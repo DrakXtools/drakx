@@ -100,8 +100,8 @@ sub packageSetFlagBase      { $_[0] or die "invalid package from\n" . backtrace(
 sub packageSetFlagUpgrade   { $_[0] or die "invalid package from\n" . backtrace();
 			      $_[1] ? ($_[0]->[$FLAGS] |= $PKGS_UPGRADE)   : ($_[0]->[$FLAGS] &= ~$PKGS_UPGRADE); }
 
-sub packageMedium { $_[0] or die "invalid package from\n" . backtrace();
-		    $_[0]->[$MEDIUM] }
+sub packageMedium { my ($packages, $p) = @_; $p or die "invalid package from\n" . backtrace();
+		    $packages->{mediums}{$p->[$MEDIUM]} }
 
 sub packageProvides { $_[1] or die "invalid package from\n" . backtrace();
 		      map { $_[0]->{depslist}[$_] || die "unkown package id $_" } unpack "s*", $_[1]->[$PROVIDES] }
@@ -194,13 +194,13 @@ sub packageById {
     $l && @$l && $l;
 }
 sub packagesOfMedium {
-    my ($packages, $mediumName) = @_;
-    my $medium = $packages->{mediums}{$mediumName};
+    my ($packages, $medium) = @_;
     grep { $_ && $_->[$MEDIUM] == $medium } @{$packages->{depslist}};
 }
 sub packagesToInstall {
     my ($packages) = @_;
-    grep { packageFlagSelected($_) && !packageFlagInstalled($_) && $_->[$MEDIUM]{selected} } values %{$packages->{names}};
+    grep { packageFlagSelected($_) && !packageFlagInstalled($_) &&
+	     packageMedium($packages, $_)->{selected} } values %{$packages->{names}};
 }
 
 sub allMediums {
@@ -220,7 +220,7 @@ sub selectPackage { #($$;$$$)
     #- selected, the package cannot be selected.
     #- check if the same or better version is installed,
     #- do not select in such case.
-    $pkg && $pkg->[$MEDIUM]{selected} && !packageFlagInstalled($pkg) or return;
+    $pkg && packageMedium($packages, $pkg)->{selected} && !packageFlagInstalled($pkg) or return;
 
     #- avoid infinite recursion (mainly against badly generated depslist.ordered).
     $check_recursion ||= {}; exists $check_recursion->{$pkg->[$FILE]} and return; $check_recursion->{$pkg->[$FILE]} = undef;
@@ -438,7 +438,7 @@ sub psUsingHdlist {
 	foreach (@{$packer->{files}}) {
 	    $packer->{data}{$_}[0] eq 'f' or next;
 	    ++$packages->{count}; #- take care of this one, so that desplist will be clean with index of package.
-	    my $pkg = [ (undef) x 8 ]; $pkg->[$FILE] = $_; $pkg->[$MEDIUM] = $m;
+	    my $pkg = [ (undef) x 8 ]; $pkg->[$FILE] = $_; $pkg->[$MEDIUM] = $medium;
 	    my $specific_arch = packageArch($pkg);
 	    if (!$specific_arch || MDK::Common::System::compat_arch($specific_arch)) {
 		my $old_pkg = $packages->{names}{packageName($pkg)};
@@ -485,7 +485,7 @@ sub getOtherDeps($$) {
 		    packageVersion($pkg), " or $release ne ", packageRelease($pkg), ")"), next;
 
 	my $index = scalar @{$packages->{depslist}};
-	$index >= $pkg->[$MEDIUM]{min} && $index <= $pkg->[$MEDIUM]{max}
+	$index >= packageMedium($packages, $pkg)->{min} && $index <= packageMedium($packages, $pkg)->{max}
 	  or log::l("ignoring package $name-$version-$release in depslist outside of hdlist indexation");
 
 	#- here we have to translate referenced deps by name to id.
@@ -552,7 +552,7 @@ sub getDeps {
 	    #- above warning have chance to raise an exception here, but may help
 	    #- for debugging.
 	    my $i = scalar @{$packages->{depslist}};
-	    $i >= $pkg->[$MEDIUM]{min} && $i <= $pkg->[$MEDIUM]{max} or
+	    $i >= packageMedium($packages, $pkg)->{min} && $i <= packageMedium($packages, $pkg)->{max} or
 	      log::l("inconsistency in position for $name-$version-$release.$arch in depslist and hdlist"), $mismatch = 1;
 	}
 
@@ -1271,8 +1271,8 @@ sub install($$$;$$) {
     my $callbackOpen = sub {
 	my $p = $packages{$_[0]} or log::l("unable to retrieve package of $_[0]"), return -1;
 	my $f = packageFile($p);
-	print LOG "$f $p->[$MEDIUM]{descr}\n";
-	my $fd = install_any::getFile($f, $p->[$MEDIUM]{descr});
+	print LOG "$f $media->{$p->[$MEDIUM]}{descr}\n";
+	my $fd = install_any::getFile($f, $media->{$p->[$MEDIUM]}{descr});
 	$fd ? fileno $fd : -1;
     };
     my $callbackClose = sub { packageSetFlagInstalled($packages{$_[0]}, 1) };
@@ -1304,7 +1304,7 @@ sub install($$$;$$) {
 		while ($i <= $media->{$medium}{max} && ($i < $min || scalar @transToInstall < $limitMinTrans)) {
 		    my $pkg = $depOrder->[$i++] or next;
 		    my $dep = $packages{packageName($pkg)} or next;
-		    if ($dep->[$MEDIUM]{selected}) {
+		    if ($media->{$dep->[$MEDIUM]}{selected}) {
 			push @transToInstall, $dep;
 			foreach (map { split '\|' } packageDepsId($dep)) {
 			    $min < $_ and $min = $_;
@@ -1332,7 +1332,7 @@ sub install($$$;$$) {
 	    #- reset file descriptor open for main process but
 	    #- make sure error trying to change from hdlist are
 	    #- trown from main process too.
-	    install_any::getFile(packageFile($transToInstall[0]), $transToInstall[0][$MEDIUM]{descr});
+	    install_any::getFile(packageFile($transToInstall[0]), $media->{$transToInstall[0][$MEDIUM]}{descr});
 	}
 	#- and make sure there are no staling open file descriptor too (before forking)!
 	install_any::getFile('XXX');
@@ -1392,7 +1392,7 @@ sub install($$$;$$) {
 							  my $check_installed;
 							  c::rpmdbNameTraverse($db, packageName($p), sub {
 										   my ($header) = @_;
-										   $check_installed = c::headerGetEntry($header, 'version') eq packageVersion($p) && c::headerGetEntry($header, 'release') eq packageRelease($p);
+										   $check_installed ||= c::headerGetEntry($header, 'version') eq packageVersion($p) && c::headerGetEntry($header, 'release') eq packageRelease($p);
 									       });
 							  $check_installed and print OUTPUT "close:$_[0]\n"; },
 						      sub { #- installCallback
@@ -1459,7 +1459,7 @@ sub install($$$;$$) {
 	    unless ($retry_package) {
 		my @badPackages;
 		foreach (@transToInstall) {
-		    if (!packageFlagInstalled($_) && $_->[$MEDIUM]{selected} && !exists($ignoreBadPkg{packageName($_)})) {
+		    if (!packageFlagInstalled($_) && $media->{$_->[$MEDIUM]}{selected} && !exists($ignoreBadPkg{packageName($_)})) {
 			push @badPackages, $_;
 			log::l("bad package $_->[$FILE]");
 		    } else {
@@ -1471,7 +1471,7 @@ sub install($$$;$$) {
 		$retry_package = shift @transToInstall;
 		$retry_count = 3;
 	    } else {
-		if (!packageFlagInstalled($retry_package) && $retry_package->[$MEDIUM]{selected} && !exists($ignoreBadPkg{packageName($retry_package)})) {
+		if (!packageFlagInstalled($retry_package) && $media->{$retry_package->[$MEDIUM]}{selected} && !exists($ignoreBadPkg{packageName($retry_package)})) {
 		    if ($retry_count) {
 			log::l("retrying installing package $retry_package->[$FILE] alone in a transaction");
 			--$retry_count;

@@ -538,7 +538,7 @@ sub choosePackagesTree {
 
     $o->ask_many_from_list('', _("Choose the packages you want to install"),
 			   {
-			    list => [ #grep { pkgs::packageMedium($_)->{selected} } 
+			    list => [ 
 				      map { pkgs::packageByName($packages, $_) }
 				      keys %{$packages->{names}} ],
 			    value => \&pkgs::packageFlagSelected,
@@ -676,7 +676,7 @@ sub chooseCD {
     my @mediumsDescr = ();
     my %mediumsDescr = ();
 
-    if (!common::usingRamdisk()) {
+    if (0 && !common::usingRamdisk()) {
 	#- mono-cd in case of no ramdisk
 	undef $packages->{mediums}{$_}{selected} foreach @mediums;
 	log::l("low memory install, using single CD installation (as it is not ejectable)");
@@ -744,7 +744,6 @@ sub installPackages {
 
 	#- if not using a cdrom medium, always abort.
 	$method eq 'cdrom' and do {
-	    local $my_gtk::grab = 1; #- only used with install_step_gtk or safely ignored.
 	    my $name = pkgs::mediumDescr($o->{packages}, $medium);
 	    local $| = 1; print "\a";
 	    my $r = $name !~ /Application/ || ($o->{useless_thing_accepted2} ||= $o->ask_from_list_('', formatAlaTeX($com_license), [ __("Accept"), __("Refuse") ], "Accept") eq "Accept");
@@ -752,7 +751,7 @@ sub installPackages {
 
 Please insert the Cd-Rom labelled \"%s\" in your drive and press Ok when done.
 If you don't have it, press Cancel to avoid installation from this Cd-Rom.", $name), 1);
-            $r;
+            return $r;
 	};
     };
     my $install_result;

@@ -80,7 +80,7 @@ sub askChangeMedium($$) {
     do {
 	eval { $allow = changeMedium($method, $medium) };
     } while ($@); #- really it is not allowed to die in changeMedium!!! or install will cores with rpmlib!!!
-    $allow or $::o->{packages}{mediums}{$medium}{selected} = undef; #- disable selected if medium refused.
+    log::l($allow ? "accepting medium $medium" : "refusing medium $medium");
     $allow;
 }
 sub errorOpeningFile($) {

@@ -344,7 +344,7 @@ sub choosePackagesTree {
 			    },
 			    node_state => sub {
 				my $p = pkgs::packageByName($packages,$_[0]) or return;
-				pkgs::packageMedium($p)->{selected} or return;
+				pkgs::packageMedium($packages, $p)->{selected} or return;
 				pkgs::packageFlagBase($p) and return 'base';
 				pkgs::packageFlagInstalled($p) and return 'installed';
 				pkgs::packageFlagSelected($p) and return 'selected';
@@ -376,7 +376,7 @@ sub choosePackagesTree {
 			    },
 			    get_info => sub {
 				my $p = pkgs::packageByName($packages, $_[0]) or return '';
-				pkgs::extractHeaders($o->{prefix}, [$p], pkgs::packageMedium($p));
+				pkgs::extractHeaders($o->{prefix}, [$p], pkgs::packageMedium($packages, $p));
 				pkgs::packageHeader($p) or die;
 
 				my $imp = translate($pkgs::compssListDesc{pkgs::packageFlagBase($p) ?
@@ -603,7 +603,7 @@ Please insert the Cd-Rom labelled \"%s\" in your drive and press Ok when done.
 If you don't have it, press Cancel to avoid installation from this Cd-Rom.", $name), 1);
             #- add the elapsed time (otherwise the predicted time will be rubbish)
             $start_time += time() - $time;
-            $r;
+            return $r;
 	};
     };
     my $install_result;
