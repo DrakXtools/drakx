@@ -294,8 +294,9 @@ sub mergein_conf_raw {
     my $modconfref = read_conf($file);
     while (my ($key, $value) = each %$modconfref) {
 	$conf{$key}{alias} ||= $value->{alias};
+	$conf{$key}{above} ||= $value->{above};
 	$conf{$key}{options} = $value->{options} if $value->{options};
-	push @{$conf{$key}{probeall} ||= []}, deref($value->{probeall});
+	push @{$conf{$key}{probeall} ||= []}, deref($value->{probeall}) if $value->{probeall};
     }
 }
 sub mergein_conf() {
