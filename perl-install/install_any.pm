@@ -515,12 +515,12 @@ sub kdemove_desktop_file {
 #-###############################################################################
 sub auto_inst_file() { ($::g_auto_install ? "/tmp" : "$::o->{prefix}/root") . "/auto_inst.cfg.pl" }
 
-sub g_auto_install(;$) {
+sub g_auto_install {
     my ($f) = @_; $f ||= auto_inst_file;
     my $o = {};
 
     require pkgs;
-    $o->{default_packages} = [ map { pkgs::packageName($_) } grep { pkgs::packageFlagSelected($_) && !pkgs::packageFlagBase($_) } values %{$::o->{packages}{names}} ];
+    $o->{default_packages} = pkgs::selected_leaves($::o->{packages});
 
     my @fields = qw(mntpoint type size);
     $o->{partitions} = [ map { my %l; @l{@fields} = @$_{@fields}; \%l } grep { $_->{mntpoint} } @{$::o->{fstab}} ];
@@ -544,9 +544,30 @@ sub g_auto_install(;$) {
 
     $_ = { %{$_ || {}} }, delete @$_{qw(oldu oldg password password2)} foreach $o->{superuser}, @{$o->{users} || []};
     
+    require Data::Dumper;
     output($f, 
 	   "# You should always check the syntax with 'perl -cw auto_inst.cfg.pl' before testing\n",
 	   Data::Dumper->Dump([$o], ['$o']), "\0");
+}
+
+
+sub g_default_packages {
+    my ($o) = @_;
+
+    my $floppy = detect_devices::floppy();
+
+    $o->ask_warn('', _("Insert a FAT formatted floppy in drive %s", $floppy));
+
+    fs::mount(devices::make($floppy), "/floppy", "vfat", 0);
+
+    require Data::Dumper;
+    output('/floppy/auto_inst.cfg', 
+	   "# You should always check the syntax with 'perl -cw auto_inst.cfg.pl' before testing\n",
+	   "# To use it, boot with ``linux defcfg=floppy''\n",
+	   Data::Dumper->Dump([ { default_packages => pkgs::selected_leaves($o->{packages}) } ], ['$o']), "\0");
+    fs::umount("/floppy");
+
+    $o->ask_warn('', _("To use this saved packages selection, boot installation with ``linux defcfg=floppy''"));
 }
 
 sub loadO {
@@ -723,5 +744,6 @@ sub log_sizes {
 	   formatXiB($df[0] - $df[1], 1024),
 	   formatXiB(sum(`rpm --root $o->{prefix}/ -qa --queryformat "%{size}\n"`))) if -x "$o->{prefix}/bin/rpm";
 }
+
 
 1;
