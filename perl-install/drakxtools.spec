@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 1.1.8
-Release: 11mdk
+Release: 12mdk
 Url: http://www.linux-mandrake.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -262,6 +262,34 @@ done
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog 
+* Thu Jul 25 2002 Thierry Vignaud <tvignaud@mandrakesoft.com> 1.1.8-12mdk
+- simplify harddrake service:
+	o we don't need to set media_type, we don't use it
+	o mouse and mass storage media use the same key, let merge their
+	  code path
+	o merge timeout and cancel cases
+
+- harddrake::data : only do one probeall here (there's still many in
+  detect_devices, probing caching should go there)
+
+- harddrake:ui : 
+	o add a fields data structure:
+		* put together field translation and field description
+		* this enable to get rid of %reverse_fields usage & creation
+		* this ensure all field names & translations are marked
+		  translatables for gettext
+		* move $wait declaration around its usage and explicit its
+            destruction
+		* remove usb debugging message needed to trace the null
+		  description bug i fixed in ldetect
+		* simplify the device fields rendering "because of" the
+            above
+		* simplify the help window creation/display/destruction
+		  (only one statement left)
+	o explicitely call interactive->exit
+	o remove all "no signal to disconnect" gtk+ warnings 
+
+
 * Thu Jul 25 2002 Thierry Vignaud <tvignaud@mandrakesoft.com> 1.1.8-11mdk
 - rebuild against new libldetect (fix (null) descriptions)
 - new XFdrake (pixel)
