@@ -38,7 +38,7 @@ rhs-printfilters lpr cups cups-drivers samba ncpfs ghostscript-utils
 );
 #- package that have to be copied only if all their requires are satisfied.
 @needToCopyIfRequiresSatisfied = qw(
-xpp kups
+xpp kups kisdn
 );
 
 #-######################################################################################
