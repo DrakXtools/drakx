@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2004-02-16 23:07+0100\n"
+"POT-Creation-Date: 2004-02-17 03:02+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -3986,7 +3986,7 @@ msgid ""
 "operating systems!"
 msgstr ""
 
-#: help.pm:784 interactive.pm:295 interactive/gtk.pm:480 standalone/drakbackup:1850 standalone/drakfont:586 standalone/drakfont:649 standalone/drakvpn:325 standalone/drakvpn:708
+#: help.pm:784 interactive.pm:295 interactive/gtk.pm:480 standalone/drakbackup:1850 standalone/drakfont:586 standalone/drakfont:649 standalone/drakvpn:327 standalone/drakvpn:682
 #, c-format
 msgid "Add"
 msgstr ""
@@ -3996,7 +3996,7 @@ msgstr ""
 msgid "Modify"
 msgstr ""
 
-#: help.pm:784 interactive.pm:295 interactive/gtk.pm:480 standalone/drakvpn:325 standalone/drakvpn:708
+#: help.pm:784 interactive.pm:295 interactive/gtk.pm:480 standalone/drakvpn:327 standalone/drakvpn:682
 #, c-format
 msgid "Remove"
 msgstr ""
@@ -8990,7 +8990,7 @@ msgstr ""
 msgid "CUPS - Common Unix Printing System"
 msgstr ""
 
-#: printer/detect.pm:143 printer/detect.pm:221 printer/detect.pm:423 printer/detect.pm:460 printer/printerdrake.pm:675
+#: printer/detect.pm:145 printer/detect.pm:223 printer/detect.pm:425 printer/detect.pm:462 printer/printerdrake.pm:675
 #, c-format
 msgid "Unknown Model"
 msgstr ""
@@ -13423,7 +13423,7 @@ msgid ""
 "The parameters of the auto-install are available in the sections on the left"
 msgstr ""
 
-#: standalone/drakautoinst:235 standalone/drakgw:583 standalone/drakvpn:918 standalone/scannerdrake:367
+#: standalone/drakautoinst:235 standalone/drakgw:583 standalone/drakvpn:892 standalone/scannerdrake:367
 #, c-format
 msgid "Congratulations!"
 msgstr ""
@@ -15354,7 +15354,7 @@ msgstr ""
 msgid "Interface"
 msgstr ""
 
-#: standalone/drakconnect:112 standalone/drakconnect:497 standalone/drakvpn:547 standalone/drakvpn:656
+#: standalone/drakconnect:112 standalone/drakconnect:497 standalone/drakvpn:962
 #, c-format
 msgid "Protocol"
 msgstr ""
@@ -16144,7 +16144,7 @@ msgstr ""
 msgid "reconfigure"
 msgstr ""
 
-#: standalone/drakgw:133 standalone/drakgw:162 standalone/drakvpn:97 standalone/drakvpn:123 standalone/drakvpn:370 standalone/drakvpn:749
+#: standalone/drakgw:133 standalone/drakgw:162 standalone/drakvpn:97 standalone/drakvpn:123 standalone/drakvpn:372 standalone/drakvpn:723
 #, c-format
 msgid "dismiss"
 msgstr ""
@@ -16527,7 +16527,7 @@ msgstr ""
 msgid "Delete selected rule"
 msgstr ""
 
-#: standalone/drakperm:125 standalone/drakvpn:325 standalone/drakvpn:708 standalone/printerdrake:229
+#: standalone/drakperm:125 standalone/drakvpn:327 standalone/drakvpn:682 standalone/printerdrake:229
 #, c-format
 msgid "Edit"
 msgstr ""
@@ -17141,12 +17141,17 @@ msgid ""
 "This kernel has '%s' support."
 msgstr ""
 
-#: standalone/drakvpn:286 standalone/drakvpn:286
+#: standalone/drakvpn:286
 #, c-format
-msgid "configure %s"
+msgid "Security Policies"
 msgstr ""
 
-#: standalone/drakvpn:289 standalone/drakvpn:298
+#: standalone/drakvpn:286
+#, c-format
+msgid "IKE daemon racoon"
+msgstr ""
+
+#: standalone/drakvpn:289 standalone/drakvpn:300
 #, c-format
 msgid "Configuration file"
 msgstr ""
@@ -17154,15 +17159,17 @@ msgstr ""
 #: standalone/drakvpn:290
 #, c-format
 msgid ""
-"Welcome to the configuration files step !\n"
+"Configuration step !\n"
 "\n"
-"You can now configure the sections of these files.\n"
+"You need to define the Security Policies and then to \n"
+"configure the automatic key exchange (IKE) daemon. \n"
+"The KAME IKE daemon we're using is called 'racoon'.\n"
 "\n"
-"Which file would you like to configure ?\n"
+"What would you like to configure ?\n"
 ""
 msgstr ""
 
-#: standalone/drakvpn:299
+#: standalone/drakvpn:301
 #, c-format
 msgid ""
 "Next, we will configure the %s file.\n"
@@ -17172,12 +17179,12 @@ msgid ""
 ""
 msgstr ""
 
-#: standalone/drakvpn:317 standalone/drakvpn:699
+#: standalone/drakvpn:319 standalone/drakvpn:673
 #, c-format
 msgid "%s entries"
 msgstr ""
 
-#: standalone/drakvpn:318
+#: standalone/drakvpn:320
 #, c-format
 msgid ""
 "The %s file contents\n"
@@ -17192,22 +17199,22 @@ msgid ""
 ""
 msgstr ""
 
-#: standalone/drakvpn:325 standalone/drakvpn:708
+#: standalone/drakvpn:327 standalone/drakvpn:682
 #, c-format
 msgid "Display"
 msgstr ""
 
-#: standalone/drakvpn:325 standalone/drakvpn:708
+#: standalone/drakvpn:327 standalone/drakvpn:682
 #, c-format
 msgid "Commit"
 msgstr ""
 
-#: standalone/drakvpn:341 standalone/drakvpn:345 standalone/drakvpn:723 standalone/drakvpn:727
+#: standalone/drakvpn:343 standalone/drakvpn:347 standalone/drakvpn:697 standalone/drakvpn:701
 #, c-format
 msgid "Display configuration"
 msgstr ""
 
-#: standalone/drakvpn:346
+#: standalone/drakvpn:348
 #, c-format
 msgid ""
 "The %s file does not exist.\n"
@@ -17218,12 +17225,12 @@ msgid ""
 ""
 msgstr ""
 
-#: standalone/drakvpn:362
+#: standalone/drakvpn:364
 #, c-format
 msgid "ipsec.conf entries"
 msgstr ""
 
-#: standalone/drakvpn:363
+#: standalone/drakvpn:365
 #, c-format
 msgid ""
 "The %s file contains different sections.\n"
@@ -17239,27 +17246,27 @@ msgid ""
 ""
 msgstr ""
 
-#: standalone/drakvpn:370
+#: standalone/drakvpn:372
 #, c-format
 msgid "config setup"
 msgstr ""
 
-#: standalone/drakvpn:370
+#: standalone/drakvpn:372
 #, c-format
 msgid "conn %default"
 msgstr ""
 
-#: standalone/drakvpn:370
+#: standalone/drakvpn:372
 #, c-format
 msgid "normal conn"
 msgstr ""
 
-#: standalone/drakvpn:376 standalone/drakvpn:417 standalone/drakvpn:504 standalone/drakvpn:557
+#: standalone/drakvpn:378 standalone/drakvpn:419 standalone/drakvpn:506 standalone/drakvpn:546
 #, c-format
 msgid "Exists !"
 msgstr ""
 
-#: standalone/drakvpn:377 standalone/drakvpn:418
+#: standalone/drakvpn:379 standalone/drakvpn:420
 #, c-format
 msgid ""
 "A section with this name already exists.\n"
@@ -17270,7 +17277,7 @@ msgid ""
 ""
 msgstr ""
 
-#: standalone/drakvpn:394
+#: standalone/drakvpn:396
 #, c-format
 msgid ""
 "This section has to be on top of your\n"
@@ -17283,37 +17290,37 @@ msgid ""
 ""
 msgstr ""
 
-#: standalone/drakvpn:399
+#: standalone/drakvpn:401
 #, c-format
 msgid "interfaces"
 msgstr ""
 
-#: standalone/drakvpn:400
+#: standalone/drakvpn:402
 #, c-format
 msgid "klipsdebug"
 msgstr ""
 
-#: standalone/drakvpn:401
+#: standalone/drakvpn:403
 #, c-format
 msgid "plutodebug"
 msgstr ""
 
-#: standalone/drakvpn:402
+#: standalone/drakvpn:404
 #, c-format
 msgid "plutoload"
 msgstr ""
 
-#: standalone/drakvpn:403
+#: standalone/drakvpn:405
 #, c-format
 msgid "plutostart"
 msgstr ""
 
-#: standalone/drakvpn:404
+#: standalone/drakvpn:406
 #, c-format
 msgid "uniqueids"
 msgstr ""
 
-#: standalone/drakvpn:438
+#: standalone/drakvpn:440
 #, c-format
 msgid ""
 "This is the first section after the config\n"
@@ -17327,52 +17334,52 @@ msgid ""
 ""
 msgstr ""
 
-#: standalone/drakvpn:445
+#: standalone/drakvpn:447
 #, c-format
 msgid "pfs"
 msgstr ""
 
-#: standalone/drakvpn:446
+#: standalone/drakvpn:448
 #, c-format
 msgid "keyingtries"
 msgstr ""
 
-#: standalone/drakvpn:447
+#: standalone/drakvpn:449
 #, c-format
 msgid "compress"
 msgstr ""
 
-#: standalone/drakvpn:448
+#: standalone/drakvpn:450
 #, c-format
 msgid "disablearrivalcheck"
 msgstr ""
 
-#: standalone/drakvpn:449 standalone/drakvpn:488
+#: standalone/drakvpn:451 standalone/drakvpn:490
 #, c-format
 msgid "left"
 msgstr ""
 
-#: standalone/drakvpn:450 standalone/drakvpn:489
+#: standalone/drakvpn:452 standalone/drakvpn:491
 #, c-format
 msgid "leftcert"
 msgstr ""
 
-#: standalone/drakvpn:451 standalone/drakvpn:490
+#: standalone/drakvpn:453 standalone/drakvpn:492
 #, c-format
 msgid "leftrsasigkey"
 msgstr ""
 
-#: standalone/drakvpn:452 standalone/drakvpn:491
+#: standalone/drakvpn:454 standalone/drakvpn:493
 #, c-format
 msgid "leftsubnet"
 msgstr ""
 
-#: standalone/drakvpn:453 standalone/drakvpn:492
+#: standalone/drakvpn:455 standalone/drakvpn:494
 #, c-format
 msgid "leftnexthop"
 msgstr ""
 
-#: standalone/drakvpn:482 standalone/drakvpn:537
+#: standalone/drakvpn:484
 #, c-format
 msgid ""
 "Your %s file has several sections, or connections.\n"
@@ -17382,47 +17389,47 @@ msgid ""
 ""
 msgstr ""
 
-#: standalone/drakvpn:485
+#: standalone/drakvpn:487
 #, c-format
 msgid "section name"
 msgstr ""
 
-#: standalone/drakvpn:486
+#: standalone/drakvpn:488
 #, c-format
 msgid "authby"
 msgstr ""
 
-#: standalone/drakvpn:487
+#: standalone/drakvpn:489
 #, c-format
 msgid "auto"
 msgstr ""
 
-#: standalone/drakvpn:493
+#: standalone/drakvpn:495
 #, c-format
 msgid "right"
 msgstr ""
 
-#: standalone/drakvpn:494
+#: standalone/drakvpn:496
 #, c-format
 msgid "rightcert"
 msgstr ""
 
-#: standalone/drakvpn:495
+#: standalone/drakvpn:497
 #, c-format
 msgid "rightrsasigkey"
 msgstr ""
 
-#: standalone/drakvpn:496
+#: standalone/drakvpn:498
 #, c-format
 msgid "rightsubnet"
 msgstr ""
 
-#: standalone/drakvpn:497
+#: standalone/drakvpn:499
 #, c-format
 msgid "rightnexthop"
 msgstr ""
 
-#: standalone/drakvpn:505 standalone/drakvpn:558
+#: standalone/drakvpn:507 standalone/drakvpn:547
 #, c-format
 msgid ""
 "A section with this name already exists.\n"
@@ -17433,62 +17440,23 @@ msgid ""
 ""
 msgstr ""
 
-#: standalone/drakvpn:540 standalone/drakvpn:649
+#: standalone/drakvpn:539
 #, c-format
-msgid "Secure policy"
+msgid ""
+"Add a Security Policy.\n"
+"\n"
+"You can now add a Secutiy Policy.\n"
+"\n"
+"Choose continue when you are done to write the data.\n"
+""
 msgstr ""
 
-#: standalone/drakvpn:541 standalone/drakvpn:650
-#, c-format
-msgid "Source IP range"
-msgstr ""
-
-#: standalone/drakvpn:542 standalone/drakvpn:651
-#, c-format
-msgid "Destination IP range"
-msgstr ""
-
-#: standalone/drakvpn:543 standalone/drakvpn:652
-#, c-format
-msgid "Upper-layer protocol"
-msgstr ""
-
-#: standalone/drakvpn:544 standalone/drakvpn:653
-#, c-format
-msgid "Flag"
-msgstr ""
-
-#: standalone/drakvpn:545 standalone/drakvpn:654
-#, c-format
-msgid "Direction"
-msgstr ""
-
-#: standalone/drakvpn:546 standalone/drakvpn:655
-#, c-format
-msgid "IPsec policy"
-msgstr ""
-
-#: standalone/drakvpn:548 standalone/drakvpn:657
-#, c-format
-msgid "Mode"
-msgstr ""
-
-#: standalone/drakvpn:549 standalone/drakvpn:658
-#, c-format
-msgid "Source/destination"
-msgstr ""
-
-#: standalone/drakvpn:550 standalone/drakvpn:659 standalone/harddrake2:57
-#, c-format
-msgid "Level"
-msgstr ""
-
-#: standalone/drakvpn:577 standalone/drakvpn:842
+#: standalone/drakvpn:564 standalone/drakvpn:816
 #, c-format
 msgid "Edit section"
 msgstr ""
 
-#: standalone/drakvpn:578
+#: standalone/drakvpn:565
 #, c-format
 msgid ""
 "Your %s file has several sections or connections.\n"
@@ -17498,17 +17466,17 @@ msgid ""
 ""
 msgstr ""
 
-#: standalone/drakvpn:581 standalone/drakvpn:674 standalone/drakvpn:847 standalone/drakvpn:893
+#: standalone/drakvpn:568 standalone/drakvpn:648 standalone/drakvpn:821 standalone/drakvpn:867
 #, c-format
 msgid "Section names"
 msgstr ""
 
-#: standalone/drakvpn:591
+#: standalone/drakvpn:578
 #, c-format
 msgid "Can't edit !"
 msgstr ""
 
-#: standalone/drakvpn:592
+#: standalone/drakvpn:579
 #, c-format
 msgid ""
 "You cannot edit this section.\n"
@@ -17520,7 +17488,7 @@ msgid ""
 ""
 msgstr ""
 
-#: standalone/drakvpn:601
+#: standalone/drakvpn:588
 #, c-format
 msgid ""
 "Your %s file has several sections.\n"
@@ -17530,7 +17498,7 @@ msgid ""
 ""
 msgstr ""
 
-#: standalone/drakvpn:612
+#: standalone/drakvpn:599
 #, c-format
 msgid ""
 "Your %s file has several sections or connections.\n"
@@ -17540,7 +17508,7 @@ msgid ""
 ""
 msgstr ""
 
-#: standalone/drakvpn:625
+#: standalone/drakvpn:612
 #, c-format
 msgid ""
 "Your %s file has several sections or connections.\n"
@@ -17551,22 +17519,23 @@ msgid ""
 ""
 msgstr ""
 
-#: standalone/drakvpn:646
+#: standalone/drakvpn:633
 #, c-format
 msgid ""
-"Your %s file has several sections, or connections.\n"
+"Edit a Security Policy.\n"
 "\n"
-"You can now edit the chosen section.\n"
+"You can now add a Secutiy Policy.\n"
+"\n"
 "Choose continue when you are done to write the data.\n"
 ""
 msgstr ""
 
-#: standalone/drakvpn:670 standalone/drakvpn:889
+#: standalone/drakvpn:644 standalone/drakvpn:863
 #, c-format
 msgid "Remove section"
 msgstr ""
 
-#: standalone/drakvpn:671 standalone/drakvpn:890
+#: standalone/drakvpn:645 standalone/drakvpn:864
 #, c-format
 msgid ""
 "Your %s file has several or sections or connections.\n"
@@ -17576,7 +17545,7 @@ msgid ""
 ""
 msgstr ""
 
-#: standalone/drakvpn:700
+#: standalone/drakvpn:674
 #, c-format
 msgid ""
 "The racoon.conf file configuration.\n"
@@ -17590,7 +17559,7 @@ msgid ""
 "  - commit \t\t (writes the changes to the real file)"
 msgstr ""
 
-#: standalone/drakvpn:728
+#: standalone/drakvpn:702
 #, c-format
 msgid ""
 "The %s file does not exist\n"
@@ -17601,12 +17570,12 @@ msgid ""
 ""
 msgstr ""
 
-#: standalone/drakvpn:742
+#: standalone/drakvpn:716
 #, c-format
 msgid "racoonf.conf entries"
 msgstr ""
 
-#: standalone/drakvpn:743
+#: standalone/drakvpn:717
 #, c-format
 msgid ""
 "The 'add' sections step.\n"
@@ -17620,22 +17589,22 @@ msgid ""
 ""
 msgstr ""
 
-#: standalone/drakvpn:749
+#: standalone/drakvpn:723
 #, c-format
 msgid "path"
 msgstr ""
 
-#: standalone/drakvpn:749 standalone/drakvpn:956
+#: standalone/drakvpn:723 standalone/drakvpn:930
 #, c-format
 msgid "remote"
 msgstr ""
 
-#: standalone/drakvpn:749
+#: standalone/drakvpn:723
 #, c-format
 msgid "sainfo"
 msgstr ""
 
-#: standalone/drakvpn:757
+#: standalone/drakvpn:731
 #, c-format
 msgid ""
 "The 'add path' section step.\n"
@@ -17645,12 +17614,12 @@ msgid ""
 "Put your mouse over the certificate entry to obtain online help."
 msgstr ""
 
-#: standalone/drakvpn:760
+#: standalone/drakvpn:734
 #, c-format
 msgid "path type"
 msgstr ""
 
-#: standalone/drakvpn:764
+#: standalone/drakvpn:738
 #, c-format
 msgid ""
 "Path Specification\n"
@@ -17678,12 +17647,12 @@ msgid ""
 "  method in phase 1."
 msgstr ""
 
-#: standalone/drakvpn:788
+#: standalone/drakvpn:762
 #, c-format
 msgid "real file"
 msgstr ""
 
-#: standalone/drakvpn:811
+#: standalone/drakvpn:785
 #, c-format
 msgid ""
 "Make sure you already have the path sections\n"
@@ -17694,7 +17663,7 @@ msgid ""
 ""
 msgstr ""
 
-#: standalone/drakvpn:828
+#: standalone/drakvpn:802
 #, c-format
 msgid ""
 "Make sure you already have the path sections\n"
@@ -17706,7 +17675,7 @@ msgid ""
 ""
 msgstr ""
 
-#: standalone/drakvpn:843
+#: standalone/drakvpn:817
 #, c-format
 msgid ""
 "Your %s file has several sections or connections.\n"
@@ -17716,7 +17685,7 @@ msgid ""
 ""
 msgstr ""
 
-#: standalone/drakvpn:854
+#: standalone/drakvpn:828
 #, c-format
 msgid ""
 "Your %s file has several sections.\n"
@@ -17728,7 +17697,7 @@ msgid ""
 ""
 msgstr ""
 
-#: standalone/drakvpn:863
+#: standalone/drakvpn:837
 #, c-format
 msgid ""
 "Your %s file has several sections.\n"
@@ -17739,7 +17708,7 @@ msgid ""
 ""
 msgstr ""
 
-#: standalone/drakvpn:871
+#: standalone/drakvpn:845
 #, c-format
 msgid ""
 "This section has to be on top of your\n"
@@ -17754,17 +17723,17 @@ msgid ""
 ""
 msgstr ""
 
-#: standalone/drakvpn:878
+#: standalone/drakvpn:852
 #, c-format
 msgid "path_type"
 msgstr ""
 
-#: standalone/drakvpn:879
+#: standalone/drakvpn:853
 #, c-format
 msgid "real_file"
 msgstr ""
 
-#: standalone/drakvpn:919
+#: standalone/drakvpn:893
 #, c-format
 msgid ""
 "Everything has been configured.\n"
@@ -17776,124 +17745,185 @@ msgid ""
 "section is configured."
 msgstr ""
 
-#: standalone/drakvpn:939
+#: standalone/drakvpn:913
 #, c-format
 msgid "sainfo_source_address"
 msgstr ""
 
-#: standalone/drakvpn:940
+#: standalone/drakvpn:914
 #, c-format
 msgid "sainfo_source_proto"
 msgstr ""
 
-#: standalone/drakvpn:941
+#: standalone/drakvpn:915
 #, c-format
 msgid "sainfo_dest_address"
 msgstr ""
 
-#: standalone/drakvpn:942
+#: standalone/drakvpn:916
 #, c-format
 msgid "sainfo_dest_proto"
 msgstr ""
 
-#: standalone/drakvpn:943
+#: standalone/drakvpn:917
 #, c-format
 msgid "PFS group"
 msgstr ""
 
-#: standalone/drakvpn:945
+#: standalone/drakvpn:919
 #, c-format
 msgid "Lifetime number"
 msgstr ""
 
-#: standalone/drakvpn:946
+#: standalone/drakvpn:920
 #, c-format
 msgid "Lifetime unit"
 msgstr ""
 
-#: standalone/drakvpn:947 standalone/drakvpn:968
+#: standalone/drakvpn:921 standalone/drakvpn:942
 #, c-format
 msgid "Encryption algorithm"
 msgstr ""
 
-#: standalone/drakvpn:948
+#: standalone/drakvpn:922
 #, c-format
 msgid "Authentication algorithm"
 msgstr ""
 
-#: standalone/drakvpn:949
+#: standalone/drakvpn:923
 #, c-format
 msgid "Compression algorithm"
 msgstr ""
 
-#: standalone/drakvpn:957
+#: standalone/drakvpn:931
 #, c-format
 msgid "exchange_mode"
 msgstr ""
 
-#: standalone/drakvpn:958
+#: standalone/drakvpn:932
 #, c-format
 msgid "generate_policy"
 msgstr ""
 
-#: standalone/drakvpn:959
+#: standalone/drakvpn:933
 #, c-format
 msgid "passive"
 msgstr ""
 
-#: standalone/drakvpn:960
+#: standalone/drakvpn:934
 #, c-format
 msgid "certificate_type"
 msgstr ""
 
-#: standalone/drakvpn:961
+#: standalone/drakvpn:935
 #, c-format
 msgid "my_certfile"
 msgstr ""
 
-#: standalone/drakvpn:962
+#: standalone/drakvpn:936
 #, c-format
 msgid "my_private_key"
 msgstr ""
 
-#: standalone/drakvpn:963
+#: standalone/drakvpn:937
 #, c-format
 msgid "peers_certfile"
 msgstr ""
 
-#: standalone/drakvpn:964
+#: standalone/drakvpn:938
 #, c-format
 msgid "verify_cert"
 msgstr ""
 
-#: standalone/drakvpn:965
+#: standalone/drakvpn:939
 #, c-format
 msgid "my_identifier"
 msgstr ""
 
-#: standalone/drakvpn:966
+#: standalone/drakvpn:940
 #, c-format
 msgid "peers_identifier"
 msgstr ""
 
-#: standalone/drakvpn:967
+#: standalone/drakvpn:941
 #, c-format
 msgid "proposal"
 msgstr ""
 
-#: standalone/drakvpn:969
+#: standalone/drakvpn:943
 #, c-format
 msgid "Hash algorithm"
 msgstr ""
 
-#: standalone/drakvpn:970
+#: standalone/drakvpn:944
 #, c-format
 msgid "Authentication method"
 msgstr ""
 
-#: standalone/drakvpn:971
+#: standalone/drakvpn:945
 #, c-format
 msgid "DH group"
+msgstr ""
+
+#: standalone/drakvpn:952
+#, c-format
+msgid ""
+"Add a Security Policy.\n"
+"\n"
+"You can now add a new Security Policy.\n"
+"\n"
+"Choose continue when you are done to write the data.\n"
+""
+msgstr ""
+
+#: standalone/drakvpn:955
+#, c-format
+msgid "Command"
+msgstr ""
+
+#: standalone/drakvpn:956
+#, c-format
+msgid "Source IP range"
+msgstr ""
+
+#: standalone/drakvpn:957
+#, c-format
+msgid "Destination IP range"
+msgstr ""
+
+#: standalone/drakvpn:958
+#, c-format
+msgid "Upper-layer protocol"
+msgstr ""
+
+#: standalone/drakvpn:959
+#, c-format
+msgid "Flag"
+msgstr ""
+
+#: standalone/drakvpn:960
+#, c-format
+msgid "Direction"
+msgstr ""
+
+#: standalone/drakvpn:961
+#, c-format
+msgid "IPsec policy"
+msgstr ""
+
+#: standalone/drakvpn:963
+#, c-format
+msgid "Mode"
+msgstr ""
+
+#: standalone/drakvpn:964
+#, c-format
+msgid "Source/destination"
+msgstr ""
+
+#: standalone/drakvpn:965 standalone/harddrake2:57
+#, c-format
+msgid "Level"
 msgstr ""
 
 #: standalone/drakxtv:46
