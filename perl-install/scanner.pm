@@ -151,7 +151,7 @@ sub updateScannerDBfromSane {
 		   "Acer" => "Acer Peripherals Inc.",
 		   "AGFA" => "AGFA-Gevaert NV",
 		   "Agfa" => "AGFA-Gevaert NV",
-		   "Epson" => "Seiko Epson Corp.",
+		   "Epson" => "Epson Corp.",
 		   "Fujitsu Computer Products of America" => "Fujitsu",
 		   "HP" => sub { $_[0] =~ s/HP\s/Hewlett-Packard|/; $_[0] =~ s/HP4200/Hewlett-Packard|ScanJet 4200C/; $_[0] },
 		   "Hewlett-Packard" => sub { $_[0] =~ s/HP 3200 C/Hewlett-Packard|ScanJet 3200C/; $_[0] },
