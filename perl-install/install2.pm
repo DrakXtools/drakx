@@ -243,11 +243,6 @@ sub configureNetwork {
     installStepsCall($o, $auto, 'configureNetwork', $ent_number == 1, $clicked);
 }
 #------------------------------------------------------------------------------
-sub installCrypto {
-    my ($_clicked, $_ent_number, $auto) = @_;
-    installStepsCall($o, $auto, 'installCrypto');
-}
-#------------------------------------------------------------------------------
 sub installUpdates {
     my ($_clicked, $_ent_number, $auto) = @_;
     installStepsCall($o, $auto, 'installUpdates');

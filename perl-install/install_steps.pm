@@ -635,16 +635,6 @@ sub configureNetwork {
 }
 
 #------------------------------------------------------------------------------
-sub installCrypto {
-    my ($o) = @_;
-    my $u = $o->{crypto} or return; $u->{mirror} && $u->{packages} or return;
-
-    upNetwork($o);
-    require crypto;
-    my @_crypto_packages = crypto::getPackages($o->{prefix}, $o->{packages}, $u->{mirror});
-    $o->pkg_install(@{$u->{packages}});
-}
-
 sub installUpdates {
     my ($o) = @_;
     my $u = $o->{updates} or return; $u->{updates} or return;

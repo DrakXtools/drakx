@@ -849,38 +849,6 @@ sub configureNetwork {
 #------------------------------------------------------------------------------
 #-pppConfig moved to any.pm
 #------------------------------------------------------------------------------
-sub installCrypto {
-    my $license =
-N("You now have the opportunity to download encryption software.
-
-WARNING:
-
-Due to different general requirements applicable to these software and imposed
-by various jurisdictions, customer and/or end user of theses software should
-ensure that the laws of his/their jurisdiction allow him/them to download, stock
-and/or use these software.
-
-In addition customer and/or end user shall particularly be aware to not infringe
-the laws of his/their jurisdiction. Should customer and/or end user not
-respect the provision of these applicable laws, he/they will incure serious
-sanctions.
-
-In no event shall Mandrakesoft nor its manufacturers and/or suppliers be liable
-for special, indirect or incidental damages whatsoever (including, but not
-limited to loss of profits, business interruption, loss of commercial data and
-other pecuniary losses, and eventual liabilities and indemnification to be paid
-pursuant to a court decision) arising out of use, possession, or the sole
-downloading of these software, to which customer and/or end user could
-eventually have access after having sign up the present agreement.
-
-
-For any queries relating to these agreement, please contact 
-Mandrakesoft, Inc.
-2400 N. Lincoln Avenue Suite 243
-Altadena California 91001
-USA");
-    goto &installUpdates; #- remove old code, keep this one ok though by transfering to installUpdates.
-}
 
 sub installUpdates {
     my ($o) = @_;
