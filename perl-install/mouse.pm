@@ -432,8 +432,8 @@ sub test_mouse_standalone {
     my $darea = Gtk2::DrawingArea->new;
     $darea->set_events([ 'button_press_mask', 'button_release_mask' ]);  #$darea must be unrealized.
     gtkpack($hbox,
-	    gtkpack(gtkset_border_width(Gtk2::VBox->new(0,10), 10),
-		    gtksize(gtkset_size_request($darea, $width+1, $height+1), $width, $height)));
+            gtkpack(gtkset_border_width(Gtk2::VBox->new(0,10), 10),
+                    gtksize(gtkset_size_request($darea, $width+1, $height+1), $width, $height)));
     test_mouse($mouse, $hbox, $darea, $width, $height);
 }
 
@@ -501,7 +501,7 @@ sub test_mouse {
 	if (member($nb, 3..4)) {
 	    $wait = 1;
 	    $draw_pixbuf->($xpms{middle}, 98, 67, 13, 62);
-	    Gtk->timeout_add(200, sub { $wait = 0 });
+	    Gtk2->timeout_add(200, sub { $wait = 0 });
 	}
     };
     
