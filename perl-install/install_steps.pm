@@ -337,13 +337,15 @@ sub installPackages($$) { #- complete REWORK, TODO and TOCHECK!
 	#- important files and restore them after.
 	foreach (@{$o->{toSave} || []}) {
 	    if (-e "$o->{prefix}/$_") {
-		unlink "$o->{prefix}/$_.mdkgisave"; eval { commands::cp("$o->{prefix}/$_", "$o->{prefix}/$_.mdkgisave") };
+		unlink "$o->{prefix}/$_.mdkgisave"; 
+		eval { commands::cp("$o->{prefix}/$_", "$o->{prefix}/$_.mdkgisave") };
 	    }
 	}
 	pkgs::remove($o->{prefix}, $o->{toRemove});
 	foreach (@{$o->{toSave} || []}) {
 	    if (-e "$o->{prefix}/$_.mdkgisave") {
-		unlink "$o->{prefix}/$_"; rename "$o->{prefix}/$_.mdkgisave", "$o->{prefix}/$_";
+		unlink "$o->{prefix}/$_"; 
+		rename "$o->{prefix}/$_.mdkgisave", "$o->{prefix}/$_";
 	    }
 	}
 	$o->{toSave} = [];
