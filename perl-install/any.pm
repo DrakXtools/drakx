@@ -495,7 +495,7 @@ sub inspect {
 }
 
 sub ask_user_one {
-    my ($in, $users, $security, %options) = @_;
+    my ($in, $users, $security, $u, %options) = @_;
 
     my @icons = facesnames();
 
@@ -508,7 +508,6 @@ sub ask_user_one {
 	ctools => N("access to compilation tools"),
     );
 
-    my $u;
     $u->{password2} ||= $u->{password} ||= '';
     $u->{shell} ||= '/bin/bash';
     my $names = @$users ? N("(already added %s)", join(", ", map { $_->{realname} || $_->{name} } @$users)) : '';
@@ -563,10 +562,12 @@ sub ask_user_one {
 }
 
 sub ask_users {
-    my ($in, $users, $security) = @_;
+    my ($in, $users, $security, $suggested_names) = @_;
 
     while (1) {
-        ask_user_one($in, $users, $security) and return;
+	my $u = {};
+	$u->{name} = shift @$suggested_names;
+        ask_user_one($in, $users, $security, $u) and return;
     }
 }
 
