@@ -819,7 +819,7 @@ sub miscellaneous {
 #------------------------------------------------------------------------------
 sub exitInstall { 
     my ($o) = @_;
-    eval { output "$o->{prefix}/root/report.bug", commands::report_bug() };
+    eval { output "$o->{prefix}/root/report.bug", commands::report_bug($o->{prefix}) };
     install_any::unlockCdrom;
     install_any::log_sizes($o);
 }

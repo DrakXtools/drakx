@@ -570,6 +570,8 @@ sub  install_cpio($$;@) {
 }
 
 sub report_bug {
+    my ($prefix) = @_;
+
     sub header { "
 ********************************************************************************
 * $_[0]
@@ -590,7 +592,8 @@ sub report_bug {
       header("syslog"), cat_("/tmp/syslog"),
       header("ddcxinfos"), `$ENV{LD_LOADER} ddcxinfos`,
       header("ddebug.log"), cat_("/tmp/ddebug.log"),
-      header("install.log"), cat_("/mnt/root/install.log"),
+      header("install.log"), cat_("$prefix/root/install.log"),
+      header("fstab"), cat_("$prefix/etc/fstab"),
       ;
 }
 
@@ -601,7 +604,8 @@ sub bug {
     require detect_devices;
     mount devices::make(detect_devices::floppy()), "/fd0";
 
-    output "/fd0/report.bug", report_bug();
+    output "/fd0/report.bug", report_bug("/mnt") #- no other way :-(
+);
     umount "/fd0";
     sync;
 }
