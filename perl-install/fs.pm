@@ -9,12 +9,13 @@ use common;
 use log;
 use devices;
 use fs::type;
+use fs::get;
+use fs::format;
 use run_program;
 use detect_devices;
 use modules;
 use fsedit;
 use loopback;
-use fs::format;
 
 
 sub read_fstab {
