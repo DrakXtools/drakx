@@ -35,10 +35,7 @@ sub scan4channels() {
     # xawtv has been installed by DrakX when/if it's detected a tv
     # card.
 
-    # In the future, we might try to install xawtv if it'sn't there as
-    # we're just a, xawtv wraper
-
-    -x "/usr/bin/scantv" or $in->do_pkgs->install('xawtv');
+    $in->do_pkgs->ensure_is_installed('xawtv', '/usr/bin/scantv');
 
 	   my ($ftable_id, $norm);
         #   this table must be checked on each xawtv release:
