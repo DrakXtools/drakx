@@ -21,7 +21,7 @@ BOOT_IMG += $(RELEASE_BOOT_IMG)
 
 FRELEASE_BOOT_IMG = $(BOOT_IMG:%=images/%)
 FBOOT_IMG = $(BOOT_IMG:%=images/%)
-FBOOT_RDZ = $(FBOOT_IMG:%.img=%.rdz)
+FBOOT_RDZ = $(FBOOT_IMG:%.img=%.rdz) images/all.rdz
 
 BINS = mdk-stage1/init mdk-stage1/stage1-full mdk-stage1/stage1-cdrom mdk-stage1/stage1-network mdk-stage/stage1-usbnet
 ifeq (ppc,$(ARCH))
