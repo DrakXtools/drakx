@@ -1,5 +1,6 @@
 package Xconfigurator;
 
+use common qw(:common);
 
 %depths = (
       8 => __("256 colors (8 bits)"),
