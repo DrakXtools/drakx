@@ -159,7 +159,7 @@ sub installfirmware {
 	# Tell user about firmware installation
 	$in->ask_from('Scannerdrake',
 		      N("It is possible that your %s needs its Firmware to be uploaded everytime when it is turned on.", removeverticalbar($model)) . " " .
-		      N("If this is the case, you can make this be done automatically for you.") . " " .
+		      N("If this is the case, you can make this be done automatically.") . " " .
 		      N("To do so, you need to supply the firmware file for your scanner so that it can be installed.") . " " .
 		      N("You find the file on the CD or floppy coming with the scanner, on the manufacturer's home page, or on your Windows partition."),
 		      [
@@ -190,29 +190,87 @@ sub installfirmware {
 			$firmware));
 	
     }
-    if ($firmware) {
-	# Install firmware
-	run_program::rooted($::prefix, "mkdir", "-p",
-			    "/usr/share/sane/firmware") || do {
-				$in->ask_warn('Scannerdrake',
-					      N("Could not create directory /usr/share/sane/firmware!"));
-				return "";
-			    };
-	run_program::rooted($::prefix, "cp", "-f", "$firmware",
-			    "/usr/share/sane/firmware") || do {
-				$in->ask_warn('Scannerdrake',
-					      N("Could not copy firmware file %s to /usr/share/sane/firmware!", $firmware));
-				return "";
-			    };
-	$firmware =~ s!^(.*)(/[^/]+)$!/usr/share/sane/firmware$2!;
-	run_program::rooted($::prefix, "chmod", "644",
-			    $firmware) || do {
-				$in->ask_warn('Scannerdrake',
-					      N("Could not set permissions of firmware file %s!", $firmware));
-				return "";
-			    };
-    }
+    # Install the firmware file in /usr/share/sane/firmware
+    $firmware = scanner::installfirmware($firmware);
     return $firmware;
+}
+
+sub updatefirmware {
+    my (@configured) = @_;
+    my $firmware;
+    my @scanners =
+	map { 
+	    $_->{val}{DESCRIPTION}
+	} grep { 
+	    $_->{val}{FIRMWARELINE}
+	} @configured;
+    my ($scannerchoice, $mediachoice);
+    while (1) {
+	# Tell user about firmware installation
+	$in->ask_from('Scannerdrake',
+		      ($#scanners > 0 ?
+		       N("It is possible that your scanners need their firmware to be uploaded everytime when they are turned on.") :
+		       N("It is possible that your %s needs its firmware to be uploaded everytime when it is turned on.", $scanners[0])) . " " .
+		      N("If this is the case, you can make this be done automatically.") . " " .
+		      ($#scanners > 0 ?
+		       N("To do so, you need to supply the firmware files for your scanners so that it can be installed.") :
+		       N("To do so, you need to supply the firmware file for your scanner so that it can be installed.")) . " " .
+		       N("You find the file on the CD or floppy coming with the scanner, on the manufacturer's home page, or on your Windows partition.") . "\n" .
+		      N("If you have already installed your scanner's firmware you can update the firmware here by supplying the new firmware file."),
+		      [
+		       { label => N("Install firmware for the"), 
+			 val => \$scannerchoice,
+			 list => \@scanners, 
+			 not_edit => 1, sort => 1 },
+		       { label => N("Install firmware file from"), 
+			 val => \$mediachoice,
+			 list => [N("CD-ROM"),
+				  N("Floppy Disk"), 
+				  N("Other place")], 
+			 not_edit => 1, sort => 0 },
+		       ],
+		      ) or return 0;
+	my $dir;
+	if ($mediachoice eq N("CD-ROM")) {
+	    $dir = "/mnt/cdrom";
+	} elsif ($mediachoice eq N("Floppy Disk")) {
+	    $dir = "/mnt/floppy";
+	} elsif ($mediachoice eq N("Other place")) {
+	    $dir = "/mnt";
+	} else {
+	    return 0;
+	}
+	# Let user select a firmware file from a floppy, hard disk, ...
+        $firmware = $in->ask_file(N("Select firmware file for the %s",
+				    $scannerchoice), "$dir");
+	last if !$firmware || (-r $firmware);
+	$in->ask_warn('Scannerdrake',
+		      N("The firmware file %s does not exist or is unreadable!",
+			$firmware));
+	
+    }
+
+    return 0 if !$firmware;
+
+    # Install the firmware file in /usr/share/sane/firmware
+    $firmware = scanner::installfirmware($firmware);
+
+    # Enter the path to the firmware in the appropriate config file
+    foreach (@configured) {
+	next if $_->{val}{DESCRIPTION} ne $scannerchoice; 
+	my $backend = $_->{val}{BACKEND};
+	my $firmwareline =$_->{val}{FIRMWARELINE};
+	$firmwareline =~ s/\$FIRMWARE/$firmware/sg;
+	scanner::setfirmware($backend, $firmwareline);
+	last;
+    }
+
+    # Success message
+    $in->ask_warn('Scannerdrake',
+		  N("The firmware file for your %s was successfully installed.",
+		    $scannerchoice));
+    
+    return 1;
 }
 
 sub tryConfScanner {
@@ -358,6 +416,13 @@ sub mainwindow {
 		    $buttonclicked = "manualadd";
 		    1;
 		} },
+	      ( (grep { $_->{val}{FIRMWARELINE} } @configured) ?
+		{ val => N("Install/Update firmware files"),
+		  type => 'button',
+		  clicked_may_quit => sub {
+		      $buttonclicked = "firmware";
+		      1;
+		  } } : () ),
 	      { val => N("Scanner sharing"),
 		type => 'button',
 		clicked_may_quit => sub {
@@ -394,6 +459,9 @@ sub mainwindow {
 	    } elsif ($buttonclicked eq "sharing") {
 		# Show dialog to set up scanner sharing
 		$changed = sharewindow(@configured);
+	    } elsif ($buttonclicked eq "firmware") {
+		# Show dialog to select the firmware file
+		updatefirmware(@configured);
 	    } elsif ($buttonclicked eq "quit") {
 		# We have clicked "Quit"
 		$maindone = 1;

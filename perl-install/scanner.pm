@@ -77,6 +77,40 @@ sub add2dll {
     output("$sanedir/dll.conf", @dllconf);
 }
 
+sub setfirmware {
+    my ($backend, $firmwareline) = @_;
+    my @driverconf = cat_("$sanedir/$backend.conf");
+    handle_configs::set_directive(\@driverconf, $firmwareline, 0);
+    output("$sanedir/$backend.conf", @driverconf);
+}
+
+sub installfirmware {
+    # Install the firmware file in /usr/share/sane/firmware
+    my ($firmware) = @_;
+    return "" if !$firmware;
+    # Install firmware
+    run_program::rooted($::prefix, "mkdir", "-p",
+			"/usr/share/sane/firmware") || do {
+			    $in->ask_warn('Scannerdrake',
+					  N("Could not create directory /usr/share/sane/firmware!"));
+			    return "";
+			};
+    run_program::rooted($::prefix, "cp", "-f", "$firmware",
+			"/usr/share/sane/firmware") || do {
+			    $in->ask_warn('Scannerdrake',
+					  N("Could not copy firmware file %s to /usr/share/sane/firmware!", $firmware));
+			    return "";
+			};
+    $firmware =~ s!^(.*)(/[^/]+)$!/usr/share/sane/firmware$2!;
+    run_program::rooted($::prefix, "chmod", "644",
+			$firmware) || do {
+			    $in->ask_warn('Scannerdrake',
+					  N("Could not set permissions of firmware file %s!", $firmware));
+			    return "";
+			};
+    return $firmware;
+}
+
 sub configured() {
     my @res;
     my $parportscannerfound = 0;
@@ -88,20 +122,28 @@ sub configured() {
 	    # Extract port and description
 	    my $port = $1;
 	    my $description = $2;
+	    # Remove duplicate scanners appearing through saned and the
+	    # "net" backend
+	    next if $port =~ /^net:(localhost|127.0.0.1):/;
 	    # Is the scanner hooked to a parallel or serial port?
 	    if ($port =~ /(parport|pt_drv|parallel|ttys)/i) {
 		$parportscannerfound = 1;
 	    }
-	    # Remove duplicate scanners appearing through saned and the
-	    # "net" backend
-	    next if $port =~ /^net:(localhost|127.0.0.1):/;
+	    # Determine which SANE backend the scanner in question uses
+	    $port =~ /^([^:]+):/;
+	    my $backend = $1;
+	    # Does the scanner need a firmware file
+	    my $firmwareline = firmwareline($backend);
 	    # Store collected data
 	    push @res, { 
 		port => $port, 
 		val => { 
 		    DESCRIPTION => $description,
-		} 
-	    };
+		    ($backend ? ( BACKEND => $backend ) : ()),
+		    ($firmwareline ? 
+		     ( FIRMWARELINE => $firmwareline ) : ()),
+		}
+	    }
 	}
     }
     close LIST;
@@ -362,6 +404,32 @@ sub get_usb_ids_for_port {
     }
 }
 
+sub readconfiglinetemplates {
+    # Read templates for configuration file lines
+    my %configlines;
+    my $backend;
+    foreach my $line (cat_("$scannerDBdir/scannerconfigs")) {
+	chomp $line;
+	if ($line =~ /^\s*SERVER\s+(\S+)\s*$/) {
+	    $backend = $1;
+	} elsif ($backend) {
+	    push @{$configlines{$backend}}, $line;
+	}
+    }
+    return \%configlines;
+}
+
+sub firmwareline {
+    # Determine whether the given SANE backend supports a firmware file
+    # and return the line needed in the config file
+    my ($backend) = @_;
+    # Read templates for configuration file lines
+    my %configlines = %{readconfiglinetemplates()};
+    # Does the backend support a line for the firmware?
+    my @firmwarelines = (grep { s/^FIRMWARELINE // } @{$configlines{$backend}});
+    return join("\n", @firmwarelines);
+}
+
 sub readScannerDB {
     my ($file) = @_;
     my ($card, %cards);
@@ -454,16 +522,7 @@ sub updateScannerDBfromSane {
 		  };
 
     # Read templates for configuration file lines
-    my %configlines;
-    my $backend;
-    foreach my $line (cat_("$scannerDBdir/scannerconfigs")) {
-	chomp $line;
-	if ($line =~ /^\s*SERVER\s+(\S+)\s*$/) {
-	    $backend = $1;
-	} elsif ($backend) {
-	    push @{$configlines{$backend}}, $line;
-	}
-    }
+    my %configlines = %{readconfiglinetemplates()};
 
     foreach my $ff (glob_("$sanesrcdir/doc/descriptions/*.desc"), glob_("$sanesrcdir/doc/descriptions-external/*.desc"), "UNSUPPORTED") {
 	my $f = $ff;
@@ -500,7 +559,8 @@ sub updateScannerDBfromSane {
 			  # interfaces of this scanner
 			  foreach my $line (@{$configlines{$backend}}) {
 			      my $i = $1 if $line =~ /^\s*(\S*?)LINE/;
-			      if (!$i || $intf =~ /$i/i) {
+			      if (!$i || $i eq "FIRMWARE" || 
+				  $intf =~ /$i/i) {
 				  $to_add .= "$line\n";
 			      }
 			  }
