@@ -610,7 +610,11 @@ sub configurePrinter {
     printerdrake::install_spooler($o->{printer}, $o); #- not interactive...
 
     foreach (values %{$o->{printer}{configured} || {}}) {
-	log::l("configuring printer queue $_->{QUEUE} for $_->{mode}");
+	log::l("configuring printer queue $_->{queuedata}{queue} or $_->{QUEUE}");
+	#- when copy is so adulée (sorry french taste :-)
+	#- and when there are some configuration in one place and in another place...
+	$o->{printer}{currentqueue} = {};
+	printer::copy_printer_params($_->{queuedata}, $o->{printer}{currentqueue});
 	printer::copy_printer_params($_, $o->{printer});
 	#- setup all configured queues, which is not the case interactively where
 	#- only the working queue is setup on configuration.
