@@ -92,7 +92,7 @@ $comb_app->set_popdown_strings("", sort(@generic_tool));
 gtkadd($window->{window},
        gtkpack_(Gtk2::VBox->new(0,5),
                 0, gtkpack(Gtk2::HBox->new(0,0),
-		           gtkpack(gtkset_justify(Gtk2::WrappedLabel->new(formatAlaTeX("%s", translate($mandrake_release))), "left")),
+		           gtkpack(gtkset_justify(Gtk2::WrappedLabel->new($mandrake_release), "left")),
 			 ),
 		0, gtkpack(Gtk2::HSeparator->new),
 		0, gtkadd($table),
