@@ -148,7 +148,7 @@ sub configureNetwork {
     my @l = map { $_->[0] } @all_cards;
 
     foreach (@all_cards) {
-	modules::remove_alias($_->[0]);
+	modules::remove_alias($_->[1]);
 	modules::add_alias($_->[0], $_->[1]);
     }
 
