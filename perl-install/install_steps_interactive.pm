@@ -971,7 +971,7 @@ sub miscellaneous {
 { label => _("Enable num lock at startup"), val => \$u->{numlock}, type => 'bool' },
    ),
      ], complete => sub {
-	    !$u->{memsize} || $u->{memsize} =~ s/^(\d+)M?$/$1M/i or $o->ask_warn('', _("Give the ram size in MB")), return 1;
+	    !$u->{memsize} || $u->{memsize} =~ /K$/ || $u->{memsize} =~ s/^(\d+)M?$/$1M/i or $o->ask_warn('', _("Give the ram size in MB")), return 1;
 	    my %m = reverse %l; $ENV{SECURE_LEVEL} = $o->{security} = $m{$s};
 	    $o->{useSupermount} && $o->{security} > 3 and $o->ask_warn('', _("Can't use supermount in high security level")), return 1;
 	    $o->{security} == 5 and $o->ask_okcancel('',
