@@ -149,4 +149,27 @@ sub check_XF86Config_symlink() {
     }
 }
 
+sub setupFB {
+    my ($bios_vga_mode) = @_;
+
+    require bootloader;
+    my ($bootloader, $all_hds);
+
+    if ($::isInstall) {
+	($bootloader, $all_hds) = ($::o->{bootloader}, $::o->{all_hds});
+    } else {
+	$all_hds = fsedit::get_hds();
+	fs::get_info_from_fstab($all_hds);
+
+	$bootloader = bootloader::read($all_hds) or return;
+    }
+
+    foreach (@{$bootloader->{entries}}) {
+	$_->{vga} = $bios_vga_mode if $_->{vga}; #- replace existing vga= with
+    }
+
+    bootloader::action($bootloader, 'write', $all_hds);
+    bootloader::action($bootloader, 'when_config_changed');
+}
+
 1;

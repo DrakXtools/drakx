@@ -835,19 +835,6 @@ sub ejectCdrom {
 
 sub warnAboutFilesStillOpen() {
     log::l("files still open: ", readlink($_)) foreach map { glob_("$_/fd/*") } glob_("/proc/*");
-  }
-
-sub setupFB {
-    my ($o, $vga) = @_;
-
-    $vga ||= 785; #- assume at least 640x480x16.
-
-    require bootloader;
-    foreach (@{$o->{bootloader}{entries}}) {
-	$_->{vga} = $vga if $_->{vga}; #- replace existing vga= with
-    }
-    bootloader::install($o->{bootloader}, $o->{all_hds});
-    1;
 }
 
 sub install_urpmi {

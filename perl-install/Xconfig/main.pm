@@ -196,6 +196,7 @@ sub write {
     Xconfig::various::check_XF86Config_symlink();
     symlinkf "../../usr/X11R6/bin/Xorg", "$::prefix/etc/X11/X";
     if ($X->{resolution}{bios}) {
+	Xconfig::various::setupFB($X->{resolution}{bios});
 	'need_reboot';
     } else {
 	'need_restart';

@@ -875,12 +875,6 @@ sub configureX {
 }
 sub configureXAfter {
     my ($o) = @_;
-    if ($o->{X}{bios_vga_mode}) {
-	install_any::setupFB($o, $o->{X}{bios_vga_mode}) or do {
-	    log::l("disabling automatic start-up of X11 if any as setup framebuffer failed");
-	    Xconfig::various::runlevel(3); #- disable automatic start-up of X11 on error.
-	};
-    }
     if ($o->{X}{default_depth} >= 16 && $o->{X}{resolution_wanted} >= 1024) {
 	log::l("setting large icon style for kde");
 	install_any::kderc_largedisplay($o->{prefix});
