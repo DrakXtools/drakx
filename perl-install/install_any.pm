@@ -42,7 +42,7 @@ my %iso_images;
 sub useMedium($) {
     #- before ejecting the first CD, there are some files to copy!
     #- does nothing if the function has already been called.
-    $_[0] > 1 and $::o->{method} =~ /(^cdrom|-iso)$/ and setup_postinstall_rpms($::prefix, $::o->{packages});
+    $_[0] > 1 and method_allows_medium_change($::o->{method}) and setup_postinstall_rpms($::prefix, $::o->{packages});
 
     $asked_medium eq $_[0] or log::l("selecting new medium '$_[0]'");
     $asked_medium = $_[0];
@@ -68,6 +68,10 @@ sub askChangeMedium($$) {
     } while $@; #- really it is not allowed to die in changeMedium!!! or install will cores with rpmlib!!!
     log::l($allow ? "accepting medium $medium" : "refusing medium $medium");
     $allow;
+}
+sub method_allows_medium_change($) {
+    my ($method) = @_;
+    $method eq "cdrom" || $method eq "disk-iso";
 }
 
 sub look_for_ISOs() {

@@ -384,7 +384,7 @@ sub choosePackages {
 
     #- this is done at the very beginning to take into account
     #- selection of CD by user if using a cdrom.
-    $o->chooseCD($packages) if $o->{method} =~ /(^cdrom|-iso)$/ && !$::oem;
+    $o->chooseCD($packages) if install_any::method_allows_medium_change($o->{method}) && !$::oem;
 
     my $w = $o->wait_message('', N("Looking for available packages..."));
     my $availableC = &install_steps::choosePackages;
@@ -684,7 +684,7 @@ sub installPackages {
 	my ($method, $medium) = @_;
 
 	#- if not using a cdrom medium or an iso image, always abort.
-	return unless $method =~ /(^cdrom|-iso)$/ && !$::oem;
+	return unless method_allows_medium_change($method) && !$::oem;
 
 	my $name = pkgs::mediumDescr($o->{packages}, $medium);
 	local $| = 1; print "\a";
