@@ -1331,7 +1331,7 @@ sub main {
 		{ 
 		 title => 'XFdrake',
 		 messages => _("What do you want to do?"),
-		 ok => '',
+		 cancel => '',
 		}, [
 		    { format => sub { $_[0][0] }, val => \$f,
 		      list => [
