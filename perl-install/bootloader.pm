@@ -26,9 +26,9 @@ use modules;
 '0x0f01' => "80x50",
 '0x0f02' => "80x43",
 '0x0f03' => "80x28",
-'0x0f04' => "80x30",
-'0x0f05' => "80x34",
-'0x0f06' => "80x60",
+'0x0f05' => "80x30",
+'0x0f06' => "80x34",
+'0x0f07' => "80x60",
 '0x0122' => "100x30",
  785 => "640x480 in 16 bits (FrameBuffer only)",
  788 => "800x600 in 16 bits (FrameBuffer only)",
@@ -703,12 +703,15 @@ sub write_lilo_conf {
 	open F, ">$f" or die "cannot create lilo config file: $f";
 	log::l("writing lilo config to $f");
 
+	chmod 0600, $f if $lilo->{password};
+
 	#- normalize: RESTRICTED is only valid if PASSWORD is set
 	delete $lilo->{restricted} if !$lilo->{password};
 
 	local $lilo->{default} = make_label_lilo_compatible($lilo->{default});
-	$lilo->{$_} and print F "$_=$lilo->{$_}" foreach qw(boot map install vga default append keytable);
+	$lilo->{$_} and print F "$_=$lilo->{$_}" foreach qw(boot map install vga default keytable);
 	$lilo->{$_} and print F $_ foreach qw(linear lba32 compact prompt restricted);
+	print F "append=\"$lilo->{append}\"" if $lilo->{append};
  	print F "password=", $lilo->{password} if $lilo->{password}; #- also done by msec
 	print F "timeout=", round(10 * $lilo->{timeout}) if $lilo->{timeout};
 	print F "serial=", $1 if get_append($lilo, 'console') =~ /ttyS(.*)/;
