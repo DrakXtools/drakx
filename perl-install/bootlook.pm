@@ -115,7 +115,7 @@ my $global_vbox = new Gtk::VBox();
 # lilo/grub
 my $lilo_dedans = new Gtk::HBox(0, 10);
 $lilo_dedans->border_width (5);
-my $lilo_button = new Gtk::Button _("Configuration de Lilo/Grub");
+my $lilo_button = new Gtk::Button _("Lilo/Grub configuration");
 $lilo_dedans->pack_end($lilo_button,0,0,0);
 $lilo_button->signal_connect(clicked => sub { lilo_choice(); });
 
