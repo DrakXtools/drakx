@@ -199,13 +199,7 @@ sub manage {
     $notebook->set_property('show-border', 0);
     my $apply_button;
   
-    my $wait = $in->wait_message(N("Please wait"), N("Detection in progress"));
-    gtkflush();
-
-    network::netconnect::detect(my $detect = {});
-    $detect->{adsl} and do { $detect->{adsl}{$_} and $intf->{$_} = {} foreach keys %{$detect->{adsl}} };
-    
-    undef $wait;
+    my $config = { 'eth0' => 1 }; # testing
 
     $window->{rwindow}->add(gtkpack_(Gtk2::VBox->new,
 				     0, $interface_menu = gtksignal_connect(Gtk2::OptionMenu->new,
@@ -237,12 +231,12 @@ sub manage {
     each_index {
 	my $interface = $_;
 	$gui->{$interface}{index} = $::i;
-	build_tree($netc, $intf->{$interface}, $interface);
-	build_notebook($netc, $intf->{$interface}, $gui->{$interface}, $interface, $apply_button);
+	build_tree($netc, $intf->{$interface} ||= {}, $interface, $config->{$interface});
+	build_notebook($netc, $intf->{$interface}, $gui->{$interface}, $interface, $config->{$interface}, $apply_button);
 	$notebook->append_page(gtkpack(Gtk2::VBox->new(0,0), $gui->{$interface}{notebook}));
-    } (sort keys %$intf);
-    
-    $interface_menu->set_popdown_strings(sort keys %$intf);
+    } (sort keys %$config);
+
+    $interface_menu->set_popdown_strings(sort keys %$config);
     $apply_button->set_sensitive(0);
     
     $window->{rwindow}->show_all;
@@ -251,10 +245,16 @@ sub manage {
 }
 
 sub build_tree {
-    my ($netc, $intf, $interface) = @_;
+    my ($netc, $intf, $interface, $interface_kind) = @_;
     
-    if ($interface eq 'ppp0') {
+    if ($interface eq 'adsl') {
 	$intf->{pages} = { 'Tcp/ip' => 1, 'Account' => 1, 'Options' => 1, 'Informations' => 1 };
+	network::adsl::adsl_probe_info($intf, $netc, $interface_kind);
+	$intf->{save} = sub { network::adsl::adsl_conf_backend($intf, $netc, $interface_kind) };
+    }
+    elsif ($interface eq 'modem') {
+	$intf->{pages} = { 'Tcp/ip' => 1, 'Account' => 1, 'Options' => 1 };
+	# FIXME: code duplication, should be in network::modem::read_config
 	$intf->{device} = $netc->{autodetect}{modem};
 	my %l = getVarsFromSh("$::prefix/usr/share/config/kppprc");
 	$intf->{connection} = $l{Name};
@@ -273,7 +273,7 @@ sub build_tree {
 	}
 	$intf->{save} = sub { network::modem::ppp_configure($in, $intf) };
     }
-    elsif ($interface eq 'ippp0') {
+    elsif ($interface eq 'isdn') {
 	$intf->{pages} = { 'Tcp/ip' => 1, 'Account' => 1, 'Modem' => 1, 'Options' => 1 };
 	network::isdn::isdn_read_config($intf);
 	$intf->{save} = sub { network::isdn::isdn_write_config($intf, $netc) };
@@ -285,7 +285,7 @@ sub build_tree {
 }
 
 sub build_notebook {
-    my ($netc, $intf, $gui, $interface, $apply_button) = @_;
+    my ($netc, $intf, $gui, $interface, $interface_kind, $apply_button) = @_;
  
     my $apply = sub { $apply_button->set_sensitive(1) };
 
@@ -383,7 +383,7 @@ sub build_notebook {
 				   [ "MII_NOT_SUPPORTED", N("Network Hotplugging") ],
 				  ),		     
 			     ),
-			  if_($interface eq 'ippp0',
+			  if_($interface eq 'isdn',
 			      gtkpack(Gtk2::HBox->new(0,0),
 				      gtkpack__(new Gtk2::VBox(0,0),
 						Gtk2::Label->new(N("Dialing mode")),
@@ -412,11 +412,11 @@ sub build_notebook {
     }
     
     if ($intf->{pages}{Account}) {
-	if ($interface =~ /^speedtouch|sagem$/) {
-	    $gui->{description} = $interface eq 'speedtouch' ? 'Alcatel|USB ADSL Modem (Speed Touch)' : 'Analog Devices Inc.|USB ADSL modem';
+	if ($interface_kind =~ /^speedtouch|sagem$/) {
+	    $gui->{description} = $interface_kind eq 'speedtouch' ? 'Alcatel|USB ADSL Modem (Speed Touch)' : 'Analog Devices Inc.|USB ADSL modem';
 	}
 	gtkpack_($gui->{sheet}{Account} = Gtk2::VBox->new(0,0),
-		 if_($interface eq 'ippp0',
+		 if_($interface eq 'isdn',
 		     0, gtkpack_(Gtk2::VBox->new(0,0),
 				 1, Gtk2::Label->new(N("Authentication")),
 				 0, $gui->{intf}{auth} = gtksignal_connect(Gtk2::OptionMenu->new,
@@ -430,7 +430,7 @@ sub build_notebook {
 		       );
 		   } ([ N("Account Login (user name)"), 'login' ],
 		      [ N("Account Password"), 'passwd' ],
-		      if_($interface =~ /^(i?ppp0)$/, [ N("Provider phone number"), $1 eq 'ppp0' ? 'phone' : 'phone_out' ]),
+		      if_($interface =~ /^(isdn|modem)$/, [ N("Provider phone number"), $1 eq 'modem' ? 'phone' : 'phone_out' ]),
 		     ),
 		);
 	$gui->{intf}{auth}->set_popdown_strings(N("PAP"), N("Terminal-based"), N("Script-based"), N_("CHAP"));
