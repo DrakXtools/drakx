@@ -605,15 +605,15 @@ sub sanitize_ver {
 }
 
 sub suggest {
-    my ($bootloader, $hds, %options) = @_;
-    my $fstab = [ fs::get::hds_fstab(@$hds) ];
+    my ($bootloader, $all_hds, %options) = @_;
+    my $fstab = [ fs::get::fstab($all_hds) ];
     my $root_part = fs::get::root($fstab);
     my $root = '/dev/' . (isLoopback($root_part) ? 'loop7' : $root_part->{device});
     my $boot = fs::get::root($fstab, 'boot')->{device};
     #- PPC xfs module requires enlarged initrd
     my $xfsroot = $root_part->{fs_type} eq 'xfs';
 
-    my ($onmbr, $unsafe) = $bootloader->{crushMbr} ? (1, 0) : suggest_onmbr($hds->[0]);
+    my ($onmbr, $unsafe) = $bootloader->{crushMbr} ? (1, 0) : suggest_onmbr($all_hds->{hds}[0]);
     add2hash_($bootloader, arch() =~ /ppc/ ?
 	{
 	 defaultos => "linux",
@@ -632,7 +632,7 @@ sub suggest {
 	 timeout => $onmbr && 10,
 	 nowarn => 1,
 	   if_(arch() !~ /ia64/,
-	 boot => "/dev/" . ($onmbr ? $hds->[0]{device} : fs::get::root($fstab, 'boot')->{device}),
+	 boot => "/dev/" . ($onmbr ? $all_hds->{hds}[0]{device} : $boot),
 	 map => "/boot/map",
 	 color => 'black/cyan yellow/cyan',
          ),
@@ -721,7 +721,7 @@ wait for default boot.
 	#- search for dos (or windows) boot partition. Don't look in extended partitions!
 	my @windows_boot_parts =
 	  grep { isFat_or_NTFS($_) && member(fs::type::fs_type_from_magic($_), 'vfat', 'ntfs') }
-	    map { @{$_->{primary}{normal}} } @$hds;
+	    map { @{$_->{primary}{normal}} } @{$all_hds->{hds}};
 	each_index {
 	    add_entry($bootloader,
 		      {
@@ -771,11 +771,12 @@ sub method_choices_raw() {
 }
 sub method_choices {
     my ($fstab) = @_;
+    my $root_part = fs::get::root($fstab);
 
     grep {
-	!(/lilo/ && isLoopback(fs::get::root($fstab)))
+	!(/lilo/ && isLoopback($root_part))
 	  && !(/lilo-graphic/ && detect_devices::matching_desc('ProSavageDDR'))
-	  && !(/grub/ && isRAID(fs::get::root($fstab)));
+	  && !(/grub/ && isRAID($root_part));
     } method_choices_raw();
 }
 
@@ -840,7 +841,7 @@ sub check_enough_space() {
 }
 
 sub write_yaboot {
-    my ($bootloader, $_hds) = @_;
+    my ($bootloader, $_all_hds) = @_;
     $bootloader->{prompt} ||= $bootloader->{timeout};
 
     if ($bootloader->{message}) {
@@ -902,9 +903,9 @@ sub write_yaboot {
 }
 
 sub install_yaboot {
-    my ($bootloader, $hds) = @_;    
+    my ($bootloader, $all_hds) = @_;
     log::l("Installing boot loader...");
-    write_yaboot($bootloader, $hds);
+    write_yaboot($bootloader, $all_hds);
     when_config_changed_yaboot($bootloader);
 }
 sub when_config_changed_yaboot {
@@ -929,13 +930,13 @@ sub make_label_lilo_compatible {
 }
 
 sub write_lilo {
-    my ($bootloader, $hds) = @_;
+    my ($bootloader, $all_hds) = @_;
     $bootloader->{prompt} ||= $bootloader->{timeout};
 
     my $file2fullname = sub {
 	my ($file) = @_;
 	if (arch() =~ /ia64/) {
-	    my $fstab = [ fs::get::hds_fstab(@$hds) ];
+	    my $fstab = [ fs::get::fstab($all_hds) ];
 	    (my $part, $file) = fs::get::file2part($fstab, $file);
 	    my %hds = map_index { $_ => "hd$::i" } map { $_->{device} } 
 	      sort { 
@@ -948,9 +949,9 @@ sub write_lilo {
 	}
     };
 
-    my @sorted_hds = sort_hds_according_to_bios($bootloader, $hds);
+    my @sorted_hds = sort_hds_according_to_bios($bootloader, $all_hds);
 
-    if (is_empty_hash_ref($bootloader->{bios} ||= {}) && $hds->[0] != $sorted_hds[0]) {
+    if (is_empty_hash_ref($bootloader->{bios} ||= {}) && $all_hds->{hds}[0] != $sorted_hds[0]) {
 	log::l("Since we're booting on $sorted_hds[0]{device}, make it bios=0x80");
 	$bootloader->{bios} = { "/dev/$sorted_hds[0]{device}" => '0x80' };
     }
@@ -998,7 +999,7 @@ sub write_lilo {
 	    push @entry_conf, "unsafe" if $entry->{unsafe} && !$entry->{table};
 		
 	    if ($entry->{table}) {
-		my $hd = fs::get::device2part($entry->{table}, $hds);
+		my $hd = fs::get::device2part($entry->{table}, $all_hds->{hds});
 		if ($hd != $sorted_hds[0]) {		       
 		    #- boot off the nth drive, so reverse the BIOS maps
 		    my $nb = sprintf("0x%x", 0x80 + (find_index { $hd == $_ } @sorted_hds));
@@ -1019,7 +1020,7 @@ sub write_lilo {
 }
 
 sub install_lilo {
-    my ($bootloader, $hds) = @_;
+    my ($bootloader, $all_hds) = @_;
 
     if (my ($install) = $bootloader->{method} =~ /lilo-(text|menu)/) {
 	$bootloader->{install} = $install;
@@ -1029,7 +1030,7 @@ sub install_lilo {
     output("$::prefix/boot/message-text", $bootloader->{message}) if $bootloader->{message};
     symlinkf "message-" . ($bootloader->{method} ne 'lilo-graphic' ? 'text' : 'graphic'), "$::prefix/boot/message";
 
-    write_lilo($bootloader, $hds);
+    write_lilo($bootloader, $all_hds);
 
     when_config_changed_lilo($bootloader);
 }
@@ -1056,8 +1057,8 @@ sub mixed_kind_of_disks {
 }
 
 sub sort_hds_according_to_bios {
-    my ($bootloader, $hds) = @_;
-    my $boot_hd = fs::get::device2part($bootloader->{first_hd_device} || $bootloader->{boot}, $hds); #- $boot_hd is undefined when installing on floppy
+    my ($bootloader, $all_hds) = @_;
+    my $boot_hd = fs::get::device2part($bootloader->{first_hd_device} || $bootloader->{boot}, $all_hds->{hds}); #- $boot_hd is undefined when installing on floppy
     my $boot_kind = $boot_hd && hd2bios_kind($boot_hd);
 
     my $translate = sub {
@@ -1065,7 +1066,7 @@ sub sort_hds_according_to_bios {
 	my $kind = hd2bios_kind($hd);
 	$boot_hd ? ($hd == $boot_hd ? 0 : $kind eq $boot_kind ? 1 : 2) . "_$kind" : $kind;
     };
-    sort { $translate->($a) cmp $translate->($b) } @$hds;
+    sort { $translate->($a) cmp $translate->($b) } @{$all_hds->{hds}};
 }
 
 sub device_string2grub {
@@ -1129,12 +1130,11 @@ sub grub2file {
 }
 
 sub write_grub {
-    my ($bootloader, $hds) = @_;
+    my ($bootloader, $all_hds) = @_;
 
-    my $fstab = [ fs::get::hds_fstab(@$hds) ]; 
+    my $fstab = [ fs::get::fstab($all_hds) ]; 
     my @legacy_floppies = detect_devices::floppies();
-    my @sorted_hds = sort_hds_according_to_bios($bootloader, $hds);
-
+    my @sorted_hds = sort_hds_according_to_bios($bootloader, $all_hds);
     write_grub_device_map(\@legacy_floppies, \@sorted_hds);
 
     my $file2grub = sub {
@@ -1210,9 +1210,9 @@ EOF
 }
 
 sub install_grub {
-    my ($bootloader, $hds) = @_;
+    my ($bootloader, $all_hds) = @_;
 
-    write_grub($bootloader, $hds);
+    write_grub($bootloader, $all_hds);
 
     if (!$::testing) {
 	log::l("Installing boot loader...");
@@ -1236,18 +1236,18 @@ sub action {
 }
 
 sub install {
-    my ($bootloader, $hds) = @_;
+    my ($bootloader, $all_hds) = @_;
 
-    if (my $part = fs::get::device2part($bootloader->{boot}, [ fs::get::hds_fstab(@$hds) ])) {
+    if (my $part = fs::get::device2part($bootloader->{boot}, [ fs::get::fstab($all_hds) ])) {
 	die N("You can't install the bootloader on a %s partition\n", $part->{fs_type})
 	  if $part->{fs_type} eq 'xfs';
     }
     $bootloader->{keytable} = keytable($bootloader->{keytable});
-    action($bootloader, 'install', $hds);
+    action($bootloader, 'install', $all_hds);
 }
 
 sub update_for_renumbered_partitions {
-    my ($in, $renumbering, $hds) = @_;
+    my ($in, $renumbering, $all_hds) = @_;
 
     my %files = (
 		 lilo => '/etc/lilo.conf',
@@ -1266,7 +1266,7 @@ sub update_for_renumbered_partitions {
     my @sorted_hds; {
  	my $grub2dev = read_grub_device_map();
 	map_each {
-	    $sorted_hds[$1] = fs::get::device2part($::b, $hds) if $::a =~ /hd(\d+)/;
+	    $sorted_hds[$1] = fs::get::device2part($::b, $all_hds->{hds}) if $::a =~ /hd(\d+)/;
 	} %$grub2dev;
     };
 
@@ -1293,7 +1293,7 @@ sub update_for_renumbered_partitions {
 	}
     }
 
-    my $main_method = detect_main_method([ fs::get::hds_fstab(@$hds) ]);
+    my $main_method = detect_main_method([ fs::get::fstab($all_hds) ]);
     my @needed = $main_method ? $main_method : ('lilo', 'grub');
     if (find {
 	my $config = $_ eq 'grub' ? 'grub_install' : $_;

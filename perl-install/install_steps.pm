@@ -829,7 +829,7 @@ sub setupBootloaderBefore {
         my $p = pkgs::packageByName($o->{packages}, 'bootsplash');
         $p && $p->flag_installed;
     };
-    bootloader::suggest($o->{bootloader}, $o->{all_hds}{hds},
+    bootloader::suggest($o->{bootloader}, $o->{all_hds},
                         vga_fb => ($force_vga || $vga && $need_fb) && $o->{vga}, 
                         quiet => $o->{meta_class} ne 'server');
 
