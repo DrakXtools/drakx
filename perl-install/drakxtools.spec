@@ -19,9 +19,8 @@ Obsoletes: draksec
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Group: System/Configuration/Other
 Requires: perl-base >= 1:5.8.0-10mdk, urpmi, modutils >= 2.3.11, ldetect-lst >= 0.1.7-3mdk, usermode-consoleonly >= 1.44-4mdk, msec >= 0.38
-Obsoletes: diskdrake setuptool
-Obsoletes: mouseconfig kbdconfig printtool drakfloppy
-Provides: diskdrake setuptool mouseconfig kbdconfig printtool
+Obsoletes: diskdrake drakfloppy kbdconfig mouseconfig printtool setuptool
+Provides: diskdrake drakfloppy kbdconfig mouseconfig printtool setuptool
 
 %package http
 Summary: The drakxtools via http
@@ -174,16 +173,16 @@ perl -ni -e '/http/ ? print STDERR $_ : print' %{name}.list 2> %{name}-http.list
 #mdk menu entry
 mkdir -p $RPM_BUILD_ROOT/%_menudir
 
-cat > $RPM_BUILD_ROOT%_menudir/localedrake <<EOF
-?package(harddrake-ui):\
+cat > $RPM_BUILD_ROOT%_menudir/drakxtools-newt <<EOF
+?package(drakxtools-newt):\
 	needs="X11"\
 	section="Configuration/Other"\
 	title="LocaleDrake"\
 	longtitle="Language configurator"\
 	command="/usr/bin/localedrake"\
-	icon="harddrake.png"
-EOF
 
+EOF
+ 
 cat > $RPM_BUILD_ROOT%_menudir/harddrake-ui <<EOF
 ?package(harddrake-ui):\
 	needs="X11"\
@@ -246,6 +245,12 @@ done
 %preun http
 %_preun_service drakxtools_http
 
+%post newt
+%update_menus
+
+%postun newt
+%clean_menus
+
 %post -n harddrake-ui
 %update_menus
 
@@ -264,12 +269,12 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %files newt -f %name.list
 %defattr(-,root,root)
 %config(noreplace) /etc/security/fileshare.conf
+%_menudir/drakxtools-newt
 %doc diskdrake/diskdrake.html
 %attr(4755,root,root) %_sbindir/fileshareset
 
 %files -f %{name}-gtk.list
 %defattr(-,root,root)
-%_menudir/localedrake
 %config(noreplace) %_sysconfdir/pam.d/net_monitor
 %config(noreplace) %_sysconfdir/security/console.apps/net_monitor
 /usr/X11R6/bin/*
