@@ -8,7 +8,7 @@ use printer::common;
 use printer::cups;
 
 # ------------------------------------------------------------------
-#   Star Offica/OpenOffice.org
+#   Star Office/OpenOffice.org
 # ------------------------------------------------------------------
 
 
@@ -41,7 +41,7 @@ sub configureoffice {
     my ($suite, $printer) = @_;
     # Do we have Star Office installed?
     my $configfilename = find_config_file($suite);
-    return 1 if !$configfilename;
+    return 1 unless $configfilename;
     $configfilename =~ m!$suites{$suite}{file_name}!;
     my $configprefix = $1;
     # Load Star Office printer config file
@@ -51,7 +51,7 @@ sub configureoffice {
 	(-x "$::prefix/usr/bin/curl" || -x "$::prefix/usr/bin/wget")) {
 	my @printerlist = printer::cups::get_remote_queues();
 	foreach my $listentry (@printerlist) {
-	    next if !($listentry =~ /^([^\|]+)\|([^\|]+)$/);
+	    next unless ($listentry =~ /^([^\|]+)\|([^\|]+)$/);
 	    my $queue = $1;
 	    my $server = $2;
 	    if (-x "$::prefix/usr/bin/wget") {
@@ -74,6 +74,7 @@ sub configureoffice {
     foreach my $queue (keys(%{$printer->{configured}})) {
 	# Check if we have a PPD file
 	if (! -r "$::prefix/etc/foomatic/$queue.ppd") {
+         # Only set up this printer if there's a PPD file
 	    if (-r "$::prefix/etc/cups/ppd/$queue.ppd") {
 		# If we have a PPD file in the CUPS config dir, link to it
 		run_program::rooted($::prefix, 
@@ -86,9 +87,6 @@ sub configureoffice {
 				    "ln", "-sf",
 				    "/usr/share/postscript/ppd/$queue.ppd",
 				    "/etc/foomatic/$queue.ppd");
-	    } else {
-		# No PPD file at all? We cannot set up this printer
-		next;
 	    }
 	}
 	$configfilecontent = 
@@ -107,7 +105,7 @@ sub add_cups_remote_to_office {
     my ($suite, $printer, $queue) = @_;
     # Do we have Star Office installed?
     my $configfilename = find_config_file($suite);
-    return 1 if !$configfilename;
+    return 1 unless $configfilename;
     $configfilename =~ m!$suites{$suite}{file_name}!;
     my $configprefix = $1;
     # Load Star Office printer config file
@@ -117,7 +115,7 @@ sub add_cups_remote_to_office {
 	(-x "$::prefix/usr/bin/curl" || -x "$::prefix/usr/bin/wget")) {
 	my @printerlist = printer::cups::get_remote_queues();
 	foreach my $listentry (@printerlist) {
-	    next if !($listentry =~ /^([^\|]+)\|([^\|]+)$/);
+	    next unless ($listentry =~ /^([^\|]+)\|([^\|]+)$/);
 	    my $q = $1;
 	    next if $q ne $queue;
 	    my $server = $2;
@@ -156,7 +154,7 @@ sub remove_printer_from_office {
     my ($suite, $printer, $queue) = @_;
     # Do we have Star Office installed?
     my $configfilename = find_config_file($suite);
-    return 1 if !$configfilename;
+    return 1 unless $configfilename;
     $configfilename =~ m!$suites{$suite}{file_name}!;
     my $configprefix = $1;
     # Load Star Office printer config file
@@ -173,7 +171,7 @@ sub remove_local_printers_from_office {
     my ($suite, $printer) = @_;
     # Do we have Star Office installed?
     my $configfilename = find_config_file($suite);
-    return 1 if !$configfilename;
+    return 1 unless $configfilename;
     $configfilename =~ m!$suites{$suite}{file_name}!;
     my $configprefix = $1;
     # Load Star Office printer config file
@@ -347,9 +345,7 @@ sub find_config_file {
 	    my $filename = <F>;
 	    close F;
 	    if ($filename) {
-		if ($::prefix ne "") {
-		    $filename =~ s/^$::prefix//;
-		}
+		    $filename =~ s/^$::prefix// if $::prefix;
 		# Work around a bug in the "ls" of "busybox". During
 		# installation it outputs the mask given on the command line
 		# instead of nothing when the mask does not match any file
