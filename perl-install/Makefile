@@ -60,7 +60,7 @@ get_needed_files: $(DIRS)
 #	see also /usr/lib/perl5/5.00503/ARCH-linux/Data/Dumper.pm
 
 	cat `../tools/specific_arch share/list` >> /tmp/list
-	@missing=`perl -lne 'print if !-e $$_' /tmp/list`; [ -n "$$missing" ] && { echo "missing files vvvvvvvvvvvvvvvvvvvvvvvvvv" ; echo "$$missing" ; echo "missing files ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^" ; exit 1; }
+	@missing=`perl -lne 'print if !-e $$_' /tmp/list`; [ -z "$$missing" ] || { echo "missing files vvvvvvvvvvvvvvvvvvvvvvvvvv" ; echo "$$missing" ; echo "missing files ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^" ; exit 1; }
 
 	find auto -follow -name "*.so" >> /tmp/list
 
