@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2000-05-18 16:40+0200\n"
+"POT-Creation-Date: 2000-05-21 21:24+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -745,7 +745,7 @@ msgstr ""
 msgid "Be careful: this operation is dangerous."
 msgstr ""
 
-#: ../../diskdrake.pm_.c:197 ../../install_any.pm_.c:330
+#: ../../diskdrake.pm_.c:197 ../../install_any.pm_.c:332
 #: ../../install_steps.pm_.c:74 ../../install_steps_interactive.pm_.c:40
 #: ../../standalone/diskdrake_.c:60 ../../standalone/rpmdrake_.c:294
 #: ../../standalone/rpmdrake_.c:304
@@ -1809,40 +1809,40 @@ msgid ""
 "Then choose action ``Mount point'' and set it to `/'"
 msgstr ""
 
-#: ../../install_any.pm_.c:331 ../../standalone/diskdrake_.c:61
+#: ../../install_any.pm_.c:333 ../../standalone/diskdrake_.c:61
 msgid ""
 "I can't read your partition table, it's too corrupted for me :(\n"
 "I'll try to go on blanking bad partitions"
 msgstr ""
 
-#: ../../install_any.pm_.c:348
+#: ../../install_any.pm_.c:350
 msgid ""
 "DiskDrake failed to read correctly the partition table.\n"
 "Continue at your own risk!"
 msgstr ""
 
-#: ../../install_any.pm_.c:370
+#: ../../install_any.pm_.c:372
 msgid "Searching root partition."
 msgstr ""
 
-#: ../../install_any.pm_.c:399
+#: ../../install_any.pm_.c:401
 msgid "Information"
 msgstr ""
 
-#: ../../install_any.pm_.c:400
+#: ../../install_any.pm_.c:402
 #, c-format
 msgid "%s: This is not a root partition, please select another one."
 msgstr ""
 
-#: ../../install_any.pm_.c:402
+#: ../../install_any.pm_.c:404
 msgid "No root partition found"
 msgstr ""
 
-#: ../../install_any.pm_.c:440
+#: ../../install_any.pm_.c:442
 msgid "Can't use broadcast with no NIS domain"
 msgstr ""
 
-#: ../../install_any.pm_.c:603
+#: ../../install_any.pm_.c:605
 msgid "Error reading file $f"
 msgstr ""
 
@@ -1865,12 +1865,12 @@ msgid ""
 "Mandrake/RPMS/*.rpm\"\n"
 msgstr ""
 
-#: ../../install_steps.pm_.c:385
+#: ../../install_steps.pm_.c:387
 #, c-format
 msgid "Welcome to %s"
 msgstr ""
 
-#: ../../install_steps.pm_.c:737
+#: ../../install_steps.pm_.c:739
 msgid "No floppy drive available"
 msgstr ""
 
@@ -3442,28 +3442,32 @@ msgstr ""
 msgid "Is this correct?"
 msgstr ""
 
-#: ../../partition_table.pm_.c:535
+#: ../../partition_table.pm_.c:521
+msgid "Extended partition not supported on this platform"
+msgstr ""
+
+#: ../../partition_table.pm_.c:539
 msgid ""
 "You have a hole in your partition table but I can't use it.\n"
 "The only solution is to move your primary partitions to have the hole next "
 "to the extended partitions"
 msgstr ""
 
-#: ../../partition_table.pm_.c:623
+#: ../../partition_table.pm_.c:628
 #, c-format
 msgid "Error reading file %s"
 msgstr ""
 
-#: ../../partition_table.pm_.c:630
+#: ../../partition_table.pm_.c:635
 #, c-format
 msgid "Restoring from file %s failed: %s"
 msgstr ""
 
-#: ../../partition_table.pm_.c:632
+#: ../../partition_table.pm_.c:637
 msgid "Bad backup file"
 msgstr ""
 
-#: ../../partition_table.pm_.c:653
+#: ../../partition_table.pm_.c:658
 #, c-format
 msgid "Error writing to file %s"
 msgstr ""
