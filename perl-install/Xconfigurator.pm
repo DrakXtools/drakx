@@ -1104,23 +1104,24 @@ sub main {
 _("I can set up your computer to automatically start X upon booting.
 Would you like X to start when you reboot?"), 1);
 	    rewriteInittab($run ? 5 : 3) unless $::testing;
-
-	    my @etc_pass_fields = qw(name pw uid gid realname home shell);
-	    my @users = mapgrep {
-		my %l; @l{@etc_pass_fields} = split ':';
-		$l{uid} > 500, $l{name};
-	    } cat_("$o->{prefix}/etc/passwd");
-
-	    my $flag='no';
-	    unless (exists $o->{miscellaneous}{autologuser} || $::auto || !@users || $o->{authentication}{NIS}) {
-	        $in->ask_from_entries_refH(_("Autologin"),
+	}
+	my @etc_pass_fields = qw(name pw uid gid realname home shell);
+	my @users = mapgrep {
+	    my %l; @l{@etc_pass_fields} = split ':';
+	    $l{uid} > 500, $l{name};
+	} cat_("$o->{prefix}/etc/passwd");
+	my @wm = run_program::rooted($prefix, "/usr/sbin/chksession", "-l");
+	my $flag='no';
+	unless (exists $o->{miscellaneous}{autologuser} || $::auto || !@users || $o->{authentication}{NIS}) {
+	    $in->ask_from_entries_refH(_("Autologin"),
 _("I can set up your computer to automatically log on one user.
 If you don't want to use this feature, click on the cancel button."),
-                                           [ _("Choose the default user:") => {val => \$o->{miscellaneous}{autologuser}, list => \@users, not_edit => 1} ])
-		    ? do { $flag='yes'; system("urpmi --auto autologin"); } : delete $o->{miscellaneaous}{autologuser};
-	    }
-	    any::setAutologin($prefix, $o->{miscellaneous}{autologuser}, "startx", $flag);
+				       [ _("Choose the default user:") => { val => \$o->{miscellaneous}{autologuser}, list => \@users, not_edit => 1},
+					 _("Choose the window_manager to run:") => { val => \$o->{miscellaneous}{autologwm}, list => \@wm, not_edit => 1}, ])
+	      ? do { $flag='yes'; $::isStandalone ? system("urpmi --auto autologin") : $o->pkgs_install("autologin"); } : delete $o->{miscellaneaous}{autologuser};
 	}
+	any::setAutologin($prefix, $o->{miscellaneous}{autologuser}, $o->{miscellaneous}{autologwm}, "/usr/X11R6/bin/startx", $flag);
+
 	run_program::rooted($prefix, "chkconfig", "--del", "gpm") if $o->{mouse}{device} =~ /ttyS/ && !$::isStandalone;
     }
 }
