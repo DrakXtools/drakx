@@ -523,16 +523,6 @@ sub check_fs_type {
     $fs_type eq "reiserfs" && $part->{size} < 32 << 11 and die N("You can't use ReiserFS for partitions smaller than 32MB");
 }
 
-sub package_needed_for_partition_type {
-    my ($part) = @_;
-    my %l = (
-	reiserfs => 'reiserfsprogs',
-	xfs => 'xfsprogs',
-        jfs => 'jfsprogs',
-    );
-    $l{$part->{fs_type}};
-}
-
 #- you can do this before modifying $part->{mntpoint}
 #- so $part->{mntpoint} should not be used here, use $mntpoint instead
 sub check_mntpoint {

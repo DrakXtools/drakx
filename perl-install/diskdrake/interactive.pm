@@ -1027,13 +1027,7 @@ sub check_type {
 	return;
     }
     if ($::isStandalone) {
-	if (my $pkg = fsedit::package_needed_for_partition_type($type)) {
-	    if (!-x "/sbin/mkfs.$type->{fs_type}") {
-		$in->ask_yesorno('', N("The package %s is needed. Install it?", $pkg), 1) or return;
-		$in->do_pkgs->install($pkg);
-	    }
-	    -x "/sbin/mkfs.$type->{fs_type}" or $in->ask_warn('', "Mandatory package $pkg is missing"), return;
-	}
+	fs::format::check_package_is_installed($in->do_pkgs, $type->{fs_type}) or return;
     }
     1;
 }
