@@ -351,7 +351,7 @@ sub create_box_with_title {
 		      (map {
 			  my $w = ref($_) ? $_ : Gtk2::Label->new($_);
 			  gtkset_name($w, "Title");
-			  $::isWizard ? (gtkpack__(Gtk2::HBox->new(0,0), gtkset_size_request(Gtk2::Label->new, 20, 0), $w))
+			  $::isWizard ? gtkpack__(Gtk2::HBox->new(0,0), gtkset_size_request(Gtk2::Label->new, 20, 0), $w)
 			              : $w
 		      } map { ref($_) ? $_ : warp_text($_) } @_),
 		      if_($::isWizard, gtkset_size_request(Gtk2::Label->new, 0, 15)),
