@@ -57,6 +57,10 @@ FD_t fd2FD_t(int fd) {
   return f;
 }
 
+';
+
+print '
+
 void initIMPS2() {
   unsigned char imps2_s1[] = { 243, 200, 243, 100, 243, 80, };
   unsigned char imps2_s2[] = { 246, 230, 244, 243, 100, 232, 3, };
@@ -71,11 +75,6 @@ void initIMPS2() {
   tcflush (fd, TCIFLUSH);
   tcdrain(fd);
 }
-
-
-';
-
-print '
 
 long long llseek(int fd, long long offset,  int whence);
 
