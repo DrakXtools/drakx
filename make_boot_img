@@ -69,30 +69,6 @@ if ($arch =~ /i.86/ && $img =~ /all/) {
 
 sub install_stripped { _ "strip $_[0]"; _ "$sudo install $_[0] $_[1]" }
 
-sub patch_pcmcia_config {
-    my ($pcmcia_root) = @_;
-    my @ignore_modules_in_deps = qw(pcmcia_core ds);
-
-    my @conf_contents = cat_("$pcmcia_root/pcmcia/config");
-    die "$pcmcia_root/pcmcia/config seems short\n" if listlength(@conf_contents) < 10;
-
-    #- adjust deps
-    foreach (cat_("all.modules/$main/modules.dep")) {
-	/^(\S+): (.*)/ and $deps{$1} = [ split ' ', $2 ] or die "could not understand `$_' in all.modules/$main/modules.dep\n";
-    }
-    foreach my $confline (@conf_contents) {
-	$confline =~ /class.*\s+module\s+(.*)/ or next;
-	my @modules = map { /"([^"]+)"(.*)/ && [ $1, $2 ] } split ',', $1;
-	$_->[0] =~ s|.*/([^/]+)$|$1|g foreach @modules;  #- remove directories since we don't support that during install
-	my @deps = grep { !member($_, @ignore_modules_in_deps, map { $_->[0] } @modules) } map { @{$deps{$_->[0]}} } @modules;
-	my $new_modz = join ', ', (map { "\"$_\"" } @deps), (map { "\"$_->[0]\"$_->[1]" } @modules);
-	$confline =~ s/(class.*\s+module\s+).*/$1$new_modz/;
-    }
-
-    output("/tmp/make_boot_image_pcmcia_config", @conf_contents);
-    _ "$sudo mv /tmp/make_boot_image_pcmcia_config $pcmcia_root/pcmcia/config";
-}
-
 sub initrd {
     my ($mnt, $img) = @_;
     my ($ltype, $I) = $type =~ /(.*?)(64)/; $ltype ||= $type;
@@ -118,7 +94,9 @@ sub initrd {
 
     if (member($type, qw(pcmcia all network)) && $arch !~ /ppc/ && $arch !~ /ia64/) {
 	 _ "$sudo cp -a /etc/pcmcia $mnt/etc";
-	 patch_pcmcia_config("$mnt/etc");
+	 _ "cp $mnt/etc/pcmcia/config /tmp/pcmcia_config_tmp";
+	 _ "tools/patch_pcmcia_config.pl /tmp/pcmcia_config_tmp all.modules/$main/modules.dep";
+	 _ "sudo mv /tmp/pcmcia_config_tmp $mnt/etc/pcmcia/config";
     }
     my ($ext) = $img =~ /rdz-(.*)/ or die "bad initrd name ($img)";
     $modz = "all.modules$I/$ext";
