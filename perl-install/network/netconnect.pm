@@ -67,6 +67,17 @@ sub detect_timezone() {
     \@country;
 }
 
+# load sub category's wizard pages into main wizard data structure
+sub get_subwizard {
+    my ($wiz, $type) = @_;
+    my %net_conf_callbacks = (adsl => sub { require network::adsl; &network::adsl::get_wizard },
+                              cable => sub { require network::ethernet; &network::ethernet::get_wizard },
+                              isdn => sub { require network::isdn; &network::isdn::get_wizard },
+                              lan => sub { require network::ethernet; &network::ethernet::get_wizard },
+                              modem => sub { require network::modem; &network::modem::get_wizard },
+                             );
+    $net_conf_callbacks{$type}->($wiz);
+}
 
 # configuring all network devices
   sub main {
