@@ -8,7 +8,7 @@ use run_program;
 use modules;
 use any;
 use mouse;
-use network;
+use network::network;
 use network::tools;
 use MDK::Common::Globals "network", qw($in $prefix $connect_file $disconnect_file $connect_prog);
 
@@ -300,7 +300,7 @@ sub load_conf {
     my $current = { getVarsFromSh("$prefix/etc/netprofile/current") };
     
     $netcnx->{PROFILE} = $current->{PROFILE} || 'default';
-    network::read_all_conf($prefix, $netc, $intf);
+    network::network::read_all_conf($prefix, $netc, $intf);
 }
 
 sub get_net_device() {

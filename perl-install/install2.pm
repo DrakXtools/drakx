@@ -447,7 +447,7 @@ sub main {
 
     #- done before auto_install is called to allow the -IP feature on auto_install file name
     if (-e '/tmp/network') {
-	require network;
+	require network::network;
 	#- get stage1 network configuration if any.
 	log::l('found /tmp/network');
 	$o->{netc} ||= {};
