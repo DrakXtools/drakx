@@ -103,11 +103,12 @@ sub init {
     modules::load_category('multimedia/sound');
 
 drakx_stuff:
-    $o->{steps}{startMove} = { reachable => 1, text => "Start Move" };
-    $o->{steps}{handleI18NClp} = { reachable => 1, text => "Handle I18N CLP" };
     $o->{steps}{handleMoveKey} = { reachable => 1, text => "Handle Move Key" };
+    $o->{steps}{handleI18NClp} = { reachable => 1, text => "Handle I18N CLP" };
+    $o->{steps}{verifyKey} = { reachable => 1, text => "Verify Key" };
+    $o->{steps}{startMove} = { reachable => 1, text => "Start Move" };
     $o->{orderedSteps_orig} = $o->{orderedSteps};
-    $o->{orderedSteps} = [ qw(setupSCSI handleMoveKey selectLanguage handleI18NClp acceptLicense selectMouse selectKeyboard startMove) ];
+    $o->{orderedSteps} = [ qw(setupSCSI handleMoveKey selectLanguage handleI18NClp acceptLicense verifyKey selectMouse selectKeyboard startMove) ];
     $o->{steps}{first} = $o->{orderedSteps}[0];
 
     member($_, @ALLOWED_LANGS) or delete $lang::langs{$_} foreach keys %lang::langs;
@@ -134,6 +135,8 @@ sub lomount_clp {
 
 sub install_TrueFS_in_home {
     my ($o) = @_;
+
+    require fsedit;
     my $home = fsedit::mntpoint2part('/home', $o->{fstab}) or return;
 
     my %loopbacks = map {
@@ -190,6 +193,34 @@ sub install2::handleMoveKey {
     } @parts;
 
     fs::mount_part($_) foreach @parts;
+}
+
+sub install2::verifyKey {
+    my ($o) = $::o;
+
+    while (!any { m|\s/home\s| } cat_('/proc/mounts')) {
+        
+        $o->ask_okcancel_({ title => N("Need a key to save your data"), 
+                            messages => formatAlaTeX(
+N("We didn't detect any USB key on your system. If you
+plug in an USB key now, Mandrake Move will have the ability
+to transparently save the data in your home directory and
+system wide configuration, for next boot on this computer
+or another one. Note: if you plug in a key now, wait several
+seconds before detecting again.
+
+
+You may also proceed without an USB key - you'll still be
+able to use Mandrake Move as a normal live Mandrake
+Operating System.")),
+                            ok => N("Detect again USB key"),
+                            cancel => N("Continue without USB key") }) or return;
+
+        require fsedit;
+        $o->{all_hds} = fsedit::empty_all_hds();
+        install_any::getHds($o, $o);
+        install2::handleMoveKey();
+    }
 }
 
 sub install2::startMove {
