@@ -1258,7 +1258,7 @@ sub configureX {
 
     my $options = { 
 	allowFB => $o->{allowFB},
-	allowNVIDIA_rpms => $o->do_pkgs->check_kernel_module_packages('NVIDIA_kernel-', 'NVIDIA_GLX'),
+	allowNVIDIA_rpms => $o->do_pkgs->check_kernel_module_packages('NVIDIA_kernel', 'NVIDIA_GLX'),
     };
 
     require Xconfig::main;
