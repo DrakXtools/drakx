@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX\n"
 "POT-Creation-Date: 2002-09-02 20:14+0200\n"
-"PO-Revision-Date: 2002-08-20 15:15+0200\n"
+"PO-Revision-Date: 2002-09-04 11:15+0200\n"
 "Last-Translator: José JORGE <jose.jorge@oreka.com>\n"
 "Language-Team: Português\n"
 "MIME-Version: 1.0\n"
@@ -326,9 +326,8 @@ msgid "Do you want to test the configuration?"
 msgstr "Quer testar a configuração?"
 
 #: ../../Xconfig/test.pm_.c:31
-#, fuzzy
 msgid "Warning: testing this graphic card may freeze your computer"
-msgstr "Aviso: o teste desta placa gráfica pode congelar o seu computador"
+msgstr "Aviso: o teste desta placa gráfica pode bloquear o seu computador"
 
 #: ../../Xconfig/various.pm_.c:29
 #, c-format
@@ -827,14 +826,12 @@ msgid "access to administrative files"
 msgstr "aceder aos ficheiros de administração"
 
 #: ../../any.pm_.c:754
-#, fuzzy
 msgid "access to network tools"
-msgstr "aceder às ferramentas rpm"
+msgstr "aceder às ferramentas rede"
 
 #: ../../any.pm_.c:755
-#, fuzzy
 msgid "access to compilation tools"
-msgstr "aceder às ferramentas rpm"
+msgstr "aceder às ferramentas de construção"
 
 #: ../../any.pm_.c:760
 #, c-format
@@ -1236,9 +1233,8 @@ msgid "Display theme under console"
 msgstr "Mostrar o tema na linha de commando"
 
 #: ../../bootlook.pm_.c:145
-#, fuzzy
 msgid "Create new theme"
-msgstr "Criar uma nova partição"
+msgstr "Criar um novo tema"
 
 #: ../../bootlook.pm_.c:169
 msgid "Can't create Bootsplash preview"
@@ -1601,9 +1597,8 @@ msgid "Details"
 msgstr "Detalhes"
 
 #: ../../diskdrake/hd_gtk.pm_.c:252
-#, fuzzy
 msgid "No hard drives found"
-msgstr "Nenhuma impressora encontrada!"
+msgstr "Nenhum disco rígido encontrado"
 
 #: ../../diskdrake/hd_gtk.pm_.c:323
 msgid "Ext2"
@@ -2384,7 +2379,7 @@ msgid "server"
 msgstr "servidor"
 
 #: ../../fsedit.pm_.c:240
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "I can't read the partition table of device %s, it's too corrupted for me :(\n"
 "I can try to go on, erasing over bad partitions (ALL DATA will be lost!).\n"
@@ -2393,10 +2388,13 @@ msgid ""
 "\n"
 "Do you agree to loose all the partitions?\n"
 msgstr ""
-"Não consigo ler sua tabela de partição, é muito defeituosa para mim :(\n"
+"Não consigo ler a tabela de partição de %s, é demasiado defeituosa para mim :"
+"(\n"
 "Eu posso tentar continuar limpando as partições defeituosas (TODOS OS DADOS\n"
 "serão perdidos!). A outra solução é não deixar o DrakX modificar a tabela\n"
 "de partições. (o erro é %s)\n"
+"\n"
+"Aceita perder todas as partições?\n"
 
 #: ../../fsedit.pm_.c:501
 msgid "You can't use JFS for partitions smaller than 16MB"
@@ -2461,9 +2459,8 @@ msgid "There's no known OSS/ALSA alternative driver for your sound card (%s)"
 msgstr ""
 
 #: ../../harddrake/sound.pm_.c:158
-#, fuzzy
 msgid "Sound configuration"
-msgstr "Configuração de CUPS"
+msgstr "Configuração do Som"
 
 #: ../../harddrake/sound.pm_.c:159
 #, c-format
@@ -2473,13 +2470,12 @@ msgid ""
 msgstr ""
 
 #: ../../harddrake/sound.pm_.c:162
-#, fuzzy
 msgid "Driver:"
-msgstr "Driver"
+msgstr "Piloto :"
 
 #: ../../harddrake/sound.pm_.c:173
 msgid "No known driver"
-msgstr ""
+msgstr "Nenhum piloto conhecido"
 
 #: ../../harddrake/sound.pm_.c:174
 #, c-format
@@ -2487,7 +2483,6 @@ msgid "There's no known driver for your sound card (%s)"
 msgstr ""
 
 #: ../../harddrake/sound.pm_.c:177
-#, fuzzy
 msgid "Unkown driver"
 msgstr "Modelo desconhecido"
 
@@ -2603,9 +2598,8 @@ msgid "the vendor name of the device"
 msgstr "o nome do vendedor do dispositivo"
 
 #: ../../harddrake/ui.pm_.c:38
-#, fuzzy
 msgid "Alternative drivers"
-msgstr "Página de teste alternativa (A4)"
+msgstr "Pilotos alternativos"
 
 #: ../../harddrake/ui.pm_.c:39
 msgid "the list of alternative drivers for this sound card"
@@ -5602,9 +5596,8 @@ msgid "Belgian"
 msgstr "Belga"
 
 #: ../../keyboard.pm_.c:177
-#, fuzzy
 msgid "Bengali"
-msgstr "activar"
+msgstr "Bengala"
 
 #: ../../keyboard.pm_.c:178
 msgid "Bulgarian (phonetic)"
@@ -5619,7 +5612,6 @@ msgid "Brazilian (ABNT-2)"
 msgstr "Brasileiro (ABNT-2)"
 
 #: ../../keyboard.pm_.c:183
-#, fuzzy
 msgid "Bosnian"
 msgstr "Estoniano"
 
@@ -5732,9 +5724,8 @@ msgid "Latin American"
 msgstr "Latino Americano"
 
 #: ../../keyboard.pm_.c:218
-#, fuzzy
 msgid "Laotian"
-msgstr "Latuniano"
+msgstr "Laociano"
 
 #: ../../keyboard.pm_.c:219
 msgid "Lithuanian AZERTY (old)"
@@ -5765,17 +5756,16 @@ msgid "Myanmar (Burmese)"
 msgstr ""
 
 #: ../../keyboard.pm_.c:227
-#, fuzzy
 msgid "Mongolian (cyrillic)"
-msgstr "Serbo (cirílico)"
+msgstr "Mongoliano (cirílico)"
 
 #: ../../keyboard.pm_.c:228
 msgid "Maltese (UK)"
-msgstr ""
+msgstr "Maltês (UK)"
 
 #: ../../keyboard.pm_.c:229
 msgid "Maltese (US)"
-msgstr ""
+msgstr "Maltês (US)"
 
 #: ../../keyboard.pm_.c:230
 msgid "Dutch"
@@ -5968,9 +5958,8 @@ msgid "Genius NetScroll"
 msgstr "Genius RodaRede"
 
 #: ../../mouse.pm_.c:39 ../../mouse.pm_.c:48
-#, fuzzy
 msgid "Microsoft Explorer"
-msgstr "Microsoft IntelliRato"
+msgstr "Microsoft Explorer"
 
 #: ../../mouse.pm_.c:44 ../../mouse.pm_.c:70
 msgid "1 button"
@@ -6057,9 +6046,8 @@ msgid "MOVE YOUR WHEEL!"
 msgstr "MOVA A SUA RODA!"
 
 #: ../../my_gtk.pm_.c:64
-#, fuzzy
 msgid "-adobe-utopia-regular-r-*-*-25-*-*-*-p-*-iso8859-*,*-r-*"
-msgstr "-adobe-times-bold-r-normal--17-*-100-100-p-*-iso8859-*,*-r-*"
+msgstr "-adobe-utopia-regular-r-*-*-25-*-*-*-p-*-iso8859-*,*-r-*"
 
 #: ../../my_gtk.pm_.c:159
 msgid "Finish"
@@ -6124,32 +6112,26 @@ msgid "use pptp"
 msgstr "usar pptp"
 
 #: ../../network/drakfirewall.pm_.c:12
-#, fuzzy
 msgid "Web Server"
-msgstr "Servidor"
+msgstr "Servidor Web"
 
 #: ../../network/drakfirewall.pm_.c:17
-#, fuzzy
 msgid "Domain Name Server"
-msgstr "Calculador de Nome do domínio"
+msgstr "Servidor de Nomes do Domínio"
 
 #: ../../network/drakfirewall.pm_.c:32
-#, fuzzy
 msgid "Mail Server"
-msgstr "Activar o servidor"
+msgstr "Servidor de Correio"
 
 #: ../../network/drakfirewall.pm_.c:37
-#, fuzzy
 msgid "POP and IMAP Server"
-msgstr "Servidor LDAP"
+msgstr "Servidor POP e IMAP"
 
 #: ../../network/drakfirewall.pm_.c:111
-#, fuzzy
 msgid "No network card"
-msgstr "nenhuma placa de rede encontrada"
+msgstr "Nenhuma placa de rede"
 
 #: ../../network/drakfirewall.pm_.c:129
-#, fuzzy
 msgid ""
 "drakfirewall configurator\n"
 "\n"
@@ -6157,15 +6139,15 @@ msgid ""
 "For a powerful dedicated firewall solution, please look to the\n"
 "specialized MandrakeSecurity Firewall distribution."
 msgstr ""
-"Configurador do tinyfirewall\n"
+"Configurador do drakfirewall\n"
 "\n"
-"Configura uma firewall pessoal para esta máquina Linux Mandrake.\n"
-"Para uma firewall poderosa e dedicada, por favor procure a \n"
+"Configura um pára-fogo pessoal para esta máquina Mandrake Linux.\n"
+"Para um pára-fogo poderoso e dedicado, por favor veja a \n"
 "distribuição especializada MandrakeSecurity Firewall"
 
 #: ../../network/drakfirewall.pm_.c:147
 msgid "Which services would you like to allow the Internet to connect to?"
-msgstr ""
+msgstr "A quais serviços deseja permitir a ligação desde o Internet ?"
 
 #: ../../network/drakfirewall.pm_.c:148
 msgid ""
@@ -6184,12 +6166,11 @@ msgstr ""
 
 #: ../../network/drakfirewall.pm_.c:162
 msgid "Everything (no firewall)"
-msgstr ""
+msgstr "Tudo (nenhum pára-fogo)"
 
 #: ../../network/drakfirewall.pm_.c:164
-#, fuzzy
 msgid "Other ports"
-msgstr "Testar portas"
+msgstr "Outras portas"
 
 #: ../../network/ethernet.pm_.c:37
 msgid ""
@@ -7217,28 +7198,30 @@ msgid "Printerdrake"
 msgstr "PrinterDrake"
 
 #: ../../printerdrake.pm_.c:178
-#, fuzzy
 msgid "Checking your system..."
-msgstr "A re-lançar o sistema de impressão..."
+msgstr "A testar o seu sistema..."
 
 #: ../../printerdrake.pm_.c:186
 msgid ""
 "There are no printers found which are directly connected to your machine"
-msgstr ""
+msgstr "Não encontrei nenhuma impressora ligada directamente à sua máquina"
 
 #: ../../printerdrake.pm_.c:198
-#, fuzzy
 msgid ""
 "The following printers\n"
 "\n"
-msgstr "Os seguintes pacotes serão removidos"
+msgstr ""
+"As impressoras seguintes\n"
+"\n"
 
 #: ../../printerdrake.pm_.c:199
 #, fuzzy
 msgid ""
 "The following printer\n"
 "\n"
-msgstr "Os seguintes pacotes serão removidos"
+msgstr ""
+"A impressora seguinte\n"
+"\n"
 
 #: ../../printerdrake.pm_.c:201
 msgid ""
@@ -7266,9 +7249,8 @@ msgid ""
 msgstr ""
 
 #: ../../printerdrake.pm_.c:210
-#, fuzzy
 msgid "directly connected to your system"
-msgstr "Cópia das polícias no seu sistema"
+msgstr "directamente ligada(s) ao seu sistema"
 
 #: ../../printerdrake.pm_.c:213
 msgid ""
@@ -7284,31 +7266,28 @@ msgid ""
 msgstr ""
 
 #: ../../printerdrake.pm_.c:221
-#, fuzzy
 msgid " (Make sure that all your printers are connected and turned on).\n"
-msgstr "Por favor escolha a ficha em que a sua impressora está ligada."
+msgstr "(Por favor verifique que a sua impressora está ligada e acesa).\n"
 
 #: ../../printerdrake.pm_.c:235
 msgid ""
 "Do you want to enable printing on the printers mentioned above or on "
 "printers in the local network?\n"
 msgstr ""
+"Quer autorisar a impressão nas impressoras indicadas acima ou nas "
+"impressoras da rede local ?\n"
 
 #: ../../printerdrake.pm_.c:236
-#, fuzzy
 msgid "Do you want to enable printing on printers in the local network?\n"
-msgstr ""
-"Quer definir esta impressora (\"%s\")\n"
-"como impressora por omissão?"
+msgstr "Quer autorisar a impressão nas impressoras da rede local ?\n"
 
 #: ../../printerdrake.pm_.c:238
-#, fuzzy
 msgid "Do you want to enable printing on the printers mentioned above?\n"
-msgstr "Quer iniciar a sua ligação ão iniciar?"
+msgstr "Quer autorisar a impressão nas impressoras indicadas acima ?\n"
 
 #: ../../printerdrake.pm_.c:239
 msgid "Are you sure that you want to set up printing on this machine?\n"
-msgstr ""
+msgstr "Tem a certeza que deseja configurar a impressão nesta máquina ?\n"
 
 #: ../../printerdrake.pm_.c:240
 #, c-format
@@ -8594,9 +8573,8 @@ msgid "Printer options"
 msgstr "Opções da impressora"
 
 #: ../../printerdrake.pm_.c:2989
-#, fuzzy
 msgid "Preparing Printerdrake..."
-msgstr "A preparar PrinterDrake..."
+msgstr "A preparar Printerdrake..."
 
 #: ../../printerdrake.pm_.c:3007 ../../printerdrake.pm_.c:3580
 msgid "Configuring applications..."
@@ -9263,9 +9241,8 @@ msgstr ""
 "que vai poder encontrar nas nossas páginas \"Comunidade\""
 
 #: ../../share/advertising/03-internet.pl_.c:9
-#, fuzzy
 msgid "Get the most from the Internet"
-msgstr "Ligar à Internet"
+msgstr "Aproveite o melhor do Internet"
 
 #: ../../share/advertising/03-internet.pl_.c:10
 msgid ""
@@ -9319,9 +9296,8 @@ msgid ""
 msgstr ""
 
 #: ../../share/advertising/08-development.pl_.c:9
-#, fuzzy
 msgid "Development simplified"
-msgstr "Desenvolvimento"
+msgstr "Desenvolvimento mais simples"
 
 #: ../../share/advertising/08-development.pl_.c:10
 msgid "Mandrake Linux 9.0 is the ultimate development platform"
@@ -9368,13 +9344,12 @@ msgid "The official MandrakeSoft store"
 msgstr ""
 
 #: ../../share/advertising/11-mdkstore.pl_.c:10
-#, fuzzy
 msgid ""
 "Our full range of Linux solutions, as well as special offers on products and "
 "'goodies', are available online at our e-store"
 msgstr ""
-"Uma linha completa de soluções Linux, assim como ofertas especiais e "
-"suplementos, estão disponivéis em linha na nossa e-loja"
+"A nossa linha completa de soluções Linux, assim como ofertas especiais, "
+"estão disponivéis em linha na nossa e-loja"
 
 #: ../../share/advertising/12-mdkstore.pl_.c:9
 msgid "Strategic partners"
@@ -9409,9 +9384,8 @@ msgid ""
 msgstr ""
 
 #: ../../share/advertising/14-mdkexpert.pl_.c:9
-#, fuzzy
 msgid "Become a MandrakeExpert"
-msgstr "MandrakeExpert"
+msgstr "Seja um Perito com MandrakeExpert"
 
 #: ../../share/advertising/14-mdkexpert.pl_.c:10
 msgid ""
@@ -9427,9 +9401,8 @@ msgid ""
 msgstr ""
 
 #: ../../share/advertising/15-mdkexpert-corporate.pl_.c:9
-#, fuzzy
 msgid "MandrakeExpert Corporate"
-msgstr "MandrakeExpert"
+msgstr "MandrakeExpert Empresa"
 
 #: ../../share/advertising/15-mdkexpert-corporate.pl_.c:10
 msgid "An online platform to respond to company's specific support needs"
@@ -9691,16 +9664,15 @@ msgstr ""
 
 #: ../../standalone/drakbackup_.c:725
 msgid "WARNING"
-msgstr ""
+msgstr "ATENÇÃO"
 
 #: ../../standalone/drakbackup_.c:726
-#, fuzzy
 msgid "FATAL"
-msgstr "FAT"
+msgstr "FATAL"
 
 #: ../../standalone/drakbackup_.c:727
 msgid "INFO"
-msgstr ""
+msgstr "INFO"
 
 #: ../../standalone/drakbackup_.c:739
 msgid ""
@@ -9776,9 +9748,9 @@ msgid "No password prompt on %s at port %s"
 msgstr ""
 
 #: ../../standalone/drakbackup_.c:851
-#, fuzzy, c-format
+#, c-format
 msgid "Bad password on %s"
-msgstr "Nenhuma senha"
+msgstr "Senha errada em %s"
 
 #: ../../standalone/drakbackup_.c:852
 #, c-format
@@ -9786,9 +9758,9 @@ msgid "Permission denied transferring %s to %s"
 msgstr ""
 
 #: ../../standalone/drakbackup_.c:853
-#, fuzzy, c-format
+#, c-format
 msgid "Can't find %s on %s"
-msgstr "Não é possível abrir %s: %s\n"
+msgstr "Não consigo encontrar %s em %s"
 
 #: ../../standalone/drakbackup_.c:856
 #, c-format
@@ -9866,9 +9838,8 @@ msgid "Backup Other files..."
 msgstr "Cópia de segurança d'outros ficheiros..."
 
 #: ../../standalone/drakbackup_.c:1321
-#, fuzzy
 msgid "No changes to backup!"
-msgstr "Utilizar um leitor de cassetes para arquivar"
+msgstr "Nenhuma mudança nos arquivos!"
 
 #: ../../standalone/drakbackup_.c:1337 ../../standalone/drakbackup_.c:1360
 #, c-format
@@ -10559,23 +10530,25 @@ msgid ""
 msgstr ""
 
 #: ../../standalone/drakbackup_.c:3394
-#, fuzzy
 msgid ""
 "Restore Selected\n"
 "Files"
-msgstr "Remover selecção"
+msgstr ""
+"Restaurar os Ficheiros\n"
+"Selecionados"
 
 #: ../../standalone/drakbackup_.c:3411
-#, fuzzy
 msgid ""
 "Change\n"
 "Restore Path"
-msgstr "Restaurar os Outros"
+msgstr ""
+"Mudar o Caminho\n"
+"de Restauração"
 
 #: ../../standalone/drakbackup_.c:3477
-#, fuzzy, c-format
+#, c-format
 msgid "Backup files not found at %s."
-msgstr "Guardar %s em %s.old"
+msgstr "Guardar o ficheiros não encontrados em %s"
 
 #: ../../standalone/drakbackup_.c:3490
 #, c-format
@@ -10585,9 +10558,8 @@ msgid ""
 msgstr ""
 
 #: ../../standalone/drakbackup_.c:3490
-#, fuzzy
 msgid "Restore From CD"
-msgstr "Restaurar a partir do Disco Rígido."
+msgstr "Restaurar a partir do CD"
 
 #: ../../standalone/drakbackup_.c:3492
 #, c-format
@@ -10602,9 +10574,8 @@ msgid ""
 msgstr ""
 
 #: ../../standalone/drakbackup_.c:3502
-#, fuzzy
 msgid "Restore From Tape"
-msgstr "Restaurar a tabela de partições"
+msgstr "Restaurar a partir duma Cassete"
 
 #: ../../standalone/drakbackup_.c:3504
 #, c-format
@@ -10612,9 +10583,8 @@ msgid "Not the correct tape label. Tape is labelled %s."
 msgstr ""
 
 #: ../../standalone/drakbackup_.c:3524
-#, fuzzy
 msgid "Restore Via Network"
-msgstr "Restaurar os Utilizadores"
+msgstr "Restaurar pela Rede"
 
 #: ../../standalone/drakbackup_.c:3524
 #, c-format
@@ -10622,28 +10592,24 @@ msgid "Restore Via Network Protocol: %s"
 msgstr ""
 
 #: ../../standalone/drakbackup_.c:3525
-#, fuzzy
 msgid "Host Name"
-msgstr "Nome do anfitrião"
+msgstr "Nome de Anfitrião"
 
 #: ../../standalone/drakbackup_.c:3526
 msgid "Host Path or Module"
 msgstr ""
 
 #: ../../standalone/drakbackup_.c:3533
-#, fuzzy
 msgid "Password required"
-msgstr "Senha"
+msgstr "Senha requisa"
 
 #: ../../standalone/drakbackup_.c:3539
-#, fuzzy
 msgid "Username required"
-msgstr "Nome de utilizador"
+msgstr "Nome de utilizador requiso"
 
 #: ../../standalone/drakbackup_.c:3542
-#, fuzzy
 msgid "Hostname required"
-msgstr "Anfitrião: "
+msgstr "Anfitrião requiso"
 
 #: ../../standalone/drakbackup_.c:3547
 msgid "Path or Module required"
@@ -10654,9 +10620,8 @@ msgid "Files Restored..."
 msgstr ""
 
 #: ../../standalone/drakbackup_.c:3563
-#, fuzzy
 msgid "Restore Failed..."
-msgstr "Restaurar os Outros"
+msgstr "A restauração falhou"
 
 #: ../../standalone/drakbackup_.c:3801
 msgid "Restore all backups"
@@ -10675,14 +10640,12 @@ msgid "Browse to new restore repository."
 msgstr ""
 
 #: ../../standalone/drakbackup_.c:3865
-#, fuzzy
 msgid "Restore From Catalog"
-msgstr "Restaurar a tabela de partições"
+msgstr "Restaurar a partir do Catálogo"
 
 #: ../../standalone/drakbackup_.c:3893
-#, fuzzy
 msgid "Restore Progress"
-msgstr "Restaurar os Utilizadores"
+msgstr "Progressão da Restauração"
 
 #: ../../standalone/drakbackup_.c:3935 ../../standalone/drakbackup_.c:3968
 #: ../../standalone/drakbackup_.c:3994 ../../standalone/drakbackup_.c:4021
@@ -12111,12 +12074,10 @@ msgstr ""
 "Clique em Configurar para iniciar o assistente de configuração."
 
 #: ../../standalone/draksound_.c:46
-#, fuzzy
 msgid "No Sound Card detected!"
-msgstr "Nenhuma placa TV detectada!"
+msgstr "Nenhuma Placa de Som detectada!"
 
 #: ../../standalone/draksound_.c:47
-#, fuzzy
 msgid ""
 "No Sound Card has been detected on your machine. Please verify that a Linux-"
 "supported Sound Card is correctly plugged in.\n"
@@ -12127,8 +12088,8 @@ msgid ""
 "\n"
 "http://www.linux-mandrake.com/en/hardware.php3"
 msgstr ""
-"Nenhuma placa TV foi encontrada na sua maquina. Por favor verifique que uma "
-"placa Video/TV suportada por Linux está bem ligada.\n"
+"Nenhuma placa de som foi encontrada na sua maquina. Por favor verifique que "
+"uma placa sonora suportada por Linux está bem ligada.\n"
 "\n"
 "\n"
 "Pode visitar a nossa base de dados de material em :\n"
@@ -12141,52 +12102,44 @@ msgid "package ImageMagick is required for correct working"
 msgstr ""
 
 #: ../../standalone/draksplash_.c:76
-#, fuzzy
 msgid "first step creation"
-msgstr "criação de disquete de arranque"
+msgstr "primeiro passo de criação"
 
 #: ../../standalone/draksplash_.c:77
-#, fuzzy
 msgid "final resolution"
-msgstr "Resolução"
+msgstr "resolução final"
 
 #: ../../standalone/draksplash_.c:78 ../../standalone/draksplash_.c:170
-#, fuzzy
 msgid "choose image file"
-msgstr "Escolha um ficheiro"
+msgstr "escolha um ficheiro imagem"
 
 #: ../../standalone/draksplash_.c:79
-#, fuzzy
 msgid "Theme name"
-msgstr "Nome de partilha"
+msgstr "Nome do tema"
 
 #: ../../standalone/draksplash_.c:81
 msgid "make bootsplash step 2"
 msgstr ""
 
 #: ../../standalone/draksplash_.c:82
-#, fuzzy
 msgid "go to lilosplash configuration"
-msgstr "Configuração pós-instalação"
+msgstr "ir à configuração do lilosplash"
 
 #: ../../standalone/draksplash_.c:83
-#, fuzzy
 msgid "quit"
-msgstr "Sair"
+msgstr "sair"
 
 #: ../../standalone/draksplash_.c:84
-#, fuzzy
 msgid "save theme"
-msgstr "Instalar temas"
+msgstr "gravar tema"
 
 #: ../../standalone/draksplash_.c:85
 msgid "browse"
-msgstr ""
+msgstr "navegar"
 
 #: ../../standalone/draksplash_.c:98 ../../standalone/draksplash_.c:159
-#, fuzzy
 msgid "Configure bootsplash picture"
-msgstr "Não consigo criar uma pré-visualização da imagem de início"
+msgstr "Configurar a imagem de início"
 
 #: ../../standalone/draksplash_.c:99
 msgid "x coordinate of text box in number of character"
@@ -12225,24 +12178,20 @@ msgid "the color of the progress bar"
 msgstr ""
 
 #: ../../standalone/draksplash_.c:119
-#, fuzzy
 msgid "go back"
-msgstr "Loopback"
+msgstr "voltar"
 
 #: ../../standalone/draksplash_.c:120
-#, fuzzy
 msgid "preview"
-msgstr "dispositivo"
+msgstr "pré-visualização"
 
 #: ../../standalone/draksplash_.c:121
-#, fuzzy
 msgid "choose color"
-msgstr "Escolha um monitor"
+msgstr "escolha a cor"
 
 #: ../../standalone/draksplash_.c:124
-#, fuzzy
 msgid "Display logo on Console"
-msgstr "Mostrar o tema na linha de commando"
+msgstr "Mostrar o logo na linha de commando"
 
 #: ../../standalone/draksplash_.c:125
 msgid "Make kernel message quiet by default"
@@ -12258,19 +12207,16 @@ msgid "saving Bootsplash theme..."
 msgstr ""
 
 #: ../../standalone/draksplash_.c:436
-#, fuzzy
 msgid "ProgressBar color selection"
-msgstr "Escolha do modelo da impressora"
+msgstr "Escolha da cor da Barra de Progressão"
 
 #: ../../standalone/draksplash_.c:454
-#, fuzzy
 msgid "You must choose an image file first!"
-msgstr "Você deve escolher/entrar um dispositivo/impressora!"
+msgstr "Você deve escolher um ficheiro imagem primeiro!"
 
 #: ../../standalone/draksplash_.c:463
-#, fuzzy
 msgid "Generating preview ..."
-msgstr "A detectar dispositivos..."
+msgstr "A criar a pré-visualização"
 
 #: ../../standalone/drakxtv_.c:49
 msgid ""
@@ -12680,7 +12626,7 @@ msgid "The %s is not supported by this version of Mandrake Linux."
 msgstr ""
 
 #: ../../standalone/scannerdrake_.c:56
-#, fuzzy, c-format
+#, c-format
 msgid "%s found on %s, configure it?"
 msgstr "%s encontrado em %s, configurar-lo ?"
 

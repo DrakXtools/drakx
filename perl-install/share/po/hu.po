@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX\n"
 "POT-Creation-Date: 2002-09-02 20:14+0200\n"
-"PO-Revision-Date: 2002-09-03 00:34+0000\n"
+"PO-Revision-Date: 2002-09-04 01:20+0000\n"
 "Last-Translator: Arpad Biro <biro_arpad@yahoo.com>\n"
 "Language-Team: Hungarian\n"
 "MIME-Version: 1.0\n"
@@ -2540,7 +2540,7 @@ msgid "Unkown driver"
 msgstr "Ismeretlen meghajtó"
 
 #: ../../harddrake/sound.pm_.c:178
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "The \"%s\" driver for your sound card is unlisted\n"
 "\n"
@@ -2551,8 +2551,8 @@ msgstr ""
 "A hangkártya \"%s\" meghajtója nem szerepel a listában.\n"
 "\n"
 "Küldje el az \"lspcidrake -v\" parancs által produkált kimenetet\n"
-"a következõ címre: Thierry Vignaud <tvignaud at mandrakesoft dot com>\n"
-"a következõ tárggyal: \"unlisted sound driver\"."
+"a következõ címre: \"install at mandrakesoft dot com\"\n"
+"a következõ tárggyal: \"unlisted sound driver: %s\"."
 
 #: ../../harddrake/ui.pm_.c:16
 msgid "Model"
@@ -2655,14 +2655,12 @@ msgid "the vendor name of the device"
 msgstr "az eszköz gyártójának neve"
 
 #: ../../harddrake/ui.pm_.c:38
-#, fuzzy
 msgid "Alternative drivers"
-msgstr "Nincs alternatív meghajtó"
+msgstr "Alternatív meghajtók"
 
 #: ../../harddrake/ui.pm_.c:39
-#, fuzzy
 msgid "the list of alternative drivers for this sound card"
-msgstr "Nincs ismert OSS/ALSA alternatív meghajtó a hangkártyához (%s)"
+msgstr "a hangkártyához használható alternatív meghajtók"
 
 #: ../../harddrake/ui.pm_.c:63
 msgid "/_Quit"
@@ -7035,7 +7033,6 @@ msgid "No network card"
 msgstr "Hálózati kártya nem található"
 
 #: ../../network/drakfirewall.pm_.c:129
-#, fuzzy
 msgid ""
 "drakfirewall configurator\n"
 "\n"
@@ -7043,11 +7040,11 @@ msgid ""
 "For a powerful dedicated firewall solution, please look to the\n"
 "specialized MandrakeSecurity Firewall distribution."
 msgstr ""
-"Személyes tûzfal beállítása\n"
+"A DrakFirewall beállítása\n"
 "\n"
-"Ezzel egy személyes felhasználásra szánt mini tûzfalat lehet beállítani.\n"
-"Ha egy sokfelhasználós, vállalati szintû megoldást szeretne, szerezze\n"
-"be a speciális MandrakeSecurity Firewall disztribúciót."
+"Ezzel egy személyes felhasználásra szánt tûzfalat lehet beállítani ehhez\n"
+"a Mandrake Linuxt használó géphez. Ha egy komolyabb tûzfalmegoldást\n"
+"szeretne, szerezze be a speciális MandrakeSecurity Firewall disztribúciót."
 
 #: ../../network/drakfirewall.pm_.c:147
 msgid "Which services would you like to allow the Internet to connect to?"
@@ -8958,7 +8955,7 @@ msgstr ""
 
 #: ../../printerdrake.pm_.c:1816
 msgid "GDI Laser Printer using the Zenographics ZJ-Stream Format"
-msgstr ""
+msgstr "Zenographics ZJ-Stream formátumot használó GDI lézernyomtató"
 
 #: ../../printerdrake.pm_.c:1817
 msgid ""
@@ -8982,6 +8979,25 @@ msgid ""
 "The first command can be given by any normal user, the second must be given "
 "as root. After having done so you can print normally.\n"
 msgstr ""
+"Az Ön nyomtatója a - több cég által is gyártott - GDI lézernyomtatók (más "
+"néven: winprinter eszközök) közé tartozik. Ezek a nyomtatók Zenographics ZJ-"
+"Stream raszterformátumban kapják az adatokat. Az ezen nyomtatókhoz "
+"használható meghajtóprogram a fejlesztés korai fázisában van, ezért nem "
+"mindig mûködik megfelelõen. Elõfordulhat például az, hogy a nyomtató csak A4-"
+"es papírmérettel mûködik.\n"
+"\n"
+"Ezen nyomtatók közül néhányra - mint például a HP LaserJet 1000 (amelyhez ez "
+"a meghajtó eredetileg készült) - bekapcsoláskor fel kell tölteni a \"firmware"
+"\" vezérlõprogramot. A HP LaserJet 1000 esetén meg kell keresni a \"sihp1000."
+"img\" nevû fájlt a nyomtató windowsos CD-jén vagy egy windowsos partíción, "
+"majd fel kell azt tölteni a nyomtatóra a következõ parancsok egyikével:\n"
+"\n"
+"     lpr -o raw sihp1000.img\n"
+"     cat sihp1000.img > /dev/usb/lp0\n"
+"\n"
+"Az elsõ parancsot bármely felhasználó kiadhatja, a másodikat viszont csak "
+"rendszergazdai jogosultságú felhasználók. A parancs végrehajtása után a "
+"megszokott módon lehet nyomtatni.\n"
 
 #: ../../printerdrake.pm_.c:2040
 msgid ""
@@ -10248,7 +10264,7 @@ msgstr "Köszönjük, hogy a Mandrake Linux 9.0 rendszert választotta"
 
 #: ../../share/advertising/01-thanks.pl_.c:10
 msgid "Welcome to the Open Source world"
-msgstr "Üdvözöljük a Nyílt Forráskód világában."
+msgstr "Üdvözöljük a Nyílt Forráskód világában"
 
 #: ../../share/advertising/01-thanks.pl_.c:11
 msgid ""
@@ -10261,7 +10277,7 @@ msgstr ""
 
 #: ../../share/advertising/02-community.pl_.c:9
 msgid "Get involved in the Free Software world"
-msgstr "Csatlakozzon a Szabad Szoftver világához."
+msgstr "Csatlakozzon a Szabad Szoftver világához"
 
 #: ../../share/advertising/02-community.pl_.c:10
 msgid "Want to know more about the Open Source community?"
@@ -10274,7 +10290,7 @@ msgid ""
 msgstr ""
 "Ossza meg ismereteit másokkal és járuljon hozzá linuxos eszközök "
 "fejlesztéséhez - csatlakozzon a közösségi (\"Community\") weblapjainkon "
-"található fórumokhoz."
+"található fórumokhoz"
 
 #: ../../share/advertising/03-internet.pl_.c:9
 msgid "Get the most from the Internet"
@@ -10305,7 +10321,7 @@ msgid ""
 "files, edit and handle your images or photos, and play videos"
 msgstr ""
 "A Mandrake Linux 9.0 a legújabb programokat tartalmazza zene és videók "
-"lejátszásához valamint képek szerkesztéséhez és kezeléséhez."
+"lejátszásához valamint képek szerkesztéséhez és kezeléséhez"
 
 #: ../../share/advertising/05-games.pl_.c:9
 msgid "Games"
@@ -10329,7 +10345,7 @@ msgid ""
 "your machine"
 msgstr ""
 "A Mandrake Linux 9.0 Vezérlõközponttal testreszabható és beállítható az "
-"egész rendszer."
+"egész rendszer"
 
 #: ../../share/advertising/07-desktop.pl_.c:9
 msgid "User interfaces"
@@ -10349,7 +10365,7 @@ msgstr "Egyszerû fejlesztés"
 
 #: ../../share/advertising/08-development.pl_.c:10
 msgid "Mandrake Linux 9.0 is the ultimate development platform"
-msgstr "A Mandrake Linux 9.0 a legjobb fejlesztõi környezet."
+msgstr "A Mandrake Linux 9.0 a legjobb fejlesztõi környezet"
 
 #: ../../share/advertising/08-development.pl_.c:11
 msgid ""
@@ -10357,11 +10373,11 @@ msgid ""
 "development environments"
 msgstr ""
 "Használja fel a GNU GCC 3 fordító és a legjobb nyílt forráskódú "
-"fejlesztõkörnyezetek erejét."
+"fejlesztõkörnyezetek erejét"
 
 #: ../../share/advertising/09-server.pl_.c:9
 msgid "Turn your machine into a reliable server"
-msgstr "Alakítsa gépét egy megbízható kiszolgálóvá."
+msgstr "Alakítsa gépét egy megbízható kiszolgálóvá"
 
 #: ../../share/advertising/09-server.pl_.c:10
 msgid ""
@@ -10381,7 +10397,7 @@ msgid ""
 "F.)"
 msgstr ""
 "A MandrakeSecurity termékek közt megtalálható a Multi Network Firewall nevû "
-"tûzfal (M.N.F.)."
+"tûzfal (M.N.F.)"
 
 #: ../../share/advertising/10-mnf.pl_.c:11
 msgid ""
@@ -10389,7 +10405,7 @@ msgid ""
 "all your security needs"
 msgstr ""
 "Ez a tûzfaltermék olyan hálózati funkciókat valósít meg, amelyek az összes "
-"biztonsági igénynek megfelelnek."
+"biztonsági igénynek megfelelnek"
 
 #: ../../share/advertising/10-mnf.pl_.c:12
 msgid "This product is available on MandrakeStore website"
@@ -10405,7 +10421,7 @@ msgid ""
 "'goodies', are available online at our e-store"
 msgstr ""
 "Linuxos megoldások teljes skálája, speciális termékajánlatok, valamint egyéb "
-"árucikkek elektronikus üzletünkben."
+"árucikkek elektronikus üzletünkben"
 
 #: ../../share/advertising/12-mdkstore.pl_.c:9
 msgid "Strategic partners"
@@ -10417,6 +10433,9 @@ msgid ""
 "solutions compatible with Mandrake Linux; a list of these partners is "
 "available on the MandrakeStore"
 msgstr ""
+"A MandrakeSoft együttmûködik több, a Mandrake Linuxszal kapcsolatos "
+"professzionális megoldásokat kínáló céggel - a partnerek listája elérhetõ a "
+"MandrakeStore webhelyén"
 
 #: ../../share/advertising/13-mdkcampus.pl_.c:9
 msgid "Discover MandrakeSoft's training catalogue Linux-Campus"
@@ -10428,11 +10447,11 @@ msgid ""
 "and experts (Network and System administrations)"
 msgstr ""
 "Az oktatási programot a felhasználók és a szakértõk (hálózati- és "
-"rendszeradminisztrátorok) igényei alapján hoztuk létre."
+"rendszeradminisztrátorok) igényei alapján hoztuk létre"
 
 #: ../../share/advertising/13-mdkcampus.pl_.c:11
 msgid "Certify yourself on Linux"
-msgstr ""
+msgstr "Szerezzen linuxos képesítést"
 
 #: ../../share/advertising/13-mdkcampus.pl_.c:12
 msgid ""
@@ -10440,6 +10459,9 @@ msgid ""
 "partners, the Linux-Campus catalogue prepares you for the acknowledged LPI "
 "certification program (worldwide professional technical certification)"
 msgstr ""
+"Akár a weben keresztül tanul, akár az oktatási partnereinken keresztül, a "
+"Linux-Campus oktatási anyag felkészíti Önt az elismert világméretû "
+"professzionális LPI vizsgaprogramra"
 
 #: ../../share/advertising/14-mdkexpert.pl_.c:9
 msgid "Become a MandrakeExpert"
@@ -10450,6 +10472,8 @@ msgid ""
 "Find the solutions to your problems via MandrakeSoft's online support "
 "platform"
 msgstr ""
+"Találjon megoldást a felmerülõ problémáira a MandrakeSoft webes támogatási "
+"rendszerével"
 
 #: ../../share/advertising/14-mdkexpert.pl_.c:11
 msgid ""
@@ -10457,6 +10481,9 @@ msgid ""
 "your knowledge and help others by becoming a recognized Expert on the online "
 "technical support website:"
 msgstr ""
+"Csatlakozzon a MandrakeSoft támogatási csapataihoz és a linuxos közösséghez, "
+"hogy megoszthassa ismereteit és segítséget nyújthasson másoknak a támogatási "
+"weboldalakon keresztül - váljon elismert szakértõvé"
 
 #: ../../share/advertising/15-mdkexpert-corporate.pl_.c:9
 msgid "MandrakeExpert Corporate"
@@ -10464,14 +10491,14 @@ msgstr "Mandrake-szakértõ - vállalati"
 
 #: ../../share/advertising/15-mdkexpert-corporate.pl_.c:10
 msgid "An online platform to respond to company's specific support needs"
-msgstr ""
+msgstr "Webes támogatási rendszer vállalati igényekhez"
 
 #: ../../share/advertising/15-mdkexpert-corporate.pl_.c:11
 msgid ""
 "All incidents will be followed up by a single qualified MandrakeSoft "
 "technical expert."
 msgstr ""
-"Az összes bejelentést a MandrakeSoft ugyanazon szakembere fogja kezelni."
+"Az összes bejelentést a MandrakeSoft ugyanazon szakembere fogja kezelni"
 
 #: ../../standalone.pm_.c:41
 msgid "Installing packages..."
@@ -10782,6 +10809,10 @@ msgid ""
 "this feature, install perl-Expect and comment lines 772-774,\n"
 " as well as 788,789. Then uncomment line 787."
 msgstr ""
+"A perl-Expect nincs telepítve vagy nincs bekapcsolva. Ahhoz, hogy\n"
+"ezt a funkciót használhassa, telepítse a perl-Expect csomagot,\n"
+"majd tegye megjegyzésbe a 772.-774. sorokat valamint a 788. és a 789.\n"
+"sort, a 787. sort pedig vegye ki megjegyzésbõl."
 
 #: ../../standalone/drakbackup_.c:817
 #, c-format
@@ -10809,27 +10840,27 @@ msgstr "HIBA: Nem hajtható végre: %s."
 #: ../../standalone/drakbackup_.c:850
 #, c-format
 msgid "No password prompt on %s at port %s"
-msgstr ""
+msgstr "Nincs jelszókérés %s ezen portján: %s"
 
 #: ../../standalone/drakbackup_.c:851
-#, fuzzy, c-format
+#, c-format
 msgid "Bad password on %s"
-msgstr "Nincs jelszó"
+msgstr "Hibás jelszó ezen: %s"
 
 #: ../../standalone/drakbackup_.c:852
 #, c-format
 msgid "Permission denied transferring %s to %s"
-msgstr ""
+msgstr "\"%s\" nem vihetõ át ide: \"%s\" - engedély megtagadva"
 
 #: ../../standalone/drakbackup_.c:853
-#, fuzzy, c-format
+#, c-format
 msgid "Can't find %s on %s"
-msgstr "%s megnyitása nem sikerült: %s\n"
+msgstr "%s nem található itt: %s"
 
 #: ../../standalone/drakbackup_.c:856
 #, c-format
 msgid "%s not responding"
-msgstr ""
+msgstr "%s nem válaszol"
 
 #: ../../standalone/drakbackup_.c:860
 #, c-format
@@ -10878,7 +10909,7 @@ msgstr "Probléma a CD-hozzáférési engedélyekkel."
 #: ../../standalone/drakbackup_.c:1087
 #, c-format
 msgid "No tape in %s!"
-msgstr ""
+msgstr "Nincs szalag ebben: %s."
 
 #: ../../standalone/drakbackup_.c:1199 ../../standalone/drakbackup_.c:1248
 msgid "Backup system files..."
@@ -11038,7 +11069,7 @@ msgstr "Mentés hálózati kapcsolaton keresztül"
 
 #: ../../standalone/drakbackup_.c:1777
 msgid "Net Method:"
-msgstr ""
+msgstr "Hálózati mód:"
 
 #: ../../standalone/drakbackup_.c:1781
 msgid "Use Expect for SSH"
@@ -11595,25 +11626,29 @@ msgid ""
 "Restore Selected\n"
 "Catalog Entry"
 msgstr ""
+"A kijelölt katalógus-\n"
+"bejegyzés visszaállítása"
 
 #: ../../standalone/drakbackup_.c:3394
-#, fuzzy
 msgid ""
 "Restore Selected\n"
 "Files"
-msgstr "Kijelöltek eltávolítása"
+msgstr ""
+"A kijelölt fájlok\n"
+"visszaállítása"
 
 #: ../../standalone/drakbackup_.c:3411
-#, fuzzy
 msgid ""
 "Change\n"
 "Restore Path"
-msgstr "Egyéb adatok visszatöltése"
+msgstr ""
+"A visszaállítási\n"
+"útvonal módosítása"
 
 #: ../../standalone/drakbackup_.c:3477
-#, fuzzy, c-format
+#, c-format
 msgid "Backup files not found at %s."
-msgstr "\"%s\" mentése \"%s.old\" névre"
+msgstr "Mentésfájlok nem találhatók itt: %s."
 
 #: ../../standalone/drakbackup_.c:3490
 #, c-format
@@ -11621,16 +11656,17 @@ msgid ""
 "Insert the CD with volume label %s\n"
 " in the CD drive under mount point /mnt/cdrom"
 msgstr ""
+"Helyezze be a(z) \"%s\" címkéjû CD-t\n"
+" a /mnt/cdrom csatolási pont alatti CD-meghajtóba"
 
 #: ../../standalone/drakbackup_.c:3490
-#, fuzzy
 msgid "Restore From CD"
-msgstr "Visszatöltés merevlemezrõl"
+msgstr "Visszatöltés CD-rõl"
 
 #: ../../standalone/drakbackup_.c:3492
 #, c-format
 msgid "Not the correct CD label. Disk is labelled %s."
-msgstr ""
+msgstr "Nem a megfelelõ címkéjû CD. A CD címkéje: %s."
 
 #: ../../standalone/drakbackup_.c:3502
 #, c-format
@@ -11638,26 +11674,26 @@ msgid ""
 "Insert the tape with volume label %s\n"
 " in the tape drive device %s"
 msgstr ""
+"Helyezze be a(z) \"%s\" címkéjû szalagot\n"
+" a(z) %s szalagos meghajtóba"
 
 #: ../../standalone/drakbackup_.c:3502
-#, fuzzy
 msgid "Restore From Tape"
-msgstr "A partíciós tábla visszatöltése"
+msgstr "Visszatöltés szalagról"
 
 #: ../../standalone/drakbackup_.c:3504
 #, c-format
 msgid "Not the correct tape label. Tape is labelled %s."
-msgstr ""
+msgstr "Nem a megfelelõ címkéjû szalag. A szalag címkéje: %s."
 
 #: ../../standalone/drakbackup_.c:3524
-#, fuzzy
 msgid "Restore Via Network"
-msgstr "Felhasználók visszatöltése"
+msgstr "Visszatöltés hálózaton keresztül"
 
 #: ../../standalone/drakbackup_.c:3524
 #, c-format
 msgid "Restore Via Network Protocol: %s"
-msgstr ""
+msgstr "Visszatöltés a(z) %s hálózati protokollon keresztül"
 
 #: ../../standalone/drakbackup_.c:3525
 msgid "Host Name"
@@ -11665,7 +11701,7 @@ msgstr "Gépnév"
 
 #: ../../standalone/drakbackup_.c:3526
 msgid "Host Path or Module"
-msgstr ""
+msgstr "Gép-útvonal vagy modul"
 
 #: ../../standalone/drakbackup_.c:3533
 msgid "Password required"
@@ -11681,16 +11717,15 @@ msgstr "Gépnév szükséges"
 
 #: ../../standalone/drakbackup_.c:3547
 msgid "Path or Module required"
-msgstr ""
+msgstr "Útvonal vagy modul megadása szükséges"
 
 #: ../../standalone/drakbackup_.c:3560
 msgid "Files Restored..."
-msgstr ""
+msgstr "Fájlok visszaállítva..."
 
 #: ../../standalone/drakbackup_.c:3563
-#, fuzzy
 msgid "Restore Failed..."
-msgstr "Egyéb adatok visszatöltése"
+msgstr "A visszaállítás sikertelen volt..."
 
 #: ../../standalone/drakbackup_.c:3801
 msgid "Restore all backups"
@@ -11702,21 +11737,19 @@ msgstr "Egyéni visszatöltés"
 
 #: ../../standalone/drakbackup_.c:3856
 msgid "CD in place - continue."
-msgstr ""
+msgstr "A CD a helyén van - folytatás."
 
 #: ../../standalone/drakbackup_.c:3862
 msgid "Browse to new restore repository."
-msgstr ""
+msgstr "Átlépés egy másik visszaállítási tárhelyre."
 
 #: ../../standalone/drakbackup_.c:3865
-#, fuzzy
 msgid "Restore From Catalog"
-msgstr "A partíciós tábla visszatöltése"
+msgstr "Visszaállítás a katalógusból"
 
 #: ../../standalone/drakbackup_.c:3893
-#, fuzzy
 msgid "Restore Progress"
-msgstr "Felhasználók visszatöltése"
+msgstr "A visszaállítás folyamata"
 
 #: ../../standalone/drakbackup_.c:3935 ../../standalone/drakbackup_.c:3968
 #: ../../standalone/drakbackup_.c:3994 ../../standalone/drakbackup_.c:4021

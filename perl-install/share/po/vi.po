@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX for Mandrake Linux 9.0\n"
 "POT-Creation-Date: 2002-09-02 20:14+0200\n"
-"PO-Revision-Date: 2002-09-01 11:22+0700\n"
+"PO-Revision-Date: 2002-09-04 20:12+0700\n"
 "Last-Translator: Trinh Minh Thanh <tmthanh@linuxmail.org>\n"
 "Language-Team: Gnome-Vi Team <Gnomevi-list@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -2470,7 +2470,7 @@ msgid "Unkown driver"
 msgstr "Driver không xác định"
 
 #: ../../harddrake/sound.pm_.c:178
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "The \"%s\" driver for your sound card is unlisted\n"
 "\n"
@@ -2481,8 +2481,8 @@ msgstr ""
 "Driver \"%s\" cho card âm thanh của bạn không được liệt kê\n"
 "\n"
 "Hãy gửi output của lệnh \"lspcidrake -v\" đến\n"
-"Thierry Vignaud <tvignaud at mandrakesoft dot com>\n"
-"với chủ đề của thư: unlisted sound driver"
+"<install at mandrakesoft dot com>\n"
+"với chủ đề của thư: unlisted sound driver \"%s\""
 
 #: ../../harddrake/ui.pm_.c:16
 msgid "Model"
@@ -2585,15 +2585,12 @@ msgid "the vendor name of the device"
 msgstr "tên nhà sản xuất thiết bị"
 
 #: ../../harddrake/ui.pm_.c:38
-#, fuzzy
 msgid "Alternative drivers"
-msgstr "Không có driver thay thế"
+msgstr "Các driver thay thế"
 
 #: ../../harddrake/ui.pm_.c:39
-#, fuzzy
 msgid "the list of alternative drivers for this sound card"
-msgstr ""
-"Không có driver của OSS/ALSA để thay thế cho card âm thanh của bạn (%s)"
+msgstr "Danh sách các driver thay thế cho card âm thanh này"
 
 #: ../../harddrake/ui.pm_.c:63
 msgid "/_Quit"
@@ -6871,7 +6868,6 @@ msgid "No network card"
 msgstr "Không có card mạng nào"
 
 #: ../../network/drakfirewall.pm_.c:129
-#, fuzzy
 msgid ""
 "drakfirewall configurator\n"
 "\n"
@@ -6879,9 +6875,9 @@ msgid ""
 "For a powerful dedicated firewall solution, please look to the\n"
 "specialized MandrakeSecurity Firewall distribution."
 msgstr ""
-"Chương trình cấu hình tường lửa nhỏ\n"
+"Chương trình cấu hình Drakfirewall\n"
 "\n"
-"Chương trình này cấu hình một tường lửa cá nhân cho Mandrake Linux.\n"
+"Chương trình này cấu hình một tường lửa cá nhân cho máy Mandrake Linux.\n"
 "Về giải pháp tường lửa mạnh và chuyên dụng, hãy quan tâm tới phân phối\n"
 "tường lửa bảo mật chuyên dụng của Mandrake."
 
@@ -8740,7 +8736,6 @@ msgstr ""
 "tính hoặc cấu hình nó trên máy tính mà nó được nối vào."
 
 #: ../../printerdrake.pm_.c:1813
-#, fuzzy
 msgid ""
 "To be able to print with your Lexmark inkjet and this configuration, you "
 "need the inkjet printer drivers provided by Lexmark (http://www.lexmark."
@@ -8752,17 +8747,17 @@ msgid ""
 "adjust the head alignment settings with this program."
 msgstr ""
 "Để có thể thực hiện in bằng Lexmark inkjet và cấu hình này, bạn cần driver "
-"của máy in inkjet do Lexmark cung cấp (http://www.lexmark.com/). Hãy tới "
-"site ở Mỹ và nhấn lên nút \"Drivers\". Sau đó chọn kiểu máy in rồi đến hệ "
-"điều hành \"Linux\". Các driver ở đó dưới dạng các gói RPM hoặc shell "
-"scripts cùng với việc cài đặt có giao diện đồ họa. Bạn không cần thực hiện "
-"cấu hình này bằng các frontend đồ họa. Hãy trực tiếp bỏ qua sau khi chấp "
-"thuận giấy phép. Rồi in các trang định vị đầu in với \"bảo trì Lexmark\" và "
-"điều chỉnh thiết lập vị trí đầu in bằng chương trình này."
+"của máy in inkjet do Lexmark cung cấp (http://www.lexmark.com/). Hãy nhấn "
+"lên liên kết \"Drivers\". Sau đó chọn kiểu máy in rồi đến hệ điều hành "
+"\"Linux\". Các driver ở đó dưới dạng các gói RPM hoặc shell scripts cùng với "
+"việc cài đặt có giao diện đồ họa. Bạn không cần thực hiện cấu hình này bằng "
+"các frontend đồ họa. Hãy trực tiếp bỏ qua sau khi chấp thuận giấy phép. Rồi "
+"in các trang định vị đầu in với \"lexmarkmaintain\" và điều chỉnh thiết lập "
+"vị trí đầu in bằng chương trình này."
 
 #: ../../printerdrake.pm_.c:1816
 msgid "GDI Laser Printer using the Zenographics ZJ-Stream Format"
-msgstr ""
+msgstr "Máy in Laser GDI sử dụng định dạng Zenographics ZJ-Stream"
 
 #: ../../printerdrake.pm_.c:1817
 msgid ""
@@ -8786,6 +8781,24 @@ msgid ""
 "The first command can be given by any normal user, the second must be given "
 "as root. After having done so you can print normally.\n"
 msgstr ""
+"Máy in của bạn thuộc về nhóm máy in Laser GDI (winprinters) được nhiều nhà "
+"sản xuất bán, máy dùng định dạng  Zenographics ZJ-stream raster cho dữ liệu "
+"gửi tới máy in. Driver cho các máy in này vẫn còn đang trong giai đoạn phát "
+"triển ban đầu nên không phải lúc nào chúng cũng chạy tốt. Nhất là chúng có "
+"lẽ chỉ làm việc khi bạn chọn khổ giấy in A4.\n"
+"\n"
+"Một số máy in loại này, như là HP LaserJet 1000, thì driver này cho chúng "
+"được tạo lúc đầu cần firmware của chúng để được upload tới sau khi chúng "
+"được bật lên. Trong trường hợp máy in HP LaserJet 1000, bạn phải tìm kiếm "
+"Windows driver CD của máy hay ở phân vùng Windows cho tập tin \"sihp1000.img"
+"\" và upload tập tin tới máy in bằng một trong các lệnh sau:\n"
+"\n"
+"     lpr -o raw sihp1000.img\n"
+"     cat sihp1000.img > /dev/usb/lp0\n"
+"\n"
+"Lệnh thứ nhất có thể cho bất kỳ người dùng thông thường nào dùng. Lệnh thứ "
+"hai thì bắt buộc phải chạy trong root. Sau khi hoàn tất mọi thứ, bạn có thể "
+"in như bình thường.\n"
 
 #: ../../printerdrake.pm_.c:2040
 msgid ""
@@ -8941,7 +8954,7 @@ msgstr ""
 "\n"
 "Lệnh \"%s\" cũng cho phép thay đổi các thiết lập tùy chọn cho một tác vụ in "
 "đặc biệt. Đơn giản là thêm các thiết lập mong muốn vào dòng lệnh, ví dụ: \"%"
-"s <tập tin>\". "
+"s <file>\". "
 
 #: ../../printerdrake.pm_.c:2296 ../../printerdrake.pm_.c:2336
 #, c-format
@@ -10230,15 +10243,14 @@ msgstr ""
 "tuyến của MandrakeSoft."
 
 #: ../../share/advertising/14-mdkexpert.pl_.c:11
-#, fuzzy
 msgid ""
 "Join the MandrakeSoft support teams and the Linux Community online to share "
 "your knowledge and help others by becoming a recognized Expert on the online "
 "technical support website:"
 msgstr ""
 "Hãy tham gia nhóm hỗ trợ MandrakeSoft và cộng đồng Linux trực tuyến để chia "
-"sẻ hiểu biết của bạn và giúp người khác bằng việc trở thành Chuyên Gia trên "
-"website hỗ trợ kỹ thuật trực tuyến:"
+"sẻ hiểu biết của bạn và giúp người khác bằng việc trở thành Chuyên Gia được "
+"công nhận trên website hỗ trợ kỹ thuật trực tuyến:"
 
 #: ../../share/advertising/15-mdkexpert-corporate.pl_.c:9
 msgid "MandrakeExpert Corporate"
