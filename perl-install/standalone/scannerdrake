@@ -29,13 +29,13 @@ use handle_configs;
 use services;
 
 foreach (@ARGV) {
-    /^--update-usbtable$/ and do { scanner::updateScannerDBfromUsbtable(); exit };
-    /^--update-sane=(.*)$/ and do { scanner::updateScannerDBfromSane($1); exit };
+    /^--update-usbtable$/ and do { scanner::updateScannerDBfromUsbtable(); exit() };
+    /^--update-sane=(.*)$/ and do { scanner::updateScannerDBfromSane($1); exit() };
     /^--manual$/ and $::Manual=1;
-    /^--dynamic=(.*)$/ and do { dynamic($1); exit };
+    /^--dynamic=(.*)$/ and do { dynamic($1); exit() };
 }
 
-$in = 'interactive'->vnew('su', 'default');
+my $in = 'interactive'->vnew('su', 'default');
 if (!files_exist('/usr/bin/scanimage',
 		 '/usr/bin/xsane',
 		 if_(files_exist("/usr/bin/gimp"),
@@ -47,13 +47,13 @@ if (!files_exist('/usr/bin/scanimage',
 if ($::Manual) { manual(); quit() }
 my $wait = $in->wait_message(N("Scannerdrake"),
 			     N("Searching for configured scanners ..."));
-@c = scanner::configured();
+my @c = scanner::configured();
 $wait = $in->wait_message(N("Scannerdrake"),
 			     N("Searching for new scanners ..."));
-@f = scanner::detect(@c);
+my @f = scanner::detect(@c);
 $wait = undef;
 my $changed = 0;
-(@f) and $changed = auto();
+@f and $changed = auto();
 if ($changed) {
     my $wait =
 	$in->wait_message(N("Scannerdrake"),
@@ -84,7 +84,7 @@ sub auto {
 		$in->ask_warn('Scannerdrake', N("The %s is not supported by this version of Mandrake Linux.", removeverticalbar($name)));
 		next;
 	    }
-	    if ($in->ask_yesorno('Scannerdrake',N("%s found on %s, configure it automatically?",removeverticalbar($name),$_->{port}),1)) {
+	    if ($in->ask_yesorno('Scannerdrake', N("%s found on %s, configure it automatically?", removeverticalbar($name), $_->{port}),1)) {
 		$c = (tryConfScanner($name, $_->{port}, 
 				     $_->{val}{vendor},
 				     $_->{val}{id}) or 
@@ -130,9 +130,10 @@ sub manual {
 
 sub dynamic {
     @f = scanner::detect();
+    my $name;
     foreach (@f) { 
 	if (member($_->{val}{DESCRIPTION}, keys %$scanner::scannerDB)) {
-	    my $name = $_->{val}{DESCRIPTION};
+	    $name = $_->{val}{DESCRIPTION};
 	    $name =~ s/\s$//; #some HP entry have a trailing space, i will correct usbtable asap
 	    if ($scanner::scannerDB->{$name}{flags}{unsupported}) {
 		$in->ask_warn('Scannerdrake', N("The %s is not supported by this version of Mandrake Linux.", removeverticalbar($name)));
@@ -141,7 +142,7 @@ sub dynamic {
 	    scanner::confScanner($name, $_->{port},
 				 $_->{val}{vendor}, $_->{val}{id});
 	} else {
-	    $in->ask_warn('Scannerdrake', N("The %s is not known by this version of Scannerdrake.", removeverticalbar($name)));
+	    $in->ask_warn('Scannerdrake', N("The %s is not known by this version of Scannerdrake.", removeverticalbar($name))); 
 	}
     }
 }
@@ -154,7 +155,7 @@ sub tryConfScanner {
 					removeverticalbar($model)));
 	return 0;
     }
-    if (($scanner::scannerDB->{$model}{ask} =~ /DEVICE/) || (!$port)){
+    if ($scanner::scannerDB->{$model}{ask} =~ /DEVICE/ || !$port) {
 	$port ||= N("Auto-detect available ports");
 	$in->ask_from('Scannerdrake',
 		      N("Please select the device where your %s is attached", removeverticalbar($model)) . " " .
@@ -343,7 +344,7 @@ sub makeexportmenues {
 	($_ eq '+' ? N("All remote machines") : $_) => $_;
     } map {
 	# Remove comments and blank lines
-	($_ =~ /^\s*($|\#)/ ? () : chomp_($_));
+	(/^\s*($|\#)/ ? () : chomp_($_));
     } @exports;
     my %menuexports_inv = reverse %menuexports;
     return (\%menuexports, \%menuexports_inv);
@@ -355,7 +356,7 @@ sub makeimportmenues {
 	($_ eq 'localhost' ? N("This machine") : $_) => $_;
     } map {
 	# Remove comments and blank lines
-	($_ =~ /^\s*($|\#)/ ? () : chomp_($_));
+	if_(!/^\s*($|\#)/, chomp_($_));
     } @imports;
     my %menuimports_inv = reverse %menuimports;
     return (\%menuimports, \%menuimports_inv);
@@ -375,8 +376,8 @@ sub sharewindow {
     my $sanedrunning = services::starts_on_boot("saned");
     my $oldsanedrunning = $sanedrunning;
     # Is the "net" SANE backend active
-    my $netbackendactive = grep(/^\s*net\s*$/,
-				cat_("/etc/sane.d/dll.conf"));
+    my $netbackendactive = grep { /^\s*net\s*$/ }
+      cat_("/etc/sane.d/dll.conf");
     my $oldnetbackendactive = $netbackendactive;
     # Set this to 1 to tell the caller that the list of locally available
     # scanners has changed (Here if the SANE client configuration has
@@ -533,9 +534,9 @@ sub sharewindow {
 				       # spaces
 				       $address =~ s/^\s*(.*?)\s*$/$1/;
 				       # Check whether item is duplicate
-				       if (($address ne $oldaddress) &&
-					   (member("$address\n",
-						   @exports))) {
+				       if ($address ne $oldaddress &&
+					   member("$address\n",
+						   @exports)) {
 					   $in->ask_warn(N("Scannerdrake"), 
 							 N("This host is already in the list, it cannot be added again.\n"));
 					   return (1,1);
@@ -553,7 +554,7 @@ sub sharewindow {
 				 disabled => sub {
 				     $hostchoice ne 
 					 N("Name/IP address of host:");
-			         }},
+			         } },
 			       ],
 			     )) {
 			    # OK was clicked, insert new item into the list
@@ -683,9 +684,9 @@ sub sharewindow {
 				       # spaces
 				       $address =~ s/^\s*(.*?)\s*$/$1/;
 				       # Check whether item is duplicate
-				       if (($address ne $oldaddress) &&
-					   (member("$address\n",
-						   @imports))) {
+				       if ($address ne $oldaddress &&
+					   member("$address\n",
+						   @imports)) {
 					   $in->ask_warn(N("Scannerdrake"), 
 							 N("This host is already in the list, it cannot be added again.\n"));
 					   return (1,1);
@@ -703,7 +704,7 @@ sub sharewindow {
 				 disabled => sub {
 				     $hostchoice ne 
 					 N("Name/IP address of host:");
-			         }},
+			         } },
 			       ],
 			     )) {
 			    # OK was clicked, insert new item into the list
