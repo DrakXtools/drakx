@@ -377,8 +377,6 @@ sub poll_ppd_base {
 	scalar(keys %descr_to_ppd) > 5 and last;
 	sleep 1; #- we have to try again running the program, wait here a little before.
     }
-    #- just in case, poll_ppd_base may produce core if not connected immediately.
-    unlink "$prefix/core";
 
     scalar(keys %descr_to_ppd) > 5 or die "unable to connect to cups server";
 }
@@ -600,7 +598,7 @@ sub remove_queue($) {
 	require run_program;
 	run_program::rooted($prefix, "lpadmin", "-x", $printer->{QUEUE});
     }
-    delete $printer->{configured}{$printer->{queue}};
+    delete $printer->{configured}{$printer->{QUEUE}};
 }
 
 sub restart_queue($) {
