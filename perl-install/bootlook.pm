@@ -1,4 +1,4 @@
-#!/usr/bin/perl -w
+package bootlook;
 
 # Control-center
 
