@@ -67,7 +67,7 @@ char * mygethostbyaddr(char * ipnum)
 	struct hostent * host;
 	if (!inet_aton(ipnum, &in))
 		return NULL;
-	host = gethostbyaddr(&in, strlen((void *) &in), AF_INET);
+	host = gethostbyaddr(&(in.s_addr), sizeof(in.s_addr), AF_INET);
 	if (host && host->h_name)
 		return host->h_name;
 	return NULL;
