@@ -195,7 +195,6 @@ sub read_conf_file {
 if ($mdk_cc) { $build_floppy || $build_cd || $default || @list_arg || $conf_file ? backend_mod() : interactive_mode();
 	   } else { $build_floppy || $build_cd || $default || @list_arg || $conf_file ? backend_mod() : interactive_mode_my(); }
 
-
 sub backend_mod {
 
 }
@@ -447,9 +446,6 @@ sub advanced {
 				  1, createScrolledWindow( gtkpack(new Gtk::VBox(0,0),
 								   map { my $b = new Gtk::CheckButton("$_"); 
 									 $check_what_user{$_} = $b;
-# 									 if(member($_, @user_list )) { 
-# 									     $check_what_user{$_}->set_active(1);
-# 									 } else { $check_what_user{$_}->set_active(0);}
 									 $b } (@all_user_list) 
 								   ),
 							   ),
@@ -614,22 +610,15 @@ sub advanced {
 		  bottom => "left",
 		  left => "top"
 		  );
-#    my @checked_user_list;
 
 #    print $check_what_user{'seb'}->active."\n";
-#    @user_list = ();
 
-#    foreach (@all_user_list) {
-#	gtksignal_connect(gtkset_active($check_what_user{$_},$check_what_user{$_}), toggled => sub { $check_what_user{$_} = $check_what_user{$_} ? 0 : 1; });
+   foreach (@all_user_list) {
+	gtksignal_connect(gtkset_active($check_what_user{$_},$check_what_user{$_}), toggled => sub { $check_what_user{$_} = $check_what_user{$_} ? 0 : 1; });
 #	$check_what_user{$_}->active and push @user_list, $_;
 #	print $_ . "\n";# foreach @checked_user_list;
-#    }
+   }
 
-
-#     foreach (@user_list) {
-# 	gtkset_active($check_what_user{$_}, $check_what_user{$_}->active),
-# #	gtksignal_connect(gtkset_active($check_what_user{$_},$check_what_user{$_}), toggled => sub { $check_what_user{$_} = $check_what_user{$_} ? 0 : 1; })
-# 	}
     $combo_where_net_proto->entry->signal_connect( 'changed', sub { $net_proto = $combo_where_net_proto->entry->get_text()});
 
 
