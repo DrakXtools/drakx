@@ -14,7 +14,6 @@ use any;
 use vars qw(@ISA @EXPORT);
 use log;
 
-
 @ISA = qw(Exporter);
 @EXPORT = qw(resolv configureNetworkIntf netmask dns is_ip masked_ip findIntf addDefaultRoute read_all_conf dnsServers guessHostname configureNetworkNet read_resolv_conf read_interface_conf add2hosts gateway configureNetwork2 write_conf sethostname down_it read_conf write_resolv_conf up_it);
 
@@ -483,7 +482,7 @@ sub easy_dhcp {
 			NETWORKING => "yes",
 			FORWARD_IPV4 => "false",
 			DOMAINNAME => "localdomain",
-			DHCP => 1,
+			DHCP => "yes",
 		       });
     1;
 }
@@ -523,13 +522,12 @@ sub configureNetwork2 {
     add2hosts("$etc/hosts", $netc->{HOSTNAME}, map { $_->{IPADDR} } values %$intf) if $netc->{HOSTNAME};
     add2hosts("$etc/hosts", "localhost", "127.0.0.1");
 
-    $netc->{DHCP} && $in->do_pkgs->install($netc->{dhcp_client} || 'dhcp-client');
+    any { $_->{BOOTPROTO} =~ /^dhcp$/ } values %$intf and $in->do_pkgs->install($netc->{dhcp_client} || 'dhcp-client');
     $in->do_pkgs->install(qw(zcip tmdns));
     $netc->{ZEROCONF_HOSTNAME} and write_zeroconf("$etc/tmdns.conf", $netc->{ZEROCONF_HOSTNAME});      
     any { $_->{BOOTPROTO} =~ /^(pump|bootp)$/ } values %$intf and $in->do_pkgs->install('pump');
             
     proxy_configure($::o->{miscellaneous});
 }
-
 
 1;
