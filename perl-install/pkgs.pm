@@ -41,12 +41,14 @@ my %ignoreBadPkg = (
 		    'rt2-demo'      => 1,
 		   );
 
-sub packageMedium { my ($packages, $p) = @_; $p or die "invalid package from\n" . backtrace();
-		    foreach (values %{$packages->{mediums}}) {
-			defined $_->{start} && defined $_->{end} or next;
-			$p->id >= $_->{start} && $p->id <= $_->{end} and return $_;
-		    }
-		    return }
+sub packageMedium {
+   my ($packages, $p) = @_; $p or die "invalid package from\n" . backtrace();
+   foreach (values %{$packages->{mediums}}) {
+       defined $_->{start} && defined $_->{end} or next;
+       $p->id >= $_->{start} && $p->id <= $_->{end} and return $_;
+   }
+   return {};
+}
 
 sub cleanHeaders {
     my ($prefix) = @_;
