@@ -11,6 +11,10 @@
 #
 # James Pearson 20/5/98
 
+# Modified by Christian Walther, 2003/01/17:
+#  changed gzip to StuffIt Expander
+#  added perl & shell script
+
 # off	type		test		message
 
 # GIF
@@ -43,7 +47,7 @@
 >2	byte&0x1f	x		%d bits
 
 # gzip (GNU zip, not to be confused with Info-ZIP or PKWARE zip archiver)
-0       string          \037\213        GNUz ZIVU gzip compressed data
+0       string          \037\213        Gzip SITx gzip compressed data
 >2      byte            <8              \b, reserved method,
 >2      byte            8               \b, deflated,
 >3	byte		&0x01		ASCII,
@@ -79,3 +83,7 @@
 >>>16	string		EPS		- type %s
 >>>16	string		Query		- type %s
 >>>16	string		ExitServer	- type %s
+
+# scripts
+0	string		#!/usr/bin/perl	McPL TEXT
+0	string		#!/bin/sh	ttxt TEXT
