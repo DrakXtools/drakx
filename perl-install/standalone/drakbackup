@@ -123,6 +123,7 @@ my $daemon_media = '';
 my $hd_quota = 0;
 my $where_net = 0;
 my $where_hd = 1;
+my $use_hd = 1;
 my $del_hd_files = 0;
 my $where_cd = 0;
 my $where_tape = 0;
@@ -706,7 +707,8 @@ sub read_conf_file() {
 		$backup_user_versions = 1; 
     }
 	# deal with users that may have been deleted from the system
-	check_valid_users() if $cfg_file_exist;    
+	check_valid_users() if $cfg_file_exist;
+	$use_hd = !($where_cd || $where_tape || $where_net);    
 }
 
 sub verify_mail_setup() {
@@ -2688,7 +2690,7 @@ sub wizard_step2() {
 					0, gtkset_sensitive(gtksignal_connect(Gtk2::Button->new(N("Configure")), clicked => sub {
 						destroy_widget();
 						advanced_where_hd(\&wizard_step2);
-					}), $where_hd),
+					}), $use_hd),
 				),
 				0, gtkpack_(new Gtk2::HBox(0, 15),
 					0, my $check_wizard_net = new Gtk2::CheckButton(N("Across Network")),
@@ -2734,23 +2736,13 @@ sub wizard_step2() {
 		if ($where_tape) { $where_cd = 0; $where_net = 0 };
 		refresh_wizard_step2();
 	});
-	if (!$where_hd && !$where_cd && !$where_net) {
-	    $in->ask_warn(N("Error"), N("Please select media for backup..."));
-		fonction_env(\$box2, \&wizard_step2, \&wizard, \&wizard_step2); 
-	} else { 
-		fonction_env(\$box2, \&wizard_step2, \&wizard, undef); 
-	}
+	fonction_env(\$box2, \&wizard_step2, \&wizard, undef); 
     button_box_wizard();
     $up_box->show_all;
 }
 
 sub refresh_wizard_step2() {
-	$where_hd = 1;
-	if (!$where_hd && !$where_cd && !$where_net) {  
-		$next_widget = \&wizard_step2
-	} else { 
-		$next_widget = \&wizard_step3 
-	}
+	$use_hd = !($where_tape || $where_cd || $where_net);
 	destroy_widget();
 	wizard_step2();
 }
