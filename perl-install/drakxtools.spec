@@ -294,6 +294,7 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 * Sat Mar  8 2003 Guillaume Cottenceau <gc@mandrakesoft.com> 9.1-19mdk
 - ugtk2.pm: fix still seldom happening #1445 (clicking two times too
   fast)
+- drakxservices: fix embedding and packing in standalone mode
 
 * Fri Mar  7 2003 Guillaume Cottenceau <gc@mandrakesoft.com> 9.1-18mdk
 - ugtk2.pm: fix rpmdrake dumping core when multiple searchs in some
