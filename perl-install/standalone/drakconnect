@@ -962,7 +962,7 @@ Please run \"Internet access\" in control center."));
                                                 gtksignal_connect(Gtk2::Button->new(N("Ok")), clicked => sub {
                                                                           foreach my $i (0..$#conf_data) {
                                                                               ${$conf_data[$::i][1]} = $infos[2*$::i+1]->get_text;
-                                                                          } @conf_data;
+                                                                          };
                                                                           # called from old GUI?
                                                                           if ($label_host) {
                                                                               update();
