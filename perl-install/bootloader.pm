@@ -110,7 +110,7 @@ sub read() {
 		    $v =~ s/hd:\d+,//g;
 		    $v =~ s/"//g;
 		}
-		$e->{$_} = $v || 1;
+		$e->{$_} = $v || 1 if !member($_, 'read-only');
 	    }
 	}
     }
@@ -130,29 +130,39 @@ sub suggest_onmbr {
     !$type || member($type, qw(dos dummy lilo grub empty)), !$type;
 }
 
-sub compare_entries ($$) {
+sub same_entries {
     my ($a, $b) = @_;
-    my %entries;
 
-    @entries{keys %$a, keys %$b} = ();
-    $a->{$_} eq $b->{$_} and delete $entries{$_} foreach keys %entries;
-    scalar keys %entries;
+    foreach (uniq(keys %$a, keys %$b)) {
+	next if $_ eq 'label';
+	next if $a->{$_} eq $b->{$_};
+	my ($inode_a, $inode_b) = map { (stat "$::prefix$_")[1] } ($a->{$_}, $b->{$_});
+	next if $inode_a && $inode_b && $inode_a == $inode_b;
+
+	log::l("entries $a->{label} don't have same $_: $a->{$_} ne $b->{$_}");
+	return;
+    }
+    1;
 }
 
-sub add_entry($$) {
-    my ($entries, $v) = @_;
-    my (%usedold, $freeold);
+sub add_entry {
+    my ($bootloader, $v) = @_;
 
-    do { $usedold{$1 || 0} = 1 if $_->{label} =~ /^old([^_]*)_/ } foreach @$entries;
-    foreach (0..scalar keys %usedold) { exists $usedold{$_} or $freeold = $_ || '', last }
-
-    foreach (@$entries) {
-	if ($_->{label} eq $v->{label}) {
-	    compare_entries($_, $v) or return; #- avoid inserting it twice as another entry already exists !
-	    $_->{label} = "old${freeold}_$_->{label}";
+    foreach my $label ($v->{label}, map { 'old' . $_ . '_' . $v->{label} } ('', 2..10)) {
+	my $conflicting = get_label($v->{label}, $bootloader);
+	if ($conflicting && same_entries($conflicting, $v)) {
+	    #- removing $conflicting. 
+	    #- It's better than better $conflicting and not adding $v because same_entries can match not so same entries, esp. regarding symlinks
+	    @{$bootloader->{entries}} = grep { $_ != $conflicting } @{$bootloader->{entries}};
+	    undef $conflicting;
+	}
+	if (!$conflicting) {
+	    $v->{label} = $label;
+	    push @{$bootloader->{entries}}, $v;
+	    return $v;
 	}
     }
-    push @$entries, $v;
+    die 'add_entry';
 }
 
 sub add_kernel {
@@ -192,8 +202,7 @@ sub add_kernel {
 	      initrd => $initrd,
 	      append => $lilo->{perImageAppend},
 	     });
-    add_entry($lilo->{entries}, $v);
-    $v;
+    add_entry($lilo, $v);
 }
 
 sub duplicate_kernel_entry {
@@ -202,8 +211,7 @@ sub duplicate_kernel_entry {
     get_label($new_label, $bootloader) and return;
 
     my $entry = { %{ get_label('linux', $bootloader) }, label => $new_label };
-    add_entry($bootloader->{entries}, $entry);
-    $entry;
+    add_entry($bootloader, $entry);
 }
 
 sub unpack_append {
@@ -395,6 +403,10 @@ wait %d seconds for default boot.
 	    add_kernel($lilo, $version, $ext, $root, { label => 'linux-nonfb' });
 	}
     }
+
+    #- remove existing libsafe, don't care if the previous one was modified by the user?
+    @{$lilo->{entries}} = grep { $_->{label} ne 'failsafe' } @{$lilo->{entries}};
+
     my $failsafe = add_kernel($lilo, $labels{''}, '', $root, { label => 'failsafe' });
     $failsafe->{append} =~ s/devfs=mount/devfs=nomount/;
     $failsafe->{append} .= " failsafe";
@@ -406,7 +418,7 @@ wait %d seconds for default boot.
 	foreach (@$hds) {
 	    foreach (@{$_->{primary}{normal}}) {
 		my $path = $_->{device} =~ m|^/| && $_->{device} !~ m|^/dev/| ? $_->{device} : dev2prompath($_->{device});
-		add_entry($lilo->{entries},
+		add_entry($lilo,
 			  {
 			   type => 'other',
 			   kernel_or_dev => $path,
@@ -417,7 +429,7 @@ wait %d seconds for default boot.
     } elsif (arch() =~ /ppc/) {
 	#- if we identified a MacOS partition earlier - add it
 	if (defined $partition_table::mac::macos_part) {
-	    add_entry($lilo->{entries},
+	    add_entry($lilo,
 		      {
 		       label => "macos",
 		       kernel_or_dev => $partition_table::mac::macos_part
@@ -429,7 +441,7 @@ wait %d seconds for default boot.
 	foreach (@$hds) {
 	    foreach (@{$_->{primary}{normal}}) {
 		my $label = isNT($_) ? 'NT' : isDos($_) ? 'dos' : 'windows';
-		add_entry($lilo->{entries},
+		add_entry($lilo,
 			  {
 			   type => 'other',
 			   kernel_or_dev => "/dev/$_->{device}",
@@ -472,7 +484,7 @@ sub suggest_floppy {
     my $floppy = detect_devices::floppy() or return;
     $floppy eq 'fd0' or log::l("suggest_floppy: not adding $floppy"), return;
 
-    add_entry($bootloader->{entries},
+    add_entry($bootloader,
       {
        type => 'other',
        kernel_or_dev => '/dev/fd0',
