@@ -149,7 +149,7 @@ user "$adsl->{login}"
 	$in->do_pkgs->what_provides("speedtouch_mgmt") and $in->do_pkgs->install('speedtouch_mgmt');
 	-e "$prefix/usr/share/speedtouch/mgmt.o" or $in->ask_warn('', _('You need the alcatel microcode.
 Download it at
-http://www.alcatel.com/consumer/dsl/dvrreg_lx.htm
+http://www.speedtouchdsl.com/dvrreg_lx.htm
 and copy the mgmt.o in /usr/share/speedtouch'));
     }
 
