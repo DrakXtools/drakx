@@ -282,6 +282,7 @@ sub setupBootloader__entries {
     my $Modify = sub {
 	my ($e) = @_;
 	my $default = my $old_default = $e->{label} eq $b->{default};
+	my $vga = $e->{vga} || 'normal';
 
 	my @l;
 	if ($e->{type} eq "image") { 
@@ -290,7 +291,7 @@ sub setupBootloader__entries {
 { label => N("Root"), val => \$e->{root}, list => [ map { "/dev/$_->{device}" } @$fstab ], not_edit => !$::expert },
 { label => N("Append"), val => \$e->{append} },
   if_(arch() !~ /ppc|ia64/,
-{ label => N("Video mode"), val => \$e->{vga}, list => [ keys %bootloader::vga_modes ], format => sub { $bootloader::vga_modes{$_[0]} }, not_edit => !$::expert, advanced => 1 },
+{ label => N("Video mode"), val => \$vga, list => [ keys %bootloader::vga_modes ], format => sub { $bootloader::vga_modes{$_[0]} }, not_edit => !$::expert, advanced => 1 },
 ),
 { label => N("Initrd"), val => \$e->{initrd}, list => [ map { s/$::prefix//; $_ } glob_("$::prefix/boot/initrd*") ], not_edit => 0, advanced => 1 },
 	    );
@@ -330,6 +331,7 @@ sub setupBootloader__entries {
 	       } } }, \@l) or return;
 
 	$b->{default} = $old_default || $default ? $default && $e->{label} : $b->{default};
+	$e->{vga} = $vga eq 'normal' ? '' : $vga;
 	bootloader::configure_entry($e); #- hack to make sure initrd file are built.
 	1;
     };
