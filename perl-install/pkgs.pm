@@ -583,6 +583,7 @@ sub getProvides($) {
 sub read_rpmsrate {
     my ($packages, $f) = @_;
     my $line_nb = 0;
+    my $fatal_error;
     my (@l);
     while (<$f>) {
 	$line_nb++;
@@ -630,7 +631,21 @@ sub read_rpmsrate {
 		    my @m2 = 
 		      map { if_($_ && packageName($_) =~ /locales-(.*)/, qq(LOCALES"$1")) }
 		      map { packageById($packages, $_) } packageDepsId($p);
-		    packageSetRateRFlags($p, $rate, (grep { !/^\d$/ } @m), @m2);
+
+		    @m = ((grep { !/^\d$/ } @m), @m2);
+		    if (packageRate($p)) {
+			next if @m == 1 && $m[0] eq 'INSTALL';
+
+			my ($rate2, @m3) = packageRateRFlags($p);
+			if (@m3 > 1 || @m > 1) {
+			    log::l("can't handle complicate flags for packages appearing twice ($_)");
+			    $fatal_error++;
+			}
+			log::l("package $_ appearing twice with different rates ($rate != $rate2)") if $rate != $rate2;
+			packageSetRateRFlags($p, $rate, "$m[0]||$m3[0]");
+		    } else {
+			packageSetRateRFlags($p, $rate, @m);
+		    }
 		} else {
 		    print "$_ = ", join(" && ", @m), "\n";
 		}
@@ -640,6 +655,7 @@ sub read_rpmsrate {
 	    push @l, [ $l2[0][0], $l2[$#l2][1] ];
 	}
     }
+    $fatal_error and die "$fatal_error fatal errors in rpmsrate";
 }
 
 sub readCompssUsers {
@@ -690,7 +706,9 @@ sub setSelectedFromCompssList {
     my $nb = selectedSize($packages);
     foreach my $p (sort { packageRate($b) <=> packageRate($a) } values %{$packages->{names}}) {
 	my ($rate, @flags) = packageRateRFlags($p);
-	next if !$rate || $rate < $min_level || grep { !grep { /^!(.*)/ ? !$compssUsersChoice->{$1} : $compssUsersChoice->{$_} } split('\|\|') } @flags;
+	next if 
+	  !$rate || $rate < $min_level || 
+	  !$compssUsersChoice->{ALL} && grep { !grep { /^!(.*)/ ? !$compssUsersChoice->{$1} : $compssUsersChoice->{$_} } split('\|\|') } @flags;
 
 	#- determine the packages that will be selected when
 	#- selecting $p. the packages are not selected.
