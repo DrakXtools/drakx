@@ -47,7 +47,7 @@ sub get {
 }
 sub get_label {
     my ($label, $bootloader) = @_;
-    $_->{label} && lc(substr($_->{label}, 0, 15)) eq lc(substr($label, 0, 15)) and return $_ foreach @{$bootloader->{entries}};
+    $_->{label} && lc(make_label_lilo_compatible($_->{label})) eq lc(make_label_lilo_compatible($label)) and return $_ foreach @{$bootloader->{entries}};
     undef;
 }
 
@@ -715,7 +715,7 @@ sub install_yaboot {
 		    $of_dev = get_of_dev($_->{root});    			
 		    print F "$_->{type}=$of_dev,$_->{kernel_or_dev}";
 		}
-		print F "\tlabel=", substr($_->{label}, 0, 15); #- lilo doesn't handle more than 15 char long labels
+		print F "\tlabel=", make_label_lilo_compatible($_->{label});
 		print F "\troot=$_->{root}";
 		if ($boot !~ /$_->{root}/ && $boot) {
 		    print F "\tinitrd=$of_dev," . substr($_->{initrd}, 5) if $_->{initrd};
