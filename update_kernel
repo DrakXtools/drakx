@@ -116,7 +116,12 @@ for i in $ALL_KERNELS/*; do
 done
 
 
-# v=kernel-2.4.2-BOOT2.tar.bz2
-# scp kenobi:~chmou/work/kernel/archive/$v /tmp
-# cd ~/gi/kernel ; rm -rf * ; tar xfI /tmp/$v 
-# cd ~/gi ; ./update_kernel ; rm -f network.rdz ; ./make_boot_img network.rdz network ; scp vmlinuz network.rdz kenobi:/tftpboot ; cp -f ~/gi/modules/modules.cz /export/Mandrake/mdkinst/lib/modules.cz
+install_kernel() {
+ v=2.4.2-BOOT5
+ scp kenobi:~chmou/work/kernel/archive/kernel-$v.tar.bz2 /tmp
+ cd ~/gi/all.kernels ; rm -rf $v ; mkdir $v ; cd $v ; tar xfj /tmp/kernel-$v.tar.bz2 
+ cd ~/gi ; ./update_kernel ; rm -f network.rdz ; ./make_boot_img network.rdz network ; 
+ scp all.kernels/$v/boot/vmlinu* kenobi:/tftpboot/vmlinuz
+ scp images/network.rdz kenobi:/tftpboot
+ cp -f ~/gi/all.modules/modules.cz-$v /export/Mandrake/mdkinst/lib/modules.cz
+}
