@@ -58,37 +58,41 @@ sub raw {
     my $stderr = $stderr_raw && (ref($stderr_raw) ? "$ENV{HOME}/tmp/.drakx-stderr.$$" : "$root$stderr_raw");
 
     if (my $pid = fork()) {
-	my $ok;
-	eval {
-	    local $SIG{ALRM} = sub { die "ALARM" };
-	    alarm($options->{timeout} || 10 * 60);
-	    waitpid $pid, 0;
-	    $ok = $? == 0;
-	    alarm 0;
-	};
-	if ($@) {
-	    log::l("ERROR: killing runaway process");
-	    kill 9, $pid;
-	    return;
-	}
+	if ($options->{detach}) {
+	    $pid;
+	} else {
+	    my $ok;
+	    eval {
+		local $SIG{ALRM} = sub { die "ALARM" };
+		alarm($options->{timeout} || 10 * 60);
+		waitpid $pid, 0;
+		$ok = $? == 0;
+		alarm 0;
+	    };
+	    if ($@) {
+		log::l("ERROR: killing runaway process");
+		kill 9, $pid;
+		return;
+	    }
 
-	if ($stdout_raw && ref($stdout_raw)) {	    
-	    if (ref($stdout_raw) eq 'ARRAY') { 
-		@$stdout_raw = cat_($stdout);
-	    } else { 
-		$$stdout_raw = cat_($stdout);
+	    if ($stdout_raw && ref($stdout_raw)) {	    
+		if (ref($stdout_raw) eq 'ARRAY') { 
+		    @$stdout_raw = cat_($stdout);
+		} else { 
+		    $$stdout_raw = cat_($stdout);
+		}
+		unlink $stdout;
 	    }
-	    unlink $stdout;
-	}
-	if ($stderr_raw && ref($stderr_raw)) {
-	    if (ref($stderr_raw) eq 'ARRAY') { 
-		@$stderr_raw = cat_($stderr);
-	    } else { 
-		$$stderr_raw = cat_($stderr);
+	    if ($stderr_raw && ref($stderr_raw)) {
+		if (ref($stderr_raw) eq 'ARRAY') { 
+		    @$stderr_raw = cat_($stderr);
+		} else { 
+		    $$stderr_raw = cat_($stderr);
+		}
+		unlink $stderr;
 	    }
-	    unlink $stderr;
+	    $ok;
 	}
-	$ok;
     } else {
 	if ($stderr && $stderr eq 'STDERR') {
 	} elsif ($stderr) {
