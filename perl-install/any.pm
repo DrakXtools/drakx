@@ -229,7 +229,7 @@ sub setupBootloader__general {
             { label => N("Delay before booting default image"), val => \$b->{timeout} },
             { text => N("Enable ACPI"), val => \$force_acpi, type => 'bool' },
 		if_(!$force_nolapic,
-            { text => N("Force No APIC"), val => \$force_noapic, type => 'bool' }, 
+            { text => N("Force no APIC"), val => \$force_noapic, type => 'bool' }, 
 	        ),
             { text => N("Force No Local APIC"), val => \$force_nolapic, type => 'bool' },
 		if_($security >= 4 || $b->{password} || $b->{restricted},
