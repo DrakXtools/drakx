@@ -1951,9 +1951,14 @@ sub setup_common {
 	    $descr = "$descrmake|$autosku";
 	} elsif ($automake && $automodel) {
 	    $descr = "$descrmake|$automodel";
-	} else {
+	} elsif ($autodescr) {
 	    $descr = $autodescr;
 	    $descr =~ s/ /|/;
+	} elsif ($automodel) {
+	    $descr = $automodel;
+	    $descr =~ s/ /|/;
+	} elsif ($automake) {
+	    $descr = "$descrmake|";
 	}
 	# Remove manufacturer's name from the beginning of the
 	# description (do not do this with manufacturer names which
