@@ -208,7 +208,11 @@ sub main {
 	}
 	partition_table::assign_device_numbers($_) foreach fsedit::all_hds($all_hds);
     }
-    Done($in, $all_hds) or goto &main;
+    return if eval { Done($in, $all_hds) };
+    if (my $err = $@) {
+    	$in->ask_warn(_("Error"), formatError($err));
+    }
+    goto &main;
 }
 
 
