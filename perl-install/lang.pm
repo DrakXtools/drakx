@@ -1024,10 +1024,12 @@ sub write {
 	}
 	
     }
-    if ($locale->{IM} && $locale->{IM} ne 'None') {
-        log::explanations(qq(Configuring "$locale->{IM}" IM));
+
+    my $im = $locale->{IM};
+    if ($im && $im ne 'None') {
+        log::explanations(qq(Configuring "$im" IM));
         delete @$h{qw(GTK_IM_MODULE QT_IM_MODULE XIM XIM_PROGRAM XMODIFIERS)};
-        add2hash($h, { XIM_PROGRAM => $im_xim_program{$locale->{IM}}{$h->{LC_NAME}} });
+        add2hash($h, { XIM_PROGRAM => $im_xim_program{$im}{$h->{LC_NAME}} });
         add2hash($h, $xim{$locale->{lang}});
         add2hash($h, $gtkqt_im{$locale->{IM}});
         $h->{QT_IM_MODULE} = $h->{GTK_IM_MODULE} if $h->{GTK_IM_MODULE};
