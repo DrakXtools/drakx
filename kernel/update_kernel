@@ -68,7 +68,7 @@ function create_modules_mar() {
         echo "done"
         mv modules.cz ../modules.cz-$kern
     fi
-    for i in network network_gigabit_usb network_gigabit network_usb cdrom hd hdcdrom_usb pcmcia all; do
+    for i in $images; do
         eval "modules=\$${i}_modules_raw"
         modules_with_deps=`perl -I $GIBASEDIR/kernel $GIBASEDIR/kernel/dependencies.pl $version modules.dep $modules`
         if [ -n "$MOVE" ]; then modules_with_deps="change_loop.o gzloop.o isofs.o zlib_inflate.o supermount.o $modules_with_deps"; fi
