@@ -6,7 +6,6 @@ use vars qw(%drivers);
 use common qw(:common :file :system :functional);
 use detect_devices;
 use run_program;
-use install_any;
 use log;
 
 
