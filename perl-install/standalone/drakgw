@@ -69,6 +69,7 @@ sub outpend {
 }
 
 sub start_daemons () {
+    return if $::testing;
     my $cups_used = 0;
     log::explanations("Starting daemons");
     if (-f "/etc/rc.d/init.d/cups") {
@@ -92,6 +93,7 @@ sub start_daemons () {
 }
 
 sub stop_daemons () {
+    return if $::testing;
     log::explanations("Stopping daemons");
     foreach (qw(dhcpd named)) {
 	system("/etc/rc.d/init.d/$_ status >/dev/null 2>/dev/null") == 0 and sys("/etc/rc.d/init.d/$_ stop");
@@ -376,7 +378,7 @@ my %rpm2file = ('dhcp-server' => '/usr/sbin/dhcpd',
 
 #- first: try to install all in one step
 my @needed_to_install = grep { !-e $rpm2file{$_} } keys %rpm2file;
-@needed_to_install and $in->do_pkgs->install(@needed_to_install);
+@needed_to_install and $in->do_pkgs->install(@needed_to_install) if !$::testing;
 #- second: try one by one if failure detected
 if (!$::testing && any { !-e $rpm2file{$_} } keys %rpm2file) {
     foreach (keys %rpm2file) {
