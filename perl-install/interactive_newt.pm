@@ -104,7 +104,7 @@ sub ask_from_entries_refW {
 	} elsif ($e->{type} eq 'button') {
 	    $w = Newt::Component::Button(-1, -1, may_apply($e->{format}, ${$e->{val}}));
 	} elsif ($e->{type} =~ /list/) {
-	    my ($h, $wi) = (5, 20);
+	    my ($h, $wi) = (@$l == 1 && $height > 30 ? 10 : 5, 20);
 	    my $scroll = @{$e->{list}} > $h ? 1 << 2 : 0;
 	    $size = min(int @{$e->{list}}, $h);
 
@@ -114,7 +114,7 @@ sub ask_from_entries_refW {
 		$w->ListboxAddEntry($t, $_);
 		$wi = max($wi, length $t);
 	    }
-	    $w->ListboxSetWidth($wi + 3); # 3 added for the scrollbar (?)
+	    $w->ListboxSetWidth(min($wi + 3, $width - 7)); # 3 added for the scrollbar (?)
 	    $get = sub { $w->ListboxGetCurrent };
 	    $set = sub {
 		my ($val) = @_;
@@ -163,7 +163,7 @@ sub ask_from_entries_refW {
 	    $grid;
 	}
     };
-    my ($buttons, $ok, $cancel) = Newt::Grid::ButtonBar($common->{ok} || '', if_($common->{cancel}, $common->{cancel}));
+    my ($buttons, $ok, $cancel) = Newt::Grid::ButtonBar($common->{ok} || _("Ok"), if_($common->{cancel}, $common->{cancel}));
 
     my $form = Newt::Component::Form(\undef, '', 0);
     my $window = Newt::Grid::GridBasicWindow(first(myTextbox(@widgets == 0, @{$common->{messages}})), $listg, $buttons);
