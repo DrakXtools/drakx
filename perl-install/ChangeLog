@@ -1,3 +1,213 @@
+2004/08/12  Pixel  <pixel at mandrakesoft.com>
+
+	* .perl_checker: standalone doesn't need to be blacklisted
+
+	* resize_fat/io.pm: remove check_mounted(), it is done by diskdrake
+	perl_checker compliance
+
+	* security/msec.pm: use difference2() as suggested by new perl_checker
+	warning
+	cleanup
+	perl_checker compliance
+
+	* lang.pm: cleanup
+
+2004/08/12  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* share/po/sv.po: big swedish update thanks to Robin Rosenberg
+	<robin.rosenberg@dewire.com>
+
+	* share/rpmsrate: install driver and firmware for madwifi cards
+
+2004/08/11  Daouda Lo  <daouda at mandrakesoft.com>
+
+	* standalone/drakhelp: 
+	  - perl_checker fixes
+	  - use webclient-kde instead of konqueror
+	  - add epiphany browser
+
+2004/08/11  Olivier Blin <oblin at mandrakesoft.com>
+
+	* standalone/drakroam: rewrite write_config for wlandetect to use output()
+	regexp cleanup (bis)
+	regexp cleanups
+	remove unused variable
+	use each_index
+	introduce and use isRoamingRunning to detect if the roaming daemon is
+	running (woah, sector clear, titi is gone home, no more cvs conflicts)
+	prepare for multiple roaming daemons support
+	run UpdateStatus after a timeout in case 'ps' output isn't updated
+	immediately
+	make titi enhancement actually work
+	use standalone
+	only one item can be selected in the known list
+	use a lower scan interval, as requested by Austin
+	use cat_, remove unneeded local $_, try to fix ConnectNow
+
+	* share/gen_locales.pl: unused since locale links are done by the
+	installer
+
+	* share/gen_locales.sh: do not run gen_locales.pl anymore
+	(locale links are done by the installer)
+
+	* lang.pm: main charset is now en_US.UTF-8
+
+	* standalone/drakbug: comment unused variable
+	update product list and fix case (bugzilla is case sensitive)
+	fix product, component and version for bugzilla
+	reorganize to use the same upload info message for Anthill and Bugzilla
+	fix bugzilla url
+
+2004/08/11  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* lang.pm: rewrite handling of defautl locale
+
+	* share/po/es.po: updated Spanish file
+	s/XFree/Xorg/
+
+	* share/po/bn.po, share/po/ms.po, share/po/sk.po, share/po/gl.po,
+	share/po/pt_BR.po, share/po/th.po, share/po/et.po, share/po/ja.po,
+	share/po/hr.po, share/po/be.po, share/po/ko.po, share/po/DrakX.pot,
+	share/po/sv.po, share/po/sr.po, share/po/pl.po, share/po/fi.po,
+	share/po/he.po, share/po/ca.po, share/po/da.po, share/po/ar.po,
+	share/po/ltg.po, share/po/nb.po, share/po/ky.po, share/po/uz.po,
+	share/po/ro.po, share/po/zh_TW.po, share/po/zh_CN.po,
+	share/po/sr@Latn.po, share/po/sq.po, share/po/it.po, share/po/eu.po,
+	share/po/lv.po, share/po/hu.po, share/po/fa.po, share/po/id.po,
+	share/po/ru.po, share/po/br.po, share/po/sl.po, share/po/nn.po,
+	share/po/tr.po, share/po/mt.po, share/po/ga.po, share/po/mn.po,
+	share/po/uk.po, share/po/am.po, share/po/lt.po, share/po/cy.po,
+	share/po/tg.po, share/po/bs.po, share/po/fur.po, share/po/mk.po,
+	share/po/wa.po, share/po/is.po, share/po/hi.po, share/po/af.po,
+	share/po/az.po, share/po/pt.po, share/po/vi.po, share/po/fr.po,
+	share/po/ta.po, share/po/nl.po, share/po/de.po, share/po/tl.po,
+	share/po/eo.po, share/po/bg.po, share/po/cs.po, share/po/el.po,
+	share/po/uz@Latn.po: s/XFree/Xorg/
+
+2004/08/11  Pixel  <pixel at mandrakesoft.com>
+
+	* .perl_checker: new perl_checker fake those packages
+
+	* any.pm, standalone/harddrake2, interactive/stdio.pm, standalone.pm,
+	pkgs.pm, lang.pm, standalone/service_harddrake, install_steps.pm,
+	install_any.pm, ugtk2.pm: perl_checker compliance
+
+2004/08/11  Rafael Garcia-Suarez <rgarciasuarez at mandrakesoft.com>
+
+	* install_any.pm: Support for ftp supplementary media
+	Restore ability to have supplementary http media.
+	Fix http installs.
+	Misleading comment
+
+2004/08/11  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* drakxtools.spec: 10.1-0.8mdk
+
+	* bootloader.pm (mkinitrd) log failled command
+
+	* standalone/drakroam: perl_checker hints
+	typo fix
+	(Dialog) according to mandrake guidelines we should not use stock icon
+	(AddNet) help perl_checker in checking callers
+	(UpdateStatus) simplify
+	simplify through run_program::get_stdout()
+	expand parenthesises
+	(UpdateAvailable) probably better
+	(UpdateAvailable) localize variable
+	(Dialog) indent
+	(Dialog) enable checking call signature
+	(Dialog) simplify: reuse create_scrolled_window()
+	(Dialog) fix it (got broken on ugtk2 port)
+	perl_checker fixes
+
+	* Makefile.config: install drakroam
+
+	* standalone.pm: perl_checker cleanups
+
+	* share/rpmsrate: install firmware for centrino if needed
+
+	* .perl_checker: blacklist Gtk2::SimpleList for drakroam
+
+2004/08/10  Alice Lafox  <alice at lafox.com.ua>
+
+	* share/po/ru.po: update
+
+2004/08/10  Olivier Blin <oblin at mandrakesoft.com>
+
+	* network/netconnect.pm: remove unused variable in network::netconnect,
+	thanks perl_checker
+	add some FIXME comments in network::netconnect
+	network::tools::connect_prog shouldn't be used/written anymore now
+	kill some more connect/disconnect_file
+
+	* standalone/drakroam: perl_checker compliance
+	ugtk2 port
+	fix roaming detection
+	initial import of wlandetect version, from Austin Action
+
+	* standalone/drakconnect: network::tools::connect_prog is really dead now
+
+2004/08/10  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/locales-skeleton.tar.bz2: updated use UTF-8 locales for everything
+
+	* share/gen_locales.pl, share/gen_locales.sh: using "en_US.UTF-8" instead
+	of "UTF-8" as model
+	updated use UTF-8 locales for everything
+
+2004/08/10  Pixel  <pixel at mandrakesoft.com>
+
+	* tools/make_mdkinst_stage2, rescue/make_rescue_img: umount mount point
+	instead of umounting the loopback file
+	(works better when /etc/mtab is /proc/mounts)
+
+	* share/rpmsrate: don't install devfsd by default, use udev instead
+
+	* Xconfig/various.pm, Xconfig/card.pm: s/XFree/Xorg/
+
+	* any.pm: create /etc/udev/conf.d/xxx.conf
+
+	* diskdrake/interactive.pm: no {fs_type} doesn't mean the type invalid
+	no {pt_type} doesn't mean Empty
+
+	* network/adsl.pm, pkgs.pm, install2.pm, bootloader.pm: mount /proc, /sys
+	and /proc/usb/usb in $prefix ASAP instead of doing it at various places
+
+	* fs/type.pm: when there is no {pt_type}, favour the one fs_type2pt_type
+	favours
+
+	* raid.pm: remove dead code
+
+2004/08/10  reinouts
+
+	* share/po/nl.po: Updated Dutch (nl) translation
+	by Reinout van Schouwen <reinout@cs.vu.nl>
+
+2004/08/10  Rafael Garcia-Suarez <rgarciasuarez at mandrakesoft.com>
+
+	* pkgs.pm, install_any.pm: URLPREFIX is not set if the main media isn't
+	http, so the prefix must be
+	passed manually.
+
+2004/08/10  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* standalone/net_monitor: add a horizontal separator in stats to prevent
+	visual disguts between
+	supposed non aligned labels
+	fix looking aka vertical alignment of labels (Fabrice FACORAT
+	<f.faber-pro@ifrance.com>, #10300)
+	fix packing (Fabrice FACORAT <f.faber-pro@ifrance.com>, #10300)
+
+	* tools/cvslog2changelog.pl: list a few more contributors
+
+	* share/rpmsrate: add s2u so that hostname changes do not fsck the desktop
+	install udev by default
+
+	* standalone/drakroam (AddNet, WriteConfig) do not bother accessing arrays
+	like in C
+	perl_checker cleanups (GUI code actually wasn't touched in order to
+	help olivier merge his ugtk2 porting work)
+
 2004/08/10  Pablo Saratxaga  <pablo at mandrakesoft.com>
 
 	* share/fonts.tar.bz2: updated fonts (added devanagari and tamil)
@@ -34669,7 +34879,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.943 2004/08/08 07:11:16 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.944 2004/08/10 07:33:39 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
