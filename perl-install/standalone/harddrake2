@@ -86,8 +86,9 @@ my @menu_items =
      {   path => N("/_Options").N("/Autodetect _jazz drives"), type => '<CheckItem>',
          callback => sub { $options{JAZZ_DETECTION} = $check_boxes{JAZZ_DETECTION}->active } },
      {   path => N("/_Help"), type => '<Branch>' },
+     {   path => N("/_Help").N("/_Help"), callback => sub { unless(fork()) { exec("drakhelp Starter.html/harddrake.html") } } },
      {
-         path => N("/_Help").N("/_Help..."), 
+         path => N("/_Help").N("/_Fields description"), 
          callback => sub {
              if ($current_device) {
                  $in->ask_warn(N("Harddrake help"), 
