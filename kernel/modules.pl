@@ -54,7 +54,7 @@ my %modules_only_for_all_img = (
 
   'disk/hardware_raid' => [
     if_(arch() =~ /x86_64/, qw(ataraid)), #- old
-    qw(i2o_block qla2200 qla2300 cpqfc DAC960 gdth),
+    qw(i2o_block qla2200 qla2300 cpqfc DAC960 gdth pdc-ultra),
   ],
 );
 
