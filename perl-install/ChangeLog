@@ -1,3 +1,95 @@
+2002/02/16  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/da.po: updated Danish file
+
+	* share/po/sk.po, share/po/cs.po, share/po/es.po: updated Czech, Spanish
+	and Slovak files
+
+2002/02/16  Pixel  <pixel@mandrakesoft.com>
+
+	* lang.pm: fix call to update_gnomekderc
+	remove unused & unneeded special %lang2kde_lang
+	  - add lang::check
+	  - fix utf-ko -> utf_ko
+	  - fix utf-14 -> utf_14
+	  - modify share/config/kdeglobals
+	  - add charset2kde_charset, lang2country, lang2kde_lang
+
+2002/02/15  dam's  <damien@mandrakesoft.com>
+
+	* standalone/drakfont: embedded mode correction
+
+	* my_gtk.pm: highlight in gtk icon widget
+
+	* share/themes/mdk-check_on.png, share/themes/mdk-toggle_off.png,
+	share/themes/mdk-toggle_on.png, share/themes/mdk-check_off.png: new gfx
+
+	* share/step-red.xpm, share/step-orange.xpm, share/step-orange-click.xpm,
+	share/step-green-click.xpm, share/step-green.xpm, share/step-red-on.xpm,
+	share/step-orange-on.xpm, share/step-green-on.xpm,
+	share/step-red-click.xpm: new gfx
+	new gfx
+
+2002/02/15  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/vi.po, share/po/fi.po, share/po/DrakX.pot, share/po/fr.po,
+	share/po/wa.po, share/po/da.po, share/po/cs.po, share/po/hu.po,
+	share/po/eu.po: updated Basque file; fixed a msgid change
+
+	* share/po/sv.po: updated Swedish file
+	updated Basque file; fixed a msgid change
+
+2002/02/15  Pixel  <pixel@mandrakesoft.com>
+
+	* run_program.pm: remove assigning STDIN to /dev/null since:
+	  - programs should not use STDIN
+	  - the "postInstall" script for auto_install's is more happy still
+	having the STDIN.
+
+	* diskdrake/smbnfs_gtk.pm, pixmaps/smbnfs_has_mntpoint.png,
+	pixmaps/smbnfs_default.png, pixmaps/smbnfs_mounted.png,
+	pixmaps/smbnfs_server.png: add icons showing if a mount-point is
+	associated or if the share is mounted
+
+	* pkgs.pm: fix typo
+
+	* diskdrake/interactive.pm: use the new warp_text
+
+	* install_steps.pm: use lang::charset2kde_charset
+
+	* standalone/localedrake: lang::write doesn't need the filename anymore
+
+	* any.pm: use 'combo' instead of 'type' for bootloader choice and security
+	choice
+	(requested by fredb&dadou)
+
+	* interactive_gtk.pm: force scalar for Gtk::Label->new with warp_text
+
+	* interactive.pm: favour "combo" over "list" in any case
+
+	* Makefile (check): add lang::check checking
+
+2002/02/15  tvignaud
+
+	* share/po/fr.po: update translation
+
+2002/02/14  Pixel  <pixel@mandrakesoft.com>
+
+	* standalone/lsnetdrake: adapt to the neater network::smb and network::nfs
+
+	* network/smb.pm, network/smbnfs.pm, network/nfs.pm: cleaner & OOed code,
+	with more code sharing
+
+	* interactive_gtk.pm, diskdrake/interactive.pm: use the new warp_text
+	feature
+
+	* my_gtk.pm (ctree_set_icon): new function
+
+	* diskdrake/smbnfs_gtk.pm: some cleanup, icons showing wether a
+	mount-point is associated are coming
+
+	* standalone/diskdrake: fix expert and testing options handling
+
 2002/02/14  dam's  <damien@mandrakesoft.com>
 
 	* standalone/drakfont: embedded mode
