@@ -46,7 +46,7 @@ $install = $ {{
 
 $img =~ /rdz$/ ? initrd($mnt, $img) : $::{"boot_img_$arch"}->($mnt, $img);
 
-sub install_s { _ "strip $_[0]"; _ "$sudo install $_[0] $_[1]" }
+sub install_stripped { _ "strip $_[0]"; _ "$sudo install $_[0] $_[1]" }
 
 sub initrd {
     my ($mnt, $img) = @_;
@@ -60,8 +60,8 @@ sub initrd {
     _ "$sudo mount -t ext2 $tmp $mnt -o loop";
 
     _ "$sudo tar xjC $mnt -f $tar";
-    install_s("$instdir/init", "$mnt/sbin");
-    install_s("$instdir/$install", "$mnt/sbin/stage1");
+    install_stripped("$instdir/init", "$mnt/sbin");
+    install_stripped("$instdir/$install", "$mnt/sbin/stage1");
 
     my $ftype = $type =~ /^(all)$/ ? "pcmcia" : $type;
     if ($ftype eq "pcmcia") {
@@ -99,7 +99,14 @@ sub boot_img_i386 {
 
     _ "$sudo mount -t vfat -o umask=0 $img $mnt -o loop";
     _ "cat vmlinuz > $mnt/vmlinuz" if $type !~ /blank/;
-    -f "$type.rdz" ? _ "cp -f $type.rdz $mnt" : initrd("${mnt}2", "$mnt/$type.rdz");
+    initrd("${mnt}2", "$type.rdz") if !-f "$type.rdz";
+    eval { _ "cp -f $type.rdz $mnt" };
+    if ($@) {
+	unlink "$mnt/$type.rdz";
+	my $avail = (split ' ', `df $mnt`)[-3];
+	my $s = int((-s "$type.rdz") / 1024);
+	die sprintf("not enough room for $type.rdz: need %dKB (available %dKB < needed %dKB)\n", $s - $avail, $avail, $s);
+    }
 
 #    my $ftype = $type =~ /^(other|all)$/ ? "cdrom" : $type;
     my $timeout = 72;
