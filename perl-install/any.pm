@@ -176,6 +176,7 @@ sub setupBootloader {
 				 }
 				) or return 0;
 	} else {
+	$b->{boot} = $partition_table_mac::bootstrap_part;	
 	$in->ask_from_entries_refH('', _("Bootloader main options"), [
 	{ label => _("Bootloader to use"), val => \$bootloader, list => [ keys(%bootloaders) ], format => \&translate },	
 	{ label => _("Init Message"), val => \$b->{initmsg} },
