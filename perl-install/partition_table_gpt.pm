@@ -225,6 +225,9 @@ sub raw_add {
     push @$raw, $part;
 }
 
+sub adjustStart {}
+sub adjustEnd {}
+
 sub first_usable_sector {
     my ($hd) = @_;
     $hd->{primary}{info}{firstUsableLBA};

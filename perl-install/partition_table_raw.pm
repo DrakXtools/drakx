@@ -77,7 +77,7 @@ sub adjustStart($$) {
 sub adjustEnd($$) {
     my ($hd, $part) = @_;
     my $end = $part->{start} + $part->{size};
-    $end == $hd->{totalsectors} and return;
+    $end > $hd->{geom}{cylinders} * cylinder_size($hd) && $end <= $hd->{totalsectors} and return;
     my $end1 = round_down($end, cylinder_size($hd));
     my $end2 = round_up($end - ($hd->{geom}{heads} > 2 ? 2 : 1) * $hd->{geom}{sectors}, cylinder_size($hd));
     $end2 <= $hd->{geom}{cylinders} * cylinder_size($hd) or die "adjustEnd go beyond end of device geometry ($end2 > $hd->{totalsectors})";
