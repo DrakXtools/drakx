@@ -38,13 +38,14 @@ use vars qw(%thedb %printer_type %printer_type_inv @papersize_type %fields $spoo
 
 #-#####################################################################################
 use Data::Dumper;
-use commands;
 
 #-#####################################################################################
 
 =head2 pixel imports
 
 =cut
+
+use commands;
 
 #-#####################################################################################
 
@@ -220,19 +221,13 @@ Example of data-struct:
 =cut
 
 #-#####################################################################################
-my $PRINTER_NONE   = "NONE";
-my $PRINTER_LOCAL  = "LOCAL";
-my $PRINTER_LPRREM = "REMOTE";
-my $PRINTER_SMB    = "SMB";
-my $PRINTER_NCP    = "NCP";   
 
 #-if we are in an panoramix config
 my $prefix = "";
 
 #-location of the printer database in an installed system
 my $PRINTER_DB_FILE    = "/usr/lib/rhs/rhs-printfilters/printerdb";
-my $PRINTER_FILTER_DIR = "/usr/lib/rhs/rhs-printfilters/";
-
+my $PRINTER_FILTER_DIR = "/usr/lib/rhs/rhs-printfilters";
 
 
 #-#####################################################################################
@@ -243,21 +238,22 @@ my $PRINTER_FILTER_DIR = "/usr/lib/rhs/rhs-printfilters/";
 
 #-#####################################################################################
 
-%printer_type = ("local"             => $PRINTER_LOCAL,
-		 "Remote lpd"        => $PRINTER_LPRREM,
-		 "SMB/Windows 95/NT" => $PRINTER_SMB,
-		 "NetWare"           => $PRINTER_NCP,   
-		);                                 
+%printer_type = (
+    "local"             => "LOCAL",
+    "Remote lpd"        => "REMOTE",
+    "SMB/Windows 95/NT" => "SMB",
+    "NetWare"           => "NCP",   
+);
 %printer_type_inv = reverse %printer_type;
 
 %fields = ( 
-	   STANDARD => [qw(QUEUE SPOOLDIR IF )],
-	   SPEC     => [qw(DBENTRY RESOLUTION PAPERSIZE BITSPERPIXEL CRLF )],
-	   LOCAL    => [qw(DEVICE)],
-	   REMOTE   => [qw(REMOTEHOST REMOTEQUEUE)],
-	   SMB      => [qw(SMBHOST SMBHOSTIP SMBSHARE SMBUSER SMBPASSWD SMBWORKGROUP AF)],
-	   NCP      => [qw(NCPHOST NCPQUEUE NCPUSER NCPPASSWD)],
-	  );
+    STANDARD => [qw(QUEUE SPOOLDIR IF)],
+    SPEC     => [qw(DBENTRY RESOLUTION PAPERSIZE BITSPERPIXEL CRLF)],
+    LOCAL    => [qw(DEVICE)],
+    REMOTE   => [qw(REMOTEHOST REMOTEQUEUE)],
+    SMB      => [qw(SMBHOST SMBHOSTIP SMBSHARE SMBUSER SMBPASSWD SMBWORKGROUP AF)],
+    NCP      => [qw(NCPHOST NCPQUEUE NCPUSER NCPPASSWD)],
+);
 @papersize_type = qw(letter legal ledger a3 a4);
 $spooldir       = "/var/spool/lpd/";
 
@@ -270,7 +266,7 @@ $spooldir       = "/var/spool/lpd/";
 #-#####################################################################################
 
 sub set_prefix($) {
-    $prefix = shift;
+    ($prefix) = @_;
 }
 #-*****************************************************************************
 #- read function
@@ -281,9 +277,7 @@ sub set_prefix($) {
 sub read_printer_db(;$) {
     my ($dbpath) = @_;
     
-    #-$dbpath = $dbpath ? $dbpath : $DB_PRINTER_FILTER;
-    $dbpath ||= $PRINTER_DB_FILE;
-    $dbpath = "${prefix}$dbpath";
+    $dbpath = $prefix . ($dbpath || $PRINTER_DB_FILE);
 
     %thedb and return;
 
@@ -300,23 +294,24 @@ sub read_printer_db(;$) {
 	  WHILE : 
 	      while (<DBPATH>) {
 		SWITCH: {
-		      /GSDriver:\s*(\w*)/      and do { $entry->{GSDRIVER} = $1; last SWITCH};
-		      /Description:\s*{(.*)}/  and do { $entry->{DESCR}    = $1; last SWITCH};
-		      /About:\s*{(.*)}/        and do { $entry->{ABOUT}    = $1; last SWITCH};
+		      /GSDriver:\s*(\w*)/      and do { $entry->{GSDRIVER} = $1; last SWITCH };
+		      /Description:\s*{(.*)}/  and do { $entry->{DESCR}    = $1; last SWITCH };
+		      /About:\s*{(.*)}/        and do { $entry->{ABOUT}    = $1; last SWITCH };
 		      /About:\s*{(.*)/ 
 			and do 
 			  {
 			      my $string = "$1\n";
 			      while (<DBPATH>) {
-				  /(.*)}/ and do { $entry->{ABOUT} = $string; last SWITCH};
+				  /(.*)}/ and do { $entry->{ABOUT} = $string; last SWITCH };
 				  $string .= $_;
 			      }
 			  };
 		      /Resolution:\s*{(.*)}\s*{(.*)}\s*{(.*)}/ 
-			and do { push @{$entry->{RESOLUTION}}, {XDPI => $1, YDPI => $2, DESCR => $3}; last SWITCH};
+			and do { push @{$entry->{RESOLUTION}}, { XDPI => $1, YDPI => $2, DESCR => $3 }; last SWITCH };
 		      /BitsPerPixel:\s*{(.*)}\s*{(.*)}/ 
-			and do { push @{$entry->{BITSPERPIXEL}}, {DEPTH => $1, DESCR => $2};last SWITCH;};
-		      /EndEntry/          and do { last WHILE;};
+			and do { push @{$entry->{BITSPERPIXEL}}, {DEPTH => $1, DESCR => $2}; last SWITCH };
+
+		      /EndEntry/ and last WHILE;
 		  }
 	      }
 	    $thedb{$entryname} = $entry;
@@ -334,17 +329,15 @@ sub read_printer_db(;$) {
 #------------------------------------------------------------------------------
 sub create_spool_dir($) {
     my ($queue_path) = @_;
-    my $complete_path = "${prefix}$queue_path";
+    my $complete_path = "$prefix$queue_path";
 
-    unless ($::testing) {
-	mkdir "$complete_path", 0755
-	  or die "An error has occurred - can't create $complete_path : $!";
+    mkdir "$complete_path", 0755
+      or die "An error has occurred - can't create $complete_path : $!";
 	
-	#-redhat want that "drwxr-xr-x root lp"
-	my $gid_lp = (getpwnam("lp"))[3];
-	chown 0, $gid_lp, $complete_path 
-	  or die "An error has occurred - can't chgrp $complete_path to lp $!";
-    }
+    #-redhat want that "drwxr-xr-x root lp"
+    my $gid_lp = (getpwnam("lp"))[3];
+    chown 0, $gid_lp, $complete_path 
+      or die "An error has occurred - can't chgrp $complete_path to lp $!";
 }
 
 #------------------------------------------------------------------------------
@@ -355,7 +348,7 @@ sub create_spool_dir($) {
 #------------------------------------------------------------------------------
 sub create_config_file($$%) {
     my ($inputfile, $outpufile, %toreplace) = @_;
-    my ($in, $out) = ("${prefix}$inputfile", "${prefix}$outpufile");
+    my ($in, $out) = ("$prefix$inputfile", "$prefix$outpufile");
     local *OUT;
     local *IN;
     
@@ -368,12 +361,9 @@ sub create_config_file($$%) {
 	*OUT = *STDOUT
     }
     
-    while ((<IN>)) {
+    while (<IN>) {
 	if (/@@@(.*)@@@/) {
-	    my $chaine = $1;
-	    if (!defined($toreplace{$chaine})) {
-		die "I can't replace $chaine";
-	    }
+	    defined($toreplace{$1}) or die "I can't replace $chaine";
 	    s/@@@(.*)@@@/$toreplace{$1}/g;
 	}
 	print OUT;
@@ -388,14 +378,11 @@ sub create_config_file($$%) {
 #------------------------------------------------------------------------------
 sub copy_master_filter($) {
     my ($queue_path) = @_;
-    my $complete_path = "${prefix}${queue_path}filter";
-    my $master_filter = "${prefix}${PRINTER_FILTER_DIR}master-filter";
+    my $complete_path = "$prefix/$queue_path/filter";
+    my $master_filter = "$prefix/$PRINTER_FILTER_DIR/master-filter";
 
-    unless ($::testing) {
-	commands::cp($master_filter, $complete_path) or die "Can't copy $master_filter to $complete_path $!";
-    } 
-    
-    
+    eval { commands::cp($master_filter, $complete_path) };
+    $@ and die "Can't copy $master_filter to $complete_path $!";
 }
 
 #------------------------------------------------------------------------------
@@ -419,15 +406,15 @@ sub configure_queue($) {
     my ($entry) = @_;
 
     $entry->{SPOOLDIR} ||= "$spooldir";
-    $entry->{IF}       ||= "$spooldir$entry->{QUEUE}/filter";
-    $entry->{AF}       ||= "$spooldir$entry->{QUEUE}/acct";
+    $entry->{IF}       ||= "$spooldir/$entry->{QUEUE}/filter";
+    $entry->{AF}       ||= "$spooldir/$entry->{QUEUE}/acct";
     
     my $queue_path      = "$entry->{SPOOLDIR}";
     create_spool_dir($queue_path);
 
     my $get_name_file = sub { 
 	my ($name) = @_; 
-	("${PRINTER_FILTER_DIR}$name.in", "$entry->{SPOOLDIR}$name")
+	("$PRINTER_FILTER_DIR/$name.in", "$entry->{SPOOLDIR}$name")
     };
     my ($filein, $file);
     my %fieldname = ();
@@ -435,18 +422,17 @@ sub configure_queue($) {
 
 
     ($filein, $file) = &$get_name_file("general.cfg");
+    $fieldname{ascps_trans} = ($dbentry->{GSDRIVER} eq "POSTSCRIPT") ? "NO" : "YES";
     $fieldname{desiredto}   = ($entry->{GSDRIVER} eq "TEXT") ? "ps" : "asc";
-    $fieldname{papersize}   = ($entry->{PAPERSIZES}) ? $entry->{PAPERSIZES} : "letter";
-    $fieldname{printertype} = ($entry)->{TYPE};
-    $fieldname{ascps_trans} = ($dbentry->{GSDRIVER} eq "POSTSCRIPT") ? 
-      "NO" : "YES";
-    create_config_file($filein,$file, %fieldname);
+    $fieldname{papersize}   = $entry->{PAPERSIZES} ? $entry->{PAPERSIZES} : "letter";
+    $fieldname{printertype} = $entry->{TYPE};
+    create_config_file($filein, $file, %fieldname);
 
     #- successfully created general.cfg, now do postscript.cfg 
     ($filein, $file) = &$get_name_file("postscript.cfg");
     %fieldname = ();
     $fieldname{gsdevice}       = $dbentry->{GSDRIVER};
-    $fieldname{papersize}      = ($entry->{PAPERSIZES}) ? $entry->{PAPERSIZES} : "letter";
+    $fieldname{papersize}      = $entry->{PAPERSIZES} ? $entry->{PAPERSIZES} : "letter";
     $fieldname{resolution}     = ($entry->{RESOLUTION} eq "Default") ? "Default" : "";
     $fieldname{color}          = 
       do {
@@ -458,8 +444,7 @@ sub configure_queue($) {
       };
     $fieldname{reversepages}   = "NO";
     $fieldname{extragsoptions} = "";
-    $fieldname{pssendeof}      = ($dbentry->{GSDRIVER} eq "POSTSCRIPT") ?
-      "NO" : "YES";
+    $fieldname{pssendeof}      = ($dbentry->{GSDRIVER} eq "POSTSCRIPT") ? "NO" : "YES";
     $fieldname{nup}            = "1";
     $fieldname{rtlftmar}       = "18";
     $fieldname{topbotmar}      = "18";
@@ -473,28 +458,25 @@ sub configure_queue($) {
     $fieldname{textsendeof}     = "1";
     create_config_file($filein, $file, %fieldname);
 
-	
-    unless ($::testing) {
-	if ($entry->{TYPE} eq $PRINTER_SMB) {
-	    #- simple config file required if SMB printer
-	    my $config_file = "${prefix}${queue_path}.config";
-	    local *CONFFILE;
-	    open CONFFILE, ">$config_file" or die "Can't create $config_file $!";
-	    print CONFFILE "share='\\\\$entry->{SMBHOST}\\$entry->{SMBSHARE}'\n";
-	    print CONFFILE "hostip='$entry->{SMBHOSTIP}'\n";
-	    print CONFFILE "user='$entry->{SMBUSER}'\n";
-	    print CONFFILE "password='$entry->{SMBPASSWD}'\n";
-	    print CONFFILE "workgroup='$entry->{SMBWORKGROUP}'\n";
-	} elsif ($entry->{TYPE} eq $PRINTER_NCP) {
-	    #- same for NCP printer
-	    my $config_file = "${prefix}${queue_path}.config";
-	    local *CONFFILE;
-	    open CONFFILE, ">$config_file" or die "Can't create $config_file $!";
-	    print CONFFILE "server=$entry->{NCPHOST}\n";
-	    print CONFFILE "queue=$entry->{NCPQUEUE}\n";
-	    print CONFFILE "user=$entry->{NCPUSER}\n";
-	    print CONFFILE "password=$entry->{NCPPASSWD}\n";
-	}
+    if ($entry->{TYPE} eq "SMB") {
+	#- simple config file required if SMB printer
+	my $config_file = "$prefix$queue_path.config";
+	local *F;
+	open F, ">$config_file" or die "Can't create $config_file $!";
+	print F "share='\\\\$entry->{SMBHOST}\\$entry->{SMBSHARE}'\n";
+	print F "hostip='$entry->{SMBHOSTIP}'\n";
+	print F "user='$entry->{SMBUSER}'\n";
+	print F "password='$entry->{SMBPASSWD}'\n";
+	print F "workgroup='$entry->{SMBWORKGROUP}'\n";
+    } elsif ($entry->{TYPE} eq "NCP") {
+	#- same for NCP printer
+	my $config_file = "$prefix$queue_path.config";
+	local *F;
+	open F, ">$config_file" or die "Can't create $config_file $!";
+	print F "server=$entry->{NCPHOST}\n";
+	print F "queue=$entry->{NCPQUEUE}\n";
+	print F "user=$entry->{NCPUSER}\n";
+	print F "password=$entry->{NCPPASSWD}\n";
     }
 
     copy_master_filter($queue_path);
@@ -502,7 +484,7 @@ sub configure_queue($) {
     #-now the printcap file
     local *PRINTCAP;
     if ($::testing) {
-	open PRINTCAP, ">${prefix}etc/printcap" or die "Can't open printcap file $!";
+	open PRINTCAP, ">$prefix/etc/printcap" or die "Can't open printcap file $!";
     } else {
 	*PRINTCAP = *STDOUT;
     }
@@ -523,9 +505,9 @@ sub configure_queue($) {
     print PRINTCAP "\t:sd=$entry->{SPOOLDIR}:\\\n";
     print PRINTCAP "\t:mx#0:\\\n\t:sh:\\\n";
 	   
-    if ($entry->{TYPE} eq $PRINTER_LOCAL) {
+    if ($entry->{TYPE} eq "LOCAL") {
 	print PRINTCAP "\t:lp=$entry->{DEVICE}:\\\n";
-    } elsif ($entry->{TYPE} eq $PRINTER_LPRREM) { 
+    } elsif ($entry->{TYPE} eq "REMOTE") { 
 	print PRINTCAP "\t:rm=$entry->{REMOTEHOST}:\\\n";
 	print PRINTCAP "\t:rp=$entry->{REMOTEQUEUE}:\\\n";
     } else {
