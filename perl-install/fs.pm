@@ -34,6 +34,8 @@ sub read_fstab {
 		} elsif (/dev=(.*)/) {
 		    $dev = $1;
 		    0;
+		} elsif ($_ eq '--') {
+		    0;
 		} else {
 		    1;
 		}
@@ -85,8 +87,8 @@ sub add2all_hds {
 
     foreach (@l) {
 	my $s = 
-	    isNfs($_) ? 'nfs' :
-	    isThisFs('smbfs', $_) ? 'smb' :
+	    isNfs($_) ? 'nfss' :
+	    isThisFs('smbfs', $_) ? 'smbs' :
 	    'special';
 	push @{$all_hds->{$s}}, $_;
     }
@@ -170,7 +172,10 @@ sub write_fstab {
 
 	    # handle bloody supermount special case
 	    if ($options =~ /supermount/) {
-		$options = join(",", "dev=$dev", "fs=$type", grep { $_ ne 'supermount' } split(',', $options));
+		my @l = grep { $_ ne 'supermount' } split(',', $options);
+		my @l1 = grep { member($_, 'ro', 'exec') } @l;
+		my @l2 = difference2(\@l, \@l1);
+		$options = join(",", "dev=$dev", "fs=$type", @l1, if_(@l2, '--', @l2));
 		($dev, $type) = ($mntpoint, 'supermount');
 	    }
 
@@ -360,12 +365,6 @@ sub set_default_options {
     # rationalize: no need for user
     if ($options->{autofs} || $options->{supermount}) {
 	$options->{user} = 0;
-    }
-
-    if ($options->{supermount}) {
-	#- drives supermount crazy :'-(
-	delete $options->{'codepage='};
-	delete $options->{'iocharset='};
     }
 
     # have noauto when we have user
