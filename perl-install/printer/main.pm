@@ -2458,6 +2458,27 @@ sub hplip_device_entry {
     return undef;
 }
 
+sub hplip_device_entry_from_uri {
+    my ($deviceuri) = @_;
+
+    return undef if $deviceuri !~ m!^hp:/!;
+    
+    if (!$hplipdevicesdb) {
+	# Read the HPLIP device database if not done already
+	$hplipdevicesdb = read_hplip_db();
+    }
+
+    $deviceuri =~ m!^hp:/(usb|par|net)/(\S+?)(\?\S+|)$!;
+    my $model = $2;
+    return undef if !$model;
+
+    my $entry;
+    if ($entry = $hplipdevicesdb->{$model}) {
+	return $entry;
+    }
+    return undef;
+}
+
 sub start_hplip {
     my ($device, $hplipentry, @autodetected) = @_;
 

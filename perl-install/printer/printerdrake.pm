@@ -2140,11 +2140,23 @@ sub setup_common {
 		    # Configure the HPLIP SANE backend
 		    printer::main::config_sane('hpaio');
 		}
+		if (!$printer->{noninteractive} && !$::noX) {
+		    my $text = "";
+		    # Inform user about how to use HPLIP extra functions
+		    $text = hplip_help($makemodel, $hplipdevice);
+		    if ($text) {
+			undef $w;
+			local $::isWizard = 0;
+			$in->ask_warn
+			    (N("Using and Maintaining your %s",
+			       $makemodel),
+			     $text);
+		    }
+		}
 		# Take the DeviceURI from $hplipdevice.
 		$printer->{currentqueue}{connect} = $hplipdevice;
 	    }
 	}
-	print "##### 10 |$hplipdevice|\n";
 	if (!$hplipdevice) {
 	    if ($makemodel =~ /HP\s+(OfficeJet|PSC|PhotoSmart|LaserJet\s+(1200|1220|2200|30(15|20|30)|3200|33.0|4345)|(DeskJet|dj)\s*450)/i ||
 		$makemodel =~ /Sony\s+IJP[\s\-]+V[\s\-]+100/i ||
@@ -2277,12 +2289,13 @@ sub setup_common {
 			printer::main::config_photocard();
 		    }
 		    
-		    if (!$printer->{noninteractive}) {
+		    if (!$printer->{noninteractive} && !$::noX) {
 			my $text = "";
 			# Inform user about how to scan with his MF device
 			$text = scanner_help($makemodel, "ptal://$ptaldevice");
 			if ($text) {
 			    undef $w;
+			    local $::isWizard = 0;
 			    $in->ask_warn
 				(N("Scanning on your HP multi-function device"),
 				 $text);
@@ -2292,6 +2305,7 @@ sub setup_common {
 			$text = photocard_help($makemodel, "ptal://$ptaldevice");
 			if ($text) {
 			    undef $w;
+			    local $::isWizard = 0;
 			    $in->ask_warn(N("Photo memory card access on your HP multi-function device"),
 					  $text);
 			}
@@ -3546,6 +3560,7 @@ sub printer_help {
     my $default = $printer->{DEFAULT};
     my $raw = 0;
     my $cupsremote = 0;
+    my $hplip = "";
     my $scanning = "";
     my $photocard = "";
     my $hp11000fw = "";
@@ -3553,6 +3568,14 @@ sub printer_help {
 	if ($printer->{configured}{$queue}{queuedata}{model} eq "Unknown model" ||
 	    $printer->{configured}{$queue}{queuedata}{model} eq N("Raw printer")) {
 	    $raw = 1;
+	}
+	# Information about extra functions of HP printers enabled by HPLIP
+	$hplip = hplip_help(
+	     $printer->{configured}{$queue}{queuedata}{make} . " " .
+	     $printer->{configured}{$queue}{queuedata}{model}, 
+	     $printer->{configured}{$queue}{queuedata}{connect});
+	if ($hplip) {
+	    $hplip = "\n\n$hplip\n\n";
 	}
 	# Information about scanning with HP's multi-function devices
 	$scanning = scanner_help(
@@ -3591,11 +3614,11 @@ The \"%s\" command also allows to modify the option settings for a particular pr
 (!$cupsremote ?
  N("To know about the options available for the current printer read either the list shown below or click on the \"Print option list\" button.%s%s%s
 
-", $scanning, $photocard, $hp11000fw) . printer::main::help_output($printer, 'cups') : 
- $scanning . $photocard . $hp11000fw .
+", $hplip, $scanning . $photocard, $hp11000fw) . printer::main::help_output($printer, 'cups') : 
+ $hplip . $scanning . $photocard . $hp11000fw .
  N("Here is a list of the available printing options for the current printer:
 
-") . printer::main::help_output($printer, 'cups')) : $scanning . $photocard . $hp11000fw);
+") . printer::main::help_output($printer, 'cups')) : $hplip . $scanning . $photocard . $hp11000fw);
     } elsif ($spooler eq "lprng") {
 	$dialogtext =
 N("To print a file from the command line (terminal window) use the command \"%s <file>\".
@@ -3605,7 +3628,7 @@ N("This command you can also use in the \"Printing command\" field of the printi
 (!$raw ?
 N("
 The \"%s\" command also allows to modify the option settings for a particular printing job. Simply add the desired settings to the command line, e. g. \"%s <file>\". ", "lpr", ($queue ne $default ? "lpr -P $queue -Z option=setting -Z switch" : "lpr -Z option=setting -Z switch")) .
-N("To get a list of the options available for the current printer click on the \"Print option list\" button.") . $scanning . $photocard . $hp11000fw : $scanning . $photocard . $hp11000fw);
+N("To get a list of the options available for the current printer click on the \"Print option list\" button.") . $hplip . $scanning . $photocard . $hp11000fw : $hplip . $scanning . $photocard . $hp11000fw);
     } elsif ($spooler eq "lpd") {
 	$dialogtext =
 N("To print a file from the command line (terminal window) use the command \"%s <file>\".
@@ -3615,7 +3638,7 @@ N("This command you can also use in the \"Printing command\" field of the printi
 (!$raw ?
 N("
 The \"%s\" command also allows to modify the option settings for a particular printing job. Simply add the desired settings to the command line, e. g. \"%s <file>\". ", "lpr", ($queue ne $default ? "lpr -P $queue -o option=setting -o switch" : "lpr -o option=setting -o switch")) .
-N("To get a list of the options available for the current printer click on the \"Print option list\" button.") . $scanning . $photocard . $hp11000fw : $scanning . $photocard . $hp11000fw);
+N("To get a list of the options available for the current printer click on the \"Print option list\" button.") . $hplip . $scanning . $photocard . $hp11000fw : $hplip . $scanning . $photocard . $hp11000fw);
     } elsif ($spooler eq "pdq") {
 	$dialogtext =
 N("To print a file from the command line (terminal window) use the command \"%s <file>\" or \"%s <file>\".
@@ -3631,8 +3654,8 @@ The \"%s\" and \"%s\" commands also allow to modify the option settings for a pa
 ", "pdq", "lpr", ($queue ne $default ? "pdq -P $queue -aoption=setting -oswitch" : "pdq -aoption=setting -oswitch")) .
 N("To know about the options available for the current printer read either the list shown below or click on the \"Print option list\" button.%s%s%s
 
-", $scanning, $photocard, $hp11000fw) . printer::main::help_output($printer, 'pdq') :
- $scanning . $photocard . $hp11000fw);
+", $hplip, $scanning . $photocard, $hp11000fw) . printer::main::help_output($printer, 'pdq') :
+ $hplip . $scanning . $photocard . $hp11000fw);
     }
     my $windowtitle = ($scanning ?
                        ($photocard ?
@@ -3640,7 +3663,9 @@ N("To know about the options available for the current printer read either the l
 			N("Printing/Scanning on \"%s\"", $queue)) :
                        ($photocard ?
 			N("Printing/Photo Card Access on \"%s\"", $queue) :
-			N("Printing on the printer \"%s\"", $queue)));
+			($hplip ?
+			 N("Using/Maintaining the printer \"%s\"", $queue) :
+			 N("Printing on the printer \"%s\"", $queue))));
     if (!$raw && !$cupsremote) {
         my $choice;
         while ($choice ne N("Close")) {
@@ -3657,6 +3682,43 @@ N("To know about the options available for the current printer read either the l
     } else {
 	$in->ask_warn($windowtitle, $dialogtext);
     }
+}
+
+sub hplip_help {
+    my ($makemodel, $deviceuri, $hplipentry) = @_;
+    return "" if (!$hplipentry && $deviceuri !~ m!^hp:/!);
+    if (!$hplipentry) {
+	$hplipentry =
+	    printer::main::hplip_device_entry_from_uri($deviceuri);
+	return "" if !$hplipentry;
+    }
+
+    my $text = N("Your %s is set up with HP's HPLIP driver software. This way many special features of your printer are supported.\n\n", $makemodel);
+    
+    if ($hplipentry->{scan}) {
+	$text .= N("The scanner in your printer can be used with the usual SANE software, for example Kooka or XSane (Both in the Multimedia/Graphics menu). ");
+	$text .= N("Run Scannerdrake (Hardware/Scanner in Mandrakelinux Control Center) to share your scanner on the network.\n\n");
+    }
+
+    if ($hplipentry->{card} == 1) {
+	$text .= N("The memory card readers in your printer can be accessed using HP's Printer Toolbox (Menu: System/Monitoring/HP Printer Toolbox) clicking the \"Access Photo Cards...\" button on the \"Functions\" tab. ");
+	$text .= N("Note that this is very slow, reading the pictures from the camera or a USB card reader is usually faster.\n\n");
+    }
+
+    if ($hplipentry->{card} == 2) {
+	$text .= N("The memory card readers in your printer can be accessed like a usual USB mass storage device. ");
+	$text .= N("After inserting a card a hard disk icon to access the card should appear on your desktop.\n\n");
+    }
+
+    $text .= N("HP's Printer Toolbox (Menu: System/Monitoring/HP Printer Toolbox) offers a lot of status monitoring and maintenance functions for your %s:\n\n", $makemodel);
+    $text .= N(" - Ink level/status info\n") if $hplipentry->{status};
+    $text .= N(" - Ink nozzle cleaning\n") if $hplipentry->{clean};
+    $text .= N(" - Print head alignment\n") if $hplipentry->{align};
+    $text .= N(" - Color calibration\n") if $hplipentry->{colorcal};
+
+    $text .= "\n";
+
+    return $text;
 }
 
 sub scanner_help {
