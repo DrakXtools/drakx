@@ -134,12 +134,12 @@ sub getPackages {
     #- get pubkey file first as we cannot handle 2 files opened simultaneously.
     my $pubkey;
     eval {
-	my $fpubkey = getFile("base/pubkey", $mirror);
+	my $fpubkey = getFile("../media_info/pubkey", $mirror);
 	$pubkey = [ $packages->parse_armored_file($fpubkey) ];
     };
 
     #- check first if there is something to get...
-    my $fhdlist = getFile("base/hdlist.cz", $mirror);
+    my $fhdlist = getFile("media_info/hdlist.cz", $mirror);
     unless ($fhdlist) {
 	log::l("no updates available, bailing out");
 	return;
