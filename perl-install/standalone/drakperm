@@ -45,8 +45,7 @@ each_index {
 } (N("path"), N("user"), N("group"), N("permissions"));
 
 #- widgets settings
-my $combo_perm = new Gtk2::Combo;
-$combo_perm->entry->set_editable(0);
+my $combo_perm = new Gtk2::OptionMenu;
 $combo_perm->set_popdown_strings(sort(keys %perm));
 
 sub add_callback() {
