@@ -43,9 +43,11 @@ ifeq (alpha,$(ARCH))
 	cp -f vmlinux.gz $(ROOTDEST)/boot/instboot.gz
 	make -C tools/$(ARCH)/cd install ROOTDEST=$(ROOTDEST)
 endif
-	cd $(ROOTDEST)/images; rm -rf alternatives ; mkdir alternatives ; mv *.img-* alternatives
+	cd $(ROOTDEST)/images; rm -rf alternatives 
+	if [ `ls $(ROOTDEST)/images/*.img-* 2>/dev/null | wc -l` -gt 0 ]; then	\
+	  cd $(ROOTDEST)/images; mkdir alternatives; cd alternatives; mv ../*.img-* .; md5sum *.img-* > MD5SUM; \
+	fi
 	cd $(ROOTDEST)/images; md5sum *.img* > MD5SUM
-	cd $(ROOTDEST)/images/alternatives; md5sum *.img* > MD5SUM
 
 	install live_update $(ROOTDEST)/live_update
 	make -C perl-install full_stage2
