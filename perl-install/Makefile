@@ -27,7 +27,7 @@ tar-drakxtools: clean
 	cd ../drakxtools ; perl -pi -e 's/^C_RPM.*/C_RPM=0/; s/^C_DRAKX.*/C_DRAKX=0/' c/Makefile
 	cd ../drakxtools ; perl -pi -e 's/^all: help/all:/' share/po/Makefile
 	cd ../drakxtools ; rm -rf install* pkgs.pm help.pm ftp.pm http.pm crypto.pm t.pm */CVS ; mv Makefile.drakxtools Makefile
-	cd .. ; tar cfj drakxtools.tar.bz2 --exclude CVS $(patsubst %,drakxtools/%,Makefile Makefile.config Newt diskdrake c ddcprobe serial_probe share/po sbus_probing resize_fat share/diskdrake.rc share/wizard.rc $(STANDALONEPMS) standalone/icons pixmaps network standalone/interactive_http rpcinfo-flushed.c *.pm)
+	cd .. ; tar cfj drakxtools.tar.bz2 --exclude CVS $(patsubst %,drakxtools/%,Makefile Makefile.config Newt diskdrake c ddcprobe serial_probe share/po sbus_probing resize_fat share/diskdrake.rc share/wizard.rc $(STANDALONEPMS) standalone/icons pixmaps network standalone/interactive_http rpcinfo-flushed.c *.pm security)
 	cd .. ; rm -rf drakxtools
 
 $(DIRS):
