@@ -338,14 +338,18 @@ sub get_intf_ip {
 my %intf;
 
 sub update_list() {
+    @all_cards = network::ethernet::conf_network_card_backend($netc, $intf);
     my %new_intf = map { @$_ } @all_cards;
     my @new_intf = sort keys %new_intf;
+    foreach my $interface (difference2(\@new_intf, [ keys %intf ])) {
+        $intf{$interface} = $tree_model->append(undef);
+    }
     foreach my $interface (@new_intf) {
         my ($ip, $state) = get_intf_ip($interface);
-        $intf{$interface}{iter} ||= $tree_model->append(undef);
-        $tree_model->set($intf{$interface}{iter}, map_index { $::i => $_ } (gtkcreate_pixbuf("eth_card_mini2.png"), $interface, $ip , $intf->{$interface}{BOOTPROTO}, $new_intf{$interface}, $state));
+        $tree_model->set($intf{$interface}, map_index { $::i => $_ } (gtkcreate_pixbuf("eth_card_mini2.png"), $interface, $ip , $intf->{$interface}{BOOTPROTO}, $new_intf{$interface}, $state));
     }
     foreach my $i (difference2([ keys %intf ], \@new_intf)) {
+        $tree_model->remove($intf{$i});
         delete $intf{$i};
     }
 }
