@@ -48,6 +48,25 @@ sub mapIntfToDevice {
 }
 
 
+# return list of [ intf_name, module, device_description ] tuples such as:
+# [ "eth0", "3c59x", "3Com Corporation|3c905C-TX [Fast Etherlink]" ]
+sub get_eth_cards() {
+    my @all_cards = detect_devices::getNet();
+
+    my @devs = detect_devices::pcmcia_probe();
+    modules::mergein_conf("$::prefix/etc/modules.conf");
+    my $saved_driver;
+    return map {
+        my $interface = $_;
+        my $a = c::getNetDriver($interface) || modules::get_alias($interface);
+        my $b = find { $_->{device} eq $interface } @devs;
+        $a ||= $b->{driver};
+        $a and $saved_driver = $a; # handle multiple cards managed by the same driver
+        [ $interface, $saved_driver, (mapIntfToDevice($interface))[0]->{description} ]
+    } @all_cards;
+}
+
+
 #- conf_network_card_backend : configure the network cards and return the list of them, or configure one specified interface : WARNING, you have to setup the ethernet cards, by calling load_category($in, 'network/main|gigabit|usb', !$::expert, 1) or load_category_backend before calling this function. Basically, you call this function in 2 times.
 #- input
 #-  $prefix
@@ -72,21 +91,8 @@ sub mapIntfToDevice {
 sub conf_network_card_backend {
     my ($netc, $intf, $o_type, $o_interface, $o_ipadr, $o_netadr) = @_;
     #-type =static or dhcp
-    if (!$o_interface) {
-	my @all_cards = detect_devices::getNet();
+    return get_eth_cards() if !$o_interface;
 
-	my @devs = detect_devices::pcmcia_probe();
-	modules::mergein_conf("$::prefix/etc/modules.conf");
-	my $saved_driver;
-	return map {
-	    my $interface = $_;
-	    my $a = c::getNetDriver($interface) || modules::get_alias($interface);
-	    my $b = find { $_->{device} eq $interface } @devs;
-	    $a ||= $b->{driver};
-	    $a and $saved_driver = $a; # handle multiple cards managed by the same driver
- 	    [ $interface, $saved_driver ]
-	} @all_cards;
-    }
     $o_interface =~ /eth[0-9]+/ or die("the interface is not an ethx");
     
     $netc->{NET_DEVICE} = $o_interface; #- one consider that there is only ONE Internet connection device..
