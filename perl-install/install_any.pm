@@ -498,7 +498,7 @@ sub setupFB {
 sub hdInstallPath() {
     my $tail = first(readlink("/tmp/image") =~ m|^/tmp/hdimage/(.*)|);
     my $head = first(readlink("/tmp/hdimage") =~ m|$::o->{prefix}(.*)|);
-    $tail && "$head/$tail";
+    $head && $tail && "$head/$tail";
 }
 
 sub install_urpmi {
