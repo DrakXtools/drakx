@@ -84,7 +84,7 @@ my @files_corrupted;
 my $remove_user_before_restore = 0;
 my @file_list_to_send_by_ftp;
 my $results;
-my @net_methods = ("ftp", "rsync", "ssh", "webdav");
+my @net_methods = ("", "ftp", "rsync", "ssh", "webdav");
 my @media_types = (translate(N_("hd")), "cd", translate(N_("tape")));
 my %cd_devices;
 my $std_device;
@@ -790,18 +790,20 @@ sub complete_results() {
 sub ftp_client() {
     use Net::FTP; 
     my $ftp;
-
-    $DEBUG and print "file list to send: $_\n "  foreach @file_list_to_send_by_ftp;
-    if ($DEBUG && $interactive) { $ftp = Net::FTP->new($host_name, Debug => 1) or return 1 }
-    elsif ($interactive)  {  $ftp = Net::FTP->new($host_name, Debug => 0) or return 1 }
-    else {  $ftp = Net::FTP->new($host_name, Debug => 0) or return 1 }
-    $ftp->login($login_user, $passwd_user);
-    $ftp->cwd($host_path); 
+	
+	foreach (1..5) {
+		$ftp = Net::FTP->new($host_name, Debug => 0) or return 1;
+		$ftp && $ftp->login($login_user, $passwd_user) and last;
+		log::l("ftp login failed, sleeping before trying again");
+		sleep 5 * $_;
+		$ftp = 0;
+	}
+	return 1 if !$ftp;
+	$ftp->cwd($host_path); 
     foreach (@file_list_to_send_by_ftp) {
 		$interactive and $pbar->set_fraction(0);
 		$interactive and progress($pbar, $plabel, 0.5, $_);
 		$interactive and $pbar->set_text($_);
-		#- make perl_checker happy...
 		$ftp->put($_, undef, undef);
 		$interactive and progress($pbar, $plabel, 0.5, $_);
 		$interactive and $pbar->set_text($_);
@@ -1452,12 +1454,13 @@ sub build_backup_files() {
 	#- leave this one alone for now - works well
 	#- integrate with other methods later
     if (($where_net && !$daemon && $net_proto eq 'ftp') || $daemon && $daemon_media eq 'ftp') {
-		$results .= N("file list sent by FTP: %s\n ", $_)  foreach @file_list_to_send_by_ftp;
 		$interactive and build_backup_ftp_status();
 		if (ftp_client()) { 
 	    	$results .= N("\n FTP connection problem: It was not possible to send your backup files by FTP.\n");
 	    	$interactive and $in->ask_warn(N("Error"), N("Error during sending file via FTP. Please correct your FTP configuration."));
-		} 
+		} else {
+			$results .= N("file list sent by FTP: %s\n", $_)  foreach @file_list_to_send_by_ftp;
+		}
     }
 	
 	#- consolidate all the other methods under here - interactive and --default should land here
@@ -1548,7 +1551,7 @@ sub push_list {
 
 sub files_to_results {
 	my ($basename) = @_;
-	$results .= "\nfile: " . $save_path . "/backup_" . $basename . $the_time . $tar_ext . "\n\n";
+	$results .= "\nfile: " . $save_path . "/backup_" . $basename . $the_time . "." . $tar_ext . "\n\n";
 	$results .= cat_("$save_path/list_" . $basename . $the_time . ".txt");
 }
 
@@ -3566,12 +3569,16 @@ sub find_files_to_restore() {
 	
     gtkpack($advanced_box,
 		$file_restore = gtkpack_(new Gtk2::VBox(0,10),
-		    0, new Gtk2::Label(N("Filename text to search for:")),
+		    0, new Gtk2::Label(N("Filename text substring to search for (empty string matches all):")),
 			0, gtkpack_(new Gtk2::HBox(0,10),
 				1, $file_wildcard_entry,
 				0, gtksignal_connect(new Gtk2::Button(N("Search Backups")), clicked => sub {
-					my $wildcard = $file_wildcard_entry->get_text;
+					local $_ = $file_wildcard_entry->get_text; 
+					s|^\*|\\\*|g;
+					my $wildcard = $_;
 					@possible_sources = glob "$save_path/list*";
+					$model->clear;
+					my $match = 0;
 					foreach my $list (@possible_sources) {
 						my @listing = cat_($list);
 						my @matches = grep { /$wildcard/ } @listing;
@@ -3581,8 +3588,10 @@ sub find_files_to_restore() {
 								chop;
 								$model->append_set($list_entry, [ 0 => $_ ]);
 							}
+							$match = 1
 						}
 					}
+					show_warning("i", N("No matches found...")) if $match == 0;
 				}),
 			),
 			1, create_scrolled_window($file_list),
@@ -3600,6 +3609,7 @@ sub find_files_to_restore() {
 		my ($lmodel, $iter) = $_[0]->get_selected;
 		$lmodel && $iter or return;
  		my $s = $lmodel->get($iter, 0);
+print "$s\n";
 		if (! any { /$s/ } @possible_sources) {
 			$file_to_restore = $s;
 			my $parent_iter = Gtk2::TreeModel::iter_parent($lmodel, $iter);
@@ -3704,7 +3714,7 @@ sub catalog_restore {
 	gtkpack($advanced_box,
 		$catalog_box = gtkpack_(new Gtk2::HBox(0,10),
 			1, gtkpack_(new Gtk2::VBox(0,5),
-				0, N("Click date/time to see backup files."),
+				0, N("Click date/time to see backup files.\nCtrl-Click files to select multiple files."),
 				1, gtkpack_(new Gtk2::VBox(0, 10),
 					1, create_scrolled_window($tree_catalog),
 					1, create_scrolled_window($tree_files),
