@@ -203,7 +203,10 @@ sub cardConfiguration(;$$$) {
 			$card->{type} =~ /ATI Rage 128/); #- 16 and 32 bits, prefer 16bit as no DMA.
 
     #- check to use XFree 4.0 or XFree 3.3.
-    $card->{use_xf4} = $card->{driver} && !$card->{flags}{unsupported};
+    $card->{use_xf4} = $card->{driver} && !$card->{flags}{unsupported} &&
+      !($card->{type} =~ /RIVA TNT/ ||
+	$card->{type} =~ /RIVA128/ ||
+	$card->{type} =~ /GeForce/);
 
     #- basic installation, use of XFree 4.0 or XFree 3.3.
     my ($xf4_ver, $xf3_ver) = ("4.0.1", "3.3.6");
