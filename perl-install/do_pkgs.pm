@@ -86,7 +86,7 @@ sub check_kernel_module_packages {
 
 sub what_provides {
     my ($do, $name) = @_;
-    map { $do->{o}{packages}{depslist}[$_]->name } keys %{$do->{o}{packages}{provides}{$name} || {}};
+    map { $_->name } pkgs::packagesProviding($do->{o}{packages}, $name);
 }
 
 sub are_installed {
