@@ -124,11 +124,11 @@ sub write {
 
     if ($conf->{disabled}) {
 	run_program::rooted($::prefix, 'chkconfig', '--del', 'shorewall');
-	run_program::run('service', 'shorewall', 'stop') if $::isStandalone;
-	run_program::run('service', 'shorewall', 'clear') if $::isStandalone;
+	run_program::run('service', '>', '/dev/null', 'shorewall', 'stop') if $::isStandalone;
+	run_program::run('service', '>', '/dev/null', 'shorewall', 'clear') if $::isStandalone;
     } else {
 	run_program::rooted($::prefix, 'chkconfig', '--add', 'shorewall');
-	run_program::run('service', 'shorewall', 'restart') if $::isStandalone;
+	run_program::run('service', '>', '/dev/null', 'shorewall', 'restart') if $::isStandalone;
     }
 }
 
