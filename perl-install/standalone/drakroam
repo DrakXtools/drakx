@@ -37,6 +37,7 @@ my $IFConfig = '/sbin/ifconfig';
 my $IFUp = '/sbin/ifup';
 my $IFDown = '/sbin/ifdown';
 my $DHClient = '/sbin/dhclient';
+my $device;
 
 # initialize variables
 my $ScanInterval = 60; # tell deamon to search for new nets every x seconds
@@ -141,7 +142,7 @@ sub UpdateAll {
 	&UpdateRoaming;
 }
 
-sub UpdateRoaming {
+sub UpdateRoaming() {
 	my $status = "off";
 	open(my $PS, "ps -A |") or die("Can't open ps\n");
 	any { /wlandetect$/ } <$PS> and $status = "on";
@@ -149,15 +150,16 @@ sub UpdateRoaming {
 	$RoamStatus->set_text("Roaming: $status");
 }
 
-sub UpdateStatus {
+sub UpdateStatus() {
 	my $CurrentNet = "-";
 	my $CurrentIP = "---.---.---.---";
-	$CurrentGW = "---.---.---.---";
-	$CurrentMode = "";
-	$CurrentWEP = "";
-	$CurrentSignal = "-";
+	my $CurrentGW = "---.---.---.---";
+	my $CurrentMode = "";
+	my $CurrentWEP = "";
+	my $CurrentSignal = "-";
 	print("Updating\n");
 	open(my $IWSTATUS, "$IWConfig 2>/dev/null |") or die("Can't run iwconfig\n");
+     local $_;
 	while (<$IWSTATUS>) {
 		if (/ESSID:"(\S*)"/) { $CurrentNet = $1 }
 		if (/Mode:(\S*)\s/) { $CurrentMode = $1 }
@@ -184,19 +186,18 @@ sub UpdateStatus {
 	$SignalLabel->set_text("Signal: $CurrentSignal");
 }
 
-sub UpdateAvailable {
+sub UpdateAvailable() {
 	print("Running iwlist\n");
 	open(my $LIST, "$IWList scan 2>/dev/null |") or die("Can't run iwlist");
 	@{$AvailableList->{data}} = ();
+     my ($mode, $wep, $signal);
+     local $_;
 	while (<$LIST>) {
 		if (/([^ ]+)([ \t]+)Scan completed :/) { $device = $1 }
 		elsif (/([^ ]+)([ \t]+)No scan results/) { $device = $1 }
 		if (/ESSID:"(\S*)"/) {
 			$essid = $1;
 			print("Found $essid.\n");
-			my $mode;
-			my $wep;
-			my $signal;
 		}
 		if (/Mode:(\S*)/) { $mode = $1 }
 		if (m!Quality:(\S*)/!) { $signal = $1 }
@@ -219,10 +220,11 @@ sub AddNet {
 	push @{$KnownList->{data}}, [ $essid, $mode, $channel, $key, $dhcp ];
 }
 
-sub ReadConfig {
+sub ReadConfig() {
 	open(my $CONFIG, $config) or die "Configuration file not found.\n";
 	print "Reading config file.\n\n";
-	$line = 0;
+	my $line = 0;
+     local $_;
 	while (<$CONFIG>) {
 		$line++;
                 if (/^#/) {} #ignore comments
@@ -250,9 +252,9 @@ sub ReadConfig {
 	close $CONFIG;
 }
 
-sub WriteConfig {
+sub WriteConfig() {
 	open(my $CONFIG, "> $config") or die("Can't open configuration file\n");
-	print $CONFIG "#wlandetect configuration file\n#format: essid<tab><tab>commands\n#use @DEV@ for device name\n";
+	print $CONFIG "#wlandetect configuration file\n#format: essid<tab><tab>commands\n#use \@DEV\@ for device name\n";
 	foreach my $row (@{$KnownList->{data}}) { # again, lame
 		print $CONFIG "$row->[0]\t\t$IWConfig essid $row->[0]";
 		if ($row->[1]) {
@@ -286,7 +288,7 @@ sub StopRoam {
 	&UpdateRoaming;
 }
 
-sub SetInterval {
+sub SetInterval() {
 	$ScanInterval = $ScanEntry->get_text;
 	system("killall wlandetect; $WLanDetect -d -t $ScanInterval &");
 }
@@ -305,12 +307,12 @@ sub ConnectNow {
 	}
 	push @command, "; ";
 	if ($KnownList->{data}[$row][4]) {
-		push @command, "$IFConfig $decive up; $DHClient $device";
+		push @command, "$IFConfig $device up; $DHClient $device";
 	}
 	else {
 		push @command, "$IFUp $device"
 	}
-	$ToBash = join("", @command);
+	my $ToBash = join("", @command);
 	print("Sending $ToBash\n");
 	system($ToBash);
 	&UpdateStatus;
@@ -323,14 +325,14 @@ sub Disconnect {
 
 sub Dialog {
 # read file
-$FilePointer = pop @_;
+my $FilePointer = pop @_;
 my $content = join('', cat_($FilePointer));
 # dump into a dialog
-$AboutWindow = Gtk2::Dialog->new("Drakroam Info", $MainWindow,
+my $AboutWindow = Gtk2::Dialog->new("Drakroam Info", $MainWindow,
                                     'destroy-with-parent',
                                     'gtk-ok' => 'none');
-$AboutLabel = Gtk2::Label->new($content);
-$DialogScroll = Gtk2::ScrolledWindow->new;
+my $AboutLabel = Gtk2::Label->new($content);
+my $DialogScroll = Gtk2::ScrolledWindow->new;
 #$DialogScroll->set_policy('automatic', 'automatic');
 $DialogScroll->add_with_viewport($AboutLabel);
 $AboutWindow->vbox->add($DialogScroll);
