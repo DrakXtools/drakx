@@ -339,11 +339,13 @@ int nfsmount_prepare(const char *spec, char **mount_opts)
 
 
 	/* Set default options.
-	 * rsize/wsize (and bsize, for ver >= 3) are left 0 in order to
-	 * let the kernel decide.
+	 * rsize/wsize are set to 8192 to enable nfs install on
+	 * old i586 machines
 	 * timeo is filled in after we know whether it'll be TCP or UDP. */
 	memset(&data, 0, sizeof(data));
-	data.retrans	= 3;
+	data.rsize	= 8192;
+	data.wsize	= 8192;
+	data.retrans	= 30;
 	data.acregmin	= 3;
 	data.acregmax	= 60;
 	data.acdirmin	= 30;
