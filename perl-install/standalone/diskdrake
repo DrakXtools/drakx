@@ -83,9 +83,8 @@ $all_hds->{current_fstab} = fs::fstab_to_string($all_hds, '');
 if ($type eq 'list-hd') {
     print partition_table::description($_), "\n" foreach fs::get::fstab($all_hds);    
 } elsif ($type eq 'change-geometry') {
-    $para =~ s|^/dev/||;
     my ($device, undef, $heads, $sectors) = $para =~ /(.+)=(\d+,)?(\d+),(\d+)$/ or die "usage: diskdrake --change-geometry=<device>=[<cylinders>,]<heads>,<sectors>\n";
-    my $hd = find { $_->{device} eq $device } @{$all_hds->{hds}};
+    my $hd = fs::get::device2part($device, $all_hds->{hds});
     put_in_hash($hd->{geom}, { heads => $heads, sectors => $sectors });
     $hd->{isDirty} = 1;
     partition_table::write($hd);
