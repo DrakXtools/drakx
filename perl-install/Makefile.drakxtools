@@ -36,6 +36,7 @@ install:
 	ln -s fileshareset $(SBINDEST)/filesharelist
 	mv -f $(SBINDEST)/lsnetdrake $(BINDEST)/lsnetdrake
 	mv -f $(SBINDEST)/drakbug $(BINDEST)/drakbug
+	mv -f $(SBINDEST)/drakhelp $(BINDEST)/drakhelp
 
 	install -m 644 *.pm $(LIBDEST)
 	for i in $(PMS_DIRS); do install -d $(LIBDEST)/$$i ; install -m 644 $$i/*.pm $(LIBDEST)/$$i/;done
