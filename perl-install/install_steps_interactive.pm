@@ -1146,7 +1146,12 @@ sub summary {
 
     $o->summary_prompt(\@l, $check_complete);
 
-    $o->cleanupPrinter;
+    if ($o->{printer}) {
+	#- Clean up $o->{printer} so that the records for an auto-installation
+	#- contain only the important stuff
+	require printer::printerdrake;
+	printer::printerdrake::final_cleanup($o->{printer});
+    }
     install_steps::configureTimezone($o) if !$timezone_manually_set;  #- do not forget it.
 }
 
