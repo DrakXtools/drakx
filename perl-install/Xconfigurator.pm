@@ -633,7 +633,7 @@ sub chooseResolutionsGtk($$;$) {
 			       ),
 		    0, gtkadd($W->create_okcancel,
 			      $::isEmbedded ?
-			      gtksignal_connect(new Gtk::Button(_("Expert Mode")), clicked => sub { system ("XFdrake --expert --testing"); }) :
+			      gtksignal_connect(new Gtk::Button(_("Expert Mode")), clicked => sub { system ("XFdrake --expert"); }) :
 			      gtksignal_connect(new Gtk::Button(_("Show all")), clicked => sub { $W->{retval} = 1; $chosen_w = 0; Gtk->main_quit })),
 		    ));
     $depth_combo->disable_activate;
@@ -644,9 +644,10 @@ sub chooseResolutionsGtk($$;$) {
         $chosen_depth = $txt2depth{untranslate($depth_combo->entry->get_text, keys %txt2depth)};
         my $w = $card->{depth}{$chosen_depth}[0][0];
         $chosen_w > $w and &$set($w2widget{$chosen_w = $w});
-	$pix_colors->set(gtkcreate_png("colors8.png")) if $chosen_depth >= 8;
-	$pix_colors->set(gtkcreate_png("colors16.png")) if $chosen_depth >= 15;
-	$pix_colors->set(gtkcreate_png("colors.png")) if $chosen_depth >=24;
+	$pix_colors->set(gtkcreate_png(
+               $chosen_depth >= 24 ? "colors.png" :
+	       $chosen_depth >= 15 ? "colors16.png" :
+	                             "colors8.png"));
     });
     if ($::isEmbedded) {
 	$w2_combo->disable_activate;
