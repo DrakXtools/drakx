@@ -483,6 +483,19 @@ user,exec,dev,suid )."),
     );
 }
 
+
+sub rationalize_options {
+    my ($part) = @_;
+
+    my ($options, $unknown) = mount_options_unpack($part);
+
+    if (!isThisFs('reiserfs', $part)) {
+	$options->{notail} = 0;
+    }
+
+    mount_options_pack($part, $options, $unknown);
+}
+
 sub set_default_options {
     my ($part, %opts) = @_;
     #- opts are: useSupermount security iocharset codepage
@@ -540,8 +553,6 @@ sub set_default_options {
     }
     if (isThisFs('reiserfs', $part)) {
 	$options->{notail} = 1;
-    } else {
-	$options->{notail} = 0;
     }
     if (isLoopback($part) && !isSwap($part)) { #- no need for loop option for swap files
 	$options->{loop} = 1;
@@ -561,6 +572,8 @@ sub set_default_options {
     }
 
     mount_options_pack($part, $options, $unknown);
+
+    rationalize_options($part);
 }
 
 sub set_all_default_options {

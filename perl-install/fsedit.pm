@@ -771,7 +771,8 @@ sub change_type {
     $part->{mntpoint} = '' if isRawLVM({ type => $type }) || isRawRAID({ type => $type });
     $part->{type} = $type;
     $part->{notFormatted} = 1;
-    $part->{isFormatted} = 0;    
+    $part->{isFormatted} = 0;
+    fs::rationalize_options($part);
 }
 
 sub rescuept($) {
