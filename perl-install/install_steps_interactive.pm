@@ -289,7 +289,9 @@ sub setupSCSI {
     if (!$::noauto && arch() =~ /i.86/) {
 	if ($o->{pcmcia} ||= !$::testing && c::pcmcia_probe()) {
 	    my $w = $o->wait_message(_("PCMCIA"), _("Configuring PCMCIA cards..."));
-	    modules::configure_pcmcia($o->{pcmcia});
+	    my $results = modules::configure_pcmcia($o->{pcmcia});
+	    $w = undef;
+	    $results and $o->ask_warn('', $results);
 	}
     }
     { 

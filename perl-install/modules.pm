@@ -807,6 +807,12 @@ sub configure_pcmcia {
     return if $running;
     $running = 1;
 
+    if (c::kernel_version() =~ /^2\.2/) {
+	my $msg = _("PCMCIA support no longer exist for 2.2 kernels. Please use a 2.4 kernel.");
+	log::l($msg);
+	return $msg;
+    }
+
     log::l("i try to configure pcmcia services");
 
     symlink "/tmp/stage2/$_", $_ foreach "/etc/pcmcia";
@@ -818,7 +824,7 @@ sub configure_pcmcia {
     };
 
     #- run cardmgr in foreground while it is configuring the card.
-    run_program::run("cardmgr-" . c::kernel_version(), "-f", "-m" ,"/modules");
+    run_program::run("cardmgr", "-f", "-m" ,"/modules");
     sleep(3);
     
     #- make sure to be aware of loaded module by cardmgr.

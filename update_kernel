@@ -82,7 +82,7 @@ NOT_USEFULL_IN_STAGE1="nls_*.o parport_probe.o raid*.o serial.o smbfs.o usb-*.o"
 
 GENERIC_MODULES="isa-pnp.o floppy.o"
 
-PCMCIA_COREMODULES="pcmcia_core.o tcic.o ds.o i82365.o"
+PCMCIA_COREMODULES="pcmcia_core.o tcic.o ds.o i82365.o yenta_socket.o"
 
 
 if [ "$ARCH" == "i386" ]; then
@@ -104,16 +104,6 @@ GIBASEDIR=`pwd`
 rm -rf all.modules ; mkdir all.modules
 for i in $ALL_KERNELS/*; do
 	kern=`basename $i`
-	[ -e $i/cardmgr ] && (
-	    cd $i/cardmgr
-	    touch main.c
-	    nm cardmgr.o | grep -q cardmgr_main && echo "int main(int argc, char **argv) { cardmgr_main(argc, argv); }" > main.c
-	    gcc -o cardmgr-$kern *.o main.c
-	)
-	[ -e $i/sbin/cardmgr ] && (
-	    mkdir $i/cardmgr
-	    cp -f $i/sbin/cardmgr $i/cardmgr/cardmgr-$kern
-        )
 	(
 	    mkdir all.modules/$kern
 	    cd all.modules/$kern
