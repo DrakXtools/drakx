@@ -31,17 +31,11 @@ use log;
 use bootloader;
 use fs;
 use ugtk2 qw(:helpers :wrappers :create);
-if ($::isEmbedded) {
-  print "EMBED\n";
-  print "XID : $::XID\n";
-  print "CCPID :  $::CCPID\n";
-}
 
 my $in = 'interactive'->vnew('su', 'default');
 
 my @winm;
-my @usernames;
-parse_etc_passwd();
+my @usernames = list_users();
 
 my $no_bootsplash;
 my $x_mode = Xconfig::various::runlevel() == 5;
@@ -364,15 +358,6 @@ Gtk2->exit(0);
 # get user names to put in combo  
 #-------------------------------------------------------------
 
-sub parse_etc_passwd {
-    my ($uname, $uid, @user_info);
-    setpwent();
-    do {
-	@user_info = getpwent();
-	($uname, $uid) = @user_info[0,2];
-	push @usernames, $uname if $uid > 500 and !($uname eq "nobody");
-    } while @user_info;
-}
 
 sub get_wm {
     @winm = split(' ', `/usr/sbin/chksession -l`);
