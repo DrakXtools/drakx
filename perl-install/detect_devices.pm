@@ -63,7 +63,15 @@ sub floppies() {
 sub floppy { first(floppies()) }
 #- example ls120, model = "LS-120 SLIM 02 UHD Floppy"
 
-sub isBurner { my $f = tryOpen($_[0]); $f && c::isBurner(fileno($f)) }
+sub isBurner { 
+    my ($dev) = @_;
+    if (my ($nb) = $dev =~ /scd(.*)/) {	
+	grep { /^(scd|sr)$nb:.*writer/ } syslog();
+    } else {
+	my $f = tryOpen($dev); 
+	$f && c::isBurner(fileno($f));
+    }
+}
 sub isZipDrive { $_[0]->{info} =~ /ZIP\s+\d+/ } #- accept ZIP 100, untested for bigger ZIP drive.
 #-sub isJazzDrive { $_[0]->{info} =~ /JAZZ?\s+/ } #- untested.
 sub isLS120Drive { $_[0]->{info} =~ /LS-?120|144MB/ }
