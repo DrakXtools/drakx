@@ -1,11 +1,17 @@
 #!/bin/bash
 
 ALL_KERNELS="all.kernels"
+RPMS=/export/Mandrake/RPMS
 
 # move stuff to this new "kernel" directory
 if [ ! -d all.kernels ]; then
+  if [ -d ../all.kernels ]; then
   mv ../all.kernels .
   rm -rf ../all.modules
+  else
+    # make sure "all.kernels" directory exists
+    mkdir all.kernels
+  fi
 fi
 
 function create_marfile() {
@@ -40,13 +46,23 @@ function create_modules_mar() {
 
 [ -e $ALL_KERNELS/.main ] && main=$(cat $ALL_KERNELS/.main)
 
-rpm=$(rpm -qpl /export/Mandrake/RPMS/kernel-BOOT-*.rpm | perl -lne 'm|/boot/vmlinuz-(.*)| and print $1')
+ARCH=`uname -m | sed -e 's/i.86/i386/' -e 's/sparc.*/sparc/'`
+
+if [ "$ARCH" == "ia64" ] || [ "$ARCH" == "ppc" ]; then
+	rpm=$(rpm -qp --qf '%{name}' $RPMS/kernel-[0-9]*.rpm | perl -pe 's/kernel-((\.?[0-9]+){3})\.(.*)/$1-${3}/')
+else 
+	rpm=$(rpm -qp --qf '%{name}' $RPMS/kernel-BOOT-*.rpm | perl -pe 's/kernel-BOOT-((\.?[0-9]+){3})\.(.*)/$1-${3}BOOT/')
+fi
 if [ -n "$rpm" -a ! -e $ALL_KERNELS/$rpm ]; then
     [ -n "$main" ] && rm -rf $ALL_KERNELS/$main
     cd $ALL_KERNELS
     rm -rf $rpm ; mkdir $rpm
     cd $rpm
-    rpm2cpio /export/Mandrake/RPMS/kernel-BOOT-*.rpm | cpio -id
+    if [ "$ARCH" == "ia64" ] || [ "$ARCH" == "ppc" ]; then
+      rpm2cpio $RPMS/kernel-[0-9]*.rpm | cpio -id
+    else
+      rpm2cpio $RPMS/kernel-BOOT-*.rpm | cpio -id
+    fi
     find -type f -name "*.o.gz" | xargs gunzip
     cd ../..
 
@@ -63,19 +79,18 @@ fi
     cd ..
 }
 
-ARCH=`uname -m | sed -e 's/i.86/i386/' -e 's/sparc.*/sparc/'`
 
 if [ "$ARCH" == "i386" ]; then
     for i in $ALL_KERNELS/*/boot/vmlinuz*; do
 	#disable any existing resolution!!!
 	/usr/sbin/rdev -v $i 65535 #788 #785 
     done
-else
-    if [ "$ARCH" == "ppc" ]; then
+elif [ "$ARCH" == "ppc" ]; then
         cp -f "$KERNEL_BOOT_PATH"/boot/vmlinux .
-    else
-        cp -f "$KERNEL_BOOT_PATH"/boot/vmlinux.gz .
-    fi
+elif [ "$ARCH" == "ia64" ]; then
+    cp -f "$KERNEL_BOOT_PATH"/boot/efi/vmlinuz* .
+else	
+    cp -f "$KERNEL_BOOT_PATH"/boot/vmlinuz* .
 fi
 
 
