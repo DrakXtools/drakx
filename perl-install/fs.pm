@@ -492,7 +492,7 @@ sub format_ext3 {
 sub format_reiserfs {
     my ($dev, @options) = @_;
     #TODO add -h tea
-    run_program::run("mkreiserfs", "-f", "-q", @options, devices::make($dev)) or die _("%s formatting of %s failed", "reiserfs", $dev);
+    run_program::run("mkreiserfs", "-ff", @options, devices::make($dev)) or die _("%s formatting of %s failed", "reiserfs", $dev);
 }
 sub format_xfs {
     my ($dev, @options) = @_;
