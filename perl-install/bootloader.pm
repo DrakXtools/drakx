@@ -583,7 +583,7 @@ sub install_silo($$$) {
 
 	$silo->{$_} and print F "$_=$silo->{$_}" foreach qw(partition root default append);
 	$silo->{$_} and print F $_ foreach qw(restricted);
-	#- print F "password=", $silo->{password} if $silo->{restricted} && $silo->{password}; #- done by msec
+	print F "password=", $silo->{password} if $silo->{restricted} && $silo->{password}; #- also done by msec
 	print F "timeout=", round(10 * $silo->{timeout}) if $silo->{timeout};
 	print F "message=$silo->{boot}/message" if $silo->{message};
 
@@ -661,7 +661,7 @@ sub write_lilo_conf {
 
 	$lilo->{$_} and print F "$_=$lilo->{$_}" foreach qw(boot map install vga default append keytable);
 	$lilo->{$_} and print F $_ foreach qw(linear lba32 compact prompt restricted);
-	#- print F "password=", $lilo->{password} if $lilo->{restricted} && $lilo->{password}; #- done by msec
+ 	print F "password=", $lilo->{password} if $lilo->{restricted} && $lilo->{password}; #- also done by msec
 	print F "timeout=", round(10 * $lilo->{timeout}) if $lilo->{timeout};
 
 	my $dev = $hds->[0]{device};
