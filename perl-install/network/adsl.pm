@@ -115,7 +115,9 @@ modprobe $bewan_module
 sleep 10
 ),
                   stop => qq(modprobe -r $bewan_module),
-                  pppd_options => "plugin pppoatm.so $netc->{vpi}." . hex($netc->{vci}),
+                  plugin => {
+                             pppoa => "pppoatm.so $netc->{vpi}." . hex($netc->{vci})
+                            },
                   ppp_options => qq(
 lock 
 ipparam ppp0 
@@ -138,9 +140,10 @@ sync
                    start => '/usr/sbin/modem_run -k -n 2 -f /usr/share/speedtouch/mgmt.o',
                    overide_script => 1,
                    server => {
-                              pppoa => '"/usr/sbin/pppoa3 -c"
-plugin pppoatm.so
-' . join('.', hex($netc->{vpi}), hex($netc->{vci})),
+                              pppoa => qq("/usr/sbin/pppoa3 -c")
+                             },
+                   plugin => {
+                              pppoa => "pppoatm.so " . join('.', hex($netc->{vpi}), hex($netc->{vci})),
                              },
                    ppp_options => qq(
 sync
@@ -243,6 +246,7 @@ defaultroute)
               );
         
 	my $pty_option = $modems{$adsl_device}{server}{$adsl_type} && "pty $modems{$adsl_device}{server}{$adsl_type}";
+	my $plugin = $modems{$adsl_device}{plugin}{$adsl_type} && "plugin $modems{$adsl_device}{plugin}{$adsl_type}";
 	output("$::prefix/etc/ppp/peers/ppp0",
 qq(noauth
 noipdefault
@@ -257,6 +261,7 @@ persist
 usepeerdns
 defaultroute
 $pty_option
+$plugin
 user "$adsl->{login}"
 ));
 
