@@ -7,6 +7,7 @@ use diagnostics;
 use standalone;     #- warning, standalone must be loaded very first, for 'explanations'
 use common;
 use interactive;
+use detect_devices;
 use harddrake::data;
 use harddrake::sound;
 use modules;
@@ -20,13 +21,13 @@ $last_boot_config .= '_X11' if $invert_do_it;
 
 modules::mergein_conf('/etc/modules.conf');
 
-# we need to check if graphic card is managed by nv|nivdia first:
-if (find { -e join('', "/lib/modules/", c::kernel_version(), "/kernel/drivers/$_") }  map { ("video/$_", "char/$_") } qw(NVdriver nvidia.o nvidia.o.gz nvidia.ko nvidia.ko.gz)) {
-	substInFile { s!Driver "nv.*"!Driver "nvidia"!g; s!#*( Load.*glx)!\1!g } $_ foreach "/etc/X11/XF86Config-4", "/etc/X11/XF86Config";
-} else {
-	substInFile { s!Driver "nv.*"!Driver "nv"!g;s!([^#]Load.*glx)!#\1!g } $_ foreach "/etc/X11/XF86Config-4", "/etc/X11/XF86Config";
+if (find { $_->{driver} =~ /Card:NVIDIA/ } detect_devices::probexall()) {
+    if (find { -e join('', "/lib/modules/", c::kernel_version(), "/kernel/drivers/$_") }  map { ("video/$_", "char/$_") } qw(NVdriver nvidia.o nvidia.o.gz nvidia.ko nvidia.ko.gz)) {
+        substInFile { s!Driver "nv.*"!Driver "nvidia"!g; s!#*( Load.*glx)!\1!g } $_ foreach "/etc/X11/XF86Config-4", "/etc/X11/XF86Config";
+    } else {
+        substInFile { s!Driver "nv.*"!Driver "nv"!g;s!([^#]Load.*glx)!#\1!g } $_ foreach "/etc/X11/XF86Config-4", "/etc/X11/XF86Config";
+    }
 }
-
 
 # first run ? if not read old hw config
 my $previous_config = -f $last_boot_config && -s $last_boot_config ? Storable::retrieve($last_boot_config) : {};
