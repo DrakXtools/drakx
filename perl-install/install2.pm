@@ -238,6 +238,7 @@ sub choosePackages {
     $o->setPackages;
 
     $o->choosePackages($o->{packages}, $o->{compss}, $o->{compssUsers}, $_[1] == 1);
+    log::l("compssUsersChoice's: ", join(" ", grep { $o->{compssUsersChoice}{$_} } keys %{$o->{compssUsersChoice}}));
 
     #- check pre-condition where base backage has to be selected.
     pkgs::packageFlagSelected(pkgs::packageByName($o->{packages}, 'basesystem')) or die "basesystem package not selected";
