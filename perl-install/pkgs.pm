@@ -1039,8 +1039,8 @@ sub install($$$;$$) {
 		my @allpids = grep { /^\d+$/ } all("/proc");
 		my %ppids;
 		foreach (@allpids) {
-		    cat_("/proc/$_/status") =~ /^PPid:\s+(\d+)/m;
-		    push @{$ppids{$1 || 1}}, $_;
+		    push @{$ppids{$1 || 1}}, $_
+		      if cat_("/proc/$_/status") =~ /^PPid:\s+(\d+)/m;
 		}
 		my @killpid = difference2(\@allpids, [ @prev_pids, 
 						       difference2([ $$, hashtree2list(getppid(), \%ppids) ],

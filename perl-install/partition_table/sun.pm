@@ -66,7 +66,7 @@ sub compute_crc($) {
     my @l2b = unpack "n256", $tmp;
     my $crc = 0;
 
-    map { $crc ^= $_ } @l2b;
+    $crc ^= $_ foreach @l2b;
 
     $crc;
 }

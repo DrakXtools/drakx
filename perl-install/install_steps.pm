@@ -99,8 +99,7 @@ sub selectLanguage {
     $o->{locale}{langs} ||= { $o->{locale}{lang} => 1 };
 
     if (!exists $o->{locale}{country}) {
-	lang::l2locale($o->{locale}{lang}) =~ /^.._(..)/;
-	$o->{locale}{country} = $1;
+	$o->{locale}{country} = $1 if lang::l2locale($o->{locale}{lang}) =~ /^.._(..)/;
     }
 
     lang::langs_selected($o->{locale});

@@ -28,7 +28,7 @@ my $signature_format_v1 = "x1024 I I I I125"; #- bootbits, version, last_page, n
 1;
 
 sub kernel_greater_or_equal($$$) {
-    c::kernel_version() =~ /(\d*)\.(\d*)\.(\d*)/;
+    c::kernel_version() =~ /(\d*)\.(\d*)\.(\d*)/ or return;
     ($1 <=> $_[0] || $2 <=> $_[1] || $3 <=> $_[2]) >= 0;
 }
 

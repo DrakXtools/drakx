@@ -1027,7 +1027,7 @@ sub during_install__l2charset {
 }
 
 sub get_unneeded_png_lang_files() {
-    print join(' ', map { m|(langs/lang-(.*)\.png)|; if_(!member($2, list_langs()), $1) } glob("pixmaps/langs/lang-*.png"));
+    print join(' ', map { if_(m|(langs/lang-(.*)\.png)| && !member($2, list_langs()), $1) } glob("pixmaps/langs/lang-*.png"));
 }
 
 sub check() {

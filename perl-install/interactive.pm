@@ -107,7 +107,7 @@ sub vnew {
 
     require 'log.pm'; #- "require log" causes some pb, perl thinking that "log" is the log() function
     undef *log::l;
-    *log::l = sub() {}; # otherwise, it will bother us :(
+    *log::l = sub {}; # otherwise, it will bother us :(
     require interactive::newt;
     interactive::newt->new;
 }

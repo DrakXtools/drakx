@@ -161,11 +161,11 @@ user "$adsl->{login}"
     }
 
     if ($adsl_type eq 'speedtouch') {
-	$netc->{vpivci} =~ /(\d+)_(\d+)/;
+	my ($vpi, $vci) = $netc->{vpivci} =~ /(\d+)_(\d+)/ or return;
 	output("$prefix/etc/ppp/peers/adsl", 
 qq(noauth
 noipdefault
-pty "/usr/sbin/pppoa3 -c -vpi $1 -vci $2"
+pty "/usr/sbin/pppoa3 -c -vpi $vpi -vci $vci"
 sync
 kdebug 1
 noaccomp
@@ -195,13 +195,13 @@ and copy the mgmt.o in /usr/share/speedtouch"));
     }
 
     if ($adsl_type eq 'eci') {
-	$netc->{vpivci} =~ /(\d+)_(\d+)/;
+	my ($vpi, $vci) = $netc->{vpivci} =~ /(\d+)_(\d+)/ or return;
 	output("$prefix/etc/ppp/peers/adsl", 
 qq(debug
 kdebug 1
 noipdefault
 defaultroute
-pty "/usr/bin/pppoeci -v 1 -vpi $1 -vci $2"
+pty "/usr/bin/pppoeci -v 1 -vpi $vpi -vci $vci"
 sync
 noaccomp
 nopcomp

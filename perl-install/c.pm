@@ -6,7 +6,7 @@ use c::stuff;
 use MDK::Common;
 
 sub AUTOLOAD() {
-    $AUTOLOAD =~ /::(.*)/;
+    $AUTOLOAD =~ /::(.*)/ or return;
     my @l = eval { &{$c::stuff::{$1}} };
     if (my $err = $@) {
 	$err =~ /Undefined subroutine &main::/ ?

@@ -29,7 +29,7 @@ sub getFile {
 
     #- skip until empty line
     my ($now, $last, $buf, $tmp) = 0;
-    my $read = sub { sysread($sock, $buf, 1) || die; $tmp .= $buf };
+    my $read = sub { sysread($sock, $buf, 1) or die ''; $tmp .= $buf };
     do {
 	$last = $now;
 	&$read; &$read if $buf =~ /\015/;

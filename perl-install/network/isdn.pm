@@ -159,8 +159,7 @@ sub isdn_read_config {
 	$isdn->{driver} = $c->{ippp0}{alias};
 	#- 'type' 'protocol' 'mem' 'io' 'io0' 'io1' 'irq'  'id'
 	foreach (split(' ', $c->{$isdn->{driver}}{options})) {
-	    /(.*)=(.*)/;
-	    $isdn->{$1} = $2;
+	    $isdn->{$1} = $2 if /(.*)=(.*)/;
 	}
 	foreach my $f ('ioptions1B', 'ioptions2B') {
 	    foreach (cat_("$prefix/etc/ppp/$f")) {

@@ -343,9 +343,9 @@ sub main {
 #-    c::unlimit_core() unless $::testing;
 
     my ($cfg, $patch, @auto);
-    my %cmdline; map { 
+    my %cmdline = map { 
 	my ($n, $v) = split '=';
-	$cmdline{$n} = $v || 1;
+	$n => $v || 1;
     } split ' ', cat_("/proc/cmdline");
 
     my $opt; foreach (@_) {

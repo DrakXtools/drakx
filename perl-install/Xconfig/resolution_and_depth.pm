@@ -104,7 +104,7 @@ sub allowed {
 	push @resolution_and_depth,
 	  map {
 	      my $Depth = $_;
-	      map { m/(\d+)x(\d+)/; { X => $1, Y => $2, Depth => $Depth } } @resolutions;
+	      map { m/(\d+)x(\d+)/ && { X => $1, Y => $2, Depth => $Depth } } @resolutions;
 	  } @depths;
     }
     $prefered_depth, @resolution_and_depth;
@@ -293,8 +293,7 @@ sub choose_gtk {
     $x_res_combo->set_popdown_strings(uniq map { "$_->{X}x$_->{Y}" } sort { $a->{X} <=> $b->{X} } @resolutions);
     $x_res_combo->entry->signal_connect(changed => sub {
 	$x_res_combo->entry->get_text eq '' and return;  #- FIXME temporarily workaround gtk suckiness (set_text generates two 'change' signals, one when removing the whole, one for inserting the replacement..)
-	$x_res_combo->entry->get_text =~ /(\d+)x(\d+)/;
-	$set_chosen_x_res->($1, $2);
+	$set_chosen_x_res->($1, $2) if $x_res_combo->entry->get_text =~ /(\d+)x(\d+)/;
 	
 	if (!member($chosen_Depth, @{$x_res2depth{$chosen_x_res}})) {
 	    $set_chosen_Depth->(max(@{$x_res2depth{$chosen_x_res}}));
