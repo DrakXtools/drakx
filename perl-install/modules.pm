@@ -740,10 +740,12 @@ sub get_that_type {
 
     grep {
 	if ($type eq 'isdn') {
-	    my $b = $_->{driver} =~ /ISDN:([^,]*),?(.*)/;
+	    my $b = $_->{driver} =~ /ISDN:([^,]*),?([^,]*),?(.*)/;
 	    if ($b) {
 		$_->{driver} = $1;
 		$_->{options} = $2;
+		$_->{firmware} = $3;
+		$_->{driver} eq "hisax" and $_->{options} .= " id=HiSax";
 	    }
 	    $b;
 	} else {
