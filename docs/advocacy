@@ -1,0 +1,87 @@
+a little DrakX history:
+
+june 1999: 
+  i start rewriting redhat's install in perl, partly for the fun of it. I'm
+  still working for the army
+
+5 july 1999: 
+  i start full time job at mandrakesoft. But we don't have many computers and i
+  must share the accounting computer with Merieme who is working half-time. No
+  test machine (i test on others box, and destroyed Jacques partitions once),
+  guess how it slows things down?
+
+august 1999: 
+  at last computers, even test one
+  first DrakX version which can install things, very very rough
+
+september 1999: 
+  a friend of mine help me 2 weeks on DrakX relayed by Francois
+
+november 1999:
+  first released version of DrakX (goldpack). Not really stable yet.
+
+january 2000:
+  7.0 is out, with a DrakX quite stable
+
+july 2000: 
+  dams starts working on draknet
+
+mid-october -> mid-january 2000: 
+  gc rewrites the stage1 to win every kb we can 
+  -> size divided by 7 (!) for cdrom
+
+
+The DrakX team is also doing a lot of other things:
+- drakxtools
+- urpmi, early MandrakeUpdate, early rpmdrake...
+- Mandrake Control Center (new DrakConf)
+- packages maintenance/enhancing (esp. ghostscript, 3D-wrappers, lilo)
+- fixing core packages to make them installable
+- scoring packages, sorting them, flagging them... (compssList, rpmsrate)
+- reading/answering cooker and other MLs
+- helping non-perl gurus :)
+
+That doesn't give much. Me being the one more working on plain DrakX. It gives 2
+people working for 1.5 years. IMO it isn't ``spending an enormous amount of
+resources''.
+And what do you mean by ``compared to the code base size''??? DrakX is currently
+around 28K lines, which is big IMO. You can compare it with linuxconf which is
+170K lines. I think the achievement of DrakX is comparable (a 6 times code size
+win from dumb C++ to expressive perl is normal imo).
+
+
+Also it seems like we don't have the same understanding of the word
+"maintenance".
+DrakX functionalities have evolved *a lot* since the beginning:
+
+- hardware detection, configuration, debugging, work-arounding (multi-kernel installs...)
+- making things prettier
+  - more bitmaps
+  - "advanced" button
+  - syslinux graphical boot
+- making it work with latest versions of software (eg: switching to rpm4)
+- finding out the best way to use rpmlib
+- multi-cd
+- draknet: configuring every piece of stupid protocols
+- diskdrake: raid, loopback, LVM, resizing, checking stupid users entry
+- XFdrake: multi-mice, multi-heads, 3D-accel
+- porting to axp/sparc/ppc (with Stew's help)
+- always more i18n
+- keeping things small
+  - .cz format
+  - moving to .png
+  - getFile on demand from mdkinst for ramdisk installs
+
+[...]
+
+> You don't believe the books ? Count yourself; see the man/months spent
+> in 'pure' developoment in drakX, and the resources put in mantainance
+> of the code base; as far as i know, your count should confirm what the
+> books says; more probabily, you will discover that our numbers are
+> even worse.
+
+if you count enhancements, adding features... in maintenance, i confirm the
+numbers, and find them quite normal.
+
+if you only count bug fixing, the time would be much shorter (around 30%).
+
