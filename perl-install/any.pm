@@ -253,7 +253,14 @@ sub pack_passwd {
     join(':', @$l{@etc_pass_fields}) . "\n";
 }
 
-sub setAutologin {
+sub get_autologin {
+    my ($prefix, $o) = @_;
+    my %l = getVarsFromSh("$prefix/etc/sysconfig/autologin");
+    $o->{autologin} ||= $l{USER};
+    $o->{desktop} ||= map { chomp; $_ } cat_("$prefix/etc/sysconfig/desktop");
+}
+
+sub set_autologin {
   my ($prefix, $user, $desktop) = @_;
 
   output "$prefix/etc/sysconfig/desktop", uc($desktop), "\n" if $user;
@@ -658,25 +665,21 @@ sub ask_users {
     }
 }
 
-#sub autologin {
-#    my ($prefix, $o, $in, $install) = @_;
-#
-#    my $cmd = $prefix ? "chroot $prefix" : "";
-#    my @wm = (split (' ', `$cmd /usr/sbin/chksession -l`));
-#
-#    if (@wm && @users && !$o->{authentication}{NIS} && $ENV{SECURE_LEVEL} <= 3) {
-#	 my %l = getVarsFromSh("$prefix/etc/sysconfig/autologin");
-#	 $o->{autologin} ||= $l{USER};
-#	 $in->ask_from_entries_refH(_("Autologin"),
-#				    _("I can set up your computer to automatically log on one user.
-#If you don't want to use this feature, click on the cancel button."),
-#				    [ { label => _("Choose the default user:"), val => \$o->{autologin}, list => [ '', @users ] },
-#				      { label => _("Choose the window manager to run:"), val => \$o->{desktop}, list => \@wm }, ]) or delete $o->{autologin};
-#    }
-#
-#    $o->{autologin} and $install->("autologin");
-#    setAutologin($prefix, $o->{autologin}, $o->{desktop});
-#}
+sub autologin {
+    my ($prefix, $o, $in, $install) = @_;
+
+    my $cmd = $prefix ? "chroot $prefix" : "";
+    my @wm = (split (' ', `$cmd /usr/sbin/chksession -l`));
+    my @users;
+
+    if (@wm && @users && !$o->{authentication}{NIS} && $ENV{SECURE_LEVEL} <= 3) {
+	 $in->ask_from_entries_refH(_("Autologin"),
+				    _("I can set up your computer to automatically log on one user.
+If you don't want to use this feature, click on the cancel button."),
+				    [ { label => _("Choose the default user:"), val => \$o->{autologin}, list => [ '', @users ] },
+				      { label => _("Choose the window manager to run:"), val => \$o->{desktop}, list => \@wm }, ]) or delete $o->{autologin};
+    }
+}
 
 sub write_passwd_user {
     my ($prefix, $u, $isMD5) = @_;
