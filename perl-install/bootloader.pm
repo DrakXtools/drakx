@@ -752,9 +752,9 @@ sub install_grub {
 	  join '', map { "($_) /dev/$bios2dev{$_}\n" } sort keys %bios2dev;
     }
     my $bootIsReiser = isReiserfs(fsedit::get_root($fstab, 'boot'));
-    my $file2grub = sub {	
-	#- FUCK TO THE GUY WHICH DOESN'T DO perl -cw bootloader.pm #my ($part, $file) = fsedit::file2part($prefix, $fstab, $file);
-	#- FUCK TO THE GUY WHICH DOESN'T DO perl -cw bootloader.pm #dev2grub($part->{device}, \%dev2bios) . $file;
+    my $file2grub = sub {
+	my ($part, $file) = fsedit::file2part($prefix, $fstab, $_[0]);
+	dev2grub($part->{device}, \%dev2bios) . $file;
     };
     {
 	local *F;
