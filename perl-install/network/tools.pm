@@ -161,10 +161,9 @@ sub detect_timezone() {
 
 sub connected() { gethostbyname("mandrakesoft.com") ? 1 : 0 }
 
-my $kid_pipe;
 # request a ref on a bg_connect and a ref on a scalar
 sub connected_bg__raw {
-    my ($kid, $status) = @_;
+    my ($kid_pipe, $status) = @_;
     local $| = 1;
     if (ref($kid_pipe) && ref($$kid_pipe)) {
 	my $fd = $$kid_pipe->{fd};
@@ -174,6 +173,7 @@ sub connected_bg__raw {
     } else { $$kid_pipe = check_link_beat() }
 }
 
+my $kid_pipe;
 sub connected_bg {
     my ($status) = @_;
     connected_bg__raw(\$kid_pipe, $status);
