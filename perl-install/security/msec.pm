@@ -273,7 +273,8 @@ sub choose_checks {
             ("You can customize the following security checks. For more information, see the mseclib manual page."),
             [
             { val => _("Basic Options"), type => 'button', clicked_may_quit => sub { $$signal = 0; print ""; } },
-            { val => _("Security Checks"), type => 'button', clicked_may_quit => sub {$$signal = 2; print ""; } },
+            { val => _("Advanced Options"), type => 'button', clicked_may_quit => sub { $$signal = 1; print ""; } },
+#	    { val => _("Firewall Configuration"), type => 'button', clicked_may_quit => sub { $$signal = 3; print ""; } },
             @display
             ],
     );
