@@ -171,7 +171,7 @@ sub write_interface_conf {
     add2hash($intf, {
 		     BROADCAST => join('.', mapn { int($_[0]) | ((~int($_[1])) & 255) } \@ip, \@mask),
 		     NETWORK   => join('.', mapn { int($_[0]) &        $_[1]          } \@ip, \@mask),
-		     ONBOOT => bool2yesno(!member($intf->{DEVICE}, map { $_->{device} } detect_devices::probeall())),
+		     ONBOOT => bool2yesno(!member($intf->{DEVICE}, map { $_->{device} } detect_devices::pcmcia_probe())),
 		    });
 
     $intf->{BOOTPROTO} =~ s/dhcp.*/dhcp/;
