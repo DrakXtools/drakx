@@ -511,14 +511,12 @@ such as ``mybox.mylab.myco.com''."),
     }
     install_steps::configureNetwork($o);
 
-    #- added ppp configuration after ethernet one.
-    if (!$::beginner && $o->ask_yesorno([ _("Modem Configuration") ],
-			_("Do you want to configure a dialup connection with modem for your system?"), 0)) {
-	$o->pppConfig;
+    #- added internet configuration after ethernet one.
+    if ($o->ask_yesorno([ _("Internet Configuration") ],
+					_("Do you want to configure an internet connection ?"), 0)) {
+	$o->{netcnx} ||= {};
+      netconnect::intro($o->{prefix}, $o->{netcnx}, $o, bool($o->{pcmcia})); #-dam's
     }
-    #- (dam's)
-    $o->{netcnx} ||= {};
-    netconnect::intro($o->{prefix}, $o->{netcnx}, $o, bool($o->{pcmcia}));
 }
 
 sub configureNetworkIntf {
