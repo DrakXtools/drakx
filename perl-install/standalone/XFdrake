@@ -61,12 +61,24 @@ Xconfig::getinfoFromXF86Config($i); #- take default from here at least.
 
 my $allowNVIDIA_rpms;
 my (%list, %select);
-local *F;
-open F, "/var/lib/urpmi/depslist.ordered";
-while (<F>) {
-    /(.*NVIDIA.*)-([^-]*)-([^-]*)\s+/ and $list{$1} = 1;
-}
-close F;
+#- local *F;
+#- open F, "/var/lib/urpmi/depslist.ordered";
+#- while (<F>) {
+#-     /(.*NVIDIA.*)-([^-]*)-([^-]*)\s+/ and $list{$1} = 1;
+#- }
+#- close F;
+#-   now replaced by the following code using directly urpm library.
+eval {
+    require urpm;
+    my $urpm = new urpm;
+    $urpm->read_config(nocheck_access => 1);
+    foreach (grep { !$_->{ignore} } @{$urpm->{media} || []}) {
+	$urpm->parse_synthesis($_);
+    }
+    foreach (@{$urpm->{params}{depslist} || []}) {
+	$_->{name} =~ /NVIDIA/ and $list->{$_->{name}} = 1;
+    }
+};
 if ($list{NVIDIA_GLX}) {
     eval {
 	my ($version, $release, $ext) = `uname -r` =~ /([^-]*)-([^-]*mdk)(\S*)/;
