@@ -254,13 +254,13 @@ sub configureNetwork {
 
   configureNetwork_step_1:
     my $n_card=0;
+    $netc ||= {};
     my $last; foreach (@l) {
 	my $intf2 = findIntf($intf ||= {}, $_);
 	add2hash($intf2, $last);
 	add2hash($intf2, { NETMASK => '255.255.255.0' });
 	configureNetworkIntf($netc, $in, $intf2, $netc->{NET_DEVICE}, 0, $all_cards[$n_card]->[1]) or return;
 
-	$netc ||= {};
 	$last = $intf2;
 	$n_card++;
     }
