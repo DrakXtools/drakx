@@ -1,3 +1,41 @@
+2003/02/17  Pixel  <pixel@mandrakesoft.com>
+
+	* ugtk2.pm: fix pop_it...
+	hopefully final fix for pop_it
+
+	* interactive/gtk.pm: also ->hide in when a button is clicked in
+	standalone
+
+	* any.pm: add a checkbox "Force ACPI"
+
+	* install_steps_interactive.pm: ensure $o->{raw_X} is not destroyed when
+	there is no modification done
+	(since in that case
+	Xconfig::main::configure_everything_or_configure_chooser() returns
+	undef)
+
+	* install2.pm: don't security::various::config_security_user() can fail,
+	don't let it bother us
+
+	* install_steps.pm: propagate /proc/cmdline acpi=xxx
+	have acpi=off by default
+
+	* Xconfig/xfree3.pm (is_fbdev): fix typo
+
+	* Xconfig/xfree.pm (get_both): fix typo
+
+	* Xconfig/resolution_and_depth.pm (to_string): simpler way to handle the
+	"default" resolution of frame-buffer
+
+2003/02/17  Till Kamppeter  <till@mandrakesoft.com>
+
+	* drakxtools.spec: 9.1-0.34mdk
+
+	* printer/main.pm: 
+	  - Fixed bug of HP DeskJetb 990C being automatically installed even if
+	there is already a queue for it
+	  - Fixed checking whether a device is known to CUPS
+
 2003/02/17  Pablo Saratxaga  <pablo@mandrakesoft.com>
 
 	* share/po/nl.po, share/po/da.po, share/po/ta.po, share/po/sv.po,
@@ -10868,7 +10906,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.783 2003/02/16 21:40:59 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.784 2003/02/17 13:43:28 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
