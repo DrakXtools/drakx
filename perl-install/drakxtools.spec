@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 9.2
-Release: 3mdk
+Release: 4mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -314,6 +314,19 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Wed Aug 27 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.2-4mdk
+- drakconnect:
+  o non wizard gui
+    * fix hostname setting
+    * set hostname at the same time we apply dns changes (on apply
+      button press)
+  o both wizard and non wizard modes: (poulpy)
+    * fix #4363
+    * fix speedtouch firmware file name
+- drakhelp: add support for contextual help
+- drakxtv: resync with kernel's bttv
+- printerdrake: misc fixes (till)
+
 * Tue Aug 26 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.2-3mdk
 - drakconnect (non wizard gui):
   o add --skip-wizard option to get into non wizard mode
