@@ -340,9 +340,9 @@ sub create_notebook {
 sub create_packtable {
     my ($options, @l) = @_;
     my $w = new Gtk::Table(0, 0, $options->{homogeneous} || 0);
-    map_index {
+    each_index {
 	my ($i, $l) = ($_[0], $_);
-	map_index {
+	each_index {
 	    my ($j) = @_;
 	    if ($_) {
 		ref $_ or $_ = new Gtk::Label($_);

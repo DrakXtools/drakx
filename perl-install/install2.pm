@@ -510,7 +510,7 @@ sub main {
 
     eval { modules::load("af_packet") };
 
-    map_index {
+    each_index {
 	modules::add_alias("sound-slot-$::i", $_->{driver});
     } modules::probe_category('multimedia/sound');
 

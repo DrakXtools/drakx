@@ -115,7 +115,7 @@ chunk-size    $_->{'chunk-size'}
 persistent-superblock 1
 EOF
 	print F "nr-raid-disks ", int @{$_->{disks}};
-	map_index {	    
+	each_index {	    
 	    print F "    device    ", devices::make($_->{device});
 	    print F "    raid-disk $::i";
 	} @{$_->{disks}};

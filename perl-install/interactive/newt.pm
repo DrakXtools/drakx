@@ -139,7 +139,7 @@ sub ask_fromW_real {
 	    $get = sub { $w->ListboxGetCurrent };
 	    $set = sub {
 		my ($val) = @_;
-		map_index {
+		each_index {
 		    $w->ListboxSetCurrent($::i) if $val eq $_;
 		} @{$e->{list}};
 	    };
@@ -163,7 +163,7 @@ sub ask_fromW_real {
     $set_all->();
 
     my $grid = Newt::Grid::CreateGrid(3, max(1, int @$l));
-    map_index {
+    each_index {
 	$grid->GridSetField(0, $::i, 1, ${Newt::Component::Label(-1, -1, $_->{e}{label})}, 0, 0, 1, 0, 1, 0);
 	$grid->GridSetField(1, $::i, 1, ${$_->{real_w}}, 0, 0, 0, 0, 1, 0);
     } @widgets;

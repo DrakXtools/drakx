@@ -940,7 +940,7 @@ sub write_grub_config {
 	    output "$::prefix$once", " " x 100;
 	}
 
-	map_index {
+	each_index {
 	    print F "default $::i" if $_->{label} eq $lilo->{default};
 	} @{$lilo->{entries}};
 

@@ -117,7 +117,7 @@ ask_fromW_begin:
     $common->{title} and print "$common->{title}\n";
     print map { "$_\n" } @{$common->{messages}};
 
-    $predo_widget->($_) foreach (@$l);
+    $predo_widget->($_) foreach @$l;
     if (listlength(@$l) > 30) {
 	my $ll = listlength(@$l);
 	print _("=> There are many things to choose from (%s).\n", $ll);
@@ -128,15 +128,15 @@ or just hit Enter to proceed.
 Your choice? ");
 	my $i = readln();
 	if (check_it($i, $ll)) {
-	    map_index { $do_widget->($_, $::i) } grep_index { $::i >= $i-1 && $::i < $i+9 } @$l;
+	    each_index { $do_widget->($_, $::i) } grep_index { $::i >= $i-1 && $::i < $i+9 } @$l;
 	    goto ask_fromW_handle_verylonglist;
 	}
     } else {
-	map_index { $do_widget->($_, $::i) } @$l;
+	each_index { $do_widget->($_, $::i) } @$l;
     }
 
     my $lab;
-    map_index { $labels[$::i] && (($lab = $format_label->($_)) ne $labels[$::i]) and print _("=> Notice, a label changed:\n%s", $lab) }
+    each_index { $labels[$::i] && (($lab = $format_label->($_)) ne $labels[$::i]) and print _("=> Notice, a label changed:\n%s", $lab) }
       grep { $_->{type} eq 'label' } @$l;
 
     my $i;

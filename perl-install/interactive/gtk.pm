@@ -283,7 +283,7 @@ sub create_list {
 
     my $tips = new Gtk::Tooltips;
     my $toselect;
-    map_index {
+    each_index {
 	my $item = new Gtk::ListItem(may_apply($e->{format}, $_));
 	$item->signal_connect(key_press_event => sub {
     	    my ($w, $event) = @_;

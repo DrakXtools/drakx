@@ -68,7 +68,7 @@ sub ask_fromW {
 
     print "<table>\n";
 
-    map_index {
+    each_index {
 	my $e = $_;
 
 	print "<tr><td>$e->{label}</td><td>\n";
@@ -120,7 +120,7 @@ sub ask_fromW {
 	print $q->h1(_("Error")), $q->p("Sorry, you can't go back");
 	goto redisplay;
     }
-    map_index {
+    each_index {
 	my $e = $_;
 	my $v = $q->param("w$::i");
 	if ($e->{type} eq 'bool') {
