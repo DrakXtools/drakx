@@ -25,12 +25,21 @@ sub read_conf {
     +{ getVarsFromSh($file) };
 }
 
+
+sub read_resolv_conf_raw {
+    my ($file) = @_;
+    $file ||= "$::prefix/etc/resolv.conf";
+    { nameserver => [ cat_($file) =~ /^\s*nameserver\s+(\S+)/mg ],
+      search => [ cat_($file) =~ /^\s*search\s+(\S+)/mg ] };
+}
+
 sub read_resolv_conf {
     my ($file) = @_;
-    my @l = map { if_(/^\s*nameserver\s+(\S+)/, $1) } cat_($file);
-
-    my %netc = mapn { $_[0] => $_[1] } [ qw(dnsServer dnsServer2 dnsServer3) ], \@l;
-    \%netc;
+    my $resolv_conf = read_resolv_conf_raw($file);
+    +{
+      (mapn { $_[0] => $_[1] } [ qw(dnsServer dnsServer2 dnsServer3) ], $resolv_conf->{nameserver}),
+      (mapn { $_[0] => $_[1] } [ qw(DOMAINNAME DOMAINNAME2 DOMAINNAME3) ], $resolv_conf->{search}),
+     };
 }
 
 sub read_interface_conf {
@@ -74,8 +83,8 @@ sub write_conf {
     my ($file, $netc) = @_;
 
     if ($netc->{HOSTNAME}) {
-	$netc->{HOSTNAME} =~ /\.(.*)$/;
-	$1 and $netc->{DOMAINNAME} = $1;
+	$netc->{HOSTNAME} =~ /\.(.+)$/;
+	$netc->{DOMAINNAME} = $1;
     }
     ($netc->{DOMAINNAME}) ||= 'localdomain';
     add2hash($netc, {
@@ -84,7 +93,7 @@ sub write_conf {
 		     if_(!$netc->{DHCP}, HOSTNAME => "localhost.$netc->{DOMAINNAME}"),
 		    });
 
-    setVarsInSh($file, $netc, if_(!$netc->{DHCP}, 'HOSTNAME'), qw(NETWORKING FORWARD_IPV4 DOMAINNAME GATEWAY GATEWAYDEV NISDOMAIN));
+    setVarsInSh($file, $netc, if_(!$netc->{DHCP}, 'HOSTNAME'), qw(NETWORKING FORWARD_IPV4 GATEWAY GATEWAYDEV NISDOMAIN));
 }
 
 sub write_zeroconf {
@@ -451,7 +460,7 @@ sub read_all_conf {
     my ($prefix, $netc, $intf) = @_;
     $netc ||= {}; $intf ||= {};
     add2hash($netc, read_conf("$prefix/etc/sysconfig/network")) if -r "$prefix/etc/sysconfig/network";
-    add2hash($netc, read_resolv_conf("$prefix/etc/resolv.conf")) if -r "$prefix/etc/resolv.conf";
+    add2hash($netc, read_resolv_conf());
     add2hash($netc, read_tmdns_conf("$prefix/etc/tmdns.conf")) if -r "$prefix/etc/tmdns.conf";
     foreach (all("$prefix/etc/sysconfig/network-scripts")) {
 	if (/ifcfg-(\w+)/ && $1 ne 'lo') {
