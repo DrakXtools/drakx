@@ -203,7 +203,7 @@ sub update_app {
     $ENV{PATH} = "/sbin:/usr/sbin:$ENV{PATH}";
     if (member($text,@all_drakxtools) || $text eq N("Standalone Tools")) {
 	$app_choice = chomp_(`rpm -q drakxtools`);
-    } elsif (member($text, keys %$mdk_app) && $text ne N("Standalone Tools")) {	
+    } elsif (exists($mdk_app->{$text}) && $text ne N("Standalone Tools")) {	
 	$app_choice = get_package($mdk_app->{$text});
     } else {
 	LOOP: while (my ($key, $value) = each %$mdk_app) {
