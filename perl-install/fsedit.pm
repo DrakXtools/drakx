@@ -144,7 +144,7 @@ sub hds {
 	    my $chunks = $mdstat[$i+1] =~ /([^ ]+) chunks/ ? $1 : "64k";
 	    my @disks;
 	    foreach my $part (@parts) {
-		if (grep /$part->{device}/, @thisparts) {
+		if (grep { readlink("/dev/$part->{device}") eq $_ || $part->{device} eq $_ } @thisparts) {
 		    $part->{raid} = $nb;
 		    delete $part->{mntpoint};
 		    push @disks, $part;
