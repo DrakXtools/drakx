@@ -804,138 +804,6 @@ failures. Would you like to create a bootdisk for your system?"),
 }
 
 #------------------------------------------------------------------------------
-sub setupLILO {
-    my ($o, $more) = @_;
-    $o->{lnx4win} or any::setupBootloader($o, $o->{bootloader}, $o->{hds}, $o->{fstab}, $o->{security}, $o->{prefix}, $more) or return;
-
-    eval { $o->SUPER::setupBootloader };
-    if ($@) {
-	$o->ask_warn('', 
-		     [ _("Installation of LILO failed. The following error occured:"),
-		       grep { !/^Warning:/ } cat_("$o->{prefix}/tmp/.error") ]);
-	unlink "$o->{prefix}/tmp/.error";
-	die "already displayed";
-    }
-}
-
-#------------------------------------------------------------------------------
-sub setupSILO {
-    my ($o, $more) = @_;
-    my $b = $o->{bootloader};
-
-    if ($::beginner && $more >= 1) {
-	my @silo_install = (__("First sector of drive (MBR)"), __("First sector of boot partition"));
-	$o->set_help('setupBootloaderBeginner') unless $::isStandalone; #- no problem of translation for this one.
-	$b->{use_partition} = $o->ask_from_list_(_("SILO Installation"),
-						 _("Where do you want to install the bootloader?"),
-						 \@silo_install, $silo_install[$b->{use_partition}]);
-    } elsif ($more || !$::beginner) {
-	$o->set_help("setupSILOGeneral");
-
-	$::expert and $o->ask_yesorno('', _("Do you want to use SILO?"), 1) || return;
-
-	my @silo_install_lang = (_("First sector of drive (MBR)"), _("First sector of boot partition"));
-	my $silo_install_lang = $silo_install_lang[$b->{use_partition}];
-	my @l = (
-_("Bootloader installation") => { val => \$silo_install_lang, list => \@silo_install_lang, not_edit => 1 },
-_("Delay before booting default image") => \$b->{timeout},
-$o->{security} < 4 ? () : (
-_("Password") => { val => \$b->{password}, hidden => 1 },
-_("Password (again)") => { val => \$b->{password2}, hidden => 1 },
-_("Restrict command line options") => { val => \$b->{restricted}, type => "bool", text => _("restrict") },
-)
-	);
-
-	$o->ask_from_entries_refH('', _("SILO main options"), \@l,
-				 complete => sub {
-#-				     $o->{security} > 4 && length($b->{password}) < 6 and $o->ask_warn('', _("At this level of security, a password (and a good one) in silo is requested")), return 1;
-				     $b->{restricted} && !$b->{password} and $o->ask_warn('', _("Option ``Restrict command line options'' is of no use without a password")), return 1;
-				     $b->{password} eq $b->{password2} or !$b->{restricted} or $o->ask_warn('', [ _("The passwords do not match"), _("Please try again") ]), return 1;
-				     0;
-				 }
-				) or return;
-	$b->{use_partition} = $silo_install_lang eq _("First sector of drive (MBR)") ? 0 : 1;
-    }
-
-    until ($::beginner && $more <= 1) {
-	$o->set_help('setupSILOAddEntry');
-	my $c = $o->ask_from_list_([''], 
-_("Here are the following entries in SILO.
-You can add some more or change the existing ones."),
-		[ (sort @{[map { "$_->{label} ($_->{kernel_or_dev})" . ($b->{default} eq $_->{label} && "  *") } @{$b->{entries}}]}), __("Add"), __("Done") ],
-	);
-	$c eq "Done" and last;
-
-	my ($e);
-
-	if ($c eq "Add") {
-	    my @labels = map { $_->{label} } @{$b->{entries}};
-	    my $prefix;
-	    if ($o->ask_from_list_('', _("Which type of entry do you want to add?"), [ __("Linux"), __("Other OS (SunOS...)") ]) eq "Linux") {
-		$e = { type => 'image' };
-		$prefix = "linux";
-	    } else {
-		$e = { type => 'other' };
-		$prefix = "sunos";
-	    }
-
-	    $e->{label} = $prefix;
-	    for (my $nb = 0; member($e->{label}, @labels); $nb++) { $e->{label} = "$prefix-$nb" }
-	} else {
-	    $c =~ /(\S+)/;
-	    ($e) = grep { $_->{label} eq $1 } @{$b->{entries}};
-	}
-	my %old_e = %$e;
-	my $default = my $old_default = $e->{label} eq $b->{default};
-	    
-	my @l;
-	if ($e->{type} eq "image") { 
-	    @l = (
-_("Image") => { val => \$e->{kernel_or_dev}, list => [ eval { map { s/$o->{prefix}//; $_ } glob_("$o->{prefix}/boot/vmlinuz*") } ] },
-_("Partition") => { val => \$e->{partition}, list => [ map { ("$o->{prefix}/dev/$_->{device}" =~ /\D*(\d*)/)[0] || 1} @{$o->{fstab}} ], not_edit => !$::expert },
-_("Root") => { val => \$e->{root}, list => [ map { "/dev/$_->{device}" } @{$o->{fstab}} ], not_edit => !$::expert },
-_("Append") => \$e->{append},
-_("Initrd") => { val => \$e->{initrd}, list => [ eval { map { s/$o->{prefix}//; $_ } glob_("$o->{prefix}/boot/initrd*") } ] },
-_("Read-write") => { val => \$e->{'read-write'}, type => 'bool' }
-	    );
-	    @l = @l[0..7] unless $::expert;
-	} else {
-	    @l = ( 
-_("Root") => { val => \$e->{kernel_or_dev}, list => [ map { "/dev/$_->{device}" } @{$o->{fstab}} ], not_edit => !$::expert },
-	    );
-	}
-	@l = (
-_("Label") => \$e->{label},
-@l,
-_("Default") => { val => \$default, type => 'bool' },
-	);
-
-	if ($o->ask_from_entries_refH($c eq "Add" ? '' : ['', _("Ok"), _("Remove entry")], 
-	    '', \@l,
-	    complete => sub {
-		$e->{label} or $o->ask_warn('', _("Empty label not allowed")), return 1;
-		member($e->{label}, map { $_->{label} } grep { $_ != $e } @{$b->{entries}}) and $o->ask_warn('', _("This label is already in use")), return 1;
-		0;
-	    })) {
-	    $b->{default} = $old_default || $default ? $default && $e->{label} : $b->{default};
-	    require silo;
-	    silo::configure_entry($o->{prefix}, $e);
-	    $c eq 'Add' and push @{$b->{entries}}, $e;
-	} else {
-	    @{$b->{entries}} = grep { $_ != $e } @{$b->{entries}};
-	}
-    }
-    eval { $o->SUPER::setupBootloader };
-    if ($@) {
-	$o->ask_warn('', 
-		     [ _("Installation of SILO failed. The following error occured:"),
-		       grep { !/^Warning:/ } cat_("$o->{prefix}/tmp/.error") ]);
-	unlink "$o->{prefix}/tmp/.error";
-	die "already displayed";
-    }
-}
-
-#------------------------------------------------------------------------------
 sub setupBootloaderBefore {
     my ($o) = @_;
     my $w = $o->wait_message('', _("Preparing bootloader"));
@@ -944,7 +812,7 @@ sub setupBootloaderBefore {
 
 #------------------------------------------------------------------------------
 sub setupBootloader {
-    my ($o) = @_;
+    my ($o, $more) = @_;
     if (arch() =~ /^alpha/) {
 	$o->ask_yesorno('', _("Do you want to use aboot?"), 1) or return;
 	catch_cdie { $o->SUPER::setupBootloader } sub {
@@ -952,10 +820,17 @@ sub setupBootloader {
 _("Error installing aboot, 
 try to force installation even if that destroys the first partition?"));
 	};
-    } elsif (arch() =~ /^sparc/) {
-	&setupSILO;
     } else {
-	&setupLILO;
+	$o->{lnx4win} or any::setupBootloader($o, $o->{bootloader}, $o->{hds}, $o->{fstab}, $o->{security}, $o->{prefix}, $more) or return;
+
+	eval { $o->SUPER::setupBootloader };
+	if ($@) {
+	    $o->ask_warn('', 
+			 [ _("Installation of bootloader failed. The following error occured:"),
+			   grep { !/^Warning:/ } cat_("$o->{prefix}/tmp/.error") ]);
+	    unlink "$o->{prefix}/tmp/.error";
+	    die "already displayed";
+	}
     }
 }
 

@@ -1,3 +1,12 @@
+2000-07-11  François Pons  <fpons@mandrakesoft.com>
+
+	* bootloader.pm: merged lilo.pm and silo.pm inside bootloader.pm,
+	this include a configure_entry from silo.pm to build a initrd if
+	used.
+	* share/compssList: added kde2 packages.
+	* share/compssUsers: added kde2 group, renamed kde to kde1 group
+	specific.
+
 2000-07-07  François Pons  <fpons@mandrakesoft.com>
 
 	* install2.pm (choosePackages): always execute setPackage to copy

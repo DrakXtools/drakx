@@ -533,30 +533,30 @@ sub setupFB {
 
     $vga ||= 785; #- assume at least 640x480x16.
 
-    require lilo;
-    #- update lilo entries with a new fb label. a bit hack unless
+    require bootloader;
+    #- update bootloader entries with a new fb label. a bit hack unless
     #- a frame buffer kernel is used, in such case we use it instead
     #- with the right mode, nothing more to do.
     foreach (qw(secure smp)) {
-	if (my $e = lilo::get("/boot/vmlinuz-$_", $o->{bootloader})) {
+	if (my $e = bootloader::get("/boot/vmlinuz-$_", $o->{bootloader})) {
 	    if ($_ eq 'secure') {
 		log::l("warning: kernel-secure is not fb, using a kernel-fb instead");
 		#- nothing done, fall through linux-fb.
 	    } else {
 		$e->{vga} = $vga;
-		lilo::install($o->{prefix}, $o->{bootloader}, $o->{fstab}, $o->{hds});
+		bootloader::install($o->{prefix}, $o->{bootloader}, $o->{fstab}, $o->{hds});
 		return 1;
 	    }
 	}
     }
-    if (lilo::add_kernel($o->{prefix}, $o->{bootloader}, kernelVersion($o), 'fb',
-			 {
-			  label => 'linux-fb',
-			  root => lilo::get("/boot/vmlinuz", $o->{bootloader})->{root},
-			  vga => $vga,
-			 })) {
+    if (bootloader::add_kernel($o->{prefix}, $o->{bootloader}, kernelVersion($o), 'fb',
+			       {
+				label => 'linux-fb',
+				root => bootloader::get("/boot/vmlinuz", $o->{bootloader})->{root},
+				vga => $vga,
+			       })) {
 	$o->{bootloader}{default} = 'linux-fb';
-	lilo::install($o->{prefix}, $o->{bootloader}, $o->{fstab}, $o->{hds});
+	bootloader::install($o->{prefix}, $o->{bootloader}, $o->{fstab}, $o->{hds});
     } else {
 	log::l("unable to install kernel with frame buffer support, disabling");
 	return 0;

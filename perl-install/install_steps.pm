@@ -749,13 +749,8 @@ sub createBootdisk($) {
 
     return if $::testing;
 
-    if (arch() =~ /^sparc/) {
-	require silo;
-        silo::mkbootdisk($o->{prefix}, install_any::kernelVersion($o), $dev, $o->{bootloader}{perImageAppend});
-    } else {
-	require lilo;
-        lilo::mkbootdisk($o->{prefix}, install_any::kernelVersion($o), $dev, $o->{bootloader}{perImageAppend});
-    }
+    require bootloader;
+    bootloader::mkbootdisk($o->{prefix}, install_any::kernelVersion($o), $dev, $o->{bootloader}{perImageAppend});
     $o->{mkbootdisk} = $dev;
 }
 
@@ -764,13 +759,8 @@ sub readBootloaderConfigBeforeInstall {
     my ($o) = @_;
     my ($image, $v);
 
-    if (arch() =~ /^sparc/) {
-	require silo;
-	add2hash($o->{bootloader} ||= {}, silo::read($o->{prefix}, "/etc/silo.conf"));
-    } else {
-	require lilo;
-	add2hash($o->{bootloader} ||= {}, lilo::read($o->{prefix}, "/etc/lilo.conf"));
-    }
+    require bootloader;
+    add2hash($o->{bootloader} ||= {}, bootloader::read($o->{prefix}, arch() =~ /sparc/ ? "/etc/silo.conf" : "/etc/lilo.conf"));
 
     #- since kernel or kernel-smp may not be upgraded, it should be checked
     #- if there is a need to update existing lilo.conf entries by using that
@@ -788,13 +778,8 @@ sub readBootloaderConfigBeforeInstall {
 	    if (-e "$o->{prefix}$v") {
 		my $e;
 
-		if (arch() =~ /sparc/) {
-		    require silo;
-		    $e = silo::get("/boot/$image", $o->{bootloader});
-		} else {
-		    require lilo;
-		    $e = lilo::get("/boot/$image", $o->{bootloader});
-		}
+		require bootloader;
+		$e = bootloader::get("/boot/$image", $o->{bootloader});
 
 		$e or next;
 		$e->{kernel_or_dev} = $v;
@@ -812,19 +797,15 @@ sub setupBootloaderBefore {
 	    $o->{bootloader}{root} ||= "/dev/$dev->{device}";
 	    $o->{bootloader}{part_nb} ||= first($dev->{device} =~ /(\d+)/);
 	}
-    } elsif (arch() =~ /^sparc/) {
-	require silo;
-        silo::init();
-        silo::suggest($o->{prefix}, $o->{bootloader}, $o->{hds}, $o->{fstab}, install_any::kernelVersion($o));
     } else {
-	require lilo;
-        lilo::suggest($o->{prefix}, $o->{bootloader}, $o->{hds}, $o->{fstab}, install_any::kernelVersion($o));
+	require bootloader;
+        bootloader::suggest($o->{prefix}, $o->{bootloader}, $o->{hds}, $o->{fstab}, install_any::kernelVersion($o));
 	if ($o->{miscellaneous}{profiles}) {
-	    my $e = lilo::get_label("linux", $o->{bootloader});
+	    my $e = bootloader::get_label("linux", $o->{bootloader});
 	    push @{$o->{bootloader}{entries}}, { %$e, label => "office", append => "$e->{append} prof=Office" };
 	    $e->{append} .= " prof=Home";
 	}
-        lilo::suggest_floppy($o->{bootloader}) if $o->{security} <= 3;
+        bootloader::suggest_floppy($o->{bootloader}) if $o->{security} <= 3;
 	$o->{bootloader}{keytable} ||= keyboard::keyboard2kmap($o->{keyboard});
     }
 }
@@ -856,11 +837,9 @@ sub setupBootloader($) {
 #	output "$o->{prefix}/etc/aboot.conf", 
 #	  map_index { "$::i:$b->{part_nb}$_ root=$b->{root} $b->{perImageAppend}\n" }
 #	    map { /$o->{prefix}(.*)/ } eval { glob_("$o->{prefix}/boot/vmlinux*") };
-    } elsif (arch() =~ /^sparc/) {
-        silo::set_promvars($o->{fstab}, $o->{bootloader});
-        silo::install($o->{prefix}, $o->{bootloader});
     } else {
-	lilo::install($o->{prefix}, $o->{bootloader}, $o->{fstab}, $o->{hds});
+	require bootloader;
+	bootloader::install($o->{prefix}, $o->{bootloader}, $o->{fstab}, $o->{hds});
     }
 }
 
