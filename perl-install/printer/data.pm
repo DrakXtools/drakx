@@ -2,12 +2,15 @@ package printer::data;
 
 use strict;
 use common;
+use vars qw(@ISA @EXPORT);
+
+@ISA = qw(Exporter);
+@EXPORT = qw(%lprcommand  %spoolers %spooler_inv %shortspooler_inv);
+
 
 # BUG, FIXME : this was neither declered nor setted anywhere before :
 # maybe this should be swtiched : 
 # $lprcommand{stuff} => $spoolers{stuff}{print_command}
-
-our %lprcommand;
 
 our %spoolers = ('ppq' => {
                           'help' => "/usr/bin/lphelp %s |",

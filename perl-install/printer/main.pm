@@ -6,13 +6,13 @@ use strict;
 
 use common;
 use run_program;
+use printer::data;
 use printer::services;
 use printer::default;
 use printer::gimp;
 use printer::cups;
 use printer::office;
 use printer::detect;
-use printer::data;
 use services;
 
 
@@ -22,7 +22,7 @@ my $PRINTER_DB_FILE = "/usr/share/foomatic/db/compiled/overview.xml";
 #-Did we already read the subroutines of /usr/sbin/ptal-init?
 my $ptalinitread = 0;
 
-%printer_type = (
+our %printer_type = (
     N("Local printer")                              => "LOCAL",
     N("Remote printer")                             => "REMOTE",
     N("Printer on remote CUPS server")              => "CUPS",
@@ -33,7 +33,10 @@ my $ptalinitread = 0;
     N("Enter a printer device URI")                 => "URI",
     N("Pipe job into a command")                    => "POSTPIPE"
 );
+
 our %printer_type_inv = reverse %printer_type;
+
+our %thedb;
 
 #------------------------------------------------------------------------------
 
@@ -116,7 +119,7 @@ sub assure_device_is_available_for_cups {
     # file:/dev/null instead. Restart CUPS if necessary to assure that
     # CUPS knows the device.
     my ($device) = @_;
-    my $result;
+    my ($result, $i);
     for ($i = 0; $i < 3; $i++) {
 	local *F; 
 	open F, ($::testing ? $::prefix : "chroot $::prefix/ ") . 
@@ -141,7 +144,7 @@ sub spooler_in_security_level {
     my ($spooler, $level) = @_;
     my $sp;
     $sp = (($spooler eq "lpr") || ($spooler eq "lprng")) ? "lpd" : $spooler;
-    $file = "$::prefix/etc/security/msec/server.$level";
+    my $file = "$::prefix/etc/security/msec/server.$level";
     if (-f $file) {
 	local *F; 
 	open F, "< $file" or return 0;
@@ -160,7 +163,7 @@ sub add_spooler_to_security_level {
     my ($spooler, $level) = @_;
     my $sp;
     $sp = (($spooler eq "lpr") || ($spooler eq "lprng")) ? "lpd" : $spooler;
-    $file = "$::prefix/etc/security/msec/server.$level";
+    my $file = "$::prefix/etc/security/msec/server.$level";
     if (-f $file) {
 	local *F; 
 	open F, ">> $file" or return 0;
@@ -185,11 +188,11 @@ sub copy_printer_params($$) {
 }
 
 sub getinfo($) {
-    my ($::prefix) = @_;
+    my ($prefix) = @_;
     my $printer = {};
     my @QUEUES;
 
-    $::prefix = $::prefix;
+    $::prefix = $prefix;
 
     # Initialize $printer data structure
     resetinfo($printer);
@@ -498,7 +501,7 @@ sub read_printer_db(;$) {
         poll_ppd_base();
     }
 
-    @entries_db_short     = sort keys %printer::thedb;
+    my @entries_db_short     = sort keys %printer::thedb;
     #%descr_to_db          = map { $printer::thedb{$_}{DESCR}, $_ } @entries_db_short;
     #%descr_to_help        = map { $printer::thedb{$_}{DESCR}, $printer::thedb{$_}{ABOUT} } @entries_db_short;
     #@entry_db_description = keys %descr_to_db;
@@ -697,7 +700,7 @@ sub set_cups_autoconf {
 
     # Read config file
     my $file = "$::prefix/etc/sysconfig/printing";
-    @file_content = cat_($file);
+    my @file_content = cat_($file);
 
     # Remove all valid "CUPS_CONFIG" lines
     (/^\s*CUPS_CONFIG/ and $_ = "") foreach @file_content;
@@ -732,7 +735,7 @@ sub get_cups_autoconf {
 sub set_usermode {
     my $usermode = $_[0];
     $::expert = $usermode;
-    $str = $usermode ? "expert" : "recommended";
+    my $str = $usermode ? "expert" : "recommended";
     substInFile { s/^(USER_MODE=).*/$1$str/; $_ .= "USER_MODE=$str" if eof } "$::prefix/etc/sysconfig/printing";
 }
 
@@ -1116,7 +1119,7 @@ sub help_output {
 
     local *F; 
     open F, ($::testing ? $::prefix : "chroot $::prefix/ ") . sprintf($spoolers{$spooler}{help}, $queue);
-    $helptext = join("", <F>);
+    my $helptext = join("", <F>);
     close F;
     $helptext = "Option list not available!\n" if $spooler eq 'lpq' && (!$helptext || ($helptext eq ""));
     return $helptext;

@@ -199,7 +199,7 @@ sub makeprinterentry {
 	$configfile = addentry($queue, "Driver: $gimpprintdriver", $configfile);
 	$configfile = removeentry($queue, "Destination:", $configfile);
 	$configfile = addentry($queue, 
-				   "Destination: /usr/bin/$printer::data::lprcommand{$printer->{SPOOLER}{print_command}} -P $queue -o raw", $configfile);
+				   "Destination: /usr/bin/$spoolers{$printer->{SPOOLER}{print_command}} -P $queue -o raw", $configfile);
     } else {
 	$configfile = removeentry($queue, "PPD-File:", $configfile);
 	$configfile = addentry($queue, "PPD-File: /etc/foomatic/$queue.ppd", $configfile);
@@ -207,7 +207,7 @@ sub makeprinterentry {
 	$configfile = addentry($queue, "Driver: ps2", $configfile);
 	$configfile = removeentry($queue, "Destination:", $configfile);
 	$configfile = addentry($queue, 
-				   "Destination: /usr/bin/$printer::data::lprcommand{$printer->{SPOOLER}{print_command}} -P $queue", $configfile);
+				   "Destination: /usr/bin/$spoolers{$printer->{SPOOLER}{print_command}} -P $queue", $configfile);
     }
     return $configfile;
 }
