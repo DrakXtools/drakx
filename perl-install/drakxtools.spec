@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 9.2
-Release: 0.32mdk
+Release: 0.33mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -18,7 +18,7 @@ Obsoletes: draksec
 %package newt
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Group: System/Configuration/Other
-Requires: perl-base >= 1:5.8.0-20mdk, urpmi, modutils >= 2.3.11, ldetect-lst >= 0.1.7-3mdk, usermode-consoleonly >= 1.44-4mdk, msec >= 0.38-5mdk
+Requires: perl-base >= 1:5.8.0-20mdk, urpmi >= 4.4-23mdk, modutils >= 2.3.11, ldetect-lst >= 0.1.7-3mdk, usermode-consoleonly >= 1.44-4mdk, msec >= 0.38-5mdk
 Obsoletes: diskdrake kbdconfig mouseconfig printtool setuptool drakfloppy
 Provides: diskdrake, kbdconfig mouseconfig printtool setuptool, drakfloppy = %version-%release
 Provides: perl(Newt::Newt)
@@ -314,6 +314,20 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Thu Aug 21 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.2-0.33mdk
+- fix CJK wrapping in interactive tools (#4642)
+- remove ugly border around standalone tools
+- wizards: increase height to prevent some hidden or cutted buttons
+- diskdrake: fix small unallocated area at the end of the drive
+  (pixel)
+- drakconnect: (poulpy)
+  o allow user to copy firmware from a floppy
+  o fix another back step
+  o fix wrong url
+- drakxtv: only offer to configure xawtv if bttv was configured
+- XFdrake: fix #3976 (francois)
+- update keyboards list & translations (pablo)
+
 * Tue Aug 19 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.2-0.32mdk
 - pci hardware discovery: do full-probe by default
 - show advanced options by default if --expert was passed or if expect
