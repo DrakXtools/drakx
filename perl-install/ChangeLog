@@ -1,3 +1,211 @@
+2002/08/11  alus
+
+	* share/po/pl.po: updated
+
+2002/08/11  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/DrakX.pot, share/po/sv.po, share/po/sr.po, share/po/sk.po,
+	share/po/sp.po, share/po/af.po, share/po/sl.po, share/po/az.po,
+	share/po/hr.po, share/po/ar.po, share/po/hu.po: updated some po files
+
+	* share/po/th.po, share/po/tr.po: updated Turkish file
+
+2002/08/11  Pixel  <pixel@mandrakesoft.com>
+
+	* lvm.pm: 
+	  - vg_add: do not vgremove the old_name anymore, this is dangerous and
+	should not happen
+	  - lv_create: fix bug when {primary}{normal} didn't exist
+	  - use run_program::get_stdout instead of ``
+	  - create and use run() and run_or_die() which takes care of running
+	vgscan again when needed
+	  - rename LVMname to VG_name
+
+	* diskdrake/interactive.pm: allow to enter any mount point even in
+	non-expert (why was it still the other way??)
+	rename LVMname to VG_name
+
+	* detect_devices.pm (floppies): module "floppy" can fail to insmod, in
+	that case it means
+	there's no floppy controller, so don't try fd0 & fd1 which may cause
+	havoc
+	(esp. segfault) (thanks to rcc)
+
+	* share/rpmsrate: adding aspell-LANGS before evolution to workaround the
+	choices limitation (=> allow to choose the right aspell-LANG)
+
+	* docs/comparisons: comprehensive feature-to-feature comparison with
+	redhat 8.0
+
+	* diskdrake/hd_gtk.pm, partition_table.pm: rename LVMname to VG_name
+
+	* fsedit.pm: get rid of the duplicated /tmp in for suggestions_mntpoint()
+	(thanks to Amaury)
+	  - rename LVMname to VG_name
+	  - part2hd: allow rootDevice to be a VG_name
+	  - add auto_allocate_vgs
+	cleanup
+
+	* fs.pm (prepare_write_fstab): no need to read the fstab once again before
+	writing since reading takes care of everything, including unknown
+	entries (which go to {special}). This fixes a bug when removing existing
+	partition with associated mount point. It used to keep the entry in
+	fstab, which is wrong (as reported by andré <naderrt@wanadoo.fr>)
+
+	* modules.pm (load): when isStandalone, ignore errors when loading
+	unavailable modules (ie have the same behaviour as during install)
+
+	* run_program.pm: add get_stdout (similar to rooted_get_stdout)
+
+	* bootloader.pm: 
+	  - compare_entries is now called same_entries
+	  - same_entries try hard to return true even if the files not the same
+	but symlinks to the same file
+	  - rework add_entry (it handles weird case which used to give old_linux
+	and old2_linux even if they are the same)
+	  - ensure the old failsafe entry doesn't give any old_failsafe
+
+	* network/smb.pm: fix yet another bug regarding credentials during install
+
+	* install_steps_auto_install.pm: nice message when rebootNeeded in
+	auto_install (otherwise it reboots without prompting)
+
+2002/08/11  Till Kamppeter  <till@mandrakesoft.com>
+
+	* printer.pm, printerdrake.pm: Setup of HP MF devices on parallel port did
+	not work. Fixed.
+	Allow setup of MF device if device file name "/dev/printer/<number>" was
+	entered.
+	If auto-detection of model name fails, ask user always whether he has an
+	MF device.
+	If SNMP or local auto-detection fails but HPOJ auto-detection succeeds,
+	use model name found by HPOJ.
+
+2002/08/10  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/vi.po, share/po/sv.po: updated po file
+
+2002/08/10  Pixel  <pixel@mandrakesoft.com>
+
+	* diskdrake/interactive.pm: 
+	  - fix computing the minimal size for reiserfs resizing
+	  - use run_program::run instead of system for calling resizing tools
+
+	* install_any.pm: workaround perl bug another way
+
+2002/08/10  Stew Benedict  <sbenedict@mandrakesoft.com>
+
+	* standalone/drakbackup: GUI fixes, scp, rsync, webDAV, CD, tape support.
+	Consolidate all net methods into one configure screen.
+	Daemon mode, email fixed. Ran perl_checker and corrected.
+	GUI feedback during various backup modes and result report.
+	CD/Tape drive/media detection. Start to look at cataloging
+	runs for locating restore media.
+
+2002/08/10  Till Kamppeter  <till@mandrakesoft.com>
+
+	* printerdrake.pm: Removed HP multi-function device configuration from SMB
+	and remote LPD printer setup.
+	Let the Sony IJP-V100 being treated as an HP multi-function device.
+	Taken into account that the HP PhotoSmart 7150 has no photo card reader.
+	Use any::get_secure_level() instead of printer::get_security_level().
+
+	* detect_devices.pm: Scanning network for printers did not work during
+	installation. Fixed.
+
+	* printer.pm: Use any::get_secure_level() instead of
+	printer::get_security_level().
+
+2002/08/09  fcrozat
+
+	* share/rpmsrate: No longer requires metacity-setup (everything can be
+	done using gnome-control-center)
+	Ensure we install enough GNOME packages when selection GNOME
+
+2002/08/09  François Pons  <fpons@mandrakesoft.com>
+
+	* install_steps.pm: make sure size of packages is computed.
+
+	* pkgs.pm: take care of packages already installed that will be removed
+	(untested).
+
+	* install_any.pm: fixed loadO when getFile is not used (local files).
+
+	* interactive.pm: allow cancel button even for wizard.
+
+	* install_steps_interactive.pm: small update to avoid side effect of bless
+	to HASH even if nothing results from
+	this.
+
+2002/08/09  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/cs.po: updated Czech file
+
+	* share/po/pt.po: updated Portuguese file
+
+	* share/po/id.po, share/po/fr.po: updated French and Indonesian files
+
+2002/08/09  Pixel  <pixel@mandrakesoft.com>
+
+	* share/keyboards.tar.bz2: fix rights on files
+
+	* tools/make_mdkinst_stage2, share/list.i386, install_any.pm: add fsck.jfs
+
+	* any.pm, modparm.pm, harddrake/ui.pm: 
+	  - fix module parameter dialog box handling
+	  - enable the cancel on load_module__ask_options
+
+	* bootloader.pm (mkinitrd): when an initrd is already there, it means an
+	initrd is needed
+	not the contrary (thanks to Damon Lynch for his test)
+
+	* install_steps.pm: remove previous report.bug.gz (otherwise one get a
+	report.bug *and* the previous report.bug.gz)
+	(report.bug's are not rotated, ddebug.log's and install.log's are)
+
+2002/08/09  Thierry Vignaud  <tvignaud@mandrakesoft.com>
+
+	* modparm.pm: no need anymore to pass extra arguments for harddrake::ui
+
+	* Xconfig/various.pm: perl_checker fixes
+
+	* harddrake/TODO: module parameters're now read from /etc/modules.conf
+	before being
+	altered
+
+	* harddrake/bttv.pm: resync with bttv-0.7.95, add support for :
+	  - tv cards:
+	o Hauppauge WinTV PVR
+	  o Leadtek|WinFast VC 100
+	  - tv tuners:
+	  o LG NTSC (newer TAPC series)
+
+	* drakxtools.spec: harddrake changes
+
+	* modules.pm: mergein_conf: return options if they're set
+
+	* harddrake/ui.pm: 
+	  - module configuration window:
+	o read current options
+		o don't display ranges, we cannot really know when a range is
+	       needed and so display them in wrong cases (kill code, enable us
+	       to simplify modparm::parameters after
+		o read & parse modules.conf only when configuring the module, not
+	       on each click in the tree
+		o move up "require module" since we use it above
+		o use get_options accessor instead of direct $conf access
+		o split the options string into a hash{option => value}
+		o don't call several times interactive->vnew
+		o fix busy cursor on window exit because of the previous change
+
+2002/08/08  alus
+
+	* share/po/pl.po: various changes
+
+2002/08/08  Pixel  <pixel@mandrakesoft.com>
+
+	* services.pm (services): better sorting of services
+
 2002/08/08  alus
 
 	* share/po/pl.po: various changes

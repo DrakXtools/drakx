@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 1.1.9
-Release: 9mdk
+Release: 10mdk
 Url: http://www.linux-mandrake.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -260,6 +260,9 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && \
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog 
+* Mon Aug 12 2002 Pixel <pixel@mandrakesoft.com> 1.1.9-10mdk
+- snapshot (various bug fixes including no-floppy-box-segfault)
+
 * Fri Aug  9 2002 Thierry Vignaud <tvignaud@mandrakesoft.com> 1.1.9-9mdk
 - harddrake:
 	o module configuration window:
