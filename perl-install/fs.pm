@@ -322,8 +322,8 @@ sub mount_options_unpack {
     my @auto_fs = auto_fs();
     my %per_fs = (
 		  iso9660 => [ qw(unhide) ],
-		  vfat => [ qw(umask=0) ],
-		  ntfs => [ qw(umask=0) ],
+		  vfat => [ qw(umask=0 umask=0022) ],
+		  ntfs => [ qw(umask=0 umask=0022) ],
 		  nfs => [ qw(rsize=8192 wsize=8192) ],
 		  smbfs => [ qw(username= password=) ],
 		  davfs => [ qw(username= password= uid= gid=) ],
@@ -369,6 +369,16 @@ sub mount_options_pack_ {
 
     my ($non_defaults, $user_implies) = mount_options();
     my @l;
+
+    my @umasks = map {
+	if (/^umask=/) {
+	    my $v = delete $options->{$_};
+	    /^umask=(.+)/ ? if_($v, $1) : $v;
+	} else { () }
+    } keys %$options;
+    if (@umasks) {
+	push @l, 'umask=' . min(@umasks);
+    }
 
     if (delete $options->{user}) {
 	push @l, 'user';
@@ -428,6 +438,7 @@ user,exec,dev,suid )."),
 
         'umask=0' => N("Give write access to ordinary users"),
 
+        'umask=0022' => N("Give read-only access to ordinary users"),
     );
 }
 
@@ -474,11 +485,14 @@ sub set_default_options {
 			      }) if $opts{is_removable};
 
 	put_in_hash($options, {
-			       'umask=0' => $opts{security} < 3, 'iocharset=' => $opts{iocharset}, 'codepage=' => $opts{codepage},
+			       'umask=0' => $opts{security} < 3, 'umask=0022' => $opts{security} < 4,
+			       'iocharset=' => $opts{iocharset}, 'codepage=' => $opts{codepage},
 			      });
     }
     if (isThisFs('ntfs', $part)) {
-	put_in_hash($options, { ro => 1, 'umask=0' => $opts{security} < 3, 'nls=' => $opts{iocharset} });
+	put_in_hash($options, { ro => 1, 'nls=' => $opts{iocharset},
+				'umask=0' => $opts{security} < 3, 'umask=0022' => $opts{security} < 4,
+			      });
     }
     if (member('iso9660', split(':', $part->{type})) || isThisFs('auto', $part)) {
 	put_in_hash($options, { user => 1, noexec => 0, 'iocharset=' => $opts{iocharset} });
