@@ -85,8 +85,7 @@ set_loop (const char *device, const char *file)
 	 */
   
 	if(mlockall(MCL_CURRENT|MCL_FUTURE)) {
-		log_message("%s (memlock)\n", strerror(errno));
-		log_message("CRITICAL Couldn't lock into memory!\n");
+		log_message("CRITICAL Couldn't lock into memory! %s (memlock)", strerror(errno));
 		return 1;
 	}
 #endif
@@ -134,17 +133,17 @@ lomount(char *loopfile, char *where)
 	my_insmod("loop", ANY_DRIVER_TYPE, NULL);
 
 	if (set_loop(loopdev, loopfile)) {
-		log_message("set_loop failed on %s (%s)\n", loopdev, strerror(errno));
+		log_message("set_loop failed on %s (%s)", loopdev, strerror(errno));
 		return 1;
 	}
   
 	if (my_mount(loopdev, where, "iso9660")) {
-		log_message("mount failed: %s\n", strerror(errno));
+		log_message("mount failed: %s", strerror(errno));
 		del_loop(loopdev);
 		return 1;
 	}
 
-	log_message("lomount succeded for %s on %s\n", loopfile, where);
+	log_message("lomount succeded for %s on %s", loopfile, where);
 	return 0;
 }
 
