@@ -731,7 +731,7 @@ Take a look at http://www.linmodems.org"),
                     post => sub {
                         my %packages = (
                                         'eci'        => [ 'eciadsl', 'missing' ],
-                                        'sagem'      => [ 'eagle-usb',  "/usr/sbin/eaglectrl" ],
+                                        'sagem'      => [ 'eagle-usb',  "/sbin/eaglectrl" ],
                                         'speedtouch' => [ 'speedtouch', "/usr/sbin/modem_run" ],
                                        );
                         return 'adsl_unsupported_eci' if $ntf_name eq 'eci';

@@ -183,9 +183,9 @@ noaccomp),
                   sagem =>
                   {
                    modules => [ qw(eagle-usb) ],
-                   start => '/usr/sbin/eaglectrl -d',
+                   start => '/sbin/eaglectrl -d',
                    stop =>  "/usr/bin/killall pppoa",
-                   get_intf => "/usr/sbin/eaglectrl -i",
+                   get_intf => '/sbin/eaglectrl -i',
                    server => {
                               pppoa => q("/usr/sbin/fctStartAdsl -t 1 -i"),
                              },
