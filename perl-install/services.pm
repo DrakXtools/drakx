@@ -252,7 +252,7 @@ sub ask {
 }
 
 sub doit {
-    my ($_in, $on_services) = @_;
+    my ($in, $on_services) = @_;
     my ($l, $was_on_services) = services();
 
     foreach (@$l) {
