@@ -829,7 +829,7 @@ Welcome to the Printer Setup Wizard
 
 This wizard will help you to install your printer(s) connected to this computer, connected directly to the network or to a remote Windows machine.
 
-If you have printer(s) connected to this machine, Please plug it/them in on this computer and turn it/them on so that it/they can be auto-detected. Also your network printer(s) and your Windows machines must be connected and turned on.
+Please plug in and turn on all printers connected to this machine so that it/they can be auto-detected. Also your network printer(s) and your Windows machines must be connected and turned on.
 
 Note that auto-detecting printers on the network takes longer than the auto-detection of only the printers connected to this machine. So turn off the auto-detection of network and/or Windows-hosted printers when you don't need it.
 
@@ -838,7 +838,7 @@ Welcome to the Printer Setup Wizard
 
 This wizard will help you to install your printer(s) connected to this computer.
 
-If you have printer(s) connected to this machine, Please plug it/them in on this computer and turn it/them on so that it/they can be auto-detected.
+Please plug in and turn on all printers connected to this machine so that it/they can be auto-detected.
 
  Click on \"Next\" when you are ready, and on \"Cancel\" if you do not want to set up your printer(s) now.")) : 
 				   ($havelocalnetworks ? N("
