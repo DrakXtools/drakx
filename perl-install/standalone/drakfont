@@ -1,6 +1,4 @@
 #!/usr/bin/perl -w
-
-
 # drakfont Future Overview
 #         - Fonts import :
 #                 pfb ( Adobe Type 1 binary )
@@ -72,6 +70,8 @@ if ("@ARGV" =~ /--help|-h/) {
     exit(0);
 }
 
+
+
 my $xlsfonts;
 my $windows;
 my $strong;
@@ -112,17 +112,21 @@ foreach my $i (@application) {
     }
 }
 
-
+# only debug
 print "app : @application\n";
 print "install : @install\n";
 print "uninstall : @uninstall\n";
 print "applications supproted: so: $so  gs: $gs \n";
 
 
+
+# PATH
 my $xfs_conffile = '/etc/X11/fs/config';
 my $drakfont_dir = '/home/seb/new_drackfont'; #/usr/X11R6/lib/X11/fonts/drakfont
 my $chkfontpath = '/usr/sbin/chkfontpath';
 
+
+# global lists, just to manipulate it easily.
 my $part;
 my @list_part;
 my @test;
@@ -311,8 +315,7 @@ sub interactive_mode {
     #gtk
 }
 
-
-
-#   faire la gestion des applications + printer
-
+# interface graphique a faire
+# option strong: verifier strong  ttmkfdir -c ???
+# gestion abiword, netscape, gimp....
 # xlsfonts | less pour verifier l'installation des polices.
