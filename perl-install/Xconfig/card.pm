@@ -165,7 +165,7 @@ sub probe() {
     #- in case of only one cards, remove all BusID reference, this will avoid
     #- need of change of it if the card is moved.
     #- on many PPC machines, card is on-board, BusID is important, leave?
-    if (@cards == 1 && arch() !~ /ppc/) {
+    if (@cards == 1 && !$cards[0]{MULTI_HEAD} && arch() !~ /ppc/) {
 	delete $cards[0]{BusID};
     }
 
