@@ -92,9 +92,7 @@ sub allowed {
 	@resolution_and_depth = grep { $_->{Depth} == 16 } @bios_vga_modes;
     } else {
 	my @depths;
-	if ($card->{Driver} eq 'vmware') {
-	    @depths = (16, 8);
-	} elsif ($card->{Driver} eq 'fglrx') {
+	if ($card->{Driver} eq 'fglrx') {
 	    @depths = 24;
 	} elsif ($card->{BoardName} eq 'RIVA128') { 
 	    @depths = qw(8 15 24);
