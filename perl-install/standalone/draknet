@@ -76,6 +76,7 @@ $button_del->signal_connect( clicked => sub {
 				 my $dialog = new Gtk::Dialog();
 				 $dialog->set_position(1);
 				 $dialog->vbox->set_border_width(10);
+				 $dialog->signal_connect ( delete_event => sub { Gtk->main_quit(); });
 				 $dialog->vbox->pack_start(new Gtk::Label(_("Profile to delete:")),1,1,0);
 				 my $combo_dialog = new Gtk::Combo;
 				 $combo_dialog->set_popdown_strings ( grep { ! /default/ } netconnect::get_profiles() );
@@ -109,6 +110,7 @@ $button_new->signal_connect( clicked => sub {
 				 my $dialog = new Gtk::Dialog();
 				 $dialog->set_position(1);
 				 $dialog->vbox->set_border_width(10);
+				 $dialog->signal_connect ( delete_event => sub { Gtk->main_quit(); });
 				 $dialog->vbox->pack_start(new Gtk::Label(_("Name of the profile to create:")),1,1,0);
 				 my $entry_dialog = new Gtk::Entry;
 				 $dialog->vbox->pack_start($entry_dialog,1,1,0);
@@ -171,8 +173,10 @@ $table1->attach($label8, 1, 2, 2, 3, 'fill', 'fill',0,0);
 my $button2 = new Gtk::Button($c ? _("Disconnect...") : _("Connect..."));
 $button2->signal_connect (clicked => sub {
 			      my $dialog = new Gtk::Dialog();
+			      $dialog->signal_connect ( delete_event => sub { Gtk->main_quit(); });
 			      $dialog->set_position(1);
 			      $dialog->vbox->set_border_width(10);
+			      $dialog->signal_connect ( delete_event => sub { Gtk->main_quit(); });
 			      $dialog->vbox->pack_start(my $l = new Gtk::Label(""),1,1,0);
 			      my $bbox_dialog = new Gtk::HButtonBox;
 			      $dialog->action_area->add($bbox_dialog);
@@ -284,6 +288,7 @@ $button_ok->signal_connect ( clicked => sub {
 				 $dialog->set_position(1);
 				 $dialog->vbox->set_border_width(10);
 				 my $label = new Gtk::Label(_("Please Wait... Applying the configuration"));
+				 $dialog->signal_connect ( delete_event => sub { Gtk->main_quit(); });
 				 $dialog->vbox->pack_start($label,1,1,20);
 				 $dialog->show_all;
 				 Gtk->main_iteration while Gtk->events_pending;
