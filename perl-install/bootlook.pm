@@ -121,7 +121,7 @@ my @thms;
 my @lilo_thms = ($themes{'default'})?():qw(default);
 my @boot_thms = ($themes{'default'})?():qw(default);
 chdir($themes{'path'}); #- we must change directory for correct @thms assignement
-foreach (glob("*")) {
+foreach (all('.')) {
     if (-d $themes{'path'} . $_ && m/^[^.]/) {
 	push @thms, $_;
 	-f $themes{'path'} . $_ . $themes{'lilo'}{'file'} and push @lilo_thms, $_;
@@ -228,7 +228,7 @@ LOGO_CONSOLE=" . ($keep_logo ? 'yes' : 'no') . "\n";
         }
         #here is mkinitrd time
         if (!$error) {
-            foreach (map { if_(m|^/boot/initrd-(.*)\.img|, $1) } glob '/boot/*'){
+            foreach (map { if_(m|^initrd-(.*)\.img|, $1) } all('/boot')){
                 if ( system("mkinitrd -f /boot/initrd-$_.img $_" ) ) {
                     $in->ask_warn(_("Error"),
 				  _("Can't launch mkinitrd -f /boot/initrd-%s.img %s.", $_,$_));
