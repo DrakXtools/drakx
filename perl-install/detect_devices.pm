@@ -581,7 +581,7 @@ sub getUPS() {
         $_;
     } grep { $_->{DESCRIPTION} =~ /MGE UPS/ } values %serialprobe),
       # USB UPSs;
-      (grep { $->{description} =~ /American Power Conversion\|Back-UPS/ } @usb_devices),
+      (grep { $_->{description} =~ /American Power Conversion\|Back-UPS/ } @usb_devices),
       (map {
           ($_->{name} = $_->{description}) =~ s/.*\|//;
           $_->{port} = "/dev/"; # FIXME
