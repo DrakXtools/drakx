@@ -351,7 +351,7 @@ sub log_output {
 }
 
 sub insert_text_n_scroll() {
-    ugtk2::gtktext_insert($log_text, \@logs, { append => !($isExplain || $isTail) });
+    ugtk2::gtktext_insert($log_text, \@logs, append => !($isExplain || $isTail));
     $log_text->scroll_to_iter($log_buf->get_end_iter, 0, 1, 0.5, 0.5);
     undef @logs;
 }
