@@ -150,7 +150,7 @@ sub detect {
 	}
 	# The Alcatel Speed Touch internet scanner is not supported by
 	# SANE
-	next if $description =~ /Alcatel.*Speed.*Touch|Camera/i;
+	next if $description =~ /Alcatel.*Speed.*Touch|Camera|ISDN|ADSL/i;
 	# Extract port
         $line =~ /\s+(\S+)\s*$/;
 	$port = $1;
@@ -190,11 +190,14 @@ sub detect {
     if (@configured) {
 	# Remove scanners which are already working
 	foreach my $d (@res) {
-	    my $searchport1 = handle_configs::searchstr($d->{port});
-	    my $searchport2 = handle_configs::searchstr($d->{port2});
+	    my $searchport1 =
+		handle_configs::searchstr(resolve_symlinks($d->{port}));
+	    my $searchport2 =
+		handle_configs::searchstr(resolve_symlinks($d->{port2}));
 	    foreach my $c (@configured) {
-		if ($c->{port} =~ /$searchport1$/ ||
-		    $searchport2 && $c->{port} =~ /$searchport2$/) {
+		my $currentport = resolve_symlinks($c->{port});
+		if ($currentport =~ /$searchport1$/ ||
+		    $searchport2 && $currentport =~ /$searchport2$/) {
 		    $d->{configured} = 1;
 		    last;
 		}
@@ -203,6 +206,35 @@ sub detect {
 	@res = grep { ! $_->{configured} } @res;
     }
     return @res;
+}
+
+sub resolve_symlinks {
+
+    # Check if a given file (either the pure filename or in a SANE device
+    # string as "<prefix>:<file>") is a symlink, if so expand the link.
+    # If the new file name is a link, expand again, until finding the
+    # physical file.
+    my ($file) = @_;
+    my $prefix = "";
+    if ($file =~ m!^([^/]*)(/.*)$!) {
+	$prefix = $1;
+	$file = $2;
+    } else {
+	return $file;
+    }
+    while (1) {
+	my $ls = `ls -l $file`;
+	if ($ls =~ m!\s($file)\s*\->\s*(\S+)\s*$!) {
+	    my $target = $2;
+	    if (($target !~ m!^/!) && ($file =~ m!^(.*)/[^/]+$!)) {
+		$target = "$1/$target";
+	    }
+	    $file = $target;
+	} else {
+	    last;
+	}
+    }
+    return $prefix . $file;
 }
 
 sub get_usb_ids_for_port {
