@@ -1014,9 +1014,9 @@ sub selectPackagesToUpgrade($$$;$$) {
 	#- used for package that are not correctly updated.
 	#- should only be used when nothing else can be done correctly.
 	my %upgradeNeedRemove = (
-				 'libstdc++' => 1,
-				 'compat-glibc' => 1,
-				 'compat-libs' => 1,
+#				 'libstdc++' => 1,
+#				 'compat-glibc' => 1,
+#				 'compat-libs' => 1,
 				);
 
 	#- generel purpose for forcing upgrade of package whatever version is.
@@ -1064,12 +1064,22 @@ sub selectPackagesToUpgrade($$$;$$) {
 	    foreach my $p (values %{$packages->{names}}) {
 		$ask_child->(packageName($p), "obsoletes", sub {
 				 #- take care of flags and version and release if present
-				 if ($_[0] =~ /^(\S*)\s*(\S*)\s*([^\s-]*)-?(\S*)/ && c::rpmdbNameTraverse($db, $1) > 0) {
-				     $3 and eval(versionCompare(packageVersion($p), $3) . $2 . 0) or next;
-				     $4 and eval(versionCompare(packageRelease($p), $4) . $2 . 0) or next;
-				     log::l("selecting " . packageName($p) . " by selection on obsoletes");
-				     $obsoletedPackages{$1} = undef;
-				     selectPackage($packages, $p);
+				 local ($_) = @_;
+				 if (my ($n,$o,$v,$r) = /^(\S*)\s*(\S*)\s*([^\s-]*)-?(\S*)/) {
+				     my $obsoleted = 0;
+				     my $check_obsoletes = sub {
+					 my ($header) = @_;
+					 (!$v || eval(versionCompare(c::headerGetEntry($header, 'version'), $v) . $o . 0)) &&
+					   (!$r || version_compare(c::headerGetEntry($header, 'version'), $v) != 0 ||
+					    eval(versionCompare(c::headerGetEntry($header, 'release'), $r) . $o . 0)) or return;
+					 ++$obsoleted;
+				     };
+				     c::rpmdbNameTraverse($db, $n, $check_obsoletes);
+				     if ($obsoleted > 0) {
+					 log::l("selecting " . packageName($p) . " by selection on obsoletes");
+					 $obsoletedPackages{$1} = undef;
+					 selectPackage($packages, $p);
+				     }
 				 }
 			     });
 	    }
