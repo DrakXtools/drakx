@@ -37,7 +37,7 @@ use POSIX;
 use Xconfig::various;
 use log;
 
-my $splash_working = 0;
+my $splash_working = 1;
 
 my $in = 'interactive'->vnew('su');
 
@@ -50,8 +50,10 @@ ugtk2->import(qw(:helpers :wrappers :create));
 
 my $no_bootsplash;
 my $x_mode = Xconfig::various::runlevel() == 5;
+my $splash_mode = 1;
 my $auto_mode = any::get_autologin();
 my $lilogrub = bootloader::detect_bootloader();
+my $switch_theme = '/usr/share/bootsplash/scripts/switch-themes';
 
 my $w = ugtk2->new(N("Boot Style Configuration"));
 my $window = $w->{window};
@@ -86,7 +88,7 @@ my %themes = 	('path' => '/usr/share/bootsplash/themes/',
                                 #'thumb'=>'/images/thumb.png',
                           },
                );
-my $cur_res = top(cat_('/etc/lilo.conf') =~ /[^#]*vga=(.*)/);
+my $cur_res = `/usr/share/bootsplash/scripts/detect-resolution`;
 #- verify that current resolution is ok
 if (member($cur_res, qw( 785 788 791 794))) {
     ($cur_res) = $bootloader::vga_modes{$cur_res} =~ /^([0-9x]+).*?$/;
@@ -96,15 +98,13 @@ if (member($cur_res, qw( 785 788 791 794))) {
 
 #- and check that lilo is the correct loader
 $no_bootsplash ||= $lilogrub ne 'LILO';
-$no_bootsplash = 0 if $::testing;
+do { $no_bootsplash = 0; $cur_res = '800x600' } if $::testing;
 my @thms;
-my @lilo_thms = if_(!$themes{default}, qw(default));
 my @boot_thms = if_(!$themes{default}, qw(default));
 chdir($themes{path}); #- we must change directory for correct @thms assignement
 foreach (all('.')) {
     if (-d $themes{path} . $_ && m/^[^.]/) {
         push @thms, $_;
-        -f $themes{path} . $_ . $themes{lilo}{file} and push @lilo_thms, $_;
         -f $themes{path} . $_ . $themes{boot}{path} . "bootsplash-$cur_res.jpg" and push @boot_thms, $_;
     }
     #       $_ eq $themes{'defaut'} and $default = $themes{'defaut'};
@@ -114,14 +114,10 @@ foreach (keys(%combo)) {
     $combo{$_} = gtkset_size_request(Gtk2::OptionMenu->new, 10, -1);
 }
 
-$combo{thms}->set_popdown_strings(@thms);
-$combo{lilo}->set_popdown_strings(@lilo_thms);
-$combo{boot}->set_popdown_strings(@boot_thms) if !$no_bootsplash;
-
-my $lilo_pixbuf;
-my $lilo_pic = gtkcreate_img($themes{def_thmb});
+do { $combo{boot}->set_popdown_strings(@boot_thms); $combo{boot}->entry->set_text($themes{default})} if !$no_bootsplash;
 
 my $boot_pic = gtkcreate_img($themes{def_thmb});
+change_image($boot_pic, $themes{default});
 
 my $thm_button = new Gtk2::Button(N("Install themes"));
 my $logo_thm = new Gtk2::CheckButton(N("Display theme\nunder console"));
@@ -132,131 +128,35 @@ $logo_thm->signal_connect(clicked => sub { invbool(\$keep_logo) });
 $B_create->signal_connect(clicked => sub {
                               system('/usr/sbin/draksplash ');
                           });
+			  
 #- ******** action to take on changing combos values
 
-$combo{thms}->entry->signal_connect(changed => sub {
-                                        my $thm_txt = $combo{thms}->entry->get_text;
-                                        $combo{lilo}->entry->set_text(member($thm_txt, @lilo_thms) ? $thm_txt : $themes{default} || 'default');
-                                        $combo{boot}->entry->set_text(member($thm_txt, @boot_thms) ? $thm_txt : $themes{default} || 'default');
-    
-                                    });
-
-$combo{lilo}->entry->signal_connect(changed => sub {
-                                        my $new_file = $themes{path} . $combo{lilo}->entry->get_text . $themes{lilo}{thumb};
-                                        undef($lilo_pixbuf);
-                                        $lilo_pixbuf = gtkcreate_pixbuf(-r $new_file ? $new_file : $themes{def_thmb});
-                                        $lilo_pixbuf = $lilo_pixbuf->scale_simple(155, 116, 'nearest');
-                                        $lilo_pic->set_from_pixbuf($lilo_pixbuf);
-                                    });
-
 $no_bootsplash == 0 
-  and $combo{boot}->entry->signal_connect(changed => sub {
-                                               my $img_file = $themes{path}.$combo{boot}->entry->get_text.$themes{boot}{path}."bootsplash-$cur_res.jpg";
-                                               $boot_pic = gtkcreate_img($img_file);
-                                           });
-
-$combo{thms}->entry->set_text($themes{default});
-
-$thm_button->signal_connect('clicked',
-                            sub {
-                                my $error = 0;
-                                my $boot_conf_file = '/etc/sysconfig/bootsplash';
-                                my $lilomsg = '/boot/message-graphic';
-                                #lilo installation
-                                if (-f $themes{path}.$combo{lilo}->entry->get_text . $themes{lilo}{file}) {
-                                    use MDK::Common::File;
-                                    cp_af($lilomsg, "/boot/message-graphic.old");
-                                    #can't use this anymore or $in->ask_warn(N("Error"), N("unable to backup lilo message"));
-                                    cp_af($themes{path} . $combo{lilo}->entry->get_text . $themes{lilo}{file}, $lilomsg);
-                                    #can't use this anymore  or $in->ask_warn(N("Error"), N("can't change lilo message"));
-                                } else {
-                                    $error = 1;
-                                    $in->ask_warn(N("Error"), N("Lilo message not found"));
-                                }
-                                #bootsplash install
-                                if ($::testing || -f $themes{path} . $combo{boot}->entry->get_text . $themes{boot}{path} . "bootsplash-$cur_res.jpg") {
-                                    my $bootsplash_cont = "# -*- Mode: shell-script -*-
-# Specify here if you want add the splash logo to initrd when
-# generating an initrd. You can specify :
-#
-# SPLASH=no to don't have a splash screen
-#
-# SPLASH=auto to make autodetect the splash screen
-#
-# SPLASH=INT When Integer could be 800x600 1024x768 1280x1024
-#
-SPLASH=$cur_res
-# Choose the themes. The should be based in
-# /usr/share/bootsplash/themes/
-THEME=" . $combo{boot}->entry->get_text . "
-# Say yes here if you want to leave the logo on the console.
-# Three options :
-#
-# LOGO_CONSOLE=no don't display logo under console.
-#
-# LOGO_CONSOLE=yes display logo under console.
-#
-# LOGO_CONSOLE=theme leave the theme to decide.
-#
-LOGO_CONSOLE=" . ($keep_logo ? 'yes' : 'no') . "\n";
-                                    if (-f $boot_conf_file) {
-                                        eval { output($boot_conf_file, $bootsplash_cont) };
-                                        $@ && $in->ask_warn(N("Error"), N("Can't write /etc/sysconfig/bootsplash."));
-                                    } else {
-                                        $in->ask_warn(N("Error"), N("Can't write /etc/sysconfig/bootsplash\nFile not found."));
-                                        $error = 1;
-                                    }
-                                } else {
-                                    $in->ask_warn("Error", "BootSplash screen not found");
-                                    return;
-                                }
-                                #here is mkinitrd time
-                                if (!$error && !$::testing) {
-                                    foreach (map { if_(m|^initrd-(.*)\.img|, $1) } all('/boot')) {
-                                        if (system("mkinitrd -f /boot/initrd-$_.img $_")) {
-                                            $in->ask_warn(N("Error"),
-                                                          N("Can't launch mkinitrd -f /boot/initrd-%s.img %s.", $_,$_));
-                                            $error = 1;
-                                        }
-                                    }
-                                }
-                                if (system('lilo')) {
-                                    $in->ask_warn(N("Error"),
-                                                  N("Can't relaunch LiLo!
-Launch \"lilo\" as root in command line to complete LiLo theme installation."));
-                                    $error = 1;
-                                }
-                                $in->ask_warn($error ? N("Error") : N("Notice"),
-                                              $error ? N("Theme installation failed!") : N("LiLo and Bootsplash themes installation successful"));
-                            });
-
-my $x_box;
+  and $combo{boot}->entry->signal_connect(changed => sub { change_image($boot_pic, $combo{boot}->entry->get_text) });
+my ($x_box,$splash_box);
 
 gtkadd($window,
        gtkpack_(new Gtk2::VBox(0,0),
                  #Splash Selector
                  if_($splash_working,
-                 0, gtkadd(my $thm_frame = new Gtk2::Frame(N("Splash selection")),
-                        gtkpack(gtkset_border_width(new Gtk2::HBox(0, 5), 5),
-                                  gtkpack__(new Gtk2::VBox(0, 5),
-                                            N("Themes"),
-                                            $combo{thms},
-                                            N("\nSelect the theme for\nlilo and bootsplash,\nyou can choose\nthem separately"),
+                 0, gtkadd(my $thm_frame = new Gtk2::Frame(N("Graphical boot theme selection")),
+                         gtkpack(gtkset_border_width(new Gtk2::VBox(0, 5), 5),
+		         gtksignal_connect(gtkset_active(new Gtk2::CheckButton(N("Use graphical boot")), $splash_mode), 
+			          clicked => sub {
+		                 	 $splash_box->set_sensitive(!$splash_mode);
+		                  	$splash_mode = !$splash_mode;
+		                  }),
+				  gtkpack__(gtkset_sensitive($splash_box = Gtk2::HBox->new(0, 0), $splash_mode),
+				  gtkpack__(new Gtk2::VBox(0, 5),
+                                            N("\nTheme"),
+                                            $combo{boot},
                                             $logo_thm),
                                   Gtk2::VSeparator->new,
                                   gtkpack__(new Gtk2::VBox(0, 5),
-                                            N("Lilo screen"),
-                                            $combo{lilo},
-                                            $lilo_pic,
-                                            $B_create),
-                                  Gtk2::VSeparator->new,
-                                  gtkpack__(new Gtk2::VBox(0, 5),
-                                            N("Bootsplash"),
-                                            $combo{boot},
-                                            $boot_pic,
-                                            $thm_button))
+                                            $boot_pic))
                        ),
                     ),
+		 ),
                  0, gtkadd(new Gtk2::Frame(N("System mode")),
                         gtkpack__(new Gtk2::VBox(0, 5),
                                   gtksignal_connect(gtkset_active(new Gtk2::CheckButton(N("Launch the graphical environment when your system starts")), $x_mode), clicked => sub {
@@ -289,6 +189,7 @@ gtkadd($window,
                                     ok_clicked => sub {
                                               Xconfig::various::runlevel($x_mode ? 5 : 3);
                                               updateAutologin();
+					      $no_bootsplash or update_bootsplash($combo{boot}->entry->get_text, $keep_logo);
                                               ugtk2->exit(0);
                                           }
                                    },
@@ -338,9 +239,33 @@ sub lilo_choice() {
 
 sub updateAutologin() {
     my ($usern, $deskt) = ($user_combo->entry->get_text, $desktop_combo->entry->get_text);
+    $::testing and return;
     if ($auto_buttons[0]->get_active) {
         any::set_autologin($usern, $deskt);
     } else {
         any::set_autologin();
     }
+}
+
+sub update_bootsplash {
+    my ($theme, $keep_logo) = @_;
+    if (-x $switch_theme) {
+	my $val = $keep_logo ? 'theme' : 'no';
+	if ($::testing) {
+	    print "substInFile { s/^LOGO_CONSOLE=.*/LOGO_CONSOLE=$val/ } /etc/sysconfig/bootsplash\n";
+	    print "system($switch_theme, $theme)\n"
+	} else {
+	    substInFile { s/^LOGO_CONSOLE=.*/LOGO_CONSOLE=$val/ } "/etc/sysconfig/bootsplash";
+	    system($switch_theme, $theme)
+	}
+    }
+}
+
+sub change_image {
+    my ($boot_pic, $val) = @_;
+    my $img_file = $themes{path} . $val . $themes{boot}{path}."bootsplash-$cur_res.jpg";
+    -f $img_file or return;
+    my $boot_pixbuf = gtkcreate_pixbuf($img_file);
+    $boot_pixbuf = $boot_pixbuf->scale_simple(300, 200, 'nearest');
+    $boot_pic->set_from_pixbuf($boot_pixbuf);
 }
