@@ -162,7 +162,20 @@ sub formatPartitions {
 
     $o->{steps}{choosePackages}{done} = 0;
     installStepsCall($o, $auto, 'choosePartitionsToFormat', $o->{fstab}) if !$o->{isUpgrade};
+    my $want_root_formated = fsedit::get_root($o->{fstab})->{toFormat};
+    if ($want_root_formated) {
+	foreach ('/usr') {
+	    my $part = fsedit::mntpoint2part($_, $o->{fstab}) or next;
+	    $part->{toFormat} or die _("You must also format %s", $_);
+	}
+    }
     installStepsCall($o, $auto, 'formatMountPartitions', $o->{fstab}) if !$::testing;
+
+    if ($want_root_formated) {
+	#- we formatted /, ensure /var/lib/rpm is cleaned otherwise bad things can happen
+	#- (especially when /var is *not* formatted)
+	eval { rm_rf("$o->{prefix}/var/lib/rpm") };
+    }
 
     mkdir "$o->{prefix}/$_", 0755 foreach 
       qw(dev etc etc/profile.d etc/rpm etc/sysconfig etc/sysconfig/console 
