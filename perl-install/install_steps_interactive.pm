@@ -72,14 +72,15 @@ sub selectLanguage {
 
     $o->charsetChanged;
 
-    $o->ask_warn('', 
-"If you see this message it is because you choose a language for " .
-"which DrakX does not include a translation yet; however the fact " .
-"that it is listed means there is some support for it anyway.\n" .
-"That is, once GNU/Linux will be installed, you will be able to at " .
-"least read and write in that language; and possibly more (various " .
-"fonts, spell checkers, various programs translated etc. that " .
-"varies from language to language).") if $o->{lang} !~ /^en/ && translate("_I18N_");
+    $o->ask_warn('', formatAlaTeX(
+"If you see this message it is because you choose a language for
+which DrakX does not include a translation yet; however the fact
+that it is listed means there is some support for it anyway.
+
+That is, once GNU/Linux will be installed, you will be able to at
+least read and write in that language; and possibly more (various
+fonts, spell checkers, various programs translated etc. that
+varies from language to language).")) if $o->{lang} !~ /^en/ && !lang::load_mo();
     
     unless ($o->{useless_thing_accepted}) {
 	$o->set_help('license');
