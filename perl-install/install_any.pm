@@ -429,11 +429,16 @@ sub addToBeDone(&$) {
 
 sub setAuthentication {
     my ($o) = @_;
-    my ($shadow, $md5, $nis) = @{$o->{authentication} || {}}{qw(shadow md5 NIS)};
+    my ($shadow, $md5, $ldap, $nis) = @{$o->{authentication} || {}}{qw(shadow md5 LDAP NIS)};
     my $p = $o->{prefix};
-    any::enableMD5Shadow($p, $shadow, $md5);
+    #- obsoleted always enabled (in /etc/pam.d/system-auth furthermore) #any::enableMD5Shadow($p, $shadow, $md5);
     any::enableShadow($p) if $shadow;
-    if ($nis) {
+    if ($ldap) {
+	$o->pkg_install(qw(chkauth openldap-clients nss_ldap pam_ldap));
+	run_program::rooted($o->{prefix}, "/usr/sbin/chkauth", "ldap", "-D", $o->{netc}{LDAPDOMAIN}, "-s", $ldap);
+    } elsif ($nis) {
+	#$o->pkg_install(qw(chkauth ypbind yp-tools net-tools));
+	#run_program::rooted($o->{prefix}, "/usr/sbin/chkauth", "yp", $domain, "-s", $nis);
 	$o->pkg_install("ypbind");
 	my $domain = $o->{netc}{NISDOMAIN};
 	$domain || $nis ne "broadcast" or die _("Can't use broadcast with no NIS domain");
