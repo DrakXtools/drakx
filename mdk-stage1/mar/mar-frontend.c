@@ -82,8 +82,9 @@ mar_create_file(char *dest_file, char **files)
 	{
 		int fsiz = file_size(files[filenum]);
 		if (fsiz == -1)
-			return -1;
-		total_length += fsiz;
+			files[filenum] = "FILE_NOT_FOUND&";
+		else
+			total_length += fsiz;
 		filenum++;
 	}
 
@@ -94,37 +95,39 @@ mar_create_file(char *dest_file, char **files)
 	filenum = 0;
 	while (files[filenum])
 	{
-		FILE * f = fopen(files[filenum], "r");
-		int fsize;
-		if (!f)
-		{
-			perror(files[filenum]);
-			return -1;
+		if (strcmp(files[filenum], "FILE_NOT_FOUND&")) {
+			FILE * f = fopen(files[filenum], "r");
+			int fsize;
+			if (!f)
+			{
+				perror(files[filenum]);
+				return -1;
+			}
+			
+			/* filename */
+			strcpy(&(temp_marfile_buffer[current_offset_filetable]), files[filenum]);
+			current_offset_filetable += strlen(files[filenum]) + 1;
+			
+			/* file_length */
+			fsize = file_size(files[filenum]);
+			if (fsize == -1) return -1;
+			memcpy(&temp_marfile_buffer[current_offset_filetable], &fsize, sizeof(int));
+			current_offset_filetable += sizeof(int);
+			
+			/* data_offset */
+			memcpy(&temp_marfile_buffer[current_offset_filetable], &current_offset_rawdata, sizeof(int));
+			current_offset_filetable += sizeof(int);
+			
+			/* data_raw_data */
+			if (fread(&temp_marfile_buffer[current_offset_rawdata], 1, fsize, f) != fsize)
+			{
+				perror(files[filenum]);
+				return -1;
+			}
+			fclose(f);
+
+			current_offset_rawdata += fsize;
 		}
-
-		/* filename */
-		strcpy(&(temp_marfile_buffer[current_offset_filetable]), files[filenum]);
-		current_offset_filetable += strlen(files[filenum]) + 1;
-
-		/* file_length */
-		fsize = file_size(files[filenum]);
-		if (fsize == -1) return -1;
-		memcpy(&temp_marfile_buffer[current_offset_filetable], &fsize, sizeof(int));
-		current_offset_filetable += sizeof(int);
-
-		/* data_offset */
-		memcpy(&temp_marfile_buffer[current_offset_filetable], &current_offset_rawdata, sizeof(int));
-		current_offset_filetable += sizeof(int);
-
-		/* data_raw_data */
-		if (fread(&temp_marfile_buffer[current_offset_rawdata], 1, fsize, f) != fsize)
-		{
-			perror(files[filenum]);
-			return -1;
-		}
-		fclose(f);
-
-		current_offset_rawdata += fsize;
 
 		filenum++;
 	}
