@@ -407,6 +407,8 @@ sub miscellaneous {
         TYPE => $o->{installClass},
         SECURITY => $o->{security},
     });
+    setVarsInSh ("$o->{prefix}/etc/profile.d/proxy.sh",  $o->{miscellaneous}, qw(http_proxy ftp_proxy)); 
+    setVarsInCsh("$o->{prefix}/etc/profile.d/proxy.csh", $o->{miscellaneous}, qw(http_proxy ftp_proxy)); 
 }
 
 #------------------------------------------------------------------------------

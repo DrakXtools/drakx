@@ -47,7 +47,7 @@ sub ask_from_listW {
 	$defW->grab_focus if $defW;
 	$w->main;
     } else {
-	$w->_ask_from_list($messages, $l, $def);
+	$w->_ask_from_list($title, $messages, $l, $def);
 	$w->main;
     }
 }
@@ -56,16 +56,17 @@ sub ask_many_from_list_refW($$$$$) {
     my ($o, $title, $messages, $list, $val) = @_;
     my $n = 0;
     my $w = my_gtk->new('', %$o);
+    my $box = gtkpack(new Gtk::VBox(0,0),
+	map {
+	    my $nn = $n++;
+	    my $o = Gtk::CheckButton->new($_);
+	    $o->set_active(${$val->[$nn]});
+	    $o->signal_connect(clicked => sub { invbool \${$val->[$nn]} });
+	    $o;
+	} @$list);
     gtkadd($w->{window},
 	   gtkpack_(create_box_with_title($w, @$messages),
-		   1, gtkset_usize(createScrolledWindow(gtkpack(new Gtk::VBox(0,0),
-			   map {
-			       my $nn = $n++;
-			       my $o = Gtk::CheckButton->new($_);
-			       $o->set_active(${$val->[$nn]});
-			       $o->signal_connect(clicked => sub { invbool \${$val->[$nn]} });
-			       $o;
-			   } @$list)), 0, @$list > 11 ? 250 : @$list * 260 / 11 + 10),
+		   1, @$list > 11 ? gtkset_usize(createScrolledWindow($box), 0, 250) : $box,
 		   0, $w->create_okcancel,
 		  )
 	  );

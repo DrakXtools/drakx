@@ -1,6 +1,6 @@
 VERSION     = 2.2.10-BOOT                                                                             
 SUDO        = sudo
-MKE2FS      = /sbin/mke2fs -q -m 0 -F
+MKE2FS      = /sbin/mke2fs -q -m 0 -F -s 1
 SO_FILES    = c/blib/arch/auto/c/c.so                                                                 
 PMS         = *.pm c/stuff.pm resize_fat/*.pm pci_probing/*.pm commands install2 diskdrake XFdrake g_auto_install
 REP4PMS     = /usr/bin/perl-install
@@ -119,6 +119,8 @@ get_needed_files: $(DIRS)
 		  install -d `dirname $$d` && \
 		  if (echo $$i | grep -q "\.pm"); then \
 		     perl -pe '$$_ =~ /^__END__/ and exit(0);' $$i > $$d; \
+		  elif (echo $$i | grep -q "\.so"); then \
+			  install -s $$i $$d; \
 		  else \
 		  	  cp -f $$i $$d; \
 		  fi; \
@@ -129,7 +131,7 @@ get_needed_files: $(DIRS)
 	cd $(DEST)/usr/bin ; mv insmod insmod_
 	rmdir $(DEST)/bin $(DEST)/sbin
 
-	ln -sf ash $(DEST)/usr/bin/sh
+	ln -sf zsh $(DEST)/usr/bin/sh
 
 	tar xfy locales.tar.bz2 -C $(DEST)
 #	DEST=$(DEST) perl -I. -MForMakefile -e 'locale()'
@@ -172,13 +174,13 @@ stage2:
 	$(SUDO) cp -a $(DEST)/* $(STAGE2TMP)
 
 	$(SUDO) umount /mnt/stage2 ; true
-	dd if=/dev/zero of=$(STAGE2) bs=1M count=16
-	$(MKE2FS) $(STAGE2)
+	dd if=/dev/zero of=$(STAGE2) bs=1M count=14
+	$(MKE2FS) -N 1000 $(STAGE2)
 	$(SUDO) mount -t ext2 $(STAGE2) /mnt/stage2 -o loop
 
 #	hack to reduce the STAGE2 image
 	rm $(STAGE2TMP)/usr/X11R6/bin/XF86_VGA16
-	for i in /usr/share/locale /usr/share/keymaps /usr/share/xmodmap; do \
+	for i in /usr/share/locale /usr/share/keymaps /usr/share/xmodmap $(REP4PMS)/po; do \
 		name=`basename $$i` ; \
 		(cd $(STAGE2TMP)/$$i ; find * | cpio -o 2>/dev/null | bzip2 > ../$$name.cpio.bz2 ; cd .. ; rm -rf $$name) \
 	done

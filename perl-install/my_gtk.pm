@@ -430,7 +430,7 @@ sub ask_warn       { my $w = my_gtk->new(shift @_); $w->_ask_warn(@_); main($w);
 sub ask_yesorno    { my $w = my_gtk->new(shift @_); $w->_ask_okcancel(@_, _("Yes"), _("No")); main($w); }
 sub ask_okcancel   { my $w = my_gtk->new(shift @_); $w->_ask_okcancel(@_, _("Is this correct?"), _("Ok"), _("Cancel")); main($w); }
 sub ask_from_entry { my $w = my_gtk->new(shift @_); $w->_ask_from_entry(@_); main($w); }
-sub ask_from_list  { my $w = my_gtk->new(shift @_); $w->_ask_from_list(@_); main($w); }
+sub ask_from_list  { my $w = my_gtk->new($_[0]); $w->_ask_from_list(@_); main($w); }
 sub ask_file       { my $w = my_gtk->new(''); $w->_ask_file(@_); main($w); }
 
 sub _ask_from_entry($$@) {
@@ -448,8 +448,9 @@ sub _ask_from_entry($$@) {
     $entry->grab_focus();
 }
 
-sub _ask_from_list($$$$) {
-    my ($o, $messages, $l, $def) = @_;
+sub _ask_from_list {
+    my ($o, $title, $messages, $l, $def) = @_;
+    my (undef, @okcancel) = ref $title ? @$title : $title;
     my $list = new Gtk::CList(1);
     my ($first_time, $starting_word, $start_reg) = (1, '', "^");
     my (@widgets, $timeout, $curr);
@@ -461,7 +462,6 @@ sub _ask_from_list($$$$) {
 	$list->moveto($_[0], 0, 0.5, 0);
     };
 
-    $list->signal_connect(button_release_event => $leave);
     $list->signal_connect(select_row => sub {
 	my ($w, $row, undef, $e) = @_;
 	$curr = $row;
@@ -500,10 +500,16 @@ sub _ask_from_list($$$$) {
 	1;
     });
     $list->set_selection_mode('browse');
+    $list->set_column_auto_resize(0, 1);
 
+    $o->{ok_clicked} = $leave;
+    $o->{cancel_clicked} = sub { die "ask_from_list cancel" };
     gtkadd($o->{window},
 	   gtkpack($o->create_box_with_title(@$messages),
-		   @$l > 15 ? gtkset_usize(createScrolledWindow($list), 200, 280) : $list));
+		   gtkpack_(new Gtk::VBox(0,7),
+			    1, @$l > 15 ? gtkset_usize(createScrolledWindow($list), 200, 280) : $list,
+			    @okcancel || !ref $title ? (0, create_okcancel($o, @okcancel)) : ())
+		  ));
 
     $o->sync; #- otherwise the moveto is not done
     map_index {

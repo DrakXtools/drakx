@@ -49,6 +49,7 @@ sub kill_action {
 #------------------------------------------------------------------------------
 sub selectLanguage($) {
     my ($o) = @_;
+
     $o->{lang} =
       lang::text2lang($o->ask_from_list("Language",
 					_("Which language do you want?"),
@@ -307,7 +308,7 @@ such as ``mybox.mylab.myco.com''.
 You may also enter the IP address of the gateway if you have one"),
 			     [_("Host name:"), _("DNS server:"), _("Gateway:"), !$::beginner ? _("Gateway device:") : ()],
 			     [(map { \$netc->{$_}} qw(HOSTNAME dnsServer GATEWAY)),
-				      {val => \$netc->{GATEWAYDEV}, list => \@devices}]
+			      {val => \$netc->{GATEWAYDEV}, list => \@devices}]
 			    );
 }
 
@@ -530,11 +531,12 @@ sub setRootPassword($) {
     $o->{security} < 2 or 
       $o->ask_from_entries_ref([_("Set root password"), _("Ok"), _("No password")],
 			 _("Set root password"),
-			 [_("Password:"), _("Password (again):"), $o->{installClass} eq "server" || $::expert ? (_("Use shadow file"), _("Use MD5 passwords")) : () ],
+			 [_("Password:"), _("Password (again):"), $o->{installClass} eq "server" || $::expert ? (_("Use shadow file"), _("Use MD5 passwords")) : (), $::beginner ? () : _("Use NIS") ],
 			 [{ val => \$sup->{password},  hidden => 1 },
 			  { val => \$sup->{password2}, hidden => 1 },
 			  { val => \$o->{authentification}{shadow}, type => 'bool', text => _("shadow") },
 			  { val => \$o->{authentification}{md5}, type => 'bool', text => _("MD5") },
+			  { val => \$o->{authentification}{NIS}, type => 'bool', text => _("yellow pages") },
 			 ],
 			 complete => sub {
 			     $sup->{password} eq $sup->{password2} or $o->ask_warn('', [ _("The passwords do not match"), _("Please try again") ]), return (1,1);
@@ -757,11 +759,21 @@ sub miscellaneous {
 	_("Miscellaneous questions"),
 	[ _("Do you have a laptop?"), 
 	  _("Use hard drive optimizations"), 
-	  _("Security level") ],
+	  _("Security level"),
+	  _("HTTP proxy"),
+	  _("FTP proxy"),
+	],
 	[ { val => \$u->{LAPTOP}, type => 'bool' },
 	  { val => \$u->{HDPARM}, type => 'bool', text => _("(may cause disk problems)") },
 	  { val => \$s, list => [ map { $l{$_} } ikeys %l ] },
+	  \$u->{http_proxy},
+	  \$u->{ftp_proxy},
 	],
+        complete => sub {
+	    $u->{http_proxy} =~ m,^($|http://), or $o->ask_warn('', _("Proxy should be http://...")), return 1,3;
+	    $u->{ftp_proxy} =~ m,^($|ftp://), or $o->ask_warn('', _("Proxy should be ftp://...")), return 1,4;
+	    0;
+	}
     ) or return;
     my %m = reverse %l; $o->{security} = $m{$s};
     $o->SUPER::miscellaneous;

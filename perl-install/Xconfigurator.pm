@@ -5,7 +5,7 @@ use strict;
 use vars qw($in $install $resolution_wanted @depths @monitorSize2resolution @hsyncranges %min_hsync4wres @vsyncranges %depths @resolutions %serversdriver @svgaservers @accelservers @allservers %videomemory @ramdac_name @ramdac_id @clockchip_name @clockchip_id %keymap_translate %standard_monitors $intro_text $finalcomment_text $s3_comment $cirrus_comment $probeonlywarning_text $monitorintro_text $hsyncintro_text $vsyncintro_text $XF86firstchunk_text $keyboardsection_start $keyboardsection_part2 $keyboardsection_end $pointersection_text1 $pointersection_text2 $monitorsection_text1 $monitorsection_text2 $monitorsection_text3 $monitorsection_text4 $modelines_text_Trident_TG_96xx $modelines_text $devicesection_text $screensection_text1 %lines %xkb_options);
 
 use pci_probing::main;
-use common qw(:common :file :functional);
+use common qw(:common :file :functional :system);
 use log;
 
 use Xconfigurator_consts;
@@ -111,12 +111,8 @@ sub readMonitorsDB {
 
 sub rewriteInittab {
     my ($runlevel) = @_;
-    local @ARGV = grep { -r $_ } "$prefix/etc/inittab" or log::l("missing inittab!!!"), return;
-    local $^I = '';
-    while (<>) {
-	s/^(id:)[35](:initdefault:)\s*$/$1$runlevel$2\n/;
-	print;
-    }
+    substInFile { s/^(id:)[35](:initdefault:)\s*$/$1$runlevel$2\n/ }
+      (grep { -r $_ } "$prefix/etc/inittab" or log::l("missing inittab!!!"), return);
 }
 
 sub keepOnlyLegalModes {
@@ -708,7 +704,7 @@ sub main {
 	   __("Test again") => sub { $ok = testFinalConfig($o, 1) },
 	   __("Quit") => sub { $quit = 1 },
         );
-	&{$c{$in->ask_from_list_('',
+	&{$c{$in->ask_from_list_([''],
 				 _("What do you want to do?"),
 				 [ grep { !ref } @c ])}};
     }

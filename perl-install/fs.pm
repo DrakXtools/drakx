@@ -57,7 +57,9 @@ sub get_mntpoints_from_fstab($) {
     }
 }
 
-sub format_ext2($;$) {
+#- mke2fs -b (1024|2048|4096) -c -i(1024 > 262144) -N (1 > 100000000) -m (0-100%) -L volume-label
+#- tune2fs
+sub format_ext2($@) {
     my ($dev, @options) = @_;
 
     $dev =~ m,(rd|ida)/, and push @options, qw(-b 4096 -R stride=16); #- For RAID only.
@@ -65,7 +67,7 @@ sub format_ext2($;$) {
     run_program::run("mke2fs", devices::make($dev), @options) or die _("%s formatting of %s failed", "ext2", $dev);
 }
 
-sub format_dos($;$@) {
+sub format_dos($@) {
     my ($dev, @options) = @_;
 
     run_program::run("mkdosfs", devices::make($dev), @options) or die _("%s formatting of %s failed", "dos", $dev);

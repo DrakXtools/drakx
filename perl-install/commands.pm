@@ -447,7 +447,7 @@ $l{Destination}, $l{Gateway}, $l{Mask}, $l{Iface}
 
 sub df {
     my ($h) = getopts(\@_, qw(h));
-    my ($dev, $size, $free, $used, $use, $mntpoint);
+    my ($dev, $blocksize, $size, $free, $used, $use, $mntpoint);
     open DF, ">&STDOUT";
     format DF_TOP =
 Filesystem          Size      Used    Avail     Use  Mounted on
@@ -465,7 +465,9 @@ $dev, $size, $used, $free, $use, $mntpoint
 	$mntpoint = $h{$dev};
 	my $buf = ' ' x 20000;
 	syscall_('statfs', $mntpoint, $buf) or next;
-	(undef, undef, $size, $free) = unpack "l7", $buf;
+	(undef, $blocksize, $size, undef, $free, undef) = unpack "L2L4", $buf;
+	$_ *= $blocksize / 1024 foreach $size, $free;
+
 	$size or next;
 
 	$use = int (100 * ($size - $free) / $size);
@@ -489,6 +491,22 @@ sub kill {
 sub lspci {
     require 'pci_probing/main.pm';
     print join "\n", pci_probing::main::list (), '';
+}
+sub dmesg { print cat_("/tmp/syslog"); }
+
+sub  install_cpio($$) {
+    my ($dir, $name) = @_; 
+
+    return "$dir/$name" if -e "$dir/$name";
+
+    my $cpio = "$dir.cpio.bz2";
+    -e $cpio or return;
+
+    eval { rm("-r", $dir) };
+    mkdir $dir, 0755;
+    require 'run_program.pm';
+    run_program::run("cd $dir ; bzip2 -cd $cpio | cpio -id $name $name/*");
+    "$dir/$name";
 }
 
 #-######################################################################################

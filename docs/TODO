@@ -1,89 +1,88 @@
-warn the user if not enough ram to fulfill install
+i18n
+
+standalone configuration applications
+
+ask proxy from http/ftp proxy
+
+X configuration, bootloader in kickstart
+
+(pix)kickstart
+
+(pix)diskdrake
+
+(pix)NIS
+
+text install
+
+(fpons)test after printer config
+
+(pix)warn the user if not enough ram to fulfill install
+
+(pix)options in mkfs
+
+update the list of modules (in update_kernel)
+merge the install(1) of redhat
+
+initrd in bzip2
+
+suggested partition tables must be better foreach installClass
+
+(fpons)verify the free space is big enough.
+
+have a better time estimation of the remaining time in install packages
+
+(pix)ask for more than the memory size detected
+
+(fpons)pb with dependencies ``missing'': icewm do not require XFree86 and so you can have icewm but no X server
+
+(?)maybe remove commented lines in /usr/lib/perl5/... files
+
+(pix) try detect_devices::floppies (and how are scsi floppies handled?)
+maybe: do a iotcl FDGETPRM to detect fd1, fd0.
+
+(pix) kudzu or not in miscellaneous
+
+(fpons)modem config
+
+smaller zsh (or ash in initrd)
+
+--------------------------------------------------------------------------------
+aha152x needs "insmod aha152x.o aha152x=0x140,11,7"
+
+grub, chos
+
+(?)timezone using a picture (pb: how to delimit zones)
+
+(fpons)handle dat drives
+
+sound config
+
+(?)ability to select the type of install when booting of cdrom
+(?)use the ability of el torito to handle 2.88MB or more 
+
+add fdisk using the zvt widget (taken in gnome-libs)
 
 using setxkb, enable the testing of the keyboard
 
 enable the testing of the mouse type (under X) (wheel)
 
-add fdisk using the zvt widget (taken in gnome-libs)
-
-test after printer config
-
 diskdrake should warn if nb_ide_parts > 63, nb_scsi_parts > 15
 
-propose fb in XFdrake
+(obsolete)lilo-deinstallation in case of lilo auto-installation for beginners
 
-update the list of modules (in update_kernel)
+(?)loadFont sucks
 
-merge the install(1) of redhat
+(obsolete)trash on the screen when X first starts
 
-lilo-deinstallation in case of lilo auto-installation for beginners
+(?)get the error when reading .rpm files fail
 
-verify the free space is big enough.
+(?)remove the gray line surrounding the logo
 
-loadFont sucks
+(?)rewrite mouseconfig in perl?
 
-have a better time estimation of the remaining time in install packages
-
-trash on the screen when X first starts
-
-get the error when reading .rpm files fail
-
-ask for notepad (aka portable) or not
-ask for hdparm or not
-ask for more than the memory size detected
-#ask for the VGA mode for lilo or vidmode
-ask the security level
-
-remove the gray line surrounding the logo
-
-pb with dependencies ``missing'': icewm do not require XFree86 and so you can have icewm but no X server
-
-rewrite mouseconfig in perl?
-
-cleanup /etc/services & /etc/protocols
-
-maybe remove commented lines in /usr/lib/perl5/... files
-
-handle zip/dat drives
+(?)cleanup /etc/services & /etc/protocols
 
 # in 2.3.15 "Silicon Integrated Systems [SiS]|SiS900 10/100 Ethernet" is handled
 
-remove cpio from base when mkbootdisk deps is added
-
-timezone using a picture (pb: how to delimit zones)
-
-suggested partition tables must be better foreach installClass
-
-the different xmodmaps for every languages (maybe gnome-core xmodmaps can help)
-xmodmap needed even for english as the backspace is not what it should
-
-aha152x needs "insmod aha152x.o aha152x=0x140,11,7"
-
-have isofs in module.
-
-replace in place catchable die's by cdie's  (as in partition_table::load)
-
-strange: no scsi of type 'fd', only 'tape'
-
-try detect_devices::floppies (and how are scsi floppies handled?)
-maybe: do a iotcl FDGETPRM to detect fd1, fd0.
-
-test smp (is it enough to scan /proc/cpuinfo for multiple /^processor/ lines?)
-
-remove the nasty wrapping arrow (in help) by patching gtk :(
-
-in ask_from_list, the horizontal scroll is buggy
-
-df is bugged (show bad sizes)
-
-wish: ability to select the type of install when booting of cdrom
-
-use the ability of el torito to handle 2.88MB or more 
-
-use ddcprobe monitor's size info for pnp monitors
-use ddcprobe video card memory size info
-use ddcprobe modelines to reduce the available resolutions
-
-kickstart like
-tolook qw(fstab )
+(?)strange: no scsi of type 'fd', only 'tape'
 

@@ -9,7 +9,7 @@ use strict;
 #-######################################################################################
 use common qw(:common :system :file);
 use run_program;
-use install_any;
+use commands;
 use log;
 use c;
 
@@ -141,11 +141,11 @@ sub setup($) {
     my ($keyboard) = @_;
     my $o = $keyboards{$keyboard} or return;
 
-    if (my $file = install_any::install_cpio("/usr/share/keymaps", "$o->[1].kmap")) {
+    if (my $file = commands::install_cpio("/usr/share/keymaps", "$o->[1].kmap")) {
 	log::l("loading keymap $o->[1]");
 	load(cat_($file)) if -e $file;
     }
-    if (my $file = install_any::install_cpio("/usr/share/xmodmap", "xmodmap.$keyboard")) {
+    if (my $file = commands::install_cpio("/usr/share/xmodmap", "xmodmap.$keyboard")) {
 	eval { run_program::run('xmodmap', $file) } unless $::testing;
     }
 }

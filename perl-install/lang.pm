@@ -8,7 +8,6 @@ use strict;
 #-######################################################################################
 use common qw(:file);
 use commands;
-use install_any;
 use log;
 
 #-######################################################################################
@@ -149,7 +148,7 @@ sub set {
 	delete $ENV{LC_ALL};
 	delete $ENV{LINGUAS};
     }
-    install_any::install_cpio("/usr/share/locale", $lang);
+    commands::install_cpio("/usr/share/locale", $lang);
 }
 
 sub write {
@@ -187,7 +186,11 @@ sub load_po($) {
     $s .= "package po::I18N;\n";
     $s .= "\%$lang = (";
 
-    my $f; -e ($f = "$_/po/$lang.po") and last foreach @INC;    
+    my $f; -e ($f = "$_/po/$lang.po") and last foreach @INC;
+    unless (-e $f) {
+	-e ($f = "$_") and last foreach @INC;
+	$f = commands::install_cpio("$f/po", "$lang.po");
+    }
     local *F; open F, $f or return;
     foreach (<F>) {
 	/^msgstr/ and $state = 1;

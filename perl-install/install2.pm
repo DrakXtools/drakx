@@ -68,6 +68,7 @@ for (my $i = 0; $i < @installSteps; $i += 2) {
     $h{next}    = $installSteps[$i + 2];
     $h{entered} = 0;
     $h{onError} = $installSteps[$i + 2 * $h{onError}];
+    $h{reachable} = !$h{needs};
     $installSteps{ $installSteps[$i] } = \%h;
     push @orderedInstallSteps, $installSteps[$i];
 }
@@ -123,7 +124,7 @@ $o = $::o = {
     mkbootdisk => 1, #- no mkbootdisk if 0 or undef, find a floppy with 1, or fd1
 #-    packages   => [ qw() ],
     partitioning => { clearall => 0, eraseBadPartitions => 0, auto_allocate => 0, autoformat => 0, readonly => 0 },
-    security => 3,
+#-    security => 3,
 #-    partitions => [
 #-		      { mntpoint => "/boot", size =>  16 << 11, type => 0x83 },
 #-		      { mntpoint => "/",     size => 256 << 11, type => 0x83 },
@@ -181,7 +182,7 @@ $o = $::o = {
     steps        => \%installSteps,
     orderedSteps => \@orderedInstallSteps,
 
-    base => [ qw(basesystem sed initscripts console-tools mkbootdisk anacron utempter ldconfig chkconfig ntsysv mktemp setup filesystem SysVinit bdflush crontabs dev e2fsprogs etcskel fileutils findutils getty_ps grep groff gzip hdparm info initscripts isapnptools kernel less ldconfig lilo logrotate losetup man mkinitrd mingetty modutils mount net-tools passwd procmail procps psmisc mandrake-release rootfiles rpm sash sed setserial shadow-utils sh-utils slocate stat sysklogd tar termcap textutils time tmpwatch util-linux vim-minimal vixie-cron which cpio perl-base) ],
+    base => [ qw(basesystem sed initscripts console-tools mkbootdisk anacron utempter ldconfig chkconfig ntsysv mktemp setup filesystem SysVinit bdflush crontabs dev e2fsprogs etcskel fileutils findutils getty_ps grep groff gzip hdparm info initscripts isapnptools kernel less ldconfig lilo logrotate losetup man mkinitrd mingetty modutils mount net-tools passwd procmail procps psmisc mandrake-release rootfiles rpm sash sed setserial shadow-utils sh-utils slocate stat sysklogd tar termcap textutils time tmpwatch util-linux vim-minimal vixie-cron which perl-base) ],
 #- for the list of fields available for user and superuser, see @etc_pass_fields in install_steps.pm
 #-    intf => [ { DEVICE => "eth0", IPADDR => '1.2.3.4', NETMASK => '255.255.255.128' } ],
 
@@ -310,7 +311,7 @@ sub formatPartitions {
 	eval { $o = $::o = install_any::loadO($o) } if $_[1] == 1;
     }
     mkdir "$o->{prefix}/$_", 0755 foreach 
-      qw(dev etc etc/sysconfig etc/sysconfig/console etc/sysconfig/network-scripts
+      qw(dev etc etc/profile.d etc/sysconfig etc/sysconfig/console etc/sysconfig/network-scripts
 	home mnt tmp var var/tmp var/lib var/lib/rpm);
     mkdir "$o->{prefix}/$_", 0700 foreach qw(root);
 }
@@ -335,6 +336,11 @@ sub doInstallStep {
     $o->beforeInstallPackages;
     $o->installPackages($o->{packages});
     $o->afterInstallPackages;
+}
+#------------------------------------------------------------------------------
+sub miscellaneous { 
+    $o->miscellaneous($_[0]); 
+    addToBeDone { install_any::fsck_option() } 'doInstallStep';
 }
 
 #------------------------------------------------------------------------------
@@ -411,8 +417,6 @@ sub configureX {
     my ($clicked) = $_[0];
     $o->setupXfree if $o->{packages}{XFree86}{installed} || $clicked;
 }
-#------------------------------------------------------------------------------
-sub miscellaneous { $o->miscellaneous($_[0]); }
 #------------------------------------------------------------------------------
 sub exitInstall { $o->exitInstall(getNextStep() eq "exitInstall") }
 
@@ -535,7 +539,7 @@ sub main {
 	    $o->kill_action;
 	    /^setstep (.*)/ and $o->{step} = $1, $clicked = 1, redo MAIN;
 	    /^theme_changed$/ and redo MAIN;
-	    unless (/^already displayed/) {
+	    unless (/^already displayed/ || /^ask_from_list cancel/) {
 		eval { $o->errorInStep($_) };
 		$@ and next;
 	    }
@@ -548,6 +552,7 @@ sub main {
 
 	last if $o->{step} eq 'exitInstall';
     }
+    substInFile { s|/sbin/mingetty tty1.*|/bin/bash --login| } "$o->{prefix}/etc/inittab" if $o->{security} < 2;
 
     fs::write($o->{prefix}, $o->{fstab});
     modules::write_conf("$o->{prefix}/etc/conf.modules", 'append');

@@ -7,7 +7,7 @@
 $instdir = "install";
 $ks = "kickstart=floppy" if $type =~ s/_ks//;
 $mnt = "/mnt/disk";
-$mke2fs = "/sbin/mke2fs -q -m 0 -F";
+$mke2fs = "/sbin/mke2fs -q -m 0 -F -s 1";
 
 if ($>) {
     $sudo = "sudo";
@@ -89,7 +89,7 @@ sub msg_boot_img {
     output("$mnt/syslinux.cfg", "
 default linux
 prompt 1
-timeout 172
+timeout 72
 display boot.msg
 F1 boot.msg
 F2 general.msg

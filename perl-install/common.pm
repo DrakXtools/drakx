@@ -9,7 +9,7 @@ use vars qw(@ISA %EXPORT_TAGS @EXPORT_OK $printable_chars $sizeof_int $bitof_int
     common     => [ qw(__ even odd min max sqr sum sign product bool invbool listlength bool2text text2bool to_int to_float ikeys member divide is_empty_array_ref is_empty_hash_ref add2hash add2hash_ set_new set_add round round_up round_down first second top uniq translate untranslate warp_text formatAlaTeX formatLines) ],
     functional => [ qw(fold_left compose map_index grep_index map_each grep_each map_tab_hash mapn mapn_ difference2 before_leaving catch_cdie cdie) ],
     file       => [ qw(dirname basename touch all glob_ cat_ symlinkf chop_ mode typeFromMagic) ],
-    system     => [ qw(sync makedev unmakedev psizeof strcpy gettimeofday syscall_ salt getVarsFromSh setVarsInSh) ],
+    system     => [ qw(sync makedev unmakedev psizeof strcpy gettimeofday syscall_ salt getVarsFromSh setVarsInSh setVarsInCsh substInFile) ],
     constant   => [ qw($printable_chars $sizeof_int $bitof_int $SECTORSIZE) ],
 );
 @EXPORT_OK = map { @$_ } values %EXPORT_TAGS;
@@ -57,7 +57,7 @@ sub add2hash_ { my ($a, $b) = @_; while (my ($k, $v) = each %{$b || {}}) { exist
 sub member { my $e = shift; foreach (@_) { $e eq $_ and return 1 } 0 }
 sub dirname { @_ == 1 or die "usage: dirname <name>\n"; local $_ = shift; s|[^/]*/*\s*$||; s|(.)/*$|$1|; $_ || '.' }
 sub basename { @_ == 1 or die "usage: basename <name>\n"; local $_ = shift; s|/*\s*$||; s|.*/||; $_ }
-sub bool { $_[0] ? 1 : 0 }
+sub bool($) { $_[0] ? 1 : 0 }
 sub invbool { my $a = shift; $$a = !$$a; $$a }
 sub listlength { scalar @_ }
 sub bool2text { $_[0] ? "true" : "false" }
@@ -247,7 +247,7 @@ sub translate {
 }
 
 sub untranslate($@) {
-    my $s = shift;
+    my $s = shift || return;
     foreach (@_) { translate($_) eq $s and return $_ }
     die "untranslate failed";
 }
@@ -328,6 +328,21 @@ sub setVarsInSh {
     local *F;
     open F, "> $_[0]" or die "cannot create config file $file";
     $l->{$_} and print F "$_=$l->{$_}\n" foreach @fields;
+}
+sub setVarsInCsh {
+    my ($file, $l, @fields) = @_;
+    @fields = keys %$l unless @fields;
+
+    local *F;
+    open F, "> $_[0]" or die "cannot create config file $file";
+    $l->{$_} and print F "setenv $_ $l->{$_}\n" foreach @fields;
+}
+
+sub substInFile(&@) {
+    my $f = shift;
+    local @ARGV = @_ or return;
+    local ($^I, $_) = '';
+    while (<>) { &$f($_); print }
 }
 
 sub best_match {

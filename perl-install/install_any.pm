@@ -158,20 +158,6 @@ sub addToBeDone(&$) {
     push @{$::o->{steps}{$step}{toBeDone}}, $f;
 }
 
-sub install_cpio($$) {
-    my ($dir, $name) = @_;
-
-    return "$dir/$name" if -e "$dir/$name";
-
-    my $cpio = "$dir.cpio.bz2";
-    -e $cpio or return;
-
-    eval { commands::rm("-r", $dir) };
-    mkdir $dir, 0755;
-    run_program::run("cd $dir ; bzip2 -cd $cpio | cpio -id $name $name/*");
-    "$dir/$name";
-}
-
 sub getHds {
     my ($o) = @_;
     my ($ok, $ok2) = 1;
@@ -291,16 +277,13 @@ sub enableShadow() {
 
 sub enableMD5Shadow($$$) {
     my ($prefix, $shadow, $md5) = @_;
-    local @ARGV = grep { -r $_ } map { "$prefix/etc/pam.d/$_" } qw(login rlogin passwd) or return;
-    local $^I = '';
-    while (<>) {
+    substInFile {
 	if (/^password.*pam_pwdb.so/) {
 	    s/\s*shadow//; s/\s*md5//;
 	    s/$/ shadow/ if $shadow;
 	    s/$/ md5/ if $md5;
 	}
-	print;
-    }
+    } grep { -r $_ } map { "$prefix/etc/pam.d/$_" } qw(login rlogin passwd);
 }
 
 sub crypt($) {
@@ -349,7 +332,7 @@ sub g_auto_install(;$) {
     
     exists $::o->{$_} and $o->{$_} = $::o->{$_} foreach qw(lang autoSCSI authentification printer mouse netc timezone superuser intf keyboard mkbootdisk base users installClass partitioning); #- TODO modules bootloader 
 
-    local $o->{partitioning}{clearall} = 1;
+#-    local $o->{partitioning}{clearall} = 1;
 
     $_ = { %{$_ || {}} }, delete @$_{qw(oldu oldg password password2)} foreach $o->{superuser}, @{$o->{users} || []};
     
@@ -391,3 +374,7 @@ sub pkg_install {
     pkgs::install($o->{prefix}, [ $p ]);
 }
 
+sub fsck_option() {
+    my $y = $::o->{security} < 4 && $::beginner && " -y";
+    substInFile { s/("fsck)( -y)?/$1$y/ } "$::o->{prefix}/etc/rc.d/rc.sysinit";
+}
