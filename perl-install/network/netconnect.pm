@@ -432,7 +432,8 @@ Take a look at http://www.linmodems.org")) ? return 1 : $in->exit(0));
                    no_supported_winmodem =>
                    {
                     name => N("Warning") . "\n\n" . N("Your modem isn't supported by the system.
-Take a look at http://www.linmodems.org")
+Take a look at http://www.linmodems.org"),
+                    end => 1,
                    },
 
 
