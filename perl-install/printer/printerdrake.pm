@@ -696,6 +696,10 @@ sub configure_new_printers {
 		$printer->{OLD_CHOICE} = "XXX";
 		# Set model selection cursor onto the "Raw Printer" entry.
 		$printer->{DBENTRY} = N("Raw printer (No driver)");
+		# Info about what was detected
+		my $info = N("(") . if_($p->{val}{DESCRIPTION},
+					$p->{val}{DESCRIPTION} . N(" on ")).
+					$p->{port} . N(")");
 		# Remove wait message
 		undef $_w;
 		# Choose the printer/driver from the list
@@ -704,7 +708,7 @@ sub configure_new_printers {
 					   N("Which printer model do you have?") .
 					   N("
 
-Printerdrake could not determine which model your printer is. Please choose the correct model from the list.") . " " .
+Printerdrake could not determine which model your printer %s is. Please choose the correct model from the list.", $info) . " " .
 					   N("If your printer is not listed, choose a compatible (see printer manual) or a similar one."), '|',
 					   [ keys %printer::main::thedb ], $printer->{DBENTRY}) or next;
 		# Rename the queue according to the chosen model
