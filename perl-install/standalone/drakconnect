@@ -90,25 +90,25 @@ my $profile_combo = gtksignal_connect(Gtk2::OptionMenu->new, changed => sub {
                                           return if $::ignore_profile_change;
                                           my $selected_profile = $combo->get_text;
                                           return if $selected_profile eq $netcnx->{PROFILE};
-					  $netcnx->{PROFILE} = $selected_profile;
-                                          set_profiles($netcnx) if $combo->window; # is realized?;
+                                          set_profiles($selected_profile) if $combo->window; # is realized?;
                                    });
 
-sub update_profiles {
-    my ($new_profile) = @_;
-    $new_profile ||= $netcnx->{PROFILE} || "default";
+# update combo profiles
+sub update_profiles() {
     @profiles = network::netconnect::get_profiles();
     $button_del->set_sensitive(@profiles > 1);
     local $::ignore_profile_change = 1;
     $profile_combo->set_popdown_strings(@profiles);
-    $profile_combo->set_text($new_profile);
+    $profile_combo->set_text($netcnx->{PROFILE});
 }
 
+# Change current profile
 sub set_profiles {
     my ($new_profile) = @_;
+    $netcnx->{PROFILE} = $new_profile;
     network::netconnect::set_profile($netcnx);
     network::netconnect::load_conf($netcnx, $netc, $intf);
-    update_profiles($new_profile);
+    update_profiles();
     update();
     $button_apply->set_sensitive(1);
 }
@@ -196,11 +196,10 @@ $window1->{window}->add(
                                                                               gtksignal_connect(Gtk2::Button->new(N("Cancel")), 
                                                                                                 clicked => sub { $dialog->destroy }),
                                                                               gtksignal_connect(Gtk2::Button->new(N("Ok")), clicked => sub {
-                                                                                                    my $curr_prof = $profile_combo->get_text;
                                                                                                     #warn if already existing
 
                                                                                                     network::netconnect::add_profile($netcnx, $entry_dialog->get_text);
-                                                                                                    update_profiles($curr_prof);
+                                                                                                    update_profiles();
                                                                                                     $dialog->destroy;
                                                                                                 }),
                                                                              );
@@ -301,17 +300,17 @@ sub sensitive_buttons {
 
 $SIG{CHLD} = sub {
     my $child = waitpid(-1, POSIX::WNOHANG);
+    # when the wizard has exiter, reload everything to catch its changes
     return if !($wizard_pid && $child eq $wizard_pid);
     undef $wizard_pid;
     sensitive_buttons(1);
-    #- reload everything...
     $netcnx = {}; $netc = {}; $intf = {};
     network::netconnect::read_net_conf('', $netcnx, $netc);
     modules::load_category('net');
     @all_cards = network::ethernet::conf_network_card_backend($netc, $intf);
     network::netconnect::load_conf($netcnx, $netc, $intf);
     network::network::probe_netcnx_type('', $netc, $intf, $netcnx);
-    $profile_combo->set_text(-e "/etc/sysconfig/network-scripts/drakconnect_conf." . ($profile_combo->entry->get_text || "default"));
+    update_profiles();
     update();
 };
 
