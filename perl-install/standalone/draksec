@@ -195,7 +195,7 @@ my $help_msg = N("The following options can be set to customize your\nsystem sec
 foreach ([ 'network', N("Network Options") ], [ 'system', N("System Options") ]) {
     my ($domain, $label) = @$_;
     my %values;
-    $notebook->append_page(gtkshow(gtkpack_(Gtk2::VBox->new,
+    gtkappend_page($notebook, gtkshow(gtkpack_(Gtk2::VBox->new,
                                             0, Gtk2::Label->new($help_msg),
                                             1, create_scrolled_window(create_packtable($common_opts,
                                                                                        map {
@@ -227,8 +227,8 @@ foreach ([ 'network', N("Network Options") ], [ 'system', N("System Options") ])
 ######################## PERIODIC CHECKS ###################################
 my %security_checks_value;
 
-$notebook->append_page(gtkshow(gtkpack_(Gtk2::VBox->new,
                                         0, Gtk2::Label->new($help_msg),
+gtkappend_page($notebook,gtkshow(gtkpack_(Gtk2::VBox->new,
                                         1, create_scrolled_window(create_packtable($common_opts,
                                                                                    map {
                                                                                        my $i = $_;
