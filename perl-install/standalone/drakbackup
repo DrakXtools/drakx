@@ -173,7 +173,9 @@ my $DEBUG = 0;
 my $restore_sys = 1; 
 my $restore_user = 1; 
 my $restore_other = 1; 
+my $restore_step_sys_date = "";
 my @user_backuped = ();
+my @sys_backuped = ();
 my $sys_backuped = 0;
 my $other_backuped = 0;
 my @user_list_to_restore= ();
@@ -276,8 +278,6 @@ sub read_passwd {
     @all_user_list = @tmp2;
 }
 
-
-
 sub the_time {
     $the_time = "_";
     $the_time .= localtime->year() + 1900;
@@ -290,7 +290,7 @@ sub the_time {
     $the_time .= localtime->min();
 
     
- }
+}
 
 sub save_conf_file {
     my @cfg_list = ( "SYS_FILES=@sys_files\n",
@@ -452,7 +452,6 @@ sub return_file_date {
     $file_date = $date . ' ' . $hour . ':' . $min;
     return $file_date;
 }
-
 
 sub build_backup_files {
     my $path_name;
@@ -624,7 +623,6 @@ sub filedialog_restore_find_path {
     $file_dialog->show();
 }
 
-
 sub filedialog {
     my $file_dialog;
 
@@ -735,7 +733,7 @@ sub advanced_what_other {
 					    gtksignal_connect(new Gtk::Button(_("Add")), clicked => sub {filedialog()  }),
 					    gtksignal_connect(new Gtk::Button(_("Remove Selected")), clicked => \&list_remove, $list_other),
 					    ),
-				  0, gtkset_sensitive(my $check_what_other_versions = new Gtk::CheckButton( _("Use Incremental Backups  (do not replace old backups)") ), 0), 
+				  0, gtkset_sensitive(my $check_what_other_versions = new Gtk::CheckButton( _("Use Incremental Backups  (do not replace old backups)") ), 0),
 				       ),
 	    );
     gtksignal_connect(gtkset_active($check_what_other_versions, $backup_other_versions), toggled => sub {
@@ -786,8 +784,6 @@ sub advanced_what_entire_sys{
     $central_widget = \$box_what;
     $up_box->show_all();
 }
-
-
 
 sub advanced_what{
     my $box_what;
@@ -1257,7 +1253,7 @@ sub advanced_options{
 					     ),
 				 0, new Gtk::HSeparator,
 				 0, gtkpack_(new Gtk::VBox(0,10),
-					     0, my $check_tar_bz2  = new Gtk::CheckButton( _(" Use Tar and bzip2  ( very slow)") ),
+					     0, my $check_tar_bz2  = new Gtk::CheckButton( _(" Use Tar and bzip2  ( very slow) [please be careful if you\n (un)select this option all your old backups will be deleted ]") ),
 					     0, gtkset_sensitive(my $check_backupignore = new Gtk::CheckButton( _(" Use .backupignore files")), 0),
 					     ),
 				 ),
@@ -1473,6 +1469,8 @@ sub find_backup_to_restore {
 	# faire test existance cd
 	# faire reponse si non existance de  $path_to_find_restore
     my @list_backup_tmp2 = ();
+    my $to_put;
+    @sys_backuped = ();
     my @list_backup = ();
     my @list_backup_tmp;
     my @user_backuped_tmp;
@@ -1487,18 +1485,37 @@ sub find_backup_to_restore {
     }
     if (grep /^backup_other/, @list_backup) {$other_backuped = 1;}
     if (grep /^backup_sys/, @list_backup) {$sys_backuped = 1;}
+    foreach (grep /^backup_sys_/, @list_backup) {
+	chomp;
+	s/^backup_sys_//gi;
+	s/.tar.gz$//gi;
+	s/.tar.bz2$//gi;
+ 	my ( $date, $heure) = /^(.*)_([^_]*)$/; 
+	my $year = substr($date, 0, 4);
+	my $month = substr($date, 4,  2);
+	my $day =  substr($date, 6, 2);
+	my $hour = substr($heure, 0,  2);
+	my $min =  substr($heure, 2, 2);
+	$to_put = "$day/$month/$year $hour:$min                   $_";
+ 	push @sys_backuped , $to_put;
+    }
+    $restore_step_sys_date  = $to_put;
     foreach (grep /^backup_user_/, @list_backup) {
 	chomp;
 	s/^backup_user_//gi;
 	s/.tar.gz$//gi;
 	s/.tar.bz2$//gi;
-	my @user_date = split(/\_20/,$_ );
-	my @user_date2 = split(/\_/,$user_date[1] );
-	my $to_put = "  $user_date[0],  (date: 20$user_date2[0], hour: $user_date2[1])";
+	my ($nom, $date, $heure) = /^(.*)_([^_]*)_([^_]*)$/;
+	my $year = substr($date, 0, 4);
+	my $month = substr($date, 4,  2);
+	my $day =  substr($date, 6, 2);
+	my $hour = substr($heure, 0,  2);
+	my $min =  substr($heure, 2, 2);
+#	my $to_put = "  $nom,  (date: $date, hour: $heure)";
+	$to_put = "$_       user: $nom,   date: $day/$month/$year,   hour: $hour:$min";
 	push @user_backuped , $to_put;
     }
 }
-
 
 sub system_state {
     $system_state = ();
@@ -1542,17 +1559,22 @@ sub restore_backend {
     if (grep /tar.gz$/, all($path_to_find_restore)) { $untar_cmd = 0; } 
     else { $untar_cmd = 1; } 
     if ($restore_user)  { 
-	$untar_cmd or system(" echo 'user: $_' && cd /tmp &&  tar xfz  $path_to_find_restore/backup_user_$_.tar.gz -C $restore_path") foreach @user_list_to_restore;
-# fixme verifier next line.
-	$untar_cmd and system("echo 'user: $_' && cd /tmp &&  /usr/bin/bzip2 -cd $path_to_find_restore/backup_user_$_.tar.bz2 | tar xf -C $restore_path ") foreach @user_list_to_restore;
+#	$untar_cmd or system(" echo 'user: $_' && cd /tmp &&  tar xfz  $path_to_find_restore/backup_user_$_.tar.gz -C $restore_path") foreach @user_list_to_restore;
+#	$untar_cmd and system("echo 'user: $_' && cd /tmp &&  /usr/bin/bzip2 -cd $path_to_find_restore/backup_user_$_.tar.bz2 | tar xf -C $restore_path ") foreach @user_list_to_restore;
+	print "user list too restore : $_\n"foreach @user_list_to_restore2;
     }
+## fixme 
     if ($restore_sys)   { 
-	$untar_cmd or system("echo backup_sys  && cd /tmp && tar xfz $path_to_find_restore/backup_sys.tar.gz  -C $restore_path ");
-	$untar_cmd and system("echo backup_sys cd /tmp && /usr/bin/bzip2 -cd $path_to_find_restore/backup_sys.tar.bz2  | tar xf -C $restore_path ");
+#	$untar_cmd or system("echo backup_sys  && cd /tmp && tar xfz $path_to_find_restore/backup_sys.tar.gz  -C $restore_path ");
+#	$untar_cmd and system("echo backup_sys cd /tmp && /usr/bin/bzip2 -cd $path_to_find_restore/backup_sys.tar.bz2  | tar xf -C $restore_path ");
+	print " restore sys\n";
     }
+
+## fixme
     if ($restore_other) { 
-	$untar_cmd or system("echo backup_other && cd /tmp && tar xfz $path_to_find_restore/backup_other.tar.gz  -C $restore_path ");
-	$untar_cmd and system("echo backup_other && cd /tmp && /usr/bin/bzip2 -cd $path_to_find_restore/backup_other.tar.bz2  | tar xf -C $restore_path ");
+#	$untar_cmd or system("echo backup_other && cd /tmp && tar xfz $path_to_find_restore/backup_other.tar.gz  -C $restore_path ");
+#	$untar_cmd and system("echo backup_other && cd /tmp && /usr/bin/bzip2 -cd $path_to_find_restore/backup_other.tar.bz2  | tar xf -C $restore_path ");
+	print "restore other \n";
     }
     print "End of restore\n";
 }
@@ -1573,7 +1595,6 @@ sub restore_do {
     }
     restore_do2();
 }
-
 
 sub restore_do2 {
     my $do_restore;
@@ -1631,7 +1652,7 @@ sub restore_step_user {
     gtkpack($advanced_box,
 	    $retore_step_user = gtkpack_(new Gtk::VBox(0,10),
 		     0, new Gtk::VBox(0,10),
-		     0, _("User list to restore "),
+		     0, _("User list to restore (only the more recent date per user is important)"),
 		     1, createScrolledWindow( gtkpack__(new Gtk::VBox(0,0),
 							map { my @name_l = split(/,/, $_);
 							      my $name_complet = $_;
@@ -1672,28 +1693,33 @@ sub restore_step_user {
 }
 
 sub restore_step_sys {
-    my $retore_step_sys;
-    my $combo_retore_step_sys = new Gtk::Combo();
-    $combo_retore_step_sys->set_popdown_strings ("9 jan 2002","10 jan 2002", "11 jan 2002", "12 jan 2002");
+    my $restore_step_sys;
+    my $combo_restore_step_sys = new Gtk::Combo();
+    $combo_restore_step_sys->set_popdown_strings (@sys_backuped);
 
     gtkpack($advanced_box,
-	    $retore_step_sys = gtkpack_(new Gtk::VBox(0,10),
+	    $restore_step_sys = gtkpack_(new Gtk::VBox(0,10),
 					1, new Gtk::VBox(0,10),
 					0, my $check_backup_before = new Gtk::CheckButton(_(" Backup the system files before.")),
 					0, gtkpack_(new Gtk::HBox(0,10),
 						    1, _("please choose the date to restore"),
-						    0, $combo_retore_step_sys,
+						    0, $combo_restore_step_sys,
 						    0, new Gtk::HBox(0,10),
 						    ),
 					1, new Gtk::VBox(0,10),
 					),
 	    );
+    $combo_restore_step_sys->entry->signal_connect( 'changed', sub {
+	$restore_step_sys_date = $combo_restore_step_sys->entry->get_text();
+	print $restore_step_sys_date. "\n";
+	});
+    $combo_restore_step_sys->entry->set_text($restore_step_sys_date);
     if ($restore_user) { $next_widget = \&restore_step_user;}
     elsif ($restore_other){ $next_widget = \&restore_step_other;}
     else{ $next_widget = \&restore_do;}
     $custom_help = "restore";
     $current_widget = \&restore_step_sys;
-    $central_widget = \$retore_step_sys;
+    $central_widget = \$restore_step_sys;
     $up_box->show_all();
 }
 
@@ -1787,7 +1813,6 @@ sub restore_find_net {
     $up_box->show_all();
 }
 
-
 sub restore_other_media {
     my $box_find_restore;
     my $button;
@@ -1844,7 +1869,6 @@ sub restore_other_media {
     $up_box->show_all();
 }
 
-
 sub restore_step2 {
     my $retore_step2;
 
@@ -1869,7 +1893,7 @@ sub restore_step2 {
 					1, new Gtk::HBox(0,10),
 					0, gtkset_sensitive(my $restore_path_entry = new Gtk::Entry(), $restore_other_path),
 						 ),
-				     0, gtkset_sensitive(my $check_backup_bef_restore = new Gtk::CheckButton(_("Build Last Backup before Restore (only for incremental backups.)")), $backup_sys_versions || $backup_user_versions ),
+				     0, gtkset_sensitive(my $check_backup_bef_restore = new Gtk::CheckButton(_("do new backup before restore (only for incremental backups.)")), $backup_sys_versions || $backup_user_versions ),
 				     1, new Gtk::VBox(0,10),
 				     ),
 	    );
@@ -2015,7 +2039,6 @@ sub button_box_backup_end {
 				       ),
 	    );
 }
-
 
 sub button_box_wizard_end {
     $button_box_tmp->destroy();
@@ -2263,8 +2286,6 @@ sub message_underdevel {
     $central_widget = \$box2;
     $up_box->show_all();    
 }
-
-
 
 ################################################  BUILD_BACKUP  ################################################  
 
@@ -2602,14 +2623,14 @@ sub interactive_mode {
     $window1->signal_connect (delete_event => sub { Gtk->exit(0) });
     $window1->set_position(1);
     $window1->set_title(_("Drakbackup"));
-    my ($pix_u_map, $pix_u_mask) = gtkcreate_png("backup_title");
-    my ($pix_l_map, $pix_l_mask) = gtkcreate_png("backup_left2");
-    my ($pix_r_map, $pix_r_mask) = gtkcreate_png("backup_bot2");
+    my ($pix_u_map, $pix_u_mask) = gtkcreate_png("BDO-drakebackup1");
+#     my ($pix_l_map, $pix_l_mask) = gtkcreate_png("backup_left2");
+#     my ($pix_r_map, $pix_r_mask) = gtkcreate_png("backup_bot2");
     read_conf_file();    
 
     gtkadd($window1,
 	   gtkpack(new Gtk::VBox(0,0),
-		   gtkpack(gtkset_usize($up_box = new Gtk::VBox(0, 5), 500, 420),
+		   gtkpack(gtkset_usize($up_box = new Gtk::VBox(0, 5), 540, 400),
 		      $box = gtkpack_(new Gtk::VBox(0, 3),
 			 0,  new Gtk::Pixmap($pix_u_map, $pix_u_mask),
 			    1, gtkpack_(new Gtk::HBox(0, 3),
