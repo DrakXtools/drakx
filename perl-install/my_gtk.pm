@@ -45,11 +45,12 @@ sub new {
 sub main($;$) {
     my ($o, $f) = @_;
     gtkset_mousecursor_normal();
+    my $idle = Gtk->timeout_add(1000, sub { gtkset_mousecursor_normal() });
     $o->show;
 
     do {
 	local $::setstep = 1;
-	Gtk->main
+	Gtk->main;
     } while ($o->{retval} && $f && !&$f());
     $o->destroy;
     $o->{retval}

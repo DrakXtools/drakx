@@ -30,7 +30,7 @@ arch() =~ /^sparc/ ? (
   "3c90x" => "3Com 3c90x (Cyclone/Hurricane/Tornado)",
   "at1700" => "Allied Telesis AT1700",
   "ac3200" => "Ansel Communication AC3200",
-#BIG  "acenic" => "AceNIC Gigabit Ethernet",
+  "acenic" => "AceNIC Gigabit Ethernet",
   "pcnet32" => "AMD PC/Net 32",
   "82596" => "Apricot 82596",
 #  "atp" => "ATP", # builtin the kernel
@@ -82,13 +82,13 @@ arch() =~ /^sparc/ ? (
   "sb1000" => "sb1000",
   "sbni" => "sbni",
   "sis900" => "sis900",
-#BIG  "sk98lin" => "Syskonnect (Schneider & Koch)|Gigabit Ethernet",
+  "sk98lin" => "Syskonnect (Schneider & Koch)|Gigabit Ethernet",
 ),
   "3c59x" => "3com 3c59x (Vortex)",
-#BIG  "de4x5" => "Digital 425,434,435,450,500",
+  "de4x5" => "Digital 425,434,435,450,500",
   "rtl8139" => "RealTek RTL8129/8139",
 }],
-[ 'network', {
+[ 'net_raw', {
   "8390" => "8390",
   "af_packet" => "packet socket",
   "nfs" => "Network File System (nfs)",
@@ -153,15 +153,15 @@ arch() =~ /^sparc/ ? (
   "pluto" => "Sun SparcSTORAGE Array SCSI", #- name it "fc4:soc:pluto" ?
 ) : arch() =~ /alpha/ ? () : (
   "DAC960" => "Mylex DAC960",
-#unused  "dpt_i2o" => "Distributed Tech SmartCache/Raid I-IV Controller", # not there anymore?
+  "dpt_i2o" => "Distributed Tech SmartCache/Raid I-IV Controller", # not there anymore?
   "megaraid" => "AMI MegaRAID",
   "aacraid" => "AACxxx Raid Controller",
   "cpqarray" => "Compaq Smart-2/P RAID Controller",
   "gdth" => "ICP Disk Array Controller",
   "ips" => "IBM ServeRAID controller",
-#unused	 "eata" => "EATA SCSI PM2x24/PM3224",
-#unused	 "eata_pio" => "EATA PIO Adapters",
-#unused	 "eata_dma" => "EATA DMA Adapters",
+	 "eata" => "EATA SCSI PM2x24/PM3224",
+	 "eata_pio" => "EATA PIO Adapters",
+	 "eata_dma" => "EATA DMA Adapters",
   "ppa" => "Iomega PPA3 (parallel port Zip)",
   "imm" => "Iomega Zip (new driver)",
 ),
@@ -237,7 +237,7 @@ arch() !~ /^sparc/ ? (
   "3c589_cs" => "3c589_cs",
   "parport_cs" => "parport_cs", 
   "3c575_cb" => "3c575_cb",
-#unused  "apa1480_cb" => "apa1480_cb",
+  "apa1480_cb" => "apa1480_cb",
   "cb_enabler" => "cb_enabler",
   "epic_cb" => "epic_cb",
   "iflash2+_mtd" => "iflash2+_mtd",
@@ -540,7 +540,8 @@ sub write_conf {
 	}
     }
     my @l = map { "scsi_hostadapter$_\n" } '', 1..$scsi-1 if $scsi;
-    push @l, "ide-floppy" if detect_devices::ide_zips();
+    push @l, 'ide-floppy' if detect_devices::ide_zips();
+    push @l, 'bttv' if grep { $_->{driver} eq 'bttv' } detect_devices::probeall();
     log::l("to put in modules @l");
 
     substInFile { 
@@ -562,7 +563,7 @@ sub read_stage1_conf {
 }
 
 sub load_thiskind {
-    my ($type, $pcic, $f) = @_;
+    my ($type, $f) = @_;
 
     grep {
 	$f->($_->{description}, $_->{driver}) if $f;
@@ -570,56 +571,19 @@ sub load_thiskind {
 	$_->{error} = $@;
 
 	!($@ && $_->{try});
-    } get_that_type($type, $pcic),
+    } get_that_type($type),
       $type =~ /scsi/ && arch() !~ /sparc/ ? 
 	(map { +{ driver => $_, description => $_, try => 1 } }
 	 detect_devices::hasUsbZip() ? "usb-storage" : (), "imm", "ppa") : ();
 }
 
 sub get_that_type {
-    my ($type, $pcic) = @_;
+    my ($type) = @_;
 
     grep {
 	my $l = $drivers{$_->{driver}};
 	$l && $l->{type} =~ /$type/ && detect_devices::check($_);
-    } detect_devices::probeall('', $pcic);
-}
-
-sub pcmcia_need_config($) {
-    return $_[0] && ! -s "/var/run/stab";
-}
-
-sub get_pcmcia_devices($$) {
-    my ($pcic) = @_;
-    my (@devs, $desc);
-
-    #- try to setup pcmcia if cardmgr is not running.
-    if (pcmcia_need_config($pcic)) {
-	log::l("i try to configure pcmcia services");
-
-	symlink("/tmp/stage2/etc/pcmcia", "/etc/pcmcia") unless -e "/etc/pcmcia";
-	symlink("/sbin/install", "/sbin/cardmgr") unless -x "/sbin/cardmgr";
-
-	eval {
-	    load("pcmcia_core");
-	    load($pcic);
-	    load("ds");
-	};
-
-	#- run cardmgr in foreground while it is configuring the card.
-	run_program::run("cardmgr", "-f", "-m" ,"/modules");
-	sleep(3);
-
-	#- make sure to be aware of loaded module by cardmgr.
-	read_already_loaded();
-    }
-
-    foreach (cat_("/var/run/stab")) {
-	$desc = $1 if /^Socket\s+\d+:\s+(.*)/;
-	my (undef, $type, $module, undef, $device) = split;
-	push @devs, { description => $desc, driver => $module, type => $type, device => $device } if $module;
-    }
-    @devs;
+    } detect_devices::probeall('');
 }
 
 sub load_ide {
@@ -631,5 +595,54 @@ sub load_ide {
 
 }
 
-1;
+sub configure_pcmcia {
+    my ($pcic) = @_;
 
+    #- try to setup pcmcia if cardmgr is not running.
+    -s "/var/run/stab" and return;
+
+    log::l("i try to configure pcmcia services");
+
+    symlink("/tmp/stage2/etc/pcmcia", "/etc/pcmcia") unless -e "/etc/pcmcia";
+    symlink("/sbin/install", "/sbin/cardmgr") unless -x "/sbin/cardmgr";
+
+    eval {
+	load("pcmcia_core");
+	load($pcic);
+	load("ds");
+    };
+
+    #- run cardmgr in foreground while it is configuring the card.
+    run_program::run("cardmgr", "-f", "-m" ,"/modules");
+    sleep(3);
+    
+    #- make sure to be aware of loaded module by cardmgr.
+    read_already_loaded();
+}
+
+sub get_pcmcia_devices {
+    my (@devs, $desc);
+
+    foreach (cat_("/var/run/stab")) {
+	$desc = $1 if /^Socket\s+\d+:\s+(.*)/;
+	my (undef, $type, $module, undef, $device) = split;
+	push @devs, { description => $desc, driver => $module, type => $type, device => $device } if $module;
+    }
+    @devs;
+}
+
+sub write_pcmcia {
+    my ($prefix, $pcmcia) = @_;
+
+    #- should be set after installing the package above otherwise the file will be renamed.
+    setVarsInSh("$prefix/etc/sysconfig/pcmcia", {
+	PCMCIA    => bool2yesno($pcmcia),
+	PCIC      => $pcmcia,
+	PCIC_OPTS => "",
+        CORE_OPTS => "",
+    });
+}
+
+
+
+1;

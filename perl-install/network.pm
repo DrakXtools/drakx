@@ -244,9 +244,9 @@ sub gateway {
 }
 
 sub configureNetwork {
-    my ($prefix, $netc, $in, $pcmcia, $intf, $first_time) = @_;
+    my ($prefix, $netc, $in, $intf, $first_time) = @_;
     local $_;
-    any::setup_thiskind($in, 'net', !$::expert, 1, $pcmcia);
+    any::setup_thiskind($in, 'net', !$::expert, 1);
     my @l = detect_devices::getNet() or die _("no network card found");
 
     my $last; foreach ($::beginner ? $l[0] : @l) {

@@ -117,7 +117,9 @@ sub selectInstallClass($@) {
     }}{$o->{installClass}};
 }
 #------------------------------------------------------------------------------
-sub setupSCSI { 
+sub setupSCSI {
+    my ($o) = @_;
+    modules::configure_pcmcia($o->{pcmcia});
     modules::load_ide();
     modules::load_thiskind('scsi|disk');
 }
@@ -383,7 +385,7 @@ Consoles 1,3,4,7 may also contain interesting information";
     sync(); sync();
 
     #- configure PCMCIA services if needed.
-    $o->pcmciaConfig();
+    modules::write_pcmcia($o->{prefix}, $o->{pcmcia});
 
     #- for mandrake_firstime
     touch "$o->{prefix}/var/lock/TMP_1ST";
@@ -512,20 +514,6 @@ sub installCrypto {
     require crypto;
     my @crypto_packages = crypto::getPackages($o->{prefix}, $o->{packages}, $u->{mirror});
     $o->pkg_install(@{$u->{packages}});
-}
-
-#------------------------------------------------------------------------------
-sub pcmciaConfig($) {
-    my ($o) = @_;
-    my $t = $o->{pcmcia};
-
-    #- should be set after installing the package above else the file will be renamed.
-    setVarsInSh("$o->{prefix}/etc/sysconfig/pcmcia", {
-	PCMCIA    => $t ? "yes" : "no",
-	PCIC      => $t,
-	PCIC_OPTS => "",
-        CORE_OPTS => "",
-    });
 }
 
 #------------------------------------------------------------------------------

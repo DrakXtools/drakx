@@ -35,7 +35,7 @@ sub new {
 
 sub configureNetwork {
     my ($o) = @_;
-    modules::load_thiskind('net', $o->{pcmcia});
+    modules::load_thiskind('net');
     netconnect::main($o->{prefix}, $o->{netcnx} ||= {}, $o->{netc}, $o->{mouse}, $o, $o->{pcmcia}, $o->{intf}, 1);
 }
 

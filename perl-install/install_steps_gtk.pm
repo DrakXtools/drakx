@@ -402,7 +402,7 @@ sub choosePackagesTree {
 	}
     };
     my $children = sub { map { $packages->[0]{($tree->node_get_pixtext($_, 0))[0]} } gtkctree_children($_[0]) };
-    my $toggle_ = sub {
+    my $toggle = sub {
 	if (ref $curr && ! $_[0]) {
 	    $tree->toggle_expansion($curr);
 	} else {
@@ -438,7 +438,6 @@ sub choosePackagesTree {
 	    }
 	}
     };
-    my $toggle = sub { &$toggle_; gtkset_mousecursor_normal() };
 
     $tree->signal_connect(key_press_event => sub {
         my ($w, $e) = @_;

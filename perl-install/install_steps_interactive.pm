@@ -181,6 +181,11 @@ sub selectMouse {
 #------------------------------------------------------------------------------
 sub setupSCSI {
     my ($o) = @_;
+
+    if ($o->{pcmcia} && !$::noauto) {
+	my $w = $o->wait_message(_("PCMCIA"), _("Configuring PCMCIA cards..."));
+	modules::configure_pcmcia($o->{pcmcia});
+    }
     { 
 	my $w = $o->wait_message(_("IDE"), _("Configuring IDE"));
 	modules::load_ide();

@@ -406,20 +406,19 @@ sub miscellaneousNetwork {
 }
 
 sub load_thiskind {
-    my ($in, $type, $pcmcia) = @_;
-    my $pcmcia2 = $pcmcia if modules::pcmcia_need_config($pcmcia) && !$::noauto;
-    my $w; $w = $in->wait_message(_("PCMCIA"), _("Configuring PCMCIA cards...")) if $pcmcia2;
-    modules::load_thiskind($type, $pcmcia2, sub { $w = wait_load_module($in, $type, @_) });
+    my ($in, $type) = @_;
+    my $w;
+    modules::load_thiskind($type, sub { $w = wait_load_module($in, $type, @_) });
 }
 
 sub setup_thiskind {
-    my ($in, $type, $auto, $at_least_one, $pcmcia) = @_;
+    my ($in, $type, $auto, $at_least_one) = @_;
 
     return if arch() eq "ppc";
 
     my @l;
     if (!$::noauto) {
-	@l = load_thiskind($in, $type, $pcmcia);
+	@l = load_thiskind($in, $type);
 	if (my @err = grep { $_ } map { $_->{error} } @l) {
 	    $in->ask_warn('', join("\n", @err));
 	}

@@ -20,7 +20,7 @@ sub suspend { my ($o) = @_; $o->{suspended} = common::setVirtual(1) }
 sub resume { my ($o) = @_; common::setVirtual(delete $o->{suspended}) }
 
 sub exit { 
-    gtkset_mousecursor_normal();
+    gtkset_mousecursor_normal(); #- for restoring a normal in any case on standalone
     c::_exit($_[0]) #- workaround 
 }
 
