@@ -432,49 +432,44 @@ sub choosePackages {
     my $min_size = pkgs::selectedSize($packages);
     $min_size < $availableC or die _("Your system has not enough space left for installation or upgrade (%d > %d)", $min_size, $availableC);
 
-    $o->chooseGroups($packages, $compssUsers, \$individual) unless $::beginner || $::corporate;
+    my $min_mark = $::beginner ? 25 : $::expert ? 0 : 1;
 
-    #- avoid reselection of package if individual selection is requested and this is not the first time.
-    if (1 || $first_time || !$individual) {
-	my $min_mark = $::beginner ? 25 : $::expert ? 0 : 1;
+    my $b = pkgs::saveSelected($packages);
+    my (undef, $level) = pkgs::setSelectedFromCompssList($o->{compssListLevels}, $packages, $min_mark, 0, $o->{installClass});
+    my $max_size = pkgs::selectedSize($packages) + 1; #- avoid division by zero.
+    pkgs::restoreSelected($b);
 
-	my $b = pkgs::saveSelected($packages);
-	my (undef, $level) = pkgs::setSelectedFromCompssList($o->{compssListLevels}, $packages, $min_mark, 0, $o->{installClass});
-	my $size = pkgs::selectedSize($packages);
-	pkgs::restoreSelected($b);
+    $o->chooseGroups($packages, $compssUsers, \$individual, $max_size) unless $::beginner || $::corporate;
 
-	my $max_size = 1 + $size; #- avoid division by zero.
+    my $size2install = min($availableC, do {
+	my $max = round_up(min($max_size, $availableC) / sqr(1024), 100);
 	
-	my $size2install = min($availableC, do {
-	    my $max = round_up(min($max_size, $availableC) / sqr(1024), 100);
-
-	    if ($::beginner) {		
-		my (@l);
-		my @text = (__("Minimum (%dMB)"), __("Recommended (%dMB)"), __("Complete (%dMB)"));
-		if ($o->{meta_class} eq 'desktop') {
-		    @l = (300, 500, 800, 0);
-		    $max > $l[2] or splice(@l, 2, 1);
-		    $max > $l[1] or splice(@l, 1, 1);
-		    $max > $l[0] or @l = $max;
-		    $text[$#l] = __("Custom");
-		} else {
-		    @l = (300, 700, $max);
-		    $l[2] > $l[1] + 200 or splice(@l, 1, 1); #- not worth proposing too alike stuff
-		    $l[1] > $l[0] + 100 or splice(@l, 0, 1);
-		}
-		$o->set_help('empty');
-		$o->ask_from_listf('', _("Select the size you want to install"), sub { _ ($text[$_[1]], $_[0]) }, \@l, $l[1]) * sqr(1024);
+	if ($::beginner) {		
+	    my (@l);
+	    my @text = (__("Minimum (%dMB)"), __("Recommended (%dMB)"), __("Complete (%dMB)"));
+	    if ($o->{meta_class} eq 'desktop') {
+		@l = (300, 500, 800, 0);
+		$max > $l[2] or splice(@l, 2, 1);
+		$max > $l[1] or splice(@l, 1, 1);
+		$max > $l[0] or @l = $max;
+		$text[$#l] = __("Custom");
 	    } else {
-		$o->chooseSizeToInstall($packages, $min_size, $max_size, $availableC, $individual) || goto &choosePackages;
+		@l = (300, 700, $max);
+		$l[2] > $l[1] + 200 or splice(@l, 1, 1); #- not worth proposing too alike stuff
+		$l[1] > $l[0] + 100 or splice(@l, 0, 1);
 	    }
-	});
-	if (!$size2install) { #- special case for desktop
-	    $o->chooseGroups($packages, $compssUsers) or goto &choosePackages;
-	    $size2install = $availableC;
+	    $o->set_help('empty');
+	    $o->ask_from_listf('', _("Select the size you want to install"), sub { _ ($text[$_[1]], $_[0]) }, \@l, $l[1]) * sqr(1024);
+	} else {
+	    $o->chooseSizeToInstall($packages, $min_size, $max_size, $availableC, $individual) || goto &choosePackages;
 	}
-	($o->{packages_}{ind}) =
-	  pkgs::setSelectedFromCompssList($o->{compssListLevels}, $packages, $min_mark, $size2install, $o->{installClass});
+    });
+    if (!$size2install) { #- special case for desktop
+	$o->chooseGroups($packages, $compssUsers) or goto &choosePackages;
+	$size2install = $availableC;
     }
+    ($o->{packages_}{ind}) =
+      pkgs::setSelectedFromCompssList($o->{compssListLevels}, $packages, $min_mark, $size2install, $o->{installClass});
 
     $o->choosePackagesTree($packages, $compss) if $individual;
 }
@@ -486,7 +481,7 @@ sub chooseSizeToInstall {
 sub choosePackagesTree {}
 
 sub chooseGroups {
-    my ($o, $packages, $compssUsers, $individual) = @_;
+    my ($o, $packages, $compssUsers, $individual, $max_size) = @_;
 
     my %size;
     my $base = pkgs::selectedSize($packages);
@@ -496,7 +491,18 @@ sub chooseGroups {
 	$size{$_} = pkgs::selectedSize($packages) - $base;
 	pkgs::restoreSelected($b);
     }
-    my @groups = (@{$o->{compssUsersSorted}}, $o->{meta_class} eq 'desktop' ? () : __("Miscellaneous"));
+
+    my @groups = @{$o->{compssUsersSorted}};
+    if ($o->{meta_class} ne 'desktop') {
+	push @groups, __("Miscellaneous");
+
+	my $b = pkgs::saveSelected($packages);
+	foreach (@{$o->{compssUsersSorted}}) {
+	    pkgs::selectPackage($packages, $_) foreach @{$compssUsers->{$_}};
+	}
+	$size{Miscellaneous} = $max_size - pkgs::selectedSize($packages);
+	pkgs::restoreSelected($b);
+    }
     my $all;
     $o->ask_many_from_list('', _("Package Group Selection"),
 			   { list => \@groups, 
