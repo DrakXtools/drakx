@@ -471,7 +471,7 @@ sub main {
 		log::l("error using auto_install, continuing");
 		undef $::auto_install;
 	    } else {
-		print "Error using auto_install\n$@\n";
+		print "Error using auto_install\n", formatError($@), "\n";
 		install_steps_auto_install_non_interactive::errorInStep();
 	    }
 	} else {
