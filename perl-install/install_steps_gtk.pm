@@ -274,28 +274,31 @@ sub reallyChooseGroups {
 	    $w_size->set(&$size_to_display);
 	});
 	gtkset_tip($tips, $check, $help);
-	#gtkpack_(new Gtk::HBox(0,0), 0, gtkpng($file), 1, $check);
-	$check;
+	gtkpack_(new Gtk::HBox(0,0), 0, gtkpng($file), 1, $check);
+	#$check;
     };
     my $entries_in_path = sub {
 	my ($path) = @_;
-	$path, map { $entry->($_) } grep { $o->{compssUsers}{$_}{path} eq $path } @{$o->{compssUsersSorted}};
+	$path, map { $entry->($_) } grep { !/Utilities/ && $o->{compssUsers}{$_}{path} eq $path } @{$o->{compssUsersSorted}};
     };
     gtkadd($w->{window},
 	   gtkpack($w->create_box_with_title(_("Package Group Selection")),
-		   gtkpack_(new Gtk::HBox(0,0),
-			   1, gtkpack(new Gtk::VBox(0,0),
-				   $entries_in_path->('Workstation'),
-				   $entries_in_path->('Server'),
-				  ),
-			   0, gtkpack__(new Gtk::VBox(0,0),
-				     $entries_in_path->('Graphical Environment'),
-				     '',
-				     $entry->('Development|Standard tools'),
-				     $entry->('Development|Documentation'),
-				  ),
-			  ),
-
+		   gtkpack_(new Gtk::VBox(0,0),
+			   1, gtkpack_(new Gtk::HBox(0,0),
+				   1, gtkpack(new Gtk::VBox(0,0), 
+					   $entries_in_path->('Workstation'),
+					   '',
+					   $entry->('Development|Development'),
+					   $entry->('Development|Documentation'),
+					  ),
+				   0, gtkpack(new Gtk::VBox(0,0), 
+					   $entries_in_path->('Server'),
+					   '',
+					   $entries_in_path->('Graphical Environment'),
+					  ),
+				     ),
+			   ),
+		   '',
 		   gtkadd(new Gtk::HBox(0,0),
 			  $w_size,
 			  if_($individual, do {
