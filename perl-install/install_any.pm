@@ -464,8 +464,14 @@ sub install_urpmi {
     my @cfg = map_index {
 	my $name = $_->{fakemedium};
 
+	#- build synthesis file at install, this will improve performance greatly.
+	run_program::rooted($prefix, "parsehdlist", ">", "/var/lib/urpmi/synthesis.hdlist.$name.cz",
+			    "--compact", "--provides", "--requires", "/var/lib/urpmi/hdlist.$name.cz");
+
 	local *LIST;
-	open LIST, ">$prefix/var/lib/urpmi/list.$name" or log::l("failed to write list.$name"), return;
+	my $mask = umask 077;
+	open LIST, ">$prefix/var/lib/urpmi/list.$name" or log::l("failed to write list.$name");
+	umask $mask;
 
 	my $dir = ${{ nfs => "file://mnt/nfs", 
                       hd => "file:/" . hdInstallPath(),
