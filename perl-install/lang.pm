@@ -566,6 +566,7 @@ sub pack_langs {
 
 sub system_locales_to_ourlocale {
     my ($locale_lang, $locale_country) = @_;
+    my $locale;
     if (member($locale_lang, list_langs())) {
 	#- special lang's such as en_US pt_BR
 	$locale->{lang} = $locale_lang;
