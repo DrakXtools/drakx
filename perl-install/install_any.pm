@@ -294,7 +294,7 @@ sub preConfigureTimezone {
 
     $o->{timezone}{timezone} ||= timezone::bestTimezone(lang::lang2text($o->{lang}));
 
-    my $utc = $::expert && !grep { isFat($_) || isNT($_) } @{$o->{fstab}};
+    my $utc = !grep { isFat($_) || isNT($_) } @{$o->{fstab}};
     my $ntp = timezone::ntp_server($o->{prefix});
     add2hash_($o->{timezone}, { UTC => $utc, ntp => $ntp });
 }
