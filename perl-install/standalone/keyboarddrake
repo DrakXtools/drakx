@@ -21,7 +21,7 @@ print "[$::expert]\n";
 my $keyboard='';
 if ($::expert) { ($keyboard) = grep { !/^-/ } @ARGV;}
 print "[$keyboard]\n";
-my $in = interactive->vnew('su', 'keyboard');
+my $in = 'interactive'->vnew('su', 'keyboard');
 
 begin:
 $::isEmbedded and kill USR2, $::CCPID;

@@ -30,7 +30,7 @@ $::Wizard_title = _("Firewalling Configuration");
 
 local $_ = join '', @ARGV;
 
-my $in = vnew interactive('su');
+my $in = 'interactive'->vnew('su', 'default');
 
 $::isEmbedded && ref($in) =~ /gtk/ or goto dd;
 require Gtk;

@@ -31,7 +31,7 @@ use MDK::Common::Globals "network", qw($in $prefix $connect_file $disconnect_fil
 
 my ($connect, $default_intf);
 init Gtk;
-my $in = vnew interactive('su');
+my $in = 'interactive'->vnew('su', 'default');
 $::isEmbedded = ($::XID, $::CCPID) = "@ARGV" =~ /--embedded (\w+) (\w+)/;
 ($default_intf) = "@ARGV" =~ /--defaultintf (\w+)/;
 $connect = "@ARGV" =~ /--connect/;

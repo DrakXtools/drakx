@@ -53,7 +53,7 @@ eval { $printer = printer::getinfo('') };
 /-pdq/ and 
     $printer->{mode} = 'pdq' and printer::read_configured_queues($printer);
 
-my $in = vnew interactive('printer', 'su');
+my $in = 'interactive'->vnew('su', 'printer');
 
 -r '/etc/modules.conf' and modules::mergein_conf('/etc/modules.conf');
 

@@ -20,7 +20,7 @@ local $_ = join '', @ARGV;
 
 $::expert = /-expert/;
 
-my $in = interactive->vnew('su', 'bootloader');
+my $in = 'interactive'->vnew('su', 'bootloader');
 
 require 'bootlook.pm' if ref($in) =~ /gtk/;
 lilo_choice();

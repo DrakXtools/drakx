@@ -18,7 +18,7 @@ local $_ = join '', @ARGV;
 $::auto = /-auto/;
 $::testing = /-testing/;
 
-my $in = vnew interactive('su', 'mouse');
+my $in = 'interactive'->vnew('su', 'mouse');
 
 -r '/etc/modules.conf' and modules::mergein_conf('/etc/modules.conf');
 

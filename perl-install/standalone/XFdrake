@@ -42,7 +42,7 @@ $::noauto = /-noauto/;
 $::testing = /-testing/;
 $i->{skiptest} = /-skiptest/;
 
-my $in = interactive->vnew('su', 'X');
+my $in = 'interactive'->vnew('su', 'X');
 
 -r '/etc/modules.conf' and modules::mergein_conf('/etc/modules.conf');
 

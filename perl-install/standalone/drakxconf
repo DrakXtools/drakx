@@ -14,7 +14,7 @@ local $_ = join '', @ARGV;
 
 /-h/ and die "usage: drakxconf\n";
 
-my $in = vnew interactive('su');
+my $in = 'interactive'->vnew('su', 'default');
 my @l=(
        { des => 'Display Configuration',
 	 cmd => 'XFdrake'},

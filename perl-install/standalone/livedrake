@@ -14,7 +14,7 @@ local $_ = join '', @ARGV;
 
 $::testing = /-testing/;
 
-my $in = vnew interactive('su');
+my $in = 'interactive'->vnew('su', 'default');
 
 my $cd_mntpoint = "/mnt/cdrom";
 

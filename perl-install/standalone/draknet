@@ -46,7 +46,7 @@ my @conx_type = ('modem', 'isdn_internal', 'isdn_external', 'adsl', 'cable', 'la
 
 #$::wizard_xpm = "/usr/share/pixmaps/internet.xpm";
 
-my $in = vnew interactive('su', 'network');
+my $in = 'interactive'->vnew('su', 'network');
 
 MDK::Common::Globals::init(
 	      in => $in,
