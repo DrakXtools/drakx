@@ -127,9 +127,6 @@ int ensure_dev_exists(char *dev)
 		minor = 8 * charstar_to_int(ptr+1);
 		ptr = strchr(ptr, 'p');
 		minor += charstar_to_int(ptr+1);
-        } else if (ptr_begins_static_str(name, "cloop")) {
-		major = 240;
-		minor = name[5] - '0';
 	} else {
 		log_message("I don't know how to create device %s, please post bugreport to me!", dev);
 		return -1;
@@ -191,16 +188,15 @@ int my_mount(char *dev, char *location, char *fs, int force_rw)
 	if (!strcmp(fs, "reiserfs"))
 		my_insmod("reiserfs", ANY_DRIVER_TYPE, NULL);
 
+#endif
 	if (!strcmp(fs, "iso9660"))
 		my_insmod("isofs", ANY_DRIVER_TYPE, NULL);
-#endif
 
 #ifndef DISABLE_NETWORK
 	if (!strcmp(fs, "nfs")) {
-		int flags = MS_RDONLY;
 		my_insmod("nfs", ANY_DRIVER_TYPE, NULL);
 		log_message("preparing nfsmount for %s", dev);
-		rc = nfsmount_prepare(dev, &flags, &opts);
+		rc = nfsmount_prepare(dev, &opts);
 		if (rc != 0)
 			return rc;
 	}
