@@ -97,14 +97,9 @@ sub write_conf {
     if ($netc->{HOSTNAME} && $netc->{HOSTNAME} =~ /\.(.+)$/) {
 	$netc->{DOMAINNAME} = $1;
     }
-    $netc->{DOMAINNAME} ||= 'localdomain';
-    add2hash($netc, {
-		     NETWORKING => "yes",
-		     FORWARD_IPV4 => "false",
-		     if_(!$netc->{DHCP}, HOSTNAME => "localhost.$netc->{DOMAINNAME}"),
-		    });
+    $netc->{NETWORKING} = 'yes';
 
-    setVarsInSh($file, $netc, if_(!$netc->{DHCP}, qw(HOSTNAME)), qw(NETWORKING FORWARD_IPV4 GATEWAY GATEWAYDEV NISDOMAIN));
+    setVarsInSh($file, $netc, if_(!$netc->{DHCP}, qw(HOSTNAME)), qw(NETWORKING GATEWAY GATEWAYDEV NISDOMAIN));
 }
 
 sub write_zeroconf {
@@ -116,7 +111,7 @@ sub write_resolv_conf {
     my ($file, $netc) = @_;
 
     my %new = (
-        search => [ grep { $_ } uniq(@$netc{'DOMAINNAME', 'DOMAINNAME2'}) ],
+        search => [ grep { $_ } uniq(@$netc{'DOMAINNAME', 'DOMAINNAME2', 'DOMAINNAME3'}) ],
         nameserver => [ grep { $_ } uniq(@$netc{'dnsServer', 'dnsServer2', 'dnsServer3'}) ],
     );
 
@@ -477,6 +472,7 @@ sub read_all_conf {
 	if (/ifcfg-(\w+)/ && $1 ne 'lo') {
 	    my $intf = findIntf($intf, $1);
 	    add2hash($intf, { getVarsFromSh("$prefix/etc/sysconfig/network-scripts/$_") });
+	    $netc->{HOSTNAME} = $intf->{DHCP_HOSTNAME} if ($intf->{BOOTPROTO} == 'dhcp');
 	}
     }
     $netcnx->{type} or probe_netcnx_type($prefix, $netc, $intf, $netcnx);
@@ -512,8 +508,6 @@ sub easy_dhcp {
 
     put_in_hash($netc, { 
 			NETWORKING => "yes",
-			FORWARD_IPV4 => "false",
-			DOMAINNAME => "localdomain",
 			DHCP => "yes",
 		       });
     1;
@@ -558,7 +552,7 @@ sub configureNetwork2 {
     $in->do_pkgs->install(qw(zcip tmdns));
     $netc->{ZEROCONF_HOSTNAME} and write_zeroconf("$etc/tmdns.conf", $netc->{ZEROCONF_HOSTNAME});      
     any { $_->{BOOTPROTO} =~ /^(pump|bootp)$/ } values %$intf and $in->do_pkgs->install('pump');
-            
+
     proxy_configure($::o->{miscellaneous});
 }
 
