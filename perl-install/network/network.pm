@@ -392,9 +392,9 @@ sub miscellaneousNetwork {
        complete => sub {
 	   $u->{http_proxy} =~ m,^($|http://), or $in->ask_warn('', _("Proxy should be http://...")), return 1,0;
 	   $u->{ftp_proxy} =~ m,^($|ftp://), or $in->ask_warn('', _("Proxy should be ftp://...")), return 1,1;
-	   return;
+	   0;
        }
-    );
+    ) || return;
 }
 
 sub read_all_conf {
