@@ -812,4 +812,10 @@ sub remove_advertising {
     @advertising_images = ();
 }
 
+sub disable_user_view {
+    my ($prefix) = @_;
+    substInFile { s/^UserView=.*/UserView=true/ } "$prefix/usr/share/config/kdmrc";
+    substInFile { s/^Browser=.*/Browser=0/ } "$prefix/etc/X11/gdm/gdm.conf";
+}
+
 1;
