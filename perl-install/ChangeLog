@@ -1,5 +1,90 @@
 2002/02/20  dam's  <damien@mandrakesoft.com>
 
+	* share/themes-marble3d.rc: updated theme
+
+	* network/adsl.pm: mgmt install corrected
+
+2002/02/20  daouda
+
+	* share/rpmsrate: 
+	  - same weight for rfbdrake in NETWORKING_REMOTE_ACCESS
+	NETWORKING_REMOTE_ACCESS_SERVER
+
+2002/02/20  fcrozat
+
+	* share/rpmsrate: Remove mozilla-psm from list, it is merged in mozilla
+
+2002/02/20  François Pons  <fpons@mandrakesoft.com>
+
+	* rescue/tree/etc/oem, tools/oem-prepare: synced with newer rpmsrate of
+	DrakX and newer method to select INSTALL packages.
+
+	* standalone/XFdrake: fixed NVIDIA package in urpmi db by directly using
+	urpm library instead of
+	parsing (now removed) depslist.ordered file.
+
+	* Xconfigurator.pm: fixed default value if selecting a card (use previous
+	one or existing one).
+	added XFree 4 driver choice if Other|Unlisted is chosen.
+	fixed cancel on card selection so that previous choice is not lost.
+
+	* Xconfigurator_consts.pm: added @allbutfbdrivers and @alldrivers for
+	listing XFree 4 drivers.
+
+2002/02/20  gbeauchesne
+
+	* share/rpmsrate: 
+	  - Add gcc3.0-c++ and libstdc++3.0-devel
+	  - Prefer gcc3.0-java over gcc-java
+	  - Remove BasiliskII-sheepnet since it does no longer exist
+	  - Add/prefer BasiliskII-jit over BasiliskII
+
+2002/02/20  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/fr.po: updated FRench file
+
+	* share/po/es.po: updated Spanish file
+	updated Spanish file
+	updated pot file
+
+	* share/po/be.po, share/po/sp.po, share/po/zh_CN.po, share/po/pt.po,
+	share/po/DrakX.pot, share/po/bg.po, share/po/ga.po, share/po/sr.po,
+	share/po/de.po, share/po/et.po, share/po/eu.po, share/po/az.po,
+	share/po/ru.po, share/po/pt_BR.po, share/po/hr.po, share/po/ko.po,
+	share/po/cy.po, share/po/nl.po, share/po/ja.po, share/po/wa.po,
+	share/po/sv.po, share/po/is.po, share/po/hu.po, share/po/it.po,
+	share/po/id.po, share/po/pl.po, share/po/fi.po, share/po/no.po,
+	share/po/th.po, share/po/el.po, share/po/sk.po, share/po/lt.po,
+	share/po/ar.po, share/po/sl.po, share/po/vi.po, share/po/br.po,
+	share/po/ca.po, share/po/gl.po, share/po/lv.po, share/po/uk.po,
+	share/po/eo.po, share/po/ro.po, share/po/bs.po, share/po/da.po,
+	share/po/zh_TW.po, share/po/cs.po, share/po/af.po: updated pot file
+
+2002/02/20  Pixel  <pixel@mandrakesoft.com>
+
+	* share/po/fr.po: fix s/SILO/LILO/
+
+	* fsedit.pm: have "with /usr" translated
+
+	* install_steps_interactive.pm (loadSavePackagesOnFloppy): add a "Cancel"
+	button
+
+	* steps.pm: move installUpdates after configureX (workaround for bad
+	timeouts during installing updates)
+
+	* install_steps.pm, any.pm, standalone/draksec: factorize and update the
+	reading of previous security level
+
+2002/02/20  siegel
+
+	* share/po/de.po: update
+
+2002/02/20  tvignaud
+
+	* share/po/fr.po: update french translations
+
+2002/02/20  dam's  <damien@mandrakesoft.com>
+
 	* share/advertising/13-Nvert.pl: changed toll free
 
 	* my_gtk.pm: added mcc kill if wait message
