@@ -184,6 +184,8 @@ sub formatPartitions {
 	home mnt tmp var var/tmp var/lib var/lib/rpm var/lib/urpmi);
     mkdir "$o->{prefix}/$_", 0700 foreach qw(root root/tmp);
 
+    common::screenshot_dir__and_move();
+
     substInFile { s/%_excludedocs.*//; $_ .= "%_excludedocs yes\n" if eof && $o->{excludedocs} } "$o->{prefix}/etc/rpm/macros";
 
     any::rotate_logs($o->{prefix});

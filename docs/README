@@ -259,9 +259,10 @@ to give it the complete path.
 ********************************************************************************
 * Making screenshots ***********************************************************
 ********************************************************************************
-On a test machine, make a network install, switch to console (ctrl-alt-F2), enter:
-% xhost+
+1. easy solution: press "F2"!
 
+2. On a test machine, make a network install, switch to console (ctrl-alt-F2), enter:
+% xhost+
 then, on another computer:
 % DISPLAY=test_machine:0 xwd -root | convert - screenshot.png
 

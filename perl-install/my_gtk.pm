@@ -680,13 +680,16 @@ sub _create_window($$) {
 	});
     }
     $w->signal_connect(key_press_event => sub {
-	my $d = ${{ 65470 => 'help',
-	            65481 => 'next',
-		    65480 => 'previous' }}{$_[1]{keyval}};
+	my $d = ${{ 0xffbe => 'help',
+		    0xffbf => 'screenshot',
+	            0xffc9 => 'next',
+		    0xffc8 => 'previous' }}{$_[1]{keyval}};
 
 	if ($d eq "help") {
 	    require install_gtk;
 	    install_gtk::create_big_help($::o);
+	} elsif ($::isInstall && $d eq 'screenshot') {
+	    common::take_screenshot($o);
 	} elsif (chr($_[1]{keyval}) eq 'e' && $_[1]{state} & 8) {
 	    log::l("Switching to " . ($::expert ? "beginner" : "expert"));
 	    $::expert = !$::expert;
