@@ -68,6 +68,7 @@ my $cfg_dir = "/etc/drakxtools/draktermserv/";
 my $cfg_file = $cfg_dir . "draktermserv.conf";
 my $server_ip = get_ip_from_sys();
 my $changes_made = 0;
+my $client_cfg = "/etc/dhcpd.conf.etherboot.clients";
 
 #- make sure terminal server and friends are installed
 my $ts = system("rpm -qa | grep terminal-server > /dev/null");
@@ -494,7 +495,8 @@ sub make_boot() {
 	#- make a boot image on floppy or iso from etherboot images
 	my $boot_box;
 	my $rom_path = "/usr/share/etherboot";
-	my @nics = all("/usr/share/etherboot/zimg");
+	#- doesn't return list sorted
+	my @nics = sort(all("/usr/share/etherboot/zimg"));
 	my $list_nics = new Gtk2::List();
 	my $nic;
 	
@@ -672,7 +674,8 @@ sub maintain_users() {
 	my $titer;
 	
 	#- use /homes to filter system daemons
-	my @homes = all("/home");
+	#- seems suppressing root is less than useful, let it be added
+	my @homes = (all("/home"), "root");
 	
 	my $list_model = Gtk2::ListStore->new("Glib::String");
 	my $list_sys_users = Gtk2::TreeView->new_with_model($list_model);
@@ -1053,7 +1056,7 @@ sub dhcpd_config() {
 	
 	gtkpack($status_box, 
 		$dhcpd_box = gtkpack_(new Gtk2::HBox(1,10),
-			0, gtkadd((new Gtk2::VBox),
+			0, gtkadd(new Gtk2::VBox,
 				gtkadd($box_subnet),
 				gtkadd($box_netmask),
 				gtkadd($box_routers),
@@ -1069,12 +1072,12 @@ sub dhcpd_config() {
 				gtkadd((new Gtk2::HBox),
 					new Gtk2::Label(N("Dynamic IP Address Pool:")),
 				),
-				gtkadd((new Gtk2::HBox(0,0)),
-					gtkadd((new Gtk2::VBox),
+				gtkadd(new Gtk2::HBox(0,0),
+					gtkadd(new Gtk2::VBox,
 						gtkadd($label_ip_range_start),
 						gtkadd($entry_ip_range_start),
 					),
-					gtkadd((new Gtk2::VBox),
+					gtkadd(new Gtk2::VBox,
 						gtkadd($label_ip_range_end),
 						gtkadd($entry_ip_range_end),
 					),
@@ -1173,7 +1176,7 @@ sub write_dhcpd_config {
 
 	print FHANDLE "}\n\n";
 	
-	print FHANDLE qq(# Include client machine configurations\ninclude "/etc/dhcpd.conf.etherboot.clients";\n);
+	print FHANDLE qq(# Include client machine configurations\ninclude "$client_cfg";\n);
 	close FHANDLE	
 }
 
@@ -1227,6 +1230,11 @@ sub enable_ts {
 			dhcpd_config();
 			return;		
 		}
+	}
+	#- suggestion from jmdault - not always needed
+	if (! -e $client_cfg) {
+		log::explanations("Touch file $client_cfg");
+		`touch $client_cfg`;
 	}
 	my $buff_index = toggle_chkconfig("on", "dhcpd", 2);
 	$buff[$buff_index] = "\tSetting up default /etc/exports...\n";
@@ -1355,13 +1363,13 @@ sub adduser {
 	my ($cmd_line, $username) = @_;
 	my @active_users = cat_("/etc/shadow");
 	my @ts_users = cat_('/etc/shadow$$CLIENT$$');
-	my $is_user = grep { /$username/ } @active_users;
+	my $is_user = any { /$username/ } @active_users;
 	my $add_fail = 0;
 	my $in_already;
 	
 	if ($is_user) {
 		my @shadow_entry = grep { /$username/ } @active_users;
-		my $is_ts_user = grep { /$username/ } @ts_users;
+		my $is_ts_user = any { /$username/ } @ts_users;
 		if ($is_ts_user) {
 			my @ts_shadow = grep { /$username/ } @ts_users;
 			if ($shadow_entry[0] eq $ts_shadow[0]) {
@@ -1401,9 +1409,8 @@ sub deluser {
 	my ($cmd_line, $username) = @_;
 	my $i;
 	my $user_deleted;
-		
-	my @ts_users = cat_('/etc/shadow\$\$CLIENT$$');
-	my $is_ts_user = grep { /$username/ } @ts_users;
+	my @ts_users = cat_('/etc/shadow$$CLIENT$$');
+	my $is_ts_user = any { /$username/ } @ts_users;
 	
 	if ($is_ts_user) {
 		$i = 0;
@@ -1471,7 +1478,7 @@ sub addclient {
 			$ts_clients{$hostname}{hdw_config} = "false";
 			client_hdw_config($ip, 0);
 		}	
-		my $clients = "/etc/dhcpd.conf.etherboot.clients";
+		my $clients = $client_cfg;
 		local *CLIENT;
 		open(CLIENT, ">> $clients") or warn(N("Can't open %s!", $clients));
 		my $client_entry = format_client_entry($hostname, %ts_clients);
@@ -1585,7 +1592,7 @@ sub format_client_entry {
 
 sub write_dhcpd_conf {
 	my %ts_clients = @_;
-	my $clients = "/etc/dhcpd.conf.etherboot.clients";
+	my $clients = $client_cfg;
 		
 	local *CLIENT;
 	open(CLIENT, "> $clients") or warn("Can't open $clients!");
@@ -1597,7 +1604,7 @@ sub write_dhcpd_conf {
 }
 
 sub read_dhcpd_conf() {
-	my $clients = "/etc/dhcpd.conf.etherboot.clients";
+	my $clients = $client_cfg;
 	my %ts_clients;
 	my $hostname;
 	
