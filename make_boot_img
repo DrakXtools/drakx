@@ -177,7 +177,8 @@ sub initrd {
 sub entries_append {
     my ($type) = @_;
 
-    my $automatic = $type eq "cdrom" ? 'automatic=method:cdrom' : '';
+    my $automatic = $type =~ /cdrom/ ? 'automatic=method:cdrom' : '';
+    $automatic .= " changedisk" if $type =~ /changedisk/;
 
     my @simple_entries = (
 	linux => $default_vga,
@@ -249,7 +250,7 @@ F3 boot.msg
 	    my ($name) = /(\S+)\.k?o$/ or die "bad file in .mar";
 	    my $gz_size = chomp_(`gzip -c $dir/$_ | wc -c`);
 	    sprintf "%7d  %6d      %s\n", $gz_size, listlength($pcitable =~ /"$name"/g), $name;
-	} split(' ', `mdk-stage1/mar/mar -l $dir/${type}_modules.mar`);
+	} split(' ', `mdk-stage1/mar/mar -l $dir/${initrd_type}_modules.mar`);
 	output('.not-enough-room', "gz size - pcitable - name\n", @l);
 
 	warn sprintf("not enough room for $rdz: need %dKB (available %dKB < needed %dKB)\n", $s - $avail, $avail, $s);
