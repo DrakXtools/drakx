@@ -23,6 +23,7 @@ sub read {
 sub write {
     my ($raw_X, $file) = @_;
     $file ||= ($::prefix || '') . $raw_X->config_file;
+    rename $file, "$file.old";
     Xconfig::parse::write_XF86Config($raw_X, $file);
 }
 
