@@ -1132,6 +1132,7 @@ sub write_grub {
 	my @conf;
 
 	push @conf, map { "$_ $bootloader->{$_}" } grep { $bootloader->{$_} } qw(timeout color);
+	push @conf, map { $_ . ' ' . $file2grub->($bootloader->{$_}) } grep { $bootloader->{$_} } qw(splashimage);
 	push @conf, "serial --unit=$1 --speed=$2\nterminal --timeout=" . ($bootloader->{timeout} || 0) . " console serial" if get_append($bootloader, 'console') =~ /ttyS(\d),(\d+)/;
 
 	eval {
@@ -1143,12 +1144,12 @@ sub write_grub {
 
 	    if ($_->{type} eq "image") {
 		my $vga = $_->{vga} || $bootloader->{vga};
-		push @conf, sprintf "kernel %s root=%s %s%s%s",
-		  $file2grub->($_->{kernel_or_dev}),
-		  $_->{root} =~ /loop7/ ? "707" : $_->{root}, #- special to workaround bug in kernel (see #ifdef CONFIG_BLK_DEV_LOOP)
-		  $_->{append},
-		  $_->{'read-write'} && " rw",
-		  $vga && $vga ne "normal" && " vga=$vga";
+		push @conf, 
+		  join(' ', 'kernel', $file2grub->($_->{kernel_or_dev}),
+		       if_($_->{root}, $_->{root} =~ /loop7/ ? "root=707" : "root=$_->{root}"), #- special to workaround bug in kernel (see #ifdef CONFIG_BLK_DEV_LOOP)
+		       $_->{append},
+		       if_($_->{'read-write'}, 'rw'),
+		       if_($vga && $vga ne "normal", "vga=$vga"));
 		push @conf, "initrd " . $file2grub->($_->{initrd}) if $_->{initrd};
 	    } else {
 		push @conf, "root " . device_string2grub($_->{kernel_or_dev}, \@legacy_floppies, \@sorted_hds);
