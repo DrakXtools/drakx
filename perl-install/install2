@@ -21,6 +21,12 @@
 use diagnostics;
 use strict;
 
+BEGIN {
+    #- for testing purpose
+    (my $f = __FILE__) =~ s|install2$|list_modules.pm|;
+    -e $f or symlink '../kernel/list_modules.pm', $f;
+}
+
 use lib qw(/usr/bin/perl-install .);
 use install2;
 
