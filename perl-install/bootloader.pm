@@ -164,6 +164,9 @@ sub read {
 	    if (m!/fd\d+$!) {
 		warn "not checking the method on floppy, assuming $main_method is right\n";
 		$main_method;
+	    } elsif ($main_method eq 'yaboot') {
+		#- not checking on ppc, there's only yaboot anyway :)
+		$main_method;
 	    } elsif (my $type = partition_table::raw::typeOfMBR($_)) {
 		warn "typeOfMBR $type on $_ for method $main_method\n" if $ENV{DEBUG};
 		$type;
