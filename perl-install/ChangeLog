@@ -1,3 +1,22 @@
+2003/01/08  Pixel  <pixel@mandrakesoft.com>
+
+	* ugtk2.pm: ensure drakx don't need wiz_default_up.png and
+	wiz_default_left.png
+
+2003/01/07  Pixel  <pixel@mandrakesoft.com>
+
+	* any.pm: "require bootloader" where needed
+
+	* interactive/gtk.pm, install_steps_gtk.pm, install_gtk.pm, install2.pm,
+	ugtk2.pm: 
+	  - remove help (which was at the bottom)
+	  - wizard style
+	  - focus "Next" button by default (this is rough, some dialog boxes
+	*need* changes
+	before being able to complete (think root password dialog))
+
+	* diskdrake/hd_gtk.pm: fix ugly global setting of $ugtk2::pop_it
+
 2003/01/07  Daouda Lo  <daouda@mandrakesoft.com>
 
 	* standalone/drakbug: 
@@ -7737,7 +7756,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.762 2003/01/07 01:30:49 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.763 2003/01/07 23:08:22 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
