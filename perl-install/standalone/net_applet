@@ -122,8 +122,9 @@ sub cronNetwork() {
                                   });
 }
 sub go2State {
+    my ($state_type, $interface) = @_;
     $menu and $menu->destroy;
-    $menu = setState(@_)
+    $menu = setState($state_type, $interface);
 }
 sub setState {
     my ($state_type, $interface) = @_;
@@ -136,7 +137,7 @@ sub setState {
     foreach (@$arr) {
         my $name = ref($actions{$_}{name}) eq 'CODE' ? $actions{$_}{name}->($interface) : $actions{$_}{name};
         my $launch = $actions{$_}{launch};
-        $menu->append(gtksignal_connect(gtkshow(Gtk2::MenuItem->new_with_label($name)), activate => sub { $launch->($interface) } ));
+        $menu->append(gtksignal_connect(gtkshow(Gtk2::MenuItem->new_with_label($name)), activate => sub { $launch->($interface) }));
     }
     $menu->append(gtkshow(Gtk2::SeparatorMenuItem->new));
     $menu->append(gtksignal_connect(gtkset_active($checkmi = Gtk2::CheckMenuItem->new_with_label(N("Always launch on startup")), shouldStart()), toggled => sub { setAutoStart(uc(bool2text($checkmi->get_active))) }));
