@@ -16,117 +16,6 @@ use devices;
 use modules;
 
 
-sub getHds {
-    my ($o) = @_;
-    my ($ok, $ok2) = (1, 1);
-    my $flags = $o->{partitioning};
-
-    my @drives = detect_devices::hds();
-#    add2hash_($o->{partitioning}, { readonly => 1 }) if partition_table_raw::typeOfMBR($drives[0]{device}) eq 'system_commander';
-
-  getHds: 
-    $o->{hds} = catch_cdie { fsedit::hds(\@drives, $flags) }
-      sub {
-        log::l("error reading partition table: $@");
-	my ($err) = $@ =~ /(.*) at /;
-	$@ =~ /overlapping/ and $o->ask_warn('', $@), return 1;
-	$o->ask_okcancel(_("Error"),
-[_("I can't read your partition table, it's too corrupted for me :(
-I'll try to go on blanking bad partitions"), $err]) unless $flags->{readonly};
-	$ok = 0; 1 
-    };
-
-    if (is_empty_array_ref($o->{hds}) && $o->{autoSCSI}) {
-	$o->setupSCSI; #- ask for an unautodetected scsi card
-	goto getHds;
-    }
-
-    $ok2 = fsedit::verifyHds($o->{hds}, $flags->{readonly}, $ok)
-        unless $flags->{clearall} || $flags->{clear};
-
-    $o->{fstab} = [ fsedit::get_fstab(@{$o->{hds}}) ];
-    fs::check_mounted($o->{fstab});
-    fs::merge_fstabs($o->{fstab}, $o->{manualFstab});
-
-    $o->ask_warn('', 
-_("DiskDrake failed to read correctly the partition table.
-Continue at your own risk!")) if !$ok2 && $ok && !$flags->{readonly};
-
-    my @win = grep { isFat($_) && isFat({ type => fsedit::typeOfPart($_->{device}) }) } @{$o->{fstab}};
-    log::l("win parts: ", join ",", map { $_->{device} } @win) if @win;
-    if (@win == 1) {
-	$win[0]{mntpoint} = "/mnt/windows";
-    } else {
-	my %w; foreach (@win) {
-	    my $v = $w{$_->{device_windobe}}++;
-	    $_->{mntpoint} = "/mnt/win_" . lc($_->{device_windobe}) . ($v ? $v+1 : ''); #- lc cuz of StartOffice(!) cf dadou
-	}
-    }
-
-    my @sunos = grep { isSunOS($_) && type2name($_->{type}) =~ /root/i } @{$o->{fstab}}; #- take only into account root partitions.
-    if (@sunos) {
-	my $v = '';
-	map { $_->{mntpoint} = "/mnt/sunos" . ($v && ++$v) } @sunos;
-    }
-    #- a good job is to mount SunOS root partition, and to use mount point described here in /etc/vfstab.
-
-    $ok2;
-}
-
-
-sub searchAndMount4Upgrade {
-    my ($o) = @_;
-    my ($root, $found);
-
-    my $w = !$::expert && $o->wait_message('', _("Searching root partition."));
-
-    #- try to find the partition where the system is installed if beginner
-    #- else ask the user the right partition, and test it after.
-    getHds($o);
-
-    #- get all ext2 partition that may be root partition.
-    my %Parts = my %parts = map { $_->{device} => $_ } grep { isTrueFS($_) } @{$o->{fstab}};
-    while (keys(%parts) > 0) {
-	$root = $::beginner ? first(%parts) : $o->selectRootPartition(keys %parts);
-	$root = delete $parts{$root};
-
-	my $r; unless ($r = $root->{realMntpoint}) {
-	    $r = $o->{prefix};
-	    $root->{mntpoint} = "/"; 
-	    log::l("trying to mount partition $root->{device}");
-	    eval { fs::mount_part($root, $o->{prefix}, 'readonly') };
-	    $r = "/*ERROR*" if $@;
-	}
-	$found = -d "$r/etc/sysconfig" && [ fs::read_fstab("$r/etc/fstab") ];
-
-	unless ($root->{realMntpoint}) {
-	    log::l("umounting partition $root->{device}");
-	    eval { fs::umount_part($root, $o->{prefix}) };
-	}
-
-	last if !is_empty_array_ref($found);
-
-	delete $root->{mntpoint};
-	$o->ask_warn(_("Information"), 
-		     _("%s: This is not a root partition, please select another one.", $root->{device})) unless $::beginner;
-    }
-    is_empty_array_ref($found) and die _("No root partition found");
-	
-    log::l("found root partition : $root->{device}");
-
-    #- test if the partition has to be fsck'ed and remounted rw.
-    if ($root->{realMntpoint}) {
-	($o->{prefix}, $root->{mntpoint}) = ($root->{realMntpoint}, '/');
-    } else {
-	delete $root->{mntpoint};
-	($Parts{$_->{device}} || {})->{mntpoint} = $_->{mntpoint} foreach @$found;
-	map { $_->{mntpoint} = 'swap_upgrade' } grep { isSwap($_) } @{$o->{fstab}}; #- use all available swap.
-
-	#- TODO fsck, create check_mount_all ?
-	fs::mount_all([ grep { isTrueFS($_) || isSwap($_) } @{$o->{fstab}} ], $o->{prefix});
-    }
-}
-
 sub partitionWizard {
     my ($o, $hds, $fstab, $readonly) = @_;
     my @wizlog;
@@ -252,21 +141,20 @@ Then choose action ``Mount point'' and set it to `/'"), 1) or return;
 	    } ];
     }
 
-    if (!$readonly) { #- diskdrake only available in gtk for now
-	$solutions{fdisk} =
-	  [ -10, _("Use fdisk"), sub { 
-		$o->suspend;
-		foreach (@$hds) {
-		    print "\n" x 10, _("You can now partition %s.
+    $solutions{fdisk} =
+      [ -10, _("Use fdisk"), sub { 
+	    $o->suspend;
+	    foreach (@$hds) {
+		print "\n" x 10, _("You can now partition %s.
 When you are done, don't forget to save using `w'", partition_table_raw::description($_));
-		    print "\n\n";
-		    my $pid = fork or exec "fdisk", devices::make($_->{device});
-		    waitpid($pid, 0);
-		}
-		$o->resume;
-		0;
-	    } ];
-    }
+		print "\n\n";
+		my $pid = fork or exec "fdisk", devices::make($_->{device});
+		waitpid($pid, 0);
+	    }
+	    $o->resume;
+	    0;
+	} ];
+
     log::l("partitioning wizard log:\n", (map { ">>wizlog>>$_\n" } @wizlog));
     %solutions;
 }
@@ -297,7 +185,7 @@ sub setup_thiskind {
 	if (my @err = grep { $_->{error} } map { $_->{error} } @l) {
 	    $o->ask_warn('', join("\n", @err));
 	}
-	return if $auto && (@l || !$at_least_one);
+	return @l if $auto && (@l || !$at_least_one);
     }
     @l = map { $_->{description} } @l;
     while (1) {
@@ -310,7 +198,7 @@ sub setup_thiskind {
 	push @$opt, __("See hardware info") if $::expert;
 	my $r = "Yes";
 	$r = $o->ask_from_list_('', $msg, $opt, "No") unless $at_least_one && @l == 0;
-	if ($r eq "No") { return }
+	if ($r eq "No") { return @l }
 	if ($r eq "Yes") {
 	    push @l, $o->load_module($type) || next;
 	} else {

@@ -9,7 +9,7 @@ TAGS: $(PMS)
 
 clean:
 	for i in $(DIRS); do $(MAKE) -C $$i clean; done
-	rm -rf auto
+	rm -rf auto ../drakxtools.tar.bz2
 	find . -name "*~" -o -name ".#*" -o -name "TAGS" -o -name "*.old" | xargs rm -f
 
 tar-drakxtools: clean

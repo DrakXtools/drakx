@@ -66,7 +66,7 @@ sub exitInstall {
     } else {
 	install_steps::exitInstall;
 	print "\a";
-	print "Auto installation complete\n";
+	print "Auto installation complete (the postInstall is done yet though)\n";
 	print "Press <Enter> to reboot\n";
 	<STDIN>;
     }

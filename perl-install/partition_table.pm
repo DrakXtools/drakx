@@ -401,7 +401,7 @@ sub read_one($$) {
 sub read($;$) {
     my ($hd, $clearall) = @_;
     if ($clearall) {
-	partition_table_raw::zero_MBR($hd);
+	partition_table_raw::zero_MBR_and_dirty($hd);
 	return 1;
     }
     my $pt = read_one($hd, 0) or return 0;

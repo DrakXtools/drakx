@@ -66,7 +66,6 @@ sub hds {
 
 	eval { partition_table::read($hd, $flags->{clearall} || member($_->{device}, @{$flags->{clear} || []})) };
 	if ($@) {
-	    cdie($@) unless $flags->{eraseBadPartitions};
 	    partition_table_raw::zero_MBR($hd);
 	}
 	member($_->{device}, @{$flags->{clear} || []}) and partition_table::remove($hd, $_)
@@ -116,14 +115,6 @@ sub hasRAID {
     map { $b ||= isRAID($_) } get_fstab(@_);
     $b;
 }
-
-sub get_root {
-    my ($fstab, $boot) = @_;
-    if ($boot) { $_->{mntpoint} eq "/boot" and return $_ foreach @$fstab; }
-    $_->{mntpoint} eq "/" and return $_ foreach @$fstab;
-    undef;
-}
-sub get_root_ { get_root([ get_fstab(@{$_[0]}) ], $_[1]) }
 
 sub is_one_big_fat {
     my ($hds) = @_;
@@ -225,12 +216,17 @@ sub suggestions_mntpoint {
 #-}
 
 
-sub has_mntpoint($$) {
+sub mntpoint2part {
+    my ($mntpoint, $fstab) = @_;
+    first(grep { $mntpoint eq $_->{mntpoint} } @$fstab);
+}
+sub has_mntpoint {
     my ($mntpoint, $hds) = @_;
-    scalar grep { 
-	$mntpoint eq $_->{mntpoint} || 
-	grep { $mntpoint eq $_->{mntpoint} } @{$_->{loopback} || []}
-    } get_fstab(@$hds);
+    mntpoint2part($mntpoint, [ get_fstab(@$hds) ]);
+}
+sub get_root {
+    my ($fstab, $boot) = @_;
+    $boot && mntpoint2part("/boot", $fstab) || mntpoint2part("/", $fstab);
 }
 
 #- do this before modifying $part->{mntpoint}
@@ -436,6 +432,7 @@ sub verifyHds {
 	    partition_table_raw::zero_MBR($hd);
 	    $hd->{primary} = { normal => [ grep { $hd->{device} eq $_->{rootDevice} } @parts ] };
 	}
+	$ok = 1;
     }
     $readonly && get_fstab(@$hds) == 0 and die _("You don't have any partitions!");
     $ok;

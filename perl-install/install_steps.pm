@@ -123,6 +123,7 @@ sub setupSCSI {
     modules::load_ide();
     modules::load_thiskind('scsi|disk');
 }
+
 #------------------------------------------------------------------------------
 sub doPartitionDisksBefore {
     my ($o) = @_;
@@ -135,7 +136,6 @@ sub doPartitionDisksBefore {
     eval { fs::umount_all($o->{fstab}, $o->{prefix}) } if $o->{fstab} && !$::testing;
 
     $o->{raid} ||= {};
-    install_interactive::getHds($o);
 }
 
 #------------------------------------------------------------------------------
@@ -161,13 +161,15 @@ sub doPartitionDisksAfter {
 sub doPartitionDisks {
     my ($o) = @_;
 
+    install_any::getHds($o);
+
     if ($o->{isUpgrade}) {
 	# either one root is defined (and all is ok), or we take the first one we find
 	my $p = fsedit::get_root($o->{fstab}) || first(install_any::find_root_parts($o->{hds}, $o->{prefix})) or die;
 	install_any::use_root_part($o->{fstab}, $p, $o->{prefix});
-    } else {
-	 #TODO;
-    }	
+    } elsif ($o->{partitioning}{auto_allocate}) {
+	fsedit::auto_allocate($o->{hds}, $o->{partitions});
+    }
 }
 
 #------------------------------------------------------------------------------

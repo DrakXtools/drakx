@@ -287,6 +287,7 @@ sub umount_part($;$) {
 sub mount_all($;$$) {
     my ($fstab, $prefix) = @_;
 
+    #- TODO fsck, create check_mount_all ?
     log::l("mounting all filesystems");
 
     #- order mount by alphabetical ordre, that way / < /home < /home/httpd...

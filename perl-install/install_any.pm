@@ -597,7 +597,7 @@ sub generate_ks_cfg {
 }
 
 sub suggest_mount_points {
-    my ($hds, $prefix) = @_;
+    my ($hds, $prefix, $uniq) = @_;
     my @parts = grep { isTrueFS($_) } fsedit::get_fstab(@$hds);
 
     my (%mntpoints, $user);
@@ -617,7 +617,8 @@ sub suggest_mount_points {
 	my $d = $handle->{dir};
 	my ($mnt) = grep { -e "$d/$l{$_}" } keys %l;
 	$mnt ||= (stat("$d/.bashrc"))[4] ? '/root' : '/home/user' . ++$user if -e "$d/.bashrc";
-	
+
+	next if $uniq && fsedit::mntpoint2part($mnt, \@parts);
 	$part->{mntpoint} = $mnt;
 
 	# try to find other mount points via fstab
@@ -631,13 +632,69 @@ sub suggest_mount_points {
 #- mainly for finding the root partitions for upgrade
 sub find_root_parts {
     my ($hds, $prefix) = @_;
+    log::l("find_root_parts");
     suggest_mount_points($hds, $prefix);
     grep { delete($_->{mntpoint}) eq '/' } fsedit::get_fstab(@$hds);
 }
 sub use_root_part {
     my ($fstab, $part, $prefix) = @_;
-    my $handle = any::inspect($part, $prefix) or die;
-    fs::get_mntpoints_from_fstab($fstab, $handle->{dir});
+    {
+	my $handle = any::inspect($part, $prefix) or die;
+	fs::get_mntpoints_from_fstab($fstab, $handle->{dir});
+    }
+
+    map { $_->{mntpoint} = 'swap_upgrade' } grep { isSwap($_) } @$fstab; #- use all available swap.
+    fs::mount_all($fstab, $prefix);
+}
+
+sub getHds {
+    my ($o, $f_err) = @_;
+    my $ok = 1;
+    my $flags = $o->{partitioning};
+
+    my @drives = detect_devices::hds();
+#    add2hash_($o->{partitioning}, { readonly => 1 }) if partition_table_raw::typeOfMBR($drives[0]{device}) eq 'system_commander';
+
+  getHds: 
+    $o->{hds} = catch_cdie { fsedit::hds(\@drives, $flags) }
+      sub {
+	  $ok = 0;
+	  log::l("error reading partition table: $@");
+	  my ($err) = $@ =~ /(.*) at /;
+	  $flags->{readonly} && $f_err and $f_err->($err);
+      };
+
+    if (is_empty_array_ref($o->{hds}) && $o->{autoSCSI}) {
+	$o->setupSCSI; #- ask for an unautodetected scsi card
+	goto getHds;
+    }
+
+    $ok = fsedit::verifyHds($o->{hds}, $flags->{readonly}, $ok)
+        unless $flags->{clearall} || $flags->{clear};
+
+    $o->{fstab} = [ fsedit::get_fstab(@{$o->{hds}}) ];
+    fs::check_mounted($o->{fstab});
+    fs::merge_fstabs($o->{fstab}, $o->{manualFstab});
+
+    my @win = grep { isFat($_) && isFat({ type => fsedit::typeOfPart($_->{device}) }) } @{$o->{fstab}};
+    log::l("win parts: ", join ",", map { $_->{device} } @win) if @win;
+    if (@win == 1) {
+	$win[0]{mntpoint} = "/mnt/windows";
+    } else {
+	my %w; foreach (@win) {
+	    my $v = $w{$_->{device_windobe}}++;
+	    $_->{mntpoint} = "/mnt/win_" . lc($_->{device_windobe}) . ($v ? $v+1 : ''); #- lc cuz of StartOffice(!) cf dadou
+	}
+    }
+
+    my @sunos = grep { isSunOS($_) && type2name($_->{type}) =~ /root/i } @{$o->{fstab}}; #- take only into account root partitions.
+    if (@sunos) {
+	my $v = '';
+	map { $_->{mntpoint} = "/mnt/sunos" . ($v && ++$v) } @sunos;
+    }
+    #- a good job is to mount SunOS root partition, and to use mount point described here in /etc/vfstab.
+
+    $ok;
 }
 
 1;

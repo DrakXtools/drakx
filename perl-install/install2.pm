@@ -580,7 +580,8 @@ sub main {
     mkdir $o->{root}, 0755;
 
     #-  make sure we don't pick up any gunk from the outside world
-    $ENV{PATH} = "/usr/bin:/bin:/sbin:/usr/sbin:/usr/X11R6/bin:$o->{prefix}/sbin:$o->{prefix}/bin:$o->{prefix}/usr/sbin:$o->{prefix}/usr/bin:$o->{prefix}/usr/X11R6/bin" unless $::g_auto_install;
+    my $remote_path = "$o->{prefix}/sbin:$o->{prefix}/bin:$o->{prefix}/usr/sbin:$o->{prefix}/usr/bin:$o->{prefix}/usr/X11R6/bin";
+    $ENV{PATH} = "/usr/bin:/bin:/sbin:/usr/sbin:/usr/X11R6/bin:$remote_path" unless $::g_auto_install;
 
     $o->{interactive} ||= 'gtk';
     if ($o->{interactive} eq "gtk" && availableMemory < 22 * 1024) {
@@ -608,11 +609,22 @@ sub main {
     $o->{prefix} = $::testing ? "/tmp/test-perl-install" : "/mnt";
     mkdir $o->{prefix}, 0755;
 
+    modules::unload($_) foreach qw(vfat msdos fat);
+    modules::load_deps(($::testing ? ".." : "") . "/modules/modules.dep");
+    modules::read_stage1_conf("/tmp/conf.modules");
+    modules::read_already_loaded();
+
+    eval { modules::load("af_packet") };
+
+    map_index {
+	modules::add_alias("sound-slot-$::i", $_->{driver});
+    } modules::get_that_type('sound');
+
     #- needed very early for install_steps_gtk
     modules::load_thiskind("usb");
     eval { ($o->{mouse}, $o->{wacom}) = mouse::detect() } unless $o->{nomouseprobe} || $o->{mouse};
 
-    lang::set($o->{lang}) if $o->{lang} ne 'en'; #- mainly for defcfg
+    lang::set($o->{lang}); #- mainly for defcfg
 
     $o->{allowFB} = listlength(cat_("/proc/fb"));
 
@@ -651,19 +663,6 @@ sub main {
 	my $l = network::read_interface_conf($file);
 	add2hash(network::findIntf($o->{intf} ||= [], $l->{DEVICE}), $l);
     }
-
-    modules::unload($_) foreach qw(vfat msdos fat);
-    modules::load_deps(($::testing ? ".." : "") . "/modules/modules.dep");
-    modules::read_stage1_conf("/tmp/conf.modules");
-    modules::read_already_loaded();
-
-    eval { modules::load("af_packet") };
-
-    map_index {
-	modules::add_alias("snd-slot-$::i", $_->{driver});
-    } modules::get_that_type('sound');
-
-    lang::set($o->{lang});
 
     #-the main cycle
     my $clicked = 0;
@@ -713,6 +712,8 @@ sub main {
 
     #- mainly for auto_install's
     run_program::rooted($o->{prefix}, "sh", "-c", $o->{postInstall}) if $o->{postInstall};
+    do { local $ENV{PATH} = $remote_path;
+	 run_program::run("bash", "-c", $o->{postInstallNonRooted}) } if $o->{postInstallNonRooted};
 
     #- have the really bleeding edge ddebug.log
     eval { commands::cp('-f', "/tmp/ddebug.log", "$o->{prefix}/root") };

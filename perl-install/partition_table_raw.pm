@@ -115,14 +115,20 @@ sub kernel_read($) {
     sync(); sleep(1);
 }
 
-sub zero_MBR($) {
+sub zero_MBR {
     my ($hd) = @_;
     #- force the standard partition type for the architecture
     my $type = arch() eq "alpha" ? "bsd" : arch() =~ /^sparc/ ? "sun" : arch() eq "ppc" ? "mac" : "dos";
     bless $hd, "partition_table_$type";
-    $hd->{isDirty} = $hd->{needKernelReread} = 1;
     $hd->{primary} = $hd->clear_raw();
     delete $hd->{extended};
+}
+
+sub zero_MBR_and_dirty {
+    my ($hd) = @_;
+    zero_MBR($hd);
+    $hd->{isDirty} = $hd->{needKernelReread} = 1;
+
 }
 
 1;

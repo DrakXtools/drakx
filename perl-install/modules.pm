@@ -399,8 +399,8 @@ sub load_multi {
     load_raw(map { [ $_ ] } @l);
 }
 
-sub unload($;$) {
-    my ($m, $remove_alias) = @_; 
+sub unload {
+    my ($m) = @_; 
     if ($::testing) {
 	log::l("rmmod $m");
     } else {
@@ -408,7 +408,6 @@ sub unload($;$) {
 	    delete $conf{$m}{loaded};
 	}
     }
-    remove_alias($m) if $remove_alias;
 }
 
 sub load_raw {
@@ -434,6 +433,7 @@ sub load_raw {
 		/^irq=(\d+)/ and eval { output "/proc/parport/0/irq", $1 };
 	    }
 	} elsif ($_->[0] =~ /usb-[uo]hci/) {
+	    add_alias('usb-interface', $_->[0]);
 	    #- ensure keyboard is working, the kernel must do the job the BIOS was doing
 	    load_multi("usbkbd", "keybdev");
 	}

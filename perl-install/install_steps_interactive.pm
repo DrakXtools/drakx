@@ -160,7 +160,7 @@ sub selectMouse {
 			    [ mouse::serial_ports ]);
     }
 
-    $o->setup_thiskind('SERIAL_USB', !$::expert, 0) if $o->{mouse}{device} eq "usbmouse";
+    install_interactive::setup_thiskind($o, 'usb', !$::expert, 0) if $o->{mouse}{device} eq "usbmouse";
     eval { 
 	devices::make("usbmouse");
 	modules::load("usbmouse");
@@ -189,7 +189,7 @@ sub ask_mntpoint_s {
     if (@fstab == 1) {
 	$fstab[0]{mntpoint} = '/';
     } else {
-	install_any::suggest_mount_points($o->{hds}, $o->{prefix});
+	install_any::suggest_mount_points($o->{hds}, $o->{prefix}, 'uniq');
 	$o->ask_from_entries_refH('', 
 				  _("Choose the mount points"),
 				  [ map { partition_table_raw::description($_) => 
@@ -202,13 +202,33 @@ sub ask_mntpoint_s {
 #------------------------------------------------------------------------------
 sub doPartitionDisks {
     my ($o) = @_;
+
+    my $warned;
+    install_any::getHds($o, sub {
+	my ($err) = @_;
+	$warned = 1;
+	if ($o->ask_okcancel(_("Error"), 
+[_("I can't read your partition table, it's too corrupted for me :(
+I'll try to go on blanking bad partitions and ALL DATA will be lost
+(%s)"), $err])) {
+            0;
+        } else {
+            $o->{partitioning}{readonly} = 1;
+            1;
+        }
+    }) or $warned or $o->ask_warn('', 
+_("DiskDrake failed to read correctly the partition table.
+Continue at your own risk!"));
+
+
     if ($o->{isUpgrade}) {
 	# either one root is defined (and all is ok), or we take the first one we find
-	my @p = fsedit::get_root($o->{fstab});
-	@p = install_any::find_root_parts($o->{hds}, $o->{prefix}) if !@p;
-	my $p = $o->ask_from_listf(_("Root Partition"),
-				   _("What is the root partition (/) of your system?"),
-				   \&partition_table_raw::description, [ @p ]) or die "setstep exitInstall\n";
+	my $p = 
+	  fsedit::get_root($o->{fstab}) ||
+	  $o->ask_from_listf(_("Root Partition"),
+			     _("What is the root partition (/) of your system?"),
+			     \&partition_table_raw::description, 
+			     [ install_any::find_root_parts($o->{hds}, $o->{prefix}) ]) or die "setstep exitInstall\n";
 	install_any::use_root_part($o->{fstab}, $p, $o->{prefix});
     } else {
 	my %solutions = install_interactive::partitionWizard($o, $o->{hds}, $o->{fstab}, $o->{partitioning}{readonly});
@@ -450,14 +470,14 @@ sub configureNetwork($) {
 			       _("Local networking has already been configured. Do you want to:"),
 			     [ @l ]) || "Do not";
     } else {
-	$_ = $::beginner ? "Do not" :
-	  ($o->ask_yesorno([ _("Network Configuration") ],
-			   _("Do you want to configure a local network for your system?"), 0) ? "Local LAN" : "Do not");
+	$_ = (!$::beginner || install_interactive::setup_thiskind($o, 'net', 1, 0)) &&
+	  $o->ask_yesorno([ _("Network Configuration") ],
+			  _("Do you want to configure a local network for your system?"), 0) ? "Local LAN" : "Do not";
     }
     if (/^Do not/) {
 	$o->{netc}{NETWORKING} = "false";
     } elsif (!/^Keep/) {
-	$o->setup_thiskind('net', !$::expert, 1);
+	install_interactive::setup_thiskind($o, 'net', !$::expert, 1);
 	my @l = detect_devices::getNet() or die _("no network card found");
 
 	my $last; foreach ($::beginner ? $l[0] : @l) {
