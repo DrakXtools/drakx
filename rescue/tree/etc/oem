@@ -346,6 +346,14 @@ if (-e "/cdrom/oem/vmlinuz" && -e "/cdrom/oem/all.rdz") {
 } elsif (-e "/cdrom/boot/vmlinuz" && -e "/cdrom/boot/hd.rdz") {
     system "cp", "-a", "/cdrom/boot/vmlinuz", "/hd/boot/vmlinuz";
     system "cp", "-a", "/cdrom/boot/hd.rdz", "/hd/boot/all.rdz";
+} elsif (-e "/cdrom/images/hd.img") {
+    mkdir "/tmp/hd";
+    system "modprobe", "loop";
+    system "modprobe", "vfat";
+    system "mount", "-t", "vfat", "/cdrom/images/hd.img", "/tmp/hd", "-o", "loop";
+    system "cp", "-a", "/tmp/hd/vmlinuz", "/hd/boot/vmlinuz";
+    system "cp", "-a", "/tmp/hd/hd.rdz", "/hd/boot/all.rdz";
+    system "umount", "/tmp/hd";
 } else {
     die "no installation stage1 found";
 }
