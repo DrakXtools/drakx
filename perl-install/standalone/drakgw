@@ -32,7 +32,7 @@ local $_ = join '', @ARGV;
 
 /-h/ and die "usage: drakgw [--version]\n";
 /-version/ and die 'version: $Id$ '."\n";
-$::isWizard = 1;
+$::isEmbedded or $::isWizard = 1;
 $::direct = /-direct/;
 
 
@@ -102,18 +102,33 @@ sub fatal_quit($)
 }
 
 
+while ($::isEmbedded) {
+    kill USR2, $::CCPID;
+
+    my $setup_state = grep(/disabled/, cat_($drakgw_setup)) ? _("The setup has already been done, but it's currently disabled.") :
+                      grep(/enabled/, cat_($drakgw_setup))  ? _("The setup has already been done, and it's currently enabled.") :
+                      _("No Internet Connection Sharing has ever been configured.");
+    
+    $in->ask_okcancel('', 
+_("Welcome to the Internet Connection Sharing utility!
+
+%s
+
+Click on ``Ok'' if you want to launch the setup wizard.", $setup_state)) and system("/usr/sbin/drakgw");
+
+    kill USR1, $::CCPID;
+}
+
+
 begin:
 
 #- **********************************
 #- * 0th step: verify if we are already set up
 
-$::isEmbedded and kill USR2, $::CCPID;
-if (-f $drakgw_setup)
-{
+if (-f $drakgw_setup) {
     $::Wizard_no_previous = 1;
 
-    if (grep(/enabled/, cat_($drakgw_setup)))
-    {
+    if (grep(/enabled/, cat_($drakgw_setup))) {
 	my $r = $in->ask_from_list_(_("Internet Connection Sharing currently enabled"),
 _("The setup of Internet connection sharing has already been done.
 It's currently enabled. 
@@ -145,8 +160,7 @@ It's currently disabled.
 
 What would you like to do?"),
 				   [ __("enable"), __("reconfigure"), __("dismiss") ]);
-	if ($r eq "enable")
-	{
+	if ($r eq "enable") {
 	    foreach ($dhcpd_conf, $rc_firewall_22, $rc_firewall_24) {
 		rename($_, "$_.old") if -f $_;
 		rename("$_.drakgwdisable", $_) or die "Could not find configuration. Please reconfigure.";
@@ -164,8 +178,7 @@ What would you like to do?"),
 	    quit_global($in, 0);
 	}
     }
-    else
-    {
+    else {
 	$in->ask_warn(_("Unrecognized config file"), _("Config file content could not be interpreted."));
 	quit_global($in, -1);
     }
@@ -203,9 +216,9 @@ my @cards = grep {
 log::l("[drakgw] Available network cards: ", join(", ", @cards));
 
 my $format = sub {
-    $aliased_devices{$_} ?
-      _("Interface %s (using module %s)", $_, $aliased_devices{$_}) :
-      _("Interface %s", $_);
+    $aliased_devices{$_[0]} ?
+      _("Interface %s (using module %s)", $_[0], $aliased_devices{$_[0]}) :
+      _("Interface %s", $_[0]);
 };
 
 #- setup the network interface we shall use
@@ -220,6 +233,10 @@ if (!@cards)
 elsif (@cards == 1)
 {
     $device = $cards[0];
+    print "device $device\n";
+    my $t = $format->($device);
+    print "format $t\n";
+
     $in->ask_okcancel(_("Network interface"),
 _("There is only one configured network adapter on your system:
 
@@ -512,7 +529,7 @@ quit_global($in, 0);
 
 sub quit_global {
     my ($in, $exitcode) = @_;
-    $::isEmbedded ? kill(USR1, $::CCPID) : $in->exit($exitcode);
+    $in->exit($exitcode);
     goto begin
 }
 
@@ -520,6 +537,9 @@ sub quit_global {
 
 #-------------------------------------------------
 #- $Log$
+#- Revision 1.28  2001/03/21 18:07:36  gc
+#- honour embedded mode
+#-
 #- Revision 1.27  2001/03/13 16:23:29  gc
 #- fix for bind
 #-
