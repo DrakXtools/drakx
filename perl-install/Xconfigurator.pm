@@ -306,6 +306,7 @@ NOTE THIS IS EXPERIMENTAL SUPPORT AND MAY FREEZE YOUR COMPUTER.", $xf3_ver)) . "
     -x "$prefix$card->{prog}" or $install && $install->($card->{use_xf4} ? 'XFree86-server' : "XFree86-$card->{server}", @l);
     -x "$prefix$card->{prog}" or die "server $card->{server} is not available (should be in $prefix$card->{prog})";
 
+    delete $card->{depth}{32} if $card->{type} =~ /S3 Trio3D/;
     $card->{options}{sw_cursor} = 1 if $card->{type} =~ /S3 Trio3D|SiS 6326/;
     unless ($card->{type}) {
 	$card->{flags}{noclockprobe} = member($card->{server}, qw(I128 S3 S3V Mach64));
