@@ -937,9 +937,14 @@ END { &exit() }
 sub _create_window {
     my (%options) = @_;
 
+    my $no_Window_Manager = !$::isStandalone;
+
     my $w = gtknew('Window', 
 		   if_(!$::isInstall && !$::isWizard, border_width => 5),
-		   position_policy => !$::isInstall && !$::isStandalone ? 'center-always' : 'center-on-parent',
+
+		   #- policy: during install, we need a special code to handle the weird centering, see below
+		   position_policy => $::isInstall ? '' : $no_Window_Manager ? 'center-always' : 'center-on-parent',
+
 		   if_(!$::isInstall, icon_no_error => wm_icon()),
 
 		   if_($::isInstall, position => [
@@ -958,8 +963,8 @@ sub _create_window {
 	} 
     });
 
-    if (!$::isStandalone) {
-	#- force keyboard focus instead of mouse focus (useful when we have no Window Manager)
+    if ($no_Window_Manager) {
+	#- force keyboard focus instead of mouse focus
 	(my $previous_current_window, $ugtk2::current_window) = ($ugtk2::current_window, $w);
 	$w->signal_connect(expose_event => \&_XSetInputFocus);
 	$w->signal_connect(destroy => sub { $ugtk2::current_window = $previous_current_window });
