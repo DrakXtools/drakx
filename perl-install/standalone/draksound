@@ -50,7 +50,8 @@ if (@devices) {
 You can visit our hardware database at:
 
 
-http://www.linux-mandrake.com/en/hardware.php3")));
+http://www.linux-mandrake.com/en/hardware.php3").
+_("\n\n\nNote: if you've an ISA PnP sound card, you'll have to use the sndconfig program.  Just type \"sndconfig\" in a console.")));
 }
 
 modules::write_conf;
