@@ -7,10 +7,9 @@ use standalone;     #- warning, standalone must be loaded very first, for 'expla
 use common;
 use interactive;
 use modules;
-use detect_devices;
-use Xconfig;
 use mouse;
 use c;
+
 
 $::isEmbedded = ($::XID, $::CCPID) = "@ARGV" =~ /--embedded (\w+) (\w+)/;
 local $_ = join '', @ARGV;
@@ -22,49 +21,25 @@ $::testing = /-testing/;
 
 my $in = 'interactive'->vnew('su', 'mouse');
 
--r '/etc/modules.conf' and modules::mergein_conf('/etc/modules.conf');
-
 undef $::Plug;
 begin:
-my ($curr_env) = Xconfig::getinfoFromXF86Config('');
-my ($mouse) = mouse::detect() unless $::noauto;
-my $time_tag2;
-
-#- now try to merge $curr_env->{mouse} with $mouse.
-
-# Hack to read symlinks (when they are used in existing config):
-# This prevents mousedrake from doing stupid things like
-# ln -sf mouse /dev/mouse (this was done by me after it read
-# an old XF86Config, not -4, and found "/dev/mouse" there).
-# 2002 July 13, imz@altlinux.ru
-if ( $curr_env->{mouse}{device} eq "mouse" ) {
-    $curr_env->{mouse}{device} = 
-	( readlink "$prefix/dev/mouse" 
-	  or ( log::l("reading $prefix/dev/mouse symlink failed"), 
-	       $mouse->{device} ) );
+my $mouse = mouse::read();
+if (!$::noauto) {
+    my $probed_mouse = mouse::detect();
+    $mouse = $probed_mouse if !$mouse->{XMOUSETYPE} || !$probed_mouse->{unsafe};
 }
-if ( $curr_env->{mouse}{auxmouse}{device} eq "mouse1" ) {
-    $curr_env->{mouse}{auxmouse}{device} = 
-	( readlink "$prefix/dev/mouse1" 
-	  or ( log::l("reading $prefix/dev/mouse1 symlink failed"),
-	       $mouse->{auxmouse}{device} ) );
-}
-# End of the hack.
-
-$mouse->{XMOUSETYPE} eq $curr_env->{mouse}{XMOUSETYPE} ||
-    $mouse->{XMOUSETYPE} eq 'PS/2' && ($curr_env->{mouse}{XMOUSETYPE} =~ m|PS/2| ||
-				       $curr_env->{mouse}{auxmouse}{XMOUSETYPE} =~ m|PS/2|) and $mouse = $curr_env->{mouse};
 
 $::isEmbedded and kill USR2, $::CCPID;
 if (!$mouse || !$::auto) {
     $mouse ||= mouse::fullname2mouse("serial|Generic 2 Button Mouse");
     if ($::isEmbedded && $in->isa('interactive::gtk')) {
-	require my_gtk;
-	my $time_tag = Gtk->timeout_add(100, sub {
-					    defined $::Plug && defined $::Plug->child or return 1;
-					    mouse::test_mouse_standalone($mouse,$::Plug->child);
-					    0;
-					});
+	#- HACK: waiting for the ask_from_treelistf to attach itself
+	#- and adding the nice test mouse to it
+	Gtk->timeout_add(100, sub {
+			     defined $::Plug && defined $::Plug->child or return 1;
+			     mouse::test_mouse_standalone($mouse,$::Plug->child);
+			     0;
+			 });
     }
     my $name = $in->ask_from_treelistf('mousedrake', _("Please, choose the type of your mouse."), '|',
 				       sub { join '|', map { translate($_) } split '\|', $_[0] },
@@ -73,11 +48,12 @@ if (!$mouse || !$::auto) {
     Gtk->timeout_remove($time_tag2) if $::isEmbedded  && $in->isa('interactive::gtk');
     $name or $::isEmbedded ? do { kill(USR1, $::CCPID); goto begin } : $in->exit(0);
     my $mouse_chosen = mouse::fullname2mouse($name);
-    $mouse->{type} eq $mouse_chosen->{type} && $mouse->{name} eq $mouse_chosen->{name} or $mouse = $mouse_chosen;
+    $mouse = $mouse_chosen if !($mouse->{type} eq $mouse_chosen->{type} && $mouse->{name} eq $mouse_chosen->{name});
 
     if ($mouse->{device} eq "usbmouse") {
-	my ($c) = grep { $_->{driver} =~ /usb-[ou]hci/ } detect_devices::pci_probe(0) or die _("no serial_usb found\n");
-	eval { modules::load($c->{driver}, "serial_usb") };
+	modules::mergein_conf('/etc/modules.conf') if -r '/etc/modules.conf';
+	modules::load_category('bus/usb') or die _("no serial_usb found\n");
+	eval { modules::load('serial_usb') };
     }
 
     $mouse->{XEMU3} = 'yes' if $mouse->{nbuttons} < 3 && (!$::noauto || $in->ask_yesorno('', _("Emulate third button?"), 1));
@@ -90,8 +66,8 @@ if (!$mouse || !$::auto) {
 					  ) || goto begin if $mouse->{type} eq 'serial';
 }
 
-mouse::write_conf($mouse);
--e "/var/lock/subsys/gpm" and system "service", "gpm", "restart";
+mouse::write_conf($mouse, 1);
+system('service', 'gpm', 'restart') if -e '/var/lock/subsys/gpm';
 
 $::isEmbedded ? kill(USR1, $::CCPID) : $in->exit(0);
 goto begin;
