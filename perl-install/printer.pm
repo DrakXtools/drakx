@@ -1373,6 +1373,7 @@ sub get_copiable_queues {
 		    # spooler?
 		    if ((($newspooler eq "cups") &&
 			 (($entry->{connect} =~ /^file:/) ||
+			  ($entry->{connect} =~ /^ptal:/) ||
 			  ($entry->{connect} =~ /^lpd:/) ||
 			  ($entry->{connect} =~ /^socket:/) ||
 			  ($entry->{connect} =~ /^smb:/) ||
@@ -1380,6 +1381,7 @@ sub get_copiable_queues {
 			((($newspooler eq "lpd") ||
 			  ($newspooler eq "lprng")) &&
 			 (($entry->{connect} =~ /^file:/) ||
+			  ($entry->{connect} =~ /^ptal:/) ||
 			  ($entry->{connect} =~ /^lpd:/) ||
 			  ($entry->{connect} =~ /^socket:/) ||
 			  ($entry->{connect} =~ /^smb:/) ||
@@ -1387,6 +1389,7 @@ sub get_copiable_queues {
 			  ($entry->{connect} =~ /^postpipe:/))) ||
 			(($newspooler eq "pdq") &&
 			 (($entry->{connect} =~ /^file:/) ||
+			  ($entry->{connect} =~ /^ptal:/) ||
 			  ($entry->{connect} =~ /^lpd:/) ||
 			  ($entry->{connect} =~ /^socket:/)))) {
 			push(@queuelist, $entry->{name});
