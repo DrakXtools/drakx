@@ -1,4 +1,4 @@
-package data;
+package harddrake::data;
 
 use strict;
 use detect_devices;
@@ -58,7 +58,7 @@ our @tree =
 	 sub { require printerdrake; printerdrake::auto_detect(class_discard->new)  } ],
 	["SCANNER","Scanner", "scanner.png", "$sbindir/scannerdrake",
 	 sub { require scanner; scanner::findScannerUsbport() }],
-	["MOUSE","Mouse", "hw_mouse.png", "$sbindir/mousedrake", sub { use mouse; &mouse::detect()}],
+	["MOUSE","Mouse", "hw_mouse.png", "$sbindir/mousedrake", sub { require mouse; &mouse::detect()}],
 	["JOYSTICK","Joystick", "joystick.png", "", sub {}]
 
 #	["","Ideinterface", "Ideinterface.png", "", "STORAGE_IDE"],

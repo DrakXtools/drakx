@@ -1029,7 +1029,7 @@ sub summary {
      } @sound_cards),
     if_($isa_sound_card, { label => _("Sound card"), clicked => $isa_sound_card }), 
     (map {
-{ label => _("TV card"), val => $_->{description}, clicked => sub { use harddrake::bttv; bttv::config($o) }} 
+{ label => _("TV card"), val => $_->{description}, clicked => sub { require harddrake::bttv; harddrake::bttv::config($o) }} 
      } grep { $_->{driver} eq 'bttv' } detect_devices::probeall()),
 ]);
     install_steps::configureTimezone($o);  #- do not forget it.

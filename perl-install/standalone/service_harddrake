@@ -43,7 +43,7 @@ my %config;
 
 # For each hw, class, detect device, compare and offer to reconfigure if
 # needed
-foreach (@data::tree) {
+foreach (@harddrake::data::tree) {
     my ($Ident, $item, undef, $configurator, $detector) = @$_;
 
     # No detector ? (should never happen but who know ?)

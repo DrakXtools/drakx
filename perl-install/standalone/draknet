@@ -669,10 +669,8 @@ Create one first by clicking on 'Configure'")),1,1,0);
     $button_ok->signal_connect ( clicked => sub {
 				     $i=0;
 				     foreach (@mask) {
-					 if ($_) {
-					     ${$conf_data[$i]->[1]}=$infos[2*$i+1]->get_text();
-					 }
-					 $i++;
+					    ${$conf_data[$i]->[1]}=$infos[2*$i+1]->get_text() if ($_);
+					    $i++;
 				     }
 				     update();
 				     $button_apply->set_sensitive(1);
