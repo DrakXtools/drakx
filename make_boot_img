@@ -188,36 +188,36 @@ image[sun4c,sun4d,sun4m]=/$boot/vmlinux
   label=linux
   alias=install
   initrd=/$boot/live.rdz
-  append=ramdisk_size=32000
+  append=\"ramdisk_size=32000\"
 image[sun4c,sun4d,sun4m]=/$boot/vmlinux
   label=text
   initrd=/$boot/live.rdz
-  append=ramdisk_size=32000 text
+  append=\"ramdisk_size=32000 text\"
 image[sun4c,sun4d,sun4m]=/$boot/vmlinux
   label=expert
   initrd=/$boot/live.rdz
-  append=ramdisk_size=32000 expert
+  append=\"ramdisk_size=32000 expert\"
 image[sun4c,sun4d,sun4m]=/$boot/vmlinux
   label=ks
   initrd=/$boot/live.rdz
-  append=ramdisk_size=32000 ks
+  append=\"ramdisk_size=32000 ks\"
 image[sun4u]=/$boot/vmlinux64
   label=linux
   alias=install
-  initrd=/$boot/live.rdz
-  append=ramdisk_size=32000
+  initrd=/$boot/live64.rdz
+  append=\"ramdisk_size=32000\"
 image[sun4u]=/$boot/vmlinux64
   label=text
-  initrd=/$boot/live.rdz
-  append=ramdisk_size=32000 text
+  initrd=/$boot/live64.rdz
+  append=\"ramdisk_size=32000 text\"
 image[sun4u]=/$boot/vmlinux64
   label=expert
-  initrd=/$boot/live.rdz
-  append=ramdisk_size=32000 expert
+  initrd=/$boot/live64.rdz
+  append=\"ramdisk_size=32000 expert\"
 image[sun4u]=/$boot/vmlinux64
   label=ks
-  initrd=/$boot/live.rdz
-  append=ramdisk_size=32000 ks
+  initrd=/$boot/live64.rdz
+  append=\"ramdisk_size=32000 ks\"
 ");
 
 	output("$dir/$boot/README", "
