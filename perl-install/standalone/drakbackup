@@ -432,7 +432,7 @@ sub  filedialog {
     $file_dialog->show();
 }
 
-sub wizard {
+sub wizard_old {
     my $backup_sys;
     my $backup_user;
     my $user;
@@ -1057,6 +1057,74 @@ sub advanced {
 			      ));
     $up_box->show_all();
 }
+
+
+
+sub wizard   {
+    my $about_box;
+    my $book_open;
+    my $book_open_mask;
+    my $transparent;
+    my $book_closed;
+    my $book_closed_mask;
+    my $box_tmp;    
+    my $choice_what_sys;
+    my $box2;    
+    read_conf_file();
+
+
+    my ($pix_u_map, $pix_u_mask) = gtkcreate_png("backup_title");
+    my ($pix_l_map, $pix_l_mask) = gtkcreate_png("backup_left2");
+    my ($pix_r_map, $pix_r_mask) = gtkcreate_png("backup_bot2");
+    
+    gtkpack($up_box,
+	    $box = gtkpack_(new Gtk::VBox(0, 3),
+		0, new Gtk::Pixmap($pix_u_map, $pix_u_mask),
+		    1, gtkpack_(new Gtk::HBox(0, 3),
+			0, new Gtk::Pixmap($pix_l_map, $pix_l_mask), 
+				1, $advanced_box = gtkpack_(new Gtk::HBox(0, 15),	
+				   1, $box2 =  gtkpack_(new Gtk::HBox(0, 15),	
+					   1, new Gtk::VBox(0, 5),	
+					   1, gtkpack_(new Gtk::VBox(0, 15),	
+						       1, new Gtk::VBox(0, 5),	
+						       1, gtksignal_connect(my $button_options = new Gtk::Button(), clicked => sub {
+							   $box2->destroy(); }),
+						       1, new Gtk::VBox(0, 5),	
+							 ),
+					   1, new Gtk::VBox(0, 5),	
+							),
+							    ),
+				),
+			    0, new Gtk::Pixmap($pix_r_map, $pix_r_mask),
+			    0, gtkpack_(new Gtk::HButtonBox,
+				       0, gtksignal_connect(new Gtk::Button(_(" Cancel ")), clicked => 
+							 sub { ${$central_widget}->destroy(); interactive_mode();  }),
+				       0, gtksignal_connect(new Gtk::Button(_(" Help ")), clicked => 
+							 sub { ${$central_widget}->destroy(); adv_help(\&$current_widget,$custom_help );  }),
+				       1, new Gtk::HBox(0, 1),	
+				       0, gtksignal_connect(new Gtk::Button(_(" Previous ")), clicked => 
+							 sub { ${$central_widget}->destroy(); $previous_widget->(); }),
+				       0, gtksignal_connect(new Gtk::Button(_(" Next ")), clicked => 
+							 sub { ${$central_widget}->destroy();  save_conf_file(); $previous_widget->(); }),
+				       
+				       ),
+			    ),
+	    );
+    $custom_help = "";
+    $central_widget = \$box2;
+    $current_widget = \&advanced_box;
+    $previous_widget =\&interactive_mode;
+    $up_box->show_all();
+}
+
+
+
+
+
+
+
+
+
 
 
 sub advanced_bef {
@@ -1689,10 +1757,13 @@ sub restore {
 		      0, gtkpng('backup_bot2'),
 		      0, new Gtk::HSeparator,
 		      0, gtkpack_(new Gtk::HBox(0, 0),
-				  1, gtkpack_(gtkset_layout(new Gtk::HButtonBox, -start),
+				  1, gtkpack_(new Gtk::HButtonBox,
 					      1, gtksignal_connect(new Gtk::Button(_(" Cancel ")), clicked => sub { 
 						  ${$central_widget}->destroy(); interactive_mode();  }),
 					      1, gtksignal_connect(new Gtk::Button(_("     Help      ")), clicked => sub {
+						  $retore_box->destroy(); restore_help();}),
+					      1, new Gtk::HBox(0, 0),
+					      1, gtksignal_connect(new Gtk::Button(_("     Next      ")), clicked => sub {
 						  $retore_box->destroy(); restore_help();}),
 					      ),
 				  ),
@@ -2080,15 +2151,15 @@ configuration file:
 
     gtkpack($advanced_box,
 	    $advanced_box_help = gtkpack_(new Gtk::VBox(0,10),
-				  1, gtkpack_(new Gtk::HBox(0,0),
-					      1, $text, 
-					      0, new Gtk::VScrollbar($text->vadj),
-					      ),
-				  0, gtkadd(gtkset_layout(new Gtk::HButtonBox, -spread),
-					    gtksignal_connect(new Gtk::Button(_("OK")), clicked => 
-							      sub { ${$central_widget}->destroy(); $function->();  }),
-					    ),
-				  )
+					  1, gtkpack_(new Gtk::HBox(0,0),
+						      1, $text, 
+						      0, new Gtk::VScrollbar($text->vadj),
+						      ),
+					  0, gtkadd(gtkset_layout(new Gtk::HButtonBox, -spread),
+						    gtksignal_connect(new Gtk::Button(_("OK")), clicked => sub { 
+							${$central_widget}->destroy(); $function->();  }),
+						    ),
+					  )
 	    );
     $central_widget = \$advanced_box_help;
     $up_box->show_all();
