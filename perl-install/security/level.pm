@@ -71,15 +71,15 @@ The security is now high enough to use the system as a server which can accept
 connections from many clients. Note: if your machine is only a client on the Internet, you should choose a lower level."),
       5 => N("This is similar to the previous level, but the system is entirely closed and security features are at their maximum."),
     );
-    delete @l{0,1};
-    delete $l{5} if !$::expert;
+
+    my @l = 2 .. 5;
 
     $in->ask_from_({ title => N("DrakSec Basic Options"),
 		     messages => N("Please choose the desired security level") . "\n\n" .
-		                 join('', map { "$l{$_}: " . formatAlaTeX($help{$_}) . "\n\n" } ikeys %l),
+		                 join('', map { to_string($_) . ": " . formatAlaTeX($help{$_}) . "\n\n" } @l),
 		     interactive_help_id => 'miscellaneous',
 		   }, [
-              { label => N("Security level"), val => $security, list => [ sort keys %l ], format => \&to_string },
+              { label => N("Security level"), val => $security, list => \@l, format => \&to_string },
                 if_($in->do_pkgs->is_installed('libsafe') && arch() =~ /^i.86/,
                 { label => N("Use libsafe for servers"), val => $libsafe, type => 'bool', text =>
                   N("A library which defends against buffer overflow and format string attacks.") }),
