@@ -612,7 +612,7 @@ sub install_lilo ($$) {
     my $file2fullname = sub {
 	my ($file) = @_;
 	if (arch() =~ /ia64/) {
-	    (my $part, $file) = fsedit::file2dev($prefix, $fstab, $file);
+	    (my $part, $file) = fsedit::file2part($prefix, $fstab, $file);
 	    my %hds = map_index { $_ => "hd$::i" } sort map { $_->{device} } @$hds;
 	    $dev2efi->{$part->{device}} . ":" . $file;
 	} else {
@@ -752,7 +752,7 @@ sub install_grub {
     }
     my $bootIsReiser = isReiserfs(fsedit::get_root($fstab, 'boot'));
     my $file2grub = sub {	
-	my ($part, $file) = fsedit::file2dev($prefix, $fstab, $file);
+	my ($part, $file) = fsedit::file2part($prefix, $fstab, $file);
 	dev2grub($part->{device}, \%dev2bios) . $file;
     };
     {
