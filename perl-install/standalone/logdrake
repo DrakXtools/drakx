@@ -271,7 +271,7 @@ sub parse_file {
 
   my @all=catMaybeCompressed ($file);
 
-  if ($isExplain) {
+  if ($::isExplain) {
       my (@t, $t);
       while (@all) {
 	  $t = pop @all;
@@ -511,6 +511,9 @@ sub destroy_window {
 
 # log
 # $Log$
+# Revision 1.9  2002/02/04 14:02:14  damien
+# corrected typo. Yvounet, check your code!!
+#
 # Revision 1.8  2002/02/04 14:00:52  damien
 # embedded, explain
 #
