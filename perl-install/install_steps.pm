@@ -41,6 +41,12 @@ sub new($$) {
 sub enteringStep($$) {
     my ($o, $step) = @_;
     log::l("starting step `$step'");
+}
+sub leavingStep($$) {
+    my ($o, $step) = @_;
+    log::l("step `$step' finished");
+
+    eval { commands::cp('-f', "/tmp/ddebug.log", "$o->{prefix}/root") } if -d "$o->{prefix}/root" && !$::testing;
 
     for (my $s = $o->{steps}{first}; $s; $s = $o->{steps}{$s}{next}) {
 
@@ -54,13 +60,6 @@ sub enteringStep($$) {
 	}
 	$o->{steps}{$s}{reachable} = 1 if $reachable;
     }
-}
-sub leavingStep($$) {
-    my ($o, $step) = @_;
-    log::l("step `$step' finished");
-
-    eval { commands::cp('-f', "/tmp/ddebug.log", "$o->{prefix}/root") } if -d "$o->{prefix}/root" && !$::testing;
-
     $o->{steps}{$step}{reachable} = $o->{steps}{$step}{redoable};
 
     while (my $f = shift @{$o->{steps}{$step}{toBeDone} || []}) {
