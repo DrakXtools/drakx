@@ -20,7 +20,7 @@
 # Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 
 
-use MDK::Common;
+use common;
 use Gtk;
 use Gtk::Gdk::Pixbuf;
 use Config;

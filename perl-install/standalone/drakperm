@@ -3,10 +3,8 @@
 use lib qw(/usr/lib/libDrakX);
 use standalone;
 
-use MDK::Common;
-
+use common;
 use my_gtk;
-
 use interactive;
 
 my $in = 'interactive'->vnew('su', 'default');
