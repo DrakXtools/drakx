@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10
-Release: 14mdk
+Release: 15mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -317,6 +317,18 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Mon Mar  1 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10-15mdk
+- left align labels
+- drakfirewall: remove the masq zone and add policies, rules only if
+  there is an interface in loc (florin)
+- draksec:
+  o sanitize main explanation text
+  o prevent pull-down menus to fill availlable space in packtables
+- printerdrake (till):
+  o fix HPOJ config
+  o support new HP multi-function devices
+  o better Lexmark X125 printer support
+
 * Fri Feb 27 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10-14mdk
 - drakautoinst: support two-floppies boot style for replay_install
   disk as well (gc)
