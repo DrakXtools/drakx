@@ -132,8 +132,9 @@ our %spoolers = ('pdq' => {
 		     'long_name' => N("CUPS - Common Unix Printing System (remote server)"),
 		     'short_name' => N("Remote CUPS"),
 		     'local_queues' => 0,
-		     'packages2add' => [ ['cups-common'],
-					 ['/usr/bin/lpr-cups'] ],
+		     'packages2add' => [ ['cups-common', 'xpp'],
+					 ['/usr/bin/lpr-cups',
+					  '/usr/bin/xpp'] ],
 		     'alternatives' => [
 					[ 'lpr', '/usr/bin/lpr-cups' ],
 					[ 'lpq', '/usr/bin/lpq-cups' ],
