@@ -622,11 +622,11 @@ sub auto_inst_file() { ($::g_auto_install ? "/tmp" : "$::o->{prefix}/root/drakx"
 
 sub report_bug {
     my ($prefix) = @_;
-    any::report_bug($prefix, 'auto_inst' => g_auto_install());
+    any::report_bug($prefix, 'auto_inst' => g_auto_install('', 1));
 }
 
 sub g_auto_install {
-    my ($replay) = @_;
+    my ($replay, $respect_privacy) = @_;
     my $o = {};
 
     require pkgs;
@@ -661,7 +661,11 @@ sub g_auto_install {
     #- deep copy because we're modifying it below
     $o->{users} = [ @{$o->{users} || []} ];
 
-    $_ = { %{$_ || {}} }, delete @$_{qw(oldu oldg password password2)} foreach $o->{superuser}, @{$o->{users} || []};
+    my @user_info_to_remove = (
+	if_($respect_privacy, qw(name realname home pw)), 
+	qw(oldu oldg password password2),
+    );
+    $_ = { %{$_ || {}} }, delete @$_{@user_info_to_remove} foreach $o->{superuser}, @{$o->{users} || []};
     
     require Data::Dumper;
     my $str = join('', 
