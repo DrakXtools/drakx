@@ -2,15 +2,17 @@
 
 use lib qw(/usr/lib/libDrakX);
 
-use common qw(:common :file :functional);
-use interactive;
-use standalone;
-use any;
-use bootloader;
-use detect_devices;
-use fsedit;
-use fs;
-use c;
+require bootlook;
+
+#-use common qw(:common :file :functional);
+#-use interactive;
+#-use standalone;
+#-use any;
+#-use bootloader;
+#-use detect_devices;
+#-use fsedit;
+#-use fs;
+#-use c;
 
 $::isEmbedded = ($::XID, $::CCPID) = "@ARGV" =~ /--embedded (\w+) (\w+)/;
 local $_ = join '', @ARGV;
