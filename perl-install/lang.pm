@@ -408,11 +408,14 @@ sub getLANGUAGE {
 }
 
 my %xim = (
+#- xcin only works with 'zh_TW', 'zh_TW.Big5', 'zh_CN', 'zh_CN.GB2312'
+#- all other locale names, in particular 'zh_HK' or 'zh_TW.UTF-8'
+#- are unknown to it. So chinput is used for all but 'zh_TW'
   'zh_TW' => { 
  	ENC => 'big5',
  	XIM => 'xcin',
  	XIM_PROGRAM => 'xcin',
- 	XMODIFIERS => '"@im=xcin"',
+ 	XMODIFIERS => '"@im=xcin-zh_TW"',
  	CONSOLE_NOT_LOCALIZED => 'yes',
   },
   'zh_TW.UTF-8' => {
@@ -430,6 +433,34 @@ my %xim = (
 	CONSOLE_NOT_LOCALIZED => 'yes',
   },
   'zh_CN.UTF-8' => {
+	ENC => 'utf8',
+	XIM => 'Chinput',
+	XIM_PROGRAM => 'chinput',
+	XMODIFIERS => '"@im=Chinput"',
+	CONSOLE_NOT_LOCALIZED => 'yes',
+  },
+  'zh_SG' => {
+	ENC => 'gb',
+	XIM => 'Chinput',
+	XIM_PROGRAM => 'chinput',
+	XMODIFIERS => '"@im=Chinput"',
+	CONSOLE_NOT_LOCALIZED => 'yes',
+  },
+  'zh_SG.UTF-8' => {
+	ENC => 'utf8',
+	XIM => 'Chinput',
+	XIM_PROGRAM => 'chinput',
+	XMODIFIERS => '"@im=Chinput"',
+	CONSOLE_NOT_LOCALIZED => 'yes',
+  },
+  'zh_HK' => {
+	ENC => 'big5',
+	XIM => 'Chinput',
+	XIM_PROGRAM => 'chinput',
+	XMODIFIERS => '"@im=Chinput"',
+	CONSOLE_NOT_LOCALIZED => 'yes',
+  },
+  'zh_HK.UTF-8' => {
 	ENC => 'utf8',
 	XIM => 'Chinput',
 	XIM_PROGRAM => 'chinput',
