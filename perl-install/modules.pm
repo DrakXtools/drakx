@@ -209,7 +209,11 @@ sub remove_alias_regexp($) {
     my ($aliased) = @_;
     log::l(qq(removing all aliases that match "$aliased"));
     foreach (keys %conf) {
-        delete $conf{$_}{alias} if /$aliased/;
+        if (/$aliased/) {
+            my $module = $conf{$_}{alias};
+            delete $conf{$module}{above} if $module =~ /^snd-/;
+            delete $conf{$_}{alias};
+        }
     }
 }
 
