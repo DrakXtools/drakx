@@ -41,7 +41,7 @@ static int mount_that_cd_device(char * dev_name)
 	strcpy(device_fullname, "/dev/");
 	strcat(device_fullname, dev_name);
 
-	return my_mount(device_fullname, IMAGE_LOCATION, "iso9660");
+	return my_mount(device_fullname, IMAGE_LOCATION, "iso9660", 0);
 }
 
 

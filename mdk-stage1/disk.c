@@ -106,9 +106,9 @@ static enum return_type try_with_device(char *dev_name)
 	strcpy(device_fullname, "/dev/");
 	strcat(device_fullname, choice);
 
-	if (my_mount(device_fullname, disk_own_mount, "ext2") == -1 &&
-	    my_mount(device_fullname, disk_own_mount, "vfat") == -1 &&
-	    my_mount(device_fullname, disk_own_mount, "reiserfs") == -1) {
+	if (my_mount(device_fullname, disk_own_mount, "ext2", 0) == -1 &&
+	    my_mount(device_fullname, disk_own_mount, "vfat", 0) == -1 &&
+	    my_mount(device_fullname, disk_own_mount, "reiserfs", 0) == -1) {
 		stg1_error_message("I can't find a valid filesystem (tried: ext2, vfat, reiserfs).");
 		return try_with_device(dev_name);
 	}

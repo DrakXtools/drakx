@@ -146,7 +146,7 @@ lomount(char *loopfile, char *where)
 		return 1;
 	}
   
-	if (my_mount(loopdev, where, "iso9660")) {
+	if (my_mount(loopdev, where, "iso9660", 0)) {
 		del_loop();
 		return 1;
 	}

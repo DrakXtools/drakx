@@ -648,7 +648,7 @@ enum return_type nfs_prepare(void)
 		strcat(nfsmount_location, ":");
 		strcat(nfsmount_location, answers[1]);
 		
-		if (my_mount(nfsmount_location, IMAGE_LOCATION, "nfs") == -1) {
+		if (my_mount(nfsmount_location, IMAGE_LOCATION, "nfs", 0) == -1) {
 			stg1_error_message("I can't mount the directory from the NFS server.");
 			results = RETURN_BACK;
 			continue;

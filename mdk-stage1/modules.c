@@ -390,7 +390,7 @@ void update_modules(void)
 
 	my_insmod("floppy", ANY_DRIVER_TYPE, NULL);
 
-	if (my_mount("/dev/fd0", floppy_mount_location, "ext2") == -1) {
+	if (my_mount("/dev/fd0", floppy_mount_location, "ext2", 0) == -1) {
 		enum return_type results = ask_yes_no("I can't find a Linux ext2 floppy in first floppy drive.\n"
 						      "Retry?");
 		if (results == RETURN_OK)

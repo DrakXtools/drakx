@@ -295,7 +295,7 @@ enum return_type load_ramdisk_fd(int ramdisk_fd, int size)
 	BZ2_bzclose(st2); /* opened by gzdopen, but also closes the associated fd */
 	close(ram_fd);
 
-	if (my_mount(ramdisk, STAGE2_LOCATION, "ext2"))
+	if (my_mount(ramdisk, STAGE2_LOCATION, "ext2", 1))
 		return RETURN_ERROR;
 
 	set_param(MODE_RAMDISK);
