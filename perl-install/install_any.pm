@@ -251,7 +251,7 @@ sub setPackages($) {
 	push @{$o->{default_packages}}, "cdrecord" if detect_devices::getIDEBurners();
 	push @{$o->{default_packages}}, "alsa" if modules::get_alias("sound") =~ /^snd-card-/;
 
-	pkgs::getDeps($o->{packages});
+	pkgs::getDeps($o->{prefix}, $o->{packages});
 
 	$o->{compss} = pkgs::readCompss($o->{packages});
 	$o->{compssListLevels} = pkgs::readCompssList($o->{packages});
@@ -590,8 +590,6 @@ sub fsck_option() {
 
 sub install_urpmi {
     my ($prefix, $method, $mediums) = @_;
-
-    getAndSaveFile("depslist", "$prefix/var/lib/urpmi/depslist");
 
     my @cfg = map_index {
 	my $name = $_->{fakemedium};

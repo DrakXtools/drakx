@@ -441,7 +441,11 @@ sub getOtherDeps($$) {
 }
 
 sub getDeps($) {
-    my ($packages) = @_;
+    my ($prefix, $packages) = @_;
+
+    #- this is necessary for urpmi, but also as hdlist are copied here,
+    #- we can make consistent the directory.
+    install_any::getAndSaveFile("depslist", "$prefix/var/lib/urpmi/depslist");
 
     my $f = install_any::getFile("depslist.ordered") or die "can't find dependencies list";
 
