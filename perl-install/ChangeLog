@@ -1,3 +1,93 @@
+2005/04/06  Pixel  <pixel at mandrakesoft.com>
+
+	* install_any.pm: make the auto_inst.cfg more valid in report.bug.gz, and
+	add a warning
+
+2005/04/06  Warly  <warly at mandrakesoft.com>
+
+	* share/logo-mandrake.png: LE-2005 logo
+
+2005/04/05  Olivier Blin <oblin at mandrakesoft.com>
+
+	* network/network.pm: remove useless and unwanted non-ASCII character
+
+	* mouse.pm: really apply specific ALPS touchpad settings (#14510)
+
+	* modules.pm: don't load modules.cz in uml install
+
+	* standalone/net_monitor: perl_checker, indent
+	detect more devices (e.g. wireless)
+
+	* drakxtools.spec: 10.2-20mdk
+
+	* network/netconnect.pm: support more slmodems
+
+	* do_pkgs.pm: install dkms packages if found
+
+	* standalone/drakroam: do not crash if no essid is selected (partially fix
+	#15244)
+	hide unavailable features, add close button
+
+	* network/adsl.pm: please perl_checker
+	replace non-ASCII characters
+
+	* network/tools.pm: improve wifi detection
+
+2005/04/05  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* lang.pm: corrected small typo
+
+	* share/po/eu.po: updated Basque file
+
+2005/04/05  pmaryanov
+
+	* share/po/ru.po: updated
+
+2005/04/05  Pixel  <pixel at mandrakesoft.com>
+
+	* lang.pm: since we have a non-ascii font name, we have to "use utf8"
+	check(): only display "Errors:" if there is some errors
+
+	* rescue/list: revert adding Compress::Zlib
+
+	* install_steps.pm: remove accentuated char
+
+	* standalone/draksplash, share/advertising/22.pl, share/advertising/10.pl,
+	standalone/drakpxe, share/advertising/05.pl, share/advertising/21.pl,
+	share/advertising/28.pl, share/advertising/14.pl,
+	share/advertising/24.pl: 
+	  - remove non useful non-ascii characters
+	  - add "use utf8" for useful utf8 characters
+
+	* ugtk2.pm: replace the latin-charset unbreakable space with a "use utf8"
+	and the utf8 unbreakable space
+
+	* install_any.pm: media_browser is returning a file, not a file handle,
+	/me is bad :-/
+
+	* Makefile: the keyboard check is always failing, can't make pablo have it
+	right, so not checking it by default
+	(that way we can have the "make check" in gi call "make check" in
+	gi/perl-install)
+	check the presence of non ascii characters in perl files (allow utf8
+	chars if there is 'use utf8')
+
+	* printer/main.pm: replace non ascii char
+
+2005/04/05  Reinout van Schouwen  <reinout at cs.vu.nl>
+
+	* share/po/nl.po: Updated Dutch translation
+	by Reinout van Schouwen <reinout@cs.vu.nl>
+
+2005/04/05  Rafael Garcia-Suarez <rgarciasuarez at mandrakesoft.com>
+
+	* crypto.pm: Add new countries to match the mirror list
+	Update mirror list
+
+2005/04/05  sharuzzaman
+
+	* share/po/ms.po: Updated Malay translation
+
 2005/04/05  Olivier Blin <oblin at mandrakesoft.com>
 
 	* network/network.pm: remove useless and unwanted non-ASCII character
@@ -48247,7 +48337,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.1029 2005/04/04 19:10:19 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.1030 2005/04/05 10:15:16 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
