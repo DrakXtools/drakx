@@ -826,7 +826,7 @@ sub versionCompare($$) {
     local $_;
 
     while ($a || $b) {
-	my ($sb, $sa) =  map { $1 if ($a || 0) =~ /^\W*\d/ ? s/^\W*0*(\d+)// : s/^\W*(\D+)// } ($b, $a);
+	my ($sb, $sa) =  map { $1 if $a =~ /^\W*\d/ ? s/^\W*0*(\d+)// : s/^\W*(\D+)// } ($b, $a);
 	$_ = length($sa) cmp length($sb) || $sa cmp $sb and return $_;
     }
 }
@@ -1303,9 +1303,7 @@ sub install($$$;$$) {
 		c::rpmtransAddPackage($trans, $_->[$HEADER], packageName($_), $isUpgrade && allowedToUpgrade(packageName($_)))
 		    foreach @transToInstall;
 
-		c::rpmdepOrder($trans) or
-		    die "error ordering package list: " . c::rpmErrorString(), 
-		      sub { c::rpmdbClose($db) };
+		c::rpmdepOrder($trans) or die "error ordering package list: " . c::rpmErrorString();
 		c::rpmtransSetScriptFd($trans, fileno LOG);
 
 		log::l("rpmRunTransactions start");
