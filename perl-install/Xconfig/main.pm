@@ -199,7 +199,7 @@ sub export_to_install_X {
     $::o->{X}{default_depth} = $X->{resolution}{Depth};
     $::o->{X}{bios_vga_mode} = $X->{resolution}{bios};
     $::o->{X}{monitor} = $X->{monitor} if $X->{monitor}{manually_chosen} && $X->{monitor}{vendor} ne "Plug'n Play";
-    $::o->{X}{card} = $X->{monitor} if $X->{card}{manually_chosen};
+    $::o->{X}{card} = $X->{card} if $X->{card}{manually_chosen};
     $::o->{X}{Xinerama} = 1 if $X->{card}{Xinerama};
 }
 
