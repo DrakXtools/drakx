@@ -828,12 +828,12 @@ You can find a driver on http://eciadsl.flashtux.org/"),
                             allow_empty_list => 1, format => sub { translate($eth_intf{$_[0]} || $_[0]) } } ];
                     },
                     post => sub {
-                        $ethntf = $intf->{$ntf_name} ||= { DEVICE => $ntf_name };
                         if ($ntf_name eq "Manually load a driver") {
                             require network::ethernet;
                             modules::interactive::load_category__prompt($in, $modules_conf, network::ethernet::get_eth_categories());
                             return 'lan';
                         }
+                        $ethntf = $intf->{$ntf_name} ||= { DEVICE => $ntf_name };
                         $::isInstall && $netc->{NET_DEVICE} eq $ethntf->{DEVICE} ? 'lan_alrd_cfg' : 'lan_protocol';
                     },
                    },
