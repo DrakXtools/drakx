@@ -38,7 +38,7 @@ sub test {
     }
 
     #- ensure xfs is running
-    fuzzy_pidofs(qr/\bxfs\b/) or run_program::rooted($::prefix, "/etc/rc.d/init.d/xfs", "start");
+    fuzzy_pidofs(qr/\bxfs\b/) or do { run_program::rooted($::prefix, "/etc/rc.d/init.d/xfs", $_) foreach 'stop', 'start' };
     fuzzy_pidofs(qr/\bxfs\b/) or die "xfs is not running";
 
     my $f = $::testing ? $tmpconfig : "/etc/X11/XF86Config.test";
