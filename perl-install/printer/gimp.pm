@@ -284,7 +284,7 @@ sub addprinter {
 
 sub pop_spaces {
     my @lines = @_;
-    pop @lines while @lines $lines[-1] !~ /\S/;
+    pop @lines while @lines and $lines[-1] !~ /\S/;
 }
 
 sub removeentry {
