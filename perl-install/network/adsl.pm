@@ -270,10 +270,6 @@ user "$adsl->{login}"
             } "$::prefix/etc/ppp/pppoe.conf";
         }
 
-#            pptp => {
-#                     connect => "/usr/bin/pptp 10.0.0.138 name $adsl->{login}",
-#                     disconnect => "/usr/bin/killall pptp pppd\n",
-#                    },
 #            pppoe => {
 #                      # we do not call directly pppd, rp-pppoe take care of "plugin rp-pppoe.so" peers option and the like
 #                      connect => "LC_ALL=C LANG=C LANGUAGE=C LC_MESSAGES=C /usr/sbin/adsl-start",
@@ -285,7 +281,6 @@ user "$adsl->{login}"
    
     #- FIXME: 
     #-   ppp0 and ippp0 are hardcoded
-    #-   pptp has to be done within pppd (no more use of /usr/bin/pptp)
     my $kind = $adsl_type eq 'pppoe' ? 'xDSL' : 'ADSL';
     output_with_perm("$::prefix/etc/sysconfig/network-scripts/ifcfg-ppp0", 0705, qq(DEVICE=ppp0
 ONBOOT=no
