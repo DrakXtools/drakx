@@ -681,7 +681,9 @@ Please choose the minimal installation you want"),
 	if ($minimal) {
 	    $o->{compssUsersChoice}{$_} = 0 foreach keys %{$o->{compssUsersChoice}};
 	} else {
+	    my $X = $o->{compssUsersChoice}{X}; #- don't let setDefaultPackages modify this one
 	    install_any::setDefaultPackages($o, 'clean');
+	    $o->{compssUsersChoice}{X} = $X;
 	}
 	install_any::unselectMostPackages($o);
     }
