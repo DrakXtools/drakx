@@ -51,7 +51,7 @@ sub from_bios {
     find { $_->{bios} == $bios } @bios_vga_modes;
 }
 
-sub bios_vga_modes { @bios_vga_modes }
+sub bios_vga_modes() { @bios_vga_modes }
 
 sub size2default_resolution {
     my ($size) = @_; #- size in inch
