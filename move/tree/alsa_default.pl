@@ -13,7 +13,7 @@ if (/\s*control\./) {
         # enable switches (we should really blacklist sb live and the like):
         s/(value\w*\S*)\s* false/\1 true/;
         # set volume to 67%:
-        my $val = $max*0.6;
+        my $val = int($max*0.6);
         s/(value\w*\S*)\s* 0/\1 $val/
     }
 }
