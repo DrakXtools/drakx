@@ -329,12 +329,12 @@ sub input_callback  {
 sub logcolorize {
 
     # we get date & time if it is date & time (dmesg)
-    s/(\D{3} .. \d\d:\d\d:\d\d )//;
-    $timestamp = $1;
+    s/(\D{3} .. (\d\d:\d\d:\d\d ))//;
+    $timestamp = $::isExplain ? $2 : $1;
     @rec = split;
 
     log_output($cyan,$timestamp,$b); # date & time if any...
-    log_output(($rec[0] eq $h) ? $blue : $col,"$rec[0] ",$b);  # hostname
+    $::isExplain or log_output(($rec[0] eq $h) ? $blue : $col,"$rec[0] ",$b);  # hostname
     
     if ($rec[1] eq "last") {
 	log_output($green," last message repeated ",$n);
