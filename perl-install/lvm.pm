@@ -116,6 +116,7 @@ sub vg_destroy {
     lvm_cmd('vgchange', '-a', 'n', $lvm->{VG_name});
     lvm_cmd_or_die('vgremove', $lvm->{VG_name});
     foreach (@{$lvm->{disks}}) {
+	lvm_cmd_or_die('pvremove', devices::make($_->{device}));
 	delete $_->{lvm};
 	set_isFormatted($_, 0);
     }
