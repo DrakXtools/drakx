@@ -826,7 +826,6 @@ sub wrap_paragraph {
 sub new {
     my ($type, $title, %opts) = @_;
 
-
     my $o = bless { %opts }, $type;
     while (my $e = shift @tempory::objects) { $e->destroy }
 
@@ -843,16 +842,7 @@ sub new {
     $o->{rwindow} = $o->{window} = $window;
     $o->{pop_it} = $window->{pop_it};
 
-    if (!$o->{pop_it}) {
-	set_main_window_size($o->{window});
-	$o->{window}->set_border_width(10);
-    }
     $o;
-}
-sub set_main_window_size {
-    my ($window) = @_;
-    my ($width, $height) = $::isInstall ? ($::real_windowwidth, $::real_windowheight) : $::isWizard ? (540, 360) : (600, 400);
-    $window->set_size_request($width, $height);
 }
 
 sub main {

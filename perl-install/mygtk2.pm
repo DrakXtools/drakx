@@ -481,6 +481,9 @@ sub _gtk__MagicWindow {
 	    %$opts = ();
 	}
 
+	set_main_window_size($::WizardWindow);
+	$sub_child->set_border_width(10);
+
 	$w = $::WizardWindow;
 	gtkadd($::WizardTable, children_loose => [ $sub_child ]);
     }
@@ -788,6 +791,11 @@ sub _text_insert {
     $textview;
 }
 
+sub set_main_window_size {
+    my ($window) = @_;
+    my ($width, $height) = $::isInstall ? ($::real_windowwidth, $::real_windowheight) : $::isWizard ? (540, 360) : (600, 400);
+    $window->set_size_request($width, $height);
+}
 
 my @icon_paths;
 sub add_icon_path { push @icon_paths, @_ }
