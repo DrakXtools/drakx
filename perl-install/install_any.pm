@@ -473,6 +473,9 @@ sub selectSupplMedia {
 	    if ($@) {
 		log::l("psUsingHdlists failed: $@");
 	    } else {
+		#- copy latest compssUsers.pl and rpmsrate somewhere locally
+		getAndSaveFile("$url/media/media_info/compssUsers.pl", "/tmp/compssUsers.pl");
+		getAndSaveFile("$url/media/media_info/rpmsrate", "/tmp/rpmsrate");
 		useMedium($prev_asked_medium); #- back to main medium
 		return $suppl_method;
 	    }
