@@ -938,33 +938,52 @@ sub _ask_okcancel($@) {
     $o->{ok}->grab_focus;
 }
 
+sub create_file_selector {
+    my (%opts) = @_;
+    my $w = ugtk2->new(delete $opts{title});
+    my ($message, $save, $want_a_dir) = (delete $opts{message}, delete $opts{save}, delete $opts{want_a_dir});
+    my $action = $want_a_dir ? ($save ? 'create_folder' : 'select_folder') : ($save ? 'save' : 'open');
+    add2hash(\%opts, { width => 480, height => 250 });
+    gtkadd($w->{window},
+	   gtkpack_(create_box_with_title($w, $message),
+		    1, $w->{chooser} = gtknew('FileChooser', action => $action, %opts),
+		    0, create_okcancel($w),
+		 ));
+    $w->{chooser}->signal_connect(file_activated => sub { $w->{ok}->clicked });
+    $w;
+}
+
+sub file_selected_check {
+    my ($save, $want_a_dir, $file) = @_;
+
+    if (!$file) {
+	N("No file chosen");
+    } elsif (-f $file && $want_a_dir) {
+	N("You have chosen a file, not a directory");
+    } elsif (-d $file && !$want_a_dir) {
+	N("You have chosen a directory, not a file");
+    } elsif (!-e $file && !$save) {
+	$want_a_dir ? N("No such directory") : N("No such file");
+    } else {
+	'';
+    }
+}
 
 sub _ask_file {
     my ($o, $title, $path) = @_;
-    my $f = Gtk2::FileSelection->new($title);
-    if ($o->{rwindow}->isa('mygtk2::MagicWindow')) {
-	$f->set_modal($o->{rwindow}->get_modal);
-	$f->set_position($o->{rwindow}->get('window-position'));
-    }
-    my $bg = $o->{window};
-    $o->{rwindow} = $o->{window} = $f;
-    $f->set_filename($path) if $path;
-    $f->signal_connect(destroy => sub { eval { $bg->destroy } });
-    $f->ok_button->signal_connect(clicked => sub { $o->{retval} = $f->get_filename; Gtk2->main_quit });
-    $f->cancel_button->signal_connect(clicked => sub { Gtk2->main_quit });
-    $f->grab_focus;
-    $f;
-}
 
+    my $w = create_file_selector({ title => $title, want_a_dir => 0, directory => $path });
+    put_in_hash($o, $w);
+
+    $w->{ok}->signal_connect(clicked => sub { $o->{retval} = $w->{chooser}->get_filename });
+}
 sub _ask_dir {
-    my ($o) = @_;
-    my $f = &_ask_file;
-    $f->file_list->get_parent->hide;
-    $f->selection_entry->get_parent->hide;
-    $f->ok_button->signal_connect(clicked => sub {
-				      my ($model, $iter) = $f->dir_list->get_selection->get_selected;
-				      $o->{retval} .= '/' . $model->get($iter, 0) if $model;
-				  });
+    my ($o, $title, $path) = @_;
+
+    my $w = create_file_selector({ title => $title, want_a_dir => 1, directory => $path });
+    put_in_hash($o, $w);
+
+    $w->{ok}->signal_connect(clicked => sub { $o->{retval} = $w->{chooser}->get_filename });
 }
 
 sub ask_browse_tree_info {
