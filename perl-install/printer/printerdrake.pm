@@ -189,14 +189,13 @@ If some of these measures lead to problems for you, turn this option off, but th
 				$ip = $sharehosts->{invhash}{$choice};
 			    }
 			}
-			my @menu = (N("Local network(s)"));
+			my @menu = N("Local network(s)");
 			my @interfaces = 
 			    printer::detect::getNetworkInterfaces();
 		        foreach my $interface (@interfaces) {
-			    push (@menu,
-				  (N("Interface \"%s\"", $interface)));
+			    push @menu, N("Interface \"%s\"", $interface);
 			}
-			push (@menu, N("IP address of host/network:"));
+			push @menu, N("IP address of host/network:");
 			# Show the dialog
 			my $address;
 			my $oldaddress = 
@@ -210,7 +209,7 @@ If some of these measures lead to problems for you, turn this option off, but th
 				   complete => sub {
 				       if (($hostchoice eq 
 					    N("IP address of host/network:")) &&
-					   (!printer::main::is_network_ip($ip))) {
+					   !printer::main::is_network_ip($ip)) {
 					   
 					   $in->ask_warn('', 
 N("The entered host/network IP is not correct.\n") .
@@ -225,8 +224,7 @@ N("192.168.100.0/255.255.255.0\n")
 				       }
 				       if ($hostchoice eq $menu[0]) {
 					   $address = "\@LOCAL";
-				       } elsif ($hostchoice eq 
-						$menu[$#menu]) {
+				       } elsif ($hostchoice eq $menu[-1]) {
 					   $address = $ip;
 				       } else {
 					   ($address) =
@@ -235,9 +233,9 @@ N("192.168.100.0/255.255.255.0\n")
 					   $address = "\@IF($address)";
 				       }
 				       # Check whether item is duplicate
-				       if (($address ne $oldaddress) &&
-					   (member($address,
-						   @{$printer->{cupsconfig}{clientnetworks}}))) {
+				       if ($address ne $oldaddress &&
+					   member($address,
+						  @{$printer->{cupsconfig}{clientnetworks}})) {
 					   $in->ask_warn('', 
 							 N("This host/network is already in the list, it cannot be added again.\n"));
 					   return (1,1);
@@ -1495,7 +1493,7 @@ sub setup_common {
 	# do auto-detection or when auto-detection failed
 	my $searchunknown = N("Unknown model");
 	if (!$do_auto_detect ||
-	    $makemodel =~ /$searchunknown/i ||
+	    $makemodel eq $searchunknown ||
 	    $makemodel =~ /^\s*$/) {
 	    local $::isWizard = 0;
 	    if (!$printer->{noninteractive}) {
@@ -2066,9 +2064,9 @@ sub get_printer_info {
 	    $printer->{currentqueue}{driver} = "PPD";
 	}
 	# Now get the options for this printer/driver combo
-	if (($printer->{configured}{$queue}) && 
-	    (($printer->{configured}{$queue}{queuedata}{foomatic}) ||
-	     ($printer->{configured}{$queue}{queuedata}{ppd}))) {
+	if ($printer->{configured}{$queue} && 
+	    ($printer->{configured}{$queue}{queuedata}{foomatic} ||
+	     $printer->{configured}{$queue}{queuedata}{ppd})) {
 	    if (!$newdriver) {
 		# The user didn't change the printer/driver
 		$printer->{ARGS} = $printer->{configured}{$queue}{args};
@@ -2757,7 +2755,7 @@ sub copy_queues_from {
 	foreach (@oldqueues) {
 	    push @queuesselected, 1;
 	    push @queueentries, { text => $_, type => 'bool', 
-				   val => \$queuesselected[$#queuesselected] };
+				   val => \$queuesselected[-1] };
 	}
 	# LPRng and LPD use the same config files, therefore one sees the 
 	# queues of LPD when one uses LPRng and vice versa, but these queues
