@@ -646,10 +646,10 @@ If you have none of those CDs, click Cancel.
 If only some CDs are missing, unselect them, then click Ok."),
 			   {
 			    list => \@mediumsDescr,
-			    label => sub { _("Cd-Rom labeled \"%s\"", $_) },
-			    ref => sub { \$mediumsDescr{$_} },
+			    label => sub { _("Cd-Rom labeled \"%s\"", $_[0]) },
+			    val => sub { \$mediumsDescr{$_[0]} },
 			   }) or do {
-			       map { $mediumsDescr{$_} = 0 } @mediumsDescr; #- force unselection of other CDs.
+			       $mediumsDescr{$_} = 0 foreach @mediumsDescr; #- force unselection of other CDs.
 			   };
     $o->set_help('choosePackages');
 
