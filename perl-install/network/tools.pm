@@ -251,7 +251,7 @@ sub get_default_ppp_interface {
 #- returns ippp interface dialed on boot
 sub get_default_ippp_interface {
     my ($intf) = @_;
-    find { /^ippp\d+/ && text2bool($intf->{$_}{ONBOOT}) && text2bool($intf->{$_}{DIAL_ON_IFUP}) } sort keys %$intf;
+    find { /^ippp\d+/ && (text2bool($intf->{$_}{ONBOOT}) || text2bool($intf->{$_}{DIAL_ON_IFUP})) } sort keys %$intf;
 }
 
 #- returns gateway interface if found
