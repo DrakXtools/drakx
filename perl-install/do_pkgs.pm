@@ -172,7 +172,7 @@ sub install {
     my $_wait = $do->in->wait_message('', N("Installing packages..."));
     $do->in->suspend;
     log::explanations("installed packages @l");
-    my $ret = system('urpmi', '--allow-medium-change', '--auto', '--best-output', '--no-verify-rpm', @l) == 0;
+    my $ret = system('urpmi', '--allow-medium-change', '--auto', '--no-verify-rpm', @l) == 0;
     $do->in->resume;
     $ret;
 }
