@@ -160,15 +160,14 @@ sub apply_checks {
 
 sub reload {
     my ($msec) = @_;
-    my $num_level = 0;
     require security::level;
-    $num_level ||= security::level::get();
+    my $num_level = security::level::get();
     $msec->{functions}{defaults_file} = "$::prefix/usr/share/msec/level.$num_level";
     $msec->{functions}{default} = { $msec->load_defaults('functions') };
 }
 
 sub new { 
-    my $type = shift;
+    my ($type) = @_;
     my $msec = bless {}, $type;
 
     $msec->{functions}{values_file}   = "$::prefix/etc/security/msec/level.local";
