@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX-uz@Cyrl\n"
-"POT-Creation-Date: 2003-08-27 17:44+0200\n"
+"POT-Creation-Date: 2003-08-29 22:12+0200\n"
 "PO-Revision-Date: 2003-08-25 23:58+0200\n"
 "Last-Translator: Mashrab Kuvatov <kmashrab@uni-bremen.de>\n"
 "Language-Team: Uzbek <uz-li@yahoogroups.com>\n"
@@ -615,6 +615,11 @@ msgstr ""
 msgid " on Novell server \"%s\", printer \"%s\""
 msgstr " Novell серверида \"%s\", принтер \"%s\""
 
+#: ../../standalone/printerdrake:1
+#, fuzzy, c-format
+msgid "Printer Name"
+msgstr "Босиб чиқариш навбатининг номи"
+
 #: ../../standalone/drakfloppy:1
 #, c-format
 msgid "Remove a module"
@@ -1078,6 +1083,7 @@ msgstr ""
 
 #: ../../standalone/drakboot:1 ../../standalone/drakfloppy:1
 #: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
+#: ../../standalone/printerdrake:1
 #, c-format
 msgid "<control>Q"
 msgstr "<control>Ч"
@@ -1989,7 +1995,7 @@ msgstr ""
 "қолдиринг.\n"
 "\n"
 
-#: ../../printer/cups.pm:1
+#: ../../printer/cups.pm:1 ../../standalone/printerdrake:1
 #, fuzzy, c-format
 msgid "Configured on other machines"
 msgstr "Уланишни мослаш"
@@ -2393,6 +2399,11 @@ msgstr "Сомали"
 msgid "No open source driver"
 msgstr ""
 
+#: ../../standalone/printerdrake:1
+#, c-format
+msgid "Def."
+msgstr ""
+
 #: ../../security/level.pm:1
 #, c-format
 msgid ""
@@ -2416,6 +2427,11 @@ msgstr "Янги Каледония"
 #, c-format
 msgid "European protocol (EDSS1)"
 msgstr "Ойропа протоколи (EDSS1)"
+
+#: ../../standalone/printerdrake:1
+#, c-format
+msgid "/_Delete"
+msgstr "/_Ўчириш"
 
 #: ../../any.pm:1
 #, c-format
@@ -3266,7 +3282,7 @@ msgstr "Гвинея-Биссау"
 msgid "Horizontal refresh rate"
 msgstr ""
 
-#: ../../standalone/drakperm:1
+#: ../../standalone/drakperm:1 ../../standalone/printerdrake:1
 #, c-format
 msgid "Edit"
 msgstr "Тузатиш"
@@ -4109,6 +4125,7 @@ msgid "Accept"
 msgstr "Қабул қилиш"
 
 #: ../../printer/printerdrake.pm:1 ../../standalone/harddrake2:1
+#: ../../standalone/printerdrake:1
 #, c-format
 msgid "Description"
 msgstr "Таърифи"
@@ -4236,6 +4253,11 @@ msgstr "Кейп Верде"
 #, c-format
 msgid "whether this cpu has the Cyrix 6x86 Coma bug"
 msgstr ""
+
+#: ../../standalone/printerdrake:1
+#, fuzzy, c-format
+msgid "Loading printer configuration... Please wait"
+msgstr "Принтернинг мосламаларини ўзгартириш"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -4691,7 +4713,7 @@ msgstr "Жадвал"
 msgid "I don't know how to format %s in type %s"
 msgstr "%s'ни %s турида қандай формат қилишни билмайман"
 
-#: ../../standalone/harddrake2:1
+#: ../../standalone/harddrake2:1 ../../standalone/printerdrake:1
 #, c-format
 msgid "Model"
 msgstr "Модел"
@@ -5392,7 +5414,7 @@ msgstr "Пакетларни биттама-битта танлаш"
 msgid "This partition is not resizeable"
 msgstr "Дискнинг бу қисмининг ҳажмини ўзгартириб бўлмайди"
 
-#: ../../printer/printerdrake.pm:1
+#: ../../printer/printerdrake.pm:1 ../../standalone/printerdrake:1
 #, c-format
 msgid "Location"
 msgstr "Манзили"
@@ -5427,15 +5449,15 @@ msgstr "Шу компютер"
 msgid "DOS drive letter: %s (just a guess)\n"
 msgstr "DOS дискининг ҳарфи: %s (таваккалига)\n"
 
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "Select the files or directories and click on 'OK'"
-msgstr "Файлларни ёки директорияларни танланг ва \"Ок\" тугмасини босинг"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Bahrain"
 msgstr "Баҳрайн"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "Select the files or directories and click on 'OK'"
+msgstr "Файлларни ёки директорияларни танланг ва \"Ок\" тугмасини босинг"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
@@ -5622,6 +5644,11 @@ msgstr ""
 "Изоҳ: агар компютерингизни Интернет тармоғида клиент сифатида ишлатсангиз, "
 "пастроғ даражани танланг."
 
+#: ../../standalone/printerdrake:1
+#, fuzzy, c-format
+msgid "Server Name"
+msgstr "Сервернинг номи:"
+
 #: ../../network/tools.pm:1 ../../standalone/drakconnect:1
 #, c-format
 msgid "Account Password"
@@ -5642,6 +5669,21 @@ msgid ""
 "System Commander).\n"
 "\n"
 "On which drive are you booting?"
+msgstr ""
+
+#: ../../install_interactive.pm:1
+#, c-format
+msgid ""
+"WARNING!\n"
+"\n"
+"DrakX will now resize your Windows partition. Be careful: this\n"
+"operation is dangerous. If you have not already done so, you\n"
+"first need to exit the installation, run \"chkdsk c:\" from a\n"
+"Command Prompt under Windows (beware, running graphical program\n"
+"\"scandisk\" is not enough, be sure to use \"chkdsk\" in a\n"
+"Command Prompt!), optionally run defrag, then restart the\n"
+"installation. You should also backup your data.\n"
+"When sure, press Ok."
 msgstr ""
 
 #: ../../keyboard.pm:1
@@ -5919,15 +5961,15 @@ msgstr ""
 msgid "Uruguay"
 msgstr "Уругвай"
 
-#: ../../printer/main.pm:1
-#, fuzzy, c-format
-msgid "SMB/Windows server \"%s\", share \"%s\""
-msgstr " Novell серверида \"%s\", принтер \"%s\""
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Benin"
 msgstr "Бенин"
+
+#: ../../printer/main.pm:1
+#, fuzzy, c-format
+msgid "SMB/Windows server \"%s\", share \"%s\""
+msgstr " Novell серверида \"%s\", принтер \"%s\""
 
 #: ../../standalone/drakperm:1
 #, c-format
@@ -6069,11 +6111,6 @@ msgstr ""
 msgid "Other OS (SunOS...)"
 msgstr "Бошқа ОС (SunOS...)"
 
-#: ../../standalone/drakconnect:1
-#, fuzzy, c-format
-msgid "Hostname configuration"
-msgstr "Системани мослаш"
-
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Install/Upgrade"
@@ -6157,6 +6194,11 @@ msgstr ""
 "Илтимос Drakbackup учун ажратилган\n"
 "юқори чегарани киритинг (Мб)"
 
+#: ../../loopback.pm:1
+#, c-format
+msgid "Circular mounts %s\n"
+msgstr ""
+
 #: ../../my_gtk.pm:1
 #, c-format
 msgid "-adobe-utopia-regular-r-*-*-25-*-*-*-p-*-iso8859-*,*-r-*"
@@ -6166,11 +6208,6 @@ msgstr "-adobe-utopia-regular-r-*-*-33-*-*-*-p-*-iso8859-*,*-r-*"
 #, c-format
 msgid "Lilo/grub mode"
 msgstr "Lilo/grub усули"
-
-#: ../../loopback.pm:1
-#, c-format
-msgid "Circular mounts %s\n"
-msgstr ""
 
 #: ../../lang.pm:1
 #, c-format
@@ -6345,6 +6382,11 @@ msgid ""
 "copyright laws applicable to software programs.\n"
 msgstr ""
 
+#: ../../standalone/printerdrake:1
+#, fuzzy, c-format
+msgid "/_Expert mode"
+msgstr "Эксперт усули"
+
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Remove this printer from Star Office/OpenOffice.org/GIMP"
@@ -6468,6 +6510,11 @@ msgstr "Товуш носозликларини топиш ва бартараф
 #, c-format
 msgid "Polish (qwerty layout)"
 msgstr "Полякча (qwerty)"
+
+#: ../../standalone/printerdrake:1
+#, fuzzy, c-format
+msgid "/_Add Printer"
+msgstr "Принтер"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -6757,6 +6804,11 @@ msgstr "LPD"
 #, c-format
 msgid "Graphics card: %s\n"
 msgstr "График карта: %s\n"
+
+#: ../../standalone/printerdrake:1
+#, fuzzy, c-format
+msgid "/Set as _Default"
+msgstr " (Андоза)"
 
 #: ../../security/l10n.pm:1
 #, c-format
@@ -7142,6 +7194,11 @@ msgstr "Муғилистон"
 #, c-format
 msgid "Mounted\n"
 msgstr "Уланган\n"
+
+#: ../../standalone/printerdrake:1
+#, fuzzy, c-format
+msgid "Configure CUPS"
+msgstr "X серверини мослаш"
 
 #: ../../help.pm:1
 #, c-format
@@ -7574,6 +7631,11 @@ msgstr "ТВ карта"
 msgid "Printer on SMB/Windows 95/98/NT server"
 msgstr "SMB/Windows 95/98/NT серверидаги принтер"
 
+#: ../../standalone/printerdrake:1
+#, fuzzy, c-format
+msgid "/_Configure CUPS"
+msgstr "X серверини мослаш"
+
 #: ../../standalone/scannerdrake:1
 #, c-format
 msgid ", "
@@ -7656,6 +7718,11 @@ msgid ""
 "offering professional solutions compatible with Mandrake Linux"
 msgstr ""
 
+#: ../../standalone/printerdrake:1
+#, c-format
+msgid "Authors: "
+msgstr "Муаллифлар: "
+
 #: ../../standalone/drakgw:1
 #, c-format
 msgid "Internet Connection Sharing is now disabled."
@@ -7723,6 +7790,11 @@ msgstr ""
 #, c-format
 msgid "Ethernet Card"
 msgstr "Ethernet карта"
+
+#: ../../standalone/printerdrake:1
+#, fuzzy, c-format
+msgid "Delete selected printer"
+msgstr "Белгиланган қоидани ўчириш"
 
 #: ../../my_gtk.pm:1 ../../services.pm:1 ../../ugtk2.pm:1
 #, c-format
@@ -8110,6 +8182,11 @@ msgstr ""
 msgid "Automatic Steps Configuration"
 msgstr "Автоматик босқичларни мослаш"
 
+#: ../../lang.pm:1
+#, c-format
+msgid "Barbados"
+msgstr "Барбадос"
+
 #: ../../share/advertising/02-community.pl:1
 #, c-format
 msgid ""
@@ -8118,11 +8195,6 @@ msgid ""
 msgstr ""
 "Кўпроқ маълумотга эга бўлишни ва Open Source уюшмасига ўз ҳиссангизни "
 "қўшишниистайсизми? Бепул дастурлар оламига ўз ҳиссангизни қўшинг!"
-
-#: ../../lang.pm:1
-#, c-format
-msgid "Barbados"
-msgstr "Барбадос"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -8167,6 +8239,11 @@ msgstr "IP чегарасининг охири:"
 #, c-format
 msgid "High"
 msgstr "Юқори"
+
+#: ../../standalone/printerdrake:1
+#, fuzzy, c-format
+msgid "Add a new printer to the system"
+msgstr "Системага фойдаланувчини қўшиш"
 
 #: ../../any.pm:1
 #, c-format
@@ -8918,6 +8995,11 @@ msgid ""
 "per second)"
 msgstr ""
 
+#: ../../standalone/printerdrake:1
+#, fuzzy, c-format
+msgid "Mandrake Linux Printer Management Tool"
+msgstr "Mandrake Linux учун фойдаланувчиларни бошқариш воситаси"
+
 #: ../../pkgs.pm:1
 #, c-format
 msgid "important"
@@ -8961,15 +9043,15 @@ msgid ""
 "configure the driver."
 msgstr ""
 
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "Users"
-msgstr "Фойдаланувчилар"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Aruba"
 msgstr "Аруба"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "Users"
+msgstr "Фойдаланувчилар"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -9382,6 +9464,7 @@ msgid "Theme name"
 msgstr "Мавзунинг номи"
 
 #: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
+#: ../../standalone/printerdrake:1
 #, c-format
 msgid "/_Help"
 msgstr "/_Ёрдам"
@@ -9482,25 +9565,15 @@ msgstr "Принтерни олиб ташлаш"
 msgid "View Last Log"
 msgstr ""
 
-#: ../../install_interactive.pm:1
-#, c-format
-msgid ""
-"WARNING!\n"
-"\n"
-"DrakX will now resize your Windows partition. Be careful: this\n"
-"operation is dangerous. If you have not already done so, you\n"
-"first need to exit the installation, run \"chkdsk c:\" from a\n"
-"Command Prompt under Windows (beware, running graphical program\n"
-"\"scandisk\" is not enough, be sure to use \"chkdsk\" in a\n"
-"Command Prompt!), optionally run defrag, then restart the\n"
-"installation. You should also backup your data.\n"
-"When sure, press Ok."
-msgstr ""
-
 #: ../../network/drakfirewall.pm:1
 #, c-format
 msgid "Which services would you like to allow the Internet to connect to?"
 msgstr "Интернетдан қайси хизматларга уланишга рухсат берасиз?"
+
+#: ../../standalone/printerdrake:1
+#, fuzzy, c-format
+msgid "Connection Type"
+msgstr "Уланишнинг тури: "
 
 #: ../../standalone/logdrake:1
 #, c-format
@@ -9668,7 +9741,7 @@ msgstr ""
 msgid "You must enter a device or file name!"
 msgstr "Ускунанинг ёки файлнинг номини киритишингиз шарт!"
 
-#: ../../standalone/harddrake2:1
+#: ../../standalone/harddrake2:1 ../../standalone/printerdrake:1
 #, c-format
 msgid "/_Quit"
 msgstr "/Чи_қиш"
@@ -9952,15 +10025,15 @@ msgstr "Пакетлар ўрнатилмоқда..."
 msgid "Dutch"
 msgstr "Голландча"
 
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "The following packages need to be installed:\n"
-msgstr "Қуйидаги пакетларни ўрнатиш керак:\n"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Angola"
 msgstr "Ангола"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "The following packages need to be installed:\n"
+msgstr "Қуйидаги пакетларни ўрнатиш керак:\n"
 
 #: ../../standalone/logdrake:1
 #, c-format
@@ -10190,6 +10263,7 @@ msgstr "Саами (Шведча/Финча)"
 #: ../../printer/printerdrake.pm:1 ../../standalone/drakTermServ:1
 #: ../../standalone/drakbackup:1 ../../standalone/drakbug:1
 #: ../../standalone/drakfont:1 ../../standalone/net_monitor:1
+#: ../../standalone/printerdrake:1
 #, c-format
 msgid "Close"
 msgstr "Ёпиш"
@@ -10836,6 +10910,11 @@ msgstr ""
 msgid "Add a scanner manually"
 msgstr ""
 
+#: ../../standalone/printerdrake:1
+#, c-format
+msgid "Refresh"
+msgstr "Янгилаш"
+
 #: ../../help.pm:1 ../../diskdrake/interactive.pm:1
 #, c-format
 msgid "Reload partition table"
@@ -10855,11 +10934,6 @@ msgstr "Танланганни тиклаш"
 #, c-format
 msgid "Search for fonts in installed list"
 msgstr "Ўрнатилган рўйхатда шрифтларни қидириш"
-
-#: ../../standalone/drakconnect:1
-#, fuzzy, c-format
-msgid "Hostname"
-msgstr "Компютернинг номи"
 
 #: ../../standalone/drakgw:1
 #, c-format
@@ -10975,6 +11049,11 @@ msgstr ""
 #, c-format
 msgid "Save packages selection"
 msgstr "Пакетлар танловини сақлаш"
+
+#: ../../standalone/printerdrake:1
+#, c-format
+msgid "/_Actions"
+msgstr "/_Амаллар"
 
 #: ../../standalone/drakautoinst:1
 #, c-format
@@ -11259,6 +11338,11 @@ msgstr "Қуйидаги компютерлардаги сканнерларда
 #, c-format
 msgid "Unselected All"
 msgstr "Ҳеч қайсини танламаш"
+
+#: ../../standalone/printerdrake:1
+#, fuzzy, c-format
+msgid "Printer Management \n"
+msgstr "Фойдаланувчилар бошқаруви\n"
 
 #: ../../standalone/logdrake:1
 #, c-format
@@ -12014,6 +12098,11 @@ msgstr ""
 msgid "please choose the date to restore"
 msgstr "Илтимос тиклаш учун санани танланг"
 
+#: ../../lang.pm:1
+#, c-format
+msgid "Netherlands Antilles"
+msgstr "Нидерландия Антил Ороллари"
+
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid "Switching from ext2 to ext3"
@@ -12023,11 +12112,6 @@ msgstr "Ext2 файл системасидан ext3 файл системаси�
 #, c-format
 msgid "LPRng"
 msgstr "LPRng"
-
-#: ../../lang.pm:1
-#, c-format
-msgid "Netherlands Antilles"
-msgstr "Нидерландия Антил Ороллари"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -12302,7 +12386,7 @@ msgstr "кабел орқали уланиш аниқланди"
 msgid "Permission denied transferring %s to %s"
 msgstr ""
 
-#: ../../standalone/harddrake2:1
+#: ../../standalone/harddrake2:1 ../../standalone/printerdrake:1
 #, c-format
 msgid "/_Report Bug"
 msgstr "/_Хато ҳақида хабар қилиш"
@@ -12850,12 +12934,17 @@ msgstr ""
 msgid "\tBackups use tar and gzip\n"
 msgstr ""
 
+#: ../../standalone/printerdrake:1
+#, fuzzy, c-format
+msgid "Set as default"
+msgstr "андоза"
+
 #: ../../Xconfig/card.pm:1
 #, c-format
 msgid "2 MB"
 msgstr "2 Мб"
 
-#: ../../printer/main.pm:1
+#: ../../printer/main.pm:1 ../../standalone/printerdrake:1
 #, fuzzy, c-format
 msgid "Configured on this machine"
 msgstr "(шу компютерда)"
@@ -14000,6 +14089,11 @@ msgstr "Loopback учун ишлатиш"
 msgid "Mandrake Bug Report Tool"
 msgstr "Mandrake учун хато ҳақида хабар қилувчи восита"
 
+#: ../../standalone/printerdrake:1
+#, c-format
+msgid "Apply filter"
+msgstr "Филтерни қўллаш"
+
 #: ../../network/adsl.pm:1
 #, c-format
 msgid "use pppoe"
@@ -14030,11 +14124,6 @@ msgstr "Узатиш"
 msgid "Dvorak (Swedish)"
 msgstr "Дворак (Шведча)"
 
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "More Options"
-msgstr "Қўшимча параметрлар"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Afghanistan"
@@ -14042,8 +14131,18 @@ msgstr "Афғонистон"
 
 #: ../../standalone/drakbackup:1
 #, c-format
+msgid "More Options"
+msgstr "Қўшимча параметрлар"
+
+#: ../../standalone/drakbackup:1
+#, c-format
 msgid "Delete Hard Drive tar files after backup to other media."
 msgstr ""
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Burundi"
+msgstr "Бурунди"
 
 #: ../../services.pm:1
 #, c-format
@@ -14053,11 +14152,6 @@ msgid ""
 "basic\n"
 "UNIX cron, including better security and more powerful configuration options."
 msgstr ""
-
-#: ../../lang.pm:1
-#, c-format
-msgid "Burundi"
-msgstr "Бурунди"
 
 #: ../../standalone/drakTermServ:1
 #, c-format
@@ -14210,6 +14304,11 @@ msgstr "Тб"
 msgid "FATAL"
 msgstr ""
 
+#: ../../standalone/printerdrake:1
+#, c-format
+msgid "Refresh the list"
+msgstr "Рўйхатни янгилаш"
+
 #: ../../standalone/drakpxe:1
 #, c-format
 msgid ""
@@ -14221,7 +14320,7 @@ msgid ""
 msgstr ""
 
 #: ../../diskdrake/hd_gtk.pm:1 ../../diskdrake/interactive.pm:1
-#: ../../standalone/drakperm:1
+#: ../../standalone/drakperm:1 ../../standalone/printerdrake:1
 #, c-format
 msgid "Delete"
 msgstr "Ўчириш"
@@ -15338,6 +15437,11 @@ msgstr ""
 msgid "Internet Connection Sharing currently enabled"
 msgstr ""
 
+#: ../../lang.pm:1
+#, c-format
+msgid "United Arab Emirates"
+msgstr "Бирлашган Араб Амирликлари"
+
 #: ../../network/tools.pm:1 ../../standalone/drakconnect:1
 #, c-format
 msgid "Card IO_0"
@@ -15350,11 +15454,6 @@ msgstr ""
 
 #: ../../lang.pm:1
 #, c-format
-msgid "United Arab Emirates"
-msgstr "Бирлашган Араб Амирликлари"
-
-#: ../../lang.pm:1
-#, c-format
 msgid "Thailand"
 msgstr "Таиланд"
 
@@ -15362,6 +15461,11 @@ msgstr "Таиланд"
 #, c-format
 msgid "Card IO_1"
 msgstr "Картанинг IO_1'си"
+
+#: ../../standalone/printerdrake:1
+#, c-format
+msgid "Search:"
+msgstr "Қидириш:"
 
 #: ../../lang.pm:1
 #, c-format
@@ -15497,6 +15601,11 @@ msgstr "Дискетга сақлаш"
 #, c-format
 msgid "Check open ports"
 msgstr "Очиқ портларни текшириш"
+
+#: ../../standalone/printerdrake:1
+#, fuzzy, c-format
+msgid "Edit selected printer"
+msgstr "Танланган серверни тузатиш"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -15770,6 +15879,11 @@ msgstr "LPD ва LPRng билан IPP принтерларни ишлатиб б
 msgid "Host name or IP."
 msgstr "Компютернинг номи  ёки IP рақами"
 
+#: ../../standalone/printerdrake:1
+#, c-format
+msgid "/_Edit"
+msgstr "/_Тузатиш"
+
 #: ../../fsedit.pm:1
 #, c-format
 msgid "simple"
@@ -15827,6 +15941,7 @@ msgstr ""
 
 #: ../../standalone/drakboot:1 ../../standalone/drakfloppy:1
 #: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
+#: ../../standalone/printerdrake:1
 #, c-format
 msgid "/_File"
 msgstr "/_Файл"
@@ -15974,7 +16089,7 @@ msgstr ""
 msgid "Kernel:"
 msgstr ""
 
-#: ../../standalone/harddrake2:1
+#: ../../standalone/harddrake2:1 ../../standalone/printerdrake:1
 #, c-format
 msgid "/_About..."
 msgstr "/_Ҳақида"
@@ -16040,6 +16155,11 @@ msgstr ""
 #, c-format
 msgid "Show current interface configuration"
 msgstr "Жорий интерфейснинг мосламасини кўрсатиш"
+
+#: ../../standalone/printerdrake:1
+#, fuzzy, c-format
+msgid "Add Printer"
+msgstr "Принтер"
 
 #: ../../security/help.pm:1
 #, c-format
@@ -16394,6 +16514,11 @@ msgstr ""
 msgid "IP address should be in format 1.2.3.4"
 msgstr "IP рақами қуйидаги форматда бўлиши шарт: 1.2.3.4"
 
+#: ../../standalone/printerdrake:1
+#, fuzzy, c-format
+msgid "Configure CUPS printing system"
+msgstr "Босиб чиқариш системасини ўзгартириш"
+
 #: ../../lang.pm:1
 #, c-format
 msgid "Ecuador"
@@ -16574,6 +16699,11 @@ msgstr "Х дастурларидан фойдаланишга рухсат эт
 msgid "Computing the size of the Windows partition"
 msgstr "Дискнинг Windows қисмининг ҳажми ҳисобланмоқда"
 
+#: ../../standalone/printerdrake:1
+#, c-format
+msgid "/_Refresh"
+msgstr "/_Янгилаш"
+
 #: ../../crypto.pm:1 ../../lang.pm:1 ../../network/tools.pm:1
 #: ../../standalone/drakxtv:1
 #, c-format
@@ -16660,6 +16790,11 @@ msgstr ""
 "\n"
 "Printerdrake %s принтерингизнинг моделини аниқлолмади. Илтимос, қуйидаги "
 "рўйхатдан тўғри келадиган моделни танланг."
+
+#: ../../standalone/printerdrake:1
+#, fuzzy, c-format
+msgid "Set selected printer as the default printer"
+msgstr "Бу принтерни андоза деб белгилаш"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -18401,6 +18536,14 @@ msgstr "NFS сервери, SMB сервери, Прокси сервери, SSH
 #: ../../share/compssUsers:999
 msgid "Set of tools to read and send mail and news and to browse the Web"
 msgstr ""
+
+#, fuzzy
+#~ msgid "Hostname configuration"
+#~ msgstr "Системани мослаш"
+
+#, fuzzy
+#~ msgid "Hostname"
+#~ msgstr "Компютернинг номи"
 
 #~ msgid "Bad Ip"
 #~ msgstr "Нотўғри IP"
