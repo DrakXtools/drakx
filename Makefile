@@ -1,7 +1,7 @@
 ARCH := $(patsubst i%86,i386,$(shell uname -m))
 ARCH := $(patsubst sparc%,sparc,$(ARCH))
 
-RELEASE_BOOT_IMG = cdrom.img hd.img network.img usbnet.img
+RELEASE_BOOT_IMG = cdrom.img hd.img network.img usb.img
 ifeq (i386,$(ARCH))
 RELEASE_BOOT_IMG += blank.img pcmcia.img other.img
 endif
@@ -23,7 +23,7 @@ FRELEASE_BOOT_IMG = $(BOOT_IMG:%=images/%)
 FBOOT_IMG = $(BOOT_IMG:%=images/%)
 FBOOT_RDZ = $(FBOOT_IMG:%.img=%.rdz) images/all.rdz
 
-BINS = mdk-stage1/init mdk-stage1/stage1-full mdk-stage1/stage1-cdrom mdk-stage1/stage1-network mdk-stage/stage1-usbnet
+BINS = mdk-stage1/init mdk-stage1/stage1-full mdk-stage1/stage1-cdrom mdk-stage1/stage1-network mdk-stage1/stage1-usb
 ifeq (ppc,$(ARCH))
 BINS = mdk-stage1/init mdk-stage1/stage1-full 
 endif

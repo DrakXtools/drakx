@@ -39,7 +39,7 @@ function create_modules() {
     create_marfile cdrom_modules.mar    $CDROM_MODULES $GENERIC_MODULES
     create_marfile hd_modules.mar       $HD_MODULES $GENERIC_MODULES
     create_marfile pcmcia_modules.mar   $PCMCIA_MODULES $PCMCIA_COREMODULES $GENERIC_MODULES
-    create_marfile usbnet_modules.mar   $USBNET_MODULES $GENERIC_MODULES
+    create_marfile usb_modules.mar      $USB_MODULES $GENERIC_MODULES
     create_marfile other_modules.mar    $BIG_MODULES $GENERIC_MODULES
     create_marfile all_modules.mar      $ALL_MODULES $PCMCIA_COREMODULES $GENERIC_MODULES
     rm -f $ALL_MODULES $PCMCIA_COREMODULES $NOT_USEFULL_IN_STAGE1 # leave in the directory non-install1 used modules
@@ -63,15 +63,14 @@ f "disk" ; DISK_DRIVERS=$v
 f "net" ; NETWORK_DRIVERS=$v
 f "scsi cdrom" ; CD_DRIVERS=$v
 f "pcmcia net_raw cdrom_raw scsi_raw disk_raw" ; PCMCIA_DRIVERS=$v
-f "usb" ; USB_DRIVERS=$v
-f "usbnet net_raw" ; USBNET_DRIVERS=$v
+f "usb usbnet net_raw usbstorage scsi_raw cdrom_raw disk_raw" ; USB_DRIVERS=$v
 f "big net_raw cdrom_raw scsi_raw disk_raw" ; BIG_DRIVERS=$v
-f "pcmcia net usb usbnet cdrom scsi disk keepbig" ; ALL_DRIVERS=$v
+f "pcmcia net usb usbnet usbstorage cdrom scsi disk keepbig" ; ALL_DRIVERS=$v
 [ $ARCH == "i386" ] && DOSMODULES="vfat.o fat.o"
 echo "done."
 
 NETWORK_MODULES="  $NETWORK_DRIVERS"
-USBNET_MODULES="   $USB_DRIVERS $USBNET_DRIVERS usbkbd.o keybdev.o input.o"
+USB_MODULES="      $USB_DRIVERS usbkbd.o keybdev.o input.o"
 CDROM_MODULES="    $CD_DRIVERS"
 HD_MODULES="       $DOSMODULES $SCSI_DRIVERS $DISK_DRIVERS loop.o isofs.o reiserfs.o"
 [ "$ARCH" == "ppc" ] && HD_MODULES="$HD_MODULES hfs.o"
@@ -79,7 +78,7 @@ PCMCIA_MODULES="   $DOSMODULES $PCMCIA_DRIVERS"
 BIG_MODULES="      $BIG_DRIVERS"
 ALL_MODULES="      $DOSMODULES $ALL_DRIVERS loop.o isofs.o reiserfs.o"
 [ "$ARCH" == "ppc" ] && ALL_MODULES="$ALL_MODULES hfs.o"
-NOT_USEFULL_IN_STAGE1="nls_*.o parport_probe.o raid*.o serial.o smbfs.o usb-*.o"
+NOT_USEFULL_IN_STAGE1="nls_*.o parport_probe.o raid*.o serial.o smbfs.o"
 
 GENERIC_MODULES="isa-pnp.o floppy.o"
 

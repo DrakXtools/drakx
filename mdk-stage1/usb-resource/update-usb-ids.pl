@@ -25,8 +25,7 @@ struct usb_module_map {
 };
 ';
 
-print "#ifdef ENABLE_USB
-struct pci_module_map usb_pci_ids[] = {
+print "struct pci_module_map usb_pci_ids[] = {
 
 ";
 
@@ -42,11 +41,10 @@ while (my ($k, $v) = each %$drivers) {
 
 print "};
 int usb_num_ids=sizeof(usb_pci_ids)/sizeof(struct pci_module_map);
-#endif
 ";
 
 
-my @t = ('usbnet');
+my @t = ('usb');
 
 
 foreach $type (@t) {
@@ -56,8 +54,7 @@ foreach $type (@t) {
 	push @$modulez, (`../mar/mar -l $_`);
     }
 
-    print "#ifdef ENABLE_".uc($type)."
-struct usb_module_map ${type}_usb_ids[] = {
+    print "struct usb_module_map ${type}_usb_ids[] = {
 ";
     foreach my $usbentry (@usbtable) {
 	grep(/^\t$usbentry->{'module'}\.o\s/, @$modulez) or next;
@@ -67,7 +64,6 @@ struct usb_module_map ${type}_usb_ids[] = {
 
     print "};
 int ${type}_usb_num_ids=sizeof(${type}_usb_ids)/sizeof(struct usb_module_map);
-#endif
 ";
 
 }

@@ -1,6 +1,6 @@
 #!/usr/bin/perl
 
-@ARGV >= 2 or die "usage: $0 <image> all|other|cdrom|hd|network|usbnet|blank|pcmcia|live|tftp|tftprd\n";
+@ARGV >= 2 or die "usage: $0 <image> all|other|cdrom|hd|network|usb|blank|pcmcia|live|tftp|tftprd\n";
 
 use Config;
 use MDK::Common;
@@ -34,7 +34,7 @@ $install = $ {{
     tftprd => "stage1-full",
     pcmcia => "stage1-full",
     network => "stage1-network",
-    usbnet => "stage1-usbnet",
+    usb => "stage1-usb",
     cdrom => "stage1-cdrom",
     hd => "stage1-disk",
     live64 => "stage1-full",
@@ -108,7 +108,7 @@ sub initrd {
     install_stripped("$instdir/init", "$mnt/sbin");
     install_stripped("$instdir/$install", "$mnt/sbin/stage1");
 
-    if ($type eq "network" || $type eq "usbnet" || $type eq "all" || $type eq "other" || $type eq "blank") {
+    if ($type eq "network" || $type eq "usb" || $type eq "all" || $type eq "other" || $type eq "blank") {
 	install_stripped("$instdir/ppp/pppd-bin", "$mnt/sbin/pppd");
 	install_stripped("$instdir/rp-pppoe/pppoe-bin", "$mnt/sbin/pppoe");
 	_ "$sudo mknod $mnt/dev/ppp c 108 0";

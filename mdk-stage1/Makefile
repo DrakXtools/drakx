@@ -23,7 +23,7 @@
  #
  # 	ix86
  # init with minilibc
- # stage1 with dietlibc except some targets
+ # stage1 with dietlibc
  #
  # 	ppc
  # init with dietlibc
@@ -122,8 +122,7 @@ STAGE1OBJS-NETWORK = $(subst .c,-NETWORK.o,$(STAGE1SRC) $(NETWORKSRC))
 NETWORK_DEFS = -DDISABLE_CDROM -DDISABLE_DISK
 
 
-STAGE1OBJS-USBNET = $(subst .c,-USBNET.o,$(STAGE1SRC) $(NETWORKSRC))
-
+STAGE1OBJS-USB = $(subst .c,-USB.o,$(STAGE1SRC) $(CDROMSRC) $(DISKSRC) $(NETWORKSRC))
 
 STAGE1OBJS-FULL = $(subst .c,-FULL.o,$(STAGE1SRC) $(CDROMSRC) $(DISKSRC) $(NETWORKSRC))
 
@@ -144,7 +143,7 @@ endif
 BINS = init stage1-full
 
 ifeq (i386, $(ARCH))
-BINS += stage1-cdrom stage1-disk stage1-network stage1-usbnet
+BINS += stage1-cdrom stage1-disk stage1-network stage1-usb
 endif
 
 ifneq (ia64, $(ARCH))
@@ -164,8 +163,8 @@ PCMCIA_DEFS = -DENABLE_PCMCIA
 endif
 
 
-USBNET_DEFS_GEN = -DENABLE_USB -DENABLE_USBNET
-USBNET_DEFS = $(USBNET_DEFS_GEN) -DDISABLE_PCINET
+USB_DEFS_GEN = -DENABLE_USB
+USB_DEFS = -DENABLE_USB -DDISABLE_PCIADAPTERS
 
 all: dirs $(BINS)
 
@@ -190,7 +189,7 @@ stage1-network: $(STAGE1OBJS-NETWORK) $(STAGE1_OWN_LIBS) $(STAGE1_NETWORK_LIBS) 
 	$(CC) $(LDFLAGS_STAGE1) -o $@ $^
 	$(STRIPCMD) $@
 
-stage1-usbnet: $(STAGE1OBJS-USBNET) $(STAGE1_OWN_LIBS) $(STAGE1_NETWORK_LIBS) $(FRONTEND_LINK) $(STAGE1_LIBC)
+stage1-usb: $(STAGE1OBJS-USB) $(STAGE1_OWN_LIBS) $(STAGE1_NETWORK_LIBS) $(FRONTEND_LINK) $(STAGE1_LIBC)
 	$(CC) $(LDFLAGS_STAGE1) -o $@ $^
 	$(STRIPCMD) $@
 
@@ -211,11 +210,11 @@ $(STAGE1OBJS-DISK): %-DISK.o: %.c
 $(STAGE1OBJS-NETWORK): %-NETWORK.o: %.c
 	$(COMPILE) $(INCLUDES) $(NETWORK_DEFS) -c $< -o $@
 
-$(STAGE1OBJS-USBNET): %-USBNET.o: %.c
-	$(COMPILE) $(INCLUDES) $(NETWORK_DEFS) $(USBNET_DEFS) -c $< -o $@
+$(STAGE1OBJS-USB): %-USB.o: %.c
+	$(COMPILE) $(INCLUDES) $(USB_DEFS) -c $< -o $@
 
 $(STAGE1OBJS-FULL): %-FULL.o: %.c
-	$(COMPILE) $(INCLUDES) $(USBNET_DEFS_GEN) $(PCMCIA_DEFS) -c $< -o $@
+	$(COMPILE) $(INCLUDES) $(USB_DEFS_GEN) $(PCMCIA_DEFS) -c $< -o $@
 
 .c.o:
 	$(COMPILE) $(INCLUDES) -c $<
@@ -225,7 +224,7 @@ clean:
 	@for n in $(DIRS); do \
 		(cd $$n; make clean) \
 	done
-	rm -f *.o .depend *.rdz *.img $(BINS)
+	rm -f *.o .depend *.rdz *.img rescue-gui $(BINS)
 
 
 tar-mkinitrd_helper: clean
@@ -255,7 +254,7 @@ endif
 
 *-NETWORK.o: %-NETWORK.o: %.o
 
-*-USBNET.o: %-USBNET.o: %.o
+*-USB.o: %-USB.o: %.o
 
 *-FULL.o: %-FULL.o: %.o
 

@@ -136,6 +136,7 @@ static void probe_that_type(enum driver_type type)
 		struct pci_module_map * pcidb = NULL;
 
 		switch (type) {
+#ifndef DISABLE_PCIADAPTERS
 #ifndef DISABLE_MEDIAS
 		case SCSI_ADAPTERS:
 			pcidb = medias_pci_ids;
@@ -143,7 +144,6 @@ static void probe_that_type(enum driver_type type)
 			break;
 #endif
 #ifndef DISABLE_NETWORK
-#ifndef DISABLE_PCINET
 		case NETWORK_DEVICES:
 			pcidb = network_pci_ids;
 			len   = network_num_ids;
@@ -225,17 +225,6 @@ static void probe_that_type(enum driver_type type)
 		char buf[200];
 		struct usb_module_map * usbdb = NULL;
 
-		switch (type) {
-#ifdef ENABLE_USBNET
-		case NETWORK_DEVICES:
-			usbdb = usbnet_usb_ids;
-			len   = usbnet_usb_num_ids;
-			break;
-#endif
-		default:
-			goto end_usb_probe;
-		}
-
 		if (!already_probed_usb_controllers) {
 			already_probed_usb_controllers = 1;
 			probe_that_type(USB_CONTROLLERS);
@@ -243,6 +232,7 @@ static void probe_that_type(enum driver_type type)
 
 		if (!already_mounted_usbdev) {
 			already_mounted_usbdev = 1;
+			my_insmod("usb-storage", SCSI_ADAPTERS, NULL);
 			if (mount("/proc/bus/usb", "/proc/bus/usb", "usbdevfs", 0, NULL)) {
 				log_message("USB: couldn't mount /proc/bus/usb");
 				goto end_usb_probe;
@@ -257,11 +247,20 @@ static void probe_that_type(enum driver_type type)
 			goto end_usb_probe;
 		}
 
+		switch (type) {
+		case NETWORK_DEVICES:
+			usbdb = usb_usb_ids;
+			len   = usb_usb_num_ids;
+			break;
+		default:
+			goto end_usb_probe;
+		}
+
 		while (1) {
 			int i, vendor, id;
 
 			if (!fgets(buf, sizeof(buf), f)) break;
-			
+
 			if (strstr(buf, "Keyboard")) {
 				my_insmod("usbkbd", ANY_DRIVER_TYPE, NULL);
 				my_insmod("keybdev", ANY_DRIVER_TYPE, NULL);
@@ -273,7 +272,6 @@ static void probe_that_type(enum driver_type type)
 			for (i = 0; i < len; i++) {
 				if (usbdb[i].vendor == vendor && usbdb[i].id == id) {
 					log_message("USB: device %04x %04x is \"%s\" (%s)", vendor, id, usbdb[i].name, usbdb[i].module);
-#ifdef ENABLE_USBNET
 					if (type == NETWORK_DEVICES) {
 						stg1_info_message("About to load driver for usb network device:\n \n%s", usbdb[i].name);
 						prepare_intf_descr(usbdb[i].name);
@@ -281,7 +279,6 @@ static void probe_that_type(enum driver_type type)
 						if (intf_descr_for_discover) /* for modules providing more than one net intf */
 							net_discovered_interface(NULL);
 					}
-#endif
 
 				}
 			}
@@ -630,7 +627,7 @@ char ** get_net_devices(void)
 		"tr0",
 		"plip0", "plip1", "plip2",
 		"fddi0",
-#ifdef ENABLE_USBNET
+#ifdef ENABLE_USB
 		"usb0", "usb1", "usb2", "usb3",
 #endif
 		NULL

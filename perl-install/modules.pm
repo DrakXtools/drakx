@@ -127,6 +127,9 @@ if_(arch() !~ /alpha/ && arch() !~ /sparc/,
   "catc" => "CATC EL1210A NetMate USB Ethernet driver",
   "CDCEther" => "CDCEther",
 }],
+[ 'usbstorage', {
+  "usb-storage" => "usb-storage",
+}],
 [ 'isdn', {
    "hisax" => "hisax",
    "hysdn" => "hysdn",
