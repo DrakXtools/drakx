@@ -1,14 +1,14 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 9.3
-Release: 11mdk
+Release: 12mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
 Group: System/Configuration/Other
 Requires: %{name}-newt = %version-%release, perl-Gtk2 >= 0.95-6mdk, /usr/X11R6/bin/xtest, font-tools, usermode >= 1.63-5mdk, perl-MDK-Common >= 1.1.2-2mdk, gurpmi
 Requires: foomatic-db-engine
-Conflicts: drakconf < 9.3-2mdk
+Conflicts: drakconf < 9.3-10mdk
 Conflicts: rpmdrake < 2.1-29mdk
 Conflicts: mandrake_doc-drakxtools-en < 9.2, mandrake_doc-drakxtools-es < 9.2, mandrake_doc-drakxtools-fr < 9.2
 BuildRequires: gettext, gtk+2-devel, ldetect-devel >= 0.5.1-2mdk, ncurses-devel, newt-devel, perl-devel >= 1:5.8.0-20mdk, libext2fs-devel, perl-MDK-Common-devel >= 1.1.8-3mdk
@@ -315,6 +315,19 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Tue Dec  9 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.3-12mdk
+- net_monitor:
+  o properly handle multiple interfaces (each one having its own pixmap)
+  o make it fit when embedded
+  o kill icons on button
+  o kill profile managment (duplicated features already availlable
+    within mcc)
+- drakonnect:
+  o split in multiples pieces
+  o move profile support into mcc
+  o fix writing spurious "WIRELESS_NWID=HASH(0x8e93758)" in ifcfg-<intf>
+  o add "delete an interface" wizard
+
 * Fri Nov 28 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.3-11mdk
 - improve buttons layout in interactive written tools
 - drakconnect:
