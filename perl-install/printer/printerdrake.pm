@@ -392,9 +392,7 @@ sub setup_local_autoscan {
 		} elsif ($p->{port} =~ m!^smb://([^/:]+)/([^/:]+)$!) {
 		    $menustr .= N(", printer \"%s\" on SMB/Windows server \"%s\"", $2, $1);
 		}
-		if ($::expert) {
-		    $menustr .= " ($p->{port})";
-		}
+          $menustr .= " ($p->{port})" if $::expert;
 		$menuentries->{$menustr} = $p->{port};
 		push @str, N("Detected %s", $menustr);
 	    } else {
@@ -408,9 +406,7 @@ sub setup_local_autoscan {
 		} elsif ($p->{port} =~ m!^smb://([^/:]+)/([^/:]+)$!) {
 		    $menustr .= N("Printer \"%s\" on SMB/Windows server \"%s\"", $2, $1);
 		}
-		if ($::expert) {
-		    $menustr .= " ($p->{port})";
-		}
+		$menustr .= " ($p->{port})" if $::expert;
 		$menuentries->{$menustr} = $p->{port};
 	    }
 	}
@@ -425,9 +421,7 @@ sub setup_local_autoscan {
 			    last;
 			}
 		    }
-		    if ($alreadyfound) {
-			next;
-		    }
+		    next if $alreadyfound;
 		}
 		my $menustr;
 		if ($q =~ m!^/dev/lp(\d+)$!) {
@@ -435,9 +429,7 @@ sub setup_local_autoscan {
 		} elsif ($q =~ m!^/dev/usb/lp(\d+)$!) {
 		    $menustr = N("USB printer \#%s", $1);
 		}
-		if ($::expert) {
-		    $menustr .= " ($q)";
-		}
+		$menustr .= " ($q)" if $::expert;
 		$menuentries->{$menustr} = $q;
 	    }
 	}
@@ -451,14 +443,10 @@ sub setup_local_autoscan {
 	my $m;
 	for ($m = 0; $m <= 2; $m++) {
 	    my $menustr = N("Printer on parallel port \#%s", $m);
-	    if ($::expert) {
-		$menustr .= " (/dev/lp$m)";
-	    }
+	    $menustr .= " (/dev/lp$m)" if $::expert;
 	    $menuentries->{$menustr} = "/dev/lp$m";
 	    $menustr = N("USB printer \#%s", $m);
-	    if ($::expert) {
-		$menustr .= " (/dev/usb/lp$m)";
-	    }
+	    $menustr .= " (/dev/usb/lp$m)" if $::expert;
 	    $menuentries->{$menustr} = "/dev/usb/lp$m";
 	}
     }
@@ -654,11 +642,11 @@ N("To use a remote lpd printer, you need to supply the hostname of the printer s
 { label => N("Remote host name"), val => \$remotehost },
 { label => N("Remote printer name"), val => \$remotequeue } ],
 complete => sub {
-    unless ($remotehost ne "") {
+    if ($remotehost eq "") {
 	$in->ask_warn('', N("Remote host name missing!"));
 	return (1,0);
     }
-    unless ($remotequeue ne "") {
+    if ($remotequeue eq "") {
 	$in->ask_warn('', N("Remote printer name missing!"));
 	return (1,1);
     }
@@ -666,8 +654,7 @@ complete => sub {
 }
 			      );
     #- make the DeviceURI from user input.
-    $printer->{currentqueue}{connect} = 
-        "lpd://$remotehost/$remotequeue";
+    $printer->{currentqueue}{connect} = "lpd://$remotehost/$remotequeue";
 
     #- LPD does not support filtered queues to a remote LPD server by itself
     #- It needs an additional program as "rlpr"
