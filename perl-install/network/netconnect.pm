@@ -167,8 +167,8 @@ If you don't want to use the auto detection, deselect the checkbox.
                         my @connections = 
                           (
                            [ #-PO: here, "(detected)" string will be appended to eg "ADSL connection"
-			     N("Normal modem connection"), N("(detected on port %s)", $netc->{autodetect}{modem}), "modem" ],
-                           [ N("Winmodem connection"),     N("(detected)"), "winmodem" ],
+                            N("Normal modem connection"), N("(detected on port %s)", $netc->{autodetect}{modem}), "modem" ],
+                           [ N("Winmodem connection"), N("(detected)"), "winmodem" ],
                            [ N("ISDN connection"),  N("(detected %s)", join(', ', map { $_->{description} } values %{$netc->{autodetect}{isdn}})), "isdn" ],
                            [ N("ADSL connection"),  N("(detected)"), "adsl" ],
                            [ N("Cable connection"), N("(detected)"), "cable" ],
@@ -841,7 +841,7 @@ You may also enter the IP address of the gateway if you have one."),
                             $up = connected();
                         }
                         $success = $up;
-                                           return $a ? "disconnect" : "end";
+                        return $a ? "disconnect" : "end";
                     }
                    },
                    disconnect => 
