@@ -1618,6 +1618,7 @@ sub set_pixmap {
                                $darea->{icon}->render_to_drawable($window, $darea->style->bg_gc('normal'),
                                                                   0, 0, 10, 10, -1, -1, 'none', 0, 0);
                                $darea->window->draw_layout($style->text_gc('normal'), $height + 20, 25, $darea->{layout});
+                               1;
                            });
 }
 
