@@ -15,21 +15,20 @@ int pthread_create (pthread_t *thread, const pthread_attr_t *attr,
   __THREAD_INIT();
 
   if (start_routine==0) {
-    (*(__errno_location()))=EINVAL;
-    return -1;
+    return EINVAL;
   }
 
   td = __thread_get_free();
 
   if (td) {
+    td->go.__spinlock=PTHREAD_SPIN_LOCKED;
     if (!(attr)) {
       pthread_attr_init(&default_attr);
       attr=&default_attr;
     }
 
     if ((td->policy!=SCHED_OTHER)&&(td->priority==0)) {
-      (*(__errno_location()))=EINVAL;
-      return -1;
+      return EINVAL;
     }
 
     if (attr->__inheritsched==PTHREAD_INHERIT_SCHED) {
@@ -48,14 +47,17 @@ int pthread_create (pthread_t *thread, const pthread_attr_t *attr,
 
     td->stack_size	= attr->__stacksize;
 
-    if (!(td->stack_addr)) {
+    if (!(attr->__stackaddr)) {
       char *stack=(char*)malloc(td->stack_size);
       if (!(stack)) {
-	(*(__errno_location()))=EINVAL;
-	return -1;
+	return EINVAL;
       }
       td->stack_begin	= stack;
+#ifdef __parisc__
+      td->stack_addr	= stack;
+#else
       td->stack_addr	= stack+td->stack_size;
+#endif
     } else {
       td->stack_begin	= 0;
       td->stack_addr	= attr->__stackaddr;
@@ -65,12 +67,15 @@ int pthread_create (pthread_t *thread, const pthread_attr_t *attr,
 
     if (ret>1)
       *thread=ret;
-    else
+    else {
+      ++td->exited;	/* mark as exited */
       __thread_cleanup(td);
+      if (ret<0) return (*(__errno_location()));
+      return EAGAIN;
+    }
   }
   else
-    (*(__errno_location()))=EAGAIN;
+    return EAGAIN;
 
-  if (ret<2) return -1;
-  return ret;
+  return 0;
 }

@@ -1,13 +1,33 @@
+
 #include <dietfeatures.h>
 
 .text
+.global __unified_syscall_256
+.type __unified_syscall_256,@function
+__unified_syscall_256:
+	movzwl %ax,%eax
+	jmp .L1
+.L2:
+.size __unified_syscall_256,.L2-__unified_syscall_256
+.weak exit
+exit:
+.global _exit
+.type	_exit,@function
+_exit:
+	movb	$1,%al
 .global __unified_syscall
+.type	__unified_syscall,@function
 __unified_syscall:
+.size _exit,__unified_syscall-_exit
 	movzbl	%al, %eax
+.L1:
 	push	%edi
 	push	%esi
 	push	%ebx
 	movl	%esp,%edi
+	/* we use movl instead of pop because otherwise a signal would
+	   destroy the stack frame and crash the program, although it
+	   would save a few bytes. */
 	movl	0x10(%edi),%ebx
 	movl	0x14(%edi),%ecx
 	movl	0x18(%edi),%edx
@@ -16,19 +36,24 @@ __unified_syscall:
 	int	$0x80
 	cmp	$-124,%eax
 	jbe	.Lnoerror
-#ifdef WANT_THREAD_SAVE
+	neg	%eax
+#ifdef WANT_THREAD_SAFE
 	movl	%eax,%ebx
 	call	__errno_location
-	neg	%ebx
 	movl	%ebx,(%eax)
+	orl	$-1,%eax
 #else
-	neg	%eax
 	mov	%eax,errno
+	sbb	%eax,%eax               # eax = eax - eax - CY = -1
 #endif
-	xor	%eax,%eax
-	dec	%eax
 .Lnoerror:
 	pop	%ebx
 	pop	%esi
 	pop	%edi
+
+/* here we go and "reuse" the return for weak-void functions */
+#include "dietuglyweaks.h"
+
 	ret
+.L3:
+.size __unified_syscall,.L3-__unified_syscall

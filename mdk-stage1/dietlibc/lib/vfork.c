@@ -1,6 +1,4 @@
-#include <linux/types.h>
 #include <unistd.h>
 
-pid_t vfork(void) {
-  return fork();
-}
+pid_t vfork() { return fork(); }
+

@@ -1,24 +1,38 @@
 # local "test" make file
 
-SRC = $(wildcard *.c) test/test.c
+CC  = gcc
+DCC = diet $(CC)
+
+SRC = $(wildcard *.c) # test/test.c
 OBJ = _dl_jump.o $(SRC:.c=.o)
 
-#CFLAGS = -Wall -O2
-CFLAGS = -g
+#CFLAGS = -Wall -D__OD_CLEAN_ROOM -DNODIETREF -fPIC -g -O
+CFLAGS = -Wall -O2 -D__OD_CLEAN_ROOM -DNODIETREF -fPIC -frerun-loop-opt -fschedule-insns2 $(DEB) # -fomit-frame-pointer
 
 %.o : %.S
-	$(HOME)/bin/diet gcc $(CFLAGS) -c -o $@ $^
+	$(DCC) $(CFLAGS) -c -o $@ $^
 
 %.o : %.c
-	$(HOME)/bin/diet gcc $(CFLAGS) -c -o $@ $^
+	$(DCC) $(CFLAGS) -c -o $@ $^
 
-all: test.out
+it: t.out
 
-test.g: test.c
+a.out: t.out
+	gcc -O -g test/a.c t.out -L/opt/diet/lib-i386 -lc -lgcc -o $@ -Wl,-dynamic-linker=`pwd`/t.out -nostdlib
+
+t.out: _dl_main.o
+	ld -shared -o $@ $? -soname=libdl.so
+
+all: test.out libdl.a
+
+libdl.a: $(OBJ)
+	ar cru $@ $^
+
+test.g: test/test.c
 	gcc -o $@ $^ -ldl
 
-test.out: $(OBJ)
-	$(HOME)/bin/diet gcc -o $@ $^
+test.out: $(OBJ) test/test.o
+	diet gcc -o $@ $^
 
 clean:
 	$(RM) *.o *.a *.out *~ # *.so

@@ -46,14 +46,11 @@ static char sccsid[] =
 #include <rpc/auth.h>
 #define MAX_MARSHEL_SIZE 20
 
-/*
- * Authenticator operations routines
- */
 static void authnone_verf();
-static void authnone_destroy();
-static bool_t authnone_marshal();
 static bool_t authnone_validate();
 static bool_t authnone_refresh();
+static void authnone_destroy();
+static bool_t authnone_marshal(AUTH *client, XDR *xdrs);
 
 static struct auth_ops ops = {
 	authnone_verf,
@@ -66,7 +63,7 @@ static struct auth_ops ops = {
 static struct authnone_private {
 	AUTH no_client;
 	char marshalled_client[MAX_MARSHEL_SIZE];
-	u_int mcnt;
+	unsigned int mcnt;
 } *authnone_private;
 
 AUTH *authnone_create()
@@ -86,7 +83,7 @@ AUTH *authnone_create()
 		ap->no_client.ah_ops = &ops;
 		xdrs = &xdr_stream;
 		xdrmem_create(xdrs, ap->marshalled_client,
-					  (u_int) MAX_MARSHEL_SIZE, XDR_ENCODE);
+					  (unsigned int) MAX_MARSHEL_SIZE, XDR_ENCODE);
 		(void) xdr_opaque_auth(xdrs, &ap->no_client.ah_cred);
 		(void) xdr_opaque_auth(xdrs, &ap->no_client.ah_verf);
 		ap->mcnt = XDR_GETPOS(xdrs);
@@ -126,3 +123,4 @@ static bool_t authnone_refresh()
 static void authnone_destroy()
 {
 }
+

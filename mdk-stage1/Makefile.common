@@ -32,6 +32,13 @@ endif
 ifeq (ppc, $(ARCH))
 L = GLIBC
 endif
+ifeq (x86_64, $(ARCH))
+#L = GLIBC
+endif
+
+ifeq (DIETLIBC, $(L))
+DIET = $(top_dir)/dietlibc/bin-$(ARCH)/diet
+endif
 
 
  #- flags used by all stuff
@@ -46,11 +53,11 @@ GLIBC_INCLUDES = -I. -I$(top_dir)/bzlib
 INCLUDES = $($(L)_INCLUDES)
 
 GLIBC_LDFLAGS_STAGE1 = -static
-DIETLIBC_LDFLAGS_STAGE1 = -nostdlib $(top_dir)/dietlibc/bin-$(ARCH)/start.o
+DIETLIBC_LDFLAGS_STAGE1 = -nostdlib
 LDFLAGS_STAGE1 = $($(L)_LDFLAGS_STAGE1)
 
 GLIBC_LIBC =
-DIETLIBC_LIBC = $(top_dir)/dietlibc/bin-$(ARCH)/dietlibc.a
+DIETLIBC_LIBC = 
 STAGE1_LIBC = $($(L)_LIBC)
 
 STRIPCMD = strip -R .note -R .comment

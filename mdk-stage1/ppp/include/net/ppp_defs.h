@@ -97,7 +97,7 @@
  */
 
 #if !defined(__BIT_TYPES_DEFINED__) && !defined(_BITYPES) \
- && !defined(__FreeBSD__) && (NS_TARGET < 40)
+ && !defined(__FreeBSD__) && (NS_TARGET < 40) && !defined(__dietlibc__)
 #ifdef	UINT32_T
 typedef UINT32_T	u_int32_t;
 #else

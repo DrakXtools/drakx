@@ -35,6 +35,7 @@
 #include <sys/wait.h>
 #include <linux/unistd.h>
 #include <sys/select.h>
+#include <sys/ioctl.h>
 
 #ifndef SOCK_STREAM
 #define SOCK_STREAM 1

@@ -22,8 +22,6 @@
  * Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
 
-#ident "$Id$"
-
 #include <string.h>
 #include <assert.h>
 #include <stdlib.h>
@@ -94,15 +92,15 @@ typedef struct _hppa64_file_t
  *     e8 20 d0 00     bve (r1)
  *     53 7b 00 30     ldd 18(dp),dp
  *
- * We need a different stub for millicode calls, which doesn't screw
- * dp:
+ * We need a different stub for millicode calls, which doesn't depend on
+ * or modify dp:
  *
- *     53 61 00 00     ldd 0(dp),r1
- *     			R_PARISC_LTOFF14R <.got entry offset from dp>
+ *     20 20 00 00     ldil 0,r1
+ *			R_PARISC_DIR21L <addr of kernels opd entry>
+ *     34 21 00 00     ldo 0(r1),r1
+ *			R_PARISC_DIR14R <addr of kernels opd entry>
  *     50 21 00 20     ldd 10(r1),r1
- *     e8 20 d0 00     bve (r1)
- *     08 00 02 40     nop
- *
+ *     e8 20 d0 02     bve,n (r1)
  */
 
 /* NOTE: to keep the code cleaner we make all stubs the same size.
@@ -120,10 +118,10 @@ unsigned char hppa64_stub_extern[] =
 
 unsigned char hppa64_stub_millicode[] =
 {
-       0x53, 0x61, 0x00, 0x00,
+       0x20, 0x20, 0x00, 0x00,
+       0x34, 0x21, 0x00, 0x00,
        0x50, 0x21, 0x00, 0x20,
-       0xe8, 0x20, 0xd0, 0x00,
-       0x08, 0x00, 0x02, 0x40,
+       0xe8, 0x20, 0xd0, 0x02,
 };
 
 /*======================================================================*/
@@ -361,6 +359,7 @@ arch_create_got(struct obj_file *f)
 		need_stub = TRUE;
 		break;
 	    case R_PARISC_DIR64:
+	    case R_PARISC_SEGREL32:
 		break;
 	    case R_PARISC_FPTR64:
 		/* This is a simple OPD entry (only created for local symbols,
@@ -372,26 +371,10 @@ arch_create_got(struct obj_file *f)
 
 	    if (need_got || need_opd || need_stub)
 	    {
-		Elf64_Sym     *extsym;
 		hppa64_symbol_t *isym;
-		const char    *name;
 		int            local;
-		unsigned long  symndx;
 
-		symndx = ELF64_R_SYM(rel->r_info);
-		extsym = &symtab[symndx];
-		if (ELF64_ST_BIND(extsym->st_info) == STB_LOCAL)
-		{
-		    isym = (hppa64_symbol_t *) f->local_symtab[symndx];
-		}
-		else
-		{
-		    if (extsym->st_name)
-			name = strtab + extsym->st_name;
-		    else
-			name = f->sections[extsym->st_shndx]->name;
-		    isym = (hppa64_symbol_t *)obj_find_symbol(f, name);
-		}
+		obj_find_relsym(isym, f, f, rel, symtab, strtab);
 		local = isym->root.secidx <= SHN_HIRESERVE;
 
 		if (need_stub)
@@ -574,15 +557,23 @@ arch_apply_relocation(struct obj_file *f,
 		     */
 		    unsigned char *stub;
 
-		    if (!strncmp(isym->root.name, "$$", 2))
+		    if (!strncmp(isym->root.name, "$$", 2)) {
 			stub = hppa64_stub_millicode;
-		    else
+			memcpy((Elf64_Addr *)(hfile->stub->contents + se->offset),
+					stub, SIZEOF_STUB);
+			v = (Elf64_Addr)isym->root.value;
+			ret = patch_21l(v, (Elf64_Word *)(hfile->stub->contents + se->offset));
+			if (ret == obj_reloc_ok)
+			    ret = patch_14r(v, (Elf64_Word *)(hfile->stub->contents + se->offset + 4));
+		    }
+		    else {
 			stub = hppa64_stub_extern;
-		    se->reloc_done = TRUE;
 		    memcpy((Elf64_Addr *)(hfile->stub->contents + se->offset),
 	    			stub, SIZEOF_STUB);
 		    v = (Elf64_Addr)(hfile->got->header.sh_addr + ge->offset) - gp;
 		    ret = patch_14r2(v, (Elf64_Word *)(hfile->stub->contents + se->offset));
+		}
+		    se->reloc_done = TRUE;
 		}
 		v = hfile->stub->header.sh_addr + se->offset;
 	    }
@@ -595,6 +586,11 @@ arch_apply_relocation(struct obj_file *f,
 	{
 	    loc[0] = v >> 32;
 	    loc[1] = v;
+	}
+	break;
+    case R_PARISC_SEGREL32:
+	{
+	    loc[0] = v - f->baseaddr;
 	}
 	break;
     case R_PARISC_FPTR64:

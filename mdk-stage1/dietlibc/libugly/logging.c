@@ -1,3 +1,4 @@
+#include <errno.h>
 #include "dietfeatures.h"
 
 #include <stdio.h>
@@ -5,7 +6,6 @@
 #include <stdarg.h>
 #include <errno.h>
 #include <unistd.h>
-#include <asm/socket.h>
 #include <fcntl.h>
 #include <syslog.h>
 #include <string.h>
@@ -14,9 +14,9 @@
 #include <signal.h>
 
 #define _PATH_CONSOLE	"/dev/console"
-#define BUF_SIZE 512	/* messagebuffer size (>= 200) */
+#define BUF_SIZE 2048	/* messagebuffer size (>= 200) */
 
-#define MAX_LOGTAG 80
+#define MAX_LOGTAG 1000
 
 /* those have to be global *sigh* */
 static volatile int	connected = 0;  /* have done connect */
@@ -37,13 +37,15 @@ static void closelog_intern(void)
   connected = 0;
 }
 
-void closelog(void)
+void __libc_closelog(void);
+void __libc_closelog(void)
 {
   closelog_intern();
 
   LogTag[0]=0;
   LogType = SOCK_DGRAM;
 }
+void closelog(void) __attribute__((weak,alias("__libc_closelog")));
 
 static void openlog_intern(int option, int facility)
 {
@@ -63,27 +65,15 @@ static void openlog_intern(int option, int facility)
       }
     }
     if ((LogFile != -1) && !connected) {
-#ifdef WANT_THREAD_SAFE
-      int old_errno = (*(__errno_location()));
-#else
       int old_errno=errno;
-#endif
       if(connect(LogFile, &SyslogAddr, sizeof(SyslogAddr)) == -1) {
-#ifdef WANT_THREAD_SAFE
-	int saved_errno = (*(__errno_location()));
-#else
 	int saved_errno=errno;
-#endif
 	close(LogFile);
 	LogFile = -1;
 	if((LogType == SOCK_DGRAM) && (saved_errno == EPROTOTYPE)) {
 	  /* retry with SOCK_STREAM instead of SOCK_DGRAM */
 	  LogType = SOCK_STREAM;
-#ifdef WANT_THREAD_SAFE
-	  (*(__errno_location()))=old_errno;
-#else
 	  errno=old_errno;
-#endif
 	  continue;
 	}
       }
@@ -94,7 +84,8 @@ static void openlog_intern(int option, int facility)
 }
 
 /* has to be secured against multiple, simultanious call's in threaded environment */
-void openlog(const char *ident, int option, int facility)
+void __libc_openlog(const char *ident, int option, int facility);
+void __libc_openlog(const char *ident, int option, int facility)
 {
   if (ident) {
     strncpy(LogTag,ident,MAX_LOGTAG);
@@ -102,6 +93,7 @@ void openlog(const char *ident, int option, int facility)
   }
   openlog_intern(option, facility);
 }
+void openlog(const char *ident, int option, int facility) __attribute__((weak,alias("__libc_openlog")));
 
 int setlogmask(int mask)
 {
@@ -110,7 +102,8 @@ int setlogmask(int mask)
   return old;
 }
 
-void vsyslog(int priority, const char *format, va_list arg_ptr)
+void __libc_vsyslog(int priority, const char *format, va_list arg_ptr);
+void __libc_vsyslog(int priority, const char *format, va_list arg_ptr)
 {
   char buffer[BUF_SIZE];
   char time_buf[20];
@@ -122,11 +115,7 @@ void vsyslog(int priority, const char *format, va_list arg_ptr)
   int sigpipe;
   struct sigaction action, oldaction;
   struct sigaction *oldaction_ptr = NULL;
-#ifdef WANT_THREAD_SAFE
-  int saved_errno = (*(__errno_location()));
-#else
   int saved_errno = errno;
-#endif
 
   /* check for invalid priority/facility bits */
   if (priority & ~(LOG_PRIMASK|LOG_FACMASK)) {
@@ -156,11 +145,7 @@ void vsyslog(int priority, const char *format, va_list arg_ptr)
     buflen = 41;
   }
   else {
-#ifdef WANT_THREAD_SAFE
-    (*(__errno_location()))=saved_errno;
-#else
     errno=saved_errno;
-#endif
     buflen = vsnprintf(buffer+headerlen, BUF_SIZE - headerlen, format, arg_ptr);
   }
   if (LogStat & LOG_PERROR) {
@@ -201,6 +186,7 @@ void vsyslog(int priority, const char *format, va_list arg_ptr)
   if (sigpipe == 0)
     sigaction(SIGPIPE, &oldaction, (struct sigaction *) NULL);
 }
+void vsyslog(int priority, const char *format, va_list arg_ptr) __attribute__((weak,alias("__libc_vsyslog")));
 
 void syslog(int priority, const char *format, ...)
 {

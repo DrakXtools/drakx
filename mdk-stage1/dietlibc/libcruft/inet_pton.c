@@ -1,6 +1,9 @@
 #include <stdlib.h>
+#include <sys/socket.h>
 #include <arpa/inet.h>
 #include <errno.h>
+#include <string.h>
+#include "dietfeatures.h"
 
 static unsigned int scan_ip6(const char *s,char ip[16])
 {
@@ -9,8 +12,8 @@ static unsigned int scan_ip6(const char *s,char ip[16])
   unsigned long u;
 
   char suffix[16];
-  int prefixlen=0;
-  int suffixlen=0;
+  unsigned int prefixlen=0;
+  unsigned int suffixlen=0;
 
   for (i=0; i<16; i++) ip[i]=0;
 
@@ -26,7 +29,7 @@ static unsigned int scan_ip6(const char *s,char ip[16])
     }
     {
       char *tmp;
-      u=strtol(s,&tmp,16);
+      u=strtoul(s,&tmp,16);
       i=tmp-s;
     }
 
@@ -60,7 +63,7 @@ static unsigned int scan_ip6(const char *s,char ip[16])
       i=tmp-s;
     }
     if (!i) {
-      len--;
+      if (*s) len--;
       break;
     }
     if (suffixlen+prefixlen<=12 && s[i]=='.') {
@@ -83,12 +86,14 @@ static unsigned int scan_ip6(const char *s,char ip[16])
 }
 
 int inet_pton(int AF, const char *CP, void *BUF) {
+  int len;
   if (AF==AF_INET) {
     if (!inet_aton(CP,(struct in_addr*)BUF))
       return 0;
   } else if (AF==AF_INET6) {
-    if (CP[scan_ip6(CP,BUF)])
-      return 0;
+    if (CP[len=scan_ip6(CP,BUF)])
+      if (CP[len]!='%')	/* allow "fe80::220:e0ff:fe69:ad92%eth0" */
+	return 0;
   } else {
     errno=EAFNOSUPPORT;
     return -1;

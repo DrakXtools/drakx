@@ -13,8 +13,7 @@
 #define	_PATH_SERVICES		"/etc/services"
 
 /* Description of data base entry for a single service.  */
-struct servent
-{
+struct servent {
   char *s_name;			/* Official service name.  */
   char **s_aliases;		/* Alias list.  */
   int s_port;			/* Port number.  */
@@ -22,14 +21,24 @@ struct servent
 };
 
 extern void endservent (void) __THROW;
-extern struct servent *getservent (void) __THROW;
+extern void setservent(int stayopen) __THROW;
+
+extern int getservent_r(struct servent *res, char *buf, size_t buflen,
+			 struct servent **res_sig) __THROW;
+extern int getservbyname_r(const char* name,const char* proto,
+			   struct servent *res, char *buf, size_t buflen,
+			   struct servent **res_sig) __THROW;
+extern int getservbyport_r(int port,const char* proto,
+			   struct servent *res, char *buf, size_t buflen,
+			   struct servent **res_sig) __THROW;
+
+extern struct servent *getservent(void) __THROW;
 extern struct servent *getservbyname (const char *__name,
 				      const char *__proto) __THROW;
 extern struct servent *getservbyport (int __port, const char *__proto)
      __THROW;
 
-struct hostent
-{
+struct hostent {
   char *h_name;			/* Official name of host.  */
   char **h_aliases;		/* Alias list.  */
   int h_addrtype;		/* Host address type.  */
@@ -40,6 +49,7 @@ struct hostent
 
 extern void endhostent (void) __THROW;
 extern struct hostent *gethostent (void) __THROW;
+extern struct hostent *gethostent_r (char* buf,int len) __THROW;
 extern struct hostent *gethostbyaddr (const void *__addr, socklen_t __len,
 				      int __type) __THROW;
 extern struct hostent *gethostbyname (const char *__name) __THROW;
@@ -55,9 +65,14 @@ extern int gethostbyname_r(const char* NAME, struct hostent* RESULT_BUF,char* BU
 #define TRY_AGAIN 2
 #define NO_RECOVERY 3
 #define NO_ADDRESS 4
+#define NO_DATA 5
 
 extern int gethostbyaddr_r(const char* addr, size_t length, int format,
 		    struct hostent* result, char *buf, size_t buflen,
+		    struct hostent **RESULT, int *h_errnop) __THROW;
+
+int gethostbyname2_r(const char* name, int AF, struct hostent* result,
+		    char *buf, size_t buflen,
 		    struct hostent **RESULT, int *h_errnop) __THROW;
 
 struct protoent {
@@ -72,19 +87,38 @@ struct protoent *getprotobynumber(int proto) __THROW;
 void setprotoent(int stayopen) __THROW;
 void endprotoent(void) __THROW;
 
+int getprotoent_r(struct protoent *res, char *buf, size_t buflen,
+		  struct protoent **res_sig) __THROW;
+int getprotobyname_r(const char* name,
+		     struct protoent *res, char *buf, size_t buflen,
+		     struct protoent **res_sig) __THROW;
+int getprotobynumber_r(int proto,
+		      struct protoent *res, char *buf, size_t buflen,
+		      struct protoent **res_sig) __THROW;
 
-/* Description of data base entry for a single network.  NOTE: here a
-   poor assumption is made.  The network number is expected to fit
-   into an unsigned long int variable.  */
-struct netent
-{
-  char *n_name;			/* Official name of network.  */
-  char **n_aliases;		/* Alias list.  */
-  int n_addrtype;		/* Net address type.  */
-  uint32_t n_net;		/* Network number.  */
+
+void sethostent(int stayopen) __THROW;
+
+/* dummy */
+extern int h_errno;
+
+struct netent {
+  char    *n_name;          /* official network name */
+  char    **n_aliases;      /* alias list */
+  int     n_addrtype;       /* net address type */
+  unsigned long int n_net;  /* network number */
 };
 
-extern struct netent *getnetbyname (__const char *__name) __THROW;
+struct netent *getnetbyaddr(unsigned long net, int type) __THROW;
+void endnetent(void) __THROW;
+void setnetent(int stayopen) __THROW;
+struct netent *getnetbyname(const char *name) __THROW;
+struct netent *getnetent(void) __THROW;
 
+extern const char *hstrerror (int err_num) __THROW;
+void herror(const char *s) __THROW;
+
+#define NI_MAXHOST 1025
+#define NI_MAXSERV 32
 
 #endif

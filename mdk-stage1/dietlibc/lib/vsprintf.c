@@ -1,10 +1,12 @@
 #include <stdarg.h>
-#include <linux/types.h>
+#include <sys/types.h>
 #include <stdlib.h>
-
-int vsnprintf (char *str,size_t size,const char *format, va_list arg_ptr);
+#include <stdio.h>
+#include "dietwarning.h"
 
 int vsprintf(char *dest,const char *format, va_list arg_ptr)
 {
-  return vsnprintf(dest,1000000,format,arg_ptr);
+  return vsnprintf(dest,(size_t)-1,format,arg_ptr);
 }
+
+link_warning("vsprintf","warning: Avoid *sprintf; use *snprintf. It is more secure.")

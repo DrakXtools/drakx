@@ -1,6 +1,6 @@
+#include <sys/socket.h>
 #include <arpa/inet.h>
-
-extern char *inet_ntoa_r(struct in_addr in,char* buf);
+#include <string.h>
 
 static const unsigned char V4mappedprefix[12]={0,0,0,0,0,0,0,0,0,0,0xff,0xff};
 
@@ -17,8 +17,7 @@ static int fmt_xlong(char* s,unsigned int i) {
   return s-bak+1;
 }
 
-unsigned int fmt_ip6(char *s,const char ip[16])
-{
+static unsigned int fmt_ip6(char *s,const char ip[16]) {
   unsigned int len;
   unsigned int i;
   unsigned int temp;
@@ -53,13 +52,16 @@ unsigned int fmt_ip6(char *s,const char ip[16])
       }
     }
   }
+  if (compressing) {
+    *s++=':'; ++len;
+  }
   *s=0;
   return len;
 }
 
 const char* inet_ntop(int AF, const void *CP, char *BUF, size_t LEN) {
   char buf[100];
-  int len;
+  size_t len;
   if (AF==AF_INET) {
     inet_ntoa_r(*(struct in_addr*)CP,buf);
     len=strlen(buf);

@@ -1,6 +1,7 @@
+#include <time.h>
 
-/* seconds per month -- nonleap! */
-const unsigned int __spm[12] =
+/* days per month -- nonleap! */
+const short __spm[12] =
   { 0,
     (31),
     (31+28),

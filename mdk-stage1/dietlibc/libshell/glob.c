@@ -24,6 +24,7 @@
 #include <fnmatch.h>
 #include <dirent.h>
 #include <pwd.h>
+#include "dietfeatures.h"
 
 #include <glob.h>
 
@@ -38,7 +39,7 @@ static int cmp_func(const void * a, const void * b)
 		return 1;
 	if (s2 == NULL)
 		return -1;
-	return strcmp(s1, s2);
+	return strcoll(s1, s2);
 }
 
 
@@ -47,6 +48,38 @@ static int cmp_func(const void * a, const void * b)
    The GLOB_NOSORT bit in FLAGS is ignored.  No sorting is ever done.
    The GLOB_APPEND flag is assumed to be set (always appends).
    Prepends DIRECTORY in constructed PGLOB. */
+static void close_dir_keep_errno(DIR* dp) {
+  int save = errno;
+  if (dp)
+    closedir (dp);
+  errno=save;
+}
+
+static int add_entry(const char* name,glob_t *pglob,int* nfound) {
+  pglob->gl_pathv	= (char **) realloc(pglob->gl_pathv,
+			  (pglob->gl_pathc + pglob->gl_offs + 2)
+			  * sizeof (char *));
+  if (pglob->gl_pathv == NULL)
+    return 1;
+  pglob->gl_pathv[pglob->gl_offs + pglob->gl_pathc] = strdup(name);
+  pglob->gl_pathv[pglob->gl_offs + pglob->gl_pathc + 1] = NULL;
+  pglob->gl_pathc++;
+  (*nfound)++;
+  return 0;
+}
+
+static void build_fullname(char * fullname, const char * directory, const char * filename) {
+  char *dest=fullname;
+  if (directory[0]=='/' && !directory[1]) {
+    *dest='/'; ++dest;
+  } else if (directory[0]!='.' || directory[1]) {
+    strcpy(dest,directory);
+    dest=strchr(dest,0);
+    *dest='/'; ++dest;
+  }
+  strcpy(dest,filename);
+}
+
 static int glob_in_dir(const char *pattern, const char *directory, int flags,
 		       int errfunc(const char * epath, int eerrno),
 		       glob_t *pglob)
@@ -56,33 +89,6 @@ static int glob_in_dir(const char *pattern, const char *directory, int flags,
 
 	int i;
 	char * ptr;
-
-	void close_dir_keep_errno(void) {
-		int save = errno;
-		if (dp)
-			closedir (dp);
-		__set_errno(save);
-	}
-	int add_entry(const char * name) {
-		pglob->gl_pathv	= (char **) realloc(pglob->gl_pathv,
-						    (pglob->gl_pathc + pglob->gl_offs + 2)
-						    * sizeof (char *));
-		if (pglob->gl_pathv == NULL)
-			return 1;
-		pglob->gl_pathv[pglob->gl_offs + pglob->gl_pathc] = strdup(name);
-		pglob->gl_pathv[pglob->gl_offs + pglob->gl_pathc + 1] = NULL;
-		pglob->gl_pathc++;
-		nfound++;
-		return 0;
-	}
-	void build_fullname(char * fullname, int fullnamesize, const char * directory, const char * filename) {
-		if (!strcmp(directory, "/"))
-			snprintf(fullname, fullnamesize, "/%s", filename);
-		else if (!strcmp(directory, "."))
-			snprintf(fullname, fullnamesize, "%s", filename);
-		else
-			snprintf(fullname, fullnamesize, "%s/%s", directory, filename);
-	}
 
 	if (!dp) {
 		if (errno != ENOTDIR
@@ -96,19 +102,19 @@ static int glob_in_dir(const char *pattern, const char *directory, int flags,
 		while ((ep = readdir(dp))) {
 			i = strlen(directory) + strlen(ep->d_name) + 2;
 			ptr = (char *) alloca(i);
-			build_fullname(ptr, i, directory, ep->d_name);
+			build_fullname(ptr, directory, ep->d_name);
 			if (flags & GLOB_ONLYDIR) {
 				struct stat statr;
 				if (stat(ptr, &statr) || !S_ISDIR(statr.st_mode))
 					continue;
 			}
 			if (fnmatch(pattern, ep->d_name, fnm_flags) == 0)
-				if (add_entry(ptr))
+				if (add_entry(ptr,pglob,&nfound))
 					goto memory_error;
 		}
 	}
 
-	close_dir_keep_errno();
+	close_dir_keep_errno(dp);
 
 	if (nfound != 0)
 		pglob->gl_flags = flags;
@@ -116,8 +122,8 @@ static int glob_in_dir(const char *pattern, const char *directory, int flags,
 		/* nfound == 0 */
 		i = strlen(directory) + strlen(pattern) + 2;
 		ptr = (char *) alloca(i);
-		build_fullname(ptr, i, directory, pattern);
-		if (add_entry(ptr))
+		build_fullname(ptr, directory, pattern);
+		if (add_entry(ptr,pglob,&nfound))
 			goto memory_error;
 	}
 
@@ -127,7 +133,7 @@ static int glob_in_dir(const char *pattern, const char *directory, int flags,
 	/* We're in trouble since we can't free the already allocated memory. [allocated from strdup(filame)]
 	 * Well, after all, when malloc returns NULL we're already in a bad mood, and no doubt the
 	 * program will manage to segfault by itself very soon :-). */
-	close_dir_keep_errno();
+	close_dir_keep_errno(dp);
 	return GLOB_NOSPACE;
 }
 
@@ -146,7 +152,7 @@ int glob(const char *pattern, int flags, int errfunc(const char * epath, int eer
 	char * ptr, * ptr2;
 
 	if (pattern == NULL || pglob == NULL || (flags & ~__GLOB_FLAGS) != 0) {
-		__set_errno (EINVAL);
+		errno=EINVAL;
 		return -1;
 	}
 
@@ -196,10 +202,10 @@ int glob(const char *pattern, int flags, int errfunc(const char * epath, int eer
 	if (filename == NULL) {
 		/* We have no '/' in the pattern */
 		filename = pattern_;
-		dirname = ".";
+		dirname = (char*)".";
 	} else if (filename == pattern_) {
 		/* "/pattern".  */
-		dirname = "/";
+		dirname = (char*)"/";
 		filename++;
 	} else {
 		dirname = pattern_;
@@ -293,13 +299,13 @@ int glob(const char *pattern, int flags, int errfunc(const char * epath, int eer
 					}
 
 					/* okay now we add the new entry */
-					k = strlen(dirs.gl_pathv[i]) + 1 + strlen(filename) + 1;
+					k = strlen(dirs.gl_pathv[i]) + strlen(filename) + 2;
 					if ((pglob->gl_pathv[j] = malloc(k)) == NULL) {
 						globfree(&dirs);
 						globfree(pglob);
 						return GLOB_NOSPACE;
 					}
-					snprintf(pglob->gl_pathv[j], k, "%s/%s", dirs.gl_pathv[i], filename);
+					build_fullname(pglob->gl_pathv[j], dirs.gl_pathv[i], filename);
 					pglob->gl_pathc++;
 					pglob->gl_pathv[j+1] = NULL;
 				}

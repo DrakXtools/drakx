@@ -51,7 +51,7 @@ static bool_t xdrstdio_getlong();
 static bool_t xdrstdio_putlong();
 static bool_t xdrstdio_getbytes();
 static bool_t xdrstdio_putbytes();
-static u_int xdrstdio_getpos();
+static unsigned int xdrstdio_getpos();
 static bool_t xdrstdio_setpos();
 static int32_t *xdrstdio_inline();
 static void xdrstdio_destroy();
@@ -70,6 +70,7 @@ static struct xdr_ops xdrstdio_ops = {
 	xdrstdio_destroy			/* destroy stream */
 };
 
+
 /*
  * Initialize a stdio xdr stream.
  * Sets the xdr stream handle xdrs for use on the stream file.
@@ -83,7 +84,7 @@ enum xdr_op op;
 
 	xdrs->x_op = op;
 	xdrs->x_ops = &xdrstdio_ops;
-	xdrs->x_private = (caddr_t) file;
+	xdrs->x_private = (char*) file;
 	xdrs->x_handy = 0;
 	xdrs->x_base = 0;
 }
@@ -104,7 +105,7 @@ XDR *xdrs;
 register long *lp;
 {
 
-	if (fread((caddr_t) lp, sizeof(long), 1, (FILE *) xdrs->x_private) !=
+	if (fread((char*) lp, sizeof(long), 1, (FILE *) xdrs->x_private) !=
 		1) return (FALSE);
 
 #ifndef mc68000
@@ -123,7 +124,7 @@ long *lp;
 
 	lp = &mycopy;
 #endif
-	if (fwrite((caddr_t) lp, sizeof(long), 1, (FILE *) xdrs->x_private) !=
+	if (fwrite((char*) lp, sizeof(long), 1, (FILE *) xdrs->x_private) !=
 		1) return (FALSE);
 
 	return (TRUE);
@@ -131,8 +132,8 @@ long *lp;
 
 static bool_t xdrstdio_getbytes(xdrs, addr, len)
 XDR *xdrs;
-caddr_t addr;
-u_int len;
+char* addr;
+unsigned int len;
 {
 
 	if ((len != 0)
@@ -143,8 +144,8 @@ u_int len;
 
 static bool_t xdrstdio_putbytes(xdrs, addr, len)
 XDR *xdrs;
-caddr_t addr;
-u_int len;
+char* addr;
+unsigned int len;
 {
 
 	if ((len != 0)
@@ -153,16 +154,16 @@ u_int len;
 	return (TRUE);
 }
 
-static u_int xdrstdio_getpos(xdrs)
+static unsigned int xdrstdio_getpos(xdrs)
 XDR *xdrs;
 {
 
-	return ((u_int) ftell((FILE *) xdrs->x_private));
+	return ((unsigned int) ftell((FILE *) xdrs->x_private));
 }
 
 static bool_t xdrstdio_setpos(xdrs, pos)
 XDR *xdrs;
-u_int pos;
+unsigned int pos;
 {
 
 	return ((fseek((FILE *) xdrs->x_private, (long) pos, 0) < 0) ?
@@ -171,7 +172,7 @@ u_int pos;
 
 static int32_t *xdrstdio_inline(xdrs, len)
 XDR *xdrs;
-u_int len;
+unsigned int len;
 {
 
 	/*
@@ -185,3 +186,4 @@ u_int len;
 	 */
 	return (NULL);
 }
+

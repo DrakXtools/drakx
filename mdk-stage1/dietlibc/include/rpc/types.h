@@ -52,10 +52,6 @@ typedef unsigned long rpcport_t;
 #      define  TRUE    (1)
 #endif
 
-#ifndef NULL
-#      define  NULL 0
-#endif
-
 #include <stdlib.h>		/* For malloc decl.  */
 #define mem_alloc(bsize)	malloc(bsize)
 #define mem_free(ptr, bsize)	free(ptr)
@@ -63,13 +59,23 @@ typedef unsigned long rpcport_t;
 #ifndef makedev /* ie, we haven't already included it */
 #include <sys/types.h>
 #endif
+
+# ifndef __dietlibc_u_char_defined
+typedef char* caddr_t;
+typedef uint32_t u_long;
+typedef unsigned char u_char;
+typedef unsigned short u_short;
+typedef unsigned int u_int;
+# define __dietlibc_u_char_defined
+#endif
+
 #include <sys/time.h>
 #include <sys/param.h>
 
 #include <netinet/in.h>
 
 #ifndef INADDR_LOOPBACK
-#define       INADDR_LOOPBACK         (u_long)0x7F000001
+#define       INADDR_LOOPBACK         0x7F000001UL
 #endif
 #ifndef MAXHOSTNAMELEN
 #define        MAXHOSTNAMELEN  64

@@ -1,5 +1,4 @@
 /* Machine-specific elf macros for i386 et al.  */
-#ident "$Id$"
 
 #define ELFCLASSM	ELFCLASS32
 #define ELFDATAM	ELFDATA2LSB

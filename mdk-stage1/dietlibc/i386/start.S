@@ -1,42 +1,51 @@
-#include "start.h"
+#include "dietfeatures.h"
+#include "PIC.h"
 
-#ifdef __i386__
 .text
-.globl _start
+.global _start
 _start:
-#if 0
-	popl	%ecx
-	movl	%esp, %esi
-	leal	4(%esp,%ecx,4),%eax
+#if 1
+	popl	%ecx			/* %ecx = argc */
+	movl	%esp,%esi		/* %esi = argv */
+	pushl	%ecx
 #else
-	movl (%esp),%ecx	/* %ecx = argc */
-	leal 4(%esp),%esi	/* %esi = argv */
-
-	leal 4(%esi,%ecx,4),%eax	/* eax = 4*ecx+4 = envp */
+	movl	(%esp),%ecx		/* %ecx = argc */
+	leal	4(%esp),%esi		/* %esi = argv */
 #endif
-	pushl %eax
-	pushl %esi
-	pushl %ecx
-	movl %eax,environ
+	leal	4(%esi,%ecx,4),%eax	/* %eax = envp = (4*ecx)+%esi+4 */
 
 #ifdef WANT_DYNAMIC
-/* in %edx we have the dynamic _fini ( register this if non null ) */
-	test	%edx, %edx
-	je	.Linit
+/* in %edx we have the ld.so dynamic _fini ( register this if non null ) */
 	push	%edx
-	call	atexit
-	pop	%edx
-.Linit:
-	call	_init
-	push	$_fini
-	call	atexit
-	pop	%edx
 #endif
 
-	call main
-	pushl %eax
-	call exit
-.Lfefe:
-	.size	 _start,.Lfefe-_start
+	pushl	%eax
+	pushl	%esi
+	pushl	%ecx
+	PIC_INIT			/* non-PIC: this is an empty line */
+	PUT_VAR %eax, environ, %ecx	/* non-PIC: movl %eax,environ */
+
+#ifdef PROFILING
+	pushl	$_etext
+	pushl	$.text
+	call	monitor
+	addl	$0x8, %esp
 #endif
+
+#ifdef WANT_DYNAMIC
+	call	_dyn_start
+#else
+	call	main
+#endif
+
+#ifdef PROFILING
+	pushl	%eax
+	call	_stop_monitor
+	popl	%eax
+#endif
+	pushl	%eax
+	call	exit
+	hlt	/* die now ! will ya ... */
+.Lstart:
+	.size	 _start,.Lstart-_start
 

@@ -1,7 +1,9 @@
 #include <ctype.h>
 
-int __isupper_ascii(int c) {
-  return (c>='A' && c<='Z');
+int __isupper_ascii ( int ch );
+int __isupper_ascii ( int ch )
+{
+    return (unsigned int)(ch - 'A') < 26u;
 }
 
-int isupper(int c) __attribute__((weak,alias("__isupper_ascii")));
+int isupper ( int ch ) __attribute__((weak,alias("__isupper_ascii")));

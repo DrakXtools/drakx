@@ -176,7 +176,7 @@ static enum return_type try_with_device(char *dev_name)
 	}
 
 	while (fgets(buf, sizeof(buf), f)) {
-		bzero(name, sizeof(name));
+		memset(name, 0, sizeof(name));
 		sscanf(buf, " %d %d %d %s", &major, &minor, &blocks, name);
 		if ((strstr(name, dev_name) == name) && (blocks > 1) && (name[strlen(dev_name)] != '\0')) {
 			const char * partition_type = detect_partition_type(name);

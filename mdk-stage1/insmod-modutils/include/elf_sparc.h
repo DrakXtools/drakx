@@ -1,5 +1,4 @@
 /* Machine-specific elf macros for the Sparc.  */
-#ident "$Id$"
 
 #define ELFCLASSM	ELFCLASS32
 #define ELFDATAM	ELFDATA2MSB

@@ -23,7 +23,7 @@
 
 // dietlibc can do hostname lookup, whereas glibc can't when linked statically :-(
 
-#ifdef __LIBC_DIETLIBC__
+#if defined(__dietlibc__)
 
 #include <unistd.h>
 #include <string.h>
@@ -67,15 +67,14 @@ char * mygethostbyaddr(char * ipnum)
 	struct hostent * host;
 	if (!inet_aton(ipnum, &in))
 		return NULL;
-	host = gethostbyaddr(&(in.s_addr), sizeof(in.s_addr), AF_INET);
+	host = gethostbyaddr(&(in.s_addr), sizeof(in.s_addr) /* INADDRSZ */, AF_INET);
 	if (host && host->h_name)
 		return host->h_name;
 	return NULL;
 }
 
-
-#else // __LIBC_DIETLIBC__
-
+#elif defined(__GLIBC__)
+  
 #include <alloca.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
@@ -209,5 +208,9 @@ int mygethostbyname(char * name, struct in_addr * addr) {
 		log_message("is-at %s", inet_ntoa(*addr));
 	return rc;
 }
+
+#else
+
+#error "Unsupported C library"
 
 #endif

@@ -1,22 +1,24 @@
 #include "dietfeatures.h"
 #include <unistd.h>
 #include <string.h>
+#include <stdio.h>
+
+#define _BSD_SOURCE
 #include <errno.h>
 
-extern char *sys_errlist[];
-extern int sys_nerr;
-extern int errno;
+extern const char  __sys_err_unknown [];
 
-void perror(const char *s) {
-  register char *message="[unknown error]";
-  write(2,s,strlen(s));
-  write(2,": ",2);
-  if (errno>=0 && errno<sys_nerr)
-#ifdef WANT_THREAD_SAFE
-    message=sys_errlist[*__errno_location()];
-#else
-    message=sys_errlist[errno];
-#endif
-  write(2,message,strlen(message));
-  write(2,"\n",1);
+void  perror ( const char* prepend )
+{
+    register const char* message = __sys_err_unknown;
+
+    if ( (unsigned int) errno < (unsigned int) __SYS_NERR )
+        message = sys_errlist [errno];
+
+    if (prepend) {
+      write ( 2, prepend, strlen(prepend) );
+      write ( 2, ": ", 2 );
+    }
+    write ( 2, message, strlen(message) );
+    write ( 2, "\n", 1 );
 }

@@ -20,39 +20,26 @@ include $(top_dir)/Makefile.common
 
 TARGETS = pppoe
 
-ifeq (DIETLIBC, $(L))
-TARGETS += pppoe-DIET
-endif
-
 BINTARGET = ../pppoe-bin
 
 
 all: $(TARGETS)
 
 clean:
-	rm -f *.o *.a $(BINTARGET) pppoe pppoe-DIET
+	rm -f *.o *.a $(BINTARGET) pppoe
 
 FLAGS = -Wall -Werror -Os -fomit-frame-pointer '-DPPPOE_PATH="/sbin/pppoe"' '-DPPPD_PATH="/sbin/pppd"' '-DVERSION="3.0-stg1"'
 
-
+ifeq (GLIBC, $(L))
+EXTRA_LDFLAGS = -static
+endif
 
 OBJS = pppoe.o if.o debug.o common.o ppp.o discovery.o
-OBJS-DIET = $(subst .o,-DIET.o,$(OBJS))
-
 
 pppoe: $(OBJS)
-	gcc -static -o $@ $^
-	$(STRIPCMD) $@
-	cp -f $@ $(BINTARGET)
-
-pppoe-DIET: $(OBJS-DIET)
-	gcc $(DIETLIBC_LDFLAGS_STAGE1) -o $@ $^ $(DIETLIBC_LIBC)
+	$(DIET) gcc -o $@ $^ $(EXTRA_LDFLAGS)
 	$(STRIPCMD) $@
 	cp -f $@ $(BINTARGET)
 
 $(OBJS): %.o: %.c
-	gcc $(FLAGS) $(GLIBC_INCLUDES) $(INCS) -c $< -o $@
-
-$(OBJS-DIET): %-DIET.o: %.c
-	gcc $(FLAGS) $(DIETLIBC_INCLUDES) $(INCS) -c $< -o $@
-
+	$(DIET) gcc $(FLAGS) $(INCLUDES) $(INCS) -c $< -o $@

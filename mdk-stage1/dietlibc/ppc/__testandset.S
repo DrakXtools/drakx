@@ -2,10 +2,11 @@
 .type __testandset,@function
 .align 2
 __testandset:
-	lwarx	5,0,3
-	add	0,4,5
-	stwcx	0,0,3
-	bne	__testandset
+1:	lwarx	5,0,3
+	li	0,1
+	stwcx.	0,0,3
+	bne-	1b
+	mr	3,5
 	blr
 .size __testandset,.-__testandset
 

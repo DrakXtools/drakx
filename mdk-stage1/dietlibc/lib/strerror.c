@@ -1,10 +1,20 @@
+#include "dietfeatures.h"
+#include <unistd.h>
 #include <string.h>
 
-extern char *sys_errlist[];
-extern int sys_nerr;
+#define _BSD_SOURCE
+#include <errno.h>
 
-char *strerror(int errnum) {
-  if (errnum>=0 && errnum<sys_nerr)
-    return sys_errlist[errnum];
-  return "[unknown error]";
+extern const char __sys_err_unknown[];
+
+char*strerror(int errnum) {
+  register const char*message=__sys_err_unknown;
+
+    if ( (unsigned int)errnum < (unsigned int)__SYS_NERR )
+    message=sys_errlist[errnum];
+#if defined(__mips__)
+  if ( errnum == 1133 )
+    message="Quota exceeded";
+#endif
+    return (char*)message;
 }

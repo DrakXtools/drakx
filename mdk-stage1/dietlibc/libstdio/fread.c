@@ -4,48 +4,43 @@
 
 size_t fread( void *ptr, size_t size, size_t nmemb, FILE *stream) {
   int res;
-#ifdef WANT_BUFFERED_STDIO
   unsigned long i,j;
   j=size*nmemb;
-#ifdef WANT_UNGETC
+  i=0;
+
+  if (!j || j/nmemb!=size) return 0;
   if (stream->ungotten) {
+    stream->ungotten=0;
     *(char*)ptr=stream->ungetbuf;
-    ptr=((char*)ptr)+1;
-    --j;
+    ++i;
   }
   if (!j) return 1;
+
+#ifdef WANT_FREAD_OPTIMIZATION
+  if ( !(stream->flags&FDPIPE) && (j>stream->buflen)) {
+    size_t tmp=j-i;
+    int res;
+    fflush(stream);
+    while ((res=read(stream->fd,ptr+i,tmp))<(int)tmp) {
+      if (res==-1) {
+	stream->flags|=ERRORINDICATOR;
+	goto exit;
+      } else if (!res) {
+	stream->flags|=EOFINDICATOR;
+	goto exit;
+      }
+      i+=res; tmp-=res;
+    }
+    return nmemb;
+  }
 #endif
-  for (i=0; i<j; ++i) {
+  for (; i<j; ++i) {
     res=fgetc(stream);
     if (res==EOF)
+exit:
       return i/size;
     else
       ((unsigned char*)ptr)[i]=(unsigned char)res;
   }
   return nmemb;
-#else
-#ifdef WANT_UNGETC
-  unsigned long j=size*nmemb;
-#endif
-  fflush(stream);
-#ifdef WANT_UNGETC
-  if (stream->ungotten) {
-    *(char*)ptr=stream->ungetbuf;
-    ptr=((char*)ptr)+1;
-    --j;
-  }
-  if (!j) return 1;
-  res=read(stream->fd,ptr,j);
-#else
-  res=read(stream->fd,ptr,size*nmemb);
-#endif
-  if (res<0) {
-    stream->flags|=ERRORINDICATOR;
-    return 0;
-  } else if (res<size*nmemb)
-	  if (!(stream->flags & UNSEEKABLE)
-	      || ((stream->flags & UNSEEKABLE) && res == 0))
-		  stream->flags|=EOFINDICATOR;
-  return res/size;
-#endif
 }

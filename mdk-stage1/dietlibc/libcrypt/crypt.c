@@ -1,8 +1,9 @@
 #include "dietfeatures.h"
 #include <unistd.h>
+#include <md5.h>
 
 /* Initial permutation, */
-static char IP[] = {
+static const char IP[] = {
   57,49,41,33,25,17, 9, 1,
   59,51,43,35,27,19,11, 3,
   61,53,45,37,29,21,13, 5,
@@ -14,7 +15,7 @@ static char IP[] = {
 };
 
 /* Final permutation, FP = IP^(-1) */
-static char FP[] = {
+static const char FP[] = {
   39, 7,47,15,55,23,63,31,
   38, 6,46,14,54,22,62,30,
   37, 5,45,13,53,21,61,29,
@@ -28,14 +29,14 @@ static char FP[] = {
 /* Permuted-choice 1 from the key bits to yield C and D.
  * Note that bits 8,16... are left out: They are intended for a parity check.
  */
-static char PC1_C[] = {
+static const char PC1_C[] = {
   56,48,40,32,24,16, 8,
    0,57,49,41,33,25,17,
    9, 1,58,50,42,34,26,
   18,10, 2,59,51,43,35
 };
 
-static char PC1_D[] = {
+static const char PC1_D[] = {
   62,54,46,38,30,22,14,
    6,61,53,45,37,29,21,
   13, 5,60,52,44,36,28,
@@ -43,18 +44,18 @@ static char PC1_D[] = {
 };
 
 /* Sequence of shifts used for the key schedule. */
-static char shifts[] = { 1,1,2,2,2,2,2,2,1,2,2,2,2,2,2,1 };
+static const char shifts[] = { 1,1,2,2,2,2,2,2,1,2,2,2,2,2,2,1 };
 
 /*
  * Permuted-choice 2, to pick out the bits from the CD array that generate
  * the key schedule.
  */
-static char PC2_C[] = {
+static const char PC2_C[] = {
   13, 16, 10, 23,  0,  4,  2, 27, 14,  5, 20,  9,
   22, 18, 11,  3, 25,  7, 15,  6, 26, 19, 12,  1
 };
 
-static char PC2_D[] = {
+static const char PC2_D[] = {
   12, 23,  2,  8, 18, 26,  1, 11, 22, 16,  4, 19,
   15, 20, 10, 27,  5, 24, 17, 13, 21,  7,  0,  3
 };
@@ -68,7 +69,7 @@ static char KS[16][48];
 
 /* The E bit-selection table. */
 static char E[48];
-static char e2[] = {
+static const char e2[] = {
   32,  1,  2,  3,  4,  5,  4,  5,  6,  7,  8,  9,
    8,  9, 10, 11, 12, 13, 12, 13, 14, 15, 16, 17,
   16, 17, 18, 19, 20, 21, 20, 21, 22, 23, 24, 25,
@@ -119,7 +120,7 @@ void setkey(const char *key)
 /* The 8 selection functions. For some reason, they give a 0-origin index,
  * unlike everything else.
  */
-static char S[8][64] = {
+static const char S[8][64] = {
   {
     14, 4,13, 1, 2,15,11, 8, 3,10, 6,12, 5, 9, 0, 7,
      0,15, 7, 4,14, 2,13, 1,10, 6,12,11, 9, 5, 3, 8,
@@ -178,7 +179,7 @@ static char S[8][64] = {
 };
 
 /* P is a permutation on the selected combination of the current L and key. */
-static char P[] = {
+static const char P[] = {
   15, 6,19,20, 28,11,27,16,  0,14,22,25,  4,17,30, 9,
    1, 7,23,13, 31,26, 2, 8, 18,12,29, 5, 21,10, 3,24
 };
@@ -192,11 +193,12 @@ static char f[32];
 static char preS[48];
 
 /* The payoff: encrypt a block. */
-void encrypt(char block[64], int edflag)
+void encrypt(char block[64],int edflag)
 {
   int  i, ii;
   register int t, j, k;
 
+  (void)edflag;
   /* First, permute the bits in the input */
   for(j=0; j < 64; j++)
     L[j] = block[(int)IP[j]];
@@ -253,7 +255,10 @@ char * crypt(const char *pw, const char *salt)
 {
   register int i, j, c;
   static char block[66], iobuf[16];
-
+#ifdef WANT_CRYPT_MD5
+  if (salt[0]=='$' && salt[1]=='1' && salt[2]=='$')
+    return md5crypt(pw,salt);
+#endif
   for(i=0; i < 66; i++)
     block[i] = 0;
   for(i=0; (c= *pw) && i < 64; pw++) {
@@ -287,7 +292,7 @@ char * crypt(const char *pw, const char *salt)
   }
 
   for(i=0; i < 25; i++)
-    encrypt(block, 0);
+    encrypt(block,0);
 
   for(i=0; i < 11; i++) {
     c = 0;

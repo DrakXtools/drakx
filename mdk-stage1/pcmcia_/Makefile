@@ -18,31 +18,20 @@ top_dir = ..
 include $(top_dir)/Makefile.common
 
 
-all: libpcmcia.a libpcmcia-DIET.a
+all: libpcmcia.a
 
 clean:
 	rm -f *.o libpcmcia.a
 
-FLAGS = -D__linux__ -Wall -Werror -Os -fomit-frame-pointer -pipe -c -I..
+FLAGS = -D__linux__ -Wall -Werror -Os -fomit-frame-pointer -pipe -c -I.. -D_BSD_SOURCE
 
 
 OBJS = probe.o cardmgr.o lex_config.o yacc_config.o
-
-OBJS-DIET = $(subst .o,-DIET.o,$(OBJS))
 
 
 libpcmcia.a: $(OBJS)
 	ar -cru $@ $^
 	ranlib $@
 
-libpcmcia-DIET.a: $(OBJS-DIET)
-	ar -cru $@ $^
-	ranlib $@
-
-
 $(OBJS): %.o: %.c
-	gcc $(FLAGS) $(GLIBC_INCLUDES) -c $< -o $@
-
-$(OBJS-DIET): %-DIET.o: %.c
-	gcc $(FLAGS)  $(DIETLIBC_INCLUDES) -c $< -o $@
-
+	$(DIET) gcc $(FLAGS) $(INCLUDES) -c $< -o $@

@@ -1,14 +1,23 @@
 #include <dietstdio.h>
 
-#ifdef WANT_BUFFERED_STDIO
-static FILE __stdout = { 1, BUFLINEWISE, 0, 0 };
-
-int __fflush_stdout() {
-  return fflush(stdout);
-}
-#else
-static FILE __stdout = { 1, 0 };
+static char __stdout_buf[BUFSIZE];
+static FILE __stdout = {
+  .fd=1,
+  .flags=BUFLINEWISE|STATICBUF,
+  .bs=0, .bm=0,
+  .buflen=BUFSIZE,
+  .buf=__stdout_buf,
+  .next=0,
+  .popen_kludge=0,
+  .ungetbuf=0,
+  .ungotten=0
+#ifdef WANT_THREAD_SAFE
+  , .m=PTHREAD_MUTEX_INITIALIZER
 #endif
+};
 
 FILE *stdout=&__stdout;
 
+int __fflush_stdout(void) {
+  return fflush(stdout);
+}

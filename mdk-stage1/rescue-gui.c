@@ -34,14 +34,24 @@
 
 char * env[] = {
 	"PATH=/usr/bin:/bin:/sbin:/usr/sbin:/mnt/sbin:/mnt/usr/sbin:/mnt/bin:/mnt/usr/bin",
-	"LD_LIBRARY_PATH=/lib:/usr/lib:/mnt/lib:/mnt/usr/lib:/usr/X11R6/lib:/mnt/usr/X11R6/lib",
+	"LD_LIBRARY_PATH=/lib:/usr/lib:/mnt/lib:/mnt/usr/lib:/usr/X11R6/lib:/mnt/usr/X11R6/lib"
+#if defined(__x86_64__) || defined(__ppc64__)
+	":/lib64:/usr/lib64:/usr/X11R6/lib64:/mnt/lib64:/mnt/usr/lib64:/mnt/usr/X11R6/lib64"
+#endif
+	,
 	"HOME=/",
 	"TERM=linux",
 	"TERMINFO=/etc/terminfo",
 	NULL
 };
 
-void pause(void) { unsigned char t; fflush(stdout); read(0, &t, 1); }
+/* pause() already exists and causes the invoking process to sleep
+   until a signal is received */
+static void PAUSE(void) {
+  unsigned char t;
+  fflush(stdout);
+  read(0, &t, 1);
+}
 
 
 /* ------ UUURGH this is duplicated from `init.c', don't edit here........ */
@@ -202,13 +212,13 @@ int main(int argc __attribute__ ((unused)), char **argv __attribute__ ((unused))
 
 				execve(child_argv[0], child_argv, env);
 				printf("Can't execute binary (%s)\n<press Enter>\n", binary);
-				pause();
+				PAUSE();
 
 				return 33;
 			}
 			while (wait4(-1, &wait_status, 0, NULL) != pid) {};
 			printf("<press Enter to return to Rescue GUI>");
-			pause();
+			PAUSE();
 			resume_from_suspend();
 			if (!WIFEXITED(wait_status) || WEXITSTATUS(wait_status) != 0) {
 				error_message("Program exited abnormally (return code %d).", WEXITSTATUS(wait_status));

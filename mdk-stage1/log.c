@@ -37,6 +37,9 @@ static FILE * logfile = NULL;
 
 void vlog_message(const char * s, va_list args)
 {
+	va_list args_copy;
+	va_copy(args_copy, args);
+
 	if (logfile) {
 		fprintf(logfile, "* ");
 		vfprintf(logfile, s, args);
@@ -45,10 +48,12 @@ void vlog_message(const char * s, va_list args)
 	}
 	if (logtty) {
 		fprintf(logtty, "* ");
-		vfprintf(logtty, s, args);
+		vfprintf(logtty, s, args_copy);
 		fprintf(logtty, "\n");
 		fflush(logtty);
 	}
+
+	va_end(args_copy);
 }
 
 

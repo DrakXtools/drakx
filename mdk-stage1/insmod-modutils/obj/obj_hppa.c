@@ -64,36 +64,6 @@ enum hppa_fsel
   e_rrsel
 };
 
-/* This could be a call to obj_create_alloced_section() followed
- * by an overwrite of sec->header.sh_flags.
- */
-
-struct obj_section *
-obj_hppa_create_alloced_section (struct obj_file *f, const char *name,
-				 unsigned long align, unsigned long size,
-				 unsigned long sh_flags)
-{
-  int newidx = f->header.e_shnum++;
-  struct obj_section *sec;
-
-  f->sections = xrealloc(f->sections, (newidx+1) * sizeof(sec));
-  f->sections[newidx] = sec = arch_new_section();
-
-  memset(sec, 0, sizeof(*sec));
-  sec->header.sh_type = SHT_PROGBITS;
-  sec->header.sh_flags = sh_flags;
-  sec->header.sh_size = size;
-  sec->header.sh_addralign = align;
-  sec->name = name;
-  sec->idx = newidx;
-  if (size)
-    sec->contents = xmalloc(size);
-
-  obj_insert_section_load_order(f, sec);
-
-  return sec;
-}
-
 struct obj_file *
 arch_new_file (void)
 {
@@ -383,14 +353,14 @@ hppa_rebuild_insn (insn, value, r_format)
    This is significantly less complex than what we do for shared
    libraries because, obviously, modules are not shared.  Also we have
    no issues related to symbol visibility, lazy linking, etc.
-   The kernels dp is fixed (at symbol data_start), and we can fix up any
+   The kernels dp is fixed (at symbol $global$), and we can fix up any
    DPREL refs in the module to use that same dp value.
-   All PCREL17F refs result in a stub with the following format:
+   All PCREL* refs result in a stub with the following format:
 
   	ldil L'func_addr,%r1
         be,n R'func_addr(%sr4,%r1)
 
-  Note, all PCREL17F get a stub, regardless of whether they are
+  Note, all PCREL* get a stub, regardless of whether they are
   local or external.  With local ones, and external ones to other
   modules, there is a good chance we could manage without the stub.
   I'll leave that for a future optimisation.
@@ -411,7 +381,8 @@ arch_create_got(struct obj_file *f)
   /* Create stub section.
    * XXX set flags, see obj_ia64.c
    */
-  hfile->stub = obj_create_alloced_section(f, ".stub", STUB_SIZE, 0);
+  hfile->stub = obj_create_alloced_section(f, ".stub", STUB_SIZE,
+					   0, SHF_WRITE);
 
   /* Actually this is a lot like check_relocs() in a BFD backend.  We
      walk all sections and all their relocations and look for ones
@@ -446,30 +417,17 @@ arch_create_got(struct obj_file *f)
 	      continue;
 
 	    case R_PARISC_PCREL17F:
+	    case R_PARISC_PCREL22F:
 	      need_stub = 1;
 	      break;
 	    }
 
 	  if (need_stub)
 	    {
-	      Elf32_Sym *extsym;
 	      hppa_symbol_t *hsym;
-	      char const *name;
 	      int local;
-	      unsigned long symndx;
 
-	      symndx = ELF32_R_SYM(rel->r_info);
-	      extsym = symtab + symndx;
-	      if (ELF32_ST_BIND(extsym->st_info) == STB_LOCAL)
-		hsym = (hppa_symbol_t *) f->local_symtab[symndx];
-	      else
-		{
-		  if (extsym->st_name)
-		    name = strtab + extsym->st_name;
-		  else
-		    name = f->sections[extsym->st_shndx]->name;
-		  hsym = (hppa_symbol_t *)obj_find_symbol(f, name);
-		}
+	      obj_find_relsym(hsym, f, f, rel, symtab, strtab);
 	      local = hsym->root.secidx <= SHN_HIRESERVE;
 
 	      if (need_stub)
@@ -529,12 +487,17 @@ arch_apply_relocation(struct obj_file *f,
     /* Easy. */
     break;
 
+  case R_PARISC_SEGREL32:
+    v -= f->baseaddr;
+    break;
+
   case R_PARISC_DPREL21L:
   case R_PARISC_DPREL14R:
     v -= dp;
     break;
 
   case R_PARISC_PCREL17F:
+  case R_PARISC_PCREL22F:
     /* Find an import stub. */
     assert(hsym->stub != NULL);
     assert(hfile->stub != NULL);
@@ -566,6 +529,8 @@ arch_apply_relocation(struct obj_file *f,
     case R_PARISC_DIR32:
     case R_PARISC_PLABEL32:
     case R_PARISC_PCREL17F:
+    case R_PARISC_SEGREL32:
+    case R_PARISC_PCREL22F:
       fsel = e_fsel;
       break;
 	
@@ -602,6 +567,7 @@ arch_apply_relocation(struct obj_file *f,
     {
     case R_PARISC_DIR32:
     case R_PARISC_PLABEL32:
+    case R_PARISC_SEGREL32:
       r_format = 32;
       break;
 
@@ -617,6 +583,10 @@ arch_apply_relocation(struct obj_file *f,
     case R_PARISC_DPREL14R:
     case R_PARISC_DIR14R:
       r_format = 14;
+      break;
+
+    case R_PARISC_PCREL22F:
+      r_format = 22;
       break;
 
     default:
@@ -652,13 +622,13 @@ arch_archdata (struct obj_file *f, struct obj_section *sec)
   int i;
   hppa_file_t *hfile = (hppa_file_t *)f;
 
-  /* Initialise dp to the kernels dp (symbol data_start)
+  /* Initialise dp to the kernels dp (symbol $global$)
    */
   for (i = 0, s = ksyms; i < nksyms; i++, s++)
-    if (!strcmp((char *)s->name, "data_start"))
+    if (!strcmp((char *)s->name, "$global$"))
       break;
   if (i >= nksyms) {
-    error("Cannot initialise dp, 'data_start' not found\n");
+    error("Cannot initialise dp, '$global$' not found\n");
     return 1;
   }
   hfile->dp = s->value;

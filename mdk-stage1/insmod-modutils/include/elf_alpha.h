@@ -1,5 +1,4 @@
 /* Machine-specific elf macros for the Alpha.  */
-#ident "$Id$"
 
 #define ELFCLASSM	ELFCLASS64
 #define ELFDATAM	ELFDATA2LSB

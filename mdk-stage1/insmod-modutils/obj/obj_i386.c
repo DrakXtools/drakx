@@ -19,8 +19,6 @@
    along with this program; if not, write to the Free Software Foundation,
    Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.  */
 
-#ident "$Id$"
-
 #include <string.h>
 #include <assert.h>
 
@@ -183,9 +181,7 @@ arch_create_got (struct obj_file *f)
 
       for (; rel < relend; ++rel)
 	{
-	  Elf32_Sym *extsym;
 	  struct i386_symbol *intsym;
-	  const char *name;
 
 	  switch (ELF32_R_TYPE(rel->r_info))
 	    {
@@ -199,12 +195,7 @@ arch_create_got (struct obj_file *f)
 	      break;
 	    }
 
-	  extsym = &symtab[ELF32_R_SYM(rel->r_info)];
-	  if (extsym->st_name)
-	    name = strtab + extsym->st_name;
-	  else
-	    name = f->sections[extsym->st_shndx]->name;
-	  intsym = (struct i386_symbol *)obj_find_symbol(&ifile->root, name);
+	  obj_find_relsym(intsym, f, &ifile->root, rel, symtab, strtab);
 
 	  if (!intsym->gotent.offset_done)
 	    {
@@ -216,7 +207,8 @@ arch_create_got (struct obj_file *f)
     }
 
   if (offset > 0 || gotneeded)
-    ifile->got = obj_create_alloced_section(&ifile->root, ".got", 4, offset);
+    ifile->got = obj_create_alloced_section(&ifile->root, ".got", 4, offset,
+					    SHF_WRITE);
 
   return 1;
 }

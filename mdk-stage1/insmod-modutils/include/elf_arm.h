@@ -1,5 +1,4 @@
 /* Machine-specific elf macros for ARM.  */
-#ident "$Id$"
 
 #define ELFCLASSM	ELFCLASS32
 #define ELFDATAM	ELFDATA2LSB

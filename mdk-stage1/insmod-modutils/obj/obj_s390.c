@@ -1,6 +1,10 @@
-/* S/390 specific support for Elf loading and relocation.
-   Copyright 1996, 1997 Linux International.
+/* IBM S/390 31-bit specific support for Elf loading and relocation.
+   Copyright 2000, 2001 IBM Deutschland Entwicklung GmbH, IBM Corporation.
 
+   Contributed by Martin Schwidefsky <schwidefsky@de.ibm.com>
+
+   Derived from obj/obj_i386.c:
+     Copyright 1996, 1997 Linux International.
    Contributed by Richard Henderson <rth@tamu.edu>
 
    This file is part of the Linux modutils.
@@ -19,8 +23,6 @@
    along with this program; if not, write to the Free Software Foundation,
    Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.  */
 
-#ident "$Id$"
-
 #include <string.h>
 #include <assert.h>
 
@@ -31,22 +33,31 @@
 
 /*======================================================================*/
 
+struct s390_plt_entry
+{
+  long offset;
+  int  allocated:1;
+  int  initialized:1;
+};
+
 struct s390_got_entry
 {
-  int offset;
-  unsigned offset_done : 1;
+  long offset;
+  unsigned allocated:1;
   unsigned reloc_done : 1;
 };
 
 struct s390_file
 {
   struct obj_file root;
+  struct obj_section *plt;
   struct obj_section *got;
 };
 
 struct s390_symbol
 {
   struct obj_symbol root;
+  struct s390_plt_entry pltent;
   struct s390_got_entry gotent;
 };
 
@@ -59,6 +70,7 @@ arch_new_file (void)
   struct s390_file *f;
   f = xmalloc(sizeof(*f));
   f->got = NULL;
+  f->plt = NULL;
   return &f->root;
 }
 
@@ -74,6 +86,7 @@ arch_new_symbol (void)
   struct s390_symbol *sym;
   sym = xmalloc(sizeof(*sym));
   memset(&sym->gotent, 0, sizeof(sym->gotent));
+  memset(&sym->pltent, 0, sizeof(sym->pltent));
   return &sym->root;
 }
 
@@ -95,12 +108,14 @@ arch_apply_relocation (struct obj_file *f,
 		       Elf32_Rela *rel,
 		       Elf32_Addr v)
 {
-  struct s390_file *ifile = (struct s390_file *)f;
-  struct s390_symbol *isym  = (struct s390_symbol *)sym;
+  struct s390_file *ifile = (struct s390_file *) f;
+  struct s390_symbol *isym  = (struct s390_symbol *) sym;
+  struct s390_plt_entry *pe;
 
   Elf32_Addr *loc = (Elf32_Addr *)(targsec->contents + rel->r_offset);
   Elf32_Addr dot = targsec->header.sh_addr + rel->r_offset;
   Elf32_Addr got = ifile->got ? ifile->got->header.sh_addr : 0;
+  Elf32_Addr plt = ifile->plt ? ifile->plt->header.sh_addr : 0;
 
   enum obj_reloc ret = obj_reloc_ok;
 
@@ -110,12 +125,48 @@ arch_apply_relocation (struct obj_file *f,
       break;
 
     case R_390_32:
-      *loc += v;
+      *(unsigned int *) loc += v;
+      break;
+    case R_390_16:
+      *(unsigned short *) loc += v;
+      break;
+    case R_390_8:
+      *(unsigned char *) loc += v;
+      break;
+
+    case R_390_PC32:
+      *(unsigned int *) loc += v - dot;
+      break;
+    case R_390_PC16DBL:
+      *(unsigned short *) loc += (v - dot) >> 1;
+      break;
+    case R_390_PC16: 
+      *(unsigned short *) loc += v - dot;
       break;
 
     case R_390_PLT32:
-    case R_390_PC32:
-      *loc += v - dot;
+    case R_390_PLT16DBL:
+      /* find the plt entry and initialize it.  */
+      assert(isym != NULL);
+      pe = (struct s390_plt_entry *) &isym->pltent;
+      assert(pe->allocated);
+      if (pe->initialized == 0) {
+        unsigned int *ip = (unsigned int *)(ifile->plt->contents + pe->offset); 
+        ip[0] = 0x0d105810; /* basr 1,0; lg 1,10(1); br 1 */
+        ip[1] = 0x100607f1;
+       if (ELF32_R_TYPE(rel->r_info) == R_390_PLT16DBL)
+         ip[2] = v - 2;
+       else
+         ip[2] = v;
+        pe->initialized = 1;
+      }
+
+      /* Insert relative distance to target.  */
+      v = plt + pe->offset - dot;
+      if (ELF32_R_TYPE(rel->r_info) == R_390_PLT32)
+        *(unsigned int *) loc = (unsigned int) v;
+      else if (ELF32_R_TYPE(rel->r_info) == R_390_PLT16DBL)
+        *(unsigned short *) loc = (unsigned short) ((v + 2) >> 1);
       break;
 
     case R_390_GLOB_DAT:
@@ -129,17 +180,25 @@ arch_apply_relocation (struct obj_file *f,
 
     case R_390_GOTPC:
       assert(got != 0);
-      *loc += got - dot;
+      *(unsigned long *) loc += got - dot;
       break;
 
+    case R_390_GOT12:
+    case R_390_GOT16:
     case R_390_GOT32:
       assert(isym != NULL);
+      assert(got != 0);
       if (!isym->gotent.reloc_done)
 	{
 	  isym->gotent.reloc_done = 1;
 	  *(Elf32_Addr *)(ifile->got->contents + isym->gotent.offset) = v;
 	}
-      *loc += isym->gotent.offset;
+      if (ELF32_R_TYPE(rel->r_info) == R_390_GOT12)
+        *(unsigned short *) loc |= (*(unsigned short *) loc + isym->gotent.offset) & 0xfff;
+      else if (ELF32_R_TYPE(rel->r_info) == R_390_GOT16)
+        *(unsigned short *) loc += isym->gotent.offset;
+      else if (ELF32_R_TYPE(rel->r_info) == R_390_GOT32)
+        *(unsigned int *) loc += isym->gotent.offset;
       break;
 
     case R_390_GOTOFF:
@@ -158,71 +217,98 @@ arch_apply_relocation (struct obj_file *f,
 int
 arch_create_got (struct obj_file *f)
 {
-  struct s390_file *ifile = (struct s390_file *)f;
-  int i, n, offset = 0, gotneeded = 0;
+  struct s390_file *ifile = (struct s390_file *) f;
+  int i, got_offset = 0, plt_offset = 0, gotneeded = 0;
 
-  n = ifile->root.header.e_shnum;
-  for (i = 0; i < n; ++i)
+  for (i = 0; i < f->header.e_shnum; ++i)
     {
       struct obj_section *relsec, *symsec, *strsec;
-      Elf32_Rel *rel, *relend;
+      Elf32_Rela *rel, *relend;
       Elf32_Sym *symtab;
       const char *strtab;
 
-      relsec = ifile->root.sections[i];
-      if (relsec->header.sh_type != SHT_REL)
+      relsec = f->sections[i];
+      if (relsec->header.sh_type != SHT_RELA)
 	continue;
 
-      symsec = ifile->root.sections[relsec->header.sh_link];
-      strsec = ifile->root.sections[symsec->header.sh_link];
+      symsec = f->sections[relsec->header.sh_link];
+      strsec = f->sections[symsec->header.sh_link];
 
-      rel = (Elf32_Rel *)relsec->contents;
-      relend = rel + (relsec->header.sh_size / sizeof(Elf32_Rel));
+      rel = (Elf32_Rela *)relsec->contents;
+      relend = rel + (relsec->header.sh_size / sizeof(Elf32_Rela));
       symtab = (Elf32_Sym *)symsec->contents;
       strtab = (const char *)strsec->contents;
 
       for (; rel < relend; ++rel)
 	{
-	  Elf32_Sym *extsym;
 	  struct s390_symbol *intsym;
-	  const char *name;
+          struct s390_plt_entry *pe;
+          struct s390_got_entry *ge;
 
-	  switch (ELF32_R_TYPE(rel->r_info))
-	    {
+          switch (ELF32_R_TYPE(rel->r_info)) {
+            /* These four relocations refer to a plt entry.  */
+            case R_390_PLT16DBL:
+            case R_390_PLT32:
+	      obj_find_relsym(intsym, f, f, rel, symtab, strtab);
+              assert(intsym);
+              pe = &intsym->pltent;
+              if (!pe->allocated) {
+                pe->allocated = 1;
+                pe->offset = plt_offset;
+                plt_offset += 12;
+              }
+              break;
+            /* The next three don't need got entries but the address
+               of the got itself.  */
 	    case R_390_GOTPC:
 	    case R_390_GOTOFF:
 	      gotneeded = 1;
-	    default:
-	      continue;
+              break;
 
+            case R_390_GOT12:
+            case R_390_GOT16:
 	    case R_390_GOT32:
-	      break;
+	      obj_find_relsym(intsym, f, f, rel, symtab, strtab);
+              assert(intsym);
+              ge = (struct s390_got_entry *) &intsym->gotent;
+              if (!ge->allocated) {
+                ge->allocated = 1;
+                ge->offset = got_offset;
+                got_offset += sizeof(void*);
 	    }
+	      break;
 
-	  extsym = &symtab[ELF32_R_SYM(rel->r_info)];
-	  if (extsym->st_name)
-	    name = strtab + extsym->st_name;
-	  else
-	    name = f->sections[extsym->st_shndx]->name;
-	  intsym = (struct s390_symbol *)obj_find_symbol(&ifile->root, name);
-
-	  if (!intsym->gotent.offset_done)
-	    {
-	      intsym->gotent.offset_done = 1;
-	      intsym->gotent.offset = offset;
-	      offset += 4;
+            default:
+              break;
 	    }
 	}
     }
 
-  if (offset > 0 || gotneeded)
-    ifile->got = obj_create_alloced_section(&ifile->root, ".got", 4, offset);
+  if (got_offset > 0 || gotneeded) {
+    struct obj_section *gotsec;
+    struct obj_symbol *gotsym;
+
+    gotsec = obj_find_section(f, ".got");
+    if (gotsec == NULL)
+      gotsec = obj_create_alloced_section(f, ".got", 4, got_offset, SHF_WRITE);
+    else
+      obj_extend_section(gotsec, got_offset);
+    gotsym = obj_add_symbol(f, "_GLOBAL_OFFSET_TABLE_", -1,
+                            ELFW(ST_INFO) (STB_LOCAL, STT_OBJECT),
+                            gotsec->idx, 0, 0);
+    gotsym->secidx = gotsec->idx;  /* mark the symbol as defined */
+    ifile->got = gotsec;
+  }
+
+  if (plt_offset > 0)
+    ifile->plt = obj_create_alloced_section(f, ".plt", 4, plt_offset,
+					    SHF_WRITE);
 
   return 1;
 }
 
 int
-arch_init_module (struct obj_file *f, struct module *m)
+arch_init_module (struct obj_file *f, struct module *mod)
 {
   return 1;
 }
@@ -243,3 +329,4 @@ arch_archdata (struct obj_file *fin, struct obj_section *sec)
 {
   return 0;
 }
+

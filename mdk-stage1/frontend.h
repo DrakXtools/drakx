@@ -21,6 +21,12 @@
 
 #include <stdarg.h>
 
+/* 'unused' atttribute, gcc specific and just to turn down some warnings.  */
+#if defined __GNUC__
+#define UNUSED __attribute__((unused))
+#else
+#define UNUSED
+#endif
 
 enum return_type { RETURN_OK, RETURN_BACK, RETURN_ERROR };
 

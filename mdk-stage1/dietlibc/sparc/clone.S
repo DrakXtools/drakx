@@ -1,10 +1,11 @@
-#include <asm/errno.h>
-#include <asm/unistd.h>
+#include <errno.h>
+#include "syscalls.h"
 
 .text
 .align 4
 .weak clone
 clone:
+.type __clone,#function
 .global __clone
 __clone:
 	save	%sp, -96, %sp

@@ -1,15 +1,25 @@
 #include <dietfeatures.h>
+#include "syscalls.h"
 
+.weak exit
+exit:
+.global _exit
+_exit:
+	lda	$0, __NR_exit
 .global __unified_syscall
 __unified_syscall:
 	callsys
 	bne	$19, .Lerror
+
+/* here we go and "reuse" the return for weak-void functions */
+#include "dietuglyweaks.h"
+
 	ret	$31, ($26), 0x01
 
 .Lerror:
 .global error_unified_syscall
 error_unified_syscall:
-#ifdef WANT_THREAD_SAVE
+#ifdef WANT_THREAD_SAFE
 	lda	$sp, -16($sp)	/* alloc 2 qwords on stack */
 	stq	$26, 0($sp)	/* save ra to stack */
 	stq	$0,  8($sp)	/* save v0 to stack */

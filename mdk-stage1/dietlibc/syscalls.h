@@ -1,142 +1,35 @@
-#ifdef __ASSEMBLER__
+#if defined(__i386__)
+#include "i386/syscalls.h"
 
-#include <asm/unistd.h>
+#elif defined(__x86_64__)
+#include "x86_64/syscalls.h"
 
+#elif defined(__sparc__)
+#if defined(__arch64__)
+#include "sparc64/syscalls.h"
 #else
-
-#include <linux/unistd.h>
-
+#include "sparc/syscalls.h"
 #endif
 
-#ifdef __i386__
+#elif defined(__powerpc__)
+#include "ppc/syscalls.h"
 
-#define syscall_weak(name,wsym,sym) \
-.text; \
-.weak wsym; \
-wsym: ; \
-.global sym; \
-sym: \
-	movb $__NR_##name,%al; \
-	jmp __unified_syscall
+#elif defined(__mips__)
+#include "mips/syscalls.h"
 
-#define syscall(name,sym) \
-.text; \
-.global sym; \
-sym: \
-	movb $__NR_##name,%al; \
-	jmp __unified_syscall
+#elif defined(__arm__)
+#include "arm/syscalls.h"
 
-#endif
+#elif defined(__s390__)
+#include "s390/syscalls.h"
 
-#ifdef __sparc__
+#elif defined(__alpha__)
+#include "alpha/syscalls.h"
 
-#define syscall_weak(name,wsym,sym) \
-.text; \
-.weak wsym; \
-wsym: ; \
-.global sym; \
-sym: \
-	b __unified_syscall; \
-	mov __NR_##name, %g1
+#elif defined(__hppa__)
+#include "parisc/syscalls.h"
 
-#define syscall(name,sym) \
-.text; \
-.global sym; \
-sym: \
-	b __unified_syscall; \
-	mov __NR_##name, %g1
-
-#endif
-
-#ifdef __powerpc__
-
-#define syscall_weak(name,wsym,sym) \
-.text; \
-.weak wsym; \
-wsym: ; \
-.global sym; \
-sym: \
-	li	0,__NR_##name; \
-	b __unified_syscall
-
-#define syscall(name,sym) \
-.text; \
-.global sym; \
-sym: \
-	li	0,__NR_##name; \
-	b __unified_syscall
-
-#endif
-
-
-#ifdef __mips__
-
-#define syscall_weak(name,wsym,sym) \
-.text; \
-.weak wsym; \
-wsym: ; \
-.global sym; \
-.ent sym; \
-sym: \
-	li	$2,__NR_##name; \
-	la	$25,__unified_syscall; \
-	jr	$25; \
-.end sym
-
-#define syscall(name,sym) \
-.text; \
-.global sym; \
-.ent sym; \
-sym: \
-	li	$2,__NR_##name; \
-	la	$25,__unified_syscall; \
-	jr	$25; \
-.end sym
-
-#endif
-
-#ifdef __arm__
-
-#define syscall_weak(name,wsym,sym) \
-.text; \
-.weak wsym; \
-wsym: ; \
-.global sym; \
-sym: \
-	swi	__NR_##name; \
-	b	__unified_syscall
-
-#define syscall(name,sym) \
-.text; \
-.global sym; \
-sym: \
-	swi	__NR_##name; \
-	b	__unified_syscall
-
-#endif
-
-
-#ifdef __alpha__
-
-#define syscall_weak(name,wsym,sym) \
-.text ; \
-.align 2 ; \
-.weak wsym; \
-.type wsym,@function ; \
-wsym: ; \
-.global sym ; \
-.type sym,@function ; \
-sym: ; \
-        lda     $0, __NR_##name($31) ; \
-        br      __unified_syscall
-
-#define syscall(name,sym) \
-.text ; \
-.align 2 ; \
-.global sym ; \
-.type sym,@function ; \
-sym: ; \
-        lda     $0, __NR_##name($31) ; \
-        br      __unified_syscall
+#elif defined(__ia64__)
+#include "ia64/syscalls.h"
 
 #endif

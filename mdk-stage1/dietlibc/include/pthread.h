@@ -5,9 +5,6 @@
 #include <signal.h>
 #include <setjmp.h>
 
-/* arg... kernel haeder... */
-#define ENOTSUP 524 /* Operation is not supported */
-
 #define PTHREAD_STACK_SIZE	16384
 
 #define PTHREAD_THREADS_MAX	128
@@ -19,9 +16,16 @@
 #define PTHREAD_DESTRUCTOR_ITERATIONS 10
 
 typedef struct _pthread_descr_struct *_pthread_descr;
-typedef unsigned long int pthread_t;
+typedef int pthread_t;
 
 /* Fast locks */
+#ifdef __parisc__
+#define PTHREAD_SPIN_LOCKED 0
+#define PTHREAD_SPIN_UNLOCKED 1
+#else
+#define PTHREAD_SPIN_LOCKED 1
+#define PTHREAD_SPIN_UNLOCKED 0
+#endif
 struct _pthread_fastlock {
   int __spinlock;
 };
@@ -49,17 +53,23 @@ enum
 };
 
 #define PTHREAD_MUTEX_INITIALIZER \
-{{0}, 0, PTHREAD_MUTEX_FAST_NP, 0}
+{{PTHREAD_SPIN_UNLOCKED}, 0, PTHREAD_MUTEX_FAST_NP, 0}
 
 #define PTHREAD_RECURSIVE_MUTEX_INITIALIZER_NP \
-{{0}, 0, PTHREAD_MUTEX_RECURSIVE_NP, 0}
+{{PTHREAD_SPIN_UNLOCKED}, 0, PTHREAD_MUTEX_RECURSIVE_NP, 0}
 
 #define PTHREAD_ERRORCHECK_MUTEX_INITIALIZER_NP \
-{{0}, 0, PTHREAD_MUTEX_ERRORCHECK_NP, 0}
+{{PTHREAD_SPIN_UNLOCKED}, 0, PTHREAD_MUTEX_ERRORCHECK_NP, 0}
 
 typedef struct {
   int __mutexkind;
 } pthread_mutexattr_t;
+
+int pthread_mutexattr_init(pthread_mutexattr_t *attr);
+int pthread_mutexattr_destroy(pthread_mutexattr_t *attr);
+
+int pthread_mutexattr_getkind_np(const pthread_mutexattr_t *attr, int *kind);
+int pthread_mutexattr_setkind_np(pthread_mutexattr_t *attr, int kind);
 
 int pthread_mutex_init(pthread_mutex_t *mutex,
 		const pthread_mutexattr_t *mutexattr);
@@ -77,7 +87,7 @@ typedef struct {
 } pthread_cond_t;
 
 #define PTHREAD_COND_INITIALIZER \
-{{0},0}
+{{PTHREAD_SPIN_UNLOCKED},0}
 
 int pthread_cond_init(pthread_cond_t *cond, pthread_condattr_t *cond_attr);
 int pthread_cond_destroy(pthread_cond_t *cond);
@@ -164,9 +174,14 @@ int pthread_attr_getstackaddr(pthread_attr_t *attr, void **stack);
 int pthread_attr_setstacksize(pthread_attr_t *attr, size_t stacksize);
 int pthread_attr_getstacksize(pthread_attr_t *attr, size_t *stacksize);
 
+int pthread_setschedparam(pthread_t target_thread, int policy,
+			  const struct sched_param *param);
+int pthread_getschedparam(pthread_t target_thread, int *policy,
+			  struct sched_param *param);
+
 /* ONCE */
 typedef int pthread_once_t;
-#define PTHREAD_ONCE_INIT	0
+#define PTHREAD_ONCE_INIT	PTHREAD_SPIN_UNLOCKED
 
 int __pthread_once(pthread_once_t* once_control, void (*init_routine)(void));
 int pthread_once(pthread_once_t* once_control, void (*init_routine)(void));
@@ -210,7 +225,7 @@ pid_t pthread_atfork(void (*prepare)(void), void (*parent)(void),
 		     void (*child)(void));
 
 /* THREADS */
-int pthread_create (pthread_t *__thread,
+int pthread_create (pthread_t *__threadarg,
 		const pthread_attr_t *__attr,
 		void *(*__start_routine) (void *),
 		void *__arg);
@@ -223,5 +238,7 @@ int pthread_detach (pthread_t __th);
 
 pthread_t pthread_self (void);
 int pthread_equal (pthread_t __thread1, pthread_t __thread2);
+
+int pthread_sigmask(int how, const sigset_t*newset, sigset_t *oldset);
 
 #endif

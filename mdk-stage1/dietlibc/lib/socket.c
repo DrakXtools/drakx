@@ -1,12 +1,11 @@
-#include <linux/net.h>
+#include <linuxnet.h>
 
 extern int socketcall(int callno,long* args);
 
-int socket(int a, int b, int c) {
-#ifdef __i386__
-  return socketcall(SYS_SOCKET, (long*)&a);
-#else
+int __libc_socket(int a, int b, int c);
+int __libc_socket(int a, int b, int c) {
   unsigned long args[] = { a, b, c };
   return socketcall(SYS_SOCKET, args);
-#endif
 }
+
+int socket(int a,int b,int c) __attribute__((weak,alias("__libc_socket")));

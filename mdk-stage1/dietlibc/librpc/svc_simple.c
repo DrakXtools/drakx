@@ -73,8 +73,8 @@ int registerrpc(int prognum, int versnum, int procnum, char *(*progname)(), xdrp
 			return (-1);
 		}
 	}
-	(void) pmap_unset((u_long) prognum, (u_long) versnum);
-	if (!svc_register(transp, (u_long) prognum, (u_long) versnum,
+	(void) pmap_unset((unsigned long) prognum, (unsigned long) versnum);
+	if (!svc_register(transp, (unsigned long) prognum, (unsigned long) versnum,
 					  universal, IPPROTO_UDP)) {
 		(void) fprintf(stderr, "couldn't register prog %d vers %d\n",
 					   prognum, versnum);
@@ -120,7 +120,7 @@ SVCXPRT *transp;
 	for (pl = proglst; pl != NULL; pl = pl->p_nxt)
 		if (pl->p_prognum == prog && pl->p_procnum == proc) {
 			/* decode arguments into a CLEAN buffer */
-			bzero(xdrbuf, sizeof(xdrbuf));	/* required ! */
+			memset(xdrbuf, 0, sizeof(xdrbuf));	/* required ! */
 			if (!svc_getargs(transp, pl->p_inproc, xdrbuf)) {
 				svcerr_decode(transp);
 				return;

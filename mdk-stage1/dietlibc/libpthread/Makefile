@@ -12,14 +12,14 @@ VPATH=../$(ARCH)/
 PTHREAD_OBJS = \
 	__testandset.o \
  \
-	thread_internal.o \
-	thread_key.o \
+	pthread_internal.o \
+	pthread_key.o \
  \
 	pthread_once.o pthread_spinlock.o \
  \
 	pthread_create.o pthread_detach.o \
 	pthread_join.o pthread_self.o \
-	pthread_exit.o \
+	pthread_exit.o pthread_equal.o \
  \
 	pthread_cleanup_push.o \
 	pthread_cleanup_pop.o \
@@ -72,6 +72,7 @@ PTHREAD_OBJS = \
 	pthread_sys_create.o \
 	pthread_sys_fcntl.o \
 	pthread_sys_fsync.o \
+	pthread_sys_fdatasync.o \
 	pthread_sys_nanosleep.o \
 	pthread_sys_logging.o \
 	pthread_sys_open.o \

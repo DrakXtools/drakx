@@ -1,11 +1,10 @@
-#ifdef __alpha__
-
 #include <setjmp.h>
 
 .text
 .align 2
 
 .global __longjmp
+.type __longjmp,@function
 __longjmp:
 	mov	$17, $0 	/* a1 -> v0 */
 
@@ -18,7 +17,7 @@ __longjmp:
 
 	ldq	$26, (JB_PC*8) ($16)	/* ra */
 	ldq	$fp, (JB_FP*8) ($16)	/* fp */
-	ldq	 $1, (JB_SP*8) ($16)	/* sp */
+	ldq	$sp, (JB_SP*8) ($16)	/* sp */
 
 	ldt	$f2, (JB_F2*8) ($16)	/* f2 */
 	ldt	$f3, (JB_F3*8) ($16)	/* f3 */
@@ -30,9 +29,5 @@ __longjmp:
 	ldt	$f9, (JB_F9*8) ($16)	/* f9 */
 
 	cmoveq	 $0, 0x1, $0
-	mov	 $1, $sp
 
 	ret	$31, ($26), 1
-
-
-#endif

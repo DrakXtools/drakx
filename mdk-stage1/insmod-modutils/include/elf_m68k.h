@@ -1,5 +1,4 @@
 /* Machine-specific elf macros for m68k.  */
-#ident "$Id$"
 
 #define ELFCLASSM	ELFCLASS32
 #define ELFDATAM	ELFDATA2MSB

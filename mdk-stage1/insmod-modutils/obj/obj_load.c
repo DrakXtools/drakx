@@ -21,8 +21,6 @@
    along with this program; if not, write to the Free Software Foundation,
    Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.  */
 
-#ident "$Id$"
-
 #include <alloca.h>
 #include <string.h>
 #include <stdlib.h>
@@ -52,7 +50,7 @@ obj_load (int fp, Elf32_Half e_type, const char *filename)
   gzf_lseek(fp, 0, SEEK_SET);
   if (gzf_read(fp, &f->header, sizeof(f->header)) != sizeof(f->header))
     {
-      error("error reading ELF header %s: %m", filename);
+      error("cannot read ELF header from %s", filename);
       return NULL;
     }
 
@@ -257,7 +255,7 @@ obj_load (int fp, Elf32_Half e_type, const char *filename)
 	{
 	case SHT_RELM:
 	  {
-	    unsigned long nrel, j;
+	    unsigned long nrel, j, nsyms;
 	    ElfW(RelM) *rel;
 	    struct obj_section *symtab;
 	    char *strtab;
@@ -273,34 +271,25 @@ obj_load (int fp, Elf32_Half e_type, const char *filename)
 	    nrel = sec->header.sh_size / sizeof(ElfW(RelM));
 	    rel = (ElfW(RelM) *) sec->contents;
 	    symtab = f->sections[sec->header.sh_link];
+	    nsyms = symtab->header.sh_size / symtab->header.sh_entsize;
 	    strtab = f->sections[symtab->header.sh_link]->contents;
 
 	    /* Save the relocate type in each symbol entry.  */
 	    for (j = 0; j < nrel; ++j, ++rel)
 	      {
-		ElfW(Sym) *extsym;
 		struct obj_symbol *intsym;
 		unsigned long symndx;
 		symndx = ELFW(R_SYM)(rel->r_info);
 		if (symndx)
 		  {
-		    extsym = ((ElfW(Sym) *) symtab->contents) + symndx;
-		    if (ELFW(ST_BIND)(extsym->st_info) == STB_LOCAL)
+		    if (symndx >= nsyms)
 		      {
-			/* Local symbols we look up in the local table to be sure
-			   we get the one that is really intended.  */
-			intsym = f->local_symtab[symndx];
+			error("%s: Bad symbol index: %08lx >= %08lx",
+			      filename, symndx, nsyms);
+			continue;
 		      }
-		    else
-		      {
-			/* Others we look up in the hash table.  */
-			const char *name;
-			if (extsym->st_name)
-			  name = strtab + extsym->st_name;
-			else
-			  name = f->sections[extsym->st_shndx]->name;
-			intsym = obj_find_symbol(f, name);
-		      }
+
+		    obj_find_relsym(intsym, f, f, rel, (ElfW(Sym) *)(symtab->contents), strtab);
 		    intsym->r_type = ELFW(R_TYPE)(rel->r_info);
 		  }
 	      }

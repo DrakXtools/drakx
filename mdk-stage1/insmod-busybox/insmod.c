@@ -82,7 +82,7 @@
 #endif
 
 /* FIXME: Remove once we switched to dietlibc 0.22 */
-#if 1
+#if 0
 
 #undef new_sys_init_module
 #define __NR_new_sys_init_module  __NR_init_module

@@ -44,11 +44,10 @@ static char sccsid[] = "@(#)svc.c 1.41 87/10/13 Copyr 1984 Sun Micro";
 #include <errno.h>
 #include <rpc/rpc.h>
 #include <rpc/pmap_clnt.h>
+#include <string.h>
 #ifdef __linux__
 #include <sys/types.h>
 #endif
-
-extern int errno;
 
 #ifdef FD_SETSIZE
 static SVCXPRT **xports;
@@ -69,8 +68,8 @@ static SVCXPRT *xports[NOFILE];
  */
 static struct svc_callout {
 	struct svc_callout *sc_next;
-	u_long sc_prog;
-	u_long sc_vers;
+	unsigned long sc_prog;
+	unsigned long sc_vers;
 	void (*sc_dispatch) ();
 } *svc_head;
 
@@ -135,8 +134,8 @@ SVCXPRT *xprt;
  */
 bool_t svc_register(xprt, prog, vers, dispatch, protocol)
 SVCXPRT *xprt;
-u_long prog;
-u_long vers;
+unsigned long prog;
+unsigned long vers;
 void (*dispatch) ();
 rpcprot_t protocol;
 {
@@ -170,8 +169,8 @@ rpcprot_t protocol;
  * Remove a service program from the callout list.
  */
 void svc_unregister(prog, vers)
-u_long prog;
-u_long vers;
+unsigned long prog;
+unsigned long vers;
 {
 	struct svc_callout *prev;
 	register struct svc_callout *s;
@@ -184,7 +183,7 @@ u_long vers;
 		prev->sc_next = s->sc_next;
 	}
 	s->sc_next = NULL_SVC;
-	mem_free((char *) s, (u_int) sizeof(struct svc_callout));
+	mem_free((char *) s, (unsigned int) sizeof(struct svc_callout));
 
 	/* now unregister the information with the local binder service */
 	(void) pmap_unset(prog, vers);
@@ -195,8 +194,8 @@ u_long vers;
  * struct.
  */
 static struct svc_callout *svc_find(prog, vers, prev)
-u_long prog;
-u_long vers;
+unsigned long prog;
+unsigned long vers;
 struct svc_callout **prev;
 {
 	register struct svc_callout *s, *p;
@@ -220,7 +219,7 @@ struct svc_callout **prev;
 bool_t svc_sendreply(xprt, xdr_results, xdr_location)
 register SVCXPRT *xprt;
 xdrproc_t xdr_results;
-caddr_t xdr_location;
+char* xdr_location;
 {
 	struct rpc_msg rply;
 
@@ -324,8 +323,8 @@ register SVCXPRT *xprt;
  */
 void svcerr_progvers(xprt, low_vers, high_vers)
 register SVCXPRT *xprt;
-u_long low_vers;
-u_long high_vers;
+unsigned long low_vers;
+unsigned long high_vers;
 {
 	struct rpc_msg rply;
 
@@ -389,13 +388,13 @@ int *readfds;
 	enum xprt_stat stat;
 	struct rpc_msg msg;
 	int prog_found;
-	u_long low_vers;
-	u_long high_vers;
+	unsigned long low_vers;
+	unsigned long high_vers;
 	struct svc_req r;
 	register SVCXPRT *xprt;
-	register u_long mask;
+	register unsigned long mask;
 	register int bit;
-	register u_long *maskp;
+	register unsigned long *maskp;
 	register int setsize;
 	register int sock;
 	char cred_area[2 * MAX_AUTH_BYTES + RQCRED_SIZE];
@@ -409,9 +408,9 @@ int *readfds;
 	setsize = _rpc_dtablesize();
 #ifdef __linux__
 /*#define NFDBITS	32*/
-	maskp = (u_long *) readfds;
+	maskp = (unsigned long *) readfds;
 #else
-	maskp = (u_long *) readfds->fds_bits;
+	maskp = (unsigned long *) readfds->fds_bits;
 #endif
 	for (sock = 0; sock < setsize; sock += NFDBITS) {
 		for (mask = *maskp++; (bit = ffs(mask)); mask ^= (1 << (bit - 1))) {

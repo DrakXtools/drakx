@@ -17,8 +17,6 @@
    along with this program; if not, write to the Free Software Foundation,
    Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.  */
 
-#ident "$Id$"
-
 #include <stdlib.h>
 #include <string.h>
 #include <malloc.h>
@@ -37,7 +35,7 @@ static void
 append_string (const char *s, char **strings,
 	       ElfW(Word) *strings_size, ElfW(Word) *strings_left)
 {
-    int l = strlen(s) + 1;
+    size_t l = strlen(s) + 1;
     while (l > *strings_left) {
 	*strings = xrealloc(*strings, *strings_size += EXPAND_BY);
 	*strings_left += EXPAND_BY;
@@ -54,7 +52,7 @@ append_symbol (const struct kallsyms_symbol *s,
 	       struct kallsyms_symbol **symbols,
 	       ElfW(Word) *symbols_size, ElfW(Word) *symbols_left)
 {
-    int l = sizeof(*s);
+    size_t l = sizeof(*s);
     while (l > *symbols_left) {
 	*symbols = xrealloc(*symbols, *symbols_size += EXPAND_BY);
 	*symbols_left += EXPAND_BY;

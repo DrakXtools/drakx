@@ -2,12 +2,12 @@
 #include <pthread.h>
 #include "thread_internal.h"
 
-static void __pthread_acquire(int * spinlock)
+void __pthread_lock(struct _pthread_fastlock * lock)
 {
   int cnt = 0;
   struct timespec tm;
 
-  while (__testandset(spinlock)) {
+  while (__testandset(&lock->__spinlock)) {
     if (cnt < MAX_SPIN_COUNT) {
       sched_yield();
       cnt++;
@@ -20,11 +20,6 @@ static void __pthread_acquire(int * spinlock)
   }
 }
 
-void __pthread_lock(struct _pthread_fastlock * lock)
-{
-  __pthread_acquire(&lock->__spinlock);
-}
-
 int __pthread_trylock(struct _pthread_fastlock * lock)
 {
   return __testandset(&lock->__spinlock);
@@ -32,7 +27,8 @@ int __pthread_trylock(struct _pthread_fastlock * lock)
 
 int __pthread_unlock(struct _pthread_fastlock * lock)
 {
-  return (lock->__spinlock = 0);
+  lock->__spinlock = PTHREAD_SPIN_UNLOCKED;
+  return 0;
 }
 
 

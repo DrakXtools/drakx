@@ -1,3 +1,8 @@
-#warning "someone included features.h, apparently someone is including glibc headers!"
+#ifndef _FEATURES_H
+#define _FEATURES_H
 
-#define __dietlibc__
+#ifndef __dietlibc__
+#error "not using the diet wrapper?!"
+#endif
+
+#endif

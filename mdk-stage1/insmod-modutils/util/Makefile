@@ -13,7 +13,7 @@ top_dir = ../..
 include $(top_dir)/Makefile.common
 
 
-all: libutil.a libutil-STANDALONE.a #libutil-DIET.a
+all: libutil.a libutil-STANDALONE.a
 
 clean:
 	rm -f *.o *.a
@@ -36,7 +36,7 @@ libutil-STANDALONE.a: $(OBJS) logger-standalone.o
 	ranlib $@
 
 logger-standalone.o: logger.c
-	gcc $(CFLAGS) $(DEFS) $(INCS) $(GLIBC_INCLUDES) -o $@ -D_STANDALONE_ -c logger.c
+	$(DIET) gcc $(CFLAGS) $(DEFS) $(INCS) $(INCLUDES) -o $@ -D_STANDALONE_ -c logger.c
 
-.c.o:
-	gcc $(CFLAGS) $(DEFS) $(INCS) $(GLIBC_INCLUDES) -c $<
+%.o: %.c
+	$(DIET) gcc $(CFLAGS) $(DEFS) $(INCS) $(INCLUDES) -c $<

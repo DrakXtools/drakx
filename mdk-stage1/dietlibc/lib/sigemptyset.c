@@ -1,14 +1,12 @@
-#define __USE_EXTERN_INLINES 1
 #include <signal.h>
-#include <errno.h>
-#include <string.h>
 
 int sigemptyset(sigset_t *set) {
-  if (set==NULL) {
-    __set_errno(EINVAL);
-    return -1;
+  set->sig[0]=0;
+  if (_NSIG_WORDS>1) set->sig[1]=0;
+  if (_NSIG_WORDS>2) {
+    set->sig[2]=0;
+    set->sig[3]=0;
   }
-  memset(set,0,sizeof(*set));
   return 0;
 }
 

@@ -1,5 +1,4 @@
 /* Machine-specific elf macros for the PowerPC.  */
-#ident "$Id$"
 
 #define ELFCLASSM	ELFCLASS32
 #define ELFDATAM	ELFDATA2MSB

@@ -116,6 +116,8 @@ struct gen_files gen_file[] = {
 	{"isapnpmap", NULL, 0},
 	{"usbmap", NULL, 0},
 	{"parportmap", NULL, 0},
+	{"ieee1394map", NULL, 0},
+	{"pnpbiosmap", NULL, 0},
 	{"dep", NULL, 0},
 };
 
@@ -491,7 +493,7 @@ static int do_read(int all, char *force_ver, char *base_dir, char *conf_file, in
 	int state[MAX_LEVEL + 1]; /* nested "if" */
 	int level = 0;
 	char buf[3000];
-	char tmpline[100];
+	char tmpline[PATH_MAX];
 	char **pathp;
 	char *envpath;
 	char *version;
@@ -691,6 +693,20 @@ static int do_read(int all, char *force_ver, char *base_dir, char *conf_file, in
 		 */
 		if (all && aliaslist[0])
 			n_aliases = build_list(aliaslist, &aliases, version, 0);
+
+		/*
+		 * Build predef postinstalls
+		 */
+		if (all && post_install[0])
+			for (i=0 ; post_install[i] ; i++ )
+				decode_exec(xstrdup(post_install[i]), EXEC_POST_INSTALL);
+		
+		/*
+		 * Build predef preremoves
+		 */
+		if (all && pre_remove[0])
+			for (i=0 ; pre_remove[i] ; i++ )
+				decode_exec(xstrdup(pre_remove[i]), EXEC_PRE_REMOVE);
 
 		/* Order and priority is now: (MODPATH + modules.conf) || (predefs + modules.conf) */
 		if ((envpath = getenv("MODPATH")) != NULL && !safemode) {
@@ -1073,7 +1089,7 @@ static int do_read(int all, char *force_ver, char *base_dir, char *conf_file, in
 			arg2 = next_word(arg);
 			meta_expand(arg2, &g, NULL, version, ME_ALL);
 			snprintf(env, sizeof(env), "%s=%s", arg, (g.pathc ? g.pathv[0] : ""));
-			putenv(env);
+			putenv(xstrdup(env));
 			one_err = 0;
 		}
 
@@ -1108,7 +1124,7 @@ static int do_read(int all, char *force_ver, char *base_dir, char *conf_file, in
 		/*
 		 * prune
 		 */
-		else if (all && !assgn && strcmp(parm, "prune") == 0) {
+		else if (!assgn && strcmp(parm, "prune") == 0) {
 			decode_list(&n_prunelist, &prunelist, arg, adding, version, 0);
 			one_err = 0;
 		}
@@ -1349,9 +1365,11 @@ static int do_read(int all, char *force_ver, char *base_dir, char *conf_file, in
 		return ret;
 	/* else */
 
+	if (depth == 0) {
 	/* Check we have names for generated files */
 	for (i = 0; !ret && i < gen_file_count; ++i)
 		ret = gen_file_check(gen_file+i, &g, base_dir, version);
+	}
 
 	return ret;
 }
@@ -1367,7 +1385,12 @@ int config_read(int all, char *force_ver, char *base_dir, char *conf_file)
 		return -1;
 	}
 
+	if (access(MODUTILS_MACROS, R_OK) == 0){
+		r = do_read(all, force_ver, base_dir, MODUTILS_MACROS, 0);
+		r = do_read(all, force_ver, "", conf_file, 1);
+	} else {
 	r = do_read(all, force_ver, base_dir, conf_file, 0);
+	} 
 
 	if (quick && !r && !need_update (force_ver, base_dir))
 		exit (0);

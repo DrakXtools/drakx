@@ -44,6 +44,7 @@ extern int errno;
 /* Aieee, gcc 2.95+ creates a stub for posix_types.h on i386 which brings
    glibc headers in and thus makes __FD_SET etc. not defined with 2.3+ kernels. */
 #define _FEATURES_H 1
+#include <linux/posix_types.h>
 #include <linux/socket.h>
 #include <linux/types.h>
 #include <linux/time.h>
@@ -51,13 +52,15 @@ extern int errno;
 #include <linux/un.h>
 #include <linux/loop.h>
 #include <linux/net.h>
-#include <asm/posix_types.h>
 #include <asm/termios.h>
 #include <asm/ioctls.h>
 #include <asm/unistd.h>
 #include <asm/fcntl.h>
 #include <asm/signal.h>
 
+#ifndef __NR__newselect
+#define __NR__newselect __NR_select
+#endif
 
 #ifndef MINILIBC_INTERNAL
 static inline _syscall5(int,mount,const char *,spec,const char *,dir,const char *,type,unsigned long,rwflag,const void *,data);
@@ -76,8 +79,17 @@ static inline _syscall2(int,chmod,const char * ,path,mode_t,mode)
 static inline _syscall2(int,sethostname,const char *,name,int,len)
 static inline _syscall2(int,setdomainname,const char *,name,int,len)
 static inline _syscall2(int,setpgid,int,name,int,len)
+#ifdef __x86_64__
+extern __sighandler_t signal(int signum, __sighandler_t handler);
+#else
 static inline _syscall2(int,signal,int,num,void *,len)
+#endif
+#ifdef __NR_umount
 static inline _syscall1(int,umount,const char *,dir)
+#else
+static inline _syscall2(int,umount2,const char *,dir,int,flags)
+static inline int umount(const char * dir) { return umount2(dir, 0); }
+#endif
 static inline _syscall1(int,unlink,const char *,fn)
 static inline _syscall1(int,close,int,fd)
 static inline _syscall1(int,swapoff,const char *,fn)
@@ -112,19 +124,21 @@ static inline _syscall3(int,syslog,int, type, char *, buf, int, len);
 #else
 static inline _syscall5(int,_newselect,int,n,fd_set *,rd,fd_set *,wr,fd_set *,ex,struct timeval *,timeval);
 static inline _syscall3(int,write,int,fd,const char *,buf,unsigned long,count)
+#ifdef __NR_socketcall
 static inline _syscall2(int,socketcall,int,code,unsigned long *, args)
+#endif
 #define __NR__do_exit __NR_exit
-extern inline _syscall1(int,_do_exit,int,exitcode)
+static inline _syscall1(int,_do_exit,int,exitcode)
 #endif
 
 #define select _newselect
 
 extern int errno;
 
-inline int socket(int a, int b, int c);
-inline int bind(int a, void * b, int c);
-inline int listen(int a, int b);
-inline int accept(int a, void * addr, void * addr2);
+int socket(int a, int b, int c);
+int bind(int a, void * b, int c);
+int listen(int a, int b);
+int accept(int a, void * addr, void * addr2);
 
 void sleep(int secs);
 

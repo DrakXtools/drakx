@@ -48,6 +48,7 @@ double acosh(double d) __THROW __attribute__((__const__));
 double atanh(double d) __THROW __attribute__((__const__));
 
 double exp(double d) __THROW __attribute__((__const__));
+double exp10(double d) __THROW __attribute__((__const__));
 double log(double d) __THROW __attribute__((__const__));
 double log10(double d) __THROW __attribute__((__const__));
 
@@ -57,5 +58,39 @@ double sqrt(double x) __THROW __attribute__((__const__));
 double fabs(double x) __THROW __attribute__((__const__));
 double fmod(double x, double y) __THROW __attribute__((__const__));
 
+double floor(double x) __attribute__((__const__));
+double ceil(double x) __attribute__((__const__));
+
+double expm1(double x) __THROW __attribute__((__const__));
+double hypot(double x, double y) __THROW __attribute__((__const__));
+double atan2(double x, double y) __THROW __attribute__((__const__));
+
+double copysign(double value, double sign) __attribute__((__const__));
+
+#  define HUGE_VAL \
+  (__extension__                                                              \
+   ((union { unsigned __l __attribute__((__mode__(__DI__))); double __d; })   \
+    { __l: 0x000000007ff00000ULL }).__d)
+
+#ifdef _GNU_SOURCE
+void sincos(double x, double* sinx, double* cosx);
+double ipow (double mant, int expo);
+#endif
+
+int isnan(double d) __attribute__((__const__));
+int isinf(double d) __attribute__((__const__));
+int finite(double d) __attribute__((__const__));
+
+double j0(double x);
+double j1(double x);
+double jn(int n, double x);
+double y0(double x);
+double y1(double x);
+double yn(int n, double x);
+double erf(double x);
+double erfc(double x);
+double lgamma(double x);
+
+double rint(double x);
 
 #endif

@@ -11,6 +11,11 @@
 
 #define _PATH_UTMP	"/var/run/utmp"
 #define _PATH_WTMP	"/var/log/wtmp"
+#ifdef _BSD_SOURCE
+/* die, BSD, die!!! */
+#define UTMP_FILE _PATH_UTMP
+#define WTMP_FILE _PATH_WTMP
+#endif
 
 /* The structure describing an entry in the database of
    previous logins.  */
@@ -38,11 +43,13 @@ struct utmp
   char ut_id[4];		/* Inittab ID.  */
   char ut_user[UT_NAMESIZE];	/* Username.  */
   char ut_host[UT_HOSTSIZE];	/* Hostname for remote login.  */
-#define ut_name ut_host
+#define ut_name ut_user
   struct exit_status ut_exit;	/* Exit status of a process marked
 				   as DEAD_PROCESS.  */
   long int ut_session;		/* Session ID, used for windowing.  */
+#define ut_time ut_tv.tv_sec
   struct timeval ut_tv;		/* Time entry was made.  */
+#define ut_addr ut_addr_v6[0]
   int32_t ut_addr_v6[4];	/* Internet address of remote host.  */
   char __unused[20];		/* Reserved for future use.  */
 };
@@ -69,5 +76,19 @@ struct utmp
 #define _HAVE_UT_ID	1
 #define _HAVE_UT_TV	1
 #define _HAVE_UT_HOST	1
+
+struct utmp *getutent(void) __THROW;
+struct utmp *getutid(struct utmp *ut) __THROW;
+struct utmp *getutline(struct utmp *ut) __THROW;
+
+void pututline(struct utmp *ut) __THROW;
+
+void setutent(void) __THROW;
+void endutent(void) __THROW;
+
+void utmpname(const char *file) __THROW;
+
+void updwtmp(const char *wtmp_file, const struct utmp *ut);
+void logwtmp(const char *line, const char *name, const char *host);
 
 #endif

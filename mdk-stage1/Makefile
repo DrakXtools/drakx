@@ -33,6 +33,10 @@
  # init with glibc
  # stage1 with glibc
  #
+ #	x86-64
+ # init with minilibc
+ # stage1 with dietlibc
+ #
  #*****************************************************************************
 
 
@@ -53,11 +57,16 @@ ifeq (i386, $(ARCH))
 INITSRC = minilibc.c init.c
 INIT_DEFS = -DINIT_HEADERS=\"minilibc.h\" -fno-builtin
 else
+ifeq (x86_64, $(ARCH))
+INITSRC = minilibc.c init.c
+INIT_DEFS = -DINIT_HEADERS=\"minilibc.h\" -fno-builtin
+else
 INITSRC = init.c
 ifeq (ia64, $(ARCH))
 INIT_DEFS = -DINIT_HEADERS=\"init-libc-headers.h\" $(GLIBC_INCLUDES)
 else
 INIT_DEFS = -DINIT_HEADERS=\"init-libc-headers.h\" $(DIETLIBC_INCLUDES)
+endif
 endif
 endif
 
@@ -66,27 +75,26 @@ INITOBJS = $(subst .c,.o,$(INITSRC))
 
  #- frontends
 NEWT_FRONTEND_SRC = newt-frontend.c
-GLIBC_NEWT_FRONTEND_LIBS = newt/libnewt.a slang/libslang.a
-DIETLIBC_NEWT_FRONTEND_LIBS = $(subst .a,-DIET.a,$(GLIBC_NEWT_FRONTEND_LIBS))
+NEWT_FRONTEND_LIBS = newt/libnewt.a slang/libslang.a
 
 STDIO_FRONTEND_SRC = stdio-frontend.c
-GLIBC_STDIO_FRONTEND_LIBS =
-DIETLIBC_STDIO_FRONTEND_LIBS =
+STDIO_FRONTEND_LIBS =
+STDIO_FRONTEND_LIBS =
 
 
 FRONTEND_OBJS = $(subst .c,.o,$($(F)_FRONTEND_SRC))
 
-FRONTEND_LINK = $(FRONTEND_OBJS) $($(L)_$(F)_FRONTEND_LIBS)
+FRONTEND_LINK = $(FRONTEND_OBJS) $($(F)_FRONTEND_LIBS)
 
+INSMOD = insmod-modutils
 ifeq (i386, $(ARCH))
 INSMOD = insmod-busybox
-else
-INSMOD = insmod-modutils
+endif
+ifeq (x86_64, $(ARCH))
+INSMOD = insmod-busybox
 endif
 
-GLIBC_STAGE1_OWN_LIBS = $(INSMOD)/libinsmod.a mar/libmar.a bzlib/libbzlib.a
-DIETLIBC_STAGE1_OWN_LIBS = $(subst .a,-DIET.a,$(GLIBC_STAGE1_OWN_LIBS))
-STAGE1_OWN_LIBS = $($(L)_STAGE1_OWN_LIBS)
+STAGE1_OWN_LIBS = $(INSMOD)/libinsmod.a mar/libmar.a bzlib/libbzlib.a
 
 
 ifeq (DIETLIBC, $(L))
@@ -94,7 +102,11 @@ STAGE1_NETWORK_LIBS = $(top_dir)/dietlibc/bin-$(ARCH)/librpc.a
 endif
 
 ifeq (GLIBC, $(L))
+ifeq (x86_64, $(ARCH))
+STAGE1_NETWORK_LIBS = /usr/lib64/libresolv.a
+else
 STAGE1_NETWORK_LIBS = /usr/lib/libresolv.a
+endif
 endif
 
  #- stage1 itself
@@ -134,12 +146,17 @@ STAGE1OBJS-FULL = $(subst .c,-FULL.o,$(STAGE1SRC) $(CDROMSRC) $(DISKSRC) $(NETWO
 ifeq (i386, $(ARCH))
 LDFLAGS_INIT = -static -nostdlib /usr/lib/crt1.o
 else
+ifeq (x86_64, $(ARCH))
+LDFLAGS_INIT = -static -nostdlib /usr/lib64/crt1.o
+INIT_LIBC = $(GLIBC_LIBC)
+else
 ifeq (ia64, $(ARCH))
 LDFLAGS_INIT = $(GLIBC_LDFLAGS_STAGE1)
 INIT_LIBC = $(GLIBC_LIBC)
 else
 LDFLAGS_INIT = $(DIETLIBC_LDFLAGS_STAGE1)
 INIT_LIBC = $(DIETLIBC_LIBC)
+endif
 endif
 endif
 
@@ -149,23 +166,32 @@ BINS = init stage1-full
 ifeq (i386, $(ARCH))
 BINS += stage1-cdrom stage1-disk stage1-network stage1-network-usb stage1-medias-usb
 endif
+ifeq (x86_64, $(ARCH))
+BINS += stage1-cdrom stage1-disk stage1-network stage1-usb
+endif
 
-ifneq (ia64, $(ARCH))
+ifeq (i386, $(ARCH))
 DIRS = dietlibc
 endif
-DIRS += mar pci-resource usb-resource bzlib $(INSMOD) slang newt ppp/pppd rp-pppoe/src
-ifeq (i386,$(ARCH))
+ifeq (ppc, $(ARCH))
+DIRS = dietlibc
+endif
+ifeq (x86_64, $(ARCH))
+DIRS = dietlibc
+endif
+DIRS += mar pci-resource usb-resource bzlib $(INSMOD) slang newt
+ifneq (x86_64, $(ARCH))
+DIRS += ppp/pppd rp-pppoe/src
+endif
+ifeq (i386, $(ARCH))
 DIRS += pcmcia_
 endif
 
 
 ifeq (i386,$(ARCH))
-GLIBC_PCMCIA_LIB = pcmcia_/libpcmcia.a
-DIETLIBC_PCMCIA_LIB = $(subst .a,-DIET.a,$(GLIBC_PCMCIA_LIB))
-PCMCIA_LIB = $($(L)_PCMCIA_LIB)
+PCMCIA_LIB = pcmcia_/libpcmcia.a
 PCMCIA_DEFS = -DENABLE_PCMCIA
 endif
-
 
 USB_DEFS_GEN = -DENABLE_USB
 USB_DEFS = -DENABLE_USB -DDISABLE_PCIADAPTERS
@@ -182,27 +208,27 @@ init: $(INITOBJS) $(INIT_LIBC)
 	$(STRIPCMD) $@
 
 stage1-cdrom: $(STAGE1OBJS-CDROM) $(STAGE1_OWN_LIBS) $(FRONTEND_LINK) $(STAGE1_LIBC)
-	$(CC) $(LDFLAGS_STAGE1) -o $@ $^
+	$(DIET) $(CC) $(LDFLAGS_STAGE1) -o $@ $^
 	$(STRIPCMD) $@
 
 stage1-disk: $(STAGE1OBJS-DISK) $(STAGE1_OWN_LIBS) $(FRONTEND_LINK) $(STAGE1_LIBC)
-	$(CC) $(LDFLAGS_STAGE1) -o $@ $^
+	$(DIET) $(CC) $(LDFLAGS_STAGE1) -o $@ $^
 	$(STRIPCMD) $@
 
 stage1-medias-usb: $(STAGE1OBJS-MEDIAS-USB) $(STAGE1_OWN_LIBS) $(FRONTEND_LINK) $(STAGE1_LIBC)
-	$(CC) $(LDFLAGS_STAGE1) -o $@ $^
+	$(DIET) $(CC) $(LDFLAGS_STAGE1) -o $@ $^
 	$(STRIPCMD) $@
 
 stage1-network: $(STAGE1OBJS-NETWORK) $(STAGE1_OWN_LIBS) $(STAGE1_NETWORK_LIBS) $(FRONTEND_LINK) $(PCMCIA_LIB) $(STAGE1_LIBC)
-	$(CC) $(LDFLAGS_STAGE1) -o $@ $^
+	$(DIET) $(CC) $(LDFLAGS_STAGE1) -o $@ $^
 	$(STRIPCMD) $@
 
 stage1-network-usb: $(STAGE1OBJS-NETWORK-USB) $(STAGE1_OWN_LIBS) $(STAGE1_NETWORK_LIBS) $(FRONTEND_LINK) $(PCMCIA_LIB) $(STAGE1_LIBC)
-	$(CC) $(LDFLAGS_STAGE1) -o $@ $^
+	$(DIET) $(CC) $(LDFLAGS_STAGE1) -o $@ $^
 	$(STRIPCMD) $@
 
 stage1-full: $(STAGE1OBJS-FULL) $(STAGE1_OWN_LIBS) $(STAGE1_NETWORK_LIBS) $(FRONTEND_LINK) $(PCMCIA_LIB) $(STAGE1_LIBC)
-	$(CC) $(LDFLAGS_STAGE1) -o $@ $^
+	$(DIET) $(CC) $(LDFLAGS_STAGE1) -o $@ $^
 	$(STRIPCMD) $@
 
 
@@ -210,25 +236,25 @@ $(INITOBJS): %.o: %.c
 	$(COMPILE) $(INIT_DEFS) -c $<
 
 $(STAGE1OBJS-CDROM): %-CDROM.o: %.c
-	$(COMPILE) $(INCLUDES) $(CDROM_DEFS) -c $< -o $@
+	$(DIET) $(COMPILE) $(INCLUDES) $(CDROM_DEFS) -c $< -o $@
 
 $(STAGE1OBJS-DISK): %-DISK.o: %.c
-	$(COMPILE) $(INCLUDES) $(DISK_DEFS) -c $< -o $@
+	$(DIET) $(COMPILE) $(INCLUDES) $(DISK_DEFS) -c $< -o $@
 
 $(STAGE1OBJS-MEDIAS-USB): %-MEDIAS-USB.o: %.c
-	$(COMPILE) $(INCLUDES) $(MEDIAS-USB_DEFS) $(USB_DEFS_GEN) -c $< -o $@
+	$(DIET) $(COMPILE) $(INCLUDES) $(MEDIAS-USB_DEFS) $(USB_DEFS_GEN) -c $< -o $@
 
 $(STAGE1OBJS-NETWORK): %-NETWORK.o: %.c
-	$(COMPILE) $(INCLUDES) $(NETWORK_DEFS) $(PCMCIA_DEFS) -c $< -o $@
+	$(DIET) $(COMPILE) $(INCLUDES) $(NETWORK_DEFS) $(PCMCIA_DEFS) -c $< -o $@
 
 $(STAGE1OBJS-NETWORK-USB): %-NETWORK-USB.o: %.c
-	$(COMPILE) $(INCLUDES) $(NETWORK_DEFS) $(USB_DEFS_GEN) -c $< -o $@
+	$(DIET) $(COMPILE) $(INCLUDES) $(NETWORK_DEFS) $(USB_DEFS_GEN) -c $< -o $@
 
 $(STAGE1OBJS-FULL): %-FULL.o: %.c
-	$(COMPILE) $(INCLUDES) $(USB_DEFS_GEN) $(PCMCIA_DEFS) -c $< -o $@
+	$(DIET) $(COMPILE) $(INCLUDES) $(USB_DEFS_GEN) $(PCMCIA_DEFS) -c $< -o $@
 
 .c.o:
-	$(COMPILE) $(INCLUDES) -c $<
+	$(DIET) $(COMPILE) $(INCLUDES) -c $<
 
 
 clean: 
@@ -247,7 +273,7 @@ tar-mkinitrd_helper: clean
 	rm -rf mkinitrd_helper-subdir
 
 rescue-gui: rescue-gui.o frontend-common.o $(FRONTEND_LINK) $(STAGE1_LIBC)
-	$(CC) $(LDFLAGS_STAGE1) -o $@ $^
+	$(DIET) $(CC) $(LDFLAGS_STAGE1) -o $@ $^
 	$(STRIPCMD) $@
 
 

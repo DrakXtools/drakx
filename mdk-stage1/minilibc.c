@@ -69,33 +69,91 @@ void _fini (int __status __attribute__ ((unused)))
 {
 }
 
-inline int socket(int a, int b, int c)
+#ifdef __x86_64__
+/* x86-64 implementation of signal() derived from glibc sources */
+
+static inline int sigemptyset(sigset_t *set) {
+  *set = 0;
+  return 0;
+}
+
+static inline int sigaddset(sigset_t *set, int sig) {
+  __asm__("btsq %1,%0" : "=m" (*set) : "Ir" (sig - 1L) : "cc");
+  return 0;
+}
+
+#define __NR___rt_sigaction __NR_rt_sigaction
+static inline _syscall3(int,__rt_sigaction,int,signum,const void *,act,void *,oldact)
+#define __NR___rt_sigreturn __NR_rt_sigreturn
+static _syscall1(int,__rt_sigreturn,unsigned long,unused)
+
+static void restore_rt(void) {
+  __rt_sigreturn(0);
+}
+
+int sigaction(int signum, const struct sigaction *act, struct sigaction *oldact) {
+  struct sigaction *newact = (struct sigaction *)act;
+  if (act) {
+	newact = __builtin_alloca(sizeof(*newact));
+	newact->sa_handler = act->sa_handler;
+	newact->sa_flags = act->sa_flags | SA_RESTORER;
+	newact->sa_restorer = &restore_rt;
+	newact->sa_mask = act->sa_mask;
+  }
+  return __rt_sigaction(signum, newact, oldact);
+}
+
+__sighandler_t signal(int signum, __sighandler_t action) {
+  struct sigaction sa,oa;
+  sa.sa_handler=action;
+  sigemptyset(&sa.sa_mask);
+  sigaddset(&sa.sa_mask,signum);
+  sa.sa_flags=SA_RESTART;
+  if (sigaction(signum,&sa,&oa))
+    return SIG_ERR;
+  return oa.sa_handler;
+}
+
+#endif
+
+#ifdef __NR_socketcall
+
+int socket(int a, int b, int c)
 {
 	unsigned long args[] = { a, b, c };
 	
 	return socketcall(SYS_SOCKET, args);
 }
 
-inline int bind(int a, void * b, int c)
+int bind(int a, void * b, int c)
 {
 	unsigned long args[] = { a, (long) b, c };
 	
 	return socketcall(SYS_BIND, args);
 }
 
-inline int listen(int a, int b)
+int listen(int a, int b)
 {
 	unsigned long args[] = { a, b, 0 };
 	
 	return socketcall(SYS_LISTEN, args);
 }
 
-inline int accept(int a, void * addr, void * addr2)
+int accept(int a, void * addr, void * addr2)
 {
 	unsigned long args[] = { a, (long) addr, (long) addr2 };
 	
 	return socketcall(SYS_ACCEPT, args);
 }
+
+#else
+
+_syscall3(int,socket,int,domain,int,type,int,protocol)
+_syscall3(int,bind,int,sockfd,void *,my_addr,int,addrlen)
+_syscall2(int,listen,int,s,int,backlog)
+_syscall3(int,accept,int,s,void *,addr,void *,addrlen)
+
+#endif
 
 
 void sleep(int secs)
@@ -257,4 +315,3 @@ void printf(char * fmt, ...)
 		}
 	}
 }
-

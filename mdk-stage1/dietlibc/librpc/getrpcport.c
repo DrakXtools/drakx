@@ -42,15 +42,15 @@ static char sccsid[] = "@(#)getrpcport.c 1.3 87/08/11 SMI";
 #include <string.h>
 #include <rpc/pmap_clnt.h>
 
-extern int getrpcport (const char * host, u_long prognum,
-			   u_long versnum, u_int proto)
+extern int getrpcport (const char * host, unsigned long prognum,
+			   unsigned long versnum, unsigned int proto)
 {
 	struct sockaddr_in addr;
 	struct hostent *hp;
 
 	if ((hp = gethostbyname(host)) == NULL)
 		return (0);
-	bcopy(hp->h_addr, (char *) &addr.sin_addr, hp->h_length);
+	memmove((char *) &addr.sin_addr, hp->h_addr, hp->h_length);
 	addr.sin_family = AF_INET;
 	addr.sin_port = 0;
 	return (pmap_getport(&addr, prognum, versnum, proto));

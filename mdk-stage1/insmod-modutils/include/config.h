@@ -28,6 +28,7 @@
 #include <stdio.h>
 #include <sys/utsname.h>
 
+#define MODUTILS_MACROS        "/lib/modutils/macros"
 #define ETC_MODULES_CONF	"/etc/modules.conf"
 
 #define EXEC_PRE_INSTALL 0
@@ -92,6 +93,8 @@ enum gen_file_enum {
 	GEN_ISAPNPMAPFILE,
 	GEN_USBMAPFILE,
 	GEN_PARPORTMAPFILE,
+	GEN_IEEE1394MAPFILE,
+	GEN_PNPBIOSMAPFILE,
 	GEN_DEPFILE,
 };
 

@@ -1,15 +1,17 @@
-#define __KERNEL__
-#define sigaddset foobar
-#include <asm/signal.h>
-#undef sigaddset
+#include <signal.h>
+#include <errno.h>
 
-int __sigaddset(sigset_t *set, int signo) {
-  unsigned long sig = signo - 1;
-  if (_NSIG_WORDS == 1)
-    set->sig[0] |= 1UL << sig;
-  else
-    set->sig[sig / _NSIG_BPW] |= 1UL << (sig % _NSIG_BPW);
-  return 0;
+#define __sigmask(sig)		( ((unsigned long)1) << (((sig)-1) % (8*sizeof(unsigned long))) )
+#define __sigword(sig)		( ((sig)-1) / (8*sizeof(unsigned long)) )
+
+int sigaddset(sigset_t *set, int signo) {
+  if ((signo<1)||(signo>SIGRTMAX)) {
+    (*__errno_location())=EINVAL;
+    return -1;
+  } else {
+    unsigned long __mask = __sigmask (signo);
+    unsigned long __word = __sigword (signo);
+    set->sig[__word]|=__mask;
+    return 0;
+  }
 }
-
-int sigaddset (sigset_t *env, int signo) __attribute__((weak,alias("__sigaddset")));

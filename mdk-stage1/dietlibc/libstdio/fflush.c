@@ -1,20 +1,15 @@
-#include "dietstdio.h"
 #include <unistd.h>
 #include <stdlib.h>
 #include "dietwarning.h"
+#include "dietstdio.h"
 
 FILE *__stdio_root;
 
-#ifdef WANT_BUFFERED_STDIO
 int __stdio_atexit=0;
 
-void __stdio_flushall() {
+void __stdio_flushall(void) {
   fflush(0);
 }
-
-extern int __fflush_stdin();
-extern int __fflush_stdout();
-extern int __fflush_stderr();
 
 int fflush(FILE *stream) {
   if (stream==0) {
@@ -28,15 +23,20 @@ int fflush(FILE *stream) {
 	res=-1;
     return res;
   }
+//  if (stream->flags&NOBUF) return 0;
   if (stream->flags&BUFINPUT) {
     register int tmp;
-    if ((tmp=stream->bm-stream->bs)) lseek(stream->fd,tmp,SEEK_CUR);
-  } else
-    if (stream->bm && write(stream->fd,stream->buf,stream->bm)!=stream->bm) {
+    if ((tmp=stream->bm-stream->bs)) {
+      lseek(stream->fd,tmp,SEEK_CUR);
+    }
+    stream->bs=stream->bm=0;
+  } else {
+    if (stream->bm && write(stream->fd,stream->buf,stream->bm)!=(int)stream->bm) {
       stream->flags|=ERRORINDICATOR;
       return -1;
     }
-  stream->bm=0;
+    stream->bm=0;
+  }
   return 0;
 }
 
@@ -50,13 +50,15 @@ int __fflush4(FILE *stream,int next) {
     stream->flags=(stream->flags&~BUFINPUT)|next;
     return res;
   }
+  if (stream->fd==0) __fflush_stdout();
   return 0;
 }
 
-#else
-int fflush(FILE *stream) {
-  return 0;
+/* Internal function, has no prototype.
+ * This is defined here because of the weak symbol ELF semantics */
+int __stdio_outs(const char *s,size_t len);
+int __stdio_outs(const char *s,size_t len) {
+  return fwrite(s,1,(size_t)len,stdout)==len?1:0;
 }
-#endif
 
-link_warning("fflush","warning: your code uses stdio (several kilobytes of bloat).")
+link_warning("fflush","warning: your code uses stdio (7+k bloat).")

@@ -15,12 +15,16 @@ include $(top_dir)/Makefile.common
 
 INCS = -I./include
 
-DEFS = -Wno-error -D_GNU_SOURCE -DELF_MACHINE_H='"elf_$(ARCH).h"' -DARCH_$(ARCH)
+TAINT_URL = http://www.tux.org/lkml/\#export-tainted
+
+DEFS = -Wno-error -D_GNU_SOURCE \
+       -DELF_MACHINE_H='"elf_$(ARCH).h"' -DARCH_$(ARCH) \
+       -DTAINT_URL='"$(TAINT_URL)"'
 
 
 DIRS = util obj
 
-all: dirs insmod libinsmod.a #libinsmod-DIET.a
+all: dirs insmod libinsmod.a
 
 dirs:
 	@for n in . $(DIRS); do \
@@ -31,11 +35,11 @@ clean:
 	@for n in $(DIRS); do \
 		(cd $$n; make clean) \
 	done
-	rm -rf t *.o insmod libinsmod.a libinsmod-DIET.a
+	rm -rf t *.o insmod libinsmod.a
 
 
 insmod: insmod-frontend.o insmod.o ./util/libutil-STANDALONE.a ./obj/libobj.a
-	gcc -o $@ $^
+	$(DIET) gcc -o $@ $^
 	$(STRIPCMD) $@
 
 t/.create_stuff: util/libutil.a obj/libobj.a
@@ -48,16 +52,8 @@ libinsmod.a: insmod.o t/.create_stuff
 	ar cru $@ insmod.o t/*
 	ranlib $@
 
-libinsmod-DIET.a: insmod-DIET.o ./util/libutil-DIET.a ./obj/libobj-DIET.a
-	ar cru $@ $^
-	ranlib $@
-
 insmod-frontend.o: insmod-frontend.c insmod.c
-	gcc $(CFLAGS) $(DEFS) $(INCS) $(GLIBC_INCLUDES) -c insmod-frontend.c
+	$(DIET) gcc $(CFLAGS) $(DEFS) $(INCS) $(INCLUDES) -c insmod-frontend.c
 
 insmod.o: insmod.c
-	gcc $(CFLAGS) $(DEFS) $(INCS) $(GLIBC_INCLUDES) -c insmod.c
-
-insmod-DIET.o: insmod.c
-	gcc $(CFLAGS) $(DEFS) $(INCS) $(DIETLIBC_INCLUDES) -o $@ -c insmod.c
-
+	$(DIET) gcc $(CFLAGS) $(DEFS) $(INCS) $(INCLUDES) -c insmod.c

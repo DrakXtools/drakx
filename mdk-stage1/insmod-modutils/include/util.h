@@ -1,3 +1,6 @@
+#ifndef MODUTILS_UTIL_H
+#define MODUTILS_UTIL_H 1
+
 /* Miscelaneous utility functions.
    Copyright 1996, 1997 Linux International.
 
@@ -19,11 +22,6 @@
    along with this program; if not, write to the Free Software Foundation,
    Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.  */
 
-
-#ifndef MODUTILS_UTIL_H
-#define MODUTILS_UTIL_H 1
-
-#ident "$Id$"
 
 #include <stdio.h>
 #include <sys/stat.h>

@@ -45,8 +45,7 @@ static char sccsid[] = "@(#)clnt_udp.c 1.39 87/08/11 Copyr 1984 Sun Micro";
 #include <errno.h>
 #include <rpc/pmap_clnt.h>
 #include <unistd.h>
-
-extern int errno;
+#include "dietfeatures.h"
 
 /*
  * UDP bases client side rpc operations
@@ -67,6 +66,7 @@ static struct clnt_ops udp_ops = {
 	clntudp_control
 };
 
+
 /* 
  * Private data kept per client handle
  */
@@ -79,10 +79,10 @@ struct cu_data {
 	struct timeval cu_total;
 	struct rpc_err cu_error;
 	XDR cu_outxdrs;
-	u_int cu_xdrpos;
-	u_int cu_sendsz;
+	unsigned int cu_xdrpos;
+	unsigned int cu_sendsz;
 	char *cu_outbuf;
-	u_int cu_recvsz;
+	unsigned int cu_recvsz;
 	char cu_inbuf[1];
 };
 
@@ -105,12 +105,12 @@ struct cu_data {
 CLIENT *clntudp_bufcreate(raddr, program, version, wait, sockp, sendsz,
 						  recvsz)
 struct sockaddr_in *raddr;
-u_long program;
-u_long version;
+unsigned long program;
+unsigned long version;
 struct timeval wait;
 register int *sockp;
-u_int sendsz;
-u_int recvsz;
+unsigned int sendsz;
+unsigned int recvsz;
 {
 	CLIENT *cl;
 	register struct cu_data *cu;
@@ -137,7 +137,7 @@ u_int recvsz;
 
 	(void) gettimeofday(&now, (struct timezone *) 0);
 	if (raddr->sin_port == 0) {
-		u_short port;
+		unsigned short port;
 
 		if ((port =
 			 pmap_getport(raddr, program, version, IPPROTO_UDP)) == 0) {
@@ -146,7 +146,7 @@ u_int recvsz;
 		raddr->sin_port = htons(port);
 	}
 	cl->cl_ops = &udp_ops;
-	cl->cl_private = (caddr_t) cu;
+	cl->cl_private = (char*) cu;
 	cu->cu_raddr = *raddr;
 	cu->cu_rlen = sizeof(cu->cu_raddr);
 	cu->cu_wait = wait;
@@ -186,16 +186,16 @@ u_int recvsz;
 	return (cl);
   fooy:
 	if (cu)
-		mem_free((caddr_t) cu, sizeof(*cu) + sendsz + recvsz);
+		mem_free((char*) cu, sizeof(*cu) + sendsz + recvsz);
 	if (cl)
-		mem_free((caddr_t) cl, sizeof(CLIENT));
+		mem_free((char*) cl, sizeof(CLIENT));
 	return ((CLIENT *) NULL);
 }
 
 CLIENT *clntudp_create(raddr, program, version, wait, sockp)
 struct sockaddr_in *raddr;
-u_long program;
-u_long version;
+unsigned long program;
+unsigned long version;
 struct timeval wait;
 register int *sockp;
 {
@@ -207,11 +207,11 @@ register int *sockp;
 static enum clnt_stat
 clntudp_call(cl, proc, xargs, argsp, xresults, resultsp, utimeout)
 register CLIENT *cl;			/* client handle */
-u_long proc;					/* procedure number */
+unsigned long proc;					/* procedure number */
 xdrproc_t xargs;				/* xdr routine for args */
-caddr_t argsp;					/* pointer to args */
+char* argsp;					/* pointer to args */
 xdrproc_t xresults;				/* xdr routine for results */
-caddr_t resultsp;				/* pointer to results */
+char* resultsp;				/* pointer to results */
 struct timeval utimeout;		/* seconds to wait before giving up */
 {
 	register struct cu_data *cu = (struct cu_data *) cl->cl_private;
@@ -250,7 +250,7 @@ struct timeval utimeout;		/* seconds to wait before giving up */
 	/*
 	 * the transaction is the first thing in the out buffer
 	 */
-	(*(u_short *) (cu->cu_outbuf))++;
+	(*(unsigned short *) (cu->cu_outbuf))++;
 	if ((!XDR_PUTLONG(xdrs, (long *) &proc)) ||
 		(!AUTH_MARSHALL(cl->cl_auth, xdrs)) || (!(*xargs) (xdrs, argsp)))
 		return (cu->cu_error.re_status = RPC_CANTENCODEARGS);
@@ -324,10 +324,10 @@ struct timeval utimeout;		/* seconds to wait before giving up */
 			cu->cu_error.re_errno = errno;
 			return (cu->cu_error.re_status = RPC_CANTRECV);
 		}
-		if (inlen < sizeof(u_long))
+		if (inlen < sizeof(unsigned long))
 			continue;
 		/* see if reply transaction id matches sent id */
-		if (*((u_long *) (cu->cu_inbuf)) != *((u_long *) (cu->cu_outbuf)))
+		if (*((unsigned long *) (cu->cu_inbuf)) != *((unsigned long *) (cu->cu_outbuf)))
 			continue;
 		/* we now assume we have the proper reply */
 		break;
@@ -336,7 +336,7 @@ struct timeval utimeout;		/* seconds to wait before giving up */
 	/*
 	 * now decode and validate the response
 	 */
-	xdrmem_create(&reply_xdrs, cu->cu_inbuf, (u_int) inlen, XDR_DECODE);
+	xdrmem_create(&reply_xdrs, cu->cu_inbuf, (unsigned int) inlen, XDR_DECODE);
 	ok = xdr_replymsg(&reply_xdrs, &reply_msg);
 	/* XDR_DESTROY(&reply_xdrs);  save a few cycles on noop destroy */
 	if (ok) {
@@ -380,7 +380,7 @@ struct rpc_err *errp;
 static bool_t clntudp_freeres(cl, xdr_res, res_ptr)
 CLIENT *cl;
 xdrproc_t xdr_res;
-caddr_t res_ptr;
+char* res_ptr;
 {
 	register struct cu_data *cu = (struct cu_data *) cl->cl_private;
 	register XDR *xdrs = &(cu->cu_outxdrs);
@@ -432,6 +432,7 @@ CLIENT *cl;
 		(void) close(cu->cu_sock);
 	}
 	XDR_DESTROY(&(cu->cu_outxdrs));
-	mem_free((caddr_t) cu, (sizeof(*cu) + cu->cu_sendsz + cu->cu_recvsz));
-	mem_free((caddr_t) cl, sizeof(CLIENT));
+	mem_free((char*) cu, (sizeof(*cu) + cu->cu_sendsz + cu->cu_recvsz));
+	mem_free((char*) cl, sizeof(CLIENT));
 }
+

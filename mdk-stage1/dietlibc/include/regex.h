@@ -38,6 +38,7 @@ typedef struct __regex_t {
   int brackets,cflags;
   regmatch_t *l;
 } regex_t;
+#define re_nsub r.pieces
 
 int regcomp(regex_t *preg, const char *regex, int cflags) __THROW;
 int regexec(const regex_t *preg, const char *string, size_t nmatch, regmatch_t pmatch[], int eflags) __THROW;
@@ -61,7 +62,10 @@ enum __regex_errors {
   REG_BADPAT, /* Invalid use of pattern operators such as group or list. */
   REG_ESIZE, /* Compiled  regular  expression  requires  a  pattern  buffer
 		larger than 64Kb.  This is not defined by POSIX.2. */
-  REG_ESPACE, /* regcomp ran out of space */
+  REG_ESPACE /* regcomp ran out of space */
 };
+
+char * re_comp(char * regex);
+int re_exec(char * string);
 
 #endif

@@ -3,7 +3,13 @@
 
 #include <sys/cdefs.h>
 #include <sys/resource.h>
-#include <linux/wait.h>
+
+#define WNOHANG		0x00000001
+#define WUNTRACED	0x00000002
+
+#define __WNOTHREAD	0x20000000	/* Don't wait on children of other threads in this group */
+#define __WALL		0x40000000	/* Wait on all children, regardless of type */
+#define __WCLONE	0x80000000	/* Wait only on non-SIGCHLD children */
 
 /* If WIFEXITED(STATUS), the low-order 8 bits of the status.  */
 #define __WEXITSTATUS(status)	(((status) & 0xff00) >> 8)
@@ -26,6 +32,8 @@
 /* Nonzero if STATUS indicates the child is stopped.  */
 #define WIFSTOPPED(status)	(((status) & 0xff) == 0x7f)
 
+/* Nonzero if STATUS indicates the child dumped core. */
+#define WCOREDUMP(status) ((status) & 0x80)
 
 pid_t wait(int *status) __THROW;
 pid_t waitpid(pid_t pid, int *status, int options) __THROW;

@@ -1,118 +1,63 @@
-#include "getopt.h"
 #include <string.h>
+#include <getopt.h>
 
-/*
- * by Olaf Dreesen
- */
-
-int opterr;
-
-int optind=1;
-char *optarg;
-
-static int opt_unknown=1,opt_unknown_len;
-
-static int getopt_check(int c,char*o,int ol)
-{
-  int i;
-  if (c==':') return 2;
-  for (i=0;i<ol;i++)
-  {
-    if (o[i]==c)
-    {
-      if (o[i+1]==':') return 1;
-      return 0;
+static void getopterror(int which) {
+  static char error1[]="Unknown option `-x'.\n";
+  static char error2[]="Missing argument for `-x'.\n";
+  if (opterr) {
+    if (which) {
+      error2[23]=optopt;
+      write(2,error2,28);
+    } else {
+      error1[17]=optopt;
+      write(2,error1,22);
     }
-  }
-  return 2;
-}
-
-static void getopt_sort(char*v[],int oi)
-{
-  int i;
-  char *tmp, *tmp2=0;
-
-  if (opt_unknown_len)
-  {
-    tmp=v[optind-(1+oi)];
-    if (oi) tmp2=v[optind-1];
-
-    for (i=opt_unknown+opt_unknown_len;i>opt_unknown;i--) v[i+oi]=v[i-1];
-
-    v[opt_unknown++]=tmp;
-    if (oi) v[opt_unknown++]=tmp2;
   }
 }
 
-static char* nextchar;
-int getopt(int c,char*v[],char*o)
-{
-  int ol=strlen(o);
-  int ret=0;
-  int oi=0;
-
-  optarg=0;
-
-  while (nextchar || (optind<c))
-  {
-    if (nextchar)
-    {
-      if ((ret=(*(++nextchar))))
-      {
-	switch (getopt_check(ret,o,ol))
-	{
-	case 1:
-	  if (*(++nextchar))
-	    optarg=nextchar;
-	  else
-	  {
-	    if (optind<c)
-	    {
-	      oi=1;
-	      optarg=v[optind++];
-	    }
-	    else
-	      ret='?';
-	  }
-	  nextchar=0;
-	case 0:
-	  if (!nextchar)
-	    getopt_sort(v,oi);
-	  else
-	    if (!(*(nextchar+1)))
-	      getopt_sort(v,oi);
-	  return ret;
-	  break;
-	default:
-	  return '?';
-	  break;
-	}
-      }
-      else
-	nextchar=0;
+int getopt(int argc, char * const argv[], const char *optstring) {
+  static int lastidx=0,lastofs=0;
+  char *tmp;
+  if (optind==0) optind=1;	/* whoever started setting optind to 0 should be shot */
+again:
+  if (optind>argc || !argv[optind] || *argv[optind]!='-' || argv[optind][1]==0)
+    return -1;
+  if (argv[optind][1]=='-' && argv[optind][2]==0) {
+    ++optind;
+    return -1;
+  }
+  if (lastidx!=optind) {
+    lastidx=optind; lastofs=0;
+  }
+  optopt=argv[optind][lastofs+1];
+  if ((tmp=strchr(optstring,optopt))) {
+    if (*tmp==0) {	/* apparently, we looked for \0, i.e. end of argument */
+      ++optind;
+      goto again;
     }
-    else
-    {
-      if ((v[optind][0]=='-')&&((v[optind][1]!=0)))
-      {
-	if ((v[optind][1]=='-')&&(v[optind][2]==0))
-	{
-	  getopt_sort(v,oi);
-	  optind=opt_unknown;
-	  return -1;
-	}
-	else
-	{
-	  nextchar=v[optind];
-	}
+    if (tmp[1]==':') {	/* argument expected */
+      if (tmp[2]==':' || argv[optind][lastofs+2]) {	/* "-foo", return "oo" as optarg */
+	if (!*(optarg=argv[optind]+lastofs+2)) optarg=0;
+	goto found;
       }
-      else
-      {
-	++opt_unknown_len;
+      optarg=argv[optind+1];
+      if (!optarg) {	/* missing argument */
+	++optind;
+	if (*optstring==':') return ':';
+	getopterror(1);
+	return ':';
       }
       ++optind;
+    } else {
+      ++lastofs;
+      return optopt;
     }
+found:
+    ++optind;
+    return optopt;
+  } else {	/* not found */
+    getopterror(0);
+    ++optind;
+    return '?';
   }
-  optind=opt_unknown;
-  return -1;
 }

@@ -1,3 +1,6 @@
+#ifndef MODUTILS_MODULE_H
+#define MODUTILS_MODULE_H 1
+
 /* Definitions for the Linux module syscall interface.
    Copyright 1996, 1997 Linux International.
 
@@ -19,11 +22,6 @@
    along with this program; if not, write to the Free Software Foundation,
    Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.  */
 
-
-#ifndef MODUTILS_MODULE_H
-#define MODUTILS_MODULE_H 1
-
-#ident "$Id$"
 
 /* This file contains the structures used by the 2.0 and 2.1 kernels.
    We do not use the kernel headers directly because we do not wish
@@ -206,5 +204,14 @@ int delete_module(const char *);
  * expansion is not allowed on that name.
  */
 extern unsigned int safemode;
+
+/*======================================================================*/
+/* Tainted kernel information.  This must match include/linux/kernel.h  */
+/* and kernel/panic.c.                                                  */
+
+#define TAINT_FILENAME			"/proc/sys/kernel/tainted"
+#define TAINT_PROPRIETORY_MODULE	(1<<0)
+#define TAINT_FORCED_MODULE		(1<<1)
+#define TAINT_UNSAFE_SMP		(1<<2)
 
 #endif /* module.h */

@@ -25,15 +25,10 @@ include $(top_dir)/Makefile.common
 TARGETS = libmar.a mar
 
 
-ifeq (DIETLIBC, $(L))
-TARGETS += libmar-DIET.a
-endif
-
-
 all: $(TARGETS)
 
 clean:
-	rm -f *.o libmar.a libmar-DIET.a mar
+	rm -f *.o libmar.a mar
 
 
 mar: mar-frontend.o mar-extract-only-standalone.o
@@ -44,15 +39,8 @@ libmar.a: mar-extract-only.o
 	ar -cru $@ $^
 	ranlib $@
 
-libmar-DIET.a: mar-extract-only-DIET.o
-	ar -cru $@ $^
-	ranlib $@
-
 mar-extract-only.o: mar-extract-only.c mar-extract-only.h mar.h
-	gcc $(CFLAGS) $(GLIBC_INCLUDES) -c mar-extract-only.c
-
-mar-extract-only-DIET.o: mar-extract-only.c mar-extract-only.h mar.h
-	gcc $(CFLAGS) $(DIETLIBC_INCLUDES) -o $@ -c mar-extract-only.c
+	$(DIET) gcc $(CFLAGS) $(INCLUDES) -c mar-extract-only.c
 
 mar-frontend.o: mar-frontend.c mar.h mar-extract-only.h
 	gcc $(CFLAGS) $(GLIBC_INCLUDES) -c mar-frontend.c

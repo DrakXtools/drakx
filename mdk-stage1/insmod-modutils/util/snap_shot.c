@@ -20,8 +20,6 @@
    Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
   */
 
-#ident "$Id$"
-
 #include <errno.h>
 #include <stdio.h>
 #include <stdarg.h>
@@ -108,6 +106,7 @@ void snap_shot(const char *module_names, int n_module_names)
 		if (ferror(in))
 			error("unable to read from %s %m", infile[i]);
 		fclose(in);
+		fflush(out);
 		fclose(out);
 	}
 }
@@ -150,5 +149,6 @@ void snap_shot_log(const char *fmt,...)
 	vfprintf(log, fmt, args);
 	va_end(args);
 	fprintf(log, "\n");
+	fflush(log);
 	fclose(log);
 }

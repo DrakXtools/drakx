@@ -2,20 +2,25 @@
 #include <dlfcn.h>
 #include <limits.h>
 
-int _dl_search(char*buf, int bufsize, const char*filename);
-void *_dl_open(const char*pathname, int fd, int flag);
+#include "_dl_int.h"
 
-void *dlopen (const char *filename, int flag)
-{
-  int fd;
-  char buf[PATH_MAX];
-  const char *p;
-  if (*filename=='/')
-    fd=open(p=filename,O_RDONLY);
-  else {
-    p=buf;
-    fd=_dl_search(buf,sizeof(buf),filename);
+#ifdef __DIET_LD_SO__
+static
+#endif
+void*_dlopen(const char *filename, int flags) {
+  struct _dl_handle* ret;
+  if (filename) {
+    if ((ret=_dl_find_lib(filename))) {
+      ++(ret->lnk_count);	/* add a reference */
+      return ret;
+    }
+    return _dl_open(filename,flags);
   }
+  /* return 1 as an indicator for dlsym to search ALL global objects */
+  return RTLD_DEFAULT;
+}
 
-  return _dl_open(p,fd,flag);
+void*dlopen(const char *filename, int flags) {
+  _dl_error_location="dlopen";
+  return _dlopen(filename,flags|RTLD_USER|RTLD_NOSONAME);
 }

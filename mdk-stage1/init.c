@@ -33,7 +33,11 @@
 
 char * env[] = {
 	"PATH=/usr/bin:/bin:/sbin:/usr/sbin:/mnt/sbin:/mnt/usr/sbin:/mnt/bin:/mnt/usr/bin",
-	"LD_LIBRARY_PATH=/lib:/usr/lib:/mnt/lib:/mnt/usr/lib:/usr/X11R6/lib:/mnt/usr/X11R6/lib",
+	"LD_LIBRARY_PATH=/lib:/usr/lib:/mnt/lib:/mnt/usr/lib:/usr/X11R6/lib:/mnt/usr/X11R6/lib"
+#if defined(__x86_64__) || defined(__ppc64__)
+	":/lib64:/usr/lib64:/usr/X11R6/lib64:/mnt/lib64:/mnt/usr/lib64:/mnt/usr/X11R6/lib64"
+#endif
+	,
 	"HOME=/",
 	"TERM=linux",
 	"TERMINFO=/etc/terminfo",

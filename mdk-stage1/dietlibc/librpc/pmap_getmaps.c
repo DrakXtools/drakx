@@ -48,13 +48,12 @@ static char sccsid[] =
 #include <netdb.h>
 #include <stdio.h>
 #include <errno.h>
+#include <netinet/in.h>
 //#include <net/if.h>
 #include <sys/ioctl.h>
 #define NAMELEN 255
 #define MAX_BROADCAST_SIZE 1400
 #include <unistd.h>
-
-extern int errno;
 
 /*
  * Get a copy of the current port maps.
@@ -74,7 +73,7 @@ struct sockaddr_in *address;
 	client = clnttcp_create(address, PMAPPROG, PMAPVERS, &socket, 50, 500);
 	if (client != (CLIENT *) NULL) {
 		if (CLNT_CALL(client, PMAPPROC_DUMP, (xdrproc_t)xdr_void, NULL, (xdrproc_t)xdr_pmaplist,
-					  (caddr_t)&head, minutetimeout) != RPC_SUCCESS) {
+					  (char*)&head, minutetimeout) != RPC_SUCCESS) {
 			clnt_perror(client, "pmap_getmaps rpc problem");
 		}
 		CLNT_DESTROY(client);

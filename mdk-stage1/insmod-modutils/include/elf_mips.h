@@ -1,5 +1,4 @@
 /* Machine-specific elf macros for MIPS.  */
-#ident "$Id$"
 
 #define ELFCLASSM	ELFCLASS32
 #ifdef __MIPSEB__

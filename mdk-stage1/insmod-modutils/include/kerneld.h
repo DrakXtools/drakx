@@ -4,8 +4,6 @@
 #ifndef MODUTILS_KERNELD_H
 #define MODUTILS_KERNELD_H
 
-#ident "$Id$"
-
 #define KERNELD_SYSTEM 1
 #define KERNELD_REQUEST_MODULE 2		/* "insmod" */
 #define KERNELD_RELEASE_MODULE 3		/* "rmmod" */

@@ -1,1 +1,1 @@
-#define MODUTILS_VERSION "2.4.2"
+#define MODUTILS_VERSION "2.4.19"

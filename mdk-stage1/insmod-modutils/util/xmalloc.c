@@ -18,8 +18,6 @@
    along with this program; if not, write to the Free Software Foundation,
    Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.  */
 
-#ident "$Id$"
-
 #include <stdlib.h>
 #include "util.h"
 
@@ -29,7 +27,7 @@
 void *
 xmalloc(size_t size)
 {
-  void *ptr = malloc(size);
+  void *ptr = malloc(size ? size : 1);
   if (!ptr)
     {
       error("Out of memory");

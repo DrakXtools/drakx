@@ -20,8 +20,7 @@
    Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
   */
 
-#ident "$Id$"
-
+#include <limits.h>
 #include <stdio.h>
 #include <stdarg.h>
 #include <stdlib.h>
@@ -32,9 +31,10 @@
 
 /*======================================================================*/
 
+int log;
+
 int errors;
 const char *error_file;
-int log;
 
 #define STOREMSG
 #ifdef STOREMSG
@@ -43,6 +43,27 @@ struct cbuf {
 	int type;
 	char *msg;
 } *head, *tail;
+
+static void dumpmsg(void)
+{
+	for (;head; head = head->next)
+		syslog(head->type, "%s", head->msg);
+}
+#endif /* STOREMSG */
+
+void setsyslog(const char *program)
+{
+	openlog(program, LOG_CONS, LOG_DAEMON);
+#ifdef STOREMSG
+	atexit(dumpmsg);
+#endif
+	log = 1;
+}
+
+#ifdef _STANDALONE_
+static int silent;
+
+const char *program_name;
 
 static void savemsg(int type, char *msg)
 {
@@ -60,30 +81,6 @@ static void savemsg(int type, char *msg)
 	tail = me;
 }
 
-#endif /* STOREMSG */
-
-static void dumpmsg(void)
-{
-	for (;head; head = head->next)
-		syslog(head->type, "%s", head->msg);
-}
-
-void setsyslog(const char *program)
-{
-	openlog(program, LOG_CONS, LOG_DAEMON);
-#ifdef STOREMSG
-	atexit(dumpmsg);
-#endif
-	log = 1;
-}
-
-
-
-#ifdef _STANDALONE_
-static int silent;
-
-const char *program_name;
-
 void error(const char *fmt,...)
 {
 	va_list args;
@@ -91,7 +88,7 @@ void error(const char *fmt,...)
 	if (silent)
 		;
 	else if (log) {
-		char buf[1024];
+		char buf[2*PATH_MAX];
 		int n;
 
 		if (error_file)
@@ -124,7 +121,7 @@ void lprintf(const char *fmt,...)
 
 	if (silent);
 	else if (log) {
-		char buf[1024];
+		char buf[2*PATH_MAX];
 		va_start(args, fmt);
 		vsnprintf(buf, sizeof(buf), fmt, args);
 		va_end(args);
@@ -140,7 +137,6 @@ void lprintf(const char *fmt,...)
 		putchar('\n');
 	}
 }
-
 #else /* _STANDALONE_ */
 #include "../../log.h"
 void error(const char *s, ...)
@@ -161,3 +157,4 @@ void lprintf(const char *s, ...)
 	va_end(p);
 }
 #endif
+

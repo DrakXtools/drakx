@@ -1,23 +1,27 @@
 /*
  * malloc/free by O.Dreesen
+ *
+ * first TRY:
+ *   lists w/magics
+ * and now the second TRY
+ *   let the kernel map all the stuff (if there is something to do)
  */
 
-#include <linux/unistd.h>
-#include <asm/mman.h>
-#include <linux/errno.h>
+#include <unistd.h>
+#include <sys/mman.h>
+#include <errno.h>
 #include "dietfeatures.h"
 
-#if 0
-#include <sys/mman.h>
-#define _LIBC
-#include <errno.h>
-#endif
+#include <sys/cdefs.h>
+#include <sys/types.h>
+#include <stddef.h>
+#include <stdlib.h>
+#include <string.h>
 
-#include <linux/types.h>
+#include <sys/shm.h>	/* for PAGE_SIZE */
 
-#if defined(MAP_ANONYMOUS) && !defined(MAP_ANON)
-#define MAP_ANON MAP_ANONYMOUS
-#endif
+
+/* -- HELPER CODE --------------------------------------------------------- */
 
 #ifndef MAP_FAILED
 #define MAP_FAILED ((void*)-1)
@@ -27,217 +31,207 @@
 #define NULL ((void*)0)
 #endif
 
-extern void * mmap(void *start, size_t length, int prot , int flags, int fd, off_t offset);
-extern void *memset(void *s, int c, size_t n);
-extern void *memcpy(void *dest, const void *src, size_t n);
+typedef union {
+  void*  next;
+  size_t size;
+} __alloc_t;
 
-typedef struct t_alloc_head {
-  unsigned int magic1;
-  struct t_alloc_head *ptr;
-  unsigned long size;
-  unsigned int magic2;
-} alloc_head;
+#define BLOCK_START(b)	(((void*)(b))-sizeof(__alloc_t))
+#define BLOCK_RET(b)	(((void*)(b))+sizeof(__alloc_t))
 
-/* guess what ? the virtual block size */
-#define MEM_BLOCK_SIZE	4096
+#define MEM_BLOCK_SIZE	PAGE_SIZE
+#define PAGE_ALIGN(s)	(((s)+MEM_BLOCK_SIZE-1)&(unsigned long)(~(MEM_BLOCK_SIZE-1)))
 
-/* minimum allocated bytes */
-#define MEM_ALLOC_MIN	4
+/* a simple mmap :) */
 
-/* Initial start position in memory */
-#define MEM_ALLOC_START	((char*)0x18000000)
+#ifdef __i386__
+/* regparm exists only on i386 */
+static void *do_mmap(size_t size) __attribute__((regparm(1)));
+static size_t get_index(size_t _size) __attribute__((regparm(1)));
+static void* __small_malloc(size_t _size) __attribute__((regparm(1)));
+#endif
 
-/* Make every block align */
-#define MEM_ALIGN(s)	(((s)+MEM_ALLOC_MIN-1)&(~(MEM_ALLOC_MIN-1)))
-#define PAGE_ALIGN(s)	(((s)+MEM_BLOCK_SIZE-1)&(~(MEM_BLOCK_SIZE-1)))
-#define PAGE_ALIGNP(p)	((char*)PAGE_ALIGN((size_t)(p)))
-
-#define END_OF_BLOCK(p)	((alloc_head*)(((char*)(p))+((p)->size)))
-#define START_BLOCK(p)	((alloc_head*)(((char*)(p))-sizeof(alloc_head)))
-#define START_DATA(p)	(((char*)(p))+sizeof(alloc_head))
-#define MIN_ALLOC(s)	(((((s)+sizeof(alloc_head)-1)/MEM_ALLOC_MIN)+1)*MEM_ALLOC_MIN)
-
-#define ALLOC_MAGIC1	0xbad2f7ee
-#define ALLOC_MAGIC2	0xf7ee2bad
-
-/* freelist handler */
-static alloc_head base = {ALLOC_MAGIC1,&base,0,ALLOC_MAGIC2};
-static char *alloc_get_end = MEM_ALLOC_START;
-
-void __libc_free(void *ptr)
-{
-  alloc_head *prev,*p,*block;
-
-  if (ptr==NULL) return;
-
-  block=START_BLOCK(ptr);
-  if (block->magic1 != ALLOC_MAGIC1) return;
-  if (block->magic2 != ALLOC_MAGIC2) return;
-
-  prev=&base;
-  for (p=prev->ptr ; ; prev=p, p=p->ptr)
-  {
-    if ((block>prev)&&(block<p)) break; /* found the gap block belongs */
-    if ((prev>p)&&(block<p)) break;	  /* block pre freelist */
-    if ((prev>p)&&(block>prev)) break;  /* block after freelist */
-
-    /* emergency escape: freelist has ONLY one entry the freelist base */
-    if (p->ptr==p) break;
-  }
-  prev->ptr = block;
-
-  if (END_OF_BLOCK(block)==p)
-  { /* join right neighbor */
-    block->ptr   = p->ptr;
-    block->size += p->size;
-  }
-  else
-    block->ptr = p;
-
-  if (END_OF_BLOCK(prev)==block)
-  { /* join left neighbor */
-    prev->size += block->size;
-    prev->ptr   = block->ptr;
-  }
+static void *do_mmap(size_t size) {
+  return mmap(0, size, PROT_READ|PROT_WRITE, MAP_ANONYMOUS|MAP_PRIVATE, -1, (size_t)0);
 }
-void free(void *ptr) __attribute__((weak,alias("__libc_free")));
 
-static void *alloc_get_mem(unsigned long size)
-{
-  char *tmp;
-  alloc_head *ah;
+/* -- SMALL MEM ----------------------------------------------------------- */
 
-  size=PAGE_ALIGN(size);
+static __alloc_t* __small_mem[8];
 
-  /* map free pages @ alloc_get_end */
-  tmp=mmap(alloc_get_end, size, PROT_READ|PROT_WRITE,
-	   MAP_ANONYMOUS|MAP_PRIVATE|MAP_FIXED, -1, 0);
-  if (tmp==MAP_FAILED)
-  {
-    /* OK we can't map free pages @ alloc_get_end so try free position */
-    tmp=mmap(0, size, PROT_READ|PROT_WRITE,
-	     MAP_ANONYMOUS|MAP_PRIVATE, -1, 0);
-    if (tmp==MAP_FAILED)
-    {
-      errno = ENOMEM;
-      return NULL;	/* PANIC ! */
+#define __SMALL_NR(i)		(MEM_BLOCK_SIZE/(i))
+
+#define __MIN_SMALL_SIZE	__SMALL_NR(256)		/*   16 /   32 */
+#define __MAX_SMALL_SIZE	__SMALL_NR(2)		/* 2048 / 4096 */
+
+#define GET_SIZE(s)		(__MIN_SMALL_SIZE<<get_index((s)))
+
+#define FIRST_SMALL(p)		(((unsigned long)(p))&(~(MEM_BLOCK_SIZE-1)))
+
+static inline int __ind_shift() { return (MEM_BLOCK_SIZE==4096)?4:5; }
+
+static size_t get_index(size_t _size) {
+  register size_t idx=0;
+  if (_size) {
+    register size_t size=((_size-1)&(MEM_BLOCK_SIZE-1))>>__ind_shift();
+    while(size) { size>>=1; ++idx; }
+  }
+  return idx;
+}
+
+/* small mem */
+static void __small_free(void*_ptr,size_t _size) __attribute__((regparm(2)));
+
+static void __small_free(void*_ptr,size_t _size) {
+  __alloc_t* ptr=BLOCK_START(_ptr);
+  size_t size=_size;
+  size_t idx=get_index(size);
+
+  memset(ptr,0,size);	/* allways zero out small mem */
+
+  ptr->next=__small_mem[idx];
+  __small_mem[idx]=ptr;
+}
+
+static void* __small_malloc(size_t _size) {
+  __alloc_t *ptr;
+  size_t size=_size;
+  size_t idx;
+
+  idx=get_index(size);
+  ptr=__small_mem[idx];
+
+  if (ptr==0)  {	/* no free blocks ? */
+    register int i,nr;
+    ptr=do_mmap(MEM_BLOCK_SIZE);
+    if (ptr==MAP_FAILED) return MAP_FAILED;
+
+    __small_mem[idx]=ptr;
+
+    nr=__SMALL_NR(size)-1;
+    for (i=0;i<nr;i++) {
+      ptr->next=(((void*)ptr)+size);
+      ptr=ptr->next;
     }
-    alloc_get_end=tmp;
+    ptr->next=0;
+
+    ptr=__small_mem[idx];
   }
 
-  alloc_get_end+=size;
+  /* get a free block */
+  __small_mem[idx]=ptr->next;
+  ptr->next=0;
 
-  /* make a header */
-  ah=(alloc_head*)tmp;
-  ah->magic1=ALLOC_MAGIC1;
-  ah->magic2=ALLOC_MAGIC2;
-  ah->ptr=ah;
-  ah->size=size;
-
-  /* link new free maped pages in freelist */
-  __libc_free(START_DATA(tmp));
-
-  return &base;
+  return ptr;
 }
 
-void *__libc_malloc(size_t size)
-{
-  alloc_head *p, *prev;
-  size_t need;
+/* -- PUBLIC FUNCTIONS ---------------------------------------------------- */
 
-  /* needed MEM_ALLOC_MIN */
-  need=MIN_ALLOC(size);
-
-  prev=&base;
-  for (p=prev->ptr;;prev=p,p=p->ptr)
-  {
-    if (p->size>=need)
-    {
-      if (p->size==need)
-      { /* fit PERFECT */
-	prev->ptr=p->ptr;	/* relink freelist */
-      }
+static void _alloc_libc_free(void *ptr) {
+  register size_t size;
+  if (ptr) {
+    size=((__alloc_t*)BLOCK_START(ptr))->size;
+    if (size) {
+      if (size<=__MAX_SMALL_SIZE)
+	__small_free(ptr,size);
       else
-      {
-	alloc_head *tmp=(alloc_head*)(((char*)p)+need);
-	if ((p->size-need)<sizeof(alloc_head))
-	{ /* work around: if there is not enough space for freelist head.
-	   * this waste some bytes ( < sizeof(alloc_head) ) */
-	  need=p->size;
-	  prev->ptr=p->ptr;	/* relink freelist */
-	}
-	else
-	{
-	  prev->ptr=tmp;
-	  tmp->magic1=ALLOC_MAGIC1;
-	  tmp->magic2=ALLOC_MAGIC2;
-	  tmp->ptr=p->ptr;
-	  tmp->size=p->size-need;	/* remaining size */
-	}
-
-	p->size=need;	/* set size */
-      }
-      p->ptr=p;		/* self-link */
-
-      return (void*)START_DATA(p);
-    }
-    else if (p==&base)
-    {
-      if ((p=alloc_get_mem(need))==NULL) goto err_out;
+	munmap(BLOCK_START(ptr),size);
     }
   }
+}
+void __libc_free(void *ptr) __attribute__((alias("_alloc_libc_free")));
+void free(void *ptr) __attribute__((weak,alias("_alloc_libc_free")));
+void if_freenameindex(void* ptr) __attribute__((alias("free")));
+
+#ifdef WANT_MALLOC_ZERO
+static __alloc_t zeromem[2]={{0},{0}};
+#endif
+
+static void* _alloc_libc_malloc(size_t size) {
+  __alloc_t* ptr;
+  size_t need;
+#ifdef WANT_MALLOC_ZERO
+  if (!size) return BLOCK_RET(zeromem);
+#else
+  if (!size) goto retzero;
+#endif
+  size+=sizeof(__alloc_t);
+  if (size<sizeof(__alloc_t)) goto retzero;
+  if (size<=__MAX_SMALL_SIZE) {
+    need=GET_SIZE(size);
+    ptr=__small_malloc(need);
+  }
+  else {
+    need=PAGE_ALIGN(size);
+    if (!need) ptr=MAP_FAILED; else ptr=do_mmap(need);
+  }
+  if (ptr==MAP_FAILED) goto err_out;
+  ptr->size=need;
+  return BLOCK_RET(ptr);
 err_out:
-  return NULL;
+  (*__errno_location())=ENOMEM;
+retzero:
+  return 0;
 }
-void *malloc(size_t size) __attribute__((weak,alias("__libc_malloc")));
+void* __libc_malloc(size_t size) __attribute__((alias("_alloc_libc_malloc")));
+void* malloc(size_t size) __attribute__((weak,alias("_alloc_libc_malloc")));
 
-void *calloc(size_t nmemb,size_t size)
-{
-  size_t n=nmemb*size;
-  void *tmp=malloc(n);
-  if (tmp) memset(tmp,0,n);
-  return tmp;
-}
-
-void *realloc(void *ptr,size_t size)
-{
-  alloc_head *tmp=0,*tf=0;
-  long need=0;
-  long diff=0;
-
-  if (ptr)
-  {
-    if (size)
-    {
-      tmp=START_BLOCK(ptr);
-      need=MIN_ALLOC(size);  /* only this size will survive */
-      diff=tmp->size-need;
-      if (diff<0)
-      {
-	if ((tf=malloc(size)))
-	{
-	  memcpy(tf,ptr,tmp->size-sizeof(alloc_head));
-	  free(ptr);
-	  return tf;
-	}
-	return NULL;
-      }
-      if (diff>=sizeof(alloc_head))
-      {
-	tmp->size=need;
-	tf=END_OF_BLOCK(tmp);
-	tf->magic1=ALLOC_MAGIC1;
-	tf->magic2=ALLOC_MAGIC2;
-	tf->ptr=tf;
-	tf->size=diff;
-	free(START_DATA(tf));
-      }
-      return ptr;
-    }
-    else
-      free(ptr);
+void *calloc(size_t nmemb, size_t _size) {
+  register size_t size=_size*nmemb;
+  if (nmemb && size/nmemb!=_size) {
+    (*__errno_location())=ENOMEM;
+    return 0;
   }
-  else if (size>0)
-    return malloc(size);
-  return NULL;
+  return malloc(size);
 }
+
+void* __libc_realloc(void* ptr, size_t _size);
+void* __libc_realloc(void* ptr, size_t _size) {
+  register size_t size=_size;
+  if (ptr) {
+    if (size) {
+      __alloc_t* tmp=BLOCK_START(ptr);
+      size+=sizeof(__alloc_t);
+      if (size<sizeof(__alloc_t)) goto retzero;
+      size=(size<=__MAX_SMALL_SIZE)?GET_SIZE(size):PAGE_ALIGN(size);
+      if (tmp->size!=size) {
+	if ((tmp->size<=__MAX_SMALL_SIZE)) {
+	  void *new=_alloc_libc_malloc(_size);
+	  if (new) {
+	    register __alloc_t* foo=BLOCK_START(new);
+	    size=foo->size;
+	    if (size>tmp->size) size=tmp->size;
+	    if (size) memcpy(new,ptr,size-sizeof(__alloc_t));
+	    _alloc_libc_free(ptr);
+	  }
+	  ptr=new;
+	}
+	else {
+	  register __alloc_t* foo;
+	  size=PAGE_ALIGN(size);
+	  foo=mremap(tmp,tmp->size,size,MREMAP_MAYMOVE);
+	  if (foo==MAP_FAILED) {
+retzero:
+	    (*__errno_location())=ENOMEM;
+	    ptr=0;
+	  }
+	  else {
+	    foo->size=size;
+	    ptr=BLOCK_RET(foo);
+	  }
+	}
+      }
+    }
+    else { /* size==0 */
+      _alloc_libc_free(ptr);
+    }
+  }
+  else { /* ptr==0 */
+    if (size) {
+      ptr=_alloc_libc_malloc(size);
+    }
+  }
+  return ptr;
+}
+void* realloc(void* ptr, size_t size) __attribute__((weak,alias("__libc_realloc")));
+

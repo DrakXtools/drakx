@@ -9,6 +9,8 @@
 #error "the diet libc is not compiled with thread safeness enabled!"
 #endif
 
+#undef errno
+
 /* cleanup */
 #define PTHREAD_MAX_CLEANUP 8
 struct thread_cleanup_t {
@@ -18,15 +20,13 @@ struct thread_cleanup_t {
 
 /* the thread descriptor / internal */
 struct _pthread_descr_struct {
-  /* runtime handling */
-  struct _pthread_descr_struct *joined; /* a joined thread or NULL */
-
   /* conditional variables */
   struct _pthread_descr_struct *waitnext; /* an other waiting thread or NULL */
   int  waiting;			/* internal waiting "lock" */
 
   /* thread/process data */
   int  pid;			/* Process id */
+  int  exited;			/* Process is dead */
 
   int  policy;			/* thread scheduling policy */
   int  priority;		/* thread priority */
@@ -42,7 +42,7 @@ struct _pthread_descr_struct {
 
   /* thread exit handling */
   void  *retval;		/* thread return value */
-  int   join;			/* thread waits for other to return */
+  int  joined;			/* flag other thread has joined */
   jmp_buf jmp_exit;		/* pthread_exit jump */
 
   /* thread flags */
@@ -58,7 +58,7 @@ struct _pthread_descr_struct {
   void* arg;			/* thread argument */
 
   /* create thread / manager thread lock */
-  struct _pthread_fastlock *manager_lock;
+  struct _pthread_fastlock go;
 
   /* cleanup stack */
   struct thread_cleanup_t cleanup_stack[PTHREAD_MAX_CLEANUP];
@@ -84,12 +84,13 @@ int __clone(void* (*fn)(void*), void* stack, int flags, void *arg);
 int __find_thread_id(int pid);
 _pthread_descr __get_thread_struct(int id);
 
-_pthread_descr __thread_get_free();
-_pthread_descr __thread_self();
+_pthread_descr __thread_get_free(void);
+_pthread_descr __thread_self(void);
 
-void __thread_cleanup(_pthread_descr th);
+int __thread_join(_pthread_descr join, void **return_value);
+#define __thread_cleanup(th) (void)__thread_join((th),0)
 
-void __thread_wait_some_time();
+void __thread_wait_some_time(void);
 
 #define __NO_ASYNC_CANCEL_BEGIN { int oldtype; pthread_setcanceltype(PTHREAD_CANCEL_DEFERRED, &oldtype);
 #define __NO_ASYNC_CANCEL_END pthread_setcanceltype(oldtype,0); pthread_testcancel(); }
@@ -100,7 +101,7 @@ int signal_manager_thread(_pthread_descr td);
 
 /* init stuff */
 extern pthread_once_t __thread_inited;
-void __thread_init();
+void __thread_init(void);
 #define __THREAD_INIT() __pthread_once(&__thread_inited, __thread_init)
 #define __TEST_CANCEL() pthread_testcancel()
 
@@ -108,6 +109,7 @@ void __thread_init();
 
 void  __libc_free(void *ptr);
 void *__libc_malloc(size_t size);
+void *__libc_realloc(void* ptr, size_t size);
 
 void __libc_closelog(void);
 void __libc_openlog(const char *ident, int option, int facility);
@@ -119,6 +121,7 @@ int __libc_close(int fd);
 int __libc_creat(const char *pathname, mode_t mode);
 int __libc_fcntl(int fd, int cmd, void *arg);
 int __libc_fsync(int fd);
+int __libc_fdatasync(int fd);
 int __libc_nanosleep(const struct timespec *req, struct timespec *rem);
 int __libc_open(const char *pathname, int flags, mode_t mode);
 int __libc_pause(void);

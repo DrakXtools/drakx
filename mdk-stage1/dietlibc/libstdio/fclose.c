@@ -4,14 +4,9 @@
 
 int fclose(FILE *stream) {
   int res;
-#ifdef WANT_BUFFERED_STDIO
   FILE *f,*fl;
-#endif
-  if (!stream)
-	  return EOF;
   fflush(stream);
   res=close(stream->fd);
-#ifdef WANT_BUFFERED_STDIO
   for (fl=0,f=__stdio_root; f; fl=f,f=f->next)
     if (f==stream) {
       if (fl)
@@ -20,7 +15,8 @@ int fclose(FILE *stream) {
 	__stdio_root=f->next;
       break;
     }
-#endif
+  if ((!(stream->flags&STATICBUF))&&(stream->buf))
+    free(stream->buf);
   free(stream);
   return res;
 }

@@ -1,23 +1,31 @@
+#include <stdlib.h>
+
 typedef void (*function)(void);
 
-static function __atexitlist[4];
+#define NUM_ATEXIT	32
+
+static function __atexitlist[NUM_ATEXIT];
+static int atexit_counter = 0;
 
 int atexit(function t) {
-  int i;
-  for (i=0; i<4; i++)
-    if (__atexitlist[i]==0) {
-      __atexitlist[i]=t;
-      return 0;
-    }
+  if (atexit_counter<NUM_ATEXIT) {
+    __atexitlist[atexit_counter]=t;
+    ++atexit_counter;
+    return 0;
+  }
   return -1;
 }
 
 extern void _exit(int code) __attribute__((noreturn));
+extern void __thread_doexit();
 
-void exit(int code) {
-  if (__atexitlist[3]) __atexitlist[3]();
-  if (__atexitlist[2]) __atexitlist[2]();
-  if (__atexitlist[1]) __atexitlist[1]();
-  if (__atexitlist[0]) __atexitlist[0]();
+void __libc_exit(int code);
+void __libc_exit(int code) {
+  register int i=atexit_counter;
+  __thread_doexit();
+  while(i) {
+    __atexitlist[--i]();
+  }
   _exit(code);
 }
+void exit(int code) __attribute__((alias("__libc_exit")));

@@ -2,6 +2,7 @@
 #include <fcntl.h>
 #include <unistd.h>
 #include <errno.h>
+#include "dietfeatures.h"
 
 int lockf(int fd, int cmd, off_t len) {
   struct flock fl;

@@ -44,8 +44,8 @@ static char sccsid[] = "@(#)clnt_generic.c 1.4 87/08/11 (C) 1987 SMI";
  * returns client handle. Default options are set, which the user can 
  * change using the rpc equivalent of ioctl()'s.
  */
-CLIENT *clnt_create __P ((const char *hostname, const u_long prog,
-				 const u_long vers, const char *proto))
+CLIENT *clnt_create __P ((const char *hostname, const unsigned long prog,
+				 const unsigned long vers, const char *proto))
 {
 	struct hostent *h;
 	struct protoent *p;
@@ -68,14 +68,14 @@ CLIENT *clnt_create __P ((const char *hostname, const u_long prog,
 		return (NULL);
 	}
 #ifdef __linux__
-	bzero((char *) &sin, sizeof(sin));
+	memset((char*)&sin,0,sizeof(sin));
 #endif
 	sin.sin_family = h->h_addrtype;
 	sin.sin_port = 0;
 #ifndef __linux__
-	bzero(sin.sin_zero, sizeof(sin.sin_zero));
+	memset(sin.sin_zero,0,sizeof(sin.sin_zero));
 #endif
-	bcopy(h->h_addr, (char *) &sin.sin_addr, h->h_length);
+	memmove((char *) &sin.sin_addr, h->h_addr, h->h_length);
 	p = getprotobyname(proto);
 	if (p == NULL) {
 		rpc_createerr.cf_stat = RPC_UNKNOWNPROTO;

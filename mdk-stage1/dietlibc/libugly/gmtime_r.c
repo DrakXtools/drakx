@@ -3,7 +3,7 @@
 /* seconds per day */
 #define SPD 24*60*60
 
-extern unsigned int __spm[];
+extern short __spm[];
 
 struct tm *gmtime_r(const time_t *timep, struct tm *r) {
   time_t i;
@@ -14,7 +14,7 @@ struct tm *gmtime_r(const time_t *timep, struct tm *r) {
   r->tm_wday=(4+work)%7;
   for (i=1970; ; ++i) {
     register time_t k=__isleap(i)?366:365;
-    if (work>k)
+    if (work>=k)
       work-=k;
     else
       break;
@@ -28,7 +28,7 @@ struct tm *gmtime_r(const time_t *timep, struct tm *r) {
     work-=1;
   }
 
-  for (i=11; i && __spm[i]>work; --i) ;
+  for (i=11; i && (__spm[i]>work); --i) ;
   r->tm_mon=i;
   r->tm_mday+=work-__spm[i];
   return r;

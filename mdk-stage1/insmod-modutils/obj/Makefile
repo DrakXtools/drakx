@@ -23,11 +23,16 @@ INCS = -I./../include
 
 DEFS = -D_GNU_SOURCE -DELF_MACHINE_H='"elf_$(ARCH).h"' -DARCH_$(ARCH) -DCONFIG_ROOT_CHECK_OFF=0
 
-OBJS = obj_kallsyms.o obj_common.o obj_load.o obj_reloc.o obj_$(ARCH).o
+ifeq (x86_64, $(ARCH))
+DEFS += -Wno-error
+endif
+
+OBJS = obj_kallsyms.o obj_common.o obj_load.o obj_reloc.o obj_$(ARCH).o \
+       obj_gpl_license.o
 
 libobj.a: $(OBJS)
 	ar cru $@ $^
 	ranlib $@
 
-.c.o:
-	gcc $(CFLAGS) $(DEFS) $(INCS) $(GLIBC_INCLUDES) -c $<
+%.o: %.c
+	$(DIET) gcc $(CFLAGS) $(DEFS) $(INCS) $(INCLUDES) -c $<

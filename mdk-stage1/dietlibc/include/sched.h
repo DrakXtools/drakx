@@ -4,13 +4,6 @@
 #include <time.h>
 
 #include <sys/types.h>
-#ifndef u16
-#define u16 __u16
-#endif
-
-/* till those F**KIN' kernel headers are sane: A COPY !
- * #include <linux/sched.h>
- * A COPY OF THE STUFF WE NEED.... *GRUMBLE* */
 
 /*
  * cloning flags:
@@ -26,7 +19,9 @@
 #define CLONE_PARENT    0x00008000      /* set if we want to have the same parent as the cloner */
 #define CLONE_THREAD    0x00010000      /* Same thread group? */
 
-#define CLONE_SIGNAL    (CLONE_SIGHAND | CLONE_THREA)
+#define CLONE_SIGNAL    (CLONE_SIGHAND | CLONE_THREAD)
+
+int clone(void*(*fn)(void*),void*stack,int flags,void*arg);
 
 /*
  * Scheduling policies
@@ -42,7 +37,7 @@
 #define SCHED_YIELD		0x10
 
 struct sched_param {
-	int sched_priority;
+  int sched_priority;
 };
 
 /* END OF COPY form kernel-header */
