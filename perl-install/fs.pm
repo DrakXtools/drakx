@@ -18,10 +18,10 @@ use loopback;
 
 
 sub read_fstab {
-    my ($file) = @_;
+    my ($file, $all_options) = @_;
 
     map {
-	my ($dev, $mntpoint, $type, $options) = split;
+	my ($dev, $mntpoint, $type, $options, $freq, $passno) = split;
 
 	$options = 'defaults' if $options eq 'rw'; # clean-up for mtab read
 
@@ -49,7 +49,7 @@ sub read_fstab {
 	    }
 	}
 
-	{ device => $dev, mntpoint => $mntpoint, type => $type, options => $options };
+	{ device => $dev, mntpoint => $mntpoint, type => $type, options => $options, if_($all_options, freq => $freq, passno => $passno) };
     } cat_($file);
 }
 
@@ -101,7 +101,7 @@ sub merge_info_from_mtab {
 
 sub merge_info_from_fstab {
     my ($fstab, $prefix, $uniq) = @_;
-    my @l = grep { !($uniq && fsedit::mntpoint2part($_->{mntpoint}, $fstab)) } read_fstab("$prefix/etc/fstab");
+    my @l = grep { !($uniq && fsedit::mntpoint2part($_->{mntpoint}, $fstab)) } read_fstab("$prefix/etc/fstab", 'all_options');
     merge_fstabs($fstab, @l);
 }
 
@@ -110,7 +110,7 @@ sub write_fstab {
     $prefix ||= '';
 
     my @l1 = (fsedit::get_really_all_fstab($all_hds), @{$all_hds->{special}});
-    my @l2 = read_fstab("$prefix/etc/fstab");
+    my @l2 = read_fstab("$prefix/etc/fstab", 'all_options');
 
     my %new;
     my @l = map { 
@@ -128,6 +128,8 @@ sub write_fstab {
 	my $mntpoint = loopback::carryRootLoopback($_) ? '/initrd/loopfs' : $_->{mntpoint};
 	
 	my ($freq, $passno) =
+	  exists $_->{freq} ?
+	    ($_->{freq}, $_->{passno}) :
 	  isTrueFS($_) ? 
 	    (1, $_->{mntpoint} eq '/' ? 1 : loopback::carryRootLoopback($_) ? 0 : 2) : 
 	    (0, 0);
@@ -373,7 +375,7 @@ sub get_raw_hds {
        detect_devices::floppies(), detect_devices::cdroms(), 
        (map { $_->{device} .= '4'; $_ } detect_devices::zips())
       ];
-    my @fstab = read_fstab("$prefix/etc/fstab");
+    my @fstab = read_fstab("$prefix/etc/fstab", 'all_options');
     $all_hds->{nfss} = [ grep { isNfs($_) } @fstab ];
     $all_hds->{smbs} = [ grep { isThisFs('smbfs', $_) } @fstab ];
     $all_hds->{special} = [
