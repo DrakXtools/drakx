@@ -473,11 +473,11 @@ sub ftp_client {
     $ftp->cwd("$host_path"); 
     foreach (@file_list_to_send_by_ftp) {
 	$pbar->set_value(0);
-	$interactive and progress($pbar, 0.5, _("$_"));
-#	$interactive and progress($pbar, 0.5, _("$_"));
+	$interactive and progress($pbar, 0.5, $_);
+#	$interactive and progress($pbar, 0.5, $_);
 	$interactive and $pbar->set_show_text( $_ );
 	$ftp->put("$_");
-	$interactive and progress($pbar, 0.5, _("$_"));
+	$interactive and progress($pbar, 0.5, $_);
 	$interactive and $pbar->set_show_text( $_ );
 	$interactive and progress($pbar3, 1/@file_list_to_send_by_ftp, _("total progess"));
     }
