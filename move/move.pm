@@ -26,8 +26,8 @@ sub init {
                  DIR_COLORS bashrc profile profile.d rc.d init.d devfsd.conf devfs gtk-2.0 pango fonts modules.devfs 
                  dynamic gnome-vfs-2.0 gnome-vfs-mime-magic gtk gconf menu menu-methods nsswitch.conf default login.defs 
                  skel ld.so.cache);
-    symlinkf "/image/etc/X11/$_", "/etc/X11/$_" foreach qw(encodings.dir app-defaults applnk fs lbxproxy proxymngr rstart wmsession.d xinit.d xinit xkb xserver xsm);
-
+    symlinkf "/image/etc/X11/$_", "/etc/X11/$_"
+      foreach qw(encodings.dir app-defaults applnk fs lbxproxy proxymngr rstart wmsession.d xinit.d xinit xkb xserver xsm);
 
     #- free up stage1 memory
     fs::umount($_) foreach qw(/stage1/proc /stage1);
