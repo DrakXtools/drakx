@@ -192,7 +192,7 @@ ifdown eth0
 			  changed => sub {
 			      return if !$netc->{autodetection};
 			      my $c = 0;
-			      $conf{adsl} and $c++;
+#-			      $conf{adsl} and $c++;
 			      $conf{cable} and $c++;
 			      my $a = keys(%{$netc->{autodetect}{lan}});
 			      0 < $a && $a <= $c and $conf{lan} = undef;
