@@ -365,13 +365,13 @@ sub easy_dhcp {
     require modules;
     require network::ethernet;
     modules::load_category($modules_conf, 'network/main|gigabit|pcmcia|usb');
-    my @all_cards = network::ethernet::get_eth_cards($modules_conf);
+    my @all_dev = sort map { $_->[0] } network::ethernet::get_eth_cards($modules_conf);
 
     #- only for a single ethernet network card
-    my @ether_cards = grep { `LC_ALL= LANG= $::prefix/sbin/ip -o link show $_->[0] 2>/dev/null` =~ m|\slink/ether\s| } @all_cards;
-    @ether_cards == 1 or return;
+    my @ether_dev = grep { /^eth[0-9]+$/ && `LC_ALL= LANG= $::prefix/sbin/ip -o link show $_ 2>/dev/null` =~ m|\slink/ether\s| } @all_dev;
+    @ether_dev == 1 or return;
 
-    my $dhcp_intf = $ether_cards[0][0];
+    my $dhcp_intf = $ether_dev[0];
     log::explanations("easy_dhcp: found $dhcp_intf");
 
     network::ethernet::conf_network_card_backend($netc, $intf, 'dhcp', $dhcp_intf);
