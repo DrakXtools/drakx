@@ -1093,7 +1093,6 @@ sub write_grub_config {
 	$bootloader->{$_} and print F "$_ $bootloader->{$_}" foreach qw(timeout);
 
 	print F "color black/cyan yellow/cyan";
-	print F "keytable ", $file2grub->($bootloader->{keytable}) if $bootloader->{keytable};
 	print F "serial --unit=$1 --speed=$2\nterminal --timeout=" . ($bootloader->{timeout} || 0) . " console serial" if get_append($bootloader, 'console') =~ /ttyS(\d),(\d+)/;
 
 	each_index {
