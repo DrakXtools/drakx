@@ -100,7 +100,7 @@ sub selectMouse {
 
     installStepsCall($o, $auto, 'selectMouse', !$first_time || $clicked);
 
-    addToBeDone { mouse::write($o, $o->{mouse}) } 'installPackages' if !$o->{isUpgrade} || $clicked;
+    addToBeDone { mouse::write($o, $o->{mouse}) if !$o->{isUpgrade} || $clicked } 'installPackages';
 }
 
 #------------------------------------------------------------------------------
@@ -126,7 +126,7 @@ sub selectKeyboard {
 	if (my $keyboard = keyboard::read()) {
 	    $o->{keyboard} = $keyboard;
 	}
-    } 'formatPartitions' if $o->{isUpgrade};
+    } 'formatPartitions';
 }
 
 #------------------------------------------------------------------------------
@@ -136,8 +136,6 @@ sub selectInstallClass {
     installStepsCall($o, $auto, 'selectInstallClass', $clicked);
 
     if ($o->{isUpgrade}) {
-	@{$o->{orderedSteps}} = map { /setupSCSI/ ? ($_, "doPartitionDisks") : $_ }
-	                        grep { !/doPartitionDisks/ } @{$o->{orderedSteps}};
 	$o->{keepConfiguration} and @{$o->{orderedSteps}} = grep { !/selectMouse|selectKeyboard|miscellaneous|setRootPassword|addUser|configureNetwork|installUpdates|summary|configureServices|configureX/ } @{$o->{orderedSteps}};
 	my $s; foreach (@{$o->{orderedSteps}}) {
 	    $s->{next} = $_ if $s;
