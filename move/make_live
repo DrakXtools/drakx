@@ -93,3 +93,6 @@ substInFile {
     s|\s*shadow||;
 } "$::prefix/etc/pam.d/system-auth";
 
+substInFile {
+    s|Mandrake Linux release (\S+) \(.*\)|Mandrake Move release $1 (Moyoto)|;
+} "$::prefix/etc/mandrake-release";
