@@ -15,7 +15,6 @@ my $in = 'interactive'->vnew('su');
 
 modules::mergein_conf('/etc/modules.conf') if -r '/etc/modules.conf';
 
-undef $::Plug;
 begin:
 my $mouse = mouse::read();
 my %old = %$mouse;
