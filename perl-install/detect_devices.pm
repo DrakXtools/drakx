@@ -41,7 +41,7 @@ sub cdroms() {
     my $nb = $modules::scsi; #- this is gross!
     foreach (getIDEBurners()) {
 	my ($e) = grep { $_->{device} eq $_ } @l or next;
-	$e->{device} = "scd" . ($nb++ || '');
+	$e->{device} = "scd" . $nb++;
     }
     @l;
 }
