@@ -64,8 +64,8 @@
 #include <sys/utsname.h>
 #include <sys/stat.h>
 #include <arpa/inet.h>
-#include <linux/nfs.h>
-#include <linux/nfs_mount.h> //#include "mount_constants.h"
+#include "linux-2.2/nfs.h"
+#include "linux-2.2/nfs_mount.h" //#include "mount_constants.h"
 
 
 #include "dns.h"
