@@ -864,9 +864,36 @@ sub computeGroupSize {
 	my $flags = join("\t", @flags = or_ify(@flags));
 	$group{$p->name} = ($memo{$flags} ||= or_clean(@flags));
 
-	#- determine the packages that will be selected when selecting $p. the packages are not selected.
+	#- determine the packages that will be selected when selecting $p.
+	#- make a fast selection (but potentially erroneous).
 	my %newSelection;
-	selectPackage($packages, $p, 0, \%newSelection);
+	unless ($p->flag_available) {
+	    my @l2 = ($p->id);
+	    my $id;
+
+	    while (defined($id = shift @l2)) {
+		exists $newSelection{$id} and next;
+		$newSelection{$id} = undef;
+
+		my $pkg = $packages->{depslist}[$id];
+		foreach ($pkg->requires_nosense) {
+		    my ($candidate_id, $prefer_id);
+		    foreach (keys %{$packages->{provides}{$_} || {}}) {
+			my $ppkg = $packages->{depslist}[$_] or next;
+			if ($ppkg->flag_available) {
+			    $candidate_id = undef;
+			    last;
+			} else {
+			    exists $preferred{$ppkg->name} and $prefer_id = $_;
+			    $ppkg->name =~ /kernel-\d/ and $prefer_id ||= $_;
+			    $candidate_id = $_;
+			}
+		    }
+		    push @l2, $prefer_id || $candidate_id;
+		}
+	    }
+	}
+
 	foreach (keys %newSelection) {
 	    my $p = $packages->{depslist}[$_] or next;
 	    my $s = $group{$p->name} || do {
@@ -1283,10 +1310,10 @@ sub installTransactionClosure {
     #- search first usable medium (sorted by medium ordering).
     foreach (sort { $a->{start} <=> $b->{start} } values %{$packages->{mediums}}) {
 	$_->{selected} or next;
-	if ($l[0]->id <= $_->{end}) {
+	if ($l[0] <= $_->{end}) {
 	    #- we have a candidate medium, it could be the right one containing
 	    #- the first package of @l...
-	    $l[0]->id >= $_->{start} and $medium = $_, last;
+	    $l[0] >= $_->{start} and $medium = $_, last;
 	    #- ... but it could be necessary to find the first
 	    #- medium containing package of @l.
 	    foreach $id (@l) {
