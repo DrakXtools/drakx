@@ -246,6 +246,8 @@ sub load($;$@) {
     $conf{'scsi_hostadapter' . ($scsi++ || '')}{alias} = $name 
       if $type eq 'scsi';
 
+    $conf{$name}{options} = join " ", @options if @options;
+
     if ($::testing) {
 	log::l("i try to install $name module");
     } else {

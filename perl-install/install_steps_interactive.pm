@@ -137,7 +137,7 @@ sub configureNetwork($) {
     if ($r =~ /^Don't/) {
 	$o->{netc}{NETWORKING} = "false";
     } elsif ($r !~ /^Keep/) {
-	$o->setup_thiskind('net', 1, 1);
+	$o->setup_thiskind('net', !$::expert, 1);
 	my @l = detect_devices::getNet() or die _("no network card found");
 
 	my $last; foreach ($::expert ? @l : $l[0]) {
@@ -402,22 +402,30 @@ sub loadModule {
 			      _("What %s card have you?", $type), 
 			      [ modules::text_of_type($type) ]) or return;
     my $m = modules::text2driver($l);
+
     if ($o->ask_from_list('', 
-			  _("In some cases, the %s driver needs to have extra information to work
+_("In some cases, the %s driver needs to have extra information to work
 properly, although it normally works fine without. Would you like to specify
 extra options for it or allow the driver to probe your machine for the
 information it needs? Occasionally, probing will hang a computer, but it should
 not cause any damage.", $l),
 			  [ __("Autoprobe"), __("Specify options") ], "Autoprobe") ne "Autoprobe") {
+      ASK:
 	@options = split ' ',
 	  $o->ask_from_entry('',
-			     _("Here must give the different options for the module %s.
+_("Here must give the different options for the module %s.
 Options are in format ``name=value name2=value2 ...''.
 For example you can have ``io=0x300 irq=7''", $l),
 			     _("Module options:"),
 			    );
     }
-    modules::load($m, $type, @options);
+    eval { modules::load($m, $type, @options) };
+    if ($@) {
+	$o->ask_yesorno('', 
+_("Loading of module %s failed
+Do you want to try again with other parameters?", $l)) or return;
+	goto ASK;
+    }
     $l, $m;
 }
 
@@ -444,6 +452,7 @@ sub setup_thiskind {
 			    _("Do you have another one?") ], "No") :
 			      $o->ask_yesorno('', _("Do you have an %s interface?", $type), "No") or return;
 
-	push @l, [ $o->loadModule($type) ];
+	my @r = $o->loadModule($type) or return;
+	push @l, \@r;
     }
 }
