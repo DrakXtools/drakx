@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 9.2
-Release: 0.24mdk
+Release: 0.25mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -314,6 +314,19 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Sat Aug  2 2003 Pixel <pixel@mandrakesoft.com> 9.2-0.25mdk
+- drakauth first appearance
+- diskdrake --nfs and --smb:
+  o instead of removing the "Search servers" button when the search is over,
+    keep it to allow searching for new servers
+    (the label is changed from "Search servers" to "Search new servers") (bug #4297)
+- XFdrake
+  o use something like """Virtual 1280 960""" instead of """Modes "1280x960" "1024x768" "800x600" "640x480""""
+  o fix test dialog box
+- drakbackup (various changes)
+- drakboot
+  o allow to choose /dev/fd0 for the boot device
+  
 * Thu Jul 24 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.2-0.24mdk
 - drakbug:
   o use option menus instead of combos
