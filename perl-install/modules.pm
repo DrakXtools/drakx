@@ -176,9 +176,16 @@ sub remove_alias($) {
 }
 
 sub remove_alias_regexp($) {
+    my ($aliased) = @_;
+    foreach (keys %conf) {
+        delete $conf{$_}{alias} if /$aliased/;
+    }
+}
+
+sub remove_alias_regexp_byname($) {
     my ($name) = @_;
     foreach (keys %conf) {
-        delete $conf{$_}{alias} if /$name/;
+        delete $conf{$_} if /$name/;
     }
 }
 
