@@ -56,7 +56,7 @@ char * env[] = {
  *
  */
 
-int testing;
+int testing = 0;
 int klog_pid;
 
 
@@ -444,9 +444,6 @@ int main(int argc, char **argv)
                        "Call `reboot' or `halt' directly.\n");
                 return 0;
         }
-
-	/* getpid() != 1 should work, by linuxrc tends to get a larger pid */
-	testing = (getpid() > 50);
 
 	if (!testing) {
 		/* turn off screen blanking */
