@@ -27,6 +27,7 @@ use ugtk2 qw(:helpers :wrappers :ask :create);
 use run_program;
 use security::level;
 use security::msec;
+use security::help qw(help);
 
 $MODE = 'basic';
 $0 =~ /draksec-firewall$/ and $MODE = 'firewall';
@@ -98,8 +99,9 @@ sub new_editable_combo {
 }
 
 sub set_default_tip {
-	my ($entry, $default) = @_;
-	gtkset_tip(new Gtk2::Tooltips, $entry, N(" (default value: %s)", $default));
+	my ($entry, $default, $opt) = @_;
+     my $help = $security::help::help{$opt};
+	gtkset_tip(new Gtk2::Tooltips, $entry, join("\n", if_($help, $help), N("(default value: %s)", $default)));
 }
 
 my $msec = new security::msec;
@@ -173,7 +175,7 @@ foreach ([ 'network', N("Network Options") ], [ 'system', N("System Options") ])
                                                                                            $entry = $values{$i};
                                                                                        }
                                                                                        $entry->set_text($msec->get_function_value($i));
-                                                                                       set_default_tip($entry, $default);
+                                                                                       set_default_tip($entry, $default, $i);
                                                                                        [ new Gtk2::Label($i), $values{$i} ];
                                                                                    } $msec->get_functions($domain))))),
                            new Gtk2::Label($label));
@@ -191,7 +193,7 @@ $notebook->append_page(gtkshow(create_scrolled_window(gtkpack(new Gtk2::VBox(0, 
                                                                                        my $i = $_;
                                                                                        $security_checks_value{$i} = new_editable_combo();
                                                                                        my $entry = $security_checks_value{$i}->entry;
-                                                                                       set_default_tip($entry, $msec->get_check_default);
+                                                                                       set_default_tip($entry, $msec->get_check_default, $i);
                                                                                        $security_checks_value{$i}->set_popdown_strings(qw(yes no default));
                                                                                        $entry->set_text($msec->get_check_value($i));
                                                                                        [ gtkshow(new Gtk2::Label(translate($i))), $security_checks_value{$i} ];
