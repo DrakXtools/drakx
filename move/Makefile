@@ -29,16 +29,15 @@ default: install
 get_dest_livetree:
 	@echo -n $(DEST_LIVETREE)
 
+iso: build install live_tree_boot clps only_iso
+
+
 build: stage1 xwait runlevel_set
 	sudo ./collect-directories-to-create.pl $(DEST_LIVETREE) > data/directories-to-create
 	sudo find $(DEST_LIVETREE)/etc -type f | perl -pe 's|$(DEST_LIVETREE)||' > data/all-etcfiles
 	$(MAKE) -C ../perl-install mo_files
 
-stage1:
-	cd $(STAGE1) && ADDITIONAL_DEFS="-DMANDRAKE_MOVE" MOVE=1 make dirs init stage1-full init-move
-	cd .. ; ./make_boot_img move
-
-install:
+install: un_live_tree_boot
 	sudo cp -f $(STAGE1)/init-move $(DEST_LIVETREE)/sbin/init
 
 	$(MAKE) -C ../perl-install/share/po install NAME=libDrakX DATADIR=$(DEST_LIVETREE)/usr/share
@@ -62,7 +61,7 @@ install:
 	sudo cp -f $(INSTALL)/pixmaps/langs/lang-*.png $(DEST_LIVETREE)/usr/share/langs
 
 	 #- overwrite /usr/lib/libDrakX files of the live tree with those in CVS
-	(cd $(DEST_LIVETREE)/usr/lib/libDrakX ; find -name "*.pm") | egrep -v 'ctxhelp|drakfirsttime|xfree3|xfree4|xfreeX' | (cd $(INSTALL) ; sudo cpio -pLumd $(DEST_LIVETREE)/usr/lib/libDrakX/)
+	(cd $(DEST_LIVETREE)/usr/lib/libDrakX ; find -name "*.pm") | egrep -v 'ctxhelp|drakfirsttime' | (cd $(INSTALL) ; sudo cpio -pLumd $(DEST_LIVETREE)/usr/lib/libDrakX/)
 
 	 #- overwrite stuff.so of drakxtools because it doesn't contain C_DRAKX stuff
 	sudo cp -f ../perl-install/c/blib/arch/auto/stuff/stuff.so $(DEST_LIVETREE)/usr/lib/libDrakX/auto/c/stuff
@@ -87,26 +86,31 @@ install:
 	grep ChangeLog $(INSTALL)/CVS/Entries > /tmp/version
 	sudo cp -f /tmp/version $(DEST_LIVETREE)/usr/share/VERSION
 
-live_tree_boot:
-	rm -f $(DEST)/live_tree*.clp
-	./make_live_tree_boot $(DEST_LIVETREE)
-	tools/fix-fc-cache.pl $(DEST_LIVETREE)
-	$(MAKE) $(DEST)/live_tree_always.clp
-	$(MAKE) $(DEST)/live_tree_boot.clp
-	$(MAKE) $(DEST)/live_tree_totem.clp
-	-$(MAKE) $(DEST)/live_tree_nvidia.clp
-	$(MAKE) $(patsubst %, $(DEST)/live_tree_always_i18n_%.clp, $(LANG_FILES))
-
 un_live_tree_boot:
 	./make_live_tree_boot -u $(DEST_LIVETREE)
 	tools/fix-fc-cache.pl $(DEST_LIVETREE)
 
-iso: un_live_tree_boot build install live_tree_boot
-	rm -rf $(DEST)/iso $(DEST)/live_tree.clp
+live_tree_boot:
+	rm -f $(DEST)/live_tree*.clp
+	./make_live_tree_boot $(DEST_LIVETREE)
+	tools/fix-fc-cache.pl $(DEST_LIVETREE)
+	$(MAKE) clps
+
+clps:
+	$(MAKE) $(DEST)/live_tree_always.clp
+	$(MAKE) $(DEST)/live_tree_boot.clp
+	$(MAKE) $(DEST)/live_tree_totem.clp
+	-$(MAKE) $(DEST)/live_tree_nvidia.clp
+	for i in en fr de it es; do $(MAKE) $(DEST)/live_tree_i18n_$$i.clp $(DEST)/live_tree_always_i18n_$$i.clp; done
+	$(MAKE) $(DEST)/live_tree.clp
+
+
+only_iso:
+	rm -rf $(DEST)/iso
 	mkdir $(DEST)/iso
 	cp -a isolinux $(DEST)/iso
 	rm -rf $(DEST)/iso/isolinux/CVS
-	$(MAKE) $(DEST)/live_tree.clp
+
 	mv $(DEST)/*.clp $(DEST)/iso
 
 	touch $(DEST)/iso/isolinux/boot.cat
@@ -118,6 +122,11 @@ iso: un_live_tree_boot build install live_tree_boot
 	mkcd --addmd5 $(ISO)
 #	cdrecord -v -eject dev=0,0,0 blank=fast gracetime=2 speed=99 $(ISO)
 #	ftp://a:a@leia//BIG/mdkmove.iso
+
+
+stage1:
+	cd $(STAGE1) && ADDITIONAL_DEFS="-DMANDRAKE_MOVE" MOVE=1 make dirs init stage1-full init-move
+	cd .. ; ./make_boot_img move
 
 xwait: %: %.c
 	$(CC) $(CFLAGS) $< -L/usr/X11R6/$(LIB_NAME) -lX11 -o $@
