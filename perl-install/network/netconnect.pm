@@ -13,7 +13,7 @@ use network::tools;
 use MDK::Common::Globals "network", qw($in $prefix $connect_file $disconnect_file $connect_prog);
 
 our @EXPORT = qw(start_internet stop_internet);
-
+my	%conf;
 #- intro is called only in standalone.
 sub intro {
     my ($prefix, $netcnx, $in) = @_;
@@ -70,7 +70,7 @@ sub detect {
     require network::adsl;
     network::adsl->import;
     $auto_detect->{adsl} = adsl_detect($adsl);
-    
+
     require network::modem;
     network::modem->import;
     my ($modem, @pci_modems) = detect_devices::getModem();
@@ -175,10 +175,9 @@ If you don't want to use the auto detection, deselect the checkbox.
   step_2:
 
 #    my $set_default;
-    my %conf;
     $conf{$_} = $netc->{autodetect}{$_} ? 1 : 0 foreach 'modem', 'winmodem', 'adsl', 'cable', 'lan';
     $conf{isdn} = $netc->{autodetect}{isdn}{description} ? 1 : 0;
-	       
+
     $::isInstall and $in->set_help('configureNetwork');
     my @l = (
 	  [N("Normal modem connection") . if_($netc->{autodetect}{modem}, " - " . N("detected on port %s", $netc->{autodetect}{modem})), \$conf{modem}],
@@ -335,7 +334,6 @@ sub save_conf {
     my @_all_cards = conf_network_card_backend($netc, $intf, undef, undef, undef, undef);
 
     $intf = { %$intf };
-    output_with_perm("$prefix/etc/sysconfig/network-scripts/drakconnect_conf", 0600,
 #      "SystemName=" . do { $netc->{HOSTNAME} =~ /([^\.]*)\./; $1 } . "
 #DomainName=" . do { $netc->{HOSTNAME} =~ /\.(.*)/; $1 } . "
 #InternetAccessType=" . do { if ($netcnx->{type}) { $netcnx->{type} } else { $netc->{GATEWAY} ? "lan" : "" } } . "
@@ -361,57 +359,57 @@ sub save_conf {
 # Eth${_}DHCPClient=" . ($intf->{"eth$_"}{BOOTPROTO} eq 'dhcp' ? $netcnx->{dhcp_client} : '') . "
 # Eth${_}DHCPServerName=" . ($intf->{"eth$_"}{BOOTPROTO} eq 'dhcp' ? $netc->{HOSTNAME} : '') . "\n"
 #  } (0..9)) .
-"ISDNDriver=$isdn->{driver}
-ISDNDeviceType=$isdn->{type}
-ISDNIrq=$isdn->{irq}
-ISDNMem=$isdn->{mem}
-ISDNIo=$isdn->{io}
-ISDNIo0=$isdn->{io0}
-ISDNIo1=$isdn->{io1}
-ISDNProtocol=$isdn->{protocol}
-ISDNCardDescription=$isdn->{description}
-ISDNCardVendor=$isdn->{vendor}
-ISDNId=$isdn->{id}
-ISDNProvider=$netc->{DOMAINNAME2}
-ISDNProviderPhone=$isdn->{phone_out}
-ISDNProviderDomain=" . do { $netc->{DOMAINNAME2} =~ /\.(.*)/; $1 } . "
-ISDNProviderDNS1=$netc->{dnsServer2}
-ISDNProviderDNS2=$netc->{dnsServer3}
-ISDNDialing=$isdn->{dialing_mode}
-ISDNSpeed=$isdn->{speed}
-ISDNTimeout=$isdn->{huptimeout}
-ISDNHomePhone=$isdn->{phone_in}
-ISDNLogin=$isdn->{login}
-ISDNPassword=$isdn->{passwd}
-ISDNConfirmPassword=$isdn->{passwd2}
-" .
-#PPPInterfacesList=
-"PPPDevice=$modem->{device}
+# ISDNDriver=$isdn->{driver}
+# ISDNDeviceType=$isdn->{type}
+# ISDNIrq=$isdn->{irq}
+# ISDNMem=$isdn->{mem}
+# ISDNIo=$isdn->{io}
+# ISDNIo0=$isdn->{io0}
+# ISDNIo1=$isdn->{io1}
+# ISDNProtocol=$isdn->{protocol}
+# ISDNCardDescription=$isdn->{description}
+# ISDNCardVendor=$isdn->{vendor}
+# ISDNId=$isdn->{id}
+# ISDNProvider=$netc->{DOMAINNAME2}
+# ISDNProviderPhone=$isdn->{phone_out}
+# ISDNProviderDomain=" . do { $netc->{DOMAINNAME2} =~ /\.(.*)/; $1 } . "
+# ISDNProviderDNS1=$netc->{dnsServer2}
+# ISDNProviderDNS2=$netc->{dnsServer3}
+# ISDNDialing=$isdn->{dialing_mode}
+# ISDNSpeed=$isdn->{speed}
+# ISDNTimeout=$isdn->{huptimeout}
+# ISDNHomePhone=$isdn->{phone_in}
+# ISDNLogin=$isdn->{login}
+# ISDNPassword=$isdn->{passwd}
+# ISDNConfirmPassword=$isdn->{passwd2}
+# PPPProviderPhone=$modem->{phone}
+# PPPProviderDNS1=$modem->{dns1}
+# PPPProviderDNS2=$modem->{dns2}
+# PPPPassword=$modem->{passwd}
+# PPPConfirmPassword=$modem->{passwd}
+# ADSLProviderDNS1=$netc->{dnsServer2}
+# ADSLProviderDNS2=$netc->{dnsServer3}
+
+    my $str;
+    $str .= "
+PPPDevice=$modem->{device}
 PPPDeviceSpeed=
 PPPConnectionName=$modem->{connection}
-" .
-#PPPProviderPhone=$modem->{phone}
-"PPPProviderDomain=$modem->{domain}
-" .
-#PPPProviderDNS1=$modem->{dns1}
-#PPPProviderDNS2=$modem->{dns2}
-"PPPLogin=$modem->{login}
-" .
-#PPPPassword=$modem->{passwd}
-#PPPConfirmPassword=$modem->{passwd}
-"PPPAuthentication=$modem->{auth}
-PPPSpecialCommand=" . ($netcnx->{type} eq 'isdn_external' ? $netcnx->{isdn_external}{special_command} : '') . "
+PPPProviderDomain=$modem->{domain}
+PPPLogin=$modem->{login}
+PPPAuthentication=$modem->{auth}
+PPPSpecialCommand=" . ($netcnx->{type} eq 'isdn_external' ? $netcnx->{isdn_external}{special_command} : '') if ($conf{modem});
 
+    $str .= "
 ADSLInterfacesList=
 ADSLModem=" .  q( # Obsolete information. Please don't use it.) . "
 ADSLType=" . ($netcnx->{type} =~ /adsl/ ? $netcnx->{type} : '') . "
 ADSLProviderDomain=$netc->{DOMAINNAME2}
-".#ADSLProviderDNS1=$netc->{dnsServer2}
-#ADSLProviderDNS2=$netc->{dnsServer3}
-"ADSLLogin=$adsl->{login}
-ADSLPassword=$adsl->{passwd}
-DOMAINNAME2=$netc->{DOMAINNAME2}"
-	  );
+ADSLLogin=$adsl->{login}
+".#ADSLPassword=$adsl->{passwd}
+"DOMAINNAME2=$netc->{DOMAINNAME2}" if ($conf{adsl});
+
+    output_with_perm("$prefix/etc/sysconfig/network-scripts/drakconnect_conf", 0600, $str);
     my $a = $netcnx->{PROFILE} ? $netcnx->{PROFILE} : "default";
     cp_af("$prefix/etc/sysconfig/network-scripts/drakconnect_conf", "$prefix/etc/sysconfig/network-scripts/drakconnect_conf." . $a);
     chmod 0600, "$prefix/etc/sysconfig/network-scripts/drakconnect_conf";
