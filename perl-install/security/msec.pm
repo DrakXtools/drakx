@@ -57,6 +57,11 @@ use MDK::Common;
 
 
 my $check_file = "$::prefix/etc/security/msec/security.conf";
+
+my @sec_levels = ("Dangerous",  "Poor", "Standard", "High",  "Higher", "Paranoid");
+my %sec_levels = ("Dangerous" => 0,  "Poor" => 1, "Standard" => 2, "High" => 3,  "Higher" => 4, "Paranoid" => 5);
+
+
 # ***********************************************
 #              PRIVATE FUNCTIONS
 # ***********************************************
@@ -69,12 +74,7 @@ sub get_default {
 
     if ($category eq "functions") {
         my $word_level = get_secure_level();
-        if ($word_level eq "Dangerous") { $num_level = 0 }
-        elsif ($word_level eq "Poor") { $num_level = 1 }
-        elsif ($word_level eq "Standard") { $num_level = 2 }
-        elsif ($word_level eq "High") { $num_level = 3 }
-        elsif ($word_level eq "Higher") { $num_level = 4 }
-        elsif ($word_level eq "Paranoid") { $num_level = 5 }
+	   $num_level = $sec_levels{$word_level};
         $default_file = "$::prefix/usr/share/msec/level.".$num_level;
     }
     elsif ($category eq "checks") { $default_file = "$::prefix/var/lib/msec/security.conf"; }
@@ -106,7 +106,7 @@ sub get_value {
             if($_ =~ /^$item/) {
 			 if ($category eq 'functions') {
 				my $i = $_;
-				(undef, $_) = split / /;
+				(undef, $_) = split /\(/;
 				tr /()//d;
 				$value = $_;
 				$_ = $i;
@@ -142,7 +142,6 @@ sub get_secure_level {
                 ${{ getVarsFromSh("$::prefix/etc/sysconfig/msec") }}{SECURE_LEVEL};
 		# || $ENV{SECURE_LEVEL};
 
-    my @sec_levels = ("Dangerous",  "Poor", "Standard", "High",  "Higher", "Paranoid");
     return $sec_levels[$num_level];}
 
 sub get_seclevel_list {
@@ -152,7 +151,6 @@ sub get_seclevel_list {
 sub set_secure_level {
     my $word_level = $_[1];
 
-    my %sec_levels = ("Dangerous" => 0,  "Poor" => 1, "Standard" => 2, "High" => 3,  "Higher" => 4, "Paranoid" => 5);
     my $run_level = $sec_levels{$word_level};
     system "/usr/sbin/msec", $run_level ? $run_level : 3;
 }
