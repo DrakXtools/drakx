@@ -24,17 +24,17 @@ sub keyboard_from_kmap {
 sub info {
     my ($X) = @_;
     my $info;
-    my $xf_ver = $X->{card}{use_xf4} ? "4.2.0" : "3.3.6";
-    my $title = ($X->{card}{DRI_GLX} || $X->{UTAH_GLX} ?
+    my $xf_ver = $X->{card}{driver} && !$X->{card}{prefer_xf3} ? "4.2.0" : "3.3.6";
+    my $title = ($X->{card}{use_DRI_GLX} || $X->{card}{use_UTAH_GLX} ?
 		 _("XFree %s with 3D hardware acceleration", $xf_ver) : _("XFree %s", $xf_ver));
 
     $info .= _("Keyboard layout: %s\n", $X->{keyboard}{XkbLayout});
     $info .= _("Mouse type: %s\n", $X->{mouse}{XMOUSETYPE});
     $info .= _("Mouse device: %s\n", $X->{mouse}{device}) if $::expert;
-    $info .= _("Monitor: %s\n", $X->{monitor}{type});
+    $info .= _("Monitor: %s\n", $X->{monitor}{ModelName});
     $info .= _("Monitor HorizSync: %s\n", $X->{monitor}{hsyncrange}) if $::expert;
     $info .= _("Monitor VertRefresh: %s\n", $X->{monitor}{vsyncrange}) if $::expert;
-    $info .= _("Graphics card: %s\n", $X->{card}{type});
+    $info .= _("Graphics card: %s\n", $X->{card}{VendorName} . ' '. $X->{card}{BoardName});
     $info .= _("Graphics card identification: %s\n", $X->{card}{identifier}) if $::expert;
     $info .= _("Graphics memory: %s kB\n", $X->{card}{VideoRam}) if $X->{card}{VideoRam};
     if ($X->{default_depth} and my $depth = $X->{card}{depth}{$X->{default_depth}}) {
@@ -65,7 +65,7 @@ sub getinfoFromXF86Config {
     $X ||= {};
 
     my (%keyboard, %mouse, %wacom, %card, %monitor);
-    my (%c, $depth, $driver);
+    my (%c, $depth);
 
     foreach (cat_("$prefix/etc/X11/XF86Config-4")) {
 	if (my $i = /^Section "InputDevice"/ .. /^EndSection/) {
@@ -92,7 +92,6 @@ sub getinfoFromXF86Config {
 		  if $c{driver} =~ /wacom/i;
 	    }
 	} elsif (/^Section "Monitor"/ .. /^EndSection/) {
-	    $monitor{type} ||= $1 if /^\s*Identifier\s+"(.*?)"/;
 	    $monitor{hsyncrange} ||= $1 if /^\s*HorizSync\s+(.*)/;
 	    $monitor{vsyncrange} ||= $1 if /^\s*VertRefresh\s+(.*)/;
 	    $monitor{ModeLines} .= $_ if /^\s*Mode[lL]ine\s+(\S+)\s+(\S+)\s+/;
@@ -109,6 +108,7 @@ sub getinfoFromXF86Config {
 	    }
 	}
     }
+    my $first_screen_section;
     foreach (cat_("$prefix/etc/X11/XF86Config")) {
 	if (/^Section "Keyboard"/ .. /^EndSection/) {
 	    $keyboard{XkbModel} ||= $1 if /^\s*XkbModel\s+"(.*?)"/;
@@ -124,34 +124,35 @@ sub getinfoFromXF86Config {
 		$wacom{$1} = undef if /^\s*Port\s+"\/dev\/(.*?)"/;
 	    }
 	} elsif (/^Section "Monitor"/ .. /^EndSection/) {
-	    $monitor{type} ||= $1 if /^\s*Identifier\s+"(.*?)"/;
 	    $monitor{hsyncrange} ||= $1 if /^\s*HorizSync\s+(.*)/;
 	    $monitor{vsyncrange} ||= $1 if /^\s*VertRefresh\s+(.*)/;
 	    $monitor{ModeLines_xf3} .= $_ if /^\s*Mode[lL]ine\s+(\S+)\s+(\S+)\s+/;
 	} elsif (my $i = /^Section "Device"/ .. /^EndSection/) {
 	    %c = () if $i == 1;
 
-	    $c{type} ||= $1 if /^\s*Identifier\s+"(.*?)"/;
+	    $c{indentifier} ||= $1 if /^\s*Identifier\s+"(.*?)"/;
 	    $c{VideoRam} ||= $1 if /VideoRam\s+(\d+)/;
-	    $c{flags}{needVideoRam} ||= 1 if /^\s*VideoRam\s+/;
+	    $c{needVideoRam} ||= 1 if /^\s*VideoRam\s+/;
 	    $c{driver} ||= $1 if /^\s*Driver\s+"(.*?)"/;
+	    $c{VendorName} ||= $1 if /^\s*VendorName\s+"(.*?)"/;
+	    $c{BoardName} ||= $1 if /^\s*BoardName\s+"(.*?)"/;
+	    $c{Chipset} ||= $1 if /^\s*Chipset\s+"(.*?)"/;
 	    $c{options_xf3}{$1} ||= 0 if /^\s*#\s*Option\s+"(.*?)"/;
 	    $c{options_xf3}{$1} ||= 1 if /^\s*Option\s+"(.*?)"/;
 
-	    add2hash(\%card, \%c) if ($i =~ /E0/ && $c{type} && $c{type} ne "Generic VGA");
+	    add2hash(\%card, \%c) if ($i =~ /E0/ && $c{identifier} && $c{identifier} ne "Generic VGA");
 	} elsif (my $s = /^Section "Screen"/ .. /^EndSection/) {
-	    undef $driver if $s == 1;
-	    $driver = $1 if /^\s*Driver\s+"(.*?)"/;
-	    if ($driver eq $Xconfigurator_consts::serversdriver{$card{server}}) {
-		$card{default_depth} ||= $1 if /^\s*DefaultColorDepth\s+(\d+)/;
-		if (my $i = /^\s*Subsection\s+"Display"/ .. /^\s*EndSubsection/) {
-		    undef $depth if $i == 1;
-		    $depth = $1 if /^\s*Depth\s+(\d*)/;
-		    if (/^\s*Modes\s+(.*)/) {
-			my $a = 0;
-			unshift @{$card{depth}{$depth || 8} ||= []}, #- insert at the beginning for resolution_wanted!
-		            grep { $_->[0] >= 640 } map { [ /"(\d+)x(\d+)"/ ] } split ' ', $1;
-		    }
+	    $first_screen_section++ if $s =~ /E0/;
+	    $first_screen_section or next;
+
+	    $card{default_depth} ||= $1 if /^\s*DefaultColorDepth\s+(\d+)/;
+	    if (my $i = /^\s*Subsection\s+"Display"/ .. /^\s*EndSubsection/) {
+		undef $depth if $i == 1;
+		$depth = $1 if /^\s*Depth\s+(\d*)/;
+		if (/^\s*Modes\s+(.*)/) {
+		    my $a = 0;
+		    unshift @{$card{depth}{$depth || 8} ||= []}, #- insert at the beginning for resolution_wanted!
+		      grep { $_->[0] >= 640 } map { [ /"(\d+)x(\d+)"/ ] } split ' ', $1;
 		}
 	    }
 	}
@@ -240,7 +241,6 @@ sub add2card {
     my ($card, $other_card) = @_;
 
     push @{$card->{lines}}, @{$other_card->{lines} || []};
-    add2hash($card->{flags}, $other_card->{flags});
     add2hash($card, $other_card);
 }
 
@@ -253,35 +253,25 @@ sub readCardsDB {
     my ($lineno, $cmd, $val) = 0;
     my $fs = {
 	NAME => sub {
-	    $cards{$card->{type}} = $card if $card;
-	    $card = { type => $val };
+	    $cards{$card->{card_name}} = $card if $card;
+	    $card = { card_name => $val };
 	},
 	SEE => sub {
 	    my $c = $cards{$val} or die "Error in database, invalid reference $val at line $lineno";
 	    add2card($card, $c);
 	},
-	CHIPSET => sub {
-	    $card->{Chipset} = $val;
-	    $card->{flags}{needVideoRam} = 1 if member($val, qw(mgag10 mgag200 RIVA128 SiS6326));
-	},
-        LINE => sub { 
-	    push @{$card->{lines}}, $val;
-	},
+        LINE => sub { push @{$card->{lines}}, $val },
+	CHIPSET => sub { $card->{Chipset} = $val },
 	SERVER => sub { $card->{server} = $val },
 	DRIVER => sub { $card->{driver} = $val },
 	DRIVER2 => sub { $card->{driver2} = $val },
-	NEEDVIDEORAM => sub { $card->{flags}{needVideoRam} = 1 },
-	DRI_GLX => sub { $card->{DRI_GLX} = 1 },
-	UTAH_GLX => sub { $card->{UTAH_GLX} = 1 },
-	DRI_GLX_EXPERIMENTAL => sub { $card->{DRI_GLX_EXPERIMENTAL} = 1 },
-	UTAH_GLX_EXPERIMENTAL => sub { $card->{UTAH_GLX_EXPERIMENTAL} = 1 },
-	MULTI_HEAD => sub { $card->{MULTI_HEAD} = $val },
+	NEEDVIDEORAM => sub { $card->{needVideoRam} = 1 },
+	DRI_GLX => sub { $card->{DRI_GLX} = 1 if $card->{driver} },
+	UTAH_GLX => sub { $card->{UTAH_GLX} = 1 if $card->{server} },
+	DRI_GLX_EXPERIMENTAL => sub { $card->{DRI_GLX_EXPERIMENTAL} = 1 if $card->{driver} },
+	UTAH_GLX_EXPERIMENTAL => sub { $card->{UTAH_GLX_EXPERIMENTAL} = 1 if $card->{server} },
+	MULTI_HEAD => sub { $card->{MULTI_HEAD} = $val if $card->{driver} },
 	UNSUPPORTED => sub { delete $card->{driver} },
-
-	#- Obsolete stuff, no existing card still need this
-	RAMDAC => sub { $card->{Ramdac} = $val },
-	DACSPEED => sub { $card->{Dacspeed} = $val },
-	CLOCKCHIP => sub { $card->{Clockchip} = $val },
 
 	COMMENT => sub {},
     };
@@ -291,7 +281,7 @@ sub readCardsDB {
 	s/\s+$//;
 	/^#/ and next;
 	/^$/ and next;
-	/^END/ and do { $cards{$card->{type}} = $card if $card; last };
+	/^END/ and do { $cards{$card->{card_name}} = $card if $card; last };
 
 	($cmd, $val) = /(\S+)\s*(.*)/ or next; #log::l("bad line $lineno ($_)"), next;
 

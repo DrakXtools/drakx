@@ -14,8 +14,7 @@ use any;
 use modules;
 
 my $tmpconfig = "/tmp/Xconfig";
-
-my ($prefix);
+my $force_xf4 = arch() =~ /ppc|ia64/;
 
 
 sub xtest {
@@ -23,6 +22,11 @@ sub xtest {
     $::isStandalone ? 
       system("DISPLAY=$display /usr/X11R6/bin/xtest") == 0 : 
       c::Xtest($display);    
+}
+
+sub using_xf4 {
+    my ($card) = @_;
+    $card->{driver} && !$card->{prefer_xf3};
 }
 
 sub readCardsNames {
@@ -55,6 +59,14 @@ sub updateCardAccordingName {
     my ($card, $name) = @_;
     my $cards = Xconfig::readCardsDB("$ENV{SHARE_PATH}/ldetect-lst/Cards+");
     Xconfig::add2card($card, $cards->{$name});
+
+    delete @$card{'server'} if $force_xf4;
+
+    delete @$card{'UTAH_GLX', 'UTAH_GLX_EXPERIMENTAL'} 
+      if $force_xf4 || availableRamMB() > 800; #- no Utah GLX if more than 800 Mb (server, or kernel-enterprise, Utha GLX does not work with latest).
+
+    $card->{prefer_xf3} = 1 if $card->{driver} eq 'neomagic' && !$force_xf4;
+
     $card;
 }
 
@@ -71,15 +83,15 @@ sub readMonitorsDB {
 	/^#/ and next;
 	/^$/ and next;
 
-	my @fields = qw(vendor type eisa hsyncrange vsyncrange dpms);
+	my @fields = qw(VendorName ModelName eisa hsyncrange vsyncrange dpms);
 	my @l = split /\s*;\s*/;
 
 	my %l; @l{@fields} = @l;
-	if ($monitors{$l{type}}) {
-	    my $i; for ($i = 0; $monitors{"$l{type} ($i)"}; $i++) {}
-	    $l{type} = "$l{type} ($i)";
+	if ($monitors{$l{ModelName}}) {
+	    my $i; for ($i = 0; $monitors{"$l{ModelName} ($i)"}; $i++) {}
+	    $l{ModelName} = "$l{ModelName} ($i)";
 	}
-	$monitors{"$l{vendor}|$l{type}"} = \%l;
+	$monitors{"$l{VendorName}|$l{ModelName}"} = \%l;
     }
     \%monitors;
 }
@@ -102,9 +114,11 @@ sub keepOnlyLegalModes {
 sub cardConfigurationAuto() {
     my @c = grep { $_->{driver} =~ /(Card|Server|Driver):/ } detect_devices::probeall();
 
-    my @cards = map_index {
+    my @cards = map {
+	my @l = $_->{description} =~ /(.*?)\|(.*)/;
 	my $card = { 
-	    identifier => $_->{description} . (@c > 1 && " $::i"),
+	    description => $_->{description},
+	    VendorName => $l[0], BoardName => $l[1],
 	    busid => "PCI:$_->{pci_bus}:$_->{pci_device}:$_->{pci_function}",
 	};
 	if    ($_->{driver} =~ /Card:(.*)/)   { updateCardAccordingName($card, $1) }
@@ -115,7 +129,7 @@ sub cardConfigurationAuto() {
 	$card;
     } @c;
 
-    if (@cards >= 2 && $cards[0]{type} eq $cards[1]{type} && $cards[0]{type} eq 'Intel 830') {
+    if (@cards >= 2 && $cards[0]{card_name} eq $cards[1]{card_name} && $cards[0]{card_name} eq 'Intel 830') {
 	shift @cards;
     }
     #- take a default on sparc if nothing has been found.
@@ -124,27 +138,17 @@ sub cardConfigurationAuto() {
 	local $_ = cat_("/proc/fb");
 	@cards = { server => /Mach64/ ? "Mach64" : /Permedia2/ ? "3DLabs" : "Sun24" };
     }
-    #- special case for multi head card using only one busid.
-    @cards = map { 
-	if ($_->{MULTI_HEAD} && $_->{type} =~ /G[24]00/) {
-	    if ($ENV{MATROX_HAL}) {
-		$_->{flags}{need_MATROX_HAL} = 1;
-	    } else {
-		delete $_->{MULTI_HEAD};
-	    }
-	}
-	map { {%$_} } ($_) x ($_->{MULTI_HEAD} || 1);
-    } @cards;
 
-    #- make sure no type are already used, duplicate both screen
-    #- and rename type (because used as id).
-    if (@cards > 1) {
-	my $card = 1;
-	foreach (@cards) {
-	    $_->{type} = "$_->{type} $card";
-	    $card++;
+    #- disabling MULTI_HEAD when not available
+    foreach (@cards) { 
+	$_->{MULTI_HEAD} && $_->{card_name} =~ /G[24]00/ or next;
+	if ($ENV{MATROX_HAL}) {
+	    $_->{need_MATROX_HAL} = 1;
+	} else {
+	    delete $_->{MULTI_HEAD};
 	}
     }
+
     #- in case of only one cards, remove all busid reference, this will avoid
     #- need of change of it if the card is moved.
     #- on many PPC machines, card is on-board, busid is important, leave?
@@ -159,128 +163,219 @@ sub install_server {
     my ($card, $cardOptions) = @_;
 
     my $prog = "/usr/X11R6/bin/" . 
-      ($card->{use_xf4} ? 'XFree86' : 
+      (using_xf4($card) ? 'XFree86' : 
        $card->{server} =~ /Sun(.*)/ ? "Xsun$1" : 
        $card->{server} eq 'Xpmac' ? 'Xpmac' :
        "XF86_$card->{server}");
 
     my @packages = ();
-    -x "$prefix$prog" or push @packages, $card->{use_xf4} ? 'XFree86-server' : "XFree86-$card->{server}";
+    push @packages, using_xf4($card) ? 'XFree86-server' : "XFree86-$card->{server}" if ! -x "$::prefix$prog";
 
     #- additional packages to install according available card.
     #- add XFree86-libs-DRI here if using DRI (future split of XFree86 TODO)
-    if ($card->{DRI_GLX}) {
-	push @packages, 'Glide_V5' if $card->{type} eq 'Voodoo5 (generic)';
-	push @packages, 'Glide_V3-DRI' if member($card->{type}, 'Voodoo3 (generic)', 'Voodoo Banshee (generic)');
-	push @packages, 'XFree86-glide-module' if $card->{type} =~ /Voodoo/;
+    if ($card->{use_DRI_GLX}) {
+	push @packages, 'Glide_V5' if $card->{card_name} eq 'Voodoo5 (generic)';
+	push @packages, 'Glide_V3-DRI' if member($card->{card_name}, 'Voodoo3 (generic)', 'Voodoo Banshee (generic)');
+	push @packages, 'XFree86-glide-module' if $card->{card_name} =~ /Voodoo/;
     }
-    if ($card->{UTAH_GLX}) {
+    if ($card->{use_UTAH_GLX}) {
 	push @packages, 'Mesa';
     }
     #- 3D acceleration configuration for XFree 4 using NVIDIA driver (TNT, TN2 and GeForce cards only).
     push @packages, @{$cardOptions->{allowNVIDIA_rpms}} if $card->{driver2} eq 'nvidia' && $cardOptions->{allowNVIDIA_rpms};
 
     $do_pkgs->install(@packages) if @packages;
-    -x "$prefix$prog" or die "server $card->{server} is not available (should be in $prefix$prog)";
+    -x "$::prefix$prog" or die "server $card->{server} is not available (should be in $::prefix$prog)";
 
     #- make sure everything is correct at this point, packages have really been installed
     #- and driver and GLX extension is present.
     if ($card->{driver2} eq 'nvidia' &&
-	-e "$prefix/usr/X11R6/lib/modules/drivers/nvidia_drv.o" &&
-	-e "$prefix/usr/X11R6/lib/modules/extensions/libglx.so") {
+	-e "$::prefix/usr/X11R6/lib/modules/drivers/nvidia_drv.o" &&
+	-e "$::prefix/usr/X11R6/lib/modules/extensions/libglx.so") {
 	log::l("Using specific NVIDIA driver and GLX extensions");
 	$card->{driver} = 'nvidia';
     }
 
-    Xconfig::install_matrox_proprietary_hal($prefix) if $card->{flags}{need_MATROX_HAL};
+    Xconfig::install_matrox_proprietary_hal($::prefix) if $card->{need_MATROX_HAL};
 
     $prog;
+}
+
+sub multi_head_config {
+    my ($noauto, @cards) = @_;
+
+    @cards > 1 || $cards[0]{MULTI_HEAD} > 1 or return $cards[0];
+
+    my @choices;
+
+    my $disable_multi_head = grep { 
+	$_->{driver} or log::l("found card $_->{description} not supported by XF4, disabling multi-head support");
+	!$_->{driver};
+    } @cards;
+    if (!$disable_multi_head) {
+	my $configure_multi_head = sub {
+
+	    #- special case for multi head card using only one busid.
+	    @cards = map {
+		map_index { { screen => $::i, %$_ } } ($_) x ($_->{MULTI_HEAD} || 1);
+	    } @cards;
+
+	    delete $_->{server} foreach @cards;	#- XFree 3 doesn't handle multi head (?)
+	    my $card = shift @cards; #- assume good default.
+	    $card->{cards} = \@cards;
+	    $card->{Xinerama} = $_[0];
+	    $card;
+	};
+	push @choices, { text => _("Configure all heads independently"), code => sub { $configure_multi_head->('') } };
+	push @choices, { text => _("Use Xinerama extension"), code => sub { $configure_multi_head->(1) } };
+    }
+
+    foreach my $c (@cards) {
+	push @choices, { text => _("Configure only card \"%s\"%s", $c->{description}, $c->{busid} && " ($c->{busid})"),
+			 code => sub { $c } };
+    }
+    my $tc = $in->ask_from_listf(_("Multi-head configuration"),
+				 _("Your system support multiple head configuration.
+What do you want to do?"), sub { $_[0]{text} }, \@choices) or return; #- no more die, CHECK with auto that return ''!
+
+    $tc->{code} or die internal_error();
+    return $tc->{code}();
+}
+
+sub xfree_and_glx_choices {
+    my ($card) = @_;
+
+    $card->{use_UTAH_GLX} = $card->{use_DRI_GLX} = 0;
+
+    #- XFree version available, better to parse available package and get version from it.
+    my ($xf4_ver, $xf3_ver) = ('4.2.0', '3.3.6');
+
+    my @choices = do {
+	#- basic installation, use of XFree 4.2 or XFree 3.3.
+	my $xf3 = { text => _("XFree %s", $xf4_ver), code => sub { $card->{prefer_xf3} = 0 } };
+	my $xf4 = { text => _("XFree %s", $xf3_ver), code => sub { $card->{prefer_xf3} = 1 } };
+	$card->{prefer_xf3} ? ($xf3, $xf4) : ($xf4, $xf3);
+    };
+
+    #- try to figure if 3D acceleration is supported
+    #- by XFree 3.3 but not XFree 4 then ask user to keep XFree 3.3 ?
+    if ($card->{UTAH_GLX}) {
+	unshift @choices, { text => _("XFree %s with 3D hardware acceleration", $xf3_ver),
+			    code => sub { $card->{prefer_xf3} = 1; $card->{use_UTAH_GLX} = 1 },
+			    more_messages => ($card->{driver} && !$card->{DRI_GLX} ?
+_("Your card can have 3D hardware acceleration support but only with XFree %s.
+Your card is supported by XFree %s which may have a better support in 2D.", $xf3_ver, $xf4_ver) :
+_("Your card can have 3D hardware acceleration support with XFree %s.", $xf3_ver)),
+			  };
+    }
+
+    #- an expert user may want to try to use an EXPERIMENTAL 3D acceleration, currenlty
+    #- this is with Utah GLX and so, it can provide a way of testing.
+    if ($card->{UTAH_GLX_EXPERIMENTAL} && $::expert) {
+	push @choices, { text => _("XFree %s with EXPERIMENTAL 3D hardware acceleration", $xf3_ver),
+			 code => sub { $card->{prefer_xf3} = 1; $card->{use_UTAH_GLX} = 1 },
+			 more_messages => (using_xf4($card) && !$card->{DRI_GLX} ?
+_("Your card can have 3D hardware acceleration support but only with XFree %s,
+NOTE THIS IS EXPERIMENTAL SUPPORT AND MAY FREEZE YOUR COMPUTER.
+Your card is supported by XFree %s which may have a better support in 2D.", $xf3_ver, $xf4_ver) :
+_("Your card can have 3D hardware acceleration support with XFree %s,
+NOTE THIS IS EXPERIMENTAL SUPPORT AND MAY FREEZE YOUR COMPUTER.", $xf3_ver)),
+		       };
+    }
+
+    #- ask the expert or any user on second pass user to enable or not hardware acceleration support.
+    if ($card->{DRI_GLX} && !$card->{Xinerama}) {
+	unshift @choices, { text => _("XFree %s with 3D hardware acceleration", $xf4_ver),
+			    code => sub { $card->{prefer_xf3} = 0; $card->{use_DRI_GLX} = 1 },
+			    more_messages => _("Your card can have 3D hardware acceleration support with XFree %s.", $xf4_ver),
+			  };
+    }
+
+    #- an expert user may want to try to use an EXPERIMENTAL 3D acceleration.
+    if ($card->{DRI_GLX_EXPERIMENTAL} && !$card->{Xinerama} && $::expert) {
+	push @choices, { text => _("XFree %s with EXPERIMENTAL 3D hardware acceleration", $xf4_ver),
+			 code => sub { $card->{prefer_xf3} = 0; $card->{use_DRI_GLX} = 1 },
+			 more_messages => _("Your card can have 3D hardware acceleration support with XFree %s,
+NOTE THIS IS EXPERIMENTAL SUPPORT AND MAY FREEZE YOUR COMPUTER.", $xf4_ver),
+		       };
+    }
+
+    if (arch() =~ /ppc/ && $ENV{DISPLAY}) {
+	push @choices, { text => _("Xpmac (installation display driver)"), code => sub { 
+			     #- HACK: re-allowing XFree 3
+			     $::force_xf4 = 0;
+			     $card->{server} = "Xpmac";
+			     $card->{prefer_xf3} = 1;
+			 }};
+    }
+    @choices;
+}
+sub xfree_and_glx_choose {
+    my ($card, $noauto) = @_;
+
+    my @choices = xfree_and_glx_choices($card);
+
+    @choices = $choices[0] if !$::expert && !$noauto;
+
+    my $msg = join("\n\n\n", 
+		   (grep {$_} map { $_->{more_messages} } @choices),
+		   _("Which configuration of XFree do you want to have?"));
+    #- examine choice of user, beware the list MUST NOT BE REORDERED AS the first item should be the
+    #- proposed one by DrakX.
+    my $tc = $in->ask_from_listf(_("XFree configuration"), formatAlaTeX($msg), sub { $_[0]{text} }, \@choices) or return;
+    #- in case of class discarding, this can help ...
+    $tc or $tc = $choices[0];
+    log::l("Using $tc->{text}");
+    $tc->{code} and $tc->{code}();
 }
 
 sub cardConfiguration {
     my ($card, $noauto, $cardOptions) = @_;
     $card ||= {};
 
-    updateCardAccordingName($card, $card->{type}) if $card->{type}; #- try to get info from given type
-    undef $card->{type} unless $card->{server} || $card->{driver}; #- bad type as we can't find the server
-    my @cards = cardConfigurationAuto();
-    if (@cards > 1 && ($noauto || !$card->{server})) {#} && !$::isEmbedded) {
-	my (%single_heads, @choices, $tc);
-	my $configure_multi_head = sub {
-	    add2hash($card, $cards[0]); #- assume good default.
-	    delete $card->{cards} if $noauto;
-	    $card->{cards} or $card->{cards} = \@cards;
-	    $card->{force_xf4} = 1; #- force XF4 in such case.
-	    $card->{Xinerama} = $_[0];
-	};
-	foreach (@cards) {
-	    if (!$_->{driver}) {
-		log::l("found card \"$_->{identifier}\" not supported by XF4, disabling mutli-head support");
-		$configure_multi_head = undef;
-	    }
-	    #- if more than one card use the same BusID, we have to use screen.
-	    if ($single_heads{$_->{busid}}) {
-		$single_heads{$_->{busid}}{screen} ||= 0;
-		$_->{screen} = $single_heads{$_->{busid}}{screen} + 1;
-	    }
-	    $single_heads{$_->{busid}} = $_;
-	}
-	if ($configure_multi_head) {
-	    push @choices, { text => _("Configure all heads independently"), code => sub { $configure_multi_head->('') } };
-	    push @choices, { text => _("Use Xinerama extension"), code => sub { $configure_multi_head->(1) } };
-	}
-	foreach my $e (values %single_heads) {
-	    push @choices, { text => _("Configure only card \"%s\" (%s)", $e->{identifier}, $e->{busid}),
-			     code => sub { add2hash($card, $e); foreach (qw(cards screen Xinerama)) { delete $card->{$_} } } };
-	}
-	$tc = $in->ask_from_listf(_("Multi-head configuration"),
-_("Your system support multiple head configuration.
-What do you want to do?"), sub { translate($_[0]{text}) }, \@choices) or return; #- no more die, CHECK with auto that return ''!
-	$tc->{code} and $tc->{code}();
-    } else {
-	#- only one head found, configure it as before.
-	add2hash($card, $cards[0]) if !$noauto;
-	delete $card->{cards}; delete $card->{Xinerama};
+    #- using XF4 if {driver} && !{prefer_xf3} otherwise using XF3
+    #- error if $force_xf4 && !{driver} || !{driver} && !{server}
+    #- internal error if $force_xf4 && {prefer_xf3} || {prefer_xf3} && !{server}
+
+    if ($card->{card_name}) {
+	#- try to get info from given card_name
+	updateCardAccordingName($card, $card->{card_name});
+	undef $card->{card_name} if !$card->{server} && !$card->{driver}; #- bad card_name as we can't find the server
     }
-    $card->{server} = 'FBDev' unless !$cardOptions->{allowFB} || $card->{server} || $card->{driver} || $card->{type} || $noauto;
 
-    my $currentRealName = realName2CardName($card->{type} || $cards[0]{type}) || 'Other|Unlisted';
-    $card->{type} = cardName2RealName($in->ask_from_treelist(_("Graphics card"),
-							     _("Select a graphics card"), '|', ['Other|Unlisted', readCardsNames()],
-							     $currentRealName))
-      or return unless $card->{type} || $card->{server} || $card->{driver};
+    if (!$card->{server} && !$card->{driver} && !$noauto) {
+	my @cards = cardConfigurationAuto();	
 
-    updateCardAccordingName($card, $card->{type}) if $card->{type};
+	$card = multi_head_config($noauto, @cards);
 
-    #- check to use XFree 4 or XFree 3.3.
-    $card->{use_xf4} = $card->{driver};
-    $card->{force_xf4} ||= arch() =~ /ppc|ia64/; #- try to figure out ugly hack for PPC (recommend XF4 always so...)
-    $card->{prefer_xf3} = !$card->{force_xf4} && $card->{type} =~ /NeoMagic /;
+	$card->{server} = 'FBDev' if $cardOptions->{allowFB} && !$card->{server} && !$card->{driver};
+    }
+
     #- take into account current environment in standalone to keep
     #- the XFree86 version.
     if ($::isStandalone) {
-	readlink("$prefix/etc/X11/X") =~ /XFree86/ and $card->{prefer_xf3} = 0;
-	readlink("$prefix/etc/X11/X") =~ /XF86_/ and $card->{prefer_xf3} = !$card->{force_xf4};
+	readlink("$::prefix/etc/X11/X") =~ /XFree86/ and $card->{prefer_xf3} = 0;
+	readlink("$::prefix/etc/X11/X") =~ /XF86_/ and $card->{prefer_xf3} = !$force_xf4;
     }
 
     #- manage X 3.3.6 or above 4.2.0 specific server or driver.
-    if ($card->{type} eq 'Other|Unlisted') {
-	undef $card->{type};
+    if (!$card->{server} && !$card->{driver}) {
+	undef $card->{card_name};
 
 	my @list = ('server', $cardOptions->{allowFB} ? @Xconfigurator_consts::allservers : @Xconfigurator_consts::allbutfbservers);
-	my $default_server = if_(!$card->{use_xf4} || $card->{prefer_xf3}, $card->{server} || $cards[0]{server}) || 'server';
+	my $default_server = $card->{prefer_xf3} && $card->{server} || 'server';
 	$card->{server} = $in->ask_from_list(_("X server"), _("Choose a X server"), \@list, $default_server) or return;
 
 	if ($card->{server} eq 'server') {
 	    my $fake_card = {};
-	    updateCardAccordingName($fake_card, $cards[0]{type}) if $cards[0]{type};
-	    $card->{server} = $card->{prefer_xf3} = undef;
-	    $card->{use_xf4} = $card->{force_xf4} = 1;
+	    updateCardAccordingName($fake_card, $card->{card_name}) if $card->{card_name};
+	    delete $card->{server};
+	    $card->{prefer_xf3} = 0;
 	    $card->{driver} = $in->ask_from_list(_("X driver"), _("Choose a X driver"),
 						 ($cardOptions->{allowFB} ? \@Xconfigurator_consts::alldrivers : \@Xconfigurator_consts::allbutfbdrivers),
-						 $card->{driver} || $fake_card->{driver} || $cards[0]{driver}) or return;
+						 $card->{driver} || $fake_card->{driver} || $card->{driver}) or return;
 	} else {
-	    $card->{driver} = $card->{use_xf4} = $card->{force_xf4} = undef;
+	    delete $card->{driver};
 	    $card->{prefer_xf3} = 1;
 	}
     }
@@ -289,129 +384,57 @@ What do you want to do?"), sub { translate($_[0]{text}) }, \@choices) or return;
 	$_->{VideoRam} = 4096,  delete $_->{depth} if $_->{driver} eq 'i810';
 	$_->{VideoRam} = 16384, delete $_->{depth} if $_->{Chipset} =~ /PERMEDIA/ && $_->{VideoRam} <= 1024;
     }
-    if (availableRamMB() > 800 || arch() =~ /ppc/) {
-	#- No 3D XFree 3.3 for PPC
-	#- and no Utah GLX if more than 800 Mb (server, or kernel-enterprise, Utha GLX does not work with latest).
-	$card->{UTAH_GLX} = $card->{UTAH_GLX_EXPERIMENTAL} = '';
-    }
-    #- XFree version available, better to parse available package and get version from it.
-    my ($xf4_ver, $xf3_ver) = ("4.2.0", "3.3.6");
-    #- basic installation, use of XFree 4.2 or XFree 3.3.
-    my $xf3_tc = { text => _("XFree %s", $xf3_ver),
-		   code => sub { $card->{UTAH_GLX} = $card->{DRI_GLX} = ''; $card->{use_xf4} = '';
-				 log::l("Using XFree $xf3_ver") } };
-    my $msg = _("Which configuration of XFree do you want to have?");
-    my @choices = $card->{use_xf4} ? (if_($card->{prefer_xf3}, $xf3_tc),
-				      if_(!$card->{prefer_xf3} || $::expert || $noauto, 
-					  { text => _("XFree %s", $xf4_ver),
-					    code => sub { $card->{UTAH_GLX} = $card->{DRI_GLX} = '';
-							  log::l("Using XFree $xf4_ver") } }),
-				      if_(!$card->{prefer_xf3} && !$card->{force_xf4} && ($::expert || $noauto), $xf3_tc)) : $xf3_tc;
-    #- try to figure if 3D acceleration is supported
-    #- by XFree 3.3 but not XFree 4 then ask user to keep XFree 3.3 ?
-    if ($card->{UTAH_GLX} && !$card->{force_xf4}) {
-	$msg = ($card->{use_xf4} && !$card->{DRI_GLX} && !$card->{prefer_xf3} ?
-_("Your card can have 3D hardware acceleration support but only with XFree %s.
-Your card is supported by XFree %s which may have a better support in 2D.", $xf3_ver, $xf4_ver) :
-_("Your card can have 3D hardware acceleration support with XFree %s.", $xf3_ver)) . "\n\n\n" . $msg;
-	$::expert || $noauto or @choices = (); #- keep it by default here as it is the only choice available.
-	unshift @choices, { text => _("XFree %s with 3D hardware acceleration", $xf3_ver),
-			    code => sub { $card->{use_xf4} = '';
-					  log::l("Using XFree $xf3_ver with 3D hardware acceleration") } };
-    }
 
-    #- an expert user may want to try to use an EXPERIMENTAL 3D acceleration.
-    if ($::expert && $card->{use_xf4} && $card->{DRI_GLX_EXPERIMENTAL} && !$card->{Xinerama}) {
-	$msg =
-_("Your card can have 3D hardware acceleration support with XFree %s,
-NOTE THIS IS EXPERIMENTAL SUPPORT AND MAY FREEZE YOUR COMPUTER.", $xf4_ver) . "\n\n\n" . $msg;
-	push @choices, { text => _("XFree %s with EXPERIMENTAL 3D hardware acceleration", $xf4_ver),
-			 code => sub { $card->{DRI_GLX} = 'EXPERIMENTAL';
-				       log::l("Using XFree $xf4_ver with EXPERIMENTAL 3D hardware acceleration") } };
-    }
-
-    #- an expert user may want to try to use an EXPERIMENTAL 3D acceleration, currenlty
-    #- this is with Utah GLX and so, it can provide a way of testing.
-    if ($::expert && $card->{UTAH_GLX_EXPERIMENTAL} && !$card->{force_xf4}) {
-	$msg = ($card->{use_xf4} && !$card->{DRI_GLX} && !$card->{prefer_xf3} ?
-_("Your card can have 3D hardware acceleration support but only with XFree %s,
-NOTE THIS IS EXPERIMENTAL SUPPORT AND MAY FREEZE YOUR COMPUTER.
-Your card is supported by XFree %s which may have a better support in 2D.", $xf3_ver, $xf4_ver) :
-_("Your card can have 3D hardware acceleration support with XFree %s,
-NOTE THIS IS EXPERIMENTAL SUPPORT AND MAY FREEZE YOUR COMPUTER.", $xf3_ver)) . "\n\n\n" . $msg;
-	push @choices, { text => _("XFree %s with EXPERIMENTAL 3D hardware acceleration", $xf3_ver),
-			 code => sub { $card->{use_xf4} = ''; $card->{UTAH_GLX} = 'EXPERIMENTAL';
-				       log::l("Using XFree $xf3_ver with EXPERIMENTAL 3D hardware acceleration") } };
-    }
-
-    #- ask the expert or any user on second pass user to enable or not hardware acceleration support.
-    if ($card->{use_xf4} && $card->{DRI_GLX} && !$card->{Xinerama}) {
-	$msg = _("Your card can have 3D hardware acceleration support with XFree %s.", $xf4_ver) . "\n\n\n" . $msg;
-	$::expert || $noauto or @choices = (); #- keep all user by default with XFree 4 including 3D acceleration.
-	unshift @choices, { text => _("XFree %s with 3D hardware acceleration", $xf4_ver),
-			    code => sub { log::l("Using XFree $xf4_ver with 3D hardware acceleration") } };
-    }
-    if (arch() =~ /ppc/) {
-	#- not much choice for PPC - we only have XF4, and Xpmac from the installer   
-	@choices = { text => _("XFree %s", $xf4_ver), code => sub { $card->{use_xf4} = 1; log::l("Using XFree $xf4_ver") } };
-	push @choices, { text => _("Xpmac (installation display driver)"), code => sub { 
-			     $card->{server} = "Xpmac";
-			     $card->{use_xf4} = '';
-			 }} if $ENV{DISPLAY};
-    }
-    #- examine choice of user, beware the list MUST NOT BE REORDERED AS the first item should be the
-    #- proposed one by DrakX.
-    my $tc = $in->ask_from_listf(_("XFree configuration"), formatAlaTeX($msg), sub { translate($_[0]{text}) }, \@choices) or return;
-    #- in case of class discarding, this can help ...
-    $tc or $tc = $choices[0];
-    $tc->{code} and $tc->{code}();
+    xfree_and_glx_choose($card, $noauto);
 
     $card->{prog} = install_server($card);
 
     #- check for Matrox G200 PCI cards, disable AGP in such cases, causes black screen else.
-    if (member($card->{type}, 'Matrox Millennium 200', 'Matrox Millennium 200', 'Matrox Mystique') && $card->{identifier} !~ /AGP/) {
+    if (member($card->{card_name}, 'Matrox Millennium 200', 'Matrox Millennium 200', 'Matrox Mystique') && $card->{description} !~ /AGP/) {
 	log::l("disabling AGP mode for Matrox card, as it seems to be a PCI card");
 	log::l("this is only used for XFree 3.3.6, see /etc/X11/glx.conf");
-	substInFile { s/^\s*#*\s*mga_dma\s*=\s*\d+\s*$/mga_dma = 0\n/ } "$prefix/etc/X11/glx.conf";
+	substInFile { s/^\s*#*\s*mga_dma\s*=\s*\d+\s*$/mga_dma = 0\n/ } "$::prefix/etc/X11/glx.conf";
     }
 
-    delete $card->{depth}{32} if $card->{type} =~ /S3 Trio3D|SiS/;
-    $card->{options}{sw_cursor} = 1 if $card->{type} =~ /S3 Trio3D|SiS 6326/;
+    delete $card->{depth}{32} if $card->{card_name} =~ /S3 Trio3D|SiS/;
+    $card->{options}{sw_cursor} = 1 if $card->{card_name} =~ /S3 Trio3D|SiS 6326/;
     $card->{options_xf3}{power_saver} = 1;
     $card->{options_xf4}{DPMS} = 'on';
-    
-    $card->{VideoRam} ||= $in->ask_from_listf_('', _("Select the memory size of your graphics card"),
-					       sub { $Xconfigurator_consts::VideoRams{$_[0]} },
-					       [ sort keys %Xconfigurator_consts::VideoRams ]) || return
-						 if $card->{flags}{needVideoRam};
-
 
     #- hack for ATI Mach64 cards where two options should be used if using Utah-GLX.
-    if (member($card->{type}, 'ATI Mach64 Utah', 'ATI Rage Mobility')) {
-	$card->{options_xf3}{no_font_cache} = $card->{UTAH_GLX};
-	$card->{options_xf3}{no_pixmap_cache} = $card->{UTAH_GLX};
+    if (member($card->{card_name}, 'ATI Mach64 Utah', 'ATI Rage Mobility')) {
+	$card->{options_xf3}{no_font_cache} = $card->{use_UTAH_GLX};
+	$card->{options_xf3}{no_pixmap_cache} = $card->{use_UTAH_GLX};
     }
     #- hack for SiS cards where an option should be used if using Utah-GLX.
-    if (member($card->{type}, 'SiS 6326', 'SiS 630')) {
-	$card->{options_xf3}{no_pixmap_cache} = $card->{UTAH_GLX};
+    if (member($card->{card_name}, 'SiS 6326', 'SiS 630')) {
+	$card->{options_xf3}{no_pixmap_cache} = $card->{use_UTAH_GLX};
     }
 
     #- 3D acceleration configuration for XFree 4 using DRI, this is enabled by default
     #- but for some there is a need to specify VideoRam (else it won't run).
-    if ($card->{DRI_GLX}) {
-	$card->{flags}{needVideoRam} = 1 if $card->{identifier} =~ /Matrox.* G[245][05]0/;
-	($card->{flags}{needVideoRam}, $card->{VideoRam}) = (1, 16384)
-	  if member($card->{type}, 'Intel 810', 'Intel 815');
+    if ($card->{use_DRI_GLX}) {
+	$card->{needVideoRam} = 1 if $card->{description} =~ /Matrox.* G[245][05]0/;
+	($card->{needVideoRam}, $card->{VideoRam}) = (1, 16384)
+	  if member($card->{card_name}, 'Intel 810', 'Intel 815');
 	#- always enable (as a reminder for people using a better AGP mode to change it at their own risk).
 	$card->{options_xf4}{AGPMode} = '1';
 	#- hack for ATI Rage 128 card using a bttv or peripheral with PCI bus mastering exchange
 	#- AND using DRI at the same time.
-	if (member($card->{type}, 'ATI Rage 128', 'ATI Rage 128 Mobility')) {
+	if (member($card->{card_name}, 'ATI Rage 128', 'ATI Rage 128 Mobility')) {
 	    $card->{options_xf4}{UseCCEFor2D} = (detect_devices::matching_desc('Bt8[47][89]') ||
 						 detect_devices::matching_desc('TV') ||
 						 detect_devices::matching_desc('AG GMV1')) ? 'true' : 'false';
 	}
     }
+
+    
+    $in->ask_from('', _("Select the memory size of your graphics card"),
+		  [ { list => [ sort keys %Xconfigurator_consts::VideoRams ],
+		      format => sub { translate($Xconfigurator_consts::VideoRams{$_[0]}) },
+		      not_edit => !$::expert } ]) || return
+			if $card->{needVideoRam} && !$card->{VideoRam};
+
 
     $card;
 }
@@ -422,7 +445,7 @@ sub optionsConfiguration($) {
     my %l;
 
     foreach (@Xconfigurator_consts::options) {
-	if ($X->{card}{server} eq $_->[1] && $X->{card}{identifier} =~ /$_->[2]/) {
+	if ($X->{card}{server} eq $_->[1] && $X->{card}{description} =~ /$_->[2]/) {
 	    my $options = 'options_' . ($X->{card}{server} eq 'XFree86' ? 'xf4' : 'xf3');
 	    $X->{card}{$options}{$_->[0]} ||= 0;
 	    if (!$l{$_->[0]}) {
@@ -446,11 +469,10 @@ sub monitorConfiguration(;$$) {
 	log::l("EISA_ID: $monitor->{EISA_ID}");
 	if (my ($mon) = grep { lc($_->{eisa}) eq $monitor->{EISA_ID} } values %$monitors) {
 	    add2hash($monitor, $mon);
-	    log::l("EISA_ID corresponds to: $monitor->{type}");
+	    log::l("EISA_ID corresponds to: $monitor->{ModelName}");
 	}
     }
     if ($monitor->{hsyncrange} && $monitor->{vsyncrange}) {
-	add2hash($monitor, { type => "monitor1" });
 	return $monitor;
     }
 
@@ -472,7 +494,7 @@ that is beyond the capabilities of your monitor: you may damage your monitor.
     } else {
 	add2hash($monitor, $monitors->{$monitor->{type}});
     }
-    add2hash($monitor, { type => "monitor1", manual => 1 });
+    add2hash($monitor, { manual => 1 });
 }
 
 sub finalize_config {
@@ -513,9 +535,9 @@ sub check_config {
 #- needed for bad cards not restoring cleanly framebuffer, according to which version of XFree are used.
 sub check_bad_card {
     my ($card) = @_;
-    my $bad_card = $card->{use_xf4} ? $card->{BAD_FB_RESTORE} : $card->{BAD_FB_RESTORE_XF3};
+    my $bad_card = using_xf4($card) ? $card->{BAD_FB_RESTORE} : $card->{BAD_FB_RESTORE_XF3};
     $bad_card ||= $card->{driver} eq 'i810' || $card->{driver} eq 'fbdev';
-    $bad_card ||= $card->{identifier} =~ /S3.*ViRGE/ if $::live;
+    $bad_card ||= $card->{description} =~ /S3.*ViRGE/ if $::live;
     $bad_card ||= $card->{driver} eq 'nvidia' if !$::isStandalone; #- avoid testing during install at any price.
 
     log::l("the graphics card does not like X in framebuffer") if $bad_card;
@@ -528,7 +550,7 @@ sub testFinalConfig {
 
     my $f = "/etc/X11/XF86Config.test";
     
-    eval { write_XF86Config($X, $::testing ? $tmpconfig : "$prefix/$f") };
+    eval { write_XF86Config($X, $::testing ? $tmpconfig : "$::prefix/$f") };
     if (my $err = $@) {
 	$in->ask_warn('', $err);
 	return;
@@ -540,26 +562,26 @@ sub testFinalConfig {
 
     $in->ask_yesorno(_("Test of the configuration"), _("Do you want to test the configuration?"), 1) or return 1 if !$auto;
 
-    unlink "$prefix/tmp/.X9-lock";
+    unlink "$::prefix/tmp/.X9-lock";
 
     #- create a link from the non-prefixed /tmp/.X11-unix/X9 to the prefixed one
     #- that way, you can talk to :9 without doing a chroot
     #- but take care of non X11 install :-)
     if (-d "/tmp/.X11-unix") {
-	symlinkf "$prefix/tmp/.X11-unix/X9", "/tmp/.X11-unix/X9" if $prefix;
+	symlinkf "$::prefix/tmp/.X11-unix/X9", "/tmp/.X11-unix/X9" if $::prefix;
     } else {
-	symlinkf "$prefix/tmp/.X11-unix", "/tmp/.X11-unix" if $prefix;
+	symlinkf "$::prefix/tmp/.X11-unix", "/tmp/.X11-unix" if $::prefix;
     }
     #- restart_xfs;
 
-    my $f_err = "$prefix/tmp/Xoutput";
+    my $f_err = "$::prefix/tmp/Xoutput";
     my $pid;
     unless ($pid = fork) {
 	system("xauth add :9 . `mcookie`");
 	open STDERR, ">$f_err";
-	chroot $prefix if $prefix;
+	chroot $::prefix if $::prefix;
 	exec $X->{card}{prog}, 
-	  if_($X->{card}{prog} !~ /Xsun/, "-xf86config", ($::testing ? $tmpconfig : $f) . ($X->{card}{use_xf4} && "-4")),
+	  if_($X->{card}{prog} !~ /Xsun/, "-xf86config", ($::testing ? $tmpconfig : $f) . (using_xf4($X->{card}) && "-4")),
 	  ":9" or c::_exit(0);
     }
 
@@ -571,7 +593,7 @@ sub testFinalConfig {
 	local $_;
 	local *F; open F, $f_err;
       i: while (<F>) {
-	    if ($X->{card}{use_xf4}) {
+	    if (using_xf4($X->{card})) {
 		if (/^\(EE\)/ && !/Disabling/ || /^Fatal\b/) {
 		    my @msg = !/error/ && $_ ;
 		    while (<F>) {
@@ -625,8 +647,8 @@ sub testFinalConfig {
 
         my $background = "/usr/share/pixmaps/backgrounds/linux-mandrake/XFdrake-image-test.jpg";
         my $qiv = "/usr/bin/qiv";
-        -r "} . $prefix . q{/$background" && -x "} . $prefix . q{/$qiv" and
-            system(($::testing ? "} . $prefix . q{" : "chroot } . $prefix . q{/ ") . "$qiv -y $background");
+        -r "} . $::prefix . q{/$background" && -x "} . $::prefix . q{/$qiv" and
+            system(($::testing ? "} . $::prefix . q{" : "chroot } . $::prefix . q{/ ") . "$qiv -y $background");
 
         my $in = interactive_gtk->new;
 	$in->exit($in->ask_yesorno('', [ _("Is this the correct setting?"), $text ], 0) ? 0 : 222);
@@ -634,7 +656,7 @@ sub testFinalConfig {
     my $rc = close F;
     my $err = $?;
 
-    unlink "/tmp/.X11-unix/X9" if $prefix;
+    unlink "/tmp/.X11-unix/X9" if $::prefix;
     kill 2, $pid;
     $::noShadow = 0;
 
@@ -646,12 +668,12 @@ sub allowedDepth($) {
     my ($card) = @_;
     my %allowed_depth;
 
-    if ($card->{UTAH_GLX} || $card->{DRI_GLX}) {
+    if ($card->{use_UTAH_GLX} || $card->{use_DRI_GLX}) {
 	$allowed_depth{16} = 1; #- this is the default.
-	$card->{identifier} =~ /Voodoo 5/ and $allowed_depth{24} = undef;
-	$card->{identifier} =~ /Matrox.* G[245][05]0/ and $allowed_depth{24} = undef;
-	$card->{identifier} =~ /Rage 128/ and $allowed_depth{24} = undef;
-	$card->{identifier} =~ /Radeon/ and $allowed_depth{24} = undef;
+	$card->{description} =~ /Voodoo 5/ and $allowed_depth{24} = undef;
+	$card->{description} =~ /Matrox.* G[245][05]0/ and $allowed_depth{24} = undef;
+	$card->{description} =~ /Rage 128/ and $allowed_depth{24} = undef;
+	$card->{description} =~ /Radeon/ and $allowed_depth{24} = undef;
     }
     
     for ($card->{server}) {
@@ -763,8 +785,8 @@ sub chooseResolutionsGtk($$;$) {
     }
     gtkadd($W->{window},
 	   gtkpack_($W->create_box_with_title(_("Choose the resolution and the color depth"),
-					      "(" . ($card->{type} ? 
-						     _("Graphics card: %s", $card->{type}) :
+					      "(" . ($card->{card_name} ? 
+						     _("Graphics card: %s", $card->{card_name}) :
 						     _("XFree86 server: %s", $card->{server})) . ")"
 					     ),
 		    1, gtkpack2(new Gtk::VBox(0,0),
@@ -974,10 +996,10 @@ Section "InputDevice"
     $pointer->($X->{mouse}{auxmouse}, 2) if $X->{mouse}{auxmouse};
 
     #- write module section for version 3.
-    if (@{$X->{wacom}} || $X->{card}{UTAH_GLX}) {
+    if (@{$X->{wacom}} || $X->{card}{use_UTAH_GLX}) {
 	print F qq(Section "Module"\n);
 	print F qq(    Load "xf86Wacom.so"\n) if @{$X->{wacom}};
-	print F qq(    Load "glx-3.so"\n) if $X->{card}{UTAH_GLX}; #- glx.so may clash with server version 4.
+	print F qq(    Load "glx-3.so"\n) if $X->{card}{use_UTAH_GLX}; #- glx.so may clash with server version 4.
 	print F qq(EndSection\n\n);
     }
 
@@ -1093,7 +1115,7 @@ Section "Module"
 # This loads the DBE extension module.
     Load	"dbe"
 );
-    if (!($X->{card}{DRI_GLX} && $X->{card}{driver} eq 'r128')) {
+    if (!($X->{card}{use_DRI_GLX} && $X->{card}{driver} eq 'r128')) {
 	print G qq(
 # This loads the Video for Linux module.
     Load        "v4l"
@@ -1101,10 +1123,10 @@ Section "Module"
     }
 
     #- For example, this loads the NVIDIA GLX extension module.
-    #- When DRI_GLX_SPECIAL is set, DRI_GLX is also set
+    #- When DRI_GLX_SPECIAL is set, use_DRI_GLX is also set
     if ($X->{card}{DRI_GLX_SPECIAL}) {
 	print G $X->{card}{DRI_GLX_SPECIAL};
-    } elsif ($X->{card}{DRI_GLX}) {
+    } elsif ($X->{card}{use_DRI_GLX}) {
 	print G qq(
     Load	"glx"
     Load	"dri"
@@ -1121,14 +1143,14 @@ Section "DRI"
     Mode	0666
 EndSection
 
-) if $X->{card}{DRI_GLX};
+) if $X->{card}{use_DRI_GLX};
 
     #- Write monitor section.
     $O = $X->{monitor};
     print F qq(\nSection "Monitor"\n);
     print G qq(\nSection "Monitor"\n);
-    print F qq(    Identifier "$O->{type}"\n);
-    print G qq(    Identifier "$O->{type}"\n);
+    print F qq(    Identifier "monitor1"\n);
+    print G qq(    Identifier "monitor1"\n);
     print F qq(    HorizSync  $O->{hsyncrange}\n\n);
     print G qq(    HorizSync  $O->{hsyncrange}\n\n);
     print F qq(    VertRefresh $O->{vsyncrange}\n\n);
@@ -1137,9 +1159,9 @@ EndSection
     print G $O->{ModeLines} if $O->{ModeLines};
     print F "\nEndSection\n\n\n";
     print G "\nEndSection\n\n\n";
-    foreach (2..@{$X->{card}{cards} || []}) {
+    foreach (1..@{$X->{card}{cards} || []}) {
 	print G qq(Section "Monitor"\n);
-	print G qq(    Identifier "monitor$_"\n);
+	print G qq(    Identifier "monitor), $_+1, qq("\n);
 	print G qq(    HorizSync   $O->{hsyncrange}\n);
 	print G qq(    VertRefresh $O->{vsyncrange}\n);
 	print G qq(EndSection\n\n\n);
@@ -1149,18 +1171,15 @@ EndSection
     $O = $X->{card};
     print F $Xconfigurator_consts::devicesection_text;
     print F qq(Section "Device"\n);
-    print F qq(    Identifier  "$O->{type}"\n);
+    print F qq(    Identifier  "device1"\n);
+    print F qq(    VendorName  "$O->{VendorName}"\n) if $O->{VendorName};
+    print F qq(    BoardName   "$O->{BoardName}"\n) if $O->{BoardName};
     print F qq(    Chipset     "$O->{Chipset}"\n) if $O->{Chipset};
 
-    print F "#" if $O->{VideoRam} && !$O->{flags}{needVideoRam};
+    print F "#" if $O->{VideoRam} && !$O->{needVideoRam};
     print F "    VideoRam    $O->{VideoRam}\n" if $O->{VideoRam};
 
     print F map { "    $_\n" } @{$O->{lines} || []};
-
-    #- Obsolete stuff, no existing card still need this
-    print F qq(    Ramdac      "$O->{Ramdac}"\n) if $O->{Ramdac};
-    print F qq(    Dacspeed    "$O->{Dacspeed}"\n) if $O->{Dacspeed};
-    print F qq(    Clockchip   "$O->{Clockchip}"\n) if $O->{Clockchip};
 
     print F qq(
 
@@ -1182,18 +1201,15 @@ EndSection
     print F "EndSection\n\n\n";
 
     #- configure all drivers here!
-    foreach (@{$O->{cards} || [ $O ]}) {
+    each_index {
 	print G qq(Section "Device"\n);
-	print G qq(    Identifier  "$_->{type}"\n);
+	print G qq(    Identifier  "device), $::i+1, qq("\n);
+	print G qq(    VendorName  "$_->{VendorName}"\n) if $_->{VendorName};
+	print G qq(    BoardName   "$_->{BoardName}"\n) if $_->{BoardName};
 	print G qq(    Driver      "$_->{driver}"\n);
-	print G "#" if $_->{VideoRam} && !$_->{flags}{needVideoRam};
+	print G "#" if $_->{VideoRam} && !$_->{needVideoRam};
 	print G "    VideoRam    $_->{VideoRam}\n" if $_->{VideoRam};
 	print G map { "    $_\n" } @{$_->{lines} || []};
-
-	#- Obsolete stuff, no existing card still need this
-	print G qq(    Ramdac      "$_->{Ramdac}"\n) if $_->{Ramdac};
-	print G qq(    Dacspeed    "$_->{Dacspeed}"\n) if $_->{Dacspeed};
-	print G qq(    Clockchip   "$_->{clockchip}"\n) if $_->{clockchip};
 
 	print G qq(
 
@@ -1210,7 +1226,7 @@ EndSection
             print G qq(    Option    "UseFBDev"\n);
         }
 	print G "EndSection\n\n\n";
-    }
+    } $O, @{$O->{cards} || []};
 
     my $subscreen = sub {
 	my ($f, $server, $defdepth, $depths) = @_;
@@ -1233,35 +1249,26 @@ EndSection
 Section "Screen"
     Driver "$server"
     Device      "$device"
-    Monitor     "$X->{monitor}{type}"
+    Monitor     "monitor1"
 ); #-"
 	$subscreen->(*F, $server, $defdepth, $depths);
     };
 
-    &$screen("svga", $X->{default_depth}, $O->{type}, $O->{depth}) 
+    &$screen("svga", $X->{default_depth}, 'device0', $O->{depth}) 
       if $O->{server} eq 'SVGA';
 
-    &$screen("accel", $X->{default_depth}, $O->{type}, $O->{depth})
+    &$screen("accel", $X->{default_depth}, 'device0', $O->{depth})
       if $Xconfigurator_consts::serversdriver{$O->{server}} eq 'accel';
 
-    &$screen("fbdev", $X->{default_depth}, $O->{type}, $O->{depth});
+    &$screen("fbdev", $X->{default_depth}, 'device0', $O->{depth});
 
     &$screen("vga16", '', "Generic VGA", { '' => [[ 640, 480 ], [ 800, 600 ]]});
 
-    print G qq(
-Section "Screen"
-    Identifier "screen1"
-    Device      "$O->{type}"
-    Monitor     "$X->{monitor}{type}"
-);
-    #- bpp 32 not handled by XF4
-    $subscreen->(*G, "svga", min($X->{default_depth}, 24), $O->{depth});
-    foreach (2..@{$O->{cards} || []}) {
-	my $device = $O->{cards}[$_ - 1]{type};
+    foreach (1 .. 1 + @{$O->{cards} || []}) {
 	print G qq(
 Section "Screen"
     Identifier "screen$_"
-    Device      "$device"
+    Device      "device$_"
     Monitor     "monitor$_"
 );
 	#- bpp 32 not handled by XF4
@@ -1274,8 +1281,8 @@ Section "ServerLayout"
     Identifier "layout1"
     Screen     "screen1"
 );
-    foreach (2..@{$O->{cards} || []}) {
-	my ($curr, $prev) = ($_, $_ - 1);
+    foreach (1..@{$O->{cards} || []}) {
+	my ($curr, $prev) = ($_ + 1, $_);
 	print G qq(    Screen     "screen$curr" RightOf "screen$prev"\n);
     }
     print G '#' if defined $O->{Xinerama} && !$O->{Xinerama};
@@ -1305,11 +1312,11 @@ sub show_info {
 
 #- Program entry point.
 sub main {
-    ($prefix, my $X, $in, $do_pkgs, my $cardOptions) = @_;
+    (my $X, $in, $do_pkgs, my $cardOptions) = @_;
     $X ||= {};
 
-    Xconfig::XF86check_link($prefix, '');
-    Xconfig::XF86check_link($prefix, '-4');
+    Xconfig::XF86check_link($::prefix, '');
+    Xconfig::XF86check_link($::prefix, '-4');
 
     {
 	my $w = $in->wait_message('', _("Preparing X-Window configuration"), 1);
@@ -1360,13 +1367,13 @@ The current configuration is:
     }
     if ($ok) {
 	if (!$::testing) {
-	    my $f = "$prefix/etc/X11/XF86Config";
+	    my $f = "$::prefix/etc/X11/XF86Config";
 	    if (-e "$f.test") {
 		rename $f, "$f.old" or die "unable to make a backup of XF86Config";
 		rename "$f-4", "$f-4.old";
 		rename "$f.test", $f;
 		rename "$f.test-4", "$f-4";
-		symlinkf "../..$X->{card}{prog}", "$prefix/etc/X11/X" if $X->{card}{server} !~ /Xpmac/;
+		symlinkf "../..$X->{card}{prog}", "$::prefix/etc/X11/X" if $X->{card}{server} !~ /Xpmac/;
 	    }
 	}
 
@@ -1375,7 +1382,7 @@ The current configuration is:
 	    my $run = exists $X->{xdm} ? $X->{xdm} : $::auto || $in->ask_yesorno(_("Graphical interface at startup"),
 _("I can setup your computer to automatically start the graphical interface (XFree) upon booting.
 Would you like XFree to start when you reboot?"), 1);
-	    any::runlevel($prefix, $run ? 5 : 3) if !$::testing;
+	    any::runlevel($::prefix, $run ? 5 : 3) if !$::testing;
 	}
 	if ($::isStandalone && $in->isa('interactive_gtk')) {
 	    if (my $wm = any::running_window_manager()) {
