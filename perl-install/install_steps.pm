@@ -468,7 +468,7 @@ sub pppConfig {
     $toreplace{connection} ||= 'DialupConnection';
     $toreplace{domain} ||= 'localdomain';
     $toreplace{intf} ||= 'ppp0';
-    $toreplace{papname} = $o->{modem}{auth} eq 'PAP' && $toreplace{connection};
+    $toreplace{papname} = $o->{modem}{auth} eq 'PAP' && $toreplace{login};
 
     #- build ifcfg-ppp0.
     my $ifcfg = "$o->{prefix}/etc/sysconfig/network-scripts/ifcfg-ppp0";
@@ -533,13 +533,13 @@ END
 END
     close CHAT;
 
-    if ($o->{modem}{auth} eq 'PAP' || $o->{modem}{auth} eq 'CHAP') {
+    if ($o->{modem}{auth} eq 'PAP') {
 	#- need to create a secrets file for the connection.
 	my $secrets = "$o->{prefix}/etc/ppp/" . lc($o->{modem}{auth}) . "-secrets";
 	my @l = cat_($secrets);
 	my $replaced = 0;
 	do { $replaced ||= 1
-	       if s/^\s*$toreplace{login}\s+ppp0\s+(\S+)/$toreplace{login}  ppp0  "$toreplace{passwd}"/; } foreach @l;
+	       if s/^\s*"?$toreplace{login}"?\s+ppp0\s+(\S+)/"$toreplace{login}"  ppp0  "$toreplace{passwd}"/; } foreach @l;
 	if ($replaced) {
 	    local *F;
 	    open F, ">$secrets" or die "Can't open $secrets: $!";
@@ -551,7 +551,7 @@ END
 	}
 	#- restore access right to secrets file, just in case.
 	chmod 0600, $secrets;
-    }
+    } #- CHAP is not supported by initscripts, need patching before doing more on that here!
 
     install_any::template2userfile($o->{prefix}, "$ENV{SHARE_PATH}/kppprc.in", ".kde/share/config/kppprc", 1, %toreplace);
 
