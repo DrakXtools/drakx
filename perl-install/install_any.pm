@@ -380,11 +380,10 @@ sub setDefaultPackages {
       detect_devices::matching_desc('[nN][vV]idia.*Quadro');
 
 
-    foreach (lang::langs($o->{locale}{langs}), substr(lang::c2locale($o->{locale}{country}), 0, 2)) {
-	unshift @{$o->{default_packages}}, map { $_->name } pkgs::packagesProviding($o->{packages}, "locales-$_");
-    }
-    foreach (lang::langs($o->{locale}{langs}), #- mainly for zh in case of zh_TW.Big5
-	     lang::langsLANGUAGE($o->{locale}{langs})) {
+    my @locale_pkgs = map { pkgs::packagesProviding($o->{packages}, 'locales-' . $_) } lang::langsLANGUAGE($o->{locale}{langs});
+    unshift @{$o->{default_packages}}, uniq(map { $_->name } @locale_pkgs);
+
+    foreach (lang::langsLANGUAGE($o->{locale}{langs})) {
 	$o->{compssUsersChoice}{qq(LOCALES"$_")} = 1;
     }
     $o->{compssUsersChoice}{'CHARSET"' . lang::l2charset($o->{locale}{lang}) . '"'} = 1;
