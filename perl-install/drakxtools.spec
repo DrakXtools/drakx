@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10
-Release: 53mdk
+Release: 54mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -324,6 +324,16 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Thu Jul 15 2004 Olivier Blin <blino@mandrake.org> 10-54mdk
+- drakboot: use bootloader and Xconfig instead of detect-resolution
+- net_applet:
+  o use drakconnect to configure network
+  o use 'ip route show' to find the gateway device when no GATEWAYDEV
+    is defined
+- drakauth: add "Active Directory" through winbind (pixel)
+- bootloader-config: fix installation on floppy (#10260) (pixel)
+- drakedm: typo fix (lost -> lose) (rvojta)
+
 * Thu Jul  8 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10-53mdk
 - bootloader-config (pixel):
   o nicer "usage: ..." 
