@@ -11,7 +11,7 @@ use vars qw(@ISA %EXPORT_TAGS @EXPORT_OK @icon_paths $force_center $force_focus 
       gtkset_text gtkset_tip gtkappenditems gtkappend  gtkset_shadow_type gtkset_layout gtkset_relief
       gtkadd gtkexpand gtkput gtktext_append gtktext_insert gtkset_size_request gtksize gtkset_justify gtkset_active
       gtkset_sensitive gtkset_visibility gtkset_modal gtkset_border_width gtkmove gtkresize gtkshow
-      gtkhide gtkdestroy gtkflush gtkset_mousecursor gtkset_mousecursor_normal gtkset_markup
+      gtkhide gtkdestroy gtkflush gtkset_mousecursor gtkset_mousecursor_normal gtkset_markup gtkmodify_font gtkset_property
       gtkset_mousecursor_wait gtkappend_text gtkprepend_text gtkinsert_text gtkroot gtksetstyle) ],
     helpers => [ qw(add2notebook add_icon_path n_line_size fill_tiled fill_tiled_coords string_size
       get_text_coord gtkcolor gtkset_background gtkfontinfo gtkcreate_img gtkcreate_pixbuf set_back_pixbuf) ],
@@ -529,6 +529,18 @@ sub gtkfontinfo {
     }
     $metrics->unref;
     %fontinfo;
+}
+
+sub gtkmodify_font {
+    my ($w, $arg) = @_;
+    $w->modify_font($arg);
+    $w;
+}
+
+sub gtkset_property {
+    my ($w, $property, $value) = @_;
+    $w->set_property($property, $value);
+    $w;
 }
 
 sub set_back_pixbuf {
