@@ -150,7 +150,7 @@ sub add_kind2notebook {
 
 sub general_action_box {
     my ($box, $nowizard, $interactive_help) = @_;
-    $_->widget->destroy foreach $box->children;
+    $_->destroy foreach $box->get_children;
 
     gtkadd($box, gtksignal_connect(Gtk2::Button->new_from_stock('gtk-help'), clicked => $interactive_help)) if $interactive_help;
 
@@ -165,7 +165,7 @@ sub general_action_box {
 }
 sub per_kind_action_box {
     my ($box, $kind) = @_;
-    $_->widget->destroy foreach $box->children;
+    $_->destroy foreach $box->get_children;
 
     $kind->{type} =~ /hd|lvm/ or return;
 
@@ -177,7 +177,7 @@ sub per_kind_action_box {
 }
 sub per_entry_action_box {
     my ($box, $kind, $entry) = @_;
-    $_->widget->destroy foreach $box->children;
+    $_->destroy foreach $box->get_children;
 
     if ($entry) {
 	my @buttons = map { 
@@ -200,7 +200,7 @@ I suggest you first resize that partition
 
 sub per_entry_info_box {
     my ($box, $kind, $entry) = @_;
-    $_->widget->destroy foreach $box->children;
+    $_->destroy foreach $box->get_children;
     my $info;
     if ($entry) {
 	$info = diskdrake::interactive::format_part_info(kind2hd($kind), $entry);
@@ -213,7 +213,7 @@ sub per_entry_info_box {
 sub current_kind_changed {
     my ($_in, $kind) = @_;
 
-    $_->widget->destroy foreach $kind->{display_box}->children;
+    $_->destroy foreach $kind->{display_box}->get_children;
 
     my $v = $kind->{val};
     my @parts = 

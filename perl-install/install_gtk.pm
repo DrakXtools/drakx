@@ -185,7 +185,7 @@ sub create_logo_window {
 
     my $w = bless {}, 'ugtk2';
     $w->{rwindow} = $w->{window} = Gtk2::Window->new('toplevel');
-    $w->{rwindow}->set_uposition(0, 0);
+#    $w->{rwindow}->set_position(0, 0);
     $w->{rwindow}->set_size_request($::logowidth, $::logoheight);
     $w->{rwindow}->set_name("logo");
     $w->{rwindow}->set_title('skip');
@@ -199,7 +199,7 @@ sub create_logo_window {
 #------------------------------------------------------------------------------
 sub init_gtk() {
     symlink("/tmp/stage2/etc/$_", "/etc/$_") foreach qw(gtk-2.0 pango fonts);
-    Gtk2->init(\@ARGV);
+    Gtk2::init(@ARGV);
     Gtk2->set_locale;
 }
 

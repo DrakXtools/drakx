@@ -269,7 +269,7 @@ sub choose_gtk {
 						   ),
 					  ),
 			       ),
-		    0, gtkadd($W->create_okcancel(N("Ok"), N("Cancel"), '', if_($help_sub, [ N("Help"), $help_sub, 1 ]))),
+		    0, gtkadd($W->create_okcancel('gtk-ok', 'gtk-cancel', '', if_($help_sub, [ 'gtk-help', $help_sub, 1 ]))),
 		    ));
     $depth_combo->disable_activate;
     $depth_combo->set_use_arrows_always(1);

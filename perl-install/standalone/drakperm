@@ -32,7 +32,7 @@ my $w = ugtk2->new('drakperm');
 $w->{rwindow}->set_size_request(550, 400) unless $::isEmbedded;
 my $W = $w->{window};
 $W->signal_connect(delete_event => sub { ugtk2->exit });
-my $treeModel = Gtk2::TreeStore->new((Gtk2::GType->STRING) x 4);
+my $treeModel = Gtk2::TreeStore->new(("Glib::String") x 4);
 my $permList = Gtk2::TreeView->new_with_model($treeModel);
 
 my @column_sizes = (150, 100, 100, 15, -1);
@@ -65,7 +65,6 @@ my @buttons;
 sub del_callback() {
     my ($tree, $iter) = $permList->get_selection->get_selected;
     $tree->remove($iter);
-    $iter->free;
     sensitive_buttons(0);
     $modified++;
 }
@@ -74,33 +73,26 @@ sub down_callback() {
     my ($model, $iter) = $permList->get_selection->get_selected;
     return unless $iter;
     my $new_iter = $model->iter_next($iter);
-    goto CLEAN1 unless $new_iter;
+    return if !$new_iter;
 
     $model->move_after($iter, $new_iter);
     $model->move_after($iter, $new_iter);
     $permList->get_selection->select_iter($iter);
     $permList->queue_draw;
-    $new_iter->free;
-  CLEAN1: $iter->free;
 }
 
 sub up_callback() {
     my ($model, $iter) = $permList->get_selection->get_selected;
-    return unless $iter;
+    return if !$iter;
     my $path = $model->get_path($iter);
-    goto CLEAN1 unless $path;
+    return if !$path;
     $path->prev;
     my $prev_iter = $model->get_iter($path);
-    $path->free;
-    goto CLEAN2 unless $prev_iter;
+    return if !$prev_iter;
     $model->move_before($iter, $prev_iter);
     $model->move_before($iter, $prev_iter);
     $permList->get_selection->select_iter($iter);
     $permList->queue_draw;
-    
-    $prev_iter->free;
-  CLEAN2: $path->free;
-  CLEAN1: $iter->free;
 }
 
 my $combo_sig = $combo_perm->entry->signal_connect(changed => sub { display_perm($combo_perm->entry->get_text , @_) });
@@ -110,7 +102,6 @@ $permList->signal_connect(button_press_event => sub {
                      my (undef, $iter) = $permList->get_selection->get_selected;
                      return unless $iter;
                      row_setting_dialog($iter) if $event->type eq '2button-press';
-                     $iter->free;
                  });
 
 
@@ -155,7 +146,6 @@ $permList->get_selection->signal_connect('changed' => sub {
                                                my $editable = $editable;
                                                $editable = 0 unless $iter;
                                                sensitive_buttons($editable);
-                                               $iter->free if $iter;
                                            });
 
 $w->main;
@@ -210,7 +200,6 @@ sub save_perm() {
     $treeModel->foreach(sub {
                              my ($model, $_path, $iter) = @_;
                              my $line = $model->get($iter, 0) . "\t" . $model->get($iter,1) . ($model->get($iter,2) ? "." . $model->get($iter,2) : "") . "\t" . $model->get($iter,3) . "\n";
-                             $iter->free;
                              print F $line;
                              return 0;
                          }, $val);
@@ -334,7 +323,6 @@ sub row_setting_dialog {
                             $treeModel->set($iter, [ 3 => ($s || '') . $user . $group . $other ]);
                             $dlg->destroy;
                             $modified++;
-                            $iter->free;
                         });
     $usr_check->signal_connect(clicked => sub {
                         my $bool = $usr_check->get_active; 

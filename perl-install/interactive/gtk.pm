@@ -67,7 +67,7 @@ sub create_treeview_list {
     my ($e, $may_go_to_next, $changed, $double_click) = @_;
     my $curr;
 
-    my $list = Gtk2::ListStore->new(Gtk2::GType->STRING);
+    my $list = Gtk2::ListStore->new("Glib::String");
     my $list_tv = Gtk2::TreeView->new_with_model($list);
     $list_tv->set_headers_visible(0);
     $list_tv->get_selection->set_mode('browse');
@@ -85,7 +85,7 @@ sub create_treeview_list {
         my ($_w, $event) = @_;
 	my $c = chr($event->keyval & 0xff);
 
-	Gtk2->timeout_remove($timeout) if $timeout; $timeout = '';
+	Glib::Source->remove($timeout) if $timeout; $timeout = '';
 	
 	if ($event->keyval >= 0x100) {
 	    &$may_go_to_next if member($event->keyval, (Gtk2::Gdk::Event::Key->Sym_Return, Gtk2::Gdk::Event::Key->Sym_KP_Enter));
@@ -109,24 +109,21 @@ sub create_treeview_list {
 	    if ($j == @l) {
 		$starting_word = '';
 	    } else {
-		my $path = Gtk2::TreePath->new_from_string(($j + $curr) % @l);
-		$select->($path);
-		$path->free;
+		$select->(Gtk2::TreePath->new_from_string(($j + $curr) % @l));
 	    }
 
-	    $timeout = Gtk2->timeout_add($forgetTime, sub { $timeout = $starting_word = ''; 0 });
+	    $timeout = Glib::Timeout->add($forgetTime, sub { $timeout = $starting_word = ''; 0 });
 	}
 	0;
     });
     $list_tv->show;
 
-    $list->append_set([ 0 => $_ ])->free foreach @{$e->{formatted_list}};
+    $list->append_set([ 0 => $_ ]) foreach @{$e->{formatted_list}};
 
     $list_tv->get_selection->signal_connect(changed => sub {
 	my ($model, $iter) = $_[0]->get_selected;
 	$model && $iter or return;
 	my $row = $model->get_path_str($iter);
-	$iter->free;
 	${$e->{val}} = $e->{list}[$curr = $row];
 	&$changed;
     });
@@ -139,9 +136,8 @@ sub create_treeview_list {
 	    my ($old_path) = $list_tv->get_cursor;
 	    if (!$old_path || $nb != $old_path->to_string) {
 		$select->(my $path = Gtk2::TreePath->new_from_string($nb));
-		$path->free;
 	    }
-	    $old_path->free if $old_path;
+	    undef $old_path if $old_path;
 	};
     };
 }
@@ -152,7 +148,7 @@ sub create_treeview_tree {
     $tree_expanded = to_bool($tree_expanded); #- to reduce "Use of uninitialized value", especially when debugging
 
     my $sep = quotemeta $e->{separator};
-    my $tree_model = Gtk2::TreeStore->new(Gtk2::GType->STRING, Gtk2::GType->OBJECT, Gtk2::GType->STRING);
+    my $tree_model = Gtk2::TreeStore->new("Glib::String", "Gtk2::Gdk::Pixbuf", "Glib::String");
     my $tree = Gtk2::TreeView->new_with_model($tree_model);
     $tree->get_selection->set_mode('browse');
     $tree->append_column(Gtk2::TreeViewColumn->new_with_attributes(undef, Gtk2::CellRendererText->new, 'text' => 0));
@@ -168,7 +164,7 @@ sub create_treeview_tree {
 	    [ $text  ? (0 => $text) : @{[]},
 	      $image ? (1 => $to_unref = gtkcreate_pixbuf($image)) : @{[]} ];
 	};
-	$clean_image = sub { $to_unref and $to_unref->unref };
+	$clean_image = sub { undef $to_unref };
     } else {
 	$build_value = sub { [ 0 => $_[0] ] };
 	$clean_image = sub {};
@@ -195,23 +191,20 @@ sub create_treeview_tree {
 	my $iter = $tree_model->append_set($parent->($root), $build_value->($leaf));
 	$clean_image->();
 	my $pathstr = $tree_model->get_path_str($iter);
-	$iter->free;
 	$precomp{$pathstr} = { value => $leaf, fullvalue => $_[0], listvalue => $_[1] };
 	push @ordered_keys, $pathstr;
 	$wleaves{$_[0]} = $pathstr;
     } $e->{formatted_list}, $e->{list};
-    $_->free foreach values %wtree;
+    undef $_ foreach values %wtree;
     undef %wtree;
 
     my $select = sub {
 	my ($path_str) = @_;
+	$tree->expand_to_path(Gtk2::TreePath->new_from_string($path_str));
 	my $path = Gtk2::TreePath->new_from_string($path_str);
-	$tree->expand_to_path($path);
-	$path->free;
-	$path = Gtk2::TreePath->new_from_string($path_str);
 	$tree->set_cursor($path, undef, 0);
 	$tree->scroll_to_cell($path, undef, 1, 0.5, 0);
-	$path->free;
+
     };
 
     my $curr = $tree_model->get_iter_first; #- default value
@@ -220,7 +213,7 @@ sub create_treeview_tree {
     $tree->get_selection->signal_connect(changed => sub {
 	my ($model, $iter) = $_[0]->get_selected;
 	$model && $iter or return;
-	$curr->free if ref $curr;
+	undef $curr if ref $curr;
 	my $path = $tree_model->get_path($curr = $iter);
 	if (!$tree_model->iter_has_child($iter)) {
 	    ${$e->{val}} = $precomp{$path->to_string}{listvalue};
@@ -228,16 +221,14 @@ sub create_treeview_tree {
 	} else {
 	    $tree->expand_row($path, 0) if $selected_via_click;
 	}
-	$path->free;
     });
     my ($starting_word, $start_reg) = ('', "^");
     my $timeout;
 
     my $toggle = sub {
 	if ($tree_model->iter_has_child($curr)) {
-	    my $path = $tree_model->get_path($curr);
-	    $tree->toggle_expansion($path, 0);
-	    $path->free;
+	    $tree->toggle_expansion($tree_model->get_path($curr), 0);
+
 	} else {
 	    &$may_go_to_next;
 	}
@@ -248,11 +239,11 @@ sub create_treeview_tree {
 	$selected_via_click = 0;
 	my $c = chr($event->keyval & 0xff);
 	$curr or return;
-	Gtk2->timeout_remove($timeout) if $timeout; $timeout = '';
+	Glib::Source->remove($timeout) if $timeout; $timeout = '';
 
 	if ($event->keyval >= 0x100) {
-	    &$toggle if member($event->keyval, (Gtk2::Gdk::Event::Key->Sym_Return, Gtk2::Gdk::Event::Key->Sym_KP_Enter));
-	    $starting_word = '' if !member($event->keyval, (Gtk2::Gdk::Event::Key->Sym_Control_L, Gtk2::Gdk::Event::Key->Sym_Control_R));
+	    &$toggle if member($event->keyval, (0xFF0D, 0xFF8D)); # from gdk/gdkkeysyms.h
+	    $starting_word = '' if !member($event->keyval, (0xFFE3, 0xFFE4));  # from gdk/gdkkeysyms.h
 	} else {
 	    my $next;
 	    if (member('control-mask', @{$event->state})) {
@@ -286,7 +277,7 @@ sub create_treeview_tree {
 		$starting_word = '';
 	    }
 
-	    $timeout = Gtk2->timeout_add($forgetTime, sub { $timeout = $starting_word = ''; 0 });
+	    $timeout = Glib::Timeout->add($forgetTime, sub { $timeout = $starting_word = ''; 0 });
 	}
 	0;
     });
@@ -299,7 +290,7 @@ sub create_treeview_tree {
 	my $v = may_apply($e->{format}, $_[0]);
 	my ($model, $iter) = $tree->get_selection->get_selected;
 	$select->($wleaves{$v} || return) if !$model || $wleaves{$v} ne $model->get_path_str($iter);
-	$iter->free if ref $iter;
+	undef $iter if ref $iter;
     }, $size;
 }
 
@@ -441,7 +432,7 @@ sub ask_fromW {
 		$mainw->{rwindow}->show;
 		$set_all->();
 	    });
-	    $set = sub { $w->child->set(may_apply($e->{format}, $_[0])) };
+	    $set = sub { $w->child->set_label(may_apply($e->{format}, $_[0])) };
 	    $width = length may_apply($e->{format}, ${$e->{val}});
 	} elsif ($e->{type} eq 'range') {
 	    my $want_scale = !$::expert;
@@ -474,7 +465,7 @@ sub ask_fromW {
 		    $e->{formatted_list} = [ map { may_apply($e->{format}, $_) } @{$e->{list}} ];
 		    my $list = $w->get_model;
 		    $list->clear;
-		    $list->append_set([ 0 => $_ ])->free foreach @{$e->{formatted_list}};
+		    $list->append_set([ 0 => $_ ]) foreach @{$e->{formatted_list}};
 		    $changed->();
 		    $buttons{$_}->set_sensitive(@{$e->{list}} != ()) foreach 'Modify', 'Remove';
 		};
@@ -543,7 +534,7 @@ sub ask_fromW {
 		#- FIXME workaround gtk suckiness (set_text generates two 'change' signals, one when removing the whole, one for inserting the replacement..)
 		my $idle;
 		$w->signal_connect(changed => sub {
-		    $idle ||= Gtk2->idle_add(sub { undef $idle; $changed->(); 0 });
+		    $idle ||= Glib::Idle->add(sub { undef $idle; $changed->(); 0 });
 		});
 
 		$set = sub {
@@ -610,7 +601,7 @@ sub ask_fromW {
 			    sub { 
 				my ($w) = @_;
 				$set_advanced->(!$advanced);
-				$w->child->set($advanced ? $common->{advanced_label_close} : $common->{advanced_label});
+				$w->child->set_label($advanced ? $common->{advanced_label_close} : $common->{advanced_label});
 			    } ];
 
     my $create_widgets = sub {

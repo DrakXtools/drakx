@@ -1036,7 +1036,7 @@ sub spawn_progress {
 
 	$interactive and progress($pbar3, $plabel3, 0, translate($descr));
 	$interactive and $pbar3->set_fraction(0);
-	$interactive and $timer = Gtk2->timeout_add(2, \&progress_timeout);
+	$interactive and $timer = Glib::Timeout->add(2, \&progress_timeout);
 
 	$log_buff .= "\n" . $descr . ":\n";
 	$log_buff .= $command . "\n\n";
@@ -1051,7 +1051,7 @@ sub spawn_progress {
 		}			
 	}
 	close TMP;
-	$interactive and Gtk2->timeout_remove($timer);
+	$interactive and Glib::Source->remove($timer);
 }
 
 sub progress_timeout() {
@@ -1772,7 +1772,7 @@ sub advanced_what_other() {
 	$iter = Gtk2::TreeIter->new;
 	my $other_file;
 			
-	$list_model = Gtk2::ListStore->new(Gtk2::GType->STRING);
+	$list_model = Gtk2::ListStore->new("Glib::String");
 	my $list_others = Gtk2::TreeView->new_with_model($list_model);
 	$list_others->append_column(Gtk2::TreeViewColumn->new_with_attributes(undef, Gtk2::CellRendererText->new, 'text' => 0));
 	$list_others->set_headers_visible(0);	
@@ -1795,8 +1795,8 @@ sub advanced_what_other() {
 				1, create_scrolled_window($list_others),
 			),
 			0, gtkadd(gtkset_layout(new Gtk2::HButtonBox, 'spread'),
-				gtksignal_connect(new Gtk2::Button(N("Add")), clicked => sub { filedialog() }),
-				gtksignal_connect(new Gtk2::Button(N("Remove Selected")), clicked => sub { 
+				gtksignal_connect(Gtk2::Button->new(N("Add")), clicked => sub { filedialog() }),
+				gtksignal_connect(Gtk2::Button->new(N("Remove Selected")), clicked => sub { 
 					$list_model->remove($file_iter); 
 					my $iindex = 0; 
 					foreach (@list_other) {
@@ -1837,9 +1837,9 @@ sub advanced_what_entire_sys() {
 		     1, new Gtk2::VBox(0, 5),
 		     1, gtkpack_(new Gtk2::VBox(0, 15),	
 				 1, new Gtk2::VBox(0, 5),
-				 1, gtksignal_connect(my $button_what_other = new Gtk2::Button(), 
+				 1, gtksignal_connect(my $button_what_other = Gtk2::Button->new, 
 						      clicked => sub { destroy_widget(); message_underdevel() }),
-				 1, gtksignal_connect(my $button_what_all = new Gtk2::Button(), 
+				 1, gtksignal_connect(my $button_what_all = Gtk2::Button->new, 
 						      clicked => sub { destroy_widget(); message_underdevel() }),
 				 1, new Gtk2::VBox(0, 5),
 				 ),
@@ -1868,13 +1868,13 @@ sub advanced_what() {
 		     1, new Gtk2::VBox(0, 5),
 		     1, gtkpack_(new Gtk2::VBox(0, 15),	
 				 1, new Gtk2::VBox(0, 5),
-				 1, gtksignal_connect(my $button_what_sys = new Gtk2::Button(), 
+				 1, gtksignal_connect(my $button_what_sys = Gtk2::Button->new, 
 						      clicked => sub { $box_what->destroy; advanced_what_sys() }),
-				 1, gtksignal_connect(my $button_what_user = new Gtk2::Button(), 
+				 1, gtksignal_connect(my $button_what_user = Gtk2::Button->new, 
 						      clicked => sub { destroy_widget(); advanced_what_user() }),
-				 1, gtksignal_connect(my $button_what_other = new Gtk2::Button(), 
+				 1, gtksignal_connect(my $button_what_other = Gtk2::Button->new, 
 						      clicked => sub { destroy_widget(); advanced_what_other() }),
-#				 1, gtksignal_connect(my $button_what_all = new Gtk2::Button(), 
+#				 1, gtksignal_connect(my $button_what_all = Gtk2::Button->new, 
 #						  clicked => sub { destroy_widget(); advanced_what_entire_sys(); }),
 				 1, new Gtk2::VBox(0, 5),
 				 ),
@@ -1922,7 +1922,7 @@ sub advanced_where_net_types {
 	 		0, gtkpack_(new Gtk2::HBox(0,5),
 	   			0, gtkset_sensitive(my $check_use_expect = new Gtk2::CheckButton(N("Use Expect for SSH")), ($where_net && $net_proto eq 'ssh')),
 	   			0, gtkset_sensitive(my $check_xfer_keys = new Gtk2::CheckButton(N("Create/Transfer\nbackup keys for SSH")), ($where_net && $net_proto eq 'ssh')),
-				0, gtkset_sensitive(my $button_xfer_keys = new Gtk2::Button(N("  Transfer  \nNow")), $xfer_keys),
+				0, gtkset_sensitive(my $button_xfer_keys = Gtk2::Button->new_from_stock(N("  Transfer  \nNow")), $xfer_keys),
 	   			0, gtkset_sensitive(my $check_user_keys = new Gtk2::CheckButton(N("Other (not drakbackup)\nkeys in place already")), ($where_net && $net_proto eq 'ssh')),
 			),
 	 		0, new Gtk2::HSeparator,
@@ -2076,7 +2076,7 @@ sub advanced_where_cd {
 			0, new Gtk2::VBox(0, 5),
 	 		0, gtkpack_(new Gtk2::HBox(0,10),
 	 			0, gtkset_sensitive(new Gtk2::Label(N("Please check if you want to erase your RW media (1st Session)")), $cdrw && $where_cd),
-				0, gtkset_sensitive(my $button_erase_now = new Gtk2::Button(N(" Erase Now ")), $cdrw),			
+				0, gtkset_sensitive(my $button_erase_now = Gtk2::Button->new_from_stock(N(" Erase Now ")), $cdrw),			
 	    		1, new Gtk2::VBox(0, 5),
 	    		0, gtkset_sensitive(my $check_cdrw_erase = new Gtk2::CheckButton(), $cdrw && $where_cd),
 			),
@@ -2275,7 +2275,7 @@ sub advanced_where_hd {
 				0, gtkset_sensitive(new Gtk2::Label(N("Please enter the directory to save to:")), $where_hd),
 				1, new Gtk2::VBox(0, 6),
 				0, gtkset_size_request(gtkset_sensitive($save_path_entry = new Gtk2::Entry(), $where_hd), 152, 20),
-				0, gtkset_sensitive($button = gtksignal_connect(new Gtk2::Button(),  clicked => sub {
+				0, gtkset_sensitive($button = gtksignal_connect(Gtk2::Button->new,  clicked => sub {
 					filedialog_where_hd() 
 				}), $where_hd),
 			),
@@ -2327,11 +2327,11 @@ sub advanced_where() {
 				  1, new Gtk2::VBox(0, 5),
 				  1, gtkpack_(new Gtk2::VBox(0, 15),	
 					  1, new Gtk2::VBox(0, 5),
-					  1, gtksignal_connect(my $button_where_net = new Gtk2::Button(), clicked => sub { 
+					  1, gtksignal_connect(my $button_where_net = Gtk2::Button->new, clicked => sub { 
 					      destroy_widget();
 					      advanced_where_net_types(); 
 					  }),
-					  1, gtksignal_connect(my $button_where_cd = new Gtk2::Button(),  clicked => sub { 
+					  1, gtksignal_connect(my $button_where_cd = Gtk2::Button->new,  clicked => sub { 
 					      destroy_widget(); 
 					      if (require_rpm("mkisofs", "cdrecord")) { 
 					      	advanced_where_cd();
@@ -2340,11 +2340,11 @@ sub advanced_where() {
 						  	install_rpm(\&advanced_where);
 						  }
 					  }),
-					  1, gtksignal_connect(my $button_where_hd = new Gtk2::Button(),  clicked => sub { 
+					  1, gtksignal_connect(my $button_where_hd = Gtk2::Button->new,  clicked => sub { 
 					      destroy_widget(); 
 					      advanced_where_hd();
 					  }),
-					  1, gtksignal_connect(my $button_where_tape = new Gtk2::Button(),  clicked => sub { 
+					  1, gtksignal_connect(my $button_where_tape = Gtk2::Button->new,  clicked => sub { 
 					      destroy_widget(); 
 						  # message_underdevel();
 						  advanced_where_tape() }),
@@ -2484,13 +2484,13 @@ sub advanced_box() {
 			1, new Gtk2::VBox(0, 5),	
 			1, gtkpack_(new Gtk2::VBox(0, 15),	
 				1, new Gtk2::VBox(0, 5),	
-				1, gtksignal_connect(my $button_what = new Gtk2::Button(), clicked => sub { 
+				1, gtksignal_connect(my $button_what = Gtk2::Button->new, clicked => sub { 
 				    destroy_widget(); advanced_what() }),
-				1, gtksignal_connect(my $button_where = new Gtk2::Button(), clicked => sub { 
+				1, gtksignal_connect(my $button_where = Gtk2::Button->new, clicked => sub { 
 				    destroy_widget();  advanced_where() }),
-				1, gtksignal_connect(my $button_when = new Gtk2::Button(), clicked => sub { 
+				1, gtksignal_connect(my $button_when = Gtk2::Button->new, clicked => sub { 
 				    destroy_widget();  advanced_when() }),
-				1, gtksignal_connect(my $button_options = new Gtk2::Button(), clicked => sub {
+				1, gtksignal_connect(my $button_options = Gtk2::Button->new, clicked => sub {
 					destroy_widget(); advanced_options() }),
 				1, new Gtk2::VBox(0, 5),	
 			),
@@ -2557,7 +2557,7 @@ sub wizard_step2() {
 				0, gtkpack_(new Gtk2::HBox(0, 15),	      
 					0, my $check_wizard_hd = new Gtk2::CheckButton(N("on Hard Drive")),
 					1, new Gtk2::VBox(0, 5),
-					0, gtkset_sensitive(gtksignal_connect(new Gtk2::Button(N("Configure")), clicked => sub {
+					0, gtkset_sensitive(gtksignal_connect(Gtk2::Button->new_from_stock(N("Configure")), clicked => sub {
 						destroy_widget();
 						to_ok();
 						advanced_where_hd(\&wizard_step2);
@@ -2567,7 +2567,7 @@ sub wizard_step2() {
 				0, gtkpack_(new Gtk2::HBox(0, 15),	      
 					0, my $check_wizard_net = new Gtk2::CheckButton(N("across Network")),
 					1, new Gtk2::VBox(0, 5),
-					0, gtkset_sensitive(gtksignal_connect(new Gtk2::Button(N("Configure")), clicked => sub {
+					0, gtkset_sensitive(gtksignal_connect(Gtk2::Button->new_from_stock(N("Configure")), clicked => sub {
 						destroy_widget();
 						to_ok();
 						advanced_where_net_types(\&wizard_step2);
@@ -2577,7 +2577,7 @@ sub wizard_step2() {
  				0, gtkpack_(new Gtk2::HBox(0, 15),	      
  					0, my $check_wizard_cd = new Gtk2::CheckButton(N("on CDROM")),
  					1, new Gtk2::VBox(0, 5),	
- 					0, gtkset_sensitive(gtksignal_connect(new Gtk2::Button(N("Configure")), clicked => sub {
+ 					0, gtkset_sensitive(gtksignal_connect(Gtk2::Button->new_from_stock(N("Configure")), clicked => sub {
  						destroy_widget();
  						advanced_where_cd(\&wizard_step2);
  					}), $where_cd),
@@ -2585,7 +2585,7 @@ sub wizard_step2() {
  				0, gtkpack_(new Gtk2::HBox(0, 15),	      
  					0, my $check_wizard_tape = new Gtk2::CheckButton(N("on Tape Device")),
  					1, new Gtk2::VBox(0, 5),
- 					0, gtkset_sensitive(gtksignal_connect(new Gtk2::Button(N("Configure")), clicked => sub {
+ 					0, gtkset_sensitive(gtksignal_connect(Gtk2::Button->new_from_stock(N("Configure")), clicked => sub {
  						destroy_widget();
  						advanced_where_tape(\&wizard_step2);
  					}), $where_tape),
@@ -2631,7 +2631,7 @@ sub wizard()   {
 				0, my $check_wizard_user = new Gtk2::CheckButton(N("Backup Users")),
 				0, gtkpack_(new Gtk2::HBox(0, 15),
 					1, new Gtk2::VBox(0, 5),	
-					0, gtksignal_connect(new Gtk2::Button(N("Select user manually")), clicked => sub {
+					0, gtksignal_connect(Gtk2::Button->new_from_stock(N("Select user manually")), clicked => sub {
 						destroy_widget();
 						advanced_what_user(\&wizard);
 					}),
@@ -2907,7 +2907,7 @@ sub show_backup_details {
 				0, new Gtk2::VScrollbar($text->vadj),
 			),
 			0, gtkadd(gtkset_layout(new Gtk2::HButtonBox, 'spread'),
-				gtksignal_connect(new Gtk2::Button(N("Done")), clicked => sub { 
+				gtksignal_connect(Gtk2::Button->new_from_stock(N("Done")), clicked => sub { 
 					destroy_widget(); 
 					$function->() }),
 			),
@@ -3132,7 +3132,7 @@ sub restore_step_user() {
 					my @user_list_tmp;
 					my $restore_row = new Gtk2::HBox(0,5);
 					my $b = new Gtk2::CheckButton($name_complet);
-					my $details = new Gtk2::Button(" Details ");
+					my $details = Gtk2::Button->new_from_stock(" Details ");
 					
 					$restore_row->pack_start($b, 1, 1, 0);
 					$restore_row->pack_end(new Gtk2::VBox(1,5), 0, 0, 0);
@@ -3206,7 +3206,7 @@ sub restore_step_sys() {
 			0, gtkpack_(new Gtk2::HBox(0,10),
 				1, N("please choose the date to restore"),
 				0, $combo_restore_step_sys,
-				0, my $details = new Gtk2::Button(" Details "),
+				0, my $details = Gtk2::Button->new_from_stock(" Details "),
 				0, new Gtk2::HBox(0,10),
 			),
 			1, new Gtk2::VBox(0,10),
@@ -3247,7 +3247,7 @@ sub restore_other_media_hd {
 		    	0, gtkset_sensitive(new Gtk2::Label(N("Please enter the directory to save:")), $where_hd),
 		    	1, new Gtk2::VBox(0, 6),
 		    	0, gtkset_size_request(gtkset_sensitive($save_path_entry = new Gtk2::Entry(), $where_hd), 152, 20),
-		    	0, gtkset_sensitive($button = gtksignal_connect(new Gtk2::Button(),  clicked => sub {
+		    	0, gtkset_sensitive($button = gtksignal_connect(Gtk2::Button->new,  clicked => sub {
 				filedialog_where_hd() }), $where_hd),
 			),
 	 		0, new Gtk2::VBox(0, 6),
@@ -3289,7 +3289,7 @@ sub restore_other_media() {
 				0, gtkset_sensitive(new Gtk2::Label(N("Please enter the directory where backups are stored")), $other_media_hd),
 				1, new Gtk2::VBox(0, 6),
 				0, gtkset_size_request(gtkset_sensitive($restore_find_path_entry = new Gtk2::Entry(), $other_media_hd), 152, 20),
-				0, gtkset_sensitive($button = gtksignal_connect(new Gtk2::Button(),  clicked => sub {
+				0, gtkset_sensitive($button = gtksignal_connect(Gtk2::Button->new,  clicked => sub {
 				     filedialog_restore_find_path(); 
 				}), $other_media_hd),
 			),
@@ -3299,7 +3299,7 @@ sub restore_other_media() {
 # 					 0, new Gtk2::VBox(0, 6),
 # 					 1, gtkpack(new Gtk2::HBox(0,10),
 # 						    new Gtk2::VBox(0, 6),
-# 						    gtkset_sensitive(gtksignal_connect(new Gtk2::Button("Network"),  clicked => sub {
+# 						    gtkset_sensitive(gtksignal_connect(Gtk2::Button->new_from_stock("Network"),  clicked => sub {
 # 							destroy_widget();
 # 							restore_find_net(\&restore_other_media);}), !$other_media_hd),
 # 						    new Gtk2::VBox(0, 6),
@@ -3357,7 +3357,7 @@ sub restore_step2() {
 			0, gtkpack_(new Gtk2::HBox(0,10),
 				0, my $check_restore_other_src = new Gtk2::CheckButton(N("Select another media to restore from")),
 				1, new Gtk2::HBox(0,10),
-				0, gtkset_sensitive(gtksignal_connect(new Gtk2::Button(N("Other Media")), clicked => sub {
+				0, gtkset_sensitive(gtksignal_connect(Gtk2::Button->new_from_stock(N("Other Media")), clicked => sub {
 					destroy_widget();
 					restore_other_media();
 				}), $restore_other_src),
@@ -3421,7 +3421,7 @@ sub catalog_restore() {
 	my $restore_path_entry;
 		
 	#- catalog info in tree view
-	my $model = Gtk2::TreeStore->new(Gtk2::GType->STRING);
+	my $model = Gtk2::TreeStore->new("Glib::String");
     my $tree_catalog = Gtk2::TreeView->new_with_model($model);
     $tree_catalog->append_column(Gtk2::TreeViewColumn->new_with_attributes(undef, Gtk2::CellRendererText->new, 'text' => 0));
     $tree_catalog->set_headers_visible(0);
@@ -3478,7 +3478,6 @@ sub catalog_restore() {
 			}
 			$indexer++;
 		}
-		$c_detail->free;		
 	}	
 		
 	gtkpack($advanced_box,
@@ -3490,7 +3489,7 @@ sub catalog_restore() {
 					1, create_scrolled_window($list_bu_files),
 				),
 				0, gtkpack_(new Gtk2::HBox(1, 10),
-					1, gtksignal_connect(new Gtk2::Button(N("Restore Selected\nCatalog Entry")), clicked => sub { 
+					1, gtksignal_connect(Gtk2::Button->new_from_stock(N("Restore Selected\nCatalog Entry")), clicked => sub { 
 						if ($cat_entry) {
 							my $media_check = restore_catalog_entry($cat_entry, ());
 							if ($media_check) {
@@ -3500,7 +3499,7 @@ sub catalog_restore() {
 							} 
 						} 
 					}),
-					1, gtksignal_connect(new Gtk2::Button(N("Restore Selected\nFiles")), clicked => sub { 							
+					1, gtksignal_connect(Gtk2::Button->new_from_stock(N("Restore Selected\nFiles")), clicked => sub { 							
 						my $files = @restore_files;
 						#- grab the array before the widget clears it 
 						my @passed_files = @restore_files;
@@ -3517,7 +3516,7 @@ sub catalog_restore() {
 						0, new Gtk2::Label("Restore To Path"),
 		    			0, $restore_path_entry = new Gtk2::Entry(),
 					),
-					1, gtksignal_connect(new Gtk2::Button(N("Change\nRestore Path")), clicked => sub { 							
+					1, gtksignal_connect(Gtk2::Button->new_from_stock(N("Change\nRestore Path")), clicked => sub { 							
 						filedialog_generic("Path To Restore To", \$restore_path_entry, \$restore_path);
 					}),						
 				),
@@ -3903,7 +3902,7 @@ sub restore_box() {
 				1, gtkpack_(new Gtk2::VBox(0,10),
 					1, new Gtk2::VBox(0,10),
 					1, new Gtk2::VBox(0,10),
-					1, gtksignal_connect(new Gtk2::Button(N("Restore all backups")), clicked => sub { 
+					1, gtksignal_connect(Gtk2::Button->new_from_stock(N("Restore all backups")), clicked => sub { 
 						$retore_box->destroy;
 						button_box_restore();
 						@user_list_to_restore2 = sort @user_backuped; 
@@ -3912,7 +3911,7 @@ sub restore_box() {
 						$restore_user = 1;
 						restore_do() 
 					}),
-					1, gtksignal_connect(new Gtk2::Button(N("Custom Restore")), clicked => sub { 
+					1, gtksignal_connect(Gtk2::Button->new_from_stock(N("Custom Restore")), clicked => sub { 
 						$retore_box->destroy;
 						button_box_restore(); 
 						restore_step2();
@@ -3955,15 +3954,15 @@ sub restore_find_media_box() {
 			1, gtkpack(new Gtk2::HBox(0, 15),
 				new Gtk2::VBox(0, 5),
 				gtkpack(new Gtk2::VBox(0, 10),
-					gtkset_sensitive(gtksignal_connect(new Gtk2::Button(N("CD in place - continue.")), clicked => sub {  
+					gtkset_sensitive(gtksignal_connect(Gtk2::Button->new_from_stock(N("CD in place - continue.")), clicked => sub {  
 						$good_restore_path = 1;
 						interactive_mode_box("restore");
 					}), $mount_media),
 					$new_path_entry = gtkset_sensitive(new Gtk2::Entry(), $mount_media),
-					gtkset_sensitive(gtksignal_connect(new Gtk2::Button(N("Browse to new restore repository.")), clicked => sub {  
+					gtkset_sensitive(gtksignal_connect(Gtk2::Button->new_from_stock(N("Browse to new restore repository.")), clicked => sub {  
 						filedialog_generic("Directory To Restore From", \$new_path_entry, \$path_to_find_restore);
 					}), $mount_media),
-					gtksignal_connect(new Gtk2::Button(N("Restore From Catalog")), clicked => sub {  
+					gtksignal_connect(Gtk2::Button->new_from_stock(N("Restore From Catalog")), clicked => sub {  
 						$box2->destroy;
 						catalog_restore();
 					}),
@@ -4016,18 +4015,18 @@ sub button_box_adv() {
     $button_box_tmp->destroy;
     gtkpack($button_box,
 		$button_box_tmp = gtkpack_(new Gtk2::HButtonBox,
-			0, gtksignal_connect(new Gtk2::Button(N("Cancel")), clicked => sub { 
+			0, gtksignal_connect(Gtk2::Button->new_from_stock('gtk-cancel'), clicked => sub { 
 				interactive_mode_box();
 			}),
-			0, gtksignal_connect(new Gtk2::Button(N("Help")), clicked => sub { 
+			0, gtksignal_connect(Gtk2::Button->new_from_stock('gtk-help'), clicked => sub { 
 				adv_help(\&$current_widget, $custom_help);
 			}),
 			1, new Gtk2::HBox(0, 1),	
-			0, gtksignal_connect(new Gtk2::Button(N("Previous")), clicked => sub { 
+			0, gtksignal_connect(Gtk2::Button->new_from_stock('gtk-go-back'), clicked => sub { 
 				destroy_widget();
 				$previous_widget->();
 			}),
-			0, gtksignal_connect(new Gtk2::Button(N("Save")), clicked => sub { 
+			0, gtksignal_connect(Gtk2::Button->new_from_stock('gtk-save'), clicked => sub { 
 				destroy_widget();
 				unless (check_pkg_needs()) {
 					save_conf_file();
@@ -4043,19 +4042,19 @@ sub button_box_restore_main() {
 
     gtkpack($button_box,
 	    $button_box_tmp = gtkpack_(gtkpack_(new Gtk2::HButtonBox, 
-			0, gtksignal_connect(new Gtk2::Button(N("Cancel")), clicked => sub { 
+			0, gtksignal_connect(Gtk2::Button->new_from_stock('gtk-cancel'), clicked => sub { 
 				destroy_widget(); 
 				interactive_mode_box();
 			}),
-			0, gtksignal_connect(new Gtk2::Button(N("Help")), clicked => sub {
+			0, gtksignal_connect(Gtk2::Button->new_from_stock('gtk-help'), clicked => sub {
 				adv_help(\&$current_widget, $custom_help);
 			}),
 			1, new Gtk2::HBox(0, 1),	
-			0, gtksignal_connect(new Gtk2::Button(N("Previous")), clicked => sub { 
+			0, gtksignal_connect(Gtk2::Button->new_from_stock('gtk-go-back'), clicked => sub { 
 				destroy_widget(); 
 				interactive_mode_box() 
 			}),
-			0, gtksignal_connect(new Gtk2::Button(N("Ok")), clicked => sub { 
+			0, gtksignal_connect(Gtk2::Button->new_from_stock('gtk-ok'), clicked => sub { 
 				destroy_widget(); 
 				interactive_mode_box() }),
 			),
@@ -4069,7 +4068,7 @@ sub button_box_log_main() {
     gtkpack($button_box,
 	    $button_box_tmp = gtkpack_(gtkpack_(new Gtk2::HButtonBox, 
 			1, new Gtk2::HBox(0, 1),	
-			0, gtksignal_connect(new Gtk2::Button(N("Ok")), clicked => sub { 
+			0, gtksignal_connect(Gtk2::Button->new_from_stock('gtk-ok'), clicked => sub { 
 				destroy_widget(); 
 				interactive_mode_box() }),
 			),
@@ -4083,19 +4082,19 @@ sub button_box_backup_end() {
 
     gtkpack($button_box,
 	    $button_box_tmp = gtkpack_(new Gtk2::HButtonBox,
-			0, gtksignal_connect(new Gtk2::Button(N("Cancel")), clicked => sub { 
+			0, gtksignal_connect(Gtk2::Button->new_from_stock('gtk-cancel'), clicked => sub { 
 				destroy_widget(); 
 				interactive_mode_box() 
 			}),
-			0, gtksignal_connect(new Gtk2::Button(N("Help")), clicked => sub { 
+			0, gtksignal_connect(Gtk2::Button->new_from_stock('gtk-help'), clicked => sub { 
 				adv_help(\&$current_widget, $custom_help) 
 			}),
 			1, new Gtk2::HBox(0, 1),	
-			0, gtksignal_connect(new Gtk2::Button(N("Previous")), clicked => sub { 
+			0, gtksignal_connect(Gtk2::Button->new_from_stock('gtk-go-back'), clicked => sub { 
 				destroy_widget(); 
 				$previous_widget->() 
 			}),
-			0, gtksignal_connect(new Gtk2::Button(N("Build Backup")), clicked => sub { 
+			0, gtksignal_connect(Gtk2::Button->new_from_stock(N("Build Backup")), clicked => sub { 
 				destroy_widget();
 				build_backup_status();
 				build_backup_files(); 
@@ -4109,19 +4108,19 @@ sub button_box_wizard_end() {
 
     gtkpack($button_box,
 		$button_box_tmp = gtkpack_(new Gtk2::HButtonBox,
-			0, gtksignal_connect(new Gtk2::Button(N("Cancel")), clicked => sub { 
+			0, gtksignal_connect(Gtk2::Button->new_from_stock('gtk-cancel'), clicked => sub { 
 				destroy_widget();
 				interactive_mode_box();
 			}),
-			0, gtksignal_connect(new Gtk2::Button(N("Help")), clicked => sub { 
+			0, gtksignal_connect(Gtk2::Button->new_from_stock('gtk-help'), clicked => sub { 
 				adv_help(\&$current_widget, $custom_help);
 			}),
 			1, new Gtk2::HBox(0, 1),	
-			0, gtksignal_connect(new Gtk2::Button(N("Previous")), clicked => sub { 
+			0, gtksignal_connect(Gtk2::Button->new_from_stock('gtk-go-back'), clicked => sub { 
 				destroy_widget(); 
 				$previous_widget->();
 			}),
-			0, gtksignal_connect(new Gtk2::Button(N("Save")), clicked => sub { 
+			0, gtksignal_connect(Gtk2::Button->new_from_stock('gtk-save'), clicked => sub { 
 				destroy_widget();
 				save_conf_file();
 				interactive_mode_box();
@@ -4135,19 +4134,19 @@ sub button_box_restore_end() {
 
     gtkpack($button_box,
 	    $button_box_tmp = gtkpack_(new Gtk2::HButtonBox,
-			0, gtksignal_connect(new Gtk2::Button(N("Cancel")), clicked => sub { 
+			0, gtksignal_connect(Gtk2::Button->new_from_stock('gtk-cancel'), clicked => sub { 
 				destroy_widget();
 				interactive_mode_box();
 			}),
-			0, gtksignal_connect(new Gtk2::Button(N("Help")), clicked => sub { 
+			0, gtksignal_connect(Gtk2::Button->new_from_stock('gtk-help'), clicked => sub { 
 				adv_help(\&$current_widget, $custom_help);
 			}),
 			1, new Gtk2::HBox(0, 1),	
-			0, gtksignal_connect(new Gtk2::Button(N("Previous")), clicked => sub { 
+			0, gtksignal_connect(Gtk2::Button->new_from_stock('gtk-go-back'), clicked => sub { 
 				destroy_widget();
 				$previous_widget->();
 			}),
-			0, gtksignal_connect(new Gtk2::Button(N("Restore")), clicked => sub { 
+			0, gtksignal_connect(Gtk2::Button->new(N("Restore")), clicked => sub { 
  				destroy_widget();
 				restore_backend(); 
 			}),
@@ -4162,7 +4161,7 @@ sub button_box_build_backup_end() {
 	    $button_box_tmp = gtkpack_(new Gtk2::HButtonBox, 
 			1, new Gtk2::HBox(0, 5),	
 			1, new Gtk2::HBox(0, 5),	
-			0, gtksignal_connect(new Gtk2::Button(N("Ok")), clicked => sub { 
+			0, gtksignal_connect(Gtk2::Button->new_from_stock('gtk-ok'), clicked => sub { 
 #				destroy_widget();
 				interactive_mode_box();  
 			}),
@@ -4177,10 +4176,10 @@ sub button_box_restore_pbs_end() {
 		$button_box_tmp = gtkpack_(new Gtk2::HButtonBox, 
 			1, new Gtk2::HBox(0, 5),	
 			1, new Gtk2::HBox(0, 5),	
-			1, gtksignal_connect(new Gtk2::Button(N("Help")), clicked => sub {
+			1, gtksignal_connect(Gtk2::Button->new_from_stock('gtk-help'), clicked => sub {
 				adv_help(\&$current_widget, $custom_help);
 			}),
-			0, gtksignal_connect(new Gtk2::Button(N("Ok")), clicked => sub { 
+			0, gtksignal_connect(Gtk2::Button->new_from_stock('gtk-ok'), clicked => sub { 
 				destroy_widget();
 				interactive_mode_box();
 			}),
@@ -4193,19 +4192,19 @@ sub button_box_build_backup() {
 
 	gtkpack($button_box,
 		$button_box_tmp = gtkpack_(new Gtk2::HButtonBox,
-			1, gtksignal_connect(new Gtk2::Button(N("Cancel")), clicked => sub { 
+			1, gtksignal_connect(Gtk2::Button->new_from_stock('gtk-cancel'), clicked => sub { 
 				destroy_widget(); 
 				interactive_mode_box();
 			}),
-			1, gtksignal_connect(new Gtk2::Button(N("Help")), clicked => sub {
+			1, gtksignal_connect(Gtk2::Button->new_from_stock('gtk-help'), clicked => sub {
 				adv_help(\&$current_widget, $custom_help); 
 			}),
 			1, new Gtk2::HBox(0, 0),
-			0, gtksignal_connect(new Gtk2::Button(N("Previous")), clicked => sub { 
+			0, gtksignal_connect(Gtk2::Button->new_from_stock('gtk-go-back'), clicked => sub { 
 				destroy_widget();
 				$previous_widget->();
 			}),
-			1, gtksignal_connect(new Gtk2::Button(N("Next")), clicked => sub {
+			1, gtksignal_connect(Gtk2::Button->new_from_stock('gtk-go-forward'), clicked => sub {
 				destroy_widget();
 				$next_widget->();
 			}),
@@ -4219,19 +4218,19 @@ sub button_box_restore() {
 
     gtkpack($button_box,
 	    $button_box_tmp = gtkpack_(new Gtk2::HButtonBox,
-			1, gtksignal_connect(new Gtk2::Button(N("Cancel")), clicked => sub { 
+			1, gtksignal_connect(Gtk2::Button->new_from_stock('gtk-cancel'), clicked => sub { 
 				destroy_widget(); 
 				interactive_mode_box();  
 			}),
-			1, gtksignal_connect(new Gtk2::Button(N("Help")), clicked => sub {
+			1, gtksignal_connect(Gtk2::Button->new_from_stock('gtk-help'), clicked => sub {
 				adv_help(\&$current_widget, $custom_help);
 			}),
 			1, new Gtk2::HBox(0, 0),
-			0, gtksignal_connect(new Gtk2::Button(N("Previous")), clicked => sub { 
+			0, gtksignal_connect(Gtk2::Button->new_from_stock('gtk-go-back'), clicked => sub { 
 				destroy_widget(); 
 				$previous_widget->(); 
 			}),
-			1, gtksignal_connect(new Gtk2::Button(N("Next")), clicked => sub {
+			1, gtksignal_connect(Gtk2::Button->new_from_stock('gtk-go-forward'), clicked => sub {
 				destroy_widget(); 
 				$next_widget->();
 			}),
@@ -4248,20 +4247,20 @@ sub button_box_find_media {
 
     gtkpack($button_box,
 	    $button_box_tmp = gtkpack_(new Gtk2::HButtonBox,
-			1, gtksignal_connect(new Gtk2::Button(N("Cancel")), clicked => sub { 
+			1, gtksignal_connect(Gtk2::Button->new_from_stock('gtk-cancel'), clicked => sub { 
 				$central_widget = \$box2;
 				interactive_mode_box();  
 			}),
-			1, gtksignal_connect(new Gtk2::Button(N("Help")), clicked => sub {
+			1, gtksignal_connect(Gtk2::Button->new_from_stock('gtk-help'), clicked => sub {
 				$central_widget = \$box2; 
 				adv_help(\&restore_find_media_box, $custom_help);
 			}),
 			1, new Gtk2::HBox(0, 0),
-			0, gtksignal_connect(new Gtk2::Button(N("Previous")), clicked => sub {
+			0, gtksignal_connect(Gtk2::Button->new_from_stock('gtk-go-back'), clicked => sub {
 				$central_widget = \$box2;
 				interactive_mode_box();  
 			}),
-			1, gtkset_sensitive(gtksignal_connect(new Gtk2::Button(N("Next")), clicked => sub {
+			1, gtkset_sensitive(gtksignal_connect(Gtk2::Button->new_from_stock('gtk-go-forward'), clicked => sub {
 				interactive_mode_box("restore"); 
 			}), $mount_media),
 		),
@@ -4273,19 +4272,19 @@ sub button_box_wizard() {
 
     gtkpack($button_box,
 	    $button_box_tmp = gtkpack_(new Gtk2::HButtonBox,
-			1, gtksignal_connect(new Gtk2::Button(N("Cancel")), clicked => sub { 
+			1, gtksignal_connect(Gtk2::Button->new_from_stock('gtk-cancel'), clicked => sub { 
 				destroy_widget(); 
 				interactive_mode_box() 
 			}),
-			1, gtksignal_connect(new Gtk2::Button(N("Help")), clicked => sub {
+			1, gtksignal_connect(Gtk2::Button->new_from_stock('gtk-help'), clicked => sub {
 				adv_help(\&$current_widget, $custom_help) 
 			}),
 			1, new Gtk2::HBox(0, 0),
-			0, gtksignal_connect(new Gtk2::Button($next_widget ? N("Previous") : N("OK")), clicked => sub { 
+			0, gtksignal_connect(Gtk2::Button->new_from_stock($next_widget ? 'gtk-go-back' : 'gtk-ok'), clicked => sub { 
 				destroy_widget();
 				$previous_widget ? $previous_widget->() : $next_widget->();
 			}),
-			if_($next_widget, 1, gtksignal_connect(new Gtk2::Button(N("Next")), clicked => sub {
+			if_($next_widget, 1, gtksignal_connect(Gtk2::Button->new_from_stock('gtk-go-forward'), clicked => sub {
 				destroy_widget();
 				$next_widget ? $next_widget->() : $previous_widget->();
 			})),
@@ -4298,8 +4297,8 @@ sub button_box_main() {
 
     gtkpack($button_box,
 	    $button_box_tmp = gtkpack(gtkset_layout(new Gtk2::HButtonBox, 'start'),
-			gtksignal_connect(new Gtk2::Button(N("Close")), clicked => sub { ugtk2->exit(0) }),
-			gtksignal_connect(new Gtk2::Button(N("Help")), clicked => sub { 
+			gtksignal_connect(Gtk2::Button->new_from_stock('gtk-close'), clicked => sub { ugtk2->exit(0) }),
+			gtksignal_connect(Gtk2::Button->new_from_stock('gtk-help'), clicked => sub { 
 				adv_help(\&interactive_mode_box, $custom_help) 
 			}),
 		),
@@ -4352,7 +4351,7 @@ sub install_rpm {
 	    $box_what_user = gtkpack_(new Gtk2::VBox(0, 15),
 			0, N("The following packages need to be installed:\n") . join(' ', @list_of_rpm_to_install),
 				0, new Gtk2::HSeparator,
-				0, gtksignal_connect(new Gtk2::Button(N("Install")), clicked => sub {  
+				0, gtksignal_connect(Gtk2::Button->new_from_stock(N("Install")), clicked => sub {  
 					system("/usr/sbin/urpmi --X @list_of_rpm_to_install"); 
 					destroy_widget();
 					$previous_widget->();		  
@@ -4635,12 +4634,12 @@ sub build_backup_box() {
 			1, new Gtk2::VBox(0, 5),	
 			1, gtkpack_(new Gtk2::VBox(0, 15),	
 				1, new Gtk2::VBox(0, 5),	
-				1, gtksignal_connect(my $button_from_conf_file = new Gtk2::Button(), clicked => sub { 
+				1, gtksignal_connect(my $button_from_conf_file = Gtk2::Button->new, clicked => sub { 
 					destroy_widget();
 					build_backup_box_see_conf();
 				}),
  				0, new Gtk2::VBox(0, 5),	
-				1, gtksignal_connect(my $button_see_conf = new Gtk2::Button(), clicked => sub { 
+				1, gtksignal_connect(my $button_see_conf = Gtk2::Button->new, clicked => sub { 
 					destroy_widget();
 					build_backup_box_see_conf();
 				}),
@@ -4683,33 +4682,33 @@ sub interactive_mode_box {
 			1, new Gtk2::VBox(0, 5),	
 			1, gtkpack_(new Gtk2::VBox(0, 5),	
 				1, new Gtk2::VBox(0, 5),	
-				1, gtksignal_connect(new Gtk2::Button(N("Wizard Configuration")), clicked => sub { 
+				1, gtksignal_connect(Gtk2::Button->new_from_stock(N("Wizard Configuration")), clicked => sub { 
 					destroy_widget();
 					read_conf_file();
 					wizard(); 
 				}),
-				1, gtksignal_connect(new Gtk2::Button(N("Advanced Configuration")), clicked => sub { 
+				1, gtksignal_connect(Gtk2::Button->new_from_stock(N("Advanced Configuration")), clicked => sub { 
 					button_box_adv();
 					destroy_widget();
 					advanced_box(); 
 				}),
-				1, gtksignal_connect(new Gtk2::Button(N("View Configuration")), clicked => sub { 
+				1, gtksignal_connect(Gtk2::Button->new_from_stock(N("View Configuration")), clicked => sub { 
 					destroy_widget();
 					build_backup_box_see_conf("interactive");
 				}),
-				1, gtksignal_connect(new Gtk2::Button(N("View Last Log")), clicked => sub { 
+				1, gtksignal_connect(Gtk2::Button->new_from_stock(N("View Last Log")), clicked => sub { 
 					$results = cat_($log_file);
 					button_box_log_main();
 					show_status();
 				}),				
-				1, gtksignal_connect(new Gtk2::Button(N("Backup Now")), clicked => sub { 
+				1, gtksignal_connect(Gtk2::Button->new_from_stock(N("Backup Now")), clicked => sub { 
 					if ($cfg_file_exist) { 
 						build_backup_box();
 					} else { 
 						message_noconf_box();
 					}
 				}),
-				1, gtksignal_connect(new Gtk2::Button(N("Restore")), clicked => sub {
+				1, gtksignal_connect(Gtk2::Button->new_from_stock(N("Restore")), clicked => sub {
 					destroy_widget(); 
 					restore_box();
 				}),
@@ -4965,7 +4964,7 @@ backup data files by hand.
 
 			1, create_scrolled_window($text), 
 			0, gtkadd(gtkset_layout(new Gtk2::HButtonBox, 'spread'),
-				gtksignal_connect(new Gtk2::Button(N("OK")), clicked => sub { 
+				gtksignal_connect(Gtk2::Button->new_from_stock(N("OK")), clicked => sub { 
 					destroy_widget(); 
 					$function->();
 				}),

@@ -40,7 +40,7 @@ unless ($::no_ugtk_init) {
     !check_for_xserver() and die "Cannot be run in console mode.\n";
     $::one_message_has_been_translated and warn("N() was called from $::one_message_has_been_translated BEFORE gtk2 initialisation, replace it with a N_() AND a translate() later.\n"), c::_exit(1);
 
-    Gtk2->init(\@ARGV);
+    Gtk2->init();
     c::bind_textdomain_codeset($_, 'UTF8') foreach 'libDrakX', @::textdomains;
     $::need_utf8_i18n = 1;
 }
@@ -58,7 +58,7 @@ $border = 5;
 # you're building.
 
 sub gtkdestroy                { $_[0] and $_[0]->destroy }
-sub gtkflush()                  { Gtk2->update_ui }
+sub gtkflush()                { Gtk2->main_iteration while Gtk2->events_pending }
 sub gtkhide                   { $_[0]->hide; $_[0] }
 sub gtkmove                   { $_[0]->window->move($_[1], $_[2]); $_[0] }
 sub gtkpack                   { gtkpowerpack(1, 1, @_) }
@@ -150,7 +150,7 @@ sub gtkradio {
 
 sub gtkroot() {
     my $root if 0;
-    $root ||= Gtk2::Gdk::Window->foreign_new(Gtk2::Gdk->ROOT_WINDOW);
+    $root ||= Gtk2::Gdk->get_default_root_window();
 }
 
 sub gtkset_text {
@@ -167,8 +167,7 @@ sub gtkcombo_setpopdown_strings {
 
 sub gtkset_mousecursor {
     my ($type, $w) = @_;
-    ($w || gtkroot())->set_cursor(my $c = Gtk2::Gdk::Cursor->new($type));
-    $c->unref;
+    ($w || gtkroot())->set_cursor(Gtk2::Gdk::Cursor->new($type));
 }
 
 sub gtksignal_connect {
@@ -402,13 +401,13 @@ sub create_vbox { gtkset_layout(Gtk2::VButtonBox->new, $_[0] || 'spread') }
 sub create_factory_menu_ {
     my ($type, $name, $window, @menu_items) = @_;
     my $widget = Gtk2::ItemFactory->new($type, $name, my $accel_group = Gtk2::AccelGroup->new);
-    $widget->create_items([ @menu_items ]);
+    $widget->create_items($window, @menu_items);
     $window->add_accel_group($accel_group);
     ($widget->get_widget($name), $widget);
 }
 
-sub create_factory_popup_menu { create_factory_menu_(Gtk2::Menu->get_type, '<main>', @_) }
-sub create_factory_menu { create_factory_menu_(Gtk2::MenuBar->get_type, '<main>', @_) }
+sub create_factory_popup_menu { create_factory_menu_("Gtk2::Menu", '<main>', @_) }
+sub create_factory_menu { create_factory_menu_("Gtk2::MenuBar", '<main>', @_) }
 
 sub create_menu {
     my $title = shift;
@@ -531,25 +530,27 @@ sub gtktext_insert {
     my ($textview, $t, %opts) = @_;
     my $buffer = $textview->get_buffer;
     if (ref($t) eq 'ARRAY') {
-        $opts{append} or $buffer->set_text('', -1);
+        $opts{append} or $buffer->set_text('');
         foreach my $token (@$t) {
-            my ($iter1, $iter2);
+            my $iter1 = $buffer->get_end_iter;
             my $c = $buffer->get_char_count;
-            $buffer->insert($iter1 = $buffer->get_end_iter, $token->[0], -1);
-            $iter1->free;
+            if ($token->[0] =~ /^Gtk2::Gdk::Pixbuf/) {
+                $buffer->insert_pixbuf($iter1, $token->[0]);
+                next;
+            }
+            $buffer->insert($iter1, $token->[0]);
             if ($token->[1]) {
-                my $tag = $buffer->create_tag(undef);
+                my $tag = $buffer->create_tag(rand());
                 $tag->set(%{$token->[1]});
-                $buffer->apply_tag($tag, $iter1 = $buffer->get_iter_at_offset($c), $iter2 = $buffer->get_end_iter);
-                $iter1->free; $iter2->free;
+                $buffer->apply_tag($tag, $iter1 = $buffer->get_iter_at_offset($c), my $iter2 = $buffer->get_end_iter);
             }
         }
     } else {
-        $buffer->set_text($t, -1);
+        $buffer->set_text($t);
     }
     #- the following line is needed to move the cursor to the beginning, so that if the
     #- textview has a scrollbar, it won't scroll to the bottom when focusing (#3633)
-    $buffer->place_cursor(my $iter = $buffer->get_start_iter); $iter->free;
+    $buffer->place_cursor(my $iter = $buffer->get_start_iter);
     $textview->set_wrap_mode($opts{wrap_mode} || 'word');
     $textview->set_editable($opts{editable} || 0);
     $textview->set_cursor_visible($opts{visible} || 0);
@@ -560,14 +561,13 @@ sub gtktext_insert {
 sub gtkfontinfo {
     my ($widget) = @_;
     my $context = $widget->get_pango_context;
-    my $metrics = $context->get_metrics($widget->style->get_font_desc, $context->get_language);
+    my $metrics = $context->get_metrics($context->get_font_description, $context->get_language);
     my %fontinfo;
     foreach (qw(ascent descent approximate_char_width approximate_digit_width)) {
 	no strict;
 	my $func = "get_$_";
-	$fontinfo{$_} = Gtk2::Pango->PANGO_PIXELS($metrics->$func);
+	$fontinfo{$_} = Gtk2::Pango->pixels($metrics->$func);
     }
-    $metrics->unref;
     %fontinfo;
 }
 
@@ -624,7 +624,6 @@ sub string_size {
     my ($widget, $text) = @_;
     my $layout = $widget->create_pango_layout($text);
     my @size = $layout->get_pixel_size;
-    $layout->unref;
     @size;
 }
 
@@ -749,7 +748,6 @@ sub gtkset_background {
     $root->set_background($color);
     my ($w, $h) = $root->get_size;
     $root->draw_rectangle($gc, 1, 0, 0, $w, $h);
-    $gc->unref;
 }
 
 sub add_icon_path { push @icon_paths, @_ }
@@ -775,6 +773,7 @@ add_icon_path(@icon_paths,
 sub new {
     my ($type, $title, %opts) = @_;
 
+
     my $o = bless { %opts }, $type;
     $o->_create_window($title);
     while (my $e = shift @tempory::objects) { $e->destroy }
@@ -791,7 +790,6 @@ sub new {
 
     if ($::isWizard && !$o->{pop_it}) {
 	$o->{isWizard} = 1;
-	$o->{window}->sink; $o->{rwindow}->sink;  #- free memory
 	$o->{window} = Gtk2::VBox->new(0,0);
 	$o->{window}->set_border_width($::Wizard_splash ? 0 : 10);
 	$o->{rwindow} = $o->{window};
@@ -806,8 +804,7 @@ sub new {
 		$::WizardWindow->set_uposition($::stepswidth + $::windowwidth * 0.04, $::logoheight + $::windowheight * ($::logoheight ? 0.12 : 0.05));
 		$::WizardWindow->signal_connect(key_press_event => sub {
 		    my (undef, $event) = @_;
-		    my $d = ${{ Gtk2::Gdk::Event::Key->Sym_F2  => 'screenshot' }}{$event->keyval};
-		    
+		    my $d = ${{ 0xFFBF => 'screenshot' }}{$event->keyval}; # GDK_F2 from gdk/gdkkeysyms.h
 		    if ($d eq 'screenshot') {
 			common::take_screenshot();
 		    } elsif (chr($event->keyval) eq 'e' && member('mod1-mask', @{$event->state})) {  #- alt-e
@@ -832,7 +829,6 @@ sub new {
 									      0, 0, 0, $height*$i, -1, -1, 'none', 0, 0);
 					       my $layout = $draw1->create_pango_layout($::Wizard_title);
 					       $draw1->window->draw_layout($draw1->style->white_gc, 40, 62, $layout);
-					       $layout->unref;
 					   }
 				       });
 		$draw2->signal_connect(expose_event => sub {
@@ -874,8 +870,8 @@ sub new {
 sub main {
     my ($o, $o_completed, $o_canceled) = @_;
     gtkset_mousecursor_normal();
-    my $timeout = Gtk2->timeout_add(1000, sub { gtkset_mousecursor_normal(); 1 });
-    my $_b = MDK::Common::Func::before_leaving { Gtk2->timeout_remove($timeout) };
+    my $timeout = Glib::Timeout->add(1000, sub { gtkset_mousecursor_normal(); 1 });
+    my $_b = MDK::Common::Func::before_leaving { Glib::Source->remove($timeout) };
     $o->show;
 
     do {
@@ -939,7 +935,7 @@ sub _create_window($$) {
     $w->signal_connect(size_allocate => sub {
 	my (undef, $event) = @_;
 	my $w_size = $event->values;
-	return if $w_size->[2] == $wi && $w_size->[3] == $he;
+	return if $w_size->[2] == $wi && $w_size->[3] == $he; #BUG
 	(undef, undef, $wi, $he) = @$w_size;
 
 	my ($X, $Y, $Wi, $He) = @{$force_center || $o->{force_center}};
@@ -960,7 +956,7 @@ sub _create_window($$) {
 
 sub ask_warn       { my $w = ugtk2->new(shift @_, grab => 1); $w->_ask_warn(@_); main($w) }
 sub ask_yesorno    { my $w = ugtk2->new(shift @_, grab => 1); $w->_ask_okcancel(@_, N("Yes"), N("No")); main($w) }
-sub ask_okcancel   { my $w = ugtk2->new(shift @_, grab => 1); $w->_ask_okcancel(@_, N("Is this correct?"), N("Ok"), N("Cancel")); main($w) }
+sub ask_okcancel   { my $w = ugtk2->new(shift @_, grab => 1); $w->_ask_okcancel(@_, N("Is this correct?"), 'gtk-ok', 'gtk-cancel'); main($w) }
 sub ask_from_entry { my $w = ugtk2->new(shift @_, grab => 1); $w->_ask_from_entry(@_); main($w) }
 sub ask_dir        { my $w = ugtk2->new(shift @_, grab => 1); $w->_ask_dir(@_); main($w) }
 
@@ -1004,7 +1000,8 @@ sub _ask_okcancel($@) {
 
 sub _ask_file {
     my ($o, $title, $path) = @_;
-    my ($modality, $position) = ($o->{rwindow}->get_modal, $o->{rwindow}->window_position);
+    my ($modality, $position) = ($o->{rwindow}->get_modal, $o->{rwindow}->get('window-position'));
+    print "position is $position\n";
     my $f = $o->{rwindow} = Gtk2::FileSelection->new($title);
     $f->set_modal($modality);
     $f->set_position($position);
@@ -1022,7 +1019,7 @@ sub _ask_dir {
     $f->selection_entry->get_parent->hide;
     $f->ok_button->signal_connect(clicked => sub {
 				      my ($model, $iter) = $f->dir_list->get_selection->get_selected;
-				      if ($model) { $o->{retval} .= $model->get($iter, 0); $iter->free }
+				      $o->{retval} .= $model->get($iter, 0) if $model;
 				  });
 }
 
@@ -1031,7 +1028,7 @@ sub ask_browse_tree_info {
 
     my $w = ugtk2->new($common->{title});
 
-    my $tree_model = Gtk2::TreeStore->new(Gtk2::GType->STRING, Gtk2::GType->OBJECT, Gtk2::GType->STRING);
+    my $tree_model = Gtk2::TreeStore->new("Glib::String", "Gtk2::Gdk::Pixbuf", "Glib::String");
     my $tree = Gtk2::TreeView->new_with_model($tree_model);
     $tree->get_selection->set_mode('browse');
     $tree->append_column(my $textcolumn = Gtk2::TreeViewColumn->new_with_attributes(undef, Gtk2::CellRendererText->new, 'text' => 0));
@@ -1132,7 +1129,6 @@ sub ask_browse_tree_info_given_widgets {
 		my @list = grep { $stats->{$_} > 0 } keys %$stats;
 		my $new_state = @list == 1 ? $list[0] : 'semiselected';
 		$node_state{$parent_str} ne $new_state and $set_node_state_tree->($parent, $new_state);
-		$parent->free;
 	    }
 	    $w->{tree_model}->set($iter, [ 1 => $pix{$state} ]);
 	    $node_state{$iter_str} = $state;  #- cache for efficiency
@@ -1172,21 +1168,19 @@ sub ask_browse_tree_info_given_widgets {
 	    #- if leaf is void, we may create the parent and one child (to have the [+] in front of the parent in the ctree)
 	    #- though we use '' as the label of the child; then rpmdrake will connect on tree_expand, and whenever
 	    #- the first child has '' as the label, it will remove the child and add all the "right" children
-	    $options->{nochild} or $w->{tree_model}->append_set($parent, [ 0 => '' ])->free;
+	    $options->{nochild} or $w->{tree_model}->append_set($parent, [ 0 => '' ]);
 	}
     };
     my $clear_all_caches = sub {
 	foreach (values %ptree) {
 	    foreach my $n (@$_) {
 		delete $node_state{$w->{tree_model}->get_path_str($n)};
-		$n->free;
 	    }
 	}
 	foreach (values %wtree) {
 	    my $iter_str = $w->{tree_model}->get_path_str($_);
 	    delete $node_state{$iter_str};
 	    delete $state_stats{$iter_str};
-	    $_->free;
 	}
 	%ptree = %wtree = ();
     };
@@ -1222,13 +1216,11 @@ sub ask_browse_tree_info_given_widgets {
 			delete $wtree{$_->[1]};
 			delete $node_state{$w->{tree_model}->get_path_str($_->[0])};
 			delete $state_stats{$w->{tree_model}->get_path_str($_->[0])};
-			$_->[0]->free;
 		    }
 		}
 	    }
 	    foreach (@to_remove) {
 		delete $node_state{$w->{tree_model}->get_path_str($_)};
-		$_->free;
 	    }
 	    @{$ptree{$_}} = difference2($ptree{$_}, \@to_remove);
 	}
@@ -1237,7 +1229,6 @@ sub ask_browse_tree_info_given_widgets {
 	    delete $node_state{$iter_str};
 	    delete $state_stats{$iter_str};
 	    $w->{tree_model}->remove($wtree{$cat});
-	    $wtree{$cat}->free;
 	    delete $wtree{$cat};
 	}
 	&$update_size;
@@ -1249,11 +1240,10 @@ sub ask_browse_tree_info_given_widgets {
     };
     
     $common->{display_info} = sub { gtktext_insert($w->{info}, $common->{get_info}($curr)); 0 };
-    my $children = sub { map { my $v = $w->{tree_model}->get($_, 0); $_->free; $v } gtktreeview_children($w->{tree_model}, $_[0]) };
+    my $children = sub { map { my $v = $w->{tree_model}->get($_, 0); $v } gtktreeview_children($w->{tree_model}, $_[0]) };
     my $toggle = sub {
 	if (ref($curr) && !$_[0]) {
 	    $w->{tree}->toggle_expansion(my $path = $w->{tree_model}->get_path($curr));
-	    $path->free;
 	} else {
 	    if (ref $curr) {
 		my @_a = $children->($curr);
@@ -1282,12 +1272,11 @@ sub ask_browse_tree_info_given_widgets {
     $w->{tree}->get_selection->signal_connect(changed => sub {
 	my ($model, $iter) = $_[0]->get_selected;
 	$model && $iter or return;
-	Gtk2->timeout_remove($idle) if $idle;
+	Glib::Source->remove($idle) if $idle;
 	
-	$curr->free if ref $curr;
 	if (!$model->iter_has_child($iter)) {
 	    $curr = $model->get($iter, 0);
-	    $idle = Gtk2->timeout_add(100, $common->{display_info});
+	    $idle = Glib::Timeout->add(100, $common->{display_info});
 	} else {
 	    $curr = $iter;
 	}
@@ -1304,7 +1293,6 @@ sub ask_browse_tree_info_given_widgets {
 	my ($returns, $path, $column) = $w->{tree}->get_path_at_pos($_[1]->x, $_[1]->y);
 	if ($returns) {
 	    Gtk2->equals($column, $w->{pixcolumn}) and $mouse_toggle_pending = $w->{tree_model}->get($path, 0);
-	    $path->free;
 	}
     });
     $common->{rebuild_tree}->();
@@ -1313,4 +1301,52 @@ sub ask_browse_tree_info_given_widgets {
     $w->{w}->main;
 }
 
+# misc helpers:
+
+package Gtk2::TreeStore;
+sub append_set {
+    my ($model, $parent, @values) = @_;
+    # compatibility:
+    @values = @{$values[0]} if $#values == 0 && ref($values[0]) eq 'ARRAY';
+    my $iter = $model->append($parent);
+    $model->set($iter, @values);
+    return $iter;
+}
+
+package Gtk2::ListStore;
+# Append a new row, set the values, return the TreeIter
+sub append_set {
+    my ($model, @values) = @_;
+    # compatibility:
+    @values = @{$values[0]} if $#values == 0 && ref($values[0]) eq 'ARRAY';
+    my $iter = $model->append();
+    $model->set($iter, @values);
+    return $iter;
+}
+
+package Gtk2::TreeModel;
+# gets the string representation of a TreeIter
+sub get_path_str {
+    my ($self, $iter) = @_;
+    my $path = $self->get_path($iter);
+    $path or return;
+    $path->to_string;
+}
+
+package Gtk2::Label;
+sub set {
+    my ($label) = shift;
+    $label->set_label(@_);
+}
+
+package Gtk2::Entry;
+sub new_with_text {
+    shift;
+    my $entry = Gtk2::Entry::>new;
+    @_ and $entry->set_text(@_);
+    return $entry;
+}
+
+
 1;
+

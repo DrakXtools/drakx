@@ -97,11 +97,11 @@ my @menu_items =
      [ N("/_File"), undef, undef, undef, '<Branch>' ],
      [ N("/_File").N("/_Quit"), N("<control>Q"), \&quit_global, undef, '<StockItem>', 'gtk-quit' ],
      [ join('', @{$menu_options{PRINTERS_DETECTION}}), undef, 
-       sub { $options{PRINTERS_DETECTION} = $check_boxes{PRINTERS_DETECTION}->active }, undef, '<CheckItem>' ],
+       sub { $options{PRINTERS_DETECTION} = $check_boxes{PRINTERS_DETECTION}->get_active }, undef, '<CheckItem>' ],
      [ join('', @{$menu_options{MODEMS_DETECTION}}), undef,
-       sub { $options{MODEMS_DETECTION} = $check_boxes{MODEMS_DETECTION}->active }, undef, '<CheckItem>' ],
+       sub { $options{MODEMS_DETECTION} = $check_boxes{MODEMS_DETECTION}->get_active }, undef, '<CheckItem>' ],
      [ join('', @{$menu_options{JAZZ_DETECTION}}), undef,
-       sub { $options{JAZZ_DETECTION} = $check_boxes{JAZZ_DETECTION}->active }, undef, '<CheckItem>' ],
+       sub { $options{JAZZ_DETECTION} = $check_boxes{JAZZ_DETECTION}->get_active }, undef, '<CheckItem>' ],
      [ $menus{help}, undef, undef, undef, '<Branch>' ],
      [ $menus{help}.N("/_Help"), undef, sub { unless (fork()) { exec("drakhelp Drakxtools-Guide.html/harddrake.html") } }, undef, '<Item>' ],
      [ $menus{help}.N("/_Fields description"), undef, sub {
@@ -148,7 +148,7 @@ if ($::isEmbedded) {
     $w->{window}->set_size_request(805, 550);
 }
 
-my $tree_model = Gtk2::TreeStore->new(Gtk2::GType->OBJECT, Gtk2::GType->STRING, Gtk2::GType->INT);
+my $tree_model = Gtk2::TreeStore->new("Gtk2::Gdk::Pixbuf", "Glib::String", "Glib::Int");
 my ($statusbar, $sig_id);
 $w->{window}->add(gtkpack_(0, Gtk2::VBox->new(0, 0),
                            if_(!$::isEmbedded, 0, $menubar),
@@ -198,16 +198,15 @@ $tree->get_selection->signal_connect('changed' => sub {
     my ($model, $iter) = $select->get_selected;
     if ($model) {
         my $idx = $model->get($iter, 2);
-        $iter->free;
         $current_device = $data[$idx];
         
         if ($idx ne -1) {
+            use Gtk2::Pango;
             gtktext_insert($text, [ map  {
-
                 # The U+200E character is to force LTR display, as what what follows the colon is always in LTR (device names, paths, etc),
                 # this ensures proper displaying of names like /dev/fd0 (otherwise it gets 'dev/fd0/').
                 # it must come *after* the space, as the space must follow the colon following the direction of writting.
-                if_($_ && $fields{$_}[0], [ $fields{$_}[0] . ": \x{200e}", { 'foreground' => 'royalblue3', 'weight' => Gtk2::Pango->WEIGHT_BOLD } ],
+                if_($_ && $fields{$_}[0], [ $fields{$_}[0] . ": \x{200e}", { 'foreground' => 'royalblue3', 'weight' => Gtk2::Pango->PANGO_WEIGHT_BOLD } ],
                     [ ($current_device->{$_} =~ /^(unknown)/ ? N("unknown") :
                        $current_device->{$_} =~ /^(Unknown)/ ? N("Unknown") : 
                        $current_device->{$_} eq 'yes' ? N("Yes") : 
@@ -227,7 +226,7 @@ $tree->get_selection->signal_connect('changed' => sub {
             return 1;
         }
     }
-    $text->get_buffer->set_text(N("Click on a device in the left tree in order to display its information here."), -1);
+    $text->get_buffer->set_text(N("Click on a device in the left tree in order to display its information here."));
     $config_button->hide;
     $module_cfg_button->hide;
 });
@@ -294,12 +293,11 @@ foreach (@harddrake::data::tree) {
         foreach my $field (qw(devfs_device device)) {
             $_->{$field} = '/dev/'.$_->{$field} if $_->{$field};
         }
-        $tree_model->append_set($parent_iter, [ 1 => $custom_id, 2 => $index++ ])->free;
+        $tree_model->append_set($parent_iter, [ 1 => $custom_id, 2 => $index++ ]);
         push @data, $_;
         push @configurators, $configurator;
     }
     $tree->expand_row($tree_model->get_path($parent_iter), 1) unless $title eq N("Unknown/Others");
-    $parent_iter->free;
 }
 
 $SIG{CHLD} = sub {
@@ -327,7 +325,6 @@ $textcolumn->set_sizing('GTK_TREE_VIEW_COLUMN_AUTOSIZE');#GROW_ONLY
 my $path = Gtk2::TreePath->new_first;
 $path->down unless $::isEmbedded;
 $tree->get_selection->select_path($path);
-$path->free;
 $w->{rwindow}->show_all;
 undef $wait;
 gtkset_mousecursor_normal();

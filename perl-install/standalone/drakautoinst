@@ -317,7 +317,7 @@ sub create_entry_element {
     } else {
 	$e = new Gtk2::Entry;
 	$e->{value} = $value;
-	my $tag = Gtk2->timeout_add(1000, sub { $e->set_text($text); 0 });
+	my $tag = Glib::Timeout->add(1000, sub { $e->set_text($text); 0 });
 	gtksignal_connect($e, changed => sub {
 			      my $exe = $e->{value} . "='" . $e->get_text . "'";
 			      print "EXEC : $exe\n ";

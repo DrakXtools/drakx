@@ -518,7 +518,6 @@ sub installPackages {
                                        };
                                        $draw_lay->($darea->style->black_gc, 0);
                                        $i == 0 and $draw_lay->($darea->style->black_gc, 1);
-                                       $layout->unref;
                                        $i++;
                                    }
 			       }

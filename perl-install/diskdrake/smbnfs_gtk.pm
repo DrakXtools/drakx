@@ -68,7 +68,7 @@ sub per_entry_info_box {
 
 sub per_entry_action_box {
     my ($box, $kind, $entry) = @_;
-    $_->widget->destroy foreach $box->children;
+    $_->destroy foreach $box->get_children;
 
     my @buttons;
 
@@ -107,7 +107,7 @@ sub update {
     my ($kind) = @_;
     per_entry_action_box($kind->{action_box}, $kind, $current_entry);
     per_entry_info_box($kind->{info_box}, $kind, $current_entry);
-    $tree_model->set($current_leaf, [ 0 => export_icon($current_entry) ]) if $current_entry;
+    $tree_model->set($current_leaf, 0 => export_icon($current_entry)) if $current_entry;
 }
 
 sub find_fstab_entry {
@@ -129,7 +129,7 @@ sub import_tree {
     my ($kind, $info_box) = @_;
     my (%servers_displayed, %wservers, %wexports);
 
-    $tree_model = Gtk2::TreeStore->new(Gtk2::GType->OBJECT, Gtk2::GType->STRING);
+    $tree_model = Gtk2::TreeStore->new("Gtk2::Gdk::Pixbuf", "Glib::String");
     my $tree = Gtk2::TreeView->new_with_model($tree_model);
     $tree->get_selection->set_mode('browse');
 
@@ -194,7 +194,6 @@ sub import_tree {
 
 	my $path = $tree_model->get_path($node);
 	$tree->expand_row($path, 0);
-	$path->free;
 
 	foreach ($find_exports->($wservers{$tree_model->get_path_str($node)} || return)) { #- can't die here since insert_node provoque a tree_select_row before the %wservers is filled
 	    my $s = $kind->to_string($_);

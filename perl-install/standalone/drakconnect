@@ -81,6 +81,7 @@ $window1->{rwindow}->set_border_width(10);
 my $combo1 = new Gtk2::Combo;
 $combo1->set_popdown_strings(network::netconnect::get_profiles());
 my $old_profile = $netcnx->{PROFILE};
+
 $combo1->entry->set_text($netcnx->{PROFILE} || "default");
 $combo1->entry->set_editable(0);
 my $button_del = new Gtk2::Button(N("Del profile..."));
@@ -164,7 +165,7 @@ $int_connect->signal_connect(clicked => sub {
 my $button_internet = gtksignal_connect(Gtk2::Button->new(N("Configure Internet Access...")),
                                 clicked => sub { configure_net('', $netcnx, $netc, $intf) });
 
-my $tree_model = Gtk2::TreeStore->new(Gtk2::GType->OBJECT, map { Gtk2::GType->STRING } 2..6);
+my $tree_model = Gtk2::TreeStore->new("Gtk2::Gdk::Pixbuf", map { "Glib::String" } 2..6);
 my $list = Gtk2::TreeView->new_with_model($tree_model);
 $list->append_column(Gtk2::TreeViewColumn->new_with_attributes(undef, Gtk2::CellRendererPixbuf->new, 'pixbuf' => 0));
 each_index {
@@ -269,19 +270,22 @@ $button_ok->signal_connect(clicked => sub {
 				 quit_global();
 			     });
 $bbox0->add($button_ok);
-$combo1->entry->signal_connect('changed', sub {
-#				    connected() and disconnect_backend();
-				    network::netconnect::set_profile($netcnx, $combo1->entry->get_text);
-				    network::netconnect::load_conf($netcnx, $netc, $intf);
-				    $netcnx->{$_} = $netc->{$_} foreach qw(NET_DEVICE NET_INTERFACE);
-				    update();
-				    $button_apply->set_sensitive(1);
-				});
+
+$combo1->signal_connect(realize => sub {
+                            $combo1->entry->signal_connect(changed => sub {
+                                                               #connected() and disconnect_backend();
+                                                               network::netconnect::set_profile($netcnx, $combo1->entry->get_text);
+                                                               network::netconnect::load_conf($netcnx, $netc, $intf);
+                                                               $netcnx->{$_} = $netc->{$_} foreach qw(NET_DEVICE NET_INTERFACE);
+                                                               update();
+                                                               $button_apply->set_sensitive(1);
+                                                           });
+});
 
 $window1->{rwindow}->show_all;
 $_->hide foreach $button_internet, $button_lan;
 gtkflush();
-my $tag = Gtk2->timeout_add(4000, \&update2);
+my $tag = Glib::Timeout->add(4000, \&update2);
 $window1->main;
 ugtk2->exit(0);
 
@@ -302,7 +306,7 @@ sub build_list() {
             $ip = $intf->{"eth$i"}{IPADDR};
             $state = "n/a";
         }
-        $tree_model->append_set(undef, [ map_index { $::i => $_ } (gtkcreate_pixbuf("eth_card_mini2.png"), "eth$i", $ip , $intf->{"eth$i"}{BOOTPROTO}, $all_cards[$i][1], $state) ])->free;
+        $tree_model->append_set(undef, [ map_index { $::i => $_ } (gtkcreate_pixbuf("eth_card_mini2.png"), "eth$i", $ip , $intf->{"eth$i"}{BOOTPROTO}, $all_cards[$i][1], $state) ]);
     }
 }
 
@@ -329,7 +333,7 @@ sub ethisup { `LC_ALL=C LANG=C LANGUAGE=C LC_MESSAGES=C /sbin/ifconfig` =~ /eth$
 my $to_update;
 sub update() {
     my $h = chomp_(`hostname`);
-    $label_host->set($h);
+    $label_host->set_label($h);
     $type_label->set($netcnx->{type});
     $int_label->set($netcnx->{type} eq 'lan' ? N("Gateway:") : N("Interface:"));
     $interface_name->set($netcnx->{type} eq 'lan' ? $netc->{GATEWAY} : $netcnx->{NET_INTERFACE});

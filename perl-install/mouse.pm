@@ -456,7 +456,6 @@ sub test_mouse {
 				    ($darea->allocation->width-$w)/2,
 				    ($darea->allocation->height-$height)/2 + $y,
 				    $layout);
-	$layout->unref;
     };
     my $draw_pixbuf = sub {
 	my ($p, $x, $y, $w, $h) = @_;
@@ -501,8 +500,8 @@ sub test_mouse {
 		$draw_pixbuf->($xpms{ad}, 102, 131, 6, 8);
 	    }
 	    $draw_pixbuf->($xpms{middle}, 98, 67, 13, 62);
-	    $timeout and Gtk2->timeout_remove($timeout);
-	    $timeout = Gtk2->timeout_add(100, sub { $drawarea->(); $timeout = 0; 0 });
+	    $timeout and Glib::Source->remove($timeout);
+	    $timeout = Glib::Timeout->add(100, sub { $drawarea->(); $timeout = 0; 0 });
 	}
     };
     

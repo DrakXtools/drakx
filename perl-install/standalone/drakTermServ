@@ -531,7 +531,7 @@ sub make_nbi() {
 		"via-rhine", "winbond-840", "xircom_cb", "xircom_tulip_cb", "yellowfin");
 	
 	#- kernel/module info in tree view
-	my $model = Gtk2::TreeStore->new(Gtk2::GType->STRING);
+	my $model = Gtk2::TreeStore->new("Glib::String");
     my $tree_kernels = Gtk2::TreeView->new_with_model($model);
     $tree_kernels->append_column(Gtk2::TreeViewColumn->new_with_attributes(undef, Gtk2::CellRendererText->new, 'text' => 0));
     $tree_kernels->set_headers_visible(0);
@@ -546,7 +546,6 @@ sub make_nbi() {
     		$model->append($k_detail, $t_kernel);
     		$model->set($k_detail, [ 0 => $_ ]);
 		}
-		$k_detail->free;
 	}	
 
 	$tree_kernels->get_selection->signal_connect(changed => sub {
@@ -566,7 +565,7 @@ sub make_nbi() {
 	});
 	
 	# existing nbi images in list
-	my $list_model = Gtk2::ListStore->new(Gtk2::GType->STRING);
+	my $list_model = Gtk2::ListStore->new("Glib::String");
 	my $list_nbis = Gtk2::TreeView->new_with_model($list_model);
 	$list_nbis->append_column(Gtk2::TreeViewColumn->new_with_attributes(undef, Gtk2::CellRendererText->new, 'text' => 0));
 	$list_nbis->set_headers_visible(0);	
@@ -671,7 +670,7 @@ sub maintain_users() {
 	#- use /homes to filter system daemons
 	my @homes = all("/home");
 	
-	my $list_model = Gtk2::ListStore->new(Gtk2::GType->STRING);
+	my $list_model = Gtk2::ListStore->new("Glib::String");
 	my $list_sys_users = Gtk2::TreeView->new_with_model($list_model);
 	$list_sys_users->append_column(Gtk2::TreeViewColumn->new_with_attributes(undef, Gtk2::CellRendererText->new, 'text' => 0));
 	$list_sys_users->set_headers_visible(0);
@@ -686,7 +685,6 @@ sub maintain_users() {
     		$list_model->set($iter, [ 0 => $s_label ]);
 		}
 	}
-	$iter->free;
 
 	$list_sys_users->get_selection->signal_connect(changed => sub {
     	my ($model, $iter) = $_[0]->get_selected;
@@ -694,7 +692,7 @@ sub maintain_users() {
     	$sys_user = $model->get($iter, 0);
 	});
 
-	$list_model = Gtk2::ListStore->new(Gtk2::GType->STRING);
+	$list_model = Gtk2::ListStore->new("Glib::String");
 	my $list_ts_users = Gtk2::TreeView->new_with_model($list_model);
 	$list_ts_users->append_column(Gtk2::TreeViewColumn->new_with_attributes(undef, Gtk2::CellRendererText->new, 'text' => 0));
 	$list_ts_users->set_headers_visible(0);
@@ -757,7 +755,7 @@ sub maintain_clients() {
 	my $button_delete;
 	
 	#- client info in tree view
-	my $model = Gtk2::TreeStore->new(Gtk2::GType->STRING);
+	my $model = Gtk2::TreeStore->new("Glib::String");
     my $tree_clients = Gtk2::TreeView->new_with_model($model);
     $tree_clients->append_column(Gtk2::TreeViewColumn->new_with_attributes(undef, Gtk2::CellRendererText->new, 'text' => 0));
     $tree_clients->set_headers_visible(0);

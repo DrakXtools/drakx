@@ -40,7 +40,7 @@ require_root_capability();
 
 my $expert_mode = $::expert;
 
-my $list_model = Gtk2::ListStore->new((Gtk2::GType->STRING) x 2);
+my $list_model = Gtk2::ListStore->new(("Glib::String") x 2);
 my $list  = Gtk2::TreeView->new_with_model($list_model);
 each_index {
     $list->append_column(my $col = Gtk2::TreeViewColumn->new_with_attributes($_, Gtk2::CellRendererText->new, 'text' => $::i));
@@ -87,7 +87,7 @@ $kernel_combo->entry->signal_connect(changed => sub {
 
 
 # Create root tree
-my $tree_model = Gtk2::TreeStore->new((Gtk2::GType->STRING) x 2);
+my $tree_model = Gtk2::TreeStore->new(("Glib::String") x 2);
 my $tree = Gtk2::TreeView->new_with_model($tree_model);
 #$tree->get_selection->set_mode('browse');
 $tree->set_headers_visible(0);
@@ -229,7 +229,6 @@ sub selected_tree {
     my ($model, $iter) = $select->get_selected;
     return unless $model;       # no real selection
     my $file = $model->get($iter, 1);
-    $iter->free;
     
     return if -d $file;
 
@@ -238,21 +237,26 @@ sub selected_tree {
     return if member($file, @modules);
     push @modules, $file;
     $file =~ s|/lib/modules/.*?/||g;
-    $list_model->append_set([ 0 => $file, 1 => $size ])->free;
+    $list_model->append_set([ 0 => $file, 1 => $size ]);
 }
 
 
 # Callback for expanding a tree - find subdirectories, files and add them to tree
 sub expand_tree {
     my ($tree, $parent_iter, $path) = @_;
-
+    print "K 0\n";
     my $dir   = $tree_model->get($parent_iter, 1);
+    print "K 1\n";
     my $child = $tree_model->iter_children($parent_iter);
 
     #- hackish: if first child has '' as name, then we need to expand on the fly
+    print "K 2 $child\n";
     if ($child && $tree_model->get($child, 0) eq '') {
+    print "K 3\n";
         $tree_model->remove($child);
+    print "K 4\n";
     }
+    print "K 5\n";
     unless ($child && $tree_model->iter_has_child($parent_iter)) {
         foreach my $dir_entry (all($dir)) {
             my $entry_path = $dir . "/" . $dir_entry;
@@ -264,11 +268,12 @@ sub expand_tree {
                 #- if leaf is void, we may create the parent and one child (to have the [+] in front of the parent in the ctree)
                 #- though we use '' as the label of the child; then rpmdrake will connect on tree_expand, and whenever
                 #- the first child has '' as the label, it will remove the child and add all the "right" children
-                $tree_model->append_set($iter, [ 0 => '' ])->free if has_sub_trees($entry_path);
+                $tree_model->append_set($iter, [ 0 => '' ]) if has_sub_trees($entry_path);
             }
         }
     }
     $tree->expand_row($path, 0);
+    print "K 9\n\n";
 }
 
 

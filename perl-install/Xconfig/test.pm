@@ -128,7 +128,7 @@ sub test {
 	$ugtk2::force_focus = 1;
         my $text = Gtk2::Label->new;
         my $time = 12;
-        Gtk2->timeout_add(1000, sub {
+        Glib::Timeout->add(1000, sub {
 	    $text->set(sprintf(translate("%s"), $time));
 	    $time-- or Gtk2->main_quit;
             1;
@@ -143,7 +143,6 @@ sub test {
             $pixbuf->render_to_drawable($pixmap, $gc, 0, 0, 0, 0, $w, $h, 'none', 0, 0);
             $root->set_back_pixmap($pixmap, 0);
             $root->clear;
-            $gc->unref;
         };
 
         my $in = interactive::gtk->new;

@@ -219,7 +219,7 @@ sub ask_standalone_gtk {
 		  gtkpack__(Gtk2::HBox->new(0,0), gtksignal_connect(Gtk2::Button->new_from_stock('gtk-dialog-info'), clicked => sub { $display->($infos) })),
                   gtkpack__(Gtk2::HBox->new(0,0), gtkset_active(gtksignal_connect(
                           Gtk2::CheckButton->new(N("On boot")),
-                          clicked => sub { if ($_[0]->active) {
+                          clicked => sub { if ($_[0]->get_active) {
                                                push @$on_services, $service if !member($service, @$on_services);
                                            } else {
                                                @$on_services = grep { $_ ne $service } @$on_services;
