@@ -67,11 +67,6 @@ install_pms: $(DIRS)
 		perl -ne 'print' $$i > $(DESTREP4PMS)/$$i; \
 		perl -pe 's/#[-+].*//; $$_ = "\n" if (/^=(head|begin)/ .. /^=cut/) || /use (diagnostics|strict|vars|warnings)/' $$i > $(DESTREP4PMS)/$$i; \
 	done
-	if [ "x$(PERL_INSTALL_DEBUG)" == "x" ]; then \
-		perl -pi -e 's|#!/usr/bin/perl -d.*\n|#!/usr/bin/perl\n|' $(DESTREP4PMS)/install2; \
-	else \
-		perl -pe 's|#!/usr/bin/perl.*\n|#!/usr/bin/perl -d \n|' install2 > $(DESTREP4PMS)/install2; \
-	fi \
 
 	rm -f $(DESTREP4PMS)/{bootlook,tinyfirewall}.pm
 
