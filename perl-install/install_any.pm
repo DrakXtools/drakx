@@ -912,7 +912,7 @@ sub ejectCdrom {
     if ($o_mountpoint) {
 	$cdrom = $o_cdrom || cat_("/proc/mounts") =~ m!(/dev/\S+)\s+(/mnt/cdrom|/tmp/image)! && $1;
     } else {
-	$cdrom = cat_("/proc/mounts") =~ m!(/dev/$o_cdrom)\s+(/mnt/cdrom|/tmp/image)! && $1;
+	$cdrom = cat_("/proc/mounts") =~ m!((?:/dev/)?$o_cdrom)\s+(/mnt/cdrom|/tmp/image)! && $1;
 	$o_mountpoint ||= $cdrom ? $2 || '/tmp/image' : '';
     }
     $cdrom ||= $o_cdrom;
