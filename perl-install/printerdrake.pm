@@ -3126,7 +3126,8 @@ sub main {
 					  _("Expert Mode")) } : ()),
 			  { clicked_may_quit =>
 			    sub { $menuchoice = "\@quit"; 1 },
-			    val => _("Quit") },
+			    val => ($::isEmbedded || $::isInstall ?
+				    _("Done") : _("Quit")) },
 			  ]
 		    );
 		    # Toggle expert mode and standard mode
