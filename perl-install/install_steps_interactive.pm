@@ -967,15 +967,14 @@ sub summary {
 	};
     }
 
-    foreach (grep { $_->{driver} =~ /(bttv|saa7134)/ } detect_devices::probeall()) {
-	my $driver = $_->{driver};
+    foreach my $tv (grep { $_->{driver} =~ /(bttv|saa7134)/ } detect_devices::probeall()) {
 	push @l, {
 	    group => N("Hardware"),
 	    label => N("TV card"),
-	    val => sub { $_->{description} }, 
+	    val => sub { $tv->{description} }, 
 	    clicked => sub { 
 	        require harddrake::v4l; 
-	        harddrake::v4l::config($o, $driver);
+	        harddrake::v4l::config($o, $tv->{driver});
 	    }
 	};
     }
