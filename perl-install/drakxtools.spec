@@ -313,8 +313,12 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 
 %changelog
 * Wed May 21 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.2-0.3mdk
+- drakbackup: fixes regarding file names in differntial mode (stew)
 - drakboot, drakconnect, harddrake2, printerdrake: misc cleaning
-- drakconnect: fix #853 (check ip) (poulpy)
+- drakconnect:
+  o workaround #3341 (display "Bad ip" instead of a blank field if we
+    failled to parse the ip)
+  o fix #853 (check ip) (poulpy)
 - printerdrake: fix #1342 (english rephrasing)
 - requires: fix #3485
 
