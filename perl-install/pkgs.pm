@@ -378,7 +378,8 @@ sub psUpdateHdlistsDeps {
 }
 
 sub psUsingHdlists {
-    my ($prefix, $method, $o_hdlistsfile, $o_packages, $o_initialmedium) = @_;
+    my ($o, $method, $o_hdlistsfile, $o_packages, $o_initialmedium) = @_;
+    my $prefix = $o->{prefix};
     my $listf = install_any::getFile($o_hdlistsfile || 'media/media_info/hdlists')
 	or die "no hdlists found";
     my $suppl_CDs = 0;
@@ -390,6 +391,7 @@ sub psUsingHdlists {
 
     #- parse hdlists file.
     my $medium_name = $o_initialmedium || 1;
+    my @hdlists;
     foreach (<$listf>) {
 	chomp;
 	s/\s*#.*$//;
@@ -397,17 +399,20 @@ sub psUsingHdlists {
 	#- we'll ask afterwards for supplementary CDs, if the hdlists file contains
 	#- a line that begins with "suppl"
 	if (/^suppl/) { $suppl_CDs = 1; next }
+	my $cdsuppl = index($medium_name, 's') >= 0;
 	m/^\s*(noauto:)?(hdlist\S*\.cz2?)\s+(\S+)\s*(.*)$/ or die qq(invalid hdlist description "$_" in hdlists file);
+	push @hdlists, [ $2, $medium_name, $3, $4, !$1, 
+	    #- hdlist path, suppl CDs are mounted on /mnt/cdrom :
+	    $cdsuppl ? "/mnt/cdrom/media/media_info/$2" : undef,
+	];
+	$cdsuppl ? ($medium_name = ($medium_name + 1) . 's') : ++$medium_name;
+    }
+    @hdlists = $o->deselectFoundMedia(\@hdlists) unless defined $o_initialmedium;
 
+    foreach my $h (@hdlists) {
 	#- make sure the first medium is always selected!
 	#- by default select all image.
-	psUsingHdlist(
-	    $prefix, $method, $o_packages, $2, $medium_name, $3, $4, !$1,
-	    #- hdlist path, suppl CDs are mounted on /mnt/cdrom :
-	    index($medium_name, 's') >= 0 ? "/mnt/cdrom/media/media_info/$2" : undef,
-        );
-
-	$medium_name =~ /s$/ ? ($medium_name = ($medium_name + 1) . 's') : ++$medium_name;
+	psUsingHdlist($prefix, $method, $o_packages, @$h);
     }
 
     log::l("psUsingHdlists read " . int(@{$o_packages->{depslist}}) .

@@ -391,6 +391,10 @@ sub setPackages {
     }
 }
 
+sub deselectFoundMedia {
+    my ($o, $p) = @_;
+    install_any::deselectFoundMedia($o, $p);
+}
 sub selectSupplMedia {
     my ($o, $suppl_method) = @_;
     install_any::selectSupplMedia($o, $suppl_method);

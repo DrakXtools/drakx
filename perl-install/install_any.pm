@@ -361,6 +361,21 @@ sub preConfigureTimezone {
     add2hash_($o->{timezone}, { UTC => $utc, ntp => $ntp });
 }
 
+sub deselectFoundMedia {
+    my ($o, $hdlists) = @_;
+    my $l = $o->ask_many_from_list('',
+N("The following installation media have been found.
+If you want to skip some of them, you can unselect them now."),
+	{
+	    list => $hdlists,
+	    value => sub { 1 },
+	    label => sub { $_[0][3] },
+	},
+    );
+    log::l("keeping media " . map { $_->[1] } @$l);
+    @$l;
+}
+
 sub ask_if_suppl_media {
     my ($o) = @_;
     our $suppl_already_asked;
@@ -410,7 +425,7 @@ sub selectSupplMedia {
 		log::l($@) if $@;
 		useMedium($medium_name);
 		#- probe for an hdlists file and then look for all hdlists listed herein
-		eval { pkgs::psUsingHdlists($o->{prefix}, $suppl_method, "/mnt/cdrom/media/media_info/hdlists", $o->{packages}, '1s') };
+		eval { pkgs::psUsingHdlists($o, $suppl_method, "/mnt/cdrom/media/media_info/hdlists", $o->{packages}, '1s') };
 		if ($@) {
 		    log::l("psUsingHdlists failed: $@");
 		    #- no hdlists found on the suppl. CD
@@ -493,7 +508,7 @@ sub setPackages {
     require pkgs;
     if (!$o->{packages} || is_empty_array_ref($o->{packages}{depslist})) {
 	my $cdrom;
-	($o->{packages}, my $suppl_method) = pkgs::psUsingHdlists($o->{prefix}, $o->{method});
+	($o->{packages}, my $suppl_method) = pkgs::psUsingHdlists($o, $o->{method});
 
 	1 while
 	$suppl_method = $o->selectSupplMedia($suppl_method);
