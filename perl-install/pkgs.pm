@@ -530,10 +530,11 @@ sub psUsingHdlist {
     $m;
 }
 
-sub read_rpmsrate {
-    my ($packages, $f) = @_;
+sub read_rpmsrate_raw {
+    my ($f) = @_;
     my $line_nb = 0;
     my $fatal_error;
+    my (%flags, %rates, @need_to_copy);
     my (@l);
     local $_;
     while (<$f>) {
@@ -559,10 +560,61 @@ sub read_rpmsrate {
                  )(.*)/x) { #@")) {
 	    ($t, $flag, $data) = ($1,$2,$3);
 	    while ($flag =~ s,^\s*(("[^"]*"|[^"\s]*)*)\s+,$1,) {}
+	    push @m, $flag;
+	    push @l2, [ length $indent, [ @m ] ];
+	    $indent .= $t;
+	}
+	if ($data) {
+	    # has packages on same line
+	    my ($rates, $flags) = partition { /^\d$/ } @m;
+	    my ($rate) = @$rates or die sprintf qq(missing rate for "%s" at line %d (flags are %s)\n), $data, $line_nb, join('&&', @m);
+	    foreach my $name (split ' ', $data) {
+		if (member('INSTALL', @$flags)) {
+		    push @need_to_copy, $name if !member('NOCOPY', @$flags);
+		    next;    #- do not need to put INSTALL flag for a package.
+		}
+		if (member('PRINTER', @$flags)) {
+		    push @need_to_copy, $name;
+		}
+		if (my $previous = $flags{$name}) {
+		    my @common = intersection($flags, $previous);
+		    my @diff1 = difference2($flags, \@common);
+		    my @diff2 = difference2($previous, \@common);
+		    if (!@diff1 || !@diff2) {
+			@$flags = @common;
+		    } elsif (@diff1 == 1 && @diff2 == 1) {
+			@$flags = (@common, join('||', $diff1[0], $diff2[0]));
+		    } else {
+			log::l("can not handle complicate flags for packages appearing twice ($name)");
+			$fatal_error++;
+		    }
+		    log::l("package $name appearing twice with different rates ($rate != " . $rates{$name} . ")") if $rate != $rates{$name};
+		}
+		$rates{$name} = $rate;
+		$flags{$name} = $flags;
+	    }
+	    push @l, @l2;
+	} else {
+	    push @l, [ $l2[0][0], $l2[-1][1] ];
+	}
+    }
+    $fatal_error and die "$fatal_error fatal errors in rpmsrate";
+    \%rates, \%flags, \@need_to_copy;
+}
+
+sub read_rpmsrate {
+    my ($packages, $f) = @_;
+
+    my ($rates, $flags, $need_to_copy) = read_rpmsrate_raw($f);
+    
+    foreach (keys %$flags) {
+	my $p = packageByName($packages, $_) or next;
+	my @more_flags = map { if_(/locales-(.*)/, qq(LOCALES"$1")) } $p->requires_nosense;
+
+	my @flags = map {
 	    my $ok = 0;
-            my ($inv, $p);
-	    $flag = join('||', grep { 
-		if (($inv, $p) = /^(!)?HW"(.*)"/) {
+	    my $flag = join('||', grep { 
+		if (my ($inv, $p) = /^(!)?HW"(.*)"/) {
 		    ($inv xor detect_devices::matching_desc__regexp($p)) and $ok = 1;
 		    0;
                 } elsif (($inv, $p) = /^(!)?DRIVER"(.*)"/) {
@@ -574,49 +626,14 @@ sub read_rpmsrate {
 		} else {
 		    1;
 		}
-	    } split '\|\|', $flag);
-	    push @m, $ok ? 'TRUE' : $flag || 'FALSE';
-	    push @l2, [ length $indent, [ @m ] ];
-	    $indent .= $t;
-	}
-	if ($data) {
-	    # has packages on same line
-	    my $rate = find { /^\d$/ } @m or die sprintf qq(missing rate for "%s" at line %d (flags are %s)\n), $data, $line_nb, join('&&', @m);
-	    foreach (split ' ', $data) {
-		if ($packages) {
-		    my $p = packageByName($packages, $_) or next;
-		    my @m2 = map { if_(/locales-(.*)/, qq(LOCALES"$1")) } $p->requires_nosense;
-		    my @m3 = ((grep { !/^\d$/ } @m), @m2);
-		    if (member('INSTALL', @m3)) {
-			member('NOCOPY', @m3) or push @{$packages->{needToCopy} ||= []}, $_;
-			next; #- do not need to put INSTALL flag for a package.
-		    }
-		    if (member('PRINTER', @m3)) {
-			push @{$packages->{needToCopy} ||= []}, $_;
-		    }
-		    if ($p->rate) {
-			my @m4 = $p->rflags;
-			if ((@m3 > 1 || @m4 > 1) && "@m3[1..$#m3]" ne "@m4[1..$#m4]") {
-			    log::l("can not handle complicate flags for packages appearing twice ($_)");
-			    $fatal_error++;
-			}
-			log::l("package $_ appearing twice with different rates ($rate != " . $p->rate . ")") if $rate != $p->rate;
-			$p->set_rate($rate);
-			$p->set_rflags("$m3[0]||$m4[0]");
-		    } else {
-			$p->set_rate($rate);
-			$p->set_rflags(@m3);
-		    }
-		} else {
-		    print "$_ = ", join(" && ", @m), "\n";
-		}
-	    }
-	    push @l, @l2;
-	} else {
-	    push @l, [ $l2[0][0], $l2[-1][1] ];
-	}
+	    } split '\|\|', $_);
+	    $ok ? 'TRUE' : $flag || 'FALSE';
+	} @{$flags->{$_}};
+
+	$p->set_rate($rates->{$_});
+	$p->set_rflags(@flags, @more_flags);
     }
-    $fatal_error and die "$fatal_error fatal errors in rpmsrate";
+    $packages->{needToCopy} = $need_to_copy;
 }
 
 sub readCompssUsers {
