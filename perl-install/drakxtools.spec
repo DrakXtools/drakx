@@ -327,7 +327,7 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
-* Fri Sep 10 2o004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.1-1mdk
+* Fri Sep 10 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.1-1mdk
 - fix console UIs (pixel)
 - drakboot: do not kill the whole bootsplash wizard when embedded (blino)
 - drakconnect: fix cnx status in "internet" interface (blino)
