@@ -31,6 +31,7 @@ wizards - a layer on top of interactive that ensure proper stepping
                              post => sub { },   # code executing when stepping forward;
                                                 # returned value is next step name (it overrides "next" field)
                              end => ,       # is it the last step ?
+                             default => ,       # default answer for yes/no or when data does not conatains any fields
                              no_cancel => , # do not display the cancel button (eg for first step)
                              no_back => ,   # do not display the back button (eg for first step)
                              ignore => ,    # do not stack this step for back stepping (eg for warnings and the like steps)
@@ -153,7 +154,7 @@ sub process {
         }
         my $name = ref($page->{name}) ? $page->{name}->() : $page->{name};
         my %yesno = (yes => N("Yes"), no => N("No"));
-        my $yes;
+        my $yes = $page->{default};
         $data2 = [ { val => \$yes, type => 'list', list => [ values %yesno ], gtk => { use_boxradio => 1 } } ] if $page->{type} eq "yesorno";
         my $a;
         if (ref $data2 eq 'ARRAY' && @$data2) {
@@ -163,7 +164,7 @@ sub process {
                                  if_($page->{interactive_help_id}, interactive_help_id => $page->{interactive_help_id}),
                                }, $data2);
         } else {
-            $a = $in->ask_okcancel($o->{name}, $name);
+            $a = $in->ask_okcancel($o->{name}, $name, $yes);
         }
         # interactive->ask_yesorno does not support stepping forward or backward:
         $a = $yes if $a && $page->{type} eq "yesorno";
