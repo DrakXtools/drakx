@@ -13,7 +13,7 @@ my @devices = detect_devices::probeall(1);
 # Update me each time you handle one more devices class (aka configurator)
 sub unknown {
     grep { $_->{media_type} !~ /BRIDGE|class\|Mouse|DISPLAY|Hub|MEMORY_RAM|MULTIMEDIA_(VIDEO|AUDIO|OTHER)|NETWORK|Printer|SERIAL_(USB|SMBUS)|STORAGE_(IDE|OTHER|SCSI)|tape/
-	       && $_->{driver} !~ /^(ohci1394|scanner|usbvision)$|Mouse:USB|class\|Mouse|Removable:zip|www.linmodems.org|nvnet/
+	       && $_->{driver} !~ /^(ohci1394|scanner|usbvision|mod_quickcam)$|Mouse:USB|class\|Mouse|Removable:zip|www.linmodems.org|nvnet/
 	       && $_->{type} ne 'network'
 	       && $_->{description} !~ /Alcatel|ADSL Modem/
 	   } @devices;
@@ -46,7 +46,7 @@ our @tree =
      [ "TV", , N("Tvcard"), "tv.png", "/usr/bin/XawTV", sub { grep { $_->{media_type} =~ /MULTIMEDIA_VIDEO/ && $_->{bus} eq 'PCI' || $_->{driver} eq 'usbvision' } @devices }, 0 ],     
      [ "MULTIMEDIA_OTHER", , N("Other MultiMedia devices"), "multimedia.png", "", sub { grep { $_->{media_type} =~ /MULTIMEDIA_OTHER/ } @devices }, 0 ],
      [ "AUDIO", , N("Soundcard"), "sound.png", "$sbindir/draksound", sub { grep { $_->{media_type} =~ /MULTIMEDIA_AUDIO/ } @devices }, 0 ],
-     [ "WEBCAM", , N("Webcam"), "webcam.png", "", sub { grep { $_->{media_type} =~ /MULTIMEDIA_VIDEO/ && $_->{bus} ne 'PCI' } @devices }, 0 ],
+     [ "WEBCAM", , N("Webcam"), "webcam.png", "", sub { grep { $_->{media_type} =~ /MULTIMEDIA_VIDEO/ && $_->{bus} ne 'PCI' || $_->{driver} eq 'mod_quickcam' } @devices }, 0 ],
      [ "CPU", , N("Processors"), "cpu.png", "", sub { detect_devices::getCPUs() }, 0 ],
      [ "ETHERNET", , N("Ethernetcard"), "hw_network.png", "$sbindir/drakconnect", sub {
          #- generic NIC detection for USB seems broken (class, subclass, 
