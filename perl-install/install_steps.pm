@@ -242,6 +242,14 @@ sub afterInstallPackages($) {
     #- remove the nasty acon...
     run_program::rooted($o->{prefix}, "chkconfig", "--del", "acon") unless $ENV{LANGUAGE} =~ /ar/;
 
+    #- create /etc/sysconfig/desktop file according to user choice and presence of /usr/bin/kdm or /usr/bin/gdm.
+    my $f = "$o->{prefix}/etc/sysconfig/desktop";
+    if ($o->{compssUsersChoice}{KDE} && -x "$o->{prefix}/usr/bin/kdm") {
+	output($f, "KDE\n");
+    } elsif ($o->{compssUsersChoice}{Gnome} && -x "$o->{prefix}/usr/bin/gdm") {
+	output($f, "GNOME\n");
+    }
+
     if ($o->{pcmcia}) {
 	substInFile { s/.*(TaskBarShowAPMStatus).*/$1=1/ } "$o->{prefix}/usr/lib/X11/icewm/preferences";
 	eval { commands::cp("$o->{prefix}/usr/share/applnk/System/kapm.kdelnk", 

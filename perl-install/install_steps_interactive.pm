@@ -301,9 +301,6 @@ sub chooseGroups {
 	    delete $_->{skip};
 	}
     }
-    my $f = "$o->{prefix}/etc/sysconfig/desktop";
-    output($f, "GNOME\n") if $o->{compssUsersChoice}{Gnome};
-    output($f, "KDE\n") if $o->{compssUsersChoice}{KDE};
 }
 
 #------------------------------------------------------------------------------
