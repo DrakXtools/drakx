@@ -642,10 +642,13 @@ sub install_lilo($$) {
 		print F "\ttable=$_->{table}" if $_->{table};
 		print F "\tunsafe" if $_->{unsafe} && !$_->{table};
 		
-		#- boot off the second drive, so reverse the BIOS maps
-		$_->{mapdrive} ||= { '0x80' => '0x81', '0x81' => '0x80' } 
-		  if $_->{table} && $lilo->{boot} !~ /$_->{table}/;
-
+		if (my ($dev) = $_->{table} =~ m|/dev/(.*)|) {
+		    if ($dev2bios{$dev}) {
+			#- boot off the nth drive, so reverse the BIOS maps
+			my $nb = sprintf("0x%x", 0x80 + $dev2bios{$dev});
+			$_->{mapdrive} ||= { '0x80' => $nb, $nb => '0x80' }; 
+		    }
+		}
 		while (my ($from, $to) = each %{$_->{mapdrive} || {}}) {
 		    print F "\tmap-drive=$from";
 		    print F "\t   to=$to";
