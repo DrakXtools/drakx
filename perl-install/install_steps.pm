@@ -272,18 +272,16 @@ sub choosePackages {
     my $availableCorrected = pkgs::invCorrectSize($available / sqr(1024)) * sqr(1024);
     log::l(sprintf "available size %s (corrected %s)", formatXiB($available), formatXiB($availableCorrected));
 
+    add2hash_($o, { compssListLevel => 5 }) if !$::auto_install;
+
     #- avoid destroying user selection of packages but only
     #- for expert, as they may have done individual selection before.
     if ($first_time || !$::expert) {
 	install_any::unselectMostPackages($o);
 
-	unless ($::expert) {
-	    add2hash_($o, { compssListLevel => 5 }) unless $::auto_install;
-	    exists $o->{compssListLevel}
-	      and pkgs::setSelectedFromCompssList($packages, $o->{compssUsersChoice}, $o->{compssListLevel}, $availableCorrected);
-	}
+	exists $o->{compssListLevel}
+	  and pkgs::setSelectedFromCompssList($packages, $o->{compssUsersChoice}, $o->{compssListLevel}, $availableCorrected);
     }
-
     $availableCorrected;
 }
 
