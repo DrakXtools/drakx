@@ -189,7 +189,8 @@ sub dnsServers {
 
 sub findIntf {
     my ($intf, $device) = @_;
-    $intf->{$device} ||= { DEVICE => $device };
+    $intf->{$device}->{DEVICE} = $device;
+    $intf->{$device};
 }
 #PAD \s* a la fin
 my $ip_regexp = qr/^(\d{1,3})\.(\d{1,3})\.(\d{1,3})\.(\d{1,3})$/;
