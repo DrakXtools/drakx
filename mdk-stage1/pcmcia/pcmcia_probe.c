@@ -1,7 +1,7 @@
 /*
  * Guillaume Cottenceau (gc@mandrakesoft.com)
  *
- * Copyright 2000 MandrakeSoft
+ * Copyright 2000-2001 MandrakeSoft
  *
  * This software may be freely redistributed under the terms of the GNU
  * public license.
@@ -12,13 +12,13 @@
  *
  */
 
-/* Code comes from /anonymous@projects.sourceforge.net:/pub/pcmcia-cs/pcmcia-cs-3.1.23.tar.bz2
+/* Code comes from /anonymous@projects.sourceforge.net:/pub/pcmcia-cs/pcmcia-cs-3.1.28.tar.bz2
  *
  *   Licence of this code follows:
 
     PCMCIA controller probe
 
-    probe.c 1.52 2000/06/12 21:33:02
+    probe.c 1.54 2001/05/10 03:01:59
 
     The contents of this file are subject to the Mozilla Public
     License Version 1.1 (the "License"); you may not use this file
@@ -78,17 +78,21 @@ pci_id_t pci_id[] = {
 	{ 0x104c, 0xac12, "Texas Instruments PCI1130", "TI 1130" },
 	{ 0x104c, 0xac13, "Texas Instruments PCI1031", "TI 1031" },
 	{ 0x104c, 0xac15, "Texas Instruments PCI1131", "TI 1131" },
-	{ 0x104c, 0xac16, "Texas Instruments PCI1250", "TI 1250A" },
+	{ 0x104c, 0xac1a, "Texas Instruments PCI1210", "TI 1210" },
+	{ 0x104c, 0xac1e, "Texas Instruments PCI1211", "TI 1211" },
 	{ 0x104c, 0xac17, "Texas Instruments PCI1220", "TI 1220" },
 	{ 0x104c, 0xac19, "Texas Instruments PCI1221", "TI 1221" },
-	{ 0x104c, 0xac1a, "Texas Instruments PCI1210", "TI 1210" },
+	{ 0x104c, 0xac1c, "Texas Instruments PCI1225", "TI 1225" },
+	{ 0x104c, 0xac16, "Texas Instruments PCI1250", "TI 1250A" },
 	{ 0x104c, 0xac1d, "Texas Instruments PCI1251A", "TI 1251A" },
 	{ 0x104c, 0xac1f, "Texas Instruments PCI1251B", "TI 1251B" },
-	{ 0x104c, 0xac1b, "Texas Instruments PCI1450", "TI 1450" },
-	{ 0x104c, 0xac1c, "Texas Instruments PCI1225", "TI 1225" },
-	{ 0x104c, 0xac1e, "Texas Instruments PCI1211", "TI 1211" },
 	{ 0x104c, 0xac50, "Texas Instruments PCI1410", "TI 1410" },
 	{ 0x104c, 0xac51, "Texas Instruments PCI1420", "TI 1420" },
+	{ 0x104c, 0xac1b, "Texas Instruments PCI1450", "TI 1450" },
+	{ 0x104c, 0xac52, "Texas Instruments PCI1451", "TI 1451" },
+	{ 0x104c, 0xac41, "Texas Instruments PCI4410", "TI 4410" },
+	{ 0x104c, 0xac40, "Texas Instruments PCI4450", "TI 4450" },
+	{ 0x104c, 0xac42, "Texas Instruments PCI4451", "TI 4451" },
 	{ 0x1217, 0x6729, "O2 Micro 6729", "O2Micro OZ6729" },
 	{ 0x1217, 0x673a, "O2 Micro 6730", "O2Micro OZ6730" },
 	{ 0x1217, 0x6832, "O2 Micro 6832/6833", "O2Micro OZ6832/OZ6833" },
