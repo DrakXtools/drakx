@@ -511,27 +511,33 @@ GridHeight=70
     }
 
     #- update oem lilo image if it exists.
-    if (-s "/boot/oem-message-graphic") {
+    if (-s "$o->{prefix}/boot/oem-message-graphic") {
 	rename "$o->{prefix}/boot/message-graphic", "$o->{prefix}/boot/message-graphic.mdkgiorig";
 	rename "$o->{prefix}/boot/oem-message-graphic", "$o->{prefix}/boot/message-graphic";
     }
 
     #- update background image if it exists for common environment.
-    if (-s -s "/usr/share/mdk/oem-background.png") {
-	#- KDE desktop background.
-	if (-e "$o->{prefix}/usr/share/config/kdesktoprc") {
-	    update_gnomekderc("$o->{prefix}/usr/share/config/kdesktoprc", "Desktop0",
-			      MultiWallpaperMode => "NoMulti",
-			      Wallpaper => "/usr/share/mdk/oem-background.png",
-			      WallpaperMode => "Scaled",
-			     );
-	}
-	#- GNOME desktop background.
-	if (-e "$o->{prefix}/etc/gnome/config/Background") {
-	    update_gnomekderc("$o->{prefix}/etc/gnome/config/Background", "Default",
-			      wallpaper => "/usr/share/mdk/oem-background.png",
-			      wallpaperAlign => "3",
-			     );
+    if (-s "$o->{prefix}/usr/share/mdk/oem-background.png") {
+	if (-e "$o->{prefix}/usr/share/mdk/backgrounds/default.png") {
+	    rename "$o->{prefix}/usr/share/mdk/backgrounds/default.png",
+	           "$o->{prefix}/usr/share/mdk/backgrounds/default.png.mdkgiorig";
+	    rename "$o->{prefix}/usr/share/mdk/oem-background.png", "$o->{prefix}/usr/share/mdk/backgrounds/default.png";
+	} else {
+	    #- KDE desktop background.
+	    if (-e "$o->{prefix}/usr/share/config/kdesktoprc") {
+		update_gnomekderc("$o->{prefix}/usr/share/config/kdesktoprc", "Desktop0",
+				  MultiWallpaperMode => "NoMulti",
+				  Wallpaper => "/usr/share/mdk/oem-background.png",
+				  WallpaperMode => "Scaled",
+				 );
+	    }
+	    #- GNOME desktop background.
+	    if (-e "$o->{prefix}/etc/gnome/config/Background") {
+		update_gnomekderc("$o->{prefix}/etc/gnome/config/Background", "Default",
+				  wallpaper => "/usr/share/mdk/oem-background.png",
+				  wallpaperAlign => "3",
+				 );
+	    }
 	}
     }
 
