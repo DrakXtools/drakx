@@ -259,8 +259,8 @@ sub search_windows_font() {
 }
 
 sub is_a_font($) {
-    local ($_) = @_;
-    /\.ttf$/i || /\.pfa$/i || /\.pfb$/i || /\.pcf$/i || /\.pcf\.gz$/i || /\.pfm$/i || /\.gsf$/;
+    my ($file) = @_;
+    any { $file =~ /\Q.$_\E$/i } qw(ttf pfa pfb pcf pcf.gz pfm gsf); 
 }
 
 # Optimisation de cette etape indispensable
