@@ -308,8 +308,8 @@ What do you want to do?"), sub { translate($_[0]{text}) }, \@choices) or return;
 	$card->{server} = 'FBDev';
     }
 
-    #- basic installation, use of XFree 4.1 or XFree 3.3.
-    my ($xf4_ver, $xf3_ver) = ("4.1.0", "3.3.6");
+    #- basic installation, use of XFree 4.2 or XFree 3.3.
+    my ($xf4_ver, $xf3_ver) = ("4.2.0", "3.3.6");
     my $xf3_tc = { text => _("XFree %s", $xf3_ver),
 		   code => sub { $card->{Utah_glx} = $card->{DRI_glx} = $card->{NVIDIA_glx} = ''; $card->{use_xf4} = '';
 				 log::l("Using XFree $xf3_ver") } };
@@ -1438,7 +1438,7 @@ sub XF86check_link {
 sub info {
     my ($o) = @_;
     my $info;
-    my $xf_ver = $o->{card}{use_xf4} ? "4.1.0" : "3.3.6";
+    my $xf_ver = $o->{card}{use_xf4} ? "4.2.0" : "3.3.6";
     my $title = ($o->{card}{DRI_glx} || $o->{card}{NVIDIA_glx} || $o->{Utah_glx} ?
 		 _("XFree %s with 3D hardware acceleration", $xf_ver) : _("XFree %s", $xf_ver));
 
