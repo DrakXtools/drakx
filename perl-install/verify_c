@@ -1,0 +1,14 @@
+#!/usr/bin/perl -n
+
+/^#/ and next;
+/c::(\w+)/ and push @c, [ $1, $ARGV, $. ] ;
+
+eof && close ARGV;
+
+END {
+    $_ = join '', `cat c/c.xs.pm`; 
+    foreach $c (@c) {
+	/$c->[0]/ or $err = print "$c->[1]:$c->[2]: $c->[0] not in c.xs\n";
+    }
+    exit $err;
+}

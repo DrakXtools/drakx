@@ -1,0 +1,15 @@
+#!/usr/bin/perl
+
+use diagnostics;
+use strict;
+
+use lib qw(/usr/bin/perl-install /home/pixel/perl-install . c c/blib/arch);
+use common qw(:file);
+use commands;
+
+my $progname = basename($0);
+
+# hack as some functions are defined by perl... so chmod -> chmod_
+&{$commands::{$progname} || $commands::{$progname . "_"} || \&err}(@ARGV), exit 0;
+
+sub err { die "$0: unknown program (unimplemented)\n"; }

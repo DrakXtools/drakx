@@ -1,0 +1,381 @@
+package commands;
+
+use diagnostics;
+use strict;
+use vars qw($printable_chars);
+
+use common qw(:common :file :system :constant);
+
+my $BUFFER_SIZE = 1024;
+
+1;
+
+
+sub getopts {
+    my $o = shift;
+    my @r = map { '' } (@_ = split //, $_[0]);
+    while (1) {
+	local $_ = $o->[0];
+	$_ && /^-/ or return @r;
+	for (my $i = 0; $i < @_; $i++) { /$_[$i]/ and $r[$i] = $_[$i]; }
+	shift @$o;
+    }
+    @r;
+}
+
+sub cat { @ARGV = @_; print while <> }
+sub which { ARG: foreach (@_) { foreach my $c (split /:/, $ENV{PATH}) { -x "$c/$_" and print("$c/$_\n"), next ARG; }}}
+sub dirname_ { print dirname(@_), "\n" }
+sub basename_ { print basename(@_), "\n" }
+sub rmdir_ { foreach (@_) { rmdir $_ or die "rmdir: can't remove $_\n" } }
+sub lsmod { print "Module                  Size  Used by\n"; cat("/proc/modules"); }
+
+sub grep_ { 
+    my ($h, $v) = getopts(\@_, qw(hv));
+    my $r = shift and !$h or die "usage: grep <regexp> [files...]\n"; 
+    @ARGV = @_; (/$r/ ? $v || print : $v && print) while <> 
+}
+
+sub tr_ { 
+    my ($s, $c, $d) = getopts(\@_, qw(s c d));
+    @_ >= 1 + (!$d || $s) or die "usage: tr [-c] [-s [-d]] <set1> <set2> [files...]\n    or tr [-c] -d <set1> [files...]\n";
+    my $set1 = shift;
+    my $set2; !$d || $s and $set2 = shift;
+    @ARGV = @_;
+    eval "(tr/$set1/$set2/$s$d$c, print) while <>";
+}
+
+sub mount {
+    @_ or return cat("/proc/mounts");
+    my ($t) = getopts(\@_, qw(t));
+    my $fs = $t ? shift : $_[0] =~ /:/ ? "nfs" : "ext2";
+
+    @_ == 2 or die "usage: mount [-t <fs>] <device> <dir>\n",
+    "       (if /dev/ is left off the device name, a temporary node will be created)\n";
+
+    require 'fs.pm';
+    fs::mount(@_, $fs, 0, 1);
+}
+
+sub umount {
+    @_ == 1 or die "umount expects a single argument\n";
+
+    require 'fs.pm';
+    fs::umount($_[0]);
+}
+
+sub mkdir_ { 
+    my $rec; $_[0] eq '-p' and $rec = shift;
+
+    my $mkdir; $mkdir = sub {
+	my $root = dirname $_[0];
+	if (-e $root) {
+	    -d $root or die "mkdir: error creating directory $_[0]: $root is a file and i won't delete it\n";
+	} else {
+	    $rec or die "mkdir: $root does not exist (try option -p)\n";
+	    &$mkdir($root);
+	}
+	mkdir $_[0], 0755 or die "mkdir: error creating directory $_: $!\n";
+    };
+    foreach (@_) { &$mkdir($_); }
+}
+
+
+sub mknod {
+    if (@_ == 1) {
+	require 'devices.pm';
+	eval { devices::make($_[0]) }; $@ and die "mknod: failed to create $_[0]\n";
+    } elsif (@_ == 4) {
+	require 'c.pm';
+	my $mode = $ {{"b" => c::S_IFBLK(), "c" => c::S_IFCHR()}}{$_[1]} or die "unknown node type $_[1]\n";
+	syscall_('mknod', my $a = $_[0], $mode | 0600, makedev($_[2], $_[3])) or die "mknod failed: $!\n";
+    } else { die "usage: mknod <path> [b|c] <major> <minor> or mknod <path>\n"; }
+}
+
+sub ln {
+    my ($force, $soft, $i);
+
+    while ($i = shift) {
+	if ($i eq '-f') { $force = 1; }
+	elsif ($i eq '-s') { $soft = 1; }
+	elsif ($i eq '-fs' || $i eq '-sf') { $force = $soft = 1; }
+	else { last }
+    }
+
+    my $source = $i or die "usage: ln [-s] [-f] <source> [<dest>]\n";
+    my $dest = shift || basename($source);
+
+    $force and unlink $dest;
+
+
+    ($soft ? symlink($source, $dest) : link($source, $dest)) or die "ln failed: $!\n";
+}
+
+sub rm { 
+    my $rec; $_[0] eq '-r' and $rec = shift;
+    
+    my $rm; $rm = sub {
+	foreach (@_) {
+	    if (-d $_) {
+		$rec or die "$_ is a directory\n";
+		&$rm(glob_($_));
+		rmdir $_ or die "can't remove directory $_: $!\n";
+	    } else { unlink $_ or die "rm of $_ failed: $!\n" }
+	}
+    };
+    &$rm(@_);
+}
+
+sub chmod_ { 
+    @_ >= 2 or die "usage: chmod <mode> <files>\n";
+
+    my $mode = shift;
+    $mode =~ /^[0-7]+$/ or die "illegal mode $mode\n";
+
+    foreach (@_) { chmod oct($mode), $_ or die "chmod failed $_: $!\n" }
+}
+
+sub chown_ {
+    my $rec; $_[0] eq '-r' and $rec = shift;
+    local $_ = shift or die "usage: chown [-r] name[.group] <files>\n";
+
+    my ($name, $group) = (split('\.'), $_);
+
+    my ($uid, $gid) = (getpwnam($name) || $name, getgrnam($group) || $group);
+
+    my $chown; $chown = sub {
+	foreach (@_) {
+	    chown $uid, $gid, $_ or die "chown of file $_ failed: $!\n";
+	    -d $_ && $rec and &$chown(glob_($_));
+	}
+    };
+    &$chown(@_);
+}
+
+sub mkswap {
+    @_ == 1 or die "mkswap <device>\n";
+
+    require 'swap.pm';
+    swap::enable($_[0], 0);
+}
+
+sub swapon {
+    @_ == 1 or die "swapon <file>\n";
+
+    require 'swap.pm';
+    swap::swapon($_[0]);
+}
+sub swapoff {
+    @_ == 1 or die "swapoff <file>\n";
+    require 'swap.pm';
+    swap::swapoff($_[0]);
+}
+
+sub uncpio {
+    @_ and die "uncpio reads from stdin\n";
+
+#    cpioInstallArchive(gzdopen(0, "r"), NULL, 0, NULL, NULL, &fail);
+}
+
+
+sub rights {
+    my $r = '-' x 9;
+    my @rights = (qw(x w r x w r x w r), ['t', 0], ['s', 3], ['s', 6]);
+    for (my $i = 0; $i < @rights; $i++) {
+	if (vec(pack("S", $_[0]), $i, 1)) {
+	    my ($val, $place) = $i >= 9 ? @{$rights[$i]} : ($rights[$i], $i);
+	    my $old = \substr($r, 8 - $place, 1);
+	    $$old = ($$old eq '-' && $i >= 9) ? uc $val : $val;
+	}
+    }
+    my @types = split //, "_pc_d_b_-_l_s";
+    $types[$_[0] >> 12 & 0xf] . $r;
+}
+
+sub ls {
+    my ($l , $h) = getopts(\@_, qw(lh));
+    $h and die "usage: ls [-l] <files...>\n";
+
+    @_ or @_ = '.';
+    @_ == 1 && -d $_[0] and @_ = glob_($_[0]);
+    foreach (sort @_) { 
+	if ($l) {
+	    my @s = lstat or warn("can't stat file $_\n"), next;
+	    formline(
+"@<<<<<<<<< @<<<<<<< @<<<<<<< @>>>>>>>> @>>>>>>>>>>>>>>> @*\n",
+		     rights($s[2]), getpwuid $s[4] || $s[4], getgrgid $s[5] || $s[5],
+		     $s[6] ? join ", ", unmakedev($s[6]) : $s[7], 
+		     scalar localtime $s[9], -l $_ ? "$_ -> " . readlink $_ : $_); 
+	    print $^A; $^A = '';
+	} else { print "$_\n"; }
+    }
+}
+
+sub cp {
+    my ($force) = getopts(\@_, qw(f));
+    @_ >= 2 or die "usage: cp [-f] <sources> <dest>\n(this cp does -Rl by default)\n";
+
+    my $cp; $cp = sub {
+	my $dest = pop @_;
+
+	@_ or return;
+	@_ == 1 || -d $dest or die "cp: copying multiple files, but last argument ($dest) is not a directory\n";
+
+	foreach my $src (@_) {
+	    my $dest = $dest;
+	    -d $dest and $dest .= "/" . basename($src);
+
+	    if (-e $dest) {
+		$force ? unlink $dest : die "file $dest already exist\n";
+	    }
+
+	    if (-d $src) {
+		-d $dest or mkdir $dest, mode($src) or die "mkdir: can't create directory $dest: $!\n";
+		&$cp(glob_($src), $dest);
+	    } elsif (-l $src) {
+		symlink((readlink($src) || die "readlink failed: $!"), $dest) or die "symlink: can't create symlink $dest: $!\n";
+	    } else {
+		local (*F, *G);
+		open F, $src or die "can't open $src for reading: $!\n";
+		open G, "> $dest" or $force or die "can't create $dest : $!\n";
+		foreach (<F>) { print G $_ }
+		chmod mode($src), $dest;
+	    }
+	}
+    };
+    &$cp(@_);
+}
+
+sub ps {
+    @_ and die "usage: ps\n";
+    my ($pid, $cmd);
+
+    local (*STDOUT_TOP, *STDOUT);
+    format STDOUT_TOP =
+  PID   CMD
+.
+    format =
+@>>>>  @<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+$pid, $cmd
+.
+
+    foreach $pid (sort {$a <=> $b} grep { /\d+/ } all('/proc')) {
+	(($cmd) = cat_("/proc/$pid/cmdline")) =~ s/\0/ /g;
+	$cmd ||= (split ' ', (cat_("/proc/$pid/stat"))[0])[1];
+	write STDOUT
+    }
+}
+
+
+sub dd {
+    my $u = "usage: dd [-h] [if=<file>] [of=<file>] [bs=<number>] [count=<number>]\n";
+    (getopts(\@_, qw(h)))[0] and die $u;
+    my %h = (if => \*STDIN, of => \*STDOUT, bs => 512, count => undef);
+    foreach (@_) {
+	/(.*?)=(.*)/ && exists $h{$1} or die $u;
+	$h{$1} = $2;
+    }
+    local (*IF, *OF); my ($tmp, $nb, $read);
+    ref $h{if} eq 'GLOB' ? *IF = $h{if} : sysopen(IF, $h{if}, 0   ) || die "error: can't open file $h{if}\n";
+    ref $h{of} eq 'GLOB' ? *OF = $h{of} : sysopen(OF, $h{of}, 0x41) || die "error: can't open file $h{of}\n";
+
+    $h{bs} =~ /(\d+)k$/ and $h{bs} = $1 * 1024;
+    $h{bs} =~ /(\d+)M$/ and $h{bs} = $1 * 1024 * 1024;
+    $h{bs} =~ /(\d+)G$/ and $h{bs} = $1 * 1024 * 1024 * 1024;
+
+    for ($nb = 0; !$h{count} || $nb < $h{count}; $nb++) {
+	$read = sysread(IF, $tmp, $h{bs}) or $h{count} ? die "error: can't read block $nb\n" : last;
+	syswrite(OF, $tmp) or die "error: can't write block $nb\n";
+	$read < $h{bs} and $read = 1, last;
+    }
+    print STDERR "$nb+$read records in\n";
+    print STDERR "$nb+$read records out\n";
+}
+
+sub head_tail {
+    my ($h, $n) = getopts(\@_, qw(hn));
+    $h || @_ > 1 + bool($n) and die "usage: $0 [-h] [-n lines] [<file>]\n";
+    $n = $n ? shift : 10;
+    local *F; @_ ? open(F, $_[0]) || die "error: can't open file $_[0]\n" : (*F = \*STDIN);
+
+    if ($0 eq 'head') {
+	foreach (<F>) { $n-- or return; print }
+    } else {
+	@_ = (); foreach (<F>) { push @_, $_; @_ > $n and shift; }
+	print @_;
+    }
+}
+sub head { $0 = 'head'; &head_tail }
+sub tail { $0 = 'tail'; &head_tail }
+
+sub strings {
+    my ($h, $o, $n) = getopts(\@_, qw(hon));
+    $h and die "usage: strings [-o] [-n min-length] [<files>]\n";
+    $n = $n ? shift : 4;
+    $/ = "\0"; @ARGV = @_; my $l = 0; while (<>) {
+	while (/[$printable_chars]\{$n,}/og) {
+	    printf "%07d ", ($l + length $') if $o;
+	    print "$&\n" ;
+	}
+	$l += length;
+    } continue { $l = 0 if eof }
+}
+
+sub hexdump {
+    my $i = 0; $/ = \16; @ARGV = @_; while (<>) {
+	printf "%08lX  ", $i; $i += 16;
+	print join(" ", map({ sprintf "%02X", $_ } unpack("C*", $_)), 
+		   ($_ =~ s/[^$printable_chars]/./og, $_)[1]), "\n"; 
+    }
+}
+
+sub more { 
+    @ARGV = @_;
+    require 'devices.pm';
+    my $tty = devices::make('tty');
+    local *IN; open IN, "<$tty" or die "can't open $tty\n"; 
+    my $n = 0; while (<>) { 
+	++$n == 25 and $n = <IN>, $n = 0; 
+	print 
+    } 
+}
+
+sub pack_ {
+    my $t;
+    foreach (@_) {
+	if (-d $_) {
+	    pack_(glob_($_));
+	} else {
+	    print -s $_, "\n";
+	    print $_, "\n";
+
+	    local *F;
+	    open F, $_ or die "can't read file $_: $!\n";
+	    while (read F, $t, $BUFFER_SIZE) { print $t; }    
+	}
+    }
+}
+
+sub unpack_ {
+    my $t;
+    @_ == 1 or die "give me one and only one file to unpack\n";
+    local *F;
+    open F, $_[0] or die "can't open file $_: $!\n";
+    while (1) {
+	my ($size) = chop_(scalar <F>);
+	defined $size or last;
+	$size =~ /^\d+$/ or die "bad format (can't find file size)\n";
+	my ($filename) = chop_(scalar <F>) or die "expecting filename\n";
+
+	print "$filename\n";
+	my $dir = dirname($filename);
+	-d $dir or mkdir_('-p', $dir);
+	
+	local *G;
+	open G, "> $filename" or die "can't write file $filename: $!\n";
+	while ($size) {
+	    $size -= read(F, $t, min($size, $BUFFER_SIZE)) || die "data for file $filename is missing\n";
+	    print G $t or die "error writing to file $filename: $!\n";
+	}
+    }
+}

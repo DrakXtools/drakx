@@ -1,0 +1,39 @@
+binding "bind"
+{
+  bind "m" {
+     "clicked" ("Mount")
+  }
+}
+
+style "font"
+{
+  font = "-adobe-helvetica-medium-r-normal--*-80-*-*-*-*-*-*"
+}
+
+
+
+style "red" = "font"
+{
+  bg[NORMAL] = { 1.0, 0, 0 }
+  bg[PRELIGHT] = { 0.9, 0, 0 }
+}
+style "green" = "font"
+{
+  bg[NORMAL] = { 0, 1.0, 0 }
+  bg[PRELIGHT] = { 0, 0.9, 0 }
+}
+style "blue" = "font"
+{
+  bg[NORMAL] = { 0, 0, 1.0 }
+  bg[PRELIGHT] = { 0, 0, 0.9 }
+}
+style "white" = "font"
+{
+  bg[NORMAL] = { 1.0, 1.0, 1.0 }
+}
+
+widget "*PART_*" binding "bind"
+widget "*Linux*" style "red" 
+widget "*Linux swap" style "green"
+widget "*DOS*" style "blue"
+widget "*Empty*" style "white"
