@@ -88,7 +88,7 @@ sub install2::startMove {
     install_steps::addUser($o);
 
     #- need be done early because it provide some libs such as libssl which is needed for automatic printer config
-    lomount_clp('totem') if ! -x '/usr/bin/totem';
+    lomount_clp('totem') if ! -x '/usr/bin/totem' && cat_('/proc/cmdline') !~ /\blive\b/;
 
     #- automatic printer, timezone, network configs
     require install_steps_interactive;
