@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10
-Release: 0.3mdk
+Release: 0.4mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -316,6 +316,34 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Fri Feb  6 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10-0.4mdk
+- print --help on stdout rather than stderr (gc according to gnu std) 
+- diskdrake: (pixel)
+  o fix lvm support when devfs is not mounted
+  o fix lvm extent sizing (fix illegal division by 0)
+  o fix getting the output of pvs vgs lvs commands
+  o fix get_lvs() (and use lvs instead of vgdisplay)
+  o don't display start sector and cylinders used for LVs
+  o display "Number of logical extents" of LVs
+- drakbackup: provide more detailed info on files backed
+  up/ignored. (Anthill #306) (stew)
+- drakboot: write fstab for /tmp using tmpfs when "clean /tmp" is
+  chosen (pixel)
+- drakboot, drakconnect: fix some layouts
+- drakconnect wizard:
+  o fix pcmcia card config (#7401, #7431)
+  o fix wireless settings (#7432, faillure to set parameters)
+  o split wireless step into two steps since there way too much
+    options
+- draktermserv: fix user list in mdkkdm (stew)
+- harddrake: fix module parameters with kernel-2.6.x
+- keyboardrake, localedrake: fix some locales (pablo)
+- mousedrake: use protocol "ExplorerPS/2" instead of "auto" for kernel
+  2.6 (pixel)
+- XFdrake: (pixel)
+  o do not test X config under vmware (#5346)
+  o allow 24bpp for DRI (since all drivers now support it)
+
 * Mon Feb  2 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10-0.3mdk
 - drakconnect wizard:
   o support more wireless cards
