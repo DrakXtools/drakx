@@ -621,8 +621,8 @@ sub kdeicons_postinstall($) {
 	    template2userfile($prefix, "/usr/share/floppy.kdelnk.in", "Desktop/Floppy". ($1 && " $1") .".kdelnk",
 			      1, %toreplace);
 	} elsif (m|^/dev/(\S+)\s+(/mnt/DOS_\S*)\s+|) {
-	    my %toreplace = ( device => $1, id => $2, mntpoint => $2 );
-	    template2userfile($prefix, "/usr/share/Dos_.kdelnk.in", "Desktop/Dos_$2.kdelnk", 1, %toreplace);
+	    my %toreplace = ( device => $1, id => $1, mntpoint => $2 );
+	    template2userfile($prefix, "/usr/share/Dos_.kdelnk.in", "Desktop/Dos_$1.kdelnk", 1, %toreplace);
 	} elsif (m|^/dev/(\S+)\s+(\S*)\s+vfat\s+|) {
 	    my %toreplace = ( device => $1, id => $1, mntpoint => $2 );
 	    template2userfile($prefix, "/usr/share/Dos_.kdelnk.in", "Desktop/Dos_$1.kdelnk", 1, %toreplace);
