@@ -407,7 +407,7 @@ sub multi_head_choices {
 }
 
 #- XFree version available, it would be better to parse available package and get version from it.
-sub xfree4_version { '4.2.99' }
+sub xfree4_version { '4.3' }
 sub xfree3_version { '3.3.6' }
 
 sub xfree_and_glx_choices {
