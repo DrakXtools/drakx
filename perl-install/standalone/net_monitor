@@ -311,7 +311,7 @@ sub rescan() {
 	$monitor->{sta} = 0;
 	$monitor->{nba} = 0;
     }
-    $label_cnx_type->set_label($netcnx->{type});
+    $label_cnx_type->set_label(translate($netcnx->{type}));
     $monitor->{$_} = 0 foreach 'sr', 'st';
     1;
 }
@@ -464,7 +464,7 @@ sub update() {
 		$statusbar->pop(1);
 		$statusbar->push(1, $isconnected == 1 ? N("Connected") : N("Not connected"));
 	    }
-            $button_connect->set("label", $isconnected == 1 ? N("Disconnect %s", $netcnx->{type}) : N("Connect %s", $netcnx->{type}));
+            $button_connect->set("label", $isconnected == 1 ? N("Disconnect %s", translate($netcnx->{type})) : N("Connect %s", $netcnx->{type}));
 	    $button_connect->set_sensitive($default_intf || scalar(@interfaces));
 	}
     if (!(-e $network::tools::connect_file && -e $network::tools::disconnect_file)) {
