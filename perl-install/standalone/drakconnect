@@ -667,7 +667,7 @@ sub add_intf() {
 }
 
 sub del_intf() {
-    my ($intf2delete, $faillure);
+    my ($intf2delete, $failure);
     if (!keys %$intf) {
       $in->ask_warn(N("Error"), N("No ethernet network adapter has been detected on your system. Please run the hardware configuration tool."));
       $in->exit(0);
@@ -706,14 +706,14 @@ sub del_intf() {
                                          eval { rm_rf("/etc/sysconfig/network-scripts/ifcfg-$intf2delete") };
                                      }
                                  };
-                                 $faillure = $@;
+                                 $failure = $@;
                                  return "end";
                              },
                             },
                  end => {
                          name => sub {
-                             $faillure ?
-                               N("An error occurred while deleting the \"%s\" network interface:\n\n%s", $intf2delete, $faillure)
+                             $failure ?
+                               N("An error occurred while deleting the \"%s\" network interface:\n\n%s", $intf2delete, $failure)
                              : N("Congratulations, the \"%s\" network interface has been successfully deleted", $intf2delete);
                          },
                          end => 1,
