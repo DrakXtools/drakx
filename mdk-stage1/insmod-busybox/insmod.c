@@ -1450,7 +1450,7 @@ static int old_get_kernel_symbols(const char *m_name)
 
 	nks = get_kernel_syms(NULL);
 	if (nks < 0) {
-		errorMsg("get_kernel_syms: %s: %s", m_name, strerror(errno));
+		errorMsg("get_kernel_syms: %s: %s\n", m_name, strerror(errno));
 		return 0;
 	}
 
@@ -1631,7 +1631,7 @@ old_init_module(const char *m_name, struct obj_file *f,
 							  m_size | (flag_autoclean ? OLD_MOD_AUTOCLEAN
 										: 0), &routines, symtab);
 	if (ret)
-		errorMsg("init_module: %s: %s", m_name, strerror(errno));
+		errorMsg("init_module: %s: %s\n", m_name, strerror(errno));
 
 	free(image);
 	free(symtab);
@@ -1943,7 +1943,7 @@ static int new_get_kernel_symbols(void)
 			module_names = xrealloc(module_names, bufsize = ret);
 			goto retry_modules_load;
 		}
-		errorMsg("QM_MODULES: %s", strerror(errno));
+		errorMsg("QM_MODULES: %s\n", strerror(errno));
 		return 0;
 	}
 
@@ -1962,7 +1962,7 @@ static int new_get_kernel_symbols(void)
 				/* The module was removed out from underneath us.  */
 				continue;
 			}
-			errorMsg("query_module: QM_INFO: %s: %s", mn, strerror(errno));
+			errorMsg("query_module: QM_INFO: %s: %s\n", mn, strerror(errno));
 			return 0;
 		}
 
@@ -1977,7 +1977,7 @@ static int new_get_kernel_symbols(void)
 				/* The module was removed out from underneath us.  */
 				continue;
 			default:
-				errorMsg("query_module: QM_SYMBOLS: %s: %s", mn, strerror(errno));
+				errorMsg("query_module: QM_SYMBOLS: %s: %s\n", mn, strerror(errno));
 				return 0;
 			}
 		}
@@ -2002,7 +2002,7 @@ static int new_get_kernel_symbols(void)
 			syms = xrealloc(syms, bufsize = ret);
 			goto retry_kern_sym_load;
 		}
-		errorMsg("kernel: QM_SYMBOLS: %s", strerror(errno));
+		errorMsg("kernel: QM_SYMBOLS: %s\n", strerror(errno));
 		return 0;
 	}
 	nksyms = nsyms = ret;
@@ -2183,7 +2183,7 @@ new_init_module(const char *m_name, struct obj_file *f,
 
 	ret = new_sys_init_module(m_name, (struct new_module *) image);
 	if (ret)
-		errorMsg("init_module: %s: %s", m_name, strerror(errno));
+		errorMsg("init_module: %s: %s\n", m_name, strerror(errno));
 
 	free(image);
 
@@ -2563,7 +2563,7 @@ struct obj_file *obj_load(FILE * fp)
 
 	fseek(fp, 0, SEEK_SET);
 	if (fread(&f->header, sizeof(f->header), 1, fp) != 1) {
-		errorMsg("error reading ELF header: %s", strerror(errno));
+		errorMsg("error reading ELF header: %s\n", strerror(errno));
 		return NULL;
 	}
 
@@ -2602,7 +2602,7 @@ struct obj_file *obj_load(FILE * fp)
 	section_headers = alloca(sizeof(ElfW(Shdr)) * shnum);
 	fseek(fp, f->header.e_shoff, SEEK_SET);
 	if (fread(section_headers, sizeof(ElfW(Shdr)), shnum, fp) != shnum) {
-		errorMsg("error reading ELF section headers: %s", strerror(errno));
+		errorMsg("error reading ELF section headers: %s\n", strerror(errno));
 		return NULL;
 	}
 
@@ -2632,7 +2632,7 @@ struct obj_file *obj_load(FILE * fp)
 				sec->contents = xmalloc(sec->header.sh_size);
 				fseek(fp, sec->header.sh_offset, SEEK_SET);
 				if (fread(sec->contents, sec->header.sh_size, 1, fp) != 1) {
-					errorMsg("error reading ELF section data: %s", strerror(errno));
+					errorMsg("error reading ELF section data: %s\n", strerror(errno));
 					return NULL;
 				}
 			} else {
@@ -2960,7 +2960,7 @@ extern int insmod_main( int argc, char **argv)
 				m_size);
 		goto out;
 	default:
-		errorMsg("create_module: %s: %s", m_name, strerror(errno));
+		errorMsg("create_module: %s: %s\n", m_name, strerror(errno));
 		goto out;
 	}
 
