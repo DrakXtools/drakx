@@ -258,6 +258,8 @@ environnement to avoid hostname changing problem."));
 
   step_5:
 
+    network::configureNetwork2($in, $prefix, $netc, $intf);
+
     if ($netcnx->{type} =~ /modem/ || $netcnx->{type} =~ /isdn_external/) {
 	output "$prefix$connect_prog",
 	  qq(
