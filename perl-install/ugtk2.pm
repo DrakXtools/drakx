@@ -295,7 +295,11 @@ sub create_scrolled_window {
     $viewport_shadow and gtkset_shadow_type($w->child, $viewport_shadow);
     $W->can('set_focus_vadjustment') and $W->set_focus_vadjustment($w->get_vadjustment);
     $W->show;
-    $w
+    if (ref($W) eq 'Gtk2::TextView') {
+    	gtkadd(gtkset_shadow_type(Gtk2::Frame->new, 'in'), $w)
+    } else {
+	$w
+    }
 }
 
 sub n_line_size {
@@ -321,6 +325,7 @@ sub create_box_with_title {
 	my $has_scroll = $o->{box_size} < $wanted;
 
 	my $wtext = Gtk2::TextView->new;
+	$wtext->set_left_margin(3);
 	$wtext->can_focus($has_scroll);
 	chomp(my $text = join("\n", @_));
 	my $scroll = create_scrolled_window(gtktext_insert($wtext, $text));
