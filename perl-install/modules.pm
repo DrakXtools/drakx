@@ -579,7 +579,7 @@ sub get_pcmcia_devices($$) {
 sub load_ide {
     eval {
 	load("ide-mod", 'prereq', 'options="' . detect_devices::hasUltra66() . '"');
-	delete $conf{$name}{options};
+	delete $conf{"ide-mod"}{options};
 	load_multi(qw(ide-probe ide-disk ide-cd));
     }
 }
