@@ -1,3 +1,157 @@
+2004/02/12  David Baudens  <baudens at mandrakesoft.com>
+
+	* share/advertising/ppp-07.pl, share/advertising/dis-11.pl,
+	share/advertising/dis-10.pl, share/advertising/ppp-11.pl,
+	share/advertising/ppp-10.pl, share/advertising/dis-05.pl,
+	share/advertising/ppp-09.pl, share/advertising/ppp-04.pl,
+	share/advertising/pwp-04.pl, share/advertising/pwp-10.pl,
+	share/advertising/dis-07.pl, share/advertising/pwp-08.pl,
+	share/advertising/dis-04.pl, share/advertising/pwp-09.pl: Final versions
+	for MDK 10.0
+
+2004/02/12  Pixel  <pixel at mandrakesoft.com>
+
+	* Makefile: add rule dont_run_directly_stage2
+
+	* install2.pm: replace unless with if
+
+	* mouse.pm: more cleanup
+	new 'Universal|Any PS/2 & USB mice' mouse name usable with kernel 2.6
+	rename mouseconfig() with detect_serial() which is what it really does!
+	create probe_wacom_devices() and cleanup
+	cleanup
+	cleanup
+	remove deprecated comment
+	always use fast_mouse_probe (probing serial is now mostly deprecated,
+	and it
+	is *re-done* by drakconnect, so no need to do it soon)
+	cleanup wacom detection
+
+	* devices.pm: add input/mice
+
+2004/02/12  Stew Benedict  <sbenedict at mandrakesoft.com>
+
+	* standalone/drakTermServ: Restore title banner.
+
+	* standalone/drakbackup: Address some QA issues with restores.
+	Cleanup screen layout in restore screen.
+	Restore title banner.
+
+2004/02/12  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* network/netconnect.pm: sort ADSL protocols according to locale
+	fix adsk over ethernet through dhcp protocol
+	simplify adsl protocol choosing through format callback
+
+	* drakxtools.spec: 10-0.11mdk
+
+	* harddrake/data.pm: detect more webcams
+
+2004/02/11  Florin Grad  <florin at mandrakesoft.com>
+
+	* standalone/icons/wiz_drakvpn.png: first shy attempt
+
+	* network/ipsec.pm: fix the perl_checker errors
+	remove debugging print commands
+	first shy attempt
+
+	* standalone/drakvpn: typo errors
+	fix the perl_checker errors
+	remote debugging print commands
+	first shy attempt
+
+2004/02/11  fwang
+
+	* share/po/zh_CN.po: Updated Simplified Chinese translation
+
+2004/02/11  Guillaume Cottenceau  <gc at mandrakesoft.com>
+
+	* mdk-stage1/probing.c: be sure to load usb-storage after SCSI adapters,
+	so that they are in
+	same order than reboot, so that naming is the same
+	don't insmod usb-storage the soonest, we can end up mixing scsi devices
+	orders at reboot time, do it only when needed
+
+2004/02/11  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/et.po: updated Estonian file
+
+	* share/po/cy.po: updated Welsh file
+
+2004/02/11  Pixel  <pixel at mandrakesoft.com>
+
+	* tools/hd_grub.cgi: adding hdd .. hdh
+	initial version
+
+2004/02/11  Stew Benedict  <sbenedict at mandrakesoft.com>
+
+	* standalone/drakTermServ: Rearrange main buttons (jmdault -
+	http://advx.org/docs/ice3.png)
+	Disable title banner for now (Bugzilla 7564).
+	Don't assume eth0, rework subnet/netmask for hosts.allow (jmdault).
+
+	* standalone/drakbackup: Disable title banner for now (same as Bugzilla
+	7564, just not reported yet).
+
+2004/02/11  tpittich
+
+	* share/po/sk.po: updated slovak translation
+
+2004/02/11  Warly  <warly at mandrakesoft.com>
+
+	* share/rpmsrate: Add smb4k to replace LinNeighborhood (Buchan Milnes
+	suggestion), decrease LinNeighborhood to 3.
+	raise mc from 3 to 4 in FILE_TOOLS
+
+2004/02/10  Damien Chaumette  <dchaumette at mandrakesoft.com>
+
+	* standalone/drakconnect: 
+	  - isdn and modem are fetched from $intf
+	  - drop useless @all_cards
+	  - 'ath' and 'wlan' cards fix
+
+2004/02/10  Fabian Mandelbaum  <fabman at 2vias.com.ar>
+
+	* share/po/es.po: Updated Spanish translations
+
+2004/02/10  fwang
+
+	* share/po/zh_CN.po: Updated Simplified Chinese translation
+
+2004/02/10  Guillaume Cottenceau  <gc at mandrakesoft.com>
+
+	* mdk-stage1/probing.c: fake usb floppies detection by looking at blocks
+	size of scsi disk devices, 1048575 is for 2.4 and 1440 for 2.6
+
+	* mdk-stage1/mount.c: in network mode we need to create nodes as well
+	because of usb floppies support
+
+	* mdk-stage1/tools.c, mdk-stage1/tools.h: floppy_device returns first
+	floppy device, look for medias first in case of usb floppies (maybe ide
+	floppies also? never tested) then regular floppy drive
+
+	* mdk-stage1/stage1.c, mdk-stage1/modules.c: use floppy_device rather than
+	/dev/fd0 because we now support usb floppies as well
+
+2004/02/10  Pixel  <pixel at mandrakesoft.com>
+
+	* share/keymaps.tar.bz2: update
+
+	* tools/serial_probe/serial.c: fix serial probe not detecting legacy mice
+
+	* install_steps.pm, detect_devices.pm, any.pm: no need to fake scsi for
+	ide anymore (hopefully!)
+
+2004/02/10  tsdgeos
+
+	* share/po/ca.po: Updates, unfuzzying and spell checking
+
+2004/02/10  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* security/msec.pm (apply_checks) reindent
+	(apply_checks) fix unable to save checks when config file is empty
+	(aka substInFile does not support using print in that case)
+
 2004/02/10  David Baudens  <baudens at mandrakesoft.com>
 
 	* share/advertising/pwp-05.pl, share/advertising/dis-11.pl,
@@ -25732,7 +25886,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.867 2004/02/10 11:19:28 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.868 2004/02/10 17:12:15 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
