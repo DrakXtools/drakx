@@ -246,7 +246,7 @@ sub winmodemConfigure {
     my %relocations = (ltmodem => $in->do_pkgs->check_kernel_module_packages('ltmodem'));
     my $type;
     
-    $netc->{autodetect}{winmodem} or ($in->ask_warn(N("Warning"), N("You don't have any winmodem")) ? return 0 : $in->exit(0));
+    $netc->{autodetect}{winmodem} or ($in->ask_warn(N("Warning"), N("You don't have any winmodem")) ? return 1 : $in->exit(0));
 
     foreach (keys %{$netc->{autodetect}{winmodem}}) {
 	/Hcf/ and $type = "hcfpcimodem";
@@ -256,7 +256,7 @@ sub winmodemConfigure {
     }
 
     $type or ($in->ask_warn(N("Warning"), N("Your modem isn't supported by the system.
-Take a look at http://www.linmodems.org")) ? return 0 : $in->exit(0));
+Take a look at http://www.linmodems.org")) ? return 1 : $in->exit(0));
     my $e = $in->ask_from_list(N("Title"), N("\"%s\" based winmodem detected, do you want to install needed software ?", $type), [N("Install rpm"), N("Do nothing")]) or return 0;
     if ($e =~ /rpm/) {
 	if ($in->do_pkgs->install($relocations{$type} ? @{$relocations{$type}} : $type)) {
