@@ -149,7 +149,6 @@ sub switch {
     my ($in, $device) = @_;
     my $driver = $device->{driver};
     my $alternative = get_alternative($driver);
-#    $alternative = [ "i810_audio", "snd-intel8x0"];
     if ($alternative) {
 	   my $new_driver = $alternative->[0];
 	   if ($driver eq "unknown") {
