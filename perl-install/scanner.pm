@@ -257,10 +257,13 @@ sub detect {
     my @res;
     # Run "sane-find-scanner", this also detects USB scanners which only
     # work with libusb.
+
+    my @devices = detect_devices::probeall();
+
     local *DETECT;
     open DETECT, "LC_ALL=C sane-find-scanner -q |";
     while (my $line = <DETECT>) {
-	my ($vendorid, $productid, $make, $model, $description, $port);
+	my ($vendorid, $productid, $make, $model, $description, $port, $driver);
 	if ($line =~ /^\s*found\s+USB\s+scanner/i) {
 	    # Found an USB scanner
 	    if ($line =~ /vendor=(0x[0-9a-f]+)[^0-9a-f\[]+[^\[]*\[([^\[\]]+)\].*prod(|uct)=(0x[0-9a-f]+)[^0-9a-f\[]+[^\[]*\[([^\[\]]+)\]/) {
@@ -276,6 +279,16 @@ sub detect {
 		$productid = $3;
 	    }
 	    if ($vendorid && $productid) {
+		my ($vendor) = ($vendorid =~ /0x([0-9a-f]+)/);
+		my ($id) = ($productid =~ /0x([0-9a-f]+)/);
+		my ($device) = grep { sprintf("%04x", $_->{vendor}) eq $vendor && sprintf("%04x", $_->{id}) eq $id } @devices;
+
+		if ($device) {
+              $driver = $device->{driver}
+		} else {
+              warn "i failled to lookupp $vendorid && $productid";
+		}
+                 
 		# We have vendor and product ID, look up the scanner in
 		# the usbtable
 		foreach my $entry (cat_("$scannerDBdir/usbtable")) {
@@ -336,6 +349,7 @@ sub detect {
 		DESCRIPTION => $description,
 		id => $productid,
 		vendor => $vendorid,
+		driver => $driver,
 	    } 
 	};
     }
@@ -358,7 +372,8 @@ sub detect {
 	}
 	@res = grep { ! $_->{configured} } @res;
     }
-    return @res;
+    # blacklist device that have a driver b/c of buggy sane-find-scanner:
+    return grep { member($_->{driver}, qw(scanner unknown)) } @res;
 }
 
 sub resolve_symlinks {
