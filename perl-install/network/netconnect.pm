@@ -92,6 +92,10 @@ sub detect_timezone() {
                            N("Secondary") => "Secondary",
                            N("Auto") => "Auto",
                           );
+      my %l10n_lan_protocols = (
+                               static => N("Manual configuration"),
+                               dhcp   => N("Automatic IP (BOOTP/DHCP/Zeroconf)"),
+                              );
 
 
       init_globals($in, $::prefix);
@@ -507,7 +511,7 @@ killall pppd
                    },
          
          
-                   lan_standalone => 
+                   lan => 
                    {
                     pre => sub {
                         detect($netc->{autodetect}, 'lan') if !$::isInstall;
@@ -524,28 +528,54 @@ killall pppd
                     post => sub {
                         delete $ethntf->{$_} foreach keys %$ethntf;
                         add2hash($ethntf, $intf->{$ntf_name});
-                        return 'lan';
+                        $net_device = $netc->{NET_DEVICE};
+                        if ($::isInstall && $net_device eq $ethntf->{DEVICE}) {
+                            return 'lan_alrd_cfg';
+                        } else {
+                            return 'lan_protocol';
+                        }
+                    },
+                   },
+
+                   lan_alrd_cfg =>
+                   {
+                    name => N("WARNING: this device has been previously configured to connect to the Internet.
+Simply accept to keep this device configured.
+Modifying the fields below will override this configuration."),
+                    type => "yesorno",
+                    post => sub {
+                        my ($res) = @_;
+                        die 'wizcancel' if !$res;
+                        return "lan_protocol";
+                    }
+                   },
+
+                   lan_protocol =>
+                   {
+                    pre => sub  {
+                        $module ||= (find { $_->[0] eq $ethntf->{DEVICE} } @all_cards)->[1];
+                        $auto_ip = $l10n_lan_protocols{defined $auto_ip ? ($auto_ip ? 'dhcp' : 'static') :$ethntf->{BOOTPROTO}} || 0;
+                    },
+                    name => sub { 
+                        N("Configuring network device %s (driver %s)", $ethntf->{DEVICE}, $module) . "\n\n" .
+                          N("The following protocols can be used to configure an ethernet connection. Please choose the one you want to use")
+                    },
+                    data => sub {
+                        [ { val => \$auto_ip, type => "list", list => [ values %l10n_lan_protocols ] } ];
+                    },
+                    post => sub {
+                        $auto_ip = $auto_ip eq N("Automatic IP (BOOTP/DHCP/Zeroconf)") || 0;
+                        return 'lan_intf';
                     },
                    },
                    
 
                    # FIXME: is_install: no return for each card "last step" because of manual popping
                    # better construct an hash of { current_netintf => next_step } which next_step = last_card ? next_eth_step : next_card ?
-                   lan => 
+                   lan_intf => 
                    {
                     pre => sub  {
-                        # FIXME: set $module
                         $net_device = $netc->{NET_DEVICE};
-                        if ($net_device eq $ethntf->{DEVICE}) {
-                            $text = N("WARNING: this device has been previously configured to connect to the Internet.
-Simply accept to keep this device configured.
-Modifying the fields below will override this configuration.");
-                        } else {
-                            $text = N("Please enter the IP configuration for this machine.
-Each item should be entered as an IP address in dotted-decimal
-notation (for example, 1.2.3.4).");
-                        }
-                        $auto_ip = $ethntf->{BOOTPROTO} !~ /static/;
                         $onboot = $ethntf->{ONBOOT} ? $ethntf->{ONBOOT} =~ /yes/ : bool2yesno(!member($ethntf->{DEVICE}, 
                                                                                                       map { $_->{device} } detect_devices::pcmcia_probe()));
                         $needhostname = $ethntf->{NEEDHOSTNAME} !~ /no/; 
@@ -555,16 +585,26 @@ notation (for example, 1.2.3.4).");
                         delete $ethntf->{BROADCAST};
                         @fields = qw(IPADDR NETMASK);
                     },
-                    name => sub { N("Configuring network device %s", $ethntf->{DEVICE}) . ($module ? N(" (driver %s)", $module) : '') . "\n\n" . $text },
+                    name => sub { join('', 
+                                       N("Configuring network device %s (driver %s)", $ethntf->{DEVICE}, $module),
+                                       if_(!$auto_ip, "\n\n" . N("Please enter the IP configuration for this machine.
+Each item should be entered as an IP address in dotted-decimal
+notation (for example, 1.2.3.4).")),
+                                      )  },
                     data => sub {
-                        [ { label => N("Automatic IP"), val => \$auto_ip, type => "bool", text => N("(bootp/dhcp/zeroconf)") },
-                          { label => N("IP address"), val => \$ethntf->{IPADDR}, disabled => sub { $auto_ip } },
-                          { label => N("Netmask"), val => \$ethntf->{NETMASK}, disabled => sub { $auto_ip } },
-                          { label => N("DHCP host name"), val => \$ethntf->{DHCP_HOSTNAME}, disabled => sub { ! ($auto_ip && $needhostname) }, advanced => 1 },
-                          { text => N("Track network card id (useful for laptops)"), val => \$track_network_id, type => "bool", advanced => 1 },
-                          { text => N("Network Hotplugging"), val => \$hotplug, type => "bool", advanced => 1 },
-                          { text => N("Assign host name from DHCP address"), val => \$needhostname, type => "bool", disabled => sub { ! $auto_ip }, advanced => 1 },
-                          { text => N("Start at boot"), val => \$onboot, type => "bool", advanced => 1 },
+                        [ $auto_ip ? 
+                          (
+                           { text => N("Assign host name from DHCP address"), val => \$needhostname, type => "bool", disabled => sub { ! $auto_ip } },
+                           { label => N("DHCP host name"), val => \$ethntf->{DHCP_HOSTNAME}, disabled => sub { ! ($auto_ip && $needhostname) } },
+                          )
+                          :
+                          (
+                           { label => N("IP address"), val => \$ethntf->{IPADDR}, disabled => sub { $auto_ip } },
+                           { label => N("Netmask"), val => \$ethntf->{NETMASK}, disabled => sub { $auto_ip } },
+                          ),
+                          { text => N("Track network card id (useful for laptops)"), val => \$track_network_id, type => "bool" },
+                          { text => N("Network Hotplugging"), val => \$hotplug, type => "bool" },
+                          { text => N("Start at boot"), val => \$onboot, type => "bool" },
                         ],
                     },
                     complete => sub {
