@@ -9,8 +9,12 @@ use vars qw($VERSION @ISA);
 $VERSION = '0.01';
 Newt->bootstrap($VERSION);
 
-package Newt::Component; # $Id$
-package Newt::Grid; # $Id$
+package Newt::Component;
 
+our @ISA = qw(); # help perl_checker
+
+package Newt::Grid;
+
+our @ISA = qw(); # help perl_checker
 
 1;

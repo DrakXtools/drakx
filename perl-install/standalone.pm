@@ -150,6 +150,7 @@ package pkgs_interactive;
 use run_program;
 use common;
 
+our @ISA = qw(); #- tell perl_checker this is a class
 
 sub interactive::do_pkgs {
     my ($in) = @_;
