@@ -6,7 +6,7 @@ use vars qw(@ISA @EXPORT);
 use MDK::Common::Globals "network", qw($in $prefix $disconnect_file $connect_prog $connect_file $disconnect_file);
 
 @ISA = qw(Exporter);
-@EXPORT = qw(write_cnx_script write_secret_backend ask_connect_now connect_backend disconnect_backend read_providers_backend ask_info2 connected disconnected);
+@EXPORT = qw(write_cnx_script write_secret_backend ask_connect_now connect_backend disconnect_backend read_providers_backend ask_info2 type2interface connected disconnected);
 @EXPORT_OK = qw($in);
 
 sub write_cnx_script {
@@ -88,6 +88,17 @@ sub ask_info2 {
     1;
 }
 
-sub connected { gethostbyname("www.mandrakesoft.com") ? 1 : 0; }
+sub type2interface {
+    my ($i) = @_;
+    $i=~/$_->[0]/ and return $_->[1] foreach (
+					      [ modem => 'ppp'],
+					      [ isdn_internal => 'ippp'],
+					      [ isdn_external => 'ppp'],
+					      [ adsl => 'ppp'],
+					      [ cable => 'eth'],
+					      [ lan => 'eth']);
+}
+
+sub connected { gethostbyname("www.mandrakesoft.com") ? 1 : 0 }
 
 sub disconnected { }
