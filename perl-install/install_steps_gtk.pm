@@ -367,8 +367,10 @@ sub choosePackagesTree {
 				    while (@ask_unselect > keys %ask_unselect) {
 					@ask_unselect{@ask_unselect} = ();
 					foreach (keys %ask_unselect) {
-					    push @ask_unselect, grep { ! exists $ask_unselect{$_} }
-					                        keys %{$state->{rejected}{$_}{backtrack}{closure} || {}};
+					    foreach (keys %{$state->{rejected}{$_}{backtrack}{closure} || {}}) {
+						next if exists $ask_unselect{$_};
+						push @ask_unselect, $_;
+					    }
 					}
 				    }
 				    $error = [ N("You can't select/unselect this package"),
