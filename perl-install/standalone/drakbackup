@@ -477,12 +477,14 @@ sub build_backup_files {
  		if (grep /^backup\_incr\_sys/, @dir_content) { 
 		    my @more_recent = grep /^backup\_incr\_sys/, sort @dir_content; 
 		    $more_recent = pop @more_recent;
-		system("$tar_cmd_sys -f $save_path/backup_incr_sys$the_time.$tar_ext `find @sys_files -newer $save_path/$more_recent`");
+		    my @files_list = system("find @sys_files -newer $save_path/$more_recent");
+		    system("$tar_cmd_sys -f $save_path/backup_incr_sys$the_time.$tar_ext @files_list");
 		}
   		elsif (grep /^backup\_base\_sys/,  @dir_content) { 
 		    my @more_recent = grep /^backup\_base\_sys/, sort @dir_content; 
 		    $more_recent = pop @more_recent;
-		system("$tar_cmd_sys -f $save_path/backup_incr_sys$the_time.$tar_ext `find @sys_files -newer $save_path/$more_recent`");
+		    my @files_list = system("find @sys_files -newer $save_path/$more_recent");
+		    system("$tar_cmd_sys -f $save_path/backup_incr_sys$the_time.$tar_ext @files_list");
 		   }
 		else { 
 		    system("$tar_cmd_sys -f $save_path/backup_base_sys$the_time.$tar_ext @sys_files"); 
@@ -510,29 +512,24 @@ sub build_backup_files {
 	if ($backup_user) {
 	    foreach (@user_list) {
 		my $user = $_;
-# 		if (grep (/^backup\_base\_user\_$user\_/, @dir_content)) {  $base_user_exist = 1; }
-# 		else { $base_user_exist = 0; }
 		$path_name = return_path($user);
 		if ($backup_user_versions) {
 		    if (grep(/^backup\_incr\_user\_$user\_/, @dir_content)) { 
 			my @more_recent = grep /^backup\_incr\_user\_$user\_/, sort @dir_content; 
 			$more_recent = pop @more_recent;
-#			my @system("find $path_name -cnewer $save_path/$more_recent");
-			system("$tar_cmd_user -f $save_path/backup_incr_user_$user$the_time.$tar_ext `find $path_name -cnewer $save_path/$more_recent`");
+			my @files_list = system("find $path_name -cnewer $save_path/$more_recent");
+			system("$tar_cmd_user -f $save_path/backup_incr_user_$user$the_time.$tar_ext @files_list ");
 		    }
 		    elsif (grep /^backup\_base\_user\_$user\_/, @dir_content) { 
 			my @more_recent = grep /^backup\_base\_user\_$user\_/, sort @dir_content; 
 			$more_recent = pop @more_recent;			
-			print "backup_base_user  and more_recent :  $more_recent\n";
-      print "$tar_cmd_user -f $save_path/backup_incr_user_$user$the_time.$tar_ext `find $path_name -newer $save_path/$more_recent`\n";
-system("$tar_cmd_user -f $save_path/backup_incr_user_$user$the_time.$tar_ext `find $path_name -cnewer $save_path/$more_recent`");
+			my @files_list = system("find $path_name -cnewer $save_path/$more_recent");
+			system("$tar_cmd_user -f $save_path/backup_incr_user_$user$the_time.$tar_ext @files_list ");
 		    }
 		    else {
-			print "else\n";
 			system("$tar_cmd_user -f $save_path/backup_base_user_$user$the_time.$tar_ext $path_name");
 		    }
 		} else {
-			print "else else\n";
 		    system("cd $save_path && rm -f backup_user_$_* backup_base_user_$_* backup_incr_user_$_*");
 		    system("$tar_cmd_user -f $save_path/backup_user_$_$the_time.$tar_ext $path_name");
 		}
