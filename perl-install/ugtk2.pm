@@ -972,7 +972,7 @@ sub file_selected_check {
 sub _ask_file {
     my ($o, $title, $path) = @_;
 
-    my $w = create_file_selector({ title => $title, want_a_dir => 0, directory => $path });
+    my $w = create_file_selector(title => $title, want_a_dir => 0, directory => $path);
     put_in_hash($o, $w);
 
     $w->{ok}->signal_connect(clicked => sub { $o->{retval} = $w->{chooser}->get_filename });
@@ -980,7 +980,7 @@ sub _ask_file {
 sub _ask_dir {
     my ($o, $title, $path) = @_;
 
-    my $w = create_file_selector({ title => $title, want_a_dir => 1, directory => $path });
+    my $w = create_file_selector(title => $title, want_a_dir => 1, directory => $path);
     put_in_hash($o, $w);
 
     $w->{ok}->signal_connect(clicked => sub { $o->{retval} = $w->{chooser}->get_filename });
