@@ -862,7 +862,7 @@ sub generate_automatic_stage1_params {
     my @ks = "method:$o->{method}";
 
     if ($o->{method} eq 'http') {
-	$ENV{URLPREFIX} =~ m|http://([^/:]+)/(.*)| or die;
+	$ENV{URLPREFIX} =~ m|http://([^/:]+)(/.*)| or die;
 	push @ks, "server:$1", "directory:$2";
     } elsif ($o->{method} eq 'ftp') {
 	push @ks,  "server:$ENV{HOST}", "directory:$ENV{PREFIX}", "user:$ENV{LOGIN}", "pass:$ENV{PASSWORD}";
@@ -1105,108 +1105,5 @@ sub remove_bigseldom_used() {
       qw(lvm2),
       qw(mkreiserfs resize_reiserfs mkfs.xfs fsck.jfs);
 }
-
-################################################################################
-package pkgs_interactive;
-use run_program;
-use common;
-use pkgs;
-
-our @ISA = qw(); #- tell perl_checker this is a class
-
-sub install_steps::do_pkgs {
-    my ($o) = @_;
-    bless { o => $o }, 'pkgs_interactive';
-}
-
-sub install {
-    my ($do, @l) = @_;
-    if ($::testing) {
-	log::l("i would install packages " . join(' ', @l));
-	return 1;
-    } else {
-	$do->{o}->pkg_install(@l);
-    }
-}
-
-sub ensure_is_installed {
-    my ($do, $pkg, $file, $b_auto) = @_;
-
-    if (! -e "$::prefix$file") {
-	$do->{o}->ask_okcancel('', N("The package %s needs to be installed. Do you want to install it?", $pkg), 1) 
-	  or return if !$b_auto;
-	$do->{o}->do_pkgs->install($pkg);
-    }
-    if (! -e "$::prefix$file") {
-	$do->{o}->ask_warn('', N("Mandatory package %s is missing", $pkg));
-	return;
-    }
-    1;
-}
-
-sub check_kernel_module_packages {
-    my ($do, $base_name, $o_ext_name) = @_;
-
-    if (!$o_ext_name || pkgs::packageByName($do->{o}{packages}, $o_ext_name)) {
-	my @rpms;
-	foreach my $p (@{$do->{o}{packages}{depslist}}) {
-	    my ($ext, $version_release) = $p->name =~ /kernel[^\-]*(-smp|-enterprise|-secure|-i686-up-4GB)?(?:-([^\-]+))?$/
-	      or next;
-	    $p->flag_available or next;
-	    my $name = "$base_name$ext-$version_release";
-	    pkgs::packageByName($do->{o}{packages}, $name) or next;
-	    log::l("found kernel module packages $name");
-	    push @rpms, $name;
-	}
-	@rpms > 0 and return [ @rpms, if_($o_ext_name, $o_ext_name) ];
-    }
-    return undef;
-}
-
-sub what_provides {
-    my ($do, $name) = @_;
-    map { $do->{o}{packages}{depslist}[$_]->name } keys %{$do->{o}{packages}{provides}{$name} || {}};
-}
-
-sub is_installed {
-    my ($do, $name) = @_;
-    are_installed($do, $name);
-}
-
-sub are_installed {
-    my ($do, @l) = @_;
-    grep {
-	my $p = pkgs::packageByName($do->{o}{packages}, $_);
-	$p && $p->flag_available;
-    } @l;
-}
-
-sub remove {
-    my ($do, @l) = @_;
-
-    @l = grep {
-	my $p = pkgs::packageByName($do->{o}{packages}, $_);
-	pkgs::unselectPackage($do->{o}{packages}, $p) if $p;
-	$p;
-    } @l;
-    run_program::rooted($do->{o}{prefix}, 'rpm', '-e', @l);
-}
-
-sub remove_nodeps {
-    my ($do, @l) = @_;
-
-    @l = grep {
-	my $p = pkgs::packageByName($do->{o}{packages}, $_);
-	if ($p) {
-	    $p->set_flag_requested(0);
-	    $p->set_flag_required(0);
-	}
-	$p;
-    } @l;
-    run_program::rooted($do->{o}{prefix}, 'rpm', '-e', '--nodeps', @l);
-}
-################################################################################
-
-package install_any;
 
 1;
