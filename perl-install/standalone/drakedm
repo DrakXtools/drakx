@@ -47,7 +47,6 @@ several different X sessions on your local machine at the same time.")),
                                      $dm{$dm}
                                     )
    ) {
-    my $done = 0;
     $new_dm = { reverse %dm }->{$new_dm};
     substInFile {
         s/^(DISPLAYMANAGER)=.*(\n|)//;
