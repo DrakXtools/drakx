@@ -71,7 +71,8 @@ sub choose {
 
     my $monitors = monitors();
 
-    configure_automatic($monitor, $monitors) and $auto and return 1;
+    my $ok = configure_automatic($monitor, $monitors);
+    return $ok if $auto;
 
     my %h_monitors = map {; "$_->{VendorName}|$_->{ModelName}" => $_ } @$monitors;
 
