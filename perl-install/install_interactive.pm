@@ -19,9 +19,9 @@ use fs;
 sub tellAboutProprietaryModules {
     my ($o) = @_;
     my @l = grep { $_ } map { $_->{driver} =~ /^Bad:(.*)/ && $1 } detect_devices::probeall();
-    $o->ask_warn('', 
+    $o->ask_warn('', formatAlaTeX(
 _("Some hardware on your computer needs ``proprietary'' drivers to work.
-You can find some information about them at: %s", join(", ", @l))) if @l;
+You can find some information about them at: %s", join(", ", @l)))) if @l;
 }
 
 #- unit of $mb is mega bytes, min and max are in sectors, this
