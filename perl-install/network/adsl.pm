@@ -198,6 +198,31 @@ lcp-echo-interval 0)
                        );
         $in->do_pkgs->install(@{$packages{$adsl_type}}) if !$>;
         output("$::prefix/etc/ppp/options",
+               $adsl_device eq "bewan" ?
+               qq(lock
+ipparam ppp0
+noipdefault
+noauth
+default-asyncmap
+defaultroute
+hide-password
+noaccomp
+noccp
+nobsdcomp
+nodeflate
+nopcomp
+novj novjccomp
+lcp-echo-interval 20
+lcp-echo-failure 3
+mtu 1200
+mru 1200
+sync
+persist
+user $adsl->{login}
+name $adsl->{login}
+usepeerdns
+)
+               :
                qq(lock
 noipdefault
 persist
