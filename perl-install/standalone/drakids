@@ -14,6 +14,7 @@ use Gtk2::SimpleList;
 use ugtk2 qw(:create :helpers :wrappers);
 
 my $blacklist = Gtk2::SimpleList->new(addr => 'hidden',
+                                      timestamp => 'hidden',
                                       N("Date") => 'text',
                                       N("Attacker") => 'text',
                                       N("Attack type") => 'text',
@@ -22,6 +23,13 @@ my $blacklist = Gtk2::SimpleList->new(addr => 'hidden',
                                       N("Protocol") => 'text',
                                   );
 $blacklist->get_selection->set_mode('multiple');
+$blacklist->set_headers_clickable(1);
+for (0, 1, 2) {
+    $blacklist->get_column($_)->signal_connect('clicked', \&sort_by_column, $blacklist->get_model);
+    #- sort on timestamp if Date column is clicked
+    #- sort columns include hidden columns while list columns don't
+    $blacklist->get_column($_)->set_sort_column_id($_ == 0 ? 1 : $_ + 2);
+}
 
 my $activefw = activefw->new(sub {
     my ($con, $msg) = @_;
@@ -60,6 +68,13 @@ Gtk2->main;
 
 ugtk2::exit(0);
 
+sub sort_by_column {
+    my ($column, $model) = @_;
+    my $col_id = $column->get_sort_column_id;
+    my ($old_id, $old_order) = $model->get_sort_column_id;
+    $model->set_sort_column_id($col_id, $old_id == $col_id && $old_order ne 'descending' ? 'ascending' : 'descending');
+}
+
 sub handle_init {
     $activefw->find_daemon;
     init_blacklist();
@@ -80,6 +95,7 @@ sub handle_blacklist {
     my ($timestamp, $indev, $prefix, $sensor, $protocol, $addr, $port, $icmp_type) = @_;
     push @{$blacklist->{data}}, [
         $addr,
+        $timestamp,
         activefw::format_date($timestamp),
         activefw::resolve_address(activefw::get_ip_address($addr)),
         $prefix eq 'SCAN' ? N("Port scanning") :
