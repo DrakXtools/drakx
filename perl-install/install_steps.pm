@@ -794,7 +794,7 @@ sub setupBootloaderBefore {
     my ($o) = @_;
 
     require bootloader;
-    if (my @l = (grep { $_->{interface_type} eq 'ide' } detect_devices::burners(), detect_devices::raw_zips())) {
+    if (my @l = (grep { $_->{bus} eq 'ide' } detect_devices::burners(), detect_devices::raw_zips())) {
 	bootloader::add_append($o->{bootloader}, $_->{device}, 'ide-scsi') foreach @l;
     }
     if ($o->{miscellaneous}{HDPARM}) {

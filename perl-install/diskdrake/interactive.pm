@@ -1127,7 +1127,7 @@ sub format_hd_info {
     $info .= _("Info: ") . ($hd->{info} || $hd->{media_type}) . "\n" if $::expert && ($hd->{info} || $hd->{media_type});
     $info .= _("LVM-disks %s\n", join ", ", map {$_->{device}} @{$hd->{disks}}) if isLVM($hd) && $hd->{disks};
     $info .= _("Partition table type: %s\n", $1) if $::expert && ref($hd) =~ /_([^_]+)$/;
-    $info .= _("on bus %d id %d\n", $hd->{bus}, $hd->{id}) if $::expert && exists $hd->{bus};
+    $info .= _("on channel %d id %d\n", $hd->{channel}, $hd->{id}) if $::expert && exists $hd->{channel};
     $info;
 }
 

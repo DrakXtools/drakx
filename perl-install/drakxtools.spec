@@ -216,6 +216,7 @@ done
 %changelog 
 * Wed Jul 10 2002 Thierry Vignaud <tvignaud@mandrakesoft.com> 1.1.8-5mdk
 - code enhancement: increase coherency around the whole drakx code
+- decrease the debug verbosity
 
 * Wed Jul 10 2002 Thierry Vignaud <tvignaud@mandrakesoft.com> 1.1.8-4mdk
 - fix depandancy
