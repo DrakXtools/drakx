@@ -18,12 +18,6 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 
-# If we ever want to autoconf the tv card at install time, we should
-# make a package out of this.
-# Maybe we'll have to for harddrake2
-#
-#package tvdrake;
-
 use lib qw(/usr/lib/libDrakX);
 
 use standalone;     #- warning, standalone must be loaded very first, for 'explanations'
@@ -55,7 +49,7 @@ sub scan4channels {
 				  formatAlaTeX(_("XawTV isn't installed!
 
 
-If you do have a TV card but DrakX has neither detected it (no bttv
+If you do have a TV card but DrakX has neither detected it (no bttv nor saa7134
 module in \"/etc/modules\") nor installed xawtv, please send the
 results of \"lspcidrake -v -f\" to \"install\@mandrakesoft.com\"
 with subject \"undetected TV card\".
@@ -140,16 +134,21 @@ You can install it by typing \"urpmi xawtv\" as root, in a console.")));
     }
 }
 
-my @devices = detect_devices::probeall(1);
-if (grep { $_->{media_type} eq 'MULTIMEDIA_VIDEO' } @devices) {
-    if (($< == 0) && (grep { $_->{driver} eq 'bttv' } @devices)) {
-	   require harddrake::bttv;
-	   modules::read_conf;
-	   harddrake::bttv::config($in);
-	   modules::write_conf;
+my @devices = grep { $_->{media_type} eq 'MULTIMEDIA_VIDEO' } detect_devices::probeall(1);
+if (@devices) {
+    # TODO: That need some work for multiples TV cards
+    foreach (@devices) {
+	   if (($< == 0) && (grep { $_->{driver} =~ '(bttv|saa7134)' } @devices)) {
+		  require harddrake::v4l;
+		  require modules;
+		  no strict 'subs';
+		  modules::read_conf;
+		  harddrake::v4l::config($in, $_->{driver});
+		  modules::write_conf;
+	   }
+	   scan4channels();
+	   $in->exit(0);
     }
-    scan4channels();
-    $in->exit(0);
 } else {
     $in->ask_warn(_("No TV Card detected!"), formatAlaTeX(
 											   _("No TV Card has been detected on your machine. Please verify that a Linux-supported Video/TV Card is correctly plugged in.
