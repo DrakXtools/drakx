@@ -446,7 +446,7 @@ close F;
 system "rpm", "--root", "/mnt", "--initdb";
 
 #- hack for rpm bug, copy environment of rpm before an throw install from that.
-system "tar cvf - /lib/l* /usr/lib/librpm* /bin/rpm /usr/bin/rpm* /usr/lib/rpm/* | tar xvf - -C /mnt";
+#system "tar cvf - /lib/l* /usr/lib/librpm* /bin/rpm /usr/bin/rpm* /usr/lib/rpm/* | tar xvf - -C /mnt";
 
 #- copy and install from each cd image.
 foreach my $medium (@media) {
@@ -475,10 +475,10 @@ foreach my $medium (@media) {
 	if (delete $pkg->{selected}) {
 	    my $file = "/cdrom/$medium->{rpmsdir}/" . rpm_filename($pkg);
 	    if (-e $file) {
-		#system "rpm", "--root", "/mnt", "--nodeps", "--force", "--noscripts", "-ivh", $file;
-		system "cp", $file, "/mnt";
-		system "chroot", "/mnt", "rpm", "--nodeps", "--force", "--noscripts", "-ivh", rpm_filename($pkg);
-		system "rm", ("/mnt" . rpm_filename($pkg));
+		system "rpm", "-ivh", "--root", "/mnt", "--nodeps", "--force", "--noscripts", $file;
+		#system "cp", $file, "/mnt";
+		#system "chroot", "/mnt", "rpm", "--nodeps", "--force", "--noscripts", "-ivh", rpm_filename($pkg);
+		#system "rm", ("/mnt" . rpm_filename($pkg));
 	    }
 	}
     } else {
@@ -493,7 +493,7 @@ foreach my $medium (@media) {
 	    delete $pkg->{selected};
 	}
     }
-    system "rpm", "--root", "/mnt", "--nodeps", "--force", "-ivh", @files;
+    system "rpm", "-ivh", "--root", "/mnt", "--nodeps", "--force", @files;
     print "Installed " . scalar(@files) . " packages\n";
 
     scalar(grep { $_->{selected} || $_->{closure} } @{$packages->{depslist}}) == 0 and last;
