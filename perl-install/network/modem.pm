@@ -215,7 +215,9 @@ sub ppp_choose {
     $o_mouse ||= {};
 
     $o_mouse->{device} ||= readlink "$::prefix/dev/mouse";
-    $modem->{device} ||= $in->ask_from_listf_raw({ messsages => N("Please choose which serial port your modem is connected to."),
+    my $need_to_ask = $modem->{device};
+  step_1:
+    $need_to_ask and $modem->{device} = $in->ask_from_listf_raw({ messsages => N("Please choose which serial port your modem is connected to."),
 						   interactive_help_id => 'selectSerialPort',
 						 },
 						 \&mouse::serial_port2text,
@@ -232,7 +234,7 @@ sub ppp_choose {
 					    { label => N("Domain name"), val => \$modem->{domain} },
 					    { label => N("First DNS Server (optional)"), val => \$modem->{dns1} },
 					    { label => N("Second DNS Server (optional)"), val => \$modem->{dns2} },
-					   ]) or return;
+					   ]) or do { if ($need_to_ask) { goto step_1 } else { return } };
     $netc->{DOMAINNAME2} = $modem->{domain};
     ppp_configure($in, $modem);
     $netc->{$_} = 'ppp0' foreach 'NET_DEVICE', 'NET_INTERFACE';

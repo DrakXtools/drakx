@@ -30,7 +30,7 @@ sub configure {
 	$netc->{isdntype} = 'isdn_internal';
 	$netcnx->{isdn_internal}{$_} = $netc->{autodetect}{isdn}{$_} foreach 'description', 'vendor', 'id', 'driver', 'card_type', 'type';
 	$netcnx->{isdn_internal} = isdn_read_config($netcnx->{isdn_internal});
-	isdn_detect($netcnx->{isdn_internal}, $netc) or return;
+	isdn_detect($netcnx->{isdn_internal}, $netc) or goto isdn_step_1;
     } else {
 	$netc->{isdntype} = 'isdn_external';
 	$netcnx->{isdn_external}{device} = $netc->{autodetect}{modem};
@@ -148,6 +148,7 @@ sub isdn_ask_info {
     my ($isdn, $netc) = @_;
     my $f = "$ENV{SHARE_PATH}/ldetect-lst/isdn.db";
     $f = "$prefix$f" if !-e $f;
+  isdn_ask_info_step1:
     my $str = $in->ask_from_treelist(N("ISDN Configuration"), N("Select your provider.\nIf it isn't listed, choose Unlisted."),
 				     '|', ['Unlisted - edit manually',
 					   read_providers_backend($f)], 'Unlisted - edit manually')
@@ -156,7 +157,7 @@ sub isdn_ask_info {
     $isdn->{huptimeout} = 180;
     $isdn->{$_} ||= '' foreach qw(phone_in phone_out dialing_mode login passwd passwd2 idl speed);
     add2hash($netc, { dnsServer2 => '', dnsServer3 => '', DOMAINNAME2 => '' });
-    ask_info2($isdn, $netc);
+    ask_info2($isdn, $netc) or goto isdn_ask_info_step1;
 }
 
 sub isdn_ask_protocol() {
@@ -188,6 +189,7 @@ sub isdn_ask {
 				$label . "\n" . N("What kind of card do you have?"),
 				[ N_("ISA / PCMCIA"), N_("PCI"), N_("I don't know") ]
 			       ) or return;
+ isdn_ask_step_1b:
     if ($e =~ /PCI/) {
 	$isdn->{card_type} = 'pci';
     } else {
@@ -204,7 +206,7 @@ If you have a PCMCIA card, you have to know the \"irq\" and \"io\" of your card.
     $e = $in->ask_from_listf(N("ISDN Configuration"),
 			     N("Which of the following is your ISDN card?"),
 			     sub { $_[0]{description} },
-			     [ grep { $_->{card} eq $isdn->{card_type} } @isdndata ]) or goto isdn_ask_step_1;
+			     [ grep { $_->{card} eq $isdn->{card_type} } @isdndata ]) or goto isdn_ask_step_1b;
     $e->{$_} and $isdn->{$_} = $e->{$_} foreach qw(driver type mem io io0 io1 irq firmware);
 
   isdn_ask_step_3:
@@ -221,13 +223,14 @@ sub isdn_detect {
   	log::l("found isdn card : $isdn->{description}; vendor : $isdn->{vendor}; id : $isdn->{id}; driver : $isdn->{driver}\n");
 	$isdn->{description} =~ s/\|/ -- /;
 	
+   isdn_detect_step_0:
 	defined $isdn->{type} and my $new = $in->ask_yesorno(N("ISDN Configuration"), N("Do you want to start a new configuration ?"), 1);
 	
 	if ($isdn->{type} eq '' || $new) {
-	    isdn_ask($isdn, $netc, N("I have detected an ISDN PCI card, but I don't know its type. Please select a PCI card on the next screen.")) or return;
+	    isdn_ask($isdn, $netc, N("I have detected an ISDN PCI card, but I don't know its type. Please select a PCI card on the next screen.")) or goto isdn_detect_step_0;
 	} else {
 	  isdn_detect_step_1:
-	    $isdn->{protocol} = isdn_ask_protocol() or return;
+	    $isdn->{protocol} = isdn_ask_protocol() or goto isdn_detect_step_0;
 	  isdn_detect_step_2:
 	    isdn_ask_info($isdn, $netc) or goto isdn_detect_step_1;
 	    isdn_write_config($isdn, $netc) or goto isdn_detect_step_2;
