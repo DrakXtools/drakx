@@ -464,7 +464,7 @@ sub testFinalConfig($;$$) {
         my $background = "/usr/share/pixmaps/mdk/mandrake-logo.xpm";
         my $qiv = "/usr/bin/qiv";
         if ("$prefix/$background" && -x "$prefix/$qiv") {
-            system($::testing ? "$prefix" : "chroot $prefix/ ") . "$qiv --display :9 -y $background");
+            system(($::testing ? "$prefix" : "chroot $prefix/ ") . "$qiv -y $background");
         } else {
             gtkset_background(200 * 257, 210 * 257, 210 * 257);
         }
