@@ -129,6 +129,35 @@ static enum return_type ensure_additional_modules_available(void)
                 return RETURN_OK;
 }
 
+static const char * get_name_kernel_26_transition(const char * name)
+{
+	struct kernel_24_26_mapping {
+		const char * name_24;
+		const char * name_26;
+	};
+	static struct kernel_24_26_mapping mappings[] = {
+                { "usb-ohci", "ohci-hcd" },
+                { "usb-uhci", "uhci-hcd" },
+                { "uhci", "uhci-hcd" },
+//                { "printer", "usblp" },
+                { "bcm4400", "b44" },
+                { "3c559", "3c359" },
+                { "3c90x", "3c59x" },
+                { "dc395x_trm", "dc395x" },
+//                { "audigy", "snd-emu10k1" },
+        };
+	int mappings_nb = sizeof(mappings) / sizeof(struct kernel_24_26_mapping);
+        int i;
+
+        /* pcitable contains 2.4 names. this will need to change if/when it contains 2.6 names! */
+        if (kernel_version() > 4)
+                for (i=0; i<mappings_nb; i++) {
+                        if (streq(name, mappings[i].name_24))
+                                return mappings[i].name_26;
+                }
+        return name;
+}
+
 /* unarchive and insmod given module
  * WARNING: module must not contain the trailing ".o"
  */
@@ -138,7 +167,7 @@ static enum insmod_return insmod_archived_file(const char * mod_name, char * opt
 	char final_name[50] = "/tmp/";
 	int i, rc;
 
-	strncpy(module_name, mod_name, sizeof(module_name));
+	strncpy(module_name, get_name_kernel_26_transition(mod_name), sizeof(module_name));
         if (kernel_version() <= 4)
                 strcat(module_name, ".o");
         else
