@@ -69,10 +69,11 @@ unless (-e "/cdrom/VERSION") {
 }
 
 #- detect language used and default options.
-my ($lang, $flang);
+my ($lang, $flang, $charset);
 open F, "/cdrom/VERSION" or die "no installation cdrom found on $cd";
 while (<F>) {
-    /[\s-]fr/ and ($lang, $flang) = ('fr', 'fr_FR@euro');
+    /[\s-]fr/ and $options{lang} = 'fr';
+    /\[lang[=:]([^]]*)\]/ and $options{lang} = $1;
     /\[server\]/ and $options{server} = '';
     /\[boot_entries[=:]([^]]*)\]/ and $options{boot_entries} = $1;
 }
@@ -80,8 +81,13 @@ close F;
 foreach (@ARGV) { /^([^=:]*)[=:]?(.*)/ and $options{$1} = $2; /^no([^=:]*)/ and delete $options{$1} }
 
 #- default language fall to english ?
-$lang or ($lang, $flang) = ("en", "en_US");
-print "Found lang $lang\n";
+foreach ($options{lang} || 'en') {
+    /fr/ and ($lang, $flang, $charset) = ('fr', 'fr_FR@euro', 'iso-8859-15');
+    /en/ and ($lang, $flang, $charset) = ('en', 'en_US', 'iso-8859-1');
+    /de/ and ($lang, $flang, $charset) = ('de', 'de_DE@euro', 'iso-8859-15');
+    /it/ and ($lang, $flang, $charset) = ('it', 'it_IT@euro', 'iso-8859-15');
+    /es/ and ($lang, $flang, $charset) = ('es', 'es_ES@euro', 'iso-8859-15');
+}
 foreach (keys %options) {
     print "Using option [$_" . ($options{$_} && "=$options{$_}") . "]\n";
 }
@@ -534,7 +540,7 @@ sub select_packages {
 		  foomatic printer-utils printer-testpages gimpprint rlpr samba-client ncpfs nc
 		  cups xpp qtcups kups cups-drivers lpr LPRng pdq ImageMagick
 
-		  kernel-pcmcia-cs apmd cdrecord rio500 grio500
+		  apmd cdrecord rio500 grio500
                  );
     push @pkgs, "XFree86-$_" foreach qw(3DLabs 3dfx 8514 AGX FBDev I128 Mach8 Mach32 Mach64 Mono P9000 Rage128 S3 S3V SVGA VGA16 W32);
     foreach (@pkgs) {
@@ -591,30 +597,33 @@ sub select_packages {
 	pkgs::selectPackage($o->{packages}, $lang_pkg);
 	$o->{compssUsersChoice}{qq(LOCALES"$lang")} = 1;
 	$o->{compssUsersChoice}{qq(LOCALES"$flang")} = 1;
+	$o->{compssUsersChoice}{qq(CHARSET"$charset")} = 1;
     }
 
     pkgs::setSelectedFromCompssList($o->{packages}, $o->{compssUsersChoice}, 4, 0);
 
     #- package that have to selected here as a bonus for oem install.
     foreach (qw(cups cups-drivers drakprofile draksync numlock raidtools reiserfsprogs xfsprogs jfsprogs icewm-light
-		Mesa Mesa-demos alsa alsa-utils xawtv kwintv xscreensaver-gl Mesa-demos xmms-mesa 
-		bzflag csmash gltron spacecup chromium tuxracer FlightGear armagetron 
-                glibc vim-minimal kernel kernel22
-		sox aumix xawtv gatos kwintv sane-frontends gphoto gnome-toaster gcombust xcdroast apmd cdlabelgen
+		Mesa Mesa-demos alsa alsa-utils Mesa-demos
+                glibc vim-minimal kernel
                )) {
 	my $pkg = pkgs::packageByName($o->{packages}, $_);
 	$pkg and pkgs::selectPackage($o->{packages}, $pkg);
     }
 
     #- special packages that are to be move to closure always ...
-    foreach (qw(kernel-smp kernel-linus kernel-secure hackkernel-smp hackkernel-linus hackkernel-secure
+    foreach (qw(kernel-smp kernel-linus kernel-secure hackkernel-smp hackkernel-linus hackkernel-secure kernel-pcmcia-cs
 		xawtv kwintv xscreensaver-gl xmms-mesa 
 		bzflag csmash gltron spacecup chromium tuxracer FlightGear armagetron 
-		kernel22-smp kernel22-secure alsa imwheel nfs-utils-clients lvm usbd hotplug reiserfsprogs
+		alsa imwheel nfs-utils-clients lvm usbd hotplug reiserfsprogs
 		sox aumix xawtv gatos kwintv sane-frontends gphoto gnome-toaster gcombust xcdroast apmd cdlabelgen
 		), exists $options{server} ? qw(Aurora Aurora-Monitor-NewStyle-Categorizing-WsLib) : ()) {
 	my $pkg = pkgs::packageByName($o->{packages}, $_);
-	$pkg and $pkg->{closure} = 1, delete $pkg->{selected};
+	if ($pkg) {
+	    pkgs::selectPackage($o->{packages}, $pkg);
+	    $pkg->{closure} = 1;
+	    delete $pkg->{selected};
+	}
     }
 
     $o->{packages};
