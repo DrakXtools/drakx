@@ -105,6 +105,7 @@ my %lang2keyboard =
   'pt'  => 'pt:90',
   'ro'  => 'ro2:80 ro:40 us_intl:10',
   'ru'  => 'ru:85 ru_yawerty:80 ua:50',
+  'sc'  => 'it:90',
   'se'  => 'sapmi:70 sapmi_sefi:50',
   'sh'  => 'yu:80',
   'sk'  => 'sk_qwerty:80 sk:70',

@@ -78,7 +78,7 @@ our %langs = (
 'lo' =>    [ 'Laotian',             'Laotian',           'lo_LA', ' 2   ', 'utf_lo' ],
 'lt' =>    [ 'Lithuanian',          'Lietuviskai',       'lt_LT', '1    ', 'iso-8859-13' ],
 #- ltg_LV locale not done yet, using lv_LV for now
-#'ltg' =>   [ 'Latgalian',           'Latgalisu',         'lv_LV', '1    ', 'iso-8859-13', 'ltg,lv' ],
+'ltg' =>   [ 'Latgalian',           'Latgalisu',         'lv_LV', '1    ', 'iso-8859-13', 'ltg,lv' ],
 'lv' =>    [ 'Latvian',             'Latviesu',          'lv_LV', '1    ', 'iso-8859-13' ],
 'mi' =>    [ 'Maori',               'Maori',             'mi_NZ', '   4 ', 'unicode' ],
 'mk' =>    [ 'Macedonian',          'Makedonski',        'mk_MK', '1    ', 'utf_cyr1' ],
@@ -101,6 +101,7 @@ our %langs = (
 'pt_BR' => [ 'Portuguese Brazil', 'Portugues do Brasil', 'pt_BR', '    5', 'iso-8859-1',  'pt_BR:pt_PT:pt' ],
 'ro' =>    [ 'Romanian',            'Romana',            'ro_RO', '1    ', 'iso-8859-2' ],
 'ru' =>    [ 'Russian',             'Russkij',           'ru_RU', '12   ', 'koi8-u' ],
+#'sc' =>    [ 'Sardian',            'Sardu',             'sc_IT', '1    ', 'iso-8859-15', 'sc:it_IT:it' ],
 'se' =>    [ 'Saami',               'Samegiella',        'se_NO', '1    ', 'unicode' ], 
 'sk' =>    [ 'Slovak',              'Slovencina',        'sk_SK', '1    ', 'iso-8859-2' ],
 'sl' =>    [ 'Slovenian',           'Slovenscina',       'sl_SI', '1    ', 'iso-8859-2' ],
