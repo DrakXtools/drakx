@@ -9,7 +9,7 @@ use MDK::Common::Globals "network", qw($in $prefix $disconnect_file $connect_pro
 use MDK::Common::System qw(getVarsFromSh);
 
 @ISA = qw(Exporter);
-@EXPORT = qw(ask_connect_now ask_info2 connect_backend connected connected2 connected_bg disconnect_backend disconnected is_wireless_intf passwd_by_login read_providers_backend read_secret_backend test_connected type2interface write_cnx_script write_initscript write_secret_backend);
+@EXPORT = qw(ask_connect_now ask_info2 connect_backend connected connected_bg disconnect_backend disconnected is_wireless_intf passwd_by_login read_providers_backend read_secret_backend test_connected type2interface write_cnx_script write_initscript write_secret_backend);
 @EXPORT_OK = qw($in);
 
 sub write_cnx_script {
