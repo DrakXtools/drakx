@@ -490,7 +490,7 @@ sub setup_thiskind {
     my ($in, $type, $auto, $at_least_one) = @_;
 
     return if arch() eq "ppc";
-    my @l=setup_thiskind_backend ($type, $auto, $at_least_one, sub { my $w = wait_load_module($in, $type, @_) } );
+    my @l = setup_thiskind_backend ($type, $auto, $at_least_one, sub { my $w = wait_load_module($in, $type, @_) } );
 
     if (!$::noauto) {
 	if (my @err = grep { $_ } map { $_->{error} } @l) {
@@ -533,7 +533,7 @@ sub setup_thiskind_backend {
     my @l;
     if (!$::noauto) {
 	@l = modules::load_thiskind($type, $wait_function );
-    return @l if $auto && (@l || !$at_least_one);
+	return @l;# DAMS SUCKERY if $auto && (@l || !$at_least_one);
     }
 }
 
