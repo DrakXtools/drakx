@@ -257,8 +257,7 @@ sub addentry {
     my ($section, $entry, $filecontent) = @_;
     my $sectionfound = 0;
     my $entryinserted = 0;
-    my @lines = split("\n", $filecontent);
-    while ($lines[-1] !~ /\S/) { pop @lines; }
+    my @lines = pop_spaces(split("\n", $filecontent));
     foreach (@lines) {
 	if (!$sectionfound) {
 	    $sectionfound = 1 if /^\s*Printer\s*:\s*($section)\s*$/;
@@ -276,8 +275,7 @@ sub addentry {
 
 sub addprinter {
     my ($section, $filecontent) = @_;
-    my @lines = split("\n", $filecontent);
-    while ($lines[-1] !~ /\S/) { pop @lines; }
+    my @lines = pop_spaces(split("\n", $filecontent));
     foreach (@lines) {
      # section already there, nothing to be done
      return $filecontent if /^\s*Printer\s*:\s*($section)\s*$/;
@@ -285,11 +283,15 @@ sub addprinter {
     return $filecontent . "\nPrinter: $section\n";
 }
 
+sub pop_spaces {
+    my @lines = @_;
+    pop @lines while $lines[-1] !~ /\S/;
+}
+
 sub removeentry {
     my ($section, $entry, $filecontent) = @_;
     my $sectionfound;
-    my @lines = split(/^/, $filecontent);
-    while ($lines[-1] !~ /\S/) { pop @lines; }
+    my @lines = pop_spaces(split(/^/, $filecontent));
     foreach (@lines) {
 	if (!$sectionfound) {
 	    $sectionfound = /^\s*Printer\s*:\s*($section)\s*$/;
@@ -307,8 +309,7 @@ sub removeentry {
 sub removeprinter {
     my ($section, $filecontent) = @_;
     my $sectionfound;
-    my @lines = split(/^/, $filecontent);
-    while ($lines[-1] !~ /\S/) { pop @lines; }
+    my @lines = pop_spaces(split(/^/, $filecontent));
     foreach (@lines) {
 	if (!$sectionfound) {
 	    if (/^\s*Printer\s*:\s*($section)\s*$/) {
