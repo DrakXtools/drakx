@@ -363,7 +363,7 @@ sub easy_dhcp {
     return if text2bool($netc->{NETWORKING});
 
     require modules;
-    modules::load_category($modules_conf, 'network/main|gigabit|pcmcia|usb');
+    modules::load_category($modules_conf, 'network/*');
     my @all_dev = sort map { $_->[0] } network::ethernet::get_eth_cards($modules_conf);
 
     #- only for a single ethernet network card
