@@ -180,8 +180,12 @@ sub {
         #lilo installation
         if (-f $themes{'path'}.$combo{'lilo'}->entry->get_text() . $themes{'lilo'}{'file'}) {
 	    use File::Copy;
-	    copy($lilomsg,"/boot/lilo-graphic/message.old") or $in->ask_warn(_("Error"), _("unable to backup lilo message"));
-	    copy($themes{'path'} . $combo{'lilo'}->entry->get_text() . $themes{'lilo'}{'file'}, $lilomsg) or $in->ask_warn(_("Error"), _("can't change lilo message"));
+	    ( copy($lilomsg,"/boot/lilo-graphic/message.old") 
+	      and standalone::explanations(_("Backup %s to %s.old",$lilomsg,$lilomsg)) ) 
+	      or $in->ask_warn(_("Error"), _("unable to backup lilo message"));
+	    ( copy($themes{'path'} . $combo{'lilo'}->entry->get_text() . $themes{'lilo'}{'file'}, $lilomsg) 
+	      and standalone::explanations(_("Copy %s to %s",$themes{'path'} . $combo{'lilo'}->entry->get_text() . $themes{'lilo'}{'file'},$lilomsg)) )
+	      or $in->ask_warn(_("Error"), _("can't change lilo message"));
 	} else {
             $error = 1;
             $in->ask_warn(_("Error"), _("Lilo message not found"));
@@ -214,7 +218,7 @@ THEME=" . $combo{'boot'}->entry->get_text() . "
 LOGO_CONSOLE=" . ($keep_logo ? 'yes' : 'no') . "\n";
                 if (-f $boot_conf_file) {
                         eval { output($boot_conf_file, $bootsplash_cont) };
-                        $@ and $in->ask_warn(_("Error"), _("Can't write /etc/sysconfig/bootsplash."));
+			$@ and $in->ask_warn(_("Error"), _("Can't write /etc/sysconfig/bootsplash.")) or standalone::explanations(_("Write %s",$boot_conf_file));
                 } else {
                     $in->ask_warn(_("Error"), _("Can't write /etc/sysconfig/bootsplash\nFile not found."));
                     $error = 1;
@@ -227,10 +231,11 @@ LOGO_CONSOLE=" . ($keep_logo ? 'yes' : 'no') . "\n";
             foreach (map { if_(m|^/boot/initrd-(.*)\.img|, $1) } glob '/boot/*'){
                 if ( system("mkinitrd -f /boot/initrd-$_.img $_" ) ) {
                     $in->ask_warn(_("Error"),
-				  _("Can't launch mkinitrd -f /boot/initrd-".$_.".img $_.
-Type \"mkinitrd -f /boot/initrd-".$_.".img $_\" in command line as root."));
+				  _("Can't launch mkinitrd -f /boot/initrd-%s.img %s.", $_,$_));
                     $error = 1;
-                }
+                } else { 
+		  standalone::explanations(_("Make initrd 'mkinird -f /boot/initrd-%s.img %s'.", $_,$_));
+		}
             }
         }
         if (system('lilo')) {
@@ -238,7 +243,9 @@ Type \"mkinitrd -f /boot/initrd-".$_.".img $_\" in command line as root."));
 _("Can't relaunch LiLo!
 Launch \"lilo\" as root in command line to complete LiLo theme installation."));
             $error = 1;
-        }
+        } else {
+		standalone::explanations(_("Relaunch 'lilo'"));
+	}
 	$in->ask_warn(_(($error)?"Error":"Notice"),
 		      _($error?"Theme installation failed!":"LiLo and Bootsplash themes installation successfull"));
     }
