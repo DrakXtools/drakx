@@ -253,7 +253,7 @@ sub detect() {
 sub write_conf {
     my ($mouse) = @_;
 
-    mouse::write('', $mouse);
+    &write('', $mouse);
     modules::write_conf('') if $mouse->{device} eq "usbmouse" && !$::testing;
 
     my $f = "/etc/X11/XF86Config";
