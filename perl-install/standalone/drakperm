@@ -282,6 +282,7 @@ sub row_setting_dialog {
     $browse->signal_connect(clicked => sub {
 				 my $file_dlg = new Gtk2::FileSelection(N("Path selection"));
 				 $file_dlg->set_modal(1);
+                     $file_dlg->set_transient_for($dlg);
 				 $file_dlg->show;
 				 $file_dlg->set_filename($file->get_text);
 				 $file_dlg->cancel_button->signal_connect( clicked => sub { $file_dlg->destroy });
