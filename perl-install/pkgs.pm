@@ -396,7 +396,7 @@ sub psUsingHdlists {
     my $is_ftp = $o_hdlistsprefix =~ /^ftp:/;
     my $listf = install_any::getFile($o_hdlistsprefix && !$is_ftp ? "$o_hdlistsprefix/media/media_info/hdlists" : 'media/media_info/hdlists')
 	or die "no hdlists found";
-    my ($suppl_CDs, $deselectionAllowed) = (0, 0);
+    my ($suppl_CDs, $deselectionAllowed) = ($o->{supplmedia} || 0, $o->{askmedia} || 0);
     if (!$o_packages) {
 	$o_packages = new URPM;
 	#- add additional fields used by DrakX.
