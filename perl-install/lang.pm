@@ -27,6 +27,7 @@ my %languages = (
 #- provide aliases for some not very standard names used in po files...
 'bg_BG' => [ 'Bulgarian',		'cp1251',     'bg', 'bg:bg.CP1251:bg_BG.CP1251' ],
   'br'  => [ 'Brezhoneg',		'iso-8859-1', 'br', 'br:fr_FR:fr' ],
+#-'bs'  => [ 'Bosnian',			'iso-8859-2', 'bs', 'bs:hr:sr' ],
   'ca'  => [ 'Catalan',			'iso-8859-1', 'ca', 'ca:es_ES:es:fr_FR:fr' ],
   'cs'  => [ 'Czech',			'iso-8859-2', 'cs', 'cs' ],
   'cy'  => [ 'Cymraeg (Welsh)',		'iso-8859-14','cy', 'cy:en_GB:en' ],
@@ -89,8 +90,8 @@ my %languages = (
   'sl'  => [ 'Slovenian',		'iso-8859-2', 'sl', 'sl' ],
   'sp'  => [ 'Serbian (Cyrillic)',	'iso-8859-5', 'sp', 'sp:sr' ],
   'sr'  => [ 'Serbian (Latin)',		'iso-8859-2', 'sr', 'sr' ],
-'sv@traditionell' => [ 'Swedish (traditional sorting)','iso-8859-1', 'sv', 'sv' ],
-'sv@ny' => [ 'Swedish (new sorting (v diff of w)','iso-8859-1', 'sv', 'sv' ],
+'sv@traditionell' => [ 'Swedish (traditional sorting [V = W])','iso-8859-1', 'sv', 'sv' ],
+'sv@ny' => [ 'Swedish (new sorting [V != W])','iso-8859-1', 'sv', 'sv' ],
 #-'ta'	=> [ 'Tamil',			'tscii-0',    'ta', 'ta' ],
   'tg'	=> [ 'Tajik',			'koi8-c',     'tg', 'tg' ],
   'th'  => [ 'Thai',                    'tis620',     'th', 'th' ],
@@ -112,24 +113,28 @@ my %xim = (
   'zh_TW.Big5' => { 
 	ENC => 'big5',
 	XIM => 'xcin',
+	XIM_PROGRAM => 'xcin',
 	XMODIFIERS => '"@im=xcin"',
 	CONSOLE_NOT_LOCALIZED => 'yes',
   },
   'zh_CN.GB2312' => {
 	ENC => 'gb',
 	XIM => 'xcin-zh_CN.GB2312',
+	XIM_PROGRAM => 'xcin',
 	XMODIFIERS => '"@im=xcin-zh_CN.GB2312"',
 	CONSOLE_NOT_LOCALIZED => 'yes',
   },
   'ko' => {
 	ENC => 'kr',
 	XIM => 'Ami',
+	XIM_PROGRAM => 'ami',
 	XMODIFIERS => '"@im=Ami"',
 	CONSOLE_NOT_LOCALIZED => 'yes',
   },
   'ja' => {
 	ENC => 'eucj',
 	XIM => 'kinput2',
+	XIM_PROGRAM => 'kinput2',
 	XMODIFIERS => '"@im=kinput2"',
   },
   # right to left languages only work properly on console

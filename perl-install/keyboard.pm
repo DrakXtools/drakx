@@ -67,6 +67,7 @@ my %lang2keyboard =
   'ja' => 'jp',
   'ka' => 'ge_la',
   'lt' => 'lt',
+  'mk' => 'mk',
   'nb' => 'no',
   'nl' => 'nl',
 'nl_BE'=> 'be',
@@ -153,6 +154,7 @@ arch() eq "ppc" ? (
  "it" => [ __("Italian"),        "it-latin1",   "it" ],
  "jp" => [ __("Japanese 106 keys"), "jp106",	"jp" ],
  "la" => [ __("Latin American"), "la-latin1",   "la" ],
+#-"mk" => [ __("Macedonian"),	 "mk",		"mk" ],
  "nl" => [ __("Dutch"),          "nl-latin1",   "nl" ],
  "lt" => [ __("Lithuanian AZERTY (old)"), "lt-latin7","lt" ],
 #- TODO: write a console kbd map for lt_new
