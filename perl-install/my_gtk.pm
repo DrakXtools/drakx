@@ -556,7 +556,8 @@ sub _ask_from_list_with_help {
 
     my $leave = sub { $o->{retval} = $l->[$curr]; Gtk->main_quit };
     my $select = sub {
-	$list->select_item($_[1]);
+	$list->select_item($_[0]);
+	$list->moveto($_[0], 0, 0.5, 0);
     };
 
     ref $title && !@okcancel ?

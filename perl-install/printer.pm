@@ -331,7 +331,7 @@ sub read_printer_db(;$) {
     scalar(keys %thedb) > 3 and return; #- try reparse if using only ppa, POSTSCRIPT, TEXT.
 
     my %available_devices; #- keep only available devices in our database.
-    local *AVAIL; open AVAIL, ($::testing ? "$prefix" : "chroot $prefix ") . "/usr/bin/gs --help |";
+    local *AVAIL; open AVAIL, ($::testing ? "$prefix" : "chroot $prefix/ ") . "/usr/bin/gs --help |";
     foreach (<AVAIL>) {
 	if (/^Available devices:/ ... /^\S/) {
 	    @available_devices{split /\s+/, $_} = () if /^\s+/;

@@ -23,7 +23,7 @@ unsigned int next(unsigned int cluster) {
     free_all();
     croak("fat::next: trying to use null pointer");
   }
-  if (cluster > nb_clusters + 2) {
+  if (cluster >= nb_clusters + 2) {
     free_all();
     croak("fat::next: cluster %d outside filesystem", cluster);
   }
@@ -36,7 +36,7 @@ void set_next(unsigned int cluster, unsigned int val) {
     free_all();
     croak("fat::set_next: trying to use null pointer");
   }
-  if (cluster > nb_clusters + 2) {
+  if (cluster >= nb_clusters + 2) {
     free_all();
     croak("fat::set_next: cluster %d outside filesystem", cluster);
   }
@@ -97,7 +97,7 @@ scan_fat(nb_clusters_, type_size_)
   short *p;
   
   type_size = type_size_; nb_clusters = nb_clusters_;
-  bad_cluster_value = type_size == 32 ? 0xffffff7 : 0xfff7;
+  bad_cluster_value = type_size == 32 ? 0x0ffffff7 : 0xfff7;
 
   if (type_size % 16) {
     free_all();
@@ -162,7 +162,10 @@ checkFat(cluster, type, name)
       free_all();
       croak("Bad FAT: unterminated chain for %s\n", name);
     }
-
+    if (cluster >= nb_clusters + 2) {
+      free_all();
+      croak("Bad FAT: chain outside filesystem for %s\n", name);
+    }
     if (fat_flag_map[cluster]) {
       free_all();
       croak("Bad FAT: cluster %d is cross-linked for %s\n", cluster, name);
@@ -182,6 +185,10 @@ flag(cluster)
     free_all();
     croak("Bad FAT: trying to use null pointer");
   }
+  if (cluster >= nb_clusters + 2) {
+    free_all();
+    croak("Bad FAT: going outside filesystem");
+  }
   RETVAL = fat_flag_map[cluster];
   OUTPUT:
   RETVAL
@@ -194,6 +201,10 @@ set_flag(cluster, flag)
   if (!fat_flag_map) {
     free_all();
     croak("Bad FAT: trying to use null pointer");
+  }
+  if (cluster >= nb_clusters + 2) {
+    free_all();
+    croak("Bad FAT: going outside filesystem");
   }
   fat_flag_map[cluster] = flag;
 
@@ -219,10 +230,6 @@ fat_remap(cluster)
   if (cluster >= bad_cluster_value) {
     RETVAL = cluster; /* special cases */
   } else {
-    if (fat_remap == NULL) {
-      free_all();
-      croak("fat_remap: NULL in fat_remap");
-    }
     if (cluster >= fat_remap_size) {
       free_all();
       croak("fat_remap: cluster %d >= %d in fat_remap", cluster, fat_remap_size);
@@ -240,5 +247,13 @@ set_fat_remap(cluster, val)
   if (!fat_remap) {
     free_all();
     croak("set_fat_remap: trying to use null pointer");
+  }
+  if (cluster >= fat_remap_size) {
+    free_all();
+    croak("set_fat_remap: cluster %d >= %d in set_fat_remap", cluster, fat_remap_size);
+  }
+  if (val < bad_cluster_value && val >= fat_remap_size) {
+    free_all();
+    croak("set_fat_remap: remapping cluster %d to cluster %d >= %d in set_fat_remap", cluster, val, fat_remap_size);
   }
   fat_remap[cluster] = val;

@@ -542,23 +542,14 @@ sub installPackages {
     undef *install_any::changeMedium;
     *install_any::changeMedium = sub {
 	my ($method, $medium) = @_;
-	my %medium_msg = ();
-	$medium_msg{$medium} or $medium_msg{$medium} = _("Installation CD Nr %s", ($medium || 1));
-	my %method_msg = (
-			  cdrom =>
+	my $msg =
 _("Change your Cd-Rom!
 
 Please insert the Cd-Rom labelled \"%s\" in your drive and press Ok when done.
-If you don't have it press Cancel to avoid installation from this Cd-Rom.", $medium_msg{$medium}),
-			 );
-	$method_msg{$method} or $method_msg{$method} =
-_("Update installation image!
+If you don't have it press Cancel to avoid installation from this Cd-Rom.", pkgs::mediumDescr($packages, $medium));
 
-Ask your system administrator or reboot to update your installation image to include
-the Cd-Rom image labelled \"%s\". Press Ok if image has been updated or press Cancel
-to avoid installation from this Cd-Rom image.", $medium_msg{$medium});
-
-	$o->ask_okcancel('', $method_msg{$method});
+	#- if not using a cdrom medium, always abort.
+	$method eq 'cdrom' && $o->ask_okcancel('', $msg);
     };
     catch_cdie { $o->install_steps::installPackages($packages); }
       sub {

@@ -266,8 +266,8 @@ sub choosePackages {
     my ($o, $packages, $compss, $compssUsers, $compssUsersSorted, $first_time) = @_;
 
     #- this is done at the very beginning to take into account
-    #- selection of CD by user.
-    $o->chooseCD($packages);
+    #- selection of CD by user if using a cdrom.
+    $o->chooseCD($packages) if $o->{method} eq 'cdrom';
 
     require pkgs;
     unless ($o->{isUpgrade}) {
@@ -340,15 +340,12 @@ sub chooseGroups {
 
 sub chooseCD {
     my ($o, $packages) = @_;
-
-    #- get default values according to method, always skip empty medium
-    #- which is the default (or current) CD which is always available...
-    map { $packages->[2]{$_}{selected} = $o->{method} ne 'cdrom' } grep { $_ } keys %{$packages->[2]};
+    my @mediums = pkgs::allMediums($packages);
 
     $o->ask_many_from_list_ref('',
 			       _("Choose other CD to install"),
-			       [ map { $packages->[2]{$_}{descr} || _("Cd-Rom Nr %s", $_) } grep { $_ } keys %{$packages->[2]} ],
-			       [ map { \$packages->[2]{$_}{selected} } grep { $_ } keys %{$packages->[2]} ]
+			       [ map { _("Cd-Rom labeled \"%s\"", pkgs::mediumDescr($packages, $_)) } grep { $_ > 1 } @mediums ],
+			       [ map { \$packages->[2]{$_}{selected} } grep { $_ } @mediums ] #- check for change!
 			      ) or goto &chooseCD unless $::beginner;
 }
 
@@ -490,8 +487,7 @@ sub pppConfig {
 	detect_devices::probeSerialDevices();
 	foreach (0..3) {
 	    next if $o->{mouse}{device} =~ /ttyS$_/;
-	    detect_devices::hasModem("$o->{prefix}/dev/ttyS$_")
-		and $m->{device} = "ttyS$_", last;
+	    detect_devices::hasModem("/dev/ttyS$_") and $m->{device} = "ttyS$_", last;
 	}
     }
 

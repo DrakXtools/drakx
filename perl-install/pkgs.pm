@@ -205,6 +205,15 @@ sub packagesToInstall {
     grep { pkgs::packageFlagSelected($_) && !pkgs::packageFlagInstalled($_) } values %{$packages->[0]};
 }
 
+sub allMediums {
+    my ($packages) = @_;
+    keys %{$packages->[2]};
+}
+sub mediumDescr {
+    my ($packages, $medium) = @_;
+    $packages->[2]{$medium}{descr};
+}
+
 #- selection, unselection of package.
 sub selectPackage($$;$$$) {
     my ($packages, $pkg, $base, $otherOnly, $check_recursion) = @_;
@@ -315,19 +324,21 @@ sub psUsingHdlists {
     my @hdlists;
 
     #- parse hdlist.list file.
+    my $medium = 1;
     foreach (<$listf>) {
 	chomp;
 	s/\s*#.*$//;
 	/^\s*$/ and next;
-	m/^hdlist(.*)\.cz2?\s*(.*)$/ or die "invalid hdlist filename $_";
-	push @hdlists, [ $_, $1, $2 ];
+	m/^\s*(hdlist\S*\.cz2?)\s+(\S+)\s*(.*)$/ or die "invalid hdlist description \"$_\" in hdlists file";
+	push @hdlists, [ $1, $medium, $2, $3 ];
+	++$medium;
     }
 
     foreach (@hdlists) {
-	my ($hdlist, $medium, $descr) = @$_;
+	my ($hdlist, $medium, $rpmsdir, $descr) = @$_;
 	my $f = install_any::getFile($hdlist) or die "no $hdlist found";
 
-	psUsingHdlist($prefix, $method, \@packages, $f, $hdlist, $medium, $descr, !$medium);
+	psUsingHdlist($prefix, $method, \@packages, $f, $hdlist, $medium, $rpmsdir, $descr, (!$medium || $method ne 'cdrom'));
     }
 
     log::l("psUsingHdlists read " . scalar keys(%{$packages[0]}) . " headers on " . scalar keys(%{$packages[2]}) . " hdlists");
@@ -336,15 +347,16 @@ sub psUsingHdlists {
 }
 
 sub psUsingHdlist {
-    my ($prefix, $method, $packages, $f, $hdlist, $medium, $descr, $selected) = @_;
+    my ($prefix, $method, $packages, $f, $hdlist, $medium, $rpmsdir, $descr, $selected) = @_;
 
     #- if the medium already exist, use it.
     $packages->[2]{$medium} and return;
 
-    my $fakemedium = $method . ($medium || 1);
+    my $fakemedium = $method . $medium;
     my $m = $packages->[2]{$medium} = { hdlist     => $hdlist,
-					medium     => $medium, #- default medium is ''.
-					descr      => $descr, #- default value is '' too.
+					medium     => $medium,
+					rpmsdir    => $rpmsdir, #- where is RPMS directory.
+					descr      => $descr,
 					fakemedium => $fakemedium,
 					min        => scalar keys %{$packages->[0]},
 					max        => -1, #- will be updated after reading current hdlist.
@@ -864,7 +876,7 @@ sub install($$$;$$) {
     #- place (install_steps_gtk.pm,...).
     installCallback("Starting installation", $nb, $total);
 
-    my ($i, $min, $medium) = (0, 0);
+    my ($i, $min, $medium) = (0, 0, 1);
     do {
 	my @transToInstall;
 

@@ -569,6 +569,8 @@ sub get_pcmcia_devices($$) {
 }
 
 sub load_ide {
-    load("ide-mod", 'prereq', 'options="' . detect_devices::hasUltra66() . '"');
-    load_multi(qw(ide-probe ide-disk ide-cd));
+    eval {
+	load("ide-mod", 'prereq', 'options="' . detect_devices::hasUltra66() . '"');
+	load_multi(qw(ide-probe ide-disk ide-cd));
+    }
 }

@@ -41,8 +41,8 @@ XFree86 dhcpxd pump ppp ypbind rhs-printfilters samba ncpfs kernel-fb
 #- Media change variables&functions
 #-######################################################################################
 my $postinstall_rpms = '';
-my $current_medium = '';
-my $asked_medium = '';
+my $current_medium = 1;
+my $asked_medium = 1;
 sub useMedium($) {
     #- before ejecting the first CD, there are some files to copy!
     #- does nothing if the function has already been called.
@@ -61,8 +61,8 @@ sub relGetFile($) {
     m,^(Mandrake|lnx4win)/, and return $_;
     /\.img$/ and return "images/$_";
     my $dir = m|/| ? "mdkinst" : /^(?:compss|compssList|compssUsers|filelist|depslist.*|hdlist.*)$/ ?
-      "base/": "RPMS$asked_medium/";
-    "Mandrake/$dir$_";
+      "Mandrake/base/": "$::o->{packages}[2]{$asked_medium}{rpmsdir}/";
+    "$dir$_";
 }
 sub askChangeMedium($$) {
     my ($method, $medium) = @_;
@@ -166,7 +166,7 @@ sub setup_postinstall_rpms($$) {
     #- the complete filename of each package.
     #- copy the package files in the postinstall RPMS directory.
     #- last arg is default medium '' known as the CD#1.
-    pkgs::extractHeaders($prefix, \@toCopy, $packages->[2]{''});
+    pkgs::extractHeaders($prefix, \@toCopy, $packages->[2]{1});
     commands::cp((map { "/tmp/rhimage/" . relGetFile(pkgs::packageFile($_)) } @toCopy), $postinstall_rpms);
 }
 sub clean_postinstall_rpms() {

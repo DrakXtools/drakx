@@ -427,7 +427,8 @@ sub pppConfig {
     $toreplace{$_} = $o->{modem}{$_} foreach qw(connection phone login passwd auth domain dns1 dns2);
     $toreplace{kpppauth} = ${{ 'Script-based' => 0, 'PAP' => 1, 'Terminal-based' => 2, 'CHAP' => 3, }}{$o->{modem}{auth}};
     $toreplace{phone} =~ s/\D//g;
-    $toreplace{dnsserver} = join '', map { "$o->{modem}{$_}," } "dns1", "dns2";
+    $toreplace{dnsserver} = join ',', map { $o->{modem}{$_} } "dns1", "dns2";
+    $toreplace{dnsserver} .= $toreplace{dnsserver} && ',';
 
     #- using peerdns or dns1,dns2 avoid writing a /etc/resolv.conf file.
     $toreplace{peerdns} = "yes";
@@ -437,7 +438,8 @@ sub pppConfig {
     $toreplace{intf} ||= 'ppp0';
 
     if ($o->{modem}{auth} eq 'PAP') {
-	template2file("/usr/share/ifcfg-ppp.pap.in", "$o->{prefix}/etc/sysconfig/network-scripts/ifcfg-ppp0", %toreplace);
+	template2file($toreplace{dnsserver} ? "/usr/share/ifcfg-ppp.pap.dns.in" : "/usr/share/ifcfg-ppp.pap.in",
+		      "$o->{prefix}/etc/sysconfig/network-scripts/ifcfg-ppp0", %toreplace);
 	template2file("/usr/share/chat-ppp.pap.in", "$o->{prefix}/etc/sysconfig/network-scripts/chat-ppp0", %toreplace);
 
 	my @l = cat_("$o->{prefix}/etc/ppp/pap-secrets");
@@ -452,7 +454,8 @@ sub pppConfig {
 	    print F "$toreplace{login}  ppp0  $toreplace{passwd}\n";
 	}
     } elsif ($o->{modem}{auth} eq 'Terminal-based' || $o->{modem}{auth} eq 'Script-based') {
-	template2file("/usr/share/ifcfg-ppp.script.in", "$o->{prefix}/etc/sysconfig/network-scripts/ifcfg-ppp0", %toreplace);
+	template2file($toreplace{dnsserver} ? "/usr/share/ifcfg-ppp.script.dns.in" : "/usr/share/ifcfg-ppp.script.in",
+		      "$o->{prefix}/etc/sysconfig/network-scripts/ifcfg-ppp0", %toreplace);
 	template2file("/usr/share/chat-ppp.script.in", "$o->{prefix}/etc/sysconfig/network-scripts/chat-ppp0", %toreplace);
     } #- no CHAP currently.
 

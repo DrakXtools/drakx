@@ -340,6 +340,7 @@ sub write_fstab($;$$) {
     my @new = grep { $_ ne 'none' } map { @$_[0,1] } @to_add;
     my %new; @new{@new} = undef;
 
+    require fsedit;
     unshift @to_add,
       map {
 	  my ($dir, $options, $freq, $passno) = qw(/dev/ defaults 0 0);

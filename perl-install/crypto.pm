@@ -53,7 +53,7 @@ sub getPackages($) {
 
     #- extract hdlist of crypto, then depslist.
     require pkgs;
-    pkgs::psUsingHdlist($prefix, '', $packages, getHdlist($mirror), "hdlistCrypto.cz2", "Crypto", "Crytographic site", 1) and
+    pkgs::psUsingHdlist($prefix, '', $packages, getHdlist($mirror), "hdlistCrypto.cz2", "Crypto", '', "Crytographic site", 1) and
 	pkgs::getOtherDeps($packages, getDepslist($mirror));
 
     #- produce an output suitable for visualization.

@@ -17,7 +17,7 @@ my $DIRECTORY_ATTR    = 0x10;
 
 sub get_cluster($) {
     my ($entry) = @_;
-    $entry->{first_cluster} + ($resize_fat::isFAT32 ? $entry->{first_cluster_high} * 65536 : 0);
+    $entry->{first_cluster} + ($resize_fat::isFAT32 ? $entry->{first_cluster_high} * (1 << 16) : 0);
 }
 sub set_cluster($$) {
     my ($entry, $val) = @_;
@@ -68,7 +68,7 @@ sub remap {
     my $cluster = get_cluster($entry);
     my $new_cluster = resize_fat::c_rewritten::fat_remap($cluster);
 
-    #-print "remapping cluster ", get_first_cluster($fs, $entry), " to $new_cluster";
+    #-print "remapping cluster ", get_cluster($entry), " to $new_cluster";
 
     $new_cluster == $cluster and return; #- no need to modify
 
