@@ -35,6 +35,7 @@ use log;
 use common;
 
 use Gtk2;
+use Gtk2::Gdk::Keysyms;
 
 unless ($::no_ugtk_init) {
     !check_for_xserver() and die "Cannot be run in console mode.\n";
@@ -542,7 +543,7 @@ sub gtktext_insert {
             if ($token->[1]) {
                 my $tag = $buffer->create_tag(rand());
                 $tag->set(%{$token->[1]});
-                $buffer->apply_tag($tag, $iter1 = $buffer->get_iter_at_offset($c), my $iter2 = $buffer->get_end_iter);
+                $buffer->apply_tag($tag, $iter1 = $buffer->get_iter_at_offset($c), $buffer->get_end_iter);
             }
         }
     } else {
@@ -550,7 +551,7 @@ sub gtktext_insert {
     }
     #- the following line is needed to move the cursor to the beginning, so that if the
     #- textview has a scrollbar, it won't scroll to the bottom when focusing (#3633)
-    $buffer->place_cursor(my $iter = $buffer->get_start_iter);
+    $buffer->place_cursor($buffer->get_start_iter);
     $textview->set_wrap_mode($opts{wrap_mode} || 'word');
     $textview->set_editable($opts{editable} || 0);
     $textview->set_cursor_visible($opts{visible} || 0);
@@ -804,7 +805,7 @@ sub new {
 		$::WizardWindow->set_uposition($::stepswidth + $::windowwidth * 0.04, $::logoheight + $::windowheight * ($::logoheight ? 0.12 : 0.05));
 		$::WizardWindow->signal_connect(key_press_event => sub {
 		    my (undef, $event) = @_;
-		    my $d = ${{ 0xFFBF => 'screenshot' }}{$event->keyval}; # GDK_F2 from gdk/gdkkeysyms.h
+		    my $d = ${{ $Gtk2::Gdk::Keysyms{F2} => 'screenshot' }}{$event->keyval};
 		    if ($d eq 'screenshot') {
 			common::take_screenshot();
 		    } elsif (chr($event->keyval) eq 'e' && member('mod1-mask', @{$event->state})) {  #- alt-e
@@ -1243,7 +1244,7 @@ sub ask_browse_tree_info_given_widgets {
     my $children = sub { map { my $v = $w->{tree_model}->get($_, 0); $v } gtktreeview_children($w->{tree_model}, $_[0]) };
     my $toggle = sub {
 	if (ref($curr) && !$_[0]) {
-	    $w->{tree}->toggle_expansion(my $path = $w->{tree_model}->get_path($curr));
+	    $w->{tree}->toggle_expansion($w->{tree_model}->get_path($curr));
 	} else {
 	    if (ref $curr) {
 		my @_a = $children->($curr);
