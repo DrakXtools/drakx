@@ -165,13 +165,13 @@ sub init {
     $key_disabled = !-e '/cdrom/live_tree_nvidia.clp' && cat_('/proc/mounts') !~ /nfs/;
 
     run_program::run('/sbin/service', 'syslog', 'start');
-    run_program::run('sysctl', '-w', 'kernel.hotplug="/bin/true"');
+    run_program::run('sysctl', '-w', 'kernel.hotplug=/bin/true');
     modules::load_category('bus/usb'); 
     eval { modules::load('usb-storage', 'sd_mod') };
     handle_virtual_key();
     $o->{pcmcia} ||= !$::noauto && c::pcmcia_probe();
     install_steps::setupSCSI($o);
-    run_program::run('sysctl', '-w', 'kernel.hotplug="/sbin/hotplug"');
+    run_program::run('sysctl', '-w', 'kernel.hotplug=/sbin/hotplug');
 
     key_mount($o);
     cat_('/proc/cmdline') =~ /\bcleankey\b/ and eval { rm_rf $key_sysconf, glob_('/home/.mdkmove*') };
