@@ -501,7 +501,7 @@ sub set_default_options {
 
     my ($options, $unknown) = mount_options_unpack($part);
 
-    if ($part->{is_removable}) {
+    if ($part->{is_removable} && !member($part->{mntpoint}, qw(/ /usr /var /boot))) {
 	$options->{supermount} = $opts{useSupermount} && !($opts{useSupermount} eq 'magicdev' && $part->{media_type} eq 'cdrom');
 	$part->{fs_type} = !$options->{supermount} ? 'auto' :
 		    $part->{media_type} eq 'cdrom' ? 'udf:iso9660' : 'ext2:vfat';
