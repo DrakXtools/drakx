@@ -364,7 +364,7 @@ sub when_load {
 
     if (my $category = module2category($name)) {
 	if ($category =~ m,disk/(scsi|hardware_raid|usb|firewire),) {
-	    add_probeall('scsi_hostadapter', $name);
+	    add_probeall('scsi_hostadapter', $name) if $name ne 'usb-storage';
 	    eval { load('sd_mod') };
 	}
 	add_alias('sound-slot-0', $name) if $category =~ /sound/;
