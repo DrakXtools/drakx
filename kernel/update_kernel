@@ -80,7 +80,11 @@ function create_modules_mar() {
     for i in $images; do
         eval "modules=\$${i}_modules_raw"
         modules_with_deps=`perl -I $GIBASEDIR/kernel $GIBASEDIR/kernel/dependencies.pl $version modules.dep $modules`
-	eval "create_marfile ${i}_modules.mar $modules_with_deps"
+	if [ $i = "all" ]; then
+	    echo $modules_with_deps > "${i}_modules.list"
+	else
+	    eval "create_marfile ${i}_modules.mar $modules_with_deps"
+	fi
     done
     echo
 }
@@ -181,6 +185,3 @@ for i in $ALL_KERNELS/*; do
 	    fi
 	) || exit 1
 done
-
-
-./check_mar.pl
