@@ -209,20 +209,44 @@ sub auto_detect {
 }
 
 sub wizard_welcome {
-    my ($in) = @_;
+    my ($printer, $in) = @_;
+    my $ret;
+    my $autodetect = 1;
+    $autodetect = 0 if ($printer->{NOAUTODETECT});
     if ($in) {
 	eval {
-	    return $in->ask_okcancel(_("Local Printer"),
-			  _("
+	    if ($::expert) {
+		$ret = $in->ask_okcancel
+		    (_("Add a new printer"),
+		     _("
+Welcome to the Printer Setup Wizard
+
+This wizard allows you to install local or remote printers to be used from this machine and also from other machines in the network.
+
+It asks you for all necessary information to set up the printer and gives you access to all available printer drivers, driver options, and printer connection types."));
+	    } else {
+		$ret = $in->ask_from_
+		    ({title => _("Local Printer"),
+		      messages => _("
 Welcome to the Printer Setup Wizard
 
 This wizard will help you to install your printer(s) connected to this computer.
 
 Please plug in your printer(s) on this computer and turn it/them on. Click on \"Next\" when you are ready, and on \"Cancel\" when you do not want to set up your printer(s) now.
 
-Note that some computers can crash during the printer auto-detection, use the \"Expert Mode\" of printerdrake to do a printer installation without auto-detection. You also need the \"Expert Mode\" when you want to set up printing on a remote printer when printerdrake does not list it automatically."));
+Note that some computers can crash during the printer auto-detection, turn off \"Auto-detect printers\" to do a printer installation without auto-detection. Use the \"Expert Mode\" of printerdrake when you want to set up printing on a remote printer if printerdrake does not list it automatically.")},
+		     [
+		      { text => _("Auto-detect printers"), type => 'bool',
+			val => \$autodetect},
+		      ]);
+		if (!$autodetect) {
+		    $printer->{NOAUTODETECT} = 1;
+		} else {
+		    undef $printer->{NOAUTODETECT};
+		}
+	    }
 	};
-	return 0 if ($@ =~ /wizcancel/);
+	return ($@ =~ /wizcancel/) ? 0 : $ret;
     }
 }
 
@@ -243,13 +267,18 @@ sub setup_local {
     my ($printer, $in) = @_;
     my (@port, @str, $device);
     my $queue = $printer->{OLD_QUEUE};
-    my $do_auto_detect = ((!$::expert) or
-	$in->ask_yesorno(_("Auto-Detection of Printers"), 
-			 _("Printerdrake is able to auto-detect your locally connected parallel and USB printers for you, but note that on some systems the auto-detection CAN FREEZE YOUR SYSTEM AND EVEN CORRUPT YOUR FILE SYSTEMS! So do it ON YOUR OWN RISK!
+    my $do_auto_detect;
+    if ((!$::expert) && ($::isWizard)) {
+	$do_auto_detect = !$printer->{NOAUTODETECT};
+    } else {
+	local $::isWizard = 0;
+	$do_auto_detect = $in->ask_yesorno(_("Auto-Detection of Printers"),
+					   _("Printerdrake is able to auto-detect your locally connected parallel and USB printers for you, but note that on some systems the auto-detection CAN FREEZE YOUR SYSTEM AND THIS CAN LEAD TO CORRUPTED FILE SYSTEMS! So do it ON YOUR OWN RISK!
 
-For local printers auto-detection is not really necessary, because they are external devices where you can easily see on their labels which models you have, but if you really want to auto-detect them, connect them and turn them on now and click \"Yes\", otherwise click \"No\"."),0));
-    my @parport;
-    my $menuentries;
+Do you really want to get your printers auto-detected?"), 1);
+    }
+    my @parport = ();
+    my $menuentries = {};
     $in->set_help('setupLocal') if $::isInstall;
     if ($do_auto_detect) {
 	# When HPOJ is running, it blocks the printer ports on which it is
@@ -383,6 +412,9 @@ For local printers auto-detection is not really necessary, because they are exte
     if ($in) {
 	$::expert or $in->set_help('configurePrinterDev') if $::isInstall;
 	if ($#menuentrieslist < 0) { # No menu entry
+	    # auto-detection has failed, we must do all manually
+	    $do_auto_detect = 0;
+	    $printer->{MANUAL} = 1;
 	    if ($::expert) {
 		$device = $in->ask_from_entry
 		    (_("Local Printer"),
@@ -403,21 +435,19 @@ For local printers auto-detection is not really necessary, because they are exte
 		$in->ask_warn(_("Local Printer"), _("No local printer found!"));
 		return 0;
 	    }
-	} elsif (($#menuentrieslist == 0) && (!$::expert)) { # only one menu 
-	                                                    # entry
-	    return if !$in->ask_yesorno(_("Local Printer"),
-					_("Detected %s, do you want to set it up?", $menuentrieslist[0]), 1);
 	} else {
-	    return if !$in->ask_from_(
+	    my $manualconf = 0;
+	    $manualconf = 1 if (($printer->{MANUAL}) || (!$do_auto_detect));
+	    if (!$in->ask_from_(
 	    {title => _("Local Printer"),
 	     messages => (($do_auto_detect ?
 			  ($::expert ?
-			   (@str ?
-_("Here is a list of all auto-detected printers. ") : ()) . 
-_("Please choose the printer you want to set up or enter a device name/file name in the input line") :
-			   (@str ?
-_("Here is a list of all auto-detected printers. ") : ()) . 
-_("Please choose the printer you want to set up.")) :
+			   (($#menuentrieslist == 0) ?
+_("The following printer was auto-detected, if it is not the one you want to configure, enter a device name/file name in the input line") :
+_("Here is a list of all auto-detected printers. Please choose the printer you want to set up or enter a device name/file name in the input line")) :
+			   (($#menuentrieslist == 0) ?
+_("The following printer was auto-detected. The configuration of the printer will work fully automatically. If your printer was not correctly detected or if you prefer a customized printer configuration, turn on \"Manual configuration\".") :
+_("Here is a list of all auto-detected printers. Please choose the printer you want to set up. The configuration of the printer will work fully automatically. If your printer was not correctly detected or if you prefer a customized printer configuration, turn on \"Manual configuration\"."))) :
 			  ($::expert ?
 _("Please choose the port where your printer is connected to or enter a device name/file name in the input line") :
 _("Please choose the port where your printer is connected to."))) .
@@ -445,9 +475,19 @@ _(" (Parallel Ports: /dev/lp0, /dev/lp1, ..., equivalent to LPT1:, LPT2:, ..., 1
 	      { val => \$device } : ()),
 	     { val => \$menuchoice, list => \@menuentrieslist, 
 	       not_edit => !$::expert, format => \&translate,
-	       allow_empty_list => $::expert }
+	       allow_empty_list => 1 },
+	     (((!$::expert) && ($do_auto_detect)) ? 
+	      { text => _("Manual configuration"), type => 'bool',
+		val => \$manualconf } : ()),
 	    ]
-        );
+	    )) {
+		return 0;
+	    }
+	    if ($manualconf) {
+		$printer->{MANUAL} = 1;
+	    } else {
+		undef $printer->{MANUAL};
+	    }
 	}
     }
 
@@ -455,13 +495,20 @@ _(" (Parallel Ports: /dev/lp0, /dev/lp1, ..., equivalent to LPT1:, LPT2:, ..., 1
     #- configure HPOJ if it is one
 
     my $ptaldevice = "";
+    my $isHPOJ = 0;
+    if (!$do_auto_detect) {
+	local $::isWizard = 0;
+	$isHPOJ = $in->ask_yesorno(_("Local Printer"),
+				   _("Is your printer a multi-function device from HP (OfficeJet, PSC, PhotoSmart LaserJet 1100/1200/1220/3200 with scanner)?"), 0);
+    }
     if (($menuchoice =~ /HP OfficeJet/i) ||
 	($menuchoice =~ /HP PSC/i) ||
 	($menuchoice =~ /HP PhotoSmart/i) ||
 	($menuchoice =~ /HP LaserJet 1100/i) ||
 	($menuchoice =~ /HP LaserJet 1200/i) ||
 	($menuchoice =~ /HP LaserJet 1220/i) ||
-	($menuchoice =~ /HP LaserJet 3200/i)) {
+	($menuchoice =~ /HP LaserJet 3200/i) ||
+	($isHPOJ)) {
 	# Install HPOJ package
 	if ((!$::testing) &&
 	    (!printer::files_exist((qw(/usr/sbin/ptal-mlcd
@@ -470,40 +517,52 @@ _(" (Parallel Ports: /dev/lp0, /dev/lp1, ..., equivalent to LPT1:, LPT2:, ..., 1
 	    $in->do_pkgs->install('hpoj');
 	}
 	# Configure and start HPOJ
+	my $w = $in->wait_message
+	    ('', _("Checking device and configuring HPOJ ..."));
 	$ptaldevice = printer::configure_hpoj($device, @parport);
 
-	# Configure scanning on the MF device
-	if (($menuchoice =~ /HP OfficeJet\s+[KVRGP]/i) ||
-	    ($menuchoice =~ /HP PSC\s+[579]/i)) {
-	    # Install SANE
-	    if ((!$::testing) &&
-		(!printer::files_exist((qw(/usr/bin/scanimage
-					   /usr/bin/xscanimage
-					   /usr/bin/xsane
-					   /etc/sane.d/dll.conf),
-					(printer::files_exist
-					 ('/usr/bin/gimp') ? 
-					 '/usr/bin/xsane-gimp' : ()))))) {
-		my $w = $in->wait_message('', _("Installing SANE package..."));
-		$in->do_pkgs->install('sane-backends', 'sane-frontends', 'xsane', if_($in->do_pkgs->is_installed('gimp'),'xsane-gimp'));
+	if ($ptaldevice) {
+	    # Configure scanning on the MF device
+	    if (($menuchoice =~ /HP OfficeJet\s+[KVRGP]/i) ||
+		($menuchoice =~ /HP PSC\s+[579]/i)) {
+		# Install SANE
+		if ((!$::testing) &&
+		    (!printer::files_exist((qw(/usr/bin/scanimage
+					       /usr/bin/xscanimage
+					       /usr/bin/xsane
+					       /etc/sane.d/dll.conf),
+					    (printer::files_exist
+					     ('/usr/bin/gimp') ? 
+					     '/usr/bin/xsane-gimp' : 
+					     ()))))) {
+		    my $w = $in->wait_message
+			('', _("Installing SANE package..."));
+		    $in->do_pkgs->install('sane-backends', 'sane-frontends',
+					  'xsane', 
+					  if_($in->do_pkgs->is_installed
+					      ('gimp'),'xsane-gimp'));
+		}
+		# Configure the HP SANE backend
+		printer::config_sane($ptaldevice);
+		# Inform user about how to scan with SANE
+		$in->ask_warn(_("Scanning on your HP multi-function device"),
+			      _("Your HP multi-function device was configured automatically to be able to scan. Now you can scan with \"scanimage\" (\"scanimage -d hp:%s\" to specify the scanner when you have more than one) from the command line or with the graphical interfaces \"xscanimage\" or \"xsane\". If you are using the GIMP, you can also scan by choosing the appropriate point in the \"File\"/\"Acquire\" menu. Call also \"man scanimage\" and \"man sane-hp\" on the command line to get more information.
+Do not use \"scannerdrake\" for this device!",
+				$ptaldevice));
+	    } else {
+		# Inform user about how to scan with ptal-hp
+		$in->ask_warn(_("Scanning on your HP multi-function device"),
+			      _("Your HP multi-function device was configured automatically to be able to scan. Now you can scan from the command line with \"ptal-hp %s scan ...\". Scanning via a graphical interface or from the GIMP is not supported yet for your device. More information you will find in the \"/usr/share/doc/hpoj-0.8/ptal-hp-scan.html\" on your system. If you have an HP LaserJet 1100 or 1200 you can only scan when you have the scanner option installed.
+Do not use \"scannerdrake\" for this device!",
+				$ptaldevice));
 	    }
-	    # Configure the HP SANE backend
-	    printer::config_sane($ptaldevice);
-	    # Inform user about how to scan with SANE
-	    $in->ask_warn(_("Scanning on your HP multi-function device"),
-			  _("Your HP multi-function device was configured automatically to be able to scan. Now you can scan with \"scanimage\" (\"scanimage -d hp:%s\" to specify the scanner when you have more than one) from the command line or with the graphical interfaces \"xscanimage\" or \"xsane\". If you are using the GIMP, you can also scan by choosing the appropriate point in the \"File\"/\"Acquire\" menu. Call also \"man scanimage\" and \"man sane-hp\" on the command line to get more information.
-Do not use \"scannerdrake\" for this device!",
-			    $ptaldevice));
-	} else {
-	    # Inform user about how to scan with ptal-hp
-	    $in->ask_warn(_("Scanning on your HP multi-function device"),
-			  _("Your HP multi-function device was configured automatically to be able to scan. Now you can scan from the command line with \"ptal-hp %s scan ...\". Scanning via a graphical interface or from the GIMP is not supported yet for your device. More information you will find in the \"/usr/share/doc/hpoj-0.8/ptal-hp-scan.html\" on your system. If you have an HP LaserJet 1100 or 1200 you can only scan when you have the scanner option installed.
-Do not use \"scannerdrake\" for this device!",
-			    $ptaldevice));
-	}
 
-	# make the DeviceURI from $device.
-	$printer->{currentqueue}{'connect'} = "ptal:/" . $ptaldevice;
+	    # make the DeviceURI from $ptaldevice.
+	    $printer->{currentqueue}{'connect'} = "ptal:/" . $ptaldevice;
+	} else {
+	    # make the DeviceURI from $device.
+	    $printer->{currentqueue}{'connect'} = "file:" . $device;
+	}
     } else {
 	# make the DeviceURI from $device.
 	$printer->{currentqueue}{'connect'} = "file:" . $device;
@@ -922,6 +981,7 @@ sub choose_printer_name {
 		   $in->ask_warn('', _("Name of printer should contain only letters, numbers and the underscore"));
 		   return (1,0);
 	       }
+	       local $::isWizard = 0;
 	       if (($printer->{configured}{$printer->{currentqueue}{'queue'}})
 		   && ($printer->{currentqueue}{'queue'} ne $default) && 
 		   (!$in->ask_yesorno('', _("The printer \"%s\" already exists,\ndo you really want to overwrite its configuration?",
@@ -1461,7 +1521,7 @@ sub setasdefault {
     $in->set_help('setupAsDefault') if $::isInstall;
     if (($printer->{DEFAULT} eq '') || # We have no default printer,
 	                               # so set the current one as default
-	($in->ask_yesorno('', _("Do you want to set this printer (\"%s\")\nas the default printer?", $printer->{QUEUE}), 1))) { # Ask the user
+	($in->ask_yesorno('', _("Do you want to set this printer (\"%s\")\nas the default printer?", $printer->{QUEUE}), 0))) { # Ask the user
 	$printer->{DEFAULT} = $printer->{QUEUE};
         printer::set_default_printer($printer);
     }
@@ -1476,13 +1536,15 @@ sub print_testpages {
     my $alta4 = 0;
     my $photo = 0;
     my $ascii = 0;
-    if ($in->ask_from_
+    my $res2 = 0;
+    my $res1 = $in->ask_from_
 	({ title => _("Test pages"),
 	   messages => _("Please select the test pages you want to print.
 Note: the photo test page can take a rather long time to get printed and on laser printers with too low memory it can even not come out. In most cases it is enough to print the standard test page."),
           cancel => ((!$printer->{NEW}) ?
-		     _("Cancel") : _("No test pages")),
-          ok => _("Print")},
+		     _("Cancel") : ($::isWizard ? _("<- Previous") : 
+				    _("No test pages"))),
+          ok => ($::isWizard ? _("Next ->") : _("Print"))},
 	 [
 	  { text => _("Standard test page"), type => 'bool',
 	    val => \$standard },
@@ -1492,10 +1554,16 @@ Note: the photo test page can take a rather long time to get printed and on lase
 	  ($::expert ?
 	   { text => _("Alternative test page (A4)"), type => 'bool', 
 	     val => \$alta4 } : ()), 
-	  { text => _("Photo test page"), type => 'bool', val => \$photo }
+	  { text => _("Photo test page"), type => 'bool', val => \$photo },
 	  #{ text => _("Plain text test page"), type => 'bool',
 	  #  val => \$ascii }
-	  ])) {
+	  ($::isWizard ?
+	   { text => _("Do not print any test page"), type => 'bool', 
+	     val => \$res2 } : ())
+	  ]);
+    $res2 = 1 if (!($standard || $altletter || $alta4 || $photo ||
+		    $ascii));
+    if ($res1 && !$res2) {
 	my @lpq_output;
 	{
 	    my $w = $in->wait_message('', _("Printing test page(s)..."));
@@ -1538,9 +1606,9 @@ It may take some time before the printer starts.\n");
 		and return 1;
 	}
     } else {
-	return 1;
+	return ($::isWizard ? $res1 : 1) ;
     }
-    return 0;
+    return 2;
 }
 
 sub printer_help {
@@ -1825,6 +1893,7 @@ _("The network access was not running and could not be started. Please check you
 
     my $w = $in->wait_message(_("Configuration of a remote printer"), 
 			      _("Restarting printing system ..."));
+
     return printer::SIGHUP_daemon($printer->{SPOOLER});
 
 }
@@ -2337,7 +2406,9 @@ sub main {
 	    #- configuration work correctly.
 	    $printer->{OLD_QUEUE} = $printer->{QUEUE} = $queue;
 	    #- Do all the configuration steps for a new queue
-	    if ((!$::expert) && (!$::isEmbedded) && (!$::isInstall) &&
+	  step_0:
+	    #if ((!$::expert) && (!$::isEmbedded) && (!$::isInstall) &&
+	    if ((!$::isEmbedded) && (!$::isInstall) &&
 		($in->isa('interactive_gtk'))) {
 		# Enter wizard mode
 		$::Wizard_pix_up = "wiz_printerdrake.png";
@@ -2347,50 +2418,85 @@ sub main {
 		$::Wizard_no_previous = 1;
 		undef $::Wizard_no_cancel;
 		undef $::Wizard_finished;
-		wizard_welcome($in) or do {
+		wizard_welcome($printer, $in) or do {
 		    wizard_close($in, 0);
 		    next;
 		};
 		undef $::Wizard_no_previous;
 	    }
-	    eval { # eval to catch wizard cancel. The wizard stuf should be in a separate function with steps. see dragw. (dams)
+	    eval { 
+		# eval to catch wizard cancel. The wizard stuff should be in
+		# a separate function with steps. see dragw. (dams)
 		$printer->{TYPE} = "LOCAL";
-		!$::expert or choose_printer_type($printer, $in) or next;
+	      step_1:
+		!$::expert or choose_printer_type($printer, $in) or do {
+		    goto step_0 if $::isWizard;
+		    next;
+		};
 		if ($printer->{TYPE} eq 'CUPS') {
 		    setup_remote_cups_server($printer, $in);
 		    $continue = ($::expert || !$::isInstall || $menushown ||
 				 $in->ask_yesorno('',_("Do you want to configure another printer?")));
-		    next;
 		}
 		#- Cancelling one of the following dialogs should restart 
 		#- printerdrake
 		$continue = 1;
+	      step_2:
 		setup_printer_connection($printer, $in) or do {
-		    wizard_close($in, 0) if $::isWizard;
+		    if ($::isWizard) {
+			goto step_1 if $::expert;
+			goto step_0;
+		    }
 		    next;
 		};
-		!$::expert or choose_printer_name($printer, $in) or	next;    
+	      step_3:
+		if (($::expert) or ($printer->{MANUAL})) {
+		    choose_printer_name($printer, $in) or do {
+			goto step_2 if $::isWizard;
+			next;
+		    };
+		}
 		get_db_entry($printer, $in);
-		!$::expert or choose_model($printer, $in) or next;
-		get_printer_info($printer, $in) or do {
-		    wizard_close($in, 0) if $::isWizard;
-		    next;
-		};
-		!$::expert or setup_options($printer, $in) or next;
+	      step_4:
+		# Remember DB entry for "Previous" button in wizard
+		my $dbentry = $printer->{DBENTRY};
+		if (($::expert) or ($printer->{MANUAL})) { 
+		    choose_model($printer, $in) or do {
+			if ($::isWizard) {
+			    # Restore DB entry
+			    $printer->{DBENTRY} = $dbentry;
+			    goto step_3;
+			}
+			next;
+		    };
+		}
+		get_printer_info($printer, $in) or next;
+	      step_5:
+		if (($::expert) or ($printer->{MANUAL})) { 
+		    setup_options($printer, $in) or do {
+			goto step_4 if $::isWizard;
+			next;
+		    };
+		}
 		configure_queue($printer, $in);
-		!$::expert or setasdefault($printer, $in);
+		undef $printer->{MANUAL} if $printer->{MANUAL};
+		$::Wizard_no_previous = 1;
+		setasdefault($printer, $in);
 		$cursorpos = 
-		  $printer->{configured}{$printer->{QUEUE}}{'queuedata'}{'menuentry'} . 
-		    ($printer->{QUEUE} eq $printer->{DEFAULT} ? 
+		  $printer->{configured}{$printer->{QUEUE}}{'queuedata'}{'menuentry'} .
+		    ($printer->{QUEUE} eq $printer->{DEFAULT} ?
 		     _(" (Default)") : ());
-		if (print_testpages($printer, $in, $printer->{TYPE} !~ /LOCAL/ && $upNetwork)) {
+		my $testpages = print_testpages($printer, $in, $printer->{TYPE} !~ /LOCAL/ && $upNetwork);
+		if ($testpages == 1) {
+		    # User was content with test pages
 		    if ($::isWizard) {
 			# Leave wizard mode with congratulations screen
 			wizard_close($in, 1);
 		    }
 		    $continue = ($::expert || !$::isInstall || $menushown ||
 				 $in->ask_yesorno('',_("Do you want to configure another printer?")));
-		} else {
+		} elsif ($testpages == 2) {
+		    # User was not content with test pages
 		    if ($::isWizard) {
 			# Leave wizard mode without congratulations screen
 			wizard_close($in, 0);
@@ -2399,6 +2505,8 @@ sub main {
 		    $queue = $printer->{QUEUE};
 		}
 	    };
+	    undef $printer->{MANUAL} if $printer->{MANUAL};
+	    undef $printer->{NOAUTODETECT} if $printer->{NOAUTODETECT};
 	    wizard_close($in, 0) if ($@ =~ /wizcancel/);
 	} else {
 	    $printer->{NEW} = 0;

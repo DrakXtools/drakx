@@ -163,9 +163,9 @@ sub service_starts_on_boot ($) {
     open F, ($::testing ? "$prefix" : "chroot $prefix/ ") . 
 	"/bin/sh -c \"export LC_ALL=C; /sbin/chkconfig --list $service 2>&1\" |" ||
 	    return 0;
-    while (<F>) {
-	chomp;
-	if ($_ =~ /:on/) {
+    while (my $line = <F>) {
+	chomp $line;
+	if ($line =~ /:on/) {
 	    close F;
 	    return 1;
 	}
@@ -241,17 +241,16 @@ sub assure_device_is_available_for_cups {
     open F, ($::testing ? "$prefix" : "chroot $prefix/ ") . 
 	"/bin/sh -c \"export LC_ALL=C; /usr/sbin/lpinfo -v\" |" ||
 	    die "Could not run \"lpinfo\"!";
-    while (<F>) {
-	if ($_ =~ /$device/) { # Found a line containing the device name,
-	                       # so CUPS knows it.
+    while (my $line = <F>) {
+	if ($line =~ /$device/) { # Found a line containing the device name,
+	                          # so CUPS knows it.
 	    close F;
 	    return 1;
 	}
     }
     close F;
     return SIGHUP_daemon("cups");
-}    
-    
+}
 
 sub network_running {
     # If the network is not running return 0, otherwise 1.
@@ -259,11 +258,11 @@ sub network_running {
     open F, ($::testing ? "$prefix" : "chroot $prefix/ ") . 
 	"/bin/sh -c \"export LC_ALL=C; /sbin/ifconfig\" |" ||
 	    die "Could not run \"ifconfig\"!";
-    while (<F>) {
-	if (($_ !~ /^lo\s+/) && # The loopback device can have been started by
-	                        # the spooler's startup script
-	    ($_ =~ /^(\S+)\s+/)) { # In this line starts an entry for a
-	                           # running network
+    while (my $line = <F>) {
+	if (($line !~ /^lo\s+/) && # The loopback device can have been 
+                                   # started by the spooler's startup script
+	    ($line =~ /^(\S+)\s+/)) { # In this line starts an entry for a
+	                              # running network
 	    close F;
 	    return 1;
 	}
@@ -280,8 +279,8 @@ sub get_security_level {
     if (-f $file) {
 	local *F; 
 	open F, "< $file" || return 0;
-	while (<F>) {
-	    if ($_ =~ /^\s*SECURE_LEVEL=([0-5])\s*$/) {
+	while (my $line = <F>) {
+	    if ($line =~ /^\s*SECURE_LEVEL=([0-5])\s*$/) {
 		close F;
 		return $1;
 	    }
@@ -305,8 +304,8 @@ sub spooler_in_security_level {
     if (-f $file) {
 	local *F; 
 	open F, "< $file" || return 0;
-	while (<F>) {
-	    if ($_ =~ /^\s*$sp\s*$/) {
+	while (my $line = <F>) {
+	    if ($line =~ /^\s*$sp\s*$/) {
 		close F;
 		return 1;
 	    }
@@ -336,8 +335,8 @@ sub add_spooler_to_security_level {
 
 sub files_exist {
     my @files = @_;
-    for (@files) {
-	if (! -f "$prefix$_") {return 0;}
+    for my $file (@files) {
+	if (! -f "$prefix$file") {return 0;}
     }
     return 1;
 }
@@ -351,9 +350,9 @@ sub set_alternative {
 	"/bin/sh -c \"export LC_ALL=C; /bin/echo | update-alternatives --config $command \" |" ||
 	    die "Could not run \"update-alternatives\"!";
     my $choice = 0;
-    while (<F>) {
-	chomp;
-	if ($_ =~ m/^[\* ][\+ ]\s*([0-9]+)\s+(\S+)\s*$/) { # list entry?
+    while (my $line = <F>) {
+	chomp $line;
+	if ($line =~ m/^[\* ][\+ ]\s*([0-9]+)\s+(\S+)\s*$/) { # list entry?
 	    if ($2 eq $executable) {
 		$choice = $1;
 		last;
@@ -459,8 +458,8 @@ sub read_configured_queues($) {
 		# queue
 		local *F;
 		if (open F, "< $prefix/etc/cups/ppd/$QUEUES[$i]->{'queuedata'}{'queue'}.ppd") {
-		    while (<F>) {
-			if ($_ =~ /^\*%MDKMODELCHOICE:(.+)$/) {
+		    while (my $line = <F>) {
+			if ($line =~ /^\*%MDKMODELCHOICE:(.+)$/) {
 			    $printer->{configured}{$QUEUES[$i]->{'queuedata'}{'queue'}}{'queuedata'}{'ppd'} = $1;
 			}
 		    }
@@ -1427,12 +1426,43 @@ sub copy_foomatic_queue {
 sub configure_hpoj {
     my ($device, @autodetected) = @_;
     # Get the model ID as auto-detected
-    my $model;
+    $device =~ m!^/dev/\S*lp(\d+)$!;
+    my $model = $1;
+    my $device_ok = 1;
     foreach (@autodetected) {
 	$device eq $_->{port} or next;
 	$model = $_->{val}{MODEL};
+	# Check if the device is really an HP multi-function device
+	stop_service("hpoj");
+	my $bus;
+	if ($device =~ /usb/) {
+	    $bus = "usb";
+	} else {
+	    $bus = "par";
+	}
+	run_program::rooted($prefix, 
+			    "ptal-mlcd", "$bus:probe", "-device", 
+			    "$device");
+	$device_ok = 0;
+	local *F; 
+	if (open F, ($::testing ? "$prefix" : "chroot $prefix/ ") . "/usr/bin/ptal-devid mlc:$bus:probe |") {
+	    my $devid = join("", <F>);
+	    close F;
+	    if ($devid) {$device_ok = 1};
+	}
+	if (open F, ($::testing ? "$prefix" : "chroot $prefix/ ") . "ps auxwww | grep \"ptal-mlcd $bus:probe\" | grep -v grep | ") {
+	    my $line = <F>;
+	    if ($line =~ /^\s*\S+\s+(\d+)\s+/) {
+		my $pid = $1;
+		kill (15, $pid);
+	    }
+	    close F;
+	}
+	start_service("hpoj");
 	last;
     }
+    # No, it is not an HP multi-function device.
+    return "" if (!$device_ok);
     #$device = "/dev/usb/lp1"; $model = "DeskJet 990C";
     # Read the HPOJ config file and check whether this device is already
     # configured
@@ -1494,7 +1524,11 @@ sub configure_hpoj {
 	# USB device
 	my $ptaldevicemodel = $model;
 	$ptaldevicemodel =~ s/\s+/_/g;
-	$entry = "\nptal-mlcd usb:$ptaldevicemodel -device /dev/usb/lp* -devidmatch \"$model;\" \$PTAL_MLCD_CMDLINE_APPEND\nptal-printd mlc:usb:$ptaldevicemodel \$PTAL_PRINTD_CMDLINE_APPEND\n";
+	if ($model =~ /^\d+$/) {
+	    $entry = "\nptal-mlcd usb:$ptaldevicemodel -device $device \$PTAL_MLCD_CMDLINE_APPEND\nptal-printd mlc:usb:$ptaldevicemodel \$PTAL_PRINTD_CMDLINE_APPEND\n";
+	} else {
+	    $entry = "\nptal-mlcd usb:$ptaldevicemodel -device /dev/usb/lp* -devidmatch \"$model;\" \$PTAL_MLCD_CMDLINE_APPEND\nptal-printd mlc:usb:$ptaldevicemodel \$PTAL_PRINTD_CMDLINE_APPEND\n";
+	}
 	$ptaldevice = "mlc:usb:$ptaldevicemodel";
     } else {
 	# parallel device
