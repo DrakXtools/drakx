@@ -174,6 +174,8 @@ sub bestKernelPackage {
 	$pkg->name =~ /kernel-\d/ or next;
 	!$best || $pkg->compare_pkg($best) > 0 and $best = $pkg;
     }
+
+    $best;
 }
 
 sub packagesOfMedium {
