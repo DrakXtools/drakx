@@ -466,6 +466,14 @@ sub save_conf_file() {
     write_sitecopyrc() if $net_proto eq 'webdav';
     write_password_file() if $net_proto eq 'rsync' && $passwd_user;
 	return 1 if $send_mail && verify_mail_setup();
+	if ($backup_daemon && $daemon_media eq '') {
+		show_warning("f", N("No media selected for cron operation."));
+		return 1;
+	}
+	if ($backup_daemon && $when_space eq '') {
+		show_warning("f", N("No interval selected for cron operation."));
+		return 1;
+	}
 	if (!$backup_daemon) {
 		$when_space = "";
 		$daemon_media = "";
@@ -540,12 +548,13 @@ sub save_conf_file() {
     output_p($cfg_file, @cfg_list);
     chmod(0600, $cfg_file);
     save_cron_files();
+    0;
 }
 
 sub read_cron_files() {
     my $daemon_found = 0;
     foreach (qw(hourly daily weekly monthly)) {
-		if (-f "/etc/cron.$_/drakbackup") {
+		if (-f "/etc/cron.$_/drakbackup" && !$nonroot_user) {
 	    	$when_space = $_;	    
 	    	$daemon_found = 1;
 	    	last;
@@ -571,11 +580,11 @@ sub save_cron_files() {
 
 	if ($nonroot_user && $when_space ne "custom" && $when_space ne '' && $backup_daemon)  {
 		show_warning("w", N("Interval cron not available as non-root"));
-		$backup_daemon = 0;
+		$when_space = 'custom';
 		return 1;
 	} else {
 		foreach (qw(hourly daily weekly monthly)) {
-	    	-f "/etc/cron.$_/drakbackup" and rm_rf("/etc/cron.$_/drakbackup");
+	    	-f "/etc/cron.$_/drakbackup" and rm_rf("/etc/cron.$_/drakbackup") if !$nonroot_user;
 		}
 	}
     my @cron_file = ("#!/bin/sh\n", "export USER=root\n", "/usr/sbin/drakbackup --daemon > /dev/null 2>&1\n");
@@ -676,7 +685,7 @@ sub read_conf_file() {
     }
 	# deal with users that may have been deleted from the system
 	check_valid_users() if $cfg_file_exist;
-	$use_hd = !($where_cd || $where_tape || $where_net);    
+	$use_hd = !($where_cd || $where_tape || $where_net);
 }
 
 sub verify_mail_setup() {
@@ -2429,7 +2438,7 @@ sub advanced_when() {
 	
 	#- drop down list of possible media - default to config value
     my $entry_media_type = new Gtk2::OptionMenu();
-    $entry_media_type->set_popdown_strings("", @media_types, @net_methods);
+    $entry_media_type->set_popdown_strings(sort(@net_methods, @media_types));
 	$entry_media_type->entry->set_text($daemon_media);
 	
     gtkpack($advanced_box,
@@ -4238,10 +4247,11 @@ sub button_box_adv() {
 				$previous_widget->();
 			}),
 			0, gtksignal_connect(Gtk2::Button->new(N("Save")), clicked => sub { 
-				destroy_widget();
 				unless (check_pkg_needs()) {
-					save_conf_file();
-					$previous_widget->();
+					if (!save_conf_file()) {
+						destroy_widget();
+						$previous_widget->();
+					}
 				}
 			}),
 		),
