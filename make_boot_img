@@ -435,9 +435,9 @@ To Build a Bootable CD-ROM, try:
 	-f "$type.rdz" ? _ "cp -f $type.rdz $dir" : initrd($tmp_mnt_initrd, $type, $I, "$dir/$type.rdz");
 
 	output("$dir/boot.msg", "
-Welcome to Mandrake Linux 7.1
+Welcome to Mandrakelinux 7.1
 
-Press <Enter> to install or upgrade a system 7mMandrake Linux7m
+Press <Enter> to install or upgrade a system 7mMandrakelinux7m
 ");
 
 	output("$dir/silo.conf", qq(
@@ -485,7 +485,7 @@ sub boot_img_ppc() {
 MacRISC
 </COMPATIBLE>
 <DESCRIPTION>
-Mandrake Linux PPC bootloader
+Mandrakelinux PPC bootloader
 </DESCRIPTION>
 <BOOT-SCRIPT>
 " screen" output
@@ -496,7 +496,7 @@ device-end
 3 to foreground-color
 0 to background-color
 " "(0C)" fb8-write drop
-" Booting Mandrake Linux PPC..." fb8-write drop 100 ms
+" Booting Mandrakelinux PPC..." fb8-write drop 100 ms
 boot cd:2,\\\\yaboot
 </BOOT-SCRIPT>
 <OS-BADGE-ICONS>
@@ -554,7 +554,7 @@ boot cd:2,\\\\yaboot
 ');
 
 	output("$dir/$boot/yaboot.conf", '
-init-message = "\nWelcome to Mandrake Linux PPC!\nHit <TAB> for boot options.\n\n"
+init-message = "\nWelcome to Mandrakelinux PPC!\nHit <TAB> for boot options.\n\n"
 timeout = 150
 default = install-gui
 message=cd:,\\\\yaboot.msg
@@ -643,7 +643,7 @@ image = enet:0,vmlinux
 ');
 
 	output("$dir/$boot/yaboot.msg", '
-Thanks for choosing Mandrake Linux PPC.  The following is a short
+Thanks for choosing Mandrakelinux PPC.  The following is a short
 explanation of the various options for booting the install CD.
 
 All options ending with "2.2" will use the 2.2.20-9mdkBOOT kernel.
@@ -760,13 +760,13 @@ pause To display the help, press <space> until you reach "HELP END"
 pause .
 pause Please see http://qa.mandrakesoft.com/hd_grub.cgi for a friendlier solution
 pause .
-pause To specify the location where Mandrake Linux is copied,
+pause To specify the location where Mandrakelinux is copied,
 pause choose "Mandrake Install", and press "e".
 pause Then change "root (hd0,0)". FYI:
 pause - (hd0,0) is the first partition on first bios hard drive (usually hda1)
 pause - (hd0,4) is the first extended partition (usually hda5)
 pause - (hd1,0) is the first partition on second bios hard drive
-pause Replace /cooker to suits the directory containing Mandrake Linux
+pause Replace /cooker to suits the directory containing Mandrakelinux
 pause .
 pause HELP END
 EOF

@@ -11,7 +11,7 @@ Beware, don't try this on a production machine with important data.
 Sources installation:
 
 First grab the gi.tar.bz2 archive and untar it in your home directory, for 
-example from DrakX-*.src.rpm on your Mandrake Linux distribution.
+example from DrakX-*.src.rpm on your Mandrakelinux distribution.
 
 Fix a few things:
 % find gi -name "*/CVS/root/*" | xargs perl -pi -e 's/prigaux/anoncvs/'
@@ -33,9 +33,9 @@ Preparing the compilation process:
 
 Create a top level directory called /export and give write permissions to 
 the user/group that will be compiling DrakX.  It is also suggested that you 
-copy a recent Mandrake Linux CD in there. (You don't have to put have all 
+copy a recent Mandrakelinux CD in there. (You don't have to put have all 
 the RPMS...) ; you'll need roughly 1.5 Gbytes for a full install. (It is 
-possible to not have a copy of Mandrake Linux there, if all you desire is to 
+possible to not have a copy of Mandrakelinux there, if all you desire is to 
 compile gi)
 
 
