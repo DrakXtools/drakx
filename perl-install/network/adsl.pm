@@ -102,7 +102,7 @@ sub sagem_set_parameters {
             s/VPI=.*\n/VPI=$l{vpi}\n/;
             s/Encapsulation=.*\n/Encapsulation=$l{Encapsulation}\n/;
             s/STATIC_IP=.*\n//;
-            s!</eaglectrl>!STATIC_IP=$netc->{static_ip}\n</eaglectrl>"! if $netc->{static_ip};
+            s!</eaglectrl>!STATIC_IP=$netc->{static_ip}\n</eaglectrl>! if $netc->{static_ip};
         } "$::prefix$cfg_file";
     }
 }
