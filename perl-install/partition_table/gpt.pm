@@ -105,7 +105,7 @@ sub read_header {
     sysread $F, $tmp, psizeof($main_format) or die "error while reading partition table in sector $sector";
     my %info; @info{@$main_fields} = unpack $main_format, $tmp;
     
-    $info{magic} eq $magic or die "bad magic number on disk $hd->{device}";
+    $info{magic} eq $magic or die "bad magic number";
     $info{myLBA} == $sector or die "myLBA is not the same";
     $info{headerSize} == psizeof($main_format) or die "bad partition table header size";
     $info{partitionEntrySize} == psizeof($partitionEntry_format) or die "bad partitionEntrySize";
