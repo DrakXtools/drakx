@@ -426,7 +426,7 @@ sub easy_dhcp {
     my @all_cards = network::ethernet::conf_network_card_backend();
 
     #- only for a single network card
-    any { $_ eq 'eth0' } @all_cards && every { $_ ne 'eth1' } @all_cards or return;
+    any { $_->[0] eq 'eth0' } @all_cards && every { $_->[0] ne 'eth1' } @all_cards or return;
 
     network::ethernet::conf_network_card_backend($netc, $intf, 'dhcp', 'eth0');
 
