@@ -63,6 +63,22 @@ if (!$mouse || !$::auto) {
 }
 
 mouse::write_conf($in, $mouse, 1);
+
+if (!$::isEmbedded && $in->isa('interactive::gtk')) {
+    require ugtk2;
+    ugtk2->import(qw(:wrappers :create));
+    my $w = ugtk2->new(N("Mouse test"));
+    gtkadd($w->{window},
+           gtkpack(Gtk2::VBox->new(0, 5),
+                   Gtk2::Label->new(N("Please test your mouse:")),
+                   my $test_hbox = Gtk2::HBox->new(0, 5),
+                   gtkpack(create_hbox(),
+                           gtksignal_connect(Gtk2::Button->new(N("Ok")),     clicked => sub { $w->{retval} = 1; Gtk2->main_quit }),
+                           gtksignal_connect(Gtk2::Button->new(N("Cancel")), clicked => sub { $w->{retval} = 0; Gtk2->main_quit }))));
+    mouse::test_mouse_standalone($mouse, $test_hbox);
+    $w->main or goto begin;
+}
+
 system('service', 'gpm', 'restart') if -e '/var/lock/subsys/gpm';
 
 $in->exit(0);
