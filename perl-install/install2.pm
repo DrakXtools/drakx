@@ -271,13 +271,6 @@ sub addUser {
 }
 
 #------------------------------------------------------------------------------
-sub createBootdisk {
-    my ($clicked, $ent_number, $auto) = @_;
-    modules::write_conf($o->{prefix});
-    installStepsCall($o, $auto, 'createBootdisk', $ent_number == 1, $clicked);
-}
-
-#------------------------------------------------------------------------------
 sub setupBootloader {
     my ($_clicked, $ent_number, $auto) = @_;
     return if $::g_auto_install || $::uml_install;

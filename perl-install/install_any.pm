@@ -210,13 +210,6 @@ sub allowNVIDIA_rpms {
 #-######################################################################################
 #- Functions
 #-######################################################################################
-sub kernelVersion {
-    my ($o) = @_;
-    my $kernel = readlink "$o->{prefix}/boot/vmlinuz" || first(all("$o->{prefix}/boot"));
-    first($kernel =~ /vmlinuz-(.*)/);
-}
-
-
 sub getNextStep {
     my ($s) = $::o->{steps}{first};
     $s = $::o->{steps}{$s}{next} while $::o->{steps}{$s}{done} || !$::o->{steps}{$s}{reachable};

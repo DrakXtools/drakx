@@ -1000,67 +1000,6 @@ sub addUser {
 }
 
 #------------------------------------------------------------------------------
-sub createBootdisk {
-    my ($o, $first_time, $noauto) = @_;
-
-    return if !$noauto && $first_time && !$::expert;
-
-    if (arch() =~ /sparc/) {
-	#- as probing floppies is a bit more different on sparc, assume always /dev/fd0.
-	$o->ask_okcancel('',
-			 N("A custom bootdisk provides a way of booting into your Linux system without
-depending on the normal bootloader. This is useful if you don't want to install
-SILO on your system, or another operating system removes SILO, or SILO doesn't
-work with your hardware configuration. A custom bootdisk can also be used with
-the Mandrake rescue image, making it much easier to recover from severe system
-failures.
-
-If you want to create a bootdisk for your system, insert a floppy in the first
-drive and press \"Ok\"."),
-			 $o->{mkbootdisk}) or return $o->{mkbootdisk} = '';
-	my @l = detect_devices::floppies_dev();
-	$o->{mkbootdisk} = $l[0] if !$o->{mkbootdisk} || $o->{mkbootdisk} eq "1";
-	$o->{mkbootdisk} or return;
-    } else {
-	my @l = detect_devices::floppies_dev();
-	my %l = (
-		 'fd0'  => N("First floppy drive"),
-		 'fd1'  => N("Second floppy drive"),
-		 'Skip' => N("Skip"),
-		 );
-
-	if ($first_time || @l == 1) {
-	    $o->ask_yesorno('', formatAlaTeX(
-			    N("A custom bootdisk provides a way of booting into your Linux system without
-depending on the normal bootloader. This is useful if you don't want to install
-LILO (or grub) on your system, or another operating system removes LILO, or LILO doesn't
-work with your hardware configuration. A custom bootdisk can also be used with
-the Mandrake rescue image, making it much easier to recover from severe system
-failures. Would you like to create a bootdisk for your system?
-%s", isThisFs('xfs', fsedit::get_root($o->{fstab})) ? N("
-
-(WARNING! You're using XFS for your root partition,
-creating a bootdisk on a 1.44 Mb floppy will probably fail,
-because XFS needs a very large driver).") : '')), 
-			    $o->{mkbootdisk}) or return $o->{mkbootdisk} = '';
-	    $o->{mkbootdisk} = $l[0] if !$o->{mkbootdisk} || $o->{mkbootdisk} eq "1";
-	} else {
-	    @l or die N("Sorry, no floppy drive available");
-
-	    $o->ask_from_(
-              {
-	       messages => N("Choose the floppy drive you want to use to make the bootdisk"),
-	      }, [ { val => \$o->{mkbootdisk}, list => \@l, format => sub { $l{$_[0]} || $_[0] } } ]
-            ) or return;
-        }
-        $o->ask_warn('', N("Insert a floppy in %s", $l{$o->{mkbootdisk}} || $o->{mkbootdisk}));
-    }
-
-    my $_w = $o->wait_message('', N("Creating bootdisk..."));
-    install_steps::createBootdisk($o);
-}
-
-#------------------------------------------------------------------------------
 sub setupBootloaderBefore {
     my ($o) = @_;
     my $_w = $o->wait_message('', N("Preparing bootloader..."));

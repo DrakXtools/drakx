@@ -74,6 +74,67 @@ sub enableShadow {
     run_program::rooted($prefix, "grpconv") or log::l("grpconv failed");
 }
 
+sub kernelVersion {
+    my $kernel = readlink "$::prefix/boot/vmlinuz" || first(all("$::prefix/boot"));
+    first($kernel =~ /vmlinuz-(.*)/);
+}
+
+sub mkbootdisk {
+    my ($in, $bootloader, $fstab) = @_;
+
+    $in->set_help('createBootdisk') if !$::isStandalone;
+
+    if (arch() =~ /sparc/) {
+	#- as probing floppies is a bit more different on sparc, assume always /dev/fd0.
+	#- [pixel] uh, but in that case it would be better to change detect_devices::floppies, no?
+	$in->ask_okcancel('',
+			 N("A custom bootdisk provides a way of booting into your Linux system without
+depending on the normal bootloader. This is useful if you don't want to install
+SILO on your system, or another operating system removes SILO, or SILO doesn't
+work with your hardware configuration. A custom bootdisk can also be used with
+the Mandrake rescue image, making it much easier to recover from severe system
+failures.
+
+If you want to create a bootdisk for your system, insert a floppy in the first
+drive and press \"Ok\".")) or return;
+    } else {
+	$in->ask_yesorno('', formatAlaTeX(
+			    N("A custom bootdisk provides a way of booting into your Linux system without
+depending on the normal bootloader. This is useful if you don't want to install
+LILO (or grub) on your system, or another operating system removes LILO, or LILO doesn't
+work with your hardware configuration. A custom bootdisk can also be used with
+the Mandrake rescue image, making it much easier to recover from severe system
+failures. Would you like to create a bootdisk for your system?
+%s", isThisFs('xfs', fsedit::get_root($fstab)) ? N("
+
+(WARNING! You're using XFS for your root partition,
+creating a bootdisk on a 1.44 Mb floppy will probably fail,
+because XFS needs a very large driver).") : ''))) or return;
+    }
+
+    my $floppy_dev;
+    my @l = detect_devices::floppies_dev() or die N("Sorry, no floppy drive available");
+    my %l = (
+	     'fd0'  => N("First floppy drive"),
+	     'fd1'  => N("Second floppy drive"),
+	     'Skip' => N("Skip"),
+	    );
+    my $format = sub { $l{$_[0]} || $_[0] };
+
+    $in->ask_from_({
+	       messages => N("Choose the floppy drive you want to use to make the bootdisk"),
+	      }, [ { val => \$floppy_dev, list => \@l, format => $format } ]
+        ) or return;
+
+    $in->ask_warn('', N("Insert a floppy in %s", $format->($floppy_dev)));
+
+    my $_w = $in->wait_message('', N("Creating bootdisk..."));
+
+    require bootloader;
+    bootloader::mkbootdisk(kernelVersion(), $floppy_dev, $bootloader->{perImageAppend});
+    1;
+}
+
 sub setupBootloader {
     my ($in, $b, $all_hds, $fstab, $security) = @_;
     my $hds = $all_hds->{hds};
@@ -184,6 +245,7 @@ sub setupBootloader__general {
     my $memsize = bootloader::get_append($b, 'mem');
     my $prev_clean_tmp = my $clean_tmp = any { $_->{mntpoint} eq '/tmp' } @{$all_hds->{special} ||= []};
     my $prev_boot = $b->{boot};
+    my $mkbootdisk;
 
     $b->{password2} ||= $b->{password} ||= '';
     $b->{vga} ||= 'normal';
@@ -202,6 +264,9 @@ sub setupBootloader__general {
             { label => N("Password"), val => \$b->{password}, hidden => 1 },
             { label => N("Password (again)"), val => \$b->{password2}, hidden => 1 },
             { label => N("Restrict command line options"), val => \$b->{restricted}, type => "bool", text => N("restrict") },
+		),
+                if_(arch() !~ /alpha/ && arch() !~ /ppc/,
+            { label => N("Create a bootdisk"), val => \$mkbootdisk, type => 'bool', advanced => 1 },
 		),
             { label => N("Clean /tmp at each boot"), val => \$clean_tmp, type => 'bool', advanced => 1 },
             { label => N("Precise RAM size if needed (found %d MB)", availableRamMB()), val => \$memsize, advanced => 1 },
@@ -247,6 +312,8 @@ sub setupBootloader__general {
 	    @{$all_hds->{special}} = grep { $_->{mntpoint} eq '/tmp' } @{$all_hds->{special}};
 	}
     }
+    mkbootdisk($in, $b, $fstab) or return &setupBootloader__general if $mkbootdisk;
+
     1;
 }
 

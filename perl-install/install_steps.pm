@@ -765,23 +765,6 @@ sub addUser {
 }
 
 #------------------------------------------------------------------------------
-sub createBootdisk($) {
-    my ($o) = @_;
-    my $dev = $o->{mkbootdisk} or return;
-
-    my @l = detect_devices::floppies_dev();
-
-    $dev = shift @l || die N("No floppy drive available")
-      if $dev eq "1"; #- special case meaning autochoose
-
-    return if $::testing;
-
-    require bootloader;
-    bootloader::mkbootdisk(install_any::kernelVersion($o), $dev, $o->{bootloader}{perImageAppend});
-    $o->{mkbootdisk} = $dev;
-}
-
-#------------------------------------------------------------------------------
 sub readBootloaderConfigBeforeInstall {
     my ($o) = @_;
 
