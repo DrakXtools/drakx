@@ -1,3 +1,31 @@
+2004/02/13  Damien Chaumette  <dchaumette at mandrakesoft.com>
+
+	* standalone/drakconnect: forgotten modem page, to be traduced, not yet
+	usable (please don't hurt me)
+
+2004/02/13  Pixel  <pixel at mandrakesoft.com>
+
+	* install_steps_interactive.pm: add a warning when choosing security level
+	> 2 and having a windows partition
+	(since in that case we won't have umask=0) (bugzilla #4731)
+
+	* modules/interactive.pm: don't have a wait_message above another empty
+	wait_message when probing hardware
+
+	* ugtk2.pm: use center-on-parent for popped windows
+
+	* share/list: perl-MDK-Common has been rebuilt
+
+	* bootloader.pm: fix reading grub config (esp. when /boot is a separate
+	partition)
+	(nb for titi: join($xx, $yy) is *not* useful)
+
+	* install2.pm: in boolean context, "any" is better than "find"
+
+2004/02/13  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* drakxtools.spec: 10-0.14mdk
+
 2004/02/13  David Baudens  <baudens at mandrakesoft.com>
 
 	* share/po/fr.po: Fix </b> in advertiesment #5
@@ -26122,7 +26150,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.870 2004/02/12 23:29:36 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.871 2004/02/13 18:21:26 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
