@@ -339,7 +339,7 @@ sub select_packages {
 
     $o->{compssUsersChoice}{$_} = 1 foreach map { @{$o->{compssUsers}{$_}} } @{$o->{compssUsersSorted}};
     $o->{compssUsersChoice}{SYSTEM} = 1;
-    $o->{compssUsersChoice}{SERVER} = 0;
+    @{$o->{compssUsersChoice}}{grep { /SERVER/ } keys %{$o->{compssUsersChoice}}} = ();
 
     my $lang_pkg = $lang && pkgs::packageByName($o->{packages}, "locales-$lang");
     if ($lang_pkg) {
