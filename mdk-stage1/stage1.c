@@ -81,7 +81,7 @@ static void spawn_shell(void)
 {
 #ifdef SPAWN_SHELL
 	int fd;
-	char * shell_name = "/sbin/sash";
+	char * shell_name[] = { "/tmp/sh", NULL };
 
 	log_message("spawning a shell");
 
@@ -91,8 +91,8 @@ static void spawn_shell(void)
 			log_message("cannot open /dev/tty2 -- no shell will be provided");
 			return;
 		}
-		else if (access(shell_name, X_OK)) {
-			log_message("cannot open shell - %s doesn't exist", shell_name);
+		else if (access(shell_name[0], X_OK)) {
+			log_message("cannot open shell - %s doesn't exist", shell_name[0]);
 			return;
 		}
 		
@@ -106,8 +106,8 @@ static void spawn_shell(void)
 			if (ioctl(0, TIOCSCTTY, NULL))
 				log_perror("could not set new controlling tty");
 
-			execl(shell_name, shell_name, NULL);
-			log_message("execl of %s failed: %s", shell_name, strerror(errno));
+			execve(shell_name[0], shell_name, grab_env());
+			log_message("execl of %s failed: %s", shell_name[0], strerror(errno));
 		}
 		
 		close(fd);
