@@ -89,7 +89,7 @@ sub real_main {
       my ($isdn, $isdn_name, $isdn_type, %isdn_cards, @isdn_dial_methods);
       my $my_isdn = join('', N("Manual choice"), " (", N("Internal ISDN card"), ")");
       my ($ndiswrapper_driver, $ndiswrapper_inf_file);
-      my ($module, $auto_ip, $protocol, $onboot, $needhostname, $peerdns, $peeryp, $peerntpd, $hotplug, $track_network_id, @fields); # lan config
+      my ($module, $auto_ip, $protocol, $onboot, $needhostname, $peerdns, $peeryp, $peerntpd, $hotplug, $track_network_id); # lan config
       my $success = 1;
       my $ethntf = {};
       my $db_path = "/usr/share/apps/kppp/Provider";
@@ -1000,7 +1000,6 @@ Do you really want to reconfigure this device?"),
                         delete $ethntf->{NETWORK};
                         delete $ethntf->{BROADCAST};
                         delete $ethntf->{TYPE} if $netcnx->{type} ne 'adsl' || !member($adsl_type, qw(manual dhcp));
-                        @fields = qw(IPADDR NETMASK);
                         $netc->{dhcp_client} ||= (find { -x "$::prefix/sbin/$_" } qw(dhclient dhcpcd pump dhcpxd)) || "dhcp-client";
                         $netc->{dhcp_client} = "dhcp-client" if $netc->{dhcp_client} eq "dhclient";
                     },
@@ -1040,18 +1039,22 @@ notation (for example, 1.2.3.4).")),
                         $ethntf->{BOOTPROTO} = $auto_ip ? "dhcp" : "static";
                         $netc->{DHCP} = $auto_ip;
                         return 0 if $auto_ip;
-                        if (my @bad = map_index { if_(!is_ip($ethntf->{$_}), $::i) } @fields) {
+                        if (!is_ip($ethntf->{IPADDR})) {
                             $in->ask_warn(N("Error"), N("IP address should be in format 1.2.3.4"));
-                            return 1, $bad[0];
+                            return 1, 0;
+                        }
+                        if (!is_ip($ethntf->{NETMASK})) {
+                            $in->ask_warn(N("Error"), N("Netmask address should be in format 255.255.224.0"));
+                            return 1, 1;
                         }
                         if (is_ip_forbidden($ethntf->{IPADDR})) {
                           $in->ask_warn(N("Error"), N("Warning: IP address %s is usually reserved!", $ethntf->{IPADDR}));
-                          return 1;
+                          return 1, 0;
                         }
                         #- test if IP address is already used (do not test for sagem DSL devices since it may use many ifcfg files)
                         if ($ntf_name ne "sagem" && find { $_->{DEVICE} ne $ethntf->{DEVICE} && $_->{IPADDR} eq $ethntf->{IPADDR} } values %$intf) {
                           $in->ask_warn(N("Error"), N("%s already in use\n", $ethntf->{IPADDR}));
-                          return 1;
+                          return 1, 0;
                         }
                     },
                     focus_out => sub {

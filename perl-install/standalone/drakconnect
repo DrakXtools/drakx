@@ -646,17 +646,20 @@ sub save_notebook {
         $intf->{BOOTPROTO} = { reverse %{$proto->{protocols}} }->{$proto->get_text};
     }
     if ($intf->{BOOTPROTO} eq 'static') {
-        check_field($intf, 'IPADDR', 'NETMASK') or $in->ask_warn(N("Error"), N("IP address should be in format 1.2.3.4")) and return 0;
+        if (!is_ip($intf->{IPADDR})) {
+            $in->ask_warn(N("Error"), N("IP address should be in format 1.2.3.4"));
+            return 0;
+        }
+        if (!is_ip($intf->{NETMASK})) {
+            $in->ask_warn(N("Error"), N("Netmask address should be in format 255.255.224.0"));
+            return 0;
+        }
     }
-    if ($netc->{GATEWAY}) {
-        check_field($netc, 'GATEWAY') or $in->ask_warn(N("Error"), N("Gateway address should be in format 1.2.3.4")) and return 0;
+    if ($netc->{GATEWAY} && !is_ip($netc->{GATEWAY})) {
+        $in->ask_warn(N("Error"), N("Gateway address should be in format 1.2.3.4"));
+        return 0;
     }
     1;
-}
-
-sub check_field {
-    my ($field, @ip) = @_;
-    (map { if_(!is_ip($field->{$_}), 1) } @ip) ? 0 : 1;
 }
 
 sub add_intf() {
