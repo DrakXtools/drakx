@@ -242,7 +242,9 @@ readType()
     return (int)type;
 }
 
-static int intelDetectSMP(void)
+extern int intelDetectSMP(void);
+
+static int intelDetectSMP_old(void)
 {
     vm_offset_t paddr;
     int         where;
