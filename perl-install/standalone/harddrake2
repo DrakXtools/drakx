@@ -30,7 +30,7 @@ my %fields =
 - eide devices: the device is either a slave or a master device
 - scsi devices: the scsi bus and the scsi device ids") ],
      "cache size" => [ N("Cache size"), N("Size of the (second level) cpu cache") ],
-     "coma_bug" => [ N("Coma bug"), N("Whether this cpu has the Cyrix 6x86 Coma bug ?") ],
+     "coma_bug" => [ N("Coma bug"), N("Whether this cpu has the Cyrix 6x86 Coma bug") ],
      "cpu family" => [ N("Cpuid family"), N("Family of the cpu (eg: 6 for i686 class)") ],
      "cpuid level" => [ N("Cpuid level"), N("Information level that can be obtained through the cpuid instruction") ],
      "cpu MHz" => [ N("Frequency (MHz)"), N("The cpu frequency in Mhz (Mega herz which in first approximation may be coarsely assimilated to number of instructions the cpu is able to execute per second)") ],
@@ -46,7 +46,7 @@ my %fields =
 
 
      "fpu" => [ N("Is FPU present"), N("yes means the processor has an arithmetic coprocessor") ],
-     "fpu_exception" => [ N("Whether the FPU have an irq vector"), N("yes means the arithmetic coprocessor has an exception vector attached?") ],
+     "fpu_exception" => [ N("Whether the FPU has an irq vector"), N("yes means the arithmetic coprocessor has an exception vector attached") ],
      "f00f_bug" => [N("F00f bug"), N("Early pentium were buggy and freezed when decoding the F00F bytecode")],
      "hlt_bug" => [ N("Halt bug"), 
                     N("Some of the early i486DX-100 chips cannot reliably return to operating mode after the \"halt\" instruction is used") ],
