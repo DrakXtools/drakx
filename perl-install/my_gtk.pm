@@ -62,8 +62,9 @@ sub new {
 	    my ($y1, $x1) = $im_up->get_size;
 	    my ($im_left, $mask_left) = gtkcreate_png($::Wizard_pix_left || "wiz_default_left.png");
 	    my ($y2, $x2) = $im_left->get_size;
-	    $draw1->style->font(Gtk::Gdk::Font->fontset_load("-adobe-utopia-bold-r-normal-*-25-*-100-100-p-*-iso8859-*,*-r-*"));
-	    my $w = $draw1->style->font->string_width($::Wizard_title);
+	    my $style = $draw1->style->copy();
+	    $style->font(Gtk::Gdk::Font->fontset_load("-adobe-utopia-regular-r-*-*-25-*-*-*-p-*-iso8859-*"));
+	    my $w = $style->font->string_width($::Wizard_title);
 	    $draw1->signal_connect(expose_event => sub {
 				       my $i;
 				       for ($i=0;$i<(540/$y1);$i++) {
@@ -71,7 +72,7 @@ sub new {
 									$im_up, 0, 0, 0, $y1*$i,
 									$x1 , $y1 );
 					   $draw1->window->draw_string(
-								       $draw1->style->font,
+								       $style->font,
 								       $draw1->style->white_gc,
 								       140+(380-$w)/2, 62,
 								       ($::Wizard_title) );
@@ -409,7 +410,6 @@ sub create_pix_text {
     if (ref($font) eq 'Gtk::Gdk::Font') {
 	$style->font($font);
     } else {
-#-	$font ||= _("-adobe-utopia-medium-r-normal-*-12-*-*-*-p-*-iso8859-*,*-r-*");
 	$font and $style->font(Gtk::Gdk::Font->fontset_load($font));
     }
 
