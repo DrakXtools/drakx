@@ -86,7 +86,7 @@ our %adsl_data = (
                   N("Brazil") . "|Velox/Telemar" =>
                   {
                    vpi => 0,
-                   vci => 33,
+                   vci => 21,
                    Encapsulation => 1,
                    method => 'pppoe',
                   },
