@@ -58,7 +58,11 @@ sub get_eth_cards {
         my $description;
         # 0) get interface's driver through ETHTOOL ioctl or module aliases:
         my $a = c::getNetDriver($interface) || $modules_conf->get_alias($interface);
-        $a = "eth1394" if $a eq "ip1394";
+        my %fixes = (
+                     "p80211_prism2_usb" => 'prism2_usb',
+                     "ip1394" => "eth1394",
+                    );
+        $a = $fixes{$a} if $fixes{$a};
         # 1) try to match a PCMCIA device for device description:
         if (my $b = find { $_->{device} eq $interface } @devs) { # PCMCIA case
             $a = $b->{driver};
