@@ -93,39 +93,36 @@ my %menu_options = (
 
 my @menu_items = 
     (
-     {   path => N("/_File"), type => '<Branch>' },
-     {   path => N("/_File").N("/_Quit"), accelerator => N("<control>Q"), callback => \&quit_global    },
-     {   path => join('', @{$menu_options{PRINTERS_DETECTION}}), type => '<CheckItem>',
-         callback => sub { $options{PRINTERS_DETECTION} = $check_boxes{PRINTERS_DETECTION}->active } },
-     {   path => join('', @{$menu_options{MODEMS_DETECTION}}), type => '<CheckItem>',
-         callback => sub { $options{MODEMS_DETECTION} = $check_boxes{MODEMS_DETECTION}->active } },
-     {   path => join('', @{$menu_options{JAZZ_DETECTION}}), type => '<CheckItem>',
-         callback => sub { $options{JAZZ_DETECTION} = $check_boxes{JAZZ_DETECTION}->active } },
-     {   path => $menus{help}, type => '<Branch>' },
-     {   path => $menus{help}.N("/_Help"), callback => sub { unless (fork()) { exec("drakhelp Drakxtools-Guide.html/harddrake.html") } } },
-     {
-         path => $menus{help}.N("/_Fields description"), 
-         callback => sub {
-             if ($current_device) {
-                 $in->ask_warn(N("Harddrake help"), 
-                               N("Description of the fields:\n\n")
-                               . join("\n\n", map { if_($fields{$_}[0], "$fields{$_}[0]: $fields{$_}[1]") } sort keys %$current_device))
-                 } else {
-                     $in->ask_warn(N("Select a device !"), N("Once you've selected a device, you'll be able to see the device information in fields displayed on the right frame (\"Information\")"))
-                 }
-             }
-     },
-     {   path => $menus{help}.N("/_Report Bug"),
-         callback => sub { unless (fork()) { exec("drakbug --report harddrake2 &") } } },
-     {   path => $menus{help}.N("/_About..."), 
-         callback => sub {
-             $in->ask_warn(N("About Harddrake"), 
-                           N("This is HardDrake, a Mandrake hardware configuration tool.\nVersion: %s
+     [ N("/_File"), undef, undef, undef, '<Branch>' ],
+     [ N("/_File").N("/_Quit"), N("<control>Q"), \&quit_global, undef, '<CheckItem>' ],
+     [ join('', @{$menu_options{PRINTERS_DETECTION}}), undef, 
+       sub { $options{PRINTERS_DETECTION} = $check_boxes{PRINTERS_DETECTION}->active }, undef, '<CheckItem>' ],
+     [ join('', @{$menu_options{MODEMS_DETECTION}}), undef,
+       sub { $options{MODEMS_DETECTION} = $check_boxes{MODEMS_DETECTION}->active }, undef, '<CheckItem>' ],
+     [ join('', @{$menu_options{JAZZ_DETECTION}}), undef,
+       sub { $options{JAZZ_DETECTION} = $check_boxes{JAZZ_DETECTION}->active }, undef, '<CheckItem>' ],
+     [ $menus{help}, undef, undef, undef, '<Branch>' ],
+     [ $menus{help}.N("/_Help"), undef, sub { unless (fork()) { exec("drakhelp Drakxtools-Guide.html/harddrake.html") } }, undef, '<CheckItem>' ],
+     [ $menus{help}.N("/_Fields description"), undef, sub {
+           if ($current_device) {
+               $in->ask_warn(N("Harddrake help"), 
+                             N("Description of the fields:\n\n")
+                             . join("\n\n", map { if_($fields{$_}[0], "$fields{$_}[0]: $fields{$_}[1]") } sort keys %$current_device))
+           } else {
+               $in->ask_warn(N("Select a device !"), N("Once you've selected a device, you'll be able to see the device information in fields displayed on the right frame (\"Information\")"))
+           }
+       },
+       undef, '<CheckItem>'
+     ],
+     [ $menus{help}.N("/_Report Bug"), undef, sub { unless (fork()) { exec("drakbug --report harddrake2 &") } }, undef, '<CheckItem>' ],
+     [ $menus{help}.N("/_About..."), undef, sub {
+           $in->ask_warn(N("About Harddrake"), 
+                         N("This is HardDrake, a Mandrake hardware configuration tool.\nVersion: %s
 Author: Thierry Vignaud <tvignaud\@mandrakesoft.com>\n\n", $harddrake::data::version) .
-                           formatAlaTeX($::license));
-         }
-     }
-     );
+                         formatAlaTeX($::license));
+       }, undef, '<CheckItem>'
+     ]
+    );
 
 $in = 'interactive'->vnew('su');
 
