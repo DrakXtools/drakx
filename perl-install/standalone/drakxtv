@@ -63,15 +63,17 @@ sub scan4channels {
 				  system( (($use_X ) ?
 						 "xvt -T '"._("Scanning for TV channels")." ...' -e ":"")
 						. "scantv -n $norm -f $ftable_id -o ~/.xawtv".(($use_X )?"":" &>~/tmp/scantv.log"));
+				  print "Now, you can run xawtv !\n";
 				  $in->exit(0);
 			   },
-			   ) or $in->exit(0);
+			   );
     $in->exit(0);
 }
 
 
 scan4channels('interactive'->vnew()) 
     if grep { $_->{media_type} eq 'MULTIMEDIA_VIDEO' } detect_devices::probeall(1);
+
 
 # TODO :
 # - offer to sort channels after
@@ -80,3 +82,4 @@ scan4channels('interactive'->vnew())
 # - use Video-Capture-V4l-0.221 ?
 # - reput kwintv and test it ? => still buggy it seems ...
 # - configure kwintv and zapping ? => they've already wizards :-(
+# - check than scantv is there
