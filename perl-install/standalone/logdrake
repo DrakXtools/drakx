@@ -84,8 +84,6 @@ my $_menubar = create_factory_menu($my_win->{rwindow}, @menu_items) unless $::is
 
 
 ########## font and colors
-my %n = ('font' => '');
-my %b = ('font' => 'Bold');
 
     
 # Define global terms:
@@ -208,8 +206,12 @@ sub search() {
 
 my $timer;
 
+my (@logs, %tags);
+
 sub parse_file {
   my ($file, $descr) = @_;
+  undef @logs;
+  undef %tags;
 
   $file =~ s/\.gz$//;
   my ($pbar, $win_pb);
@@ -284,6 +286,7 @@ sub parse_file {
                                        seek F, 0, 1;
                                    });
   }     
+  log_output__real();
 }
 
 sub text_append {
@@ -326,26 +329,26 @@ sub logcolorize {
     my $timestamp = $isExplain ? $2 : $1;
     my @rec = split;
 
-    log_output($timestamp,  { %b, 'foreground' => 'darkcyan' }); # date & time if any...
+    log_output($timestamp,  'Bold', 'darkcyan'); # date & time if any...
     # BUG: $col hasn't yet be reseted
-    $isExplain or log_output("$rec[0] ",  { %b, 'foreground' => $rec[0] eq $h ? 'blue' : $col });  # hostname
+    $isExplain or log_output("$rec[0] ",  'Bold', $rec[0] eq $h ? 'blue' : $col);  # hostname
     
     if ($rec[1] eq "last") {
-	log_output(" last message repeated ",  { %n, 'foreground' => 'green' });
-	log_output($rec[4],  { %b, 'foreground' => 'green' });
-	log_output(" times\n",  { %n, 'foreground' => 'green' });
+	log_output(" last message repeated ",  undef, 'green');
+	log_output($rec[4],  'Bold', 'green');
+	log_output(" times\n",  undef, 'green');
 	return;
     }
     # Extract PID if present
     if ($rec[1] =~ /\[(\d+)\]:/) {
 	my ($pid) = $1;
 	$rec[1] =~ s/\[$1\]://;
-	log_output($rec[1] . "[",  { %n, 'foreground' => 'green' });
-	log_output($pid,  { %b, 'foreground' => 'black' });
-	log_output("]: ",  { %n, 'foreground' => 'green' });
+	log_output($rec[1] . "[",  undef, 'green');
+	log_output($pid,  'Bold', 'black');
+	log_output("]: ",  undef, 'green');
     }
     else {
-	log_output($rec[1] . " ",  { %n, 'foreground' => 'green' });
+	log_output($rec[1] . " ",  undef, 'green');
     }
 
     foreach my $therest (2 .. $#rec) {
@@ -362,15 +365,22 @@ sub logcolorize {
  	#foreach (@line_warn) { $col = $col_warn if $_ eq $rec[$therest] }
 	#foreach (@line_bad)  { $col = $col_bad  if $_ eq $rec[$therest] }
  	
-	log_output("$rec[$therest] ",  { %n, 'foreground' => $col });
+	log_output("$rec[$therest] ", undef, $col);
     }
-    log_output("\n",  { %n, 'foreground' => 'black' });
+    log_output("\n",  undef, 'black');
 }
 
 
 #    log_output (Gtk2::TextView, [ [ ... ] ])
 sub log_output {
-    gtktext_append($log_text, [ \@_ ]);
+    my ($text, $font, $col) = @_;
+    my $tag = join($font, $col);
+    push @logs, [ $text, $tag ];
+    $tags{$tag} ||= { if_($font, font => $font), foreground => $col };
+}
+
+sub log_output__real() {
+    text_append($log_text, \@logs);
     $log_text->scroll_to_iter($log_buf->get_end_iter, 0, 1, 0.5, 0.5);
 }
 
