@@ -21,7 +21,7 @@ my %languages = (
 'en_GB' => [ 'English (UK)',		'iso-8859-1', 'en', 'en_GB:en' ],
   'af'  => [ 'Afrikaans',		'iso-8859-1', 'af', 'af:en_ZA' ],
   'ar'  => [ 'Arabic',			'iso-8859-6', 'ar', 'ar' ],
-  'az'  => [ 'Azeri (latin)',		'iso-8859-9e', 'az', 'az' ],
+  'az'  => [ 'Azeri (latin)',		'iso-8859-9e','az', 'az:tr' ],
   'a3'  => [ 'Azeri (cyrillic)',	'koi8-c',     'a3', 'a3' ],
 'be_BY.CP1251' => [ 'Belarussian',	'cp1251',     'be', 'be:be_BY.CP1251:ru_RU.CP1251' ],
 #- provide aliases for some not very standard names used in po files...
