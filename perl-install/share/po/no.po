@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: panoramix VERSION\n"
-"POT-Creation-Date: 1999-08-27 14:32+0200\n"
+"POT-Creation-Date: 1999-08-28 15:29+0200\n"
 "PO-Revision-Date: 1999-08-25 11:07+0200\n"
 "Last-Translator: Terje Bjerkelia <terje@bjerkelia.com>\n"
 "Language-Team: norwegian\n"
@@ -419,7 +419,7 @@ msgstr "Formater"
 msgid "Move"
 msgstr "Flytt"
 
-#: ../diskdrake.pm_.c:17 ../diskdrake.pm_.c:433
+#: ../diskdrake.pm_.c:17 ../diskdrake.pm_.c:434
 msgid "Resize"
 msgstr "Endre størrelse"
 
@@ -517,7 +517,7 @@ msgstr "alle data på denne partisjonen vil gå tapt"
 msgid "Error"
 msgstr "Feil"
 
-#: ../diskdrake.pm_.c:157 ../diskdrake.pm_.c:501
+#: ../diskdrake.pm_.c:157 ../diskdrake.pm_.c:502
 msgid "Mount point: "
 msgstr "Monteringspunkt: "
 
@@ -670,51 +670,57 @@ msgstr "Flytter partisjon..."
 msgid "Partition table of drive %s is going to be written to disk!"
 msgstr "Partisjonstabellen på disk %s blir nå skrevet til disk!"
 
-#: ../diskdrake.pm_.c:424
+#: ../diskdrake.pm_.c:406
+msgid "You'll need to reboot before the modification can take place"
+msgstr ""
+"Du må starte maskinen på nytt for at modifiseringene "
+"skal tre i kraft"
+
+#: ../diskdrake.pm_.c:425
 msgid "Computing fat filesystem bounds"
 msgstr "Beregner fat filsystemgrense"
 
-#: ../diskdrake.pm_.c:424 ../diskdrake.pm_.c:460 ../interactive_gtk.pm_.c:79
+#: ../diskdrake.pm_.c:425 ../diskdrake.pm_.c:461 ../interactive_gtk.pm_.c:79
 msgid "Resizing"
 msgstr "Endrer størrelse"
 
-#: ../diskdrake.pm_.c:430
+#: ../diskdrake.pm_.c:431
 msgid "resizing"
 msgstr "Endrer størrelse"
 
-#: ../diskdrake.pm_.c:440
+#: ../diskdrake.pm_.c:441
 msgid "Choose the new size"
 msgstr "Velg ny størrelse"
 
-#: ../diskdrake.pm_.c:440
+#: ../diskdrake.pm_.c:441
 msgid "MB"
 msgstr "MB"
 
-#: ../diskdrake.pm_.c:478
+#: ../diskdrake.pm_.c:479
 msgid "Create a new partition"
 msgstr "Opprette en ny partisjon"
 
-#: ../diskdrake.pm_.c:494
+#: ../diskdrake.pm_.c:495
 msgid "Start sector: "
 msgstr "Start sektor: "
 
-#: ../diskdrake.pm_.c:497
+#: ../diskdrake.pm_.c:498
 msgid "Size in MB: "
 msgstr "Størrelse i MB: "
 
-#: ../diskdrake.pm_.c:500
+#: ../diskdrake.pm_.c:501
 msgid "Filesystem type: "
 msgstr "Filsystemtype: "
 
-#: ../diskdrake.pm_.c:502
+#: ../diskdrake.pm_.c:503
 msgid "Preference: "
 msgstr "Valg: "
 
-#: ../diskdrake.pm_.c:544 ../diskdrake.pm_.c:560
+#: ../diskdrake.pm_.c:545 ../diskdrake.pm_.c:561
 msgid "Select file"
 msgstr "Velg fil"
 
-#: ../diskdrake.pm_.c:561
+#: ../diskdrake.pm_.c:562
 msgid "Warning"
 msgstr "Advarsel"
 
@@ -909,7 +915,6 @@ msgstr ""
 "noen få minutter."
 
 #: ../install2.pm_.c:82
-#, fuzzy
 msgid ""
 "The system now requires an administrator password for your Linux system.\n"
 "This passwd is required of you by twice in order to being certain of its "
@@ -976,9 +981,8 @@ msgstr ""
 #: ../install2.pm_.c:102
 msgid ""
 "The system being now copied on your disk, he is now time to indicate to it "
-"from where he will have to start.\n"
-"Unless than you know exactly what you do, always choose \"First sector of "
-"drive\"."
+"from where it will have to start.\n"
+"Unless you know exactly what you do, always choose \"First sector of drive\"."
 msgstr ""
 "Systemet blir nå kopiert til disken din, det er nå på tide å indikere hvor "
 "starten skal være.\n"
@@ -1083,7 +1087,7 @@ msgstr "ekspert"
 msgid "server"
 msgstr "tjener"
 
-#: ../install2.pm_.c:230
+#: ../install2.pm_.c:227
 msgid ""
 "An error has occurred - no valid devices were found on which to create new "
 "filesystems. Please check your hardware for the cause of this problem"
@@ -1091,7 +1095,7 @@ msgstr ""
 "En feil har oppstått - ingen gyldige enheter ble funnet for å opprette nye "
 "filsystemer. Vennligst sjekk maskinvaren din for årsaken til dette problemet"
 
-#: ../install2.pm_.c:251
+#: ../install2.pm_.c:242
 msgid "partitionning failed: no root filesystem"
 msgstr "partisjonering feilet: intet root filsystem"
 
