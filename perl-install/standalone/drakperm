@@ -24,7 +24,6 @@ my %perm = ( 'level 1' => $perm_path.'perm.1',
              'level 5' => $perm_path.'perm.5',
              'editable' => $local_path.'perm.local',
            );
-my $rows_cnt = 0;
 my $editable = 0;
 my $modified = 0;
 my $prec_txt = $default_perm_level;
@@ -52,7 +51,6 @@ $combo_perm->set_popdown_strings(sort(keys %perm));
 
 sub add_callback {
     row_setting_dialog($treeModel->append_set(undef, [ 0 => 'new', 1 => '-', 2 => '-', 3 => '-' ]));
-    $rows_cnt++;
     $modified++;
 }
 
@@ -72,7 +70,6 @@ sub edit_callback {
 sub del_callback {
     my ($tree, $iter) = $permList->get_selection->get_selected();
     $tree->remove($iter);
-    $rows_cnt--;
     $modified++;
 }
 
@@ -174,7 +171,6 @@ sub display_perm {
     close F;
     $up_down_box->set_sensitive($editable);
 	
-    $rows_cnt = $i;
     $prec_txt = $perm_level;
     undef(%CURENT);
 }
