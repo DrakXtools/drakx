@@ -2190,6 +2190,7 @@ RIGHTDRIVE=\" \"
 
 sub configureapplications {
     my ($printer) = @_;
+    setcupslink ($printer);
     configurestaroffice($printer);
     configureopenoffice($printer);
     configuregimp($printer);
@@ -2197,6 +2198,7 @@ sub configureapplications {
 
 sub addcupsremotetoapplications {
     my ($printer, $queue) = @_;
+    setcupslink ($printer);
     return (addcupsremotetostaroffice($printer, $queue) &&
 	    addcupsremotetoopenoffice($printer, $queue) &&
 	    addcupsremotetogimp($printer, $queue));
@@ -2204,6 +2206,7 @@ sub addcupsremotetoapplications {
 
 sub removeprinterfromapplications {
     my ($printer, $queue) = @_;
+    setcupslink ($printer);
     return (removeprinterfromstaroffice($printer, $queue) &&
 	    removeprinterfromopenoffice($printer, $queue) &&
 	    removeprinterfromgimp($printer, $queue));
@@ -2211,9 +2214,42 @@ sub removeprinterfromapplications {
 
 sub removelocalprintersfromapplications {
     my ($printer) = @_;
+    setcupslink ($printer);
     removelocalprintersfromstaroffice($printer);
     removelocalprintersfromopenoffice($printer);
     removelocalprintersfromgimp($printer);
+}
+
+sub setcupslink {
+    my ($printer) = @_;
+    return 1 if (!$::isInstall);
+    return 1 if ($printer->{SPOOLER} ne "cups");
+    return 1 if (-d "/etc/cups/ppd");
+    system("ln -sf $prefix/etc/cups /etc/cups");
+    return 1;
+}
+
+sub getcupsremotequeues {
+    # The following code reads in a list of all remote printers which the
+    # local CUPS daemon knows due to broadcasting of remote servers or 
+    # "BrowsePoll" entries in the local /etc/cups/cupsd.conf
+    local *F;
+    open F, ($::testing ? $prefix : "chroot $prefix/ ") . 
+	"lpstat -v |" or return ();
+    my @printerlist;
+    my $line;
+    while ($line = <F>) {
+	if ($line =~ m/^\s*device\s+for\s+([^:\s]+):\s*(\S+)\s*$/) {
+	    my $queuename = $1;
+	    if (($2 =~ m!^ipp://([^/:]+)[:/]!) &&
+		(!$printer->{configured}{$queuename})) {
+		my $server = $1;
+		push (@printerlist, "$queuename|$server");
+	    }
+	}
+    }
+    close F;
+    return @printerlist;
 }
 
 # ------------------------------------------------------------------
@@ -2383,6 +2419,7 @@ sub addcupsremotetostaroffice {
 					       $configprefix,
 					       $configfilecontent);
 	    } else {
+		unlink ("$prefix/etc/foomatic/$queue.ppd");
 		return 0;
 	    }
 	    last;
@@ -2425,6 +2462,7 @@ sub addcupsremotetoopenoffice {
 					       $configprefix,
 					       $configfilecontent);
 	    } else {
+		unlink ("$prefix/etc/foomatic/$queue.ppd");
 		return 0;
 	    }
 	}
@@ -2690,6 +2728,10 @@ sub findsofficeconfigfile {
 		if ($prefix ne "") {
 		    $filename =~ s:^$prefix::;
 		}
+		# Work around a bug in the "ls" of "busybox". During
+		# installation it outputs the mask given on the command line
+		# instead of nothing when the mask does not match any file
+		next if $filename =~ /\*/;
 		return $filename;
 	    }
 	}
@@ -2713,6 +2755,10 @@ sub findopenofficeconfigfile {
 		if ($prefix ne "") {
 		    $filename =~ s:^$prefix::;
 		}
+		# Work around a bug in the "ls" of "busybox". During
+		# installation it outputs the mask given on the command line
+		# instead of nothing when the mask does not match any file
+		next if $filename =~ /\*/;
 		return $filename;
 	    }
 	}
@@ -2736,29 +2782,6 @@ sub writesofficeconfigfile {
     print F $filecontent;
     close F;
     return 1;
-}
-
-sub getcupsremotequeues {
-    # The following code reads in a list of all remote printers which the
-    # local CUPS daemon knows due to broadcasting of remote servers or 
-    # "BrowsePoll" entries in the local /etc/cups/cupsd.conf
-    local *F;
-    open F, ($::testing ? $prefix : "chroot $prefix/ ") . 
-	"lpstat -v |" or return ();
-    my @printerlist;
-    my $line;
-    while ($line = <F>) {
-	if ($line =~ m/^\s*device\s+for\s+([^:\s]+):\s*(\S+)\s*$/) {
-	    my $queuename = $1;
-	    if (($2 =~ m!^ipp://([^/:]+)[:/]!) &&
-		(!$printer->{configured}{$queuename})) {
-		my $server = $1;
-		push (@printerlist, "$queuename|$server");
-	    }
-	}
-    }
-    close F;
-    return @printerlist;
 }
 
 sub addentry {
@@ -2897,14 +2920,16 @@ sub configuregimp {
 	    }
 	}
 	# Default printer
-	if ($configfilecontent !~ /^\s*Current\-Printer\s*:/m) {
-	    $configfilecontent =~
-		s/\n/\nCurrent-Printer: $printer->{DEFAULT}\n/s;
-	} else {
-	    $configfilecontent =~ /^\s*Current\-Printer\s*:\s*(\S+)\s*$/m;
-	    if (!isgimpprinterconfigured ($1, $configfilecontent)) {
+	if ($printer->{DEFAULT}) {
+	    if ($configfilecontent !~ /^\s*Current\-Printer\s*:/m) {
 		$configfilecontent =~
-		    s/(Current\-Printer\s*:\s*)\S+/$1$printer->{DEFAULT}/;
+		    s/\n/\nCurrent-Printer: $printer->{DEFAULT}\n/s;
+	    } else {
+		$configfilecontent =~ /^\s*Current\-Printer\s*:\s*(\S+)\s*$/m;
+		if (!isgimpprinterconfigured ($1, $configfilecontent)) {
+		    $configfilecontent =~
+			s/(Current\-Printer\s*:\s*)\S+/$1$printer->{DEFAULT}/;
+		}
 	    }
 	}
 	# Write back GIMP's printer configuration file
@@ -2940,6 +2965,7 @@ sub addcupsremotetogimp {
 		$ppdfile = "/etc/foomatic/$queue.ppd";
 	    } else {
 		unlink ("$prefix/etc/foomatic/$queue.ppd");
+		return 0;
 	    }
 	}
     } else {
@@ -2948,7 +2974,7 @@ sub addcupsremotetogimp {
     # There is no system-wide config file, treat every user's config file
     for my $configfilename (@configfilenames) {
 	# Load GIMP's printer config file
-	my $configfilecontent = readsofficeconfigfile($configfilename);
+	my $configfilecontent = readgimpconfigfile($configfilename);
 	# Add the printer entry
 	if (!isgimpprinterconfigured ($queue, $configfilecontent)) {
 	    # Remove the old printer entry
@@ -3082,7 +3108,7 @@ sub findgimpconfigfiles {
 		    my $dir = "$homedir/$file";
 		    $dir =~ s:/[^/]*$::;
 		    next if ((-f $dir) && (! -d $dir));
-		    if (! -d $dir) {
+		    if (! -d "$prefix$dir") {
 			run_program::rooted($prefix, 
 					    "/bin/mkdir", $dir)
 			    or next;
@@ -3090,7 +3116,7 @@ sub findgimpconfigfiles {
 					      "/bin/chown", "$uid.$gid", $dir)
 			    or next;
 		    }
-		    if (! -f "$homedir/$file") {
+		    if (! -f "$prefix$homedir/$file") {
 			local *F;
 			open F, "> $prefix$homedir/$file" or next;
 			print F "#PRINTRCv1 written by GIMP-PRINT 4.2.2 - 13 Sep 2002\n";
