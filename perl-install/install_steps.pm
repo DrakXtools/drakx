@@ -404,6 +404,15 @@ Consoles 1,3,4,7 may also contain interesting information";
     any::writeandclean_ldsoconf($o->{prefix});
     log::l("before install packages, after writing ld.so.conf");
 
+    #- make sure the services of initscripts have been enabled (or a catastrophic dead will occur).
+    #- to keep while initscript not cleaned.
+    run_program::rooted($o->{prefix}, "chkconfig", "--add", "random");
+    run_program::rooted($o->{prefix}, "chkconfig", "--add", "netfs");
+    run_program::rooted($o->{prefix}, "chkconfig", "--add", "network");
+    run_program::rooted($o->{prefix}, "chkconfig", "--add", "rawdevices");
+    run_program::rooted($o->{prefix}, "chkconfig", "--add", "sound");
+    run_program::rooted($o->{prefix}, "chkconfig", "--add", "kheader");
+
     #- remove the nasty acon...
     run_program::rooted($o->{prefix}, "chkconfig", "--del", "acon") unless $ENV{LANGUAGE} =~ /ar/;
 
