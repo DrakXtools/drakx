@@ -67,13 +67,18 @@ sub default_printer_type($) { "LOCAL" }
 sub spooler {
     # LPD is taken from the menu for the moment because the classic LPD is
     # highly unsecure. Depending on how the GNU lpr development is going on
-    # LPD support can be reactivated by uncommenting the line which is
-    # commented out now.
-
-    # LPRng is taken out of the distro since Mandrake 9.0.
+    # LPD support can be reactivated by uncommenting the following line.
 
     #return @spooler_inv{qw(cups lpd lprng pdq)};
-    return @spooler_inv{qw(cups pdq)};
+
+    # LPRng is not officially supported any more since Mandrake 9.0, so
+    # show it only in the spooler menu when it was manually installed.
+    if (files_exist((qw(/usr/lib/filters/lpf
+			/usr/sbin/lpd)))) {
+	return @spooler_inv{qw(cups lprng pdq)};
+    } else {
+	return @spooler_inv{qw(cups pdq)};
+    }
 }
 
 sub printer_type($) {
