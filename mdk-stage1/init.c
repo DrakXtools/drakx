@@ -422,7 +422,9 @@ int main(int argc __attribute__ ((unused)), char **argv __attribute__ ((unused))
 			end_stage2 = 1;
 	}
 
-	if (!WIFEXITED(wait_status) || (WEXITSTATUS(wait_status) != 0 && WEXITSTATUS(wait_status) != exit_value_proceed)) {
+        if ((fd = open("/tmp/reboot", O_RDONLY, 0)) > 0) {
+                close(fd);
+        } else if (!WIFEXITED(wait_status) || (WEXITSTATUS(wait_status) != 0 && WEXITSTATUS(wait_status) != exit_value_proceed)) {
 		printf("exited abnormally :-( ");
 		if (WIFSIGNALED(wait_status))
 			printf("-- received signal %d", WTERMSIG(wait_status));
@@ -432,7 +434,9 @@ int main(int argc __attribute__ ((unused)), char **argv __attribute__ ((unused))
 		kill(klog_pid, 9);
 		printf("proceeding, please wait...\n");
 		return 0;
-        } else {
+        }
+
+        if (!abnormal_termination) {
                 int i;
                 for (i=0; i<50; i++)
                         printf("\n");  /* cleanup startkde messages */
