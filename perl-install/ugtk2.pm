@@ -989,6 +989,10 @@ sub sync {
     flush();
 }
 sub flush() { gtkflush() }
+sub shrink_topwindow {
+    my ($o) = @_;
+    $o->{rwindow}->signal_emit('size_allocate', Gtk2::Allocation->new(-1, -1, -1, -1));
+}
 sub exit {
     gtkset_mousecursor_normal(); #- for restoring a normal in any case
     flush();
