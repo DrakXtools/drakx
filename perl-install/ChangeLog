@@ -1,3 +1,8 @@
+2000-02-21  François Pons  <fpons@mandrakesoft.com>
+
+	* build_archive, extract_archive: changed format of TOC to speed
+	up extraction of archive, now 5 to 6 times faster to read TOC :-)
+	
 2000-02-22  Pixel  <pixel@mandrakesoft.com>
 
 	* Xconfigurator.pm: load "Cards" database only to translate NAME
@@ -12,7 +17,7 @@
 	ask_from_treelist. Usage is just the same as ask_from_list with
 	one more argument (the separator eg: |, /)
 
-2000-02-11  François Pons  <fpons@mandrakesoft.com>
+2000-02-21  François Pons  <fpons@mandrakesoft.com>
 
 	* diskdrake.pm: fixed deadlock while trying to create partition
 	when available space is equal or less than 2 cylinders. fixed
