@@ -246,16 +246,16 @@ sub ppp_choose {
     1;
 }
 
-#- TODO: add choice between hcf/hsf
+#- TODO: add choice between hcf/hsf/lt ?
 sub winmodemConfigure {
     my ($in, $netc) = @_;
     my $type;
     
     foreach (keys %{$netc->{autodetect}{winmodem}}) {
-    	my $temp;
-    	/Hcf/ and $temp = "hcf";
-    	/Hsf/ and $temp = "hsf";
-    	$temp and $in->do_pkgs->what_provides("${temp}linmodem") and $type = "${temp}linmodem";
+	/Hcf/ and $type = "hcfpcimodem";
+	/Hsf/ and $type = "hsflinmodem";
+	/LT/  and $type = "ltmodem";
+	$type && $in->do_pkgs->what_provides($type) or $type = undef;
     }
     
     $type || $in->ask_warn(N("Warning"), N("Your modem isn't supported by the system.
