@@ -621,6 +621,8 @@ sub write_lilo_conf {
     my ($prefix, $lilo, $fstab, $hds) = @_;
     $lilo->{prompt} = $lilo->{timeout};
 
+    delete $lilo->{linear} if $lilo->{lba32};
+
     my $file2fullname = sub {
 	my ($file) = @_;
 	if (arch() =~ /ia64/) {
@@ -968,6 +970,10 @@ IconIndex=0
 sub install {
     my ($prefix, $lilo, $fstab, $hds) = @_;
 
+    if (my ($p) = grep { $lilo->{boot} =~ /\Q$_->{device}/ } @$fstab) {
+	die _("You can't install the bootloader on a %s partition\n", partition_table::type2fs($p))
+	  if isFat($p) || isThisFs('xfs', $p);
+    }
     {
 	my $f = "$prefix/etc/sysconfig/system";
 	setVarsInSh($f, add2hash_({ CLEAN_TMP => $lilo->{CLEAN_TMP} }, { getVarsFromSh($f) }));
