@@ -1,8 +1,10 @@
 ROOTDEST    = /export
+RPMS        = $(wildcard $(ROOTDEST)/Mandrake/RPMS/*.rpm)
 BASE        = $(ROOTDEST)/Mandrake/base
 
-ALL = gendepslist rpm2header
 .PHONY: clean install
+
+all: $(BASE)/depslist $(BASE)/hdlist
 
 install:
 	$(MAKE) gendepslist rpm2header
