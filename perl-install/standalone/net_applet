@@ -202,7 +202,6 @@ sub handle_attack {
 
     $ugtk2::wm_icon = "/usr/lib/libDrakX/icons/drakfirewall.png";
     my $w = ugtk2->new(N("Active Firewall : intrusion detected"));
-    local $::no_separator = 1;
 
     gtkadd($w->{window},
            gtknew('VBox', spacing => 5, children_loose => [
