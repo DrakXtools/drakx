@@ -320,7 +320,7 @@ TYPE=$kind
     unless ($::isStandalone) {
         $::isInstall && eval {
             require fs;
-            fs::mount("/proc", "$::prefix/proc", 'proc');
+            fs::mount("/proc", "$::prefix/proc", 'proc') if !-f "$::prefix/proc/mounts";
             fs::mount("/proc/bus/usb", "$::prefix/proc/bus/usb", 'usbdevfs');
         } or log::l("failed to mount usbdevfs");
         $modems{$adsl_device}{modules} && eval { modules::load(@{$modems{$adsl_device}{modules}}) }
