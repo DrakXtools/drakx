@@ -258,7 +258,7 @@ sub testFinalConfig($;$) {
     write_XF86Config($o, $::testing ? $tmpconfig : "$prefix/etc/X11/XF86Config");
 
     $auto
-      or $in->ask_yesorno(_("Test configuration"), _("Do you want to test the configuration?"))
+      or $in->ask_yesorno(_("Test configuration"), _("Do you want to test the configuration?"), 1)
       or return 1;
 
     unlink "$prefix/tmp/.X9-lock";
@@ -315,7 +315,7 @@ sub testFinalConfig($;$) {
 	    $time-- or Gtk->main_quit;
 	});
 
-	exit (interactive_gtk->new->ask_yesorno('', [ _("Is this ok?"), $text ], 1) ? 0 : 222);
+	exit (interactive_gtk->new->ask_yesorno('', [ _("Is this ok?"), $text ], 0) ? 0 : 222);
     };
     my $rc = close F;
     my $err = $?;
@@ -334,7 +334,7 @@ sub autoResolutions($;$) {
     $nowarning || $in->ask_okcancel(_("Automatic resolutions"),
 _("To find the available resolutions i will try different ones.
 Your screen will blink...
-You can switch if off if you want, you'll hear a beep when it's over")) or return;
+You can switch if off if you want, you'll hear a beep when it's over"), 1) or return;
 
     #- swith to virtual console 1 (hopefully not X :)
     my $vt = setVirtual(1);
@@ -483,7 +483,7 @@ sub resolutionsConfiguration($%) {
 	    if ($options{nowarning} || $in->ask_okcancel(_("Automatic resolutions"),
 _("I can try to find the available resolutions (eg: 800x600).
 Alas it can freeze sometimes
-Do you want to try?"))) {
+Do you want to try?"), 1)) {
 		autoResolutions($o, $options{nowarning});
 		is_empty_hash_ref($card->{depth}) and $in->ask_warn('',
 _("No valid modes found
@@ -566,8 +566,6 @@ sub write_XF86Config {
 
     #- Write monitor section.
     $O = $o->{monitor};
-    $O->{modelines} .= $o->{card}{type} eq "TG 96" ? $modelines_text_Trident_TG_96xx : $modelines_text;
-
     print F $monitorsection_text1;
     print F qq(    Identifier "$O->{type}"\n);
     print F qq(    VendorName "$O->{vendor}"\n);
@@ -580,7 +578,7 @@ sub write_XF86Config {
     print F qq(    VertRefresh $O->{vsyncrange}\n);
     print F "\n";
     print F $monitorsection_text4;
-    print F $O->{modelines} || ($o->{card}{type} eq "TG 96" ? $modelines_text_Trident_TG_96xx : $modelines_text);
+    print F ($O->{modelines} || '') . ($o->{card}{type} eq "TG 96" ? $modelines_text_Trident_TG_96xx : $modelines_text);
     print F "\nEndSection\n\n\n";
 
     #- Write Device section.
@@ -724,7 +722,7 @@ sub main {
     if ($ok) {
 	my $run = $o->{xdm} || $::auto || $in->ask_yesorno(_("X at startup"),
 _("I can set up your computer to automatically start X upon booting.
-Would you like X to start when you reboot?"));
+Would you like X to start when you reboot?"), 1);
 
 	rewriteInittab($run ? 5 : 3) unless $::testing;
 

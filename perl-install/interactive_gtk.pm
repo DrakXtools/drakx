@@ -204,7 +204,7 @@ sub ask_from_entries_refW {
 sub wait_messageW($$$) {
     my ($o, $title, $message) = @_;
 
-    my $w = my_gtk->new(_("Resizing"), %$o, grab => 1);
+    my $w = my_gtk->new($title, %$o, grab => 1);
     my $W = pop @$message;
     gtkadd($w->{window},
 	   gtkpack(new Gtk::VBox(0,0),

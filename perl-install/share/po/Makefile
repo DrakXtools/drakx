@@ -9,7 +9,7 @@ clean:
 
 $(POFILES): panoramix.pot
 	cp -f $@ $@t
-	msgmerge $@t $< > $@ || true
+	msgmerge $@t $< > $@
 	rm $@t
 
 panoramix.pot: $(PMSFILES)
@@ -18,5 +18,5 @@ panoramix.pot: $(PMSFILES)
 	rm $(PMSCFILES)
 
 $(PMSCFILES): %_.c: %
-	perl -pe 's|#(.*)|/*\1*\/|; s|$$|\\n\\|' $< > $@
+	perl -pe 's|^(__?\()| $$1|; s|#(.*)|/*\1*\/|; s|$$|\\n\\|' $< > $@
 

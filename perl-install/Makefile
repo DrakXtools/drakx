@@ -73,6 +73,9 @@ gendepslist: %: %.cc
 $(BASE)/depslist: gendepslist $(RPMS) 
 	./gendepslist $(BASE)/depslist $(ROOTDEST)/Mandrake/RPMS/*.rpm
 
+$(BASE)/hdlist: $(RPMS) 
+	$(ROOTDEST)/misc/genhdlist $(ROOTDEST)
+
 install_pms: all
 	for i in `perl -ne 's/sub (\w+?)_? {.*/$$1/ and print' commands.pm`; do ln -sf commands $(DEST)/usr/bin/$$i; done
 
@@ -164,7 +167,7 @@ as_root:
 	mount /dev/loop0 /mnt/initrd
 	chmod a+w /mnt/initrd
 
-full_stage2: $(BASE)/depslist
+full_stage2: $(BASE)/depslist $(BASE)/hdlist
 	rm -rf $(DEST)
 	mkdir -p $(DEST)
 	$(MAKE) get_needed_files 

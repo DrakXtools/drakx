@@ -524,7 +524,7 @@ depending on the normal bootloader. This is useful if you don't want to install
 lilo on your system, or another operating system removes lilo, or lilo doesn't
 work with your hardware configuration. A custom bootdisk can also be used with
 the Mandrake rescue image, making it much easier to recover from severe system
-failures. Would you like to create a bootdisk for your system?"), !$o->{mkbootdisk}) or return;
+failures. Would you like to create a bootdisk for your system?"), $o->{mkbootdisk}) or return;
 	$o->{mkbootdisk} = $l[0] if !$o->{mkbootdisk} || $o->{mkbootdisk} eq "1";
     } else {
 	@l or die _("Sorry, no floppy drive available");
@@ -561,7 +561,7 @@ sub setupBootloader {
 			     _("Where do you want to install the bootloader?"),
 			     \@l, $l[!$onmbr]) eq $l[0];
     } else {
-	$::expert and $o->ask_yesorno('', _("Do you want to use lilo?")) || return;
+	$::expert and $o->ask_yesorno('', _("Do you want to use lilo?"), 1) || return;
     
 	my @l = (
 _("Boot device") => { val => \$b->{boot}, list => [ map { "/dev/$_->{device}" } @{$o->{hds}}, @{$o->{fstab}} ], not_edit => !$::expert },
@@ -708,7 +708,7 @@ For example you can have ``io=0x300 irq=7''", $l),
     if ($@) {
 	$o->ask_yesorno('',
 _("Loading of module %s failed
-Do you want to try again with other parameters?", $l)) or return;
+Do you want to try again with other parameters?", $l), 1) or return;
 	goto ASK;
     }
     $l, $m;
@@ -729,7 +729,7 @@ sub load_thiskind {
 #------------------------------------------------------------------------------
 sub setup_thiskind {
     my ($o, $type, $auto, $at_least_one) = @_;
-    my @l = $o->load_thiskind($type) unless $::expert && $o->ask_yesorno('', "Skip $type pci probe", 0);
+    my @l = $o->load_thiskind($type) unless $::expert && $o->ask_yesorno('', _("Skip %s pci probe", $type), 1);
     return if $auto && (@l || !$at_least_one);
     while (1) {
 	my $msg = @l ?

@@ -282,7 +282,7 @@ sub createBootdisk($) {
 #------------------------------------------------------------------------------
 sub setupBootloaderBefore {
     my ($o) = @_;
-    add2hash($o->{bootloader} ||= {}, lilo::read("$o->{prefix}/etc/lilo.conf"));
+    add2hash($o->{bootloader} ||= {}, lilo::read($o->{prefix}, "/etc/lilo.conf"));
     lilo::suggest($o->{prefix}, $o->{bootloader}, $o->{hds}, $o->{fstab}, install_any::kernelVersion());
     $o->{bootloader}{keytable} ||= keyboard::kmap($o->{keyboard});
 }

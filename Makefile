@@ -3,9 +3,9 @@ BINS = install/install install/local-install install/installinit/init
 DIRS = install install/installinit mouseconfig perl-install ddcprobe
 
 
-.PHONY: $(BOOT_IMG) $(FLOPPY_IMG) $(BINS) update_kernel
+.PHONY: $(DIRS) $(BOOT_IMG) $(FLOPPY_IMG) $(BINS) update_kernel
 
-all: $(BOOT_IMG)
+all: $(DIRS) $(BOOT_IMG)
 	mkdir /export/images 2>/dev/null ; true
 	cp -f $(BOOT_IMG) /export/images
 
@@ -15,6 +15,9 @@ clean:
 	for i in $(DIRS); do make -C $$i clean; done
 	find . -name "*~" -o -name ".#*" | xargs rm -f
 
+$(DIRS):
+	make -C $@
+
 $(BOOT_IMG): $(BINS)
 	if [ ! -e modules ]; then $(MAKE) update_kernel; fi
 	./make_boot_img $@ $(@:gi_%.img=%)
@@ -22,6 +25,8 @@ $(BOOT_IMG): $(BINS)
 $(BINS):
 	$(MAKE) -C `dirname $@`
 
+tar: clean
+	cd .. ; tar cfy gi.tar.bz2 gi
 
 update_kernel:
 	cd install ; ln -sf ../kernel/cardmgr/* .

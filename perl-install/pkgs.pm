@@ -101,6 +101,11 @@ sub set($$$) {
     $val ? &select($packages, $p) : unselect($packages, $p);
 }
 
+sub unselect_all($) {
+    my ($packages) = @_;
+    $_->{selected} = $_->{base} foreach values %$packages;
+}
+
 sub psUsingDirectory() {
     my $dirname = "/tmp/rhimage/Mandrake/RPMS";
     my %packages;
@@ -180,21 +185,26 @@ sub readCompss($) {
 }
 
 sub readCompssList($) {
-    my ($packages) = @_;
-    my $level;
+    my ($packages, $compss) = @_;
+    my %compss; map { $compss{$_->{name}} = $_ } @$compss;
 
     my $f = install_any::getFile("compssList") or die "can't find compssList";
+    local $_ = <$f>;
+    my $level = [ split ];
+
+    my $e;
     foreach (<$f>) {
 	/^\s*$/ || /^#/ and next;
 
+	/^packages\s*$/ and do { $e = $packages; next };
+	/^categories\s*$/ and do { $e = \%compss; next };
+
 	my ($name, @values) = split;
 
-	if ($name eq "package") {
-	    $level = \@values;
-	} else {
-	    my $p = $packages->{$name} or log::l("unknown packages $name (in compssList)"), next;
-	    $p->{values} = \@values;
-	}
+	$e or log::l("neither packages nor categories");
+
+	my $p = $e->{$name} or log::l("unknown entry $name (in compssList)"), next;
+	$p->{values} = \@values;
     }
     $level;
 }
@@ -223,20 +233,21 @@ sub setShowFromCompss($$$) {
 
 sub setSelectedFromCompssList($$$$$) {
     my ($compssListLevels, $packages, $size, $install_class, $lang) = @_;
+    my ($level, $ind) = 100;
 
     my @packages = values %$packages;
     my @places = do {
-	my $ind;
 	map_index { $ind = $::i if $_ eq $install_class } @{$compssListLevels};
 	defined $ind or log::l("unknown install class $install_class in compssList"), return;
 
 	my @values = map { $_->{values}[$ind] } @packages;
-	sort { $values[$b] <=> $values[$a] } 
-	  grep { $packages[$_]->{values}[$ind] } #- remove null values (won't get installed)
-	    0 .. $#packages;
+	sort { $values[$b] <=> $values[$a] } 0 .. $#packages;
     };
     foreach (@places) {
 	my $p = $packages[$_];
+	$level = min($level, $p->{values}[$ind]);
+	last if $level == 0;
+
 	verif_lang($p, $lang) or next;
 	&select($packages, $p);
 
@@ -248,6 +259,7 @@ sub setSelectedFromCompssList($$$$$) {
 	    last;
 	}
     }
+    $ind, $level;
 }
 
 sub init_db {

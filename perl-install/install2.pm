@@ -19,6 +19,7 @@ use keyboard;
 use lilo;
 use mouse;
 use fs;
+use timezone;
 use fsedit;
 use devices;
 use partition_table qw(:types);
@@ -52,7 +53,7 @@ my @installSteps = (
   setRootPassword    => [ __("Set root password"), 1, 1, "formatPartitions" ],
   addUser            => [ __("Add a user"), 1, 1, "doInstallStep" ],
   createBootdisk     => [ __("Create bootdisk"), 1, 0, "doInstallStep" ],
-  setupBootloader    => [ __("Install bootloader"), 1, 1],#, "doInstallStep" ],
+  setupBootloader    => [ __("Install bootloader"), 1, 1, "doInstallStep" ],
   configureX         => [ __("Configure X"), 1, 0, "formatPartitions" ],
   exitInstall        => [ __("Exit install"), 0, 0 ],
 );
@@ -326,7 +327,9 @@ sub selectInstallClass {
     $o->{partitions} ||= $suggestedPartitions{$o->{installClass}};
     $o->{partitioning}{auto_allocate} ||= -1 if $::beginner;
 
-    $o->setPackages(\@install_classes) if $o->{steps}{choosePackages}{entered} >= 1;
+    $o->setPackages(\@install_classes) 
+      if $o->{steps}{choosePackages}{entered} >= 1 &&
+	!$o->{steps}{doInstallStep}{done};
 }
 
 #------------------------------------------------------------------------------

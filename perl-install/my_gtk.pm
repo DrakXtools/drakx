@@ -7,7 +7,7 @@ use vars qw(@ISA %EXPORT_TAGS @EXPORT_OK $border);
 @ISA = qw(Exporter);
 %EXPORT_TAGS = (
     helpers => [ qw(create_okcancel createScrolledWindow create_menu create_notebook create_packtable create_hbox create_vbox create_adjustment create_box_with_title) ],
-    wrappers => [ qw(gtksignal_connect gtkpack gtkpack_ gtkappend gtkadd gtktext_insert gtkset_usize gtkset_justify gtkset_active gtkshow gtkdestroy gtkset_mousecursor gtkset_background gtkset_default_fontset) ],
+    wrappers => [ qw(gtksignal_connect gtkpack gtkpack_ gtkpack__ gtkappend gtkadd gtktext_insert gtkset_usize gtkset_justify gtkset_active gtkshow gtkdestroy gtkset_mousecursor gtkset_background gtkset_default_fontset) ],
     ask => [ qw(ask_warn ask_okcancel ask_yesorno ask_from_entry ask_from_list ask_file) ],
 );
 $EXPORT_TAGS{all} = [ map { @$_ } values %EXPORT_TAGS ];
@@ -90,13 +90,11 @@ sub gtksignal_connect($@) {
 }
 sub gtkpack($@) {
     my $box = shift;
-    foreach (@_) {
-	my $l = $_;
-	ref $l or $l = new Gtk::Label($l);
-	$box->pack_start($l, 1, 1, 0);
-	$l->show;
-    }
-    $box
+    gtkpack_($box, map { 1, $_} @_);
+}
+sub gtkpack__($@) {
+    my $box = shift;
+    gtkpack_($box, map { 0, $_} @_);
 }
 sub gtkpack_($@) {
     my $box = shift;
@@ -318,7 +316,9 @@ sub _create_window($$) {
     }
 
     $w->set_title($title);
-    $w->signal_connect("expose_event" => sub { c::XSetInputFocus($w->window->XWINDOW) }) if $my_gtk::force_focus || $o->{force_focus};
+
+    $w->signal_connect("map_event" => sub { c::XSetInputFocus($w->window->XWINDOW); }) 
+      if $my_gtk::force_focus || $o->{force_focus};
     $w->signal_connect("delete_event" => sub { $o->{retval} = undef; Gtk->main_quit });
     $w->set_uposition(@{$my_gtk::force_position || $o->{force_position}}) if $my_gtk::force_position || $o->{force_position};
 

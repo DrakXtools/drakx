@@ -130,7 +130,7 @@ sub setPackages($$) {
     } foreach @{$o->{base}};
 
     pkgs::setShowFromCompss($o->{compss}, $o->{installClass}, $o->{lang});
-    pkgs::setSelectedFromCompssList($o->{compssListLevels}, $o->{packages}, getAvailableSpace($o) * 0.7, $o->{installClass}, $o->{lang});
+    ($o->{packages_}{ind}, $o->{packages_}{select_level}) = pkgs::setSelectedFromCompssList($o->{compssListLevels}, $o->{packages}, getAvailableSpace($o) * 0.7, $o->{installClass}, $o->{lang});
 }
 
 sub addToBeDone(&$) {
