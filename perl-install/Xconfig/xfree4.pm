@@ -81,18 +81,6 @@ sub set_wacoms {
     } @wacoms;
 }
 
-sub set_monitors {
-    my ($raw_X, @monitors) = @_;
-
-    @monitors = map {
-	my %monitor = %$_;
-	delete @monitor{'HorizSync', 'VertRefresh'} if $monitor{VendorName} eq "Plug'n Play";
-	\%monitor;
-    } @monitors;
-
-    $raw_X->SUPER::set_monitors(@monitors);
-}
-
 sub depths { 8, 15, 16, 24 }
 sub set_resolution {
     my ($raw_X, $resolution, $Screen) = @_;
