@@ -17,22 +17,21 @@ my $in = interactive->vnew;
 
 my $locale = lang::read('', $>);
 if (!member($locale->{lang}, qw(de en es fr it ru))) { $locale->{lang} = 'en' };
-my $path_to_help = "/usr/share/doc/mandrake/" . $locale->{lang} . "/";
+my $path2help = "/usr/share/doc/mandrake/" . $locale->{lang} . "/";
+-d $path2help or $in->do_pkgs->install('mandrake_doc-drakxtools-' . $locale->{lang});
 
--d $path_to_help or $in->do_pkgs->install('mandrake_doc-drakxtools-' . $locale->{lang});
+my $path = $ARGV[0] =~ /^http|^www/ ? $ARGV[0] : $path2help . $ARGV[0];
 
-if ((my $wm = any::running_window_manager()) eq 'kwin') {
-    system("mdklaunchhelp " . $path_to_help . $ARGV[0] . "&");
-} elsif ($wm eq 'gnome-session') {
-    system("yelp ghelp://" . $path_to_help . $ARGV[0] . "&")
-} else {
-    on_request_help($path_to_help . $ARGV[0])
-}
+my $wm = any::running_window_manager();
+my %launchhelp = (
+		  'kwin' => sub { system("mdklaunchhelp " . $path . "&") },
+		  'gnome-session' => sub { system("yelp ghelp://" . $path . "&") },
+		  'other' => sub { my $browser = $ENV{BROWSER} || find { -x "/usr/bin/$_" } qw(mozilla konqueror galeon) or $in->ask_warn('drakhelp', N("No browser is installed on your system, Please install one if you want to browse the help system"));
+				    standalone::explanations("Connection to help system at $link");
+				    system("$browser " . $path . "&") 
+				}
+		 );
+member($wm, 'kwin', 'gnome-session') or $wm = 'other';
+eval { $launchhelp{$wm}->() };
 
-sub on_request_help {
-    my ($link) = @_;
-    my $browser = $ENV{BROWSER} || find { -x "/usr/bin/$_" } qw(mozilla konqueror galeon) or $in->ask_warn('drakhelp', N("No browser is installed on your system, Please install one if you want to browse the help system"));
-    standalone::explanations("Connection to help system at $link");
-    system("$browser $link &");
-}
 
