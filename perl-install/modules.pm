@@ -172,6 +172,13 @@ sub remove_alias($) {
     0;
 }
 
+sub remove_module($) {
+    my ($name) = @_;
+    remove_alias($name);
+    delete $conf{$name};
+    0;
+}
+
 sub read_conf {
     my ($file) = @_;
     my %c;
