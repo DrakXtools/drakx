@@ -390,7 +390,7 @@ sub getSerialModem {
     modules::add_alias('serial', $serdev) if arch() =~ /ppc/ && $modem->{device};
     my @devs = pcmcia_probe();
     foreach (@devs) { $_->{type} =~ /serial/ and $modem->{device} = $_->{device} }
-    grep { if_(defined $_->{device}, $_) } @devs;
+    $modem;
 }
 
 sub getModem() {
