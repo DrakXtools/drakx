@@ -316,7 +316,7 @@ sub adjust_main_extended($) {
 	}
 	$l->{start} = $hd->{primary}{extended}{start} = $start;
 	$l->{size} = $hd->{primary}{extended}{size} = $end - $start;
-	$hd->{primary}{extended}{type} = 0x85 if $only_linux && !$::expert;
+	$hd->{primary}{extended}{type} = $only_linux ? 0x85 : 0x5 if !$::expert;
     }
     unless (@{$hd->{extended} || []} || !$hd->{primary}{extended}) {
 	%{$hd->{primary}{extended}} = (); #- modify the raw entry
