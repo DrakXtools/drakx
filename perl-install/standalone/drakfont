@@ -472,6 +472,7 @@ sub interactive_mode() {
     unless ($::isEmbedded) {
         $window1->{rwindow}->set_position('center');
         $window1->{rwindow}->set_title(N("DrakFont"));
+        $window1->{window}->set_icon(gtkcreate_pixbuf("drakfont"));
     }
     
     my $button = {};

@@ -79,6 +79,7 @@ unless ($::isEmbedded) {
     $window1->{rwindow}->set_position('center');
     $window1->{rwindow}->set_title(N("Network configuration (%d adapters)", scalar @all_cards));
     $window1->{rwindow}->set_size_request(-1, -1);
+    $window1->{rwindow}->set_icon(gtkcreate_pixbuf("drakconnect"));
 }
 $window1->{rwindow}->set_border_width(10);
 
@@ -191,6 +192,12 @@ sub manage {
     my $p = {};
     my ($interface_menu, $selected, $apply_button);
     my $window = ugtk2->new('Manage Connection');
+    unless ($::isEmbedded) {
+        $window->{rwindow}->set_position('center');
+        $window->{rwindow}->set_title(N("Manage connections")); # translation availlable in mcc domain => we need merging
+        $window->{rwindow}->set_icon(gtkcreate_pixbuf("drakconnect"));
+    }
+
     my $notebook = Gtk2::Notebook->new;
     $notebook->set_property('show-tabs', 0);
     $notebook->set_property('show-border', 0);
@@ -894,6 +901,7 @@ Please run \"Internet access\" in control center."));
         $dialog->{rwindow}->set_position('center');
         $dialog->{rwindow}->set_title(N("Internet connection configuration"));
         $dialog->{rwindow}->set_size_request(-1, -1);
+        $dialog->{rwindow}->set_icon(gtkcreate_pixbuf("drakconnect"));
     }
     $dialog->{rwindow}->signal_connect(delete_event => $exit_dialogsub);
 

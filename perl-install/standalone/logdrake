@@ -53,6 +53,7 @@ my $my_win = ugtk2->new($isExplain ? $explain_title : N("Logdrake"));
 unless ($::isEmbedded) {
     $my_win->{window}->set_border_width(5);
     #$my_win->{window}->set_default_size(540,460);
+    $my_win->{window}->set_icon(gtkcreate_pixbuf("logdrake"));
 }
 $my_win->{window}->signal_connect(delete_event => \&quit);
 
