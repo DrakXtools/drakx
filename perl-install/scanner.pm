@@ -70,6 +70,11 @@ sub findScannerUsbport {
     @res;
 }
 
+
+sub findScannerScsi {
+
+}
+
 sub readScannerDB {
     my ($file) = @_;
     my ($card, %cards);
@@ -80,7 +85,7 @@ sub readScannerDB {
     my $fs = {
         LINE => sub { push @{$card->{lines}}, $val },
 	NAME => sub {
-	    $cards{$card->{type}} = $card if $card;
+	    $cards{$card->{type}} = $card if ($card and !$card->{flags}{unsupported});
 	    $card = { type => $val };
 	},
 	SEE => sub {
@@ -119,7 +124,7 @@ sub updateScannerDBfromUsbtable {
 	next unless ($mod eq "\"scanner\"");
 	$name =~ s/\"(.*)\"$/$1/;
 	if (member($name, keys %$scanner::scannerDB)) {
-	    print "$name already in ScannerDB\n";
+	    print "#[$name] already in ScannerDB!\n";
 	    next;
 	}
 	print F "NAME $name\nDRIVER usb\nCOMMENT usb $vendor_id $product_id\nUNSUPPORTED\n\n";
@@ -172,13 +177,12 @@ sub updateScannerDBfromSane {
 		      $name = (member($mfg, keys %$sane2DB))
 			? (ref $sane2DB->{$mfg}) ? $sane2DB->{$mfg}($name) : "$sane2DB->{$mfg}|$name" : "$mfg|$name";
 		      if (member($name, keys %$scanner::scannerDB)) {
-			  print "#![$name] already in ScannerDB !\n";
+			  print "#[$name] already in ScannerDB!\n";
 		      } else {
 			  print Y "\nNAME $name\nSERVER $backend\nDRIVER $intf\n";
 			  print Y "COMMENT $comment\n" if ($comment);
 			  $comment = undef; 
 		      }
-		      #print "#-----------------------------------------------------------------------------\n";
 		      $name = $val;
 		  },
 		  interface => sub {$intf = $val;},
@@ -205,6 +209,11 @@ sub updateScannerDBfromSane {
 
 #-----------------------------------------------
 # $Log$
+# Revision 1.4  2002/02/18 16:16:13  yduret
+# scsi parport preliminary support
+# no more show unsupported scanner
+# common output for ScannerDB update from sane *.desc files and from usbtable
+#
 # Revision 1.3  2001/11/12 15:18:02  yduret
 # update, sync with cvs
 #
