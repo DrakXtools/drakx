@@ -10,7 +10,6 @@ use common qw(:common :functional :system :file);
 use commands;
 use run_program;
 use my_gtk qw(:helpers :wrappers);
-use Data::Dumper;
 
 sub description {
     my %services = (
