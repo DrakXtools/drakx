@@ -97,7 +97,7 @@ sub stop_daemons ()
     foreach (qw(dhcpd named)) {
 	system("/etc/rc.d/init.d/$_ status >/dev/null 2>/dev/null") == 0 and sys("/etc/rc.d/init.d/$_ stop");
     }
-    system("/etc/rc.d/init.d/shorewall status >/dev/null 2>/dev/null") == 0 and sys("/etc/rc.d/init.d/shorewall clear");
+    system("/etc/rc.d/init.d/shorewall status >/dev/null 2>/dev/null") == 0 and sys("/etc/rc.d/init.d/shorewall clear >/dev/null");
     sys("/sbin/chkconfig --level 345 $_ off") foreach 'named', 'dhcpd';
 }
 
