@@ -22,6 +22,7 @@ use log;
 
 @fields2save = qw(primary extended totalsectors isDirty needKernelReread);
 
+@bad_types = ('DOS 3.3+ Extended Partition', 'Win95: Extended partition, LBA-mapped', 'Linux extended partition');
 
 my %types = (
   0x0 => 'Empty',
@@ -194,8 +195,9 @@ my %fs2type = reverse %type2fs;
 1;
 
 sub important_types { 
-    $::expert and return sort values %types; 
-    @important_types, $::beginner ? () : @important_types2;
+    my @l = $::expert ? sort values %types :
+      (@important_types, $::beginner ? () : @important_types2);
+    difference2(\@l, \@bad_types);
 }
 
 sub type2name($) { $types{$_[0]} || $_[0] }
