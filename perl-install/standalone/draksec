@@ -213,7 +213,7 @@ my $bok = gtksignal_connect(new Gtk2::Button(N("Ok")),
                                 if ($seclevel_value ne security::level::get_string()) {
                                     $w = wait_msg(N("Please wait, setting security level..."));
                                     log::explanations("Setting security level to $seclevel_value");
-                                    security::level::set($seclevel_value);
+                                    security::level::set(security::level::from_string($seclevel_value));
                                     remove_wait_msg($w);
                                 }
 
