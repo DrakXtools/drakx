@@ -154,7 +154,7 @@ my $default = {
     autoSCSI => 0,
     mkbootdisk => 0,
     packages => [ qw() ],
-    partitionning => { clearall => $::testing, eraseBadPartitions => 1, auto_allocate => 0, autoformat => 1 },
+    partitionning => { clearall => $::testing, eraseBadPartitions => 1, auto_allocate => 0, autoformat => 0 },
     partitions => [
 		   { mntpoint => "/boot", size =>  16 << 11, type => 0x83 }, 
 		   { mntpoint => "/",     size => 300 << 11, type => 0x83 }, 

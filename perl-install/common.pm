@@ -181,14 +181,15 @@ sub unmakedev { $_[0] >> 8, $_[0] & 0xff }
 
 sub translate {
     my ($s) = @_;
-    unless (defined %po::I18N::I18N) {
-	if (my ($lang) = substr($ENV{LC_ALL} || $ENV{LANGUAGE} || $ENV{LC_MESSAGES} || $ENV{LANG} || '', 0, 2)) {
-	    local $@;
-	    local $SIG{__DIE__} = 'none';
-	    eval { require "po/$lang.pm" };
-	}
+    my ($lang) = substr($ENV{LC_ALL} || $ENV{LANGUAGE} || $ENV{LC_MESSAGES} || $ENV{LANG} || '', 0, 2);
+    unless (defined $po::I18N::{$lang}) {
+	local $@;
+	local $SIG{__DIE__} = 'none';
+	eval { require "po/$lang.pm"; };
     }
-    $po::I18N::I18N{$s} || $s;
+    $po::I18N::{$lang} or return $s;
+    my $l = *{$po::I18N::{$lang}};
+    $l->{$s} || $s;
 }
 
 sub untranslate($@) {

@@ -41,8 +41,6 @@ sub text2lang {
 sub set {
     my $lang = shift;
 
-    undef %po::I18N::I18N;
-
     if ($lang) {
 	$ENV{LANG} = $ENV{LINGUAS} = $lang;
 	$ENV{LC_ALL} = $languages{$lang}[3];

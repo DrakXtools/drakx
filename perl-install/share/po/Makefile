@@ -9,7 +9,7 @@ clean:
 	rm -f empty.po $(FROMPOFILES) $(POFILES:%=%t) $(PMSCFILES)
 
 $(FROMPOFILES): %.pm: %.po
-	./po2perl < $< > $@
+	./po2perl $< > $@
 
 $(POFILES): panoramix.pot
 	cp -f $@ $@t

@@ -12,8 +12,8 @@ sub fd() { fileno LOG }
 
 sub l { 
     $logOpen or openLog();
-    print LOG "* ", @_, "\n"; 
-    print LOG2 "* ", @_, "\n"; 
+    print LOG "* ", @_, "\n";
+    print LOG2 "* ", @_, "\n";
 }
 sub ld { $logDebugMessages and &l }
 sub w { &l }

@@ -68,7 +68,7 @@ sub make($;$) {
 
     my $nbpages = divide(devices::size($devicename), $pagesize);
 
-    if ($nbpages <= $V0_MAX_PAGES || kernel_greater_or_equal(2,1,117) || $pagesize < 2048) {
+    if ($nbpages <= $V0_MAX_PAGES || !kernel_greater_or_equal(2,1,117) || $pagesize < 2048) {
 	$version = 0;
     } else {
 	$version = 1;

@@ -40,15 +40,13 @@ sub make($) {
     my ($type, $major, $minor);
     my $prefix = '';
 
-    if (m,^(.*)/(dev|tmp)/(.*),) {
-	$prefix = $1;
-	$_ = $3;
-    } elsif (m,/,) {
-	die "can't make device $file";
+    if (m,^(.*/(?:dev|tmp))/(.*),) {
+	$_ = $2;
+    } else {
+	$file = "$prefix/dev/$_";
+	-e $file or $file = "$prefix/tmp/$_";
     }
-    $file = "$prefix/dev/$_";
-    -e $file or $file = "$prefix/tmp/$_";
-    -e $file and return $file; # assume nobody takes fun at creating files named as device
+    -e $file and return $file; # assume nobody takes fun at creating files named as device	
 
     if (/^sd(.)(\d{0,2})/) {
 	$type = c::S_IFBLK();
