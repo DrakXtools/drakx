@@ -197,7 +197,6 @@ arch() !~ /sparc/ ? (
   0x1b => 'vfat',
   0x1c => 'vfat',
   0x1e => 'vfat',
-  0x35 => 'jfs',
   0x82 => 'swap',
   0x83 => 'ext2',
   0x183=> 'reiserfs',
