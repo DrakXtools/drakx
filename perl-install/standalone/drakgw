@@ -23,6 +23,9 @@ use c;
 use netconnect;
 use detect_devices;
 
+$::isEmbedded = ($::XID, $::CCPID) = "@ARGV" =~ /--embedded (\S*) (\S*)/;
+$::isWizard = "@ARGV" =~ /--wizard/;
+
 local $_ = join '', @ARGV;
 
 /-h/ and die "usage: drakgw [--version --verbose]\n";
@@ -94,6 +97,7 @@ sub fatal_quit($)
     $in->exit(-1);
 }
 
+begin:
 
 #- **********************************
 #- * 0th step: verify if we are already set up
@@ -215,13 +219,13 @@ if ($#all_cards == -1)
 {
     $in->ask_warn(_("No network adapter on your system!"), 
 		  _("No ethernet network adapter has been detected on your system. Please run the hardware configuration tool."));
-    $in->exit(0);
+    quit_global($in);
 }
 elsif ($#all_cards == 0)
 {
     $interface = $all_cards[0];
     $::verbose and ($in->ask_okcancel(_("Network interface"),
-				      _("There is only one configured network adapter on your system:\n\n$interface\n\nWould you like to setup your Local Area Network with that adapter?"), 1) or $in->exit(0));
+				      _("There is only one configured network adapter on your system:\n\n$interface\n\nWould you like to setup your Local Area Network with that adapter?"), 1) or quit_global($in));
 }
 else
 {
@@ -229,14 +233,14 @@ else
 				    _("Please choose what network adapter will be connected to your Local Area Network."),
 				    \@all_cards,
 				    );
-    defined $interface or $in->exit(0);
+    defined $interface or quit_global($in);
 }
 $interface =~ /(eth[0-9]+)/ or die("Internal error");
 my $device = $1;
 log::l("[drakgw] Choosing network card: $device\n");
 
 grep(/$device/, @configured_devices) and
-    ($in->ask_okcancel('', _("Warning, the network adapter is already configured.\nWould you like to reconfigure?")) or $in->exit(0));
+    ($in->ask_okcancel('', _("Warning, the network adapter is already configured.\nWould you like to reconfigure?")) or quit_global($in));
 
 
 #- setup the address for the LAN
@@ -261,7 +265,7 @@ foreach (@configured_devices)
 	open IFCFG, "$ifcfg" or die "Can't open $ifcfg";
 	my @ifcfg_content = <IFCFG>;
 	grep(/$lan_address/, @ifcfg_content) and
-	    $in->ask_warn('', _("Potential LAN address conflict found in current config of $_!\n")) and $in->exit(0);
+	    $in->ask_warn('', _("Potential LAN address conflict found in current config of $_!\n")) and quit_global($in);
 	close IFCFG;
     }
 }
@@ -272,7 +276,7 @@ foreach (@configured_devices)
 my @chain_rules;
 (-f "/etc/sysconfig/ipchains" or ((-x "/sbin/ipchains") and (@chain_rules = `/sbin/ipchains -L`) and ($#chain_rules > 2)))
     and ($in->ask_okcancel(_("Firewalling configuration detected!"),
-			   _("Warning! An existing firewalling configuration has been detected. You may need some manual fix after installation. Proceed?"), 1) or $in->exit(0));
+			   _("Warning! An existing firewalling configuration has been detected. You may need some manual fix after installation. Proceed?"), 1) or quit_global($in));
 
 
 #- ask for confirmation
@@ -536,12 +540,21 @@ You may now share Internet connection with other computers on your Local Area Ne
 
 
 log::l("[drakgw] Installation complete, exiting\n");
-$in->exit(0);
+quit_global($in);
+
+sub quit_global {
+    my ($in)=@_;
+    $::isEmbedded ? kill(USR1, $::CCPID) : $in->exit(0);
+    goto begin
+}
 
 
 
 #-------------------------------------------------
 #- $Log$
+#- Revision 1.20  2001/02/08 07:00:41  damien
+#- added embedded and (ugly) wizard mode.
+#-
 #- Revision 1.19  2001/01/10 00:32:42  prigaux
 #- use standalone and standalone::pkgs_install
 #-
