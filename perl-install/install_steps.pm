@@ -111,7 +111,7 @@ sub selectLanguage {
     if (!$o->{keyboard} || $o->{keyboard}{unsafe}) {
 	$o->{keyboard} = keyboard::from_usb() || keyboard::lang2keyboard($o->{locale}{lang});
 	$o->{keyboard}{unsafe} = 1;
-	keyboard::setup($o->{keyboard}) if !$::live;
+	keyboard::setup($o->{keyboard});
     }
 
     $o->charsetChanged;
@@ -171,7 +171,7 @@ sub doPartitionDisksBefore {
 	eval { fs::umount("$o->{prefix}/proc") };
 	eval {          fs::umount_all($o->{fstab}, $o->{prefix}) };
 	eval { sleep 1; fs::umount_all($o->{fstab}, $o->{prefix}) } if $@; #- HACK
-    } if $o->{fstab} && !$::testing && !$::live;
+    } if $o->{fstab} && !$::testing;
 }
 
 #------------------------------------------------------------------------------

@@ -77,7 +77,6 @@ install_pms: $(DIRS)
 	cp share/*.rc $(DESTREP4PMS)
 	chmod a+x $(DESTREP4PMS)/install2
 	chmod a+x $(DESTREP4PMS)/commands
-	chmod a+x $(DESTREP4PMS)/live_install*
 
 mo_files : $(MOFILES)
 

@@ -559,7 +559,6 @@ sub check_bad_card {
     my ($card) = @_;
     my $bad_card = using_xf4($card) ? $card->{BAD_FB_RESTORE} : $card->{BAD_FB_RESTORE_XF3};
     $bad_card ||= $card->{Driver} eq 'i810' || $card->{Driver} eq 'fbdev';
-    $bad_card ||= $card->{Driver} eq 's3virge' if $::live;
     $bad_card ||= $card->{Driver} eq 'nvidia' if !$::isStandalone; #- avoid testing during install at any price.
     $bad_card ||= $card->{server} =~ /FBDev|Sun/ if !using_xf4($card);
 

@@ -372,7 +372,6 @@ sub main {
 	    display   => sub { $o->{display} = $v },
 	    askdisplay => sub { print "Please enter the X11 display to perform the install on ? "; $o->{display} = chomp_(scalar(<STDIN>)) },
 	    security  => sub { $o->{security} = $v },
-	    live      => sub { $::live = 1 },
 	    noauto    => sub { $::noauto = 1 },
 	    test      => sub { $::testing = 1 },
 	    patch     => sub { $patch = 1 },
@@ -408,7 +407,7 @@ sub main {
     }
 
     undef $::auto_install if $cfg;
-    if (!$::testing && !$::live) {
+    if (!$::testing) {
 	symlink "rhimage", "/tmp/image"; #- for compatibility with old stage1
 	unlink $_ foreach "/modules/modules.mar", "/sbin/stage1";
     }
@@ -421,8 +420,7 @@ sub main {
         move::init($o);
     }
 
-    $o->{prefix} = $::prefix = $::testing ? "/tmp/test-perl-install" : $::live || $::move ? "" : "/mnt";
-    $o->{isUpgrade} = 1 if $::live;
+    $o->{prefix} = $::prefix = $::testing ? "/tmp/test-perl-install" : $::move ? "" : "/mnt";
     mkdir $o->{prefix}, 0755;
     devices::make("/dev/zero"); #- needed by ddcxinfos
 
@@ -651,7 +649,7 @@ sub main {
 	my $now = time() - 24 * 60 * 60;
 	utime $now, $now, "$o->{prefix}/$_";
     }
-    $::live or install_any::killCardServices();
+    install_any::killCardServices();
 
     #- make sure failed upgrade will not hurt too much.
     install_steps::cleanIfFailedUpgrade($o);

@@ -424,7 +424,7 @@ sub getSagem() {
 }
 
 sub getNet() {
-    grep { !(($::isStandalone || $::live) && /plip/) && c::hasNetDevice($_) }
+    grep { !($::isStandalone && /plip/) && c::hasNetDevice($_) }
       grep { /^(eth|fddi|plip|tr|usb|wifi|wlan)/ }
         map_index {
             # skip headers
