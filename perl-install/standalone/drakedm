@@ -49,7 +49,7 @@ several different X sessions on your local machine at the same time.")),
                                  val => \$dm,
                                  type => 'list',
                                  format => sub { $dm{$_[0]}[0] },
-                                 ort => 1,
+                                 sort => 1,
                                 }
                                ]
                               )
