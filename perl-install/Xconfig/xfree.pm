@@ -47,15 +47,17 @@ sub get_monitor  { get_both('get_monitor', @_) }
 sub get_monitors { get_both('get_monitors', @_) }
 sub set_monitors { set_both('set_monitors', @_) }
 
+sub is_fbdev { get_both('is_fbdev', @_) }
+
 #-##############################################################################
 #- helpers
 #-##############################################################################
 sub get_both {
     my ($getter, $both) = @_;
 
-    if ($both->{xfree3}) {
-	$both->{xfree4}->$getter;
-    } elsif ($both->{xfree4}) {
+    if (is_empty_array_ref($both->{xfree3})) {
+	$both->{xfree3}->$getter;
+    } elsif (is_empty_array_ref($both->{xfree4})) {
 	$both->{xfree3}->$getter;
     } else {
 	my @l3 = $both->{xfree3}->$getter;
@@ -66,8 +68,8 @@ sub get_both {
 sub set_both {
     my ($setter, $both, @l) = @_;
 
-    $both->{xfree3}->$setter(@l) if $both->{xfree3};
-    $both->{xfree4}->$setter(@l) if $both->{xfree4};
+    $both->{xfree3}->$setter(@l) if !is_empty_array_ref($both->{xfree3});
+    $both->{xfree4}->$setter(@l) if !is_empty_array_ref($both->{xfree4});
 }
 
 sub merge_values {
