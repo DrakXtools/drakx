@@ -927,9 +927,11 @@ sub miscellaneousBefore {
 
     $ENV{SECURE_LEVEL} = $o->{security};
 
-    mkdir_p("$o->{prefix}/etc/sysconfig/msec");
-    symlink "server.$o->{security}", "/etc/security/msec/server" if $o->{security} > 3;
-
+    addToBeDone {
+	mkdir_p("$o->{prefix}/etc/security/msec");
+	symlink "server.$o->{security}", "$o->{prefix}/etc/security/msec/server" if $o->{security} > 3;
+    } 'formatPartitions';
+    
     add2hash_ $o, { useSupermount => 1 && $o->{security} < 4 && arch() !~ /sparc/ && !$::corporate };
 
     add2hash_($o->{miscellaneous} ||= {}, { numlock => !detect_devices::isLaptop() });
