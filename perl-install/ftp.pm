@@ -50,14 +50,14 @@ sub new {
 
 sub getFile {
     my ($f, @para) = @_;
+    $f eq 'XXX' and rewindGetFile(), return; #- special case to force closing connection.
     foreach (1..3) {
 	my ($ftp, $retr) = new(@para ? @para : fromEnv);
 	$$retr->close if $$retr;
-	$f eq 'XXX' and return; #- special case to force closing connection on CD, really necessary here!
 	$$retr = $ftp->retr($f) and return $$retr;
 	rewindGetFile();
 	log::l("ftp get failed, sleeping before trying again");
-	sleep 2;
+	sleep 1;
     }
 }
 

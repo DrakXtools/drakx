@@ -16,6 +16,7 @@ sub getFile {
     $path .= "/$_[0]";
 
     $sock->close if $sock;
+    $_[0] eq 'XXX' and return; #- force closing connection.
     $sock = IO::Socket::INET->new(PeerAddr => $host,
 				  PeerPort => $port || 80,
 				  Proto    => 'tcp',
