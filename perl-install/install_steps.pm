@@ -420,7 +420,6 @@ Consoles 1,3,4,7 may also contain interesting information";
     touch "$o->{prefix}/var/lock/TMP_1ST";
 
     any::writeandclean_ldsoconf($o->{prefix});
-    log::l("before install packages, after writing ld.so.conf");
 
     #- make sure some services have been enabled (or a catastrophic restart will occur).
     #- these are normally base package post install scripts or important services to start.
@@ -495,6 +494,68 @@ GridHeight=70
 	      if -e "$o->{prefix}$_.mdkgisave";
 	}
     }
+
+    if ($o->{blank} || $o->{updatemodules}) {
+	my @l = detect_devices::floppies();
+
+	foreach (qw(blank updatemodules)) {
+	    $o->{$_} eq "1" and $o->{$_} = $l[0] || die _("No floppy drive available");
+	}
+
+	$o->{blank} and $o->copyKernelFromDiskette();
+	$o->{updatemodules} and $o->updateModulesFromDiskette();
+    }
+}
+
+sub copyKernelFromDiskette {
+    my ($o) = @_;
+    return if $::testing || !$o->{blank};
+
+    fs::mount($o->{blank}, "/floppy", "vfat", 0);
+    eval { commands::cp("-f", "/floppy/vmlinuz", "$o->{prefix}/boot/vmlinuz-default") };
+    if ($@) {
+	log::l("copying of /floppy/vmlinuz from blank modified disk failed: $@");
+    }
+    fs::umount("/floppy");
+}
+
+sub updateModulesFromDiskette {
+    my ($o) = @_;
+    return if $::testing || !$o->{updatemodules};
+
+    fs::mount($o->{updatemdoules}, "/floppy", "ext2", 0);
+    foreach (glob_("$o->{prefix}/lib/modules/*")) {
+	my ($kernelVersion) = m,lib/modules/(\S*),;
+	if (-d "/floppy/$kernelVersion") {
+	    my @src_files = glob_("/floppy/$kernelVersion/*");
+	    my @dest_files = split "\n", `find "$o->{prefix}/lib/modules`;
+	    foreach my $s (@src_files) {
+		my ($sfile, $sext) = $s =~ /([^\/\.]*\.o)(?:\.gz|\.bz2)?$/;
+		my $qsfile = quotemeta $sfile;
+		my $qsext = quotemeta $sext;
+		foreach my $target (@dest_files) {
+		    $target =~ /$qsfile/ or next;
+		    eval { commands::cp("-f", $s, $target) };
+		    if ($@) {
+			log::l("updating module $target by $s failed: $@");
+		    } else {
+			log::l("updating module $target by $s");
+		    }
+		    if ($target !~ /$qsfile$qsext$/) {
+			#- extension differ, first rename target file correctly,
+			#- then uncompress source file, then compress it as expected.
+			my ($basetarget, $text) = $target =~ /(.*?)(\.gz|\.bz2)$/;
+			rename $target, "$basetarget$sext";
+			$sext eq '.gz' and run_program::run("gzip", "-d", "$basetarget$sext");
+			$sext eq '.bz2' and run_program::run("bzip2", "-d", "$basetarget$sext");
+			$text eq '.gz' and run_program::run("gzip", $basetarget);
+			$text eq '.bz2' and run_program::run("bzip2", $basetarget);
+		    }
+		}
+	    }
+	}
+    }
+    fs::umount("/floppy");
 }
 
 #------------------------------------------------------------------------------
