@@ -131,7 +131,7 @@ sub ask_from_listf_no_check {
 	    if_($l->[1], cancel => may_apply($f, $l->[1]), focus_cancel => $def eq $l->[1]) }, []
         ) ? $l->[0] : $l->[1];
     } else {
-	ask_from_entries_refH($o, $title, $message, [ { val => \$def, type => 'list', list => $l, help => $help, format => $f } ]);
+	ask_from_entries_refH($o, $title, $message, [ { val => \$def, type => 'list', list => $l, help => $help, format => $f } ]) or die 'ask_from_list cancel';
 	$def;
     }
 }
