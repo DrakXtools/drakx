@@ -17,7 +17,7 @@ sub auto_detect {
     my ($in) = @_;
     {
 	my $w = $in->wait_message(_("Test ports"), _("Detecting devices..."));
-	modules::get_alias("usb-interface") and eval { modules::load("printer"); sleep(1); };
+	modules::get_alias("usb-interface") and eval { modules::load("printer"); sleep(2); };
 	eval { modules::load_multi("parport_pc", "parport_probe", "lp"); };
     }
     my $b = before_leaving { eval { modules::unload("parport_probe") } };
@@ -48,38 +48,16 @@ sub setup_local($$$) {
 _("Printer Device") => {val => \$printer->{DEVICE}, list => \@port } ],
 					 );
 
+    #- make the DeviceURI from DEVICE.
+    $printer->{DeviceURI} = ($printer->{DEVICE} =~ /usb/ ? "usb:" : "parallel:") . $_->{DEVICE};
+
     foreach (@parport) {
 	$printer->{DEVICE} eq $_->{port} or next;
 	$printer->{DBENTRY} = $printer::descr_to_db{common::bestMatchSentence2($_->{val}{DESCRIPTION},
 									       @printer::entry_db_description)};
-    }
-    1;
-}
-
-sub setup_uri_local($$$) {
-    my ($printer, $in, $install) = @_;
-
-    my @str = ();
-    my @parport = auto_detect($in);
-    foreach (@parport) {
-	$_->{val}{DESCRIPTION} and push @str, _("A printer, model \"%s\", has been detected on ",
-						$_->{val}{DESCRIPTION}) . $_->{port};
-    }
-
-    my @direct_uri = printer::get_direct_uri();
-    @parport and $printer->{DeviceURI} = ($parport[0]{port} =~ /usb/ ? "usb:" : "parallel:") . $parport[0]{port};
-
-    return if !$in->ask_from_entries_refH(_("Local Printer Device (URI)"),
-					  _("What URI device is your printer connected to
-(note that parallel:/dev/lp0 is equivalent to LPT1:)?\n") . (join "\n", @str), [
-_("Printer Device URI") => { val => \$printer->{DeviceURI}, list => \@direct_uri } ],
-                                         );
-
-    foreach (@parport) {
-	(split ':', $printer->{DeviceURI})[1] eq $_->{port} or next;
         $printer->{cupsDescr} = common::bestMatchSentence2($_->{val}{DESCRIPTION}, keys %printer::descr_to_ppd);
     }
-   1;
+    1;
 }
 
 sub setup_remote($$$) {
@@ -150,19 +128,41 @@ _("Password") => {val => \$printer->{NCPPASSWD}, hidden => 1} ],
     1;
 }
 
-sub setup_uri_net($$$) {
+sub setup_socket($$$) {
+    my ($printer, $in, $install) = @_;
+    my ($hostname, $port);
+
+    return if !$in->ask_from_entries_refH(_("Socket Printer Options"),
+_("To print to a socket printer, you need to provide the
+hostname of the printer and optionally the port number."), [
+_("Printer Hostname") => \$hostname,
+_("Port") => \$port ],
+					 );
+
+    #- make the DeviceURI parameters given above, these parameters are not in printer
+    #- structure as only the URI is needed (cups only).
+    $printer->{DeviceURI} = join '', ("socket://$hostname", $port ? (":$port") : ());
+    1;
+}
+
+sub setup_uri($$$) {
     my ($printer, $in, $install) = @_;
 
-    return if !$in->ask_from_entries_refH(_("Network Printer Options (URI)"),
-_("Choose the right Device URI for a network printer or a local file. Examples:
-   file:/path/to/filename.prn
-   http://hostname:631/ipp/port1
-   ipp://hostname/ipp/port1
-   lpq://hostname/queue
-   socket://hostname
-   socket://hostname:9100"), [
-_("Printer Device URI") => \$printer->{DeviceURI} ],
-					  );
+    return if !$in->ask_from_entries_refH(_("Printer Device URI"),
+_("You can specify directly the URI to access the printer with CUPS."),
+_("Printer Device URI") => { val => \$printer->{DeviceURI}, list => [ printer::get_direct_uri(),
+                                                                      "file:/",
+                                                                      "http://",
+                                                                      "ipp://",
+                                                                      "lpq://",
+                                                                      "smb://",
+                                                                      "socket://",
+                                                                    ], },
+					 );
+    if ($printer->{DeviceURI} =~ /^smb:/) {
+        &$install('samba');
+        printer::restart_queue($printer);
+    }
     1;
 }
 
@@ -381,8 +381,8 @@ You can add some more or change the existing ones."),
 	    } else {
 		if ($printer->{mode} eq 'cups') {
 		    $in->ask_from_entries_refH([_("Select Printer Connection"), _("Ok"), $::beginner ? () : _("Remove queue")],
-_("Every printer managed by CUPS need a name (for example lp).
-Other parameter like the description of the printer or its location
+_("Every printer need a name (for example lp).
+Other parameters such as the description of the printer or its location
 can be defined. What name should be used for this printer and
 how is the printer connected?"), [
 _("Name of printer") => { val => \$printer->{QUEUE} },
@@ -409,13 +409,13 @@ _("Printer Connection") => { val => \$printer->{str_type}, list => [ printer::pr
 	    $printer->{TYPE} = $printer::printer_type{$printer->{str_type}};
 
 	    $continue = 0;
-	    for ($printer->{TYPE}) { #- chooser lpr/cups ? not good !
-		/URI_LOCAL/ and setup_uri_local($printer, $in, $install) and last;
-		/URI_NET/   and setup_uri_net  ($printer, $in, $install) and last;
+	    for ($printer->{TYPE}) {
 		/LOCAL/     and setup_local    ($printer, $in, $install) and last;
-		/REMOTE/    and setup_remote   ($printer, $in, $install) and last; #- make common for cups/lpr ?
-		/SMB/       and setup_smb      ($printer, $in, $install) and last; #- make common for cups/lpr ?
+		/REMOTE/    and setup_remote   ($printer, $in, $install) and last;
+		/SMB/       and setup_smb      ($printer, $in, $install) and last;
 		/NCP/       and setup_ncp      ($printer, $in, $install) and last;
+		/SOCKET/    and setup_socket   ($printer, $in, $install) and last;
+		/URI/       and setup_uri      ($printer, $in, $install) and last;
 		$continue = 1; last;
 	    }
 	}

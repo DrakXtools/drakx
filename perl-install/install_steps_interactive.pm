@@ -573,8 +573,8 @@ sub configurePrinter {
 
     #- figure out what printing system to use, currently are suported cups and lpr,
     #- in case this has not be detected above.
-    $::beginner and $o->{printer}{mode} ||= 'cups'; #'lpr';
-    if (!$o->{printer}{mode}) {
+    $::beginner and $o->{printer}{mode} ||= 'cups';
+    if ($::expert || !$o->{printer}{mode}) {
 	$o->{printer}{mode} = $o->ask_from_list_([''], _("What printing system do you want to use?"),
 						 [ 'cups', 'lpr', __("Cancel") ],
 						);

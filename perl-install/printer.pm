@@ -17,11 +17,11 @@ my $PRINTER_FILTER_DIR = "/usr/lib/rhs/rhs-printfilters";
 
 %printer_type = (
     __("Local printer")           => "LOCAL",
-    __("Remote lpd")              => "REMOTE",
+    __("Network priner (lpd)")    => "REMOTE",
     __("SMB/Windows 95/98/NT")    => "SMB",
     __("NetWare")                 => "NCP",
-    __("URI for Local printer")   => "URI_LOCAL",
-    __("URI for Network printer") => "URI_NET",
+    __("Socket")                  => "SOCKET",
+    __("Printer Device URI")      => "URI",
 );
 %printer_type_inv = reverse %printer_type;
 
@@ -41,10 +41,10 @@ sub set_prefix($) { $prefix = $_[0]; }
 sub default_queue($) { (split '\|', $_[0]{QUEUE})[0] }
 sub default_spooldir($) { "/var/spool/lpd/" . default_queue($_[0]) }
 
-sub default_printer_type($) { ($_[0]{mode} eq /cups/ && "URI_") . "LOCAL" }
+sub default_printer_type($) { "LOCAL" }
 sub printer_type($) {
     for ($_[0]{mode}) {
-	/cups/ && return @printer_type_inv{qw(URI_LOCAL URI_NET REMOTE SMB)};
+	/cups/ && return @printer_type_inv{qw(LOCAL REMOTE SMB SOCKET), $::expert ? qw(URI) : ()};
 	/lpr/  && return @printer_type_inv{qw(LOCAL REMOTE SMB NCP)};
     }
 }
@@ -363,6 +363,7 @@ sub poll_ppd_base {
     #- the file /etc/cups/ppds.dat is no more modified.
     #- if cups continue to modify it (because it reads the ppd files available), the
     #- poll_ppd_base program simply cores :-)
+    run_program::rooted($prefix, "ifup lo"); #- else cups will not be happy!
     run_program::rooted($prefix, "/etc/rc.d/init.d/cups start");
 
     foreach (1..10) {
@@ -376,6 +377,10 @@ sub poll_ppd_base {
 	scalar(keys %descr_to_ppd) > 5 and last;
 	sleep 1; #- we have to try again running the program, wait here a little before.
     }
+    #- just in case, poll_ppd_base may produce core if not connected immediately.
+    unlink "$prefix/core";
+
+    scalar(keys %descr_to_ppd) > 5 or die "unable to connect to cups server";
 }
 
 #-******************************************************************************
