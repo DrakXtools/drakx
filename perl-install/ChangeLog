@@ -1,3 +1,184 @@
+2003/02/03  Damien Chaumette  <dchaumette@mandrakesoft.com>
+
+	* network/network.pm, network/ethernet.pm: 
+	  - fix zeroconf support
+	  - cleanups
+
+2003/02/03  Pablo Saratxaga  <pablo@mandrakesoft.com>
+
+	* share/po/cy.po: updated Welsh file
+
+2003/02/03  Pixel  <pixel@mandrakesoft.com>
+
+	* modules/parameters.pm: use run_program::get_stdout
+
+2003/02/03  Thierry Vignaud  <tvignaud@mandrakesoft.com>
+
+	* standalone/draksec: sanitize gui (aka make it look nicer):
+	  - put the same help label on top of each msec options notebook pages
+	and consolidate it
+	  - use gtkpack_ instead of gtkpack so that we can tell gtk+ that label
+	  must neither fill nor expand, only the packtable should
+	display again the first notebook page
+	if no default value, then do not print one (aka for cron checks)
+	fix help system description.
+	we should really use the camille/deush help system though.
+	  - perl_checker fixes
+	  - display sorted options (hey pixel, note that the last diff trunk
+	with
+	  execessive () was not detected by perl_checker :-( )
+
+	* modules/parameters.pm: pixelize(tm)
+
+	* standalone/interactive_http/authorised_progs: draksec is not written to
+	use interactive, thus cannot be used by http
+	frontend
+
+	* standalone/interactive_http/miniserv.init: sanitize draxktools server
+	service script:
+	  - no gratuitous shell forking
+	  - now can be debugged through "sh -x"
+	  - use std shell service lib
+	  - make it print [OK] || [FAILLED]
+
+	* ugtk2.pm: let simplify
+
+2003/02/02  alus
+
+	* share/po/pl.po: updated
+
+2003/02/02  Pablo Saratxaga  <pablo@mandrakesoft.com>
+
+	* share/po/ar.po: updated Arabic, Spanish, Finnish and Slovak files
+	updated Arabic and Danish files
+
+	* share/po/es.po, share/po/sk.po, share/po/fi.po: updated Arabic, Spanish,
+	Finnish and Slovak files
+
+	* share/po/da.po: updated Arabic and Danish files
+
+2003/02/02  Pixel  <pixel@mandrakesoft.com>
+
+	* printer/printerdrake.pm: move whatPrinter(), whatUsbport() and
+	whatPrinterPort() out of detect_devices to printer::detect
+	(it cleans up detect_devices, and won't hurt eyes anymore :)
+	this change, together with .perl_checker skipping printer::* marks the
+	style disagreement
+	    between printer/* and the rest of install
+
+	* lang.pm, common.pm, install_interactive.pm: please perl_checker
+
+	* printer/detect.pm, detect_devices.pm: move whatParport() to
+	printer::detect
+	move whatPrinter(), whatUsbport() and whatPrinterPort() out of
+	detect_devices to printer::detect
+	(it cleans up detect_devices, and won't hurt eyes anymore :)
+	this change, together with .perl_checker skipping printer::* marks the
+	style disagreement
+	    between printer/* and the rest of install
+
+	* bootloader.pm: fix grub installed on {first_hd_device} instead of {boot}
+	(bug #1199)
+
+	* share/diskdrake.rc: NTFS is blue
+
+	* partition_table.pm (adjust_local_extended): fix resizing local extended
+
+	* install_gtk.pm, ugtk2.pm: ensure the window is big enough in 640x480:
+	remove logo and steps window
+
+	* .perl_checker: do not check printer::main, printer::printerdrake and
+	printer::detect, too many warnings
+
+	* install_steps_gtk.pm: 
+	  - handle {vga16} in Xnest testing mode
+	  - fix weird bug due to missing aewm-drakx in test mode (??)
+	  - add Xnest feature when testing
+	  - cleanup and re-indent
+
+2003/02/02  siegel
+
+	* share/po/de.po: some updates
+
+2003/02/02  Till Kamppeter  <till@mandrakesoft.com>
+
+	* install_steps.pm, install_steps_interactive.pm: Fixed Foomatic
+	installation done by installer.
+
+2003/02/01  Pablo Saratxaga  <pablo@mandrakesoft.com>
+
+	* share/po/vi.po: updated Vietnamese, Estonian and Albanian files
+	updated Vietnamese file
+
+	* share/po/et.po, share/po/sq.po: updated Vietnamese, Estonian and
+	Albanian files
+
+2003/02/01  Till Kamppeter  <till@mandrakesoft.com>
+
+	* printer/data.pm, printer/printerdrake.pm: 
+	  - Completed support for pre-compiled Foomatic PPDs.
+	 - Cleaning of mamufacturer names for menues and for comparing
+	auto-dtected
+	   data against Foomatic centralized in one function.
+	 - Fixed file name in check for installed packages.
+	 - Fixed display of boolean options from native PostScript PPD files in
+	the
+	   option setting dialog.
+
+	* printer/main.pm: 
+	  - Improved generation of printer list entries from
+	manufacturer-supplied PostScript PPDs.
+	  - Completed support for pre-compiled Foomatic PPDs.
+	 - Cleaning of mamufacturer names for menues and for comparing
+	auto-dtected
+	   data against Foomatic centralized in one function.
+	 - Fixed file name in check for installed packages.
+	 - Fixed display of boolean options from native PostScript PPD files in
+	the
+	   option setting dialog.
+
+2003/01/31  Damien Chaumette  <dchaumette@mandrakesoft.com>
+
+	* install_steps_interactive.pm: be sure $o->{netcnx}{type} is set when
+	using easy_dhcp
+
+	* mdk-stage1/network.c: don't save hostname if intf->boot_proto ==
+	BOOTPROTO_DHCP
+
+	* network/ethernet.pm: zeroconf
+
+	* drakxtools.spec: new version
+
+	* ugtk2.pm: avoid poping
+
+	* network/network.pm: more zeroconf configuration
+
+2003/01/31  Pablo Saratxaga  <pablo@mandrakesoft.com>
+
+	* share/po/id.po, share/po/sk.po, share/po/ru.po, share/po/gl.po,
+	share/po/pt_BR.po, share/po/br.po, share/po/th.po, share/po/sl.po,
+	share/po/no.po, share/po/et.po, share/po/ja.po, share/po/hr.po,
+	share/po/tr.po, share/po/mt.po, share/po/ga.po, share/po/be.po,
+	share/po/uk.po, share/po/ko.po, share/po/DrakX.pot, share/po/sv.po,
+	share/po/sr.po, share/po/pl.po, share/po/fi.po, share/po/lt.po,
+	share/po/he.po, share/po/sp.po, share/po/cy.po, share/po/da.po,
+	share/po/ar.po, share/po/tg.po, share/po/bs.po, share/po/ro.po,
+	share/po/wa.po, share/po/is.po, share/po/af.po, share/po/az.po,
+	share/po/zh_TW.po, share/po/zh_CN.po, share/po/pt.po, share/po/vi.po,
+	share/po/ta.po, share/po/fr.po, share/po/sq.po, share/po/it.po,
+	share/po/nl.po, share/po/eu.po, share/po/es.po, share/po/de.po,
+	share/po/eo.po, share/po/el.po, share/po/cs.po, share/po/bg.po,
+	share/po/lv.po, share/po/hu.po: updated pot file
+
+	* share/po/ca.po: updated pot file
+	Fixed small error (missing "/" in menu entry)
+
+	* standalone/drakbackup: fixed typo (drakbakup.conf -> drakbackup.conf)
+
+2003/01/31  Pixel  <pixel@mandrakesoft.com>
+
+	* install_steps_interactive.pm: fix poulpy
+
 2003/01/31  Damien Chaumette  <dchaumette@mandrakesoft.com>
 
 	* install_steps_interactive.pm: be sure $o->{netcnx}{type} is set when
@@ -9403,7 +9584,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.775 2003/01/31 01:01:56 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.776 2003/01/31 16:30:43 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
