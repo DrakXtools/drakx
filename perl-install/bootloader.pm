@@ -236,8 +236,8 @@ sub get_kernels_and_labels {
     my @l = grep { /^vmlinuz-/ } all($dir);
     my @kernels = grep { ! -l "$dir/$_" } @l;
 
-    my @prefered = ('', 'secure', 'enterprise', 'smp');
-    my %weights = map_index { $_ => $::i } @prefered;
+    my @preferred = ('', 'secure', 'enterprise', 'smp');
+    my %weights = map_index { $_ => $::i } @preferred;
     
     require pkgs;
     @kernels = 
