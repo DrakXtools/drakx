@@ -179,8 +179,8 @@ foreach ([ 'network', N("Network Options") ], [ 'system', N("System Options") ])
                                                                                            }
                                                                                            $entry->set_text(to_i18n($msec->get_function_value($i)));
                                                                                            set_help_tip($entry, $default, $i);
-                                                                                           [ new_wrapped_label($fields{$i} || $i), $values{$i} ];
-                                                                                       } sort $msec->list_functions($domain))))),
+                                                                                           [ new_wrapped_label($i), $values{$i} ];
+                                                                                       } sort map { $fields{$_} || $_ } $msec->list_functions($domain))))),
                            new_wrapped_label($label));
     $options_values{$domain} = \%values;
 }
@@ -197,7 +197,7 @@ $notebook->append_page(gtkshow(create_scrolled_window(gtkpack_(new Gtk2::VBox(0,
                                                                                        my $entry = $security_checks_value{$i}->entry;
                                                                                        set_help_tip($entry, $msec->get_check_default($i), $i);
                                                                                        [ gtkshow(new_wrapped_label($fields{$i} || translate($i))), $security_checks_value{$i} ];
-                                                                                   } sort $msec->list_checks)))),
+                                                                                   } sort map { $fields{$_} } $msec->list_checks)))),
                        new Gtk2::Label(N("Periodic Checks")));
 
 
