@@ -84,9 +84,7 @@ sub untranslate {
 
 sub set_l10n_sort() {
     my $collation_locale = $ENV{LC_ALL};
-    if ($collation_locale) {
-        $collation_locale =~ /UTF-8/ or setlocale(LC_ALL, "$collation_locale.UTF-8");
-    } else {
+    if (!$collation_locale) {
         $collation_locale = setlocale(LC_COLLATE);
         $collation_locale =~ /UTF-8/ or setlocale(LC_COLLATE, "$collation_locale.UTF-8");
     }
