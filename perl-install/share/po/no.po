@@ -496,7 +496,7 @@ msgstr ""
 
 #: ../diskdrake.pm_.c:131
 msgid "Please make a backup of your data first"
-msgstr ""
+msgstr "Vennligst ta sikkerhetskopi av din data først"
 
 #: ../diskdrake.pm_.c:131 ../diskdrake.pm_.c:145 ../diskdrake.pm_.c:455
 #: ../diskdrake.pm_.c:484
@@ -666,11 +666,11 @@ msgstr ""
 #: ../diskdrake.pm_.c:367 ../diskdrake.pm_.c:369
 #, c-format
 msgid "Use ``%s'' instead"
-msgstr ""
+msgstr "Bruk ``%s'' istedet"
 
 #: ../diskdrake.pm_.c:372
 msgid "Use ``Unmount'' first"
-msgstr ""
+msgstr "Bruk ``Demonter'' først"
 
 #: ../diskdrake.pm_.c:373 ../diskdrake.pm_.c:406
 msgid "changing type of"
@@ -1077,7 +1077,6 @@ msgstr ""
 "ønsker å beholde. Typiske å beholde er: /home og /usr/local."
 
 #: ../help.pm_.c:97
-#, fuzzy
 msgid ""
 "You may now select the packages you wish to install.\n"
 "\n"
@@ -1102,10 +1101,8 @@ msgstr ""
 "Du kan nå velge de pakkene du ønsker å installere.\n"
 "\n"
 "\n"
-"Først kan du velge størrelsen på det installerte systemet og en automatisk\n"
-"utvelgelse av pakker vil bli gjort i samsvar med din bruk av systemet. Etter "
-"dette kan du velge flere pakker etter gruppe eller klikke på Ok for å\n"
-"beholde tidligere valg.\n"
+"Først kan du velge pakkegruppe for installering eller oppgradering. Etterpå\n"
+"kan du velge flere pakker ihht. den totale størrelsen du ønsker å velge.\n"
 "\n"
 "\n"
 "Hvis du er i ekspertmodus kan du velge pakker individuelt.\n"
@@ -1119,6 +1116,7 @@ msgstr ""
 "Informasjon om hver kategori og spesifikke pakker er tilgjengelig i området\n"
 "kalt \"Info\", som du finner mellom listen over pakker og knappen\n"
 "\"Installer\" for å starte installasjonen."
+
 
 #: ../help.pm_.c:118
 msgid ""
@@ -1227,6 +1225,11 @@ msgid ""
 "Note you have to select mirror and cryptographic according to your "
 "legislation."
 msgstr ""
+"Du kan installere kryptografisk pakke hvis internett tilknytningen din er satt\n"
+"opp riktig. Velg først et speil som du ønsker å hente ned pakkene fra og\n"
+"velg så pakkene du ønsker å installere.\n"
+"\n"
+"Mer at du må velge speil og kryptografikk ihht. din lovgivning."
 
 #: ../help.pm_.c:175
 msgid ""
@@ -1967,6 +1970,13 @@ msgid ""
 "optionally run defrag) on this partition and backup your data.\n"
 "When sure, press Ok."
 msgstr ""
+"ADVARSEL!\n"
+"\n"
+"DrakX trenger nå å endre størrelsen på Windows partisjonen din.\n"
+"Vær forsiktig: denne operasjonen er farlig. Hvis du ikke allerede har gjort\n"
+"det burde du kjøre Scandisk først (og som en opsjon kjøre defrag) på denne\n"
+"partisjonen og ta sikkerhetskopi av dine data.\n"
+"Når du er sikker, trykk Ok."
 
 #: ../install_steps_gtk.pm_.c:276
 msgid "Automatic resizing failed"
