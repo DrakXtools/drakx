@@ -613,15 +613,14 @@ sub gtktext_insert {
         $opts{append} or $buffer->set_text('');
         foreach my $token (@$t) {
             my $iter1 = $buffer->get_end_iter;
-            my $c = $buffer->get_char_count;
             if ($token->[0] =~ /^Gtk2::Gdk::Pixbuf/) {
                 $buffer->insert_pixbuf($iter1, $token->[0]);
                 next;
             }
-            $buffer->insert($iter1, $token->[0]);
             if ($token->[1]) {
-                my $tag = $buffer->create_tag(rand(), %{$token->[1]});
-                $buffer->apply_tag($tag, $iter1 = $buffer->get_iter_at_offset($c), $buffer->get_end_iter);
+                $buffer->insert_with_tags($iter1, $token->[0], $buffer->create_tag(undef, %{$token->[1]}));
+            } else {
+                $buffer->insert($iter1, $token->[0]);
             }
         }
     } else {
