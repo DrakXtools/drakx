@@ -178,7 +178,7 @@ sub createXconf {
 
     $mouse_type = 'IMPS/2' if $mouse_type eq 'ExplorerPS/2';
     devices::make("/dev/kbd") if arch() =~ /^sparc/; #- used by Xsun style server.
-    symlinkf(devices::make($mouse_dev), "/dev/mouse");
+    symlinkf(devices::make($mouse_dev), "/dev/mouse") if $mouse_dev ne 'none';
 
     #- needed for imlib to start on 8-bit depth visual.
     symlink("/tmp/stage2/etc/imrc", "/etc/imrc");
