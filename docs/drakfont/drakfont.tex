@@ -1,0 +1,152 @@
+%\documentclass[pdftex]{article} \usepackage{hyperref} . 
+%\documentclass[pdftex,onecolumn,11pt,oneside]{article}
+\documentclass[onecolumn,11pt,oneside]{article}%seminar}
+%\usepackage[pdftex]{hyperref}
+\usepackage{isolatin1}
+%\ifx\pdfoutput\undefined
+
+\usepackage[dvips]{graphicx}
+%\else
+%\usepackage[pdftex]{graphicx}
+%\usepackage[pdftex]{hyperref}
+%\usepackage{type1cm} 
+%\fi
+%\pdfoutput=1 
+\usepackage{color,graphicx,shortvrb,epsfig,verbatim,tabularx}
+\usepackage{url}
+\usepackage{hyperref}
+\urlstyle{sf}
+\usepackage{fancyheadings}
+\usepackage{program}
+\usepackage{ulem}
+\usepackage{amsfonts}
+\usepackage{xspace}
+\usepackage[english,francais]{babel}
+\pagestyle{fancy}
+\newcommand{\trtitle}{Drakfont\\ fonts importation for mandrake linux}
+\DeclareGraphicsRule{.ps}{eps}{.ps}{}
+\DeclareGraphicsExtensions{.ps}
+\renewcommand\star{{\ttfamily*}}
+\let\package\textsf
+\newlength{\gxlen}
+\settowidth{\gxlen}{\package{graphicx}: }
+\newcommand\gs{\makebox[\gxlen][l]{\package{graphics}:}}
+\newcommand\gx{\makebox[\gxlen][l]{\package{graphicx}:}}
+\MakeShortVerb{\|}
+\begin{document}
+\title{$Drakfont$ fonts importation for mandrake linux}
+
+\begin{figure}%[ht]
+\begin{center}
+%\caption{Exemple d'image}
+\mbox{\epsfig{file=mandrake.ps}}\\ %,height=1in,width=2in}}\\
+%\mbox{\epsfig{file=carte_.ps,height=1in,width=2in}}
+\end{center}
+\end{figure}
+%\begin{figure}
+%\begin{center}
+
+%\end{center}
+%\end{figure}
+\author{Dupont Sebastien \\ sdupont@mandrakesoft.com}
+\date{05/10/2001}
+\pagestyle{myheadings}
+\markright{\scriptsize \trtitle}
+\title{\bf \trtitle}
+\maketitle
+\section{drakfont Future Overview}
+
+\paragraph{Fonts import :\\}     
+\begin{itemize} 
+\item pfb ( Adobe Type 1 binary )
+\item pfa ( Adobe Type 1 ASCII )
+\item ttf ( True-Type  )    
+\item pcf.gz		      
+\item Speedo		      
+\item pfa ( Adobe Type 1 ASCII )
+\item ttf ( True-Type  )    
+\item and Bitmap (PCF, BDF, and SNF)
+\end{itemize}
+
+
+\paragraph{Features}                
+\begin{itemize} 
+\item Install fonts from any directory
+\item Get windows fonts on any vfat partitions
+\item UN-installation of any fonts (even if not installed through drakfont)                
+\end{itemize}
+
+
+\paragraph{Support}                
+\begin{itemize} 
+\item Xfs		      
+\item ghostscript \& printer 
+\item Staroffice \& printer  
+\item abiword		      
+\item Koffice, Gnumeric, ... studying
+\item all fonts supported by printer
+\item ( aliases by RENDER in Xfree86 .... -> later )
+\end{itemize}
+
+
+\section{Window interface:}
+\begin{itemize} 
+\item
+\item Fontselectiondialog widget
+\item Command buttons under Fontselectiondialog (like the actual frontend).
+\item Commands buttons:	      
+\item import from windows partition.
+\item import from all fat32 partitions and look for winnt/windows/font
+\item and import all (delete doublon) but don't import if already exist.
+\item import from directory     
+\item look for if it exist before for each font and not delete the original.
+\item (replace all, no, none)
+\item expert options:	      
+\item ask the directory, and look for if it exist before
+\item if it exist ask: (replace all, no, none)
+\item uninstall with list per font type
+\item Expert additional switch
+\item option support:   ghostscript, Staroffice, etc...
+\item check-button. (by default all check)
+\item Printer Application Fonts Support...
+\item check-button. (by default all check)
+\end{itemize}
+
+\section{Command line}
+\paragraph{Font Importation and monitoring application\\}
+\-\-windows\_import : import from all available windows partitions. \\
+\-\-strong         : strong verification of font.\\
+\-\-install        : accept any font file and any directory.\\
+\-\-uninstall      : uninstall any font or any directory of font.\\
+\-\-replace        : replace all font if already exist\\
+\-\-application    : 0 none application.\\
+                 : 1 all application available supported.\\
+                 : name\_of\_application" like  staroffice for only this one.\\
+				      
+\section{Graphics}
+
+to visualize the conceptual graphics please see:\\
+drakfont.jpg\\
+drakfont\_install\.jpg\\
+\& drakfont\_uninstall.jpg\\
+
+
+
+%\begin{figure}%[ht]
+%\begin{center}
+%\caption{Exemple d'image}
+%\mbox{\epsfig{file=drakfont_install.ps}}\\ %,height=1in,width=2in}}\\
+%\mbox{\epsfig{file=carte_.ps,height=1in,width=2in}}
+%\end{center}
+%\end{figure}
+
+
+%\begin{figure}%[ht]
+%\begin{center}
+%\caption{Exemple d'image}
+%\mbox{\epsfig{file=drakfont_uninstall.eps}}\\ %,height=1in,width=2in}}\\
+%\mbox{\epsfig{file=carte_.ps,height=1in,width=2in}}
+%\end{center}
+%\end{figure}
+
+\end{document}
