@@ -88,14 +88,14 @@ clean:
 	for i in $(DIRS) rescue; do make -C $$i clean; done
 	find . -name "*~" -o -name ".#*" | xargs rm -f
 
-upload:  install
+upload: tar install
 	touch /tmp/mdkinst_done
 	cd $(ROOTDEST)/Mandrake ; tar cfz mdkinst.tgz mdkinst
 
 	lftp -c "open -u devel mandrakesoft.com; cd $(UPLOAD_DEST)/images ; mput $(ROOTDEST)/images/*.img"
 	lftp -c "open -u devel mandrakesoft.com; cd ~/tmp ; put $(ROOTDEST)/Mandrake/mdkinst.tgz ; put /tmp/mdkinst_done ; cd $(UPLOAD_DEST)/Mandrake/base ; lcd $(ROOTDEST)/Mandrake/base ; put mdkinst_stage2.gz rescue_stage2.gz compss compssList compssUsers hdlists ; cd $(UPLOAD_DEST)/misc ; lcd ~/gi/tools/ ; put make_mdkinst_stage2" #,gendepslist,rpm2header"
 	lftp -c "open -u devel mandrakesoft.com; cd $(UPLOAD_DEST)/dosutils/autoboot/mdkinst ; put $(ROOTDEST)/dosutils/autoboot/mdkinst/vmlinuz ; mput $(ROOTDEST)/dosutils/autoboot/mdkinst/initrd.*"
-#	lftp -c "open -u devel mandrakesoft.com; cd $(UPLOAD_DEST_CONTRIB)/others/src ; put ../gi.tar.bz2"
+	lftp -c "open -u devel mandrakesoft.com; cd $(UPLOAD_DEST_CONTRIB)/others/src ; put ../gi.tar.bz2"
 	rm -f $(ROOTDEST)/Mandrake/mdkinst.tgz
 	rm -f /tmp/mdkinst_done
 
