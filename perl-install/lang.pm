@@ -1132,7 +1132,7 @@ sub load_console_font {
 
     require run_program;
     run_program::run(if_($ENV{LD_LOADER}, $ENV{LD_LOADER}), 
-		     'consolechars', '-v', '-f', $name || 'lat0-sun16',
+		     'consolechars', '-v', '-f', $name || 'lat0-16',
 		     if_($sfm, '-u', $sfm), if_($acm, '-m', $acm));
 
     #- in console mode install, ensure we'll get translations in the right codeset
