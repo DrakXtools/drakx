@@ -29,11 +29,7 @@ sub get {
     #- 2. The first SCSI device if SCSI exists. Or
     #- 3. The first RAID device if RAID exists.
 
-    map { &{$_->[0]}() ? &{$_->[1]}() : () }
-    [ \&hasIDE, \&getIDE ],
-    [ \&hasSCSI, \&getSCSI ],
-    [ \&hasDAC960, \&getDAC960 ],
-    [ \&hasCompaqSmartArray, \&getCompaqSmartArray ];
+    getIDE(), getSCSI(), getDAC960(), getCompaqSmartArray();
 }
 sub hds() { grep { $_->{type} eq 'hd' && ($::isStandalone || !isRemovableDrive($_)) } get(); }
 sub zips() { grep { $_->{type} =~ /.d/ && isZipDrive($_) } get(); }
@@ -74,19 +70,6 @@ sub isLS120Drive { $_[0]->{info} =~ /LS-?120|144MB/ }
 sub isUSBFDUDrive { $_[0]->{info} =~ /USB-?FDU/ }
 sub isRemovableDrive { &isZipDrive || &isLS120Drive || &isUSBFDUDrive } #-or &isJazzDrive }
 
-sub hasSCSI() {
-    local *F; open F, "/proc/scsi/scsi" or return 0;
-    local $_;
-    while (<F>) {
-	/devices: none/ and log::l("no scsi devices are available"), return 0;
-    }
-#-    log::l("scsi devices are available");
-    1;
-}
-sub hasIDE() { -e "/proc/ide" }
-sub hasDAC960() { 1 }
-sub hasCompaqSmartArray() { -r "/proc/array/ida0" }
-
 sub isFloppyOrHD {
     my ($dev) = @_;
     require partition_table_raw;
@@ -101,7 +84,7 @@ sub getSCSI() {
     local $_;
 
     local *F;
-    open F, "/proc/scsi/scsi" or die "failed to open /proc/scsi/scsi";
+    open F, "/proc/scsi/scsi" or return;
     local $_ = <F>; /^Attached devices:/ or return &$err();
     while ($_ = <F>) {
 	my ($id) = /^Host:.*?Id: (\d+)/ or return &$err();
@@ -127,7 +110,7 @@ sub getIDE() {
     my @idi;
 
     #- what about a system with absolutely no IDE on it, like some sparc machine.
-    hasIDE() or return ();
+    -e "/proc/ide" or return ();
 
     #- Great. 2.2 kernel, things are much easier and less error prone.
     foreach my $d (sort @{[glob_('/proc/ide/hd*')]}) {
@@ -145,9 +128,14 @@ sub getCompaqSmartArray() {
     my @idi;
     my $f;
 
-    for (my $i = 0; -r ($f = "/proc/array/ida$i"); $i++) {
+    my $dir = "/proc/driver/array"; #- kernel 2.4 places it here
+    $dir = "/proc/array" if !-d $dir; #- kernel 2.2
+
+    -e "$dir/ida0" or return;
+
+    for (my $i = 0; -r ($f = "$dir/ida$i"); $i++) {
 	foreach (cat_($f)) {
-	    if (m|^(ida/.*?):|) {
+	    if (m|^\s*(ida/.*?):|) {
 		push @idi, { device => $1, info => "Compaq RAID logical disk", type => 'hd' };
 	    }
 	}
