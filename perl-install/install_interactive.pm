@@ -161,14 +161,14 @@ the following error occured: %s", formatError($@));
 		$min_win += partition_table::raw::cylinder_size($hd);
 
 		$part->{size} > $min_linux + $min_swap + $min_freewin + $min_win or die \N("Your Windows partition is too fragmented. Please reboot your computer under Windows, run the ``defrag'' utility, then restart the Mandrake Linux installation.");
-		$o->ask_okcancel('', N("WARNING!
+		$o->ask_okcancel('', formatAlaTeX(N("WARNING!
 
 DrakX will now resize your Windows partition. Be careful:
 this operation is dangerous. If you have not already done
 so, you should first exit the installation, run scandisk
 under Windows (and optionally run defrag), then restart the
 installation. You should also backup your data.
-When sure, press Ok.")) or return;
+When sure, press Ok."))) or return;
 
 		my $mb_size = $part->{size} >> 11;
 		$o->ask_from('', N("Which size do you want to keep for Windows on"), [
