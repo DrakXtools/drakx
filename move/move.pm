@@ -587,6 +587,9 @@ sub install2::startMove {
 	sleep 1;
         log::l("DrakX waves bye-bye");
 
+        open STDOUT, ">/dev/tty10";  #- don't display startkde shit on first console
+        open STDERR, ">/dev/tty10";
+        
 	my (undef, undef, $uid, $gid, undef, undef, undef, $home, $shell) = getpwnam($username);
 	$( = $) = "$gid $gid";
 	$< = $> = $uid;
