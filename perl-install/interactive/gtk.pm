@@ -643,7 +643,7 @@ sub ask_fromW {
 	@widgets && ($common->{focus_first} || !$mainw->{ok} || @widgets == 1 && member(ref($widgets[0]{focus_w}), "Gtk2::TreeView", "Gtk2::RadioButton")) ? 
 	  $widgets[0]{focus_w} : 
 	    $mainw->{ok};
-    $widget_to_focus->grab_focus() if $widget_to_focus;
+    $widget_to_focus->grab_focus if $widget_to_focus;
 
     my $check = sub {
 	my ($f) = @_;
@@ -653,7 +653,11 @@ sub ask_fromW {
 	
 	    if ($error) {
 		$set_all->();
-		$widgets[$focus || 0]{focus_w}->grab_focus();
+		if (my $to_focus = $widgets[$focus || 0]) {
+		    $to_focus->{focus_w}->grab_focus;
+		} else {
+		    log::l("ERROR: bad entry number given to focus " . backtrace());
+		}
 	    }
 	    !$error;
 	}
