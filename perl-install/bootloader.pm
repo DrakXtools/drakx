@@ -168,7 +168,7 @@ sub add_kernel {
     -e "$prefix/boot/vmlinuz-$version" or log::l("unable to find kernel image $prefix/boot/vmlinuz-$version"), return;
     my $image = "/boot/vmlinuz" . ($ext ne "-$version" &&
 				   symlinkf("vmlinuz-$version", "$prefix/boot/vmlinuz$ext") ? $ext : "-$version");
-    my $initrd = eval { 
+    my $initrd = do { 
 	mkinitrd($prefix, $version, "/boot/initrd-$version.img");
 	"/boot/initrd" . ($ext ne "-$version" &&
 			  symlinkf("initrd-$version.img", "$prefix/boot/initrd$ext.img") ? $ext : "-$version") . ".img";
@@ -241,10 +241,7 @@ sub configure_entry($$) {
 
 	if ($specific_version) {
 	    $entry->{initrd} or $entry->{initrd} = "/boot/initrd-$specific_version.img";
-	    if (! -e "$prefix/$entry->{initrd}" || $::oem) {
-		eval { mkinitrd($prefix, $specific_version, "$entry->{initrd}") };
-		undef $entry->{initrd} if $@;
-	    }
+	    mkinitrd($prefix, $specific_version, $entry->{initrd});
 	}
     }
     $entry;
