@@ -378,6 +378,7 @@ sub when_load {
     load('snd-pcm-oss') if $name =~ /^snd-/;
     add_alias('ieee1394-controller', $name) if member($name, 'ohci1394');
     add_probeall('usb-interface', $name) if $name =~ /usb-[uo]hci/ || $name eq 'ehci-hcd';
+    add_alias('/dev/agpgart', $name) if $name =~ /-agp$/;
 
     $conf{$name}{options} = join " ", @options if @options;
 
