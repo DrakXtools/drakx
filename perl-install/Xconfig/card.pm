@@ -201,7 +201,10 @@ sub card_config__not_listed {
 	_("X server"), _("Choose a X server"), '|', 
 	sub { $_[0] =~ /^Vendor\|($vendors_regexp)\s*-?(.*)/ ? "Vendor|$1|$2" : 
 	      $_[0] =~ /^Vendor\|(.*)/ ? "Vendor|Other|$1" : $_[0] },
-	\@list, 'XFree 4|vesa') or return;
+	\@list, 
+	exists $cards->{$card->{BoardName}} ? "Vendor|$card->{BoardName}" : 'XFree 4|vesa') or return;
+
+    $r eq "Vendor|$card->{BoardName}" and return 1; #- it is unchanged, don't modify $card
 
     my ($kind, $s) = $r =~ /(.*?)\|(.*)/;
 
@@ -265,13 +268,14 @@ sub configure {
     my ($in, $raw_X, $do_pkgs, $auto, $options) = @_;
 
     my @cards = probe();
+    @cards or @cards = ({});
+
+    if (!$cards[0]{server} && !$cards[0]{Driver} || !$auto) {
+	card_config__not_listed($in, $cards[0], $options) or return;
+    }
     my $card = multi_head_choose($in, @cards) or return;
 
     $card->{Driver} = 'fbdev' if $options->{allowFB} && !$card->{server} && !$card->{Driver};
-    
-    if (!$card->{server} && !$card->{Driver}) {
-	card_config__not_listed($in, $card, $options) or return;
-    }
 
     xfree_and_glx_choose($in, $card, $auto) or return;
 
@@ -496,6 +500,7 @@ sub add_to_card__using_Cards {
     my ($card, $name) = @_;
     my $cards = readCardsDB("$ENV{SHARE_PATH}/ldetect-lst/Cards+");
     add2hash($card, $cards->{$name});
+    $card->{BoardName} = $card->{card_name};
 
     delete @$card{'server'} if $force_xf4;
 
