@@ -941,7 +941,7 @@ Please run \"Internet access\" in control center."));
                                                                                    ),
                                                                    5),
                                               ),
-                                     1, gtkadd(Gtk2::Frame->new(N("Parameters")), $param_vbox),
+                                     1, gtkadd(Gtk2::Frame->new(N("Parameters")), gtkset_border_width($param_vbox, 5)),
                                      0, gtkpack(create_hbox('edge'),
                                                 gtksignal_connect(Gtk2::Button->new(N("Cancel")), clicked => $exit_dialogsub),
                                                 gtksignal_connect(Gtk2::Button->new(N("Ok")), clicked => sub {
