@@ -81,7 +81,7 @@ upload:
 	$(MAKE) clean
 
 #	# done before make install to increment ChangeLog version
-	tools/addchangelog.pl tools/cvslog2changelog.pl | tools/mailchangelog.pl
+	tools/addchangelog.pl tools/cvslog2changelog.pl | tools/mailchangelog.pl &
 
 	$(MAKE) install
 
