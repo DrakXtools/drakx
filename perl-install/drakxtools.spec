@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10.1
-Release: 2mdk
+Release: 3mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -338,6 +338,9 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Fri Sep 10 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.1-3mdk
+- net_applet: make connect/disconnect buttons useful (blino, #11389)
+
 * Fri Sep 10 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.1-2mdk
 - description
   o split drakxtools description in drakxtools and drakxtools-newt
