@@ -312,6 +312,8 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 
 %changelog
 * Tue May 20 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.2-0.1mdk
+- drakedm: fix #1743 (offer to restart the dm service)
+- drakfont: fix #3960 (divide by zero execption)
 - draksec: fix #3616 (draksec discarding changes)
 - my_gtk: fix #3952 (non working drakcronat)
 
