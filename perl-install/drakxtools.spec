@@ -61,6 +61,8 @@ graphical, simple and powerful. Different skill levels are available
 Perl/Gtk. It uses resize_fat which is a perl rewrite of the work of
 Andrew Clausen (libresize).
 
+drakauth: configure authentification (LDAP/NIS/...)
+
 drakautoinst: help you configure an automatic installation replay
 
 drakbackup: backup and restore your system

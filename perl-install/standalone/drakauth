@@ -1,0 +1,33 @@
+#!/usr/bin/perl
+
+use lib qw(/usr/lib/libDrakX);
+
+use standalone;     #- warning, standalone must be loaded very first, for 'explanations'
+
+use common;
+use interactive;
+use any;
+use network;
+
+my $netc = {};
+my $intf = {};
+network::read_all_conf('', $netc, $intf);
+
+my $in = 'interactive'->vnew('su');
+
+
+my $authentication = {}; # TODO
+
+my $authentication_kind = any::authentication2authentication_kind($authentication);
+
+main:
+$in->ask_from('', '', 
+	      [ 
+	       { label => N("Authentication"), val => \$authentication_kind, list => [ any::authentication_kinds() ], format => \&any::authentication_kind2description },
+	      ]) or $in->exit;
+
+any::ask_authentification_parameters($in, $netc, $authentication, $authentication_kind) or goto main;
+
+any::set_authentication($in, $netc, $authentication, sub { my ($f) = @_; $f->() });
+
+$in->exit;
