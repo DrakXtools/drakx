@@ -155,7 +155,7 @@ foreach ([ 'network', N("Network Options") ], [ 'system', N("System Options") ])
     my ($domain, $label) = @$_;
     my %values;
     $notebook->append_page(gtkshow(create_scrolled_window(gtkpack(new Gtk2::VBox(0, 0),
-                                                                  new Gtk2::Label(N("The following options can be set to customize your\nsystem security. If you need explanations, click on Help.\n")),
+                                                                  new Gtk2::Label(N("The following options can be set to customize your\nsystem security. If you need an explanation, click on Help.\n")),
                                                                   create_packtable($common_opts,
                                                                                    map {
                                                                                        my $i = $_;
@@ -186,7 +186,7 @@ foreach ([ 'network', N("Network Options") ], [ 'system', N("System Options") ])
 my %security_checks_value;
 
 $notebook->append_page(gtkshow(create_scrolled_window(gtkpack(new Gtk2::VBox(0, 0),
-                                                              new Gtk2::Label(N("The following options can be set to customize your\nsystem security. If you need explanations, click on Help.\n")),
+                                                              new Gtk2::Label(N("The following options can be set to customize your\nsystem security. If you need an explanation, click on Help.\n")),
                                                               create_packtable($common_opts,
                                                                                map {
                                                                                    unless (member(qw(MAIL_WARN MAIL_USER), $_)) {

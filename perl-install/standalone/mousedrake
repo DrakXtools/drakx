@@ -34,7 +34,7 @@ if (!$mouse || !$::auto) {
 			     0;
 			 });
     }
-    my $name = $in->ask_from_treelistf('mousedrake', N("Please, choose the type of your mouse."), '|',
+    my $name = $in->ask_from_treelistf('mousedrake', N("Please choose your mouse type."), '|',
 				       sub { join '|', map { translate($_) } split '\|', $_[0] },
 				       [ mouse::fullnames ], 
 				       $mouse->{type} . '|' . $mouse->{name});

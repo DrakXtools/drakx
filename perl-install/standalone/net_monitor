@@ -175,7 +175,7 @@ sub connection {
     $button_connect->set_sensitive(0);
     $button_close->set_sensitive(0);
     $statusbar->pop(1);
-    $statusbar->push(1, $wasconnected ? N("Disconnecting from Internet ") : N("Connecting to Internet "));
+    $statusbar->push(1, $wasconnected ? N("Disconnecting from the Internet ") : N("Connecting to the Internet "));
     if ($wasconnected == 1) {
 	$c_time = time();
 	$ct_tag = Gtk->timeout_add(1000, sub {
@@ -188,7 +188,7 @@ sub connection {
 
     my $tag = Gtk->timeout_add(1000, sub {
 				   $statusbar->pop(1);
-				   $statusbar->push(1, ($wasconnected  == 1 ? N("Disconnecting from Internet ") : N("Connecting to Internet "))
+				   $statusbar->push(1, ($wasconnected  == 1 ? N("Disconnecting from the Internet ") : N("Connecting to the Internet "))
 						    . join('', map { "." } (1..$nb_point)));
 				   $nb_point++;
 				   if ($nb_point  < 4) { return 1 }
@@ -219,8 +219,8 @@ sub connection {
 					    $ret = 0;
 					    $statusbar->pop(1);
 					    $statusbar->push(1, $wasconnected ? ($isconnected ?
-									  N("Disconnection from Internet failed.") :
-									  N("Disconnection from Internet complete.")) :
+									  N("Disconnection from the Internet failed.") :
+									  N("Disconnection from the Internet complete.")) :
 						     ($isconnected ?
 						       N("Connection complete.") :
 						       N("Connection failed.\nVerify your configuration in the Mandrake Control Center."))

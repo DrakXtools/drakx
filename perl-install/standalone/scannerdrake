@@ -102,7 +102,7 @@ sub tryConfScanner {
     if ($scanner::scannerDB->{$model}{ask} =~ /DEVICE/) {
 	$port = '/dev/sg0';
 	$in->ask_from('scannerdrake',
-		      N("Scannerdrake was not able to detect your %s scanner.\nPlease select the device where your scanner is plugged", $model),
+		      N("Scannerdrake was not able to detect your %s scanner.\nPlease select the device where your scanner is attached", $model),
 		      [
 		       { label => N("choose device"), val => \$port, list => ['/dev/sg0', '/dev/sg1', '/dev/sg2', '/dev/sg3', '/dev/sg4' ], not_edit => 0, sort => 1 },
 		      ],

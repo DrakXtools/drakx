@@ -18,7 +18,7 @@ $window->{rwindow}->signal_connect(delete_event => \&CloseAppWindow);
 
 #- verification of package image magik
 unless ($in->do_pkgs->is_installed('ImageMagick')) {
-    $in->ask_okcancel(N("Error"), N("package 'ImageMagick' is required for correct working.\nClick \"Ok\" to install 'ImageMagick' or \"Cancel\" to quit")) 
+    $in->ask_okcancel(N("Error"), N("package 'ImageMagick' is required to be able to complete configuration.\nClick \"Ok\" to install 'ImageMagick' or \"Cancel\" to quit")) 
         and $in->do_pkgs->install('ImageMagick')
         or &CloseAppWindow;
 }
@@ -94,7 +94,7 @@ my %boot_conf_frame = ('frame' => new Gtk2::Frame(N("Configure bootsplash pictur
                                'px' => N("the progress bar x coordinate\nof its upper left corner"),
                                'py' => N("the progress bar y coordinate\nof its upper left corner"),
                                'pw' => N("the width of the progress bar"),
-                               'ph' => N("the heigth of the progress bar"),
+                               'ph' => N("the height of the progress bar"),
                                'pc' => N("the color of the progress bar")
                                },
                            #- must set scale values to true to get them created by mk_frame
@@ -153,7 +153,7 @@ $first{widgets}{combo}{res}->entry->signal_connect(changed => sub {
 	$boot_conf_frame{frame} = new Gtk2::Frame(N("Configure bootsplash picture"));
 	&make_boot_frame;
 	$first_vbox->add($boot_conf_frame{frame});
-	member($theme{name}, &giv_exist_thm) and &thm_in_this_res and &get_this_thm_res_conf or $in->ask_warn(N("Notice"), N("This theme haven't yet any bootsplash in %s !", $theme{res}{res}));
+	member($theme{name}, &giv_exist_thm) and &thm_in_this_res and &get_this_thm_res_conf or $in->ask_warn(N("Notice"), N("This theme does not yet have a bootsplash in %s !", $theme{res}{res}));
       });
 #- go to bootsplash configuration step 2
 #$first{widgets}{button}{boot_conf}->signal_connect(clicked => sub{show_act(\%boot_conf_frame) } );
@@ -246,7 +246,7 @@ py='.$theme{boot_conf}{py}.'
 # pw is the with of the progress bar
 pw='.$theme{boot_conf}{pw}.'
 
-# ph is the heigth of the progress bar
+# ph is the height of the progress bar
 ph='.$theme{boot_conf}{ph}.'
 
 # pc is the color of the progress bar
@@ -317,7 +317,7 @@ sub which_res_exist {
 		   and last;
 		
 	}
-	$is_ok == 1 or $in->ask_warn(N("Notice"), N("This theme haven't yet any bootsplash in %s !", $theme{res}{res})) and return 0;
+	$is_ok == 1 or $in->ask_warn(N("Notice"), N("This theme does not yet have a bootsplash in %s !", $theme{res}{res})) and return 0;
 	return 1;
 }	
 

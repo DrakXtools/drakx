@@ -145,7 +145,7 @@ my %files = (
 	     "user" => { file => "/var/log/user.log", desc => N("User") },
 	     "messages" => { file => "/var/log/messages", desc => N("Messages") },
 	     "syslog" => { file => "/var/log/syslog", desc => N("Syslog") },
-	     "explanations" => { file => "/var/log/explanations", desc => N("Mandrake Tools Explanations") }
+	     "explanations" => { file => "/var/log/explanations", desc => N("Mandrake Tools Explanation") }
 );
 
 my $yy = gtkset_sensitive(gtksignal_connect(new Gtk2::Button(N("search")) , clicked => \&search),0);
@@ -414,7 +414,7 @@ my $initdir = "/etc/init.d";
     }
   
     $in->ask_from(N("service setting"),
-		  N("You will receive an alert if one of the selected services is no more running"),
+		  N("You will receive an alert if one of the selected services is no longer running"),
 		  [ map { { label => $_, val => \${ $_ }, type => "bool", text => "$service->{ $_ }" } } @installed_d
 		  ]) or goto begin;
 
