@@ -325,7 +325,7 @@ enum return_type mount_clp(char *clp,  char *location_mount)
 enum return_type preload_mount_clp(int clp_fd, int clp_size, char *clp_name, char *location_mount)
 {
 	int ret;
-	char *clp_tmpfs = asprintf_("%s/%s", SLASH_LOCATION, clp_name);
+	char *clp_tmpfs = asprintf_("%s/tmp/%s", SLASH_LOCATION, clp_name);
 #ifdef MANDRAKE_MOVE
 	static int count = 0;
 	char buf[5000];
