@@ -1,4 +1,5 @@
 package printer;
+
 # $Id$
 
 #use diagnostics;
@@ -224,8 +225,10 @@ sub set_alternative {
 
 sub pdq_panic_button {
     my $setting = $_[0];
-    run_program::rooted($prefix, "/usr/sbin/pdqpanicbutton", "--$setting")
-	|| die "Could not $setting PDQ panic buttons!";
+    if (-f "/usr/sbin/pdqpanicbutton") {
+        run_program::rooted($prefix, "/usr/sbin/pdqpanicbutton", "--$setting")
+	    || die "Could not $setting PDQ panic buttons!";
+    }
 }
 
 sub copy_printer_params($$) {
