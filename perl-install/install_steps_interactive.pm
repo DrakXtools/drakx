@@ -74,7 +74,8 @@ sub acceptLicense {
     my ($o) = @_;
 
     $o->{release_notes} = do {
-	my $af = install_any::getFile("release-notes.". arch().".txt");
+	my  $f = install_any::getFile('release-notes.txt');
+	my $af = install_any::getFile("release-notes." . arch() . ".txt");
 	join('', <$f>, $af ? ("\n\n", <$af>) : ());
     };
 
