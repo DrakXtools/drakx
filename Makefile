@@ -33,10 +33,10 @@ UPLOAD_SPARC_DEST = /mnt/BIG/distrib/sparc
 install: build autoboot rescue
 	for i in images misc Mandrake Mandrake/base; do install -d $(ROOTDEST)/$$i ; done
 ifneq (ppc,$(ARCH))
-	cp -f $(RELEASE_BOOT_IMG) $(ROOTDEST)/images
+	for i in $(RELEASE_BOOT_IMG); do cp -f $${i}* $(ROOTDEST)/images; done
 endif
 ifeq (alpha,$(ARCH))
-	cp -f $(BOOT_RDZ) $(ROOTDEST)/boot
+	for i in $(BOOT_RDZ); do cp -f $${i}* $(ROOTDEST)/boot; done
 	cp -f vmlinux.gz $(ROOTDEST)/boot/instboot.gz
 	make -C tools/$(ARCH)/cd install ROOTDEST=$(ROOTDEST)
 endif
@@ -49,8 +49,9 @@ autoboot:
 ifeq (i386,$(ARCH))
 	install -d $(ROOTDEST)/boot
 #	cp -f vmlinuz {hd,cdrom,pcmcia,network,all,other}.rdz $(ROOTDEST)/boot
-	cp -f vmlinuz $(BOOT_RDZ) $(ROOTDEST)/boot
-	/usr/sbin/rdev -v $(ROOTDEST)/boot/vmlinuz 788
+	cp -f all.kernels/*/boot/vmlinuz* $(ROOTDEST)/boot
+	for i in $(BOOT_RDZ); do cp -f $${i}* $(ROOTDEST)/boot; done
+	for i in $(ROOTDEST)/boot/vmlinuz*; do /usr/sbin/rdev -v $$i 788; done
 endif
 
 dirs:
@@ -58,12 +59,12 @@ dirs:
 		[ "$$n" = "." ] || make -C $$n all ;\
 	done
 
-rescue: modules
+rescue: all.modules
 	make -C $@
 
 network_ks.rdz pcmcia_ks.rdz: %_ks.rdz: %.rdz
 
-$(BOOT_RDZ): dirs modules
+$(BOOT_RDZ): dirs all.modules
 	./make_boot_img $@ $(@:%.rdz=%)
 
 $(BOOT_IMG): %.img: %.rdz
@@ -74,7 +75,7 @@ tar: clean
 	cd .. ; tar cfy gi.tar.bz2 gi
 	rm needed_rpms.lst
 
-modules:
+all.modules:
 	`./tools/specific_arch ./update_kernel`
 
 $(BOOT_IMG:%=%f): %f: %
@@ -82,7 +83,8 @@ $(BOOT_IMG:%=%f): %f: %
 	xmessage "Floppy done"
 
 clean:
-	rm -rf $(BOOT_IMG) $(BOOT_RDZ) $(BINS) modules modules64 install_pcmcia_modules vmlinu* System*.map
+	for i in $(BOOT_IMG) $(BOOT_RDZ); do rm -rf $${i}*; done
+	rm -rf $(BINS) all.modules all.modules64 install_pcmcia_modules all.kernels/cardmgr
 	for i in $(DIRS) rescue; do make -C $$i clean; done
 	find . -name "*~" -o -name ".#*" | xargs rm -f
 
@@ -107,7 +109,7 @@ upload:
 	upload misc rpmtools.pm ;\
 	upload misc auto ;\
 	upload '' live_update ;\
-	for i in $(RELEASE_BOOT_IMG); do upload images $$i; done ;\
+	for i in $(RELEASE_BOOT_IMG); do for j in $${i}*; do upload images $$j; done; done;\
 	echo
 
 upload_sparc:

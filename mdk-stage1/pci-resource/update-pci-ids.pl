@@ -19,9 +19,13 @@ struct pci_module_map {
 
 my %t = (scsi => 'scsi', eth => 'net');
 
-if (-x "../mar/mar" && -f "../../modules/network_modules.mar" && -f "../../modules/hd_modules.mar") {
-    $modulez{'eth'} = [ `../mar/mar -l ../../modules/network_modules.mar` ];
-    $modulez{'scsi'} = [ `../mar/mar -l ../../modules/hd_modules.mar` ];
+my @modulz = sort grep { -d $_ } glob("../../all.modules/*");
+my $selected_mod = pop @modulz;
+my ($kern) = $selected_mod =~ /.*\/([^\/]+)/;
+
+if (-x "../mar/mar" && -f "../../all.modules/$kern/network_modules.mar" && -f "../../all.modules/$kern/hd_modules.mar") {
+    $modulez{'eth'} = [ `../mar/mar -l ../../all.modules/$kern/network_modules.mar` ];
+    $modulez{'scsi'} = [ `../mar/mar -l ../../all.modules/$kern/hd_modules.mar` ];
     $check_marfiles = 1;
 }
 
@@ -34,7 +38,7 @@ foreach $type (keys %t) {
 struct pci_module_map ${type}_pci_ids[] = {
 ";
     my %l;
-    foreach (glob("../../kernel/lib/modules/*/$t{$type}/*.o"), glob("../../kernel/lib/modules/*/kernel/drivers/$t{$type}/{*/,}*.o")) {
+    foreach (glob("../../all.kernels/$kern/lib/modules/*/$t{$type}/*.o"), glob("../../all.kernels/$kern/lib/modules/*/kernel/drivers/$t{$type}/{*/,}*.o")) {
 	m|([^/]*)\.o$|;
 	$l{$1} = 1;
     }

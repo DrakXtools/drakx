@@ -89,7 +89,7 @@ ifeq (sparc,$(ARCH))
 	ln -s /usr/X11R6/lib/X11/xkb/xkbcomp $(DEST)/usr/bin/xkbcomp
 endif
 ifeq (i386,$(ARCH))
-	install -s ../kernel/cardmgr/cardmgr $(DEST)/usr/bin
+	install -s ../all.kernels/cardmgr/* $(DEST)/usr/bin
 	install -s ../tools/i386/mkreiserfs $(DEST)/usr/bin
 endif
 
@@ -134,16 +134,7 @@ endif
 	cd share ; cp -a themes $(DEST)/usr/share/gtk
 	cd share ; cp compssUsers compssUsers.desktop rpmsrate $(ROOTDEST)/Mandrake/base
 
-	if [ -f ../modules/modules.cz* ]; then \
-		cp -f ../modules/modules.cz* $(DEST)/lib/; \
-		if [ -f ../modules64/modules.cz* ]; then \
-			cp -f ../modules64/modules.cz* $(DEST)/lib/modules64.cz2; \
-		fi \
-	else \
-		cp -f ../modules/modules.cpio.bz2 $(DEST)/lib/; \
-		install -d $(DEST)/lib/modules; \
-		cp -f ../modules/pristine/* $(DEST)/lib/modules ||: ; \
-	fi
+	for i in ../all.modules/modules.cz*; do cp -f $$i $(DEST)/lib/; done
 
 #	echo -e '#!/bin/sh\n\nexec "/usr/bin/sh"' > $(DEST)/usr/bin/runinstall2
 #	chmod a+x $(DEST)/usr/bin/runinstall2

@@ -525,7 +525,11 @@ sub unload {
 
 sub load_raw {
     my @l = map { my ($i, @i) = @$_; [ $i, \@i ] } grep { $_->[0] !~ /ignore/ } @_;
-    my $cz = "/lib/modules" . (arch() eq 'sparc64' && "64") . ".cz"; -e $cz or $cz .= "2";
+    my $cz = "/lib/modules" . (arch() eq 'sparc64' && "64") . ".cz" . c::kernel_version();
+    if (!-e $cz) {
+	unlink $_ foreach glob_("/lib/modules*.cz*");
+        install_any::getAndSaveFile("Mandrake/mdkinst$cz", $cz) or die "failed to get modules $cz: $!";
+    }
     eval {
 	require packdrake;
 	my $packer = new packdrake($cz);
@@ -728,7 +732,7 @@ sub configure_pcmcia {
     };
 
     #- run cardmgr in foreground while it is configuring the card.
-    run_program::run("cardmgr", "-f", "-m" ,"/modules");
+    run_program::run("cardmgr" . c::kernel_version(), "-f", "-m" ,"/modules");
     sleep(3);
     
     #- make sure to be aware of loaded module by cardmgr.

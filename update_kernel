@@ -1,8 +1,9 @@
 #!/bin/bash
 
-KERNEL_BOOT_PATH="kernel"
+ALL_KERNELS="all.kernels"
 
 function f() { 
+    echo -n "."
     v=`perl -Iperl-install -Mmodules -e "print qq(\\$_.o\n) foreach modules::module_of_type__4update_kernel(\"$1\")"` 
 }
 
@@ -20,18 +21,32 @@ function create_marfile() {
               && echo "WARNING! in $marfile, $k is missing (required by $i)"
         done
     done
-    ../mdk-stage1/mar/mar -c $marfile $(ls $*)
+    $GIBASEDIR/mdk-stage1/mar/mar -c $marfile $(ls $*)
 }
 
-[ -e kernel/cardmgr ] && (
-    cd kernel/cardmgr
-    # pixel ? conflicts ?
-    echo "int main(int argc, char **argv) { cardmgr_main(argc, argv); }" > main.c
-    gcc -o cardmgr *.o main.c
-)
+function create_modules() {
+    kernel_path=$1
+    kern=$2
+    echo "Updating modules in '`pwd`' for kernel '$kern'"
+    cp -f `find $kernel_path/lib/modules/ -name "*.o"` .
+    /sbin/depmod -F $kernel_path/boot/System.map* -e *.o | perl -pe 's/\\\n//' \
+	| perl -ne 's/\.o//g; s/[ \t]+/ /g; print if /: /' > modules.dep
+    perl -pi -e 's/((plip|ppa|imm): parport)/$1 parport_pc/' modules.dep
+    ls *.o               | packdrake -b9s modules.cz 400000
+    mv modules.cz "../modules.cz$kern"
+    create_marfile network_modules.mar  $NETWORK_MODULES $GENERIC_MODULES
+    create_marfile cdrom_modules.mar    $CDROM_MODULES $GENERIC_MODULES
+    create_marfile hd_modules.mar       $HD_MODULES $GENERIC_MODULES
+    create_marfile pcmcia_modules.mar   $PCMCIA_MODULES $PCMCIA_COREMODULES $GENERIC_MODULES
+    create_marfile other_modules.mar    $BIG_MODULES $GENERIC_MODULES
+    create_marfile all_modules.mar      $ALL_MODULES $GENERIC_MODULES
+    rm -f $ALL_MODULES $PCMCIA_COREMODULES $NOT_USEFULL_IN_STAGE1 # leave in the directory non-install1 used modules
+}
+
 
 ARCH=`uname -m | sed -e 's/i.86/i386/' -e 's/sparc.*/sparc/'`
 
+echo -n "Finding modules categories"
 f "scsi" ; SCSI_DRIVERS=$v
 f "disk" ; DISK_DRIVERS=$v
 f "net" ; NETWORK_DRIVERS=$v
@@ -40,6 +55,7 @@ f "pcmcia net_raw cdrom_raw scsi_raw disk_raw" ; PCMCIA_DRIVERS=$v
 f "big net_raw cdrom_raw scsi_raw disk_raw" ; BIG_DRIVERS=$v
 f "pcmcia net cdrom scsi disk keepbig" ; ALL_DRIVERS=$v
 [ $ARCH == "i386" ] && DOSMODULES="vfat.o fat.o"
+echo "done."
 
 NETWORK_MODULES="  $NETWORK_DRIVERS"
 CDROM_MODULES="    $CD_DRIVERS"
@@ -55,11 +71,10 @@ PCMCIA_COREMODULES="pcmcia_core.o tcic.o ds.o i82365.o"
 
 
 if [ "$ARCH" == "i386" ]; then
-    #disable any existing resolution!!!
-    cp -f $KERNEL_BOOT_PATH/boot/vmlinuz* vmlinuz
-    /usr/sbin/rdev -v vmlinuz 65535 #788 #785 
-
-    rm -rf install_pcmcia_modules ; install -d install_pcmcia_modules
+    for i in $ALL_KERNELS/*/boot/vmlinuz*; do
+	#disable any existing resolution!!!
+	/usr/sbin/rdev -v $i 65535 #788 #785 
+    done
 else
     if [ "$ARCH" == "ppc" ]; then
         cp -f "$KERNEL_BOOT_PATH"/boot/vmlinux .
@@ -67,22 +82,25 @@ else
         cp -f "$KERNEL_BOOT_PATH"/boot/vmlinux.gz .
     fi
 fi
-cp -f $KERNEL_BOOT_PATH/boot/System.map* System.map
 
-rm -rf modules ; install -d modules
-(cd modules ; 
-    cp -f `find ../"$KERNEL_BOOT_PATH"/lib/modules/ -name "*.o"` .
-    /sbin/depmod -F ../System.map -e *.o | perl -pe 's/\\\n//' | perl -ne 's/\.o//g; s/[ \t]+/ /g; print if /: /' > modules.dep
-    perl -pi -e 's/((plip|ppa|imm): parport)/$1 parport_pc/' modules.dep
-    ls *.o               | packdrake -b9s modules.cz 400000
-    create_marfile network_modules.mar  $NETWORK_MODULES $GENERIC_MODULES
-    create_marfile cdrom_modules.mar    $CDROM_MODULES $GENERIC_MODULES
-    create_marfile hd_modules.mar       $HD_MODULES $GENERIC_MODULES
-    create_marfile pcmcia_modules.mar   $PCMCIA_MODULES $PCMCIA_COREMODULES $GENERIC_MODULES
-    create_marfile other_modules.mar    $BIG_MODULES $GENERIC_MODULES
-    create_marfile all_modules.mar      $ALL_MODULES $GENERIC_MODULES
-    rm -f $ALL_MODULES $PCMCIA_COREMODULES $NOT_USEFULL_IN_STAGE1 # leave in the directory non-install1 used modules
-)
+
+GIBASEDIR=`pwd`
+
+rm -rf all.modules ; mkdir all.modules
+rm -rf $ALL_KERNELS/cardmgr
+for i in $ALL_KERNELS/*; do
+	[ -d $ALL_KERNELS/cardmgr ] || mkdir $ALL_KERNELS/cardmgr
+	kern=`basename $i`
+	[ -e $i/cardmgr ] && (
+	    cd $i/cardmgr
+	    echo "int main(int argc, char **argv) { cardmgr_main(argc, argv); }" > main.c
+	    gcc -o cardmgr *.o main.c
+	    cp cardmgr $GIBASEDIR/$ALL_KERNELS/cardmgr/cardmgr$kern
+	)
+	( mkdir all.modules/$kern ; cd all.modules/$kern
+	create_modules ../../$i $kern ; cd ../.. )
+done
+
 
 # v=kernel-2.2.17-BOOT3.tar.bz2
 # scp kenobi:~chmou/work/kernel/archive/$v /tmp

@@ -63,7 +63,14 @@ foreach (cat_("aliases")) {
     chomp; my ($f, $dest) = split;
     symlink $dest, "$tmp$f";
 }
-_ "cp ../modules/modules.{cz*,dep} $tmp/modules";
+
+my @modulz = sort grep { -d $_ } glob("../all.modules/*");
+my $selected_mod = pop @modulz;
+my ($kern) = $selected_mod =~ /.*\/([^\/]+)/;
+print "\tChoosing kernel modules from $kern\n";
+
+_ "cp ../all.modules/modules.cz$kern $tmp/modules/modules.cz";
+_ "cp ../all.modules/$kern/modules.dep $tmp/modules";
 
 installown("drvinst", "/usr/bin");
 

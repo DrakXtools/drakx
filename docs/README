@@ -193,7 +193,7 @@ For pcmcia, it depends on the type of install.
 ********************************************************************************
 Modules can be found in at least 2 places:
 - in /modules/modules.mar
-- in /lib/modules.cz2
+- in /lib/modules.cz<KERNEL_VERSION_RELEASE>
 
 /modules/modules.mar is used in mdk-stage1. It contains only modules
 interesting for one kind of install. For example in an hd install, it
@@ -202,7 +202,8 @@ modules. (To create, extract or view files in a ``mar'' archive, please
 use gi/mdk-stage1/mar/mar; this is basically an archive format meant to
 be minimalistic)
 
-/lib/modules.cz2 contains every module, it is used in stage2.
+/lib/modules.cz<KERNEL_VERSION_RELEASE> contains all modules, it is used
+in stage2.
 
 
 To install a module, use modprobe which is in /usr/bin. It's a perl wrapper
@@ -210,7 +211,7 @@ around /usr/bin/insmod. It uses the dependencies found in
 /modules/modules.dep (stage1).
 
 /usr/bin/insmod is a wrapper around /usr/bin/insmod_. It just extracts the
-module out of /lib/modules.cz2 in /tmp. Then it calls insmod_.
+module out of /lib/modules.cz in /tmp. Then it calls insmod_.
 
 /usr/bin/insmod_ is the real prog (which you usually find in /sbin/). You need
 to give it the complete path.

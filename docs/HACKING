@@ -61,20 +61,21 @@ gc ALL=(root) NOPASSWD:/usr/bin/patch,NOPASSWD:/bin/rpm,NOPASSWD:/bin/mount,NOPA
 
 (4) boot kernel
 
-you need a boot kernel and some kind of modules for each boot floppy. it's
-located in subdirectory "kernel" in DrakX-*.src.rpm ; if you ever grab (or
-build) another boot kernel, re-do following step (c).
+you need one or more kernels and (all?) their modules. it's located in
+subdirectory "all.kernels" in DrakX-*.src.rpm ; if you ever grab (or
+build) another boot kernel, replace or add an entry in "all.kernels" as:
 
-	(a) build the packager software for stage1 (read README file to know what's stage1)
-	[gc@obiwan ~/cvs/gi] cd mdk-stage1/mar
-	[gc@obiwan ~/cvs/gi/mdk-stage1/mar] make
+	(a) create your modules subdir (useful to describe the
+            VERSION_RELEASE) and untar your kernel
 
-	(b) build the perl stuff for stage2
-	[gc@obiwan ~/cvs/gi] cd perl-install
-	[gc@obiwan ~/cvs/gi/perl-install] make
+[gc@obiwan ~/cvs/gi/all.kernels] mkdir 2.4.1-BOOTcustom
+[gc@obiwan ~/cvs/gi/all.kernels] cd 2.4.1-BOOTcustom
+[gc@obiwan ~/cvs/gi/all.kernels/2.4.1-BOOTcustom] tar jxvf ~/mycustomkernel.tar.bz2
+[gc@obiwan ~/cvs/gi/all.kernels/2.4.1-BOOTcustom] ls
+boot/  cardmgr/  lib/
 
 	(c) build kernel/modules stuff for stage1 and stage2
-	[gc@obiwan ~/cvs/gi] ./update_kernel
+[gc@obiwan ~/cvs/gi] ./update_kernel
 
 
 (5) pray
