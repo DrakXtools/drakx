@@ -38,7 +38,9 @@ sub install_module($$) {
     my ($driver, $descr) = @_;
     print "Installing driver $driver (for \"$descr\")\n";
     system("/sbin/modprobe", $driver) and print "\tfailed\n";
-    if ($driver =~ /usb/) {
+    my $already_usb if 0;
+    if (!$already_usb && $driver =~ /usb/) {
+	$already_usb = 1;
 	print "Installing driver usbkdb\n";
 	system('/sbin/modprobe', 'usbkbd') and print "\tfailed\n";
 	print "Installing driver keybdev\n";
@@ -62,6 +64,9 @@ foreach $card (pci_probe()) {
 
 #-------------------------------------------------
 #- $Log$
+#- Revision 1.5  2001/09/27 16:00:05  gc
+#- don't install usb keyboard drivers more than once
+#-
 #- Revision 1.4  2001/09/27 15:57:55  gc
 #- try to fix usb keyboards
 #-
