@@ -38,6 +38,7 @@
 #include <netinet/ip.h>
 #include <netinet/udp.h>
 #include <sys/time.h>
+#include <time.h>
 #include <fcntl.h>
 
 #include "stage1.h"
