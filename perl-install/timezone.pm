@@ -11,7 +11,7 @@ sub getTimeZones {
     my ($prefix) = @_;
     $::testing and $prefix = '';
     open(my $F, "cd $prefix/usr/share/zoneinfo && find [A-Z]* -type f |");
-    my @l = chomp_(<$F>);
+    my @l = difference2([ chomp_(<$F> ]), [ 'ROC', 'PRC'] );
     close $F or die "cannot list the available zoneinfos";
     sort @l;
 }
