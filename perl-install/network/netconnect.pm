@@ -560,7 +560,7 @@ killall pppd
                     post => sub {
                         my %packages = (
                                         'eci'        => [ 'eciadsl', 'missing' ],
-                                        'sagem'      => [ 'adiusbadsl', '/usr/sbin/adictrl' ],
+                                        'sagem'      => [ 'eagle', '/usr/sbin/eaglectrl' ],
                                         'speedtouch' => [ 'speedtouch', '/usr/share/speedtouch/speedtouch.sh' ],
                                        );
                         $ntf_name = { reverse %eth_intf }->{$ntf_device} || $ntf_device;
