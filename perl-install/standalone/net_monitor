@@ -532,7 +532,7 @@ sub draw_monitor {
     for (my $i = $grid_interval; $i <= $height - $grid_interval; $i += $grid_interval) {
 	$pixmap->draw_line($gcl, $left_border, $i, $width, $i);
 	my ($gc2, $text);
-        if ($i > ($use_same_scale ? $pix_maxt : $height/2)) {
+        if ($i > max($grid_interval, $use_same_scale ? $pix_maxt : $height/2)) {
 	    $text = formatXiB(($height-$i)/$echr);
 	    $gc2 = $gcr;
         } else {
