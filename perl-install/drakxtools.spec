@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 1.1.9
-Release: 26mdk
+Release: 27mdk
 Url: http://www.linux-mandrake.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -37,6 +37,7 @@ Group: System/Configuration/Hardware
 Requires: %{name}-newt = %version-%release
 Obsoletes: kudzu, kudzu-devel, libdetect0, libdetect0-devel, libdetect-lst, libdetect-lst-devel, detect, detect-lst
 Provides: kudzu, kudzu-devel, libdetect0, libdetect0-devel, libdetect-lst, libdetect-lst-devel, detect, detect-lst
+Prereq: rpm-helper
 
 %package -n harddrake-ui
 Summary: Main Hardware Configuration/Information Tool
@@ -220,9 +221,14 @@ done
 %postun -n harddrake-ui
 %clean_menus
 
+%post -n harddrake
+%_post_service harddrake
+
+%preun -n harddrake
+%_preun_service harddrake
+
 %postun -n harddrake
-file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && \
-	%_sbindir/convert-harddrake || :
+file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_sbindir/convert-harddrake || :
 
 %files newt -f %name.list
 %defattr(-,root,root)
@@ -260,6 +266,9 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && \
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog 
+* Thu Aug 29 2002 Thierry Vignaud <tvignaud@mandrakesoft.com> 1.1.9-27mdk
+- fix init-script-without-chkconfig-{post,preun}
+
 * Thu Aug 29 2002 Thierry Vignaud <tvignaud@mandrakesoft.com> 1.1.9-26mdk
 - harddrake: 
 	o quit button really work in embedded mode
