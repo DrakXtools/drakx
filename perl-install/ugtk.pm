@@ -522,13 +522,9 @@ sub gtkicons_labels_widget {
                                              $darea->{state} ? $icon_h : $icon, 0, 0, ($dx - $icon_width)/2, 0, $icon_width, $icon_height);
                       $dbl_area->draw_pixmap($darea->style->bg_gc('normal'),
                                              $pix, 0, 0, ($dx - $width)/2, $y_round, $width, $height);
-#                      $dbl_area->draw_rectangle($darea->style->black_gc, 0,
-#						0, 0, max($width, $x_round) - 1 , $y_round + $height - 1);
                   }
                   $darea->window->draw_pixmap($darea->style->bg_gc('normal'),
                                               $dbl_area, 0, 0, 0, 0, $dx, $dy);
-#		  $darea->window->draw_rectangle($darea->style->black_gc, 0,
-#						0, 0, $dx, $dy);
                   ($darea->{dx}, $darea->{dy}) = ($dx, $dy);
               });
 	$darea->set_events(['exposure_mask', 'enter_notify_mask', 'leave_notify_mask', 'button_press_mask', 'button_release_mask' ]);
