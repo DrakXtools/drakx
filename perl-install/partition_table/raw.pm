@@ -84,7 +84,7 @@ sub adjustEnd($$) {
     my $end2 = round_up($end - ($hd->{geom}{heads} > 2 ? 2 : 1) * $hd->{geom}{sectors}, cylinder_size($hd));
     $end2 <= $hd->{geom}{cylinders} * cylinder_size($hd) or die "adjustEnd go beyond end of device geometry ($end2 > $hd->{totalsectors})";
     $part->{size} = ($end1 - $part->{start} > cylinder_size($hd) ? $end1 : $end2) - $part->{start};
-    $part->{size} > 0 or die "adjustEnd get a too small partition to handle correctly";
+    $part->{size} > 0 or internal_error("adjustEnd get a too small partition to handle correctly");
 }
 
 sub get_geometry($) {
