@@ -703,6 +703,7 @@ sub adsl_atboot() { (any { /x--boot_time/ } cat_($network::tools::connect_file))
 
 sub update_intbutt() {
     $int_state->set($isconnected ? N("Connected") : N("Not connected"));
+    return if !$int_connect;
     $int_connect->child->set($isconnected ? N("Disconnect...") : N("Connect..."));
     $int_connect->set_sensitive(1);
 }
@@ -956,6 +957,7 @@ Please run \"Internet access\" in control center."));
                            );
 
     $dialog->{rwindow}->show_all;
+    Glib::Timeout->add(200, \&update_intbutt);
     $dialog->main;
     ugtk2->exit(0);
 }
