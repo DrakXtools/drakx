@@ -85,7 +85,7 @@ sub from_raw_X {
 
     my $card = {
 	use_UTAH_GLX => any { /glx/ } $raw_X->{xfree3}->get_modules,
-	use_DRI_GLX  => any { /dri/ } $raw_X->{xfree4}->get_modules),
+	use_DRI_GLX  => any { /dri/ } $raw_X->{xfree4}->get_modules,
 	server => $xfree3_server,
 	prefer_xf3 => $xfree3_server && !$force_xf4,
 	%$device,
