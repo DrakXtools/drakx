@@ -63,7 +63,7 @@ sub installPackages() {
 				 #- network drivers and firmwares:
 				 qw(eagle-usb speedtouch speedtouch_mgmt unicorn),
                                  qw(cups cups-drivers foomatic-db gimpprint hpoj libnet-snmp mtools mtoolsfm nmap printer-filters printer-testpages printer-utils scli xojpanel xpp), #- printer stuff
-				 qw(ATI_GLX NVIDIA_GLX),
+				 qw(ATI_GLX ATI_GLX-utils NVIDIA_GLX),
 				 qw(hcfpcimodem hsflinmodem ltmodem),
 				 qw(xinput), #- for some mice
                                  qw(perl-Term-Readline-Gnu binutils emacs-X11 bash-completion),  #- allow debugging move
@@ -242,7 +242,7 @@ substInFile {
 } "$::prefix/usr/share/mdk/mandrakegalaxy/mdkgalaxy-fr.html";
 
 #- remove uncessary wizards, especially from appearing in MCC
-unlink "$::prefix/usr/sbin/$_" foreach qw(drakautoinst drakboot drakfloppy drakgw drakedm drakfont rpmdrake MandrakeUpdate rpmdrake-remove edit-urpm-sources.pl);
+unlink "$::prefix/usr/sbin/$_" foreach qw(drakautoinst drakboot drakfloppy drakgw drakedm drakfont drakperm draksec rpmdrake MandrakeUpdate rpmdrake-remove edit-urpm-sources.pl);
 unlink "$::prefix/usr/bin/$_" foreach qw(userdrake);
 
 #- selecting language must be done from drakx anyway
