@@ -48,7 +48,8 @@ $::wizard_xpm = "/usr/share/pixmaps/internet.xpm";
 #-e $f or system("urpmi --auto XFree86 XFree86-75dpi-fonts");
 #-e $f or die "install XFree86 first!\n";
 
-#goto dd;
+my $in = vnew interactive('su');
+
 my $window1 = new Gtk::Window -toplevel;
 $window1->signal_connect ( delete_event => sub { Gtk->exit(0); });
 $window1->set_position(1);
@@ -63,13 +64,13 @@ $hbox1->pack_start(new Gtk::Label(_("default")),0,0,0);
 my $hbox2 = new Gtk::HBox(0,0);
 $vbox1->pack_start($hbox2,1,1,0);
 $hbox2->pack_start(new Gtk::Label(_("Hostname: ")),0,0,0);
-$hbox2->pack_start(new Gtk::Label(_("petite.mandrakesoft.com")),0,0,0);
+$hbox2->pack_start(new Gtk::Label("petite.mandrakesoft.com"),0,0,0);
 
 $vbox1->pack_start(new Gtk::HSeparator,1,1,5);
 
 my $frame1 = new Gtk::Frame (_("Internet access"));
 $vbox1->pack_start($frame1,1,1,0);
-$table1 = new Gtk::Table (3,3, 0);
+my $table1 = new Gtk::Table (3,3, 0);
 $table1->set_row_spacings(5);
 $table1->set_col_spacings(5);
 #$table1->border_width(10);
@@ -81,7 +82,7 @@ my $label4 = new Gtk::Label(_("isdn_internal"));
 $table1->attach($label4, 1, 2, 0, 1, 'fill', 'fill',0,0);
 my $label5 = new Gtk::Label(_("Interface:"));
 $table1->attach($label5, 0, 1, 1, 2, 'fill', 'fill',0,0);
-my $label6 = new Gtk::Label(_("ippp0"));
+my $label6 = new Gtk::Label("ippp0");
 $table1->attach($label6, 1, 2, 1, 2, 'fill', 'fill',0,0);
 my $label7 = new Gtk::Label(_("Status:"));
 $table1->attach($label7, 0, 1, 2, 3, 'fill', 'fill',0,0);
@@ -101,7 +102,7 @@ $vbox1->pack_start($separator2,1,1,5);
 
 my $frame2 = new Gtk::Frame (_("LAN configuration"));
 $vbox1->pack_start($frame2,1,1,0);
-$table2 = new Gtk::Table (3,2, 0);
+my$table2 = new Gtk::Table (3,2, 0);
 $table2->set_row_spacings(5);
 $table2->set_col_spacings(5);
 #$table1->border_width(10);
@@ -125,33 +126,13 @@ $table2->attach($label14, 1, 2, 2, 3, 'fill', 'fill',0,0);
 $window1->show_all();
 Gtk->main;
 
-#dd:
+dd:
 
-my $in = vnew interactive('su');
-
-#my $wait = $in->wait_message('', '', 1);
 netconnect::intro('', $netcnx, $in, -e "/etc/pcmcia", sub {});#\&standalone::pkgs_install);
 $in->exit(0);
 
 sub configure_net {
-
-    my $isdn;
-    netconnect::isdn_detect_backend($isdn);
-    print "isdn $_: $isdn->{$_}\n" foreach qw(description vendor id driver card_type type);
-
-    my $netc={};
-    my $intf={};
-    any::setup_thiskind_backend('net', undef);
-    my @all_cards = netconnect::conf_network_card_backend ('', $netc, $intf, undef, undef, undef, undef);
-
-#    print " fffff: " . Data::Dumper->Dump([@all_cards], ['@all_cards']) . "\n";
-
-    print "nb: " . $netc->{nb_cards} ."\n";
-    map { print "$_->[0]: $_->[1] \n" } @all_cards;
-
-    print " jjjj: " . run_program::rooted($prefix, "/bin/ping -c 1 kdsdfsdenobi" ) . "\n";
-#    system("ping eth0 10.0.0.10 netmask 255.255.255.0");
-#    system("ifconfig eth0 10.0.0.10 netmask 255.255.255.0");
+    my $auto_detect={};
 
     my $window = new Gtk::Window -toplevel;
     $window->signal_connect ( delete_event => sub { Gtk->main_quit; });
@@ -160,9 +141,71 @@ sub configure_net {
     $window->border_width(10);
     my $vbox1 = new Gtk::VBox(0,0);
     $window->add($vbox1);
-    $vbox1->pack_start(new Gtk::Label(_("Profile: ")),0,0,0);
+
+    my $table1 = new Gtk::Table (2,2, 0);
+    $table1->set_row_spacings(5);
+    $table1->set_col_spacings(5);
+    $vbox1->pack_start($table1,1,1,0);
+    $table1->attach(new Gtk::Label(_('Select the connection')), 0, 1, 0, 1, 'fill', 'fill',0,0);
+    my $combo1=new Gtk::Combo;
+    $combo1->set_popdown_strings("Manual");
+    $table1->attach($combo1, 0, 1, 1, 2, 'fill', 'fill',0,0);
+    my $button1 = new Gtk::Button(_("Detect..."));
+    $table1->attach($button1, 1,2, 0, 2, 'fill', 'fill',0,0);
+    my $frame1 = new Gtk::Frame (_("Parameters"));
+    $vbox1->pack_start($frame1,1,1,0);
+
+    my $socket = new Gtk::Socket;
+    $socket->show;
+    $frame1->add($socket);
+    $socket->realize;
+    print ("The XID of the sockets window n°$arg is [" . $socket->window->XWINDOW . "]\nMy PID is [" . $$ . "]\n");
+    $::isEmbedded = 1;
+    $::XID = $socket->window->XWINDOW;
+    $::CCPID = $$;
+
+    my $isdn={};
+    my $netc={};
+
+    $window->show_all();
+    $window->realize();
+    $isdn->{$_} ||= '' foreach qw(phone_in phone_out dialing_mode login passwd passwd2 idl);
+    common::add2hash($netc, { dnsServer2 => '', dnsServer3 => '', DOMAINNAME2 => '' });
+    netconnect::ask_info2('', $isdn, $netc, $in, -e "/etc/pcmcia");
+    Gtk->main;
+
+
+#      my $table2 = new Gtk::Table (20,2, 0);
+#      $table2->set_row_spacings(5);
+#      $table2->set_col_spacings(5);
+#      $frame1->add($table2);
+
+#      my $i=0;
+#      foreach ("Card IRQ", "Card mem (DMA)", "Card IO", "Card IO_0", "Card IO_1", "Your personal phone number", "Provider name (ex provider.net)", "Provider phone number", "Provider dns 1", "Provider dns 2", "Dialing mode", "Account Login (user name)", "Account Password", "Confirm Password") {
+#  	print "$_\n";
+#  	$table2->attach(new Gtk::Label(_($_)), 0, 1, $i, $i+1, 'fill', 'fill',0,0);
+#  	$infos[$i]=new Gtk::Entry();
+#  	$table2->attach($infos[$i], 1, 2, $i, $i+1, 'fill', 'fill',0,0);
+#  	$i++;
+#      }
 
     $window->show_all();
     Gtk->main;
 
+}
+
+sub detect {
+    my ($auto_detect) = @_;
+    my $isdn={};
+    netconnect::isdn_detect_backend($isdn);
+    $auto_detect->{isdn}{$_}=$isdn->{$_} foreach qw(description vendor id driver card_type type);
+
+    my $netc={};
+    my $intf={};
+    any::setup_thiskind_backend('net', undef);
+    my @all_cards = netconnect::conf_network_card_backend ('', undef, undef, undef, undef, undef, undef);
+    map { netconnect::adsl_detect("", $_->[0]) ? $auto_detect->{adsl}=$_->[0] : $auto_detect->{lan}{$_->[0]}=$_->[1]; } @all_cards;
+    my $modem={};
+    netconnect::modem_detect_backend($modem);#, $mouse);
+    $modem->{device} and $auto_detect->{modem}=$modem->{device};
 }
