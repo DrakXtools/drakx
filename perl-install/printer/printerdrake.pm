@@ -2692,9 +2692,7 @@ sub install_spooler {
 		    $in->do_pkgs->install(('cups', 'net-tools', 'xpp',
 					   ($::expert ? 'cups-drivers' : ())));
 		}
-		if ((!$::testing) &&
-		    ((!files_exist((qw(/usr/bin/wget)))) &&
-		     (!files_exist((qw(/usr/bin/curl)))))) {
+		if (!$::testing && !files_exist(qw(/usr/bin/wget /usr/bin/curl))) {
 		    $in->do_pkgs->install($::isInstall ? 'curl' : 'webfetch');
 		}
 		# Try to start the network when CUPS is the spooler, so that
