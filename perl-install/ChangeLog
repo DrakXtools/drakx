@@ -1,7 +1,13 @@
 2000-09-25  dam's  <damien@mandrakesoft.com>
 
+	* network.pm (write_resolv_conf): write '# ppp temp entry adsl' in
+	/etc/resolv.conf if needed.
+
+	* netconnect.pm : adsl connection does'nt need any dns anymore.
+
 	* netconnect.pm (read_net_conf): created. draknet now stores and
 	reload the config.
+	
 	* netconnect.pm (main): if the user is french and uses french
 	keyboard, don't ask his country.
 
