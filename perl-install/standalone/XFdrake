@@ -69,8 +69,8 @@ my $allowNVIDIA_rpms;
 	foreach (grep { !$_->{ignore} } @{$urpm->{media} || []}) {
 	    $urpm->parse_synthesis($_);
 	}
-	foreach (@{$urpm->{params}{depslist} || []}) {
-	    $_->{name} =~ /NVIDIA/ and $list->{$_->{name}} = 1;
+	foreach (@{$urpm->{depslist} || []}) {
+	    $_->name =~ /NVIDIA/ and $list->{$_->name} = 1;
 	}
     };
     if ($list{NVIDIA_GLX}) {
