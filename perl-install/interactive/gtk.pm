@@ -594,7 +594,7 @@ sub ask_fromW {
     @widgets_always   = map_index { $create_widget->($_, $::i)       } @$l;
     @widgets_advanced = map_index { $create_widget->($_, $::i + @$l) } @$l2;
 
-    $mainw->{box_allow_grow} = !@$l;
+    $mainw->{box_allow_grow} = 1;
     my $pack = create_box_with_title($mainw, @{$common->{messages}});
     ugtk2::set_main_window_size($mainw) if $mainw->{pop_it} && (@$l || $mainw->{box_size} == 200);
 
@@ -642,8 +642,7 @@ sub ask_fromW {
 	my @grouped;
 	my $add_grouped = sub {
 	    if (@grouped == 0) {
-		push @widgets_to_pack, 1 => Gtk2::VBox->new(0,0) if @$l == 0;
-	    } elsif (@grouped == 1 && @$l > 1) {
+	    } elsif (@grouped == 1) {
 		push @widgets_to_pack, 0 => $grouped[0]{real_w};
 	    } else {
 		my $scroll = create_scrolled_window(gtkpack__(Gtk2::VBox->new(0,0), map { $_->{real_w} } @grouped),
@@ -667,12 +666,7 @@ sub ask_fromW {
     gtkpack_($pack, @widgets_to_pack);
 	    
     if ($buttons_pack) {
-	if ($::isWizard && !$mainw->{pop_it} && $::isInstall) {
-	    #- is this still needed?
-	    $buttons_pack->set_size_request($::real_windowwidth - 20, -1);
-	    $buttons_pack = gtkpack__(Gtk2::HBox->new(0,0), $buttons_pack);
-	}
-	$pack->pack_start(gtkshow($buttons_pack), 0, 0, 0);
+	$pack->pack_end(gtkshow($buttons_pack), 0, 0, 0);
     }
     gtkadd($mainw->{window}, $pack);
     $set_advanced->($common->{advanced_state});
