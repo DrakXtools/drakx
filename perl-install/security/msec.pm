@@ -49,7 +49,7 @@ sub load_values {
         chop $val;
         $val =~ s/[()]//g;
         chop $opt if $separator eq '\(';  # $opt =~ s/ //g if $separator eq '\(';
-        if_($val, $opt => $val);
+        if_(defined($val), $opt => $val);
     } cat_($msec->{$category}{values_file});
 }
 
