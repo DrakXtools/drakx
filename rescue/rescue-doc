@@ -7,52 +7,54 @@ output('/tmp/rescue-doc-contents', q(
                      by this rescue.
 
 
-Are you sure you need to use the rescue mode for solving your
+Are you certain "rescue mode" is the best tool for your specific
 problem?
 
-The rescue system aims to stay as small as possible. That's why
-you won't find a usable graphical environment, for example. Same
-applies for the Mandrake detection/configuration libraries: they
-don't fit here.
+The rescue system on this CD is a very basic text-based
+environment for rescuing systems that no longer boot. You will
+not find an easy-to-use graphical environment in this rescue
+system, nor the Mandrake detection/configuration libraries.
 
 
-Most of the problems with a linux system are much easier to solve
-on a running system, than by booting in "rescue" mode. In fact,
-there is hardly any problem which wouldn't be easier to solve in
-a comfortable environment of a fully installed Mandrake Linux
-system, than in a spartanic "rescue system" shell. Such problems
-include for instance:
+The vast majority of problems that can affect a Linux system are
+much easier to repair on a running system than by booting into
+"rescue mode". In fact, there are very few problems which aren't
+easier to resolve in the comfortable environment of a fully
+installed Mandrake Linux system than in this spartan "rescue
+system" shell. Some of the most common problems include:
 
-- bad or missing X configuration
+- bad or missing X (video display) configuration
 - adding/removing/reconfiguring hardware
-- cleaning up a mess caused by installing third-party software
-  with --force and --nodeps options
+- repairing problems caused by installing third-party software
+  with the "--force" and "--nodeps" options
 
-Rule of thumb says: "if you can boot without using rescue mode or
-this CD, there is no reason for using the rescue CD".
-
-
-If you can't boot your system anymore, then the Rescue system is
-for you.
-
-- if you can fully solve the problem in Rescue mode, let it go.
-  For example, you changed some parameters in your /etc/fstab and
-  it won't let the system boot anymore. Change back the
-  offending line.
-
-- if you can't fully solve the problem (you need to reconfigure
-  the whole X system, for example), just modify what's necessary
-  to boot again, boot in your system, and fully fix from there.
+The general rule of thumb is: "If you can boot into the Linux
+system without using rescue mode or this CD, there is no real
+reason to use the rescue CD".
 
 
-In case you have found a new class of problems which must be
-handled by "rescue mode", but isn't yet, please report it to
+However, if you can no longer boot into the system, the rescue
+system is the right tool. Some common examples include:
+
+- If you previously changed some parameters in the /etc/fstab and
+  the system will no longer boot, fix the offending line while in
+  rescue mode, then try to boot normally into your system.
+
+- If the problem cannot be completely resolved in rescue mode
+  (for example, if you need to reconfigure the video display),
+  just modify what's necessary to boot into a running system,
+  then complete the fix from there.
+
+In case you have found a new problem which should be handled by
+"rescue mode" but currently isn't, please report it to
 <gc@mandrakesoft.com>.
 
-For more information on problems with Mandrake Linux, please see
-our manuals, documentation on mandrakelinux.com,
-mandrakeuser.org, troubleshooting articles on mandrakeforum.com,
-or consult our support.
+For more information on troubleshooting a Mandrake Linux system,
+please consult the official manuals, the documentation on
+MandrakeLinux.com, MandrakeUser.org, troubleshooting articles on
+MandrakeForum.com, or the MandrakeExpert.com support forum.
+
+<press 'q' (qwerty keyboard) to continue>
 ));
 
 exec 'less /tmp/rescue-doc-contents';
