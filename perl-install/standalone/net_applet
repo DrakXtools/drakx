@@ -25,13 +25,13 @@ my %appletstate = (
              connected => {
   		          colour => [ 'connected' ],
 			  changes => [ 'disconnected', 'error', 'busy' ],
-			  menu => [ 'confNetwork', 'monitorNetwork', 'refresh', 'help' ],
+			  menu => [ 'downNetwork', 'confNetwork', 'monitorNetwork', 'refresh', 'help' ],
 			  tt => [ N_("Network is up on interface %s") ]
 			  },
              disconnected => {
 			      colour => [ 'disconnected' ],
 			      changes => [ 'connected', 'error', 'busy' ],
-			      menu => [ 'confNetwork', 'refresh', 'help' ],
+			      menu => [ 'upNetwork', 'confNetwork', 'refresh', 'help' ],
 			      tt => [ 
                             #-PO: keep the "Configure Network" substring synced with the "Configure Network" message below
                             N_("Network is down on interface %s. Click on \"Configure Network\"") 
@@ -40,8 +40,12 @@ my %appletstate = (
 	    );
 
 my %actions = (
+               'upNetwork' => { name => sub { N("Connect %s", $_[0]) },
+                                launch => sub { system("/usr/sbin/net_monitor --connect --defaultintf $_[0] &") } },
+               'downNetwork' => { name => sub { N("Disconnect %s", $_[0]) },
+                                  launch => sub { system("/usr/sbin/net_monitor --disconnect --defaultintf $_[0] &") } },
+               'monitorNetwork' => { name => N("Monitor Network"), launch => sub { system("/usr/sbin/net_monitor --defaultintf $_[0] &") } },
                'confNetwork' => { name => N("Configure Network"), launch => sub { system("/usr/sbin/drakconnect --skip-wizard &") } },
-               'monitorNetwork' => { name => N("Monitor Network"), launch => sub { system("/usr/sbin/net_monitor &") } },
 	       'refresh' => { name => N("Refresh"), launch => sub { checkNetwork() } },
                'help' => { name => N("Get Online Help"), launch => sub { system("drakhelp --id internet-connection &") } }
               );
@@ -132,7 +136,9 @@ sub setState {
     gtkset_tip(Gtk2::Tooltips->new, $eventbox, formatAlaTeX(common::sprintf_fixutf8(translate($appletstate{$state_type}{tt}[0]), $interface)));
     my $menu = Gtk2::Menu->new;
     foreach (@$arr) {
-        $menu->append(gtksignal_connect(gtkshow(Gtk2::MenuItem->new_with_label($actions{$_}{name})), activate => $actions{$_}{launch}));
+        my $name = ref($actions{$_}{name}) eq 'CODE' ? $actions{$_}{name}->($interface) : $actions{$_}{name};
+        my $launch = $actions{$_}{launch};
+        $menu->append(gtksignal_connect(gtkshow(Gtk2::MenuItem->new_with_label($name)), activate => sub { $launch->($interface) } ));
     }
     $menu->append(gtkshow(Gtk2::SeparatorMenuItem->new));
     $menu->append(gtksignal_connect(gtkset_active($checkmi = Gtk2::CheckMenuItem->new_with_label(N("Always launch on startup")), shouldStart()), toggled => sub { setAutoStart(uc(bool2text($checkmi->get_active))) }));
