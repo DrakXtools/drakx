@@ -876,8 +876,8 @@ sub loadO {
     } else {
 	-e "$f.pl" and $f .= ".pl" unless -e $f;
 
-	local *F; #- keep it outside the following do else filehandle will be closed before reading.
-	my $fh = -e $f ? do { open F, $f; *F } : getFile($f) or die _("Error reading file %s", $f);
+	my $fh;
+	if (-e $f) { open $fh, $f } else { $fh = getFile($f) or die _("Error reading file %s", $f) }
 	{
 	    local $/ = "\0";
 	    no strict;
