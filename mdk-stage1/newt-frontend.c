@@ -237,7 +237,128 @@ enum return_type ask_yes_no(char *msg)
 	else return RETURN_ERROR;
 }
 
-enum return_type ask_from_entries(char *msg, char ** questions, char *** answers, int entry_size)
+
+static void (*callback_real_function)(char ** strings) = NULL;
+
+static void default_callback(newtComponent co, void * data)
+{
+	newtComponent * entries = data;
+	char * strings[50], ** ptr;
+
+	if (!callback_real_function)
+		return;
+
+	ptr = strings;
+	while (entries && *entries) {
+		*ptr = newtEntryGetValue(*entries);
+		entries++;
+		ptr++;
+	}
+
+	callback_real_function(strings);
+
+	ptr = strings;
+	entries = data;
+	while (entries && *entries) {
+		newtEntrySet(*entries, strdup(*ptr), 1);
+		entries++;
+		ptr++;
+	}
+}
+
+/* only supports up to 50 buttons and entries -- shucks! */
+static int mynewtWinEntries(char * title, char * text, int suggestedWidth, int flexDown, 
+			    int flexUp, int dataWidth, void (*callback_func)(char ** strings),
+			    struct newtWinEntry * items, char * button1, ...) {
+	newtComponent buttons[50], result, form, textw;
+	newtGrid grid, buttonBar, subgrid;
+	int numItems;
+	int rc, i;
+	int numButtons;
+	char * buttonName;
+	newtComponent entries[50];
+
+	va_list args;
+	
+	textw = newtTextboxReflowed(-1, -1, text, suggestedWidth, flexDown,
+				    flexUp, 0);
+	
+	for (numItems = 0; items[numItems].text; numItems++); 
+	
+	buttonName = button1, numButtons = 0;
+	va_start(args, button1);
+	while (buttonName) {
+		buttons[numButtons] = newtButton(-1, -1, buttonName);
+		numButtons++;
+		buttonName = va_arg(args, char *);
+	}
+	
+	va_end(args);
+	
+	buttonBar = newtCreateGrid(numButtons, 1);
+	for (i = 0; i < numButtons; i++) {
+		newtGridSetField(buttonBar, i, 0, NEWT_GRID_COMPONENT, 
+				 buttons[i],
+				 i ? 1 : 0, 0, 0, 0, 0, 0);
+	}
+
+	if (callback_func) {
+		callback_real_function = callback_func;
+		entries[numItems] = NULL;
+	}
+	else
+		callback_real_function = NULL;
+	
+	subgrid = newtCreateGrid(2, numItems);
+	for (i = 0; i < numItems; i++) {
+		newtComponent entr = newtEntry(-1, -1, items[i].value ? 
+					       *items[i].value : NULL, dataWidth,
+					       items[i].value, items[i].flags);
+
+		newtGridSetField(subgrid, 0, i, NEWT_GRID_COMPONENT,
+				 newtLabel(-1, -1, items[i].text),
+				 0, 0, 0, 0, NEWT_ANCHOR_LEFT, 0);
+		newtGridSetField(subgrid, 1, i, NEWT_GRID_COMPONENT,
+				 entr,
+				 1, 0, 0, 0, 0, 0);
+		if (callback_func) {
+			entries[i] = entr;
+			newtComponentAddCallback(entr, default_callback, entries);
+		}
+	}
+	
+	
+	grid = newtCreateGrid(1, 3);
+	form = newtForm(NULL, 0, 0);
+	newtGridSetField(grid, 0, 0, NEWT_GRID_COMPONENT, textw, 
+			 0, 0, 0, 0, NEWT_ANCHOR_LEFT, 0);
+	newtGridSetField(grid, 0, 1, NEWT_GRID_SUBGRID, subgrid, 
+			 0, 1, 0, 0, 0, 0);
+	newtGridSetField(grid, 0, 2, NEWT_GRID_SUBGRID, buttonBar, 
+			 0, 1, 0, 0, 0, NEWT_GRID_FLAG_GROWX);
+	newtGridAddComponentsToForm(grid, form, 1);
+	newtGridWrappedWindow(grid, title);
+	newtGridFree(grid, 1);
+	
+	result = newtRunForm(form);
+	
+	for (rc = 0; rc < numItems; rc++)
+		*items[rc].value = strdup(*items[rc].value);
+	
+	for (rc = 0; result != buttons[rc] && rc < numButtons; rc++);
+	if (rc == numButtons) 
+		rc = 0; /* F12 */
+	else 
+		rc++;
+	
+	newtFormDestroy(form);
+	newtPopWindow();
+	
+	return rc;
+}
+
+
+enum return_type ask_from_entries(char *msg, char ** questions, char *** answers, int entry_size, void (*callback_func)(char ** strings))
 {
 	struct newtWinEntry entries[50];
 	int j, i = 0;
@@ -267,7 +388,7 @@ enum return_type ask_from_entries(char *msg, char ** questions, char *** answers
 			*(entries[j].value) = NULL;
 	}
 
-	rc = newtWinEntries("Please fill entries...", msg, 52, 5, 5, entry_size, entries, "Ok", "Cancel", NULL); 
+	rc = mynewtWinEntries("Please fill entries...", msg, 52, 5, 5, entry_size, callback_func, entries, "Ok", "Cancel", NULL); 
 
 	if (rc == 3)
 		return RETURN_BACK;

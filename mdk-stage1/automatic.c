@@ -127,10 +127,10 @@ enum return_type ask_from_list_comments_auto(char *msg, char ** elems, char ** e
 }
 
 
-enum return_type ask_from_entries_auto(char *msg, char ** questions, char *** answers, int entry_size, char ** questions_auto)
+enum return_type ask_from_entries_auto(char *msg, char ** questions, char *** answers, int entry_size, char ** questions_auto, void (*callback_func)(char ** strings))
 {
 	if (!IS_AUTOMATIC)
-		return ask_from_entries(msg, questions, answers, entry_size);
+		return ask_from_entries(msg, questions, answers, entry_size, callback_func);
 	else {
 		char * tmp_answers[50];
 		int i = 0;

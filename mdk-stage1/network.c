@@ -311,16 +311,45 @@ static int save_netinfo(struct interface_info * intf) {
 }
 
 
-void guess_netmask(struct interface_info * intf)
+char * guess_netmask(char * ip_addr)
 {
-	unsigned long int tmp = ntohl(intf->ip.s_addr);
+	struct in_addr addr;
+	unsigned long int tmp;
+
+	if (!inet_aton(ip_addr, &addr))
+		return "";
+
+	tmp = ntohl(addr.s_addr);
+	
 	if (((tmp & 0xFF000000) >> 24) <= 127)
-		inet_aton("255.0.0.0", &intf->netmask);
+		return "255.0.0.0";
 	else if (((tmp & 0xFF000000) >> 24) <= 191)
-		inet_aton("255.255.0.0", &intf->netmask);
+		return "255.255.0.0";
 	else 
-		inet_aton("255.255.255.0", &intf->netmask);
-	log_message("netmask guess: %s", inet_ntoa(intf->netmask));
+		return "255.255.255.0";
+}
+
+
+static void static_ip_callback(char ** strings)
+{
+	struct in_addr addr;
+
+	if (!inet_aton(strings[0], &addr))
+		return;
+
+	if (!strcmp(strings[1], "")) {
+		char * ptr;
+		strings[1] = strdup(strings[0]);
+		ptr = strrchr(strings[1], '.');
+		if (ptr)
+			*(ptr+1) = '\0';
+	}
+
+	if (!strcmp(strings[2], ""))
+		strings[2] = strdup(strings[1]);
+
+	if (!strcmp(strings[3], ""))
+		strings[3] = strdup(guess_netmask(strings[0]));
 }
 
 
@@ -342,7 +371,7 @@ static enum return_type setup_network_interface(struct interface_info * intf)
 		struct in_addr addr;
 
 		results = ask_from_entries_auto("Please enter the network information. (leave netmask void for Internet standard)",
-						questions, &answers, 16, questions_auto);
+						questions, &answers, 16, questions_auto, static_ip_callback);
 		if (results != RETURN_OK)
 			return setup_network_interface(intf);
 
@@ -362,11 +391,9 @@ static enum return_type setup_network_interface(struct interface_info * intf)
 			gateway.s_addr = 0; /* keep an understandable state */
 		}
 
-		if (!strcmp(answers[3], ""))
-			guess_netmask(intf);
-		else if (!inet_aton(answers[3], &addr)) {
+		if (!inet_aton(answers[3], &addr)) {
 			log_message("invalid netmask -- back to the guess");
-			guess_netmask(intf);
+			inet_aton(guess_netmask(answers[0]), &addr);
 		}
 		else
 			memcpy(&intf->netmask, &addr, sizeof(addr));
@@ -447,7 +474,7 @@ static enum return_type configure_network(struct interface_info * intf)
 		results = ask_from_entries_auto("I could not guess hostname and domain name; please fill in this information. "
 						"Valid answers are for example: `mybox' for hostname and `mynetwork.com' for "
 						"domain name, for a machine called `mybox.mynetwork.com' on the Internet.",
-						questions, &answers, 32, questions_auto);
+						questions, &answers, 32, questions_auto, NULL);
 		if (results != RETURN_OK)
 			return results;
 		
@@ -467,9 +494,6 @@ static enum return_type bringup_networking(struct interface_info * intf)
 	enum return_type results = RETURN_ERROR;
 	
 	my_insmod("af_packet", ANY_DRIVER_TYPE, NULL);
-
-//	if (intf->is_up == 1)
-//		log_message("interface already up (with IP %s)", inet_ntoa(intf->ip));
 
 	while (results != RETURN_OK) {
 		results = setup_network_interface(intf);
@@ -593,7 +617,7 @@ enum return_type nfs_prepare(void)
 	do {
 		results = ask_from_entries_auto("Please enter the name or IP address of your NFS server, "
 						"and the directory containing the " DISTRIB_NAME " Distribution.",
-						questions, &answers, 40, questions_auto);
+						questions, &answers, 40, questions_auto, NULL);
 		if (results != RETURN_OK)
 			return nfs_prepare();
 		
@@ -659,7 +683,7 @@ enum return_type ftp_prepare(void)
 		results = ask_from_entries_auto("Please enter the name or IP address of the FTP server, "
 						"the directory containing the " DISTRIB_NAME " Distribution, "
 						"and the login/pass if necessary (leave login blank for anonymous).",
-						questions, &answers, 40, questions_auto);
+						questions, &answers, 40, questions_auto, NULL);
 		if (results != RETURN_OK)
 			return ftp_prepare();
 
@@ -741,7 +765,7 @@ enum return_type http_prepare(void)
 
 		results = ask_from_entries_auto("Please enter the name or IP address of the HTTP server, "
 						"and the directory containing the " DISTRIB_NAME " Distribution.",
-						questions, &answers, 40, questions_auto);
+						questions, &answers, 40, questions_auto, NULL);
 		if (results != RETURN_OK)
 			return http_prepare();
 

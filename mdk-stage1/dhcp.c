@@ -185,7 +185,7 @@ void set_missing_ip_info(struct interface_info * intf)
 	bp_int32 nmNum;
 
 	if (intf->netmask.s_addr == 0)
-		guess_netmask(intf);
+		inet_aton(guess_netmask(inet_ntoa(intf->ip)), &intf->netmask);
 
 	nmNum = *((bp_int32 *) &intf->netmask);
 

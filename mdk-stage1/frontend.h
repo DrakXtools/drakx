@@ -36,6 +36,6 @@ void end_progression(void);
 enum return_type ask_yes_no(char *msg);
 enum return_type ask_from_list(char *msg, char ** elems, char ** choice);
 enum return_type ask_from_list_comments(char *msg, char ** elems, char ** elems_comments, char ** choice);
-enum return_type ask_from_entries(char *msg, char ** questions, char *** answers, int entry_size);
+enum return_type ask_from_entries(char *msg, char ** questions, char *** answers, int entry_size, void (*callback_func)(char ** strings));
 
 #endif
