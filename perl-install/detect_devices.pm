@@ -228,7 +228,7 @@ sub stringlist {
 sub check {
     my ($l) = @_;
     my $ok = $l->{driver} !~ /(unknown|ignore)/;
-    $ok or log::l("skipping $l->{description}, no module available (if you know one, please mail bugs\@linux-mandrake.com)");
+    $ok or log::l("skipping $l->{description}, no module available (if you know one, please mail install\@mandrakesoft.com)");
     $ok
 }
 

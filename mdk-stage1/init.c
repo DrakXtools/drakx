@@ -349,7 +349,7 @@ int main(int argc, char **argv)
 		printf("*** TESTING MODE ***\n");
 
 
-	printf("\n\t\t\t\033[1;40mWelcome to Linux-\033[1;36mMandrake\033[0;39m\n\n");
+	printf("\n\t\t\t\033[1;40mWelcome to \033[1;36mMandrake\033[0;39m Linux\n\n");
 	
 	if (!testing) {
 		if (mount("/proc", "/proc", "proc", 0, NULL))
