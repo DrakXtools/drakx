@@ -909,7 +909,7 @@ sub setRootPassword {
 			 ]) or return;
 
     if ($nis) { 
-	$o->{authentication}{NIS} = 'broadcast';
+	$o->{authentication}{NIS} ||= 'broadcast';
 	$o->ask_from_entries_refH('',
 				  _("Authentification NIS"),
 				  [ { label => _("NIS Domain"), val => \ ($o->{netc}{NISDOMAIN} ||= $o->{netc}{DOMAINNAME}) },
