@@ -119,7 +119,7 @@ my @list_of_rpm_to_install;
 my @other_files;
 my @sys_files = "/etc";
 my $host_passwd;
-my $untar_prefix;
+my $untar_prefix = "tar -C $restore_path -x";
 
 # allow not-root user with own config
 if ($ENV{USER} ne 'root' && $ENV{HOME} ne '/root') {
@@ -1039,8 +1039,8 @@ sub build_backup_files() {
 		  }
 		  if (!$first_done) {
 			my $list_file = name_list_file($incr . $user);
-			do_find(undef, $find_args_cuser, $list_file, $path_name);
-			do_tar($tar_cmd_user, "backup_$incr$user", undef, $path_name);
+			do_find(undef, $find_args_user, $list_file, $path_name);
+			do_tar($tar_cmd_cuser, "backup_$incr$user", undef, $path_name);
 		  }
 		  push_list("list_$incr$user") if $incr =~ /_user/;
 		  files_to_results("$incr$user");
@@ -2878,6 +2878,7 @@ sub restore_do() {
 }
 
 sub restore_do2() {
+    destroy_widget();
     my $do_restore;
     my $text = new Gtk2::TextView;
     restore_state();
@@ -3182,7 +3183,8 @@ sub find_files_to_restore() {
 	my @files_to_restore;
 	my $cat_entry;
 	my @catalog = cat_("$cfg_dir/drakbackup_catalog");
-	
+	destroy_widget();
+
 	#- file info in tree view
 	my $model = Gtk2::TreeStore->new("Glib::String", "Gtk2::Gdk::Pixbuf", "Glib::Int");
     my $file_list = Gtk2::TreeView->new_with_model($model);
@@ -3690,9 +3692,12 @@ sub wildcard_to_tarfile {
 
 sub file_to_tarfile {
 	my ($restore_file, $wildcard) = @_;
+	#- remove leading "/"
+	$restore_file = substr($restore_file, 1);
+	#- filename with spaces
+	$restore_file = "'" . $restore_file . "'" if $restore_file =~ / /;
 	my $tarfile = `grep -l $restore_file $conf{PATH_TO_SAVE}/*$wildcard.txt`;
 	chop $tarfile;
-	$restore_file = substr($restore_file, 1);
 	$tarfile = basename($tarfile);
 	$tarfile =~ s/txt/$conf{OPTION_COMP}/;
 	$tarfile =~ s/list/backup/;
@@ -3871,6 +3876,10 @@ sub cbutton() {
 	0, gtksignal_connect(Gtk2::Button->new(N("Cancel")), clicked => \&interactive_mode_box);
 }
 
+sub cbuttonr() {
+	0, gtksignal_connect(Gtk2::Button->new(N("Cancel")), clicked => \&restore_box);
+}
+
 sub ibutton {
 	my ($msg) = @_;
 	0, gtksignal_connect(Gtk2::Button->new($msg), clicked => \&interactive_mode_box);
@@ -3980,7 +3989,7 @@ sub button_box_restore_end() {
     $button_box_tmp->destroy;
     gtkpack($button_box,
 	    $button_box_tmp = gtkpack_(new Gtk2::HButtonBox,
-			cbutton(),
+			cbuttonr(),
 			hbutton(),
 			hspace(),
 			pbutton(),
@@ -4007,7 +4016,7 @@ sub button_box_restore() {
     $button_box_tmp->destroy;
     gtkpack($button_box,
 	    $button_box_tmp = gtkpack_(new Gtk2::HButtonBox,
-			cbutton(),
+			cbuttonr(),
 			hbutton(),
 			hspace(),
 			pbutton(),
