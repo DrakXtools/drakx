@@ -42,13 +42,13 @@ eval {
     local $::isWizard = 1;
     local $::Wizard_no_previous = 1;
   language:
-    $locale->{lang} = any::selectLanguage($in, $locale->{lang}) or goto the_end;
+    $locale->{lang} = any::selectLanguage($in, $locale->{lang}) or $in->exit(0);
     undef $::Wizard_no_previous;
     select_country() or goto language;
 };
 if ($@) {
     if ($@ =~ /^one lang only/) {
-	select_country() or goto the_end;
+	select_country() or $in->exit(0);
     } else {
 	die;
     }
@@ -61,8 +61,3 @@ if ($>) {
 	  and any::ask_window_manager_to_logout($wm);
     }
 }
-
-the_end:
-$in->exit(0);
-
-
