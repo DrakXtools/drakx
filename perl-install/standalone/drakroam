@@ -154,12 +154,12 @@ $AvailableList = Gtk2::SimpleList->new(
                                          );
 $AvailableList->get_selection->set_mode('single');
 
-my $NetLabel = Gtk2::Label->new;
-my $IpLabel = Gtk2::Label->new;
-my $GwLabel = Gtk2::Label->new;
-my $ModeLabel = Gtk2::Label->new;
-my $WepLabel = Gtk2::Label->new;
-my $SignalLabel = Gtk2::Label->new;
+my $NetLabel = Gtk2::WrappedLabel->new;
+my $IpLabel = Gtk2::WrappedLabel->new;
+my $GwLabel = Gtk2::WrappedLabel->new;
+my $ModeLabel = Gtk2::WrappedLabel->new;
+my $WepLabel = Gtk2::WrappedLabel->new;
+my $SignalLabel = Gtk2::WrappedLabel->new;
 
 my $w = ugtk2->new('Drakroam');
 gtkadd(gtkset_border_width($w->{window}, 2),
