@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10
-Release: 7mdk
+Release: 8mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -316,6 +316,28 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Tue Feb 24 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10-8mdk
+- drakconnect wizard:
+  o ethernet: fix module lookup for pcmcia cards
+  o adsl ISP db (Benoit Audouard):
+    * set default protocol to pppoa for various ISPs
+    * update 9telecom entry
+    * add encapsulation method for "tiscali 512k.fr"
+    * fix wrongly inverted encapsulation methods for "Free" isp cnx
+      offers
+- drakTermServ (stew):
+  o mknbi-set always wants a kernel version now
+  o deal with conflicts with msec > 3 and exporting / (use
+    no_root_squash).
+  o always pass a kernel to mkinitrd-net (#8216)
+  o add --restart option for terminal-server.
+- printerdrake, scannerdrake: misc gui fixes (till)
+- printerdrake (till):
+  o give clear warning/error messages if a package installation fails
+  o let printer model in first-time dialog also be shown if there is
+    no description field in the device ID of the printer
+- scannerdrake: ask user before installing packages (till)
+ 
 * Mon Feb 23 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10-7mdk
 - drakconnect
   o add wizard:
