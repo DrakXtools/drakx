@@ -3,7 +3,10 @@
 use MDK::Common;
 use Getopt::Long;
 
-GetOptions('no-link' => \ (my $no_link), 'no-dir' => \ (my $no_dir), 'full-dirs=s', \ (my $full_dirs));
+GetOptions('no-link' => \ (my $no_link), 
+	   'no-dir' => \ (my $no_dir),
+	   'full-dirs=s', \ (my $full_dirs),
+	  );
 
 my @skipped_dirs = (
 		    '/usr/share/fonts', 
