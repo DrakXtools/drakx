@@ -505,7 +505,7 @@ sub setRootPassword($) {
     $o->{superuser}{password2} ||= $o->{user}{password} ||= "";
     my $sup = $o->{superuser};
 
-    $o->ask_from_entries_ref(_("Set root password"),
+    $o->ask_from_entries_ref([_("Set root password"), _("Ok"), _("No password")],
 			 _("Set root password"),
 			 [_("Password:"), _("Password (again):")],
 			 [{ val => \$sup->{password},  hidden => 1},
