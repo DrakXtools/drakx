@@ -380,18 +380,25 @@ sub build_notebook {
                                   gtksignal_connect($gui->{netc}{dhcp_client} = Gtk2::ComboBox->new_with_strings(\@network::ethernet::dhcp_clients,
                                                                                                                  $netc->{dhcp_client} || $network::ethernet::dhcp_clients[0]),
                                                     changed => $apply)),
+                          gtksignal_connect($gui->{intf_bool}{NEEDHOSTNAME} = Gtk2::CheckButton->new(N("Assign host name from DHCP address")), toggled => $apply),
                           gtkpack__(Gtk2::HBox->new,
-                                  Gtk2::Label->new(N("DHCP timeout (in seconds)")),
-                                  gtksignal_connect($gui->{intf}{DHCP_TIMEOUT} = Gtk2::Entry->new,
-                                                    key_press_event => $apply)),
+                                    Gtk2::Label->new(N("DHCP host name")),
+                                    gtksignal_connect($gui->{intf}{DHCP_HOSTNAME} = Gtk2::Entry->new,
+                                                      key_press_event => $apply)),
+                          gtkpack__(Gtk2::HBox->new,
+                                    Gtk2::Label->new(N("DHCP timeout (in seconds)")),
+                                    gtksignal_connect($gui->{intf}{DHCP_TIMEOUT} = Gtk2::Entry->new,
+                                                      key_press_event => $apply)),
                           gtksignal_connect($gui->{intf_bool}{PEERDNS} = Gtk2::CheckButton->new(N("Get DNS servers from DHCP")), toggled => $apply),
                           gtksignal_connect($gui->{intf_bool}{PEERYP} = Gtk2::CheckButton->new(N("Get YP servers from DHCP")), toggled => $apply),
                           gtksignal_connect($gui->{intf_bool}{PEERNTPD} = Gtk2::CheckButton->new(N("Get NTPD servers from DHCP")), toggled => $apply),
                       ),
             );
-	$gui->{intf}{DHCP_TIMEOUT}->set_text($intf->{DHCP_TIMEOUT});
-	defined $intf->{PEERDNS} or $intf->{PEERDNS} = "yes";
-	$gui->{intf_bool}{$_}->set_active(text2bool($intf->{$_})) foreach qw(PEERDNS PEERYP PEERNTPD);
+	foreach (qw(NEEDHOSTNAME PEERDNS)) { #- default these settings to yes
+	    defined $intf->{$_} or $intf->{$_} = "yes";
+	}
+	$gui->{intf}{$_}->set_text($intf->{$_}) foreach qw(DHCP_HOSTNAME DHCP_TIMEOUT);
+	$gui->{intf_bool}{$_}->set_active(text2bool($intf->{$_})) foreach qw(NEEDHOSTNAME PEERDNS PEERYP PEERNTPD);
 	$gui->{netc}{dhcp_client}->set_text($netc->{dhcp_client});
 	$gui->{sheet}{DHCP}->set_sensitive($intf->{BOOTPROTO} eq 'dhcp');
     }
