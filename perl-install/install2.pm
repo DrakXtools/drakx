@@ -254,7 +254,9 @@ sub selectKeyboard {
 
 #------------------------------------------------------------------------------
 sub selectInstallClass {
-    $o->selectInstallClass(@install_classes);
+    my ($clicked) = @_;
+
+    $o->selectInstallClass($clicked);
    
     $o->{partitions} ||= $suggestedPartitions{$o->{installClass}};
 
