@@ -589,15 +589,15 @@ sub set {
 
 #- set all LC_* variables to a unique locale ("C"), and only redefine
 #- LC_CTYPE (for X11 choosing the fontset) and LANGUAGE (for the po files)
-	$ENV{$_} = 'C' foreach qw(LC_NUMERIC LC_TIME LC_COLLATE LC_MONETARY LC_PAPER LC_NAME LC_ADDRESS LC_TELEPHONE LC_MEASUREMENT LC_IDENTIFICATION);
+	$ENV{$_} = 'en_US.UTF-8' foreach qw(LC_NUMERIC LC_TIME LC_COLLATE LC_MONETARY LC_PAPER LC_NAME LC_ADDRESS LC_TELEPHONE LC_MEASUREMENT LC_IDENTIFICATION);
 
 #- use lang2LANG() to define LC_CTYPE, so DrakX will use a same encoding
 #- for all variations of a same language, eg both 'ru_RU.KOI8-R' and
 #- 'ru_RU.UTF-8' will be handled the same (as 'ru') by DrakX.
 #- that way DrakX only needs a reduced set of locale and fonts support.
 #- of course on the installed system they will be different.
-	$ENV{LC_CTYPE}  = lang2LANG($lang);
-	$ENV{LC_MESSAGES} = lang2LANG($lang);
+	$ENV{LC_CTYPE}  = 'en_US.UTF-8';
+	$ENV{LC_MESSAGES} = 'en_US.UTF-8';
 	$ENV{LANG}      = lang2LANG($lang);
 
 	if ($translate_for_console && $lang =~ /^(ko|ja|zh|th)/) {
