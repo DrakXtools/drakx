@@ -42,7 +42,9 @@ umount_cd() {
 
     ln -sf /image_always/lib /
 
-    if [ ! -l /image ]; then
+    if [ -l /image ]; then
+	rm -f /image
+    else
 	umount /image && \
 	    /image_always/sbin/losetup -d /dev/$main_loop || { mount_cd; kill $totem_pid; exec mdk_totem; }
     fi
@@ -52,8 +54,12 @@ umount_cd() {
 
 mount_cd() {
     echo mount_cd
-    /image_always/sbin/losetup -r -e gz /dev/$main_loop /cdrom/live_tree.clp 
-    /image_always/bin/mount /dev/$main_loop /image
+    if [ -e /cdrom/live_tree.clp ]; then
+	/image_always/sbin/losetup -r -e gz /dev/$main_loop /cdrom/live_tree.clp 
+	/image_always/bin/mount /dev/$main_loop /image
+    else
+	ln -sf /cdrom/live_tree /image
+    fi
 
     losetup -r -e gz /dev/$boot_loop /cdrom/live_tree_boot.clp 
     mount /dev/$boot_loop /image_boot
