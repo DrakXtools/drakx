@@ -443,7 +443,7 @@ sub modprobe {
     my $name = shift;
     require modules;
     modules::load_dependencies("/modules/modules.dep");
-    modules::load($name, '', @_);
+    modules::load([ $name, @_ ]);
 }
 
 sub route {
