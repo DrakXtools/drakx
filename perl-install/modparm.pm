@@ -26,7 +26,7 @@ sub get_options_name($) {
   my @names;
   $modinfo = $::isStandalone ? '/sbin/modinfo' : '/usr/bin/modinfo';
   -e $modinfo or die _('modinfo is not available');
-  if($::isStandalone) {
+  if ($::isStandalone) {
       my @line = `$modinfo -p $module`;
   } else {
       modules::extract_modules('/tmp', $module);
@@ -51,7 +51,6 @@ sub get_options_name($) {
 	  push @names, $_;
       }
   }
-  print "yop : @names \n";
   @names;
 }
 
