@@ -66,7 +66,7 @@ sub load {
     @l = difference2([ uniq(@l) ], [ map { my $s = $_; $s =~ s/_/-/g; $s, $_ } loaded_modules() ]) or return;
 
     my $network_module = do {
-	my ($network_modules, $other) = partition { module2category($_) =~ m,network/(main|gigabit|usb), } @l;
+	my ($network_modules, $other) = partition { module2category($_) =~ m,network/(main|gigabit|usb|wireless), } @l;
 	if (@$network_modules > 1) {
 	    # do it one by one
 	    load($_) foreach @$network_modules;
