@@ -58,6 +58,8 @@ my %tuners_lst =
      39 => "LG|NTSC (newer TAPC series)",
      40 => "HITACHI V7-J180AT",
      41 => "Philips|PAL_MK (FI1216 MK)",
+     42 => "Philips|1236D ATSC/NTSC daul in"
+
      );
 
 # Tweaked from Cardlist
@@ -213,6 +215,12 @@ my $cards_lst = {
         "P|PHYTEC|VD-009-X1 Combi (bt878)" => 107,
         "P|PHYTEC|VD-009 MiniDIN (bt878)" => 108,
         "P|PHYTEC|VD-009 Combi (bt878)" => 109,
+        "I|IVC-100" => 110,
+        "I|IVC-120G" => 111,
+        "P|pcHDTV HD-2000 TV" => 112,
+        "T|Twinhan DST + clones" => 113,
+        "L|Leadtek|Winfast VC100" => 114,
+
 
     },
     'saa7134' => {
@@ -227,7 +235,18 @@ my $cards_lst = {
         "Terratec|Cinergy 400 TV" => 8,
         "Medion|5044" => 9,
         "Kworld/KuroutoShikou SAA7130-TVPCI" => 10,
-        "Terratec Cinergy 600 TV" => 11,
+        "Terratec|Cinergy 600 TV" => 11,
+        "Medion|7134" => 12,
+        "ELSA|EX-VISION 300TV" => 13,
+        "ELSA|EX-VISION 500TV" => 14,
+        "ASUS|TV-FM 7134" => 15,
+        "AOPEN|VA1000 POWER" => 16,
+        "10MOONS PCI TV CAPTURE CARD" => 17,
+        "BMK|MPEX No Tuner" => 18,
+        "Compro VideoMate TV" => 19,
+        "Matrox|CronosPlus" => 20,
+        "Medion|2819" => 21,
+        "BMK|MPEX Tuner" => 22,
     }
 };
 
