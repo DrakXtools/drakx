@@ -525,7 +525,7 @@ sub upload {
     my $dialog = _create_dialog(N("Upload the hardware list"),
                                 { if_(!$::isEmbedded, transient => $w->{real_window}) }); #, height => 400
     gtkpack($dialog->vbox,
-            gtkset_markup(Gtk2::Label->new, qq(<span weight="bold">) . N("Upload the system configuration") . "</span>\n"),
+            gtkset_markup(Gtk2::Label->new, qq(<span weight="bold">) . N("Upload the hardware list") . "</span>\n"),
             create_packtable({ col_spacings => 10, row_spacings => 5, mcc => 1 },
                                [ N("Account:"), my $account_w = Gtk2::Entry->new ],
                                [ N("Password:"), my $password_w = Gtk2::Entry->new ],
