@@ -404,12 +404,11 @@ sub getSerialModem {
 	next if $mouse->{device} =~ /$port/;
      my $device = "/dev/$port";
 	next unless -e $device && hasModem($device);
+     $serialprobe{$device}->{device} = $device;
      push @modems, $serialprobe{$device};
     }
     my @devs = pcmcia_probe();
     foreach my $modem (@modems) {
-        $modem->{device} = $modem->{DEVICE};
-        delete $modem->{DEVICE};
         #- add an alias for macserial on PPC
         modules::add_alias('serial', $serdev) if arch() =~ /ppc/ && $modem->{device};
         foreach (@devs) { $_->{type} =~ /serial/ and $modem->{device} = $_->{device} }
