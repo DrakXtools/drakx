@@ -382,7 +382,7 @@ sub load {
 #-	$type ||= ($drivers{$name} || { type => 'unknown'})->{type};
 
 	eval { load($_, 'prereq') } foreach @{$deps{$name}};
-	load_raw($name, @options);
+	load_raw([ $name, @options ]);
     }
     push @{$loaded{$type}}, $name;
 
@@ -401,10 +401,7 @@ sub load_multi {
 
     $::testing and log::l("i would install modules @l"), return;
 
-    my $cz = "/lib/modules.cz"; -e $cz or $cz .= "2";
-    run_program::run("extract_archive", $cz, "/tmp", map { "$_.o" } @l);
-    run_program::run(["insmod_", "insmod"], "-f", "/tmp/$_.o") and $conf{$_}{loaded} = 1 foreach @l;
-    unlink map { "/tmp/$_.o" } @l;
+    load_raw(map { [ $_ ] } @l);
 }
 
 sub unload($;$) {
@@ -417,22 +414,31 @@ sub unload($;$) {
     remove_alias($m) if $remove_alias;
 }
 
-sub load_raw($@) {
-    my ($name, @options) = @_;
+sub load_raw {
+    my @l = map { my ($i, @i) = @$_; [ $i, \@i ] } @_;
 
-    run_program::run("insmod", $name, grep { $_ } @options) or die("insmod $name failed");
+    my $cz = "/lib/modules.cz"; -e $cz or $cz .= "2";
+    run_program::run("extract_archive", $cz, "/tmp", map { "$_->[0].o" } @l);
+    my @failed = grep {
+	my $m = "/tmp/$_->[0].o";
+	if (-e $m && run_program::run(["insmod_", "insmod"], "-f", $m, @{$_->[1]})) {
+	    unlink $m;
+	    $conf{$_->[0]}{loaded} = 1;
+	    '';
+	} else {
+	    log::l("missing module $_->[0]") unless -e $m;
+	    -e $m;
+	}
+    } @l;
 
     #- this is a hack to make plip go
-    if ($name eq "parport_pc") {
-	foreach (@options) {
-	    /^irq=(\d+)/ or next;
-	    log::l("writing to /proc/parport/0/irq");
-	    local *F;
-	    open F, "> /proc/parport/0/irq" or last;
-	    print F $1;
+    foreach (@l) {
+	$_->[0] eq "parport_pc" or next;
+	foreach (@{$_->[1]}) {
+	    /^irq=(\d+)/ and eval { output "/proc/parport/0/irq", $1 };
 	}
     }
-    $conf{$name}{loaded} = 1;
+    die "insmod'ing modules " . join(", ", @failed) . " failed" if @failed;
 }
 
 sub read_already_loaded() {

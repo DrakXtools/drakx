@@ -189,6 +189,11 @@ sub cardConfiguration(;$$$) {
 					 _("Select the memory size of your graphic card"),
 					 [ sort { $videomemory{$a} <=> $videomemory{$b} }
 					   keys %videomemory])};
+
+    if (!$::isStandalone && $card->{driver} eq "i810") {
+	require modules;
+	modules::load("agpgart");
+    }
     $card;
 }
 

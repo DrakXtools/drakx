@@ -9,6 +9,15 @@
 
 2000-04-28  Pixel  <pixel@mandrakesoft.com>
 
+	* modules.pm (load_raw): don't call commands::insmod, do it in
+	place. Merge with load_multi
+
+	* install_steps.pm (afterInstallPackages): fix windobe ttfonts
+	symlinking	
+
+	* Xconfigurator.pm (cardConfiguration): load module agpgart for
+	i810
+	
 	* install_any.pm (getHds): changed the mount point setting for
 	windows partitions as device_windobe is not unique
 
