@@ -485,9 +485,6 @@ sub set_glx_restrictions {
     #- 3D acceleration configuration for XFree 4 using DRI, this is enabled by default
     #- but for some there is a need to specify VideoRam (else it won't run).
     if ($card->{use_DRI_GLX}) {
-	#- always enable (as a reminder for people using a better AGP mode to change it at their own risk).
-	$card->{Options_xfree4}{AGPMode} = 'true';
-
 	$card->{needVideoRam} = 1 if $card->{description} =~ /Matrox.* G[245][05]0/;
 	($card->{needVideoRam}, $card->{VideoRam}) = (1, 16384)
 	  if member($card->{card_name}, 'Intel 810', 'Intel 815');
