@@ -206,6 +206,13 @@ substInFile {
     s|Mandrake Linux release (\S+) \(.*\)|Mandrake Move release $1 (Moyoto)|;
 } "$::prefix/etc/mandrake-release";
 
+#- fix mandrake galaxy version download
+substInFile {
+    s/Mandrake%20Control%20Center\.desktop/Configure%20your%20computer.desktop/;
+    s/logiciels\.// if $next;
+    $next = s/, et installez de nouveaux/.../;
+} "$::prefix/usr/share/mdk/mandrakegalaxy/mdkgalaxy-fr.html";
+
 #- remove uncessary wizards, especially from appearing in MCC
 unlink "$::prefix/usr/sbin/$_" foreach qw(drakautoinst drakboot drakfloppy drakgw drakedm drakfont rpmdrake MandrakeUpdate rpmdrake-remove edit-urpm-sources.pl);
 unlink "$::prefix/usr/bin/$_" foreach qw(userdrake);
