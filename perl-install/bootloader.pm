@@ -970,7 +970,7 @@ sub install {
 
     if (my ($p) = grep { $lilo->{boot} =~ /\Q$_->{device}/ } @$fstab) {
 	die _("You can't install the bootloader on a %s partition\n", partition_table::type2fs($p))
-	  if isFat($p) || isThisFs('xfs', $p);
+	  if isThisFs('xfs', $p);
     }
     {
 	my $f = "$prefix/etc/sysconfig/system";
