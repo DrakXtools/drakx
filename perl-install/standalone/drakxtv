@@ -131,17 +131,17 @@ You can install it by typing \"urpmi xawtv\" as root, in a console.")));
 my @devices = grep { $_->{media_type} eq 'MULTIMEDIA_VIDEO' || $_->{driver} eq 'usbvision' } detect_devices::probeall();
 push @devices, { driver => 'bttv', description => 'dummy' } if $::testing && !@devices;
 if (@devices) {
+    my $not_canceled = 1;
     # TODO: That need some work for multiples TV cards
     foreach (@devices) {
 	   if ($< == 0 && (grep { detect_devices::isTVcard($_) } @devices)) {
 		  require harddrake::v4l;
 		  require modules;
-		  no strict 'subs';
 		  modules::read_conf();
-		  harddrake::v4l::config($in, $_->{driver});
+		  $not_canceled &&= harddrake::v4l::config($in, $_->{driver});
 		  modules::write_conf();
 	   }
-	   scan4channels();
+	   scan4channels() if $not_canceled;
     }
 } else {
     $in->ask_warn(N("No TV Card detected!"), formatAlaTeX(
