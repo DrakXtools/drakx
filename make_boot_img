@@ -214,6 +214,7 @@ F3 boot.msg
 
     _ "sync";
     _ "df $mnt";
+    _ "$sudo umount $mnt";
 }
 
 # alias to x86 variant, slightly bigger with images though
