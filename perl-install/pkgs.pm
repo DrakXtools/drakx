@@ -823,7 +823,10 @@ sub selectPackagesAlreadyInstalled {
 }
 
 sub selectPackagesToUpgrade {
-    my ($packages, $prefix) = @_;
+    my ($packages, $prefix, $medium) = @_;
+
+    #- check before that if medium is given, it should be valid.
+    $medium && ! defined $medium->{start} || ! defined $medium->{end} and return;
 
     log::l("selecting packages to upgrade");
 
@@ -831,7 +834,10 @@ sub selectPackagesToUpgrade {
     $state->{selected} = {};
 
     my %selection;
-    $packages->request_packages_to_upgrade($packages->{rpmdb}, $state, \%selection, requested => undef);
+    $packages->request_packages_to_upgrade($packages->{rpmdb}, $state, \%selection,
+					   requested => undef,
+					   $medium ? (start => $medium->{start}, end => $medium->{end}) : (),
+					  );
     log::l("resolving dependencies...");
     $packages->resolve_requested($packages->{rpmdb}, $state, \%selection,
 				 callback_choices => \&packageCallbackChoices);
