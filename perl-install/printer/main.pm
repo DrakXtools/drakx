@@ -664,7 +664,7 @@ sub read_location {
 	my $location_end = -1;
 	# Go through all the lines, bail out when start and end line found
 	for (my $i = 0; 
-	     $i <= $#{$cupsd_conf_ptr} and $location_end == -1;
+	     $i <= $#{$cupsd_conf_ptr};
 	     $i++) {
 	    if ($cupsd_conf_ptr->[$i] =~ m!^\s*<\s*Location\s+$path\s*>!) {
 		# Start line of block
@@ -707,7 +707,7 @@ sub rip_location {
     if (grep { m!^\s*<Location\s+$path\s*>! } @$cupsd_conf_ptr) {
 	# Go through all the lines, bail out when start and end line found
 	for (my $i = 0; 
-	     $i <= $#{$cupsd_conf_ptr} and $location_end == -1;
+	     $i <= $#{$cupsd_conf_ptr} == -1;
 	     $i++) {
 	    if ($cupsd_conf_ptr->[$i] =~ m!^\s*<\s*Location\s+$path\s*>!) {
 		# Start line of block
@@ -727,9 +727,7 @@ sub rip_location {
     } else {
 	# If there is no location block, create one
 	$location_start = $#{$cupsd_conf_ptr} + 1;
-	@location = ();
-	push @location, "<Location $path>\n";
-	push @location, "</Location>\n";
+	@location = ("<Location $path>\n", "</Location>\n");
     }
 
     return ($location_start, @location);
