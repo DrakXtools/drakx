@@ -929,6 +929,9 @@ sub new {
 	    } elsif (!$o->{isEmbedded}) {
 		$::WizardWindow->set_position('center_always') if !$::isStandalone;
 		gtkpack__($::WizardTable, Gtk2::Banner->new($::Wizard_pix_up || "wiz_default_up.png", $::Wizard_title));
+          $::WizardWindow->set_icon(gtkcreate_pixbuf($::Wizard_pix_up || "wiz_default_up.png"));
+	    } else {
+          $::Plug->set_icon(gtkcreate_pixbuf($::Wizard_pix_up || "wiz_default_up.png"));
 	    }
 	    $::WizardWindow->show;
 	}
