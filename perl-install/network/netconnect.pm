@@ -198,7 +198,7 @@ sub real_main {
           }
           network::network::configureNetwork2($in, $modules_conf, $::prefix, $netc, $intf);
           $network_configured = 1;
-          return "restart" if $need_restart_network && $::isStandalone && !$::expert;
+          return "restart" if $need_restart_network && !$::isInstall && !$::expert;
           return $offer_to_connect->();
       };
 
