@@ -721,11 +721,9 @@ sub ask_from__add_modify_removeW {
 
 sub wait_messageW($$$) {
     my ($o, $title, $messages) = @_;
-    local $::isEmbedded = 0; # to prevent sub window embedding
-    local $::isWizard = 0 if !$::isInstall; # to prevent sub window embedding
 
     my @l = map { Gtk2::Label->new(scalar warp_text($_)) } @$messages;
-    my $w = ugtk2->new($title, %$o, grab => 1, if__($::main_window, transient => $::main_window));
+    my $w = ugtk2->new($title, %$o, pop_it => !$::isInstall, grab => 1, if__($::main_window, transient => $::main_window));
     gtkadd($w->{window}, my $hbox = Gtk2::HBox->new(0,0));
     $hbox->pack_start(my $box = Gtk2::VBox->new(0,0), 1, 1, 10);  
     $box->pack_start(shift @l, 0, 0, 4);
