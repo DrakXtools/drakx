@@ -220,7 +220,7 @@ If you don't want to use the auto detection, deselect the checkbox.
                     post => sub {
                         load_conf($netcnx, $netc, $intf) if $::isInstall;  # :-(
                         get_subwizard($wiz, 'adsl') if $connections{$cnx_type} eq 'adsl';
-                        return $type = $connections{$cnx_type};
+                        return $type = $netcnx->{type} = $connections{$cnx_type};
                     },
                    },
 
@@ -286,7 +286,6 @@ If you don't want to use the auto detection, deselect the checkbox.
                     [ { val => \$netcnx->{dhcp_client}, list => ["dhcp-client", "dhcpcd", "dhcpxd"] } ],
                     
                     post => sub {
-                        $netcnx->{type} = $type = 'cable';
                         $in->do_pkgs->install($netcnx->{dhcp_client});
                                  write_cnx_script($netc, "cable", qq(
 /sbin/ifup $netc->{NET_DEVICE}
@@ -381,7 +380,6 @@ Take a look at http://www.linmodems.org"),
                    {
                     pre => sub {
                         detect($netc->{autodetect}, 'modem') if !$::isInstall;
-                        $netcnx->{type} = 'modem';
                     },
                     name => N("Select the modem to configure:"),
                     data => sub {
