@@ -155,7 +155,8 @@ sub process {
         my $name = ref($page->{name}) ? $page->{name}->() : $page->{name};
         my %yesno = (yes => N("Yes"), no => N("No"));
         my $yes = $page->{default};
-        $data2 = [ { val => \$yes, type => 'list', list => [ values %yesno ], gtk => { use_boxradio => 1 } } ] if $page->{type} eq "yesorno";
+        $data2 = [ { val => \$yes, type => 'list', list => [ keys %yesno ], format => sub { $yesno{$_[0]} }, 
+                     gtk => { use_boxradio => 1 } } ] if $page->{type} eq "yesorno";
         my $a;
         if (ref $data2 eq 'ARRAY' && @$data2) {
             $a = $in->ask_from_({ title => $o->{name}, 
@@ -172,7 +173,7 @@ sub process {
             # step forward:
             push @steps, $next if !$page->{ignore} && $steps[-1] ne $next;
             my $current = $next;
-            $next = defined $page->{post} ? $page->{post}($page->{type} eq "yesorno" ? $yes eq $yesno{yes} : $a) : 0;
+            $next = defined $page->{post} ? $page->{post}($page->{type} eq "yesorno" ? $yes eq 'yes' : $a) : 0;
             return if $page->{end};
             if (!$next) {
                 if (!defined $o->{pages}{$next}) {
