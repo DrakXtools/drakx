@@ -7,7 +7,7 @@ ISO = /BIG/mdkmove.iso
 DATA_FILES = devices symlinks directories-to-create etcfiles all-etcfiles keyfiles \
              BOOT-800-MOVE.jpg BOOT-1024-MOVE.jpg BOOT-1280-MOVE.jpg BOOT-1600-MOVE.jpg
 
-PROGRAM_FILES = etc-monitorer.pl tree/startkde_move tree/wait4x
+PROGRAM_FILES = etc-monitorer.pl tree/startkde_move tree/wait4x tree/halt_reboot
 LANG_FILES = $(shell perl -ne 'print $$1 if /ALLOWED_LANGS = qw\((.*)\)/' move.pm)
 
 STAGE1 = ../mdk-stage1

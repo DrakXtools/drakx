@@ -1,0 +1,10 @@
+#!/bin/sh
+
+sudo killall -USR1 startkde_move
+
+if [ $UID == 0 ]; then
+    user=`getent passwd 501 | perl -ne 'print $1 if /([^:]+):/'`
+    su $user -c 'dcop kdesktop default logout'
+else
+    dcop kdesktop default logout
+fi

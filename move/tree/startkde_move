@@ -1,5 +1,13 @@
 #!/bin/sh
 
+#- exit cleanly on SIGUSR1, so that our init can see a clean shutdown and automatically reboot
+reboot () {
+    touch /tmp/reboot
+    sudo killall X
+    exit 0
+}
+trap 'reboot' SIGUSR1
+
 while true; do
     wait4x || exit 1
     xwait -permanent &
