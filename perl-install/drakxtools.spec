@@ -190,7 +190,7 @@ cat > $RPM_BUILD_ROOT%_menudir/harddrake-ui <<EOF
 	section="Configuration/Hardware"\
 	title="HardDrake"\
 	longtitle="Show extracted information from the system logs"\
-	command="/usr/sbin/logdrake"\
+	command="/usr/sbin/harddrake2"\
 	icon="harddrake.png"
 EOF
 
