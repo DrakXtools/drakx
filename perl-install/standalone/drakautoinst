@@ -87,7 +87,7 @@ my $o_old = $o;
 
 if (!$::isEmbedded && $in->isa('interactive::gtk')) {
     require ugtk2;
-    import ugtk2 qw(:helpers :wrappers);
+    ugtk2->import(qw(:helpers :wrappers));
 
     my %tree;
     $struct_gui{$_} = 'General' foreach qw(lang isUpgrade autoExitInstall timezone default_packages mkbootdisk);
