@@ -126,7 +126,7 @@ sub set_permissions {
 sub restart_service ($) {
     my ($service) = @_;
     # Exit silently if the service is not installed
-    if (!(-x "/etc/rc.d/init.d/$service")) {
+    if (!(-x "$prefix/etc/rc.d/init.d/$service")) {
 	return 1;
     }
     run_program::rooted($prefix, "/etc/rc.d/init.d/$service", "restart");
@@ -144,7 +144,7 @@ sub restart_service ($) {
 sub start_service ($) {
     my ($service) = @_;
     # Exit silently if the service is not installed
-    if (!(-x "/etc/rc.d/init.d/$service")) {
+    if (!(-x "$prefix/etc/rc.d/init.d/$service")) {
 	return 1;
     }
     run_program::rooted($prefix, "/etc/rc.d/init.d/$service", "start");
@@ -162,7 +162,7 @@ sub start_service ($) {
 sub stop_service ($) {
     my ($service) = @_;
     # Exit silently if the service is not installed
-    if (!(-x "/etc/rc.d/init.d/$service")) {
+    if (!(-x "$prefix/etc/rc.d/init.d/$service")) {
 	return 1;
     }
     run_program::rooted($prefix, "/etc/rc.d/init.d/$service", "stop");
