@@ -1,3 +1,93 @@
+2004/02/27  David Baudens  <baudens at mandrakesoft.com>
+
+	* pixmaps/refresh.png: Udpate icon to not display a cuted icon
+
+	* pixmaps/about.png, standalone/printerdrake,
+	pixmaps/about-printerdrake.png: Better layout for PrinterDrake about
+	dialog box
+
+2004/02/27  Fabian Mandelbaum  <fabman at 2vias.com.ar>
+
+	* share/po/es.po: Updated Spanish translations
+
+2004/02/27  Guillaume Cottenceau  <gc at mandrakesoft.com>
+
+	* share/po/fr.po: update
+
+2004/02/27  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/et.po, share/po/af.po: updated Afrikaans and Estonian files
+	updated po files
+
+	* share/po/ms.po, share/po/sk.po, share/po/gl.po, share/po/pt_BR.po,
+	share/po/th.po, share/po/ja.po, share/po/hr.po, share/po/be.po,
+	share/po/ko.po, share/po/DrakX.pot, share/po/sv.po, share/po/sr.po,
+	share/po/pl.po, share/po/fi.po, share/po/he.po, share/po/ca.po,
+	share/po/da.po, share/po/ar.po, share/po/ltg.po, share/po/nb.po,
+	share/po/uz.po, share/po/ro.po, share/po/zh_TW.po, share/po/zh_CN.po,
+	share/po/sr@Latn.po, share/po/sq.po, share/po/it.po, share/po/eu.po,
+	share/po/es.po, share/po/lv.po, share/po/hu.po, share/po/fa.po,
+	share/po/id.po, share/po/ru.po, share/po/br.po, share/po/sl.po,
+	share/po/nn.po, share/po/tr.po, share/po/mt.po, share/po/ga.po,
+	share/po/mn.po, share/po/uk.po, share/po/lt.po, share/po/cy.po,
+	share/po/tg.po, share/po/bs.po, share/po/mk.po, share/po/wa.po,
+	share/po/is.po, share/po/hi.po, share/po/az.po, share/po/pt.po,
+	share/po/fr.po, share/po/ta.po, share/po/vi.po, share/po/nl.po,
+	share/po/de.po, share/po/tl.po, share/po/eo.po, share/po/bg.po,
+	share/po/cs.po, share/po/el.po, share/po/uz@Latn.po: updated po files
+
+2004/02/27  Stew Benedict  <sbenedict at mandrakesoft.com>
+
+	* standalone/drakbackup: Fix tape backup/restore (#8284)
+
+2004/02/27  tbacklund
+
+	* share/po/fi.po: fully translated again
+
+2004/02/27  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* ugtk2.pm (set_back_pixmap) export it
+
+	* standalone/net_monitor (in_ifconfig) better check ifconfig is executable
+	before running it
+	(-e is not enough)
+
+	* network/netconnect.pm: fix crash when modem was not found
+
+	* share/po/fr.po: a few new translated strings
+	typo fix
+	update
+
+	* standalone/drakvpn: translate some fields
+
+2004/02/26  Arkadiusz Lipiec  <alipiec at elka.pw.edu.pl>
+
+	* share/po/pl.po: Updated translation
+
+2004/02/26  Guillaume Cottenceau  <gc at mandrakesoft.com>
+
+	* standalone/drakautoinst, install_any.pm: support two-floppies boot style
+	for replay_install disk as well (not nice at all..)
+
+2004/02/26  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* ugtk2.pm (Gtk2::Banner::new) add o_otions ref hash parameter, thus
+	enabling to
+	override text position (eg: for mcc about dialog)
+	(set_back_pixmap) split it out of Gtk2::Banner::set_pixmap
+
+	* network/netconnect.pm: 
+	  - never delete up/down scripts
+	  - only write internet service if start at boot requested
+
+	* drakxtools.spec: remove bogus empty line
+	update 10-13mdk changelog
+	10-13mdk
+
+2004/02/26  Warly  <warly at mandrakesoft.com>
+
+	* pkgs.pm: We need the PRINTER flag
+
 2004/02/26  Guillaume Cottenceau  <gc at mandrakesoft.com>
 
 	* standalone/drakautoinst: support two-floppies boot style for
@@ -27636,7 +27726,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.890 2004/02/26 10:18:56 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.891 2004/02/26 16:57:31 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
