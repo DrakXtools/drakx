@@ -335,8 +335,6 @@ wait %d seconds for default boot.
 	}
     }
 
-
-    add2hash_($lilo, { getVarsFromSh("$prefix/etc/sysconfig/system") }); #- for CLEAN_TMP
     add2hash_($lilo, { memsize => $1 }) if cat_("/proc/cmdline") =~ /mem=(\S+)/;
     if (my ($s, $port, $speed) = cat_("/proc/cmdline") =~ /console=(ttyS(\d),(\d+)\S*)/) {
 	log::l("serial console $s $port $speed");
@@ -995,10 +993,6 @@ sub install {
     if (my ($p) = grep { $lilo->{boot} =~ /\Q$_->{device}/ } @$fstab) {
 	die _("You can't install the bootloader on a %s partition\n", partition_table::type2fs($p))
 	  if isThisFs('xfs', $p);
-    }
-    {
-	my $f = "$prefix/etc/sysconfig/system";
-	setVarsInSh($f, add2hash_({ CLEAN_TMP => $lilo->{CLEAN_TMP} }, { getVarsFromSh($f) }));
     }
     $lilo->{keytable} = keytable($prefix, $lilo->{keytable});
 

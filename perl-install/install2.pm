@@ -232,7 +232,6 @@ sub miscellaneous {
 
     addToBeDone {
 	setVarsInSh("$o->{prefix}/etc/sysconfig/system", { 
-            CLEAN_TMP => $o->{miscellaneous}{CLEAN_TMP},
             CLASS => $::expert && 'expert' || 'beginner',
             SECURITY => $o->{security},
 	    META_CLASS => $o->{meta_class} || 'PowerPack',

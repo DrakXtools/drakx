@@ -147,6 +147,7 @@ sub setupBootloader {
 	my $bootloader = arch() =~ /sparc/ ? __("SILO") : arch() =~ /ppc/ ? __("Yaboot") : __("LILO with graphical menu");
 	my $profiles = bootloader::has_profiles($b);
 	my $memsize = bootloader::get_append($b, 'mem');
+	my $prev_clean_tmp = my $clean_tmp = grep { $_->{mntpoint} eq '/tmp' } @{$hds->{special}};
 
 	$b->{vga} ||= 'Normal';
 	if (arch !~ /ppc/) {
@@ -166,7 +167,7 @@ sub setupBootloader {
 { label => _("Password (again)"), val => \$b->{password2}, hidden => 1 },
 { label => _("Restrict command line options"), val => \$b->{restricted}, type => "bool", text => _("restrict") },
     ),
-{ label => _("Clean /tmp at each boot"), val => \$b->{CLEAN_TMP}, type => 'bool', advanced => 1 },
+{ label => _("Clean /tmp at each boot"), val => \$clean_tmp, type => 'bool', advanced => 1 },
 { label => _("Precise RAM size if needed (found %d MB)", availableRamMB()), val => \$memsize, advanced => 1 },
     if_(detect_devices::isLaptop,
 { label => _("Enable multi profiles"), val => \$profiles, type => 'bool', advanced => 1 },
@@ -204,6 +205,14 @@ sub setupBootloader {
 
 	bootloader::set_profiles($b, $profiles);
 	bootloader::add_append($b, "mem", $memsize);
+
+	if ($prev_clean_tmp != $clean_tmp) {
+	    if ($clean_tmp) {
+		push @{$hds->{special}}, { device => 'none', mntpoint => '/tmp', type => 'tmpfs' };
+	    } else {
+		@{$hds->{special}} = grep { $_->{mntpoint} eq '/tmp' } @{$hds->{special}};
+	    }
+	}
     }
 
     $ask_per_entries or return 1;

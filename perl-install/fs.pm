@@ -435,6 +435,7 @@ sub get_raw_hds {
     $all_hds->{nfss} = [ grep { isNfs($_) } @fstab ];
     $all_hds->{smbs} = [ grep { isThisFs('smbfs', $_) } @fstab ];
     $all_hds->{special} = [
+       (grep { isThisFs('tmpfs', $_) } @fstab),
        { device => 'none', mntpoint => '/proc', type => 'proc' },
        { device => 'none', mntpoint => '/dev/pts', type => 'devpts', options => 'mode=0620' },
     ];
