@@ -748,8 +748,8 @@ sub getAndSaveAutoInstallFloppy {
     } elsif (arch() =~ /ia64/) {
 	#- nothing yet
     } else {
-	my $imagefile = "$o->{prefix}/tmp/autoinst.img";
-	my $mountdir = "$o->{prefix}/tmp/aif-mount"; -d $mountdir or mkdir $mountdir, 0755;
+	my $imagefile = "$o->{prefix}/root/autoinst.img";
+	my $mountdir = "$o->{prefix}/root/aif-mount"; -d $mountdir or mkdir $mountdir, 0755;
 
 	my $param = 'kickstart=floppy ' . generate_automatic_stage1_params($o);
 
