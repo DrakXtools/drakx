@@ -111,7 +111,7 @@ our %l = (
         qw(cmpci cs46xx cs4281 es1370 es1371 esssolo1 i810_audio maestro maestro3),
         qw(nm256_audio pas16 trident via82cxxx_audio sonicvibes emu10k1 ymfpci),
 
-        qw(snd-ice1712 snd-cmipci snd-ens1371),
+        qw(snd-ice1712 snd-cmipci snd-ens1371 snd-via8233),
         qw(snd-es1938 snd-fm801 snd-intel8x0 snd-rme96),
         qw(snd-trident snd-ymfpci),
       ),
