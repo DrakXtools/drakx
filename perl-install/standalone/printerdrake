@@ -166,7 +166,7 @@ my ($menu, $factory) = create_factory_menu($::isEmbedded ? $::Plug : $us->{wnd}{
 						  %printer::main::thedb = 
 						      ();
                                               }, undef, '<CheckItem>' ],
-                                            [ N("/_Help"), undef, undef, undef, '<Branch>' ],
+                                            [ N("/_Help"), undef, undef, undef, '<LastBranch>' ],
                                             [ N("/_Help").N("/_Help"), undef, sub { HelpSystem() }, undef, '<StockItem>', 'gtk-help' ],
                                             [ N("/_Help").N("/_Report Bug"), undef, sub { system("$ENV{BROWSER} https://qa.mandrakesoft.com &") }, undef, '<StockItem>', 'gtk-stop' ],
                                             [ N("/_Help").N("/_About..."), undef, \&About, undef, '<StockItem>', 'gtk-preferences' ]
