@@ -80,5 +80,6 @@ BEGIN {
               'erwan'   => 'Erwan Velu  <erwan at mandrakesoft.com>',
               'nplanel' => 'Nicolas Planel  <nplanel at mandrakesoft.com>',
               'rgarciasuarez' => 'Rafael Garcia-Suarez <rgarciasuarez at mandrakesoft.com>',
+              'oblin' => 'Olivier Blin <oblin at mandrakesoft.com>',
 	     );
 }
