@@ -459,8 +459,9 @@ sub easy_dhcp {
     put_in_hash($netc, { 
 			NETWORKING => "yes",
 			FORWARD_IPV4 => "false",
-			HOSTNAME => "localhost.localdomain",
 			DOMAINNAME => "localdomain",
+			DHCP => 1,
+			ZEROCONF => 1,
 		       });
     1;
 }
@@ -497,10 +498,10 @@ sub configureNetwork2 {
     write_conf("$etc/sysconfig/network", $netc);
     write_resolv_conf("$etc/resolv.conf", $netc);
     write_interface_conf("$etc/sysconfig/network-scripts/ifcfg-$_->{DEVICE}", $_, $netc, $prefix) foreach grep { $_->{DEVICE} } values %$intf;
+    add2hosts("$etc/hosts", $netc->{HOSTNAME}, map { $_->{IPADDR} } values %$intf) if $netc->{HOSTNAME};
     add2hosts("$etc/hosts", "localhost", "127.0.0.1");
-    add2hosts("$etc/hosts", $netc->{HOSTNAME}, map { $_->{IPADDR} } values %$intf);
 
-    ($netc->{DHCP} || grep { $_->{BOOTPROTO} =~ /^(dhcp)$/ } values %$intf) && $in->do_pkgs->install($netc->{dhcp_client} || 'dhcp-client');
+    $netc->{DHCP} && $in->do_pkgs->install($netc->{dhcp_client} || 'dhcp-client');
     $netc->{ZEROCONF} && $in->do_pkgs->install(qw(tmdns zcip)) and write_zeroconf('/etc/tmdns.conf', $netc->{ZEROCONF_HOSTNAME});      
     any { $_->{BOOTPROTO} =~ /^(pump|bootp)$/ } values %$intf and $in->do_pkgs->install('pump');
             
