@@ -22,12 +22,11 @@ if ($klang) {
     #- help KDE defaulting to the right charset
     print lang::charset2kde_charset(lang::lang2charset($lang)), "\n";
 } else {
-    my ($lang, $langs) = lang::read('', $>);
+    my ($lang) = lang::read('', $>);
 
     my $in = 'interactive'->vnew;
-    if ($lang = any::selectLanguage($in, $lang, $langs)) {
+    if ($lang = any::selectLanguage($in, $lang)) {
 	lang::write('', $lang, $>);
-	lang::write_langs('', $langs) if $langs;
 	if ($>) {
 	    if (my $wm = any::running_window_manager()) {
 		$in->ask_okcancel('', _("The change is done, but to be effective you must logout"), 1)

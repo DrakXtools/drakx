@@ -432,13 +432,16 @@ my %lang2country = (
 #-######################################################################################
 
 sub list { 
-    my ($exclude_non_necessary_utf8) = @_;
-    if ($exclude_non_necessary_utf8) {
+    my (%options) = @_;
+    my @l = @languages;
+    if ($options{exclude_non_necessary_utf8}) {
 	my %LANGs_non_utf8 = map { lang2LANG($_) => 1 } grep { !/UTF-8/ } @languages;
-	grep { !/UTF-8/ || !$LANGs_non_utf8{lang2LANG($_)} } @languages;
-    } else {
-	@languages;
+	@l = grep { !/UTF-8/ || !$LANGs_non_utf8{lang2LANG($_)} } @l;
     }
+    if ($options{exclude_non_installed_langs}) {
+	@l = grep { -e "/usr/share/locale/" . lang2LANG($_) . "/LC_CTYPE" } @l;
+    }
+    @l;
 }
 sub lang2text     { exists $languages{$_[0]} && $languages{$_[0]}[0] }
 sub lang2charset  { exists $languages{$_[0]} && $languages{$_[0]}[1] }

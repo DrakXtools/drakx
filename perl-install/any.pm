@@ -840,6 +840,9 @@ Do you want to use this feature?"),
 sub selectLanguage {
     my ($in, $lang, $langs_) = @_;
     my $langs = $langs_ || {};
+    my @langs = lang::list(exclude_non_necessary_utf8 => $::isInstall, 
+			   exclude_non_installed_langs => !$::isInstall,
+			  );
     $in->ask_from_(
 	{ messages => _("Please choose a language to use."),
 	  title => 'language choice',
@@ -849,7 +852,7 @@ sub selectLanguage {
 	  },
 	},
 	[ { val => \$lang, separator => '|', 
-	    format => \&lang::lang2text, list => [ lang::list($::isInstall) ] },
+	    format => \&lang::lang2text, list => \@langs },
 	    if_($langs_, (map {;
 	       { val => \$langs->{$_->[0]}, type => 'bool', disabled => sub { $langs->{all} },
 		 text => $_->[1], advanced => 1,
