@@ -2,6 +2,7 @@ package timezone; # $Id$
 
 use diagnostics;
 use strict;
+use vars qw($ntp_servers);
 
 use common qw(:common :system :file);
 use commands;
@@ -153,5 +154,80 @@ sub sexProb($) {
     }
     $nb ? $prob / $nb : 0.5;
 }
+
+$ntp_servers = 
+q(Australia (ntp.marine.csiro.au)
+Australia (ntp.mel.nml.csiro.au)
+Australia (ntp.nml.csiro.au)
+Australia (ntp.per.nml.csiro.au)
+Switzerland (swisstime.ethz.ch)
+Germany (ntps1-0.cs.tu-berlin.de)
+Germany (ntps1-1.cs.tu-berlin.de)
+Germany (ntps1-1.rz.uni-osnabrueck.de)
+Hong kong (clock.cuhk.edu.hk)
+Italy (tempo.cstv.to.cnr.it)
+Italy (time.ien.it)
+Japan (clock.nc.fukuoka-u.ac.jp)
+Japan (clock.tl.fukuoka-u.ac.jp)
+Mexico (cronos.cenam.mx)
+Netherlands (ntp0.nl.net)
+Netherlands (ntp1.nl.net)
+Netherlands (ntp2.nl.net)
+Poland (ntp.certum.pl)
+Poland (vega.cbk.poznan.pl)
+Sweden (time1.stupi.se)
+Sweden (time2.stupi.se)
+United kingdom (chronos.csr.net)
+United states CA (clock.isc.org)
+United states CA (clock.via.net)
+United states CA (ntp-cup.external.hp.com)
+United states CA (timekeeper.isi.edu)
+United states CA (usno.pa-x.dec.com)
+United states CO (navobs1.usnogps.navy.mil)
+United states CO (navobs2.usnogps.navy.mil)
+United states DC (tick.usno.navy.mil)
+United states DC (tock.usno.navy.mil)
+United states DE (ntp1.delmarva.com)
+United states MA (bonehed.lcs.mit.edu)
+United states MA (clock.osf.org)
+United states MO (navobs1.wustl.edu)
+United states NC (terrapin.csc.ncsu.edu)
+United states OH (lerc-dns.lerc.nasa.gov)
+Australia (ntp.adelaide.edu.au)
+Australia (ntp.saard.net)
+Australia (time.esec.com.au)
+Canada (ntp.cpsc.ucalgary.ca)
+Canada (ntp1.cmc.ec.gc.ca)
+Canada (ntp2.cmc.ec.gc.ca)
+Canada (time.chu.nrc.ca)
+Canada (time.nrc.ca)
+Canada (timelord.uregina.ca)
+Spain (slug.ctv.es)
+France (ntp.univ-lyon1.fr)
+Croatia (zg1.ntp.carnet.hr)
+Croatia (zg2.ntp.carnet.hr)
+Croatia (st.ntp.carnet.hr)
+Croatia (ri.ntp.carnet.hr)
+Croatia (os.ntp.carnet.hr)
+Indonesia (ntp.incaf.net)
+Korea, republic of (time.nuri.net)
+Norway (fartein.ifi.uio.no)
+Russia (ntp.landau.ac.ru)
+Singapore (ntp.shim.org)
+Slovenia (time.ijs.si)
+Slovenia (time.ijs.si)
+United kingdom (ntp.cs.strath.ac.uk)
+United kingdom (ntp2a.mcc.ac.uk)
+United kingdom (ntp2b.mcc.ac.uk)
+United kingdom (ntp2c.mcc.ac.uk)
+United kingdom (ntp2d.mcc.ac.uk)
+United states DE (louie.udel.edu)
+United states IL (ntp-0.cso.uiuc.edu)
+United states IL (ntp-1.cso.uiuc.edu)
+United states IL (ntp-2.cso.uiuc.edu)
+United states IN (gilbreth.ecn.purdue.edu)
+United states IN (harbor.ecn.purdue.edu)
+United states IN (molecule.ecn.purdue.edu)
+);
 
 1;

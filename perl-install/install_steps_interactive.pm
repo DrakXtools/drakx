@@ -814,8 +814,12 @@ sub configureTimezone {
     ]) or goto &configureTimezone
 	    if $::expert || $clicked;
     if ($ntp) {
+	my @servers = split("\n", $timezone::ntp_servers);
+
 	$o->ask_from_entries_refH('', '',
-	    [ { label => _("NTP Server"), val => \$o->{timezone}{ntp} } ]) or goto &configureTimezone;
+	    [ { label => _("NTP Server"), val => \$o->{timezone}{ntp}, list => \@servers, not_edit => 0 } ]
+        ) or goto &configureTimezone;
+	$o->{timezone}{ntp} =~ s/.*\((.+)\)/$1/;
     } else {
 	$o->{timezone}{ntp} = '';
     }
