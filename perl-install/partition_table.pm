@@ -485,8 +485,17 @@ sub read($;$) {
     undef $hd->{extended};
     verifyPrimary($pt);
     eval {
-	$pt->{extended} and read_extended($hd, $pt->{extended}) || return 0;
-    }; die "extended partition: $@" if $@;
+	my $need_removing_empty_extended;
+	$pt->{extended} and read_extended($hd, $pt->{extended}, \$need_removing_empty_extended) || return 0;
+
+	if ($need_removing_empty_extended) {
+	    #- special case when hda5 is empty, it must be skipped
+	    #- (windows XP generates such partition tables)
+	    remove_empty_extended($hd); #- includes adjust_main_extended
+	}
+	
+    }; 
+    die "extended partition: $@" if $@;
 
     assign_device_numbers($hd);
     remove_empty_extended($hd);
@@ -494,7 +503,7 @@ sub read($;$) {
 }
 
 sub read_extended {
-    my ($hd, $extended) = @_;
+    my ($hd, $extended, $need_removing_empty_extended) = @_;
 
     my $pt = read_one($hd, $extended->{start}) or return 0;
     $pt = { %$extended, %$pt };
@@ -502,25 +511,32 @@ sub read_extended {
     push @{$hd->{extended}}, $pt;
     @{$hd->{extended}} > 100 and die "oops, seems like we're looping here :(  (or you have more than 100 extended partitions!)";
 
-    @{$pt->{normal}} <= 1 or die "more than one normal partition in extended partition";
-    @{$pt->{normal}} >= 1 or cdie "no normal partition in extended partition";
-    $pt->{normal} = $pt->{normal}[0];
-    #- in case of extended partitions, the start sector is local to the partition or to the first extended_part!
-    $pt->{normal}{start} += $pt->{start};
+    if (@{$pt->{normal}} == 0) {
+	$$need_removing_empty_extended = 1;
+	delete $pt->{normal};
+	print "need_removing_empty_extended\n";
+    } elsif (@{$pt->{normal}} > 1) {
+	die "more than one normal partition in extended partition";
+    } else {
+	$pt->{normal} = $pt->{normal}[0];
+	#- in case of extended partitions, the start sector is local to the partition or to the first extended_part!
+	$pt->{normal}{start} += $pt->{start};
 
-    #- the following verification can broke an existing partition table that is
-    #- correctly read by fdisk or cfdisk. maybe the extended partition can be
-    #- recomputed to get correct size.
-    if (!verifyInside($pt->{normal}, $extended)) {
-	$extended->{size} = $pt->{normal}{start} + $pt->{normal}{size};
-	verifyInside($pt->{normal}, $extended) or die "partition $pt->{normal}{device} is not inside its extended partition";
+	#- the following verification can broke an existing partition table that is
+	#- correctly read by fdisk or cfdisk. maybe the extended partition can be
+	#- recomputed to get correct size.
+	if (!verifyInside($pt->{normal}, $extended)) {
+	    $extended->{size} = $pt->{normal}{start} + $pt->{normal}{size};
+	    verifyInside($pt->{normal}, $extended) or die "partition $pt->{normal}{device} is not inside its extended partition";
+	}
     }
 
     if ($pt->{extended}) {
 	$pt->{extended}{start} += $hd->{primary}{extended}{start};
-	read_extended($hd, $pt->{extended}) or return 0;
+	return read_extended($hd, $pt->{extended}, $need_removing_empty_extended);
+    } else {
+	1;
     }
-    1;
 }
 
 # write the partition table
