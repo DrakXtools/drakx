@@ -32,7 +32,7 @@ sub relGetFile($) {
     my $dir = m|/| ? "mdkinst" :
       (member($_, qw(compss compssList depslist hdlist)) ? "base" : "RPMS");
     $_ = "Mandrake/$dir/$_";
-    #- s/i386/i586/; #- this avoid installation of non i586 packages.
+    s/i386/i586/;
     $_;
 }
 sub getFile($) {
