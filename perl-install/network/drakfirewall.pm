@@ -56,6 +56,11 @@ my @all_servers =
    ports => '631/tcp 631/udp',
    hide => 1,
   },
+  {
+   name => N_("Echo request (ping)"),
+   ports => '8/icmp',
+   force_default_selection => 0,
+  },
 );
 
 sub port2server {
@@ -68,7 +73,7 @@ sub port2server {
 sub check_ports_syntax {
     my ($ports) = @_;
     foreach (split ' ', $ports) {
-	my ($nb, $range, $nb2) = m!^(\d+)(:(\d+))?/(tcp|udp)$! or return $_;
+	my ($nb, $range, $nb2) = m!^(\d+)(:(\d+))?/(tcp|udp|icmp)$! or return $_;
 	foreach my $port ($nb, if_($range, $nb2)) {
 	    1 <= $port && $port <= 65535 or return $_;
 	}
@@ -103,7 +108,9 @@ sub default_from_pkgs {
     my @pkgs = $in->do_pkgs->are_installed(map { split ' ', $_->{pkg} } @all_servers);
     [ grep {
 	my $s = $_;
-	any { member($_, @pkgs) } (split ' ', $s->{pkg});
+	exists $s->{force_default_selection} ? 
+	  $s->{force_default_selection} : 
+	  any { member($_, @pkgs) } split(' ', $s->{pkg});
     } @all_servers ];
 }
 
