@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX VERSION\n"
-"POT-Creation-Date: 2000-03-28 06:39+0200\n"
+"POT-Creation-Date: 2000-03-30 00:40+0200\n"
 "PO-Revision-Date: 1999-08-25 11:07+0200\n"
 "Last-Translator: Terje Bjerkelia <terje@bjerkelia.com>\n"
 "Language-Team: norwegian\n"
@@ -3445,12 +3445,12 @@ msgid "Brazilian"
 msgstr "Brasiliansk"
 
 #: ../../keyboard.pm_.c:110
-msgid "Swiss (French layout)"
-msgstr "Sveisisk (fransk oppsett)"
-
-#: ../../keyboard.pm_.c:111
 msgid "Swiss (German layout)"
 msgstr "Sveisisk (tysk oppsett)"
+
+#: ../../keyboard.pm_.c:111
+msgid "Swiss (French layout)"
+msgstr "Sveisisk (fransk oppsett)"
 
 #: ../../keyboard.pm_.c:114
 msgid "German (no dead keys)"
@@ -4540,50 +4540,93 @@ msgstr "Finner tillatelser"
 msgid "Finding leaves takes some time"
 msgstr "Finne tillatelser vil ta litt tid"
 
+#~ msgid "A entry %s already exists"
+#~ msgstr "En inngang %s eksisterer ellerede"
+
+#~ msgid "Armenian"
+#~ msgstr "Armensk"
+
+#~ msgid "Too many packages chosen: %dMB doesn't fit in %dMB"
+#~ msgstr "For mange pakker er valgt: %dMB passer ikke i %dMB"
+
+#~ msgid "Going to install %d MB. You can choose to install more programs"
+#~ msgstr ""
+#~ "%d MB vil bli installert. Du kan velge å installere flere programmer"
+
+#~ msgid "Bad kickstart file %s (failed %s)"
+#~ msgstr "Dårlig kickstart-fil %s (mislykket %s)"
+
+#~ msgid "resizing"
+#~ msgstr "endrer størrelse"
+
+#~ msgid "formatting"
+#~ msgstr "formatering"
+
+#~ msgid "changing type of"
+#~ msgstr "endrer type av"
+
+#~ msgid "After %s partition %s,"
+#~ msgstr "Etter %s partisjon %s,"
+
+#~ msgid "linear"
+#~ msgstr "lineær"
+
+#~ msgid "Linear (needed for some SCSI drives)"
+#~ msgstr "Lineær (behøves av noen SCSI-disker)"
+
+#~ msgid "Printer"
+#~ msgstr "Skriver"
+
+#~ msgid "Would you like to configure a printer?"
+#~ msgstr "Ønsker du å konfigurere en skriver?"
+
+#~ msgid "Local Printer Options"
+#~ msgstr "Opsjoner for lokal skriver"
+
 #~ msgid ""
-#~ "Linux does not yet fully support ultra dma 66.\n"
-#~ "As a work-around i can make a custom floppy giving access the hard drive on "
-#~ "ide2 and ide3"
+#~ "Every print queue (which print jobs are directed to) needs a\n"
+#~ "name (often lp) and a spool directory associated with it. What\n"
+#~ "name and directory should be used for this queue?"
 #~ msgstr ""
-#~ "Linux støtter ennå ikke ultra dma 66 fullt ut.\n"
-#~ "Som en løsning kan jeg lage en diskett som gir tilgang til harddisken på "
-#~ "ide2 og ide3"
+#~ "Hver skriverkø (som skrivejobber sendes til) trenger et navn\n"
+#~ "(ofte lp) og en spolingskatalog assosiert til denne. Hvilket\n"
+#~ "navn og katalog skal brukes for denne køen?"
 
-#~ msgid ""
-#~ "Enter a floppy to create an HTP enabled boot\n"
-#~ "(all data on floppy will be lost)"
-#~ msgstr ""
-#~ "Sett inn en diskett for å opprette en oppstart med HTP slått på\n"
-#~ "(Alle data på disketten vil gå tapt)"
+#~ msgid "Name of queue:"
+#~ msgstr "Køens navn:"
 
-#~ msgid "It is necessary to restart installation booting on the floppy"
-#~ msgstr "Det er nødvendig å starte installasjonen igjen fra disketten"
+#~ msgid "Spool directory:"
+#~ msgstr "Spolingskatalog:"
 
-#~ msgid "It is necessary to restart installation with the new parameters"
-#~ msgstr ""
-#~ "Det er nødvendig å starte installasjonen igjen med de de nye parameterene"
+#~ msgid "Select Printer Connection"
+#~ msgstr "Velg skrivertilkobling"
 
-#~ msgid ""
-#~ "Failed to create an HTP boot floppy.\n"
-#~ "You may have to restart installation and give ``%s'' at the prompt"
-#~ msgstr ""
-#~ "Oppretting av HTP oppstartsdiskett mislykket.\n"
-#~ "Du må muligens starte installasjonen igjen og gi ``%s'' ved klartegnet"
+#~ msgid "How is the printer connected?"
+#~ msgstr "Hvordan er skriveren tilkoblet?"
 
-#~ msgid "User name:"
-#~ msgstr "Brukernavn:"
+#~ msgid "Printer options"
+#~ msgstr "Opsjoner for skriver"
 
-#~ msgid "Password:"
-#~ msgstr "Passord:"
+#~ msgid "Paper Size"
+#~ msgstr "Papirstørrelse"
 
-#~ msgid ""
-#~ "Test page(s) have been sent to the printer daemon.\n"
-#~ "This may take a little time before printer start.\n"
-#~ "Does it work properly?"
-#~ msgstr ""
-#~ "Testsiden(e) har blitt sendt til skriver-daemonen.\n"
-#~ "Det kan ta litt tid før skriveren starter.\n"
-#~ "Virker det ordentlig?"
+#~ msgid "Eject page after job?"
+#~ msgstr "Kjør ut side etter jobb?"
+
+#~ msgid "Fix stair-stepping text?"
+#~ msgstr "Fikse trappestegs-tekst?"
+
+#~ msgid "Uniprint driver options"
+#~ msgstr "Opsjoner uniprint-driver"
+
+#~ msgid "Color depth options"
+#~ msgstr "Opsjoner fargedybde"
+
+#~ msgid "Do you want to test printing?"
+#~ msgstr "Vil du teste utskrift?"
+
+#~ msgid "Printing test page(s)..."
+#~ msgstr "Skriver ut testside(r)..."
 
 #~ msgid ""
 #~ "Test page(s) have been sent to the printer daemon.\n"
@@ -4600,90 +4643,47 @@ msgstr "Finne tillatelser vil ta litt tid"
 #~ "\n"
 #~ "Virker det ordentlig?"
 
-#~ msgid "Printing test page(s)..."
-#~ msgstr "Skriver ut testside(r)..."
+#~ msgid ""
+#~ "Test page(s) have been sent to the printer daemon.\n"
+#~ "This may take a little time before printer start.\n"
+#~ "Does it work properly?"
+#~ msgstr ""
+#~ "Testsiden(e) har blitt sendt til skriver-daemonen.\n"
+#~ "Det kan ta litt tid før skriveren starter.\n"
+#~ "Virker det ordentlig?"
 
-#~ msgid "Do you want to test printing?"
-#~ msgstr "Vil du teste utskrift?"
+#~ msgid "Password:"
+#~ msgstr "Passord:"
 
-#~ msgid "Color depth options"
-#~ msgstr "Opsjoner fargedybde"
-
-#~ msgid "Uniprint driver options"
-#~ msgstr "Opsjoner uniprint-driver"
-
-#~ msgid "Fix stair-stepping text?"
-#~ msgstr "Fikse trappestegs-tekst?"
-
-#~ msgid "Eject page after job?"
-#~ msgstr "Kjør ut side etter jobb?"
-
-#~ msgid "Paper Size"
-#~ msgstr "Papirstørrelse"
-
-#~ msgid "Printer options"
-#~ msgstr "Opsjoner for skriver"
-
-#~ msgid "How is the printer connected?"
-#~ msgstr "Hvordan er skriveren tilkoblet?"
-
-#~ msgid "Select Printer Connection"
-#~ msgstr "Velg skrivertilkobling"
-
-#~ msgid "Spool directory:"
-#~ msgstr "Spolingskatalog:"
-
-#~ msgid "Name of queue:"
-#~ msgstr "Køens navn:"
+#~ msgid "User name:"
+#~ msgstr "Brukernavn:"
 
 #~ msgid ""
-#~ "Every print queue (which print jobs are directed to) needs a\n"
-#~ "name (often lp) and a spool directory associated with it. What\n"
-#~ "name and directory should be used for this queue?"
+#~ "Failed to create an HTP boot floppy.\n"
+#~ "You may have to restart installation and give ``%s'' at the prompt"
 #~ msgstr ""
-#~ "Hver skriverkø (som skrivejobber sendes til) trenger et navn\n"
-#~ "(ofte lp) og en spolingskatalog assosiert til denne. Hvilket\n"
-#~ "navn og katalog skal brukes for denne køen?"
+#~ "Oppretting av HTP oppstartsdiskett mislykket.\n"
+#~ "Du må muligens starte installasjonen igjen og gi ``%s'' ved klartegnet"
 
-#~ msgid "Local Printer Options"
-#~ msgstr "Opsjoner for lokal skriver"
-
-#~ msgid "Would you like to configure a printer?"
-#~ msgstr "Ønsker du å konfigurere en skriver?"
-
-#~ msgid "Printer"
-#~ msgstr "Skriver"
-
-#~ msgid "Linear (needed for some SCSI drives)"
-#~ msgstr "Lineær (behøves av noen SCSI-disker)"
-
-#~ msgid "linear"
-#~ msgstr "lineær"
-
-#~ msgid "After %s partition %s,"
-#~ msgstr "Etter %s partisjon %s,"
-
-#~ msgid "changing type of"
-#~ msgstr "endrer type av"
-
-#~ msgid "formatting"
-#~ msgstr "formatering"
-
-#~ msgid "resizing"
-#~ msgstr "endrer størrelse"
-
-#~ msgid "Bad kickstart file %s (failed %s)"
-#~ msgstr "Dårlig kickstart-fil %s (mislykket %s)"
-
-#~ msgid "Going to install %d MB. You can choose to install more programs"
+#~ msgid "It is necessary to restart installation with the new parameters"
 #~ msgstr ""
-#~ "%d MB vil bli installert. Du kan velge å installere flere programmer"
+#~ "Det er nødvendig å starte installasjonen igjen med de de nye parameterene"
 
-#~ msgid "Too many packages chosen: %dMB doesn't fit in %dMB"
-#~ msgstr "For mange pakker er valgt: %dMB passer ikke i %dMB"
+#~ msgid "It is necessary to restart installation booting on the floppy"
+#~ msgstr "Det er nødvendig å starte installasjonen igjen fra disketten"
 
-#~ msgid "Armenian"
-#~ msgstr "Armensk"
+#~ msgid ""
+#~ "Enter a floppy to create an HTP enabled boot\n"
+#~ "(all data on floppy will be lost)"
+#~ msgstr ""
+#~ "Sett inn en diskett for å opprette en oppstart med HTP slått på\n"
+#~ "(Alle data på disketten vil gå tapt)"
 
-#~ msgid "A entry %s already exists"
-#~ msgstr "En inngang %s eksisterer ellerede"
+#~ msgid ""
+#~ "Linux does not yet fully support ultra dma 66.\n"
+#~ "As a work-around i can make a custom floppy giving access the hard drive on "
+#~ "ide2 and ide3"
+#~ msgstr ""
+#~ "Linux støtter ennå ikke ultra dma 66 fullt ut.\n"
+#~ "Som en løsning kan jeg lage en diskett som gir tilgang til harddisken på "
+#~ "ide2 og ide3"
