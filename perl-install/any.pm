@@ -559,10 +559,8 @@ sub inspect {
     $h;
 }
 
-sub ask_users {
-    my ($in, $users, $security) = @_;
-
-    my $u if 0; $u ||= {};
+sub ask_user_one {
+    my ($in, $users, $security, %options) = @_;
 
     my @icons = facesnames();
 
@@ -574,29 +572,30 @@ sub ask_users {
 	ntools => N("access to network tools"),
 	ctools => N("access to compilation tools"),
     );
-    while (1) {
-	$u->{password2} ||= $u->{password} ||= '';
-	$u->{shell} ||= '/bin/bash';
-	my $names = @$users ? N("(already added %s)", join(", ", map { $_->{realname} || $_->{name} } @$users)) : '';
 
-	my %groups;
-	my $verif = sub {
-	    $u->{password} eq $u->{password2} or $in->ask_warn('', [ N("The passwords do not match"), N("Please try again") ]), return 1,2;
-	    $security > 3 && length($u->{password}) < 6 and $in->ask_warn('', N("This password is too simple")), return 1,2;
+    my $u;
+    $u->{password2} ||= $u->{password} ||= '';
+    $u->{shell} ||= '/bin/bash';
+    my $names = @$users ? N("(already added %s)", join(", ", map { $_->{realname} || $_->{name} } @$users)) : '';
+    
+    my %groups;
+    my $verif = sub {
+        $u->{password} eq $u->{password2} or $in->ask_warn('', [ N("The passwords do not match"), N("Please try again") ]), return 1,2;
+        $security > 3 && length($u->{password}) < 6 and $in->ask_warn('', N("This password is too simple")), return 1,2;
 	    $u->{name} or $in->ask_warn('', N("Please give a user name")), return 1,0;
-	    $u->{name} =~ /^[a-z]+?[a-z0-9_-]*?$/ or $in->ask_warn('', N("The user name must contain only lower cased letters, numbers, `-' and `_'")), return 1,0;
-	    length($u->{name}) <= 32 or $in->ask_warn('', N("The user name is too long")), return 1,0;
-	    member($u->{name}, 'root', map { $_->{name} } @$users) and $in->ask_warn('', N("This user name has already been added")), return 1,0;
-	    return 0;
-	};
-	my $ret = $in->ask_from_(
-	    { title => N("Add user"),
-	      messages => N("Enter a user\n%s", $names),
-	      interactive_help_id => 'addUser',
-	      focus_first => 1,
-	      if_(!$::isInstall, ok => N("Done")),
-	      cancel => N("Accept user"),
-	      callbacks => {
+        $u->{name} =~ /^[a-z]+?[a-z0-9_-]*?$/ or $in->ask_warn('', N("The user name must contain only lower cased letters, numbers, `-' and `_'")), return 1,0;
+        length($u->{name}) <= 32 or $in->ask_warn('', N("The user name is too long")), return 1,0;
+        member($u->{name}, 'root', map { $_->{name} } @$users) and $in->ask_warn('', N("This user name has already been added")), return 1,0;
+        return 0;
+    };
+    my $ret = $in->ask_from_(
+        { title => N("Add user"),
+          messages => N("Enter a user\n%s", $options{additional_msg} || $names),
+          interactive_help_id => 'addUser',
+          focus_first => 1,
+          if_(!$::isInstall, ok => N("Done")),
+          cancel => $options{noaccept} ? '' : N("Accept user"),
+          callbacks => {
 	          focus_out => sub {
 		      if ($_[0] eq '0') {
 			  $u->{name} ||= lc first($u->{realname} =~ /([\w-]+)/);
@@ -604,28 +603,35 @@ sub ask_users {
 		  },
 	          complete => sub { $u->{name} ? &$verif : 0 },
                   canceled => $verif,
-                  ok_disabled => sub { $security >= 4 && !@$users },
-	    } }, [ 
-	    { label => N("Real name"), val => \$u->{realname} },
-	    { label => N("User name"), val => \$u->{name} },
-            { label => N("Password"),val => \$u->{password}, hidden => 1 },
-            { label => N("Password (again)"), val => \$u->{password2}, hidden => 1 },
-            { label => N("Shell"), val => \$u->{shell}, list => [ shells() ], not_edit => !$::expert, advanced => 1 },
-	      if_($security <= 3 && @icons,
-	    { label => N("Icon"), val => \ ($u->{icon} ||= 'man'), list => \@icons, icon2f => \&face2png, format => \&translate },
-	      ),
-	      if_($security > 3,
-		  map {
-            { label => $_, val => \$groups{$_}, text => $high_security_groups{$_}, type => 'bool' }
-		  } keys %high_security_groups,
-	      ),
-           ],
-        );
-	$u->{groups} = [ grep { $groups{$_} } keys %groups ];
+                  ok_disabled => sub { $security >= 4 && !@$users || $options{needauser} && !$u->{name} },
+	  } }, [ 
+	  { label => N("Real name"), val => \$u->{realname} },
+          { label => N("User name"), val => \$u->{name} },
+          { label => N("Password"),val => \$u->{password}, hidden => 1 },
+          { label => N("Password (again)"), val => \$u->{password2}, hidden => 1 },
+          { label => N("Shell"), val => \$u->{shell}, list => [ shells() ], not_edit => !$::expert, advanced => 1 },
+	    if_($security <= 3 && !$options{noicons} && @icons,
+	  { label => N("Icon"), val => \ ($u->{icon} ||= 'man'), list => \@icons, icon2f => \&face2png, format => \&translate },
+	    ),
+	    if_($security > 3,
+                map {
+                    { label => $_, val => \$groups{$_}, text => $high_security_groups{$_}, type => 'bool' }
+                } keys %high_security_groups,
+               ),
+               ],
+                            );
+    $u->{groups} = [ grep { $groups{$_} } keys %groups ];
 
-	push @$users, $u if $u->{name};
-	$u = {};
-	$ret and return;
+    push @$users, $u if $u->{name};
+
+    return $ret;
+}
+
+sub ask_users {
+    my ($in, $users, $security) = @_;
+
+    while (1) {
+        ask_user_one($in, $users, $security) and return;
     }
 }
 

@@ -59,6 +59,12 @@ drakx_stuff:
 
 sub install2::startMove {
     my $o = $::o;
+    
+    require any;
+    any::ask_user_one($o, $o->{users} ||= [], $o->{security},
+                      additional_msg => N("BLA BLA user for move, password for screensaver"), noaccept => 1, needauser => 1, noicons => 1);
+    require install_steps;
+    install_steps::addUser($o);
 
     require install_any;
     install_any::write_fstab($o);
