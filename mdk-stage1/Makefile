@@ -170,7 +170,7 @@ all: dirs $(BINS)
 
 dirs:
 	@for n in . $(DIRS); do \
-		[ "$$n" = "." ] || make -C $$n ;\
+		[ "$$n" = "." ] || make -C $$n || exit 1 ;\
 	done
 
 init: $(INITOBJS) $(INIT_LIBC)
