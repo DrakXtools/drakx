@@ -2421,16 +2421,19 @@ sub button_box_wizard {
     gtkpack($button_box,
 	    $button_box_tmp = gtkpack_(new Gtk::HButtonBox,
 				       1, gtksignal_connect(new Gtk::Button(_("Cancel")), clicked => sub { 
-					   ${$central_widget}->destroy(); interactive_mode_box();  }),
+								${$central_widget}->destroy(); interactive_mode_box();  }),
 				       1, gtksignal_connect(new Gtk::Button(_("Help")), clicked => sub {
-					   ${$central_widget}->destroy(); adv_help(\&$current_widget,$custom_help); }),
+								${$central_widget}->destroy(); adv_help(\&$current_widget,$custom_help); }),
 				       1, new Gtk::HBox(0, 0),
-				       0, gtksignal_connect(new Gtk::Button(_("Previous")), clicked => sub { 
-					   ${$central_widget}->destroy(); $previous_widget->(); }),
-				       1, gtksignal_connect(new Gtk::Button(_("Next")), clicked => sub {
-					   ${$central_widget}->destroy(); $next_widget->();
-				       }),
-				       ),
+				       0, gtksignal_connect(new Gtk::Button($next_widget ? _("Previous") : _("OK")), clicked => sub { 
+								${$central_widget}->destroy();
+								$previous_widget ? $previous_widget->() : $next_widget->();
+							    }),
+				       if_($next_widget, 1, gtksignal_connect(new Gtk::Button(_("Next")), clicked => sub {
+										  ${$central_widget}->destroy();
+										  $next_widget ? $next_widget->() : $previous_widget->();
+									      })),
+				      ),
 	    );
 }
 

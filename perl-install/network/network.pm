@@ -57,6 +57,7 @@ sub up_it {
     run_program::rooted($prefix, "/etc/rc.d/init.d/network", "start");
     $_->{isUp} = 1 foreach values %$intfs;
 }
+
 sub down_it {
     my ($prefix, $intfs) = @_;
     run_program::rooted($prefix, "/etc/rc.d/init.d/network", "stop");
@@ -66,7 +67,11 @@ sub down_it {
 sub write_conf {
     my ($file, $netc) = @_;
 
-   ($netc->{DOMAINNAME}) ||= 'localdomain';
+    if ($netc->{HOSTNAME}) {
+	$netc->{HOSTNAME} =~ /^[^\.]\.(.*)$/;
+	$1 and $netc->{DOMAINNAME} = $1;
+    }
+    ($netc->{DOMAINNAME}) ||= 'localdomain';
     add2hash($netc, {
 		     NETWORKING => "yes",
 		     FORWARD_IPV4 => "false",
