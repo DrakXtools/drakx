@@ -27,6 +27,9 @@ my $has_nvaudio = -x '/lib/modules/' . c::kernel_version() . '/';
 
 our %alsa2oss = 
     (
+     if_(arch() =~ /ppc/, "snd-powermac" => [ "unknown" ]),
+     if_(arch() =~ /sparc/, "snd-sun-amd7930" => [ "unknown" ]),
+     if_(arch() =~ /sparc/, "snd-sun-cs4231" => [ "unknown" ]),
      "snd-ad1816a" => [ "ad1816" ], # isa
      "snd-ad1848"  => [ "ad1848", "pss" ], # isa
      "snd-ali5451" => [ "trident" ],
