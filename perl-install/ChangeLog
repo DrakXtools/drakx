@@ -1,3 +1,178 @@
+2002/07/29  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* install_any.pm: use aliases for stage1 params to reduce kernel msg
+
+2002/07/29  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/id.po, share/po/sk.po, share/po/ru.po, share/po/gl.po,
+	share/po/pt_BR.po, share/po/br.po, share/po/th.po, share/po/sl.po,
+	share/po/no.po, share/po/et.po, share/po/ja.po, share/po/hr.po,
+	share/po/tr.po, share/po/mt.po, share/po/ga.po, share/po/be.po,
+	share/po/uk.po, share/po/ko.po, share/po/DrakX.pot, share/po/sv.po,
+	share/po/sr.po, share/po/pl.po, share/po/fi.po, share/po/lt.po,
+	share/po/sp.po, share/po/cy.po, share/po/ca.po, share/po/da.po,
+	share/po/ar.po, share/po/bs.po, share/po/ro.po, share/po/wa.po,
+	share/po/is.po, share/po/af.po, share/po/az.po, share/po/zh_TW.po,
+	share/po/zh_CN.po, share/po/pt.po, share/po/vi.po, share/po/fr.po,
+	share/po/it.po, share/po/nl.po, share/po/eu.po, share/po/es.po,
+	share/po/de.po, share/po/eo.po, share/po/el.po, share/po/cs.po,
+	share/po/bg.po, share/po/lv.po, share/po/hu.po: updated pot file
+
+2002/07/29  Pixel  <pixel@mandrakesoft.com>
+
+	* mouse.pm: 
+	  - don't display "To activate the mouse, MOVE YOUR WHEEL!" when not
+	install
+	  - don't display "Please test the mouse" either
+	allow to not mess with X config auxmouse
+	(that way mousedrake doesn't need to care about it)
+	disallow big_help (when pressing F1) when testing mouse
+
+	* install_any.pm (g_auto_install): also save chosen on_services (this is
+	the only thing left to do to make it work :)
+
+	* drakxtools.spec: remove "Requires: groff" (nobody know why it's there)
+	(Pixel)
+
+	* run_program.pm: fix rooted() when chrooted and saving the result in a
+	perl variable
+
+	* share/rpmsrate: xpcd is still there (deush)
+	  - remove deprecated packages
+	  - adapt some to their names
+
+	* mdk-stage1/init-data/msgboot-graphicallogo.img.bz2: fix typo
+
+	* Xconfig/main.pm: restore xdm choice previous behaviour (auto_install)
+
+	* Xconfig/resolution_and_depth.pm (configure_auto_install): really use
+	resolution_wanted given in $o
+
+	* fs.pm: fix mke2fs on loopback
+	  - use $::prefix for reading/writing (it was missing for writing)
+	  - use output_p so that /etc/samba directory is created if needed
+	(fix bug reported by David Eastcott)
+
+	* Xconfig/test.pm: try harder to have "xfs" running
+
+	* partition_table.pm: cleanup
+
+	* services.pm (ask_standalone_gtk, ask_install): only return the
+	on_services (those
+	functions used to return ($l, $on_services) which used in a scalar
+	context
+	returned $on_services)
+
+	* standalone/mousedrake: 
+	  - fix using deprecated Xconfig.pm
+	  - document dam's hack for test mouse
+	  - cleanup
+	  - don't bother reading XFree mouse config
+	(using keep_auxmouse_unchanged of mouse::write_conf)
+
+	* Xconfig/default.pm: fix default config for mouse
+
+	* my_gtk.pm: disallow big_help (when pressing F1) when testing mouse
+
+	* printer.pm: make perl_checker happy
+
+	* diskdrake/interactive.pm: nicer error message when "You can't create a
+	new partition
+	(since you reached the maximal number of primary partitions).
+	First remove a primary partition and create an extended partition."
+	fix diskdrake::interactive::Options() excepts a value from
+	fs::mount_options_pack(), but fs::mount_options_pack() doesn't return
+	any
+	value (reported by Olivier Thauvin)
+
+	* standalone/XFdrake: make perl_checker happy
+	(ask_for_X_restart): make it work
+
+	* bootloader.pm: try to allow /boot on vfat (it used to work)
+
+	* network/smb.pm: 
+	  - use $::prefix for reading/writing (it was missing for writing)
+	  - use output_p so that /etc/samba directory is created if needed
+	(fix bug reported by David Eastcott)
+
+	* install_interactive.pm: fix partition wizard choice updating after
+	calling diskdrake
+
+	* install_steps_gtk.pm, install_steps_interactive.pm, install2.pm: ensure
+	choosing install-or-upgrade can't be done twice
+	(since it's badly handled and hard to handle nicely)
+
+2002/07/29  Thierry Vignaud  <tvignaud@mandrakesoft.com>
+
+	* standalone/drakxtv: read and wrote /etc/modules.conf
+
+	* Makefile: 
+	  - consolidate duplicated 'use (warn|strict...' into nuke_perl target
+	  - thus enable to fix bug reported by gc (aka i only fixed localsrpm
+	  nuke, not srpm: one)
+
+	* drakxtools.spec: final changes batch
+	  - pixel: don't set release to 14mdk when 13mdk hadn't be released ...
+	  - list 13mdk changes
+	replace trigger by format test for hw config file conversion
+
+2002/07/28  Pixel  <pixel@mandrakesoft.com>
+
+	* install_steps.pm (configureX, configureXBefore, configureXAfter):
+	greatly simplified using new Xconfig stuff
+
+	* standalone/XFdrake: 
+	  - adapt to new Xconfig modules
+	  - try out the new "XFdrake resolution" and "XFdrake monitor" that'll
+	get into DrakConf soon
+
+	* Xconfig/xfree3.pm, Xconfig/various.pm, Xconfig/parse.pm,
+	Xconfig/xfree.pm, Xconfig/test.pm, Xconfig/xfreeX.pm,
+	Xconfig/proprietary.pm, Xconfig/xfree4.pm, Xconfig/monitor.pm,
+	Xconfig/default.pm, Xconfig/screen.pm, Xconfig/FILES: 14 new modules,
+	will it be enough?? :)
+
+	* any.pm (running_window_manager): return the pids found if wanted
+	(ddcxinfos): ensure no probe is done when $::noauto
+
+	* install_steps_gtk.pm, install_gtk.pm, standalone.pm: adapt to new
+	Xconfig modules
+
+	* install_any.pm (g_auto_install): no need to handle $o->{X} as a special
+	case, it's already done by Xconfig::main::export_to_install_X
+
+	* Xconfig.pm, Xconfigurator.pm, Xconfigurator_consts.pm: thou hast served
+	well, you may now lie in peace
+
+	* common.pm (availableRamMB): use a precise constraint on 'Card:Intel 810'
+	instead of a regexp
+
+	* Xconfig/card.pm: make perl_checker happy
+	rahh, don't commit my test code!
+	14 new modules, will it be enough?? :)
+
+	* share/list: CardsNames is not needed anymore
+
+	* interactive.pm: fix "nicer error message when {val} is not set for
+	ask_from & list" in case of a reference to a reference (ref is REF
+	instead of SCALAR)
+
+	* Xconfig/main.pm: fix displaying info about current configuration
+	14 new modules, will it be enough?? :)
+
+	* Xconfig/resolution_and_depth.pm: 
+	  - make the gtk resolution chooser work
+	  - dropped the differenciation between embedded or not
+	14 new modules, will it be enough?? :)
+
+	* mouse.pm (detect): return wacom inside $mouse
+	(mouseconfig): reduce the number of "Use of undefined value"
+	(set_xfree_conf): created
+
+	* install2.pm: wacom is now inside $mouse
+
+	* install_steps_interactive.pm (configureX): adapt to new Xconfig
+
 2002/07/28  Pixel  <pixel@mandrakesoft.com>
 
 	* Xconfig/main.pm: fix displaying info about current configuration
