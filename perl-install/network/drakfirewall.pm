@@ -61,6 +61,12 @@ my @all_servers =
    ports => '8/icmp',
    force_default_selection => 0,
   },
+  {
+   name => "BitTorrent",
+   ports => '6881:6999/tcp',
+   hide => 1,
+   pkg => 'bittorrent bittorrent-shadowsclient',
+  },
 );
 
 sub port2server {
