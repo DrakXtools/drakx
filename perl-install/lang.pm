@@ -490,34 +490,34 @@ my %gtkqt_im =
            #- desktops (kde, gnome, etc). So XIM_PROGRAM isn't defined; it will
            #- be the xinitrc script, XIM section, that will choose the right one 
            #- XIM_PROGRAM => 'ami',
-           XMODIFIERS => '"@im=Ami"',
+           XMODIFIERS => '@im=Ami',
            GTK_IM_MODULE => 'xim',
           },
    chinput => {
                GTK_IM_MODULE => 'xim',
                XIM => 'xcin',
-               XMODIFIERS => '"@im=Chinput"',
+               XMODIFIERS => '@im=Chinput',
                },
    fctix => {
              XIM => 'fcitx',
              XIM_PROGRAM => 'fcitx',
-             XMODIFIERS => '"@im=fcitx"',
+             XMODIFIERS => '@im=fcitx',
             },
    kinput2 => {   
                XIM => 'kinput2',
                XIM_PROGRAM => 'kinput2',
-               XMODIFIERS => '"@im=kinput2"',
+               XMODIFIERS => '@im=kinput2',
               },
    scim => {
             GTK_IM_MODULE => 'scim',
             XIM_PROGRAM => 'scim -d',
-            XMODIFIERS => '"@im=SCIM"',
+            XMODIFIERS => '@im=SCIM',
            },
    uim => {
            GTK_IM_MODULE => 'uim-anthy',
            XIM => 'uim-anthy',
            XIM_PROGRAM => 'uim-xim',
-           XMODIFIERS => '"@im=uim-anthy"',
+           XMODIFIERS => '@im=uim-anthy',
           },
    xcin => {
             XIM => 'xcin',
