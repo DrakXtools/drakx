@@ -4,7 +4,6 @@ package printer::printerdrake;
 use strict;
 
 use common;
-use detect_devices;
 use modules;
 use network;
 use log;
@@ -694,7 +693,7 @@ sub setup_local_autoscan {
 	}
 	my @port;
 	if ($::expert) {
-	    @port = detect_devices::whatPrinterPort();
+	    @port = printer::detect::whatPrinterPort();
 	  LOOP: foreach my $q (@port) {
 		if (@str) {
 		    foreach my $p (@autodetected) {
