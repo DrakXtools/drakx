@@ -128,7 +128,7 @@ sub init {
                  skel ld.so.cache openoffice xinetd.d xinetd.conf syslog.conf sysctl.conf sysconfig/networking/ifcfg-lo
                  ifplugd);
     symlinkf_short("/image/etc/X11/$_", "/etc/X11/$_")
-      foreach qw(encodings.dir app-defaults applnk fs lbxproxy proxymngr rstart wmsession.d xinit.d xinit xkb xserver xsm);
+      foreach qw(encodings.dir app-defaults applnk fs lbxproxy proxymngr rstart wmsession.d xinit xkb xserver xsm);
     symlinkf_short("/image/root/$_", "/root/$_") foreach qw(.bashrc);
 
     mkdir_p(dirname("/var/$_")), symlinkf_short("/image/var/$_", "/var/$_") foreach qw(lib/samba cache/gstreamer-0.6);
