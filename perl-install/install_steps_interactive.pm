@@ -1236,16 +1236,11 @@ try to force installation even if that destroys the first partition?"));
 
 sub miscellaneous {
     my ($o, $clicked) = @_;
-    my %l = (
-	2 => _("Low"),
-	3 => _("Medium"),
-	4 => _("High"),
-    );
-    if ($::expert || $clicked) {
-	$ENV{SECURE_LEVEL} = $o->{security} = 
-	  $o->ask_from_listf('', _("Choose security level"), sub { $l{$_[0]} }, [ ikeys %l ], $o->{security})
-	    or return;
-    }
+
+    any::choose_security_level($o, \$o->{security}, \$o->{libsafe}) or return;
+
+    any::config_libsafe($o->{prefix}, $o->{libsafe});
+    
     install_steps::miscellaneous($o);
 }
 

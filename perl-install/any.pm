@@ -942,4 +942,55 @@ sub ddcxinfos {
     @l;
 }
 
+sub config_libsafe {
+    my ($prefix, $libsafe) = @_;
+    my %t = getVarsFromSh("$prefix/etc/sysconfig/system");
+    if (@_ > 1) {
+	$t{LIBSAFE} = bool2yesno($libsafe);
+	setVarsInSh("$prefix/etc/sysconfig/system", \%t);
+    }
+    text2bool($t{LIBSAFE});
+}
+
+sub choose_security_level {
+    my ($in, $security, $libsafe) = @_;
+
+    my %l = (
+      0 => _("Welcome To Crackers"),
+      1 => _("Poor"),
+      2 => _("Low"),
+      3 => _("Medium"),
+      4 => _("High"),
+      5 => _("Paranoid"),
+    );
+    my %help = (
+      0 => _("This level is to be used with care. It makes your system more easy to use,
+but very sensitive: it must not be used for a machine connected to others
+or to the Internet. There is no password access."),
+      1 => _("Password are now enabled, but use as a networked computer is still not recommended."),
+      2 => _("Few improvements for this security level, the main one is that there are
+more security warnings and checks."),
+      3 => _("This is the standard security recommended for a computer that will be used
+to connect to the Internet as a client. There are now security checks. "),
+      4 => _("With this security level, the use of this system as a server becomes possible.
+The security is now high enough to use the system as a server which accept
+connections from many clients. "),
+      5 => _("We take level 4 features, but now the system is entirely closed.
+Security features are at their maximum."),
+    );
+    delete @l{0,1};
+    delete @l{5} if !$::expert;
+
+    $in->ask_from('', _("Choose security level") . "\n\n" .
+		  join('', map { "$l{$_}: $help{$_}\n\n" } keys %l),
+		  [
+		   { label => _("Security level"), val => $security, list => [ sort keys %l ], format => sub { $l{$_} } },
+		   if_($in->do_pkgs->is_installed('libsafe') && arch() =~ /^i.86/,
+		       { label => _("Use libsafe for servers"), val => $libsafe, type => 'bool', text =>
+			 _("A library which defends against buffer overflow and format string attacks.") }
+		      )
+		  ]
+		 );
+}
+
 1;
