@@ -2655,15 +2655,15 @@ sub install_spooler {
 
     # "lpr" conflicts with "LPRng", remove either "LPRng" or remove "lpr"
     my $packages = $spoolers{$spooler}{packages2rm};
-    if ($packages) {
+    if ($packages && files_exist($packages->[1])) {
         $w = $in->wait_message(N("Printerdrake"), N("Removing %s ..."), $spoolers{$packages->[0]}{short_name});
-        $in->do_pkgs->remove_nodeps($packages->[0]) if !files_exist($packages->[1]);
+        $in->do_pkgs->remove_nodeps($packages->[0]);
     }
 
     $packages = $spoolers{$spooler}{packages2add};
-    if ($packages) {
+    if ($packages && !files_exist(@{$packages->[1]})) {
         $w = $in->wait_message(N("Printerdrake"), N("Installing %s ..."), $spoolers{$spooler}{short_name});
-        $in->do_pkgs->install(@{$packages->[0]}) if !files_exist(@{$packages->[1]});
+        $in->do_pkgs->install(@{$packages->[0]});
     }
 
     undef $w;
@@ -3350,23 +3350,15 @@ What do you want to modify on this printer?",
 		    $in->ask_warn(N("Default printer"),
 				  N("The printer \"%s\" is set as the default printer now.", $queue));
 		} elsif ($modify eq N("Add this printer to Star Office/OpenOffice.org/GIMP")) {
-		    if (printer::main::addcupsremotetoapplications
-			($printer, $queue)) {
-			$in->ask_warn(N("Adding printer to Star Office/OpenOffice.org/GIMP"),
-				      N("The printer \"%s\" was successfully added to Star Office/OpenOffice.org/GIMP.", $queue));
-		    } else {
-			$in->ask_warn(N("Adding printer to Star Office/OpenOffice.org/GIMP"),
-				      N("Failed to add the printer \"%s\" to Star Office/OpenOffice.org/GIMP.", $queue));
-		    }
+              $in->ask_warn(N("Adding printer to Star Office/OpenOffice.org/GIMP"),
+                            printer::main::addcupsremotetoapplications($printer, $queue) ?
+                            N("The printer \"%s\" was successfully added to Star Office/OpenOffice.org/GIMP.", $queue) :
+                            N("Failed to add the printer \"%s\" to Star Office/OpenOffice.org/GIMP.", $queue));
 		} elsif ($modify eq N("Remove this printer from Star Office/OpenOffice.org/GIMP")) {
-		    if (printer::main::removeprinterfromapplications
-			($printer, $queue)) {
-			$in->ask_warn(N("Removing printer from Star Office/OpenOffice.org/GIMP"),
-				      N("The printer \"%s\" was successfully removed from Star Office/OpenOffice.org/GIMP.", $queue));
-		    } else {
-			$in->ask_warn(N("Removing printer from Star Office/OpenOffice.org/GIMP"),
-				      N("Failed to remove the printer \"%s\" from Star Office/OpenOffice.org/GIMP.", $queue));
-		    }
+              $in->ask_warn(N("Removing printer from Star Office/OpenOffice.org/GIMP"),
+                            printer::main::removeprinterfromapplications($printer, $queue) ?
+                            N("The printer \"%s\" was successfully removed from Star Office/OpenOffice.org/GIMP.", $queue) :
+                            N("Failed to remove the printer \"%s\" from Star Office/OpenOffice.org/GIMP.", $queue));
 		} elsif ($modify eq N("Print test pages")) {
 		    print_testpages($printer, $in, $upNetwork);
 		} elsif ($modify eq N("Know how to use this printer")) {
@@ -3417,8 +3409,7 @@ What do you want to modify on this printer?",
 	# Configure the current printer queue in applications when main menu
 	# will not be shown (During installation in "Recommended" mode)
 	if ($::isInstall && !$::expert && !$menushown && !$continue) {
-	    my $w = $in->wait_message(N("Printerdrake"),
-				      N("Configuring applications..."));
+	    my $w = $in->wait_message(N("Printerdrake"), N("Configuring applications..."));
 	    printer::main::configureapplications($printer);
 	}
 
