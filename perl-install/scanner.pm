@@ -311,7 +311,7 @@ sub readScannerDB {
 }
 
 sub updateScannerDBfromUsbtable() {
-    substInFile { s/END// } "ScannerDB";
+    substInFile { s/^END// } "ScannerDB";
     my $to_add = "# generated from usbtable by scannerdrake\n";
     foreach (cat_("$ENV{SHARE_PATH}/ldetect-lst/usbtable")) {
 	my ($vendor_id, $product_id, $mod, $name) = chomp_(split /\s/,$_,4);
@@ -330,7 +330,7 @@ sub updateScannerDBfromUsbtable() {
 
 sub updateScannerDBfromSane {
     my ($sanesrcdir) = @_;
-    substInFile { s/END// } "ScannerDB";
+    substInFile { s/^END// } "ScannerDB";
 
     my $to_add = "# generated from Sane by scannerdrake\n";
     # for compat with our usbtable
@@ -366,7 +366,14 @@ sub updateScannerDBfromSane {
 	}
     }
 
-    foreach my $f (glob_("$sanesrcdir/doc/descriptions/*.desc"), glob_("$sanesrcdir/doc/descriptions-external/*.desc")) {
+    foreach my $ff (glob_("$sanesrcdir/doc/descriptions/*.desc"), glob_("$sanesrcdir/doc/descriptions-external/*.desc"), "UNSUPPORTED") {
+	my $f = $ff;
+	# unsupported.desc must be treated separately, as the list of
+	# unsupported scanners in SANE is out of date.
+	next if $f =~ /unsupported.desc$/;
+	# Treat unsupported.desc in the end
+	$f = "$sanesrcdir/doc/descriptions/unsupported.desc" if
+	    ($f eq "UNSUPPORTED");
 	my $F = common::openFileMaybeCompressed($f);
 	$to_add .= "\n# from $f";
 	my ($lineno, $cmd, $val) = 0;
@@ -378,8 +385,13 @@ sub updateScannerDBfromSane {
 		      unless ($name) { $name = $val; return }
 		      $name = member($mfg, keys %$sane2DB) ?
 			ref($sane2DB->{$mfg}) ? $sane2DB->{$mfg}($name) : "$sane2DB->{ $mfg }|$name" : "$mfg|$name";
-		      if (0 && member($name, keys %$scanner::scannerDB)) {
-			  print "#[$name] already in ScannerDB!\n";
+		      # When adding the unsupported scanner models, check
+		      # whether the model is not already supported. To
+		      # compare the names ignore upper/lower case.
+		      my $searchname = quotemeta($name);
+		      if (($backend =~ /unsupported/i) &&
+			  ($to_add =~ /^NAME $searchname$/im)) {
+			  $to_add .= "# $name already supported!\n";
 		      } else {
 			  # SANE bug: "snapscan" calls itself "SnapScan"
 			  $backend =~ s/SnapScan/snapscan/g;
