@@ -1,5 +1,36 @@
 2002/07/21  Pixel  <pixel@mandrakesoft.com>
 
+	* Xconfigurator.pm: Load "extmod" is a must! (for things like shape and
+	dga)
+
+	* Xconfig.pm: fix typo
+
+	* share/locales-skeleton.tar.bz2: usr/share/locale skeleton is now build
+	in gen_locales.pl
+
+	* share/gen_locales.pl, share/gen_locales.sh: build per languages symlinks
+	using the new::during_install__lang2charset
+	  -> this enables doing the same during install when using ramdisk
+	=> no need to have a locale.cz2 anymore
+	  (this is now possible since the number of special cases is lower than
+	before)
+
+	* lang.pm: 
+	  - remove utf_xxx charsets, adding a flag UTF-8 instead
+	  - add during_install__lang2charset
+	  - when using ramdisk, no locale.cz2 anymore:
+	there are 3 main charsets containing everything for all locales, except
+	LC_CTYPE
+	    by default, there is UTF-8.
+	    when asked for GB2312 or BIG5, removing the other main charsets
+	  - cleanup comments (use #- instead of #)
+	  - various cleanup
+
+	* tools/make_mdkinst_stage2: no more locale.cz2, just keeping the main
+	charset /usr/share/locale/UTF-8
+
+2002/07/21  Pixel  <pixel@mandrakesoft.com>
+
 	* share/locales-skeleton.tar.bz2: usr/share/locale skeleton is now build
 	in gen_locales.pl
 
