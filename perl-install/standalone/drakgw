@@ -102,6 +102,7 @@ begin:
 #- **********************************
 #- * 0th step: verify if we are already set up
 
+$::isEmbedded and kill USR2, $::CCPID;
 if (-f $drakgw_setup)
 {
     open DRAKGW_SETUP, "$drakgw_setup" or die "Can't open $drakgw_setup";
@@ -539,6 +540,9 @@ sub quit_global {
 
 #-------------------------------------------------
 #- $Log$
+#- Revision 1.23  2001/03/01 00:18:17  damien
+#- updated embedded mode
+#-
 #- Revision 1.22  2001/02/26 18:39:12  prigaux
 #- pixelization
 #-
