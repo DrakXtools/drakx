@@ -577,7 +577,7 @@ sub testFinalConfig {
     #- needed for bad cards not restoring cleanly framebuffer, according to which version of XFree are used.
     my $bad_card = ($o->{card}{use_xf4} ?
 		    $o->{card}{identifier} =~ /Matrox|SiS.*SG86C2.5|SiS.*559[78]|SiS.*300|SiS.*540|SiS.*6C?326|SiS.*6C?236|Tseng.*ET6\d00|Riva.*128/ :
-		    $o->{card}{identifier} =~ /i740|Rage Mobility [PL]|3D Rage LT/);
+		    $o->{card}{identifier} =~ /i740|Rage Mobility [PL]|3D Rage LT|Rage 128/);
     log::l("the graphic card does not like X in framebuffer") if $bad_card;
 
     my $verybad_card = $o->{card}{driver} eq 'i810';
