@@ -9,7 +9,7 @@ $::o = { locale => lang::read() } if !$::isInstall;
 
 @ISA = qw(Exporter);
 %EXPORT_TAGS = (
-    wrappers => [ qw(gtkadd gtkappend gtkappend_page gtkappenditems gtkcombo_setpopdown_strings gtkdestroy
+    wrappers => [ qw(gtkadd gtkadd_widget gtkappend gtkappend_page gtkappenditems gtkcombo_setpopdown_strings gtkdestroy
                      gtkentry gtkflush gtkhide gtkmodify_font gtkmove gtkpack gtkpack2 gtkpack2_
                      gtkpack2__ gtkpack_ gtkpack__ gtkpowerpack gtkput gtkradio gtkresize gtkroot
                      gtkset_active gtkset_border_width gtkset_editable gtkset_justify gtkset_alignment gtkset_layout gtkset_line_wrap
@@ -105,6 +105,16 @@ sub gtkadd {
 	$w->add(gtkshow($l));
     }
     $w
+}
+
+sub gtkadd_widget {
+    my $sg = shift;
+    map {
+        my $l = $_;
+        ref $l or $l = Gtk2::Label->new($l);
+        $sg->add_widget($l);
+        $l;
+    } @_;
 }
 
 sub gtkappend {
