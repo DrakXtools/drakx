@@ -43,6 +43,8 @@ ifeq (alpha,$(ARCH))
 	cp -f vmlinux.gz $(ROOTDEST)/boot/instboot.gz
 	make -C tools/$(ARCH)/cd install ROOTDEST=$(ROOTDEST)
 endif
+	cd $(ROOTDEST)/images; md5sum *.img* > MD5SUM
+
 	install live_update $(ROOTDEST)/live_update
 	make -C perl-install full_stage2
 
@@ -105,10 +107,8 @@ upload:
 	upload misc rpmtools.pm ;\
 	upload misc auto ;\
 	upload '' live_update ;\
-	rm -f MD5SUM ;\
-	for i in $(RELEASE_BOOT_IMG); do for j in $${i}*; do upload images $$j; md5sum $$j >> MD5SUM; done; done;\
 	upload images MD5SUM ;\
-	rm -f MD5SUM ;\
+	for i in $(RELEASE_BOOT_IMG); do for j in $${i}*; do upload images $$j; done; done;\
 	echo
 
 upload_sparc:
