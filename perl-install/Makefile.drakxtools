@@ -16,7 +16,7 @@ LIBX11DEST = $(PREFIX)/usr/X11R6/lib/X11
 LIBDEST = $(LIBDIR)/$(NAME)
 PIXDIR = $(DATADIR)/$(NAME)/pixmaps
 INITDIR =  $(PREFIX)/etc/rc.d/init.d
-PHONY: $(DIRS)
+.PHONY: $(DIRS)
 
 all: rpcinfo-flushed $(DIRS)
 
