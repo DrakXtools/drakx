@@ -734,7 +734,7 @@ sub maintain_clients {
 		$c_detail->append($c_det_type);
 		$c_det_type->show();
 		
-		if ($clients{$key}{filename} ne '') {
+		if ($clients{$key}{filename}) {
 			my $c_det_nbi = new_with_label Gtk::TreeItem($clients{$key}{filename});
 			$c_detail->append($c_det_nbi);
 			$c_det_nbi->show();
@@ -758,7 +758,7 @@ sub maintain_clients {
 
 	my @images = grep(/\.nbi/, all("/var/lib/tftpboot/"));
 	my $have_nbis = @images;
-	if ($have_nbis ne 0) {
+	if ($have_nbis) {
 		unshift(@images, "");
 		$entry_nbi->set_popdown_strings(@images);
 		$entry_nbi->set_value_in_list(1, 0);
@@ -793,7 +793,7 @@ sub maintain_clients {
 							my $mac = $entry_mac->get_text();
 							my $ip = $entry_ip->get_text();
 							my $nbi = $entry_nbi->entry->get_text(); 
-							if ($hostname ne '' && $mac ne '' && $ip ne '') {
+							if ($hostname && $mac && $ip) {
 	
 								my $result = addclient(0, $hostname, $mac, $ip, $nbi, $is_thin);
 								
@@ -819,7 +819,7 @@ sub maintain_clients {
 									$c_detail->append($c_det_type);
 									$c_det_type->show();
 									
-									if ($nbi ne '') {
+									if ($nbi) {
 										my $c_det_nbi = new_with_label Gtk::TreeItem($nbi);
 										$c_detail->append($c_det_nbi);
 										$c_det_nbi->show();
@@ -1109,7 +1109,7 @@ sub write_dhcpd_config {
 	print FHANDLE "\toption broadcast-address $broadcast;\n" if $broadcast;
 	print FHANDLE "\toption domain-name \"$domain\";\n" if $domain;
 	
-	my $pool_string = "\trange dynamic-bootp " . $pool_start . " " . $pool_end . ";\n" if (($pool_start ne '') && ($pool_end ne ''));
+	my $pool_string = "\trange dynamic-bootp " . $pool_start . " " . $pool_end . ";\n" if $pool_start && $pool_end;
 	print FHANDLE $pool_string if $pool_string;
 	
 	my $ns_string = "\toption domain-name-servers " . $ns1 if $ns1;
@@ -1517,8 +1517,8 @@ sub format_client_entry {
 	my $entry = "host $client {\n";
 	$entry .= "\thardware ethernet\t$ts_clients{$client}{hardware};\n";
 	$entry .= "\tfixed-address\t\t$ts_clients{$client}{address};\n";
-	$entry .= "\t#type\t\t\t$ts_clients{$client}{type};\n" if ($ts_clients{$client}{type} ne '');
-	$entry .= "\tfilename\t\t\"$ts_clients{$client}{filename}\";\n" if ($ts_clients{$client}{filename} ne '');
+	$entry .= "\t#type\t\t\t$ts_clients{$client}{type};\n" if $ts_clients{$client}{type};
+	$entry .= "\tfilename\t\t\"$ts_clients{$client}{filename}\";\n" if $ts_clients{$client}{filename};
 	$entry .= "}\n";
 	write_thin_inittab($ts_clients{$client}{address}) if ($ts_clients{$client}{type} eq "thin"); 
 	$entry

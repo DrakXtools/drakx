@@ -152,7 +152,7 @@ sub update_app {
 	}
 	
     }
-    $app_choice ne '' ? $package->set_text("$app_choice") : $package->set_text(N("Not installed"));
+    $app_choice ? $package->set_text("$app_choice") : $package->set_text(N("Not installed"));
 }
 
 my %packages;

@@ -521,8 +521,8 @@ sub get_cd_info {
 
 sub save_conf_file {
 
-	write_sitecopyrc() if ($net_proto eq 'webdav');
-	write_password_file() if (($net_proto eq 'rsync') && ($passwd_user ne ''));	
+	write_sitecopyrc() if $net_proto eq 'webdav';
+	write_password_file() if $net_proto eq 'rsync' && $passwd_user;
 	
     my @cfg_list = ("SYS_FILES=@sys_files\n",
 		     "HOME_FILES=@user_list\n", 
@@ -759,7 +759,7 @@ sub do_expect {
 		
 	eval { require Expect };
 	
-	if ($@ ne '') {
+	if ($@) {
 		if ($mode eq 'sendkey') {
 			${$central_widget}->destroy();
 			check_pkg_needs();
@@ -898,8 +898,8 @@ sub webdav_client {
 sub rsync_client {
     $DEBUG and print "file list to send: $_\n "  foreach @file_list_to_send_by_ftp;
 	my $rsync_cmd = "rsync -tv $save_path/* ";
-	$rsync_cmd = $rsync_cmd . "--password-file=$cfg_dir/rsync.user " if ($passwd_user ne '');
-	$rsync_cmd = $rsync_cmd . "$login_user\@" if ($login_user ne '');
+	$rsync_cmd = $rsync_cmd . "--password-file=$cfg_dir/rsync.user " if $passwd_user;
+	$rsync_cmd = $rsync_cmd . "$login_user\@" if $login_user;
 	$rsync_cmd = $rsync_cmd . "$host_name\:\:$host_path";
 	spawn_progress($rsync_cmd, "Running rsync");
 	return(0);
@@ -1026,14 +1026,14 @@ sub get_cd_volname {
 }
 
 sub build_iso {	
-	if (($multi_session) && ($session_offset ne '')) {
+	if ($multi_session && $session_offset) {
 		$vol_name = get_cd_volname();
 	} else {
 		$vol_name = "Drakbackup" . $the_time;
 	}
 	#this is safe to change the volname on rewrites, as is seems to get ignored anyway
 	my $command = "mkisofs -r -J -T -v -V '$vol_name' ";
-	$command .= "-C $session_offset -M $cd_device " if (($multi_session) && ($session_offset ne ''));
+	$command .= "-C $session_offset -M $cd_device " if $multi_session && $session_offset;
 	$command .= "-o $save_path/drakbackup.iso @file_list_to_send_by_ftp";
 	spawn_progress($command, "Running mkisofs...");
 }
@@ -1310,7 +1310,7 @@ sub build_backup_files {
 	}
 		
 	#- should hit this block if running daemon mode only
-	if ($daemon && ($daemon_media ne '')) {
+	if ($daemon && $daemon_media) {
 #		ftp_client() if $ftp_daemon;
 		rsync_client() if ($daemon_media eq 'rsync');
 		ssh_client() if (($daemon_media eq 'ssh') && !($use_expect));
@@ -1337,7 +1337,7 @@ sub build_backup_files {
 	#- consolidate all the other methods under here - interactive and --default should land here
 	if (!$daemon) {
 	
-		if ($where_net && ($net_proto ne '') && ($net_proto ne 'ftp')) {
+		if ($where_net && $net_proto && ($net_proto ne 'ftp')) {
 			rsync_client() if ($net_proto eq 'rsync');
 			ssh_client() if (($net_proto eq 'ssh') && !($use_expect));
 			do_expect("backup", "") if (($net_proto eq 'ssh') && ($use_expect));
@@ -1372,7 +1372,7 @@ sub build_backup_files {
 			$catalog .= ":HD:localhost:$save_path";
 			$net_proto = '';
 		} 
-		$catalog .= ":$net_proto:$login_user\@$host_name:$host_path" if ($net_proto ne '');
+		$catalog .= ":$net_proto:$login_user\@$host_name:$host_path" if $net_proto;
 		$catalog .= ":CD:$vol_name:$cd_device" if ($where_cd);
 		$catalog .= ":Tape:$vol_name:$tape_device" if ($where_tape);
 		$catalog .= ":System" if ($backup_sys);
@@ -1435,7 +1435,7 @@ sub check_pkg_needs {
 		$extra_pkg = 'perl-Expect' if (($net_proto eq 'ssh') && (($use_expect) || ($xfer_keys)));
 	}
 	$extra_pkg = 'mt-st' if ($where_tape);
-	if ($extra_pkg ne '') {
+	if ($extra_pkg) {
 		if (require_rpm($extra_pkg)) {
 			return(0);
 		} else {
@@ -1799,7 +1799,7 @@ sub advanced_where_net_types {
 	$entry_net_type->entry->set_text($net_proto);
 	$entry_net_type->entry->editable(0);
 	$button_xfer_keys->signal_connect('clicked', sub { 
-		if (($passwd_user ne '') && ($login_user ne '') && ($host_name ne '')) {
+		if ($passwd_user && $login_user && $host_name) {
 			do_expect("sendkey", $backup_key);
 		} else {
 			$in->ask_warn('',N("Need hostname, username and password!"));
@@ -1979,7 +1979,7 @@ sub advanced_where_cd {
 		$current_widget->();
     });
 	$button_erase_now->signal_connect('clicked', sub { 
-		if ($cd_device ne '') {
+		if ($cd_device) {
 			erase_cdrw();
 		} else {
 			$in->ask_warn('',N("No CD device defined!"));
@@ -3367,7 +3367,7 @@ sub catalog_restore {
 				),
 				0, gtkpack_(new Gtk::HBox(1, 10),
 					1, gtksignal_connect(new Gtk::Button(N("Restore Selected\nCatalog Entry")), clicked => sub { 
-						if ($cat_entry ne '') {
+						if ($cat_entry) {
 							my $media_check = restore_catalog_entry($cat_entry, ());
 							if ($media_check) {
 								${$central_widget}->destroy();
@@ -3380,7 +3380,7 @@ sub catalog_restore {
 						my $files = @restore_files;
 						#- grab the array before the widget clears it 
 						my @passed_files = @restore_files;
-						if (($cat_entry ne '') && ($files != 0)) {
+						if ($cat_entry && $files) {
 							my $media_check = restore_catalog_entry($cat_entry, @passed_files);
 							if ($media_check) {
 								${$central_widget}->destroy();
@@ -3821,7 +3821,7 @@ sub restore_find_media_box {
     my $message = "Unable to find backups to restore...\n";
 	$message .= "Verify that $path_to_find_restore is the correct path" if (($where_hd) && ($where_cd));
 	$message .= " and the CD is in the drive" if ($where_cd);
-	if (($where_tape) || ($net_proto ne '')) {
+	if ($where_tape || $net_proto) {
 		$message .= "Backups on unmountable media - Use Catalog to restore";
 		$mount_media = 0;
 	}
@@ -4636,7 +4636,7 @@ sub interactive_mode_box {
 sub interactive_mode {
     $interactive = 1;
 	eval { require my_gtk; };
-	if ($@ ne '') {
+	if ($@) {
 		die "Can't load my_gtk...\n";
 	} else {
   		my_gtk->import(qw(:helpers :wrappers));

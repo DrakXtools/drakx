@@ -69,7 +69,7 @@ ask_fromW_begin:
 	    print "$e->{text} $e->{label}\n";
 	    print N("Your choice? (0/1, default `%s') ", ${$e->{val}} || '0');
 	    my $i = readln();
-	    if ($i ne '') {
+	    if ($i) {
 		to_bool($i) != to_bool(${$e->{val}}) and $common->{callbacks}{changed}->($ind);
 		${$e->{val}} = $i;
 	    }
@@ -102,7 +102,7 @@ ask_fromW_begin:
 	    print $t;
 	} elsif ($e->{type} eq 'entry') {
 	    print "$e->{label} $e->{text}\n";
-	    print N("Your choice? (default `%s'%s) ", ${$e->{val}}, ${$e->{val}} ne '' ? N(" enter `void' for void entry") : '');
+	    print N("Your choice? (default `%s'%s) ", ${$e->{val}}, ${$e->{val}} ? N(" enter `void' for void entry") : '');
 	    my $i = readln();
 	    ${$e->{val}} = $i || ${$e->{val}};
 	    ${$e->{val}} = '' if ${$e->{val}} eq 'void';
