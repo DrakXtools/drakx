@@ -1,5 +1,87 @@
 2004/06/25  Olivier Blin <oblin at mandrakesoft.com>
 
+	* mdk-stage1/directory.c: fix typo
+	do not use ramdisk in nfs install
+	add missing include for basename()
+	use relative symlink to image location in disk/nfs install, to have a
+	working stage2
+
+	* mdk-stage1/network.c: unset automatic in ftp/http install when ramdisk
+	can't be loaded
+	use new http_proxy variables instead of the old answers (not anymore
+	available)
+
+	* network/netconnect.pm: never disable "DHCP host name" entry box, it
+	shouldn't be linked with ""Assign host name from DHCP address" checkbox
+	(#2759, #9981)
+	unblacklist sis900 since its link beat detection works with latest
+	kernels
+
+2004/06/25  Pixel  <pixel at mandrakesoft.com>
+
+	* standalone/drakTermServ: simplify using new bootloader.pm
+
+	* Xconfig/various.pm, any.pm, standalone/drakboot: adapt to new
+	bootloader.pm
+
+	* bootloader.pm: when adding a new kernel, have a nicer new name for
+	conflicting entry
+	when modifying a symlink, ensure we also use the long name for the old
+	symlink in the existing entries
+	fix 2 typos
+	drop obsolete function
+	drop obsolete lnx4win_file()
+	major cleanup and rewrite
+	  - some functions have been renamed
+	  - some functions have changed prototype
+	  - no more bootloader::vga_modes, we use
+	Xconfig::resolution_and_depth::bios_vga_modes()
+	  - no more detectloader, it is now detect_main_method(),
+	but notice that bootloader::read() + bootloader::write() abstract all
+	this!
+	  - update_for_renumbered_partitions() is surely broken :)
+	  - sort_hds_according_to_bios() and mixed_kind_of_disks() uses new
+	function hd2bios_kind()
+	  - new data structure "kernel_str"
+	  - lilo doesn't need so much help as it used to be, so don't put as
+	much
+	  "disk=/dev/sda bios=0x80" as before
+	some goals:
+	  - don't rely on device names
+	  (this allows not to care too much about devfs vs udev vs ...)
+	  - kernels can be named something else than /boot/vmlinuz*,
+	  please use the various functions to construct the initrd file name,
+	the symlink name...
+
+	* fs.pm: 
+	  - enhance subpart_from_wild_device_name() to handle "sda" the same as
+	"/dev/sda" (when /dev/sda exists)
+	  - new function device2part() which uses subpart_from_wild_device_name
+	and the
+	  given fstab to convert the device name to the corresponding structure
+	  (this allows not relying too much on the device name)
+
+	* install2.pm: remove deprecated rhimage symlink
+
+	* install_steps.pm: fix blino stage1 change (i think he likes breaking
+	things ;p)
+	bootloader::add_kernel() do a good job at replacing symlinks with the
+	real
+	kernel/initrd file name, so don't need to do it here
+	adapt to new bootloader.pm
+
+	* install_any.pm: use internal_error() instead of die'ing with no
+	arguments
+	fix blino stage1 change (i think he likes breaking things ;p)
+	  - adapt to new bootloader.pm
+	  - simplify
+
+2004/06/25  Rafael Garcia-Suarez <rgarciasuarez at mandrakesoft.com>
+
+	* install_any.pm: Make perl_checker silent
+
+2004/06/25  Olivier Blin <oblin at mandrakesoft.com>
+
 	* mdk-stage1/network.c: unset automatic in ftp/http install when ramdisk
 	can't be loaded
 	use new http_proxy variables instead of the old answers (not anymore
@@ -32047,7 +32129,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.927 2004/06/15 15:33:17 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.928 2004/06/25 05:47:27 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
