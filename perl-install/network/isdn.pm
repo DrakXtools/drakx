@@ -64,15 +64,14 @@ sub isdn_write_config_backend {
     if ($light) {
 	modules::mergein_conf("$prefix/etc/modules.conf");
 	if ($isdn->{id}) {
-	    @c = any::setup_thiskind($in, 'isdn', !$::expert, 1);
-	    modules::add_alias("ippp0", $c[0]{driver});
 	    isdn_detect_backend($isdn);
 	} else {
 	    my $a="";
 	    defined $isdn->{$_} and $a .= "$_=" . $isdn->{$_} . " " foreach qw(type protocol mem io io0 io1 irq);
-	    modules::add_alias("ippp0", $isdn->{driver});
+	    $isdn->{driver} eq "hisax" and $a.="id=HiSax";
 	    modules::set_options($isdn->{driver}, $a);
 	}
+	modules::add_alias("ippp0", $isdn->{driver});
 	$::isStandalone and modules::write_conf($prefix);
 	foreach my $f ('ioptions1B', 'ioptions2B') {
 	    substInFile { s/^name .*\n//; $_ .= "name $isdn->{login}\n" if eof  } "$prefix/etc/ppp/$f";
@@ -106,7 +105,8 @@ I4L_MEMBASE="$isdn->{mem}"
 I4L_PORT="$isdn->{io}"
 I4L_IO0="$isdn->{io0}"
 I4L_IO1="$isdn->{io1}"
-I4L_ID="isdn_card"
+I4L_ID="HiSax"
+I4L_FIRMWARE="$isdn->{firmware}"
 );
 
 	output "$prefix/etc/ppp/ioptions",
@@ -116,6 +116,9 @@ defaultroute
 ";
 	system "$prefix/etc/rc.d/init.d/isdn4linux restart";
     }
+
+    substInFile { s/^FIRMWARE.*\n//; $_ .= qq(FIRMWARE="$isdn->{firmware}"\n) if eof  } "$prefix/etc/sysconfig/network-scripts/ifcfg-ippp0";
+
     write_secret_backend($isdn->{login}, $isdn->{passwd});
 
     output "$prefix$connect_file",
@@ -234,10 +237,11 @@ sub isdn_detect {
 sub isdn_detect_backend {
     my ($isdn) = @_;
     if (my ($c) = (modules::get_that_type('isdn'))) {
-  	$isdn->{$_} = $c->{$_} foreach qw(description vendor id driver options);
+  	$isdn->{$_} = $c->{$_} foreach qw(description vendor id driver options firmware);
 	$isdn->{$_} = sprintf("%0x", $isdn->{$_}) foreach ('vendor', 'id');
 	$isdn->{card_type} = 'pci';
 	($isdn->{type}) = $isdn->{options} =~ /type=(\d+)/;
+#	$c->{options} !~ /id=HiSax/ && $isdn->{driver} eq "hisax" and $c->{options} .= " id=HiSax";
 	if ($c->{options} !~ /protocol=/ && $isdn->{protocol} =~ /\d/) {
 	    modules::set_options($c->{driver}, $c->{options} . " protocol=" . $isdn->{protocol});
 	}
