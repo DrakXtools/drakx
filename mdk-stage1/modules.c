@@ -43,7 +43,7 @@ static int disable_modules = 0;
 /* unarchive and insmod given module
  * WARNING: module must not contain the trailing ".o"
  */
-static int insmod_archived_file(const char * mod_name, char * options)
+static enum insmod_return insmod_archived_file(const char * mod_name, char * options)
 {
 	char module_name[50];
 	char final_name[50] = "/tmp/";
@@ -54,19 +54,21 @@ static int insmod_archived_file(const char * mod_name, char * options)
 	i = mar_extract_file(archive_name, module_name, "/tmp/");
 	if (i == 1) {
 		log_message("file-not-found-in-archive %s", module_name);
-		return -2;
+		return INSMOD_FAILED_FILE_NOT_FOUND;
 	}
 	if (i != 0)
-		return -1;
+		return INSMOD_FAILED;
 
 	strcat(final_name, mod_name);
 	strcat(final_name, ".o");
 
 	rc = insmod_call(final_name, options);
-	if (rc)
-		log_message("\tfailed");
 	unlink(final_name); /* sucking no space left on device */
-	return rc;
+	if (rc) {
+		log_message("\tfailed");
+		return INSMOD_FAILED;
+	}
+	return INSMOD_OK;
 }
 
 
@@ -209,7 +211,7 @@ static int module_already_present(const char * name)
 }
 
 
-static int insmod_with_deps(const char * mod_name, char * options)
+static enum insmod_return insmod_with_deps(const char * mod_name, char * options)
 {
 	struct module_deps_elem * dep;
 
@@ -228,14 +230,14 @@ static int insmod_with_deps(const char * mod_name, char * options)
 	}
 
 	if (module_already_present(mod_name))
-		return 0;
+		return INSMOD_OK;
 
 	log_message("needs %s", mod_name);
 	return insmod_archived_file(mod_name, options);
 }
 
 
-int my_insmod(const char * mod_name, enum driver_type type, char * options)
+enum insmod_return my_insmod(const char * mod_name, enum driver_type type, char * options)
 {
 	char alias[500];
 	int i;
@@ -250,7 +252,7 @@ int my_insmod(const char * mod_name, enum driver_type type, char * options)
 
 	if (disable_modules) {
 		log_message("\tdisabled");
-		return 0;
+		return INSMOD_OK;
 	}
 
 #ifndef DISABLE_NETWORK
@@ -259,7 +261,7 @@ int my_insmod(const char * mod_name, enum driver_type type, char * options)
 #endif
 
 	if (IS_TESTING)
-		return 0;
+		return INSMOD_OK;
 
 	i = insmod_with_deps(mod_name, options);
 	if (i == 0) {
@@ -316,7 +318,7 @@ static enum return_type insmod_with_options(char * mod, enum driver_type type)
 	strcat(options, " ");
 	strcat(options, answers[0]); // because my_insmod will eventually modify the string
 	
-	if (my_insmod(mod, type, answers[0])) {
+	if (my_insmod(mod, type, answers[0]) != INSMOD_OK) {
 		error_message("Insmod failed.");
 		return RETURN_ERROR;
 	}

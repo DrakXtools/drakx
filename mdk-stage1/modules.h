@@ -18,8 +18,10 @@
 #include "stage1.h"
 #include "probing.h"
 
+enum insmod_return { INSMOD_OK, INSMOD_FAILED, INSMOD_FAILED_FILE_NOT_FOUND };
+
 void init_modules_insmoding(void);
-int my_insmod(const char * mod_name, enum driver_type type, char * options);
+enum insmod_return my_insmod(const char * mod_name, enum driver_type type, char * options);
 enum return_type ask_insmod(enum driver_type);
 
 struct module_deps_elem {
