@@ -608,8 +608,7 @@ sub gtktext_insert {
             }
             $buffer->insert($iter1, $token->[0]);
             if ($token->[1]) {
-                my $tag = $buffer->create_tag(rand());
-                $tag->set(%{$token->[1]});
+                my $tag = $buffer->create_tag(rand(), %{$token->[1]});
                 $buffer->apply_tag($tag, $iter1 = $buffer->get_iter_at_offset($c), $buffer->get_end_iter);
             }
         }
