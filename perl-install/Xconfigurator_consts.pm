@@ -225,17 +225,6 @@ Before continuing with this program, make sure you know the chipset and
 amount of video memory on your video card. SuperProbe can help with this.
 It is also helpful if you know what server you want to run.";
 
-$finalcomment_text = "
-configuration file has been written. Take a look at it before running 'startx'.
-Note that the XF86Config file must be in one of the directories searched by the
-server (e.g. /etc/X11/XF86Config) in order to be used. Within the server press
-ctrl, alt and '+' simultaneously to cycle video resolutions. Pressing ctrl, alt
-and backspace simultaneously immediately exits the server (use if the monitor
-doesn't sync for a particular mode).
-
-For further configuration, refer to /usr/X11R6/lib/X11/doc/README.Config.
-";
-
 $s3_comment = '
 # Use Option "nolinear" if the server doesn\'t start up correctly
 # (this avoids the linear framebuffer probe). If that fails try

@@ -124,7 +124,7 @@ get_needed_files: $(DIRS)
 		  fi; \
 		fi; \
 	done
-	mv -f $(DEST)/lib/libimlib-xpm.so $(DEST)/usr/lib
+	mv -f $(DEST)/lib/libimlib-png.so $(DEST)/usr/lib
 
 	mv -f $(DEST)/bin/* $(DEST)/sbin/* $(DEST)/usr/bin
 	cd $(DEST)/usr/bin ; mv insmod insmod_

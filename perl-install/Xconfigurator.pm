@@ -113,8 +113,9 @@ sub readMonitorsDB {
 
 sub rewriteInittab {
     my ($runlevel) = @_;
-    substInFile { s/^(id:)[35](:initdefault:)\s*$/$1$runlevel$2\n/ }
-      (grep { -r $_ } "$prefix/etc/inittab" or log::l("missing inittab!!!"), return);
+    my $f = "$prefix/etc/inittab";
+    -r $f or log::l("missing inittab!!!"), return;
+    substInFile { s/^(id:)[35](:initdefault:)\s*$/$1$runlevel$2\n/ } $f;
 }
 
 sub keepOnlyLegalModes {
@@ -748,16 +749,5 @@ _("I can set up your computer to automatically start X upon booting.
 Would you like X to start when you reboot?"), 1);
 
 	rewriteInittab($run ? 5 : 3) unless $::testing;
-
-	$in->ask_warn(_("X successfully configured"),
-_("Configuration file has been written. Take a look at it before running 'startx'.
-
-Within the server, press Ctrl, Alt and '+' simultaneously to cycle through video resolutions.
-
-Pressing Ctrl, Alt and Backspace simultaneously immediately exits the server
-
-For further configuration, refer to /usr/X11R6/lib/X11/doc/README.Config.
-
-")) unless $::auto;
     }
 }

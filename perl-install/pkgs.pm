@@ -21,7 +21,10 @@ hackkernel hackkernel-BOOT hackkernel-fb hackkernel-headers
 hackkernel-pcmcia-cs hackkernel-smp hackkernel-smp-fb
 );
 
-sub correctSize { (20471 - $_[0])*$_[0]/16258 } #- size correction in MB.
+my $A = 20471;
+my $B = 16258;
+sub correctSize { ($A - $_[0]) * $_[0] / $B } #- size correction in MB.
+sub invCorrectSize { $A / 2 - sqrt(sqr($A) - 4 * $B * $_[0]) / 2 }
 
 sub Package {
     my ($packages, $name) = @_;

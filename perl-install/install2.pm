@@ -45,7 +45,7 @@ my @installSteps = (
   partitionDisks     => [ __("Setup filesystems"), 1, 0, "selectPath" ],
   formatPartitions   => [ __("Format partitions"), 1, -1, "partitionDisks" ],
   choosePackages     => [ __("Choose packages to install"), 1, 1, "selectPath" ],
-  doInstallStep      => [ __("Install system"), 1, -1, ["formatPartitions", "selectPath"] ],
+  doInstallStep      => [ __("Install system"), 1, -1 ],
   miscellaneous      => [ __("Miscellaneous"), 1, 1 ],
   configureNetwork   => [ __("Configure networking"), 1, 1, "formatPartitions" ],
   configureTimezone  => [ __("Configure timezone"), 1, 1, "doInstallStep" ],
@@ -153,7 +153,7 @@ $o = $::o = {
                  str_type => $printer::printer_type_default,
                  QUEUE    => "lp",
                  SPOOLDIR => "/var/spool/lpd/lp",
-                 DBENTRY  => "DeskJet670",
+                 DBENTRY  => "PostScript",
                  PAPERSIZE => "legal",
                  CRLF      => 0,
 

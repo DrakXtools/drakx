@@ -299,8 +299,9 @@ sub addUser($) {
     foreach (glob_("$p/home")) { my ($u, $g) = (stat($_))[4,5]; $uids{$u} = 1; $gids{$g} = 1; }
 
     my @l = @{$o->{users} || []};
+    my %done;
     foreach (@l) {
-	next if !$_->{name} || getpwnam($_->{name});
+	next if !$_->{name} || getpwnam($_->{name}) || $done{$_->{name}};
 
 	my $u = $_->{uid} || ($_->{oldu} = (stat("$p$_->{home}"))[4]);
 	my $g = $_->{gid} || ($_->{oldg} = (stat("$p$_->{home}"))[5]);
@@ -311,6 +312,7 @@ sub addUser($) {
 	$_->{uid} = $u;
 	$_->{gid} = $g;
 	$_{pw} ||= $_->{password} && install_any::crypt($_->{password});
+	$done{$_->{name}} = 1;
     }
     my @passwd = cat_("$p/etc/passwd");;
 

@@ -544,8 +544,7 @@ sub setRootPassword($) {
 
     return if $o->{security} < 1 && !$clicked;
 
-    $o->{security} < 1 or 
-      $o->ask_from_entries_ref([_("Set root password"), _("Ok"), _("No password")],
+    $o->ask_from_entries_ref([_("Set root password"), _("Ok"), _("No password")],
 			 _("Set root password"),
 			 [_("Password:"), _("Password (again):"), $o->{installClass} eq "server" || $::expert ? (_("Use shadow file"), _("Use MD5 passwords")) : (), $::beginner ? () : _("Use NIS") ],
 			 [{ val => \$sup->{password},  hidden => 1 },
@@ -585,7 +584,7 @@ sub addUser($) {
 
     if ($o->{security} < 2 && !$clicked || $o->ask_from_entries_ref(
         [ _("Add user"), _("Accept user"), _("Done") ],
-        _("Enter a user\n%s", $o->{users} ? _("(already added %s)", join(", ", map { $_->{realname} } @{$o->{users}})) : ''),
+        _("Enter a user\n%s", $o->{users} ? _("(already added %s)", join(", ", map { $_->{realname} || $_->{name} } @{$o->{users}})) : ''),
         [ _("Real name"), _("User name"), $o->{security} < 2 ? () : (_("Password"), _("Password (again)")), $::beginner ? () : _("Shell") ],
         [ \$u->{realname}, \$u->{name},
 	  {val => \$u->{password}, hidden => 1}, {val => \$u->{password2}, hidden => 1},
@@ -601,6 +600,7 @@ sub addUser($) {
 	    #(length $u->{password} < 6) and $o->ask_warn('', _("This password is too simple")), return (1,2);
 	    $u->{name} or $o->ask_warn('', _("Please give a user name")), return (1,0);
 	    $u->{name} =~ /^[a-z0-9_-]+$/ or $o->ask_warn('', _("The user name must contain only lower cased letters, numbers, `-' and `_'")), return (1,0);
+	    member($u->{name}, map { $_->{name} } @{$u->{users}}) and $o->ask_warn('', _("This user name is already added")), return (1,0);
 	    return 0;
 	},
     )) {
@@ -696,7 +696,7 @@ _("Restrict command line options") => { val => \$b->{restricted}, type => "bool"
     }
 
     until ($::beginner && $more <= 1) {
-	my $c = $o->ask_from_list_('', 
+	my $c = $o->ask_from_list_([''], 
 _("Here are the following entries in LILO.
 You can add some more or change the existent ones."),
 		[ (sort @{[map_each { "$::b->{label} ($::a)" . ($b->{default} eq $::b->{label} && "  *") } %{$b->{entries}}]}), __("Add"), __("Done") ],
@@ -802,6 +802,7 @@ sub miscellaneous {
         complete => sub {
 	    $u->{http_proxy} =~ m,^($|http://), or $o->ask_warn('', _("Proxy should be http://...")), return 1,3;
 	    $u->{ftp_proxy} =~ m,^($|ftp://), or $o->ask_warn('', _("Proxy should be ftp://...")), return 1,4;
+	    $u->{memsize} =~ s/^(\d+)M?$/$1M/ or $o->ask_warn('', _("Give the ram size in Mb")), return 1,6;
 	    0;
 	}
     ) || return;
@@ -907,7 +908,7 @@ sub load_thiskind {
 #------------------------------------------------------------------------------
 sub setup_thiskind {
     my ($o, $type, $auto, $at_least_one) = @_;
-    my @l = $o->load_thiskind($type) unless $::expert && $o->ask_yesorno('', _("Skip %s PCI probing", $type), 1);
+    my @l = $o->load_thiskind($type) unless $::expert && !$o->ask_yesorno('', _("Try to find PCI devices?"), 1);
     return if $auto && (@l || !$at_least_one);
     while (1) {
 	my $msg = @l ?
