@@ -30,6 +30,7 @@
 #include "thirdparty.h"
 
 #define THIRDPARTY_MOUNT_LOCATION "/tmp/thirdparty"
+#define THIRDPARTY_DIRECTORY "/install/thirdparty"
 
 static enum return_type third_party_choose_device(char ** device)
 {
@@ -168,7 +169,7 @@ static enum return_type thirdparty_mount_device(char * device)
 }
 
 
-static enum return_type thirdparty_prompt_modules(char ** modules_list)
+static enum return_type thirdparty_prompt_modules(const char *modules_location, char ** modules_list)
 {
 	enum return_type results;
 	char final_name[500];
@@ -182,7 +183,7 @@ static enum return_type thirdparty_prompt_modules(char ** modules_list)
 		if (results != RETURN_OK)
 			break;
 
-		sprintf(final_name, "%s/%s", THIRDPARTY_MOUNT_LOCATION, module_name);
+		sprintf(final_name, "%s/%s", modules_location, module_name);
 
 		results = ask_from_entries("Please enter the options:", questions, &answers, 24, NULL);
 		if (results != RETURN_OK)
@@ -198,7 +199,7 @@ static enum return_type thirdparty_prompt_modules(char ** modules_list)
 }
 
 
-static enum return_type thirdparty_autoload_modules(char ** modules_list, FILE *f)
+static enum return_type thirdparty_autoload_modules(const char *modules_location, char ** modules_list, FILE *f)
 {
 	while (1) {
 		char final_name[500];
@@ -221,7 +222,7 @@ static enum return_type thirdparty_autoload_modules(char ** modules_list, FILE *
 		log_message("updatemodules: (%s) (%s)", module, options);
 		while (entry && *entry) {
 			if (!strncmp(*entry, module, strlen(module)) && (*entry)[strlen(module)] == '.') {
-				sprintf(final_name, "%s/%s", THIRDPARTY_MOUNT_LOCATION, *entry);
+				sprintf(final_name, "%s/%s", modules_location, *entry);
 				if (insmod_local_file(final_name, options)) {
 					log_message("\t%s (floppy): failed", *entry);
 					stg1_error_message("Insmod %s (floppy) failed.", *entry);
@@ -247,11 +248,12 @@ static enum return_type thirdparty_autoload_modules(char ** modules_list, FILE *
 void thirdparty_load_modules(void)
 {
 	enum return_type results;
-	char * device = NULL;
+	char * device, * modules_location;
 	char ** modules_list;
 	char toload_name[500];
 	FILE * f;
 
+	device = NULL;
 	if (IS_AUTOMATIC) {
 		device = get_auto_value("thirdparty");
 		log_message("third party : trying automatic device %s", device);
@@ -269,7 +271,16 @@ void thirdparty_load_modules(void)
 
 	log_message("third party : using device %s", device);
 
-	modules_list = list_directory(THIRDPARTY_MOUNT_LOCATION);
+	/* look first in the specific third-party directory */
+	modules_location = THIRDPARTY_MOUNT_LOCATION THIRDPARTY_DIRECTORY;
+	modules_list = list_directory(modules_location);
+	if (!modules_list || !modules_list[0]) {
+		/* if it's empty, look in the root of selected device */
+		modules_location = THIRDPARTY_MOUNT_LOCATION;
+		modules_list = list_directory(modules_location);
+	}
+
+	log_message("third party: using modules location %s", modules_location);
 
 	if (!modules_list || !*modules_list) {
 		stg1_error_message("No modules found on disk.");
@@ -277,15 +288,15 @@ void thirdparty_load_modules(void)
 		return thirdparty_load_modules();
 	}
 
-	sprintf(toload_name, "%s/to_load", THIRDPARTY_MOUNT_LOCATION);
+	sprintf(toload_name, "%s/to_load", modules_location);
 	f = fopen(toload_name, "rb");
 	if (f) {
-		results = thirdparty_autoload_modules(modules_list, f);
+		results = thirdparty_autoload_modules(modules_location, modules_list, f);
 	} else {
 		if (IS_AUTOMATIC)
 			stg1_error_message("I can't find a \"to_load\" file. Please select the modules manually.");
 		log_message("No \"to_load\" file, prompting for modules");
-		results = thirdparty_prompt_modules(modules_list);
+		results = thirdparty_prompt_modules(modules_location, modules_list);
 	}
 	umount(THIRDPARTY_MOUNT_LOCATION);
 
