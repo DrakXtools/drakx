@@ -23,5 +23,6 @@
 #define _DISK_H_
 
 enum return_type disk_prepare(void);
+int process_recovery(void);
 
 #endif

@@ -147,32 +147,17 @@ static char * disk_extract_list_directory(char * direct)
 	return strdup(tmp);
 }
 
-static enum return_type try_with_device(char *dev_name)
+static int list_partitions(char * dev_name, char ** parts, char ** comments)
 {
-	char * questions_location[] = { "Directory or ISO image", NULL };
-	char * questions_location_auto[] = { "directory", NULL };
-	static char ** answers_location = NULL;
-	char device_fullname[50];
-	char location_full[500];
-
-	char * disk_own_mount = "/tmp/hdimage";
-
 	int major, minor, blocks;
 	char name[100];
-
-	char buf[512];
 	FILE * f;
-	char * parts[50];
-	char * parts_comments[50];
-	struct stat statbuf;
 	int i = 0;
-	enum return_type results;
-	char * choice;
+	char buf[512];
 
 	if (!(f = fopen("/proc/partitions", "rb")) || !fgets(buf, sizeof(buf), f) || !fgets(buf, sizeof(buf), f)) {
 		log_perror(dev_name);
-		stg1_error_message("Could not read partitions information.");
-		return RETURN_ERROR;
+                return 1;
 	}
 
 	while (fgets(buf, sizeof(buf), f)) {
@@ -181,17 +166,55 @@ static enum return_type try_with_device(char *dev_name)
 		if ((strstr(name, dev_name) == name) && (blocks > 1) && (name[strlen(dev_name)] != '\0')) {
 			const char * partition_type = detect_partition_type(name);
 			parts[i] = strdup(name);
-			parts_comments[i] = (char *) malloc(sizeof(char) * 100);
-			sprintf(parts_comments[i], "size: %d Mbytes", blocks >> 10);
+			comments[i] = (char *) malloc(sizeof(char) * 100);
+			sprintf(comments[i], "size: %d Mbytes", blocks >> 10);
 			if (partition_type) {
-				strcat(parts_comments[i], ", type: ");
-				strcat(parts_comments[i], partition_type);
+				strcat(comments[i], ", type: ");
+				strcat(comments[i], partition_type);
 			}
 			i++;
 		}
 	}
 	parts[i] = NULL;
 	fclose(f);
+
+        return 0;
+}
+
+static int try_mount(char * dev, char * location)
+{
+	char device_fullname[50];
+	strcpy(device_fullname, "/dev/");
+	strcat(device_fullname, dev);
+
+	if (my_mount(device_fullname, location, "ext2", 0) == -1 &&
+	    my_mount(device_fullname, location, "vfat", 0) == -1 &&
+	    my_mount(device_fullname, location, "reiserfs", 0) == -1) {
+                return 1;
+        }
+
+        return 0;
+}
+
+static enum return_type try_with_device(char *dev_name)
+{
+	char * questions_location[] = { "Directory or ISO image", NULL };
+	char * questions_location_auto[] = { "directory", NULL };
+	static char ** answers_location = NULL;
+	char location_full[500];
+
+	char * disk_own_mount = "/tmp/hdimage";
+
+	char * parts[50];
+	char * parts_comments[50];
+	struct stat statbuf;
+	enum return_type results;
+	char * choice;
+
+        if (list_partitions(dev_name, parts, parts_comments)) {
+		stg1_error_message("Could not read partitions information.");
+		return RETURN_ERROR;
+        }
 
 	if (parts[0] == NULL) {
 		stg1_error_message("No partitions found.");
@@ -203,12 +226,7 @@ static enum return_type try_with_device(char *dev_name)
 	if (results != RETURN_OK)
 		return results;
 
-	strcpy(device_fullname, "/dev/");
-	strcat(device_fullname, choice);
-
-	if (my_mount(device_fullname, disk_own_mount, "ext2", 0) == -1 &&
-	    my_mount(device_fullname, disk_own_mount, "vfat", 0) == -1 &&
-	    my_mount(device_fullname, disk_own_mount, "reiserfs", 0) == -1) {
+        if (try_mount(choice, disk_own_mount)) {
 		stg1_error_message("I can't find a valid filesystem (tried: ext2, vfat, reiserfs).");
 		return try_with_device(dev_name);
 	}
@@ -292,22 +310,32 @@ static enum return_type try_with_device(char *dev_name)
 	return RETURN_OK;
 }
 
-enum return_type disk_prepare(void)
+static int get_disks(char *** names, char *** models)
 {
-	char ** medias, ** ptr, ** medias_models;
-	char * choice;
-	int i, count = 0;
-	enum return_type results;
+	char ** ptr;
+	int count = 0;
 
 	my_insmod("sd_mod", ANY_DRIVER_TYPE, NULL);
 	
-	get_medias(DISK, &medias, &medias_models, BUS_ANY);
+	get_medias(DISK, names, models, BUS_ANY);
 
-	ptr = medias;
+	ptr = *names;
 	while (ptr && *ptr) {
 		count++;
 		ptr++;
 	}
+
+        return count;
+}
+
+enum return_type disk_prepare(void)
+{
+	char ** medias, ** medias_models;
+	char * choice;
+	int i;
+	enum return_type results;
+
+        int count = get_disks(&medias, &medias_models);
 
 	if (count == 0) {
 		stg1_error_message("No DISK drive found.");
@@ -340,4 +368,78 @@ enum return_type disk_prepare(void)
 	if (i == RETURN_BACK)
 		return RETURN_BACK;
 	return disk_prepare();
+}
+
+int
+process_recovery(void)
+{
+	char ** medias, ** medias_models;
+        int count, i;
+
+        log_message("trying the automatic recovery of oem installs");
+
+        count = get_disks(&medias, &medias_models);
+
+        for (i=0; i<count; i++) {
+                char * parts[50];
+                char * parts_comments[50];
+                char ** part, ** comment;
+                log_message("examining disk %s (%s)", medias[i], medias_models[i]);
+
+                if (list_partitions(medias[i], parts, parts_comments)) {
+                        log_message("could not read partitions information, bailing out");
+                        return 0;
+                }
+
+                part = parts;
+                comment = parts_comments;
+                while (part && *part) {
+                        char * disk_own_mount = "/tmp/hdimage";
+                        log_message("examining partition %s (%s)", *part, *comment);
+                        if (try_mount(*part, disk_own_mount))
+                                log_message("couldn't mount it");
+                        else {
+                                FILE *f;
+                                char buf[500];
+                                char location[500];
+                                strcpy(location, disk_own_mount);
+                                strcat(location, "/VERSION");
+                                if (!(f = fopen(location, "rb")) || !fgets(buf, sizeof(buf), f)) {
+                                        log_perror("could not fopen or fgets VERSION");
+                                        goto examine_next_part;
+                                }
+                                fclose(f);
+                                if (!strstr(buf, VERSION)) {
+                                        log_message("mismatching VERSION contents");
+                                        goto examine_next_part;
+                                }
+                                strcpy(location, disk_own_mount);
+                                strcat(location, "/Mandrake/oem_patch.pl");
+                                if (access(location, R_OK)) {
+                                        log_message("Mandrake/oem_patch.pl is not here");
+                                        goto examine_next_part;
+                                }
+
+                                log_message("going on with a recovery on disk %s partition %s", medias[i], *part);
+
+                                symlink(disk_own_mount, IMAGE_LOCATION);
+                                if (load_ramdisk() != RETURN_OK) {
+                                        log_perror("loading ramdisk failed");
+                                        umount(disk_own_mount);
+                                        return 0;
+                                }
+
+                                umount(disk_own_mount);
+                                method_name = strdup("disk");
+                                return 1;
+                        }
+
+                examine_next_part:
+                        umount(disk_own_mount);
+                        part++;
+                        comment++;
+                }
+        }
+
+        return 0;
 }

@@ -418,7 +418,12 @@ int main(int argc __attribute__ ((unused)), char **argv __attribute__ ((unused))
 				   "your own risk. Alternatively, you may reboot your system now.");
 	}
 
-	ret = method_select_and_prepare();
+#ifndef DISABLE_DISK
+        if (IS_RECOVERY && streq(get_auto_value("method"), "cdrom") && process_recovery())
+                ret = RETURN_OK;
+        else 
+#endif
+                ret = method_select_and_prepare();
 
 	finish_frontend();
 	close_log();
