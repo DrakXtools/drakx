@@ -267,10 +267,10 @@ foreach (@harddrake::data::tree) {
         if ($_->{bus} eq 'ide') {
             $_->{channel} = $_->{channel} ? N("secondary") : N("primary");
             delete $_->{info};
-        } elsif ($_->{bus} !~ /USB|PCI/) {
+        } elsif ($_->{bus} && $_->{bus} !~ /USB|PCI/) {
             # SCSI detection incoherency:
             my $i = $_;
-            $_->{bus_location} = join ':', map { sprintf("%lx", $i->{$_}) } qw(bus id);
+            $_->{bus_location} = join ':', map { sprintf("%lx", $i->{$_}) } qw(channel id lun);
         }
         harddrake::data::set_removable_configurator($Ident, $_, \$configurator);
         if ($Ident eq "AUDIO") {
