@@ -768,7 +768,8 @@ sub setupBootloaderBefore {
 				    !detect_devices::matching_desc('SiS.*540') &&
 				    !detect_devices::matching_desc('SiS.*6C?326') &&
 				    !detect_devices::matching_desc('SiS.*6C?236') &&
-				    !detect_devices::matching_desc('Voodoo [35]|Voodoo Banshee') #- 3d acceleration seems to bug in fb mode
+				    !detect_devices::matching_desc('Voodoo [35]|Voodoo Banshee') && #- 3d acceleration seems to bug in fb mode
+				    !detect_devices::matching_desc('8281[05].* CGC') #- i810 now have FB support during install but we disable it afterwards
 				   );
 	my $force_vga = $o->{allowFB} && (detect_devices::matching_desc('SiS.*630') #- SiS 630 need frame buffer.
 					 );
