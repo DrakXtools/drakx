@@ -580,6 +580,7 @@ sub installPackages {
     $w->sync;
     $msg->set(_("Please wait, preparing installation"));
     gtkset_mousecursor_normal($cancel->window);
+    $details->hide if !@install_any::advertising_images;
 
     my $advertize = sub {
 	@install_any::advertising_images or return;
