@@ -175,7 +175,16 @@ sub merge_info_from_mtab {
 
 sub merge_info_from_fstab {
     my ($fstab, $prefix, $uniq) = @_;
-    my @l = grep { !($uniq && fsedit::mntpoint2part($_->{mntpoint}, $fstab)) } read_fstab($prefix, "/etc/fstab", 'all_options');
+
+    my @l = grep { 
+	if ($uniq) {
+	    my $part = fsedit::mntpoint2part($_->{mntpoint}, $fstab);
+	    !$part || fsedit::is_same_hd($part, $_); #- keep it only if it is the mountpoint AND the same device
+	} else {
+	    1;
+	}
+    } read_fstab($prefix, "/etc/fstab", 'all_options');
+
     merge_fstabs($fstab, @l);
 }
 
