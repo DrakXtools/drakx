@@ -582,41 +582,42 @@ sub install_urpmi {
     #- rare case where urpmi cannot be installed (no hd install path).
     $method eq 'disk' && !hdInstallPath() and return;
 
-    my @cfg = map {
+    my @cfg;
+    foreach (sort { $a->{medium} <=> $b->{medium} } values %$mediums) {
 	my $name = $_->{fakemedium};
+	if ($_->{ignored} || $_->{selected}) {
+	    local *LIST;
+	    my $mask = umask 077;
+	    open LIST, ">$prefix/var/lib/urpmi/list.$name" or log::l("failed to write list.$name");
+	    umask $mask;
 
-	local *LIST;
-	my $mask = umask 077;
-	open LIST, ">$prefix/var/lib/urpmi/list.$name" or log::l("failed to write list.$name");
-	umask $mask;
+	    my $dir = ($_->{prefix} || ${{ nfs => "file://mnt/nfs", 
+					   disk => "file:/" . hdInstallPath(),
+					   ftp => $ENV{URLPREFIX},
+					   http => $ENV{URLPREFIX},
+					   cdrom => "removable://mnt/cdrom" }}{$method}) . "/$_->{rpmsdir}";
 
-	my $dir = ($_->{prefix} || ${{ nfs => "file://mnt/nfs", 
-				       disk => "file:/" . hdInstallPath(),
-				       ftp => $ENV{URLPREFIX},
-				       http => $ENV{URLPREFIX},
-				       cdrom => "removable://mnt/cdrom" }}{$method}) . "/$_->{rpmsdir}";
+	    #- build list file using internal data, synthesis file should exists.
+	    #- WARNING this method of build only works because synthesis (or hdlist)
+	    #-         has been read.
+	    foreach (@{$packages->{depslist}}[$_->{start} .. $_->{end}]) {
+		print LIST "$dir/".$_->filename."\n";
+	    }
+	    close LIST;
 
-	#- build list file using internal data, synthesis file should exists.
-	#- WARNING this method of build only works because synthesis (or hdlist)
-	#-         has been read.
-	foreach (@{$packages->{depslist}}[$_->{start} .. $_->{end}]) {
-	    print LIST "$dir/".$_->filename."\n";
-	}
-	close LIST;
+	    #- build synthesis file if there are still not existing (ie not copied from mirror).
+	    if (-s "$prefix/var/lib/urpmi/synthesis.hdlist.$name.cz" <= 32) {
+		unlink "$prefix/var/lib/urpmi/synthesis.hdlist.$name.cz";
+		run_program::rooted($prefix, "parsehdlist", ">", "/var/lib/urpmi/synthesis.hdlist.$name",
+				    "--synthesis", "/var/lib/urpmi/hdlist.$name.cz");
+		run_program::rooted($prefix, "gzip", "-S", ".cz", "/var/lib/urpmi/synthesis.hdlist.$name");
+	    }
 
-	#- build synthesis file if there are still not existing (ie not copied from mirror).
-	if (-s "$prefix/var/lib/urpmi/synthesis.hdlist.$name.cz" <= 32) {
-	    unlink "$prefix/var/lib/urpmi/synthesis.hdlist.$name.cz";
-	    run_program::rooted($prefix, "parsehdlist", ">", "/var/lib/urpmi/synthesis.hdlist.$name",
-				"--synthesis", "/var/lib/urpmi/hdlist.$name.cz");
-	    run_program::rooted($prefix, "gzip", "-S", ".cz", "/var/lib/urpmi/synthesis.hdlist.$name");
-	}
+	    my ($qname, $qdir) = ($name, $dir);
+	    $qname =~ s/(\s)/\\$1/g; $qdir =~ s/(\s)/\\$1/g;
 
-	my ($qname, $qdir) = ($name, $dir);
-	$qname =~ s/(\s)/\\$1/g; $qdir =~ s/(\s)/\\$1/g;
-
-	#- output new urpmi.cfg format here.
-	"$qname " . ($dir !~ /^(ftp|http)/ && $qdir) . " {
+	    #- output new urpmi.cfg format here.
+	    push @cfg, "$qname " . ($dir !~ /^(ftp|http)/ && $qdir) . " {
   hdlist: hdlist.$name.cz
   with_hdlist: ../base/" . ($_->{update} ? "hdlist.cz" : $_->{hdlist}) . "
   list: list.$name" . ($dir =~ /removable:/ && "
@@ -625,8 +626,12 @@ sub install_urpmi {
 }
 
 ";
-	#- select only ignored (ie noauto flag) media and selected one.
-    } sort { $a->{medium} <=> $b->{medium} } grep { $_->{ignored} || $_->{selected} } values %$mediums;
+	} else {
+	    #- remove not selected media by removing hdlist and synthesis files copied.
+	    unlink "/var/lib/urpmi/hdlist.$name.cz";
+	    unlink "/var/lib/urpmi/synthesis.hdlist.$name.cz";
+	}
+    }
     eval { output "$prefix/etc/urpmi/urpmi.cfg", @cfg };
 }
 
