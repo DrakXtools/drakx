@@ -123,7 +123,7 @@ sub readProcPartitions {
 
 #- get all normal partition including special ones as found on sparc.
 sub get_fstab {
-    map { partition_table::get_normal_parts($_) } @_
+    loopback::loopbacks(@_), map { partition_table::get_normal_parts($_) } @_
 }
 
 #- get normal partition that should be visible for working on.
