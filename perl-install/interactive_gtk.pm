@@ -151,6 +151,8 @@ sub ask_from_entries_refW {
 	   my $c = chr $e->{keyval};
 	   if ($c eq "\x8d")
 	     {
+		 #don't know why it works, i believe that 
+		 #i must say before &$go_to_next, but with it doen't work HACK!
 		 $w->signal_emit_stop("key_press_event");
 	     }
 	    ;
