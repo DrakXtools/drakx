@@ -287,6 +287,7 @@ sub create_scrolled_window {
     }
     $o_viewport_shadow and gtkset_shadow_type($w->child, $o_viewport_shadow);
     $W->can('set_focus_vadjustment') and $W->set_focus_vadjustment($w->get_vadjustment);
+    $W->set_left_margin(6) if ref($W) =~ /Gtk2::TextView/;
     $W->show;
     if (ref($W) =~ /Gtk2::TextView|Gtk2::TreeView/) {
     	gtkadd(gtkset_shadow_type(Gtk2::Frame->new, 'in'), $w)
