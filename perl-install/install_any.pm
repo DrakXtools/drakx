@@ -643,7 +643,7 @@ Please insert the Cd-Rom labelled \"%s\" in your drive and press Ok when done.",
     }
     #- now the install will continue as 'disk'
     $o->{method} = 'disk';
-    *any::hdInstallPath = sub () { "/var/ftp/pub/Mandrakelinux" };
+    our $copied_rpms_on_disk = 1;
 }
 
 sub set_rpmsrate_default_category_flags {
@@ -851,7 +851,8 @@ sub install_urpmi {
     my $hdInstallPath = any::hdInstallPath();
 
     #- rare case where urpmi cannot be installed (no hd install path).
-    $method eq 'disk' && !$hdInstallPath and return;
+    our $copied_rpms_on_disk;
+    $method eq 'disk' && !$hdInstallPath && !$copied_rpms_on_disk and return;
 
     log::l("install_urpmi $method");
     #- clean to avoid opening twice the rpm db.
@@ -875,7 +876,8 @@ sub install_urpmi {
 	my $name = $_->{fakemedium};
 	if ($_->{ignored} || $_->{selected}) {
 	    my $curmethod = $_->{method} || $::o->{method};
-	    my $dir = ($_->{prefix} || ${{ nfs => "file://mnt/nfs", 
+	    my $dir = (($copied_rpms_on_disk ? "/var/ftp/pub/Mandrakelinux" : '')
+		|| $_->{prefix} || ${{ nfs => "file://mnt/nfs", 
 					   disk => "file:/" . $hdInstallPath,
 					   ftp => $ENV{URLPREFIX},
 					   http => $ENV{URLPREFIX},
