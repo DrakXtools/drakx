@@ -154,7 +154,7 @@ sub selectInstallClass1 {
     my $w = my_gtk->new('');
     my $focused;
     gtkadd($w->{window},
-	   gtkpack($o->create_box_with_title(_("Please, choose one of the following classes of installation:")),
+	   gtkpack($w->create_box_with_title(_("Please, choose one of the following classes of installation:")),
 		   (my @radios = gtkradio(@$l, $def)),
 		   gtkadd(create_hbox(),
 			  map { my $v = $_; 
@@ -249,6 +249,64 @@ a percentage of %d%% will install as many packages as possible.", $percentage, $
     $spin->grab_focus();
     $w->main and $val + 1; #- add a single byte (hack?) to make selection of 0 bytes ok.
 }
+
+sub reallyChooseGroups {
+    my ($o, $size_to_display, $individual, $val) = @_;
+
+    my $w = my_gtk->new('');
+    my $tips = new Gtk::Tooltips;
+
+    my ($path);
+    my $w_size = new Gtk::Label(&$size_to_display);
+    gtkadd($w->{window},
+	   gtkpack_($w->create_box_with_title(_("Package Group Selection")),
+		   0, $w_size,
+		   0, '',
+		   1, createScrolledWindow(gtkpack(new Gtk::VBox(0,0),
+		     map {
+			 my $e = $_;
+			 my $text = translate($o->{compssUsers}{$e}{label});
+			 my $help = translate($o->{compssUsers}{$e}{descr});
+
+			 my $file = do {
+			     my $f = "/usr/share/icons/" . ($o->{compssUsers}{$e}{icons} || 'default');
+			     -e "$f.png" or $f .= "_section";
+			     -e "$f.png" or $f = '/usr/share/icons/default_section';
+			     "$f.png";
+			 };
+			 my $check = Gtk::CheckButton->new($text);
+			 $check->set_active($val->{$e});
+			 $check->signal_connect(clicked => sub { 
+			     $val->{$e} = $check->get_active;
+			     print "Size is now ", &$size_to_display, "\n";
+			     $w_size->set(&$size_to_display);
+			 });
+			 $tips->set_tip($check, $help);
+
+			 my $old = $path;
+			 $path = $o->{compssUsers}{$e}{path};
+			 (
+			  if_($old ne $path, new Gtk::Label($path)),
+			  gtkpack_(new Gtk::HBox(0,0), 0, gtkpng($file), 1, $check),
+			 )
+		     } @{$o->{compssUsersSorted}})),
+		    0, gtkadd(create_hbox(1), 
+			   gtksignal_connect(new Gtk::Button(_("Ok")), clicked => sub { Gtk->main_quit }),
+			   if_($individual, do {
+			       my $check = Gtk::CheckButton->new(_("Individual package selection"));
+			       $check->set_active($$individual);
+			       $check->signal_connect(clicked => sub { $$individual = $check->get_active });
+			       $check;
+			   }),
+		    ),
+		   ),
+	  );
+    $w->{rwindow}->set_default_size($::windowwidth * 0.8, $::windowheight * 0.8);
+    $w->main;
+    1;    
+}
+
+
 sub choosePackagesTree {
     my ($o, $packages) = @_;
 
