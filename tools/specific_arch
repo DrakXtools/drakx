@@ -5,5 +5,5 @@ use MDK::Common;
 print join(' ', map {
 		      my $arch = arch();
 		      $arch = $compat_arch{$arch} while $arch && !-e "$_.$arch";
-		      -e "$_.$arch" ? "$_.$arch" : $_;
+		      -e "$_.$arch" ? "$_.$arch" : ();
 		    } @ARGV), "\n";
