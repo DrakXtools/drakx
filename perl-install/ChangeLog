@@ -1,3 +1,35 @@
+2004/08/03  Olivier Blin <oblin at mandrakesoft.com>
+
+	* share/fonts.tar.bz2: add missing fonts.conf (with Kacst-Qr entries)
+
+2004/08/03  Pixel  <pixel at mandrakesoft.com>
+
+	* install_steps_interactive.pm: authentication::kind2description() has
+	changed and its name is missleading :-(
+	keeping it for now and adapt install_steps_interactive::setRootPassword
+	along what's done in drakauth
+	authentication::kind2description() has changed and its name is
+	missleading :-(
+	keeping it for now and adapt install_steps_interactive::setRootPassword
+	along what's done in drakauth
+
+2004/08/03  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* standalone/drakups (add_device_wizard) fix string (Joe Brower)
+
+2004/08/02  Olivier Blin <oblin at mandrakesoft.com>
+
+	* Makefile: enable ar and fa locales since an arabic font is now available
+	in install
+
+2004/08/02  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/fonts.tar.bz2: added arabic and bengali fonts
+
+2004/08/02  Pixel  <pixel at mandrakesoft.com>
+
+	* fs/format.pm: make perl_checker happy
+
 2004/08/02  Olivier Blin <oblin at mandrakesoft.com>
 
 	* network/adsl.pm: in sagem start section, modprobe eagle-usb and do not
@@ -33729,7 +33761,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.939 2004/08/02 08:08:17 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.940 2004/08/02 11:07:49 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
