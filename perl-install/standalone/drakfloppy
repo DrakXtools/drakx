@@ -42,15 +42,15 @@ Gtk->set_locale;
 #         (This version is now UTF8 compliant - Sg 2001-08-18)
 #-------------------------------------------------------------
 
-sub _ {
-    my $s = shift @_; my $t = translate($s);
-    sprintf $t, @_;
-}
+#sub _ {
+#    my $s = shift @_; my $t = translate($s);
+#    sprintf $t, @_;
+#}
 
-sub translate {
-    my ($s) = @_;
-    $s ? c::dgettext('libDrakX', $s) : '';
-}
+#sub translate {
+#    my ($s) = @_;
+#    $s ? c::dgettext('libDrakX', $s) : '';
+#}
 
 if ($::isEmbedded) {
   print "EMBED\n";
