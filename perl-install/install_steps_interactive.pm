@@ -1067,7 +1067,7 @@ sub generateAutoInstFloppy {
 
     my $dev = devices::make($floppy);
 
-    my $image = $o->{pcmcia} ? "pcmcia" :
+    my $image = cat_("/proc/cmdline") =~ /pcmcia/ ? "pcmcia" :
       ${{ hd => 'hd', cdrom => 'cdrom', ftp => 'network', nfs => 'network', http => 'network' }}{$o->{method}};
 
     if (arch() =~ /sparc/) {
