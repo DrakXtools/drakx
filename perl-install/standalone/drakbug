@@ -77,7 +77,7 @@ if ($mandrake_release =~ /(official|community)/i) {
     $bugzilla = 'http://qa.mandrakesoft.com/enter_bug.cgi';
     $wizard_name = "Bugzilla wizard";
 }
-$upload_info = N("To submit a bug report, click on the button report.\nThis will open  a web browser window on %s\n where you'll find a form to fill in.  The information displayed above will be \ntransferred to that server.", $wizard_name);
+$upload_info = N("To submit a bug report, click on the report button.\nThis will open  a web browser window on %s\n where you'll find a form to fill in.  The information displayed above will be \ntransferred to that server.", $wizard_name);
 
 if ($stable_release == 0) {
     $table = create_packtable({ col_spacings => 5, row_spacings => 10 },
