@@ -213,18 +213,18 @@ $global_vbox->pack_start ($x_main_frame, 1, 1, 0);
 
 #deush : hability to choose the runlevel.
 my $runl_hbox = new Gtk::HBox;
-my $runl_button5 = new Gtk::RadioButton ("5");
-my $runl_button1 = new Gtk::RadioButton ("1"), $runl_button5;
-$runl_hbox->pack_start($runl_button1, 0, 0, 0);
-my $runl_button2 = new Gtk::RadioButton ("2"), $runl_button5;
-$runl_hbox->pack_start($runl_button2, 0, 0, 0);
-my $runl_button3 = new Gtk::RadioButton ("3"), $runl_button5;
-$runl_hbox->pack_start($runl_button3, 0, 0, 0);
-my $runl_button4 = new Gtk::RadioButton ("4"), $runl_button5;
-$runl_hbox->pack_start($runl_button4, 0, 0, 0);
+my $runl_button5 = new Gtk::RadioButton ("level 5");
+my $runl_button1 = new Gtk::RadioButton ("level 1", $runl_button5);
+$runl_hbox->add($runl_button1);
+my $runl_button2 = new Gtk::RadioButton ("level 2", $runl_button5);
+$runl_hbox->add($runl_button2);
+my $runl_button3 = new Gtk::RadioButton ("level 3", $runl_button5);
+$runl_hbox->add($runl_button3);
+my $runl_button4 = new Gtk::RadioButton ("level 4", $runl_button5);
+$runl_hbox->add($runl_button4);
 
-$runl_hbox->pack_start($runl_button5, 0, 0, 0);
-
+$runl_hbox->add($runl_button5);
+#$runl_hbox->set_sensitive($x_mode);
 my $runlevel_frame = new Gtk::Frame _("Default Runlevel");
 $runlevel_frame->add($runl_hbox);
 $global_vbox->pack_start ($runlevel_frame, 0, 0, 0);
