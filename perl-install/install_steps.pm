@@ -729,8 +729,10 @@ sub summaryAfter {
     my ($o) = @_;
 
     require bootloader;
-    bootloader::get_append($o->{bootloader}, 'acpi') ne 'off' && ne 'ht' && !(-x "$::prefix/usr/bin/acpi" && -x "$::prefix/usr/sbin/acpid")
-	and $o->do_pkgs->install(qw(acpi acpid));
+    my $acpi = bootloader::get_append($o->{bootloader}, 'acpi');
+    if ($acpi ne 'off' && $acpi ne 'ht' && !(-x "$::prefix/usr/bin/acpi" && -x "$::prefix/usr/sbin/acpid")) {
+	$o->do_pkgs->install(qw(acpi acpid));
+    }
 }
 
 #------------------------------------------------------------------------------
