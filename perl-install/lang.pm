@@ -564,13 +564,8 @@ sub pack_langs {
     $s;
 }
 
-sub read {
-    my ($prefix, $user_only) = @_;
-    my ($f1, $f2) = ("$prefix$ENV{HOME}/.i18n", "$prefix/etc/sysconfig/i18n");
-    my %h = getVarsFromSh($user_only && -e $f1 ? $f1 : $f2);
-    my $locale;
-    my $locale_lang = $h{LC_MESSAGES} || 'en_US';
-    my $locale_country = $h{LC_MONETARY} || 'en_US';
+sub system_locales_to_ourlocale {
+    my ($locale_lang, $locale_country) = @_;
     if (member($locale_lang, list_langs())) {
 	#- special lang's such as en_US pt_BR
 	$locale->{lang} = $locale_lang;
@@ -583,6 +578,13 @@ sub read {
     $locale->{lang} ||= 'en_US';
     $locale->{country} ||= 'US';
     $locale;
+}
+
+sub read {
+    my ($prefix, $user_only) = @_;
+    my ($f1, $f2) = ("$prefix$ENV{HOME}/.i18n", "$prefix/etc/sysconfig/i18n");
+    my %h = getVarsFromSh($user_only && -e $f1 ? $f1 : $f2);
+    system_locales_to_ourlocale($h{LC_MESSAGES} || 'en_US', $h{LC_MONETARY} || 'en_US');
 }
 
 sub write_langs {

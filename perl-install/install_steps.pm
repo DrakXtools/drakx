@@ -88,6 +88,10 @@ sub set_help { 1 }
 #------------------------------------------------------------------------------
 sub selectLanguage {
     my ($o) = @_;
+
+    #- for auto_install compatibility with old $o->{lang}
+    $o->{locale} = lang::system_locales_to_ourlocale($o->{lang}, $o->{lang}) if $o->{lang} && !ref($o->{locale});
+
     lang::set($o->{locale}{lang}, !$o->isa('interactive::gtk'));
     $o->{locale}{langs} ||= { $o->{locale}{lang} => 1 };
 
