@@ -11,11 +11,15 @@ sub main {
     my ($in, $all_hds, $raw_hd) = @_;
     my %actions = my @actions = actions();
     my $action;
-    while ($action ne 'Done') {
-	$action = $in->ask_from_list_('', 
-					 diskdrake::interactive::format_raw_hd_info($raw_hd), 
-					 [ map { $_->[0] } group_by2 @actions ], 'Done') or return;
-	$actions{$action}->($in, $raw_hd, $all_hds);
+    if ($::auto) {
+        $actions{Done}->($in, $raw_hd, $all_hds);
+    } else {
+        while ($action ne 'Done') {
+            $action = $in->ask_from_list_('', 
+                                          diskdrake::interactive::format_raw_hd_info($raw_hd), 
+                                          [ map { $_->[0] } group_by2 @actions ], 'Done') or return;
+            $actions{$action}->($in, $raw_hd, $all_hds);
+        }
     }
 }
 
