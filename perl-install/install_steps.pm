@@ -295,8 +295,6 @@ sub beforeInstallPackages {
 
     log::l("before install packages, after copy");
     #- some packages need such files for proper installation.
-    any::writeandclean_ldsoconf($o->{prefix});
-    log::l("before install packages, after writing ld.so.conf");
     $::live or fs::write($o->{prefix}, $o->{fstab}, $o->{manualFstab}, $o->{useSupermount});
 
     log::l("before install packages, after adding localhost in hosts");
@@ -407,6 +405,9 @@ Consoles 1,3,4,7 may also contain interesting information";
 
     #- for mandrake_firstime
     touch "$o->{prefix}/var/lock/TMP_1ST";
+
+    any::writeandclean_ldsoconf($o->{prefix});
+    log::l("before install packages, after writing ld.so.conf");
 
     #- remove the nasty acon...
     run_program::rooted($o->{prefix}, "chkconfig", "--del", "acon") unless $ENV{LANGUAGE} =~ /ar/;
