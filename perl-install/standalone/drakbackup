@@ -198,7 +198,7 @@ my @user_list_to_restore2 = ();
 my @data_backuped = ();
 my $box_tail; 
 my $label_tail;
-my @user_list_to_build_on_cd = (); 
+my @list_to_build_on_cd = (); 
 my $restore_path = "/";
 my $restore_other_path = 0;
 my $restore_other_src;
@@ -2368,7 +2368,7 @@ sub find_backup_to_put_on_cd {
 	my $to_put = "  other_data,          (tail: $tail ko, date: 20$user_date2[0], hour: $user_date2[1])";
 	push @data_backuped , $to_put;
     }
-    foreach (grep /^backup_sys/, @list_backup) {
+    foreach (grep /_sys_/, @list_backup) {
 	$sys_backuped = 1;
 	chomp;
 	my $tail  = (split(' ',`du $save_path/$_` ))[0] ;
@@ -2380,7 +2380,7 @@ sub find_backup_to_put_on_cd {
 	my $to_put = "  system,          (tail: $tail ko, date: 20$user_date2[0], hour: $user_date2[1])";
 	push @data_backuped , $to_put;
     }
-    foreach (grep /^backup_user_/, @list_backup) {
+    foreach (grep /user_/, @list_backup) {
 	chomp;
 	my $tail  = (split(' ',`du $save_path/$_` ))[0] ;
 	s/^backup_user_//gi;
@@ -2455,7 +2455,7 @@ sub build_backup_box_progress {
 sub aff_total_tail {
     my @toto = ();
     my $total = 0;
-    push @toto, (split (",", $_))[1]  foreach @user_list_to_build_on_cd;
+    push @toto, (split (",", $_))[1]  foreach @list_to_build_on_cd;
     foreach (@toto) {
 	s/\s+\(tail://gi;
 	s/\s+//gi;
@@ -2469,8 +2469,8 @@ my %check_data_to_backup_cd;
 sub build_backup_cd_select_data {
     my $retore_step_user;
     find_backup_to_put_on_cd();
-    @user_list_to_build_on_cd = sort @data_backuped;
-    @data_backuped = @user_list_to_build_on_cd;
+    @list_to_build_on_cd = sort @data_backuped;
+    @data_backuped = @list_to_build_on_cd;
 
     gtkpack($advanced_box,
 	    $retore_step_user = gtkpack_(new Gtk::VBox(0,10),
@@ -2480,7 +2480,7 @@ sub build_backup_cd_select_data {
 						      map { my $name = $_;
 							    my @user_list_tmp = ();
 							    my $b = new Gtk::CheckButton($name); 
-							    if ( grep $name , @user_list_to_build_on_cd)  {
+							    if ( grep $name , @list_to_build_on_cd)  {
 								gtkset_active($b, 1);
 							    } else {
 								gtkset_active($b, 0);
@@ -2488,16 +2488,16 @@ sub build_backup_cd_select_data {
 							    $b->signal_connect(toggled => sub {
 								if ($check_data_to_backup_cd{$name}[1] ) {
 								    $check_data_to_backup_cd{$name}[1] = 0;
-								    if (!member( /$name$/, @user_list_to_build_on_cd) ) {
-									push @user_list_to_build_on_cd, $name;}
+								    if (!member( /$name$/, @list_to_build_on_cd) ) {
+									push @list_to_build_on_cd, $name;}
 								} else {
 								    $check_data_to_backup_cd{$name}[1] = 1;
-								    foreach (@user_list_to_build_on_cd) {
+								    foreach (@list_to_build_on_cd) {
 									if ($name ne $_) {
 									    push @user_list_tmp, $_;
+									}
 								    }
-								    }
-								    @user_list_to_build_on_cd = @user_list_tmp;
+								    @list_to_build_on_cd = @user_list_tmp;
 								}
 								aff_total_tail();
 							    });
