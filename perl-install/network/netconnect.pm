@@ -426,25 +426,27 @@ Take a look at http://www.linmodems.org"),
                                          q(ifdown ppp0
 killall pppd
 ), $netcnx->{type});
-                        $modem = $netcnx->{$netcnx->{type}};
-                        $modem->{device} = $first_modem->()->{device};
+                        $netcnx->{$netcnx->{type}} ||= {};
+                        $modem ||= $netcnx->{$netcnx->{type}};
+                        $modem->{device} ||= $first_modem->()->{device};
                         my %l = getVarsFromSh("$::prefix/usr/share/config/kppprc");
-                        $modem->{connection} = $l{Name};
-                        $modem->{domain} = $l{Domain};
-                        ($modem->{dns1}, $modem->{dns2}) = split(',', $l{DNS});
+                        $modem->{connection} ||= $l{Name};
+                        $modem->{domain} ||= $l{Domain};
+                        ($modem->{dns1}, $modem->{dns2}) ||= split(',', $l{DNS});
 
                         foreach (cat_("/etc/sysconfig/network-scripts/chat-ppp0")) {
-                            /.*ATDT(\d*)/ and $modem->{phone} = $1;
+                            /.*ATDT(\d*)/ and $modem->{phone} ||= $1;
                         }
                         foreach (cat_("/etc/sysconfig/network-scripts/ifcfg-ppp0")) {
-                            /NAME=(['"]?)(.*)\1/ and $modem->{login} = $2;
+                            /NAME=(['"]?)(.*)\1/ and $modem->{login} ||= $2;
                         }
                         my $secret = network::tools::read_secret_backend();
                         foreach (@$secret) {
-                            $modem->{passwd} = $_->{passwd} if $_->{login} eq $modem->{login};
+                            $modem->{passwd} ||= $_->{passwd} if $_->{login} eq $modem->{login};
                         }
                         #my $secret = network::tools::read_secret_backend();
                         #my @cnx_list = map { $_->{server} } @$secret;
+                        $modem->{$_} ||= '' foreach qw(connection phone login passwd auth domain dns1 dns2);
                     },
                     name => N("Dialup options"), 
                     data => sub {
