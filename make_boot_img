@@ -88,18 +88,22 @@ sub boot_img_i386 {
     my ($mnt, $img) = @_;
 
     __ "$sudo umount $mnt 2>/dev/null";
+    my $automatic = "";
+
     if ($type eq "hd") {
 	_ "bunzip2 -c $instdir/init-data/msgboot.img.bz2 > $img";
+	$automatic = "automatic=type:disk";
     } elsif ($type eq "all") {
 	_ "bunzip2 -c $instdir/init-data/msgboot-graphicallogo-2880.img.bz2 > $img";
     } else {
 	_ "bunzip2 -c $instdir/init-data/msgboot-graphicallogo.img.bz2 > $img";
+	$automatic = "automatic=type:cdrom" if ($type eq "cdrom");
     }
     _ "$sudo mount -t msdos -o umask=0 $img $mnt -o loop";
     _ "cat vmlinuz > $mnt/vmlinuz" if $type !~ /blank/;
     -f "$type.rdz" ? _ "cp -f $type.rdz $mnt" : initrd("${mnt}2", "$mnt/$type.rdz");
 
-    my $ftype = $type =~ /^(other|all)$/ ? "cdrom" : $type;
+#    my $ftype = $type =~ /^(other|all)$/ ? "cdrom" : $type;
     my $timeout = 72;
     output("$mnt/syslinux.cfg", "
 default linux
@@ -110,31 +114,31 @@ F1 help.msg
 F2 boot.msg
 label linux
   kernel vmlinuz
-  append ramdisk_size=32000 initrd=$type.rdz automatic=method:$ftype vga=788
+  append ramdisk_size=32000 initrd=$type.rdz $automatic vga=788
 label vgalo
   kernel vmlinuz
-  append ramdisk_size=32000 initrd=$type.rdz automatic=method:$ftype vga=785
+  append ramdisk_size=32000 initrd=$type.rdz $automatic vga=785
 label vgahi
   kernel vmlinuz
-  append ramdisk_size=32000 initrd=$type.rdz automatic=method:$ftype vga=791
+  append ramdisk_size=32000 initrd=$type.rdz $automatic vga=791
 label vga16
   kernel vmlinuz
-  append ramdisk_size=32000 initrd=$type.rdz automatic=method:$ftype vga16
+  append ramdisk_size=32000 initrd=$type.rdz $automatic vga16
 label text
   kernel vmlinuz
-  append ramdisk_size=32000 initrd=$type.rdz automatic=method:$ftype text
+  append ramdisk_size=32000 initrd=$type.rdz $automatic text
 label patch
   kernel vmlinuz
-  append ramdisk_size=32000 initrd=$type.rdz automatic=method:$ftype patch vga=788
+  append ramdisk_size=32000 initrd=$type.rdz $automatic patch vga=788
 label expert
   kernel vmlinuz
-  append ramdisk_size=32000 initrd=$type.rdz automatic=method:$ftype expert vga=788
+  append ramdisk_size=32000 initrd=$type.rdz $automatic expert vga=788
 label rescue
   kernel vmlinuz
-  append ramdisk_size=32000 initrd=$type.rdz automatic=method:$ftype rescue rw
+  append ramdisk_size=32000 initrd=$type.rdz $automatic rescue rw
 label lnx4win
   kernel vmlinuz
-  append ramdisk_size=32000 initrd=$type.rdz automatic=method:$ftype lnx4win vga=788
+  append ramdisk_size=32000 initrd=$type.rdz $automatic lnx4win vga=788
 label preinst
   kernel vmlinuz
   append ramdisk_size=32000 initrd=all.rdz automatic=method:cdrom rescue oem rw
@@ -143,7 +147,7 @@ label oem
   append ramdisk_size=32000 initrd=all.rdz automatic=method:cdrom rescue oem rw
 label auto
   kernel vmlinuz
-  append ramdisk_size=32000 initrd=$type.rdz automatic=method:$ftype auto_install=Mandrake/base/auto_inst.cfg.pl
+  append ramdisk_size=32000 initrd=$type.rdz $automatic auto_install=Mandrake/base/auto_inst.cfg.pl
 label all
   kernel vmlinuz
   append ramdisk_size=32000 initrd=$type.rdz pcmcia vga=788
