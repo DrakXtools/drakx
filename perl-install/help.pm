@@ -15,7 +15,7 @@ installed, or if you wish to use multiple distributions or versions.
 
 
 Choose \"Upgrade\" if you wish to update a previous version of Mandrake
-Linux: 5.1 (Venice), 5.2 (Leeloo), 5.3 (Festen) or 6.0 (Venus)."),
+Linux: 5.1 (Venice), 5.2 (Leeloo), 5.3 (Festen), 6.0 (Venus) or 6.1 (Helios)."),
 
 selectInstallClass =>
  __("Select:
@@ -60,9 +60,6 @@ on your system), as suggested by the installation guide. These
 are the options you will need to provide to the driver."),
 
 partitionDisks =>
-#- __("In this stage, you may choose what partition(s) use to install your
-#-Linux-Mandrake system."),
-
  __("At this point, you may choose what partition(s) to use to install
 your Linux-Mandrake system if they have been already defined (from a
 previous install of Linux or from another partitionning tool). In other
@@ -100,10 +97,9 @@ choosePackages =>
  __("You may now select the packages you wish to install.
 
 
-First you can select the size of your installed system and an automated
-selection of packages will be done according to your system usage. After
-that you can select more packages by group or click on Ok to keep the
-previous selection.
+First you can select group of package to install or upgrade. After that
+you can select more packages according to the total size you wish to
+select.
 
 
 If you are in expert mode, you can select packages individually.
@@ -167,6 +163,13 @@ Choose \"Dialup with modem\" and the Internet connection with
 a modem will be configured. DrakX will try to find your modem,
 if it fails you will have to select the right serial port where
 your modem is connected to."),
+
+installCrypto =>
+ __("You can install cryptographic package if your internet connection has been
+set up correctly. First choose a mirror where you wish to download packages and
+after that select the packages to install.
+
+Note you have to select mirror and cryptographic according to your legislation."),
 
 configureTimezone =>
  __("You can now select your timezone according to where you live.
