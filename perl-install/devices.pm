@@ -111,7 +111,7 @@ sub entry {
 	$type = c::S_IFBLK();
 	$major = 114;
 	$minor = 16 * $1 + ($2 || 0);
-    } elsif (/(.*)(\d+)$/) {
+    } elsif (/(.*\D)(\d+)$/) {
 	    ($type, $major, $minor) =
 	     @{ ${{"fd"          => [ c::S_IFBLK(), 2,  0 ],
 		   "hidbp-mse-"  => [ c::S_IFCHR(), 10, 32 ],
