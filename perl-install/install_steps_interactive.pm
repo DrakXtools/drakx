@@ -840,18 +840,14 @@ sub configurePrinter {
     require printer;
     require printerdrake;
 
-    if (!$::expert && !$clicked) {
-        printerdrake::auto_detect($o) or return;
-    }
-
-    my $printer = $o->{printer} ||= {};
-
-    #- bring interface up for installing ethernet packages but avoid ppp by default,
-    #- else the guy know what he is doing...
-    #install_interactive::upNetwork($o, 'pppAvoided');
+    #- try to determine if a question should be asked to the user or
+    #- if he is autorized to configure multiple queues.
+    my $ask_multiple_printer = !$::expert && !$clicked ? scalar(printerdrake::auto_detect($o)) : 2;
+    $ask_multiple_printer-- or return;
 
     #- take default configuration, this include choosing the right system
     #- currently used by the system.
+    my $printer = $o->{printer} ||= {};
     eval { add2hash($printer, printer::getinfo($o->{prefix})) };
 
     #- figure out what printing system to use, currently are suported cups and lpr,
@@ -869,7 +865,8 @@ sub configurePrinter {
     }
 
     $printer->{PAPERSIZE} = $o->{lang} eq 'en' ? 'letter' : 'a4';
-    printerdrake::main($printer, $o, sub { $o->pkg_install(@_) }, sub { install_interactive::upNetwork($o, 'pppAvoided') });
+    printerdrake::main($printer, $o, $ask_multiple_printer,
+		       sub { $o->pkg_install(@_) }, sub { install_interactive::upNetwork($o, 'pppAvoided') });
     
     $o->pkg_install_if_requires_satisfied('Mesa-common', 'xpp', 'libqtcups2', 'qtcups', 'kups') if !is_empty_hash_ref($printer->{configured}) || pkgs::packageFlagInstalled(pkgs::packageByName($o->{packages}, 'cups'));
 }
