@@ -679,6 +679,7 @@ sub read_conf {
     while (my ($k, $v) = each %c) {
 	if (my $a = $v->{alias}) {
 	    local $c{$a}{alias};
+	    delete $v->{probeall};
 	    add2hash($c{$a}, $v);
 	}
     }
