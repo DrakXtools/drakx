@@ -59,7 +59,7 @@ never build or run DrakX as root; install package sudo, and set up
 relevant permissions; the following should be enough: (in your
 /etc/sudoers)
 
-gc ALL=(root) NOPASSWD:/usr/bin/patch,NOPASSWD:/bin/rpm,NOPASSWD:/bin/mount,NOPASSWD:/bin/cp,NOPASSWD:/bin/umount,NOPASSWD:/usr/bin/install,NOPASSWD:/bin/rm,NOPASSWD:/bin/mv,NOPASSWD:/bin/tar,NOPASSWD:/bin/cpio,NOPASSWD:/bin/chown,NOPASSWD:/bin/mkdir,NOPASSWD:/usr/bin/strip
+gc ALL=(root) NOPASSWD:/usr/bin/patch,NOPASSWD:/bin/rpm,NOPASSWD:/bin/mount,NOPASSWD:/bin/cp,NOPASSWD:/bin/umount,NOPASSWD:/usr/bin/install,NOPASSWD:/bin/rm,NOPASSWD:/bin/mv,NOPASSWD:/bin/tar,NOPASSWD:/bin/cpio,NOPASSWD:/bin/chown,NOPASSWD:/bin/mkdir,NOPASSWD:/usr/bin/strip,NOPASSWD:/bin/mknod
 
 
 (4) boot kernel
