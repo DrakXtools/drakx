@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX\n"
-"POT-Creation-Date: 2003-03-09 13:01+0100\n"
+"POT-Creation-Date: 2003-03-12 17:27+0100\n"
 "PO-Revision-Date: 2002-04-29 06:45MET\n"
 "Last-Translator: Pablo Saratxaga <pablo@mandrakesoft.com>\n"
 "Language-Team: Walon <linux-wa@chanae.alphanet.ch>\n"
@@ -10765,11 +10765,6 @@ msgstr "Candjî li sistinme d' eprimaedje"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
-msgid "Printer sharing"
-msgstr "Pårtaedje des scrireces"
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
 msgid "CUPS configuration"
 msgstr "Apontiaedje di CUPS"
 
@@ -11211,11 +11206,12 @@ msgstr "Eprimaedje/sicanaedje/cåtes foto so «%s»"
 #, c-format
 msgid ""
 "To know about the options available for the current printer read either the "
-"list shown below or click on the \"Print option list\" button.%s%s\n"
+"list shown below or click on the \"Print option list\" button.%s%s%s\n"
 "\n"
 msgstr ""
 "Po-z saveur les tchuzes k' i gn a pol sicrirece lijhoz li djivêye chal pa "
-"dzo oudonbén clitchîz sol boton «Djivêye des tchuzes pol eprimaedje». %s%s\n"
+"dzo oudonbén clitchîz sol boton «Djivêye des tchuzes pol eprimaedje». %s%s%"
+"s\n"
 "\n"
 
 #: ../../printer/printerdrake.pm:1
@@ -11464,52 +11460,8 @@ msgstr ""
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
-msgid ""
-"Your printer belongs to the group of GDI laser printers (winprinters) sold "
-"by different manufacturers which uses the Zenographics ZJ-stream raster "
-"format for the data sent to the printer. The driver for these printers is "
-"still in a very early development stage and so it will perhaps not always "
-"work properly. Especially it is possible that the printer only works when "
-"you choose the A4 paper size.\n"
-"\n"
-"Some of these printers, as the HP LaserJet 1000, for which this driver was "
-"originally created, need their firmware to be uploaded to them after they "
-"are turned on. In the case of the HP LaserJet 1000 you have to search the "
-"printer's Windows driver CD or your Windows partition for the file "
-"\"sihp1000.img\" and upload the file to the printer with one of the "
-"following commands:\n"
-"\n"
-"     lpr -o raw sihp1000.img\n"
-"     cat sihp1000.img > /dev/usb/lp0\n"
-"\n"
-"The first command can be given by any normal user, the second must be given "
-"as root. After having done so you can print normally.\n"
-msgstr ""
-"Vosse sicrirece est do groupe di scrireces lazer GDI (ossu lomêyes "
-"winprinters) vindowes pa sacwants fabricants k' eployèt li sistinme ZJ-"
-"stream di Zenographics po-z evoyî les dnêyes sol sicrirece. Li mineu po ces "
-"scrireces la est co å cminçmint di s' diswalpaedje, et motoit bén k' i "
-"n' rotrè nén comufåt a tos les côps. Pårticulirmint c' est nén possibe "
-"d' eprimî avou do papî ki n' est nén al cogne sitandård A4.\n"
-"\n"
-"Sacwantes di ces scrireces la, come li HP LaserJet 1000, ki l' mineu a stî "
-"scrît oridjinålmint por leye, ont mezåjhe di rçure leu firmware djusse après "
-"aveur stî metowes en alaedje. Dins l' cas del HP LaserJet 1000 vos dvoz "
-"prinde sol CD di mineus Windows del sicrirece ou sol pårticion Windows li "
-"fitchî «sihp10000.img» eyet l' evoyî al sicrirece avou ene des comandes ki "
-"shuvèt:\n"
-"\n"
-"     lpr -o raw sihp1000.img\n"
-"     cat sihp1000.img > /dev/usb/lp0\n"
-"\n"
-"Li prumire comande pout esse enondêye pa tot l' minme ké uzeu; pol deujhinme "
-"i få esse root. On côp ki vos l' avoz fwait, vos ploz eployî l' sicrirece "
-"normålmint.\n"
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "GDI Laser Printer using the Zenographics ZJ-Stream Format"
-msgstr "Sicrirece Lazer GDI k' eploye li ZJ-Stream di Zenographics"
+msgid "Firmware-Upload for HP LaserJet 1000"
+msgstr "Tcherdjaedje do firmware del HP LaserJet 1000"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -11698,6 +11650,11 @@ msgstr "Dji rind les pôrts des scrireces disponibes po CUPS..."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
+msgid "Checking device and configuring HPOJ..."
+msgstr "Verifiaedje les éndjins eyet apontiaedje di HPOJ..."
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
 msgid "Photo memory card access on your HP multi-function device"
 msgstr "Accès åzès cåtes memwere po les fotos so l' éndjin multi-fonccions HP"
 
@@ -11715,11 +11672,6 @@ msgstr "Astalant les pacaedjes mtools..."
 #, c-format
 msgid "Installing SANE packages..."
 msgstr "Astalant les pacaedjes SANE..."
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "Checking device and configuring HPOJ..."
-msgstr "Verifiaedje les éndjins eyet apontiaedje di HPOJ..."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -12592,6 +12544,11 @@ msgstr "Nole adresse IP pol sierveu!"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
+msgid "If no port is given, 631 will be taken as default."
+msgstr "Si nou pôrt n' est dné, li prémetowe valixhance srè 631."
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
 msgid "Enter IP address and port of the host whose printers you want to use."
 msgstr ""
 "Dinez l' adresse IP eyet l' pôrt do lodjoe ki vos vloz eployî ses scrireces."
@@ -12712,6 +12669,23 @@ msgstr "Coridjaedje otomatike di l' apontiaedje di CUPS"
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid ""
+"Turning on this allows to print plain text files in japanese language. Only "
+"use this function if you really want to print text in japanese, if it is "
+"activated you cannot print accentuated characters in latin fonts any more "
+"and you will not be able to adjust the margins, the character size, etc. "
+"This setting only affects printers defined on this machine. If you want to "
+"print japanese text on a printer set up on a remote machine, you have to "
+"activate this function on that remote machine."
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Japanese text printing mode"
+msgstr "Eprimaedje di tecses djaponès"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid ""
 "To get access to printers on remote CUPS servers in your local network you "
 "only need to turn on the \"Automatically find available printers on remote "
 "machines\" option; the CUPS servers inform your machine automatically about "
@@ -12778,8 +12752,8 @@ msgstr ""
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
-msgid "CUPS printer sharing configuration"
-msgstr "Apontiaedje do påraedjaedje des scrireces di CUPS"
+msgid "CUPS printer configuration"
+msgstr "Apontiaedje des scrireces di CUPS"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -12806,6 +12780,25 @@ msgstr "Kimint li scrirece est ele raloyeye?"
 #, c-format
 msgid "Select Printer Connection"
 msgstr "Tchoezixhoz li raloyaedje del sicrirece"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid ""
+"The HP LaserJet 1000 needs its firmware to be uploaded after being turned "
+"on. Download the Windows driver package from the HP web site (the firmware "
+"on the printer's CD does not work) and extract the firmware file from it by "
+"uncompresing the self-extracting '.exe' file with the 'unzip' utility and "
+"searching for the 'sihp1000.img' file. Copy this file into the '/etc/"
+"printer' directory. There it will be found by the automatic uploader script "
+"and uploaded whenever the printer is connected and turned on.\n"
+msgstr ""
+"Li HP LaserJet 1000, a mezåjhe di rçure si firmware djusse après aveur stî "
+"metowe en alaedje. Aberwetez li mineu a pårti del waibe da HP (li firmaware "
+"do CD di mineus Windows del sicrirece ni sieve nén) eyet saetchîz l' fitchî "
+"do firmware foû del årtchive «*.exe» avou l' programe «unzip» et cweroz "
+"après l' fitchî «sihp10000.img». copyîz ç' fitchî la dins l' ridant «/etc/"
+"printer». La i srè trové otomaticmint eyet evoyî al sicrirece tchaeke côp "
+"k' ele est metowe en alaedje.\n"
 
 #: ../../security/help.pm:1
 #, c-format
@@ -14150,11 +14143,6 @@ msgstr ""
 msgid ""
 "No configuration file found \n"
 "please click Wizard or Advanced."
-msgstr ""
-
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "%s"
 msgstr ""
 
 #: ../../standalone/drakbackup:1
@@ -19142,74 +19130,132 @@ msgid "NFS server, SMB server, Proxy server, ssh server"
 msgstr "Sierveu NFS, sierveu SMB, sierveu proxy, sierveu SSH"
 
 #: ../../share/compssUsers:999
-msgid "Office"
-msgstr "Burô"
+msgid "Audio station"
+msgstr "Posse djoweu d' muzike"
 
 #: ../../share/compssUsers:999
-msgid "Set of tools for mail, news, web, file transfer, and chat"
-msgstr ""
-"Usteyes pol emilaedje, les copinreyes, naiviaedje waibe, transfer di "
-"fitchîs, eyet li chat"
+msgid "Sound playing/editing programs"
+msgstr "Programes po schoûter/candjî des sons"
 
 #: ../../share/compssUsers:999
-msgid "Games"
-msgstr "Djeus"
+msgid "Video station"
+msgstr "Posse videyo"
 
 #: ../../share/compssUsers:999
-msgid "Multimedia - Graphics"
-msgstr "Multimedia - Grafikes"
+msgid "Video playing programs"
+msgstr "Programes po vey des videyos"
 
 #: ../../share/compssUsers:999
-msgid "Graphics programs such as The Gimp"
+msgid "Graphic station"
+msgstr "Posse grafike"
+
+#: ../../share/compssUsers:999
+msgid "Graphics programs"
 msgstr "Programes grafikes come li Gimp"
 
 #: ../../share/compssUsers:999
-msgid "Multimedia - Sound"
-msgstr "Multimedia - Son"
+msgid "Set of tools to read and send mail and news and to browse the Web"
+msgstr ""
+"Énsembe d' usteyes po lere et evoyî des messaedjes et po naivyî so les "
+"pådjes waibe"
 
-#: ../../share/compssUsers:999
-msgid "Audio-related tools: mp3 or midi players, mixers, etc"
-msgstr "Usteyes ki ont a vey avou l' son: djoweus mp3 ou MIDI, maxheus,..."
+#~ msgid "Printer sharing"
+#~ msgstr "Pårtaedje des scrireces"
 
-#: ../../share/compssUsers:999
-msgid "Multimedia - Video"
-msgstr "Multimedia - Vidéyo"
+#~ msgid ""
+#~ "Your printer belongs to the group of GDI laser printers (winprinters) "
+#~ "sold by different manufacturers which uses the Zenographics ZJ-stream "
+#~ "raster format for the data sent to the printer. The driver for these "
+#~ "printers is still in a very early development stage and so it will "
+#~ "perhaps not always work properly. Especially it is possible that the "
+#~ "printer only works when you choose the A4 paper size.\n"
+#~ "\n"
+#~ "Some of these printers, as the HP LaserJet 1000, for which this driver "
+#~ "was originally created, need their firmware to be uploaded to them after "
+#~ "they are turned on. In the case of the HP LaserJet 1000 you have to "
+#~ "search the printer's Windows driver CD or your Windows partition for the "
+#~ "file \"sihp1000.img\" and upload the file to the printer with one of the "
+#~ "following commands:\n"
+#~ "\n"
+#~ "     lpr -o raw sihp1000.img\n"
+#~ "     cat sihp1000.img > /dev/usb/lp0\n"
+#~ "\n"
+#~ "The first command can be given by any normal user, the second must be "
+#~ "given as root. After having done so you can print normally.\n"
+#~ msgstr ""
+#~ "Vosse sicrirece est do groupe di scrireces lazer GDI (ossu lomêyes "
+#~ "winprinters) vindowes pa sacwants fabricants k' eployèt li sistinme ZJ-"
+#~ "stream di Zenographics po-z evoyî les dnêyes sol sicrirece. Li mineu po "
+#~ "ces scrireces la est co å cminçmint di s' diswalpaedje, et motoit bén "
+#~ "k' i n' rotrè nén comufåt a tos les côps. Pårticulirmint c' est nén "
+#~ "possibe d' eprimî avou do papî ki n' est nén al cogne sitandård A4.\n"
+#~ "\n"
+#~ "Sacwantes di ces scrireces la, come li HP LaserJet 1000, ki l' mineu a "
+#~ "stî scrît oridjinålmint por leye, ont mezåjhe di rçure leu firmware "
+#~ "djusse après aveur stî metowes en alaedje. Dins l' cas del HP LaserJet "
+#~ "1000 vos dvoz prinde sol CD di mineus Windows del sicrirece ou sol "
+#~ "pårticion Windows li fitchî «sihp10000.img» eyet l' evoyî al sicrirece "
+#~ "avou ene des comandes ki shuvèt:\n"
+#~ "\n"
+#~ "     lpr -o raw sihp1000.img\n"
+#~ "     cat sihp1000.img > /dev/usb/lp0\n"
+#~ "\n"
+#~ "Li prumire comande pout esse enondêye pa tot l' minme ké uzeu; pol "
+#~ "deujhinme i få esse root. On côp ki vos l' avoz fwait, vos ploz eployî "
+#~ "l' sicrirece normålmint.\n"
 
-#: ../../share/compssUsers:999
-msgid "Video players and editors"
-msgstr "Djoweus et aspougneus di vidéyo"
+#~ msgid "GDI Laser Printer using the Zenographics ZJ-Stream Format"
+#~ msgstr "Sicrirece Lazer GDI k' eploye li ZJ-Stream di Zenographics"
 
-#: ../../share/compssUsers:999
-msgid "Multimedia - CD Burning"
-msgstr "Multimedia - Gravaedje di plakes lazer"
+#~ msgid "Office"
+#~ msgstr "Burô"
 
-#: ../../share/compssUsers:999
-msgid "Tools to create and burn CD's"
-msgstr "Usteyes po fé et graver des plakes lazer"
+#~ msgid "Set of tools for mail, news, web, file transfer, and chat"
+#~ msgstr ""
+#~ "Usteyes pol emilaedje, les copinreyes, naiviaedje waibe, transfer di "
+#~ "fitchîs, eyet li chat"
 
-#: ../../share/compssUsers:999
-msgid "More Graphical Desktops (Gnome, IceWM)"
-msgstr "Des ôtes scribannes grafikes (Gnome, IceWM)"
+#~ msgid "Games"
+#~ msgstr "Djeus"
 
-#: ../../share/compssUsers:999
-msgid "Gnome, Icewm, Window Maker, Enlightenment, Fvwm, etc"
-msgstr "Gnome, Icewm, Window Maker, Enlightenment, Fvwm, etc"
+#~ msgid "Multimedia - Graphics"
+#~ msgstr "Multimedia - Grafikes"
 
-#: ../../share/compssUsers:999
-msgid "Personal Information Management"
-msgstr "Manaedjmint des finances personéles"
+#~ msgid "Multimedia - Sound"
+#~ msgstr "Multimedia - Son"
 
-#: ../../share/compssUsers:999
-msgid "Tools for your Palm Pilot or your Visor"
-msgstr "Usteyes po vosse Palm Pilot ou vosse Visor"
+#~ msgid "Audio-related tools: mp3 or midi players, mixers, etc"
+#~ msgstr "Usteyes ki ont a vey avou l' son: djoweus mp3 ou MIDI, maxheus,..."
 
-#: ../../share/compssUsers:999
-msgid "Personal Finance"
-msgstr "Personelès finances"
+#~ msgid "Multimedia - Video"
+#~ msgstr "Multimedia - Vidéyo"
 
-#: ../../share/compssUsers:999
-msgid "Programs to manage your finances, such as gnucash"
-msgstr "Programes po vos manaedjî vos çanses, come li gnucash"
+#~ msgid "Video players and editors"
+#~ msgstr "Djoweus et aspougneus di vidéyo"
+
+#~ msgid "Multimedia - CD Burning"
+#~ msgstr "Multimedia - Gravaedje di plakes lazer"
+
+#~ msgid "Tools to create and burn CD's"
+#~ msgstr "Usteyes po fé et graver des plakes lazer"
+
+#~ msgid "More Graphical Desktops (Gnome, IceWM)"
+#~ msgstr "Des ôtes scribannes grafikes (Gnome, IceWM)"
+
+#~ msgid "Gnome, Icewm, Window Maker, Enlightenment, Fvwm, etc"
+#~ msgstr "Gnome, Icewm, Window Maker, Enlightenment, Fvwm, etc"
+
+#~ msgid "Personal Information Management"
+#~ msgstr "Manaedjmint des finances personéles"
+
+#~ msgid "Tools for your Palm Pilot or your Visor"
+#~ msgstr "Usteyes po vosse Palm Pilot ou vosse Visor"
+
+#~ msgid "Personal Finance"
+#~ msgstr "Personelès finances"
+
+#~ msgid "Programs to manage your finances, such as gnucash"
+#~ msgstr "Programes po vos manaedjî vos çanses, come li gnucash"
 
 #~ msgid "no network card found"
 #~ msgstr "nole cåte rantoele di trovêye"
