@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX\n"
-"POT-Creation-Date: 2003-09-16 13:45+0200\n"
+"POT-Creation-Date: 2003-12-03 03:09+0100\n"
 "PO-Revision-Date: 2002-09-09 09:08+0900\n"
 "Last-Translator: Jaegeum Cze <baedaron@hanafos.com>\n"
 "Language-Team: Korean <beadaron@hanafos.com>\n"
@@ -268,11 +268,6 @@ msgstr "CUPS 설정"
 msgid "Total progress"
 msgstr "전체 진행"
 
-#: ../../lang.pm:1
-#, c-format
-msgid "Hong Kong"
-msgstr "홍콩"
-
 #: ../../install_interactive.pm:1
 #, c-format
 msgid "Not enough free space to allocate new partitions"
@@ -344,6 +339,18 @@ msgstr "%s 발견"
 msgid "No CD device defined!"
 msgstr "CD 장치가 정의되지 않았습니다!"
 
+#: ../../network/shorewall.pm:1
+#, c-format
+msgid ""
+"Please enter the name of the interface connected to the "
+"internet.              \n"
+"                \n"
+"Examples:\n"
+"                ppp+ for modem or DSL connections, \n"
+"                eth0, or eth1 for cable connection, \n"
+"                ippp+ for a isdn connection.\n"
+msgstr ""
+
 #: ../../standalone/drakbackup:1
 #, fuzzy, c-format
 msgid "\tUse .backupignore files\n"
@@ -413,15 +420,20 @@ msgstr "팩키지 %s가 필요합니다. 설치하겠습니까?"
 msgid "Swiss (French layout)"
 msgstr "스위스 (불어)"
 
+#: ../../raid.pm:1
+#, c-format
+msgid "mkraid failed (maybe raidtools are missing?)"
+msgstr "mkraid 실패 (raidtool이 설치되어 있지 않을 수 있습니다.)"
+
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "August"
 msgstr "팔월"
 
-#: ../../raid.pm:1
-#, c-format
-msgid "mkraid failed (maybe raidtools are missing?)"
-msgstr "mkraid 실패 (raidtool이 설치되어 있지 않을 수 있습니다.)"
+#: ../../network/drakfirewall.pm:1
+#, fuzzy, c-format
+msgid "FTP server"
+msgstr "NTP 서버"
 
 #: ../../harddrake/data.pm:1
 #, c-format
@@ -501,11 +513,6 @@ msgstr "현재 설정 %s에서 잠재적인 랜 주소 충돌이 발견됩니다!\n"
 #, c-format
 msgid "Configuring..."
 msgstr "설정 중..."
-
-#: ../../standalone/drakgw:1
-#, c-format
-msgid "The setup has already been done, and it's currently enabled."
-msgstr "설정이 이미 완료되었으며, 현재 허용된 상태입니다."
 
 #: ../../harddrake/v4l.pm:1
 #, c-format
@@ -625,6 +632,11 @@ msgstr ""
 msgid "Printer Name"
 msgstr "프린트 큐 이름"
 
+#: ../../../move/move.pm:1
+#, c-format
+msgid "Setting up USB key"
+msgstr ""
+
 #: ../../standalone/drakfloppy:1
 #, c-format
 msgid "Remove a module"
@@ -682,15 +694,17 @@ msgstr ""
 msgid "if needed"
 msgstr "부팅시 적재 모듈이 있을 경우에만 이미지 생성"
 
+#: ../../standalone/drakclock:1
+#, c-format
+msgid ""
+"We need to install ntp package\n"
+" to enable Network Time Protocol"
+msgstr ""
+
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "Restore Failed..."
 msgstr "복구 실패..."
-
-#: ../../standalone/harddrake2:1
-#, fuzzy, c-format
-msgid "/Autodetect _jazz drives"
-msgstr "자동 검색됨"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -918,11 +932,6 @@ msgstr ""
 #, c-format
 msgid "512 kB"
 msgstr "512 kB"
-
-#: ../../standalone/net_monitor:1
-#, c-format
-msgid "Logs"
-msgstr ""
 
 #: ../../standalone/scannerdrake:1
 #, c-format
@@ -1349,6 +1358,11 @@ msgstr "라트바아"
 msgid "monthly"
 msgstr "매월"
 
+#: ../../../move/move.pm:1
+#, fuzzy, c-format
+msgid "Retry"
+msgstr "복구"
+
 #: ../../standalone/drakfloppy:1
 #, c-format
 msgid "Module name"
@@ -1394,6 +1408,11 @@ msgstr ""
 msgid "the module of the GNU/Linux kernel that handles the device"
 msgstr ""
 
+#: ../../standalone/drakclock:1
+#, fuzzy, c-format
+msgid "Is your hardware clock set to GMT?"
+msgstr "하드웨어 시계 GMT 설정"
+
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid "Trying to rescue partition table"
@@ -1434,6 +1453,11 @@ msgstr "라이브 업그레이드를 시작할 수 없습니다!!! \n"
 msgid "Name: "
 msgstr "이름:"
 
+#: ../../standalone/drakconnect:1
+#, c-format
+msgid "up"
+msgstr ""
+
 #: ../../Xconfig/resolution_and_depth.pm:1
 #, c-format
 msgid "16 million colors (24 bits)"
@@ -1444,7 +1468,7 @@ msgstr "천6백만 색상  (24bits)"
 msgid "Allow all users"
 msgstr "모든 사용자 허용"
 
-#: ../../share/advertising/08-store.pl:1
+#: ../advertising/08-store.pl:1
 #, c-format
 msgid "The official MandrakeSoft Store"
 msgstr ""
@@ -1476,15 +1500,15 @@ msgstr "사용자"
 msgid "Do new backup before restore (only for incremental backups.)"
 msgstr ""
 
-#: ../../standalone/harddrake2:1
-#, fuzzy, c-format
-msgid "Name"
-msgstr "이름:"
-
 #: ../../raid.pm:1
 #, c-format
 msgid "mkraid failed"
 msgstr "mkraid 실패"
+
+#: ../../standalone/harddrake2:1
+#, fuzzy, c-format
+msgid "Name"
+msgstr "이름:"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -1690,6 +1714,17 @@ msgstr "서버 허용 중"
 #, c-format
 msgid "Printing test page(s)..."
 msgstr "시험 페이지 인쇄 중..."
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid ""
+"Transfer successful\n"
+"You may want to verify you can login to the server with:\n"
+"\n"
+"ssh -i %s %s@%s\n"
+"\n"
+"without being prompted for a password."
+msgstr ""
 
 #: ../../fsedit.pm:1
 #, c-format
@@ -2621,6 +2656,11 @@ msgstr ""
 msgid "Can't add a partition to _formatted_ RAID md%d"
 msgstr "포맷된 RAID md%d에 파티션을 추가할 수 없습니다."
 
+#: ../../standalone/drakclock:1
+#, fuzzy, c-format
+msgid "Network Time Protocol"
+msgstr "네트웍 인터페이스"
+
 #: ../../Xconfig/card.pm:1
 #, c-format
 msgid ""
@@ -2823,7 +2863,7 @@ msgstr "팔라우"
 msgid "level"
 msgstr "레벨"
 
-#: ../../share/advertising/13-mdkexpert_corporate.pl:1
+#: ../advertising/13-mdkexpert_corporate.pl:1
 #, c-format
 msgid ""
 "All incidents will be followed up by a single qualified MandrakeSoft "
@@ -3187,7 +3227,7 @@ msgstr ""
 msgid "Bad package"
 msgstr "잘못된 팩키지"
 
-#: ../../share/advertising/07-server.pl:1
+#: ../advertising/07-server.pl:1
 #, c-format
 msgid ""
 "Transform your computer into a powerful Linux server: Web server, mail, "
@@ -3442,7 +3482,7 @@ msgstr "보안에 신경안씀"
 msgid "Module options:"
 msgstr "모듈 옵션들:"
 
-#: ../../share/advertising/11-mnf.pl:1
+#: ../advertising/11-mnf.pl:1
 #, c-format
 msgid "Secure your networks with the Multi Network Firewall"
 msgstr ""
@@ -3521,6 +3561,11 @@ msgstr "마우스"
 #, c-format
 msgid "not enough room in /boot"
 msgstr "/boot에 공간이 부족합니다."
+
+#: ../../install_steps_gtk.pm:1
+#, c-format
+msgid "trying to promote %s"
+msgstr ""
 
 #: ../../lang.pm:1
 #, c-format
@@ -3624,6 +3669,11 @@ msgstr ""
 msgid "Saudi Arabia"
 msgstr "사우디아라비아"
 
+#: ../../services.pm:1
+#, c-format
+msgid "Internet"
+msgstr "인터넷"
+
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid "Continue anyway?"
@@ -3641,11 +3691,6 @@ msgstr ""
 #, c-format
 msgid "Printer"
 msgstr "프린터"
-
-#: ../../services.pm:1
-#, c-format
-msgid "Internet"
-msgstr "인터넷"
 
 #: ../../standalone/service_harddrake:1
 #, c-format
@@ -3714,6 +3759,11 @@ msgstr "프린터 이름에는 문자, 숫자 그리고 밑줄(Underscore)만 있어야 합니다."
 #, c-format
 msgid "Restarting printing system..."
 msgstr "인쇄 시스템 재실행 중 ..."
+
+#: ../../../move/tree/mdk_totem:1
+#, c-format
+msgid "You can only run with no CDROM support"
+msgstr ""
 
 #: ../../modules/interactive.pm:1
 #, c-format
@@ -3926,15 +3976,15 @@ msgstr "ISA / PCMCIA"
 msgid "About"
 msgstr "중지"
 
-#: ../../network/network.pm:1
-#, c-format
-msgid "Proxies configuration"
-msgstr "프락시 설정"
-
 #: ../../mouse.pm:1
 #, c-format
 msgid "GlidePoint"
 msgstr "ALPS 글라이드포인트"
+
+#: ../../network/network.pm:1
+#, c-format
+msgid "Proxies configuration"
+msgstr "프락시 설정"
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -4077,6 +4127,11 @@ msgstr "마운트 위치는 반드시 「/」로 시작하여야 합니다."
 msgid "Choose your CD/DVD device"
 msgstr "CD/DVD 용량을 선택하세요."
 
+#: ../../network/drakfirewall.pm:1
+#, fuzzy, c-format
+msgid "CUPS server"
+msgstr "DNS 서버"
+
 #: ../../standalone/logdrake:1
 #, c-format
 msgid "Postfix Mail Server"
@@ -4092,7 +4147,7 @@ msgstr "저장하지 않고 종료하시겠습니까?"
 msgid "Yemen"
 msgstr "예멘"
 
-#: ../../share/advertising/11-mnf.pl:1
+#: ../advertising/11-mnf.pl:1
 #, c-format
 msgid "This product is available on the MandrakeStore Web site."
 msgstr ""
@@ -4100,6 +4155,31 @@ msgstr ""
 #: ../../interactive/stdio.pm:1
 #, c-format
 msgid "=> There are many things to choose from (%s).\n"
+msgstr ""
+
+#: ../../standalone/drakclock:1
+#, c-format
+msgid "GMT - DrakClock"
+msgstr ""
+
+#: ../../../move/move.pm:1
+#, c-format
+msgid ""
+"An error occurred:\n"
+"\n"
+"\n"
+"%s\n"
+"\n"
+"This may come from corrupted system configuration files\n"
+"on the USB key, in this case removing them and then\n"
+"rebooting Mandrake Move would fix the problem. To do\n"
+"so, click on the corresponding button.\n"
+"\n"
+"\n"
+"You may also want to reboot and remove the USB key, or\n"
+"examine its contents under another OS, or even have\n"
+"a look at log files in console #3 and #4 to try to\n"
+"guess what's happening."
 msgstr ""
 
 #: ../../steps.pm:1
@@ -4329,6 +4409,11 @@ msgstr "사용자 드레이크"
 #, c-format
 msgid "Which partition do you want to use for Linux4Win?"
 msgstr "어느 파티션을 Linux4Win용으로 사용하겠습니까?"
+
+#: ../../install_steps_gtk.pm:1
+#, fuzzy, c-format
+msgid "due to missing %s"
+msgstr "kdesu가 없음"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -4842,7 +4927,7 @@ msgstr ""
 msgid "Started on boot"
 msgstr "부팅시 시작됨"
 
-#: ../../share/advertising/12-mdkexpert.pl:1
+#: ../advertising/12-mdkexpert.pl:1
 #, c-format
 msgid ""
 "Join the MandrakeSoft support teams and the Linux Community online to share "
@@ -5153,11 +5238,6 @@ msgid ""
 msgstr ""
 "콘솔하에서\n"
 "테마 보이기"
-
-#: ../../standalone/net_monitor:1
-#, c-format
-msgid "Statistics"
-msgstr ""
 
 #: ../../printer/cups.pm:1
 #, c-format
@@ -5909,7 +5989,7 @@ msgstr ""
 "고품질의 난수 생성을 위해 시스템 엔트로피 풀을 저장하고 \n"
 "복구합니다."
 
-#: ../../share/advertising/07-server.pl:1
+#: ../advertising/07-server.pl:1
 #, c-format
 msgid "Turn your computer into a reliable server"
 msgstr ""
@@ -5924,6 +6004,11 @@ msgstr ""
 msgid " (driver %s)"
 msgstr " (%s 드라이버)"
 
+#: ../../services.pm:1
+#, c-format
+msgid "Start when requested"
+msgstr ""
+
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid ""
@@ -5937,11 +6022,6 @@ msgstr ""
 #, c-format
 msgid "I don't know"
 msgstr "모르겠음"
-
-#: ../../services.pm:1
-#, c-format
-msgid "Start when requested"
-msgstr ""
 
 #: ../../printer/main.pm:1
 #, c-format
@@ -6148,6 +6228,11 @@ msgid ""
 "section."
 msgstr ""
 
+#: ../../../move/move.pm:1
+#, fuzzy, c-format
+msgid "Key isn't writable"
+msgstr "XawTV가 설치되지 않았습니다!"
+
 #: ../../lang.pm:1
 #, c-format
 msgid "Bangladesh"
@@ -6192,15 +6277,15 @@ msgstr ""
 msgid "Set the root umask."
 msgstr "암호 없음"
 
-#: ../../network/modem.pm:1 ../../standalone/drakconnect:1
-#, c-format
-msgid "Script-based"
-msgstr "스크립트 기반"
-
 #: ../../install_any.pm:1 ../../partition_table.pm:1
 #, c-format
 msgid "Error reading file %s"
 msgstr "%s 파일을 읽는중 오류가 발생했습니다."
+
+#: ../../network/modem.pm:1 ../../standalone/drakconnect:1
+#, c-format
+msgid "Script-based"
+msgstr "스크립트 기반"
 
 #: ../../harddrake/v4l.pm:1
 #, c-format
@@ -6272,17 +6357,6 @@ msgstr ""
 #, c-format
 msgid "Domain Authentication Required"
 msgstr "도메인 인증이 필요합니다."
-
-#: ../../standalone/drakTermServ:1
-#, c-format
-msgid ""
-"\n"
-"\n"
-" Thanks:\n"
-"\t- LTSP Project http://www.ltsp.org\n"
-"\t- Michael Brown <mbrown\\@fensystems.co.uk>\n"
-"\n"
-msgstr ""
 
 #: ../../security/level.pm:1
 #, c-format
@@ -6915,15 +6989,15 @@ msgstr "Yaboot"
 msgid "Logitech CC Series with Wheel emulation"
 msgstr "로지텍 CC 시리즈"
 
-#: ../../standalone/drakboot:1
-#, c-format
-msgid "Splash selection"
-msgstr "스플래쉬 선택"
-
 #: ../../partition_table.pm:1
 #, c-format
 msgid "Extended partition not supported on this platform"
 msgstr "이 시스템에서는 확장파티션이 지원되지 않습니다."
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Splash selection"
+msgstr "스플래쉬 선택"
 
 #: ../../network/isdn.pm:1
 #, c-format
@@ -6981,6 +7055,11 @@ msgstr ""
 msgid "Printer default settings"
 msgstr "프린터 모델 선택"
 
+#: ../../mouse.pm:1
+#, c-format
+msgid "Generic PS2 Wheel Mouse"
+msgstr "일반적인 PS2 휠 마우스"
+
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid ""
@@ -6988,11 +7067,6 @@ msgid ""
 "memory page level, thus enabling the processor to prevent unchecked kernel "
 "accesses to user memory (aka this is a bug guard)"
 msgstr ""
-
-#: ../../mouse.pm:1
-#, c-format
-msgid "Generic PS2 Wheel Mouse"
-msgstr "일반적인 PS2 휠 마우스"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -7139,6 +7213,11 @@ msgstr "한글 키보드"
 msgid "Not connected"
 msgstr "연결 안됨"
 
+#: ../../standalone/net_monitor:1
+#, fuzzy, c-format
+msgid "No internet connection configured"
+msgstr "인터넷 연결 설정"
+
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Greek"
@@ -7153,17 +7232,6 @@ msgstr ""
 #, fuzzy, c-format
 msgid "Generic 3 Button Mouse with Wheel emulation"
 msgstr "일반적인 3버튼 마우스"
-
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid ""
-"Transfer successful\n"
-"You may want to verify you can login to the server with:\n"
-"\n"
-"ssh -i %s %s\\@%s\n"
-"\n"
-"without being prompted for a password."
-msgstr ""
 
 #: ../../any.pm:1
 #, c-format
@@ -7386,7 +7454,7 @@ msgstr ""
 "덮어 쓸려면 「전송」을 누르세요.\n"
 "새 이름을 입력하거나 이 프린터를 지나칠 수도 있습니다."
 
-#: ../../share/advertising/12-mdkexpert.pl:1
+#: ../advertising/12-mdkexpert.pl:1
 #, c-format
 msgid ""
 "Find the solutions of your problems via MandrakeSoft's online support "
@@ -7450,6 +7518,22 @@ msgstr ""
 #: ../../printer/main.pm:1
 #, c-format
 msgid "Multi-function device on USB"
+msgstr ""
+
+#: ../../../move/move.pm:1
+#, c-format
+msgid ""
+"We didn't detect any USB key on your system. If you\n"
+"plug in an USB key now, Mandrake Move will have the ability\n"
+"to transparently save the data in your home directory and\n"
+"system wide configuration, for next boot on this computer\n"
+"or another one. Note: if you plug in a key now, wait several\n"
+"seconds before detecting again.\n"
+"\n"
+"\n"
+"You may also proceed without an USB key - you'll still be\n"
+"able to use Mandrake Move as a normal live Mandrake\n"
+"Operating System."
 msgstr ""
 
 #: ../../help.pm:1
@@ -7545,15 +7629,15 @@ msgstr "스티키 비트"
 msgid "Other Media"
 msgstr "다른 매체"
 
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "Backup system files"
-msgstr "시스템 파일 백업"
-
 #: ../../mouse.pm:1
 #, c-format
 msgid "Logitech MouseMan+"
 msgstr "로지텍 마우스맨/퍼스트마우스 (시리얼)"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "Backup system files"
+msgstr "시스템 파일 백업"
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -7616,6 +7700,11 @@ msgstr "사용자 정의 파티션 나누기"
 msgid "Please choose your type of mouse."
 msgstr "마우스 종류를 선택하세요."
 
+#: ../../services.pm:1
+#, c-format
+msgid "running"
+msgstr "실행중"
+
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "class of hardware device"
@@ -7632,11 +7721,6 @@ msgstr ""
 #, c-format
 msgid "United Kingdom"
 msgstr "영국"
-
-#: ../../services.pm:1
-#, c-format
-msgid "running"
-msgstr "실행중"
 
 #: ../../lang.pm:1
 #, c-format
@@ -7682,7 +7766,7 @@ msgstr "세네갈"
 msgid "Command line"
 msgstr "도메인 이름"
 
-#: ../../share/advertising/08-store.pl:1
+#: ../advertising/08-store.pl:1
 #, c-format
 msgid ""
 "Our full range of Linux solutions, as well as special offers on products and "
@@ -7734,6 +7818,17 @@ msgstr "스왑"
 #, fuzzy, c-format
 msgid "Custom settings"
 msgstr "사용자 정의 파티션 나누기"
+
+#: ../../../move/move.pm:1
+#, c-format
+msgid ""
+"The USB key seems to have write protection enabled, but we can't safely\n"
+"unplug it now.\n"
+"\n"
+"\n"
+"Click the button to reboot the machine, unplug it, remove write protection,\n"
+"plug the key again, and launch Mandrake Move again."
+msgstr ""
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -7837,7 +7932,7 @@ msgstr "어떤 어댑터로 인터넷에 연결할 것인지 선택하세요."
 msgid "Photo memory card access on your HP multi-function device"
 msgstr ""
 
-#: ../../share/advertising/09-mdksecure.pl:1
+#: ../advertising/09-mdksecure.pl:1
 #, c-format
 msgid ""
 "Enhance your computer performance with the help of a selection of partners "
@@ -7956,6 +8051,11 @@ msgstr ""
 #, c-format
 msgid "Exit install"
 msgstr "설치 종료"
+
+#: ../../../move/move.pm:1
+#, c-format
+msgid "Need a key to save your data"
+msgstr ""
 
 #: ../../standalone/drakgw:1
 #, c-format
@@ -8134,11 +8234,6 @@ msgstr "러시아 (음성학)"
 msgid "dhcpd Config..."
 msgstr "DHCPD 설정 중..."
 
-#: ../../standalone/drakgw:1
-#, c-format
-msgid "The setup has already been done, but it's currently disabled."
-msgstr "설정은 이미 완료되었지만, 현재 해제된 상태입니다."
-
 #: ../../any.pm:1
 #, c-format
 msgid "LILO/grub Installation"
@@ -8277,6 +8372,11 @@ msgstr ""
 msgid "Choose an X server"
 msgstr "X 서버 선택"
 
+#: ../../../move/tree/mdk_totem:1
+#, c-format
+msgid "Copying to memory to allow removing the CDROM"
+msgstr ""
+
 #: ../../install_interactive.pm:1
 #, c-format
 msgid "Swap partition size in MB: "
@@ -8326,7 +8426,7 @@ msgstr "자동 과정 설정기"
 msgid "Barbados"
 msgstr "바르바도스"
 
-#: ../../share/advertising/02-community.pl:1
+#: ../advertising/02-community.pl:1
 #, c-format
 msgid ""
 "Want to know more and to contribute to the Open Source community? Get "
@@ -8485,15 +8585,6 @@ msgstr ""
 msgid "First Time Wizard"
 msgstr "첫 실행 마법사"
 
-#: ../../install_steps.pm:1
-#, c-format
-msgid ""
-"An error occurred, but I don't know how to handle it nicely.\n"
-"Continue at your own risk."
-msgstr ""
-"오류가 발생했습니다. 그러나 적절히 처리할 수 없습니다.\n"
-"위헝을 감수할려면 계속하세요."
-
 #: ../../lang.pm:1
 #, fuzzy, c-format
 msgid "Taiwan"
@@ -8508,6 +8599,15 @@ msgstr "파키스탄"
 #, c-format
 msgid "please wait, parsing file: %s"
 msgstr "기다려 주세요. 파일 분석 중: %s"
+
+#: ../../install_steps.pm:1 ../../../move/move.pm:1
+#, c-format
+msgid ""
+"An error occurred, but I don't know how to handle it nicely.\n"
+"Continue at your own risk."
+msgstr ""
+"오류가 발생했습니다. 그러나 적절히 처리할 수 없습니다.\n"
+"위헝을 감수할려면 계속하세요."
 
 #: ../../install_steps_gtk.pm:1
 #, fuzzy, c-format
@@ -8689,6 +8789,11 @@ msgstr ""
 "플로피에 팩키지 선택목록을 적재 또는 저장할지를 선택하세요.\n"
 "형식(포맷)은 자동설치 생성 플로피와 동일합니다."
 
+#: ../../../move/tree/mdk_totem:1
+#, fuzzy, c-format
+msgid "No CDROM support"
+msgstr "라디오 지원:"
+
 #: ../../standalone/drakxtv:1
 #, c-format
 msgid "China (broadcast)"
@@ -8726,7 +8831,7 @@ msgstr ""
 "%s 모듈을 읽어들이는데 실패했습니다.\n"
 "다른 값으로 다시 시도해 보시겠습니까?"
 
-#: ../../share/advertising/01-thanks.pl:1
+#: ../advertising/01-thanks.pl:1
 #, c-format
 msgid "Welcome to the Open Source world."
 msgstr "공개 소스 세계에 오신 것을 환영합니다."
@@ -8944,6 +9049,11 @@ msgstr "기타 포트"
 msgid "number of capture buffers for mmap'ed capture"
 msgstr ""
 
+#: ../../network/adsl.pm:1
+#, fuzzy, c-format
+msgid " - detected"
+msgstr "%s 발견"
+
 #: ../../harddrake/data.pm:1
 #, c-format
 msgid "SMBus controllers"
@@ -9043,6 +9153,11 @@ msgstr ""
 msgid "Restore"
 msgstr "복구"
 
+#: ../../standalone/drakclock:1
+#, fuzzy, c-format
+msgid "Server:"
+msgstr "서버:"
+
 #: ../../security/help.pm:1
 #, c-format
 msgid "if set to yes, check if the network devices are in promiscuous mode."
@@ -9052,6 +9167,11 @@ msgstr ""
 #, c-format
 msgid "Looking for available packages..."
 msgstr "유효한 팩키지를 찾고 있습니다."
+
+#: ../../../move/move.pm:1
+#, fuzzy, c-format
+msgid "Please wait, setting up system configuration files on USB key..."
+msgstr "희망하는 보안 단계를 선택해 주세요."
 
 #: ../../any.pm:1
 #, c-format
@@ -9170,15 +9290,15 @@ msgid ""
 "per second)"
 msgstr ""
 
-#: ../../standalone/printerdrake:1
-#, fuzzy, c-format
-msgid "Mandrake Linux Printer Management Tool"
-msgstr "리눅스-맨드레이크 설치 %s"
-
 #: ../../pkgs.pm:1
 #, c-format
 msgid "important"
 msgstr "중요한 팩키지"
+
+#: ../../standalone/printerdrake:1
+#, fuzzy, c-format
+msgid "Mandrake Linux Printer Management Tool"
+msgstr "리눅스-맨드레이크 설치 %s"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -9247,6 +9367,11 @@ msgstr "사용자들"
 #, c-format
 msgid "Preparing bootloader..."
 msgstr "부트 로더 준비중"
+
+#: ../../../move/move.pm:1
+#, c-format
+msgid "Enter your user information, password will be used for screensaver"
+msgstr ""
 
 #: ../../network/network.pm:1
 #, c-format
@@ -9674,15 +9799,15 @@ msgstr "파일 내용"
 msgid "Authentication LDAP"
 msgstr "인증 LDAP"
 
+#: ../../install_steps_gtk.pm:1
+#, c-format
+msgid "in order to keep %s"
+msgstr ""
+
 #: ../../harddrake/sound.pm:1
 #, c-format
 msgid "Let me pick any driver"
 msgstr ""
-
-#: ../../standalone/net_monitor:1
-#, fuzzy, c-format
-msgid "Profile "
-msgstr "프로파일: "
 
 #: ../../standalone/net_monitor:1
 #, c-format
@@ -9781,9 +9906,9 @@ msgstr "커널 버전"
 #: ../../standalone/drakautoinst:1 ../../standalone/drakbackup:1
 #: ../../standalone/drakboot:1 ../../standalone/drakconnect:1
 #: ../../standalone/drakfloppy:1 ../../standalone/drakfont:1
-#: ../../standalone/drakgw:1 ../../standalone/drakperm:1
-#: ../../standalone/draksec:1 ../../standalone/logdrake:1
-#: ../../standalone/mousedrake:1 ../../standalone/net_monitor:1
+#: ../../standalone/drakperm:1 ../../standalone/draksec:1
+#: ../../standalone/logdrake:1 ../../standalone/mousedrake:1
+#: ../../standalone/net_monitor:1
 #, c-format
 msgid "Cancel"
 msgstr "취소"
@@ -9936,15 +10061,6 @@ msgstr "이탈리아"
 msgid "Basic"
 msgstr "기본"
 
-#: ../../standalone/drakTermServ:1
-#, c-format
-msgid ""
-"\n"
-" Copyright (C) 2002 by MandrakeSoft \n"
-"\tStew Benedict sbenedict\\@mandrakesoft.com\n"
-"\n"
-msgstr ""
-
 #: ../../install_messages.pm:1
 #, fuzzy, c-format
 msgid "http://www.mandrakelinux.com/en/92errata.php3"
@@ -9965,10 +10081,10 @@ msgstr ""
 msgid "Card IO"
 msgstr "카드 IO"
 
-#: ../../standalone/drakperm:1
-#, c-format
-msgid "when checked, owner and group won't be changed"
-msgstr ""
+#: ../../network/drakfirewall.pm:1
+#, fuzzy, c-format
+msgid "Samba server"
+msgstr "삼바 서비스"
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -10045,6 +10161,11 @@ msgstr ""
 msgid "access to compilation tools"
 msgstr "컴파일 도구 액세스"
 
+#: ../../standalone/net_monitor:1
+#, c-format
+msgid "Global statistics"
+msgstr ""
+
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "Please select data to restore..."
@@ -10065,6 +10186,11 @@ msgstr ""
 #, c-format
 msgid "Standard test page"
 msgstr "표준 시험 페이지"
+
+#: ../../standalone/drakclock:1
+#, fuzzy, c-format
+msgid "Time Zone"
+msgstr "시간대"
 
 #: ../../diskdrake/hd_gtk.pm:1 ../../diskdrake/interactive.pm:1
 #, c-format
@@ -10148,6 +10274,15 @@ msgid ""
 "Your choice? "
 msgstr ""
 
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"\n"
+" Copyright (C) 2002 by MandrakeSoft \n"
+"\tStew Benedict sbenedict@mandrakesoft.com\n"
+"\n"
+msgstr ""
+
 #: ../../standalone/draksplash:1
 #, c-format
 msgid "Save theme"
@@ -10173,15 +10308,15 @@ msgstr "네트웍 설정 마법사"
 msgid "Removable media automounting"
 msgstr "탈착식 미디어 자동 마운트"
 
-#: ../../standalone/drakbackup:1
-#, fuzzy, c-format
-msgid "Enter the directory to save:"
-msgstr "저장할 디렉토리를 선택하세요:"
-
 #: ../../services.pm:1
 #, c-format
 msgid "Printing"
 msgstr "인쇄"
+
+#: ../../standalone/drakbackup:1
+#, fuzzy, c-format
+msgid "Enter the directory to save:"
+msgstr "저장할 디렉토리를 선택하세요:"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -10304,7 +10439,7 @@ msgstr "켄싱턴 씽킹 마우스"
 msgid "Configuration of a remote printer"
 msgstr "원격 프린터 설정"
 
-#: ../../share/advertising/13-mdkexpert_corporate.pl:1
+#: ../advertising/13-mdkexpert_corporate.pl:1
 #, c-format
 msgid "An online platform to respond to enterprise support needs."
 msgstr ""
@@ -10449,15 +10584,22 @@ msgstr ""
 msgid "Configure Local Area Network..."
 msgstr "지역 네트웍 설정..."
 
-#: ../../security/l10n.pm:1
+#: ../../../move/move.pm:1
 #, c-format
-msgid "Verify checksum of the suid/sgid files"
+msgid ""
+"The USB key seems to have write protection enabled. Please\n"
+"unplug it, remove write protection, and then plug it again."
 msgstr ""
 
 #: ../../services.pm:1
 #, c-format
 msgid "Launch the sound system on your machine"
 msgstr "이 컴퓨터에서 사운드 시스템 실행"
+
+#: ../../security/l10n.pm:1
+#, c-format
+msgid "Verify checksum of the suid/sgid files"
+msgstr ""
 
 #: ../../security/l10n.pm:1
 #, c-format
@@ -10763,6 +10905,11 @@ msgstr "이 팩키지를 선택해제할수 없습니다. 반드시 업그레이드되어야 합니다."
 msgid "Loading from floppy"
 msgstr "플로피에서 읽는 중"
 
+#: ../../standalone/drakclock:1
+#, c-format
+msgid "Timezone - DrakClock"
+msgstr ""
+
 #: ../../security/help.pm:1
 #, c-format
 msgid "Enable/Disable the logging of IPv4 strange packets."
@@ -10907,6 +11054,11 @@ msgstr ""
 "설치후 시스템 설정에 대한 정보는 공식 맨드레이크 리눅스 유저 가이드를\n"
 "참고하시기 바랍니다."
 
+#: ../../standalone/drakclock:1
+#, c-format
+msgid "Enable Network Time Protocol"
+msgstr ""
+
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "paranoid"
@@ -10994,7 +11146,7 @@ msgstr "네트웍 도구 액세스"
 msgid "Firmware-Upload for HP LaserJet 1000"
 msgstr ""
 
-#: ../../share/advertising/03-software.pl:1
+#: ../advertising/03-software.pl:1
 #, c-format
 msgid ""
 "And, of course, push multimedia to its limits with the very latest software "
@@ -11053,15 +11205,15 @@ msgstr "부트 프로토콜"
 msgid "LVM-disks %s\n"
 msgstr "LVM-디스크 %s\n"
 
-#: ../../diskdrake/interactive.pm:1
-#, c-format
-msgid "The package %s is needed. Install it?"
-msgstr "팩키지 %s가 필요합니다. 설치하겠습니까?"
-
 #: ../../services.pm:1
 #, c-format
 msgid "On boot"
 msgstr "자동실행"
+
+#: ../../diskdrake/interactive.pm:1
+#, c-format
+msgid "The package %s is needed. Install it?"
+msgstr "팩키지 %s가 필요합니다. 설치하겠습니까?"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -11077,6 +11229,11 @@ msgstr "라트바아"
 #, c-format
 msgid "Please make a backup of your data first"
 msgstr "먼저 데이터를 백업하세요."
+
+#: ../../harddrake/data.pm:1
+#, c-format
+msgid "ADSL adapters"
+msgstr ""
 
 #: ../../install_interactive.pm:1
 #, c-format
@@ -11104,7 +11261,7 @@ msgstr "부팅시 적재 모듈이 있을 경우에만 이미지 생성"
 msgid "Remove List"
 msgstr "제거 목록"
 
-#: ../../share/advertising/05-desktop.pl:1
+#: ../advertising/05-desktop.pl:1
 #, c-format
 msgid "A customizable environment"
 msgstr ""
@@ -11303,6 +11460,13 @@ msgstr ""
 #: ../../network/tools.pm:1
 #, c-format
 msgid "Firmware copy succeeded"
+msgstr ""
+
+#: ../../../move/tree/mdk_totem:1
+#, c-format
+msgid ""
+"You can't use another CDROM when the following programs are running: \n"
+"%s"
 msgstr ""
 
 #: ../../security/help.pm:1
@@ -11739,6 +11903,11 @@ msgid ""
 "line, e. g. \"%s <file>\". "
 msgstr ""
 
+#: ../../standalone/drakclock:1
+#, fuzzy, c-format
+msgid "DrakClock"
+msgstr "드레이크 백업"
+
 #: ../../modules/interactive.pm:1
 #, c-format
 msgid ""
@@ -11767,21 +11936,6 @@ msgid ""
 "\n"
 "- Daemon, %s via:\n"
 msgstr ""
-
-#: ../../standalone/drakgw:1
-#, c-format
-msgid ""
-"Welcome to the Internet Connection Sharing utility!\n"
-"\n"
-"%s\n"
-"\n"
-"Click on Configure to launch the setup wizard."
-msgstr ""
-"인터넷 연결공유 유틸리티에 잘 오셨습니다!\n"
-"\n"
-"%s\n"
-"\n"
-"마법사를 실행하려면 「설정」을 누르세요."
 
 #: ../../lang.pm:1
 #, c-format
@@ -11960,6 +12114,11 @@ msgstr ""
 msgid "Christmas Island"
 msgstr "크리스마스 섬"
 
+#: ../../mouse.pm:1
+#, fuzzy, c-format
+msgid "Automatic"
+msgstr "IP 자동할당"
+
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Installation of bootloader failed. The following error occured:"
@@ -12063,11 +12222,6 @@ msgstr ""
 #, c-format
 msgid "Set root password and network authentication methods"
 msgstr ""
-
-#: ../../standalone/drakgw:1
-#, c-format
-msgid "Internet Connection Sharing configuration"
-msgstr "인터넷 연결공유 설정"
 
 #: ../../ugtk2.pm:1
 #, c-format
@@ -12308,6 +12462,11 @@ msgstr "부트 디스크를 만들때 사용할 플로피 드라이브를 선택해 주세요"
 msgid "LILO with text menu"
 msgstr "텍스트 메뉴 LILO"
 
+#: ../../standalone/net_monitor:1
+#, c-format
+msgid "instantaneous"
+msgstr ""
+
 #: ../../network/drakfirewall.pm:1
 #, c-format
 msgid "Everything (no firewall)"
@@ -12486,6 +12645,11 @@ msgstr "사용자명을 입력해 주세요"
 msgid "Enable CD Boot?"
 msgstr "CD 부팅 허용?"
 
+#: ../../../move/move.pm:1
+#, c-format
+msgid "Simply reboot"
+msgstr ""
+
 #: ../../interactive/stdio.pm:1
 #, c-format
 msgid " enter `void' for void entry"
@@ -12564,15 +12728,15 @@ msgid ""
 "other machines on your local network as well."
 msgstr ""
 
-#: ../../install_steps_interactive.pm:1
-#, c-format
-msgid "Which is your timezone?"
-msgstr "님의 시간대는 어디입니까?"
-
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "Can't create log file!"
 msgstr ""
+
+#: ../../install_steps_interactive.pm:1 ../../standalone/drakclock:1
+#, c-format
+msgid "Which is your timezone?"
+msgstr "님의 시간대는 어디입니까?"
 
 #: ../../standalone/drakbackup:1
 #, fuzzy, c-format
@@ -12619,6 +12783,11 @@ msgstr "모잠비크"
 msgid "Icon"
 msgstr "아이콘"
 
+#: ../../../move/tree/mdk_totem:1
+#, fuzzy, c-format
+msgid "Kill those programs"
+msgstr "X 프로그램 액세스"
+
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "Please choose what you want to backup"
@@ -12654,7 +12823,7 @@ msgstr "규칙 추가"
 msgid "Chunk size %s\n"
 msgstr "크기 %s\n"
 
-#: ../../share/advertising/02-community.pl:1
+#: ../advertising/02-community.pl:1
 #, c-format
 msgid "Build the future of Linux!"
 msgstr ""
@@ -12783,7 +12952,7 @@ msgstr ""
 "면\n"
 "「아니오」를 누르세요."
 
-#: ../../share/advertising/13-mdkexpert_corporate.pl:1
+#: ../advertising/13-mdkexpert_corporate.pl:1
 #, c-format
 msgid "MandrakeExpert Corporate"
 msgstr "맨드레이크 전문가 법인"
@@ -12821,6 +12990,11 @@ msgstr "프린터 모델 선택"
 msgid ""
 "After changing type of partition %s, all data on this partition will be lost"
 msgstr "%s의 파티션 유형을 변경후 이 파티션내의 모든 자료를 잃게 됩니다."
+
+#: ../../harddrake/data.pm:1
+#, fuzzy, c-format
+msgid "ISDN adapters"
+msgstr "내장 ISDN 카드"
 
 #: ../../common.pm:1
 #, c-format
@@ -13088,6 +13262,11 @@ msgstr "유효한 프린터들"
 msgid "Plug'n Play probing failed. Please select the correct monitor"
 msgstr ""
 
+#: ../../../move/move.pm:1
+#, c-format
+msgid "Detect again USB key"
+msgstr ""
+
 #: ../../services.pm:1
 #, c-format
 msgid "Services and deamons"
@@ -13129,7 +13308,7 @@ msgstr "서비스 설정"
 msgid "Slovakian (QWERTZ)"
 msgstr "슬로바키아 (QWERTZ)"
 
-#: ../../share/advertising/06-development.pl:1
+#: ../advertising/06-development.pl:1
 #, c-format
 msgid ""
 "To modify and to create in different languages such as Perl, Python, C and C+"
@@ -13190,6 +13369,11 @@ msgstr "알제리"
 #, c-format
 msgid "Restore Via Network"
 msgstr "네트웍을 통한 복구"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "Use tar and bzip2 (rather than tar and gzip)"
+msgstr ""
 
 #: ../../any.pm:1
 #, c-format
@@ -13305,7 +13489,7 @@ msgstr ""
 msgid "Georgian (\"Latin\" layout)"
 msgstr "그루지아 (라틴)"
 
-#: ../../share/advertising/09-mdksecure.pl:1
+#: ../advertising/09-mdksecure.pl:1
 #, c-format
 msgid "Get the best items with Mandrake Linux Strategic partners"
 msgstr ""
@@ -13405,7 +13589,7 @@ msgstr "자동로그인"
 msgid "Domain Admin Password"
 msgstr ""
 
-#: ../../share/advertising/05-desktop.pl:1
+#: ../advertising/05-desktop.pl:1
 #, c-format
 msgid ""
 "Perfectly adapt your computer to your needs thanks to the 11 available "
@@ -13545,6 +13729,11 @@ msgstr ""
 msgid "Pipe job into a command"
 msgstr "작업을 명령으로 파이프 연결"
 
+#: ../../../move/move.pm:1
+#, fuzzy, c-format
+msgid "Remove system config files"
+msgstr "루프백 파일을 제거합니까?"
+
 #: ../../lang.pm:1
 #, c-format
 msgid "Cote d'Ivoire"
@@ -13556,7 +13745,8 @@ msgid "new dynamic device name generated by core kernel devfs"
 msgstr ""
 
 #: ../../help.pm:1 ../../install_any.pm:1 ../../interactive.pm:1
-#: ../../ugtk2.pm:1 ../../modules/interactive.pm:1 ../../standalone/drakgw:1
+#: ../../ugtk2.pm:1 ../../modules/interactive.pm:1
+#: ../../standalone/drakclock:1 ../../standalone/drakgw:1
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "Yes"
@@ -13577,11 +13767,6 @@ msgstr "복구 진행"
 msgid "Estonia"
 msgstr "에스토니아"
 
-#: ../../standalone/scannerdrake:1
-#, c-format
-msgid "Choose the host on which the local scanners should be made available:"
-msgstr ""
-
 #: ../../partition_table.pm:1
 #, c-format
 msgid ""
@@ -13593,6 +13778,11 @@ msgstr ""
 "유일한 해결책은 주 파티션들이 확장 파티션들의 뒤에 있는 빈 공간을 차지하도록 "
 "옴기는 것입니다."
 
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "Choose the host on which the local scanners should be made available:"
+msgstr ""
+
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "Channel"
@@ -13603,11 +13793,6 @@ msgstr "채널"
 #, c-format
 msgid "Add"
 msgstr "추가"
-
-#: ../../standalone/drakgw:1
-#, c-format
-msgid "No Internet Connection Sharing has ever been configured."
-msgstr "어떠한 인터넷 연결 공유도 설정된 적이 없습니다."
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -13894,7 +14079,7 @@ msgstr "설치합니까 아니면 업데이트 합니까?"
 msgid "ISDN card"
 msgstr "내장 ISDN 카드"
 
-#: ../../share/advertising/02-community.pl:1
+#: ../advertising/02-community.pl:1
 #, c-format
 msgid ""
 "To share your own knowledge and help build Linux software, join our "
@@ -13928,6 +14113,40 @@ msgid ""
 "Using the ``Upgrade'' option should work fine on Mandrake Linux systems\n"
 "running version \"8.1\" or later. Performing an Upgrade on versions prior\n"
 "to Mandrake Linux version \"8.1\" is not recommended."
+msgstr ""
+
+#: ../../standalone/drakfont:1
+#, c-format
+msgid ""
+"\n"
+" Copyright (C) 2001-2002 by MandrakeSoft \n"
+"     DUPONT Sebastien (original version)\n"
+"     CHAUMETTE Damien <dchaumette@mandrakesoft.com>\n"
+"\n"
+" This program is free software; you can redistribute it and/or modify\n"
+" it under the terms of the GNU General Public License as published by\n"
+" the Free Software Foundation; either version 2, or (at your option)\n"
+" any later version.\n"
+"\n"
+" This program is distributed in the hope that it will be useful,\n"
+" but WITHOUT ANY WARRANTY; without even the implied warranty of\n"
+" MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n"
+" GNU General Public License for more details.\n"
+"\n"
+" You should have received a copy of the GNU General Public License\n"
+" along with this program; if not, write to the Free Software\n"
+" Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.\n"
+"\n"
+" Thanks:\n"
+"    -  pfm2afm:   \n"
+"\t by Ken Borgendale:\n"
+"\t    Convert a Windows .pfm  file to a .afm (Adobe Font Metrics)\n"
+"    -  type1inst:\n"
+"\t by James Macnicol: \n"
+"\t    type1inst generates files fonts.dir fonts.scale & Fontmap.\n"
+"    -  ttf2pt1:   \n"
+"\t  by Andrew Weeks, Frank Siegert, Thomas Henlich, Sergey Babkin  \n"
+"             Convert ttf font files to afm and pfb fonts\n"
 msgstr ""
 
 #: ../../printer/main.pm:1
@@ -13996,6 +14215,11 @@ msgstr ""
 msgid "Unsafe"
 msgstr "위험"
 
+#: ../../network/drakfirewall.pm:1
+#, fuzzy, c-format
+msgid "SSH server"
+msgstr "SSH 서비스"
+
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid ", %s sectors"
@@ -14003,7 +14227,7 @@ msgstr ", %s 섹터"
 
 #: ../../help.pm:1 ../../install_any.pm:1 ../../interactive.pm:1
 #: ../../ugtk2.pm:1 ../../modules/interactive.pm:1
-#: ../../standalone/harddrake2:1
+#: ../../standalone/drakclock:1 ../../standalone/harddrake2:1
 #, c-format
 msgid "No"
 msgstr "아니오"
@@ -14529,6 +14753,11 @@ msgstr "선택 항목 제거"
 msgid "Network configuration"
 msgstr "네트웍 설정"
 
+#: ../../standalone/harddrake2:1
+#, fuzzy, c-format
+msgid "/Autodetect _jaz drives"
+msgstr "자동 검색됨"
+
 #: ../../any.pm:1
 #, c-format
 msgid "No sharing"
@@ -14640,9 +14869,10 @@ msgstr ""
 #: ../../install_steps.pm:1 ../../diskdrake/dav.pm:1
 #: ../../diskdrake/hd_gtk.pm:1 ../../diskdrake/interactive.pm:1
 #: ../../diskdrake/smbnfs_gtk.pm:1 ../../interactive/http.pm:1
-#: ../../standalone/drakboot:1 ../../standalone/drakbug:1
+#: ../../standalone/drakauth:1 ../../standalone/drakboot:1
+#: ../../standalone/drakbug:1 ../../standalone/drakconnect:1
 #: ../../standalone/drakfloppy:1 ../../standalone/drakfont:1
-#: ../../standalone/draksplash:1
+#: ../../standalone/draksplash:1 ../../../move/move.pm:1
 #, c-format
 msgid "Error"
 msgstr "오류"
@@ -14686,6 +14916,11 @@ msgstr ""
 "님의 시스템은 다중 헤드 설정을 지원합니다.\n"
 "어떻게 하시겠습니까?"
 
+#: ../../partition_table.pm:1
+#, c-format
+msgid "mount failed: "
+msgstr "마운트 실패: "
+
 #: ../../steps.pm:1
 #, c-format
 msgid "Configure services"
@@ -14695,11 +14930,6 @@ msgstr "서비스 설정"
 #, c-format
 msgid "Broadcast Address:"
 msgstr ""
-
-#: ../../partition_table.pm:1
-#, c-format
-msgid "mount failed: "
-msgstr "마운트 실패: "
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -14714,15 +14944,15 @@ msgstr ""
 msgid "Image"
 msgstr "이미지"
 
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "Failed to add the printer \"%s\" to Star Office/OpenOffice.org/GIMP."
-msgstr ""
-
 #: ../../services.pm:1
 #, c-format
 msgid "Remote Administration"
 msgstr "원격 관리"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Failed to add the printer \"%s\" to Star Office/OpenOffice.org/GIMP."
+msgstr ""
 
 #: ../../modules.pm:1
 #, c-format
@@ -14780,7 +15010,7 @@ msgstr "칠월"
 msgid "Prints into %s"
 msgstr ", %s에 인쇄"
 
-#: ../../install_steps_interactive.pm:1
+#: ../../install_steps_interactive.pm:1 ../../../move/move.pm:1
 #, c-format
 msgid "An error occurred"
 msgstr "오류 발생"
@@ -14987,7 +15217,7 @@ msgstr ""
 msgid "Laos"
 msgstr "라오스"
 
-#: ../../share/advertising/04-configuration.pl:1
+#: ../advertising/04-configuration.pl:1
 #, c-format
 msgid ""
 "Mandrake Linux 9.2 provides you with the Mandrake Control Center, a powerful "
@@ -15163,11 +15393,6 @@ msgstr ""
 msgid "Is FPU present"
 msgstr ""
 
-#: ../../standalone/scannerdrake:1
-#, c-format
-msgid "There are no scanners found which are available on your system.\n"
-msgstr ""
-
 #: ../../services.pm:1
 #, c-format
 msgid ""
@@ -15176,6 +15401,11 @@ msgid ""
 msgstr ""
 "죄송합니다.\n"
 "이 서비스에 대한 추가정보가 없습니다."
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "There are no scanners found which are available on your system.\n"
+msgstr ""
 
 #: ../../standalone/drakTermServ:1
 #, c-format
@@ -15215,16 +15445,6 @@ msgstr "장치"
 #: ../../security/help.pm:1
 #, c-format
 msgid "if set to yes, report unowned files."
-msgstr ""
-
-#: ../../standalone/harddrake2:1
-#, c-format
-msgid ""
-"This is HardDrake, a Mandrake hardware configuration tool.\n"
-"<span foreground=\"royalblue3\">Version:</span> %s\n"
-"<span foreground=\"royalblue3\">Author:</span> Thierry Vignaud &lt;tvignaud"
-"\\@mandrakesoft.com&gt;\n"
-"\n"
 msgstr ""
 
 #: ../../install_interactive.pm:1
@@ -15308,10 +15528,21 @@ msgstr "베트남"
 msgid "/_Fields description"
 msgstr "설명"
 
-#: ../../share/advertising/10-security.pl:1
+#: ../advertising/10-security.pl:1
 #, c-format
 msgid "Optimize your security by using Mandrake Linux"
 msgstr "보안 최적화"
+
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"\n"
+"\n"
+" Thanks:\n"
+"\t- LTSP Project http://www.ltsp.org\n"
+"\t- Michael Brown <mbrown@fensystems.co.uk>\n"
+"\n"
+msgstr ""
 
 #: ../../install_steps_gtk.pm:1 ../../interactive.pm:1 ../../ugtk2.pm:1
 #: ../../Xconfig/resolution_and_depth.pm:1 ../../diskdrake/hd_gtk.pm:1
@@ -15408,7 +15639,7 @@ msgstr ""
 msgid "mkinitrd optional arguments"
 msgstr "mkinitrd의 기타 인자"
 
-#: ../../share/advertising/03-software.pl:1
+#: ../advertising/03-software.pl:1
 #, c-format
 msgid ""
 "Surf the Web with Mozilla or Konqueror, read your mail with Evolution or "
@@ -15602,6 +15833,11 @@ msgstr "XFS 재시작"
 #, fuzzy, c-format
 msgid "Printing/Scanning/Photo Cards on \"%s\""
 msgstr "프린터「%s」상에서 인쇄 중"
+
+#: ../../../move/move.pm:1
+#, c-format
+msgid "Continue without USB key"
+msgstr ""
 
 #: ../../install_steps.pm:1
 #, c-format
@@ -16022,7 +16258,7 @@ msgstr "일반 모뎀 연결"
 msgid "Hardware probing in progress"
 msgstr "검색 진행 중"
 
-#: ../../standalone/drakgw:1
+#: ../../network/shorewall.pm:1 ../../standalone/drakgw:1
 #, fuzzy, c-format
 msgid "Net Device"
 msgstr "Xinetd 서비스"
@@ -16079,6 +16315,11 @@ msgid ""
 "package 'ImageMagick' is required to be able to complete configuration.\n"
 "Click \"Ok\" to install 'ImageMagick' or \"Cancel\" to quit"
 msgstr ""
+
+#: ../../network/drakfirewall.pm:1
+#, fuzzy, c-format
+msgid "Telnet server"
+msgstr "X 서버"
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -16338,7 +16579,7 @@ msgstr "시스템 로그"
 msgid "Can't create catalog!"
 msgstr ""
 
-#: ../../share/advertising/11-mnf.pl:1
+#: ../advertising/11-mnf.pl:1
 #, c-format
 msgid ""
 "Complete your security setup with this very easy-to-use software which "
@@ -16388,6 +16629,11 @@ msgstr "인터넷 연결 설정"
 #, c-format
 msgid "Add the name as an exception to the handling of password aging by msec."
 msgstr ""
+
+#: ../../network/isdn.pm:1
+#, fuzzy, c-format
+msgid "USB"
+msgstr "LSB"
 
 #: ../../standalone/drakxtv:1
 #, c-format
@@ -16450,6 +16696,11 @@ msgstr "작업 그룹"
 #, c-format
 msgid "Printer host name or IP"
 msgstr "프린터 호스트명 또는 IP"
+
+#: ../../standalone/drakconnect:1
+#, fuzzy, c-format
+msgid "down"
+msgstr "완료"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -16860,6 +17111,11 @@ msgstr "항목 추가"
 msgid "The printers on this machine are available to other computers"
 msgstr ""
 
+#: ../../lang.pm:1
+#, fuzzy, c-format
+msgid "China (Hong Kong)"
+msgstr "홍콩"
+
 #: ../../standalone/drakautoinst:1
 #, c-format
 msgid "I can't find needed image file `%s'."
@@ -16913,7 +17169,7 @@ msgstr "설치되지 않았습니다."
 msgid "American Samoa"
 msgstr "미국령 사모아"
 
-#: ../../share/advertising/12-mdkexpert.pl:1
+#: ../advertising/12-mdkexpert.pl:1
 #, c-format
 msgid "Become a MandrakeExpert"
 msgstr "맨드레이크 전문가가 되세요."
@@ -17029,6 +17285,11 @@ msgstr "이탈리아"
 msgid "Cayman Islands"
 msgstr "케이만 제도"
 
+#: ../../fs.pm:1 ../../partition_table.pm:1
+#, c-format
+msgid "error unmounting %s: %s"
+msgstr "%s를 언마운트중 오류발생: %s"
+
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Name of printer"
@@ -17038,11 +17299,6 @@ msgstr "프린터 이름"
 #, c-format
 msgid "disable"
 msgstr "해제"
-
-#: ../../fs.pm:1 ../../partition_table.pm:1
-#, c-format
-msgid "error unmounting %s: %s"
-msgstr "%s를 언마운트중 오류발생: %s"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -17144,7 +17400,7 @@ msgstr "콤팩드 모드"
 msgid "Detected model: %s %s"
 msgstr "검색된 모델: %s %s"
 
-#: ../../share/advertising/03-software.pl:1
+#: ../advertising/03-software.pl:1
 #, c-format
 msgid "MandrakeSoft has selected the best software for you"
 msgstr ""
@@ -17248,6 +17504,11 @@ msgstr "시작시 바로 X 실행"
 msgid " adsl"
 msgstr ""
 
+#: ../../raid.pm:1
+#, c-format
+msgid "Not enough partitions for RAID level %d\n"
+msgstr "RAID 레벨 %d를 위한 파티션들이 충분하지 않습니다.\n"
+
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "format of floppies supported by the drive"
@@ -17257,11 +17518,6 @@ msgstr ""
 #, c-format
 msgid "Firmware copy failed, file %s not found"
 msgstr ""
-
-#: ../../raid.pm:1
-#, c-format
-msgid "Not enough partitions for RAID level %d\n"
-msgstr "RAID 레벨 %d를 위한 파티션들이 충분하지 않습니다.\n"
 
 #: ../../standalone/drakTermServ:1
 #, fuzzy, c-format
@@ -17384,7 +17640,7 @@ msgid ""
 "No CD or DVD image found, please copy the installation program and rpm files."
 msgstr ""
 
-#: ../../share/advertising/04-configuration.pl:1
+#: ../advertising/04-configuration.pl:1
 #, fuzzy, c-format
 msgid "Mandrake's multipurpose configuration tool"
 msgstr "맨드레이크 터미널 서버 설정"
@@ -17414,7 +17670,7 @@ msgstr "덴마크"
 msgid "Enter a printer device URI"
 msgstr "프린터 장치 URI을 입력하세요."
 
-#: ../../share/advertising/01-thanks.pl:1
+#: ../advertising/01-thanks.pl:1
 #, c-format
 msgid ""
 "The success of MandrakeSoft is based upon the principle of Free Software. "
@@ -17923,7 +18179,7 @@ msgstr "카드 모델:"
 msgid "Thin Client"
 msgstr "DHCP 클라이언트"
 
-#: ../../share/advertising/01-thanks.pl:1
+#: ../advertising/01-thanks.pl:1
 #, c-format
 msgid "Thank you for choosing Mandrake Linux 9.2"
 msgstr "맨드레이크 리눅스 9.2를 선택해 주셔서 감사합니다."
@@ -18026,6 +18282,13 @@ msgstr "윈도우즈 폰트 가져오기"
 msgid "Mouse Systems"
 msgstr "마우스 시스템"
 
+#: ../../standalone/drakclock:1
+#, c-format
+msgid ""
+"Your computer can synchronize its clock\n"
+" with a remote time server using NTP"
+msgstr ""
+
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Iranian"
@@ -18051,7 +18314,7 @@ msgstr "사용자 추가"
 msgid "Remote printer name"
 msgstr "원격 프린터명"
 
-#: ../../share/advertising/10-security.pl:1
+#: ../advertising/10-security.pl:1
 #, c-format
 msgid ""
 "MandrakeSoft has designed exclusive tools to create the most secured Linux "
@@ -18198,6 +18461,11 @@ msgstr "마이크로소프트 익스플로러"
 msgid "Uninstall Fonts"
 msgstr "폰트 제거"
 
+#: ../../../move/move.pm:1
+#, fuzzy, c-format
+msgid "Please wait, detecting and configuring devices..."
+msgstr "희망하는 보안 단계를 선택해 주세요."
+
 #: ../../keyboard.pm:1
 #, c-format
 msgid "German (no dead keys)"
@@ -18224,11 +18492,6 @@ msgid ""
 "You can export using NFS or Samba. Please select which you'd like to use."
 msgstr "NFS와 삼바 중, 어느 것을 이용하시겠습니까?"
 
-#: ../../help.pm:1 ../../install_steps_interactive.pm:1
-#, fuzzy, c-format
-msgid "Reboot"
-msgstr "루트"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Gambia"
@@ -18238,6 +18501,12 @@ msgstr "잠비아"
 #, c-format
 msgid "Mandrake Control Center"
 msgstr "맨드레이크 제어 센터"
+
+#: ../../help.pm:1 ../../install_steps_interactive.pm:1
+#: ../../../move/move.pm:1
+#, fuzzy, c-format
+msgid "Reboot"
+msgstr "루트"
 
 #: ../../printer/main.pm:1
 #, c-format
@@ -18268,6 +18537,11 @@ msgstr ""
 #, c-format
 msgid "Remember this password"
 msgstr "비밀번호 기억"
+
+#: ../../install_steps_gtk.pm:1
+#, c-format
+msgid "due to unsatisfied %s"
+msgstr ""
 
 #: ../../standalone/drakgw:1
 #, c-format
@@ -18325,6 +18599,11 @@ msgstr "파푸아뉴기니"
 #, fuzzy, c-format
 msgid "Multi-function device on a parallel port"
 msgstr "프린터 호스트명 또는 IP"
+
+#: ../../../move/tree/mdk_totem:1
+#, fuzzy, c-format
+msgid "Busy files"
+msgstr "시스템 파일 백업"
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -18388,6 +18667,16 @@ msgstr ""
 #, c-format
 msgid "DHCP Client"
 msgstr "DHCP 클라이언트"
+
+#: ../../standalone/harddrake2:1
+#, c-format
+msgid ""
+"This is HardDrake, a Mandrake hardware configuration tool.\n"
+"<span foreground=\"royalblue3\">Version:</span> %s\n"
+"<span foreground=\"royalblue3\">Author:</span> Thierry Vignaud &lt;"
+"tvignaud@mandrakesoft.com&gt;\n"
+"\n"
+msgstr ""
 
 #: ../../standalone/drakgw:1
 #, c-format
@@ -18576,47 +18865,13 @@ msgstr "프린터 전송 하지않음"
 msgid "Delay before booting the default image"
 msgstr "기본 이미지로 부팅될 때까지 지연시간"
 
-#: ../../standalone/drakfont:1
-#, c-format
-msgid ""
-"\n"
-" Copyright (C) 2001-2002 by MandrakeSoft \n"
-"     DUPONT Sebastien (original version)\n"
-"     CHAUMETTE Damien <dchaumette\\@mandrakesoft.com>\n"
-"\n"
-" This program is free software; you can redistribute it and/or modify\n"
-" it under the terms of the GNU General Public License as published by\n"
-" the Free Software Foundation; either version 2, or (at your option)\n"
-" any later version.\n"
-"\n"
-" This program is distributed in the hope that it will be useful,\n"
-" but WITHOUT ANY WARRANTY; without even the implied warranty of\n"
-" MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n"
-" GNU General Public License for more details.\n"
-"\n"
-" You should have received a copy of the GNU General Public License\n"
-" along with this program; if not, write to the Free Software\n"
-" Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.\n"
-"\n"
-" Thanks:\n"
-"    -  pfm2afm:   \n"
-"\t by Ken Borgendale:\n"
-"\t    Convert a Windows .pfm  file to a .afm (Adobe Font Metrics)\n"
-"    -  type1inst:\n"
-"\t by James Macnicol: \n"
-"\t    type1inst generates files fonts.dir fonts.scale & Fontmap.\n"
-"    -  ttf2pt1:   \n"
-"\t  by Andrew Weeks, Frank Siegert, Thomas Henlich, Sergey Babkin  \n"
-"             Convert ttf font files to afm and pfb fonts\n"
-msgstr ""
-
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "Use Hard Disk to backup"
 msgstr "하드 디스크로 백업"
 
 #: ../../help.pm:1 ../../install_steps_gtk.pm:1 ../../standalone/drakbackup:1
-#: ../../standalone/drakboot:1 ../../standalone/drakgw:1
+#: ../../standalone/drakboot:1
 #, c-format
 msgid "Configure"
 msgstr "설정"
@@ -18684,7 +18939,7 @@ msgstr ""
 "이미 설치가 완료된 컴퓨터에서 「rpm -qpl Mandrake/RPMS/*.rpm」명령으로 점검"
 "해 보세요.\n"
 
-#: ../../share/advertising/06-development.pl:1
+#: ../advertising/06-development.pl:1
 #, c-format
 msgid "Mandrake Linux 9.2: the ultimate development platform"
 msgstr ""
@@ -18765,6 +19020,11 @@ msgstr "최종 해상도"
 msgid "Services"
 msgstr "서비스"
 
+#: ../../../move/move.pm:1
+#, fuzzy, c-format
+msgid "Auto configuration"
+msgstr "경고 설정"
+
 #: ../../Xconfig/card.pm:1
 #, c-format
 msgid "4 MB"
@@ -18803,9 +19063,10 @@ msgid "Internet station"
 msgstr "인터넷 스테이션"
 
 #: ../../share/compssUsers:999
+#, fuzzy
 msgid ""
-"Set of tools to read and send mail and news (pine, mutt, tin..) and to "
-"browse the Web"
+"Set of tools to read and send mail and news (mutt, tin..) and to browse the "
+"Web"
 msgstr "메일/뉴스를 일고 보내며 웹검색을 위한 도구모음(pine, mutt, tin...)"
 
 #: ../../share/compssUsers:999
@@ -18942,6 +19203,35 @@ msgstr "NFS 서버, 삼바 서버, 프락시 서버, SSH 서버"
 #, fuzzy
 msgid "Set of tools to read and send mail and news and to browse the Web"
 msgstr "메일/뉴스를 일고 보내며 웹검색을 위한 도구모음(pine, mutt, tin...)"
+
+#~ msgid "The setup has already been done, and it's currently enabled."
+#~ msgstr "설정이 이미 완료되었으며, 현재 허용된 상태입니다."
+
+#~ msgid "The setup has already been done, but it's currently disabled."
+#~ msgstr "설정은 이미 완료되었지만, 현재 해제된 상태입니다."
+
+#, fuzzy
+#~ msgid "Profile "
+#~ msgstr "프로파일: "
+
+#~ msgid ""
+#~ "Welcome to the Internet Connection Sharing utility!\n"
+#~ "\n"
+#~ "%s\n"
+#~ "\n"
+#~ "Click on Configure to launch the setup wizard."
+#~ msgstr ""
+#~ "인터넷 연결공유 유틸리티에 잘 오셨습니다!\n"
+#~ "\n"
+#~ "%s\n"
+#~ "\n"
+#~ "마법사를 실행하려면 「설정」을 누르세요."
+
+#~ msgid "Internet Connection Sharing configuration"
+#~ msgstr "인터넷 연결공유 설정"
+
+#~ msgid "No Internet Connection Sharing has ever been configured."
+#~ msgstr "어떠한 인터넷 연결 공유도 설정된 적이 없습니다."
 
 #~ msgid "-adobe-utopia-regular-r-*-*-25-*-*-*-p-*-iso8859-*,*-r-*"
 #~ msgstr ""

@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX-vi\n"
-"POT-Creation-Date: 2003-09-16 13:45+0200\n"
+"POT-Creation-Date: 2003-12-03 03:09+0100\n"
 "PO-Revision-Date: 2003-09-19 17:57+0700\n"
 "Last-Translator: Trinh Minh Thanh <tmthanh@yahoo.com>\n"
 "Language-Team: Vietnamese <gnomevi-list@lists.sourceforge.net>\n"
@@ -282,11 +282,6 @@ msgstr "Cấu hình CUPS"
 msgid "Total progress"
 msgstr "Toàn bộ tiến trình"
 
-#: ../../lang.pm:1
-#, c-format
-msgid "Hong Kong"
-msgstr "Hong Kong"
-
 #: ../../install_interactive.pm:1
 #, c-format
 msgid "Not enough free space to allocate new partitions"
@@ -361,6 +356,24 @@ msgstr "Biên soạn host được chọn"
 msgid "No CD device defined!"
 msgstr "Không có thiết bị CD được chỉ định!"
 
+#: ../../network/shorewall.pm:1
+#, fuzzy, c-format
+msgid ""
+"Please enter the name of the interface connected to the "
+"internet.              \n"
+"                \n"
+"Examples:\n"
+"                ppp+ for modem or DSL connections, \n"
+"                eth0, or eth1 for cable connection, \n"
+"                ippp+ for a isdn connection.\n"
+msgstr ""
+"Hãy nhập tên giao tiếp kết nối internet.\n"
+"\n"
+"Ví dụ:\n"
+"\t\tppp+ cho kết nối modem hay DSL, \n"
+"\t\teth0, hoặc eth1 cho kết nối cáp, \n"
+"\t\tippp+ cho kết nối ISDN.\n"
+
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "\tUse .backupignore files\n"
@@ -434,15 +447,20 @@ msgstr "Hoàn thành việc thay đổi, bạn có muốn chạy lại dịch v�
 msgid "Swiss (French layout)"
 msgstr "Thụy sỹ (bàn phím Pháp)"
 
+#: ../../raid.pm:1
+#, c-format
+msgid "mkraid failed (maybe raidtools are missing?)"
+msgstr "mkraid không được (có lẽ thiếu raidtools ?)"
+
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "August"
 msgstr "Tháng Tám"
 
-#: ../../raid.pm:1
-#, c-format
-msgid "mkraid failed (maybe raidtools are missing?)"
-msgstr "mkraid không được (có lẽ thiếu raidtools ?)"
+#: ../../network/drakfirewall.pm:1
+#, fuzzy, c-format
+msgid "FTP server"
+msgstr "Máy chủ NTP"
 
 #: ../../harddrake/data.pm:1
 #, c-format
@@ -523,11 +541,6 @@ msgstr ""
 #, c-format
 msgid "Configuring..."
 msgstr "Đang cấu hình..."
-
-#: ../../standalone/drakgw:1
-#, c-format
-msgid "The setup has already been done, and it's currently enabled."
-msgstr "Đã hoàn thành xong cài đặt, và hiện thời nó được hoạt động."
 
 #: ../../harddrake/v4l.pm:1
 #, c-format
@@ -663,6 +676,11 @@ msgstr " trên máy chủ Novell \"%s\", máy in \"%s\""
 msgid "Printer Name"
 msgstr "Tên máy in"
 
+#: ../../../move/move.pm:1
+#, c-format
+msgid "Setting up USB key"
+msgstr ""
+
 #: ../../standalone/drakfloppy:1
 #, c-format
 msgid "Remove a module"
@@ -720,15 +738,17 @@ msgstr ""
 msgid "if needed"
 msgstr "Nếu cần thiết"
 
+#: ../../standalone/drakclock:1
+#, c-format
+msgid ""
+"We need to install ntp package\n"
+" to enable Network Time Protocol"
+msgstr ""
+
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "Restore Failed..."
 msgstr "Không Khôi Phục Được..."
-
-#: ../../standalone/harddrake2:1
-#, c-format
-msgid "/Autodetect _jazz drives"
-msgstr "/Tự động phát hiện _jazz drive"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -1043,11 +1063,6 @@ msgstr "\tGiới hạn sử dụng đĩa đến %s MB\n"
 #, c-format
 msgid "512 kB"
 msgstr "512 kB"
-
-#: ../../standalone/net_monitor:1
-#, c-format
-msgid "Logs"
-msgstr "Logs"
 
 #: ../../standalone/scannerdrake:1
 #, c-format
@@ -1547,6 +1562,11 @@ msgstr "Latvian"
 msgid "monthly"
 msgstr "hàng tháng"
 
+#: ../../../move/move.pm:1
+#, fuzzy, c-format
+msgid "Retry"
+msgstr "Khôi phục"
+
 #: ../../standalone/drakfloppy:1
 #, c-format
 msgid "Module name"
@@ -1591,6 +1611,11 @@ msgstr "Dùng Unicode theo mặc định"
 #, c-format
 msgid "the module of the GNU/Linux kernel that handles the device"
 msgstr "Module của GNU/Linux kernel quản lý thiết bị đó"
+
+#: ../../standalone/drakclock:1
+#, fuzzy, c-format
+msgid "Is your hardware clock set to GMT?"
+msgstr "Đồng hồ trong máy đặt theo GMT"
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -1637,6 +1662,11 @@ msgstr "Không thể chạy nâng cấp thực!!!\n"
 msgid "Name: "
 msgstr "Tên:"
 
+#: ../../standalone/drakconnect:1
+#, c-format
+msgid "up"
+msgstr ""
+
 #: ../../Xconfig/resolution_and_depth.pm:1
 #, c-format
 msgid "16 million colors (24 bits)"
@@ -1647,7 +1677,7 @@ msgstr "16 triệu màu (24 bits)"
 msgid "Allow all users"
 msgstr "Cho phép mọi người dùng"
 
-#: ../../share/advertising/08-store.pl:1
+#: ../advertising/08-store.pl:1
 #, c-format
 msgid "The official MandrakeSoft Store"
 msgstr "Cửa hàng chính thức của MandrakeSoft"
@@ -1681,15 +1711,15 @@ msgstr "Người dùng"
 msgid "Do new backup before restore (only for incremental backups.)"
 msgstr "Thực hiện sao lưu mới trước khi khôi phục (chỉ cho các sao lưu mới)"
 
-#: ../../standalone/harddrake2:1
-#, c-format
-msgid "Name"
-msgstr "Tên"
-
 #: ../../raid.pm:1
 #, c-format
 msgid "mkraid failed"
 msgstr "mkraid không được"
+
+#: ../../standalone/harddrake2:1
+#, c-format
+msgid "Name"
+msgstr "Tên"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -1907,6 +1937,23 @@ msgstr "đang cho các server hoạt động..."
 #, c-format
 msgid "Printing test page(s)..."
 msgstr "Đang in thử trang..."
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid ""
+"Transfer successful\n"
+"You may want to verify you can login to the server with:\n"
+"\n"
+"ssh -i %s %s@%s\n"
+"\n"
+"without being prompted for a password."
+msgstr ""
+"Truyền tải thành công.\n"
+"Có thể kiểm tra là bạn có thể đăng nhập vào máy chủ bằng:\n"
+"\n"
+"ssh -i %s %s@%s\n"
+"\n"
+"mà không bị nhắc nhở về mật khẩu."
 
 #: ../../fsedit.pm:1
 #, c-format
@@ -2899,6 +2946,11 @@ msgstr "Dung lượng của từng ổ đĩa (khả năng ghi và/hoặc hỗ tr
 msgid "Can't add a partition to _formatted_ RAID md%d"
 msgstr "Không thể thêm một phân vùng cho _formatted_ RAID md%d"
 
+#: ../../standalone/drakclock:1
+#, fuzzy, c-format
+msgid "Network Time Protocol"
+msgstr "Giao diện mạng"
+
 #: ../../Xconfig/card.pm:1
 #, c-format
 msgid ""
@@ -3132,7 +3184,7 @@ msgstr "Palau"
 msgid "level"
 msgstr "Mức độ"
 
-#: ../../share/advertising/13-mdkexpert_corporate.pl:1
+#: ../advertising/13-mdkexpert_corporate.pl:1
 #, c-format
 msgid ""
 "All incidents will be followed up by a single qualified MandrakeSoft "
@@ -3529,7 +3581,7 @@ msgstr ""
 msgid "Bad package"
 msgstr "Gói hỏng"
 
-#: ../../share/advertising/07-server.pl:1
+#: ../advertising/07-server.pl:1
 #, c-format
 msgid ""
 "Transform your computer into a powerful Linux server: Web server, mail, "
@@ -3799,7 +3851,7 @@ msgstr "Chào mừng các Cracker"
 msgid "Module options:"
 msgstr "Tùy chọn của module:"
 
-#: ../../share/advertising/11-mnf.pl:1
+#: ../advertising/11-mnf.pl:1
 #, c-format
 msgid "Secure your networks with the Multi Network Firewall"
 msgstr "Bảo mật mạng của bạn bằng Multi Network Firewall"
@@ -3877,6 +3929,11 @@ msgstr "Chuột"
 #, c-format
 msgid "not enough room in /boot"
 msgstr "không đủ ngăn trong /boot"
+
+#: ../../install_steps_gtk.pm:1
+#, c-format
+msgid "trying to promote %s"
+msgstr ""
 
 #: ../../lang.pm:1
 #, c-format
@@ -4026,6 +4083,11 @@ msgstr ""
 msgid "Saudi Arabia"
 msgstr "Saudi Arabia"
 
+#: ../../services.pm:1
+#, c-format
+msgid "Internet"
+msgstr "Internet"
+
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid "Continue anyway?"
@@ -4045,11 +4107,6 @@ msgstr ""
 #, c-format
 msgid "Printer"
 msgstr "Máy in"
-
-#: ../../services.pm:1
-#, c-format
-msgid "Internet"
-msgstr "Internet"
 
 #: ../../standalone/service_harddrake:1
 #, c-format
@@ -4124,6 +4181,11 @@ msgstr "Các điểm gắn kết chỉ nên dùng các ký tự chữ và số"
 #, c-format
 msgid "Restarting printing system..."
 msgstr "Đang khởi chạy lại hệ thống in ấn ..."
+
+#: ../../../move/tree/mdk_totem:1
+#, c-format
+msgid "You can only run with no CDROM support"
+msgstr ""
 
 #: ../../modules/interactive.pm:1
 #, c-format
@@ -4357,15 +4419,15 @@ msgstr "ISA / PCMCIA"
 msgid "About"
 msgstr "Giới thiệu về"
 
-#: ../../network/network.pm:1
-#, c-format
-msgid "Proxies configuration"
-msgstr "Cấu hình máy chủ ủy nhiệm"
-
 #: ../../mouse.pm:1
 #, c-format
 msgid "GlidePoint"
 msgstr "GlidePoint"
+
+#: ../../network/network.pm:1
+#, c-format
+msgid "Proxies configuration"
+msgstr "Cấu hình máy chủ ủy nhiệm"
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -4517,6 +4579,11 @@ msgstr "Điểm gắn kết phải bắt đầu với / đứng đầu"
 msgid "Choose your CD/DVD device"
 msgstr "Chọn phương tiện CD/DVD"
 
+#: ../../network/drakfirewall.pm:1
+#, fuzzy, c-format
+msgid "CUPS server"
+msgstr "Máy chủ DNS"
+
 #: ../../standalone/logdrake:1
 #, c-format
 msgid "Postfix Mail Server"
@@ -4532,7 +4599,7 @@ msgstr "Thoát mà không lưu lại"
 msgid "Yemen"
 msgstr "Yemen"
 
-#: ../../share/advertising/11-mnf.pl:1
+#: ../advertising/11-mnf.pl:1
 #, c-format
 msgid "This product is available on the MandrakeStore Web site."
 msgstr "Sản phẩm này hiện có trên website của MandrakeStore"
@@ -4541,6 +4608,31 @@ msgstr "Sản phẩm này hiện có trên website của MandrakeStore"
 #, c-format
 msgid "=> There are many things to choose from (%s).\n"
 msgstr "=> Có rất nhiều thứ để chọn từ (%s).\n"
+
+#: ../../standalone/drakclock:1
+#, c-format
+msgid "GMT - DrakClock"
+msgstr ""
+
+#: ../../../move/move.pm:1
+#, c-format
+msgid ""
+"An error occurred:\n"
+"\n"
+"\n"
+"%s\n"
+"\n"
+"This may come from corrupted system configuration files\n"
+"on the USB key, in this case removing them and then\n"
+"rebooting Mandrake Move would fix the problem. To do\n"
+"so, click on the corresponding button.\n"
+"\n"
+"\n"
+"You may also want to reboot and remove the USB key, or\n"
+"examine its contents under another OS, or even have\n"
+"a look at log files in console #3 and #4 to try to\n"
+"guess what's happening."
+msgstr ""
 
 #: ../../steps.pm:1
 #, c-format
@@ -4778,6 +4870,11 @@ msgstr "Userdrake"
 #, c-format
 msgid "Which partition do you want to use for Linux4Win?"
 msgstr "Phân vùng nào bạn muốn sử dụng cho Linux4Win?"
+
+#: ../../install_steps_gtk.pm:1
+#, fuzzy, c-format
+msgid "due to missing %s"
+msgstr "thiếu kdesu"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -5333,7 +5430,7 @@ msgstr ""
 msgid "Started on boot"
 msgstr "Được chạy lúc khởi động "
 
-#: ../../share/advertising/12-mdkexpert.pl:1
+#: ../advertising/12-mdkexpert.pl:1
 #, c-format
 msgid ""
 "Join the MandrakeSoft support teams and the Linux Community online to share "
@@ -5668,11 +5765,6 @@ msgid ""
 msgstr ""
 "Hiển thị theme\n"
 "dưới console"
-
-#: ../../standalone/net_monitor:1
-#, c-format
-msgid "Statistics"
-msgstr "Thống kê"
 
 #: ../../printer/cups.pm:1
 #, c-format
@@ -6540,7 +6632,7 @@ msgstr ""
 "Lưu và khôi phục entropy pool của hệ thống để cho hoạt động\n"
 "sinh số ngẫu nhiên có chất lượng cao."
 
-#: ../../share/advertising/07-server.pl:1
+#: ../advertising/07-server.pl:1
 #, c-format
 msgid "Turn your computer into a reliable server"
 msgstr "Biến máy tính của bạn thành một máy chủ tin cậy."
@@ -6555,6 +6647,11 @@ msgstr "Kiểm tra mật khẩu trống trong /etc/shadow"
 msgid " (driver %s)"
 msgstr " (driver %s)"
 
+#: ../../services.pm:1
+#, c-format
+msgid "Start when requested"
+msgstr "Chạy khi có yêu cầu"
+
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid ""
@@ -6568,11 +6665,6 @@ msgstr ""
 #, c-format
 msgid "I don't know"
 msgstr "Tôi không biết"
-
-#: ../../services.pm:1
-#, c-format
-msgid "Start when requested"
-msgstr "Chạy khi có yêu cầu"
 
 #: ../../printer/main.pm:1
 #, c-format
@@ -6801,6 +6893,11 @@ msgstr ""
 "Có thể chạy printerdrake trong mục Phần Cứng tại Trung Tâm Điều Khiển "
 "Mandrake."
 
+#: ../../../move/move.pm:1
+#, fuzzy, c-format
+msgid "Key isn't writable"
+msgstr "XawTV chưa được cài đặt!"
+
 #: ../../lang.pm:1
 #, c-format
 msgid "Bangladesh"
@@ -6849,15 +6946,15 @@ msgstr ""
 msgid "Set the root umask."
 msgstr "Đặt root umask."
 
-#: ../../network/modem.pm:1 ../../standalone/drakconnect:1
-#, c-format
-msgid "Script-based"
-msgstr "Script-based"
-
 #: ../../install_any.pm:1 ../../partition_table.pm:1
 #, c-format
 msgid "Error reading file %s"
 msgstr "Lỗi khi đọc tập tin %s"
+
+#: ../../network/modem.pm:1 ../../standalone/drakconnect:1
+#, c-format
+msgid "Script-based"
+msgstr "Script-based"
 
 #: ../../harddrake/v4l.pm:1
 #, c-format
@@ -6941,23 +7038,6 @@ msgstr ""
 #, c-format
 msgid "Domain Authentication Required"
 msgstr "Yêu cầu Xác Thực Miền"
-
-#: ../../standalone/drakTermServ:1
-#, c-format
-msgid ""
-"\n"
-"\n"
-" Thanks:\n"
-"\t- LTSP Project http://www.ltsp.org\n"
-"\t- Michael Brown <mbrown\\@fensystems.co.uk>\n"
-"\n"
-msgstr ""
-"\n"
-"\n"
-" Cảm ơn:\n"
-"\t- Dự án LTSP http://www.ltsp.org\n"
-"\t- Michael Brown <mbrown\\@fensystems.co.uk>\n"
-"\n"
 
 #: ../../security/level.pm:1
 #, c-format
@@ -7700,15 +7780,15 @@ msgstr "Yaboot"
 msgid "Logitech CC Series with Wheel emulation"
 msgstr "Logitech CC Series với mô phỏng bánh xe"
 
-#: ../../standalone/drakboot:1
-#, c-format
-msgid "Splash selection"
-msgstr "Chọn splash"
-
 #: ../../partition_table.pm:1
 #, c-format
 msgid "Extended partition not supported on this platform"
 msgstr "Phân vùng mở rộng không được hỗ trợ trên nền tảng này"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Splash selection"
+msgstr "Chọn splash"
 
 #: ../../network/isdn.pm:1
 #, c-format
@@ -7768,6 +7848,11 @@ msgstr ""
 msgid "Printer default settings"
 msgstr "Các thiết lập mặc định của máy in"
 
+#: ../../mouse.pm:1
+#, c-format
+msgid "Generic PS2 Wheel Mouse"
+msgstr "Generic PS2 Wheel Mouse"
+
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid ""
@@ -7778,11 +7863,6 @@ msgstr ""
 "WP flag trong CR0 register của cpu buộc phải chống ghi lên memory page "
 "level, do đó cho phép bộ vi xử lý phòng chống việc truy cập kernel không "
 "được kiểm đến bộ nhớ của người dùng (aka đây là cơ chế bảo vệ lỗi)"
-
-#: ../../mouse.pm:1
-#, c-format
-msgid "Generic PS2 Wheel Mouse"
-msgstr "Generic PS2 Wheel Mouse"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -7948,6 +8028,11 @@ msgstr "Bàn phím Hàn quốc"
 msgid "Not connected"
 msgstr "Chưa kết nối"
 
+#: ../../standalone/net_monitor:1
+#, fuzzy, c-format
+msgid "No internet connection configured"
+msgstr "Cấu hình kết nối Internet"
+
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Greek"
@@ -7962,23 +8047,6 @@ msgstr "Saint Kitts and Nevis"
 #, c-format
 msgid "Generic 3 Button Mouse with Wheel emulation"
 msgstr "Chuột chuẩn chung 3 nút với mô phỏng bánh xe"
-
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid ""
-"Transfer successful\n"
-"You may want to verify you can login to the server with:\n"
-"\n"
-"ssh -i %s %s\\@%s\n"
-"\n"
-"without being prompted for a password."
-msgstr ""
-"Truyền tải thành công.\n"
-"Có thể kiểm tra là bạn có thể đăng nhập vào máy chủ bằng:\n"
-"\n"
-"ssh -i %s %s\\@%s\n"
-"\n"
-"mà không bị nhắc nhở về mật khẩu."
 
 #: ../../any.pm:1
 #, c-format
@@ -8211,7 +8279,7 @@ msgstr ""
 "Nhấn \"Truyền\" để ghi đè lên nó.\n"
 "Bạn cũng có thể gõ tên mới hay bỏ qua máy in này."
 
-#: ../../share/advertising/12-mdkexpert.pl:1
+#: ../advertising/12-mdkexpert.pl:1
 #, c-format
 msgid ""
 "Find the solutions of your problems via MandrakeSoft's online support "
@@ -8278,6 +8346,22 @@ msgstr "Kyrgyzstan"
 #, c-format
 msgid "Multi-function device on USB"
 msgstr "Thiết bị đa năng trên USB"
+
+#: ../../../move/move.pm:1
+#, c-format
+msgid ""
+"We didn't detect any USB key on your system. If you\n"
+"plug in an USB key now, Mandrake Move will have the ability\n"
+"to transparently save the data in your home directory and\n"
+"system wide configuration, for next boot on this computer\n"
+"or another one. Note: if you plug in a key now, wait several\n"
+"seconds before detecting again.\n"
+"\n"
+"\n"
+"You may also proceed without an USB key - you'll still be\n"
+"able to use Mandrake Move as a normal live Mandrake\n"
+"Operating System."
+msgstr ""
 
 #: ../../help.pm:1
 #, c-format
@@ -8376,15 +8460,15 @@ msgstr "Sticky-bit"
 msgid "Other Media"
 msgstr "Phương tiện Khác"
 
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "Backup system files"
-msgstr "Sao lưu các file hệ thống"
-
 #: ../../mouse.pm:1
 #, c-format
 msgid "Logitech MouseMan+"
 msgstr "Logitech MouseMan+"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "Backup system files"
+msgstr "Sao lưu các file hệ thống"
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -8447,6 +8531,11 @@ msgstr "Thiết lập của hệ thống"
 msgid "Please choose your type of mouse."
 msgstr "Hãy chọn loại chuột."
 
+#: ../../services.pm:1
+#, c-format
+msgid "running"
+msgstr "đang chạy"
+
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "class of hardware device"
@@ -8464,11 +8553,6 @@ msgstr ""
 #, c-format
 msgid "United Kingdom"
 msgstr "Anh Quốc"
-
-#: ../../services.pm:1
-#, c-format
-msgid "running"
-msgstr "đang chạy"
 
 #: ../../lang.pm:1
 #, c-format
@@ -8514,7 +8598,7 @@ msgstr "Senegal"
 msgid "Command line"
 msgstr "Dòng lệnh"
 
-#: ../../share/advertising/08-store.pl:1
+#: ../advertising/08-store.pl:1
 #, c-format
 msgid ""
 "Our full range of Linux solutions, as well as special offers on products and "
@@ -8574,6 +8658,17 @@ msgstr "Swap"
 #, c-format
 msgid "Custom settings"
 msgstr "Thiết lập tùy chọn"
+
+#: ../../../move/move.pm:1
+#, c-format
+msgid ""
+"The USB key seems to have write protection enabled, but we can't safely\n"
+"unplug it now.\n"
+"\n"
+"\n"
+"Click the button to reboot the machine, unplug it, remove write protection,\n"
+"plug the key again, and launch Mandrake Move again."
+msgstr ""
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -8684,7 +8779,7 @@ msgstr "Hãy chọn adapter mạng bạn muốn dùng để kết nối Internet
 msgid "Photo memory card access on your HP multi-function device"
 msgstr "Truy cập photo memory card trên thiết bị đa năng HP của bạn"
 
-#: ../../share/advertising/09-mdksecure.pl:1
+#: ../advertising/09-mdksecure.pl:1
 #, c-format
 msgid ""
 "Enhance your computer performance with the help of a selection of partners "
@@ -8805,6 +8900,11 @@ msgstr ""
 #, c-format
 msgid "Exit install"
 msgstr "Thoát khỏi cài đặt"
+
+#: ../../../move/move.pm:1
+#, c-format
+msgid "Need a key to save your data"
+msgstr ""
 
 #: ../../standalone/drakgw:1
 #, c-format
@@ -8994,11 +9094,6 @@ msgstr "Russian (Phonetic)"
 msgid "dhcpd Config..."
 msgstr "Cấu hình DHCPd..."
 
-#: ../../standalone/drakgw:1
-#, c-format
-msgid "The setup has already been done, but it's currently disabled."
-msgstr "Đã hoàn thành xong cài đặt, nhưng hiện tại nó không được hoạt động."
-
 #: ../../any.pm:1
 #, c-format
 msgid "LILO/grub Installation"
@@ -9176,6 +9271,11 @@ msgstr ""
 msgid "Choose an X server"
 msgstr "Chọn X server"
 
+#: ../../../move/tree/mdk_totem:1
+#, c-format
+msgid "Copying to memory to allow removing the CDROM"
+msgstr ""
+
 #: ../../install_interactive.pm:1
 #, c-format
 msgid "Swap partition size in MB: "
@@ -9225,7 +9325,7 @@ msgstr "Cấu hình các bước tự động"
 msgid "Barbados"
 msgstr "Barbados"
 
-#: ../../share/advertising/02-community.pl:1
+#: ../advertising/02-community.pl:1
 #, c-format
 msgid ""
 "Want to know more and to contribute to the Open Source community? Get "
@@ -9389,15 +9489,6 @@ msgstr "Thế hệ con của CPU"
 msgid "First Time Wizard"
 msgstr "Đồ Thuật Chạy Lần Đầu Tiên"
 
-#: ../../install_steps.pm:1
-#, c-format
-msgid ""
-"An error occurred, but I don't know how to handle it nicely.\n"
-"Continue at your own risk."
-msgstr ""
-"Có lỗi xảy ra, không rõ cách giải quyết thích hợp.\n"
-"Tiếp tục với rủi ro."
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Taiwan"
@@ -9412,6 +9503,15 @@ msgstr "Pakistan"
 #, c-format
 msgid "please wait, parsing file: %s"
 msgstr "Hãy đợi, đang phân tích tập tin: %s"
+
+#: ../../install_steps.pm:1 ../../../move/move.pm:1
+#, c-format
+msgid ""
+"An error occurred, but I don't know how to handle it nicely.\n"
+"Continue at your own risk."
+msgstr ""
+"Có lỗi xảy ra, không rõ cách giải quyết thích hợp.\n"
+"Tiếp tục với rủi ro."
 
 #: ../../install_steps_gtk.pm:1
 #, c-format
@@ -9609,6 +9709,11 @@ msgstr ""
 "Hãy chọn tải hay lưu lựa chọn gói tin vào đĩa mềm.\n"
 "Định dạng giống như các đĩa mềm được tạo ra khi cài đặt tự động."
 
+#: ../../../move/tree/mdk_totem:1
+#, fuzzy, c-format
+msgid "No CDROM support"
+msgstr "Hỗ trợ Radio:"
+
 #: ../../standalone/drakxtv:1
 #, c-format
 msgid "China (broadcast)"
@@ -9650,7 +9755,7 @@ msgstr ""
 "Nạp module %s không được.\n"
 "Bạn có muốn thử lại với các tham số khác?"
 
-#: ../../share/advertising/01-thanks.pl:1
+#: ../advertising/01-thanks.pl:1
 #, c-format
 msgid "Welcome to the Open Source world."
 msgstr "Chào mừng thế giới Mã Nguồn Mở."
@@ -9877,6 +9982,11 @@ msgstr "Các cổng khác"
 msgid "number of capture buffers for mmap'ed capture"
 msgstr "số các capture buffer cho mmap'ed capture"
 
+#: ../../network/adsl.pm:1
+#, fuzzy, c-format
+msgid " - detected"
+msgstr "dò tìm được"
+
 #: ../../harddrake/data.pm:1
 #, c-format
 msgid "SMBus controllers"
@@ -9979,6 +10089,11 @@ msgstr "Khởi động lại bằng người dùng console"
 msgid "Restore"
 msgstr "Khôi phục"
 
+#: ../../standalone/drakclock:1
+#, fuzzy, c-format
+msgid "Server:"
+msgstr "Máy chủ:"
+
 #: ../../security/help.pm:1
 #, c-format
 msgid "if set to yes, check if the network devices are in promiscuous mode."
@@ -9989,6 +10104,11 @@ msgstr ""
 #, c-format
 msgid "Looking for available packages..."
 msgstr "Đang tìm các gói hiện có"
+
+#: ../../../move/move.pm:1
+#, fuzzy, c-format
+msgid "Please wait, setting up system configuration files on USB key..."
+msgstr "Hãy đợi, đang thiết lập mức bảo mật..."
 
 #: ../../any.pm:1
 #, c-format
@@ -10110,15 +10230,15 @@ msgstr ""
 "tần số CPU tính theo MHz (MHz là đánh giá ban đầu có thể được hiểu là số mà "
 "CPU có thể thực thi trong một giây)"
 
-#: ../../standalone/printerdrake:1
-#, c-format
-msgid "Mandrake Linux Printer Management Tool"
-msgstr "Công cụ quản lý máy in của Mandrake Linux"
-
 #: ../../pkgs.pm:1
 #, c-format
 msgid "important"
 msgstr "quan trọng"
+
+#: ../../standalone/printerdrake:1
+#, c-format
+msgid "Mandrake Linux Printer Management Tool"
+msgstr "Công cụ quản lý máy in của Mandrake Linux"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -10175,6 +10295,11 @@ msgstr "Người dùng"
 #, c-format
 msgid "Preparing bootloader..."
 msgstr "Đang chuẩn bị trình khởi động"
+
+#: ../../../move/move.pm:1
+#, c-format
+msgid "Enter your user information, password will be used for screensaver"
+msgstr ""
 
 #: ../../network/network.pm:1
 #, c-format
@@ -10624,15 +10749,15 @@ msgstr "Nội dung tập tin"
 msgid "Authentication LDAP"
 msgstr "Chứng thực "
 
+#: ../../install_steps_gtk.pm:1
+#, c-format
+msgid "in order to keep %s"
+msgstr ""
+
 #: ../../harddrake/sound.pm:1
 #, c-format
 msgid "Let me pick any driver"
 msgstr "Hãy để chương trình chọn một driver bất kỳ"
-
-#: ../../standalone/net_monitor:1
-#, c-format
-msgid "Profile "
-msgstr "Lý lịch "
 
 #: ../../standalone/net_monitor:1
 #, c-format
@@ -10733,9 +10858,9 @@ msgstr "Đưa ra phiên bản kernel"
 #: ../../standalone/drakautoinst:1 ../../standalone/drakbackup:1
 #: ../../standalone/drakboot:1 ../../standalone/drakconnect:1
 #: ../../standalone/drakfloppy:1 ../../standalone/drakfont:1
-#: ../../standalone/drakgw:1 ../../standalone/drakperm:1
-#: ../../standalone/draksec:1 ../../standalone/logdrake:1
-#: ../../standalone/mousedrake:1 ../../standalone/net_monitor:1
+#: ../../standalone/drakperm:1 ../../standalone/draksec:1
+#: ../../standalone/logdrake:1 ../../standalone/mousedrake:1
+#: ../../standalone/net_monitor:1
 #, c-format
 msgid "Cancel"
 msgstr "Bỏ qua"
@@ -10888,19 +11013,6 @@ msgstr "Ý"
 msgid "Basic"
 msgstr "Cơ bản"
 
-#: ../../standalone/drakTermServ:1
-#, c-format
-msgid ""
-"\n"
-" Copyright (C) 2002 by MandrakeSoft \n"
-"\tStew Benedict sbenedict\\@mandrakesoft.com\n"
-"\n"
-msgstr ""
-"\n"
-" Bản quyền (C) 2002 của MandrakeSoft \n"
-"\tStew Benedict sbenedict\\@mandrakesoft.com\n"
-"\n"
-
 #: ../../install_messages.pm:1
 #, c-format
 msgid "http://www.mandrakelinux.com/en/92errata.php3"
@@ -10921,10 +11033,10 @@ msgstr "pdq"
 msgid "Card IO"
 msgstr "Card IO"
 
-#: ../../standalone/drakperm:1
-#, c-format
-msgid "when checked, owner and group won't be changed"
-msgstr "khi được kiểm dấu, chủ sở hữu và nhóm sẽ không bị thay đổi"
+#: ../../network/drakfirewall.pm:1
+#, fuzzy, c-format
+msgid "Samba server"
+msgstr "Máy Chủ Samba"
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -11017,6 +11129,11 @@ msgstr ""
 msgid "access to compilation tools"
 msgstr "truy cập tới các công cụ biên dịch"
 
+#: ../../standalone/net_monitor:1
+#, fuzzy, c-format
+msgid "Global statistics"
+msgstr "Thống kê"
+
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "Please select data to restore..."
@@ -11037,6 +11154,11 @@ msgstr ""
 #, c-format
 msgid "Standard test page"
 msgstr "Trang in thử chuẩn"
+
+#: ../../standalone/drakclock:1
+#, fuzzy, c-format
+msgid "Time Zone"
+msgstr "Múi giờ"
 
 #: ../../diskdrake/hd_gtk.pm:1 ../../diskdrake/interactive.pm:1
 #, c-format
@@ -11143,6 +11265,19 @@ msgstr ""
 "hoặc nhấn Enter để tiến hành.\n"
 "Bạn chọn gì? "
 
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"\n"
+" Copyright (C) 2002 by MandrakeSoft \n"
+"\tStew Benedict sbenedict@mandrakesoft.com\n"
+"\n"
+msgstr ""
+"\n"
+" Bản quyền (C) 2002 của MandrakeSoft \n"
+"\tStew Benedict sbenedict@mandrakesoft.com\n"
+"\n"
+
 #: ../../standalone/draksplash:1
 #, c-format
 msgid "Save theme"
@@ -11168,15 +11303,15 @@ msgstr "Đồ Thuật Cấu Hình Mạng"
 msgid "Removable media automounting"
 msgstr "Tự động gắn kết phương tiện tháo lắp"
 
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "Enter the directory to save:"
-msgstr "Hãy nhập thư mục để lưu:"
-
 #: ../../services.pm:1
 #, c-format
 msgid "Printing"
 msgstr "In ấn"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "Enter the directory to save:"
+msgstr "Hãy nhập thư mục để lưu:"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -11297,7 +11432,7 @@ msgstr "Kensington Thinking Mouse"
 msgid "Configuration of a remote printer"
 msgstr "Cấu hình của một máy in ở xa"
 
-#: ../../share/advertising/13-mdkexpert_corporate.pl:1
+#: ../advertising/13-mdkexpert_corporate.pl:1
 #, c-format
 msgid "An online platform to respond to enterprise support needs."
 msgstr ""
@@ -11458,15 +11593,22 @@ msgstr ""
 msgid "Configure Local Area Network..."
 msgstr "Cấu hình mạng cục bộ..."
 
-#: ../../security/l10n.pm:1
+#: ../../../move/move.pm:1
 #, c-format
-msgid "Verify checksum of the suid/sgid files"
-msgstr "Thẩm tra checksum của các tập tin suid/sgid"
+msgid ""
+"The USB key seems to have write protection enabled. Please\n"
+"unplug it, remove write protection, and then plug it again."
+msgstr ""
 
 #: ../../services.pm:1
 #, c-format
 msgid "Launch the sound system on your machine"
 msgstr "Chạy hệ thống âm thanh trên máy tính của bạn"
+
+#: ../../security/l10n.pm:1
+#, c-format
+msgid "Verify checksum of the suid/sgid files"
+msgstr "Thẩm tra checksum của các tập tin suid/sgid"
 
 #: ../../security/l10n.pm:1
 #, c-format
@@ -11798,6 +11940,11 @@ msgstr "Bạn không thể không chọn gói này. Nó phải được nâng c�
 msgid "Loading from floppy"
 msgstr "Đang tải từ đĩa mềm"
 
+#: ../../standalone/drakclock:1
+#, c-format
+msgid "Timezone - DrakClock"
+msgstr ""
+
 #: ../../security/help.pm:1
 #, c-format
 msgid "Enable/Disable the logging of IPv4 strange packets."
@@ -11951,6 +12098,11 @@ msgstr ""
 "Thông tin cấu hình hệ thống có sẵn trong chương Sau Cài Đặt của\n"
 "hướng dẫn sử dụng chính (Official Mandrake Linux User's Guide)."
 
+#: ../../standalone/drakclock:1
+#, fuzzy, c-format
+msgid "Enable Network Time Protocol"
+msgstr "Khôi Phục Qua Giao Thức Mạng: %s"
+
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "paranoid"
@@ -12042,7 +12194,7 @@ msgstr "truy cập tới các công cụ mạng"
 msgid "Firmware-Upload for HP LaserJet 1000"
 msgstr "Firmware-Upload cho HP LaserJet 1000"
 
-#: ../../share/advertising/03-software.pl:1
+#: ../advertising/03-software.pl:1
 #, c-format
 msgid ""
 "And, of course, push multimedia to its limits with the very latest software "
@@ -12107,15 +12259,15 @@ msgstr "Giao thức khởi động"
 msgid "LVM-disks %s\n"
 msgstr "Các đĩa LVM %s\n"
 
-#: ../../diskdrake/interactive.pm:1
-#, c-format
-msgid "The package %s is needed. Install it?"
-msgstr "Cần gói tin %s. Cài đặt nó không?"
-
 #: ../../services.pm:1
 #, c-format
 msgid "On boot"
 msgstr "Đang khởi động"
+
+#: ../../diskdrake/interactive.pm:1
+#, c-format
+msgid "The package %s is needed. Install it?"
+msgstr "Cần gói tin %s. Cài đặt nó không?"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -12131,6 +12283,11 @@ msgstr "Vatican"
 #, c-format
 msgid "Please make a backup of your data first"
 msgstr "Trước hết, bạn hãy sao lưu dữ liệu"
+
+#: ../../harddrake/data.pm:1
+#, c-format
+msgid "ADSL adapters"
+msgstr ""
 
 #: ../../install_interactive.pm:1
 #, c-format
@@ -12157,7 +12314,7 @@ msgstr "Firmware cần có"
 msgid "Remove List"
 msgstr "Gỡbỏ Danh sách"
 
-#: ../../share/advertising/05-desktop.pl:1
+#: ../advertising/05-desktop.pl:1
 #, c-format
 msgid "A customizable environment"
 msgstr "Một môi trường khả chuyển"
@@ -12391,6 +12548,13 @@ msgstr "Đặt thời hạn shell. Giá trị bằng 0 sẽ là không có thờ
 #, c-format
 msgid "Firmware copy succeeded"
 msgstr "Hoàn thành sao chép firmware"
+
+#: ../../../move/tree/mdk_totem:1
+#, c-format
+msgid ""
+"You can't use another CDROM when the following programs are running: \n"
+"%s"
+msgstr ""
 
 #: ../../security/help.pm:1
 #, c-format
@@ -12880,6 +13044,11 @@ msgstr ""
 "đặc biệt. Đơn giản là thêm các thiết lập mong muốn vào dòng lệnh, ví dụ: \"%"
 "s <file>\". "
 
+#: ../../standalone/drakclock:1
+#, fuzzy, c-format
+msgid "DrakClock"
+msgstr "Drakbackup"
+
 #: ../../modules/interactive.pm:1
 #, c-format
 msgid ""
@@ -12910,21 +13079,6 @@ msgid ""
 msgstr ""
 "\n"
 "- Daemon, %s qua:\n"
-
-#: ../../standalone/drakgw:1
-#, c-format
-msgid ""
-"Welcome to the Internet Connection Sharing utility!\n"
-"\n"
-"%s\n"
-"\n"
-"Click on Configure to launch the setup wizard."
-msgstr ""
-"Chào mừng tiện ích Chia Sẻ Kết Nối Internet!\n"
-"\n"
-"%s\n"
-"\n"
-"Nhấn  lên Cấu hình để chạy đồ thuật thiết lập."
 
 #: ../../lang.pm:1
 #, c-format
@@ -13110,6 +13264,11 @@ msgstr ""
 msgid "Christmas Island"
 msgstr "Christmas Island"
 
+#: ../../mouse.pm:1
+#, fuzzy, c-format
+msgid "Automatic"
+msgstr "IP tự động"
+
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Installation of bootloader failed. The following error occured:"
@@ -13211,11 +13370,6 @@ msgstr " Truyền bây giờ"
 #, c-format
 msgid "Set root password and network authentication methods"
 msgstr "Đặt mật khẩu root và phương thức chứng thực trên mạng"
-
-#: ../../standalone/drakgw:1
-#, c-format
-msgid "Internet Connection Sharing configuration"
-msgstr "Cấu hình chia sẻ kết nối Internet"
 
 #: ../../ugtk2.pm:1
 #, c-format
@@ -13490,6 +13644,11 @@ msgstr "Chọn ổ đĩa mềm bạn muốn dùng để tạo đĩa khởi độ
 msgid "LILO with text menu"
 msgstr "LILO với menu văn bản"
 
+#: ../../standalone/net_monitor:1
+#, c-format
+msgid "instantaneous"
+msgstr ""
+
 #: ../../network/drakfirewall.pm:1
 #, c-format
 msgid "Everything (no firewall)"
@@ -13686,6 +13845,11 @@ msgstr "Hãy cho tên người dùng"
 msgid "Enable CD Boot?"
 msgstr "Cho phép khởi động từ CD?"
 
+#: ../../../move/move.pm:1
+#, c-format
+msgid "Simply reboot"
+msgstr ""
+
 #: ../../interactive/stdio.pm:1
 #, c-format
 msgid " enter `void' for void entry"
@@ -13787,15 +13951,15 @@ msgstr ""
 "cho tính năng này hoạt động. Thực tế là nó sẽ cài đặt một máy chủ thời\n"
 "gian lên máy tính này để các máy khác trong mạng cục bộ tùy ý sử dụng."
 
-#: ../../install_steps_interactive.pm:1
-#, c-format
-msgid "Which is your timezone?"
-msgstr "Múi giờ nào là của bạn?"
-
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "Can't create log file!"
 msgstr "Không thể tạo logfile !"
+
+#: ../../install_steps_interactive.pm:1 ../../standalone/drakclock:1
+#, c-format
+msgid "Which is your timezone?"
+msgstr "Múi giờ nào là của bạn?"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -13847,6 +14011,11 @@ msgstr "Mozambique"
 msgid "Icon"
 msgstr "Biểu tượng"
 
+#: ../../../move/tree/mdk_totem:1
+#, fuzzy, c-format
+msgid "Kill those programs"
+msgstr "truy cập tới các chương trình X"
+
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "Please choose what you want to backup"
@@ -13882,7 +14051,7 @@ msgstr "Thêm quy tắc"
 msgid "Chunk size %s\n"
 msgstr "Kích thước bó %s\n"
 
-#: ../../share/advertising/02-community.pl:1
+#: ../advertising/02-community.pl:1
 #, c-format
 msgid "Build the future of Linux!"
 msgstr "Xây dựng tương lai của Linux!"
@@ -14014,7 +14183,7 @@ msgstr ""
 "như một máy chủ, hay nếu bạn không thành công trong việc cấu hình hiển\n"
 "thị."
 
-#: ../../share/advertising/13-mdkexpert_corporate.pl:1
+#: ../advertising/13-mdkexpert_corporate.pl:1
 #, c-format
 msgid "MandrakeExpert Corporate"
 msgstr "Nhóm MandrakeExpert"
@@ -14055,6 +14224,11 @@ msgstr "Lựa chọn loại máy in"
 msgid ""
 "After changing type of partition %s, all data on this partition will be lost"
 msgstr "Sau khi thay đổi kiểu phân vùng %s, mọi dữ liệu trên đó sẽ mất"
+
+#: ../../harddrake/data.pm:1
+#, fuzzy, c-format
+msgid "ISDN adapters"
+msgstr "ISDN card"
 
 #: ../../common.pm:1
 #, c-format
@@ -14389,6 +14563,11 @@ msgstr "Chia sẻ máy quét cục bộ"
 msgid "Plug'n Play probing failed. Please select the correct monitor"
 msgstr "Dò tìm được Plug 'n' Play không được. Hãy chọn đúng monitor"
 
+#: ../../../move/move.pm:1
+#, c-format
+msgid "Detect again USB key"
+msgstr ""
+
 #: ../../services.pm:1
 #, c-format
 msgid "Services and deamons"
@@ -14431,7 +14610,7 @@ msgstr "Chkconfig tuân theo các quy tắc của msec"
 msgid "Slovakian (QWERTZ)"
 msgstr "Slovakian (QWERTZ)"
 
-#: ../../share/advertising/06-development.pl:1
+#: ../advertising/06-development.pl:1
 #, c-format
 msgid ""
 "To modify and to create in different languages such as Perl, Python, C and C+"
@@ -14497,6 +14676,11 @@ msgstr "Algeria"
 #, c-format
 msgid "Restore Via Network"
 msgstr "Khôi Phục Qua Mạng"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "Use tar and bzip2 (rather than tar and gzip)"
+msgstr ""
 
 #: ../../any.pm:1
 #, c-format
@@ -14632,7 +14816,7 @@ msgstr "DVD-ROM"
 msgid "Georgian (\"Latin\" layout)"
 msgstr "Tổ chức bàn phím Georgian (\"Latin\")"
 
-#: ../../share/advertising/09-mdksecure.pl:1
+#: ../advertising/09-mdksecure.pl:1
 #, c-format
 msgid "Get the best items with Mandrake Linux Strategic partners"
 msgstr ""
@@ -14739,7 +14923,7 @@ msgstr "Đăng nhập tự động"
 msgid "Domain Admin Password"
 msgstr "Mật Khẩu Quản Trị Miền"
 
-#: ../../share/advertising/05-desktop.pl:1
+#: ../advertising/05-desktop.pl:1
 #, c-format
 msgid ""
 "Perfectly adapt your computer to your needs thanks to the 11 available "
@@ -14881,6 +15065,11 @@ msgstr "utopia 25"
 msgid "Pipe job into a command"
 msgstr "Pipe (đặt ống dẫn) vào trong lệnh"
 
+#: ../../../move/move.pm:1
+#, fuzzy, c-format
+msgid "Remove system config files"
+msgstr "Có gỡ bỏ tập tin loopback không?"
+
 #: ../../lang.pm:1
 #, c-format
 msgid "Cote d'Ivoire"
@@ -14892,7 +15081,8 @@ msgid "new dynamic device name generated by core kernel devfs"
 msgstr "tên thiết bị động mới được tạo bởi core kernel devfs"
 
 #: ../../help.pm:1 ../../install_any.pm:1 ../../interactive.pm:1
-#: ../../ugtk2.pm:1 ../../modules/interactive.pm:1 ../../standalone/drakgw:1
+#: ../../ugtk2.pm:1 ../../modules/interactive.pm:1
+#: ../../standalone/drakclock:1 ../../standalone/drakgw:1
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "Yes"
@@ -14913,11 +15103,6 @@ msgstr "Khôi Phục Tiến Trình"
 msgid "Estonia"
 msgstr "Estonia"
 
-#: ../../standalone/scannerdrake:1
-#, c-format
-msgid "Choose the host on which the local scanners should be made available:"
-msgstr "Chọn host để tạo các máy quét cục bộ sẵn dùng trên đó:"
-
 #: ../../partition_table.pm:1
 #, c-format
 msgid ""
@@ -14929,6 +15114,11 @@ msgstr ""
 "sử dụng được. Chỉ có giải pháp là chuyển các phân vùng đầu tiên để có lỗ "
 "trống tiếp theo cho các phân vùng mở rộng"
 
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "Choose the host on which the local scanners should be made available:"
+msgstr "Chọn host để tạo các máy quét cục bộ sẵn dùng trên đó:"
+
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "Channel"
@@ -14939,11 +15129,6 @@ msgstr "Kênh"
 #, c-format
 msgid "Add"
 msgstr "Thêm"
-
-#: ../../standalone/drakgw:1
-#, c-format
-msgid "No Internet Connection Sharing has ever been configured."
-msgstr "Chưa có một chia sẻ kết nối Internet nào được cấu hình."
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -15233,7 +15418,7 @@ msgstr "Thực hiện việc cài đặt hay nâng cấp ?"
 msgid "ISDN card"
 msgstr "ISDN card"
 
-#: ../../share/advertising/02-community.pl:1
+#: ../advertising/02-community.pl:1
 #, c-format
 msgid ""
 "To share your own knowledge and help build Linux software, join our "
@@ -15290,6 +15475,68 @@ msgstr ""
 "Tùy chọn ``Nâng cấp'' sẽ hoạt động tốt trên hệ thống Mandrake Linux\n"
 "phiên bản \"8.1\" hay mới hơn. Không nên thực hiện nâng cấp cho các\n"
 "phiên bản cũ hơn Mandrake Linux \"8.1\" ."
+
+#: ../../standalone/drakfont:1
+#, c-format
+msgid ""
+"\n"
+" Copyright (C) 2001-2002 by MandrakeSoft \n"
+"     DUPONT Sebastien (original version)\n"
+"     CHAUMETTE Damien <dchaumette@mandrakesoft.com>\n"
+"\n"
+" This program is free software; you can redistribute it and/or modify\n"
+" it under the terms of the GNU General Public License as published by\n"
+" the Free Software Foundation; either version 2, or (at your option)\n"
+" any later version.\n"
+"\n"
+" This program is distributed in the hope that it will be useful,\n"
+" but WITHOUT ANY WARRANTY; without even the implied warranty of\n"
+" MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n"
+" GNU General Public License for more details.\n"
+"\n"
+" You should have received a copy of the GNU General Public License\n"
+" along with this program; if not, write to the Free Software\n"
+" Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.\n"
+"\n"
+" Thanks:\n"
+"    -  pfm2afm:   \n"
+"\t by Ken Borgendale:\n"
+"\t    Convert a Windows .pfm  file to a .afm (Adobe Font Metrics)\n"
+"    -  type1inst:\n"
+"\t by James Macnicol: \n"
+"\t    type1inst generates files fonts.dir fonts.scale & Fontmap.\n"
+"    -  ttf2pt1:   \n"
+"\t  by Andrew Weeks, Frank Siegert, Thomas Henlich, Sergey Babkin  \n"
+"             Convert ttf font files to afm and pfb fonts\n"
+msgstr ""
+"\n"
+" Bản quyền (C) 2001-2002 của MandrakeSoft \n"
+"        DUPONT Sebastien (phiên bản gốc)\n"
+"        CHAUMETTE Damien <dchaumette@mandrakesoft.com>\n"
+"\n"
+" Chương trình này là phần mềm miễn phí; bạn có thể phân phối lại hay\n"
+" thay đổi theo các điều khoản của GNU/GPL mà Quỹ Phần Mềm Tự Do\n"
+" công bố; với phiên bản 2, hay bất kỳ phiên bản mới nhất nào.\n"
+"\n"
+" Chương trình này được phân phối với hy vọng là nó có ích,\n"
+" nhưng Không Có Bất Kỳ Bảo Đảm Nào; thậm chí không có bảo đảm về\n"
+" Khả Năng Thương Mại hay Thích Hợp Với Mục Đích Đặc Biệt. Hãy xem\n"
+" GNU/GPL để biết thêm chi tiết.\n"
+"\n"
+"Bạn nên nhận lấy một bản sao của GNU/GPL đi kèm theo\n"
+"chương trình; nếu không có, xin viết thư tới: Free Software\n"
+"Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.\n"
+"\n"
+" Lời cảm ơn tới:\n"
+"    -  pfm2afm:   \n"
+"\t viết bởi Ken Borgendale:\n"
+"\t    Chuyển đổi tập tin *.pfm của Windows thành *.afm (Adobe Font Metrics)\n"
+"    -  type1inst:\n"
+"\t viết bởi James Macnicol: \n"
+"\t    type1inst tạo ra các tập tin fonts.dir fonts.scale & Fontmap.\n"
+"    -  ttf2pt1:   \n"
+"\t  viết bởi Andrew Weeks, Frank Siegert, Thomas Henlich, Sergey Babkin  \n"
+"             Chuyển đổi các tập tin ttf font thành afm và pfb font\n"
 
 #: ../../printer/main.pm:1
 #, c-format
@@ -15357,6 +15604,11 @@ msgstr "Chuỗi bắt đầu của DHCP"
 msgid "Unsafe"
 msgstr "Không an toàn"
 
+#: ../../network/drakfirewall.pm:1
+#, fuzzy, c-format
+msgid "SSH server"
+msgstr "Máy chủ SSH"
+
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid ", %s sectors"
@@ -15364,7 +15616,7 @@ msgstr ", %s sector"
 
 #: ../../help.pm:1 ../../install_any.pm:1 ../../interactive.pm:1
 #: ../../ugtk2.pm:1 ../../modules/interactive.pm:1
-#: ../../standalone/harddrake2:1
+#: ../../standalone/drakclock:1 ../../standalone/harddrake2:1
 #, c-format
 msgid "No"
 msgstr "Không"
@@ -15924,6 +16176,11 @@ msgstr "Bỏ host được chọn"
 msgid "Network configuration"
 msgstr "Cấu hình mạng"
 
+#: ../../standalone/harddrake2:1
+#, c-format
+msgid "/Autodetect _jaz drives"
+msgstr "/Tự động phát hiện _jaz drive"
+
 #: ../../any.pm:1
 #, c-format
 msgid "No sharing"
@@ -16046,9 +16303,10 @@ msgstr "Lưu ý là toàn bộ phương tiện 'net' hiện thời cũng dùng �
 #: ../../install_steps.pm:1 ../../diskdrake/dav.pm:1
 #: ../../diskdrake/hd_gtk.pm:1 ../../diskdrake/interactive.pm:1
 #: ../../diskdrake/smbnfs_gtk.pm:1 ../../interactive/http.pm:1
-#: ../../standalone/drakboot:1 ../../standalone/drakbug:1
+#: ../../standalone/drakauth:1 ../../standalone/drakboot:1
+#: ../../standalone/drakbug:1 ../../standalone/drakconnect:1
 #: ../../standalone/drakfloppy:1 ../../standalone/drakfont:1
-#: ../../standalone/draksplash:1
+#: ../../standalone/draksplash:1 ../../../move/move.pm:1
 #, c-format
 msgid "Error"
 msgstr "Lỗi"
@@ -16092,6 +16350,11 @@ msgstr ""
 "Hệ thống của bạn hỗ trợ cấu hình multiple head.\n"
 "Bạn muốn làm gì?"
 
+#: ../../partition_table.pm:1
+#, c-format
+msgid "mount failed: "
+msgstr "Không gắn kết được: "
+
 #: ../../steps.pm:1
 #, c-format
 msgid "Configure services"
@@ -16101,11 +16364,6 @@ msgstr "Cấu hình các dịch vụ"
 #, c-format
 msgid "Broadcast Address:"
 msgstr "Địa Chỉ Truyền Thông (Address Broadcast):"
-
-#: ../../partition_table.pm:1
-#, c-format
-msgid "mount failed: "
-msgstr "Không gắn kết được: "
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -16123,15 +16381,15 @@ msgstr ""
 msgid "Image"
 msgstr "Ảnh"
 
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "Failed to add the printer \"%s\" to Star Office/OpenOffice.org/GIMP."
-msgstr "Không thêm được máy in \"%s\" vào Star Office/OpenOffice.org/GIMP."
-
 #: ../../services.pm:1
 #, c-format
 msgid "Remote Administration"
 msgstr "Quản trị từ xa"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Failed to add the printer \"%s\" to Star Office/OpenOffice.org/GIMP."
+msgstr "Không thêm được máy in \"%s\" vào Star Office/OpenOffice.org/GIMP."
 
 #: ../../modules.pm:1
 #, c-format
@@ -16189,7 +16447,7 @@ msgstr "Tháng Bảy"
 msgid "Prints into %s"
 msgstr "In vào %s"
 
-#: ../../install_steps_interactive.pm:1
+#: ../../install_steps_interactive.pm:1 ../../../move/move.pm:1
 #, c-format
 msgid "An error occurred"
 msgstr "Lỗi xảy ra"
@@ -16406,7 +16664,7 @@ msgstr ", thiết bị đa năng"
 msgid "Laos"
 msgstr "Lào"
 
-#: ../../share/advertising/04-configuration.pl:1
+#: ../advertising/04-configuration.pl:1
 #, c-format
 msgid ""
 "Mandrake Linux 9.2 provides you with the Mandrake Control Center, a powerful "
@@ -16590,11 +16848,6 @@ msgstr "Cần tạo /etc/dhcpd.conf trước tiên!"
 msgid "Is FPU present"
 msgstr "FPU có mặt không"
 
-#: ../../standalone/scannerdrake:1
-#, c-format
-msgid "There are no scanners found which are available on your system.\n"
-msgstr "Không tìm thấy máy quét nào sẵn có trên hệ thống của bạn.\n"
-
 #: ../../services.pm:1
 #, c-format
 msgid ""
@@ -16603,6 +16856,11 @@ msgid ""
 msgstr ""
 "Xin lỗi, không có thông tin\n"
 "thêm về dịch vụ này."
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "There are no scanners found which are available on your system.\n"
+msgstr "Không tìm thấy máy quét nào sẵn có trên hệ thống của bạn.\n"
 
 #: ../../standalone/drakTermServ:1
 #, c-format
@@ -16643,21 +16901,6 @@ msgstr "Thiết bị DVD-RAM"
 #, c-format
 msgid "if set to yes, report unowned files."
 msgstr "nếu đặt là có, báo cáo các tập tin vô chủ."
-
-#: ../../standalone/harddrake2:1
-#, c-format
-msgid ""
-"This is HardDrake, a Mandrake hardware configuration tool.\n"
-"<span foreground=\"royalblue3\">Version:</span> %s\n"
-"<span foreground=\"royalblue3\">Author:</span> Thierry Vignaud &lt;tvignaud"
-"\\@mandrakesoft.com&gt;\n"
-"\n"
-msgstr ""
-"Đây là HardDrake, công cụ cấu hình phần cứng của Mandrake.\n"
-"<span foreground=\"royalblue3\">Phiên bản:</span> %s\n"
-"<span foreground=\"royalblue3\">Tác giả:</span> Thierry Vignaud &lt;tvignaud"
-"\\@mandrakesoft.com&gt;\n"
-"\n"
 
 #: ../../install_interactive.pm:1
 #, c-format
@@ -16740,10 +16983,27 @@ msgstr "Việt Nam"
 msgid "/_Fields description"
 msgstr "/Mô tả các t_rường"
 
-#: ../../share/advertising/10-security.pl:1
+#: ../advertising/10-security.pl:1
 #, c-format
 msgid "Optimize your security by using Mandrake Linux"
 msgstr "Tối ưu vấn đề bảo mật"
+
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"\n"
+"\n"
+" Thanks:\n"
+"\t- LTSP Project http://www.ltsp.org\n"
+"\t- Michael Brown <mbrown@fensystems.co.uk>\n"
+"\n"
+msgstr ""
+"\n"
+"\n"
+" Cảm ơn:\n"
+"\t- Dự án LTSP http://www.ltsp.org\n"
+"\t- Michael Brown <mbrown@fensystems.co.uk>\n"
+"\n"
 
 #: ../../install_steps_gtk.pm:1 ../../interactive.pm:1 ../../ugtk2.pm:1
 #: ../../Xconfig/resolution_and_depth.pm:1 ../../diskdrake/hd_gtk.pm:1
@@ -16844,7 +17104,7 @@ msgstr "Danh sách người dùng hợp lệ đã thay đổi, ghi lại tập t
 msgid "mkinitrd optional arguments"
 msgstr "Đối số tuỳ chọn cho mkinitrd"
 
-#: ../../share/advertising/03-software.pl:1
+#: ../advertising/03-software.pl:1
 #, c-format
 msgid ""
 "Surf the Web with Mozilla or Konqueror, read your mail with Evolution or "
@@ -17040,6 +17300,11 @@ msgstr "Đang khởi chạy lại CUPS..."
 #, c-format
 msgid "Printing/Scanning/Photo Cards on \"%s\""
 msgstr "In/Quét/Thẻ photo trên \"%s\""
+
+#: ../../../move/move.pm:1
+#, c-format
+msgid "Continue without USB key"
+msgstr ""
 
 #: ../../install_steps.pm:1
 #, c-format
@@ -17501,7 +17766,7 @@ msgstr "Cho phép kết nối tới X Window"
 msgid "Hardware probing in progress"
 msgstr "Đang dò tìm phần cứng"
 
-#: ../../standalone/drakgw:1
+#: ../../network/shorewall.pm:1 ../../standalone/drakgw:1
 #, c-format
 msgid "Net Device"
 msgstr "Thiết bị mạng"
@@ -17566,6 +17831,11 @@ msgid ""
 msgstr ""
 "yêu cầu gói 'ImageMagick' để có thể hoạt động đúng.\n"
 "Nhấn \"Ok\" để cài đặt 'ImageMagick' hay \"Bỏ qua\" để thoát ra"
+
+#: ../../network/drakfirewall.pm:1
+#, fuzzy, c-format
+msgid "Telnet server"
+msgstr "X server"
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -17830,7 +18100,7 @@ msgstr "Bản ghi hệ thống"
 msgid "Can't create catalog!"
 msgstr "Không thể tạo catalog!"
 
-#: ../../share/advertising/11-mnf.pl:1
+#: ../advertising/11-mnf.pl:1
 #, c-format
 msgid ""
 "Complete your security setup with this very easy-to-use software which "
@@ -17886,6 +18156,11 @@ msgstr "Cấu hình kết nối Internet"
 #, c-format
 msgid "Add the name as an exception to the handling of password aging by msec."
 msgstr "Thêm tên như là phần trừ ra cho việc xử lý thời hạn mật khẩu bởi msec."
+
+#: ../../network/isdn.pm:1
+#, fuzzy, c-format
+msgid "USB"
+msgstr "LSB"
 
 #: ../../standalone/drakxtv:1
 #, c-format
@@ -17946,6 +18221,11 @@ msgstr "Nhóm làm việc"
 #, c-format
 msgid "Printer host name or IP"
 msgstr "Tên máy chủ in hoặc IP"
+
+#: ../../standalone/drakconnect:1
+#, fuzzy, c-format
+msgid "down"
+msgstr "hoàn thành"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -18391,6 +18671,11 @@ msgstr "Thêm một mục"
 msgid "The printers on this machine are available to other computers"
 msgstr "Những máy in trên máy tính này sẵn dùng cho các máy tính khác"
 
+#: ../../lang.pm:1
+#, fuzzy, c-format
+msgid "China (Hong Kong)"
+msgstr "Hong Kong"
+
 #: ../../standalone/drakautoinst:1
 #, c-format
 msgid "I can't find needed image file `%s'."
@@ -18448,7 +18733,7 @@ msgstr "Gói tin không được cài đặt"
 msgid "American Samoa"
 msgstr "American Samoa"
 
-#: ../../share/advertising/12-mdkexpert.pl:1
+#: ../advertising/12-mdkexpert.pl:1
 #, c-format
 msgid "Become a MandrakeExpert"
 msgstr "Trở Thành MandrakeExpert"
@@ -18572,6 +18857,11 @@ msgstr "Ý"
 msgid "Cayman Islands"
 msgstr "Cayman Islands"
 
+#: ../../fs.pm:1 ../../partition_table.pm:1
+#, c-format
+msgid "error unmounting %s: %s"
+msgstr "Lỗi khi đang thôi gắn kết %s: %s"
+
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Name of printer"
@@ -18581,11 +18871,6 @@ msgstr "Tên máy in"
 #, c-format
 msgid "disable"
 msgstr "Tắt"
-
-#: ../../fs.pm:1 ../../partition_table.pm:1
-#, c-format
-msgid "error unmounting %s: %s"
-msgstr "Lỗi khi đang thôi gắn kết %s: %s"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -18692,7 +18977,7 @@ msgstr "Đồng ý"
 msgid "Detected model: %s %s"
 msgstr "Phát hiện được model: %s %s"
 
-#: ../../share/advertising/03-software.pl:1
+#: ../advertising/03-software.pl:1
 #, c-format
 msgid "MandrakeSoft has selected the best software for you"
 msgstr "MandrakeSoft đã chọn ra những phần mềm tốt nhất cho bạn"
@@ -18828,6 +19113,11 @@ msgstr "Giao diện đồ họa khi khởi động"
 msgid " adsl"
 msgstr "ADSL"
 
+#: ../../raid.pm:1
+#, c-format
+msgid "Not enough partitions for RAID level %d\n"
+msgstr "Không đủ các phân vùng cho mức độ RAID %d\n"
+
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "format of floppies supported by the drive"
@@ -18837,11 +19127,6 @@ msgstr "định dạng đĩa mềm được hỗ trợ"
 #, c-format
 msgid "Firmware copy failed, file %s not found"
 msgstr "Không sao chép được firmware, không thấy tập tin %s"
-
-#: ../../raid.pm:1
-#, c-format
-msgid "Not enough partitions for RAID level %d\n"
-msgstr "Không đủ các phân vùng cho mức độ RAID %d\n"
 
 #: ../../standalone/drakTermServ:1
 #, c-format
@@ -18972,7 +19257,7 @@ msgstr ""
 "Không thấy ảnh CD hay DVD, hãy sao chép chương trình cài đặt và các tập tin "
 "rpm."
 
-#: ../../share/advertising/04-configuration.pl:1
+#: ../advertising/04-configuration.pl:1
 #, c-format
 msgid "Mandrake's multipurpose configuration tool"
 msgstr "Công cụ cấu hình đa năng của Mandrake"
@@ -19002,7 +19287,7 @@ msgstr "Đĩa"
 msgid "Enter a printer device URI"
 msgstr "Hãy nhập thiết bị in URI"
 
-#: ../../share/advertising/01-thanks.pl:1
+#: ../advertising/01-thanks.pl:1
 #, c-format
 msgid ""
 "The success of MandrakeSoft is based upon the principle of Free Software. "
@@ -19584,7 +19869,7 @@ msgstr "Card loại: "
 msgid "Thin Client"
 msgstr "Thin Client"
 
-#: ../../share/advertising/01-thanks.pl:1
+#: ../advertising/01-thanks.pl:1
 #, c-format
 msgid "Thank you for choosing Mandrake Linux 9.2"
 msgstr "Cảm ơn đã chọn sử dụng Mandrake Linux 9.2"
@@ -19700,6 +19985,13 @@ msgstr "Lấy phông từ Windows"
 msgid "Mouse Systems"
 msgstr "Mouse Systems"
 
+#: ../../standalone/drakclock:1
+#, c-format
+msgid ""
+"Your computer can synchronize its clock\n"
+" with a remote time server using NTP"
+msgstr ""
+
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Iranian"
@@ -19725,7 +20017,7 @@ msgstr "Thêm máy chủ"
 msgid "Remote printer name"
 msgstr "Tên máy in ở xa"
 
-#: ../../share/advertising/10-security.pl:1
+#: ../advertising/10-security.pl:1
 #, c-format
 msgid ""
 "MandrakeSoft has designed exclusive tools to create the most secured Linux "
@@ -19881,6 +20173,11 @@ msgstr "Microsoft Explorer"
 msgid "Uninstall Fonts"
 msgstr "Bỏ cài đặt phông chữ"
 
+#: ../../../move/move.pm:1
+#, fuzzy, c-format
+msgid "Please wait, detecting and configuring devices..."
+msgstr "Hãy đợi, đang thiết lập mức bảo mật..."
+
 #: ../../keyboard.pm:1
 #, c-format
 msgid "German (no dead keys)"
@@ -19907,11 +20204,6 @@ msgid ""
 "You can export using NFS or Samba. Please select which you'd like to use."
 msgstr "Có thể dùng NFS hay SAMBA để xuất ra. Hãy chọn cái mà bạn thích dùng."
 
-#: ../../help.pm:1 ../../install_steps_interactive.pm:1
-#, c-format
-msgid "Reboot"
-msgstr "Khởi động lại"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Gambia"
@@ -19921,6 +20213,12 @@ msgstr "Gambia"
 #, c-format
 msgid "Mandrake Control Center"
 msgstr "Trung tâm Điều khiển Mandrake"
+
+#: ../../help.pm:1 ../../install_steps_interactive.pm:1
+#: ../../../move/move.pm:1
+#, c-format
+msgid "Reboot"
+msgstr "Khởi động lại"
 
 #: ../../printer/main.pm:1
 #, c-format
@@ -19956,6 +20254,11 @@ msgstr ""
 #, c-format
 msgid "Remember this password"
 msgstr "Nhớ mật khẩu này"
+
+#: ../../install_steps_gtk.pm:1
+#, c-format
+msgid "due to unsatisfied %s"
+msgstr ""
 
 #: ../../standalone/drakgw:1
 #, c-format
@@ -20015,6 +20318,11 @@ msgstr "Papua New Guinea"
 #, c-format
 msgid "Multi-function device on a parallel port"
 msgstr "Thiết bị đa năng ở cổng song song"
+
+#: ../../../move/tree/mdk_totem:1
+#, fuzzy, c-format
+msgid "Busy files"
+msgstr "Sao lưu các file hệ thống"
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -20078,6 +20386,21 @@ msgstr ""
 #, c-format
 msgid "DHCP Client"
 msgstr "DHCP Client"
+
+#: ../../standalone/harddrake2:1
+#, c-format
+msgid ""
+"This is HardDrake, a Mandrake hardware configuration tool.\n"
+"<span foreground=\"royalblue3\">Version:</span> %s\n"
+"<span foreground=\"royalblue3\">Author:</span> Thierry Vignaud &lt;"
+"tvignaud@mandrakesoft.com&gt;\n"
+"\n"
+msgstr ""
+"Đây là HardDrake, công cụ cấu hình phần cứng của Mandrake.\n"
+"<span foreground=\"royalblue3\">Phiên bản:</span> %s\n"
+"<span foreground=\"royalblue3\">Tác giả:</span> Thierry Vignaud &lt;"
+"tvignaud@mandrakesoft.com&gt;\n"
+"\n"
 
 #: ../../standalone/drakgw:1
 #, c-format
@@ -20279,75 +20602,13 @@ msgstr "Không truyền tới máy in"
 msgid "Delay before booting the default image"
 msgstr "Độ trễ trước khi khởi động ảnh mặc định"
 
-#: ../../standalone/drakfont:1
-#, c-format
-msgid ""
-"\n"
-" Copyright (C) 2001-2002 by MandrakeSoft \n"
-"     DUPONT Sebastien (original version)\n"
-"     CHAUMETTE Damien <dchaumette\\@mandrakesoft.com>\n"
-"\n"
-" This program is free software; you can redistribute it and/or modify\n"
-" it under the terms of the GNU General Public License as published by\n"
-" the Free Software Foundation; either version 2, or (at your option)\n"
-" any later version.\n"
-"\n"
-" This program is distributed in the hope that it will be useful,\n"
-" but WITHOUT ANY WARRANTY; without even the implied warranty of\n"
-" MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n"
-" GNU General Public License for more details.\n"
-"\n"
-" You should have received a copy of the GNU General Public License\n"
-" along with this program; if not, write to the Free Software\n"
-" Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.\n"
-"\n"
-" Thanks:\n"
-"    -  pfm2afm:   \n"
-"\t by Ken Borgendale:\n"
-"\t    Convert a Windows .pfm  file to a .afm (Adobe Font Metrics)\n"
-"    -  type1inst:\n"
-"\t by James Macnicol: \n"
-"\t    type1inst generates files fonts.dir fonts.scale & Fontmap.\n"
-"    -  ttf2pt1:   \n"
-"\t  by Andrew Weeks, Frank Siegert, Thomas Henlich, Sergey Babkin  \n"
-"             Convert ttf font files to afm and pfb fonts\n"
-msgstr ""
-"\n"
-" Bản quyền (C) 2001-2002 của MandrakeSoft \n"
-"        DUPONT Sebastien (phiên bản gốc)\n"
-"        CHAUMETTE Damien <dchaumette\\@mandrakesoft.com>\n"
-"\n"
-" Chương trình này là phần mềm miễn phí; bạn có thể phân phối lại hay\n"
-" thay đổi theo các điều khoản của GNU/GPL mà Quỹ Phần Mềm Tự Do\n"
-" công bố; với phiên bản 2, hay bất kỳ phiên bản mới nhất nào.\n"
-"\n"
-" Chương trình này được phân phối với hy vọng là nó có ích,\n"
-" nhưng Không Có Bất Kỳ Bảo Đảm Nào; thậm chí không có bảo đảm về\n"
-" Khả Năng Thương Mại hay Thích Hợp Với Mục Đích Đặc Biệt. Hãy xem\n"
-" GNU/GPL để biết thêm chi tiết.\n"
-"\n"
-"Bạn nên nhận lấy một bản sao của GNU/GPL đi kèm theo\n"
-"chương trình; nếu không có, xin viết thư tới: Free Software\n"
-"Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.\n"
-"\n"
-" Lời cảm ơn tới:\n"
-"    -  pfm2afm:   \n"
-"\t viết bởi Ken Borgendale:\n"
-"\t    Chuyển đổi tập tin *.pfm của Windows thành *.afm (Adobe Font Metrics)\n"
-"    -  type1inst:\n"
-"\t viết bởi James Macnicol: \n"
-"\t    type1inst tạo ra các tập tin fonts.dir fonts.scale & Fontmap.\n"
-"    -  ttf2pt1:   \n"
-"\t  viết bởi Andrew Weeks, Frank Siegert, Thomas Henlich, Sergey Babkin  \n"
-"             Chuyển đổi các tập tin ttf font thành afm và pfb font\n"
-
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "Use Hard Disk to backup"
 msgstr "Dùng đĩa cứng để sao lưu"
 
 #: ../../help.pm:1 ../../install_steps_gtk.pm:1 ../../standalone/drakbackup:1
-#: ../../standalone/drakboot:1 ../../standalone/drakgw:1
+#: ../../standalone/drakboot:1
 #, c-format
 msgid "Configure"
 msgstr "Cấu hình"
@@ -20415,7 +20676,7 @@ msgstr ""
 "Có thể do ổ đĩa cdrom hoặc đĩa cdrom của bạn bị lỗi.\n"
 "Kiểm tra cdrom trên máy tính bằng \"rpm -qpl Mandrake/RPMS/*.rpm\"\n"
 
-#: ../../share/advertising/06-development.pl:1
+#: ../advertising/06-development.pl:1
 #, c-format
 msgid "Mandrake Linux 9.2: the ultimate development platform"
 msgstr "Mandrake Linux 9.2 là nền tảng phát triển cơ bản."
@@ -20502,6 +20763,11 @@ msgstr "Độ phân giải cuối cùng"
 msgid "Services"
 msgstr "Dịch vụ"
 
+#: ../../../move/move.pm:1
+#, fuzzy, c-format
+msgid "Auto configuration"
+msgstr "Tùy chỉnh cấu hình"
+
 #: ../../Xconfig/card.pm:1
 #, c-format
 msgid "4 MB"
@@ -20540,9 +20806,10 @@ msgid "Internet station"
 msgstr "Internet"
 
 #: ../../share/compssUsers:999
+#, fuzzy
 msgid ""
-"Set of tools to read and send mail and news (pine, mutt, tin..) and to "
-"browse the Web"
+"Set of tools to read and send mail and news (mutt, tin..) and to browse the "
+"Web"
 msgstr ""
 "Các công cụ đọc và gửi thư tín và tin tức (pine, mutt, tin..) và để duyệt Web"
 
@@ -20680,3 +20947,37 @@ msgstr "Máy chủ NFS, SMB, SSH, ủy nhiệm"
 #: ../../share/compssUsers:999
 msgid "Set of tools to read and send mail and news and to browse the Web"
 msgstr "Bộ công cụ đọc và gửi thư, tin tức và duyệt Web"
+
+#~ msgid "The setup has already been done, and it's currently enabled."
+#~ msgstr "Đã hoàn thành xong cài đặt, và hiện thời nó được hoạt động."
+
+#~ msgid "Logs"
+#~ msgstr "Logs"
+
+#~ msgid "The setup has already been done, but it's currently disabled."
+#~ msgstr "Đã hoàn thành xong cài đặt, nhưng hiện tại nó không được hoạt động."
+
+#~ msgid "Profile "
+#~ msgstr "Lý lịch "
+
+#~ msgid ""
+#~ "Welcome to the Internet Connection Sharing utility!\n"
+#~ "\n"
+#~ "%s\n"
+#~ "\n"
+#~ "Click on Configure to launch the setup wizard."
+#~ msgstr ""
+#~ "Chào mừng tiện ích Chia Sẻ Kết Nối Internet!\n"
+#~ "\n"
+#~ "%s\n"
+#~ "\n"
+#~ "Nhấn  lên Cấu hình để chạy đồ thuật thiết lập."
+
+#~ msgid "Internet Connection Sharing configuration"
+#~ msgstr "Cấu hình chia sẻ kết nối Internet"
+
+#~ msgid "No Internet Connection Sharing has ever been configured."
+#~ msgstr "Chưa có một chia sẻ kết nối Internet nào được cấu hình."
+
+#~ msgid "when checked, owner and group won't be changed"
+#~ msgstr "khi được kiểm dấu, chủ sở hữu và nhóm sẽ không bị thay đổi"

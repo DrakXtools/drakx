@@ -8,8 +8,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX 9.2\n"
-"POT-Creation-Date: 2003-09-16 13:45+0200\n"
-"PO-Revision-Date: 2003-09-21 12:52+0800\n"
+"POT-Creation-Date: 2003-12-03 03:09+0100\n"
+"PO-Revision-Date: 2003-09-24 16:52+0800\n"
 "Last-Translator: Shiyu Tang <shiyutang@netscape.net>\n"
 "Language-Team: Mandrake i18n Team <cooker-i18n@linux-mandrake.com>\n"
 "MIME-Version: 1.0\n"
@@ -38,7 +38,7 @@ msgstr ""
 #: ../../standalone/drakTermServ:1
 #, c-format
 msgid "Configuration changed - restart clusternfs/dhcpd?"
-msgstr "配置已更改 - 重新启动 clusternfs/dhcpd 吗?"
+msgstr "配置已更改 - 重新启动 clusternfs/dhcpd 吗？"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -79,7 +79,7 @@ msgid ""
 "Still continue?"
 msgstr ""
 "备份分区表的大小和原来的有所不同\n"
-"仍然继续吗?"
+"仍然继续吗？"
 
 #: ../../diskdrake/smbnfs_gtk.pm:1
 #, c-format
@@ -89,7 +89,7 @@ msgstr "哪个用户名"
 #: ../../any.pm:1
 #, c-format
 msgid "Which type of entry do you want to add?"
-msgstr "要增加的条目是什么类型?"
+msgstr "要增加的条目是什么类型？"
 
 #: ../../help.pm:1 ../../diskdrake/interactive.pm:1
 #, c-format
@@ -234,7 +234,7 @@ msgid ""
 msgstr ""
 "把打印机连接到一个 Linux 服务器然后让 Windows 机器作为客户连接服务器。\n"
 "\n"
-"您坚持要继续这样配置打印机吗?"
+"您坚持要继续这样配置打印机吗？"
 
 #: ../../lang.pm:1
 #, c-format
@@ -279,11 +279,6 @@ msgstr "CUPS 配置"
 #, c-format
 msgid "Total progress"
 msgstr "总进度"
-
-#: ../../lang.pm:1
-#, c-format
-msgid "Hong Kong"
-msgstr "中国香港"
 
 #: ../../install_interactive.pm:1
 #, c-format
@@ -359,6 +354,24 @@ msgstr "编辑选中的主机"
 msgid "No CD device defined!"
 msgstr "没有发现 CD 设备！"
 
+#: ../../network/shorewall.pm:1
+#, fuzzy, c-format
+msgid ""
+"Please enter the name of the interface connected to the "
+"internet.              \n"
+"                \n"
+"Examples:\n"
+"                ppp+ for modem or DSL connections, \n"
+"                eth0, or eth1 for cable connection, \n"
+"                ippp+ for a isdn connection.\n"
+msgstr ""
+"请输入连接到互联网的网卡名称。\n"
+"\n"
+"例如：\n"
+"\t\tppp+ 代表调制解调器或 DSL 连接，\n"
+"\t\teth0 或 eth1 代表有线电视连接，\n"
+"\t\tippp+ 代表 ISDN 连接。\n"
+
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "\tUse .backupignore files\n"
@@ -423,12 +436,17 @@ msgstr "使用此选项您可把 /etc 目录恢复到任何以前的版本。"
 #: ../../standalone/drakedm:1
 #, c-format
 msgid "The change is done, do you want to restart the dm service ?"
-msgstr "更改已经完成，您想要重新启动 dm 设备吗?"
+msgstr "更改已经完成，您想要重新启动 dm 设备吗？"
 
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Swiss (French layout)"
-msgstr "瑞士(法语布局)"
+msgstr "瑞士（法语布局）"
+
+#: ../../raid.pm:1
+#, c-format
+msgid "mkraid failed (maybe raidtools are missing?)"
+msgstr "mkraid 失败（可能缺少 raidtools？）"
 
 # calendar/gui/goto-dialog.glade.h:2
 # calendar/gui/goto-dialog.glade.h:2
@@ -438,10 +456,10 @@ msgstr "瑞士(法语布局)"
 msgid "August"
 msgstr "八月"
 
-#: ../../raid.pm:1
-#, c-format
-msgid "mkraid failed (maybe raidtools are missing?)"
-msgstr "mkraid 失败(可能缺少 raidtools?)"
+#: ../../network/drakfirewall.pm:1
+#, fuzzy, c-format
+msgid "FTP server"
+msgstr "NTP 服务器"
 
 #: ../../harddrake/data.pm:1
 #, c-format
@@ -522,11 +540,6 @@ msgstr "在当前的 %s 配置中发现可能的 LAN 地址冲突！\n"
 #, c-format
 msgid "Configuring..."
 msgstr "正在配置..."
-
-#: ../../standalone/drakgw:1
-#, c-format
-msgid "The setup has already been done, and it's currently enabled."
-msgstr "配置已经完成，并已启用。"
 
 #: ../../harddrake/v4l.pm:1
 #, c-format
@@ -660,6 +673,11 @@ msgstr "Novell 打印服务器“%s”上的打印机“%s”"
 msgid "Printer Name"
 msgstr "打印机名称"
 
+#: ../../../move/move.pm:1
+#, c-format
+msgid "Setting up USB key"
+msgstr ""
+
 #: ../../standalone/drakfloppy:1
 #, c-format
 msgid "Remove a module"
@@ -717,15 +735,17 @@ msgstr ""
 msgid "if needed"
 msgstr "当需要时"
 
+#: ../../standalone/drakclock:1
+#, c-format
+msgid ""
+"We need to install ntp package\n"
+" to enable Network Time Protocol"
+msgstr ""
+
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "Restore Failed..."
 msgstr "恢复失败..."
-
-#: ../../standalone/harddrake2:1
-#, c-format
-msgid "/Autodetect _jazz drives"
-msgstr "/自动检测 jazz 驱动器(_J)"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -1028,11 +1048,6 @@ msgstr "\t限制磁盘使用为 %s MB\n"
 msgid "512 kB"
 msgstr "512 kB"
 
-#: ../../standalone/net_monitor:1
-#, c-format
-msgid "Logs"
-msgstr "日志"
-
 #: ../../standalone/scannerdrake:1
 #, c-format
 msgid "(Note: Parallel ports cannot be auto-detected)"
@@ -1046,7 +1061,7 @@ msgstr "<control>N"
 #: ../../network/isdn.pm:1
 #, c-format
 msgid "What kind of card do you have?"
-msgstr "请问您适配卡的种类?"
+msgstr "请问您适配卡的种类？"
 
 #: ../../standalone/logdrake:1
 #, c-format
@@ -1178,7 +1193,7 @@ msgstr "注意"
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "You have not configured X. Are you sure you really want this?"
-msgstr "您还没有配置过 X。您真的想要这样吗?"
+msgstr "您还没有配置过 X。您真的想要这样吗？"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -1193,7 +1208,7 @@ msgstr ""
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid "What type of partitioning?"
-msgstr "何种分区类型?"
+msgstr "何种分区类型？"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -1491,7 +1506,7 @@ msgstr ""
 "您不想安装 LILO(或 grub)，或者其它操作系统把 LILO 删除了，或者 LILO 在您\n"
 "的硬件系统上不能工作，那么这就很有用处了。\n"
 "启动盘还可以和 Mandrake 修复盘配合使用，帮助您更轻松的恢复严重故障的系统。\n"
-"现在就给您的系统做一张启动盘，好吗?\n"
+"现在就给您的系统做一张启动盘，好吗？\n"
 "%s"
 
 #: ../../standalone/drakbackup:1
@@ -1512,6 +1527,11 @@ msgstr "拉脱维亚"
 #, c-format
 msgid "monthly"
 msgstr "每月"
+
+#: ../../../move/move.pm:1
+#, fuzzy, c-format
+msgid "Retry"
+msgstr "恢复"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
@@ -1558,6 +1578,11 @@ msgstr "默认使用 Unicode"
 msgid "the module of the GNU/Linux kernel that handles the device"
 msgstr "管理该设备的 GNU/Linux 内核模块"
 
+#: ../../standalone/drakclock:1
+#, fuzzy, c-format
+msgid "Is your hardware clock set to GMT?"
+msgstr "您的系统时钟设定为 GMT"
+
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid "Trying to rescue partition table"
@@ -1602,6 +1627,11 @@ msgstr "无法启动在线升级！！！\n"
 msgid "Name: "
 msgstr "名称："
 
+#: ../../standalone/drakconnect:1
+#, c-format
+msgid "up"
+msgstr ""
+
 #: ../../Xconfig/resolution_and_depth.pm:1
 #, c-format
 msgid "16 million colors (24 bits)"
@@ -1612,7 +1642,7 @@ msgstr "1 千 6 百万色(24 位)"
 msgid "Allow all users"
 msgstr "允许所有用户使用"
 
-#: ../../share/advertising/08-store.pl:1
+#: ../advertising/08-store.pl:1
 #, c-format
 msgid "The official MandrakeSoft Store"
 msgstr "MandrakeSoft 官方专卖店"
@@ -1646,15 +1676,15 @@ msgstr "用户"
 msgid "Do new backup before restore (only for incremental backups.)"
 msgstr "恢复前做新的备份(只适用于增量备份。)"
 
-#: ../../standalone/harddrake2:1
-#, c-format
-msgid "Name"
-msgstr "名称"
-
 #: ../../raid.pm:1
 #, c-format
 msgid "mkraid failed"
 msgstr "mkraid 失败"
+
+#: ../../standalone/harddrake2:1
+#, c-format
+msgid "Name"
+msgstr "名称"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -1865,6 +1895,23 @@ msgstr "正在启用服务器..."
 msgid "Printing test page(s)..."
 msgstr "正在打印测试页..."
 
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid ""
+"Transfer successful\n"
+"You may want to verify you can login to the server with:\n"
+"\n"
+"ssh -i %s %s@%s\n"
+"\n"
+"without being prompted for a password."
+msgstr ""
+"传送成功\n"
+"要验证您可以登录到服务器，请运行：\n"
+"\n"
+"ssh -i %s %s@%s\n"
+"\n"
+"这样不会提问密码。"
+
 #: ../../fsedit.pm:1
 #, c-format
 msgid "There is already a partition with mount point %s\n"
@@ -2008,7 +2055,7 @@ msgstr "如果设为 yes，就会通过邮件报告检测结果。"
 #: ../../interactive/stdio.pm:1
 #, c-format
 msgid "Your choice? (default %s) "
-msgstr "您的选择?(默认为 %s)"
+msgstr "您的选择？（默认为 %s）"
 
 #: ../../harddrake/sound.pm:1
 #, c-format
@@ -2052,7 +2099,7 @@ msgstr "        恢复配置       "
 #: ../../Xconfig/test.pm:1
 #, c-format
 msgid "Is this the correct setting?"
-msgstr "这样正确吗?"
+msgstr "这样正确吗？"
 
 #: ../../help.pm:1
 #, c-format
@@ -2227,7 +2274,7 @@ msgstr "系统"
 #: ../../any.pm:1 ../../help.pm:1
 #, c-format
 msgid "Do you want to use this feature?"
-msgstr "您要使用此特性吗?"
+msgstr "您要使用此特性吗？"
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -2337,7 +2384,7 @@ msgstr ""
 #: ../../services.pm:1
 #, c-format
 msgid "Launch the ALSA (Advanced Linux Sound Architecture) sound system"
-msgstr "启动 ALSA(高级 Linux 声音体系)声音系统"
+msgstr "启动 ALSA（高级 Linux 声音体系）声音系统"
 
 #. -PO: the first %s is the card type (scsi, network, sound,...)
 #. -PO: the second is the vendor+model name
@@ -2352,7 +2399,8 @@ msgid ""
 "You have transferred your former default printer (\"%s\"), Should it be also "
 "the default printer under the new printing system %s?"
 msgstr ""
-"您已经迁移以前系统中的默认打印机(“%s”)，是否设置为新打印系统的默认打印机 %s?"
+"您已经迁移以前系统中的默认打印机（“%s”），是否设置为新打印系统的默认打印机 %"
+"s？"
 
 #: ../../standalone/drakTermServ:1
 #, c-format
@@ -2815,6 +2863,11 @@ msgstr "驱动器的特殊能力(刻录能力和/或 DVD 支持)"
 msgid "Can't add a partition to _formatted_ RAID md%d"
 msgstr "无法加入一个分区到已经格式化的硬盘阵列 md%d"
 
+#: ../../standalone/drakclock:1
+#, fuzzy, c-format
+msgid "Network Time Protocol"
+msgstr "网卡"
+
 #: ../../Xconfig/card.pm:1
 #, c-format
 msgid ""
@@ -3042,7 +3095,7 @@ msgstr "帕劳"
 msgid "level"
 msgstr "级别"
 
-#: ../../share/advertising/13-mdkexpert_corporate.pl:1
+#: ../advertising/13-mdkexpert_corporate.pl:1
 #, c-format
 msgid ""
 "All incidents will be followed up by a single qualified MandrakeSoft "
@@ -3079,7 +3132,7 @@ msgstr "选择屏幕分辨率以及颜色深度"
 #: ../../standalone/mousedrake:1
 #, c-format
 msgid "Emulate third button?"
-msgstr "模拟三键吗?"
+msgstr "模拟三键吗？"
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -3425,7 +3478,7 @@ msgstr ""
 msgid "Bad package"
 msgstr "有错的软件包"
 
-#: ../../share/advertising/07-server.pl:1
+#: ../advertising/07-server.pl:1
 #, c-format
 msgid ""
 "Transform your computer into a powerful Linux server: Web server, mail, "
@@ -3570,7 +3623,7 @@ msgstr "USB 控制器"
 #: ../../Xconfig/various.pm:1
 #, c-format
 msgid "What norm is your TV using?"
-msgstr "您的电视信号是什么制式?"
+msgstr "您的电视信号是什么制式？"
 
 #: ../../standalone/drakconnect:1
 #, c-format
@@ -3607,7 +3660,7 @@ msgstr ""
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid "Remove the loopback file?"
-msgstr "删除回环(loopback)文件?"
+msgstr "删除回环 (loopback) 文件？"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -3687,7 +3740,7 @@ msgstr "欢迎入侵者"
 msgid "Module options:"
 msgstr "模块参数："
 
-#: ../../share/advertising/11-mnf.pl:1
+#: ../advertising/11-mnf.pl:1
 #, c-format
 msgid "Secure your networks with the Multi Network Firewall"
 msgstr "用多网络防火墙保卫您的网络"
@@ -3767,6 +3820,11 @@ msgstr "鼠标"
 #, c-format
 msgid "not enough room in /boot"
 msgstr "/boot 中没有足够空间"
+
+#: ../../install_steps_gtk.pm:1
+#, c-format
+msgid "trying to promote %s"
+msgstr ""
 
 #: ../../lang.pm:1
 #, c-format
@@ -3907,10 +3965,15 @@ msgstr ""
 msgid "Saudi Arabia"
 msgstr "沙特阿拉伯"
 
+#: ../../services.pm:1
+#, c-format
+msgid "Internet"
+msgstr "互联网"
+
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid "Continue anyway?"
-msgstr "冒险继续执行?"
+msgstr "冒险继续执行？"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -3924,11 +3987,6 @@ msgstr "如果您的打印机不在列表中，请选择兼容的(参考打印�
 #, c-format
 msgid "Printer"
 msgstr "打印机"
-
-#: ../../services.pm:1
-#, c-format
-msgid "Internet"
-msgstr "互联网"
 
 #: ../../standalone/service_harddrake:1
 #, c-format
@@ -4004,6 +4062,11 @@ msgstr "载入点只能包含字母和数字"
 #, c-format
 msgid "Restarting printing system..."
 msgstr "重新启动打印系统..."
+
+#: ../../../move/tree/mdk_totem:1
+#, c-format
+msgid "You can only run with no CDROM support"
+msgstr ""
 
 #: ../../modules/interactive.pm:1
 #, c-format
@@ -4156,7 +4219,7 @@ msgstr "在 12 控制台上启用/禁用系统日志报告"
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Would you like to try again?"
-msgstr "您是否想要再试一次?"
+msgstr "您是否想要再试一次？"
 
 #: ../../help.pm:1 ../../diskdrake/hd_gtk.pm:1
 #, c-format
@@ -4188,7 +4251,7 @@ msgstr "不包括浏览器缓存"
 msgid ""
 "Failed to check filesystem %s. Do you want to repair the errors? (beware, "
 "you can lose data)"
-msgstr "检查文件系统 %s 失败。您想修复错误吗?(注意，有可能丢失数据)"
+msgstr "检查文件系统 %s 失败。您想修复错误吗？（注意，有可能丢失数据）"
 
 #: ../../standalone/keyboarddrake:1
 #, c-format
@@ -4230,15 +4293,15 @@ msgstr "ISA / PCMCIA"
 msgid "About"
 msgstr "关于"
 
-#: ../../network/network.pm:1
-#, c-format
-msgid "Proxies configuration"
-msgstr "代理服务器配置"
-
 #: ../../mouse.pm:1
 #, c-format
 msgid "GlidePoint"
 msgstr "GlidePoint"
+
+#: ../../network/network.pm:1
+#, c-format
+msgid "Proxies configuration"
+msgstr "代理服务器配置"
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -4388,6 +4451,11 @@ msgstr "装载点必需要以 / 为开头"
 msgid "Choose your CD/DVD device"
 msgstr "请选择您的 CD/DVD 设备"
 
+#: ../../network/drakfirewall.pm:1
+#, fuzzy, c-format
+msgid "CUPS server"
+msgstr "DNS 服务器"
+
 #: ../../standalone/logdrake:1
 #, c-format
 msgid "Postfix Mail Server"
@@ -4403,7 +4471,7 @@ msgstr "不保存改变就退出"
 msgid "Yemen"
 msgstr "也门"
 
-#: ../../share/advertising/11-mnf.pl:1
+#: ../advertising/11-mnf.pl:1
 #, c-format
 msgid "This product is available on the MandrakeStore Web site."
 msgstr "此产品可以从 MandrakeStore 网站获得。"
@@ -4412,6 +4480,31 @@ msgstr "此产品可以从 MandrakeStore 网站获得。"
 #, c-format
 msgid "=> There are many things to choose from (%s).\n"
 msgstr "=> 您可以从(%s)中选择很多东西。\n"
+
+#: ../../standalone/drakclock:1
+#, c-format
+msgid "GMT - DrakClock"
+msgstr ""
+
+#: ../../../move/move.pm:1
+#, c-format
+msgid ""
+"An error occurred:\n"
+"\n"
+"\n"
+"%s\n"
+"\n"
+"This may come from corrupted system configuration files\n"
+"on the USB key, in this case removing them and then\n"
+"rebooting Mandrake Move would fix the problem. To do\n"
+"so, click on the corresponding button.\n"
+"\n"
+"\n"
+"You may also want to reboot and remove the USB key, or\n"
+"examine its contents under another OS, or even have\n"
+"a look at log files in console #3 and #4 to try to\n"
+"guess what's happening."
+msgstr ""
 
 #: ../../steps.pm:1
 #, c-format
@@ -4642,7 +4735,12 @@ msgstr "Drak 用户管理"
 #: ../../install_interactive.pm:1
 #, c-format
 msgid "Which partition do you want to use for Linux4Win?"
-msgstr "请问您要在哪一个分区里放 Linux4Win?"
+msgstr "请问您要在哪一个分区里放 Linux4Win？"
+
+#: ../../install_steps_gtk.pm:1
+#, fuzzy, c-format
+msgid "due to missing %s"
+msgstr "缺少 kdesu"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -4706,7 +4804,7 @@ msgstr "没有找到远程打印机！"
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Do you want to enable printing on printers in the local network?\n"
-msgstr "您想使用本地网络的打印机来打印吗?\n"
+msgstr "您想使用本地网络的打印机来打印吗？\n"
 
 #: ../../lang.pm:1
 #, c-format
@@ -4764,12 +4862,12 @@ msgstr "用户 umask"
 #: ../../any.pm:1
 #, c-format
 msgid "Default OS?"
-msgstr "默认操作系统?"
+msgstr "默认操作系统？"
 
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Swiss (German layout)"
-msgstr "瑞士(德语布局)"
+msgstr "瑞士（德语布局）"
 
 #: ../../Xconfig/card.pm:1
 #, c-format
@@ -5176,7 +5274,7 @@ msgstr ""
 msgid "Started on boot"
 msgstr "开机时启动"
 
-#: ../../share/advertising/12-mdkexpert.pl:1
+#: ../advertising/12-mdkexpert.pl:1
 #, c-format
 msgid ""
 "Join the MandrakeSoft support teams and the Linux Community online to share "
@@ -5257,7 +5355,7 @@ msgstr "检测到"
 #: ../../network/netconnect.pm:1
 #, c-format
 msgid "The network needs to be restarted. Do you want to restart it ?"
-msgstr "网络需要重新启动。你要重新启动吗?"
+msgstr "网络需要重新启动。你要重新启动吗？"
 
 #: ../../standalone/drakbug:1
 #, c-format
@@ -5329,7 +5427,7 @@ msgstr "开始扇区："
 #: ../../lang.pm:1
 #, c-format
 msgid "Congo (Brazzaville)"
-msgstr "刚果(布拉柴维尔)"
+msgstr "刚果（布拉柴维尔）"
 
 #: ../../standalone/drakperm:1
 #, c-format
@@ -5339,7 +5437,7 @@ msgstr "读取"
 #: ../../any.pm:1 ../../install_any.pm:1 ../../standalone.pm:1
 #, c-format
 msgid "The package %s needs to be installed. Do you want to install it?"
-msgstr "需要安装软件包 %s。您同意安装吗?"
+msgstr "需要安装软件包 %s。您同意安装吗？"
 
 #: ../../lang.pm:1
 #, c-format
@@ -5505,11 +5603,6 @@ msgid ""
 msgstr ""
 "在控制台\n"
 "显示主题"
-
-#: ../../standalone/net_monitor:1
-#, c-format
-msgid "Statistics"
-msgstr "统计"
 
 #: ../../printer/cups.pm:1
 #, c-format
@@ -5723,7 +5816,7 @@ msgstr "CDROM"
 #: ../../network/tools.pm:1
 #, c-format
 msgid "Do you want to try to connect to the Internet now?"
-msgstr "您想要测试连接到互联网吗?"
+msgstr "您想要测试连接到互联网吗？"
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -5733,7 +5826,7 @@ msgstr "比利时"
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Do you have an ISA sound card?"
-msgstr "您有 ISA 声卡吗?"
+msgstr "您有 ISA 声卡吗？"
 
 #: ../../network/ethernet.pm:1
 #, c-format
@@ -5785,7 +5878,7 @@ msgstr ""
 #: ../../standalone/scannerdrake:1
 #, c-format
 msgid "%s is not in the scanner database, configure it manually?"
-msgstr "扫描仪数据库中没有 %s，要手工配置它吗?"
+msgstr "扫描仪数据库中没有 %s，要手工配置它吗？"
 
 #: ../../any.pm:1
 #, c-format
@@ -5860,7 +5953,7 @@ msgstr "核心报告的 CPU 标志"
 #: ../../standalone/drakTermServ:1
 #, c-format
 msgid "Something went wrong! - Is mkisofs installed?"
-msgstr "发生错误！ - mkisofs 安装了吗?"
+msgstr "发生错误！ - mkisofs 安装了吗？"
 
 #: ../../Xconfig/card.pm:1
 #, c-format
@@ -6060,7 +6153,7 @@ msgstr ""
 "互联网连接共享的设定已经完成。\n"
 "它当前已经被启用。\n"
 "\n"
-"您要做什么?"
+"您要做什么？"
 
 #: ../../standalone/drakTermServ:1
 #, c-format
@@ -6106,13 +6199,13 @@ msgstr ""
 "\n"
 "    *“%s”：如果您喜欢 LILO 的图形菜单界面。\n"
 "\n"
-" *“%s”：通常您不需要更改默认的启动设备(“%s”)。但是，如果您愿意，也可\n"
-"以把引导程序安装在第二个硬盘上(“%s”)，甚至是一张软盘(“%s”)上。\n"
+" *“%s”：通常您不需要更改默认的启动设备（“%s”）。但是，如果您愿意，也可\n"
+"以把引导程序安装在第二个硬盘上（“%s”），甚至是一张软盘（“%s”）上。\n"
 "\n"
 " *“%s”：当启动或重新启动系统时，会在控制台中留给用户指定的时间，以便可以\n"
 "选择除默认值外的其它启动选项。\n"
 "\n"
-"！！注意：如果您在这里选择不安装开机引导程序(选“%s”)，您必须准备其它方\n"
+"！！注意：如果您在这里选择不安装开机引导程序（选“%s”），您必须准备其它方\n"
 "法引导您的 Mandrake Linux 系统！不管修改任何选项，一定要清楚您在做什么！\n"
 "\n"
 "单击此对话框中的“%s”按钮可为专家用户提供高级的选项。"
@@ -6126,7 +6219,7 @@ msgstr "如果设置，发送邮件报告到这个邮箱地址，或者发给 ro
 #: ../../Xconfig/card.pm:1
 #, c-format
 msgid "Which configuration of XFree do you want to have?"
-msgstr "您希望拥有哪个 XFree 配置?"
+msgstr "您希望拥有哪个 XFree 配置？"
 
 #: ../../any.pm:1 ../../help.pm:1 ../../install_steps_interactive.pm:1
 #: ../../diskdrake/interactive.pm:1
@@ -6186,10 +6279,10 @@ msgid ""
 "On which drive are you booting?"
 msgstr ""
 "您决定在一个分区上安装启动引导程序。\n"
-"那么在用于启动的硬盘上您应该已经有一个安装启动引导程序(例如：System "
-"Commander)。\n"
+"那么在用于启动的硬盘上您应该已经有一个安装启动引导程序（例如：System "
+"Commander）。\n"
 "\n"
-"您要用哪个硬盘启动?"
+"您要用哪个硬盘启动？"
 
 #: ../../install_interactive.pm:1
 #, c-format
@@ -6342,7 +6435,7 @@ msgid ""
 "number generation."
 msgstr "保存和恢复系统的熵池，可以产生更高品质的随机数。"
 
-#: ../../share/advertising/07-server.pl:1
+#: ../advertising/07-server.pl:1
 #, c-format
 msgid "Turn your computer into a reliable server"
 msgstr "把您的机器变成可靠的服务器"
@@ -6357,6 +6450,11 @@ msgstr "检查 /etc/shadow 中的空密码"
 msgid " (driver %s)"
 msgstr "(驱动 %s)"
 
+#: ../../services.pm:1
+#, c-format
+msgid "Start when requested"
+msgstr "请求时启动"
+
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid ""
@@ -6370,11 +6468,6 @@ msgstr ""
 #, c-format
 msgid "I don't know"
 msgstr "我不知道"
-
-#: ../../services.pm:1
-#, c-format
-msgid "Start when requested"
-msgstr "请求时启动"
 
 #: ../../printer/main.pm:1
 #, c-format
@@ -6402,7 +6495,7 @@ msgstr ""
 "\n"
 "为安全起见，分区及格式化不会自动执行。您必须在要安装的机器上选择。\n"
 "\n"
-"继续吗?"
+"继续吗？"
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -6477,7 +6570,7 @@ msgid "busmouse"
 msgstr "busmouse"
 
 #: ../../standalone/drakTermServ:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "        - Create Etherboot Enabled Boot Images:\n"
 "        \tTo boot a kernel via etherboot, a special kernel/initrd image must "
@@ -6492,17 +6585,17 @@ msgid ""
 "one full kernel."
 msgstr ""
 "        - 创建 Etherboot 的以太网启动映像：\n"
-"        \t\t要通过 etherboot 启动核心，必须创建特殊的 kernel/initrd 映像。\n"
-"        \t\tmkinitrd-net 能够在这一过程中发挥很大作用，而“Drak 终端服务”仅仅"
+"        \t要通过 etherboot 启动核心，必须创建特殊的 kernel/initrd 映像。\n"
+"        \tmkinitrd-net 能够在这一过程中发挥很大作用，而“Drak 终端服务”仅仅"
 "是\n"
-"        \t\t帮助管理/定制这些映像的图形化界面。要创建文件        \t\t/etc/"
-"dhcpd.conf.etherboot-pcimap.include，与 dhcpd.conf 相关联，\n"
-"        \t\t你需要至少为一个完整的内核创建以太网启动镜像。"
+"        \t帮助管理/定制这些映像的图形化界面。要创建文件 /etc/dhcpd.conf."
+"etherboot-pcimap.include，与 dhcpd.conf 相关联，\n"
+"        \t你需要至少为一个完整的内核创建以太网启动镜像。"
 
 #: ../../network/tools.pm:1 ../../standalone/drakconnect:1
 #, c-format
 msgid "Account Login (user name)"
-msgstr "帐户登录 (用户名)"
+msgstr "帐户登录（用户名）"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -6593,6 +6686,11 @@ msgstr ""
 "这个 %s 必须使用“Drak 打印机”来配置。\n"
 "您可以在“Mandrake 控制中心”的硬件部分打开“Drak 打印机”。"
 
+#: ../../../move/move.pm:1
+#, fuzzy, c-format
+msgid "Key isn't writable"
+msgstr "XawTV 没有安装！"
+
 #: ../../lang.pm:1
 #, c-format
 msgid "Bangladesh"
@@ -6645,15 +6743,15 @@ msgstr ""
 msgid "Set the root umask."
 msgstr "设置 root umask。"
 
-#: ../../network/modem.pm:1 ../../standalone/drakconnect:1
-#, c-format
-msgid "Script-based"
-msgstr "基于脚本登录"
-
 #: ../../install_any.pm:1 ../../partition_table.pm:1
 #, c-format
 msgid "Error reading file %s"
 msgstr "请取文件 %s 出错"
+
+#: ../../network/modem.pm:1 ../../standalone/drakconnect:1
+#, c-format
+msgid "Script-based"
+msgstr "基于脚本登录"
 
 #: ../../harddrake/v4l.pm:1
 #, c-format
@@ -6736,23 +6834,6 @@ msgstr ""
 msgid "Domain Authentication Required"
 msgstr "需要域认证"
 
-#: ../../standalone/drakTermServ:1
-#, c-format
-msgid ""
-"\n"
-"\n"
-" Thanks:\n"
-"\t- LTSP Project http://www.ltsp.org\n"
-"\t- Michael Brown <mbrown\\@fensystems.co.uk>\n"
-"\n"
-msgstr ""
-"\n"
-"\n"
-"感谢：\n"
-"\t- LTSP 项目 http://www.ltsp.org\n"
-"\t- Michael Brown <mbrown\\@fensystems.co.uk>\n"
-"\n"
-
 #: ../../security/level.pm:1
 #, c-format
 msgid "Use libsafe for servers"
@@ -6827,7 +6908,7 @@ msgstr "瑞典语"
 #: ../../modules/interactive.pm:1
 #, c-format
 msgid "Which %s driver should I try?"
-msgstr "尝试使用哪个 %s 驱动程序?"
+msgstr "尝试使用哪个 %s 驱动程序？"
 
 #: ../../standalone/logdrake:1
 #, c-format
@@ -7128,7 +7209,7 @@ msgstr "开机时启动打印系统"
 #: ../../network/netconnect.pm:1
 #, c-format
 msgid "Do you want to start the connection at boot?"
-msgstr "您是否希望一开机就启动连接?"
+msgstr "您是否希望一开机就启动连接？"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -7180,7 +7261,7 @@ msgstr ""
 "该打印系统在后台运行守护程序，守护程序能通过网络进行远程访问，而可能遭受攻\n"
 "击。该安全级别缺省启动少数选择的留守程序。\n"
 "\n"
-"您要配置打印吗?"
+"您要配置打印吗？"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -7195,7 +7276,7 @@ msgstr "这个分区不能被用于回环"
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid "File already exists. Use it?"
-msgstr "文件已经存在。使用现有的文件?"
+msgstr "文件已经存在。使用现有的文件？"
 
 #: ../../standalone/net_monitor:1
 #, c-format
@@ -7421,7 +7502,7 @@ msgstr "启动设备"
 #: ../../install_interactive.pm:1
 #, c-format
 msgid "Which partition do you want to resize?"
-msgstr "您需要改变哪个分区的大小?"
+msgstr "您需要改变哪个分区的大小？"
 
 #: ../../lang.pm:1
 #, c-format
@@ -7473,15 +7554,15 @@ msgstr "Yaboot"
 msgid "Logitech CC Series with Wheel emulation"
 msgstr "罗技 CC 系列, 模拟滚轮"
 
-#: ../../standalone/drakboot:1
-#, c-format
-msgid "Splash selection"
-msgstr "选择启动画面"
-
 #: ../../partition_table.pm:1
 #, c-format
 msgid "Extended partition not supported on this platform"
 msgstr "这个平台上不支持扩展分区"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Splash selection"
+msgstr "选择启动画面"
 
 #: ../../network/isdn.pm:1
 #, c-format
@@ -7530,12 +7611,17 @@ msgstr "每日安全检查"
 msgid ""
 "Do you want to enable printing on the printers mentioned above or on "
 "printers in the local network?\n"
-msgstr "您想激活上述打印机的打印功能，还是要使用本地网络的打印机来打印?\n"
+msgstr "您想激活上述打印机的打印功能，还是要使用本地网络的打印机来打印？\n"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Printer default settings"
 msgstr "打印机默认设置"
+
+#: ../../mouse.pm:1
+#, c-format
+msgid "Generic PS2 Wheel Mouse"
+msgstr "普通 PS2 滚轮鼠标"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -7546,11 +7632,6 @@ msgid ""
 msgstr ""
 "CPU 中 CRO 寄存器的 WP 标志位强制在内存页面级别进行写保护，这使得处理器可以避"
 "免未检查的内核访问用户内存(不过此防护有 bug)"
-
-#: ../../mouse.pm:1
-#, c-format
-msgid "Generic PS2 Wheel Mouse"
-msgstr "普通 PS2 滚轮鼠标"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -7706,6 +7787,11 @@ msgstr "韩国键盘"
 msgid "Not connected"
 msgstr "未连接"
 
+#: ../../standalone/net_monitor:1
+#, fuzzy, c-format
+msgid "No internet connection configured"
+msgstr "Internet 连接配置"
+
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Greek"
@@ -7721,27 +7807,10 @@ msgstr "圣基茨和尼维斯"
 msgid "Generic 3 Button Mouse with Wheel emulation"
 msgstr "普通 3 键鼠标, 模拟滚轮"
 
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid ""
-"Transfer successful\n"
-"You may want to verify you can login to the server with:\n"
-"\n"
-"ssh -i %s %s\\@%s\n"
-"\n"
-"without being prompted for a password."
-msgstr ""
-"传送成功\n"
-"要验证您可以登录到服务器，请运行：\n"
-"\n"
-"ssh -i %s %s\\@%s\n"
-"\n"
-"这样不会提问密码。"
-
 #: ../../any.pm:1
 #, c-format
 msgid "Enable OF Boot?"
-msgstr "启用 OF 启动?"
+msgstr "启用 OF 启动？"
 
 #: ../../fsedit.pm:1
 #, c-format
@@ -7964,7 +8033,7 @@ msgstr ""
 "单击“传送”覆盖配置。\n"
 "您也可以选择新的名称或跳过该打印机。"
 
-#: ../../share/advertising/12-mdkexpert.pl:1
+#: ../advertising/12-mdkexpert.pl:1
 #, c-format
 msgid ""
 "Find the solutions of your problems via MandrakeSoft's online support "
@@ -8029,6 +8098,22 @@ msgstr "吉尔吉斯斯坦"
 #, c-format
 msgid "Multi-function device on USB"
 msgstr "USB 端口上的一体机"
+
+#: ../../../move/move.pm:1
+#, c-format
+msgid ""
+"We didn't detect any USB key on your system. If you\n"
+"plug in an USB key now, Mandrake Move will have the ability\n"
+"to transparently save the data in your home directory and\n"
+"system wide configuration, for next boot on this computer\n"
+"or another one. Note: if you plug in a key now, wait several\n"
+"seconds before detecting again.\n"
+"\n"
+"\n"
+"You may also proceed without an USB key - you'll still be\n"
+"able to use Mandrake Move as a normal live Mandrake\n"
+"Operating System."
+msgstr ""
 
 #: ../../help.pm:1
 #, c-format
@@ -8125,15 +8210,15 @@ msgstr "Sticky-bit"
 msgid "Other Media"
 msgstr "其它介质"
 
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "Backup system files"
-msgstr "备份系统文件"
-
 #: ../../mouse.pm:1
 #, c-format
 msgid "Logitech MouseMan+"
 msgstr "罗技 MouseMan+"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "Backup system files"
+msgstr "备份系统文件"
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -8196,6 +8281,11 @@ msgstr "系统设置"
 msgid "Please choose your type of mouse."
 msgstr "请选择您的鼠标类型。"
 
+#: ../../services.pm:1
+#, c-format
+msgid "running"
+msgstr "运行"
+
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "class of hardware device"
@@ -8212,11 +8302,6 @@ msgstr "下面是本地连接的打印机要共享的计算机和网络："
 #, c-format
 msgid "United Kingdom"
 msgstr "英国"
-
-#: ../../services.pm:1
-#, c-format
-msgid "running"
-msgstr "运行"
 
 #: ../../lang.pm:1
 #, c-format
@@ -8260,7 +8345,7 @@ msgstr "塞内加尔"
 msgid "Command line"
 msgstr "命令行"
 
-#: ../../share/advertising/08-store.pl:1
+#: ../advertising/08-store.pl:1
 #, c-format
 msgid ""
 "Our full range of Linux solutions, as well as special offers on products and "
@@ -8321,6 +8406,17 @@ msgstr "交换"
 #, c-format
 msgid "Custom settings"
 msgstr "自定义设置"
+
+#: ../../../move/move.pm:1
+#, c-format
+msgid ""
+"The USB key seems to have write protection enabled, but we can't safely\n"
+"unplug it now.\n"
+"\n"
+"\n"
+"Click the button to reboot the machine, unplug it, remove write protection,\n"
+"plug the key again, and launch Mandrake Move again."
+msgstr ""
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -8428,7 +8524,7 @@ msgstr "请选择用哪个网卡连接互联网。"
 msgid "Photo memory card access on your HP multi-function device"
 msgstr "您的惠普一体机的照片存储卡访问"
 
-#: ../../share/advertising/09-mdksecure.pl:1
+#: ../advertising/09-mdksecure.pl:1
 #, c-format
 msgid ""
 "Enhance your computer performance with the help of a selection of partners "
@@ -8546,6 +8642,11 @@ msgstr ""
 #, c-format
 msgid "Exit install"
 msgstr "退出安装"
+
+#: ../../../move/move.pm:1
+#, c-format
+msgid "Need a key to save your data"
+msgstr ""
 
 #: ../../standalone/drakgw:1
 #, c-format
@@ -8674,7 +8775,7 @@ msgstr ""
 "如果那样，您一定要立即升级。\n"
 "\n"
 "\n"
-"您真要安装这些服务?\n"
+"您真要安装这些服务？\n"
 
 #: ../../printer/main.pm:1
 #, c-format
@@ -8731,11 +8832,6 @@ msgstr "俄语(音标)"
 #, c-format
 msgid "dhcpd Config..."
 msgstr "DHCPD 配置..."
-
-#: ../../standalone/drakgw:1
-#, c-format
-msgid "The setup has already been done, but it's currently disabled."
-msgstr "配置已经完成。它当前已经被禁用。"
 
 #: ../../any.pm:1
 #, c-format
@@ -8902,6 +8998,11 @@ msgstr ""
 msgid "Choose an X server"
 msgstr "选择 X 服务器"
 
+#: ../../../move/tree/mdk_totem:1
+#, c-format
+msgid "Copying to memory to allow removing the CDROM"
+msgstr ""
+
 #: ../../install_interactive.pm:1
 #, c-format
 msgid "Swap partition size in MB: "
@@ -8949,12 +9050,12 @@ msgstr "自动步骤配置"
 msgid "Barbados"
 msgstr "巴巴多斯"
 
-#: ../../share/advertising/02-community.pl:1
+#: ../advertising/02-community.pl:1
 #, c-format
 msgid ""
 "Want to know more and to contribute to the Open Source community? Get "
 "involved in the Free Software world!"
-msgstr "想更多了解开放源代码社团?请加入自由软件的世界！"
+msgstr "想更多了解开放源代码社团？请加入自由软件的世界！"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -9113,15 +9214,6 @@ msgstr "CPU 的次世代"
 msgid "First Time Wizard"
 msgstr "初次使用向导"
 
-#: ../../install_steps.pm:1
-#, c-format
-msgid ""
-"An error occurred, but I don't know how to handle it nicely.\n"
-"Continue at your own risk."
-msgstr ""
-"发生错误，可是我不知道该怎样处理才好。\n"
-"继续下去会怎样就看您的运气了。"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Taiwan"
@@ -9136,6 +9228,15 @@ msgstr "巴基斯坦"
 #, c-format
 msgid "please wait, parsing file: %s"
 msgstr "请等待，正在分析文件：%s"
+
+#: ../../install_steps.pm:1 ../../../move/move.pm:1
+#, c-format
+msgid ""
+"An error occurred, but I don't know how to handle it nicely.\n"
+"Continue at your own risk."
+msgstr ""
+"发生错误，可是我不知道该怎样处理才好。\n"
+"继续下去会怎样就看您的运气了。"
 
 #: ../../install_steps_gtk.pm:1
 #, c-format
@@ -9273,7 +9374,7 @@ msgstr ""
 "这可能是由设置为很高的安全级别所引起的。因为打印系统对攻击而言是一个潜在的威"
 "胁。\n"
 "\n"
-"您希望让打印系统自动启动吗?"
+"您希望让打印系统自动启动吗？"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -9282,7 +9383,7 @@ msgid ""
 "What do you want to modify on this printer?"
 msgstr ""
 "打印机 %s\n"
-"真的要修改吗?"
+"真的要修改吗？"
 
 #: ../../standalone/scannerdrake:1
 #, c-format
@@ -9312,7 +9413,7 @@ msgid ""
 "\n"
 "\"Custom\" permit a per-user granularity.\n"
 msgstr ""
-"您愿意让用户能共享他们的目录吗?\n"
+"您愿意让用户能共享他们的目录吗？\n"
 "在这里选择允许，用户将可以在 KDE 和 Gnome 的文件管理器中单击“共享”菜单项\n"
 "“定制”允许按照不同用户细分设置。\n"
 
@@ -9324,6 +9425,11 @@ msgid ""
 msgstr ""
 "请选择用软盘载入或保存软件包选择信息。\n"
 "格式与自动安装生成的软盘一样。"
+
+#: ../../../move/tree/mdk_totem:1
+#, fuzzy, c-format
+msgid "No CDROM support"
+msgstr "无线电支持："
 
 #: ../../standalone/drakxtv:1
 #, c-format
@@ -9363,9 +9469,9 @@ msgid ""
 "Do you want to try again with other parameters?"
 msgstr ""
 "模块 %s 加载失败。\n"
-"您要尝试其它的参数吗?"
+"您要尝试其它的参数吗？"
 
-#: ../../share/advertising/01-thanks.pl:1
+#: ../advertising/01-thanks.pl:1
 #, c-format
 msgid "Welcome to the Open Source world."
 msgstr "欢迎进入开放源代码世界。"
@@ -9468,7 +9574,7 @@ msgstr ""
 "互联网连接共享的设定已经完成。\n"
 "它当前已经被禁用。\n"
 "\n"
-"您要做什么?"
+"您要做什么？"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -9587,6 +9693,11 @@ msgstr "其它端口"
 msgid "number of capture buffers for mmap'ed capture"
 msgstr "用于 mmap 捕获的缓冲区数量"
 
+#: ../../network/adsl.pm:1
+#, fuzzy, c-format
+msgid " - detected"
+msgstr "检测到"
+
 #: ../../harddrake/data.pm:1
 #, c-format
 msgid "SMBus controllers"
@@ -9638,7 +9749,7 @@ msgid ""
 "configuring now. How do you want to proceed?"
 msgstr ""
 "您在配置远程打印机。配置远程打印需要网络访问，但您还没有配置网络。如果您仍\n"
-"旧不进行网络配置的话，您将不能使用您现在正在配置的打印机。你希望怎样继续?"
+"旧不进行网络配置的话，您将不能使用您现在正在配置的打印机。你希望怎样继续？"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -9685,6 +9796,11 @@ msgstr "控制台用户可重新启动"
 msgid "Restore"
 msgstr "恢复"
 
+#: ../../standalone/drakclock:1
+#, fuzzy, c-format
+msgid "Server:"
+msgstr "服务器："
+
 #: ../../security/help.pm:1
 #, c-format
 msgid "if set to yes, check if the network devices are in promiscuous mode."
@@ -9694,6 +9810,11 @@ msgstr "如果设为 yes，就会检查网络设备是否工作在混乱状态�
 #, c-format
 msgid "Looking for available packages..."
 msgstr "正在寻找可安装的程序..."
+
+#: ../../../move/move.pm:1
+#, fuzzy, c-format
+msgid "Please wait, setting up system configuration files on USB key..."
+msgstr "请稍候，正在设置安全级别..."
 
 #: ../../any.pm:1
 #, c-format
@@ -9808,15 +9929,15 @@ msgid ""
 msgstr ""
 "以 MHz 为单位的 CPU 频率(初次估计的兆赫兹可能比较接近 CPU 每秒可执行的指令数)"
 
-#: ../../standalone/printerdrake:1
-#, c-format
-msgid "Mandrake Linux Printer Management Tool"
-msgstr "Mandrake Linux 打印机管理工具"
-
 #: ../../pkgs.pm:1
 #, c-format
 msgid "important"
 msgstr "重要"
+
+#: ../../standalone/printerdrake:1
+#, c-format
+msgid "Mandrake Linux Printer Management Tool"
+msgstr "Mandrake Linux 打印机管理工具"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -9871,6 +9992,11 @@ msgstr "用户"
 msgid "Preparing bootloader..."
 msgstr "正在准备引导程序..."
 
+#: ../../../move/move.pm:1
+#, c-format
+msgid "Enter your user information, password will be used for screensaver"
+msgstr ""
+
 #: ../../network/network.pm:1
 #, c-format
 msgid "Gateway (e.g. %s)"
@@ -9916,7 +10042,7 @@ msgstr "您的系统时钟设定为 GMT"
 #: ../../network/isdn.pm:1
 #, c-format
 msgid "Do you want to start a new configuration ?"
-msgstr "您想要开始新配置吗?"
+msgstr "您想要开始新配置吗？"
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -9926,7 +10052,7 @@ msgstr "给一个文件名"
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Please choose the port that your printer is connected to."
-msgstr "请问您的打印机是连接到那个端口?"
+msgstr "请选择您的打印机是连接到哪个端口。"
 
 #: ../../standalone/livedrake:1
 #, c-format
@@ -9941,12 +10067,12 @@ msgstr "巴拉圭"
 #: ../../network/netconnect.pm:1
 #, c-format
 msgid "Configuration is complete, do you want to apply settings ?"
-msgstr "配置完成，您想要应用设置吗?"
+msgstr "配置完成，您想要应用设置吗？"
 
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "Use Incremental/Differential Backups  (do not replace old backups)"
-msgstr "使用增量/差异备份(不破坏老备份)"
+msgstr "使用增量/差异备份（不破坏老备份）"
 
 #: ../../standalone/drakTermServ:1
 #, c-format
@@ -10305,15 +10431,15 @@ msgstr "文件内容"
 msgid "Authentication LDAP"
 msgstr "LDAP 认证"
 
+#: ../../install_steps_gtk.pm:1
+#, c-format
+msgid "in order to keep %s"
+msgstr ""
+
 #: ../../harddrake/sound.pm:1
 #, c-format
 msgid "Let me pick any driver"
 msgstr "让我挑选任意驱动"
-
-#: ../../standalone/net_monitor:1
-#, c-format
-msgid "Profile "
-msgstr "配置文件 "
 
 #: ../../standalone/net_monitor:1
 #, c-format
@@ -10414,9 +10540,9 @@ msgstr "提交内核版本"
 #: ../../standalone/drakautoinst:1 ../../standalone/drakbackup:1
 #: ../../standalone/drakboot:1 ../../standalone/drakconnect:1
 #: ../../standalone/drakfloppy:1 ../../standalone/drakfont:1
-#: ../../standalone/drakgw:1 ../../standalone/drakperm:1
-#: ../../standalone/draksec:1 ../../standalone/logdrake:1
-#: ../../standalone/mousedrake:1 ../../standalone/net_monitor:1
+#: ../../standalone/drakperm:1 ../../standalone/draksec:1
+#: ../../standalone/logdrake:1 ../../standalone/mousedrake:1
+#: ../../standalone/net_monitor:1
 #, c-format
 msgid "Cancel"
 msgstr "取消"
@@ -10459,7 +10585,7 @@ msgstr "查看上次的日志"
 #: ../../network/drakfirewall.pm:1
 #, c-format
 msgid "Which services would you like to allow the Internet to connect to?"
-msgstr "您想要允许互联网连接到哪些服务?"
+msgstr "您想要允许互联网连接到哪些服务？"
 
 #: ../../standalone/printerdrake:1
 #, c-format
@@ -10569,19 +10695,6 @@ msgstr "意大利"
 msgid "Basic"
 msgstr "基本"
 
-#: ../../standalone/drakTermServ:1
-#, c-format
-msgid ""
-"\n"
-" Copyright (C) 2002 by MandrakeSoft \n"
-"\tStew Benedict sbenedict\\@mandrakesoft.com\n"
-"\n"
-msgstr ""
-"\n"
-"版权所有 (C) 2002 by MandrakeSoft \n"
-"\tStew Benedict sbenedict\\@mandrakesoft.com\n"
-"\n"
-
 #: ../../install_messages.pm:1
 #, c-format
 msgid "http://www.mandrakelinux.com/en/92errata.php3"
@@ -10602,10 +10715,10 @@ msgstr "pdq"
 msgid "Card IO"
 msgstr "网卡 IO"
 
-#: ../../standalone/drakperm:1
-#, c-format
-msgid "when checked, owner and group won't be changed"
-msgstr "选中则不能改变所有者和组"
+#: ../../network/drakfirewall.pm:1
+#, fuzzy, c-format
+msgid "Samba server"
+msgstr "Samba 服务器"
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -10691,6 +10804,11 @@ msgstr ""
 msgid "access to compilation tools"
 msgstr "允许使用编译工具"
 
+#: ../../standalone/net_monitor:1
+#, fuzzy, c-format
+msgid "Global statistics"
+msgstr "统计"
+
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "Please select data to restore..."
@@ -10710,6 +10828,11 @@ msgstr ""
 #, c-format
 msgid "Standard test page"
 msgstr "标准测试页"
+
+#: ../../standalone/drakclock:1
+#, fuzzy, c-format
+msgid "Time Zone"
+msgstr "时区"
 
 #: ../../diskdrake/hd_gtk.pm:1 ../../diskdrake/interactive.pm:1
 #, c-format
@@ -10808,7 +10931,20 @@ msgid ""
 msgstr ""
 "请输入需要修改的项目前面的数字，\n"
 "按 Enter 继续。\n"
-"您的选择?"
+"您的选择？"
+
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"\n"
+" Copyright (C) 2002 by MandrakeSoft \n"
+"\tStew Benedict sbenedict@mandrakesoft.com\n"
+"\n"
+msgstr ""
+"\n"
+"版权所有 (C) 2002 by MandrakeSoft \n"
+"\tStew Benedict sbenedict@mandrakesoft.com\n"
+"\n"
 
 #: ../../standalone/draksplash:1
 #, c-format
@@ -10835,15 +10971,15 @@ msgstr "网络配置向导"
 msgid "Removable media automounting"
 msgstr "自动装载可移动介质"
 
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "Enter the directory to save:"
-msgstr "请输入要保存的目录："
-
 #: ../../services.pm:1
 #, c-format
 msgid "Printing"
 msgstr "打印"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "Enter the directory to save:"
+msgstr "请输入要保存的目录："
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -10959,7 +11095,7 @@ msgstr "Kensington Thinking Mouse"
 msgid "Configuration of a remote printer"
 msgstr "配置远程打印机"
 
-#: ../../share/advertising/13-mdkexpert_corporate.pl:1
+#: ../advertising/13-mdkexpert_corporate.pl:1
 #, c-format
 msgid "An online platform to respond to enterprise support needs."
 msgstr "专为响应企业的特殊要求提供专业服务的在线支持平台。"
@@ -11005,7 +11141,7 @@ msgstr ""
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid "Quit without writing the partition table?"
-msgstr "不写入分区表而退出?"
+msgstr "不写入分区表而退出？"
 
 #: ../../mouse.pm:1
 #, c-format
@@ -11114,15 +11250,22 @@ msgstr ""
 msgid "Configure Local Area Network..."
 msgstr "配置局域网..."
 
-#: ../../security/l10n.pm:1
+#: ../../../move/move.pm:1
 #, c-format
-msgid "Verify checksum of the suid/sgid files"
-msgstr "校验 suid/sgid 文件的校验和"
+msgid ""
+"The USB key seems to have write protection enabled. Please\n"
+"unplug it, remove write protection, and then plug it again."
+msgstr ""
 
 #: ../../services.pm:1
 #, c-format
 msgid "Launch the sound system on your machine"
 msgstr "启动计算机上的声音系统"
+
+#: ../../security/l10n.pm:1
+#, c-format
+msgid "Verify checksum of the suid/sgid files"
+msgstr "校验 suid/sgid 文件的校验和"
 
 #: ../../security/l10n.pm:1
 #, c-format
@@ -11157,7 +11300,7 @@ msgstr "三键"
 #: ../../diskdrake/interactive.pm:1 ../../diskdrake/removable.pm:1
 #, c-format
 msgid "Which filesystem do you want?"
-msgstr "您希望使用哪种文件系统?"
+msgstr "您希望使用哪种文件系统？"
 
 #: ../../lang.pm:1
 #, c-format
@@ -11370,7 +11513,7 @@ msgstr ""
 "\n"
 "要下载这些软件包，您的网络连接必须已经配置好并且可以使用。\n"
 "\n"
-"您是否要安装升级包?"
+"您是否要安装升级包？"
 
 #: ../../standalone/logdrake:1
 #, c-format
@@ -11448,6 +11591,11 @@ msgstr "您不能不选择这个软件包。它必须升级"
 #, c-format
 msgid "Loading from floppy"
 msgstr "正从软盘载入"
+
+#: ../../standalone/drakclock:1
+#, c-format
+msgid "Timezone - DrakClock"
+msgstr ""
 
 #: ../../security/help.pm:1
 #, c-format
@@ -11601,6 +11749,11 @@ msgstr ""
 "\n"
 "关于安装后如何配置您的系统，请查看 Mandrake Linux 用户手册。"
 
+#: ../../standalone/drakclock:1
+#, fuzzy, c-format
+msgid "Enable Network Time Protocol"
+msgstr "恢复使用的网络协议：%s"
+
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "paranoid"
@@ -11690,7 +11843,7 @@ msgstr "允许使用网络工具"
 msgid "Firmware-Upload for HP LaserJet 1000"
 msgstr "惠普 LaserJet 1000 的固件上载"
 
-#: ../../share/advertising/03-software.pl:1
+#: ../advertising/03-software.pl:1
 #, c-format
 msgid ""
 "And, of course, push multimedia to its limits with the very latest software "
@@ -11711,7 +11864,7 @@ msgid ""
 "try to force installation even if that destroys the first partition?"
 msgstr ""
 "安装 aboot 时出错，\n"
-"强迫安装会毁坏第一个分区，要继续吗?"
+"强迫安装会毁坏第一个分区，要继续吗？"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -11730,7 +11883,7 @@ msgid ""
 "Warning: If you've already done this process you'll probably\n"
 " need to purge the entry from authorized_keys on the server."
 msgstr ""
-"%s 已存在，要删除吗?\n"
+"%s 已存在，要删除吗？\n"
 "\n"
 "警告：如果您曾经做过这个步骤，您可能需要\n"
 "从服务器的的 authorized_keys 删除该项目。"
@@ -11743,7 +11896,7 @@ msgstr "请填写或选择下列项目"
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid "Do you want to save /etc/fstab modifications"
-msgstr "您想要保存 /etc/fstab 修改吗?"
+msgstr "您想要保存 /etc/fstab 修改吗？"
 
 #: ../../standalone/drakconnect:1
 #, c-format
@@ -11755,15 +11908,15 @@ msgstr "启动协议"
 msgid "LVM-disks %s\n"
 msgstr "LVM 磁盘 %s\n"
 
-#: ../../diskdrake/interactive.pm:1
-#, c-format
-msgid "The package %s is needed. Install it?"
-msgstr "需要安装软件包 %s。您同意安装吗?"
-
 #: ../../services.pm:1
 #, c-format
 msgid "On boot"
 msgstr "启动时"
+
+#: ../../diskdrake/interactive.pm:1
+#, c-format
+msgid "The package %s is needed. Install it?"
+msgstr "需要安装软件包 %s。您同意安装吗？"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -11780,10 +11933,15 @@ msgstr "梵蒂冈"
 msgid "Please make a backup of your data first"
 msgstr "请先备份您的数据"
 
+#: ../../harddrake/data.pm:1
+#, c-format
+msgid "ADSL adapters"
+msgstr ""
+
 #: ../../install_interactive.pm:1
 #, c-format
 msgid "You have more than one hard drive, which one do you install linux on?"
-msgstr "您有不只一个硬盘，您要在哪个上面安装 Linux?"
+msgstr "您有不只一个硬盘，您要在哪个上面安装 Linux？"
 
 #: ../../lang.pm:1
 #, c-format
@@ -11805,7 +11963,7 @@ msgstr "需要固件"
 msgid "Remove List"
 msgstr "删除列表"
 
-#: ../../share/advertising/05-desktop.pl:1
+#: ../advertising/05-desktop.pl:1
 #, c-format
 msgid "A customizable environment"
 msgstr "可自定义的环境"
@@ -11833,7 +11991,7 @@ msgstr "摩洛哥"
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Which printer model do you have?"
-msgstr "您的打印机的型号是什么?"
+msgstr "您的打印机的型号是什么？"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -12031,6 +12189,13 @@ msgstr "设置 shell 超时。若设为 0，则为没有超时。"
 msgid "Firmware copy succeeded"
 msgstr "固件复制成功"
 
+#: ../../../move/tree/mdk_totem:1
+#, c-format
+msgid ""
+"You can't use another CDROM when the following programs are running: \n"
+"%s"
+msgstr ""
+
 #: ../../security/help.pm:1
 #, c-format
 msgid "if set to yes, check permissions of files in the users' home."
@@ -12058,7 +12223,7 @@ msgstr "自动"
 #: ../../Xconfig/test.pm:1
 #, c-format
 msgid "Do you want to test the configuration?"
-msgstr "您想要测试您的配置吗?"
+msgstr "您想要测试您的配置吗？"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -12080,12 +12245,12 @@ msgstr "/操作(_A)"
 #: ../../standalone/drakautoinst:1
 #, c-format
 msgid "Remove the last item"
-msgstr "删除最后一项吗?"
+msgstr "删除最后一项"
 
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "User list to restore (only the most recent date per user is important)"
-msgstr "可恢复的用户清单(每个用户最近的数据是最重要的)"
+msgstr "可恢复的用户清单（每个用户最近的数据是最重要的）"
 
 #: ../../standalone/drakTermServ:1
 #, c-format
@@ -12139,7 +12304,7 @@ msgstr "大小："
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid "Which sector do you want to move it to?"
-msgstr "您想移动它到哪个扇区?"
+msgstr "您想移动它到哪个扇区？"
 
 #: ../../lang.pm:1
 #, c-format
@@ -12149,7 +12314,7 @@ msgstr "巴哈马"
 #: ../../interactive/stdio.pm:1
 #, c-format
 msgid "Do you want to click on this button?"
-msgstr "您希望单击此按钮吗?"
+msgstr "您希望单击此按钮吗？"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -12381,7 +12546,7 @@ msgid ""
 "do you really want to overwrite its configuration?"
 msgstr ""
 "打印机“%s”已经存在，\n"
-"真的覆盖配置?"
+"真的覆盖配置？"
 
 #: ../../standalone/scannerdrake:1
 #, c-format
@@ -12499,6 +12664,11 @@ msgstr ""
 "“%s”命令也可用来修改特殊打印作业的选项。只需简单地往命令行中加入想要的设定，"
 "例如：“%s <file>”。"
 
+#: ../../standalone/drakclock:1
+#, fuzzy, c-format
+msgid "DrakClock"
+msgstr "Drak 备份"
+
 #: ../../modules/interactive.pm:1
 #, c-format
 msgid ""
@@ -12513,7 +12683,7 @@ msgstr ""
 "有时候需要给 %s 驱动程序指定额外的信息才能正常运行，尽管通常不需要。\n"
 "您可以在这里指定一些额外的选项，也可以让驱动程序探测您的机器，自动\n"
 "确定需要的信息。偶尔会发生机器在探测中停止反应，不过这不会损坏什么。\n"
-"您决定怎么做?"
+"您决定怎么做？"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -12528,21 +12698,6 @@ msgid ""
 msgstr ""
 "\n"
 "- 守护进程，%s 通过：\n"
-
-#: ../../standalone/drakgw:1
-#, c-format
-msgid ""
-"Welcome to the Internet Connection Sharing utility!\n"
-"\n"
-"%s\n"
-"\n"
-"Click on Configure to launch the setup wizard."
-msgstr ""
-"欢迎使用 Internet 连接共享配置工具！\n"
-"\n"
-"%s\n"
-"\n"
-"单击“配置”运行配置向导。"
 
 #: ../../lang.pm:1
 #, c-format
@@ -12729,6 +12884,11 @@ msgstr ""
 msgid "Christmas Island"
 msgstr "圣诞岛"
 
+#: ../../mouse.pm:1
+#, fuzzy, c-format
+msgid "Automatic"
+msgstr "自动 IP"
+
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Installation of bootloader failed. The following error occured:"
@@ -12831,11 +12991,6 @@ msgstr "现在传送"
 msgid "Set root password and network authentication methods"
 msgstr "设定 root 密码及网络认证方式"
 
-#: ../../standalone/drakgw:1
-#, c-format
-msgid "Internet Connection Sharing configuration"
-msgstr "Internet 连接共享配置"
-
 #: ../../ugtk2.pm:1
 #, c-format
 msgid "Toggle between flat and group sorted"
@@ -12889,7 +13044,7 @@ msgid ""
 msgstr ""
 "某些步骤没有完成。\n"
 "\n"
-"您确信要现在退出吗?"
+"您确信要现在退出吗？"
 
 #: ../../lang.pm:1
 #, c-format
@@ -12915,7 +13070,7 @@ msgid ""
 msgstr ""
 "您的打印机是否为惠普或索尼出品的一体机(OfficeJect，PSC，配备扫描仪的LaserJet "
 "1100/1200/1220/3200/3300，DeskJet 450, Sony IJP-V100)，惠普 PhotoSmart 或 HP "
-"LaserJet 2200?"
+"LaserJet 2200？"
 
 #. -PO: these messages will be displayed at boot time in the BIOS, use only ASCII (7bit)
 #: ../../bootloader.pm:1
@@ -13032,7 +13187,7 @@ msgstr "动态 IP 地址池："
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid "LVM name?"
-msgstr "LVM 名称?"
+msgstr "LVM 名称？"
 
 #: ../../standalone/service_harddrake:1
 #, c-format
@@ -13106,6 +13261,11 @@ msgstr "选择您要制作启动盘的软盘驱动器"
 #, c-format
 msgid "LILO with text menu"
 msgstr "文本菜单 LILO"
+
+#: ../../standalone/net_monitor:1
+#, c-format
+msgid "instantaneous"
+msgstr ""
 
 #: ../../network/drakfirewall.pm:1
 #, c-format
@@ -13294,7 +13454,12 @@ msgstr "请给出用户名"
 #: ../../any.pm:1
 #, c-format
 msgid "Enable CD Boot?"
-msgstr "允许 CD 启动?"
+msgstr "允许 CD 启动？"
+
+#: ../../../move/move.pm:1
+#, c-format
+msgid "Simply reboot"
+msgstr ""
 
 #: ../../interactive/stdio.pm:1
 #, c-format
@@ -13393,15 +13558,15 @@ msgstr ""
 "实际上还将在您的计算机上安装时间服务器，这样局域网中的计算机也可使用此功能\n"
 "了。"
 
-#: ../../install_steps_interactive.pm:1
-#, c-format
-msgid "Which is your timezone?"
-msgstr "您所在的时区？"
-
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "Can't create log file!"
 msgstr "无法创建日志文件！"
+
+#: ../../install_steps_interactive.pm:1 ../../standalone/drakclock:1
+#, c-format
+msgid "Which is your timezone?"
+msgstr "您所在的时区？"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -13452,6 +13617,11 @@ msgstr "莫桑比克"
 msgid "Icon"
 msgstr "图标"
 
+#: ../../../move/tree/mdk_totem:1
+#, fuzzy, c-format
+msgid "Kill those programs"
+msgstr "允许使用 X 应用程序"
+
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "Please choose what you want to backup"
@@ -13487,7 +13657,7 @@ msgstr "添加规则"
 msgid "Chunk size %s\n"
 msgstr "组块大小 %s\n"
 
-#: ../../share/advertising/02-community.pl:1
+#: ../advertising/02-community.pl:1
 #, c-format
 msgid "Build the future of Linux!"
 msgstr "创造 Linux 的未来！"
@@ -13616,7 +13786,7 @@ msgstr ""
 "    您可以再次选择是否让您的机器在启动时就切换到图形界面。显然，如果您的机\n"
 "器用做服务器，或者您没有配置好显示，您可能想要选中“%s”。"
 
-#: ../../share/advertising/13-mdkexpert_corporate.pl:1
+#: ../advertising/13-mdkexpert_corporate.pl:1
 #, c-format
 msgid "MandrakeExpert Corporate"
 msgstr "MandrakeExpert 企业版"
@@ -13658,6 +13828,11 @@ msgid ""
 "After changing type of partition %s, all data on this partition will be lost"
 msgstr "在改变分区表 %s 的类型之后，在这个分区上的所有资料将要被清除"
 
+#: ../../harddrake/data.pm:1
+#, fuzzy, c-format
+msgid "ISDN adapters"
+msgstr "内置 ISDN 卡"
+
 #: ../../common.pm:1
 #, c-format
 msgid "%d seconds"
@@ -13676,7 +13851,7 @@ msgstr "必须输入有效的 URI！"
 #: ../../network/isdn.pm:1
 #, c-format
 msgid "Found \"%s\" interface do you want to use it ?"
-msgstr "找到了“%s”接口，您想要使用吗?"
+msgstr "找到了“%s”接口，您想要使用吗？"
 
 #: ../../standalone/drakgw:1
 #, c-format
@@ -13978,6 +14153,11 @@ msgstr "共享本地扫描仪"
 msgid "Plug'n Play probing failed. Please select the correct monitor"
 msgstr "即插即用检测失败。请明确选择一个显示器"
 
+#: ../../../move/move.pm:1
+#, c-format
+msgid "Detect again USB key"
+msgstr ""
+
 #: ../../services.pm:1
 #, c-format
 msgid "Services and deamons"
@@ -14019,7 +14199,7 @@ msgstr "Chkconfig 遵从 msec 规则"
 msgid "Slovakian (QWERTZ)"
 msgstr "斯洛伐克(QWERTZ 布局)"
 
-#: ../../share/advertising/06-development.pl:1
+#: ../advertising/06-development.pl:1
 #, c-format
 msgid ""
 "To modify and to create in different languages such as Perl, Python, C and C+"
@@ -14073,7 +14253,7 @@ msgstr ""
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid "Where do you want to mount %s?"
-msgstr "您想把 %s 装载到哪里?"
+msgstr "您想把 %s 装载到哪里？"
 
 #: ../../lang.pm:1
 #, c-format
@@ -14084,6 +14264,11 @@ msgstr "阿尔及利亚"
 #, c-format
 msgid "Restore Via Network"
 msgstr "通过网络恢复"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "Use tar and bzip2 (rather than tar and gzip)"
+msgstr ""
 
 #: ../../any.pm:1
 #, c-format
@@ -14216,7 +14401,7 @@ msgstr "DVD-ROM"
 msgid "Georgian (\"Latin\" layout)"
 msgstr "格鲁吉亚(“拉丁”布局)"
 
-#: ../../share/advertising/09-mdksecure.pl:1
+#: ../advertising/09-mdksecure.pl:1
 #, c-format
 msgid "Get the best items with Mandrake Linux Strategic partners"
 msgstr "从 Mandrake Linux 战略合作伙伴处得到最好的支持"
@@ -14320,7 +14505,7 @@ msgstr "自动登录"
 msgid "Domain Admin Password"
 msgstr "域管理员密码"
 
-#: ../../share/advertising/05-desktop.pl:1
+#: ../advertising/05-desktop.pl:1
 #, c-format
 msgid ""
 "Perfectly adapt your computer to your needs thanks to the 11 available "
@@ -14455,6 +14640,11 @@ msgstr "utopia 25"
 msgid "Pipe job into a command"
 msgstr "作业管道定向到命令"
 
+#: ../../../move/move.pm:1
+#, fuzzy, c-format
+msgid "Remove system config files"
+msgstr "删除回环 (loopback) 文件？"
+
 #: ../../lang.pm:1
 #, c-format
 msgid "Cote d'Ivoire"
@@ -14466,7 +14656,8 @@ msgid "new dynamic device name generated by core kernel devfs"
 msgstr "内核自带的 devfs 中使用的新的动态设备名"
 
 #: ../../help.pm:1 ../../install_any.pm:1 ../../interactive.pm:1
-#: ../../ugtk2.pm:1 ../../modules/interactive.pm:1 ../../standalone/drakgw:1
+#: ../../ugtk2.pm:1 ../../modules/interactive.pm:1
+#: ../../standalone/drakclock:1 ../../standalone/drakgw:1
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "Yes"
@@ -14475,7 +14666,7 @@ msgstr "是"
 #: ../../network/isdn.pm:1
 #, c-format
 msgid "Which protocol do you want to use?"
-msgstr "您将使用哪种协议?"
+msgstr "您将使用哪种协议？"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -14487,11 +14678,6 @@ msgstr "恢复进展"
 msgid "Estonia"
 msgstr "爱沙尼亚"
 
-#: ../../standalone/scannerdrake:1
-#, c-format
-msgid "Choose the host on which the local scanners should be made available:"
-msgstr "选择本地扫描仪适用的网络或主机："
-
 #: ../../partition_table.pm:1
 #, c-format
 msgid ""
@@ -14501,6 +14687,11 @@ msgid ""
 msgstr ""
 "分区表里有一段是空的，可是我没法使用它。\n"
 "唯一的办法是移动您的主分区，把空闲部分换到与扩展分区相邻的位置。"
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "Choose the host on which the local scanners should be made available:"
+msgstr "选择本地扫描仪适用的网络或主机："
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -14512,11 +14703,6 @@ msgstr "通道"
 #, c-format
 msgid "Add"
 msgstr "增加"
-
-#: ../../standalone/drakgw:1
-#, c-format
-msgid "No Internet Connection Sharing has ever been configured."
-msgstr "互联网连接共享没有配置。"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -14675,12 +14861,12 @@ msgstr "文本宽度"
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid "Where do you want to mount device %s?"
-msgstr "您想把设备 %s 装载到哪里?"
+msgstr "您想把设备 %s 装载到哪里？"
 
 #: ../../standalone/drakgw:1
 #, c-format
 msgid "The default lease (in seconds)"
-msgstr "默认租期(以秒为单位)"
+msgstr "默认租期（以秒为单位）"
 
 #: ../../network/netconnect.pm:1
 #, c-format
@@ -14732,7 +14918,7 @@ msgstr "韩国"
 #: ../../interactive/stdio.pm:1
 #, c-format
 msgid "Your choice? (default `%s'%s) "
-msgstr "您的选择?(默认“%s”%s)"
+msgstr "您的选择？（默认“%s”%s）"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -14797,20 +14983,20 @@ msgstr "运行“Drak 用户管理”"
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Is this an install or an upgrade?"
-msgstr "现在要新装还是升级?"
+msgstr "现在要新装还是升级？"
 
 #: ../../help.pm:1
 #, c-format
 msgid "ISDN card"
 msgstr "内置 ISDN 卡"
 
-#: ../../share/advertising/02-community.pl:1
+#: ../advertising/02-community.pl:1
 #, c-format
 msgid ""
 "To share your own knowledge and help build Linux software, join our "
 "discussion forums on our \"Community\" webpages."
 msgstr ""
-"想与别人分享您的知识，并帮助创造更好的 Linux 工具吗?请加入我们的论坛。在“社"
+"想与别人分享您的知识，并帮助创造更好的 Linux 工具吗？请加入我们的论坛。在“社"
 "区”网页可以找到它。"
 
 #: ../../standalone/drakbackup:1
@@ -14856,6 +15042,68 @@ msgstr ""
 "使用“升级”选项适用于 Mandrake Linux 系统版本“8.1”或更高版本。我们并不\n"
 "推荐您在先于“8.1”版本之前的 Mandrake Linux 上执行升级。"
 
+#: ../../standalone/drakfont:1
+#, c-format
+msgid ""
+"\n"
+" Copyright (C) 2001-2002 by MandrakeSoft \n"
+"     DUPONT Sebastien (original version)\n"
+"     CHAUMETTE Damien <dchaumette@mandrakesoft.com>\n"
+"\n"
+" This program is free software; you can redistribute it and/or modify\n"
+" it under the terms of the GNU General Public License as published by\n"
+" the Free Software Foundation; either version 2, or (at your option)\n"
+" any later version.\n"
+"\n"
+" This program is distributed in the hope that it will be useful,\n"
+" but WITHOUT ANY WARRANTY; without even the implied warranty of\n"
+" MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n"
+" GNU General Public License for more details.\n"
+"\n"
+" You should have received a copy of the GNU General Public License\n"
+" along with this program; if not, write to the Free Software\n"
+" Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.\n"
+"\n"
+" Thanks:\n"
+"    -  pfm2afm:   \n"
+"\t by Ken Borgendale:\n"
+"\t    Convert a Windows .pfm  file to a .afm (Adobe Font Metrics)\n"
+"    -  type1inst:\n"
+"\t by James Macnicol: \n"
+"\t    type1inst generates files fonts.dir fonts.scale & Fontmap.\n"
+"    -  ttf2pt1:   \n"
+"\t  by Andrew Weeks, Frank Siegert, Thomas Henlich, Sergey Babkin  \n"
+"             Convert ttf font files to afm and pfb fonts\n"
+msgstr ""
+"\n"
+" 版权所有 (C) 2001-2002 by MandrakeSoft \n"
+"     DUPONT Sebastien（原始版本）\n"
+"     CHAUMETTE Damien <dchaumette@mandrakesoft.com>\n"
+"\n"
+" 这个程序是自由软件；您可以重新发布，或修改它，只要您遵守来自\n"
+" Free Software Foundation 自由软件基金会的 GNU General Public\n"
+" License 通用公共许可证第 2 版，或者更新的版本。\n"
+"\n"
+" 我们发行这个软件是希望它有用，但是不提供任何担保；不保证它适\n"
+" 合任何普通或特定的用途。细节见 GNU General Public License 通\n"
+" 用公共许可证。\n"
+"\n"
+" 您应该随同本软件得到一份 GNU General Public License 通用公共\n"
+" 许可证。如果没有，请您写信给自由软件基金会，地址是\n"
+" Free Software Foundation, Inc., 59 Temple Place - Suite 330,\n"
+" Boston, MA 02111-1307, USA.\n"
+"\n"
+" 感谢：\n"
+"    -  pfm2afm:\n"
+"\t 来自 Ken Borgendale：\n"
+"\t    将 Windows .pfm 文件转换为 .afm (Adobe Font Metrics)\n"
+"    -  type1inst：\n"
+"\t 来自 James Macnicol：\n"
+"\t    type1inst 生成文件 fonts.dir fonts.scale 和 Fontmap。\n"
+"    -  ttf2pt1：\n"
+"\t  来自 Andrew Weeks，Frank Siegert，Thomas Henlich，Sergey Babkin\n"
+"\t    将 ttf 字体文件转换为 afm 和 pfb 字体\n"
+
 #: ../../printer/main.pm:1
 #, c-format
 msgid "Printer on remote CUPS server"
@@ -14890,7 +15138,7 @@ msgstr "请选择您的鼠标是连接到那个串行口。"
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Did it work properly?"
-msgstr "工作正常?"
+msgstr "工作正常？"
 
 #: ../../fs.pm:1
 #, c-format
@@ -14922,6 +15170,11 @@ msgstr "DHCP 起始范围"
 msgid "Unsafe"
 msgstr "不安全"
 
+#: ../../network/drakfirewall.pm:1
+#, fuzzy, c-format
+msgid "SSH server"
+msgstr "SSH 服务器"
+
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid ", %s sectors"
@@ -14929,7 +15182,7 @@ msgstr "，%s 扇区"
 
 #: ../../help.pm:1 ../../install_any.pm:1 ../../interactive.pm:1
 #: ../../ugtk2.pm:1 ../../modules/interactive.pm:1
-#: ../../standalone/harddrake2:1
+#: ../../standalone/drakclock:1 ../../standalone/harddrake2:1
 #, c-format
 msgid "No"
 msgstr "否"
@@ -14952,7 +15205,7 @@ msgstr "找不到任何字体。\n"
 #: ../../standalone/keyboarddrake:1
 #, c-format
 msgid "Do you want the BackSpace to return Delete in console?"
-msgstr "您是否想要 BackSpace 在控制台起 Delete 的作用?"
+msgstr "您是否想要 BackSpace 在控制台起 Delete 的作用？"
 
 #: ../../Xconfig/monitor.pm:1
 #, c-format
@@ -15075,7 +15328,7 @@ msgstr "打印队列名"
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Do you want to use aboot?"
-msgstr "您要使用 aboot 吗?"
+msgstr "您要使用 aboot 吗？"
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -15176,7 +15429,7 @@ msgstr ", 打印机“%s”在 SMB/Windows 服务器“%s” 上"
 #: ../../install_steps_gtk.pm:1 ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Go on anyway?"
-msgstr "真的要继续?"
+msgstr "真的要继续？"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -15479,6 +15732,11 @@ msgstr "删除选中的主机"
 msgid "Network configuration"
 msgstr "网络配置"
 
+#: ../../standalone/harddrake2:1
+#, c-format
+msgid "/Autodetect _jaz drives"
+msgstr "/自动检测 jaz 驱动器(_J)"
+
 #: ../../any.pm:1
 #, c-format
 msgid "No sharing"
@@ -15549,7 +15807,7 @@ msgid ""
 "Would you like XFree to start when you reboot?"
 msgstr ""
 "我可以设定您的电脑在开机时自动进入 X Window 环境。\n"
-"您希望这么做吗?"
+"您希望这么做吗？"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
@@ -15600,9 +15858,10 @@ msgstr "请注意目前所有的“网络”介质都还要使用硬盘。"
 #: ../../install_steps.pm:1 ../../diskdrake/dav.pm:1
 #: ../../diskdrake/hd_gtk.pm:1 ../../diskdrake/interactive.pm:1
 #: ../../diskdrake/smbnfs_gtk.pm:1 ../../interactive/http.pm:1
-#: ../../standalone/drakboot:1 ../../standalone/drakbug:1
+#: ../../standalone/drakauth:1 ../../standalone/drakboot:1
+#: ../../standalone/drakbug:1 ../../standalone/drakconnect:1
 #: ../../standalone/drakfloppy:1 ../../standalone/drakfont:1
-#: ../../standalone/draksplash:1
+#: ../../standalone/draksplash:1 ../../../move/move.pm:1
 #, c-format
 msgid "Error"
 msgstr "错误"
@@ -15644,7 +15903,12 @@ msgid ""
 "What do you want to do?"
 msgstr ""
 "您的系统支持多显示器。\n"
-"是否进行设置?"
+"是否进行设置？"
+
+#: ../../partition_table.pm:1
+#, c-format
+msgid "mount failed: "
+msgstr "装载失败："
 
 #: ../../steps.pm:1
 #, c-format
@@ -15655,11 +15919,6 @@ msgstr "配置服务"
 #, c-format
 msgid "Broadcast Address:"
 msgstr "广播地址："
-
-#: ../../partition_table.pm:1
-#, c-format
-msgid "mount failed: "
-msgstr "装载失败："
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -15676,15 +15935,15 @@ msgstr ""
 msgid "Image"
 msgstr "映像"
 
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "Failed to add the printer \"%s\" to Star Office/OpenOffice.org/GIMP."
-msgstr "未能添加打印机“%s”到 Star Office/OpenOffice.org/GIMP"
-
 #: ../../services.pm:1
 #, c-format
 msgid "Remote Administration"
 msgstr "远程管理"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Failed to add the printer \"%s\" to Star Office/OpenOffice.org/GIMP."
+msgstr "未能添加打印机“%s”到 Star Office/OpenOffice.org/GIMP"
 
 #: ../../modules.pm:1
 #, c-format
@@ -15730,7 +15989,7 @@ msgstr "全部"
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Which printing system (spooler) do you want to use?"
-msgstr "您需要使用哪种打印系统?"
+msgstr "您需要使用哪种打印系统？"
 
 # calendar/gui/goto-dialog.glade.h:8
 # calendar/gui/goto-dialog.glade.h:8
@@ -15745,7 +16004,7 @@ msgstr "七月"
 msgid "Prints into %s"
 msgstr "打印到 %s"
 
-#: ../../install_steps_interactive.pm:1
+#: ../../install_steps_interactive.pm:1 ../../../move/move.pm:1
 #, c-format
 msgid "An error occurred"
 msgstr "发生一个错误"
@@ -15757,7 +16016,7 @@ msgid ""
 "Are you sure you want to deselect it?"
 msgstr ""
 "这个软件包必须进行升级。\n"
-"您真的要删除它吗?"
+"您真的要删除它吗？"
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -15968,7 +16227,7 @@ msgstr "，一体机"
 msgid "Laos"
 msgstr "老挝"
 
-#: ../../share/advertising/04-configuration.pl:1
+#: ../advertising/04-configuration.pl:1
 #, c-format
 msgid ""
 "Mandrake Linux 9.2 provides you with the Mandrake Control Center, a powerful "
@@ -16065,7 +16324,7 @@ msgstr "葡萄牙"
 #: ../../modules/interactive.pm:1
 #, c-format
 msgid "Do you have another one?"
-msgstr "您有其它的吗?"
+msgstr "您有其它的吗？"
 
 #: ../../printer/main.pm:1
 #, c-format
@@ -16110,7 +16369,7 @@ msgstr "无"
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid "Which disk do you want to move it to?"
-msgstr "您想移动它到哪个盘?"
+msgstr "您想移动它到哪个盘？"
 
 #: ../../standalone/draksplash:1
 #, c-format
@@ -16152,17 +16411,17 @@ msgstr "需要先创建 /etc/dhcpd.conf 文件！"
 msgid "Is FPU present"
 msgstr "FPU 存在"
 
-#: ../../standalone/scannerdrake:1
-#, c-format
-msgid "There are no scanners found which are available on your system.\n"
-msgstr "没有发现扫描仪直接连接在您的机器上。\n"
-
 #: ../../services.pm:1
 #, c-format
 msgid ""
 "No additional information\n"
 "about this service, sorry."
 msgstr "没有该服务的附加信息。"
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "There are no scanners found which are available on your system.\n"
+msgstr "没有发现扫描仪直接连接在您的机器上。\n"
 
 #: ../../standalone/drakTermServ:1
 #, c-format
@@ -16177,7 +16436,7 @@ msgstr "马绍尔群岛"
 #: ../../ugtk2.pm:1
 #, c-format
 msgid "Is this correct?"
-msgstr "这样正确吗?"
+msgstr "这样正确吗？"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -16204,21 +16463,6 @@ msgstr "DVDRAM 设备"
 msgid "if set to yes, report unowned files."
 msgstr "如果设为 yes，就会报告无主文件。"
 
-#: ../../standalone/harddrake2:1
-#, c-format
-msgid ""
-"This is HardDrake, a Mandrake hardware configuration tool.\n"
-"<span foreground=\"royalblue3\">Version:</span> %s\n"
-"<span foreground=\"royalblue3\">Author:</span> Thierry Vignaud &lt;tvignaud"
-"\\@mandrakesoft.com&gt;\n"
-"\n"
-msgstr ""
-"这是“Drak 硬件设置”，Mandrake 的硬件设置工具。\n"
-"<span foreground=\"royalblue3\">版本：</span> %s\n"
-"<span foreground=\"royalblue3\">作者：</span> Thierry Vignaud &lt;tvignaud"
-"\\@mandrakesoft.com&gt;\n"
-"\n"
-
 #: ../../install_interactive.pm:1
 #, c-format
 msgid ""
@@ -16226,9 +16470,9 @@ msgid ""
 "\n"
 "Continue anyway?"
 msgstr ""
-"您还没有交换分区\n"
+"您还没有交换分区。\n"
 "\n"
-"要继续吗?"
+"要继续吗？"
 
 #: ../../install_steps_gtk.pm:1
 #, c-format
@@ -16300,10 +16544,27 @@ msgstr "越南"
 msgid "/_Fields description"
 msgstr "/描述(_F)"
 
-#: ../../share/advertising/10-security.pl:1
+#: ../advertising/10-security.pl:1
 #, c-format
 msgid "Optimize your security by using Mandrake Linux"
 msgstr "使用 Mandrake Linux 改善安全性"
+
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"\n"
+"\n"
+" Thanks:\n"
+"\t- LTSP Project http://www.ltsp.org\n"
+"\t- Michael Brown <mbrown@fensystems.co.uk>\n"
+"\n"
+msgstr ""
+"\n"
+"\n"
+"感谢：\n"
+"\t- LTSP 项目 http://www.ltsp.org\n"
+"\t- Michael Brown <mbrown@fensystems.co.uk>\n"
+"\n"
 
 #: ../../install_steps_gtk.pm:1 ../../interactive.pm:1 ../../ugtk2.pm:1
 #: ../../Xconfig/resolution_and_depth.pm:1 ../../diskdrake/hd_gtk.pm:1
@@ -16329,7 +16590,7 @@ msgstr "您自己的电话号码"
 #: ../../install_interactive.pm:1
 #, c-format
 msgid "Which size do you want to keep for Windows on"
-msgstr "您将保留多少空间给 Windows?"
+msgstr "您将保留多少空间给 Windows？"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -16399,7 +16660,7 @@ msgstr "有效用户列表已经更改，重写配置文件。"
 msgid "mkinitrd optional arguments"
 msgstr "mkinitrd 可选参数"
 
-#: ../../share/advertising/03-software.pl:1
+#: ../advertising/03-software.pl:1
 #, c-format
 msgid ""
 "Surf the Web with Mozilla or Konqueror, read your mail with Evolution or "
@@ -16594,6 +16855,11 @@ msgstr "正在重新启动 CUPS..."
 #, c-format
 msgid "Printing/Scanning/Photo Cards on \"%s\""
 msgstr "在“%s”打印机上的打印/扫描/照片卡"
+
+#: ../../../move/move.pm:1
+#, c-format
+msgid "Continue without USB key"
+msgstr ""
 
 #: ../../install_steps.pm:1
 #, c-format
@@ -16810,7 +17076,7 @@ msgid "If no port is given, 631 will be taken as default."
 msgstr "如果没有给出端口，默认将会使用 631。"
 
 #: ../../standalone/drakTermServ:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "        - Per client system configuration files:\n"
 "        \tThrough clusternfs, each diskless client can have its own unique "
@@ -16906,7 +17172,7 @@ msgstr "罗技 CC 系列"
 #: ../../network/isdn.pm:1
 #, c-format
 msgid "What kind is your ISDN connection?"
-msgstr "您的 ISDN 连接是什么类型?"
+msgstr "您的 ISDN 连接是什么类型？"
 
 #: ../../any.pm:1
 #, c-format
@@ -16936,7 +17202,7 @@ msgstr "打印机自动检测"
 #: ../../network/isdn.pm:1
 #, c-format
 msgid "Which of the following is your ISDN card?"
-msgstr "下列哪个是您的 ISDN 卡?"
+msgstr "下列哪个是您的 ISDN 卡？"
 
 #: ../../services.pm:1
 #, c-format
@@ -16971,7 +17237,7 @@ msgstr "捕获缓冲区数量："
 #: ../../interactive/stdio.pm:1
 #, c-format
 msgid "Your choice? (0/1, default `%s') "
-msgstr "您的选择?(0/1，默认 %s)"
+msgstr "您的选择？（0/1，默认 %s）"
 
 #: ../../help.pm:1
 #, c-format
@@ -17001,7 +17267,7 @@ msgid ""
 "Click on \"%s\" if you wish to select partitions that will be checked for\n"
 "bad blocks on the disk."
 msgstr ""
-"新创建的分区都必须格式化才能使用(所谓格式化就是创建文件系统)。\n"
+"新创建的分区都必须格式化才能使用（所谓格式化就是创建文件系统）。\n"
 "\n"
 "此时，可能希望重新格式化已有的分区，以便删除其中包含的数据。如果您想要这\n"
 "么做的话，请同时选择这些分区。\n"
@@ -17026,7 +17292,7 @@ msgstr "法国"
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Czech (QWERTY)"
-msgstr "捷克(QWERTY)"
+msgstr "捷克（QWERTY）"
 
 #: ../../security/l10n.pm:1
 #, c-format
@@ -17038,7 +17304,7 @@ msgstr "允许 X Window 连接"
 msgid "Hardware probing in progress"
 msgstr "硬件检测进行中"
 
-#: ../../standalone/drakgw:1
+#: ../../network/shorewall.pm:1 ../../standalone/drakgw:1
 #, c-format
 msgid "Net Device"
 msgstr "网络设备"
@@ -17054,8 +17320,8 @@ msgid ""
 " (Parallel Ports: /dev/lp0, /dev/lp1, ..., equivalent to LPT1:, LPT2:, ..., "
 "1st USB printer: /dev/usb/lp0, 2nd USB printer: /dev/usb/lp1, ...)."
 msgstr ""
-"(并行口：/dev/lp0，/dev/lp1，...，相当于 LPT1:，LPT2:，...，第一个 USB 设备"
-"口：/dev/usb/lp0，第二个 USB 设备口：/dev/usb/lp1, ...)。"
+"（并行口：/dev/lp0，/dev/lp1，...，相当于 LPT1:，LPT2:，...，第一个 USB 设备"
+"口：/dev/usb/lp0，第二个 USB 设备口：/dev/usb/lp1，...）。"
 
 #: ../../network/netconnect.pm:1 ../../network/tools.pm:1
 #, c-format
@@ -17104,6 +17370,11 @@ msgstr ""
 "要正常工作需要软件包 ImageMagick。\n"
 "请单击“确定”安装 ImageMagick 或“取消”退出"
 
+#: ../../network/drakfirewall.pm:1
+#, fuzzy, c-format
+msgid "Telnet server"
+msgstr "X 服务器"
+
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Lithuanian \"number row\" QWERTY"
@@ -17120,7 +17391,7 @@ msgstr ""
 "为了能升级您的系统，将要删除下列的软件包：%s\n"
 "\n"
 "\n"
-"您确定要删除这些软件包吗?\n"
+"您确定要删除这些软件包吗？\n"
 
 #: ../../lang.pm:1
 #, c-format
@@ -17162,7 +17433,7 @@ msgid ""
 "Assign raw devices to block devices (such as hard drive\n"
 "partitions), for the use of applications such as Oracle or DVD players"
 msgstr ""
-"将 RAW 设备指定为块设备(如硬盘分区)，\n"
+"将 RAW 设备指定为块设备（如硬盘分区），\n"
 "以便供 Oracle 或 DVD 播放机之类的程序使用"
 
 #: ../../install_steps_gtk.pm:1
@@ -17173,12 +17444,12 @@ msgstr "请稍候，正在准备安装..."
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Czech (QWERTZ)"
-msgstr "捷克(QWERTZ)"
+msgstr "捷克（QWERTZ）"
 
 #: ../../network/network.pm:1
 #, c-format
 msgid "Track network card id (useful for laptops)"
-msgstr "跟踪网卡标志(用于膝上设备)"
+msgstr "跟踪网卡标志（用于笔记本电脑）"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -17243,7 +17514,7 @@ msgstr "没有测试页"
 #: ../../lang.pm:1
 #, c-format
 msgid "Falkland Islands (Malvinas)"
-msgstr "福克兰群岛(马尔维纳斯)"
+msgstr "福克兰群岛（马尔维纳斯）"
 
 #: ../../standalone/drakconnect:1
 #, c-format
@@ -17315,12 +17586,12 @@ msgstr "可编辑"
 #: ../../network/ethernet.pm:1
 #, c-format
 msgid "Which dhcp client do you want to use ? (default is dhcp-client)"
-msgstr "您想要使用哪种 DHCP 客户程序?默认的是 dhcp-client"
+msgstr "您想要使用哪种 DHCP 客户程序？（默认的是 dhcp-client）"
 
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Tamil (ISCII-layout)"
-msgstr "泰米尔(ISCII-布局)"
+msgstr "泰米尔（ISCII-布局）"
 
 #: ../../lang.pm:1
 #, c-format
@@ -17372,7 +17643,7 @@ msgstr "Syslog"
 msgid "Can't create catalog!"
 msgstr "无法创建 catalog！"
 
-#: ../../share/advertising/11-mnf.pl:1
+#: ../advertising/11-mnf.pl:1
 #, c-format
 msgid ""
 "Complete your security setup with this very easy-to-use software which "
@@ -17404,8 +17675,8 @@ msgid ""
 "There's no free driver for your sound card (%s), but there's a proprietary "
 "driver at \"%s\"."
 msgstr ""
-"没有已知的 OSS/ALSA 替代驱动程序可以用在您的(%s)声卡上，不过在“%s”有一个专有"
-"的驱动程序。"
+"没有已知的 OSS/ALSA 替代驱动程序可以用在您的（%s）声卡上，不过在“%s”有一个专"
+"有的驱动程序。"
 
 #: ../../standalone/drakperm:1
 #, c-format
@@ -17426,6 +17697,11 @@ msgstr "Internet 连接配置"
 #, c-format
 msgid "Add the name as an exception to the handling of password aging by msec."
 msgstr "将 name 添加为 msec 处理密码时效的例外。"
+
+#: ../../network/isdn.pm:1
+#, fuzzy, c-format
+msgid "USB"
+msgstr "LSB"
 
 #: ../../standalone/drakxtv:1
 #, c-format
@@ -17475,7 +17751,7 @@ msgstr "请测试您的鼠标："
 #: ../../modules/interactive.pm:1
 #, c-format
 msgid "(module %s)"
-msgstr "(模块 %s)"
+msgstr "（模块 %s）"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -17486,6 +17762,11 @@ msgstr "工作组"
 #, c-format
 msgid "Printer host name or IP"
 msgstr "打印机主机名或 IP 地址"
+
+#: ../../standalone/drakconnect:1
+#, fuzzy, c-format
+msgid "down"
+msgstr "完成"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -17567,17 +17848,17 @@ msgid ""
 "\n"
 "Do not use \"scannerdrake\" for this device!"
 msgstr ""
-"您的一体机已经自动配置成能够扫描。要扫描，可以使用命令“scanimage”(“scanimage "
-"-d hp:%s”指定多个扫描仪之一)或者用图形界面“xscanimage”或“xsane”。如果您使用 "
-"GIMP，可以从“文件”/“获取”菜单的有关项目扫描。也可以使用“man scanimage”命令查"
-"看更多信息。\n"
+"您的一体机已经自动配置成能够扫描。要扫描，可以使用命"
+"令“scanimage”（“scanimage -d hp:%s”指定多个扫描仪之一）或者用图形界"
+"面“xscanimage”或“xsane”。如果您使用 GIMP，可以从“文件”/“获取”菜单的有关项目扫"
+"描。也可以使用“man scanimage”命令查看更多信息。\n"
 "\n"
 "不要对这个设备使用“Drak 扫描仪”配置工具！"
 
 #: ../../any.pm:1
 #, c-format
 msgid "(already added %s)"
-msgstr "(已经添加了 %s)"
+msgstr "（已经添加了 %s）"
 
 #: ../../any.pm:1
 #, c-format
@@ -17796,12 +18077,12 @@ msgstr "Apache WWW 服务器"
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "stepping of the cpu (sub model (generation) number)"
-msgstr "CPU 步进(次型号(世代))"
+msgstr "CPU 步进（次型号（世代））"
 
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "select path to restore (instead of /)"
-msgstr "选择将要恢复到的路径(/ 除外)"
+msgstr "选择将要恢复到的路径（/ 除外）"
 
 #: ../../standalone/draksplash:1
 #, c-format
@@ -17821,7 +18102,7 @@ msgstr "中国"
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid " (Make sure that all your printers are connected and turned on).\n"
-msgstr "(请确认您的打印机已经连接好并且接通了电源)。\n"
+msgstr "（请确认您的打印机已经连接好并且接通了电源）。\n"
 
 #: ../../standalone/printerdrake:1
 #, c-format
@@ -17915,6 +18196,11 @@ msgstr "添加项目"
 msgid "The printers on this machine are available to other computers"
 msgstr "此计算机上的打印机可共享给计算机"
 
+#: ../../lang.pm:1
+#, fuzzy, c-format
+msgid "China (Hong Kong)"
+msgstr "中国香港"
+
 #: ../../standalone/drakautoinst:1
 #, c-format
 msgid "I can't find needed image file `%s'."
@@ -17954,12 +18240,12 @@ msgstr "PCI"
 #: ../../diskdrake/smbnfs_gtk.pm:1
 #, c-format
 msgid "Can't login using username %s (bad password?)"
-msgstr "不能使用用户名 %s 登录(密码错误?)"
+msgstr "不能使用用户名 %s 登录（密码错误？）"
 
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Azerbaidjani (latin)"
-msgstr "Azerbaidjani (latin)"
+msgstr "Azerbaidjani（拉丁）"
 
 #: ../../standalone/drakbug:1
 #, c-format
@@ -17971,7 +18257,7 @@ msgstr "软件包未安装"
 msgid "American Samoa"
 msgstr "美属萨摩亚"
 
-#: ../../share/advertising/12-mdkexpert.pl:1
+#: ../advertising/12-mdkexpert.pl:1
 #, c-format
 msgid "Become a MandrakeExpert"
 msgstr "成为 Mandrake 专家"
@@ -18092,6 +18378,11 @@ msgstr "意大利"
 msgid "Cayman Islands"
 msgstr "开曼群岛"
 
+#: ../../fs.pm:1 ../../partition_table.pm:1
+#, c-format
+msgid "error unmounting %s: %s"
+msgstr "卸载 %s 出错：%s"
+
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Name of printer"
@@ -18101,11 +18392,6 @@ msgstr "打印机名字"
 #, c-format
 msgid "disable"
 msgstr "禁用"
-
-#: ../../fs.pm:1 ../../partition_table.pm:1
-#, c-format
-msgid "error unmounting %s: %s"
-msgstr "卸载 %s 出错：%s"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -18210,7 +18496,7 @@ msgstr "紧凑"
 msgid "Detected model: %s %s"
 msgstr "检测到型号：%s %s"
 
-#: ../../share/advertising/03-software.pl:1
+#: ../advertising/03-software.pl:1
 #, c-format
 msgid "MandrakeSoft has selected the best software for you"
 msgstr "MandrakeSoft 为您精心挑选最佳软件"
@@ -18253,7 +18539,7 @@ msgstr ""
 "您必须先把您的电视和您的图形卡连接好，然后启动您的电脑。\n"
 "然后在启动引导程序中选择“TVout”条目\n"
 "\n"
-"您是否要使用这个特性?"
+"您是否要使用这个特性？"
 
 #: ../../Xconfig/main.pm:1 ../../Xconfig/monitor.pm:1
 #, c-format
@@ -18287,8 +18573,8 @@ msgstr ""
 "将以明文出现在 Samba 向 Windows 服务器发送打印任务的命令行中。所以这个系统的"
 "所有用户都可以用下列命令看到密码：“ps auxwww”。\n"
 "\n"
-"我们建议您使用下面列出的替代方法之一(所有情况中您必须设法保证只有您的本地网络"
-"的计算机可以访问您的 Windows 服务器，例如使用防火墙)：\n"
+"我们建议您使用下面列出的替代方法之一（所有情况中您必须设法保证只有您的本地网"
+"络的计算机可以访问您的 Windows 服务器，例如使用防火墙）：\n"
 "\n"
 "使用 Windows 服务器上没有密码的帐户，如“GUEST”帐户或者打印专用的帐户。不要清"
 "除一个普通用户的密码保护，或者取消管理员用户的密码。\n"
@@ -18300,7 +18586,7 @@ msgstr ""
 #: ../../Xconfig/resolution_and_depth.pm:1
 #, c-format
 msgid "65 thousand colors (16 bits)"
-msgstr "6 万 5 千色(16 位)"
+msgstr "6 万 5 千色（16 位）"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -18325,9 +18611,9 @@ msgid ""
 "\n"
 "You can do it manually but you need to know what you're doing."
 msgstr ""
-"警告，网卡(%s)已经配置过。\n"
+"警告，网卡（%s）已经配置过。\n"
 "\n"
-"您希望自动重新配置吗?\n"
+"您希望自动重新配置吗？\n"
 "\n"
 "如果您知道怎样做，也可以手工配置。"
 
@@ -18341,6 +18627,11 @@ msgstr "启动时进入图形界面"
 msgid " adsl"
 msgstr " adsl"
 
+#: ../../raid.pm:1
+#, c-format
+msgid "Not enough partitions for RAID level %d\n"
+msgstr "没有足够的分区建立 %d 级的硬盘阵列\n"
+
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "format of floppies supported by the drive"
@@ -18349,12 +18640,7 @@ msgstr "驱动器接受的软盘格式"
 #: ../../network/tools.pm:1
 #, c-format
 msgid "Firmware copy failed, file %s not found"
-msgstr "固件复制失败, 文件 %s 未找到"
-
-#: ../../raid.pm:1
-#, c-format
-msgid "Not enough partitions for RAID level %d\n"
-msgstr "没有足够的分区建立 %d 级的硬盘阵列\n"
+msgstr "固件复制失败，文件 %s 未找到"
 
 #: ../../standalone/drakTermServ:1
 #, c-format
@@ -18439,7 +18725,7 @@ msgstr "允许瘦客户端"
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Georgian (\"Russian\" layout)"
-msgstr "格鲁吉亚(“俄语”布局)"
+msgstr "格鲁吉亚（“俄语”布局）"
 
 #: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
 #: ../../standalone/printerdrake:1
@@ -18463,9 +18749,9 @@ msgid ""
 msgstr ""
 "\n"
 "\n"
-"(警告！您选择了使用 XFS 作为您的根分区，\n"
+"（警告！您选择了使用 XFS 作为您的根分区，\n"
 "很可能无法在一个 1.44 MB 软盘上创建启动盘，\n"
-"因为 XFS 需要一个很大的驱动程序)。"
+"因为 XFS 需要一个很大的驱动程序）。"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -18482,7 +18768,7 @@ msgid ""
 "No CD or DVD image found, please copy the installation program and rpm files."
 msgstr "没有发现 CD 或 DVD 映像，请复制安装程序和 RPM 文件。"
 
-#: ../../share/advertising/04-configuration.pl:1
+#: ../advertising/04-configuration.pl:1
 #, c-format
 msgid "Mandrake's multipurpose configuration tool"
 msgstr "Mandrake 的多用途配置工具"
@@ -18512,7 +18798,7 @@ msgstr "磁盘"
 msgid "Enter a printer device URI"
 msgstr "打印机设备 URI"
 
-#: ../../share/advertising/01-thanks.pl:1
+#: ../advertising/01-thanks.pl:1
 #, c-format
 msgid ""
 "The success of MandrakeSoft is based upon the principle of Free Software. "
@@ -18555,7 +18841,7 @@ msgstr "迁移打印机配置"
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Do you want to enable printing on the printers mentioned above?\n"
-msgstr "您是否希望在上述的打印机上进行打印?\n"
+msgstr "您是否希望在上述的打印机上进行打印？\n"
 
 #: ../../security/l10n.pm:1
 #, c-format
@@ -18590,7 +18876,7 @@ msgstr ""
 #: ../../printer/main.pm:1
 #, c-format
 msgid "%s (Port %s)"
-msgstr "%s(端口 %s)"
+msgstr "%s（端口 %s）"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -18741,7 +19027,7 @@ msgstr "进入专家模式"
 #: ../../printer/cups.pm:1
 #, c-format
 msgid "(on this machine)"
-msgstr "(在这个机器上)"
+msgstr "（在这个机器上）"
 
 #: ../../network/network.pm:1
 #, c-format
@@ -18752,7 +19038,7 @@ msgstr "网关地址的格式应该是 1.2.3.4"
 #, c-format
 msgid ""
 "\"%s\" based winmodem detected, do you want to install needed software ?"
-msgstr "检测到了基于“%s”的软猫，您是否想要安装所需的软件?"
+msgstr "检测到了基于“%s”的软猫，您是否想要安装所需的软件？"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -18851,9 +19137,9 @@ msgstr ""
 " * 核心引导延迟：此延迟与 LILO 启动延迟类似。选择 Linux 之后，您可以在选\n"
 "择默认内核描述之前等待多少个 0.1 秒。\n"
 "\n"
-" * 启用CD引导?：选中此选项将允许您在第一个启动提示时选择“C”用 CD 启动。\n"
+" * 启用CD引导？：选中此选项将允许您在第一个启动提示时选择“C”用 CD 启动。\n"
 "\n"
-" * 启用OF引导?：选中此选项将允许您在第一个启动提示时选择“N”用开放固件\n"
+" * 启用OF引导？：选中此选项将允许您在第一个启动提示时选择“N”用开放固件\n"
 "启动。\n"
 "\n"
 " * 默认操作系统：您可以选择在开放固件延迟到时后默认引导哪个操作系统。"
@@ -18887,7 +19173,7 @@ msgstr "没有鼠标"
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "Choose your CD/DVD media size (MB)"
-msgstr "请选择您使用的 CD/DVD 介质容量(MB)"
+msgstr "请选择您使用的 CD/DVD 介质容量 (MB)"
 
 #: ../../security/l10n.pm:1
 #, c-format
@@ -18917,7 +19203,7 @@ msgstr "配置网络"
 #: ../../any.pm:1
 #, c-format
 msgid "Where do you want to install the bootloader?"
-msgstr "您希望启动引导程序安装到哪里?"
+msgstr "您希望启动引导程序安装到哪里？"
 
 #: ../../help.pm:1
 #, c-format
@@ -18982,12 +19268,12 @@ msgstr "DHCP 客户端"
 #: ../../security/l10n.pm:1
 #, c-format
 msgid "List users on display managers (kdm and gdm)"
-msgstr "在显示管理器上列出用户(kdm 或 gdm)"
+msgstr "在显示管理器上列出用户（kdm 或 gdm）"
 
 #: ../../mouse.pm:1
 #, c-format
 msgid "Logitech Mouse (serial, old C7 type)"
-msgstr "Logitech Mouse(串口，旧 C7 型)"
+msgstr "Logitech Mouse（串口，旧 C7 型）"
 
 #: ../../partition_table.pm:1
 #, c-format
@@ -19005,9 +19291,9 @@ msgid ""
 "Do you agree to lose all the partitions?\n"
 msgstr ""
 "我无法读取设备 %s 的分区表，这个分区表破坏得太严重了 :(\n"
-"我可以尝试清除坏分区 (所有的数据将被清除！)，然后继续。\n"
+"我可以尝试清除坏分区（所有的数据将被清除！），然后继续。\n"
 "另外一个解决办法是禁止 DrakX 修改分区表。\n"
-"(错误是 %s)\n"
+"（错误是 %s）\n"
 "\n"
 "您同意清除所有分区吗？\n"
 
@@ -19049,7 +19335,7 @@ msgstr "在 %s 没有发现备份文件。"
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Armenian (phonetic)"
-msgstr "美国(音标)"
+msgstr "美国（音标）"
 
 #: ../../harddrake/v4l.pm:1
 #, c-format
@@ -19061,7 +19347,7 @@ msgstr "卡的型号："
 msgid "Thin Client"
 msgstr "瘦客户端"
 
-#: ../../share/advertising/01-thanks.pl:1
+#: ../advertising/01-thanks.pl:1
 #, c-format
 msgid "Thank you for choosing Mandrake Linux 9.2"
 msgstr "感谢您选择 Mandrake Linux 9.2"
@@ -19149,13 +19435,14 @@ msgid ""
 "        \tWith SUBNET/MASK being defined for your network."
 msgstr ""
 "        - 维护 /etc/exports：\n"
-"        \t\tClusternfs 允许将 root 文件系统导出到无盘工作站。drakTermServ\n"
+"        \t\tClusternfs 允许将 root 文件系统导出到无盘工作站。“Drak 终端服"
+"务”\n"
 "        \t\t会设置正确的选项以便允许从无盘客户端匿名访问 root 文件系统。\n"
 "\n"
 "        \t\tClusternfs 的典型导出项为：\n"
 "        \t\t\n"
 "        \t/\t\t\t\t\t(ro,all_squash)\n"
-"        \t\t/home              子网/掩码(rw,root_squash)\n"
+"        \t\t/home              子网/掩码 (rw,root_squash)\n"
 "\t\t\t\n"
 "\t\t\t这里的子网/掩码应该与您的网络相同。"
 
@@ -19173,6 +19460,13 @@ msgstr "获得 Windows 字体"
 #, c-format
 msgid "Mouse Systems"
 msgstr "鼠标系统"
+
+#: ../../standalone/drakclock:1
+#, c-format
+msgid ""
+"Your computer can synchronize its clock\n"
+" with a remote time server using NTP"
+msgstr ""
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -19199,7 +19493,7 @@ msgstr "添加服务器"
 msgid "Remote printer name"
 msgstr "远程打印机名"
 
-#: ../../share/advertising/10-security.pl:1
+#: ../advertising/10-security.pl:1
 #, c-format
 msgid ""
 "MandrakeSoft has designed exclusive tools to create the most secured Linux "
@@ -19280,7 +19574,7 @@ msgstr "硬盘"
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Turkish (traditional \"F\" model)"
-msgstr "土耳其(传统“F”式)"
+msgstr "土耳其（传统“F”式）"
 
 #: ../../standalone/drakautoinst:1 ../../standalone/drakgw:1
 #: ../../standalone/scannerdrake:1
@@ -19306,7 +19600,7 @@ msgstr "下移"
 #: ../../printer/main.pm:1 ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Raw printer (No driver)"
-msgstr "直接打印输出(不使用驱动程序)"
+msgstr "直接打印输出（不使用驱动程序）"
 
 #: ../../network/modem.pm:1
 #, c-format
@@ -19350,10 +19644,15 @@ msgstr "Microsoft Explorer"
 msgid "Uninstall Fonts"
 msgstr "卸载字体"
 
+#: ../../../move/move.pm:1
+#, fuzzy, c-format
+msgid "Please wait, detecting and configuring devices..."
+msgstr "请稍候，正在设置安全级别..."
+
 #: ../../keyboard.pm:1
 #, c-format
 msgid "German (no dead keys)"
-msgstr "德国(没有dead keys)"
+msgstr "德国（没有dead keys）"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -19368,18 +19667,13 @@ msgstr "正在迁移 %s ..."
 #: ../../Xconfig/resolution_and_depth.pm:1
 #, c-format
 msgid "32 thousand colors (15 bits)"
-msgstr "3 万 2 千色(15 位)"
+msgstr "3 万 2 千色（15 位）"
 
 #: ../../any.pm:1
 #, c-format
 msgid ""
 "You can export using NFS or Samba. Please select which you'd like to use."
-msgstr "您可以通过 NFS 或 Samba 来共享文件。您希望使用哪一个?"
-
-#: ../../help.pm:1 ../../install_steps_interactive.pm:1
-#, c-format
-msgid "Reboot"
-msgstr "重新启动"
+msgstr "您可以通过 NFS 或 Samba 来共享文件。您希望使用哪一个？"
 
 #: ../../lang.pm:1
 #, c-format
@@ -19390,6 +19684,12 @@ msgstr "冈比亚"
 #, c-format
 msgid "Mandrake Control Center"
 msgstr "Mandrake 控制中心"
+
+#: ../../help.pm:1 ../../install_steps_interactive.pm:1
+#: ../../../move/move.pm:1
+#, c-format
+msgid "Reboot"
+msgstr "重新启动"
 
 #: ../../printer/main.pm:1
 #, c-format
@@ -19424,6 +19724,11 @@ msgstr "在您的系统上没有安装浏览器。如果您想要浏览帮助系
 msgid "Remember this password"
 msgstr "记住密码"
 
+#: ../../install_steps_gtk.pm:1
+#, c-format
+msgid "due to unsatisfied %s"
+msgstr ""
+
 #: ../../standalone/drakgw:1
 #, c-format
 msgid "Internet Connection Sharing is now enabled."
@@ -19456,7 +19761,7 @@ msgstr "使用在 Windows 分区上的空闲空间"
 #: ../../standalone/scannerdrake:1
 #, c-format
 msgid "%s found on %s, configure it automatically?"
-msgstr "发现 %s 连接在 %s 上，是否自动配置它?"
+msgstr "发现 %s 连接在 %s 上，是否自动配置它？"
 
 #: ../../Xconfig/various.pm:1
 #, c-format
@@ -19483,10 +19788,15 @@ msgstr "巴布亚新几内亚"
 msgid "Multi-function device on a parallel port"
 msgstr "并行端口上的一体机"
 
+#: ../../../move/tree/mdk_totem:1
+#, fuzzy, c-format
+msgid "Busy files"
+msgstr "备份系统文件"
+
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Serbian (cyrillic)"
-msgstr "赛尔维亚(西里尔字母)"
+msgstr "赛尔维亚（西里尔字母）"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -19504,8 +19814,8 @@ msgid ""
 "Do you want to set this printer (\"%s\")\n"
 "as the default printer?"
 msgstr ""
-"您希望设置这个打印机(“%s”)\n"
-"作为默认打印机吗?"
+"您希望设置这个打印机（“%s”）\n"
+"作为默认打印机吗？"
 
 #: ../../standalone/drakgw:1
 #, c-format
@@ -19545,6 +19855,21 @@ msgstr ""
 #, c-format
 msgid "DHCP Client"
 msgstr "DHCP 客户端"
+
+#: ../../standalone/harddrake2:1
+#, c-format
+msgid ""
+"This is HardDrake, a Mandrake hardware configuration tool.\n"
+"<span foreground=\"royalblue3\">Version:</span> %s\n"
+"<span foreground=\"royalblue3\">Author:</span> Thierry Vignaud &lt;"
+"tvignaud@mandrakesoft.com&gt;\n"
+"\n"
+msgstr ""
+"这是“Drak 硬件设置”，Mandrake 的硬件设置工具。\n"
+"<span foreground=\"royalblue3\">版本：</span> %s\n"
+"<span foreground=\"royalblue3\">作者：</span> Thierry Vignaud &lt;"
+"tvignaud@mandrakesoft.com&gt;\n"
+"\n"
 
 #: ../../standalone/drakgw:1
 #, c-format
@@ -19601,7 +19926,7 @@ msgstr "逗号分隔的数字"
 msgid ""
 "Once you've selected a device, you'll be able to see the device information "
 "in fields displayed on the right frame (\"Information\")"
-msgstr "只要您选中了设备，您就能看到在右侧框架(“信息”)中显示的解释。"
+msgstr "只要您选中了设备，您就能看到在右侧框架（“信息”）中显示的解释。"
 
 #: ../../standalone/drakperm:1
 #, c-format
@@ -19624,7 +19949,7 @@ msgstr ""
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Do you really want to remove the printer \"%s\"?"
-msgstr "真的要删除打印机“%s”?"
+msgstr "真的要删除打印机“%s”？"
 
 #: ../../install_interactive.pm:1
 #, c-format
@@ -19680,7 +20005,7 @@ msgstr "利比里亚"
 #, c-format
 msgid ""
 "Could not install the packages needed to set up a scanner with Scannerdrake."
-msgstr "无法安装用 Scannerdrake 设置扫描仪所需的软件包。"
+msgstr "无法安装用“Drak 扫描仪”设置扫描仪所需的软件包。"
 
 #: ../../standalone/drakgw:1
 #, c-format
@@ -19749,75 +20074,13 @@ msgstr "不迁移打印机"
 msgid "Delay before booting the default image"
 msgstr "启动默认映像前的延迟"
 
-#: ../../standalone/drakfont:1
-#, c-format
-msgid ""
-"\n"
-" Copyright (C) 2001-2002 by MandrakeSoft \n"
-"     DUPONT Sebastien (original version)\n"
-"     CHAUMETTE Damien <dchaumette\\@mandrakesoft.com>\n"
-"\n"
-" This program is free software; you can redistribute it and/or modify\n"
-" it under the terms of the GNU General Public License as published by\n"
-" the Free Software Foundation; either version 2, or (at your option)\n"
-" any later version.\n"
-"\n"
-" This program is distributed in the hope that it will be useful,\n"
-" but WITHOUT ANY WARRANTY; without even the implied warranty of\n"
-" MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n"
-" GNU General Public License for more details.\n"
-"\n"
-" You should have received a copy of the GNU General Public License\n"
-" along with this program; if not, write to the Free Software\n"
-" Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.\n"
-"\n"
-" Thanks:\n"
-"    -  pfm2afm:   \n"
-"\t by Ken Borgendale:\n"
-"\t    Convert a Windows .pfm  file to a .afm (Adobe Font Metrics)\n"
-"    -  type1inst:\n"
-"\t by James Macnicol: \n"
-"\t    type1inst generates files fonts.dir fonts.scale & Fontmap.\n"
-"    -  ttf2pt1:   \n"
-"\t  by Andrew Weeks, Frank Siegert, Thomas Henlich, Sergey Babkin  \n"
-"             Convert ttf font files to afm and pfb fonts\n"
-msgstr ""
-"\n"
-" 版权所有 (C) 2001-2002 by MandrakeSoft \n"
-"     DUPONT Sebastien(原始版本)\n"
-"     CHAUMETTE Damien <dchaumette\\@mandrakesoft.com>\n"
-"\n"
-" 这个程序是自由软件；您可以重新发布，或修改它，只要您遵守来自\n"
-" Free Software Foundation 自由软件基金会的 GNU General Public\n"
-" License 通用公共许可证第 2 版，或者更新的版本。\n"
-"\n"
-" 我们发行这个软件是希望它有用，但是不提供任何担保；不保证它适\n"
-" 合任何普通或特定的用途。细节见 GNU General Public License 通\n"
-" 用公共许可证。\n"
-"\n"
-" 您应该随同本软件得到一份 GNU General Public License 通用公共\n"
-" 许可证。如果没有，请您写信给自由软件基金会，地址是\n"
-" Free Software Foundation, Inc., 59 Temple Place - Suite 330,\n"
-" Boston, MA 02111-1307, USA.\n"
-"\n"
-" 感谢：\n"
-"    -  pfm2afm:\n"
-"\t 来自 Ken Borgendale：\n"
-"\t    将 Windows .pfm 文件转换为 .afm (Adobe Font Metrics)\n"
-"    -  type1inst：\n"
-"\t 来自 James Macnicol：\n"
-"\t    type1inst 生成文件 fonts.dir fonts.scale 和 Fontmap。\n"
-"    -  ttf2pt1：\n"
-"\t  来自 Andrew Weeks，Frank Siegert，Thomas Henlich，Sergey Babkin\n"
-"\t    将 ttf 字体文件转换为 afm 和 pfb 字体\n"
-
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "Use Hard Disk to backup"
 msgstr "使用硬盘备份文件"
 
 #: ../../help.pm:1 ../../install_steps_gtk.pm:1 ../../standalone/drakbackup:1
-#: ../../standalone/drakboot:1 ../../standalone/drakgw:1
+#: ../../standalone/drakboot:1
 #, c-format
 msgid "Configure"
 msgstr "配置"
@@ -19883,7 +20146,7 @@ msgstr ""
 "您的光盘或者驱动器可能有缺陷。\n"
 "请在一台安装好的电脑上检查光盘，命令是“rpm -qpl Mandrake/RPMS/*.rpm”\n"
 
-#: ../../share/advertising/06-development.pl:1
+#: ../advertising/06-development.pl:1
 #, c-format
 msgid "Mandrake Linux 9.2: the ultimate development platform"
 msgstr "Mandrake Linux 9.2：终极开发平台"
@@ -19938,18 +20201,18 @@ msgstr " --doc <link>          - 链接到其他网页 （ 给 WM 欢迎的前�
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Dvorak (US)"
-msgstr "Dvorak(美国)"
+msgstr "Dvorak（美国）"
 
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid ""
 "this is the physical bus on which the device is plugged (eg: PCI, USB, ...)"
-msgstr "设备所插在的物理总线(例如：PCI，USB，...)"
+msgstr "设备所插在的物理总线（例如：PCI，USB，...）"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "How is the printer connected?"
-msgstr "打印机是如何连接的?"
+msgstr "打印机是如何连接的？"
 
 #: ../../security/level.pm:1
 #, c-format
@@ -19965,6 +20228,11 @@ msgstr "最终分辨率"
 #, c-format
 msgid "Services"
 msgstr "服务"
+
+#: ../../../move/move.pm:1
+#, fuzzy, c-format
+msgid "Auto configuration"
+msgstr "自定义配置"
 
 #: ../../Xconfig/card.pm:1
 #, c-format
@@ -20003,14 +20271,15 @@ msgid "Internet station"
 msgstr "Internet 工作站"
 
 #: ../../share/compssUsers:999
+#, fuzzy
 msgid ""
-"Set of tools to read and send mail and news (pine, mutt, tin..) and to "
-"browse the Web"
+"Set of tools to read and send mail and news (mutt, tin..) and to browse the "
+"Web"
 msgstr "上网工具，如收发电子邮件及新闻组(pine，mutt，tin..)，浏览网站"
 
 #: ../../share/compssUsers:999
 msgid "Network Computer (client)"
-msgstr "网络计算机(客户端)"
+msgstr "网络计算机（客户端）"
 
 #: ../../share/compssUsers:999
 msgid "Clients for different protocols including ssh"
@@ -20140,6 +20409,40 @@ msgstr "NFS 服务器，SMB 服务器，代理服务器，SSH 服务器"
 msgid "Set of tools to read and send mail and news and to browse the Web"
 msgstr "一组上网工具，用于收发邮件和新闻，或者浏览网站"
 
+#~ msgid "The setup has already been done, and it's currently enabled."
+#~ msgstr "配置已经完成，并已启用。"
+
+#~ msgid "Logs"
+#~ msgstr "日志"
+
+#~ msgid "The setup has already been done, but it's currently disabled."
+#~ msgstr "配置已经完成。它当前已经被禁用。"
+
+#~ msgid "Profile "
+#~ msgstr "配置文件 "
+
+#~ msgid ""
+#~ "Welcome to the Internet Connection Sharing utility!\n"
+#~ "\n"
+#~ "%s\n"
+#~ "\n"
+#~ "Click on Configure to launch the setup wizard."
+#~ msgstr ""
+#~ "欢迎使用 Internet 连接共享配置工具！\n"
+#~ "\n"
+#~ "%s\n"
+#~ "\n"
+#~ "单击“配置”运行配置向导。"
+
+#~ msgid "Internet Connection Sharing configuration"
+#~ msgstr "Internet 连接共享配置"
+
+#~ msgid "No Internet Connection Sharing has ever been configured."
+#~ msgstr "互联网连接共享没有配置。"
+
+#~ msgid "when checked, owner and group won't be changed"
+#~ msgstr "选中则不能改变所有者和组"
+
 #~ msgid ""
 #~ "XawTV isn't installed!\n"
 #~ "\n"
@@ -20147,7 +20450,7 @@ msgstr "一组上网工具，用于收发邮件和新闻，或者浏览网站"
 #~ "If you do have a TV card but DrakX has neither detected it (no bttv nor "
 #~ "saa7134\n"
 #~ "module in \"/etc/modules\") nor installed xawtv, please send the\n"
-#~ "results of \"lspcidrake -v -f\" to \"install\\@mandrakesoft.com\"\n"
+#~ "results of \"lspcidrake -v -f\" to \"install@mandrakesoft.com\"\n"
 #~ "with subject \"undetected TV card\".\n"
 #~ "\n"
 #~ "\n"
@@ -20158,7 +20461,7 @@ msgstr "一组上网工具，用于收发邮件和新闻，或者浏览网站"
 #~ "\n"
 #~ "如果您有电视卡但是 DrakX 即没有检测到它(bttv 或 saa7134 \n"
 #~ "模块都不在“/etc/modules”中)也没有安装 xawtv，请运行\n"
-#~ "“lspcidrake -v -f”并把结果发送给“install\\@mandrakesoft.com”\n"
+#~ "“lspcidrake -v -f”并把结果发送给“install@mandrakesoft.com”\n"
 #~ "标题写“undetected TV card”，\n"
 #~ "\n"
 #~ "\n"

@@ -11,7 +11,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX-fi - MDK Release 9.2\n"
-"POT-Creation-Date: 2003-09-16 13:45+0200\n"
+"POT-Creation-Date: 2003-12-03 03:09+0100\n"
 "PO-Revision-Date: 2003-09-19 02:15+0300\n"
 "Last-Translator: Thomas Backlund <tmb@iki.fi>\n"
 "Language-Team: Finnish <cooker-i18n@mandrake-linux.com>\n"
@@ -290,11 +290,6 @@ msgstr "CUPS asetukset"
 msgid "Total progress"
 msgstr "Kokonaisedistyminen"
 
-#: ../../lang.pm:1
-#, c-format
-msgid "Hong Kong"
-msgstr "Hong Kong"
-
 #: ../../install_interactive.pm:1
 #, c-format
 msgid "Not enough free space to allocate new partitions"
@@ -369,6 +364,24 @@ msgstr "Muokkaa valittua konetta"
 msgid "No CD device defined!"
 msgstr "Yhtäkään CD-asemaa ei määritetty!"
 
+#: ../../network/shorewall.pm:1
+#, fuzzy, c-format
+msgid ""
+"Please enter the name of the interface connected to the "
+"internet.              \n"
+"                \n"
+"Examples:\n"
+"                ppp+ for modem or DSL connections, \n"
+"                eth0, or eth1 for cable connection, \n"
+"                ippp+ for a isdn connection.\n"
+msgstr ""
+"Ole hyvä ja syötä liitynnän nimi jolla yhdistetään Internetiin.\n"
+"\n"
+"Esimerkkejä:\n"
+"\t\tppp+ modeemi tai DSL yhteyksille.\n"
+"\t\teth0 tai eth1 kaapeliyhteydelle.\n"
+"\t\tppp+ ISDN-yhteydelle.\n"
+
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "\tUse .backupignore files\n"
@@ -442,15 +455,20 @@ msgstr "Muutos on tehty, haluatko käynnistää palvelun dm uudelleen ?"
 msgid "Swiss (French layout)"
 msgstr "Sveitsi (Ranskalainen järjestys)"
 
+#: ../../raid.pm:1
+#, c-format
+msgid "mkraid failed (maybe raidtools are missing?)"
+msgstr "mkraid epäonnistui (ehkä raidtools puuttuu?)"
+
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "August"
 msgstr "Elokuu"
 
-#: ../../raid.pm:1
-#, c-format
-msgid "mkraid failed (maybe raidtools are missing?)"
-msgstr "mkraid epäonnistui (ehkä raidtools puuttuu?)"
+#: ../../network/drakfirewall.pm:1
+#, fuzzy, c-format
+msgid "FTP server"
+msgstr "NTP-palvelin"
 
 #: ../../harddrake/data.pm:1
 #, c-format
@@ -531,11 +549,6 @@ msgstr ""
 #, c-format
 msgid "Configuring..."
 msgstr "Asetetaan..."
-
-#: ../../standalone/drakgw:1
-#, c-format
-msgid "The setup has already been done, and it's currently enabled."
-msgstr "Asetukset on jo tehty ja ne ovat käytössä."
 
 #: ../../harddrake/v4l.pm:1
 #, c-format
@@ -671,6 +684,11 @@ msgstr " Novell palvelimella \"%s\", tulostin \"%s\""
 msgid "Printer Name"
 msgstr "Tulostimen nimi"
 
+#: ../../../move/move.pm:1
+#, c-format
+msgid "Setting up USB key"
+msgstr ""
+
 #: ../../standalone/drakfloppy:1
 #, c-format
 msgid "Remove a module"
@@ -729,15 +747,17 @@ msgstr ""
 msgid "if needed"
 msgstr "jos tarvitaan"
 
+#: ../../standalone/drakclock:1
+#, c-format
+msgid ""
+"We need to install ntp package\n"
+" to enable Network Time Protocol"
+msgstr ""
+
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "Restore Failed..."
 msgstr "Palautus epäonnistui..."
-
-#: ../../standalone/harddrake2:1
-#, c-format
-msgid "/Autodetect _jazz drives"
-msgstr "/_Jazz asemien automaattitunnistus"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -1223,11 +1243,6 @@ msgstr "\tRajoita levyn käyttö %s megatavuun\n"
 #, c-format
 msgid "512 kB"
 msgstr "512 kt"
-
-#: ../../standalone/net_monitor:1
-#, c-format
-msgid "Logs"
-msgstr "Lokit"
 
 #: ../../standalone/scannerdrake:1
 #, c-format
@@ -1739,6 +1754,11 @@ msgstr "Latvia"
 msgid "monthly"
 msgstr "kuukausittain"
 
+#: ../../../move/move.pm:1
+#, fuzzy, c-format
+msgid "Retry"
+msgstr "Palauta"
+
 #: ../../standalone/drakfloppy:1
 #, c-format
 msgid "Module name"
@@ -1783,6 +1803,11 @@ msgstr "Käytä Unicodea oletuksena"
 #, c-format
 msgid "the module of the GNU/Linux kernel that handles the device"
 msgstr "GNU/Linux ytimen moduuli joka käsittelee kyseistä laitetta"
+
+#: ../../standalone/drakclock:1
+#, fuzzy, c-format
+msgid "Is your hardware clock set to GMT?"
+msgstr "Laitteistokello asetettu GMT-aikaan"
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -1829,6 +1854,11 @@ msgstr "Järjestelmän päivitystä ei voida aloittaa!\n"
 msgid "Name: "
 msgstr "Nimi: "
 
+#: ../../standalone/drakconnect:1
+#, c-format
+msgid "up"
+msgstr ""
+
 #: ../../Xconfig/resolution_and_depth.pm:1
 #, c-format
 msgid "16 million colors (24 bits)"
@@ -1840,7 +1870,7 @@ msgstr "16 miljoonaa väriä (24 bittiä)"
 msgid "Allow all users"
 msgstr "Salli kaikille käyttäjille"
 
-#: ../../share/advertising/08-store.pl:1
+#: ../advertising/08-store.pl:1
 #, c-format
 msgid "The official MandrakeSoft Store"
 msgstr "Virallinen MandrakeSoft kauppa"
@@ -1875,15 +1905,15 @@ msgid "Do new backup before restore (only for incremental backups.)"
 msgstr ""
 "Luo uusi varmuuskopio ennen palauttamista (vain kasvavilla varmuuskopioilla)"
 
-#: ../../standalone/harddrake2:1
-#, c-format
-msgid "Name"
-msgstr "Nimi"
-
 #: ../../raid.pm:1
 #, c-format
 msgid "mkraid failed"
 msgstr "mkraid epäonnistui"
+
+#: ../../standalone/harddrake2:1
+#, c-format
+msgid "Name"
+msgstr "Nimi"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -2114,6 +2144,23 @@ msgstr "Otan palvelut käyttöön.."
 #, c-format
 msgid "Printing test page(s)..."
 msgstr "Tulostan testisivu(ja)..."
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid ""
+"Transfer successful\n"
+"You may want to verify you can login to the server with:\n"
+"\n"
+"ssh -i %s %s@%s\n"
+"\n"
+"without being prompted for a password."
+msgstr ""
+"Siirto onnistui\n"
+"Sinun kannattaa varmistaa että voit kirjoittautua palvelimeen komennolla:\n"
+"\n"
+"ssh -i %s %s@%s\n"
+"\n"
+"ilman että sinulta pyydetään salasanaa."
 
 # mat
 #: ../../fsedit.pm:1
@@ -3121,6 +3168,11 @@ msgstr "erikoisominaisuudet ajurissa (polttomahdollisuus ja/tai DVD tuki)"
 msgid "Can't add a partition to _formatted_ RAID md%d"
 msgstr "En voi lisätä osiota _alustetulle_ RAID:lle md%d"
 
+#: ../../standalone/drakclock:1
+#, fuzzy, c-format
+msgid "Network Time Protocol"
+msgstr "Verkkoliitäntä"
+
 #: ../../Xconfig/card.pm:1
 #, c-format
 msgid ""
@@ -3357,7 +3409,7 @@ msgstr "Palau"
 msgid "level"
 msgstr "taso"
 
-#: ../../share/advertising/13-mdkexpert_corporate.pl:1
+#: ../advertising/13-mdkexpert_corporate.pl:1
 #, c-format
 msgid ""
 "All incidents will be followed up by a single qualified MandrakeSoft "
@@ -3759,7 +3811,7 @@ msgstr ""
 msgid "Bad package"
 msgstr "Viallinen paketti"
 
-#: ../../share/advertising/07-server.pl:1
+#: ../advertising/07-server.pl:1
 #, c-format
 msgid ""
 "Transform your computer into a powerful Linux server: Web server, mail, "
@@ -4034,7 +4086,7 @@ msgstr "Tervetuloa murtautujat"
 msgid "Module options:"
 msgstr "Moduulin optiot:"
 
-#: ../../share/advertising/11-mnf.pl:1
+#: ../advertising/11-mnf.pl:1
 #, c-format
 msgid "Secure your networks with the Multi Network Firewall"
 msgstr "Turvaa verkkosi käyttäen Multi Network Firewall"
@@ -4115,6 +4167,11 @@ msgstr "Hiiri"
 #, c-format
 msgid "not enough room in /boot"
 msgstr "ei tarpeeksi tilaa hakemistossa /boot"
+
+#: ../../install_steps_gtk.pm:1
+#, c-format
+msgid "trying to promote %s"
+msgstr ""
 
 #: ../../lang.pm:1
 #, c-format
@@ -4269,6 +4326,11 @@ msgstr ""
 msgid "Saudi Arabia"
 msgstr "Saudi Arabia"
 
+#: ../../services.pm:1
+#, c-format
+msgid "Internet"
+msgstr "Internet"
+
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid "Continue anyway?"
@@ -4288,11 +4350,6 @@ msgstr ""
 #, c-format
 msgid "Printer"
 msgstr "Tulostin"
-
-#: ../../services.pm:1
-#, c-format
-msgid "Internet"
-msgstr "Internet"
 
 #: ../../standalone/service_harddrake:1
 #, c-format
@@ -4369,6 +4426,11 @@ msgstr "Liitospisteet saavat sisältää vain kirjaimia ja numeroita"
 #, c-format
 msgid "Restarting printing system..."
 msgstr "Käynnistän tulostusjärjestelmää uudelleen..."
+
+#: ../../../move/tree/mdk_totem:1
+#, c-format
+msgid "You can only run with no CDROM support"
+msgstr ""
 
 #: ../../modules/interactive.pm:1
 #, c-format
@@ -4603,15 +4665,15 @@ msgstr "ISA / PCMCIA"
 msgid "About"
 msgstr "Tietoja"
 
-#: ../../network/network.pm:1
-#, c-format
-msgid "Proxies configuration"
-msgstr "Välityspalvelimien asettaminen"
-
 #: ../../mouse.pm:1
 #, c-format
 msgid "GlidePoint"
 msgstr "GlidePoint"
+
+#: ../../network/network.pm:1
+#, c-format
+msgid "Proxies configuration"
+msgstr "Välityspalvelimien asettaminen"
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -4777,6 +4839,11 @@ msgstr "Liitospisteiden pitää alkaa /-merkillä."
 msgid "Choose your CD/DVD device"
 msgstr "Valitse CD/DVD asemasi"
 
+#: ../../network/drakfirewall.pm:1
+#, fuzzy, c-format
+msgid "CUPS server"
+msgstr "Nimipalvelin"
+
 #: ../../standalone/logdrake:1
 #, c-format
 msgid "Postfix Mail Server"
@@ -4792,7 +4859,7 @@ msgstr "Lopeta tallentamatta"
 msgid "Yemen"
 msgstr "Jemen"
 
-#: ../../share/advertising/11-mnf.pl:1
+#: ../advertising/11-mnf.pl:1
 #, c-format
 msgid "This product is available on the MandrakeStore Web site."
 msgstr "Tämä tuote on saatavissa MandrakeStore:n webbisivustolla"
@@ -4801,6 +4868,31 @@ msgstr "Tämä tuote on saatavissa MandrakeStore:n webbisivustolla"
 #, c-format
 msgid "=> There are many things to choose from (%s).\n"
 msgstr "=> On monta asiaa, joista valita (%s).\n"
+
+#: ../../standalone/drakclock:1
+#, c-format
+msgid "GMT - DrakClock"
+msgstr ""
+
+#: ../../../move/move.pm:1
+#, c-format
+msgid ""
+"An error occurred:\n"
+"\n"
+"\n"
+"%s\n"
+"\n"
+"This may come from corrupted system configuration files\n"
+"on the USB key, in this case removing them and then\n"
+"rebooting Mandrake Move would fix the problem. To do\n"
+"so, click on the corresponding button.\n"
+"\n"
+"\n"
+"You may also want to reboot and remove the USB key, or\n"
+"examine its contents under another OS, or even have\n"
+"a look at log files in console #3 and #4 to try to\n"
+"guess what's happening."
+msgstr ""
 
 #: ../../steps.pm:1
 #, c-format
@@ -5046,6 +5138,11 @@ msgstr "Userdrake"
 #, c-format
 msgid "Which partition do you want to use for Linux4Win?"
 msgstr "Mille osiolle haluat laittaa Linux4Win:n?"
+
+#: ../../install_steps_gtk.pm:1
+#, fuzzy, c-format
+msgid "due to missing %s"
+msgstr "kdesu puuttuu"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -5601,7 +5698,7 @@ msgstr ""
 msgid "Started on boot"
 msgstr "Käynnistetty koneen käynnistämisen yhteydessä"
 
-#: ../../share/advertising/12-mdkexpert.pl:1
+#: ../advertising/12-mdkexpert.pl:1
 #, c-format
 msgid ""
 "Join the MandrakeSoft support teams and the Linux Community online to share "
@@ -5937,11 +6034,6 @@ msgid ""
 msgstr ""
 "Näyttö teema\n"
 "konsolissa"
-
-#: ../../standalone/net_monitor:1
-#, c-format
-msgid "Statistics"
-msgstr "Tilastot"
 
 #: ../../printer/cups.pm:1
 #, c-format
@@ -6819,7 +6911,7 @@ msgstr ""
 "Tallentaa ja palauttaa järjestelmän satunnaislukualtaan, tämä\n"
 "parantaa satunnaislukujen laatua."
 
-#: ../../share/advertising/07-server.pl:1
+#: ../advertising/07-server.pl:1
 #, c-format
 msgid "Turn your computer into a reliable server"
 msgstr "Muuta koneesi luotettavaksi palvelimeksi"
@@ -6834,6 +6926,11 @@ msgstr "Tarkista tyhjät salasanat tiedostossa /etc/shadow"
 msgid " (driver %s)"
 msgstr " (ajuri %s)"
 
+#: ../../services.pm:1
+#, c-format
+msgid "Start when requested"
+msgstr "Käynnistä pyydettäessä"
+
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid ""
@@ -6847,11 +6944,6 @@ msgstr ""
 #, c-format
 msgid "I don't know"
 msgstr "En tiedä"
-
-#: ../../services.pm:1
-#, c-format
-msgid "Start when requested"
-msgstr "Käynnistä pyydettäessä"
 
 #: ../../printer/main.pm:1
 #, c-format
@@ -7083,6 +7175,11 @@ msgstr ""
 "Kuvanlukija %s pitää asettaa printerdrake:n kautta.\n"
 "Voit käynnistää printerdrake:n Mandraken Ohjauspaneelista Laitteisto-osasta."
 
+#: ../../../move/move.pm:1
+#, fuzzy, c-format
+msgid "Key isn't writable"
+msgstr "XawTV ei ole asennettuna!"
+
 #: ../../lang.pm:1
 #, c-format
 msgid "Bangladesh"
@@ -7131,15 +7228,15 @@ msgstr ""
 msgid "Set the root umask."
 msgstr "Aseta root umask."
 
-#: ../../network/modem.pm:1 ../../standalone/drakconnect:1
-#, c-format
-msgid "Script-based"
-msgstr "Script-pohjainen"
-
 #: ../../install_any.pm:1 ../../partition_table.pm:1
 #, c-format
 msgid "Error reading file %s"
 msgstr "Virhe lukiessa tiedostoa %s"
+
+#: ../../network/modem.pm:1 ../../standalone/drakconnect:1
+#, c-format
+msgid "Script-based"
+msgstr "Script-pohjainen"
 
 #: ../../harddrake/v4l.pm:1
 #, c-format
@@ -7224,23 +7321,6 @@ msgstr ""
 #, c-format
 msgid "Domain Authentication Required"
 msgstr "Verkkoaluetunnistus vaaditaan"
-
-#: ../../standalone/drakTermServ:1
-#, c-format
-msgid ""
-"\n"
-"\n"
-" Thanks:\n"
-"\t- LTSP Project http://www.ltsp.org\n"
-"\t- Michael Brown <mbrown\\@fensystems.co.uk>\n"
-"\n"
-msgstr ""
-"\n"
-"\n"
-" Kiitokset:\n"
-"\t- LTSP Projekti http://www.ltsp.org\n"
-"\t- Michael Brown <mbrown\\@fensystems.co.uk>\n"
-"\n"
 
 #: ../../security/level.pm:1
 #, c-format
@@ -7987,15 +8067,15 @@ msgstr "Yaboot"
 msgid "Logitech CC Series with Wheel emulation"
 msgstr "Logitech CC Series rullaemuloinnilla"
 
-#: ../../standalone/drakboot:1
-#, c-format
-msgid "Splash selection"
-msgstr "Splash valinta"
-
 #: ../../partition_table.pm:1
 #, c-format
 msgid "Extended partition not supported on this platform"
 msgstr "Laajennettua osiotyyppiä ei ole tuettu tässä ympäristössä"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Splash selection"
+msgstr "Splash valinta"
 
 #: ../../network/isdn.pm:1
 #, c-format
@@ -8056,6 +8136,11 @@ msgstr ""
 msgid "Printer default settings"
 msgstr "Tulostimen oletusasetuksia"
 
+#: ../../mouse.pm:1
+#, c-format
+msgid "Generic PS2 Wheel Mouse"
+msgstr "Yleinen PS2 rullahiiri"
+
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid ""
@@ -8066,11 +8151,6 @@ msgstr ""
 "WP lipuke rekisterissä CR0 pakottaa kirjoitussuojan muistisivun tasolla, "
 "jolloin sallitaan prosessorin estää tarkistamattomat ytimen käyttäjämuistin  "
 "käytöt (eli tämä on virhesuoja)"
-
-#: ../../mouse.pm:1
-#, c-format
-msgid "Generic PS2 Wheel Mouse"
-msgstr "Yleinen PS2 rullahiiri"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -8238,6 +8318,11 @@ msgstr "Korealainen näppäimistö"
 msgid "Not connected"
 msgstr "Ei yhteyttä"
 
+#: ../../standalone/net_monitor:1
+#, fuzzy, c-format
+msgid "No internet connection configured"
+msgstr "Internetyhteyden asetus"
+
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Greek"
@@ -8252,23 +8337,6 @@ msgstr "Saint Kitts ja Nevis"
 #, c-format
 msgid "Generic 3 Button Mouse with Wheel emulation"
 msgstr "Yleinen 3-näppäinen hiiri rullaemuloinnilla"
-
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid ""
-"Transfer successful\n"
-"You may want to verify you can login to the server with:\n"
-"\n"
-"ssh -i %s %s\\@%s\n"
-"\n"
-"without being prompted for a password."
-msgstr ""
-"Siirto onnistui\n"
-"Sinun kannattaa varmistaa että voit kirjoittautua palvelimeen komennolla:\n"
-"\n"
-"ssh -i %s %s\\@%s\n"
-"\n"
-"ilman että sinulta pyydetään salasanaa."
 
 #: ../../any.pm:1
 #, c-format
@@ -8505,7 +8573,7 @@ msgstr ""
 "Paina \"Siirrä\" ylikirjoittaaksesi sen.\n"
 "Voit myös kirjoittaa uuden nimen tai ohittaa tämän tulostimen."
 
-#: ../../share/advertising/12-mdkexpert.pl:1
+#: ../advertising/12-mdkexpert.pl:1
 #, c-format
 msgid ""
 "Find the solutions of your problems via MandrakeSoft's online support "
@@ -8571,6 +8639,22 @@ msgstr "Kyrgyzstan"
 #, c-format
 msgid "Multi-function device on USB"
 msgstr "Monikäyttölaite USB:ssa"
+
+#: ../../../move/move.pm:1
+#, c-format
+msgid ""
+"We didn't detect any USB key on your system. If you\n"
+"plug in an USB key now, Mandrake Move will have the ability\n"
+"to transparently save the data in your home directory and\n"
+"system wide configuration, for next boot on this computer\n"
+"or another one. Note: if you plug in a key now, wait several\n"
+"seconds before detecting again.\n"
+"\n"
+"\n"
+"You may also proceed without an USB key - you'll still be\n"
+"able to use Mandrake Move as a normal live Mandrake\n"
+"Operating System."
+msgstr ""
 
 #: ../../help.pm:1
 #, c-format
@@ -8667,15 +8751,15 @@ msgstr "Tahmea-bitti"
 msgid "Other Media"
 msgstr "Muu media"
 
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "Backup system files"
-msgstr "Varmuuskopioi järjestelmätiedostot"
-
 #: ../../mouse.pm:1
 #, c-format
 msgid "Logitech MouseMan+"
 msgstr "Logitech MouseMan+"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "Backup system files"
+msgstr "Varmuuskopioi järjestelmätiedostot"
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -8740,6 +8824,11 @@ msgstr "Järjestelmäasetukset"
 msgid "Please choose your type of mouse."
 msgstr "Valitse hiiren tyyppi."
 
+#: ../../services.pm:1
+#, c-format
+msgid "running"
+msgstr "käynnissä"
+
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "class of hardware device"
@@ -8758,11 +8847,6 @@ msgstr ""
 #, c-format
 msgid "United Kingdom"
 msgstr "Iso-Britannia"
-
-#: ../../services.pm:1
-#, c-format
-msgid "running"
-msgstr "käynnissä"
 
 #: ../../lang.pm:1
 #, c-format
@@ -8808,7 +8892,7 @@ msgstr "Senegal"
 msgid "Command line"
 msgstr "Komentorivi"
 
-#: ../../share/advertising/08-store.pl:1
+#: ../advertising/08-store.pl:1
 #, c-format
 msgid ""
 "Our full range of Linux solutions, as well as special offers on products and "
@@ -8869,6 +8953,17 @@ msgstr "Sivutus"
 #, c-format
 msgid "Custom settings"
 msgstr "Mukautetut asetukset"
+
+#: ../../../move/move.pm:1
+#, c-format
+msgid ""
+"The USB key seems to have write protection enabled, but we can't safely\n"
+"unplug it now.\n"
+"\n"
+"\n"
+"Click the button to reboot the machine, unplug it, remove write protection,\n"
+"plug the key again, and launch Mandrake Move again."
+msgstr ""
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -8979,7 +9074,7 @@ msgstr "Valitse mitä verkkokorteista haluat käyttää Internetiin liittymiseen
 msgid "Photo memory card access on your HP multi-function device"
 msgstr "Kuva-muistikortin käyttö HP monitoimilaitteissasi"
 
-#: ../../share/advertising/09-mdksecure.pl:1
+#: ../advertising/09-mdksecure.pl:1
 #, c-format
 msgid ""
 "Enhance your computer performance with the help of a selection of partners "
@@ -9104,6 +9199,11 @@ msgstr ""
 #, c-format
 msgid "Exit install"
 msgstr "Lopeta asennus"
+
+#: ../../../move/move.pm:1
+#, c-format
+msgid "Need a key to save your data"
+msgstr ""
 
 #: ../../standalone/drakgw:1
 #, c-format
@@ -9297,12 +9397,6 @@ msgstr "Venäjä (Foneettinen)"
 msgid "dhcpd Config..."
 msgstr "dhcpd:n asetus..."
 
-#: ../../standalone/drakgw:1
-#, c-format
-msgid "The setup has already been done, but it's currently disabled."
-msgstr ""
-"Asetukset on jo tehty, mutta ne ovat tällä hetkellä poistettu käytöstä."
-
 #: ../../any.pm:1
 #, c-format
 msgid "LILO/grub Installation"
@@ -9482,6 +9576,11 @@ msgstr ""
 msgid "Choose an X server"
 msgstr "Valitse X-palvelin"
 
+#: ../../../move/tree/mdk_totem:1
+#, c-format
+msgid "Copying to memory to allow removing the CDROM"
+msgstr ""
+
 #: ../../install_interactive.pm:1
 #, c-format
 msgid "Swap partition size in MB: "
@@ -9531,7 +9630,7 @@ msgstr "Automaattisten vaiheiden asetus"
 msgid "Barbados"
 msgstr "Barbados"
 
-#: ../../share/advertising/02-community.pl:1
+#: ../advertising/02-community.pl:1
 #, c-format
 msgid ""
 "Want to know more and to contribute to the Open Source community? Get "
@@ -9696,15 +9795,6 @@ msgstr "Prosessorin alasukupolvi"
 msgid "First Time Wizard"
 msgstr "Aloittelija-velho"
 
-#: ../../install_steps.pm:1
-#, c-format
-msgid ""
-"An error occurred, but I don't know how to handle it nicely.\n"
-"Continue at your own risk."
-msgstr ""
-"Tapahtui virhe, eikä sitä ei voida käsitellä kunnolla.\n"
-"Jatka omalla vastuullasi."
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Taiwan"
@@ -9719,6 +9809,15 @@ msgstr "Pakistan"
 #, c-format
 msgid "please wait, parsing file: %s"
 msgstr "odota hetki, jäsennän tiedostoa: %s"
+
+#: ../../install_steps.pm:1 ../../../move/move.pm:1
+#, c-format
+msgid ""
+"An error occurred, but I don't know how to handle it nicely.\n"
+"Continue at your own risk."
+msgstr ""
+"Tapahtui virhe, eikä sitä ei voida käsitellä kunnolla.\n"
+"Jatka omalla vastuullasi."
 
 #: ../../install_steps_gtk.pm:1
 #, c-format
@@ -9919,6 +10018,11 @@ msgstr ""
 "Lataa tai tallenna pakettien valinta levykkeelle.\n"
 "Muoto on sama kuin auto_install-toiminnon luomilla levykkeillä."
 
+#: ../../../move/tree/mdk_totem:1
+#, fuzzy, c-format
+msgid "No CDROM support"
+msgstr "Radiotuki:"
+
 #: ../../standalone/drakxtv:1
 #, c-format
 msgid "China (broadcast)"
@@ -9960,7 +10064,7 @@ msgstr ""
 "Moduulin %s lataaminen epäonnistui.\n"
 "Haluatko yrittää muilla asetuksilla?"
 
-#: ../../share/advertising/01-thanks.pl:1
+#: ../advertising/01-thanks.pl:1
 #, c-format
 msgid "Welcome to the Open Source world."
 msgstr "Tervetuloa Avoimen Lähdekoodin maailmaan"
@@ -10187,6 +10291,11 @@ msgstr "Muut portit"
 msgid "number of capture buffers for mmap'ed capture"
 msgstr "mmap-kaappauspuskurien määrä:"
 
+#: ../../network/adsl.pm:1
+#, fuzzy, c-format
+msgid " - detected"
+msgstr "löydetty"
+
 #: ../../harddrake/data.pm:1
 #, c-format
 msgid "SMBus controllers"
@@ -10288,6 +10397,11 @@ msgstr "Uudelleenkäynnistys konsolikäyttäjällä"
 msgid "Restore"
 msgstr "Palauta"
 
+#: ../../standalone/drakclock:1
+#, fuzzy, c-format
+msgid "Server:"
+msgstr "Palvelin: "
+
 #: ../../security/help.pm:1
 #, c-format
 msgid "if set to yes, check if the network devices are in promiscuous mode."
@@ -10298,6 +10412,11 @@ msgstr ""
 #, c-format
 msgid "Looking for available packages..."
 msgstr "Etsin saatavilla olevia paketteja..."
+
+#: ../../../move/move.pm:1
+#, fuzzy, c-format
+msgid "Please wait, setting up system configuration files on USB key..."
+msgstr "Odota hetki, asetetaan turvatasoa..."
 
 #: ../../any.pm:1
 #, c-format
@@ -10422,15 +10541,15 @@ msgstr ""
 "Prosessorin taajuus MHz:inä (Megahertziä voidaan ensisilmäyksellä karkeasti "
 "verrata tehtävien määrään jotka prosessori suorittaa sekunnissa)"
 
-#: ../../standalone/printerdrake:1
-#, c-format
-msgid "Mandrake Linux Printer Management Tool"
-msgstr "Mandrake Linux Tulostuksen Hallintatyökalu"
-
 #: ../../pkgs.pm:1
 #, c-format
 msgid "important"
 msgstr "tärkeä"
+
+#: ../../standalone/printerdrake:1
+#, c-format
+msgid "Mandrake Linux Printer Management Tool"
+msgstr "Mandrake Linux Tulostuksen Hallintatyökalu"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -10488,6 +10607,11 @@ msgstr "Käyttäjät"
 #, c-format
 msgid "Preparing bootloader..."
 msgstr "Valmistelen käyttöjärjestelmän lataajaa..."
+
+#: ../../../move/move.pm:1
+#, c-format
+msgid "Enter your user information, password will be used for screensaver"
+msgstr ""
 
 #: ../../network/network.pm:1
 #, c-format
@@ -10942,15 +11066,15 @@ msgstr "Tiedoston sisältö"
 msgid "Authentication LDAP"
 msgstr "Tunnistus: LDAP"
 
+#: ../../install_steps_gtk.pm:1
+#, c-format
+msgid "in order to keep %s"
+msgstr ""
+
 #: ../../harddrake/sound.pm:1
 #, c-format
 msgid "Let me pick any driver"
 msgstr "Anna minun valita mikä ajuri tahansa"
-
-#: ../../standalone/net_monitor:1
-#, c-format
-msgid "Profile "
-msgstr "Profiili: "
 
 #: ../../standalone/net_monitor:1
 #, c-format
@@ -11051,9 +11175,9 @@ msgstr "Lähetä ytimen versio"
 #: ../../standalone/drakautoinst:1 ../../standalone/drakbackup:1
 #: ../../standalone/drakboot:1 ../../standalone/drakconnect:1
 #: ../../standalone/drakfloppy:1 ../../standalone/drakfont:1
-#: ../../standalone/drakgw:1 ../../standalone/drakperm:1
-#: ../../standalone/draksec:1 ../../standalone/logdrake:1
-#: ../../standalone/mousedrake:1 ../../standalone/net_monitor:1
+#: ../../standalone/drakperm:1 ../../standalone/draksec:1
+#: ../../standalone/logdrake:1 ../../standalone/mousedrake:1
+#: ../../standalone/net_monitor:1
 #, c-format
 msgid "Cancel"
 msgstr "Peruuta"
@@ -11207,19 +11331,6 @@ msgstr "Italia"
 msgid "Basic"
 msgstr "Perusasetukset"
 
-#: ../../standalone/drakTermServ:1
-#, c-format
-msgid ""
-"\n"
-" Copyright (C) 2002 by MandrakeSoft \n"
-"\tStew Benedict sbenedict\\@mandrakesoft.com\n"
-"\n"
-msgstr ""
-"\n"
-" Copyright (C)2002 MandrakeSoft.\n"
-"\tStew Benedict <sbenedict\\@mandrakesoft.com>\n"
-"\n"
-
 #: ../../install_messages.pm:1
 #, c-format
 msgid "http://www.mandrakelinux.com/en/92errata.php3"
@@ -11240,10 +11351,10 @@ msgstr "pdq"
 msgid "Card IO"
 msgstr "Kortin IO"
 
-#: ../../standalone/drakperm:1
-#, c-format
-msgid "when checked, owner and group won't be changed"
-msgstr "kun valittu, omistajaa ja ryhmää ei muuteta"
+#: ../../network/drakfirewall.pm:1
+#, fuzzy, c-format
+msgid "Samba server"
+msgstr "Samba palvelin"
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -11339,6 +11450,11 @@ msgstr ""
 msgid "access to compilation tools"
 msgstr "oikeudet ohjelmointityökaluihin"
 
+#: ../../standalone/net_monitor:1
+#, fuzzy, c-format
+msgid "Global statistics"
+msgstr "Tilastot"
+
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "Please select data to restore..."
@@ -11358,6 +11474,11 @@ msgstr ""
 #, c-format
 msgid "Standard test page"
 msgstr "Vakio testisivu"
+
+#: ../../standalone/drakclock:1
+#, fuzzy, c-format
+msgid "Time Zone"
+msgstr "Aikavyöhyke"
 
 #: ../../diskdrake/hd_gtk.pm:1 ../../diskdrake/interactive.pm:1
 #, c-format
@@ -11468,6 +11589,19 @@ msgstr ""
 "tai paina vain Enter jatkaaksesi.\n"
 "Valintasi? "
 
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"\n"
+" Copyright (C) 2002 by MandrakeSoft \n"
+"\tStew Benedict sbenedict@mandrakesoft.com\n"
+"\n"
+msgstr ""
+"\n"
+" Copyright (C)2002 MandrakeSoft.\n"
+"\tStew Benedict <sbenedict@mandrakesoft.com>\n"
+"\n"
+
 # Asennuksen sivuvalikko
 #: ../../standalone/draksplash:1
 #, c-format
@@ -11494,15 +11628,15 @@ msgstr "Verkkoasetusten velho"
 msgid "Removable media automounting"
 msgstr "Vaihdettavan median automaattinen liittäminen"
 
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "Enter the directory to save:"
-msgstr "Syötä hakemisto, johon tallennetaan:"
-
 #: ../../services.pm:1
 #, c-format
 msgid "Printing"
 msgstr "Tulostus"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "Enter the directory to save:"
+msgstr "Syötä hakemisto, johon tallennetaan:"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -11627,7 +11761,7 @@ msgstr "Kensington Thinking Mouse"
 msgid "Configuration of a remote printer"
 msgstr "Etätulostimen asetukset"
 
-#: ../../share/advertising/13-mdkexpert_corporate.pl:1
+#: ../advertising/13-mdkexpert_corporate.pl:1
 #, c-format
 msgid "An online platform to respond to enterprise support needs."
 msgstr "Online-alusta, joka vastaa yrityskohtaiseen tukitarpeeseen"
@@ -11786,15 +11920,22 @@ msgstr ""
 msgid "Configure Local Area Network..."
 msgstr "Aseta paikallisverkko..."
 
-#: ../../security/l10n.pm:1
+#: ../../../move/move.pm:1
 #, c-format
-msgid "Verify checksum of the suid/sgid files"
-msgstr "Tarkistetaan 'suid/sgid' tiedostojen tarkistussumma."
+msgid ""
+"The USB key seems to have write protection enabled. Please\n"
+"unplug it, remove write protection, and then plug it again."
+msgstr ""
 
 #: ../../services.pm:1
 #, c-format
 msgid "Launch the sound system on your machine"
 msgstr "Käynnistä äänijärjestelmä tietokoneessasi"
+
+#: ../../security/l10n.pm:1
+#, c-format
+msgid "Verify checksum of the suid/sgid files"
+msgstr "Tarkistetaan 'suid/sgid' tiedostojen tarkistussumma."
 
 #: ../../security/l10n.pm:1
 #, c-format
@@ -12124,6 +12265,11 @@ msgstr "Et voi poistaa tämän paketin valintaa. Paketti pitää päivittää."
 msgid "Loading from floppy"
 msgstr "Ladataan levykkeeltä"
 
+#: ../../standalone/drakclock:1
+#, c-format
+msgid "Timezone - DrakClock"
+msgstr ""
+
 #: ../../security/help.pm:1
 #, c-format
 msgid "Enable/Disable the logging of IPv4 strange packets."
@@ -12279,6 +12425,11 @@ msgstr ""
 "Järjestelmän asettamisesta saat tietoja virallisen Linux Mandraken\n"
 "käyttäjäoppaan jälkiasennuskappaleesta."
 
+#: ../../standalone/drakclock:1
+#, fuzzy, c-format
+msgid "Enable Network Time Protocol"
+msgstr "Palauta verkon kautta protokollalla: %s"
+
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "paranoid"
@@ -12370,7 +12521,7 @@ msgstr "oikeudet verkkotyökaluihin"
 msgid "Firmware-Upload for HP LaserJet 1000"
 msgstr "Firmwaren lataus HP LaserJet 1000 tulostimelle"
 
-#: ../../share/advertising/03-software.pl:1
+#: ../advertising/03-software.pl:1
 #, c-format
 msgid ""
 "And, of course, push multimedia to its limits with the very latest software "
@@ -12436,15 +12587,15 @@ msgstr "Käynnistysprotokolla"
 msgid "LVM-disks %s\n"
 msgstr "LVM-levyt %s\n"
 
-#: ../../diskdrake/interactive.pm:1
-#, c-format
-msgid "The package %s is needed. Install it?"
-msgstr "Paketti %s tarvitaan. Haluatko asentaa sen?"
-
 #: ../../services.pm:1
 #, c-format
 msgid "On boot"
 msgstr "Käynnistyksen yhteydessä"
+
+#: ../../diskdrake/interactive.pm:1
+#, c-format
+msgid "The package %s is needed. Install it?"
+msgstr "Paketti %s tarvitaan. Haluatko asentaa sen?"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -12460,6 +12611,11 @@ msgstr "Vatikaani"
 #, c-format
 msgid "Please make a backup of your data first"
 msgstr "Luo ensin varmuuskopio tiedoistasi"
+
+#: ../../harddrake/data.pm:1
+#, c-format
+msgid "ADSL adapters"
+msgstr ""
 
 #: ../../install_interactive.pm:1
 #, c-format
@@ -12486,7 +12642,7 @@ msgstr "Firmware tarvitaan"
 msgid "Remove List"
 msgstr "Poista lista"
 
-#: ../../share/advertising/05-desktop.pl:1
+#: ../advertising/05-desktop.pl:1
 #, c-format
 msgid "A customizable environment"
 msgstr "Räätälöitävissä oleva ympäristö"
@@ -12731,6 +12887,13 @@ msgstr "Asettaa komentotulkin aikaviiveen. Arvo 0 (nolla) poistaa aikaviiveen."
 #, c-format
 msgid "Firmware copy succeeded"
 msgstr "Firmwaren kopiointi onnistui"
+
+#: ../../../move/tree/mdk_totem:1
+#, c-format
+msgid ""
+"You can't use another CDROM when the following programs are running: \n"
+"%s"
+msgstr ""
 
 #: ../../security/help.pm:1
 #, c-format
@@ -13232,6 +13395,11 @@ msgstr ""
 "tulostustyölle. Voit yksinkertaisesti lisätä halutut asetukset "
 "komentoriville, esim.: \"%s <tiedosto>\". "
 
+#: ../../standalone/drakclock:1
+#, fuzzy, c-format
+msgid "DrakClock"
+msgstr "Drakbackup"
+
 #: ../../modules/interactive.pm:1
 #, c-format
 msgid ""
@@ -13261,21 +13429,6 @@ msgid ""
 msgstr ""
 "\n"
 "- Demoni (%s) sisältää :\n"
-
-#: ../../standalone/drakgw:1
-#, c-format
-msgid ""
-"Welcome to the Internet Connection Sharing utility!\n"
-"\n"
-"%s\n"
-"\n"
-"Click on Configure to launch the setup wizard."
-msgstr ""
-"Tervetuloa Internetyhteyden jakamisen apuohjelmaan!\n"
-"\n"
-"%s\n"
-"\n"
-"Paina Aseta käynnistääksesi asennusvelhon."
 
 #: ../../lang.pm:1
 #, c-format
@@ -13462,6 +13615,11 @@ msgstr ""
 msgid "Christmas Island"
 msgstr "Joulusaari"
 
+#: ../../mouse.pm:1
+#, fuzzy, c-format
+msgid "Automatic"
+msgstr "Automaattinen IP"
+
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Installation of bootloader failed. The following error occured:"
@@ -13563,11 +13721,6 @@ msgstr "Siirrä nyt"
 #, c-format
 msgid "Set root password and network authentication methods"
 msgstr "Aseta pääkäyttäjään (root) salasana ja tunnistustavat"
-
-#: ../../standalone/drakgw:1
-#, c-format
-msgid "Internet Connection Sharing configuration"
-msgstr "Internetyhteyden jakamisen asetukset"
 
 #: ../../ugtk2.pm:1
 #, c-format
@@ -13847,6 +14000,11 @@ msgstr "Valitse levykeasema jolla luot käynnistyslevykkeen"
 msgid "LILO with text menu"
 msgstr "LILO tekstipohjaisella valikolla"
 
+#: ../../standalone/net_monitor:1
+#, c-format
+msgid "instantaneous"
+msgstr ""
+
 #: ../../network/drakfirewall.pm:1
 #, c-format
 msgid "Everything (no firewall)"
@@ -14042,6 +14200,11 @@ msgstr "Anna käyttäjätunnus"
 msgid "Enable CD Boot?"
 msgstr "Mahdollista CD-käynnistys?"
 
+#: ../../../move/move.pm:1
+#, c-format
+msgid "Simply reboot"
+msgstr ""
+
 #: ../../interactive/stdio.pm:1
 #, c-format
 msgid " enter `void' for void entry"
@@ -14147,15 +14310,15 @@ msgstr ""
 "Tämä myös asentaa aikapalvelimen koneeseesi jota muut paikallisverkkosi\n"
 "koneet voivat käyttää."
 
-#: ../../install_steps_interactive.pm:1
-#, c-format
-msgid "Which is your timezone?"
-msgstr "Mikä on järjestelmäsi aikavyöhyke?"
-
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "Can't create log file!"
 msgstr "En voi luoda lokitiedostoa!"
+
+#: ../../install_steps_interactive.pm:1 ../../standalone/drakclock:1
+#, c-format
+msgid "Which is your timezone?"
+msgstr "Mikä on järjestelmäsi aikavyöhyke?"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -14207,6 +14370,11 @@ msgstr "Mosambik"
 msgid "Icon"
 msgstr "Kuvake"
 
+#: ../../../move/tree/mdk_totem:1
+#, fuzzy, c-format
+msgid "Kill those programs"
+msgstr "oikeudet X-ohjelmiin"
+
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "Please choose what you want to backup"
@@ -14242,7 +14410,7 @@ msgstr "Lisää sääntö"
 msgid "Chunk size %s\n"
 msgstr "Palan koko %s\n"
 
-#: ../../share/advertising/02-community.pl:1
+#: ../advertising/02-community.pl:1
 #, c-format
 msgid "Build the future of Linux!"
 msgstr "Rakenna Linuxin tulevaisuutta!"
@@ -14374,7 +14542,7 @@ msgstr ""
 "testannut asetuksia. Haluat varmaankin vastata \"%s\", jos koneesi\n"
 "on tarkoitettu palvelimeksi tai jos näytön asetus epäonnistui."
 
-#: ../../share/advertising/13-mdkexpert_corporate.pl:1
+#: ../advertising/13-mdkexpert_corporate.pl:1
 #, c-format
 msgid "MandrakeExpert Corporate"
 msgstr "MandrakeExpert Corporate"
@@ -14417,6 +14585,11 @@ msgstr "Tulostimen mallin valinta"
 msgid ""
 "After changing type of partition %s, all data on this partition will be lost"
 msgstr "Vaihdettuasi osion %s tyyppiä kaikki siinä olevat tiedot häviävät"
+
+#: ../../harddrake/data.pm:1
+#, fuzzy, c-format
+msgid "ISDN adapters"
+msgstr "ISDN-kortti"
 
 #: ../../common.pm:1
 #, c-format
@@ -14757,6 +14930,11 @@ msgid "Plug'n Play probing failed. Please select the correct monitor"
 msgstr ""
 "Kytke ja Käytä -tunnistus epäonnistui. Ole hyvä ja valitse oikea näyttö"
 
+#: ../../../move/move.pm:1
+#, c-format
+msgid "Detect again USB key"
+msgstr ""
+
 #: ../../services.pm:1
 #, c-format
 msgid "Services and deamons"
@@ -14798,7 +14976,7 @@ msgstr "Chkconfig tottelee msec:n sääntöjä"
 msgid "Slovakian (QWERTZ)"
 msgstr "Slovakia (QWERTZ)"
 
-#: ../../share/advertising/06-development.pl:1
+#: ../advertising/06-development.pl:1
 #, c-format
 msgid ""
 "To modify and to create in different languages such as Perl, Python, C and C+"
@@ -14865,6 +15043,11 @@ msgstr "Algeria"
 #, c-format
 msgid "Restore Via Network"
 msgstr "Palauta verkon kautta"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "Use tar and bzip2 (rather than tar and gzip)"
+msgstr ""
 
 #: ../../any.pm:1
 #, c-format
@@ -14999,7 +15182,7 @@ msgstr "DVD-ROM"
 msgid "Georgian (\"Latin\" layout)"
 msgstr "Georgia (\"Latin\"-järjestys)"
 
-#: ../../share/advertising/09-mdksecure.pl:1
+#: ../advertising/09-mdksecure.pl:1
 #, c-format
 msgid "Get the best items with Mandrake Linux Strategic partners"
 msgstr ""
@@ -15104,7 +15287,7 @@ msgstr "Automaattinen kirjautuminen"
 msgid "Domain Admin Password"
 msgstr "Verkkoalueen pääkäyttäjän salasana"
 
-#: ../../share/advertising/05-desktop.pl:1
+#: ../advertising/05-desktop.pl:1
 #, c-format
 msgid ""
 "Perfectly adapt your computer to your needs thanks to the 11 available "
@@ -15248,6 +15431,12 @@ msgstr "utopia 25"
 msgid "Pipe job into a command"
 msgstr "Putkita työ käskylle"
 
+# mat
+#: ../../../move/move.pm:1
+#, fuzzy, c-format
+msgid "Remove system config files"
+msgstr "Poista loopback-tiedosto?"
+
 #: ../../lang.pm:1
 #, c-format
 msgid "Cote d'Ivoire"
@@ -15259,7 +15448,8 @@ msgid "new dynamic device name generated by core kernel devfs"
 msgstr "uusi dynaaminen laitenimi, luotu ytimen sisäisen devfs:n toimesta"
 
 #: ../../help.pm:1 ../../install_any.pm:1 ../../interactive.pm:1
-#: ../../ugtk2.pm:1 ../../modules/interactive.pm:1 ../../standalone/drakgw:1
+#: ../../ugtk2.pm:1 ../../modules/interactive.pm:1
+#: ../../standalone/drakclock:1 ../../standalone/drakgw:1
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "Yes"
@@ -15280,12 +15470,6 @@ msgstr "Palautuksen edistyminen"
 msgid "Estonia"
 msgstr "Viro"
 
-#: ../../standalone/scannerdrake:1
-#, c-format
-msgid "Choose the host on which the local scanners should be made available:"
-msgstr ""
-"Valitse kone jolle paikalliset kuvanlukijat pitäisi asettaa käytettäviksi:"
-
 #: ../../partition_table.pm:1
 #, c-format
 msgid ""
@@ -15297,6 +15481,12 @@ msgstr ""
 "Ainoa ratkaisu on siirtää primääriosioita siten että reikä on ennen "
 "laajennettuja osioita"
 
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "Choose the host on which the local scanners should be made available:"
+msgstr ""
+"Valitse kone jolle paikalliset kuvanlukijat pitäisi asettaa käytettäviksi:"
+
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "Channel"
@@ -15307,11 +15497,6 @@ msgstr "Kanava"
 #, c-format
 msgid "Add"
 msgstr "Lisää"
-
-#: ../../standalone/drakgw:1
-#, c-format
-msgid "No Internet Connection Sharing has ever been configured."
-msgstr "Internetyhteyden jakamista ei ole koskaan asetettu."
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -15602,7 +15787,7 @@ msgstr "Onko tämä asennus vai päivitys?"
 msgid "ISDN card"
 msgstr "ISDN-kortti"
 
-#: ../../share/advertising/02-community.pl:1
+#: ../advertising/02-community.pl:1
 #, c-format
 msgid ""
 "To share your own knowledge and help build Linux software, join our "
@@ -15658,6 +15843,71 @@ msgstr ""
 "``Päivitä''-ominaisuuden pitäisi toimia Mandrake Linux\n"
 "-järjestelmissä versioista \"8.1\" ja uudemmat. Vanhemman version\n"
 "kuin \"8.1\" päivittämistä ei suositella."
+
+#: ../../standalone/drakfont:1
+#, c-format
+msgid ""
+"\n"
+" Copyright (C) 2001-2002 by MandrakeSoft \n"
+"     DUPONT Sebastien (original version)\n"
+"     CHAUMETTE Damien <dchaumette@mandrakesoft.com>\n"
+"\n"
+" This program is free software; you can redistribute it and/or modify\n"
+" it under the terms of the GNU General Public License as published by\n"
+" the Free Software Foundation; either version 2, or (at your option)\n"
+" any later version.\n"
+"\n"
+" This program is distributed in the hope that it will be useful,\n"
+" but WITHOUT ANY WARRANTY; without even the implied warranty of\n"
+" MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n"
+" GNU General Public License for more details.\n"
+"\n"
+" You should have received a copy of the GNU General Public License\n"
+" along with this program; if not, write to the Free Software\n"
+" Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.\n"
+"\n"
+" Thanks:\n"
+"    -  pfm2afm:   \n"
+"\t by Ken Borgendale:\n"
+"\t    Convert a Windows .pfm  file to a .afm (Adobe Font Metrics)\n"
+"    -  type1inst:\n"
+"\t by James Macnicol: \n"
+"\t    type1inst generates files fonts.dir fonts.scale & Fontmap.\n"
+"    -  ttf2pt1:   \n"
+"\t  by Andrew Weeks, Frank Siegert, Thomas Henlich, Sergey Babkin  \n"
+"             Convert ttf font files to afm and pfb fonts\n"
+msgstr ""
+"\n"
+" Copyright (C) 2001-2002 MandrakeSoft \n"
+"\tDUPONT Sebastien (alkuperäinen versio) \n"
+"        CHAUMETTE Damien dchaumette@mandrakesoft.com\n"
+"\n"
+"Tämä ohjelma on ilmainen; voit levittää ja/tai muokata sitä Free\n"
+"Software Foundationin julkaiseman 'GNU General Public License'\n"
+"-lisenssin mukaisesti; joko lisenssin version 2 mukaisesti, tai\n"
+"(niin halutessasi) minkä tahansa uudemman version mukaisesti.\n"
+"\n"
+"Tämä ohjelma on julkaistu siinä toivossa, että se osoittautuisi\n"
+"hyödylliseksi, mutta ILMAN MINKÄÄNLAISTA TAKUUTA; ilman edes\n"
+"oletettua takuuta TUOTTEEN TOIMIVUUDESTA tai SOPIVUUDESTA \n"
+"TIETTYYN TEHTÄVÄÄN. Lisätietoja saat tutustumalla 'GNU General \n"
+"Public License' dokumentaatioon.\n"
+"\n"
+"Hakemasi ohjelman mukana kuuluu tulla kopio 'GNU General Public License'\n"
+"dokumentaatiosta; jos näin ei ole, kirjoita osoitteeseen:\n"
+"Free Software Foundation Inc., 59 Temple Place - Suite 330,\n"
+" Boston, MA 02111-1307, USA.\n"
+"\n"
+" Kiitoksia:\n"
+"    -  pfm2afm:   \n"
+"\t Ken Borgendale:\n"
+"\t    Muuttaa Windows .pfm tiedoston .afm muotoon (Adobe Font Metrics)\n"
+"    -  type1inst:\n"
+"\t James Macnicol: \n"
+"\t    type1inst luo tiedostot fonts.dir fonts.scale & Fontmap.\n"
+"    -  ttf2pt1:   \n"
+"\t   Andrew Weeks, Frank Siegert, Thomas Henlich, Sergey Babkin  \n"
+"             Muuttaa ttf fonttitiedostot afm ja pfb fonteiksi\n"
 
 #: ../../printer/main.pm:1
 #, c-format
@@ -15727,6 +15977,11 @@ msgstr "DHCP:n alueen alku"
 msgid "Unsafe"
 msgstr "Turvaton"
 
+#: ../../network/drakfirewall.pm:1
+#, fuzzy, c-format
+msgid "SSH server"
+msgstr "SSH-palvelin"
+
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid ", %s sectors"
@@ -15734,7 +15989,7 @@ msgstr ", %s sektoria"
 
 #: ../../help.pm:1 ../../install_any.pm:1 ../../interactive.pm:1
 #: ../../ugtk2.pm:1 ../../modules/interactive.pm:1
-#: ../../standalone/harddrake2:1
+#: ../../standalone/drakclock:1 ../../standalone/harddrake2:1
 #, c-format
 msgid "No"
 msgstr "Ei"
@@ -16305,6 +16560,11 @@ msgstr "Poista valittu kone"
 msgid "Network configuration"
 msgstr "Verkon asetukset"
 
+#: ../../standalone/harddrake2:1
+#, c-format
+msgid "/Autodetect _jaz drives"
+msgstr "/_Jaz asemien automaattitunnistus"
+
 #: ../../any.pm:1
 #, c-format
 msgid "No sharing"
@@ -16429,9 +16689,10 @@ msgstr ""
 #: ../../install_steps.pm:1 ../../diskdrake/dav.pm:1
 #: ../../diskdrake/hd_gtk.pm:1 ../../diskdrake/interactive.pm:1
 #: ../../diskdrake/smbnfs_gtk.pm:1 ../../interactive/http.pm:1
-#: ../../standalone/drakboot:1 ../../standalone/drakbug:1
+#: ../../standalone/drakauth:1 ../../standalone/drakboot:1
+#: ../../standalone/drakbug:1 ../../standalone/drakconnect:1
 #: ../../standalone/drakfloppy:1 ../../standalone/drakfont:1
-#: ../../standalone/draksplash:1
+#: ../../standalone/draksplash:1 ../../../move/move.pm:1
 #, c-format
 msgid "Error"
 msgstr "Virhe"
@@ -16476,6 +16737,11 @@ msgstr ""
 "Järjestelmäsi tukee usean näytön laitteistokokoonpanoa.\n"
 "Mitä haluat tehdä?"
 
+#: ../../partition_table.pm:1
+#, c-format
+msgid "mount failed: "
+msgstr "liittäminen epäonnistui: "
+
 #: ../../steps.pm:1
 #, c-format
 msgid "Configure services"
@@ -16485,11 +16751,6 @@ msgstr "Palvelujen asettaminen"
 #, c-format
 msgid "Broadcast Address:"
 msgstr "Lähetysosoite:"
-
-#: ../../partition_table.pm:1
-#, c-format
-msgid "mount failed: "
-msgstr "liittäminen epäonnistui: "
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -16507,17 +16768,17 @@ msgstr ""
 msgid "Image"
 msgstr "Kuva"
 
+#: ../../services.pm:1
+#, c-format
+msgid "Remote Administration"
+msgstr "Etähallinta"
+
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Failed to add the printer \"%s\" to Star Office/OpenOffice.org/GIMP."
 msgstr ""
 "Tulostimen \"%s\" lisääminen Star Office/OpenOffice.org/GIMP käyttöön "
 "epäonnistui."
-
-#: ../../services.pm:1
-#, c-format
-msgid "Remote Administration"
-msgstr "Etähallinta"
 
 #: ../../modules.pm:1
 #, c-format
@@ -16575,7 +16836,7 @@ msgstr "Heinäkuu"
 msgid "Prints into %s"
 msgstr "Tulostetaan kohteeseen %s"
 
-#: ../../install_steps_interactive.pm:1
+#: ../../install_steps_interactive.pm:1 ../../../move/move.pm:1
 #, c-format
 msgid "An error occurred"
 msgstr "Tapahtui virhe"
@@ -16791,7 +17052,7 @@ msgstr ", monitoimilaite"
 msgid "Laos"
 msgstr "Laos"
 
-#: ../../share/advertising/04-configuration.pl:1
+#: ../advertising/04-configuration.pl:1
 #, c-format
 msgid ""
 "Mandrake Linux 9.2 provides you with the Mandrake Control Center, a powerful "
@@ -16976,12 +17237,6 @@ msgstr "Pitää ensin luoda /etc/dhcpd.conf!"
 msgid "Is FPU present"
 msgstr "Löytyykö FPU"
 
-#: ../../standalone/scannerdrake:1
-#, c-format
-msgid "There are no scanners found which are available on your system.\n"
-msgstr ""
-"Yhtäkään kuvanlukijaa ei löydetty, joka on kytketty suoraan tietokoneesi.\n"
-
 #: ../../services.pm:1
 #, c-format
 msgid ""
@@ -16990,6 +17245,12 @@ msgid ""
 msgstr ""
 "Ei lisätietoja\n"
 "tälle palvelulle, valitan."
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "There are no scanners found which are available on your system.\n"
+msgstr ""
+"Yhtäkään kuvanlukijaa ei löydetty, joka on kytketty suoraan tietokoneesi.\n"
 
 #: ../../standalone/drakTermServ:1
 #, c-format
@@ -17030,21 +17291,6 @@ msgstr "DVDRAM laite"
 #, c-format
 msgid "if set to yes, report unowned files."
 msgstr "jos asetettu, raportoidaan omistamattomat tiedostot."
-
-#: ../../standalone/harddrake2:1
-#, c-format
-msgid ""
-"This is HardDrake, a Mandrake hardware configuration tool.\n"
-"<span foreground=\"royalblue3\">Version:</span> %s\n"
-"<span foreground=\"royalblue3\">Author:</span> Thierry Vignaud &lt;tvignaud"
-"\\@mandrakesoft.com&gt;\n"
-"\n"
-msgstr ""
-"Tämä on HardDrake, Mandraken laitteistonasetustyökalu.\n"
-"<span foreground=\"royalblue3\">Versio:</span> %s\n"
-"<span foreground=\"royalblue3\">Tekijä:</span> Thierry Vignaud &lt;tvignaud"
-"\\@mandrakesoft.com&gt;\n"
-"\n"
 
 #: ../../install_interactive.pm:1
 #, c-format
@@ -17127,10 +17373,27 @@ msgstr "Vietnam"
 msgid "/_Fields description"
 msgstr "/_Kenttien kuvaus"
 
-#: ../../share/advertising/10-security.pl:1
+#: ../advertising/10-security.pl:1
 #, c-format
 msgid "Optimize your security by using Mandrake Linux"
 msgstr "Optimoi turvallisuutesi"
+
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"\n"
+"\n"
+" Thanks:\n"
+"\t- LTSP Project http://www.ltsp.org\n"
+"\t- Michael Brown <mbrown@fensystems.co.uk>\n"
+"\n"
+msgstr ""
+"\n"
+"\n"
+" Kiitokset:\n"
+"\t- LTSP Projekti http://www.ltsp.org\n"
+"\t- Michael Brown <mbrown@fensystems.co.uk>\n"
+"\n"
 
 #: ../../install_steps_gtk.pm:1 ../../interactive.pm:1 ../../ugtk2.pm:1
 #: ../../Xconfig/resolution_and_depth.pm:1 ../../diskdrake/hd_gtk.pm:1
@@ -17238,7 +17501,7 @@ msgstr ""
 msgid "mkinitrd optional arguments"
 msgstr "mkinitrd vapaaehtoiset parametrit"
 
-#: ../../share/advertising/03-software.pl:1
+#: ../advertising/03-software.pl:1
 #, c-format
 msgid ""
 "Surf the Web with Mozilla or Konqueror, read your mail with Evolution or "
@@ -17436,6 +17699,11 @@ msgstr "Käynnistetään CUPS uudelleen..."
 #, c-format
 msgid "Printing/Scanning/Photo Cards on \"%s\""
 msgstr "Tulostus/Skannaus/Kuva-Kortit laitteella \"%s\""
+
+#: ../../../move/move.pm:1
+#, c-format
+msgid "Continue without USB key"
+msgstr ""
 
 #: ../../install_steps.pm:1
 #, c-format
@@ -17900,7 +18168,7 @@ msgstr "Salli X Window -yhteydet"
 msgid "Hardware probing in progress"
 msgstr "Laitteiston tunnistaminen käynnissä..."
 
-#: ../../standalone/drakgw:1
+#: ../../network/shorewall.pm:1 ../../standalone/drakgw:1
 #, c-format
 msgid "Net Device"
 msgstr "Verkkolaite"
@@ -17966,6 +18234,11 @@ msgid ""
 msgstr ""
 "paketti 'ImageMagick' vaaditaan jotta kaikki toimisi oikein.\n"
 "Paina \"Ok\" asentaaksesi 'ImageMagick\" tai \"Peruuta\" lopettaaksesi."
+
+#: ../../network/drakfirewall.pm:1
+#, fuzzy, c-format
+msgid "Telnet server"
+msgstr "X-palvelin"
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -18233,7 +18506,7 @@ msgstr "Järjestelmäloki"
 msgid "Can't create catalog!"
 msgstr "En voi luoda luetteloa!"
 
-#: ../../share/advertising/11-mnf.pl:1
+#: ../advertising/11-mnf.pl:1
 #, c-format
 msgid ""
 "Complete your security setup with this very easy-to-use software which "
@@ -18291,6 +18564,11 @@ msgstr "Internetyhteyden asetus"
 #, c-format
 msgid "Add the name as an exception to the handling of password aging by msec."
 msgstr "Lisää nimi jota msec:n salasanojen vanheneminen ei koske."
+
+#: ../../network/isdn.pm:1
+#, fuzzy, c-format
+msgid "USB"
+msgstr "LSB"
 
 #: ../../standalone/drakxtv:1
 #, c-format
@@ -18352,6 +18630,11 @@ msgstr "Työryhmä"
 #, c-format
 msgid "Printer host name or IP"
 msgstr "Tulostinlaitteen verkkonimi tai osoite"
+
+#: ../../standalone/drakconnect:1
+#, fuzzy, c-format
+msgid "down"
+msgstr "valmis"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -18810,6 +19093,11 @@ msgstr "Lisää alkio"
 msgid "The printers on this machine are available to other computers"
 msgstr "Tulostimet tässä koneessa ovat muiden koneiden käytettävissä"
 
+#: ../../lang.pm:1
+#, fuzzy, c-format
+msgid "China (Hong Kong)"
+msgstr "Hong Kong"
+
 #: ../../standalone/drakautoinst:1
 #, c-format
 msgid "I can't find needed image file `%s'."
@@ -18868,7 +19156,7 @@ msgstr "Pakettia ei asennettu"
 msgid "American Samoa"
 msgstr "Amerikan Samoa"
 
-#: ../../share/advertising/12-mdkexpert.pl:1
+#: ../advertising/12-mdkexpert.pl:1
 #, c-format
 msgid "Become a MandrakeExpert"
 msgstr "Tule MandrakeExpert asiantuntijaksi"
@@ -18992,6 +19280,11 @@ msgstr "Italia"
 msgid "Cayman Islands"
 msgstr "Caymansaaret"
 
+#: ../../fs.pm:1 ../../partition_table.pm:1
+#, c-format
+msgid "error unmounting %s: %s"
+msgstr "virhe irrotettaessa %s: %s"
+
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Name of printer"
@@ -19001,11 +19294,6 @@ msgstr "Tulostimen nimi"
 #, c-format
 msgid "disable"
 msgstr "poista käytöstä"
-
-#: ../../fs.pm:1 ../../partition_table.pm:1
-#, c-format
-msgid "error unmounting %s: %s"
-msgstr "virhe irrotettaessa %s: %s"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -19112,7 +19400,7 @@ msgstr "Tiivis"
 msgid "Detected model: %s %s"
 msgstr "Tunnistettu malli: %s %s"
 
-#: ../../share/advertising/03-software.pl:1
+#: ../advertising/03-software.pl:1
 #, c-format
 msgid "MandrakeSoft has selected the best software for you"
 msgstr "MandrakeSoft on valinnut parhaat ohjelmat sinulle"
@@ -19252,6 +19540,11 @@ msgstr "Graafinen tila käynnistyksessä"
 msgid " adsl"
 msgstr " adsl"
 
+#: ../../raid.pm:1
+#, c-format
+msgid "Not enough partitions for RAID level %d\n"
+msgstr "Ei riittävästi osioita RAID tasolle %d\n"
+
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "format of floppies supported by the drive"
@@ -19261,11 +19554,6 @@ msgstr "Levykkeiden eri muodot joita asema tukee"
 #, c-format
 msgid "Firmware copy failed, file %s not found"
 msgstr "Firmwaren kopiointi epäonnistui, tiedosto %s ei löytynyt"
-
-#: ../../raid.pm:1
-#, c-format
-msgid "Not enough partitions for RAID level %d\n"
-msgstr "Ei riittävästi osioita RAID tasolle %d\n"
 
 #: ../../standalone/drakTermServ:1
 #, c-format
@@ -19397,7 +19685,7 @@ msgstr ""
 "CD- tai DVD-kuvaa ei löydy, ole hyvä ja kopioi asennusohjelma ja rpm-"
 "tiedostot."
 
-#: ../../share/advertising/04-configuration.pl:1
+#: ../advertising/04-configuration.pl:1
 #, c-format
 msgid "Mandrake's multipurpose configuration tool"
 msgstr "Mandraken monitoiminen asetustyökalu"
@@ -19427,7 +19715,7 @@ msgstr "Levy"
 msgid "Enter a printer device URI"
 msgstr "Syötä tulostinlaitteen osoite (URI)"
 
-#: ../../share/advertising/01-thanks.pl:1
+#: ../advertising/01-thanks.pl:1
 #, c-format
 msgid ""
 "The success of MandrakeSoft is based upon the principle of Free Software. "
@@ -20012,7 +20300,7 @@ msgstr "Kortin malli:"
 msgid "Thin Client"
 msgstr "Kevyt asiakas"
 
-#: ../../share/advertising/01-thanks.pl:1
+#: ../advertising/01-thanks.pl:1
 #, c-format
 msgid "Thank you for choosing Mandrake Linux 9.2"
 msgstr "Kiitos, että olet valinnut Mandrake Linux 9.2:n"
@@ -20129,6 +20417,13 @@ msgstr "Hae Windowsin kirjasimet"
 msgid "Mouse Systems"
 msgstr "Mouse Systems"
 
+#: ../../standalone/drakclock:1
+#, c-format
+msgid ""
+"Your computer can synchronize its clock\n"
+" with a remote time server using NTP"
+msgstr ""
+
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Iranian"
@@ -20154,7 +20449,7 @@ msgstr "Lisää palvelin"
 msgid "Remote printer name"
 msgstr "Etätulostimen nimi"
 
-#: ../../share/advertising/10-security.pl:1
+#: ../advertising/10-security.pl:1
 #, c-format
 msgid ""
 "MandrakeSoft has designed exclusive tools to create the most secured Linux "
@@ -20312,6 +20607,11 @@ msgstr "Microsoft Explorer"
 msgid "Uninstall Fonts"
 msgstr "Poista kirjasimia"
 
+#: ../../../move/move.pm:1
+#, fuzzy, c-format
+msgid "Please wait, detecting and configuring devices..."
+msgstr "Odota hetki, asetetaan turvatasoa..."
+
 #: ../../keyboard.pm:1
 #, c-format
 msgid "German (no dead keys)"
@@ -20338,11 +20638,6 @@ msgid ""
 "You can export using NFS or Samba. Please select which you'd like to use."
 msgstr "Voit jakaa sekä NFS:llä että Samballa. Valitse kumpaa haluat käyttää."
 
-#: ../../help.pm:1 ../../install_steps_interactive.pm:1
-#, c-format
-msgid "Reboot"
-msgstr "Käynnistä uudelleen"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Gambia"
@@ -20352,6 +20647,12 @@ msgstr "Gambia"
 #, c-format
 msgid "Mandrake Control Center"
 msgstr "Mandraken Ohjauskeskus"
+
+#: ../../help.pm:1 ../../install_steps_interactive.pm:1
+#: ../../../move/move.pm:1
+#, c-format
+msgid "Reboot"
+msgstr "Käynnistä uudelleen"
 
 #: ../../printer/main.pm:1
 #, c-format
@@ -20387,6 +20688,11 @@ msgstr ""
 #, c-format
 msgid "Remember this password"
 msgstr "Muista tämä salasana"
+
+#: ../../install_steps_gtk.pm:1
+#, c-format
+msgid "due to unsatisfied %s"
+msgstr ""
 
 #: ../../standalone/drakgw:1
 #, c-format
@@ -20447,6 +20753,11 @@ msgstr "Papua Uusi-Guinea"
 #, c-format
 msgid "Multi-function device on a parallel port"
 msgstr "Monikäyttölaite rinnakkaisportissa "
+
+#: ../../../move/tree/mdk_totem:1
+#, fuzzy, c-format
+msgid "Busy files"
+msgstr "Varmuuskopioi järjestelmätiedostot"
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -20510,6 +20821,21 @@ msgstr ""
 #, c-format
 msgid "DHCP Client"
 msgstr "DHCP-asiakas"
+
+#: ../../standalone/harddrake2:1
+#, c-format
+msgid ""
+"This is HardDrake, a Mandrake hardware configuration tool.\n"
+"<span foreground=\"royalblue3\">Version:</span> %s\n"
+"<span foreground=\"royalblue3\">Author:</span> Thierry Vignaud &lt;"
+"tvignaud@mandrakesoft.com&gt;\n"
+"\n"
+msgstr ""
+"Tämä on HardDrake, Mandraken laitteistonasetustyökalu.\n"
+"<span foreground=\"royalblue3\">Versio:</span> %s\n"
+"<span foreground=\"royalblue3\">Tekijä:</span> Thierry Vignaud &lt;"
+"tvignaud@mandrakesoft.com&gt;\n"
+"\n"
 
 #: ../../standalone/drakgw:1
 #, c-format
@@ -20714,78 +21040,13 @@ msgstr "Älä siirrä tulostimia"
 msgid "Delay before booting the default image"
 msgstr "Viive ennen oletusjärjestelmän käynnistystä"
 
-#: ../../standalone/drakfont:1
-#, c-format
-msgid ""
-"\n"
-" Copyright (C) 2001-2002 by MandrakeSoft \n"
-"     DUPONT Sebastien (original version)\n"
-"     CHAUMETTE Damien <dchaumette\\@mandrakesoft.com>\n"
-"\n"
-" This program is free software; you can redistribute it and/or modify\n"
-" it under the terms of the GNU General Public License as published by\n"
-" the Free Software Foundation; either version 2, or (at your option)\n"
-" any later version.\n"
-"\n"
-" This program is distributed in the hope that it will be useful,\n"
-" but WITHOUT ANY WARRANTY; without even the implied warranty of\n"
-" MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n"
-" GNU General Public License for more details.\n"
-"\n"
-" You should have received a copy of the GNU General Public License\n"
-" along with this program; if not, write to the Free Software\n"
-" Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.\n"
-"\n"
-" Thanks:\n"
-"    -  pfm2afm:   \n"
-"\t by Ken Borgendale:\n"
-"\t    Convert a Windows .pfm  file to a .afm (Adobe Font Metrics)\n"
-"    -  type1inst:\n"
-"\t by James Macnicol: \n"
-"\t    type1inst generates files fonts.dir fonts.scale & Fontmap.\n"
-"    -  ttf2pt1:   \n"
-"\t  by Andrew Weeks, Frank Siegert, Thomas Henlich, Sergey Babkin  \n"
-"             Convert ttf font files to afm and pfb fonts\n"
-msgstr ""
-"\n"
-" Copyright (C) 2001-2002 MandrakeSoft \n"
-"\tDUPONT Sebastien (alkuperäinen versio) \n"
-"        CHAUMETTE Damien dchaumette\\@mandrakesoft.com\n"
-"\n"
-"Tämä ohjelma on ilmainen; voit levittää ja/tai muokata sitä Free\n"
-"Software Foundationin julkaiseman 'GNU General Public License'\n"
-"-lisenssin mukaisesti; joko lisenssin version 2 mukaisesti, tai\n"
-"(niin halutessasi) minkä tahansa uudemman version mukaisesti.\n"
-"\n"
-"Tämä ohjelma on julkaistu siinä toivossa, että se osoittautuisi\n"
-"hyödylliseksi, mutta ILMAN MINKÄÄNLAISTA TAKUUTA; ilman edes\n"
-"oletettua takuuta TUOTTEEN TOIMIVUUDESTA tai SOPIVUUDESTA \n"
-"TIETTYYN TEHTÄVÄÄN. Lisätietoja saat tutustumalla 'GNU General \n"
-"Public License' dokumentaatioon.\n"
-"\n"
-"Hakemasi ohjelman mukana kuuluu tulla kopio 'GNU General Public License'\n"
-"dokumentaatiosta; jos näin ei ole, kirjoita osoitteeseen:\n"
-"Free Software Foundation Inc., 59 Temple Place - Suite 330,\n"
-" Boston, MA 02111-1307, USA.\n"
-"\n"
-" Kiitoksia:\n"
-"    -  pfm2afm:   \n"
-"\t Ken Borgendale:\n"
-"\t    Muuttaa Windows .pfm tiedoston .afm muotoon (Adobe Font Metrics)\n"
-"    -  type1inst:\n"
-"\t James Macnicol: \n"
-"\t    type1inst luo tiedostot fonts.dir fonts.scale & Fontmap.\n"
-"    -  ttf2pt1:   \n"
-"\t   Andrew Weeks, Frank Siegert, Thomas Henlich, Sergey Babkin  \n"
-"             Muuttaa ttf fonttitiedostot afm ja pfb fonteiksi\n"
-
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "Use Hard Disk to backup"
 msgstr "Käytä kiintolevyä varmuuskopiointiin"
 
 #: ../../help.pm:1 ../../install_steps_gtk.pm:1 ../../standalone/drakbackup:1
-#: ../../standalone/drakboot:1 ../../standalone/drakgw:1
+#: ../../standalone/drakboot:1
 #, c-format
 msgid "Configure"
 msgstr "Aseta"
@@ -20853,7 +21114,7 @@ msgstr ""
 "Joko cdrom-asemasi tai levy on viallinen.\n"
 "Tarkista cd-rom Linux-koneessa käyttämällä \"rpm -qpl Mandrake/RPMS/*.rpm\"\n"
 
-#: ../../share/advertising/06-development.pl:1
+#: ../advertising/06-development.pl:1
 #, c-format
 msgid "Mandrake Linux 9.2: the ultimate development platform"
 msgstr "Mandrake Linux 9.2 on ratkaiseva kehitysalusta"
@@ -20940,6 +21201,11 @@ msgstr "lopullinen tarkkuus"
 msgid "Services"
 msgstr "Palvelut"
 
+#: ../../../move/move.pm:1
+#, fuzzy, c-format
+msgid "Auto configuration"
+msgstr "Mukautettu asetus"
+
 #: ../../Xconfig/card.pm:1
 #, c-format
 msgid "4 MB"
@@ -20978,9 +21244,10 @@ msgid "Internet station"
 msgstr "Internetkone"
 
 #: ../../share/compssUsers:999
+#, fuzzy
 msgid ""
-"Set of tools to read and send mail and news (pine, mutt, tin..) and to "
-"browse the Web"
+"Set of tools to read and send mail and news (mutt, tin..) and to browse the "
+"Web"
 msgstr ""
 "Valikoima työkaluja sähköpostin ja uutisryhmien lukemiseen (pine, mutt, "
 "tin...) sekä Internetissä surffailuun"
@@ -21123,6 +21390,41 @@ msgstr ""
 "Valikoima työkaluja sähköpostin ja uutisryhmien lukemiseen sekä Internetissä "
 "surffailuun"
 
+#~ msgid "The setup has already been done, and it's currently enabled."
+#~ msgstr "Asetukset on jo tehty ja ne ovat käytössä."
+
+#~ msgid "Logs"
+#~ msgstr "Lokit"
+
+#~ msgid "The setup has already been done, but it's currently disabled."
+#~ msgstr ""
+#~ "Asetukset on jo tehty, mutta ne ovat tällä hetkellä poistettu käytöstä."
+
+#~ msgid "Profile "
+#~ msgstr "Profiili: "
+
+#~ msgid ""
+#~ "Welcome to the Internet Connection Sharing utility!\n"
+#~ "\n"
+#~ "%s\n"
+#~ "\n"
+#~ "Click on Configure to launch the setup wizard."
+#~ msgstr ""
+#~ "Tervetuloa Internetyhteyden jakamisen apuohjelmaan!\n"
+#~ "\n"
+#~ "%s\n"
+#~ "\n"
+#~ "Paina Aseta käynnistääksesi asennusvelhon."
+
+#~ msgid "Internet Connection Sharing configuration"
+#~ msgstr "Internetyhteyden jakamisen asetukset"
+
+#~ msgid "No Internet Connection Sharing has ever been configured."
+#~ msgstr "Internetyhteyden jakamista ei ole koskaan asetettu."
+
+#~ msgid "when checked, owner and group won't be changed"
+#~ msgstr "kun valittu, omistajaa ja ryhmää ei muuteta"
+
 #~ msgid ""
 #~ "XawTV isn't installed!\n"
 #~ "\n"
@@ -21130,7 +21432,7 @@ msgstr ""
 #~ "If you do have a TV card but DrakX has neither detected it (no bttv nor "
 #~ "saa7134\n"
 #~ "module in \"/etc/modules\") nor installed xawtv, please send the\n"
-#~ "results of \"lspcidrake -v -f\" to \"install\\@mandrakesoft.com\"\n"
+#~ "results of \"lspcidrake -v -f\" to \"install@mandrakesoft.com\"\n"
 #~ "with subject \"undetected TV card\".\n"
 #~ "\n"
 #~ "\n"
@@ -21141,7 +21443,7 @@ msgstr ""
 #~ "\n"
 #~ "Jos sinulla on TV-kortti, mutta DrakX ei tunnistanut sitä (ei bttv eikä \n"
 #~ "saa713 moduulia tiedostossa \"/etc/modules\") eikä asentanut xawtv:tä, \n"
-#~ "lähetä \"lspcidrake -v -f\" tuloste osoitteeseen \"install\\@mandrakesoft."
+#~ "lähetä \"lspcidrake -v -f\" tuloste osoitteeseen \"install@mandrakesoft."
 #~ "com\n"
 #~ "otsikolla \"undetected TV card\".\n"
 #~ "\n"
@@ -21425,11 +21727,11 @@ msgstr ""
 #~ msgstr "Syötä verkkoaseman nimi tai IP."
 
 #~ msgid ""
-#~ " Copyright (C) 2001-2002 MandrakeSoft by DUPONT Sebastien <dupont_s"
-#~ "\\@epita.fr>"
+#~ " Copyright (C) 2001-2002 MandrakeSoft by DUPONT Sebastien <dupont_s@epita."
+#~ "fr>"
 #~ msgstr ""
 #~ " Copyright (C) 2001-2002 MandrakeSoft.\n"
-#~ " Tekijä: DUPONT Sebastien  <dupont_s\\@epita.fr>"
+#~ " Tekijä: DUPONT Sebastien  <dupont_s@epita.fr>"
 
 #~ msgid ""
 #~ "Options Description:\n"
@@ -21469,10 +21771,10 @@ msgstr ""
 #~ "olla varovainen eikä muokata varmistustiedostoja käsin.\n"
 
 #~ msgid ""
-#~ " updates 2002 MandrakeSoft by Stew Benedict <sbenedict\\@mandrakesoft.com>"
+#~ " updates 2002 MandrakeSoft by Stew Benedict <sbenedict@mandrakesoft.com>"
 #~ msgstr ""
 #~ " Päivitykset 2002 MandrakeSoft\n"
-#~ " Tekijä: Stew Benedict <sbenedict\\@mandrakesoft.com>"
+#~ " Tekijä: Stew Benedict <sbenedict@mandrakesoft.com>"
 
 #~ msgid ""
 #~ "Arguments: (arg, expr='*.*', dev='tty12')\n"

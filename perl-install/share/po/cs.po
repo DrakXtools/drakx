@@ -1,21 +1,19 @@
 # Translation of DrakX-cs.po to Czech
-# Czech messages for drakbootdisk.
 # Copyright (C) 1999,2003 Free Software Foundation, Inc.
-# Radek Vybiral <Radek.Vybiral@vsb.cz>, 2000, 2001.
-# Michal Bukovjan <michal.bukovjan@openone.cz>, 2002
-# Michal Bukovjan <bukm@centrum.cz>, 2003
+# Radek Vybiral <Radek.Vybiral@vsb.cz>, 2000, 2001-2003.
+# Michal Bukovjan <bukm@centrum.cz>, 2002-2003.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX-cs\n"
-"POT-Creation-Date: 2003-09-16 13:45+0200\n"
-"PO-Revision-Date: 2003-09-18 21:42GMT+0100\n"
-"Last-Translator: Radek Vybíral <Radek.Vybiral@vsb.cz>\n"
+"POT-Creation-Date: 2003-12-03 03:09+0100\n"
+"PO-Revision-Date: 2003-11-11 23:19GMT\n"
+"Last-Translator: Michal Bukovjan <bukm@centrum.cz>\n"
 "Language-Team: Czech <cs@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 0.9.6\n"
+"X-Generator: KBabel 1.0.2\n"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -286,11 +284,6 @@ msgstr "Nastavení CUPS"
 msgid "Total progress"
 msgstr "Celkový průběh"
 
-#: ../../lang.pm:1
-#, c-format
-msgid "Hong Kong"
-msgstr "Hong Kong"
-
 #: ../../install_interactive.pm:1
 #, c-format
 msgid "Not enough free space to allocate new partitions"
@@ -365,6 +358,24 @@ msgstr "Upravit vybraný počítač"
 msgid "No CD device defined!"
 msgstr "Není definováno žádné CD zařízení!"
 
+#: ../../network/shorewall.pm:1
+#, fuzzy, c-format
+msgid ""
+"Please enter the name of the interface connected to the "
+"internet.              \n"
+"                \n"
+"Examples:\n"
+"                ppp+ for modem or DSL connections, \n"
+"                eth0, or eth1 for cable connection, \n"
+"                ippp+ for a isdn connection.\n"
+msgstr ""
+"Zadejte prosím název rozhraní, které je připojeno k Internetu.\n"
+"\n"
+"Příklady:\n"
+"\t\tppp+ pro modem nebo pro DSL připojení,\n"
+"\t\teth0 nebo eth1 pro připojení přes kabel,\n"
+"\t\tippp+ pro isdn připojení.\n"
+
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "\tUse .backupignore files\n"
@@ -436,15 +447,20 @@ msgstr "Změny provedeny, chcete restartovat službu dm ?"
 msgid "Swiss (French layout)"
 msgstr "Švýcarské (Francouzský styl)"
 
+#: ../../raid.pm:1
+#, c-format
+msgid "mkraid failed (maybe raidtools are missing?)"
+msgstr "mkraid neuspěl (je možné, že chybí raidtools?)"
+
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "August"
 msgstr "Srpen"
 
-#: ../../raid.pm:1
-#, c-format
-msgid "mkraid failed (maybe raidtools are missing?)"
-msgstr "mkraid neuspěl (je možné, že chybí raidtools?)"
+#: ../../network/drakfirewall.pm:1
+#, fuzzy, c-format
+msgid "FTP server"
+msgstr "NTP Server"
 
 #: ../../harddrake/data.pm:1
 #, c-format
@@ -524,11 +540,6 @@ msgstr "Našel jsem možný konflikt v současném nastavení LAN adresy pro %s!
 #, c-format
 msgid "Configuring..."
 msgstr "Nastavuji..."
-
-#: ../../standalone/drakgw:1
-#, c-format
-msgid "The setup has already been done, and it's currently enabled."
-msgstr "Nastavení již bylo provedeno, nyní je povoleno."
 
 #: ../../harddrake/v4l.pm:1
 #, c-format
@@ -665,6 +676,11 @@ msgstr " na serveru Novell \"%s\", tiskárna \"%s\""
 msgid "Printer Name"
 msgstr "Název tiskárny"
 
+#: ../../../move/move.pm:1
+#, c-format
+msgid "Setting up USB key"
+msgstr ""
+
 #: ../../standalone/drakfloppy:1
 #, c-format
 msgid "Remove a module"
@@ -722,15 +738,17 @@ msgstr ""
 msgid "if needed"
 msgstr "pokud je potřeba"
 
+#: ../../standalone/drakclock:1
+#, c-format
+msgid ""
+"We need to install ntp package\n"
+" to enable Network Time Protocol"
+msgstr ""
+
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "Restore Failed..."
 msgstr "Obnova selhala..."
-
-#: ../../standalone/harddrake2:1
-#, c-format
-msgid "/Autodetect _jazz drives"
-msgstr "/Automaticky detekovat _jazz disky"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -1077,11 +1095,6 @@ msgstr "\tNastavit limit pro místo na disku na %s MB\n"
 msgid "512 kB"
 msgstr "512 kB"
 
-#: ../../standalone/net_monitor:1
-#, c-format
-msgid "Logs"
-msgstr "Logy"
-
 #: ../../standalone/scannerdrake:1
 #, c-format
 msgid "(Note: Parallel ports cannot be auto-detected)"
@@ -1231,7 +1244,8 @@ msgstr "Poznámka"
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "You have not configured X. Are you sure you really want this?"
-msgstr "Nemáte nastaveno X. Opravdu je potřebujete?"
+msgstr ""
+"Nemáte nastaveno prostředí X. Chcete jej skutečně ponechat nenastavené?"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -1584,6 +1598,11 @@ msgstr "Litevské"
 msgid "monthly"
 msgstr "každý měsíc"
 
+#: ../../../move/move.pm:1
+#, fuzzy, c-format
+msgid "Retry"
+msgstr "Obnovit"
+
 #: ../../standalone/drakfloppy:1
 #, c-format
 msgid "Module name"
@@ -1628,6 +1647,11 @@ msgstr "Použít Unicode jako výchozí"
 #, c-format
 msgid "the module of the GNU/Linux kernel that handles the device"
 msgstr "modul jádra systému GNU/Linux, který ovládá toto zařízení"
+
+#: ../../standalone/drakclock:1
+#, fuzzy, c-format
+msgid "Is your hardware clock set to GMT?"
+msgstr "Hardwarové hodiny nastaveny na GMT"
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -1674,6 +1698,11 @@ msgstr "Nelze spustit aktualizaci na běžící systém !!!\n"
 msgid "Name: "
 msgstr "Jméno: "
 
+#: ../../standalone/drakconnect:1
+#, c-format
+msgid "up"
+msgstr ""
+
 #: ../../Xconfig/resolution_and_depth.pm:1
 #, c-format
 msgid "16 million colors (24 bits)"
@@ -1684,7 +1713,7 @@ msgstr "16 miliónů barev (24 bitů)"
 msgid "Allow all users"
 msgstr "Povolit všem uživatelům"
 
-#: ../../share/advertising/08-store.pl:1
+#: ../advertising/08-store.pl:1
 #, c-format
 msgid "The official MandrakeSoft Store"
 msgstr "Oficiální obchod společnosti MandrakeSoft"
@@ -1718,15 +1747,15 @@ msgstr "Uživatel"
 msgid "Do new backup before restore (only for incremental backups.)"
 msgstr "Provést novou zálohu před obnovou (pouze pro přírůstkovou zálohu)"
 
-#: ../../standalone/harddrake2:1
-#, c-format
-msgid "Name"
-msgstr "Název"
-
 #: ../../raid.pm:1
 #, c-format
 msgid "mkraid failed"
 msgstr "mkraid neuspěl"
+
+#: ../../standalone/harddrake2:1
+#, c-format
+msgid "Name"
+msgstr "Název"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -1947,6 +1976,23 @@ msgstr "Povoluji servery..."
 #, c-format
 msgid "Printing test page(s)..."
 msgstr "Tisknu testovací stránku(y)..."
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid ""
+"Transfer successful\n"
+"You may want to verify you can login to the server with:\n"
+"\n"
+"ssh -i %s %s@%s\n"
+"\n"
+"without being prompted for a password."
+msgstr ""
+"Přenos úspěšný!\n"
+"Možná budete chtít zkontrolovat, zda se můžete přihlásit na server:\n"
+"\n"
+"ssh -i %s %s@%s\n"
+"\n"
+"bez dotazu na heslo."
 
 #: ../../fsedit.pm:1
 #, c-format
@@ -2943,6 +2989,11 @@ msgstr ""
 msgid "Can't add a partition to _formatted_ RAID md%d"
 msgstr "Nemůžu přidat oddíl do _naformátovaného_ RAID md%d"
 
+#: ../../standalone/drakclock:1
+#, fuzzy, c-format
+msgid "Network Time Protocol"
+msgstr "Síťové rozhraní"
+
 #: ../../Xconfig/card.pm:1
 #, c-format
 msgid ""
@@ -3178,7 +3229,7 @@ msgstr "Palau"
 msgid "level"
 msgstr "úroveň"
 
-#: ../../share/advertising/13-mdkexpert_corporate.pl:1
+#: ../advertising/13-mdkexpert_corporate.pl:1
 #, c-format
 msgid ""
 "All incidents will be followed up by a single qualified MandrakeSoft "
@@ -3573,7 +3624,7 @@ msgstr ""
 msgid "Bad package"
 msgstr "Špatný balíček"
 
-#: ../../share/advertising/07-server.pl:1
+#: ../advertising/07-server.pl:1
 #, c-format
 msgid ""
 "Transform your computer into a powerful Linux server: Web server, mail, "
@@ -3843,7 +3894,7 @@ msgstr "Dveře dokořán"
 msgid "Module options:"
 msgstr "Volby modulu:"
 
-#: ../../share/advertising/11-mnf.pl:1
+#: ../advertising/11-mnf.pl:1
 #, c-format
 msgid "Secure your networks with the Multi Network Firewall"
 msgstr "Zabezpečte vaše sítě s produktem Multi Network Firewall"
@@ -3923,6 +3974,11 @@ msgstr "Myš"
 #, c-format
 msgid "not enough room in /boot"
 msgstr "není dost místa v adresáři /boot"
+
+#: ../../install_steps_gtk.pm:1
+#, c-format
+msgid "trying to promote %s"
+msgstr ""
 
 #: ../../lang.pm:1
 #, c-format
@@ -4073,6 +4129,11 @@ msgstr ""
 msgid "Saudi Arabia"
 msgstr "Saudská Arábie"
 
+#: ../../services.pm:1
+#, c-format
+msgid "Internet"
+msgstr "Internet"
+
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid "Continue anyway?"
@@ -4092,11 +4153,6 @@ msgstr ""
 #, c-format
 msgid "Printer"
 msgstr "Tiskárna"
-
-#: ../../services.pm:1
-#, c-format
-msgid "Internet"
-msgstr "Internet"
 
 #: ../../standalone/service_harddrake:1
 #, c-format
@@ -4172,6 +4228,11 @@ msgstr "Název přípojného bodu může obsahovat pouze písmena a číslice"
 #, c-format
 msgid "Restarting printing system..."
 msgstr "Restartuji tiskový systém ..."
+
+#: ../../../move/tree/mdk_totem:1
+#, c-format
+msgid "You can only run with no CDROM support"
+msgstr ""
 
 #: ../../modules/interactive.pm:1
 #, c-format
@@ -4409,15 +4470,15 @@ msgstr "ISA / PCMCIA"
 msgid "About"
 msgstr "O aplikaci"
 
-#: ../../network/network.pm:1
-#, c-format
-msgid "Proxies configuration"
-msgstr "Nastavení proxy"
-
 #: ../../mouse.pm:1
 #, c-format
 msgid "GlidePoint"
 msgstr "GlidePoint"
+
+#: ../../network/network.pm:1
+#, c-format
+msgid "Proxies configuration"
+msgstr "Nastavení proxy"
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -4570,6 +4631,11 @@ msgstr "Přípojné body (mount points) musí začínat '/'"
 msgid "Choose your CD/DVD device"
 msgstr "Vyberte CD/DVD zařízení"
 
+#: ../../network/drakfirewall.pm:1
+#, fuzzy, c-format
+msgid "CUPS server"
+msgstr "DNS server"
+
 #: ../../standalone/logdrake:1
 #, c-format
 msgid "Postfix Mail Server"
@@ -4585,7 +4651,7 @@ msgstr "Konec bez uložení"
 msgid "Yemen"
 msgstr "Jemen"
 
-#: ../../share/advertising/11-mnf.pl:1
+#: ../advertising/11-mnf.pl:1
 #, c-format
 msgid "This product is available on the MandrakeStore Web site."
 msgstr "Tento produkt je k dispozici na webových stránkách MandrakeStore."
@@ -4594,6 +4660,31 @@ msgstr "Tento produkt je k dispozici na webových stránkách MandrakeStore."
 #, c-format
 msgid "=> There are many things to choose from (%s).\n"
 msgstr "=> Je zde více voleb, ze kterých je možné si vybrat (%s).\n"
+
+#: ../../standalone/drakclock:1
+#, c-format
+msgid "GMT - DrakClock"
+msgstr ""
+
+#: ../../../move/move.pm:1
+#, c-format
+msgid ""
+"An error occurred:\n"
+"\n"
+"\n"
+"%s\n"
+"\n"
+"This may come from corrupted system configuration files\n"
+"on the USB key, in this case removing them and then\n"
+"rebooting Mandrake Move would fix the problem. To do\n"
+"so, click on the corresponding button.\n"
+"\n"
+"\n"
+"You may also want to reboot and remove the USB key, or\n"
+"examine its contents under another OS, or even have\n"
+"a look at log files in console #3 and #4 to try to\n"
+"guess what's happening."
+msgstr ""
 
 #: ../../steps.pm:1
 #, c-format
@@ -4706,8 +4797,8 @@ msgid ""
 "Modifying the fields below will override this configuration."
 msgstr ""
 "VAROVÁNÍ: Toto zařízení již bylo nastaveno pro připojení k Internetu.\n"
-"Klepněte na Ok pro zachování nastavení.\n"
-"Modifikace následujících položek přepíše toto nastavení."
+"Pokud nic nezměníte, zachová se stávající nastavení zařízení.\n"
+"Úprava následujících položek přepíše toto nastavení."
 
 #: ../../any.pm:1
 #, c-format
@@ -4835,6 +4926,11 @@ msgstr "UserDrake"
 #, c-format
 msgid "Which partition do you want to use for Linux4Win?"
 msgstr "Který diskový oddíl chcete použít pro Linux4Win?"
+
+#: ../../install_steps_gtk.pm:1
+#, fuzzy, c-format
+msgid "due to missing %s"
+msgstr "chybí kdesu"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -5395,7 +5491,7 @@ msgstr ""
 msgid "Started on boot"
 msgstr "Spustit při startu"
 
-#: ../../share/advertising/12-mdkexpert.pl:1
+#: ../advertising/12-mdkexpert.pl:1
 #, c-format
 msgid ""
 "Join the MandrakeSoft support teams and the Linux Community online to share "
@@ -5617,8 +5713,8 @@ msgid ""
 "Insert a FAT formatted floppy in drive %s with %s in root directory and "
 "press %s"
 msgstr ""
-"Vložte naformátovanou disketu s FAT oddílem do %s s %s v kořenovém adresáři "
-"a stiskněte %s"
+"Vložte disketu formátovanou systémem FAT do disketové jednotky %s s %s v "
+"kořenovém adresáři a stiskněte %s"
 
 #: ../../lang.pm:1
 #, c-format
@@ -5730,11 +5826,6 @@ msgid ""
 msgstr ""
 "Zobrazit motiv\n"
 "na konzoli"
-
-#: ../../standalone/net_monitor:1
-#, c-format
-msgid "Statistics"
-msgstr "Statistiky"
 
 #: ../../printer/cups.pm:1
 #, c-format
@@ -6605,7 +6696,7 @@ msgstr ""
 "Ukládá a obnovuje 'stav entropie' na počítači, což je používáno pro\n"
 "kvalitnější generaci náhodných čísel."
 
-#: ../../share/advertising/07-server.pl:1
+#: ../advertising/07-server.pl:1
 #, c-format
 msgid "Turn your computer into a reliable server"
 msgstr "Vytvořte ze svého počítače spolehlivý server."
@@ -6620,6 +6711,11 @@ msgstr "Kontrolovat prázdná hesla v /etc/shadow"
 msgid " (driver %s)"
 msgstr " (ovladač %s)"
 
+#: ../../services.pm:1
+#, c-format
+msgid "Start when requested"
+msgstr "Spustit na žádost"
+
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid ""
@@ -6633,11 +6729,6 @@ msgstr ""
 #, c-format
 msgid "I don't know"
 msgstr "Nevím"
-
-#: ../../services.pm:1
-#, c-format
-msgid "Start when requested"
-msgstr "Spustit na žádost"
 
 #: ../../printer/main.pm:1
 #, c-format
@@ -6865,6 +6956,11 @@ msgstr ""
 "Skener %s musí být nastaven pomocí nástroje PrinterDrake.\n"
 "Spustit PrinterDrake lze z ovládacího centra Mandrake v sekci Hardware"
 
+#: ../../../move/move.pm:1
+#, fuzzy, c-format
+msgid "Key isn't writable"
+msgstr "Aplikace XawTV není nainstalovaná!"
+
 #: ../../lang.pm:1
 #, c-format
 msgid "Bangladesh"
@@ -6912,15 +7008,15 @@ msgstr ""
 msgid "Set the root umask."
 msgstr "Nastavuje umask pro uživatele root."
 
-#: ../../network/modem.pm:1 ../../standalone/drakconnect:1
-#, c-format
-msgid "Script-based"
-msgstr "Podle scénáře"
-
 #: ../../install_any.pm:1 ../../partition_table.pm:1
 #, c-format
 msgid "Error reading file %s"
 msgstr "Chyba při čtení souboru %s"
+
+#: ../../network/modem.pm:1 ../../standalone/drakconnect:1
+#, c-format
+msgid "Script-based"
+msgstr "Podle scénáře"
 
 #: ../../harddrake/v4l.pm:1
 #, c-format
@@ -7004,23 +7100,6 @@ msgstr ""
 #, c-format
 msgid "Domain Authentication Required"
 msgstr "Vyžadováno ověření Domény"
-
-#: ../../standalone/drakTermServ:1
-#, c-format
-msgid ""
-"\n"
-"\n"
-" Thanks:\n"
-"\t- LTSP Project http://www.ltsp.org\n"
-"\t- Michael Brown <mbrown\\@fensystems.co.uk>\n"
-"\n"
-msgstr ""
-"\n"
-"\n"
-" Poděkování:\n"
-"\t- LTSP Projekt http://www.ltsp.org\n"
-"\t- Michael Brown <mbrown\\@fensystems.co.uk>\n"
-"\n"
 
 #: ../../security/level.pm:1
 #, c-format
@@ -7754,15 +7833,15 @@ msgstr "Yaboot"
 msgid "Logitech CC Series with Wheel emulation"
 msgstr "Logitech série CC (sériová) s emulací kolečka"
 
-#: ../../standalone/drakboot:1
-#, c-format
-msgid "Splash selection"
-msgstr "Výběr zaváděcího obrázku"
-
 #: ../../partition_table.pm:1
 #, c-format
 msgid "Extended partition not supported on this platform"
 msgstr "Rozšířené diskové oddíly nejsou na tomto systému podporovány"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Splash selection"
+msgstr "Výběr zaváděcího obrázku"
 
 #: ../../network/isdn.pm:1
 #, c-format
@@ -7822,6 +7901,11 @@ msgstr ""
 msgid "Printer default settings"
 msgstr "Výchozí nastavení tiskárny"
 
+#: ../../mouse.pm:1
+#, c-format
+msgid "Generic PS2 Wheel Mouse"
+msgstr "Standardní PS2 myš s kolečkem"
+
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid ""
@@ -7832,11 +7916,6 @@ msgstr ""
 "příznak WP pro CR0 registr procesoru zabezpečuje ochranu před zápisem na "
 "úrovni paměti, takže jeho povolením dojde k prevenci nečekaným přístupům do "
 "paměti uživatelských aplikací (čili je to ochrana před chybou)"
-
-#: ../../mouse.pm:1
-#, c-format
-msgid "Generic PS2 Wheel Mouse"
-msgstr "Standardní PS2 myš s kolečkem"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -8001,6 +8080,11 @@ msgstr "Korejská klávesnice"
 msgid "Not connected"
 msgstr "Nepřipojen"
 
+#: ../../standalone/net_monitor:1
+#, fuzzy, c-format
+msgid "No internet connection configured"
+msgstr "Konfigurace připojení k internetu"
+
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Greek"
@@ -8015,23 +8099,6 @@ msgstr "Saint Kitts a Nevis"
 #, c-format
 msgid "Generic 3 Button Mouse with Wheel emulation"
 msgstr "Standardní třítlačítková myš s emulací kolečka"
-
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid ""
-"Transfer successful\n"
-"You may want to verify you can login to the server with:\n"
-"\n"
-"ssh -i %s %s\\@%s\n"
-"\n"
-"without being prompted for a password."
-msgstr ""
-"Přenos úspěšný!\n"
-"Možná budete chtít zkontrolovat, zda se můžete přihlásit na server:\n"
-"\n"
-"ssh -i %s %s\\@%s\n"
-"\n"
-"bez dotazu na heslo."
 
 #: ../../any.pm:1
 #, c-format
@@ -8265,7 +8332,7 @@ msgstr ""
 "Klepněte na \"Přenést\" pro přepsání.\n"
 "Také můžete napsat nový název nebo ji přeskočit."
 
-#: ../../share/advertising/12-mdkexpert.pl:1
+#: ../advertising/12-mdkexpert.pl:1
 #, c-format
 msgid ""
 "Find the solutions of your problems via MandrakeSoft's online support "
@@ -8332,6 +8399,22 @@ msgstr "Kyrgyzstán"
 #, c-format
 msgid "Multi-function device on USB"
 msgstr "Multifunkční zařízení na USB"
+
+#: ../../../move/move.pm:1
+#, c-format
+msgid ""
+"We didn't detect any USB key on your system. If you\n"
+"plug in an USB key now, Mandrake Move will have the ability\n"
+"to transparently save the data in your home directory and\n"
+"system wide configuration, for next boot on this computer\n"
+"or another one. Note: if you plug in a key now, wait several\n"
+"seconds before detecting again.\n"
+"\n"
+"\n"
+"You may also proceed without an USB key - you'll still be\n"
+"able to use Mandrake Move as a normal live Mandrake\n"
+"Operating System."
+msgstr ""
 
 #: ../../help.pm:1
 #, c-format
@@ -8430,15 +8513,15 @@ msgstr "Sticky-bit"
 msgid "Other Media"
 msgstr "Další média"
 
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "Backup system files"
-msgstr "Zálohovat systémové soubory"
-
 #: ../../mouse.pm:1
 #, c-format
 msgid "Logitech MouseMan+"
 msgstr "Logitech MouseMan+"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "Backup system files"
+msgstr "Zálohovat systémové soubory"
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -8502,6 +8585,11 @@ msgstr "Nastavení systému"
 msgid "Please choose your type of mouse."
 msgstr "Vyberte si typ vaší myši."
 
+#: ../../services.pm:1
+#, c-format
+msgid "running"
+msgstr "spuštěno"
+
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "class of hardware device"
@@ -8519,11 +8607,6 @@ msgstr ""
 #, c-format
 msgid "United Kingdom"
 msgstr "Velká Británie"
-
-#: ../../services.pm:1
-#, c-format
-msgid "running"
-msgstr "spuštěno"
 
 #: ../../lang.pm:1
 #, c-format
@@ -8569,7 +8652,7 @@ msgstr "Senegal"
 msgid "Command line"
 msgstr "Příkazová řádka"
 
-#: ../../share/advertising/08-store.pl:1
+#: ../advertising/08-store.pl:1
 #, c-format
 msgid ""
 "Our full range of Linux solutions, as well as special offers on products and "
@@ -8629,6 +8712,17 @@ msgstr "Odkládací (swap)"
 #, c-format
 msgid "Custom settings"
 msgstr "Vlastní nastavení"
+
+#: ../../../move/move.pm:1
+#, c-format
+msgid ""
+"The USB key seems to have write protection enabled, but we can't safely\n"
+"unplug it now.\n"
+"\n"
+"\n"
+"Click the button to reboot the machine, unplug it, remove write protection,\n"
+"plug the key again, and launch Mandrake Move again."
+msgstr ""
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -8738,7 +8832,7 @@ msgstr ""
 msgid "Photo memory card access on your HP multi-function device"
 msgstr "Přístup k paměťové kartě na multifunkčním zařízení od HP"
 
-#: ../../share/advertising/09-mdksecure.pl:1
+#: ../advertising/09-mdksecure.pl:1
 #, c-format
 msgid ""
 "Enhance your computer performance with the help of a selection of partners "
@@ -8857,6 +8951,11 @@ msgstr ""
 #, c-format
 msgid "Exit install"
 msgstr "Ukončení instalace"
+
+#: ../../../move/move.pm:1
+#, c-format
+msgid "Need a key to save your data"
+msgstr ""
 
 #: ../../standalone/drakgw:1
 #, c-format
@@ -9044,11 +9143,6 @@ msgstr "Ruské (foneticky)"
 msgid "dhcpd Config..."
 msgstr "Nastavení dhcpd..."
 
-#: ../../standalone/drakgw:1
-#, c-format
-msgid "The setup has already been done, but it's currently disabled."
-msgstr "Nastavení již bylo provedeno, ale nyní je vypnuto."
-
 #: ../../any.pm:1
 #, c-format
 msgid "LILO/grub Installation"
@@ -9223,6 +9317,11 @@ msgstr ""
 msgid "Choose an X server"
 msgstr "Zvolte X server"
 
+#: ../../../move/tree/mdk_totem:1
+#, c-format
+msgid "Copying to memory to allow removing the CDROM"
+msgstr ""
+
 #: ../../install_interactive.pm:1
 #, c-format
 msgid "Swap partition size in MB: "
@@ -9272,7 +9371,7 @@ msgstr "Nastavení automatických kroků"
 msgid "Barbados"
 msgstr "Barbados"
 
-#: ../../share/advertising/02-community.pl:1
+#: ../advertising/02-community.pl:1
 #, c-format
 msgid ""
 "Want to know more and to contribute to the Open Source community? Get "
@@ -9435,15 +9534,6 @@ msgstr "Specifická třída cpu"
 msgid "First Time Wizard"
 msgstr "Průvodce pro nové uživatele"
 
-#: ../../install_steps.pm:1
-#, c-format
-msgid ""
-"An error occurred, but I don't know how to handle it nicely.\n"
-"Continue at your own risk."
-msgstr ""
-"Stala se chyba, ale nevím, jak jí správně interpretovat.\n"
-"Pokračujte na vlastní riziko."
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Taiwan"
@@ -9458,6 +9548,15 @@ msgstr "Pákistán"
 #, c-format
 msgid "please wait, parsing file: %s"
 msgstr "čekejte prosím, zpracovávám soubor: %s"
+
+#: ../../install_steps.pm:1 ../../../move/move.pm:1
+#, c-format
+msgid ""
+"An error occurred, but I don't know how to handle it nicely.\n"
+"Continue at your own risk."
+msgstr ""
+"Stala se chyba, ale nevím, jak jí správně interpretovat.\n"
+"Pokračujte na vlastní riziko."
 
 #: ../../install_steps_gtk.pm:1
 #, c-format
@@ -9656,6 +9755,11 @@ msgstr ""
 "Vyberte si, zda chcete uložit nebo nahrát výběr balíčků na disketu.\n"
 "Formát výběru je stejný jako formát automaticky generované diskety."
 
+#: ../../../move/tree/mdk_totem:1
+#, fuzzy, c-format
+msgid "No CDROM support"
+msgstr "Podpora rádia :"
+
 #: ../../standalone/drakxtv:1
 #, c-format
 msgid "China (broadcast)"
@@ -9697,7 +9801,7 @@ msgstr ""
 "Spuštění modulu %s selhalo.\n"
 "Chcete to zkusit s jinými parametry?"
 
-#: ../../share/advertising/01-thanks.pl:1
+#: ../advertising/01-thanks.pl:1
 #, c-format
 msgid "Welcome to the Open Source world."
 msgstr "Vítejte do světa Open Source"
@@ -9926,6 +10030,11 @@ msgstr "Další porty"
 msgid "number of capture buffers for mmap'ed capture"
 msgstr "Počet bufferů pro zachycení systémem mmap"
 
+#: ../../network/adsl.pm:1
+#, fuzzy, c-format
+msgid " - detected"
+msgstr "detekováno"
+
 #: ../../harddrake/data.pm:1
 #, c-format
 msgid "SMBus controllers"
@@ -10027,6 +10136,11 @@ msgstr "Restart systému provedený uživatelem z konzole"
 msgid "Restore"
 msgstr "Obnovit"
 
+#: ../../standalone/drakclock:1
+#, fuzzy, c-format
+msgid "Server:"
+msgstr "Server: "
+
 #: ../../security/help.pm:1
 #, c-format
 msgid "if set to yes, check if the network devices are in promiscuous mode."
@@ -10037,6 +10151,11 @@ msgstr ""
 #, c-format
 msgid "Looking for available packages..."
 msgstr "Hledám dostupné balíčky..."
+
+#: ../../../move/move.pm:1
+#, fuzzy, c-format
+msgid "Please wait, setting up system configuration files on USB key..."
+msgstr "Čekejte prosím, nastavuji úroveň zabezpečení..."
 
 #: ../../any.pm:1
 #, c-format
@@ -10159,15 +10278,15 @@ msgstr ""
 "Frekvence CPU v MHz (Megahertz je hodnota přibližně rovna vypočtenému počtu "
 "instrukcí, které je schopen procesor provést za sekundu)"
 
-#: ../../standalone/printerdrake:1
-#, c-format
-msgid "Mandrake Linux Printer Management Tool"
-msgstr "Nástroj Mandrake Linux pro správu tiskáren"
-
 #: ../../pkgs.pm:1
 #, c-format
 msgid "important"
 msgstr "důležité"
+
+#: ../../standalone/printerdrake:1
+#, c-format
+msgid "Mandrake Linux Printer Management Tool"
+msgstr "Nástroj Mandrake Linux pro správu tiskáren"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -10225,6 +10344,11 @@ msgstr "Uživatelé"
 #, c-format
 msgid "Preparing bootloader..."
 msgstr "Připravuji zaváděcí program"
+
+#: ../../../move/move.pm:1
+#, c-format
+msgid "Enter your user information, password will be used for screensaver"
+msgstr ""
 
 #: ../../network/network.pm:1
 #, c-format
@@ -10673,15 +10797,15 @@ msgstr "Obsah souboru"
 msgid "Authentication LDAP"
 msgstr "Ověření pomocí LDAP"
 
+#: ../../install_steps_gtk.pm:1
+#, c-format
+msgid "in order to keep %s"
+msgstr ""
+
 #: ../../harddrake/sound.pm:1
 #, c-format
 msgid "Let me pick any driver"
 msgstr "Umožnit výběr ovladače"
-
-#: ../../standalone/net_monitor:1
-#, c-format
-msgid "Profile "
-msgstr "Profil "
 
 #: ../../standalone/net_monitor:1
 #, c-format
@@ -10782,9 +10906,9 @@ msgstr "Odeslat verzi jádra"
 #: ../../standalone/drakautoinst:1 ../../standalone/drakbackup:1
 #: ../../standalone/drakboot:1 ../../standalone/drakconnect:1
 #: ../../standalone/drakfloppy:1 ../../standalone/drakfont:1
-#: ../../standalone/drakgw:1 ../../standalone/drakperm:1
-#: ../../standalone/draksec:1 ../../standalone/logdrake:1
-#: ../../standalone/mousedrake:1 ../../standalone/net_monitor:1
+#: ../../standalone/drakperm:1 ../../standalone/draksec:1
+#: ../../standalone/logdrake:1 ../../standalone/mousedrake:1
+#: ../../standalone/net_monitor:1
 #, c-format
 msgid "Cancel"
 msgstr "Zrušit"
@@ -10937,19 +11061,6 @@ msgstr "Italské"
 msgid "Basic"
 msgstr "Základní"
 
-#: ../../standalone/drakTermServ:1
-#, c-format
-msgid ""
-"\n"
-" Copyright (C) 2002 by MandrakeSoft \n"
-"\tStew Benedict sbenedict\\@mandrakesoft.com\n"
-"\n"
-msgstr ""
-"\n"
-" Copyright ©2002 by MandrakeSoft \n"
-"\tStew Benedict <sbenedict\\@mandrakesoft.com>\n"
-"\n"
-
 #: ../../install_messages.pm:1
 #, c-format
 msgid "http://www.mandrakelinux.com/en/92errata.php3"
@@ -10970,10 +11081,10 @@ msgstr "pdq"
 msgid "Card IO"
 msgstr "IO karty"
 
-#: ../../standalone/drakperm:1
-#, c-format
-msgid "when checked, owner and group won't be changed"
-msgstr "pokud je zaškrtnuto, vlastník a skupina nebudou změněny"
+#: ../../network/drakfirewall.pm:1
+#, fuzzy, c-format
+msgid "Samba server"
+msgstr "Server Samba"
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -11065,6 +11176,11 @@ msgstr ""
 msgid "access to compilation tools"
 msgstr "přístup k nástrojům pro kompilaci"
 
+#: ../../standalone/net_monitor:1
+#, fuzzy, c-format
+msgid "Global statistics"
+msgstr "Statistiky"
+
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "Please select data to restore..."
@@ -11084,6 +11200,11 @@ msgstr ""
 #, c-format
 msgid "Standard test page"
 msgstr "Standardní testovací stránka"
+
+#: ../../standalone/drakclock:1
+#, fuzzy, c-format
+msgid "Time Zone"
+msgstr "Časová zóna"
 
 #: ../../diskdrake/hd_gtk.pm:1 ../../diskdrake/interactive.pm:1
 #, c-format
@@ -11200,6 +11321,19 @@ msgstr ""
 "nebo stiskněte Enter pro pokračování.\n"
 "Vaše volba? "
 
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"\n"
+" Copyright (C) 2002 by MandrakeSoft \n"
+"\tStew Benedict sbenedict@mandrakesoft.com\n"
+"\n"
+msgstr ""
+"\n"
+" Copyright ©2002 by MandrakeSoft \n"
+"\tStew Benedict <sbenedict@mandrakesoft.com>\n"
+"\n"
+
 #: ../../standalone/draksplash:1
 #, c-format
 msgid "Save theme"
@@ -11225,15 +11359,15 @@ msgstr "Průvodce nastavením sítě"
 msgid "Removable media automounting"
 msgstr "Automatické připojování pro vyjímatelná média"
 
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "Enter the directory to save:"
-msgstr "Zadejte adresář, kam bude umístěna záloha:"
-
 #: ../../services.pm:1
 #, c-format
 msgid "Printing"
 msgstr "Tisk"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "Enter the directory to save:"
+msgstr "Zadejte adresář, kam bude umístěna záloha:"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -11356,7 +11490,7 @@ msgstr "Kensington Thinking Mouse"
 msgid "Configuration of a remote printer"
 msgstr "Nastavení vzdálené tiskárny"
 
-#: ../../share/advertising/13-mdkexpert_corporate.pl:1
+#: ../advertising/13-mdkexpert_corporate.pl:1
 #, c-format
 msgid "An online platform to respond to enterprise support needs."
 msgstr ""
@@ -11516,15 +11650,22 @@ msgstr ""
 msgid "Configure Local Area Network..."
 msgstr "Nastavit lokální síť..."
 
-#: ../../security/l10n.pm:1
+#: ../../../move/move.pm:1
 #, c-format
-msgid "Verify checksum of the suid/sgid files"
-msgstr "Ověřovat kontrolní součet pro suid/sgid soubory"
+msgid ""
+"The USB key seems to have write protection enabled. Please\n"
+"unplug it, remove write protection, and then plug it again."
+msgstr ""
 
 #: ../../services.pm:1
 #, c-format
 msgid "Launch the sound system on your machine"
 msgstr "Spustit zvukový systém při startu"
+
+#: ../../security/l10n.pm:1
+#, c-format
+msgid "Verify checksum of the suid/sgid files"
+msgstr "Ověřovat kontrolní součet pro suid/sgid soubory"
 
 #: ../../security/l10n.pm:1
 #, c-format
@@ -11856,6 +11997,11 @@ msgstr "Tento balíček musí být aktualizován, nemůžete ho nezvolit"
 msgid "Loading from floppy"
 msgstr "Nahrávám z diskety"
 
+#: ../../standalone/drakclock:1
+#, c-format
+msgid "Timezone - DrakClock"
+msgstr ""
+
 #: ../../security/help.pm:1
 #, c-format
 msgid "Enable/Disable the logging of IPv4 strange packets."
@@ -12009,6 +12155,11 @@ msgstr ""
 "Informace o konfiguraci systému po instalaci jsou dostupné\n"
 "v dané kapitole oficiální uživatelské příručky pro Mandrake Linux."
 
+#: ../../standalone/drakclock:1
+#, fuzzy, c-format
+msgid "Enable Network Time Protocol"
+msgstr "Obnovit přes síť pomocí protokolu: %s"
+
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "paranoid"
@@ -12099,7 +12250,7 @@ msgstr "přístup k síťovým nástrojům"
 msgid "Firmware-Upload for HP LaserJet 1000"
 msgstr "Upload firmware pro HP LaserJet 1000"
 
-#: ../../share/advertising/03-software.pl:1
+#: ../advertising/03-software.pl:1
 #, c-format
 msgid ""
 "And, of course, push multimedia to its limits with the very latest software "
@@ -12165,15 +12316,15 @@ msgstr "Protokol o spuštění"
 msgid "LVM-disks %s\n"
 msgstr "LVM disky %s\n"
 
-#: ../../diskdrake/interactive.pm:1
-#, c-format
-msgid "The package %s is needed. Install it?"
-msgstr "Balíček %s musí být nainstalován. Chcete ho nainstalovat?"
-
 #: ../../services.pm:1
 #, c-format
 msgid "On boot"
 msgstr "Při spuštění"
+
+#: ../../diskdrake/interactive.pm:1
+#, c-format
+msgid "The package %s is needed. Install it?"
+msgstr "Balíček %s musí být nainstalován. Chcete ho nainstalovat?"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -12189,6 +12340,11 @@ msgstr "Vatikán"
 #, c-format
 msgid "Please make a backup of your data first"
 msgstr "Zálohujte si nejdřív svá data, prosím"
+
+#: ../../harddrake/data.pm:1
+#, c-format
+msgid "ADSL adapters"
+msgstr ""
 
 #: ../../install_interactive.pm:1
 #, c-format
@@ -12215,7 +12371,7 @@ msgstr "Je nutný firmware"
 msgid "Remove List"
 msgstr "Odebrat seznam"
 
-#: ../../share/advertising/05-desktop.pl:1
+#: ../advertising/05-desktop.pl:1
 #, c-format
 msgid "A customizable environment"
 msgstr "Přizpůsobitelné prostředí"
@@ -12459,6 +12615,13 @@ msgstr "Nastaví čas vypršení pro shell. Nulová hodnota znamená žádný č
 #, c-format
 msgid "Firmware copy succeeded"
 msgstr "Kopírování firmware proběhlo úspěšně"
+
+#: ../../../move/tree/mdk_totem:1
+#, c-format
+msgid ""
+"You can't use another CDROM when the following programs are running: \n"
+"%s"
+msgstr ""
 
 #: ../../security/help.pm:1
 #, c-format
@@ -12944,6 +13107,11 @@ msgstr ""
 "Jednoduše zadejte potřebné nastavení do příkazové řádky, např. \"%s<soubor>"
 "\". "
 
+#: ../../standalone/drakclock:1
+#, fuzzy, c-format
+msgid "DrakClock"
+msgstr "DrakBackup"
+
 #: ../../modules/interactive.pm:1
 #, c-format
 msgid ""
@@ -12977,21 +13145,6 @@ msgid ""
 msgstr ""
 "\n"
 "- Démon, %s přes :\n"
-
-#: ../../standalone/drakgw:1
-#, c-format
-msgid ""
-"Welcome to the Internet Connection Sharing utility!\n"
-"\n"
-"%s\n"
-"\n"
-"Click on Configure to launch the setup wizard."
-msgstr ""
-"Vítá vás průvodce nastavením sdílení připojení k Internetu!\n"
-"\n"
-"%s\n"
-"\n"
-"Klepněte na Konfigurovat, pokud chcete spustit průvodce nastavením."
 
 #: ../../lang.pm:1
 #, c-format
@@ -13179,6 +13332,11 @@ msgstr ""
 msgid "Christmas Island"
 msgstr "Vánoční ostrov"
 
+#: ../../mouse.pm:1
+#, fuzzy, c-format
+msgid "Automatic"
+msgstr "Automatická IP"
+
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Installation of bootloader failed. The following error occured:"
@@ -13280,11 +13438,6 @@ msgstr "Přenést nyní"
 #, c-format
 msgid "Set root password and network authentication methods"
 msgstr "Nastavení hesla uživatele root a režimy pro síťové ověřování"
-
-#: ../../standalone/drakgw:1
-#, c-format
-msgid "Internet Connection Sharing configuration"
-msgstr "Nastavení sdílení připojení k Internetu"
 
 #: ../../ugtk2.pm:1
 #, c-format
@@ -13563,6 +13716,11 @@ msgstr "Zvolte mechaniku, ve které chcete vytvořit startovací disketu"
 msgid "LILO with text menu"
 msgstr "LILO s textovou nabídkou"
 
+#: ../../standalone/net_monitor:1
+#, c-format
+msgid "instantaneous"
+msgstr ""
+
 #: ../../network/drakfirewall.pm:1
 #, c-format
 msgid "Everything (no firewall)"
@@ -13758,6 +13916,11 @@ msgstr "Prosím zadejte uživatelské jméno"
 msgid "Enable CD Boot?"
 msgstr "Povolit spuštění z CD?"
 
+#: ../../../move/move.pm:1
+#, c-format
+msgid "Simply reboot"
+msgstr ""
+
 #: ../../interactive/stdio.pm:1
 #, c-format
 msgid " enter `void' for void entry"
@@ -13858,15 +14021,15 @@ msgstr ""
 "připojení k Internetu. Na počítač se také nainstaluje časový server, který\n"
 "mohou volitelně používat jiné počítače ve vaší lokální síti."
 
-#: ../../install_steps_interactive.pm:1
-#, c-format
-msgid "Which is your timezone?"
-msgstr "Jaké je vaše časové pásmo?"
-
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "Can't create log file!"
 msgstr "Nelze vytvořit log soubor!"
+
+#: ../../install_steps_interactive.pm:1 ../../standalone/drakclock:1
+#, c-format
+msgid "Which is your timezone?"
+msgstr "Jaké je vaše časové pásmo?"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -13918,6 +14081,11 @@ msgstr "Mosambik"
 msgid "Icon"
 msgstr "Ikona"
 
+#: ../../../move/tree/mdk_totem:1
+#, fuzzy, c-format
+msgid "Kill those programs"
+msgstr "přístup k programům v X prostředí"
+
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "Please choose what you want to backup"
@@ -13953,7 +14121,7 @@ msgstr "Přidat pravidlo"
 msgid "Chunk size %s\n"
 msgstr "Velikost bloku(chunk) %s\n"
 
-#: ../../share/advertising/02-community.pl:1
+#: ../advertising/02-community.pl:1
 #, c-format
 msgid "Build the future of Linux!"
 msgstr "Tvořte budoucnost Linuxu!"
@@ -14084,7 +14252,7 @@ msgstr ""
 "jako server nebo v případě, že se nepodařilo správně nastavit grafickou "
 "kartu."
 
-#: ../../share/advertising/13-mdkexpert_corporate.pl:1
+#: ../advertising/13-mdkexpert_corporate.pl:1
 #, c-format
 msgid "MandrakeExpert Corporate"
 msgstr "MandrakeExpert Corporate"
@@ -14125,6 +14293,11 @@ msgstr "Výběr modelu tiskárny"
 msgid ""
 "After changing type of partition %s, all data on this partition will be lost"
 msgstr "Tím, že změníte typ oddílu %s, přijdete o všechna jeho data"
+
+#: ../../harddrake/data.pm:1
+#, fuzzy, c-format
+msgid "ISDN adapters"
+msgstr "ISDN karta"
 
 #: ../../common.pm:1
 #, c-format
@@ -14466,6 +14639,11 @@ msgstr "Sdílení lokálních skenerů"
 msgid "Plug'n Play probing failed. Please select the correct monitor"
 msgstr "Plug'n Play detekce selhala. Vyberte prosím přesný monitor"
 
+#: ../../../move/move.pm:1
+#, c-format
+msgid "Detect again USB key"
+msgstr ""
+
 #: ../../services.pm:1
 #, c-format
 msgid "Services and deamons"
@@ -14507,7 +14685,7 @@ msgstr "Kontrolovat pravidla pro msec"
 msgid "Slovakian (QWERTZ)"
 msgstr "Slovenské (QWERTZ)"
 
-#: ../../share/advertising/06-development.pl:1
+#: ../advertising/06-development.pl:1
 #, c-format
 msgid ""
 "To modify and to create in different languages such as Perl, Python, C and C+"
@@ -14574,6 +14752,11 @@ msgstr "Alžírsko"
 #, c-format
 msgid "Restore Via Network"
 msgstr "Obnovit přes síť"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "Use tar and bzip2 (rather than tar and gzip)"
+msgstr ""
 
 #: ../../any.pm:1
 #, c-format
@@ -14707,7 +14890,7 @@ msgstr "DVD-ROM"
 msgid "Georgian (\"Latin\" layout)"
 msgstr "Gruzínské (rozložení \"Latin\")"
 
-#: ../../share/advertising/09-mdksecure.pl:1
+#: ../advertising/09-mdksecure.pl:1
 #, c-format
 msgid "Get the best items with Mandrake Linux Strategic partners"
 msgstr ""
@@ -14814,7 +14997,7 @@ msgstr "Automatické přihlášení"
 msgid "Domain Admin Password"
 msgstr "Heslo Správce domény"
 
-#: ../../share/advertising/05-desktop.pl:1
+#: ../advertising/05-desktop.pl:1
 #, c-format
 msgid ""
 "Perfectly adapt your computer to your needs thanks to the 11 available "
@@ -14957,6 +15140,11 @@ msgstr "utopia 25"
 msgid "Pipe job into a command"
 msgstr "Poslat tiskovou úlohu do příkazu"
 
+#: ../../../move/move.pm:1
+#, fuzzy, c-format
+msgid "Remove system config files"
+msgstr "Odstranit soubor loopbacku?"
+
 #: ../../lang.pm:1
 #, c-format
 msgid "Cote d'Ivoire"
@@ -14969,7 +15157,8 @@ msgstr ""
 "nový, dynamický název zařízení, který generuje zabudovaný systém jádra devfs"
 
 #: ../../help.pm:1 ../../install_any.pm:1 ../../interactive.pm:1
-#: ../../ugtk2.pm:1 ../../modules/interactive.pm:1 ../../standalone/drakgw:1
+#: ../../ugtk2.pm:1 ../../modules/interactive.pm:1
+#: ../../standalone/drakclock:1 ../../standalone/drakgw:1
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "Yes"
@@ -14990,11 +15179,6 @@ msgstr "Průběh obnovení"
 msgid "Estonia"
 msgstr "Estonsko"
 
-#: ../../standalone/scannerdrake:1
-#, c-format
-msgid "Choose the host on which the local scanners should be made available:"
-msgstr "Zvolte počítač, na kterém budou přístupné lokální skenery:"
-
 #: ../../partition_table.pm:1
 #, c-format
 msgid ""
@@ -15006,6 +15190,11 @@ msgstr ""
 "Jediné řešení je přesunout primární oddíly tak, abyste měli mezeru vedle\n"
 "rozšířených oddílů."
 
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "Choose the host on which the local scanners should be made available:"
+msgstr "Zvolte počítač, na kterém budou přístupné lokální skenery:"
+
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "Channel"
@@ -15016,11 +15205,6 @@ msgstr "Kanál"
 #, c-format
 msgid "Add"
 msgstr "Přidat"
-
-#: ../../standalone/drakgw:1
-#, c-format
-msgid "No Internet Connection Sharing has ever been configured."
-msgstr "Není nastaveno žádné sdílení Internetového připojení."
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -15304,14 +15488,14 @@ msgstr "Spustit UserDrake"
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Is this an install or an upgrade?"
-msgstr "Je to instalace nebo aktualizace?"
+msgstr "Jedná se o instalaci nebo aktualizaci?"
 
 #: ../../help.pm:1
 #, c-format
 msgid "ISDN card"
 msgstr "ISDN karta"
 
-#: ../../share/advertising/02-community.pl:1
+#: ../advertising/02-community.pl:1
 #, c-format
 msgid ""
 "To share your own knowledge and help build Linux software, join our "
@@ -15368,6 +15552,67 @@ msgstr ""
 "verzi \n"
 "\"8.1\" a novější. Aktualizace na verzích starších než \"8.1\" není "
 "doporučováno."
+
+#: ../../standalone/drakfont:1
+#, c-format
+msgid ""
+"\n"
+" Copyright (C) 2001-2002 by MandrakeSoft \n"
+"     DUPONT Sebastien (original version)\n"
+"     CHAUMETTE Damien <dchaumette@mandrakesoft.com>\n"
+"\n"
+" This program is free software; you can redistribute it and/or modify\n"
+" it under the terms of the GNU General Public License as published by\n"
+" the Free Software Foundation; either version 2, or (at your option)\n"
+" any later version.\n"
+"\n"
+" This program is distributed in the hope that it will be useful,\n"
+" but WITHOUT ANY WARRANTY; without even the implied warranty of\n"
+" MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n"
+" GNU General Public License for more details.\n"
+"\n"
+" You should have received a copy of the GNU General Public License\n"
+" along with this program; if not, write to the Free Software\n"
+" Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.\n"
+"\n"
+" Thanks:\n"
+"    -  pfm2afm:   \n"
+"\t by Ken Borgendale:\n"
+"\t    Convert a Windows .pfm  file to a .afm (Adobe Font Metrics)\n"
+"    -  type1inst:\n"
+"\t by James Macnicol: \n"
+"\t    type1inst generates files fonts.dir fonts.scale & Fontmap.\n"
+"    -  ttf2pt1:   \n"
+"\t  by Andrew Weeks, Frank Siegert, Thomas Henlich, Sergey Babkin  \n"
+"             Convert ttf font files to afm and pfb fonts\n"
+msgstr ""
+"\n"
+" Copyright ©2001-2002 MandrakeSoft \n"
+"      DUPONT Sebastien (původní verze)\n"
+"      CHAUMETTE Damien <dchaumette@mandrakesoft.com>\n"
+"\n"
+" Tento program je svobodný software; můžete ho šířit a/nebo modifikovat\n"
+" podle specifikace GNU General Public Licence, která byla publikována\n"
+" Free Software Foundation; buď verze 2, nebo (podle volby) pozdější verze.\n"
+"\n"
+" Tento program je distribuován s nadějí, že bude užitečný,\n"
+" ale BEZ JAKÝCHKOLIV ZÁRUK; BEZ NÁROKU NA PROFIT. Více detailů naleznete\n"
+" v licenci GNU General Public Licence.\n"
+"\n"
+" Kopii GNU General Public Licence můžete obdržet buď s tímto programem\n"
+" nebo si o ní můžete napsat na adresu Free Software Foundation, Inc.,\n"
+" 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.\n"
+"\n"
+" Poděkování:\n"
+"   - pfm2afm: \n"
+"\t autor Ken Borgendale:\n"
+"\t    Převádí Windows .pfm soubor na .afm (Adobe Font Metrics)\n"
+"    -  type1inst:\n"
+"\t autor James Macnicol: \n"
+"\t    type1inst generuje soubory fonts.dir fonts.scale & Fontmap.\n"
+"    -  ttf2pt1:   \n"
+"\t  autoři Andrew Weeks, Frank Siegert, Thomas Henlich, Sergey Babkin  \n"
+"             Převádí soubory s ttf fonty na soubory afm a pfb\n"
 
 #: ../../printer/main.pm:1
 #, c-format
@@ -15436,6 +15681,11 @@ msgstr "Počátek pásma adres DHCP"
 msgid "Unsafe"
 msgstr "Nejistý"
 
+#: ../../network/drakfirewall.pm:1
+#, fuzzy, c-format
+msgid "SSH server"
+msgstr "Server SSH"
+
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid ", %s sectors"
@@ -15443,7 +15693,7 @@ msgstr ", %s sektorů"
 
 #: ../../help.pm:1 ../../install_any.pm:1 ../../interactive.pm:1
 #: ../../ugtk2.pm:1 ../../modules/interactive.pm:1
-#: ../../standalone/harddrake2:1
+#: ../../standalone/drakclock:1 ../../standalone/harddrake2:1
 #, c-format
 msgid "No"
 msgstr "Ne"
@@ -16008,6 +16258,11 @@ msgstr "Odstranit vybraný počítač"
 msgid "Network configuration"
 msgstr "Nastavení sítě"
 
+#: ../../standalone/harddrake2:1
+#, c-format
+msgid "/Autodetect _jaz drives"
+msgstr "/Automaticky detekovat _jaz disky"
+
 #: ../../any.pm:1
 #, c-format
 msgid "No sharing"
@@ -16130,9 +16385,10 @@ msgstr "V tuto chvíli také všechna 'síťová' média používají pevný dis
 #: ../../install_steps.pm:1 ../../diskdrake/dav.pm:1
 #: ../../diskdrake/hd_gtk.pm:1 ../../diskdrake/interactive.pm:1
 #: ../../diskdrake/smbnfs_gtk.pm:1 ../../interactive/http.pm:1
-#: ../../standalone/drakboot:1 ../../standalone/drakbug:1
+#: ../../standalone/drakauth:1 ../../standalone/drakboot:1
+#: ../../standalone/drakbug:1 ../../standalone/drakconnect:1
 #: ../../standalone/drakfloppy:1 ../../standalone/drakfont:1
-#: ../../standalone/draksplash:1
+#: ../../standalone/draksplash:1 ../../../move/move.pm:1
 #, c-format
 msgid "Error"
 msgstr "Chyba"
@@ -16176,6 +16432,11 @@ msgstr ""
 "Váš systém podporuje zobrazení na dvou monitorech.\n"
 "Co chcete dělat?"
 
+#: ../../partition_table.pm:1
+#, c-format
+msgid "mount failed: "
+msgstr "chyba připojování: "
+
 #: ../../steps.pm:1
 #, c-format
 msgid "Configure services"
@@ -16185,11 +16446,6 @@ msgstr "Nastavení služeb"
 #, c-format
 msgid "Broadcast Address:"
 msgstr "Adresa broadcastu:"
-
-#: ../../partition_table.pm:1
-#, c-format
-msgid "mount failed: "
-msgstr "chyba připojování: "
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -16207,16 +16463,16 @@ msgstr ""
 msgid "Image"
 msgstr "Obraz(image)"
 
+#: ../../services.pm:1
+#, c-format
+msgid "Remote Administration"
+msgstr "Vzdálená administrace"
+
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Failed to add the printer \"%s\" to Star Office/OpenOffice.org/GIMP."
 msgstr ""
 "Přidání tiskárny \"%s\" do Star Office/OpenOffice.org/GIMP se nezdařilo."
-
-#: ../../services.pm:1
-#, c-format
-msgid "Remote Administration"
-msgstr "Vzdálená administrace"
 
 #: ../../modules.pm:1
 #, c-format
@@ -16275,7 +16531,7 @@ msgstr "Červenec"
 msgid "Prints into %s"
 msgstr "Tisk na %s"
 
-#: ../../install_steps_interactive.pm:1
+#: ../../install_steps_interactive.pm:1 ../../../move/move.pm:1
 #, c-format
 msgid "An error occurred"
 msgstr "Stala se chyba"
@@ -16490,7 +16746,7 @@ msgstr ", multifunkční zařízení"
 msgid "Laos"
 msgstr "Laos"
 
-#: ../../share/advertising/04-configuration.pl:1
+#: ../advertising/04-configuration.pl:1
 #, c-format
 msgid ""
 "Mandrake Linux 9.2 provides you with the Mandrake Control Center, a powerful "
@@ -16675,11 +16931,6 @@ msgstr "Je nutné nejprve vytvořit soubor /etc/dhcpd.conf!"
 msgid "Is FPU present"
 msgstr "Přítomnost FPU"
 
-#: ../../standalone/scannerdrake:1
-#, c-format
-msgid "There are no scanners found which are available on your system.\n"
-msgstr "Na vašem počítači nebyly nalezeny žádné připojené skenery.\n"
-
 #: ../../services.pm:1
 #, c-format
 msgid ""
@@ -16688,6 +16939,11 @@ msgid ""
 msgstr ""
 "Nejsou žádné další\n"
 "informace o službě, promiňte."
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "There are no scanners found which are available on your system.\n"
+msgstr "Na vašem počítači nebyly nalezeny žádné připojené skenery.\n"
 
 #: ../../standalone/drakTermServ:1
 #, c-format
@@ -16728,21 +16984,6 @@ msgstr "DVDRAM zařízení"
 #, c-format
 msgid "if set to yes, report unowned files."
 msgstr "pokud je nastaveno, vypisuje soubory bez vlastníka."
-
-#: ../../standalone/harddrake2:1
-#, c-format
-msgid ""
-"This is HardDrake, a Mandrake hardware configuration tool.\n"
-"<span foreground=\"royalblue3\">Version:</span> %s\n"
-"<span foreground=\"royalblue3\">Author:</span> Thierry Vignaud &lt;tvignaud"
-"\\@mandrakesoft.com&gt;\n"
-"\n"
-msgstr ""
-"Toto je HardDrake, nástroj společnosti Mandrake pro nastavení hardware.\n"
-"<span foreground=\"royalblue3\">Version:</span> %s\n"
-"<span foreground=\"royalblue3\">Author:</span> Thierry Vignaud &lt;tvignaud"
-"\\@mandrakesoft.com&gt;\n"
-"\n"
 
 #: ../../install_interactive.pm:1
 #, c-format
@@ -16825,10 +17066,27 @@ msgstr "Vietnam"
 msgid "/_Fields description"
 msgstr "/_Popis položek"
 
-#: ../../share/advertising/10-security.pl:1
+#: ../advertising/10-security.pl:1
 #, c-format
 msgid "Optimize your security by using Mandrake Linux"
 msgstr "Optimalizujte vaše zabezpečení pomocí distribuce Mandrake Linux"
+
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"\n"
+"\n"
+" Thanks:\n"
+"\t- LTSP Project http://www.ltsp.org\n"
+"\t- Michael Brown <mbrown@fensystems.co.uk>\n"
+"\n"
+msgstr ""
+"\n"
+"\n"
+" Poděkování:\n"
+"\t- LTSP Projekt http://www.ltsp.org\n"
+"\t- Michael Brown <mbrown@fensystems.co.uk>\n"
+"\n"
 
 #: ../../install_steps_gtk.pm:1 ../../interactive.pm:1 ../../ugtk2.pm:1
 #: ../../Xconfig/resolution_and_depth.pm:1 ../../diskdrake/hd_gtk.pm:1
@@ -16935,7 +17193,7 @@ msgstr ""
 msgid "mkinitrd optional arguments"
 msgstr "volitelné argumenty pro mkinitrd"
 
-#: ../../share/advertising/03-software.pl:1
+#: ../advertising/03-software.pl:1
 #, c-format
 msgid ""
 "Surf the Web with Mozilla or Konqueror, read your mail with Evolution or "
@@ -17131,6 +17389,11 @@ msgstr "Restartuji CUPS..."
 #, c-format
 msgid "Printing/Scanning/Photo Cards on \"%s\""
 msgstr "Tisk/Skenování/Foto karty na \"%s\""
+
+#: ../../../move/move.pm:1
+#, c-format
+msgid "Continue without USB key"
+msgstr ""
 
 #: ../../install_steps.pm:1
 #, c-format
@@ -17598,7 +17861,7 @@ msgstr "Povolit připojení na X Window"
 msgid "Hardware probing in progress"
 msgstr "Probíhá detekce hardware"
 
-#: ../../standalone/drakgw:1
+#: ../../network/shorewall.pm:1 ../../standalone/drakgw:1
 #, c-format
 msgid "Net Device"
 msgstr "Síťové zařízení"
@@ -17663,6 +17926,11 @@ msgid ""
 msgstr ""
 "pro správnou funkci je požadován balíček ImageMagick.\n"
 "Balíček nainstalujete tlačítkem \"OK\", nebo skončete tlačítkem \"Zrušit\"."
+
+#: ../../network/drakfirewall.pm:1
+#, fuzzy, c-format
+msgid "Telnet server"
+msgstr "X server"
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -17928,7 +18196,7 @@ msgstr "Syslog"
 msgid "Can't create catalog!"
 msgstr "Nelze vytvořit katalog!"
 
-#: ../../share/advertising/11-mnf.pl:1
+#: ../advertising/11-mnf.pl:1
 #, c-format
 msgid ""
 "Complete your security setup with this very easy-to-use software which "
@@ -17984,6 +18252,11 @@ msgstr "Konfigurace připojení k internetu"
 msgid "Add the name as an exception to the handling of password aging by msec."
 msgstr ""
 "Přidá jméno k výjimkám, které se nekontrolují na dobu platnosti pomocí msec."
+
+#: ../../network/isdn.pm:1
+#, fuzzy, c-format
+msgid "USB"
+msgstr "LSB"
 
 #: ../../standalone/drakxtv:1
 #, c-format
@@ -18044,6 +18317,11 @@ msgstr "Pracovní skupina"
 #, c-format
 msgid "Printer host name or IP"
 msgstr "Název nebo IP adresa tiskárny"
+
+#: ../../standalone/drakconnect:1
+#, fuzzy, c-format
+msgid "down"
+msgstr "hotovo"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -18425,7 +18703,7 @@ msgstr "server"
 #: ../../install_any.pm:1
 #, c-format
 msgid "Insert a FAT formatted floppy in drive %s"
-msgstr "Vložte naformátovanou disketu do %s"
+msgstr "Vložte disketu formátovanou systémem FAT do disketové jednotky %s"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -18506,6 +18784,11 @@ msgstr "Přidat položku"
 msgid "The printers on this machine are available to other computers"
 msgstr "Tiskárny na tomto počítači jsou přístupné jiným vzdáleným počítačům"
 
+#: ../../lang.pm:1
+#, fuzzy, c-format
+msgid "China (Hong Kong)"
+msgstr "Hong Kong"
+
 #: ../../standalone/drakautoinst:1
 #, c-format
 msgid "I can't find needed image file `%s'."
@@ -18563,7 +18846,7 @@ msgstr "Balíček není nainstalován"
 msgid "American Samoa"
 msgstr "Americká Samoa"
 
-#: ../../share/advertising/12-mdkexpert.pl:1
+#: ../advertising/12-mdkexpert.pl:1
 #, c-format
 msgid "Become a MandrakeExpert"
 msgstr "Staňte se Mandrake Expertem"
@@ -18687,6 +18970,11 @@ msgstr "Itálie"
 msgid "Cayman Islands"
 msgstr "Kajmanské ostrovy"
 
+#: ../../fs.pm:1 ../../partition_table.pm:1
+#, c-format
+msgid "error unmounting %s: %s"
+msgstr "chyba odpojování %s: %s"
+
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Name of printer"
@@ -18696,11 +18984,6 @@ msgstr "Název tiskárny"
 #, c-format
 msgid "disable"
 msgstr "vypnout"
-
-#: ../../fs.pm:1 ../../partition_table.pm:1
-#, c-format
-msgid "error unmounting %s: %s"
-msgstr "chyba odpojování %s: %s"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -18806,7 +19089,7 @@ msgstr "Kompaktní"
 msgid "Detected model: %s %s"
 msgstr "Nalezen model: %s %s"
 
-#: ../../share/advertising/03-software.pl:1
+#: ../advertising/03-software.pl:1
 #, c-format
 msgid "MandrakeSoft has selected the best software for you"
 msgstr "MandrakeSoft pro vás vybral ten nejlepší software"
@@ -18942,6 +19225,11 @@ msgstr "Spouští se X"
 msgid " adsl"
 msgstr " adsl"
 
+#: ../../raid.pm:1
+#, c-format
+msgid "Not enough partitions for RAID level %d\n"
+msgstr "Není dostatek oddílů pro RAID úrovně %d\n"
+
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "format of floppies supported by the drive"
@@ -18951,11 +19239,6 @@ msgstr "Druhy formátu disket podporované mechanikou"
 #, c-format
 msgid "Firmware copy failed, file %s not found"
 msgstr "Nepodařilo se zkopírovat firmware, soubor %s nebyl nalezen"
-
-#: ../../raid.pm:1
-#, c-format
-msgid "Not enough partitions for RAID level %d\n"
-msgstr "Není dostatek oddílů pro RAID úrovně %d\n"
 
 #: ../../standalone/drakTermServ:1
 #, c-format
@@ -19085,7 +19368,7 @@ msgstr ""
 "Nebyl nalezen CD či DVD obraz, prosím zkopírujte instalační program a rpm "
 "soubory."
 
-#: ../../share/advertising/04-configuration.pl:1
+#: ../advertising/04-configuration.pl:1
 #, c-format
 msgid "Mandrake's multipurpose configuration tool"
 msgstr "Víceúčelový konfigurační nástroj pro Mandrake"
@@ -19115,7 +19398,7 @@ msgstr "Disk"
 msgid "Enter a printer device URI"
 msgstr "Zadejte URI tiskového zařízení"
 
-#: ../../share/advertising/01-thanks.pl:1
+#: ../advertising/01-thanks.pl:1
 #, c-format
 msgid ""
 "The success of MandrakeSoft is based upon the principle of Free Software. "
@@ -19697,7 +19980,7 @@ msgstr "Model karty :"
 msgid "Thin Client"
 msgstr "Tenký klient"
 
-#: ../../share/advertising/01-thanks.pl:1
+#: ../advertising/01-thanks.pl:1
 #, c-format
 msgid "Thank you for choosing Mandrake Linux 9.2"
 msgstr "Děkujeme vám, že jste si vybrali Mandrake Linux 9.2"
@@ -19813,6 +20096,13 @@ msgstr "Načíst fonty z Windows"
 msgid "Mouse Systems"
 msgstr "Mouse Systems"
 
+#: ../../standalone/drakclock:1
+#, c-format
+msgid ""
+"Your computer can synchronize its clock\n"
+" with a remote time server using NTP"
+msgstr ""
+
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Iranian"
@@ -19838,7 +20128,7 @@ msgstr "Přidat server"
 msgid "Remote printer name"
 msgstr "Název vzdálené tiskárny"
 
-#: ../../share/advertising/10-security.pl:1
+#: ../advertising/10-security.pl:1
 #, c-format
 msgid ""
 "MandrakeSoft has designed exclusive tools to create the most secured Linux "
@@ -19995,6 +20285,11 @@ msgstr "Microsoft Explorer"
 msgid "Uninstall Fonts"
 msgstr "Odinstalovat fonty"
 
+#: ../../../move/move.pm:1
+#, fuzzy, c-format
+msgid "Please wait, detecting and configuring devices..."
+msgstr "Čekejte prosím, nastavuji úroveň zabezpečení..."
+
 #: ../../keyboard.pm:1
 #, c-format
 msgid "German (no dead keys)"
@@ -20023,11 +20318,6 @@ msgstr ""
 "Nyní lze provést export přes protokol NFS nebo Samba. Vyberte prosím, který "
 "chcete použít."
 
-#: ../../help.pm:1 ../../install_steps_interactive.pm:1
-#, c-format
-msgid "Reboot"
-msgstr "Restartovat"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Gambia"
@@ -20037,6 +20327,12 @@ msgstr "Gambie"
 #, c-format
 msgid "Mandrake Control Center"
 msgstr "Ovládací centrum Mandrake"
+
+#: ../../help.pm:1 ../../install_steps_interactive.pm:1
+#: ../../../move/move.pm:1
+#, c-format
+msgid "Reboot"
+msgstr "Restartovat"
 
 #: ../../printer/main.pm:1
 #, c-format
@@ -20072,6 +20368,11 @@ msgstr ""
 #, c-format
 msgid "Remember this password"
 msgstr "Pamatovat si heslo"
+
+#: ../../install_steps_gtk.pm:1
+#, c-format
+msgid "due to unsatisfied %s"
+msgstr ""
 
 #: ../../standalone/drakgw:1
 #, c-format
@@ -20132,6 +20433,11 @@ msgstr "Papua Nová Guinea"
 #, c-format
 msgid "Multi-function device on a parallel port"
 msgstr "Multifunkční zařízení na paralelním portu"
+
+#: ../../../move/tree/mdk_totem:1
+#, fuzzy, c-format
+msgid "Busy files"
+msgstr "Zálohovat systémové soubory"
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -20195,6 +20501,21 @@ msgstr ""
 #, c-format
 msgid "DHCP Client"
 msgstr "DHCP klient"
+
+#: ../../standalone/harddrake2:1
+#, c-format
+msgid ""
+"This is HardDrake, a Mandrake hardware configuration tool.\n"
+"<span foreground=\"royalblue3\">Version:</span> %s\n"
+"<span foreground=\"royalblue3\">Author:</span> Thierry Vignaud &lt;"
+"tvignaud@mandrakesoft.com&gt;\n"
+"\n"
+msgstr ""
+"Toto je HardDrake, nástroj společnosti Mandrake pro nastavení hardware.\n"
+"<span foreground=\"royalblue3\">Version:</span> %s\n"
+"<span foreground=\"royalblue3\">Author:</span> Thierry Vignaud &lt;"
+"tvignaud@mandrakesoft.com&gt;\n"
+"\n"
 
 #: ../../standalone/drakgw:1
 #, c-format
@@ -20396,74 +20717,13 @@ msgstr "Nepřenášet tiskárny"
 msgid "Delay before booting the default image"
 msgstr "Prodleva před automatickým zavedením výchozího obrazu"
 
-#: ../../standalone/drakfont:1
-#, c-format
-msgid ""
-"\n"
-" Copyright (C) 2001-2002 by MandrakeSoft \n"
-"     DUPONT Sebastien (original version)\n"
-"     CHAUMETTE Damien <dchaumette\\@mandrakesoft.com>\n"
-"\n"
-" This program is free software; you can redistribute it and/or modify\n"
-" it under the terms of the GNU General Public License as published by\n"
-" the Free Software Foundation; either version 2, or (at your option)\n"
-" any later version.\n"
-"\n"
-" This program is distributed in the hope that it will be useful,\n"
-" but WITHOUT ANY WARRANTY; without even the implied warranty of\n"
-" MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n"
-" GNU General Public License for more details.\n"
-"\n"
-" You should have received a copy of the GNU General Public License\n"
-" along with this program; if not, write to the Free Software\n"
-" Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.\n"
-"\n"
-" Thanks:\n"
-"    -  pfm2afm:   \n"
-"\t by Ken Borgendale:\n"
-"\t    Convert a Windows .pfm  file to a .afm (Adobe Font Metrics)\n"
-"    -  type1inst:\n"
-"\t by James Macnicol: \n"
-"\t    type1inst generates files fonts.dir fonts.scale & Fontmap.\n"
-"    -  ttf2pt1:   \n"
-"\t  by Andrew Weeks, Frank Siegert, Thomas Henlich, Sergey Babkin  \n"
-"             Convert ttf font files to afm and pfb fonts\n"
-msgstr ""
-"\n"
-" Copyright ©2001-2002 MandrakeSoft \n"
-"      DUPONT Sebastien (původní verze)\n"
-"      CHAUMETTE Damien <dchaumette\\@mandrakesoft.com>\n"
-"\n"
-" Tento program je svobodný software; můžete ho šířit a/nebo modifikovat\n"
-" podle specifikace GNU General Public Licence, která byla publikována\n"
-" Free Software Foundation; buď verze 2, nebo (podle volby) pozdější verze.\n"
-"\n"
-" Tento program je distribuován s nadějí, že bude užitečný,\n"
-" ale BEZ JAKÝCHKOLIV ZÁRUK; BEZ NÁROKU NA PROFIT. Více detailů naleznete\n"
-" v licenci GNU General Public Licence.\n"
-"\n"
-" Kopii GNU General Public Licence můžete obdržet buď s tímto programem\n"
-" nebo si o ní můžete napsat na adresu Free Software Foundation, Inc.,\n"
-" 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.\n"
-"\n"
-" Poděkování:\n"
-"   - pfm2afm: \n"
-"\t autor Ken Borgendale:\n"
-"\t    Převádí Windows .pfm soubor na .afm (Adobe Font Metrics)\n"
-"    -  type1inst:\n"
-"\t autor James Macnicol: \n"
-"\t    type1inst generuje soubory fonts.dir fonts.scale & Fontmap.\n"
-"    -  ttf2pt1:   \n"
-"\t  autoři Andrew Weeks, Frank Siegert, Thomas Henlich, Sergey Babkin  \n"
-"             Převádí soubory s ttf fonty na soubory afm a pfb\n"
-
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "Use Hard Disk to backup"
 msgstr "Použít pro zálohování pevný disk"
 
 #: ../../help.pm:1 ../../install_steps_gtk.pm:1 ../../standalone/drakbackup:1
-#: ../../standalone/drakboot:1 ../../standalone/drakgw:1
+#: ../../standalone/drakboot:1
 #, c-format
 msgid "Configure"
 msgstr "Nastavit"
@@ -20529,7 +20789,7 @@ msgstr ""
 "Je možné, že je poškozen CD disk nebo CD-ROM mechanika.\n"
 "Zkontrolujete to použitím příkazu \"rpm -qpl Mandrake/RPMS/*.rpm\"\n"
 
-#: ../../share/advertising/06-development.pl:1
+#: ../advertising/06-development.pl:1
 #, c-format
 msgid "Mandrake Linux 9.2: the ultimate development platform"
 msgstr "Distribuce Mandrake Linux 9.2 je nejlepší vývojová platforma"
@@ -20617,6 +20877,11 @@ msgstr "konečné rozlišení"
 msgid "Services"
 msgstr "Služby"
 
+#: ../../../move/move.pm:1
+#, fuzzy, c-format
+msgid "Auto configuration"
+msgstr "Vlastní nastavení"
+
 #: ../../Xconfig/card.pm:1
 #, c-format
 msgid "4 MB"
@@ -20655,9 +20920,10 @@ msgid "Internet station"
 msgstr "Internetová stanice"
 
 #: ../../share/compssUsers:999
+#, fuzzy
 msgid ""
-"Set of tools to read and send mail and news (pine, mutt, tin..) and to "
-"browse the Web"
+"Set of tools to read and send mail and news (mutt, tin..) and to browse the "
+"Web"
 msgstr ""
 "Kolekce nástrojů pro čtení a posílaní el. pošty a příspěvků do diskusních "
 "skupin (pine, mutt, tin..) a pro prohlížení Webu"
@@ -20800,6 +21066,40 @@ msgstr ""
 "Kolekce nástrojů pro čtení a posílaní el. pošty a příspěvků do diskusních "
 "skupin a pro prohlížení webu"
 
+#~ msgid "The setup has already been done, and it's currently enabled."
+#~ msgstr "Nastavení již bylo provedeno, nyní je povoleno."
+
+#~ msgid "Logs"
+#~ msgstr "Logy"
+
+#~ msgid "The setup has already been done, but it's currently disabled."
+#~ msgstr "Nastavení již bylo provedeno, ale nyní je vypnuto."
+
+#~ msgid "Profile "
+#~ msgstr "Profil "
+
+#~ msgid ""
+#~ "Welcome to the Internet Connection Sharing utility!\n"
+#~ "\n"
+#~ "%s\n"
+#~ "\n"
+#~ "Click on Configure to launch the setup wizard."
+#~ msgstr ""
+#~ "Vítá vás průvodce nastavením sdílení připojení k Internetu!\n"
+#~ "\n"
+#~ "%s\n"
+#~ "\n"
+#~ "Klepněte na Konfigurovat, pokud chcete spustit průvodce nastavením."
+
+#~ msgid "Internet Connection Sharing configuration"
+#~ msgstr "Nastavení sdílení připojení k Internetu"
+
+#~ msgid "No Internet Connection Sharing has ever been configured."
+#~ msgstr "Není nastaveno žádné sdílení Internetového připojení."
+
+#~ msgid "when checked, owner and group won't be changed"
+#~ msgstr "pokud je zaškrtnuto, vlastník a skupina nebudou změněny"
+
 #~ msgid ""
 #~ "XawTV isn't installed!\n"
 #~ "\n"
@@ -20807,7 +21107,7 @@ msgstr ""
 #~ "If you do have a TV card but DrakX has neither detected it (no bttv nor "
 #~ "saa7134\n"
 #~ "module in \"/etc/modules\") nor installed xawtv, please send the\n"
-#~ "results of \"lspcidrake -v -f\" to \"install\\@mandrakesoft.com\"\n"
+#~ "results of \"lspcidrake -v -f\" to \"install@mandrakesoft.com\"\n"
 #~ "with subject \"undetected TV card\".\n"
 #~ "\n"
 #~ "\n"
@@ -20819,7 +21119,7 @@ msgstr ""
 #~ "Máte-li TV kartu a nástroj DrakX ji ani nerozpoznal (není přítomen\n"
 #~ "modul bttv nebo saa7314 v \"/etc/modules\"), ani nenainstaloval\n"
 #~ "aplikaci XawTV, pošlete prosím výsledek příkazu\n"
-#~ "\"lspcidrake -v -f\" na adresu \"install\\@mandrakesoft.com\"\n"
+#~ "\"lspcidrake -v -f\" na adresu \"install@mandrakesoft.com\"\n"
 #~ "s předmětem zprávy \"undetected TV card\".\n"
 #~ "\n"
 #~ "Tuto aplikaci můžete doinstalovat příkazem \"urpmi xawtv\" spuštěným \n"
@@ -21219,11 +21519,10 @@ msgstr ""
 #~ msgstr "Zadejte prosím název počítače nebo IP."
 
 #~ msgid ""
-#~ " Copyright (C) 2001-2002 MandrakeSoft by DUPONT Sebastien <dupont_s"
-#~ "\\@epita.fr>"
-#~ msgstr ""
-#~ " Copyright ©2001-2002 MandrakeSoft by DUPONT Sebastien <dupont_s\\@epita."
+#~ " Copyright (C) 2001-2002 MandrakeSoft by DUPONT Sebastien <dupont_s@epita."
 #~ "fr>"
+#~ msgstr ""
+#~ " Copyright ©2001-2002 MandrakeSoft by DUPONT Sebastien <dupont_s@epita.fr>"
 
 #~ msgid ""
 #~ "Options Description:\n"
@@ -21332,10 +21631,10 @@ msgstr ""
 #~ "\n"
 
 #~ msgid ""
-#~ " updates 2002 MandrakeSoft by Stew Benedict <sbenedict\\@mandrakesoft.com>"
+#~ " updates 2002 MandrakeSoft by Stew Benedict <sbenedict@mandrakesoft.com>"
 #~ msgstr ""
-#~ " aktualizace 2002 MandrakeSoft od Stewa Benedicta <sbenedict"
-#~ "\\@mandrakesoft.com>"
+#~ " aktualizace 2002 MandrakeSoft od Stewa Benedicta <sbenedict@mandrakesoft."
+#~ "com>"
 
 #~ msgid ""
 #~ "Arguments: (arg, expr='*.*', dev='tty12')\n"

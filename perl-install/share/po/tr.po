@@ -14,7 +14,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX-tr\n"
-"POT-Creation-Date: 2003-09-16 13:45+0200\n"
+"POT-Creation-Date: 2003-12-03 03:09+0100\n"
 "PO-Revision-Date: 2003-09-11 22:21+0300\n"
 "Last-Translator: Ömer Fadıl USTA <omer_fad@hotmail.com>\n"
 "Language-Team: Turkish <tr@li.org>\n"
@@ -291,11 +291,6 @@ msgstr "CUPS yapılandırması"
 msgid "Total progress"
 msgstr "Toplam işlem"
 
-#: ../../lang.pm:1
-#, c-format
-msgid "Hong Kong"
-msgstr "Hong Kong"
-
 #: ../../install_interactive.pm:1
 #, c-format
 msgid "Not enough free space to allocate new partitions"
@@ -370,6 +365,24 @@ msgstr "Seçili makineyi düzenle"
 msgid "No CD device defined!"
 msgstr "Hiç CD aygıtı tanımlanmamış!"
 
+#: ../../network/shorewall.pm:1
+#, fuzzy, c-format
+msgid ""
+"Please enter the name of the interface connected to the "
+"internet.              \n"
+"                \n"
+"Examples:\n"
+"                ppp+ for modem or DSL connections, \n"
+"                eth0, or eth1 for cable connection, \n"
+"                ippp+ for a isdn connection.\n"
+msgstr ""
+"Lütfen İnternet'e bağlantı için kullanılacak arayüzü seçiniz.\n"
+"\n"
+"Örnek:\n"
+"\t\tppp+  : modem veya DSL bağlantıları, \n"
+"\t\teth0, veya eth1 : kablo bağlantısı, \n"
+"\t\tippp+ : isdn bağlantısı.\n"
+
 #: ../../standalone/drakbackup:1
 #, fuzzy, c-format
 msgid "\tUse .backupignore files\n"
@@ -441,15 +454,20 @@ msgstr "Değişiklik tamamlandı, dm hizmetini yeniden başlatmak ister misiniz?
 msgid "Swiss (French layout)"
 msgstr "İsveççe (Fransız klavyesi)"
 
+#: ../../raid.pm:1
+#, c-format
+msgid "mkraid failed (maybe raidtools are missing?)"
+msgstr "mkraid başarısız (raidtools eksik olabilir mi?"
+
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "August"
 msgstr "Ağustos"
 
-#: ../../raid.pm:1
-#, c-format
-msgid "mkraid failed (maybe raidtools are missing?)"
-msgstr "mkraid başarısız (raidtools eksik olabilir mi?"
+#: ../../network/drakfirewall.pm:1
+#, fuzzy, c-format
+msgid "FTP server"
+msgstr "Zaman sunucusu"
 
 #: ../../harddrake/data.pm:1
 #, c-format
@@ -528,11 +546,6 @@ msgstr "%s ayarlarında muhtemel bir yerel ağ adresi çakışması bulundu!\n"
 #, c-format
 msgid "Configuring..."
 msgstr "Yapılandırılıyor..."
-
-#: ../../standalone/drakgw:1
-#, c-format
-msgid "The setup has already been done, and it's currently enabled."
-msgstr "Ayarlar daha önceden yapılmış şekilde ,ve o aktif halde ayarlı."
 
 #: ../../harddrake/v4l.pm:1
 #, c-format
@@ -668,6 +681,11 @@ msgstr "\"%s\" adlı Novell sunucusu ve \"%s\" yazıcısı üzerinde"
 msgid "Printer Name"
 msgstr "Yazıcı Adı"
 
+#: ../../../move/move.pm:1
+#, c-format
+msgid "Setting up USB key"
+msgstr ""
+
 #: ../../standalone/drakfloppy:1
 #, c-format
 msgid "Remove a module"
@@ -725,15 +743,17 @@ msgstr ""
 msgid "if needed"
 msgstr "gerekirse"
 
+#: ../../standalone/drakclock:1
+#, c-format
+msgid ""
+"We need to install ntp package\n"
+" to enable Network Time Protocol"
+msgstr ""
+
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "Restore Failed..."
 msgstr "Geri Alma Başarısız..."
-
-#: ../../standalone/harddrake2:1
-#, c-format
-msgid "/Autodetect _jazz drives"
-msgstr "/_jazz sürücülerini otomatik algıla"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -1050,11 +1070,6 @@ msgstr ""
 #, c-format
 msgid "512 kB"
 msgstr "512 kB"
-
-#: ../../standalone/net_monitor:1
-#, c-format
-msgid "Logs"
-msgstr "Kayıtlar"
 
 #: ../../standalone/scannerdrake:1
 #, c-format
@@ -1529,6 +1544,11 @@ msgstr "Latviya dili"
 msgid "monthly"
 msgstr "aylık"
 
+#: ../../../move/move.pm:1
+#, fuzzy, c-format
+msgid "Retry"
+msgstr "Geri Al"
+
 #: ../../standalone/drakfloppy:1
 #, c-format
 msgid "Module name"
@@ -1574,6 +1594,11 @@ msgstr "Öntanımlı olarak Unicode kullan"
 msgid "the module of the GNU/Linux kernel that handles the device"
 msgstr "O aygıtı işleyecek GNU/Linux çekirdek modülü"
 
+#: ../../standalone/drakclock:1
+#, fuzzy, c-format
+msgid "Is your hardware clock set to GMT?"
+msgstr "Donanım saati GMT'ye göre ayarlansın"
+
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid "Trying to rescue partition table"
@@ -1616,6 +1641,11 @@ msgstr "Canlı güncelleme başlatılamıyor !!!\n"
 msgid "Name: "
 msgstr "İsim: "
 
+#: ../../standalone/drakconnect:1
+#, c-format
+msgid "up"
+msgstr ""
+
 #: ../../Xconfig/resolution_and_depth.pm:1
 #, c-format
 msgid "16 million colors (24 bits)"
@@ -1626,7 +1656,7 @@ msgstr "16 milyon renk (24 bit)"
 msgid "Allow all users"
 msgstr "Tüm kullanıcılara izin ver"
 
-#: ../../share/advertising/08-store.pl:1
+#: ../advertising/08-store.pl:1
 #, c-format
 msgid "The official MandrakeSoft Store"
 msgstr "Resmi MandrakeSoft Mağazası"
@@ -1660,15 +1690,15 @@ msgstr "Kullanıcı"
 msgid "Do new backup before restore (only for incremental backups.)"
 msgstr "Geri almadan önce yeni yedekleme yapılsın (sadece fark yedeklemesinde)"
 
-#: ../../standalone/harddrake2:1
-#, c-format
-msgid "Name"
-msgstr "İsim:"
-
 #: ../../raid.pm:1
 #, c-format
 msgid "mkraid failed"
 msgstr "mkraid başarısız"
+
+#: ../../standalone/harddrake2:1
+#, c-format
+msgid "Name"
+msgstr "İsim:"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -1900,6 +1930,22 @@ msgstr "Servisler Etkinleştiriliyor..."
 #, c-format
 msgid "Printing test page(s)..."
 msgstr "Deneme sayfası basılıyor..."
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid ""
+"Transfer successful\n"
+"You may want to verify you can login to the server with:\n"
+"\n"
+"ssh -i %s %s@%s\n"
+"\n"
+"without being prompted for a password."
+msgstr ""
+"Aktarma başarıyla gerçekleştirildi!\n"
+"Aşağıdaki komutla, size parola sorulmadan, sunucuda oturum\n"
+"açıp açamadığınızı görebilirsiniz:\n"
+"\n"
+"ssh -i %s %s@%s"
 
 #: ../../fsedit.pm:1
 #, c-format
@@ -2890,6 +2936,11 @@ msgstr "Sürücünün özel kapasiteleri ( yazma desteği ve/veya DVD support"
 msgid "Can't add a partition to _formatted_ RAID md%d"
 msgstr "Biçemlendirilmiş RAID md%d 'ye disk bölümü eklenemedi"
 
+#: ../../standalone/drakclock:1
+#, fuzzy, c-format
+msgid "Network Time Protocol"
+msgstr "Ağ arabirimi"
+
 #: ../../Xconfig/card.pm:1
 #, c-format
 msgid ""
@@ -3110,7 +3161,7 @@ msgstr "Palau"
 msgid "level"
 msgstr "seviye"
 
-#: ../../share/advertising/13-mdkexpert_corporate.pl:1
+#: ../advertising/13-mdkexpert_corporate.pl:1
 #, c-format
 msgid ""
 "All incidents will be followed up by a single qualified MandrakeSoft "
@@ -3496,7 +3547,7 @@ msgstr ""
 msgid "Bad package"
 msgstr "Hatalı paket"
 
-#: ../../share/advertising/07-server.pl:1
+#: ../advertising/07-server.pl:1
 #, c-format
 msgid ""
 "Transform your computer into a powerful Linux server: Web server, mail, "
@@ -3762,7 +3813,7 @@ msgstr "Crackers'a Hoş Geldiniz"
 msgid "Module options:"
 msgstr "Modül seçenekleri:"
 
-#: ../../share/advertising/11-mnf.pl:1
+#: ../advertising/11-mnf.pl:1
 #, c-format
 msgid "Secure your networks with the Multi Network Firewall"
 msgstr "Çoklu Ağ Ateşduvarı ile ağınızı koruyun"
@@ -3842,6 +3893,11 @@ msgstr "Fare"
 #, c-format
 msgid "not enough room in /boot"
 msgstr "/boot içinde yeterli yer yok"
+
+#: ../../install_steps_gtk.pm:1
+#, c-format
+msgid "trying to promote %s"
+msgstr ""
 
 #: ../../lang.pm:1
 #, c-format
@@ -3989,6 +4045,11 @@ msgstr ""
 msgid "Saudi Arabia"
 msgstr "Suudi Arabistan"
 
+#: ../../services.pm:1
+#, c-format
+msgid "Internet"
+msgstr "İnternet"
+
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid "Continue anyway?"
@@ -4008,11 +4069,6 @@ msgstr ""
 #, c-format
 msgid "Printer"
 msgstr "Yazıcı"
-
-#: ../../services.pm:1
-#, c-format
-msgid "Internet"
-msgstr "İnternet"
 
 #: ../../standalone/service_harddrake:1
 #, c-format
@@ -4086,6 +4142,11 @@ msgstr "Bağlantı noktaları sadece alfabetik harfler içerebilir."
 #, c-format
 msgid "Restarting printing system..."
 msgstr "Yazdırma sistemi başlatılıyor ..."
+
+#: ../../../move/tree/mdk_totem:1
+#, c-format
+msgid "You can only run with no CDROM support"
+msgstr ""
 
 #: ../../modules/interactive.pm:1
 #, c-format
@@ -4305,15 +4366,15 @@ msgstr "ISA / PCMCIA"
 msgid "About"
 msgstr "Hakkında"
 
-#: ../../network/network.pm:1
-#, c-format
-msgid "Proxies configuration"
-msgstr "Vekil sunucu ayarları"
-
 #: ../../mouse.pm:1
 #, c-format
 msgid "GlidePoint"
 msgstr "GlidePoint"
+
+#: ../../network/network.pm:1
+#, c-format
+msgid "Proxies configuration"
+msgstr "Vekil sunucu ayarları"
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -4462,6 +4523,11 @@ msgstr "Bağlama noktaları / ile başlamalıdır"
 msgid "Choose your CD/DVD device"
 msgstr "Lütfen CD/DVD aygıtınızı seçiniz"
 
+#: ../../network/drakfirewall.pm:1
+#, fuzzy, c-format
+msgid "CUPS server"
+msgstr "DNS sunucusu"
+
 #: ../../standalone/logdrake:1
 #, c-format
 msgid "Postfix Mail Server"
@@ -4477,7 +4543,7 @@ msgstr "Kaydetmeden Çık"
 msgid "Yemen"
 msgstr "Yemen"
 
-#: ../../share/advertising/11-mnf.pl:1
+#: ../advertising/11-mnf.pl:1
 #, c-format
 msgid "This product is available on the MandrakeStore Web site."
 msgstr "Bu ürün MandrakeStore web sitesinden edinilebilir"
@@ -4486,6 +4552,31 @@ msgstr "Bu ürün MandrakeStore web sitesinden edinilebilir"
 #, c-format
 msgid "=> There are many things to choose from (%s).\n"
 msgstr "=> Oradan seçilecek bir kaç şey var (%s).\n"
+
+#: ../../standalone/drakclock:1
+#, c-format
+msgid "GMT - DrakClock"
+msgstr ""
+
+#: ../../../move/move.pm:1
+#, c-format
+msgid ""
+"An error occurred:\n"
+"\n"
+"\n"
+"%s\n"
+"\n"
+"This may come from corrupted system configuration files\n"
+"on the USB key, in this case removing them and then\n"
+"rebooting Mandrake Move would fix the problem. To do\n"
+"so, click on the corresponding button.\n"
+"\n"
+"\n"
+"You may also want to reboot and remove the USB key, or\n"
+"examine its contents under another OS, or even have\n"
+"a look at log files in console #3 and #4 to try to\n"
+"guess what's happening."
+msgstr ""
 
 #: ../../steps.pm:1
 #, c-format
@@ -4727,6 +4818,11 @@ msgstr "Userdrake"
 #, c-format
 msgid "Which partition do you want to use for Linux4Win?"
 msgstr "Linux4Win için hangi disk bölümünü kullanmak istiyorsunuz?"
+
+#: ../../install_steps_gtk.pm:1
+#, fuzzy, c-format
+msgid "due to missing %s"
+msgstr "kdesu kayıp"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -5274,7 +5370,7 @@ msgstr ""
 msgid "Started on boot"
 msgstr "Önyüklemede başlatılan"
 
-#: ../../share/advertising/12-mdkexpert.pl:1
+#: ../advertising/12-mdkexpert.pl:1
 #, c-format
 msgid ""
 "Join the MandrakeSoft support teams and the Linux Community online to share "
@@ -5604,11 +5700,6 @@ msgid ""
 msgstr ""
 "Konsol altında\n"
 "temaları göster"
-
-#: ../../standalone/net_monitor:1
-#, c-format
-msgid "Statistics"
-msgstr "İstatistikler"
 
 #: ../../printer/cups.pm:1
 #, c-format
@@ -6429,7 +6520,7 @@ msgstr ""
 "Yüksek kalite rastgele sayı üretimi için sistem entropi havuzunun \n"
 "saklanması ve yeniden eski haline getirilmesini sağlar."
 
-#: ../../share/advertising/07-server.pl:1
+#: ../advertising/07-server.pl:1
 #, c-format
 msgid "Turn your computer into a reliable server"
 msgstr "Makinanızı güvenilir bir sunucuya dönüştürün"
@@ -6444,6 +6535,11 @@ msgstr ""
 msgid " (driver %s)"
 msgstr " (%s sürücüsü)"
 
+#: ../../services.pm:1
+#, c-format
+msgid "Start when requested"
+msgstr ""
+
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid ""
@@ -6457,11 +6553,6 @@ msgstr ""
 #, c-format
 msgid "I don't know"
 msgstr "Bilmiyorum"
-
-#: ../../services.pm:1
-#, c-format
-msgid "Start when requested"
-msgstr ""
 
 #: ../../printer/main.pm:1
 #, c-format
@@ -6680,6 +6771,11 @@ msgstr ""
 "printerdrake uygulamasını Mandrake Kontrol Merkezinin Donanım bölümünden "
 "çalıştırabilirsiniz."
 
+#: ../../../move/move.pm:1
+#, fuzzy, c-format
+msgid "Key isn't writable"
+msgstr "XawTV kurulu değil!"
+
 #: ../../lang.pm:1
 #, c-format
 msgid "Bangladesh"
@@ -6724,15 +6820,15 @@ msgstr ""
 msgid "Set the root umask."
 msgstr "Root parolası"
 
-#: ../../network/modem.pm:1 ../../standalone/drakconnect:1
-#, c-format
-msgid "Script-based"
-msgstr "Betik tabanlı"
-
 #: ../../install_any.pm:1 ../../partition_table.pm:1
 #, c-format
 msgid "Error reading file %s"
 msgstr "%s dosyası okunurken hata oluştu"
+
+#: ../../network/modem.pm:1 ../../standalone/drakconnect:1
+#, c-format
+msgid "Script-based"
+msgstr "Betik tabanlı"
 
 #: ../../harddrake/v4l.pm:1
 #, c-format
@@ -6805,22 +6901,6 @@ msgstr ""
 #, c-format
 msgid "Domain Authentication Required"
 msgstr "Etki alanı kimlik doğrulaması gerekli"
-
-#: ../../standalone/drakTermServ:1
-#, c-format
-msgid ""
-"\n"
-"\n"
-" Thanks:\n"
-"\t- LTSP Project http://www.ltsp.org\n"
-"\t- Michael Brown <mbrown\\@fensystems.co.uk>\n"
-"\n"
-msgstr ""
-"\n"
-"\n"
-" Teşekkürler:\n"
-"\t- LTSP Projesi http://www.ltsp.org\n"
-"\t- Michael Brown <mbrown\\@fensystems.co.uk\n"
 
 #: ../../security/level.pm:1
 #, c-format
@@ -7526,15 +7606,15 @@ msgstr "Yaboot"
 msgid "Logitech CC Series with Wheel emulation"
 msgstr "Logitech CC Series"
 
-#: ../../standalone/drakboot:1
-#, c-format
-msgid "Splash selection"
-msgstr "Açılış Ekranı seçimi"
-
 #: ../../partition_table.pm:1
 #, c-format
 msgid "Extended partition not supported on this platform"
 msgstr "Mantıksal bölüm bu platform tarafından desteklenmiyor"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Splash selection"
+msgstr "Açılış Ekranı seçimi"
 
 #: ../../network/isdn.pm:1
 #, c-format
@@ -7594,6 +7674,11 @@ msgstr ""
 msgid "Printer default settings"
 msgstr "Öntanımlı yazıcı ayarları"
 
+#: ../../mouse.pm:1
+#, c-format
+msgid "Generic PS2 Wheel Mouse"
+msgstr "Sıradan Tekerli PS2 Fare"
+
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid ""
@@ -7601,11 +7686,6 @@ msgid ""
 "memory page level, thus enabling the processor to prevent unchecked kernel "
 "accesses to user memory (aka this is a bug guard)"
 msgstr ""
-
-#: ../../mouse.pm:1
-#, c-format
-msgid "Generic PS2 Wheel Mouse"
-msgstr "Sıradan Tekerli PS2 Fare"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -7760,6 +7840,11 @@ msgstr "Kore klavyesi"
 msgid "Not connected"
 msgstr "Bağlanılamadı"
 
+#: ../../standalone/net_monitor:1
+#, fuzzy, c-format
+msgid "No internet connection configured"
+msgstr "Internet bağlantısı ayarları"
+
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Greek"
@@ -7774,22 +7859,6 @@ msgstr "Sen Kitts ve Nevis"
 #, c-format
 msgid "Generic 3 Button Mouse with Wheel emulation"
 msgstr "Tekerlek Emülasyonlu Genel 3 tuşlu Fare"
-
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid ""
-"Transfer successful\n"
-"You may want to verify you can login to the server with:\n"
-"\n"
-"ssh -i %s %s\\@%s\n"
-"\n"
-"without being prompted for a password."
-msgstr ""
-"Aktarma başarıyla gerçekleştirildi!\n"
-"Aşağıdaki komutla, size parola sorulmadan, sunucuda oturum\n"
-"açıp açamadığınızı görebilirsiniz:\n"
-"\n"
-"ssh -i %s %s\\@%s"
 
 #: ../../any.pm:1
 #, c-format
@@ -8022,7 +8091,7 @@ msgstr ""
 "Ayrıca yeni bir isim girebilir ya da\n"
 "bu yazıcıyı atlayabilirsiniz."
 
-#: ../../share/advertising/12-mdkexpert.pl:1
+#: ../advertising/12-mdkexpert.pl:1
 #, c-format
 msgid ""
 "Find the solutions of your problems via MandrakeSoft's online support "
@@ -8088,6 +8157,22 @@ msgstr "Kırgızistan"
 #, c-format
 msgid "Multi-function device on USB"
 msgstr "USB üzerindeki Çok işlevli aygıt"
+
+#: ../../../move/move.pm:1
+#, c-format
+msgid ""
+"We didn't detect any USB key on your system. If you\n"
+"plug in an USB key now, Mandrake Move will have the ability\n"
+"to transparently save the data in your home directory and\n"
+"system wide configuration, for next boot on this computer\n"
+"or another one. Note: if you plug in a key now, wait several\n"
+"seconds before detecting again.\n"
+"\n"
+"\n"
+"You may also proceed without an USB key - you'll still be\n"
+"able to use Mandrake Move as a normal live Mandrake\n"
+"Operating System."
+msgstr ""
 
 #: ../../help.pm:1
 #, c-format
@@ -8183,15 +8268,15 @@ msgstr "Yapışkan-bit"
 msgid "Other Media"
 msgstr "Diğer Ortam"
 
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "Backup system files"
-msgstr "Sistem dosyaları yedeklensin"
-
 #: ../../mouse.pm:1
 #, c-format
 msgid "Logitech MouseMan+"
 msgstr "Logitech MouseMan+"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "Backup system files"
+msgstr "Sistem dosyaları yedeklensin"
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -8254,6 +8339,11 @@ msgstr "Sistem ayarları"
 msgid "Please choose your type of mouse."
 msgstr "Lütfen kullandığınız farenin türünü seçin."
 
+#: ../../services.pm:1
+#, c-format
+msgid "running"
+msgstr "çalışıyor"
+
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "class of hardware device"
@@ -8270,11 +8360,6 @@ msgstr ""
 #, c-format
 msgid "United Kingdom"
 msgstr "İngiltere"
-
-#: ../../services.pm:1
-#, c-format
-msgid "running"
-msgstr "çalışıyor"
 
 #: ../../lang.pm:1
 #, c-format
@@ -8320,7 +8405,7 @@ msgstr "Senegal"
 msgid "Command line"
 msgstr "Komut satırı"
 
-#: ../../share/advertising/08-store.pl:1
+#: ../advertising/08-store.pl:1
 #, c-format
 msgid ""
 "Our full range of Linux solutions, as well as special offers on products and "
@@ -8377,6 +8462,17 @@ msgstr "Takas"
 #, c-format
 msgid "Custom settings"
 msgstr "Özel ayarlar"
+
+#: ../../../move/move.pm:1
+#, c-format
+msgid ""
+"The USB key seems to have write protection enabled, but we can't safely\n"
+"unplug it now.\n"
+"\n"
+"\n"
+"Click the button to reboot the machine, unplug it, remove write protection,\n"
+"plug the key again, and launch Mandrake Move again."
+msgstr ""
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -8487,7 +8583,7 @@ msgstr ""
 msgid "Photo memory card access on your HP multi-function device"
 msgstr ""
 
-#: ../../share/advertising/09-mdksecure.pl:1
+#: ../advertising/09-mdksecure.pl:1
 #, fuzzy, c-format
 msgid ""
 "Enhance your computer performance with the help of a selection of partners "
@@ -8612,6 +8708,11 @@ msgstr ""
 #, c-format
 msgid "Exit install"
 msgstr "Kurulumdan Çık"
+
+#: ../../../move/move.pm:1
+#, c-format
+msgid "Need a key to save your data"
+msgstr ""
 
 #: ../../standalone/drakgw:1
 #, c-format
@@ -8794,11 +8895,6 @@ msgstr "Rusça (Fonetik)"
 msgid "dhcpd Config..."
 msgstr "dhcpd Yapılandırması..."
 
-#: ../../standalone/drakgw:1
-#, c-format
-msgid "The setup has already been done, but it's currently disabled."
-msgstr "Ayarlar daha önceden yapılmış şekilde , ama o pasif halde ayarlı."
-
 #: ../../any.pm:1
 #, c-format
 msgid "LILO/grub Installation"
@@ -8976,6 +9072,11 @@ msgstr ""
 msgid "Choose an X server"
 msgstr "Bir X sunucusu seçiniz"
 
+#: ../../../move/tree/mdk_totem:1
+#, c-format
+msgid "Copying to memory to allow removing the CDROM"
+msgstr ""
+
 #: ../../install_interactive.pm:1
 #, c-format
 msgid "Swap partition size in MB: "
@@ -9025,7 +9126,7 @@ msgstr "Otomatik adım yapılandırması"
 msgid "Barbados"
 msgstr "Barbados"
 
-#: ../../share/advertising/02-community.pl:1
+#: ../advertising/02-community.pl:1
 #, c-format
 msgid ""
 "Want to know more and to contribute to the Open Source community? Get "
@@ -9188,15 +9289,6 @@ msgstr "CPU'un alt nesli"
 msgid "First Time Wizard"
 msgstr "İlk Açılış Sihirbazı"
 
-#: ../../install_steps.pm:1
-#, c-format
-msgid ""
-"An error occurred, but I don't know how to handle it nicely.\n"
-"Continue at your own risk."
-msgstr ""
-"Bir hata oluştu, ancak sebebi saptanamadı.\n"
-"Devam edebilirsiniz, ama risk size ait!"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Taiwan"
@@ -9211,6 +9303,15 @@ msgstr "Pakistan"
 #, c-format
 msgid "please wait, parsing file: %s"
 msgstr "Lütfen dosya ayrıştırılırken bekleyiniz: %s"
+
+#: ../../install_steps.pm:1 ../../../move/move.pm:1
+#, c-format
+msgid ""
+"An error occurred, but I don't know how to handle it nicely.\n"
+"Continue at your own risk."
+msgstr ""
+"Bir hata oluştu, ancak sebebi saptanamadı.\n"
+"Devam edebilirsiniz, ama risk size ait!"
 
 #: ../../install_steps_gtk.pm:1
 #, c-format
@@ -9402,6 +9503,11 @@ msgstr ""
 "Lütfen disketteki paket seçimini yükle veya kaydete tıklayınız.\n"
 "Otomatik kurulum disketleriyle aynı biçemde oluşturulacaktır."
 
+#: ../../../move/tree/mdk_totem:1
+#, fuzzy, c-format
+msgid "No CDROM support"
+msgstr "Radyo desteği :"
+
 #: ../../standalone/drakxtv:1
 #, c-format
 msgid "China (broadcast)"
@@ -9439,7 +9545,7 @@ msgstr ""
 "%s modülü yüklenemedi.\n"
 "Tekrar başka parametrelerle denemek ister misiniz?"
 
-#: ../../share/advertising/01-thanks.pl:1
+#: ../advertising/01-thanks.pl:1
 #, c-format
 msgid "Welcome to the Open Source world."
 msgstr "Açık Kaynak Kodu Dünyasına Hoş Geldiniz."
@@ -9664,6 +9770,11 @@ msgstr "Diğer portlar"
 msgid "number of capture buffers for mmap'ed capture"
 msgstr "mmap yakalaması için yakalama tamponu sayısı"
 
+#: ../../network/adsl.pm:1
+#, fuzzy, c-format
+msgid " - detected"
+msgstr "algılandı"
+
 #: ../../harddrake/data.pm:1
 #, c-format
 msgid "SMBus controllers"
@@ -9763,6 +9874,11 @@ msgstr ""
 msgid "Restore"
 msgstr "Geri Al"
 
+#: ../../standalone/drakclock:1
+#, fuzzy, c-format
+msgid "Server:"
+msgstr "Sunucu: "
+
 #: ../../security/help.pm:1
 #, c-format
 msgid "if set to yes, check if the network devices are in promiscuous mode."
@@ -9772,6 +9888,11 @@ msgstr ""
 #, c-format
 msgid "Looking for available packages..."
 msgstr "Mevcut paketler taranıyor"
+
+#: ../../../move/move.pm:1
+#, fuzzy, c-format
+msgid "Please wait, setting up system configuration files on USB key..."
+msgstr "Lütfen bekleyin, güvenlik seviyesi ayarlanıyor..."
 
 #: ../../any.pm:1
 #, c-format
@@ -9895,15 +10016,15 @@ msgid ""
 "per second)"
 msgstr ""
 
-#: ../../standalone/printerdrake:1
-#, c-format
-msgid "Mandrake Linux Printer Management Tool"
-msgstr "Mandrake Linux Yazıcı Yönetim Aracı"
-
 #: ../../pkgs.pm:1
 #, c-format
 msgid "important"
 msgstr "önemli"
+
+#: ../../standalone/printerdrake:1
+#, c-format
+msgid "Mandrake Linux Printer Management Tool"
+msgstr "Mandrake Linux Yazıcı Yönetim Aracı"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -9952,6 +10073,11 @@ msgstr "Kullanıcılar"
 #, c-format
 msgid "Preparing bootloader..."
 msgstr "Önyükleyici hazırlanıyor"
+
+#: ../../../move/move.pm:1
+#, c-format
+msgid "Enter your user information, password will be used for screensaver"
+msgstr ""
 
 #: ../../network/network.pm:1
 #, c-format
@@ -10393,15 +10519,15 @@ msgstr "Dosya içeriği"
 msgid "Authentication LDAP"
 msgstr "LDAP Kimlik kanıtlaması"
 
+#: ../../install_steps_gtk.pm:1
+#, c-format
+msgid "in order to keep %s"
+msgstr ""
+
 #: ../../harddrake/sound.pm:1
 #, c-format
 msgid "Let me pick any driver"
 msgstr ""
-
-#: ../../standalone/net_monitor:1
-#, c-format
-msgid "Profile "
-msgstr "Profil "
 
 #: ../../standalone/net_monitor:1
 #, c-format
@@ -10500,9 +10626,9 @@ msgstr "Çekirdek sürümü"
 #: ../../standalone/drakautoinst:1 ../../standalone/drakbackup:1
 #: ../../standalone/drakboot:1 ../../standalone/drakconnect:1
 #: ../../standalone/drakfloppy:1 ../../standalone/drakfont:1
-#: ../../standalone/drakgw:1 ../../standalone/drakperm:1
-#: ../../standalone/draksec:1 ../../standalone/logdrake:1
-#: ../../standalone/mousedrake:1 ../../standalone/net_monitor:1
+#: ../../standalone/drakperm:1 ../../standalone/draksec:1
+#: ../../standalone/logdrake:1 ../../standalone/mousedrake:1
+#: ../../standalone/net_monitor:1
 #, c-format
 msgid "Cancel"
 msgstr "İptal"
@@ -10655,19 +10781,6 @@ msgstr "İtalyanca"
 msgid "Basic"
 msgstr "Temel"
 
-#: ../../standalone/drakTermServ:1
-#, c-format
-msgid ""
-"\n"
-" Copyright (C) 2002 by MandrakeSoft \n"
-"\tStew Benedict sbenedict\\@mandrakesoft.com\n"
-"\n"
-msgstr ""
-"\n"
-" Copyrigh (C) 2002 by MandrakeSoft \n"
-"\tStew Benedict sbenedict\\@mandrakesoft.com\n"
-"\n"
-
 #: ../../install_messages.pm:1
 #, c-format
 msgid "http://www.mandrakelinux.com/en/92errata.php3"
@@ -10688,10 +10801,10 @@ msgstr "pdq"
 msgid "Card IO"
 msgstr "Kartın IO değeri"
 
-#: ../../standalone/drakperm:1
-#, c-format
-msgid "when checked, owner and group won't be changed"
-msgstr "işaretli ise, sahip ve grup değişmeyecek"
+#: ../../network/drakfirewall.pm:1
+#, fuzzy, c-format
+msgid "Samba server"
+msgstr "Samba Sunucu"
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -10782,6 +10895,11 @@ msgstr ""
 msgid "access to compilation tools"
 msgstr "derleme araçlarına erişim"
 
+#: ../../standalone/net_monitor:1
+#, fuzzy, c-format
+msgid "Global statistics"
+msgstr "İstatistikler"
+
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "Please select data to restore..."
@@ -10801,6 +10919,11 @@ msgstr ""
 #, c-format
 msgid "Standard test page"
 msgstr "Standart deneme sayfası"
+
+#: ../../standalone/drakclock:1
+#, fuzzy, c-format
+msgid "Time Zone"
+msgstr "Zaman Dilimi"
 
 #: ../../diskdrake/hd_gtk.pm:1 ../../diskdrake/interactive.pm:1
 #, c-format
@@ -10887,6 +11010,19 @@ msgstr ""
 "ya da devam etmek için ENTER tuşuna basınız.\n"
 "Seçiminiz? "
 
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"\n"
+" Copyright (C) 2002 by MandrakeSoft \n"
+"\tStew Benedict sbenedict@mandrakesoft.com\n"
+"\n"
+msgstr ""
+"\n"
+" Copyrigh (C) 2002 by MandrakeSoft \n"
+"\tStew Benedict sbenedict@mandrakesoft.com\n"
+"\n"
+
 #: ../../standalone/draksplash:1
 #, c-format
 msgid "Save theme"
@@ -10912,15 +11048,15 @@ msgstr "Ağ Yapılandırma Sihirbazı"
 msgid "Removable media automounting"
 msgstr "Kaldırılabilir ortam otomatik bağlanıyor"
 
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "Enter the directory to save:"
-msgstr "Kaydedilecek dizini girin:"
-
 #: ../../services.pm:1
 #, c-format
 msgid "Printing"
 msgstr "Yazdırılıyor"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "Enter the directory to save:"
+msgstr "Kaydedilecek dizini girin:"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -11051,7 +11187,7 @@ msgstr "Kensington Thinking Mouse"
 msgid "Configuration of a remote printer"
 msgstr "Ağ yazıcısı yapılandırması"
 
-#: ../../share/advertising/13-mdkexpert_corporate.pl:1
+#: ../advertising/13-mdkexpert_corporate.pl:1
 #, c-format
 msgid "An online platform to respond to enterprise support needs."
 msgstr "Şirketinizin özel destek ihiyaçlarını karşılayan çevrimiçi platform"
@@ -11207,15 +11343,22 @@ msgstr ""
 msgid "Configure Local Area Network..."
 msgstr "Yerel ağı yapılandır.."
 
-#: ../../security/l10n.pm:1
+#: ../../../move/move.pm:1
 #, c-format
-msgid "Verify checksum of the suid/sgid files"
+msgid ""
+"The USB key seems to have write protection enabled. Please\n"
+"unplug it, remove write protection, and then plug it again."
 msgstr ""
 
 #: ../../services.pm:1
 #, c-format
 msgid "Launch the sound system on your machine"
 msgstr "Ses sistemini Makinede uygula"
+
+#: ../../security/l10n.pm:1
+#, c-format
+msgid "Verify checksum of the suid/sgid files"
+msgstr ""
 
 #: ../../security/l10n.pm:1
 #, c-format
@@ -11540,6 +11683,11 @@ msgstr "Bu paketi seçimlerinizden çıkaramazsınız. Güncellenmek zorunda"
 msgid "Loading from floppy"
 msgstr "Disketten yükleniyor"
 
+#: ../../standalone/drakclock:1
+#, c-format
+msgid "Timezone - DrakClock"
+msgstr ""
+
 #: ../../security/help.pm:1
 #, c-format
 msgid "Enable/Disable the logging of IPv4 strange packets."
@@ -11693,6 +11841,11 @@ msgstr ""
 "adresine bakabilirsiniz. Sisteminizin ayarları hakkında daha geniş\n"
 "bilgiyi Mandrake Linux Kullanıcı Kılavuzunda bulabilirsiniz."
 
+#: ../../standalone/drakclock:1
+#, fuzzy, c-format
+msgid "Enable Network Time Protocol"
+msgstr "%s Ağ Protokolü ile Geri Al"
+
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "paranoid"
@@ -11783,7 +11936,7 @@ msgstr "ağ araçlarına erişim"
 msgid "Firmware-Upload for HP LaserJet 1000"
 msgstr "HP LaserJet 1000 için Firmware-güncellemesi"
 
-#: ../../share/advertising/03-software.pl:1
+#: ../advertising/03-software.pl:1
 #, c-format
 msgid ""
 "And, of course, push multimedia to its limits with the very latest software "
@@ -11848,15 +12001,15 @@ msgstr "Önyükleme Protokolü"
 msgid "LVM-disks %s\n"
 msgstr "LVM-diskleri %s\n"
 
-#: ../../diskdrake/interactive.pm:1
-#, c-format
-msgid "The package %s is needed. Install it?"
-msgstr "%s paketinin kurulması gerekiyor. Kurulsun mu?"
-
 #: ../../services.pm:1
 #, c-format
 msgid "On boot"
 msgstr "Önyüklemede"
+
+#: ../../diskdrake/interactive.pm:1
+#, c-format
+msgid "The package %s is needed. Install it?"
+msgstr "%s paketinin kurulması gerekiyor. Kurulsun mu?"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -11872,6 +12025,11 @@ msgstr "Vatikan"
 #, c-format
 msgid "Please make a backup of your data first"
 msgstr "Önce verinizin yedeğini alınız"
+
+#: ../../harddrake/data.pm:1
+#, c-format
+msgid "ADSL adapters"
+msgstr ""
 
 #: ../../install_interactive.pm:1
 #, c-format
@@ -11898,7 +12056,7 @@ msgstr "gerekirse"
 msgid "Remove List"
 msgstr "Listeyi Sil"
 
-#: ../../share/advertising/05-desktop.pl:1
+#: ../advertising/05-desktop.pl:1
 #, c-format
 msgid "A customizable environment"
 msgstr "Bir özelleştirilebilir ortam"
@@ -12138,6 +12296,13 @@ msgstr ""
 #: ../../network/tools.pm:1
 #, c-format
 msgid "Firmware copy succeeded"
+msgstr ""
+
+#: ../../../move/tree/mdk_totem:1
+#, c-format
+msgid ""
+"You can't use another CDROM when the following programs are running: \n"
+"%s"
 msgstr ""
 
 #: ../../security/help.pm:1
@@ -12623,6 +12788,11 @@ msgstr ""
 "\n"
 "Kullanımı: \"%s <dosya>\". "
 
+#: ../../standalone/drakclock:1
+#, fuzzy, c-format
+msgid "DrakClock"
+msgstr "Drakbackup"
+
 #: ../../modules/interactive.pm:1
 #, c-format
 msgid ""
@@ -12653,21 +12823,6 @@ msgid ""
 msgstr ""
 "\n"
 "- Ardsüreç (%s) bulunsun :\n"
-
-#: ../../standalone/drakgw:1
-#, c-format
-msgid ""
-"Welcome to the Internet Connection Sharing utility!\n"
-"\n"
-"%s\n"
-"\n"
-"Click on Configure to launch the setup wizard."
-msgstr ""
-"Internet Bağlantısı Paylaşımı uygulama gereçlerine hoşgeldiniz!\n"
-"\n"
-"%s\n"
-"\n"
-"Ayarlama sihirbazını başlatmak için \"Yapılandır\"a basın!"
 
 #: ../../lang.pm:1
 #, c-format
@@ -12852,6 +13007,11 @@ msgstr ""
 msgid "Christmas Island"
 msgstr "Christmas Adası"
 
+#: ../../mouse.pm:1
+#, fuzzy, c-format
+msgid "Automatic"
+msgstr "Otomatik IP"
+
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Installation of bootloader failed. The following error occured:"
@@ -12953,11 +13113,6 @@ msgstr "Şimdi Aktar"
 #, c-format
 msgid "Set root password and network authentication methods"
 msgstr ""
-
-#: ../../standalone/drakgw:1
-#, c-format
-msgid "Internet Connection Sharing configuration"
-msgstr "Internet bağlantısı paylaşımı yapılandırması"
 
 #: ../../ugtk2.pm:1
 #, c-format
@@ -13208,6 +13363,11 @@ msgstr "Açılış disketinin oluşturulacağı disket sürücüsünü seçin"
 msgid "LILO with text menu"
 msgstr "Metin tabanlı LILO"
 
+#: ../../standalone/net_monitor:1
+#, c-format
+msgid "instantaneous"
+msgstr ""
+
 #: ../../network/drakfirewall.pm:1
 #, c-format
 msgid "Everything (no firewall)"
@@ -13400,6 +13560,11 @@ msgstr "Lütfen bir kullanıcı adı verin"
 msgid "Enable CD Boot?"
 msgstr "CD den açılış etkinleştirilsin mi?"
 
+#: ../../../move/move.pm:1
+#, c-format
+msgid "Simply reboot"
+msgstr ""
+
 #: ../../interactive/stdio.pm:1
 #, c-format
 msgid " enter `void' for void entry"
@@ -13502,15 +13667,15 @@ msgstr ""
 "ayrıca yerel ağınızdaki makinaların zamanlarını sizin makinanızdan\n"
 "ayarlamalarını sağlayacak bir zaman sunucusunu da kuracaktır."
 
-#: ../../install_steps_interactive.pm:1
-#, c-format
-msgid "Which is your timezone?"
-msgstr "Bulunduğunuz zaman dilimi hangisi?"
-
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "Can't create log file!"
 msgstr "Kayıt dosyası oluşturulamıyor!"
+
+#: ../../install_steps_interactive.pm:1 ../../standalone/drakclock:1
+#, c-format
+msgid "Which is your timezone?"
+msgstr "Bulunduğunuz zaman dilimi hangisi?"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -13557,6 +13722,11 @@ msgstr "Mozambik"
 msgid "Icon"
 msgstr "Simge"
 
+#: ../../../move/tree/mdk_totem:1
+#, fuzzy, c-format
+msgid "Kill those programs"
+msgstr "X uygulamalarına erişim"
+
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "Please choose what you want to backup"
@@ -13592,7 +13762,7 @@ msgstr "Bir kural ekle"
 msgid "Chunk size %s\n"
 msgstr "Parça boyutu %s\n"
 
-#: ../../share/advertising/02-community.pl:1
+#: ../advertising/02-community.pl:1
 #, c-format
 msgid "Build the future of Linux!"
 msgstr "Linux'un geleceğini imar edin!"
@@ -13725,7 +13895,7 @@ msgstr ""
 "sunucu rolü üstlenmesini seçmişseniz bu soruya \"Hayır\" cevabı vermeniz\n"
 "önerilir."
 
-#: ../../share/advertising/13-mdkexpert_corporate.pl:1
+#: ../advertising/13-mdkexpert_corporate.pl:1
 #, c-format
 msgid "MandrakeExpert Corporate"
 msgstr "MandrakeExpert Kurumsal"
@@ -13768,6 +13938,11 @@ msgid ""
 msgstr ""
 "%s bölümünün türü değiştirildikten sonra, üzerindeki tüm bilgiler "
 "silinecektir"
+
+#: ../../harddrake/data.pm:1
+#, fuzzy, c-format
+msgid "ISDN adapters"
+msgstr "ISDN kartı"
 
 #: ../../common.pm:1
 #, c-format
@@ -14043,6 +14218,11 @@ msgid "Plug'n Play probing failed. Please select the correct monitor"
 msgstr ""
 "Tak ve Çalıştır yöntemiyle monitör algılanamadı. Lütfen doğru modeli seçin"
 
+#: ../../../move/move.pm:1
+#, c-format
+msgid "Detect again USB key"
+msgstr ""
+
 #: ../../services.pm:1
 #, c-format
 msgid "Services and deamons"
@@ -14084,7 +14264,7 @@ msgstr "Hizmetlerin Yapılandırması"
 msgid "Slovakian (QWERTZ)"
 msgstr "Slovakça (QWERTZ)"
 
-#: ../../share/advertising/06-development.pl:1
+#: ../advertising/06-development.pl:1
 #, c-format
 msgid ""
 "To modify and to create in different languages such as Perl, Python, C and C+"
@@ -14148,6 +14328,11 @@ msgstr "Cezayir"
 #, c-format
 msgid "Restore Via Network"
 msgstr "Ağ ile Geri Al"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "Use tar and bzip2 (rather than tar and gzip)"
+msgstr ""
 
 #: ../../any.pm:1
 #, c-format
@@ -14263,7 +14448,7 @@ msgstr "DVD-ROM"
 msgid "Georgian (\"Latin\" layout)"
 msgstr "Gürcü dili (Latin klavye)"
 
-#: ../../share/advertising/09-mdksecure.pl:1
+#: ../advertising/09-mdksecure.pl:1
 #, c-format
 msgid "Get the best items with Mandrake Linux Strategic partners"
 msgstr ""
@@ -14367,7 +14552,7 @@ msgstr "Otomatik Giriş"
 msgid "Domain Admin Password"
 msgstr "Alan Yöneticisinin Parolası"
 
-#: ../../share/advertising/05-desktop.pl:1
+#: ../advertising/05-desktop.pl:1
 #, c-format
 msgid ""
 "Perfectly adapt your computer to your needs thanks to the 11 available "
@@ -14514,6 +14699,11 @@ msgstr "utopia 25"
 msgid "Pipe job into a command"
 msgstr "Bir komuttaki bağlama işi"
 
+#: ../../../move/move.pm:1
+#, fuzzy, c-format
+msgid "Remove system config files"
+msgstr "Loopback dosyası kaldırılsın mı ?"
+
 #: ../../lang.pm:1
 #, c-format
 msgid "Cote d'Ivoire"
@@ -14525,7 +14715,8 @@ msgid "new dynamic device name generated by core kernel devfs"
 msgstr "çekirdek içi devfs'nin oluşturduğu yeni, dinamik aygıt adı"
 
 #: ../../help.pm:1 ../../install_any.pm:1 ../../interactive.pm:1
-#: ../../ugtk2.pm:1 ../../modules/interactive.pm:1 ../../standalone/drakgw:1
+#: ../../ugtk2.pm:1 ../../modules/interactive.pm:1
+#: ../../standalone/drakclock:1 ../../standalone/drakgw:1
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "Yes"
@@ -14546,11 +14737,6 @@ msgstr "Geri Alma Durumu"
 msgid "Estonia"
 msgstr "Estonya"
 
-#: ../../standalone/scannerdrake:1
-#, c-format
-msgid "Choose the host on which the local scanners should be made available:"
-msgstr ""
-
 #: ../../partition_table.pm:1
 #, c-format
 msgid ""
@@ -14562,6 +14748,11 @@ msgstr ""
 "Bu boşluğu, birinci bölümünüzü en yakınındaki mantıksal bölüme taşıyarak\n"
 "sorunu çözebilirsiniz."
 
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "Choose the host on which the local scanners should be made available:"
+msgstr ""
+
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "Channel"
@@ -14572,11 +14763,6 @@ msgstr "Kanal"
 #, c-format
 msgid "Add"
 msgstr "Ekle"
-
-#: ../../standalone/drakgw:1
-#, c-format
-msgid "No Internet Connection Sharing has ever been configured."
-msgstr "Internet Bağlantısı Paylaşımı yapılandırması yok"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -14867,7 +15053,7 @@ msgstr "Bu bir yükleme mi yoksa güncelleme mi ?"
 msgid "ISDN card"
 msgstr "ISDN kartı"
 
-#: ../../share/advertising/02-community.pl:1
+#: ../advertising/02-community.pl:1
 #, c-format
 msgid ""
 "To share your own knowledge and help build Linux software, join our "
@@ -14905,6 +15091,70 @@ msgid ""
 "running version \"8.1\" or later. Performing an Upgrade on versions prior\n"
 "to Mandrake Linux version \"8.1\" is not recommended."
 msgstr ""
+
+#: ../../standalone/drakfont:1
+#, c-format
+msgid ""
+"\n"
+" Copyright (C) 2001-2002 by MandrakeSoft \n"
+"     DUPONT Sebastien (original version)\n"
+"     CHAUMETTE Damien <dchaumette@mandrakesoft.com>\n"
+"\n"
+" This program is free software; you can redistribute it and/or modify\n"
+" it under the terms of the GNU General Public License as published by\n"
+" the Free Software Foundation; either version 2, or (at your option)\n"
+" any later version.\n"
+"\n"
+" This program is distributed in the hope that it will be useful,\n"
+" but WITHOUT ANY WARRANTY; without even the implied warranty of\n"
+" MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n"
+" GNU General Public License for more details.\n"
+"\n"
+" You should have received a copy of the GNU General Public License\n"
+" along with this program; if not, write to the Free Software\n"
+" Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.\n"
+"\n"
+" Thanks:\n"
+"    -  pfm2afm:   \n"
+"\t by Ken Borgendale:\n"
+"\t    Convert a Windows .pfm  file to a .afm (Adobe Font Metrics)\n"
+"    -  type1inst:\n"
+"\t by James Macnicol: \n"
+"\t    type1inst generates files fonts.dir fonts.scale & Fontmap.\n"
+"    -  ttf2pt1:   \n"
+"\t  by Andrew Weeks, Frank Siegert, Thomas Henlich, Sergey Babkin  \n"
+"             Convert ttf font files to afm and pfb fonts\n"
+msgstr ""
+"\n"
+" Telif Hakkı (C) 2001-2002 MandrakeSoft'a aittir \n"
+"     DUPONT Sebastien (asıl sürüm)\n"
+"     CHAUMETTE Damien <dchaumette@mandrakesoft.com>\n"
+"\n"
+" Bu program bir serbest yazılımdır. Bu yazılımı Free Software Foundation\n"
+" tarafından yayınlanmış olan GNU Genel Kamu Lisansının 2. ya da daha  sonra "
+"ki bir sürümünün koşulları altında kopyalayabilir, dağıtabilir ve/veya\n"
+" üzerinde değişiklik yapabilirsiniz.\n"
+"\n"
+" Bu program kullanışlı olabileceği umularak dağıtılmaktadır. Ancak,\n"
+" hiçbir GARANTİSİ YOKTUR; hatta SATILABİLİRLİĞİ veya HERHANGİ BİR\n"
+" AMACA UYGUNLUĞU için bile garanti verilmez. Daha ayrıntılı bilgi\n"
+" edinmek için GNU Genel Kamu Lisansına bakınız.\n"
+"\n"
+" GNU Genel Kamu Lisansının bir kopyasını bu programla birlikte almış\n"
+" olacaksınız; yoksa Free Software Foundation, Inc., 59 Temple Place\n"
+" Suite 330, Boston, MA  02111-1307, USA. adresinden isteyebilirsiniz.\n"
+"\n"
+" Teşekkürler:\n"
+"    -  pfm2afm:   \n"
+"\t Ken Borgendale:\n"
+"\t    Bir Windows .pfm dosyasını .afm dosyasına çevirme (Adobe Font "
+"Metrics)\n"
+"    -  type1inst:\n"
+"\t James Macnicol: \n"
+"\t    type1inst fonts.dir fonts.scale & Fontmap dosyalarını oluştur.\n"
+"    -  ttf2pt1:   \n"
+"\t  Andrew Weeks, Frank Siegert, Thomas Henlich, Sergey Babkin  \n"
+"              ttf yazı tiplerinin afm and pfb yaz tiplerine dönüştürür.\n"
 
 #: ../../printer/main.pm:1
 #, c-format
@@ -14972,6 +15222,11 @@ msgstr "DHCP başlama modu"
 msgid "Unsafe"
 msgstr "Güvensiz"
 
+#: ../../network/drakfirewall.pm:1
+#, fuzzy, c-format
+msgid "SSH server"
+msgstr "SSH Sunucu"
+
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid ", %s sectors"
@@ -14979,7 +15234,7 @@ msgstr ", %s sektör"
 
 #: ../../help.pm:1 ../../install_any.pm:1 ../../interactive.pm:1
 #: ../../ugtk2.pm:1 ../../modules/interactive.pm:1
-#: ../../standalone/harddrake2:1
+#: ../../standalone/drakclock:1 ../../standalone/harddrake2:1
 #, c-format
 msgid "No"
 msgstr "Hayır"
@@ -15540,6 +15795,11 @@ msgstr "Seçili makineleri kaldır"
 msgid "Network configuration"
 msgstr "Ağ Yapılandırması"
 
+#: ../../standalone/harddrake2:1
+#, c-format
+msgid "/Autodetect _jaz drives"
+msgstr "/_jaz sürücülerini otomatik algıla"
+
 #: ../../any.pm:1
 #, c-format
 msgid "No sharing"
@@ -15654,9 +15914,10 @@ msgstr ""
 #: ../../install_steps.pm:1 ../../diskdrake/dav.pm:1
 #: ../../diskdrake/hd_gtk.pm:1 ../../diskdrake/interactive.pm:1
 #: ../../diskdrake/smbnfs_gtk.pm:1 ../../interactive/http.pm:1
-#: ../../standalone/drakboot:1 ../../standalone/drakbug:1
+#: ../../standalone/drakauth:1 ../../standalone/drakboot:1
+#: ../../standalone/drakbug:1 ../../standalone/drakconnect:1
 #: ../../standalone/drakfloppy:1 ../../standalone/drakfont:1
-#: ../../standalone/draksplash:1
+#: ../../standalone/draksplash:1 ../../../move/move.pm:1
 #, c-format
 msgid "Error"
 msgstr "Hata"
@@ -15700,6 +15961,11 @@ msgstr ""
 "Sisteminiz Çoklu-Kafa yapılandırmasını destekliyor.\n"
 "Yapılmasını ister misiniz?"
 
+#: ../../partition_table.pm:1
+#, c-format
+msgid "mount failed: "
+msgstr "bağlama başarısız: "
+
 #: ../../steps.pm:1
 #, c-format
 msgid "Configure services"
@@ -15709,11 +15975,6 @@ msgstr "Hizmetlerin Yapılandırması"
 #, c-format
 msgid "Broadcast Address:"
 msgstr "Broadcast Adresi:"
-
-#: ../../partition_table.pm:1
-#, c-format
-msgid "mount failed: "
-msgstr "bağlama başarısız: "
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -15728,15 +15989,15 @@ msgstr ""
 msgid "Image"
 msgstr "Görüntü"
 
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "Failed to add the printer \"%s\" to Star Office/OpenOffice.org/GIMP."
-msgstr "Yazıcı \"%s\" Star Office/OpenOffice.org/GIMP'e eklenemedi."
-
 #: ../../services.pm:1
 #, c-format
 msgid "Remote Administration"
 msgstr "Uzak Yönetim"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Failed to add the printer \"%s\" to Star Office/OpenOffice.org/GIMP."
+msgstr "Yazıcı \"%s\" Star Office/OpenOffice.org/GIMP'e eklenemedi."
 
 #: ../../modules.pm:1
 #, c-format
@@ -15795,7 +16056,7 @@ msgstr "Temmuz"
 msgid "Prints into %s"
 msgstr ", %s e yazdırılıyor"
 
-#: ../../install_steps_interactive.pm:1
+#: ../../install_steps_interactive.pm:1 ../../../move/move.pm:1
 #, c-format
 msgid "An error occurred"
 msgstr "Bir hata oluştu"
@@ -16010,7 +16271,7 @@ msgstr ", çok işlevli aygıt"
 msgid "Laos"
 msgstr "Laos"
 
-#: ../../share/advertising/04-configuration.pl:1
+#: ../advertising/04-configuration.pl:1
 #, c-format
 msgid ""
 "Mandrake Linux 9.2 provides you with the Mandrake Control Center, a powerful "
@@ -16188,11 +16449,6 @@ msgstr "Öncelikle /etc/dhcpd.conf dosyası oluşturulmalı!"
 msgid "Is FPU present"
 msgstr "FPU mevcut mu ?"
 
-#: ../../standalone/scannerdrake:1
-#, c-format
-msgid "There are no scanners found which are available on your system.\n"
-msgstr "Bilgisayarınızda hiçbir mevcut tarayıcı bulunamadı.\n"
-
 #: ../../services.pm:1
 #, c-format
 msgid ""
@@ -16201,6 +16457,11 @@ msgid ""
 msgstr ""
 "Bu hizmet hakkında\n"
 "başka bilgi yok."
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "There are no scanners found which are available on your system.\n"
+msgstr "Bilgisayarınızda hiçbir mevcut tarayıcı bulunamadı.\n"
 
 #: ../../standalone/drakTermServ:1
 #, c-format
@@ -16241,21 +16502,6 @@ msgstr "DVDRAM aygıtı"
 #, c-format
 msgid "if set to yes, report unowned files."
 msgstr ""
-
-#: ../../standalone/harddrake2:1
-#, c-format
-msgid ""
-"This is HardDrake, a Mandrake hardware configuration tool.\n"
-"<span foreground=\"royalblue3\">Version:</span> %s\n"
-"<span foreground=\"royalblue3\">Author:</span> Thierry Vignaud &lt;tvignaud"
-"\\@mandrakesoft.com&gt;\n"
-"\n"
-msgstr ""
-"Harddrake, Mandrakenin donanım yapılandırma aracı.\n"
-"<span foreground=\"royalblue3\">Sürüm:</span> %s\n"
-"<span foreground=\"royalblue3\">Yazan:</span> Thierry Vignaud &lt;tvignaud"
-"\\@mandrakesoft.com&gt;\n"
-"\n"
 
 #: ../../install_interactive.pm:1
 #, c-format
@@ -16341,10 +16587,26 @@ msgstr "Vietnam"
 msgid "/_Fields description"
 msgstr "/_Alan tanımlaması"
 
-#: ../../share/advertising/10-security.pl:1
+#: ../advertising/10-security.pl:1
 #, c-format
 msgid "Optimize your security by using Mandrake Linux"
 msgstr "Güvenliğinizi en etkin hale getirin"
+
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"\n"
+"\n"
+" Thanks:\n"
+"\t- LTSP Project http://www.ltsp.org\n"
+"\t- Michael Brown <mbrown@fensystems.co.uk>\n"
+"\n"
+msgstr ""
+"\n"
+"\n"
+" Teşekkürler:\n"
+"\t- LTSP Projesi http://www.ltsp.org\n"
+"\t- Michael Brown <mbrown@fensystems.co.uk\n"
 
 #: ../../install_steps_gtk.pm:1 ../../interactive.pm:1 ../../ugtk2.pm:1
 #: ../../Xconfig/resolution_and_depth.pm:1 ../../diskdrake/hd_gtk.pm:1
@@ -16441,7 +16703,7 @@ msgstr ""
 msgid "mkinitrd optional arguments"
 msgstr "mkinitrd optional arguments"
 
-#: ../../share/advertising/03-software.pl:1
+#: ../advertising/03-software.pl:1
 #, c-format
 msgid ""
 "Surf the Web with Mozilla or Konqueror, read your mail with Evolution or "
@@ -16635,6 +16897,11 @@ msgstr "CUPS yeniden başlatılıyor..."
 #, c-format
 msgid "Printing/Scanning/Photo Cards on \"%s\""
 msgstr "\"%s\" ile yazdırılıyor/taranıyor/fotoğraf kartları kullanılıyor"
+
+#: ../../../move/move.pm:1
+#, c-format
+msgid "Continue without USB key"
+msgstr ""
 
 #: ../../install_steps.pm:1
 #, c-format
@@ -17082,7 +17349,7 @@ msgstr "X Pencere bağlantılarına izin ver"
 msgid "Hardware probing in progress"
 msgstr "Donanım Algılama sürüyor"
 
-#: ../../standalone/drakgw:1
+#: ../../network/shorewall.pm:1 ../../standalone/drakgw:1
 #, c-format
 msgid "Net Device"
 msgstr "Ağ Aygıtı"
@@ -17149,6 +17416,11 @@ msgstr ""
 "Uygulamanın düzgün çalışması için 'ImageMagick' paketi gerekiyor.\n"
 "'ImageMagick' yazilimini kurmak için \"Tamam\", Çıkmak için \"İptal\"\n"
 "tuşuna basınız."
+
+#: ../../network/drakfirewall.pm:1
+#, fuzzy, c-format
+msgid "Telnet server"
+msgstr "X sunucusu"
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -17416,7 +17688,7 @@ msgstr "Sistem Günlüğü"
 msgid "Can't create catalog!"
 msgstr "Katalog oluşturulamıyor!"
 
-#: ../../share/advertising/11-mnf.pl:1
+#: ../advertising/11-mnf.pl:1
 #, c-format
 msgid ""
 "Complete your security setup with this very easy-to-use software which "
@@ -17469,6 +17741,11 @@ msgstr "Internet bağlantısı ayarları"
 #, c-format
 msgid "Add the name as an exception to the handling of password aging by msec."
 msgstr ""
+
+#: ../../network/isdn.pm:1
+#, fuzzy, c-format
+msgid "USB"
+msgstr "LSB"
 
 #: ../../standalone/drakxtv:1
 #, c-format
@@ -17529,6 +17806,11 @@ msgstr "Çalışma grubu"
 #, c-format
 msgid "Printer host name or IP"
 msgstr "Yazıcının makina adı/IP numarası"
+
+#: ../../standalone/drakconnect:1
+#, fuzzy, c-format
+msgid "down"
+msgstr "bitti"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -17981,6 +18263,11 @@ msgstr "Bir öğe ekle"
 msgid "The printers on this machine are available to other computers"
 msgstr "Bu makinedeki yazıcılar diğer makinelerden erişilebilinir."
 
+#: ../../lang.pm:1
+#, fuzzy, c-format
+msgid "China (Hong Kong)"
+msgstr "Hong Kong"
+
 #: ../../standalone/drakautoinst:1
 #, c-format
 msgid "I can't find needed image file `%s'."
@@ -18037,7 +18324,7 @@ msgstr "Paket kurulu değil"
 msgid "American Samoa"
 msgstr "Amerikan Samoası"
 
-#: ../../share/advertising/12-mdkexpert.pl:1
+#: ../advertising/12-mdkexpert.pl:1
 #, c-format
 msgid "Become a MandrakeExpert"
 msgstr "Bir MandrakeExpert olun"
@@ -18159,6 +18446,11 @@ msgstr "İtalya"
 msgid "Cayman Islands"
 msgstr "Seyman Adaları"
 
+#: ../../fs.pm:1 ../../partition_table.pm:1
+#, c-format
+msgid "error unmounting %s: %s"
+msgstr "%s ayrılırken hata: %s"
+
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Name of printer"
@@ -18168,11 +18460,6 @@ msgstr "Yazıcının ismi"
 #, c-format
 msgid "disable"
 msgstr "pasif"
-
-#: ../../fs.pm:1 ../../partition_table.pm:1
-#, c-format
-msgid "error unmounting %s: %s"
-msgstr "%s ayrılırken hata: %s"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -18279,7 +18566,7 @@ msgstr "Sıkışık"
 msgid "Detected model: %s %s"
 msgstr "Algılanan model: %s %s"
 
-#: ../../share/advertising/03-software.pl:1
+#: ../advertising/03-software.pl:1
 #, c-format
 msgid "MandrakeSoft has selected the best software for you"
 msgstr "MandrakeSoft sizler için en mükemmelleri bir araya getirdi"
@@ -18416,6 +18703,11 @@ msgstr "Açılışta X"
 msgid " adsl"
 msgstr " adsl"
 
+#: ../../raid.pm:1
+#, c-format
+msgid "Not enough partitions for RAID level %d\n"
+msgstr "%d. seviye RAID için yetersiz sayıda disk bölümü\n"
+
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "format of floppies supported by the drive"
@@ -18425,11 +18717,6 @@ msgstr "Sürücü tarafından desteklenilen biçimlendirme tarzları"
 #, c-format
 msgid "Firmware copy failed, file %s not found"
 msgstr ""
-
-#: ../../raid.pm:1
-#, c-format
-msgid "Not enough partitions for RAID level %d\n"
-msgstr "%d. seviye RAID için yetersiz sayıda disk bölümü\n"
 
 #: ../../standalone/drakTermServ:1
 #, c-format
@@ -18559,7 +18846,7 @@ msgstr ""
 "CD veya DVD görüntüsü bulunamadı, lütfen kurulum programını ve rpm "
 "dosyalarını kopyalayın."
 
-#: ../../share/advertising/04-configuration.pl:1
+#: ../advertising/04-configuration.pl:1
 #, c-format
 msgid "Mandrake's multipurpose configuration tool"
 msgstr "Mandrakenin çok amaçlı yapılandırma aracı"
@@ -18589,7 +18876,7 @@ msgstr "Sürücü"
 msgid "Enter a printer device URI"
 msgstr "Yazıcı adresini girin"
 
-#: ../../share/advertising/01-thanks.pl:1
+#: ../advertising/01-thanks.pl:1
 #, c-format
 msgid ""
 "The success of MandrakeSoft is based upon the principle of Free Software. "
@@ -19166,7 +19453,7 @@ msgstr "Kart modeli:"
 msgid "Thin Client"
 msgstr "Thin İstemci"
 
-#: ../../share/advertising/01-thanks.pl:1
+#: ../advertising/01-thanks.pl:1
 #, c-format
 msgid "Thank you for choosing Mandrake Linux 9.2"
 msgstr "Mandrake Linux 9.2 sürümünü seçtiğiniz için Teşekkür ederiz"
@@ -19269,6 +19556,13 @@ msgstr "Windows Yazı tiplerini Al"
 msgid "Mouse Systems"
 msgstr "Mouse Systems"
 
+#: ../../standalone/drakclock:1
+#, c-format
+msgid ""
+"Your computer can synchronize its clock\n"
+" with a remote time server using NTP"
+msgstr ""
+
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Iranian"
@@ -19294,7 +19588,7 @@ msgstr "Sunucu ekle"
 msgid "Remote printer name"
 msgstr "Uzak yazıcı adı"
 
-#: ../../share/advertising/10-security.pl:1
+#: ../advertising/10-security.pl:1
 #, c-format
 msgid ""
 "MandrakeSoft has designed exclusive tools to create the most secured Linux "
@@ -19446,6 +19740,11 @@ msgstr "Microsoft Explorer"
 msgid "Uninstall Fonts"
 msgstr "Yazı tiplerini Kaldır"
 
+#: ../../../move/move.pm:1
+#, fuzzy, c-format
+msgid "Please wait, detecting and configuring devices..."
+msgstr "Lütfen bekleyin, güvenlik seviyesi ayarlanıyor..."
+
 #: ../../keyboard.pm:1
 #, c-format
 msgid "German (no dead keys)"
@@ -19473,11 +19772,6 @@ msgid ""
 msgstr ""
 "NFS ya da Samba kullanarak sunabilirsiniz. Hangisini kullanmak isterseniz."
 
-#: ../../help.pm:1 ../../install_steps_interactive.pm:1
-#, c-format
-msgid "Reboot"
-msgstr "Yeniden başla"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Gambia"
@@ -19487,6 +19781,12 @@ msgstr "Gambiya"
 #, c-format
 msgid "Mandrake Control Center"
 msgstr "Mandrake Kontrol Merkezi"
+
+#: ../../help.pm:1 ../../install_steps_interactive.pm:1
+#: ../../../move/move.pm:1
+#, c-format
+msgid "Reboot"
+msgstr "Yeniden başla"
 
 #: ../../printer/main.pm:1
 #, c-format
@@ -19522,6 +19822,11 @@ msgstr ""
 #, c-format
 msgid "Remember this password"
 msgstr "Bu parolayı hatırla"
+
+#: ../../install_steps_gtk.pm:1
+#, c-format
+msgid "due to unsatisfied %s"
+msgstr ""
 
 #: ../../standalone/drakgw:1
 #, c-format
@@ -19585,6 +19890,11 @@ msgstr "Papua Yeni Gine"
 msgid "Multi-function device on a parallel port"
 msgstr "Parelel port üzerindeki çok işlevli aygıt"
 
+#: ../../../move/tree/mdk_totem:1
+#, fuzzy, c-format
+msgid "Busy files"
+msgstr "Sistem dosyaları yedeklensin"
+
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Serbian (cyrillic)"
@@ -19647,6 +19957,21 @@ msgstr ""
 #, c-format
 msgid "DHCP Client"
 msgstr "DHCP İstemci"
+
+#: ../../standalone/harddrake2:1
+#, c-format
+msgid ""
+"This is HardDrake, a Mandrake hardware configuration tool.\n"
+"<span foreground=\"royalblue3\">Version:</span> %s\n"
+"<span foreground=\"royalblue3\">Author:</span> Thierry Vignaud &lt;"
+"tvignaud@mandrakesoft.com&gt;\n"
+"\n"
+msgstr ""
+"Harddrake, Mandrakenin donanım yapılandırma aracı.\n"
+"<span foreground=\"royalblue3\">Sürüm:</span> %s\n"
+"<span foreground=\"royalblue3\">Yazan:</span> Thierry Vignaud &lt;"
+"tvignaud@mandrakesoft.com&gt;\n"
+"\n"
 
 #: ../../standalone/drakgw:1
 #, c-format
@@ -19846,77 +20171,13 @@ msgstr "Yazıcılar aktarılmasın"
 msgid "Delay before booting the default image"
 msgstr "Öntanımlı imajın yüklenmesinden önceki gecikme"
 
-#: ../../standalone/drakfont:1
-#, c-format
-msgid ""
-"\n"
-" Copyright (C) 2001-2002 by MandrakeSoft \n"
-"     DUPONT Sebastien (original version)\n"
-"     CHAUMETTE Damien <dchaumette\\@mandrakesoft.com>\n"
-"\n"
-" This program is free software; you can redistribute it and/or modify\n"
-" it under the terms of the GNU General Public License as published by\n"
-" the Free Software Foundation; either version 2, or (at your option)\n"
-" any later version.\n"
-"\n"
-" This program is distributed in the hope that it will be useful,\n"
-" but WITHOUT ANY WARRANTY; without even the implied warranty of\n"
-" MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n"
-" GNU General Public License for more details.\n"
-"\n"
-" You should have received a copy of the GNU General Public License\n"
-" along with this program; if not, write to the Free Software\n"
-" Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.\n"
-"\n"
-" Thanks:\n"
-"    -  pfm2afm:   \n"
-"\t by Ken Borgendale:\n"
-"\t    Convert a Windows .pfm  file to a .afm (Adobe Font Metrics)\n"
-"    -  type1inst:\n"
-"\t by James Macnicol: \n"
-"\t    type1inst generates files fonts.dir fonts.scale & Fontmap.\n"
-"    -  ttf2pt1:   \n"
-"\t  by Andrew Weeks, Frank Siegert, Thomas Henlich, Sergey Babkin  \n"
-"             Convert ttf font files to afm and pfb fonts\n"
-msgstr ""
-"\n"
-" Telif Hakkı (C) 2001-2002 MandrakeSoft'a aittir \n"
-"     DUPONT Sebastien (asıl sürüm)\n"
-"     CHAUMETTE Damien <dchaumette\\@mandrakesoft.com>\n"
-"\n"
-" Bu program bir serbest yazılımdır. Bu yazılımı Free Software Foundation\n"
-" tarafından yayınlanmış olan GNU Genel Kamu Lisansının 2. ya da daha  sonra "
-"ki bir sürümünün koşulları altında kopyalayabilir, dağıtabilir ve/veya\n"
-" üzerinde değişiklik yapabilirsiniz.\n"
-"\n"
-" Bu program kullanışlı olabileceği umularak dağıtılmaktadır. Ancak,\n"
-" hiçbir GARANTİSİ YOKTUR; hatta SATILABİLİRLİĞİ veya HERHANGİ BİR\n"
-" AMACA UYGUNLUĞU için bile garanti verilmez. Daha ayrıntılı bilgi\n"
-" edinmek için GNU Genel Kamu Lisansına bakınız.\n"
-"\n"
-" GNU Genel Kamu Lisansının bir kopyasını bu programla birlikte almış\n"
-" olacaksınız; yoksa Free Software Foundation, Inc., 59 Temple Place\n"
-" Suite 330, Boston, MA  02111-1307, USA. adresinden isteyebilirsiniz.\n"
-"\n"
-" Teşekkürler:\n"
-"    -  pfm2afm:   \n"
-"\t Ken Borgendale:\n"
-"\t    Bir Windows .pfm dosyasını .afm dosyasına çevirme (Adobe Font "
-"Metrics)\n"
-"    -  type1inst:\n"
-"\t James Macnicol: \n"
-"\t    type1inst fonts.dir fonts.scale & Fontmap dosyalarını oluştur.\n"
-"    -  ttf2pt1:   \n"
-"\t  Andrew Weeks, Frank Siegert, Thomas Henlich, Sergey Babkin  \n"
-"              ttf yazı tiplerinin afm and pfb yaz tiplerine dönüştürür.\n"
-
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "Use Hard Disk to backup"
 msgstr "Yedeklemede Sabit Disk Kullanılsın"
 
 #: ../../help.pm:1 ../../install_steps_gtk.pm:1 ../../standalone/drakbackup:1
-#: ../../standalone/drakboot:1 ../../standalone/drakgw:1
+#: ../../standalone/drakboot:1
 #, c-format
 msgid "Configure"
 msgstr "Yapılandır"
@@ -19984,7 +20245,7 @@ msgstr ""
 "Linux kurulu başka bir makinada \"rpm -qpl Mandrake/RPMS/*.rpm\"\n"
 "komutuyla CD'nizi kontrol edebilirsiniz.\n"
 
-#: ../../share/advertising/06-development.pl:1
+#: ../advertising/06-development.pl:1
 #, c-format
 msgid "Mandrake Linux 9.2: the ultimate development platform"
 msgstr "Mandrake Linux 9.2 benzersiz bir geliştirme platformudur"
@@ -20065,6 +20326,11 @@ msgstr "son çözünürlük"
 msgid "Services"
 msgstr "Hizmetler"
 
+#: ../../../move/move.pm:1
+#, fuzzy, c-format
+msgid "Auto configuration"
+msgstr "Özel yapılandırma"
+
 #: ../../Xconfig/card.pm:1
 #, c-format
 msgid "4 MB"
@@ -20103,9 +20369,10 @@ msgid "Internet station"
 msgstr "Internet konsolu"
 
 #: ../../share/compssUsers:999
+#, fuzzy
 msgid ""
-"Set of tools to read and send mail and news (pine, mutt, tin..) and to "
-"browse the Web"
+"Set of tools to read and send mail and news (mutt, tin..) and to browse the "
+"Web"
 msgstr ""
 "E-posta alışverişi ve haber grubu istemci programları (pine, mutt, tin..) ve "
 "web istemcileri "
@@ -20243,6 +20510,40 @@ msgstr "NFS sunucusu, SMB sunucusu, Vekil Sunucu, ssh Sunucu"
 msgid "Set of tools to read and send mail and news and to browse the Web"
 msgstr "Webde dolaşmak , posta , haber okumak ve yollamak için araçları ayarla"
 
+#~ msgid "The setup has already been done, and it's currently enabled."
+#~ msgstr "Ayarlar daha önceden yapılmış şekilde ,ve o aktif halde ayarlı."
+
+#~ msgid "Logs"
+#~ msgstr "Kayıtlar"
+
+#~ msgid "The setup has already been done, but it's currently disabled."
+#~ msgstr "Ayarlar daha önceden yapılmış şekilde , ama o pasif halde ayarlı."
+
+#~ msgid "Profile "
+#~ msgstr "Profil "
+
+#~ msgid ""
+#~ "Welcome to the Internet Connection Sharing utility!\n"
+#~ "\n"
+#~ "%s\n"
+#~ "\n"
+#~ "Click on Configure to launch the setup wizard."
+#~ msgstr ""
+#~ "Internet Bağlantısı Paylaşımı uygulama gereçlerine hoşgeldiniz!\n"
+#~ "\n"
+#~ "%s\n"
+#~ "\n"
+#~ "Ayarlama sihirbazını başlatmak için \"Yapılandır\"a basın!"
+
+#~ msgid "Internet Connection Sharing configuration"
+#~ msgstr "Internet bağlantısı paylaşımı yapılandırması"
+
+#~ msgid "No Internet Connection Sharing has ever been configured."
+#~ msgstr "Internet Bağlantısı Paylaşımı yapılandırması yok"
+
+#~ msgid "when checked, owner and group won't be changed"
+#~ msgstr "işaretli ise, sahip ve grup değişmeyecek"
+
 #~ msgid ""
 #~ "XawTV isn't installed!\n"
 #~ "\n"
@@ -20250,7 +20551,7 @@ msgstr "Webde dolaşmak , posta , haber okumak ve yollamak için araçları ayar
 #~ "If you do have a TV card but DrakX has neither detected it (no bttv nor "
 #~ "saa7134\n"
 #~ "module in \"/etc/modules\") nor installed xawtv, please send the\n"
-#~ "results of \"lspcidrake -v -f\" to \"install\\@mandrakesoft.com\"\n"
+#~ "results of \"lspcidrake -v -f\" to \"install@mandrakesoft.com\"\n"
 #~ "with subject \"undetected TV card\".\n"
 #~ "\n"
 #~ "\n"
@@ -20263,7 +20564,7 @@ msgstr "Webde dolaşmak , posta , haber okumak ve yollamak için araçları ayar
 #~ "modules\n"
 #~ "dosyasında bttv modulü yoksa) ya da xawtv yi yüklemedi ise lütfen \n"
 #~ "\"lspcidrake -v -f\"\n"
-#~ " komutunun sonuçlarını \"install\\@mandrakesoft.com\" \n"
+#~ " komutunun sonuçlarını \"install@mandrakesoft.com\" \n"
 #~ "adresine konu kısmına \"undetected TV card\" yazarak gönderin.\n"
 #~ "\n"
 #~ "\n"

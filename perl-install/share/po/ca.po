@@ -1,18 +1,21 @@
+# translation of DrakX-ca.po to Catalan
 # drakbootdisk translation to Catalan.
-# Copyright (C) 2000 Free Software Foundation, Inc.
+# Copyright (C) 2000, 2003 Free Software Foundation, Inc.
 # Softcatala, softcatala.org, 2000-2003
+# Albert Astals Cid <astals11@terra.es>, 2003.
 #
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: DrakX\n"
-"POT-Creation-Date: 2003-09-16 13:45+0200\n"
-"PO-Revision-Date: 2003-07-12 21:23+0200\n"
-"Last-Translator: Quico Llach <quico@softcatala.org>\n"
-"Language-Team: Catalan <traddrake@softcatala.org>\n"
+"Project-Id-Version: DrakX-ca\n"
+"POT-Creation-Date: 2003-12-03 03:09+0100\n"
+"PO-Revision-Date: 2003-12-02 15:56+0100\n"
+"Last-Translator: Albert Astals Cid <astals11@terra.es>\n"
+"Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=iso-8859-1\n"
+"Content-Type: text/plain; charset=ISO-8859-1\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.0.2\n"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -30,8 +33,8 @@ msgid ""
 "%s: %s requires hostname, MAC address, IP, nbi-image, 0/1 for THIN_CLIENT, "
 "0/1 for Local Config...\n"
 msgstr ""
-"%s: %s necessita: nom d'ordinador central, adreça MAC, IP, image-nbi, 0/1 "
-"per a THIN_CLIENT, 0/1 per a la configuració local...\n"
+"%s: %s necessita: el nom de l'ordinador, adreça MAC, IP, image-nbi, 0/1 per "
+"a THIN_CLIENT, 0/1 per a la configuració local...\n"
 
 #: ../../standalone/drakTermServ:1
 #, c-format
@@ -49,6 +52,8 @@ msgid ""
 "Differential backups only save files that have changed or are new since the "
 "original 'base' backup."
 msgstr ""
+"Les copies de seguretat diferencials només guarden els fitxers que han "
+"canviat o que són nous a partir de la còpia de seguretat original."
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -61,9 +66,9 @@ msgid "Please insert floppy disk:"
 msgstr "Si us plau, inseriu un disquet:"
 
 #: ../../standalone/drakTermServ:1
-#, fuzzy, c-format
+#, c-format
 msgid "DrakTermServ"
-msgstr "Visió general del drakTermServ"
+msgstr "DrakTermServ"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -96,9 +101,9 @@ msgid "Restore partition table"
 msgstr "Restaura la taula de particions"
 
 #: ../../standalone/drakconnect:1
-#, fuzzy, c-format
+#, c-format
 msgid "Configure hostname..."
-msgstr "Configura el ratolí"
+msgstr "Configura el nom de l'ordinador..."
 
 #: ../../printer/cups.pm:1
 #, c-format
@@ -116,6 +121,8 @@ msgid ""
 "The current security level is %s\n"
 "Select permissions to see/edit"
 msgstr ""
+"El nivell de seguretat actual és %s\n"
+"Esculli els permissos a veure/editar"
 
 #: ../../diskdrake/hd_gtk.pm:1
 #, c-format
@@ -168,7 +175,7 @@ msgid "Gateway device"
 msgstr "Dispositiu de la passarel·la"
 
 #: ../../standalone/drakfloppy:1
-#, fuzzy, c-format
+#, c-format
 msgid "Advanced preferences"
 msgstr "Opcions avançades"
 
@@ -183,11 +190,11 @@ msgid "Ethernetcard"
 msgstr "Targeta Ethernet"
 
 #: ../../security/l10n.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "If set, send the mail report to this email address else send it to root"
 msgstr ""
 "si es defineix, envia l'informe de correu a aquesta adreça electrònica; si "
-"no, envia'l al root."
+"no, envia'l al root"
 
 #: ../../modules/interactive.pm:1 ../../standalone/drakconnect:1
 #, c-format
@@ -249,10 +256,9 @@ msgid "Error writing to file %s"
 msgstr "S'ha produït un error en escriure al fitxer %s"
 
 #: ../../security/l10n.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Report check result to syslog"
-msgstr ""
-"si és \"sí\", informa del resultat de la comprovació al registre del sistema."
+msgstr "Informa del resultat de la comprovació al registre del sistema"
 
 #: ../../services.pm:1
 #, c-format
@@ -282,14 +288,9 @@ msgid "CUPS configuration"
 msgstr "Configuració de CUPS"
 
 #: ../../standalone/drakbackup:1
-#, fuzzy, c-format
+#, c-format
 msgid "Total progress"
 msgstr "Progrés total"
-
-#: ../../lang.pm:1
-#, c-format
-msgid "Hong Kong"
-msgstr "Hong Kong"
 
 #: ../../install_interactive.pm:1
 #, c-format
@@ -360,18 +361,37 @@ msgstr "Atura"
 #: ../../standalone/scannerdrake:1
 #, c-format
 msgid "Edit selected host"
-msgstr "Edita l'ordinador central seleccionat"
+msgstr "Edita l'ordinador seleccionat"
 
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "No CD device defined!"
 msgstr "No s'ha definit cap dispositiu de CD!"
 
+#: ../../network/shorewall.pm:1
+#, c-format
+msgid ""
+"Please enter the name of the interface connected to the "
+"internet.              \n"
+"                \n"
+"Examples:\n"
+"                ppp+ for modem or DSL connections, \n"
+"                eth0, or eth1 for cable connection, \n"
+"                ippp+ for a isdn connection.\n"
+msgstr ""
+"Si us plau, introduïu el nom de la interfície connectada a "
+"internet.              \n"
+"                \n"
+"Exemples:\n"
+"                ppp+ per a mòdem o connexions DSL, \n"
+"                eth0, o eth1 per a connexions de cable, \n"
+"                ippp+ per a connexions XDSI.\n"
+
 #
 #: ../../standalone/drakbackup:1
-#, fuzzy, c-format
+#, c-format
 msgid "\tUse .backupignore files\n"
-msgstr "Usa la quota de disc per als fitxers de còpia de seguretat."
+msgstr "\tUsa els fitxers .backupignore\n"
 
 #
 #: ../../keyboard.pm:1
@@ -391,9 +411,9 @@ msgstr "256 kB"
 
 #
 #: ../../standalone/drakbackup:1
-#, fuzzy, c-format
+#, c-format
 msgid "Don't rewind tape after backup"
-msgstr "Utilitza una cinta per fer la còpia de seguretat"
+msgstr "No rebobonis la cinta després de la còpia de seguretat"
 
 #: ../../any.pm:1
 #, c-format
@@ -444,15 +464,21 @@ msgstr "S'ha fet el canvi, voleu reiniciar el servei dm?"
 msgid "Swiss (French layout)"
 msgstr "Suís (disposició francesa)"
 
-#: ../../standalone/drakbackup:1
-#, fuzzy, c-format
-msgid "August"
-msgstr "agost"
-
 #: ../../raid.pm:1
 #, c-format
 msgid "mkraid failed (maybe raidtools are missing?)"
 msgstr "L'mkraid ha fallat (potser manquen les eines del RAID (raidtools)?)"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "August"
+msgstr "Agost"
+
+#
+#: ../../network/drakfirewall.pm:1
+#, c-format
+msgid "FTP server"
+msgstr "Servidor FTP"
 
 #: ../../harddrake/data.pm:1
 #, c-format
@@ -470,15 +496,15 @@ msgid "Soundcard"
 msgstr "Targeta de so"
 
 #: ../../standalone/drakbackup:1
-#, fuzzy, c-format
+#, c-format
 msgid "Month"
 msgstr "Mes"
 
 #
 #: ../../standalone/drakbackup:1
-#, fuzzy, c-format
+#, c-format
 msgid "Search for files to restore"
-msgstr "Seleccioneu un altre suport des del qual restaurar"
+msgstr "Busca fitxers a restaurar"
 
 #: ../../lang.pm:1
 #, c-format
@@ -520,9 +546,9 @@ msgid "Iraq"
 msgstr "Iraq"
 
 #: ../../standalone/drakbug:1
-#, fuzzy, c-format
+#, c-format
 msgid "connecting to %s ..."
-msgstr "s'està connectant amb l'auxiliar de Bugzilla..."
+msgstr "s'està connectant a %s ..."
 
 #: ../../standalone/drakgw:1
 #, c-format
@@ -535,11 +561,6 @@ msgstr ""
 #, c-format
 msgid "Configuring..."
 msgstr "S'està configurant..."
-
-#: ../../standalone/drakgw:1
-#, c-format
-msgid "The setup has already been done, and it's currently enabled."
-msgstr "La configuració ja s'ha realitzat i ara està habilitada."
 
 #: ../../harddrake/v4l.pm:1
 #, c-format
@@ -566,9 +587,9 @@ msgid "Search installed fonts"
 msgstr "Cerca les fonts instal·lades"
 
 #: ../../standalone/drakboot:1
-#, fuzzy, c-format
+#, c-format
 msgid "Default desktop"
-msgstr "Predeterminat"
+msgstr "Escriptori predeterminat"
 
 #: ../../standalone/drakbug:1
 #, c-format
@@ -675,9 +696,14 @@ msgid " on Novell server \"%s\", printer \"%s\""
 msgstr " en servidor Novell \"%s\", impressora \"%s\""
 
 #: ../../standalone/printerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "Printer Name"
-msgstr "Nom de la cua d'impressió"
+msgstr "Nom de la impressora"
+
+#: ../../../move/move.pm:1
+#, c-format
+msgid "Setting up USB key"
+msgstr ""
 
 #: ../../standalone/drakfloppy:1
 #, c-format
@@ -737,16 +763,17 @@ msgstr ""
 msgid "if needed"
 msgstr "si cal"
 
+#: ../../standalone/drakclock:1
+#, c-format
+msgid ""
+"We need to install ntp package\n"
+" to enable Network Time Protocol"
+msgstr ""
+
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "Restore Failed..."
 msgstr "La restauració ha fallat..."
-
-#
-#: ../../standalone/harddrake2:1
-#, c-format
-msgid "/Autodetect _jazz drives"
-msgstr "/Detecta automàticament les unitats _jazz"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -980,9 +1007,9 @@ msgstr ""
 
 #
 #: ../../standalone/drakboot:1
-#, fuzzy, c-format
+#, c-format
 msgid "Default user"
-msgstr "Impressora predeterminada"
+msgstr "Usuari predeterminat"
 
 #: ../../standalone/draksplash:1
 #, c-format
@@ -1087,11 +1114,6 @@ msgstr ""
 msgid "512 kB"
 msgstr "512 kB"
 
-#: ../../standalone/net_monitor:1
-#, c-format
-msgid "Logs"
-msgstr "Registres"
-
 #: ../../standalone/scannerdrake:1
 #, c-format
 msgid "(Note: Parallel ports cannot be auto-detected)"
@@ -1129,11 +1151,10 @@ msgid ""
 msgstr ""
 "També podeu emprar la interfície gràfica \"xpdq\" per configurar opcions i "
 "gestionar treballs d'impressió.\n"
-"Si esteu utilitzant KDE com a entorn gràfic per defecte, teniu un \"botó "
-"d'emergència\", una icona a l'escriptori, etiquetada amb \"ATURA la "
-"impressora!\", que atura tots el treballs d'impressió immediatament en fer-"
-"hi clic. Això és útil, per exemple, quan se us enganxa el paper en la "
-"impressora.\n"
+"Si esteu utilitzant KDE com a entorn gràfic teniu un \"botó d'emergència\", "
+"una icona a l'escriptori, etiquetada amb \"ATURA la impressora!\", que atura "
+"tots el treballs d'impressió immediatament en fer-hi clic. Això és útil, per "
+"exemple, quan se us enganxa el paper en la impressora.\n"
 
 #: ../../standalone/drakboot:1 ../../standalone/drakfloppy:1
 #: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
@@ -1143,9 +1164,9 @@ msgid "<control>Q"
 msgstr "<control>Q"
 
 #: ../../standalone/drakbackup:1
-#, fuzzy, c-format
+#, c-format
 msgid "Unable to find backups to restore...\n"
-msgstr "Si us plau, seleccioneu les dades per restaurar..."
+msgstr "No s'han pogut trobar les dades per restaurar...\n"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -1450,11 +1471,9 @@ msgstr "Configura l'accés a Internet..."
 
 #
 #: ../../standalone/drakbackup:1
-#, fuzzy, c-format
+#, c-format
 msgid "Please choose the time interval between each backup"
-msgstr ""
-"Si us plau, escolliu l'interval \n"
-"de temps entre cada còpia de seguretat"
+msgstr "Si us plau, escolliu l'interval de temps entre cada còpia de seguretat"
 
 #
 #: ../../crypto.pm:1 ../../lang.pm:1
@@ -1463,9 +1482,9 @@ msgid "Norway"
 msgstr "Noruega"
 
 #: ../../standalone/drakconnect:1
-#, fuzzy, c-format
+#, c-format
 msgid "Delete profile"
-msgstr "Suprimeix el perfil..."
+msgstr "Suprimeix el perfil"
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -1504,9 +1523,9 @@ msgstr ""
 "quan calgui, expulsarà el CD actual i us demanarà que n'inseriu un altre."
 
 #: ../../standalone/drakperm:1
-#, fuzzy, c-format
+#, c-format
 msgid "When checked, owner and group won't be changed"
-msgstr "si ho marqueu, no es canviaran ni el propietari ni el grup"
+msgstr "Si ho marqueu, no es canviaran ni el propietari ni el grup"
 
 #: ../../lang.pm:1
 #, c-format
@@ -1624,6 +1643,12 @@ msgstr "Letó"
 msgid "monthly"
 msgstr "mensual"
 
+#
+#: ../../../move/move.pm:1
+#, c-format
+msgid "Retry"
+msgstr "Reintenta"
+
 #: ../../standalone/drakfloppy:1
 #, c-format
 msgid "Module name"
@@ -1670,6 +1695,12 @@ msgstr "Utilitza Unicode per defecte"
 msgid "the module of the GNU/Linux kernel that handles the device"
 msgstr "el mòdul del nucli GNU/Linux que gestiona aquest dispositiu"
 
+#
+#: ../../standalone/drakclock:1
+#, c-format
+msgid "Is your hardware clock set to GMT?"
+msgstr "Està el rellotge del vostre ordinador establert en GTM?"
+
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid "Trying to rescue partition table"
@@ -1681,12 +1712,9 @@ msgid "Option %s must be an integer number!"
 msgstr "L'opció %s ha de ser un número enter!"
 
 #: ../../security/l10n.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Use password to authenticate users"
-msgstr ""
-"Arguments: (arg)\n"
-"\n"
-"Utilitza una contrasenya per autenticar usuaris."
+msgstr "Utilitza una contrasenya per autenticar usuaris."
 
 #: ../../interactive/stdio.pm:1
 #, c-format
@@ -1715,6 +1743,11 @@ msgstr "No es pot iniciar l'actualització en directe!!!\n"
 msgid "Name: "
 msgstr "Nom: "
 
+#: ../../standalone/drakconnect:1
+#, c-format
+msgid "up"
+msgstr ""
+
 #: ../../Xconfig/resolution_and_depth.pm:1
 #, c-format
 msgid "16 million colors (24 bits)"
@@ -1726,7 +1759,7 @@ msgstr "16 milions de colors (24 bits)"
 msgid "Allow all users"
 msgstr "Permet tots els usuaris"
 
-#: ../../share/advertising/08-store.pl:1
+#: ../advertising/08-store.pl:1
 #, c-format
 msgid "The official MandrakeSoft Store"
 msgstr "La botiga oficial de MandrakeSoft"
@@ -1737,12 +1770,12 @@ msgid "Resizing"
 msgstr "S'està canviant la mida"
 
 #: ../../standalone/drakbackup:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Enter the maximum size\n"
 " allowed for Drakbackup (MB)"
 msgstr ""
-"Si us plau, especifiqueu la mida màxima\n"
+"Especifiqueu la mida màxima\n"
 " permesa per a Drakbackup (MB)"
 
 #: ../../network/netconnect.pm:1
@@ -1763,15 +1796,15 @@ msgstr ""
 "Fes una nova còpia de seguretat abans de restaurar (només per les còpies "
 "incrementals.)"
 
-#: ../../standalone/harddrake2:1
-#, c-format
-msgid "Name"
-msgstr "Nom"
-
 #: ../../raid.pm:1
 #, c-format
 msgid "mkraid failed"
 msgstr "L'mkraid ha fallat"
+
+#: ../../standalone/harddrake2:1
+#, c-format
+msgid "Name"
+msgstr "Nom"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -1779,9 +1812,9 @@ msgid "Button 3 Emulation"
 msgstr "Emulació del botó 3"
 
 #: ../../security/l10n.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Check additions/removals of sgid files"
-msgstr "si és \"sí\", comprova les addicions/supressions dels fitxers sgid."
+msgstr "Comprova les addicions/supressions dels fitxers sgid."
 
 #
 #: ../../standalone/drakbackup:1
@@ -1876,9 +1909,9 @@ msgid "Harddrake2 version %s"
 msgstr "Versió del Harddrake2 %s"
 
 #: ../../standalone/drakfloppy:1
-#, fuzzy, c-format
+#, c-format
 msgid "Preferences"
-msgstr "Preferència: "
+msgstr "Preferències"
 
 #: ../../lang.pm:1
 #, c-format
@@ -1993,18 +2026,32 @@ msgstr "S'estan habilitant els servidors..."
 msgid "Printing test page(s)..."
 msgstr "S'esta(n) imprimint la(es) pàgina(es) de prova..."
 
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid ""
+"Transfer successful\n"
+"You may want to verify you can login to the server with:\n"
+"\n"
+"ssh -i %s %s@%s\n"
+"\n"
+"without being prompted for a password."
+msgstr ""
+"La transferència s'ha completat amb èxit\n"
+"Comproveu que podeu entrar al servidor amb:\n"
+"\n"
+"ssh -i %s %s@%s\n"
+"\n"
+"sense que se us demani una contrasenya."
+
 #: ../../fsedit.pm:1
 #, c-format
 msgid "There is already a partition with mount point %s\n"
 msgstr "Ja hi ha una partició amb el punt de muntatge %s\n"
 
 #: ../../security/help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Enable/Disable msec hourly security check."
-msgstr ""
-"Arguments: (arg)\n"
-"\n"
-"Habilita/Inhabilita la comprovació horària de seguretat msec."
+msgstr "Habilita/Inhabilita la comprovació de seguretat msec horària."
 
 #: ../../help.pm:1
 #, c-format
@@ -2275,7 +2322,7 @@ msgid "Autoprobe"
 msgstr "Exploració automàtica"
 
 #: ../../security/help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "if set to yes, check for :\n"
 "\n"
@@ -2285,8 +2332,13 @@ msgid ""
 "\n"
 "- for users with the 0 id other than root."
 msgstr ""
-"si és \"sí\", comprova les contrasenyes buides, les que no hi són a /etc/"
-"shadow i els usuaris amb l'identificador 0 que no sigui root."
+"si és \"sí\", comprova :\n"
+"\n"
+" - les contrasenyes buides, \n"
+"\n"
+" - les que no hi són a /etc/shadow\n"
+"\n"
+" - usuaris amb l'identificador 0 que no sigui root."
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -2328,9 +2380,9 @@ msgstr ""
 "\n"
 
 #: ../../printer/cups.pm:1 ../../standalone/printerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "Configured on other machines"
-msgstr "Configura els serveis"
+msgstr "Configurat a d'altres ordinadors"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -2664,7 +2716,7 @@ msgstr ""
 "Per poder imprimir a una impressora NetWare, heu de proporcionar el nom del\n"
 "servidor d'impressió NetWare (tingueu en compte que pot ser diferent del "
 "nom\n"
-"TCP/IP del seu ordinador central), així com el nom de la cua d'impressió de\n"
+"TCP/IP de l'ordinador), així com el nom de la cua d'impressió de\n"
 "la impressora a la qual voleu accedir i el nom d'usuari i contrasenya si "
 "són\n"
 "necessaris."
@@ -2778,12 +2830,9 @@ msgid "Terminal-based"
 msgstr "Basat en terminal"
 
 #: ../../security/help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Enable/Disable IP spoofing protection."
-msgstr ""
-"Arguments: (arg, alert=1)\n"
-"\n"
-"Habilita/Inhabilita la protecció contra falsejament de la IP."
+msgstr "Habilita/Inhabilita la protecció contra falsejament de la IP."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -2869,9 +2918,9 @@ msgid "European protocol (EDSS1)"
 msgstr "Protocol europeu (EDSS1)"
 
 #: ../../standalone/printerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "/_Delete"
-msgstr "Esborrar"
+msgstr "/_Esborra"
 
 #: ../../any.pm:1
 #, c-format
@@ -3020,7 +3069,7 @@ msgid "Tokelau"
 msgstr "Tokelau"
 
 #: ../../standalone/logdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "Matching"
 msgstr "que coincideixin amb"
 
@@ -3063,6 +3112,11 @@ msgstr ""
 msgid "Can't add a partition to _formatted_ RAID md%d"
 msgstr "No es pot afegir una partició a un RAID _formatat_ md%d"
 
+#: ../../standalone/drakclock:1
+#, fuzzy, c-format
+msgid "Network Time Protocol"
+msgstr "Interfície de la xarxa"
+
 #: ../../Xconfig/card.pm:1
 #, c-format
 msgid ""
@@ -3074,7 +3128,8 @@ msgstr ""
 "l'Xfree %s,\n"
 "TINGUEU EN COMPTE QUE ES TRACTA D'UN SUPORT EXPERIMENTAL; L'ORDINADOR ES POT "
 "PENJAR.\n"
-"L'XFree %s, que pot tenir un suport millor en 2D, suporta la vostra targeta."
+"La vostra targeta està suportada per XFree %s que pot tenir un suport millor "
+"en 2D."
 
 #: ../../standalone/draksec:1
 #, c-format
@@ -3142,7 +3197,7 @@ msgstr "Inicia"
 #: ../../security/l10n.pm:1
 #, c-format
 msgid "Direct root login"
-msgstr ""
+msgstr "Entrada directa com a superusuari"
 
 #
 #: ../../printer/printerdrake.pm:1
@@ -3207,9 +3262,9 @@ msgstr "CUPS"
 
 #
 #: ../../standalone/drakbackup:1
-#, fuzzy, c-format
+#, c-format
 msgid "Erase tape before backup"
-msgstr "Utilitza una cinta per fer la còpia de seguretat"
+msgstr "Esborra la cinta abans de fer la còpia de seguretat"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -3232,7 +3287,7 @@ msgid "This is a mandatory package, it can't be unselected"
 msgstr "Aquest paquet és obligatori; no es pot desseleccionar"
 
 #: ../../standalone/drakTermServ:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "        - Create etherboot floppies/CDs:\n"
 "        \tThe diskless client machines need either ROM images on the NIC, or "
@@ -3248,13 +3303,13 @@ msgid ""
 "        \t\t/usr/lib/etherboot/lzrom/3c509.lzrom > /dev/fd0"
 msgstr ""
 "        - Crea disquets/CD Etherboot:\n"
-"        \t\tLes màquines client sense disc necessiten imatge ROM al NIC, o "
-"bé un disquet o CD\n"
-"        \t\td'arrencada per iniciar la seqüència d'arrencada. El "
-"drakTermServ ajudarà a generar\n"
-"        \t\taquestes imatges, basades en el NIC de la màquina client.\n"
+"        \tLes màquines client sense disc necessiten imatge ROM al NIC, o bé "
+"un disquet o CD\n"
+"        \td'arrencada per iniciar la seqüència d'arrencada. El drakTermServ "
+"ajudarà a generar\n"
+"        \taquestes imatges, basades en el NIC de la màquina client.\n"
 "        \t\t\n"
-"        \t\tUn exemple senzill de la creació manual d'un disquet d'arrencada "
+"        \tUn exemple senzill de la creació manual d'un disquet d'arrencada "
 "des d'un 3Com 3c509:\n"
 "        \t\t\n"
 "        \tcat /usr/lib/etherboot/boot1a.bin \\\n"
@@ -3281,9 +3336,9 @@ msgid "Saint Lucia"
 msgstr "Saint Lucia"
 
 #: ../../standalone/drakbackup:1
-#, fuzzy, c-format
+#, c-format
 msgid "November"
-msgstr "novembre"
+msgstr "Novembre"
 
 #: ../../standalone/drakconnect:1
 #, c-format
@@ -3306,7 +3361,7 @@ msgstr "Palau"
 msgid "level"
 msgstr "nivell"
 
-#: ../../share/advertising/13-mdkexpert_corporate.pl:1
+#: ../advertising/13-mdkexpert_corporate.pl:1
 #, c-format
 msgid ""
 "All incidents will be followed up by a single qualified MandrakeSoft "
@@ -3483,9 +3538,9 @@ msgid "All primary partitions are used"
 msgstr "S'utilitzen totes les particions primàries"
 
 #: ../../printer/main.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "LPD server \"%s\", printer \"%s\""
-msgstr " en servidor LPD \"%s\", impressora \"%s\""
+msgstr "Servidor LPD \"%s\", impressora \"%s\""
 
 #: ../../network/netconnect.pm:1
 #, c-format
@@ -3494,7 +3549,7 @@ msgid ""
 "avoid any hostname-related problems."
 msgstr ""
 "Després d'això, és recomanable que reinicieu l'entorn X per\n"
-"evitar problemes deguts al canvi de nom de l'ordinador central."
+"evitar problemes deguts al canvi de nom de l'ordinador."
 
 #: ../../services.pm:1
 #, c-format
@@ -3543,7 +3598,7 @@ msgstr "Número de telèfon del proveïdor"
 #: ../../printer/main.pm:1
 #, c-format
 msgid "Host %s"
-msgstr "Ordinador central %s"
+msgstr "Ordinador %s"
 
 #: ../../lang.pm:1
 #, c-format
@@ -3625,7 +3680,7 @@ msgstr "Nigèria"
 #: ../../standalone/drakTermServ:1
 #, c-format
 msgid "%s: %s requires hostname...\n"
-msgstr "%s: %s necessita un nom d'ordinador central...\n"
+msgstr "%s: %s necessita un nom d'ordinador...\n"
 
 #: ../../install_interactive.pm:1
 #, c-format
@@ -3646,9 +3701,9 @@ msgstr ""
 "estan disponibles al sistema.\n"
 
 #: ../../printer/main.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Multi-function device on parallel port #%s"
-msgstr ", dispositiu multifunció en port paral·lel #%s"
+msgstr "Dispositiu multifunció en port paral·lel #%s"
 
 #
 #: ../../printer/printerdrake.pm:1
@@ -3720,7 +3775,7 @@ msgstr ""
 msgid "Bad package"
 msgstr "Paquet incorrecte"
 
-#: ../../share/advertising/07-server.pl:1
+#: ../advertising/07-server.pl:1
 #, c-format
 msgid ""
 "Transform your computer into a powerful Linux server: Web server, mail, "
@@ -3756,9 +3811,9 @@ msgid "Romania"
 msgstr "Romania"
 
 #: ../../standalone/drakperm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Group"
-msgstr "grup"
+msgstr "Grup"
 
 #: ../../lang.pm:1
 #, c-format
@@ -3837,9 +3892,9 @@ msgstr "Velocitat de refresc horitzontal"
 
 #
 #: ../../standalone/drakperm:1 ../../standalone/printerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "Edit"
-msgstr "Surt"
+msgstr "Edita"
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -3966,9 +4021,9 @@ msgstr "S'està tornant a generar la llista dels escàners configurats..."
 
 #
 #: ../../modules/interactive.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Module configuration"
-msgstr "Configuració manual"
+msgstr "Configuració dels mòduls"
 
 #
 #: ../../harddrake/data.pm:1
@@ -4005,7 +4060,7 @@ msgstr "Benvinguts, crackers"
 msgid "Module options:"
 msgstr "Opcions del mòdul:"
 
-#: ../../share/advertising/11-mnf.pl:1
+#: ../advertising/11-mnf.pl:1
 #, c-format
 msgid "Secure your networks with the Multi Network Firewall"
 msgstr "Assegureu les vostres xarxes amb el tallafocs Multi Network"
@@ -4027,9 +4082,9 @@ msgid "No password prompt on %s at port %s"
 msgstr "No es demana cap contrasenya a %s en el port %s"
 
 #: ../../mouse.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Kensington Thinking Mouse with Wheel emulation"
-msgstr "Kensington Thinking Mouse"
+msgstr "Kensington Thinking Mouse amb emulació de rodeta"
 
 #: ../../standalone/scannerdrake:1
 #, c-format
@@ -4089,6 +4144,11 @@ msgstr "Ratolí"
 msgid "not enough room in /boot"
 msgstr "no hi ha prou espai a /boot"
 
+#: ../../install_steps_gtk.pm:1
+#, c-format
+msgid "trying to promote %s"
+msgstr ""
+
 #: ../../lang.pm:1
 #, c-format
 msgid "Liechtenstein"
@@ -4097,7 +4157,7 @@ msgstr "Liechtenstein"
 #: ../../network/ethernet.pm:1 ../../network/network.pm:1
 #, c-format
 msgid "Host name"
-msgstr "Nom de l'ordinador central"
+msgstr "Nom de l'ordinador"
 
 #: ../../standalone/draksplash:1
 #, c-format
@@ -4247,6 +4307,11 @@ msgstr ""
 msgid "Saudi Arabia"
 msgstr "Aràbia Saudita"
 
+#: ../../services.pm:1
+#, c-format
+msgid "Internet"
+msgstr "Internet"
+
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid "Continue anyway?"
@@ -4266,11 +4331,6 @@ msgstr ""
 #, c-format
 msgid "Printer"
 msgstr "Impressora"
-
-#: ../../services.pm:1
-#, c-format
-msgid "Internet"
-msgstr "Internet"
 
 #: ../../standalone/service_harddrake:1
 #, c-format
@@ -4320,6 +4380,8 @@ msgstr "Escolliu el perfil a configurar"
 #, c-format
 msgid "Password minimum length and number of digits and upcase letters"
 msgstr ""
+"Longitud mínima de la contrasenya i el nombre de dígits i lletres en "
+"majúscules"
 
 #: ../../network/ethernet.pm:1 ../../network/network.pm:1
 #, c-format
@@ -4331,8 +4393,8 @@ msgid ""
 msgstr ""
 "\n"
 "\n"
-"Introduïu un nom d'ordinador central Zeroconf sense cap punt si no\n"
-"voleu utilitzar el nom d'ordinador central per defecte."
+"Introduïu un nom d'ordinador Zeroconf sense cap punt si no\n"
+"voleu utilitzar el nom d'ordinador per defecte."
 
 #
 #: ../../standalone/drakbackup:1
@@ -4350,6 +4412,11 @@ msgstr "Els punts de muntatge només poden contenir caràcters alfanumèrics"
 #, c-format
 msgid "Restarting printing system..."
 msgstr "S'està reiniciant el sistema d'impressió..."
+
+#: ../../../move/tree/mdk_totem:1
+#, c-format
+msgid "You can only run with no CDROM support"
+msgstr ""
 
 #: ../../modules/interactive.pm:1
 #, c-format
@@ -4471,14 +4538,12 @@ msgstr ""
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "Need hostname, username and password!"
-msgstr ""
-"Cal introduir el nom de l'ordinador central, el nom d'usuari i la "
-"contrasenya!"
+msgstr "Cal introduir el nom de l'ordinador, el nom d'usuari i la contrasenya!"
 
 #: ../../network/tools.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Insert floppy"
-msgstr "Inseriu un disquet a la unitat %s"
+msgstr "Inseriu un disquet"
 
 #: ../../diskdrake/dav.pm:1
 #, c-format
@@ -4592,15 +4657,15 @@ msgstr "ISA / PCMCIA"
 msgid "About"
 msgstr "Quant a"
 
-#: ../../network/network.pm:1
-#, c-format
-msgid "Proxies configuration"
-msgstr "Configuració dels servidors intermediaris (proxies)"
-
 #: ../../mouse.pm:1
 #, c-format
 msgid "GlidePoint"
 msgstr "GlidePoint"
+
+#: ../../network/network.pm:1
+#, c-format
+msgid "Proxies configuration"
+msgstr "Configuració dels servidors intermediaris (proxies)"
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -4608,9 +4673,9 @@ msgid "Start: sector %s\n"
 msgstr "Inici: sector %s\n"
 
 #: ../../standalone/drakconnect:1
-#, fuzzy, c-format
+#, c-format
 msgid "No Mask"
-msgstr "Paquet incorrecte"
+msgstr "Sense màscara"
 
 #
 #: ../../standalone/drakgw:1
@@ -4647,9 +4712,9 @@ msgid "Please click on a partition"
 msgstr "Si us plau, feu clic a una partició "
 
 #: ../../printer/main.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Multi-function device on HP JetDirect"
-msgstr ", dispositiu multifunció en HP JetDirect"
+msgstr "Dispositiu multifunció en HP JetDirect"
 
 #: ../../any.pm:1 ../../standalone/drakbackup:1
 #, c-format
@@ -4724,7 +4789,7 @@ msgid ""
 "- Save via %s on host: %s\n"
 msgstr ""
 "\n"
-"- Desa-ho a través de %s en l'ordinador central: %s\n"
+"- Desa-ho a través de %s en l'ordinador %s\n"
 
 #: ../../lang.pm:1 ../../standalone/drakxtv:1
 #, c-format
@@ -4749,9 +4814,14 @@ msgstr "Els punts de muntatge han de començar amb una /"
 
 #
 #: ../../standalone/drakbackup:1
-#, fuzzy, c-format
+#, c-format
 msgid "Choose your CD/DVD device"
-msgstr "Si us plau, escolliu l'espai disponible en el CD/DVD (en MB)"
+msgstr "Escolliu el vostre dispositiu CD/DVD"
+
+#: ../../network/drakfirewall.pm:1
+#, c-format
+msgid "CUPS server"
+msgstr "Servidor CUPS"
 
 #: ../../standalone/logdrake:1
 #, c-format
@@ -4768,7 +4838,7 @@ msgstr "Surt sense desar"
 msgid "Yemen"
 msgstr "Iemen"
 
-#: ../../share/advertising/11-mnf.pl:1
+#: ../advertising/11-mnf.pl:1
 #, c-format
 msgid "This product is available on the MandrakeStore Web site."
 msgstr "Aquest producte es troba disponible al lloc web de MandrakeStore"
@@ -4777,6 +4847,31 @@ msgstr "Aquest producte es troba disponible al lloc web de MandrakeStore"
 #, c-format
 msgid "=> There are many things to choose from (%s).\n"
 msgstr "=> Hi ha moltes coses per escollir de (%s).\n"
+
+#: ../../standalone/drakclock:1
+#, c-format
+msgid "GMT - DrakClock"
+msgstr ""
+
+#: ../../../move/move.pm:1
+#, c-format
+msgid ""
+"An error occurred:\n"
+"\n"
+"\n"
+"%s\n"
+"\n"
+"This may come from corrupted system configuration files\n"
+"on the USB key, in this case removing them and then\n"
+"rebooting Mandrake Move would fix the problem. To do\n"
+"so, click on the corresponding button.\n"
+"\n"
+"\n"
+"You may also want to reboot and remove the USB key, or\n"
+"examine its contents under another OS, or even have\n"
+"a look at log files in console #3 and #4 to try to\n"
+"guess what's happening."
+msgstr ""
 
 #: ../../steps.pm:1
 #, c-format
@@ -4825,9 +4920,9 @@ msgstr "Descripció"
 
 #
 #: ../../standalone/drakbug:1
-#, fuzzy, c-format
+#, c-format
 msgid "Please enter summary text."
-msgstr "Si us plau, introduïu la vostra identificació (login)"
+msgstr "Si us plau, introduïu el resum."
 
 #: ../../fsedit.pm:1
 #, c-format
@@ -4965,9 +5060,10 @@ msgstr "si aquesta CPU té o no l'error Coma Cyrix 6x86"
 
 #
 #: ../../standalone/printerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "Loading printer configuration... Please wait"
-msgstr "Modifica la configuració de la impressora"
+msgstr ""
+"S'està carregant la configuració de la impressora... Si us plau, espereu"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -5027,6 +5123,11 @@ msgstr "Userdrake"
 msgid "Which partition do you want to use for Linux4Win?"
 msgstr "Quina partició voleu utilitzar per al Linux4Win?"
 
+#: ../../install_steps_gtk.pm:1
+#, fuzzy, c-format
+msgid "due to missing %s"
+msgstr "El kdesu no hi és"
+
 #
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -5065,9 +5166,9 @@ msgid "Card mem (DMA)"
 msgstr "Targeta de memòria (DMA)"
 
 #: ../../standalone/net_monitor:1
-#, fuzzy, c-format
+#, c-format
 msgid "Disconnecting from Internet "
-msgstr "S'està desconnectant d'Internet"
+msgstr "S'està desconnectant d'Internet "
 
 #: ../../crypto.pm:1 ../../lang.pm:1 ../../network/tools.pm:1
 #, c-format
@@ -5146,9 +5247,9 @@ msgstr "Estats Units"
 
 #
 #: ../../security/l10n.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "User umask"
-msgstr "Usuaris"
+msgstr "Umask d'usuari"
 
 #: ../../any.pm:1
 #, c-format
@@ -5185,12 +5286,9 @@ msgid "NTP Server"
 msgstr "Servidor NTP"
 
 #: ../../security/l10n.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Sulogin(8) in single user level"
-msgstr ""
-"Arguments: (arg)\n"
-"\n"
-" Habilita/Deshabilita sulogin(8) en nivell monousuari."
+msgstr "Sulogin(8) en nivell monousuari"
 
 #
 #: ../../install_steps_gtk.pm:1
@@ -5252,9 +5350,9 @@ msgstr "Opcions avançades"
 
 #
 #: ../../standalone/drakbackup:1
-#, fuzzy, c-format
+#, c-format
 msgid "View Configuration"
-msgstr "Configuració"
+msgstr "Consulta la configuració"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -5482,7 +5580,7 @@ msgid "Slovenian"
 msgstr "Eslovè"
 
 #: ../../security/help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Authorize:\n"
 "\n"
@@ -5496,12 +5594,16 @@ msgid ""
 "To authorize the services you need, use /etc/hosts.allow (see hosts.allow"
 "(5))."
 msgstr ""
-"Arguments: (arg)\n"
+"Autoritza:\n"
 "\n"
-"Autoritza tots els serveis controlats per tcp_wrappers (vegeu hosts.deny(5)) "
-"si \\fIarg\\fP = ALL. Només els locals\n"
-"si \\fIarg\\fP = LOCAL i cap si if \\fIarg\\fP = NONE. Per autoritzar els "
-"serveis que us calguin, utilitzeu /etc/hosts.allow\n"
+"- tots els serveis controlats per tcp_wrappers (vegeu hosts.deny(5)) si "
+"s'estableix a \"ALL\",\n"
+"\n"
+"- només els fitxers locals si s'estabeix a \"LOCAL\"\n"
+"\n"
+"- cap si s'estableix a \"NONE\".\n"
+"\n"
+"Per autoritzar els serveis que us calguin, utilitzeu /etc/hosts.allow\n"
 "(vegeu hosts.allow(5))."
 
 #: ../../lang.pm:1
@@ -5602,7 +5704,7 @@ msgstr ""
 msgid "Started on boot"
 msgstr "Iniciat en l'arrencada"
 
-#: ../../share/advertising/12-mdkexpert.pl:1
+#: ../advertising/12-mdkexpert.pl:1
 #, c-format
 msgid ""
 "Join the MandrakeSoft support teams and the Linux Community online to share "
@@ -5652,14 +5754,14 @@ msgstr ""
 "- Desa-ho a una cinta en el dispositiu: %s"
 
 #: ../../standalone/drakbackup:1
-#, fuzzy, c-format
+#, c-format
 msgid "Login name"
-msgstr "Nom de domini"
+msgstr "Nom d'accés"
 
 #: ../../security/l10n.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Report unowned files"
-msgstr "si és \"sí\", informa dels fitxers sense propietari"
+msgstr "Informa dels fitxers sense propietari"
 
 #: ../../standalone/drakconnect:1
 #, c-format
@@ -5764,9 +5866,9 @@ msgid "Congo (Brazzaville)"
 msgstr "Congo (Brazzaville)"
 
 #: ../../standalone/drakperm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Read"
-msgstr "Només lectura"
+msgstr "Lectura"
 
 #: ../../any.pm:1 ../../install_any.pm:1 ../../standalone.pm:1
 #, c-format
@@ -5931,12 +6033,9 @@ msgid "Network Options"
 msgstr "Opcions de xarxa"
 
 #: ../../security/l10n.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Enable msec hourly security check"
-msgstr ""
-"Arguments: (arg)\n"
-"\n"
-"Habilita/Inhabilita la comprovació horària de seguretat msec."
+msgstr "Habilitala la comprovació de seguretat msec horària"
 
 #: ../../standalone/drakboot:1
 #, c-format
@@ -5946,11 +6045,6 @@ msgid ""
 msgstr ""
 "Mostra el tema\n"
 "sota la consola"
-
-#: ../../standalone/net_monitor:1
-#, c-format
-msgid "Statistics"
-msgstr "Estadístiques"
 
 #: ../../printer/cups.pm:1
 #, c-format
@@ -6057,9 +6151,9 @@ msgid "Kiribati"
 msgstr "Kiribati"
 
 #: ../../mouse.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Logitech Mouse (serial, old C7 type) with Wheel emulation"
-msgstr "Logitech Mouse (sèrie, tipus C7 antic)"
+msgstr "Logitech Mouse (sèrie, tipus C7 antic) amb emulació de rodeta"
 
 #: ../../standalone/drakbackup:1
 #, fuzzy, c-format
@@ -6232,7 +6326,7 @@ msgstr "No es poden fer captures de pantalla abans de fer les particions"
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "Host Name"
-msgstr "Nom de l'ordinador central"
+msgstr "Nom de l'ordinador"
 
 #: ../../standalone/logdrake:1
 #, c-format
@@ -6400,12 +6494,9 @@ msgid "Journalised FS"
 msgstr "Journalised FS"
 
 #: ../../security/l10n.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Ethernet cards promiscuity check"
-msgstr ""
-"Arguments: (arg)\n"
-"\n"
-"Activa/Inhabilita la comprovació de promiscuïtat de les targetes Ethernet."
+msgstr "Comprovació de promiscuïtat de les targetes Ethernet"
 
 #: ../../standalone/scannerdrake:1
 #, c-format
@@ -6451,9 +6542,9 @@ msgstr ""
 "tornar a configurar la connexió a Internet i a la xarxa local.\n"
 
 #: ../../security/l10n.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Run the daily security checks"
-msgstr "si és \"sí\", executa les comprovacions diàries de seguretat."
+msgstr "Executa les comprovacions diàries de seguretat"
 
 #: ../../Xconfig/various.pm:1
 #, c-format
@@ -6477,7 +6568,7 @@ msgstr "Maltès (Estats Units)"
 #: ../../standalone/drakfloppy:1
 #, c-format
 msgid "The creation of the boot floppy has been successfully completed \n"
-msgstr ""
+msgstr "La creació del disc d'arrencada s'ha completat amb èxit \n"
 
 #: ../../services.pm:1
 #, c-format
@@ -6489,9 +6580,9 @@ msgstr ""
 "de xarxa (NFS), SMB (gestor de xarxes d'àrea local/Windows) i NCP (NetWare)."
 
 #: ../../standalone/drakconnect:1
-#, fuzzy, c-format
+#, c-format
 msgid "Launch the wizard"
-msgstr "Feu clic aquí per executar l'auxiliar ->"
+msgstr "Executa l'auxiliar"
 
 #: ../../harddrake/data.pm:1
 #, c-format
@@ -6654,9 +6745,9 @@ msgstr ""
 "un client d'Internet, seria millor escollir un nivell més baix."
 
 #: ../../standalone/printerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "Server Name"
-msgstr "Nom del servidor:"
+msgstr "Nom del servidor"
 
 #: ../../network/tools.pm:1 ../../standalone/drakconnect:1
 #, c-format
@@ -6687,7 +6778,7 @@ msgstr ""
 
 #
 #: ../../install_interactive.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "WARNING!\n"
 "\n"
@@ -6702,14 +6793,17 @@ msgid ""
 msgstr ""
 "ATENCIÓ!\n"
 "\n"
-"Tot seguit, el DrakX canviarà la mida de la vostra partició de Windows. Aneu "
-"amb\n"
-"compte: aquesta operació és perillosa. Si encara no ho heu fet, sortiu de "
-"la\n"
-"instal·lació, executeu l'Scandisk sota Windows (i potser també el defrag) i\n"
-"torneu a començar la instal·lació. Feu també una còpia de seguretat de les\n"
-"vostres dades.\n"
-"Quan estigueu segur, premeu \"D'acord\"."
+"Tot seguit, el DrakX canviarà la mida de la vostra partició de Windows. "
+"Aneu\n"
+"amb compte: aquesta operació és perillosa. Si encara no ho heu fet, sortiu "
+"de\n"
+"la instal·lació, executeu \"chkdsk c:\" a la línia de comandes sota Windows\n"
+"(atenció el programa gràfic\"scandisk\" no és suficient, assegura't d'usar\n"
+"\"chkdsk\" en una línia de comandes), opcionalment executeu defrag, després\n"
+"torneu a començar la instal·lació. També haurieu de fer una còpia de "
+"seguretat\n"
+"de les vostres dades.\n"
+"Quan estigueu segur, premeu D'acord."
 
 #
 #: ../../keyboard.pm:1
@@ -6783,7 +6877,7 @@ msgid ""
 "Choose the network or host on which the local printers should be made "
 "available:"
 msgstr ""
-"Trieu la xara o ordinador central en què les impressores locals han d'estar "
+"Trieu la xara o ordinadors en què les impressores locals han d'estar "
 "disponibles:"
 
 #: ../../printer/printerdrake.pm:1
@@ -6859,20 +6953,25 @@ msgstr ""
 "Desa i recupera el generador d'entropia del sistema per a\n"
 "la generació de nombres aleatoris d'una qualitat més alta."
 
-#: ../../share/advertising/07-server.pl:1
+#: ../advertising/07-server.pl:1
 #, c-format
 msgid "Turn your computer into a reliable server"
 msgstr "Convertiu la vostra màquina en un servidor fiable"
 
 #: ../../security/l10n.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Check empty password in /etc/shadow"
-msgstr "si és \"sí\", comprova la contrasenya buida a /etc/shadow."
+msgstr "Comprova la contrasenya buida a /etc/shadow"
 
 #: ../../network/network.pm:1
 #, c-format
 msgid " (driver %s)"
 msgstr " (controlador %s)"
+
+#: ../../services.pm:1
+#, c-format
+msgid "Start when requested"
+msgstr ""
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -6887,11 +6986,6 @@ msgstr ""
 #, c-format
 msgid "I don't know"
 msgstr "No ho sé"
-
-#: ../../services.pm:1
-#, c-format
-msgid "Start when requested"
-msgstr ""
 
 #: ../../printer/main.pm:1
 #, c-format
@@ -6951,9 +7045,9 @@ msgid "Post Uninstall"
 msgstr "Post-desinstal·lació"
 
 #: ../../standalone/net_monitor:1
-#, fuzzy, c-format
+#, c-format
 msgid "Connecting to Internet "
-msgstr "Connexió a Internet"
+msgstr "S'està connectant a Internet "
 
 #: ../../standalone/scannerdrake:1
 #, c-format
@@ -6967,9 +7061,9 @@ msgid "Cpuid level"
 msgstr "Nivell cpuid"
 
 #: ../../printer/main.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Novell server \"%s\", printer \"%s\""
-msgstr " en servidor Novell \"%s\", impressora \"%s\""
+msgstr "Servidor Novell \"%s\", impressora \"%s\""
 
 #
 #: ../../keyboard.pm:1
@@ -7004,7 +7098,7 @@ msgid "busmouse"
 msgstr "busmouse"
 
 #: ../../standalone/drakTermServ:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "        - Create Etherboot Enabled Boot Images:\n"
 "        \tTo boot a kernel via etherboot, a special kernel/initrd image must "
@@ -7019,15 +7113,15 @@ msgid ""
 "one full kernel."
 msgstr ""
 "        - Crea imatges d'arrencada habilitades per a l'Etherboot:\n"
-"        \t\tPer arrencar un nucli mitjançant Etherboot cal crear una imatge "
+"        \tPer arrencar un nucli mitjançant Etherboot cal crear una imatge "
 "kernel/initrd especial.\n"
-"        \t\tL'mkinitrd-net fa molta d'aquesta feina i el drakTermServ és "
-"només una interfície gràfica\n"
-"        \t\tper ajudar a gestionar/personalitzar aquestes imatges. Per crear "
+"        \tL'mkinitrd-net fa molta d'aquesta feina i el drakTermServ és només "
+"una interfície gràfica\n"
+"        \tper ajudar a gestionar/personalitzar aquestes imatges. Per crear "
 "el fitxer \n"
-"        \t\t/etc/dhcpd.conf.etherboot-pcimap.include, que s'integra com a "
+"        \t/etc/dhcpd.conf.etherboot-pcimap.include, que s'integra com a "
 "inclusió en \n"
-"        \t\tdhcpd.conf, heu de crear les imatges Etherboot per a un nucli "
+"        \tdhcpd.conf, heu de crear les imatges Etherboot per a un nucli "
 "complet com a mínim."
 
 #: ../../network/tools.pm:1 ../../standalone/drakconnect:1
@@ -7054,12 +7148,9 @@ msgstr ""
 "amb el drakconnect abans de continuar."
 
 #: ../../security/l10n.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Accept broadcasted icmp echo"
-msgstr ""
-"Arguments: (arg)\n"
-"\n"
-" Accepta/Refusa l'eco icmp difós."
+msgstr "Accepta l'eco icmp broadcast"
 
 #: ../../lang.pm:1
 #, c-format
@@ -7072,9 +7163,9 @@ msgid "Benin"
 msgstr "Benín"
 
 #: ../../printer/main.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "SMB/Windows server \"%s\", share \"%s\""
-msgstr " en servidor SMB/Windows \"%s\", recurs compartit \"%s\""
+msgstr "Servidor SMB/Windows \"%s\", recurs compartit \"%s\""
 
 #: ../../standalone/drakperm:1
 #, c-format
@@ -7084,7 +7175,7 @@ msgstr "Selecció del camí"
 #: ../../standalone/scannerdrake:1
 #, c-format
 msgid "Name/IP address of host:"
-msgstr "Nom/Adreça IP de l'ordinador central:"
+msgstr "Nom/Adreça IP de l'ordinador:"
 
 #: ../../Xconfig/various.pm:1
 #, c-format
@@ -7092,9 +7183,9 @@ msgid "Monitor: %s\n"
 msgstr "Monitor: %s\n"
 
 #: ../../standalone/drakperm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Custom & system settings"
-msgstr "Particionament personalitzat de disc"
+msgstr "Arranjament personalitzat del sistema"
 
 #: ../../partition_table/raw.pm:1
 #, c-format
@@ -7113,7 +7204,7 @@ msgstr ""
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Printer host name or IP missing!"
-msgstr "Falta el nom o la IP de l'ordinador central de la impressora!"
+msgstr "Falta el nom o la IP de l'ordinador de la impressora!"
 
 #
 #: ../../standalone/drakbackup:1
@@ -7134,6 +7225,11 @@ msgstr ""
 "La %s s'ha de configurar amb el printerdrake.\n"
 "Podeu executar el printerdrake des del Centre de Control Mandrake en la "
 "secció Maquinari."
+
+#: ../../../move/move.pm:1
+#, fuzzy, c-format
+msgid "Key isn't writable"
+msgstr "No teniu instal·lat XawTV!"
 
 #: ../../lang.pm:1
 #, c-format
@@ -7180,22 +7276,19 @@ msgstr ""
 "sistema, podeu fer clic al botó i seleccionar un altre programa de control."
 
 #: ../../security/help.pm:1
-#, fuzzy, c-format
-msgid "Set the root umask."
-msgstr ""
-"Arguments: (umask)\n"
-"\n"
-"Defineix umask de root."
-
-#: ../../network/modem.pm:1 ../../standalone/drakconnect:1
 #, c-format
-msgid "Script-based"
-msgstr "Basat en script"
+msgid "Set the root umask."
+msgstr "Defineix umask de root."
 
 #: ../../install_any.pm:1 ../../partition_table.pm:1
 #, c-format
 msgid "Error reading file %s"
 msgstr "S'ha produït un error en llegir el fitxer %s"
+
+#: ../../network/modem.pm:1 ../../standalone/drakconnect:1
+#, c-format
+msgid "Script-based"
+msgstr "Basat en script"
 
 #
 #: ../../harddrake/v4l.pm:1
@@ -7283,23 +7376,6 @@ msgstr ""
 msgid "Domain Authentication Required"
 msgstr "Cal l'autenticació de domini"
 
-#: ../../standalone/drakTermServ:1
-#, c-format
-msgid ""
-"\n"
-"\n"
-" Thanks:\n"
-"\t- LTSP Project http://www.ltsp.org\n"
-"\t- Michael Brown <mbrown\\@fensystems.co.uk>\n"
-"\n"
-msgstr ""
-"\n"
-"\n"
-" Gràcies a:\n"
-"\t- Projecte LTSP http://www.ltsp.org\n"
-"\t- Michael Brown <mbrown\\@fensystems.co.uk>\n"
-"\n"
-
 #
 #: ../../security/level.pm:1
 #, c-format
@@ -7323,12 +7399,12 @@ msgstr ""
 "testing] [-v|--version] "
 
 #: ../../standalone/drakbackup:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Maximum size\n"
 " allowed for Drakbackup (MB)"
 msgstr ""
-"Si us plau, especifiqueu la mida màxima\n"
+"Mida màxima\n"
 " permesa per a Drakbackup (MB)"
 
 #: ../../loopback.pm:1
@@ -7387,9 +7463,9 @@ msgid ""
 msgstr "Rebreu un avís si algun dels serveis seleccionats ja no funciona"
 
 #: ../../standalone/drakbackup:1
-#, fuzzy, c-format
+#, c-format
 msgid "Weekday"
-msgstr "Dimecres"
+msgstr "Dia de la setmana"
 
 #: ../../diskdrake/hd_gtk.pm:1
 #, c-format
@@ -7452,7 +7528,7 @@ msgstr "Carregador de l'arrencada a utilitzar"
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "SMB server host"
-msgstr "Ordinador central del servidor SMB"
+msgstr "Ordinadordel servidor SMB"
 
 #: ../../standalone/drakTermServ:1
 #, c-format
@@ -7530,9 +7606,9 @@ msgstr ""
 "informàtics.\n"
 
 #: ../../standalone/printerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "/_Expert mode"
-msgstr "Mode expert"
+msgstr "/Mode _expert"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -7665,9 +7741,9 @@ msgid "Polish (qwerty layout)"
 msgstr "Polonès (disposició qwerty)"
 
 #: ../../standalone/printerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "/_Add Printer"
-msgstr "Impressora"
+msgstr "/_Afegeix impressora"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -7708,7 +7784,7 @@ msgstr ""
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Host \"%s\", port %s"
-msgstr "Ordinador central \"%s\", port %s"
+msgstr "Ordinador \"%s\", port %s"
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -7769,12 +7845,9 @@ msgstr ""
 "informació."
 
 #: ../../security/help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Allow/Forbid autologin."
-msgstr ""
-"Arguments: (arg)\n"
-"\n"
-"Permet/Impedeix l'entrada automàtica."
+msgstr "Permet/Impedeix l'entrada automàtica."
 
 #: ../../standalone/drakxtv:1
 #, c-format
@@ -7792,12 +7865,9 @@ msgid "old static device name used in dev package"
 msgstr "nom antic de dispositiu estàtic, usat en el paquet de desenvolupament"
 
 #: ../../security/l10n.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Enable the logging of IPv4 strange packets"
-msgstr ""
-"Arguments: (arg)\n"
-"\n"
-"Habilita/Inhabilita el registre de paquets estranys IPv4."
+msgstr "Habilita el registre de paquets IPv4 estranys"
 
 #: ../../any.pm:1
 #, c-format
@@ -7906,11 +7976,10 @@ msgstr ""
 "quan reinicieu el sistema, després que la instal·lació s'hagi completat."
 
 #: ../../standalone/drakbackup:1
-#, fuzzy, c-format
+#, c-format
 msgid "Directory (or module) to put the backup on this host."
 msgstr ""
-"Si us plau, entreu el directori (o mòdul) d'aquest\n"
-"ordinador central on voleu desar la còpia de seguretat."
+"Directori (o mòdul) d'aquest ordinador on voleu desar la còpia de seguretat."
 
 #: ../../diskdrake/smbnfs_gtk.pm:1
 #, c-format
@@ -8000,9 +8069,9 @@ msgid "Graphics card: %s\n"
 msgstr "Targeta gràfica: %s\n"
 
 #: ../../standalone/printerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "/Set as _Default"
-msgstr " (Predeterminat)"
+msgstr "/Estableix com a _predeterminada"
 
 #: ../../security/l10n.pm:1
 #, c-format
@@ -8015,19 +8084,19 @@ msgid "Yaboot"
 msgstr "Yaboot"
 
 #: ../../mouse.pm:1
-#, fuzzy, c-format
-msgid "Logitech CC Series with Wheel emulation"
-msgstr "Logitech CC Series"
-
-#: ../../standalone/drakboot:1
 #, c-format
-msgid "Splash selection"
-msgstr "Selecció de pantalla de presentació"
+msgid "Logitech CC Series with Wheel emulation"
+msgstr "Logitech CC Series amb emulació de rodeta"
 
 #: ../../partition_table.pm:1
 #, c-format
 msgid "Extended partition not supported on this platform"
 msgstr "Aquesta plataforma no suporta particions ampliades"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Splash selection"
+msgstr "Selecció de pantalla de presentació"
 
 #: ../../network/isdn.pm:1
 #, c-format
@@ -8051,9 +8120,9 @@ msgid "Choose file"
 msgstr "Escolliu el fitxer"
 
 #: ../../standalone/drakbug:1
-#, fuzzy, c-format
+#, c-format
 msgid "Summary: "
-msgstr "Resum"
+msgstr "Resum: "
 
 #: ../../network/shorewall.pm:1
 #, c-format
@@ -8089,6 +8158,11 @@ msgstr ""
 msgid "Printer default settings"
 msgstr "Paràmetres per defecte de la impressora"
 
+#: ../../mouse.pm:1
+#, c-format
+msgid "Generic PS2 Wheel Mouse"
+msgstr "Ratolí PS2 genèric amb rodeta"
+
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid ""
@@ -8100,11 +8174,6 @@ msgstr ""
 "escriptura a nivell de la pàgina de memòria, permetent que el processador "
 "eviti accessos del nucli no comprovats a la memòria de l'usuari (és a dir, "
 "que és un control contra errors)"
-
-#: ../../mouse.pm:1
-#, c-format
-msgid "Generic PS2 Wheel Mouse"
-msgstr "Ratolí PS2 genèric amb rodeta"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -8259,9 +8328,9 @@ msgid "Network interface"
 msgstr "Interfície de la xarxa"
 
 #: ../../standalone/net_monitor:1
-#, fuzzy, c-format
+#, c-format
 msgid "Disconnection from Internet failed."
-msgstr "No s'ha pogut desconnectar d'Internet."
+msgstr "La desconnexió d'Internet ha fallat."
 
 #
 #: ../../printer/printerdrake.pm:1
@@ -8279,6 +8348,11 @@ msgstr "Teclat coreà"
 msgid "Not connected"
 msgstr "Sense connexió"
 
+#: ../../standalone/net_monitor:1
+#, fuzzy, c-format
+msgid "No internet connection configured"
+msgstr "Configuració de la connexió a Internet"
+
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Greek"
@@ -8290,26 +8364,9 @@ msgid "Saint Kitts and Nevis"
 msgstr "Saint Christopher i Nevis"
 
 #: ../../mouse.pm:1
-#, fuzzy, c-format
-msgid "Generic 3 Button Mouse with Wheel emulation"
-msgstr "Ratolí genèric de 3 botons"
-
-#: ../../standalone/drakbackup:1
 #, c-format
-msgid ""
-"Transfer successful\n"
-"You may want to verify you can login to the server with:\n"
-"\n"
-"ssh -i %s %s\\@%s\n"
-"\n"
-"without being prompted for a password."
-msgstr ""
-"La transferència s'ha completat amb èxit\n"
-"Comproveu que podeu entrar al servidor amb:\n"
-"\n"
-"ssh -i %s %s\\@%s\n"
-"\n"
-"sense que se us demani una contrasenya."
+msgid "Generic 3 Button Mouse with Wheel emulation"
+msgstr "Ratolí genèric de 3 botons amb emulació de rodeta"
 
 #: ../../any.pm:1
 #, c-format
@@ -8322,9 +8379,9 @@ msgid "You can't use JFS for partitions smaller than 16MB"
 msgstr "No podeu utilitzar el JFS per a particions inferiors a 16 MB"
 
 #: ../../standalone/drakbackup:1
-#, fuzzy, c-format
+#, c-format
 msgid "Erase your RW media (1st Session)"
-msgstr "Marqueu aquesta opció si voleu esborrar el suport RW (1a sessió)"
+msgstr "Esborra el suport RW (1a sessió)"
 
 #: ../../Xconfig/various.pm:1
 #, c-format
@@ -8349,15 +8406,15 @@ msgstr ""
 "Intenteu canviar alguns paràmetres"
 
 #: ../../printer/main.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "TCP/IP host \"%s\", port %s"
-msgstr ", host TCP/IP \"%s\", port %s"
+msgstr "Host TCP/IP \"%s\", port %s"
 
 #
 #: ../../standalone/drakperm:1
-#, fuzzy, c-format
+#, c-format
 msgid "User :"
-msgstr "usuari :"
+msgstr "Usuari :"
 
 #
 #: ../../standalone/drakbackup:1
@@ -8469,9 +8526,9 @@ msgid "Mounted\n"
 msgstr "Muntat\n"
 
 #: ../../standalone/printerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "Configure CUPS"
-msgstr "Configura l'X"
+msgstr "Configura CUPS"
 
 #: ../../help.pm:1
 #, c-format
@@ -8490,9 +8547,9 @@ msgid "Encryption key for %s"
 msgstr "Clau de xifratge per a %s"
 
 #: ../../install_steps_interactive.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Do you want to recover your system?"
-msgstr "Voleu utilitzar l'aboot?"
+msgstr "Voleu recuperar el vostre sistema?"
 
 #: ../../services.pm:1
 #, c-format
@@ -8551,7 +8608,7 @@ msgstr ""
 "Feu clic a \"Transfereix\" per sobreescriure-la.\n"
 "També podeu escriure un nom nou o ometre aquesta impressora."
 
-#: ../../share/advertising/12-mdkexpert.pl:1
+#: ../advertising/12-mdkexpert.pl:1
 #, c-format
 msgid ""
 "Find the solutions of your problems via MandrakeSoft's online support "
@@ -8563,7 +8620,7 @@ msgstr ""
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid ", host \"%s\", port %s"
-msgstr ", ordinador central \"%s\", port %s"
+msgstr ", ordinador \"%s\", port %s"
 
 #: ../../lang.pm:1
 #, c-format
@@ -8587,9 +8644,9 @@ msgstr "Canadà (cable)"
 
 #
 #: ../../standalone/drakfloppy:1
-#, fuzzy, c-format
+#, c-format
 msgid "Floppy creation completed"
-msgstr "Connexió completa."
+msgstr "Creació del disquet completa"
 
 #
 #: ../../help.pm:1
@@ -8617,9 +8674,25 @@ msgid "Kyrgyzstan"
 msgstr "Kirguizistan"
 
 #: ../../printer/main.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Multi-function device on USB"
-msgstr ", dispositiu multifunció en USB"
+msgstr "Dispositiu multifunció en USB"
+
+#: ../../../move/move.pm:1
+#, c-format
+msgid ""
+"We didn't detect any USB key on your system. If you\n"
+"plug in an USB key now, Mandrake Move will have the ability\n"
+"to transparently save the data in your home directory and\n"
+"system wide configuration, for next boot on this computer\n"
+"or another one. Note: if you plug in a key now, wait several\n"
+"seconds before detecting again.\n"
+"\n"
+"\n"
+"You may also proceed without an USB key - you'll still be\n"
+"able to use Mandrake Move as a normal live Mandrake\n"
+"Operating System."
+msgstr ""
 
 #: ../../help.pm:1
 #, c-format
@@ -8659,9 +8732,9 @@ msgstr "Sud-àfrica"
 
 #
 #: ../../standalone/drakbackup:1
-#, fuzzy, c-format
+#, c-format
 msgid "Eject tape after the backup"
-msgstr "Utilitza una cinta per fer la còpia de seguretat"
+msgstr "Explusa la cinta després de fer la còpia de seguretat"
 
 #: ../../standalone/drakTermServ:1
 #, c-format
@@ -8693,7 +8766,7 @@ msgstr "%s"
 #: ../../mouse.pm:1
 #, c-format
 msgid "Please test the mouse"
-msgstr "Si us plau, comproveu el ratolí."
+msgstr "Si us plau proveu el ratolí."
 
 #: ../../fs.pm:1
 #, c-format
@@ -8707,14 +8780,14 @@ msgstr ""
 "grups de discussió)."
 
 #: ../../mouse.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "3 buttons with Wheel emulation"
-msgstr "Emulació dels botons"
+msgstr "3·butons amb emulació de rodeta"
 
 #: ../../standalone/drakperm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Sticky-bit"
-msgstr "sticky-bit"
+msgstr "Sticky-bit"
 
 #
 #: ../../standalone/drakbackup:1
@@ -8722,16 +8795,16 @@ msgstr "sticky-bit"
 msgid "Other Media"
 msgstr "Altres suports"
 
+#: ../../mouse.pm:1
+#, c-format
+msgid "Logitech MouseMan+"
+msgstr "Logitech MouseMan+"
+
 #
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "Backup system files"
 msgstr "Còpia de seguretat dels fitxers de sistema"
-
-#: ../../mouse.pm:1
-#, c-format
-msgid "Logitech MouseMan+"
-msgstr "Logitech MouseMan+"
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -8788,15 +8861,20 @@ msgid "local config: false"
 msgstr "configuraci´p local: fals"
 
 #: ../../standalone/drakperm:1
-#, fuzzy, c-format
+#, c-format
 msgid "System settings"
-msgstr "Particionament personalitzat de disc"
+msgstr "Configuració del sistema"
 
 #
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Please choose your type of mouse."
 msgstr "Si us plau, seleccioneu el tipus del vostre ratolí."
+
+#: ../../services.pm:1
+#, c-format
+msgid "running"
+msgstr "s'està executant"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -8816,11 +8894,6 @@ msgstr ""
 #, c-format
 msgid "United Kingdom"
 msgstr "Regne Unit"
-
-#: ../../services.pm:1
-#, c-format
-msgid "running"
-msgstr "s'està executant"
 
 #: ../../lang.pm:1
 #, c-format
@@ -8867,7 +8940,7 @@ msgstr "Senegal"
 msgid "Command line"
 msgstr "Línia d'ordres"
 
-#: ../../share/advertising/08-store.pl:1
+#: ../advertising/08-store.pl:1
 #, c-format
 msgid ""
 "Our full range of Linux solutions, as well as special offers on products and "
@@ -8877,9 +8950,9 @@ msgstr ""
 "productes i altres avantatges, a la nostra botiga en línia:"
 
 #: ../../standalone/drakbackup:1
-#, fuzzy, c-format
+#, c-format
 msgid "March"
-msgstr "març"
+msgstr "Març"
 
 #: ../../any.pm:1
 #, c-format
@@ -8924,9 +8997,20 @@ msgid "Swap"
 msgstr "Intercanvi"
 
 #: ../../standalone/drakperm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Custom settings"
-msgstr "Particionament personalitzat de disc"
+msgstr "Arranjament personalitzat"
+
+#: ../../../move/move.pm:1
+#, c-format
+msgid ""
+"The USB key seems to have write protection enabled, but we can't safely\n"
+"unplug it now.\n"
+"\n"
+"\n"
+"Click the button to reboot the machine, unplug it, remove write protection,\n"
+"plug the key again, and launch Mandrake Move again."
+msgstr ""
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -8945,9 +9029,9 @@ msgid "Printer on SMB/Windows 95/98/NT server"
 msgstr "Impressora en servidor SMB/Windows 95/98/NT"
 
 #: ../../standalone/printerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "/_Configure CUPS"
-msgstr "Configura l'X"
+msgstr "/_Configura CUPS"
 
 #: ../../standalone/scannerdrake:1
 #, c-format
@@ -8957,13 +9041,13 @@ msgstr ", "
 #: ../../standalone/drakbug:1
 #, c-format
 msgid "Submit lspci"
-msgstr ""
+msgstr "Envia lspci"
 
 #
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Remove selected host/network"
-msgstr "Elimina l'ordinador central/xarxa seleccionada"
+msgstr "Elimina l'ordinador/xarxa seleccionada"
 
 #
 #: ../../services.pm:1
@@ -9046,7 +9130,7 @@ msgstr ""
 "Accés a la targeta de memòria per a fotografies en el vostre dispositiu "
 "multifunció HP"
 
-#: ../../share/advertising/09-mdksecure.pl:1
+#: ../advertising/09-mdksecure.pl:1
 #, c-format
 msgid ""
 "Enhance your computer performance with the help of a selection of partners "
@@ -9059,7 +9143,7 @@ msgstr ""
 #: ../../standalone/printerdrake:1
 #, c-format
 msgid "Authors: "
-msgstr ""
+msgstr "Autors: "
 
 #: ../../standalone/drakgw:1
 #, c-format
@@ -9122,12 +9206,10 @@ msgid "The entered IP is not correct.\n"
 msgstr "La IP introduïda no és correcta.\n"
 
 #: ../../standalone/drakbackup:1
-#, fuzzy, c-format
+#, c-format
 msgid "Please be sure that the cron daemon is included in your services."
 msgstr ""
-"Si us plau assegureu-vos que el dimoni cron està inclòs en els serveis. \n"
-"\n"
-"Noteu que ara mateix tots els suports de xarxa també fan servir el disc dur."
+"Si us plau assegureu-vos que el dimoni cron està inclòs en els serveis."
 
 #: ../../standalone/drakconnect:1
 #, c-format
@@ -9136,9 +9218,9 @@ msgstr "Targeta Ethernet"
 
 #
 #: ../../standalone/printerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "Delete selected printer"
-msgstr "Elimina la regla seleccionada"
+msgstr "Elimina la impressora seleccionada"
 
 #: ../../services.pm:1 ../../ugtk2.pm:1
 #, c-format
@@ -9174,6 +9256,11 @@ msgstr ""
 #, c-format
 msgid "Exit install"
 msgstr "Surt de la instal·lació"
+
+#: ../../../move/move.pm:1
+#, c-format
+msgid "Need a key to save your data"
+msgstr ""
 
 #: ../../standalone/drakgw:1
 #, c-format
@@ -9215,7 +9302,7 @@ msgstr ""
 #: ../../standalone/drakbug:1
 #, c-format
 msgid "Submit cpuinfo"
-msgstr ""
+msgstr "Envia cpuinfo"
 
 #
 #: ../../install_steps_gtk.pm:1
@@ -9231,12 +9318,12 @@ msgstr "Etiòpia"
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "YES"
-msgstr ""
+msgstr "SÍ"
 
 #: ../../security/l10n.pm:1
 #, c-format
 msgid "Enable \"crontab\" and \"at\" for users"
-msgstr ""
+msgstr "Habilita \"crontab\" i \"at\" pels usuaris"
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -9341,7 +9428,7 @@ msgstr ""
 "línia d'entrada"
 
 #: ../../security/help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "If SERVER_LEVEL (or SECURE_LEVEL if absent)\n"
 "is greater than 3 in /etc/security/msec/security.conf, creates the\n"
@@ -9352,16 +9439,13 @@ msgid ""
 "add a service if it is present in the file during the installation of\n"
 "packages."
 msgstr ""
-"Arguments: ()\n"
-"\n"
 "Si SERVER_LEVEL (o SECURE_LEVEL si no hi és) és més gran que 3\n"
 "a /etc/security/msec/security.conf, crea l'enllaç simbòlic /etc/security/"
 "msec/server\n"
-"per apuntar a /etc/security/msec/server.<SERVER_LEVEL>. El /etc/security/"
-"msec/server\n"
-"és utilitzat per chkconfig --add per decidir afegir un servei si és present "
-"al fitxer\n"
-"durant la instal·lació dels paquets."
+"per apuntar a /etc/security/msec/server.<SERVER_LEVEL>.\n"
+"\n"
+" El /etc/security/msec/server és utilitzat per chkconfig --add per decidir\n"
+"afegir un servei si és present al fitxer durant la instal·lació dels paquets."
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -9372,11 +9456,6 @@ msgstr "Rus (fonètic)"
 #, c-format
 msgid "dhcpd Config..."
 msgstr "Configuració del dhcpd..."
-
-#: ../../standalone/drakgw:1
-#, c-format
-msgid "The setup has already been done, but it's currently disabled."
-msgstr "La configuració ja s'ha realitzat, però ara està inhabilitada."
 
 #: ../../any.pm:1
 #, c-format
@@ -9540,13 +9619,11 @@ msgid "(default value: %s)"
 msgstr " (valor per defecte: %s)"
 
 #: ../../security/help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Set password aging to \"max\" days and delay to change to \"inactive\"."
 msgstr ""
-"Arguments: (max, inactive=-1)\n"
-"\n"
-"Definiu l'antiguitat de la contrasenya a \\fImax\\fP dies i temps en canviar "
-"a \\fIinactive\\fP."
+"Definiu l'antiguitat de la contrasenya a \"max\" dies i temps en canviar a "
+"\"inactive\"."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -9572,6 +9649,11 @@ msgstr ""
 #, c-format
 msgid "Choose an X server"
 msgstr "Escolliu un servidor X"
+
+#: ../../../move/tree/mdk_totem:1
+#, c-format
+msgid "Copying to memory to allow removing the CDROM"
+msgstr ""
 
 #: ../../install_interactive.pm:1
 #, c-format
@@ -9626,7 +9708,7 @@ msgstr "Configuració automatitzada dels passos"
 msgid "Barbados"
 msgstr "Barbados"
 
-#: ../../share/advertising/02-community.pl:1
+#: ../advertising/02-community.pl:1
 #, c-format
 msgid ""
 "Want to know more and to contribute to the Open Source community? Get "
@@ -9655,13 +9737,9 @@ msgid "received"
 msgstr "rebuts"
 
 #: ../../security/l10n.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Enable su only from the wheel group members or for any user"
-msgstr ""
-"Arguments: (arg)\n"
-"\n"
-" S'està habilitant su només per a membres del grup de roda o permet su des "
-"de qualsevol usuari."
+msgstr "Habilita su només per a membres del grup wheel o per qualsevol usuari"
 
 #: ../../standalone/logdrake:1
 #, c-format
@@ -9685,9 +9763,9 @@ msgid "High"
 msgstr "Alt"
 
 #: ../../standalone/printerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "Add a new printer to the system"
-msgstr "Afegir un grup"
+msgstr "Afegeix una nova impressora al sistema"
 
 #: ../../any.pm:1
 #, c-format
@@ -9784,9 +9862,9 @@ msgid "Choose the window manager to run:"
 msgstr "Escolliu el gestor de finestres per executar:"
 
 #: ../../standalone/drakbackup:1
-#, fuzzy, c-format
+#, c-format
 msgid "December"
-msgstr "desembre"
+msgstr "Desembre"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -9797,15 +9875,6 @@ msgstr "generació del sub de la CPU"
 #, c-format
 msgid "First Time Wizard"
 msgstr "Auxiliar per a la primera vegada"
-
-#: ../../install_steps.pm:1
-#, c-format
-msgid ""
-"An error occurred, but I don't know how to handle it nicely.\n"
-"Continue at your own risk."
-msgstr ""
-"S'ha produït un error, però no sé com gestionar-lo correctament.\n"
-"Si continueu, és sota la vostra responsabilitat."
 
 #: ../../lang.pm:1
 #, c-format
@@ -9821,6 +9890,15 @@ msgstr "Pakistan"
 #, c-format
 msgid "please wait, parsing file: %s"
 msgstr "espereu si us plau, s'està analitzant el fitxer: %s"
+
+#: ../../install_steps.pm:1 ../../../move/move.pm:1
+#, c-format
+msgid ""
+"An error occurred, but I don't know how to handle it nicely.\n"
+"Continue at your own risk."
+msgstr ""
+"S'ha produït un error, però no sé com gestionar-lo correctament.\n"
+"Si continueu, és sota la vostra responsabilitat."
 
 #: ../../install_steps_gtk.pm:1
 #, c-format
@@ -9938,7 +10016,7 @@ msgstr "Camí"
 #: ../../standalone/drakbug:1
 #, c-format
 msgid "NOT FOUND"
-msgstr ""
+msgstr "NO S'HA TROBAT"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -9983,7 +10061,7 @@ msgstr ""
 #: ../../standalone/scannerdrake:1
 #, c-format
 msgid "Add host"
-msgstr "Afegeix un ordinador central"
+msgstr "Afegeix un ordinador"
 
 #: ../../harddrake/sound.pm:1
 #, c-format
@@ -10023,6 +10101,11 @@ msgstr ""
 "Si us plau, carregueu o deseu la selecció de paquets en el disquet.\n"
 "El format és el mateix que en els disquets generats d'instal·lació "
 "automàtica."
+
+#: ../../../move/tree/mdk_totem:1
+#, fuzzy, c-format
+msgid "No CDROM support"
+msgstr "Permet l'ús de la ràdio:"
 
 #: ../../standalone/drakxtv:1
 #, c-format
@@ -10066,7 +10149,7 @@ msgstr ""
 "Ha fallat la càrrega del mòdul %s.\n"
 "Voleu tornar-ho a intentar amb altres paràmetres?"
 
-#: ../../share/advertising/01-thanks.pl:1
+#: ../advertising/01-thanks.pl:1
 #, c-format
 msgid "Welcome to the Open Source world."
 msgstr "Benvingut al món del Codi Font Obert"
@@ -10090,7 +10173,7 @@ msgstr ""
 #: ../../standalone/scannerdrake:1
 #, c-format
 msgid "You must enter a host name or an IP address.\n"
-msgstr "Heu d'introduir un nom d'ordinador central o una adreça IP.\n"
+msgstr "Heu d'introduir un nom d'ordinador o una adreça IP.\n"
 
 #: ../../crypto.pm:1 ../../lang.pm:1 ../../network/tools.pm:1
 #, c-format
@@ -10182,8 +10265,8 @@ msgstr ""
 #, c-format
 msgid "Enter IP address and port of the host whose printers you want to use."
 msgstr ""
-"Introduïu l'adreça IP i port de l'ordinador central les impressores del qual "
-"voleu utilitzar."
+"Introduïu l'adreça IP i port de l'ordinador les impressores del qual voleu "
+"utilitzar."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -10226,9 +10309,9 @@ msgstr ""
 "\n"
 
 #: ../../standalone/draksec:1
-#, fuzzy, c-format
+#, c-format
 msgid "Basic options"
-msgstr "Opcions bàsiques del DrakSec"
+msgstr "Opcions bàsiques"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -10236,12 +10319,9 @@ msgid "the name of the CPU"
 msgstr "nom de la CPU"
 
 #: ../../security/l10n.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Accept bogus IPv4 error messages"
-msgstr ""
-"Arguments: (arg)\n"
-"\n"
-"Accepta/Rebutja els missatges d'error IPv4 falsos."
+msgstr "Accepta els missatges d'error IPv4 falsos."
 
 #
 #: ../../printer/printerdrake.pm:1
@@ -10301,6 +10381,11 @@ msgstr "Altres ports"
 #, c-format
 msgid "number of capture buffers for mmap'ed capture"
 msgstr "nombre de memòries intermèdies per a captures amb MMAP"
+
+#: ../../network/adsl.pm:1
+#, c-format
+msgid " - detected"
+msgstr " - s'ha detectat"
 
 #: ../../harddrake/data.pm:1
 #, c-format
@@ -10386,9 +10471,9 @@ msgid "Domain Name:"
 msgstr "Nom de domini:"
 
 #: ../../security/l10n.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Root umask"
-msgstr "Contrasenya de root"
+msgstr "Umask de root"
 
 #: ../../any.pm:1
 #, c-format
@@ -10406,6 +10491,11 @@ msgstr ""
 msgid "Restore"
 msgstr "Restaura"
 
+#: ../../standalone/drakclock:1
+#, c-format
+msgid "Server:"
+msgstr "Servidor:"
+
 #: ../../security/help.pm:1
 #, c-format
 msgid "if set to yes, check if the network devices are in promiscuous mode."
@@ -10416,6 +10506,11 @@ msgstr ""
 #, c-format
 msgid "Looking for available packages..."
 msgstr "S'estan cercant els paquets disponibles..."
+
+#: ../../../move/move.pm:1
+#, fuzzy, c-format
+msgid "Please wait, setting up system configuration files on USB key..."
+msgstr "Espereu si us plau, s'està configurant el nivell de seguretat..."
 
 #: ../../any.pm:1
 #, c-format
@@ -10546,15 +10641,15 @@ msgstr ""
 "grollera, es pot considerar com el nombre d'instruccions per segon que la "
 "CPU pot executar)"
 
-#: ../../standalone/printerdrake:1
-#, fuzzy, c-format
-msgid "Mandrake Linux Printer Management Tool"
-msgstr "Instal·lació del Mandrake Linux %s"
-
 #: ../../pkgs.pm:1
 #, c-format
 msgid "important"
 msgstr "important"
+
+#: ../../standalone/printerdrake:1
+#, c-format
+msgid "Mandrake Linux Printer Management Tool"
+msgstr "Eina de gestió d'impressores de Mandrake Linux"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -10619,6 +10714,11 @@ msgstr "Usuaris"
 msgid "Preparing bootloader..."
 msgstr "S'està preparant el carregador de l'arrencada..."
 
+#: ../../../move/move.pm:1
+#, c-format
+msgid "Enter your user information, password will be used for screensaver"
+msgstr ""
+
 #: ../../network/network.pm:1
 #, c-format
 msgid "Gateway (e.g. %s)"
@@ -10636,11 +10736,9 @@ msgstr "Exemples d'IP correctes:\n"
 
 #
 #: ../../standalone/drakbackup:1
-#, fuzzy, c-format
+#, c-format
 msgid "Please choose the media for backup."
-msgstr ""
-"Si us plau, trieu el\n"
-"suport per a la còpia."
+msgstr "Si us plau, trieu el suport per a la còpia."
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -10789,18 +10887,18 @@ msgstr ""
 "HTML i CGI."
 
 #: ../../standalone/drakbackup:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Enter your CD Writer device name\n"
 " ex: 0,1,0"
 msgstr ""
-"Si us plau, entreu el nom de dispositiu de l'enregistradora de CD\n"
+"Entreu el nom de dispositiu de l'enregistradora de CD\n"
 " ex: 0,1,0"
 
 #: ../../standalone/draksec:1
 #, c-format
 msgid "ALL"
-msgstr ""
+msgstr "TOT"
 
 #: ../../standalone/drakTermServ:1
 #, c-format
@@ -11075,9 +11173,9 @@ msgstr ""
 "Fonts de la còpia: \n"
 
 #: ../../standalone/drakbackup:1
-#, fuzzy, c-format
+#, c-format
 msgid "custom"
-msgstr "Personalitzada"
+msgstr "a mida"
 
 #: ../../standalone/logdrake:1
 #, c-format
@@ -11090,15 +11188,15 @@ msgstr "Contingut del fitxer"
 msgid "Authentication LDAP"
 msgstr "Autenticació LDAP"
 
+#: ../../install_steps_gtk.pm:1
+#, c-format
+msgid "in order to keep %s"
+msgstr ""
+
 #: ../../harddrake/sound.pm:1
 #, c-format
 msgid "Let me pick any driver"
 msgstr "Deixa'm agafar qualsevol programa de control"
-
-#: ../../standalone/net_monitor:1
-#, c-format
-msgid "Profile "
-msgstr "Perfil"
 
 #: ../../standalone/net_monitor:1
 #, c-format
@@ -11123,7 +11221,7 @@ msgstr "%d cadenes separades per coma"
 #: ../../network/netconnect.pm:1
 #, c-format
 msgid " isdn"
-msgstr ""
+msgstr " xdsi"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -11173,7 +11271,7 @@ msgstr "S'està formatant la partició %s"
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "Hostname required"
-msgstr "El nom de l'ordinador central (host) és necessari"
+msgstr "El nom de l'ordinador és necessari"
 
 #: ../../standalone/drakfont:1
 #, c-format
@@ -11186,9 +11284,9 @@ msgid "Wheel"
 msgstr "Rodeta"
 
 #: ../../standalone/drakbug:1
-#, fuzzy, c-format
+#, c-format
 msgid "Submit kernel version"
-msgstr "versió del nucli"
+msgstr "Envia la versió del nucli"
 
 #: ../../any.pm:1 ../../help.pm:1 ../../install_steps_gtk.pm:1
 #: ../../install_steps_interactive.pm:1 ../../interactive.pm:1
@@ -11199,9 +11297,9 @@ msgstr "versió del nucli"
 #: ../../standalone/drakautoinst:1 ../../standalone/drakbackup:1
 #: ../../standalone/drakboot:1 ../../standalone/drakconnect:1
 #: ../../standalone/drakfloppy:1 ../../standalone/drakfont:1
-#: ../../standalone/drakgw:1 ../../standalone/drakperm:1
-#: ../../standalone/draksec:1 ../../standalone/logdrake:1
-#: ../../standalone/mousedrake:1 ../../standalone/net_monitor:1
+#: ../../standalone/drakperm:1 ../../standalone/draksec:1
+#: ../../standalone/logdrake:1 ../../standalone/mousedrake:1
+#: ../../standalone/net_monitor:1
 #, c-format
 msgid "Cancel"
 msgstr "Cancel·la"
@@ -11250,9 +11348,9 @@ msgid "Which services would you like to allow the Internet to connect to?"
 msgstr "A quins serveis voleu permetre la connexió des d'Internet?"
 
 #: ../../standalone/printerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "Connection Type"
-msgstr "Tipus de connexió:"
+msgstr "Tipus de connexió"
 
 #: ../../standalone/logdrake:1
 #, c-format
@@ -11283,14 +11381,14 @@ msgid "Button 2 Emulation"
 msgstr "Emulació del botó 2"
 
 #: ../../standalone/drakbug:1
-#, fuzzy, c-format
+#, c-format
 msgid "Please enter a package name."
-msgstr "Si us plau, introduïu un nom d'usuari"
+msgstr "Si us plau, introduïu un nom de paquet"
 
 #: ../../security/l10n.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Run chkrootkit checks"
-msgstr "si és \"sí\", executa les comprovacions chkrootkit."
+msgstr "Executa les comprovacions chkrootkit"
 
 #: ../../standalone/drakfont:1
 #, c-format
@@ -11361,19 +11459,6 @@ msgstr "Italià"
 msgid "Basic"
 msgstr "Bàsic"
 
-#: ../../standalone/drakTermServ:1
-#, c-format
-msgid ""
-"\n"
-" Copyright (C) 2002 by MandrakeSoft \n"
-"\tStew Benedict sbenedict\\@mandrakesoft.com\n"
-"\n"
-msgstr ""
-"\n"
-" Copyright (C) 2002 per MandrakeSoft \n"
-"\tStew Benedict sbenedict\\@mandrakesoft.com\n"
-"\n"
-
 #: ../../install_messages.pm:1
 #, c-format
 msgid "http://www.mandrakelinux.com/en/92errata.php3"
@@ -11394,10 +11479,10 @@ msgstr "pdq"
 msgid "Card IO"
 msgstr "E/S de la Targeta"
 
-#: ../../standalone/drakperm:1
+#: ../../network/drakfirewall.pm:1
 #, c-format
-msgid "when checked, owner and group won't be changed"
-msgstr "si ho marqueu, no es canviaran ni el propietari ni el grup"
+msgid "Samba server"
+msgstr "Servidor Samba"
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -11436,9 +11521,9 @@ msgid "\t-Network by FTP.\n"
 msgstr "\t-Xarxa per FTP.\n"
 
 #: ../../security/l10n.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Reports check result to tty"
-msgstr "si és \"sí\", informa dels resultats de la comprovació a tty."
+msgstr "Informa dels resultats de la comprovació a tty"
 
 #
 #: ../../printer/printerdrake.pm:1
@@ -11492,6 +11577,11 @@ msgstr ""
 msgid "access to compilation tools"
 msgstr "accés a les eines de compilació"
 
+#: ../../standalone/net_monitor:1
+#, c-format
+msgid "Global statistics"
+msgstr "Estadístiques globals"
+
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "Please select data to restore..."
@@ -11512,6 +11602,11 @@ msgstr ""
 #, c-format
 msgid "Standard test page"
 msgstr "Pàgina de prova estàndard"
+
+#: ../../standalone/drakclock:1
+#, c-format
+msgid "Time Zone"
+msgstr "Fus horari"
 
 #: ../../diskdrake/hd_gtk.pm:1 ../../diskdrake/interactive.pm:1
 #, c-format
@@ -11637,6 +11732,19 @@ msgstr ""
 "o premeu Retorn per continuar.\n"
 "Què trieu? "
 
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"\n"
+" Copyright (C) 2002 by MandrakeSoft \n"
+"\tStew Benedict sbenedict@mandrakesoft.com\n"
+"\n"
+msgstr ""
+"\n"
+" Copyright (C) 2002 per MandrakeSoft \n"
+"\tStew Benedict sbenedict@mandrakesoft.com\n"
+"\n"
+
 #: ../../standalone/draksplash:1
 #, c-format
 msgid "Save theme"
@@ -11665,16 +11773,16 @@ msgid "Removable media automounting"
 msgstr "Muntatge automàtic dels dispositius extraïbles"
 
 #
-#: ../../standalone/drakbackup:1
-#, fuzzy, c-format
-msgid "Enter the directory to save:"
-msgstr "Si us plau, introduïu el directori on voleu desar-ho:"
-
-#
 #: ../../services.pm:1
 #, c-format
 msgid "Printing"
 msgstr "Impressió"
+
+#
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "Enter the directory to save:"
+msgstr "Introduïu el directori a desar:"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -11705,7 +11813,7 @@ msgstr "Utilitza l'fdisk"
 #: ../../mouse.pm:1
 #, c-format
 msgid "MOVE YOUR WHEEL!"
-msgstr "MOVEU LA RODA!"
+msgstr "MOVEU LA RODETA!"
 
 #: ../../standalone/net_monitor:1
 #, c-format
@@ -11812,7 +11920,7 @@ msgstr "Kensington Thinking Mouse"
 msgid "Configuration of a remote printer"
 msgstr "Configuració d'una impressora remota"
 
-#: ../../share/advertising/13-mdkexpert_corporate.pl:1
+#: ../advertising/13-mdkexpert_corporate.pl:1
 #, c-format
 msgid "An online platform to respond to enterprise support needs."
 msgstr ""
@@ -11924,16 +12032,14 @@ msgid "Read-only"
 msgstr "Només lectura"
 
 #: ../../security/help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Enable/Disable name resolution spoofing protection.  If\n"
 "\"alert\" is true, also reports to syslog."
 msgstr ""
-"Arguments: (arg, alert=1)\n"
-"\n"
-"Habilita/Deshabilita la protecció contra falsejament de resolució de noms. "
+"Habilita/Deshabilita la protecció contra falsejament de resolució de noms.  "
 "Si\n"
-"\\fIalert\\fP és cert, informa també al registre del sistema."
+"\"alert\" és cert, informa també al registre del sistema."
 
 #
 #: ../../harddrake/sound.pm:1
@@ -11982,10 +12088,12 @@ msgstr ""
 msgid "Configure Local Area Network..."
 msgstr "Configura la xarxa d'àrea local..."
 
-#: ../../security/l10n.pm:1
-#, fuzzy, c-format
-msgid "Verify checksum of the suid/sgid files"
-msgstr "si és \"sí\", comprova la suma de control dels fitxers suid/sgid."
+#: ../../../move/move.pm:1
+#, c-format
+msgid ""
+"The USB key seems to have write protection enabled. Please\n"
+"unplug it, remove write protection, and then plug it again."
+msgstr ""
 
 #
 #: ../../services.pm:1
@@ -11994,15 +12102,19 @@ msgid "Launch the sound system on your machine"
 msgstr "Executa el sistema de so en el vostre ordinador"
 
 #: ../../security/l10n.pm:1
-#, fuzzy, c-format
+#, c-format
+msgid "Verify checksum of the suid/sgid files"
+msgstr "Comprova la suma de control dels fitxers suid/sgid"
+
+#: ../../security/l10n.pm:1
+#, c-format
 msgid "Run some checks against the rpm database"
-msgstr ""
-"si és \"sí\", executa determinades comprovacions de la base de dades rpm."
+msgstr "Executa determinades comprovacions de la base de dades rpm"
 
 #: ../../standalone/drakperm:1
 #, c-format
 msgid "Execute"
-msgstr ""
+msgstr "Executa"
 
 #
 #: ../../printer/printerdrake.pm:1
@@ -12153,8 +12265,8 @@ msgid ""
 "server and the printer name on that server."
 msgstr ""
 "Per poder utilitzar una impressora lpd remota, cal que proporcioneu el nom "
-"de l'ordinador central que té el servidor de la impressora i el nom de la "
-"impressora en aquell servidor."
+"de l'ordinador que té el servidor de la impressora i el nom de la impressora "
+"en aquell servidor."
 
 #: ../../lang.pm:1
 #, c-format
@@ -12162,9 +12274,9 @@ msgid "Iceland"
 msgstr "Islàndia"
 
 #: ../../standalone/drakconnect:1
-#, fuzzy, c-format
+#, c-format
 msgid "Network & Internet Configuration"
-msgstr "Configuració de xarxa"
+msgstr "Configuració de xarxa i internet"
 
 #: ../../common.pm:1
 #, c-format
@@ -12227,12 +12339,9 @@ msgid "Backup your System files. (/etc directory)"
 msgstr "Fes una còpia de seguretat dels fitxers del sistema (directori /etc)."
 
 #: ../../security/help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Set the user umask."
-msgstr ""
-"Arguments: (umask)\n"
-"\n"
-"Defineix la umask de l'usuari."
+msgstr "Defineix la umask de l'usuari."
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -12333,13 +12442,15 @@ msgstr "No podeu desseleccionar aquest paquet; s'ha d'actualitzar"
 msgid "Loading from floppy"
 msgstr "S'està carregant des del disquet"
 
-#: ../../security/help.pm:1
-#, fuzzy, c-format
-msgid "Enable/Disable the logging of IPv4 strange packets."
+#: ../../standalone/drakclock:1
+#, c-format
+msgid "Timezone - DrakClock"
 msgstr ""
-"Arguments: (arg)\n"
-"\n"
-"Habilita/Inhabilita el registre de paquets estranys IPv4."
+
+#: ../../security/help.pm:1
+#, c-format
+msgid "Enable/Disable the logging of IPv4 strange packets."
+msgstr "Habilita/Inhabilita el registre de paquets IPv4 estranys."
 
 #: ../../lang.pm:1
 #, c-format
@@ -12493,6 +12604,11 @@ msgstr ""
 "l'últim capítol d'instal·lació de la Guia Oficial de l'Usuari del\n"
 "Mandrake Linux."
 
+#: ../../standalone/drakclock:1
+#, fuzzy, c-format
+msgid "Enable Network Time Protocol"
+msgstr "Restaura mitjançant el protocol de xarxa: %s"
+
 #
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -12540,20 +12656,18 @@ msgid ""
 "access and any applicable user name, password, and workgroup information."
 msgstr ""
 "Per poder imprimir a una impressora SMB, heu d'indicar el nom de\n"
-"l'ordinador central SMB (tingueu en compte que pot ser diferent del seu nom\n"
+"l'ordinador SMB (tingueu en compte que pot ser diferent del seu nom\n"
 "TCP/IP) i possiblement l'adreça IP del servidor d'impressió, així com el nom "
 "de compartició de la impressora a què voleu accedir i el nom d'usuari,\n"
 "contrasenya i informació de grup si són necessaris."
 
 #: ../../security/help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 " Enabling su only from members of the wheel group or allow su from any user."
 msgstr ""
-"Arguments: (arg)\n"
-"\n"
-" S'està habilitant su només per a membres del grup de roda o permet su des "
-"de qualsevol usuari."
+" S'està habilitant su només per a membres del grup wheel o permet su des de "
+"qualsevol usuari."
 
 #: ../../standalone/drakgw:1
 #, c-format
@@ -12571,9 +12685,9 @@ msgstr ""
 "PENJAR."
 
 #: ../../security/l10n.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Shell timeout"
-msgstr "Temps màxim d'arrencada del nucli"
+msgstr "Temps màxim d'espera per a l'intèrpret d'ordres"
 
 #: ../../standalone/logdrake:1
 #, c-format
@@ -12590,7 +12704,7 @@ msgstr "accés a les eines de xarxa"
 msgid "Firmware-Upload for HP LaserJet 1000"
 msgstr "Penjada de microprogramari per a l'HP LaserJet 1000"
 
-#: ../../share/advertising/03-software.pl:1
+#: ../advertising/03-software.pl:1
 #, c-format
 msgid ""
 "And, of course, push multimedia to its limits with the very latest software "
@@ -12658,15 +12772,15 @@ msgstr "Protocol d'arrencada"
 msgid "LVM-disks %s\n"
 msgstr "Discs LVM %s\n"
 
-#: ../../diskdrake/interactive.pm:1
-#, c-format
-msgid "The package %s is needed. Install it?"
-msgstr "Cal instal·lar el paquet %s. Voleu instal·lar-lo?"
-
 #: ../../services.pm:1
 #, c-format
 msgid "On boot"
 msgstr "En arrencar"
+
+#: ../../diskdrake/interactive.pm:1
+#, c-format
+msgid "The package %s is needed. Install it?"
+msgstr "Cal instal·lar el paquet %s. Voleu instal·lar-lo?"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -12683,6 +12797,11 @@ msgstr "Vaticà"
 #, c-format
 msgid "Please make a backup of your data first"
 msgstr "Si us plau, feu primer una còpia de seguretat de les vostres dades"
+
+#: ../../harddrake/data.pm:1
+#, c-format
+msgid "ADSL adapters"
+msgstr "Adaptadors ADSL"
 
 #: ../../install_interactive.pm:1
 #, c-format
@@ -12710,7 +12829,7 @@ msgstr "si cal"
 msgid "Remove List"
 msgstr "Esborra la llista"
 
-#: ../../share/advertising/05-desktop.pl:1
+#: ../advertising/05-desktop.pl:1
 #, c-format
 msgid "A customizable environment"
 msgstr "Entorn personalitzable"
@@ -12771,7 +12890,7 @@ msgid "chunk size"
 msgstr "mida del fragment"
 
 #: ../../security/help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "If set to \"ALL\", /etc/issue and /etc/issue.net are allowed to exist.\n"
 "\n"
@@ -12779,19 +12898,16 @@ msgid ""
 "\n"
 "Else only /etc/issue is allowed."
 msgstr ""
-"Arguments: (arg)\n"
+"Si s'estableix a \"ALL\" permet que /etc/issue i /etc/issue.net existeixin.\n"
 "\n"
-"Si \\fIarg\\fP = ALL permet que /etc/issue i /etc/issue.net existeixin. Si "
-"\\fIarg\\fP = NONE no es\n"
-"permet cap \"issue\"; si no, només es permet /etc/issue."
+"Si s'estableix a \"NONE\" no espermet cap\n"
+"\n"
+"Altrament només es permet /etc/issue."
 
 #: ../../security/help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid " Enable/Disable sulogin(8) in single user level."
-msgstr ""
-"Arguments: (arg)\n"
-"\n"
-" Habilita/Deshabilita sulogin(8) en nivell monousuari."
+msgstr " Habilita/Deshabilita sulogin(8) en nivell monousuari."
 
 #. -PO: these messages will be displayed at boot time in the BIOS, use only ASCII (7bit)
 #. -PO: and keep them smaller than 79 chars long
@@ -12818,7 +12934,7 @@ msgstr "Afegiu un escàner manualment"
 #: ../../standalone/printerdrake:1
 #, c-format
 msgid "Refresh"
-msgstr ""
+msgstr "Refresca"
 
 #
 #: ../../help.pm:1 ../../diskdrake/interactive.pm:1
@@ -12833,11 +12949,9 @@ msgstr "Sí, vull l'entrada automàtica amb aquest (usuari, escriptori)"
 
 #
 #: ../../standalone/drakbackup:1
-#, fuzzy, c-format
+#, c-format
 msgid "Restore Selected"
-msgstr ""
-"Restaura els fitxers\n"
-"seleccionats"
+msgstr "Restaura els seleccionats"
 
 #: ../../standalone/drakfont:1
 #, c-format
@@ -12857,7 +12971,7 @@ msgstr "Arrencada"
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid " and the CD is in the drive"
-msgstr ""
+msgstr " i el CD és a la unitat"
 
 #
 #: ../../harddrake/v4l.pm:1
@@ -12955,17 +13069,22 @@ msgid "Security Administrator:"
 msgstr "Administrador de seguretat:"
 
 #: ../../security/help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Set the shell timeout. A value of zero means no timeout."
 msgstr ""
-"Arguments: (val)\n"
-"\n"
 "Defineix el temps màxim d'espera per a l'intèrpret d'ordres. El valor zero "
 "indica 'sense temps màxim'."
 
 #: ../../network/tools.pm:1
 #, c-format
 msgid "Firmware copy succeeded"
+msgstr ""
+
+#: ../../../move/tree/mdk_totem:1
+#, c-format
+msgid ""
+"You can't use another CDROM when the following programs are running: \n"
+"%s"
 msgstr ""
 
 #: ../../security/help.pm:1
@@ -13013,9 +13132,9 @@ msgid "Save packages selection"
 msgstr "Desa la selecció de paquets"
 
 #: ../../standalone/printerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "/_Actions"
-msgstr "Accions"
+msgstr "/_Accions"
 
 #
 #: ../../standalone/drakautoinst:1
@@ -13047,9 +13166,9 @@ msgstr ""
 "Escolliu els serveis que s'han d'iniciar automàticament durant l'arrencada"
 
 #: ../../security/l10n.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Check files/directories writable by everybody"
-msgstr "si és \"sí\", comprova els fitxers/directoris que tothom pot escriure."
+msgstr "Comprova els fitxers/directoris que tothom pot escriure"
 
 #
 #: ../../printer/printerdrake.pm:1
@@ -13129,15 +13248,12 @@ msgstr "Xpmac (instal·lació del controlador de pantalla)"
 #: ../../network/ethernet.pm:1 ../../network/network.pm:1
 #, c-format
 msgid "Zeroconf host name must not contain a ."
-msgstr "El nom de l'ordinador central del Zeroconf no ha de contenir cap ."
+msgstr "El nom de l'ordinador del Zeroconf no ha de contenir cap ."
 
 #: ../../security/help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid " Accept/Refuse icmp echo."
-msgstr ""
-"Arguments: (arg)\n"
-"\n"
-" Accepta/Rebutja l'eco icmp."
+msgstr " Accepta/Rebutja l'eco icmp."
 
 #: ../../services.pm:1
 #, c-format
@@ -13228,7 +13344,7 @@ msgstr ""
 "xarxa dedicat."
 
 #: ../../harddrake/sound.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "OSS (Open Sound System) was the first sound API. It's an OS independent "
 "sound API (it's available on most UNIX(tm) systems) but it's a very basic "
@@ -13247,9 +13363,9 @@ msgid ""
 "the ALSA library.\n"
 msgstr ""
 "L'OSS (Sistema de So Obert) va ser la primera API de so. És una API "
-"independent del sistema operatiu (disponible en molts sistemes UNIX) però és "
-"molt bàsica i limitada.\n"
-"Encara més, tots els controladors OSS reinventen la roda...\n"
+"independent del sistema operatiu (disponible en molts sistemes UNIX(tm)) "
+"però és molt bàsica i limitada.\n"
+"Encara més, tots els controladors OSS reinventen la roda.\n"
 "\n"
 "L'ALSA (Arquitectura Avançada de So per a Linux) és una arquitectura modular "
 "que\n"
@@ -13257,7 +13373,7 @@ msgstr ""
 "\n"
 "També proporciona una API molt més funcional que la d'OSS.\n"
 "\n"
-"Per utilitzar ALSA, es pot triar entre:\n"
+"Per utilitzar alsa, es pot triar entre:\n"
 "- l'antiga API compatible d'OSS\n"
 "- la nova API d'ALSA que proporciona moltes característiques millorades però "
 "que necessita fer servir la lliberia ALSA.\n"
@@ -13289,7 +13405,7 @@ msgstr "Rebutja"
 #: ../../standalone/draksec:1
 #, c-format
 msgid "LOCAL"
-msgstr ""
+msgstr "LOCAL"
 
 #: ../../diskdrake/hd_gtk.pm:1
 #, c-format
@@ -13371,9 +13487,9 @@ msgstr "No hi ha particions disponibles"
 
 #
 #: ../../standalone/printerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "Printer Management \n"
-msgstr "Nou nom d'impressora"
+msgstr "Gestió d'impressores \n"
 
 #: ../../standalone/logdrake:1
 #, c-format
@@ -13406,9 +13522,9 @@ msgid "Build Whole Kernel -->"
 msgstr "Munta tot el nucli -->"
 
 #: ../../network/netconnect.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "modem"
-msgstr "Mòdem"
+msgstr "mòdem"
 
 #: ../../lang.pm:1
 #, c-format
@@ -13467,6 +13583,11 @@ msgstr ""
 "d'impressió concret. Simplement afegiu els paràmetres desitjats a la línia "
 "d'ordres, p.ex.: \"%s <fitxer>\". "
 
+#: ../../standalone/drakclock:1
+#, c-format
+msgid "DrakClock"
+msgstr "DrakClock"
+
 #: ../../modules/interactive.pm:1
 #, c-format
 msgid ""
@@ -13498,30 +13619,15 @@ msgstr ""
 "\n"
 "- Dimoni (%s) inclou:\n"
 
-#: ../../standalone/drakgw:1
-#, c-format
-msgid ""
-"Welcome to the Internet Connection Sharing utility!\n"
-"\n"
-"%s\n"
-"\n"
-"Click on Configure to launch the setup wizard."
-msgstr ""
-"Benvingut a la utilitat de compartició de la connexió a Internet!\n"
-"\n"
-"%s\n"
-"\n"
-"Feu clic a 'Configura' per executar l'auxiliar de configuració."
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Cuba"
 msgstr "Cuba"
 
 #: ../../standalone/drakbackup:1
-#, fuzzy, c-format
+#, c-format
 msgid "October"
-msgstr "octubre"
+msgstr "Octubre"
 
 #: ../../lang.pm:1
 #, c-format
@@ -13554,12 +13660,9 @@ msgstr ""
 "L'XFree %s, que pot tenir un suport millor en 2D, suporta la vostra targeta."
 
 #: ../../security/help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid " Activate/Disable daily security check."
-msgstr ""
-"Arguments: (arg)\n"
-"\n"
-" Activa/Inhabilita la comprovació diària de seguretat."
+msgstr " Activa/Inhabilita la comprovació diària de seguretat."
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -13567,12 +13670,9 @@ msgid "\t-CD-R.\n"
 msgstr "\t-CD-R.\n"
 
 #: ../../security/l10n.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Enable libsafe if libsafe is found on the system"
-msgstr ""
-"Arguments: (arg)\n"
-"\n"
-"Habilita/Inhabilita el libsafe si és que es troba al sistema."
+msgstr "Habilita/Inhabilita el libsafe si és que es troba al sistema."
 
 #: ../../install_interactive.pm:1
 #, c-format
@@ -13600,9 +13700,9 @@ msgid "Automatic time synchronization (using NTP)"
 msgstr "Sincronització automàtica de la hora (usant NTP)"
 
 #: ../../network/adsl.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Use my Windows partition"
-msgstr "S'està redimensionant la partició de Windows"
+msgstr "Usa la meva partició de Windows"
 
 #: ../../Xconfig/card.pm:1
 #, c-format
@@ -13706,6 +13806,11 @@ msgstr ""
 msgid "Christmas Island"
 msgstr "Illa Christmas"
 
+#: ../../mouse.pm:1
+#, fuzzy, c-format
+msgid "Automatic"
+msgstr "IP automàtica"
+
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Installation of bootloader failed. The following error occured:"
@@ -13724,9 +13829,9 @@ msgid "Set this printer as the default"
 msgstr "Fes que aquesta sigui la impressora predeterminada"
 
 #: ../../standalone/drakbackup:1
-#, fuzzy, c-format
+#, c-format
 msgid "Verify that %s is the correct path"
-msgstr "És aquest el paràmetre correcte?"
+msgstr "Comproveu que %s és la ruta correcte"
 
 #: ../../install_interactive.pm:1
 #, c-format
@@ -13794,7 +13899,7 @@ msgstr "Illes Turks i Caicos"
 #: ../../standalone/drakconnect:1
 #, c-format
 msgid "No Ip"
-msgstr ""
+msgstr "Cap IP"
 
 #: ../../help.pm:1 ../../install_steps_gtk.pm:1 ../../interactive.pm:1
 #: ../../ugtk2.pm:1 ../../interactive/newt.pm:1
@@ -13804,11 +13909,9 @@ msgid "<- Previous"
 msgstr "<- Anterior"
 
 #: ../../standalone/drakbackup:1
-#, fuzzy, c-format
+#, c-format
 msgid "Transfer Now"
-msgstr ""
-"  Transfereix-ho   \n"
-"ara"
+msgstr "Transfereix-ho ara"
 
 #: ../../install_steps_interactive.pm:1
 #, fuzzy, c-format
@@ -13817,11 +13920,6 @@ msgstr ""
 "Arguments: (arg)\n"
 "\n"
 "Utilitza una contrasenya per autenticar usuaris."
-
-#: ../../standalone/drakgw:1
-#, c-format
-msgid "Internet Connection Sharing configuration"
-msgstr "Configuració de la compartició de la connexió a Internet"
 
 #: ../../ugtk2.pm:1
 #, c-format
@@ -13859,9 +13957,9 @@ msgid "Saint Helena"
 msgstr "Saint Helena"
 
 #: ../../printer/main.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Parallel port #%s"
-msgstr " en port paral·lel #%s"
+msgstr "Port paral·lel #%s"
 
 #
 #: ../../help.pm:1 ../../install_steps_interactive.pm:1
@@ -13910,7 +14008,7 @@ msgstr ""
 # only the ascii charset will be available on most machines
 # so use only 7bit for this message (and do transliteration or
 # leave it in English, as it is the best for your language)
-# 
+#
 #. -PO: these messages will be displayed at boot time in the BIOS, use only ASCII (7bit)
 #: ../../bootloader.pm:1
 #, c-format
@@ -13984,17 +14082,16 @@ msgid "Select the memory size of your graphics card"
 msgstr "Seleccioneu la mida de la memòria de la vostra targeta gràfica"
 
 #: ../../security/help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Enable/Disable crontab and at for users.\n"
 "\n"
 "Put allowed users in /etc/cron.allow and /etc/at.allow (see man at(1)\n"
 "and crontab(1))."
 msgstr ""
-"Arguments: (arg)\n"
+"Habilita/Inhabilita crontab i at per als usuaris.\n"
 "\n"
-"Habilita/Inhabilita crontab i at per als usuaris. Posa els usuaris "
-"autoritzats a /etc/cron.allow i /etc/at.allow\n"
+"Posa els usuaris autoritzats a /etc/cron.allow i /etc/at.allow\n"
 "(vegeu man at(1) i crontab(1))."
 
 #: ../../standalone.pm:1
@@ -14113,6 +14210,11 @@ msgstr ""
 msgid "LILO with text menu"
 msgstr "LILO amb menú de text"
 
+#: ../../standalone/net_monitor:1
+#, c-format
+msgid "instantaneous"
+msgstr ""
+
 #: ../../network/drakfirewall.pm:1
 #, c-format
 msgid "Everything (no firewall)"
@@ -14153,7 +14255,7 @@ msgstr "Brasiler (ABNT-2)"
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "IP address of host/network:"
-msgstr "Adreça IP de l'ordinador central/xarxa:"
+msgstr "Adreça IP de l'ordinador/xarxa:"
 
 #: ../../standalone/draksplash:1
 #, c-format
@@ -14175,12 +14277,9 @@ msgid "Saint Vincent and the Grenadines"
 msgstr "Saint Vincent i les Grenadines"
 
 #: ../../security/help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Allow/Forbid reboot by the console user."
-msgstr ""
-"Arguments: (arg)\n"
-"\n"
-"Permet/Impedeix tornar a arrencar per l'usuari de la consola."
+msgstr "Permet/Impedeix tornar a arrencar per l'usuari de la consola."
 
 #: ../../standalone/logdrake:1
 #, c-format
@@ -14317,6 +14416,11 @@ msgstr "Si us plau, introduïu un nom d'usuari"
 msgid "Enable CD Boot?"
 msgstr "Voleu habilitar l'arrencada des de CD?"
 
+#: ../../../move/move.pm:1
+#, c-format
+msgid "Simply reboot"
+msgstr ""
+
 #: ../../interactive/stdio.pm:1
 #, c-format
 msgid " enter `void' for void entry"
@@ -14328,14 +14432,14 @@ msgid "Backups on unmountable media - Use Catalog to restore"
 msgstr ""
 
 #: ../../standalone/drakbackup:1
-#, fuzzy, c-format
+#, c-format
 msgid "January"
-msgstr "gener"
+msgstr "Gener"
 
 #: ../../security/l10n.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Password history length"
-msgstr "Aquesta contrasenya és massa senzilla"
+msgstr "Longitud de la història de contrasenyes"
 
 #: ../../network/netconnect.pm:1
 #, c-format
@@ -14386,12 +14490,9 @@ msgid "%s on %s"
 msgstr "%s a %s"
 
 #: ../../security/help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Allow/Forbid remote root login."
-msgstr ""
-"Arguments: (arg)\n"
-"\n"
-"Permet/Impedeix l'entrada de root remota."
+msgstr "Permet/Impedeix l'entrada de root remota."
 
 #: ../../help.pm:1
 #, c-format
@@ -14429,15 +14530,15 @@ msgstr ""
 "un servidor d'hora que altres màquines de la vostra xarxa local també podran "
 "utilitzar."
 
-#: ../../install_steps_interactive.pm:1
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "Can't create log file!"
+msgstr "No s'ha pogut crear el registre!"
+
+#: ../../install_steps_interactive.pm:1 ../../standalone/drakclock:1
 #, c-format
 msgid "Which is your timezone?"
 msgstr "En quina zona horària us trobeu?"
-
-#: ../../standalone/drakbackup:1
-#, fuzzy, c-format
-msgid "Can't create log file!"
-msgstr "No s'ha pogut crear el catàleg!"
 
 #
 #: ../../standalone/drakbackup:1
@@ -14490,6 +14591,11 @@ msgstr "Moçambic"
 msgid "Icon"
 msgstr "Icona"
 
+#: ../../../move/tree/mdk_totem:1
+#, fuzzy, c-format
+msgid "Kill those programs"
+msgstr "accés a programes X"
+
 #
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -14514,19 +14620,19 @@ msgstr "Mida: %s\n"
 #: ../../standalone/drakconnect:1
 #, c-format
 msgid "Hostname: "
-msgstr "Nom de l'ordinador central: "
+msgstr "Nom de l'ordinador: "
 
 #: ../../standalone/drakperm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Add a rule"
-msgstr "afegeix una regla"
+msgstr "Afegeix una regla"
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid "Chunk size %s\n"
 msgstr "Mida del fragment %s\n"
 
-#: ../../share/advertising/02-community.pl:1
+#: ../advertising/02-community.pl:1
 #, c-format
 msgid "Build the future of Linux!"
 msgstr "Construïu el futur del Linux!"
@@ -14538,9 +14644,9 @@ msgid "Local Printer"
 msgstr "Impressora local"
 
 #: ../../network/tools.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Floppy access error, unable to mount device %s"
-msgstr "On voleu muntar el dispositiu %s?"
+msgstr "Error d'accés al disquet, no s'ha pogut muntar el dispositiu %s"
 
 #: ../../standalone.pm:1
 #, c-format
@@ -14665,7 +14771,7 @@ msgstr ""
 "o si no heu pogut configurar la pantalla."
 
 #
-#: ../../share/advertising/13-mdkexpert_corporate.pl:1
+#: ../advertising/13-mdkexpert_corporate.pl:1
 #, c-format
 msgid "MandrakeExpert Corporate"
 msgstr "Grup corporatiu MandrakeExpert"
@@ -14709,6 +14815,11 @@ msgid ""
 "After changing type of partition %s, all data on this partition will be lost"
 msgstr ""
 "Després de canviar el tipus de la partició %s, se'n perdran totes les dades"
+
+#: ../../harddrake/data.pm:1
+#, c-format
+msgid "ISDN adapters"
+msgstr "Adaptadors XDSI"
 
 #: ../../common.pm:1
 #, c-format
@@ -14773,7 +14884,7 @@ msgstr ""
 #: ../../network/modem.pm:1
 #, c-format
 msgid "You don't have any winmodem"
-msgstr ""
+msgstr "No tens cap winmodem"
 
 #: ../../standalone/drakTermServ:1
 #, c-format
@@ -14969,9 +15080,9 @@ msgid "Comoros"
 msgstr "Comores"
 
 #: ../../standalone/drakbackup:1
-#, fuzzy, c-format
+#, c-format
 msgid "May"
-msgstr "Dilluns"
+msgstr "Maig"
 
 #: ../../standalone/drakboot:1
 #, c-format
@@ -15017,7 +15128,7 @@ msgstr "Torna a enviar"
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "CD in place - continue."
-msgstr "El CD és a lloc. Continua."
+msgstr "El CD és a lloc - continua."
 
 #: ../../common.pm:1
 #, c-format
@@ -15049,6 +15160,11 @@ msgstr "Compartició d'escàners locals"
 msgid "Plug'n Play probing failed. Please select the correct monitor"
 msgstr "L'exploració Plug'n'Play ha fallat. Especifiqueu un monitor"
 
+#: ../../../move/move.pm:1
+#, c-format
+msgid "Detect again USB key"
+msgstr ""
+
 #: ../../services.pm:1
 #, c-format
 msgid "Services and deamons"
@@ -15058,7 +15174,7 @@ msgstr "Serveis i dimonis"
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Remote host name missing!"
-msgstr "Falta el nom de l'ordinador central remot!"
+msgstr "Falta el nom de l'ordinador remot!"
 
 #: ../../fsedit.pm:1
 #, c-format
@@ -15085,16 +15201,16 @@ msgid "This password is too simple"
 msgstr "Aquesta contrasenya és massa senzilla"
 
 #: ../../security/l10n.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Chkconfig obey msec rules"
-msgstr "Configura els serveis"
+msgstr "Chkconfig obeeix les regles msec"
 
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Slovakian (QWERTZ)"
 msgstr "Eslovac (QWERTZ)"
 
-#: ../../share/advertising/06-development.pl:1
+#: ../advertising/06-development.pl:1
 #, c-format
 msgid ""
 "To modify and to create in different languages such as Perl, Python, C and C+"
@@ -15107,9 +15223,9 @@ msgstr ""
 
 #
 #: ../../standalone/drakbackup:1
-#, fuzzy, c-format
+#, c-format
 msgid "No devices found"
-msgstr "No s'ha trobat cap imatge"
+msgstr "No s'ha trobat cap dispositiu"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -15146,8 +15262,8 @@ msgid ""
 "or IP and the optional port number (default is 9100) in the input fields."
 msgstr ""
 "Trieu una de les impressores detectades de la llista, o introduïu el nom de "
-"l'ordinador central o la IP i opcionalment el número de port (per defecte és "
-"el 9100) en els quadres de text."
+"l'ordinador o la IP i opcionalment el número de port (per defecte és el "
+"9100) en els quadres de text."
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -15164,6 +15280,11 @@ msgstr "Algèria"
 #, c-format
 msgid "Restore Via Network"
 msgstr "Restaura a través de la xarxa"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "Use tar and bzip2 (rather than tar and gzip)"
+msgstr "Usa tar i bzip2 (en comptes de tar i gzip)"
 
 #: ../../any.pm:1
 #, c-format
@@ -15187,9 +15308,9 @@ msgid "\tBackups use tar and gzip\n"
 msgstr "\tLes còpies de seguretat utilitzen tar i gzip\n"
 
 #: ../../standalone/printerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "Set as default"
-msgstr "predeterminat"
+msgstr "Estableix com a predeterminat"
 
 #: ../../Xconfig/card.pm:1
 #, c-format
@@ -15197,9 +15318,9 @@ msgid "2 MB"
 msgstr "2 MB"
 
 #: ../../printer/main.pm:1 ../../standalone/printerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "Configured on this machine"
-msgstr "(en aquest ordinador)"
+msgstr "Configurat en aquest ordinador"
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -15258,12 +15379,12 @@ msgstr ""
 "freqüència de 2,46 GHz), or afegir prou '0' (zeros)."
 
 #: ../../standalone/draksec:1
-#, fuzzy, c-format
+#, c-format
 msgid "ignore"
-msgstr "Singapur"
+msgstr "ignora"
 
 #: ../../security/help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Allow/Forbid X connections:\n"
 "\n"
@@ -15273,11 +15394,13 @@ msgid ""
 "\n"
 "- NONE (no connection)."
 msgstr ""
-"Arguments: (arg, listen_tcp=None)\n"
+"Permet/Impedeix connexions X:\n"
 "\n"
-"Permet/Impedeix connexions X. El primer arg indica el que es fa\n"
-"a la banda client: ALL (es permeten totes les connexions),\n"
-"LOCAL (només connexió local) i NONE (cap connexió)."
+"- ALL (es permeten totes les connexions),\n"
+"\n"
+"- LOCAL (només connexió des de la màquina local),\n"
+"\n"
+"- NONE (cap connexió)."
 
 #: ../../printer/main.pm:1
 #, c-format
@@ -15299,7 +15422,7 @@ msgstr "DVD-ROM"
 msgid "Georgian (\"Latin\" layout)"
 msgstr "Georgià (disposició \"llatina\")"
 
-#: ../../share/advertising/09-mdksecure.pl:1
+#: ../advertising/09-mdksecure.pl:1
 #, c-format
 msgid "Get the best items with Mandrake Linux Strategic partners"
 msgstr ""
@@ -15359,12 +15482,9 @@ msgid "Select a scanner model"
 msgstr "Seleccioneu un model d'escàner"
 
 #: ../../security/help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Accept/Refuse bogus IPv4 error messages."
-msgstr ""
-"Arguments: (arg)\n"
-"\n"
-"Accepta/Rebutja els missatges d'error IPv4 falsos."
+msgstr "Accepta/Rebutja els missatges d'error IPv4 falsos."
 
 #: ../../printer/data.pm:1
 #, c-format
@@ -15412,7 +15532,7 @@ msgstr "Entrada automàtica"
 msgid "Domain Admin Password"
 msgstr "Contrasenya de l'administrador del domini"
 
-#: ../../share/advertising/05-desktop.pl:1
+#: ../advertising/05-desktop.pl:1
 #, c-format
 msgid ""
 "Perfectly adapt your computer to your needs thanks to the 11 available "
@@ -15569,6 +15689,12 @@ msgstr "utopia 25"
 msgid "Pipe job into a command"
 msgstr "Redirecciona el treball cap a una ordre"
 
+#
+#: ../../../move/move.pm:1
+#, fuzzy, c-format
+msgid "Remove system config files"
+msgstr "Voleu suprimir el fitxer de loopback?"
+
 #: ../../lang.pm:1
 #, c-format
 msgid "Cote d'Ivoire"
@@ -15580,7 +15706,8 @@ msgid "new dynamic device name generated by core kernel devfs"
 msgstr "nou nom de dispositiu dinàmic generat pel devfs intern del nucli"
 
 #: ../../help.pm:1 ../../install_any.pm:1 ../../interactive.pm:1
-#: ../../ugtk2.pm:1 ../../modules/interactive.pm:1 ../../standalone/drakgw:1
+#: ../../ugtk2.pm:1 ../../modules/interactive.pm:1
+#: ../../standalone/drakclock:1 ../../standalone/drakgw:1
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "Yes"
@@ -15602,13 +15729,6 @@ msgstr "Progrés de la restauració"
 msgid "Estonia"
 msgstr "Estònia"
 
-#: ../../standalone/scannerdrake:1
-#, c-format
-msgid "Choose the host on which the local scanners should be made available:"
-msgstr ""
-"Escolliu l'ordinador central els escàners locals del qual han d'estar "
-"disponibles:"
-
 #: ../../partition_table.pm:1
 #, c-format
 msgid ""
@@ -15620,6 +15740,11 @@ msgstr ""
 "L'única solució és moure les particions primàries per fer que el forat quedi "
 "contigu a les particions ampliades"
 
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "Choose the host on which the local scanners should be made available:"
+msgstr "Escolliu l'ordinador on els escàners locals han d'estar disponibles:"
+
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "Channel"
@@ -15630,11 +15755,6 @@ msgstr "Canal"
 #, c-format
 msgid "Add"
 msgstr "Afegeix"
-
-#: ../../standalone/drakgw:1
-#, c-format
-msgid "No Internet Connection Sharing has ever been configured."
-msgstr "No s'ha configurat mai cap connexió compartida a Internet."
 
 #
 #: ../../standalone/drakbackup:1
@@ -15711,20 +15831,14 @@ msgid "parse all fonts"
 msgstr "analitza totes les fonts"
 
 #: ../../security/help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Allow/Forbid direct root login."
-msgstr ""
-"Arguments: (arg)\n"
-"\n"
-"Permet/Impedeix l'entrada doirecta en root."
+msgstr "Permet/Impedeix l'entrada directa de root."
 
 #: ../../security/help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid " Accept/Refuse broadcasted icmp echo."
-msgstr ""
-"Arguments: (arg)\n"
-"\n"
-" Accepta/Refusa l'eco icmp difós."
+msgstr " Accepta/Refusa l'eco icmp broadcast."
 
 #
 #: ../../help.pm:1 ../../install_steps_interactive.pm:1
@@ -15781,12 +15895,9 @@ msgid "Sharing of local printers"
 msgstr "Compartició d'impressores locals"
 
 #: ../../security/help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Enable/Disable libsafe if libsafe is found on the system."
-msgstr ""
-"Arguments: (arg)\n"
-"\n"
-"Habilita/Inhabilita el libsafe si és que es troba al sistema."
+msgstr "Habilita/Inhabilita el libsafe si és que es troba al sistema."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -15794,9 +15905,9 @@ msgid "Available printers"
 msgstr "Impressores disponibles"
 
 #: ../../standalone/drakbackup:1
-#, fuzzy, c-format
+#, c-format
 msgid "NO"
-msgstr "INFORMACIÓ"
+msgstr "NO"
 
 #: ../../diskdrake/hd_gtk.pm:1 ../../diskdrake/interactive.pm:1
 #, c-format
@@ -15819,20 +15930,17 @@ msgid "The default lease (in seconds)"
 msgstr "Lísing per defecte (en segons)"
 
 #: ../../network/netconnect.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "We are now going to configure the %s connection.\n"
 "\n"
 "\n"
 "Press \"%s\" to continue."
 msgstr ""
-"\n"
-"\n"
-"\n"
 "Ara es configurarà la connexió %s.\n"
 "\n"
 "\n"
-"Premeu D'acord per continuar."
+"Premeu \"%s\" per continuar."
 
 #: ../../printer/main.pm:1 ../../printer/printerdrake.pm:1
 #, c-format
@@ -15926,9 +16034,9 @@ msgid "Installing"
 msgstr "S'està instal·lant"
 
 #: ../../mouse.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Logitech MouseMan with Wheel emulation"
-msgstr "Logitech MouseMan"
+msgstr "Logitech MouseMan amb emulació de rodeta"
 
 #: ../../any.pm:1
 #, c-format
@@ -15945,7 +16053,7 @@ msgstr "Es tracta d'una instal·lació o d'una actualització?"
 msgid "ISDN card"
 msgstr "Targeta XDSI"
 
-#: ../../share/advertising/02-community.pl:1
+#: ../advertising/02-community.pl:1
 #, c-format
 msgid ""
 "To share your own knowledge and help build Linux software, join our "
@@ -16008,6 +16116,68 @@ msgstr ""
 "actualització\n"
 "en versions de Linux Mandrake anteriors a la \"8.1\"."
 
+#: ../../standalone/drakfont:1
+#, c-format
+msgid ""
+"\n"
+" Copyright (C) 2001-2002 by MandrakeSoft \n"
+"     DUPONT Sebastien (original version)\n"
+"     CHAUMETTE Damien <dchaumette@mandrakesoft.com>\n"
+"\n"
+" This program is free software; you can redistribute it and/or modify\n"
+" it under the terms of the GNU General Public License as published by\n"
+" the Free Software Foundation; either version 2, or (at your option)\n"
+" any later version.\n"
+"\n"
+" This program is distributed in the hope that it will be useful,\n"
+" but WITHOUT ANY WARRANTY; without even the implied warranty of\n"
+" MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n"
+" GNU General Public License for more details.\n"
+"\n"
+" You should have received a copy of the GNU General Public License\n"
+" along with this program; if not, write to the Free Software\n"
+" Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.\n"
+"\n"
+" Thanks:\n"
+"    -  pfm2afm:   \n"
+"\t by Ken Borgendale:\n"
+"\t    Convert a Windows .pfm  file to a .afm (Adobe Font Metrics)\n"
+"    -  type1inst:\n"
+"\t by James Macnicol: \n"
+"\t    type1inst generates files fonts.dir fonts.scale & Fontmap.\n"
+"    -  ttf2pt1:   \n"
+"\t  by Andrew Weeks, Frank Siegert, Thomas Henlich, Sergey Babkin  \n"
+"             Convert ttf font files to afm and pfb fonts\n"
+msgstr ""
+"\n"
+" Copyright (C) 2001-2002 per MandrakeSoft \n"
+"     DUPONT Sébastien (versió original)\n"
+"     CHAUMETTE Damien <dchaumette@mandrakesoft.com>\n"
+"\n"
+" Aquest programa és programari lliure; el podeu redistribuir i/o modificar\n"
+" sota els termes de la Llicència General Pública de GNU publicada per la\n"
+" Free Software Foundation, tant la versió 2 com qualsevol versió posterior,\n"
+" a elecció vostra.\n"
+"\n"
+" Aquest programa és distribueix amb l'esperança que serà útil,\n"
+" però SENSE CAP GARANTIA; sense ni tant sols la garantia implícita de\n"
+" MERCANTIBILITAT o ADEQUACIÓ A UNA FINALITAT DETERMINADA. Consulteu la\n"
+" Llicència General Pública de GNU per a més informació.\n"
+"\n"
+" Heu d'haver rebut una còpia de la Llicència General Pública de GNU\n"
+" amb el programa; si no és així, escriviu a la Free Software\n"
+" Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.\n"
+" Gràcies:\n"
+"    -  pfm2afm:   \n"
+"\t per Ken Borgendale:\n"
+"\t    Converteix un fitxer .pfm de Windows a un .afm (Adobe Font Metrics)\n"
+"    -  type1inst:\n"
+"\t per James Macnicol: \n"
+"\t    El type1inst genera fitxers fonts.dir, fonts.scale i Fontmap.\n"
+"    -  ttf2pt1:   \n"
+"\t  per Andrew Weeks, Frank Siegert, Thomas Henlich, Sergey Babkin  \n"
+"             Converteix fitxers de tipus de lletra ttf a afm i pfb\n"
+
 #
 #: ../../printer/main.pm:1
 #, c-format
@@ -16030,7 +16200,7 @@ msgstr "aquí si no."
 #: ../../network/network.pm:1
 #, c-format
 msgid "DHCP host name"
-msgstr "Nom de l'ordinador central DHCP"
+msgstr "Nom DHCP de l'ordinador"
 
 #: ../../standalone/drakgw:1
 #, c-format
@@ -16058,9 +16228,9 @@ msgid "Poor"
 msgstr "Pobre"
 
 #: ../../security/l10n.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Report check result by mail"
-msgstr "si és \"sí\", l'informa comprova el resultat per correu."
+msgstr "Informa el resultat de la comprovació per correu"
 
 #: ../../lang.pm:1
 #, c-format
@@ -16077,6 +16247,11 @@ msgstr "L'adreça inicial del rang del DHCP"
 msgid "Unsafe"
 msgstr "No segur"
 
+#: ../../network/drakfirewall.pm:1
+#, c-format
+msgid "SSH server"
+msgstr "Servidor SSH"
+
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid ", %s sectors"
@@ -16084,7 +16259,7 @@ msgstr ", %s sectors"
 
 #: ../../help.pm:1 ../../install_any.pm:1 ../../interactive.pm:1
 #: ../../ugtk2.pm:1 ../../modules/interactive.pm:1
-#: ../../standalone/harddrake2:1
+#: ../../standalone/drakclock:1 ../../standalone/harddrake2:1
 #, c-format
 msgid "No"
 msgstr "No"
@@ -16156,9 +16331,9 @@ msgid "%s BootSplash (%s) preview"
 msgstr "Vista prèvia del BootSplash %s (%s)"
 
 #: ../../standalone/drakbackup:1
-#, fuzzy, c-format
+#, c-format
 msgid "February"
-msgstr "febrer"
+msgstr "Febrer"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
@@ -16181,13 +16356,13 @@ msgid "Network configuration (%d adapters)"
 msgstr "Configuració de xarxa (%d adaptadors)"
 
 #: ../../standalone/drakbackup:1
-#, fuzzy, c-format
+#, c-format
 msgid "April"
-msgstr "abril"
+msgstr "Abril"
 
 #
 #: ../../standalone/drakconnect:1
-#, fuzzy, c-format
+#, c-format
 msgid "Deactivate now"
 msgstr "Desactiva'l ara"
 
@@ -16419,13 +16594,11 @@ msgstr ""
 "No podeu utilitzar un sistema d'arxius xifrat per al punt de muntatge %s"
 
 #: ../../security/help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Set the password history length to prevent password reuse."
 msgstr ""
-"Arguments: (arg)\n"
-"\n"
-"Defineix la llargària de l'historial de contrasenyes per impedir reutilitzar "
-"les contrasenyes."
+"Defineix la llargària de l'historial de contrasenyes per prevenir la "
+"reutilització de contrasenyes."
 
 #: ../../lang.pm:1
 #, c-format
@@ -16455,7 +16628,7 @@ msgstr "Eina per a la comunicació d'errors de programació (bugs) de Mandrake"
 #: ../../standalone/printerdrake:1
 #, c-format
 msgid "Apply filter"
-msgstr ""
+msgstr "Aplica el filtre"
 
 #: ../../network/adsl.pm:1
 #, c-format
@@ -16590,9 +16763,9 @@ msgid ""
 msgstr ""
 
 #: ../../printer/main.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "USB printer"
-msgstr ", impressora USB"
+msgstr "Impressora USB"
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -16661,12 +16834,18 @@ msgstr ""
 #: ../../standalone/scannerdrake:1
 #, c-format
 msgid "Remove selected host"
-msgstr "Elimina l'ordinador central seleccionat"
+msgstr "Elimina l'ordinador seleccionat"
 
 #: ../../network/netconnect.pm:1
 #, c-format
 msgid "Network configuration"
 msgstr "Configuració de xarxa"
+
+#
+#: ../../standalone/harddrake2:1
+#, c-format
+msgid "/Autodetect _jaz drives"
+msgstr "/Detecta automàticament les unitats _jaz"
 
 #
 #: ../../any.pm:1
@@ -16690,9 +16869,9 @@ msgid "FATAL"
 msgstr "FATAL"
 
 #: ../../standalone/printerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "Refresh the list"
-msgstr "Llista de usuaris"
+msgstr "Actualitza la llista"
 
 #: ../../standalone/drakTermServ:1
 #, c-format
@@ -16785,20 +16964,19 @@ msgid ", printer \"%s\" on server \"%s\""
 msgstr ", impressora \"%s\", en el servidor \"%s\""
 
 #: ../../standalone/drakbackup:1
-#, fuzzy, c-format
+#, c-format
 msgid "Note that currently all 'net' media also use the hard drive."
 msgstr ""
-"Si us plau assegureu-vos que el dimoni cron està inclòs en els serveis. \n"
-"\n"
 "Noteu que ara mateix tots els suports de xarxa també fan servir el disc dur."
 
 #: ../../fsedit.pm:1 ../../install_steps_interactive.pm:1
 #: ../../install_steps.pm:1 ../../diskdrake/dav.pm:1
 #: ../../diskdrake/hd_gtk.pm:1 ../../diskdrake/interactive.pm:1
 #: ../../diskdrake/smbnfs_gtk.pm:1 ../../interactive/http.pm:1
-#: ../../standalone/drakboot:1 ../../standalone/drakbug:1
+#: ../../standalone/drakauth:1 ../../standalone/drakboot:1
+#: ../../standalone/drakbug:1 ../../standalone/drakconnect:1
 #: ../../standalone/drakfloppy:1 ../../standalone/drakfont:1
-#: ../../standalone/draksplash:1
+#: ../../standalone/draksplash:1 ../../../move/move.pm:1
 #, c-format
 msgid "Error"
 msgstr "Error"
@@ -16843,6 +17021,11 @@ msgstr ""
 "El vostre sistema permet l'ús d'una configuració de múltiples capçals.\n"
 "Què voleu fer?"
 
+#: ../../partition_table.pm:1
+#, c-format
+msgid "mount failed: "
+msgstr "ha fallat el muntatge: "
+
 #: ../../steps.pm:1
 #, c-format
 msgid "Configure services"
@@ -16852,11 +17035,6 @@ msgstr "Configura els serveis"
 #, c-format
 msgid "Broadcast Address:"
 msgstr "Adreça de difusió:"
-
-#: ../../partition_table.pm:1
-#, c-format
-msgid "mount failed: "
-msgstr "ha fallat el muntatge: "
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -16874,18 +17052,18 @@ msgstr ""
 msgid "Image"
 msgstr "Imatge"
 
+#
+#: ../../services.pm:1
+#, c-format
+msgid "Remote Administration"
+msgstr "Administració remota"
+
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Failed to add the printer \"%s\" to Star Office/OpenOffice.org/GIMP."
 msgstr ""
 "És impossible d'afegir la impressora \"%s\" a Star Office/OpenOffice.org/"
 "GIMP."
-
-#
-#: ../../services.pm:1
-#, c-format
-msgid "Remote Administration"
-msgstr "Administració remota"
 
 #: ../../modules.pm:1
 #, c-format
@@ -16919,9 +17097,9 @@ msgstr "dispositiu"
 
 #
 #: ../../standalone/drakbackup:1
-#, fuzzy, c-format
+#, c-format
 msgid "Enter the directory to save to:"
-msgstr "Introduïu el directori on desar la còpia de seguretat:"
+msgstr "Introduïu el directori on desar::"
 
 #
 #: ../../crypto.pm:1 ../../lang.pm:1
@@ -16941,16 +17119,16 @@ msgid "Which printing system (spooler) do you want to use?"
 msgstr "Quin sistema d'impressió (cua) voleu utilitzar?"
 
 #: ../../standalone/drakbackup:1
-#, fuzzy, c-format
+#, c-format
 msgid "July"
-msgstr "juliol"
+msgstr "Juliol"
 
 #: ../../printer/main.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Prints into %s"
-msgstr ", imprimint a %s"
+msgstr "Imprimeix a %s"
 
-#: ../../install_steps_interactive.pm:1
+#: ../../install_steps_interactive.pm:1 ../../../move/move.pm:1
 #, c-format
 msgid "An error occurred"
 msgstr "S'ha produït un error"
@@ -16970,22 +17148,17 @@ msgid "Tamil (Typewriter-layout)"
 msgstr "Tàmil (disposició de màquina d'escriure)"
 
 #: ../../security/help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Use password to authenticate users."
-msgstr ""
-"Arguments: (arg)\n"
-"\n"
-"Utilitza una contrasenya per autenticar usuaris."
+msgstr "Utilitza una contrasenya per autenticar usuaris."
 
 #: ../../security/help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Allow/Forbid the list of users on the system on display managers (kdm and "
 "gdm)."
 msgstr ""
-"Arguments: (arg)\n"
-"\n"
-"Permet/Impedeix la llista d'usuaris en el sistema en gestors de pantalla "
+"Permet/Impedeix la llista d'usuaris del sistema en els gestors de pantalla "
 "(kdm i gdm)."
 
 #: ../../standalone/drakautoinst:1
@@ -17038,7 +17211,7 @@ msgid "Friday"
 msgstr "Divendres"
 
 #: ../../standalone/net_monitor:1
-#, fuzzy, c-format
+#, c-format
 msgid "Disconnection from Internet complete."
 msgstr "S'ha completat la desconnexió d'Internet."
 
@@ -17106,6 +17279,8 @@ msgstr "Japonès de 106 tecles"
 #, c-format
 msgid "Could not install the packages needed to share your scanner(s)."
 msgstr ""
+"No s'ha pogut instal·lar els paquets necessaris per compartir els vostres "
+"escàner(s)."
 
 #: ../../standalone/drakTermServ:1
 #, c-format
@@ -17118,9 +17293,9 @@ msgid "Burkina Faso"
 msgstr "Burkina Faso"
 
 #: ../../standalone/drakbackup:1
-#, fuzzy, c-format
+#, c-format
 msgid "June"
-msgstr "juny"
+msgstr "Juny"
 
 #: ../../standalone/scannerdrake:1
 #, c-format
@@ -17179,7 +17354,7 @@ msgstr ", dispositiu multifunció"
 msgid "Laos"
 msgstr "Laos"
 
-#: ../../share/advertising/04-configuration.pl:1
+#: ../advertising/04-configuration.pl:1
 #, c-format
 msgid ""
 "Mandrake Linux 9.2 provides you with the Mandrake Control Center, a powerful "
@@ -17194,11 +17369,9 @@ msgstr ""
 "moltes coses més!"
 
 #: ../../security/help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Activate/Disable ethernet cards promiscuity check."
 msgstr ""
-"Arguments: (arg)\n"
-"\n"
 "Activa/Inhabilita la comprovació de promiscuïtat de les targetes Ethernet."
 
 #: ../../install_interactive.pm:1
@@ -17263,9 +17436,9 @@ msgid "Saint Pierre and Miquelon"
 msgstr "Saint Pierre i Miquelon"
 
 #: ../../standalone/drakbackup:1
-#, fuzzy, c-format
+#, c-format
 msgid "September"
-msgstr "setembre"
+msgstr "Setembre"
 
 #: ../../standalone/draksplash:1
 #, c-format
@@ -17291,7 +17464,7 @@ msgstr ", imprimint a %s"
 #: ../../network/network.pm:1
 #, c-format
 msgid "Assign host name from DHCP address"
-msgstr "Assigna un nom d'ordinador central a partir de l'adreça DHCP"
+msgstr "Assigna un nom d'ordinador a partir de l'adreça DHCP"
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -17311,7 +17484,7 @@ msgstr "Cilindre %d a %d\n"
 #: ../../standalone/drakbug:1
 #, c-format
 msgid "YOUR TEXT HERE"
-msgstr ""
+msgstr "EL TEU TEXT AQUÍ"
 
 #: ../../standalone/drakconnect:1
 #, c-format
@@ -17321,7 +17494,7 @@ msgstr "Perfil nou..."
 #: ../../modules/interactive.pm:1 ../../standalone/draksec:1
 #, c-format
 msgid "NONE"
-msgstr ""
+msgstr "CAP"
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -17368,12 +17541,6 @@ msgstr "Abans cal crear /etc/dhcpd.conf!"
 msgid "Is FPU present"
 msgstr "FPU és present"
 
-#: ../../standalone/scannerdrake:1
-#, c-format
-msgid "There are no scanners found which are available on your system.\n"
-msgstr ""
-"No s'ha trobat cap escàner que estigui disponible en el vostre sistema.\n"
-
 #: ../../services.pm:1
 #, c-format
 msgid ""
@@ -17382,6 +17549,12 @@ msgid ""
 msgstr ""
 "Malauradament no hi ha més informació\n"
 "sobre aquest servei."
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "There are no scanners found which are available on your system.\n"
+msgstr ""
+"No s'ha trobat cap escàner que estigui disponible en el vostre sistema.\n"
 
 #: ../../standalone/drakTermServ:1
 #, c-format
@@ -17424,21 +17597,6 @@ msgstr "Dispositiu DVDRAM"
 msgid "if set to yes, report unowned files."
 msgstr "si és \"sí\", informa dels fitxers sense propietari"
 
-#: ../../standalone/harddrake2:1
-#, c-format
-msgid ""
-"This is HardDrake, a Mandrake hardware configuration tool.\n"
-"<span foreground=\"royalblue3\">Version:</span> %s\n"
-"<span foreground=\"royalblue3\">Author:</span> Thierry Vignaud &lt;tvignaud"
-"\\@mandrakesoft.com&gt;\n"
-"\n"
-msgstr ""
-"Aquest és el HardDrake, l'eina de configuració de maquinari de Mandrake.\n"
-"<span foreground=\"royalblue3\">Versió:</span> %s\n"
-"<span foreground=\"royalblue3\">Autor:</span> Thierry Vignaud &lt;tvignaud"
-"\\@mandrakesoft.com&gt;\n"
-"\n"
-
 #: ../../install_interactive.pm:1
 #, c-format
 msgid ""
@@ -17466,9 +17624,9 @@ msgid "Suriname"
 msgstr "Surinam"
 
 #: ../../network/adsl.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Use a floppy"
-msgstr "Desa al disquet"
+msgstr "Usa un disquet"
 
 #: ../../any.pm:1
 #, c-format
@@ -17521,10 +17679,27 @@ msgstr "Vietnam"
 msgid "/_Fields description"
 msgstr "/Descripció de _camps"
 
-#: ../../share/advertising/10-security.pl:1
+#: ../advertising/10-security.pl:1
 #, c-format
 msgid "Optimize your security by using Mandrake Linux"
 msgstr "Optimitzeu la vostra seguretat"
+
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"\n"
+"\n"
+" Thanks:\n"
+"\t- LTSP Project http://www.ltsp.org\n"
+"\t- Michael Brown <mbrown@fensystems.co.uk>\n"
+"\n"
+msgstr ""
+"\n"
+"\n"
+" Gràcies a:\n"
+"\t- Projecte LTSP http://www.ltsp.org\n"
+"\t- Michael Brown <mbrown@fensystems.co.uk>\n"
+"\n"
 
 #
 #: ../../install_steps_gtk.pm:1 ../../interactive.pm:1 ../../ugtk2.pm:1
@@ -17539,10 +17714,9 @@ msgid "Help"
 msgstr "Ajuda"
 
 #: ../../security/l10n.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Check if the network devices are in promiscuous mode"
-msgstr ""
-"si és \"sí\", comprova si els dispositius de xarxa són en mode promiscu."
+msgstr "Comprova si els dispositius de xarxa són en mode promiscu"
 
 #: ../../network/tools.pm:1 ../../standalone/drakconnect:1
 #, c-format
@@ -17570,9 +17744,9 @@ msgid "Username required"
 msgstr "El nom d'usuari és necessari"
 
 #: ../../standalone/drakfloppy:1
-#, fuzzy, c-format
+#, c-format
 msgid "Device"
-msgstr "Dispositiu: "
+msgstr "Dispositiu"
 
 #: ../../help.pm:1
 #, c-format
@@ -17628,7 +17802,7 @@ msgstr ""
 msgid "mkinitrd optional arguments"
 msgstr "Arguments opcionals de l'mkinitrd"
 
-#: ../../share/advertising/03-software.pl:1
+#: ../advertising/03-software.pl:1
 #, c-format
 msgid ""
 "Surf the Web with Mozilla or Konqueror, read your mail with Evolution or "
@@ -17651,7 +17825,7 @@ msgstr "Imprimeix la(es) pàgina(es) de prova"
 
 #
 #: ../../standalone/drakconnect:1
-#, fuzzy, c-format
+#, c-format
 msgid "Activate now"
 msgstr "Activa'l ara"
 
@@ -17762,7 +17936,7 @@ msgstr "Reinicia l'XFS"
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Add host/network"
-msgstr "Afegeix ordinador central/xarxa"
+msgstr "Afegeix ordinador/xarxa"
 
 #: ../../standalone/scannerdrake:1
 #, c-format
@@ -17836,6 +18010,11 @@ msgstr "S'està reiniciant el CUPS"
 #, c-format
 msgid "Printing/Scanning/Photo Cards on \"%s\""
 msgstr "S'està imprimint/escanejant/llegint targetes de fotos en \"%s\""
+
+#: ../../../move/move.pm:1
+#, c-format
+msgid "Continue without USB key"
+msgstr ""
 
 #: ../../install_steps.pm:1
 #, c-format
@@ -17930,9 +18109,9 @@ msgstr ""
 
 #
 #: ../../standalone/drakbackup:1
-#, fuzzy, c-format
+#, c-format
 msgid " (Default is all users)"
-msgstr "Impressora predeterminada"
+msgstr " (El valor per defecte és tots els usuaris)"
 
 #: ../../printer/printerdrake.pm:1 ../../standalone/scannerdrake:1
 #, c-format
@@ -18026,9 +18205,9 @@ msgid "Routers:"
 msgstr "Encaminadors:"
 
 #: ../../standalone/drakperm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Write"
-msgstr "Eritrea"
+msgstr "Escriptura"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -18132,9 +18311,9 @@ msgid "\t-Network by webdav.\n"
 msgstr "\t-Xarxa per webdav.\n"
 
 #: ../../printer/main.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ", multi-function device on a parallel port"
-msgstr ", dispositiu multifunció en port paral·lel #%s"
+msgstr ", dispositiu multifunció en un port paral·lel"
 
 #: ../../standalone/drakgw:1 ../../standalone/drakpxe:1
 #, c-format
@@ -18183,14 +18362,14 @@ msgid "Save on floppy"
 msgstr "Desa al disquet"
 
 #: ../../security/l10n.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Check open ports"
-msgstr "detectat al port %s"
+msgstr "Comprova els ports oberts"
 
 #: ../../standalone/printerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "Edit selected printer"
-msgstr "Edita el servidor seleccionat"
+msgstr "Edita la impressora seleccionada"
 
 #
 #: ../../printer/printerdrake.pm:1
@@ -18304,16 +18483,16 @@ msgid "Czech (QWERTY)"
 msgstr "Txec (QWERTY)"
 
 #: ../../security/l10n.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Allow X Window connections"
-msgstr "Connexió Winmodem"
+msgstr "Permet connexions X Windows"
 
 #: ../../standalone/service_harddrake:1
 #, c-format
 msgid "Hardware probing in progress"
 msgstr "Comprovació de maquinari en curs"
 
-#: ../../standalone/drakgw:1
+#: ../../network/shorewall.pm:1 ../../standalone/drakgw:1
 #, c-format
 msgid "Net Device"
 msgstr "Dispositiu de xarxa"
@@ -18381,6 +18560,11 @@ msgid ""
 msgstr ""
 "el paquet 'ImageMagick' és necessari per a un correcte funcionament.\n"
 "Feu clic a \"D'acord\" per intal·lar-lo o a \"Cancel·la\" per sortir"
+
+#: ../../network/drakfirewall.pm:1
+#, c-format
+msgid "Telnet server"
+msgstr "Servidor telnet"
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -18502,14 +18686,14 @@ msgid "LPD and LPRng do not support IPP printers.\n"
 msgstr "LPD i LPRng no funcionen amb impressores IPP.\n"
 
 #: ../../standalone/drakbackup:1
-#, fuzzy, c-format
+#, c-format
 msgid "Host name or IP."
-msgstr "Nom de l'ordinador central"
+msgstr "Nom de l'ordinador o IP"
 
 #: ../../standalone/printerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "/_Edit"
-msgstr "Edita"
+msgstr "/_Edita"
 
 #: ../../fsedit.pm:1
 #, c-format
@@ -18538,9 +18722,9 @@ msgid "Adapter %s: %s"
 msgstr "Adaptador %s: %s"
 
 #: ../../standalone/drakfloppy:1
-#, fuzzy, c-format
+#, c-format
 msgid "Boot disk creation"
-msgstr "creació de discs d'arrencada"
+msgstr "Creació del disc d'arrencada"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -18590,9 +18774,9 @@ msgstr ""
 "un tallafoc que protegeixi el vostre ordinador d'atacs des de la xarxa."
 
 #: ../../standalone/drakperm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Editable"
-msgstr "inhabilita"
+msgstr "Editable"
 
 #: ../../network/ethernet.pm:1
 #, c-format
@@ -18610,13 +18794,11 @@ msgid "Mayotte"
 msgstr "Mayotte"
 
 #: ../../security/help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Set shell commands history size. A value of -1 means unlimited."
 msgstr ""
-"Arguments: (mida)\n"
-"\n"
 "Defineix la mida de l'historial d'ordres de l'intèrpret d'ordres. El valor -"
-"1 indica \"il·limitada\"."
+"1 indica il·limitada."
 
 #: ../../install_steps_gtk.pm:1
 #, c-format
@@ -18660,7 +18842,7 @@ msgstr "Syslog"
 msgid "Can't create catalog!"
 msgstr "No s'ha pogut crear el catàleg!"
 
-#: ../../share/advertising/11-mnf.pl:1
+#: ../advertising/11-mnf.pl:1
 #, c-format
 msgid ""
 "Complete your security setup with this very easy-to-use software which "
@@ -18685,12 +18867,9 @@ msgid "Set root password"
 msgstr "Estableix la contrasenya de root"
 
 #: ../../security/l10n.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Enable IP spoofing protection"
-msgstr ""
-"Arguments: (arg, alert=1)\n"
-"\n"
-"Habilita/Inhabilita la protecció contra falsejament de la IP."
+msgstr "Habilita la protecció contra falsejament de la IP."
 
 #: ../../harddrake/sound.pm:1
 #, c-format
@@ -18702,9 +18881,9 @@ msgstr ""
 "però n'hi ha un de propietat a \"%s\"."
 
 #: ../../standalone/drakperm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Group :"
-msgstr "grup :"
+msgstr "Grup :"
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -18718,13 +18897,16 @@ msgid "Internet connection configuration"
 msgstr "Configuració de la connexió a Internet"
 
 #: ../../security/help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Add the name as an exception to the handling of password aging by msec."
 msgstr ""
-"Arguments: (nom)\n"
-"\n"
 "Afegiu el nom com a excepció al maneig, per part de l'msec, de l'antiguitat "
 "de contrasenyes."
+
+#: ../../network/isdn.pm:1
+#, c-format
+msgid "USB"
+msgstr "USB"
 
 #: ../../standalone/drakxtv:1
 #, c-format
@@ -18785,7 +18967,13 @@ msgstr "Grup de treball"
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Printer host name or IP"
-msgstr "Nom o IP de l'ordinador central de la impressora"
+msgstr "Nom o IP de l'ordinador de la impressora"
+
+#
+#: ../../standalone/drakconnect:1
+#, fuzzy, c-format
+msgid "down"
+msgstr "fet"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -18806,20 +18994,18 @@ msgid "Show current interface configuration"
 msgstr "Mostra la configuració actual de la interfície"
 
 #: ../../standalone/printerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "Add Printer"
-msgstr "Impressora"
+msgstr "Afegeix impressora"
 
 #: ../../security/help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "The argument specifies if clients are authorized to connect\n"
 "to the X server from the network on the tcp port 6000 or not."
 msgstr ""
-"Arguments: (arg)\n"
-"\n"
 "L'argument indica si els clients estan autoritzar a connectar\n"
-"al servidor X en el port tcp 6000 o no."
+"al servidor X des de la xarxa en el port tcp 6000 o no."
 
 #: ../../help.pm:1
 #, c-format
@@ -18919,7 +19105,7 @@ msgstr "Afegeix/Suprimeix usuaris"
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Host/network IP address missing."
-msgstr "L'adreça IP de l'ordinador central/xarxa no hi és."
+msgstr "L'adreça IP de l'ordinador/xarxa no hi és."
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -18934,14 +19120,12 @@ msgstr "Paràmetres"
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "The entered host/network IP is not correct.\n"
-msgstr "La IP de l'ordinador central/xarxa no és correcta.\n"
+msgstr "La IP de l'ordinador/xarxa no és correcta.\n"
 
 #: ../../standalone/drakbackup:1
-#, fuzzy, c-format
+#, c-format
 msgid "Create/Transfer backup keys for SSH"
-msgstr ""
-"Crea/Transfereix\n"
-"la còpia de seguretat de les claus per a SSH"
+msgstr "Crea/Transfereix la còpia de seguretat de les claus per a SSH"
 
 #: ../../any.pm:1
 #, c-format
@@ -19238,7 +19422,7 @@ msgstr "Elecció d'un gestor de pantalla"
 #: ../../network/ethernet.pm:1 ../../network/network.pm:1
 #, c-format
 msgid "Zeroconf Host name"
-msgstr "Nom de l'ordinador central Zeroconf"
+msgstr "Nom Zeroconf de l'ordinador"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -19252,9 +19436,9 @@ msgstr "L'adreça IP ha d'estar en format 1.2.3.4"
 
 #
 #: ../../standalone/printerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "Configure CUPS printing system"
-msgstr "Modifica el sistema d'impressió"
+msgstr "Configura el sistema d'impressió CUPS"
 
 #: ../../lang.pm:1
 #, c-format
@@ -19271,6 +19455,11 @@ msgstr "Afegeix un element"
 #, c-format
 msgid "The printers on this machine are available to other computers"
 msgstr "Les impressores d'aquesta màquina són accessibles a altres ordinadors"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "China (Hong Kong)"
+msgstr "Xina (Hong Kong)"
 
 #: ../../standalone/drakautoinst:1
 #, c-format
@@ -19334,7 +19523,7 @@ msgid "American Samoa"
 msgstr "Samoa Americana"
 
 #
-#: ../../share/advertising/12-mdkexpert.pl:1
+#: ../advertising/12-mdkexpert.pl:1
 #, c-format
 msgid "Become a MandrakeExpert"
 msgstr "Esdeveniu un MandrakeExpert"
@@ -19390,13 +19579,11 @@ msgid " on parallel port #%s"
 msgstr " en port paral·lel #%s"
 
 #: ../../security/help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Set the password minimum length and minimum number of digit and minimum "
 "number of capitalized letters."
 msgstr ""
-"Arguments: (length, ndigits=0, nupper=0)\n"
-"\n"
 "Defineix la llargada mínima de la contrasenya i el nombre mínim de xifres i "
 "de lletres en majúscules."
 
@@ -19435,7 +19622,7 @@ msgstr ""
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Remote host name"
-msgstr "Nom de l'ordinador central remot"
+msgstr "Nom de l'ordinador remot"
 
 #: ../../any.pm:1
 #, c-format
@@ -19445,12 +19632,12 @@ msgstr "accés a programes X"
 #: ../../install_interactive.pm:1
 #, c-format
 msgid "Computing the size of the Windows partition"
-msgstr "Càlcul de la mida de la partició de Windows"
+msgstr "S'està calculant la mida de la partició de Windows"
 
 #: ../../standalone/printerdrake:1
 #, c-format
 msgid "/_Refresh"
-msgstr ""
+msgstr "/_Refresca"
 
 #
 #: ../../crypto.pm:1 ../../lang.pm:1 ../../network/tools.pm:1
@@ -19464,6 +19651,11 @@ msgstr "Itàlia"
 msgid "Cayman Islands"
 msgstr "Illes Caiman"
 
+#: ../../fs.pm:1 ../../partition_table.pm:1
+#, c-format
+msgid "error unmounting %s: %s"
+msgstr "s'ha produït un error en desmuntar %s: %s"
+
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Name of printer"
@@ -19473,11 +19665,6 @@ msgstr "Nom de la impressora"
 #, c-format
 msgid "disable"
 msgstr "inhabilita"
-
-#: ../../fs.pm:1 ../../partition_table.pm:1
-#, c-format
-msgid "error unmounting %s: %s"
-msgstr "s'ha produït un error en desmuntar %s: %s"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -19546,9 +19733,9 @@ msgstr ""
 "us plau, escolliu el model correcte de la llista."
 
 #: ../../standalone/printerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "Set selected printer as the default printer"
-msgstr "Fes que aquesta sigui la impressora predeterminada"
+msgstr "Estaleix la impressora seleccionada com la predeterminada"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -19587,7 +19774,7 @@ msgstr "Compacte"
 msgid "Detected model: %s %s"
 msgstr "Model detectat: %s %s"
 
-#: ../../share/advertising/03-software.pl:1
+#: ../advertising/03-software.pl:1
 #, c-format
 msgid "MandrakeSoft has selected the best software for you"
 msgstr "MandrakeSoft us ha seleccionat el millor programari"
@@ -19727,7 +19914,12 @@ msgstr "Interfície gràfica a l'inici"
 #: ../../network/netconnect.pm:1
 #, c-format
 msgid " adsl"
-msgstr ""
+msgstr " adsl"
+
+#: ../../raid.pm:1
+#, c-format
+msgid "Not enough partitions for RAID level %d\n"
+msgstr "No hi ha prou particions per al nivell RAID %d\n"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -19738,11 +19930,6 @@ msgstr "format dels disquets que es poden utilitzar en la unitat"
 #, c-format
 msgid "Firmware copy failed, file %s not found"
 msgstr ""
-
-#: ../../raid.pm:1
-#, c-format
-msgid "Not enough partitions for RAID level %d\n"
-msgstr "No hi ha prou particions per al nivell RAID %d\n"
 
 #: ../../standalone/drakTermServ:1
 #, c-format
@@ -19814,7 +20001,7 @@ msgstr "Si us plau seleccioneu el suport per a la còpia..."
 #: ../../standalone/logdrake:1
 #, c-format
 msgid "Wrong email"
-msgstr ""
+msgstr "Adreça de correu electrònic incorrecta"
 
 #: ../../Xconfig/various.pm:1
 #, c-format
@@ -19877,7 +20064,7 @@ msgstr ""
 "d'instal·lació i els fitxers rpm."
 
 #
-#: ../../share/advertising/04-configuration.pl:1
+#: ../advertising/04-configuration.pl:1
 #, c-format
 msgid "Mandrake's multipurpose configuration tool"
 msgstr "Eina de configuració multiús de Mandrake"
@@ -19909,7 +20096,7 @@ msgstr "Disc"
 msgid "Enter a printer device URI"
 msgstr "Entreu un dispositiu URI d'impressora"
 
-#: ../../share/advertising/01-thanks.pl:1
+#: ../advertising/01-thanks.pl:1
 #, c-format
 msgid ""
 "The success of MandrakeSoft is based upon the principle of Free Software. "
@@ -19943,7 +20130,7 @@ msgstr "S'ha d'introduir una línia d'ordres!"
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "Select user manually"
-msgstr "Seleccioneu l'usuari manualment"
+msgstr "Seleccioneu els usuaris manualment"
 
 #
 #: ../../printer/printerdrake.pm:1
@@ -19957,9 +20144,9 @@ msgid "Do you want to enable printing on the printers mentioned above?\n"
 msgstr "Voleu habilitar la impressió a les impressores anteriors?\n"
 
 #: ../../security/l10n.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Check additions/removals of suid root files"
-msgstr "si és \"sí\", comprova addicions/eliminacions dels fitxers arrel suid."
+msgstr "Comprova addicions/eliminacions de fitxers suid root."
 
 #: ../../any.pm:1
 #, c-format
@@ -20001,9 +20188,9 @@ msgid "Use network connection to backup"
 msgstr "Empra la connexió de xarxa per fer la còpia de seguretat"
 
 #: ../../standalone/drakfloppy:1
-#, fuzzy, c-format
+#, c-format
 msgid "Kernel version"
-msgstr "versió del nucli"
+msgstr "Versió del nucli"
 
 #: ../../help.pm:1
 #, c-format
@@ -20168,9 +20355,9 @@ msgid "Left Shift key"
 msgstr "Tecla Maj Esquerra"
 
 #: ../../network/netconnect.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid " local network"
-msgstr "Xarxa(es) local(s)"
+msgstr " xarxa local"
 
 #: ../../interactive/stdio.pm:1
 #, c-format
@@ -20184,9 +20371,9 @@ msgstr ""
 
 #
 #: ../../diskdrake/smbnfs_gtk.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Search new servers"
-msgstr "Cerca servidors"
+msgstr "Cerca nous servidors"
 
 #: ../../lang.pm:1
 #, c-format
@@ -20363,14 +20550,14 @@ msgstr "Cap ratolí"
 
 #
 #: ../../standalone/drakbackup:1
-#, fuzzy, c-format
+#, c-format
 msgid "Choose your CD/DVD media size (MB)"
-msgstr "Si us plau, escolliu l'espai disponible en el CD/DVD (en MB)"
+msgstr "Escolliu la mida del CD/DVD (en MB)"
 
 #: ../../security/l10n.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Check permissions of files in the users' home"
-msgstr "si és \"sí\", comprova els permisos dels fitxers a casa dels usuaris"
+msgstr "Comprova els permisos dels fitxers al home dels usuaris"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -20463,9 +20650,9 @@ msgid "The %s is not supported by this version of Mandrake Linux."
 msgstr "El %s no és compatible amb aquesta versió de Mandrake Linux."
 
 #: ../../standalone/drakbackup:1
-#, fuzzy, c-format
+#, c-format
 msgid "tape"
-msgstr "Cinta"
+msgstr "cinta"
 
 #: ../../standalone/drakconnect:1
 #, c-format
@@ -20473,13 +20660,9 @@ msgid "DHCP client"
 msgstr "Client DHCP"
 
 #: ../../security/l10n.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "List users on display managers (kdm and gdm)"
-msgstr ""
-"Arguments: (arg)\n"
-"\n"
-"Permet/Impedeix la llista d'usuaris en el sistema en gestors de pantalla "
-"(kdm i gdm)."
+msgstr "Llista els usuaris en el sistema en gestors de pantalla (kdm i gdm)"
 
 #: ../../mouse.pm:1
 #, c-format
@@ -20511,9 +20694,9 @@ msgstr ""
 "Esteu d'acord en perdre totes les particions?\n"
 
 #: ../../standalone/drakbug:1
-#, fuzzy, c-format
+#, c-format
 msgid "Find Package"
-msgstr "%d paquets"
+msgstr "Cerca el paquet"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -20560,7 +20743,7 @@ msgstr "Model de la targeta:"
 msgid "Thin Client"
 msgstr "Client prim"
 
-#: ../../share/advertising/01-thanks.pl:1
+#: ../advertising/01-thanks.pl:1
 #, c-format
 msgid "Thank you for choosing Mandrake Linux 9.2"
 msgstr "Gràcies per triar Mandrake Linux 9.2"
@@ -20598,7 +20781,7 @@ msgstr "S'està preparant la instal·lació"
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Edit selected host/network"
-msgstr "Edita l'ordinador central/xarxa seleccionada"
+msgstr "Edita l'ordinador/xarxa seleccionada"
 
 #: ../../standalone/drakTermServ:1
 #, c-format
@@ -20679,6 +20862,13 @@ msgstr "Aconsegueix les fonts de Windows"
 msgid "Mouse Systems"
 msgstr "Mouse Systems"
 
+#: ../../standalone/drakclock:1
+#, c-format
+msgid ""
+"Your computer can synchronize its clock\n"
+" with a remote time server using NTP"
+msgstr ""
+
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Iranian"
@@ -20705,7 +20895,7 @@ msgstr "Afegeix un servidor"
 msgid "Remote printer name"
 msgstr "Nom de la impressora remota"
 
-#: ../../share/advertising/10-security.pl:1
+#: ../advertising/10-security.pl:1
 #, c-format
 msgid ""
 "MandrakeSoft has designed exclusive tools to create the most secured Linux "
@@ -20746,8 +20936,7 @@ msgstr "Escolliu el nivell de seguretat desitjat"
 #: ../../standalone/scannerdrake:1
 #, c-format
 msgid "This host is already in the list, it cannot be added again.\n"
-msgstr ""
-"Aquest ordinador central ja és a la llista, no es pot tornar a afegir.\n"
+msgstr "Aquest ordinador  ja és a la llista, no es pot tornar a afegir.\n"
 
 #: ../../printer/main.pm:1
 #, c-format
@@ -20755,15 +20944,15 @@ msgid ", USB printer"
 msgstr ", impressora USB"
 
 #: ../../standalone/drakfloppy:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Unable to properly close mkbootdisk:\n"
 "\n"
 "<span foreground=\"Red\"><tt>%s</tt></span>"
 msgstr ""
 "No es pot tancar l'mkbootdisk correctament: \n"
-" %s \n"
-" %s"
+"\n"
+"<span foreground=\"Red\"><tt>%s</tt></span>"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -20784,9 +20973,9 @@ msgid "Configure X"
 msgstr "Configura l'X"
 
 #: ../../standalone/drakbackup:1
-#, fuzzy, c-format
+#, c-format
 msgid "hd"
-msgstr "Txad"
+msgstr "hd"
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -20805,12 +20994,9 @@ msgid "Use owner id for execution"
 msgstr "Usa l'identificador del propietari (UID) per a l'execució"
 
 #: ../../security/l10n.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Allow remote root login"
-msgstr ""
-"Arguments: (arg)\n"
-"\n"
-"Permet/Impedeix l'entrada de root remota."
+msgstr "Permet l'entrada de root remota"
 
 #: ../../standalone/drakperm:1
 #, c-format
@@ -20867,6 +21053,11 @@ msgstr "Microsoft Explorer"
 msgid "Uninstall Fonts"
 msgstr "Desinstal·la fonts"
 
+#: ../../../move/move.pm:1
+#, c-format
+msgid "Please wait, detecting and configuring devices..."
+msgstr "Espereu si us plau, s'està detectant i configurant els dispositius..."
+
 #: ../../keyboard.pm:1
 #, c-format
 msgid "German (no dead keys)"
@@ -20875,7 +21066,7 @@ msgstr "Alemany (sense tecles inoperatives)"
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "\tSend mail to %s\n"
-msgstr ""
+msgstr "\tEnvia correu a %s\n"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -20894,11 +21085,6 @@ msgid ""
 msgstr ""
 "Podeu exportar utilitzant NFS o Samba. Seleccioneu quin voleu utilitzar."
 
-#: ../../help.pm:1 ../../install_steps_interactive.pm:1
-#, c-format
-msgid "Reboot"
-msgstr "Reinicia"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Gambia"
@@ -20909,10 +21095,16 @@ msgstr "Gàmbia"
 msgid "Mandrake Control Center"
 msgstr "Centre de Control Mandrake"
 
+#: ../../help.pm:1 ../../install_steps_interactive.pm:1
+#: ../../../move/move.pm:1
+#, c-format
+msgid "Reboot"
+msgstr "Reinicia"
+
 #: ../../printer/main.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Multi-function device"
-msgstr ", dispositiu multifunció"
+msgstr "Dispositiu multifunció"
 
 #: ../../network/drakfirewall.pm:1
 #, c-format
@@ -20945,6 +21137,11 @@ msgstr ""
 msgid "Remember this password"
 msgstr "Recorda aquesta contrasenya"
 
+#: ../../install_steps_gtk.pm:1
+#, c-format
+msgid "due to unsatisfied %s"
+msgstr ""
+
 #: ../../standalone/drakgw:1
 #, c-format
 msgid "Internet Connection Sharing is now enabled."
@@ -20966,9 +21163,9 @@ msgstr ""
 "el grup de treball, si són necessaris."
 
 #: ../../network/netconnect.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid " cable"
-msgstr "Taula"
+msgstr " cable"
 
 #: ../../help.pm:1 ../../install_interactive.pm:1
 #, c-format
@@ -20988,9 +21185,7 @@ msgstr "Controlador de l'XFree86: %s\n"
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "This host/network is already in the list, it cannot be added again.\n"
-msgstr ""
-"Aquest ordinador central/xarxa ja és a la llista, no es pot tornar a "
-"afegir.\n"
+msgstr "Aquest ordinador/xarxa ja és a la llista, no es pot tornar a afegir.\n"
 
 #: ../../install_steps_gtk.pm:1 ../../install_steps_interactive.pm:1
 #, c-format
@@ -21003,9 +21198,15 @@ msgid "Papua New Guinea"
 msgstr "Papua Nova Guinea"
 
 #: ../../printer/main.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Multi-function device on a parallel port"
-msgstr ", dispositiu multifunció en port paral·lel #%s"
+msgstr "Dispositiu multifunció en un port paral·lel"
+
+#
+#: ../../../move/tree/mdk_totem:1
+#, fuzzy, c-format
+msgid "Busy files"
+msgstr "Còpia de seguretat dels fitxers de sistema"
 
 #
 #: ../../keyboard.pm:1
@@ -21014,9 +21215,9 @@ msgid "Serbian (cyrillic)"
 msgstr "Serbi (ciríl·lic)"
 
 #: ../../standalone/drakbackup:1
-#, fuzzy, c-format
+#, c-format
 msgid "Enter the directory where backups are stored"
-msgstr "Si us plau, entreu el directori on es guarden les còpies de seguretat"
+msgstr "Entreu el directori on es guarden les còpies de seguretat"
 
 #: ../../standalone/draksplash:1
 #, c-format
@@ -21071,6 +21272,21 @@ msgstr ""
 msgid "DHCP Client"
 msgstr "Client DHCP"
 
+#: ../../standalone/harddrake2:1
+#, c-format
+msgid ""
+"This is HardDrake, a Mandrake hardware configuration tool.\n"
+"<span foreground=\"royalblue3\">Version:</span> %s\n"
+"<span foreground=\"royalblue3\">Author:</span> Thierry Vignaud &lt;"
+"tvignaud@mandrakesoft.com&gt;\n"
+"\n"
+msgstr ""
+"Aquest és el HardDrake, l'eina de configuració de maquinari de Mandrake.\n"
+"<span foreground=\"royalblue3\">Versió:</span> %s\n"
+"<span foreground=\"royalblue3\">Autor:</span> Thierry Vignaud &lt;"
+"tvignaud@mandrakesoft.com&gt;\n"
+"\n"
+
 #: ../../standalone/drakgw:1
 #, c-format
 msgid "dismiss"
@@ -21099,7 +21315,7 @@ msgstr ""
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Irish"
-msgstr ""
+msgstr "Irlandès"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -21204,6 +21420,8 @@ msgstr "Libèria"
 msgid ""
 "Could not install the packages needed to set up a scanner with Scannerdrake."
 msgstr ""
+"No s'han pogut instal·lar els paquets necessaris per configurar l'escàner "
+"amb Scannerdrake."
 
 #: ../../standalone/drakgw:1
 #, c-format
@@ -21275,68 +21493,6 @@ msgstr "No transfereixis cap impressora"
 msgid "Delay before booting the default image"
 msgstr "Demora abans d'arrencar la imatge predeterminada"
 
-#: ../../standalone/drakfont:1
-#, c-format
-msgid ""
-"\n"
-" Copyright (C) 2001-2002 by MandrakeSoft \n"
-"     DUPONT Sebastien (original version)\n"
-"     CHAUMETTE Damien <dchaumette\\@mandrakesoft.com>\n"
-"\n"
-" This program is free software; you can redistribute it and/or modify\n"
-" it under the terms of the GNU General Public License as published by\n"
-" the Free Software Foundation; either version 2, or (at your option)\n"
-" any later version.\n"
-"\n"
-" This program is distributed in the hope that it will be useful,\n"
-" but WITHOUT ANY WARRANTY; without even the implied warranty of\n"
-" MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n"
-" GNU General Public License for more details.\n"
-"\n"
-" You should have received a copy of the GNU General Public License\n"
-" along with this program; if not, write to the Free Software\n"
-" Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.\n"
-"\n"
-" Thanks:\n"
-"    -  pfm2afm:   \n"
-"\t by Ken Borgendale:\n"
-"\t    Convert a Windows .pfm  file to a .afm (Adobe Font Metrics)\n"
-"    -  type1inst:\n"
-"\t by James Macnicol: \n"
-"\t    type1inst generates files fonts.dir fonts.scale & Fontmap.\n"
-"    -  ttf2pt1:   \n"
-"\t  by Andrew Weeks, Frank Siegert, Thomas Henlich, Sergey Babkin  \n"
-"             Convert ttf font files to afm and pfb fonts\n"
-msgstr ""
-"\n"
-" Copyright (C) 2001-2002 per MandrakeSoft \n"
-"     DUPONT Sébastien (versió original)\n"
-"     CHAUMETTE Damien <dchaumette\\@mandrakesoft.com>\n"
-"\n"
-" Aquest programa és programari lliure; el podeu redistribuir i/o modificar\n"
-" sota els termes de la Llicència General Pública de GNU publicada per la\n"
-" Free Software Foundation, tant la versió 2 com qualsevol versió posterior,\n"
-" a elecció vostra.\n"
-"\n"
-" Aquest programa és distribueix amb l'esperança que serà útil,\n"
-" però SENSE CAP GARANTIA; sense ni tant sols la garantia implícita de\n"
-" MERCANTIBILITAT o ADEQUACIÓ A UNA FINALITAT DETERMINADA. Consulteu la\n"
-" Llicència General Pública de GNU per a més informació.\n"
-"\n"
-" Heu d'haver rebut una còpia de la Llicència General Pública de GNU\n"
-" amb el programa; si no és així, escriviu a la Free Software\n"
-" Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.\n"
-" Gràcies:\n"
-"    -  pfm2afm:   \n"
-"\t per Ken Borgendale:\n"
-"\t    Converteix un fitxer .pfm de Windows a un .afm (Adobe Font Metrics)\n"
-"    -  type1inst:\n"
-"\t per James Macnicol: \n"
-"\t    El type1inst genera fitxers fonts.dir, fonts.scale i Fontmap.\n"
-"    -  ttf2pt1:   \n"
-"\t  per Andrew Weeks, Frank Siegert, Thomas Henlich, Sergey Babkin  \n"
-"             Converteix fitxers de tipus de lletra ttf a afm i pfb\n"
-
 #
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -21344,7 +21500,7 @@ msgid "Use Hard Disk to backup"
 msgstr "Usa el disc dur per fer la còpia de seguretat"
 
 #: ../../help.pm:1 ../../install_steps_gtk.pm:1 ../../standalone/drakbackup:1
-#: ../../standalone/drakboot:1 ../../standalone/drakgw:1
+#: ../../standalone/drakboot:1
 #, c-format
 msgid "Configure"
 msgstr "Configura"
@@ -21377,7 +21533,7 @@ msgid ""
 "such as ``mybox.mylab.myco.com''.\n"
 "You may also enter the IP address of the gateway if you have one."
 msgstr ""
-"Si us plau, introduïu el nom del vostre ordinador central.\n"
+"Si us plau, introduïu el nom del vostre ordinador.\n"
 "Aquest nom ha de ser complet, com ara \"mybox.mylab.myco.com\".\n"
 "També podeu introduir l'adreça IP de la passarel·la, si en teniu una."
 
@@ -21416,7 +21572,7 @@ msgstr ""
 "Comproveu el CD-ROM en un ordinador instal·lat mitjançant \"rpm -qpl "
 "Mandrake/RPMS/*.rpm\"\n"
 
-#: ../../share/advertising/06-development.pl:1
+#: ../advertising/06-development.pl:1
 #, c-format
 msgid "Mandrake Linux 9.2: the ultimate development platform"
 msgstr "Mandrake Linux 9.2 és l'últim en plataformes de desenvolupament"
@@ -21429,7 +21585,7 @@ msgstr "Model detectat: %s"
 #: ../../standalone/logdrake:1
 #, c-format
 msgid "\"%s\" is not a valid email!"
-msgstr ""
+msgstr "\"%s\" no és una adreça de correu electrònic vàlida!"
 
 #: ../../standalone/drakedm:1
 #, c-format
@@ -21453,10 +21609,9 @@ msgid "Azerbaijan"
 msgstr "Azerbaitjan"
 
 #: ../../standalone/drakbackup:1
-#, fuzzy, c-format
+#, c-format
 msgid "Device name to use for backup"
-msgstr ""
-"Si us plau, introduïu el nom del dispositiu a utilitzar per fer la còpia"
+msgstr "Nom del dispositiu a utilitzar per fer la còpia"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -21505,6 +21660,12 @@ msgstr "resolució definitiva"
 msgid "Services"
 msgstr "Serveis"
 
+#
+#: ../../../move/move.pm:1
+#, c-format
+msgid "Auto configuration"
+msgstr "Configuració automàtica"
+
 #: ../../Xconfig/card.pm:1
 #, c-format
 msgid "4 MB"
@@ -21544,11 +21705,11 @@ msgstr "Estació d'Internet"
 
 #: ../../share/compssUsers:999
 msgid ""
-"Set of tools to read and send mail and news (pine, mutt, tin..) and to "
-"browse the Web"
+"Set of tools to read and send mail and news (mutt, tin..) and to browse the "
+"Web"
 msgstr ""
-"Conjunt d'eines per llegir i enviar correu i notícies (pine, mutt, tin...) i "
-"per navegar pel Web"
+"Conjunt d'eines per llegir i enviar correu i notícies (mutt, tin...) i per "
+"navegar pel Web"
 
 #: ../../share/compssUsers:999
 msgid "Network Computer (client)"
@@ -21689,731 +21850,36 @@ msgid "Set of tools to read and send mail and news and to browse the Web"
 msgstr ""
 "Conjunt d'eines per llegir i enviar correu i notícies i per navegar pel Web"
 
-#~ msgid ""
-#~ "XawTV isn't installed!\n"
-#~ "\n"
-#~ "\n"
-#~ "If you do have a TV card but DrakX has neither detected it (no bttv nor "
-#~ "saa7134\n"
-#~ "module in \"/etc/modules\") nor installed xawtv, please send the\n"
-#~ "results of \"lspcidrake -v -f\" to \"install\\@mandrakesoft.com\"\n"
-#~ "with subject \"undetected TV card\".\n"
-#~ "\n"
-#~ "\n"
-#~ "You can install it by typing \"urpmi xawtv\" as root, in a console."
-#~ msgstr ""
-#~ "No teniu instal·lat el XawTV!\n"
-#~ "\n"
-#~ "\n"
-#~ "Si teniu una targeta de TV però el DrakX no l'ha detectada (no hi ha el "
-#~ "mòdul\n"
-#~ "bttv o el saa7134 a \"/etc/modules\") o no heu instal·lat xawtv,\n"
-#~ "si us plau envieu els resultats de \"lspcidrake -v -f\"\n"
-#~ "a \"install\\@mandrakesoft.com\" amb l'assumpte \"undetected TV card\".\n"
-#~ "\n"
-#~ "\n"
-#~ "El podeu instal·lar teclejant \"urpmi xawtv\" com a root, en la consola."
+#~ msgid "The setup has already been done, and it's currently enabled."
+#~ msgstr "La configuració ja s'ha realitzat i ara està habilitada."
 
-#~ msgid "-adobe-utopia-regular-r-*-*-25-*-*-*-p-*-iso8859-*,*-r-*"
-#~ msgstr "-adobe-utopia-regular-r-*-*-25-*-*-*-p-*-iso8859-*,*-r-*"
+#~ msgid "Logs"
+#~ msgstr "Registres"
 
-#~ msgid "-adobe-times-bold-r-normal--17-*-100-100-p-*-iso8859-*,*-r-*"
-#~ msgstr "-adobe-times-bold-r-normal--17-*-100-100-p-*-iso8859-*,*-r-*"
+#~ msgid "The setup has already been done, but it's currently disabled."
+#~ msgstr "La configuració ja s'ha realitzat, però ara està inhabilitada."
 
-#
-#, fuzzy
-#~ msgid "Hostname configuration"
-#~ msgstr "Configuració del sistema"
-
-#, fuzzy
-#~ msgid "Hostname"
-#~ msgstr "Nom de l'ordinador central"
-
-#
-#~ msgid "Remote Printers"
-#~ msgstr "Impressores remotes"
-
-#~ msgid "Printing system: "
-#~ msgstr "Sistema d'impressió: "
-
-#, fuzzy
-#~ msgid "Level 1"
-#~ msgstr "Nivell"
-
-#, fuzzy
-#~ msgid "Level 2"
-#~ msgstr "Nivell"
-
-#, fuzzy
-#~ msgid "Level 3"
-#~ msgstr "Nivell"
-
-#, fuzzy
-#~ msgid "Level 4"
-#~ msgstr "Nivell"
-
-#, fuzzy
-#~ msgid "Level 5"
-#~ msgstr "Nivell"
-
-#, fuzzy
-#~ msgid "Insert floppy and press %s"
-#~ msgstr "Inseriu un disquet a la unitat %s"
-
-#~ msgid "Load"
-#~ msgstr "Carrega"
-
-#~ msgid "Bad Ip"
-#~ msgstr "IP incorrecta"
-
-#~ msgid "Output"
-#~ msgstr "Sortida"
-
-#~ msgid "Please relog into %s to activate the changes"
-#~ msgstr "Si us plau, torneu a entrar a %s per activar els canvis"
+#~ msgid "Profile "
+#~ msgstr "Perfil"
 
 #~ msgid ""
-#~ "Description:\n"
+#~ "Welcome to the Internet Connection Sharing utility!\n"
 #~ "\n"
-#~ "  Drakbackup is used to backup your system.\n"
-#~ "  During the configuration you can select: \n"
-#~ "\t- System files, \n"
-#~ "\t- Users files, \n"
-#~ "\t- Other files.\n"
-#~ "\tor All your system ...  and Other (like Windows Partitions)\n"
+#~ "%s\n"
 #~ "\n"
-#~ "  Drakbackup allows you to backup your system on:\n"
-#~ "\t- Harddrive.\n"
-#~ "\t- NFS.\n"
-#~ "\t- CDROM (CDRW), DVDROM (with autoboot, rescue and autoinstall.).\n"
-#~ "\t- FTP.\n"
-#~ "\t- Rsync.\n"
-#~ "\t- Webdav.\n"
-#~ "\t- Tape.\n"
-#~ "\n"
-#~ "  Drakbackup allows you to restore your system to\n"
-#~ "  a user selected directory.\n"
-#~ "\n"
-#~ "  Per default all backups will be stored on your\n"
-#~ "  /var/lib/drakbackup directory\n"
-#~ "\n"
-#~ "  Configuration file:\n"
-#~ "\t/etc/drakconf/drakbackup/drakbackup.conf\n"
-#~ "\n"
-#~ "Restore Step:\n"
-#~ "  \n"
-#~ "  During the restore step, DrakBackup will remove \n"
-#~ "  your original directory and verify that all \n"
-#~ "  backup files are not corrupted. It is recommended \n"
-#~ "  you do a last backup before restoring.\n"
-#~ "\n"
-#~ "\n"
+#~ "Click on Configure to launch the setup wizard."
 #~ msgstr ""
-#~ "Descripció:\n"
+#~ "Benvingut a la utilitat de compartició de la connexió a Internet!\n"
 #~ "\n"
-#~ "  El Drakbackup s'usa per fer còpies de seguretat del sistema.\n"
-#~ "  Durant la configuració podeu seleccionar: \n"
-#~ "\t- Fitxers de sistema\n"
-#~ "\t- Fitxers d'usuari\n"
-#~ "\t- Altres fitxers\n"
-#~ "\to Tot el sistema...  i Altres (com ara Particions de Windows)\n"
+#~ "%s\n"
 #~ "\n"
-#~ "  El Drakbackup us permet fer còpies de seguretat del sistema en:\n"
-#~ "\t- Disc dur\n"
-#~ "\t- NFS\n"
-#~ "\t- CDROM (CDRW), DVDROM (amb arrencada automàtica, rescat i instal•lació "
-#~ "automàtica)\n"
-#~ "\t- FTP\n"
-#~ "\t- Rsync\n"
-#~ "\t- Webdav\n"
-#~ "\t- Cinta\n"
-#~ "\n"
-#~ "  El Drakbackup us permet restaurar el sistema a\n"
-#~ "  un directori seleccionat d'usuari.\n"
-#~ "\n"
-#~ "  Per defecte totes les còpies de seguretat s'emmagatzemen al\n"
-#~ "  directori /var/lib/drakbackup\n"
-#~ "\n"
-#~ "  Fitxer de configuració:\n"
-#~ "\t/etc/drakconf/drakbackup/drakbackup.conf\n"
-#~ "\n"
-#~ "\n"
-#~ "Pas de restauració:\n"
-#~ "  \n"
-#~ "  Durant el pas de restauració, el DrakBackup eliminarà \n"
-#~ "  el directori original i verificarà que cap de \n"
-#~ "  les còpies de seguretat no s'ha fet malbé. És recomanable que \n"
-#~ "  feu una última còpia de seguretat abans de restaurar.\n"
-#~ "\n"
-#~ "\n"
+#~ "Feu clic a 'Configura' per executar l'auxiliar de configuració."
 
-#~ msgid ""
-#~ "Options Description:\n"
-#~ "\n"
-#~ " - Backup System Files:\n"
-#~ "       \n"
-#~ "\tThis option allows you to backup your /etc directory,\n"
-#~ "\twhich contains all configuration files. Please be\n"
-#~ "\tcareful during the restore step to not overwrite:\n"
-#~ "\t\t/etc/passwd \n"
-#~ "\t\t/etc/group \n"
-#~ "\t\t/etc/fstab\n"
-#~ "\n"
-#~ " - Backup User Files: \n"
-#~ "\n"
-#~ "\tThis option allows you select all users that you want to \n"
-#~ "\tbackup. To preserve disk space, it is recommended that\n"
-#~ "\tyou do not include the web browser's cache.\n"
-#~ "\n"
-#~ " - Backup Other Files: \n"
-#~ "\n"
-#~ "\tThis option allows you to include additional data to save.\n"
-#~ "\tIf you want to add individual files, select them from the\n"
-#~ "\trighthand 'Files' list pane.  To add directories, enter the \n"
-#~ "\tdirectory by clicking on it in the lefthand 'Folders' pane, \n"
-#~ "\tand at that point click 'OK' without selecting any files.\n"
-#~ " \n"
-#~ " - Incremental Backups:\n"
-#~ "\n"
-#~ "\tThe incremental backup is the most powerful option for \n"
-#~ "\tbackup. This option allows you to backup all your data \n"
-#~ "\tthe first time, and only the changed data afterward.\n"
-#~ "\tThen you will be able, during the restore step, to restore \n"
-#~ "\tyour data from a specified date. If you have not selected \n"
-#~ "\tthis option all old backups are deleted before each backup.    \n"
-#~ "\n"
-#~ " - Differential Backups:\n"
-#~ " \n"
-#~ "\tThe differential backup, rather than comparing changes in the\n"
-#~ "\tdata to the previous incremental backup, always compares the\n"
-#~ "\tdata to the initial base backup. This method allows one to\n"
-#~ "\trestore the base and then the differential from a certain date.\n"
-#~ "\n"
-#~ msgstr ""
-#~ "Descripció de les opcions:\n"
-#~ "\n"
-#~ " - Còpia de seguretat dels fitxers de sistema:\n"
-#~ "       \n"
-#~ "\tAquesta opció us permet fer còpies del directori /etc,\n"
-#~ "\tque conté tots els fitxers de configuració. Aneu amb\n"
-#~ "\tcompte, durant el pas de restauració, de no sobreescriure:\n"
-#~ "\t\t/etc/passwd \n"
-#~ "\t\t/etc/group \n"
-#~ "\t\t/etc/fstab\n"
-#~ "\n"
-#~ " - Còpia de seguretat dels fitxers d'usuari: \n"
-#~ "\n"
-#~ "\tAquesta opció us permet seleccionar els usuaris dels quals\n"
-#~ "\tvoleu fer còpia de seguretat. Per estalviar espai de disc, és\n"
-#~ "\trecomanable que no hi inclogueu la memòria cau del navegador.\n"
-#~ "\n"
-#~ " - Còpia de seguretat d'altres fitxers: \n"
-#~ "\n"
-#~ "\tAquesta opció us permet incloure més dades per desar. Si\n"
-#~ "\t voleu afegir fitxers individuals, seleccioneu-los al quadre\n"
-#~ "\t ‘Fitxers' de la dreta. Per afegir directoris, introduïu el\n"
-#~ "\t directori fent-hi clic al quadre ‘Carpetes' de l'esquerra,\n"
-#~ "\t i feu clic a ‘D'acord' sense seleccionar cap fitxer.\n"
-#~ " \n"
-#~ "- Còpia de seguretat incremental:\n"
-#~ "\n"
-#~ "\tLa còpia incremental és l'opció més potent a l'hora de fer còpies\n"
-#~ "\t de seguretat. Aquesta opció us permet fer una còpia de seguretat\n"
-#~ "\t de totes les dades la primera vegada, i després solament de les\n"
-#~ "\t dades que han canviat.Després, durant el pas de restauració, \n"
-#~ "\t podreu restaurar les dades des d'una data determinada.Si no heu\n"
-#~ "\t seleccionat aquesta opció, totes les còpies de seguretat antigues\n"
-#~ "\t se suprimiran abans de cada còpia.    \n"
-#~ "\n"
-#~ "- Còpia de seguretat diferencial:\n"
-#~ "\n"
-#~ "\tLa copia diferencial, en comptes de comparar els canvis en la data\n"
-#~ "\tde les còpies de seguretat incrementals anteriors, compara sempre\n"
-#~ "\tla data de la còpia de seguretat base inicial. Aquest mètode permet\n"
-#~ "\trestaurar la base i després la diferencial a partir d'una data "
-#~ "determinada.\n"
-#~ "\n"
+#~ msgid "Internet Connection Sharing configuration"
+#~ msgstr "Configuració de la compartició de la connexió a Internet"
 
-#~ msgid "Please check if you want to use the non-rewinding device."
-#~ msgstr "Marqueu aquesta opció si voleu emprar el dispositiu no rebobinable."
+#~ msgid "No Internet Connection Sharing has ever been configured."
+#~ msgstr "No s'ha configurat mai cap connexió compartida a Internet."
 
-#
-#~ msgid "Please enter your password"
-#~ msgstr "Si us plau, introduïu la contrasenya"
-
-#~ msgid ""
-#~ "\n"
-#~ " Some errors during sendmail are caused by \n"
-#~ " a bad configuration of postfix. To solve it you have to\n"
-#~ " set myhostname or mydomain in /etc/postfix/main.cf\n"
-#~ "\n"
-#~ msgstr ""
-#~ "\n"
-#~ " Alguns errors durant el procés de sendmail són causats per \n"
-#~ " una configuració dolenta de postfix. Per resoldre-ho hauríeu de\n"
-#~ " definir myhostname o mydomain en /etc/postfix/main.cf\n"
-#~ "\n"
-
-#~ msgid ""
-#~ "Please choose your CD/DVD device\n"
-#~ "(Press Enter to propogate settings to other fields.\n"
-#~ "This field isn't necessary, only a tool to fill in the form.)"
-#~ msgstr ""
-#~ "Seleccioneu el vostre dispositiu de CD/DVD\n"
-#~ "(Premeu Retorn perquè aquestes opcions es propaguin a d'altres camps.\n"
-#~ "Aquest camp no és necessari, només és una eina per omplir el formulari.)"
-
-#~ msgid "Please check if you want to eject your tape after the backup."
-#~ msgstr "Marqueu aquesta opció si voleu expulsar la cinta en acabar."
-
-#~ msgid "Please check if you want to erase your tape before the backup."
-#~ msgstr ""
-#~ "Marqueu aquesta opció si voleu esborrar la cinta abans de fer la còpia de "
-#~ "seguretat."
-
-#
-#~ msgid "Please enter the host name or IP."
-#~ msgstr "Si us plau, introduïu el nom de l'ordinador o la IP."
-
-#~ msgid ""
-#~ " Copyright (C) 2001-2002 MandrakeSoft by DUPONT Sebastien <dupont_s"
-#~ "\\@epita.fr>"
-#~ msgstr ""
-#~ " Copyright (C) 2001-2002 MandrakeSoft per DUPONT Sebastien <dupont_s"
-#~ "\\@epita.fr>"
-
-#~ msgid ""
-#~ "Options Description:\n"
-#~ "\n"
-#~ "Please be careful when you are using ftp backup, because only \n"
-#~ "backups that are already built are sent to the server.\n"
-#~ "So at the moment, you need to build the backup on your hard \n"
-#~ "drive before sending it to the server.\n"
-#~ "\n"
-#~ msgstr ""
-#~ "Descripció de les opcions:\n"
-#~ "\n"
-#~ "Si us plau, aneu amb compte quan feu còpies de seguretat amb FTP, \n"
-#~ "perquè només s'envien al servidor les còpies que ja estan creades.\n"
-#~ "Per tant, ara per ara us cal crear la còpia de seguretat al vostre disc \n"
-#~ "dur abans d'enviar-la al servidor.\n"
-#~ "\n"
-
-#~ msgid ""
-#~ "\n"
-#~ "Restore Backup Problems:\n"
-#~ "\n"
-#~ "During the restore step, Drakbackup will verify all your\n"
-#~ "backup files before restoring them.\n"
-#~ "Before the restore, Drakbackup will remove \n"
-#~ "your original directory, and you will loose all your \n"
-#~ "data. It is important to be careful and not modify the \n"
-#~ "backup data files by hand.\n"
-#~ msgstr ""
-#~ "\n"
-#~ "Problemes durant la restauració de còpies de seguretat:\n"
-#~ "\n"
-#~ "Durant el pas de restauració, el Drakbackup verificarà tots\n"
-#~ "els fitxers de les còpies de seguretat abans de restaurar-los.\n"
-#~ "Abans de la restauració, el Drakbackup esborrarà \n"
-#~ "els directoris originals, i perdreu totes les vostres \n"
-#~ "dades. És important de tenir cura i no modificar a mà els \n"
-#~ "fitxers de còpia de seguretat.\n"
-
-#~ msgid ""
-#~ "Restore Description:\n"
-#~ "\n"
-#~ "Drakbackup now allows you to search the backup lists for a particular\n"
-#~ "file or files to restore.  If the search is successful, you will be \n"
-#~ "presented with a list of matches, along with backup media and dates.\n"
-#~ "You can then select individual files to restore from your backup media.\n"
-#~ " \n"
-#~ "For 'normal' restores, only the most recent date will be used, \n"
-#~ "because with incremental  backups it is necessary to restore \n"
-#~ "one by one each older backup.\n"
-#~ "\n"
-#~ "So if you don't want to restore a user please unselect all their\n"
-#~ "check boxes.\n"
-#~ "\n"
-#~ "Otherwise, you are able to select only one of these.\n"
-#~ "\n"
-#~ " - Incremental Backups:\n"
-#~ "\n"
-#~ "\tThe incremental backup is the most powerful option for \n"
-#~ "\tbackup. This option allows you to backup all your data \n"
-#~ "\tthe first time, and only the changed data afterward.\n"
-#~ "\tThen you will be able, during the restore step, to restore \n"
-#~ "\tyour data from a specified date. If you have not selected \n"
-#~ "\tthis option all old backups are deleted before each backup.    \n"
-#~ "\n"
-#~ " - Differential Backups:\n"
-#~ " \n"
-#~ "\tThe differential backup, rather than comparing changes in the\n"
-#~ "\tdata to the previous incremental backup, always compares the\n"
-#~ "\tdata to the initial base backup. This method allows one to\n"
-#~ "\trestore the base and then the differential from a certain date.\n"
-#~ "\n"
-#~ msgstr ""
-#~ "descripció de la restauració:\n"
-#~ " \n"
-#~ "Només s'utilitzarà la data més recent, perquè les còpies incrementals\n"
-#~ "necessiten restaurar una a una totes les còpies antigues.\n"
-#~ "\n"
-#~ "Per tant, si no voleu restaurar un usuari deactiveu tots els seus\n"
-#~ "quadres de verificació.\n"
-#~ "\n"
-#~ "D'altra banda, només podeu seleccionar aquesta opció\n"
-#~ "\n"
-#~ " - Còpia de seguretat incremental:\n"
-#~ "\n"
-#~ "\tLa còpia incremental és l'opció més potent a l'hora de fer \n"
-#~ "\tcòpies de seguretat. Aquesta opció us permet fer una còpia \n"
-#~ "\tde seguretat de totes les dades la primera vegada, i \n"
-#~ "\tnomés de les dades canviades després.\n"
-#~ "\tMés tard, sereu capaç, durant el procés de restauració, \n"
-#~ "\tde restaurar les dades d'una data determinada.\n"
-#~ "\tSi no s'activa aquesta opció totes les còpies de \n"
-#~ "\tseguretat antigues s'esborren abans de cada nova còpia.    \n"
-#~ "\n"
-#~ "- Còpia de seguretat diferencial:\n"
-#~ " \n"
-#~ "\tLa còpia diferencial, en comptes de comparar els canvis de les\n"
-#~ "\tdades amb la còpia incremental anterior, compara sempre les \n"
-#~ "\tdades amb la còpia de seguretat inicial. Aquest mètode permet\n"
-#~ "\trestaurar la base i després les diferències a partir d'una data\n"
-#~ "\tdeterminada.\n"
-#~ "\n"
-
-#~ msgid ""
-#~ " updates 2002 MandrakeSoft by Stew Benedict <sbenedict\\@mandrakesoft.com>"
-#~ msgstr ""
-#~ " actualitzacions 2002 MandrakeSoft per Stew Benedict <sbenedict"
-#~ "\\@mandrakesoft.com>"
-
-#~ msgid ""
-#~ "Arguments: (arg, expr='*.*', dev='tty12')\n"
-#~ "\n"
-#~ "Enable/Disable syslog reports to console 12. \\fIexpr\\fP is the\n"
-#~ "expression describing what to log (see syslog.conf(5) for more details) "
-#~ "and\n"
-#~ "dev the device to report the log."
-#~ msgstr ""
-#~ "Arguments: (arg, expr='*.*', dev='tty12')\n"
-#~ "\n"
-#~ "Habilita/Inhabilita els informes de registre del sistema per a la consola "
-#~ "12. \\fIexpr\\fP és l'\n"
-#~ "expressió que indica què s'ha de registrar (vegeu syslog.conf(5) per a "
-#~ "més detalls) i\n"
-#~ "dev el dispositiu on presentar el registre."
-
-#~ msgid "edit"
-#~ msgstr "edita"
-
-#~ msgid ""
-#~ "Arguments: (arg)\n"
-#~ "\n"
-#~ " Accept/Refuse broadcasted icmp echo."
-#~ msgstr ""
-#~ "Arguments: (arg)\n"
-#~ "\n"
-#~ " Accepta/Refusa l'eco icmp difós."
-
-#~ msgid ""
-#~ "Arguments: (arg)\n"
-#~ "\n"
-#~ "Enable/Disable libsafe if libsafe is found on the system."
-#~ msgstr ""
-#~ "Arguments: (arg)\n"
-#~ "\n"
-#~ "Habilita/Inhabilita el libsafe si és que es troba al sistema."
-
-#~ msgid ""
-#~ "Arguments: (arg)\n"
-#~ "\n"
-#~ "Allow/Forbid remote root login."
-#~ msgstr ""
-#~ "Arguments: (arg)\n"
-#~ "\n"
-#~ "Permet/Impedeix l'entrada de root remota."
-
-#~ msgid "select perm file to see/edit"
-#~ msgstr "seleccioneu el fitxer perm que voleu veure/editar"
-
-#~ msgid "path"
-#~ msgstr "camí"
-
-#~ msgid ""
-#~ "Arguments: (arg)\n"
-#~ "\n"
-#~ "Enable/Disable the logging of IPv4 strange packets."
-#~ msgstr ""
-#~ "Arguments: (arg)\n"
-#~ "\n"
-#~ "Habilita/Inhabilita el registre de paquets estranys IPv4."
-
-#~ msgid ""
-#~ "Arguments: (arg, alert=1)\n"
-#~ "\n"
-#~ "Enable/Disable IP spoofing protection."
-#~ msgstr ""
-#~ "Arguments: (arg, alert=1)\n"
-#~ "\n"
-#~ "Habilita/Inhabilita la protecció contra falsejament de la IP."
-
-#~ msgid "permissions"
-#~ msgstr "permisos"
-
-#~ msgid ""
-#~ "Arguments: (arg)\n"
-#~ "\n"
-#~ "Enable/Disable msec hourly security check."
-#~ msgstr ""
-#~ "Arguments: (arg)\n"
-#~ "\n"
-#~ "Habilita/Inhabilita la comprovació horària de seguretat msec."
-
-#~ msgid "delete"
-#~ msgstr "suprimeix"
-
-#~ msgid ""
-#~ "Arguments: (arg)\n"
-#~ "\n"
-#~ "Accept/Refuse bogus IPv4 error messages."
-#~ msgstr ""
-#~ "Arguments: (arg)\n"
-#~ "\n"
-#~ "Accepta/Rebutja els missatges d'error IPv4 falsos."
-
-#~ msgid ""
-#~ "Arguments: (arg)\n"
-#~ "\n"
-#~ "Use password to authenticate users."
-#~ msgstr ""
-#~ "Arguments: (arg)\n"
-#~ "\n"
-#~ "Utilitza una contrasenya per autenticar usuaris."
-
-#
-#~ msgid "user"
-#~ msgstr "usuari"
-
-#~ msgid ""
-#~ "Standard: This is the standard security recommended for a computer that "
-#~ "will be used to connect\n"
-#~ "               to the Internet as a client.\n"
-#~ "\n"
-#~ "High:       There are already some restrictions, and more automatic "
-#~ "checks are run every night.\n"
-#~ "\n"
-#~ "Higher:    The security is now high enough to use the system as a server "
-#~ "which can accept\n"
-#~ "              connections from many clients. If your machine is only a "
-#~ "client on the Internet, you\n"
-#~ "           should choose a lower level.\n"
-#~ "\n"
-#~ "Paranoid:  This is similar to the previous level, but the system is "
-#~ "entirely closed and security\n"
-#~ "                features are at their maximum\n"
-#~ "\n"
-#~ "Security Administrator:\n"
-#~ "               If the 'Security Alerts' option is set, security alerts "
-#~ "will be sent to this user (username or\n"
-#~ "            email)"
-#~ msgstr ""
-#~ "Estàndard: Aquesta és la seguretat estàndard recomanada per a un "
-#~ "ordinador que es\n"
-#~ "           connectarà a Internet com a client.\n"
-#~ "\n"
-#~ "Alta:      Ja hi ha algunes restriccions, i cada nit s'executen més "
-#~ "comprovacions.\n"
-#~ "\n"
-#~ "Més alta:  La seguretat és prou elevada com per utilitzar el sistema com "
-#~ "a servidor\n"
-#~ "           que pugui acceptar connexions de molts clients. Si la màquina "
-#~ "és només un\n"
-#~ "           client a Internet, trieu un nivell més baix.\n"
-#~ "\n"
-#~ "Paranoica: Similar al nivell anterior, però el sistema es tanca "
-#~ "completament i les\n"
-#~ "           funcions de seguretat estan al màxim\n"
-#~ "\n"
-#~ "Administrador de seguretat:\n"
-#~ "           Si s'activa l'opció 'Alarmes de seguretat', aquest usuari les "
-#~ "rebrà (nom\n"
-#~ "           d'usuari o adreça electrònica)"
-
-#~ msgid "Expert Area"
-#~ msgstr "Àrea d'experts"
-
-#~ msgid "Wizard..."
-#~ msgstr "Auxiliar..."
-
-#~ msgid ""
-#~ "\n"
-#~ "                      DrakBackup Daemon Report\n"
-#~ "\n"
-#~ "\n"
-#~ msgstr ""
-#~ "\n"
-#~ "                      Informe del Dimoni DrakBackup\n"
-#~ "\n"
-#~ "\n"
-
-#~ msgid " / Region"
-#~ msgstr " / Regió"
-
-#~ msgid ""
-#~ "Please enter the maximum size\n"
-#~ " allowed for Drakbackup"
-#~ msgstr ""
-#~ "Si us plau, especifiqueu la mida màxima\n"
-#~ " permesa per a Drakbackup"
-
-#~ msgid "Country"
-#~ msgstr "País"
-
-#
-#~ msgid "Previous"
-#~ msgstr "Anterior"
-
-#~ msgid ""
-#~ "Options Description:\n"
-#~ "\n"
-#~ " In this step Drakbackup allow you to change:\n"
-#~ "\n"
-#~ " - The compression mode:\n"
-#~ "    \n"
-#~ "      If you check bzip2 compression, you will compress\n"
-#~ "      your data better than gzip (about 2-10 %%).\n"
-#~ "      This option is not checked by default because\n"
-#~ "      this compression mode needs more time (about 1000%% more).\n"
-#~ " \n"
-#~ " - The update mode:\n"
-#~ "\n"
-#~ "      This option will update your backup, but this\n"
-#~ "      option is not really useful because you need to\n"
-#~ "      decompress your backup before you can update it.\n"
-#~ "      \n"
-#~ " - the .backupignore mode:\n"
-#~ "\n"
-#~ "      Like with cvs, Drakbackup will ignore all references\n"
-#~ "      included in .backupignore files in each directories.\n"
-#~ "      ex: \n"
-#~ "         #> cat .backupignore\n"
-#~ "         *.o\n"
-#~ "         *~\n"
-#~ "         ...\n"
-#~ "      \n"
-#~ "\n"
-#~ msgstr ""
-#~ "Descripció de les opcions:\n"
-#~ "\n"
-#~ " En aquest pas, el Drakbackup us permet canviar:\n"
-#~ "\n"
-#~ " - El mode de compressió:\n"
-#~ "    \n"
-#~ "      Si seleccioneu compressió bzip2, comprimireu\n"
-#~ "      les dades millor que amb el gzip (entre el 2 i el 10%%).\n"
-#~ "      Aquesta opció no està activada per defecte perquè\n"
-#~ "      aquest mode de compressió necessita més temps (un 1000%% més).\n"
-#~ " \n"
-#~ " - El mode d'actualització:\n"
-#~ "\n"
-#~ "      Aquesta opció actualitzarà la còpia de seguretat,\n"
-#~ "      però de fet no és útil perquè cal descomprimir la\n"
-#~ "      còpia de seguretat abans de poder-la actualitzar.\n"
-#~ "      \n"
-#~ " - El mode .backupignore:\n"
-#~ "\n"
-#~ "      Igual que el cvs, el Drakbackup ignorarà totes les referències\n"
-#~ "      incloses en els fitxers .backupignore de cada directori.\n"
-#~ "      P.ex.: \n"
-#~ "         /*> cat .backupignore*/\n"
-#~ "         *.o\n"
-#~ "         *~\n"
-#~ "         ...\n"
-#~ "      \n"
-#~ "\n"
-
-#~ msgid ""
-#~ "Restore Description:\n"
-#~ " \n"
-#~ "Only the most recent date will be used, because with incremental \n"
-#~ "backups it is necessary to restore one by one each older backup.\n"
-#~ "\n"
-#~ "So if you don't want to restore a user please unselect all their\n"
-#~ "check boxes.\n"
-#~ "\n"
-#~ "Otherwise, you are able to select only one of these.\n"
-#~ "\n"
-#~ " - Incremental Backups:\n"
-#~ "\n"
-#~ "\tThe incremental backup is the most powerful option for \n"
-#~ "\tbackup. This option allows you to backup all your data \n"
-#~ "\tthe first time, and only the changed data afterward.\n"
-#~ "\tThen you will be able, during the restore step, to restore \n"
-#~ "\tyour data from a specified date. If you have not selected \n"
-#~ "\tthis option all old backups are deleted before each backup.    \n"
-#~ "\n"
-#~ " - Differential Backups:\n"
-#~ " \n"
-#~ "\tThe differential backup, rather than comparing changes in the\n"
-#~ "\tdata to the previous incremental backup, always compares the\n"
-#~ "\tdata to the initial base backup. This method allows one to\n"
-#~ "\trestore the base and then the differential from a certain date.\n"
-#~ "\n"
-#~ msgstr ""
-#~ "Descripció de la restauració:\n"
-#~ " \n"
-#~ "Només s'utilitzarà la data més recent, perquè les còpies incrementals\n"
-#~ "necessiten restaurar una a una totes les còpies antigues.\n"
-#~ "\n"
-#~ "Per tant, si no voleu restaurar un usuari, desactiveu-ne tots els\n"
-#~ "quadres de verificació.\n"
-#~ "\n"
-#~ "En cas contrari, només podeu seleccionar una d'aquestes opcions\n"
-#~ "\n"
-#~ " - Còpia de seguretat incremental:\n"
-#~ "\n"
-#~ "\tLa còpia incremental és l'opció més potent a l'hora de fer \n"
-#~ "\tcòpies de seguretat. Aquesta opció us permet fer una còpia \n"
-#~ "\tde seguretat de totes les dades la primera vegada, i \n"
-#~ "\tposteriorment només de les dades que s'han modificat.\n"
-#~ "\tDesprés podreu, durant el procés de restauració, \n"
-#~ "\trestaurar les dades a partir d'una data determinada.\n"
-#~ "\tSi no heu selecionat aquesta opció, totes les còpies de \n"
-#~ "\tseguretat antigues s'esborren abans de cada nova còpia.    \n"
-#~ "\n"
-#~ "- Còpia de seguretat diferencial:\n"
-#~ " \n"
-#~ "\tLa còpia diferencial, en comptes de comparar els canvis de les\n"
-#~ "\tdades amb la còpia incremental anterior, compara sempre les \n"
-#~ "\tdades amb la còpia de seguretat inicial. Aquest mètode permet\n"
-#~ "\trestaurar la base i després les diferències a partir d'una data\n"
-#~ "\tdeterminada.\n"
-#~ "\n"
-
-#
-#~ msgid "help"
-#~ msgstr "ajuda"
-
-#~ msgid ""
-#~ "This is HardDrake, a Mandrake hardware configuration tool.\n"
-#~ "Version: %s\n"
-#~ "Author: Thierry Vignaud <tvignaud\\@mandrakesoft.com>\n"
-#~ "\n"
-#~ msgstr ""
-#~ "Aquest és el HardDrake, una eina de configuració de maquinari de "
-#~ "Mandrake.\n"
-#~ "Versió: %s\n"
-#~ "Autor: Thierry Vignaud <tvignaud\\@mandrakesoft.com>\n"
-#~ "\n"
-
-#~ msgid ""
-#~ "\n"
-#~ "                      DrakBackup Report \n"
-#~ "\n"
-#~ msgstr ""
-#~ "\n"
-#~ "                      Informe del DrakBackup \n"
-#~ "\n"
+#~ msgid "when checked, owner and group won't be changed"
+#~ msgstr "si ho marqueu, no es canviaran ni el propietari ni el grup"

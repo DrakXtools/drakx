@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX 1.0\n"
-"POT-Creation-Date: 2003-09-16 13:45+0200\n"
+"POT-Creation-Date: 2003-12-03 03:09+0100\n"
 "PO-Revision-Date: 2002-09-06 00:35+0800\n"
 "Last-Translator: prabu anand <prabu_anand2000@yahoo.com>\n"
 "Language-Team: Tamil <tamilinix@yahoogroups.com>\n"
@@ -265,11 +265,6 @@ msgstr "CUPS  வடிவமைப்பு"
 msgid "Total progress"
 msgstr "சோதனை பக்கங்கள்"
 
-#: ../../lang.pm:1
-#, c-format
-msgid "Hong Kong"
-msgstr "ஹாங்காங்"
-
 #: ../../install_interactive.pm:1
 #, c-format
 msgid "Not enough free space to allocate new partitions"
@@ -341,6 +336,18 @@ msgstr " %s  கண்டுபிடிக்கப்பட்டுள்ள�
 msgid "No CD device defined!"
 msgstr ""
 
+#: ../../network/shorewall.pm:1
+#, c-format
+msgid ""
+"Please enter the name of the interface connected to the "
+"internet.              \n"
+"                \n"
+"Examples:\n"
+"                ppp+ for modem or DSL connections, \n"
+"                eth0, or eth1 for cable connection, \n"
+"                ippp+ for a isdn connection.\n"
+msgstr ""
+
 #: ../../standalone/drakbackup:1
 #, fuzzy, c-format
 msgid "\tUse .backupignore files\n"
@@ -410,15 +417,20 @@ msgstr "%s என்ற பொதி நிறுவப்படவேண்ட�
 msgid "Swiss (French layout)"
 msgstr "சுவிஷ்(பிரெஞ்சு)"
 
+#: ../../raid.pm:1
+#, c-format
+msgid "mkraid failed (maybe raidtools are missing?)"
+msgstr "mkraid தோல்வியடைந்தது(raidtools பொதி இல்ைலயா?)"
+
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "August"
 msgstr "ஆகஸ்ட்"
 
-#: ../../raid.pm:1
-#, c-format
-msgid "mkraid failed (maybe raidtools are missing?)"
-msgstr "mkraid தோல்வியடைந்தது(raidtools பொதி இல்ைலயா?)"
+#: ../../network/drakfirewall.pm:1
+#, fuzzy, c-format
+msgid "FTP server"
+msgstr "NTP சேவையகம்"
 
 #: ../../harddrake/data.pm:1
 #, c-format
@@ -496,11 +508,6 @@ msgstr "%s! பிழை நேர்ந்துள்ளது மன்னி
 #, c-format
 msgid "Configuring..."
 msgstr "வடிவமைக்கப்படுகிறது..."
-
-#: ../../standalone/drakgw:1
-#, c-format
-msgid "The setup has already been done, and it's currently enabled."
-msgstr "இணையத் தொடர்பு பரிமாறி வடிவமைக்கப்பட்டுவிட்டது"
 
 #: ../../harddrake/v4l.pm:1
 #, c-format
@@ -624,6 +631,11 @@ msgstr " \"%s\" ேநாவல் ேசவையகத்தில் அச�
 msgid "Printer Name"
 msgstr "அச்சுப்ெபாறி சாரையின் பெயர்"
 
+#: ../../../move/move.pm:1
+#, c-format
+msgid "Setting up USB key"
+msgstr ""
+
 #: ../../standalone/drakfloppy:1
 #, c-format
 msgid "Remove a module"
@@ -679,15 +691,17 @@ msgstr ""
 msgid "if needed"
 msgstr "தேவைப்பட்டால்"
 
+#: ../../standalone/drakclock:1
+#, c-format
+msgid ""
+"We need to install ntp package\n"
+" to enable Network Time Protocol"
+msgstr ""
+
 #: ../../standalone/drakbackup:1
 #, fuzzy, c-format
 msgid "Restore Failed..."
 msgstr "மறுதொடக்கம்"
-
-#: ../../standalone/harddrake2:1
-#, fuzzy, c-format
-msgid "/Autodetect _jazz drives"
-msgstr "தானியக்கத்தால் கண்டுபிடிக்கப்பட்டது"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -1034,11 +1048,6 @@ msgstr ""
 #, c-format
 msgid "512 kB"
 msgstr "512 kB கிலோபைட்"
-
-#: ../../standalone/net_monitor:1
-#, c-format
-msgid "Logs"
-msgstr ""
 
 #: ../../standalone/scannerdrake:1
 #, c-format
@@ -1485,6 +1494,11 @@ msgstr "லாட்விய"
 msgid "monthly"
 msgstr ""
 
+#: ../../../move/move.pm:1
+#, fuzzy, c-format
+msgid "Retry"
+msgstr "மறுதொடக்கம்"
+
 #: ../../standalone/drakfloppy:1
 #, c-format
 msgid "Module name"
@@ -1530,6 +1544,11 @@ msgstr ""
 msgid "the module of the GNU/Linux kernel that handles the device"
 msgstr "இயக்கி நிரலின் ஒரு கூறு"
 
+#: ../../standalone/drakclock:1
+#, fuzzy, c-format
+msgid "Is your hardware clock set to GMT?"
+msgstr "வன்ெபாருள் கடிகாரத்ைத GMT க்கு மாற்று"
+
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid "Trying to rescue partition table"
@@ -1572,6 +1591,11 @@ msgstr ""
 msgid "Name: "
 msgstr "கணினியின்பெயர்:  "
 
+#: ../../standalone/drakconnect:1
+#, c-format
+msgid "up"
+msgstr ""
+
 #: ../../Xconfig/resolution_and_depth.pm:1
 #, c-format
 msgid "16 million colors (24 bits)"
@@ -1582,7 +1606,7 @@ msgstr "16 மில்லியன் வண்ணங்கள் (24 பிட
 msgid "Allow all users"
 msgstr "அனைத்து பயனரையும் அனுமதி"
 
-#: ../../share/advertising/08-store.pl:1
+#: ../advertising/08-store.pl:1
 #, c-format
 msgid "The official MandrakeSoft Store"
 msgstr ""
@@ -1614,15 +1638,15 @@ msgstr "பயனர்"
 msgid "Do new backup before restore (only for incremental backups.)"
 msgstr ""
 
-#: ../../standalone/harddrake2:1
-#, fuzzy, c-format
-msgid "Name"
-msgstr "கணினியின்பெயர்:  "
-
 #: ../../raid.pm:1
 #, c-format
 msgid "mkraid failed"
 msgstr "mkraid தோல்வியடைந்தது"
+
+#: ../../standalone/harddrake2:1
+#, fuzzy, c-format
+msgid "Name"
+msgstr "கணினியின்பெயர்:  "
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -1829,6 +1853,17 @@ msgstr "பரிமாறிகளை செயல்படுத்து"
 #, c-format
 msgid "Printing test page(s)..."
 msgstr "சோதனை பக்கங்கள் அச்சிடப்படுகிறது"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid ""
+"Transfer successful\n"
+"You may want to verify you can login to the server with:\n"
+"\n"
+"ssh -i %s %s@%s\n"
+"\n"
+"without being prompted for a password."
+msgstr ""
 
 #: ../../fsedit.pm:1
 #, c-format
@@ -2753,6 +2788,11 @@ msgstr ""
 msgid "Can't add a partition to _formatted_ RAID md%d"
 msgstr "வகிர் _formatted_ RAID md%d உடன் சேர்க்க முடியவில்ைல"
 
+#: ../../standalone/drakclock:1
+#, fuzzy, c-format
+msgid "Network Time Protocol"
+msgstr "வலையமைப்பு அட்ைட"
+
 #: ../../Xconfig/card.pm:1
 #, c-format
 msgid ""
@@ -2953,7 +2993,7 @@ msgstr "பாலாவ்"
 msgid "level"
 msgstr "நிலை"
 
-#: ../../share/advertising/13-mdkexpert_corporate.pl:1
+#: ../advertising/13-mdkexpert_corporate.pl:1
 #, c-format
 msgid ""
 "All incidents will be followed up by a single qualified MandrakeSoft "
@@ -3314,7 +3354,7 @@ msgstr ""
 msgid "Bad package"
 msgstr "தவறான பொதி"
 
-#: ../../share/advertising/07-server.pl:1
+#: ../advertising/07-server.pl:1
 #, c-format
 msgid ""
 "Transform your computer into a powerful Linux server: Web server, mail, "
@@ -3570,7 +3610,7 @@ msgstr "பகைவர்களே வருக"
 msgid "Module options:"
 msgstr "கூறு அமைப்புகள்"
 
-#: ../../share/advertising/11-mnf.pl:1
+#: ../advertising/11-mnf.pl:1
 #, c-format
 msgid "Secure your networks with the Multi Network Firewall"
 msgstr ""
@@ -3651,6 +3691,11 @@ msgstr "எலி"
 #, c-format
 msgid "not enough room in /boot"
 msgstr "/boot அடைவில் போதிய இடமில்ைல"
+
+#: ../../install_steps_gtk.pm:1
+#, c-format
+msgid "trying to promote %s"
+msgstr ""
 
 #: ../../lang.pm:1
 #, c-format
@@ -3797,6 +3842,11 @@ msgstr ""
 msgid "Saudi Arabia"
 msgstr "சவுதி அேரபியா"
 
+#: ../../services.pm:1
+#, c-format
+msgid "Internet"
+msgstr "இணையம்"
+
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid "Continue anyway?"
@@ -3814,11 +3864,6 @@ msgstr ""
 #, c-format
 msgid "Printer"
 msgstr "அச்சுப்ெபாறி"
-
-#: ../../services.pm:1
-#, c-format
-msgid "Internet"
-msgstr "இணையம்"
 
 #: ../../standalone/service_harddrake:1
 #, c-format
@@ -3887,6 +3932,11 @@ msgstr ""
 #, c-format
 msgid "Restarting printing system..."
 msgstr "அச்சுபொறி மறுதொடக்கம் செய்யப்படுகிறது..."
+
+#: ../../../move/tree/mdk_totem:1
+#, c-format
+msgid "You can only run with no CDROM support"
+msgstr ""
 
 #: ../../modules/interactive.pm:1
 #, c-format
@@ -4096,15 +4146,15 @@ msgstr "ISA / PCMCIA"
 msgid "About"
 msgstr "முறித்து விடு"
 
-#: ../../network/network.pm:1
-#, c-format
-msgid "Proxies configuration"
-msgstr "பினாமி வடிவமைப்பு"
-
 #: ../../mouse.pm:1
 #, c-format
 msgid "GlidePoint"
 msgstr "கிளைட்பாயின்ட்-GlidePoint"
+
+#: ../../network/network.pm:1
+#, c-format
+msgid "Proxies configuration"
+msgstr "பினாமி வடிவமைப்பு"
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -4243,6 +4293,11 @@ msgstr "ஏற்றப் புள்ளிகள்  / உடன் மட்
 msgid "Choose your CD/DVD device"
 msgstr "தயவுசெய்து உங்கள் விசைப்பலகை இட அமைவைத் தேர்வு செய்க"
 
+#: ../../network/drakfirewall.pm:1
+#, fuzzy, c-format
+msgid "CUPS server"
+msgstr "CUPS சேவையக IP"
+
 #: ../../standalone/logdrake:1
 #, fuzzy, c-format
 msgid "Postfix Mail Server"
@@ -4258,7 +4313,7 @@ msgstr "சேமிக்காமல் வெளிச்ெசல்"
 msgid "Yemen"
 msgstr "ேயமன்"
 
-#: ../../share/advertising/11-mnf.pl:1
+#: ../advertising/11-mnf.pl:1
 #, c-format
 msgid "This product is available on the MandrakeStore Web site."
 msgstr ""
@@ -4267,6 +4322,31 @@ msgstr ""
 #, c-format
 msgid "=> There are many things to choose from (%s).\n"
 msgstr "=> தேர்வுச் செய்வதற்கு பல உள்ளன(%s).\n"
+
+#: ../../standalone/drakclock:1
+#, c-format
+msgid "GMT - DrakClock"
+msgstr ""
+
+#: ../../../move/move.pm:1
+#, c-format
+msgid ""
+"An error occurred:\n"
+"\n"
+"\n"
+"%s\n"
+"\n"
+"This may come from corrupted system configuration files\n"
+"on the USB key, in this case removing them and then\n"
+"rebooting Mandrake Move would fix the problem. To do\n"
+"so, click on the corresponding button.\n"
+"\n"
+"\n"
+"You may also want to reboot and remove the USB key, or\n"
+"examine its contents under another OS, or even have\n"
+"a look at log files in console #3 and #4 to try to\n"
+"guess what's happening."
+msgstr ""
 
 #: ../../steps.pm:1
 #, c-format
@@ -4492,6 +4572,11 @@ msgstr "டிரேக்பயனர்"
 #, c-format
 msgid "Which partition do you want to use for Linux4Win?"
 msgstr "எந்த வகிற்றில் நீங்கள் வின்ேடாஸ்லினக்ைஸ பயன்படுத்த விரும்புகிறீர்கள்?"
+
+#: ../../install_steps_gtk.pm:1
+#, fuzzy, c-format
+msgid "due to missing %s"
+msgstr "kdesu இல்ைல"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -5016,7 +5101,7 @@ msgstr ""
 msgid "Started on boot"
 msgstr "தொடங்கும்போதே துவக்கிவிடு"
 
-#: ../../share/advertising/12-mdkexpert.pl:1
+#: ../advertising/12-mdkexpert.pl:1
 #, c-format
 msgid ""
 "Join the MandrakeSoft support teams and the Linux Community online to share "
@@ -5327,11 +5412,6 @@ msgid ""
 msgstr ""
 "உருகருக்களை முனையத்தில்\n"
 "காட்டு"
-
-#: ../../standalone/net_monitor:1
-#, c-format
-msgid "Statistics"
-msgstr ""
 
 #: ../../printer/cups.pm:1
 #, c-format
@@ -6119,7 +6199,7 @@ msgid ""
 "number generation."
 msgstr ""
 
-#: ../../share/advertising/07-server.pl:1
+#: ../advertising/07-server.pl:1
 #, c-format
 msgid "Turn your computer into a reliable server"
 msgstr "உங்கள் கணினியை ஒர் அற்புதமாக சேவையகமாக மாற்றுங்கள்"
@@ -6134,6 +6214,11 @@ msgstr ""
 msgid " (driver %s)"
 msgstr "(இயக்க நிரல் %s)"
 
+#: ../../services.pm:1
+#, fuzzy, c-format
+msgid "Start when requested"
+msgstr "தொடக்கபட்டி"
+
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid ""
@@ -6147,11 +6232,6 @@ msgstr ""
 #, c-format
 msgid "I don't know"
 msgstr "எனக்கு தெரியாது"
-
-#: ../../services.pm:1
-#, fuzzy, c-format
-msgid "Start when requested"
-msgstr "தொடக்கபட்டி"
 
 #: ../../printer/main.pm:1
 #, c-format
@@ -6356,6 +6436,11 @@ msgstr ""
 "உங்கள் %s வருடி வடிவமைக்கப்பட வேண்டும்\n"
 "அதற்கு டிரேக்அச்சு நிரலை பயன்படுத்துங்கள்"
 
+#: ../../../move/move.pm:1
+#, fuzzy, c-format
+msgid "Key isn't writable"
+msgstr "நிறுவப்படவில்ைல"
+
 #: ../../lang.pm:1
 #, c-format
 msgid "Bangladesh"
@@ -6400,15 +6485,15 @@ msgstr ""
 msgid "Set the root umask."
 msgstr "கடவுச்ெசால் ஏதுமில்ைல"
 
-#: ../../network/modem.pm:1 ../../standalone/drakconnect:1
-#, c-format
-msgid "Script-based"
-msgstr "கட்டளைத்ெதாடர் வழியாக"
-
 #: ../../install_any.pm:1 ../../partition_table.pm:1
 #, c-format
 msgid "Error reading file %s"
 msgstr "%s என்ற கோப்ேபா படிப்பதில் பிழை நேர்ந்துள்ளது"
+
+#: ../../network/modem.pm:1 ../../standalone/drakconnect:1
+#, c-format
+msgid "Script-based"
+msgstr "கட்டளைத்ெதாடர் வழியாக"
 
 #: ../../harddrake/v4l.pm:1
 #, c-format
@@ -6478,17 +6563,6 @@ msgstr ""
 #, c-format
 msgid "Domain Authentication Required"
 msgstr "வின்கள நல்குரிமை வேண்டும்"
-
-#: ../../standalone/drakTermServ:1
-#, c-format
-msgid ""
-"\n"
-"\n"
-" Thanks:\n"
-"\t- LTSP Project http://www.ltsp.org\n"
-"\t- Michael Brown <mbrown\\@fensystems.co.uk>\n"
-"\n"
-msgstr ""
 
 #: ../../security/level.pm:1
 #, c-format
@@ -7118,15 +7192,15 @@ msgstr "Yaboot"
 msgid "Logitech CC Series with Wheel emulation"
 msgstr "லாஜிடெக் CC வகை எலி"
 
-#: ../../standalone/drakboot:1
-#, c-format
-msgid "Splash selection"
-msgstr "தொடங்குத்திரை தேர்வு"
-
 #: ../../partition_table.pm:1
 #, c-format
 msgid "Extended partition not supported on this platform"
 msgstr ""
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Splash selection"
+msgstr "தொடங்குத்திரை தேர்வு"
 
 #: ../../network/isdn.pm:1
 #, c-format
@@ -7182,6 +7256,11 @@ msgstr ""
 msgid "Printer default settings"
 msgstr "அச்சுபொறியின் மாடலை தேர்வு"
 
+#: ../../mouse.pm:1
+#, c-format
+msgid "Generic PS2 Wheel Mouse"
+msgstr "பொதுவான PS2 சக்கர எலி"
+
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid ""
@@ -7189,11 +7268,6 @@ msgid ""
 "memory page level, thus enabling the processor to prevent unchecked kernel "
 "accesses to user memory (aka this is a bug guard)"
 msgstr ""
-
-#: ../../mouse.pm:1
-#, c-format
-msgid "Generic PS2 Wheel Mouse"
-msgstr "பொதுவான PS2 சக்கர எலி"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -7337,6 +7411,11 @@ msgstr "கொரிய விசைப்பலகை"
 msgid "Not connected"
 msgstr "இணைக்கப்படவில்ைல"
 
+#: ../../standalone/net_monitor:1
+#, fuzzy, c-format
+msgid "No internet connection configured"
+msgstr "இணையத்ெதாடர்பு  வடிவமைக்கப்பாளன்"
+
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Greek"
@@ -7351,17 +7430,6 @@ msgstr "ெசயின்ட் கிட்ஸ் ெநவிஸ்"
 #, fuzzy, c-format
 msgid "Generic 3 Button Mouse with Wheel emulation"
 msgstr "பொதுவான 3 பொத்தான் எலி"
-
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid ""
-"Transfer successful\n"
-"You may want to verify you can login to the server with:\n"
-"\n"
-"ssh -i %s %s\\@%s\n"
-"\n"
-"without being prompted for a password."
-msgstr ""
 
 #: ../../any.pm:1
 #, c-format
@@ -7584,7 +7652,7 @@ msgid ""
 "You can also type a new name or skip this printer."
 msgstr ""
 
-#: ../../share/advertising/12-mdkexpert.pl:1
+#: ../advertising/12-mdkexpert.pl:1
 #, c-format
 msgid ""
 "Find the solutions of your problems via MandrakeSoft's online support "
@@ -7649,6 +7717,22 @@ msgstr "கிரிகிஸ்தான்"
 #, fuzzy, c-format
 msgid "Multi-function device on USB"
 msgstr "பலமுனை சாதனம் USB துறையில் உள்ளது"
+
+#: ../../../move/move.pm:1
+#, c-format
+msgid ""
+"We didn't detect any USB key on your system. If you\n"
+"plug in an USB key now, Mandrake Move will have the ability\n"
+"to transparently save the data in your home directory and\n"
+"system wide configuration, for next boot on this computer\n"
+"or another one. Note: if you plug in a key now, wait several\n"
+"seconds before detecting again.\n"
+"\n"
+"\n"
+"You may also proceed without an USB key - you'll still be\n"
+"able to use Mandrake Move as a normal live Mandrake\n"
+"Operating System."
+msgstr ""
 
 #: ../../help.pm:1
 #, fuzzy, c-format
@@ -7740,15 +7824,15 @@ msgstr ""
 msgid "Other Media"
 msgstr "எதிரியல்"
 
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "Backup system files"
-msgstr ""
-
 #: ../../mouse.pm:1
 #, c-format
 msgid "Logitech MouseMan+"
 msgstr "லாஜிடெக்- Logitech MouseMan+"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "Backup system files"
+msgstr ""
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -7811,6 +7895,11 @@ msgstr "வகிர்தலை தனிப்பயனாக்கு"
 msgid "Please choose your type of mouse."
 msgstr "தயவுசெய்து, உங்கள் எலியின் வகையைத் தேர்வுச் செய்யுங்கள் "
 
+#: ../../services.pm:1
+#, c-format
+msgid "running"
+msgstr "இயங்குகிறது"
+
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "class of hardware device"
@@ -7827,11 +7916,6 @@ msgstr ""
 #, c-format
 msgid "United Kingdom"
 msgstr "பிரிட்டன்"
-
-#: ../../services.pm:1
-#, c-format
-msgid "running"
-msgstr "இயங்குகிறது"
 
 #: ../../lang.pm:1
 #, c-format
@@ -7875,7 +7959,7 @@ msgstr "ெசனகல்"
 msgid "Command line"
 msgstr "களத்தின் பெயர்"
 
-#: ../../share/advertising/08-store.pl:1
+#: ../advertising/08-store.pl:1
 #, c-format
 msgid ""
 "Our full range of Linux solutions, as well as special offers on products and "
@@ -7927,6 +8011,17 @@ msgstr "இடமாற்று"
 #, fuzzy, c-format
 msgid "Custom settings"
 msgstr "வகிர்தலை தனிப்பயனாக்கு"
+
+#: ../../../move/move.pm:1
+#, c-format
+msgid ""
+"The USB key seems to have write protection enabled, but we can't safely\n"
+"unplug it now.\n"
+"\n"
+"\n"
+"Click the button to reboot the machine, unplug it, remove write protection,\n"
+"plug the key again, and launch Mandrake Move again."
+msgstr ""
 
 #: ../../standalone/drakbackup:1
 #, fuzzy, c-format
@@ -8030,7 +8125,7 @@ msgstr "எந்த வலையமைப்பு அட்ைட உங்க
 msgid "Photo memory card access on your HP multi-function device"
 msgstr ""
 
-#: ../../share/advertising/09-mdksecure.pl:1
+#: ../advertising/09-mdksecure.pl:1
 #, c-format
 msgid ""
 "Enhance your computer performance with the help of a selection of partners "
@@ -8150,6 +8245,11 @@ msgstr ""
 #, c-format
 msgid "Exit install"
 msgstr "நிறுவல் நிரலை விட்டு வெளிச்ெசல்"
+
+#: ../../../move/move.pm:1
+#, c-format
+msgid "Need a key to save your data"
+msgstr ""
 
 #: ../../standalone/drakgw:1
 #, c-format
@@ -8327,11 +8427,6 @@ msgstr "ரஷிய(ஒலியமைப்பு)"
 msgid "dhcpd Config..."
 msgstr "dhcpd  வடிவமைக்கப்பு"
 
-#: ../../standalone/drakgw:1
-#, c-format
-msgid "The setup has already been done, but it's currently disabled."
-msgstr "இணையத் தொடர்பு பரிமாறி வடிவமைக்கப்பட்டுவிட்டது.ஆனால், தற்ேபாது முடக்கப்பட்டுள்ளது"
-
 #: ../../any.pm:1
 #, c-format
 msgid "LILO/grub Installation"
@@ -8505,6 +8600,11 @@ msgstr ""
 msgid "Choose an X server"
 msgstr "X-பரிமாறியைத் தேர்வு செய்"
 
+#: ../../../move/tree/mdk_totem:1
+#, c-format
+msgid "Copying to memory to allow removing the CDROM"
+msgstr ""
+
 #: ../../install_interactive.pm:1
 #, c-format
 msgid "Swap partition size in MB: "
@@ -8552,7 +8652,7 @@ msgstr "தானியக்க வடிவமைப்பு"
 msgid "Barbados"
 msgstr "பார்படாஸ்"
 
-#: ../../share/advertising/02-community.pl:1
+#: ../advertising/02-community.pl:1
 #, c-format
 msgid ""
 "Want to know more and to contribute to the Open Source community? Get "
@@ -8713,15 +8813,6 @@ msgstr ""
 msgid "First Time Wizard"
 msgstr "டிரேக்பதிவு "
 
-#: ../../install_steps.pm:1
-#, c-format
-msgid ""
-"An error occurred, but I don't know how to handle it nicely.\n"
-"Continue at your own risk."
-msgstr ""
-"பிழை நேர்ந்துள்ளது மன்னிக்கவும் எனக்கு என்ன செய்வதென்று தெரியவில்ைல\n"
-"தொடர்ந்து செல்வது உங்கள் பொறுப்பு"
-
 #: ../../lang.pm:1
 #, fuzzy, c-format
 msgid "Taiwan"
@@ -8736,6 +8827,15 @@ msgstr "பாகிஸ்தான்"
 #, c-format
 msgid "please wait, parsing file: %s"
 msgstr ""
+
+#: ../../install_steps.pm:1 ../../../move/move.pm:1
+#, c-format
+msgid ""
+"An error occurred, but I don't know how to handle it nicely.\n"
+"Continue at your own risk."
+msgstr ""
+"பிழை நேர்ந்துள்ளது மன்னிக்கவும் எனக்கு என்ன செய்வதென்று தெரியவில்ைல\n"
+"தொடர்ந்து செல்வது உங்கள் பொறுப்பு"
 
 #: ../../install_steps_gtk.pm:1
 #, fuzzy, c-format
@@ -8911,6 +9011,11 @@ msgstr ""
 "தயவுசெய்து உங்கள் பொதி தேர்ைவ ஒரு நெகிழ்வட்டில் சேமிக்கவும்.\n"
 "இவ்வாறு சேமிக்கும் முறை தானியங்கி-நிறுவலை ஒத்து இருக்கும்"
 
+#: ../../../move/tree/mdk_totem:1
+#, fuzzy, c-format
+msgid "No CDROM support"
+msgstr "வாெனாலி ஆதரவு"
+
 #: ../../standalone/drakxtv:1
 #, c-format
 msgid "China (broadcast)"
@@ -8948,7 +9053,7 @@ msgstr ""
 "%s என்ற இயக்க நிரல் ஏற்றத்தில் பிழை நேர்ந்துள்ளது\n"
 "நீங்கள் வேறு விருப்பத்ேதர்வுகளை தெரிவித்து பார்க்கவும்"
 
-#: ../../share/advertising/01-thanks.pl:1
+#: ../advertising/01-thanks.pl:1
 #, c-format
 msgid "Welcome to the Open Source world."
 msgstr "திறந்த மூலநிரல் உலகுக்கு வருக"
@@ -9169,6 +9274,11 @@ msgstr "மற்ற துறைகளை"
 msgid "number of capture buffers for mmap'ed capture"
 msgstr "number of capture buffers for mmap'ed capture"
 
+#: ../../network/adsl.pm:1
+#, fuzzy, c-format
+msgid " - detected"
+msgstr "கண்டுபிடிக்கப்பட்டுள்ளது"
+
 #: ../../harddrake/data.pm:1
 #, c-format
 msgid "SMBus controllers"
@@ -9269,6 +9379,11 @@ msgstr ""
 msgid "Restore"
 msgstr "மறுதொடக்கம்"
 
+#: ../../standalone/drakclock:1
+#, fuzzy, c-format
+msgid "Server:"
+msgstr "சேவையகம்: "
+
 #: ../../security/help.pm:1
 #, c-format
 msgid "if set to yes, check if the network devices are in promiscuous mode."
@@ -9278,6 +9393,11 @@ msgstr ""
 #, c-format
 msgid "Looking for available packages..."
 msgstr "இருக்கும் பொதிகள் பார்ைவயிடப்படுகின்றன"
+
+#: ../../../move/move.pm:1
+#, fuzzy, c-format
+msgid "Please wait, setting up system configuration files on USB key..."
+msgstr "உங்களுக்கு தேவையான பாதுகாப்பு நிலையைத் தேர்வுச் செய்யவும்"
 
 #: ../../any.pm:1
 #, c-format
@@ -9396,15 +9516,15 @@ msgid ""
 "per second)"
 msgstr ""
 
-#: ../../standalone/printerdrake:1
-#, fuzzy, c-format
-msgid "Mandrake Linux Printer Management Tool"
-msgstr "மாண்ட்ேரக் லினக்ஸ் நிறுவல்  %s"
-
 #: ../../pkgs.pm:1
 #, c-format
 msgid "important"
 msgstr "முக்கியமானவை"
+
+#: ../../standalone/printerdrake:1
+#, fuzzy, c-format
+msgid "Mandrake Linux Printer Management Tool"
+msgstr "மாண்ட்ேரக் லினக்ஸ் நிறுவல்  %s"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -9472,6 +9592,11 @@ msgstr "பயனர்கள்"
 #, c-format
 msgid "Preparing bootloader..."
 msgstr "துவங்குநிரலை உருவாக்குகிறேன்..."
+
+#: ../../../move/move.pm:1
+#, c-format
+msgid "Enter your user information, password will be used for screensaver"
+msgstr ""
 
 #: ../../network/network.pm:1
 #, c-format
@@ -9893,15 +10018,15 @@ msgstr "இணையத்ைத பயன்படுத்த தொடர்�
 msgid "Authentication LDAP"
 msgstr "நல்குாிமை LDAP"
 
+#: ../../install_steps_gtk.pm:1
+#, c-format
+msgid "in order to keep %s"
+msgstr ""
+
 #: ../../harddrake/sound.pm:1
 #, c-format
 msgid "Let me pick any driver"
 msgstr "நாேன இயக்கு நிரலை ேதர்ந்ெதடுக்கிேறன்"
-
-#: ../../standalone/net_monitor:1
-#, fuzzy, c-format
-msgid "Profile "
-msgstr "பயனர்குறிப்பு: "
 
 #: ../../standalone/net_monitor:1
 #, c-format
@@ -10000,9 +10125,9 @@ msgstr "கரு வெளியீடு"
 #: ../../standalone/drakautoinst:1 ../../standalone/drakbackup:1
 #: ../../standalone/drakboot:1 ../../standalone/drakconnect:1
 #: ../../standalone/drakfloppy:1 ../../standalone/drakfont:1
-#: ../../standalone/drakgw:1 ../../standalone/drakperm:1
-#: ../../standalone/draksec:1 ../../standalone/logdrake:1
-#: ../../standalone/mousedrake:1 ../../standalone/net_monitor:1
+#: ../../standalone/drakperm:1 ../../standalone/draksec:1
+#: ../../standalone/logdrake:1 ../../standalone/mousedrake:1
+#: ../../standalone/net_monitor:1
 #, c-format
 msgid "Cancel"
 msgstr "தவிர்"
@@ -10152,15 +10277,6 @@ msgstr "இத்தாலிய "
 msgid "Basic"
 msgstr "தொடக்க"
 
-#: ../../standalone/drakTermServ:1
-#, c-format
-msgid ""
-"\n"
-" Copyright (C) 2002 by MandrakeSoft \n"
-"\tStew Benedict sbenedict\\@mandrakesoft.com\n"
-"\n"
-msgstr ""
-
 #: ../../install_messages.pm:1
 #, fuzzy, c-format
 msgid "http://www.mandrakelinux.com/en/92errata.php3"
@@ -10181,10 +10297,10 @@ msgstr ""
 msgid "Card IO"
 msgstr "அட்ைடயின் உள்/வெளி IO"
 
-#: ../../standalone/drakperm:1
-#, c-format
-msgid "when checked, owner and group won't be changed"
-msgstr ""
+#: ../../network/drakfirewall.pm:1
+#, fuzzy, c-format
+msgid "Samba server"
+msgstr "ஒலிப் பரிமாறி"
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -10263,6 +10379,11 @@ msgstr ""
 msgid "access to compilation tools"
 msgstr "உருவாக்கக் கருவிகளுக்கான அனுமதி"
 
+#: ../../standalone/net_monitor:1
+#, c-format
+msgid "Global statistics"
+msgstr ""
+
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "Please select data to restore..."
@@ -10280,6 +10401,11 @@ msgstr "எதொடங்கல் "
 #, c-format
 msgid "Standard test page"
 msgstr "சாதரன சோதனை பக்கம்"
+
+#: ../../standalone/drakclock:1
+#, fuzzy, c-format
+msgid "Time Zone"
+msgstr "கால மண்டலம்"
 
 #: ../../diskdrake/hd_gtk.pm:1 ../../diskdrake/interactive.pm:1
 #, c-format
@@ -10366,6 +10492,15 @@ msgstr ""
 "அல்லது நுழைவு சாவியை தட்டி தொடரவும்\n"
 "உங்கள் தேர்வு? "
 
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"\n"
+" Copyright (C) 2002 by MandrakeSoft \n"
+"\tStew Benedict sbenedict@mandrakesoft.com\n"
+"\n"
+msgstr ""
+
 #: ../../standalone/draksplash:1
 #, fuzzy, c-format
 msgid "Save theme"
@@ -10391,15 +10526,15 @@ msgstr "டிரேக்வலையமைப்பு மாயாவி"
 msgid "Removable media automounting"
 msgstr "கழற்று ஊடகங்கள் தானேற்றம்"
 
-#: ../../standalone/drakbackup:1
-#, fuzzy, c-format
-msgid "Enter the directory to save:"
-msgstr "உங்களுக்கு தேவையான பாதுகாப்பு நிலையைத் தேர்வுச் செய்யவும்"
-
 #: ../../services.pm:1
 #, c-format
 msgid "Printing"
 msgstr "அச்சு மேலாளர்"
+
+#: ../../standalone/drakbackup:1
+#, fuzzy, c-format
+msgid "Enter the directory to save:"
+msgstr "உங்களுக்கு தேவையான பாதுகாப்பு நிலையைத் தேர்வுச் செய்யவும்"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -10521,7 +10656,7 @@ msgstr "கென்ஸிங்க்டன் சிந்திக்கு�
 msgid "Configuration of a remote printer"
 msgstr "தொலைவு அச்சுப்ெபாறியின் வடிவமைப்பு"
 
-#: ../../share/advertising/13-mdkexpert_corporate.pl:1
+#: ../advertising/13-mdkexpert_corporate.pl:1
 #, c-format
 msgid "An online platform to respond to enterprise support needs."
 msgstr ""
@@ -10666,14 +10801,21 @@ msgstr ""
 msgid "Configure Local Area Network..."
 msgstr "LAN-ஐ  வடிவமைக்கவும்..."
 
-#: ../../security/l10n.pm:1
+#: ../../../move/move.pm:1
 #, c-format
-msgid "Verify checksum of the suid/sgid files"
+msgid ""
+"The USB key seems to have write protection enabled. Please\n"
+"unplug it, remove write protection, and then plug it again."
 msgstr ""
 
 #: ../../services.pm:1
 #, c-format
 msgid "Launch the sound system on your machine"
+msgstr ""
+
+#: ../../security/l10n.pm:1
+#, c-format
+msgid "Verify checksum of the suid/sgid files"
 msgstr ""
 
 #: ../../security/l10n.pm:1
@@ -10980,6 +11122,11 @@ msgstr "இந்த பொதியை.நீக்க முடியாது
 msgid "Loading from floppy"
 msgstr "நெகிழ்வட்டில் இருந்து ஏற்றுப்படுகிறது"
 
+#: ../../standalone/drakclock:1
+#, c-format
+msgid "Timezone - DrakClock"
+msgstr ""
+
 #: ../../security/help.pm:1
 #, c-format
 msgid "Enable/Disable the logging of IPv4 strange packets."
@@ -11124,6 +11271,11 @@ msgstr ""
 "தயவுசெய்து உங்கள் கணினியை வடிவமைக்க மாண்ட்ேரக் உதவிநூல்களை \n"
 "படிக்கவும்"
 
+#: ../../standalone/drakclock:1
+#, c-format
+msgid "Enable Network Time Protocol"
+msgstr ""
+
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "paranoid"
@@ -11206,7 +11358,7 @@ msgstr "வலையமைப்புக் கருவிகளுக்க�
 msgid "Firmware-Upload for HP LaserJet 1000"
 msgstr ""
 
-#: ../../share/advertising/03-software.pl:1
+#: ../advertising/03-software.pl:1
 #, c-format
 msgid ""
 "And, of course, push multimedia to its limits with the very latest software "
@@ -11263,15 +11415,15 @@ msgstr "தொடங்கு வரைமுறை"
 msgid "LVM-disks %s\n"
 msgstr "LVM-தட்டுகள்%s\n"
 
-#: ../../diskdrake/interactive.pm:1
-#, c-format
-msgid "The package %s is needed. Install it?"
-msgstr "%s என்ற பொதி நிறுவப்படவேண்டும். ஓப்புதல் தரவும்?"
-
 #: ../../services.pm:1
 #, c-format
 msgid "On boot"
 msgstr "தொடங்குதலின் போது"
+
+#: ../../diskdrake/interactive.pm:1
+#, c-format
+msgid "The package %s is needed. Install it?"
+msgstr "%s என்ற பொதி நிறுவப்படவேண்டும். ஓப்புதல் தரவும்?"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -11287,6 +11439,11 @@ msgstr "லாட்விய"
 #, c-format
 msgid "Please make a backup of your data first"
 msgstr "தயவுசெய்து உங்களுக்கு தேவையான அனைத்ைதயும் காப்ெபடுத்துக்ெகாள்ளவும்"
+
+#: ../../harddrake/data.pm:1
+#, c-format
+msgid "ADSL adapters"
+msgstr ""
 
 #: ../../install_interactive.pm:1
 #, c-format
@@ -11313,7 +11470,7 @@ msgstr "தேவைப்பட்டால்"
 msgid "Remove List"
 msgstr "நுழைவிடத்ைத நீக்கு"
 
-#: ../../share/advertising/05-desktop.pl:1
+#: ../advertising/05-desktop.pl:1
 #, c-format
 msgid "A customizable environment"
 msgstr ""
@@ -11537,6 +11694,13 @@ msgstr ""
 #: ../../network/tools.pm:1
 #, c-format
 msgid "Firmware copy succeeded"
+msgstr ""
+
+#: ../../../move/tree/mdk_totem:1
+#, c-format
+msgid ""
+"You can't use another CDROM when the following programs are running: \n"
+"%s"
 msgstr ""
 
 #: ../../security/help.pm:1
@@ -11963,6 +12127,11 @@ msgid ""
 "line, e. g. \"%s <file>\". "
 msgstr ""
 
+#: ../../standalone/drakclock:1
+#, fuzzy, c-format
+msgid "DrakClock"
+msgstr "காப்ெபடுத்தல்"
+
 #: ../../modules/interactive.pm:1
 #, c-format
 msgid ""
@@ -11991,21 +12160,6 @@ msgid ""
 "\n"
 "- Daemon, %s via:\n"
 msgstr ""
-
-#: ../../standalone/drakgw:1
-#, c-format
-msgid ""
-"Welcome to the Internet Connection Sharing utility!\n"
-"\n"
-"%s\n"
-"\n"
-"Click on Configure to launch the setup wizard."
-msgstr ""
-"இணையத் தொடர்பு பரிமாறி வடிவமைப்புக்கு வாருங்கள்!\n"
-"\n"
-"%s\n"
-"\n"
-"வடிவமை என்ற பொத்தானை அழுத்தினால் இதற்கான மாயாவியைத் துவக்கு"
 
 #: ../../lang.pm:1
 #, c-format
@@ -12181,6 +12335,11 @@ msgstr ""
 msgid "Christmas Island"
 msgstr "கிருஸ்துமஸ் தீவுகள்"
 
+#: ../../mouse.pm:1
+#, fuzzy, c-format
+msgid "Automatic"
+msgstr "தன்னியக்க IP"
+
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Installation of bootloader failed. The following error occured:"
@@ -12282,11 +12441,6 @@ msgstr "மாற்று"
 #, c-format
 msgid "Set root password and network authentication methods"
 msgstr ""
-
-#: ../../standalone/drakgw:1
-#, c-format
-msgid "Internet Connection Sharing configuration"
-msgstr "இணையத் தொடர்பு பரிமாறி வடிவமைப்பு"
 
 #: ../../ugtk2.pm:1
 #, c-format
@@ -12532,6 +12686,11 @@ msgstr " துவங்குவட்ைட உருவாக்க நெக
 msgid "LILO with text menu"
 msgstr "உரைவழி லிலோ"
 
+#: ../../standalone/net_monitor:1
+#, c-format
+msgid "instantaneous"
+msgstr ""
+
 #: ../../network/drakfirewall.pm:1
 #, c-format
 msgid "Everything (no firewall)"
@@ -12712,6 +12871,11 @@ msgstr "பயனருக்கு ஓர் பெயர் கொடுக்
 msgid "Enable CD Boot?"
 msgstr "சிடியில் இருந்து தொடங்கலாமா?"
 
+#: ../../../move/move.pm:1
+#, c-format
+msgid "Simply reboot"
+msgstr ""
+
 #: ../../interactive/stdio.pm:1
 #, c-format
 msgid " enter `void' for void entry"
@@ -12803,15 +12967,15 @@ msgstr ""
 "actually install on your machine a time server which can be optionally used\n"
 "by other machines on your local network."
 
-#: ../../install_steps_interactive.pm:1
-#, c-format
-msgid "Which is your timezone?"
-msgstr "நீங்கள் எந்த கால மண்டலத்ைதச் சேர்ந்தவர்?"
-
 #: ../../standalone/drakbackup:1
 #, fuzzy, c-format
 msgid "Can't create log file!"
 msgstr "%s கோப்பில் எழுத முடியவில்ைல"
+
+#: ../../install_steps_interactive.pm:1 ../../standalone/drakclock:1
+#, c-format
+msgid "Which is your timezone?"
+msgstr "நீங்கள் எந்த கால மண்டலத்ைதச் சேர்ந்தவர்?"
 
 #: ../../standalone/drakbackup:1
 #, fuzzy, c-format
@@ -12858,6 +13022,11 @@ msgstr "ெமாசம்பிக்"
 msgid "Icon"
 msgstr "குறும்படம்"
 
+#: ../../../move/tree/mdk_totem:1
+#, fuzzy, c-format
+msgid "Kill those programs"
+msgstr "X நிரல்களுக்கான அனுமதி"
+
 #: ../../standalone/drakbackup:1
 #, fuzzy, c-format
 msgid "Please choose what you want to backup"
@@ -12893,7 +13062,7 @@ msgstr "கூற்ைறச் சேர்"
 msgid "Chunk size %s\n"
 msgstr "வெட்டு அளவு%s\n"
 
-#: ../../share/advertising/02-community.pl:1
+#: ../advertising/02-community.pl:1
 #, c-format
 msgid "Build the future of Linux!"
 msgstr ""
@@ -13026,7 +13195,7 @@ msgstr ""
 "act as a server, or if you were not successful in getting the display\n"
 "configured."
 
-#: ../../share/advertising/13-mdkexpert_corporate.pl:1
+#: ../advertising/13-mdkexpert_corporate.pl:1
 #, fuzzy, c-format
 msgid "MandrakeExpert Corporate"
 msgstr "மாண்ட்ேரக்இணைய"
@@ -13064,6 +13233,11 @@ msgstr "அச்சுபொறியின் மாடலை தேர்வ�
 msgid ""
 "After changing type of partition %s, all data on this partition will be lost"
 msgstr " %s, என்ற வகிர் அதன் வகையை மாற்றியவுடன், அதலிருந்த தகவல் அனைத்ைதயும் இழந்துவிடும்"
+
+#: ../../harddrake/data.pm:1
+#, fuzzy, c-format
+msgid "ISDN adapters"
+msgstr "ISDN அட்ைட"
 
 #: ../../common.pm:1
 #, c-format
@@ -13334,6 +13508,11 @@ msgid "Plug'n Play probing failed. Please select the correct monitor"
 msgstr ""
 "தானாக தேடிய முறை வெற்றிபெறவில்ைல.தயவுசெய்து சரியான  திரையகத்ைத.தேர்ந்ெதடுக்கவும்"
 
+#: ../../../move/move.pm:1
+#, c-format
+msgid "Detect again USB key"
+msgstr ""
+
 #: ../../services.pm:1
 #, c-format
 msgid "Services and deamons"
@@ -13375,7 +13554,7 @@ msgstr "சேவைகளை வடிவமையுங்கள்"
 msgid "Slovakian (QWERTZ)"
 msgstr "சுலோவெனிய(குவார்ட்ஸ்)"
 
-#: ../../share/advertising/06-development.pl:1
+#: ../advertising/06-development.pl:1
 #, c-format
 msgid ""
 "To modify and to create in different languages such as Perl, Python, C and C+"
@@ -13436,6 +13615,11 @@ msgstr "அல்ஜிரியா"
 #, fuzzy, c-format
 msgid "Restore Via Network"
 msgstr "மறுதொடக்கம்"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "Use tar and bzip2 (rather than tar and gzip)"
+msgstr ""
 
 #: ../../any.pm:1
 #, c-format
@@ -13551,7 +13735,7 @@ msgstr "டிவிடி-இயக்கி"
 msgid "Georgian (\"Latin\" layout)"
 msgstr "ஜார்ஜியா"
 
-#: ../../share/advertising/09-mdksecure.pl:1
+#: ../advertising/09-mdksecure.pl:1
 #, c-format
 msgid "Get the best items with Mandrake Linux Strategic partners"
 msgstr ""
@@ -13655,7 +13839,7 @@ msgstr "தன்னியக்கநுழைவு"
 msgid "Domain Admin Password"
 msgstr "விண்ேடாஸ் களம் நிர்வாகியின் கடவுச்ெசால்"
 
-#: ../../share/advertising/05-desktop.pl:1
+#: ../advertising/05-desktop.pl:1
 #, fuzzy, c-format
 msgid ""
 "Perfectly adapt your computer to your needs thanks to the 11 available "
@@ -13793,6 +13977,11 @@ msgstr ""
 msgid "Pipe job into a command"
 msgstr "வேலையை கட்டளைக்கு அனுப்பு"
 
+#: ../../../move/move.pm:1
+#, fuzzy, c-format
+msgid "Remove system config files"
+msgstr "கண்ணியின் கோப்ேபா நீக்கவா?"
+
 #: ../../lang.pm:1
 #, c-format
 msgid "Cote d'Ivoire"
@@ -13804,7 +13993,8 @@ msgid "new dynamic device name generated by core kernel devfs"
 msgstr ""
 
 #: ../../help.pm:1 ../../install_any.pm:1 ../../interactive.pm:1
-#: ../../ugtk2.pm:1 ../../modules/interactive.pm:1 ../../standalone/drakgw:1
+#: ../../ugtk2.pm:1 ../../modules/interactive.pm:1
+#: ../../standalone/drakclock:1 ../../standalone/drakgw:1
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "Yes"
@@ -13825,17 +14015,17 @@ msgstr "தட்டின் வகிர் அமைப்புகளை ப
 msgid "Estonia"
 msgstr "எஸ்தோனியா"
 
-#: ../../standalone/scannerdrake:1
-#, c-format
-msgid "Choose the host on which the local scanners should be made available:"
-msgstr ""
-
 #: ../../partition_table.pm:1
 #, c-format
 msgid ""
 "You have a hole in your partition table but I can't use it.\n"
 "The only solution is to move your primary partitions to have the hole next "
 "to the extended partitions."
+msgstr ""
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "Choose the host on which the local scanners should be made available:"
 msgstr ""
 
 #: ../../standalone/harddrake2:1
@@ -13848,11 +14038,6 @@ msgstr "தடம்"
 #, c-format
 msgid "Add"
 msgstr "சேர்"
-
-#: ../../standalone/drakgw:1
-#, c-format
-msgid "No Internet Connection Sharing has ever been configured."
-msgstr "இதுவரை இணையத் தொடர்பு பரிமாறி வடிவமைக்கப்படவில்ைல"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -14137,7 +14322,7 @@ msgstr "இது நிறுவுதலா அல்லது ேமம்ப
 msgid "ISDN card"
 msgstr "ISDN அட்ைட"
 
-#: ../../share/advertising/02-community.pl:1
+#: ../advertising/02-community.pl:1
 #, c-format
 msgid ""
 "To share your own knowledge and help build Linux software, join our "
@@ -14173,6 +14358,40 @@ msgid ""
 "Using the ``Upgrade'' option should work fine on Mandrake Linux systems\n"
 "running version \"8.1\" or later. Performing an Upgrade on versions prior\n"
 "to Mandrake Linux version \"8.1\" is not recommended."
+msgstr ""
+
+#: ../../standalone/drakfont:1
+#, c-format
+msgid ""
+"\n"
+" Copyright (C) 2001-2002 by MandrakeSoft \n"
+"     DUPONT Sebastien (original version)\n"
+"     CHAUMETTE Damien <dchaumette@mandrakesoft.com>\n"
+"\n"
+" This program is free software; you can redistribute it and/or modify\n"
+" it under the terms of the GNU General Public License as published by\n"
+" the Free Software Foundation; either version 2, or (at your option)\n"
+" any later version.\n"
+"\n"
+" This program is distributed in the hope that it will be useful,\n"
+" but WITHOUT ANY WARRANTY; without even the implied warranty of\n"
+" MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n"
+" GNU General Public License for more details.\n"
+"\n"
+" You should have received a copy of the GNU General Public License\n"
+" along with this program; if not, write to the Free Software\n"
+" Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.\n"
+"\n"
+" Thanks:\n"
+"    -  pfm2afm:   \n"
+"\t by Ken Borgendale:\n"
+"\t    Convert a Windows .pfm  file to a .afm (Adobe Font Metrics)\n"
+"    -  type1inst:\n"
+"\t by James Macnicol: \n"
+"\t    type1inst generates files fonts.dir fonts.scale & Fontmap.\n"
+"    -  ttf2pt1:   \n"
+"\t  by Andrew Weeks, Frank Siegert, Thomas Henlich, Sergey Babkin  \n"
+"             Convert ttf font files to afm and pfb fonts\n"
 msgstr ""
 
 #: ../../printer/main.pm:1
@@ -14241,6 +14460,11 @@ msgstr ""
 msgid "Unsafe"
 msgstr "பாதுகாப்பில்லாதது"
 
+#: ../../network/drakfirewall.pm:1
+#, fuzzy, c-format
+msgid "SSH server"
+msgstr "சேவையகம்"
+
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid ", %s sectors"
@@ -14248,7 +14472,7 @@ msgstr ", %s வில்"
 
 #: ../../help.pm:1 ../../install_any.pm:1 ../../interactive.pm:1
 #: ../../ugtk2.pm:1 ../../modules/interactive.pm:1
-#: ../../standalone/harddrake2:1
+#: ../../standalone/drakclock:1 ../../standalone/harddrake2:1
 #, c-format
 msgid "No"
 msgstr "இல்ைல"
@@ -14783,6 +15007,11 @@ msgstr "நுழைவிடத்தை நீக்கு"
 msgid "Network configuration"
 msgstr "வலையகமைப்பு வடிவமைப்பு "
 
+#: ../../standalone/harddrake2:1
+#, fuzzy, c-format
+msgid "/Autodetect _jaz drives"
+msgstr "தானியக்கத்தால் கண்டுபிடிக்கப்பட்டது"
+
 #: ../../any.pm:1
 #, c-format
 msgid "No sharing"
@@ -14894,9 +15123,10 @@ msgstr ""
 #: ../../install_steps.pm:1 ../../diskdrake/dav.pm:1
 #: ../../diskdrake/hd_gtk.pm:1 ../../diskdrake/interactive.pm:1
 #: ../../diskdrake/smbnfs_gtk.pm:1 ../../interactive/http.pm:1
-#: ../../standalone/drakboot:1 ../../standalone/drakbug:1
+#: ../../standalone/drakauth:1 ../../standalone/drakboot:1
+#: ../../standalone/drakbug:1 ../../standalone/drakconnect:1
 #: ../../standalone/drakfloppy:1 ../../standalone/drakfont:1
-#: ../../standalone/draksplash:1
+#: ../../standalone/draksplash:1 ../../../move/move.pm:1
 #, c-format
 msgid "Error"
 msgstr "பிழை"
@@ -14940,6 +15170,11 @@ msgstr ""
 "உங்கள் கணினி அமைப்பு பல்திரையக வடிவமைப்பில் வேலைச் செய்யும்\n"
 "நீங்கள் என்ன செய்ய விரும்புகிறீர்கள்?"
 
+#: ../../partition_table.pm:1
+#, c-format
+msgid "mount failed: "
+msgstr "ஏற்றத்தில் பிழை நேர்ந்துள்ளது: "
+
 #: ../../steps.pm:1
 #, c-format
 msgid "Configure services"
@@ -14949,11 +15184,6 @@ msgstr "சேவைகளை வடிவமையுங்கள்"
 #, c-format
 msgid "Broadcast Address:"
 msgstr ""
-
-#: ../../partition_table.pm:1
-#, c-format
-msgid "mount failed: "
-msgstr "ஏற்றத்தில் பிழை நேர்ந்துள்ளது: "
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -14968,15 +15198,15 @@ msgstr ""
 msgid "Image"
 msgstr "உருவம்"
 
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "Failed to add the printer \"%s\" to Star Office/OpenOffice.org/GIMP."
-msgstr "\"%s\" அச்சுப்ெபாறி பயன்பாடுகள் பயன்படுத்த சேர்க்க முடியவில்ைல"
-
 #: ../../services.pm:1
 #, c-format
 msgid "Remote Administration"
 msgstr "தொலைவு மேலாண்மை"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Failed to add the printer \"%s\" to Star Office/OpenOffice.org/GIMP."
+msgstr "\"%s\" அச்சுப்ெபாறி பயன்பாடுகள் பயன்படுத்த சேர்க்க முடியவில்ைல"
 
 #: ../../modules.pm:1
 #, c-format
@@ -15034,7 +15264,7 @@ msgstr "ஜூலை"
 msgid "Prints into %s"
 msgstr "%s க்கு அச்சிடப்படுகிறது"
 
-#: ../../install_steps_interactive.pm:1
+#: ../../install_steps_interactive.pm:1 ../../../move/move.pm:1
 #, c-format
 msgid "An error occurred"
 msgstr "பிழை நேர்ந்துள்ளது மன்னிக்கவும்"
@@ -15241,7 +15471,7 @@ msgstr ", பலமுனை சாதனம் "
 msgid "Laos"
 msgstr ""
 
-#: ../../share/advertising/04-configuration.pl:1
+#: ../advertising/04-configuration.pl:1
 #, c-format
 msgid ""
 "Mandrake Linux 9.2 provides you with the Mandrake Control Center, a powerful "
@@ -15415,11 +15645,6 @@ msgstr " /etc/dhcpd.conf  என்ற கோப்பு முதலில் 
 msgid "Is FPU present"
 msgstr ""
 
-#: ../../standalone/scannerdrake:1
-#, c-format
-msgid "There are no scanners found which are available on your system.\n"
-msgstr ""
-
 #: ../../services.pm:1
 #, c-format
 msgid ""
@@ -15428,6 +15653,11 @@ msgid ""
 msgstr ""
 "மேல் விவரம் ஏதுமில்ைல\n"
 "மன்னிக்கவும்"
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "There are no scanners found which are available on your system.\n"
+msgstr ""
 
 #: ../../standalone/drakTermServ:1
 #, c-format
@@ -15468,18 +15698,6 @@ msgstr "சாதனம்"
 #, c-format
 msgid "if set to yes, report unowned files."
 msgstr ""
-
-#: ../../standalone/harddrake2:1
-#, fuzzy, c-format
-msgid ""
-"This is HardDrake, a Mandrake hardware configuration tool.\n"
-"<span foreground=\"royalblue3\">Version:</span> %s\n"
-"<span foreground=\"royalblue3\">Author:</span> Thierry Vignaud &lt;tvignaud"
-"\\@mandrakesoft.com&gt;\n"
-"\n"
-msgstr ""
-"இது டிரேக்வன்ெபாருள், மாண்ட்ேரக் வன்ெபாருள் வடிவமைக்பபுக் கருவி\n"
-"வெளியீடு"
 
 #: ../../install_interactive.pm:1
 #, c-format
@@ -15562,10 +15780,21 @@ msgstr ""
 msgid "/_Fields description"
 msgstr "குறிப்பு"
 
-#: ../../share/advertising/10-security.pl:1
+#: ../advertising/10-security.pl:1
 #, c-format
 msgid "Optimize your security by using Mandrake Linux"
 msgstr "உங்கள் பாதுகாப்புக்காக"
+
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"\n"
+"\n"
+" Thanks:\n"
+"\t- LTSP Project http://www.ltsp.org\n"
+"\t- Michael Brown <mbrown@fensystems.co.uk>\n"
+"\n"
+msgstr ""
 
 #: ../../install_steps_gtk.pm:1 ../../interactive.pm:1 ../../ugtk2.pm:1
 #: ../../Xconfig/resolution_and_depth.pm:1 ../../diskdrake/hd_gtk.pm:1
@@ -15661,7 +15890,7 @@ msgstr ""
 msgid "mkinitrd optional arguments"
 msgstr ""
 
-#: ../../share/advertising/03-software.pl:1
+#: ../advertising/03-software.pl:1
 #, c-format
 msgid ""
 "Surf the Web with Mozilla or Konqueror, read your mail with Evolution or "
@@ -15852,6 +16081,11 @@ msgstr "மறுதொடக்கம்"
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Printing/Scanning/Photo Cards on \"%s\""
+msgstr ""
+
+#: ../../../move/move.pm:1
+#, c-format
+msgid "Continue without USB key"
 msgstr ""
 
 #: ../../install_steps.pm:1
@@ -16292,7 +16526,7 @@ msgstr "சாதரன மோடம்வழி தொடர்பு"
 msgid "Hardware probing in progress"
 msgstr "வன்ெபாருள் தேடுதல் நடைபெறுகிறது"
 
-#: ../../standalone/drakgw:1
+#: ../../network/shorewall.pm:1 ../../standalone/drakgw:1
 #, fuzzy, c-format
 msgid "Net Device"
 msgstr "துவக்கச்சேவைகள்"
@@ -16353,6 +16587,11 @@ msgid ""
 "package 'ImageMagick' is required to be able to complete configuration.\n"
 "Click \"Ok\" to install 'ImageMagick' or \"Cancel\" to quit"
 msgstr ""
+
+#: ../../network/drakfirewall.pm:1
+#, fuzzy, c-format
+msgid "Telnet server"
+msgstr "X-பரிமாறி"
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -16608,7 +16847,7 @@ msgstr ""
 msgid "Can't create catalog!"
 msgstr ""
 
-#: ../../share/advertising/11-mnf.pl:1
+#: ../advertising/11-mnf.pl:1
 #, c-format
 msgid ""
 "Complete your security setup with this very easy-to-use software which "
@@ -16660,6 +16899,11 @@ msgstr "இணையத்ெதாடர்பு  வடிவமைக்க�
 #, c-format
 msgid "Add the name as an exception to the handling of password aging by msec."
 msgstr ""
+
+#: ../../network/isdn.pm:1
+#, fuzzy, c-format
+msgid "USB"
+msgstr "LSB"
 
 #: ../../standalone/drakxtv:1
 #, c-format
@@ -16720,6 +16964,11 @@ msgstr "பணிக்குழு"
 #, c-format
 msgid "Printer host name or IP"
 msgstr ""
+
+#: ../../standalone/drakconnect:1
+#, fuzzy, c-format
+msgid "down"
+msgstr "முடிந்தது"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -17157,6 +17406,11 @@ msgstr "உருப்படியை சேர்"
 msgid "The printers on this machine are available to other computers"
 msgstr ""
 
+#: ../../lang.pm:1
+#, fuzzy, c-format
+msgid "China (Hong Kong)"
+msgstr "ஹாங்காங்"
+
 #: ../../standalone/drakautoinst:1
 #, c-format
 msgid "I can't find needed image file `%s'."
@@ -17214,7 +17468,7 @@ msgstr "நிறுவப்படவில்ைல"
 msgid "American Samoa"
 msgstr "சாமோ"
 
-#: ../../share/advertising/12-mdkexpert.pl:1
+#: ../advertising/12-mdkexpert.pl:1
 #, c-format
 msgid "Become a MandrakeExpert"
 msgstr "மாண்ட்ேரக் வித்தகராகவும்"
@@ -17330,6 +17584,11 @@ msgstr "இத்தாலி"
 msgid "Cayman Islands"
 msgstr "கேமன் தீவுகள்"
 
+#: ../../fs.pm:1 ../../partition_table.pm:1
+#, c-format
+msgid "error unmounting %s: %s"
+msgstr "இறக்குவதில் பிழை நேர்ந்துள்ளது %s: %s"
+
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Name of printer"
@@ -17339,11 +17598,6 @@ msgstr ""
 #, c-format
 msgid "disable"
 msgstr "முடமாக்கு"
-
-#: ../../fs.pm:1 ../../partition_table.pm:1
-#, c-format
-msgid "error unmounting %s: %s"
-msgstr "இறக்குவதில் பிழை நேர்ந்துள்ளது %s: %s"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -17443,7 +17697,7 @@ msgstr "நெருக்கமாக"
 msgid "Detected model: %s %s"
 msgstr "கண்டுபிடிக்கப்பட்ட மாடல்: %s %s"
 
-#: ../../share/advertising/03-software.pl:1
+#: ../advertising/03-software.pl:1
 #, c-format
 msgid "MandrakeSoft has selected the best software for you"
 msgstr ""
@@ -17560,6 +17814,11 @@ msgstr "துவங்கும் போது வரைவியல்வழ�
 msgid " adsl"
 msgstr ""
 
+#: ../../raid.pm:1
+#, c-format
+msgid "Not enough partitions for RAID level %d\n"
+msgstr "%d என்ற RAID நிலைக்கு போதுமான வகிர் இல்ைல\n"
+
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "format of floppies supported by the drive"
@@ -17569,11 +17828,6 @@ msgstr ""
 #, c-format
 msgid "Firmware copy failed, file %s not found"
 msgstr ""
-
-#: ../../raid.pm:1
-#, c-format
-msgid "Not enough partitions for RAID level %d\n"
-msgstr "%d என்ற RAID நிலைக்கு போதுமான வகிர் இல்ைல\n"
 
 #: ../../standalone/drakTermServ:1
 #, fuzzy, c-format
@@ -17696,7 +17950,7 @@ msgid ""
 "No CD or DVD image found, please copy the installation program and rpm files."
 msgstr ""
 
-#: ../../share/advertising/04-configuration.pl:1
+#: ../advertising/04-configuration.pl:1
 #, fuzzy, c-format
 msgid "Mandrake's multipurpose configuration tool"
 msgstr "பரிமாறி வடிவமைப்பு"
@@ -17726,7 +17980,7 @@ msgstr "வட்டு"
 msgid "Enter a printer device URI"
 msgstr "அச்சுப்ெபாறியின் முகவரி"
 
-#: ../../share/advertising/01-thanks.pl:1
+#: ../advertising/01-thanks.pl:1
 #, c-format
 msgid ""
 "The success of MandrakeSoft is based upon the principle of Free Software. "
@@ -18281,7 +18535,7 @@ msgstr "அட்ைட மாதிரி:"
 msgid "Thin Client"
 msgstr "DHCP வேண்டி"
 
-#: ../../share/advertising/01-thanks.pl:1
+#: ../advertising/01-thanks.pl:1
 #, c-format
 msgid "Thank you for choosing Mandrake Linux 9.2"
 msgstr "மாண்ட்ேரக் லினக்ஸ் 9.2 தேர்வு செய்ததற்கு நன்றி"
@@ -18384,6 +18638,13 @@ msgstr ""
 msgid "Mouse Systems"
 msgstr "எலி இயக்கங்கள்"
 
+#: ../../standalone/drakclock:1
+#, c-format
+msgid ""
+"Your computer can synchronize its clock\n"
+" with a remote time server using NTP"
+msgstr ""
+
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Iranian"
@@ -18409,7 +18670,7 @@ msgstr "பயனரைச் சேர்"
 msgid "Remote printer name"
 msgstr "தொலைவு அச்சுப்ெபாறியின் பெயர்"
 
-#: ../../share/advertising/10-security.pl:1
+#: ../advertising/10-security.pl:1
 #, c-format
 msgid ""
 "MandrakeSoft has designed exclusive tools to create the most secured Linux "
@@ -18556,6 +18817,11 @@ msgstr "மைக்ேரசாப்ட் Explorer-மேலோடி"
 msgid "Uninstall Fonts"
 msgstr ""
 
+#: ../../../move/move.pm:1
+#, fuzzy, c-format
+msgid "Please wait, detecting and configuring devices..."
+msgstr "உங்களுக்கு தேவையான பாதுகாப்பு நிலையைத் தேர்வுச் செய்யவும்"
+
 #: ../../keyboard.pm:1
 #, c-format
 msgid "German (no dead keys)"
@@ -18583,11 +18849,6 @@ msgid ""
 msgstr ""
 "நீங்கள் சம்பா, NFS மூலம் ஏற்றுமதி செய்யலாம். உங்களுக்கு தேவையானதைத் தேர்வுச் செய்யவும்"
 
-#: ../../help.pm:1 ../../install_steps_interactive.pm:1
-#, c-format
-msgid "Reboot"
-msgstr "மறுெதாடக்கம்"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Gambia"
@@ -18597,6 +18858,12 @@ msgstr "ஜாம்பியா"
 #, c-format
 msgid "Mandrake Control Center"
 msgstr "மாண்ட்ேரக் கட்டுப்பட்டு மையம்"
+
+#: ../../help.pm:1 ../../install_steps_interactive.pm:1
+#: ../../../move/move.pm:1
+#, c-format
+msgid "Reboot"
+msgstr "மறுெதாடக்கம்"
 
 #: ../../printer/main.pm:1
 #, fuzzy, c-format
@@ -18628,6 +18895,11 @@ msgstr ""
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "Remember this password"
+msgstr ""
+
+#: ../../install_steps_gtk.pm:1
+#, c-format
+msgid "due to unsatisfied %s"
 msgstr ""
 
 #: ../../standalone/drakgw:1
@@ -18687,6 +18959,11 @@ msgstr "பப்பாவ் நியு கினியா"
 msgid "Multi-function device on a parallel port"
 msgstr "பலமுனை சாதனம் இணை துறையில் உள்ளது"
 
+#: ../../../move/tree/mdk_totem:1
+#, fuzzy, c-format
+msgid "Busy files"
+msgstr "கோப்புகளை மறைக்கவும்"
+
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Serbian (cyrillic)"
@@ -18745,6 +19022,18 @@ msgstr ""
 #, c-format
 msgid "DHCP Client"
 msgstr "DHCP வேண்டி"
+
+#: ../../standalone/harddrake2:1
+#, fuzzy, c-format
+msgid ""
+"This is HardDrake, a Mandrake hardware configuration tool.\n"
+"<span foreground=\"royalblue3\">Version:</span> %s\n"
+"<span foreground=\"royalblue3\">Author:</span> Thierry Vignaud &lt;"
+"tvignaud@mandrakesoft.com&gt;\n"
+"\n"
+msgstr ""
+"இது டிரேக்வன்ெபாருள், மாண்ட்ேரக் வன்ெபாருள் வடிவமைக்பபுக் கருவி\n"
+"வெளியீடு"
 
 #: ../../standalone/drakgw:1
 #, c-format
@@ -18931,47 +19220,13 @@ msgstr "அச்சுப்ெபாறிகளை மாற்ற வேண�
 msgid "Delay before booting the default image"
 msgstr "கொடாநிலை உருவம் துவங்குவதற்கான தாமதம்"
 
-#: ../../standalone/drakfont:1
-#, c-format
-msgid ""
-"\n"
-" Copyright (C) 2001-2002 by MandrakeSoft \n"
-"     DUPONT Sebastien (original version)\n"
-"     CHAUMETTE Damien <dchaumette\\@mandrakesoft.com>\n"
-"\n"
-" This program is free software; you can redistribute it and/or modify\n"
-" it under the terms of the GNU General Public License as published by\n"
-" the Free Software Foundation; either version 2, or (at your option)\n"
-" any later version.\n"
-"\n"
-" This program is distributed in the hope that it will be useful,\n"
-" but WITHOUT ANY WARRANTY; without even the implied warranty of\n"
-" MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n"
-" GNU General Public License for more details.\n"
-"\n"
-" You should have received a copy of the GNU General Public License\n"
-" along with this program; if not, write to the Free Software\n"
-" Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.\n"
-"\n"
-" Thanks:\n"
-"    -  pfm2afm:   \n"
-"\t by Ken Borgendale:\n"
-"\t    Convert a Windows .pfm  file to a .afm (Adobe Font Metrics)\n"
-"    -  type1inst:\n"
-"\t by James Macnicol: \n"
-"\t    type1inst generates files fonts.dir fonts.scale & Fontmap.\n"
-"    -  ttf2pt1:   \n"
-"\t  by Andrew Weeks, Frank Siegert, Thomas Henlich, Sergey Babkin  \n"
-"             Convert ttf font files to afm and pfb fonts\n"
-msgstr ""
-
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "Use Hard Disk to backup"
 msgstr ""
 
 #: ../../help.pm:1 ../../install_steps_gtk.pm:1 ../../standalone/drakbackup:1
-#: ../../standalone/drakboot:1 ../../standalone/drakgw:1
+#: ../../standalone/drakboot:1
 #, c-format
 msgid "Configure"
 msgstr "வடிவமை"
@@ -19037,7 +19292,7 @@ msgstr ""
 "உங்கள் சிடியைச் சோதிக்க ஏற்கனவே இயங்குகின்ற கணினியில் \"rpm -qpl Mandrake/RPMS/*.rpm "
 "என கட்டளையிடவும்\"\n"
 
-#: ../../share/advertising/06-development.pl:1
+#: ../advertising/06-development.pl:1
 #, c-format
 msgid "Mandrake Linux 9.2: the ultimate development platform"
 msgstr "மாண்ட்ேரக் லினக்ஸ் 9.2 உங்களுக்கு சிறந்த உருவாக்க நிலையமாக திகழ்கிறது"
@@ -19118,6 +19373,11 @@ msgstr "பரிமாணங்கள்"
 msgid "Services"
 msgstr "சேவைகள்"
 
+#: ../../../move/move.pm:1
+#, fuzzy, c-format
+msgid "Auto configuration"
+msgstr "அறிவிப்பாளரின் வடிவமைப்பு "
+
 #: ../../Xconfig/card.pm:1
 #, c-format
 msgid "4 MB"
@@ -19154,9 +19414,10 @@ msgid "Internet station"
 msgstr "இணையக் கணினி"
 
 #: ../../share/compssUsers:999
+#, fuzzy
 msgid ""
-"Set of tools to read and send mail and news (pine, mutt, tin..) and to "
-"browse the Web"
+"Set of tools to read and send mail and news (mutt, tin..) and to browse the "
+"Web"
 msgstr "நீங்கள் மின்னஞ்சல், மற்றும் இணையத்ைத மேலோட உதவுங்கருவிகள்"
 
 #: ../../share/compssUsers:999
@@ -19293,6 +19554,32 @@ msgstr "NFS /சம்பா/பினாமி/ssh பரிமாறிகள�
 #, fuzzy
 msgid "Set of tools to read and send mail and news and to browse the Web"
 msgstr "நீங்கள் மின்னஞ்சல், மற்றும் இணையத்ைத மேலோட உதவுங்கருவிகள்"
+
+#~ msgid "The setup has already been done, and it's currently enabled."
+#~ msgstr "இணையத் தொடர்பு பரிமாறி வடிவமைக்கப்பட்டுவிட்டது"
+
+#~ msgid "The setup has already been done, but it's currently disabled."
+#~ msgstr ""
+#~ "இணையத் தொடர்பு பரிமாறி வடிவமைக்கப்பட்டுவிட்டது.ஆனால், தற்ேபாது முடக்கப்பட்டுள்ளது"
+
+#~ msgid ""
+#~ "Welcome to the Internet Connection Sharing utility!\n"
+#~ "\n"
+#~ "%s\n"
+#~ "\n"
+#~ "Click on Configure to launch the setup wizard."
+#~ msgstr ""
+#~ "இணையத் தொடர்பு பரிமாறி வடிவமைப்புக்கு வாருங்கள்!\n"
+#~ "\n"
+#~ "%s\n"
+#~ "\n"
+#~ "வடிவமை என்ற பொத்தானை அழுத்தினால் இதற்கான மாயாவியைத் துவக்கு"
+
+#~ msgid "Internet Connection Sharing configuration"
+#~ msgstr "இணையத் தொடர்பு பரிமாறி வடிவமைப்பு"
+
+#~ msgid "No Internet Connection Sharing has ever been configured."
+#~ msgstr "இதுவரை இணையத் தொடர்பு பரிமாறி வடிவமைக்கப்படவில்ைல"
 
 #~ msgid "-adobe-utopia-regular-r-*-*-25-*-*-*-p-*-iso8859-*,*-r-*"
 #~ msgstr ""
@@ -21739,9 +22026,6 @@ msgstr "நீங்கள் மின்னஞ்சல், மற்றும
 
 #~ msgid "What is the root partition (/) of your system?"
 #~ msgstr "உங்கள் கணினியில் மூல வகிர் (/) எங்கு உள்ளது?"
-
-#~ msgid "CUPS server IP"
-#~ msgstr "CUPS சேவையக IP"
 
 #~ msgid ""
 #~ "The following printer\n"

@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX-fa\n"
-"POT-Creation-Date: 2003-09-16 13:45+0200\n"
+"POT-Creation-Date: 2003-12-03 03:09+0100\n"
 "PO-Revision-Date: 2003-09-21 21:51+0200\n"
 "Last-Translator: Abbas Izad <abbasizad@hotmail.com>\n"
 "Language-Team: Persian\n"
@@ -285,11 +285,6 @@ msgstr "تنظیم CUPS"
 msgid "Total progress"
 msgstr "فراروند کل"
 
-#: ../../lang.pm:1
-#, c-format
-msgid "Hong Kong"
-msgstr "هنگ‌ کنگ"
-
 #: ../../install_interactive.pm:1
 #, c-format
 msgid "Not enough free space to allocate new partitions"
@@ -364,6 +359,24 @@ msgstr "ویرایش میزبان انتخاب شده"
 msgid "No CD device defined!"
 msgstr "هیچ دستگاه CD تایین نشده!"
 
+#: ../../network/shorewall.pm:1
+#, fuzzy, c-format
+msgid ""
+"Please enter the name of the interface connected to the "
+"internet.              \n"
+"                \n"
+"Examples:\n"
+"                ppp+ for modem or DSL connections, \n"
+"                eth0, or eth1 for cable connection, \n"
+"                ippp+ for a isdn connection.\n"
+msgstr ""
+"لطفاً نام واسطی را که به اینترنت ارتباط دارد را وارد نمایید.\n"
+"\n"
+"نمونه‌ها:\n"
+"\t\tppp+ برای مودم یا ارتباطات DSL, \n"
+"\t\teth0, یا eth1 برای ارتباطات با کابل, \n"
+"\t\tippp+ برای یک ارتباط isdn.\n"
+
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "\tUse .backupignore files\n"
@@ -437,15 +450,20 @@ msgstr "تغییر انجام شد، می‌خواهید سرویس dm را دو
 msgid "Swiss (French layout)"
 msgstr "سوئیس (طرح فرانسوی)"
 
+#: ../../raid.pm:1
+#, c-format
+msgid "mkraid failed (maybe raidtools are missing?)"
+msgstr "برنامه mkraid شکست خورد (شاید ابزار raidtools وجود ندارند؟)"
+
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "August"
 msgstr "اوت"
 
-#: ../../raid.pm:1
-#, c-format
-msgid "mkraid failed (maybe raidtools are missing?)"
-msgstr "برنامه mkraid شکست خورد (شاید ابزار raidtools وجود ندارند؟)"
+#: ../../network/drakfirewall.pm:1
+#, fuzzy, c-format
+msgid "FTP server"
+msgstr "کارگزار NTP"
 
 #: ../../harddrake/data.pm:1
 #, c-format
@@ -525,11 +543,6 @@ msgstr "احتمال اختلال نشانی LAN در تنظیم کنونی %s �
 #, c-format
 msgid "Configuring..."
 msgstr "در حال تنظیم..."
-
-#: ../../standalone/drakgw:1
-#, c-format
-msgid "The setup has already been done, and it's currently enabled."
-msgstr "پیکربندی قبلا انجام شده است و اکنون فعال می‌باشد. "
 
 #: ../../harddrake/v4l.pm:1
 #, c-format
@@ -666,6 +679,11 @@ msgstr "بر کارگزار Novell \"%s\"، چاپگر \"%s\""
 msgid "Printer Name"
 msgstr "نام چاپگر"
 
+#: ../../../move/move.pm:1
+#, c-format
+msgid "Setting up USB key"
+msgstr ""
+
 #: ../../standalone/drakfloppy:1
 #, c-format
 msgid "Remove a module"
@@ -723,15 +741,17 @@ msgstr ""
 msgid "if needed"
 msgstr "اگر لازم است"
 
+#: ../../standalone/drakclock:1
+#, c-format
+msgid ""
+"We need to install ntp package\n"
+" to enable Network Time Protocol"
+msgstr ""
+
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "Restore Failed..."
 msgstr "بازسازی شکست خورد..."
-
-#: ../../standalone/harddrake2:1
-#, c-format
-msgid "/Autodetect _jazz drives"
-msgstr "/شناسایی خودکار راه‌انداز _jazz"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -1053,11 +1073,6 @@ msgstr "\tمحدود کردن استفاده ازدیسک تا %s مگابایت
 #, c-format
 msgid "512 kB"
 msgstr "۵۱۲ کیلوبایت"
-
-#: ../../standalone/net_monitor:1
-#, c-format
-msgid "Logs"
-msgstr "ثبت‌ها"
 
 #: ../../standalone/scannerdrake:1
 #, c-format
@@ -1576,6 +1591,11 @@ msgstr "لاتویایی"
 msgid "monthly"
 msgstr "ماهانه"
 
+#: ../../../move/move.pm:1
+#, fuzzy, c-format
+msgid "Retry"
+msgstr "بازسازی"
+
 #: ../../standalone/drakfloppy:1
 #, c-format
 msgid "Module name"
@@ -1620,6 +1640,11 @@ msgstr "استفاده از یونی‌کد بوسیله پیش‌فرض"
 #, c-format
 msgid "the module of the GNU/Linux kernel that handles the device"
 msgstr "بخشی از هسته گنو/لینوکس که این دستگاه را اداره می‌کند"
+
+#: ../../standalone/drakclock:1
+#, fuzzy, c-format
+msgid "Is your hardware clock set to GMT?"
+msgstr "گذاردن ساعت سخت‌افزار به GMT"
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -1666,6 +1691,11 @@ msgstr "نمی‌توانم ارتقا را بطور زنده شروع کنم!!!
 msgid "Name: "
 msgstr "نام:"
 
+#: ../../standalone/drakconnect:1
+#, c-format
+msgid "up"
+msgstr ""
+
 #: ../../Xconfig/resolution_and_depth.pm:1
 #, c-format
 msgid "16 million colors (24 bits)"
@@ -1676,7 +1706,7 @@ msgstr "۱۶ میلیون رنگ (۲۴ بیت)"
 msgid "Allow all users"
 msgstr "اجازه به تمام کاربران"
 
-#: ../../share/advertising/08-store.pl:1
+#: ../advertising/08-store.pl:1
 #, c-format
 msgid "The official MandrakeSoft Store"
 msgstr "فروشگاه رسمی MandrakeSoft"
@@ -1710,15 +1740,15 @@ msgstr "کاربر"
 msgid "Do new backup before restore (only for incremental backups.)"
 msgstr "انجام ذخیره پشتیبان قبل از بازسازی (فقط برای ذخیره‌های پشتیبان افزایشی)"
 
-#: ../../standalone/harddrake2:1
-#, c-format
-msgid "Name"
-msgstr "نام"
-
 #: ../../raid.pm:1
 #, c-format
 msgid "mkraid failed"
 msgstr "شکست mkraid"
+
+#: ../../standalone/harddrake2:1
+#, c-format
+msgid "Name"
+msgstr "نام"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -1933,6 +1963,23 @@ msgstr "در حال فعال کردن کارگزارها..."
 #, c-format
 msgid "Printing test page(s)..."
 msgstr "در حال چاپ صفحه(های) آزمایشی..."
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid ""
+"Transfer successful\n"
+"You may want to verify you can login to the server with:\n"
+"\n"
+"ssh -i %s %s@%s\n"
+"\n"
+"without being prompted for a password."
+msgstr ""
+"انتقال موفق بود\n"
+"ممکن است بخواهید ورود به کارگزار را با:\n"
+"\n"
+"ssh -i %s %s@%s\n"
+"\n"
+"بدون سوال برای گذرواژه امتحان نمایید."
 
 #: ../../fsedit.pm:1
 #, c-format
@@ -2939,6 +2986,11 @@ msgstr "توانایی‌های مخصوص دستگاه (توانایی نگار
 msgid "Can't add a partition to _formatted_ RAID md%d"
 msgstr "نمی‌توان یک قسمت‌بندی به _formatted_ RAID md%d افزود"
 
+#: ../../standalone/drakclock:1
+#, fuzzy, c-format
+msgid "Network Time Protocol"
+msgstr "واسط شبکه"
+
 #: ../../Xconfig/card.pm:1
 #, c-format
 msgid ""
@@ -3174,7 +3226,7 @@ msgstr "پالاو"
 msgid "level"
 msgstr "سطح"
 
-#: ../../share/advertising/13-mdkexpert_corporate.pl:1
+#: ../advertising/13-mdkexpert_corporate.pl:1
 #, c-format
 msgid ""
 "All incidents will be followed up by a single qualified MandrakeSoft "
@@ -3568,7 +3620,7 @@ msgstr ""
 msgid "Bad package"
 msgstr "بسته‌ی خراب"
 
-#: ../../share/advertising/07-server.pl:1
+#: ../advertising/07-server.pl:1
 #, c-format
 msgid ""
 "Transform your computer into a powerful Linux server: Web server, mail, "
@@ -3841,7 +3893,7 @@ msgstr "به رمزشکن‌ها خوش آمدید"
 msgid "Module options:"
 msgstr "گزینه‌های بخش:"
 
-#: ../../share/advertising/11-mnf.pl:1
+#: ../advertising/11-mnf.pl:1
 #, c-format
 msgid "Secure your networks with the Multi Network Firewall"
 msgstr "شبکه خود را با دیوارآتش چند شبکه‌ای امن نمایید"
@@ -3922,6 +3974,11 @@ msgstr "موش"
 #, c-format
 msgid "not enough room in /boot"
 msgstr "فضای ناکافی در شاخه /boot"
+
+#: ../../install_steps_gtk.pm:1
+#, c-format
+msgid "trying to promote %s"
+msgstr ""
 
 #: ../../lang.pm:1
 #, c-format
@@ -4071,6 +4128,11 @@ msgstr ""
 msgid "Saudi Arabia"
 msgstr "عربستان سعودی"
 
+#: ../../services.pm:1
+#, c-format
+msgid "Internet"
+msgstr "اینترنت"
+
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid "Continue anyway?"
@@ -4090,11 +4152,6 @@ msgstr ""
 #, c-format
 msgid "Printer"
 msgstr "چاپگر"
-
-#: ../../services.pm:1
-#, c-format
-msgid "Internet"
-msgstr "اینترنت"
 
 #: ../../standalone/service_harddrake:1
 #, c-format
@@ -4171,6 +4228,11 @@ msgstr "نقاط سوارسازی فقط باید حاوی نویسه‌های �
 #, c-format
 msgid "Restarting printing system..."
 msgstr "شروع مجدد سیستم چاپگری..."
+
+#: ../../../move/tree/mdk_totem:1
+#, c-format
+msgid "You can only run with no CDROM support"
+msgstr ""
 
 #: ../../modules/interactive.pm:1
 #, c-format
@@ -4402,15 +4464,15 @@ msgstr "ISA / PCMCIA"
 msgid "About"
 msgstr "درباره"
 
-#: ../../network/network.pm:1
-#, c-format
-msgid "Proxies configuration"
-msgstr "تنظیم پراکسی‌ها"
-
 #: ../../mouse.pm:1
 #, c-format
 msgid "GlidePoint"
 msgstr "GlidePoint"
+
+#: ../../network/network.pm:1
+#, c-format
+msgid "Proxies configuration"
+msgstr "تنظیم پراکسی‌ها"
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -4562,6 +4624,11 @@ msgstr "نقاط سوارسازی باید با یک / شروع شوند"
 msgid "Choose your CD/DVD device"
 msgstr "انتخاب اندازه‌ی رسانه‌های CD/DVD (در مگابایت)"
 
+#: ../../network/drakfirewall.pm:1
+#, fuzzy, c-format
+msgid "CUPS server"
+msgstr "کارگزار DNS "
+
 #: ../../standalone/logdrake:1
 #, c-format
 msgid "Postfix Mail Server"
@@ -4577,7 +4644,7 @@ msgstr "خروج بدون ذخیره کردن"
 msgid "Yemen"
 msgstr "یمن"
 
-#: ../../share/advertising/11-mnf.pl:1
+#: ../advertising/11-mnf.pl:1
 #, c-format
 msgid "This product is available on the MandrakeStore Web site."
 msgstr "این محصول در پایگاه اینترنت MandrakeStore موجود می‌باشد."
@@ -4586,6 +4653,31 @@ msgstr "این محصول در پایگاه اینترنت MandrakeStore موج�
 #, c-format
 msgid "=> There are many things to choose from (%s).\n"
 msgstr "=> چیزهای زیادی برای انتخاب از (%s) وجود دارد.\n"
+
+#: ../../standalone/drakclock:1
+#, c-format
+msgid "GMT - DrakClock"
+msgstr ""
+
+#: ../../../move/move.pm:1
+#, c-format
+msgid ""
+"An error occurred:\n"
+"\n"
+"\n"
+"%s\n"
+"\n"
+"This may come from corrupted system configuration files\n"
+"on the USB key, in this case removing them and then\n"
+"rebooting Mandrake Move would fix the problem. To do\n"
+"so, click on the corresponding button.\n"
+"\n"
+"\n"
+"You may also want to reboot and remove the USB key, or\n"
+"examine its contents under another OS, or even have\n"
+"a look at log files in console #3 and #4 to try to\n"
+"guess what's happening."
+msgstr ""
 
 #: ../../steps.pm:1
 #, c-format
@@ -4826,6 +4918,11 @@ msgstr "Userdrake"
 #, c-format
 msgid "Which partition do you want to use for Linux4Win?"
 msgstr "کدام قسمت‌بندی را می‌خواهید برای Linux4Win استفاده نمایید؟"
+
+#: ../../install_steps_gtk.pm:1
+#, fuzzy, c-format
+msgid "due to missing %s"
+msgstr "kdesu وجود ندارد"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -5395,7 +5492,7 @@ msgstr ""
 msgid "Started on boot"
 msgstr "شروع شده در آغاز"
 
-#: ../../share/advertising/12-mdkexpert.pl:1
+#: ../advertising/12-mdkexpert.pl:1
 #, c-format
 msgid ""
 "Join the MandrakeSoft support teams and the Linux Community online to share "
@@ -5730,11 +5827,6 @@ msgid ""
 msgstr ""
 "نمایش تم \n"
 "زیر کنسول"
-
-#: ../../standalone/net_monitor:1
-#, c-format
-msgid "Statistics"
-msgstr "آمار‌ها"
 
 #: ../../printer/cups.pm:1
 #, c-format
@@ -6606,7 +6698,7 @@ msgstr ""
 "ذخیره‌سازی و بازسازی entropy pool سیستم برای تولید اعداد شانسی با کیفیت "
 "بالاتر."
 
-#: ../../share/advertising/07-server.pl:1
+#: ../advertising/07-server.pl:1
 #, c-format
 msgid "Turn your computer into a reliable server"
 msgstr "رایانه خود را به یک کارگزار قابل اعتماد تبدیل نمایید"
@@ -6621,6 +6713,11 @@ msgstr "گذرواژه‌ی خالی در پرونده /etc/shadow را کنتر
 msgid " (driver %s)"
 msgstr " (راه‌انداز %s)"
 
+#: ../../services.pm:1
+#, c-format
+msgid "Start when requested"
+msgstr "شروع در صورت تقاضا"
+
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid ""
@@ -6634,11 +6731,6 @@ msgstr ""
 #, c-format
 msgid "I don't know"
 msgstr "نمی‌دانم"
-
-#: ../../services.pm:1
-#, c-format
-msgid "Start when requested"
-msgstr "شروع در صورت تقاضا"
 
 #: ../../printer/main.pm:1
 #, c-format
@@ -6868,6 +6960,11 @@ msgstr ""
 "شما می‌توانید printerdrake را از مرکز کنترل مان‌درایک در قسمت سخت‌افزار اجرا "
 "نمایید."
 
+#: ../../../move/move.pm:1
+#, fuzzy, c-format
+msgid "Key isn't writable"
+msgstr "XawTV نصب نشده است!"
+
 #: ../../lang.pm:1
 #, c-format
 msgid "Bangladesh"
@@ -6916,15 +7013,15 @@ msgstr ""
 msgid "Set the root umask."
 msgstr "umask مدیر را بگذارید."
 
-#: ../../network/modem.pm:1 ../../standalone/drakconnect:1
-#, c-format
-msgid "Script-based"
-msgstr "بر اساس دست‌نویس"
-
 #: ../../install_any.pm:1 ../../partition_table.pm:1
 #, c-format
 msgid "Error reading file %s"
 msgstr "خطا در خواندن پرونده %s"
+
+#: ../../network/modem.pm:1 ../../standalone/drakconnect:1
+#, c-format
+msgid "Script-based"
+msgstr "بر اساس دست‌نویس"
 
 #: ../../harddrake/v4l.pm:1
 #, c-format
@@ -7007,23 +7104,6 @@ msgstr ""
 #, c-format
 msgid "Domain Authentication Required"
 msgstr "اعتبارسنجی دامنه لازم است"
-
-#: ../../standalone/drakTermServ:1
-#, c-format
-msgid ""
-"\n"
-"\n"
-" Thanks:\n"
-"\t- LTSP Project http://www.ltsp.org\n"
-"\t- Michael Brown <mbrown\\@fensystems.co.uk>\n"
-"\n"
-msgstr ""
-"\n"
-"\n"
-" Thanks:\n"
-"\t- LTSP Project http://www.ltsp.org\n"
-"\t- Michael Brown <mbrown\\@fensystems.co.uk>\n"
-"\n"
 
 #: ../../security/level.pm:1
 #, c-format
@@ -7762,15 +7842,15 @@ msgstr "Yaboot"
 msgid "Logitech CC Series with Wheel emulation"
 msgstr "سری‌های CC لوگیتک با شبیه‌سازی چرخ"
 
-#: ../../standalone/drakboot:1
-#, c-format
-msgid "Splash selection"
-msgstr "انتخاب Splash"
-
 #: ../../partition_table.pm:1
 #, c-format
 msgid "Extended partition not supported on this platform"
 msgstr "قسمت‌بندی مضاعف بر این پایگاه حمایت نمی‌شود"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Splash selection"
+msgstr "انتخاب Splash"
 
 #: ../../network/isdn.pm:1
 #, c-format
@@ -7830,6 +7910,11 @@ msgstr ""
 msgid "Printer default settings"
 msgstr "تنظیمات پیش‌فرض چاپگر"
 
+#: ../../mouse.pm:1
+#, c-format
+msgid "Generic PS2 Wheel Mouse"
+msgstr "موش چرخی PS2 عمومی"
+
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid ""
@@ -7840,11 +7925,6 @@ msgstr ""
 "پرچم WP در ثبت CR0 واحد مرکزی پردازه‌گر حفاظت نگارش را در سطح صفحه حافظه "
 "مجبور می‌کند، بنابرین پردازه‌گر قادر به جلوگیری از دسترسی‌های کنترل نشده هسته "
 "به حافظه‌ی کاربر خواهد بود."
-
-#: ../../mouse.pm:1
-#, c-format
-msgid "Generic PS2 Wheel Mouse"
-msgstr "موش چرخی PS2 عمومی"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -8008,6 +8088,11 @@ msgstr "صفحه‌کلید کره‌ای"
 msgid "Not connected"
 msgstr "ارتباط برقرار نمی‌باشد"
 
+#: ../../standalone/net_monitor:1
+#, fuzzy, c-format
+msgid "No internet connection configured"
+msgstr "تنظیمات ارتباط اینترنت"
+
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Greek"
@@ -8022,23 +8107,6 @@ msgstr "سنت کیتز و نویز"
 #, c-format
 msgid "Generic 3 Button Mouse with Wheel emulation"
 msgstr "موش معمولی ۳ تکمه‌ای با شبیه‌سازی چرخ"
-
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid ""
-"Transfer successful\n"
-"You may want to verify you can login to the server with:\n"
-"\n"
-"ssh -i %s %s\\@%s\n"
-"\n"
-"without being prompted for a password."
-msgstr ""
-"انتقال موفق بود\n"
-"ممکن است بخواهید ورود به کارگزار را با:\n"
-"\n"
-"ssh -i %s %s\\@%s\n"
-"\n"
-"بدون سوال برای گذرواژه امتحان نمایید."
 
 #: ../../any.pm:1
 #, c-format
@@ -8275,7 +8343,7 @@ msgstr ""
 "بر \"انتقال\" بازنگارش آن کلیک نمایید.\n"
 "شما می‌توانید یک نام جدید بنویسید یا این چاپگر را رها کنید."
 
-#: ../../share/advertising/12-mdkexpert.pl:1
+#: ../advertising/12-mdkexpert.pl:1
 #, c-format
 msgid ""
 "Find the solutions of your problems via MandrakeSoft's online support "
@@ -8342,6 +8410,22 @@ msgstr "قرقیزستان"
 #, c-format
 msgid "Multi-function device on USB"
 msgstr "دستگاه چند-عملی بر USB"
+
+#: ../../../move/move.pm:1
+#, c-format
+msgid ""
+"We didn't detect any USB key on your system. If you\n"
+"plug in an USB key now, Mandrake Move will have the ability\n"
+"to transparently save the data in your home directory and\n"
+"system wide configuration, for next boot on this computer\n"
+"or another one. Note: if you plug in a key now, wait several\n"
+"seconds before detecting again.\n"
+"\n"
+"\n"
+"You may also proceed without an USB key - you'll still be\n"
+"able to use Mandrake Move as a normal live Mandrake\n"
+"Operating System."
+msgstr ""
 
 #: ../../help.pm:1
 #, c-format
@@ -8438,15 +8522,15 @@ msgstr " بیت-چسبنده"
 msgid "Other Media"
 msgstr "رسانه دیگر"
 
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "Backup system files"
-msgstr "ذخیره پشتیبان پرونده‌های سیستم"
-
 #: ../../mouse.pm:1
 #, c-format
 msgid "Logitech MouseMan+"
 msgstr "Logitech MouseMan+"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "Backup system files"
+msgstr "ذخیره پشتیبان پرونده‌های سیستم"
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -8511,6 +8595,11 @@ msgstr "اوضاع سیستم"
 msgid "Please choose your type of mouse."
 msgstr "لطفاً نوع موش خود را انتخاب نمایید."
 
+#: ../../services.pm:1
+#, c-format
+msgid "running"
+msgstr "در حال اجرا است"
+
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "class of hardware device"
@@ -8529,11 +8618,6 @@ msgstr ""
 #, c-format
 msgid "United Kingdom"
 msgstr "بریتانیا"
-
-#: ../../services.pm:1
-#, c-format
-msgid "running"
-msgstr "در حال اجرا است"
 
 #: ../../lang.pm:1
 #, c-format
@@ -8579,7 +8663,7 @@ msgstr "سنگال"
 msgid "Command line"
 msgstr "خط فرمان"
 
-#: ../../share/advertising/08-store.pl:1
+#: ../advertising/08-store.pl:1
 #, c-format
 msgid ""
 "Our full range of Linux solutions, as well as special offers on products and "
@@ -8639,6 +8723,17 @@ msgstr "مبادله"
 #, c-format
 msgid "Custom settings"
 msgstr "تنظیمات اختصاصی"
+
+#: ../../../move/move.pm:1
+#, c-format
+msgid ""
+"The USB key seems to have write protection enabled, but we can't safely\n"
+"unplug it now.\n"
+"\n"
+"\n"
+"Click the button to reboot the machine, unplug it, remove write protection,\n"
+"plug the key again, and launch Mandrake Move again."
+msgstr ""
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -8751,7 +8846,7 @@ msgstr ""
 msgid "Photo memory card access on your HP multi-function device"
 msgstr "دسترسی کارت حافظه‌ی عکس روی دستگاه چند-عاملی HP خود"
 
-#: ../../share/advertising/09-mdksecure.pl:1
+#: ../advertising/09-mdksecure.pl:1
 #, c-format
 msgid ""
 "Enhance your computer performance with the help of a selection of partners "
@@ -8875,6 +8970,11 @@ msgstr ""
 #, c-format
 msgid "Exit install"
 msgstr "خروج از نصب"
+
+#: ../../../move/move.pm:1
+#, c-format
+msgid "Need a key to save your data"
+msgstr ""
 
 #: ../../standalone/drakgw:1
 #, c-format
@@ -9065,11 +9165,6 @@ msgstr "روسی"
 msgid "dhcpd Config..."
 msgstr "تنظیم dhcpd ..."
 
-#: ../../standalone/drakgw:1
-#, c-format
-msgid "The setup has already been done, but it's currently disabled."
-msgstr "این تنظیم قبلا انجام شده ولی در حال حاضر فعال نمی‌باشد."
-
 #: ../../any.pm:1
 #, c-format
 msgid "LILO/grub Installation"
@@ -9246,6 +9341,11 @@ msgstr ""
 msgid "Choose an X server"
 msgstr "انتخاب یک کارگزار X "
 
+#: ../../../move/tree/mdk_totem:1
+#, c-format
+msgid "Copying to memory to allow removing the CDROM"
+msgstr ""
+
 #: ../../install_interactive.pm:1
 #, c-format
 msgid "Swap partition size in MB: "
@@ -9295,7 +9395,7 @@ msgstr "تنظیم مراحل خودکار"
 msgid "Barbados"
 msgstr "باربادوس"
 
-#: ../../share/advertising/02-community.pl:1
+#: ../advertising/02-community.pl:1
 #, c-format
 msgid ""
 "Want to know more and to contribute to the Open Source community? Get "
@@ -9458,15 +9558,6 @@ msgstr "نسل زیر cpu"
 msgid "First Time Wizard"
 msgstr "جادوگر بار اول"
 
-#: ../../install_steps.pm:1
-#, c-format
-msgid ""
-"An error occurred, but I don't know how to handle it nicely.\n"
-"Continue at your own risk."
-msgstr ""
-"یک خطا رخ داد، اما نمی‌دانم چگونه آن را بخوبی اداره کنم. \n"
-"با مسئولیت خود ادامه دهید."
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Taiwan"
@@ -9481,6 +9572,15 @@ msgstr "پاکستان"
 #, c-format
 msgid "please wait, parsing file: %s"
 msgstr "لطفا صبر کنید، تجزیه پرونده: %s"
+
+#: ../../install_steps.pm:1 ../../../move/move.pm:1
+#, c-format
+msgid ""
+"An error occurred, but I don't know how to handle it nicely.\n"
+"Continue at your own risk."
+msgstr ""
+"یک خطا رخ داد، اما نمی‌دانم چگونه آن را بخوبی اداره کنم. \n"
+"با مسئولیت خود ادامه دهید."
 
 #: ../../install_steps_gtk.pm:1
 #, c-format
@@ -9678,6 +9778,11 @@ msgstr ""
 "لطفاً بارگزاری یا ذخیره مجموعه بسته را بر دیسکچه انتخاب نمایید.\n"
 "قالب همانند دیسکچه‌های تولید شده‌ی نصب-خودکار می‌باشد."
 
+#: ../../../move/tree/mdk_totem:1
+#, fuzzy, c-format
+msgid "No CDROM support"
+msgstr "حمایت رادیو:"
+
 #: ../../standalone/drakxtv:1
 #, c-format
 msgid "China (broadcast)"
@@ -9718,7 +9823,7 @@ msgstr ""
 "بارگزاری بخش %s شکست خورد.\n"
 "آیا می‌خواهید با اجزای دیگری دوباره امتحان کنید؟"
 
-#: ../../share/advertising/01-thanks.pl:1
+#: ../advertising/01-thanks.pl:1
 #, c-format
 msgid "Welcome to the Open Source world."
 msgstr "به دنیای منبع آزاد خوش آمدید."
@@ -9947,6 +10052,11 @@ msgstr "درگاه‌های دیگر"
 msgid "number of capture buffers for mmap'ed capture"
 msgstr "تعداد میانگیرهای عکس‌گیری برای mmap عکس‌گیری شده"
 
+#: ../../network/adsl.pm:1
+#, fuzzy, c-format
+msgid " - detected"
+msgstr "شناسایی شده"
+
 #: ../../harddrake/data.pm:1
 #, c-format
 msgid "SMBus controllers"
@@ -10049,6 +10159,11 @@ msgstr "آغازگری مجدد توسط کاربر کنسول"
 msgid "Restore"
 msgstr "بازسازی"
 
+#: ../../standalone/drakclock:1
+#, fuzzy, c-format
+msgid "Server:"
+msgstr "کارگزار‌:"
+
 #: ../../security/help.pm:1
 #, c-format
 msgid "if set to yes, check if the network devices are in promiscuous mode."
@@ -10060,6 +10175,11 @@ msgstr ""
 #, c-format
 msgid "Looking for available packages..."
 msgstr "گشتن بدنبال بسته‌های موجود..."
+
+#: ../../../move/move.pm:1
+#, fuzzy, c-format
+msgid "Please wait, setting up system configuration files on USB key..."
+msgstr "لطفاً صبر کنید، در حال گذاردن سطح امنیتی..."
 
 #: ../../any.pm:1
 #, c-format
@@ -10185,15 +10305,15 @@ msgstr ""
 "فرکانس CPU در مگاهرتز (مگاهرتز تقریبا تشبیه می‌شود به تعداد دستوراتی که cpu  "
 "قادر است در یک ثانیه اجرا کند) "
 
-#: ../../standalone/printerdrake:1
-#, c-format
-msgid "Mandrake Linux Printer Management Tool"
-msgstr "ابزار مدیریت چاپگر لینوکس ماندرایک"
-
 #: ../../pkgs.pm:1
 #, c-format
 msgid "important"
 msgstr "مهم"
+
+#: ../../standalone/printerdrake:1
+#, c-format
+msgid "Mandrake Linux Printer Management Tool"
+msgstr "ابزار مدیریت چاپگر لینوکس ماندرایک"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -10254,6 +10374,11 @@ msgstr "کاربران"
 #, c-format
 msgid "Preparing bootloader..."
 msgstr "در حال آماده‌سازی بارگزار آغازگر..."
+
+#: ../../../move/move.pm:1
+#, c-format
+msgid "Enter your user information, password will be used for screensaver"
+msgstr ""
 
 #: ../../network/network.pm:1
 #, c-format
@@ -10705,15 +10830,15 @@ msgstr "محتوای پرونده"
 msgid "Authentication LDAP"
 msgstr "اعتبارسنجی LDAP"
 
+#: ../../install_steps_gtk.pm:1
+#, c-format
+msgid "in order to keep %s"
+msgstr ""
+
 #: ../../harddrake/sound.pm:1
 #, c-format
 msgid "Let me pick any driver"
 msgstr "بگذار من هر دستگاهی را انتخاب کنم"
-
-#: ../../standalone/net_monitor:1
-#, c-format
-msgid "Profile "
-msgstr "نمایه"
 
 #: ../../standalone/net_monitor:1
 #, c-format
@@ -10814,9 +10939,9 @@ msgstr "ارایه نسخه‌ی هسته"
 #: ../../standalone/drakautoinst:1 ../../standalone/drakbackup:1
 #: ../../standalone/drakboot:1 ../../standalone/drakconnect:1
 #: ../../standalone/drakfloppy:1 ../../standalone/drakfont:1
-#: ../../standalone/drakgw:1 ../../standalone/drakperm:1
-#: ../../standalone/draksec:1 ../../standalone/logdrake:1
-#: ../../standalone/mousedrake:1 ../../standalone/net_monitor:1
+#: ../../standalone/drakperm:1 ../../standalone/draksec:1
+#: ../../standalone/logdrake:1 ../../standalone/mousedrake:1
+#: ../../standalone/net_monitor:1
 #, c-format
 msgid "Cancel"
 msgstr "لغو"
@@ -10970,19 +11095,6 @@ msgstr "ایتالیایی"
 msgid "Basic"
 msgstr "ابتدایی"
 
-#: ../../standalone/drakTermServ:1
-#, c-format
-msgid ""
-"\n"
-" Copyright (C) 2002 by MandrakeSoft \n"
-"\tStew Benedict sbenedict\\@mandrakesoft.com\n"
-"\n"
-msgstr ""
-"\n"
-" Copyright (C) 2002 by MandrakeSoft \n"
-"\tStew Benedict sbenedict\\@mandrakesoft.com\n"
-"\n"
-
 #: ../../install_messages.pm:1
 #, c-format
 msgid "http://www.mandrakelinux.com/en/92errata.php3"
@@ -11003,10 +11115,10 @@ msgstr "pdq"
 msgid "Card IO"
 msgstr "IO کارت"
 
-#: ../../standalone/drakperm:1
-#, c-format
-msgid "when checked, owner and group won't be changed"
-msgstr "اگر انتخاب شود، مالک و گروه تغییر نخواهند کرد"
+#: ../../network/drakfirewall.pm:1
+#, fuzzy, c-format
+msgid "Samba server"
+msgstr "کارگزار Samba "
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -11101,6 +11213,11 @@ msgstr ""
 msgid "access to compilation tools"
 msgstr "دسترسی به ابزار تالیف برنامه"
 
+#: ../../standalone/net_monitor:1
+#, fuzzy, c-format
+msgid "Global statistics"
+msgstr "آمار‌ها"
+
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "Please select data to restore..."
@@ -11120,6 +11237,11 @@ msgstr ""
 #, c-format
 msgid "Standard test page"
 msgstr "صفحه‌ی آزمایشی استاندارد"
+
+#: ../../standalone/drakclock:1
+#, fuzzy, c-format
+msgid "Time Zone"
+msgstr "زمان منطقه‌ای"
 
 #: ../../diskdrake/hd_gtk.pm:1 ../../diskdrake/interactive.pm:1
 #, c-format
@@ -11239,6 +11361,19 @@ msgstr ""
 "یا برای ادامه فقط ورود را فشار دهید. \n"
 "انتخاب شما؟"
 
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"\n"
+" Copyright (C) 2002 by MandrakeSoft \n"
+"\tStew Benedict sbenedict@mandrakesoft.com\n"
+"\n"
+msgstr ""
+"\n"
+" Copyright (C) 2002 by MandrakeSoft \n"
+"\tStew Benedict sbenedict@mandrakesoft.com\n"
+"\n"
+
 #: ../../standalone/draksplash:1
 #, c-format
 msgid "Save theme"
@@ -11264,15 +11399,15 @@ msgstr "جادوگر تنظیمات شبکه"
 msgid "Removable media automounting"
 msgstr "سوارسازی خودکار رسانه قابل انتقال"
 
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "Enter the directory to save:"
-msgstr "شاخه‌ای را برای ذخیره وارد نمایید:"
-
 #: ../../services.pm:1
 #, c-format
 msgid "Printing"
 msgstr "در حال چاپ"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "Enter the directory to save:"
+msgstr "شاخه‌ای را برای ذخیره وارد نمایید:"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -11393,7 +11528,7 @@ msgstr "موش متفکر Kensington "
 msgid "Configuration of a remote printer"
 msgstr "تنظیمات یک چاپگر از راه دور"
 
-#: ../../share/advertising/13-mdkexpert_corporate.pl:1
+#: ../advertising/13-mdkexpert_corporate.pl:1
 #, c-format
 msgid "An online platform to respond to enterprise support needs."
 msgstr "یک پایگاه روی خط برای جوابگویی به احتیاجات حمایتی شرکت‌ها."
@@ -11554,15 +11689,22 @@ msgstr ""
 msgid "Configure Local Area Network..."
 msgstr "تنظیم شبکه منطقه محلی..."
 
-#: ../../security/l10n.pm:1
+#: ../../../move/move.pm:1
 #, c-format
-msgid "Verify checksum of the suid/sgid files"
-msgstr "امتحان checksum برای suid/sgidپرونده‌ها"
+msgid ""
+"The USB key seems to have write protection enabled. Please\n"
+"unplug it, remove write protection, and then plug it again."
+msgstr ""
 
 #: ../../services.pm:1
 #, c-format
 msgid "Launch the sound system on your machine"
 msgstr "پرتاب اجرای سیستم صدا بر ماشین شما"
+
+#: ../../security/l10n.pm:1
+#, c-format
+msgid "Verify checksum of the suid/sgid files"
+msgstr "امتحان checksum برای suid/sgidپرونده‌ها"
 
 #: ../../security/l10n.pm:1
 #, c-format
@@ -11893,6 +12035,11 @@ msgstr "شما نمی‌توانید این بسته را انتخاب نکنی�
 msgid "Loading from floppy"
 msgstr "در حال بارگذاری از دیسکچه "
 
+#: ../../standalone/drakclock:1
+#, c-format
+msgid "Timezone - DrakClock"
+msgstr ""
+
 #: ../../security/help.pm:1
 #, c-format
 msgid "Enable/Disable the logging of IPv4 strange packets."
@@ -12047,6 +12194,11 @@ msgstr ""
 "اطلاعات درباره تنظیم سیستم شما در فصل بعد از نصب راهنمای کاربر لینوکس \n"
 "مان‌درایک رسمی موجود می‌باشد."
 
+#: ../../standalone/drakclock:1
+#, fuzzy, c-format
+msgid "Enable Network Time Protocol"
+msgstr "بازسازی از طریق پیوندنامه شبکه: %s"
+
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "paranoid"
@@ -12137,7 +12289,7 @@ msgstr "دسترسی به ابزار شبکه"
 msgid "Firmware-Upload for HP LaserJet 1000"
 msgstr "باردهی-Firmware برای HP LaserJet 1000"
 
-#: ../../share/advertising/03-software.pl:1
+#: ../advertising/03-software.pl:1
 #, c-format
 msgid ""
 "And, of course, push multimedia to its limits with the very latest software "
@@ -12202,15 +12354,15 @@ msgstr "پایان‌نامه آغازگری"
 msgid "LVM-disks %s\n"
 msgstr "LVM-disks %s\n"
 
-#: ../../diskdrake/interactive.pm:1
-#, c-format
-msgid "The package %s is needed. Install it?"
-msgstr "بسته %s لازم است نصب شود. آیا نصب شود؟"
-
 #: ../../services.pm:1
 #, c-format
 msgid "On boot"
 msgstr "در آغازگری"
+
+#: ../../diskdrake/interactive.pm:1
+#, c-format
+msgid "The package %s is needed. Install it?"
+msgstr "بسته %s لازم است نصب شود. آیا نصب شود؟"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -12226,6 +12378,11 @@ msgstr "واتیکان"
 #, c-format
 msgid "Please make a backup of your data first"
 msgstr "لطفا اول یک ذخیره پشتیبان از داده‌های خود تهیه نمایید"
+
+#: ../../harddrake/data.pm:1
+#, c-format
+msgid "ADSL adapters"
+msgstr ""
 
 #: ../../install_interactive.pm:1
 #, c-format
@@ -12254,7 +12411,7 @@ msgstr "Firmware لازم است"
 msgid "Remove List"
 msgstr "برداشتن لیست"
 
-#: ../../share/advertising/05-desktop.pl:1
+#: ../advertising/05-desktop.pl:1
 #, c-format
 msgid "A customizable environment"
 msgstr "یک محیط اختصاصی‌سازی"
@@ -12493,6 +12650,13 @@ msgstr "تایین مدت تاخیر پوسته. صفر بمعنی هیچ تاخ
 #, c-format
 msgid "Firmware copy succeeded"
 msgstr "کپی کردن فیرم‌ویر موفق بود"
+
+#: ../../../move/tree/mdk_totem:1
+#, c-format
+msgid ""
+"You can't use another CDROM when the following programs are running: \n"
+"%s"
+msgstr ""
 
 #: ../../security/help.pm:1
 #, c-format
@@ -12976,6 +13140,11 @@ msgstr ""
 "مشخص می‌دهد. فقط تنظیم‌ها مورد نظرتان را به خط فرمان اضافه نمایید، line, e. g. "
 "\"%s <file>\". "
 
+#: ../../standalone/drakclock:1
+#, fuzzy, c-format
+msgid "DrakClock"
+msgstr "Drakbackup"
+
 #: ../../modules/interactive.pm:1
 #, c-format
 msgid ""
@@ -13007,21 +13176,6 @@ msgid ""
 msgstr ""
 "\n"
 "- شبح (%s) از طریق:\n"
-
-#: ../../standalone/drakgw:1
-#, c-format
-msgid ""
-"Welcome to the Internet Connection Sharing utility!\n"
-"\n"
-"%s\n"
-"\n"
-"Click on Configure to launch the setup wizard."
-msgstr ""
-"به ابزار اشتراک ارتباط اینترنت خوش آمدید! \n"
-"\n"
-"%s\n"
-"\n"
-"بر روی تنظیم برای پرتاب جادوگر برپاسازی کلیک نمایید."
 
 #: ../../lang.pm:1
 #, c-format
@@ -13209,6 +13363,11 @@ msgstr ""
 msgid "Christmas Island"
 msgstr "جزایر کریسمس"
 
+#: ../../mouse.pm:1
+#, fuzzy, c-format
+msgid "Automatic"
+msgstr "آی پی خودکار"
+
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Installation of bootloader failed. The following error occured:"
@@ -13310,11 +13469,6 @@ msgstr "انتقال اکنون"
 #, c-format
 msgid "Set root password and network authentication methods"
 msgstr "گذاردن گذرواژه مدیر و روش‌های اعتبارسنجی شبکه"
-
-#: ../../standalone/drakgw:1
-#, c-format
-msgid "Internet Connection Sharing configuration"
-msgstr "تنظیم اشتراک ارتباط اینترنت"
 
 #: ../../ugtk2.pm:1
 #, c-format
@@ -13588,6 +13742,11 @@ msgstr ""
 msgid "LILO with text menu"
 msgstr "LILO با فهرست متنی"
 
+#: ../../standalone/net_monitor:1
+#, c-format
+msgid "instantaneous"
+msgstr ""
+
 #: ../../network/drakfirewall.pm:1
 #, c-format
 msgid "Everything (no firewall)"
@@ -13783,6 +13942,11 @@ msgstr "لطفا یک نام کاربر بدهید"
 msgid "Enable CD Boot?"
 msgstr "فعال سازی آغازگری سی دی؟"
 
+#: ../../../move/move.pm:1
+#, c-format
+msgid "Simply reboot"
+msgstr ""
+
 #: ../../interactive/stdio.pm:1
 #, c-format
 msgid " enter `void' for void entry"
@@ -13892,15 +14056,15 @@ msgstr ""
 "می‌تواند بوسیله‌ی \n"
 "ماشین های دیگر روی شبکه شما نیز استفاده شود را نصب می‌کند."
 
-#: ../../install_steps_interactive.pm:1
-#, c-format
-msgid "Which is your timezone?"
-msgstr "زمان منطقه شما کدام است؟"
-
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "Can't create log file!"
 msgstr "نمی‌توان پرونده‌ی ثبت را ایجاد نمود!"
+
+#: ../../install_steps_interactive.pm:1 ../../standalone/drakclock:1
+#, c-format
+msgid "Which is your timezone?"
+msgstr "زمان منطقه شما کدام است؟"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -13952,6 +14116,11 @@ msgstr "موزامبیک"
 msgid "Icon"
 msgstr "شمایل"
 
+#: ../../../move/tree/mdk_totem:1
+#, fuzzy, c-format
+msgid "Kill those programs"
+msgstr "دستیابی به برنامه‌های X"
+
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "Please choose what you want to backup"
@@ -13987,7 +14156,7 @@ msgstr "افزودن یک قاعده"
 msgid "Chunk size %s\n"
 msgstr "اندازه‌ی تکه %s\n"
 
-#: ../../share/advertising/02-community.pl:1
+#: ../advertising/02-community.pl:1
 #, c-format
 msgid "Build the future of Linux!"
 msgstr "آینده لینوکس را بسازید!"
@@ -14121,7 +14290,7 @@ msgstr ""
 "تنظیم \n"
 "نمایشگر خود موفق نبوده‌اید."
 
-#: ../../share/advertising/13-mdkexpert_corporate.pl:1
+#: ../advertising/13-mdkexpert_corporate.pl:1
 #, c-format
 msgid "MandrakeExpert Corporate"
 msgstr "MandrakeExpert Corporate"
@@ -14163,6 +14332,11 @@ msgid ""
 "After changing type of partition %s, all data on this partition will be lost"
 msgstr ""
 "بعد ار تغییر نوع قسمت‌بندی %s، تمام داده‌ها بر این قسمت‌بندی ار دست خواهند رفت"
+
+#: ../../harddrake/data.pm:1
+#, fuzzy, c-format
+msgid "ISDN adapters"
+msgstr "کارت ISDN "
 
 #: ../../common.pm:1
 #, c-format
@@ -14514,6 +14688,11 @@ msgstr "اشتراک پویشگرهای محلی"
 msgid "Plug'n Play probing failed. Please select the correct monitor"
 msgstr "وارسی Plug'n Play شکست خورد. لطفاً نمایشگر درست را انتخاب نمایید"
 
+#: ../../../move/move.pm:1
+#, c-format
+msgid "Detect again USB key"
+msgstr ""
+
 #: ../../services.pm:1
 #, c-format
 msgid "Services and deamons"
@@ -14556,7 +14735,7 @@ msgstr "اطاعت Chkconfig از قواعد msec "
 msgid "Slovakian (QWERTZ)"
 msgstr "اسلوواکی (QWERTZ)"
 
-#: ../../share/advertising/06-development.pl:1
+#: ../advertising/06-development.pl:1
 #, c-format
 msgid ""
 "To modify and to create in different languages such as Perl, Python, C and C+"
@@ -14622,6 +14801,11 @@ msgstr "الجزایر"
 #, c-format
 msgid "Restore Via Network"
 msgstr "بازسازی از طریق شبکه"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "Use tar and bzip2 (rather than tar and gzip)"
+msgstr ""
 
 #: ../../any.pm:1
 #, c-format
@@ -14756,7 +14940,7 @@ msgstr "DVD-ROM"
 msgid "Georgian (\"Latin\" layout)"
 msgstr "گرجستانی (\"لاتین\" طرح)"
 
-#: ../../share/advertising/09-mdksecure.pl:1
+#: ../advertising/09-mdksecure.pl:1
 #, c-format
 msgid "Get the best items with Mandrake Linux Strategic partners"
 msgstr "بهترین‌ها را با شرکای تاکتیکی لینوکس مان‌درایک دریافت نمایید "
@@ -14862,7 +15046,7 @@ msgstr "ورود خودکار"
 msgid "Domain Admin Password"
 msgstr "گذرواژه مدیریت دامنه"
 
-#: ../../share/advertising/05-desktop.pl:1
+#: ../advertising/05-desktop.pl:1
 #, c-format
 msgid ""
 "Perfectly adapt your computer to your needs thanks to the 11 available "
@@ -15007,6 +15191,11 @@ msgstr "utopia 25"
 msgid "Pipe job into a command"
 msgstr "هدایت کار بدرون یک فرمان"
 
+#: ../../../move/move.pm:1
+#, fuzzy, c-format
+msgid "Remove system config files"
+msgstr "آیا پرونده‌ی loopback برداشته شود؟"
+
 #: ../../lang.pm:1
 #, c-format
 msgid "Cote d'Ivoire"
@@ -15018,7 +15207,8 @@ msgid "new dynamic device name generated by core kernel devfs"
 msgstr "نام جدید متغیر دستگاه تولید شده توسط devfs هسته‌ی مرکزی"
 
 #: ../../help.pm:1 ../../install_any.pm:1 ../../interactive.pm:1
-#: ../../ugtk2.pm:1 ../../modules/interactive.pm:1 ../../standalone/drakgw:1
+#: ../../ugtk2.pm:1 ../../modules/interactive.pm:1
+#: ../../standalone/drakclock:1 ../../standalone/drakgw:1
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "Yes"
@@ -15039,11 +15229,6 @@ msgstr "پیشرفت بازسازی"
 msgid "Estonia"
 msgstr "استونی"
 
-#: ../../standalone/scannerdrake:1
-#, c-format
-msgid "Choose the host on which the local scanners should be made available:"
-msgstr "میزبانی را که پویشگران محلی باید بر آن موجود باشند را انتخاب نمایید:"
-
 #: ../../partition_table.pm:1
 #, c-format
 msgid ""
@@ -15055,6 +15240,11 @@ msgstr ""
 "حل، انتقال قسمت‌بندی‌های مقدم بنحوی است که آن سوراخ نزدیک به قسمت‌بندی‌های مضاعف "
 "قرار داده شود. "
 
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "Choose the host on which the local scanners should be made available:"
+msgstr "میزبانی را که پویشگران محلی باید بر آن موجود باشند را انتخاب نمایید:"
+
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "Channel"
@@ -15065,11 +15255,6 @@ msgstr "کانال"
 #, c-format
 msgid "Add"
 msgstr "افزودن"
-
-#: ../../standalone/drakgw:1
-#, c-format
-msgid "No Internet Connection Sharing has ever been configured."
-msgstr "هیچ اشتراک ارتباط اینترنت تاکنون تنظیم نشده است."
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -15363,7 +15548,7 @@ msgstr "آیا این یک نصب است یا یک ارتقا؟"
 msgid "ISDN card"
 msgstr "کارت ISDN "
 
-#: ../../share/advertising/02-community.pl:1
+#: ../advertising/02-community.pl:1
 #, c-format
 msgid ""
 "To share your own knowledge and help build Linux software, join our "
@@ -15422,6 +15607,70 @@ msgstr ""
 "\"\n"
 "یا بعدی کارآرایی خوبی داشته باشد. اجرای یک ارتقا بر نسخ پیشتر از لینوکس\n"
 "مان‌درایک ۸.۱پیشنهاد نمی‌شود."
+
+#: ../../standalone/drakfont:1
+#, c-format
+msgid ""
+"\n"
+" Copyright (C) 2001-2002 by MandrakeSoft \n"
+"     DUPONT Sebastien (original version)\n"
+"     CHAUMETTE Damien <dchaumette@mandrakesoft.com>\n"
+"\n"
+" This program is free software; you can redistribute it and/or modify\n"
+" it under the terms of the GNU General Public License as published by\n"
+" the Free Software Foundation; either version 2, or (at your option)\n"
+" any later version.\n"
+"\n"
+" This program is distributed in the hope that it will be useful,\n"
+" but WITHOUT ANY WARRANTY; without even the implied warranty of\n"
+" MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n"
+" GNU General Public License for more details.\n"
+"\n"
+" You should have received a copy of the GNU General Public License\n"
+" along with this program; if not, write to the Free Software\n"
+" Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.\n"
+"\n"
+" Thanks:\n"
+"    -  pfm2afm:   \n"
+"\t by Ken Borgendale:\n"
+"\t    Convert a Windows .pfm  file to a .afm (Adobe Font Metrics)\n"
+"    -  type1inst:\n"
+"\t by James Macnicol: \n"
+"\t    type1inst generates files fonts.dir fonts.scale & Fontmap.\n"
+"    -  ttf2pt1:   \n"
+"\t  by Andrew Weeks, Frank Siegert, Thomas Henlich, Sergey Babkin  \n"
+"             Convert ttf font files to afm and pfb fonts\n"
+msgstr ""
+"\n"
+" Copyright (C) 2001-2002 by MandrakeSoft \n"
+"     DUPONT Sebastien (original version)\n"
+"     CHAUMETTE Damien <dchaumette@mandrakesoft.com>\n"
+"\n"
+" این برنامه یک نرم‌افزار آزاد می‌باشد؛ شما می‌توانید آن را پخش مجدد و یا آن را "
+"تحت \n"
+" شرایط گنو که توسط موسسه نرم‌افزار آزاد منتشر شده است؛ نسخه ۲ یا بالاتر تغییر "
+"دهید\n"
+"\n"
+" این برنامه به امید آنکه مفید بوده ولی بدون هیچگونه ضمانت؛ بدون حتی ضمانت "
+"کارآرایی\n"
+" تجاری یا تناسب برای منظور خاصی می باشد. اجازه نامه گنو را برای تشریحات "
+"بیشتر نگاه کنید\n"
+"\n"
+" شما بایستی یک کپی از این اجازه نامه‌ی گنو را با این برنامه دریافت کرده "
+"باشید؛ اگر نه، به نشانی\n"
+" Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.\n"
+"نامه‌ای برای دریافت آن بنویسید.\n"
+" \n"
+"با تشکر از:\n"
+"    -  pfm2afm:   \n"
+"\t by Ken Borgendale:\n"
+"\t    Convert a Windows .pfm  file to a .afm (Adobe Font Metrics)\n"
+"    -  type1inst:\n"
+"\t by James Macnicol: \n"
+"\t    type1inst generates files fonts.dir fonts.scale & Fontmap.\n"
+"    -  ttf2pt1:   \n"
+"\t  by Andrew Weeks, Frank Siegert, Thomas Henlich, Sergey Babkin  \n"
+"             Convert ttf font files to afm and pfb fonts\n"
 
 #: ../../printer/main.pm:1
 #, c-format
@@ -15489,6 +15738,11 @@ msgstr "آغاز گستره‌ی DHCP "
 msgid "Unsafe"
 msgstr "ناامن"
 
+#: ../../network/drakfirewall.pm:1
+#, fuzzy, c-format
+msgid "SSH server"
+msgstr "کارگزار‌ SSH "
+
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid ", %s sectors"
@@ -15496,7 +15750,7 @@ msgstr ", %s بندها"
 
 #: ../../help.pm:1 ../../install_any.pm:1 ../../interactive.pm:1
 #: ../../ugtk2.pm:1 ../../modules/interactive.pm:1
-#: ../../standalone/harddrake2:1
+#: ../../standalone/drakclock:1 ../../standalone/harddrake2:1
 #, c-format
 msgid "No"
 msgstr "نه"
@@ -16058,6 +16312,11 @@ msgstr "برداشتن میزبان انتخاب شده"
 msgid "Network configuration"
 msgstr "تنظیمات شبکه"
 
+#: ../../standalone/harddrake2:1
+#, c-format
+msgid "/Autodetect _jaz drives"
+msgstr "/شناسایی خودکار راه‌انداز _jaz"
+
 #: ../../any.pm:1
 #, c-format
 msgid "No sharing"
@@ -16181,9 +16440,10 @@ msgstr "توجه نمایید که اکنون همه‌ی رسانه‌های ش
 #: ../../install_steps.pm:1 ../../diskdrake/dav.pm:1
 #: ../../diskdrake/hd_gtk.pm:1 ../../diskdrake/interactive.pm:1
 #: ../../diskdrake/smbnfs_gtk.pm:1 ../../interactive/http.pm:1
-#: ../../standalone/drakboot:1 ../../standalone/drakbug:1
+#: ../../standalone/drakauth:1 ../../standalone/drakboot:1
+#: ../../standalone/drakbug:1 ../../standalone/drakconnect:1
 #: ../../standalone/drakfloppy:1 ../../standalone/drakfont:1
-#: ../../standalone/draksplash:1
+#: ../../standalone/draksplash:1 ../../../move/move.pm:1
 #, c-format
 msgid "Error"
 msgstr "خطا"
@@ -16227,6 +16487,11 @@ msgstr ""
 "سیستم شما از تنظیمات چندگانه‌ی سرآیندی حمایت می‌کند. \n"
 "چکار می خواهید انجام دهید؟"
 
+#: ../../partition_table.pm:1
+#, c-format
+msgid "mount failed: "
+msgstr "سوارسازی شکست خورد:"
+
 #: ../../steps.pm:1
 #, c-format
 msgid "Configure services"
@@ -16236,11 +16501,6 @@ msgstr "تنظیم سرویس‌ها"
 #, c-format
 msgid "Broadcast Address:"
 msgstr "نشانی پخش همگانی:"
-
-#: ../../partition_table.pm:1
-#, c-format
-msgid "mount failed: "
-msgstr "سوارسازی شکست خورد:"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -16258,15 +16518,15 @@ msgstr ""
 msgid "Image"
 msgstr "تصویر"
 
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "Failed to add the printer \"%s\" to Star Office/OpenOffice.org/GIMP."
-msgstr "اضافه کردن چاپگر \"%s\" به گیمپ شکست خورد."
-
 #: ../../services.pm:1
 #, c-format
 msgid "Remote Administration"
 msgstr "مدیریت از راه دور"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Failed to add the printer \"%s\" to Star Office/OpenOffice.org/GIMP."
+msgstr "اضافه کردن چاپگر \"%s\" به گیمپ شکست خورد."
 
 #: ../../modules.pm:1
 #, c-format
@@ -16326,7 +16586,7 @@ msgstr "ژوئیه"
 msgid "Prints into %s"
 msgstr "چاپ بدرون %s"
 
-#: ../../install_steps_interactive.pm:1
+#: ../../install_steps_interactive.pm:1 ../../../move/move.pm:1
 #, c-format
 msgid "An error occurred"
 msgstr "یک خطا رخ داد"
@@ -16541,7 +16801,7 @@ msgstr "، دستگاه چند-عاملی"
 msgid "Laos"
 msgstr "لائوس"
 
-#: ../../share/advertising/04-configuration.pl:1
+#: ../advertising/04-configuration.pl:1
 #, c-format
 msgid ""
 "Mandrake Linux 9.2 provides you with the Mandrake Control Center, a powerful "
@@ -16725,11 +16985,6 @@ msgstr "احتیاج به ایجاد پرونده‌ی /etc/dhcpd.conf در اب
 msgid "Is FPU present"
 msgstr "آیا FPU حاضر است"
 
-#: ../../standalone/scannerdrake:1
-#, c-format
-msgid "There are no scanners found which are available on your system.\n"
-msgstr "هیچ پویشگری روی سیستم شما یافت نشد.\n"
-
 #: ../../services.pm:1
 #, c-format
 msgid ""
@@ -16738,6 +16993,11 @@ msgid ""
 msgstr ""
 "هیچ اطلاعات اضافی \n"
 "درباره‌ی این سرویس، متأسفم."
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "There are no scanners found which are available on your system.\n"
+msgstr "هیچ پویشگری روی سیستم شما یافت نشد.\n"
 
 #: ../../standalone/drakTermServ:1
 #, c-format
@@ -16778,20 +17038,6 @@ msgstr "دستگاه DVDRAM"
 #, c-format
 msgid "if set to yes, report unowned files."
 msgstr "اگر به آری گذاشته شده، پرونده‌های بدون صاحب گزارش شود."
-
-#: ../../standalone/harddrake2:1
-#, c-format
-msgid ""
-"This is HardDrake, a Mandrake hardware configuration tool.\n"
-"<span foreground=\"royalblue3\">Version:</span> %s\n"
-"<span foreground=\"royalblue3\">Author:</span> Thierry Vignaud &lt;tvignaud"
-"\\@mandrakesoft.com&gt;\n"
-"\n"
-msgstr ""
-"این برنامه سخت‌درایک است، یک ابزار تنظیمات سخت‌افزار مان‌درایک.\n"
-"<span foreground=\"royalblue3\">نسخه:</span> %s\n"
-"<span foreground=\"royalblue3\">نگارنده:</span> Thierry Vignaud &lt;tvignaud"
-"\\@mandrakesoft.com&gt;\n"
 
 #: ../../install_interactive.pm:1
 #, c-format
@@ -16874,10 +17120,27 @@ msgstr "ویتنام"
 msgid "/_Fields description"
 msgstr "/توضیحات ـمحوطه‌ها"
 
-#: ../../share/advertising/10-security.pl:1
+#: ../advertising/10-security.pl:1
 #, c-format
 msgid "Optimize your security by using Mandrake Linux"
 msgstr "امنیت خود را با استفاده از لینوکس مان‌درایک به حداکثر برسانید"
+
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"\n"
+"\n"
+" Thanks:\n"
+"\t- LTSP Project http://www.ltsp.org\n"
+"\t- Michael Brown <mbrown@fensystems.co.uk>\n"
+"\n"
+msgstr ""
+"\n"
+"\n"
+" Thanks:\n"
+"\t- LTSP Project http://www.ltsp.org\n"
+"\t- Michael Brown <mbrown@fensystems.co.uk>\n"
+"\n"
 
 #: ../../install_steps_gtk.pm:1 ../../interactive.pm:1 ../../ugtk2.pm:1
 #: ../../Xconfig/resolution_and_depth.pm:1 ../../diskdrake/hd_gtk.pm:1
@@ -16978,7 +17241,7 @@ msgstr "لیست کاربر معتبر تغییر کرده است، بازنگا
 msgid "mkinitrd optional arguments"
 msgstr "مبحث‌های دلخواه mkinitrd "
 
-#: ../../share/advertising/03-software.pl:1
+#: ../advertising/03-software.pl:1
 #, c-format
 msgid ""
 "Surf the Web with Mozilla or Konqueror, read your mail with Evolution or "
@@ -17174,6 +17437,11 @@ msgstr "راه‌اندازی مجدد CUPS..."
 #, c-format
 msgid "Printing/Scanning/Photo Cards on \"%s\""
 msgstr "چاپ/پویش/کارتهای عکس روی \"%s\""
+
+#: ../../../move/move.pm:1
+#, c-format
+msgid "Continue without USB key"
+msgstr ""
 
 #: ../../install_steps.pm:1
 #, c-format
@@ -17639,7 +17907,7 @@ msgstr "اجازه‌ی ارتباطات پنجره X "
 msgid "Hardware probing in progress"
 msgstr "وارسی سخت‌افزار در جریان است"
 
-#: ../../standalone/drakgw:1
+#: ../../network/shorewall.pm:1 ../../standalone/drakgw:1
 #, c-format
 msgid "Net Device"
 msgstr "دستگاه شبکه"
@@ -17704,6 +17972,11 @@ msgid ""
 msgstr ""
 "بسته‌ی 'ImageMagick' برای تکمیل تنظیمات لازم می‌باشد.\n"
 "برای نصب 'ImageMagick' بر \"تایید\" یا بر \"لغو\" برای خروج کلیک نمایید "
+
+#: ../../network/drakfirewall.pm:1
+#, fuzzy, c-format
+msgid "Telnet server"
+msgstr "کارگزار X "
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -17970,7 +18243,7 @@ msgstr "Syslog"
 msgid "Can't create catalog!"
 msgstr "نمی‌توان شاخه را ایجاد نمود!"
 
-#: ../../share/advertising/11-mnf.pl:1
+#: ../advertising/11-mnf.pl:1
 #, c-format
 msgid ""
 "Complete your security setup with this very easy-to-use software which "
@@ -18027,6 +18300,11 @@ msgstr "تنظیمات ارتباط اینترنت"
 #, c-format
 msgid "Add the name as an exception to the handling of password aging by msec."
 msgstr "نام را مثل یک استثنا برای اداره‌ی عمر گذرواژه بوسیله msec اضافه نمایید."
+
+#: ../../network/isdn.pm:1
+#, fuzzy, c-format
+msgid "USB"
+msgstr "LSB"
 
 #: ../../standalone/drakxtv:1
 #, c-format
@@ -18087,6 +18365,11 @@ msgstr "گروه کاری"
 #, c-format
 msgid "Printer host name or IP"
 msgstr "نام میزبان یا IP چاپگر"
+
+#: ../../standalone/drakconnect:1
+#, fuzzy, c-format
+msgid "down"
+msgstr "انجام شد"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -18545,6 +18828,11 @@ msgstr "افزودن یک مورد"
 msgid "The printers on this machine are available to other computers"
 msgstr "چاپگرهای روی این ماشین در دسترسی رایانه‌های دیگر می‌باشند"
 
+#: ../../lang.pm:1
+#, fuzzy, c-format
+msgid "China (Hong Kong)"
+msgstr "هنگ‌ کنگ"
+
 #: ../../standalone/drakautoinst:1
 #, c-format
 msgid "I can't find needed image file `%s'."
@@ -18601,7 +18889,7 @@ msgstr "بسته نصب نشده است"
 msgid "American Samoa"
 msgstr "ساموای آمریکا"
 
-#: ../../share/advertising/12-mdkexpert.pl:1
+#: ../advertising/12-mdkexpert.pl:1
 #, c-format
 msgid "Become a MandrakeExpert"
 msgstr "یک کارشناس مان‌درایک شوید"
@@ -18724,6 +19012,11 @@ msgstr "ایتالیا"
 msgid "Cayman Islands"
 msgstr "جزایر کی‌من"
 
+#: ../../fs.pm:1 ../../partition_table.pm:1
+#, c-format
+msgid "error unmounting %s: %s"
+msgstr "خطا در پیاده‌سازی %s: %s"
+
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Name of printer"
@@ -18733,11 +19026,6 @@ msgstr "نام چاپگر"
 #, c-format
 msgid "disable"
 msgstr "غیر‌فعال سازی"
-
-#: ../../fs.pm:1 ../../partition_table.pm:1
-#, c-format
-msgid "error unmounting %s: %s"
-msgstr "خطا در پیاده‌سازی %s: %s"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -18844,7 +19132,7 @@ msgstr "فشرده"
 msgid "Detected model: %s %s"
 msgstr "مدل شناسایی شده: %s %s"
 
-#: ../../share/advertising/03-software.pl:1
+#: ../advertising/03-software.pl:1
 #, c-format
 msgid "MandrakeSoft has selected the best software for you"
 msgstr "MandrakeSoft بهترین نرم‌افزار را برای شما انتخاب کرده است"
@@ -18981,6 +19269,11 @@ msgstr "واسط تصویری در شروع"
 msgid " adsl"
 msgstr " adsl"
 
+#: ../../raid.pm:1
+#, c-format
+msgid "Not enough partitions for RAID level %d\n"
+msgstr "قسمت‌بندی‌های کافی برای سطح RAID %d وجود ندارد\n"
+
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "format of floppies supported by the drive"
@@ -18990,11 +19283,6 @@ msgstr "قالب‌های دیسکچه حمایت شده توسط دستگاه"
 #, c-format
 msgid "Firmware copy failed, file %s not found"
 msgstr "کپی کردن فیرم‌ویر شکست خورد، پرونده‌ی %s یافت نشد"
-
-#: ../../raid.pm:1
-#, c-format
-msgid "Not enough partitions for RAID level %d\n"
-msgstr "قسمت‌بندی‌های کافی برای سطح RAID %d وجود ندارد\n"
 
 #: ../../standalone/drakTermServ:1
 #, c-format
@@ -19124,7 +19412,7 @@ msgstr ""
 "هیچ تصویر سی دی یا دی وی دی یافت نشد، لطفاً برنامه نصب و پرونده‌های rpm را کپی "
 "نمایید."
 
-#: ../../share/advertising/04-configuration.pl:1
+#: ../advertising/04-configuration.pl:1
 #, c-format
 msgid "Mandrake's multipurpose configuration tool"
 msgstr "ابزار تنظیمات چندمنظوری مان‌درایک"
@@ -19154,7 +19442,7 @@ msgstr "دیسک"
 msgid "Enter a printer device URI"
 msgstr "یک نشانی اینترنتی دستگاه چاپگر را وارد نمایید"
 
-#: ../../share/advertising/01-thanks.pl:1
+#: ../advertising/01-thanks.pl:1
 #, c-format
 msgid ""
 "The success of MandrakeSoft is based upon the principle of Free Software. "
@@ -19748,7 +20036,7 @@ msgstr "مدل کارت:"
 msgid "Thin Client"
 msgstr "کارگیر نازک"
 
-#: ../../share/advertising/01-thanks.pl:1
+#: ../advertising/01-thanks.pl:1
 #, c-format
 msgid "Thank you for choosing Mandrake Linux 9.2"
 msgstr "برای انتخاب لینوکس مان‌درایک از شما متشکریم"
@@ -19864,6 +20152,13 @@ msgstr "گرفتن قلم‌های نگارش ویندوز"
 msgid "Mouse Systems"
 msgstr "سیستم‌های موش"
 
+#: ../../standalone/drakclock:1
+#, c-format
+msgid ""
+"Your computer can synchronize its clock\n"
+" with a remote time server using NTP"
+msgstr ""
+
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Iranian"
@@ -19889,7 +20184,7 @@ msgstr "افزودن کارگزار"
 msgid "Remote printer name"
 msgstr "نام چاپگر از راه دور"
 
-#: ../../share/advertising/10-security.pl:1
+#: ../advertising/10-security.pl:1
 #, c-format
 msgid ""
 "MandrakeSoft has designed exclusive tools to create the most secured Linux "
@@ -20045,6 +20340,11 @@ msgstr "Microsoft Explorer"
 msgid "Uninstall Fonts"
 msgstr "نصب‌برداری قلم‌های نگارش"
 
+#: ../../../move/move.pm:1
+#, fuzzy, c-format
+msgid "Please wait, detecting and configuring devices..."
+msgstr "لطفاً صبر کنید، در حال گذاردن سطح امنیتی..."
+
 #: ../../keyboard.pm:1
 #, c-format
 msgid "German (no dead keys)"
@@ -20073,11 +20373,6 @@ msgstr ""
 "شما می‌توانید با استفاده از NFS یا Samba صادر نمایید. لطفاً آن را که مایلید "
 "استفاده کنید را انتخاب نمایید."
 
-#: ../../help.pm:1 ../../install_steps_interactive.pm:1
-#, c-format
-msgid "Reboot"
-msgstr "آغازگری مجدد"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Gambia"
@@ -20087,6 +20382,12 @@ msgstr "گامبیا"
 #, c-format
 msgid "Mandrake Control Center"
 msgstr "مرکز کنترل مان‌درایک"
+
+#: ../../help.pm:1 ../../install_steps_interactive.pm:1
+#: ../../../move/move.pm:1
+#, c-format
+msgid "Reboot"
+msgstr "آغازگری مجدد"
 
 #: ../../printer/main.pm:1
 #, c-format
@@ -20122,6 +20423,11 @@ msgstr ""
 #, c-format
 msgid "Remember this password"
 msgstr "بخاطر سپردن این گذرواژه"
+
+#: ../../install_steps_gtk.pm:1
+#, c-format
+msgid "due to unsatisfied %s"
+msgstr ""
 
 #: ../../standalone/drakgw:1
 #, c-format
@@ -20181,6 +20487,11 @@ msgstr "گینه‌ی جدید پاپائو "
 #, c-format
 msgid "Multi-function device on a parallel port"
 msgstr "دستگاه چند-عملیاتی بر یک درگاه موازی "
+
+#: ../../../move/tree/mdk_totem:1
+#, fuzzy, c-format
+msgid "Busy files"
+msgstr "ذخیره پشتیبان پرونده‌های سیستم"
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -20244,6 +20555,20 @@ msgstr ""
 #, c-format
 msgid "DHCP Client"
 msgstr "کارگیر DHCP "
+
+#: ../../standalone/harddrake2:1
+#, c-format
+msgid ""
+"This is HardDrake, a Mandrake hardware configuration tool.\n"
+"<span foreground=\"royalblue3\">Version:</span> %s\n"
+"<span foreground=\"royalblue3\">Author:</span> Thierry Vignaud &lt;"
+"tvignaud@mandrakesoft.com&gt;\n"
+"\n"
+msgstr ""
+"این برنامه سخت‌درایک است، یک ابزار تنظیمات سخت‌افزار مان‌درایک.\n"
+"<span foreground=\"royalblue3\">نسخه:</span> %s\n"
+"<span foreground=\"royalblue3\">نگارنده:</span> Thierry Vignaud &lt;"
+"tvignaud@mandrakesoft.com&gt;\n"
 
 #: ../../standalone/drakgw:1
 #, c-format
@@ -20444,77 +20769,13 @@ msgstr "چاپگرها منتقل نشوند"
 msgid "Delay before booting the default image"
 msgstr "درنگ پیش از آغازگری تصویر پیش‌فرض"
 
-#: ../../standalone/drakfont:1
-#, c-format
-msgid ""
-"\n"
-" Copyright (C) 2001-2002 by MandrakeSoft \n"
-"     DUPONT Sebastien (original version)\n"
-"     CHAUMETTE Damien <dchaumette\\@mandrakesoft.com>\n"
-"\n"
-" This program is free software; you can redistribute it and/or modify\n"
-" it under the terms of the GNU General Public License as published by\n"
-" the Free Software Foundation; either version 2, or (at your option)\n"
-" any later version.\n"
-"\n"
-" This program is distributed in the hope that it will be useful,\n"
-" but WITHOUT ANY WARRANTY; without even the implied warranty of\n"
-" MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n"
-" GNU General Public License for more details.\n"
-"\n"
-" You should have received a copy of the GNU General Public License\n"
-" along with this program; if not, write to the Free Software\n"
-" Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.\n"
-"\n"
-" Thanks:\n"
-"    -  pfm2afm:   \n"
-"\t by Ken Borgendale:\n"
-"\t    Convert a Windows .pfm  file to a .afm (Adobe Font Metrics)\n"
-"    -  type1inst:\n"
-"\t by James Macnicol: \n"
-"\t    type1inst generates files fonts.dir fonts.scale & Fontmap.\n"
-"    -  ttf2pt1:   \n"
-"\t  by Andrew Weeks, Frank Siegert, Thomas Henlich, Sergey Babkin  \n"
-"             Convert ttf font files to afm and pfb fonts\n"
-msgstr ""
-"\n"
-" Copyright (C) 2001-2002 by MandrakeSoft \n"
-"     DUPONT Sebastien (original version)\n"
-"     CHAUMETTE Damien <dchaumette\\@mandrakesoft.com>\n"
-"\n"
-" این برنامه یک نرم‌افزار آزاد می‌باشد؛ شما می‌توانید آن را پخش مجدد و یا آن را "
-"تحت \n"
-" شرایط گنو که توسط موسسه نرم‌افزار آزاد منتشر شده است؛ نسخه ۲ یا بالاتر تغییر "
-"دهید\n"
-"\n"
-" این برنامه به امید آنکه مفید بوده ولی بدون هیچگونه ضمانت؛ بدون حتی ضمانت "
-"کارآرایی\n"
-" تجاری یا تناسب برای منظور خاصی می باشد. اجازه نامه گنو را برای تشریحات "
-"بیشتر نگاه کنید\n"
-"\n"
-" شما بایستی یک کپی از این اجازه نامه‌ی گنو را با این برنامه دریافت کرده "
-"باشید؛ اگر نه، به نشانی\n"
-" Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.\n"
-"نامه‌ای برای دریافت آن بنویسید.\n"
-" \n"
-"با تشکر از:\n"
-"    -  pfm2afm:   \n"
-"\t by Ken Borgendale:\n"
-"\t    Convert a Windows .pfm  file to a .afm (Adobe Font Metrics)\n"
-"    -  type1inst:\n"
-"\t by James Macnicol: \n"
-"\t    type1inst generates files fonts.dir fonts.scale & Fontmap.\n"
-"    -  ttf2pt1:   \n"
-"\t  by Andrew Weeks, Frank Siegert, Thomas Henlich, Sergey Babkin  \n"
-"             Convert ttf font files to afm and pfb fonts\n"
-
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "Use Hard Disk to backup"
 msgstr "استفاده از دیسک برای ذخیره پشتیبان"
 
 #: ../../help.pm:1 ../../install_steps_gtk.pm:1 ../../standalone/drakbackup:1
-#: ../../standalone/drakboot:1 ../../standalone/drakgw:1
+#: ../../standalone/drakboot:1
 #, c-format
 msgid "Configure"
 msgstr "تنظیم"
@@ -20583,7 +20844,7 @@ msgstr ""
 "این سی دی را بر یک رایانه‌ی نصب شده با استفاده از \"rpm -qpl Mandrake/RPMS/*."
 "rpm\" کنترل نمایید\n"
 
-#: ../../share/advertising/06-development.pl:1
+#: ../advertising/06-development.pl:1
 #, c-format
 msgid "Mandrake Linux 9.2: the ultimate development platform"
 msgstr "لینوکس مان‌درایک ۹۱: بهترین پایگاه برنامه سازی "
@@ -20669,6 +20930,11 @@ msgstr "وضوح نهایی"
 msgid "Services"
 msgstr "سرویس‌ها"
 
+#: ../../../move/move.pm:1
+#, fuzzy, c-format
+msgid "Auto configuration"
+msgstr "تنظیمات اختصاصی"
+
 #: ../../Xconfig/card.pm:1
 #, c-format
 msgid "4 MB"
@@ -20707,9 +20973,10 @@ msgid "Internet station"
 msgstr "پایگاه اینترنت"
 
 #: ../../share/compssUsers:999
+#, fuzzy
 msgid ""
-"Set of tools to read and send mail and news (pine, mutt, tin..) and to "
-"browse the Web"
+"Set of tools to read and send mail and news (mutt, tin..) and to browse the "
+"Web"
 msgstr ""
 "مجموعه ابزار خواندن و ارسال پست و اخبار (pine, mutt, tin..) و برای مرور "
 "اینترنت"
@@ -20846,6 +21113,40 @@ msgstr "کارگزار NFS , کارگزار SMB , کارگزار Proxy , کار�
 msgid "Set of tools to read and send mail and news and to browse the Web"
 msgstr "مجموعه از ابزار برای خواندن و فرستادن پست و اخبار و برای مرور وب"
 
+#~ msgid "The setup has already been done, and it's currently enabled."
+#~ msgstr "پیکربندی قبلا انجام شده است و اکنون فعال می‌باشد. "
+
+#~ msgid "Logs"
+#~ msgstr "ثبت‌ها"
+
+#~ msgid "The setup has already been done, but it's currently disabled."
+#~ msgstr "این تنظیم قبلا انجام شده ولی در حال حاضر فعال نمی‌باشد."
+
+#~ msgid "Profile "
+#~ msgstr "نمایه"
+
+#~ msgid ""
+#~ "Welcome to the Internet Connection Sharing utility!\n"
+#~ "\n"
+#~ "%s\n"
+#~ "\n"
+#~ "Click on Configure to launch the setup wizard."
+#~ msgstr ""
+#~ "به ابزار اشتراک ارتباط اینترنت خوش آمدید! \n"
+#~ "\n"
+#~ "%s\n"
+#~ "\n"
+#~ "بر روی تنظیم برای پرتاب جادوگر برپاسازی کلیک نمایید."
+
+#~ msgid "Internet Connection Sharing configuration"
+#~ msgstr "تنظیم اشتراک ارتباط اینترنت"
+
+#~ msgid "No Internet Connection Sharing has ever been configured."
+#~ msgstr "هیچ اشتراک ارتباط اینترنت تاکنون تنظیم نشده است."
+
+#~ msgid "when checked, owner and group won't be changed"
+#~ msgstr "اگر انتخاب شود، مالک و گروه تغییر نخواهند کرد"
+
 #~ msgid ""
 #~ "XawTV isn't installed!\n"
 #~ "\n"
@@ -20853,7 +21154,7 @@ msgstr "مجموعه از ابزار برای خواندن و فرستادن پ�
 #~ "If you do have a TV card but DrakX has neither detected it (no bttv nor "
 #~ "saa7134\n"
 #~ "module in \"/etc/modules\") nor installed xawtv, please send the\n"
-#~ "results of \"lspcidrake -v -f\" to \"install\\@mandrakesoft.com\"\n"
+#~ "results of \"lspcidrake -v -f\" to \"install@mandrakesoft.com\"\n"
 #~ "with subject \"undetected TV card\".\n"
 #~ "\n"
 #~ "\n"
@@ -20865,7 +21166,7 @@ msgstr "مجموعه از ابزار برای خواندن و فرستادن پ�
 #~ "اگر شما یک کارت TV دارید ولی نه DrakX توانسته آن را شناسایی (نه بخش bttv "
 #~ "نه saa7134\n"
 #~ "در \"/etc/modules\") نه xawtv نصب شده, لطفا نتیجه \n"
-#~ " \"lspcidrake -v -f\" را به \"install\\@mandrakesoft.com\" با موضوع\n"
+#~ " \"lspcidrake -v -f\" را به \"install@mandrakesoft.com\" با موضوع\n"
 #~ " \"undetected TV card\" گزارش دهید.\n"
 #~ "\n"
 #~ "\n"

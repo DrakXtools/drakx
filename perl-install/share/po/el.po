@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX-el\n"
-"POT-Creation-Date: 2003-09-16 13:45+0200\n"
+"POT-Creation-Date: 2003-12-03 03:09+0100\n"
 "PO-Revision-Date: 2003-06-14 23:44+0300\n"
 "Last-Translator:  Νίκος Νύκταρης (Nick Niktaris) <niktarin@yahoo.com>\n"
 "Language-Team: Greek <nls@tux.hellug.gr>\n"
@@ -280,11 +280,6 @@ msgstr "Ρύθμιση CUPS"
 msgid "Total progress"
 msgstr "Συνολική πρόοδος"
 
-#: ../../lang.pm:1
-#, c-format
-msgid "Hong Kong"
-msgstr "Χονγκ Κονγκ"
-
 #: ../../install_interactive.pm:1
 #, c-format
 msgid "Not enough free space to allocate new partitions"
@@ -360,6 +355,18 @@ msgstr "Επεξεργασία επιλεγμένου υπολογιστή"
 msgid "No CD device defined!"
 msgstr "Δεν καθορίστηκε συσκευή CD"
 
+#: ../../network/shorewall.pm:1
+#, c-format
+msgid ""
+"Please enter the name of the interface connected to the "
+"internet.              \n"
+"                \n"
+"Examples:\n"
+"                ppp+ for modem or DSL connections, \n"
+"                eth0, or eth1 for cable connection, \n"
+"                ippp+ for a isdn connection.\n"
+msgstr ""
+
 #: ../../standalone/drakbackup:1
 #, fuzzy, c-format
 msgid "\tUse .backupignore files\n"
@@ -433,15 +440,20 @@ msgstr "Το δίκτυο πρέπει να επανεκκινηθεί, Θέλετε να το επανεκκινήσετε ;"
 msgid "Swiss (French layout)"
 msgstr "Ελβετικό (Γαλλική διάταξη)"
 
+#: ../../raid.pm:1
+#, c-format
+msgid "mkraid failed (maybe raidtools are missing?)"
+msgstr "αποτυχία mkraid (μήπως απουσιάζουν τα raidtools;)"
+
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "August"
 msgstr "Αύγουστος"
 
-#: ../../raid.pm:1
-#, c-format
-msgid "mkraid failed (maybe raidtools are missing?)"
-msgstr "αποτυχία mkraid (μήπως απουσιάζουν τα raidtools;)"
+#: ../../network/drakfirewall.pm:1
+#, fuzzy, c-format
+msgid "FTP server"
+msgstr "Εξυπηρετητής NTP"
 
 #: ../../harddrake/data.pm:1
 #, c-format
@@ -521,11 +533,6 @@ msgstr "Πιθανή διπλής διεύθυνσης LAN στην τρέχουσα ρύθμιση του %s!\n"
 #, c-format
 msgid "Configuring..."
 msgstr "Ρύθμιση..."
-
-#: ../../standalone/drakgw:1
-#, c-format
-msgid "The setup has already been done, and it's currently enabled."
-msgstr "Η ρύθμιση έχει ήδη γίνει, και αυτή τη στιγμή είναι ενεργοποιημένη."
 
 #: ../../harddrake/v4l.pm:1
 #, fuzzy, c-format
@@ -651,6 +658,11 @@ msgstr "στον εξυπηρετητή Novell \"%s\", στον εκτυπωτή \"%s\""
 msgid "Printer Name"
 msgstr "Όνομα Ουράς Εκτυπωτή"
 
+#: ../../../move/move.pm:1
+#, c-format
+msgid "Setting up USB key"
+msgstr ""
+
 #: ../../standalone/drakfloppy:1
 #, c-format
 msgid "Remove a module"
@@ -708,15 +720,17 @@ msgstr ""
 msgid "if needed"
 msgstr "αν χρειάζεται"
 
+#: ../../standalone/drakclock:1
+#, c-format
+msgid ""
+"We need to install ntp package\n"
+" to enable Network Time Protocol"
+msgstr ""
+
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "Restore Failed..."
 msgstr "Η Επαναφορά Απέτυχε..."
-
-#: ../../standalone/harddrake2:1
-#, c-format
-msgid "/Autodetect _jazz drives"
-msgstr "/Εντοπισμός _οδηγών jazz"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -1023,11 +1037,6 @@ msgstr ""
 #, c-format
 msgid "512 kB"
 msgstr "512 kB"
-
-#: ../../standalone/net_monitor:1
-#, c-format
-msgid "Logs"
-msgstr "Ημερολόγια"
 
 #: ../../standalone/scannerdrake:1
 #, c-format
@@ -1508,6 +1517,11 @@ msgstr "Λετονικό"
 msgid "monthly"
 msgstr "μηνιαία"
 
+#: ../../../move/move.pm:1
+#, fuzzy, c-format
+msgid "Retry"
+msgstr "Επαναφορά"
+
 #: ../../standalone/drakfloppy:1
 #, c-format
 msgid "Module name"
@@ -1553,6 +1567,11 @@ msgstr "Προεπιλεγμένη η χρήση Unicode"
 msgid "the module of the GNU/Linux kernel that handles the device"
 msgstr "το άρθρωμα του πυρήνα GNU/Linux που χειρίζεται την συσκευή"
 
+#: ../../standalone/drakclock:1
+#, fuzzy, c-format
+msgid "Is your hardware clock set to GMT?"
+msgstr "Το ρολόι του υπολογιστή σας είναι ρυθμισμένο σε GMT (ώρα Γκρίνουιτς)"
+
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid "Trying to rescue partition table"
@@ -1595,6 +1614,11 @@ msgstr "Δεν μπορώ να ξεκινήσω το live upgrade!!!\n"
 msgid "Name: "
 msgstr "Όνομα: "
 
+#: ../../standalone/drakconnect:1
+#, c-format
+msgid "up"
+msgstr ""
+
 #: ../../Xconfig/resolution_and_depth.pm:1
 #, c-format
 msgid "16 million colors (24 bits)"
@@ -1605,7 +1629,7 @@ msgstr "16 εκατομμύρια χρώματα (24 bits)"
 msgid "Allow all users"
 msgstr "Επιτρέπεται για όλους τους χρήστες"
 
-#: ../../share/advertising/08-store.pl:1
+#: ../advertising/08-store.pl:1
 #, c-format
 msgid "The official MandrakeSoft Store"
 msgstr "Το επίσημο κατάστημα της MandrakeSoft"
@@ -1639,15 +1663,15 @@ msgstr "Χρήστης"
 msgid "Do new backup before restore (only for incremental backups.)"
 msgstr "Ολοκληρώθηκε νέο"
 
-#: ../../standalone/harddrake2:1
-#, c-format
-msgid "Name"
-msgstr "Όνομα"
-
 #: ../../raid.pm:1
 #, c-format
 msgid "mkraid failed"
 msgstr "αποτυχία mkraid"
+
+#: ../../standalone/harddrake2:1
+#, c-format
+msgid "Name"
+msgstr "Όνομα"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -1856,6 +1880,24 @@ msgstr "Ενεργοποίηση εξυπηρετητών..."
 #, c-format
 msgid "Printing test page(s)..."
 msgstr "Εκτύπωση δοκιμαστικών σελίδων..."
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid ""
+"Transfer successful\n"
+"You may want to verify you can login to the server with:\n"
+"\n"
+"ssh -i %s %s@%s\n"
+"\n"
+"without being prompted for a password."
+msgstr ""
+"Επιτυχής μεταφορά\n"
+"Ίσως να χρειαστεί να επαληθεύσετε ότι μπορείτε να προσπελάσετε τον "
+"διακομιστή με:\n"
+"\n"
+"ssh -i %s %s@%s\n"
+"\n"
+"χωρίς να ζητηθεί κωδικός πρόσβασης."
 
 #: ../../fsedit.pm:1
 #, c-format
@@ -2856,6 +2898,11 @@ msgstr ""
 msgid "Can't add a partition to _formatted_ RAID md%d"
 msgstr "Δεν μπορώ να προσθέσω κατάτμηση στο _μορφοποιημένο_ RAID md%d"
 
+#: ../../standalone/drakclock:1
+#, fuzzy, c-format
+msgid "Network Time Protocol"
+msgstr "Συσκευή δικτύου"
+
 #: ../../Xconfig/card.pm:1
 #, c-format
 msgid ""
@@ -3074,7 +3121,7 @@ msgstr "Παλάου"
 msgid "level"
 msgstr "επίπεδο"
 
-#: ../../share/advertising/13-mdkexpert_corporate.pl:1
+#: ../advertising/13-mdkexpert_corporate.pl:1
 #, fuzzy, c-format
 msgid ""
 "All incidents will be followed up by a single qualified MandrakeSoft "
@@ -3461,7 +3508,7 @@ msgstr ""
 msgid "Bad package"
 msgstr "Λάθος πακέτο"
 
-#: ../../share/advertising/07-server.pl:1
+#: ../advertising/07-server.pl:1
 #, c-format
 msgid ""
 "Transform your computer into a powerful Linux server: Web server, mail, "
@@ -3733,7 +3780,7 @@ msgstr "Καλώς ορίσατε στους Crackers"
 msgid "Module options:"
 msgstr "Επιλογές αρθρώματος:"
 
-#: ../../share/advertising/11-mnf.pl:1
+#: ../advertising/11-mnf.pl:1
 #, c-format
 msgid "Secure your networks with the Multi Network Firewall"
 msgstr ""
@@ -3814,6 +3861,11 @@ msgstr "Ποντίκι"
 #, c-format
 msgid "not enough room in /boot"
 msgstr "δεν υπάρχει αρκετός χώρος στο /boot"
+
+#: ../../install_steps_gtk.pm:1
+#, c-format
+msgid "trying to promote %s"
+msgstr ""
 
 #: ../../lang.pm:1
 #, c-format
@@ -3964,6 +4016,11 @@ msgstr ""
 msgid "Saudi Arabia"
 msgstr "Σαουδική Αραβία"
 
+#: ../../services.pm:1
+#, c-format
+msgid "Internet"
+msgstr "Διαδίκτυο"
+
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid "Continue anyway?"
@@ -3983,11 +4040,6 @@ msgstr ""
 #, c-format
 msgid "Printer"
 msgstr "Εκτυπωτής"
-
-#: ../../services.pm:1
-#, c-format
-msgid "Internet"
-msgstr "Διαδίκτυο"
 
 #: ../../standalone/service_harddrake:1
 #, c-format
@@ -4064,6 +4116,11 @@ msgstr ""
 #, c-format
 msgid "Restarting printing system..."
 msgstr "Επανεκκίνηση του συστήματος εκτύπωσης..."
+
+#: ../../../move/tree/mdk_totem:1
+#, c-format
+msgid "You can only run with no CDROM support"
+msgstr ""
 
 #: ../../modules/interactive.pm:1
 #, c-format
@@ -4296,15 +4353,15 @@ msgstr "ISA / PCMCIA"
 msgid "About"
 msgstr "Περί"
 
-#: ../../network/network.pm:1
-#, c-format
-msgid "Proxies configuration"
-msgstr "Ρυθμίσεις proxies"
-
 #: ../../mouse.pm:1
 #, c-format
 msgid "GlidePoint"
 msgstr "GlidePoint"
+
+#: ../../network/network.pm:1
+#, c-format
+msgid "Proxies configuration"
+msgstr "Ρυθμίσεις proxies"
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -4453,6 +4510,11 @@ msgstr "Το σημείο σύνδεσης πρέπει να ξεκινάει με /"
 msgid "Choose your CD/DVD device"
 msgstr "Παρακαλώ ορίστε τον χώρο του CD/DVD "
 
+#: ../../network/drakfirewall.pm:1
+#, fuzzy, c-format
+msgid "CUPS server"
+msgstr "Εξυπηρετητής DNS"
+
 #: ../../standalone/logdrake:1
 #, c-format
 msgid "Postfix Mail Server"
@@ -4468,7 +4530,7 @@ msgstr "Έξοδος χωρίς αποθήκευση"
 msgid "Yemen"
 msgstr "Υεμένη"
 
-#: ../../share/advertising/11-mnf.pl:1
+#: ../advertising/11-mnf.pl:1
 #, c-format
 msgid "This product is available on the MandrakeStore Web site."
 msgstr "Αυτό το προϊόν είναι διαθέσιμο στην ιστοσελίδα του MandrakeStore"
@@ -4477,6 +4539,31 @@ msgstr "Αυτό το προϊόν είναι διαθέσιμο στην ιστοσελίδα του MandrakeStore"
 #, c-format
 msgid "=> There are many things to choose from (%s).\n"
 msgstr "=> Υπάρχουν πολλά πράγματα από τα οποία μπορείτε να επιλέξετε (%s).\n"
+
+#: ../../standalone/drakclock:1
+#, c-format
+msgid "GMT - DrakClock"
+msgstr ""
+
+#: ../../../move/move.pm:1
+#, c-format
+msgid ""
+"An error occurred:\n"
+"\n"
+"\n"
+"%s\n"
+"\n"
+"This may come from corrupted system configuration files\n"
+"on the USB key, in this case removing them and then\n"
+"rebooting Mandrake Move would fix the problem. To do\n"
+"so, click on the corresponding button.\n"
+"\n"
+"\n"
+"You may also want to reboot and remove the USB key, or\n"
+"examine its contents under another OS, or even have\n"
+"a look at log files in console #3 and #4 to try to\n"
+"guess what's happening."
+msgstr ""
 
 #: ../../steps.pm:1
 #, c-format
@@ -4716,6 +4803,11 @@ msgstr "Userdrake"
 #, c-format
 msgid "Which partition do you want to use for Linux4Win?"
 msgstr "Ποια κατάτμηση θέλετε να χρησιμοποιήσετε για το Linux4Win;"
+
+#: ../../install_steps_gtk.pm:1
+#, fuzzy, c-format
+msgid "due to missing %s"
+msgstr "το kdesu λείπει"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -5272,7 +5364,7 @@ msgstr ""
 msgid "Started on boot"
 msgstr "Ξεκίνησαν στην εκκίνηση"
 
-#: ../../share/advertising/12-mdkexpert.pl:1
+#: ../advertising/12-mdkexpert.pl:1
 #, fuzzy, c-format
 msgid ""
 "Join the MandrakeSoft support teams and the Linux Community online to share "
@@ -5607,11 +5699,6 @@ msgid ""
 msgstr ""
 "Εμφάνιση θέματος\n"
 "στην κονσόλα"
-
-#: ../../standalone/net_monitor:1
-#, c-format
-msgid "Statistics"
-msgstr "Στατιστικά"
 
 #: ../../printer/cups.pm:1
 #, c-format
@@ -6460,7 +6547,7 @@ msgstr ""
 "Αποθηκεύει και επαναφέρει την πηγή εντροπίας του συστήματος για \n"
 "την δημιουργία καλύτερης ποιότητας τυχαίων αριθμών."
 
-#: ../../share/advertising/07-server.pl:1
+#: ../advertising/07-server.pl:1
 #, c-format
 msgid "Turn your computer into a reliable server"
 msgstr "Μετατρέψτε το μηχάνημά σας σε έναν αξιόπιστο διακομιστή"
@@ -6475,6 +6562,11 @@ msgstr "αν οριστεί ναι, έλεγχος κενών κωδικών πρόσβασης στο /etc/shadow."
 msgid " (driver %s)"
 msgstr " (οδηγός %s)"
 
+#: ../../services.pm:1
+#, c-format
+msgid "Start when requested"
+msgstr ""
+
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid ""
@@ -6488,11 +6580,6 @@ msgstr ""
 #, c-format
 msgid "I don't know"
 msgstr "Δεν ξέρω"
-
-#: ../../services.pm:1
-#, c-format
-msgid "Start when requested"
-msgstr ""
 
 #: ../../printer/main.pm:1
 #, c-format
@@ -6711,6 +6798,11 @@ msgstr ""
 "Μπορείτε να εκκινήσετε το printerdrake από το Κέντρο Ελέγχου Mandrake από το "
 "τμήμα Υλικό."
 
+#: ../../../move/move.pm:1
+#, fuzzy, c-format
+msgid "Key isn't writable"
+msgstr "Το XawTV εγκαταστάθηκε!"
+
 #: ../../lang.pm:1
 #, c-format
 msgid "Bangladesh"
@@ -6759,15 +6851,15 @@ msgstr ""
 msgid "Set the root umask."
 msgstr "Κωδικός Root"
 
-#: ../../network/modem.pm:1 ../../standalone/drakconnect:1
-#, c-format
-msgid "Script-based"
-msgstr "Χρήση script"
-
 #: ../../install_any.pm:1 ../../partition_table.pm:1
 #, c-format
 msgid "Error reading file %s"
 msgstr "Σφάλμα κατά την ανάγνωση του αρχείου %s"
+
+#: ../../network/modem.pm:1 ../../standalone/drakconnect:1
+#, c-format
+msgid "Script-based"
+msgstr "Χρήση script"
 
 #: ../../harddrake/v4l.pm:1
 #, c-format
@@ -6849,23 +6941,6 @@ msgstr ""
 #, c-format
 msgid "Domain Authentication Required"
 msgstr "Απαιτείται Πιστοποίηση Τομέα"
-
-#: ../../standalone/drakTermServ:1
-#, c-format
-msgid ""
-"\n"
-"\n"
-" Thanks:\n"
-"\t- LTSP Project http://www.ltsp.org\n"
-"\t- Michael Brown <mbrown\\@fensystems.co.uk>\n"
-"\n"
-msgstr ""
-"\n"
-"\n"
-" Ευχαριστούμε:\n"
-"\t- LTSP Project http://www.ltsp.org\n"
-"\t- Michael Brown <mbrown\\@fensystems.co.uk>\n"
-"\n"
 
 #: ../../security/level.pm:1
 #, c-format
@@ -7555,15 +7630,15 @@ msgstr "Yaboot"
 msgid "Logitech CC Series with Wheel emulation"
 msgstr "Logitech CC Series"
 
-#: ../../standalone/drakboot:1
-#, c-format
-msgid "Splash selection"
-msgstr "Τμήμα Splash"
-
 #: ../../partition_table.pm:1
 #, c-format
 msgid "Extended partition not supported on this platform"
 msgstr "Η εκτεταμένη κατάτμηση δεν υποστηρίζεται σε αυτόν τον τύπο συστήματος"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Splash selection"
+msgstr "Τμήμα Splash"
 
 #: ../../network/isdn.pm:1
 #, c-format
@@ -7623,6 +7698,11 @@ msgstr ""
 msgid "Printer default settings"
 msgstr "Επιλογή μοντέλου εκτυπωτή"
 
+#: ../../mouse.pm:1
+#, c-format
+msgid "Generic PS2 Wheel Mouse"
+msgstr "Γενικού τύπου ποντίκι PS2 με ροδάκι"
+
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid ""
@@ -7630,11 +7710,6 @@ msgid ""
 "memory page level, thus enabling the processor to prevent unchecked kernel "
 "accesses to user memory (aka this is a bug guard)"
 msgstr ""
-
-#: ../../mouse.pm:1
-#, c-format
-msgid "Generic PS2 Wheel Mouse"
-msgstr "Γενικού τύπου ποντίκι PS2 με ροδάκι"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -7799,6 +7874,11 @@ msgstr "Κορεάτικο Πληκτρολόγιο"
 msgid "Not connected"
 msgstr "Δε συνδέθηκε"
 
+#: ../../standalone/net_monitor:1
+#, fuzzy, c-format
+msgid "No internet connection configured"
+msgstr "Ρύθμιση σύνδεσης Διαδικτύου"
+
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Greek"
@@ -7813,24 +7893,6 @@ msgstr "Σαιντ Κιτς και Νέβις"
 #, fuzzy, c-format
 msgid "Generic 3 Button Mouse with Wheel emulation"
 msgstr "Γενικού τύπου με 3 πλήκτρα"
-
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid ""
-"Transfer successful\n"
-"You may want to verify you can login to the server with:\n"
-"\n"
-"ssh -i %s %s\\@%s\n"
-"\n"
-"without being prompted for a password."
-msgstr ""
-"Επιτυχής μεταφορά\n"
-"Ίσως να χρειαστεί να επαληθεύσετε ότι μπορείτε να προσπελάσετε τον "
-"διακομιστή με:\n"
-"\n"
-"ssh -i %s %s\\@%s\n"
-"\n"
-"χωρίς να ζητηθεί κωδικός πρόσβασης."
 
 #: ../../any.pm:1
 #, c-format
@@ -8065,7 +8127,7 @@ msgstr ""
 "Κάντε κλικ στο \"Μεταφορά\" για να τον επικαλύψετε.\n"
 "Επίσης μπορείτε να του δώσετε ένα νέο όνομα ή να τον παραβλέψετε ."
 
-#: ../../share/advertising/12-mdkexpert.pl:1
+#: ../advertising/12-mdkexpert.pl:1
 #, fuzzy, c-format
 msgid ""
 "Find the solutions of your problems via MandrakeSoft's online support "
@@ -8130,6 +8192,22 @@ msgstr "Κιργιστάν"
 #, fuzzy, c-format
 msgid "Multi-function device on USB"
 msgstr ", πολυχρηστική συσκευή στην USB"
+
+#: ../../../move/move.pm:1
+#, c-format
+msgid ""
+"We didn't detect any USB key on your system. If you\n"
+"plug in an USB key now, Mandrake Move will have the ability\n"
+"to transparently save the data in your home directory and\n"
+"system wide configuration, for next boot on this computer\n"
+"or another one. Note: if you plug in a key now, wait several\n"
+"seconds before detecting again.\n"
+"\n"
+"\n"
+"You may also proceed without an USB key - you'll still be\n"
+"able to use Mandrake Move as a normal live Mandrake\n"
+"Operating System."
+msgstr ""
 
 #: ../../help.pm:1
 #, fuzzy, c-format
@@ -8224,15 +8302,15 @@ msgstr ""
 msgid "Other Media"
 msgstr "Άλλα Μέσα"
 
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "Backup system files"
-msgstr "Αντίγραφα ασφαλείας του συστήματος αρχείων"
-
 #: ../../mouse.pm:1
 #, c-format
 msgid "Logitech MouseMan+"
 msgstr "Logitech MouseMan+"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "Backup system files"
+msgstr "Αντίγραφα ασφαλείας του συστήματος αρχείων"
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -8296,6 +8374,11 @@ msgstr "Προσαρμοσμένες κατατμήσεις δίσκου"
 msgid "Please choose your type of mouse."
 msgstr "Παρακαλώ επιλέξτε τύπο ποντικιού."
 
+#: ../../services.pm:1
+#, c-format
+msgid "running"
+msgstr "εκτελείται"
+
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "class of hardware device"
@@ -8314,11 +8397,6 @@ msgstr ""
 #, c-format
 msgid "United Kingdom"
 msgstr "Ηνωμένο Βασίλειο"
-
-#: ../../services.pm:1
-#, c-format
-msgid "running"
-msgstr "εκτελείται"
 
 #: ../../lang.pm:1
 #, c-format
@@ -8362,7 +8440,7 @@ msgstr "Σενεγάλη"
 msgid "Command line"
 msgstr "Γραμμή εντολών"
 
-#: ../../share/advertising/08-store.pl:1
+#: ../advertising/08-store.pl:1
 #, fuzzy, c-format
 msgid ""
 "Our full range of Linux solutions, as well as special offers on products and "
@@ -8417,6 +8495,17 @@ msgstr "Swap"
 #, fuzzy, c-format
 msgid "Custom settings"
 msgstr "Προσαρμοσμένες κατατμήσεις δίσκου"
+
+#: ../../../move/move.pm:1
+#, c-format
+msgid ""
+"The USB key seems to have write protection enabled, but we can't safely\n"
+"unplug it now.\n"
+"\n"
+"\n"
+"Click the button to reboot the machine, unplug it, remove write protection,\n"
+"plug the key again, and launch Mandrake Move again."
+msgstr ""
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -8531,7 +8620,7 @@ msgstr ""
 msgid "Photo memory card access on your HP multi-function device"
 msgstr ""
 
-#: ../../share/advertising/09-mdksecure.pl:1
+#: ../advertising/09-mdksecure.pl:1
 #, fuzzy, c-format
 msgid ""
 "Enhance your computer performance with the help of a selection of partners "
@@ -8654,6 +8743,11 @@ msgstr ""
 #, c-format
 msgid "Exit install"
 msgstr "Έξοδος"
+
+#: ../../../move/move.pm:1
+#, c-format
+msgid "Need a key to save your data"
+msgstr ""
 
 #: ../../standalone/drakgw:1
 #, c-format
@@ -8847,11 +8941,6 @@ msgstr "Ρωσικό (φωνητικό)"
 msgid "dhcpd Config..."
 msgstr "Ρύθμιση dhcpd..."
 
-#: ../../standalone/drakgw:1
-#, c-format
-msgid "The setup has already been done, but it's currently disabled."
-msgstr "Η ρύθμιση έχει ήδη γίνει, αλλά αυτή τη στιγμή είναι απενεργοποιημένη."
-
 #: ../../any.pm:1
 #, c-format
 msgid "LILO/grub Installation"
@@ -9029,6 +9118,11 @@ msgstr ""
 msgid "Choose an X server"
 msgstr "Επιλέξτε τον εξυπηρετητή Χ"
 
+#: ../../../move/tree/mdk_totem:1
+#, c-format
+msgid "Copying to memory to allow removing the CDROM"
+msgstr ""
+
 #: ../../install_interactive.pm:1
 #, c-format
 msgid "Swap partition size in MB: "
@@ -9078,7 +9172,7 @@ msgstr "Ρύθμιση Αυτόματων Βημάτων"
 msgid "Barbados"
 msgstr "Μπαρμπάντος"
 
-#: ../../share/advertising/02-community.pl:1
+#: ../advertising/02-community.pl:1
 #, fuzzy, c-format
 msgid ""
 "Want to know more and to contribute to the Open Source community? Get "
@@ -9242,15 +9336,6 @@ msgstr "Sub"
 msgid "First Time Wizard"
 msgstr "Οδηγός Πρώτης Φοράς"
 
-#: ../../install_steps.pm:1
-#, c-format
-msgid ""
-"An error occurred, but I don't know how to handle it nicely.\n"
-"Continue at your own risk."
-msgstr ""
-"Προκλήθηκε ένα σφάλμα που δεν ξέρω πώς να το χειριστώ.\n"
-"Συνεχίστε με δική σας ευθύνη."
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Taiwan"
@@ -9265,6 +9350,15 @@ msgstr "Πακιστάν"
 #, c-format
 msgid "please wait, parsing file: %s"
 msgstr "παρακαλώ περιμένετε, επεξεργασία αρχείου: %s"
+
+#: ../../install_steps.pm:1 ../../../move/move.pm:1
+#, c-format
+msgid ""
+"An error occurred, but I don't know how to handle it nicely.\n"
+"Continue at your own risk."
+msgstr ""
+"Προκλήθηκε ένα σφάλμα που δεν ξέρω πώς να το χειριστώ.\n"
+"Συνεχίστε με δική σας ευθύνη."
 
 #: ../../install_steps_gtk.pm:1
 #, fuzzy, c-format
@@ -9450,6 +9544,11 @@ msgstr ""
 "Παρακαλώ επιλέξτε τη φόρτωση ή αποθήκευση των επιλογής πακέτων στη δισκέτα.\n"
 "Η μορφοποίηση είναι η ίδια με τις δισκέτες αυτόματης εγκατάστασης."
 
+#: ../../../move/tree/mdk_totem:1
+#, fuzzy, c-format
+msgid "No CDROM support"
+msgstr "Υποστήριξη ραδιοφώνου:"
+
 #: ../../standalone/drakxtv:1
 #, c-format
 msgid "China (broadcast)"
@@ -9487,7 +9586,7 @@ msgstr ""
 "Η φόρτωση του αρθρώματος %s απέτυχε.\n"
 "Θέλετε να δοκιμάσετε ξανά με διαφορετικές παραμέτρους;"
 
-#: ../../share/advertising/01-thanks.pl:1
+#: ../advertising/01-thanks.pl:1
 #, c-format
 msgid "Welcome to the Open Source world."
 msgstr "Καλώς ορίσατε στον κόσμο του Ανοιχτού Κώδικα"
@@ -9713,6 +9812,11 @@ msgstr "Άλλες θύρες"
 msgid "number of capture buffers for mmap'ed capture"
 msgstr ""
 
+#: ../../network/adsl.pm:1
+#, fuzzy, c-format
+msgid " - detected"
+msgstr "ανιχνεύθηκε"
+
 #: ../../harddrake/data.pm:1
 #, c-format
 msgid "SMBus controllers"
@@ -9813,6 +9917,11 @@ msgstr ""
 msgid "Restore"
 msgstr "Επαναφορά"
 
+#: ../../standalone/drakclock:1
+#, fuzzy, c-format
+msgid "Server:"
+msgstr "Εξυπηρετητής:"
+
 #: ../../security/help.pm:1
 #, c-format
 msgid "if set to yes, check if the network devices are in promiscuous mode."
@@ -9824,6 +9933,11 @@ msgstr ""
 #, c-format
 msgid "Looking for available packages..."
 msgstr "Ψάχνω για διαθέσιμα πακέτα..."
+
+#: ../../../move/move.pm:1
+#, fuzzy, c-format
+msgid "Please wait, setting up system configuration files on USB key..."
+msgstr "Παρακαλώ περιμένετε, ρυθμίζεται το επίπεδο ασφαλείας..."
 
 #: ../../any.pm:1
 #, c-format
@@ -9945,15 +10059,15 @@ msgid ""
 "per second)"
 msgstr ""
 
-#: ../../standalone/printerdrake:1
-#, fuzzy, c-format
-msgid "Mandrake Linux Printer Management Tool"
-msgstr "Εγκατάσταση Mandrake Linux %s"
-
 #: ../../pkgs.pm:1
 #, c-format
 msgid "important"
 msgstr "σημαντικό"
+
+#: ../../standalone/printerdrake:1
+#, fuzzy, c-format
+msgid "Mandrake Linux Printer Management Tool"
+msgstr "Εγκατάσταση Mandrake Linux %s"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -10016,6 +10130,11 @@ msgstr "Χρήστες"
 #, c-format
 msgid "Preparing bootloader..."
 msgstr "Προετοιμασία προγράμματος εκκίνησης..."
+
+#: ../../../move/move.pm:1
+#, c-format
+msgid "Enter your user information, password will be used for screensaver"
+msgstr ""
 
 #: ../../network/network.pm:1
 #, c-format
@@ -10452,15 +10571,15 @@ msgstr "Περιεχόμενο του αρχείου"
 msgid "Authentication LDAP"
 msgstr "Πιστοποίηση LDAP"
 
+#: ../../install_steps_gtk.pm:1
+#, c-format
+msgid "in order to keep %s"
+msgstr ""
+
 #: ../../harddrake/sound.pm:1
 #, c-format
 msgid "Let me pick any driver"
 msgstr "Θα διαλέξω εγώ οδηγό"
-
-#: ../../standalone/net_monitor:1
-#, c-format
-msgid "Profile "
-msgstr "Προφίλ "
 
 #: ../../standalone/net_monitor:1
 #, c-format
@@ -10561,9 +10680,9 @@ msgstr "έκδοση πυρήνα"
 #: ../../standalone/drakautoinst:1 ../../standalone/drakbackup:1
 #: ../../standalone/drakboot:1 ../../standalone/drakconnect:1
 #: ../../standalone/drakfloppy:1 ../../standalone/drakfont:1
-#: ../../standalone/drakgw:1 ../../standalone/drakperm:1
-#: ../../standalone/draksec:1 ../../standalone/logdrake:1
-#: ../../standalone/mousedrake:1 ../../standalone/net_monitor:1
+#: ../../standalone/drakperm:1 ../../standalone/draksec:1
+#: ../../standalone/logdrake:1 ../../standalone/mousedrake:1
+#: ../../standalone/net_monitor:1
 #, c-format
 msgid "Cancel"
 msgstr "Άκυρο"
@@ -10716,19 +10835,6 @@ msgstr "Ιταλικό"
 msgid "Basic"
 msgstr "Βασική"
 
-#: ../../standalone/drakTermServ:1
-#, c-format
-msgid ""
-"\n"
-" Copyright (C) 2002 by MandrakeSoft \n"
-"\tStew Benedict sbenedict\\@mandrakesoft.com\n"
-"\n"
-msgstr ""
-"\n"
-" Copyright (C) 2002 by MandrakeSoft \n"
-"\tStew Benedict sbenedict\\@mandrakesoft.com\n"
-"\n"
-
 #: ../../install_messages.pm:1
 #, c-format
 msgid "http://www.mandrakelinux.com/en/92errata.php3"
@@ -10749,10 +10855,10 @@ msgstr ""
 msgid "Card IO"
 msgstr "IO κάρτας"
 
-#: ../../standalone/drakperm:1
-#, c-format
-msgid "when checked, owner and group won't be changed"
-msgstr "όταν επιλεγεί, ο ιδιοκτήτης και ομάδα δεν θα αλλάξουν"
+#: ../../network/drakfirewall.pm:1
+#, fuzzy, c-format
+msgid "Samba server"
+msgstr "Εξυπηρετητής Samba"
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -10845,6 +10951,11 @@ msgstr ""
 msgid "access to compilation tools"
 msgstr ""
 
+#: ../../standalone/net_monitor:1
+#, fuzzy, c-format
+msgid "Global statistics"
+msgstr "Στατιστικά"
+
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "Please select data to restore..."
@@ -10865,6 +10976,11 @@ msgstr ""
 #, c-format
 msgid "Standard test page"
 msgstr "Τυπική δοκιμαστική σελίδα"
+
+#: ../../standalone/drakclock:1
+#, fuzzy, c-format
+msgid "Time Zone"
+msgstr "Ωρολογιακή Ζώνη"
 
 #: ../../diskdrake/hd_gtk.pm:1 ../../diskdrake/interactive.pm:1
 #, c-format
@@ -10951,6 +11067,19 @@ msgstr ""
 "\n"
 " "
 
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"\n"
+" Copyright (C) 2002 by MandrakeSoft \n"
+"\tStew Benedict sbenedict@mandrakesoft.com\n"
+"\n"
+msgstr ""
+"\n"
+" Copyright (C) 2002 by MandrakeSoft \n"
+"\tStew Benedict sbenedict@mandrakesoft.com\n"
+"\n"
+
 #: ../../standalone/draksplash:1
 #, c-format
 msgid "Save theme"
@@ -10976,15 +11105,15 @@ msgstr "Οδηγός Ρύθμισης Δικτύου"
 msgid "Removable media automounting"
 msgstr "Αυτόματη σύνδεση αποσπώμενων μονάδων"
 
-#: ../../standalone/drakbackup:1
-#, fuzzy, c-format
-msgid "Enter the directory to save:"
-msgstr "Παρακαλώ ορίστε τον κατάλογο αποθήκευσης: "
-
 #: ../../services.pm:1
 #, c-format
 msgid "Printing"
 msgstr "Εκτύπωση"
+
+#: ../../standalone/drakbackup:1
+#, fuzzy, c-format
+msgid "Enter the directory to save:"
+msgstr "Παρακαλώ ορίστε τον κατάλογο αποθήκευσης: "
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -11105,7 +11234,7 @@ msgstr "Kensington Thinking Mouse"
 msgid "Configuration of a remote printer"
 msgstr "Ρύθμιση απομακρυσμένου εκτυπωτή"
 
-#: ../../share/advertising/13-mdkexpert_corporate.pl:1
+#: ../advertising/13-mdkexpert_corporate.pl:1
 #, c-format
 msgid "An online platform to respond to enterprise support needs."
 msgstr ""
@@ -11263,15 +11392,22 @@ msgstr ""
 msgid "Configure Local Area Network..."
 msgstr "Ρύθμιση τοπικού δικτύου..."
 
-#: ../../security/l10n.pm:1
-#, fuzzy, c-format
-msgid "Verify checksum of the suid/sgid files"
-msgstr "αν οριστεί ναι, επαλήθευση checksum για τα αρχεία suid/sgid."
+#: ../../../move/move.pm:1
+#, c-format
+msgid ""
+"The USB key seems to have write protection enabled. Please\n"
+"unplug it, remove write protection, and then plug it again."
+msgstr ""
 
 #: ../../services.pm:1
 #, c-format
 msgid "Launch the sound system on your machine"
 msgstr "Εκκίνηση του συστήματος ήχου στο μηχάνημά σας"
+
+#: ../../security/l10n.pm:1
+#, fuzzy, c-format
+msgid "Verify checksum of the suid/sgid files"
+msgstr "αν οριστεί ναι, επαλήθευση checksum για τα αρχεία suid/sgid."
 
 #: ../../security/l10n.pm:1
 #, fuzzy, c-format
@@ -11595,6 +11731,11 @@ msgstr "Δεν μπορείτε να αποεπιλέξετε αυτό το πακέτο. Πρέπει να αναβαθμιστεί"
 msgid "Loading from floppy"
 msgstr "Φορτώνεται από δισκέτα"
 
+#: ../../standalone/drakclock:1
+#, c-format
+msgid "Timezone - DrakClock"
+msgstr ""
+
 #: ../../security/help.pm:1
 #, c-format
 msgid "Enable/Disable the logging of IPv4 strange packets."
@@ -11747,6 +11888,11 @@ msgstr ""
 "σχετικό\n"
 "κεφάλαιο του επίσημου οδηγού χρήσης του Mandrake Linux."
 
+#: ../../standalone/drakclock:1
+#, fuzzy, c-format
+msgid "Enable Network Time Protocol"
+msgstr "Επαναφορά Μέσω Πρωτόκολλο Δικτύου: %s"
+
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "paranoid"
@@ -11839,7 +11985,7 @@ msgstr "πρόσβαση σε εργαλεία δικτύου"
 msgid "Firmware-Upload for HP LaserJet 1000"
 msgstr ""
 
-#: ../../share/advertising/03-software.pl:1
+#: ../advertising/03-software.pl:1
 #, fuzzy, c-format
 msgid ""
 "And, of course, push multimedia to its limits with the very latest software "
@@ -11899,15 +12045,15 @@ msgstr "Πρωτόκολλο Εκκίνησης"
 msgid "LVM-disks %s\n"
 msgstr "Δίσκοι LVM %s\n"
 
-#: ../../diskdrake/interactive.pm:1
-#, c-format
-msgid "The package %s is needed. Install it?"
-msgstr "Το πακέτο %s είναι απαραίτητο. Να εγκατασταθεί;"
-
 #: ../../services.pm:1
 #, c-format
 msgid "On boot"
 msgstr "Στην εκκίνηση"
+
+#: ../../diskdrake/interactive.pm:1
+#, c-format
+msgid "The package %s is needed. Install it?"
+msgstr "Το πακέτο %s είναι απαραίτητο. Να εγκατασταθεί;"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -11923,6 +12069,11 @@ msgstr "Λετονικό"
 #, c-format
 msgid "Please make a backup of your data first"
 msgstr "Παρακαλώ κάντε πρώτα ένα αντίγραφο ασφαλείας των δεδομένων σας"
+
+#: ../../harddrake/data.pm:1
+#, c-format
+msgid "ADSL adapters"
+msgstr ""
 
 #: ../../install_interactive.pm:1
 #, c-format
@@ -11951,7 +12102,7 @@ msgstr "αν χρειάζεται"
 msgid "Remove List"
 msgstr "Λίστα Αφαίρεσης"
 
-#: ../../share/advertising/05-desktop.pl:1
+#: ../advertising/05-desktop.pl:1
 #, c-format
 msgid "A customizable environment"
 msgstr "Ένα προσαρμοζόμενο περιβάλλον"
@@ -12181,6 +12332,13 @@ msgstr ""
 #: ../../network/tools.pm:1
 #, c-format
 msgid "Firmware copy succeeded"
+msgstr ""
+
+#: ../../../move/tree/mdk_totem:1
+#, c-format
+msgid ""
+"You can't use another CDROM when the following programs are running: \n"
+"%s"
 msgstr ""
 
 #: ../../security/help.pm:1
@@ -12659,6 +12817,11 @@ msgstr ""
 "για μια συγκεκριμένη εργασία εκτύπωσης. Απλά προσθέσετε τις επιθυμητές "
 "ρυθμίσεις στην γραμμή εντολών, π.χ. \"%s<αρχείο>\"."
 
+#: ../../standalone/drakclock:1
+#, fuzzy, c-format
+msgid "DrakClock"
+msgstr "Drakbackup"
+
 #: ../../modules/interactive.pm:1
 #, c-format
 msgid ""
@@ -12689,21 +12852,6 @@ msgid ""
 msgstr ""
 "\n"
 "- Δαίμονας (%s) μαζί με :\n"
-
-#: ../../standalone/drakgw:1
-#, c-format
-msgid ""
-"Welcome to the Internet Connection Sharing utility!\n"
-"\n"
-"%s\n"
-"\n"
-"Click on Configure to launch the setup wizard."
-msgstr ""
-"Καλώς ορίσατε στο εργαλείο ρύθμισης της Κοινής Σύνδεσης του Διαδικτύου!\n"
-"\n"
-"%s\n"
-"\n"
-"Κάντε κλικ στο Ρύθμιση για να ξεκινήσετε τον οδηγό εγκατάστασης."
 
 #: ../../lang.pm:1
 #, c-format
@@ -12893,6 +13041,11 @@ msgstr ""
 msgid "Christmas Island"
 msgstr "Νήσοι Χριστουγέννων"
 
+#: ../../mouse.pm:1
+#, fuzzy, c-format
+msgid "Automatic"
+msgstr "Αυτόματο IP"
+
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Installation of bootloader failed. The following error occured:"
@@ -12998,11 +13151,6 @@ msgstr ""
 #, c-format
 msgid "Set root password and network authentication methods"
 msgstr ""
-
-#: ../../standalone/drakgw:1
-#, c-format
-msgid "Internet Connection Sharing configuration"
-msgstr "Ρύθμιση Κοινής σύνδεσης Διαδικτύου"
 
 #: ../../ugtk2.pm:1
 #, c-format
@@ -13277,6 +13425,11 @@ msgstr "Επιλέξτε οδηγό δισκέτας για δημιουργία δισκέτας εκκίνησης"
 msgid "LILO with text menu"
 msgstr "LILO με μενού κειμένου"
 
+#: ../../standalone/net_monitor:1
+#, c-format
+msgid "instantaneous"
+msgstr ""
+
 #: ../../network/drakfirewall.pm:1
 #, c-format
 msgid "Everything (no firewall)"
@@ -13471,6 +13624,11 @@ msgstr "Παρακαλώ εισάγετε όνομα χρήστη"
 msgid "Enable CD Boot?"
 msgstr "Ενεργοποίηση εκκίνησης από CD;"
 
+#: ../../../move/move.pm:1
+#, c-format
+msgid "Simply reboot"
+msgstr ""
+
 #: ../../interactive/stdio.pm:1
 #, c-format
 msgid " enter `void' for void entry"
@@ -13573,15 +13731,15 @@ msgstr ""
 " εξυπηρετητής\n"
 " εξυπηρετητής."
 
-#: ../../install_steps_interactive.pm:1
-#, c-format
-msgid "Which is your timezone?"
-msgstr "Ποια είναι η ζώνη ώρας;"
-
 #: ../../standalone/drakbackup:1
 #, fuzzy, c-format
 msgid "Can't create log file!"
 msgstr "Αδύνατη η δημιουργία καταλόγου!"
+
+#: ../../install_steps_interactive.pm:1 ../../standalone/drakclock:1
+#, c-format
+msgid "Which is your timezone?"
+msgstr "Ποια είναι η ζώνη ώρας;"
 
 #: ../../standalone/drakbackup:1
 #, fuzzy, c-format
@@ -13633,6 +13791,11 @@ msgstr "Μοζαμβίκη"
 msgid "Icon"
 msgstr "Εικονίδιο"
 
+#: ../../../move/tree/mdk_totem:1
+#, fuzzy, c-format
+msgid "Kill those programs"
+msgstr "πρόσβαση σε προγράμματα Χ"
+
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "Please choose what you want to backup"
@@ -13668,7 +13831,7 @@ msgstr "Προσθήκη ενός κανόνα"
 msgid "Chunk size %s\n"
 msgstr "Μέγεθος chunk %s\n"
 
-#: ../../share/advertising/02-community.pl:1
+#: ../advertising/02-community.pl:1
 #, c-format
 msgid "Build the future of Linux!"
 msgstr ""
@@ -13800,7 +13963,7 @@ msgstr ""
 " εξυπηρετητής\n"
 "."
 
-#: ../../share/advertising/13-mdkexpert_corporate.pl:1
+#: ../advertising/13-mdkexpert_corporate.pl:1
 #, c-format
 msgid "MandrakeExpert Corporate"
 msgstr "MandrakeExpert Corporate"
@@ -13840,6 +14003,11 @@ msgid ""
 msgstr ""
 "Μετά την αλλαγή τύπου στην κατάτμηση %s, όλα τα δεδομένα σε αυτήν την "
 "κατάτμηση θα χαθούν"
+
+#: ../../harddrake/data.pm:1
+#, fuzzy, c-format
+msgid "ISDN adapters"
+msgstr "Εσωτερική κάρτα ISDN"
 
 #: ../../common.pm:1
 #, c-format
@@ -14117,6 +14285,11 @@ msgstr "Κοινή χρήση τοπικών σαρωτών"
 msgid "Plug'n Play probing failed. Please select the correct monitor"
 msgstr ""
 
+#: ../../../move/move.pm:1
+#, c-format
+msgid "Detect again USB key"
+msgstr ""
+
 #: ../../services.pm:1
 #, c-format
 msgid "Services and deamons"
@@ -14160,7 +14333,7 @@ msgstr "Ρύθμιση υπηρεσιών"
 msgid "Slovakian (QWERTZ)"
 msgstr "Σλοβακίας (QWERTZ)"
 
-#: ../../share/advertising/06-development.pl:1
+#: ../advertising/06-development.pl:1
 #, c-format
 msgid ""
 "To modify and to create in different languages such as Perl, Python, C and C+"
@@ -14221,6 +14394,11 @@ msgstr "Αλγερία"
 #, c-format
 msgid "Restore Via Network"
 msgstr "Επαναφορά μέσω δικτύου"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "Use tar and bzip2 (rather than tar and gzip)"
+msgstr ""
 
 #: ../../any.pm:1
 #, c-format
@@ -14344,7 +14522,7 @@ msgstr "DVD-ROM"
 msgid "Georgian (\"Latin\" layout)"
 msgstr "Γεωργία (\"Λατινική\" διάταξη)"
 
-#: ../../share/advertising/09-mdksecure.pl:1
+#: ../advertising/09-mdksecure.pl:1
 #, c-format
 msgid "Get the best items with Mandrake Linux Strategic partners"
 msgstr ""
@@ -14452,7 +14630,7 @@ msgstr "Αυτόματη σύνδεση"
 msgid "Domain Admin Password"
 msgstr "Κωδικός Πρόσβασης Διαχειριστή Τομέα"
 
-#: ../../share/advertising/05-desktop.pl:1
+#: ../advertising/05-desktop.pl:1
 #, fuzzy, c-format
 msgid ""
 "Perfectly adapt your computer to your needs thanks to the 11 available "
@@ -14591,6 +14769,11 @@ msgstr "utopia 25"
 msgid "Pipe job into a command"
 msgstr "Διασωλήνωση εργασίας σε εντολή"
 
+#: ../../../move/move.pm:1
+#, fuzzy, c-format
+msgid "Remove system config files"
+msgstr "Να αφαιρεθεί το αρχείο loopback;"
+
 #: ../../lang.pm:1
 #, c-format
 msgid "Cote d'Ivoire"
@@ -14602,7 +14785,8 @@ msgid "new dynamic device name generated by core kernel devfs"
 msgstr "δημιουργήθηκε νέα δυναμική συσκευή από τον κεντρικό πυρήνα devfs"
 
 #: ../../help.pm:1 ../../install_any.pm:1 ../../interactive.pm:1
-#: ../../ugtk2.pm:1 ../../modules/interactive.pm:1 ../../standalone/drakgw:1
+#: ../../ugtk2.pm:1 ../../modules/interactive.pm:1
+#: ../../standalone/drakclock:1 ../../standalone/drakgw:1
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "Yes"
@@ -14623,12 +14807,6 @@ msgstr "Πρόοδος Ανάκτησης"
 msgid "Estonia"
 msgstr "Εσθονία"
 
-#: ../../standalone/scannerdrake:1
-#, c-format
-msgid "Choose the host on which the local scanners should be made available:"
-msgstr ""
-"Επιλέξτε τον υπολογιστή του οποίου οι τοπικοί σαρωτές θα γίνουν διαθέσιμοι:"
-
 #: ../../partition_table.pm:1
 #, c-format
 msgid ""
@@ -14640,6 +14818,12 @@ msgstr ""
 "Η μοναδική λύση είναι να μετακινήσετε τις πρωτεύουσες κατατμήσεις σας έτσι "
 "ώστε το κενό να βρεθεί δίπλα στην εκτεταμένη κατάτμηση"
 
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "Choose the host on which the local scanners should be made available:"
+msgstr ""
+"Επιλέξτε τον υπολογιστή του οποίου οι τοπικοί σαρωτές θα γίνουν διαθέσιμοι:"
+
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "Channel"
@@ -14650,11 +14834,6 @@ msgstr "Κανάλι"
 #, c-format
 msgid "Add"
 msgstr "Προσθήκη"
-
-#: ../../standalone/drakgw:1
-#, c-format
-msgid "No Internet Connection Sharing has ever been configured."
-msgstr "Η Κοινή Σύνδεση Διαδικτύου δεν έχει ρυθμιστεί ποτέ."
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -14950,7 +15129,7 @@ msgstr "Πρόκειται για εγκατάσταση ή για αναβάθμιση;"
 msgid "ISDN card"
 msgstr "Εσωτερική κάρτα ISDN"
 
-#: ../../share/advertising/02-community.pl:1
+#: ../advertising/02-community.pl:1
 #, fuzzy, c-format
 msgid ""
 "To share your own knowledge and help build Linux software, join our "
@@ -15005,6 +15184,40 @@ msgstr ""
 " Αναβάθμιση Linux\n"
 " εκτελείται Αναβάθμιση\n"
 " Linux."
+
+#: ../../standalone/drakfont:1
+#, c-format
+msgid ""
+"\n"
+" Copyright (C) 2001-2002 by MandrakeSoft \n"
+"     DUPONT Sebastien (original version)\n"
+"     CHAUMETTE Damien <dchaumette@mandrakesoft.com>\n"
+"\n"
+" This program is free software; you can redistribute it and/or modify\n"
+" it under the terms of the GNU General Public License as published by\n"
+" the Free Software Foundation; either version 2, or (at your option)\n"
+" any later version.\n"
+"\n"
+" This program is distributed in the hope that it will be useful,\n"
+" but WITHOUT ANY WARRANTY; without even the implied warranty of\n"
+" MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n"
+" GNU General Public License for more details.\n"
+"\n"
+" You should have received a copy of the GNU General Public License\n"
+" along with this program; if not, write to the Free Software\n"
+" Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.\n"
+"\n"
+" Thanks:\n"
+"    -  pfm2afm:   \n"
+"\t by Ken Borgendale:\n"
+"\t    Convert a Windows .pfm  file to a .afm (Adobe Font Metrics)\n"
+"    -  type1inst:\n"
+"\t by James Macnicol: \n"
+"\t    type1inst generates files fonts.dir fonts.scale & Fontmap.\n"
+"    -  ttf2pt1:   \n"
+"\t  by Andrew Weeks, Frank Siegert, Thomas Henlich, Sergey Babkin  \n"
+"             Convert ttf font files to afm and pfb fonts\n"
+msgstr ""
 
 #: ../../printer/main.pm:1
 #, c-format
@@ -15074,6 +15287,11 @@ msgstr "To όριο εκκίνησης DHCP"
 msgid "Unsafe"
 msgstr "Ανασφαλές"
 
+#: ../../network/drakfirewall.pm:1
+#, fuzzy, c-format
+msgid "SSH server"
+msgstr "Εξυπηρετητής SSH"
+
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid ", %s sectors"
@@ -15081,7 +15299,7 @@ msgstr ", %s τομείς"
 
 #: ../../help.pm:1 ../../install_any.pm:1 ../../interactive.pm:1
 #: ../../ugtk2.pm:1 ../../modules/interactive.pm:1
-#: ../../standalone/harddrake2:1
+#: ../../standalone/drakclock:1 ../../standalone/harddrake2:1
 #, c-format
 msgid "No"
 msgstr "Όχι"
@@ -15641,6 +15859,11 @@ msgstr "Αφαίρεση επιλεγμένου υπολογιστή"
 msgid "Network configuration"
 msgstr "Ρυθμίσεις δικτύου"
 
+#: ../../standalone/harddrake2:1
+#, c-format
+msgid "/Autodetect _jaz drives"
+msgstr "/Εντοπισμός _οδηγών jaz"
+
 #: ../../any.pm:1
 #, c-format
 msgid "No sharing"
@@ -15761,9 +15984,10 @@ msgstr ""
 #: ../../install_steps.pm:1 ../../diskdrake/dav.pm:1
 #: ../../diskdrake/hd_gtk.pm:1 ../../diskdrake/interactive.pm:1
 #: ../../diskdrake/smbnfs_gtk.pm:1 ../../interactive/http.pm:1
-#: ../../standalone/drakboot:1 ../../standalone/drakbug:1
+#: ../../standalone/drakauth:1 ../../standalone/drakboot:1
+#: ../../standalone/drakbug:1 ../../standalone/drakconnect:1
 #: ../../standalone/drakfloppy:1 ../../standalone/drakfont:1
-#: ../../standalone/draksplash:1
+#: ../../standalone/draksplash:1 ../../../move/move.pm:1
 #, c-format
 msgid "Error"
 msgstr "Σφάλμα"
@@ -15807,6 +16031,11 @@ msgstr ""
 "\n"
 " Τι?"
 
+#: ../../partition_table.pm:1
+#, c-format
+msgid "mount failed: "
+msgstr "σύνδεση απέτυχε: "
+
 #: ../../steps.pm:1
 #, c-format
 msgid "Configure services"
@@ -15816,11 +16045,6 @@ msgstr "Ρύθμιση υπηρεσιών"
 #, c-format
 msgid "Broadcast Address:"
 msgstr "Διεύθυνση Μετάδοσης:"
-
-#: ../../partition_table.pm:1
-#, c-format
-msgid "mount failed: "
-msgstr "σύνδεση απέτυχε: "
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -15835,16 +16059,16 @@ msgstr ""
 msgid "Image"
 msgstr "Εικόνα"
 
+#: ../../services.pm:1
+#, c-format
+msgid "Remote Administration"
+msgstr "Απομακρυσμένη διαχείριση"
+
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Failed to add the printer \"%s\" to Star Office/OpenOffice.org/GIMP."
 msgstr ""
 "Απέτυχε η προσθήκη του εκτυπωτή \"%s\" στο Star Office/OpenOffice.org/GIMP"
-
-#: ../../services.pm:1
-#, c-format
-msgid "Remote Administration"
-msgstr "Απομακρυσμένη διαχείριση"
 
 #: ../../modules.pm:1
 #, c-format
@@ -15904,7 +16128,7 @@ msgstr "Ιούλιος"
 msgid "Prints into %s"
 msgstr ", εκτύπωση στο %s"
 
-#: ../../install_steps_interactive.pm:1
+#: ../../install_steps_interactive.pm:1 ../../../move/move.pm:1
 #, c-format
 msgid "An error occurred"
 msgstr "Προκλήθηκε σφάλμα"
@@ -16119,7 +16343,7 @@ msgstr ", πολυχρηστική συσκευή"
 msgid "Laos"
 msgstr "Λάος"
 
-#: ../../share/advertising/04-configuration.pl:1
+#: ../advertising/04-configuration.pl:1
 #, c-format
 msgid ""
 "Mandrake Linux 9.2 provides you with the Mandrake Control Center, a powerful "
@@ -16299,11 +16523,6 @@ msgstr "Πρέπει να δημιουργήσω πρώτα το /etc/dhcpd.conf!"
 msgid "Is FPU present"
 msgstr "Το FPU είναι παρόν"
 
-#: ../../standalone/scannerdrake:1
-#, c-format
-msgid "There are no scanners found which are available on your system.\n"
-msgstr "Δεν βρέθηκαν σαρωτές που να είναι διαθέσιμοι στο σύστημά σας.\n"
-
 #: ../../services.pm:1
 #, c-format
 msgid ""
@@ -16312,6 +16531,11 @@ msgid ""
 msgstr ""
 "Χωρίς επιπλέον πληροφορίες\n"
 "για αυτή την υπηρεσία."
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "There are no scanners found which are available on your system.\n"
+msgstr "Δεν βρέθηκαν σαρωτές που να είναι διαθέσιμοι στο σύστημά σας.\n"
 
 #: ../../standalone/drakTermServ:1
 #, c-format
@@ -16352,18 +16576,6 @@ msgstr "συσκευή"
 #, c-format
 msgid "if set to yes, report unowned files."
 msgstr "αν οριστεί ναι, αναφορά άγνωστων αρχείων."
-
-#: ../../standalone/harddrake2:1
-#, fuzzy, c-format
-msgid ""
-"This is HardDrake, a Mandrake hardware configuration tool.\n"
-"<span foreground=\"royalblue3\">Version:</span> %s\n"
-"<span foreground=\"royalblue3\">Author:</span> Thierry Vignaud &lt;tvignaud"
-"\\@mandrakesoft.com&gt;\n"
-"\n"
-msgstr ""
-"Αυτό είναι το HardDrake, ένα εργαλείο ρύθμισης της Mandrake\n"
-"Έκδοση:"
 
 #: ../../install_interactive.pm:1
 #, c-format
@@ -16446,10 +16658,27 @@ msgstr "Βιετνάμ"
 msgid "/_Fields description"
 msgstr "/_Περιγραφή Πεδίων"
 
-#: ../../share/advertising/10-security.pl:1
+#: ../advertising/10-security.pl:1
 #, c-format
 msgid "Optimize your security by using Mandrake Linux"
 msgstr "Βελτιστοποιήστε την ασφάλειά σας"
+
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"\n"
+"\n"
+" Thanks:\n"
+"\t- LTSP Project http://www.ltsp.org\n"
+"\t- Michael Brown <mbrown@fensystems.co.uk>\n"
+"\n"
+msgstr ""
+"\n"
+"\n"
+" Ευχαριστούμε:\n"
+"\t- LTSP Project http://www.ltsp.org\n"
+"\t- Michael Brown <mbrown@fensystems.co.uk>\n"
+"\n"
 
 #: ../../install_steps_gtk.pm:1 ../../interactive.pm:1 ../../ugtk2.pm:1
 #: ../../Xconfig/resolution_and_depth.pm:1 ../../diskdrake/hd_gtk.pm:1
@@ -16553,7 +16782,7 @@ msgstr ""
 msgid "mkinitrd optional arguments"
 msgstr "προαιρετικές επιλογές του mkinitrd"
 
-#: ../../share/advertising/03-software.pl:1
+#: ../advertising/03-software.pl:1
 #, c-format
 msgid ""
 "Surf the Web with Mozilla or Konqueror, read your mail with Evolution or "
@@ -16748,6 +16977,11 @@ msgstr "Επανεκκίνηση XFS"
 #, c-format
 msgid "Printing/Scanning/Photo Cards on \"%s\""
 msgstr "Εκτύπωση/Σάρωση/Κάρτες Φωτογραφιών στο\"%s\""
+
+#: ../../../move/move.pm:1
+#, c-format
+msgid "Continue without USB key"
+msgstr ""
 
 #: ../../install_steps.pm:1
 #, c-format
@@ -17196,7 +17430,7 @@ msgstr "Σύνδεση Winmodem"
 msgid "Hardware probing in progress"
 msgstr "Ανίχνευση υλικού σε εξέλιξη"
 
-#: ../../standalone/drakgw:1
+#: ../../network/shorewall.pm:1 ../../standalone/drakgw:1
 #, c-format
 msgid "Net Device"
 msgstr "Συσκευή Δικτύου"
@@ -17262,6 +17496,11 @@ msgid ""
 msgstr ""
 "το πακέτο 'ImageMagick' είναι απαραίτητο για την ολοκλήρωση της ρύθμισης.\n"
 "Κάντε κλικ στο \"Εντάξει\" για να εγκαταστήσετε το ή \"Άκυρο\" για έξοδο"
+
+#: ../../network/drakfirewall.pm:1
+#, fuzzy, c-format
+msgid "Telnet server"
+msgstr "εξυπηρετητής X"
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -17530,7 +17769,7 @@ msgstr "Syslog"
 msgid "Can't create catalog!"
 msgstr "Αδύνατη η δημιουργία καταλόγου!"
 
-#: ../../share/advertising/11-mnf.pl:1
+#: ../advertising/11-mnf.pl:1
 #, c-format
 msgid ""
 "Complete your security setup with this very easy-to-use software which "
@@ -17588,6 +17827,11 @@ msgstr ""
 "\n"
 "\n"
 " Προσθήκη."
+
+#: ../../network/isdn.pm:1
+#, fuzzy, c-format
+msgid "USB"
+msgstr "LSB"
 
 #: ../../standalone/drakxtv:1
 #, c-format
@@ -17648,6 +17892,11 @@ msgstr "Ομάδα εργασίας:"
 #, c-format
 msgid "Printer host name or IP"
 msgstr "Δικτυακό όνομα εκτυπωτή ή IP"
+
+#: ../../standalone/drakconnect:1
+#, fuzzy, c-format
+msgid "down"
+msgstr "Ολοκληρώθηκε"
 
 #: ../../standalone/drakbackup:1
 #, fuzzy, c-format
@@ -18107,6 +18356,11 @@ msgid "The printers on this machine are available to other computers"
 msgstr ""
 "Οι εκτυπωτές σε αυτό το μηχάνημα είναι διαθέσιμοι σε άλλους υπολογιστές"
 
+#: ../../lang.pm:1
+#, fuzzy, c-format
+msgid "China (Hong Kong)"
+msgstr "Χονγκ Κονγκ"
+
 #: ../../standalone/drakautoinst:1
 #, c-format
 msgid "I can't find needed image file `%s'."
@@ -18164,7 +18418,7 @@ msgstr "Το πακέτο δεν είναι εγκατεστημένο"
 msgid "American Samoa"
 msgstr "Αμερικανική Σαμόα"
 
-#: ../../share/advertising/12-mdkexpert.pl:1
+#: ../advertising/12-mdkexpert.pl:1
 #, c-format
 msgid "Become a MandrakeExpert"
 msgstr "Γίνετε MandrakeExpert"
@@ -18286,6 +18540,11 @@ msgstr "Ιταλία"
 msgid "Cayman Islands"
 msgstr "Νήσοι Κέυμαν"
 
+#: ../../fs.pm:1 ../../partition_table.pm:1
+#, c-format
+msgid "error unmounting %s: %s"
+msgstr "σφάλμα κατά την αποσύνδεση του %s: %s"
+
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Name of printer"
@@ -18295,11 +18554,6 @@ msgstr "Όνομα εκτυπωτή"
 #, c-format
 msgid "disable"
 msgstr "απενεργοποίηση"
-
-#: ../../fs.pm:1 ../../partition_table.pm:1
-#, c-format
-msgid "error unmounting %s: %s"
-msgstr "σφάλμα κατά την αποσύνδεση του %s: %s"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -18406,7 +18660,7 @@ msgstr "Συμπαγής"
 msgid "Detected model: %s %s"
 msgstr "Βρέθηκε το μοντέλο: %s %s"
 
-#: ../../share/advertising/03-software.pl:1
+#: ../advertising/03-software.pl:1
 #, c-format
 msgid "MandrakeSoft has selected the best software for you"
 msgstr ""
@@ -18531,6 +18785,11 @@ msgstr "Γραφικό περιβάλλον στην εκκίνηση"
 msgid " adsl"
 msgstr ""
 
+#: ../../raid.pm:1
+#, c-format
+msgid "Not enough partitions for RAID level %d\n"
+msgstr "Δεν υπάρχουν αρκετές κατατμήσεις για RAID επιπέδου %d\n"
+
 #: ../../standalone/harddrake2:1
 #, fuzzy, c-format
 msgid "format of floppies supported by the drive"
@@ -18540,11 +18799,6 @@ msgstr "Φορμά για δισκέτες που μπορεί να δεχτεί ο οδηγός"
 #, c-format
 msgid "Firmware copy failed, file %s not found"
 msgstr ""
-
-#: ../../raid.pm:1
-#, c-format
-msgid "Not enough partitions for RAID level %d\n"
-msgstr "Δεν υπάρχουν αρκετές κατατμήσεις για RAID επιπέδου %d\n"
 
 #: ../../standalone/drakTermServ:1
 #, fuzzy, c-format
@@ -18675,7 +18929,7 @@ msgstr ""
 "Δεν βρέθηκαν εικόνες CD ή DVD, παρακαλώ αντιγράψτε το πρόγραμμα εγκατάστασης "
 "και τα αρχεία rpm."
 
-#: ../../share/advertising/04-configuration.pl:1
+#: ../advertising/04-configuration.pl:1
 #, fuzzy, c-format
 msgid "Mandrake's multipurpose configuration tool"
 msgstr "Ρύθμιση του Διακομιστή Τερματικού Mandrake"
@@ -18705,7 +18959,7 @@ msgstr "Δίσκος"
 msgid "Enter a printer device URI"
 msgstr "Εισάγετε συσκευή εκτυπωτή URI"
 
-#: ../../share/advertising/01-thanks.pl:1
+#: ../advertising/01-thanks.pl:1
 #, fuzzy, c-format
 msgid ""
 "The success of MandrakeSoft is based upon the principle of Free Software. "
@@ -19279,7 +19533,7 @@ msgstr "Μοντέλο κάρτας:"
 msgid "Thin Client"
 msgstr "Πελάτης DHCP"
 
-#: ../../share/advertising/01-thanks.pl:1
+#: ../advertising/01-thanks.pl:1
 #, c-format
 msgid "Thank you for choosing Mandrake Linux 9.2"
 msgstr "Σας ευχαριστούμε που επιλέξατε το Mandrake Linux 9.2"
@@ -19382,6 +19636,13 @@ msgstr "Λήψη Γραμματοσειρών Windows "
 msgid "Mouse Systems"
 msgstr "Mouse Systems"
 
+#: ../../standalone/drakclock:1
+#, c-format
+msgid ""
+"Your computer can synchronize its clock\n"
+" with a remote time server using NTP"
+msgstr ""
+
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Iranian"
@@ -19407,7 +19668,7 @@ msgstr "Προσθήκη εξυπηρετητή"
 msgid "Remote printer name"
 msgstr "Απομακρυσμένος όνομα εκτυπωτή"
 
-#: ../../share/advertising/10-security.pl:1
+#: ../advertising/10-security.pl:1
 #, c-format
 msgid ""
 "MandrakeSoft has designed exclusive tools to create the most secured Linux "
@@ -19559,6 +19820,11 @@ msgstr "Microsoft Explorer"
 msgid "Uninstall Fonts"
 msgstr "Απεγκατάσταση Γραμματοσειρών"
 
+#: ../../../move/move.pm:1
+#, fuzzy, c-format
+msgid "Please wait, detecting and configuring devices..."
+msgstr "Παρακαλώ περιμένετε, ρυθμίζεται το επίπεδο ασφαλείας..."
+
 #: ../../keyboard.pm:1
 #, c-format
 msgid "German (no dead keys)"
@@ -19587,11 +19853,6 @@ msgstr ""
 "Μπορείτε να γίνει εξαγωγή με την χρήση NFS ή Samba. Παρακαλώ επιλέξτε ποίο "
 "θέλετε."
 
-#: ../../help.pm:1 ../../install_steps_interactive.pm:1
-#, c-format
-msgid "Reboot"
-msgstr "Επανεκκίνηση"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Gambia"
@@ -19601,6 +19862,12 @@ msgstr "Γκάμπια"
 #, c-format
 msgid "Mandrake Control Center"
 msgstr "Κέντρο Ελέγχου Mandrake"
+
+#: ../../help.pm:1 ../../install_steps_interactive.pm:1
+#: ../../../move/move.pm:1
+#, c-format
+msgid "Reboot"
+msgstr "Επανεκκίνηση"
 
 #: ../../printer/main.pm:1
 #, fuzzy, c-format
@@ -19636,6 +19903,11 @@ msgstr ""
 #, c-format
 msgid "Remember this password"
 msgstr "Απομνημόνευση του κωδικού πρόσβασης"
+
+#: ../../install_steps_gtk.pm:1
+#, c-format
+msgid "due to unsatisfied %s"
+msgstr ""
 
 #: ../../standalone/drakgw:1
 #, c-format
@@ -19695,6 +19967,11 @@ msgstr "Παπούα-Νέα Γουϊνέα"
 #, fuzzy, c-format
 msgid "Multi-function device on a parallel port"
 msgstr ", πολυχρηστική συσκευή στην παράλληλη θήρα #%s"
+
+#: ../../../move/tree/mdk_totem:1
+#, fuzzy, c-format
+msgid "Busy files"
+msgstr "Αντίγραφα ασφαλείας του συστήματος αρχείων"
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -19758,6 +20035,18 @@ msgstr ""
 #, c-format
 msgid "DHCP Client"
 msgstr "Πελάτης DHCP"
+
+#: ../../standalone/harddrake2:1
+#, fuzzy, c-format
+msgid ""
+"This is HardDrake, a Mandrake hardware configuration tool.\n"
+"<span foreground=\"royalblue3\">Version:</span> %s\n"
+"<span foreground=\"royalblue3\">Author:</span> Thierry Vignaud &lt;"
+"tvignaud@mandrakesoft.com&gt;\n"
+"\n"
+msgstr ""
+"Αυτό είναι το HardDrake, ένα εργαλείο ρύθμισης της Mandrake\n"
+"Έκδοση:"
 
 #: ../../standalone/drakgw:1
 #, c-format
@@ -19955,75 +20244,13 @@ msgstr "Χωρίς μεταφορά εκτυπωτών"
 msgid "Delay before booting the default image"
 msgstr "Καθυστέρηση πριν την εκκίνηση"
 
-#: ../../standalone/drakfont:1
-#, fuzzy, c-format
-msgid ""
-"\n"
-" Copyright (C) 2001-2002 by MandrakeSoft \n"
-"     DUPONT Sebastien (original version)\n"
-"     CHAUMETTE Damien <dchaumette\\@mandrakesoft.com>\n"
-"\n"
-" This program is free software; you can redistribute it and/or modify\n"
-" it under the terms of the GNU General Public License as published by\n"
-" the Free Software Foundation; either version 2, or (at your option)\n"
-" any later version.\n"
-"\n"
-" This program is distributed in the hope that it will be useful,\n"
-" but WITHOUT ANY WARRANTY; without even the implied warranty of\n"
-" MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n"
-" GNU General Public License for more details.\n"
-"\n"
-" You should have received a copy of the GNU General Public License\n"
-" along with this program; if not, write to the Free Software\n"
-" Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.\n"
-"\n"
-" Thanks:\n"
-"    -  pfm2afm:   \n"
-"\t by Ken Borgendale:\n"
-"\t    Convert a Windows .pfm  file to a .afm (Adobe Font Metrics)\n"
-"    -  type1inst:\n"
-"\t by James Macnicol: \n"
-"\t    type1inst generates files fonts.dir fonts.scale & Fontmap.\n"
-"    -  ttf2pt1:   \n"
-"\t  by Andrew Weeks, Frank Siegert, Thomas Henlich, Sergey Babkin  \n"
-"             Convert ttf font files to afm and pfb fonts\n"
-msgstr ""
-"\n"
-"\n"
-"\n"
-"<dchaumette\\@mandrakesoft.com>\n"
-"\n"
-"\n"
-" Γενικά Άδεια\n"
-"\n"
-"\n"
-"\n"
-"\n"
-"\n"
-"\n"
-" Γενικά Άδεια\n"
-"\n"
-" ληφθέντα Γενικά Άδεια\n"
-"\n"
-"\n"
-"\n"
-"\n"
-"\n"
-"\n"
-" Τομέας Windows \n"
-"\n"
-"\n"
-"\n"
-"\n"
-"\n"
-
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "Use Hard Disk to backup"
 msgstr "Χρήση σκληρού δίσκου για τα αντίγραφα ασφαλείας"
 
 #: ../../help.pm:1 ../../install_steps_gtk.pm:1 ../../standalone/drakbackup:1
-#: ../../standalone/drakboot:1 ../../standalone/drakgw:1
+#: ../../standalone/drakboot:1
 #, c-format
 msgid "Configure"
 msgstr "Ρύθμιση"
@@ -20093,7 +20320,7 @@ msgstr ""
 "Ελέγξτε το CD-ROM σε ένα άλλο σύστημα χρησιμοποιώντας την εντολή \"rpm -qpl "
 "Mandrake/RPMS/*.rpm\"\n"
 
-#: ../../share/advertising/06-development.pl:1
+#: ../advertising/06-development.pl:1
 #, c-format
 msgid "Mandrake Linux 9.2: the ultimate development platform"
 msgstr "Το Mandrake Linux 9.2 είναι η υπέρτατη πλατφόρμα ανάπτυξης"
@@ -20180,6 +20407,11 @@ msgstr "τελική ανάλυση"
 msgid "Services"
 msgstr "Υπηρεσίες"
 
+#: ../../../move/move.pm:1
+#, fuzzy, c-format
+msgid "Auto configuration"
+msgstr "Προσαρμοσμένη Ρύθμιση"
+
 #: ../../Xconfig/card.pm:1
 #, c-format
 msgid "4 MB"
@@ -20218,9 +20450,10 @@ msgid "Internet station"
 msgstr "Σταθμός Διαδικτύου"
 
 #: ../../share/compssUsers:999
+#, fuzzy
 msgid ""
-"Set of tools to read and send mail and news (pine, mutt, tin..) and to "
-"browse the Web"
+"Set of tools to read and send mail and news (mutt, tin..) and to browse the "
+"Web"
 msgstr ""
 "Εργαλεία για αποστολή και λήψη αλληλογραφίας και ειδήσεων (pine, mutt, "
 "tin...) και περιήγηση στο Διαδίκτυο"
@@ -20360,6 +20593,41 @@ msgstr ""
 "Σετ εργαλείων για την αποστολή και λήψη αλληλογραφίας, ειδήσεων  και "
 "περιήγηση στο Διαδίκτυο"
 
+#~ msgid "The setup has already been done, and it's currently enabled."
+#~ msgstr "Η ρύθμιση έχει ήδη γίνει, και αυτή τη στιγμή είναι ενεργοποιημένη."
+
+#~ msgid "Logs"
+#~ msgstr "Ημερολόγια"
+
+#~ msgid "The setup has already been done, but it's currently disabled."
+#~ msgstr ""
+#~ "Η ρύθμιση έχει ήδη γίνει, αλλά αυτή τη στιγμή είναι απενεργοποιημένη."
+
+#~ msgid "Profile "
+#~ msgstr "Προφίλ "
+
+#~ msgid ""
+#~ "Welcome to the Internet Connection Sharing utility!\n"
+#~ "\n"
+#~ "%s\n"
+#~ "\n"
+#~ "Click on Configure to launch the setup wizard."
+#~ msgstr ""
+#~ "Καλώς ορίσατε στο εργαλείο ρύθμισης της Κοινής Σύνδεσης του Διαδικτύου!\n"
+#~ "\n"
+#~ "%s\n"
+#~ "\n"
+#~ "Κάντε κλικ στο Ρύθμιση για να ξεκινήσετε τον οδηγό εγκατάστασης."
+
+#~ msgid "Internet Connection Sharing configuration"
+#~ msgstr "Ρύθμιση Κοινής σύνδεσης Διαδικτύου"
+
+#~ msgid "No Internet Connection Sharing has ever been configured."
+#~ msgstr "Η Κοινή Σύνδεση Διαδικτύου δεν έχει ρυθμιστεί ποτέ."
+
+#~ msgid "when checked, owner and group won't be changed"
+#~ msgstr "όταν επιλεγεί, ο ιδιοκτήτης και ομάδα δεν θα αλλάξουν"
+
 #~ msgid ""
 #~ "XawTV isn't installed!\n"
 #~ "\n"
@@ -20367,7 +20635,7 @@ msgstr ""
 #~ "If you do have a TV card but DrakX has neither detected it (no bttv nor "
 #~ "saa7134\n"
 #~ "module in \"/etc/modules\") nor installed xawtv, please send the\n"
-#~ "results of \"lspcidrake -v -f\" to \"install\\@mandrakesoft.com\"\n"
+#~ "results of \"lspcidrake -v -f\" to \"install@mandrakesoft.com\"\n"
 #~ "with subject \"undetected TV card\".\n"
 #~ "\n"
 #~ "\n"
@@ -20378,8 +20646,8 @@ msgstr ""
 #~ "\n"
 #~ "Αν έχετε κάρτα Τηλεόρασης αλλά το DrakX δεν την βρήκε (χωρίς bttv\n"
 #~ "module στο \"/etc/modules\") και δεν εγκατέστησε ούτε το xawtv, παρακαλώ\n"
-#~ "στείλτε τα αποτέλεσμα του \"lspcidrake -v -f\" στο \"install"
-#~ "\\@mandrakesoft.com\"\n"
+#~ "στείλτε τα αποτέλεσμα του \"lspcidrake -v -f\" στο \"install@mandrakesoft."
+#~ "com\"\n"
 #~ "με θέμα  \"undetected TV card\".\n"
 #~ "\n"
 #~ "\n"
@@ -20450,16 +20718,16 @@ msgstr ""
 #~ msgstr "Παρακαλώ ορίστε τον δικτυακό όνομα ή την IP"
 
 #~ msgid ""
-#~ " Copyright (C) 2001-2002 MandrakeSoft by DUPONT Sebastien <dupont_s"
-#~ "\\@epita.fr>"
+#~ " Copyright (C) 2001-2002 MandrakeSoft by DUPONT Sebastien <dupont_s@epita."
+#~ "fr>"
 #~ msgstr ""
-#~ " Copyright (C) 2001-2002 MandrakeSoft by DUPONT Sebastien <dupont_s"
-#~ "\\@epita.fr>"
+#~ " Copyright (C) 2001-2002 MandrakeSoft by DUPONT Sebastien <dupont_s@epita."
+#~ "fr>"
 
 #~ msgid ""
-#~ " updates 2002 MandrakeSoft by Stew Benedict <sbenedict\\@mandrakesoft.com>"
+#~ " updates 2002 MandrakeSoft by Stew Benedict <sbenedict@mandrakesoft.com>"
 #~ msgstr ""
-#~ "αναβαθμίσεις 2002 MandrakeSoft by Stew Benedict <sbenedict\\@mandrakesoft."
+#~ "αναβαθμίσεις 2002 MandrakeSoft by Stew Benedict <sbenedict@mandrakesoft."
 #~ "com>"
 
 #~ msgid "edit"

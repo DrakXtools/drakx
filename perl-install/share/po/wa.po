@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX\n"
-"POT-Creation-Date: 2003-09-16 13:45+0200\n"
+"POT-Creation-Date: 2003-12-03 03:09+0100\n"
 "PO-Revision-Date: 2003-07-25 19:33+0200\n"
 "Last-Translator: Pablo Saratxaga <pablo@mandrakesoft.com>\n"
 "Language-Team: Walon <linux-wa@chanae.alphanet.ch>\n"
@@ -81,7 +81,7 @@ msgid ""
 "Still continue?"
 msgstr ""
 "Li copeye di såvrité del tåvlea di pårtixhaedje n' a nén li minme grandeu.\n"
-"Doe dju continuwer tot l' minme?"
+"Doe dju continouwer tot l' minme?"
 
 #: ../../diskdrake/smbnfs_gtk.pm:1
 #, c-format
@@ -240,7 +240,7 @@ msgstr ""
 "Raloyî vosse sicrirece a on sierveu Linux eyet leyî li(les) éndjole(s) "
 "Windows s' î raloyî come des cliyints.\n"
 "\n"
-"Voloz vs vormint continuwer l' apontiaedje del sicrirece di cisse manire "
+"Voloz vs vormint continouwer l' apontiaedje del sicrirece di cisse manire "
 "chal?"
 
 #: ../../lang.pm:1
@@ -288,11 +288,6 @@ msgstr "Apontiaedje di CUPS"
 #, c-format
 msgid "Total progress"
 msgstr "Totå di l' avançmint"
-
-#: ../../lang.pm:1
-#, c-format
-msgid "Hong Kong"
-msgstr "Hong Kong"
 
 #: ../../install_interactive.pm:1
 #, c-format
@@ -364,6 +359,24 @@ msgstr "Candjî li tchoezi lodjoe"
 #, c-format
 msgid "No CD device defined!"
 msgstr "Noû éndjin léjheu di plakes lazer di defini!"
+
+#: ../../network/shorewall.pm:1
+#, c-format
+msgid ""
+"Please enter the name of the interface connected to the "
+"internet.              \n"
+"                \n"
+"Examples:\n"
+"                ppp+ for modem or DSL connections, \n"
+"                eth0, or eth1 for cable connection, \n"
+"                ippp+ for a isdn connection.\n"
+msgstr ""
+"Dinez l' no del eterface rantoele k' est raloyeye al daegntoele.\n"
+"\n"
+"Egzimpes:\n"
+"                ppp+ po des raloyaedjes viè modem ou DSL, \n"
+"                eth0, ou eth1 po des raloyaedjes viè cåbe, \n"
+"                ippp+ po on raloyaedje viè RDIS (ISDN).\n"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -439,15 +452,20 @@ msgstr ""
 msgid "Swiss (French layout)"
 msgstr "Swisse (cogne romande)"
 
+#: ../../raid.pm:1
+#, c-format
+msgid "mkraid failed (maybe raidtools are missing?)"
+msgstr "mkraid n' a nén stî (motoit vos n' avoz nén les raidtools?)"
+
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "August"
 msgstr "Awousse"
 
-#: ../../raid.pm:1
+#: ../../network/drakfirewall.pm:1
 #, c-format
-msgid "mkraid failed (maybe raidtools are missing?)"
-msgstr "mkraid n' a nén stî (motoit vos n' avoz nén les raidtools?)"
+msgid "FTP server"
+msgstr "Sierveu FTP"
 
 #: ../../harddrake/data.pm:1
 #, c-format
@@ -485,7 +503,7 @@ msgid ""
 "To print a file from the command line (terminal window) use the command \"%s "
 "<file>\".\n"
 msgstr ""
-"Po-z eprimî on fitchî a pårti del roye di comande (d' on purnea terminå) "
+"Po-z imprimer on fitchî a pårti del roye di comande (d' on purnea terminå) "
 "eployîz li comande «%s <fitchî>».\n"
 
 #: ../../diskdrake/interactive.pm:1
@@ -529,11 +547,6 @@ msgstr ""
 #, c-format
 msgid "Configuring..."
 msgstr "Apontiant..."
-
-#: ../../standalone/drakgw:1
-#, c-format
-msgid "The setup has already been done, and it's currently enabled."
-msgstr "L' apontiaedje a ddja stî fwait. Et il est en alaedje pol moumint."
 
 #: ../../harddrake/v4l.pm:1
 #, c-format
@@ -583,7 +596,7 @@ msgstr ""
 #: ../../lang.pm:1
 #, c-format
 msgid "Venezuela"
-msgstr ""
+msgstr "Venezwela"
 
 #: ../../network/network.pm:1 ../../printer/printerdrake.pm:1
 #: ../../standalone/drakconnect:1
@@ -670,6 +683,11 @@ msgstr " sol sierveu Novell «%s», sicrirece «%s»"
 msgid "Printer Name"
 msgstr "No del sicrirece"
 
+#: ../../../move/move.pm:1
+#, c-format
+msgid "Setting up USB key"
+msgstr "Apontiaedje del clé USB"
+
 #: ../../standalone/drakfloppy:1
 #, c-format
 msgid "Remove a module"
@@ -727,15 +745,19 @@ msgstr ""
 msgid "if needed"
 msgstr "s' i fåt"
 
+#: ../../standalone/drakclock:1
+#, c-format
+msgid ""
+"We need to install ntp package\n"
+" to enable Network Time Protocol"
+msgstr ""
+"I fåt astaler l' pacaedje ntp\n"
+"pol protocole d' ôrlodje rantoele"
+
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "Restore Failed..."
 msgstr "Li rapexhaedje a fwait berwete..."
-
-#: ../../standalone/harddrake2:1
-#, c-format
-msgid "/Autodetect _jazz drives"
-msgstr "/Oto-detecter les léjheus _jazz"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -887,7 +909,7 @@ msgstr "Apontiaedje del eterface do moumint"
 #: ../../printer/data.pm:1
 #, c-format
 msgid "LPD - Line Printer Daemon"
-msgstr "LPD - Li vî démon d' eprimaedje di GNU/Linux"
+msgstr "LPD - Li vî démon d' imprimaedje di GNU/Linux"
 
 #: ../../network/isdn.pm:1
 #, c-format
@@ -961,17 +983,12 @@ msgstr "Mostrer seulmint pol djoû tchoezi"
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "\tLimit disk usage to %s MB\n"
-msgstr ""
+msgstr "\tLimiter l' eployaedje del plake a %s Mo\n"
 
 #: ../../Xconfig/card.pm:1
 #, c-format
 msgid "512 kB"
 msgstr "512 Ko"
-
-#: ../../standalone/net_monitor:1
-#, c-format
-msgid "Logs"
-msgstr "Djournå"
 
 #: ../../standalone/scannerdrake:1
 #, c-format
@@ -1009,11 +1026,11 @@ msgid ""
 "jams.\n"
 msgstr ""
 "Vos ploz ossu eployî l' eterface grafike «xpdq» po defini des tchuzes et \n"
-"manaedjî les bouyes d' eprimaedje.\n"
+"manaedjî les bouyes d' imprimaedje.\n"
 "Si vos eployîz KDE come sicribanne vos avoz on boton «panike», et ene "
-"imådjete sol sicribanne, avou l' tecse «DJOKER l' eprimaedje!», ki va djoker "
-"sol moumint totes les bouyes d' eprimaedje cwand vos l' clitchîz. Çouchal "
-"pout esse ahessåve si li scrirece a des problemes avou l' papî.\n"
+"imådjete sol sicribanne, avou l' tecse «DJOKER l' imprimaedje!», ki va "
+"djoker sol moumint totes les bouyes d' imprimaedje cwand vos l' clitchîz. "
+"Çouchal pout esse ahessåve si li scrirece a des problemes avou l' papî.\n"
 
 #: ../../standalone/drakboot:1 ../../standalone/drakfloppy:1
 #: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
@@ -1188,7 +1205,7 @@ msgstr "Swisse"
 #: ../../lang.pm:1
 #, c-format
 msgid "Brunei Darussalam"
-msgstr ""
+msgstr "Bruney Darussalam"
 
 #: ../../modules/interactive.pm:1
 #, c-format
@@ -1459,6 +1476,11 @@ msgstr "Letone"
 msgid "monthly"
 msgstr "tos les moes"
 
+#: ../../../move/move.pm:1
+#, c-format
+msgid "Retry"
+msgstr "Rissayî"
+
 #: ../../standalone/drakfloppy:1
 #, c-format
 msgid "Module name"
@@ -1503,6 +1525,11 @@ msgstr "Eployî l' ecôdaedje unicôde"
 #, c-format
 msgid "the module of the GNU/Linux kernel that handles the device"
 msgstr "li module do nawea GNU/Linux ki manaedje cist éndjin chal"
+
+#: ../../standalone/drakclock:1
+#, c-format
+msgid "Is your hardware clock set to GMT?"
+msgstr "L' ôrlodje del éndjolreye est ele metowe e tins universel (GMT)?"
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -1550,6 +1577,11 @@ msgstr "Dji n' sai enonder li vicant metaedje a djoû !!!\n"
 msgid "Name: "
 msgstr "No: "
 
+#: ../../standalone/drakconnect:1
+#, c-format
+msgid "up"
+msgstr "en alaedje"
+
 #: ../../Xconfig/resolution_and_depth.pm:1
 #, c-format
 msgid "16 million colors (24 bits)"
@@ -1560,7 +1592,7 @@ msgstr "16 miyons di coleurs (24 bits)"
 msgid "Allow all users"
 msgstr "Permete tos les uzeus"
 
-#: ../../share/advertising/08-store.pl:1
+#: ../advertising/08-store.pl:1
 #, c-format
 msgid "The official MandrakeSoft Store"
 msgstr "Li waibe oficir di comiece so fyis di MandrakeSoft"
@@ -1592,15 +1624,15 @@ msgstr "Uzeu"
 msgid "Do new backup before restore (only for incremental backups.)"
 msgstr ""
 
-#: ../../standalone/harddrake2:1
-#, c-format
-msgid "Name"
-msgstr "No"
-
 #: ../../raid.pm:1
 #, c-format
 msgid "mkraid failed"
 msgstr "mkraid n' a nén stî"
+
+#: ../../standalone/harddrake2:1
+#, c-format
+msgid "Name"
+msgstr "No"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -1804,7 +1836,7 @@ msgid ""
 "\"Print option list\" button."
 msgstr ""
 "Po-z aveur ene djivêye des tchuzes k' i gn a pol sicrirece clitchîz sol "
-"boton «Djivêye des tchuzes pol eprimaedje»."
+"boton «Djivêye des tchuzes po l' imprimaedje»."
 
 #: ../../standalone/drakgw:1
 #, c-format
@@ -1815,6 +1847,23 @@ msgstr "Metant les sierveus en alaedje..."
 #, c-format
 msgid "Printing test page(s)..."
 msgstr "Dji rexhe li/les pådje(s) di saye..."
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid ""
+"Transfer successful\n"
+"You may want to verify you can login to the server with:\n"
+"\n"
+"ssh -i %s %s@%s\n"
+"\n"
+"without being prompted for a password."
+msgstr ""
+"Li transfert a stî comufåt\n"
+"Vos ploz verifyî ki vs poloz elodjî sol sierveu avou l' comande:\n"
+"\n"
+"ssh -i %s %s@%s\n"
+"\n"
+"et vs acertiner k' i n' vs dimande nén po on scret."
 
 #: ../../fsedit.pm:1
 #, c-format
@@ -2345,8 +2394,8 @@ msgid ""
 "the default printer under the new printing system %s?"
 msgstr ""
 "Vos avoz fwait on transfer di vosse viye prémetowe sicrirece («%s»), El "
-"voloz vs mete ossu come prémetowe sicrirece pol novea sistinme d' eprimaedje "
-"%s?"
+"voloz vs mete ossu come prémetowe sicrirece pol novea sistinme "
+"d' imprimaedje %s?"
 
 #: ../../standalone/drakTermServ:1
 #, c-format
@@ -2571,7 +2620,7 @@ msgstr ""
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Installing a printing system in the %s security level"
-msgstr "Astalaedje d' on sistinme d' eprimaedje e livea di såvrité «%s»"
+msgstr "Astalaedje d' on sistinme d' imprimaedje e livea di såvrité «%s»"
 
 #: ../../any.pm:1
 #, c-format
@@ -2833,6 +2882,11 @@ msgstr ""
 msgid "Can't add a partition to _formatted_ RAID md%d"
 msgstr "Dji n' pout radjouter ene pårticion a on RAID _abwesné_ md%d"
 
+#: ../../standalone/drakclock:1
+#, c-format
+msgid "Network Time Protocol"
+msgstr "Protocole d' ôrlodje pa rantoele"
+
 #: ../../Xconfig/card.pm:1
 #, c-format
 msgid ""
@@ -3070,7 +3124,7 @@ msgstr ""
 msgid "level"
 msgstr "livea"
 
-#: ../../share/advertising/13-mdkexpert_corporate.pl:1
+#: ../advertising/13-mdkexpert_corporate.pl:1
 #, c-format
 msgid ""
 "All incidents will be followed up by a single qualified MandrakeSoft "
@@ -3191,7 +3245,7 @@ msgstr "Tchoezi les pacaedjes"
 #: ../../lang.pm:1
 #, c-format
 msgid "Mauritania"
-msgstr ""
+msgstr "Moritanreye"
 
 #: ../../standalone/drakgw:1
 #, c-format
@@ -3411,7 +3465,7 @@ msgid ""
 "JetDirect servers the port number is usually 9100, on other servers it can "
 "vary. See the manual of your hardware."
 msgstr ""
-"Po-z eprimî avou ene sicrirece TCP ou soket, vos dvoz dner li no d' lodjoe "
+"Po-z imprimer avou ene sicrirece TCP ou soket, vos dvoz dner li no d' lodjoe "
 "ou l' adresse IP del sicrirece, et motoit ossu li limero do pôrt (si "
 "prémetowe valixhance est 9100). So les sierveus HP JetDirect li pôrt est "
 "normålmint li 9100, so d' ôtes sierveus çoula pout candjî. Léjhoz li manuel "
@@ -3461,7 +3515,7 @@ msgid ""
 "\n"
 msgstr ""
 "Apontyî vosse sierveu Windows po kel sicrirece soeye disponibe dizo "
-"l' protocole IPP eyet apontyî l' eprimaedje a pårti di ciste éndjole chal "
+"l' protocole IPP eyet apontyî l' imprimaedje a pårti di ciste éndjole chal "
 "avou l' sôre di raloyaedje «%s» dins Printerdrake.\n"
 
 #: ../../install_steps_gtk.pm:1
@@ -3469,7 +3523,7 @@ msgstr ""
 msgid "Bad package"
 msgstr "Måva pacaedje"
 
-#: ../../share/advertising/07-server.pl:1
+#: ../advertising/07-server.pl:1
 #, c-format
 msgid ""
 "Transform your computer into a powerful Linux server: Web server, mail, "
@@ -3477,7 +3531,7 @@ msgid ""
 msgstr ""
 "Fé di voste éndjole on poujhant sierveu e seulmint sacwants clitchs di vosse "
 "sori: sierveus waibe, d' emilaedje, côpe feu, routeu, di fitchîs et "
-"d' eprimaedje,..."
+"d' imprimaedje,..."
 
 #: ../../security/level.pm:1
 #, c-format
@@ -3552,14 +3606,14 @@ msgid ""
 "print japanese text on a printer set up on a remote machine, you have to "
 "activate this function on that remote machine."
 msgstr ""
-"Mete çouchal en alaedje permete d' eprimî des fitchîs e peur tecse e "
-"djaponès. Nel eployîz ki si vos vloz vormint eprimî des tecses e djaponès, "
-"ca cwand c' est metou en alaedje vos n' poloz nén eprimî des latenès letes "
+"Mete çouchal en alaedje permete d' imprimer des fitchîs e peur tecse e "
+"djaponès. Nel eployîz ki si vos vloz vormint imprimer des tecses e djaponès, "
+"ca cwand c' est metou en alaedje vos n' poloz nén imprimer des latenès letes "
 "avou des accints dins des fitchîs e peur tecse, et vos n' pôroz nerén candjî "
 "l' grandeu des mådjes, li grandeu des letes, evnd. Ciste apontiaedje n' est "
-"ki po les scrireces defineyes so ciste éndjole chal. Si vos vloz eprimî des "
-"tecses e djaponès son ene sicrirece å lon, vos dvoz mete en alaedje cisse "
-"tchuze chal so l' éndjole då lon."
+"ki po les scrireces defineyes so ciste éndjole chal. Si vos vloz imprimer "
+"des tecses e djaponès son ene sicrirece å lon, vos dvoz mete en alaedje "
+"cisse tchuze chal so l' éndjole då lon."
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -3578,7 +3632,7 @@ msgstr ""
 #: ../../lang.pm:1
 #, c-format
 msgid "Guinea-Bissau"
-msgstr "Guineye-Bissau"
+msgstr "Guinêye-Bissaw"
 
 #: ../../Xconfig/monitor.pm:1
 #, c-format
@@ -3748,7 +3802,7 @@ msgstr "Ouxh å lådje po les hacneus"
 msgid "Module options:"
 msgstr "Tchuzes do module:"
 
-#: ../../share/advertising/11-mnf.pl:1
+#: ../advertising/11-mnf.pl:1
 #, c-format
 msgid "Secure your networks with the Multi Network Firewall"
 msgstr ""
@@ -3758,7 +3812,7 @@ msgstr ""
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Go on without configuring the network"
-msgstr "Continuwer sins apontyî li rantoele"
+msgstr "Continouwer sins apontyî li rantoele"
 
 #: ../../network/isdn.pm:1
 #, c-format
@@ -3829,10 +3883,15 @@ msgstr "Sori"
 msgid "not enough room in /boot"
 msgstr "i gn a nén del plaece assez so /boot"
 
+#: ../../install_steps_gtk.pm:1
+#, c-format
+msgid "trying to promote %s"
+msgstr ""
+
 #: ../../lang.pm:1
 #, c-format
 msgid "Liechtenstein"
-msgstr ""
+msgstr "Lîchtensteyn"
 
 #: ../../network/ethernet.pm:1 ../../network/network.pm:1
 #, c-format
@@ -3974,8 +4033,8 @@ msgid ""
 "\n"
 msgstr ""
 "Po-z saveur les tchuzes k' i gn a pol sicrirece léjhoz li djivêye chal pa "
-"dzo oudonbén clitchîz sol boton «Djivêye des tchuzes pol eprimaedje». %s%s%"
-"s\n"
+"dzo oudonbén clitchîz sol boton «Djivêye des tchuzes po l' imprimaedje». %s%s"
+"%s\n"
 "\n"
 
 #: ../../lang.pm:1
@@ -3983,10 +4042,15 @@ msgstr ""
 msgid "Saudi Arabia"
 msgstr "Arabeye Sawoudite"
 
+#: ../../services.pm:1
+#, c-format
+msgid "Internet"
+msgstr "Rantoele"
+
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid "Continue anyway?"
-msgstr "Voloz vs vormint continuwer?"
+msgstr "Voloz vs vormint continouwer?"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -4002,11 +4066,6 @@ msgstr ""
 #, c-format
 msgid "Printer"
 msgstr "Sicrirece"
-
-#: ../../services.pm:1
-#, c-format
-msgid "Internet"
-msgstr "Rantoele"
 
 #: ../../standalone/service_harddrake:1
 #, c-format
@@ -4081,7 +4140,12 @@ msgstr "Les ponts di montaedje dvèt aveur seulmint des letes et des chifes"
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Restarting printing system..."
-msgstr "Renondant li sistinme d' eprimaedje..."
+msgstr "Renondant li sistinme d' imprimaedje..."
+
+#: ../../../move/tree/mdk_totem:1
+#, c-format
+msgid "You can only run with no CDROM support"
+msgstr ""
 
 #: ../../modules/interactive.pm:1
 #, c-format
@@ -4106,7 +4170,7 @@ msgstr "Vindeu, modele del sicrirece"
 #: ../../printer/data.pm:1
 #, c-format
 msgid "PDQ - Print, Don't Queue"
-msgstr "PDQ - Eprimî sins caweye"
+msgstr "PDQ - Imprimer sins caweye"
 
 #: ../../standalone.pm:1
 #, c-format
@@ -4179,7 +4243,7 @@ msgid ""
 msgstr ""
 "\n"
 "Les comandes «%s» et «%s» permetèt ossu di candjî les tchuzes po ene bouye "
-"d' eprimaedje dnêye. Tot simplumint radjoutez les tchuzes ki vos vloz el "
+"d' imprimaedje dnêye. Tot simplumint radjoutez les tchuzes ki vos vloz el "
 "roye di comande, eg: «%s <fitchî>».\n"
 
 #: ../../standalone/drakbackup:1
@@ -4300,15 +4364,15 @@ msgstr "ISA / PCMCIA"
 msgid "About"
 msgstr "Å dfait"
 
-#: ../../network/network.pm:1
-#, c-format
-msgid "Proxies configuration"
-msgstr "Apontiaedje des proxies"
-
 #: ../../mouse.pm:1
 #, c-format
 msgid "GlidePoint"
 msgstr "GlidePoint"
+
+#: ../../network/network.pm:1
+#, c-format
+msgid "Proxies configuration"
+msgstr "Apontiaedje des proxies"
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -4456,6 +4520,11 @@ msgstr "Les ponts di montaedje dvèt comincî avou on '/'"
 msgid "Choose your CD/DVD device"
 msgstr "Tchoezixhoz vost éndjin léjheu di CD/DVD"
 
+#: ../../network/drakfirewall.pm:1
+#, c-format
+msgid "CUPS server"
+msgstr "Sierveu CUPS"
+
 #: ../../standalone/logdrake:1
 #, c-format
 msgid "Postfix Mail Server"
@@ -4471,7 +4540,7 @@ msgstr "Cwiter sins schaper"
 msgid "Yemen"
 msgstr "Yemen"
 
-#: ../../share/advertising/11-mnf.pl:1
+#: ../advertising/11-mnf.pl:1
 #, c-format
 msgid "This product is available on the MandrakeStore Web site."
 msgstr "Ci prodût chal si pout trover sol waibe di MandrakeStore"
@@ -4480,6 +4549,31 @@ msgstr "Ci prodût chal si pout trover sol waibe di MandrakeStore"
 #, c-format
 msgid "=> There are many things to choose from (%s).\n"
 msgstr "=> I gn a sacwantès afwaires a tchoezi (%s).\n"
+
+#: ../../standalone/drakclock:1
+#, c-format
+msgid "GMT - DrakClock"
+msgstr ""
+
+#: ../../../move/move.pm:1
+#, c-format
+msgid ""
+"An error occurred:\n"
+"\n"
+"\n"
+"%s\n"
+"\n"
+"This may come from corrupted system configuration files\n"
+"on the USB key, in this case removing them and then\n"
+"rebooting Mandrake Move would fix the problem. To do\n"
+"so, click on the corresponding button.\n"
+"\n"
+"\n"
+"You may also want to reboot and remove the USB key, or\n"
+"examine its contents under another OS, or even have\n"
+"a look at log files in console #3 and #4 to try to\n"
+"guess what's happening."
+msgstr ""
 
 #: ../../steps.pm:1
 #, c-format
@@ -4620,7 +4714,7 @@ msgid ""
 "Please choose the printer to which the print jobs should go or enter a "
 "device name/file name in the input line"
 msgstr ""
-"S' i vs plait, tchoezixhoz li scrirece ki les bouyes d' eprimaedje sont-st "
+"S' i vs plait, tchoezixhoz li scrirece ki les bouyes d' imprimaedje sont-st "
 "evoyeyes dnez on no d' fitchî ou d' éndjin sol roye d' intrêye."
 
 #: ../../standalone/scannerdrake:1
@@ -4725,6 +4819,11 @@ msgstr "Userdrake"
 msgid "Which partition do you want to use for Linux4Win?"
 msgstr "Kéne pårticion voloz vs eployî po-z î mete Linux4win?"
 
+#: ../../install_steps_gtk.pm:1
+#, c-format
+msgid "due to missing %s"
+msgstr "cåze di %s ki manke"
+
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Test pages"
@@ -4788,7 +4887,7 @@ msgstr "Nou no pol sicrirece å lon!"
 #, c-format
 msgid "Do you want to enable printing on printers in the local network?\n"
 msgstr ""
-"Voloz vs mete en alaedje l' eprimaedje so les scrireces sol rantoele "
+"Voloz vs mete en alaedje l' imprimaedje so les scrireces sol rantoele "
 "locåle?\n"
 
 #: ../../lang.pm:1
@@ -5294,7 +5393,7 @@ msgstr ""
 msgid "Started on boot"
 msgstr "En alaedje a l' enondaedje"
 
-#: ../../share/advertising/12-mdkexpert.pl:1
+#: ../advertising/12-mdkexpert.pl:1
 #, c-format
 msgid ""
 "Join the MandrakeSoft support teams and the Linux Community online to share "
@@ -5633,11 +5732,6 @@ msgstr ""
 "Håyner tinme\n"
 "dizo l' conzôle"
 
-#: ../../standalone/net_monitor:1
-#, c-format
-msgid "Statistics"
-msgstr "Sitatistikes"
-
 #: ../../printer/cups.pm:1
 #, c-format
 msgid "(on %s)"
@@ -5686,7 +5780,7 @@ msgstr ""
 #: ../../lang.pm:1
 #, c-format
 msgid "Equatorial Guinea"
-msgstr "Guineye Ecwåtoriåle"
+msgstr "Guinêye Ecwåtoriåle"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -5704,7 +5798,7 @@ msgid ""
 "To print a file from the command line (terminal window) use the command \"%s "
 "<file>\" or \"%s <file>\".\n"
 msgstr ""
-"Po-z eprimî on fitchî a pårti del roye di comande (d' on purnea terminå) "
+"Po-z imprimer on fitchî a pårti del roye di comande (d' on purnea terminå) "
 "eployîz li comande «%s <fitchî>» oudonbén «%s <fitchî>».\n"
 
 #: ../../printer/printerdrake.pm:1
@@ -6434,7 +6528,7 @@ msgstr ""
 "I shonne ki voste éndjole est pår trop viye\n"
 " oudonbén k' ele nén cnoxhowe; adon l' enondrece\n"
 " yaboot ni rotrè nén por vos.\n"
-"L' astalaedje va continuwer, mins vos dvroz\n"
+"L' astalaedje va continouwer, mins vos dvroz\n"
 " eployî BootX ou ôte tchoi po-z enonder voste éndjole"
 
 #: ../../diskdrake/interactive.pm:1
@@ -6459,7 +6553,7 @@ msgid ""
 "because the file to print is provided by the application.\n"
 msgstr ""
 "Vos ploz ossu eployî ces comandes la pol tchamp «Comande po rexhe» k' i gn a "
-"el purnea di dialogue pol eprimaedje di beacôp di programes, mins chal ni "
+"el purnea di dialogue po l' imprimaedje di beacôp di programes, mins chal ni "
 "metoz nén li no di fitchî ca c' est l' programe kel dinrè.\n"
 
 #: ../../lang.pm:1
@@ -6470,7 +6564,7 @@ msgstr "Djapon"
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Print option list"
-msgstr "Djivêye des tchuzes pol eprimaedje"
+msgstr "Djivêye des tchuzes po l' imprimaedje"
 
 #: ../../standalone/localedrake:1
 #, c-format
@@ -6522,7 +6616,7 @@ msgstr ""
 "Schaper et rprinde l' éntropeye do sistinme, po-z aveur ene askepiance\n"
 "di nombes a l' astcheyance di meyeuse cwålité."
 
-#: ../../share/advertising/07-server.pl:1
+#: ../advertising/07-server.pl:1
 #, c-format
 msgid "Turn your computer into a reliable server"
 msgstr "Fijhoz di voste éndjole on stocaesse sierveu."
@@ -6537,6 +6631,11 @@ msgstr "Verifyî s' i gn a des vudes sicrets e /etc/shadow"
 msgid " (driver %s)"
 msgstr " (mineu %s)"
 
+#: ../../services.pm:1
+#, c-format
+msgid "Start when requested"
+msgstr ""
+
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid ""
@@ -6550,11 +6649,6 @@ msgstr ""
 #, c-format
 msgid "I don't know"
 msgstr "Dji n' sai nén"
-
-#: ../../services.pm:1
-#, c-format
-msgid "Start when requested"
-msgstr ""
 
 #: ../../printer/main.pm:1
 #, c-format
@@ -6586,7 +6680,7 @@ msgstr ""
 "Po pus di såvrité, l' etape di l' abwesnaedje des deurès plakes ni srè måy "
 "fwait otomaticmint.\n"
 "\n"
-"Voloz vs continuwer?"
+"Voloz vs continouwer?"
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -6786,6 +6880,11 @@ msgstr ""
 "Vos ploz enonder printerdrake a pårti do cinte di contrôle di Mandrake, el "
 "seccion «Éndjolreye»."
 
+#: ../../../move/move.pm:1
+#, c-format
+msgid "Key isn't writable"
+msgstr "Li sere n'&nbsp;est nén scrijhåve"
+
 #: ../../lang.pm:1
 #, c-format
 msgid "Bangladesh"
@@ -6804,7 +6903,7 @@ msgstr "Sayes po cmincî"
 #: ../../network/isdn.pm:1
 #, c-format
 msgid "Continue"
-msgstr "Continuwer"
+msgstr "Continouwer"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -6833,15 +6932,15 @@ msgstr ""
 msgid "Set the root umask."
 msgstr "Defini l' umask (prémetowès permissions) po root"
 
-#: ../../network/modem.pm:1 ../../standalone/drakconnect:1
-#, c-format
-msgid "Script-based"
-msgstr "Pa scripe"
-
 #: ../../install_any.pm:1 ../../partition_table.pm:1
 #, c-format
 msgid "Error reading file %s"
 msgstr "Åk n' a nén stî come dji sayive di lére li fitchî %s"
+
+#: ../../network/modem.pm:1 ../../standalone/drakconnect:1
+#, c-format
+msgid "Script-based"
+msgstr "Pa scripe"
 
 #: ../../harddrake/v4l.pm:1
 #, c-format
@@ -6914,23 +7013,6 @@ msgstr ""
 #, c-format
 msgid "Domain Authentication Required"
 msgstr "L' acertinaedje des dominnes est obligatwere"
-
-#: ../../standalone/drakTermServ:1
-#, c-format
-msgid ""
-"\n"
-"\n"
-" Thanks:\n"
-"\t- LTSP Project http://www.ltsp.org\n"
-"\t- Michael Brown <mbrown\\@fensystems.co.uk>\n"
-"\n"
-msgstr ""
-"\n"
-"\n"
-" Gråces:\n"
-"\t- Prodjet LTSP http://www.ltsp.org\n"
-"\t- Michael Brown <mbrown\\@fensystems.co.uk>\n"
-"\n"
 
 #: ../../security/level.pm:1
 #, c-format
@@ -7279,7 +7361,7 @@ msgstr ""
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Starting the printing system at boot time"
-msgstr "Enonder li sistinme d' eprimaedje a l' enondaedje del éndjole"
+msgstr "Enonder li sistinme d' imprimaedje a l' enondaedje del éndjole"
 
 #: ../../network/netconnect.pm:1
 #, c-format
@@ -7328,17 +7410,17 @@ msgid ""
 "\n"
 "Do you really want to configure printing on this machine?"
 msgstr ""
-"Vos alez astaler li sistinme d' eprimaedje %s so ene éndjole k' est avou "
+"Vos alez astaler li sistinme d' imprimaedje %s so ene éndjole k' est avou "
 "l' livea di såvrité «%s».\n"
 "\n"
-"Ci sistinme d' eprimaedje chal enonde on démon (ene bouye di fond) ki ratind "
-"après les bouyes d' eprimaedje et les manaedje. Ci démon chal pout eto esse "
-"raloyî pa des éndjoles då lon sol rantoele, dj' ô bén ça pout esse on pont "
-"possibe po les hacneus fé des atakes. Po cisse råjhon la seulmint kékes "
-"démons sont-st enondés dins ci livea di såvrité chal avou l' apontiaedje "
-"prémetou.\n"
+"Ci sistinme d' imprimaedje chal enonde on démon (ene bouye di fond) ki "
+"ratind après les bouyes d' imprimaedje et les manaedje. Ci démon chal pout "
+"eto esse raloyî pa des éndjoles då lon sol rantoele, dj' ô bén ça pout esse "
+"on pont possibe po les hacneus fé des atakes. Po cisse råjhon la seulmint "
+"kékes démons sont-st enondés dins ci livea di såvrité chal avou "
+"l' apontiaedje prémetou.\n"
 "\n"
-"Voloz vs vormint apontyî l' eprimaedje so ciste éndjole chal?"
+"Voloz vs vormint apontyî l' imprimaedje so ciste éndjole chal?"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -7630,7 +7712,7 @@ msgstr "Cåte grafike: %s\n"
 #: ../../standalone/printerdrake:1
 #, c-format
 msgid "/Set as _Default"
-msgstr "/Mete come _prémetou"
+msgstr "/Mete come _prémetowe"
 
 #: ../../security/l10n.pm:1
 #, c-format
@@ -7647,15 +7729,15 @@ msgstr "Yaboot"
 msgid "Logitech CC Series with Wheel emulation"
 msgstr "Logitech CC Series avou rôlete emulêye"
 
-#: ../../standalone/drakboot:1
-#, c-format
-msgid "Splash selection"
-msgstr "Tchoezixhaedje del waitroûle d' enondaedje"
-
 #: ../../partition_table.pm:1
 #, c-format
 msgid "Extended partition not supported on this platform"
 msgstr "Sitindowe pårticion nén sopoirtêye so cisse platfôme chal"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Splash selection"
+msgstr "Tchoezixhaedje del waitroûle d' enondaedje"
 
 #: ../../network/isdn.pm:1
 #, c-format
@@ -7694,7 +7776,7 @@ msgstr ""
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Printing/Photo Card Access on \"%s\""
-msgstr "Eprimaedje/Accès cåtes foto so «%s»"
+msgstr "Imprimaedje/Accès cåtes foto so «%s»"
 
 #: ../../security/l10n.pm:1
 #, c-format
@@ -7707,13 +7789,18 @@ msgid ""
 "Do you want to enable printing on the printers mentioned above or on "
 "printers in the local network?\n"
 msgstr ""
-"Voloz vs mete en alaedje l' eprimaedje so les scrireces chal pa dzeur ou so "
+"Voloz vs mete en alaedje l' imprimaedje so les scrireces chal pa dzeur ou so "
 "les scrireces sol rantoele locåle?\n"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Printer default settings"
 msgstr "Prémetous apontiaedjes pol sicrirece"
+
+#: ../../mouse.pm:1
+#, c-format
+msgid "Generic PS2 Wheel Mouse"
+msgstr "Sori tipike PS2 a rôlete"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -7722,11 +7809,6 @@ msgid ""
 "memory page level, thus enabling the processor to prevent unchecked kernel "
 "accesses to user memory (aka this is a bug guard)"
 msgstr ""
-
-#: ../../mouse.pm:1
-#, c-format
-msgid "Generic PS2 Wheel Mouse"
-msgstr "Sori tipike PS2 a rôlete"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -7891,6 +7973,11 @@ msgstr "Taprece coreyinne"
 msgid "Not connected"
 msgstr "Nén raloyî"
 
+#: ../../standalone/net_monitor:1
+#, c-format
+msgid "No internet connection configured"
+msgstr "Nou raloyaedje al rantoele daegnrece d' apontyî"
+
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Greek"
@@ -7905,23 +7992,6 @@ msgstr "Sint Kitts eyet Nevis"
 #, c-format
 msgid "Generic 3 Button Mouse with Wheel emulation"
 msgstr "Sori tipike a 3 botons avou rôlete emulêye"
-
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid ""
-"Transfer successful\n"
-"You may want to verify you can login to the server with:\n"
-"\n"
-"ssh -i %s %s\\@%s\n"
-"\n"
-"without being prompted for a password."
-msgstr ""
-"Li transfert a stî comufåt\n"
-"Vos ploz verifyî ki vs poloz elodjî sol sierveu avou l' comande:\n"
-"\n"
-"ssh -i %s %s\\@%s\n"
-"\n"
-"et vs acertiner k' i n' vs dimande nén po on scret."
 
 #: ../../any.pm:1
 #, c-format
@@ -8158,7 +8228,7 @@ msgstr ""
 "Vos ploz ossu dner on novea no, oudonbén passer houte\n"
 "l' apontiaedje di cisse sicrirece chal."
 
-#: ../../share/advertising/12-mdkexpert.pl:1
+#: ../advertising/12-mdkexpert.pl:1
 #, c-format
 msgid ""
 "Find the solutions of your problems via MandrakeSoft's online support "
@@ -8226,6 +8296,22 @@ msgstr "Kirgizstan"
 msgid "Multi-function device on USB"
 msgstr "Éndjin USB multi-fonccions"
 
+#: ../../../move/move.pm:1
+#, c-format
+msgid ""
+"We didn't detect any USB key on your system. If you\n"
+"plug in an USB key now, Mandrake Move will have the ability\n"
+"to transparently save the data in your home directory and\n"
+"system wide configuration, for next boot on this computer\n"
+"or another one. Note: if you plug in a key now, wait several\n"
+"seconds before detecting again.\n"
+"\n"
+"\n"
+"You may also proceed without an USB key - you'll still be\n"
+"able to use Mandrake Move as a normal live Mandrake\n"
+"Operating System."
+msgstr ""
+
 #: ../../help.pm:1
 #, c-format
 msgid "With basic documentation"
@@ -8254,7 +8340,7 @@ msgstr ""
 #: ../../lang.pm:1
 #, c-format
 msgid "Western Sahara"
-msgstr ""
+msgstr "Sara Coûtchantrece"
 
 #: ../../network/network.pm:1
 #, c-format
@@ -8326,15 +8412,15 @@ msgstr ""
 msgid "Other Media"
 msgstr "Ôtes sopoirts"
 
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "Backup system files"
-msgstr ""
-
 #: ../../mouse.pm:1
 #, c-format
 msgid "Logitech MouseMan+"
 msgstr "Logitech MouseMan+"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "Backup system files"
+msgstr ""
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -8399,6 +8485,11 @@ msgstr "Apontiaedjes do sistinme"
 msgid "Please choose your type of mouse."
 msgstr "Tchoezixhoz li sôre di vosse sori."
 
+#: ../../services.pm:1
+#, c-format
+msgid "running"
+msgstr "en alaedje"
+
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "class of hardware device"
@@ -8417,11 +8508,6 @@ msgstr ""
 #, c-format
 msgid "United Kingdom"
 msgstr "Rweyåme-Uni"
-
-#: ../../services.pm:1
-#, c-format
-msgid "running"
-msgstr "en alaedje"
 
 #: ../../lang.pm:1
 #, c-format
@@ -8467,7 +8553,7 @@ msgstr "Sénégal"
 msgid "Command line"
 msgstr "Roye di cmande"
 
-#: ../../share/advertising/08-store.pl:1
+#: ../advertising/08-store.pl:1
 #, c-format
 msgid ""
 "Our full range of Linux solutions, as well as special offers on products and "
@@ -8522,6 +8608,17 @@ msgstr "Swap"
 #, c-format
 msgid "Custom settings"
 msgstr "Apontiaedjes da vosse"
+
+#: ../../../move/move.pm:1
+#, c-format
+msgid ""
+"The USB key seems to have write protection enabled, but we can't safely\n"
+"unplug it now.\n"
+"\n"
+"\n"
+"Click the button to reboot the machine, unplug it, remove write protection,\n"
+"plug the key again, and launch Mandrake Move again."
+msgstr ""
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -8635,7 +8732,7 @@ msgstr ""
 msgid "Photo memory card access on your HP multi-function device"
 msgstr "Accès åzès cåtes memwere po les fotos so l' éndjin multi-fonccions HP"
 
-#: ../../share/advertising/09-mdksecure.pl:1
+#: ../advertising/09-mdksecure.pl:1
 #, c-format
 msgid ""
 "Enhance your computer performance with the help of a selection of partners "
@@ -8668,7 +8765,7 @@ msgstr "Taprece del Amerike nonnrece"
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Japanese text printing mode"
-msgstr "Eprimaedje di tecses djaponès"
+msgstr "Imprimaedje di tecses djaponès"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -8759,6 +8856,11 @@ msgstr ""
 #, c-format
 msgid "Exit install"
 msgstr "Moussî foû"
+
+#: ../../../move/move.pm:1
+#, c-format
+msgid "Need a key to save your data"
+msgstr ""
 
 #: ../../standalone/drakgw:1
 #, c-format
@@ -8951,11 +9053,6 @@ msgstr "Rûsse (fonetike)"
 msgid "dhcpd Config..."
 msgstr "Apontiaedje di dhcpd..."
 
-#: ../../standalone/drakgw:1
-#, c-format
-msgid "The setup has already been done, but it's currently disabled."
-msgstr "L' apontiaedje a ddja stî fwait. Mins il est pol moumint dismetou."
-
 #: ../../any.pm:1
 #, c-format
 msgid "LILO/grub Installation"
@@ -9086,7 +9183,7 @@ msgstr "Tchoezixhoz vosse clé d' ecriptaedje pol sistinme di fitchîs"
 #: ../../lang.pm:1
 #, c-format
 msgid "Sierra Leone"
-msgstr ""
+msgstr "Sierra Leyone"
 
 #: ../../lang.pm:1
 #, c-format
@@ -9096,7 +9193,7 @@ msgstr "Botswana"
 #: ../../lang.pm:1
 #, c-format
 msgid "Andorra"
-msgstr "Andorre"
+msgstr "Andore"
 
 #: ../../standalone/draksec:1
 #, c-format
@@ -9133,6 +9230,11 @@ msgstr ""
 #, c-format
 msgid "Choose an X server"
 msgstr "Tchoezixhoz on sierveu X"
+
+#: ../../../move/tree/mdk_totem:1
+#, c-format
+msgid "Copying to memory to allow removing the CDROM"
+msgstr ""
 
 #: ../../install_interactive.pm:1
 #, c-format
@@ -9183,7 +9285,7 @@ msgstr "Apontiaedje des etapes otomatikes"
 msgid "Barbados"
 msgstr "Barbades"
 
-#: ../../share/advertising/02-community.pl:1
+#: ../advertising/02-community.pl:1
 #, c-format
 msgid ""
 "Want to know more and to contribute to the Open Source community? Get "
@@ -9346,15 +9448,6 @@ msgstr "sor-djermêye do processeu"
 msgid "First Time Wizard"
 msgstr "Macrea di Prumî Elodjaedje"
 
-#: ../../install_steps.pm:1
-#, c-format
-msgid ""
-"An error occurred, but I don't know how to handle it nicely.\n"
-"Continue at your own risk."
-msgstr ""
-"Åk n' a nén stî, et dji n' sai cmint m' saetchî l' cou foû des\n"
-"strons. Si vos continuwez, vos duvroz tirer vosse plan tot seu."
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Taiwan"
@@ -9369,6 +9462,15 @@ msgstr "Pakistan"
 #, c-format
 msgid "please wait, parsing file: %s"
 msgstr "tårdjîz s' i vs plait, dji lé l' fitchî: %s"
+
+#: ../../install_steps.pm:1 ../../../move/move.pm:1
+#, c-format
+msgid ""
+"An error occurred, but I don't know how to handle it nicely.\n"
+"Continue at your own risk."
+msgstr ""
+"Åk n' a nén stî, et dji n' sai cmint m' saetchî l' cou foû des\n"
+"strons. Si vos continouwez, vos duvroz tirer vosse plan tot seu."
 
 #: ../../install_steps_gtk.pm:1
 #, c-format
@@ -9387,16 +9489,16 @@ msgid ""
 "agreement. Then print printhead alignment pages with \"lexmarkmaintain\" and "
 "adjust the head alignment settings with this program."
 msgstr ""
-"Po vos poleur eprimî avou vosse Lexmark inkjet eyet cist apontiaedje chal, i "
-"vs fåt les mineus po les scrireces a djet d' intche di Lexmark. Alez sol "
+"Po vos poleur imprimer avou vosse Lexmark inkjet eyet cist apontiaedje chal, "
+"i vs fåt les mineus po les scrireces a djet d' intche di Lexmark. Alez sol "
 "waibe http://www.lexmark.com et clitchîz sol boton «Drivers». Poy, "
 "tchoezixhoz vosse modele, et «Linux» come sistinme d' operance. Les mineus "
 "vnèt come des pacaedjes RPM ou des scripes shell avou ene eterface "
 "d' astalaedje eteractive grafike. Vos n' avoz nén mezåjhe del apontyî avou "
 "ciste eterface grafike. Clitchîz so «Rinoncî» djusse après accepter "
 "l' licince, et poy fijhoz rexhe les pådjes po mete e roye les tiesse "
-"d' eprimaedje avou «lexmarkmaintain» et coridjîz s' i fåt l' aroymint des "
-"tiesse d' eprimaedje avou ci programe la."
+"d' imprimaedje avou «lexmarkmaintain» et coridjîz s' i fåt l' aroymint des "
+"tiesse d' imprimaedje avou ci programe la."
 
 #: ../../standalone/drakperm:1
 #, c-format
@@ -9508,14 +9610,15 @@ msgid ""
 "Do you want to have the automatic starting of the printing system turned on "
 "again?"
 msgstr ""
-"Li sistinme d' eprimaedje (%s) ni srè nén enonder otomaticmint cwand "
+"Li sistinme d' imprimaedje (%s) ni srè nén enonder otomaticmint cwand "
 "l' éndjole s' enondrè.\n"
 "\n"
 "C' est possibe ki l' enondaedje otomatike fuxhe essocté paski l' livea di "
-"såvrité a stî ragrandi, ca l' sistinme d' eprimaedje est on pont possibe "
+"såvrité a stî ragrandi, ca l' sistinme d' imprimaedje est on pont possibe "
 "d' atakes po les hacneus.\n"
 "\n"
-"Voloz vs rimete en alaedje l' enondaedje otomatike do sistinme d' eprimaedje?"
+"Voloz vs rimete en alaedje l' enondaedje otomatike do sistinme "
+"d' imprimaedje?"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -9570,6 +9673,11 @@ msgstr ""
 "so ene plakete.\n"
 "Li cogne est l' minme ki po les plaketes fwaites pol oto-astalaedje."
 
+#: ../../../move/tree/mdk_totem:1
+#, c-format
+msgid "No CDROM support"
+msgstr "Nén d' sopoirt po les plakes lazer"
+
 #: ../../standalone/drakxtv:1
 #, c-format
 msgid "China (broadcast)"
@@ -9611,7 +9719,7 @@ msgstr ""
 "I gn a åk ki n' a nén stî tot tcherdjant li module %s.\n"
 "Voloz vs sayî co on côp avou des ôtes parametes?"
 
-#: ../../share/advertising/01-thanks.pl:1
+#: ../advertising/01-thanks.pl:1
 #, c-format
 msgid "Welcome to the Open Source world."
 msgstr "Wilicome amon les libes programes"
@@ -9838,6 +9946,11 @@ msgstr "Ôtes pôrts"
 msgid "number of capture buffers for mmap'ed capture"
 msgstr "nombe di tampons po les copeyes di waitroûlêyes avou mmap()"
 
+#: ../../network/adsl.pm:1
+#, c-format
+msgid " - detected"
+msgstr " - detecté"
+
 #: ../../harddrake/data.pm:1
 #, c-format
 msgid "SMBus controllers"
@@ -9891,7 +10004,7 @@ msgid ""
 "configuring now. How do you want to proceed?"
 msgstr ""
 "Vos alez apontyî ene sicrirece å lon. Çouchal a mezåjhe d' ene rantoele en "
-"alaedje, mins li vosse n' est nén co apontieye. Si vos continuwez sins "
+"alaedje, mins li vosse n' est nén co apontieye. Si vos continouwez sins "
 "rantoele vos n' pôroz nén sayî li scrirece ki vos apontyîz pol moumint. Cwè "
 "voloz vs fé?"
 
@@ -9940,6 +10053,11 @@ msgstr "Renonaedje pa l' uzeu sol conzôle"
 msgid "Restore"
 msgstr "Rapexhî"
 
+#: ../../standalone/drakclock:1
+#, c-format
+msgid "Server:"
+msgstr "Sierveu:"
+
 #: ../../security/help.pm:1
 #, c-format
 msgid "if set to yes, check if the network devices are in promiscuous mode."
@@ -9949,6 +10067,13 @@ msgstr ""
 #, c-format
 msgid "Looking for available packages..."
 msgstr "Dji cwir après les pacaedjes k' i gn a"
+
+#: ../../../move/move.pm:1
+#, c-format
+msgid "Please wait, setting up system configuration files on USB key..."
+msgstr ""
+"Tårdjîz on pô s' i vs plait, dji screye les fitchîs d' apontiaedje sol sere "
+"USB..."
 
 #: ../../any.pm:1
 #, c-format
@@ -10075,15 +10200,15 @@ msgstr ""
 "Li frécwénce do processeu, e MHz (Mega hertz, çou ki polèt esse defini a pô "
 "près come li nombe d' instruccions ki l' processeu pout fé so ene segonde)"
 
-#: ../../standalone/printerdrake:1
-#, c-format
-msgid "Mandrake Linux Printer Management Tool"
-msgstr "Usteye di manaedjmint des scrireces di Mandrake"
-
 #: ../../pkgs.pm:1
 #, c-format
 msgid "important"
 msgstr "ki vént bén a pont"
+
+#: ../../standalone/printerdrake:1
+#, c-format
+msgid "Mandrake Linux Printer Management Tool"
+msgstr "Usteye di manaedjmint des scrireces di Mandrake"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -10139,6 +10264,11 @@ msgstr "Uzeus"
 #, c-format
 msgid "Preparing bootloader..."
 msgstr "Dj' aprestêye l' enondrece"
+
+#: ../../../move/move.pm:1
+#, c-format
+msgid "Enter your user information, password will be used for screensaver"
+msgstr ""
 
 #: ../../network/network.pm:1
 #, c-format
@@ -10260,7 +10390,7 @@ msgid ""
 "NOTE: Depending on the printer model and the printing system up to %d MB of "
 "additional software will be installed."
 msgstr ""
-"NOTE: Sorlon li modele del sicrirece eyet li sistinme d' eprimaedje, i gn "
+"NOTE: Sorlon li modele del sicrirece eyet li sistinme d' imprimaedje, i gn "
 "årè mezåjhe d' astaler disk' a %d Mo di pacaedjes di rawete."
 
 #: ../../standalone/drakconnect:1
@@ -10576,15 +10706,15 @@ msgstr "Håynaedje do fitchî"
 msgid "Authentication LDAP"
 msgstr "Verifiaedje LDAP"
 
+#: ../../install_steps_gtk.pm:1
+#, c-format
+msgid "in order to keep %s"
+msgstr ""
+
 #: ../../harddrake/sound.pm:1
 #, c-format
 msgid "Let me pick any driver"
 msgstr "Leyîz mu tchoezi tot l' minme ké mineu"
-
-#: ../../standalone/net_monitor:1
-#, c-format
-msgid "Profile "
-msgstr "Profil "
 
 #: ../../standalone/net_monitor:1
 #, c-format
@@ -10685,9 +10815,9 @@ msgstr "Evoyî l' modêye do nawea"
 #: ../../standalone/drakautoinst:1 ../../standalone/drakbackup:1
 #: ../../standalone/drakboot:1 ../../standalone/drakconnect:1
 #: ../../standalone/drakfloppy:1 ../../standalone/drakfont:1
-#: ../../standalone/drakgw:1 ../../standalone/drakperm:1
-#: ../../standalone/draksec:1 ../../standalone/logdrake:1
-#: ../../standalone/mousedrake:1 ../../standalone/net_monitor:1
+#: ../../standalone/drakperm:1 ../../standalone/draksec:1
+#: ../../standalone/logdrake:1 ../../standalone/mousedrake:1
+#: ../../standalone/net_monitor:1
 #, c-format
 msgid "Cancel"
 msgstr "Rinoncî"
@@ -10840,19 +10970,6 @@ msgstr "Itålyinne"
 msgid "Basic"
 msgstr "Di båze"
 
-#: ../../standalone/drakTermServ:1
-#, c-format
-msgid ""
-"\n"
-" Copyright (C) 2002 by MandrakeSoft \n"
-"\tStew Benedict sbenedict\\@mandrakesoft.com\n"
-"\n"
-msgstr ""
-"\n"
-" Copyright © 2002 MandrakeSoft \n"
-" Stew Benedict <sbenedict\\@mandrakesoft.com>\n"
-"\n"
-
 #: ../../install_messages.pm:1
 #, c-format
 msgid "http://www.mandrakelinux.com/en/92errata.php3"
@@ -10873,11 +10990,10 @@ msgstr "pdq"
 msgid "Card IO"
 msgstr "I/R del cåte"
 
-#: ../../standalone/drakperm:1
+#: ../../network/drakfirewall.pm:1
 #, c-format
-msgid "when checked, owner and group won't be changed"
-msgstr ""
-"s' il est clitchî, li prôpietaire et l' groupe èn polèt nén esse candjîs"
+msgid "Samba server"
+msgstr "Sierveu Samba"
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -10976,6 +11092,11 @@ msgstr ""
 msgid "access to compilation tools"
 msgstr "accès ås usteyes di copilaedje"
 
+#: ../../standalone/net_monitor:1
+#, c-format
+msgid "Global statistics"
+msgstr "Sitatistikes globåles"
+
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "Please select data to restore..."
@@ -10995,6 +11116,11 @@ msgstr ""
 #, c-format
 msgid "Standard test page"
 msgstr "Pådje di saye standård"
+
+#: ../../standalone/drakclock:1
+#, c-format
+msgid "Time Zone"
+msgstr "Coisse d' eureye"
 
 #: ../../diskdrake/hd_gtk.pm:1 ../../diskdrake/interactive.pm:1
 #, c-format
@@ -11078,8 +11204,21 @@ msgid ""
 "Your choice? "
 msgstr ""
 "Tchoezixhoz li prumî limero del fortchete di 10 ki vos vloz aspougnî,\n"
-"oudonbén vos ploz djusse taper so Enter po continuwer.\n"
+"oudonbén vos ploz djusse taper so Enter po continouwer.\n"
 "Vosse tchuze? "
+
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"\n"
+" Copyright (C) 2002 by MandrakeSoft \n"
+"\tStew Benedict sbenedict@mandrakesoft.com\n"
+"\n"
+msgstr ""
+"\n"
+" Copyright © 2002 MandrakeSoft \n"
+" Stew Benedict <sbenedict@mandrakesoft.com>\n"
+"\n"
 
 #: ../../standalone/draksplash:1
 #, c-format
@@ -11106,15 +11245,15 @@ msgstr "Macrea d' apontiaedje del rantoele"
 msgid "Removable media automounting"
 msgstr "Montaedje otomatike des sopoirts bodjåves"
 
+#: ../../services.pm:1
+#, c-format
+msgid "Printing"
+msgstr "Imprimaedje"
+
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "Enter the directory to save:"
 msgstr ""
-
-#: ../../services.pm:1
-#, c-format
-msgid "Printing"
-msgstr "Eprimaedje"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -11240,7 +11379,7 @@ msgstr "Kensington Thinking Mouse"
 msgid "Configuration of a remote printer"
 msgstr "Apontiaedje d' ene sicrirece å lon"
 
-#: ../../share/advertising/13-mdkexpert_corporate.pl:1
+#: ../advertising/13-mdkexpert_corporate.pl:1
 #, c-format
 msgid "An online platform to respond to enterprise support needs."
 msgstr ""
@@ -11399,15 +11538,22 @@ msgstr ""
 msgid "Configure Local Area Network..."
 msgstr "Apontyî li rantoele locåle..."
 
-#: ../../security/l10n.pm:1
+#: ../../../move/move.pm:1
 #, c-format
-msgid "Verify checksum of the suid/sgid files"
+msgid ""
+"The USB key seems to have write protection enabled. Please\n"
+"unplug it, remove write protection, and then plug it again."
 msgstr ""
 
 #: ../../services.pm:1
 #, c-format
 msgid "Launch the sound system on your machine"
 msgstr "Enonder li sistinme di son so voste éndjole"
+
+#: ../../security/l10n.pm:1
+#, c-format
+msgid "Verify checksum of the suid/sgid files"
+msgstr ""
 
 #: ../../security/l10n.pm:1
 #, c-format
@@ -11467,10 +11613,10 @@ msgstr ""
 "Apontiaedjes pol prémetowe sicrirece\n"
 "\n"
 "Acertinez vs kel grandeu do papî eyet li sôre d' intche ou l' môde "
-"d' eprimaedje (cwand on les pout tchoezi) sont-st apontyîs comufåt. Et ossu "
+"d' imprimaedje (cwand on les pout tchoezi) sont-st apontyîs comufåt. Et ossu "
 "ki l' apontiaedje del éndjolreye po les scrireces lazer (memwere, baks "
 "duplecs, baks di rawete) est fwait comufåt. Notez k' avou ene grande finté "
-"ou cwålité pol rexhowe l' eprimaedje pout esse bén pus londjin."
+"ou cwålité pol rexhowe l' imprimaedje pout esse bén pus londjin."
 
 #: ../../install_any.pm:1
 #, c-format
@@ -11738,6 +11884,11 @@ msgstr "Vos n' poloz nén distchoezi ci pacaedje chal. I l' fåt mete a djoû"
 msgid "Loading from floppy"
 msgstr "Tcherdjant a pårti d' ene plakete"
 
+#: ../../standalone/drakclock:1
+#, c-format
+msgid "Timezone - DrakClock"
+msgstr ""
+
 #: ../../security/help.pm:1
 #, c-format
 msgid "Enable/Disable the logging of IPv4 strange packets."
@@ -11891,6 +12042,11 @@ msgstr ""
 "vos trovroz del informåcion sol apontiaedje do sistinme el tchaptrea\n"
 "sol post-astalåcion do Guide di l' Uzeu Mandrake Linux Oficir."
 
+#: ../../standalone/drakclock:1
+#, c-format
+msgid "Enable Network Time Protocol"
+msgstr "Mete ene alaedje li protocole d' ôrlodje rantoele"
+
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "paranoid"
@@ -11919,7 +12075,7 @@ msgid ""
 "because the file to print is provided by the application.\n"
 msgstr ""
 "Cisse comande vos l' poloz ossu eployî pol tchamp «Comande po rexhe» k' i gn "
-"a el purnea di dialogue pol eprimaedje di beacôp di programes, mins chal ni "
+"a el purnea di dialogue pol imprimaedje di beacôp di programes, mins chal ni "
 "metoz nén li no di fitchî ca c' est l' programe kel dinrè.\n"
 
 #: ../../Xconfig/main.pm:1 ../../Xconfig/resolution_and_depth.pm:1
@@ -11982,14 +12138,14 @@ msgstr "accès ås usteyes rantoele"
 msgid "Firmware-Upload for HP LaserJet 1000"
 msgstr "Tcherdjaedje do firmware del HP LaserJet 1000"
 
-#: ../../share/advertising/03-software.pl:1
+#: ../advertising/03-software.pl:1
 #, c-format
 msgid ""
 "And, of course, push multimedia to its limits with the very latest software "
 "to play videos, audio files and to handle your images or photos."
 msgstr ""
-"Avou Mandrake Linux 9.2 vos ploz eployî les dierins programes po djower des "
-"fitchîs di son, aspougnî eyet håyner vos imådjes ou fotos, et djower des "
+"Avou Mandrake Linux 9.2 vos ploz eployî les dierins programes po djouwer des "
+"fitchîs di son, aspougnî eyet håyner vos imådjes ou fotos, et djouwer des "
 "films"
 
 #: ../../printer/printerdrake.pm:1
@@ -12026,7 +12182,7 @@ msgid ""
 msgstr ""
 "%s egzistêye dedja, el disfacer?\n"
 "\n"
-"Asteme: si vos avoz ddja fwait çouchal vos dvroz seurmint\n"
+"Asteme: si vos avoz ddja fwait çouchal vos dvroz surmint\n"
 "purdjî l' intrêye do fitchî «authorized_keys» sol sierveu."
 
 #: ../../network/tools.pm:1
@@ -12049,15 +12205,15 @@ msgstr "Protocole d' enondaedje"
 msgid "LVM-disks %s\n"
 msgstr "Plakes-LVM %s\n"
 
-#: ../../diskdrake/interactive.pm:1
-#, c-format
-msgid "The package %s is needed. Install it?"
-msgstr "I gn a mezåjhe do pacaedje «%s». El voloz astaler?"
-
 #: ../../services.pm:1
 #, c-format
 msgid "On boot"
 msgstr "A l' enondaedje"
+
+#: ../../diskdrake/interactive.pm:1
+#, c-format
+msgid "The package %s is needed. Install it?"
+msgstr "I gn a mezåjhe do pacaedje «%s». El voloz astaler?"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -12073,6 +12229,11 @@ msgstr "Vatican"
 #, c-format
 msgid "Please make a backup of your data first"
 msgstr "Fijhoz ene copeye di såvrité divant di tcheryî pus lon."
+
+#: ../../harddrake/data.pm:1
+#, c-format
+msgid "ADSL adapters"
+msgstr ""
 
 #: ../../install_interactive.pm:1
 #, c-format
@@ -12099,7 +12260,7 @@ msgstr "I gn a mezåjhe do firmware"
 msgid "Remove List"
 msgstr "Djivêye a oister"
 
-#: ../../share/advertising/05-desktop.pl:1
+#: ../advertising/05-desktop.pl:1
 #, c-format
 msgid "A customizable environment"
 msgstr "Èn evironmint apontiåve a vosse môde"
@@ -12279,31 +12440,32 @@ msgid ""
 "system you may change it by running PrinterDrake from the Mandrake Control\n"
 "Center and clicking the expert button."
 msgstr ""
-"Chal, vos tchoezixhoz li ké sistinme d' eprimaedje vos vloz eployî\n"
+"Chal, vos tchoezixhoz li ké sistinme d' imprimaedje vos vloz eployî\n"
 "so vosse copiutrece. Des ôtes sistinmes d' operance k' i gn a\n"
 "vos dnèt onk, mins Mandrake Linux vos lait tchoezi inte deus, tchaeke onk\n"
 "estant l' meyeu dins on cas dné.\n"
 "\n"
-" * «%s» - ki vout dire «print, don't queue» (eprimer sins caweye), est\n"
+" * «%s» - ki vout dire «print, don't queue» (imprimer sins caweye), est\n"
 "li tchuze a-z eployî si vosse copiutrece est raloyeye directumint a vosse\n"
 "copiutrece et ki vos vloz divni araedjî cwand l' papî s' bôre... et ki\n"
 "vos n' avoz nén des scrireces sol rantoele locåle («%s» n' sait manaedjî\n"
 "ki des apontiaedjes rantoele foirt simpes eyet il est ene miete londjin\n"
-"po-z eprimî pal rantoele). Tchoezixhoz «pdq» si vos estoz on mieraprindisse\n"
+"po-z imprimer pal rantoele). Tchoezixhoz «pdq» si vos estoz on "
+"mieraprindisse\n"
 "avou GNU/Linux.\n"
 "\n"
-" «%s» - «Common Unix Printing System» (sistinme di comon eprimaedje po\n"
-"Unix), est clapant po l' eprimaedje so vosse sicrirece locåle ossu bén\n"
+" «%s» - «Common Unix Printing System» (sistinme di comon imprimaedje po\n"
+"Unix), est clapant po l' imprimaedje so vosse sicrirece locåle ossu bén\n"
 "ki les cenes a l' ôte costé del bole. Il est simpe et pout fé do cliyint\n"
-"come do sierveu pol vî sistinme d' eprimaedje «lpd». Ça vout dire k' il\n"
+"come do sierveu pol vî sistinme d' imprimaedje «lpd». Ça vout dire k' il\n"
 "est copatibe avou les sistinme k' i gn aveut davance. I pout fé bråmint\n"
 "d' afwaires, mins l' apontiaedje di båze est cåzu ossu åjhey ki l' ci\n"
 "di «pdq». Si vos avoz mezåjhe d' emuler on sierveu «lpd», i vs fåt mete\n"
 "en alaedje li démon «cups-lpd». %s a des eterfaces grafikes po tchoezi\n"
-"les scrireces, apontyî les tchuzes prôpes a tchaeskene et po-z eprimî.\n"
+"les scrireces, apontyî les tchuzes prôpes a tchaeskene et po-z imprimer.\n"
 "\n"
 "Si vos tchoezixhoz asteure, et ki pus tård vos n' inmez nén vosse sistinme\n"
-"d' eprimaedje, vos l' poloz åjheymint candjî avou l' usteye d' apontiaedje\n"
+"d' imprimaedje, vos l' poloz åjheymint candjî avou l' usteye d' apontiaedje\n"
 "des scrireces, a-z enonder a pårti do cinte di contrôle di Mandrake, tot\n"
 "clitchant sol boton «Sipepieus»."
 
@@ -12326,7 +12488,7 @@ msgstr ""
 "Verifyîz ki Printerdrake a fwait comufåt li deteccion \n"
 "otomatike do modele di vosse sicrirece, s' i vs plait.\n"
 "Cweroz après li modele corek el djivêye si on måva \n"
-"modele a stî trové, ou si c' est «Eprimaedje direk» \n"
+"modele a stî trové, ou si c' est «Imprimaedje direk» \n"
 "(çou ki vout dire ki nou mineu a stî trové)."
 
 #: ../../standalone/draksec:1
@@ -12343,6 +12505,13 @@ msgstr ""
 #, c-format
 msgid "Firmware copy succeeded"
 msgstr "Li copiaedje do firmware a stî comifåt"
+
+#: ../../../move/tree/mdk_totem:1
+#, c-format
+msgid ""
+"You can't use another CDROM when the following programs are running: \n"
+"%s"
+msgstr ""
 
 #: ../../security/help.pm:1
 #, c-format
@@ -12547,7 +12716,7 @@ msgstr ""
 "Ces scrireces la eployèt on protocole di comunicåcion foirt sipeciål, çou ki "
 "fwait k' ele ni polèt roter comufåt ki raloyeyes å prumî pôrt paralele. "
 "Cwand li scrirece est raloyeye a on ôte pôrt ou raloyeye a on sierveu "
-"d' eprimaedje, i vos l' fåt mete sol prumî pôrt paralele divant d' poleur "
+"d' imprimaedje, i vos l' fåt mete sol prumî pôrt paralele divant d' poleur "
 "rexhe li pådje di saye. Ôtrumint ele ni rotrè nén. Li sôre di raloyaedje ki "
 "vos avoz dné ni srè nén prindou e conte pal mineu."
 
@@ -12826,8 +12995,13 @@ msgid ""
 msgstr ""
 "\n"
 "Li comande «%s» permete ossu di candjî les tchuzes po ene bouye "
-"d' eprimaedje dnêye. Tot simplumint radjoutez les tchuzes ki vos vloz el "
+"d' imprimaedje dnêye. Tot simplumint radjoutez les tchuzes ki vos vloz el "
 "roye di comande, eg: «%s <fitchî>». "
+
+#: ../../standalone/drakclock:1
+#, c-format
+msgid "DrakClock"
+msgstr "DrakClock"
 
 #: ../../modules/interactive.pm:1
 #, c-format
@@ -12857,22 +13031,6 @@ msgid ""
 "\n"
 "- Daemon, %s via:\n"
 msgstr ""
-
-#: ../../standalone/drakgw:1
-#, c-format
-msgid ""
-"Welcome to the Internet Connection Sharing utility!\n"
-"\n"
-"%s\n"
-"\n"
-"Click on Configure to launch the setup wizard."
-msgstr ""
-"Wilicome al usteye d' apontiaedje do pårtaedje do raloyaedje al rantoele "
-"daegnrece!\n"
-"\n"
-"%s\n"
-"\n"
-"Clitchîz so «Apontyî» si vos vloz enonder li macrea d' apontiaedje."
 
 #: ../../lang.pm:1
 #, c-format
@@ -13059,6 +13217,11 @@ msgstr ""
 msgid "Christmas Island"
 msgstr "Iye Christmas"
 
+#: ../../mouse.pm:1
+#, c-format
+msgid "Automatic"
+msgstr "Otomatike"
+
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Installation of bootloader failed. The following error occured:"
@@ -13160,11 +13323,6 @@ msgstr "Transferer do côp"
 #, c-format
 msgid "Set root password and network authentication methods"
 msgstr "Defini li scret di root eyet les metôdes d' otintifiaedje pa rantoele"
-
-#: ../../standalone/drakgw:1
-#, c-format
-msgid "Internet Connection Sharing configuration"
-msgstr "Apontiaedje do pårtaedje do raloyaedje al rantoele daegnrece"
 
 #: ../../ugtk2.pm:1
 #, c-format
@@ -13441,6 +13599,11 @@ msgstr ""
 msgid "LILO with text menu"
 msgstr "LILO avou on menu e môde tecse"
 
+#: ../../standalone/net_monitor:1
+#, c-format
+msgid "instantaneous"
+msgstr ""
+
 #: ../../network/drakfirewall.pm:1
 #, c-format
 msgid "Everything (no firewall)"
@@ -13637,6 +13800,11 @@ msgstr "Dinez on no d' uzeu, s' i vs plait"
 msgid "Enable CD Boot?"
 msgstr "Permete l' enondaedje pa plake lazer?"
 
+#: ../../../move/move.pm:1
+#, c-format
+msgid "Simply reboot"
+msgstr ""
+
 #: ../../interactive/stdio.pm:1
 #, c-format
 msgid " enter `void' for void entry"
@@ -13680,8 +13848,8 @@ msgstr ""
 "\n"
 "Proficiat! Li scrirece da vosse est asteure astalêye eyet apontieye!\n"
 "\n"
-"Vos ploz eprimî avou li comande «Eprimî» di vos programes (normålmint elle "
-"est dizo l' menu «Fitchî»).\n"
+"Vos ploz imprimer avou li comande «Imprimer» di vos programes (normålmint "
+"elle est dizo l' menu «Fitchî»).\n"
 "\n"
 "Si vos vloz radjouter, bodjî ou candjî l' no d' ene sicrirece, ou si vos "
 "vloz candjî les prémetowès tchuzes (sôre di papî, cwålité del rexhowe,...), "
@@ -13744,15 +13912,15 @@ msgstr ""
 "éndjole on sierveu d' eure ki pôreut ossu esse eployî pa d' ôtès\n"
 "copiutreces, par egzimpe les cenes d' ene rantoele locåle, si vos vloz."
 
-#: ../../install_steps_interactive.pm:1
-#, c-format
-msgid "Which is your timezone?"
-msgstr "Dins kéne coisse d' eureye vikez?"
-
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "Can't create log file!"
 msgstr "Dji n' sai ahiver l' fitchî di djournå!"
+
+#: ../../install_steps_interactive.pm:1 ../../standalone/drakclock:1
+#, c-format
+msgid "Which is your timezone?"
+msgstr "Dins kéne coisse d' eureye vikez?"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -13762,7 +13930,7 @@ msgstr "Eployî les fitchîs .backupignore"
 #: ../../lang.pm:1
 #, c-format
 msgid "Guinea"
-msgstr "Guineye"
+msgstr "Guinêye"
 
 #: ../../network/tools.pm:1
 #, c-format
@@ -13804,6 +13972,11 @@ msgstr "Mozambike"
 msgid "Icon"
 msgstr "Imådjete"
 
+#: ../../../move/tree/mdk_totem:1
+#, c-format
+msgid "Kill those programs"
+msgstr "Touwer ces programes la"
+
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "Please choose what you want to backup"
@@ -13839,7 +14012,7 @@ msgstr "Radjouter ene rîle"
 msgid "Chunk size %s\n"
 msgstr "Grandeu des bokets %s\n"
 
-#: ../../share/advertising/02-community.pl:1
+#: ../advertising/02-community.pl:1
 #, c-format
 msgid "Build the future of Linux!"
 msgstr "Costrujhoz l' avni di Linux!"
@@ -13975,7 +14148,7 @@ msgstr ""
 "sierveu,\n"
 "ou si vos n' arivez nén a-z apontyî l' cåte videyo, vos ploz risponde «%s»."
 
-#: ../../share/advertising/13-mdkexpert_corporate.pl:1
+#: ../advertising/13-mdkexpert_corporate.pl:1
 #, c-format
 msgid "MandrakeExpert Corporate"
 msgstr "MandrakeExpert Corporate"
@@ -14014,6 +14187,11 @@ msgid ""
 "After changing type of partition %s, all data on this partition will be lost"
 msgstr ""
 "Totes les dnêyes sol pårticion %s vont esse pierdowes dispoy candjî si sôre."
+
+#: ../../harddrake/data.pm:1
+#, c-format
+msgid "ISDN adapters"
+msgstr "Cåtes RDIS"
 
 #: ../../common.pm:1
 #, c-format
@@ -14354,6 +14532,11 @@ msgstr ""
 "Li sayaedje Plug'n Play a fwait berwete. Tchoezixhoz li sôre di waitroûle "
 "s' i vs plait"
 
+#: ../../../move/move.pm:1
+#, c-format
+msgid "Detect again USB key"
+msgstr ""
+
 #: ../../services.pm:1
 #, c-format
 msgid "Services and deamons"
@@ -14395,7 +14578,7 @@ msgstr "Chkconfig schoûte åzès rîles di msec"
 msgid "Slovakian (QWERTZ)"
 msgstr "Slovake (QWERTZ)"
 
-#: ../../share/advertising/06-development.pl:1
+#: ../advertising/06-development.pl:1
 #, c-format
 msgid ""
 "To modify and to create in different languages such as Perl, Python, C and C+"
@@ -14463,6 +14646,11 @@ msgstr "Aldjereye"
 msgid "Restore Via Network"
 msgstr "Rapexhî å dtruviè del rantoele"
 
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "Use tar and bzip2 (rather than tar and gzip)"
+msgstr ""
+
 #: ../../any.pm:1
 #, c-format
 msgid "Initrd-size"
@@ -14487,7 +14675,7 @@ msgstr ""
 #: ../../standalone/printerdrake:1
 #, c-format
 msgid "Set as default"
-msgstr "Mete come prémetou"
+msgstr "Prémetowe"
 
 #: ../../Xconfig/card.pm:1
 #, c-format
@@ -14597,7 +14785,7 @@ msgstr "DVD-ROM"
 msgid "Georgian (\"Latin\" layout)"
 msgstr "Djeyordjyinne (cogne latene)"
 
-#: ../../share/advertising/09-mdksecure.pl:1
+#: ../advertising/09-mdksecure.pl:1
 #, c-format
 msgid "Get the best items with Mandrake Linux Strategic partners"
 msgstr "Les meyeus cayets avou les påtnaires sitratedjikes di Mandrake Linux"
@@ -14663,7 +14851,7 @@ msgstr "Accepter/rifuzer les crons messaedjes d' aroke IPv4."
 #: ../../printer/data.pm:1
 #, c-format
 msgid "LPRng - LPR New Generation"
-msgstr "LPRng - Ene amidrêye modêye do démon d' eprimaedje LPR"
+msgstr "LPRng - Ene amidrêye modêye do démon d' imprimaedje LPR"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -14704,7 +14892,7 @@ msgstr "Elodjaedje otomatike"
 msgid "Domain Admin Password"
 msgstr "Sicret do manaedjeu do dominne"
 
-#: ../../share/advertising/05-desktop.pl:1
+#: ../advertising/05-desktop.pl:1
 #, c-format
 msgid ""
 "Perfectly adapt your computer to your needs thanks to the 11 available "
@@ -14854,10 +15042,15 @@ msgstr "utopia 25"
 msgid "Pipe job into a command"
 msgstr "Evoyî l' bouye a ene comande å truviè d' ene buze"
 
+#: ../../../move/move.pm:1
+#, c-format
+msgid "Remove system config files"
+msgstr "Oister les fitchî d' apontiaedje do sistinme"
+
 #: ../../lang.pm:1
 #, c-format
 msgid "Cote d'Ivoire"
-msgstr "Coddivwere"
+msgstr "Coisse d' Ivwere"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -14866,7 +15059,8 @@ msgstr ""
 "novea éndjin dinamike, askepyî otomaticmint pal sopoirt «devfs» do nawea"
 
 #: ../../help.pm:1 ../../install_any.pm:1 ../../interactive.pm:1
-#: ../../ugtk2.pm:1 ../../modules/interactive.pm:1 ../../standalone/drakgw:1
+#: ../../ugtk2.pm:1 ../../modules/interactive.pm:1
+#: ../../standalone/drakclock:1 ../../standalone/drakgw:1
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "Yes"
@@ -14887,13 +15081,6 @@ msgstr "Avançmint do rapexhaedje"
 msgid "Estonia"
 msgstr "Estoneye"
 
-#: ../../standalone/scannerdrake:1
-#, c-format
-msgid "Choose the host on which the local scanners should be made available:"
-msgstr ""
-"Tchoezixhoz li lodjoe ki les scanreces locåles dvèt esse metowes come "
-"disponibes:"
-
 #: ../../partition_table.pm:1
 #, c-format
 msgid ""
@@ -14906,6 +15093,13 @@ msgstr ""
 "Li seule solucion c' est di bodjî vos mwaissès pårticions po-z aveur li trô "
 "a costé des pårticions stindowes"
 
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "Choose the host on which the local scanners should be made available:"
+msgstr ""
+"Tchoezixhoz li lodjoe ki les scanreces locåles dvèt esse metowes come "
+"disponibes:"
+
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "Channel"
@@ -14916,11 +15110,6 @@ msgstr "Canå"
 #, c-format
 msgid "Add"
 msgstr "Radjouter"
-
-#: ../../standalone/drakgw:1
-#, c-format
-msgid "No Internet Connection Sharing has ever been configured."
-msgstr "Li pårtaedje do raloyaedje al rantoele daegnrece n' a måy stî apontyî."
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -15101,7 +15290,7 @@ msgstr ""
 "Asteure nos alans fé l' apontiaedje do raloyaedje %s.\n"
 "\n"
 "\n"
-"Clitchîz so «%s» po continuwer."
+"Clitchîz so «%s» po continouwer."
 
 #: ../../printer/main.pm:1 ../../printer/printerdrake.pm:1
 #, c-format
@@ -15145,7 +15334,7 @@ msgstr "Vosse tchuze? (prémetowe «%s»%s)"
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Raw printer"
-msgstr "Eprimaedje direk"
+msgstr "Imprimaedje direk"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -15212,7 +15401,7 @@ msgstr "C' est ene astalåcion ou on metaedje a djoû?"
 msgid "ISDN card"
 msgstr "Cåte RDIS"
 
-#: ../../share/advertising/02-community.pl:1
+#: ../advertising/02-community.pl:1
 #, c-format
 msgid ""
 "To share your own knowledge and help build Linux software, join our "
@@ -15273,6 +15462,73 @@ msgstr ""
 "Eployî l' tchuze «Metaedje a djoû» rote comufåt po mete a djoû des\n"
 "sistinmes Mandrake Linux modêye «8.1» ou pus nouve. Mins l' fé po\n"
 "des modêyes di Mandrake Linux pus viyes kel «8.1» n' est nén ricmandé."
+
+#: ../../standalone/drakfont:1
+#, c-format
+msgid ""
+"\n"
+" Copyright (C) 2001-2002 by MandrakeSoft \n"
+"     DUPONT Sebastien (original version)\n"
+"     CHAUMETTE Damien <dchaumette@mandrakesoft.com>\n"
+"\n"
+" This program is free software; you can redistribute it and/or modify\n"
+" it under the terms of the GNU General Public License as published by\n"
+" the Free Software Foundation; either version 2, or (at your option)\n"
+" any later version.\n"
+"\n"
+" This program is distributed in the hope that it will be useful,\n"
+" but WITHOUT ANY WARRANTY; without even the implied warranty of\n"
+" MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n"
+" GNU General Public License for more details.\n"
+"\n"
+" You should have received a copy of the GNU General Public License\n"
+" along with this program; if not, write to the Free Software\n"
+" Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.\n"
+"\n"
+" Thanks:\n"
+"    -  pfm2afm:   \n"
+"\t by Ken Borgendale:\n"
+"\t    Convert a Windows .pfm  file to a .afm (Adobe Font Metrics)\n"
+"    -  type1inst:\n"
+"\t by James Macnicol: \n"
+"\t    type1inst generates files fonts.dir fonts.scale & Fontmap.\n"
+"    -  ttf2pt1:   \n"
+"\t  by Andrew Weeks, Frank Siegert, Thomas Henlich, Sergey Babkin  \n"
+"             Convert ttf font files to afm and pfb fonts\n"
+msgstr ""
+"\n"
+" Copyright © 2001-2002 MandrakeSoft \n"
+"        DUPONT Sébastien (prumire modêye)\n"
+"        CHAUMETTE Damien <dchaumette@mandrakesoft.com>\n"
+"\n"
+" Çouchal, c' est on libe programe; vos l' poloz bén spåde et vos l' poloz\n"
+" bén candjî tot shuvant li Licince Publike Djeneråle (GPL) di GNU eplaideye\n"
+" pal Free Software Foundation; ça pout esse li 2e modêye del licince ou\n"
+" (si vos inmez mî) ene pus nouve.\n"
+"\n"
+" Li programe est spårdou avou l' espwer k' i serè ahessåve,\n"
+" mins SINS NOLE WAERANTEYE; dji n' waeranti nén minme ki vos VINDRÎZ\n"
+" bén li programe ou ki vos vs È SIEVRÎZ BÉN PO ENE SÔRE OU L' ÔTE.\n"
+" Waitîz li Licince Publike Djeneråle (GPL) di GNU po vey les pondants\n"
+" eyet les djondants.\n"
+"\n"
+" Avou ci programe ci, vos dvrîz aveur riçuvou ene copeye del Licince "
+"Publike\n"
+" Djeneråle (GPL) di GNU; si vos n' l' avoz nén avou, sicrijhoz al\n"
+"    Free SoftWare Foundation, Inc.,\n"
+"    59 Temple Place - Suite 330,\n"
+"    Boston, MA 02111-1307, USA.\n"
+"\n"
+" Gråces:\n"
+"    -  pfm2afm:   \n"
+"\t pa Ken Borgendale:\n"
+"\t    Kiviersaedje di fitchîs Windows .pfm en .afm (Adobe Font Metrics)\n"
+"    -  type1inst:\n"
+"\t pa James Macnicol: \n"
+"\t    type1inst djenere les fitchîs fonts.dir fonts.scale & Fontmap.\n"
+"    -  ttf2pt1:   \n"
+"\t pa Andrew Weeks, Frank Siegert, Thomas Henlich, Sergey Babkin  \n"
+"       Kiviersaedje fi fontes ttf e fontes afm et pfb\n"
 
 #: ../../printer/main.pm:1
 #, c-format
@@ -15342,6 +15598,11 @@ msgstr "Comince del fôrtchete pol DHCP"
 msgid "Unsafe"
 msgstr "Nén seur"
 
+#: ../../network/drakfirewall.pm:1
+#, c-format
+msgid "SSH server"
+msgstr "Sierveu SSH"
+
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid ", %s sectors"
@@ -15349,7 +15610,7 @@ msgstr ", %s secteus"
 
 #: ../../help.pm:1 ../../install_any.pm:1 ../../interactive.pm:1
 #: ../../ugtk2.pm:1 ../../modules/interactive.pm:1
-#: ../../standalone/harddrake2:1
+#: ../../standalone/drakclock:1 ../../standalone/harddrake2:1
 #, c-format
 msgid "No"
 msgstr "Neni"
@@ -15911,6 +16172,11 @@ msgstr "Oister les tchoezis lodjoes"
 msgid "Network configuration"
 msgstr "Apontiaedje del rantoele"
 
+#: ../../standalone/harddrake2:1
+#, c-format
+msgid "/Autodetect _jaz drives"
+msgstr "/Oto-detecter les léjheus _jaz"
+
 #: ../../any.pm:1
 #, c-format
 msgid "No sharing"
@@ -16034,9 +16300,10 @@ msgstr ""
 #: ../../install_steps.pm:1 ../../diskdrake/dav.pm:1
 #: ../../diskdrake/hd_gtk.pm:1 ../../diskdrake/interactive.pm:1
 #: ../../diskdrake/smbnfs_gtk.pm:1 ../../interactive/http.pm:1
-#: ../../standalone/drakboot:1 ../../standalone/drakbug:1
+#: ../../standalone/drakauth:1 ../../standalone/drakboot:1
+#: ../../standalone/drakbug:1 ../../standalone/drakconnect:1
 #: ../../standalone/drakfloppy:1 ../../standalone/drakfont:1
-#: ../../standalone/draksplash:1
+#: ../../standalone/draksplash:1 ../../../move/move.pm:1
 #, c-format
 msgid "Error"
 msgstr "Aroke"
@@ -16069,7 +16336,7 @@ msgstr "Livea"
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Change the printing system"
-msgstr "Candjî li sistinme d' eprimaedje"
+msgstr "Candjî li sistinme d' imprimaedje"
 
 #: ../../Xconfig/card.pm:1
 #, c-format
@@ -16081,6 +16348,11 @@ msgstr ""
 "waitroûle e minme tins.\n"
 "Cwè voloz vs fé?"
 
+#: ../../partition_table.pm:1
+#, c-format
+msgid "mount failed: "
+msgstr "li montaedje a fwait berwete: "
+
 #: ../../steps.pm:1
 #, c-format
 msgid "Configure services"
@@ -16090,11 +16362,6 @@ msgstr "Apontyî les siervices"
 #, c-format
 msgid "Broadcast Address:"
 msgstr "Adresse di broadcast:"
-
-#: ../../partition_table.pm:1
-#, c-format
-msgid "mount failed: "
-msgstr "li montaedje a fwait berwete: "
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -16113,17 +16380,17 @@ msgstr ""
 msgid "Image"
 msgstr "Imådje"
 
+#: ../../services.pm:1
+#, c-format
+msgid "Remote Administration"
+msgstr "Administråcion då lon"
+
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Failed to add the printer \"%s\" to Star Office/OpenOffice.org/GIMP."
 msgstr ""
 "Li radjoutaedje del sicrirece «%s» po Star Office/OpenOffice.org/GIMP a "
 "fwait berwete."
-
-#: ../../services.pm:1
-#, c-format
-msgid "Remote Administration"
-msgstr "Administråcion då lon"
 
 #: ../../modules.pm:1
 #, c-format
@@ -16141,7 +16408,7 @@ msgstr "Tchoezi tot"
 #: ../../printer/data.pm:1
 #, c-format
 msgid "CUPS - Common Unix Printing System"
-msgstr "CUPS - Li novea sistinme di comon eprimaedje po Unix"
+msgstr "CUPS - Li novea sistinme di comon imprimaedje po Unix"
 
 #: ../../standalone/logdrake:1
 #, c-format
@@ -16171,7 +16438,7 @@ msgstr "Tos"
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Which printing system (spooler) do you want to use?"
-msgstr "Ké sistinme d' eprimaedje (sôre di caweyaedje) voloz vs eployî?"
+msgstr "Ké sistinme d' imprimaedje (sôre di caweyaedje) voloz vs eployî?"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -16183,7 +16450,7 @@ msgstr "Djulete"
 msgid "Prints into %s"
 msgstr "Ki rexhe so %s"
 
-#: ../../install_steps_interactive.pm:1
+#: ../../install_steps_interactive.pm:1 ../../../move/move.pm:1
 #, c-format
 msgid "An error occurred"
 msgstr "Dj' aroke so ene sacwè"
@@ -16401,7 +16668,7 @@ msgstr ", éndjin multi-fonccions"
 msgid "Laos"
 msgstr "Lawos"
 
-#: ../../share/advertising/04-configuration.pl:1
+#: ../advertising/04-configuration.pl:1
 #, c-format
 msgid ""
 "Mandrake Linux 9.2 provides you with the Mandrake Control Center, a powerful "
@@ -16588,11 +16855,6 @@ msgstr "Vos dvoz askepyî /etc/dhcpd.conf d' aprume!"
 msgid "Is FPU present"
 msgstr "I gn a-st on FPU"
 
-#: ../../standalone/scannerdrake:1
-#, c-format
-msgid "There are no scanners found which are available on your system.\n"
-msgstr "Nole sicanrece a stî trovêye di disponibe so voste éndjole.\n"
-
 #: ../../services.pm:1
 #, c-format
 msgid ""
@@ -16601,6 +16863,11 @@ msgid ""
 msgstr ""
 "Mande escuzes, mins dj' a pont d' ôtès\n"
 "informåcions so ci siervice chal."
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "There are no scanners found which are available on your system.\n"
+msgstr "Nole sicanrece a stî trovêye di disponibe so voste éndjole.\n"
 
 #: ../../standalone/drakTermServ:1
 #, c-format
@@ -16642,21 +16909,6 @@ msgstr "Éndjin DVDRAM"
 msgid "if set to yes, report unowned files."
 msgstr "s' il est metou, rapoirter les fitchîs ki sont-st ôrfulins."
 
-#: ../../standalone/harddrake2:1
-#, c-format
-msgid ""
-"This is HardDrake, a Mandrake hardware configuration tool.\n"
-"<span foreground=\"royalblue3\">Version:</span> %s\n"
-"<span foreground=\"royalblue3\">Author:</span> Thierry Vignaud &lt;tvignaud"
-"\\@mandrakesoft.com&gt;\n"
-"\n"
-msgstr ""
-"Çouchal c' est HardDrake, l' usteye d' apontiaedje del éndjolreye di "
-"Mandrake.\n"
-"<span foreground=\"royalblue3\">Modêye:</span> %s\n"
-"<span foreground=\"royalblue3\">Oteur:</span> Thierry Vignaud <tvignaud"
-"\\@mandrakesoft.com>\n"
-
 #: ../../install_interactive.pm:1
 #, c-format
 msgid ""
@@ -16666,7 +16918,7 @@ msgid ""
 msgstr ""
 "Vos n' avoz nole pårticion di swap\n"
 "\n"
-"Voloz vs vormint continuwer?"
+"Voloz vs vormint continouwer?"
 
 #: ../../install_steps_gtk.pm:1
 #, c-format
@@ -16738,10 +16990,27 @@ msgstr "Vietnam"
 msgid "/_Fields description"
 msgstr "/Discrijhaedje des _tchamps"
 
-#: ../../share/advertising/10-security.pl:1
+#: ../advertising/10-security.pl:1
 #, c-format
 msgid "Optimize your security by using Mandrake Linux"
 msgstr "Amidrez vosse livea di såvrité tot-z eployant Mandrake Linux"
+
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"\n"
+"\n"
+" Thanks:\n"
+"\t- LTSP Project http://www.ltsp.org\n"
+"\t- Michael Brown <mbrown@fensystems.co.uk>\n"
+"\n"
+msgstr ""
+"\n"
+"\n"
+" Gråces:\n"
+"\t- Prodjet LTSP http://www.ltsp.org\n"
+"\t- Michael Brown <mbrown@fensystems.co.uk>\n"
+"\n"
 
 #: ../../install_steps_gtk.pm:1 ../../interactive.pm:1 ../../ugtk2.pm:1
 #: ../../Xconfig/resolution_and_depth.pm:1 ../../diskdrake/hd_gtk.pm:1
@@ -16842,7 +17111,7 @@ msgstr ""
 msgid "mkinitrd optional arguments"
 msgstr "opcionelès tchuzes po mkinitrd"
 
-#: ../../share/advertising/03-software.pl:1
+#: ../advertising/03-software.pl:1
 #, c-format
 msgid ""
 "Surf the Web with Mozilla or Konqueror, read your mail with Evolution or "
@@ -17038,7 +17307,12 @@ msgstr "Dji renonde CUPS..."
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Printing/Scanning/Photo Cards on \"%s\""
-msgstr "Eprimaedje/sicanaedje/cåtes foto so «%s»"
+msgstr "Imprimaedje/sicanaedje/cåtes foto so «%s»"
+
+#: ../../../move/move.pm:1
+#, c-format
+msgid "Continue without USB key"
+msgstr ""
 
 #: ../../install_steps.pm:1
 #, c-format
@@ -17217,7 +17491,7 @@ msgstr "Cweri:"
 #: ../../lang.pm:1
 #, c-format
 msgid "Kazakhstan"
-msgstr "Kazaxhstan"
+msgstr "Kazaxhtan"
 
 #: ../../standalone/drakTermServ:1
 #, c-format
@@ -17247,7 +17521,7 @@ msgstr "Mineu nén cnoxhou"
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Thai keyboard"
-msgstr "Tailandesse"
+msgstr "Taylandesse"
 
 #: ../../lang.pm:1
 #, c-format
@@ -17495,7 +17769,7 @@ msgstr "Permete les raloyaedjes X Window"
 msgid "Hardware probing in progress"
 msgstr "Deteccion del éndjolreye en alaedje"
 
-#: ../../standalone/drakgw:1
+#: ../../network/shorewall.pm:1 ../../standalone/drakgw:1
 #, c-format
 msgid "Net Device"
 msgstr "Éndjin rantoele"
@@ -17561,6 +17835,11 @@ msgid ""
 msgstr ""
 "i gn a mezåjhe do pacaedje «ImageMagick» po k' ça rote comufåt.\n"
 "Clitchîz so «'l est bon» po-z astaler «ImageMagick» ou so «Rinoncî» po cwiter"
+
+#: ../../network/drakfirewall.pm:1
+#, c-format
+msgid "Telnet server"
+msgstr "Sierveu telnet"
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -17832,7 +18111,7 @@ msgstr "Syslog"
 msgid "Can't create catalog!"
 msgstr "Dji n' sai ahiver on catalogue!"
 
-#: ../../share/advertising/11-mnf.pl:1
+#: ../advertising/11-mnf.pl:1
 #, c-format
 msgid ""
 "Complete your security setup with this very easy-to-use software which "
@@ -17889,6 +18168,11 @@ msgstr "Apontiaedje do raloyaedje al rantoele daegnrece"
 #, c-format
 msgid "Add the name as an exception to the handling of password aging by msec."
 msgstr ""
+
+#: ../../network/isdn.pm:1
+#, c-format
+msgid "USB"
+msgstr "USB"
 
 #: ../../standalone/drakxtv:1
 #, c-format
@@ -17950,6 +18234,11 @@ msgstr "Groupe d' ovraedje"
 msgid "Printer host name or IP"
 msgstr "Adresse IP ou no do lodjoe del scrirece"
 
+#: ../../standalone/drakconnect:1
+#, c-format
+msgid "down"
+msgstr "essocté"
+
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "Host Path or Module"
@@ -17970,7 +18259,7 @@ msgstr "Mostrer l' apontiaedje del eterface do moumint"
 #: ../../standalone/printerdrake:1
 #, c-format
 msgid "Add Printer"
-msgstr "Radjouter scrirece"
+msgstr "Radjouter"
 
 #: ../../security/help.pm:1
 #, c-format
@@ -18020,7 +18309,7 @@ msgid ""
 msgstr ""
 "Les mineus po les scrireces a djet d' intche k' ont stî dné pa Lexmark "
 "sopoirtèt seulmint les scrireces locåles, nén les scrireces å lon ou so des "
-"sierveus d' eprimaedje. I vos fåt l' mete so on pôrt locå oudonbén "
+"sierveus d' imprimaedje. I vos fåt l' mete so on pôrt locå oudonbén "
 "l' apontyî sol éndjole wice k' ele est raloyeye."
 
 #: ../../printer/printerdrake.pm:1
@@ -18387,7 +18676,7 @@ msgstr "L' adresse IP doet esse del cogne 1.2.3.4"
 #: ../../standalone/printerdrake:1
 #, c-format
 msgid "Configure CUPS printing system"
-msgstr "Apontyî li sistinme d' eprimaedje CUPS"
+msgstr "Apontyî li sistinme d' imprimaedje CUPS"
 
 #: ../../lang.pm:1
 #, c-format
@@ -18404,6 +18693,11 @@ msgstr "Radjouter on cayet"
 msgid "The printers on this machine are available to other computers"
 msgstr ""
 "Les scrireces so ciste éndjole chal sont disponibes po d' ôtès copiutreces"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "China (Hong Kong)"
+msgstr "Chine (Hong Kong)"
 
 #: ../../standalone/drakautoinst:1
 #, c-format
@@ -18461,7 +18755,7 @@ msgstr "Pacaedje nén astalé"
 msgid "American Samoa"
 msgstr "Samowa amerikinne"
 
-#: ../../share/advertising/12-mdkexpert.pl:1
+#: ../advertising/12-mdkexpert.pl:1
 #, c-format
 msgid "Become a MandrakeExpert"
 msgstr "Divnoz on espert Mandrake so MandrakeExpert"
@@ -18585,6 +18879,11 @@ msgstr "Itåleye"
 msgid "Cayman Islands"
 msgstr "Iyes Cayman"
 
+#: ../../fs.pm:1 ../../partition_table.pm:1
+#, c-format
+msgid "error unmounting %s: %s"
+msgstr "aroke tot montant %s: %s"
+
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Name of printer"
@@ -18594,11 +18893,6 @@ msgstr "No del sicrirece"
 #, c-format
 msgid "disable"
 msgstr "dismete"
-
-#: ../../fs.pm:1 ../../partition_table.pm:1
-#, c-format
-msgid "error unmounting %s: %s"
-msgstr "aroke tot montant %s: %s"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -18705,7 +18999,7 @@ msgstr "Compak"
 msgid "Detected model: %s %s"
 msgstr "Modele detecté: %s %s"
 
-#: ../../share/advertising/03-software.pl:1
+#: ../advertising/03-software.pl:1
 #, c-format
 msgid "MandrakeSoft has selected the best software for you"
 msgstr "MandrakeSoft a relî por vos les meyeus programes"
@@ -18780,10 +19074,10 @@ msgid ""
 "type in Printerdrake.\n"
 "\n"
 msgstr ""
-"Vos aloz asteure apontyî l' eprimaedje so on conte Windows avou scret. Cåze "
+"Vos aloz asteure apontyî l' imprimaedje so on conte Windows avou scret. Cåze "
 "d' ene flåwe del årtchitecteure do programe cliyint di Samba, li scret est "
 "metou e clair dins l' roye di cmande do cliyint Samba k' evoye li bouye "
-"d' eprimaedje å sierveu Windows. Do côp, tot uzeu so l' éndjole el pout vey "
+"d' imprimaedje å sierveu Windows. Do côp, tot uzeu so l' éndjole el pout vey "
 "avou ene usteye ou cmande di corwaitaedje des bouyes, come «ps auxwww».\n"
 "\n"
 "Nos vs ricmandans d' eployî purade ene des alternatives shuvantes (dins tos "
@@ -18792,12 +19086,12 @@ msgstr ""
 "feu):\n"
 "\n"
 "Eployîz on conte sins scret sol sierveu Windows, come li conte «GUEST» ou on "
-"conte sipeciå rén k' po l' eprimaedje. Èn bodjîz nén li scret d' on conte "
+"conte sipeciå rén k' po l' imprimaedje. Èn bodjîz nén li scret d' on conte "
 "personel et co moens do conte do manaedjeu do sierveu Windows.\n"
 "\n"
 "Apontyîz vosse sierveu Windows po k' i mete li scrirece dizo "
-"l' protocoleLPD. Adon apontyîz l' eprimaedje a pårti di ciste éndjole chal "
-"avou li sôre d' eprimaedje «%s» dins Printerdrake.\n"
+"l' protocoleLPD. Adon apontyîz l' imprimaedje a pårti di ciste éndjole chal "
+"avou li sôre d' imprimaedje «%s» dins Printerdrake.\n"
 "\n"
 
 #: ../../Xconfig/resolution_and_depth.pm:1
@@ -18842,6 +19136,11 @@ msgstr "Enonder X a l' enondaedje"
 msgid " adsl"
 msgstr " adsl"
 
+#: ../../raid.pm:1
+#, c-format
+msgid "Not enough partitions for RAID level %d\n"
+msgstr "I gn a nén des pårticions assez pol livea RAID %d\n"
+
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "format of floppies supported by the drive"
@@ -18852,11 +19151,6 @@ msgstr "Sôre di plaketes ki sont-st acceptêyes på mineu"
 msgid "Firmware copy failed, file %s not found"
 msgstr ""
 "Li copiaedje do firmware a fwait berwete; li fitchî %s n' a nén stî trové"
-
-#: ../../raid.pm:1
-#, c-format
-msgid "Not enough partitions for RAID level %d\n"
-msgstr "I gn a nén des pårticions assez pol livea RAID %d\n"
 
 #: ../../standalone/drakTermServ:1
 #, c-format
@@ -18969,7 +19263,7 @@ msgstr ""
 "\n"
 "(ASTEME! Vos eployîz on sistinme di fitchîs XFS po vosse pårticion raecene,\n"
 "li fijhaedje d' ene plakete d' enondaedje so ene plakete di 1,44 Mo frè\n"
-"seurmint berwete, ca l' XFS a mezåjhe d' on mineu ki prind del plaece.)"
+"surmint berwete, ca l' XFS a mezåjhe d' on mineu ki prind del plaece.)"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -18989,7 +19283,7 @@ msgstr ""
 "Nole imådje di CD ou DVD di trovêye, copyîz les programes et fitchîs rpm "
 "s' i vs plait."
 
-#: ../../share/advertising/04-configuration.pl:1
+#: ../advertising/04-configuration.pl:1
 #, c-format
 msgid "Mandrake's multipurpose configuration tool"
 msgstr "Usteye d' apontiaedje di totes sôres di Mandrake"
@@ -19019,7 +19313,7 @@ msgstr "Deure plake"
 msgid "Enter a printer device URI"
 msgstr "Dinez on URI d' éndjin di scrirece"
 
-#: ../../share/advertising/01-thanks.pl:1
+#: ../advertising/01-thanks.pl:1
 #, c-format
 msgid ""
 "The success of MandrakeSoft is based upon the principle of Free Software. "
@@ -19064,7 +19358,7 @@ msgstr "Transferer l' apontiaedje del sicrirece"
 #, c-format
 msgid "Do you want to enable printing on the printers mentioned above?\n"
 msgstr ""
-"Voloz vs mete en alaedje l' eprimaedje so les scrireces chal pa dzeur?\n"
+"Voloz vs mete en alaedje l' imprimaedje so les scrireces chal pa dzeur?\n"
 
 #: ../../security/l10n.pm:1
 #, c-format
@@ -19087,7 +19381,7 @@ msgid ""
 "The command 'wbinfo -t' will test whether your authentication secrets are "
 "good."
 msgstr ""
-"Po ki çoula rote  comifåt po on PDC W2K, vos åroz seurmint mezåjhe ki "
+"Po ki çoula rote  comifåt po on PDC W2K, vos åroz surmint mezåjhe ki "
 "l' manaedjeu do sistinme enondaxhe li comande:\n"
 " « C:\\>net localgroup \"Pre-Windows 2000 Compatible Access\" everyone /"
 "add »\n"
@@ -19336,7 +19630,7 @@ msgid ""
 "-You can install the fonts the normal way. In rare cases, bogus fonts may "
 "hang up your X Server."
 msgstr ""
-"Avant d' astaler ene fonte, asseurez vs ki vos avoz l' droet di l' eployî et "
+"Avant d' astaler ene fonte, assurez vs ki vos avoz l' droet di l' eployî et "
 "di l' astaler sol sistinme da vosse.\n"
 "\n"
 "- Vos ploz astaler les fontes del manire normåle. Dins des råres cas, des "
@@ -19585,7 +19879,8 @@ msgstr "Trover on pacaedje"
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Are you sure that you want to set up printing on this machine?\n"
-msgstr "Estoz vs seur di voleur apontyî l' eprimaedje so ciste éndjole chal?\n"
+msgstr ""
+"Estoz vs seur di voleur apontyî l' imprimaedje so ciste éndjole chal?\n"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -19627,7 +19922,7 @@ msgstr "Modele del cåte:"
 msgid "Thin Client"
 msgstr "Tene cliyint"
 
-#: ../../share/advertising/01-thanks.pl:1
+#: ../advertising/01-thanks.pl:1
 #, c-format
 msgid "Thank you for choosing Mandrake Linux 9.2"
 msgstr "Gråces di tchoezi Mandrake Linux 9.2"
@@ -19744,6 +20039,13 @@ msgstr "Prinde les fontes di Windows"
 msgid "Mouse Systems"
 msgstr "Mouse Systems"
 
+#: ../../standalone/drakclock:1
+#, c-format
+msgid ""
+"Your computer can synchronize its clock\n"
+" with a remote time server using NTP"
+msgstr ""
+
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Iranian"
@@ -19769,7 +20071,7 @@ msgstr "Radjouter sierveu"
 msgid "Remote printer name"
 msgstr "No del sicrirece å lon"
 
-#: ../../share/advertising/10-security.pl:1
+#: ../advertising/10-security.pl:1
 #, c-format
 msgid ""
 "MandrakeSoft has designed exclusive tools to create the most secured Linux "
@@ -19880,7 +20182,7 @@ msgstr "Dischinde"
 #: ../../printer/main.pm:1 ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Raw printer (No driver)"
-msgstr "Eprimaedje direk (sins mineu)"
+msgstr "Imprimaedje direk (sins mineu)"
 
 #: ../../network/modem.pm:1
 #, c-format
@@ -19895,8 +20197,8 @@ msgid ""
 "\"kprinter <file>\". The graphical tools allow you to choose the printer and "
 "to modify the option settings easily.\n"
 msgstr ""
-"Po-z eprimî on fitchî a pårti del roye di comande (d' on purnea terminå) "
-"eployîz li comande «%s <fitchî>» oudonbén ene usteye d' eprimaedje grafike: "
+"Po-z imprimer on fitchî a pårti del roye di comande (d' on purnea terminå) "
+"eployîz li comande «%s <fitchî>» oudonbén ene usteye d' imprimaedje grafike: "
 "«xpp <fitchî>» ou «kprinter <fitchî>». Les usteyes grafikes permetèt di "
 "tchoezi li scrirece a rexhe avou et candjî åjheymint les tchuzes.\n"
 
@@ -19926,6 +20228,11 @@ msgstr "Microsoft Explorer"
 msgid "Uninstall Fonts"
 msgstr "Disastaler les fontes"
 
+#: ../../../move/move.pm:1
+#, c-format
+msgid "Please wait, detecting and configuring devices..."
+msgstr "Tårdjîz on pô s' i vs plait, deteccion ey apontiaedje des éndjins..."
+
 #: ../../keyboard.pm:1
 #, c-format
 msgid "German (no dead keys)"
@@ -19952,11 +20259,6 @@ msgid ""
 "You can export using NFS or Samba. Please select which you'd like to use."
 msgstr "Vos ploz fé on pårtaedje avou NFS ou Samba. Li kék voloz vs?"
 
-#: ../../help.pm:1 ../../install_steps_interactive.pm:1
-#, c-format
-msgid "Reboot"
-msgstr "Renonder l' éndjole"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Gambia"
@@ -19966,6 +20268,12 @@ msgstr "Gambeye"
 #, c-format
 msgid "Mandrake Control Center"
 msgstr "Cinte di contrôle di Mandrake"
+
+#: ../../help.pm:1 ../../install_steps_interactive.pm:1
+#: ../../../move/move.pm:1
+#, c-format
+msgid "Reboot"
+msgstr "Renonder l' éndjole"
 
 #: ../../printer/main.pm:1
 #, c-format
@@ -20001,6 +20309,11 @@ msgstr ""
 #, c-format
 msgid "Remember this password"
 msgstr "Rimimbrez vs di ci scret chal"
+
+#: ../../install_steps_gtk.pm:1
+#, c-format
+msgid "due to unsatisfied %s"
+msgstr ""
 
 #: ../../standalone/drakgw:1
 #, c-format
@@ -20064,6 +20377,11 @@ msgstr "Papouwazeye Nouve Guinêye"
 #, c-format
 msgid "Multi-function device on a parallel port"
 msgstr "Éndjin multi-fonccions so pôrt paralele"
+
+#: ../../../move/tree/mdk_totem:1
+#, c-format
+msgid "Busy files"
+msgstr "Fitchîs ocupés"
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -20130,6 +20448,21 @@ msgstr ""
 msgid "DHCP Client"
 msgstr "Cliyint DHCP"
 
+#: ../../standalone/harddrake2:1
+#, c-format
+msgid ""
+"This is HardDrake, a Mandrake hardware configuration tool.\n"
+"<span foreground=\"royalblue3\">Version:</span> %s\n"
+"<span foreground=\"royalblue3\">Author:</span> Thierry Vignaud &lt;"
+"tvignaud@mandrakesoft.com&gt;\n"
+"\n"
+msgstr ""
+"Çouchal c' est HardDrake, l' usteye d' apontiaedje del éndjolreye di "
+"Mandrake.\n"
+"<span foreground=\"royalblue3\">Modêye:</span> %s\n"
+"<span foreground=\"royalblue3\">Oteur:</span> Thierry Vignaud "
+"<tvignaud@mandrakesoft.com>\n"
+
 #: ../../standalone/drakgw:1
 #, c-format
 msgid "dismiss"
@@ -20138,7 +20471,7 @@ msgstr "passer houte"
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Printing/Scanning on \"%s\""
-msgstr "Eprimaedje/sicanaedje so «%s»"
+msgstr "Imprimaedje/sicanaedje so «%s»"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
@@ -20151,7 +20484,7 @@ msgid ""
 "lpd is the print daemon required for lpr to work properly. It is\n"
 "basically a server that arbitrates print jobs to printer(s)."
 msgstr ""
-"lpd est li démon d' eprimaedje k' i gn en a mezåjhe po lpr poleur rexhe "
+"lpd est li démon d' imprimaedje k' i gn en a mezåjhe po lpr poleur rexhe "
 "comufåt.\n"
 "C' est on sierveu ki manaedje les bouyes po les scrireces."
 
@@ -20321,7 +20654,7 @@ msgstr "No do fitchî loopback: %s"
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Please choose the printer to which the print jobs should go."
-msgstr "Tchoezixhoz li scrirece ki les bouyes d' eprimaedje î sront evoyeyes."
+msgstr "Tchoezixhoz li scrirece ki les bouyes d' imprimaedje î sront evoyeyes."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -20333,80 +20666,13 @@ msgstr "Nén transferer les scrireces"
 msgid "Delay before booting the default image"
 msgstr "Tins divant d' enonder li prémetowe imådje"
 
-#: ../../standalone/drakfont:1
-#, c-format
-msgid ""
-"\n"
-" Copyright (C) 2001-2002 by MandrakeSoft \n"
-"     DUPONT Sebastien (original version)\n"
-"     CHAUMETTE Damien <dchaumette\\@mandrakesoft.com>\n"
-"\n"
-" This program is free software; you can redistribute it and/or modify\n"
-" it under the terms of the GNU General Public License as published by\n"
-" the Free Software Foundation; either version 2, or (at your option)\n"
-" any later version.\n"
-"\n"
-" This program is distributed in the hope that it will be useful,\n"
-" but WITHOUT ANY WARRANTY; without even the implied warranty of\n"
-" MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n"
-" GNU General Public License for more details.\n"
-"\n"
-" You should have received a copy of the GNU General Public License\n"
-" along with this program; if not, write to the Free Software\n"
-" Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.\n"
-"\n"
-" Thanks:\n"
-"    -  pfm2afm:   \n"
-"\t by Ken Borgendale:\n"
-"\t    Convert a Windows .pfm  file to a .afm (Adobe Font Metrics)\n"
-"    -  type1inst:\n"
-"\t by James Macnicol: \n"
-"\t    type1inst generates files fonts.dir fonts.scale & Fontmap.\n"
-"    -  ttf2pt1:   \n"
-"\t  by Andrew Weeks, Frank Siegert, Thomas Henlich, Sergey Babkin  \n"
-"             Convert ttf font files to afm and pfb fonts\n"
-msgstr ""
-"\n"
-" Copyright © 2001-2002 MandrakeSoft \n"
-"        DUPONT Sébastien (prumire modêye)\n"
-"        CHAUMETTE Damien <dchaumette\\@mandrakesoft.com>\n"
-"\n"
-" Çouchal, c' est on libe programe; vos l' poloz bén spåde et vos l' poloz\n"
-" bén candjî tot shuvant li Licince Publike Djeneråle (GPL) di GNU eplaideye\n"
-" pal Free Software Foundation; ça pout esse li 2e modêye del licince ou\n"
-" (si vos inmez mî) ene pus nouve.\n"
-"\n"
-" Li programe est spårdou avou l' espwer k' i serè ahessåve,\n"
-" mins SINS NOLE WAERANTEYE; dji n' waeranti nén minme ki vos VINDRÎZ\n"
-" bén li programe ou ki vos vs È SIEVRÎZ BÉN PO ENE SÔRE OU L' ÔTE.\n"
-" Waitîz li Licince Publike Djeneråle (GPL) di GNU po vey les pondants\n"
-" eyet les djondants.\n"
-"\n"
-" Avou ci programe ci, vos dvrîz aveur riçuvou ene copeye del Licince "
-"Publike\n"
-" Djeneråle (GPL) di GNU; si vos n' l' avoz nén avou, sicrijhoz al\n"
-"    Free SoftWare Foundation, Inc.,\n"
-"    59 Temple Place - Suite 330,\n"
-"    Boston, MA 02111-1307, USA.\n"
-"\n"
-" Gråces:\n"
-"    -  pfm2afm:   \n"
-"\t pa Ken Borgendale:\n"
-"\t    Kiviersaedje di fitchîs Windows .pfm en .afm (Adobe Font Metrics)\n"
-"    -  type1inst:\n"
-"\t pa James Macnicol: \n"
-"\t    type1inst djenere les fitchîs fonts.dir fonts.scale & Fontmap.\n"
-"    -  ttf2pt1:   \n"
-"\t pa Andrew Weeks, Frank Siegert, Thomas Henlich, Sergey Babkin  \n"
-"       Kiviersaedje fi fontes ttf e fontes afm et pfb\n"
-
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "Use Hard Disk to backup"
 msgstr "Eployî li deure plake po les copeyes di såvrité"
 
 #: ../../help.pm:1 ../../install_steps_gtk.pm:1 ../../standalone/drakbackup:1
-#: ../../standalone/drakboot:1 ../../standalone/drakgw:1
+#: ../../standalone/drakboot:1
 #, c-format
 msgid "Configure"
 msgstr "Apontyî"
@@ -20476,7 +20742,7 @@ msgstr ""
 "Verifyîz vosse plake lazer sor ene copiutrece ddja astalêye, avou\n"
 "l' comande «rpm -qpl Mandrake/RPMS/*.rpm»\n"
 
-#: ../../share/advertising/06-development.pl:1
+#: ../advertising/06-development.pl:1
 #, c-format
 msgid "Mandrake Linux 9.2: the ultimate development platform"
 msgstr "Mandrake Linux 9.2 est ene clapante platfôme di programaedje."
@@ -20566,6 +20832,11 @@ msgstr "finté finåle"
 msgid "Services"
 msgstr "Siervices"
 
+#: ../../../move/move.pm:1
+#, c-format
+msgid "Auto configuration"
+msgstr "Oto-apontiaedje"
+
 #: ../../Xconfig/card.pm:1
 #, c-format
 msgid "4 MB"
@@ -20607,8 +20878,8 @@ msgstr "Posse pol rantoele daegnrece"
 
 #: ../../share/compssUsers:999
 msgid ""
-"Set of tools to read and send mail and news (pine, mutt, tin..) and to "
-"browse the Web"
+"Set of tools to read and send mail and news (mutt, tin..) and to browse the "
+"Web"
 msgstr ""
 "Esshonna d' usteyes po lére et evoyî des messaedjes (pine, mutt, tin...) et "
 "po naivyî so les pådjes waibe"
@@ -20751,6 +21022,43 @@ msgstr ""
 "Eshonna d' usteyes po lére et evoyî des messaedjes et po naivyî so les "
 "pådjes waibe"
 
+#~ msgid "The setup has already been done, and it's currently enabled."
+#~ msgstr "L' apontiaedje a ddja stî fwait. Et il est en alaedje pol moumint."
+
+#~ msgid "Logs"
+#~ msgstr "Djournå"
+
+#~ msgid "The setup has already been done, but it's currently disabled."
+#~ msgstr "L' apontiaedje a ddja stî fwait. Mins il est pol moumint dismetou."
+
+#~ msgid "Profile "
+#~ msgstr "Profil "
+
+#~ msgid ""
+#~ "Welcome to the Internet Connection Sharing utility!\n"
+#~ "\n"
+#~ "%s\n"
+#~ "\n"
+#~ "Click on Configure to launch the setup wizard."
+#~ msgstr ""
+#~ "Wilicome al usteye d' apontiaedje do pårtaedje do raloyaedje al rantoele "
+#~ "daegnrece!\n"
+#~ "\n"
+#~ "%s\n"
+#~ "\n"
+#~ "Clitchîz so «Apontyî» si vos vloz enonder li macrea d' apontiaedje."
+
+#~ msgid "Internet Connection Sharing configuration"
+#~ msgstr "Apontiaedje do pårtaedje do raloyaedje al rantoele daegnrece"
+
+#~ msgid "No Internet Connection Sharing has ever been configured."
+#~ msgstr ""
+#~ "Li pårtaedje do raloyaedje al rantoele daegnrece n' a måy stî apontyî."
+
+#~ msgid "when checked, owner and group won't be changed"
+#~ msgstr ""
+#~ "s' il est clitchî, li prôpietaire et l' groupe èn polèt nén esse candjîs"
+
 #~ msgid ""
 #~ "XawTV isn't installed!\n"
 #~ "\n"
@@ -20758,7 +21066,7 @@ msgstr ""
 #~ "If you do have a TV card but DrakX has neither detected it (no bttv nor "
 #~ "saa7134\n"
 #~ "module in \"/etc/modules\") nor installed xawtv, please send the\n"
-#~ "results of \"lspcidrake -v -f\" to \"install\\@mandrakesoft.com\"\n"
+#~ "results of \"lspcidrake -v -f\" to \"install@mandrakesoft.com\"\n"
 #~ "with subject \"undetected TV card\".\n"
 #~ "\n"
 #~ "\n"
@@ -20770,7 +21078,7 @@ msgstr ""
 #~ "saa7134\n"
 #~ "dins « /etc/modules ») nerén astalé xawtv, evoyîz s' i vs plait\n"
 #~ "les rezultats del comande « lspcidrake -v -f » a l' adresse:\n"
-#~ "« install\\@mandrakesoft.com » avou come sudjet « undetected TV card ».\n"
+#~ "« install@mandrakesoft.com » avou come sudjet « undetected TV card ».\n"
 #~ "\n"
 #~ "\n"
 #~ "Vos l' poloz astaler tot tapant dins ene conzôle, come root, li comande:\n"
@@ -20792,7 +21100,7 @@ msgstr ""
 #~ msgstr "Sicrireces å lon"
 
 #~ msgid "Printing system: "
-#~ msgstr "Sistinme d' eprimaedje: "
+#~ msgstr "Sistinme d' imprimaedje: "
 
 #~ msgid "Level 1"
 #~ msgstr "Livea 1"
@@ -20846,17 +21154,17 @@ msgstr ""
 #~ msgstr "dinez l' no do lodjoe ou l' adresse IP, s' i vs plait."
 
 #~ msgid ""
-#~ " Copyright (C) 2001-2002 MandrakeSoft by DUPONT Sebastien <dupont_s"
-#~ "\\@epita.fr>"
+#~ " Copyright (C) 2001-2002 MandrakeSoft by DUPONT Sebastien <dupont_s@epita."
+#~ "fr>"
 #~ msgstr ""
-#~ " Copyright © 2001-2002 MandrakeSoft, sicrît pa DUPONT Sébastien <dupont_s"
-#~ "\\@epita.fr>"
+#~ " Copyright © 2001-2002 MandrakeSoft, sicrît pa DUPONT Sébastien "
+#~ "<dupont_s@epita.fr>"
 
 #~ msgid ""
-#~ " updates 2002 MandrakeSoft by Stew Benedict <sbenedict\\@mandrakesoft.com>"
+#~ " updates 2002 MandrakeSoft by Stew Benedict <sbenedict@mandrakesoft.com>"
 #~ msgstr ""
-#~ " ramidraedjes 2002 MandrakeSoft pa Stew Benedict <sbenedict"
-#~ "\\@mandrakesoft.com>"
+#~ " ramidraedjes 2002 MandrakeSoft pa Stew Benedict <sbenedict@mandrakesoft."
+#~ "com>"
 
 #~ msgid "edit"
 #~ msgstr "candjî"

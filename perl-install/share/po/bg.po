@@ -9,7 +9,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX-bg\n"
-"POT-Creation-Date: 2003-09-16 13:45+0200\n"
+"POT-Creation-Date: 2003-12-03 03:09+0100\n"
 "PO-Revision-Date: 2003-09-12 22:40+0300\n"
 "Last-Translator: Boyan Ivanov <boyan17@bulgaria.com>\n"
 "Language-Team: Bulgarian <dict@linux.zonebg.com>\n"
@@ -284,11 +284,6 @@ msgstr "CUPS конфигурация"
 msgid "Total progress"
 msgstr "Общ прогрес"
 
-#: ../../lang.pm:1
-#, c-format
-msgid "Hong Kong"
-msgstr "Хонг Конг"
-
 #: ../../install_interactive.pm:1
 #, c-format
 msgid "Not enough free space to allocate new partitions"
@@ -360,6 +355,18 @@ msgstr "Настройка на избрания хост"
 msgid "No CD device defined!"
 msgstr "Не е дефинирано CD устройство!"
 
+#: ../../network/shorewall.pm:1
+#, c-format
+msgid ""
+"Please enter the name of the interface connected to the "
+"internet.              \n"
+"                \n"
+"Examples:\n"
+"                ppp+ for modem or DSL connections, \n"
+"                eth0, or eth1 for cable connection, \n"
+"                ippp+ for a isdn connection.\n"
+msgstr ""
+
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "\tUse .backupignore files\n"
@@ -429,15 +436,20 @@ msgstr "Промяната е направена.Желаете ли да рестартирате dm услугата?"
 msgid "Swiss (French layout)"
 msgstr "Швейцарска (френски наредба)"
 
+#: ../../raid.pm:1
+#, c-format
+msgid "mkraid failed (maybe raidtools are missing?)"
+msgstr "mkraid пропадна (може би raidtools липсват ?)"
+
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "August"
 msgstr "Август"
 
-#: ../../raid.pm:1
-#, c-format
-msgid "mkraid failed (maybe raidtools are missing?)"
-msgstr "mkraid пропадна (може би raidtools липсват ?)"
+#: ../../network/drakfirewall.pm:1
+#, fuzzy, c-format
+msgid "FTP server"
+msgstr "NTP сървър"
 
 #: ../../harddrake/data.pm:1
 #, c-format
@@ -517,11 +529,6 @@ msgstr "Възможен конфликт с адресите в LAN с настройката на %s!\n"
 #, c-format
 msgid "Configuring..."
 msgstr "Настройка ..."
-
-#: ../../standalone/drakgw:1
-#, c-format
-msgid "The setup has already been done, and it's currently enabled."
-msgstr "Установката вече е направена и в момента е включена."
 
 #: ../../harddrake/v4l.pm:1
 #, c-format
@@ -643,6 +650,11 @@ msgstr " на Novell сървър \"%s\", принтер \"%s\""
 msgid "Printer Name"
 msgstr "Име на принтер"
 
+#: ../../../move/move.pm:1
+#, c-format
+msgid "Setting up USB key"
+msgstr ""
+
 #: ../../standalone/drakfloppy:1
 #, c-format
 msgid "Remove a module"
@@ -700,15 +712,17 @@ msgstr ""
 msgid "if needed"
 msgstr "ако е нужно"
 
+#: ../../standalone/drakclock:1
+#, c-format
+msgid ""
+"We need to install ntp package\n"
+" to enable Network Time Protocol"
+msgstr ""
+
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "Restore Failed..."
 msgstr "Възстановяването пропадна..."
-
-#: ../../standalone/harddrake2:1
-#, c-format
-msgid "/Autodetect _jazz drives"
-msgstr "/Автоматично открива _jazz устройства"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -1056,11 +1070,6 @@ msgstr ""
 #, c-format
 msgid "512 kB"
 msgstr "512 КБ"
-
-#: ../../standalone/net_monitor:1
-#, c-format
-msgid "Logs"
-msgstr "Логове"
 
 #: ../../standalone/scannerdrake:1
 #, c-format
@@ -1540,6 +1549,11 @@ msgstr "Латвийска"
 msgid "monthly"
 msgstr "Ежемесечно"
 
+#: ../../../move/move.pm:1
+#, fuzzy, c-format
+msgid "Retry"
+msgstr "Възстановява"
+
 #: ../../standalone/drakfloppy:1
 #, c-format
 msgid "Module name"
@@ -1585,6 +1599,11 @@ msgstr "Използва уникод по подразбиране"
 msgid "the module of the GNU/Linux kernel that handles the device"
 msgstr "модулът на ГНУ/Линукс ядрото се грижи за това устройство"
 
+#: ../../standalone/drakclock:1
+#, fuzzy, c-format
+msgid "Is your hardware clock set to GMT?"
+msgstr "Хадруерният ви часовник е настроен по GMT"
+
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid "Trying to rescue partition table"
@@ -1627,6 +1646,11 @@ msgstr "Не мога да пусна обновяването !!!\n"
 msgid "Name: "
 msgstr "Име: "
 
+#: ../../standalone/drakconnect:1
+#, c-format
+msgid "up"
+msgstr ""
+
 #: ../../Xconfig/resolution_and_depth.pm:1
 #, c-format
 msgid "16 million colors (24 bits)"
@@ -1637,7 +1661,7 @@ msgstr "16 милиона цвята (24 бита)"
 msgid "Allow all users"
 msgstr "Позволява на потребители"
 
-#: ../../share/advertising/08-store.pl:1
+#: ../advertising/08-store.pl:1
 #, c-format
 msgid "The official MandrakeSoft Store"
 msgstr "Официалният източник на MandrakeSoft "
@@ -1671,15 +1695,15 @@ msgstr "Потребител"
 msgid "Do new backup before restore (only for incremental backups.)"
 msgstr ""
 
-#: ../../standalone/harddrake2:1
-#, c-format
-msgid "Name"
-msgstr "Име"
-
 #: ../../raid.pm:1
 #, c-format
 msgid "mkraid failed"
 msgstr "mkraid пропадна"
+
+#: ../../standalone/harddrake2:1
+#, c-format
+msgid "Name"
+msgstr "Име"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -1906,6 +1930,17 @@ msgstr "Включване на сървъри ..."
 #, c-format
 msgid "Printing test page(s)..."
 msgstr "Отпечатване на тестов(ата/ите) страниц(а/и) ..."
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid ""
+"Transfer successful\n"
+"You may want to verify you can login to the server with:\n"
+"\n"
+"ssh -i %s %s@%s\n"
+"\n"
+"without being prompted for a password."
+msgstr ""
 
 #: ../../fsedit.pm:1
 #, c-format
@@ -2863,6 +2898,11 @@ msgstr ""
 msgid "Can't add a partition to _formatted_ RAID md%d"
 msgstr "Не мога да прибавя дял към _форматиран_ RAID md%d"
 
+#: ../../standalone/drakclock:1
+#, fuzzy, c-format
+msgid "Network Time Protocol"
+msgstr "Мрежов интерфейс"
+
 #: ../../Xconfig/card.pm:1
 #, c-format
 msgid ""
@@ -3078,7 +3118,7 @@ msgstr "Палау"
 msgid "level"
 msgstr "ниво"
 
-#: ../../share/advertising/13-mdkexpert_corporate.pl:1
+#: ../advertising/13-mdkexpert_corporate.pl:1
 #, c-format
 msgid ""
 "All incidents will be followed up by a single qualified MandrakeSoft "
@@ -3452,7 +3492,7 @@ msgstr ""
 msgid "Bad package"
 msgstr "Лош пакет"
 
-#: ../../share/advertising/07-server.pl:1
+#: ../advertising/07-server.pl:1
 #, c-format
 msgid ""
 "Transform your computer into a powerful Linux server: Web server, mail, "
@@ -3710,7 +3750,7 @@ msgstr "Добре дошли при Cracker-ите"
 msgid "Module options:"
 msgstr "Опции на модула:"
 
-#: ../../share/advertising/11-mnf.pl:1
+#: ../advertising/11-mnf.pl:1
 #, c-format
 msgid "Secure your networks with the Multi Network Firewall"
 msgstr ""
@@ -3789,6 +3829,11 @@ msgstr "Мишка"
 #, c-format
 msgid "not enough room in /boot"
 msgstr "няма достатъчно място за /boot"
+
+#: ../../install_steps_gtk.pm:1
+#, c-format
+msgid "trying to promote %s"
+msgstr ""
 
 #: ../../lang.pm:1
 #, c-format
@@ -3893,6 +3938,11 @@ msgstr ""
 msgid "Saudi Arabia"
 msgstr "Саудитска Арабия"
 
+#: ../../services.pm:1
+#, c-format
+msgid "Internet"
+msgstr "Интернет"
+
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid "Continue anyway?"
@@ -3910,11 +3960,6 @@ msgstr "Ако вашият принтер не е в списъка, изберете съвместим или подобен."
 #, c-format
 msgid "Printer"
 msgstr "Принтер"
-
-#: ../../services.pm:1
-#, c-format
-msgid "Internet"
-msgstr "Интернет"
 
 #: ../../standalone/service_harddrake:1
 #, c-format
@@ -3984,6 +4029,11 @@ msgstr "Точките за монтиране трябва да съдържат само букви и цифри"
 #, c-format
 msgid "Restarting printing system..."
 msgstr "Рестартиране на принтерната система"
+
+#: ../../../move/tree/mdk_totem:1
+#, c-format
+msgid "You can only run with no CDROM support"
+msgstr ""
 
 #: ../../modules/interactive.pm:1
 #, c-format
@@ -4201,15 +4251,15 @@ msgstr "ISA / PCMCIA"
 msgid "About"
 msgstr "Относно"
 
-#: ../../network/network.pm:1
-#, c-format
-msgid "Proxies configuration"
-msgstr "Настройка на proxy"
-
 #: ../../mouse.pm:1
 #, c-format
 msgid "GlidePoint"
 msgstr "GlidePoint"
+
+#: ../../network/network.pm:1
+#, c-format
+msgid "Proxies configuration"
+msgstr "Настройка на proxy"
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -4352,6 +4402,11 @@ msgstr "Точките на монтиране трябва да започват с /"
 msgid "Choose your CD/DVD device"
 msgstr "Изберете вашето CD/DVD устройство"
 
+#: ../../network/drakfirewall.pm:1
+#, fuzzy, c-format
+msgid "CUPS server"
+msgstr "DNS сървър"
+
 #: ../../standalone/logdrake:1
 #, c-format
 msgid "Postfix Mail Server"
@@ -4367,7 +4422,7 @@ msgstr "Изход без запис"
 msgid "Yemen"
 msgstr "Йемен"
 
-#: ../../share/advertising/11-mnf.pl:1
+#: ../advertising/11-mnf.pl:1
 #, c-format
 msgid "This product is available on the MandrakeStore Web site."
 msgstr "Този продукт е достъпен от web сайта на MandrakeStore"
@@ -4376,6 +4431,31 @@ msgstr "Този продукт е достъпен от web сайта на MandrakeStore"
 #, c-format
 msgid "=> There are many things to choose from (%s).\n"
 msgstr "=> Има много неща за избор от (%s).\n"
+
+#: ../../standalone/drakclock:1
+#, c-format
+msgid "GMT - DrakClock"
+msgstr ""
+
+#: ../../../move/move.pm:1
+#, c-format
+msgid ""
+"An error occurred:\n"
+"\n"
+"\n"
+"%s\n"
+"\n"
+"This may come from corrupted system configuration files\n"
+"on the USB key, in this case removing them and then\n"
+"rebooting Mandrake Move would fix the problem. To do\n"
+"so, click on the corresponding button.\n"
+"\n"
+"\n"
+"You may also want to reboot and remove the USB key, or\n"
+"examine its contents under another OS, or even have\n"
+"a look at log files in console #3 and #4 to try to\n"
+"guess what's happening."
+msgstr ""
 
 #: ../../steps.pm:1
 #, c-format
@@ -4610,6 +4690,11 @@ msgstr "Userdrake"
 #, c-format
 msgid "Which partition do you want to use for Linux4Win?"
 msgstr "Кой дял искате да използвате за Linux4Win ?"
+
+#: ../../install_steps_gtk.pm:1
+#, fuzzy, c-format
+msgid "due to missing %s"
+msgstr "липсва kdesu"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -5133,7 +5218,7 @@ msgstr ""
 msgid "Started on boot"
 msgstr "Пуснат при стартиране"
 
-#: ../../share/advertising/12-mdkexpert.pl:1
+#: ../advertising/12-mdkexpert.pl:1
 #, c-format
 msgid ""
 "Join the MandrakeSoft support teams and the Linux Community online to share "
@@ -5449,11 +5534,6 @@ msgid ""
 msgstr ""
 "Показва тема\n"
 "на конзола"
-
-#: ../../standalone/net_monitor:1
-#, c-format
-msgid "Statistics"
-msgstr "Статистики"
 
 #: ../../printer/cups.pm:1
 #, c-format
@@ -6220,7 +6300,7 @@ msgstr ""
 "Запазва и възстановята потока на системна ентропия за по-голямо качество\n"
 "на произволно генериране на числа."
 
-#: ../../share/advertising/07-server.pl:1
+#: ../advertising/07-server.pl:1
 #, c-format
 msgid "Turn your computer into a reliable server"
 msgstr "Превърнете вашата машина в надежден сървър"
@@ -6235,6 +6315,11 @@ msgstr ""
 msgid " (driver %s)"
 msgstr " (драйвер %s)"
 
+#: ../../services.pm:1
+#, c-format
+msgid "Start when requested"
+msgstr ""
+
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid ""
@@ -6248,11 +6333,6 @@ msgstr ""
 #, c-format
 msgid "I don't know"
 msgstr "Не знам"
-
-#: ../../services.pm:1
-#, c-format
-msgid "Start when requested"
-msgstr ""
 
 #: ../../printer/main.pm:1
 #, c-format
@@ -6458,6 +6538,11 @@ msgid ""
 "section."
 msgstr ""
 
+#: ../../../move/move.pm:1
+#, c-format
+msgid "Key isn't writable"
+msgstr ""
+
 #: ../../lang.pm:1
 #, c-format
 msgid "Bangladesh"
@@ -6505,15 +6590,15 @@ msgstr ""
 msgid "Set the root umask."
 msgstr "Установяване на root umask."
 
-#: ../../network/modem.pm:1 ../../standalone/drakconnect:1
-#, c-format
-msgid "Script-based"
-msgstr "Базирана на скрипт"
-
 #: ../../install_any.pm:1 ../../partition_table.pm:1
 #, c-format
 msgid "Error reading file %s"
 msgstr "Грешка при четенето на файла %s"
+
+#: ../../network/modem.pm:1 ../../standalone/drakconnect:1
+#, c-format
+msgid "Script-based"
+msgstr "Базирана на скрипт"
 
 #: ../../harddrake/v4l.pm:1
 #, c-format
@@ -6586,23 +6671,6 @@ msgstr ""
 #, c-format
 msgid "Domain Authentication Required"
 msgstr "Изисква Идентификация за Домейн"
-
-#: ../../standalone/drakTermServ:1
-#, c-format
-msgid ""
-"\n"
-"\n"
-" Thanks:\n"
-"\t- LTSP Project http://www.ltsp.org\n"
-"\t- Michael Brown <mbrown\\@fensystems.co.uk>\n"
-"\n"
-msgstr ""
-"\n"
-"\n"
-" Благодарности:\n"
-"\t- LTSP Проект http://www.ltsp.org\n"
-"\t- Michael Brown <mbrown\\@fensystems.co.uk>\n"
-"\n"
 
 #: ../../security/level.pm:1
 #, c-format
@@ -7264,15 +7332,15 @@ msgstr "Yaboot"
 msgid "Logitech CC Series with Wheel emulation"
 msgstr "Logitech CC Series с емулация на колелце"
 
-#: ../../standalone/drakboot:1
-#, c-format
-msgid "Splash selection"
-msgstr ""
-
 #: ../../partition_table.pm:1
 #, c-format
 msgid "Extended partition not supported on this platform"
 msgstr "Разширени дялове не се поддържат на тази платформа"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Splash selection"
+msgstr ""
 
 #: ../../network/isdn.pm:1
 #, c-format
@@ -7332,6 +7400,11 @@ msgstr ""
 msgid "Printer default settings"
 msgstr "Настройки по подразбиране за принтера"
 
+#: ../../mouse.pm:1
+#, c-format
+msgid "Generic PS2 Wheel Mouse"
+msgstr "Обикновенна PS2 мишка"
+
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid ""
@@ -7339,11 +7412,6 @@ msgid ""
 "memory page level, thus enabling the processor to prevent unchecked kernel "
 "accesses to user memory (aka this is a bug guard)"
 msgstr ""
-
-#: ../../mouse.pm:1
-#, c-format
-msgid "Generic PS2 Wheel Mouse"
-msgstr "Обикновенна PS2 мишка"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -7490,6 +7558,11 @@ msgstr "Корейска клавиатура"
 msgid "Not connected"
 msgstr "Не свързан"
 
+#: ../../standalone/net_monitor:1
+#, fuzzy, c-format
+msgid "No internet connection configured"
+msgstr "Настройка на Интернет връзка"
+
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Greek"
@@ -7504,17 +7577,6 @@ msgstr "Свети Китс и Невис"
 #, c-format
 msgid "Generic 3 Button Mouse with Wheel emulation"
 msgstr "Обикновенна 3-бутонна мишка с емулация на колелце"
-
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid ""
-"Transfer successful\n"
-"You may want to verify you can login to the server with:\n"
-"\n"
-"ssh -i %s %s\\@%s\n"
-"\n"
-"without being prompted for a password."
-msgstr ""
 
 #: ../../any.pm:1
 #, c-format
@@ -7739,7 +7801,7 @@ msgstr ""
 "Цъкнете \"Прехвърли\", за да го презапишете.\n"
 "Можете също така да напишете ново име или да пропуснте принтера."
 
-#: ../../share/advertising/12-mdkexpert.pl:1
+#: ../advertising/12-mdkexpert.pl:1
 #, c-format
 msgid ""
 "Find the solutions of your problems via MandrakeSoft's online support "
@@ -7804,6 +7866,22 @@ msgstr "Киргизтан"
 #, c-format
 msgid "Multi-function device on USB"
 msgstr "Многофункционално устройство на USB"
+
+#: ../../../move/move.pm:1
+#, c-format
+msgid ""
+"We didn't detect any USB key on your system. If you\n"
+"plug in an USB key now, Mandrake Move will have the ability\n"
+"to transparently save the data in your home directory and\n"
+"system wide configuration, for next boot on this computer\n"
+"or another one. Note: if you plug in a key now, wait several\n"
+"seconds before detecting again.\n"
+"\n"
+"\n"
+"You may also proceed without an USB key - you'll still be\n"
+"able to use Mandrake Move as a normal live Mandrake\n"
+"Operating System."
+msgstr ""
 
 #: ../../help.pm:1
 #, c-format
@@ -7898,15 +7976,15 @@ msgstr "sticky-бит"
 msgid "Other Media"
 msgstr "Друг носител"
 
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "Backup system files"
-msgstr "Резервно копие на системни файлове"
-
 #: ../../mouse.pm:1
 #, c-format
 msgid "Logitech MouseMan+"
 msgstr "Logitech MouseMan+"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "Backup system files"
+msgstr "Резервно копие на системни файлове"
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -7971,6 +8049,11 @@ msgstr "Системни настройки"
 msgid "Please choose your type of mouse."
 msgstr "Моля, изберете тип на мишката."
 
+#: ../../services.pm:1
+#, c-format
+msgid "running"
+msgstr "стартиране"
+
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "class of hardware device"
@@ -7989,11 +8072,6 @@ msgstr ""
 #, c-format
 msgid "United Kingdom"
 msgstr "Англия"
-
-#: ../../services.pm:1
-#, c-format
-msgid "running"
-msgstr "стартиране"
 
 #: ../../lang.pm:1
 #, c-format
@@ -8039,7 +8117,7 @@ msgstr "Сенегал"
 msgid "Command line"
 msgstr "Команден ред"
 
-#: ../../share/advertising/08-store.pl:1
+#: ../advertising/08-store.pl:1
 #, c-format
 msgid ""
 "Our full range of Linux solutions, as well as special offers on products and "
@@ -8093,6 +8171,17 @@ msgstr "Swap"
 #, c-format
 msgid "Custom settings"
 msgstr "Потребителски настройки"
+
+#: ../../../move/move.pm:1
+#, c-format
+msgid ""
+"The USB key seems to have write protection enabled, but we can't safely\n"
+"unplug it now.\n"
+"\n"
+"\n"
+"Click the button to reboot the machine, unplug it, remove write protection,\n"
+"plug the key again, and launch Mandrake Move again."
+msgstr ""
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -8203,7 +8292,7 @@ msgstr "Моля, изберете кой мрежов адаптер да използвам за връзка към Интернет"
 msgid "Photo memory card access on your HP multi-function device"
 msgstr ""
 
-#: ../../share/advertising/09-mdksecure.pl:1
+#: ../advertising/09-mdksecure.pl:1
 #, c-format
 msgid ""
 "Enhance your computer performance with the help of a selection of partners "
@@ -8323,6 +8412,11 @@ msgstr ""
 #, c-format
 msgid "Exit install"
 msgstr "Изход от инсталационната програма"
+
+#: ../../../move/move.pm:1
+#, c-format
+msgid "Need a key to save your data"
+msgstr ""
 
 #: ../../standalone/drakgw:1
 #, c-format
@@ -8501,11 +8595,6 @@ msgstr "Руска (фонетична)"
 msgid "dhcpd Config..."
 msgstr "Настройка на dhcpd..."
 
-#: ../../standalone/drakgw:1
-#, c-format
-msgid "The setup has already been done, but it's currently disabled."
-msgstr "Установката вече е направена, но в момента е изключена."
-
 #: ../../any.pm:1
 #, c-format
 msgid "LILO/grub Installation"
@@ -8680,6 +8769,11 @@ msgstr ""
 msgid "Choose an X server"
 msgstr "Изберете X сървър"
 
+#: ../../../move/tree/mdk_totem:1
+#, c-format
+msgid "Copying to memory to allow removing the CDROM"
+msgstr ""
+
 #: ../../install_interactive.pm:1
 #, c-format
 msgid "Swap partition size in MB: "
@@ -8729,7 +8823,7 @@ msgstr "Настройка на автоматичните стъпки"
 msgid "Barbados"
 msgstr "Барбадос"
 
-#: ../../share/advertising/02-community.pl:1
+#: ../advertising/02-community.pl:1
 #, c-format
 msgid ""
 "Want to know more and to contribute to the Open Source community? Get "
@@ -8892,15 +8986,6 @@ msgstr ""
 msgid "First Time Wizard"
 msgstr "Първоначален помощник"
 
-#: ../../install_steps.pm:1
-#, c-format
-msgid ""
-"An error occurred, but I don't know how to handle it nicely.\n"
-"Continue at your own risk."
-msgstr ""
-"Появи се грешка, но не знам как да се справя с нея деликатно.\n"
-"Можете да продължите на свой риск."
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Taiwan"
@@ -8915,6 +9000,15 @@ msgstr "Пакистан"
 #, c-format
 msgid "please wait, parsing file: %s"
 msgstr "моля изчакайте, правя разбор на файл: %s"
+
+#: ../../install_steps.pm:1 ../../../move/move.pm:1
+#, c-format
+msgid ""
+"An error occurred, but I don't know how to handle it nicely.\n"
+"Continue at your own risk."
+msgstr ""
+"Появи се грешка, но не знам как да се справя с нея деликатно.\n"
+"Можете да продължите на свой риск."
 
 #: ../../install_steps_gtk.pm:1
 #, c-format
@@ -9095,6 +9189,11 @@ msgstr ""
 "Може изберете зареждане или запис на избора на пакети на флопи.\n"
 "Форматът е същият като auto_install генерираните дискети."
 
+#: ../../../move/tree/mdk_totem:1
+#, fuzzy, c-format
+msgid "No CDROM support"
+msgstr "Подръжка на радио:"
+
 #: ../../standalone/drakxtv:1
 #, c-format
 msgid "China (broadcast)"
@@ -9132,7 +9231,7 @@ msgstr ""
 "Зареждането на модула %s не успя.\n"
 "Искате ли да опитате отново с други параметри ?"
 
-#: ../../share/advertising/01-thanks.pl:1
+#: ../advertising/01-thanks.pl:1
 #, c-format
 msgid "Welcome to the Open Source world."
 msgstr "Добре дошли в света на Отвореният Изходен код"
@@ -9356,6 +9455,11 @@ msgstr "Други портовете"
 msgid "number of capture buffers for mmap'ed capture"
 msgstr ""
 
+#: ../../network/adsl.pm:1
+#, fuzzy, c-format
+msgid " - detected"
+msgstr "засечена "
+
 #: ../../harddrake/data.pm:1
 #, c-format
 msgid "SMBus controllers"
@@ -9452,6 +9556,11 @@ msgstr ""
 msgid "Restore"
 msgstr "Възстановява"
 
+#: ../../standalone/drakclock:1
+#, fuzzy, c-format
+msgid "Server:"
+msgstr "Сървър: "
+
 #: ../../security/help.pm:1
 #, c-format
 msgid "if set to yes, check if the network devices are in promiscuous mode."
@@ -9461,6 +9570,11 @@ msgstr ""
 #, c-format
 msgid "Looking for available packages..."
 msgstr "Търся налични пакети..."
+
+#: ../../../move/move.pm:1
+#, fuzzy, c-format
+msgid "Please wait, setting up system configuration files on USB key..."
+msgstr "Моля, изберете ниво на сигурност..."
 
 #: ../../any.pm:1
 #, c-format
@@ -9585,15 +9699,15 @@ msgid ""
 "per second)"
 msgstr "Честота на процесора в Mhz"
 
-#: ../../standalone/printerdrake:1
-#, fuzzy, c-format
-msgid "Mandrake Linux Printer Management Tool"
-msgstr "Мандрейк инструмент за работа с потребителски сметки"
-
 #: ../../pkgs.pm:1
 #, c-format
 msgid "important"
 msgstr "важен"
+
+#: ../../standalone/printerdrake:1
+#, fuzzy, c-format
+msgid "Mandrake Linux Printer Management Tool"
+msgstr "Мандрейк инструмент за работа с потребителски сметки"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -9635,6 +9749,11 @@ msgstr "Потребители"
 #, c-format
 msgid "Preparing bootloader..."
 msgstr "Подготовка на bootloader"
+
+#: ../../../move/move.pm:1
+#, c-format
+msgid "Enter your user information, password will be used for screensaver"
+msgstr ""
 
 #: ../../network/network.pm:1
 #, c-format
@@ -10076,15 +10195,15 @@ msgstr "Съдържание на файла"
 msgid "Authentication LDAP"
 msgstr "LDAP ауторизация"
 
+#: ../../install_steps_gtk.pm:1
+#, c-format
+msgid "in order to keep %s"
+msgstr ""
+
 #: ../../harddrake/sound.pm:1
 #, c-format
 msgid "Let me pick any driver"
 msgstr "Нека избера драйвер"
-
-#: ../../standalone/net_monitor:1
-#, c-format
-msgid "Profile "
-msgstr "Профил "
 
 #: ../../standalone/net_monitor:1
 #, c-format
@@ -10183,9 +10302,9 @@ msgstr "Версия на ядрото"
 #: ../../standalone/drakautoinst:1 ../../standalone/drakbackup:1
 #: ../../standalone/drakboot:1 ../../standalone/drakconnect:1
 #: ../../standalone/drakfloppy:1 ../../standalone/drakfont:1
-#: ../../standalone/drakgw:1 ../../standalone/drakperm:1
-#: ../../standalone/draksec:1 ../../standalone/logdrake:1
-#: ../../standalone/mousedrake:1 ../../standalone/net_monitor:1
+#: ../../standalone/drakperm:1 ../../standalone/draksec:1
+#: ../../standalone/logdrake:1 ../../standalone/mousedrake:1
+#: ../../standalone/net_monitor:1
 #, c-format
 msgid "Cancel"
 msgstr "Отказ"
@@ -10338,19 +10457,6 @@ msgstr "Италианска"
 msgid "Basic"
 msgstr "Базов"
 
-#: ../../standalone/drakTermServ:1
-#, c-format
-msgid ""
-"\n"
-" Copyright (C) 2002 by MandrakeSoft \n"
-"\tStew Benedict sbenedict\\@mandrakesoft.com\n"
-"\n"
-msgstr ""
-"\n"
-" Авторски права (C) 2002 от MandrakeSoft \n"
-"\tStew Benedict sbenedict\\@mandrakesoft.com\n"
-"\n"
-
 #: ../../install_messages.pm:1
 #, c-format
 msgid "http://www.mandrakelinux.com/en/92errata.php3"
@@ -10371,10 +10477,10 @@ msgstr ""
 msgid "Card IO"
 msgstr "IO на картата"
 
-#: ../../standalone/drakperm:1
-#, c-format
-msgid "when checked, owner and group won't be changed"
-msgstr "при проверка, собственика и групата няма да бъдат променени"
+#: ../../network/drakfirewall.pm:1
+#, fuzzy, c-format
+msgid "Samba server"
+msgstr "Samba Сървър"
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -10453,6 +10559,11 @@ msgstr ""
 msgid "access to compilation tools"
 msgstr "достъп до инструменти за компилация"
 
+#: ../../standalone/net_monitor:1
+#, fuzzy, c-format
+msgid "Global statistics"
+msgstr "Статистики"
+
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "Please select data to restore..."
@@ -10473,6 +10584,11 @@ msgstr ""
 #, c-format
 msgid "Standard test page"
 msgstr "Стандартна тестова страница"
+
+#: ../../standalone/drakclock:1
+#, fuzzy, c-format
+msgid "Time Zone"
+msgstr "Часова зона"
 
 #: ../../diskdrake/hd_gtk.pm:1 ../../diskdrake/interactive.pm:1
 #, c-format
@@ -10556,6 +10672,19 @@ msgid ""
 "Your choice? "
 msgstr ""
 
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"\n"
+" Copyright (C) 2002 by MandrakeSoft \n"
+"\tStew Benedict sbenedict@mandrakesoft.com\n"
+"\n"
+msgstr ""
+"\n"
+" Авторски права (C) 2002 от MandrakeSoft \n"
+"\tStew Benedict sbenedict@mandrakesoft.com\n"
+"\n"
+
 #: ../../standalone/draksplash:1
 #, c-format
 msgid "Save theme"
@@ -10581,15 +10710,15 @@ msgstr "Магьосник за настройка на мрежата"
 msgid "Removable media automounting"
 msgstr "Автоматично монтиране на сменяем носител"
 
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "Enter the directory to save:"
-msgstr "Въведете директорията за запазване:"
-
 #: ../../services.pm:1
 #, c-format
 msgid "Printing"
 msgstr "Печатане"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "Enter the directory to save:"
+msgstr "Въведете директорията за запазване:"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -10714,7 +10843,7 @@ msgstr "Kensington THinking Mouse"
 msgid "Configuration of a remote printer"
 msgstr "Настройка на отдалечен принтер"
 
-#: ../../share/advertising/13-mdkexpert_corporate.pl:1
+#: ../advertising/13-mdkexpert_corporate.pl:1
 #, c-format
 msgid "An online platform to respond to enterprise support needs."
 msgstr ""
@@ -10863,15 +10992,22 @@ msgstr ""
 msgid "Configure Local Area Network..."
 msgstr "Настойка на локална мрежа ..."
 
-#: ../../security/l10n.pm:1
+#: ../../../move/move.pm:1
 #, c-format
-msgid "Verify checksum of the suid/sgid files"
+msgid ""
+"The USB key seems to have write protection enabled. Please\n"
+"unplug it, remove write protection, and then plug it again."
 msgstr ""
 
 #: ../../services.pm:1
 #, c-format
 msgid "Launch the sound system on your machine"
 msgstr "Пуснкане звуковата система на машината ви"
+
+#: ../../security/l10n.pm:1
+#, c-format
+msgid "Verify checksum of the suid/sgid files"
+msgstr ""
 
 #: ../../security/l10n.pm:1
 #, c-format
@@ -11178,6 +11314,11 @@ msgstr "Не можете да изключите този пакет. Той трябва да бъде обновен"
 msgid "Loading from floppy"
 msgstr "Зареждане от дискета"
 
+#: ../../standalone/drakclock:1
+#, c-format
+msgid "Timezone - DrakClock"
+msgstr ""
+
 #: ../../security/help.pm:1
 #, c-format
 msgid "Enable/Disable the logging of IPv4 strange packets."
@@ -11324,6 +11465,11 @@ msgstr ""
 "Информация за настройване на системата ви можете да намерите в\n"
 "слединсталационната глава от Official Mandrake Linux User's Guide."
 
+#: ../../standalone/drakclock:1
+#, c-format
+msgid "Enable Network Time Protocol"
+msgstr ""
+
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "paranoid"
@@ -11415,7 +11561,7 @@ msgstr "достъп до мрежови инструменти"
 msgid "Firmware-Upload for HP LaserJet 1000"
 msgstr ""
 
-#: ../../share/advertising/03-software.pl:1
+#: ../advertising/03-software.pl:1
 #, c-format
 msgid ""
 "And, of course, push multimedia to its limits with the very latest software "
@@ -11477,15 +11623,15 @@ msgstr "Стартиращ протокол"
 msgid "LVM-disks %s\n"
 msgstr "LVM-дискове %s\n"
 
-#: ../../diskdrake/interactive.pm:1
-#, c-format
-msgid "The package %s is needed. Install it?"
-msgstr "Пакет %s е необходим. Да го инсталирам?"
-
 #: ../../services.pm:1
 #, c-format
 msgid "On boot"
 msgstr "При зареждане"
+
+#: ../../diskdrake/interactive.pm:1
+#, c-format
+msgid "The package %s is needed. Install it?"
+msgstr "Пакет %s е необходим. Да го инсталирам?"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -11501,6 +11647,11 @@ msgstr "Ватикана"
 #, c-format
 msgid "Please make a backup of your data first"
 msgstr "Първо създайте backup на своите данни"
+
+#: ../../harddrake/data.pm:1
+#, c-format
+msgid "ADSL adapters"
+msgstr ""
 
 #: ../../install_interactive.pm:1
 #, c-format
@@ -11527,7 +11678,7 @@ msgstr "ако е нужно"
 msgid "Remove List"
 msgstr "Изтрива списък"
 
-#: ../../share/advertising/05-desktop.pl:1
+#: ../advertising/05-desktop.pl:1
 #, c-format
 msgid "A customizable environment"
 msgstr ""
@@ -11757,6 +11908,13 @@ msgstr ""
 #: ../../network/tools.pm:1
 #, c-format
 msgid "Firmware copy succeeded"
+msgstr ""
+
+#: ../../../move/tree/mdk_totem:1
+#, c-format
+msgid ""
+"You can't use another CDROM when the following programs are running: \n"
+"%s"
 msgstr ""
 
 #: ../../security/help.pm:1
@@ -12204,6 +12362,11 @@ msgstr ""
 "за определена работа на принтера. Просто добавете целаните настройки към "
 "командния ред, напр. \"%s <file>\". "
 
+#: ../../standalone/drakclock:1
+#, c-format
+msgid "DrakClock"
+msgstr ""
+
 #: ../../modules/interactive.pm:1
 #, c-format
 msgid ""
@@ -12234,21 +12397,6 @@ msgid ""
 "\n"
 "- Daemon, %s via:\n"
 msgstr ""
-
-#: ../../standalone/drakgw:1
-#, c-format
-msgid ""
-"Welcome to the Internet Connection Sharing utility!\n"
-"\n"
-"%s\n"
-"\n"
-"Click on Configure to launch the setup wizard."
-msgstr ""
-"Добре дошли в инструмента за споделяне на Интернет връзката !\n"
-"\n"
-"%s\n"
-"\n"
-"Цъкнете ``Настрой'', ако искате да стартиране установяващия магьосник."
 
 #: ../../lang.pm:1
 #, c-format
@@ -12433,6 +12581,11 @@ msgstr ""
 msgid "Christmas Island"
 msgstr "Коледни Острови"
 
+#: ../../mouse.pm:1
+#, fuzzy, c-format
+msgid "Automatic"
+msgstr "Автоматичен IP адрес"
+
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Installation of bootloader failed. The following error occured:"
@@ -12534,11 +12687,6 @@ msgstr "Прехвърля сега"
 #, c-format
 msgid "Set root password and network authentication methods"
 msgstr ""
-
-#: ../../standalone/drakgw:1
-#, c-format
-msgid "Internet Connection Sharing configuration"
-msgstr "Настройка на споделянето на Интернет връзката"
 
 #: ../../ugtk2.pm:1
 #, c-format
@@ -12792,6 +12940,11 @@ msgstr "Изберете флопи устройство, където да направите стартираща дискета"
 msgid "LILO with text menu"
 msgstr "LILO с текстово меню"
 
+#: ../../standalone/net_monitor:1
+#, c-format
+msgid "instantaneous"
+msgstr ""
+
 #: ../../network/drakfirewall.pm:1
 #, c-format
 msgid "Everything (no firewall)"
@@ -12974,6 +13127,11 @@ msgstr "Моля, задайте потребителско име"
 msgid "Enable CD Boot?"
 msgstr "Стартиране от CD ?"
 
+#: ../../../move/move.pm:1
+#, c-format
+msgid "Simply reboot"
+msgstr ""
+
 #: ../../interactive/stdio.pm:1
 #, c-format
 msgid " enter `void' for void entry"
@@ -13053,15 +13211,15 @@ msgid ""
 "other machines on your local network as well."
 msgstr ""
 
-#: ../../install_steps_interactive.pm:1
-#, c-format
-msgid "Which is your timezone?"
-msgstr "Коя е времевата ви зона ?"
-
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "Can't create log file!"
 msgstr ""
+
+#: ../../install_steps_interactive.pm:1 ../../standalone/drakclock:1
+#, c-format
+msgid "Which is your timezone?"
+msgstr "Коя е времевата ви зона ?"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -13108,6 +13266,11 @@ msgstr "Мозамбик"
 msgid "Icon"
 msgstr "Икона"
 
+#: ../../../move/tree/mdk_totem:1
+#, fuzzy, c-format
+msgid "Kill those programs"
+msgstr "достъп до X програми"
+
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "Please choose what you want to backup"
@@ -13143,7 +13306,7 @@ msgstr "Добавяне на правило"
 msgid "Chunk size %s\n"
 msgstr "Размер на парчето %s\n"
 
-#: ../../share/advertising/02-community.pl:1
+#: ../advertising/02-community.pl:1
 #, c-format
 msgid "Build the future of Linux!"
 msgstr ""
@@ -13274,7 +13437,7 @@ msgstr ""
 "машината\n"
 "ще работи като сървър или ако няма успешно настроен дисплей."
 
-#: ../../share/advertising/13-mdkexpert_corporate.pl:1
+#: ../advertising/13-mdkexpert_corporate.pl:1
 #, c-format
 msgid "MandrakeExpert Corporate"
 msgstr "MandrakeExpert обединява"
@@ -13313,6 +13476,11 @@ msgid ""
 "After changing type of partition %s, all data on this partition will be lost"
 msgstr ""
 "След промяна на типа на дяла %s, всички данни върху него ще бъдат загубени"
+
+#: ../../harddrake/data.pm:1
+#, fuzzy, c-format
+msgid "ISDN adapters"
+msgstr "ISDN карта"
 
 #: ../../common.pm:1
 #, c-format
@@ -13586,6 +13754,11 @@ msgstr "Споделяне на локални скенери"
 msgid "Plug'n Play probing failed. Please select the correct monitor"
 msgstr "Проба за Plug & Play е неуспешна. Моля, изберете правилен монитор"
 
+#: ../../../move/move.pm:1
+#, c-format
+msgid "Detect again USB key"
+msgstr ""
+
 #: ../../services.pm:1
 #, c-format
 msgid "Services and deamons"
@@ -13628,7 +13801,7 @@ msgstr "Chkconfig спазва msec правилата"
 msgid "Slovakian (QWERTZ)"
 msgstr "Словашка (QWERTZ)"
 
-#: ../../share/advertising/06-development.pl:1
+#: ../advertising/06-development.pl:1
 #, c-format
 msgid ""
 "To modify and to create in different languages such as Perl, Python, C and C+"
@@ -13691,6 +13864,11 @@ msgstr "Алжир"
 #, c-format
 msgid "Restore Via Network"
 msgstr "Възстановява през мрежа"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "Use tar and bzip2 (rather than tar and gzip)"
+msgstr ""
 
 #: ../../any.pm:1
 #, c-format
@@ -13806,7 +13984,7 @@ msgstr "DVD-ROM"
 msgid "Georgian (\"Latin\" layout)"
 msgstr "Грузинска (\"Латинска\" наредба)"
 
-#: ../../share/advertising/09-mdksecure.pl:1
+#: ../advertising/09-mdksecure.pl:1
 #, c-format
 msgid "Get the best items with Mandrake Linux Strategic partners"
 msgstr ""
@@ -13906,7 +14084,7 @@ msgstr "Автоматично влиза"
 msgid "Domain Admin Password"
 msgstr "Парола за администратор на домейн"
 
-#: ../../share/advertising/05-desktop.pl:1
+#: ../advertising/05-desktop.pl:1
 #, fuzzy, c-format
 msgid ""
 "Perfectly adapt your computer to your needs thanks to the 11 available "
@@ -14048,6 +14226,11 @@ msgstr "utopia 25"
 msgid "Pipe job into a command"
 msgstr "Прекарай заданието през команда"
 
+#: ../../../move/move.pm:1
+#, fuzzy, c-format
+msgid "Remove system config files"
+msgstr "Да премахна ли loopback файла ?"
+
 #: ../../lang.pm:1
 #, c-format
 msgid "Cote d'Ivoire"
@@ -14059,7 +14242,8 @@ msgid "new dynamic device name generated by core kernel devfs"
 msgstr "ново динамично устройство генерирано от ядрото devfs"
 
 #: ../../help.pm:1 ../../install_any.pm:1 ../../interactive.pm:1
-#: ../../ugtk2.pm:1 ../../modules/interactive.pm:1 ../../standalone/drakgw:1
+#: ../../ugtk2.pm:1 ../../modules/interactive.pm:1
+#: ../../standalone/drakclock:1 ../../standalone/drakgw:1
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "Yes"
@@ -14080,11 +14264,6 @@ msgstr "Прогрес на възстановяване"
 msgid "Estonia"
 msgstr "Естония"
 
-#: ../../standalone/scannerdrake:1
-#, c-format
-msgid "Choose the host on which the local scanners should be made available:"
-msgstr ""
-
 #: ../../partition_table.pm:1
 #, c-format
 msgid ""
@@ -14096,6 +14275,11 @@ msgstr ""
 "Единственият начин е да преместите главните си дялове, за да имате празно "
 "място след extended-дяловете"
 
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "Choose the host on which the local scanners should be made available:"
+msgstr ""
+
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "Channel"
@@ -14106,11 +14290,6 @@ msgstr "Канал"
 #, c-format
 msgid "Add"
 msgstr "Добавя"
-
-#: ../../standalone/drakgw:1
-#, c-format
-msgid "No Internet Connection Sharing has ever been configured."
-msgstr "Няма настройвано споделяне на Интернет връзката."
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -14399,7 +14578,7 @@ msgstr "Това нова инсталация ли е или обновяване ?"
 msgid "ISDN card"
 msgstr "ISDN карта"
 
-#: ../../share/advertising/02-community.pl:1
+#: ../advertising/02-community.pl:1
 #, c-format
 msgid ""
 "To share your own knowledge and help build Linux software, join our "
@@ -14433,6 +14612,40 @@ msgid ""
 "Using the ``Upgrade'' option should work fine on Mandrake Linux systems\n"
 "running version \"8.1\" or later. Performing an Upgrade on versions prior\n"
 "to Mandrake Linux version \"8.1\" is not recommended."
+msgstr ""
+
+#: ../../standalone/drakfont:1
+#, c-format
+msgid ""
+"\n"
+" Copyright (C) 2001-2002 by MandrakeSoft \n"
+"     DUPONT Sebastien (original version)\n"
+"     CHAUMETTE Damien <dchaumette@mandrakesoft.com>\n"
+"\n"
+" This program is free software; you can redistribute it and/or modify\n"
+" it under the terms of the GNU General Public License as published by\n"
+" the Free Software Foundation; either version 2, or (at your option)\n"
+" any later version.\n"
+"\n"
+" This program is distributed in the hope that it will be useful,\n"
+" but WITHOUT ANY WARRANTY; without even the implied warranty of\n"
+" MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n"
+" GNU General Public License for more details.\n"
+"\n"
+" You should have received a copy of the GNU General Public License\n"
+" along with this program; if not, write to the Free Software\n"
+" Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.\n"
+"\n"
+" Thanks:\n"
+"    -  pfm2afm:   \n"
+"\t by Ken Borgendale:\n"
+"\t    Convert a Windows .pfm  file to a .afm (Adobe Font Metrics)\n"
+"    -  type1inst:\n"
+"\t by James Macnicol: \n"
+"\t    type1inst generates files fonts.dir fonts.scale & Fontmap.\n"
+"    -  ttf2pt1:   \n"
+"\t  by Andrew Weeks, Frank Siegert, Thomas Henlich, Sergey Babkin  \n"
+"             Convert ttf font files to afm and pfb fonts\n"
 msgstr ""
 
 #: ../../printer/main.pm:1
@@ -14502,6 +14715,11 @@ msgstr ""
 msgid "Unsafe"
 msgstr "Опасен"
 
+#: ../../network/drakfirewall.pm:1
+#, fuzzy, c-format
+msgid "SSH server"
+msgstr "SSH Сървър"
+
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid ", %s sectors"
@@ -14509,7 +14727,7 @@ msgstr ", %s сектора"
 
 #: ../../help.pm:1 ../../install_any.pm:1 ../../interactive.pm:1
 #: ../../ugtk2.pm:1 ../../modules/interactive.pm:1
-#: ../../standalone/harddrake2:1
+#: ../../standalone/drakclock:1 ../../standalone/harddrake2:1
 #, c-format
 msgid "No"
 msgstr "Не"
@@ -15071,6 +15289,11 @@ msgstr "Изтриване на избрания адрес"
 msgid "Network configuration"
 msgstr "Настройка на мрежата"
 
+#: ../../standalone/harddrake2:1
+#, c-format
+msgid "/Autodetect _jaz drives"
+msgstr "/Автоматично открива _jaz устройства"
+
 #: ../../any.pm:1
 #, c-format
 msgid "No sharing"
@@ -15182,9 +15405,10 @@ msgstr ""
 #: ../../install_steps.pm:1 ../../diskdrake/dav.pm:1
 #: ../../diskdrake/hd_gtk.pm:1 ../../diskdrake/interactive.pm:1
 #: ../../diskdrake/smbnfs_gtk.pm:1 ../../interactive/http.pm:1
-#: ../../standalone/drakboot:1 ../../standalone/drakbug:1
+#: ../../standalone/drakauth:1 ../../standalone/drakboot:1
+#: ../../standalone/drakbug:1 ../../standalone/drakconnect:1
 #: ../../standalone/drakfloppy:1 ../../standalone/drakfont:1
-#: ../../standalone/draksplash:1
+#: ../../standalone/draksplash:1 ../../../move/move.pm:1
 #, c-format
 msgid "Error"
 msgstr "Грешка"
@@ -15226,6 +15450,11 @@ msgid ""
 "What do you want to do?"
 msgstr ""
 
+#: ../../partition_table.pm:1
+#, c-format
+msgid "mount failed: "
+msgstr "монтирането не успя: "
+
 #: ../../steps.pm:1
 #, c-format
 msgid "Configure services"
@@ -15235,11 +15464,6 @@ msgstr "Настройка на услугите"
 #, c-format
 msgid "Broadcast Address:"
 msgstr "Broadcast адрес:"
-
-#: ../../partition_table.pm:1
-#, c-format
-msgid "mount failed: "
-msgstr "монтирането не успя: "
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -15254,16 +15478,16 @@ msgstr ""
 msgid "Image"
 msgstr "Образ"
 
+#: ../../services.pm:1
+#, c-format
+msgid "Remote Administration"
+msgstr "Отдалечена администрация"
+
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Failed to add the printer \"%s\" to Star Office/OpenOffice.org/GIMP."
 msgstr ""
 "Неуспех при добавяне на принтер \"%s\" на Star Office/OpenOffice.org/GIMP."
-
-#: ../../services.pm:1
-#, c-format
-msgid "Remote Administration"
-msgstr "Отдалечена администрация"
 
 #: ../../modules.pm:1
 #, c-format
@@ -15323,7 +15547,7 @@ msgstr "Юли"
 msgid "Prints into %s"
 msgstr ", печат на %s"
 
-#: ../../install_steps_interactive.pm:1
+#: ../../install_steps_interactive.pm:1 ../../../move/move.pm:1
 #, c-format
 msgid "An error occurred"
 msgstr "Появи се грешка"
@@ -15530,7 +15754,7 @@ msgstr ", многофункционално устройство"
 msgid "Laos"
 msgstr "Лаос"
 
-#: ../../share/advertising/04-configuration.pl:1
+#: ../advertising/04-configuration.pl:1
 #, c-format
 msgid ""
 "Mandrake Linux 9.2 provides you with the Mandrake Control Center, a powerful "
@@ -15704,11 +15928,6 @@ msgstr "Трябва да създадете първо /etc/dhcpd.conf!"
 msgid "Is FPU present"
 msgstr ""
 
-#: ../../standalone/scannerdrake:1
-#, c-format
-msgid "There are no scanners found which are available on your system.\n"
-msgstr ""
-
 #: ../../services.pm:1
 #, c-format
 msgid ""
@@ -15717,6 +15936,11 @@ msgid ""
 msgstr ""
 "Няма допълнителна информация\n"
 "за тази услуга, съжелявам."
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "There are no scanners found which are available on your system.\n"
+msgstr ""
 
 #: ../../standalone/drakTermServ:1
 #, c-format
@@ -15757,21 +15981,6 @@ msgstr "DVDRAM устройство"
 #, c-format
 msgid "if set to yes, report unowned files."
 msgstr ""
-
-#: ../../standalone/harddrake2:1
-#, c-format
-msgid ""
-"This is HardDrake, a Mandrake hardware configuration tool.\n"
-"<span foreground=\"royalblue3\">Version:</span> %s\n"
-"<span foreground=\"royalblue3\">Author:</span> Thierry Vignaud &lt;tvignaud"
-"\\@mandrakesoft.com&gt;\n"
-"\n"
-msgstr ""
-"Това е HardDrake, хардуерен конфигурационен инструмент на Mandrake.\n"
-"<span foreground=\"royalblue3\">Версия:</span> %s\n"
-"<span foreground=\"royalblue3\">Автор:</span> Thierry Vignaud &lt;tvignaud"
-"\\@mandrakesoft.com&gt;\n"
-"\n"
 
 #: ../../install_interactive.pm:1
 #, c-format
@@ -15854,10 +16063,27 @@ msgstr "Виетнам"
 msgid "/_Fields description"
 msgstr "/_Полета описание"
 
-#: ../../share/advertising/10-security.pl:1
+#: ../advertising/10-security.pl:1
 #, c-format
 msgid "Optimize your security by using Mandrake Linux"
 msgstr "Оптимизира вашата сигурност"
+
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"\n"
+"\n"
+" Thanks:\n"
+"\t- LTSP Project http://www.ltsp.org\n"
+"\t- Michael Brown <mbrown@fensystems.co.uk>\n"
+"\n"
+msgstr ""
+"\n"
+"\n"
+" Благодарности:\n"
+"\t- LTSP Проект http://www.ltsp.org\n"
+"\t- Michael Brown <mbrown@fensystems.co.uk>\n"
+"\n"
 
 #: ../../install_steps_gtk.pm:1 ../../interactive.pm:1 ../../ugtk2.pm:1
 #: ../../Xconfig/resolution_and_depth.pm:1 ../../diskdrake/hd_gtk.pm:1
@@ -15965,7 +16191,7 @@ msgstr ""
 msgid "mkinitrd optional arguments"
 msgstr "mkinitrd допълнителни аргументи"
 
-#: ../../share/advertising/03-software.pl:1
+#: ../advertising/03-software.pl:1
 #, c-format
 msgid ""
 "Surf the Web with Mozilla or Konqueror, read your mail with Evolution or "
@@ -16159,6 +16385,11 @@ msgstr "Рестартиране на CUPS..."
 #, c-format
 msgid "Printing/Scanning/Photo Cards on \"%s\""
 msgstr "Печатане/Сканиране/Фото картички на принтер \"%s\""
+
+#: ../../../move/move.pm:1
+#, c-format
+msgid "Continue without USB key"
+msgstr ""
 
 #: ../../install_steps.pm:1
 #, c-format
@@ -16600,7 +16831,7 @@ msgstr "Позволява X Window връзки"
 msgid "Hardware probing in progress"
 msgstr "Прогрес на хардуерна проба"
 
-#: ../../standalone/drakgw:1
+#: ../../network/shorewall.pm:1 ../../standalone/drakgw:1
 #, c-format
 msgid "Net Device"
 msgstr "Мрежово у-во"
@@ -16664,6 +16895,11 @@ msgid ""
 "package 'ImageMagick' is required to be able to complete configuration.\n"
 "Click \"Ok\" to install 'ImageMagick' or \"Cancel\" to quit"
 msgstr ""
+
+#: ../../network/drakfirewall.pm:1
+#, fuzzy, c-format
+msgid "Telnet server"
+msgstr "X сървър"
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -16930,7 +17166,7 @@ msgstr "Системен журнал"
 msgid "Can't create catalog!"
 msgstr ""
 
-#: ../../share/advertising/11-mnf.pl:1
+#: ../advertising/11-mnf.pl:1
 #, c-format
 msgid ""
 "Complete your security setup with this very easy-to-use software which "
@@ -16982,6 +17218,11 @@ msgstr "Настройка на Интернет връзка"
 #: ../../security/help.pm:1
 #, c-format
 msgid "Add the name as an exception to the handling of password aging by msec."
+msgstr ""
+
+#: ../../network/isdn.pm:1
+#, c-format
+msgid "USB"
 msgstr ""
 
 #: ../../standalone/drakxtv:1
@@ -17043,6 +17284,11 @@ msgstr "Работна група"
 #, c-format
 msgid "Printer host name or IP"
 msgstr "Име на хост за принтера или IP"
+
+#: ../../standalone/drakconnect:1
+#, fuzzy, c-format
+msgid "down"
+msgstr "готово"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -17457,6 +17703,11 @@ msgstr "Добавяне на обект"
 msgid "The printers on this machine are available to other computers"
 msgstr "Принтерите на тази машина с достъпни за другите компютри"
 
+#: ../../lang.pm:1
+#, fuzzy, c-format
+msgid "China (Hong Kong)"
+msgstr "Хонг Конг"
+
 #: ../../standalone/drakautoinst:1
 #, c-format
 msgid "I can't find needed image file `%s'."
@@ -17513,7 +17764,7 @@ msgstr "Пакета не е инсталиран"
 msgid "American Samoa"
 msgstr "Американска Самоа"
 
-#: ../../share/advertising/12-mdkexpert.pl:1
+#: ../advertising/12-mdkexpert.pl:1
 #, c-format
 msgid "Become a MandrakeExpert"
 msgstr "Станете MandrakeExpert"
@@ -17631,6 +17882,11 @@ msgstr "Италия"
 msgid "Cayman Islands"
 msgstr "Кайманови Острови"
 
+#: ../../fs.pm:1 ../../partition_table.pm:1
+#, c-format
+msgid "error unmounting %s: %s"
+msgstr "грешка при демонтиране на %s: %s"
+
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Name of printer"
@@ -17640,11 +17896,6 @@ msgstr "Име на принтер"
 #, c-format
 msgid "disable"
 msgstr "изключи"
-
-#: ../../fs.pm:1 ../../partition_table.pm:1
-#, c-format
-msgid "error unmounting %s: %s"
-msgstr "грешка при демонтиране на %s: %s"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -17747,7 +17998,7 @@ msgstr "Компактен"
 msgid "Detected model: %s %s"
 msgstr "Открит модел: %s %s"
 
-#: ../../share/advertising/03-software.pl:1
+#: ../advertising/03-software.pl:1
 #, c-format
 msgid "MandrakeSoft has selected the best software for you"
 msgstr ""
@@ -17851,6 +18102,11 @@ msgstr "X при стартиране на системата"
 msgid " adsl"
 msgstr ""
 
+#: ../../raid.pm:1
+#, c-format
+msgid "Not enough partitions for RAID level %d\n"
+msgstr "Няма достатъчно дялове за RAID ниво %d\n"
+
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "format of floppies supported by the drive"
@@ -17860,11 +18116,6 @@ msgstr ""
 #, c-format
 msgid "Firmware copy failed, file %s not found"
 msgstr ""
-
-#: ../../raid.pm:1
-#, c-format
-msgid "Not enough partitions for RAID level %d\n"
-msgstr "Няма достатъчно дялове за RAID ниво %d\n"
 
 #: ../../standalone/drakTermServ:1
 #, c-format
@@ -17990,7 +18241,7 @@ msgid ""
 "No CD or DVD image found, please copy the installation program and rpm files."
 msgstr ""
 
-#: ../../share/advertising/04-configuration.pl:1
+#: ../advertising/04-configuration.pl:1
 #, c-format
 msgid "Mandrake's multipurpose configuration tool"
 msgstr "Многофункционален инструмент за настройка на Мандрейк"
@@ -18020,7 +18271,7 @@ msgstr "Диск"
 msgid "Enter a printer device URI"
 msgstr "Въведете URI на печатащо устройство"
 
-#: ../../share/advertising/01-thanks.pl:1
+#: ../advertising/01-thanks.pl:1
 #, c-format
 msgid ""
 "The success of MandrakeSoft is based upon the principle of Free Software. "
@@ -18534,7 +18785,7 @@ msgstr "Модел на карта:"
 msgid "Thin Client"
 msgstr "Thin клиент"
 
-#: ../../share/advertising/01-thanks.pl:1
+#: ../advertising/01-thanks.pl:1
 #, c-format
 msgid "Thank you for choosing Mandrake Linux 9.2"
 msgstr "Благодарим ви, че избрахте Mandrake Linux 9.2"
@@ -18637,6 +18888,13 @@ msgstr "Взима шрифтове на Windows"
 msgid "Mouse Systems"
 msgstr "Mouse Systems"
 
+#: ../../standalone/drakclock:1
+#, c-format
+msgid ""
+"Your computer can synchronize its clock\n"
+" with a remote time server using NTP"
+msgstr ""
+
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Iranian"
@@ -18662,7 +18920,7 @@ msgstr "Добавяне на сървър"
 msgid "Remote printer name"
 msgstr "Име на отдалечен принтер"
 
-#: ../../share/advertising/10-security.pl:1
+#: ../advertising/10-security.pl:1
 #, c-format
 msgid ""
 "MandrakeSoft has designed exclusive tools to create the most secured Linux "
@@ -18813,6 +19071,11 @@ msgstr "Microsoft Explorer"
 msgid "Uninstall Fonts"
 msgstr "Инсталира шрифтове"
 
+#: ../../../move/move.pm:1
+#, fuzzy, c-format
+msgid "Please wait, detecting and configuring devices..."
+msgstr "Моля, изберете ниво на сигурност..."
+
 #: ../../keyboard.pm:1
 #, c-format
 msgid "German (no dead keys)"
@@ -18841,11 +19104,6 @@ msgstr ""
 "Вие може да експортирате като използвате NFS или Samba. Моля, изберете какво "
 "искате да използвате."
 
-#: ../../help.pm:1 ../../install_steps_interactive.pm:1
-#, c-format
-msgid "Reboot"
-msgstr "Престартира"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Gambia"
@@ -18855,6 +19113,12 @@ msgstr "Гамбия"
 #, c-format
 msgid "Mandrake Control Center"
 msgstr "Контролен център на Mandrake"
+
+#: ../../help.pm:1 ../../install_steps_interactive.pm:1
+#: ../../../move/move.pm:1
+#, c-format
+msgid "Reboot"
+msgstr "Престартира"
 
 #: ../../printer/main.pm:1
 #, fuzzy, c-format
@@ -18888,6 +19152,11 @@ msgstr ""
 #, c-format
 msgid "Remember this password"
 msgstr "Запомня тази парола"
+
+#: ../../install_steps_gtk.pm:1
+#, c-format
+msgid "due to unsatisfied %s"
+msgstr ""
 
 #: ../../standalone/drakgw:1
 #, c-format
@@ -18949,6 +19218,11 @@ msgstr "Папуа Нова Гвинея"
 #, fuzzy, c-format
 msgid "Multi-function device on a parallel port"
 msgstr ", многофункционално устройство на на паралелен порт #%s"
+
+#: ../../../move/tree/mdk_totem:1
+#, fuzzy, c-format
+msgid "Busy files"
+msgstr "Резервно копие на системни файлове"
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -19012,6 +19286,21 @@ msgstr ""
 #, c-format
 msgid "DHCP Client"
 msgstr "DHCP клиент"
+
+#: ../../standalone/harddrake2:1
+#, c-format
+msgid ""
+"This is HardDrake, a Mandrake hardware configuration tool.\n"
+"<span foreground=\"royalblue3\">Version:</span> %s\n"
+"<span foreground=\"royalblue3\">Author:</span> Thierry Vignaud &lt;"
+"tvignaud@mandrakesoft.com&gt;\n"
+"\n"
+msgstr ""
+"Това е HardDrake, хардуерен конфигурационен инструмент на Mandrake.\n"
+"<span foreground=\"royalblue3\">Версия:</span> %s\n"
+"<span foreground=\"royalblue3\">Автор:</span> Thierry Vignaud &lt;"
+"tvignaud@mandrakesoft.com&gt;\n"
+"\n"
 
 #: ../../standalone/drakgw:1
 #, c-format
@@ -19204,47 +19493,13 @@ msgstr "Не прехвърляй принтери"
 msgid "Delay before booting the default image"
 msgstr "Забавяне преди стартирането на подразбиращият се образ"
 
-#: ../../standalone/drakfont:1
-#, c-format
-msgid ""
-"\n"
-" Copyright (C) 2001-2002 by MandrakeSoft \n"
-"     DUPONT Sebastien (original version)\n"
-"     CHAUMETTE Damien <dchaumette\\@mandrakesoft.com>\n"
-"\n"
-" This program is free software; you can redistribute it and/or modify\n"
-" it under the terms of the GNU General Public License as published by\n"
-" the Free Software Foundation; either version 2, or (at your option)\n"
-" any later version.\n"
-"\n"
-" This program is distributed in the hope that it will be useful,\n"
-" but WITHOUT ANY WARRANTY; without even the implied warranty of\n"
-" MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n"
-" GNU General Public License for more details.\n"
-"\n"
-" You should have received a copy of the GNU General Public License\n"
-" along with this program; if not, write to the Free Software\n"
-" Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.\n"
-"\n"
-" Thanks:\n"
-"    -  pfm2afm:   \n"
-"\t by Ken Borgendale:\n"
-"\t    Convert a Windows .pfm  file to a .afm (Adobe Font Metrics)\n"
-"    -  type1inst:\n"
-"\t by James Macnicol: \n"
-"\t    type1inst generates files fonts.dir fonts.scale & Fontmap.\n"
-"    -  ttf2pt1:   \n"
-"\t  by Andrew Weeks, Frank Siegert, Thomas Henlich, Sergey Babkin  \n"
-"             Convert ttf font files to afm and pfb fonts\n"
-msgstr ""
-
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "Use Hard Disk to backup"
 msgstr "Използва твърд диск за резервно копие"
 
 #: ../../help.pm:1 ../../install_steps_gtk.pm:1 ../../standalone/drakbackup:1
-#: ../../standalone/drakboot:1 ../../standalone/drakgw:1
+#: ../../standalone/drakboot:1
 #, c-format
 msgid "Configure"
 msgstr "Настрока"
@@ -19312,7 +19567,7 @@ msgstr ""
 "Проверете компакт диска на инсталирания компютър използвайки \"rpm -qpl "
 "Mandrake/RPMS/*.rpm\"\n"
 
-#: ../../share/advertising/06-development.pl:1
+#: ../advertising/06-development.pl:1
 #, c-format
 msgid "Mandrake Linux 9.2: the ultimate development platform"
 msgstr "Mandrake Linux 9.2 е непрекъснато разработваща се платформа"
@@ -19394,6 +19649,11 @@ msgstr ""
 msgid "Services"
 msgstr "Услуги"
 
+#: ../../../move/move.pm:1
+#, fuzzy, c-format
+msgid "Auto configuration"
+msgstr "Потребителска настройка"
+
 #: ../../Xconfig/card.pm:1
 #, c-format
 msgid "4 MB"
@@ -19432,9 +19692,10 @@ msgid "Internet station"
 msgstr "Интернет станция"
 
 #: ../../share/compssUsers:999
+#, fuzzy
 msgid ""
-"Set of tools to read and send mail and news (pine, mutt, tin..) and to "
-"browse the Web"
+"Set of tools to read and send mail and news (mutt, tin..) and to browse the "
+"Web"
 msgstr ""
 "Набор от инструменти за четене и изпращане на поща и новини (pine, mutt, "
 "tin..) и за обикаляне из Мрежата"
@@ -19576,19 +19837,39 @@ msgstr ""
 "Набор от инструменти за четене и изпращане на поща и новини и за сърфиране "
 "из Мрежата"
 
-#~ msgid "-adobe-utopia-regular-r-*-*-25-*-*-*-p-*-iso8859-*,*-r-*"
-#~ msgstr "-adobe-utopia-regular-r-*-*-25-*-*-*-p-*-iso8859-*,*-r-*"
+#~ msgid "The setup has already been done, and it's currently enabled."
+#~ msgstr "Установката вече е направена и в момента е включена."
 
-#~ msgid "-adobe-times-bold-r-normal--17-*-100-100-p-*-iso8859-*,*-r-*"
-#~ msgstr "-adobe-times-bold-r-normal--17-*-100-100-p-*-iso8859-*,*-r-*"
+#~ msgid "Logs"
+#~ msgstr "Логове"
 
-#, fuzzy
-#~ msgid "Hostname configuration"
-#~ msgstr "Конфигурация на система"
+#~ msgid "The setup has already been done, but it's currently disabled."
+#~ msgstr "Установката вече е направена, но в момента е изключена."
 
-#, fuzzy
-#~ msgid "Hostname"
-#~ msgstr "Име на хост:"
+#~ msgid "Profile "
+#~ msgstr "Профил "
+
+#~ msgid ""
+#~ "Welcome to the Internet Connection Sharing utility!\n"
+#~ "\n"
+#~ "%s\n"
+#~ "\n"
+#~ "Click on Configure to launch the setup wizard."
+#~ msgstr ""
+#~ "Добре дошли в инструмента за споделяне на Интернет връзката !\n"
+#~ "\n"
+#~ "%s\n"
+#~ "\n"
+#~ "Цъкнете ``Настрой'', ако искате да стартиране установяващия магьосник."
+
+#~ msgid "Internet Connection Sharing configuration"
+#~ msgstr "Настройка на споделянето на Интернет връзката"
+
+#~ msgid "No Internet Connection Sharing has ever been configured."
+#~ msgstr "Няма настройвано споделяне на Интернет връзката."
+
+#~ msgid "when checked, owner and group won't be changed"
+#~ msgstr "при проверка, собственика и групата няма да бъдат променени"
 
 #~ msgid "Remote Printers"
 #~ msgstr "Отдалечен принтер"
@@ -19610,10 +19891,6 @@ msgstr ""
 
 #~ msgid "Level 5"
 #~ msgstr "Ниво 5"
-
-#, fuzzy
-#~ msgid "Insert floppy and press %s"
-#~ msgstr "Сложете дискета в устройство %s"
 
 #~ msgid "Load"
 #~ msgstr "Зареди"
@@ -19697,16 +19974,16 @@ msgstr ""
 #~ msgstr "Моля, въведете име на хост или IP."
 
 #~ msgid ""
-#~ " Copyright (C) 2001-2002 MandrakeSoft by DUPONT Sebastien <dupont_s"
-#~ "\\@epita.fr>"
+#~ " Copyright (C) 2001-2002 MandrakeSoft by DUPONT Sebastien <dupont_s@epita."
+#~ "fr>"
 #~ msgstr ""
-#~ " Авторски права (C) 2001-2002 MandrakeSoft by DUPONT Sebastien <dupont_s"
-#~ "\\@epita.fr>"
+#~ " Авторски права (C) 2001-2002 MandrakeSoft by DUPONT Sebastien "
+#~ "<dupont_s@epita.fr>"
 
 #~ msgid ""
-#~ " updates 2002 MandrakeSoft by Stew Benedict <sbenedict\\@mandrakesoft.com>"
+#~ " updates 2002 MandrakeSoft by Stew Benedict <sbenedict@mandrakesoft.com>"
 #~ msgstr ""
-#~ " обновявания 2002 MandrakeSoft от Stew Benedict <sbenedict\\@mandrakesoft."
+#~ " обновявания 2002 MandrakeSoft от Stew Benedict <sbenedict@mandrakesoft."
 #~ "com>"
 
 #~ msgid "edit"

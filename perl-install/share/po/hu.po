@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX-hu\n"
-"POT-Creation-Date: 2003-09-16 13:45+0200\n"
+"POT-Creation-Date: 2003-12-03 03:09+0100\n"
 "PO-Revision-Date: 2003-09-18 21:16+0200\n"
 "Last-Translator: Arpad Biro <biro_arpad@yahoo.com>\n"
 "Language-Team: Hungarian\n"
@@ -287,11 +287,6 @@ msgstr "CUPS-beállítások"
 msgid "Total progress"
 msgstr "Teljes elõrehaladás"
 
-#: ../../lang.pm:1
-#, c-format
-msgid "Hong Kong"
-msgstr "Hong Kong"
-
 #: ../../install_interactive.pm:1
 #, c-format
 msgid "Not enough free space to allocate new partitions"
@@ -365,6 +360,24 @@ msgstr "A kijelölt gép szerkesztése"
 #, c-format
 msgid "No CD device defined!"
 msgstr "CD-eszköz nincs definiálva."
+
+#: ../../network/shorewall.pm:1
+#, fuzzy, c-format
+msgid ""
+"Please enter the name of the interface connected to the "
+"internet.              \n"
+"                \n"
+"Examples:\n"
+"                ppp+ for modem or DSL connections, \n"
+"                eth0, or eth1 for cable connection, \n"
+"                ippp+ for a isdn connection.\n"
+msgstr ""
+"Adja meg az internetre csatlakozó hálózati csatoló nevét.\n"
+"\n"
+"Példák:\n"
+"\t\tppp+ - modem- vagy DSL-kapcsolat esetén\n"
+"\t\teth0 vagy eth1 - kábeles kapcsolat esetén\n"
+"\t\tippp+ - ISDN-kapcsolat esetén\n"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -440,15 +453,20 @@ msgstr "A módosítás megtörtént. Szeretné újraindítani a dm szolgáltatást?"
 msgid "Swiss (French layout)"
 msgstr "svájci (francia kiosztás)"
 
+#: ../../raid.pm:1
+#, c-format
+msgid "mkraid failed (maybe raidtools are missing?)"
+msgstr "Az mkraid végrehajtása nem sikerült (talán hiányzik a raidtools?)"
+
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "August"
 msgstr "Augusztus"
 
-#: ../../raid.pm:1
-#, c-format
-msgid "mkraid failed (maybe raidtools are missing?)"
-msgstr "Az mkraid végrehajtása nem sikerült (talán hiányzik a raidtools?)"
+#: ../../network/drakfirewall.pm:1
+#, fuzzy, c-format
+msgid "FTP server"
+msgstr "NTP-kiszolgáló"
 
 #: ../../harddrake/data.pm:1
 #, c-format
@@ -528,11 +546,6 @@ msgstr "Hálózati címhibát észleltem az aktuális konfigurációban: %s!\n"
 #, c-format
 msgid "Configuring..."
 msgstr "Beállítás..."
-
-#: ../../standalone/drakgw:1
-#, c-format
-msgid "The setup has already been done, and it's currently enabled."
-msgstr "A megosztás már megtörtént, a kapcsolat használható."
 
 #: ../../harddrake/v4l.pm:1
 #, c-format
@@ -669,6 +682,11 @@ msgstr " ezen a Novell kiszolgálón: \"%s\", nyomtató: \"%s\""
 msgid "Printer Name"
 msgstr "Nyomtatónév"
 
+#: ../../../move/move.pm:1
+#, c-format
+msgid "Setting up USB key"
+msgstr ""
+
 #: ../../standalone/drakfloppy:1
 #, c-format
 msgid "Remove a module"
@@ -726,15 +744,17 @@ msgstr ""
 msgid "if needed"
 msgstr "ha szükséges"
 
+#: ../../standalone/drakclock:1
+#, c-format
+msgid ""
+"We need to install ntp package\n"
+" to enable Network Time Protocol"
+msgstr ""
+
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "Restore Failed..."
 msgstr "A visszaállítás sikertelen volt..."
-
-#: ../../standalone/harddrake2:1
-#, c-format
-msgid "/Autodetect _jazz drives"
-msgstr "/_Jaz meghajtók automatikus felderítése"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -1100,11 +1120,6 @@ msgstr "\tLemezhasználat korlátozása %s MB-ra\n"
 #, c-format
 msgid "512 kB"
 msgstr "512 KB"
-
-#: ../../standalone/net_monitor:1
-#, c-format
-msgid "Logs"
-msgstr "Naplók"
 
 #: ../../standalone/scannerdrake:1
 #, c-format
@@ -1615,6 +1630,11 @@ msgstr "lett"
 msgid "monthly"
 msgstr "havonta"
 
+#: ../../../move/move.pm:1
+#, fuzzy, c-format
+msgid "Retry"
+msgstr "Visszatöltés"
+
 #: ../../standalone/drakfloppy:1
 #, c-format
 msgid "Module name"
@@ -1659,6 +1679,11 @@ msgstr "Unicode használata alapértelmezésben"
 #, c-format
 msgid "the module of the GNU/Linux kernel that handles the device"
 msgstr "Az eszközt kezelõ linuxos kernelmodul"
+
+#: ../../standalone/drakclock:1
+#, fuzzy, c-format
+msgid "Is your hardware clock set to GMT?"
+msgstr "A gép órája GMT-idõt mutat"
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -1706,6 +1731,11 @@ msgstr "Nem sikerült elindítani a frissítést.\n"
 msgid "Name: "
 msgstr "Név: "
 
+#: ../../standalone/drakconnect:1
+#, c-format
+msgid "up"
+msgstr ""
+
 #: ../../Xconfig/resolution_and_depth.pm:1
 #, c-format
 msgid "16 million colors (24 bits)"
@@ -1716,7 +1746,7 @@ msgstr "16 millió szín (24 bites)"
 msgid "Allow all users"
 msgstr "Az összes felhasználó engedélyezése"
 
-#: ../../share/advertising/08-store.pl:1
+#: ../advertising/08-store.pl:1
 #, c-format
 msgid "The official MandrakeSoft Store"
 msgstr "A hivatalos MandrakeSoft-áruház"
@@ -1750,15 +1780,15 @@ msgstr "Felhasználó"
 msgid "Do new backup before restore (only for incremental backups.)"
 msgstr "Új mentés készítése visszatöltés elõtt (csak inkrementális mentéshez)"
 
-#: ../../standalone/harddrake2:1
-#, c-format
-msgid "Name"
-msgstr "Név"
-
 #: ../../raid.pm:1
 #, c-format
 msgid "mkraid failed"
 msgstr "mkraid sikertelen"
+
+#: ../../standalone/harddrake2:1
+#, c-format
+msgid "Name"
+msgstr "Név"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -1989,6 +2019,22 @@ msgstr "A kiszolgálók engedélyezése..."
 #, c-format
 msgid "Printing test page(s)..."
 msgstr "A tesztoldal(ak) nyomtatása folyik..."
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid ""
+"Transfer successful\n"
+"You may want to verify you can login to the server with:\n"
+"\n"
+"ssh -i %s %s@%s\n"
+"\n"
+"without being prompted for a password."
+msgstr ""
+"Az átvitel sikeres volt.\n"
+"A következõ paranccsal ellenõrizheti, hogy be tud-e jelentkezni a\n"
+"kiszolgálóra anélkül, hogy jelszót kérne a gép:\n"
+"\n"
+"ssh -i %s %s@%s"
 
 #: ../../fsedit.pm:1
 #, c-format
@@ -3008,6 +3054,11 @@ msgstr "A meghajtó speciális képességei (írási képesség és/vagy DVD-támogatás)"
 msgid "Can't add a partition to _formatted_ RAID md%d"
 msgstr "Nem lehet partíciót felvenni a _formázott_ RAID md%d eszközön"
 
+#: ../../standalone/drakclock:1
+#, fuzzy, c-format
+msgid "Network Time Protocol"
+msgstr "Hálózati csatolófelület"
+
 #: ../../Xconfig/card.pm:1
 #, c-format
 msgid ""
@@ -3246,7 +3297,7 @@ msgstr "Palau"
 msgid "level"
 msgstr "szint"
 
-#: ../../share/advertising/13-mdkexpert_corporate.pl:1
+#: ../advertising/13-mdkexpert_corporate.pl:1
 #, c-format
 msgid ""
 "All incidents will be followed up by a single qualified MandrakeSoft "
@@ -3651,7 +3702,7 @@ msgstr ""
 msgid "Bad package"
 msgstr "Hibás csomag"
 
-#: ../../share/advertising/07-server.pl:1
+#: ../advertising/07-server.pl:1
 #, c-format
 msgid ""
 "Transform your computer into a powerful Linux server: Web server, mail, "
@@ -3928,7 +3979,7 @@ msgstr "Üdvözlet a cracker-eknek"
 msgid "Module options:"
 msgstr "A modul paraméterei:"
 
-#: ../../share/advertising/11-mnf.pl:1
+#: ../advertising/11-mnf.pl:1
 #, c-format
 msgid "Secure your networks with the Multi Network Firewall"
 msgstr "Tegye biztonságossá a hálózatait a Multi Network Firewall segítségével"
@@ -4009,6 +4060,11 @@ msgstr "Egér"
 #, c-format
 msgid "not enough room in /boot"
 msgstr "nincs elég hely a /boot partíción"
+
+#: ../../install_steps_gtk.pm:1
+#, c-format
+msgid "trying to promote %s"
+msgstr ""
 
 #: ../../lang.pm:1
 #, c-format
@@ -4163,6 +4219,11 @@ msgstr ""
 msgid "Saudi Arabia"
 msgstr "Szaúd-Arábia"
 
+#: ../../services.pm:1
+#, c-format
+msgid "Internet"
+msgstr "Internet"
+
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid "Continue anyway?"
@@ -4183,11 +4244,6 @@ msgstr ""
 #, c-format
 msgid "Printer"
 msgstr "Nyomtató"
-
-#: ../../services.pm:1
-#, c-format
-msgid "Internet"
-msgstr "Internet"
 
 #: ../../standalone/service_harddrake:1
 #, c-format
@@ -4266,6 +4322,11 @@ msgstr "A csatolási pontoknak betûkbõl és számokból kell állni"
 #, c-format
 msgid "Restarting printing system..."
 msgstr "A nyomtatási rendszer újraindítása..."
+
+#: ../../../move/tree/mdk_totem:1
+#, c-format
+msgid "You can only run with no CDROM support"
+msgstr ""
 
 #: ../../modules/interactive.pm:1
 #, c-format
@@ -4504,15 +4565,15 @@ msgstr "ISA / PCMCIA"
 msgid "About"
 msgstr "Névjegy"
 
-#: ../../network/network.pm:1
-#, c-format
-msgid "Proxies configuration"
-msgstr "Proxy-beállítások"
-
 #: ../../mouse.pm:1
 #, c-format
 msgid "GlidePoint"
 msgstr "GlidePoint"
+
+#: ../../network/network.pm:1
+#, c-format
+msgid "Proxies configuration"
+msgstr "Proxy-beállítások"
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -4665,6 +4726,11 @@ msgstr "A csatolási pontoknak /-rel kell kezdõdni"
 msgid "Choose your CD/DVD device"
 msgstr "Adja meg a CD/DVD eszközt"
 
+#: ../../network/drakfirewall.pm:1
+#, fuzzy, c-format
+msgid "CUPS server"
+msgstr "DNS-kiszolgáló"
+
 #: ../../standalone/logdrake:1
 #, c-format
 msgid "Postfix Mail Server"
@@ -4680,7 +4746,7 @@ msgstr "Kilépés mentés nélkül"
 msgid "Yemen"
 msgstr "Jemen"
 
-#: ../../share/advertising/11-mnf.pl:1
+#: ../advertising/11-mnf.pl:1
 #, c-format
 msgid "This product is available on the MandrakeStore Web site."
 msgstr "A termék a MandrakeStore weblapon érhetõ el"
@@ -4689,6 +4755,31 @@ msgstr "A termék a MandrakeStore weblapon érhetõ el"
 #, c-format
 msgid "=> There are many things to choose from (%s).\n"
 msgstr "=> Sok választási lehetõség van (%s).\n"
+
+#: ../../standalone/drakclock:1
+#, c-format
+msgid "GMT - DrakClock"
+msgstr ""
+
+#: ../../../move/move.pm:1
+#, c-format
+msgid ""
+"An error occurred:\n"
+"\n"
+"\n"
+"%s\n"
+"\n"
+"This may come from corrupted system configuration files\n"
+"on the USB key, in this case removing them and then\n"
+"rebooting Mandrake Move would fix the problem. To do\n"
+"so, click on the corresponding button.\n"
+"\n"
+"\n"
+"You may also want to reboot and remove the USB key, or\n"
+"examine its contents under another OS, or even have\n"
+"a look at log files in console #3 and #4 to try to\n"
+"guess what's happening."
+msgstr ""
 
 #: ../../steps.pm:1
 #, c-format
@@ -4932,6 +5023,11 @@ msgstr "UserDrake"
 #, c-format
 msgid "Which partition do you want to use for Linux4Win?"
 msgstr "Melyik partícióra szeretné a Linux4Win-t telepíteni?"
+
+#: ../../install_steps_gtk.pm:1
+#, fuzzy, c-format
+msgid "due to missing %s"
+msgstr "nincs \"kdesu\""
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -5496,7 +5592,7 @@ msgstr ""
 msgid "Started on boot"
 msgstr "Automatikus indítás"
 
-#: ../../share/advertising/12-mdkexpert.pl:1
+#: ../advertising/12-mdkexpert.pl:1
 #, c-format
 msgid ""
 "Join the MandrakeSoft support teams and the Linux Community online to share "
@@ -5836,11 +5932,6 @@ msgid ""
 msgstr ""
 "Téma megjelenítése\n"
 "a konzolon"
-
-#: ../../standalone/net_monitor:1
-#, c-format
-msgid "Statistics"
-msgstr "Statisztika"
 
 #: ../../printer/cups.pm:1
 #, c-format
@@ -6730,7 +6821,7 @@ msgstr ""
 "Elmenti és visszaállítja a rendszer entrópia-tárolóját, így jobb\n"
 "véletlenszámokat lehet generálni."
 
-#: ../../share/advertising/07-server.pl:1
+#: ../advertising/07-server.pl:1
 #, c-format
 msgid "Turn your computer into a reliable server"
 msgstr "Alakítsa számítógépét egy megbízható kiszolgálóvá"
@@ -6747,6 +6838,11 @@ msgstr "Ellenõrzés, hogy létezik-e üres jelszó a /etc/shadow fájlban"
 msgid " (driver %s)"
 msgstr " (meghajtó: %s)"
 
+#: ../../services.pm:1
+#, c-format
+msgid "Start when requested"
+msgstr "Indítás kérésre"
+
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid ""
@@ -6760,11 +6856,6 @@ msgstr ""
 #, c-format
 msgid "I don't know"
 msgstr "Nem tudom"
-
-#: ../../services.pm:1
-#, c-format
-msgid "Start when requested"
-msgstr "Indítás kérésre"
 
 #: ../../printer/main.pm:1
 #, c-format
@@ -6993,6 +7084,11 @@ msgstr ""
 "A PrinterDrake-et a Mandrake Vezérlõközpont \"Hardver\" részében indíthatja "
 "el."
 
+#: ../../../move/move.pm:1
+#, fuzzy, c-format
+msgid "Key isn't writable"
+msgstr "Az XawTV program nincsen telepítve."
+
 #: ../../lang.pm:1
 #, c-format
 msgid "Bangladesh"
@@ -7040,15 +7136,15 @@ msgstr ""
 msgid "Set the root umask."
 msgstr "A rendszergazdához tartozó umask-érték beállítása"
 
-#: ../../network/modem.pm:1 ../../standalone/drakconnect:1
-#, c-format
-msgid "Script-based"
-msgstr "Szkript-alapú"
-
 #: ../../install_any.pm:1 ../../partition_table.pm:1
 #, c-format
 msgid "Error reading file %s"
 msgstr "Hiba a(z) %s fájl olvasása közben"
+
+#: ../../network/modem.pm:1 ../../standalone/drakconnect:1
+#, c-format
+msgid "Script-based"
+msgstr "Szkript-alapú"
 
 #: ../../harddrake/v4l.pm:1
 #, c-format
@@ -7132,23 +7228,6 @@ msgstr ""
 #, c-format
 msgid "Domain Authentication Required"
 msgstr "Tartományi azonosítás szükséges"
-
-#: ../../standalone/drakTermServ:1
-#, c-format
-msgid ""
-"\n"
-"\n"
-" Thanks:\n"
-"\t- LTSP Project http://www.ltsp.org\n"
-"\t- Michael Brown <mbrown\\@fensystems.co.uk>\n"
-"\n"
-msgstr ""
-"\n"
-"\n"
-" Köszönetnyilvánítás:\n"
-"\t- LTSP Project http://www.ltsp.org\n"
-"\t- Michael Brown <mbrown\\@fensystems.co.uk>\n"
-"\n"
 
 #: ../../security/level.pm:1
 #, c-format
@@ -7899,15 +7978,15 @@ msgstr "Yaboot"
 msgid "Logitech CC Series with Wheel emulation"
 msgstr "Logitech CC Series egérgörgõ-emulációval"
 
-#: ../../standalone/drakboot:1
-#, c-format
-msgid "Splash selection"
-msgstr "Indítási kép választása"
-
 #: ../../partition_table.pm:1
 #, c-format
 msgid "Extended partition not supported on this platform"
 msgstr "A kiterjesztett (extended) partíció nem támogatott ezen a platformon"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Splash selection"
+msgstr "Indítási kép választása"
 
 #: ../../network/isdn.pm:1
 #, c-format
@@ -7968,6 +8047,11 @@ msgstr ""
 msgid "Printer default settings"
 msgstr "Alapértelmezett nyomtatóbeállítások"
 
+#: ../../mouse.pm:1
+#, c-format
+msgid "Generic PS2 Wheel Mouse"
+msgstr "Általános PS/2-es görgõs egér"
+
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid ""
@@ -7978,11 +8062,6 @@ msgstr ""
 "A processzor CR0 regiszterében levõ WP jelzõ memórialap-szintû írásvédelmet "
 "állít be - ezzel megakadályozható, hogy a kernel ellenõrizetlenül "
 "hozzáférjen a felhasználói memóriához (ez tulajdonképpen hibavédelmet jelent)"
-
-#: ../../mouse.pm:1
-#, c-format
-msgid "Generic PS2 Wheel Mouse"
-msgstr "Általános PS/2-es görgõs egér"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -8152,6 +8231,11 @@ msgstr "koreai billentyûzet"
 msgid "Not connected"
 msgstr "Nincs csatlakozva"
 
+#: ../../standalone/net_monitor:1
+#, fuzzy, c-format
+msgid "No internet connection configured"
+msgstr "Internetkapcsolat beállítása"
+
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Greek"
@@ -8166,22 +8250,6 @@ msgstr "Saint Kitts és Nevis"
 #, c-format
 msgid "Generic 3 Button Mouse with Wheel emulation"
 msgstr "Általános 3 gombos egér görgõemulációval"
-
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid ""
-"Transfer successful\n"
-"You may want to verify you can login to the server with:\n"
-"\n"
-"ssh -i %s %s\\@%s\n"
-"\n"
-"without being prompted for a password."
-msgstr ""
-"Az átvitel sikeres volt.\n"
-"A következõ paranccsal ellenõrizheti, hogy be tud-e jelentkezni a\n"
-"kiszolgálóra anélkül, hogy jelszót kérne a gép:\n"
-"\n"
-"ssh -i %s %s\\@%s"
 
 #: ../../any.pm:1
 #, c-format
@@ -8417,7 +8485,7 @@ msgstr ""
 "Kattintson az \"Átvitel\" gombra annak felülírásához.\n"
 "Esetleg adjon meg egy másik nevet vagy hagyja ki a nyomtatót."
 
-#: ../../share/advertising/12-mdkexpert.pl:1
+#: ../advertising/12-mdkexpert.pl:1
 #, c-format
 msgid ""
 "Find the solutions of your problems via MandrakeSoft's online support "
@@ -8484,6 +8552,22 @@ msgstr "Kirgizisztán"
 #, c-format
 msgid "Multi-function device on USB"
 msgstr "Többfunkciós eszköz USB-n"
+
+#: ../../../move/move.pm:1
+#, c-format
+msgid ""
+"We didn't detect any USB key on your system. If you\n"
+"plug in an USB key now, Mandrake Move will have the ability\n"
+"to transparently save the data in your home directory and\n"
+"system wide configuration, for next boot on this computer\n"
+"or another one. Note: if you plug in a key now, wait several\n"
+"seconds before detecting again.\n"
+"\n"
+"\n"
+"You may also proceed without an USB key - you'll still be\n"
+"able to use Mandrake Move as a normal live Mandrake\n"
+"Operating System."
+msgstr ""
 
 #: ../../help.pm:1
 #, c-format
@@ -8580,15 +8664,15 @@ msgstr "'Sticky' bit"
 msgid "Other Media"
 msgstr "Egyéb médium"
 
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "Backup system files"
-msgstr "Rendszerfájlok mentése"
-
 #: ../../mouse.pm:1
 #, c-format
 msgid "Logitech MouseMan+"
 msgstr "Logitech MouseMan+"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "Backup system files"
+msgstr "Rendszerfájlok mentése"
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -8652,6 +8736,11 @@ msgstr "Rendszerbeállítások"
 msgid "Please choose your type of mouse."
 msgstr "Adja meg az egér típusát."
 
+#: ../../services.pm:1
+#, c-format
+msgid "running"
+msgstr "fut"
+
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "class of hardware device"
@@ -8670,11 +8759,6 @@ msgstr ""
 #, c-format
 msgid "United Kingdom"
 msgstr "Egyesült Királyság"
-
-#: ../../services.pm:1
-#, c-format
-msgid "running"
-msgstr "fut"
 
 #: ../../lang.pm:1
 #, c-format
@@ -8727,7 +8811,7 @@ msgstr "Szenegál"
 msgid "Command line"
 msgstr "Parancs"
 
-#: ../../share/advertising/08-store.pl:1
+#: ../advertising/08-store.pl:1
 #, c-format
 msgid ""
 "Our full range of Linux solutions, as well as special offers on products and "
@@ -8789,6 +8873,17 @@ msgstr "Lapozóterület (swap)"
 #, c-format
 msgid "Custom settings"
 msgstr "Egyéni beállítások"
+
+#: ../../../move/move.pm:1
+#, c-format
+msgid ""
+"The USB key seems to have write protection enabled, but we can't safely\n"
+"unplug it now.\n"
+"\n"
+"\n"
+"Click the button to reboot the machine, unplug it, remove write protection,\n"
+"plug the key again, and launch Mandrake Move again."
+msgstr ""
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -8901,7 +8996,7 @@ msgstr ""
 msgid "Photo memory card access on your HP multi-function device"
 msgstr "Fotókártya-elérés a HP többfunkciós eszközön"
 
-#: ../../share/advertising/09-mdksecure.pl:1
+#: ../advertising/09-mdksecure.pl:1
 #, c-format
 msgid ""
 "Enhance your computer performance with the help of a selection of partners "
@@ -9024,6 +9119,11 @@ msgstr ""
 #, c-format
 msgid "Exit install"
 msgstr "Kilépés a telepítõbõl"
+
+#: ../../../move/move.pm:1
+#, c-format
+msgid "Need a key to save your data"
+msgstr ""
 
 #: ../../standalone/drakgw:1
 #, c-format
@@ -9212,11 +9312,6 @@ msgstr "orosz (fonetikus)"
 msgid "dhcpd Config..."
 msgstr "dhcpd beállítása..."
 
-#: ../../standalone/drakgw:1
-#, c-format
-msgid "The setup has already been done, but it's currently disabled."
-msgstr "A megosztás már megtörtént, de a kapcsolat használata le van tiltva."
-
 #: ../../any.pm:1
 #, c-format
 msgid "LILO/grub Installation"
@@ -9399,6 +9494,11 @@ msgstr ""
 msgid "Choose an X server"
 msgstr "Válasszon egy X-kiszolgálót"
 
+#: ../../../move/tree/mdk_totem:1
+#, c-format
+msgid "Copying to memory to allow removing the CDROM"
+msgstr ""
+
 #: ../../install_interactive.pm:1
 #, c-format
 msgid "Swap partition size in MB: "
@@ -9448,7 +9548,7 @@ msgstr "Az automatikus lépések beállításai"
 msgid "Barbados"
 msgstr "Barbados"
 
-#: ../../share/advertising/02-community.pl:1
+#: ../advertising/02-community.pl:1
 #, c-format
 msgid ""
 "Want to know more and to contribute to the Open Source community? Get "
@@ -9614,15 +9714,6 @@ msgstr "A CPU algenerációja"
 msgid "First Time Wizard"
 msgstr "Mandrake Varázsló"
 
-#: ../../install_steps.pm:1
-#, c-format
-msgid ""
-"An error occurred, but I don't know how to handle it nicely.\n"
-"Continue at your own risk."
-msgstr ""
-"Hiba történt, de nem lett megfelelõen lekezelve.\n"
-"Csak akkor lépjen tovább, ha biztos abban, hogy ez nem fog gondot okozni."
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Taiwan"
@@ -9637,6 +9728,15 @@ msgstr "Pakisztán"
 #, c-format
 msgid "please wait, parsing file: %s"
 msgstr "a fájl elemzése folyamatban: %s"
+
+#: ../../install_steps.pm:1 ../../../move/move.pm:1
+#, c-format
+msgid ""
+"An error occurred, but I don't know how to handle it nicely.\n"
+"Continue at your own risk."
+msgstr ""
+"Hiba történt, de nem lett megfelelõen lekezelve.\n"
+"Csak akkor lépjen tovább, ha biztos abban, hogy ez nem fog gondot okozni."
 
 #: ../../install_steps_gtk.pm:1
 #, c-format
@@ -9841,6 +9941,11 @@ msgstr ""
 "csomagkijelölést vagy a jelenlegi kijelölést szeretné elmenteni.\n"
 "A formátum ugyanaz, mint az automatikus telepítõfloppyknál."
 
+#: ../../../move/tree/mdk_totem:1
+#, fuzzy, c-format
+msgid "No CDROM support"
+msgstr "Rádiótámogatás:"
+
 #: ../../standalone/drakxtv:1
 #, c-format
 msgid "China (broadcast)"
@@ -9882,7 +9987,7 @@ msgstr ""
 "A(z) %s modul betöltése nem sikerült.\n"
 "Megpróbálja a betöltést más paraméterekkel?"
 
-#: ../../share/advertising/01-thanks.pl:1
+#: ../advertising/01-thanks.pl:1
 #, c-format
 msgid "Welcome to the Open Source world."
 msgstr "Üdvözöljük a Nyílt Forráskód világában"
@@ -10113,6 +10218,11 @@ msgstr "Egyéb portok"
 msgid "number of capture buffers for mmap'ed capture"
 msgstr "Felvételi pufferek száma mmap-es felvétel esetére"
 
+#: ../../network/adsl.pm:1
+#, fuzzy, c-format
+msgid " - detected"
+msgstr "felismerve"
+
 #: ../../harddrake/data.pm:1
 #, c-format
 msgid "SMBus controllers"
@@ -10215,6 +10325,11 @@ msgstr "Újraindítás konzolfelhasználók által"
 msgid "Restore"
 msgstr "Visszatöltés"
 
+#: ../../standalone/drakclock:1
+#, fuzzy, c-format
+msgid "Server:"
+msgstr "Kiszolgáló: "
+
 # prom. üzemmód: az eszköz nem csak a neki szóló csomagokat teszi be
 #  a pufferébe, hanem a más eszközöknek szólókat is
 #: ../../security/help.pm:1
@@ -10228,6 +10343,11 @@ msgstr ""
 #, c-format
 msgid "Looking for available packages..."
 msgstr "A rendelkezésre álló csomagok keresése..."
+
+#: ../../../move/move.pm:1
+#, fuzzy, c-format
+msgid "Please wait, setting up system configuration files on USB key..."
+msgstr "Biztonsági szint beállítása..."
 
 #: ../../any.pm:1
 #, c-format
@@ -10351,15 +10471,15 @@ msgstr ""
 "A CPU órajele MHz-ben (Megahertz - más tulajdonságokkal együtt meghatározza "
 "a CPU által másodpercenként végrehajtott utasítások számát)"
 
-#: ../../standalone/printerdrake:1
-#, c-format
-msgid "Mandrake Linux Printer Management Tool"
-msgstr "Mandrake Linux nyomtatókezelõ eszköz"
-
 #: ../../pkgs.pm:1
 #, c-format
 msgid "important"
 msgstr "fontos"
+
+#: ../../standalone/printerdrake:1
+#, c-format
+msgid "Mandrake Linux Printer Management Tool"
+msgstr "Mandrake Linux nyomtatókezelõ eszköz"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -10416,6 +10536,11 @@ msgstr "Felhasználók"
 #, c-format
 msgid "Preparing bootloader..."
 msgstr "Rendszerbetöltõ elõkészítése..."
+
+#: ../../../move/move.pm:1
+#, c-format
+msgid "Enter your user information, password will be used for screensaver"
+msgstr ""
 
 #: ../../network/network.pm:1
 #, c-format
@@ -10870,15 +10995,15 @@ msgstr "A fájl tartalma"
 msgid "Authentication LDAP"
 msgstr "LDAP-alapú azonosítás"
 
+#: ../../install_steps_gtk.pm:1
+#, c-format
+msgid "in order to keep %s"
+msgstr ""
+
 #: ../../harddrake/sound.pm:1
 #, c-format
 msgid "Let me pick any driver"
 msgstr "Szeretnék meghajtót választani"
-
-#: ../../standalone/net_monitor:1
-#, c-format
-msgid "Profile "
-msgstr "Profil "
 
 #: ../../standalone/net_monitor:1
 #, c-format
@@ -10979,9 +11104,9 @@ msgstr "A kernelverzió küldése"
 #: ../../standalone/drakautoinst:1 ../../standalone/drakbackup:1
 #: ../../standalone/drakboot:1 ../../standalone/drakconnect:1
 #: ../../standalone/drakfloppy:1 ../../standalone/drakfont:1
-#: ../../standalone/drakgw:1 ../../standalone/drakperm:1
-#: ../../standalone/draksec:1 ../../standalone/logdrake:1
-#: ../../standalone/mousedrake:1 ../../standalone/net_monitor:1
+#: ../../standalone/drakperm:1 ../../standalone/draksec:1
+#: ../../standalone/logdrake:1 ../../standalone/mousedrake:1
+#: ../../standalone/net_monitor:1
 #, c-format
 msgid "Cancel"
 msgstr "Mégsem"
@@ -11134,19 +11259,6 @@ msgstr "olasz"
 msgid "Basic"
 msgstr "Alapvetõ"
 
-#: ../../standalone/drakTermServ:1
-#, c-format
-msgid ""
-"\n"
-" Copyright (C) 2002 by MandrakeSoft \n"
-"\tStew Benedict sbenedict\\@mandrakesoft.com\n"
-"\n"
-msgstr ""
-"\n"
-" Copyright (C) 2002, MandrakeSoft \n"
-"\tStew Benedict sbenedict\\@mandrakesoft.com\n"
-"\n"
-
 #: ../../install_messages.pm:1
 #, c-format
 msgid "http://www.mandrakelinux.com/en/92errata.php3"
@@ -11167,10 +11279,10 @@ msgstr "PDQ"
 msgid "Card IO"
 msgstr "Kártya IO"
 
-#: ../../standalone/drakperm:1
-#, c-format
-msgid "when checked, owner and group won't be changed"
-msgstr "Bejelölés esetén a tulajdonos és a csoport nem lesz módosítva"
+#: ../../network/drakfirewall.pm:1
+#, fuzzy, c-format
+msgid "Samba server"
+msgstr "Samba-kiszolgáló"
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -11264,6 +11376,11 @@ msgstr ""
 msgid "access to compilation tools"
 msgstr "hozzáférés a fordítási eszközökhöz"
 
+#: ../../standalone/net_monitor:1
+#, fuzzy, c-format
+msgid "Global statistics"
+msgstr "Statisztika"
+
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "Please select data to restore..."
@@ -11283,6 +11400,11 @@ msgstr ""
 #, c-format
 msgid "Standard test page"
 msgstr "Normál tesztoldal"
+
+#: ../../standalone/drakclock:1
+#, fuzzy, c-format
+msgid "Time Zone"
+msgstr "Idõzóna"
 
 #: ../../diskdrake/hd_gtk.pm:1 ../../diskdrake/interactive.pm:1
 #, c-format
@@ -11406,6 +11528,19 @@ msgstr ""
 "vagy csak nyomja le az Enter billentyût a továbblépéshez.\n"
 "Melyiket választja? "
 
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"\n"
+" Copyright (C) 2002 by MandrakeSoft \n"
+"\tStew Benedict sbenedict@mandrakesoft.com\n"
+"\n"
+msgstr ""
+"\n"
+" Copyright (C) 2002, MandrakeSoft \n"
+"\tStew Benedict sbenedict@mandrakesoft.com\n"
+"\n"
+
 #: ../../standalone/draksplash:1
 #, c-format
 msgid "Save theme"
@@ -11431,15 +11566,15 @@ msgstr "Hálózatbeállító varázsló"
 msgid "Removable media automounting"
 msgstr "Cserélhetõ lemez automatikus csatolása"
 
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "Enter the directory to save:"
-msgstr "Adja meg a könyvtárt, ahova menteni kell:"
-
 #: ../../services.pm:1
 #, c-format
 msgid "Printing"
 msgstr "Nyomtatás"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "Enter the directory to save:"
+msgstr "Adja meg a könyvtárt, ahova menteni kell:"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -11566,7 +11701,7 @@ msgstr "Kensington Thinking Mouse"
 msgid "Configuration of a remote printer"
 msgstr "Távoli nyomtató beállítása"
 
-#: ../../share/advertising/13-mdkexpert_corporate.pl:1
+#: ../advertising/13-mdkexpert_corporate.pl:1
 #, c-format
 msgid "An online platform to respond to enterprise support needs."
 msgstr "Webes támogatási rendszer vállalati igényekhez"
@@ -11728,15 +11863,22 @@ msgstr ""
 msgid "Configure Local Area Network..."
 msgstr "A helyi hálózat beállítása..."
 
-#: ../../security/l10n.pm:1
+#: ../../../move/move.pm:1
 #, c-format
-msgid "Verify checksum of the suid/sgid files"
-msgstr "Az SUID/SGID fájlok ellenõrzõösszegének ellenõrzése"
+msgid ""
+"The USB key seems to have write protection enabled. Please\n"
+"unplug it, remove write protection, and then plug it again."
+msgstr ""
 
 #: ../../services.pm:1
 #, c-format
 msgid "Launch the sound system on your machine"
 msgstr "A gép hangrendszerének elindítása"
+
+#: ../../security/l10n.pm:1
+#, c-format
+msgid "Verify checksum of the suid/sgid files"
+msgstr "Az SUID/SGID fájlok ellenõrzõösszegének ellenõrzése"
 
 #: ../../security/l10n.pm:1
 #, c-format
@@ -12069,6 +12211,11 @@ msgstr ""
 msgid "Loading from floppy"
 msgstr "Betöltés floppyról"
 
+#: ../../standalone/drakclock:1
+#, c-format
+msgid "Timezone - DrakClock"
+msgstr ""
+
 #: ../../security/help.pm:1
 #, c-format
 msgid "Enable/Disable the logging of IPv4 strange packets."
@@ -12225,6 +12372,11 @@ msgstr ""
 "A rendszer beállításával kapcsolatban a Mandrake Linux hivatalos\n"
 "felhasználói kézikönyvében talál további információkat."
 
+#: ../../standalone/drakclock:1
+#, fuzzy, c-format
+msgid "Enable Network Time Protocol"
+msgstr "Visszatöltés a(z) %s hálózati protokollon keresztül"
+
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "paranoid"
@@ -12317,7 +12469,7 @@ msgstr "hozzáférés a hálózati eszközökhöz"
 msgid "Firmware-Upload for HP LaserJet 1000"
 msgstr "Firmware-feltöltés a HP LaserJet 1000-hez"
 
-#: ../../share/advertising/03-software.pl:1
+#: ../advertising/03-software.pl:1
 #, c-format
 msgid ""
 "And, of course, push multimedia to its limits with the very latest software "
@@ -12387,15 +12539,15 @@ msgstr "Beállítási protokoll"
 msgid "LVM-disks %s\n"
 msgstr "LVM-lemezek: %s\n"
 
-#: ../../diskdrake/interactive.pm:1
-#, c-format
-msgid "The package %s is needed. Install it?"
-msgstr "Szükség van a(z) %s csomagra. Szeretné telepíteni?"
-
 #: ../../services.pm:1
 #, c-format
 msgid "On boot"
 msgstr "Rendszerindításkor"
+
+#: ../../diskdrake/interactive.pm:1
+#, c-format
+msgid "The package %s is needed. Install it?"
+msgstr "Szükség van a(z) %s csomagra. Szeretné telepíteni?"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -12411,6 +12563,11 @@ msgstr "Vatikán"
 #, c-format
 msgid "Please make a backup of your data first"
 msgstr "Elõször készítsen biztonsági mentést az adatokról"
+
+#: ../../harddrake/data.pm:1
+#, c-format
+msgid "ADSL adapters"
+msgstr ""
 
 #: ../../install_interactive.pm:1
 #, c-format
@@ -12437,7 +12594,7 @@ msgstr "Firmware szükséges"
 msgid "Remove List"
 msgstr "Lista eltávolítása"
 
-#: ../../share/advertising/05-desktop.pl:1
+#: ../advertising/05-desktop.pl:1
 #, c-format
 msgid "A customizable environment"
 msgstr "Egy testreszabható környezet"
@@ -12686,6 +12843,13 @@ msgstr ""
 #, c-format
 msgid "Firmware copy succeeded"
 msgstr "A firmware másolása megtörtént"
+
+#: ../../../move/tree/mdk_totem:1
+#, c-format
+msgid ""
+"You can't use another CDROM when the following programs are running: \n"
+"%s"
+msgstr ""
 
 #: ../../security/help.pm:1
 #, c-format
@@ -13176,6 +13340,11 @@ msgstr ""
 "bizonyos nyomtatási feladatra vonatkozóan. Egyszerûen adja hozzá a kívánt "
 "paramétereket a parancshoz, például: \"%s <fájl>\". "
 
+#: ../../standalone/drakclock:1
+#, fuzzy, c-format
+msgid "DrakClock"
+msgstr "DrakBackup"
+
 #: ../../modules/interactive.pm:1
 #, c-format
 msgid ""
@@ -13206,21 +13375,6 @@ msgid ""
 msgstr ""
 "\n"
 "- Szolgáltatás (%s), ezzel:\n"
-
-#: ../../standalone/drakgw:1
-#, c-format
-msgid ""
-"Welcome to the Internet Connection Sharing utility!\n"
-"\n"
-"%s\n"
-"\n"
-"Click on Configure to launch the setup wizard."
-msgstr ""
-"Üdvözöljük az internetkapcsolat-megosztás beállítóprogramjában!\n"
-"\n"
-"%s\n"
-"\n"
-"Kattintson a Beállítás gombra a beállításvarázsló elindításához."
 
 #: ../../lang.pm:1
 #, c-format
@@ -13407,6 +13561,11 @@ msgstr ""
 msgid "Christmas Island"
 msgstr "Christmas-sziget"
 
+#: ../../mouse.pm:1
+#, fuzzy, c-format
+msgid "Automatic"
+msgstr "Automatikus IP-cím"
+
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Installation of bootloader failed. The following error occured:"
@@ -13508,11 +13667,6 @@ msgstr "Átvitel most"
 #, c-format
 msgid "Set root password and network authentication methods"
 msgstr "A rendszergazdai jelszó és a hálózati azonosítási módszerek beállítása"
-
-#: ../../standalone/drakgw:1
-#, c-format
-msgid "Internet Connection Sharing configuration"
-msgstr "Az internetkapcsolat megosztásának beállítása"
 
 #: ../../ugtk2.pm:1
 #, c-format
@@ -13797,6 +13951,11 @@ msgstr ""
 msgid "LILO with text menu"
 msgstr "LILO, szöveges menüvel"
 
+#: ../../standalone/net_monitor:1
+#, c-format
+msgid "instantaneous"
+msgstr ""
+
 #: ../../network/drakfirewall.pm:1
 #, c-format
 msgid "Everything (no firewall)"
@@ -13996,6 +14155,11 @@ msgstr "Adjon meg egy felhasználónevet"
 msgid "Enable CD Boot?"
 msgstr "CD-rõl történhessen rendszerindítás?"
 
+#: ../../../move/move.pm:1
+#, c-format
+msgid "Simply reboot"
+msgstr ""
+
 #: ../../interactive/stdio.pm:1
 #, c-format
 msgid " enter `void' for void entry"
@@ -14102,15 +14266,15 @@ msgstr ""
 "levõt válasszon. Ez a funkció feltelepít az Ön gépére egy idõkiszolgálót,\n"
 "amelyet a helyi hálózat többi gépe is használhat."
 
-#: ../../install_steps_interactive.pm:1
-#, c-format
-msgid "Which is your timezone?"
-msgstr "Melyik idõzónát választja?"
-
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "Can't create log file!"
 msgstr "Naplófájl nem hozható létre."
+
+#: ../../install_steps_interactive.pm:1 ../../standalone/drakclock:1
+#, c-format
+msgid "Which is your timezone?"
+msgstr "Melyik idõzónát választja?"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -14162,6 +14326,11 @@ msgstr "Mozambik"
 msgid "Icon"
 msgstr "Ikon"
 
+#: ../../../move/tree/mdk_totem:1
+#, fuzzy, c-format
+msgid "Kill those programs"
+msgstr "hozzáférés az X-es programokhoz"
+
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "Please choose what you want to backup"
@@ -14197,7 +14366,7 @@ msgstr "Szabály felvétele"
 msgid "Chunk size %s\n"
 msgstr "A szelet mérete: %s\n"
 
-#: ../../share/advertising/02-community.pl:1
+#: ../advertising/02-community.pl:1
 #, c-format
 msgid "Build the future of Linux!"
 msgstr "Építse fel a Linux jövõjét!"
@@ -14330,7 +14499,7 @@ msgstr ""
 "beállítani a grafikus üzemmódot, akkor a(z) \"%s\" lehetõséget érdemes "
 "választani."
 
-#: ../../share/advertising/13-mdkexpert_corporate.pl:1
+#: ../advertising/13-mdkexpert_corporate.pl:1
 #, c-format
 msgid "MandrakeExpert Corporate"
 msgstr "Mandrake-szakértõ - vállalati"
@@ -14372,6 +14541,11 @@ msgid ""
 "After changing type of partition %s, all data on this partition will be lost"
 msgstr ""
 "A(z) %s partíció típusának módosítása után a partíción levõ adatok elvesznek"
+
+#: ../../harddrake/data.pm:1
+#, fuzzy, c-format
+msgid "ISDN adapters"
+msgstr "ISDN-kártya"
 
 #: ../../common.pm:1
 #, c-format
@@ -14713,6 +14887,11 @@ msgstr "A helyi lapolvasók megosztása"
 msgid "Plug'n Play probing failed. Please select the correct monitor"
 msgstr "A Plug'n Play-felderítés sikertelen. Válasszon ki egy monitort."
 
+#: ../../../move/move.pm:1
+#, c-format
+msgid "Detect again USB key"
+msgstr ""
+
 #: ../../services.pm:1
 #, c-format
 msgid "Services and deamons"
@@ -14754,7 +14933,7 @@ msgstr "A chkconfig figyelembe veszi-e az msec szabályait"
 msgid "Slovakian (QWERTZ)"
 msgstr "szlovák (QWERTZ)"
 
-#: ../../share/advertising/06-development.pl:1
+#: ../advertising/06-development.pl:1
 #, c-format
 msgid ""
 "To modify and to create in different languages such as Perl, Python, C and C+"
@@ -14821,6 +15000,11 @@ msgstr "Algéria"
 #, c-format
 msgid "Restore Via Network"
 msgstr "Visszatöltés hálózaton keresztül"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "Use tar and bzip2 (rather than tar and gzip)"
+msgstr ""
 
 #: ../../any.pm:1
 #, c-format
@@ -14956,7 +15140,7 @@ msgstr "DVD-ROM"
 msgid "Georgian (\"Latin\" layout)"
 msgstr "grúz (\"latin\" kiosztás)"
 
-#: ../../share/advertising/09-mdksecure.pl:1
+#: ../advertising/09-mdksecure.pl:1
 #, c-format
 msgid "Get the best items with Mandrake Linux Strategic partners"
 msgstr ""
@@ -15064,7 +15248,7 @@ msgstr "Automatikus bejelentkezés"
 msgid "Domain Admin Password"
 msgstr "Tartományadminisztrátor jelszava"
 
-#: ../../share/advertising/05-desktop.pl:1
+#: ../advertising/05-desktop.pl:1
 #, c-format
 msgid ""
 "Perfectly adapt your computer to your needs thanks to the 11 available "
@@ -15209,6 +15393,11 @@ msgstr "utopia 25"
 msgid "Pipe job into a command"
 msgstr "A feladat kimenetének átirányítása egy parancsba"
 
+#: ../../../move/move.pm:1
+#, fuzzy, c-format
+msgid "Remove system config files"
+msgstr "El szeretné távolítani a loopback fájlt?"
+
 #: ../../lang.pm:1
 #, c-format
 msgid "Cote d'Ivoire"
@@ -15220,7 +15409,8 @@ msgid "new dynamic device name generated by core kernel devfs"
 msgstr "A kernelbeli devfs által elõállított új dinamikus eszköznév"
 
 #: ../../help.pm:1 ../../install_any.pm:1 ../../interactive.pm:1
-#: ../../ugtk2.pm:1 ../../modules/interactive.pm:1 ../../standalone/drakgw:1
+#: ../../ugtk2.pm:1 ../../modules/interactive.pm:1
+#: ../../standalone/drakclock:1 ../../standalone/drakgw:1
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "Yes"
@@ -15241,11 +15431,6 @@ msgstr "A visszaállítás folyamata"
 msgid "Estonia"
 msgstr "Észtország"
 
-#: ../../standalone/scannerdrake:1
-#, c-format
-msgid "Choose the host on which the local scanners should be made available:"
-msgstr "Válassza ki, melyik gépen legyenek elérhetõk a helyi lapolvasók:"
-
 #: ../../partition_table.pm:1
 #, c-format
 msgid ""
@@ -15257,6 +15442,11 @@ msgstr ""
 "Az egyetlen megoldás az elsõdleges partíciók áthelyezése úgy, hogy\n"
 "a kiterjesztett partíciók mellé kerüljön az üres hely."
 
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "Choose the host on which the local scanners should be made available:"
+msgstr "Válassza ki, melyik gépen legyenek elérhetõk a helyi lapolvasók:"
+
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "Channel"
@@ -15267,11 +15457,6 @@ msgstr "Csatorna"
 #, c-format
 msgid "Add"
 msgstr "Hozzáadás"
-
-#: ../../standalone/drakgw:1
-#, c-format
-msgid "No Internet Connection Sharing has ever been configured."
-msgstr "Az internetkapcsolat megosztása még nem történt meg."
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -15567,7 +15752,7 @@ msgstr "Új telepítés vagy frissítés?"
 msgid "ISDN card"
 msgstr "ISDN-kártya"
 
-#: ../../share/advertising/02-community.pl:1
+#: ../advertising/02-community.pl:1
 #, c-format
 msgid ""
 "To share your own knowledge and help build Linux software, join our "
@@ -15623,6 +15808,66 @@ msgstr ""
 "\n"
 "Frissítés használata akkor javasolt, ha a számítógépen Mandrake\n"
 "Linux 8.1 vagy újabb kiadás van."
+
+#: ../../standalone/drakfont:1
+#, c-format
+msgid ""
+"\n"
+" Copyright (C) 2001-2002 by MandrakeSoft \n"
+"     DUPONT Sebastien (original version)\n"
+"     CHAUMETTE Damien <dchaumette@mandrakesoft.com>\n"
+"\n"
+" This program is free software; you can redistribute it and/or modify\n"
+" it under the terms of the GNU General Public License as published by\n"
+" the Free Software Foundation; either version 2, or (at your option)\n"
+" any later version.\n"
+"\n"
+" This program is distributed in the hope that it will be useful,\n"
+" but WITHOUT ANY WARRANTY; without even the implied warranty of\n"
+" MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n"
+" GNU General Public License for more details.\n"
+"\n"
+" You should have received a copy of the GNU General Public License\n"
+" along with this program; if not, write to the Free Software\n"
+" Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.\n"
+"\n"
+" Thanks:\n"
+"    -  pfm2afm:   \n"
+"\t by Ken Borgendale:\n"
+"\t    Convert a Windows .pfm  file to a .afm (Adobe Font Metrics)\n"
+"    -  type1inst:\n"
+"\t by James Macnicol: \n"
+"\t    type1inst generates files fonts.dir fonts.scale & Fontmap.\n"
+"    -  ttf2pt1:   \n"
+"\t  by Andrew Weeks, Frank Siegert, Thomas Henlich, Sergey Babkin  \n"
+"             Convert ttf font files to afm and pfb fonts\n"
+msgstr ""
+"\n"
+" Copyright (C) 2001-2002, MandrakeSoft\n"
+"    DUPONT Sebastien (eredeti verzió)\n"
+"    CHAUMETTE Damien <dchaumette@mandrakesoft.com>\n"
+"\n"
+" Ez a program szabad szoftver; terjeszthetõ és/vagy módosítható\n"
+" a Free Software Foundation által publikált GNU General Public\n"
+" License 2. vagy annál újabb verziója alapján.\n"
+"\n"
+" A program annak reményében kerül terjesztésre, hogy hasznosnak\n"
+" bizonyul, de GARANCIA NÉLKÜL; még a PIACKÉPESSÉG illetve\n"
+" egy BIZONYOS CÉLRA VALÓ ALKALMASSÁG sincs garantálva. További\n"
+" részletek a GNU General Public License-ben.\n"
+"\n"
+" A programmal együtt Önnek kapnia kellett egy példányt a GNU General\n"
+" Public License-bõl; ha nem így történt, írjon a következõ címre:\n"
+" Free Software Foundation, Inc., 59 Temple Place - Suite 330, Boston,\n"
+" MA 02111-1307, USA.\n"
+"\n"
+" Köszönetnyilvánítás:\n"
+"  - pfm2afm: windowsos .pfm fájl konvertálása .afm (Adobe Font Metrics)\n"
+"    formátumra; szerzõ: Ken Borgendale\n"
+"  - type1inst: fonts.dir, fonts.scale és Fontmap fájlok elõállítása;\n"
+"    szerzõ: James Macnicol\n"
+"  - ttf2pt1: TTF betûtípus konvertálása AFM/PFB betûtípusra;\n"
+"    szerzõk: Andrew Weeks, Frank Siegert, Thomas Henlich, Sergey Babkin\n"
 
 #: ../../printer/main.pm:1
 #, c-format
@@ -15693,6 +15938,11 @@ msgstr "A DHCP-címtartomány kezdete"
 msgid "Unsafe"
 msgstr "Nem biztonságos"
 
+#: ../../network/drakfirewall.pm:1
+#, fuzzy, c-format
+msgid "SSH server"
+msgstr "SSH-kiszolgáló"
+
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid ", %s sectors"
@@ -15700,7 +15950,7 @@ msgstr ", %s szektor"
 
 #: ../../help.pm:1 ../../install_any.pm:1 ../../interactive.pm:1
 #: ../../ugtk2.pm:1 ../../modules/interactive.pm:1
-#: ../../standalone/harddrake2:1
+#: ../../standalone/drakclock:1 ../../standalone/harddrake2:1
 #, c-format
 msgid "No"
 msgstr "Nem"
@@ -16275,6 +16525,11 @@ msgstr "A kijelölt gép eltávolítása"
 msgid "Network configuration"
 msgstr "Hálózatbeállítás"
 
+#: ../../standalone/harddrake2:1
+#, c-format
+msgid "/Autodetect _jaz drives"
+msgstr "/_Jaz meghajtók automatikus felderítése"
+
 #: ../../any.pm:1
 #, c-format
 msgid "No sharing"
@@ -16399,9 +16654,10 @@ msgstr ""
 #: ../../install_steps.pm:1 ../../diskdrake/dav.pm:1
 #: ../../diskdrake/hd_gtk.pm:1 ../../diskdrake/interactive.pm:1
 #: ../../diskdrake/smbnfs_gtk.pm:1 ../../interactive/http.pm:1
-#: ../../standalone/drakboot:1 ../../standalone/drakbug:1
+#: ../../standalone/drakauth:1 ../../standalone/drakboot:1
+#: ../../standalone/drakbug:1 ../../standalone/drakconnect:1
 #: ../../standalone/drakfloppy:1 ../../standalone/drakfont:1
-#: ../../standalone/draksplash:1
+#: ../../standalone/draksplash:1 ../../../move/move.pm:1
 #, c-format
 msgid "Error"
 msgstr "Hiba"
@@ -16445,6 +16701,11 @@ msgstr ""
 "A grafikus kártya lehetõvé teszi több képernyõ használatát.\n"
 "Mit szeretne tenni?"
 
+#: ../../partition_table.pm:1
+#, c-format
+msgid "mount failed: "
+msgstr "a csatolás nem sikerült: "
+
 #: ../../steps.pm:1
 #, c-format
 msgid "Configure services"
@@ -16454,11 +16715,6 @@ msgstr "Szolgáltatások beállítása"
 #, c-format
 msgid "Broadcast Address:"
 msgstr "Broadcast-cím:"
-
-#: ../../partition_table.pm:1
-#, c-format
-msgid "mount failed: "
-msgstr "a csatolás nem sikerült: "
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -16476,17 +16732,17 @@ msgstr ""
 msgid "Image"
 msgstr "Indítófájl"
 
+#: ../../services.pm:1
+#, c-format
+msgid "Remote Administration"
+msgstr "Távoli adminisztráció"
+
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Failed to add the printer \"%s\" to Star Office/OpenOffice.org/GIMP."
 msgstr ""
 "A(z) \"%s\" nyomtatót nem sikerült felvenni a StarOffice/OpenOffice.org/GIMP "
 "programba."
-
-#: ../../services.pm:1
-#, c-format
-msgid "Remote Administration"
-msgstr "Távoli adminisztráció"
 
 #: ../../modules.pm:1
 #, c-format
@@ -16545,7 +16801,7 @@ msgstr "Július"
 msgid "Prints into %s"
 msgstr "Nyomtatás ide: %s"
 
-#: ../../install_steps_interactive.pm:1
+#: ../../install_steps_interactive.pm:1 ../../../move/move.pm:1
 #, c-format
 msgid "An error occurred"
 msgstr "Hiba lépett fel"
@@ -16764,7 +17020,7 @@ msgstr ", többfunkciós eszköz"
 msgid "Laos"
 msgstr "Laosz"
 
-#: ../../share/advertising/04-configuration.pl:1
+#: ../advertising/04-configuration.pl:1
 #, c-format
 msgid ""
 "Mandrake Linux 9.2 provides you with the Mandrake Control Center, a powerful "
@@ -16948,11 +17204,6 @@ msgstr "Elõször létre kell hozni ezt: /etc/dhcpd.conf"
 msgid "Is FPU present"
 msgstr "Van-e FPU"
 
-#: ../../standalone/scannerdrake:1
-#, c-format
-msgid "There are no scanners found which are available on your system.\n"
-msgstr "Nem található elérhetõ lapolvasó a gépen.\n"
-
 #: ../../services.pm:1
 #, c-format
 msgid ""
@@ -16961,6 +17212,11 @@ msgid ""
 msgstr ""
 "Nem érhetõ el további információ\n"
 "errõl a szolgáltatásról."
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "There are no scanners found which are available on your system.\n"
+msgstr "Nem található elérhetõ lapolvasó a gépen.\n"
 
 #: ../../standalone/drakTermServ:1
 #, c-format
@@ -17001,21 +17257,6 @@ msgstr "DVD-RAM eszköz"
 #, c-format
 msgid "if set to yes, report unowned files."
 msgstr "Ha igenre van állítva: figyelmeztetés a tulajdonos nélküli fájlokra"
-
-#: ../../standalone/harddrake2:1
-#, c-format
-msgid ""
-"This is HardDrake, a Mandrake hardware configuration tool.\n"
-"<span foreground=\"royalblue3\">Version:</span> %s\n"
-"<span foreground=\"royalblue3\">Author:</span> Thierry Vignaud &lt;tvignaud"
-"\\@mandrakesoft.com&gt;\n"
-"\n"
-msgstr ""
-"HardDrake - Mandrake hardverbeállítási program.\n"
-"<span foreground=\"royalblue3\">Verzió:</span> %s\n"
-"<span foreground=\"royalblue3\">Szerzõ:</span> Thierry Vignaud &lt;tvignaud"
-"\\@mandrakesoft.com&gt;\n"
-"\n"
 
 #: ../../install_interactive.pm:1
 #, c-format
@@ -17098,10 +17339,27 @@ msgstr "Vietnam"
 msgid "/_Fields description"
 msgstr "/_Mezõleírások"
 
-#: ../../share/advertising/10-security.pl:1
+#: ../advertising/10-security.pl:1
 #, c-format
 msgid "Optimize your security by using Mandrake Linux"
 msgstr "Növelje a gép biztonságát a Mandrake Linux használatával"
+
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"\n"
+"\n"
+" Thanks:\n"
+"\t- LTSP Project http://www.ltsp.org\n"
+"\t- Michael Brown <mbrown@fensystems.co.uk>\n"
+"\n"
+msgstr ""
+"\n"
+"\n"
+" Köszönetnyilvánítás:\n"
+"\t- LTSP Project http://www.ltsp.org\n"
+"\t- Michael Brown <mbrown@fensystems.co.uk>\n"
+"\n"
 
 #: ../../install_steps_gtk.pm:1 ../../interactive.pm:1 ../../ugtk2.pm:1
 #: ../../Xconfig/resolution_and_depth.pm:1 ../../diskdrake/hd_gtk.pm:1
@@ -17208,7 +17466,7 @@ msgstr ""
 msgid "mkinitrd optional arguments"
 msgstr "Az mkinitrd opcionális argumentumai"
 
-#: ../../share/advertising/03-software.pl:1
+#: ../advertising/03-software.pl:1
 #, c-format
 msgid ""
 "Surf the Web with Mozilla or Konqueror, read your mail with Evolution or "
@@ -17404,6 +17662,11 @@ msgstr "A CUPS újraindítása..."
 #, c-format
 msgid "Printing/Scanning/Photo Cards on \"%s\""
 msgstr "Nyomtatás/lapolvasás/fotókártyák ezen: \"%s\""
+
+#: ../../../move/move.pm:1
+#, c-format
+msgid "Continue without USB key"
+msgstr ""
 
 #: ../../install_steps.pm:1
 #, c-format
@@ -17871,7 +18134,7 @@ msgstr "X Window-kapcsolatok engedélyezése"
 msgid "Hardware probing in progress"
 msgstr "Hardverfelderítés folyamatban"
 
-#: ../../standalone/drakgw:1
+#: ../../network/shorewall.pm:1 ../../standalone/drakgw:1
 #, c-format
 msgid "Net Device"
 msgstr "Hálózati eszköz"
@@ -17938,6 +18201,11 @@ msgstr ""
 "A helyes mûködéshez szükség van az ImageMagick csomagra.\n"
 "Az ImageMagick telepítéséhez kattintson az \"OK\" gombra;\n"
 "kilépéshez a \"Mégsem\" gombra."
+
+#: ../../network/drakfirewall.pm:1
+#, fuzzy, c-format
+msgid "Telnet server"
+msgstr "X-kiszolgáló"
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -18207,7 +18475,7 @@ msgstr "Rendszernapló"
 msgid "Can't create catalog!"
 msgstr "Katalógus nem hozható létre."
 
-#: ../../share/advertising/11-mnf.pl:1
+#: ../advertising/11-mnf.pl:1
 #, c-format
 msgid ""
 "Complete your security setup with this very easy-to-use software which "
@@ -18270,6 +18538,11 @@ msgid "Add the name as an exception to the handling of password aging by msec."
 msgstr ""
 "Az adott név felvétele az msec-féle jelszóelévülés-kezelés alóli kivételként"
 
+#: ../../network/isdn.pm:1
+#, fuzzy, c-format
+msgid "USB"
+msgstr "LSB"
+
 #: ../../standalone/drakxtv:1
 #, c-format
 msgid "Scanning for TV channels"
@@ -18329,6 +18602,11 @@ msgstr "Munkacsoport"
 #, c-format
 msgid "Printer host name or IP"
 msgstr "A nyomtató gépneve vagy IP-címe"
+
+#: ../../standalone/drakconnect:1
+#, fuzzy, c-format
+msgid "down"
+msgstr "kész"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -18796,6 +19074,11 @@ msgstr "Elem hozzáadása"
 msgid "The printers on this machine are available to other computers"
 msgstr "A gép nyomtatói elérhetõk más gépek számára"
 
+#: ../../lang.pm:1
+#, fuzzy, c-format
+msgid "China (Hong Kong)"
+msgstr "Hong Kong"
+
 #: ../../standalone/drakautoinst:1
 #, c-format
 msgid "I can't find needed image file `%s'."
@@ -18854,7 +19137,7 @@ msgstr "A csomag nincs telepítve"
 msgid "American Samoa"
 msgstr "Amerikai Samoa"
 
-#: ../../share/advertising/12-mdkexpert.pl:1
+#: ../advertising/12-mdkexpert.pl:1
 #, c-format
 msgid "Become a MandrakeExpert"
 msgstr "Legyen Mandrake-szakértõ (MandrakeExpert)"
@@ -18978,6 +19261,11 @@ msgstr "Olaszország"
 msgid "Cayman Islands"
 msgstr "Kajmán-szigetek"
 
+#: ../../fs.pm:1 ../../partition_table.pm:1
+#, c-format
+msgid "error unmounting %s: %s"
+msgstr "hiba történt a(z) %s leválasztásakor: %s"
+
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Name of printer"
@@ -18987,11 +19275,6 @@ msgstr "A nyomtató neve"
 #, c-format
 msgid "disable"
 msgstr "Letiltás"
-
-#: ../../fs.pm:1 ../../partition_table.pm:1
-#, c-format
-msgid "error unmounting %s: %s"
-msgstr "hiba történt a(z) %s leválasztásakor: %s"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -19099,7 +19382,7 @@ msgstr "Kompakt"
 msgid "Detected model: %s %s"
 msgstr "Felismert modell: %s %s"
 
-#: ../../share/advertising/03-software.pl:1
+#: ../advertising/03-software.pl:1
 #, c-format
 msgid "MandrakeSoft has selected the best software for you"
 msgstr "A MandrakeSoft kiválogatta Önnek a legjobb alkalmazásokat"
@@ -19238,6 +19521,11 @@ msgstr "Indítás grafikus módban"
 msgid " adsl"
 msgstr " ADSL"
 
+#: ../../raid.pm:1
+#, c-format
+msgid "Not enough partitions for RAID level %d\n"
+msgstr "Nincs elég partíció a RAID %d szinthez\n"
+
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "format of floppies supported by the drive"
@@ -19247,11 +19535,6 @@ msgstr "A meghajtó által támogatott adathordozó-formátum"
 #, c-format
 msgid "Firmware copy failed, file %s not found"
 msgstr "A firmware másolása nem sikerült - %s nevû fájl nem található."
-
-#: ../../raid.pm:1
-#, c-format
-msgid "Not enough partitions for RAID level %d\n"
-msgstr "Nincs elég partíció a RAID %d szinthez\n"
 
 #: ../../standalone/drakTermServ:1
 #, c-format
@@ -19382,7 +19665,7 @@ msgstr ""
 "Nem található sem CD-, sem DVD-képfájl. Másolja le a telepítõprogramot és az "
 "RPM fájlokat."
 
-#: ../../share/advertising/04-configuration.pl:1
+#: ../advertising/04-configuration.pl:1
 #, c-format
 msgid "Mandrake's multipurpose configuration tool"
 msgstr "A Mandrake általános célú beállítóeszköze"
@@ -19412,7 +19695,7 @@ msgstr "Lemez"
 msgid "Enter a printer device URI"
 msgstr "A nyomtatóeszköz URI-ja"
 
-#: ../../share/advertising/01-thanks.pl:1
+#: ../advertising/01-thanks.pl:1
 #, c-format
 msgid ""
 "The success of MandrakeSoft is based upon the principle of Free Software. "
@@ -20011,7 +20294,7 @@ msgstr "Kártyatípus:"
 msgid "Thin Client"
 msgstr "Vékony kliens"
 
-#: ../../share/advertising/01-thanks.pl:1
+#: ../advertising/01-thanks.pl:1
 #, c-format
 msgid "Thank you for choosing Mandrake Linux 9.2"
 msgstr "Köszönjük, hogy a Mandrake Linux 9.2 rendszert választotta"
@@ -20127,6 +20410,13 @@ msgstr "Windowsos betûtípusok"
 msgid "Mouse Systems"
 msgstr "Mouse Systems"
 
+#: ../../standalone/drakclock:1
+#, c-format
+msgid ""
+"Your computer can synchronize its clock\n"
+" with a remote time server using NTP"
+msgstr ""
+
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Iranian"
@@ -20152,7 +20442,7 @@ msgstr "Kiszolgáló felvétele"
 msgid "Remote printer name"
 msgstr "A távoli nyomtató neve"
 
-#: ../../share/advertising/10-security.pl:1
+#: ../advertising/10-security.pl:1
 #, c-format
 msgid ""
 "MandrakeSoft has designed exclusive tools to create the most secured Linux "
@@ -20310,6 +20600,11 @@ msgstr "Microsoft Explorer"
 msgid "Uninstall Fonts"
 msgstr "Betûtípusok eltávolítása"
 
+#: ../../../move/move.pm:1
+#, fuzzy, c-format
+msgid "Please wait, detecting and configuring devices..."
+msgstr "Biztonsági szint beállítása..."
+
 #: ../../keyboard.pm:1
 #, c-format
 msgid "German (no dead keys)"
@@ -20338,11 +20633,6 @@ msgstr ""
 "Exportálás NFS-sel vagy Sambával végezhetõ. Válassza ki, melyiket kívánja "
 "használni."
 
-#: ../../help.pm:1 ../../install_steps_interactive.pm:1
-#, c-format
-msgid "Reboot"
-msgstr "Újraindítás"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Gambia"
@@ -20352,6 +20642,12 @@ msgstr "Gambia"
 #, c-format
 msgid "Mandrake Control Center"
 msgstr "Mandrake Vezérlõközpont"
+
+#: ../../help.pm:1 ../../install_steps_interactive.pm:1
+#: ../../../move/move.pm:1
+#, c-format
+msgid "Reboot"
+msgstr "Újraindítás"
 
 #: ../../printer/main.pm:1
 #, c-format
@@ -20387,6 +20683,11 @@ msgstr ""
 #, c-format
 msgid "Remember this password"
 msgstr "Emlékezzen a jelszóra"
+
+#: ../../install_steps_gtk.pm:1
+#, c-format
+msgid "due to unsatisfied %s"
+msgstr ""
 
 #: ../../standalone/drakgw:1
 #, c-format
@@ -20447,6 +20748,11 @@ msgstr "Pápua Új-Guinea"
 #, c-format
 msgid "Multi-function device on a parallel port"
 msgstr "Többfunkciós eszköz egy párhuzamos porton"
+
+#: ../../../move/tree/mdk_totem:1
+#, fuzzy, c-format
+msgid "Busy files"
+msgstr "Rendszerfájlok mentése"
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -20510,6 +20816,21 @@ msgstr ""
 #, c-format
 msgid "DHCP Client"
 msgstr "DHCP-kliens"
+
+#: ../../standalone/harddrake2:1
+#, c-format
+msgid ""
+"This is HardDrake, a Mandrake hardware configuration tool.\n"
+"<span foreground=\"royalblue3\">Version:</span> %s\n"
+"<span foreground=\"royalblue3\">Author:</span> Thierry Vignaud &lt;"
+"tvignaud@mandrakesoft.com&gt;\n"
+"\n"
+msgstr ""
+"HardDrake - Mandrake hardverbeállítási program.\n"
+"<span foreground=\"royalblue3\">Verzió:</span> %s\n"
+"<span foreground=\"royalblue3\">Szerzõ:</span> Thierry Vignaud &lt;"
+"tvignaud@mandrakesoft.com&gt;\n"
+"\n"
 
 #: ../../standalone/drakgw:1
 #, c-format
@@ -20710,73 +21031,13 @@ msgstr "Az átvitel kihagyása"
 msgid "Delay before booting the default image"
 msgstr "Várakozási idõ az alapértelmezett rendszer betöltése elõtt"
 
-#: ../../standalone/drakfont:1
-#, c-format
-msgid ""
-"\n"
-" Copyright (C) 2001-2002 by MandrakeSoft \n"
-"     DUPONT Sebastien (original version)\n"
-"     CHAUMETTE Damien <dchaumette\\@mandrakesoft.com>\n"
-"\n"
-" This program is free software; you can redistribute it and/or modify\n"
-" it under the terms of the GNU General Public License as published by\n"
-" the Free Software Foundation; either version 2, or (at your option)\n"
-" any later version.\n"
-"\n"
-" This program is distributed in the hope that it will be useful,\n"
-" but WITHOUT ANY WARRANTY; without even the implied warranty of\n"
-" MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n"
-" GNU General Public License for more details.\n"
-"\n"
-" You should have received a copy of the GNU General Public License\n"
-" along with this program; if not, write to the Free Software\n"
-" Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.\n"
-"\n"
-" Thanks:\n"
-"    -  pfm2afm:   \n"
-"\t by Ken Borgendale:\n"
-"\t    Convert a Windows .pfm  file to a .afm (Adobe Font Metrics)\n"
-"    -  type1inst:\n"
-"\t by James Macnicol: \n"
-"\t    type1inst generates files fonts.dir fonts.scale & Fontmap.\n"
-"    -  ttf2pt1:   \n"
-"\t  by Andrew Weeks, Frank Siegert, Thomas Henlich, Sergey Babkin  \n"
-"             Convert ttf font files to afm and pfb fonts\n"
-msgstr ""
-"\n"
-" Copyright (C) 2001-2002, MandrakeSoft\n"
-"    DUPONT Sebastien (eredeti verzió)\n"
-"    CHAUMETTE Damien <dchaumette\\@mandrakesoft.com>\n"
-"\n"
-" Ez a program szabad szoftver; terjeszthetõ és/vagy módosítható\n"
-" a Free Software Foundation által publikált GNU General Public\n"
-" License 2. vagy annál újabb verziója alapján.\n"
-"\n"
-" A program annak reményében kerül terjesztésre, hogy hasznosnak\n"
-" bizonyul, de GARANCIA NÉLKÜL; még a PIACKÉPESSÉG illetve\n"
-" egy BIZONYOS CÉLRA VALÓ ALKALMASSÁG sincs garantálva. További\n"
-" részletek a GNU General Public License-ben.\n"
-"\n"
-" A programmal együtt Önnek kapnia kellett egy példányt a GNU General\n"
-" Public License-bõl; ha nem így történt, írjon a következõ címre:\n"
-" Free Software Foundation, Inc., 59 Temple Place - Suite 330, Boston,\n"
-" MA 02111-1307, USA.\n"
-"\n"
-" Köszönetnyilvánítás:\n"
-"  - pfm2afm: windowsos .pfm fájl konvertálása .afm (Adobe Font Metrics)\n"
-"    formátumra; szerzõ: Ken Borgendale\n"
-"  - type1inst: fonts.dir, fonts.scale és Fontmap fájlok elõállítása;\n"
-"    szerzõ: James Macnicol\n"
-"  - ttf2pt1: TTF betûtípus konvertálása AFM/PFB betûtípusra;\n"
-"    szerzõk: Andrew Weeks, Frank Siegert, Thomas Henlich, Sergey Babkin\n"
-
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "Use Hard Disk to backup"
 msgstr "Mentés merevlemezre"
 
 #: ../../help.pm:1 ../../install_steps_gtk.pm:1 ../../standalone/drakbackup:1
-#: ../../standalone/drakboot:1 ../../standalone/drakgw:1
+#: ../../standalone/drakboot:1
 #, c-format
 msgid "Configure"
 msgstr "Beállítás"
@@ -20849,7 +21110,7 @@ msgstr ""
 "parancs segítségével tesztelheti le:\n"
 "\"rpm -qpl Mandrake/RPMS/*.rpm\"\n"
 
-#: ../../share/advertising/06-development.pl:1
+#: ../advertising/06-development.pl:1
 #, c-format
 msgid "Mandrake Linux 9.2: the ultimate development platform"
 msgstr "Mandrake Linux 9.2: a legjobb fejlesztõi környezet"
@@ -20936,6 +21197,11 @@ msgstr "végsõ felbontás"
 msgid "Services"
 msgstr "Szolgáltatások"
 
+#: ../../../move/move.pm:1
+#, fuzzy, c-format
+msgid "Auto configuration"
+msgstr "Egyéni beállítás"
+
 #: ../../Xconfig/card.pm:1
 #, c-format
 msgid "4 MB"
@@ -20974,9 +21240,10 @@ msgid "Internet station"
 msgstr "Internetes munkaállomás"
 
 #: ../../share/compssUsers:999
+#, fuzzy
 msgid ""
-"Set of tools to read and send mail and news (pine, mutt, tin..) and to "
-"browse the Web"
+"Set of tools to read and send mail and news (mutt, tin..) and to browse the "
+"Web"
 msgstr ""
 "Eszközök levelezéshez, hírkezeléshez (pine, mutt, tin, ...) és a Web "
 "böngészéséhez"
@@ -21116,6 +21383,41 @@ msgstr "NFS-, SMB-, proxy- és SSH-kiszolgáló"
 msgid "Set of tools to read and send mail and news and to browse the Web"
 msgstr "Eszközök levelezéshez, hírkezeléshez és a Web böngészéséhez"
 
+#~ msgid "The setup has already been done, and it's currently enabled."
+#~ msgstr "A megosztás már megtörtént, a kapcsolat használható."
+
+#~ msgid "Logs"
+#~ msgstr "Naplók"
+
+#~ msgid "The setup has already been done, but it's currently disabled."
+#~ msgstr ""
+#~ "A megosztás már megtörtént, de a kapcsolat használata le van tiltva."
+
+#~ msgid "Profile "
+#~ msgstr "Profil "
+
+#~ msgid ""
+#~ "Welcome to the Internet Connection Sharing utility!\n"
+#~ "\n"
+#~ "%s\n"
+#~ "\n"
+#~ "Click on Configure to launch the setup wizard."
+#~ msgstr ""
+#~ "Üdvözöljük az internetkapcsolat-megosztás beállítóprogramjában!\n"
+#~ "\n"
+#~ "%s\n"
+#~ "\n"
+#~ "Kattintson a Beállítás gombra a beállításvarázsló elindításához."
+
+#~ msgid "Internet Connection Sharing configuration"
+#~ msgstr "Az internetkapcsolat megosztásának beállítása"
+
+#~ msgid "No Internet Connection Sharing has ever been configured."
+#~ msgstr "Az internetkapcsolat megosztása még nem történt meg."
+
+#~ msgid "when checked, owner and group won't be changed"
+#~ msgstr "Bejelölés esetén a tulajdonos és a csoport nem lesz módosítva"
+
 #~ msgid ""
 #~ "XawTV isn't installed!\n"
 #~ "\n"
@@ -21123,7 +21425,7 @@ msgstr "Eszközök levelezéshez, hírkezeléshez és a Web böngészéséhez"
 #~ "If you do have a TV card but DrakX has neither detected it (no bttv nor "
 #~ "saa7134\n"
 #~ "module in \"/etc/modules\") nor installed xawtv, please send the\n"
-#~ "results of \"lspcidrake -v -f\" to \"install\\@mandrakesoft.com\"\n"
+#~ "results of \"lspcidrake -v -f\" to \"install@mandrakesoft.com\"\n"
 #~ "with subject \"undetected TV card\".\n"
 #~ "\n"
 #~ "\n"
@@ -21136,7 +21438,7 @@ msgstr "Eszközök levelezéshez, hírkezeléshez és a Web böngészéséhez"
 #~ "bttv modul, sem pedig az saa7134 modul nem szerepel a \"/etc/modules\"\n"
 #~ "fájlban) és nem telepítette az xawtv programot, abban az esetben kérjük,\n"
 #~ "küldje el az \"lspcidrake -v -f\" parancs eredményét (kimenetét) a\n"
-#~ "következõ címre: \"install\\@mandrakesoft.com\" a következõ tárggyal:\n"
+#~ "következõ címre: \"install@mandrakesoft.com\" a következõ tárggyal:\n"
 #~ "\"undetected TV card\".\n"
 #~ "\n"
 #~ "\n"
@@ -21541,11 +21843,11 @@ msgstr "Eszközök levelezéshez, hírkezeléshez és a Web böngészéséhez"
 #~ msgstr "Adja meg a gépnevet vagy az IP-címet."
 
 #~ msgid ""
-#~ " Copyright (C) 2001-2002 MandrakeSoft by DUPONT Sebastien <dupont_s"
-#~ "\\@epita.fr>"
+#~ " Copyright (C) 2001-2002 MandrakeSoft by DUPONT Sebastien <dupont_s@epita."
+#~ "fr>"
 #~ msgstr ""
-#~ " Copyright (C) 2001-2002, MandrakeSoft - DUPONT Sebastien <dupont_s"
-#~ "\\@epita.fr>"
+#~ " Copyright (C) 2001-2002, MandrakeSoft - DUPONT Sebastien <dupont_s@epita."
+#~ "fr>"
 
 #~ msgid ""
 #~ "\n"
@@ -21568,10 +21870,10 @@ msgstr "Eszközök levelezéshez, hírkezeléshez és a Web böngészéséhez"
 #~ "A mentésfájlokat kézzel ne módosítsa.\n"
 
 #~ msgid ""
-#~ " updates 2002 MandrakeSoft by Stew Benedict <sbenedict\\@mandrakesoft.com>"
+#~ " updates 2002 MandrakeSoft by Stew Benedict <sbenedict@mandrakesoft.com>"
 #~ msgstr ""
-#~ " frissítések: 2002, MandrakeSoft - Stew Benedict <sbenedict"
-#~ "\\@mandrakesoft.com>"
+#~ " frissítések: 2002, MandrakeSoft - Stew Benedict <sbenedict@mandrakesoft."
+#~ "com>"
 
 #~ msgid ""
 #~ "Arguments: (arg, expr='*.*', dev='tty12')\n"

@@ -4,11 +4,12 @@
 # Danny Zeng <danny@zeng.com.cn>, 2000.
 # Joe Man <trmetal@yahoo.com.hk>, 2001
 # Kenduest Lee <kenduest@i18n.linux.org.tw> , 2002
+# Chong Sein Yeo <csyeo@hal-pc.org>, 2003
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX\n"
-"POT-Creation-Date: 2003-09-16 13:45+0200\n"
+"POT-Creation-Date: 2003-12-03 03:09+0100\n"
 "PO-Revision-Date: 2002-09-24 06:00+CST\n"
 "Last-Translator: Kenduest Lee <kenduest@i18n.linux.org.tw>\n"
 "Language-Team: Chinese <zh@li.org>\n"
@@ -275,11 +276,6 @@ msgstr "CUPS 組態"
 msgid "Total progress"
 msgstr "全部進度"
 
-#: ../../lang.pm:1
-#, c-format
-msgid "Hong Kong"
-msgstr "香港"
-
 #: ../../install_interactive.pm:1
 #, c-format
 msgid "Not enough free space to allocate new partitions"
@@ -355,6 +351,18 @@ msgstr "偵測到 %s "
 msgid "No CD device defined!"
 msgstr "尚未有任何 CD 裝置定義！"
 
+#: ../../network/shorewall.pm:1
+#, c-format
+msgid ""
+"Please enter the name of the interface connected to the "
+"internet.              \n"
+"                \n"
+"Examples:\n"
+"                ppp+ for modem or DSL connections, \n"
+"                eth0, or eth1 for cable connection, \n"
+"                ippp+ for a isdn connection.\n"
+msgstr ""
+
 #: ../../standalone/drakbackup:1
 #, fuzzy, c-format
 msgid "\tUse .backupignore files\n"
@@ -424,16 +432,20 @@ msgstr "這個 %s 套件需要安裝上，您要安裝該套件嗎？"
 msgid "Swiss (French layout)"
 msgstr "瑞士 (法國式配置)"
 
-# calendar/gui/goto-dialog.glade.h:2
+#: ../../raid.pm:1
+#, c-format
+msgid "mkraid failed (maybe raidtools are missing?)"
+msgstr "呼叫 mkraid 失敗 (也許是 raidtools 沒安裝所導致的)"
+
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "August"
 msgstr "8月"
 
-#: ../../raid.pm:1
-#, c-format
-msgid "mkraid failed (maybe raidtools are missing?)"
-msgstr "呼叫 mkraid 失敗 (也許是 raidtools 沒安裝所導致的)"
+#: ../../network/drakfirewall.pm:1
+#, fuzzy, c-format
+msgid "FTP server"
+msgstr "NTP 伺服主機"
 
 #: ../../harddrake/data.pm:1
 #, c-format
@@ -450,7 +462,6 @@ msgstr ""
 msgid "Soundcard"
 msgstr "音效卡"
 
-# ui/evolution-calendar.xml.h:15
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "Month"
@@ -514,11 +525,6 @@ msgstr "Potential LAN 位址與目前在 %s 找到的設定互衝突!\n"
 #, c-format
 msgid "Configuring..."
 msgstr "設定中..."
-
-#: ../../standalone/drakgw:1
-#, c-format
-msgid "The setup has already been done, and it's currently enabled."
-msgstr "這個設定先前已經完成了，目前是處理開啟可用的狀態"
 
 #: ../../harddrake/v4l.pm:1
 #, c-format
@@ -648,6 +654,11 @@ msgstr " 位於 Novell 主機 \"%s\"，印表機 \"%s\""
 msgid "Printer Name"
 msgstr "列印佇列名稱"
 
+#: ../../../move/move.pm:1
+#, c-format
+msgid "Setting up USB key"
+msgstr ""
+
 #: ../../standalone/drakfloppy:1
 #, c-format
 msgid "Remove a module"
@@ -705,15 +716,17 @@ msgstr ""
 msgid "if needed"
 msgstr "當需要時"
 
+#: ../../standalone/drakclock:1
+#, c-format
+msgid ""
+"We need to install ntp package\n"
+" to enable Network Time Protocol"
+msgstr ""
+
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "Restore Failed..."
 msgstr "回存失敗..."
-
-#: ../../standalone/harddrake2:1
-#, c-format
-msgid "/Autodetect _jazz drives"
-msgstr "自動偵測"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -943,11 +956,6 @@ msgstr ""
 #, c-format
 msgid "512 kB"
 msgstr "512 kB"
-
-#: ../../standalone/net_monitor:1
-#, c-format
-msgid "Logs"
-msgstr ""
 
 #: ../../standalone/scannerdrake:1
 #, c-format
@@ -1296,8 +1304,6 @@ msgstr "當該項目選取時，將無法另外選擇套用的擁有者與群組項目"
 msgid "Bulgaria"
 msgstr "Bulgaria"
 
-# calendar/gui/dialogs/cal-prefs-dialog.glade.h:52
-# calendar/gui/event-editor.c:476
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "Tuesday"
@@ -1406,6 +1412,11 @@ msgstr "拉托維亞"
 msgid "monthly"
 msgstr "每月"
 
+#: ../../../move/move.pm:1
+#, fuzzy, c-format
+msgid "Retry"
+msgstr "回存"
+
 #: ../../standalone/drakfloppy:1
 #, c-format
 msgid "Module name"
@@ -1451,6 +1462,11 @@ msgstr "默認使用 Unicode"
 msgid "the module of the GNU/Linux kernel that handles the device"
 msgstr "目前 Linux 核心所使用的驅動程式項目"
 
+#: ../../standalone/drakclock:1
+#, fuzzy, c-format
+msgid "Is your hardware clock set to GMT?"
+msgstr "硬體時鐘設定為 GMT 時間"
+
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid "Trying to rescue partition table"
@@ -1493,6 +1509,11 @@ msgstr "無法啟動線上更新程式 !!!\n"
 msgid "Name: "
 msgstr "名稱："
 
+#: ../../standalone/drakconnect:1
+#, c-format
+msgid "up"
+msgstr ""
+
 #: ../../Xconfig/resolution_and_depth.pm:1
 #, c-format
 msgid "16 million colors (24 bits)"
@@ -1503,7 +1524,7 @@ msgstr "1 千 6 百萬色 (24 位元)"
 msgid "Allow all users"
 msgstr "允許所有使用者"
 
-#: ../../share/advertising/08-store.pl:1
+#: ../advertising/08-store.pl:1
 #, c-format
 msgid "The official MandrakeSoft Store"
 msgstr "Mandrake 官方站台"
@@ -1535,15 +1556,15 @@ msgstr "User (使用者)"
 msgid "Do new backup before restore (only for incremental backups.)"
 msgstr "在回存前進行新的備份動作 (只能夠用在遞增式備份時。)"
 
-#: ../../standalone/harddrake2:1
-#, c-format
-msgid "Name"
-msgstr "名稱："
-
 #: ../../raid.pm:1
 #, c-format
 msgid "mkraid failed"
 msgstr "mkraid 失敗"
+
+#: ../../standalone/harddrake2:1
+#, c-format
+msgid "Name"
+msgstr "名稱："
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -1747,6 +1768,23 @@ msgstr "開啟伺服器中..."
 #, c-format
 msgid "Printing test page(s)..."
 msgstr "正在列印測試頁..."
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid ""
+"Transfer successful\n"
+"You may want to verify you can login to the server with:\n"
+"\n"
+"ssh -i %s %s@%s\n"
+"\n"
+"without being prompted for a password."
+msgstr ""
+"傳輸已經完成\n"
+"您也許需要確認您能夠使用下面的指令登入系統：\n"
+"\n"
+"ssh -i %s %s@%s\n"
+"\n"
+"這應該不需要輸入任何密碼就可以直接登入。"
 
 #: ../../fsedit.pm:1
 #, c-format
@@ -2657,6 +2695,11 @@ msgstr ""
 msgid "Can't add a partition to _formatted_ RAID md%d"
 msgstr "無法在 _已格式_ 化的磁碟陣列 md%d 中加入分割區"
 
+#: ../../standalone/drakclock:1
+#, fuzzy, c-format
+msgid "Network Time Protocol"
+msgstr "網路介面"
+
 #: ../../Xconfig/card.pm:1
 #, c-format
 msgid ""
@@ -2848,7 +2891,6 @@ msgstr ""
 msgid "Saint Lucia"
 msgstr "Saint Lucia"
 
-# calendar/gui/goto-dialog.glade.h:12
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "November"
@@ -2874,7 +2916,7 @@ msgstr "Palau"
 msgid "level"
 msgstr "階層"
 
-#: ../../share/advertising/13-mdkexpert_corporate.pl:1
+#: ../advertising/13-mdkexpert_corporate.pl:1
 #, c-format
 msgid ""
 "All incidents will be followed up by a single qualified MandrakeSoft "
@@ -3257,7 +3299,7 @@ msgstr ""
 msgid "Bad package"
 msgstr "毀損的套件"
 
-#: ../../share/advertising/07-server.pl:1
+#: ../advertising/07-server.pl:1
 #, c-format
 msgid ""
 "Transform your computer into a powerful Linux server: Web server, mail, "
@@ -3520,7 +3562,7 @@ msgstr "劣"
 msgid "Module options:"
 msgstr "模組參數："
 
-#: ../../share/advertising/11-mnf.pl:1
+#: ../advertising/11-mnf.pl:1
 #, c-format
 msgid "Secure your networks with the Multi Network Firewall"
 msgstr ""
@@ -3598,6 +3640,11 @@ msgstr "滑鼠"
 #, c-format
 msgid "not enough room in /boot"
 msgstr "/boot 沒有足夠的空間"
+
+#: ../../install_steps_gtk.pm:1
+#, c-format
+msgid "trying to promote %s"
+msgstr ""
 
 #: ../../lang.pm:1
 #, c-format
@@ -3748,6 +3795,11 @@ msgstr ""
 msgid "Saudi Arabia"
 msgstr "Saudi Arabia"
 
+#: ../../services.pm:1
+#, c-format
+msgid "Internet"
+msgstr "Internet"
+
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid "Continue anyway?"
@@ -3765,11 +3817,6 @@ msgstr "如果該印表機並未列出，請選擇相容或者是相信的印表機型號。"
 #, c-format
 msgid "Printer"
 msgstr "印表機"
-
-#: ../../services.pm:1
-#, c-format
-msgid "Internet"
-msgstr "Internet"
 
 #: ../../standalone/service_harddrake:1
 #, c-format
@@ -3843,12 +3890,16 @@ msgstr "印表機的名稱應該只有包含英文字母、數字與底線這類字元"
 msgid "Restarting printing system..."
 msgstr "正在重新啟動列印系統服務 ..."
 
+#: ../../../move/tree/mdk_totem:1
+#, c-format
+msgid "You can only run with no CDROM support"
+msgstr ""
+
 #: ../../modules/interactive.pm:1
 #, c-format
 msgid "See hardware info"
 msgstr "檢視硬體資訊"
 
-# ui/evolution-calendar.xml.h:7
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "Day"
@@ -4056,15 +4107,15 @@ msgstr "ISA / PCMCIA"
 msgid "About"
 msgstr "放棄"
 
-#: ../../network/network.pm:1
-#, c-format
-msgid "Proxies configuration"
-msgstr "設定要使用的代理伺服器"
-
 #: ../../mouse.pm:1
 #, c-format
 msgid "GlidePoint"
 msgstr "GlidePoint"
+
+#: ../../network/network.pm:1
+#, c-format
+msgid "Proxies configuration"
+msgstr "設定要使用的代理伺服器"
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -4211,6 +4262,11 @@ msgstr "指定的掛載點需以 / 開頭"
 msgid "Choose your CD/DVD device"
 msgstr "請選取您 CD/DVD 容量大小"
 
+#: ../../network/drakfirewall.pm:1
+#, fuzzy, c-format
+msgid "CUPS server"
+msgstr "DNS 伺服器"
+
 #: ../../standalone/logdrake:1
 #, c-format
 msgid "Postfix Mail Server"
@@ -4226,7 +4282,7 @@ msgstr "不儲存就離開"
 msgid "Yemen"
 msgstr "Yemen"
 
-#: ../../share/advertising/11-mnf.pl:1
+#: ../advertising/11-mnf.pl:1
 #, c-format
 msgid "This product is available on the MandrakeStore Web site."
 msgstr "您可以透過 MandrakeStore 站台獲得更多該產品資訊"
@@ -4235,6 +4291,31 @@ msgstr "您可以透過 MandrakeStore 站台獲得更多該產品資訊"
 #, c-format
 msgid "=> There are many things to choose from (%s).\n"
 msgstr "%s 上有很多的項目可供選擇。\n"
+
+#: ../../standalone/drakclock:1
+#, c-format
+msgid "GMT - DrakClock"
+msgstr ""
+
+#: ../../../move/move.pm:1
+#, c-format
+msgid ""
+"An error occurred:\n"
+"\n"
+"\n"
+"%s\n"
+"\n"
+"This may come from corrupted system configuration files\n"
+"on the USB key, in this case removing them and then\n"
+"rebooting Mandrake Move would fix the problem. To do\n"
+"so, click on the corresponding button.\n"
+"\n"
+"\n"
+"You may also want to reboot and remove the USB key, or\n"
+"examine its contents under another OS, or even have\n"
+"a look at log files in console #3 and #4 to try to\n"
+"guess what's happening."
+msgstr ""
 
 #: ../../steps.pm:1
 #, c-format
@@ -4469,6 +4550,11 @@ msgstr "Userdrake 使用者管理"
 #, c-format
 msgid "Which partition do you want to use for Linux4Win?"
 msgstr "您希望要用那個分割區給 Linux4Win 來使用呢？"
+
+#: ../../install_steps_gtk.pm:1
+#, fuzzy, c-format
+msgid "due to missing %s"
+msgstr "kdesu 程式不見了"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -4987,7 +5073,7 @@ msgstr ""
 msgid "Started on boot"
 msgstr "於開機時啟動"
 
-#: ../../share/advertising/12-mdkexpert.pl:1
+#: ../advertising/12-mdkexpert.pl:1
 #, c-format
 msgid ""
 "Join the MandrakeSoft support teams and the Linux Community online to share "
@@ -5310,11 +5396,6 @@ msgid ""
 msgstr ""
 "在 console\n"
 "顯示佈景"
-
-#: ../../standalone/net_monitor:1
-#, c-format
-msgid "Statistics"
-msgstr ""
 
 #: ../../printer/cups.pm:1
 #, c-format
@@ -5790,8 +5871,6 @@ msgstr "Greenland"
 msgid "Logitech MouseMan+/FirstMouse+"
 msgstr "Logitech MouseMan+/FirstMouse+"
 
-# calendar/gui/dialogs/cal-prefs-dialog.glade.h:47
-# calendar/gui/event-editor.c:478
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "Thursday"
@@ -6109,7 +6188,7 @@ msgid ""
 "number generation."
 msgstr "儲存與回存高品質系統亂數產生器"
 
-#: ../../share/advertising/07-server.pl:1
+#: ../advertising/07-server.pl:1
 #, c-format
 msgid "Turn your computer into a reliable server"
 msgstr ""
@@ -6124,6 +6203,11 @@ msgstr ""
 msgid " (driver %s)"
 msgstr "(driver %s)"
 
+#: ../../services.pm:1
+#, c-format
+msgid "Start when requested"
+msgstr ""
+
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid ""
@@ -6137,11 +6221,6 @@ msgstr ""
 #, c-format
 msgid "I don't know"
 msgstr "不清楚"
-
-#: ../../services.pm:1
-#, c-format
-msgid "Start when requested"
-msgstr ""
 
 #: ../../printer/main.pm:1
 #, c-format
@@ -6348,6 +6427,11 @@ msgstr ""
 "這台 %s 掃描器需要先執行 printerdrake 程式進行設定。\n"
 "您可以透過 Mandrake 控制台內的硬體項目內執行該程式。"
 
+#: ../../../move/move.pm:1
+#, fuzzy, c-format
+msgid "Key isn't writable"
+msgstr "XawTV 程式並未安裝！"
+
 #: ../../lang.pm:1
 #, c-format
 msgid "Bangladesh"
@@ -6373,8 +6457,6 @@ msgstr "繼續"
 msgid "Custom Restore"
 msgstr "自訂回存方式"
 
-# calendar/gui/dialogs/cal-prefs-dialog.glade.h:38
-# calendar/gui/event-editor.c:480
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "Saturday"
@@ -6394,15 +6476,15 @@ msgstr ""
 msgid "Set the root umask."
 msgstr "沒有密碼"
 
-#: ../../network/modem.pm:1 ../../standalone/drakconnect:1
-#, c-format
-msgid "Script-based"
-msgstr "Script-based"
-
 #: ../../install_any.pm:1 ../../partition_table.pm:1
 #, c-format
 msgid "Error reading file %s"
 msgstr "讀取檔案 %s 時發生錯誤"
+
+#: ../../network/modem.pm:1 ../../standalone/drakconnect:1
+#, c-format
+msgid "Script-based"
+msgstr "Script-based"
 
 #: ../../harddrake/v4l.pm:1
 #, c-format
@@ -6475,17 +6557,6 @@ msgstr ""
 #, c-format
 msgid "Domain Authentication Required"
 msgstr "需要 Domain 認證"
-
-#: ../../standalone/drakTermServ:1
-#, c-format
-msgid ""
-"\n"
-"\n"
-" Thanks:\n"
-"\t- LTSP Project http://www.ltsp.org\n"
-"\t- Michael Brown <mbrown\\@fensystems.co.uk>\n"
-"\n"
-msgstr ""
 
 #: ../../security/level.pm:1
 #, c-format
@@ -6567,8 +6638,6 @@ msgid ""
 "running"
 msgstr "若是您所選取的服務項目若是沒執行的話，您將會收到警示通知"
 
-# calendar/gui/dialogs/cal-prefs-dialog.glade.h:55
-# calendar/gui/event-editor.c:477
 #: ../../standalone/drakbackup:1
 #, fuzzy, c-format
 msgid "Weekday"
@@ -6641,7 +6710,6 @@ msgstr "網芳主機名稱”"
 msgid "Name Servers:"
 msgstr "Samba 伺服器"
 
-# executive-summary/test-service/rdf-summary.c:806
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "Minute"
@@ -7161,15 +7229,15 @@ msgstr "Yaboot"
 msgid "Logitech CC Series with Wheel emulation"
 msgstr "Logitech CC Series"
 
-#: ../../standalone/drakboot:1
-#, c-format
-msgid "Splash selection"
-msgstr "畫面選取"
-
 #: ../../partition_table.pm:1
 #, c-format
 msgid "Extended partition not supported on this platform"
 msgstr "這個平台並不支援延伸分割區"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Splash selection"
+msgstr "畫面選取"
 
 #: ../../network/isdn.pm:1
 #, c-format
@@ -7227,6 +7295,11 @@ msgstr "您要啟上面提及印表機列印服務，或者是使用內部網路內的印表機嗎？\n"
 msgid "Printer default settings"
 msgstr "印表機型號選擇"
 
+#: ../../mouse.pm:1
+#, c-format
+msgid "Generic PS2 Wheel Mouse"
+msgstr "一般 PS/2 Wheel 滑鼠"
+
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid ""
@@ -7234,11 +7307,6 @@ msgid ""
 "memory page level, thus enabling the processor to prevent unchecked kernel "
 "accesses to user memory (aka this is a bug guard)"
 msgstr ""
-
-#: ../../mouse.pm:1
-#, c-format
-msgid "Generic PS2 Wheel Mouse"
-msgstr "一般 PS/2 Wheel 滑鼠"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -7382,6 +7450,11 @@ msgstr "韓式鍵盤"
 msgid "Not connected"
 msgstr "尚未連線"
 
+#: ../../standalone/net_monitor:1
+#, fuzzy, c-format
+msgid "No internet connection configured"
+msgstr "Internet 連線設定"
+
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Greek"
@@ -7396,23 +7469,6 @@ msgstr "Saint Kitts and Nevis"
 #, c-format
 msgid "Generic 3 Button Mouse with Wheel emulation"
 msgstr "一般的三鍵式滑鼠"
-
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid ""
-"Transfer successful\n"
-"You may want to verify you can login to the server with:\n"
-"\n"
-"ssh -i %s %s\\@%s\n"
-"\n"
-"without being prompted for a password."
-msgstr ""
-"傳輸已經完成\n"
-"您也許需要確認您能夠使用下面的指令登入系統：\n"
-"\n"
-"ssh -i %s %s\\@%s\n"
-"\n"
-"這應該不需要輸入任何密碼就可以直接登入。"
 
 #: ../../any.pm:1
 #, c-format
@@ -7639,7 +7695,7 @@ msgstr ""
 "請點選『傳送』覆蓋內容。\n"
 "您也可以另外輸入一個名稱，或者是略過這台印表機。"
 
-#: ../../share/advertising/12-mdkexpert.pl:1
+#: ../advertising/12-mdkexpert.pl:1
 #, c-format
 msgid ""
 "Find the solutions of your problems via MandrakeSoft's online support "
@@ -7706,6 +7762,22 @@ msgstr "Kyrgyzstan"
 #, fuzzy, c-format
 msgid "Multi-function device on USB"
 msgstr "，位於 USB 的多功能裝置"
+
+#: ../../../move/move.pm:1
+#, c-format
+msgid ""
+"We didn't detect any USB key on your system. If you\n"
+"plug in an USB key now, Mandrake Move will have the ability\n"
+"to transparently save the data in your home directory and\n"
+"system wide configuration, for next boot on this computer\n"
+"or another one. Note: if you plug in a key now, wait several\n"
+"seconds before detecting again.\n"
+"\n"
+"\n"
+"You may also proceed without an USB key - you'll still be\n"
+"able to use Mandrake Move as a normal live Mandrake\n"
+"Operating System."
+msgstr ""
 
 #: ../../help.pm:1
 #, c-format
@@ -7800,15 +7872,15 @@ msgstr "Sticky-Bit"
 msgid "Other Media"
 msgstr "其他裝置"
 
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "Backup system files"
-msgstr "備份系統檔案"
-
 #: ../../mouse.pm:1
 #, c-format
 msgid "Logitech MouseMan+"
 msgstr "Logitech MouseMan+"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "Backup system files"
+msgstr "備份系統檔案"
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -7871,6 +7943,11 @@ msgstr "自訂磁碟分割"
 msgid "Please choose your type of mouse."
 msgstr "請選取滑鼠的形式。"
 
+#: ../../services.pm:1
+#, c-format
+msgid "running"
+msgstr "執行中"
+
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "class of hardware device"
@@ -7887,11 +7964,6 @@ msgstr ""
 #, c-format
 msgid "United Kingdom"
 msgstr "英國"
-
-#: ../../services.pm:1
-#, c-format
-msgid "running"
-msgstr "執行中"
 
 #: ../../lang.pm:1
 #, c-format
@@ -7937,16 +8009,15 @@ msgstr "Senegal"
 msgid "Command line"
 msgstr "網域名稱"
 
-#: ../../share/advertising/08-store.pl:1
+#: ../advertising/08-store.pl:1
 #, c-format
 msgid ""
 "Our full range of Linux solutions, as well as special offers on products and "
 "other \"goodies\", are available on our e-store:"
 msgstr ""
 "Mandrake 提供了完整的 Linux 解決方案，並且包含我們各式商品，\n"
-"您可以上網瀏覽我們提供的線上電子商店穫得進一步資訊。"
+"您可以上網瀏覽我們提供的線上電子商店獲得進一步資訊。"
 
-# calendar/gui/goto-dialog.glade.h:10
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "March"
@@ -7995,6 +8066,17 @@ msgstr "Swap"
 #, fuzzy, c-format
 msgid "Custom settings"
 msgstr "自訂磁碟分割"
+
+#: ../../../move/move.pm:1
+#, c-format
+msgid ""
+"The USB key seems to have write protection enabled, but we can't safely\n"
+"unplug it now.\n"
+"\n"
+"\n"
+"Click the button to reboot the machine, unplug it, remove write protection,\n"
+"plug the key again, and launch Mandrake Move again."
+msgstr ""
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -8095,7 +8177,7 @@ msgstr "請選擇您要用來連上 Internet 的網路卡"
 msgid "Photo memory card access on your HP multi-function device"
 msgstr ""
 
-#: ../../share/advertising/09-mdksecure.pl:1
+#: ../advertising/09-mdksecure.pl:1
 #, c-format
 msgid ""
 "Enhance your computer performance with the help of a selection of partners "
@@ -8217,6 +8299,11 @@ msgstr ""
 #, c-format
 msgid "Exit install"
 msgstr "離開安裝程式"
+
+#: ../../../move/move.pm:1
+#, c-format
+msgid "Need a key to save your data"
+msgstr ""
 
 #: ../../standalone/drakgw:1
 #, c-format
@@ -8398,11 +8485,6 @@ msgstr "俄羅斯 (音標)"
 msgid "dhcpd Config..."
 msgstr "dhcpd 設定..."
 
-#: ../../standalone/drakgw:1
-#, c-format
-msgid "The setup has already been done, but it's currently disabled."
-msgstr "這個設定先前已經完成了，不過目前是處理關閉沒啟用的狀態"
-
 #: ../../any.pm:1
 #, c-format
 msgid "LILO/grub Installation"
@@ -8546,6 +8628,11 @@ msgstr ""
 msgid "Choose an X server"
 msgstr "選取合適的 X 伺服程式"
 
+#: ../../../move/tree/mdk_totem:1
+#, c-format
+msgid "Copying to memory to allow removing the CDROM"
+msgstr ""
+
 #: ../../install_interactive.pm:1
 #, c-format
 msgid "Swap partition size in MB: "
@@ -8595,7 +8682,7 @@ msgstr "自動化步驟設定"
 msgid "Barbados"
 msgstr "Barbados"
 
-#: ../../share/advertising/02-community.pl:1
+#: ../advertising/02-community.pl:1
 #, c-format
 msgid ""
 "Want to know more and to contribute to the Open Source community? Get "
@@ -8739,7 +8826,6 @@ msgstr "科威特"
 msgid "Choose the window manager to run:"
 msgstr "選取您想使用的視窗管理程式："
 
-# calendar/gui/goto-dialog.glade.h:3
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "December"
@@ -8755,15 +8841,6 @@ msgstr ""
 msgid "First Time Wizard"
 msgstr "首次精靈"
 
-#: ../../install_steps.pm:1
-#, c-format
-msgid ""
-"An error occurred, but I don't know how to handle it nicely.\n"
-"Continue at your own risk."
-msgstr ""
-"發生了一個程式不知道該如何妥善處置的錯誤，\n"
-"要繼續安裝工作的話請小心。"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Taiwan"
@@ -8778,6 +8855,15 @@ msgstr "Pakistan"
 #, c-format
 msgid "please wait, parsing file: %s"
 msgstr "請稍候，正在解析檔案：%s"
+
+#: ../../install_steps.pm:1 ../../../move/move.pm:1
+#, c-format
+msgid ""
+"An error occurred, but I don't know how to handle it nicely.\n"
+"Continue at your own risk."
+msgstr ""
+"發生了一個程式不知道該如何妥善處置的錯誤，\n"
+"要繼續安裝工作的話請小心。"
 
 #: ../../install_steps_gtk.pm:1
 #, fuzzy, c-format
@@ -8971,6 +9057,11 @@ msgstr ""
 "請選擇在載入或者是儲存所選擇的套件到磁片內。\n"
 "該磁片格式就是自動安裝時所製作產生的磁片格式。"
 
+#: ../../../move/tree/mdk_totem:1
+#, fuzzy, c-format
+msgid "No CDROM support"
+msgstr "Radio 支援："
+
 #: ../../standalone/drakxtv:1
 #, c-format
 msgid "China (broadcast)"
@@ -9008,7 +9099,7 @@ msgstr ""
 "載入 %s 模組失敗，\n"
 "您要用其他參數再試一次嗎?"
 
-#: ../../share/advertising/01-thanks.pl:1
+#: ../advertising/01-thanks.pl:1
 #, c-format
 msgid "Welcome to the Open Source world."
 msgstr "歡迎來到開放源碼的世界。"
@@ -9227,6 +9318,11 @@ msgstr "測試連接埠"
 msgid "number of capture buffers for mmap'ed capture"
 msgstr ""
 
+#: ../../network/adsl.pm:1
+#, fuzzy, c-format
+msgid " - detected"
+msgstr "偵測到 %s "
+
 #: ../../harddrake/data.pm:1
 #, c-format
 msgid "SMBus controllers"
@@ -9327,6 +9423,11 @@ msgstr ""
 msgid "Restore"
 msgstr "回存"
 
+#: ../../standalone/drakclock:1
+#, fuzzy, c-format
+msgid "Server:"
+msgstr "主機： "
+
 #: ../../security/help.pm:1
 #, c-format
 msgid "if set to yes, check if the network devices are in promiscuous mode."
@@ -9336,6 +9437,11 @@ msgstr ""
 #, c-format
 msgid "Looking for available packages..."
 msgstr "正在搜尋可以安裝的套件"
+
+#: ../../../move/move.pm:1
+#, fuzzy, c-format
+msgid "Please wait, setting up system configuration files on USB key..."
+msgstr "請稍後，設定安全等級中..."
 
 #: ../../any.pm:1
 #, c-format
@@ -9450,15 +9556,15 @@ msgid ""
 "per second)"
 msgstr ""
 
-#: ../../standalone/printerdrake:1
-#, fuzzy, c-format
-msgid "Mandrake Linux Printer Management Tool"
-msgstr "Mandrake Linux 安裝程式 %s"
-
 #: ../../pkgs.pm:1
 #, c-format
 msgid "important"
 msgstr "重要的"
+
+#: ../../standalone/printerdrake:1
+#, fuzzy, c-format
+msgid "Mandrake Linux Printer Management Tool"
+msgstr "Mandrake Linux 安裝程式 %s"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -9516,6 +9622,11 @@ msgstr "使用者"
 #, c-format
 msgid "Preparing bootloader..."
 msgstr "正在準備開機程式"
+
+#: ../../../move/move.pm:1
+#, c-format
+msgid "Enter your user information, password will be used for screensaver"
+msgstr ""
 
 #: ../../network/network.pm:1
 #, c-format
@@ -9941,15 +10052,15 @@ msgstr "檔案的內容"
 msgid "Authentication LDAP"
 msgstr "LDAP 認證"
 
+#: ../../install_steps_gtk.pm:1
+#, c-format
+msgid "in order to keep %s"
+msgstr ""
+
 #: ../../harddrake/sound.pm:1
 #, c-format
 msgid "Let me pick any driver"
 msgstr "選擇任何驅動程式"
-
-#: ../../standalone/net_monitor:1
-#, fuzzy, c-format
-msgid "Profile "
-msgstr "設定檔："
 
 #: ../../standalone/net_monitor:1
 #, c-format
@@ -10048,9 +10159,9 @@ msgstr "核心版本"
 #: ../../standalone/drakautoinst:1 ../../standalone/drakbackup:1
 #: ../../standalone/drakboot:1 ../../standalone/drakconnect:1
 #: ../../standalone/drakfloppy:1 ../../standalone/drakfont:1
-#: ../../standalone/drakgw:1 ../../standalone/drakperm:1
-#: ../../standalone/draksec:1 ../../standalone/logdrake:1
-#: ../../standalone/mousedrake:1 ../../standalone/net_monitor:1
+#: ../../standalone/drakperm:1 ../../standalone/draksec:1
+#: ../../standalone/logdrake:1 ../../standalone/mousedrake:1
+#: ../../standalone/net_monitor:1
 #, c-format
 msgid "Cancel"
 msgstr "取消"
@@ -10203,15 +10314,6 @@ msgstr "義大利"
 msgid "Basic"
 msgstr "基本"
 
-#: ../../standalone/drakTermServ:1
-#, c-format
-msgid ""
-"\n"
-" Copyright (C) 2002 by MandrakeSoft \n"
-"\tStew Benedict sbenedict\\@mandrakesoft.com\n"
-"\n"
-msgstr ""
-
 #: ../../install_messages.pm:1
 #, c-format
 msgid "http://www.mandrakelinux.com/en/92errata.php3"
@@ -10232,10 +10334,10 @@ msgstr ""
 msgid "Card IO"
 msgstr "介面卡 IO"
 
-#: ../../standalone/drakperm:1
-#, c-format
-msgid "when checked, owner and group won't be changed"
-msgstr "當該項目選取時，將無法另外選擇套用的擁有者與群組項目"
+#: ../../network/drakfirewall.pm:1
+#, fuzzy, c-format
+msgid "Samba server"
+msgstr "Samba 伺服器"
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -10311,6 +10413,11 @@ msgstr ""
 msgid "access to compilation tools"
 msgstr "存取彙整工具"
 
+#: ../../standalone/net_monitor:1
+#, c-format
+msgid "Global statistics"
+msgstr ""
+
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "Please select data to restore..."
@@ -10330,6 +10437,11 @@ msgstr ""
 #, c-format
 msgid "Standard test page"
 msgstr "標準列印測試頁"
+
+#: ../../standalone/drakclock:1
+#, fuzzy, c-format
+msgid "Time Zone"
+msgstr "時區"
 
 #: ../../diskdrake/hd_gtk.pm:1 ../../diskdrake/interactive.pm:1
 #, c-format
@@ -10415,6 +10527,15 @@ msgstr ""
 "請選取您要編輯的前10個項目，按下Enter繼續。\n"
 "您目前選擇是？"
 
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"\n"
+" Copyright (C) 2002 by MandrakeSoft \n"
+"\tStew Benedict sbenedict@mandrakesoft.com\n"
+"\n"
+msgstr ""
+
 #: ../../standalone/draksplash:1
 #, c-format
 msgid "Save theme"
@@ -10440,15 +10561,15 @@ msgstr "網路設定精靈"
 msgid "Removable media automounting"
 msgstr "抽取式裝置自動掛載"
 
-#: ../../standalone/drakbackup:1
-#, fuzzy, c-format
-msgid "Enter the directory to save:"
-msgstr "請輸入您要儲存的目錄名稱："
-
 #: ../../services.pm:1
 #, c-format
 msgid "Printing"
 msgstr "列印"
+
+#: ../../standalone/drakbackup:1
+#, fuzzy, c-format
+msgid "Enter the directory to save:"
+msgstr "請輸入您要儲存的目錄名稱："
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -10566,7 +10687,7 @@ msgstr "Kensington Thinking Mouse"
 msgid "Configuration of a remote printer"
 msgstr "設定遠端印表機"
 
-#: ../../share/advertising/13-mdkexpert_corporate.pl:1
+#: ../advertising/13-mdkexpert_corporate.pl:1
 #, c-format
 msgid "An online platform to respond to enterprise support needs."
 msgstr ""
@@ -10720,15 +10841,22 @@ msgstr ""
 msgid "Configure Local Area Network..."
 msgstr "設定區域網路..."
 
-#: ../../security/l10n.pm:1
+#: ../../../move/move.pm:1
 #, c-format
-msgid "Verify checksum of the suid/sgid files"
+msgid ""
+"The USB key seems to have write protection enabled. Please\n"
+"unplug it, remove write protection, and then plug it again."
 msgstr ""
 
 #: ../../services.pm:1
 #, c-format
 msgid "Launch the sound system on your machine"
 msgstr "在您的系統上啟動音效服務系統"
+
+#: ../../security/l10n.pm:1
+#, c-format
+msgid "Verify checksum of the suid/sgid files"
+msgstr ""
 
 #: ../../security/l10n.pm:1
 #, c-format
@@ -11041,6 +11169,11 @@ msgstr "這個套件一定要更新才行，您不可以不選這個套件"
 msgid "Loading from floppy"
 msgstr "正在載入軟碟中的設定值"
 
+#: ../../standalone/drakclock:1
+#, c-format
+msgid "Timezone - DrakClock"
+msgstr ""
+
 #: ../../security/help.pm:1
 #, c-format
 msgid "Enable/Disable the logging of IPv4 strange packets."
@@ -11187,6 +11320,11 @@ msgstr ""
 "關於設定系統的資訊，您可以在 Mandrake Linux 使用\n"
 "手冊 (Official Mandrake Linux User's Guide) 裡面找到。"
 
+#: ../../standalone/drakclock:1
+#, fuzzy, c-format
+msgid "Enable Network Time Protocol"
+msgstr "網路回存使用的協定：%s"
+
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "paranoid"
@@ -11277,7 +11415,7 @@ msgstr "存取網路工具"
 msgid "Firmware-Upload for HP LaserJet 1000"
 msgstr ""
 
-#: ../../share/advertising/03-software.pl:1
+#: ../advertising/03-software.pl:1
 #, c-format
 msgid ""
 "And, of course, push multimedia to its limits with the very latest software "
@@ -11342,15 +11480,15 @@ msgstr "通訊協定"
 msgid "LVM-disks %s\n"
 msgstr "LVM 磁碟 %s\n"
 
-#: ../../diskdrake/interactive.pm:1
-#, c-format
-msgid "The package %s is needed. Install it?"
-msgstr "這個 %s 套件需要安裝上，您要安裝該套件嗎？"
-
 #: ../../services.pm:1
 #, c-format
 msgid "On boot"
 msgstr "開機自動載入"
+
+#: ../../diskdrake/interactive.pm:1
+#, c-format
+msgid "The package %s is needed. Install it?"
+msgstr "這個 %s 套件需要安裝上，您要安裝該套件嗎？"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -11367,10 +11505,15 @@ msgstr "拉托維亞"
 msgid "Please make a backup of your data first"
 msgstr "請您先備份您的資料"
 
+#: ../../harddrake/data.pm:1
+#, c-format
+msgid "ADSL adapters"
+msgstr ""
+
 #: ../../install_interactive.pm:1
 #, c-format
 msgid "You have more than one hard drive, which one do you install linux on?"
-msgstr "你系統上有多顆硬碟可供安裝 Linux 系統，您打算要準備那一顆供安裝使用？"
+msgstr "你系統上有多個硬碟可供安裝 Linux 系統，您打算要準備那一個供安裝使用？"
 
 #: ../../lang.pm:1
 #, c-format
@@ -11392,7 +11535,7 @@ msgstr "當需要時"
 msgid "Remove List"
 msgstr "移除清單"
 
-#: ../../share/advertising/05-desktop.pl:1
+#: ../advertising/05-desktop.pl:1
 #, c-format
 msgid "A customizable environment"
 msgstr ""
@@ -11609,6 +11752,13 @@ msgstr ""
 #: ../../network/tools.pm:1
 #, c-format
 msgid "Firmware copy succeeded"
+msgstr ""
+
+#: ../../../move/tree/mdk_totem:1
+#, c-format
+msgid ""
+"You can't use another CDROM when the following programs are running: \n"
+"%s"
 msgstr ""
 
 #: ../../security/help.pm:1
@@ -12057,6 +12207,11 @@ msgstr ""
 "「%s」指令，能夠讓您修改某個設定列印工作項目的參數設定。\n"
 "簡單一點的方式就是在命令列加上您要填入的設定值，比方「%s <檔案>」。 "
 
+#: ../../standalone/drakclock:1
+#, fuzzy, c-format
+msgid "DrakClock"
+msgstr "Drakbackup"
+
 #: ../../modules/interactive.pm:1
 #, c-format
 msgid ""
@@ -12087,27 +12242,11 @@ msgstr ""
 "\n"
 "- Daemon (%s) 服務程式包含 :\n"
 
-#: ../../standalone/drakgw:1
-#, c-format
-msgid ""
-"Welcome to the Internet Connection Sharing utility!\n"
-"\n"
-"%s\n"
-"\n"
-"Click on Configure to launch the setup wizard."
-msgstr ""
-"歡迎來到 Internet 連線分享設定工具！\n"
-"\n"
-"%s\n"
-"\n"
-"點選設定來啟動設定精靈。"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Cuba"
 msgstr "Cuba"
 
-# calendar/gui/goto-dialog.glade.h:13
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "October"
@@ -12282,6 +12421,11 @@ msgstr ""
 msgid "Christmas Island"
 msgstr "Christmas Island"
 
+#: ../../mouse.pm:1
+#, fuzzy, c-format
+msgid "Automatic"
+msgstr "自動分配 IP"
+
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Installation of bootloader failed. The following error occured:"
@@ -12385,11 +12529,6 @@ msgstr ""
 #, c-format
 msgid "Set root password and network authentication methods"
 msgstr ""
-
-#: ../../standalone/drakgw:1
-#, c-format
-msgid "Internet Connection Sharing configuration"
-msgstr "Internet 連線分享設定"
 
 #: ../../ugtk2.pm:1
 #, c-format
@@ -12635,6 +12774,11 @@ msgstr "選擇要用來製作開機磁片的軟碟機"
 msgid "LILO with text menu"
 msgstr "文字選單 LILO 程式"
 
+#: ../../standalone/net_monitor:1
+#, c-format
+msgid "instantaneous"
+msgstr ""
+
 #: ../../network/drakfirewall.pm:1
 #, c-format
 msgid "Everything (no firewall)"
@@ -12822,6 +12966,11 @@ msgstr "請輸入使用者帳號"
 msgid "Enable CD Boot?"
 msgstr "允許 CD 開機？"
 
+#: ../../../move/move.pm:1
+#, c-format
+msgid "Simply reboot"
+msgstr ""
+
 #: ../../interactive/stdio.pm:1
 #, c-format
 msgid " enter `void' for void entry"
@@ -12832,7 +12981,6 @@ msgstr "輸入「void」表示空的項目"
 msgid "Backups on unmountable media - Use Catalog to restore"
 msgstr ""
 
-# calendar/gui/goto-dialog.glade.h:7
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "January"
@@ -12907,15 +13055,15 @@ msgid ""
 "other machines on your local network as well."
 msgstr ""
 
-#: ../../install_steps_interactive.pm:1
-#, c-format
-msgid "Which is your timezone?"
-msgstr "您的時區為何 ?"
-
 #: ../../standalone/drakbackup:1
 #, fuzzy, c-format
 msgid "Can't create log file!"
 msgstr "無法建立 catalog 資訊"
+
+#: ../../install_steps_interactive.pm:1 ../../standalone/drakclock:1
+#, c-format
+msgid "Which is your timezone?"
+msgstr "您的時區為何 ?"
 
 #: ../../standalone/drakbackup:1
 #, fuzzy, c-format
@@ -12962,6 +13110,11 @@ msgstr "Mozambique"
 msgid "Icon"
 msgstr "圖示"
 
+#: ../../../move/tree/mdk_totem:1
+#, fuzzy, c-format
+msgid "Kill those programs"
+msgstr "存取 X 發生錯誤"
+
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "Please choose what you want to backup"
@@ -12997,7 +13150,7 @@ msgstr "新增規則"
 msgid "Chunk size %s\n"
 msgstr "組塊大小 %s\n"
 
-#: ../../share/advertising/02-community.pl:1
+#: ../advertising/02-community.pl:1
 #, c-format
 msgid "Build the future of Linux!"
 msgstr ""
@@ -13128,7 +13281,7 @@ msgstr ""
 "因為一般 Server 伺服器並不跑 X 環境執行相關GUI圖形\n"
 "介面軟體程式。"
 
-#: ../../share/advertising/13-mdkexpert_corporate.pl:1
+#: ../advertising/13-mdkexpert_corporate.pl:1
 #, c-format
 msgid "MandrakeExpert Corporate"
 msgstr "MandrakeExprt 組織"
@@ -13166,6 +13319,11 @@ msgstr "印表機型號選擇"
 msgid ""
 "After changing type of partition %s, all data on this partition will be lost"
 msgstr "改變分割區 %s 的格式以後，所有在這個分割區上的資料都會被清除"
+
+#: ../../harddrake/data.pm:1
+#, fuzzy, c-format
+msgid "ISDN adapters"
+msgstr "內部 ISDN 介面卡"
 
 #: ../../common.pm:1
 #, c-format
@@ -13358,7 +13516,6 @@ msgstr ""
 msgid "Comoros"
 msgstr "Comoros"
 
-# calendar/gui/goto-dialog.glade.h:11
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "May"
@@ -13439,6 +13596,11 @@ msgstr "可用的印表機"
 msgid "Plug'n Play probing failed. Please select the correct monitor"
 msgstr "Plug'n Play 偵測失敗，請選擇預期的螢幕項目"
 
+#: ../../../move/move.pm:1
+#, c-format
+msgid "Detect again USB key"
+msgstr ""
+
 #: ../../services.pm:1
 #, c-format
 msgid "Services and deamons"
@@ -13480,7 +13642,7 @@ msgstr "設定系統服務"
 msgid "Slovakian (QWERTZ)"
 msgstr "斯洛法克 (QWERTZ)"
 
-#: ../../share/advertising/06-development.pl:1
+#: ../advertising/06-development.pl:1
 #, c-format
 msgid ""
 "To modify and to create in different languages such as Perl, Python, C and C+"
@@ -13543,6 +13705,11 @@ msgstr "Algeria"
 #, c-format
 msgid "Restore Via Network"
 msgstr "使用網路回存檔案"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "Use tar and bzip2 (rather than tar and gzip)"
+msgstr ""
 
 #: ../../any.pm:1
 #, c-format
@@ -13658,7 +13825,7 @@ msgstr ""
 msgid "Georgian (\"Latin\" layout)"
 msgstr "喬治亞 (\"拉丁式\" 配置)"
 
-#: ../../share/advertising/09-mdksecure.pl:1
+#: ../advertising/09-mdksecure.pl:1
 #, c-format
 msgid "Get the best items with Mandrake Linux Strategic partners"
 msgstr ""
@@ -13760,7 +13927,7 @@ msgstr "自動登入"
 msgid "Domain Admin Password"
 msgstr "網域管理密碼"
 
-#: ../../share/advertising/05-desktop.pl:1
+#: ../advertising/05-desktop.pl:1
 #, fuzzy, c-format
 msgid ""
 "Perfectly adapt your computer to your needs thanks to the 11 available "
@@ -13896,6 +14063,11 @@ msgstr ""
 msgid "Pipe job into a command"
 msgstr "使用 Pipe 管線方式組成列印工作"
 
+#: ../../../move/move.pm:1
+#, fuzzy, c-format
+msgid "Remove system config files"
+msgstr "移除繞回裝置 (loopback) 檔案？"
+
 #: ../../lang.pm:1
 #, c-format
 msgid "Cote d'Ivoire"
@@ -13907,7 +14079,8 @@ msgid "new dynamic device name generated by core kernel devfs"
 msgstr "由何新的 devfs 提供產生的動態新裝置名稱"
 
 #: ../../help.pm:1 ../../install_any.pm:1 ../../interactive.pm:1
-#: ../../ugtk2.pm:1 ../../modules/interactive.pm:1 ../../standalone/drakgw:1
+#: ../../ugtk2.pm:1 ../../modules/interactive.pm:1
+#: ../../standalone/drakclock:1 ../../standalone/drakgw:1
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "Yes"
@@ -13928,11 +14101,6 @@ msgstr "回存進度"
 msgid "Estonia"
 msgstr "Estonia"
 
-#: ../../standalone/scannerdrake:1
-#, c-format
-msgid "Choose the host on which the local scanners should be made available:"
-msgstr ""
-
 #: ../../partition_table.pm:1
 #, c-format
 msgid ""
@@ -13942,6 +14110,11 @@ msgid ""
 msgstr ""
 "您的硬碟分割表中有程式無法使用的空白磁區，唯一的解決方法是\n"
 "將主分割區的位置搬移，讓這些空白磁區與延伸分割區相鄰。"
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "Choose the host on which the local scanners should be made available:"
+msgstr ""
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -13953,11 +14126,6 @@ msgstr "取消"
 #, c-format
 msgid "Add"
 msgstr "新增"
-
-#: ../../standalone/drakgw:1
-#, c-format
-msgid "No Internet Connection Sharing has ever been configured."
-msgstr "Internet 連線分享尚未設定。"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -14247,7 +14415,7 @@ msgstr "這是安裝或是升級?"
 msgid "ISDN card"
 msgstr "內部 ISDN 介面卡"
 
-#: ../../share/advertising/02-community.pl:1
+#: ../advertising/02-community.pl:1
 #, c-format
 msgid ""
 "To share your own knowledge and help build Linux software, join our "
@@ -14283,6 +14451,40 @@ msgid ""
 "Using the ``Upgrade'' option should work fine on Mandrake Linux systems\n"
 "running version \"8.1\" or later. Performing an Upgrade on versions prior\n"
 "to Mandrake Linux version \"8.1\" is not recommended."
+msgstr ""
+
+#: ../../standalone/drakfont:1
+#, c-format
+msgid ""
+"\n"
+" Copyright (C) 2001-2002 by MandrakeSoft \n"
+"     DUPONT Sebastien (original version)\n"
+"     CHAUMETTE Damien <dchaumette@mandrakesoft.com>\n"
+"\n"
+" This program is free software; you can redistribute it and/or modify\n"
+" it under the terms of the GNU General Public License as published by\n"
+" the Free Software Foundation; either version 2, or (at your option)\n"
+" any later version.\n"
+"\n"
+" This program is distributed in the hope that it will be useful,\n"
+" but WITHOUT ANY WARRANTY; without even the implied warranty of\n"
+" MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n"
+" GNU General Public License for more details.\n"
+"\n"
+" You should have received a copy of the GNU General Public License\n"
+" along with this program; if not, write to the Free Software\n"
+" Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.\n"
+"\n"
+" Thanks:\n"
+"    -  pfm2afm:   \n"
+"\t by Ken Borgendale:\n"
+"\t    Convert a Windows .pfm  file to a .afm (Adobe Font Metrics)\n"
+"    -  type1inst:\n"
+"\t by James Macnicol: \n"
+"\t    type1inst generates files fonts.dir fonts.scale & Fontmap.\n"
+"    -  ttf2pt1:   \n"
+"\t  by Andrew Weeks, Frank Siegert, Thomas Henlich, Sergey Babkin  \n"
+"             Convert ttf font files to afm and pfb fonts\n"
 msgstr ""
 
 #: ../../printer/main.pm:1
@@ -14351,6 +14553,11 @@ msgstr "DHCP 起始範圍"
 msgid "Unsafe"
 msgstr "解除磁碟檢查"
 
+#: ../../network/drakfirewall.pm:1
+#, fuzzy, c-format
+msgid "SSH server"
+msgstr "NIS 伺服主機"
+
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid ", %s sectors"
@@ -14358,7 +14565,7 @@ msgstr "，第 %s 磁區"
 
 #: ../../help.pm:1 ../../install_any.pm:1 ../../interactive.pm:1
 #: ../../ugtk2.pm:1 ../../modules/interactive.pm:1
-#: ../../standalone/harddrake2:1
+#: ../../standalone/drakclock:1 ../../standalone/harddrake2:1
 #, c-format
 msgid "No"
 msgstr "否"
@@ -14428,7 +14635,6 @@ msgstr "NetWare 印表機選項"
 msgid "%s BootSplash (%s) preview"
 msgstr "%s 開機進度畫面 (%s) 御覽"
 
-# calendar/gui/goto-dialog.glade.h:4
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "February"
@@ -14454,7 +14660,6 @@ msgstr "新增使用者"
 msgid "Network configuration (%d adapters)"
 msgstr "網路組態 (%d 介面卡)"
 
-# calendar/gui/goto-dialog.glade.h:1
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "April"
@@ -14911,6 +15116,11 @@ msgstr "移除選取項目"
 msgid "Network configuration"
 msgstr "網路設定"
 
+#: ../../standalone/harddrake2:1
+#, fuzzy, c-format
+msgid "/Autodetect _jaz drives"
+msgstr "自動偵測"
+
 #: ../../any.pm:1
 #, c-format
 msgid "No sharing"
@@ -15025,9 +15235,10 @@ msgstr ""
 #: ../../install_steps.pm:1 ../../diskdrake/dav.pm:1
 #: ../../diskdrake/hd_gtk.pm:1 ../../diskdrake/interactive.pm:1
 #: ../../diskdrake/smbnfs_gtk.pm:1 ../../interactive/http.pm:1
-#: ../../standalone/drakboot:1 ../../standalone/drakbug:1
+#: ../../standalone/drakauth:1 ../../standalone/drakboot:1
+#: ../../standalone/drakbug:1 ../../standalone/drakconnect:1
 #: ../../standalone/drakfloppy:1 ../../standalone/drakfont:1
-#: ../../standalone/draksplash:1
+#: ../../standalone/draksplash:1 ../../../move/move.pm:1
 #, c-format
 msgid "Error"
 msgstr "錯誤"
@@ -15071,6 +15282,11 @@ msgstr ""
 "您的系統支援多重顯示卡環境。\n"
 "您打算怎麼做呢？"
 
+#: ../../partition_table.pm:1
+#, c-format
+msgid "mount failed: "
+msgstr "掛載失敗："
+
 #: ../../steps.pm:1
 #, c-format
 msgid "Configure services"
@@ -15080,11 +15296,6 @@ msgstr "設定系統服務"
 #, c-format
 msgid "Broadcast Address:"
 msgstr ""
-
-#: ../../partition_table.pm:1
-#, c-format
-msgid "mount failed: "
-msgstr "掛載失敗："
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -15099,15 +15310,15 @@ msgstr ""
 msgid "Image"
 msgstr "核心"
 
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "Failed to add the printer \"%s\" to Star Office/OpenOffice.org/GIMP."
-msgstr "無法新增印表機 \"%s\" 到 Star Office/OpenOffice.org/GIMP 內。"
-
 #: ../../services.pm:1
 #, c-format
 msgid "Remote Administration"
 msgstr "遠端管理"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Failed to add the printer \"%s\" to Star Office/OpenOffice.org/GIMP."
+msgstr "無法新增印表機 \"%s\" 到 Star Office/OpenOffice.org/GIMP 內。"
 
 #: ../../modules.pm:1
 #, c-format
@@ -15155,7 +15366,6 @@ msgstr "所有"
 msgid "Which printing system (spooler) do you want to use?"
 msgstr "您打算用那一套列印系統？"
 
-# calendar/gui/goto-dialog.glade.h:8
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "July"
@@ -15166,7 +15376,7 @@ msgstr "7月"
 msgid "Prints into %s"
 msgstr "，列印至 %s"
 
-#: ../../install_steps_interactive.pm:1
+#: ../../install_steps_interactive.pm:1 ../../../move/move.pm:1
 #, c-format
 msgid "An error occurred"
 msgstr "發生一個錯誤"
@@ -15240,8 +15450,6 @@ msgstr "Netware 伺服器印表機"
 msgid "Give the ram size in MB"
 msgstr "輸入記憶體大小 (以 MB 為單位)"
 
-# calendar/gui/dialogs/cal-prefs-dialog.glade.h:23
-# calendar/gui/event-editor.c:479
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "Friday"
@@ -15322,7 +15530,6 @@ msgstr "這個過程將會需要花費一些時間。"
 msgid "Burkina Faso"
 msgstr "Burkina Faso"
 
-# calendar/gui/goto-dialog.glade.h:9
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "June"
@@ -15378,13 +15585,12 @@ msgstr "位在通道 %d id %d\n"
 msgid ", multi-function device"
 msgstr "，多功能裝置"
 
-# mail/message-list.c:685
 #: ../../lang.pm:1
 #, c-format
 msgid "Laos"
 msgstr "寮國"
 
-#: ../../share/advertising/04-configuration.pl:1
+#: ../advertising/04-configuration.pl:1
 #, c-format
 msgid ""
 "Mandrake Linux 9.2 provides you with the Mandrake Control Center, a powerful "
@@ -15453,7 +15659,6 @@ msgstr ""
 msgid "Saint Pierre and Miquelon"
 msgstr "Saint Pierre and Miquelon"
 
-# calendar/gui/goto-dialog.glade.h:14
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "September"
@@ -15559,11 +15764,6 @@ msgstr "需要建立 /etc/dhcpd.conf 檔案！"
 msgid "Is FPU present"
 msgstr ""
 
-#: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
-msgid "There are no scanners found which are available on your system.\n"
-msgstr "您的系統偵測不到有任何本機印表機的安裝"
-
 #: ../../services.pm:1
 #, c-format
 msgid ""
@@ -15572,6 +15772,11 @@ msgid ""
 msgstr ""
 "抱歉 ! 這個服務項目並沒有\n"
 "額外的相關資訊。"
+
+#: ../../standalone/scannerdrake:1
+#, fuzzy, c-format
+msgid "There are no scanners found which are available on your system.\n"
+msgstr "您的系統偵測不到有任何本機印表機的安裝"
 
 #: ../../standalone/drakTermServ:1
 #, c-format
@@ -15612,18 +15817,6 @@ msgstr "裝置設備"
 #, c-format
 msgid "if set to yes, report unowned files."
 msgstr ""
-
-#: ../../standalone/harddrake2:1
-#, fuzzy, c-format
-msgid ""
-"This is HardDrake, a Mandrake hardware configuration tool.\n"
-"<span foreground=\"royalblue3\">Version:</span> %s\n"
-"<span foreground=\"royalblue3\">Author:</span> Thierry Vignaud &lt;tvignaud"
-"\\@mandrakesoft.com&gt;\n"
-"\n"
-msgstr ""
-"這是 HardDrake 程式，Mandrake 所發展的硬體檢視設定工具。\n"
-"版本："
 
 #: ../../install_interactive.pm:1
 #, c-format
@@ -15706,10 +15899,21 @@ msgstr "Viet Nam"
 msgid "/_Fields description"
 msgstr "描述"
 
-#: ../../share/advertising/10-security.pl:1
+#: ../advertising/10-security.pl:1
 #, c-format
 msgid "Optimize your security by using Mandrake Linux"
 msgstr "讓您的系統更加安全"
+
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"\n"
+"\n"
+" Thanks:\n"
+"\t- LTSP Project http://www.ltsp.org\n"
+"\t- Michael Brown <mbrown@fensystems.co.uk>\n"
+"\n"
+msgstr ""
 
 #: ../../install_steps_gtk.pm:1 ../../interactive.pm:1 ../../ugtk2.pm:1
 #: ../../Xconfig/resolution_and_depth.pm:1 ../../diskdrake/hd_gtk.pm:1
@@ -15801,7 +16005,7 @@ msgstr ""
 msgid "mkinitrd optional arguments"
 msgstr "mkinitrd 選項"
 
-#: ../../share/advertising/03-software.pl:1
+#: ../advertising/03-software.pl:1
 #, c-format
 msgid ""
 "Surf the Web with Mozilla or Konqueror, read your mail with Evolution or "
@@ -15997,6 +16201,11 @@ msgstr "重新啟動 XFS 服務"
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Printing/Scanning/Photo Cards on \"%s\""
+msgstr ""
+
+#: ../../../move/move.pm:1
+#, c-format
+msgid "Continue without USB key"
 msgstr ""
 
 #: ../../install_steps.pm:1
@@ -16429,7 +16638,7 @@ msgstr "一般 modem 連線方式"
 msgid "Hardware probing in progress"
 msgstr "正在偵測中"
 
-#: ../../standalone/drakgw:1
+#: ../../network/shorewall.pm:1 ../../standalone/drakgw:1
 #, fuzzy, c-format
 msgid "Net Device"
 msgstr "Xinetd 服務"
@@ -16494,6 +16703,11 @@ msgid ""
 msgstr ""
 "系統需要安裝上 ImageMagick 套件才能夠進行設定。\n"
 "請點選 \"確定\" 安裝該套件，或者是點選 \"取消\" 放棄安裝"
+
+#: ../../network/drakfirewall.pm:1
+#, fuzzy, c-format
+msgid "Telnet server"
+msgstr "X 伺服程式"
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -16642,8 +16856,6 @@ msgstr "介面卡 %s： %s"
 msgid "Boot disk creation"
 msgstr "製作開機磁片"
 
-# calendar/gui/dialogs/cal-prefs-dialog.glade.h:30
-# calendar/gui/event-editor.c:475
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "Monday"
@@ -16757,7 +16969,7 @@ msgstr "Syslog (系統記錄)"
 msgid "Can't create catalog!"
 msgstr "無法建立 catalog 資訊"
 
-#: ../../share/advertising/11-mnf.pl:1
+#: ../advertising/11-mnf.pl:1
 #, c-format
 msgid ""
 "Complete your security setup with this very easy-to-use software which "
@@ -16807,6 +17019,11 @@ msgstr "Internet 連線設定"
 #, c-format
 msgid "Add the name as an exception to the handling of password aging by msec."
 msgstr ""
+
+#: ../../network/isdn.pm:1
+#, fuzzy, c-format
+msgid "USB"
+msgstr "LSB"
 
 #: ../../standalone/drakxtv:1
 #, c-format
@@ -16867,6 +17084,11 @@ msgstr "工作群組"
 #, c-format
 msgid "Printer host name or IP"
 msgstr "印表機主機名稱或是IP"
+
+#: ../../standalone/drakconnect:1
+#, fuzzy, c-format
+msgid "down"
+msgstr "完成"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -17009,9 +17231,9 @@ msgstr ""
 "備份 SSH 的憑證檔案"
 
 #: ../../any.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Here is the full list of available countries"
-msgstr "下面清單是可供選擇的鍵盤列表"
+msgstr "以下是所有的國家/地區"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -17044,10 +17266,6 @@ msgstr "PAP"
 msgid "Backup user files"
 msgstr "備份使用者檔案"
 
-# ui/evolution-calendar.xml.h:40
-# ui/evolution-event-editor.xml.h:66
-# ui/evolution-task-editor-dialog.xml.h:79
-# ui/evolution.xml.h:58
 #: ../../diskdrake/dav.pm:1
 #, c-format
 msgid "New"
@@ -17298,6 +17516,11 @@ msgstr "新增項目"
 msgid "The printers on this machine are available to other computers"
 msgstr ""
 
+#: ../../lang.pm:1
+#, c-format
+msgid "China (Hong Kong)"
+msgstr "中國(香港)"
+
 #: ../../standalone/drakautoinst:1
 #, c-format
 msgid "I can't find needed image file `%s'."
@@ -17351,7 +17574,7 @@ msgstr "尚未安裝"
 msgid "American Samoa"
 msgstr "American Samoa"
 
-#: ../../share/advertising/12-mdkexpert.pl:1
+#: ../advertising/12-mdkexpert.pl:1
 #, c-format
 msgid "Become a MandrakeExpert"
 msgstr "成為 MandrakeExpert 專家"
@@ -17473,6 +17696,11 @@ msgstr "義大利"
 msgid "Cayman Islands"
 msgstr "Cayman Islands"
 
+#: ../../fs.pm:1 ../../partition_table.pm:1
+#, c-format
+msgid "error unmounting %s: %s"
+msgstr "卸下 %s 的掛載時發生錯誤： %s"
+
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Name of printer"
@@ -17482,11 +17710,6 @@ msgstr "印表機名稱"
 #, c-format
 msgid "disable"
 msgstr "關閉"
-
-#: ../../fs.pm:1 ../../partition_table.pm:1
-#, c-format
-msgid "error unmounting %s: %s"
-msgstr "卸下 %s 的掛載時發生錯誤： %s"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -17588,7 +17811,7 @@ msgstr "緊密模式"
 msgid "Detected model: %s %s"
 msgstr "偵測到的型號：%s %s"
 
-#: ../../share/advertising/03-software.pl:1
+#: ../advertising/03-software.pl:1
 #, c-format
 msgid "MandrakeSoft has selected the best software for you"
 msgstr ""
@@ -17719,6 +17942,11 @@ msgstr "開機時啟動 X 環境"
 msgid " adsl"
 msgstr ""
 
+#: ../../raid.pm:1
+#, c-format
+msgid "Not enough partitions for RAID level %d\n"
+msgstr "分割區數目不足以用來設定成為階層 %d 的磁碟陣列\n"
+
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "format of floppies supported by the drive"
@@ -17728,11 +17956,6 @@ msgstr ""
 #, c-format
 msgid "Firmware copy failed, file %s not found"
 msgstr ""
-
-#: ../../raid.pm:1
-#, c-format
-msgid "Not enough partitions for RAID level %d\n"
-msgstr "分割區數目不足以用來設定成為階層 %d 的磁碟陣列\n"
 
 #: ../../standalone/drakTermServ:1
 #, fuzzy, c-format
@@ -17860,7 +18083,7 @@ msgid ""
 "No CD or DVD image found, please copy the installation program and rpm files."
 msgstr ""
 
-#: ../../share/advertising/04-configuration.pl:1
+#: ../advertising/04-configuration.pl:1
 #, fuzzy, c-format
 msgid "Mandrake's multipurpose configuration tool"
 msgstr "Mandrake Terminal Server 設定"
@@ -17890,7 +18113,7 @@ msgstr "丹麥"
 msgid "Enter a printer device URI"
 msgstr "輸入印表機所在 URI 位址"
 
-#: ../../share/advertising/01-thanks.pl:1
+#: ../advertising/01-thanks.pl:1
 #, c-format
 msgid ""
 "The success of MandrakeSoft is based upon the principle of Free Software. "
@@ -18205,8 +18428,6 @@ msgstr ""
 "Delay 的功能。\n"
 " * Default OS: 作為預設開機的選擇項目。"
 
-# calendar/gui/dialogs/cal-prefs-dialog.glade.h:55
-# calendar/gui/event-editor.c:477
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "Wednesday"
@@ -18388,7 +18609,7 @@ msgstr "介面卡模組："
 msgid "Thin Client"
 msgstr "DHCP 用戶端"
 
-#: ../../share/advertising/01-thanks.pl:1
+#: ../advertising/01-thanks.pl:1
 #, c-format
 msgid "Thank you for choosing Mandrake Linux 9.2"
 msgstr "感謝您選擇 Mandrake Linux 9.2"
@@ -18491,6 +18712,13 @@ msgstr "安裝Windows字型"
 msgid "Mouse Systems"
 msgstr "Mouse Systems"
 
+#: ../../standalone/drakclock:1
+#, c-format
+msgid ""
+"Your computer can synchronize its clock\n"
+" with a remote time server using NTP"
+msgstr ""
+
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Iranian"
@@ -18516,7 +18744,7 @@ msgstr "新增使用者"
 msgid "Remote printer name"
 msgstr "遠端印表機名稱"
 
-#: ../../share/advertising/10-security.pl:1
+#: ../advertising/10-security.pl:1
 #, c-format
 msgid ""
 "MandrakeSoft has designed exclusive tools to create the most secured Linux "
@@ -18671,6 +18899,11 @@ msgstr "Microsoft Explorer"
 msgid "Uninstall Fonts"
 msgstr "移除字型"
 
+#: ../../../move/move.pm:1
+#, fuzzy, c-format
+msgid "Please wait, detecting and configuring devices..."
+msgstr "請稍後，設定安全等級中..."
+
 #: ../../keyboard.pm:1
 #, c-format
 msgid "German (no dead keys)"
@@ -18697,11 +18930,6 @@ msgid ""
 "You can export using NFS or Samba. Please select which you'd like to use."
 msgstr "您能夠分享出 NFS 或者是 Samba 資源。您打算用那個"
 
-#: ../../help.pm:1 ../../install_steps_interactive.pm:1
-#, fuzzy, c-format
-msgid "Reboot"
-msgstr "/ 分割區"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Gambia"
@@ -18711,6 +18939,12 @@ msgstr "Gambia"
 #, c-format
 msgid "Mandrake Control Center"
 msgstr "Mandrake 控制中心"
+
+#: ../../help.pm:1 ../../install_steps_interactive.pm:1
+#: ../../../move/move.pm:1
+#, fuzzy, c-format
+msgid "Reboot"
+msgstr "/ 分割區"
 
 #: ../../printer/main.pm:1
 #, fuzzy, c-format
@@ -18744,6 +18978,11 @@ msgstr ""
 #, c-format
 msgid "Remember this password"
 msgstr "記住該密碼"
+
+#: ../../install_steps_gtk.pm:1
+#, c-format
+msgid "due to unsatisfied %s"
+msgstr ""
 
 #: ../../standalone/drakgw:1
 #, c-format
@@ -18803,6 +19042,11 @@ msgstr "Papua New Guinea"
 #, fuzzy, c-format
 msgid "Multi-function device on a parallel port"
 msgstr "，位於並列埠多功能裝置 \\/*%s"
+
+#: ../../../move/tree/mdk_totem:1
+#, fuzzy, c-format
+msgid "Busy files"
+msgstr "備份系統檔案"
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -18865,6 +19109,18 @@ msgstr ""
 msgid "DHCP Client"
 msgstr "DHCP 用戶端"
 
+#: ../../standalone/harddrake2:1
+#, fuzzy, c-format
+msgid ""
+"This is HardDrake, a Mandrake hardware configuration tool.\n"
+"<span foreground=\"royalblue3\">Version:</span> %s\n"
+"<span foreground=\"royalblue3\">Author:</span> Thierry Vignaud &lt;"
+"tvignaud@mandrakesoft.com&gt;\n"
+"\n"
+msgstr ""
+"這是 HardDrake 程式，Mandrake 所發展的硬體檢視設定工具。\n"
+"版本："
+
 #: ../../standalone/drakgw:1
 #, c-format
 msgid "dismiss"
@@ -18894,8 +19150,6 @@ msgstr ""
 msgid "Irish"
 msgstr ""
 
-# calendar/gui/dialogs/cal-prefs-dialog.glade.h:44
-# calendar/gui/event-editor.c:481
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "Sunday"
@@ -19055,47 +19309,13 @@ msgstr "不傳送印表機"
 msgid "Delay before booting the default image"
 msgstr "在啟動作業系統前先延遲的時間"
 
-#: ../../standalone/drakfont:1
-#, c-format
-msgid ""
-"\n"
-" Copyright (C) 2001-2002 by MandrakeSoft \n"
-"     DUPONT Sebastien (original version)\n"
-"     CHAUMETTE Damien <dchaumette\\@mandrakesoft.com>\n"
-"\n"
-" This program is free software; you can redistribute it and/or modify\n"
-" it under the terms of the GNU General Public License as published by\n"
-" the Free Software Foundation; either version 2, or (at your option)\n"
-" any later version.\n"
-"\n"
-" This program is distributed in the hope that it will be useful,\n"
-" but WITHOUT ANY WARRANTY; without even the implied warranty of\n"
-" MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n"
-" GNU General Public License for more details.\n"
-"\n"
-" You should have received a copy of the GNU General Public License\n"
-" along with this program; if not, write to the Free Software\n"
-" Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.\n"
-"\n"
-" Thanks:\n"
-"    -  pfm2afm:   \n"
-"\t by Ken Borgendale:\n"
-"\t    Convert a Windows .pfm  file to a .afm (Adobe Font Metrics)\n"
-"    -  type1inst:\n"
-"\t by James Macnicol: \n"
-"\t    type1inst generates files fonts.dir fonts.scale & Fontmap.\n"
-"    -  ttf2pt1:   \n"
-"\t  by Andrew Weeks, Frank Siegert, Thomas Henlich, Sergey Babkin  \n"
-"             Convert ttf font files to afm and pfb fonts\n"
-msgstr ""
-
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "Use Hard Disk to backup"
 msgstr "使用硬碟進行備份"
 
 #: ../../help.pm:1 ../../install_steps_gtk.pm:1 ../../standalone/drakbackup:1
-#: ../../standalone/drakboot:1 ../../standalone/drakgw:1
+#: ../../standalone/drakboot:1
 #, c-format
 msgid "Configure"
 msgstr "設定"
@@ -19161,7 +19381,7 @@ msgstr ""
 "有一部分重要的套件無法安裝到系統。\n"
 "可能是您的 cdrom 硬體有問題，或者是 CD 安裝片毀損了\n"
 
-#: ../../share/advertising/06-development.pl:1
+#: ../advertising/06-development.pl:1
 #, c-format
 msgid "Mandrake Linux 9.2: the ultimate development platform"
 msgstr ""
@@ -19242,6 +19462,11 @@ msgstr "     解析度     "
 msgid "Services"
 msgstr "Server 程式"
 
+#: ../../../move/move.pm:1
+#, fuzzy, c-format
+msgid "Auto configuration"
+msgstr "警示設定"
+
 #: ../../Xconfig/card.pm:1
 #, c-format
 msgid "4 MB"
@@ -19280,9 +19505,10 @@ msgid "Internet station"
 msgstr "Internet 平台"
 
 #: ../../share/compssUsers:999
+#, fuzzy
 msgid ""
-"Set of tools to read and send mail and news (pine, mutt, tin..) and to "
-"browse the Web"
+"Set of tools to read and send mail and news (mutt, tin..) and to browse the "
+"Web"
 msgstr ""
 "包含讀信、寫信以及閱讀網路論壇的工具 (pine、mutt、tin ..) 與及 web 瀏覽工具"
 
@@ -19422,6 +19648,37 @@ msgid "Set of tools to read and send mail and news and to browse the Web"
 msgstr ""
 "包含讀信、寫信以及閱讀網路論壇的工具 (pine、mutt、tin ..) 與及 web 瀏覽工具"
 
+#~ msgid "The setup has already been done, and it's currently enabled."
+#~ msgstr "這個設定先前已經完成了，目前是處理開啟可用的狀態"
+
+#~ msgid "The setup has already been done, but it's currently disabled."
+#~ msgstr "這個設定先前已經完成了，不過目前是處理關閉沒啟用的狀態"
+
+#~ msgid ""
+#~ "Welcome to the Internet Connection Sharing utility!\n"
+#~ "\n"
+#~ "%s\n"
+#~ "\n"
+#~ "Click on Configure to launch the setup wizard."
+#~ msgstr ""
+#~ "歡迎來到 Internet 連線分享設定工具！\n"
+#~ "\n"
+#~ "%s\n"
+#~ "\n"
+#~ "點選設定來啟動設定精靈。"
+
+#~ msgid "Internet Connection Sharing configuration"
+#~ msgstr "Internet 連線分享設定"
+
+#~ msgid "No Internet Connection Sharing has ever been configured."
+#~ msgstr "Internet 連線分享尚未設定。"
+
+#~ msgid "Hong Kong"
+#~ msgstr "香港"
+
+#~ msgid "when checked, owner and group won't be changed"
+#~ msgstr "當該項目選取時，將無法另外選擇套用的擁有者與群組項目"
+
 #~ msgid "\t-CDROM.\n"
 #~ msgstr "\t-光碟機\n"
 
@@ -19559,9 +19816,6 @@ msgstr ""
 
 #~ msgid "CDROM / DVDROM"
 #~ msgstr "CDROM / DVDROM"
-
-#~ msgid "China (Hong Kong)"
-#~ msgstr "中國(香港)"
 
 #~ msgid ""
 #~ "Choose the hard drive you want to erase in order to install your new\n"
@@ -19955,7 +20209,7 @@ msgstr ""
 #~ "If you do have a TV card but DrakX has neither detected it (no bttv nor "
 #~ "saa7134\n"
 #~ "module in \"/etc/modules\") nor installed xawtv, please send the\n"
-#~ "results of \"lspcidrake -v -f\" to \"install\\@mandrakesoft.com\"\n"
+#~ "results of \"lspcidrake -v -f\" to \"install@mandrakesoft.com\"\n"
 #~ "with subject \"undetected TV card\".\n"
 #~ "\n"
 #~ "\n"
@@ -19968,7 +20222,7 @@ msgstr ""
 #~ "(一般可以由/etc/modules 檔案內是否包含 bttv 或是\n"
 #~ "saa7134 項目判定之)，請執行\"lspcidrake -v -f\"\n"
 #~ "然後將執行結果以標題為 \"Undeleted TV card\" 的信件寄到\n"
-#~ "\"install\\@mandrakesoft.com\"\n"
+#~ "\"install@mandrakesoft.com\"\n"
 #~ "。\n"
 #~ "\n"
 #~ "您現在可以開啟一個終端機程式，或者是在文字介面下，\n"

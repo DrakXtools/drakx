@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX\n"
-"POT-Creation-Date: 2003-09-16 13:45+0200\n"
+"POT-Creation-Date: 2003-12-03 03:09+0100\n"
 "PO-Revision-Date: 2001-03-17 19:17+0100\n"
 "Last-Translator: Jesús Bravo Álvarez (mdk) <jba@pobox.com>\n"
 "Language-Team: Galician <trasno@ceu.fi.udc.es>\n"
@@ -262,11 +262,6 @@ msgstr "Configuración da LAN"
 msgid "Total progress"
 msgstr "Probar portos"
 
-#: ../../lang.pm:1
-#, c-format
-msgid "Hong Kong"
-msgstr "Hong Kong"
-
 #: ../../install_interactive.pm:1
 #, c-format
 msgid "Not enough free space to allocate new partitions"
@@ -337,6 +332,18 @@ msgstr "detectouse %s"
 #, fuzzy, c-format
 msgid "No CD device defined!"
 msgstr "Seleccione un ficheiro"
+
+#: ../../network/shorewall.pm:1
+#, c-format
+msgid ""
+"Please enter the name of the interface connected to the "
+"internet.              \n"
+"                \n"
+"Examples:\n"
+"                ppp+ for modem or DSL connections, \n"
+"                eth0, or eth1 for cable connection, \n"
+"                ippp+ for a isdn connection.\n"
+msgstr ""
 
 #: ../../standalone/drakbackup:1
 #, fuzzy, c-format
@@ -409,15 +416,20 @@ msgstr ""
 msgid "Swiss (French layout)"
 msgstr "Suízo (francés)"
 
+#: ../../raid.pm:1
+#, c-format
+msgid "mkraid failed (maybe raidtools are missing?)"
+msgstr "mkraid fallou (¿pode que non estean as raidtools?)"
+
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "August"
 msgstr "agosto"
 
-#: ../../raid.pm:1
-#, c-format
-msgid "mkraid failed (maybe raidtools are missing?)"
-msgstr "mkraid fallou (¿pode que non estean as raidtools?)"
+#: ../../network/drakfirewall.pm:1
+#, fuzzy, c-format
+msgid "FTP server"
+msgstr "Servidor NIS"
 
 #: ../../harddrake/data.pm:1
 #, c-format
@@ -497,13 +509,6 @@ msgstr ""
 #, c-format
 msgid "Configuring..."
 msgstr "Configurando..."
-
-#: ../../standalone/drakgw:1
-#, c-format
-msgid "The setup has already been done, and it's currently enabled."
-msgstr ""
-"A configuración da compartición da conexión á Internet xa foi feita.\n"
-"Actualmente está activada."
 
 #: ../../harddrake/v4l.pm:1
 #, c-format
@@ -623,6 +628,11 @@ msgstr ""
 msgid "Printer Name"
 msgstr "Nome da fila de impresión"
 
+#: ../../../move/move.pm:1
+#, c-format
+msgid "Setting up USB key"
+msgstr ""
+
 #: ../../standalone/drakfloppy:1
 #, c-format
 msgid "Remove a module"
@@ -678,15 +688,17 @@ msgstr ""
 msgid "if needed"
 msgstr "se for necesario"
 
+#: ../../standalone/drakclock:1
+#, c-format
+msgid ""
+"We need to install ntp package\n"
+" to enable Network Time Protocol"
+msgstr ""
+
 #: ../../standalone/drakbackup:1
 #, fuzzy, c-format
 msgid "Restore Failed..."
 msgstr "Restaurar a partir dun ficheiro"
-
-#: ../../standalone/harddrake2:1
-#, fuzzy, c-format
-msgid "/Autodetect _jazz drives"
-msgstr "Usar detección automática"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -914,11 +926,6 @@ msgstr ""
 #, c-format
 msgid "512 kB"
 msgstr "512 KB"
-
-#: ../../standalone/net_monitor:1
-#, c-format
-msgid "Logs"
-msgstr ""
 
 #: ../../standalone/scannerdrake:1
 #, c-format
@@ -1341,6 +1348,11 @@ msgstr "Localización"
 msgid "monthly"
 msgstr ""
 
+#: ../../../move/move.pm:1
+#, fuzzy, c-format
+msgid "Retry"
+msgstr "Restaurar"
+
 #: ../../standalone/drakfloppy:1
 #, c-format
 msgid "Module name"
@@ -1386,6 +1398,11 @@ msgstr ""
 msgid "the module of the GNU/Linux kernel that handles the device"
 msgstr ""
 
+#: ../../standalone/drakclock:1
+#, fuzzy, c-format
+msgid "Is your hardware clock set to GMT?"
+msgstr "¿O reloxo interno do seu ordenador usa a hora GMT?"
+
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid "Trying to rescue partition table"
@@ -1426,6 +1443,11 @@ msgstr ""
 msgid "Name: "
 msgstr "Nome: "
 
+#: ../../standalone/drakconnect:1
+#, c-format
+msgid "up"
+msgstr ""
+
 #: ../../Xconfig/resolution_and_depth.pm:1
 #, c-format
 msgid "16 million colors (24 bits)"
@@ -1436,7 +1458,7 @@ msgstr "16 millóns de cores (24 bits)"
 msgid "Allow all users"
 msgstr "Engadir usuario"
 
-#: ../../share/advertising/08-store.pl:1
+#: ../advertising/08-store.pl:1
 #, c-format
 msgid "The official MandrakeSoft Store"
 msgstr ""
@@ -1468,15 +1490,15 @@ msgstr "Nome de usuario"
 msgid "Do new backup before restore (only for incremental backups.)"
 msgstr ""
 
-#: ../../standalone/harddrake2:1
-#, fuzzy, c-format
-msgid "Name"
-msgstr "Nome: "
-
 #: ../../raid.pm:1
 #, c-format
 msgid "mkraid failed"
 msgstr "mkraid fallou"
+
+#: ../../standalone/harddrake2:1
+#, fuzzy, c-format
+msgid "Name"
+msgstr "Nome: "
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -1676,6 +1698,17 @@ msgstr "Activando os servidores..."
 #, c-format
 msgid "Printing test page(s)..."
 msgstr "Imprimindo páxina(s) de proba..."
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid ""
+"Transfer successful\n"
+"You may want to verify you can login to the server with:\n"
+"\n"
+"ssh -i %s %s@%s\n"
+"\n"
+"without being prompted for a password."
+msgstr ""
 
 #: ../../fsedit.pm:1
 #, c-format
@@ -2573,6 +2606,11 @@ msgstr ""
 msgid "Can't add a partition to _formatted_ RAID md%d"
 msgstr "Non se pode engadir unha partición ó RAID _formatado_ md%d"
 
+#: ../../standalone/drakclock:1
+#, fuzzy, c-format
+msgid "Network Time Protocol"
+msgstr "Interface de rede"
+
 #: ../../Xconfig/card.pm:1
 #, c-format
 msgid ""
@@ -2776,7 +2814,7 @@ msgstr "Palau"
 msgid "level"
 msgstr "nivel"
 
-#: ../../share/advertising/13-mdkexpert_corporate.pl:1
+#: ../advertising/13-mdkexpert_corporate.pl:1
 #, c-format
 msgid ""
 "All incidents will be followed up by a single qualified MandrakeSoft "
@@ -3139,7 +3177,7 @@ msgstr ""
 msgid "Bad package"
 msgstr "Paquete erróneo"
 
-#: ../../share/advertising/07-server.pl:1
+#: ../advertising/07-server.pl:1
 #, c-format
 msgid ""
 "Transform your computer into a powerful Linux server: Web server, mail, "
@@ -3384,7 +3422,7 @@ msgstr "Benvida ós crackers"
 msgid "Module options:"
 msgstr "Opcións do módulo:"
 
-#: ../../share/advertising/11-mnf.pl:1
+#: ../advertising/11-mnf.pl:1
 #, c-format
 msgid "Secure your networks with the Multi Network Firewall"
 msgstr ""
@@ -3464,6 +3502,11 @@ msgstr "Rato"
 #, c-format
 msgid "not enough room in /boot"
 msgstr "non hai espacio dabondo en /boot"
+
+#: ../../install_steps_gtk.pm:1
+#, c-format
+msgid "trying to promote %s"
+msgstr ""
 
 #: ../../lang.pm:1
 #, c-format
@@ -3564,6 +3607,11 @@ msgstr ""
 msgid "Saudi Arabia"
 msgstr "Arabia Saudí"
 
+#: ../../services.pm:1
+#, c-format
+msgid "Internet"
+msgstr "Internet"
+
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid "Continue anyway?"
@@ -3581,11 +3629,6 @@ msgstr ""
 #, c-format
 msgid "Printer"
 msgstr "Impresora"
-
-#: ../../services.pm:1
-#, c-format
-msgid "Internet"
-msgstr "Internet"
 
 #: ../../standalone/service_harddrake:1
 #, c-format
@@ -3654,6 +3697,11 @@ msgstr ""
 #, fuzzy, c-format
 msgid "Restarting printing system..."
 msgstr "¿Que sistema de impresión desexa usar?"
+
+#: ../../../move/tree/mdk_totem:1
+#, c-format
+msgid "You can only run with no CDROM support"
+msgstr ""
 
 #: ../../modules/interactive.pm:1
 #, c-format
@@ -3866,15 +3914,15 @@ msgstr "ISA / PCMCIA"
 msgid "About"
 msgstr "Abortar"
 
-#: ../../network/network.pm:1
-#, c-format
-msgid "Proxies configuration"
-msgstr "Configuración dos proxys"
-
 #: ../../mouse.pm:1
 #, c-format
 msgid "GlidePoint"
 msgstr "GlidePoint"
+
+#: ../../network/network.pm:1
+#, c-format
+msgid "Proxies configuration"
+msgstr "Configuración dos proxys"
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -4017,6 +4065,11 @@ msgstr "Os puntos de montaxe deben empezar por /"
 msgid "Choose your CD/DVD device"
 msgstr "Escolla a disposición do seu teclado."
 
+#: ../../network/drakfirewall.pm:1
+#, fuzzy, c-format
+msgid "CUPS server"
+msgstr "Servidor DNS"
+
 #: ../../standalone/logdrake:1
 #, fuzzy, c-format
 msgid "Postfix Mail Server"
@@ -4032,7 +4085,7 @@ msgstr "Saír sen gardar"
 msgid "Yemen"
 msgstr "Iemen"
 
-#: ../../share/advertising/11-mnf.pl:1
+#: ../advertising/11-mnf.pl:1
 #, c-format
 msgid "This product is available on the MandrakeStore Web site."
 msgstr ""
@@ -4040,6 +4093,31 @@ msgstr ""
 #: ../../interactive/stdio.pm:1
 #, c-format
 msgid "=> There are many things to choose from (%s).\n"
+msgstr ""
+
+#: ../../standalone/drakclock:1
+#, c-format
+msgid "GMT - DrakClock"
+msgstr ""
+
+#: ../../../move/move.pm:1
+#, c-format
+msgid ""
+"An error occurred:\n"
+"\n"
+"\n"
+"%s\n"
+"\n"
+"This may come from corrupted system configuration files\n"
+"on the USB key, in this case removing them and then\n"
+"rebooting Mandrake Move would fix the problem. To do\n"
+"so, click on the corresponding button.\n"
+"\n"
+"\n"
+"You may also want to reboot and remove the USB key, or\n"
+"examine its contents under another OS, or even have\n"
+"a look at log files in console #3 and #4 to try to\n"
+"guess what's happening."
 msgstr ""
 
 #: ../../steps.pm:1
@@ -4272,6 +4350,11 @@ msgstr "Printerdrake"
 #, c-format
 msgid "Which partition do you want to use for Linux4Win?"
 msgstr "¿Que partición desexa usar para Linux4Win?"
+
+#: ../../install_steps_gtk.pm:1
+#, fuzzy, c-format
+msgid "due to missing %s"
+msgstr "falla o kdesu"
 
 #: ../../printer/printerdrake.pm:1
 #, fuzzy, c-format
@@ -4723,7 +4806,7 @@ msgstr ""
 msgid "Started on boot"
 msgstr "Iniciado o arrincar"
 
-#: ../../share/advertising/12-mdkexpert.pl:1
+#: ../advertising/12-mdkexpert.pl:1
 #, c-format
 msgid ""
 "Join the MandrakeSoft support teams and the Linux Community online to share "
@@ -5035,11 +5118,6 @@ msgstr ""
 msgid ""
 "Display theme\n"
 "under console"
-msgstr ""
-
-#: ../../standalone/net_monitor:1
-#, c-format
-msgid "Statistics"
 msgstr ""
 
 #: ../../printer/cups.pm:1
@@ -5778,7 +5856,7 @@ msgstr ""
 "Garda e restaura o estado da entropía do sistema para unha xeración\n"
 "de números aleatorios de calidade."
 
-#: ../../share/advertising/07-server.pl:1
+#: ../advertising/07-server.pl:1
 #, c-format
 msgid "Turn your computer into a reliable server"
 msgstr ""
@@ -5793,6 +5871,11 @@ msgstr ""
 msgid " (driver %s)"
 msgstr " (controlador %s)"
 
+#: ../../services.pm:1
+#, c-format
+msgid "Start when requested"
+msgstr ""
+
 #: ../../diskdrake/interactive.pm:1
 #, fuzzy, c-format
 msgid ""
@@ -5804,11 +5887,6 @@ msgstr "Ficheiro(s) loopback: %s\n"
 #, c-format
 msgid "I don't know"
 msgstr "Non sei"
-
-#: ../../services.pm:1
-#, c-format
-msgid "Start when requested"
-msgstr ""
 
 #: ../../printer/main.pm:1
 #, c-format
@@ -6005,6 +6083,11 @@ msgid ""
 "section."
 msgstr ""
 
+#: ../../../move/move.pm:1
+#, c-format
+msgid "Key isn't writable"
+msgstr ""
+
 #: ../../lang.pm:1
 #, c-format
 msgid "Bangladesh"
@@ -6049,15 +6132,15 @@ msgstr ""
 msgid "Set the root umask."
 msgstr "Sen contrasinal"
 
-#: ../../network/modem.pm:1 ../../standalone/drakconnect:1
-#, c-format
-msgid "Script-based"
-msgstr "Baseado nun script"
-
 #: ../../install_any.pm:1 ../../partition_table.pm:1
 #, c-format
 msgid "Error reading file %s"
 msgstr "Erro lendo o ficheiro %s"
+
+#: ../../network/modem.pm:1 ../../standalone/drakconnect:1
+#, c-format
+msgid "Script-based"
+msgstr "Baseado nun script"
 
 #: ../../harddrake/v4l.pm:1
 #, fuzzy, c-format
@@ -6127,17 +6210,6 @@ msgstr ""
 #, fuzzy, c-format
 msgid "Domain Authentication Required"
 msgstr "Autenticación"
-
-#: ../../standalone/drakTermServ:1
-#, c-format
-msgid ""
-"\n"
-"\n"
-" Thanks:\n"
-"\t- LTSP Project http://www.ltsp.org\n"
-"\t- Michael Brown <mbrown\\@fensystems.co.uk>\n"
-"\n"
-msgstr ""
 
 #: ../../security/level.pm:1
 #, fuzzy, c-format
@@ -6754,15 +6826,15 @@ msgstr "Yaboot"
 msgid "Logitech CC Series with Wheel emulation"
 msgstr "Logitech CC Series"
 
-#: ../../standalone/drakboot:1
-#, fuzzy, c-format
-msgid "Splash selection"
-msgstr "Gardar a selección de paquetes"
-
 #: ../../partition_table.pm:1
 #, c-format
 msgid "Extended partition not supported on this platform"
 msgstr "As particións estendidas non están soportadas nesta plataforma"
+
+#: ../../standalone/drakboot:1
+#, fuzzy, c-format
+msgid "Splash selection"
+msgstr "Gardar a selección de paquetes"
 
 #: ../../network/isdn.pm:1
 #, c-format
@@ -6820,6 +6892,11 @@ msgstr ""
 msgid "Printer default settings"
 msgstr "Conexión da impresora"
 
+#: ../../mouse.pm:1
+#, c-format
+msgid "Generic PS2 Wheel Mouse"
+msgstr "Rato de roda PS2 xenérico"
+
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid ""
@@ -6827,11 +6904,6 @@ msgid ""
 "memory page level, thus enabling the processor to prevent unchecked kernel "
 "accesses to user memory (aka this is a bug guard)"
 msgstr ""
-
-#: ../../mouse.pm:1
-#, c-format
-msgid "Generic PS2 Wheel Mouse"
-msgstr "Rato de roda PS2 xenérico"
 
 #: ../../printer/printerdrake.pm:1
 #, fuzzy, c-format
@@ -6978,6 +7050,11 @@ msgstr "Británico"
 msgid "Not connected"
 msgstr "Non conectado"
 
+#: ../../standalone/net_monitor:1
+#, fuzzy, c-format
+msgid "No internet connection configured"
+msgstr "Configuración da conexión á Internet"
+
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Greek"
@@ -6992,17 +7069,6 @@ msgstr ""
 #, fuzzy, c-format
 msgid "Generic 3 Button Mouse with Wheel emulation"
 msgstr "Rato de 3 botóns xenérico"
-
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid ""
-"Transfer successful\n"
-"You may want to verify you can login to the server with:\n"
-"\n"
-"ssh -i %s %s\\@%s\n"
-"\n"
-"without being prompted for a password."
-msgstr ""
 
 #: ../../any.pm:1
 #, c-format
@@ -7221,7 +7287,7 @@ msgid ""
 "You can also type a new name or skip this printer."
 msgstr ""
 
-#: ../../share/advertising/12-mdkexpert.pl:1
+#: ../advertising/12-mdkexpert.pl:1
 #, c-format
 msgid ""
 "Find the solutions of your problems via MandrakeSoft's online support "
@@ -7285,6 +7351,22 @@ msgstr "Kirgizstán"
 #: ../../printer/main.pm:1
 #, c-format
 msgid "Multi-function device on USB"
+msgstr ""
+
+#: ../../../move/move.pm:1
+#, c-format
+msgid ""
+"We didn't detect any USB key on your system. If you\n"
+"plug in an USB key now, Mandrake Move will have the ability\n"
+"to transparently save the data in your home directory and\n"
+"system wide configuration, for next boot on this computer\n"
+"or another one. Note: if you plug in a key now, wait several\n"
+"seconds before detecting again.\n"
+"\n"
+"\n"
+"You may also proceed without an USB key - you'll still be\n"
+"able to use Mandrake Move as a normal live Mandrake\n"
+"Operating System."
 msgstr ""
 
 #: ../../help.pm:1
@@ -7380,15 +7462,15 @@ msgstr ""
 msgid "Other Media"
 msgstr "Outros"
 
-#: ../../standalone/drakbackup:1
-#, fuzzy, c-format
-msgid "Backup system files"
-msgstr "Ficheiro de backup incorrecto"
-
 #: ../../mouse.pm:1
 #, c-format
 msgid "Logitech MouseMan+"
 msgstr "Logitech MouseMan+"
+
+#: ../../standalone/drakbackup:1
+#, fuzzy, c-format
+msgid "Backup system files"
+msgstr "Ficheiro de backup incorrecto"
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -7453,6 +7535,11 @@ msgstr "Particionamento de disco personalizado"
 msgid "Please choose your type of mouse."
 msgstr "Escolla o seu tipo de rato."
 
+#: ../../services.pm:1
+#, c-format
+msgid "running"
+msgstr "a se executar"
+
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "class of hardware device"
@@ -7469,11 +7556,6 @@ msgstr ""
 #, c-format
 msgid "United Kingdom"
 msgstr "Reino Unido"
-
-#: ../../services.pm:1
-#, c-format
-msgid "running"
-msgstr "a se executar"
 
 #: ../../lang.pm:1
 #, fuzzy, c-format
@@ -7517,7 +7599,7 @@ msgstr "activar"
 msgid "Command line"
 msgstr "Nome de dominio"
 
-#: ../../share/advertising/08-store.pl:1
+#: ../advertising/08-store.pl:1
 #, c-format
 msgid ""
 "Our full range of Linux solutions, as well as special offers on products and "
@@ -7569,6 +7651,17 @@ msgstr "Intercambio"
 #, fuzzy, c-format
 msgid "Custom settings"
 msgstr "Particionamento de disco personalizado"
+
+#: ../../../move/move.pm:1
+#, c-format
+msgid ""
+"The USB key seems to have write protection enabled, but we can't safely\n"
+"unplug it now.\n"
+"\n"
+"\n"
+"Click the button to reboot the machine, unplug it, remove write protection,\n"
+"plug the key again, and launch Mandrake Move again."
+msgstr ""
 
 #: ../../standalone/drakbackup:1
 #, fuzzy, c-format
@@ -7672,7 +7765,7 @@ msgstr "Escolla o adaptador de rede que desexa usar para conectar á Internet"
 msgid "Photo memory card access on your HP multi-function device"
 msgstr ""
 
-#: ../../share/advertising/09-mdksecure.pl:1
+#: ../advertising/09-mdksecure.pl:1
 #, c-format
 msgid ""
 "Enhance your computer performance with the help of a selection of partners "
@@ -7784,6 +7877,11 @@ msgstr ""
 #, c-format
 msgid "Exit install"
 msgstr "Saír da instalación"
+
+#: ../../../move/move.pm:1
+#, c-format
+msgid "Need a key to save your data"
+msgstr ""
 
 #: ../../standalone/drakgw:1
 #, c-format
@@ -7952,15 +8050,6 @@ msgstr "Ruso (Fonético)"
 msgid "dhcpd Config..."
 msgstr "Configurando..."
 
-#: ../../standalone/drakgw:1
-#, fuzzy, c-format
-msgid "The setup has already been done, but it's currently disabled."
-msgstr ""
-"A configuración da compartición da conexión á Internet xa foi feita.\n"
-"Actualmente está desactivada.\n"
-"\n"
-"¿Que desexa facer?"
-
 #: ../../any.pm:1
 #, c-format
 msgid "LILO/grub Installation"
@@ -8099,6 +8188,11 @@ msgstr ""
 msgid "Choose an X server"
 msgstr "Escolla un servidor X"
 
+#: ../../../move/tree/mdk_totem:1
+#, c-format
+msgid "Copying to memory to allow removing the CDROM"
+msgstr ""
+
 #: ../../install_interactive.pm:1
 #, c-format
 msgid "Swap partition size in MB: "
@@ -8148,7 +8242,7 @@ msgstr "Configuración do estilo de arrinque"
 msgid "Barbados"
 msgstr "Barbados"
 
-#: ../../share/advertising/02-community.pl:1
+#: ../advertising/02-community.pl:1
 #, c-format
 msgid ""
 "Want to know more and to contribute to the Open Source community? Get "
@@ -8307,15 +8401,6 @@ msgstr ""
 msgid "First Time Wizard"
 msgstr ""
 
-#: ../../install_steps.pm:1
-#, c-format
-msgid ""
-"An error occurred, but I don't know how to handle it nicely.\n"
-"Continue at your own risk."
-msgstr ""
-"Ocorreu un erro, e o programa non sabe como manexalo de\n"
-"maneira limpa. Continúe ó seu propio risco."
-
 #: ../../lang.pm:1
 #, fuzzy, c-format
 msgid "Taiwan"
@@ -8330,6 +8415,15 @@ msgstr "Paquistán"
 #, c-format
 msgid "please wait, parsing file: %s"
 msgstr ""
+
+#: ../../install_steps.pm:1 ../../../move/move.pm:1
+#, c-format
+msgid ""
+"An error occurred, but I don't know how to handle it nicely.\n"
+"Continue at your own risk."
+msgstr ""
+"Ocorreu un erro, e o programa non sabe como manexalo de\n"
+"maneira limpa. Continúe ó seu propio risco."
 
 #: ../../install_steps_gtk.pm:1
 #, fuzzy, c-format
@@ -8497,6 +8591,11 @@ msgid ""
 "The format is the same as auto_install generated floppies."
 msgstr ""
 
+#: ../../../move/tree/mdk_totem:1
+#, c-format
+msgid "No CDROM support"
+msgstr ""
+
 #: ../../standalone/drakxtv:1
 #, c-format
 msgid "China (broadcast)"
@@ -8534,7 +8633,7 @@ msgstr ""
 "Fallo o cargar o módulo %s\n"
 "¿Desexa retentalo con outros parámetros?"
 
-#: ../../share/advertising/01-thanks.pl:1
+#: ../advertising/01-thanks.pl:1
 #, c-format
 msgid "Welcome to the Open Source world."
 msgstr ""
@@ -8753,6 +8852,11 @@ msgstr "Probar portos"
 msgid "number of capture buffers for mmap'ed capture"
 msgstr ""
 
+#: ../../network/adsl.pm:1
+#, fuzzy, c-format
+msgid " - detected"
+msgstr "detectouse %s"
+
 #: ../../harddrake/data.pm:1
 #, c-format
 msgid "SMBus controllers"
@@ -8849,6 +8953,11 @@ msgstr ""
 msgid "Restore"
 msgstr "Restaurar"
 
+#: ../../standalone/drakclock:1
+#, fuzzy, c-format
+msgid "Server:"
+msgstr "Servidor"
+
 #: ../../security/help.pm:1
 #, c-format
 msgid "if set to yes, check if the network devices are in promiscuous mode."
@@ -8858,6 +8967,11 @@ msgstr ""
 #, c-format
 msgid "Looking for available packages..."
 msgstr "Buscando os paquetes dispoñibles"
+
+#: ../../../move/move.pm:1
+#, fuzzy, c-format
+msgid "Please wait, setting up system configuration files on USB key..."
+msgstr "Establecendo o nivel de seguridade"
 
 #: ../../any.pm:1
 #, c-format
@@ -8970,15 +9084,15 @@ msgid ""
 "per second)"
 msgstr ""
 
-#: ../../standalone/printerdrake:1
-#, fuzzy, c-format
-msgid "Mandrake Linux Printer Management Tool"
-msgstr "Instalación de Mandrake Linux %s"
-
 #: ../../pkgs.pm:1
 #, c-format
 msgid "important"
 msgstr "importante"
+
+#: ../../standalone/printerdrake:1
+#, fuzzy, c-format
+msgid "Mandrake Linux Printer Management Tool"
+msgstr "Instalación de Mandrake Linux %s"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -9020,6 +9134,11 @@ msgstr "Usuarios"
 #, c-format
 msgid "Preparing bootloader..."
 msgstr "Preparando o cargador de arrinque"
+
+#: ../../../move/move.pm:1
+#, c-format
+msgid "Enter your user information, password will be used for screensaver"
+msgstr ""
 
 #: ../../network/network.pm:1
 #, c-format
@@ -9413,15 +9532,15 @@ msgstr ""
 msgid "Authentication LDAP"
 msgstr "Autenticación"
 
+#: ../../install_steps_gtk.pm:1
+#, c-format
+msgid "in order to keep %s"
+msgstr ""
+
 #: ../../harddrake/sound.pm:1
 #, c-format
 msgid "Let me pick any driver"
 msgstr ""
-
-#: ../../standalone/net_monitor:1
-#, fuzzy, c-format
-msgid "Profile "
-msgstr "Perfil: "
 
 #: ../../standalone/net_monitor:1
 #, c-format
@@ -9520,9 +9639,9 @@ msgstr "versión do núcleo"
 #: ../../standalone/drakautoinst:1 ../../standalone/drakbackup:1
 #: ../../standalone/drakboot:1 ../../standalone/drakconnect:1
 #: ../../standalone/drakfloppy:1 ../../standalone/drakfont:1
-#: ../../standalone/drakgw:1 ../../standalone/drakperm:1
-#: ../../standalone/draksec:1 ../../standalone/logdrake:1
-#: ../../standalone/mousedrake:1 ../../standalone/net_monitor:1
+#: ../../standalone/drakperm:1 ../../standalone/draksec:1
+#: ../../standalone/logdrake:1 ../../standalone/mousedrake:1
+#: ../../standalone/net_monitor:1
 #, c-format
 msgid "Cancel"
 msgstr "Cancelar"
@@ -9672,15 +9791,6 @@ msgstr "Italiano"
 msgid "Basic"
 msgstr "Básico"
 
-#: ../../standalone/drakTermServ:1
-#, c-format
-msgid ""
-"\n"
-" Copyright (C) 2002 by MandrakeSoft \n"
-"\tStew Benedict sbenedict\\@mandrakesoft.com\n"
-"\n"
-msgstr ""
-
 #: ../../install_messages.pm:1
 #, c-format
 msgid "http://www.mandrakelinux.com/en/92errata.php3"
@@ -9701,10 +9811,10 @@ msgstr ""
 msgid "Card IO"
 msgstr "E/S da tarxeta"
 
-#: ../../standalone/drakperm:1
-#, c-format
-msgid "when checked, owner and group won't be changed"
-msgstr ""
+#: ../../network/drakfirewall.pm:1
+#, fuzzy, c-format
+msgid "Samba server"
+msgstr "Servidor NIS"
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -9777,6 +9887,11 @@ msgstr ""
 msgid "access to compilation tools"
 msgstr ""
 
+#: ../../standalone/net_monitor:1
+#, c-format
+msgid "Global statistics"
+msgstr ""
+
 #: ../../standalone/drakbackup:1
 #, fuzzy, c-format
 msgid "Please select data to restore..."
@@ -9796,6 +9911,11 @@ msgstr ""
 #, fuzzy, c-format
 msgid "Standard test page"
 msgstr "Ferramentas estándar"
+
+#: ../../standalone/drakclock:1
+#, fuzzy, c-format
+msgid "Time Zone"
+msgstr "Zona horaria"
 
 #: ../../diskdrake/hd_gtk.pm:1 ../../diskdrake/interactive.pm:1
 #, c-format
@@ -9879,6 +9999,15 @@ msgid ""
 "Your choice? "
 msgstr ""
 
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"\n"
+" Copyright (C) 2002 by MandrakeSoft \n"
+"\tStew Benedict sbenedict@mandrakesoft.com\n"
+"\n"
+msgstr ""
+
 #: ../../standalone/draksplash:1
 #, fuzzy, c-format
 msgid "Save theme"
@@ -9904,15 +10033,15 @@ msgstr "Axudante da configuración de rede"
 msgid "Removable media automounting"
 msgstr "Automonta-las unidades extraíbles"
 
-#: ../../standalone/drakbackup:1
-#, fuzzy, c-format
-msgid "Enter the directory to save:"
-msgstr "Probe o seu rato"
-
 #: ../../services.pm:1
 #, fuzzy, c-format
 msgid "Printing"
 msgstr "Impresora"
+
+#: ../../standalone/drakbackup:1
+#, fuzzy, c-format
+msgid "Enter the directory to save:"
+msgstr "Probe o seu rato"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -10004,7 +10133,7 @@ msgstr "Kensington Thinking Mouse"
 msgid "Configuration of a remote printer"
 msgstr "Configurar a impresora"
 
-#: ../../share/advertising/13-mdkexpert_corporate.pl:1
+#: ../advertising/13-mdkexpert_corporate.pl:1
 #, c-format
 msgid "An online platform to respond to enterprise support needs."
 msgstr ""
@@ -10149,15 +10278,22 @@ msgstr ""
 msgid "Configure Local Area Network..."
 msgstr "Configurar a rede de área local..."
 
-#: ../../security/l10n.pm:1
+#: ../../../move/move.pm:1
 #, c-format
-msgid "Verify checksum of the suid/sgid files"
+msgid ""
+"The USB key seems to have write protection enabled. Please\n"
+"unplug it, remove write protection, and then plug it again."
 msgstr ""
 
 #: ../../services.pm:1
 #, fuzzy, c-format
 msgid "Launch the sound system on your machine"
 msgstr "Lanzar o sistema X-Window ó iniciar"
+
+#: ../../security/l10n.pm:1
+#, c-format
+msgid "Verify checksum of the suid/sgid files"
+msgstr ""
 
 #: ../../security/l10n.pm:1
 #, c-format
@@ -10459,6 +10595,11 @@ msgstr "Non pode deseleccionar este paquete. Ten que ser actualizado"
 msgid "Loading from floppy"
 msgstr "Restaurar a partir dun disquete"
 
+#: ../../standalone/drakclock:1
+#, c-format
+msgid "Timezone - DrakClock"
+msgstr ""
+
 #: ../../security/help.pm:1
 #, c-format
 msgid "Enable/Disable the logging of IPv4 strange packets."
@@ -10607,6 +10748,11 @@ msgstr ""
 "da instalación, hai un capítulo na Guía do Usuario Oficial\n"
 "de Mandrake Linux."
 
+#: ../../standalone/drakclock:1
+#, c-format
+msgid "Enable Network Time Protocol"
+msgstr ""
+
 #: ../../printer/printerdrake.pm:1
 #, fuzzy, c-format
 msgid "paranoid"
@@ -10695,7 +10841,7 @@ msgstr ""
 msgid "Firmware-Upload for HP LaserJet 1000"
 msgstr ""
 
-#: ../../share/advertising/03-software.pl:1
+#: ../advertising/03-software.pl:1
 #, c-format
 msgid ""
 "And, of course, push multimedia to its limits with the very latest software "
@@ -10752,17 +10898,17 @@ msgstr "Protocolo de arrinque"
 msgid "LVM-disks %s\n"
 msgstr "Discos LVM %s\n"
 
+#: ../../services.pm:1
+#, c-format
+msgid "On boot"
+msgstr "Ó arrincar"
+
 #: ../../diskdrake/interactive.pm:1
 #, fuzzy, c-format
 msgid "The package %s is needed. Install it?"
 msgstr ""
 "Este paquete ten que ser actualizado\n"
 "¿Está seguro de que quere deseleccionalo?"
-
-#: ../../services.pm:1
-#, c-format
-msgid "On boot"
-msgstr "Ó arrincar"
 
 #: ../../standalone/harddrake2:1
 #, fuzzy, c-format
@@ -10778,6 +10924,11 @@ msgstr "Localización"
 #, c-format
 msgid "Please make a backup of your data first"
 msgstr "Faga primeiro unha copia de seguridade dos seus datos"
+
+#: ../../harddrake/data.pm:1
+#, c-format
+msgid "ADSL adapters"
+msgstr ""
 
 #: ../../install_interactive.pm:1
 #, c-format
@@ -10805,7 +10956,7 @@ msgstr "se for necesario"
 msgid "Remove List"
 msgstr "Impresora remota"
 
-#: ../../share/advertising/05-desktop.pl:1
+#: ../advertising/05-desktop.pl:1
 #, c-format
 msgid "A customizable environment"
 msgstr ""
@@ -11002,6 +11153,13 @@ msgstr ""
 #: ../../network/tools.pm:1
 #, c-format
 msgid "Firmware copy succeeded"
+msgstr ""
+
+#: ../../../move/tree/mdk_totem:1
+#, c-format
+msgid ""
+"You can't use another CDROM when the following programs are running: \n"
+"%s"
 msgstr ""
 
 #: ../../security/help.pm:1
@@ -11432,6 +11590,11 @@ msgid ""
 "line, e. g. \"%s <file>\". "
 msgstr ""
 
+#: ../../standalone/drakclock:1
+#, c-format
+msgid "DrakClock"
+msgstr ""
+
 #: ../../modules/interactive.pm:1
 #, c-format
 msgid ""
@@ -11460,16 +11623,6 @@ msgstr ""
 msgid ""
 "\n"
 "- Daemon, %s via:\n"
-msgstr ""
-
-#: ../../standalone/drakgw:1
-#, c-format
-msgid ""
-"Welcome to the Internet Connection Sharing utility!\n"
-"\n"
-"%s\n"
-"\n"
-"Click on Configure to launch the setup wizard."
 msgstr ""
 
 #: ../../lang.pm:1
@@ -11650,6 +11803,11 @@ msgstr ""
 msgid "Christmas Island"
 msgstr "Illa Christmas"
 
+#: ../../mouse.pm:1
+#, fuzzy, c-format
+msgid "Automatic"
+msgstr "IP automático"
+
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Installation of bootloader failed. The following error occured:"
@@ -11751,11 +11909,6 @@ msgstr ""
 #, c-format
 msgid "Set root password and network authentication methods"
 msgstr ""
-
-#: ../../standalone/drakgw:1
-#, fuzzy, c-format
-msgid "Internet Connection Sharing configuration"
-msgstr "Conexión e configuración de Internet"
 
 #: ../../ugtk2.pm:1
 #, c-format
@@ -12004,6 +12157,11 @@ msgstr "Escolla a disqueteira que quere usar para crear o disco de arranque"
 msgid "LILO with text menu"
 msgstr "LILO con menú de texto"
 
+#: ../../standalone/net_monitor:1
+#, c-format
+msgid "instantaneous"
+msgstr ""
+
 #: ../../network/drakfirewall.pm:1
 #, c-format
 msgid "Everything (no firewall)"
@@ -12183,6 +12341,11 @@ msgstr "Indique o nome de usuario"
 msgid "Enable CD Boot?"
 msgstr "¿Permitir o arrinque de CD?"
 
+#: ../../../move/move.pm:1
+#, c-format
+msgid "Simply reboot"
+msgstr ""
+
 #: ../../interactive/stdio.pm:1
 #, c-format
 msgid " enter `void' for void entry"
@@ -12263,15 +12426,15 @@ msgid ""
 "other machines on your local network as well."
 msgstr ""
 
-#: ../../install_steps_interactive.pm:1
-#, c-format
-msgid "Which is your timezone?"
-msgstr "¿Cal é a súa zona horaria?"
-
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "Can't create log file!"
 msgstr ""
+
+#: ../../install_steps_interactive.pm:1 ../../standalone/drakclock:1
+#, c-format
+msgid "Which is your timezone?"
+msgstr "¿Cal é a súa zona horaria?"
 
 #: ../../standalone/drakbackup:1
 #, fuzzy, c-format
@@ -12318,6 +12481,11 @@ msgstr "Mozambique"
 msgid "Icon"
 msgstr "Icona"
 
+#: ../../../move/tree/mdk_totem:1
+#, c-format
+msgid "Kill those programs"
+msgstr ""
+
 #: ../../standalone/drakbackup:1
 #, fuzzy, c-format
 msgid "Please choose what you want to backup"
@@ -12353,7 +12521,7 @@ msgstr "Engadir un módulo"
 msgid "Chunk size %s\n"
 msgstr "Tamaño do bloque de datos %s\n"
 
-#: ../../share/advertising/02-community.pl:1
+#: ../advertising/02-community.pl:1
 #, c-format
 msgid "Build the future of Linux!"
 msgstr ""
@@ -12476,7 +12644,7 @@ msgid ""
 "in getting the display configured."
 msgstr ""
 
-#: ../../share/advertising/13-mdkexpert_corporate.pl:1
+#: ../advertising/13-mdkexpert_corporate.pl:1
 #, fuzzy, c-format
 msgid "MandrakeExpert Corporate"
 msgstr "Experto"
@@ -12515,6 +12683,11 @@ msgid ""
 "After changing type of partition %s, all data on this partition will be lost"
 msgstr ""
 "Ó mudar o tipo da partición %s, perderanse tódolos datos desta partición"
+
+#: ../../harddrake/data.pm:1
+#, fuzzy, c-format
+msgid "ISDN adapters"
+msgstr "Tarxeta RDSI interna"
 
 #: ../../common.pm:1
 #, c-format
@@ -12782,6 +12955,11 @@ msgstr "Impresora local"
 msgid "Plug'n Play probing failed. Please select the correct monitor"
 msgstr ""
 
+#: ../../../move/move.pm:1
+#, c-format
+msgid "Detect again USB key"
+msgstr ""
+
 #: ../../services.pm:1
 #, c-format
 msgid "Services and deamons"
@@ -12823,7 +13001,7 @@ msgstr "Configurar servicios"
 msgid "Slovakian (QWERTZ)"
 msgstr "Eslovaco (QWERTZ)"
 
-#: ../../share/advertising/06-development.pl:1
+#: ../advertising/06-development.pl:1
 #, c-format
 msgid ""
 "To modify and to create in different languages such as Perl, Python, C and C+"
@@ -12884,6 +13062,11 @@ msgstr "serie"
 #, fuzzy, c-format
 msgid "Restore Via Network"
 msgstr "Restaurar a partir dun ficheiro"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "Use tar and bzip2 (rather than tar and gzip)"
+msgstr ""
 
 #: ../../any.pm:1
 #, c-format
@@ -12999,7 +13182,7 @@ msgstr ""
 msgid "Georgian (\"Latin\" layout)"
 msgstr "Xeorxiano (\"latino\")"
 
-#: ../../share/advertising/09-mdksecure.pl:1
+#: ../advertising/09-mdksecure.pl:1
 #, c-format
 msgid "Get the best items with Mandrake Linux Strategic partners"
 msgstr ""
@@ -13099,7 +13282,7 @@ msgstr "Login automático"
 msgid "Domain Admin Password"
 msgstr ""
 
-#: ../../share/advertising/05-desktop.pl:1
+#: ../advertising/05-desktop.pl:1
 #, c-format
 msgid ""
 "Perfectly adapt your computer to your needs thanks to the 11 available "
@@ -13205,6 +13388,11 @@ msgstr ""
 msgid "Pipe job into a command"
 msgstr ""
 
+#: ../../../move/move.pm:1
+#, fuzzy, c-format
+msgid "Remove system config files"
+msgstr "Formatando o ficheiro loopback %s"
+
 #: ../../lang.pm:1
 #, c-format
 msgid "Cote d'Ivoire"
@@ -13216,7 +13404,8 @@ msgid "new dynamic device name generated by core kernel devfs"
 msgstr ""
 
 #: ../../help.pm:1 ../../install_any.pm:1 ../../interactive.pm:1
-#: ../../ugtk2.pm:1 ../../modules/interactive.pm:1 ../../standalone/drakgw:1
+#: ../../ugtk2.pm:1 ../../modules/interactive.pm:1
+#: ../../standalone/drakclock:1 ../../standalone/drakgw:1
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "Yes"
@@ -13237,11 +13426,6 @@ msgstr "Restaurar a partir dun ficheiro"
 msgid "Estonia"
 msgstr "Estonio"
 
-#: ../../standalone/scannerdrake:1
-#, c-format
-msgid "Choose the host on which the local scanners should be made available:"
-msgstr ""
-
 #: ../../partition_table.pm:1
 #, c-format
 msgid ""
@@ -13253,6 +13437,11 @@ msgstr ""
 "A única solución é desprazar as particións primarias para que\n"
 "o burato esté despois das particións estendidas"
 
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "Choose the host on which the local scanners should be made available:"
+msgstr ""
+
 #: ../../standalone/harddrake2:1
 #, fuzzy, c-format
 msgid "Channel"
@@ -13263,11 +13452,6 @@ msgstr "Cancelar"
 #, c-format
 msgid "Add"
 msgstr "Engadir"
-
-#: ../../standalone/drakgw:1
-#, fuzzy, c-format
-msgid "No Internet Connection Sharing has ever been configured."
-msgstr "A compartición da conexión á Internet está activada"
 
 #: ../../standalone/drakbackup:1
 #, fuzzy, c-format
@@ -13550,7 +13734,7 @@ msgstr "¿É isto unha instalación ou unha actualización?"
 msgid "ISDN card"
 msgstr "Tarxeta RDSI interna"
 
-#: ../../share/advertising/02-community.pl:1
+#: ../advertising/02-community.pl:1
 #, c-format
 msgid ""
 "To share your own knowledge and help build Linux software, join our "
@@ -13584,6 +13768,40 @@ msgid ""
 "Using the ``Upgrade'' option should work fine on Mandrake Linux systems\n"
 "running version \"8.1\" or later. Performing an Upgrade on versions prior\n"
 "to Mandrake Linux version \"8.1\" is not recommended."
+msgstr ""
+
+#: ../../standalone/drakfont:1
+#, c-format
+msgid ""
+"\n"
+" Copyright (C) 2001-2002 by MandrakeSoft \n"
+"     DUPONT Sebastien (original version)\n"
+"     CHAUMETTE Damien <dchaumette@mandrakesoft.com>\n"
+"\n"
+" This program is free software; you can redistribute it and/or modify\n"
+" it under the terms of the GNU General Public License as published by\n"
+" the Free Software Foundation; either version 2, or (at your option)\n"
+" any later version.\n"
+"\n"
+" This program is distributed in the hope that it will be useful,\n"
+" but WITHOUT ANY WARRANTY; without even the implied warranty of\n"
+" MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n"
+" GNU General Public License for more details.\n"
+"\n"
+" You should have received a copy of the GNU General Public License\n"
+" along with this program; if not, write to the Free Software\n"
+" Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.\n"
+"\n"
+" Thanks:\n"
+"    -  pfm2afm:   \n"
+"\t by Ken Borgendale:\n"
+"\t    Convert a Windows .pfm  file to a .afm (Adobe Font Metrics)\n"
+"    -  type1inst:\n"
+"\t by James Macnicol: \n"
+"\t    type1inst generates files fonts.dir fonts.scale & Fontmap.\n"
+"    -  ttf2pt1:   \n"
+"\t  by Andrew Weeks, Frank Siegert, Thomas Henlich, Sergey Babkin  \n"
+"             Convert ttf font files to afm and pfb fonts\n"
 msgstr ""
 
 #: ../../printer/main.pm:1
@@ -13652,6 +13870,11 @@ msgstr ""
 msgid "Unsafe"
 msgstr "Inseguro"
 
+#: ../../network/drakfirewall.pm:1
+#, fuzzy, c-format
+msgid "SSH server"
+msgstr "Servidor NIS"
+
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid ", %s sectors"
@@ -13659,7 +13882,7 @@ msgstr ", %s sectores"
 
 #: ../../help.pm:1 ../../install_any.pm:1 ../../interactive.pm:1
 #: ../../ugtk2.pm:1 ../../modules/interactive.pm:1
-#: ../../standalone/harddrake2:1
+#: ../../standalone/drakclock:1 ../../standalone/harddrake2:1
 #, c-format
 msgid "No"
 msgstr "Non"
@@ -14183,6 +14406,11 @@ msgstr "Eliminar fila"
 msgid "Network configuration"
 msgstr "Configuración da rede"
 
+#: ../../standalone/harddrake2:1
+#, fuzzy, c-format
+msgid "/Autodetect _jaz drives"
+msgstr "Usar detección automática"
+
 #: ../../any.pm:1
 #, fuzzy, c-format
 msgid "No sharing"
@@ -14294,9 +14522,10 @@ msgstr ""
 #: ../../install_steps.pm:1 ../../diskdrake/dav.pm:1
 #: ../../diskdrake/hd_gtk.pm:1 ../../diskdrake/interactive.pm:1
 #: ../../diskdrake/smbnfs_gtk.pm:1 ../../interactive/http.pm:1
-#: ../../standalone/drakboot:1 ../../standalone/drakbug:1
+#: ../../standalone/drakauth:1 ../../standalone/drakboot:1
+#: ../../standalone/drakbug:1 ../../standalone/drakconnect:1
 #: ../../standalone/drakfloppy:1 ../../standalone/drakfont:1
-#: ../../standalone/draksplash:1
+#: ../../standalone/draksplash:1 ../../../move/move.pm:1
 #, c-format
 msgid "Error"
 msgstr "Erro"
@@ -14338,6 +14567,11 @@ msgid ""
 "What do you want to do?"
 msgstr ""
 
+#: ../../partition_table.pm:1
+#, c-format
+msgid "mount failed: "
+msgstr "mount fallou: "
+
 #: ../../steps.pm:1
 #, c-format
 msgid "Configure services"
@@ -14347,11 +14581,6 @@ msgstr "Configurar servicios"
 #, c-format
 msgid "Broadcast Address:"
 msgstr ""
-
-#: ../../partition_table.pm:1
-#, c-format
-msgid "mount failed: "
-msgstr "mount fallou: "
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -14366,15 +14595,15 @@ msgstr ""
 msgid "Image"
 msgstr "Imaxe"
 
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "Failed to add the printer \"%s\" to Star Office/OpenOffice.org/GIMP."
-msgstr ""
-
 #: ../../services.pm:1
 #, fuzzy, c-format
 msgid "Remote Administration"
 msgstr "Opcións da impresora remota lpd"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Failed to add the printer \"%s\" to Star Office/OpenOffice.org/GIMP."
+msgstr ""
 
 #: ../../modules.pm:1
 #, c-format
@@ -14432,7 +14661,7 @@ msgstr "xullo"
 msgid "Prints into %s"
 msgstr "Erro escribindo ó ficheiro %s"
 
-#: ../../install_steps_interactive.pm:1
+#: ../../install_steps_interactive.pm:1 ../../../move/move.pm:1
 #, c-format
 msgid "An error occurred"
 msgstr "Ocorreu un erro"
@@ -14635,7 +14864,7 @@ msgstr ""
 msgid "Laos"
 msgstr "Laos"
 
-#: ../../share/advertising/04-configuration.pl:1
+#: ../advertising/04-configuration.pl:1
 #, c-format
 msgid ""
 "Mandrake Linux 9.2 provides you with the Mandrake Control Center, a powerful "
@@ -14811,11 +15040,6 @@ msgstr ""
 msgid "Is FPU present"
 msgstr ""
 
-#: ../../standalone/scannerdrake:1
-#, c-format
-msgid "There are no scanners found which are available on your system.\n"
-msgstr ""
-
 #: ../../services.pm:1
 #, c-format
 msgid ""
@@ -14824,6 +15048,11 @@ msgid ""
 msgstr ""
 "Non hai información adicional\n"
 "sobre este servicio, desculpe."
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "There are no scanners found which are available on your system.\n"
+msgstr ""
 
 #: ../../standalone/drakTermServ:1
 #, c-format
@@ -14863,16 +15092,6 @@ msgstr "dispositivo"
 #: ../../security/help.pm:1
 #, c-format
 msgid "if set to yes, report unowned files."
-msgstr ""
-
-#: ../../standalone/harddrake2:1
-#, c-format
-msgid ""
-"This is HardDrake, a Mandrake hardware configuration tool.\n"
-"<span foreground=\"royalblue3\">Version:</span> %s\n"
-"<span foreground=\"royalblue3\">Author:</span> Thierry Vignaud &lt;tvignaud"
-"\\@mandrakesoft.com&gt;\n"
-"\n"
 msgstr ""
 
 #: ../../install_interactive.pm:1
@@ -14956,9 +15175,20 @@ msgstr ""
 msgid "/_Fields description"
 msgstr "Descrición"
 
-#: ../../share/advertising/10-security.pl:1
+#: ../advertising/10-security.pl:1
 #, c-format
 msgid "Optimize your security by using Mandrake Linux"
+msgstr ""
+
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"\n"
+"\n"
+" Thanks:\n"
+"\t- LTSP Project http://www.ltsp.org\n"
+"\t- Michael Brown <mbrown@fensystems.co.uk>\n"
+"\n"
 msgstr ""
 
 #: ../../install_steps_gtk.pm:1 ../../interactive.pm:1 ../../ugtk2.pm:1
@@ -15047,7 +15277,7 @@ msgstr ""
 msgid "mkinitrd optional arguments"
 msgstr "argumentos opcionais para o mkinitrd"
 
-#: ../../share/advertising/03-software.pl:1
+#: ../advertising/03-software.pl:1
 #, c-format
 msgid ""
 "Surf the Web with Mozilla or Konqueror, read your mail with Evolution or "
@@ -15237,6 +15467,11 @@ msgstr "restrinxir"
 #, fuzzy, c-format
 msgid "Printing/Scanning/Photo Cards on \"%s\""
 msgstr "Desactivando a rede"
+
+#: ../../../move/move.pm:1
+#, c-format
+msgid "Continue without USB key"
+msgstr ""
 
 #: ../../install_steps.pm:1
 #, c-format
@@ -15638,7 +15873,7 @@ msgstr "Conexión normal por módem"
 msgid "Hardware probing in progress"
 msgstr "detectado no porto %s"
 
-#: ../../standalone/drakgw:1
+#: ../../network/shorewall.pm:1 ../../standalone/drakgw:1
 #, fuzzy, c-format
 msgid "Net Device"
 msgstr "Servidor de impresión"
@@ -15695,6 +15930,11 @@ msgid ""
 "package 'ImageMagick' is required to be able to complete configuration.\n"
 "Click \"Ok\" to install 'ImageMagick' or \"Cancel\" to quit"
 msgstr ""
+
+#: ../../network/drakfirewall.pm:1
+#, fuzzy, c-format
+msgid "Telnet server"
+msgstr "Servidor X"
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -15950,7 +16190,7 @@ msgstr ""
 msgid "Can't create catalog!"
 msgstr ""
 
-#: ../../share/advertising/11-mnf.pl:1
+#: ../advertising/11-mnf.pl:1
 #, c-format
 msgid ""
 "Complete your security setup with this very easy-to-use software which "
@@ -16000,6 +16240,11 @@ msgstr "Configuración da conexión á Internet"
 #: ../../security/help.pm:1
 #, c-format
 msgid "Add the name as an exception to the handling of password aging by msec."
+msgstr ""
+
+#: ../../network/isdn.pm:1
+#, c-format
+msgid "USB"
 msgstr ""
 
 #: ../../standalone/drakxtv:1
@@ -16061,6 +16306,11 @@ msgstr "Grupo de traballo"
 #, fuzzy, c-format
 msgid "Printer host name or IP"
 msgstr "Servidor de impresión"
+
+#: ../../standalone/drakconnect:1
+#, fuzzy, c-format
+msgid "down"
+msgstr "feito"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -16459,6 +16709,11 @@ msgstr "Engadir usuario"
 msgid "The printers on this machine are available to other computers"
 msgstr ""
 
+#: ../../lang.pm:1
+#, fuzzy, c-format
+msgid "China (Hong Kong)"
+msgstr "Hong Kong"
+
 #: ../../standalone/drakautoinst:1
 #, c-format
 msgid "I can't find needed image file `%s'."
@@ -16512,7 +16767,7 @@ msgstr "Saír da instalación"
 msgid "American Samoa"
 msgstr "Samoa Americana"
 
-#: ../../share/advertising/12-mdkexpert.pl:1
+#: ../advertising/12-mdkexpert.pl:1
 #, fuzzy, c-format
 msgid "Become a MandrakeExpert"
 msgstr "Experto"
@@ -16628,6 +16883,11 @@ msgstr "Italiano"
 msgid "Cayman Islands"
 msgstr "Illas Caymán"
 
+#: ../../fs.pm:1 ../../partition_table.pm:1
+#, c-format
+msgid "error unmounting %s: %s"
+msgstr "erro desmontando %s: %s"
+
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Name of printer"
@@ -16637,11 +16897,6 @@ msgstr "Nome da impresora"
 #, c-format
 msgid "disable"
 msgstr "desactivar"
-
-#: ../../fs.pm:1 ../../partition_table.pm:1
-#, c-format
-msgid "error unmounting %s: %s"
-msgstr "erro desmontando %s: %s"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -16741,7 +16996,7 @@ msgstr "Compacto"
 msgid "Detected model: %s %s"
 msgstr "detectouse %s"
 
-#: ../../share/advertising/03-software.pl:1
+#: ../advertising/03-software.pl:1
 #, c-format
 msgid "MandrakeSoft has selected the best software for you"
 msgstr ""
@@ -16845,6 +17100,11 @@ msgstr "Lanzar X11 ó arrincar"
 msgid " adsl"
 msgstr ""
 
+#: ../../raid.pm:1
+#, c-format
+msgid "Not enough partitions for RAID level %d\n"
+msgstr "Non hai particións dabondo para o nivel RAID %d\n"
+
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "format of floppies supported by the drive"
@@ -16854,11 +17114,6 @@ msgstr ""
 #, c-format
 msgid "Firmware copy failed, file %s not found"
 msgstr ""
-
-#: ../../raid.pm:1
-#, c-format
-msgid "Not enough partitions for RAID level %d\n"
-msgstr "Non hai particións dabondo para o nivel RAID %d\n"
 
 #: ../../standalone/drakTermServ:1
 #, fuzzy, c-format
@@ -16979,7 +17234,7 @@ msgid ""
 "No CD or DVD image found, please copy the installation program and rpm files."
 msgstr ""
 
-#: ../../share/advertising/04-configuration.pl:1
+#: ../advertising/04-configuration.pl:1
 #, fuzzy, c-format
 msgid "Mandrake's multipurpose configuration tool"
 msgstr "Configuración de Internet"
@@ -17009,7 +17264,7 @@ msgstr "Dinamarqués"
 msgid "Enter a printer device URI"
 msgstr "URI do dispositivo de impresión"
 
-#: ../../share/advertising/01-thanks.pl:1
+#: ../advertising/01-thanks.pl:1
 #, c-format
 msgid ""
 "The success of MandrakeSoft is based upon the principle of Free Software. "
@@ -17466,7 +17721,7 @@ msgstr "Memoria da tarxeta (DMA)"
 msgid "Thin Client"
 msgstr "Cliente DHCP"
 
-#: ../../share/advertising/01-thanks.pl:1
+#: ../advertising/01-thanks.pl:1
 #, c-format
 msgid "Thank you for choosing Mandrake Linux 9.2"
 msgstr ""
@@ -17569,6 +17824,13 @@ msgstr ""
 msgid "Mouse Systems"
 msgstr "Mouse Systems"
 
+#: ../../standalone/drakclock:1
+#, c-format
+msgid ""
+"Your computer can synchronize its clock\n"
+" with a remote time server using NTP"
+msgstr ""
+
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Iranian"
@@ -17594,7 +17856,7 @@ msgstr "Engadir usuario"
 msgid "Remote printer name"
 msgstr "Impresora remota"
 
-#: ../../share/advertising/10-security.pl:1
+#: ../advertising/10-security.pl:1
 #, c-format
 msgid ""
 "MandrakeSoft has designed exclusive tools to create the most secured Linux "
@@ -17738,6 +18000,11 @@ msgstr "Microsoft IntelliMouse"
 msgid "Uninstall Fonts"
 msgstr "Desinstalando os RPMs"
 
+#: ../../../move/move.pm:1
+#, fuzzy, c-format
+msgid "Please wait, detecting and configuring devices..."
+msgstr "Establecendo o nivel de seguridade"
+
 #: ../../keyboard.pm:1
 #, c-format
 msgid "German (no dead keys)"
@@ -17764,11 +18031,6 @@ msgid ""
 "You can export using NFS or Samba. Please select which you'd like to use."
 msgstr ""
 
-#: ../../help.pm:1 ../../install_steps_interactive.pm:1
-#, fuzzy, c-format
-msgid "Reboot"
-msgstr "Raíz"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Gambia"
@@ -17778,6 +18040,12 @@ msgstr "Gambia"
 #, fuzzy, c-format
 msgid "Mandrake Control Center"
 msgstr "Centro de control"
+
+#: ../../help.pm:1 ../../install_steps_interactive.pm:1
+#: ../../../move/move.pm:1
+#, fuzzy, c-format
+msgid "Reboot"
+msgstr "Raíz"
 
 #: ../../printer/main.pm:1
 #, c-format
@@ -17808,6 +18076,11 @@ msgstr ""
 #, fuzzy, c-format
 msgid "Remember this password"
 msgstr "Sen contrasinal"
+
+#: ../../install_steps_gtk.pm:1
+#, c-format
+msgid "due to unsatisfied %s"
+msgstr ""
 
 #: ../../standalone/drakgw:1
 #, c-format
@@ -17865,6 +18138,11 @@ msgstr "Papúa Nova Guinea"
 #, fuzzy, c-format
 msgid "Multi-function device on a parallel port"
 msgstr "Servidor de impresión"
+
+#: ../../../move/tree/mdk_totem:1
+#, fuzzy, c-format
+msgid "Busy files"
+msgstr "Ficheiro de backup incorrecto"
 
 #: ../../keyboard.pm:1
 #, fuzzy, c-format
@@ -17926,6 +18204,16 @@ msgstr ""
 #, c-format
 msgid "DHCP Client"
 msgstr "Cliente DHCP"
+
+#: ../../standalone/harddrake2:1
+#, c-format
+msgid ""
+"This is HardDrake, a Mandrake hardware configuration tool.\n"
+"<span foreground=\"royalblue3\">Version:</span> %s\n"
+"<span foreground=\"royalblue3\">Author:</span> Thierry Vignaud &lt;"
+"tvignaud@mandrakesoft.com&gt;\n"
+"\n"
+msgstr ""
 
 #: ../../standalone/drakgw:1
 #, c-format
@@ -18112,47 +18400,13 @@ msgstr ""
 msgid "Delay before booting the default image"
 msgstr "Retardo antes de arrincar a imaxe por omisión"
 
-#: ../../standalone/drakfont:1
-#, c-format
-msgid ""
-"\n"
-" Copyright (C) 2001-2002 by MandrakeSoft \n"
-"     DUPONT Sebastien (original version)\n"
-"     CHAUMETTE Damien <dchaumette\\@mandrakesoft.com>\n"
-"\n"
-" This program is free software; you can redistribute it and/or modify\n"
-" it under the terms of the GNU General Public License as published by\n"
-" the Free Software Foundation; either version 2, or (at your option)\n"
-" any later version.\n"
-"\n"
-" This program is distributed in the hope that it will be useful,\n"
-" but WITHOUT ANY WARRANTY; without even the implied warranty of\n"
-" MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n"
-" GNU General Public License for more details.\n"
-"\n"
-" You should have received a copy of the GNU General Public License\n"
-" along with this program; if not, write to the Free Software\n"
-" Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.\n"
-"\n"
-" Thanks:\n"
-"    -  pfm2afm:   \n"
-"\t by Ken Borgendale:\n"
-"\t    Convert a Windows .pfm  file to a .afm (Adobe Font Metrics)\n"
-"    -  type1inst:\n"
-"\t by James Macnicol: \n"
-"\t    type1inst generates files fonts.dir fonts.scale & Fontmap.\n"
-"    -  ttf2pt1:   \n"
-"\t  by Andrew Weeks, Frank Siegert, Thomas Henlich, Sergey Babkin  \n"
-"             Convert ttf font files to afm and pfb fonts\n"
-msgstr ""
-
 #: ../../standalone/drakbackup:1
 #, fuzzy, c-format
 msgid "Use Hard Disk to backup"
 msgstr "Ficheiro de backup incorrecto"
 
 #: ../../help.pm:1 ../../install_steps_gtk.pm:1 ../../standalone/drakbackup:1
-#: ../../standalone/drakboot:1 ../../standalone/drakgw:1
+#: ../../standalone/drakboot:1
 #, fuzzy, c-format
 msgid "Configure"
 msgstr "Configurar as X"
@@ -18220,7 +18474,7 @@ msgstr ""
 "Comprobe o cdrom nun ordenador xa instalado usando \"rpm -qpl Mandrake/RPMS/"
 "*.rpm\"\n"
 
-#: ../../share/advertising/06-development.pl:1
+#: ../advertising/06-development.pl:1
 #, c-format
 msgid "Mandrake Linux 9.2: the ultimate development platform"
 msgstr ""
@@ -18301,6 +18555,11 @@ msgstr "Resolución"
 msgid "Services"
 msgstr "dispositivo"
 
+#: ../../../move/move.pm:1
+#, fuzzy, c-format
+msgid "Auto configuration"
+msgstr "Configuración"
+
 #: ../../Xconfig/card.pm:1
 #, c-format
 msgid "4 MB"
@@ -18339,9 +18598,10 @@ msgid "Internet station"
 msgstr "Estación Internet"
 
 #: ../../share/compssUsers:999
+#, fuzzy
 msgid ""
-"Set of tools to read and send mail and news (pine, mutt, tin..) and to "
-"browse the Web"
+"Set of tools to read and send mail and news (mutt, tin..) and to browse the "
+"Web"
 msgstr ""
 "Conxunto de ferramentas para ler e enviar correo e novas (pine, mutt, tin..) "
 "e para navegar na Web"
@@ -18488,6 +18748,31 @@ msgid "Set of tools to read and send mail and news and to browse the Web"
 msgstr ""
 "Conxunto de ferramentas para ler e enviar correo e novas (pine, mutt, tin..) "
 "e para navegar na Web"
+
+#~ msgid "The setup has already been done, and it's currently enabled."
+#~ msgstr ""
+#~ "A configuración da compartición da conexión á Internet xa foi feita.\n"
+#~ "Actualmente está activada."
+
+#, fuzzy
+#~ msgid "The setup has already been done, but it's currently disabled."
+#~ msgstr ""
+#~ "A configuración da compartición da conexión á Internet xa foi feita.\n"
+#~ "Actualmente está desactivada.\n"
+#~ "\n"
+#~ "¿Que desexa facer?"
+
+#, fuzzy
+#~ msgid "Profile "
+#~ msgstr "Perfil: "
+
+#, fuzzy
+#~ msgid "Internet Connection Sharing configuration"
+#~ msgstr "Conexión e configuración de Internet"
+
+#, fuzzy
+#~ msgid "No Internet Connection Sharing has ever been configured."
+#~ msgstr "A compartición da conexión á Internet está activada"
 
 #, fuzzy
 #~ msgid "Hostname configuration"
