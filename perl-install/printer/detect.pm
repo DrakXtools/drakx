@@ -17,12 +17,12 @@ sub local_detect() {
     whatPrinter();
 }
 
-sub net_detect() { whatNetPrinter(1, 0) }
+sub net_detect { whatNetPrinter(1, 0, @_) }
 
-sub net_smb_detect() { whatNetPrinter(0, 1) }
+sub net_smb_detect { whatNetPrinter(0, 1, @_) }
 
-sub detect() {
-    local_detect(), whatNetPrinter(1, 1);
+sub detect {
+    local_detect(), whatNetPrinter(1, 1, @_);
 }
 
 

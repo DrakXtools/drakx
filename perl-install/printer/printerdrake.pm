@@ -601,15 +601,17 @@ sub choose_printer_type {
     $printer->{str_type} = $printer_type_inv{$printer->{TYPE}};
     my $autodetect = 0;
     $autodetect = 1 if $printer->{AUTODETECT};
+    my $timeout = 4000;
+    $timeout = $printer->{TIMEOUT} if defined($printer->{TIMEOUT});
     my @printertypes = printer::main::printer_type($printer);
     $in->ask_from_(
 		   { title => N("Select Printer Connection"),
 		     messages => N("How is the printer connected?") .
 			 if_($printer->{SPOOLER} eq "cups",
-			  N("
+			     N("
 Printers on remote CUPS servers do not need to be configured here; these printers will be automatically detected.")) .
-			 if_(!$havelocalnetworks,
-			  N("\nWARNING: No local network connection active, remote printers can neither be detected nor tested!")),
+                          if_(!$havelocalnetworks,
+			      N("\nWARNING: No local network connection active, remote printers can neither be detected nor tested!")),
 		     },
 		   [
 		    { val => \$printer->{str_type},
@@ -617,9 +619,31 @@ Printers on remote CUPS servers do not need to be configured here; these printer
 		      not_edit => 1, sort => 0,
 		      type => 'list' },
 		    { text => N("Printer auto-detection (Local, TCP/Socket, SMB printers, and device URI)"),
-		      type => 'bool', val => \$autodetect }
-		    ]
+		      type => 'bool', val => \$autodetect },
+		    { val => N("Modify timeout for network printer auto-detection") ,
+		      type => 'button',
+		      clicked_may_quit => sub {
+			  local $::isWizard = 0;
+			  $in->ask_from_
+			      ({ title => N("Select Printer Connection"),
+				 messages => N("Enter the timeout for network printer auto-detection (in msec) here. ") .
+				     "\n\n" .
+				     N("The longer you choose the timeout, the more reliable the detections of network printers will be, but the scan can take longer then, especially if there are many machines with local firewalls in the network. "),
+				 callbacks => {
+				     complete => sub {
+					 if ($timeout !~ /^[0-9]+$/) {
+					     $in->ask_warn(N("Error"), N("The timeout must be a positive integer number!"));
+					     return 1, 0;
+					 }
+					 return 0;
+				     }
+				 }},
+			       [ { val => \$timeout } ] ); 
+			  0; 
+		      } },
+		    ],
 		   ) or return 0;
+    $printer->{TIMEOUT} = $timeout;
     $printer->{AUTODETECT} = $autodetect ? 1 : undef;
     $printer->{TYPE} = $printer_type{$printer->{str_type}};
     1;
@@ -995,8 +1019,8 @@ sub wizard_welcome {
 	    undef $printer->{AUTODETECTSMB};
 	}
 	$autodetectlocal = 1 if $printer->{AUTODETECTLOCAL};
-	$autodetectnetwork = 1 if $printer->{AUTODETECTNETWORK};
-	$autodetectsmb = 1 if $printer->{AUTODETECTSMB};
+	$autodetectnetwork = 0 if $printer->{AUTODETECTNETWORK};
+	$autodetectsmb = 0 if $printer->{AUTODETECTSMB};
     }
     if ($in) {
 	eval {
@@ -1064,6 +1088,7 @@ If you have printer(s) connected to this machine, Please plug it/them in on this
 		$printer->{AUTODETECTLOCAL} = $autodetectlocal ? 1 : undef;
 		$printer->{AUTODETECTNETWORK} = $autodetectnetwork ? 1 : undef;
 		$printer->{AUTODETECTSMB} = $autodetectsmb && $printer->{SPOOLER} ne "pdq" ? 1 : undef;
+		$printer->{TIMEOUT} = 4000;
 	    }
 	};
 	return $@ =~ /wizcancel/ ? 0 : $ret;
@@ -1125,7 +1150,7 @@ sub setup_local_autoscan {
 	services::stop("hpoj");
 	@autodetected = (
 	    $expert_or_modify || $printer->{AUTODETECTLOCAL} ? printer::detect::local_detect() : (),
-	    !$expert_or_modify ? printer::detect::whatNetPrinter($printer->{AUTODETECTNETWORK}, $printer->{AUTODETECTSMB}) : (),
+	    !$expert_or_modify ? printer::detect::whatNetPrinter($printer->{AUTODETECTNETWORK}, $printer->{AUTODETECTSMB}, $printer->{TIMEOUT}) : (),
         );
 	# We have more than one printer, so we must ask the user for a queue
 	# name in the fully automatic printer configuration.
@@ -1497,7 +1522,7 @@ sub setup_smb {
 	    };
 	}
 	my $_w = $in->wait_message(N("Printer auto-detection"), N("Scanning network..."));
-	@autodetected = printer::detect::net_smb_detect();
+	@autodetected = printer::detect::net_smb_detect($printer->{TIMEOUT});
      my ($server, $share);
 	foreach my $p (@autodetected) {
 	    my $menustr;
@@ -1750,7 +1775,7 @@ sub setup_socket {
     if ($printer->{AUTODETECT}) {
 	$autodetect = 1;
 	my $_w = $in->wait_message(N("Printer auto-detection"), N("Scanning network..."));
-	@autodetected = printer::detect::net_detect();
+	@autodetected = printer::detect::net_detect($printer->{TIMEOUT});
      my ($host, $port);
 	foreach my $p (@autodetected) {
 	    my $menustr;
