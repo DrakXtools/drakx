@@ -627,7 +627,7 @@ sub testFinalConfig {
             1;
 	});
 
-        my $background = "/usr/share/pixmaps/backgrounds/linux-mandrake/XFdrake-image-test.jpg";
+        my $background = "/usr/share/pixmaps/backgrounds/mandrakelinux/XFdrake-image-test.jpg";
         my $qiv = "/usr/bin/qiv";
         -r "} . $prefix . q{/$background" && -x "} . $prefix . q{/$qiv" and
             system(($::testing ? "} . $prefix . q{" : "chroot } . $prefix . q{/ ") . "$qiv -y $background");
