@@ -317,7 +317,7 @@ if ($options{free_size} && $options{free_fs}) {
     }
     push @commands, sprintf "mkpart %s %s %s %s", $options{free_primary} ? 'primary' : 'logical', $options{free_fs} =~ /fat/ ? 'fat' : $options{free_fs}, correct_start_end($options{free_primary} ? \$free_point : \$point, $hd_size);
 }
-system "parted", "-s", "/dev/$hd", @commands == 0 or die "unable to partition the disk $hd";
+system("parted", "-s", "/dev/$hd", @commands) == 0 or die "unable to partition the disk $hd";
 
 #- we have to build swap and mount it.
 print "Setting swap\n";
