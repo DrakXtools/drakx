@@ -53,7 +53,8 @@ sub getFile {
     $f eq 'XXX' and rewindGetFile(), return; #- special case to force closing connection.
     foreach (1..3) {
 	my ($ftp, $retr) = new(@para ? @para : fromEnv);
-	$$retr->close if $$retr;
+	eval { $$retr->close if $$retr };
+	$@ and rewindGetFile(); #- in case Timeout got us on "->close"
 	$$retr = $ftp->retr($f) and return $$retr;
 	($ftp->code == 550) and log::l("FTP: 550 file unavailable"), return;
 	rewindGetFile();
@@ -75,8 +76,9 @@ sub rewindGetFile() {
     #- close any existing connection.
     foreach (values %hosts) {
 	my ($ftp, $retr) = @{$_ || []};
-	$$retr->close if $$retr;
-	$ftp->close() if $ftp;
+	#- don't let Timeout kill us!
+	eval { $$retr->close } if $$retr;
+	eval { $ftp->close } if $ftp;
     }
 
     #- make sure to reconnect to server.
