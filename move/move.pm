@@ -57,6 +57,7 @@ sub handle_etcfiles {
 	    $allowed = member($mode, @allowed_modes);
 	} elsif (m|^/| && $allowed) {
             if ($mode eq 'READ') {
+                mkdir_p(dirname($_));
 		symlinkf_short("/image$_", $_) if !-e $_;
 	    } elsif ($mode eq 'OVERWRITE') {
                 mkdir_p(dirname($_));
