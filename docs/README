@@ -80,11 +80,7 @@ Mandrake/base/depslist.ordered
 	! Need to be remade when Mandrake/RPMS* changes !
 	(with ``gendistrib --noclean --distrib .'')
 
-Mandrake/base/compss
-	obsoletes comps. It store packages in different categories, generated
-	from the %{GROUP} field
-	! Need to be remade when Mandrake/RPMS* changes !
-	(with ``gendistrib --noclean --distrib .'')
+Mandrake/base/compssUsers
 
 Mandrake/base/rpmsrate
 	ranks and classify packages, so that the installer will know which
@@ -117,30 +113,14 @@ Mandrake/base/rescue_stage2.bz2
 	there is no live system available, only the ramdisk is used.
 
 images/*.img
-	boot images to use with DrakX. Use:
-	- cdrom for cdrom install
-	- network for ftp/nfs install (non-pcmcia devices)
-	- hd for hard-disk install
-	- pcmcia for pcmcia install (see ``PCMCIA install'' below for more)
+	floppy boot images to use with DrakX. Use:
+	- cdrom.img for cdrom install
+	- network.img + network_drivers.img for ftp/nfs install (non-pcmcia devices)
+	- hd_grub.img for hard-disk install (see http://qa.mandrakesoft.com/hd_grub.cgi)
+	- pcmcia.img for pcmcia install (see ``PCMCIA install'' below for more)
 
-	the following modules have been removed from:
-          network.img: acenic sk98lin de4x5
-          cdrom.img and hd.img: BusLogic seagate fdomain g_NCR5380 dc395x_trm tmscsim
-          hd.img: dpt_i2o eata eata_pio eata_dma
-          cdrom.img: aztcd gscd isp16 mcd mcdx optcd cm206 sjcd 
-          pcmcia.img: apa1480_cb
-	they are now in "other.img", 
-
-	blank.img is a blank boot image without a kernel nor initrd. this image
-	can be used to generate custom boot disk (to use it:
-	compile your custom kernel with everything needed
-	compiled in the kernel, not as a module (loop.o, ext3.o
-	if needed, usb stuff, etc) and put the "vmlinuz" on the
-	blank.img, then boot on it)
-
-	if you think one of those modules is used a lot, tell me, i may find some room
-	to put it back on the main floppies.
-
+images/boot.iso
+	iso image to burn enabling any install (cdrom/hd/nfs/ftp)
 
 ********************************************************************************
 * logs *************************************************************************
