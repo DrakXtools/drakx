@@ -214,18 +214,18 @@ sub check_kernel_module_packages {
 	}
 	foreach (`rpm --qf '\%{NAME}\n' -qa`) {
 	    chomp;
-	    $_ eq $ext_name and $list{$_} = 1;
-	    /$base_name/ and $list{$_} = 1;
+	    $_ eq $ext_name and $list{$_} = 0;
+	    /$base_name/ and $list{$_} = 0;
 	}
     };
-    if (!$ext_name || $list{$ext_name}) {
+    if (!$ext_name || exists $list{$ext_name}) {
 	eval {
 	    my ($version_release, $ext);
 	    if (c::kernel_version() =~ /([^-]*)-([^-]*mdk)(\S*)/) {
 		$version_release = "$1.$2";
 		$ext = $3 ? "-$3" : "";
-		$list{"$base_name$ext-$version_release"} or die "no $base_name for current kernel";
-		$select{"$base_name$ext-$version_release"} = 1;
+		exists $list{"$base_name$ext-$version_release"} or die "no $base_name for current kernel";
+		$list{"$base_name$ext-$version_release"} and $select{"$base_name$ext-$version_release"} = 1;
 	    } else {
 		#- kernel version is not recognized, what to do ?
 	    }
