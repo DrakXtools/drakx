@@ -248,7 +248,6 @@ sub parse_file {
                      )
              );
       $win_pb->set_transient_for($my_win->{rwindow}) unless $::isEmbedded;
-      $win_pb->set_modal(1);
       $win_pb->set_position('center');
       $win_pb->realize();
       $win_pb->show_all();
