@@ -88,7 +88,7 @@ sub new($) {
 
 sub vnew {
     my ($_type, $o_su, $o_icon) = @_;
-    my $su = $o_su eq "su";
+    my $su = $::testing ? 0 : $o_su eq "su";
     if ($ENV{INTERACTIVE_HTTP}) {
 	require interactive::http;
 	return interactive::http->new;
