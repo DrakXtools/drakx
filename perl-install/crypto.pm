@@ -126,6 +126,13 @@ sub getPackages {
 
     $crypto::host = $mirror;
 
+    #- get pubkey file first as we cannot handle 2 files opened simultaneously.
+    my $pubkey;
+    eval {
+	my $fpubkey = getFile("base/pubkey", $mirror);
+	$pubkey = [ $packages->parse_armored_file($fpubkey) ];
+    };
+
     #- check first if there is something to get...
     my $fhdlist = getFile("base/hdlist.cz", $mirror);
     unless ($fhdlist) {
@@ -137,7 +144,7 @@ sub getPackages {
     #- extract hdlist of crypto, then depslist.
     require pkgs;
     my $update_medium = pkgs::psUsingHdlist($prefix, 'ftp', $packages, "hdlist-updates.cz", "1u", "RPMS",
-					    "Updates for Mandrake Linux " . version(), 1, $fhdlist, $fpubkey);
+					    "Updates for Mandrake Linux " . version(), 1, $fhdlist, $pubkey);
     if ($update_medium) {
 	log::l("read updates hdlist");
 	#- keep in mind where is the URL prefix used according to mirror (for install_any::install_urpmi).
