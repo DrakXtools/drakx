@@ -329,10 +329,11 @@ sub formatPartitions {
 
     my $d = "/initrd/loopfs/lnx4win";
     if (-d $d) {
+#-	install_any::useMedium(0);
 	install_any::getAndSaveFile("lnx4win/$_", "$d/$_") foreach qw(loadlin.exe linux.pif lnx4win.exe lnx4win.ico);
     }
 
-    chdir "$o->{prefix}";
+#-    chdir "$o->{prefix}"; was for core dumps
 
     #-noatime option for ext2 fs on laptops (do not wake up the hd)
     #-	 Do  not  update  inode  access times on this

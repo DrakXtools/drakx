@@ -528,6 +528,13 @@ sub load_thiskind($;&$) {
 	&$f($text, $mod) if $f;
 	load($mod, $type);
     }
+
+    if ($type eq 'scsi') {
+	foreach ("imm", "ppa") {
+	    eval { load($_, $type); push @devs, "imm" };
+	    last if !$@;
+	}
+    }
     @devs, map { [ $_, $_ ] } @{$loaded{$type} || []};
 }
 

@@ -576,6 +576,7 @@ sub readCompssUsers {
 #- }
 
 sub setSelectedFromCompssList {
+    log::l("setSelectedFromCompssList");
     my ($compssListLevels, $packages, $min_level, $max_size, $install_class) = @_;
     my $ind = $compssListLevels->{$install_class}; defined $ind or log::l("unknown install class $install_class in compssList"), return;
     my $nb = selectedSize($packages);
