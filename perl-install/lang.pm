@@ -701,15 +701,6 @@ my @during_install__lang_having_their_LC_CTYPE = qw(ja ko ta);
 
 #- -------------------
 
-sub list { 
-    my (%options) = @_;
-    my @l = list_langs();
-    if ($options{exclude_non_installed_langs}) {
-	@l = grep { -e "/usr/share/locale/$_/LC_CTYPE" } @l;
-    }
-    @l;
-}
-
 sub l2console_font {
     my ($locale, $during_install) = @_;
     my $c = $charsets{l2charset($locale->{lang}) || return} or return;
