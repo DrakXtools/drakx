@@ -620,8 +620,6 @@ sub get_default_im {
 sub set_default_im {
     my ($im, @langs) = @_;
     foreach (@langs) {
-        add2hash($xim{$_}, $gtkqt_im{$im});
-        add2hash($xim{$_}, { XIM_PROGRAM => $im_xim_program{$im}{$_} });
         $default_im{$_}{IM} = $im foreach $_, analyse_locale_name($_)->{main};
     }
 }
@@ -1026,6 +1024,9 @@ sub write {
     if ($locale->{IM} && $locale->{IM} ne 'None') {
         log::explanations(qq(Configuring "$locale->{IM}" IM));
         delete @$h{qw(GTK_IM_MODULE QT_IM_MODULE XIM XIM_PROGRAM XMODIFIERS)};
+        my $lang = $locale->{lang};
+        add2hash($h, $xim{$lang});
+        add2hash($h, { XIM_PROGRAM => $im_xim_program{$locale->{IM}}{$lang} });
         add2hash($h, $gtkqt_im{$locale->{IM}});
         $h->{QT_IM_MODULE} = $h->{GTK_IM_MODULE} if $h->{GTK_IM_MODULE};
         my @packages = IM2packages($locale);
