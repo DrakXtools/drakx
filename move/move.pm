@@ -262,7 +262,7 @@ sub key_mount {
     }
 
     require fs;
-    fs::mount_part($_) foreach key_parts($o);
+    eval { fs::mount_part($_) } foreach key_parts($o);
 }
 
 sub key_umount {
@@ -350,9 +350,13 @@ sub install2::verifyKey {
     log::l("automatic transparent key support is disabled"), return if $key_disabled;
 
     while (cat_('/proc/mounts') !~ m|\s/home\s|) {
-        
-        $o->ask_okcancel_({ title => N("Need a key to save your data"), 
-                            messages => formatAlaTeX(
+
+	my $message = key_parts($o) ? 
+N("Your USB key doesn't have any valid Windows (FAT) partitions
+
+You may also proceed without an USB key - you'll still be
+able to use Mandrake Move as a normal live Mandrake
+Operating System.") :
 N("We didn't detect any USB key on your system. If you
 plug in an USB key now, Mandrake Move will have the ability
 to transparently save the data in your home directory and
@@ -363,7 +367,9 @@ seconds before detecting again.
 
 You may also proceed without an USB key - you'll still be
 able to use Mandrake Move as a normal live Mandrake
-Operating System.")),
+Operating System.");
+        $o->ask_okcancel_({ title => N("Need a key to save your data"), 
+                            messages => formatAlaTeX($message),
                             ok => N("Detect USB key again"),
                             cancel => N("Continue without USB key") }) or return;
 
