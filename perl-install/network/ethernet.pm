@@ -104,7 +104,7 @@ sub update_iftab() {
 # automatic net aliases configuration
 sub configure_eth_aliases {
     my ($modules_conf) = @_;
-    foreach my $card (get_eth_cards()) {
+    foreach my $card (get_eth_cards($modules_conf)) {
 	$modules_conf->remove_alias($card->[1]);
 	$modules_conf->set_alias($card->[0], $card->[1]);
     }
