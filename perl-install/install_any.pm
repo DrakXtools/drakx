@@ -426,6 +426,7 @@ sub selectSupplMedia {
 	    require install_interactive;
 	    install_interactive::upNetwork($o);
 	}
+	my $main_method = $o->{method};
 	local $o->{method} = $suppl_method;
 	if ($suppl_method eq 'cdrom') {
 	    (my $cdromdev) = detect_devices::cdroms();
@@ -438,12 +439,30 @@ sub selectSupplMedia {
 		mountCdrom("/mnt/cdrom", $cdrom);
 		log::l($@) if $@;
 		useMedium($medium_name);
+
 		#- probe for an hdlists file and then look for all hdlists listed herein
 		eval { pkgs::psUsingHdlists($o, $suppl_method, "/mnt/cdrom/media/media_info/hdlists", $o->{packages}, '1s') };
 		log::l("psUsingHdlists failed: $@");
+
 		#- copy latest compssUsers.pl and rpmsrate somewhere locally
 		getAndSaveFile("/mnt/cdrom/media/media_info/compssUsers.pl", "/tmp/compssUsers.pl");
 		getAndSaveFile("/mnt/cdrom/media/media_info/rpmsrate", "/tmp/rpmsrate");
+
+		#- umount supplementary CD. Will re-ask for it later
+		getFile("XXX"); #- close still opened filehandles
+		log::l("Umounting suppl. CD, back to medium 1");
+		eval { fs::umount("/mnt/cdrom") };
+		#- re-mount CD 1 if this was a cdrom install
+		if ($main_method eq 'cdrom') {
+		    eval { 
+			my $dev = detect_devices::tryOpen($cdrom);	    
+			ioctl($dev, c::CDROMEJECT(), 1);
+		    };
+		    $o->ask_warn('', N("Insert the CD 1 again"));
+		    mountCdrom("/tmp/image", $cdrom);
+		    log::l($@) if $@;
+		    $asked_medium = 1;
+		}
 	    }
 	} else {
 	    my $url = $o->ask_from_entry('', N("URL of the mirror?")) or return '';
@@ -533,22 +552,6 @@ sub setPackages {
 	setDefaultPackages($o);
 	pkgs::selectPackage($o->{packages}, pkgs::packageByName($o->{packages}, $_) || next) foreach @{$o->{default_packages}};
 
-	#- umount supplementary CD. Will re-ask for it later
-	if ($suppl_method eq 'cdrom') {
-	    getFile("XXX"); #- close still opened filehandles
-	    log::l("Umounting suppl. CD");
-	    eval { fs::umount("/mnt/cdrom") };
-	    #- re-mount CD 1 if this was a cdrom install
-	    if ($o->{method} eq 'cdrom') {
-		eval { 
-		    my $dev = detect_devices::tryOpen($cdrom);	    
-		    ioctl($dev, c::CDROMEJECT(), 1);
-		};
-		$o->ask_warn('', N("Insert the CD 1 again"));
-		mountCdrom("/tmp/image", $cdrom);
-		$asked_medium = 1;
-	    }
-	}
     } else {
 	#- this has to be done to make sure necessary files for urpmi are
 	#- present.
