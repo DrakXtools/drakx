@@ -1,0 +1,596 @@
+#!/usr/bin/perl
+#
+# François Pons <fpons@mandrakesoft.com>
+#
+# Copyright 2003 MandrakeSoft
+#
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License version 2, as
+# published by the Free Software Foundation.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+#
+
+use strict;
+use lib qw(/usr/lib/libDrakX);
+
+use standalone;     #- warning, standalone must be loaded very first, for 'explanations'
+
+use common;
+use detect_devices;
+use interactive;
+use network;
+use log;
+use c;
+use network::netconnect;
+use network::shorewall;
+
+$::isInstall and die "Not supported during install.\n";
+
+
+local $_ = join '', @ARGV;
+
+$::Wizard_pix_up = "wiz_drakgw.png"; #- to change ? keep existing one, nobody will see (too late) ;-)
+$::Wizard_title = N("PXE Server Configuration");
+$::direct = /-direct/;
+
+
+
+my $sysconf_network = "/etc/sysconfig/network";
+my $sysconf_dhcpd = "/etc/sysconfig/dhcpd";
+my $rc_firewall_generic = "/etc/rc.d/rc.firewall";
+my $rc_firewall_drakgw = "/etc/rc.d/rc.firewall.inet_sharing";
+my $rc_firewall_24 = "/etc/rc.d/rc.firewall.inet_sharing-2.4";
+my $masq_file = "/etc/shorewall/masq";
+my $dhcpd_conf = "/etc/dhcpd.conf";
+my $cups_conf = "/etc/cups/cupsd.conf";
+
+my $shorewall = network::shorewall::read();
+
+#- get network configuration.
+my $netcnx = {};
+my $netc = {};
+my $intf = {};
+network::netconnect::read_net_conf('', $netcnx, $netc);
+network::netconnect::load_conf($netcnx, $netc, $intf);
+
+my $in = 'interactive'->vnew('su', 'default');
+
+!$::isEmbedded && $in->isa('interactive::gtk') and $::isWizard = 1;
+
+pur_gtk_mode() if $::isEmbedded && $in->isa('interactive::gtk');
+
+sub sys { system(@_) == 0 or log::l("[drakgw] Warning, sys failed for $_[0]") }
+
+sub outpend { 
+    log::explanations("modified file $_[0]");
+    my $f = shift; local *F; open F, ">>$f" or die "outpend in file $f failed: $!\n"; print F foreach @_;
+}
+
+
+#vvvvvvvvvvvvvvvvvvv TODO
+sub start_daemons () {
+    my $cups_used = 0;
+    log::explanations("Starting daemons");
+    if (-f "/etc/rc.d/init.d/cups") {
+        if (system("/etc/rc.d/init.d/cups status >/dev/null") == 0) {
+           $cups_used = 1;
+           sys("/etc/rc.d/init.d/cups stop");
+        }
+    }
+    system("/etc/rc.d/init.d/dhcpd status >/dev/null") == 0 and sys("/etc/rc.d/init.d/dhcpd stop");
+    system("/etc/rc.d/init.d/named status >/dev/null 2>/dev/null") == 0 and sys("/etc/rc.d/init.d/named stop");
+
+    my $netscripts = '/etc/sysconfig/network-scripts';
+    sys("$netscripts/net_cnx_down >/dev/null");
+    sys("/etc/rc.d/init.d/network restart >/dev/null");
+    sys("$netscripts/net_cnx_up >/dev/null");
+
+    sys("/etc/init.d/shorewall restart >/dev/null");
+
+    sys("/etc/rc.d/init.d/$_ start >/dev/null"), sys("/sbin/chkconfig --level 345 $_ on") foreach 'named', 'dhcpd', 'shorewall';
+    sys("/etc/rc.d/init.d/cups start >/dev/null") if $cups_used;
+}
+
+sub stop_daemons () {
+    log::explanations("Stopping daemons");
+    foreach (qw(dhcpd named)) {
+	system("/etc/rc.d/init.d/$_ status >/dev/null 2>/dev/null") == 0 and sys("/etc/rc.d/init.d/$_ stop");
+    }
+    system("/etc/rc.d/init.d/shorewall status >/dev/null 2>/dev/null") == 0 and sys("/etc/rc.d/init.d/shorewall clear >/dev/null");
+    sys("/sbin/chkconfig --level 345 $_ off") foreach 'named', 'dhcpd';
+}
+
+#^^^^^^^^^^^^^^^^^ TODO
+
+my $wait_configuring;
+
+sub fatal_quit ($) {
+    log::l("[drakpxe] FATAL: $_[0]");
+    undef $wait_configuring;
+    $in->ask_warn('', $_[0]);
+    quit_global($in, -1);
+}
+
+#my ($kernel_version) = c::kernel_version() =~ /(...)/;
+#log::l("[drakgw] kernel_version $kernel_version");
+#
+#$kernel_version >= 2.4 or fatal_quit(N("Sorry, we support only 2.4 kernels."));
+
+begin:
+
+#- **********************************
+#- * 0th step: verify if we have multiple network interface.
+
+$::Wizard_no_previous = 1;
+    
+$::direct or $in->ask_okcancel(N("Installation Server Configuration"),
+N("You are about to configure your computer to install a PXE server as a DHCP server
+and a TFTP server to build an installation server.
+With that feature, other computers on your local network will be installable using from this computer.
+
+Make sure you have configured your Network/Internet access using drakconnect before going any further.
+
+Note: you need a dedicated Network Adapter to set up a Local Area Network (LAN)."), 1) or quit_global($in, 0);
+
+undef $::Wizard_no_previous;
+
+
+#- **********************************
+#- * 1st step: verify if we have multiple network interface.
+
+step_check_intf:
+
+my @intf = grep { exists $_->{NETWORK} } values %$intf;
+if (@intf < 1) {
+    #- no interface already configured found, ask user to configure.
+    $in->ask_warn(N("No network adapter on your system!"), 
+		  N("No ethernet network adapter has been detected on your system. Please run the hardware configuration tool."));
+    quit_global($in, 0);
+} elsif (@intf > 1) {
+    #- there are more than one interface, we need to choose one of them.
+    @intf = ($in->ask_from_listf(N("Choose the network interface"),
+				 N("Please choose which network interface will be used for the dhcp server."),	
+				 sub { N("Interface %s (on network %s)", $_[0]{DEVICE}, $_[0]{NETWORK}) },
+				 \@intf,
+				) or goto begin);
+}
+
+
+#- **********************************
+#- * 3rd step: select installation directory to be used (if not present, next step
+#-             will be creation and copy from existing one).
+
+step_ip_range:
+
+my ($start_range, $end_range);
+
+#- it become too complicated to handle address range, so ask user directly.
+$in->ask_from('DHCP Server Configuration',
+	      N("The DHCP server will allow other computer to boot using PXE in the given range of address.
+
+If you give an inexistant directory, you will be asked to insert Installation CD or DVD to copy the installation program and rpm files.
+
+"), [ { label => N("The DHCP start range"), val => \$start_range, type => 'entry' },
+      { label => N("The DHCP end range"), val => \$end_range, type => 'entry' }, ])
+  or goto begin;
+
+
+#- **********************************
+#- * 3rd step: select installation directory to be used (if not present, next step
+#-             will be creation and copy from existing one).
+
+step_install_dir:
+
+my $dir = "/export"; #- TODO change according configuration?
+    
+$in->ask_from('Choose the installation image directory',
+	      N("Please indicate where the installation image will be available.
+
+If you do not have an existing directory, please copy the CD or DVD contents.
+
+"),
+      [ { label => N("Installation image directory"), val => \$dir, type => 'entry' }, ])
+  or goto step_ip_range;
+
+unless (-d $dir && -e "$dir/VERSION" && -d "$dir/isolinux" && -d "$dir/Mandrake/base") {
+    $in->ask_warn(N("No image found"), 
+		  N("No CD or DVD image found, please copy the installation program and rpm files."));
+    goto step_install_dir;
+}
+
+#- **********************************
+#- * 4st step: ask user for auto installation file.
+
+step_auto_install:
+
+my $auto_inst_cfg = ""; #- TODO change according configuration?
+    
+$in->ask_from('Choose auto installation',
+	      N("Please indicate where the auto_install.cfg file is located.
+
+Leave it blank if you do not want to set up automatic installation mode.
+
+"),
+      [ { label => N("Location of auto_install.cfg file"), val => \$auto_inst_cfg, type => 'entry' }, ])
+  or goto step_install_dir;
+
+__END__
+
+my @configured_devices = map { /ifcfg-(\S+)/ } glob('/etc/sysconfig/network-scripts/ifcfg*');
+
+my %aliased_devices; 
+/^\s*alias\s+(eth[0-9])\s+(\S+)/ and $aliased_devices{$1} = $2 foreach cat_("/etc/modules.conf");
+
+my $card_netconnect = network::netconnect::get_net_device();
+defined $card_netconnect and log::l("[drakgw] Information from netconnect: ignore card $card_netconnect");
+
+my @cards = grep {
+    log::l("[drakgw] Have network card: $_");
+    $_ ne $card_netconnect
+} detect_devices::getNet();
+log::l("[drakgw] Available network cards: ", join(", ", @cards));
+
+my $format = sub {
+    $aliased_devices{$_[0]} ?
+      N("Interface %s (using module %s)", $_[0], $aliased_devices{$_[0]}) :
+      N("Interface %s", $_[0]);
+};
+
+#- setup the network interface we shall use
+
+my $device;
+if (!@cards)
+{
+    $in->ask_warn(N("No network adapter on your system!"), 
+		  N("No ethernet network adapter has been detected on your system. Please run the hardware configuration tool."));
+    quit_global($in, 0);
+}
+elsif (@cards == 1)
+{
+    $device = $cards[0];
+    $in->ask_okcancel(N("Network interface"),
+N("There is only one configured network adapter on your system:
+
+%s
+
+I am about to setup your Local Area Network with that adapter.", $format->($device)), 1) or goto step_ask_confirm;
+} else {
+    $device = $in->ask_from_listf(N("Choose the network interface"),
+				    N("Please choose what network adapter will be connected to your Local Area Network."),
+				     $format,
+				    \@cards,
+				    ) or goto step_ask_confirm;
+    defined $device or quit_global($in, 0);
+}
+log::explanations("Choosing network device: $device");
+
+
+my $lan_address = "192.168.1.0";
+my $server_ip = "192.168.1.1";
+my $nameserver_ip = "192.168.1.1";
+my $netmask = "255.255.255.0";
+my $start_range = "16";
+my $end_range = "253";
+my $default_lease = "21600";
+my $max_lease = "43200";
+my $internal_domain_name = "homeland.net";
+
+my $reconf_dhcp_server_intf = 1;
+
+if (grep(/$device/, @configured_devices)) {
+  step_warning_already_conf:
+    my $auto = N("Yes");
+		my $dhcp_details = N("Yes");
+    my $conf = network::read_interface_conf("/etc/sysconfig/network-scripts/ifcfg-$device");
+    $in->ask_from(N("Network interface already configured"),
+		  N("Warning, the network adapter (%s) is already configured.
+
+Do you want an automatic re-configuration?
+
+You can do it manually but you need to know what you're doing.", $device),
+		  [ { label => N("Automatic reconfiguration"), val => \$auto, list => [ N("Yes"), N("No (experts only)") ] },
+		    { val => N("Show current interface configuration"), clicked =>
+		      sub { $in->ask_warn(N("Current interface configuration"),
+					  N("Current configuration of `%s':
+
+Network: %s
+IP address: %s
+IP attribution: %s
+Driver: %s", $device, $conf->{NETWORK}, $conf->{IPADDR}, $conf->{BOOTPROTO}, $aliased_devices{$device} || '(unknown)')) } } ]) or goto step_detectsetup;
+    
+    if ($auto ne N("Yes")) {
+	$reconf_dhcp_server_intf = 0;
+	$server_ip = $conf->{IPADDR};
+	$nameserver_ip = $conf->{IPADDR};
+	$lan_address = $conf->{NETWORK};
+	$in->ask_from('',
+		      N("I can keep your current configuration and assume you already set up a DHCP server; in that case please verify I correctly read the Network that you use for your local network; I will not reconfigure it and I will not touch your DHCP server configuration.
+
+The default DNS entry is the Caching Nameserver configured on the firewall. You can replace that with your ISP DNS IP, for example.
+		      
+Else, I can reconfigure your interface and (re)configure a DHCP server for you.
+
+", $device),
+      [ { label => N("Local Network adress"), val => \$lan_address, type => 'entry' },
+			{ label => N("Netmask"), val => \$netmask, type => 'entry' } ])
+		  or goto step_warning_already_conf;
+	$in->ask_from('',
+		      N("DHCP Server Configuration.
+
+Here you can select different options for the DHCP server configuration.
+If you don't know the meaning of an option, simply leave it as it is.
+
+", $device),
+			[ { label => N("(This) DHCP Server IP"), val => \$server_ip, type => 'entry' },
+			{ label => N("The DNS Server IP"), val => \$nameserver_ip, type => 'entry' },
+			{ label => N("The internal domain name"), val => \$internal_domain_name, type => 'entry' },
+			{ label => N("The DHCP start range"), val => \$start_range, type => 'entry' },
+			{ label => N("The DHCP end range"), val => \$end_range, type => 'entry' },
+			{ label => N("The default lease (in seconds)"), val => \$default_lease, type => 'entry' },
+			{ label => N("The maximum lease (in seconds)"), val => \$max_lease, type => 'entry' },
+			{ label => N("Re-configure interface and DHCP server"), val => \$reconf_dhcp_server_intf, type => 'bool' } ])
+	  or goto step_warning_already_conf;
+    }
+}
+    
+if (!($lan_address =~ s/\.0$//)) {
+    $in->ask_warn('', 
+		  N("The Local Network did not finish with `.0', bailing out."));
+    quit_global($in, 0);
+}
+log::explanations("Using LAN address <$lan_address>");
+
+
+#- test for potential conflict with other networks
+
+foreach (grep { $_ ne $device } @configured_devices)
+{
+    grep(/$lan_address/, cat_("/etc/sysconfig/network-scripts/ifcfg-$_")) and
+      ($in->ask_warn('', N("Potential LAN address conflict found in current config of %s!\n", $_)) or goto step_detectsetup);
+}
+
+
+#- test for potential conflict with previous firewall config
+network::shorewall::check_iptables($in) or goto step_detectsetup;
+
+#- **********************************
+#- * 2nd step: configure
+
+$wait_configuring = $in->wait_message(N("Configuring..."), 
+				      N("Configuring scripts, installing software, starting servers..."));
+
+
+#- setup the /etc/sysconfig/network-script/ script
+
+if ($reconf_dhcp_server_intf) {
+    log::explanations("Reconfiguring network parameters of $device");
+    my $network_scripts = "/etc/sysconfig/network-scripts";
+    my $ifcfg = "$network_scripts/ifcfg-$device";
+    renamef($ifcfg, "$network_scripts/old.ifcfg-$device");
+    output($ifcfg, qq(DEVICE=$device
+BOOTPROTO=static
+IPADDR=$server_ip
+NETMASK=$netmask
+NETWORK=$lan_address.0
+BROADCAST=$lan_address.255
+ONBOOT=yes
+));
+}
+
+
+#- install and setup the RPM packages
+
+my $rpms_to_install;
+my %rpm2file = ('dhcp-server' => '/usr/sbin/dhcpd',
+		bind => '/usr/sbin/named',
+		shorewall => '/sbin/shorewall',
+		'caching-nameserver' => '/var/named/named.local');
+
+#- first: try to install all in one step
+my @needed_to_install = grep { !-e $rpm2file{$_} } keys %rpm2file;
+@needed_to_install and $in->do_pkgs->install(@needed_to_install);
+#- second: try one by one if failure detected
+if (grep { !-e $rpm2file{$_} } keys %rpm2file) {
+    foreach (keys %rpm2file) {
+	-e $rpm2file{$_} or $in->do_pkgs->install($_);
+	-e $rpm2file{$_} or fatal_quit(N("Problems installing package %s", $_));
+    }
+}
+
+put_in_hash($shorewall ||= {}, {
+    disabled => 0,
+    net_interface => $card_netconnect,
+    if_(@cards > 1, loc_interface => [ grep { $_ ne $device } @cards ]),
+    masquerade => { interface => $device, subnet => "$lan_address.0/$netmask" },
+});
+
+network::shorewall::write($shorewall);
+
+#- be sure that FORWARD_IPV4 is enabled in /etc/sysconfig/network
+
+substInFile { s/^FORWARD_IPV4.*\n//; $_ .= "FORWARD_IPV4=true\n" if eof } $sysconf_network;
+
+
+#- setup the DHCP server
+
+if ($reconf_dhcp_server_intf) {
+    log::explanations("Configuring a DHCP server on $lan_address.0");
+    renamef($dhcpd_conf, "$dhcpd_conf.old");
+    output($dhcpd_conf, qq(subnet $lan_address.0 netmask $netmask {
+	# default gateway
+	option routers $server_ip;
+	option subnet-mask $netmask;
+
+	option domain-name "$internal_domain_name";
+	option domain-name-servers $nameserver_ip;
+
+	range dynamic-bootp $lan_address.$start_range $lan_address.$end_range;
+	default-lease-time $default_lease;
+	max-lease-time $max_lease;
+}
+));
+}
+
+my $update_dhcp = '/usr/sbin/update_dhcp.pl';
+-e $update_dhcp and system($update_dhcp);
+
+
+#- put the interface for the dhcp server in the sysconfig-dhcp config, for the /etc/init.d script of dhcpd
+
+substInFile { s/^INTERFACES\n//; $_ .= "INTERFACES=\"$device\"\n" if eof } $sysconf_dhcpd;
+
+
+#- Set up /etc/cups/cupsd.conf to make the broadcasting of the printer info
+#- working correctly: 
+#- 
+#-  1. ServerName <server's IP address>  # because clients do necessarily 
+#-                                       # know the server's name
+#-
+#-  2. BrowseAddress <server's Broadcast IP> # broadcast printer info into
+#-                                           # the local network.
+#-
+#-  3. BrowseOrder Deny,Allow
+#-     BrowseDeny All
+#-     BrowseAllow <IP mask for local net> # Only accept broadcast signals 
+#-                                         # coming from local network
+#-
+#-  4. <Location />
+#-     Order Deny,Allow
+#-     Deny From All
+#-     Allow From <IP mask for local net> # Allow only machines of local 
+#-     </Location>                        # network to access the server
+#-     
+#- These steps are only done when the CUPS package is installed.
+
+#- Modify the root location block in /etc/cups/cupsd.conf
+
+if (-f $cups_conf) {
+    log::explanations("Updating CUPS configuration accordingly");
+
+    substInFile {
+        s/^ServerName[^:].*\n//; $_ .= "ServerName $server_ip\n" if eof;
+        s/^BrowseAddress.*\n//; $_ .= "BrowseAddress $lan_address.255\n" if eof;
+        s/^BrowseOrder.*\n//; $_ .= "BrowseOrder Deny,Allow\n" if eof;
+        s/^BrowseDeny.*\n//; $_ .= "BrowseDeny All\n" if eof;
+        s/^BrowseAllow.*\n//; $_ .= "BrowseAllow $lan_address.*\n" if eof;
+    } $cups_conf;
+
+    my @cups_conf_content = cat_($cups_conf);
+    my @root_location; my $root_location_start; my $root_location_end;
+
+    # Cut out the root location block so that it can be treated seperately
+    # without affecting the rest of the file
+    if (grep(m|^\s*<Location\s+/\s*>|, @cups_conf_content)) {
+	$root_location_start = -1;
+	$root_location_end = -1;
+	# Go through all the lines, bail out when start and end line found
+	for (my $i = 0; $i < @cups_conf_content && $root_location_end == -1; $i++) {
+	    if ($cups_conf_content[$i] =~ m|^\s*<\s*Location\s+/\s*>|) {
+		$root_location_start = $i;
+	    } elsif ($cups_conf_content[$i] =~ m|^\s*<\s*/Location\s*>| && $root_location_start != -1) {
+		$root_location_end = $i;
+	    }
+	}
+	# Rip out the block and store it seperately
+	@root_location = splice(@cups_conf_content, $root_location_start, $root_location_end - $root_location_start + 1);
+    } else {
+	# If there is no root location block, create one
+	$root_location_start = @cups_conf_content;
+	@root_location = ("<Location />\n", "</Location>\n");
+    }
+ 
+    # Delete all former "Order", "Allow", and "Deny" lines from the root location block
+    s/^\s*Order.*//, s/^\s*Allow.*//, s/^\s*Deny.*// foreach @root_location;
+ 
+    # Add the new "Order" and "Deny" lines, add an "Allow" line for the local network
+    splice(@root_location, -1, 0, $_) foreach "Order Deny,Allow\n", "Deny From All\n", "Allow From 127.0.0.1\n",
+					       "Allow From $lan_address.*\n";
+ 
+    # Put the changed root location block back into the file
+    splice(@cups_conf_content, $root_location_start, 0, @root_location);
+ 
+    output $cups_conf, @cups_conf_content;
+}
+
+
+#- start the daemons
+
+start_daemons();
+
+
+#- bye-bye message
+
+undef $wait_configuring;
+
+$::Wizard_no_previous = 1;
+$::Wizard_finished = 1;
+
+$in->ask_okcancel(N("Congratulations!"), 
+N("Everything has been configured.
+You may now share Internet connection with other computers on your Local Area Network, using automatic network configuration (DHCP)."));
+
+
+log::l("[drakgw] Installation complete, exiting");
+quit_global($in, 0);
+
+sub quit_global {
+    my ($in, $exitcode) = @_;
+    $in->exit($exitcode);
+    goto begin
+}
+
+sub pur_gtk_mode {
+    require ugtk2;
+    import ugtk2 qw(:wrappers :helpers :create);
+    my $setup_state = $shorewall && $shorewall->{masquerade} ? 
+                         ($shorewall->{disabled} ? 
+			  N("The setup has already been done, but it's currently disabled.") :
+			  N("The setup has already been done, and it's currently enabled.")) :
+			 N("No Internet Connection Sharing has ever been configured.");
+    
+    my $window1 = ugtk2->new('drakgw');
+    $window1->{rwindow}->signal_connect(delete_event => sub { ugtk2->exit(0) });
+    unless ($::isEmbedded) {
+        $window1->{rwindow}->set_position('center');
+        $window1->{rwindow}->set_title(N("Internet connection sharing configuration"));
+    }
+    $window1->{rwindow}->border_width(10);
+    my $vbox1 = new Gtk2::VBox(0,0);
+    $window1->{rwindow}->add($vbox1);
+    my $hbox1 = new Gtk2::HBox(0,0);
+    $vbox1->pack_start($hbox1,1,1,0);
+    my $label1 = new Gtk2::Label(
+N("Welcome to the Internet Connection Sharing utility!
+
+%s
+
+Click on Configure to launch the setup wizard.", $setup_state));
+    $hbox1->pack_start($label1,1,1,0);
+    my $hbox2 = new Gtk2::HBox(0,0);
+    $vbox1->pack_start($hbox2,1,1,0);
+    
+    my $bbox1 = new Gtk2::HButtonBox;
+    $vbox1->pack_start($bbox1,0,0,0);
+    $bbox1->set_layout('end');
+    my $button_conf = Gtk2::Button->new(N("Configure"));
+    $button_conf->signal_connect(clicked => sub {
+				       system("/usr/sbin/drakgw --wizard");
+				       ugtk2->exit(0);
+				   });
+    $bbox1->add($button_conf);
+    my $button_cancel = Gtk2::Button->new(N("Cancel"));
+    $button_cancel->signal_connect(clicked => sub { ugtk2->exit(0) });
+    $bbox1->add($button_cancel);
+    $window1->{rwindow}->show_all();
+    $window1->main;
+    ugtk2->exit(0);
+    
+}
