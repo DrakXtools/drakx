@@ -540,7 +540,7 @@ sub installPackages {
                 my $f = $install_any::advertising_images[$i++ % @install_any::advertising_images];
 		log::l("advertising $f");
 		gtkdestroy($advertising);
-		gtkpack($box, $advertising = gtkpng($f));
+		eval { gtkpack($box, $advertising = gtkpng($f)) };
 	    }
 	    $w->flush;
 	} elsif ($m =~ /^Progressing installing package/) {
