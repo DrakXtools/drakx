@@ -86,6 +86,7 @@ my %mice =
  N_("Universal") =>
  [ [ 'input/mice' ],
    [ [ 7, 'ps/2', 'ExplorerPS/2', N_("Any PS/2 & USB mice") ],
+     if_(is_xbox(), [ 5, 'ps/2', 'IMPS/2', N_("Microsoft Xbox Controller S") ]),
      [ 5, 'ps/2', 'auto-dev', N_("Synaptics Touchpad") ],
    ] ],
     ),
@@ -292,6 +293,9 @@ sub detect {
         my @input_devices = cat_('/proc/bus/input/devices');
         my $synaptics_mouse;
         if (my $mouse_nb = grep { /^H: Handlers=mouse/ } @input_devices) {
+            if (is_xbox()) {
+                return fullname2mouse('Universal|Microsoft Xbox Controller S');
+            }
             my $univ_mouse = fullname2mouse('Universal|Any PS/2 & USB mice', wacom => \@wacom);
             if (any { m!^N: Name="(?:SynPS/2 Synaptics TouchPad|AlpsPS/2 ALPS TouchPad)"$! } @input_devices) {
                 $synaptics_mouse = fullname2mouse('Universal|Synaptics Touchpad');

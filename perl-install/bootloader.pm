@@ -167,6 +167,9 @@ sub read {
 	    } elsif ($main_method eq 'yaboot') {
 		#- not checking on ppc, there's only yaboot anyway :)
 		$main_method;
+	    } elsif ($main_method eq 'cromwell') {
+		#- XBox
+		$main_method;
 	    } elsif (my $type = partition_table::raw::typeOfMBR($_)) {
 		warn "typeOfMBR $type on $_ for method $main_method\n" if $ENV{DEBUG};
 		$type;
@@ -258,6 +261,11 @@ sub yaboot2file {
     "$::prefix/boot/" . basename($of_path);
 }
 
+sub read_cromwell() {
+    my %b;
+    $b{method} = 'cromwell';
+    \%b;
+}
 sub read_yaboot() { &read_lilo }
 sub read_lilo() {
     my $file = sprintf("$::prefix/etc/%s.conf", arch() =~ /ppc/ ? 'yaboot' : 'lilo');
@@ -824,6 +832,7 @@ sub method2text {
 }
 
 sub method_choices_raw() {
+    is_xbox() ? 'cromwell' :
     arch() =~ /ppc/ ? 'yaboot' : 
     arch() =~ /ia64/ ? 'lilo' : 
       (
@@ -973,6 +982,16 @@ sub when_config_changed_yaboot {
     run_program::rooted($::prefix, "/usr/sbin/ybin", "2>", \$error) or die "ybin failed: $error";
 }
 
+sub install_cromwell { 
+    log::l("XBox/Cromwell - nothing to install...");
+}
+sub write_cromwell { 
+    log::l("XBox/Cromwell - nothing to write...");
+}
+sub when_config_changed_cromwell {
+    my ($_bootloader) = @_;
+    log::l("XBox/Cromwell - nothing to do...");
+}
 
 sub make_label_lilo_compatible {
     my ($label) = @_; 
