@@ -298,6 +298,8 @@ sub reallyChooseGroups {
 				   1, gtkpack(new Gtk::VBox(0,0), 
 					   $entry->('Development|Development'),
 					   $entry->('Development|Documentation'),
+					   '',
+					   $entries_in_path->('Graphical Environment'),
 					  ),
 				) : (
 				   1, gtkpack(new Gtk::VBox(0,0), 
