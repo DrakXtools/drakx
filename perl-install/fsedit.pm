@@ -524,7 +524,7 @@ sub check_mntpoint {
     die "raid / with no /boot" 
       if $mntpoint eq "/" && isRAID($part) && !has_mntpoint("/boot", $all_hds);
     die N("You can't use a LVM Logical Volume for mount point %s", $mntpoint)
-      if ($mntpoint eq '/' || $mntpoint eq '/boot') && isLVM($hd);
+      if $mntpoint eq '/boot' && isLVM($hd);
     die N("This directory should remain within the root filesystem")
       if member($mntpoint, qw(/bin /dev /etc /lib /sbin /root /mnt));
     die N("You need a true filesystem (ext2/ext3, reiserfs, xfs, or jfs) for this mount point\n")
