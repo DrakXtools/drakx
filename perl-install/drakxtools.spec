@@ -49,7 +49,7 @@ Provides: libdetect0, libdetect0-devel, libdetect-lst, libdetect-lst-devel, dete
 %description
 Contains adduserdrake, ddcxinfos, diskdrake, drakautoinst, drakbackup,
 drakboot, drakbug, drakbug_report, drakconnect, drakfloppy, drakfont,
-drakgw, drakproxy, drakTermServ, drakxservices,
+drakgw, drakproxy, draksplash, drakTermServ, drakxservices,
 drakxtv, lsnetdrake, lspcidrake, keyboarddrake, livedrake,
 localedrake, mousedrake, printerdrake, scannerdrake, tinyfirewall and
 XFdrake :
@@ -85,6 +85,8 @@ drakfont: import some fonts in the system.
 drakgw: internet connection sharing
 
 drakproxy: proxies configuration
+
+draksplash: bootsplash themes creation
 
 drakTermServ: mandrake terminal server configurator
 
@@ -259,6 +261,9 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && \
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog 
+* Tue Aug 20 2002 nathan <nathan@mandrakesoft.com> 1.1.9-14mdk
+- adding draksplash
+
 * Mon Aug 19 2002 Pixel <pixel@mandrakesoft.com> 1.1.9-13mdk
 - snapshot (including better XFdrake)
 
