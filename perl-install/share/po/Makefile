@@ -1,6 +1,6 @@
 PMSFILES = $(shell find .. -name "*.pm" | grep -v "^../po" | grep -v "^../c/")
 PMSCFILES = $(PMSFILES:%=%_.c)
-POFILES = $(shell ls *.po | grep -v empty.po)
+POFILES = $(shell ls *.po)
 FROMPOFILES = $(POFILES:%.po=%.pm)
 
 all: $(FROMPOFILES)
@@ -11,14 +11,14 @@ clean:
 $(FROMPOFILES): %.pm: %.po
 	./po2perl < $< > $@
 
-$(POFILES): empty.po
+$(POFILES): panoramix.pot
 	cp -f $@ $@t
-	msgmerge $< $@t > $@
+	msgmerge $@t $< > $@
 	rm $@t
 
-empty.po: $(PMSFILES)
+panoramix.pot: $(PMSFILES)
 	$(MAKE) $(PMSCFILES);
-	xgettext -F -n --omit-header --keyword=_ --keyword=__ -o empty.po $(PMSCFILES)
+	xgettext -F -n --keyword=_ --keyword=__ -o panoramix.pot $(PMSCFILES)
 	rm $(PMSCFILES)
 
 $(PMSCFILES): %_.c: %
