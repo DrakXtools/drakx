@@ -200,7 +200,7 @@ sub allowNVIDIA_rpms {
 	    $p->flag_available or next;
 	    $version or ($version, $release) = ($p->version, $p->release);
 	    my $name = "NVIDIA_kernel-$version-$release$ext";
-	    pkgs::packageByName($packages, $name) or return;
+	    pkgs::packageByName($packages, $name) or next;
 	    push @rpms, $name;
 	}
 	@rpms > 0 or return;
