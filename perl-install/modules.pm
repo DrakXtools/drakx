@@ -385,8 +385,6 @@ sub when_load {
     }
 
     load('snd-pcm-oss') if $name =~ /^snd-/;
-    add_alias('ieee1394-controller', $name) if member($name, 'ohci1394');
-    add_probeall('usb-interface', $name) if member($name, qw(usb-uhci usb-ohci ehci-hcd uhci-hcd ohci-hcd));
 
     $conf{$name}{options} = join " ", @options if @options;
 
@@ -399,8 +397,11 @@ sub when_load {
 	if ($category =~ m,disk/(scsi|hardware_raid|usb|firewire),) {
 	    add_probeall('scsi_hostadapter', $name);
 	    eval { load('sd_mod') };
-	}
-        if ($category =~ /sound/) {
+	} elsif ($category eq 'bus/usb') {
+	    add_probeall('usb-interface', $name);
+	} elsif ($category eq 'bus/firewire') {
+	    add_alias('ieee1394-controller', $name);
+	} elsif ($category =~ /sound/) {
             my $sound_alias = find { /^sound-slot-[0-9]+$/ && $conf{$_}{alias} eq $name } keys %conf;
             $sound_alias ||= 'sound-slot-0';
             add_alias($sound_alias, $name);
