@@ -345,7 +345,7 @@ sub lilo_choice() {
                       [ N("Installation of %s failed. The following error occured:", $loader), $err ]);
         goto ask;
     }
-    update_bootloader_label(bootloader::detect_bootloader());
+    eval { update_bootloader_label(bootloader::detect_bootloader()) };
 }
 
 
