@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2003-06-26 22:24+0200\n"
+"POT-Creation-Date: 2003-06-27 14:08+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1642,31 +1642,6 @@ msgstr ""
 msgid " / Region"
 msgstr ""
 
-#: ../../harddrake/sound.pm:1
-#, c-format
-msgid ""
-"The classic bug sound tester is to run the following commands:\n"
-"\n"
-"\n"
-"- \"lspcidrake -v | fgrep AUDIO\" will tell you which driver your card use\n"
-"by default\n"
-"\n"
-"- \"grep sound-slot /etc/modules.conf\" will tell you what driver it\n"
-"currently uses\n"
-"\n"
-"- \"/sbin/lsmod\" will enable you to check if its module (driver) is\n"
-"loaded or not\n"
-"\n"
-"- \"/sbin/chkconfig --list sound\" and \"/sbin/chkconfig --list alsa\" will\n"
-"tell you if sound and alsa services're configured to be run on\n"
-"initlevel 3\n"
-"\n"
-"- \"aumix -q\" will tell you if the sound volume is muted or not\n"
-"\n"
-"- \"/sbin/fuser -v /dev/dsp\" will tell which program uses the sound card.\n"
-""
-msgstr ""
-
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid ""
@@ -2241,6 +2216,31 @@ msgstr ""
 #: ../../standalone/net_monitor:1
 #, c-format
 msgid "Sending Speed:"
+msgstr ""
+
+#: ../../harddrake/sound.pm:1
+#, c-format
+msgid ""
+"The classic bug sound tester is to run the following commands:\n"
+"\n"
+"\n"
+"- \"lspcidrake -v | fgrep AUDIO\" will tell you which driver your card uses\n"
+"by default\n"
+"\n"
+"- \"grep sound-slot /etc/modules.conf\" will tell you what driver it\n"
+"currently uses\n"
+"\n"
+"- \"/sbin/lsmod\" will enable you to check if its module (driver) is\n"
+"loaded or not\n"
+"\n"
+"- \"/sbin/chkconfig --list sound\" and \"/sbin/chkconfig --list alsa\" will\n"
+"tell you if sound and alsa services're configured to be run on\n"
+"initlevel 3\n"
+"\n"
+"- \"aumix -q\" will tell you if the sound volume is muted or not\n"
+"\n"
+"- \"/sbin/fuser -v /dev/dsp\" will tell which program uses the sound card.\n"
+""
 msgstr ""
 
 #: ../../standalone/harddrake2:1
@@ -3110,11 +3110,6 @@ msgstr ""
 #: ../../bootloader.pm:1
 #, c-format
 msgid "not enough room in /boot"
-msgstr ""
-
-#: ../../harddrake/sound.pm:1
-#, c-format
-msgid "Choosing an arbitratry driver"
 msgstr ""
 
 #: ../../network/ethernet.pm:1 ../../network/network.pm:1
@@ -8443,6 +8438,11 @@ msgstr ""
 #: ../../standalone/harddrake2:1 ../../standalone/harddrake2:1 ../../standalone/logdrake:1
 #, c-format
 msgid "/_Help"
+msgstr ""
+
+#: ../../harddrake/sound.pm:1
+#, c-format
+msgid "Choosing an arbitrary driver"
 msgstr ""
 
 #: ../../standalone/scannerdrake:1

@@ -246,7 +246,7 @@ sub trouble {
                   formatAlaTeX(N("The classic bug sound tester is to run the following commands:
 
 
-- \"lspcidrake -v | fgrep AUDIO\" will tell you which driver your card use
+- \"lspcidrake -v | fgrep AUDIO\" will tell you which driver your card uses
 by default
 
 - \"grep sound-slot /etc/modules.conf\" will tell you what driver it
@@ -271,7 +271,7 @@ sub get_any_driver_entry {
         val => N("Let me pick any driver"), disabled => sub {},
         clicked => sub {
             my $old_driver = $driver;
-            if ($in->ask_from(N("Choosing an arbitratry driver"),
+            if ($in->ask_from(N("Choosing an arbitrary driver"),
                               formatAlaTeX(N("If you really think that you know which driver is the right one for your card
 you can pick one in the above list.
 
