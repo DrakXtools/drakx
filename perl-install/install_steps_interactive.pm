@@ -344,7 +344,7 @@ notation (for example, 1.2.3.4)."),
 			     [ _("IP address:"), _("Netmask:"), _("Automatic IP") ],
 			     [ \$intf->{IPADDR}, \$intf->{NETMASK}, { val => \$pump, type => "bool", text => _("(bootp/dhcp)") } ],
 			     complete => sub {
-				 $intf->{BOOTPROTO} = $pump ? "bootp" : "static";
+				 $intf->{BOOTPROTO} = $pump ? "dhcp" : "static";
 				 return 0 if $pump;
 				 for (my $i = 0; $i < @fields; $i++) {
 				     unless (network::is_ip($intf->{$fields[$i]})) {
@@ -645,9 +645,10 @@ sub setupBootloader {
 	$o->set_help('setupBootloaderBeginner');
 	my $boot = $o->{hds}[0]{device};
 	my $onmbr = "/dev/$boot" eq $b->{boot};
-	$b->{boot} = "/dev/$boot" if $o->ask_from_list_(_("LILO Installation"),
-			     _("Where do you want to install the bootloader?"),
-			     \@l, $l[!$onmbr]) eq $l[0];
+	$b->{boot} = "/dev/" . ($o->ask_from_list_(_("LILO Installation"),
+					_("Where do you want to install the bootloader?"),
+					\@l, $l[!$onmbr]) eq $l[0] 
+					  ? $boot : fsedit::get_root($o->{fstab}, 'boot')->{device});
     } elsif ($more || !$::beginner) {
 	$o->set_help("setupBootloaderGeneral");
 
@@ -948,14 +949,14 @@ sub load_thiskind {
       unless !$::beginner && modules::pcmcia_need_config($o->{pcmcia}) && 
 	     !$o->ask_yesorno('', _("Try to find PCMCIA cards?"), 1);
     $w = $o->wait_message(_("PCMCIA"), _("Configuring PCMCIA cards...")) if modules::pcmcia_need_config($pcmcia);
-    modules::load_thiskind($type, sub { $w = wait_load_module($o, $type, @_) }, $pcmcia);
 
     if ($type =~ /scsi/i && cat_("/proc/cmdline") !~ /ide2=/) {
 	log::l("HPT: looking for HPT");
+	require pci_probing::main;
 	my @l = grep { $_->[1] =~ /HPT/ } pci_probing::main::probe('STORAGE_OTHER', 'more');
 	if (@l == 2 && $o->ask_yesorno('', 
 _("Linux does not yet fully support ultra dma 66 HPT.
-As a work-around i can make a custom floppy giving access the hard drive on ide2 and ide3"))) {
+As a work-around i can make a custom floppy giving access the hard drive on ide2 and ide3"), 1)) {
 	    log::l("HPT: found");
 	    my $ide = sprintf "ide2=0x%x,0x%x ide3=0x%x,0x%x", map { 
 		my ($a, $b) = (split ' ', $_->[0])[3,4];
@@ -978,6 +979,7 @@ As a work-around i can make a custom floppy giving access the hard drive on ide2
 _("Enter a floppy to create an HTP enabled boot
 (all data on floppy will be lost)"));
 		if (my $fd = install_any::getFile("$image.img")) {
+                    my $w = $o->wait_message('', _("Creating bootdisk"));
 		    local *OUT;
 		    open OUT, ">$dev" or log::l("failed to write $dev"), return;
 		    local $/ = \ (16 * 1024);
@@ -990,10 +992,10 @@ _("Enter a floppy to create an HTP enabled boot
 		fs::umount("/floppy");
 		log::l("HPT: all done");
 
-		$o->ask_okcancel('', $nb_try ? 
+		$o->ask_warn('', $nb_try ? 
 			     _("It is necessary to restart installation booting on the floppy") :
-			     _("It is necessary to restart installation with the new parameters")) and
-		  install_steps::rebootNeeded($o);
+			     _("It is necessary to restart installation with the new parameters"));
+		install_steps::rebootNeeded($o);
 	    } else {
 		$o->ask_warn('', 
 _("Failed to create an HTP boot floppy.
@@ -1001,6 +1003,8 @@ You may have to restart installation and give ``%s'' at the prompt", $ide));
 	    }
 	}
     }
+
+    modules::load_thiskind($type, sub { $w = wait_load_module($o, $type, @_) }, $pcmcia);
 }
 
 #------------------------------------------------------------------------------

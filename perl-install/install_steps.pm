@@ -184,6 +184,11 @@ sub choosePackages($$$$) {
 sub beforeInstallPackages {
     my ($o) = @_;
 
+    $o->{bootloader}{perImageAppend} .= " " . join(" ", grep { /^ide/ } split ' ', cat_("/proc/cmdline"));
+    if (my @l = detect_devices::getIDEBurners()) {
+	$o->{bootloader}{perImageAppend} .= " " . join(" ", map { "$_=ide-scsi" } @l);
+    }
+
     network::add2hosts("$o->{prefix}/etc/hosts", "localhost.localdomain", "127.0.0.1");
     require pkgs;
     pkgs::init_db($o->{prefix}, $o->{isUpgrade});
@@ -454,13 +459,14 @@ sub addUser($) {
 	if (!$_->{name} || getpwnam($_->{name}) || $done{$_->{name}}) { 
 	    0;
 	} else {
+	    $_->{home} ||= "/home/$_->{name}";
+
 	    my $u = $_->{uid} || ($_->{oldu} = (stat("$p$_->{home}"))[4]);
 	    my $g = $_->{gid} || ($_->{oldg} = (stat("$p$_->{home}"))[5]);
 	    #- search for available uid above 501 else initscripts may fail to change language for KDE.
 	    if (!$u || getpwuid($u)) { for ($u = 501; getpwuid($u) || $uids{$u}; $u++) {} }
 	    if (!$g || getgrgid($g)) { for ($g = 501; getgrgid($g) || $gids{$g}; $g++) {} }
 
-	    $_->{home} ||= "/home/$_->{name}";
 	    $_->{uid} = $u; $uids{$u} = 1;
 	    $_->{gid} = $g; $gids{$g} = 1;
 	    $_->{pw} ||= $_->{password} && install_any::crypt($_->{password});
@@ -507,7 +513,7 @@ sub createBootdisk($) {
     return if $::testing;
 
     require lilo;
-    lilo::mkbootdisk($o->{prefix}, install_any::kernelVersion(), $dev);
+    lilo::mkbootdisk($o->{prefix}, install_any::kernelVersion(), $dev, $o->{bootloader}{perImageAppend});
     $o->{mkbootdisk} = $dev;
 }
 
@@ -544,10 +550,6 @@ sub readBootloaderConfigBeforeInstall {
 
 sub setupBootloaderBefore {
     my ($o) = @_;
-    $o->{bootloader}{perImageAppend} .= " " . join(" ", grep { /^ide/ } split ' ', cat_("/proc/cmdline"));
-    if (my $ramsize = $o->{miscellaneous}{memsize} && $o->{bootloader}{perImageAppend} !~ /mem=/) {
-	$o->{bootloader}{perImageAppend} .= " mem=$ramsize";
-    }
     require lilo;
     lilo::suggest($o->{prefix}, $o->{bootloader}, $o->{hds}, $o->{fstab}, install_any::kernelVersion());
     $o->{bootloader}{keytable} ||= keyboard::keyboard2kmap($o->{keyboard});
@@ -621,6 +623,18 @@ sub miscellaneous {
 
     cat_("/proc/cmdline") =~ /mem=(\S+)/;
     add2hash_($o->{miscellaneous} ||= {}, { numlock => !$o->{pcmcia}, $1 ? (memsize => $1) : () });
+
+    local $_ = $o->{bootloader}{perImageAppend};
+    if (my $ramsize = $o->{miscellaneous}{memsize} and !/mem=/) {
+	$_ .= " mem=$ramsize";
+    }
+    if (my @l = detect_devices::getIDEBurners() and !/ide-scsi/) {
+	$_ .= " " . join(" ", map { "$_=ide-scsi" } @l);
+    }
+    #- keep some given parameters
+    $_ .= " " . join(" ", grep { /^ide/ } split ' ', cat_("/proc/cmdline")) unless /ide.=/;
+
+    $o->{bootloader}{perImageAppend} = $_;
 }
 
 #------------------------------------------------------------------------------

@@ -28,7 +28,7 @@ use detect_devices;
 use run_program;
 
 use install_steps;
-use install_steps_interactive;
+#use install_steps_interactive;
 
 #-######################################################################################
 #- Steps table
@@ -91,7 +91,7 @@ my %suggestedPartitions = (
     { mntpoint => "/boot", size =>  10 << 11, type => 0x83, maxsize => 30 << 11 },
     { mntpoint => "/",     size => 300 << 11, type => 0x83, ratio => 5, maxsize => 2500 << 11 },
     { mntpoint => "swap",  size =>  64 << 11, type => 0x82, ratio => 1, maxsize => 250 << 11 },
-    { mntpoint => "/home", size => 300 << 11, type => 0x83, ratio => 5 },
+    { mntpoint => "/home", size => 300 << 11, type => 0x83, ratio => 2 },
   ],
   developer => [
     { mntpoint => "/boot", size =>  10 << 11, type => 0x83, maxsize => 30 << 11 },

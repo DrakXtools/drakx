@@ -104,6 +104,9 @@ sub getIDE() {
     @idi;
 }
 
+#- do not work if ide-scsi is built in the kernel (aka not in module)
+sub getIDEBurners() { uniq map { m!ATAPI.* CD(-R|/RW){1,2} ! ? /(\w+)/ : () } syslog() }
+
 sub getCompaqSmartArray() {
     my @idi;
     my $f;

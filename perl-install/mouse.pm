@@ -123,7 +123,7 @@ sub detect() {
 	eval { modules::load($c->[1], "serial_usb") };
 	sleep(1);
 	do { $wacom or modules::unload("serial"); return name2mouse("USB Mouse"), $wacom } if !$@ && detect_devices::tryOpen("usbmouse");
-	modules::unload($c->[1]);
+	modules::unload($c->[1], 'remove_alias');
     }
     die "mouseconfig failed";
 }

@@ -98,12 +98,13 @@ sub hasRAID {
     $b;
 }
 
-sub get_root($) {
-    my ($fstab) = @_;
+sub get_root($;$) {
+    my ($fstab, $boot) = @_;
+    if ($boot) { $_->{mntpoint} eq "/boot" and return $_ foreach @$fstab; }
     $_->{mntpoint} eq "/" and return $_ foreach @$fstab;
     undef;
 }
-sub get_root_ { get_root([ get_fstab(@{$_[0]}) ]) }
+sub get_root_ { get_root([ get_fstab(@{$_[0]}) ], $_[1]) }
 
 sub is_one_big_fat {
     my ($hds) = @_;

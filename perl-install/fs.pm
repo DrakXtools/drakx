@@ -212,7 +212,7 @@ sub write($$$$) {
        [ split ' ', 'none /dev/pts devpts mode=0620 0 0' ],
        (map_index {
 	   my $i = $::i ? $::i + 1 : '';
-	   mkdir "$prefix/mnt/cdrom$i", 0755 or log::l("failed to mkdir $prefix/mnt/cdrom$i: $!");
+	   mkdir "$prefix/mnt/cdrom$i", 0755;#- or log::l("failed to mkdir $prefix/mnt/cdrom$i: $!");
 	   symlinkf $_->{device}, "$prefix/dev/cdrom$i" or log::l("failed to symlink $prefix/dev/cdrom$i: $!");
 	   chown 0, 12, "$prefix/dev/$_->{device}";
 	   $useSupermount ?

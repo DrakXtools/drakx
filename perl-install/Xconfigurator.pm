@@ -293,7 +293,7 @@ sub testFinalConfig($;$$) {
 	$mesg = $mesg . "\n" . _("Warning: testing is dangerous on this graphic card");
 	$def = 0;
     }
-    $in->ask_yesorno(_("Test configuration"), $mesg, $def) or return 1;
+    $auto && $def or $in->ask_yesorno(_("Test configuration"), $mesg, $def) or return 1;
 
     unlink "$prefix/tmp/.X9-lock";
 

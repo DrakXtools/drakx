@@ -1,29 +1,32 @@
-for upgrade in expert, give choice of packages to install
+bug: Lrosqu'on effectue une mise à jour et que /etc/lilo.conf contient la
+variable « default » positionnée sur autre chose que « linux » ou «
+windows », DrakX est incapable de générer LILO.
 
-choosing packages available in upgrade?
+bug: GeForce and hd.img?
 
-put the updated FBDev server
+noatime option for ext2 fs on laptops (do not wake up the hd)
+       Do  not  update  inode  access times on this
+       file system (e.g, for faster access  on  the
+       news spool to speed up news servers).
+
+
+(?)for upgrade in expert, give choice of packages to install
+   choosing packages available in upgrade?
 
 refresh the kde desktop after package installation in rpmdrake
 (restart kpanel)
+rpmdrake: pb uninstalling package with dependencies (rpmdrake is killed?!) (as root too)
 
 with 2MB of video ram, chooses 8bpp instead of 16bpp
 
-retest windows autoresizing in newbie
-
-test bug with lilo and windows (if not on mbr)
-
 kdelnk in mandrake_desk (especially Kppp -> Internet)
-removed icons come back later
 
 rpmdrake and same name packages
 
 segfault in linuxconf (adapter 1 empty)
 (test with the sysconfig sent)
 
-UDMA66
-
-test crypto
+UDMA66 (ultra66.o for promise)
 
 just before release:
 - mandrake_doc-xx, the symlink is no good in /usr/doc/mandrake as 
@@ -31,6 +34,11 @@ just before release:
 - update kudzu's pcitable
 
 --------------------------------------------------------------------------------
+bug (by dadou): Si la partition racine est trop petite pour installer le système, un
+message d'erreur apparaît pour signaler le problème (bien) mais on ne
+peut en sortir. La seule solution est de redémarrer.
+
+
 > Here I go into the printer configuration select 'HP Deskjet 722C Colour',
 > print a test ASCII page, pressing 'No' when prompted to indicate the page did
 > not print OK and then hitting cancel when prompted to choose a printer type
@@ -38,6 +46,8 @@ just before release:
 > ask_from_list cancel at /usr/lib/libDrakX/my_gtk.pm line 504.
 
 bug in ext2resizing (no sparse superbloc, don't finish properly)
+
+diskdrake: take from parted mklabel, hide(?)
 
 error handling (like reading hdlist)
 
@@ -98,6 +108,9 @@ in the middle, remove the first one. Result hda5 at the end and bug.
 (pix)see what can be done with nvram (50 bytes to save information)
 
 i18n
+
+stage1 & network: add ability to choose the network interface to use
+stage1 & cdrom: add ability in expert to choose the scsi cdrom drive to use
 
 ability to add nfs/weird_fs entries in fstab
 
@@ -293,3 +306,6 @@ suggested partition tables must be better foreach installClass
 
 (done,pix)crypto message
 
+(done,pix)test bug with lilo and windows (if not on mbr)
+
+(done,pix)removed icons come back later (kde desktop)

@@ -300,7 +300,23 @@ sub text2driver($) {
     die "$text is not a valid module description";
 }
 
-sub add_alias($$) { $conf{$_[0]}{alias} = $_[1]; }
+sub add_alias($$) { 
+    my ($alias, $name);
+    $conf{$_}{alias} && $conf{$_}{alias} eq $name and return foreach keys %conf;
+    $alias .= $scsi++ || '' if $alias eq 'scsi_hostadapter';
+    $conf{$alias}{alias} ||= $name;
+    1;
+}
+
+sub remove_alias($) {
+    my ($name) = @_;
+    foreach (keys %conf) {
+	$conf{$_}{alias} && $conf{$_}{alias} eq $name or next;
+	delete $conf{$_}{alias};
+	return 1;
+    }
+    0;
+}
 
 sub load {
     my ($name, $type, @options) = @_;
@@ -319,19 +335,20 @@ sub load {
     push @{$loaded{$type}}, $name;
 
     if ($type) {
-	$conf{usbmouse}{alias} = $name if $type =~ /serial_usb/i;
-	$conf{'scsi_hostadapter' . ($scsi++ || '')}{alias} = $name if $type eq 'scsi';
+	add_alias('usbmouse', $name) if $type =~ /serial_usb/i;
+	add_alias('scsi_hostadapter', $name) if $type eq 'scsi';
     }
     $conf{$name}{options} = join " ", @options if @options;
 }
 
-sub unload($) {
-    my ($m) = @_; 
+sub unload($;$) {
+    my ($m, $remove_alias) = @_; 
     if ($::testing) {
 	log::l("rmmod $m");
     } else {	
 	run_program::run("rmmod", $m) && delete $conf{$m}{loaded};
     }
+    remove_alias($m) if $remove_alias;
 }
 
 sub load_raw($@) {
@@ -377,12 +394,12 @@ sub read_conf($;$) {
     foreach (cat_($file)) {
 	do {
 	    $c{$2}{$1} = $3;
-	    $$scsi = max($$scsi, $1 || 0) if /^\s*alias\s+scsi_hostadapter (\d*)/x && $scsi;
+	    $$scsi = max($$scsi, $1 || 0) if /^\s*alias\s+scsi_hostadapter (\d*)/x && $scsi; #- space added to make perl2fcalls happy!
 	} if /^\s*(\S+)\s+(\S+)\s+(.*?)\s*$/;
     }
     #- cheating here: not handling aliases of aliases
     while (my ($k, $v) = each %c) {
-	$$scsi ||= $v->{scsi_hostadapter} if $scsi;
+#-	$$scsi ||= $v->{scsi_hostadapter} if $scsi;
 	if (my $a = $v->{alias}) {
 	    local $c{$a}{alias};
 	    add2hash($c{$a}, $v);
@@ -396,9 +413,9 @@ sub write_conf {
     my $written = read_conf($file);
 
     my %net = detect_devices::net2module();
-    while (my ($k, $v) = each %net) {
-	$conf{$k}{alias} ||= $v;
-    }
+    while (my ($k, $v) = each %net) { add_alias($k, $v) }
+
+    add_alias('scsi_hostadapter', 'ide-scsi') if detect_devices::getIDEBurners();
 
     local *F;
     open F, ">> $file" or die("cannot write module config file $file: $!\n");
