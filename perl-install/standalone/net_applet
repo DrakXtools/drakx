@@ -231,7 +231,7 @@ sub initDBus {
 sub handleAttack {
     my ($seq, $timestamp, $indev, $prefix, $sensor, $protocol, $addr, $port, $icmp_type) = @_;
 
-    my $ip_addr = join(".", unpack('C4', $addr));
+    my $ip_addr = inet_ntoa(pack('N', $addr));
     #- try to resolve address, timeout after 2 seconds
     my $hostname;
     eval {
