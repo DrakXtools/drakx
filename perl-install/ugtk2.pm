@@ -457,6 +457,7 @@ sub create_notebook {
 sub create_packtable {
     my ($options, @l) = @_;
     my $w = Gtk2::Table->new(0, 0, $options->{homogeneous} || 0);
+    add2hash_($options, { xpadding => 5, ypadding => 0 });
     each_index {
 	my ($i, $l) = ($::i, $_);
 	each_index {
@@ -465,7 +466,7 @@ sub create_packtable {
 		ref $_ or $_ = Gtk2::Label->new($_);
 		$j != $#$l && !$options->{mcc} ?
 		  $w->attach($_, $j, $j + 1, $i, $i + 1,
-			     'fill', 'fill', $options->{xpadding} || 5, $options->{ypadding} || 0) :
+			     'fill', 'fill', $options->{xpadding}, $options->{ypadding}) :
 		  $w->attach($_, $j, $j + 1, $i, $i + 1,
 			     ['expand', 'fill'], ref($_) eq 'Gtk2::ScrolledWindow' || $_->get_data('must_grow') ? ['expand', 'fill'] : [], 0, 0);
 		$_->show;
