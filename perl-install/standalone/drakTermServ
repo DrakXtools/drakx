@@ -22,16 +22,7 @@ use standalone;     #- warning, standalone must be loaded very first, for 'expla
 use strict;
 
 use interactive;
-BEGIN {
-    eval {
-	require ugtk2;
-	ugtk2->import(qw(:helpers :wrappers :create));
-    };
-    if ($@) {
-	print "This program cannot be run in console mode.\n";
-	c::_exit(0);  #- skip ugtk2::END
-    }
-}
+use ugtk2 qw(:helpers :wrappers :create);
 use common;
 use run_program;
 use bootloader;

@@ -6,16 +6,7 @@ use lib qw(/usr/lib/libDrakX);
 use standalone;
 use common;
 
-BEGIN {
-    eval {
-	require ugtk2;
-	ugtk2->import(qw(:create :helpers :wrappers));
-    };
-    if ($@) {
-	print "This program cannot be run in console mode.\n";
-	c::_exit(0);  #- skip ugtk2::END
-    }
-}
+use ugtk2 qw(:create :helpers :wrappers);
 use interactive;
 use harddrake::data;  #- needs to stay after use-ugtk2 as long as this module defines globals containing some N()
 use POSIX qw(:sys_wait_h);
