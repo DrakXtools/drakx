@@ -262,10 +262,9 @@ sub readCompssList($$$) {
     }
 
     my %done;
-    foreach (split ':', $ENV{LANGUAGE}) {
-	my $locales = "locales-" . substr($_, 0, 2);
-	my $p = $packages->{$locales} or next;
-	foreach ($locales, @{$p->{provides} || []}, @{$by_lang{$_} || []}) {
+    my $locales = "locales-" . substr($ENV{LANG}, 0, 2);
+    if (my $p = $packages->{$locales}) {
+	foreach ($locales, @{$p->{provides} || []}, @{$by_lang{$ENV{LANG}} || []}) {
 	    next if $done{$_}; $done{$_} = 1;
 	    my $p = $packages->{$_} or next;
 	    $p->{values} = [ map { $_ + 90 } @{$p->{values} || [ (0) x $nb_values ]} ];
@@ -327,7 +326,7 @@ sub setSelectedFromCompssList {
 	my $nb = 0; foreach (@packages) {
 	    $nb += $_->{size} if $_->{selected};
 	}
-	if ($nb > $max_size) {
+	if ($max_size && $nb > $max_size) {
 	    unselect($packages, $p);
 	    $min_level = $p->{values}[$ind];
 	    last;

@@ -377,6 +377,7 @@ sub installCrypto {
     my $u = $o->{crypto} or return; $u->{mirror} or return;
     my ($packages, %done);
     my $dir = "$o->{prefix}/tmp";
+    modules::write_conf("$o->{prefix}/etc/conf.modules", 'append');
     network::up_it($o->{prefix}, $o->{intf}) if $o->{intf};
 
     local *install_any::getFile = sub {
@@ -578,7 +579,12 @@ sub setupBootloader($) {
 #------------------------------------------------------------------------------
 sub setupXfreeBefore {
     my ($o) = @_;
-    $o->{X}{keyboard}{xkb_keymap} ||= keyboard::keyboard2xkb($o->{keyboard});
+    my $xkb = $o->{X}{keyboard}{xkb_keymap} || keyboard::keyboard2xkb($o->{keyboard});
+    unless (-e "$o->{prefix}/usr/X11R6/lib/X11/xkb/symbols/$xkb") {
+	commands::cp("-f", keyboard::xmodmap_file($o->{keyboard}), "$o->{prefix}/etc/X11/xinit/Xmodmap");	
+	$xkb = '';
+    }
+    $o->{X}{keyboard}{xkb_keymap} = $xkb;
     $o->{X}{mouse} = $o->{mouse};
     $o->{X}{wacom} = $o->{wacom};
 

@@ -109,8 +109,9 @@ sub getAvailableSpace {
     do { $_->{mntpoint} eq '/'    and return int($_->{size} * 512 / 1.07) } foreach @{$o->{fstab}};
 
     if ($::testing) {
-	log::l("taking 200MB for testing");
-	return 2000 << 20;
+	my $nb = 350;
+	log::l("taking ${nb}MB for testing");
+	return $nb << 20;
     }
     die "missing root partition";
 }

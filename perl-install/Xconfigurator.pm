@@ -2,7 +2,7 @@ package Xconfigurator;
 
 use diagnostics;
 use strict;
-use vars qw($in $install $isLaptop $resolution_wanted @window_managers @depths @monitorSize2resolution @hsyncranges %min_hsync4wres @vsyncranges %depths @resolutions %serversdriver @svgaservers @accelservers @allbutfbservers @allservers %vgamodes %videomemory @ramdac_name @ramdac_id @clockchip_name @clockchip_id %keymap_translate %standard_monitors $intro_text $finalcomment_text $s3_comment $cirrus_comment $probeonlywarning_text $monitorintro_text $hsyncintro_text $vsyncintro_text $XF86firstchunk_text $keyboardsection_start $keyboardsection_part2 $keyboardsection_end $pointersection_text1 $pointersection_text2 $monitorsection_text1 $monitorsection_text2 $monitorsection_text3 $monitorsection_text4 $modelines_text_Trident_TG_96xx $modelines_text $devicesection_text $screensection_text1 %lines @options %xkb_options);
+use vars qw($in $install $isLaptop $resolution_wanted @window_managers @depths @monitorSize2resolution @hsyncranges %min_hsync4wres @vsyncranges %depths @resolutions %serversdriver @svgaservers @accelservers @allbutfbservers @allservers %vgamodes %videomemory @ramdac_name @ramdac_id @clockchip_name @clockchip_id %keymap_translate %standard_monitors $intro_text $finalcomment_text $s3_comment $cirrus_comment $probeonlywarning_text $monitorintro_text $hsyncintro_text $vsyncintro_text $XF86firstchunk_text $keyboardsection_start $keyboardsection_part2 $keyboardsection_part3 $keyboardsection_end $pointersection_text1 $pointersection_text2 $monitorsection_text1 $monitorsection_text2 $monitorsection_text3 $monitorsection_text4 $modelines_text_Trident_TG_96xx $modelines_text $devicesection_text $screensection_text1 %lines @options %xkb_options $default_monitor);
 
 use pci_probing::main;
 use common qw(:common :file :functional :system);
@@ -218,7 +218,7 @@ sub monitorConfiguration(;$$) {
 
 	readMonitorsDB(-e "MonitorsDB" ? "MonitorsDB" : "/usr/X11R6/lib/X11/MonitorsDB");
 
-	add2hash($monitor, { type => $in->ask_from_list(_("Monitor"), _("Choose a monitor"), ['Unlisted', keys %monitors]) }) unless $monitor->{type};
+	add2hash($monitor, { type => $in->ask_from_list(_("Monitor"), _("Choose a monitor"), ['Unlisted', keys %monitors], ' ' . translate($default_monitor)) }) unless $monitor->{type};
 	if ($monitor->{type} eq 'Unlisted') {
 	    $in->ask_from_entries_ref('',
 _("The two critical parameters are the vertical refresh rate, which is the rate
@@ -341,6 +341,7 @@ sub testFinalConfig($;$$) {
         use my_gtk qw(:wrappers);
 
 	$ENV{DISPLAY} = ":9";
+
         gtkset_mousecursor(68);
         gtkset_background(200 * 256, 210 * 256, 210 * 256);
         my ($h, $w) = Gtk::Gdk::Window->new_foreign(Gtk::Gdk->ROOT_WINDOW)->get_size;
@@ -600,6 +601,8 @@ sub write_XF86Config {
 
     print F "    RightAlt        ", ($O->{altmeta} ? "ModeShift" : "Meta"), "\n";
     print F $keyboardsection_part2;
+    print F "    XkbDisable\n" unless $O->{xkb_keymap};
+    print F $keyboardsection_part3;
     print F qq(    XkbLayout       "$O->{xkb_keymap}"\n);
     print F join '', map { "    $_\n" } @{$xkb_options{$O->{xkb_keymap}} || []};
     print F $keyboardsection_end;

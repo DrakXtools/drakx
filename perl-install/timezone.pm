@@ -38,8 +38,9 @@ sub write($$$) {
 
 my %l2t = (
 'Brezhoneg (Brittany)' => 'Europe/Paris',
-'Chinese (China)' => '',
+'Chinese (China)' => 'Asia/Shanghai',
 'Danish (Denmark)' => 'Europe/Copenhagen',
+'Dutch (Netherlands)' => 'Europe/Amsterdam',
 'English (USA)' => 'America/New_York',
 'English (UK)' => 'Europe/London',
 'Estonian (Estonia)' => 'Europe/Tallinn',
@@ -67,6 +68,7 @@ my %l2t = (
 'Portuguese (Portugal)' => 'Europe/Lisbon',
 'Romanian (Rumania)' => 'Europe/Bucharest',
 'Russian (Russia)' => 'Europe/Moscow',
+'Serbian (Serbia)' => 'Europe/Belgrade',
 'Slovak (Slovakia)' => 'Europe/Bratislava',
 'Spanish (Spain)' => 'Europe/Madrid',
 'Swedish (Finland)' => 'Europe/Helsinki',

@@ -114,6 +114,7 @@ sub ask_from_list2($$$$;$) {
 }
 sub ask_many_from_list_ref($$$$;$) {
     my ($o, $title, $message, $l, $val) = @_;
+    return 1 if @$l == 0;
     $o->ask_many_from_list_refW($title, [ deref($message) ], $l, $val);
 }
 sub ask_many_from_list($$$$;$) {

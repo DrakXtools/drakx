@@ -202,7 +202,7 @@ sub choosePartitionsToFormat($$) {
     log::l("preparing to format $_->{mntpoint}") foreach grep { $_->{toFormat} } @l;
 
     my %label;
-    $label{$_} = (isSwap($_) ? type2name($_->{type}) : $_->{mntpoint}) . " ($_->{device})" foreach @l;
+    $label{$_} = (isSwap($_) ? type2name($_->{type}) : $_->{mntpoint}) . "   ($_->{device})" foreach @l;
 
     $o->ask_many_from_list_ref('', _("Choose the partitions you want to format"),
 			       [ map { $label{$_} } @l ],
@@ -257,16 +257,22 @@ sub choosePackages {
 	$o->chooseGroups($packages, $compssUsers, $compssUsersSorted) unless $::beginner;
 
 	my %save_selected; $save_selected{$_->{name}} = $_->{selected} foreach values %$packages;
-	pkgs::setSelectedFromCompssList($o->{compssListLevels}, $packages, 1, $available, $o->{installClass});
+	pkgs::setSelectedFromCompssList($o->{compssListLevels}, $packages, 1, 0, $o->{installClass});
 	my $max_size = pkgs::size_selected($packages);
 	$_->{selected} = $save_selected{$_->{name}} foreach values %$packages;	
+
+	if (!$::beginner && $max_size > $available) {
+	    $o->ask_okcancel('', 
+_("You need %dMB for a full install of the groups you selected.
+You can go on anyway, but be warned that you won't get all packages", $max_size / sqr(1024)), 1) or goto &choosePackages
+	}
 
 	my $size2install = $::beginner ? $available * 0.7 : $o->chooseSizeToInstall($packages, $min_size, $max_size) or goto &choosePackages;
 
 	($o->{packages_}{ind}) = 
 	  pkgs::setSelectedFromCompssList($o->{compssListLevels}, $packages, 1, $size2install, $o->{installClass});
 
-#	$_->{selected} and log::l("$_->{name}") foreach values %$packages;
+#	$_->{selected} and print "$_->{name}\n" foreach values %$packages;
     }
     $o->choosePackagesTree($packages, $compss) if $::expert;
 }
@@ -899,9 +905,12 @@ sub setupXfree {
       local $::noauto = $::expert && !$o->ask_yesorno('', _("Try to find PCI devices?"), 1);
       $::noauto = $::noauto; #- no warning
 
+      symlink "$o->{prefix}/etc/gtk", "/etc/gtk";
+
       Xconfigurator::main($o->{prefix}, $o->{X}, $o, $o->{allowFB}, bool($o->{pcmcia}), sub {
 	  install_any::pkg_install($o, "XFree86-$_[0]");
       });
+      unlink "/etc/gtk";
     }
     $o->setupXfreeAfter;
 }

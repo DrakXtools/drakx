@@ -159,7 +159,7 @@ sub resolv($) {
     my ($name) = @_;
     is_ip($name) and return $name;
     my $a = join(".", unpack "C4", (gethostbyname $name)[4]);
-    log::l("resolved $name in $a");
+    #-log::l("resolved $name in $a");
     $a;
 }
 

@@ -304,7 +304,7 @@ sub chooseSizeToInstall {
     my ($o, $packages, $min_size, $max_size) = @_;
     my ($min, $max) = map { pkgs::correctSize($_ / sqr(1024)) } $min_size, $max_size;
     my $w = my_gtk->new('');
-    my $adj = create_adjustment($max, $min, $max);
+    my $adj = create_adjustment($max, $min, $max * 0.9);
     my $spin = gtkset_usize(new Gtk::SpinButton($adj, 0, 0), 100, 0);
 
     gtkadd($w->{window},

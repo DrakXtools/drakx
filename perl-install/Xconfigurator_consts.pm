@@ -102,6 +102,7 @@ $resolution_wanted = "1024x768";
     __("16 MB or more") => 16384,
 );
 
+$default_monitor = "High Frequency SVGA, 1024x768 at 70 Hz";
 %standard_monitors = (
   __("Standard VGA, 640x480 at 60 Hz")                             => [ '640x480@60',      "31.5"            , "60" ],
   __("Standard VGA, 640x480 at 60 Hz")                             => [ '640x480@60',      "31.5"            , "60" ],
@@ -537,7 +538,9 @@ $keyboardsection_part2 = '
 # To disable the XKEYBOARD extension, uncomment XkbDisable.
 
 #    XkbDisable
+';
 
+$keyboardsection_part3 = '
 # To customise the XKB settings to suit your keyboard, modify the
 # lines below (which are the defaults).  For example, for a non-U.S.
 # keyboard, you will probably want to use:

@@ -108,13 +108,13 @@ my %keyboards = (
  "is" => [ __("Icelandic"),      "is-latin1",   "is" ],
  "it" => [ __("Italian"),        "it-latin1",   "it" ],
  "la" => [ __("Latin American"), "la-latin1",   "la" ],
-#- FIXME: [3] should be "nl", but current XFree86 does not have it yet
- "nl" => [ __("Dutch"),          "nl-latin1",   "uk" ],
+ "nl" => [ __("Dutch"),          "nl-latin1",   "nl" ],
  "lt" => [ __("Lithuanian AZERTY"), "lt-latin7","lt" ],
  "lt_b" => [ __("Lithuanian \"number row\" QWERTY"), "ltb-latin7", "lt_b" ],
  "lt_p" => [ __("Lithuanian \"phonetic\" QWERTY"), "ltp-latin7", "lt_p" ],
  "no" => [ __("Norwegian"),      "no-latin1",   "no" ],
- "pl" => [ __("Polish"),         "pl-latin2",   "pl" ],
+ "pl" => [ __("Polish (qwerty layout)"),        "pl", "pl" ],
+ "pl2" => [ __("Polish (qwertz layout)"),       "pl-latin2", "pl" ],
  "pt" => [ __("Portuguese"),     "pt-latin1",   "pt" ],
  "qc" => [ __("Canadian (Quebec)"), "qc-latin1","ca_enhanced" ],
  "ru" => [ __("Russian"),        "ru4",         "ru" ],
@@ -151,7 +151,7 @@ sub text2keyboard {
 
 sub lang2keyboard($) {
     local ($_) = @_;
-    $lang2keyboard{$_} || $keyboards{$_} && $_ || substr($_, 0, 2);
+    $lang2keyboard{$_} || $keyboards{$_} && $_ || "us"; #-substr($_, 0, 2);
 }
 
 sub load($) {
@@ -183,6 +183,16 @@ sub load($) {
     #- log::l("loaded $count keymap tables");
 }
 
+sub xmodmap_file {
+    my ($keyboard) = @_;
+    my $f = "/usr/share/xmodmap/xmodmap.$keyboard";
+    if (! -e $f) {
+	run_program::run("extract_archive", "/usr/share/xmodmap", '/tmp', "xmodmap.$keyboard");
+	$f = "/tmp/xmodmap.$keyboard";
+    }
+    $f;
+}
+
 sub setup($) {
     my ($keyboard) = @_;
     my $o = $keyboards{$keyboard} or return;
@@ -196,13 +206,8 @@ sub setup($) {
 	local $/ = undef;
 	eval { load(<F>) };
     }
-
-    my $f = "/usr/share/xmodmap/xmodmap.$keyboard";
-    if (! -e $f) {
-	run_program::run("extract_archive", "/usr/share/xmodmap", '/tmp', "xmodmap.$keyboard");
-	$f = "/tmp/xmodmap.$keyboard";
-    }
-    eval { run_program::run('xmodmap', $f) } unless $::testing;
+    my $f = xmodmap_file($keyboard);
+    eval { run_program::run('xmodmap', $f) } unless $::testing || !$f;
 }
 
 sub write($$;$) {

@@ -17,6 +17,7 @@ build: $(BOOT_IMG)
 
 autoboot:
 	install -d $(AUTOBOOT)
+	cp -f vmlinuz $(AUTOBOOT)
 	cp -f hd.rdz $(AUTOBOOT)/initrd.hd
 	cp -f cdrom.rdz $(AUTOBOOT)/initrd.cd
 	cp -f pcmcia.rdz $(AUTOBOOT)/initrd.pc
@@ -32,7 +33,9 @@ $(BOOT_IMG): %.img: %.rdz
 	./make_boot_img $@ $(@:%.img=%)
 
 tar: clean
+	rpm -qa > needed_rpms.lst
 	cd .. ; tar cfy gi.tar.bz2 gi
+	rm needed_rpms.lst
 
 modules: kernel/lib/modules
 	./update_kernel
@@ -52,7 +55,9 @@ upload: tar install
 	cd $(ROOTDEST)/Mandrake ; tar cfz mdkinst.tgz mdkinst
 
 	lftp -c "open -u devel mandrakesoft.com; cd ~/cooker/cooker/images ; mput $(ROOTDEST)/images/*.img"
-	lftp -c "open -u devel mandrakesoft.com; cd ~/tmp ; put $(ROOTDEST)/Mandrake/mdkinst.tgz ; put /tmp/mdkinst_done ; cd ~/cooker/cooker/Mandrake/base ; put $(ROOTDEST)/Mandrake/base/mdkinst_stage2.gz ; put ~/gi/perl-install/compss ; put ~/gi/perl-install/compssList ; put ~/gi/perl-install/compssUsers ; cd ~/cooker/cooker/misc ; put ~/gi/tools/make_mdkinst_stage2 "
+	lftp -c "open -u devel mandrakesoft.com; cd ~/tmp ; put $(ROOTDEST)/Mandrake/mdkinst.tgz ; put /tmp/mdkinst_done ; cd ~/cooker/cooker/Mandrake/base ; lcd $(ROOTDEST)/Mandrake/base ; put mdkinst_stage2.gz compss compssList compssUsers ; cd ~/cooker/cooker/misc ; lcd ~/gi/tools/ ; put make_mdkinst_stage2 build_archive genhdlist" #,gendepslist,rpm2header"
+	lftp -c "open -u devel mandrakesoft.com; cd ~/cooker/cooker/dosutils/autoboot/mdkinst ; put $(ROOTDEST)/dosutils/autoboot/mdkinst/vmlinuz ; mput $(ROOTDEST)/dosutils/autoboot/mdkinst/initrd.*"
+	lftp -c "open -u devel mandrakesoft.com; cd ~/cooker/cooker/lnx4win ; lcd $(ROOTDEST)/lnx4win ; put initrd.gz vmlinuz"
 #	lftp -c "open -u devel mandrakesoft.com; cd ~/cooker/contrib/others/src ; put ../gi.tar.bz2"
 	rm -f $(ROOTDEST)/Mandrake/mdkinst.tgz
 	rm -f /tmp/mdkinst_done
