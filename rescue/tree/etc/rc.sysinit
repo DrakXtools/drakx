@@ -6,8 +6,12 @@ export PATH=/bin:/sbin:/usr/bin:/usr/sbin
 
 echo -e "\t\t\tWelcome to \\033[1;36mMandrake\\033[0;39m Linux"
 
-action "Mounting proc filesystem" mount -n -t proc /proc /proc
 action "Remounting root filesystem in read-write mode" mount -n -o remount,rw /
+
+ln -s /tmp/stage2/etc/* . 2>/dev/null
+
+mkdir /proc
+action "Mounting proc filesystem" mount -n -t proc /proc /proc
 
 >/etc/mtab
 mount -f /

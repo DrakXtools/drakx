@@ -376,7 +376,7 @@ static void method_select_and_prepare(void)
 		return method_select_and_prepare();
 }
 
-enum return_type create_initial_fs(char* symlinks, char* devices)
+static enum return_type create_initial_fs_symlinks(char* symlinks)
 {
         FILE *f;
         char buf[5000];
@@ -397,6 +397,13 @@ enum return_type create_initial_fs(char* symlinks, char* devices)
                         return RETURN_ERROR;
         }
         fclose(f);
+        return RETURN_OK;
+}
+
+static enum return_type create_initial_fs_devices(char* devices)
+{
+        FILE *f;
+        char buf[5000];
 
         // need to create the few devices needed to start up stage2 in a decent manner, we can't symlink or they will keep CD busy
         if (scall(mkdir(SLASH_LOCATION "/dev", 0755), "mkdir"))
@@ -475,7 +482,8 @@ int mandrake_move_post(void)
                 if (scall(symlink(STAGE2_LOCATION_ROOTED "/usr", SLASH_LOCATION "/usr"), "symlink"))
                         return RETURN_ERROR;
 
-        if (create_initial_fs(STAGE2_LOCATION "/move/symlinks", STAGE2_LOCATION "/move/devices") != RETURN_OK)
+        if (create_initial_fs_symlinks(STAGE2_LOCATION "/move/symlinks") != RETURN_OK ||
+	    create_initial_fs_devices(STAGE2_LOCATION "/move/devices") != RETURN_OK)
                 return RETURN_ERROR;
 
         if (boot__real_is_symlink_to_raw) {
@@ -538,29 +546,32 @@ int do_pivot_root(void)
 
 void finish_preparing(void)
 {
-	if (!IS_RESCUE) {
 #ifdef MANDRAKE_MOVE
-                if (mandrake_move_post() != RETURN_OK)
-                        stg1_fatal_message("Fatal error when launching MandrakeMove.");
+	if (mandrake_move_post() != RETURN_OK)
+		stg1_fatal_message("Fatal error when launching MandrakeMove.");
 #else
-                mkdir(SLASH_LOCATION "/etc", 0755);
-                mkdir(SLASH_LOCATION "/var", 0755);
-                if (create_initial_fs(STAGE2_LOCATION "/usr/share/symlinks",
-				      STAGE2_LOCATION "/usr/share/devices") != RETURN_OK)
+	mkdir(SLASH_LOCATION "/etc", 0755);
+	mkdir(SLASH_LOCATION "/var", 0755);
+	if (IS_RESCUE) {
+                if (create_initial_fs_symlinks(STAGE2_LOCATION "/usr/share/symlinks") != RETURN_OK)
                         stg1_fatal_message("Fatal error finishing initialization.");
+
+	} else {
+                if (create_initial_fs_symlinks(STAGE2_LOCATION "/usr/share/symlinks") != RETURN_OK ||
+		    create_initial_fs_devices(STAGE2_LOCATION "/usr/share/devices") != RETURN_OK)
+                        stg1_fatal_message("Fatal error finishing initialization.");
+	}
 #endif
                 
-                copy_file("/etc/resolv.conf", SLASH_LOCATION "/etc/resolv.conf", NULL);
-                mkdir(SLASH_LOCATION "/modules", 0755);
-                copy_file("/modules/modules.dep", SLASH_LOCATION "/modules/modules.dep", NULL);
+	copy_file("/etc/resolv.conf", SLASH_LOCATION "/etc/resolv.conf", NULL);
+	mkdir(SLASH_LOCATION "/modules", 0755);
+	copy_file("/modules/modules.dep", SLASH_LOCATION "/modules/modules.dep", NULL);
                 
-                umount("/tmp/tmpfs");
-                do_pivot_root();
+	umount("/tmp/tmpfs");
+	do_pivot_root();
 
-                if (file_size("/sbin/init") == -1)
-                        stg1_fatal_message("Fatal error giving hand to second stage.");
-        }
-
+	if (file_size("/sbin/init") == -1)
+		stg1_fatal_message("Fatal error giving hand to second stage.");
 
 	if (shell_pid != 0) {
                 int fd;
