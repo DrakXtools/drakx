@@ -362,7 +362,6 @@ sub install2::configMove {
 
     require install_any;
     install_any::write_fstab($o);
-    $_->{mntpoint} && !$_->{isMounted} and run_program::run('mount', $_->{mntpoint}) foreach fsedit::get_really_all_fstab($o->{all_hds});
 
     modules::write_conf('');
     require mouse;
@@ -437,6 +436,14 @@ sub install2::startMove {
     my ($w, $h) = ($pixbuf->get_width, $pixbuf->get_height);
     $root->draw_pixbuf(Gtk2::Gdk::GC->new($root), $pixbuf, 0, 0, ($::rootwidth - $w) / 2, ($::rootheight - $h)/2, $w, $h, 'none', 0, 0);
     ugtk2::gtkflush();
+
+    #- get info from existing fstab. This won't do anything if we already wrote fstab in configMove
+    fs::get_info_from_fstab($o->{all_hds}, '');
+    foreach (fsedit::get_really_all_fstab($o->{all_hds})) {
+	$_->{mntpoint} && !$_->{isMounted} && $_->{options} !~ /\bnoauto\b/ or next;
+	mkdir_p($_->{mntpoint});
+	run_program::run('mount', $_->{mntpoint});
+    }
     
     install_TrueFS_in_home($o);
 
