@@ -119,7 +119,7 @@
 
 use Gtk;
 use lib qw(/usr/lib/libDrakX);
-
+use strict;
 use standalone;     #- warning, standalone must be loaded very first, for 'explanations'
 
 use interactive;
@@ -700,6 +700,8 @@ sub write_password_file {
 	output_p("$cfg_dir/rsync.user", "$passwd_user\n");
 	chmod(0600, "$cfg_dir/rsync.user");
 }
+
+my $in;
 
 sub show_warning {
 	my ($mode, $warning) = @_;
@@ -4641,7 +4643,7 @@ sub interactive_mode {
 	} else {
   		my_gtk->import(qw(:helpers :wrappers));
 	}
-	my $in = 'interactive'->vnew('', 'default');
+	$in = 'interactive'->vnew('', 'default');
 
     my $box;
     $my_win = my_gtk->new('drakbackup');
@@ -4805,20 +4807,7 @@ Otherwise, you are able to select only one of these.
 			N(" Copyright (C) 2001-2002 MandrakeSoft by DUPONT Sebastien <dupont_s\@epita.fr>") .
 "\n" .
 N(" updates 2002 MandrakeSoft by Stew Benedict <sbenedict\@mandrakesoft.com>") .
-"\n\n" .
-N(" This program is free software; you can redistribute it and/or modify
- it under the terms of the GNU General Public License as published by
- the Free Software Foundation; either version 2, or (at your option)
- any later version.
-
- This program is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU General Public License for more details.
-
- You should have received a copy of the GNU General Public License
- along with this program; if not, write to the Free Software
- Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.") .
+"\n\n" . $::license .
 "\n\n                                            _____________________\n" .
 N("Description:
 
@@ -4846,7 +4835,6 @@ N("Description:
 
   Configuration file:
 	/etc/drakconf/drakbackup/drakbakup.conf
-
 
 Restore Step:
   
@@ -4879,64 +4867,9 @@ backup data files by hand.
 ")
 );
 
-    my $default_help = N(" Copyright (C) 2001-2002 MandrakeSoft by DUPONT Sebastien <dupont_s\@epita.fr>") .
-"\n" . 
-N(" updates 2002 MandrakeSoft by Stew Benedict <sbenedict\@mandrakesoft.com>") .
-"\n\n" .
-N(" This program is free software; you can redistribute it and/or modify
- it under the terms of the GNU General Public License as published by
- the Free Software Foundation; either version 2, or (at your option)
- any later version.
-
- This program is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU General Public License for more details.
-
- You should have received a copy of the GNU General Public License
- along with this program; if not, write to the Free Software
- Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.") .
-"\n\n                                            _____________________\n" .
-N("Description:
-
-  Drakbackup is used to backup your system.
-  During the configuration you can select 
-	- System files, 
-	- Users files, 
-	- Other files.
-	or All your system ...  and Other (like Windows Partitions)
-
-  Drakbackup allows you to backup your system on:
-	- Harddrive.
-	- NFS.
-	- CDROM (CDRW), DVDROM (with autoboot, rescue and autoinstall.).
-	- FTP.
-	- Rsync.
-	- Webdav.
-	- Tape.
-
-  Drakbackup allows you to restore your system to
-  a user selected directory.
-
-  Per default all backup will be stored on your
-  /var/lib/drakbackup directory
-
-  Configuration file:
-	/etc/drakconf/drakbackup/drakbakup.conf
-
-Restore Step:
-  
-  During the restore step, Drakbackup will remove
-  your original directory and verify that all
-  backup files are not corrupted. It is recommended
-  you do a last backup before restoring.
- 
-
-");
-
 ################################################  help function ##############################################
 
-	gtktext_insert($text, $custom_helps{$custom_help} || $default_help);
+	gtktext_insert($text, $custom_helps{$custom_help} || $custom_helps{main});
 	gtkpack($advanced_box,
 		$advanced_box_help = gtkpack_(new Gtk::VBox(0,10),
 			1, gtkpack_(new Gtk::HBox(0,0),
