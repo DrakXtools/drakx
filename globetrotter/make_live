@@ -116,10 +116,10 @@ if ($rescue) {
     print "Looking for the package partition\n";
     my @parts = partition_table::get_normal_parts($hd);
     my $pkg_dev = find { member(fs::type2fs($_), qw(ext2 ext3)) && chomp_(`e2label /dev/$_->{device} 2>/dev/root`) eq "MDK-PKGS" } @parts;
-    die "I cannot find the package partition which is needed in order to restore the system!" if is_empty_hash_ref($pkg_dev) || !$pkg_dev->{device} ;
+    die "I cannot find the package partition which is needed in order to restore the system!" if is_empty_hash_ref($pkg_dev) || !$pkg_dev->{device};
     my $root = find { member(fs::type2fs($_), qw(ext2 ext3)) && chomp_(`e2label /dev/$_->{device} 2>/dev/root`) eq "MDK-ROOT" } @parts;
     $root = find { $_->{device} eq "sda1" } @parts if is_empty_hash_ref($root);
-    die "I cannot find any hard disk to restore!" if is_empty_hash_ref($root) || !$root->{device} ;
+    die "I cannot find any hard disk to restore!" if is_empty_hash_ref($root) || !$root->{device};
     print "Please wait, disk reinstallation is in progress, this can take quite some time\n";
     print "Formating $root->{device}\n";
     system("mkfs.ext2 /dev/$root->{device} > /dev/null\n");
@@ -164,7 +164,7 @@ sub installPackages() {
     *c::kernel_version = sub {
 	#my @l = glob_('/export/Mandrake/RPMS/kernel-enterprise-2.6*');
 	my @l = glob_('/export/Mandrake/RPMS/kernel-2.6*');
-	@l >= 1 or die  "TOTO\n$str\n"."can't find kernel";
+	@l >= 1 or die  "can't find kernel";
 	@l <= 1 or die "too many kernels";
 	first(`rpm -qp --qf '%{name}' $l[0]` =~ /kernel-(.*)/);
     };
