@@ -4263,11 +4263,11 @@ sub restore_box() {
 sub restore_find_media_box() {
     my $mount_media = 1;
     $good_restore_path = 0;
-    my $message = "Unable to find backups to restore...\n";
-    $message .= "Verify that $path_to_find_restore is the correct path" if $where_hd && $where_cd;
-    $message .= " and the CD is in the drive" if $where_cd;
+    my $message = N("Unable to find backups to restore...\n");
+    $message .= N("Verify that %s is the correct path", $path_to_find_restore) if $where_hd && $where_cd;
+    $message .= N(" and the CD is in the drive") if $where_cd;
     if ($where_tape || $net_proto) {
-		$message .= "Backups on unmountable media - Use Catalog to restore";
+		$message .= N("Backups on unmountable media - Use Catalog to restore");
 		$mount_media = 0;
     }
     $message .= ".";
