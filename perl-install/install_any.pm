@@ -3,7 +3,7 @@ package install_any; # $Id$
 use diagnostics;
 use strict;
 
-use vars qw(@ISA %EXPORT_TAGS @EXPORT_OK @needToCopy @needToCopyIfRequiresSatisfied);
+use vars qw(@ISA %EXPORT_TAGS @EXPORT_OK @needToCopy @needToCopyIfRequiresSatisfied $boot_medium);
 
 @ISA = qw(Exporter);
 %EXPORT_TAGS = (
@@ -42,12 +42,15 @@ rhs-printfilters lpr cups cups-drivers samba ncpfs ghostscript-utils
 xpp kups kisdn
 );
 
+#- boot medium (the first medium to take into account).
+$boot_medium = 1;
+
 #-######################################################################################
 #- Media change variables&functions
 #-######################################################################################
 my $postinstall_rpms = '';
-my $current_medium = 1;
-my $asked_medium = 1;
+my $current_medium = $boot_medium;
+my $asked_medium = $boot_medium;
 my $cdrom = undef;
 sub useMedium($) {
     #- before ejecting the first CD, there are some files to copy!
