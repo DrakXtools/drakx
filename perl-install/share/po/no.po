@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: panoramix VERSION\n"
-"POT-Creation-Date: 1999-08-25 11:39+0200\n"
+"POT-Creation-Date: 1999-08-26 12:10+0200\n"
 "PO-Revision-Date: 1999-08-25 11:07+0200\n"
 "Last-Translator: Terje Bjerkelia <terje@bjerkelia.com>\n"
 "Language-Team: norwegian\n"
@@ -72,8 +72,8 @@ msgstr "Velg oppløsning og fargedybde"
 
 #: ../Xconfigurator.pm_.c:611
 #, c-format
-msgid "Keyboard language: %s\n"
-msgstr "Tastatur-språk: %s\n"
+msgid "Keyboard layout: %s\n"
+msgstr "Tastatur-layout: %s\n"
 
 #: ../Xconfigurator.pm_.c:612
 #, c-format
@@ -415,11 +415,11 @@ msgstr "Slett"
 msgid "Format"
 msgstr "Formater"
 
-#: ../diskdrake.pm_.c:17 ../diskdrake.pm_.c:384
+#: ../diskdrake.pm_.c:17 ../diskdrake.pm_.c:386
 msgid "Move"
 msgstr "Flytt"
 
-#: ../diskdrake.pm_.c:17 ../diskdrake.pm_.c:431
+#: ../diskdrake.pm_.c:17 ../diskdrake.pm_.c:433
 msgid "Resize"
 msgstr "Endre størrelse"
 
@@ -499,72 +499,73 @@ msgstr "Angre"
 msgid "Write partition table"
 msgstr "Skriv partisjonstabell"
 
-#: ../diskdrake.pm_.c:116
+#: ../diskdrake.pm_.c:118
 #, c-format
 msgid "After %s partition %s,"
 msgstr "Etter %s partisjon %s,"
 
-#: ../diskdrake.pm_.c:116 ../diskdrake.pm_.c:375 ../diskdrake.pm_.c:402
+#: ../diskdrake.pm_.c:118 ../diskdrake.pm_.c:377 ../diskdrake.pm_.c:404
 msgid "Read carefully!"
 msgstr "Les nøye!"
 
-#: ../diskdrake.pm_.c:116
+#: ../diskdrake.pm_.c:118
 msgid "all data on this partition will be lost"
 msgstr "alle data på denne partisjonen vil gå tapt"
 
-#: ../diskdrake.pm_.c:134 ../install_steps_interactive.pm_.c:22
+#: ../diskdrake.pm_.c:136 ../install_steps.pm_.c:73
+#: ../install_steps_interactive.pm_.c:23
 msgid "Error"
 msgstr "Feil"
 
-#: ../diskdrake.pm_.c:155 ../diskdrake.pm_.c:499
+#: ../diskdrake.pm_.c:157 ../diskdrake.pm_.c:501
 msgid "Mount point: "
 msgstr "Monteringspunkt: "
 
-#: ../diskdrake.pm_.c:156 ../diskdrake.pm_.c:178
+#: ../diskdrake.pm_.c:158 ../diskdrake.pm_.c:180
 msgid "Device: "
 msgstr "Enhet: "
 
-#: ../diskdrake.pm_.c:157
+#: ../diskdrake.pm_.c:159
 #, c-format
 msgid "DOS letter: %s (just a guess)\n"
 msgstr "DOS bokstav: %s (bare en gjetning)\n"
 
-#: ../diskdrake.pm_.c:158 ../diskdrake.pm_.c:181
+#: ../diskdrake.pm_.c:160 ../diskdrake.pm_.c:183
 msgid "Type: "
 msgstr "Type: "
 
-#: ../diskdrake.pm_.c:159
+#: ../diskdrake.pm_.c:161
 #, c-format
 msgid "Start: sector /*%s\n"
 msgstr "Start: sektor /*%s\n"
 
-#: ../diskdrake.pm_.c:160
+#: ../diskdrake.pm_.c:162
 msgid "Size: %s MB (%s%%)"
 msgstr "Størrelse: %s MB (%s%%)"
 
-#: ../diskdrake.pm_.c:161
+#: ../diskdrake.pm_.c:163
 #, c-format
 msgid ", %s sectors"
 msgstr ", %s sektorer"
 
-#: ../diskdrake.pm_.c:163
+#: ../diskdrake.pm_.c:165
 #, c-format
 msgid "Cylinder %d to cylinder %d\n"
 msgstr "Sylinder %d til sylinder %d\n"
 
-#: ../diskdrake.pm_.c:164
+#: ../diskdrake.pm_.c:166
 msgid "Formatted\n"
 msgstr "Formatert\n"
 
-#: ../diskdrake.pm_.c:165
+#: ../diskdrake.pm_.c:167
 msgid "Not formatted\n"
 msgstr "Ikke formatert\n"
 
-#: ../diskdrake.pm_.c:166
+#: ../diskdrake.pm_.c:168
 msgid "Mounted\n"
 msgstr "Montert\n"
 
-#: ../diskdrake.pm_.c:167
+#: ../diskdrake.pm_.c:169
 msgid ""
 "Partition booted by default\n"
 "    (for MS-DOS boot, not for lilo)\n"
@@ -572,30 +573,30 @@ msgstr ""
 "Partisjon startet opp som standard\n"
 "    (for MS-DOS oppstart, ikke for lilo)\n"
 
-#: ../diskdrake.pm_.c:179
+#: ../diskdrake.pm_.c:181
 #, c-format
 msgid "Size: %d MB\n"
 msgstr "Størrelse: %d MB\n"
 
-#: ../diskdrake.pm_.c:180
+#: ../diskdrake.pm_.c:182
 #, c-format
 msgid "Geometry: %s cylinders, %s heads, %s sectors\n"
 msgstr "Geometri: %s sylindere, %s hoder, %s sektorer\n"
 
-#: ../diskdrake.pm_.c:182
+#: ../diskdrake.pm_.c:184
 #, c-format
 msgid "on bus %d id %d\n"
 msgstr "på buss %d id %d\n"
 
-#: ../diskdrake.pm_.c:194
+#: ../diskdrake.pm_.c:196
 msgid "Mount"
 msgstr "Montere"
 
-#: ../diskdrake.pm_.c:196
+#: ../diskdrake.pm_.c:198
 msgid "Active"
 msgstr "Aktiv"
 
-#: ../diskdrake.pm_.c:288
+#: ../diskdrake.pm_.c:290
 msgid ""
 "You're adding a root partition far on the drive (on a cylinder > 1024),\n"
 "and you have no /boot partition. So if you plan to use lilo (the boot "
@@ -607,113 +608,113 @@ msgstr ""
 "bruke lilo (oppstartshåndtereren), så være forsiktig når du legger til\n"
 "en /boot partisjon."
 
-#: ../diskdrake.pm_.c:302
+#: ../diskdrake.pm_.c:304
 msgid "Leave without saving"
 msgstr "Slutt uten å lagre"
 
-#: ../diskdrake.pm_.c:302
+#: ../diskdrake.pm_.c:304
 msgid "Quit program without writing partition table?"
 msgstr "Avslutte programmet uten å skrive partisjonstabell?"
 
-#: ../diskdrake.pm_.c:317
+#: ../diskdrake.pm_.c:319
 msgid "changing type of"
 msgstr "endrer type av"
 
-#: ../diskdrake.pm_.c:319
+#: ../diskdrake.pm_.c:321
 msgid "Change partition type"
 msgstr "Endre partisjonstype"
 
-#: ../diskdrake.pm_.c:320
+#: ../diskdrake.pm_.c:322
 msgid "Which partition type do you want?"
 msgstr "Hvilken partisjonstype ønsker du?"
 
-#: ../diskdrake.pm_.c:337
+#: ../diskdrake.pm_.c:339
 #, c-format
 msgid "Where do you want to mount device %s?"
 msgstr "Hvor vil du montere %s enheten?"
 
-#: ../diskdrake.pm_.c:369
+#: ../diskdrake.pm_.c:371
 msgid "formatting"
 msgstr "formatering"
 
-#: ../diskdrake.pm_.c:375
+#: ../diskdrake.pm_.c:377
 msgid "After formatting all partitions,"
 msgstr "Etter formatering av alle partisjonene"
 
-#: ../diskdrake.pm_.c:375
+#: ../diskdrake.pm_.c:377
 msgid "all data on these partitions will be lost"
 msgstr "alle data på disse partisjonene vil gå tapt"
 
-#: ../diskdrake.pm_.c:385
+#: ../diskdrake.pm_.c:387
 msgid "Which disk do you want to move to?"
 msgstr "Hvilken disk vil du flytte til?"
 
-#: ../diskdrake.pm_.c:389
+#: ../diskdrake.pm_.c:391
 msgid "Sector"
 msgstr "Sektor"
 
-#: ../diskdrake.pm_.c:390
+#: ../diskdrake.pm_.c:392
 msgid "Which sector do you want to move to?"
 msgstr "Hvilken sektor vil du flytte til?"
 
-#: ../diskdrake.pm_.c:393
+#: ../diskdrake.pm_.c:395
 msgid "Moving"
 msgstr "Flytter"
 
-#: ../diskdrake.pm_.c:393
+#: ../diskdrake.pm_.c:395
 msgid "Moving partition..."
 msgstr "Flytter partisjon..."
 
-#: ../diskdrake.pm_.c:402
+#: ../diskdrake.pm_.c:404
 #, c-format
 msgid "Partition table of drive %s is going to be written to disk!"
 msgstr "Partisjonstabellen på disk %s blir nå skrevet til disk!"
 
-#: ../diskdrake.pm_.c:422
+#: ../diskdrake.pm_.c:424
 msgid "Computing fat filesystem bounds"
 msgstr "Beregner fat filsystemgrense"
 
-#: ../diskdrake.pm_.c:422 ../diskdrake.pm_.c:458 ../interactive_gtk.pm_.c:79
+#: ../diskdrake.pm_.c:424 ../diskdrake.pm_.c:460 ../interactive_gtk.pm_.c:79
 msgid "Resizing"
 msgstr "Endrer størrelse"
 
-#: ../diskdrake.pm_.c:428
+#: ../diskdrake.pm_.c:430
 msgid "resizing"
 msgstr "Endrer størrelse"
 
-#: ../diskdrake.pm_.c:438
+#: ../diskdrake.pm_.c:440
 msgid "Choose the new size"
 msgstr "Velg ny størrelse"
 
-#: ../diskdrake.pm_.c:438
+#: ../diskdrake.pm_.c:440
 msgid "MB"
 msgstr "MB"
 
-#: ../diskdrake.pm_.c:476
+#: ../diskdrake.pm_.c:478
 msgid "Create a new partition"
 msgstr "Opprette en ny partisjon"
 
-#: ../diskdrake.pm_.c:492
+#: ../diskdrake.pm_.c:494
 msgid "Start sector: "
 msgstr "Start sektor: "
 
-#: ../diskdrake.pm_.c:495
+#: ../diskdrake.pm_.c:497
 msgid "Size in MB: "
 msgstr "Størrelse i MB: "
 
-#: ../diskdrake.pm_.c:498
+#: ../diskdrake.pm_.c:500
 msgid "Filesystem type: "
 msgstr "Filsystemtype: "
 
-#: ../diskdrake.pm_.c:500
+#: ../diskdrake.pm_.c:502
 msgid "Preference: "
 msgstr "Valg: "
 
-#: ../diskdrake.pm_.c:542 ../diskdrake.pm_.c:558
+#: ../diskdrake.pm_.c:544 ../diskdrake.pm_.c:560
 msgid "Select file"
 msgstr "Velg fil"
 
-#: ../diskdrake.pm_.c:559
+#: ../diskdrake.pm_.c:561
 msgid "Warning"
 msgstr "Advarsel"
 
@@ -763,8 +764,7 @@ msgstr "Feil ved åpning av %s for skriving: %s"
 msgid ""
 "Choose the language which you approved. This one govern the language's "
 "system."
-msgstr ""
-"Velg språket som du godkjente. Dette bestemmer språket på systemet." 
+msgstr "Velg språket som du godkjente. Dette bestemmer språket på systemet."
 
 #: ../install2.pm_.c:27
 msgid ""
@@ -813,10 +813,11 @@ msgstr ""
 "kontrollen over installasjonen så er dette valget for deg."
 
 #: ../install2.pm_.c:42
+#, fuzzy
 msgid ""
 "The system did not detect a SCSI card. If you have one (or several) click on "
 "\"Yes\" and choose the module\n"
-"to be tested. In the contrary case, click on \"Not\".\n"
+"to be tested. In the contrary case, cliquez on \"Not\".\n"
 "\n"
 "If you don't know if you have interfaces SCSI, consult the documentation "
 "delivered with your computer\n"
@@ -828,8 +829,8 @@ msgstr ""
 "\"Ja\" og velg modulen\n"
 "som skal testes. I motsatt fall klikk på \"Nei\".\n"
 "\n"
-"Hvis du ikke vet om du har SCSI grensenitt, se i dokumentasjonen "
-"levert med datamaskinen din\n"
+"Hvis du ikke vet om du har SCSI grensenitt, se i dokumentasjonen levert med "
+"datamaskinen din\n"
 "eller, hvis du bruker Microsoft Windows 95/98, se i filen \"Peripheral "
 "manager\" under \"System\"\n"
 " i \"Control panel\"."
@@ -847,8 +848,8 @@ msgid ""
 msgstr ""
 "På dette punktet må du partisjonere hard-disken din. Det består av å dele "
 "opp disken din i flere soner\n"
-"(som ikke er like). Denne operasjonen, uansett hvor spektakulært og"
-"skremmende det måtte være,\n"
+"(som ikke er like). Denne operasjonen, uansett hvor spektakulært "
+"ogskremmende det måtte være,\n"
 "så er det ikke vanskelig hvis du er forsiktig med det du gjør. \n"
 "Ta deg god tid, og vær sikker før du klikker på \"Ferdig\" og LES "
 "DiskDrake-håndboken\n"
@@ -864,12 +865,11 @@ msgid ""
 "before used if they contain data to\n"
 "which you want to keep (typical cases: / home and / usr/local)."
 msgstr ""
-"Partisjonene som er opprettet må formateres så systemet kan bruke "
-"dem.\n"
+"Partisjonene som er opprettet må formateres så systemet kan bruke dem.\n"
 "Du kan også formatere partisjoner er opprettet og brukt før hvis du ønsker å "
 "fjerne alle data.\n"
-"Merk at det ikke er nødvendig å formatere partisjoner som er opprettet "
-"før hvis de inneholder data som\n"
+"Merk at det ikke er nødvendig å formatere partisjoner som er opprettet før "
+"hvis de inneholder data som\n"
 "du ønsker å beholde (typiske tilfeller: / home and / usr/local)."
 
 #: ../install2.pm_.c:60
@@ -888,18 +888,17 @@ msgid ""
 "available in zone \"Infos\"\n"
 "located above buttons of confirmation/selection/deselection."
 msgstr ""
-"Du har nå muligheten til å velge programvaren som du ønsker å "
-"installere.\n"
+"Du har nå muligheten til å velge programvaren som du ønsker å installere.\n"
 "\n"
 "Vennligst merk at pakkene håndterer avhengigheter: dette betyr at hvis du "
 "ønsker å installere\n"
 "programvare som trenger tilstedeværelsen av annen programvare, så vil også "
 "denne bli automatisk valgt\n"
-"og det vil være umulig for deg å installere den første uten å "
-"installere den andre.\n"
+"og det vil være umulig for deg å installere den første uten å installere den "
+"andre.\n"
 "\n"
-"Informasjon om hver kategori av pakkene og hver av dem er "
-"tilgjengelig i sone \"Infos\"\n"
+"Informasjon om hver kategori av pakkene og hver av dem er tilgjengelig i "
+"sone \"Infos\"\n"
 "funnet over knappene til bekreftelse/valg/fjern valg."
 
 #: ../install2.pm_.c:69
@@ -936,13 +935,13 @@ msgstr ""
 "fungere.\n"
 "Også fordi bare administratoren (også kalt \"root\") er i stand til å "
 "konfigurere datamaskinen din.\n"
-"Passordet burde ikke være for enkelt så andre ikke kan logge seg på "
-"denne kontoen.\n"
-"Det burde heller ikke være for innviklet så det er vanskelig å huske, "
-"eller i verste fall bli glemt.\n"
+"Passordet burde ikke være for enkelt så andre ikke kan logge seg på denne "
+"kontoen.\n"
+"Det burde heller ikke være for innviklet så det er vanskelig å huske, eller "
+"i verste fall bli glemt.\n"
 "\n"
-"Ønsker du å logge deg på Linux-systemet ditt som administrator, "
-"så er \"logg inn\" \n"
+"Ønsker du å logge deg på Linux-systemet ditt som administrator, så er \"logg "
+"inn\" \n"
 "\"root\" og \"passord\", som du nå vil opprette."
 
 #: ../install2.pm_.c:82
@@ -969,8 +968,8 @@ msgstr ""
 "eneste personen som vil\n"
 "bruke denne maskinen. Selv om det å kjøre systemet som \"root\" er "
 "attraktivt, så er det en \n"
-"veldig dårlig ide. Da denne har alle rettigheter er det sikkert at før "
-"eller senere vil du ødelegge alt.\n"
+"veldig dårlig ide. Da denne har alle rettigheter er det sikkert at før eller "
+"senere vil du ødelegge alt.\n"
 "Det her høyt anbefalt at du logger deg på som vanlig bruker og kun bruker "
 "kontoen \"root\" når det er nødvendig."
 
@@ -994,17 +993,48 @@ msgid ""
 "choices if the latter are not\n"
 "appropriate to you."
 msgstr ""
-"Det er nå tid for å konfigurere grafikk-tjeneren. Først, velg monitor. "
-"Du har så muligheten\n"
-"til å teste konfigurasjonen din og endre dine valg hvis disse valgene "
-"ikke passet for deg."
+"Det er nå tid for å konfigurere grafikk-tjeneren. Først, velg monitor. Du "
+"har så muligheten\n"
+"til å teste konfigurasjonen din og endre dine valg hvis disse valgene ikke "
+"passet for deg."
+
+#: ../install2.pm_.c:103
+msgid "Choose your language"
+msgstr ""
+
+#: ../install2.pm_.c:104
+msgid "Choose install or upgrade"
+msgstr "Velg installering eller oppgradering"
+
+#: ../install2.pm_.c:105
+msgid "Select installation class"
+msgstr "Velg installasjonsklasse"
+
+#: ../install2.pm_.c:106
+msgid "Setup SCSI"
+msgstr "Oppsett SCSI"
+
+#: ../install2.pm_.c:107
+msgid "Setup filesystems"
+msgstr "Oppsett filsystemer"
+
+#: ../install2.pm_.c:108
+msgid "Format partitions"
+msgstr "Formater partisjoner"
+
+#: ../install2.pm_.c:109
+msgid "Choose packages to install"
+msgstr "Velg pakker for installering"
+
+#: ../install2.pm_.c:110
+msgid "Install system"
+msgstr "Installer systemet"
 
 #: ../install2.pm_.c:112
 msgid "Configure networking"
 msgstr "Konfigurer nettverk"
 
-#: ../install2.pm_.c:116 ../install_steps_graphical.pm_.c:373
-#: ../install_steps_graphical.pm_.c:399
+#: ../install2.pm_.c:116 ../install_steps_graphical.pm_.c:402
 msgid "Set root password"
 msgstr "Sett root passord"
 
@@ -1048,7 +1078,7 @@ msgstr "ekspert"
 msgid "server"
 msgstr "tjener"
 
-#: ../install2.pm_.c:218
+#: ../install2.pm_.c:219
 msgid ""
 "An error has occurred - no valid devices were found on which to create new "
 "filesystems. Please check your hardware for the cause of this problem"
@@ -1056,7 +1086,7 @@ msgstr ""
 "En feil har oppstått - ingen gyldige enheter ble funnet for å opprette nye "
 "filsystemer. Vennligst sjekk maskinvaren din for årsaken til dette problemet"
 
-#: ../install2.pm_.c:239
+#: ../install2.pm_.c:240
 msgid "partitionning failed: no root filesystem"
 msgstr "partisjonering feilet: intet root filsystem"
 
@@ -1113,160 +1143,157 @@ msgstr "forbereder installasjon"
 msgid "installing package %s"
 msgstr "installerer pakke %s"
 
-#: ../install_steps_graphical.pm_.c:380
+#: ../install_steps_graphical.pm_.c:373
+#, fuzzy, c-format
+msgid "Configuring network device %s"
+msgstr "Konfigurer nettverk"
+
+#: ../install_steps_graphical.pm_.c:381
 msgid "IP address:"
 msgstr "IP adresse:"
 
-#: ../install_steps_graphical.pm_.c:381
+#: ../install_steps_graphical.pm_.c:382
 msgid "Netmask:"
 msgstr "Nettmaske:"
 
-#: ../install_steps_graphical.pm_.c:382
-msgid "Default gateway (IP):"
-msgstr "Standard gateway (IP):"
-
-#: ../install_steps_graphical.pm_.c:383
-msgid "Primary nameserver:"
-msgstr "Primær navnetjener:"
-
-#: ../install_steps_graphical.pm_.c:403 ../install_steps_graphical.pm_.c:429
+#: ../install_steps_graphical.pm_.c:406 ../install_steps_graphical.pm_.c:432
 msgid "Password"
 msgstr "Passord"
 
-#: ../install_steps_graphical.pm_.c:404 ../install_steps_graphical.pm_.c:430
+#: ../install_steps_graphical.pm_.c:407 ../install_steps_graphical.pm_.c:433
 msgid "Password (again)"
 msgstr "Passord (igjen)"
 
-#: ../install_steps_graphical.pm_.c:412 ../install_steps_graphical.pm_.c:445
+#: ../install_steps_graphical.pm_.c:415 ../install_steps_graphical.pm_.c:448
 msgid "Please try again"
 msgstr "Vennligst prøv igjen"
 
-#: ../install_steps_graphical.pm_.c:412 ../install_steps_graphical.pm_.c:445
+#: ../install_steps_graphical.pm_.c:415 ../install_steps_graphical.pm_.c:448
 msgid "You must enter the same password"
 msgstr "Du må skrive inn det samme passordet"
 
-#: ../install_steps_graphical.pm_.c:413
+#: ../install_steps_graphical.pm_.c:416
 msgid "This password is too simple"
 msgstr "Dette passordet er for enkelt"
 
-#: ../install_steps_graphical.pm_.c:424
+#: ../install_steps_graphical.pm_.c:427
 msgid "Add user"
 msgstr "Legg til bruker"
 
-#: ../install_steps_graphical.pm_.c:428
+#: ../install_steps_graphical.pm_.c:431
 msgid "User name"
 msgstr "Brukernavn"
 
-#: ../install_steps_graphical.pm_.c:431
+#: ../install_steps_graphical.pm_.c:434
 msgid "Real name"
 msgstr "Virkelig navn"
 
-#: ../install_steps_graphical.pm_.c:432
+#: ../install_steps_graphical.pm_.c:435
 msgid "Shell"
 msgstr "Skall"
 
-#: ../install_steps_graphical.pm_.c:447
+#: ../install_steps_graphical.pm_.c:450
 msgid "Please give a user name"
 msgstr "Vennligst oppgi et brukernavn"
 
-#: ../install_steps_graphical.pm_.c:448
+#: ../install_steps_graphical.pm_.c:451
 msgid "The user name must contain only letters, numbers, `-' and `_'"
 msgstr "Brukernavnet kan kun inneholde bokstaver, tall, `-' og `_'"
 
-#: ../install_steps_interactive.pm_.c:22
+#: ../install_steps_interactive.pm_.c:23
 msgid "An error occured"
 msgstr "En feil oppsto"
 
-#: ../install_steps_interactive.pm_.c:29
+#: ../install_steps_interactive.pm_.c:30
 msgid "Which language do you want?"
 msgstr "Hvilket språk ønsker du?"
 
-#: ../install_steps_interactive.pm_.c:35
+#: ../install_steps_interactive.pm_.c:36
 msgid "Install/Upgrade"
 msgstr "Installer/Oppgrader"
 
-#: ../install_steps_interactive.pm_.c:36
+#: ../install_steps_interactive.pm_.c:37
 msgid "Is it an install or an updgrade?"
 msgstr "Er det en installasjon eller en oppgradering?"
 
-#: ../install_steps_interactive.pm_.c:37
+#: ../install_steps_interactive.pm_.c:38
 msgid "Install"
 msgstr "Installer"
 
-#: ../install_steps_interactive.pm_.c:37
+#: ../install_steps_interactive.pm_.c:38
 msgid "Upgrade"
 msgstr "Oppgrader"
 
-#: ../install_steps_interactive.pm_.c:43
+#: ../install_steps_interactive.pm_.c:44
 msgid "Install Class"
 msgstr "Installeringsklasse"
 
-#: ../install_steps_interactive.pm_.c:44
+#: ../install_steps_interactive.pm_.c:45
 msgid "What type of user will you have?"
 msgstr "Hva slags brukertype vil du ha?"
 
-#: ../install_steps_interactive.pm_.c:53
+#: ../install_steps_interactive.pm_.c:54
 #, c-format
 msgid "Installing driver for scsi card %s"
 msgstr "Installerer driver for scsi-kort %s"
 
-#: ../install_steps_interactive.pm_.c:54
+#: ../install_steps_interactive.pm_.c:55
 #, c-format
 msgid "(module %s)"
 msgstr "(modul %s)"
 
-#: ../install_steps_interactive.pm_.c:63
+#: ../install_steps_interactive.pm_.c:64
 msgid " scsi interfaces"
 msgstr " scsi grensesnitt"
 
-#: ../install_steps_interactive.pm_.c:63
+#: ../install_steps_interactive.pm_.c:64
 msgid "Found "
 msgstr "Funnet "
 
-#: ../install_steps_interactive.pm_.c:64
+#: ../install_steps_interactive.pm_.c:65
 msgid "Do you have another one?"
 msgstr "Har du enda ett?"
 
-#: ../install_steps_interactive.pm_.c:65
+#: ../install_steps_interactive.pm_.c:66
 msgid "Do you have an scsi interface?"
 msgstr "Har du et scsi grensesnitt"
 
-#: ../install_steps_interactive.pm_.c:67
+#: ../install_steps_interactive.pm_.c:68
 msgid "What scsi card have you?"
 msgstr "Hva slags scsi-kort har du?"
 
-#: ../install_steps_interactive.pm_.c:76
+#: ../install_steps_interactive.pm_.c:77
 msgid "You need to reboot for the partition table modifications to take place"
 msgstr ""
 "Du må starte maskinen på nytt for at modifiseringene av partisjonstabellen "
 "skal tre i kraft"
 
-#: ../install_steps_interactive.pm_.c:86
+#: ../install_steps_interactive.pm_.c:87
 msgid "Choose the partitions you want to format"
 msgstr "Velg de partisjonene du ønsker å formatere"
 
-#: ../install_steps_interactive.pm_.c:97
+#: ../install_steps_interactive.pm_.c:98
 #, c-format
 msgid "Formatting partition %s"
 msgstr "Formaterer partisjon %s"
 
-#: ../install_steps_interactive.pm_.c:110
+#: ../install_steps_interactive.pm_.c:111
 msgid "Keep the current IP configuration"
 msgstr "Behold nåværende IP-konfigurasjon"
 
-#: ../install_steps_interactive.pm_.c:111
+#: ../install_steps_interactive.pm_.c:112
 msgid "Reconfigure network now"
 msgstr "Rekonfigurer nettverket nå"
 
-#: ../install_steps_interactive.pm_.c:112
+#: ../install_steps_interactive.pm_.c:113
 msgid "Don't set up networking"
 msgstr "Ikke sett opp nettverk"
 
-#: ../install_steps_interactive.pm_.c:114
+#: ../install_steps_interactive.pm_.c:115
 msgid "Network Configuration"
 msgstr "Nettverks-konfigurasjon"
 
-#: ../install_steps_interactive.pm_.c:115
+#: ../install_steps_interactive.pm_.c:116
 msgid "LAN networking has already been configured. Do you want to:"
 msgstr "LAN nettverket har allerede blitt konfigurert. Vil du:"
 
@@ -1344,106 +1371,3 @@ msgstr "Dårlig backup-fil"
 msgid "Error writing to file %s"
 msgstr "Feil ved skriving til fil %s"
 
-#~ msgid "Choose install or upgrade"
-#~ msgstr "Velg installering eller oppgradering"
-
-#~ msgid "Select installation class"
-#~ msgstr "Velg installasjonsklasse"
-
-#~ msgid "Setup SCSI"
-#~ msgstr "Oppsett SCSI"
-
-#~ msgid "Setup filesystems"
-#~ msgstr "Oppsett filsystemer"
-
-#~ msgid "Format partitions"
-#~ msgstr "Formater partisjoner"
-
-#~ msgid "Choose packages to install"
-#~ msgstr "Velg pakker for installering"
-
-#~ msgid "Install system"
-#~ msgstr "Installer systemet"
-
-#~ msgid ""
-#~ "A custom bootdisk provides a way of booting into your Linux system without\n"
-#~ "depending on the normal bootloader. This is useful if you don't want to "
-#~ "install\n"
-#~ "lilo on your system, or another operating system removes lilo, or lilo "
-#~ "doesn't\n"
-#~ "work with your hardware configuration. A custom bootdisk can also be used "
-#~ "with\n"
-#~ "the Mandrake rescue image, making it much easier to recover from severe "
-#~ "system\n"
-#~ "failures. Would you like to create a bootdisk for your system?"
-#~ msgstr ""
-#~ "En egendefinert oppstartsdiskett tilbyr en måte å laste opp Linux systemet\n"
-#~ "ditt på uten å være avhengig av den vanlige oppstartslasteren. Dette er "
-#~ "nyttig hvis du ikke ønsker å installere\n"
-#~ "lilo, eller hvis et annet operativsystem fjerner lilo, eller hvis lilo ikke "
-#~ "virker\n"
-#~ "med din maskinvarekonfigurasjon. En egendefinert oppstartsdiskett kan også "
-#~ "brukes sammen med\n"
-#~ "Mandrake's redningsdiskett som gjør det lettere å gjenopprette etter "
-#~ "systemfeil.\n"
-#~ "Ønsker du å opprette en oppstartsdisk for systemet ditt?"
-
-#~ msgid "Creating bootdisk"
-#~ msgstr "Oppretter oppstartdiskett"
-
-#~ msgid "First sector of boot partition"
-#~ msgstr "Første sektor av oppstartspartisjonen"
-
-#~ msgid "First sector of drive"
-#~ msgstr "Første sektor av disk"
-
-#~ msgid "Lilo Installation"
-#~ msgstr "Lilo installasjon"
-
-#~ msgid "Where do you want to install the bootloader?"
-#~ msgstr "Hvor ønsker du å installere oppstartslasteren?"
-
-#~ msgid "Expert"
-#~ msgstr "Ekspert"
-
-#~ msgid "Start: sector"
-#~ msgstr "Start: sektor"
-
-#~ msgid "Mb\n"
-#~ msgstr "Mb\n"
-
-#~ msgid "Size: "
-#~ msgstr "Størrelse: "
-
-#~ msgid "Size: %s Mb (%s%%)\n"
-#~ msgstr "Størrelse: %s Mb (%s%%)\n"
-
-#~ msgid "Forget the modification to partition table?"
-#~ msgstr "Glemme modifiseringen av partisjonstabellen?"
-
-#~ msgid "Mb"
-#~ msgstr "Mb"
-
-#~ msgid "Size in Mb: "
-#~ msgstr "Størrelse i Mb: "
-
-#~ msgid "Find installation files"
-#~ msgstr "Finn installasjonsfiler"
-
-#~ msgid "Find current installation"
-#~ msgstr "Finn nåværende installasjon"
-
-#~ msgid "Choose packages to upgrade"
-#~ msgstr "Velg pakker som skal oppgraderes"
-
-#~ msgid "Upgrade system"
-#~ msgstr "Oppgrader systemet"
-
-#~ msgid "newbie"
-#~ msgstr "nybegynner"
-
-#~ msgid "Choose partitions you want to format"
-#~ msgstr "Velg partisjoner du ønsker å formatere"
-
-#~ msgid "You must give a password"
-#~ msgstr "Du må oppgi et passord"
