@@ -312,10 +312,16 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 
 %changelog
 * Fri May 16 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.1-38mdk
-- drakconnect: fix #852 (poulpy)
 - drakboot:
   o do not install both lilo and grub when grub is choosen
   o further fix #2826: replace spaces by underscores in labels
+  o further fix #3560: update main bootloader label after the
+    bootloader switch
+  o raise a wait message window so that the user can figure out what
+    occurs (lilo installation being quite long)
+- harddrake: localize drive capabilites (aka burning, dvd managment, ...)
+- drakconnect: fix #852: add a step to warn user before writing
+  settings (poulpy)
 
 * Thu May 15 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.1-37mdk
 - drakfont: fix #1352 (do not add font directory with dummy messages)
