@@ -421,11 +421,12 @@ sub easy_dhcp {
 #-  $intf->{$device}{DEVICE} : DEVICE = $device
 #-  $intf->{$device}{BOOTPROTO} : boot prototype : "bootp" or "dhcp" or "pump" or ...
 sub configureNetwork2 {
-    my ($in, $_prefix, $netc, $intf) = @_;
+    my ($in, $modules_conf, $_prefix, $netc, $intf) = @_;
     my $etc = "$::prefix/etc";
     if (!$::testing) {
         require network::ethernet;
         network::ethernet::update_iftab();
+        network::ethernet::configure_eth_aliases($modules_conf);
 
         $netc->{wireless_eth} and $in->do_pkgs->ensure_binary_is_installed('wireless-tools', 'iwconfig', 'auto');
         write_conf("$etc/sysconfig/network", $netc);

@@ -15,7 +15,7 @@ use vars qw(@ISA @EXPORT);
 
 sub write_ether_conf {
     my ($in, $modules_conf, $netcnx, $netc, $intf) = @_;
-    configureNetwork2($in, $::prefix, $netc, $intf);
+    configureNetwork2($in, $modules_conf, $::prefix, $netc, $intf);
     $netc->{NETWORKING} = "yes";
     if ($netc->{GATEWAY} || any { $_->{BOOTPROTO} =~ /dhcp/ } values %$intf) {
 	$netcnx->{type} = 'lan';

@@ -751,7 +751,7 @@ sub apply {
     my $lintf = $intf;
     $dyn and $lintf->{$_} = undef foreach qw(NETMASK NETWORK IPADDR);
     network::network::sethostname($netc) if $dyn;
-    network::network::configureNetwork2($in, '', $netc, { $lintf->{DEVICE} => $lintf });
+    network::network::configureNetwork2($in, $modules_conf, '', $netc, { $lintf->{DEVICE} => $lintf });
 }
 
 sub ethisup { `LC_ALL=C LANGUAGE=C /sbin/ifconfig $_[0]` =~ /inet/ }
@@ -1027,7 +1027,7 @@ Run the \"Add Connection\" assistant from the Mandrakelinux Control Center"));
                                                                               update();
                                                                               $button_apply->set_sensitive(1);
                                                                           } else {
-                                                                              configureNetwork2($in, '', $netc, $intf);
+                                                                              configureNetwork2($in, $modules_conf, '', $netc, $intf);
                                                                               write_resolv_conf("/etc/resolv.conf", $netc);
                                                                           }
                                                                           $exit_dialogsub->();

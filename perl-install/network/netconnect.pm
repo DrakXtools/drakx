@@ -193,7 +193,7 @@ sub real_main {
           } else {
               undef $netc->{NET_DEVICE};
           }
-          network::network::configureNetwork2($in, $::prefix, $netc, $intf);
+          network::network::configureNetwork2($in, $modules_conf, $::prefix, $netc, $intf);
           $network_configured = 1;
           return "restart" if $need_restart_network && $::isStandalone && !$::expert;
           return $offer_to_connect->();
@@ -1311,7 +1311,7 @@ Click on Ok to keep your configuration, or cancel to reconfigure your Internet &
       }
 
     # install needed packages:
-    $network_configured or network::network::configureNetwork2($in, $::prefix, $netc, $intf);
+    $network_configured or network::network::configureNetwork2($in, $modules_conf, $::prefix, $netc, $intf);
 
     $netcnx->{$_} = $netc->{$_} foreach qw(NET_DEVICE NET_INTERFACE);
     $netcnx->{type} =~ /adsl/ or run_program::rooted($::prefix, "/chkconfig --del adsl 2> /dev/null");
