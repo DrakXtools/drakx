@@ -1,3 +1,134 @@
+2004/02/18  David Baudens  <baudens at mandrakesoft.com>
+
+	* share/rpmsrate: Install Google's search bar when KDE is installed
+
+2004/02/18  Damien Chaumette  <dchaumette at mandrakesoft.com>
+
+	* network/adsl.pm: drop $netc->{internet_cnx} test, unnedeed
+
+	* standalone/drakconnect: fix adsl at boot, better and more clean
+
+2004/02/18  Frederic Crozat  <fcrozat at mandrakesoft.com>
+
+	* share/rpmsrate: Pull xine-arts when choosing video AND KDE
+
+2004/02/18  Guillaume Cottenceau  <gc at mandrakesoft.com>
+
+	* share/po/ms.po, share/po/sk.po, share/po/gl.po, share/po/pt_BR.po,
+	share/po/th.po, share/po/et.po, share/po/ja.po, share/po/hr.po,
+	share/po/be.po, share/po/ko.po, share/po/DrakX.pot, share/po/sv.po,
+	share/po/sr.po, share/po/pl.po, share/po/fi.po, share/po/he.po,
+	share/po/ca.po, share/po/da.po, share/po/ar.po, share/po/nb.po,
+	share/po/uz.po, share/po/ro.po, share/po/zh_TW.po, share/po/zh_CN.po,
+	share/po/sr@Latn.po, share/po/sq.po, share/po/it.po, share/po/eu.po,
+	share/po/es.po, share/po/lv.po, share/po/hu.po, share/po/fa.po,
+	share/po/id.po, share/po/ru.po, share/po/sl.po, share/po/tr.po,
+	share/po/mt.po, share/po/ga.po, share/po/mn.po, share/po/uk.po,
+	share/po/lt.po, share/po/cy.po, share/po/tg.po, share/po/bs.po,
+	share/po/mk.po, share/po/wa.po, share/po/is.po, share/po/hi.po,
+	share/po/af.po, share/po/az.po, share/po/pt.po, share/po/fr.po,
+	share/po/ta.po, share/po/vi.po, share/po/nl.po, share/po/de.po,
+	share/po/eo.po, share/po/el.po, share/po/bg.po, share/po/cs.po,
+	share/advertising/dwd-09.pl, share/po/uz@Latn.po: fix wording of
+	advertisement thx to austin
+
+	* tools/shift_img.c, tools/shift_all.pl: these files I needed when pablo
+	gave me lang-*.png images because they were not aligned.. commiting in
+	case
+
+	* install_any.pm: ok, ok, perl checker roulaize
+	better match
+	tentatively fix #7792 (seems like line number don't match #7792,
+	but this one I'm fixing was obviously wrong, at least)
+	allow using ext2 or vfat floppies for kickstart=floppy so that
+	when you do an auto install based on network.img and
+	network_drivers.img, you can put your auto_inst.cfg.pl on
+	network_drivers.img and rock n roll
+
+	* mdk-stage1/modules.c: support automatic installs even when needing the
+	additional drivers floppy
+
+	* modules.pm: don't log insmod errors on tty5, rather on tty3+ddebug.log
+	as normal log
+
+2004/02/18  Pixel  <pixel at mandrakesoft.com>
+
+	* install_steps_gtk.pm: when cancel is pressed, fix re-selecting
+	unselected packages
+	(callback_choices unneeded, cf rpmdrake)
+	small cleanup
+
+	* install2.pm: HACK: set LD_ASSUME_KERNEL so that rpm doesn't try to use
+	tls (which we don't
+	have at install) otherwise it causes *weird* problems in __db*. When
+	LD_ASSUME_KERNEL is set, no __db* are used, and so no such pbs.
+
+	* fsedit.pm, partition_table.pm: type 0x17 *can* be ntfs, assuming it is
+	when we don't care much, and check if it is ntfs otherwise
+
+	* standalone/diskdrake: set useSupermount to magicdev (so that it doesn't
+	use supermount from cdroms)
+
+	* share/rpmsrate: gdm is an important gnome application, make it 5 (for my
+	tests)
+
+2004/02/18  Stew Benedict  <sbenedict at mandrakesoft.com>
+
+	* standalone/drakbackup: Rework backupignore behavior (Anthill #306).
+
+2004/02/18  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* ugtk2.pm (create_okcancel) enable to specify that some buttons must be
+	at right
+
+	* share/po/ms.po, share/po/sk.po, share/po/gl.po, share/po/pt_BR.po,
+	share/po/th.po, share/po/et.po, share/po/ja.po, share/po/hr.po,
+	share/po/be.po, standalone/drakvpn, share/po/ko.po, share/po/DrakX.pot,
+	share/po/sv.po, share/po/sr.po, share/po/pl.po, share/po/fi.po,
+	share/po/he.po, share/po/ca.po, share/po/da.po, share/po/ar.po,
+	share/po/nb.po, share/po/uz.po, share/po/ro.po, share/po/zh_TW.po,
+	share/po/zh_CN.po, share/po/sr@Latn.po, share/po/sq.po, share/po/it.po,
+	share/po/eu.po, share/po/es.po, share/po/lv.po, share/po/hu.po,
+	share/po/fa.po, share/po/id.po, share/po/ru.po, share/po/br.po,
+	share/po/sl.po, share/po/tr.po, share/po/mt.po, share/po/ga.po,
+	share/po/mn.po, share/po/uk.po, share/po/lt.po, share/po/cy.po,
+	share/po/tg.po, share/po/bs.po, share/po/mk.po, share/po/wa.po,
+	share/po/is.po, share/po/hi.po, share/po/af.po, share/po/az.po,
+	share/po/pt.po, share/po/fr.po, share/po/ta.po, share/po/vi.po,
+	share/po/nl.po, share/po/de.po, share/po/eo.po, share/po/bg.po,
+	share/po/cs.po, share/po/el.po, share/po/uz@Latn.po: typo fix
+
+	* standalone/drakconnect: force apply button to be right aligned
+
+2004/02/17  Damien Chaumette  <dchaumette at mandrakesoft.com>
+
+	* network/adsl.pm: manage interfaces don't want to break cnx_scripts
+
+	* standalone/drakconnect: 
+	  - add chk_config() to test internet service state
+	  - adsl onboot using chk_config()
+
+2004/02/17  Guillaume Cottenceau  <gc at mandrakesoft.com>
+
+	* mdk-stage1/stage1.c, mdk-stage1/modules.c, mdk-stage1/modules.h: support
+	2.6 insmoding for expert third party modules and loading named modules
+
+	* Xconfig/card.pm: well we reverted to 4.3
+
+2004/02/17  tsdgeos
+
+	* share/po/ca.po: today's updates
+
+2004/02/17  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* ugtk2.pm: enforce gnome button order everywhere (interface team request)
+
+	* drakxtools.spec: log one more stuff into 10-0.18mdk
+	fix changelog
+	10-0.18mdk
+
+	* standalone/icons/wiz_default_up.png: new default icon for wizards
+
 2004/02/17  Fabian Mandelbaum  <fabman at 2vias.com.ar>
 
 	* share/po/es.po: Updated Spanish translations
@@ -26466,7 +26597,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.873 2004/02/16 11:53:00 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.874 2004/02/17 16:39:53 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
