@@ -289,8 +289,11 @@ floppy_info(name)
   RETVAL = NULL;
   if (fd != -1) {
      char drivtyp[17];
-     ioctl(fd, FDGETDRVTYP, (void *)drivtyp);
-     RETVAL = drivtyp;
+     if (ioctl(fd, FDGETDRVTYP, (void *)drivtyp) == 0) {
+       struct floppy_drive_struct ds;
+       if (ioctl(fd, FDPOLLDRVSTAT, &ds) == 0 && ds.track >= 0)
+         RETVAL = drivtyp;
+     }
      close(fd);
   }
   OUTPUT:
