@@ -728,8 +728,8 @@ sub advanced_install() {
 sub list_to_remove() {
     #my @files_path = grep(!/fonts/, all($current_path)); garbage ?
     gtkflush();
-    my ($tree, @tux) = $left_list->get_selection->get_selected_rows; #- get tree & paths
-    push @uninstall, map { $tree->get($tree->get_iter($_), 0) } @tux;
+    my (@tux) = $left_list->get_selection->get_selected_rows; #- get tree & paths
+    push @uninstall, map { $left_model->get($left_model->get_iter($_), 0) } @tux;
     #push @uninstall, $current_path . "/" . $files_path[$_] foreach @number_to_remove; garbage ?
     $$central_widget->destroy;
     show_list_to_remove();
