@@ -39,7 +39,7 @@ XFree86-Sun XFree86-SunMono XFree86-Sun24 XFree86-FBDev XFree86-server
 XFree86 XFree86-glide-module Device3Dfx Glide_V3-DRI Glide_V5 Mesa
 
 dhcpcd pump dhcpxd dhcp-client isdn-light isdn4net isdn4k-utils dev pptp-adsl rp-pppoe ppp ypbind
-autologin speedtouch speedtouch_mgmt nfs-utils-clients samba-client
+autologin ntp speedtouch speedtouch_mgmt nfs-utils-clients samba-client
 wireless-tools wlan_cs wavelan_cs aironet_cs aironet4500_cs hermes airo orinico_cs orinico
 
 foomatic printer-utils printer-testpages gimpprint rlpr samba-client ncpfs nc
