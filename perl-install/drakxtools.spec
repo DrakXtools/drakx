@@ -62,6 +62,43 @@ administrators life on a Mandrakelinux machine. Nearly all of
 them work both under XFree (graphical environment) and in console
 (text environment), allowing easy distant work.
 
+drakbug: interactive bug report tool
+
+drakbug_report: help find bugs in DrakX
+
+drakclock: date & time configurator
+
+drakfloppy: boot disk creator
+
+drakfont: import fonts in the system
+
+draklog: show extracted information from the system logs
+
+draknet_monitor: connection monitoring
+
+drakperm: msec GUI (permissions configurator)
+
+drakprinter: detect and configure your printer
+
+draksec: security options managment / msec frontend
+
+draksplash: bootsplash themes creation
+
+drakTermServ: terminal server configurator
+
+listsupportedprinters: list printers
+
+net_applet: applet to check network connection
+
+%description backend
+See package %name
+
+%description newt
+Contains many Mandrakelinux applications simplifying users and
+administrators life on a Mandrakelinux machine. Nearly all of
+them work both under XFree (graphical environment) and in console
+(text environment), allowing easy distant work.
+
 adduserdrake: help you adding a user
 
 ddcxinfos: get infos from the graphic card and print XF86Config
@@ -82,64 +119,38 @@ drakbackup: backup and restore your system
 drakboot: configures your boot configuration (Lilo/GRUB,
 Bootsplash, X, autologin)
 
-drakbug: interactive bug report tool
-
-drakbug_report: help find bugs in DrakX
-
 drakconnect: LAN/Internet connection configuration. It handles
 ethernet, ISDN, DSL, cable, modem.
 
-drakfloppy: boot disk creator
-
-drakfont: import fonts in the system
+drakfirewall: simple firewall configurator
 
 drakgw: internet connection sharing
 
+drakkeyboard: configure your keyboard (both console and X)
+
+draklocale: language configurator, available both for root
+(system wide) and users (user only)
+
+drakmouse: autodetect and configure your mouse
+
 drakproxy: proxies configuration
 
-draksec: security options managment / msec frontend
+drakscanner: scanner configurator
 
 draksound: sound card configuration
 
-draksplash: bootsplash themes creation
-
-drakTermServ: terminal server configurator
+drakx11: menu-driven program which walks you through setting up
+your X server; it autodetects both monitor and video card if
+possible
 
 drakxservices: SysV service and dameaons configurator
 
 drakxtv: auto configure tv card for xawtv grabber
 
-keyboarddrake: configure your keyboard (both console and X)
-
-logdrake: show extracted information from the system logs
-
 lsnetdrake: display available nfs and smb shares
 
 lspcidrake: display your pci information, *and* the corresponding
 kernel module
-
-localedrake: language configurator, available both for root
-(system wide) and users (user only)
-
-mousedrake: autodetect and configure your mouse
-
-printerdrake: detect and configure your printer
-
-scannerdrake: scanner configurator
-
-drakfirewall: simple firewall configurator
-
-XFdrake: menu-driven program which walks you through setting up
-your X server; it autodetects both monitor and video card if
-possible
-
-net_applet: applet to check network connection
-
-%description backend
-See package %name
-
-%description newt
-See package %name
 
 %description http
 This add the capability to be runned behind a web server to the drakx tools.
