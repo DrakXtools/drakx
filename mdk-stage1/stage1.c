@@ -137,6 +137,7 @@ static void spawn_shell(void)
 
 			execve(shell_name[0], shell_name, grab_env());
 			log_message("execve of %s failed: %s", shell_name[0], strerror(errno));
+			exit(-1);
 		}
 		
 		close(fd);
