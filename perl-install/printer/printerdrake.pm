@@ -2135,13 +2135,13 @@ sub setup_common {
 		    $hplipinstallfailed = 1;
 		} else {
 		    $w = $in->wait_message(N("Printerdrake"),
-					   N("Installing HPLIP package..."))
+					   N("Installing %s package...",N("HPLIP")))
 			if !$printer->{noninteractive};
 		    $in->do_pkgs->install('hplip')
 			or do {
 			    $in->ask_warn(N("Warning"),
 					  N("Could not install the %s packages!",
-					    "HPLIP") . " " .
+					    N("HPLIP")) . " " .
 					  N("Only printing will be possible on the %s.",
 					    $makemodel));
 			    $hplipinstallfailed = 1;
@@ -2167,7 +2167,7 @@ sub setup_common {
 	    undef $w;
 	    $w = $in->wait_message(
 		 N("Printerdrake"),
-		 N("Checking device and configuring HPLIP..."))
+		 N("Checking device and configuring %s...",N("HPLIP")))
 		if !$printer->{noninteractive};
 
 	    if (!$hplipinstallfailed) {
@@ -2267,13 +2267,13 @@ sub setup_common {
 			$hpojinstallfailed = 1;
 		    } else {
 			$w = $in->wait_message(N("Printerdrake"),
-					       N("Installing HPOJ package..."))
+					       N("Installing %s package...",N("HPOJ")))
 			    if !$printer->{noninteractive};
 			$in->do_pkgs->install('hpoj', 'xojpanel', 'usbutils')
 			    or do {
 				$in->ask_warn(N("Warning"),
 					      N("Could not install the %s packages!",
-						"HPOJ") . " " .
+						N("HPOJ")) . " " .
 					      N("Only printing will be possible on the %s.",
 						$makemodel));
 				$hpojinstallfailed = 1;
@@ -2284,7 +2284,7 @@ sub setup_common {
 		undef $w;
 		$w = $in->wait_message
 		    (N("Printerdrake"),
-		     N("Checking device and configuring HPOJ..."))
+		     N("Checking device and configuring %s...",N("HPOJ")))
 		    if !$printer->{noninteractive};
 		
 		eval { $ptaldevice = printer::main::configure_hpoj
