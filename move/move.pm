@@ -204,6 +204,8 @@ sub install2::startMove {
 	any::ask_user_one($o, $o->{users} ||= [], $o->{security},
 			  additional_msg => N("BLA BLA user for move, password for screensaver"), noaccept => 1, needauser => 1, noicons => 1);
     }
+    #- force uid/gid to 501 as it was used when mounting key, addUser may choose 502 when key already holds user data
+    put_in_hash($o->{users}[0], { uid => 501, gid => 501 });
     require install_steps;
     install_steps::addUser($o);
 
