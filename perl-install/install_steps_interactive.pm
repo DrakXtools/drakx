@@ -278,7 +278,7 @@ sub choosePackages {
 
 	$o->chooseGroups($packages, $compssUsers, $compssUsersSorted, \$individual) unless $::beginner || $::corporate;
 
-	my $min_mark = 1;
+	my $min_mark = $::beginner ? 25 : 1;
 	my @l = values %{$packages->[0]};
 	my @flags = map { pkgs::packageFlagSelected($_) } @l;
 	pkgs::setSelectedFromCompssList($o->{compssListLevels}, $packages, $min_mark, 0, $o->{installClass});
