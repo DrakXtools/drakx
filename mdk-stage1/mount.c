@@ -22,6 +22,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <string.h>
+#include <stdio.h>
 #include <sys/mount.h>
 #include <sys/stat.h>
 #include <sys/types.h>
@@ -178,6 +179,14 @@ int my_mount(char *dev, char *location, char *fs, int force_rw)
 			log_perror("could not create location dir");
 			return -1;
 		}
+	}
+
+	if (!strcmp(fs, "supermount")) {
+		my_insmod("supermount", ANY_DRIVER_TYPE, NULL);
+		my_insmod("isofs", ANY_DRIVER_TYPE, NULL);
+		opts = alloca(500);
+                sprintf(opts, "dev=%s,fs=iso9660,tray_lock=always", dev);
+                dev = "none";
 	}
 
 #ifndef DISABLE_MEDIAS

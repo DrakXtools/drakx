@@ -41,7 +41,11 @@ static int mount_that_cd_device(char * dev_name)
 	strcpy(device_fullname, "/dev/");
 	strcat(device_fullname, dev_name);
 
+#ifdef MANDRAKE_MOVE
+	return my_mount(device_fullname, IMAGE_LOCATION, "supermount", 0);
+#else
 	return my_mount(device_fullname, IMAGE_LOCATION, "iso9660", 0);
+#endif
 }
 
 
