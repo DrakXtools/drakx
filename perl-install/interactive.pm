@@ -138,6 +138,11 @@ sub ask_from_treelist {
     my ($o, $title, $message, $separator, $l, $def) = @_;
     ask_from_treelistf($o, $title, $message, $separator, undef, $l, $def);
 }
+sub ask_from_treelist_ {
+    my ($o, $title, $message, $separator, $l, $def) = @_;
+    my $transl = sub { join '|', map { translate($_) } split(quotemeta($separator), $_[0]) }; 
+    ask_from_treelistf($o, $title, $message, $separator, $transl, $l, $def);
+}
 sub ask_from_treelistf {
     my ($o, $title, $message, $separator, $f, $l, $def) = @_;
     ask_from_entries_refH($o, $title, $message, [ { val => \$def, separator => $separator, list => $l, format => $f } ]);
