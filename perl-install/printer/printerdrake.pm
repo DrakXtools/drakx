@@ -3500,7 +3500,6 @@ sub install_foomatic {
     my ($in) = @_;
     if (!$::testing &&
 	!files_exist(qw(/usr/bin/foomatic-configure 
-			/usr/lib/perl5/vendor_perl/5.8.0/Foomatic/DB.pm
 			/usr/bin/foomatic-rip
 			/usr/share/foomatic/db/source/driver/ljet4.xml))) {
 	my $_w = $in->wait_message(N("Printerdrake"),
