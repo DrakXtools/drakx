@@ -107,7 +107,7 @@ sub choose {
 	    $monitor->{VendorName} = "Plug'n Play";
 	} else {
 	    delete $monitor->{VendorName};
-	    $in->ask_warn('', N("Plug'n Play probing failed. Please choose a precise monitor"));
+	    $in->ask_warn('', N("Plug'n Play probing failed. Please select the correct monitor"));
 	    goto ask_monitor;
 	}
     } elsif ($merged_name eq 'Custom') {

@@ -234,7 +234,7 @@ sub isdn_ask_info {
 
 sub isdn_ask_protocol {
     my @toto = (
-	      { description => $::expert ? N("Europe protocol (EDSS1)") : N("Europe protocol"),
+	      { description => $::expert ? N("European protocol (EDSS1)") : N("Europe protocol"),
 		protokol => 2 },
 	      { description => $::expert ? N("Protocol for the rest of the world\nNo D-Channel (leased lines)") : N("Protocol for the rest of the world"),
 		protokol => 3 }
@@ -275,7 +275,7 @@ If you have a PCMCIA card, you have to know the \"irq\" and \"io\" of your card.
 
   isdn_ask_step_2:
     $e = $in->ask_from_listf(N("ISDN Configuration"),
-			     N("Which is your ISDN card?"),
+			     N("Which of the following is your ISDN card?"),
 			     sub { $_[0]{description} },
 			     [ grep { $_->{card} eq $isdn->{card_type} } @isdndata ]) or goto isdn_ask_step_1;
     $e->{$_} and $isdn->{$_} = $e->{$_} foreach qw(driver type mem io io0 io1 irq firmware);

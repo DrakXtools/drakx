@@ -579,7 +579,7 @@ sub Mount_point {
     };
     $in->ask_from(
         '',
-        isLoopback($part) ? N("Where do you want to mount loopback file %s?", $part->{loopback_file}) :
+        isLoopback($part) ? N("Where do you want to mount the loopback file %s?", $part->{loopback_file}) :
 			    N("Where do you want to mount device %s?", $part->{device}),
 	[ { label => N("Mount point"), val => \$mntpoint, 
 	    list => [ if_($mntpoint, $mntpoint), fsedit::suggestions_mntpoint($all_hds), '' ], 
@@ -832,7 +832,7 @@ sub Loopback {
 		 $part->{loopback_file} or $in->ask_warn('', N("Give a file name")), return 1, 0;
 		 $part->{loopback_file} =~ s|^([^/])|/$1|;
 		 if (my $size = loopback::verifFile($handle->{dir}, $part->{loopback_file}, $real_part)) {
-		     $size == -1 and $in->ask_warn('', N("File already used by another loopback, choose another one")), return 1, 0;
+		     $size == -1 and $in->ask_warn('', N("File is already used by another loopback, choose another one")), return 1, 0;
 		     $in->ask_yesorno('', N("File already exists. Use it?")) or return 1, 0;
 		     delete $part->{notFormatted};
 		     $part->{size} = divide($size, 512);
@@ -1002,7 +1002,7 @@ If you plan to use the LILO boot manager, be careful to add a /boot partition"))
 	$in->ask_warn('',
 N("You've selected a software RAID partition as root (/).
 No bootloader is able to handle this without a /boot partition.
-So be careful to add a /boot partition"));
+Please be sure to add a /boot partition"));
 	undef $_;
     } elsif ($_) {
 	$in->ask_warn('', formatError($_));
@@ -1139,7 +1139,7 @@ sub format_part_info {
 	$info .= N("Loopback file name: %s", $part->{loopback_file});
     }
     if (isApple($part)) {
-	$info .= N("\nChances are, this partition is\na Driver partition, you should\nprobably leave it alone.\n");
+	$info .= N("\nChances are, this partition is\na Driver partition. You should\nprobably leave it alone.\n");
     }
     if (isAppleBootstrap($part)) {
 	$info .= N("\nThis special Bootstrap\npartition is for\ndual-booting your system.\n");

@@ -87,7 +87,7 @@ sub load_module__ask_options {
 
     if (@parameters) {
 	$in->ask_from('', 
-		      N("You may now provide its options to module %s.\nNote that any address should be entered with the prefix 0x like '0x123'", $module_descr), 
+		      N("You may now provide options to module %s.\nNote that any address should be entered with the prefix 0x like '0x123'", $module_descr), 
 		      [ map { { label => $_->[0] . ($_->[1] ? " ($_->[1])" : ''), help => $_->[2], val => \$_->[3] } } @parameters ],
 		     ) or return;
 	[ map { if_($_->[3], "$_->[0]=$_->[3]") } @parameters ];
@@ -117,7 +117,7 @@ sub load_category__prompt {
     my @parameters = modules::parameters::parameters($module);
     if (@parameters && $in->ask_from_list_('',
 formatAlaTeX(N("In some cases, the %s driver needs to have extra information to work
-properly, although it normally works fine without. Would you like to specify
+properly, although it normally works fine without them. Would you like to specify
 extra options for it or allow the driver to probe your machine for the
 information it needs? Occasionally, probing will hang a computer, but it should
 not cause any damage.", $module_descr)), [ N_("Autoprobe"), N_("Specify options") ], 'Autoprobe') ne 'Autoprobe') {

@@ -25,10 +25,10 @@ sub intro {
     read_net_conf($prefix, $netcnx, $netc);
     if (!$::isWizard) {
 	if (connected()) {
-	    $text = N("You are currently connected to internet.") . (-e $disconnect_file ? N("\nYou can disconnect or reconfigure your connection.") : N("\nYou can reconfigure your connection."));
+	    $text = N("You are currently connected to the Internet.") . (-e $disconnect_file ? N("\nYou can disconnect or reconfigure your connection.") : N("\nYou can reconfigure your connection."));
 	    $connected = 1;
 	} else {
-	    $text = N("You are not currently connected to Internet.") . (-e $connect_file ? N("\nYou can connect to Internet or reconfigure your connection.") : N("\nYou can reconfigure your connection."));
+	    $text = N("You are not currently connected to the Internet.") . (-e $connect_file ? N("\nYou can connect to the Internet or reconfigure your connection.") : N("\nYou can reconfigure your connection."));
 	    $connected = 0;
 	}
 	my @l = (
