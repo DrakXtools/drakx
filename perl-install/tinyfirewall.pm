@@ -80,9 +80,9 @@ sub ReadConfig {
 sub SaveConfig {
 	my $tmp_file = tmpnam();
 	open CONFIGFILE, "$config_file"
-		or die "Can't open $config_file: $!\n";
+		or die _("Can't open %s: %s\n", $config_file, $!);
 	open TMPFILE, ">$tmp_file"
-		or die "Can't open $tmp_file for writing: $!\n";
+		or die _("Can't open %s for writing: %s\n", $tmp_file, $!);
 	while (my $line = <CONFIGFILE>)
 	{
 		if ($line =~ m/^(.+)\s*\=\s*\"(.*)\"/)
@@ -178,13 +178,13 @@ my $popimap = sub {
 		  [undef , undef, undef, undef, ["tcp", "20"],["tcp", "21"]],
 		  [undef , undef, undef, undef, ["tcp", "25"]],
 		  [undef , undef, undef, $popimap, ["tcp", "109"], ["tcp", "110"], ["tcp", "143"]],
-		  [undef , "No I don't need DHCP", "Yes I need DHCP", $dhcp],
-		  [undef , "No I don't need NTP", "Yes I need NTP", $ntp ],
-		  [undef , "Don't Save", "Save & Quit", $quit ]
+		  [undef , _("No I don't need DHCP"), _("Yes I need DHCP"), $dhcp],
+		  [undef , _("No I don't need NTP"), _("Yes I need NTP"), $ntp ],
+		  [undef , _("Don't Save"), _("Save & Quit"), $quit ]
 		 );
     if (!Kernel22()) { 
 	pop @struct; pop @struct; pop @struct;
-	@struct = ( @struct, [undef , "Don't Save", "Save & Quit", $quit ] );
+	@struct = ( @struct, [undef , _("Don't Save"), _("Save & Quit"), $quit ] );
 	$messages[9]=$messages[11];
     }
     if ($in->standalone::pkgs_install(Kernel22() ? "ipchains" : "iptables", "Bastille")) {
@@ -209,7 +209,7 @@ my $popimap = sub {
 				       [ $yes, $no ], or_( map { $_ && CheckService($_->[0], $_->[1]) } (@$l[4..6])) ? $yes : $no
 				      )) {
 	    map { $_ and Service($e=~/Yes/, $_->[0], $_->[1]) } (@{$struct[$i]}[4..6]);
-	    $struct[$i][3] and $struct[$i][3]->($e=~/Yes/ || $e eq "Save & Quit");
+	    $struct[$i][3] and $struct[$i][3]->($e=~/Yes/ || $e eq _("Save & Quit"));
 	} else {
 	  prev:
 	    $i = $i-2 >= -1 ? $i-2 : -1;
