@@ -109,13 +109,13 @@ sub openit($$;$) { sysopen $_[1], $_[0]{file}, $_[2] || 0; }
 # cause kernel to re-read partition table
 sub kernel_read($) {
     my ($hd) = @_;
-    sync();
+    common::sync();
     local *F; openit($hd, *F) or return 0;
-    sync(); sleep(1);
+    common::sync(); sleep(1);
     $hd->{rebootNeeded} = !ioctl(F, c::BLKRRPART(), 0);
-    sync();
+    common::sync();
     close F;
-    sync(); sleep(1);
+    common::sync(); sleep(1);
 }
 
 sub zero_MBR {

@@ -408,7 +408,7 @@ Consoles 1,3,4,7 may also contain interesting information";
     pkgs::done_db();
 
     #-  why not? cuz weather is nice today :-) [pixel]
-    sync(); sync();
+    common::sync(); common::sync();
 
     #- generate /etc/lvmtab needed for rc.sysinit
     run_program::rooted($o->{prefix}, 'vgscan') if -e '/etc/lvmtab';

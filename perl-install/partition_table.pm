@@ -498,7 +498,7 @@ sub write($) {
 
     #- now sync disk and re-read the partition table
     if ($hd->{needKernelReread}) {
-	sync();
+	common::sync();
 	$hd->kernel_read;
 	$hd->{needKernelReread} = 0;
     }

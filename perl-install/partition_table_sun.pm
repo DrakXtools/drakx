@@ -147,7 +147,7 @@ sub write($$$;$) {
 
     syswrite F, pack($main_format, @$info{@$main_fields}), psizeof($main_format) or return 0;
 
-    sync();
+    common::sync();
 
     1;
 }

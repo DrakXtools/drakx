@@ -579,7 +579,7 @@ sub bug {
     require install_any;
     output("/fd0/report.bug", install_any::report_bug("/mnt")); #- no other way :-(
     umount "/fd0";
-    sync();
+    common::sync();
 }
 
 sub loadkeys {

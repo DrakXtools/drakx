@@ -609,7 +609,7 @@ sub main {
     eval { commands::cp('-f', "/tmp/ddebug.log", "$o->{prefix}/root") };
 
     #- ala pixel? :-) [fpons]
-    sync(); sync();
+    common::sync(); common::sync();
 
     log::l("installation complete, leaving");
     print "\n" x 80;
