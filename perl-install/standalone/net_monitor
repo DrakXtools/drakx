@@ -52,6 +52,7 @@ my $monitor = {};
 my $netcnx = {};
 my $netc = {};
 my $intf = {};
+my $c_time = 0;
 network::netconnect::load_conf($netcnx, $netc, $intf);
 network::netconnect::read_net_conf('', $netcnx, $netc);
 my $combo1 = new Gtk::Combo;
@@ -71,31 +72,31 @@ gtkadd($window1,
 		1, gtkpack_(new Gtk::HBox(0,5),
 			    1, my $notebook = new Gtk::Notebook,
 			    0, gtkpack_(new Gtk::VBox(0,5),
-					1, gtkadd(gtkset_shadow_type(new Gtk::Frame(_("Settings")), 'etched_out'),
+					0, gtkadd(gtkset_shadow_type(new Gtk::Frame(_("Settings")), 'etched_out'),
 						  gtkpack__(gtkset_border_width(new Gtk::VBox(0,5),5),
 							    gtkpack__(new Gtk::HBox(0,0),
 								      _("Connection type: "), my $label_cnx_type = new Gtk::Label("")),
 							    gtkpack__(new Gtk::HBox(0,0),
-								      _("Profile: "), $combo1)
+								      _("Profile "), $combo1)
 							   )
 						 ),
-					0, gtkadd(gtkset_shadow_type(new Gtk::Frame(_("Statistics")), 'etched_out'),
+					1, gtkadd(gtkset_shadow_type(new Gtk::Frame(_("Statistics")), 'etched_out'),
+						  gtkpack__(new Gtk::VBox(0,0),
 						  create_packtable({ col_spacings => 1, row_spacings => 1},
 						   [ "", "instantaneous" , "average"],
 						   [ _("Sending Speed:"), my $label_st = new Gtk::Label(""), my $label_sta=new Gtk::Label("na")],
 						   [ _("Receiving Speed:"),my $label_sr= new Gtk::Label(""), my $label_sra=new Gtk::Label("na")],
-								  )
-#						  gtkpack__(gtkset_border_width(new Gtk::VBox(0,5),5),
-#							    gtkpack__(new Gtk::HBox(0,0),
-#								      _("Sending Speed: "), my $label_st = new Gtk::Label("")),
-#							    gtkpack__(new Gtk::HBox(0,0),
-#								      _("Receiving Speed: "), my $label_sr = new Gtk::Label("")),
+								  ),
+						   gtkpack__(new Gtk::HBox(0,0), "  "._("Connection Time: "), my $label_ct = new Gtk::Label("")),
+							   )
 						 ),
-					0, gtksignal_connect(my $button_connect = new Gtk::Button(), clicked => \&connection),
-					0, new Gtk::HSeparator,
-					0, gtkpack(new Gtk::HBox(0,5),
-					      gtksignal_connect(new Gtk::Button(_("Logs")), clicked => sub { system("/usr/sbin/logdrake --file /var/log/messages &") }),
-					      gtksignal_connect(my $button_close = new Gtk::Button(_("Close")), clicked => sub { Gtk->exit(0) }),
+					0, gtkpack_(new Gtk::HBox(0,5),
+						   1, gtksignal_connect(my $button_connect = new Gtk::Button(), clicked => \&connection),
+						   0, new Gtk::VSeparator,
+						   0, gtkpack(new Gtk::VBox(0,5),
+							      gtksignal_connect(new Gtk::Button(_("Logs")), clicked => sub { system("/usr/sbin/logdrake --file /var/log/messages &") }),
+							      gtksignal_connect(my $button_close = new Gtk::Button(_("Close")), clicked => sub { Gtk->exit(0) }),
+							     )
 						  )
 				       )
 			   ),
@@ -285,25 +286,25 @@ sub update {
 					       0, gtkpack__(gtkset_border_width(new Gtk::HBox(0,0), 5),
 							    gtksize($monitor->{$intf}{darea} = new Gtk::DrawingArea(),300, 150)),
 					       0, gtkpack__(gtkset_border_width(new Gtk::HBox(0,5), 5),
-							    gtksignal_connect(my $button_t = new Gtk::Button(), clicked => sub {
-										  $colort = change_color($colort);
-										  $gct->set_foreground($colort);
-										  $_[0]->draw(undef);
-									      }),
+						    gtksignal_connect(my $button_t = gtkset_relief(new Gtk::Button(), 'none'), clicked => sub {
+									  $colort = change_color($colort);
+									  $gct->set_foreground($colort);
+									  $_[0]->draw(undef);
+								      }),
 							    _("sent: "), $monitor->{$intf}{labelt} = new Gtk::Label("0")),
 					       0, gtkpack__(gtkset_border_width(new Gtk::HBox(0,5), 5),
-							    gtksignal_connect(my $button_r = new Gtk::Button(), clicked => sub {
-										  $colorr = change_color($colorr);
-										  $gcr->set_foreground($colorr);
-										  $_[0]->draw(undef);
-									      }),
+						    gtksignal_connect(my $button_r = gtkset_relief(new Gtk::Button(), 'none'), clicked => sub {
+									  $colorr = change_color($colorr);
+									  $gcr->set_foreground($colorr);
+									  $_[0]->draw(undef);
+								      }),
 							    _("received: "), $monitor->{$intf}{labelr} = new Gtk::Label("0")),
 					       0, gtkpack__(gtkset_border_width(new Gtk::HBox(0,5), 5),
-							    gtksignal_connect(my $button_a = new Gtk::Button(), clicked => sub {
-										  $colora = change_color($colora);
-										  $gca->set_foreground($colora);
-										  $_[0]->draw(undef);
-									      }),
+						    gtksignal_connect(my $button_a = gtkset_relief(new Gtk::Button(), 'none'), clicked => sub {
+									  $colora = change_color($colora);
+									  $gca->set_foreground($colora);
+									  $_[0]->draw(undef);
+								      }),
 							    _("average"))
 					       )),
 				   new Gtk::Label($intf));
