@@ -24,12 +24,21 @@ sub add_options(\$@) {
     $$option = join(',', keys %l) || "defaults";
 }
 
-sub raw_hds {
-    detect_devices::floppies(), detect_devices::cdroms(), 
-      (map { $_->{device} .= '4'; $_ } detect_devices::zips());
+
+sub get_raw_hds {
+    my ($prefix, $all_hds) = @_;
+
+    $all_hds->{raw_hds} = 
+      [ 
+       detect_devices::floppies(), detect_devices::cdroms(), 
+       (map { $_->{device} .= '4'; $_ } detect_devices::zips())
+      ];
+    my @fstab = read_fstab("$prefix/etc/fstab");
+    $all_hds->{nfss} = [ grep { isNfs($_) } @fstab ];
+    $all_hds->{smbs} = [ grep { isThisFs('smb', $_) } @fstab ];
 }
 
-sub read_fstab($) {
+sub read_fstab {
     my ($file) = @_;
 
     local *F;
@@ -88,7 +97,7 @@ sub mount_options_unpack {
     my %per_fs = (
 		  iso9660 => [ qw(unhide) ],
 		  vfat => [ qw(umask=0) ],
-		  nfs => [ 'rsize=8192,wsize=8192' ],
+		  nfs => [ qw(rsize=8192 wsize=8192) ],
 		 );
     while (my ($fs, $l) = each %per_fs) {
 	isThisFs($fs, $part) || $part->{type} eq 'auto' && member($fs, @auto_fs) or next;
@@ -114,6 +123,10 @@ sub mount_options_unpack {
 	    push @unknown, $_;
 	}
     }
+    # merge those, for cleaner help
+    $options{'rsize=8192,wsize=8192'} = delete $options{'rsize=8192'} && delete $options{'wsize=8192'}
+      if exists $options{'rsize=8192'};
+
     $options{autofs} = 1 if $part->{type} eq 'autofs';
     $options{supermount} = 1 if $part->{type} eq 'supermount';
 

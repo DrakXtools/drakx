@@ -65,7 +65,7 @@ I'll try to go on blanking bad partitions"), $err]);
 $SIG{__DIE__} = sub { my $m = chomp_($_[0]); log::l("ERROR: $m") };
 my $fstab = [ fsedit::get_all_fstab($all_hds) ];
 
-$all_hds->{raw_hds} = [ fs::raw_hds() ];
+fs::get_raw_hds('', $all_hds);
 
 fs::get_all_mntpoints_from_fstab($all_hds);
 fs::check_mounted($fstab);

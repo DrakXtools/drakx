@@ -75,7 +75,7 @@ sub typeOfPart {
 #- Functions
 #-######################################################################################
 sub empty_all_hds {
-    { hds => [], lvms => [], raids => [], loopbacks => [], raw_hds => [] };
+    { hds => [], lvms => [], raids => [], loopbacks => [], raw_hds => [], nfs => [], smb => [] };
 }
 sub recompute_loopbacks {
     my ($all_hds) = @_;
