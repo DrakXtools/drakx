@@ -459,6 +459,13 @@ sub installPackages($$) { #- complete REWORK, TODO and TOCHECK!
     any::writeandclean_ldsoconf($o->{prefix});
     delete $ENV{DURING_INSTALL};
     run_program::rooted_or_die($o->{prefix}, 'ldconfig');
+
+    eval {
+	run_program::rooted($o->{prefix}, 'gdk-pixbuf-query-loaders', '>', '/etc/gtk-2.0/gdk-pixbuf.loaders.' . (arch() =~ /64/ ? 'lib64' : 'lib'));
+	run_program::rooted($o->{prefix}, 'gtk-query-immodules-2.0', '>', '/etc/gtk-2.0/gtk.immodules.' . (arch() =~ /64/ ? 'lib64' : 'lib'));
+	run_program::rooted($o->{prefix}, 'pango-querymodules-' . (arch() =~ /64/ ? '64' : '32'), '>', '/etc/pango/' . (arch() =~ /i.86/ ? 'i386' : arch()) . '/pango.modules');
+    };
+
     log::l("Install took: ", formatTimeRaw(time() - $time));
     install_any::log_sizes($o);
     scalar(@toInstall); #- return number of packages installed.
