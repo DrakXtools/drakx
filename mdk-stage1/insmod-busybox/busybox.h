@@ -464,7 +464,7 @@ extern int sysinfo (struct sysinfo* info);
 #define isclr(a,i)      (((a)[(i)/NBBY] & (1<<((i)%NBBY))) == 0)
 #endif
 
-/* Merge from busybox 0.65.0 */
+/* Merge from busybox 0.60.5 */
 #define error_msg				errorMsg
 #define perror_msg(FORMAT,...)	error_msg(FORMAT ": %s", ## __VA_ARGS__, strerror(errno))
 #define recursive_action		recursiveAction

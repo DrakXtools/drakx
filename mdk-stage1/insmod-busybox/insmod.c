@@ -677,10 +677,10 @@ static const int STRVERSIONLEN = 32;
 
 /*======================================================================*/
 
-static int flag_force_load = 1;
-static int flag_autoclean = 0;
-static int flag_quiet = 0;
-static int flag_export = 1;
+static const int flag_force_load = 1;
+static const int flag_autoclean = 0;
+static const int flag_quiet = 0;
+static const int flag_export = 1;
 
 
 /*======================================================================*/
@@ -3411,6 +3411,7 @@ static void hide_special_symbols(struct obj_file *f)
 				ELFW(ST_INFO) (STB_LOCAL, ELFW(ST_TYPE) (sym->info));
 }
 
+#ifdef BB_FEATURE_INSMOD_CHECK_TAINTED
 static int obj_gpl_license(struct obj_file *f, const char **license)
 {
 	struct obj_section *sec;
@@ -3478,10 +3479,12 @@ static void set_tainted(struct obj_file *f, int fd, char *m_name,
 		write(fd, buf, strlen(buf));
 	}
 }
+#endif
 
 /* Check if loading this module will taint the kernel. */
 static void check_tainted_module(struct obj_file *f, char *m_name)
 {
+#ifdef BB_FEATURE_INSMOD_CHECK_TAINTED
 	static const char tainted_file[] = TAINT_FILENAME;
 	int fd, kernel_has_tainted;
 	const char *ptr;
@@ -3521,6 +3524,7 @@ static void check_tainted_module(struct obj_file *f, char *m_name)
 
 	if (fd >= 0)
 		close(fd);
+#endif
 }
 
 void my_usage(void)
@@ -3670,17 +3674,12 @@ extern int insmod_main( int argc, char **argv)
 	obj_allocate_commons(f);
 	check_tainted_module(f, m_name);
 
-	/* done with the module name, on to the optional var=value arguments */
-	++optind;
-
-	if (optind < argc) {
-		if (m_has_modinfo
-			? !new_process_module_arguments(f, argc - optind, argv + optind) 
-			: !old_process_module_arguments(f, argc - optind, argv + optind)) 
-		{
-			goto out;
-		}
-	}
+	if (m_has_modinfo
+		? !new_process_module_arguments(f, argc - 1, argv + 1) 
+		: !old_process_module_arguments(f, argc - 1, argv + 1)) 
+	  {
+		goto out;
+	  }
 
 	arch_create_got(f);
 	hide_special_symbols(f);
