@@ -294,8 +294,7 @@ sub build_list() {
 	my ($ip, $state);
 	if (-x "/sbin/ifconfig") {
 	    local $_ = `LC_ALL=C LANG=C LANGUAGE=C LC_MESSAGES=C /sbin/ifconfig "eth$i"`;
-	    /inet addr\:$ip_regexp/ or warn "Bad Ip\n";
-	    $ip = if_($1 && $2 && $3, "$1.$2.$3.$4");
+	    $ip = /inet addr\:$ip_regexp/ ? "$1.$2.$3.$4" : N("Bad Ip");
 	    $_ = `LC_ALL=C LANG=C LANGUAGE=C LC_MESSAGES=C /sbin/ifconfig`;
 	    $state = /eth$i/ ? "up" : "down";
 	} else { 
