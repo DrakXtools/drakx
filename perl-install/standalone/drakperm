@@ -271,6 +271,7 @@ sub row_setting_dialog {
     my %s_right = get_right($s);
      
     $file->set_text($model->get($iter, 1)) if $iter;
+    $ok->set_sensitive(!$model->get($iter, 0)) if $iter;
 
     my $users  = Gtk2::OptionMenu->new;
     $users->set_popdown_strings(&get_user_or_group('users'));
