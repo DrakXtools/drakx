@@ -532,7 +532,8 @@ sub installPackages {
 	    local $my_gtk::grab = 1;
 	    my $name = pkgs::mediumDescr($o->{packages}, $medium);
 	    print "\a";	    
-	    $name !~ /Application/ || ($o->{useless_thing_accepted2} ||= $o->ask_from_list_('', formatAlaTeX(_("
+	    my $time = time();
+	    my $r = $name !~ /Application/ || ($o->{useless_thing_accepted2} ||= $o->ask_from_list_('', formatAlaTeX(_("
 Warning
 
 Please read carefully the terms below. If you disagree with any
@@ -560,10 +561,14 @@ documentation is usually forbidden.
 All rights to the components of the next CD media belong to their 
 respective authors and are protected by intellectual property and 
 copyright laws applicable to software programs.
-")), [ __("Accept"), __("Refuse") ], "Accept") eq "Accept") and $o->ask_okcancel('', _("Change your Cd-Rom!
+")), [ __("Accept"), __("Refuse") ], "Accept") eq "Accept");
+            $r &&= $o->ask_okcancel('', _("Change your Cd-Rom!
 
 Please insert the Cd-Rom labelled \"%s\" in your drive and press Ok when done.
 If you don't have it, press Cancel to avoid installation from this Cd-Rom.", $name));
+            #- add the elapsed time (otherwise the predicted time will be rubbish)
+            $start_time += time() - $time;
+            $r;
 	};
     };
     catch_cdie { $o->install_steps::installPackages($packages); }
