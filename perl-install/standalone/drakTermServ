@@ -36,7 +36,6 @@ my @buff;	#- used to display status info
 
 my $central_widget;
 my $window1;
-my $windows;
 my $status_box;
 my $main_box;
 my $wizard_buttons;
@@ -231,7 +230,7 @@ sub interactive_mode() {
     $window1->{rwindow}->signal_connect(delete_event => sub { ugtk2->exit(0) });
     unless ($::isEmbedded) {
         $window1->{rwindow}->set_position('center');
-        $window1->{rwindow}->set_title(N("Mandrake Terminal Server Configuration"));
+        $window1->{rwindow}->set_title(N("Terminal Server Configuration"));
 		my $pixbuf_icon = gtkcreate_pixbuf("ic82-network-40");
 		$darea = Gtk2::DrawingArea->new;
 		$darea->set_size_request(540, 45);
@@ -263,7 +262,6 @@ sub interactive_mode() {
 						0, gtkadd(gtkset_layout(Gtk2::VButtonBox->new, 'end'),
 							gtksignal_connect(new Gtk2::Button(N("Enable Server")), clicked => sub {
 								destroy_widget();
-								$windows = 1;
 								cursor_wait(); 
 								enable_ts();
 								cursor_norm();
@@ -278,7 +276,6 @@ sub interactive_mode() {
 						0, gtkadd(gtkset_layout(Gtk2::VButtonBox->new, 'end'),
 							gtksignal_connect(new Gtk2::Button(N("Start Server")), clicked => sub { 
 								destroy_widget();
-								$windows = 0; 
 								cursor_wait();	
 								start_ts();
 								cursor_norm();
@@ -293,7 +290,6 @@ sub interactive_mode() {
 						0, gtkadd(gtkset_layout(Gtk2::VButtonBox->new, 'end'),
 							gtksignal_connect(new Gtk2::Button(N("Etherboot Floppy/ISO")), clicked => sub { 
 								destroy_widget();
-								$windows = 1; 
 								make_boot();
 							}),
 							gtksignal_connect(new Gtk2::Button(N("Net Boot Images")), clicked => sub {
@@ -304,7 +300,6 @@ sub interactive_mode() {
 						0, gtkadd(gtkset_layout(Gtk2::VButtonBox->new, 'end'),
 							gtksignal_connect(new Gtk2::Button(N("Add/Del Users")), clicked => sub {
 								destroy_widget();
-								$windows = 0;
 								maintain_users();
 							}),
 							gtksignal_connect(new Gtk2::Button(N("Add/Del Clients")), clicked => sub { destroy_widget(); maintain_clients() }),
@@ -1624,6 +1619,7 @@ sub addclient {
 		print CLIENT $client_entry;
 		close CLIENT;	
 		$changes_made = 1;
+		create_client_sysnetwork($hostname, $ip);
 		0;
 	} 
 }
@@ -1807,6 +1803,19 @@ sub client_hdw_config {
 	}	
 }
 
+sub create_client_sysnetwork {
+	#- this lets gnome operate properly since udhcpc doesn't get the hostname from the dhcpd server
+	my ($hostname, $ip) = @_;
+	log::explanations("Adding /etc/sysconfig/network for $ip");
+	my $network_file = "/etc/sysconfig/network\$\$IP=$ip\$\$";
+	local *NETWORK;
+	open(NETWORK, "> $network_file") or warn("Can't open $network_file!");
+	print NETWORK "HOSTNAME=$hostname\n";
+	print NETWORK "NETWORKING=yes\n";
+	print NETWORK "FORWARD_IPV4=false\n";
+	close NETWORK;	
+}
+
 sub restart_server() {
 	my $answer = $in->ask_yesorno('', N("Configuration changed - restart clusternfs/dhcpd?"));
 	if ($answer == 1) {
@@ -1827,6 +1836,7 @@ sub clean_client_config {
 	eval { rm_rf("/etc/modules$suffix") };
 	eval { rm_rf("/etc/X11/XF86Config$suffix") };
 	eval { rm_rf("/etc/X11/XF86Config-4$suffix") };
+	eval { rm_rf("/etc/sysconfig/network$suffix") };
 	remove_client_mounts($client_ip);
 }
 
