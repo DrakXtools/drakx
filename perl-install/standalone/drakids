@@ -35,9 +35,13 @@ my $w = ugtk2->new(N("Active Firewall : Blacklist"));
 gtkpack($w->{window},
         gtknew('VBox', spacing => 5, children => [
             1, gtknew('ScrolledWindow', width => 600, height => 400, child => $blacklist),
-            0, gtknew('HBox', children_tight => [
-                gtknew('Button', text => N("Remove from blacklist"),
-                       clicked => \&unblacklist)
+            0, gtknew('HBox', children_loose => [
+                   gtknew('HButtonBox', layout => 'start', children_loose => [
+                       gtknew('Button', text => N("Remove from blacklist"), clicked => \&unblacklist)
+                   ]),
+                   gtknew('HButtonBox', layout => 'end', children_loose => [
+                       gtknew('Button', text => N("Quit"), clicked => sub { Gtk2->main_quit })
+                   ])
             ]),
         ]));
 init_blacklist();
