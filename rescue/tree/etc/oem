@@ -676,7 +676,7 @@ sub select_packages {
     #- INSTALL class need to be copied as closure (unless installed after).
     #- but we have to remove kernel22 and kernel22-smp now obsolete for oem.
     foreach (@{$o->{packages}{needToCopy}}) {
-	/^(kernel22.*|raidtools|lvm|reiserfsprogs|xfsprogs|jfsprogs|XFree86-(Mach8|Mono))$/ and next;
+	/^(kernel22.*|raidtools|lvm|reiserfsprogs|xfsprogs|jfsprogs|XFree86-(Mach8|Mach32|Mono))$/ and next;
 	my $pkg = pkgs::packageByName($o->{packages}, $_);
 	pkgs::selectPackage($o->{packages}, $pkg);
     }
