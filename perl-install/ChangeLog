@@ -1,3 +1,73 @@
+2003/08/28  Daouda Lo  <daouda at mandrakesoft.com>
+
+	* ctxhelp.pm: 
+	  - put ctxhelp modules to prevent broken drakx build
+
+2003/08/28  Damien Chaumette  <dchaumette at mandrakesoft.com>
+
+	* network/adsl.pm: fix #4372
+
+2003/08/28  Frederic Lepied  <flepied at mandrakesoft.com>
+
+	* share/compssUsers.desktop, share/compssUsers: select Documentation for
+	all classes
+
+	* share/rpmsrate: removed drakprofile
+	removed linuxconf and gnome-network
+
+2003/08/28  François Pons  <fpons at mandrakesoft.com>
+
+	* share/compssUsers: make selected=all by default (so that RC1 (in
+	meta_class=download will see them)
+
+2003/08/28  Guillaume Cottenceau  <gc at mandrakesoft.com>
+
+	* detect_devices.pm: detect a laptop if cpu name contains "mobile" as many
+	recent laptops are in that case (in case other means would fail)
+
+2003/08/28  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/uz.po, share/po/uz@Cyrl.po: updated Uzbek files
+
+	* share/po/fi.po: updated Finnish file
+
+	* share/po/et.po: updated Estonian file
+
+2003/08/28  Pixel  <pixel at mandrakesoft.com>
+
+	* standalone.pm: fix MDK::Common::* explainations
+
+	* install_steps.pm: don't install autologin if using KDE or Gnome desktop
+	(not needed nor used)
+
+	* any.pm: 
+	  - configure /etc/sysconfig/autologin in case of xdm, but remove it if
+	kde/gnome
+	  - create any::sessions()
+	if there is only one users and meta_class is discovery, choose autologin
+	without asking
+
+2003/08/28  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* standalone.pm (output) remove buggy warn
+
+	* install_gtk.pm: fix direction setting for bidi (need perl-Gtk2-0.95-5mdk
+	though)
+
+	* ugtk2.pm (create_dialog) enable to pass an already created Gtk2::Label
+
+2003/08/27  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/hu.po: updated Hungarian file
+
+	* share/po/he.po: updated Hebrew file
+
+2003/08/27  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* any.pm, printer/cups.pm: fix pot regeneration at package build time
+
+	* drakxtools.spec: 9.2-4mdk
+
 2003/08/27  Alice Lafox  <alice at lafox.com.ua>
 
 	* share/po/ru.po: updated
@@ -20200,7 +20270,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.826 2003/08/26 14:23:32 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.827 2003/08/27 23:27:51 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
