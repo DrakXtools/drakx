@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10.2
-Release: 6mdk
+Release: 7mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -368,6 +368,23 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Thu Mar 17 2005 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.2-7mdk
+- drakconnect:
+  o fix localized sorting (#14634)
+  o manage interface (blino):
+    * allow to modify non configured devices
+    * really detect wireless devices
+- harddrake: fix adsl devices detection (blino, #14747)
+- logdrake: fix save dialog (blino)
+- printerdrake: fix queue name auto-generation, it sometimes hanged in
+  an endless loop (till, #14426, #14525, #14563)
+- XFdrake (pixel): 
+  o instead of having xorg.conf symlinked to XF86Config, do the
+    contrary
+  o use monitor-probe-using-X
+  o remove the "ratio" combo and have the resolutions from current
+    ratio by default and allow "Other" to see all others
+
 * Wed Mar 16 2005 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.2-6mdk
 - drakboot: fix dropping line macos in yaboot.conf (pixel, #14642)
 - drakconnect (blino):
