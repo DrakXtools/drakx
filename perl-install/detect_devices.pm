@@ -34,7 +34,7 @@ sub get() {
 
     getIDE(), getSCSI(), getDAC960(), getCompaqSmartArray(), getATARAID();
 }
-sub hds()         { grep { $_->{media_type} eq 'hd' && !isRemovableDrive($_) } get() }
+sub hds()         { grep { may_be_a_hd($_) } get() }
 sub tapes()       { grep { $_->{media_type} eq 'tape' } get() }
 sub cdroms()      { grep { $_->{media_type} eq 'cdrom' } get() }
 sub burners()     { grep { isBurner($_) } cdroms() }
@@ -178,12 +178,13 @@ sub isLS120Drive { $_[0]{info} =~ /LS-?120|144MB/ }
 sub isRemovableUsb { begins_with($_[0]{usb_media_type} || '', 'Mass Storage') && usb2removable($_[0]) }
 sub isKeyUsb { begins_with($_[0]{usb_media_type} || '', 'Mass Storage') && $_[0]{media_type} eq 'hd' }
 sub isFloppyUsb { $_[0]{usb_driver} && $_[0]{usb_driver} eq 'Removable:floppy' }
-sub isRemovableDrive { 
+sub may_be_a_hd { 
     my ($e) = @_;
-    isZipDrive($e) || isLS120Drive($e)
-      || $e->{media_type} && $e->{media_type} eq 'fd' 
-      || isRemovableUsb($e)
-      || begins_with($e->{usb_media_type} || '', 'Mass Storage|Floppy (UFI)');
+    $e->{media_type} eq 'hd' && !(
+	isZipDrive($e) 
+           || isLS120Drive($e)
+           || begins_with($e->{usb_media_type} || '', 'Mass Storage|Floppy (UFI)')
+    );
 }
 
 sub getSCSI_24() {
