@@ -470,7 +470,7 @@ sub read_all_conf {
     $netcnx->{type} or probe_netcnx_type($prefix, $netc, $intf, $netcnx);
 }
 sub probe_netcnx_type {
-    my ($prefix, undef, $intf, $netcnx) = @_;
+    my ($prefix, $_netc, $intf, $netcnx) = @_;
     #- try to probe $netcnx->{type} which is used almost everywhere.
     unless ($netcnx->{type}) {
 	#- ugly hack to determine network type (avoid saying not configured in summary).
