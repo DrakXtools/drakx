@@ -89,14 +89,14 @@ sub find {
 
 sub rewrite2 {
     my ($tree, $lang) = @_;
-    my $i18ned_open_text_quote  = $ {{ fr => "« ", de => "â€ž"}}{$lang};
-    my $i18ned_close_text_quote = $ {{ fr => " »", de => "â€œ"}}{$lang};
-    my $i18ned_open_label_quote  = $ {{ fr => "« ", de => "â€ž"}}{$lang};
-    my $i18ned_close_label_quote = $ {{ fr => " »", de => "â€œ"}}{$lang};
-    my $i18ned_open_command_quote  = $ {{ fr => "« ", de => "â€ž"}}{$lang};
-    my $i18ned_close_command_quote = $ {{ fr => " »", de => "â€œ"}}{$lang};
-    my $i18ned_open_input_quote  = $ {{ fr => "« ", de => "Â»"}}{$lang};
-    my $i18ned_close_input_quote = $ {{ fr => " »", de => "Â«"}}{$lang};
+    our $i18ned_open_text_quote  = $ {{ fr => "« ", de => "â€ž"}}{$lang};
+    our $i18ned_close_text_quote = $ {{ fr => " »", de => "â€œ"}}{$lang};
+    our $i18ned_open_label_quote  = $ {{ fr => "« ", de => "â€ž"}}{$lang};
+    our $i18ned_close_label_quote = $ {{ fr => " »", de => "â€œ"}}{$lang};
+    our $i18ned_open_command_quote  = $ {{ fr => "« ", de => "â€ž"}}{$lang};
+    our $i18ned_close_command_quote = $ {{ fr => " »", de => "â€œ"}}{$lang};
+    our $i18ned_open_input_quote  = $ {{ fr => "« ", de => "Â»"}}{$lang};
+    our $i18ned_close_input_quote = $ {{ fr => " »", de => "Â«"}}{$lang};
     # rewrite2_ fills in $help
     $help = {};
     rewrite2_($tree);
