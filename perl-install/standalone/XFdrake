@@ -45,7 +45,7 @@ begin:
 my $in = interactive->vnew('su');
 
 my $f = "/usr/X11R6/lib/X11/Cards";
-standalone::pkgs_install('XFree86', 'XFree86-75dpi-fonts') if (! -e $f);
+$in->standalone::pkgs_install('XFree86', 'XFree86-75dpi-fonts') if (! -e $f);
 -e $f or die "install XFree86 first!\n";
 
 `pidof xfs` > 0 or system("/etc/rc.d/init.d/xfs start");
