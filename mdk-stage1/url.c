@@ -423,8 +423,8 @@ int http_download_file(char * hostname, char * remotename, int * size)
 		return FTPERR_FAILED_CONNECT;
 	}
 
-	buf = alloca(strlen(remotename) + 20);
-	sprintf(buf, "GET %s HTTP/0.9\r\n\r\n", remotename);
+	buf = alloca(4 + strlen(remotename) + 12 + 6 + strlen(hostname) + 4 + 1);
+	sprintf(buf, "GET %s HTTP/0.9\r\nHost: %s\r\n\r\n", remotename, hostname);
 	write(sock, buf, strlen(buf));
 
 	/* This is fun; read the response a character at a time until we:
