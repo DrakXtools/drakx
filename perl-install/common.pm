@@ -428,6 +428,7 @@ sub getVarsFromSh($) {
     local *F; open F, $_[0] or return;
     local $_;
     while (<F>) {
+	s/#.*//; # remove comments
 	my ($v, $val, $val2) =
 	  /^\s*			# leading space
 	   (\w+) =		# variable
