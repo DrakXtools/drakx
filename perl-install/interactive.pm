@@ -284,6 +284,42 @@ sub ask_from_entries_refH_powered_no_check {
 }
 
 
+sub ask_browse_tree_info {
+    my ($o, $title, $message, $common) = @_;
+    add2hash_($common, { ok => _("Ok"), cancel => _("Cancel") });
+    add2hash_($common, { title => $title, message => $message });
+    add2hash_($common, { grep_allowed_to_toggle      => sub { @_ },
+			 grep_unselected             => sub { grep { $common->{node_state}($_) eq 'unselected' } @_ },
+			 check_interactive_to_toggle => sub { 1 },
+			 toggle_nodes                => sub {
+			     my ($set_state, @nodes) = @_;
+			     my $new_state = !$common->{grep_unselected}($nodes[0]) ? 'selected' : 'unselected';
+			     $set_state->($_, $new_state) foreach @nodes;
+			 },
+		       });
+    $o->ask_browse_tree_info_refW($common);
+}
+sub ask_browse_tree_info_refW { #- default definition, do not use with too many items (memory consuming)
+    my ($o, $common) = @_;
+    my ($l, $v, $h) = ([], [], {});
+    $common->{build_tree}(sub {
+			      my ($node) = $common->{grep_allowed_to_toggle}(@_);
+			      if (my $state = $node && $common->{node_state}($node)) {
+				  push @$l, $node;
+				  $state eq 'selected' and push @$v, $node;
+				  $h->{$node} = $state eq 'selected';
+			      }
+			  }, 'flat');
+    add2hash_($common, { list   => $l, #- TODO interactivity of toggle is missing
+			 values => $v,
+			 help   => sub { $common->{get_info}($_) },
+		       });
+    my ($new_v) = $o->ask_many_from_list($common->{title}, $common->{message}, $common) or return;
+    $common->{toggle_nodes}(sub {}, grep { ! delete $h->{$_} } @$new_v);
+    $common->{toggle_nodes}(sub {}, grep { $h->{$_} } keys %$h);
+    1;
+}
+
 sub wait_message {
     my ($o, $title, $message, $temp) = @_;
 
