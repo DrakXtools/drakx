@@ -25,16 +25,18 @@ msgstr ""
 "Per-bruker deling bruker gruppen \"fileshare\". \n"
 "Du kan bruke userdrake til å legge til en bruker i denne gruppen."
 
-#: ../../any.pm:1 ../../bootlook.pm:1 ../../install_steps_gtk.pm:1
-#: ../../interactive.pm:1 ../../my_gtk.pm:1 ../../ugtk2.pm:1 ../../ugtk.pm:1
+#: ../../any.pm:1 ../../install_steps_gtk.pm:1
+#: ../../install_steps_interactive.pm:1 ../../interactive.pm:1
+#: ../../my_gtk.pm:1 ../../ugtk2.pm:1 ../../ugtk.pm:1
 #: ../../Xconfig/resolution_and_depth.pm:1 ../../diskdrake/smbnfs_gtk.pm:1
 #: ../../interactive/http.pm:1 ../../interactive/newt.pm:1
 #: ../../interactive/stdio.pm:1 ../../network/netconnect.pm:1
 #: ../../printer/printerdrake.pm:1 ../../standalone/drakautoinst:1
-#: ../../standalone/drakbackup:1 ../../standalone/drakconnect:1
-#: ../../standalone/drakfloppy:1 ../../standalone/drakfont:1
-#: ../../standalone/drakgw:1 ../../standalone/draksec:1
-#: ../../standalone/logdrake:1 ../../standalone/net_monitor:1
+#: ../../standalone/drakbackup:1 ../../standalone/drakboot:1
+#: ../../standalone/drakconnect:1 ../../standalone/drakfloppy:1
+#: ../../standalone/drakfont:1 ../../standalone/drakgw:1
+#: ../../standalone/draksec:1 ../../standalone/logdrake:1
+#: ../../standalone/net_monitor:1
 #, c-format
 msgid "Cancel"
 msgstr "Avbryt"
@@ -768,219 +770,6 @@ msgstr ""
 "vent %d sekunder for standard oppstart.\n"
 "\n"
 
-#: ../../bootlook.pm:1 ../../ugtk2.pm:1 ../../ugtk.pm:1
-#: ../../network/netconnect.pm:1 ../../standalone/drakTermServ:1
-#: ../../standalone/drakbackup:1 ../../standalone/drakconnect:1
-#: ../../standalone/drakfont:1 ../../standalone/net_monitor:1
-#, c-format
-msgid "OK"
-msgstr "OK"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "No, I don't want autologin"
-msgstr "Nei, jeg vil ikke ha autologin"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Yes, I want autologin with this (user, desktop)"
-msgstr "Ja, jeg vil ha autologin med denne (bruker; skrivebord)"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Launch the graphical environment when your system starts"
-msgstr "Start W-Windowsystemet ved oppstart"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "System mode"
-msgstr "Systemmodus"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Bootsplash"
-msgstr "Bootsplash"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Lilo screen"
-msgstr "Lilo skjerm"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid ""
-"\n"
-"Select the theme for\n"
-"lilo and bootsplash,\n"
-"you can choose\n"
-"them separately"
-msgstr ""
-"\n"
-"Velg tema for\n"
-"lilo og bootsplash,\n"
-"du kan velge\n"
-"de separat"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Themes"
-msgstr "Teamer"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Splash selection"
-msgstr "Splash valg"
-
-#: ../../bootlook.pm:1 ../../install_steps_gtk.pm:1
-#: ../../standalone/drakbackup:1 ../../standalone/drakgw:1
-#, c-format
-msgid "Configure"
-msgstr "Konfigurer"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid ""
-"You are currently using %s as your boot manager.\n"
-"Click on Configure to launch the setup wizard."
-msgstr ""
-"Du bruker for øyeblikket %s som oppstartshåndterer.\n"
-"Klikk på Konfigurer for å starte oppsett-hjelperen."
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "LiLo and Bootsplash themes installation successfull"
-msgstr "LiLo og Bootsplash temaer installert suksessfullt"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Theme installation failed!"
-msgstr "Tema installasjon mislykket!"
-
-#: ../../bootlook.pm:1 ../../standalone/draksplash:1
-#, c-format
-msgid "Notice"
-msgstr "Notis"
-
-#: ../../bootlook.pm:1 ../../fsedit.pm:1 ../../install_steps_interactive.pm:1
-#: ../../install_steps.pm:1 ../../diskdrake/dav.pm:1
-#: ../../diskdrake/hd_gtk.pm:1 ../../diskdrake/interactive.pm:1
-#: ../../diskdrake/smbnfs_gtk.pm:1 ../../interactive/http.pm:1
-#: ../../standalone/draksplash:1
-#, c-format
-msgid "Error"
-msgstr "Feil"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Relaunch 'lilo'"
-msgstr "Start 'lilo' på nytt"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid ""
-"Can't relaunch LiLo!\n"
-"Launch \"lilo\" as root in command line to complete LiLo theme installation."
-msgstr ""
-"Kan ikke starte LiLo på nytt!\n"
-"Start \"lilo\" som root i kommandolinjen for å fullføre LiLo tema "
-"installasjon."
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Make initrd 'mkinitrd -f /boot/initrd-%s.img %s'."
-msgstr "Lag initrd 'mkinitrd -f /boot/initrd-%s.img %s'."
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Can't launch mkinitrd -f /boot/initrd-%s.img %s."
-msgstr "Kan ikke starte mkinitrd -f /boot/initrd-%s.img %s."
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid ""
-"Can't write /etc/sysconfig/bootsplash\n"
-"File not found."
-msgstr ""
-"Kan ikke skrive /etc/sysconfig/bootsplash\n"
-"Fil ikke funnet."
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Write %s"
-msgstr "Skriv %s"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Can't write /etc/sysconfig/bootsplash."
-msgstr "Kan ikke skrive /etc/sysconfig/bootsplash."
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Lilo message not found"
-msgstr "Lilo beskjed ikke funnet"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Copy %s to %s"
-msgstr "Kopier %s til %s"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Backup %s to %s.old"
-msgstr "Backup %s til %s.old"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Create new theme"
-msgstr "Opprett nytt tema"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid ""
-"Display theme\n"
-"under console"
-msgstr ""
-"Vis tema\n"
-"under konsoll"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Install themes"
-msgstr "Installer temaer"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Lilo/grub mode"
-msgstr "Lilo/grub modus"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Yaboot mode"
-msgstr "Yaboot modus"
-
-#: ../../bootlook.pm:1 ../../standalone/drakfloppy:1
-#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
-#, c-format
-msgid "<control>Q"
-msgstr "<control>Q"
-
-#: ../../bootlook.pm:1 ../../standalone/drakfloppy:1
-#: ../../standalone/logdrake:1
-#, c-format
-msgid "/File/_Quit"
-msgstr "/Fil/_Avslutt"
-
-#: ../../bootlook.pm:1 ../../standalone/drakfloppy:1
-#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
-#, c-format
-msgid "/_File"
-msgstr "/_Fil"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Boot Style Configuration"
-msgstr "Oppstartsstilkonfigurasjon"
-
 #: ../../common.pm:1
 #, c-format
 msgid "consolehelper missing"
@@ -1188,6 +977,15 @@ msgstr ""
 "(feilen er %s)\n"
 "\n"
 "Vil du miste alle partisjonene?\n"
+
+#: ../../fsedit.pm:1 ../../install_steps_interactive.pm:1
+#: ../../install_steps.pm:1 ../../diskdrake/dav.pm:1
+#: ../../diskdrake/hd_gtk.pm:1 ../../diskdrake/interactive.pm:1
+#: ../../diskdrake/smbnfs_gtk.pm:1 ../../interactive/http.pm:1
+#: ../../standalone/drakboot:1 ../../standalone/draksplash:1
+#, c-format
+msgid "Error"
+msgstr "Feil"
 
 #: ../../fsedit.pm:1
 #, c-format
@@ -3748,6 +3546,7 @@ msgstr "Entrer trinn `%s'\n"
 #: ../../Xconfig/resolution_and_depth.pm:1 ../../diskdrake/hd_gtk.pm:1
 #: ../../interactive/gtk.pm:1 ../../standalone/drakTermServ:1
 #: ../../standalone/drakbackup:1 ../../standalone/drakbug:1
+#: ../../standalone/harddrake2:1
 #, c-format
 msgid "Help"
 msgstr "Hjelp"
@@ -3756,6 +3555,12 @@ msgstr "Hjelp"
 #, c-format
 msgid "not configured"
 msgstr "ikke konfigurert"
+
+#: ../../install_steps_gtk.pm:1 ../../standalone/drakbackup:1
+#: ../../standalone/drakboot:1 ../../standalone/drakgw:1
+#, c-format
+msgid "Configure"
+msgstr "Konfigurer"
 
 #: ../../install_steps_gtk.pm:1 ../../install_steps_interactive.pm:1
 #, c-format
@@ -4371,6 +4176,16 @@ msgstr "Maskinvareklokken din satt til GMT"
 #, c-format
 msgid "Which is your timezone?"
 msgstr "Hva er din tidsone?"
+
+#: ../../install_steps_interactive.pm:1
+#, fuzzy, c-format
+msgid "Would you like to try again?"
+msgstr "Ønsker du å konfigurere en skriver?"
+
+#: ../../install_steps_interactive.pm:1
+#, fuzzy, c-format
+msgid "Unable to contact mirror %s"
+msgstr "Kan ikke dele %s"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -7352,6 +7167,14 @@ msgstr "Velg språk"
 msgid "utopia 25"
 msgstr ""
 
+#: ../../ugtk2.pm:1 ../../ugtk.pm:1 ../../network/netconnect.pm:1
+#: ../../standalone/drakTermServ:1 ../../standalone/drakbackup:1
+#: ../../standalone/drakboot:1 ../../standalone/drakconnect:1
+#: ../../standalone/drakfont:1 ../../standalone/net_monitor:1
+#, c-format
+msgid "OK"
+msgstr "OK"
+
 #: ../../ugtk2.pm:1 ../../ugtk.pm:1 ../../standalone/logdrake:1
 #, c-format
 msgid "logdrake"
@@ -7532,7 +7355,7 @@ msgstr ""
 
 #: ../../Xconfig/main.pm:1 ../../diskdrake/dav.pm:1
 #: ../../diskdrake/interactive.pm:1 ../../diskdrake/removable.pm:1
-#: ../../diskdrake/smbnfs_gtk.pm:1
+#: ../../diskdrake/smbnfs_gtk.pm:1 ../../standalone/harddrake2:1
 #, c-format
 msgid "Options"
 msgstr "Valg"
@@ -8704,6 +8527,11 @@ msgstr ""
 #: ../../harddrake/data.pm:1
 #, c-format
 msgid "SCSI controllers"
+msgstr ""
+
+#: ../../harddrake/data.pm:1
+#, c-format
+msgid "Firewire controllers"
 msgstr ""
 
 #: ../../harddrake/data.pm:1
@@ -15271,6 +15099,196 @@ msgstr ""
 msgid "Installation of %s failed. The following error occured:"
 msgstr "Installasjon av %s mislykket. Følgende feil oppsto:"
 
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "No, I don't want autologin"
+msgstr "Nei, jeg vil ikke ha autologin"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Yes, I want autologin with this (user, desktop)"
+msgstr "Ja, jeg vil ha autologin med denne (bruker; skrivebord)"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Launch the graphical environment when your system starts"
+msgstr "Start W-Windowsystemet ved oppstart"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "System mode"
+msgstr "Systemmodus"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Bootsplash"
+msgstr "Bootsplash"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Lilo screen"
+msgstr "Lilo skjerm"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid ""
+"\n"
+"Select the theme for\n"
+"lilo and bootsplash,\n"
+"you can choose\n"
+"them separately"
+msgstr ""
+"\n"
+"Velg tema for\n"
+"lilo og bootsplash,\n"
+"du kan velge\n"
+"de separat"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Themes"
+msgstr "Teamer"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Splash selection"
+msgstr "Splash valg"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid ""
+"You are currently using %s as your boot manager.\n"
+"Click on Configure to launch the setup wizard."
+msgstr ""
+"Du bruker for øyeblikket %s som oppstartshåndterer.\n"
+"Klikk på Konfigurer for å starte oppsett-hjelperen."
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "LiLo and Bootsplash themes installation successfull"
+msgstr "LiLo og Bootsplash temaer installert suksessfullt"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Theme installation failed!"
+msgstr "Tema installasjon mislykket!"
+
+#: ../../standalone/drakboot:1 ../../standalone/draksplash:1
+#, c-format
+msgid "Notice"
+msgstr "Notis"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Relaunch 'lilo'"
+msgstr "Start 'lilo' på nytt"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid ""
+"Can't relaunch LiLo!\n"
+"Launch \"lilo\" as root in command line to complete LiLo theme installation."
+msgstr ""
+"Kan ikke starte LiLo på nytt!\n"
+"Start \"lilo\" som root i kommandolinjen for å fullføre LiLo tema "
+"installasjon."
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Make initrd 'mkinitrd -f /boot/initrd-%s.img %s'."
+msgstr "Lag initrd 'mkinitrd -f /boot/initrd-%s.img %s'."
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Can't launch mkinitrd -f /boot/initrd-%s.img %s."
+msgstr "Kan ikke starte mkinitrd -f /boot/initrd-%s.img %s."
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid ""
+"Can't write /etc/sysconfig/bootsplash\n"
+"File not found."
+msgstr ""
+"Kan ikke skrive /etc/sysconfig/bootsplash\n"
+"Fil ikke funnet."
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Write %s"
+msgstr "Skriv %s"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Can't write /etc/sysconfig/bootsplash."
+msgstr "Kan ikke skrive /etc/sysconfig/bootsplash."
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Lilo message not found"
+msgstr "Lilo beskjed ikke funnet"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Copy %s to %s"
+msgstr "Kopier %s til %s"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Backup %s to %s.old"
+msgstr "Backup %s til %s.old"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Create new theme"
+msgstr "Opprett nytt tema"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid ""
+"Display theme\n"
+"under console"
+msgstr ""
+"Vis tema\n"
+"under konsoll"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Install themes"
+msgstr "Installer temaer"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Lilo/grub mode"
+msgstr "Lilo/grub modus"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Yaboot mode"
+msgstr "Yaboot modus"
+
+#: ../../standalone/drakboot:1 ../../standalone/drakfloppy:1
+#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
+#, c-format
+msgid "<control>Q"
+msgstr "<control>Q"
+
+#: ../../standalone/drakboot:1 ../../standalone/drakfloppy:1
+#: ../../standalone/logdrake:1
+#, c-format
+msgid "/File/_Quit"
+msgstr "/Fil/_Avslutt"
+
+#: ../../standalone/drakboot:1 ../../standalone/drakfloppy:1
+#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
+#, c-format
+msgid "/_File"
+msgstr "/_Fil"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Boot Style Configuration"
+msgstr "Oppstartsstilkonfigurasjon"
+
 #: ../../standalone/drakbug:1
 #, c-format
 msgid "No browser available! Please install one"
@@ -15409,6 +15427,16 @@ msgstr "Mandrake bugrapporterings verktøy"
 
 #: ../../standalone/drakconnect:1
 #, c-format
+msgid "Parameters"
+msgstr "Parametere"
+
+#: ../../standalone/drakconnect:1
+#, c-format
+msgid "Internet Connection Configuration"
+msgstr "Internett tilkobling konfigurasjon"
+
+#: ../../standalone/drakconnect:1
+#, c-format
 msgid "DHCP Client"
 msgstr "DHCP-klient"
 
@@ -15422,11 +15450,6 @@ msgstr "Ethernettkort"
 msgid "Gateway"
 msgstr "Gateway"
 
-#: ../../standalone/drakconnect:1
-#, c-format
-msgid "Parameters"
-msgstr "Parametere"
-
 #: ../../standalone/drakconnect:1 ../../standalone/net_monitor:1
 #, c-format
 msgid "Connection type: "
@@ -15436,11 +15459,6 @@ msgstr "Oppkoblingstype:"
 #, c-format
 msgid "Profile: "
 msgstr "Profil: "
-
-#: ../../standalone/drakconnect:1
-#, c-format
-msgid "Internet Connection Configuration"
-msgstr "Internett tilkobling konfigurasjon"
 
 #: ../../standalone/drakconnect:1
 #, c-format
@@ -15706,8 +15724,8 @@ msgstr "Fjern en modul"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
-msgid "omit raid modules"
-msgstr "utelat raid moduler"
+msgid "Add a module"
+msgstr "Legg til en modul"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
@@ -15721,13 +15739,13 @@ msgstr "hvis det behøves"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
-msgid "force"
-msgstr "tving"
+msgid "omit raid modules"
+msgstr "utelat raid moduler"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
-msgid "Add a module"
-msgstr "Legg til en modul"
+msgid "force"
+msgstr "tving"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
@@ -15741,23 +15759,18 @@ msgstr "Ekspert område"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
-msgid "General"
-msgstr "Generelt"
-
-#: ../../standalone/drakfloppy:1
-#, c-format
 msgid "kernel version"
 msgstr "kernel versjon"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
-msgid "DrakFloppy Error: %s"
-msgstr "Feil: DrakFloppy: %s"
+msgid "default"
+msgstr "standard"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
-msgid "default"
-msgstr "standard"
+msgid "General"
+msgstr "Generelt"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
@@ -15778,11 +15791,6 @@ msgstr "Størrelse"
 #, c-format
 msgid "Module name"
 msgstr "Modulnavn"
-
-#: ../../standalone/drakfloppy:1
-#, c-format
-msgid "-misc-Fixed-Medium-r-*-*-*-140-*-*-*-*-*-*,*"
-msgstr "-misc-Fixed-Medium-r-*-*-*-140-*-*-*-*-*-*,*"
 
 #: ../../standalone/drakfont:1
 #, c-format
@@ -16494,19 +16502,6 @@ msgstr ""
 
 #: ../../standalone/drakperm:1
 #, c-format
-msgid "select perm file to see/edit"
-msgstr ""
-
-#: ../../standalone/drakperm:1
-#, c-format
-msgid ""
-"Drakperm is used to see files to use in order to fix permissions, owners, "
-"and groups via msec.\n"
-"You can also edit your own rules which will owerwrite the default rules."
-msgstr ""
-
-#: ../../standalone/drakperm:1
-#, c-format
 msgid "Edit current rule"
 msgstr ""
 
@@ -16553,6 +16548,19 @@ msgstr ""
 #: ../../standalone/drakperm:1
 #, c-format
 msgid "Up"
+msgstr ""
+
+#: ../../standalone/drakperm:1
+#, c-format
+msgid "select perm file to see/edit"
+msgstr ""
+
+#: ../../standalone/drakperm:1
+#, c-format
+msgid ""
+"Drakperm is used to see files to use in order to fix permissions, owners, "
+"and groups via msec.\n"
+"You can also edit your own rules which will owerwrite the default rules."
 msgstr ""
 
 #: ../../standalone/drakperm:1
@@ -17177,11 +17185,6 @@ msgstr "Om Harddrake"
 msgid "/_About..."
 msgstr "/_Om..."
 
-#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
-#, c-format
-msgid "/_Help"
-msgstr "/_Hjelp"
-
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "/_Report Bug"
@@ -17218,6 +17221,11 @@ msgstr "Harddrake hjelp"
 msgid "/_Fields description"
 msgstr "Beskrivelse"
 
+#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
+#, c-format
+msgid "/_Help"
+msgstr "/_Hjelp"
+
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "/_Quit"
@@ -17228,11 +17236,6 @@ msgstr "/_Avslutt"
 msgid "/Autodetect _jazz drives"
 msgstr "Utfør automatisk detektering"
 
-#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
-#, c-format
-msgid "/_Options"
-msgstr "/_Valg"
-
 #: ../../standalone/harddrake2:1
 #, fuzzy, c-format
 msgid "/Autodetect _modems"
@@ -17242,6 +17245,11 @@ msgstr "Utfør automatisk detektering"
 #, fuzzy, c-format
 msgid "/Autodetect _printers"
 msgstr "Utfør automatisk detektering"
+
+#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
+#, c-format
+msgid "/_Options"
+msgstr "/_Valg"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -18175,16 +18183,6 @@ msgstr ""
 
 #: ../../standalone/scannerdrake:1
 #, c-format
-msgid ""
-"The %s must be configured by printerdrake.\n"
-"You can launch printerdrake from the Mandrake Control Center in Hardware "
-"section."
-msgstr ""
-"%s må være konfigurert av printerdrake.\n"
-"Du kan kjøre Mandrake Conrol Center fra maskinvareseksjonen."
-
-#: ../../standalone/scannerdrake:1
-#, c-format
 msgid "choose device"
 msgstr "velg enhet"
 
@@ -18209,6 +18207,16 @@ msgstr "Utfør automatisk detektering"
 #, c-format
 msgid "(Note: Parallel ports cannot be auto-detected)"
 msgstr ""
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid ""
+"The %s must be configured by printerdrake.\n"
+"You can launch printerdrake from the Mandrake Control Center in Hardware "
+"section."
+msgstr ""
+"%s må være konfigurert av printerdrake.\n"
+"Du kan kjøre Mandrake Conrol Center fra maskinvareseksjonen."
 
 #: ../../standalone/scannerdrake:1
 #, c-format
@@ -18524,6 +18532,12 @@ msgstr "Personlig finans"
 msgid "Programs to manage your finances, such as gnucash"
 msgstr "Programmer for å håndtere dine finanser, så som gnucash"
 
+#~ msgid "DrakFloppy Error: %s"
+#~ msgstr "Feil: DrakFloppy: %s"
+
+#~ msgid "-misc-Fixed-Medium-r-*-*-*-140-*-*-*-*-*-*,*"
+#~ msgstr "-misc-Fixed-Medium-r-*-*-*-140-*-*-*-*-*-*,*"
+
 #~ msgid "Launch Aurora at boot time"
 #~ msgstr "Start Aurora ved oppstart"
 
@@ -18599,9 +18613,6 @@ msgstr "Programmer for å håndtere dine finanser, så som gnucash"
 
 #~ msgid "Know how to use this printer"
 #~ msgstr "Vet hvordan man skal bruke denne skriveren"
-
-#~ msgid "Would you like to configure printing?"
-#~ msgstr "Ønsker du å konfigurere en skriver?"
 
 #~ msgid "Preparing Printerdrake..."
 #~ msgstr "Klargjører PrinterDrake..."
