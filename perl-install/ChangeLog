@@ -1,3 +1,66 @@
+2001/02/15  dam's  <damien@mandrakesoft.com>
+
+	* my_gtk.pm, any.pm, install_gtk.pm, install_steps_interactive.pm,
+	install_steps_gtk.pm, interactive_gtk.pm: added png support. Need to
+	test the faces2xpm stuff.
+
+	* share/step-orange-click.xpm, share/rpm-selected.xpm,
+	share/step-green-click.xpm, share/step-green.xpm, share/rpm-base.xpm,
+	share/ftin.xpm, share/step-orange-on.xpm, share/ftout.xpm,
+	share/step-red-click.xpm, share/step-green-on.xpm,
+	share/rpm-unselected.xpm, share/step-red.xpm, share/step-orange.xpm,
+	share/reload.xpm, share/rpm-semiselected.xpm,
+	share/logo-mandrake-Desktop.xpm, share/rpm-installed.xpm,
+	share/step-red-on.xpm: removed, png are used instead.
+
+	* standalone/draknet: updated internet and added eth conf
+
+	* share/help.xpm, share/logo-mandrake.xpm: removed, png are used instead.
+	added png images
+
+	* share/step-red.png, share/step-orange.png, share/reload.png,
+	share/logo-mandrake.png, share/rpm-semiselected.png,
+	share/logo-mandrake-Desktop.png, share/rpm-installed.png,
+	share/logo-mandrake_sav.png, share/step-red-on.png, share/help_sav.png,
+	share/rpm-selected.png, share/step-orange-click.png,
+	share/step-green-click.png, share/step-green.png, share/rpm-base.png,
+	share/logo-mandrake2.png, share/ftin.png, share/help.png,
+	share/step-orange-on.png, share/step-green-on.png, share/ftout.png,
+	share/step-red-click.png, share/step-green_s.png, share/themes-mdk.rc,
+	share/rpm-unselected.png: added png images
+
+2001/02/15  Pixel  <pixel@mandrakesoft.com>
+
+	* Makefile (get_needed_files): copy png files instead of xpm's
+
+	* install2.pm (main): set SHARE_PATH to /export/Mandrake/mdkinst/usr/share
+	if it exists
+	(selectKeyboard): give clicked as parameter
+
+	* my_gtk.pm (gtkcreate_png): add error message, syntax cleanup
+
+	* fsedit.pm (suggestions_mntpoint): fix typo
+
+	* share/list: add GdkImlib stuff
+
+	* perl2fcalls: add Gtk::Gdk::ImlibImage
+
+	* install_steps_interactive.pm (summary): better message for i18n
+
+	* install_steps_gtk.pm (installPackages): traktolpilization and
+	advertising
+
+2001/02/14  dam's  <damien@mandrakesoft.com>
+
+	* network.pm, standalone/draknet: wireless updated
+
+	* share/help.xpm, share/themes-mdk.rc, share/logo-mandrake.xpm: valentin
+	theme :)
+
+2001/02/14  Pixel  <pixel@mandrakesoft.com>
+
+	* install_steps.pm (afterInstallPackages): add user in group usb
+
 2001/02/14  dam's  <damien@mandrakesoft.com>
 
 	* share/themes-mdk.rc: valentin theme :)
