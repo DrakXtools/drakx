@@ -815,6 +815,7 @@ sub Add2RAID {
     if (ref($md_part)) {
 	raid::add($md_part, $part);
     } else {
+	raid::check_prog($in) or return;
 	my $md_part = raid::new($raids, disks => [ $part ]);
 	modifyRAID($in, $raids, $md_part) or return raid::delete($raids, $md_part);
     }
