@@ -73,7 +73,7 @@ $my_win->{window}->add(gtkpack_(gtkset_border_width(Gtk2::VBox->new, $::isEmbedd
                                             1, gtkpack_(Gtk2::VBox->new,
                                                         0, $calendar,
                                                         0, gtkadd(gtkset_shadow_type(Gtk2::Frame->new(N("Timezone")), 'etched_in'),
-                                                                  gtkpack_(gtkset_border_width(Gtk2::VBox->new, 5),
+                                                                  gtkpack__(gtkset_border_width(Gtk2::VBox->new, 5),
                                                                             $label_timezone,
                                                                             $button_time)),
                                                         1, gtkadd(gtkset_shadow_type(Gtk2::Frame->new(N("Network Time Protocol")), 'etched_in'),
