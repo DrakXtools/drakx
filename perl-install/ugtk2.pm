@@ -799,6 +799,9 @@ sub wrap_paragraph {
             my $currentx;
             foreach (@elements) {
                 my ($text, %options) = @$_;
+                #- hack :( if ' ' is at the beginning, don't forget it, substitute
+                #- with an unbreakable space because gtk allocates too much space otherwise
+                $text =~ /^ (.*)/ and $text = " $1";
                 my @newlines = get_text_coord($text, $widget4style, $max_width, $currentx, $ydec);
                 $currentx = $newlines[-1]{'x'} + $newlines[-1]{width};
                 $ydec = $newlines[-1]{'y'};
