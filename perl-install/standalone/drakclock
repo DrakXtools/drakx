@@ -233,9 +233,7 @@ sub changed() {
 sub spinned() {
     Glib::Source->remove($timer);
     $button_reset->set_sensitive(1);
-
-    my (undef, undef, undef, @values) = localtime(time());
-    time_to_rad($adjs->get_value, $adjm->get_value, $adjh->get_value, @values);
+    time_to_rad($adjs->get_value, $adjm->get_value, $adjh->get_value);
     Repaint($drawing_area);
     0;
 }
