@@ -86,7 +86,7 @@ sub init {
     #- because programs most often won't try to create the missing subdir before trying
     #- to write a file, leading to obscure unexpected failures
     -d $_ or mkdir_p $_ foreach chomp_(cat_('/image/move/directories-to-create'));
-    
+
     #- remaining non existent /etc files are symlinked from the RO volume,
     #- better to have them RO than non existent.
     #- PB: problems arise when programs try to open then in O_WRONLY
@@ -327,9 +327,7 @@ sub install2::configMove {
     install_steps_interactive::summaryBefore($o);
 
     modules::load_category('multimedia/sound');
-    run_program::run('service', 'sound', 'start');
-
-    install_TrueFS_in_home($o);
+    run_program::raw({ detach => 1 }, 'service', 'sound', 'start');
 
     $o->{useSupermount} = 1;
     fs::set_removable_mntpoints($o->{all_hds});    
@@ -338,7 +336,6 @@ sub install2::configMove {
     require install_any;
     install_any::write_fstab($o);
     $_->{mntpoint} && !$_->{isMounted} and run_program::run('mount', $_->{mntpoint}) foreach fsedit::get_really_all_fstab($o->{all_hds});
-    $o->{fstab} = [ fsedit::get_all_fstab($o->{all_hds}) ];   
 
     modules::write_conf('');
     detect_devices::install_addons('');
@@ -412,6 +409,8 @@ sub install2::startMove {
     $root->draw_pixbuf(Gtk2::Gdk::GC->new($root), $pixbuf, 0, 0, ($::rootwidth - $w) / 2, ($::rootheight - $h)/2, $w, $h, 'none', 0, 0);
     ugtk2::gtkflush();
     
+    install_TrueFS_in_home($o);
+
     run_program::run('/sbin/service', 'syslog', 'start');
     run_program::run('killall', 'minilogd');  #- get rid of minilogd
     run_program::run('/sbin/service', 'syslog', 'restart');  #- otherwise minilogd will strike back
