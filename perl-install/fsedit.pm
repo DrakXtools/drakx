@@ -569,7 +569,7 @@ sub allocatePartitions {
 	my $part;
 	while (suggest_part($part = { start => $start, size => 0, maxsize => $size, rootDevice => $dev }, 
 			    $all_hds, $to_add)) {
-	    my $hd = fsedit::part2hd($part, $all_hds);
+	    my $hd = part2hd($part, $all_hds);
 	    add($hd, $part, $all_hds, {});
 	    $size -= $part->{size} + $part->{start} - $start;
 	    $start = $part->{start} + $part->{size};
@@ -579,7 +579,7 @@ sub allocatePartitions {
 
 sub auto_allocate {
     my ($all_hds, $o_suggestions) = @_;
-    my $before = listlength(fsedit::get_all_fstab($all_hds));
+    my $before = listlength(get_all_fstab($all_hds));
 
     my $suggestions = $o_suggestions || $suggestions{simple};
     allocatePartitions($all_hds, $suggestions);
@@ -596,7 +596,7 @@ sub auto_allocate {
 
     partition_table::assign_device_numbers($_) foreach @{$all_hds->{hds}};
 
-    if ($before == listlength(fsedit::get_all_fstab($all_hds))) {
+    if ($before == listlength(get_all_fstab($all_hds))) {
 	# find out why auto_allocate failed
 	if (any { !has_mntpoint($_->{mntpoint}, $all_hds) } @$suggestions) {
 	    die \N("Not enough free space for auto-allocating");
