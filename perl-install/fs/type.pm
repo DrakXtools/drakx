@@ -343,7 +343,12 @@ sub isSpecial { isRAID($_[0]) || isLVM($_[0]) || isLoopback($_[0]) || isUBD($_[0
 
 sub can_be_this_fs_type {
     my ($part, $fs_type) = @_;
-    $part->{fs_type} && ($part->{fs_type} eq 'auto' || member($fs_type, split(':', $part->{fs_type})));
+    can_be_one_of_those_fs_types($part, $fs_type);
+}
+sub can_be_one_of_those_fs_types {
+    my ($part, @fs_types) = @_;
+    $part->{fs_type} or return;
+    $part->{fs_type} eq 'auto' || listlength(intersection(\@fs_types, [ split(':', $part->{fs_type}) ]));
 }
 
 sub maybeFormatted { 
