@@ -1,3 +1,89 @@
+2004/01/22  Alice Lafox  <alice at lafox.com.ua>
+
+	* share/po/ru.po: updated
+
+2004/01/22  Damien Chaumette  <dchaumette at mandrakesoft.com>
+
+	* standalone/drakconnect: do not test $intf but $gui, poulpy sux
+	fix isdn modem page
+	factorise gui set_text
+	  - drop detection, will use interface scheme ($config)
+	  - use $interface_kind
+	drop now unused code
+	fix broken MII_NOT_SUPPORTED and HWADDR
+	add dns3 entry
+
+2004/01/22  Guillaume Cottenceau  <gc at mandrakesoft.com>
+
+	* modules.pm: nice kernel guys spend their free time renaming modules for
+	fun
+
+	* mdk-stage1/doc/TECH-INFOS: disk will also need the directory
+
+	* mdk-stage1/modules.c: nice kernel guys like to change modules names for
+	no reasons when they have a break
+
+2004/01/22  Pixel  <pixel at mandrakesoft.com>
+
+	* tools/Makefile: rpmtools and perl-URPM are still 5.8.2
+
+2004/01/22  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* network/netconnect.pm: typo fix :-(
+	tag speedtouch and eci connections as to be restarted as in old wizard
+	install needed package depending of modem
+	rollback
+	add static configuration for sagem800 spanish users
+	hide too big label (which is useless because of above text) but keep
+	it for translation b/c of further reusage
+
+	* network/adsl.pm: rename old end adsl step
+
+2004/01/21  Damien Chaumette  <dchaumette at mandrakesoft.com>
+
+	* network/adsl.pm: retreive vpi and vci from config file for speedtouch
+
+2004/01/21  Guillaume Cottenceau  <gc at mandrakesoft.com>
+
+	* mdk-stage1/modules.c: add capability to use an additional drivers floppy
+	network_gigabit_usb doesn't exist anymore
+
+	* network/netconnect.pm: perl checker fixes
+
+	* mdk-stage1/stage1.c, mdk-stage1/modules.h: add capability to use an
+	additional drivers floppy
+
+	* modules.pm: misc change: more readable way of setting usb-interface
+	alias
+
+2004/01/21  nplanel
+
+	* modules.pm: add *-agp module support
+
+2004/01/21  Till Kamppeter  <till at mandrakesoft.com>
+
+	* scanner.pm, standalone/printerdrake: Removed occurences of "Mandrake"
+	from translateable strings.
+
+	* printer/main.pm, printer/printerdrake.pm: Added title bar texts for
+	error and warning pop-ups.
+	Removed occurences of "Mandrake" from translateable strings.
+
+	* standalone/scannerdrake: Updated title bar texts of error pop-ups.
+	Removed occurences of "Mandrake" from translateable strings.
+
+2004/01/21  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* network/adsl.pm: rename old adsl step
+	(adsl_detect)
+	  - remove useless parameter
+	  - always return an hash, even if empty (simplify caller code)
+
+	* network/netconnect.pm: really use the same path in standalone and
+	install mode
+	add new first adsl steps
+	factorize lan detection (needed for adsl)
+
 2004/01/21  Guillaume Cottenceau  <gc at mandrakesoft.com>
 
 	* share/po/fr.po: fix typo
@@ -23813,7 +23899,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.854 2004/01/21 14:24:23 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.855 2004/01/21 16:22:31 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
