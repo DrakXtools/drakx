@@ -254,22 +254,22 @@ sub choosePackages {
     unless ($o->{isUpgrade}) {
 	my $available = pkgs::invCorrectSize(install_any::getAvailableSpace($o) / sqr(1024)) * sqr(1024);
 	
-	foreach (values %$packages) {
-	    delete $_->{skip};
-	    delete $_->{unskip};
+	foreach (values %{$packages->[0]}) {
+	    pkgs::packageSetFlagSkip($_, 0);
+	    pkgs::packageSetFlagUnskip($_, 0);
 	}
-	pkgs::unselect_all($packages);
-	pkgs::select($o->{packages}, $o->{packages}{$_} || next) foreach @{$o->{default_packages}};
+	pkgs::unselectAllPackages($packages);
+	pkgs::selectPackage($o->{packages}, pkgs::packageByName($o->{packages}, $_) || next) foreach @{$o->{default_packages}};
 
 	pkgs::setSelectedFromCompssList($o->{compssListLevels}, $packages, $::expert ? 90 : 80, $available, $o->{installClass});
-	my $min_size = pkgs::size_selected($packages);
+	my $min_size = pkgs::selectedSize($packages);
 
 	$o->chooseGroups($packages, $compssUsers, $compssUsersSorted);
 
-	my %save_selected; $save_selected{$_->{name}} = $_->{selected} foreach values %$packages;
+	my %save_selected; $save_selected{pkgs::packageName($_)} = pkgs::packageFlagSelected($_) foreach values %{$packages->[0]};
 	pkgs::setSelectedFromCompssList($o->{compssListLevels}, $packages, 1, 0, $o->{installClass});
-	my $max_size = pkgs::size_selected($packages);
-	$_->{selected} = $save_selected{$_->{name}} foreach values %$packages;	
+	my $max_size = pkgs::selectedSize($packages);
+	pkgs::packageSetFlagSelected($_, $save_selected{$_->{name}}) foreach values %{$packages->[0]};
 
 	if (!$::beginner && $max_size > $available) {
 	    $o->ask_okcancel('', 
@@ -305,10 +305,10 @@ sub chooseGroups {
     unless ($o->{compssUsersChoice}{Miscellaneous}) {
 	my %l;
 	$l{@{$compssUsers->{$_}}} = () foreach @$compssUsersSorted;
-	exists $l{$_} or $packages->{$_}{skip} = 1 foreach keys %$packages;
+	exists $l{$_} or pkgs::packageSetFlagSkip(pkgs::packageByName($packages, $_), 1) foreach keys %$packages;
     }
     foreach (@$compssUsersSorted) {
-	$o->{compssUsersChoice}{$_} or pkgs::skip_set($packages, @{$compssUsers->{$_}});
+	$o->{compssUsersChoice}{$_} or pkgs::skipSetWithProvides($packages, @{$compssUsers->{$_}});
     }
     foreach (@$compssUsersSorted) {
 	$o->{compssUsersChoice}{$_} or next;
@@ -334,7 +334,7 @@ sub installPackages {
 	} elsif ($m =~ /^Starting installing package/) {
 	    my $name = $_[0];
 	    $w->set(_("Installing package %s\n%d%%", $name, $total && 100 * $current / $total));
-	    $current += c::headerGetEntry($o->{packages}{$name}{header}, 'size');
+	    $current += pkgs::packageSize(pkgs::packageByName($o->{packages}, $name));
 	} else { unshift @_, $m; goto $old }
     };
     $o->SUPER::installPackages($packages);

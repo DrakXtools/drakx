@@ -2,10 +2,12 @@ package pkgs;
 
 use diagnostics;
 use strict;
-use vars qw(*LOG);
+use vars qw(*LOG %compssList @skip_list %by_lang @preferred $limitMinTrans $limitMaxTrans $PKGS_SELECTED $PKGS_FORCE $PKGS_INSTALLED $PKGS_BASE $PKGS_SKIP $PKGS_UNSKIP);
 
 use common qw(:common :file :functional);
 use install_any;
+use commands;
+use run_program;
 use log;
 use pkgs;
 use fs;
@@ -13,7 +15,7 @@ use lang;
 use c;
 
 #- lower bound on the left ( aka 90 means [90-100[ )
-my %compssList = (
+%compssList = (
   90 => __("must have"), #- every install have these packages (unless hand de-selected in expert, or not enough room)
   80 => __("important"), #- every beginner/custom install have these packages (unless not enough space)
 		         #- has minimum X install (XFree86 + icewm)(normal)
@@ -33,7 +35,7 @@ my %compssList = (
 #- HACK: rating += 10 if the group is selected and it is not a kde package (aka name !~ /^k/)
 
 
-my @skip_list = qw(
+@skip_list = qw(
 XFree86-8514 XFree86-AGX XFree86-Mach32 XFree86-Mach64 XFree86-Mach8 XFree86-Mono
 XFree86-P9000 XFree86-S3 XFree86-S3V XFree86-SVGA XFree86-W32 XFree86-I128
 XFree86-Sun XFree86-SunMono XFree86-Sun24 XFree86-3DLabs
@@ -44,7 +46,7 @@ hackkernel-pcmcia-cs hackkernel-smp hackkernel-smp-fb
 autoirpm autoirpm-icons numlock 
 );
 
-my %by_lang = (
+%by_lang = (
   ar    => [ 'acon' ],
   cs	=> [ 'XFree86-ISO8859-2', 'XFree86-ISO8859-2-75dpi-fonts' ],
   hr	=> [ 'XFree86-ISO8859-2', 'XFree86-ISO8859-2-75dpi-fonts' ],
@@ -62,8 +64,74 @@ my %by_lang = (
   'zh_TW.Big5' => [ 'rxvt-CLE', 'fonts-ttf-big5' ],
 );
 
-my @preferred = qw(perl-GTK postfix ghostscript-X);
+@preferred = qw(perl-GTK postfix ghostscript-X);
 
+#- constant for small transaction.
+$limitMinTrans = 8;
+$limitMaxTrans = 24;
+
+#- constant for packing flags, see below.
+$PKGS_SELECTED  = 0x00ffffff;
+$PKGS_FORCE     = 0x01000000;
+$PKGS_INSTALLED = 0x02000000;
+$PKGS_BASE      = 0x04000000;
+$PKGS_SKIP      = 0x08000000;
+$PKGS_UNSKIP    = 0x10000000;
+
+#- basic methods for extracting informations about packages.
+#- to save memory, (name, version, release) are no more stored, they
+#- are directly generated from (file).
+#- all flags are grouped together into (flags), these includes the
+#- following flags : selected, force, installed, base, skip.
+#- size and deps are grouped to save memory too and make a much
+#- simpler and faster depslist reader, this gets (sizeDeps).
+sub packageFile       { my ($pkg) = @_; $pkg->{file} }
+sub packageHeaderFile { my ($pkg) = @_; $pkg->{file} =~ /(.*-[^-]+-[^-]+\.[^.]+)\.rpm/ && $1 or die "invalid file `$pkg->{file}'" }
+sub packageName       { my ($pkg) = @_; $pkg->{file} =~ /(.*)-[^-]+-[^-]+\.[^.]+\.rpm/ && $1 or die "invalid file `$pkg->{file}'" }
+sub packageVersion    { my ($pkg) = @_; $pkg->{file} =~ /.*-([^-]+)-[^-]+\.[^.]+\.rpm/ && $1 or die "invalid file `$pkg->{file}'" }
+sub packageRelease    { my ($pkg) = @_; $pkg->{file} =~ /.*-[^-]+-([^-]+)\.[^.]+\.rpm/ && $1 or die "invalid file `$pkg->{file}'" }
+sub packageArch       { my ($pkg) = @_; $pkg->{file} =~ /.*-[^-]+-[^-]+\.([^.]+)\.rpm/ && $1 or die "invalid file `$pkg->{file}'" }
+
+sub packageSize   { my ($pkg) = @_; int $pkg->{sizeDeps} }
+sub packageDepsId { my ($pkg) = @_; split ' ', ($pkg->{sizeDeps} =~ /^\d*\s+(.*)/)[0] }
+
+sub packageFlagSelected  { my ($pkg) = @_; $pkg->{flags} & $PKGS_SELECTED }
+sub packageFlagForce     { my ($pkg) = @_; $pkg->{flags} & $PKGS_FORCE }
+sub packageFlagInstalled { my ($pkg) = @_; $pkg->{flags} & $PKGS_INSTALLED }
+sub packageFlagBase      { my ($pkg) = @_; $pkg->{flags} & $PKGS_BASE }
+sub packageFlagSkip      { my ($pkg) = @_; $pkg->{flags} & $PKGS_SKIP }
+sub packageFlagUnskip    { my ($pkg) = @_; $pkg->{flags} & $PKGS_UNSKIP }
+
+sub packageSetFlagSelected  { my ($pkg, $v) = @_; $pkg->{flags} &= ~$PKGS_SELECTED; $pkg->{flags} |= $v & $PKGS_SELECTED; }
+sub packageSetFlagForce     { my ($pkg, $v) = @_; $v ? $pkg->{flags} |= $PKGS_FORCE : $pkg->{flags} &= ~$PKGS_FORCE; }
+sub packageSetFlagInstalled { my ($pkg, $v) = @_; $v ? $pkg->{flags} |= $PKGS_INSTALLED : $pkg->{flags} &= ~$PKGS_INSTALLED; }
+sub packageSetFlagBase      { my ($pkg, $v) = @_; $v ? $pkg->{flags} |= $PKGS_BASE : $pkg->{flags} &= ~$PKGS_BASE; }
+sub packageSetFlagSkip      { my ($pkg, $v) = @_; $v ? $pkg->{flags} |= $PKGS_SKIP : $pkg->{flags} &= ~$PKGS_SKIP; }
+sub packageSetFlagUnskip    { my ($pkg, $v) = @_; $v ? $pkg->{flags} |= $PKGS_UNSKIP : $pkg->{flags} &= ~$PKGS_UNSKIP; }
+
+sub packageProvides { my ($pkg) = @_; @{$pkg->{provides} || []} }
+
+#- get all headers from hdlist.cz, remove any older headers in memory.
+sub extractHeaders($@) {
+    my $prefix = shift;
+    my @pkgs = grep { !$_->{header} } @_;
+
+    eval { commands::rm("-rf", "$prefix/tmp/headers") };
+    run_program::run("extract_archive", "$prefix/var/lib/urpmi/hdlist.cz2", "$prefix/tmp/headers",
+		     map { packageHeaderFile($_) } @pkgs);
+
+    foreach (@pkgs) {
+	my $f = "$prefix/tmp/headers/". packageHeaderFile($_);
+	local *H;
+	open H, $f or die "unable to open header file $f: $!";
+	$_->{header} = c::headerRead(fileno H, 1) or log::l("unable to read header of package ". packageHeaderFile($_));
+	close H;
+    }
+
+    grep { $_->{header} } @pkgs;
+}
+
+#- size and correction size functions for packages.
 my $A = 20471;
 my $B = 16258;
 sub correctSize { ($A - $_[0]) * $_[0] / $B } #- size correction in MB.
@@ -71,161 +139,227 @@ sub invCorrectSize { $A / 2 - sqrt(max(0, sqr($A) - 4 * $B * $_[0])) / 2 }
 
 sub selectedSize {
     my ($packages) = @_;
-    int (sum map { $_->{size} } grep { $_->{selected} } values %$packages) / sqr(1024);
+    int (sum map { packageSize($_) } grep { packageFlagSelected($_) } values %{$packages->[0]});
 }
-sub correctedSelectedSize { correctSize(selectedSize($_[0])) }
+sub correctedSelectedSize { correctSize(selectedSize($_[0]) / sqr(1024)) }
 
-sub Package {
+
+#- searching and grouping methods.
+#- package is a reference to list that contains
+#- a hash to search by name and
+#- a list to search by id.
+sub packageByName {
     my ($packages, $name) = @_;
-    $packages->{$name} or log::l("unknown package `$name'") && undef;
+    $packages->[0]{$name} or log::l("unknown package `$name'") && undef;
 }
-
-sub allpackages {
+sub packageById {
+    my ($packages, $id) = @_;
+    $packages->[1][$id] or log::l("unknown package id $id") && undef;
+}
+sub allPackages {
     my ($packages) = @_;
     my %skip_list; @skip_list{@skip_list} = ();
-    grep { !exists $skip_list{$_->{name}} } values %$packages;
+    grep { !exists $skip_list{packageName($_)} } values %{$packages->[0]};
 }
 
-sub select($$;$) {
-    my ($packages, $p, $base) = @_;
+#- selection, unselection of package.
+sub selectPackage($$;$$) {
+    my ($packages, $pkg, $base, $otherOnly) = @_;
     my %preferred; @preferred{@preferred} = ();
-    my ($n, $v);
-#   print "## $p->{name}\n";
-    unless ($p->{installed}) { #- if the same or better version is installed, do not select.
-	$p->{base} ||= $base;
-	$p->{selected} = -1; #- selected by user
-	my %l; @l{@{$p->{deps} || die "missing deps file"}} = ();
-	while (do { my %l = %l; while (($n, $v) = each %l) { last if $v != 1; } $n }) {
-	    $l{$n} = 1;
-	    my $i = $packages->{$n};
-	    if (!$i && $n =~ /\|/) {
-		foreach (split '\|', $n) {
-		    my $p = Package($packages, $_);
-		    $i ||= $p;
-		    $p && $p->{selected} and $i = $p, last;
-		    $p && exists $preferred{$_} and $i = $p;
+
+    #- check if the same or better version is installed,
+    #- do not select in such case.
+    packageFlagInstalled($pkg) and return;
+
+    #- select package and dependancies, otherOnly may be a reference
+    #- to a hash to indicate package that will strictly be selected
+    #- when value is true, may be selected when value is false (this
+    #- is only used for unselection, not selection)
+    unless (packageFlagSelected($pkg)) {
+	foreach (packageDepsId($pkg)) {
+	    if (/\|/) {
+		#- choice deps should be reselected recursively as no
+		#- closure on them is computed, this code is exactly the
+		#- same as pixel's one.
+		my ($choiceDepsPkg, $preferredDepsPkg);
+		foreach (split '\|', $_) {
+		    $choiceDepsPkg = packageById($packages, $_);
+		    $preferredDepsPkg ||= $choiceDepsPkg;
+		    $choiceDepsPkg && packageFlagSelected($choiceDepsPkg) and
+		      $preferredDepsPkg = $choiceDepsPkg, last;
+		    $choiceDepsPkg && exists $preferred{packageName($choiceDepsPkg)} and
+		      $preferredDepsPkg = $choiceDepsPkg;
 		}
+		$preferredDepsPkg and selectPackage($packages, $preferredDepsPkg, $base, $otherOnly);
+	    } else {
+		#- deps have been closed except for choices, so no need to
+		#- recursively apply selection, expand base on it.
+		my $depsPkg = packageById($packages, $_);
+		$base and packageSetFlagBase($depsPkg, 1);
+		$otherOnly and !packageFlagSelected($depsPkg) and $otherOnly->{packageName($depsPkg)} = 1;
+		$otherOnly or packageSetFlagSelected($depsPkg, 1+packageFlagSelected($depsPkg));
 	    }
-	    $i->{base} ||= $base;
-	    $i->{deps} or log::l("missing deps for $n");
-	    unless ($i->{installed}) {
-		unless ($i->{selected}) {
-#		    print ">> $i->{name}\n";
-#		    /gnome-games/ and print ">>> $i->{name}\n" foreach @{$i->{deps} || []};
-		    $l{$_} ||= 0 foreach @{$i->{deps} || []};
-		}
-		$i->{selected}++ unless $i->{selected} == -1;
+	}
+    }
+    $base and packageSetFlagBase($pkg, 1);
+    $otherOnly and packageFlagSelected($pkg) and $otherOnly->{packageName($pkg)} = 1;
+    $otherOnly or packageSetFlagSelected($pkg, 1+packageFlagSelected($pkg));
+    1;
+}
+sub unselectPackage($$;$) {
+    my ($packages, $pkg, $otherOnly) = @_;
+
+    #- base package are not unselectable,
+    #- and already unselected package are no more unselectable.
+    packageFlagBase($pkg) and return;
+    packageFlagSelected($pkg) or return;
+
+    #- dependancies may be used to propose package that may be not
+    #- usefull for the user, since their counter is just one and
+    #- they are not used any more by other packages.
+    #- provides are closed and are taken into account to get possible
+    #- unselection of package (value false on otherOnly) or strict
+    #- unselection (value true on otherOnly).
+    foreach my $providedPkg ($pkg, packageProvides($pkg)) {
+	packageFlagBase($providedPkg) and die "a provided package cannot be a base package";
+	$otherOnly or packageSetFlagSelected($providedPkg, 0);
+	$otherOnly and $otherOnly->{packageName{$providedPkg}} = 1;
+	foreach (map { split '\|' } packageDepsId($providedPkg)) {
+	    my $depsPkg = packageById($packages, $_);
+	    packageFlagBase($depsPkg) and next;
+	    packageFlagSelected($depsPkg) or next;
+	    for (packageFlagSelected($depsPkg)) {
+		$_ == 1 and do { $otherOnly and $otherOnly->{packageName($depsPkg)} ||= 0; };
+		$_ >  1 and do { $otherOnly or packageSetFlagSelected($depsPkg, $_-1); };
+		last;
 	    }
 	}
     }
     1;
 }
-sub unselect($$) {
-    my ($packages, $p) = @_;
-    $p->{base} and return;
-    my $set = set_new($p->{name});
-    my $l = $set->{list};
-
-    #- get the list of provided packages
-    foreach my $q (@$l) {
-	my $i = Package($packages, $q);
-	$i->{selected} && !$i->{base} or next;
-	$i->{selected} = 1; #- that way, its counter will be zero the first time
-	set_add($set, @{$i->{provides} || []});
-    }
-    while (@$l) {
-	my $n = shift @$l;
-	my $i = Package($packages, $n);
-
-	$i->{selected} <= 0 || $i->{base} and next;
-	if (--$i->{selected} == 0) {
-	    push @$l, @{$i->{deps} || []};
-	}
-    }
-    1;
+sub togglePackageSelection($$) {
+    my ($packages, $pkg) = @_;
+    packageFlagSelected($pkg) ? unselectPackage($packages, $pkg) : selectPackage($packages, $pkg);
 }
-sub toggle($$) {
-    my ($packages, $p) = @_;
-    $p->{selected} ? unselect($packages, $p) : &select($packages, $p);
-}
-sub set($$$) {
-    my ($packages, $p, $val) = @_;
-    $val ? &select($packages, $p) : unselect($packages, $p);
+sub setPackageSelection($$$) {
+    my ($packages, $pkg, $value) = @_;
+    $value ? selectPackage($packages, $pkg) : unselectPackage($packages, $pkg);
 }
 
-sub unselect_all($) {
+sub unselectAllPackages($) {
     my ($packages) = @_;
-    $_->{selected} = $_->{base} foreach values %$packages;
+    packageSetFlagSelected($_, packageFlagBase($_) && 1) foreach values %{$packages->[0]};
 }
 
-sub size_selected {
-    my ($packages) = @_;
-    my $nb = 0; foreach (values %$packages) {
-	$nb += $_->{size} if $_->{selected};
-    }
-    $nb;
-}
-
-sub skip_set {
+sub skipSetWithProvides {
     my ($packages, @l) = @_;
-    $_->{skip} = 1 foreach @l, grep { $_ } map { Package($packages, $_) } map { @{$_->{provides} || []} } @l;
+    packageSetFlagSkip($_, 1) foreach grep { $_ } map { $_, packageProvides($_) } map { packageByName($packages, $_) } @l;
 }
 
-sub psUsingDirectory(;$) {
+sub psUsingDirectory(;$) { #- obseleted...
     my $dirname = $_[0] || "/tmp/rhimage/Mandrake/RPMS";
-    my %packages;
+    my @packages;
 
     log::l("scanning $dirname for packages");
+    $packages[0] = {};
     foreach (all("$dirname")) {
-	my ($name, $version, $release) = /(.*)-([^-]+)-([^-]+)\.[^.]+\.rpm/ or log::l("skipping $_"), next;
-
-	$packages{$name} = {
-            name => $name, version => $version, release => $release,
-	    file => $_, selected => 0, deps => [],
-        };
+	my $pkg = { file  => $_, #- filename
+		    flags => 0,  #- flags
+		  };
+	$packages[0]{packageName($pkg)} = $pkg;
     }
-    \%packages;
+
+    $packages[1] = [];
+
+    log::l("psUsingDirectory read " . scalar keys(%{$packages[0]}) . " filenames");
+
+    \@packages;
 }
 
-sub psUsingHdlist() {
-    my $f = install_any::getFile('hdlist') or die "no hdlist found";
-    my %packages;
+sub psUsingHdlist($) {
+    my ($prefix) = @_;
+    my $f = install_any::getFile('hdlist.cz2') or die "no hdlist.cz2 found";
+    my @packages;
 
-#-    my ($noSeek, $end) = 0;
-#-    $end = sysseek F, 0, 2 or die "seek failed";
-#-    sysseek F, 0, 0 or die "seek failed";
+    #- copy hdlist file directly to $prefix/var/lib/urpmi, this will be used
+    #- for getting header of package during installation or after by urpmi.
+    my $newf = "$prefix/var/lib/urpmi/hdlist.cz2";
+    -e $newf and do { unlink $newf or die "cannot remove $newf: $!"; };
+    local *F;
+    open F, ">$newf" or die "cannot create $newf: $!";
+    my ($buf, $sz); while (($sz = sysread($f, $buf, 16384))) { syswrite(F, $buf) }
+    close F;
 
-    while (my $header = c::headerRead(fileno $f, 1)) {
-#-	 or die "error reading header at offset ", sysseek(F, 0, 1);
-	my $name = c::headerGetEntry($header, 'name');
-
-	$packages{$name} = {
-             name => $name, header => $header, selected => 0, deps => [],
-	     version   => c::headerGetEntry($header, 'version'),
-	     release   => c::headerGetEntry($header, 'release'),
-	     size      => c::headerGetEntry($header, 'size'),
-        };
+    #- extract filename from archive, this take advantage of verifying
+    #- the archive too.
+    open F, "extract_archive $newf |" or die "unable to parse $newf";
+    foreach (<F>) {
+	chomp;
+	next unless /^[dlf]\s+/;
+	if (/^f\s+\d+\s+(.*)/) {
+	    my $pkg = { file  => "$1.rpm", #- rebuild filename according to header one
+			flags => 0,        #- flags
+		      };
+	    $packages[0]{packageName($pkg)} = $pkg;
+	    print packageName($pkg), "\n";
+	} else {
+	    die "cannot determine how to handle such file in $newf: $_";
+	}
     }
-    log::l("psUsingHdlist read " . scalar keys(%packages) . " headers");
+    close F;
 
-    \%packages;
+    $packages[1] = [];
+
+    log::l("psUsingHdlist read " . scalar keys(%{$packages[0]}) . " headers");
+
+    \@packages;
 }
 
-sub chop_version($) {
+sub chopVersionRelease($) {
     first($_[0] =~ /(.*)-[^-]+-[^-]+/) || $_[0];
 }
 
 sub getDeps($) {
     my ($packages) = @_;
 
-    my $f = install_any::getFile("depslist") or die "can't find dependencies list";
+    my $f = install_any::getFile("depslist.ordered") or die "can't find dependencies list";
+
+    #- update dependencies list, provides attributes are updated later
+    #- cross reference to be resolved on id (think of loop requires)
+    #- provides should be updated after base flag has been set to save
+    #- memory.
     foreach (<$f>) {
-	my ($name, $size, @deps) = split;
-	($name, @deps) = map { join '|', map { chop_version($_) } split '\|' } ($name, @deps);
-	$packages->{$name} or next;
-	$packages->{$name}{size} = $size;
-	$packages->{$name}{deps} = \@deps;
-	map { push @{$packages->{$_}{provides}}, $name if $packages->{$_} } @deps;
+	my ($name, $version, $release, $sizeDeps) = /^(\S*)-([^-\s]+)-([^-\s]+)\s+(.*)/;
+	my $pkg = $packages->[0]{$name};
+
+	$pkg or log::l("ignoring package $name-$version-$release in depslist is not in hdlist"), next;
+	$version == packageVersion($pkg) and $release == packageRelease($pkg)
+	  or log::l("ignoring package $name-$version-$release in depslist mismatch version or release in hdlist"), next;
+	$pkg->{sizeDeps} = $sizeDeps;
+
+	#- package are already sorted in depslist to enable small transaction.
+	push @{$packages->[1]}, $pkg;
+    }
+#	map { push @{$packages->{$_}{provides}}, $name if $packages->{$_} } @deps;
+}
+
+sub getProvides($) {
+    my ($packages) = @_;
+
+    foreach (@{$packages->[1]}) {
+	my $pkg = $_;
+
+	#- update provides according to dependencies, here are stored
+	#- reference to package directly and choice are included, this
+	#- assume only 1 of the choice is selected, else on unselection
+	#- the provided package will be deleted where other package still
+	#- need it.
+	#- base package are not updated because they cannot be unselected,
+	#- this save certainly a lot of memory since most of them may be
+	#- needed by a large number of package.
+	map { my $providedPkg = $packages->[1][$_] or die "invalid package index $_";
+	      packageFlagBase($providedPkg) or push @{$providedPkg->{provides} ||= []}, $pkg;
+	  } map { split '\|' } packageDepsId($pkg);
     }
 }
 
@@ -246,7 +380,6 @@ sub readCompss($) {
 	if (/^(\S+)/) {
 	    my $p = $compss;
 	    my @l = split ':', $1;
-#- Why?	    pop @l if $l[-1] =~ /^(x11|console)$/;
 	    foreach (@l) {
 		$p->{childs}{$_} ||= { childs => {} };
 		$p = $p->{childs}{$_};
@@ -255,7 +388,7 @@ sub readCompss($) {
 	    $compss_->{$1} = $p;
 	} else {
 	    /(\S+)/ or log::l("bad line in compss: $_"), next;
-	    push @$ps, $packages->{$1} || do { log::l("unknown package $1 (in compss)"); next };
+	    push @$ps, $packages->[0]{$1} || do { log::l("unknown package $1 (in compss)"); next };
 	}
     }
     ($compss, $compss_);
@@ -272,7 +405,7 @@ sub readCompssList($$$) {
     foreach (<$f>) {
 	/^\s*$/ || /^#/ and next;
 
-	/^packages\s*$/ and do { $e = $packages; next };
+	/^packages\s*$/ and do { $e = $packages->[0]; next };
 	/^categories\s*$/ and do { $e = $compss_; next };
 
 	my ($name, @values) = split;
@@ -284,10 +417,10 @@ sub readCompssList($$$) {
 
     my %done;
     foreach (split ':', $ENV{RPM_INSTALL_LANG}) {
-	my $p = $packages->{"locales-$_"} || {};
+	my $p = $packages->[0]{"locales-$_"} || {};
 	foreach ("locales-$_", @{$p->{provides} || []}, @{$by_lang{$_} || []}) {
 	    next if $done{$_}; $done{$_} = 1;
-	    my $p = $packages->{$_} or next;
+	    my $p = $packages->[0]{$_} or next;
 	    $p->{values} = [ map { $_ + 90 } @{$p->{values} || [ (0) x $nb_values ]} ];
 	}
     }
@@ -307,7 +440,7 @@ sub readCompssUsers {
 	    push @sorted, $1;
 	    $compssUsers{$1} = $l = [];
 	} elsif (/\s+\+(\S+)/) {
-	    push @$l, $packages->{$1} || do { log::l("unknown package $1 (in compssUsers)"); next };
+	    push @$l, $packages->[0]{$1} || do { log::l("unknown package $1 (in compssUsers)"); next };
 	} elsif (/\s+(\S+)/) {
 	    my $p = $compss;
 	    $p &&= $p->{childs}{$_} foreach split ':', $1;
@@ -329,27 +462,27 @@ sub setSelectedFromCompssList {
     my ($compssListLevels, $packages, $min_level, $max_size, $install_class) = @_;
     my ($ind);
 
-    my @packages = allpackages($packages);
+    my @packages = allPackages($packages);
     my @places = do {
 	map_index { $ind = $::i if $_ eq $install_class } @$compssListLevels;
 	defined $ind or log::l("unknown install class $install_class in compssList"), return;
 
 	#- special case for /^k/ aka kde stuff
-	my @values = map { $_->{values}[$ind] + ($_->{unskip} && $_->{name} !~ /^k/ ? 10 : 0) } @packages;
+	my @values = map { $_->{values}[$ind] + (packageFlagUnskip($_) && packageName($_) !~ /^k/ ? 10 : 0) } @packages;
 	sort { $values[$b] <=> $values[$a] } 0 .. $#packages;
     };
     foreach (@places) {
 	my $p = $packages[$_];
-	next if $p->{skip};
+	next if packageFlagSkip($p);
 	last if $p->{values}[$ind] < $min_level;
 
-	&select($packages, $p);
+	selectPackage($packages, $p);
 
 	my $nb = 0; foreach (@packages) {
-	    $nb += $_->{size} if $_->{selected};
+	    $nb += packageSize($_) if packageFlagSelected($_);
 	}
 	if ($max_size && $nb > $max_size) {
-	    unselect($packages, $p);
+	    unselectPackage($packages, $p);
 	    $min_level = $p->{values}[$ind];
 	    log::l("setSelectedFromCompssList: up to indice $min_level (reached size $max_size)");
 	    last;
@@ -432,7 +565,7 @@ sub selectPackagesToUpgrade($$$;$$) {
     #- the 'installed' property will make a package unable to be selected, look at select.
     c::rpmdbTraverse($db, sub {
 			 my ($header) = @_;
-			 my $p = $packages->{c::headerGetEntry($header, 'name')};
+			 my $p = $packages->[0]{c::headerGetEntry($header, 'name')};
 			 my $otherPackage = (c::headerGetEntry($header, 'release') !~ /mdk\w*$/ &&
 					     (c::headerGetEntry($header, 'name'). '-' .
 					      c::headerGetEntry($header, 'version'). '-' .
@@ -481,7 +614,7 @@ sub selectPackagesToUpgrade($$$;$$) {
 	unless ($skipThis) {
 	    my $cumulSize;
 
-	    pkgs::select($packages, $p) unless $p->{selected};
+	    selectPackage($packages, $p) unless $p->{selected};
 
 	    #- keep in mind installed files which are not being updated. doing this costs in
 	    #- execution time but use less memory, else hash all installed files and unhash
@@ -530,7 +663,7 @@ sub selectPackagesToUpgrade($$$;$$) {
 	    map { if (exists $installedFilesForUpgrade{$_}) {
 		$toSelect ||= ! -d "$prefix/$_" && ! -l "$prefix/$_"; delete $installedFilesForUpgrade{$_} }
 	      } grep { $_ !~ m@^/etc/rc.d/@ } @availFiles;
-	    pkgs::select($packages, $p) if ($toSelect);
+	    selectPackage($packages, $p) if ($toSelect);
 	}
     }
 
@@ -541,14 +674,14 @@ sub selectPackagesToUpgrade($$$;$$) {
 
 	eval { getHeader($p) };
 	my @obsoletes = $p->{header} ? c::headerGetEntry(getHeader($p), 'obsoletes'): ();
-	map { pkgs::select($packages, $p) if c::rpmdbNameTraverse($db, $_) > 0 } @obsoletes;
+	map { selectPackage($packages, $p) if c::rpmdbNameTraverse($db, $_) > 0 } @obsoletes;
     }
 
     #- select all base packages which are not installed and not selected.
     foreach (@$base) {
-	my $p = $packages->{$_} or log::l("missing base package $_"), next;
+	my $p = $packages->[0]{$_} or log::l("missing base package $_"), next;
 	log::l("base package $_ is not installed") unless $p->{installed} || $p->{selected}; #- installed not set on upgrade.
-	pkgs::select($packages, $p, 1) unless $p->{selected}; #- if installed it cannot be selected.
+	selectPackage($packages, $p, 1) unless $p->{selected}; #- if installed it cannot be selected.
     }
 
     #- clean false value on toRemove.
@@ -565,7 +698,7 @@ sub selectPackagesToUpgrade($$$;$$) {
 						 c::headerGetEntry($header, 'version'). '-' .
 						 c::headerGetEntry($header, 'release'));
 			     if ($toRemove{$otherPackage}) {
-				 if ($packages->{c::headerGetEntry($header, 'name')}{base}) {
+				 if (packageFlagBase($packages->[0]{c::headerGetEntry($header, 'name')})) {
 				     delete $toRemove{$otherPackage}; #- keep it selected, but force upgrade.
 				 } else {
 				     my @files = c::headerGetEntry($header, 'filenames');
@@ -596,54 +729,37 @@ sub installCallback {
 }
 
 sub install($$$;$) {
-    my ($prefix, $isUpgrade, $toInstall) = @_;
+    my ($prefix, $isUpgrade, $toInstall, $depOrder) = @_;
     my %packages;
 
-#-    foreach (@$toInstall) {
-#-	  print "$_->{name}\n";
-#-    }
-
     return if $::g_auto_install;
+
+    #- first stage to extract some important informations
+    #- about the packages selected. this is used to select
+    #- one or many transaction.
+    my ($total, $nb);
+    foreach my $pkg (@$toInstall) {
+	$packages{packageName($pkg)} = $pkg;
+	$nb++;
+	$total += packageSize($pkg);
+    }
+
+    eval { fs::mount("/proc", "$prefix/proc", "proc", 0) } unless -e "$prefix/proc/cpuinfo";
 
     log::l("reading /usr/lib/rpm/rpmrc");
     c::rpmReadConfigFiles() or die "can't read rpm config files";
     log::l("\tdone");
 
     my $db = c::rpmdbOpen($prefix) or die "error opening RPM database: ", c::rpmErrorString();
-    log::l("opened rpm database for installing new packages");
-
-    my $trans = c::rpmtransCreateSet($db, $prefix);
-
-    my ($total, $nb);
-
-    foreach my $p (@$toInstall) {
-	eval { getHeader($p) }; $@ and next;
-	$p->{file} ||= sprintf "%s-%s-%s.%s.rpm",
-	                       $p->{name}, $p->{version}, $p->{release},
-			       c::headerGetEntry(getHeader($p), 'arch');
-	$packages{$p->{name}} = $p;
-	c::rpmtransAddPackage($trans, getHeader($p), $p->{name}, $isUpgrade && $p->{name} !~ /kernel/); #- TODO: replace `named kernel' by `provides kernel'
-	$nb++;
-	$total += $p->{size};
-    }
-
-    c::rpmdepOrder($trans) or
-	cdie "error ordering package list: " . c::rpmErrorString(),
-	  sub {
-	      c::rpmtransFree($trans);
-	      c::rpmdbClose($db);
-	  };
-    c::rpmtransSetScriptFd($trans, fileno LOG);
-
-    eval { fs::mount("/proc", "$prefix/proc", "proc", 0) } unless -e "$prefix/proc/cpuinfo";
+    log::l("opened rpm database for installing ". scalar @$toInstall ." new packages");
 
     my $callbackOpen = sub {
-	my $f = (my $p = $packages{$_[0]})->{file};
+	my $f = packageFile(my $pkg = delete $packages{$_[0]});
 	print LOG "$f\n";
 	my $fd = install_any::getFile($f) or log::l("ERROR: bad file $f");
 	$fd ? fileno $fd : -1;
     };
-    my $callbackClose = sub { $packages{$_[0]}{installed} = 1; };
+    my $callbackClose = sub { packageSetFlagInstalled($packages{$_[0]}, 1); };
     my $callbackMessage = \&pkgs::installCallback;
 
     #- do not modify/translate the message used with installCallback since
@@ -651,24 +767,55 @@ sub install($$$;$) {
     #- place (install_steps_gtk.pm,...).
     &$callbackMessage("Starting installation", $nb, $total);
 
-    if (my @probs = c::rpmRunTransactions($trans, $callbackOpen, $callbackClose, $callbackMessage, 0)) {
-	my %parts;
-	@probs = reverse grep {
-	    if (s/(installing package) .* (needs (?:.*) on the (.*) filesystem)/$1 $2/) {
-		$parts{$3} ? 0 : ($parts{$3} = 1);
-	    } else { 1; }
-	} reverse @probs;
+    my ($i, $min) = (0, 0);
+    do {
+	my @transToInstall;
+	if ($nb <= $limitMaxTrans || !$depOrder) {
+	    @transToInstall = values %packages;
+	} else {
+	    while ($i < @$depOrder && ($i < $min || scalar @transToInstall < $limitMinTrans)) {
+		my $depsPkg = $packages{packageName($depOrder->[$i++])};
+		if ($depsPkg) {
+		    push @transToInstall, $depsPkg;
+		    foreach (map { split '\|' } packageDepsId($depsPkg)) {
+			$min < $_ and $min = $_;
+		    }
+		}
+	    }
+	}
+	$nb -= scalar @transToInstall;
 
+	log::l("starting new transaction of ". scalar @transToInstall ." packages, still $nb after that to do");
+	my $trans = c::rpmtransCreateSet($db, $prefix);
+
+	foreach (extractHeaders($prefix, @transToInstall)) {
+	    my $p = $_;
+	    eval { getHeader($p) }; $@ and next;
+	    c::rpmtransAddPackage($trans, getHeader($p), packageName($p), $isUpgrade && packageName($p) !~ /kernel/); #- TODO: replace `named kernel' by `provides kernel'
+	}
+	c::rpmdepOrder($trans) or
+	    cdie "error ordering package list: " . c::rpmErrorString(),
+	      sub {
+		  c::rpmtransFree($trans);
+		  c::rpmdbClose($db);
+	      };
+	c::rpmtransSetScriptFd($trans, fileno LOG);
+
+	if (my @probs = c::rpmRunTransactions($trans, $callbackOpen, $callbackClose, $callbackMessage, 0)) {
+	    my %parts;
+	    @probs = reverse grep {
+		if (s/(installing package) .* (needs (?:.*) on the (.*) filesystem)/$1 $2/) {
+		    $parts{$3} ? 0 : ($parts{$3} = 1);
+		} else { 1; }
+	    } reverse @probs;
+
+	    c::rpmtransFree($trans);
+	    c::rpmdbClose($db);
+	    die "installation of rpms failed:\n  ", join("\n  ", @probs);
+	}
 	c::rpmtransFree($trans);
-	c::rpmdbClose($db);
-#	if ($isUpgrade && !$useOnlyUpgrade && %parts) {
-#	    #- recurse only once to try with only upgrade (including kernel).
-#	    log::l("trying to upgrade all packages to save space");
-#	    install($prefix,$isUpgrade,$toInstall,1);
-#	}
-	die "installation of rpms failed:\n  ", join("\n  ", @probs);
-    }
-    c::rpmtransFree($trans);
+    } while ($nb > 0);
+
     c::rpmdbClose($db);
     log::l("rpm database closed");
 

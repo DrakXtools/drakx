@@ -208,7 +208,7 @@ sub beforeInstallPackages {
     pkgs::init_db($o->{prefix}, $o->{isUpgrade});
 }
 
-sub installPackages($$) {
+sub installPackages($$) { #- complete REWORK, TODO and TOCHECK!
     my ($o, $packages) = @_;
 
     if (@{$o->{toRemove} || []}) {
@@ -229,24 +229,14 @@ sub installPackages($$) {
 	$o->{toSave} = [];
 
 	#- hack for compat-glibc to upgrade properly :-(
-	if ($packages->{'compat-glibc'}{selected}) {
+	if (pkgs::packageFlagSelected(pkgs::packageByName($packages, 'compat-glibc'))) {
 	    rename "$o->{prefix}/usr/i386-glibc20-linux", "$o->{prefix}/usr/i386-glibc20-linux.mdkgisave";
 	}
     }
 
-    #- hack to ensure proper ordering for installation of packages.
-    my @firstToInstall = qw(setup basesystem chkconfig sed ldconfig grep XFree86-libs freetype XFree86-xfs chkfontpath XFree86);
-    my %firstInstalled;
-    my @toInstall;
-    foreach (@firstToInstall) {
-	if ($packages->{$_}{selected} && !$packages->{$_}{installed}) {
-	    push @toInstall, $packages->{$_};
-	    $firstInstalled{$_} = 1; #- avoid installing twice a package.
-	}
-    }
-    push @toInstall, grep { $_->{base} && $_->{selected} && !$_->{installed} && !$firstInstalled{$_->{name}} } values %$packages;
-    push @toInstall, grep { !$_->{base} && $_->{selected} && !$_->{installed} && !$firstInstalled{$_->{name}} } values %$packages;
-    pkgs::install($o->{prefix}, $o->{isUpgrade}, \@toInstall);
+    #- small transaction will be built based on this selection and depslist.
+    my @toInstall = grep { pkgs::packageFlagSelected($_) && !pkgs::packageFlagInstalled($_) } values %{$packages->[0]};
+    pkgs::install($o->{prefix}, $o->{isUpgrade}, \@toInstall, $o->{packages}[1]);
 }
 
 sub afterInstallPackages($) {
@@ -285,8 +275,8 @@ sub afterInstallPackages($) {
     substInFile { s/^cdrom\n//; $_ .= "cdrom\n" if eof } "$msec/group.conf" if -d $msec;
     substInFile { s/^xgrp\n//; $_ .= "xgrp\n" if eof } "$msec/group.conf" if -d $msec;
 
-    my $p = $o->{packages}{urpmi};
-    if ($p && $p->{selected}) {
+    my $pkg = pkgs::packageByName($o->{packages}, 'urpmi');
+    if ($pkg && pkgs::packageFlagSelected($pkg)) {
 	install_any::install_urpmi($o->{prefix}, $o->{method});
 	substInFile { s/^urpmi\n//; $_ .= "urpmi\n" if eof } "$msec/group.conf" if -d $msec;
     }
@@ -471,7 +461,7 @@ sub printerConfig {
     if ($o->{printer}{complete}) {
 	require printer;
 	require pkgs;
-	pkgs::select($o->{packages}, $o->{packages}{'rhs-printfilters'});
+	pkgs::selectPackage($o->{packages}, pkgs::packageByName($o->{packages}, 'rhs-printfilters'));
 	$o->installPackages($o->{packages});
 
 	printer::configure_queue($o->{printer});
@@ -596,13 +586,13 @@ sub readBootloaderConfigBeforeInstall {
     #- if there is a need to update existing lilo.conf entries by using that
     #- hash.
     my %ofpkgs = (
-		  'vmlinuz' => 'kernel',
-		  'vmlinuz-smp' => 'kernel-smp',
+		  'vmlinuz'     => pkgs::packageByName($o->{packages}, 'kernel'),
+		  'vmlinuz-smp' => pkgs::packageByName($o->{packages}, 'kernel-smp'),
 		 );
 
     #- change the /boot/vmlinuz or /boot/vmlinuz-smp entries to follow symlink.
     foreach $image (keys %ofpkgs) {
-	if ($o->{bootloader}{entries}{"/boot/$image"} && $o->{packages}{$ofpkgs{$image}}{selected}) {
+	if ($o->{bootloader}{entries}{"/boot/$image"} && pkgs::packageFlagSelected($ofpkgs{$image})) {
 	    $v = readlink "$o->{prefix}/boot/$image";
 	    if ($v) {
 		$v = "/boot/$v" if $v !~ m|^/|;

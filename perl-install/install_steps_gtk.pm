@@ -369,12 +369,12 @@ sub choosePackagesTree {
 	$ignore = 1;
 	foreach (grep { $_->[0] } values %items) {
 	    $compss->{tree}->unselect_child($_->[0]);
-	    $compss->{tree}->select_child($_->[0]) if $_->[1]{selected};
+	    $compss->{tree}->select_child($_->[0]) if pkgs::packageFlagSelected($_->[1]);
 	}
 	$ignore = 0;
 	
-	foreach (values %$packages) {
-	    $size += $_->{size} - ($_->{installedCumulSize} || 0) if $_->{selected}; #- on upgrade, installed packages will be removed.
+	foreach (values %{$packages->[0]}) {
+	    $size += pkgs::packageSize($_) - ($_->{installedCumulSize} || 0) if pkgs::packageFlagSelected($_); #- on upgrade, installed packages will be removed.
 	}
 
 	$w_size->set(_("Total size: ") . int (pkgs::correctSize($size / sqr(1024))) . " / $availableSpace " . _("KB") );
@@ -385,9 +385,9 @@ sub choosePackagesTree {
 	$items{++$itemsNB} = [ $w, $p ];
 	undef $parent->{packages_item}{$itemsNB} if $parent;
 	$w->show;
-	$w->set_sensitive(!$p->{base} && !$p->{installed});
+	$w->set_sensitive(!pkgs::packageFlagBase($p) && !pkgs::packageFlagInstalled($p));
 	$w->signal_connect(focus_in_event => sub {
-	    my $p = eval { pkgs::getHeader($p) };
+	    my $p = eval { pkgs::getHeader($p) }; #- TODO
 	    gtktext_insert($info_widget, $@ ? _("Bad package") :
 			   _("Version: %s\n", c::headerGetEntry($p, 'version') . '-' . c::headerGetEntry($p, 'release')) .
 			   _("Size: %d KB\n", c::headerGetEntry($p, 'size') / 1024) .
@@ -405,23 +405,24 @@ sub choosePackagesTree {
 	#- needs to find @changed first, _then_ change the selected, otherwise
 	#- we won't be able to find the changed
 	foreach (values %items) {
-	    push @changed, $_->[1] if ($_->[1]{selected} xor exists $s{$_->[0]});
+	    push @changed, $_->[1] if (pkgs::packageFlagSelected($_->[1]) xor exists $s{$_->[0]});
 	}
 	#- works before @changed is (or must be!) one element
 	foreach (@changed) {
 	    if ($_->{childs}) {
-		my $s = invbool \$_->{selected};
+		my $pkg = $_;
+		pkgs::packageSetFlagSelected($pkg, !pkgs::packageFlagSelected($pkg));
 		my $f; $f = sub {
 		    my ($p) = @_;
 		    $p->{itemNB} or return;
 		    if ($p->{packages}) {
 			foreach (keys %{$p->{packages_item} || {}}) {
 			    my ($a, $b) = @{$items{$_}};
-			    $a and pkgs::set($packages, $b, $s);
+			    $a and pkgs::setPackageSelection($packages, $b, pkgs::packageFlagSelected($pkg));
 			}
 		    } else {
 			foreach (values %{$p->{childs}}) {
-			    $_->{selected} = $s;
+			    pkgs::packageSetFlagSelected($_, pkgs::packageFlagSelected($pkg));
 			    &$f($_);
 			}
 		    }
@@ -431,7 +432,7 @@ sub choosePackagesTree {
 #-	      } elsif ($_->{installed}) {
 #-		  $o->ask_warn('', _("Sorry, i won't select this package. A more recent version is already installed"));
 	    } else {
-		pkgs::toggle($packages, $_);		
+		pkgs::togglePackageSelection($packages, $_);
 	    }
 	}
 	&$update();
@@ -476,9 +477,9 @@ sub choosePackagesTree {
 		my %l; $l{$items{$_}[1]} = $_ foreach keys %{$p->{packages_item}};
 		map {
 		    [ $_->{values}[$ind] >= $level ?
-		      ($l{$_} ? 1 : &$new_item($_, $_->{name}, $p)) : '', $l{$_}, $_ ];
+		      ($l{$_} ? 1 : &$new_item($_, pkgs::packageName($_), $p)) : '', $l{$_}, $_ ];
 		} sort { 
-		    $a->{name} cmp $b->{name} } @{$p->{packages}};
+		    pkgs::packageName($a) cmp pkgs::packageName($b) } @{$p->{packages}};
 	    } else {
 		map {
 		    my $P = $p->{childs}{$_};
@@ -567,8 +568,8 @@ sub installPackages {
 	    my $name = $_[0];
 	    $msg->set(_("Installing package %s", $name));
 	    $current_total_size += $last_size;
-	    $last_size = c::headerGetEntry($o->{packages}{$name}{header}, 'size');
-	    $text->set((split /\n/, c::headerGetEntry($o->{packages}{$name}{header}, 'summary'))[0] || '');
+	    $last_size = c::headerGetEntry($o->{packages}[0]{$name}{header}, 'size');
+	    $text->set((split /\n/, c::headerGetEntry($o->{packages}[0]{$name}{header}, 'summary'))[0] || '');
 	    $w->flush;
 	} elsif ($m =~ /^Progressing installing package/) {
 	    $progress->update($_[2] ? $_[1] / $_[2] : 0);

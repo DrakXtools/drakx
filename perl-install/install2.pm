@@ -338,7 +338,7 @@ sub formatPartitions {
     }
     mkdir "$o->{prefix}/$_", 0755 foreach 
       qw(dev etc etc/profile.d etc/sysconfig etc/sysconfig/console etc/sysconfig/network-scripts
-	home mnt tmp var var/tmp var/lib var/lib/rpm);
+	home mnt tmp var var/tmp var/lib var/lib/rpm var/lib/urpmi);
     mkdir "$o->{prefix}/$_", 0700 foreach qw(root);
 
     raid::prepare_prefixed($o->{raid}, $o->{prefix});
@@ -353,17 +353,26 @@ sub formatPartitions {
 #------------------------------------------------------------------------------
 sub choosePackages {
     require pkgs;
+    print "a\n";
     $o->setPackages if $_[1] == 1;
+    print "b\n";
     $o->selectPackagesToUpgrade($o) if $o->{isUpgrade} && $_[1] == 1;
+    print "c\n";
     if ($_[1] > 1 || !$o->{isUpgrade} || $::expert) {
 	if ($_[1] == 1) { 
 	    $o->{compssUsersChoice}{$_} = 1 foreach @{$o->{compssUsersSorted}}, 'Miscellaneous';
 	    $o->{compssUsersChoice}{KDE} = 0 if $o->{lang} =~ /ja|el|ko|th|vi|zh/; #- gnome handles much this fonts much better
 	}
+    print "d\n";
 	$o->choosePackages($o->{packages}, $o->{compss}, 
 			   $o->{compssUsers}, $o->{compssUsersSorted}, $_[1] == 1);
-	pkgs::unselect($o->{packages}, $o->{packages}{kdesu}) if $o->{packages}{kdesu} && $o->{security} > 3;
-	$o->{packages}{$_}{selected} = 1 foreach @{$o->{base}}; #- already done by selectPackagesToUpgrade.
+    print "e\n";
+	my $pkg = pkgs::packageByName($o->{packages}, 'kdesu');
+    print "f\n";
+	pkgs::unselectPackage($o->{packages}, $pkg) if $pkg && $o->{security} > 3;
+    print "g\n";
+	pkgs::packageSetFlagSelected(pkgs::packageByName($o->{packages}, $_), 1) foreach @{$o->{base}}; #- already done by selectPackagesToUpgrade.
+    print "h\n";
     }
 }
 
@@ -371,9 +380,13 @@ sub choosePackages {
 sub doInstallStep {
     $o->readBootloaderConfigBeforeInstall if $_[1] == 1;
 
+    print "i\n";
     $o->beforeInstallPackages;
+    print "j\n";
     $o->installPackages($o->{packages});
+    print "k\n";
     $o->afterInstallPackages;
+    print "l\n";
 }
 #------------------------------------------------------------------------------
 sub miscellaneous {
@@ -470,7 +483,7 @@ sub configureX {
     fs::write($o->{prefix}, $o->{fstab}, $o->{manualFstab}, $o->{useSupermount});
     modules::write_conf("$o->{prefix}/etc/conf.modules");
 
-    $o->setupXfree if $o->{packages}{XFree86}{installed} || $clicked;
+    $o->setupXfree if pkgs::packageFlagInstalled(pkgs::packageByName($o->{packages}, 'XFree86')) || $clicked;
 }
 #------------------------------------------------------------------------------
 sub exitInstall { $o->exitInstall(getNextStep() eq "exitInstall") }

@@ -36,7 +36,7 @@ sub relGetFile($) {
     local $_ = $_[0];
     /\.img$/ and return "images/$_";
     my $dir = m|/| ? "mdkinst" :
-      member($_, qw(compss compssList compssUsers depslist hdlist)) ? "base/" : "/RPMS/";
+      member($_, qw(compss compssList compssUsers depslist depslist.ordered hdlist hdlist.cz hdlist.cz2)) ? "base/" : "/RPMS/";
     $_ = "Mandrake/$dir$_";
     s/i386/i586/;
     $_;
@@ -123,8 +123,8 @@ sub setPackages($) {
 
     require pkgs;
     if (is_empty_hash_ref($o->{packages})) {
-	my $useHdlist = $o->{method} !~ /nfs|hd/ || $o->{isUpgrade};
-	eval { $o->{packages} = pkgs::psUsingHdlist() }  if $useHdlist;
+	my $useHdlist = 1; #$o->{method} !~ /nfs|hd/ || $o->{isUpgrade};
+	eval { $o->{packages} = pkgs::psUsingHdlist($o->{prefix}) } if $useHdlist;
 	$o->{packages} = pkgs::psUsingDirectory() if !$useHdlist || $@;
 
 	push @{$o->{default_packages}}, "nfs-utils-clients" if $o->{method} eq "nfs";
@@ -148,21 +148,21 @@ sub setPackages($) {
 	push @l, "kapm" if $o->{pcmcia};
 	$_->{values} = [ map { $_ + 50 } @{$_->{values}} ] foreach grep {$_} map { $o->{packages}{$_} } @l;
 
-	grep { !$o->{packages}{$_} && log::l("missing base package $_") } @{$o->{base}} and die "missing some base packages";
+	grep { !pkgs::packageByName($o->{packages}, $_) && log::l("missing base package $_") } @{$o->{base}} and die "missing some base packages";
     } else {
-	pkgs::unselect_all($o->{packages});
+	pkgs::unselectAllPackages($o->{packages});
     }
 
     #- this will be done if necessary in the selectPackagesToUpgrade,
     #- move the selection here ? this will remove the little window.
     unless ($o->{isUpgrade}) {
 	do {
-	    my $p = $o->{packages}{$_} or log::l("missing base package $_"), next;
-	    pkgs::select($o->{packages}, $p, 1);
+	    my $p = pkgs::packageByName($o->{packages}, $_) or log::l("missing base package $_"), next;
+	    pkgs::selectPackage($o->{packages}, $p, 1);
 	} foreach @{$o->{base}};
 	do {
-	    my $p = $o->{packages}{$_} or log::l("missing add-on package $_"), next;
-	    pkgs::select($o->{packages}, $p);
+	    my $p = pkgs::packageByName($o->{packages}, $_) or log::l("missing add-on package $_"), next;
+	    pkgs::selectPackage($o->{packages}, $p);
 	} foreach @{$o->{default_packages}};
     }
 }
@@ -386,8 +386,7 @@ sub setupFB {
 
     #- install needed packages for frame buffer.
     require pkgs;
-    pkgs::select($o->{packages}, $o->{packages}{'kernel-fb'});
-    pkgs::select($o->{packages}, $o->{packages}{'XFree86-FBDev'});
+    pkgs::selectPackage($o->{packages}, pkgs::packageByName($o->{packages}, $_)) foreach (qw(kernel-fb XFree86-FBDev));
     $o->installPackages($o->{packages});
 
     $vga ||= 785; #- assume at least 640x480x16.
@@ -430,7 +429,7 @@ sub g_auto_install(;$) {
     my ($f) = @_; $f ||= auto_inst_file;
     my $o = {};
 
-    $o->{default_packages} = [ map { $_->{name} } grep { $_->{selected} && !$_->{base} } values %{$::o->{packages}} ];
+    $o->{default_packages} = [ map { pkgs::packageName($_) } grep { pkgs::packageFlagSelected($_) && !pkgs::packageFlagBase($_) } values %{$::o->{packages}[0]} ];
 
     my @fields = qw(mntpoint type size);
     $o->{partitions} = [ map { my %l; @l{@fields} = @$_{@fields}; \%l } grep { $_->{mntpoint} } @{$::o->{fstab}} ];
@@ -489,8 +488,9 @@ sub loadO {
 sub pkg_install {
     my ($o, $name) = @_;
     require pkgs;
-    pkgs::select($o->{packages}, $o->{packages}{$name} || die "$name rpm not found");
-    install_steps::installPackages ($o, $o->{packages});
+    require install_steps;
+    pkgs::selectPackage($o->{packages}, pkgs::packageByName($o->{packages}, $name) || die "$name rpm not found");
+    install_steps::installPackages($o, $o->{packages});
 }
 
 sub fsck_option() {

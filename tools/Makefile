@@ -7,7 +7,7 @@ CFLAGS      = -Wall
 
 .PHONY: clean install $(DIRS)
 
-all: $(BASE)/depslist $(BASE)/hdlist $(DIRS) xhost+ install
+all: $(BASE)/depslist $(BASE)/depslist.ordered $(BASE)/hdlist $(BASE)/hdlist.cz2 $(DIRS) xhost+ install
 
 $(DIRS):
 	make -C $@
@@ -29,8 +29,15 @@ rpm2header: %: %.c
 ddcprobe/ddcxinfos:
 	$(MAKE) -C ddcprobe ddcxinfos
 
+$(BASE)/depslist.ordered: $(BASE)/depslist
+	./orderdepslist $<
+
 $(BASE)/depslist: $(BASE)/hdlist gendepslist
 	./gendepslist -h $@ $<
+
+$(BASE)/hdlist.cz2: $(BASE)/depslist.ordered $(RPMS)
+	rm -rf tmp
+	./build_hdlist_cz2 $(ROOTDEST) tmp
 
 $(BASE)/hdlist: $(RPMS)
 	$(MAKE) install

@@ -1,3 +1,13 @@
+2000-03-01  François Pons  <fpons@mandrakesoft.com>
+
+	* *.pm: heavy modification to take into account smaller
+	transaction during installation.
+	still a lot of test to perform, no provides updated currently and
+	building of hdlist.cz2 and depslist.ordered need old files...
+	nothing done for hdlist.gz during post installation, but
+	hdlist.cz2 is already copied in /var/lib/urpmi [and is used during
+	installation of packages as extract_archive need a true file].
+
 2000-03-01  Pixel  <pixel@mandrakesoft.com>
 
 	* install_steps_gtk.pm (new): more intelligent SIGCHLD handler
