@@ -203,15 +203,9 @@ sub prepare_write_fstab {
     my @smb_credentials;
     my @l = map { 
 	my $device = 
-	  $_->{device} eq 'none' || member($_->{type}, qw(nfs smbfs davfs)) ? 
-	      $_->{device} : 
 	  isLoopback($_) ? 
 	      ($_->{mntpoint} eq '/' ? "/initrd/loopfs" : "$_->{loopback_device}{mntpoint}") . $_->{loopback_file} :
-	  do {
-	      my $dir = $_->{device} =~ m!^(/|LABEL=)! ? '' : '/dev/';
-	      eval { devices::make("$prefix$dir$_->{device}") };
-	      "$dir$_->{device}";
-	  };
+	  part2device($prefix, $_->{device}, $_->{type});
 
 	my $real_mntpoint = $_->{mntpoint} || ${{ '/tmp/hdimage' => '/mnt/hd' }}{$_->{real_mntpoint}};
 	mkdir_p("$prefix$real_mntpoint", 0755) if $real_mntpoint =~ m|^/|;
@@ -278,6 +272,17 @@ sub write_fstab {
     my ($s, $smb_credentials) = prepare_write_fstab($all_hds, $prefix, '');
     output("$prefix/etc/fstab", $s);
     network::smb::save_credentials($_) foreach @$smb_credentials;
+}
+
+sub part2device {
+    my ($prefix, $dev, $type) = @_;
+    $dev eq 'none' || member($type, qw(nfs smbfs davfs)) ? 
+      $dev : 
+      do {
+	  my $dir = $dev =~ m!^(/|LABEL=)! ? '' : '/dev/';
+	  eval { devices::make("$prefix$dir$dev") };
+	  "$dir$dev";
+      };
 }
 
 sub auto_fs() {
@@ -684,13 +689,14 @@ sub mount {
 
     -d $where or mkdir_p($where);
 
+    $dev = part2device('', $dev, $fs);
+
     my @fs_modules = qw(vfat hfs romfs ufs reiserfs xfs jfs ext3);
 
     if (member($fs, 'smb', 'smbfs', 'nfs', 'davfs', 'ntfs') && $::isStandalone) {
 	system('mount', '-t', $fs, $dev, $where, '-o', $options) == 0 or die _("mounting partition %s in directory %s failed", $dev, $where);
 	return; #- do not update mtab, already done by mount(8)
     } elsif (member($fs, 'ext2', 'proc', 'usbdevfs', 'iso9660', @fs_modules)) {
-	$dev = devices::make($dev) if $fs ne 'proc' && $fs ne 'usbdevfs';
 	$where =~ s|/$||;
 
 	my $flag = c::MS_MGC_VAL();
