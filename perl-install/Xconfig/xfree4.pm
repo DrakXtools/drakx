@@ -116,7 +116,7 @@ sub new_screen_sections {
 
     get_ServerLayout($raw_X)->{Screen} = [ 
 	{ val => qq("screen1") }, #-)
-	map { { val => sprintf('"screen%d" RightOf "screen%d"', $_-1, $_) } } (2 .. $nb_new)
+	map { { val => sprintf('"screen%d" RightOf "screen%d"', $_, $_ - 1) } } (2 .. $nb_new)
     ];
 
     @l;
