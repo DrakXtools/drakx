@@ -1020,8 +1020,10 @@ You may also enter the IP address of the gateway if you have one."),
                    multiple_internet_cnx => 
                    {
                     name => N("You have configured multiple ways to connect to the Internet.\nChoose the one you want to use.\n\n") . if_(!$::isStandalone, "You may want to configure some profiles after the installation, in the Mandrake Control Center"),
-                    data => [ { label => N("Internet connection"), val => \$netc->{internet_cnx_choice}, 
-                                list => [ keys %{$netc->{internet_cnx}} ] } ],
+                    data => sub {
+                        [ { label => N("Internet connection"), val => \$netc->{internet_cnx_choice}, 
+                            list => [ keys %{$netc->{internet_cnx}} ] } ];
+                    },
                     post => sub { $::isInstall ? "network_on_boot" : "apply_settings" },
                    },
                    
