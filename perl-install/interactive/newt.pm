@@ -172,7 +172,10 @@ sub ask_fromW {
       (exists $common->{ok} ? 
        ($common->{ok}, $common->{cancel}) :
        ($::isWizard ? _("Next") : _("Ok"), $common->{cancel} || ($::isWizard ? _("<- Previous") : _("Cancel"))));
-    my ($buttons, $ok, $cancel) = Newt::Grid::ButtonBar($::isWizard ? ($b2, $b1) : ($b1, $b2));
+    #- b1 is always displayed, so giving it some label :-(
+    $b1 ||= $::isWizard ? _("Next") : _("Ok");
+    my @b2 = if_($b2, $b2);
+    my ($buttons, $ok, $cancel) = Newt::Grid::ButtonBar($::isWizard ? (@b2, $b1) : ($b1, @b2));
     ($ok, $cancel) = ($cancel, $ok) if $::isWizard;
 
     my $form = Newt::Component::Form(\undef, '', 0);
