@@ -1582,7 +1582,14 @@ Current configuration is:
 	    }
 	}
 
-	if ($::isStandalone && $0 =~ /Xdrakres/) {
+	if (!$::isStandalone || $0 !~ /Xdrakres/) {
+	    $in->set_help('configureXxdm') unless $::isStandalone;
+	    my $run = exists $o->{xdm} ? $o->{xdm} : $::auto || $in->ask_yesorno(_("X at startup"),
+_("I can set up your computer to automatically start X upon booting.
+Would you like X to start when you reboot?"), 1);
+	    any::runlevel($prefix, $run ? 5 : 3) unless $::testing;
+	}
+	if ($::isStandalone && $in->isa('interactive_gtk')) {
 	    if (my $wm = any::running_window_manager()) {
 		if ($in->ask_okcancel('', _("Please relog into %s to activate the changes", ucfirst (lc $wm)), 1)) {
 		    fork and $in->exit;
@@ -1601,13 +1608,7 @@ Current configuration is:
 	    } else {
 		$in->ask_warn('', _("Please log out and then use Ctrl-Alt-BackSpace"));
 	    }
-	} else {
-	    $in->set_help('configureXxdm') unless $::isStandalone;
-	    my $run = exists $o->{xdm} ? $o->{xdm} : $::auto || $in->ask_yesorno(_("X at startup"),
-_("I can set up your computer to automatically start X upon booting.
-Would you like X to start when you reboot?"), 1);
-	    any::runlevel($prefix, $run ? 5 : 3) unless $::testing;
-	}
+	} 
     }
 }
 
