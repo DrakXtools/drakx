@@ -23,12 +23,18 @@ use c;
 local $_ = join '', @ARGV;
 
 /-h/ and die "usage: drakgw [--expert]\n";
-/-v/ and die 'version: $Id$ ';
+/-v/ and die 'version: $Id$ '."\n";
 
 $::expert = /-expert/ || cat_("/etc/sysconfig/system") =~ /^TYPE="?expert/m; #"
 $::isStandalone = 1;
 
 my $in = vnew interactive('su');
+
+
+my $sysconf_network = "/etc/sysconfig/network";
+my $conf_linuxconf = "/etc/conf.linuxconf";
+my $rc_firewall = "/etc/rc.d/rc.firewall";
+my $dhcpd_conf = "/etc/dhcpd.conf";
 
 
 my $drakgw_setup = "/etc/sysconfig/inet_sharing";
@@ -47,7 +53,6 @@ sub start_daemons()
     local *DRAKGW_SETUP; open DRAKGW_SETUP, ">$drakgw_setup" or die "Can't open $drakgw_setup";
     print DRAKGW_SETUP "INET_SHARING=enabled\n";
     close DRAKGW_SETUP;
-    1;
 }
 
 
@@ -55,13 +60,13 @@ sub stop_daemons()
 {
     grep(/is running/, `/etc/rc.d/init.d/dhcpd status`) and ((system("/etc/rc.d/init.d/dhcpd stop") == 0) or die "Could not stop the dhcp server");
     grep(/Connection refused/, `/etc/rc.d/init.d/named status 2>&1`) or ((system("/etc/rc.d/init.d/named stop") == 0) or die "Could not stop the named server");
+    (system("/etc/rc.d/init.d/ipchains stop") == 0) or die "Could not stop ipchains";
     (system("/sbin/chkconfig --level 345 named off") == 0) or die "Could not chkconfig named";
     (system("/sbin/chkconfig --level 345 dhcpd off") == 0) or die "Could not chkconfig dhcpd";
-    
+
     local *DRAKGW_SETUP; open DRAKGW_SETUP, ">$drakgw_setup" or die "Can't open $drakgw_setup";
     print DRAKGW_SETUP "INET_SHARING=disabled\n";
     close DRAKGW_SETUP;
-    1;
 }
 
 
@@ -81,7 +86,15 @@ if (-f $drakgw_setup)
 				     "It's currently enabled.\n\n".
 				     "What would you like to do?"),
 				   [ "disable", "reconfigure", "dismiss" ]);
-	($r eq "disable") and stop_daemons() and $in->exit(0);
+	if ($r eq "disable")
+	{
+	    stop_daemons();
+	    -f "$dhcpd_conf.drakgwdisable" and (unlink("$dhcpd_conf.drakgwdisable") or die "Could not unlink $dhcpd_conf.drakgwdisable");
+	    rename($dhcpd_conf, "$dhcpd_conf.drakgwdisable") or die "Could not rename $dhcpd_conf to $dhcpd_conf.drakgwdisable";
+	    -f "$rc_firewall.drakgwdisable" and (unlink("$rc_firewall.drakgwdisable") or die "Could not unlink $rc_firewall.drakgwdisable");
+	    rename($rc_firewall, "$rc_firewall.drakgwdisable") or die "Could not rename $rc_firewall to $rc_firewall.drakgwdisable";
+	    $in->exit(0);
+	}
 	($r eq "dismiss") and $in->exit(0);
     }
     elsif (grep(/disabled/, @drakgw_setup_content))
@@ -91,7 +104,15 @@ if (-f $drakgw_setup)
 				     "It's currently disabled.\n\n".
 				     "What would you like to do?"),
 				   [ "enable", "reconfigure", "dismiss" ]);
-	($r eq "enable") and start_daemons() and $in->exit(0);
+	if ($r eq "enable")
+	{
+	    -f $dhcpd_conf and rename($dhcpd_conf, "$dhcpd_conf.old");
+	    rename("$dhcpd_conf.drakgwdisable", $dhcpd_conf) or die "Could not find configuration. Please reconfigure.";
+	    -f $rc_firewall and rename($rc_firewall, "$rc_firewall.old");
+	    rename("$rc_firewall.drakgwdisable", $rc_firewall) or die "Could not find configuration. Please reconfigure.";
+	    start_daemons();
+	    $in->exit(0);
+	}
 	($r eq "dismiss") and $in->exit(0);
     }
     else
@@ -250,9 +271,8 @@ my $f = "/sbin/ipchains";
 -e $f or system("urpmi --auto ipchains");
 -e $f or ($in->ask_warn('', _("Could not install ipchains RPM with urpmi.")) and $in->exit(0));
 
-my $rcfirewall = "/etc/rc.d/rc.firewall";
--f $rcfirewall and rename($rcfirewall, "$rcfirewall.old");
-local *RCFIREWALL; open RCFIREWALL, ">$rcfirewall" or die "Can't open $rcfirewall";
+-f $rc_firewall and rename($rc_firewall, "$rc_firewall.old");
+local *RCFIREWALL; open RCFIREWALL, ">$rc_firewall" or die "Can't open $rc_firewall";
 print RCFIREWALL <<EOF;
 #!/bin/sh
 #
@@ -356,12 +376,11 @@ echo "1" > /proc/sys/net/ipv4/ip_forward
 /sbin/ipchains -A forward -s $lan_address.0/24 -j MASQ
 EOF
 close RCFIREWALL;
-chmod 0700, $rcfirewall;
+chmod 0700, $rc_firewall;
 
 
 #- be sure that FORWARD_IPV4 is enabled in /etc/sysconfig/network
 
-my $sysconf_network = "/etc/sysconfig/network";
 open SYSCONF_NETWORK, "$sysconf_network" or die "Can't open $sysconf_network";
 my @sysconf_network_content = <SYSCONF_NETWORK>;
 close SYSCONF_NETWORK;
@@ -378,9 +397,8 @@ $f = "/usr/sbin/dhcpd";
 -e $f or system("urpmi --auto dhcp");
 -e $f or ($in->ask_warn('', _("Could not install dhcp RPM with urpmi.")) and $in->exit(0));
 
-my $dhcpdconf = "/etc/dhcpd.conf";
--f $dhcpdconf and rename($dhcpdconf, "$dhcpdconf.old");
-local *DHCPDCONF; open DHCPDCONF, ">$dhcpdconf" or die "Can't open $dhcpdconf";
+-f $dhcpd_conf and rename($dhcpd_conf, "$dhcpd_conf.old");
+local *DHCPDCONF; open DHCPDCONF, ">$dhcpd_conf" or die "Can't open $dhcpd_conf";
 print DHCPDCONF <<EOF;
 subnet $lan_address.0 netmask 255.255.255.0 {
 	# default gateway
@@ -400,7 +418,6 @@ close DHCPDCONF;
 
 #- put the interface for the dhcp server in linuxconf config, for the /etc script of dhcpd
 
-my $conf_linuxconf = "/etc/conf.linuxconf";
 -f $conf_linuxconf or system("urpmi --auto linuxconf");
 -f $conf_linuxconf or ($in->ask_warn('', _("Could not install linuxconf RPM with urpmi.")) and $in->exit(0));
 
