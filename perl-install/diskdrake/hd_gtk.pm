@@ -96,7 +96,7 @@ sub main {
     $in->ask_okcancel(N("Read carefully!"), N("Please make a backup of your data first"), 1) or return
       if $::isStandalone;
     $in->ask_warn('', 
-N("If you plan to use aboot, be carefull to leave a free space (2048 sectors is enough)
+N("If you plan to use aboot, be careful to leave a free space (2048 sectors is enough)
 at the beginning of the disk")) if arch() eq 'alpha' && !$::isEmbedded;
 
     $w->main;

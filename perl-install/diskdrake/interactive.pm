@@ -327,7 +327,7 @@ sub Auto_allocate {
 
 	$in->ask_warn("", [ 
 			   N("All primary partitions are used"),
-			   N("I can't add any more partition"), 
+			   N("I can't add any more partitions"), 
 			   N("To have more partitions, please delete one to be able to create an extended partition"),
 			  ]);
     }
