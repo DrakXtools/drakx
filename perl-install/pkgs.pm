@@ -417,6 +417,7 @@ sub psUsingHdlists {
 	#- make sure the first medium is always selected!
 	#- by default select all image.
 	psUsingHdlist($prefix, $method, \@packages, $hdlist, $medium, $rpmsdir, $descr, 1);
+
     }
 
     log::l("psUsingHdlists read " . scalar keys(%{$packages[0]}) . " headers on " . scalar keys(%{$packages[2]}) . " hdlists");

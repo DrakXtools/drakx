@@ -359,6 +359,12 @@ sub chooseCD {
     my @mediumsDescr = ();
     my %mediumsDescr = ();
 
+    unless (grep { /ram3/ } cat_("/proc/mounts")) {
+	#- mono-cd in case of no ramdisk
+	undef $packages->[2]{$_}{selected} foreach @mediums;
+	return;
+    }
+
     #- if no other medium available or a poor beginner, we are choosing for him!
     #- note first CD is always selected and should not be unselected!
     return if scalar(@mediums) == 0 || $::beginner;
