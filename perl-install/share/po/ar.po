@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX\n"
-"POT-Creation-Date: 2003-08-13 03:40+0200\n"
-"PO-Revision-Date: 2003-06-16 21:11-0300\n"
+"POT-Creation-Date: 2003-09-09 17:07+0200\n"
+"PO-Revision-Date: 2003-08-19 14:36-0300\n"
 "Last-Translator: Mohammed Gamal <f2c2001@yahoo.com>\n"
 "Language-Team: Arabic\n"
 "MIME-Version: 1.0\n"
@@ -59,6 +59,11 @@ msgstr "منفذ طابعة الشبكة"
 msgid "Please insert floppy disk:"
 msgstr "فضلاً أدخل قرص مرن:"
 
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid "DrakTermServ"
+msgstr ""
+
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "PCMCIA"
@@ -87,6 +92,11 @@ msgstr "ما نوع المدخل الذي تريد اضافته؟"
 #, c-format
 msgid "Restore partition table"
 msgstr "استعادة جدول التقسيم"
+
+#: ../../standalone/drakconnect:1
+#, c-format
+msgid "Configure hostname..."
+msgstr "إعداد اسم المستضيف..."
 
 #: ../../printer/cups.pm:1
 #, c-format
@@ -156,9 +166,9 @@ msgid "Gateway device"
 msgstr "جهاز البوابة"
 
 #: ../../standalone/drakfloppy:1
-#, fuzzy, c-format
+#, c-format
 msgid "Advanced preferences"
-msgstr "خيارات متقدمة"
+msgstr "تفضيلات متقدمة"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -171,10 +181,11 @@ msgid "Ethernetcard"
 msgstr "بطاقة ايثرنت"
 
 #: ../../security/l10n.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "If set, send the mail report to this email address else send it to root"
 msgstr ""
-"if set, send the mail report to this email address else send it to root."
+"عند التعيين, أرسل التقرير بالبريد الى هذا العنوان أو قم بإرساله الى المستخدم "
+"الجذر"
 
 #: ../../standalone/drakconnect:1
 #, c-format
@@ -182,9 +193,9 @@ msgid "Parameters"
 msgstr "Parameters"
 
 #: ../../standalone/draksec:1
-#, fuzzy, c-format
+#, c-format
 msgid "no"
-msgstr "المعلومات"
+msgstr "لا"
 
 #: ../../harddrake/v4l.pm:1
 #, c-format
@@ -200,11 +211,6 @@ msgstr "الواجهة:"
 #, c-format
 msgid "Select installation class"
 msgstr "اختر نوع التثبيت"
-
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "on CDROM"
-msgstr "على القرص المدمج"
 
 #: ../../network/tools.pm:1
 #, c-format
@@ -238,9 +244,9 @@ msgid "Error writing to file %s"
 msgstr "خطأ أثناء الكتابة الى الملف %s"
 
 #: ../../security/l10n.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Report check result to syslog"
-msgstr "if set to yes, report check result to syslog."
+msgstr "أرسل تقرير بنتيجة الاختبار الى syslog"
 
 #: ../../services.pm:1
 #, c-format
@@ -265,6 +271,11 @@ msgstr "سيتم تثبيت الحزم التالية"
 #, c-format
 msgid "CUPS configuration"
 msgstr "CUPS تهيئة"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "Total progress"
+msgstr "اجمالي التقدم"
 
 #: ../../lang.pm:1
 #, c-format
@@ -293,7 +304,7 @@ msgstr ""
 "\n"
 
 #: ../../standalone/draksec:1
-#, fuzzy, c-format
+#, c-format
 msgid "yes"
 msgstr "نعم"
 
@@ -346,9 +357,9 @@ msgid "No CD device defined!"
 msgstr "لم يتم تعريف جهاز قرص مدمج!"
 
 #: ../../standalone/drakbackup:1
-#, fuzzy, c-format
+#, c-format
 msgid "\tUse .backupignore files\n"
-msgstr "استخدم quota لملفات النسخ الإحتياطي."
+msgstr "\tاستخدم ملفات .backupignore\n"
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -366,9 +377,9 @@ msgid "256 kB"
 msgstr "256 كيلوبايت"
 
 #: ../../standalone/drakbackup:1
-#, fuzzy, c-format
+#, c-format
 msgid "Don't rewind tape after backup"
-msgstr "استخم الشريط للنسخ الإحتياطي"
+msgstr "لا تقم بإرجاع الشريط بعد النسخ"
 
 #: ../../any.pm:1
 #, c-format
@@ -418,6 +429,11 @@ msgstr "تم عمل التغيير, هل تريد اعادة تشغيل خدمة
 msgid "Swiss (French layout)"
 msgstr "السويسرية (تصميم فرنسي)"
 
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "August"
+msgstr "أغسطس"
+
 #: ../../raid.pm:1
 #, c-format
 msgid "mkraid failed (maybe raidtools are missing?)"
@@ -439,9 +455,14 @@ msgid "Soundcard"
 msgstr "بطاقة الصوت"
 
 #: ../../standalone/drakbackup:1
-#, fuzzy, c-format
+#, c-format
+msgid "Month"
+msgstr "الشهر"
+
+#: ../../standalone/drakbackup:1
+#, c-format
 msgid "Search for files to restore"
-msgstr "اختر وسيط آخر للاستعادة منه"
+msgstr "ابحث عن الملفات المطلوب استعادتها"
 
 #: ../../lang.pm:1
 #, c-format
@@ -461,9 +482,9 @@ msgid "Level %s\n"
 msgstr "المستوى %s\n"
 
 #: ../../keyboard.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Syriac (phonetic)"
-msgstr "الأرمينية (صوتي)"
+msgstr "السريانية (صوتي)"
 
 #: ../../lang.pm:1
 #, c-format
@@ -522,9 +543,9 @@ msgid "Search installed fonts"
 msgstr "ابحث في الخطوط المثبتة"
 
 #: ../../standalone/drakboot:1
-#, fuzzy, c-format
+#, c-format
 msgid "Default desktop"
-msgstr "الإفتراضي"
+msgstr "سطح المكتب الإفتراضي"
 
 #: ../../lang.pm:1
 #, c-format
@@ -587,6 +608,11 @@ msgstr "اسم المستخدم"
 msgid "Left \"Windows\" key"
 msgstr "مفتاح \"Windows\" الأيسر"
 
+#: ../../lang.pm:1
+#, c-format
+msgid "Guyana"
+msgstr "غويانا"
+
 #: ../../standalone/drakTermServ:1
 #, c-format
 msgid "dhcpd Server Configuration"
@@ -601,15 +627,15 @@ msgstr ""
 "يُستخدم للدليل:\n"
 " يمكن فقط لمالك هذا الدليل أو الملف الغاؤه"
 
-#: ../../lang.pm:1
-#, c-format
-msgid "Guyana"
-msgstr "غويانا"
-
 #: ../../printer/main.pm:1
 #, c-format
 msgid " on Novell server \"%s\", printer \"%s\""
 msgstr " على خادم Novell \"%s\", الطابعة \"%s\""
+
+#: ../../standalone/printerdrake:1
+#, fuzzy, c-format
+msgid "Printer Name"
+msgstr "اسم صف الطابعة"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
@@ -899,9 +925,9 @@ msgstr ""
 "لأي سؤال حول هذه الوثيقة, فضلاً اتصل بـ MandrakeSoft S.A.  \n"
 
 #: ../../standalone/drakboot:1
-#, fuzzy, c-format
+#, c-format
 msgid "Default user"
-msgstr "الطابعة الإفتراضية"
+msgstr "المستخدم الإفتراضي"
 
 #: ../../standalone/draksplash:1
 #, c-format
@@ -1050,20 +1076,15 @@ msgstr ""
 
 #: ../../standalone/drakboot:1 ../../standalone/drakfloppy:1
 #: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
+#: ../../standalone/printerdrake:1
 #, c-format
 msgid "<control>Q"
 msgstr "<control>Q"
 
 #: ../../standalone/drakbackup:1
-#, c-format
-msgid ""
-"Please be sure that the cron daemon is included in your services. \n"
-"\n"
-"Note that currently all 'net' media also use the hard drive."
-msgstr ""
-"تأكد من أن مراقب cron موجود ضمن خدمات النظام. \n"
-"\n"
-"لاحظ أن كل وسائط الشبكة تستخدم القرص الصلب."
+#, fuzzy, c-format
+msgid "Unable to find backups to restore...\n"
+msgstr "رجاء اختر تاريخ الإستعادة..."
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -1139,9 +1160,9 @@ msgid "Interface"
 msgstr "الواجهة"
 
 #: ../../standalone/drakbackup:1
-#, fuzzy, c-format
+#, c-format
 msgid "Multisession CD"
-msgstr " (متعدد الجلسات)"
+msgstr "قرص مدمج متعدد الجلسات"
 
 #: ../../modules/parameters.pm:1
 #, c-format
@@ -1183,11 +1204,6 @@ msgstr "Model stepping"
 msgid "Rwanda"
 msgstr "رواندا"
 
-#: ../../modules/interactive.pm:1
-#, c-format
-msgid "Do you have any %s interfaces?"
-msgstr "هل لديك أي واجهات %s؟"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Switzerland"
@@ -1198,10 +1214,15 @@ msgstr "السويسرية"
 msgid "Brunei Darussalam"
 msgstr "سلطنة بروناي"
 
+#: ../../modules/interactive.pm:1
+#, c-format
+msgid "Do you have any %s interfaces?"
+msgstr "هل لديك أي واجهات %s؟"
+
 #: ../../standalone/drakTermServ:1
-#, fuzzy, c-format
+#, c-format
 msgid "You must be root to read configuration file. \n"
-msgstr "قم بالنسخ الآن من ملف التهيئة"
+msgstr "يجب أن تكون المستخدم الجذر لقراءة ملف التهيئة. \n"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -1291,15 +1312,20 @@ msgstr ""
 msgid "Configure Internet Access..."
 msgstr "إعداد الدخول الى الإنترنت..."
 
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "Please choose the time interval between each backup"
+msgstr "فضلا اختر الفترة ما بين كل عملية نسخ احتياطي"
+
 #: ../../crypto.pm:1 ../../lang.pm:1
 #, c-format
 msgid "Norway"
 msgstr "النرويج"
 
 #: ../../standalone/drakconnect:1
-#, fuzzy, c-format
+#, c-format
 msgid "Delete profile"
-msgstr "احذف التشكيل..."
+msgstr "احذف التشكيل"
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -1338,19 +1364,24 @@ msgstr ""
 "الحالي و سيطلب منك أن تدخل قرصاً مختلفا كما هو مطلوب."
 
 #: ../../standalone/drakperm:1
-#, fuzzy, c-format
+#, c-format
 msgid "When checked, owner and group won't be changed"
 msgstr "عند التأشير لن يتم تغيير المالك و المجموعة"
-
-#: ../../harddrake/data.pm:1
-#, c-format
-msgid "Processors"
-msgstr "المعالجات"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Bulgaria"
 msgstr "بلغاريا"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "Tuesday"
+msgstr "الثلاثاء"
+
+#: ../../harddrake/data.pm:1
+#, c-format
+msgid "Processors"
+msgstr "المعالجات"
 
 #: ../../lang.pm:1
 #, c-format
@@ -1383,15 +1414,15 @@ msgstr "التجزئة %s معروفة الآن بالإسم %s"
 msgid "Backup Other files..."
 msgstr "انسخ ملفات أخرى..."
 
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "SMB server IP"
-msgstr "IP خادم SMB"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Congo (Kinshasa)"
 msgstr "الكونغو كينشاسا"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "SMB server IP"
+msgstr "IP خادم SMB"
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -1429,15 +1460,13 @@ msgstr ""
 "%s"
 
 #: ../../standalone/drakbackup:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "\n"
 "                      DrakBackup Daemon Report\n"
 msgstr ""
 "\n"
 "                      تقرير مراقب DrakBackup\n"
-"\n"
-"\n"
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -1494,11 +1523,6 @@ msgstr "استخدم يونيكود افتراضياً"
 msgid "the module of the GNU/Linux kernel that handles the device"
 msgstr "وحدة نواة Linux التي تتعامل مع هذا الجهاز"
 
-#: ../../standalone/drakbackup:1
-#, fuzzy, c-format
-msgid "DVDR device"
-msgstr "وحدة"
-
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid "Trying to rescue partition table"
@@ -1510,12 +1534,9 @@ msgid "Option %s must be an integer number!"
 msgstr "الخيار %s يجب أن يكون رقما صحيحاً!"
 
 #: ../../security/l10n.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Use password to authenticate users"
-msgstr ""
-"Arguments: (arg)\n"
-"\n"
-"Use password to authenticate users."
+msgstr "استخدم كلمة المرور للمصادقة على المستخدمين"
 
 #: ../../interactive/stdio.pm:1
 #, c-format
@@ -1565,13 +1586,13 @@ msgid "Resizing"
 msgstr "جاري تغيير الحجم"
 
 #: ../../standalone/drakbackup:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Enter the maximum size\n"
 " allowed for Drakbackup (MB)"
 msgstr ""
 "فضلاً أدخل الحجم الأقصى\n"
-" المسموح به لـDrakbackup"
+" المسموح به لـDrakbackup (ميغابايت)"
 
 #: ../../network/netconnect.pm:1
 #, c-format
@@ -1582,23 +1603,6 @@ msgstr "وصلة كيبل"
 #, c-format
 msgid "User"
 msgstr "المستخدم"
-
-#: ../../fsedit.pm:1
-#, c-format
-msgid ""
-"I can't read the partition table of device %s, it's too corrupted for me :(\n"
-"I can try to go on, erasing over bad partitions (ALL DATA will be lost!).\n"
-"The other solution is to not allow DrakX to modify the partition table.\n"
-"(the error is %s)\n"
-"\n"
-"Do you agree to loose all the partitions?\n"
-msgstr ""
-"لا يمكنني قراءة جدول التجزئات للجهاز %s, يبدو أنه مخرّب :(\n"
-"يمكنني أن أحاول المتابعة مع ازالة التجزئات السيئة (ستضيع كل البيانات!).\n"
-"الحل الآخر هو أن تمنع DrakX من تعديل جدول التقسيمات.\n"
-"(الخطأ هو %s)\n"
-"\n"
-"هل أنت موافق على خسارة كل التجزئات؟\n"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -1621,9 +1625,9 @@ msgid "Button 3 Emulation"
 msgstr "محاكاة الزر 3"
 
 #: ../../security/l10n.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Check additions/removals of sgid files"
-msgstr "if set to yes, check additions/removals of sgid files."
+msgstr "تحقق من اضافات/حذف ملفات sgid"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -1670,15 +1674,6 @@ msgstr "اسم الطابعة, وصف, المكان"
 msgid "USA (broadcast)"
 msgstr "الولايات المتّحدة الأمريكيّة (broadcast)"
 
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid ""
-"Please choose the\n"
-"media for backup."
-msgstr ""
-"رجاء اختر\n"
-"وسيط النسخ الاحتياطي"
-
 #: ../../Xconfig/card.pm:1
 #, c-format
 msgid "Use Xinerama extension"
@@ -1689,21 +1684,15 @@ msgstr "استخدام امتداد Xinerama"
 msgid "Loopback"
 msgstr "Loopback"
 
-#: ../../standalone/drakfloppy:1
-#, c-format
-msgid ""
-"Unable to properly close mkbootdisk: \n"
-" %s \n"
-" %s"
-msgstr ""
-"تعذر غلق mkbootdisk: \n"
-" %s \n"
-" %s"
-
 #: ../../standalone/drakxtv:1
 #, c-format
 msgid "West Europe"
 msgstr "أوروبّا الغربيّة"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "On CD-R"
+msgstr "على القرص المدمج"
 
 #: ../../standalone.pm:1
 #, c-format
@@ -1728,14 +1717,19 @@ msgid "Harddrake2 version %s"
 msgstr "Harddrake2 الإصدار %s"
 
 #: ../../standalone/drakfloppy:1
-#, fuzzy, c-format
+#, c-format
 msgid "Preferences"
-msgstr "التفضيل: "
+msgstr "تفضيلات"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Swaziland"
 msgstr "سوازيلاند"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Dominican Republic"
+msgstr "جمهورية الدومينيكان"
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -1747,15 +1741,10 @@ msgstr "جاري نسخ %s"
 msgid "Choose color"
 msgstr "إختر اللون"
 
-#: ../../lang.pm:1
-#, c-format
-msgid "Dominican Republic"
-msgstr "جمهورية الدومينيكان"
-
 #: ../../keyboard.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Syriac"
-msgstr "سورية"
+msgstr "السريانية"
 
 #: ../../standalone/drakperm:1
 #, c-format
@@ -1850,12 +1839,9 @@ msgid "There is already a partition with mount point %s\n"
 msgstr "هناك تجزئة مع نقطة التحميل %s مسبقاً\n"
 
 #: ../../security/help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Enable/Disable msec hourly security check."
-msgstr ""
-"Arguments: (arg)\n"
-"\n"
-"Enable/Disable msec hourly security check."
+msgstr "تمكين/تعطيل اختبارات msec الأمنية كل ساعة"
 
 #: ../../help.pm:1
 #, c-format
@@ -2101,7 +2087,7 @@ msgid "Autoprobe"
 msgstr "تحقق آلي"
 
 #: ../../security/help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "if set to yes, check for :\n"
 "\n"
@@ -2111,8 +2097,13 @@ msgid ""
 "\n"
 "- for users with the 0 id other than root."
 msgstr ""
-"if set to yes, check for empty passwords, for no password in /etc/shadow and "
-"for users with the 0 id other than root."
+"اذا كانت القيمة نعم, تحقق من :\n"
+"\n"
+"- كلمات المرور الفارغة,\n"
+"\n"
+"- عدم وجود كلمة مرور في /etc/shadow\n"
+"\n"
+"- وجود مستخدمين برقم معرف 0 غير المستخدم الجذر."
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -2150,6 +2141,11 @@ msgstr ""
 "فضلاً حدد مكان ملف auto_install.cfg.\n"
 "\n"
 "اترك الحقل فارغاً اذا لم تكن تريد اعاد وضع التثبيت الالي.\n"
+
+#: ../../printer/cups.pm:1 ../../standalone/printerdrake:1
+#, fuzzy, c-format
+msgid "Configured on other machines"
+msgstr "قم بإعداد الإتصال"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -2441,6 +2437,11 @@ msgstr ""
 msgid "Netmask:"
 msgstr "Netmask:"
 
+#: ../../network/adsl.pm:1
+#, c-format
+msgid "Do it later"
+msgstr ""
+
 #: ../../any.pm:1
 #, c-format
 msgid "Append"
@@ -2478,41 +2479,6 @@ msgstr ""
 "\n"
 "اذا كانت بعض هذه الإجراءات قد تسببت بمشاكل لك, عطّل هذا الخيار, لكن في هذه "
 "الحال عليك الإنتباه لهذه النقاط."
-
-#: ../../harddrake/sound.pm:1
-#, c-format
-msgid ""
-"OSS (Open Sound System) was the first sound API. It's an OS independant "
-"sound API (it's available on most unices systems) but it's a very basic and "
-"limited API.\n"
-"What's more, OSS drivers all reinvent the wheel.\n"
-"\n"
-"ALSA (Advanced Linux Sound Architecture) is a modularized architecture "
-"which\n"
-"supports quite a large range of ISA, USB and PCI cards.\n"
-"\n"
-"It also provides a much higher API than OSS.\n"
-"\n"
-"To use alsa, one can either use:\n"
-"- the old compatibility OSS api\n"
-"- the new ALSA api that provides many enhanced features but requires using "
-"the ALSA library.\n"
-msgstr ""
-"OSS (Open Sound System) was the first sound API. It's an OS independant "
-"sound API (it's available on most unices systems) but it's a very basic and "
-"limited API.\n"
-"What's more, OSS drivers all reinvent the wheel.\n"
-"\n"
-"ALSA (Advanced Linux Sound Architecture) is a modularized architecture "
-"which\n"
-"supports quite a large range of ISA, USB and PCI cards.\n"
-"\n"
-"It also provides a much higher API than OSS.\n"
-"\n"
-"To use alsa, one can either use:\n"
-"- the old compatibility OSS api\n"
-"- the new ALSA api that provides many enhanced features but requires using "
-"the ALSA library.\n"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -2567,12 +2533,9 @@ msgid "Terminal-based"
 msgstr "Terminal-based"
 
 #: ../../security/help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Enable/Disable IP spoofing protection."
-msgstr ""
-"Arguments: (arg, alert=1)\n"
-"\n"
-"Enable/Disable IP spoofing protection."
+msgstr "تمكين/تعطيل حماية IP spoofing"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -2623,6 +2586,11 @@ msgstr "الصومال"
 msgid "No open source driver"
 msgstr "لا يوجد مشغل مفتوح المصدر"
 
+#: ../../standalone/printerdrake:1
+#, c-format
+msgid "Def."
+msgstr ""
+
 #: ../../security/level.pm:1
 #, c-format
 msgid ""
@@ -2646,6 +2614,11 @@ msgstr "نيوكاليدونيا"
 #, c-format
 msgid "European protocol (EDSS1)"
 msgstr "البروتوكول الأوروبي (EDSS1)"
+
+#: ../../standalone/printerdrake:1
+#, c-format
+msgid "/_Delete"
+msgstr "/_حذف"
 
 #: ../../any.pm:1
 #, c-format
@@ -2788,7 +2761,7 @@ msgid "Tokelau"
 msgstr "توكلاو"
 
 #: ../../standalone/logdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "Matching"
 msgstr "الموائمة"
 
@@ -2964,9 +2937,9 @@ msgid "CUPS"
 msgstr "CUPS"
 
 #: ../../standalone/drakbackup:1
-#, fuzzy, c-format
+#, c-format
 msgid "Erase tape before backup"
-msgstr "استخم الشريط للنسخ الإحتياطي"
+msgstr "امسح الشريط قبل النسخ الاحتياطي"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -3007,6 +2980,11 @@ msgstr ""
 msgid "Saint Lucia"
 msgstr "سانت لوسيا"
 
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "November"
+msgstr "نوفمبر"
+
 #: ../../standalone/drakconnect:1
 #, c-format
 msgid "Disconnect..."
@@ -3040,11 +3018,13 @@ msgid "Package Group Selection"
 msgstr "اختيار مجموعات الحزم"
 
 #: ../../standalone/drakTermServ:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Allow local hardware\n"
 "configuration."
-msgstr "اعداة تهيئة آلية"
+msgstr ""
+"اسمح بالتهيئة المحلية\n"
+"للعتاد"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -3187,6 +3167,11 @@ msgstr ""
 msgid "All primary partitions are used"
 msgstr "كل التجزئات الرئيسية مستخدمة"
 
+#: ../../printer/main.pm:1
+#, fuzzy, c-format
+msgid "LPD server \"%s\", printer \"%s\""
+msgstr "على خادم LPD \"%s\", الطابعة \"%s\""
+
 #: ../../network/netconnect.pm:1
 #, c-format
 msgid ""
@@ -3243,13 +3228,13 @@ msgstr "المستضيف %s"
 
 #: ../../lang.pm:1
 #, c-format
-msgid "Armenia"
-msgstr "أرمينيا"
+msgid "Fiji"
+msgstr "فيجي"
 
 #: ../../lang.pm:1
 #, c-format
-msgid "Fiji"
-msgstr "فيجي"
+msgid "Armenia"
+msgstr "أرمينيا"
 
 #: ../../any.pm:1
 #, c-format
@@ -3260,6 +3245,11 @@ msgstr "سواقة القرص المرن الثانية"
 #, c-format
 msgid "About Harddrake"
 msgstr "حول HardDrake"
+
+#: ../../security/l10n.pm:1
+#, c-format
+msgid "Authorize TCP connections to X Window"
+msgstr ""
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -3333,6 +3323,11 @@ msgstr ""
 "\n"
 "%s\n"
 "متوفرة لنظامك.\n"
+
+#: ../../printer/main.pm:1
+#, fuzzy, c-format
+msgid "Multi-function device on parallel port #%s"
+msgstr ", جهاز متعدد الوظائف على المنفذ المتوازي #%s"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -3461,19 +3456,19 @@ msgid "Romania"
 msgstr "رومانيا"
 
 #: ../../standalone/drakperm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Group"
 msgstr "المجموعة"
-
-#: ../../standalone/scannerdrake:1
-#, c-format
-msgid "choose device"
-msgstr "اختر الجهاز "
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Canada"
 msgstr "كندا"
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "choose device"
+msgstr "اختر الجهاز "
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -3491,7 +3486,7 @@ msgid "German"
 msgstr "الألمانية"
 
 #: ../../help.pm:1 ../../install_steps_gtk.pm:1 ../../interactive.pm:1
-#: ../../my_gtk.pm:1 ../../ugtk2.pm:1 ../../interactive/newt.pm:1
+#: ../../ugtk2.pm:1 ../../interactive/newt.pm:1
 #: ../../printer/printerdrake.pm:1 ../../standalone/drakbackup:1
 #, c-format
 msgid "Next ->"
@@ -3538,10 +3533,10 @@ msgstr "غينيا-بيساو"
 msgid "Horizontal refresh rate"
 msgstr "نسبة الإنعاش الأفقي"
 
-#: ../../standalone/drakperm:1
-#, fuzzy, c-format
+#: ../../standalone/drakperm:1 ../../standalone/printerdrake:1
+#, c-format
 msgid "Edit"
-msgstr "خروج"
+msgstr "تحرير"
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -3659,6 +3654,11 @@ msgstr ""
 msgid "Re-generating list of configured scanners ..."
 msgstr "جاري اعادة توليد قائمة الماسحات الضوئية المعدّة ..."
 
+#: ../../modules/interactive.pm:1
+#, fuzzy, c-format
+msgid "Module configuration"
+msgstr "تهيئة يدوية"
+
 #: ../../harddrake/data.pm:1
 #, c-format
 msgid "Scanner"
@@ -3668,11 +3668,6 @@ msgstr "الماسح الضوئي"
 #, c-format
 msgid "Warning: testing this graphic card may freeze your computer"
 msgstr "تحذير: اختبار بطاقة العرض هذه قد يتسب في ايقاف جهازك"
-
-#: ../../standalone/drakconnect:1
-#, c-format
-msgid "Bad Ip"
-msgstr "IP سيئ"
 
 #: ../../any.pm:1
 #, c-format
@@ -3715,15 +3710,15 @@ msgstr "إنهاء"
 msgid "No password prompt on %s at port %s"
 msgstr "لا يوجد طلب كلمة سر في %s على المنفذ %s"
 
+#: ../../mouse.pm:1
+#, fuzzy, c-format
+msgid "Kensington Thinking Mouse with Wheel emulation"
+msgstr "Kensington Thinking Mouse"
+
 #: ../../standalone/scannerdrake:1
 #, c-format
 msgid "Usage of remote scanners"
 msgstr "استخدام الماسحات الضوئية البعيدة"
-
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "\t-CDROM.\n"
-msgstr "\t-القرص المدمج.\n"
 
 #: ../../install_interactive.pm:1
 #, c-format
@@ -3746,7 +3741,7 @@ msgstr "Dvorak (نرويجيةّ)"
 msgid "Hard Disk Backup Progress..."
 msgstr "التقدم في نسخ القرص الصلب..."
 
-#: ../../standalone/drakfloppy:1
+#: ../../standalone/drakconnect:1 ../../standalone/drakfloppy:1
 #, c-format
 msgid "Unable to fork: %s"
 msgstr "تعذر تنفيذ: %s"
@@ -3979,6 +3974,11 @@ msgstr "استعادة من الشريط"
 msgid "Choose the profile to configure"
 msgstr "اختر التشكيل الذي تريد تهيئته"
 
+#: ../../security/l10n.pm:1
+#, c-format
+msgid "Password minimum length and number of digits and upcase letters"
+msgstr ""
+
 #: ../../network/ethernet.pm:1 ../../network/network.pm:1
 #, c-format
 msgid ""
@@ -4011,6 +4011,11 @@ msgstr "جاري اعادة تشغيل نظام الطباعة..."
 #, c-format
 msgid "See hardware info"
 msgstr "عرض معلومات العتاد"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "Day"
+msgstr "اليوم"
 
 #: ../../any.pm:1
 #, c-format
@@ -4063,14 +4068,16 @@ msgstr ""
 msgid "Subnet Mask:"
 msgstr "Subnet Mask:"
 
-#: ../../standalone/drakboot:1
-#, c-format
-msgid "LiLo and Bootsplash themes installation successfull"
-msgstr "تم تثبيت سمات LiLo و Bootsplash بنجاح"
-
 #: ../../security/l10n.pm:1
 #, c-format
 msgid "Set password expiration and account inactivation delays"
+msgstr ""
+
+#: ../../standalone/logdrake:1
+#, c-format
+msgid ""
+"_: load here is a noun, the load of the system\n"
+"Load"
 msgstr ""
 
 #: ../../Xconfig/monitor.pm:1
@@ -4116,6 +4123,11 @@ msgstr ""
 #, c-format
 msgid "Need hostname, username and password!"
 msgstr "يُحتاج الى اسم المستضيف و اسم المستخدم و كلمة المرور!"
+
+#: ../../network/adsl.pm:1
+#, fuzzy, c-format
+msgid "Insert floppy"
+msgstr "أدخل قرص مرن في %s"
 
 #: ../../diskdrake/dav.pm:1
 #, c-format
@@ -4175,6 +4187,15 @@ msgstr "تحتاج الى اعداة التثبيت لتفعيل التعديل�
 msgid "Do not include the browser cache"
 msgstr "لا تستخدم ذاكرة المتصفح المخبئية"
 
+#: ../../install_steps_interactive.pm:1
+#, c-format
+msgid ""
+"Failed to check filesystem %s. Do you want to repair the errors? (beware, "
+"you can lose data)"
+msgstr ""
+"تعذر التأكد من صحة نظام المفات %s. هل تريد تصحيح الأخطاء (كن حذراً, يمكن أن "
+"تخسر بيانات)"
+
 #: ../../standalone/keyboarddrake:1
 #, c-format
 msgid "Please, choose your keyboard layout."
@@ -4230,6 +4251,11 @@ msgstr "GlidePoint"
 msgid "Start: sector %s\n"
 msgstr "البداية: قطاع %s\n"
 
+#: ../../standalone/drakconnect:1
+#, c-format
+msgid "No Mask"
+msgstr "لا قناع"
+
 #: ../../standalone/drakgw:1
 #, c-format
 msgid "Network interface already configured"
@@ -4255,6 +4281,11 @@ msgstr "خادم بريد"
 msgid "Please click on a partition"
 msgstr "فضلا اضغط على تجزئة"
 
+#: ../../printer/main.pm:1
+#, fuzzy, c-format
+msgid "Multi-function device on HP JetDirect"
+msgstr ", جهاز متعدد الوظائف على HP JetDirect"
+
 #: ../../any.pm:1 ../../standalone/drakbackup:1
 #, c-format
 msgid "Linux"
@@ -4264,11 +4295,6 @@ msgstr "Linux"
 #, c-format
 msgid "Have a nice day!"
 msgstr "نتمنى لك يوماً سعيداً!"
-
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "across Network"
-msgstr "عبر الشّبكة"
 
 #: ../../help.pm:1
 #, c-format
@@ -4354,9 +4380,9 @@ msgid "Mount points must begin with a leading /"
 msgstr "يجب أن تبدأ نقاط التحميل بالعلامة /"
 
 #: ../../standalone/drakbackup:1
-#, fuzzy, c-format
+#, c-format
 msgid "Choose your CD/DVD device"
-msgstr "فضلاً اختر مساحة وسيط CD/DVD (بالميغابايت)"
+msgstr "فضلاً اختر جهاز CD/DVD"
 
 #: ../../standalone/logdrake:1
 #, c-format
@@ -4397,6 +4423,14 @@ msgstr ""
 "لم تختر أي مجموعة من الحزم.\n"
 "فضلاً اختر التثبيت المصغر الذي تريده:"
 
+#: ../../network/adsl.pm:1
+#, c-format
+msgid ""
+"You need the Alcatel microcode.\n"
+"You can provide it now via a floppy or your windows partition,\n"
+"or skip and do it later."
+msgstr ""
+
 #: ../../diskdrake/dav.pm:1
 #, c-format
 msgid "Please enter the WebDAV server URL"
@@ -4414,6 +4448,7 @@ msgid "Accept"
 msgstr "اقبل"
 
 #: ../../printer/printerdrake.pm:1 ../../standalone/harddrake2:1
+#: ../../standalone/printerdrake:1
 #, c-format
 msgid "Description"
 msgstr "الوصف"
@@ -4437,11 +4472,6 @@ msgstr "يمكن لبطاقتك الحصول على دعم للتسريع ثلا
 #, c-format
 msgid "Choose a monitor"
 msgstr "إختر شاشة"
-
-#: ../../standalone/drakconnect:1
-#, fuzzy, c-format
-msgid "Bad Mask"
-msgstr "حزمة سيئة"
 
 #: ../../any.pm:1
 #, c-format
@@ -4548,6 +4578,11 @@ msgstr "كيب فيردي"
 msgid "whether this cpu has the Cyrix 6x86 Coma bug"
 msgstr "اذا كان المعالج لديه Cyrix 6x86 Coma bug"
 
+#: ../../standalone/printerdrake:1
+#, fuzzy, c-format
+msgid "Loading printer configuration... Please wait"
+msgstr "جاري تحميل المستخدمين و المجموعات... رجاء الانتظار"
+
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "early pentiums were buggy and freezed when decoding the F00F bytecode"
@@ -4603,20 +4638,15 @@ msgstr "Userdrake"
 msgid "Which partition do you want to use for Linux4Win?"
 msgstr "أي تجزئة تريد استخدامها من أجل Linux4Win"
 
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "Backup system"
-msgstr "نظام المساعد"
-
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Test pages"
 msgstr "صفحات اختبارية"
 
 #: ../../diskdrake/interactive.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Logical volume name "
-msgstr "اجراء محلي"
+msgstr "Logical volume name "
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -4643,9 +4673,9 @@ msgid "Card mem (DMA)"
 msgstr "Card mem (DMA)"
 
 #: ../../standalone/net_monitor:1
-#, fuzzy, c-format
+#, c-format
 msgid "Disconnecting from Internet "
-msgstr "جاري قطع الإتصال بالإنترنت"
+msgstr "اقطع الإتصال بالإنترنت"
 
 #: ../../crypto.pm:1 ../../lang.pm:1 ../../network/tools.pm:1
 #, c-format
@@ -4722,9 +4752,9 @@ msgid "United States"
 msgstr "الولايات المتحدة"
 
 #: ../../security/l10n.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "User umask"
-msgstr "المستخدمون"
+msgstr "User umask"
 
 #: ../../any.pm:1
 #, c-format
@@ -4758,12 +4788,9 @@ msgid "NTP Server"
 msgstr "خادم NTP"
 
 #: ../../security/l10n.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Sulogin(8) in single user level"
-msgstr ""
-"Arguments: (arg)\n"
-"\n"
-" Enable/Disable sulogin(8) in single user level."
+msgstr "Sulogin(8) في مستوى المستخدم الوحيد"
 
 #: ../../install_steps_gtk.pm:1
 #, c-format
@@ -4821,9 +4848,9 @@ msgid "Advanced Options"
 msgstr "خيارات متقدمة"
 
 #: ../../standalone/drakbackup:1
-#, fuzzy, c-format
+#, c-format
 msgid "View Configuration"
-msgstr "أدوات الإعدادات"
+msgstr "اعرض الإعدادات"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -4973,7 +5000,7 @@ msgid "Slovenian"
 msgstr "السلوفينية"
 
 #: ../../security/help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Authorize:\n"
 "\n"
@@ -4987,13 +5014,17 @@ msgid ""
 "To authorize the services you need, use /etc/hosts.allow (see hosts.allow"
 "(5))."
 msgstr ""
-"Arguments: (arg)\n"
+"تمكين الصلاحية:\n"
 "\n"
-"Authorize all services controlled by tcp_wrappers (see hosts.deny(5)) if "
-"\\fIarg\\fP = ALL. Only local ones\n"
-"if \\fIarg\\fP = LOCAL and none if \\fIarg\\fP = NONE. To authorize the "
-"services you need, use /etc/hosts.allow\n"
-"(see hosts.allow(5))."
+"- لكل الخدمات التي يتم التحكم بها عن طريق tcp_wrappers (انظر صقحة دليل hosts."
+"deny(5) )اذا تم التعيين الى \"ALL\",\n"
+"\n"
+"- الملفات المحلية فقط اذا تم التعيين الى \"LOCAL\"\n"
+"\n"
+"- لا شئ اذا تم التعيين الى \"NONE\".\n"
+"\n"
+"لتمكين صالحية الخدمات التي تريدها, استخدم ملف /etc/hosts.allow (انظر hosts."
+"allow(5))."
 
 #: ../../lang.pm:1
 #, c-format
@@ -5029,12 +5060,12 @@ msgstr "الجدول"
 msgid "I don't know how to format %s in type %s"
 msgstr "لا أعرف كيف أجهز %s في النوع %s"
 
-#: ../../standalone/harddrake2:1
+#: ../../standalone/harddrake2:1 ../../standalone/printerdrake:1
 #, c-format
 msgid "Model"
 msgstr "الطراز"
 
-#: ../../printer/printerdrake.pm:1
+#: ../../printer/main.pm:1 ../../printer/printerdrake.pm:1
 #, c-format
 msgid "USB printer #%s"
 msgstr "طابعة USB #%s"
@@ -5104,9 +5135,9 @@ msgstr ""
 "الإنترنت:"
 
 #: ../../security/l10n.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "No password aging for"
-msgstr "لا كلمة مرور"
+msgstr "لا تقاد لكلمة المرور لـ"
 
 #: ../../standalone/draksec:1
 #, c-format
@@ -5129,6 +5160,11 @@ msgstr "تيمور الشرقية"
 
 #: ../../standalone/drakbackup:1
 #, c-format
+msgid "On Tape Device"
+msgstr "على الشريط"
+
+#: ../../standalone/drakbackup:1
+#, c-format
 msgid ""
 "\n"
 "- Save to Tape on device: %s"
@@ -5137,14 +5173,14 @@ msgstr ""
 "- احفظ الى الشريط على الجهاز: %s"
 
 #: ../../standalone/drakbackup:1
-#, fuzzy, c-format
+#, c-format
 msgid "Login name"
-msgstr "اسم النطاق"
+msgstr "اسم الدخول"
 
 #: ../../security/l10n.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Report unowned files"
-msgstr "if set to yes, report unowned files."
+msgstr "قم بتقرير الملفات الغير مملوكة"
 
 #: ../../standalone/drakconnect:1
 #, c-format
@@ -5212,9 +5248,9 @@ msgid "Removing %s"
 msgstr "جاري ازالة %s"
 
 #: ../../standalone/drakTermServ:1
-#, fuzzy, c-format
+#, c-format
 msgid "%s not found...\n"
-msgstr "%s لا يستجيب"
+msgstr "تعذر ايجاد %s...\n"
 
 #: ../../network/tools.pm:1 ../../standalone/drakconnect:1
 #, c-format
@@ -5238,15 +5274,15 @@ msgstr "كلمات المرور ممكّنة الآن, لكن الاستخدام
 msgid "Start sector: "
 msgstr "قطاع البداية: "
 
-#: ../../standalone/drakperm:1
-#, fuzzy, c-format
-msgid "Read"
-msgstr "للقراءة فقط"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Congo (Brazzaville)"
 msgstr "الكونغو برازافيل"
+
+#: ../../standalone/drakperm:1
+#, c-format
+msgid "Read"
+msgstr "قراءة"
 
 #: ../../any.pm:1 ../../install_any.pm:1 ../../standalone.pm:1
 #, c-format
@@ -5302,6 +5338,13 @@ msgstr ""
 msgid "Right Control key"
 msgstr "مفتاح Control الأيمن"
 
+#: ../../network/adsl.pm:1
+#, fuzzy, c-format
+msgid ""
+"Insert a FAT formatted floppy in drive %s with %s in root directory and "
+"press %s"
+msgstr "أدخل قرص مرن مجهز على نظام ملفات FAT في السواقة %s"
+
 #: ../../lang.pm:1
 #, c-format
 msgid "Zambia"
@@ -5327,15 +5370,15 @@ msgstr "الرومانية (qwertz)"
 msgid "Under Devel ... please wait."
 msgstr "تحت التطوير ... انتظر فضلا"
 
-#: ../../crypto.pm:1 ../../lang.pm:1
-#, c-format
-msgid "Czech Republic"
-msgstr "جمهورية التشيك"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Egypt"
 msgstr "مصر"
+
+#: ../../crypto.pm:1 ../../lang.pm:1
+#, c-format
+msgid "Czech Republic"
+msgstr "جمهورية التشيك"
 
 #: ../../help.pm:1 ../../install_steps_interactive.pm:1
 #, c-format
@@ -5400,12 +5443,9 @@ msgid "Network Options"
 msgstr "خيارات شبكة"
 
 #: ../../security/l10n.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Enable msec hourly security check"
-msgstr ""
-"Arguments: (arg)\n"
-"\n"
-"Enable/Disable msec hourly security check."
+msgstr "تمكين اختبارات msec الأمنية كل ساعة"
 
 #: ../../standalone/drakboot:1
 #, c-format
@@ -5465,6 +5505,11 @@ msgstr "غينيا الإستوائية"
 
 #: ../../standalone/drakbackup:1
 #, c-format
+msgid "Backup System"
+msgstr "نظام المساعد"
+
+#: ../../standalone/drakbackup:1
+#, c-format
 msgid "Build Backup"
 msgstr "ابني النسخة الإحتياطية"
 
@@ -5506,12 +5551,71 @@ msgstr ""
 msgid "Kiribati"
 msgstr "كيريباتي"
 
-#: ../../standalone/drakbackup:1
+#: ../../mouse.pm:1
 #, fuzzy, c-format
+msgid "Logitech Mouse (serial, old C7 type) with Wheel emulation"
+msgstr "Logitech Mouse (serial, old C7 type)"
+
+#: ../../standalone/drakbackup:1
+#, c-format
 msgid "Other (not drakbackup) keys in place already"
+msgstr "مفاتيح أخرى (غير drakbackup) موجودة مسبقاً"
+
+#: ../../help.pm:1
+#, c-format
+msgid ""
+"X (for X Window System) is the heart of the GNU/Linux graphical interface\n"
+"on which all the graphical environments (KDE, GNOME, AfterStep,\n"
+"WindowMaker, etc.) bundled with Mandrake Linux rely upon.\n"
+"\n"
+"You will be presented with a list of different parameters to change to get\n"
+"an optimal graphical display: Graphic Card\n"
+"\n"
+"   The installer will normally automatically detect and configure the\n"
+"graphic card installed on your machine. If it is not the case, you can\n"
+"choose from this list the card you actually have installed.\n"
+"\n"
+"   In the case that different servers are available for your card, with or\n"
+"without 3D acceleration, you are then asked to choose the server that best\n"
+"suits your needs.\n"
+"\n"
+"\n"
+"\n"
+"Monitor\n"
+"\n"
+"   The installer will normally automatically detect and configure the\n"
+"monitor connected to your machine. If it is incorrect, you can choose from\n"
+"this list the monitor you actually have connected to your computer.\n"
+"\n"
+"\n"
+"\n"
+"Resolution\n"
+"\n"
+"   Here you can choose the resolutions and color depths available for your\n"
+"hardware. Choose the one that best suits your needs (you will be able to\n"
+"change that after installation though). A sample of the chosen\n"
+"configuration is shown in the monitor.\n"
+"\n"
+"\n"
+"\n"
+"Test\n"
+"\n"
+"   the system will try to open a graphical screen at the desired\n"
+"resolution. If you can see the message during the test and answer \"%s\",\n"
+"then DrakX will proceed to the next step. If you cannot see the message, it\n"
+"means that some part of the autodetected configuration was incorrect and\n"
+"the test will automatically end after 12 seconds, bringing you back to the\n"
+"menu. Change settings until you get a correct graphical display.\n"
+"\n"
+"\n"
+"\n"
+"Options\n"
+"\n"
+"   Here you can choose whether you want to have your machine automatically\n"
+"switch to a graphical interface at boot. Obviously, you want to check\n"
+"\"%s\" if your machine is to act as a server, or if you were not successful\n"
+"in getting the display configured."
 msgstr ""
-"مفاتيح أخرى\n"
-"(غير drakbackup) موجودة مسبقاً"
 
 #: ../../standalone/draksplash:1
 #, c-format
@@ -5587,301 +5691,6 @@ msgstr ""
 "تقوم بإدخال عناوين IP و أرقام المنافذ (اختياري) للحصول على معلومات الطابعات "
 "من الخادمات."
 
-#: ../../standalone/drakTermServ:1
-#, fuzzy, c-format
-msgid ""
-"drakTermServ Overview\n"
-"\t\t\t   \n"
-"        - Create Etherboot Enabled Boot Images:\n"
-"        \t\tTo boot a kernel via etherboot, a special kernel/initrd image "
-"must be created.\n"
-"        \t\tmkinitrd-net does much of this work and drakTermServ is just a "
-"graphical interface\n"
-"        \t\tto help manage/customize these images. To create the file \n"
-"        \t\t/etc/dhcpd.conf.etherboot-pcimap.include that is pulled in as an "
-"include in \n"
-"        \t\tdhcpd.conf, you should create the etherboot images for at least "
-"one full kernel.\n"
-"\n"
-"        - Maintain /etc/dhcpd.conf:\n"
-"        \t\tTo net boot clients, each client needs a dhcpd.conf entry, "
-"assigning an IP address\n"
-"        \t\tand net boot images to the machine. drakTermServ helps create/"
-"remove these entries.\n"
-"\t\t\t\n"
-"        \t\t(PCI cards may omit the image - etherboot will request the "
-"correct image. You should\n"
-"        \t\talso consider that when etherboot looks for the images, it "
-"expects names like\n"
-"        \t\tboot-3c59x.nbi, rather than boot-3c59x.2.4.19-16mdk.nbi).\n"
-"\t\t\t \n"
-"        \t\tA typical dhcpd.conf stanza to support a diskless client looks "
-"like:\n"
-"        \t\t\n"
-"\t\t\t\thost curly {\n"
-"\t\t\t\t\thardware ethernet        00:20:af:2f:f7:9d;\n"
-"\t\t\t\t\tfixed-address              192.168.192.3;\n"
-"\t\t\t\t\t#type                          fat;\n"
-"\t\t\t\t\tfilename                      \"i386/boot/boot-3c509.2.4.18-6mdk."
-"nbi\";\n"
-"\t\t\t\t\t#hdw_config                true;\n"
-"\t\t\t\t}\n"
-"\t\t\t\n"
-"\t\t\tWhile you can use a pool of IP addresses, rather than setup a specific "
-"entry for\n"
-"\t\t\ta client machine, using a fixed address scheme facilitates using the "
-"functionality\n"
-"\t\t\tof client-specific configuration files that ClusterNFS provides.\n"
-"\t\t\t\n"
-"\t\t\tNote: The \"#type\" entry is only used by drakTermServ.  Clients can "
-"either be 'thin'\n"
-"\t\t\tor 'fat'.  Thin clients run most software on the server via xdmcp, "
-"while fat clients run \n"
-"\t\t\tmost software on the client machine. A special inittab, /etc/inittab\\$"
-"\\$IP=client_ip\\$\\$ is\n"
-"\t\t\twritten for thin clients. System config files xdm-config, kdmrc, and "
-"gdm.conf are \n"
-"\t\t\tmodified if thin clients are used, to enable xdmcp. Since there are "
-"security issues in \n"
-"\t\t\tusing xdmcp, hosts.deny and hosts.allow are modified to limit access "
-"to the local\n"
-"\t\t\tsubnet.\n"
-"\t\t\t\n"
-"\t\t\tNote: The \"#hdw_config\" entry is also only used by drakTermServ.  "
-"Clients can either \n"
-"\t\t\tbe 'true' or 'false'.  'true' enables root login at the client machine "
-"and allows local \n"
-"\t\t\thardware configuration of sound, mouse, and X, using the 'drak' tools. "
-"This is enabled \n"
-"\t\t\tby creating seperate config files associated with the client's IP "
-"address and creating \n"
-"\t\t\tread/write mount points to allow the client to alter the file. Once "
-"you are satisfied \n"
-"\t\t\twith the configuration, you can remove root login priviledges from the "
-"client.\n"
-"\t\t\t\n"
-"\t\t\tNote: You must stop/start the server after adding or changing "
-"clients.\n"
-"\t\t\t\n"
-"        - Maintain /etc/exports:\n"
-"        \t\tClusternfs allows export of the root filesystem to diskless "
-"clients. drakTermServ\n"
-"        \t\tsets up the correct entry to allow anonymous access to the root "
-"filesystem from\n"
-"        \t\tdiskless clients.\n"
-"\n"
-"        \t\tA typical exports entry for clusternfs is:\n"
-"        \t\t\n"
-"        \t\t/                  (ro,all_squash)\n"
-"        \t\t/home              SUBNET/MASK(rw,root_squash)\n"
-"\t\t\t\n"
-"\t\t\tWith SUBNET/MASK being defined for your network.\n"
-"        \t\t\n"
-"        - Maintain /etc/shadow\\$\\$CLIENT\\$\\$:\n"
-"        \t\tFor users to be able to log into the system from a diskless "
-"client, their entry in\n"
-"        \t\t/etc/shadow needs to be duplicated in /etc/shadow\\$\\$CLIENTS\\$"
-"\\$. drakTermServ helps\n"
-"        \t\tin this respect by adding or removing system users from this "
-"file.\n"
-"\n"
-"        - Per client /etc/X11/XF86Config-4\\$\\$IP-ADDRESS\\$\\$:\n"
-"        \t\tThrough clusternfs, each diskless client can have it's own "
-"unique configuration files\n"
-"        \t\ton the root filesystem of the server. By allowing local client "
-"hardware configuration, \n"
-"        \t\tdrakTermServ will help create these files.\n"
-"\n"
-"        - Per client system configuration files:\n"
-"        \t\tThrough clusternfs, each diskless client can have it's own "
-"unique configuration files\n"
-"        \t\ton the root filesystem of the server. By allowing local client "
-"hardware configuration, \n"
-"\t\t\t\tclients can customize files such as /etc/modules.conf, /etc/"
-"sysconfig/mouse, \n"
-"        \t\t/etc/sysconfig/keyboard on a per-client basis.\n"
-"\n"
-"        Note: Enabling local client hardware configuration does enable root "
-"login to the terminal \n"
-"        server on each client machine that has this feature enabled.  Local "
-"configuration can be turned\n"
-"        back off, retaining the configuration files, once the client machine "
-"is configured.\n"
-"\t\t\n"
-"        - /etc/xinetd.d/tftp:\n"
-"        \t\tdrakTermServ will configure this file to work in conjunction "
-"with the images created by\n"
-"        \t\tmkinitrd-net, and the entries in /etc/dhcpd.conf, to serve up "
-"the boot image to each\n"
-"        \t\tdiskless client.\n"
-"\n"
-"        \t\tA typical tftp configuration file looks like:\n"
-"        \t\t\n"
-"        \t\tservice tftp\n"
-"        \t\t(\n"
-"                        disable         = no\n"
-"                        socket_type  = dgram\n"
-"                        protocol        = udp\n"
-"                        wait             = yes\n"
-"                        user             = root\n"
-"                        server          = /usr/sbin/in.tftpd\n"
-"                        server_args  = -s /var/lib/tftpboot\n"
-"        \t\t}\n"
-"        \t\t\n"
-"        \t\tThe changes here from the default installation are changing the "
-"disable flag to\n"
-"        \t\t'no' and changing the directory path to /var/lib/tftpboot, where "
-"mkinitrd-net\n"
-"        \t\tputs it's images.\n"
-"\n"
-"        - Create etherboot floppies/CDs:\n"
-"        \t\tThe diskless client machines need either ROM images on the NIC, "
-"or a boot floppy\n"
-"        \t\tor CD to initate the boot sequence.  drakTermServ will help "
-"generate these images,\n"
-"        \t\tbased on the NIC in the client machine.\n"
-"        \t\t\n"
-"        \t\tA basic example of creating a boot floppy for a 3Com 3c509 "
-"manually:\n"
-"        \t\t\n"
-"        \t\tcat /usr/lib/etherboot/boot1a.bin \\\n"
-"        \t\t\t/usr/lib/etherboot/lzrom/3c509.lzrom > /dev/fd0\n"
-" \n"
-"\n"
-msgstr ""
-"drakTermServ Overview\n"
-"\t\t\t   \n"
-"        - Create Etherboot Enabled Boot Images:\n"
-"        \t\tTo boot a kernel via etherboot, a special kernel/initrd image "
-"must be created.\n"
-"        \t\tmkinitrd-net does much of this work and drakTermServ is just a "
-"graphical interface\n"
-"        \t\tto help manage/customize these images.\n"
-"\n"
-"        - Maintain /etc/dhcpd.conf:\n"
-"        \t\tTo net boot clients, each client needs a dhcpd.conf entry, "
-"assigning an IP address\n"
-"        \t\tand net boot images to the machine. drakTermServ helps create/"
-"remove these entries.\n"
-"\t\t\t\n"
-"        \t\t(PCI cards may omit the image - etherboot will request the "
-"correct image. You should\n"
-"        \t\talso consider that when etherboot looks for the images, it "
-"expects names like\n"
-"        \t\tboot-3c59x.nbi, rather than boot-3c59x.2.4.19-16mdk.nbi).\n"
-"\t\t\t \n"
-"        \t\tA typical dhcpd.conf stanza to support a diskless client looks "
-"like:\n"
-"        \t\t\n"
-"\t\t\t\thost curly {\n"
-"\t\t\t\t\thardware ethernet        00:20:af:2f:f7:9d;\n"
-"\t\t\t\t\tfixed-address              192.168.192.3;\n"
-"\t\t\t\t\t#type                          fat;\n"
-"\t\t\t\t\tfilename                      \"i386/boot/boot-3c509.2.4.18-6mdk."
-"nbi\";\n"
-"\t\t\t\t}\n"
-"\t\t\t\n"
-"\t\t\tWhile you can use a pool of IP addresses, rather than setup a specific "
-"entry for\n"
-"\t\t\ta client machine, using a fixed address scheme facilitates using the "
-"functionality\n"
-"\t\t\tof client-specific configuration files that ClusterNFS provides.\n"
-"\t\t\t\n"
-"\t\t\tNote: The \"#type\" entry is only used by drakTermServ.  Clients can "
-"either be \"thin\"\n"
-"\t\t\tor 'fat'.  Thin clients run most software on the server via xdmcp, "
-"while fat clients run most\n"
-"\t\t\tsoftware on the client machine. A special inittab, /etc/inittab\\$\\"
-"$IP=client_ip\\$\\$ is\n"
-"\t\t\twritten for thin clients. System config files xdm-config, kdmrc, and "
-"gdm.conf are modified\n"
-"\t\t\tif thin clients are used, to enable xdmcp. Since there are security "
-"issues in using xdmcp,\n"
-"\t\t\thosts.deny and hosts.allow are modified to limit access to the local "
-"subnet.\n"
-"\t\t\t\n"
-"\t\t\tNote: You must stop/start the server after adding or changing "
-"clients.\n"
-"\t\t\t\n"
-"        - Maintain /etc/exports:\n"
-"        \t\tClusternfs allows export of the root filesystem to diskless "
-"clients. drakTermServ\n"
-"        \t\tsets up the correct entry to allow anonymous access to the root "
-"filesystem from\n"
-"        \t\tdiskless clients.\n"
-"\n"
-"        \t\tA typical exports entry for clusternfs is:\n"
-"        \t\t\n"
-"        \t\t/                  (ro,all_squash)\n"
-"        \t\t/home              SUBNET/MASK(rw,root_squash)\n"
-"\t\t\t\n"
-"\t\t\tWith SUBNET/MASK being defined for your network.\n"
-"        \t\t\n"
-"        - Maintain /etc/shadow\\$\\$CLIENT\\$\\$:\n"
-"        \t\tFor users to be able to log into the system from a diskless "
-"client, their entry in\n"
-"        \t\t/etc/shadow needs to be duplicated in /etc/shadow\\$\\$CLIENTS\\$"
-"\\$. drakTermServ helps\n"
-"        \t\tin this respect by adding or removing system users from this "
-"file.\n"
-"\n"
-"        - Per client /etc/X11/XF86Config-4\\$\\$IP-ADDRESS\\$\\$:\n"
-"        \t\tThrough clusternfs, each diskless client can have it's own "
-"unique configuration files\n"
-"        \t\ton the root filesystem of the server. In the future drakTermServ "
-"will help create these\n"
-"        \t\tfiles.\n"
-"\n"
-"        - Per client system configuration files:\n"
-"        \t\tThrough clusternfs, each diskless client can have it's own "
-"unique configuration files\n"
-"        \t\ton the root filesystem of the server. In the future, "
-"drakTermServ can help create files\n"
-"        \t\tsuch as /etc/modules.conf, /etc/sysconfig/mouse, /etc/sysconfig/"
-"keyboard on a per-client\n"
-"        \t\tbasis.\n"
-"\n"
-"        - /etc/xinetd.d/tftp:\n"
-"        \t\tdrakTermServ will configure this file to work in conjunction "
-"with the images created by\n"
-"        \t\tmkinitrd-net, and the entries in /etc/dhcpd.conf, to serve up "
-"the boot image to each\n"
-"        \t\tdiskless client.\n"
-"\n"
-"        \t\tA typical tftp configuration file looks like:\n"
-"        \t\t\n"
-"        \t\tservice tftp\n"
-"        \t\t(\n"
-"                        disable         = no\n"
-"                        socket_type  = dgram\n"
-"                        protocol        = udp\n"
-"                        wait             = yes\n"
-"                        user             = root\n"
-"                        server          = /usr/sbin/in.tftpd\n"
-"                        server_args  = -s /var/lib/tftpboot\n"
-"        \t\t}\n"
-"        \t\t\n"
-"        \t\tThe changes here from the default installation are changing the "
-"disable flag to\n"
-"        \t\t'no' and changing the directory path to /var/lib/tftpboot, where "
-"mkinitrd-net\n"
-"        \t\tputs it's images.\n"
-"\n"
-"        - Create etherboot floppies/CDs:\n"
-"        \t\tThe diskless client machines need either ROM images on the NIC, "
-"or a boot floppy\n"
-"        \t\tor CD to initate the boot sequence.  drakTermServ will help "
-"generate these images,\n"
-"        \t\tbased on the NIC in the client machine.\n"
-"        \t\t\n"
-"        \t\tA basic example of creating a boot floppy for a 3Com 3c509 "
-"manually:\n"
-"        \t\t\n"
-"        \t\tcat /usr/lib/etherboot/boot1a.bin \\\n"
-"        \t\t\t/usr/lib/etherboot/lzrom/3c509.lzrom > /dev/fd0\n"
-" \n"
-"\n"
-
 #: ../../standalone/scannerdrake:1
 #, c-format
 msgid "%s is not in the scanner database, configure it manually?"
@@ -5937,8 +5746,7 @@ msgstr "تم التحقق من %s"
 msgid "/Autodetect _printers"
 msgstr "/تحقق آلي من ال_طابعات"
 
-#: ../../interactive.pm:1 ../../my_gtk.pm:1 ../../ugtk2.pm:1
-#: ../../interactive/newt.pm:1
+#: ../../interactive.pm:1 ../../ugtk2.pm:1 ../../interactive/newt.pm:1
 #, c-format
 msgid "Finish"
 msgstr "إنتهاء"
@@ -5995,7 +5803,7 @@ msgstr "اختيار مفرد للحزم"
 msgid "This partition is not resizeable"
 msgstr "هذا التقسيم غير قابل لتغيير الحجم"
 
-#: ../../printer/printerdrake.pm:1
+#: ../../printer/printerdrake.pm:1 ../../standalone/printerdrake:1
 #, c-format
 msgid "Location"
 msgstr "المكان"
@@ -6004,6 +5812,11 @@ msgstr "المكان"
 #, c-format
 msgid "USA (cable-hrc)"
 msgstr "الولايات المتّحدة الأمريكيّة  (cable-hrc)"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Guatemala"
+msgstr "غواتيمالا"
 
 #: ../../diskdrake/hd_gtk.pm:1
 #, c-format
@@ -6018,11 +5831,6 @@ msgstr ""
 "\n"
 "Activate/Disable ethernet cards promiscuity check."
 
-#: ../../lang.pm:1
-#, c-format
-msgid "Guatemala"
-msgstr "غواتيمالا"
-
 #: ../../standalone/scannerdrake:1
 #, c-format
 msgid "This machine"
@@ -6033,15 +5841,15 @@ msgstr "هذه الماكينة"
 msgid "DOS drive letter: %s (just a guess)\n"
 msgstr "حرف سواقة DOS: %s (مجرد تخمين)\n"
 
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "Select the files or directories and click on 'OK'"
-msgstr "اختر الملفات أو الأدلة ثم انقر 'أضف'"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Bahrain"
 msgstr "البحرين"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "Select the files or directories and click on 'OK'"
+msgstr "اختر الملفات أو الأدلة ثم انقر 'أضف'"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
@@ -6066,9 +5874,9 @@ msgstr ""
 "و الشبكة.\n"
 
 #: ../../security/l10n.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Run the daily security checks"
-msgstr "if set to yes, run the daily security checks"
+msgstr "شغّل الاختبارات الأمنية اليومية"
 
 #: ../../Xconfig/various.pm:1
 #, c-format
@@ -6089,6 +5897,11 @@ msgstr ""
 msgid "Maltese (US)"
 msgstr "المالطية (أمريكا)"
 
+#: ../../standalone/drakfloppy:1
+#, c-format
+msgid "The creation of the boot floppy has been successfully completed \n"
+msgstr ""
+
 #: ../../services.pm:1
 #, c-format
 msgid ""
@@ -6099,9 +5912,9 @@ msgstr ""
 "الشبكة المحلية/Windows) و NCP (NetWare)."
 
 #: ../../standalone/drakconnect:1
-#, fuzzy, c-format
+#, c-format
 msgid "Launch the wizard"
-msgstr "انقر هنا لتشغيل المعالج ->"
+msgstr "شغّل المعالج"
 
 #: ../../harddrake/data.pm:1
 #, c-format
@@ -6135,15 +5948,13 @@ msgstr "Logitech MouseMan+/FirstMouse+"
 
 #: ../../standalone/drakbackup:1
 #, c-format
-msgid "Not the correct tape label. Tape is labelled %s."
-msgstr "علامة الشريط ليست العلامة الصحيحة. علامة الشريط هي %s."
+msgid "Thursday"
+msgstr "الخميس"
 
 #: ../../standalone/drakbackup:1
 #, c-format
-msgid ""
-"For a mulitsession CD, only the first session will erase the cdrw. Otherwise "
-"the cdrw is erased before each backup."
-msgstr ""
+msgid "Not the correct tape label. Tape is labelled %s."
+msgstr "علامة الشريط ليست العلامة الصحيحة. علامة الشريط هي %s."
 
 #: ../../standalone/drakgw:1
 #, c-format
@@ -6233,6 +6044,11 @@ msgstr ""
 "اتصالات من عملاء كثيرين. ملحوظة: اذا كانت ماكينتك مجرد عميل على الإنترنت "
 "فالأجدر بك اختيار مستوى أمني أقل."
 
+#: ../../standalone/printerdrake:1
+#, fuzzy, c-format
+msgid "Server Name"
+msgstr "اسم الخادم:"
+
 #: ../../network/tools.pm:1 ../../standalone/drakconnect:1
 #, c-format
 msgid "Account Password"
@@ -6259,6 +6075,29 @@ msgstr ""
 "Commander).\n"
 "\n"
 "على أي قرص تقوم بالإقلاع؟"
+
+#: ../../install_interactive.pm:1
+#, fuzzy, c-format
+msgid ""
+"WARNING!\n"
+"\n"
+"DrakX will now resize your Windows partition. Be careful: this\n"
+"operation is dangerous. If you have not already done so, you\n"
+"first need to exit the installation, run \"chkdsk c:\" from a\n"
+"Command Prompt under Windows (beware, running graphical program\n"
+"\"scandisk\" is not enough, be sure to use \"chkdsk\" in a\n"
+"Command Prompt!), optionally run defrag, then restart the\n"
+"installation. You should also backup your data.\n"
+"When sure, press Ok."
+msgstr ""
+"تحذير!\n"
+"\n"
+"DrakX سيقوم الآن بتغيير حجم تجزئة Windows. كن حذراً:\n"
+"هذه العملية خطرة. فإذا لم تكن فعلت ذلك,\n"
+"يجب عليك أولاً الخروج من التثبيت, ثم شغّل scandisk\n"
+"في Windows (و اختيارياً defrag), ثم أعد\n"
+"التثبيت. يجب عليك كذلك عمل نسخة احتياطية من بياناتك.\n"
+"عندما تكون متأكداً, انقر موافق."
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -6393,24 +6232,15 @@ msgstr ""
 "Saves and restores system entropy pool for higher quality random\n"
 "number generation."
 
-#: ../../install_steps_interactive.pm:1
-#, c-format
-msgid ""
-"Failed to check filesystem %s. Do you want to repair the errors? (beware, "
-"you can loose data)"
-msgstr ""
-"تعذر التأكد من صحة نظام المفات %s. هل تريد تصحيح الأخطاء (كن حذراً, يمكن أن "
-"تخسر بيانات)"
-
 #: ../../share/advertising/07-server.pl:1
 #, c-format
 msgid "Turn your computer into a reliable server"
 msgstr "اجعل جهازك خادماً يعتمد عليه"
 
 #: ../../security/l10n.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Check empty password in /etc/shadow"
-msgstr "if set to yes, check empty password in /etc/shadow."
+msgstr "تحقق من وجود كلمة مرور فارغة في /etc/shadow."
 
 #: ../../network/network.pm:1
 #, c-format
@@ -6468,9 +6298,9 @@ msgstr ""
 "هل تريد المتابعة؟"
 
 #: ../../keyboard.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Telugu"
-msgstr "توكلاو"
+msgstr "التيلوغو"
 
 #: ../../harddrake/sound.pm:1
 #, c-format
@@ -6490,7 +6320,7 @@ msgid "Post Uninstall"
 msgstr "ما بعد ازالة التثبيت"
 
 #: ../../standalone/net_monitor:1
-#, fuzzy, c-format
+#, c-format
 msgid "Connecting to Internet "
 msgstr "جاري الإتصال بالإنترنت"
 
@@ -6503,6 +6333,11 @@ msgstr " ("
 #, c-format
 msgid "Cpuid level"
 msgstr "مستوى هوية المعالج"
+
+#: ../../printer/main.pm:1
+#, fuzzy, c-format
+msgid "Novell server \"%s\", printer \"%s\""
+msgstr " على خادم Novell \"%s\", الطابعة \"%s\""
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -6558,12 +6393,9 @@ msgstr ""
 "drakconnect قبل المتابعة."
 
 #: ../../security/l10n.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Accept broadcasted icmp echo"
-msgstr ""
-"Arguments: (arg)\n"
-"\n"
-" Accept/Refuse broadcasted icmp echo."
+msgstr "اقبل broadcasted icmp echo"
 
 #: ../../lang.pm:1
 #, c-format
@@ -6574,6 +6406,11 @@ msgstr "أوروغواي"
 #, c-format
 msgid "Benin"
 msgstr "بنين"
+
+#: ../../printer/main.pm:1
+#, fuzzy, c-format
+msgid "SMB/Windows server \"%s\", share \"%s\""
+msgstr "على خادم SMB/Windows \"%s\", المشاركة \"%s\""
 
 #: ../../standalone/drakperm:1
 #, c-format
@@ -6589,6 +6426,11 @@ msgstr "عنوان IP/اسم المستضيف:"
 #, c-format
 msgid "Monitor: %s\n"
 msgstr "الشاشة: %s\n"
+
+#: ../../standalone/drakperm:1
+#, fuzzy, c-format
+msgid "Custom & system settings"
+msgstr "اعدادات مخصصة"
 
 #: ../../partition_table/raw.pm:1
 #, c-format
@@ -6647,6 +6489,11 @@ msgstr "تابع"
 msgid "Custom Restore"
 msgstr "استعادة مخصصة"
 
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "Saturday"
+msgstr "السبت"
+
 #: ../../help.pm:1
 #, c-format
 msgid ""
@@ -6661,12 +6508,9 @@ msgstr ""
 "آخر."
 
 #: ../../security/help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Set the root umask."
-msgstr ""
-"Arguments: (umask)\n"
-"\n"
-"Set the root umask."
+msgstr "عين umask الخاص بالمستخدم الجذر"
 
 #: ../../network/modem.pm:1 ../../standalone/drakconnect:1
 #, c-format
@@ -6724,6 +6568,11 @@ msgstr "تثبيت/ترقية"
 msgid "%d packages"
 msgstr "%d حزم"
 
+#: ../../crypto.pm:1 ../../lang.pm:1
+#, c-format
+msgid "Costa Rica"
+msgstr "كوستاريكا"
+
 #: ../../standalone.pm:1
 #, c-format
 msgid ""
@@ -6773,11 +6622,6 @@ msgstr ""
 "\t- مايكل براون <mbrown\\@fensystems.co.uk>\n"
 "\n"
 
-#: ../../crypto.pm:1 ../../lang.pm:1
-#, c-format
-msgid "Costa Rica"
-msgstr "كوستاريكا"
-
 #: ../../security/level.pm:1
 #, c-format
 msgid "Use libsafe for servers"
@@ -6800,33 +6644,23 @@ msgstr ""
 "testing] [-v|--version] "
 
 #: ../../standalone/drakbackup:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Maximum size\n"
 " allowed for Drakbackup (MB)"
 msgstr ""
 "فضلاً أدخل الحجم الأقصى\n"
-" المسموح به لـDrakbackup"
-
-#: ../../my_gtk.pm:1
-#, c-format
-msgid "-adobe-utopia-regular-r-*-*-25-*-*-*-p-*-iso8859-*,*-r-*"
-msgstr "-adobe-utopia-regular-r-*-*-25-*-*-*-p-*-iso8859-*,*-r-*"
-
-#: ../../standalone/drakboot:1
-#, c-format
-msgid "Lilo/grub mode"
-msgstr "وضع Lilo/grub"
-
-#: ../../standalone/drakfloppy:1
-#, c-format
-msgid "Output"
-msgstr "الناتج"
+" المسموح به لـDrakbackup (ميغابايت)"
 
 #: ../../loopback.pm:1
 #, c-format
 msgid "Circular mounts %s\n"
 msgstr "Circular mounts %s\n"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Lilo/grub mode"
+msgstr "وضع Lilo/grub"
 
 #: ../../lang.pm:1
 #, c-format
@@ -6839,11 +6673,9 @@ msgid "HardDrive / NFS"
 msgstr "HardDrive / NFS"
 
 #: ../../standalone/drakbackup:1
-#, fuzzy, c-format
+#, c-format
 msgid "Old user list:\n"
-msgstr ""
-"\n"
-"-ملفّات المستخدم:\n"
+msgstr "قائمة بالمستخدمين المتقادمين:\n"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -6872,6 +6704,11 @@ msgid ""
 "You will receive an alert if one of the selected services is no longer "
 "running"
 msgstr "سوف تستلم تنبيهاً إذا كانت أحد الخدمات المختارة غير عاملة."
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "Weekday"
+msgstr "يوم الأسبوع"
 
 #: ../../diskdrake/hd_gtk.pm:1
 #, c-format
@@ -6905,6 +6742,24 @@ msgstr ""
 #, c-format
 msgid "Floppy"
 msgstr "القرص المرن"
+
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"        - Maintain /etc/exports:\n"
+"        \t\tClusternfs allows export of the root filesystem to diskless "
+"clients. drakTermServ\n"
+"        \t\tsets up the correct entry to allow anonymous access to the root "
+"filesystem from\n"
+"        \t\tdiskless clients.\n"
+"\n"
+"        \t\tA typical exports entry for clusternfs is:\n"
+"        \t\t\n"
+"        \t\t/                  (ro,all_squash)\n"
+"        \t\t/home              SUBNET/MASK(rw,root_squash)\n"
+"\t\t\t\n"
+"\t\t\tWith SUBNET/MASK being defined for your network."
+msgstr ""
 
 #: ../../standalone/drakfont:1
 #, c-format
@@ -6940,6 +6795,11 @@ msgstr "مستضيف خادم SMB"
 #, c-format
 msgid "Name Servers:"
 msgstr "خادمات الإسم:"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "Minute"
+msgstr "دقيقة"
 
 #: ../../install_messages.pm:1
 #, c-format
@@ -7002,6 +6862,11 @@ msgstr ""
 "المدمج التالي مملوكة لأصحابها و محمية بموجب قوانين الملكية \n"
 "الفكرية المنطبقة على البرمجيات.\n"
 
+#: ../../standalone/printerdrake:1
+#, fuzzy, c-format
+msgid "/_Expert mode"
+msgstr "وضعية الخبير"
+
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Remove this printer from Star Office/OpenOffice.org/GIMP"
@@ -7016,15 +6881,15 @@ msgstr ""
 "Linux Virtual Server, يستخدم لعمل خادم عالي الأداء\n"
 "و يعتمد عليه."
 
-#: ../../Xconfig/resolution_and_depth.pm:1
-#, c-format
-msgid "4 billion colors (32 bits)"
-msgstr "4 بليون لون (32 بت)"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Micronesia"
 msgstr "ميكرونيزيا"
+
+#: ../../Xconfig/resolution_and_depth.pm:1
+#, c-format
+msgid "4 billion colors (32 bits)"
+msgstr "4 بليون لون (32 بت)"
 
 #: ../../steps.pm:1
 #, c-format
@@ -7035,6 +6900,56 @@ msgstr "الترخيص"
 #, c-format
 msgid "This may take a moment to generate the keys."
 msgstr "قد يستغرق هذا بعض الوقت لتوليد المفاتيح."
+
+#: ../../standalone/draksec:1
+#, c-format
+msgid ""
+"Here, you can setup the security level and administrator of your machine.\n"
+"\n"
+"\n"
+"The Security Administrator is the one who will receive security alerts if "
+"the\n"
+"'Security Alerts' option is set. It can be a username or an email.\n"
+"\n"
+"\n"
+"The Security Level menu allows you to select one of the six preconfigured "
+"security levels\n"
+"provided with msec. These levels range from poor security and ease of use, "
+"to\n"
+"paranoid config, suitable for very sensitive server applications:\n"
+"\n"
+"\n"
+"<span foreground=\"royalblue3\">Poor</span>: This is a totally unsafe but "
+"very\n"
+"easy to use security level. It should only be used for machines not "
+"connected to\n"
+"any network and that are not accessible to everybody.\n"
+"\n"
+"\n"
+"<span foreground=\"royalblue3\">Standard</span>: This is the standard "
+"security\n"
+"recommended for a computer that will be used to connect to the Internet as "
+"a\n"
+"client.\n"
+"\n"
+"\n"
+"<span foreground=\"royalblue3\">High</span>: There are already some\n"
+"restrictions, and more automatic checks are run every night.\n"
+"\n"
+"\n"
+"<span foreground=\"royalblue3\">Higher</span>: The security is now high "
+"enough\n"
+"to use the system as a server which can accept connections from many "
+"clients. If\n"
+"your machine is only a client on the Internet, you should choose a lower "
+"level.\n"
+"\n"
+"\n"
+"<span foreground=\"royalblue3\">Paranoid</span>: This is similar to the "
+"previous\n"
+"level, but the system is entirely closed and security features are at their\n"
+"maximum"
+msgstr ""
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -7080,10 +6995,10 @@ msgstr "حل مشاكل الصوت"
 msgid "Polish (qwerty layout)"
 msgstr "البولندية (qwerty layout)"
 
-#: ../../standalone/drakconnect:1
-#, c-format
-msgid "activate now"
-msgstr "قم بالتنشيط الآن"
+#: ../../standalone/printerdrake:1
+#, fuzzy, c-format
+msgid "/_Add Printer"
+msgstr "طابعة"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -7180,12 +7095,9 @@ msgid ""
 msgstr "انقر على جهاز في السلسلة اليسرى لعرض معلوماته هنا."
 
 #: ../../security/help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Allow/Forbid autologin."
-msgstr ""
-"Arguments: (arg)\n"
-"\n"
-"Allow/Forbid autologin."
+msgstr "اسمح/امنع الدخول التلقائي"
 
 #: ../../standalone/drakxtv:1
 #, c-format
@@ -7203,12 +7115,9 @@ msgid "old static device name used in dev package"
 msgstr "اسم الجهاز القديم الساكن المستخدم في حزمة dev"
 
 #: ../../security/l10n.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Enable the logging of IPv4 strange packets"
-msgstr ""
-"Arguments: (arg)\n"
-"\n"
-"Enable/Disable the logging of IPv4 strange packets."
+msgstr "تمكين تسجيل حزم IPv4 الغريبة"
 
 #: ../../any.pm:1
 #, c-format
@@ -7313,11 +7222,11 @@ msgstr ""
 "اكتمال التثبيت و اعداة تشغيل النظام."
 
 #: ../../standalone/drakbackup:1
-#, fuzzy, c-format
+#, c-format
 msgid "Directory (or module) to put the backup on this host."
 msgstr ""
-"فضلاً أدخل الدليل (أو الوحدة) التي سيتم فيها وضع\n"
-" النسخة الإحتياطية على هذا المستضيف."
+"فضلاً أدخل الدليل (أو الوحدة) التي سيتم فيها وضع النسخة الإحتياطية على هذا "
+"المستضيف."
 
 #: ../../diskdrake/smbnfs_gtk.pm:1
 #, c-format
@@ -7380,15 +7289,15 @@ msgstr "أي تجزئة تريد تغيير حجمها؟"
 msgid "United States Minor Outlying Islands"
 msgstr "جزر الولايات المتحدة"
 
-#: ../../standalone/logdrake:1
-#, c-format
-msgid "A tool to monitor your logs"
-msgstr "أداة لمراقبة سجلات نظامك"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Djibouti"
 msgstr "جيبوتي"
+
+#: ../../standalone/logdrake:1
+#, c-format
+msgid "A tool to monitor your logs"
+msgstr "أداة لمراقبة سجلات نظامك"
 
 #: ../../network/netconnect.pm:1
 #, c-format
@@ -7405,6 +7314,11 @@ msgstr "LPD"
 msgid "Graphics card: %s\n"
 msgstr "بطاقة الشاشة: %s\n"
 
+#: ../../standalone/printerdrake:1
+#, fuzzy, c-format
+msgid "/Set as _Default"
+msgstr " (افتراضي)"
+
 #: ../../security/l10n.pm:1
 #, c-format
 msgid "Accept icmp echo"
@@ -7414,6 +7328,11 @@ msgstr ""
 #, c-format
 msgid "Yaboot"
 msgstr "Yaboot"
+
+#: ../../mouse.pm:1
+#, fuzzy, c-format
+msgid "Logitech CC Series with Wheel emulation"
+msgstr "Logitech CC Series"
 
 #: ../../standalone/drakboot:1
 #, c-format
@@ -7508,6 +7427,11 @@ msgstr "اختر جهازاً!"
 #, c-format
 msgid "Remove selected server"
 msgstr "احذف الخادم المختار"
+
+#: ../../network/adsl.pm:1
+#, c-format
+msgid "Sagem (using dhcp) usb"
+msgstr "Sagem (using dhcp) usb"
 
 #: ../../lang.pm:1
 #, c-format
@@ -7613,7 +7537,7 @@ msgid "Network interface"
 msgstr "واجهة الشبكة "
 
 #: ../../standalone/net_monitor:1
-#, fuzzy, c-format
+#, c-format
 msgid "Disconnection from Internet failed."
 msgstr "فشل قطع الإتصال بالإنترنت"
 
@@ -7641,6 +7565,11 @@ msgstr "اليونانية"
 #, c-format
 msgid "Saint Kitts and Nevis"
 msgstr "سانت كيتس و نيفيس"
+
+#: ../../mouse.pm:1
+#, fuzzy, c-format
+msgid "Generic 3 Button Mouse with Wheel emulation"
+msgstr "Generic 3 Button Mouse"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -7670,11 +7599,9 @@ msgid "You can't use JFS for partitions smaller than 16MB"
 msgstr "لا يمكنك استخدام JFS للتجزئات أصغر من 16 ميغابايت"
 
 #: ../../standalone/drakbackup:1
-#, fuzzy, c-format
+#, c-format
 msgid "Erase your RW media (1st Session)"
-msgstr ""
-"فضلا قم بالتأشير هنا اذا كنت تريد مسح الوسيط القابل لإعادة الكتابة (الجلسة "
-"الأولى)"
+msgstr "امسح الوسيط القابل لإعادة الكتابة (الجلسة الأولى)"
 
 #: ../../Xconfig/various.pm:1
 #, c-format
@@ -7698,8 +7625,13 @@ msgstr ""
 "%s\n"
 "حاول تغيير بعض المعاملات"
 
-#: ../../standalone/drakperm:1
+#: ../../printer/main.pm:1
 #, fuzzy, c-format
+msgid "TCP/IP host \"%s\", port %s"
+msgstr ", مستضيف TCP/IP \"%s\", المنفذ \"%s\""
+
+#: ../../standalone/drakperm:1
+#, c-format
 msgid "User :"
 msgstr "المستخدم :"
 
@@ -7807,6 +7739,11 @@ msgstr "منغوليا"
 msgid "Mounted\n"
 msgstr "محمل\n"
 
+#: ../../standalone/printerdrake:1
+#, fuzzy, c-format
+msgid "Configure CUPS"
+msgstr "تهيئة X"
+
 #: ../../help.pm:1
 #, c-format
 msgid "Graphical Interface"
@@ -7894,11 +7831,6 @@ msgstr ", المستضيف \"%s\", المنفذ %s"
 msgid "Monaco"
 msgstr "موناكو"
 
-#: ../../security/l10n.pm:1
-#, c-format
-msgid "Do not send mails when uneeded"
-msgstr ""
-
 #: ../../install_interactive.pm:1
 #, c-format
 msgid "Partitioning failed: %s"
@@ -7913,6 +7845,11 @@ msgstr "%s تجهيز %s قد فشل"
 #, c-format
 msgid "Canada (cable)"
 msgstr "كندة (cable)"
+
+#: ../../standalone/drakfloppy:1
+#, c-format
+msgid "Floppy creation completed"
+msgstr "اكتمل انشاء القرص المرن"
 
 #: ../../help.pm:1
 #, c-format
@@ -7938,6 +7875,11 @@ msgstr ""
 msgid "Kyrgyzstan"
 msgstr "قيرغيزستان"
 
+#: ../../printer/main.pm:1
+#, fuzzy, c-format
+msgid "Multi-function device on USB"
+msgstr ", جهاز متعدد الوظائف على منفذ USB"
+
 #: ../../help.pm:1
 #, c-format
 msgid "With basic documentation"
@@ -7959,6 +7901,11 @@ msgstr ""
 "لهذا الغرض انشئ تجزئة (أو انقر على تجزئة موجودة).\n"
 "ثم اختر ``نقطة التحميل'' و اجعلها `/'"
 
+#: ../../lang.pm:1
+#, c-format
+msgid "Western Sahara"
+msgstr "الصحراء الغربية"
+
 #: ../../network/network.pm:1
 #, c-format
 msgid "Proxy should be http://..."
@@ -7969,15 +7916,10 @@ msgstr "البروكسي يجب أن يكون http://..."
 msgid "South Africa"
 msgstr "جنوب أفريقيا "
 
-#: ../../lang.pm:1
-#, c-format
-msgid "Western Sahara"
-msgstr "الصحراء الغربية"
-
 #: ../../standalone/drakbackup:1
-#, fuzzy, c-format
+#, c-format
 msgid "Eject tape after the backup"
-msgstr "استخم الشريط للنسخ الإحتياطي"
+msgstr "أخرج الشريط بعد النسخ الاحتياطي"
 
 #: ../../standalone/drakTermServ:1
 #, c-format
@@ -8016,10 +7958,15 @@ msgid ""
 "(e.g, for faster access on the news spool to speed up news servers)."
 msgstr ""
 
-#: ../../standalone/drakperm:1
+#: ../../mouse.pm:1
 #, fuzzy, c-format
+msgid "3 buttons with Wheel emulation"
+msgstr "محاكاة الأزرار"
+
+#: ../../standalone/drakperm:1
+#, c-format
 msgid "Sticky-bit"
-msgstr "sticky-bit"
+msgstr "Sticky-bit"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -8083,9 +8030,14 @@ msgid "Malawi"
 msgstr "مالاوي"
 
 #: ../../standalone/drakTermServ:1
-#, fuzzy, c-format
+#, c-format
 msgid "local config: false"
-msgstr "ملفات محلية"
+msgstr "local config: false"
+
+#: ../../standalone/drakperm:1
+#, fuzzy, c-format
+msgid "System settings"
+msgstr "اعدادات مخصصة"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -8115,15 +8067,15 @@ msgstr "المملكة المتحدة"
 msgid "running"
 msgstr "تعمل"
 
-#: ../../standalone/draksec:1
-#, c-format
-msgid "default"
-msgstr "المرجع"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Indonesia"
 msgstr "اندونيسيا"
+
+#: ../../standalone/draksec:1
+#, c-format
+msgid "default"
+msgstr "المرجع"
 
 #: ../../standalone/drakxtv:1
 #, c-format
@@ -8168,6 +8120,11 @@ msgstr ""
 "خياراتنا الكثير من حلول نظام Linux بالإضافة الى العروض الخاصة و المنتجات "
 "الأخرىى متوفرة في متجرنا الألكتروني:"
 
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "March"
+msgstr "مارس"
+
 #: ../../any.pm:1
 #, c-format
 msgid "access to administrative files"
@@ -8208,9 +8165,9 @@ msgid "Swap"
 msgstr "التبديل"
 
 #: ../../standalone/drakperm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Custom settings"
-msgstr "تجزئة مخصصة"
+msgstr "اعدادات مخصصة"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -8226,6 +8183,11 @@ msgstr "بطاقة التلفاز"
 #, c-format
 msgid "Printer on SMB/Windows 95/98/NT server"
 msgstr "طابعة على خادم SMB/Windows 95/98/NT"
+
+#: ../../standalone/printerdrake:1
+#, fuzzy, c-format
+msgid "/_Configure CUPS"
+msgstr "تهيئة X"
 
 #: ../../standalone/scannerdrake:1
 #, c-format
@@ -8246,9 +8208,9 @@ msgstr ""
 "Postfix هو عميل لنقل البريد, أي البرنامج الذي ينقل البريد من جهاز الى آخر."
 
 #: ../../keyboard.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Uzbek (cyrillic)"
-msgstr "الصربية (سيريلي)"
+msgstr "الأوزبكية (سيريلي)"
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -8318,6 +8280,11 @@ msgstr ""
 "حسّن أداء أجهزتك بمساعدة اختياراتنا من الشركاء الذين يوفرون حلولاً احترافية "
 "متوافقة مع Mandrake Linux"
 
+#: ../../standalone/printerdrake:1
+#, c-format
+msgid "Authors: "
+msgstr "المؤلفون: "
+
 #: ../../standalone/drakgw:1
 #, c-format
 msgid "Internet Connection Sharing is now disabled."
@@ -8376,12 +8343,22 @@ msgstr "ولا شئ"
 msgid "The entered IP is not correct.\n"
 msgstr "عنوان IP المدُخل غير صحيح.\n"
 
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "Please be sure that the cron daemon is included in your services."
+msgstr "تأكد من أن مراقب cron موجود ضمن خدمات النظام."
+
 #: ../../standalone/drakconnect:1
 #, c-format
 msgid "Ethernet Card"
 msgstr "Ethernet Card"
 
-#: ../../my_gtk.pm:1 ../../services.pm:1 ../../ugtk2.pm:1
+#: ../../standalone/printerdrake:1
+#, fuzzy, c-format
+msgid "Delete selected printer"
+msgstr "احذف القاعدة المختارة"
+
+#: ../../services.pm:1 ../../ugtk2.pm:1
 #, c-format
 msgid "Info"
 msgstr "المعلومات"
@@ -8502,15 +8479,6 @@ msgstr "البحث عن ماسحات ضوئية جديدة..."
 msgid "Disabling servers..."
 msgstr "جاري تعطيل الخوادم..."
 
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid ""
-"Please choose the time \n"
-"interval between each backup"
-msgstr ""
-"فضلا اختر الفترة \n"
-"ما بين كل عملية نسخ احتياطي"
-
 #: ../../standalone/drakboot:1
 #, c-format
 msgid "Installation of %s failed. The following error occured:"
@@ -8571,7 +8539,7 @@ msgid ""
 msgstr "بدلاً من ذلك, يمكنك تحديد اسم جهاز/اسم ملف في حقا الإدخال"
 
 #: ../../security/help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "If SERVER_LEVEL (or SECURE_LEVEL if absent)\n"
 "is greater than 3 in /etc/security/msec/security.conf, creates the\n"
@@ -8582,16 +8550,14 @@ msgid ""
 "add a service if it is present in the file during the installation of\n"
 "packages."
 msgstr ""
-"Arguments: ()\n"
+"اذا كان SERVER_LEVEL (أو SECURE_LEVEL في حال عدم وجود الأول)\n"
+"أكبر من 3 في /etc/security/msec/security.conf, و ينشئ\n"
+"الاختصار /etc/security/msec/server لتشير\n"
+"الى /etc/security/msec/sever.<SERVER_LEVEL>.\n"
 "\n"
-"If SERVER_LEVEL (or SECURE_LEVEL if absent) is greater than 3\n"
-"in /etc/security/msec/security.conf, creates the symlink /etc/security/msec/"
-"server\n"
-"to point to /etc/security/msec/server.<SERVER_LEVEL>. The /etc/security/msec/"
-"server\n"
-"is used by chkconfig --add to decide to add a service if it is present in "
-"the file\n"
-"during the installation of packages."
+"ملف /etc/security/msec/server يتم استخدامه عن طريق أمر chkconfig --add "
+"لتقرير اضافة خدمة اذا كانت موجودة في في الملف أثناء تثبيت\n"
+"الحزم."
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -8617,11 +8583,6 @@ msgstr "تثبيت LILO/grub"
 #, c-format
 msgid "Israeli"
 msgstr "العبرية"
-
-#: ../../standalone/logdrake:1
-#, c-format
-msgid "load setting"
-msgstr "حمل الإعدادات"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -8713,13 +8674,13 @@ msgstr "سيراليون"
 
 #: ../../lang.pm:1
 #, c-format
-msgid "Andorra"
-msgstr "أندورا"
+msgid "Botswana"
+msgstr "بوتسوانا"
 
 #: ../../lang.pm:1
 #, c-format
-msgid "Botswana"
-msgstr "بوتسوانا"
+msgid "Andorra"
+msgstr "أندورا"
 
 #: ../../standalone/draksec:1
 #, c-format
@@ -8813,6 +8774,11 @@ msgstr ""
 msgid "Automatic Steps Configuration"
 msgstr "تهيئة آلية للخطوات"
 
+#: ../../lang.pm:1
+#, c-format
+msgid "Barbados"
+msgstr "باربادوس"
+
 #: ../../share/advertising/02-community.pl:1
 #, c-format
 msgid ""
@@ -8821,11 +8787,6 @@ msgid ""
 msgstr ""
 "هل تريد معرفة المزيد عن مجتمع المصادر المفتوحة؟ كن جزءاً من عالم البرمجيات "
 "الحرة"
-
-#: ../../lang.pm:1
-#, c-format
-msgid "Barbados"
-msgstr "باربادوس"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -8874,6 +8835,11 @@ msgstr "IP Range End:"
 msgid "High"
 msgstr "مرتفع"
 
+#: ../../standalone/printerdrake:1
+#, fuzzy, c-format
+msgid "Add a new printer to the system"
+msgstr "اضافة مستخدم الى النظام"
+
 #: ../../any.pm:1
 #, c-format
 msgid "NoVideo"
@@ -8889,7 +8855,7 @@ msgstr "هذا الحقل يصف الجهاز"
 msgid "Adding printer to Star Office/OpenOffice.org/GIMP"
 msgstr "جاري اضافة الطابعة الى Star Office/OpenOffice.org/GIMP"
 
-#: ../../printer/main.pm:1 ../../printer/printerdrake.pm:1
+#: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Local Printers"
 msgstr "الطابعات المحلية"
@@ -8964,6 +8930,11 @@ msgstr "الكويت"
 msgid "Choose the window manager to run:"
 msgstr "اختر مدير النوافذ الذي سيتم تشغيله:"
 
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "December"
+msgstr "ديسمبر"
+
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "sub generation of the cpu"
@@ -8999,9 +8970,9 @@ msgid "please wait, parsing file: %s"
 msgstr "يرجى الإنتظار, جاري تحليل الملف: %s"
 
 #: ../../install_steps_gtk.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Importance: "
-msgstr "الأهمية: %s\n"
+msgstr "الأهمية:"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -9071,15 +9042,15 @@ msgstr "الواجهة الرسومية"
 msgid "Chad"
 msgstr "تشاد"
 
-#: ../../Xconfig/card.pm:1 ../../Xconfig/various.pm:1
-#, c-format
-msgid "XFree %s with 3D hardware acceleration"
-msgstr "XFree %s مع تسريع ثلاثي الأبعاد"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "India"
 msgstr "الهند"
+
+#: ../../Xconfig/card.pm:1 ../../Xconfig/various.pm:1
+#, c-format
+msgid "XFree %s with 3D hardware acceleration"
+msgstr "XFree %s مع تسريع ثلاثي الأبعاد"
 
 #: ../../lang.pm:1
 #, c-format
@@ -9348,15 +9319,22 @@ msgstr ""
 "بعض العتاد الموجود على جهازك يحتاج الى مشغلات ``تجارية'' كي تعمل.\n"
 "يمكنك ايجاد مزيد من المعلومات عنها في: %s"
 
+#: ../../lang.pm:1
+#, c-format
+msgid "Haiti"
+msgstr "هايتي"
+
 #: ../../network/netconnect.pm:1 ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Detecting devices..."
 msgstr "جاري التحقق من الأجهزة..."
 
-#: ../../lang.pm:1
+#: ../../standalone/drakbackup:1
 #, c-format
-msgid "Haiti"
-msgstr "هايتي"
+msgid ""
+"Custom allows you to specify your own day and time.  The other options use "
+"run-parts in /etc/crontab."
+msgstr ""
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -9368,9 +9346,9 @@ msgstr ""
 "\n"
 
 #: ../../standalone/draksec:1
-#, fuzzy, c-format
+#, c-format
 msgid "Basic options"
-msgstr "خيارات DrakSec الأساسية"
+msgstr "الخيارات الأساسية"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -9378,12 +9356,9 @@ msgid "the name of the CPU"
 msgstr "اسم المعالج"
 
 #: ../../security/l10n.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Accept bogus IPv4 error messages"
-msgstr ""
-"Arguments: (arg)\n"
-"\n"
-"Accept/Refuse bogus IPv4 error messages."
+msgstr "اقبل رسائل خطأ IPv4 الوهمية"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -9551,14 +9526,6 @@ msgstr "if set to yes, check if the network devices are in promiscuous mode."
 msgid "Looking for available packages..."
 msgstr "جاري العثور على الحزم المتوفرة..."
 
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid ""
-"This should be a comma-seperated list of local users or email addresses that "
-"you want the backup results sent to. You will need a functioning mail "
-"transfer agent setup on your system."
-msgstr ""
-
 #: ../../any.pm:1
 #, c-format
 msgid "Init Message"
@@ -9569,15 +9536,15 @@ msgstr "رسالة Init"
 msgid "Rescue partition table"
 msgstr "إنقاذ جدول التقسيم"
 
-#: ../../standalone/net_monitor:1
-#, c-format
-msgid "Connection complete."
-msgstr "تم الإتصال."
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Cyprus"
 msgstr "قبرص"
+
+#: ../../standalone/net_monitor:1
+#, c-format
+msgid "Connection complete."
+msgstr "تم الإتصال."
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -9598,6 +9565,11 @@ msgstr "معالجات التهيئة"
 #, c-format
 msgid "ISDN connection"
 msgstr "وصلة ISDN"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "CD-R / DVD-R"
+msgstr "CDROM / DVDROM"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -9674,6 +9646,11 @@ msgstr ""
 "تردد المعالج بالميغاهيرتز (الميغاهيرتز تشير الى العدد التقريبي من التعليمات "
 "التي يستطيع المعالج تنفيذها في الثانية الواحدة)"
 
+#: ../../standalone/printerdrake:1
+#, fuzzy, c-format
+msgid "Mandrake Linux Printer Management Tool"
+msgstr "أداة Mandrake Linux لإدارة المستخدمين"
+
 #: ../../pkgs.pm:1
 #, c-format
 msgid "important"
@@ -9683,6 +9660,18 @@ msgstr "مهم"
 #, c-format
 msgid "Total Progress"
 msgstr "اجمالي التقدم"
+
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"        - Maintain /etc/shadow\\$\\$CLIENT\\$\\$:\n"
+"        \t\tFor users to be able to log into the system from a diskless "
+"client, their entry in\n"
+"        \t\t/etc/shadow needs to be duplicated in /etc/shadow\\$\\$CLIENTS\\$"
+"\\$. drakTermServ helps\n"
+"        \t\tin this respect by adding or removing system users from this "
+"file."
+msgstr ""
 
 #: ../../help.pm:1
 #, c-format
@@ -9720,15 +9709,15 @@ msgstr ""
 "اذا تعذر على DrakX التحقق من الخيارات آلياً ستحتاج\n"
 "الى تهيئة المشغل يدوياً."
 
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "Users"
-msgstr "المستخدمون"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Aruba"
 msgstr "أروبا"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "Users"
+msgstr "المستخدمون"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -9749,6 +9738,11 @@ msgstr "كلمات المرور غير متطابقة"
 #, c-format
 msgid "Examples for correct IPs:\n"
 msgstr "أمثلة لعناوين IP صحيحة:\n"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "Please choose the media for backup."
+msgstr "فضلاً اختر وسيط النسخ الاحتياطي."
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -9854,7 +9848,7 @@ msgid ""
 msgstr "Apache هو خادم ويب. و يُستخدم لخدمة ملفات HTML و CGI."
 
 #: ../../standalone/drakbackup:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Enter your CD Writer device name\n"
 " ex: 0,1,0"
@@ -9945,6 +9939,11 @@ msgstr ""
 "تم توليد القرص المرن بنجاح.\n"
 "يمكنك الآن اعادة التثبيت."
 
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "Use CD-R/DVD-R to backup"
+msgstr "استخدم CD/DVDROM للنسخ الإحتياطي"
+
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "the number of buttons the mouse has"
@@ -9986,9 +9985,9 @@ msgid "32 MB"
 msgstr "32 ميغابايت"
 
 #: ../../standalone/drakTermServ:1
-#, fuzzy, c-format
+#, c-format
 msgid "type: thin"
-msgstr "النوع: %s"
+msgstr "النوع: رفيع"
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -10113,6 +10112,11 @@ msgstr ""
 "\n"
 "مصادر المساعد :\n"
 
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "custom"
+msgstr "مخصص"
+
 #: ../../standalone/logdrake:1
 #, c-format
 msgid "Content of the file"
@@ -10169,6 +10173,7 @@ msgid "Theme name"
 msgstr "اسم السمة"
 
 #: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
+#: ../../standalone/printerdrake:1
 #, c-format
 msgid "/_Help"
 msgstr "/_مساعدة"
@@ -10177,6 +10182,11 @@ msgstr "/_مساعدة"
 #, c-format
 msgid "Choosing an arbitrary driver"
 msgstr "جاري اختيار مشغل عام"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Cook Islands"
+msgstr "جزر الكوك"
 
 #: ../../standalone/scannerdrake:1
 #, c-format
@@ -10191,11 +10201,6 @@ msgstr ""
 #, c-format
 msgid "the width of the progress bar"
 msgstr "عرض شريط التقدم"
-
-#: ../../lang.pm:1
-#, c-format
-msgid "Cook Islands"
-msgstr "جزر الكوك"
 
 #: ../../fs.pm:1
 #, c-format
@@ -10214,17 +10219,16 @@ msgstr "احذف اختيار الخطوط المثبتة"
 
 #: ../../any.pm:1 ../../help.pm:1 ../../install_steps_gtk.pm:1
 #: ../../install_steps_interactive.pm:1 ../../interactive.pm:1
-#: ../../my_gtk.pm:1 ../../ugtk2.pm:1 ../../ugtk.pm:1
-#: ../../Xconfig/resolution_and_depth.pm:1 ../../diskdrake/smbnfs_gtk.pm:1
-#: ../../interactive/gtk.pm:1 ../../interactive/http.pm:1
-#: ../../interactive/newt.pm:1 ../../interactive/stdio.pm:1
-#: ../../printer/printerdrake.pm:1 ../../standalone/drakautoinst:1
-#: ../../standalone/drakbackup:1 ../../standalone/drakboot:1
-#: ../../standalone/drakconnect:1 ../../standalone/drakfloppy:1
-#: ../../standalone/drakfont:1 ../../standalone/drakgw:1
-#: ../../standalone/drakperm:1 ../../standalone/draksec:1
-#: ../../standalone/logdrake:1 ../../standalone/mousedrake:1
-#: ../../standalone/net_monitor:1
+#: ../../ugtk2.pm:1 ../../Xconfig/resolution_and_depth.pm:1
+#: ../../diskdrake/smbnfs_gtk.pm:1 ../../interactive/gtk.pm:1
+#: ../../interactive/http.pm:1 ../../interactive/newt.pm:1
+#: ../../interactive/stdio.pm:1 ../../printer/printerdrake.pm:1
+#: ../../standalone/drakautoinst:1 ../../standalone/drakbackup:1
+#: ../../standalone/drakboot:1 ../../standalone/drakconnect:1
+#: ../../standalone/drakfloppy:1 ../../standalone/drakfont:1
+#: ../../standalone/drakgw:1 ../../standalone/drakperm:1
+#: ../../standalone/draksec:1 ../../standalone/logdrake:1
+#: ../../standalone/mousedrake:1 ../../standalone/net_monitor:1
 #, c-format
 msgid "Cancel"
 msgstr "الغاء"
@@ -10269,31 +10273,15 @@ msgstr "احذف الطابعة"
 msgid "View Last Log"
 msgstr ""
 
-#: ../../install_interactive.pm:1
-#, c-format
-msgid ""
-"WARNING!\n"
-"\n"
-"DrakX will now resize your Windows partition. Be careful:\n"
-"this operation is dangerous. If you have not already done\n"
-"so, you should first exit the installation, run scandisk\n"
-"under Windows (and optionally run defrag), then restart the\n"
-"installation. You should also backup your data.\n"
-"When sure, press Ok."
-msgstr ""
-"تحذير!\n"
-"\n"
-"DrakX سيقوم الآن بتغيير حجم تجزئة Windows. كن حذراً:\n"
-"هذه العملية خطرة. فإذا لم تكن فعلت ذلك,\n"
-"يجب عليك أولاً الخروج من التثبيت, ثم شغّل scandisk\n"
-"في Windows (و اختيارياً defrag), ثم أعد\n"
-"التثبيت. يجب عليك كذلك عمل نسخة احتياطية من بياناتك.\n"
-"عندما تكون متأكداً, انقر موافق."
-
 #: ../../network/drakfirewall.pm:1
 #, c-format
 msgid "Which services would you like to allow the Internet to connect to?"
 msgstr "أي خدمة تريد السماح للإنترنت أن تتصل بها؟"
+
+#: ../../standalone/printerdrake:1
+#, fuzzy, c-format
+msgid "Connection Type"
+msgstr "نوع الإتصال"
 
 #: ../../standalone/logdrake:1
 #, c-format
@@ -10324,9 +10312,9 @@ msgid "Button 2 Emulation"
 msgstr "محاكاة الزر 2"
 
 #: ../../security/l10n.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Run chkrootkit checks"
-msgstr "if set to yes, run chkrootkit checks."
+msgstr "شغّل اختبارات chkrootkit"
 
 #: ../../standalone/drakfont:1
 #, c-format
@@ -10362,11 +10350,6 @@ msgstr "كان هناك خطأ أثناء ضبط قنوات التلفاز"
 #, c-format
 msgid "US keyboard (international)"
 msgstr "لوحة مفاتيح أمريكية (دولي)"
-
-#: ../../keyboard.pm:1
-#, c-format
-msgid "Saami (swedish/finish)"
-msgstr ""
 
 #: ../../standalone/drakbug:1
 #, c-format
@@ -10468,32 +10451,19 @@ msgid "\t-Network by FTP.\n"
 msgstr "\t-الشبكة عن طريق FTP.\n"
 
 #: ../../security/l10n.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Reports check result to tty"
-msgstr "if set to yes, reports check result to tty."
+msgstr "يقوم بتقرير نتيجة الاختبار الى الطرفية"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "You must enter a device or file name!"
 msgstr "يجب عليك ادخال جهاز أو اسم ملف!"
 
-#: ../../standalone/harddrake2:1
+#: ../../standalone/harddrake2:1 ../../standalone/printerdrake:1
 #, c-format
 msgid "/_Quit"
 msgstr "/_خروج"
-
-#: ../../network/adsl.pm:1
-#, c-format
-msgid ""
-"You need the alcatel microcode.\n"
-"Download it at\n"
-"http://www.speedtouchdsl.com/dvrreg_lx.htm\n"
-"and copy the mgmt.o in /usr/share/speedtouch"
-msgstr ""
-"تحتاج الى alcatel microcode.\n"
-"قم بتنزيلها على\n"
-"http://www.speedtouchdsl.com/dvreg_lx.htm\n"
-"و انسخ الملف mgmt.o الى /usr/share/speedtouch"
 
 #: ../../Xconfig/various.pm:1
 #, c-format
@@ -10631,7 +10601,7 @@ msgid "Removable media automounting"
 msgstr "التحميل الآلي للوسائط القابلة للإزالة"
 
 #: ../../standalone/drakbackup:1
-#, fuzzy, c-format
+#, c-format
 msgid "Enter the directory to save:"
 msgstr "اختر الدليل الذي سيتم حفظه:"
 
@@ -10639,11 +10609,6 @@ msgstr "اختر الدليل الذي سيتم حفظه:"
 #, c-format
 msgid "Printing"
 msgstr "الطباعة"
-
-#: ../../harddrake/sound.pm:1
-#, c-format
-msgid "Unkown driver"
-msgstr "مشغل غير معروف"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -10747,14 +10712,19 @@ msgid "URL should begin with 'ftp:' or 'http:'"
 msgstr "يجب أن يبدأ العنوان بـ 'ftp:' أو 'http:'"
 
 #: ../../keyboard.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Oriya"
-msgstr "سورية"
+msgstr "أوريا"
 
 #: ../../standalone/drakperm:1
 #, c-format
 msgid "Add a new rule at the end"
 msgstr "أضف قاعدة جديدة في النهاية"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "LiLo and Bootsplash themes installation successful"
+msgstr "تم تثبيت سمات LiLo و Bootsplash بنجاح"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -10786,6 +10756,11 @@ msgstr "هل تريد الخروج بدون كتابة جدول التقسيم؟
 msgid "Genius NetScroll"
 msgstr "Genius NetScroll"
 
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "On Hard Drive"
+msgstr "على القرص الصّلب"
+
 #: ../../standalone.pm:1
 #, c-format
 msgid "Installing packages..."
@@ -10796,15 +10771,15 @@ msgstr "جاري تركيب الجزم..."
 msgid "Dutch"
 msgstr "الهولندية"
 
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "The following packages need to be installed:\n"
-msgstr "يجب تثبيت الحزم التالية:\n"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Angola"
 msgstr "أنغولا"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "The following packages need to be installed:\n"
+msgstr "يجب تثبيت الحزم التالية:\n"
 
 #: ../../standalone/logdrake:1
 #, c-format
@@ -10881,6 +10856,45 @@ msgstr ""
 "\n"
 "http://www.linux-mandrake.com/en/hardware.php3"
 
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"\t\t\tWhile you can use a pool of IP addresses, rather than setup a specific "
+"entry for\n"
+"\t\t\ta client machine, using a fixed address scheme facilitates using the "
+"functionality\n"
+"\t\t\tof client-specific configuration files that ClusterNFS provides.\n"
+"\t\t\t\n"
+"\t\t\tNote: The \"#type\" entry is only used by drakTermServ.  Clients can "
+"either be 'thin'\n"
+"\t\t\tor 'fat'.  Thin clients run most software on the server via xdmcp, "
+"while fat clients run \n"
+"\t\t\tmost software on the client machine. A special inittab, /etc/inittab\\$"
+"\\$IP=client_ip\\$\\$ is\n"
+"\t\t\twritten for thin clients. System config files xdm-config, kdmrc, and "
+"gdm.conf are \n"
+"\t\t\tmodified if thin clients are used, to enable xdmcp. Since there are "
+"security issues in \n"
+"\t\t\tusing xdmcp, hosts.deny and hosts.allow are modified to limit access "
+"to the local\n"
+"\t\t\tsubnet.\n"
+"\t\t\t\n"
+"\t\t\tNote: The \"#hdw_config\" entry is also only used by drakTermServ.  "
+"Clients can either \n"
+"\t\t\tbe 'true' or 'false'.  'true' enables root login at the client machine "
+"and allows local \n"
+"\t\t\thardware configuration of sound, mouse, and X, using the 'drak' tools. "
+"This is enabled \n"
+"\t\t\tby creating separate config files associated with the client's IP "
+"address and creating \n"
+"\t\t\tread/write mount points to allow the client to alter the file. Once "
+"you are satisfied \n"
+"\t\t\twith the configuration, you can remove root login privileges from the "
+"client.\n"
+"\t\t\t\n"
+"\t\t\tNote: You must stop/start the server after adding or changing clients."
+msgstr ""
+
 #: ../../standalone/drakconnect:1
 #, c-format
 msgid "Configure Local Area Network..."
@@ -10921,15 +10935,15 @@ msgstr "معلومات"
 msgid "No network card"
 msgstr "لا توجد بطاقة شبكة"
 
-#: ../../diskdrake/interactive.pm:1 ../../diskdrake/removable.pm:1
-#, c-format
-msgid "Which filesystem do you want?"
-msgstr "أي نظام ملفات تريد؟"
-
 #: ../../mouse.pm:1
 #, c-format
 msgid "3 buttons"
 msgstr "3 أزرار"
+
+#: ../../diskdrake/interactive.pm:1 ../../diskdrake/removable.pm:1
+#, c-format
+msgid "Which filesystem do you want?"
+msgstr "أي نظام ملفات تريد؟"
 
 #: ../../lang.pm:1
 #, c-format
@@ -10984,15 +10998,15 @@ msgstr "بطاقة الشاشة"
 msgid "Resizing Windows partition"
 msgstr "جاري تغيير حجم تجزئة Windows"
 
-#: ../../network/tools.pm:1 ../../standalone/drakconnect:1
-#, c-format
-msgid "Provider dns 1 (optional)"
-msgstr "DNS الأول للموفر (اختياري)"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Cameroon"
 msgstr "الكاميرون"
+
+#: ../../network/tools.pm:1 ../../standalone/drakconnect:1
+#, c-format
+msgid "Provider dns 1 (optional)"
+msgstr "DNS الأول للموفر (اختياري)"
 
 #: ../../install_interactive.pm:1
 #, c-format
@@ -11003,9 +11017,15 @@ msgstr ""
 "يمكنك الآن تجزئة %s.\n"
 "عندما تنتهي لا تنسى الحفظ باستخدام `w'"
 
+#: ../../keyboard.pm:1
+#, c-format
+msgid "Saami (swedish/finnish)"
+msgstr ""
+
 #: ../../printer/printerdrake.pm:1 ../../standalone/drakTermServ:1
 #: ../../standalone/drakbackup:1 ../../standalone/drakbug:1
 #: ../../standalone/drakfont:1 ../../standalone/net_monitor:1
+#: ../../standalone/printerdrake:1
 #, c-format
 msgid "Close"
 msgstr "إغلاق"
@@ -11051,6 +11071,11 @@ msgstr ""
 msgid "Iceland"
 msgstr "آيسلندا"
 
+#: ../../standalone/drakconnect:1
+#, fuzzy, c-format
+msgid "Network & Internet Configuration"
+msgstr "اعدادات الشبكة"
+
 #: ../../common.pm:1
 #, c-format
 msgid "consolehelper missing"
@@ -11071,7 +11096,7 @@ msgstr "اذا كان الـFPU لديه متجه IRQ"
 msgid "Ext2"
 msgstr "Ext2"
 
-#: ../../my_gtk.pm:1 ../../ugtk2.pm:1
+#: ../../ugtk2.pm:1
 #, c-format
 msgid "Expand Tree"
 msgstr "Expand Tree"
@@ -11092,7 +11117,6 @@ msgstr ""
 "مشغل \"%s\" الجديد سيتم استخدامه عند تشغيل الجهاز في المرة القادمة."
 
 #: ../../network/netconnect.pm:1 ../../printer/printerdrake.pm:1
-#: ../../standalone/drakfloppy:1
 #, c-format
 msgid "Expert Mode"
 msgstr "وضعية الخبير"
@@ -11173,6 +11197,24 @@ msgstr "زيمبابوي"
 msgid "When"
 msgstr "متى "
 
+#: ../../network/adsl.pm:1
+#, c-format
+msgid ""
+"You need the Alcatel microcode.\n"
+"Download it at:\n"
+"%s\n"
+"and copy the mgmt.o in /usr/share/speedtouch"
+msgstr ""
+"تحتاج الى alcatel microcode.\n"
+"قم بتنزيلها على\n"
+"%s\n"
+"و انسخ الملف mgmt.o الى /usr/share/speedtouch"
+
+#: ../../standalone/drakbackup:1
+#, fuzzy, c-format
+msgid "Hour"
+msgstr "هندوراس"
+
 #: ../../network/modem.pm:1 ../../standalone/drakconnect:1
 #, c-format
 msgid "Second DNS Server (optional)"
@@ -11227,11 +11269,6 @@ msgstr ""
 "الملاك و المستخدمين باستخدام msec.\n"
 "يمكنك كذلك تحرير قواعدك الخاصة التي ستُكتَب فوق القواهد الإفتراضية."
 
-#: ../../ugtk.pm:1
-#, c-format
-msgid "-adobe-times-bold-r-normal--17-*-100-100-p-*-iso8859-*,*-r-*"
-msgstr "-adobe-times-bold-r-normal--17-*-100-100-p-*-iso8859-*,*-r-*"
-
 #: ../../any.pm:1
 #, c-format
 msgid ""
@@ -11273,6 +11310,25 @@ msgstr "/dev/hda"
 #, c-format
 msgid "/dev/hdb"
 msgstr "/dev/hdb"
+
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"        - Maintain /etc/dhcpd.conf:\n"
+"        \t\tTo net boot clients, each client needs a dhcpd.conf entry, "
+"assigning an IP address\n"
+"        \t\tand net boot images to the machine. drakTermServ helps create/"
+"remove these entries.\n"
+"\t\t\t\n"
+"        \t\t(PCI cards may omit the image - etherboot will request the "
+"correct image. You should\n"
+"        \t\talso consider that when etherboot looks for the images, it "
+"expects names like\n"
+"        \t\tboot-3c59x.nbi, rather than boot-3c59x.2.4.19-16mdk.nbi).\n"
+"\t\t\t \n"
+"        \t\tA typical dhcpd.conf stanza to support a diskless client looks "
+"like:"
+msgstr ""
 
 #: ../../services.pm:1
 #, c-format
@@ -11318,11 +11374,6 @@ msgstr ", طابعة USB #%s"
 msgid "SILO Installation"
 msgstr "تثبيت SILO"
 
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "Use CD/DVDROM to backup"
-msgstr "استخدم CD/DVDROM للنسخ الإحتياطي"
-
 #: ../../install_messages.pm:1
 #, c-format
 msgid ""
@@ -11359,6 +11410,16 @@ msgstr ""
 #, c-format
 msgid "paranoid"
 msgstr "مرتفع بجنون"
+
+#: ../../security/l10n.pm:1
+#, c-format
+msgid "Do not send mails when unneeded"
+msgstr ""
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "Your scanner(s) will not be available on the network."
+msgstr ""
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -11443,7 +11504,7 @@ msgid ""
 "And, of course, push multimedia to its limits with the very latest software "
 "to play videos, audio files and to handle your images or photos."
 msgstr ""
-"Mandrake Linux 9.1 يمكّنك من استخدام آخر اصدارات البرامج لتشغيل الملفات "
+"Mandrake Linux 9.2 يمكّنك من استخدام آخر اصدارات البرامج لتشغيل الملفات "
 "الصوتية, و تحرير الصور, و تشغيل ملفات الفيديو"
 
 #: ../../printer/printerdrake.pm:1
@@ -11535,15 +11596,20 @@ msgstr "رجاء قم بعمل نسخة احتياطية من بياناتك أ�
 msgid "You have more than one hard drive, which one do you install linux on?"
 msgstr "لديك أكثر من قرص صلب, في أيهم تريد تثبيت Linux؟"
 
+#: ../../lang.pm:1
+#, c-format
+msgid "Eritrea"
+msgstr "اريتريا"
+
 #: ../../standalone/drakTermServ:1
 #, c-format
 msgid "Boot ISO"
 msgstr "ملف ISO الإقلاع"
 
-#: ../../lang.pm:1
-#, c-format
-msgid "Eritrea"
-msgstr "اريتريا"
+#: ../../network/adsl.pm:1
+#, fuzzy, c-format
+msgid "Firmware needed"
+msgstr "اذا احتجته"
 
 #: ../../standalone/drakfont:1
 #, c-format
@@ -11673,6 +11739,11 @@ msgstr ""
 msgid "Add a scanner manually"
 msgstr "أضف ماسح ضوئي يدوياً"
 
+#: ../../standalone/printerdrake:1
+#, c-format
+msgid "Refresh"
+msgstr "تحديث"
+
 #: ../../help.pm:1 ../../diskdrake/interactive.pm:1
 #, c-format
 msgid "Reload partition table"
@@ -11704,6 +11775,11 @@ msgstr "الشبكة المحلية لم تنته بـ`0', جاري الخروج
 #, c-format
 msgid "Boot"
 msgstr "الإقلاع"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid " and the CD is in the drive"
+msgstr ""
 
 #: ../../harddrake/v4l.pm:1
 #, c-format
@@ -11795,6 +11871,11 @@ msgstr ""
 "\n"
 "Set the shell timeout. A value of zero means no timeout."
 
+#: ../../network/adsl.pm:1
+#, c-format
+msgid "Firmware copy succeeded"
+msgstr ""
+
 #: ../../security/help.pm:1
 #, c-format
 msgid "if set to yes, check permissions of files in the users' home."
@@ -11835,6 +11916,11 @@ msgstr "تم حذف الطابعة \"%s\" من Star Office/OpenOffice.org/GIMP �
 #, c-format
 msgid "Save packages selection"
 msgstr "احفظ اختيار الحزم"
+
+#: ../../standalone/printerdrake:1
+#, c-format
+msgid "/_Actions"
+msgstr "/_أحداث"
 
 #: ../../standalone/drakautoinst:1
 #, c-format
@@ -11891,24 +11977,24 @@ msgstr ""
 "ظهر الخطأ التالي: %s"
 
 #: ../../install_steps_gtk.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Size: "
-msgstr "الحجم: %s"
+msgstr "الحجم: "
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid "Which sector do you want to move it to?"
 msgstr "أي قطاع تريد نقله؟"
 
-#: ../../interactive/stdio.pm:1
-#, c-format
-msgid "Do you want to click on this button?"
-msgstr "Do you want to click on this button?"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Bahamas"
 msgstr "جزر الباهاما"
+
+#: ../../interactive/stdio.pm:1
+#, c-format
+msgid "Do you want to click on this button?"
+msgstr "Do you want to click on this button?"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -12031,10 +12117,40 @@ msgstr ""
 "\n"
 "ملحوظة: تحتاج الى موائم شبكة مخصص لإعداد الشبكة المحلية (LAN)."
 
-#: ../../security/l10n.pm:1
-#, c-format
-msgid "Authorize TCP connections X Window"
+#: ../../harddrake/sound.pm:1
+#, fuzzy, c-format
+msgid ""
+"OSS (Open Sound System) was the first sound API. It's an OS independent "
+"sound API (it's available on most UNIX(tm) systems) but it's a very basic "
+"and limited API.\n"
+"What's more, OSS drivers all reinvent the wheel.\n"
+"\n"
+"ALSA (Advanced Linux Sound Architecture) is a modularized architecture "
+"which\n"
+"supports quite a large range of ISA, USB and PCI cards.\n"
+"\n"
+"It also provides a much higher API than OSS.\n"
+"\n"
+"To use alsa, one can either use:\n"
+"- the old compatibility OSS api\n"
+"- the new ALSA api that provides many enhanced features but requires using "
+"the ALSA library.\n"
 msgstr ""
+"OSS (Open Sound System) was the first sound API. It's an OS independant "
+"sound API (it's available on most UNIX(tm) systems) but it's a very basic "
+"and limited API.\n"
+"What's more, OSS drivers all reinvent the wheel.\n"
+"\n"
+"ALSA (Advanced Linux Sound Architecture) is a modularized architecture "
+"which\n"
+"supports quite a large range of ISA, USB and PCI cards.\n"
+"\n"
+"It also provides a much higher API than OSS.\n"
+"\n"
+"To use alsa, one can either use:\n"
+"- the old compatibility OSS api\n"
+"- the new ALSA api that provides many enhanced features but requires using "
+"the ALSA library.\n"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -12076,11 +12192,6 @@ msgid ""
 msgstr ""
 "HardDrake يقوم بالتحقق من العتاد, و يقوم بتهيئة العتاد\n"
 "الجديد/المتغير بشكل اختياري."
-
-#: ../../printer/cups.pm:1 ../../printer/main.pm:1
-#, c-format
-msgid "Remote Printers"
-msgstr "الطابعات البعيدة"
 
 #: ../../fs.pm:1
 #, c-format
@@ -12145,6 +12256,11 @@ msgstr "استخدم الماسحات الضوئية على المستضيفات
 msgid "Unselected All"
 msgstr "تم ازالة اختيار الكل"
 
+#: ../../standalone/printerdrake:1
+#, fuzzy, c-format
+msgid "Printer Management \n"
+msgstr "ادارة المستخدمين \n"
+
 #: ../../standalone/logdrake:1
 #, c-format
 msgid "Domain Name Resolver"
@@ -12184,6 +12300,17 @@ msgstr "المودم"
 #, c-format
 msgid "Welcome to %s"
 msgstr "أهلا بكم في %s"
+
+#: ../../standalone/drakhelp:1
+#, c-format
+msgid ""
+" drakhelp 0.1\n"
+"Copyright (C) 2003 MandrakeSoft.\n"
+"This is free software and may be redistributed under the terms of the GNU "
+"GPL.\n"
+"\n"
+"Usage: \n"
+msgstr ""
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -12268,15 +12395,20 @@ msgstr ""
 msgid "Cuba"
 msgstr "كوبا"
 
-#: ../../printer/printerdrake.pm:1
+#: ../../standalone/drakbackup:1
 #, c-format
-msgid "Searching for new printers..."
-msgstr "جاري البحث عن طابعات جديدة..."
+msgid "October"
+msgstr "أكتوبر"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Belize"
 msgstr "بيليز"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Searching for new printers..."
+msgstr "جاري البحث عن طابعات جديدة..."
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -12305,6 +12437,11 @@ msgstr ""
 "Arguments: (arg)\n"
 "\n"
 " Activate/Disable daily security check."
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "\t-CD-R.\n"
+msgstr "\t-القرص المدمج.\n"
 
 #: ../../security/l10n.pm:1
 #, fuzzy, c-format
@@ -12337,6 +12474,11 @@ msgstr ""
 #, c-format
 msgid "Automatic time synchronization (using NTP)"
 msgstr "تزامن وقت آلي (باستخدام NTP)"
+
+#: ../../network/adsl.pm:1
+#, fuzzy, c-format
+msgid "Use my Windows partition"
+msgstr "جاري تغيير حجم تجزئة Windows"
 
 #: ../../Xconfig/card.pm:1
 #, c-format
@@ -12374,6 +12516,26 @@ msgid ""
 msgstr ""
 "\n"
 "-ملفّات النّظام  :\n"
+
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"        - Per client system configuration files:\n"
+"        \t\tThrough clusternfs, each diskless client can have its own unique "
+"configuration files\n"
+"        \t\ton the root filesystem of the server. By allowing local client "
+"hardware configuration, \n"
+"\t\t\t\tclients can customize files such as /etc/modules.conf, /etc/"
+"sysconfig/mouse, \n"
+"        \t\t/etc/sysconfig/keyboard on a per-client basis.\n"
+"\n"
+"        Note: Enabling local client hardware configuration does enable root "
+"login to the terminal \n"
+"        server on each client machine that has this feature enabled.  Local "
+"configuration can be turned\n"
+"        back off, retaining the configuration files, once the client machine "
+"is configured."
+msgstr ""
 
 #: ../../standalone/drakbug:1
 #, c-format
@@ -12422,6 +12584,14 @@ msgstr "مفاتح التشفير"
 msgid "Microsoft IntelliMouse"
 msgstr "Microsoft IntelliMouse"
 
+#: ../../keyboard.pm:1
+#, c-format
+msgid ""
+"This setting will be activated after the installation.\n"
+"During installation, you will need to use the Right Control\n"
+"key to switch between the different keyboard layouts."
+msgstr ""
+
 #: ../../lang.pm:1
 #, c-format
 msgid "Christmas Island"
@@ -12441,6 +12611,11 @@ msgstr "قناة EIDE/SCSI"
 #, c-format
 msgid "Set this printer as the default"
 msgstr "عيّن هذه الطابعة كطابعة افتراضية"
+
+#: ../../standalone/drakbackup:1
+#, fuzzy, c-format
+msgid "Verify that %s is the correct path"
+msgstr "هل هذا هو الإعداد الصحيح؟"
 
 #: ../../install_interactive.pm:1
 #, c-format
@@ -12503,8 +12678,13 @@ msgstr "سرعة الإستقبال"
 msgid "Turks and Caicos Islands"
 msgstr "جزر الترك و الكايكوس"
 
+#: ../../standalone/drakconnect:1
+#, c-format
+msgid "No Ip"
+msgstr ""
+
 #: ../../help.pm:1 ../../install_steps_gtk.pm:1 ../../interactive.pm:1
-#: ../../my_gtk.pm:1 ../../ugtk2.pm:1 ../../interactive/newt.pm:1
+#: ../../ugtk2.pm:1 ../../interactive/newt.pm:1
 #: ../../printer/printerdrake.pm:1 ../../standalone/drakbackup:1
 #, c-format
 msgid "<- Previous"
@@ -12530,7 +12710,7 @@ msgstr ""
 msgid "Internet Connection Sharing configuration"
 msgstr "إعدادات مشاركة إتصال الإنترنت"
 
-#: ../../my_gtk.pm:1 ../../ugtk2.pm:1
+#: ../../ugtk2.pm:1
 #, c-format
 msgid "Toggle between flat and group sorted"
 msgstr "Toggle between flat and group sorted"
@@ -12564,6 +12744,11 @@ msgstr "إعداد OKI WinPrinter"
 msgid "Saint Helena"
 msgstr "سانت هيلانة"
 
+#: ../../printer/main.pm:1
+#, fuzzy, c-format
+msgid "Parallel port #%s"
+msgstr " على المنفذ المتوازي #%s"
+
 #: ../../help.pm:1 ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Security Level"
@@ -12594,6 +12779,17 @@ msgstr "البولندية (qwertz layout)"
 #, c-format
 msgid "Syria"
 msgstr "سورية"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid ""
+"Is your printer a multi-function device from HP or Sony (OfficeJet, PSC, "
+"LaserJet 1100/1200/1220/3200/3300 with scanner, DeskJet 450, Sony IJP-V100), "
+"an HP PhotoSmart or an HP LaserJet 2200?"
+msgstr ""
+"اذا كانت طابعتك جهازاً متعدد الوظائف من HP أو Sony (OfficeJet, PSC, LaserJet "
+"1100/1200/1220/3200/3300 مع ماسح ضوئي, Sony IPJ-V100) أو جهاز HP PhotoSmart "
+"أو HP LaserJet 2200؟"
 
 #. -PO: these messages will be displayed at boot time in the BIOS, use only ASCII (7bit)
 #: ../../bootloader.pm:1
@@ -12645,6 +12841,11 @@ msgstr "نيوزيلندا "
 #, c-format
 msgid "This directory should remain within the root filesystem"
 msgstr "هذا الدليل يجب أن يكون في نظام الملفات الجذري"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "Across Network"
+msgstr "عبر الشّبكة"
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -12733,7 +12934,7 @@ msgstr "اسم النطاق الداخلي"
 msgid "Card IRQ"
 msgstr "Card IRQ"
 
-#: ../../ugtk.pm:1 ../../standalone/logdrake:1
+#: ../../standalone/logdrake:1
 #, c-format
 msgid "logdrake"
 msgstr "logdrake"
@@ -12869,11 +13070,6 @@ msgstr "Open Firmware Delay"
 msgid "Hungary"
 msgstr "المجر"
 
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "Total progess"
-msgstr "اجمالي التقدم"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "New Zealand"
@@ -12897,6 +13093,11 @@ msgstr ""
 msgid "please choose the date to restore"
 msgstr "رجاء اختر تاريخ الإستعادة"
 
+#: ../../lang.pm:1
+#, c-format
+msgid "Netherlands Antilles"
+msgstr "أنتيل هولندا"
+
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid "Switching from ext2 to ext3"
@@ -12906,11 +13107,6 @@ msgstr "جاري التغيير من ext2 الى ext3"
 #, c-format
 msgid "LPRng"
 msgstr "LPRng"
-
-#: ../../lang.pm:1
-#, c-format
-msgid "Netherlands Antilles"
-msgstr "أنتيل هولندا"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -12989,8 +13185,13 @@ msgstr " enter `void' for void entry"
 
 #: ../../standalone/drakbackup:1
 #, c-format
-msgid "on Hard Drive"
-msgstr "على القرص الصّلب"
+msgid "Backups on unmountable media - Use Catalog to restore"
+msgstr ""
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "January"
+msgstr "يناير"
 
 #: ../../security/l10n.pm:1
 #, fuzzy, c-format
@@ -13113,6 +13314,21 @@ msgstr "جوجيا الجنوبية و جزر ساندويتش الجنوبية"
 msgid "Japan (broadcast)"
 msgstr "اليابان (broadcast)"
 
+#: ../../help.pm:1
+#, c-format
+msgid ""
+"Monitor\n"
+"\n"
+"   The installer will normally automatically detect and configure the\n"
+"monitor connected to your machine. If it is incorrect, you can choose from\n"
+"this list the monitor you actually have connected to your computer."
+msgstr ""
+"الشاشة\n"
+"\n"
+"   يمكن لبرنامج التثبيت اكتشاف و تهيئة الشاشة المتصلة بماكينتك\n"
+"آلياً. ان لم يصل ذلك, يمكنك اختيار الشاشة التي لديك\n"
+"من القائمة."
+
 #: ../../lang.pm:1
 #, c-format
 msgid "Mozambique"
@@ -13168,6 +13384,11 @@ msgstr "شارك في بناء مستقبل Linux!"
 msgid "Local Printer"
 msgstr "طابعة محلية"
 
+#: ../../network/adsl.pm:1
+#, fuzzy, c-format
+msgid "Floppy access error, unable to mount device %s"
+msgstr "أين تريد تحميل الجهاز %s؟"
+
 #: ../../standalone.pm:1
 #, c-format
 msgid "[--file=myfile] [--word=myword] [--explain=regexp] [--alert]"
@@ -13198,20 +13419,20 @@ msgstr "تم اكتشاف وصلة كيبل"
 msgid "Permission denied transferring %s to %s"
 msgstr "تم رفض لاتصريح بنقل %s الى %s"
 
-#: ../../standalone/harddrake2:1
+#: ../../standalone/harddrake2:1 ../../standalone/printerdrake:1
 #, c-format
 msgid "/_Report Bug"
 msgstr "/_تقرير خطأ"
-
-#: ../../diskdrake/interactive.pm:1
-#, c-format
-msgid "Resize"
-msgstr "تغيير الحجم"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Dominica"
 msgstr "دومينيكا"
+
+#: ../../diskdrake/interactive.pm:1
+#, c-format
+msgid "Resize"
+msgstr "تغيير الحجم"
 
 #: ../../Xconfig/various.pm:1
 #, c-format
@@ -13267,6 +13488,36 @@ msgstr "جهاز الفأرة: %s\n"
 #, c-format
 msgid "Reselect correct fonts"
 msgstr "أعد اختيار الخطوط الصحيحة"
+
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"        - /etc/xinetd.d/tftp:\n"
+"        \t\tdrakTermServ will configure this file to work in conjunction "
+"with the images created by\n"
+"        \t\tmkinitrd-net, and the entries in /etc/dhcpd.conf, to serve up "
+"the boot image to each\n"
+"        \t\tdiskless client.\n"
+"\n"
+"        \t\tA typical tftp configuration file looks like:\n"
+"        \t\t\n"
+"        \t\tservice tftp\n"
+"\t\t\t{\n"
+"                        disable         = no\n"
+"                        socket_type  = dgram\n"
+"                        protocol        = udp\n"
+"                        wait             = yes\n"
+"                        user             = root\n"
+"                        server          = /usr/sbin/in.tftpd\n"
+"                        server_args  = -s /var/lib/tftpboot\n"
+"        \t\t}\n"
+"        \t\t\n"
+"        \t\tThe changes here from the default installation are changing the "
+"disable flag to\n"
+"        \t\t'no' and changing the directory path to /var/lib/tftpboot, where "
+"mkinitrd-net\n"
+"        \t\tputs its images."
+msgstr ""
 
 #: ../../help.pm:1
 #, c-format
@@ -13384,6 +13635,11 @@ msgstr ""
 "%s%s\n"
 "متصلة مباشرةً بنظامك"
 
+#: ../../network/modem.pm:1
+#, c-format
+msgid "You don't have any winmodem"
+msgstr ""
+
 #: ../../standalone/drakTermServ:1
 #, c-format
 msgid "type: %s"
@@ -13393,6 +13649,14 @@ msgstr "النوع: %s"
 #, c-format
 msgid "Slovakian (QWERTY)"
 msgstr "السلوفاكية (QWERTY)"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid ""
+"This should be a comma-separated list of local users or email addresses that "
+"you want the backup results sent to. You will need a functioning mail "
+"transfer agent setup on your system."
+msgstr ""
 
 #: ../../standalone/draksound:1
 #, c-format
@@ -13507,6 +13771,11 @@ msgstr ""
 #, c-format
 msgid "Comoros"
 msgstr "جزر القمر"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "May"
+msgstr "مايو"
 
 #: ../../standalone/drakboot:1
 #, c-format
@@ -13633,6 +13902,12 @@ msgstr ""
 "تعديل و انشاء البرامج بلغات مختلفة مثل Perl, Python, C و ++ِِC أسهل من ذي قبل "
 "بفضل GNU gcc 3 و أفضل بيئات التطوير مفتوحة المصدر."
 
+#
+#: ../../standalone/drakbackup:1
+#, fuzzy, c-format
+msgid "No devices found"
+msgstr "تعذر ايجاد صورة"
+
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Truly minimal install (especially no urpmi)"
@@ -13675,15 +13950,15 @@ msgstr ""
 msgid "Where do you want to mount %s?"
 msgstr "أين تريد تحميل الجهاز %s؟"
 
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "Restore Via Network"
-msgstr "استعادة عن طريق الشبكة"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Algeria"
 msgstr "الجزائر"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "Restore Via Network"
+msgstr "استعادة عن طريق الشبكة"
 
 #: ../../any.pm:1
 #, c-format
@@ -13706,15 +13981,30 @@ msgstr ""
 msgid "\tBackups use tar and gzip\n"
 msgstr "\tالنسخ الإحتياطية تستخدم tar و gzip\n"
 
+#: ../../standalone/printerdrake:1
+#, fuzzy, c-format
+msgid "Set as default"
+msgstr "المرجع"
+
 #: ../../Xconfig/card.pm:1
 #, c-format
 msgid "2 MB"
 msgstr "2 ميغابايت"
 
+#: ../../printer/main.pm:1 ../../standalone/printerdrake:1
+#, fuzzy, c-format
+msgid "Configured on this machine"
+msgstr "(على هذا الجهاز)"
+
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Both Control keys simultaneously"
 msgstr "مفتاحيّ Control في نفس الوقت"
+
+#: ../../standalone/drakhelp:1
+#, c-format
+msgid " --help                - display this help     \n"
+msgstr ""
 
 #: ../../standalone.pm:1
 #, c-format
@@ -13820,18 +14110,6 @@ msgstr ""
 msgid "Kenya"
 msgstr "كينيا"
 
-#: ../../share/advertising/04-configuration.pl:1
-#, c-format
-msgid ""
-"Mandrake Linux 9.1 provides you with the Mandrake Control Center, a powerful "
-"tool to fully adapt your computer to the use you make of it. Configure and "
-"customize elements such as the security level, the peripherals (screen, "
-"mouse, keyboard...), the Internet connection and much more!"
-msgstr ""
-"يوفر Mandrake Linux 9.1 لك مركز تحكم Mandrake, و وهو أداة قوية لتعديل حاسوبك "
-"ليناسب احتياجاتك و لتهيئة و تخصيص عناصر مثل مستوى الأمن و الأجهزة الملحقة "
-"(الشاشة, الفأرة لوحة المفاتيح...), وصلة الإنترنت و غير ذلك الكثير!"
-
 #: ../../diskdrake/hd_gtk.pm:1
 #, c-format
 msgid "Use ``Unmount'' first"
@@ -13856,6 +14134,29 @@ msgstr "انشاء الخطوة الأولى"
 #, c-format
 msgid "Both Shift keys simultaneously"
 msgstr "مفتاحيّ Shift في نفس الوقت"
+
+#: ../../standalone/drakhelp:1
+#, c-format
+msgid ""
+" --id <id_label>       - load the html help page which refers to id_label\n"
+msgstr ""
+
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"        - Create etherboot floppies/CDs:\n"
+"        \t\tThe diskless client machines need either ROM images on the NIC, "
+"or a boot floppy\n"
+"        \t\tor CD to initate the boot sequence.  drakTermServ will help "
+"generate these images,\n"
+"        \t\tbased on the NIC in the client machine.\n"
+"        \t\t\n"
+"        \t\tA basic example of creating a boot floppy for a 3Com 3c509 "
+"manually:\n"
+"        \t\t\n"
+"        \t\tcat /usr/lib/etherboot/boot1a.bin \\\n"
+"        \t\t\t/usr/lib/etherboot/lzrom/3c509.lzrom > /dev/fd0"
+msgstr ""
 
 #: ../../standalone/scannerdrake:1
 #, c-format
@@ -14054,22 +14355,22 @@ msgstr "utopia 25"
 msgid "Pipe job into a command"
 msgstr "حوّل الوظيفة الى الأمر"
 
+#: ../../lang.pm:1
+#, c-format
+msgid "Cote d'Ivoire"
+msgstr "كوت ديفوار"
+
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "new dynamic device name generated by core kernel devfs"
 msgstr "اس مالجهاز الديناميكي الجديد الذي يتم توليده من devfs"
 
 #: ../../help.pm:1 ../../install_any.pm:1 ../../interactive.pm:1
-#: ../../my_gtk.pm:1 ../../ugtk2.pm:1 ../../modules/interactive.pm:1
-#: ../../standalone/drakgw:1 ../../standalone/harddrake2:1
+#: ../../ugtk2.pm:1 ../../modules/interactive.pm:1 ../../standalone/drakgw:1
+#: ../../standalone/harddrake2:1
 #, c-format
 msgid "Yes"
 msgstr "نعم"
-
-#: ../../lang.pm:1
-#, c-format
-msgid "Cote d'Ivoire"
-msgstr "كوت ديفوار"
 
 #: ../../network/isdn.pm:1
 #, c-format
@@ -14156,11 +14457,6 @@ msgstr "اختر الوصلة التي تريد تهيئتها"
 #, c-format
 msgid "Please wait, setting security level..."
 msgstr "انتظر من فضلك, جاري تعيين مستوى الأمن.."
-
-#: ../../share/advertising/06-development.pl:1
-#, c-format
-msgid "Mandrake Linux 9.1: the ultimate development platform"
-msgstr "Mandrake Linux 9.1 هي البيئة الأمثل لتطوير البرامج"
 
 #: ../../network/network.pm:1
 #, c-format
@@ -14262,8 +14558,8 @@ msgstr "مشاركة الطابعات المحلية"
 
 #: ../../install_messages.pm:1
 #, c-format
-msgid "http://www.mandrakelinux.com/en/91errata.php3"
-msgstr "http://www.mandrakelinux.com/en/91errata.php3"
+msgid "http://www.mandrakelinux.com/en/92errata.php3"
+msgstr "http://www.mandrakelinux.com/en/92errata.php3"
 
 #: ../../security/help.pm:1
 #, fuzzy, c-format
@@ -14282,62 +14578,6 @@ msgstr "الطابعات المتوفرة"
 #, c-format
 msgid "Empty"
 msgstr "فارغ"
-
-#: ../../help.pm:1
-#, c-format
-msgid ""
-"X (for X Window System) is the heart of the GNU/Linux graphical interface\n"
-"on which all the graphical environments (KDE, GNOME, AfterStep,\n"
-"WindowMaker, etc.) bundled with Mandrake Linux rely upon.\n"
-"\n"
-"You will be presented with a list of different parameters to change to get\n"
-"an optimal graphical display: Graphic Card\n"
-"\n"
-"   The installer will normally automatically detect and configure the\n"
-"graphic card installed on your machine. If it is not the case, you can\n"
-"choose from this list the card you actually have installed.\n"
-"\n"
-"   In the case that different servers are available for your card, with or\n"
-"without 3D acceleration, you are then asked to choose the server that best\n"
-"suits your needs.\n"
-"\n"
-"\n"
-"\n"
-"Monitor\n"
-"\n"
-"   The installer will normally automatically detect and configure the\n"
-"monitor connected to your machine. If it is correct, you can choose from\n"
-"this list the monitor you actually have connected to your computer.\n"
-"\n"
-"\n"
-"\n"
-"Resolution\n"
-"\n"
-"   Here you can choose the resolutions and color depths available for your\n"
-"hardware. Choose the one that best suits your needs (you will be able to\n"
-"change that after installation though). A sample of the chosen\n"
-"configuration is shown in the monitor.\n"
-"\n"
-"\n"
-"\n"
-"Test\n"
-"\n"
-"   the system will try to open a graphical screen at the desired\n"
-"resolution. If you can see the message during the test and answer \"%s\",\n"
-"then DrakX will proceed to the next step. If you cannot see the message, it\n"
-"means that some part of the autodetected configuration was incorrect and\n"
-"the test will automatically end after 12 seconds, bringing you back to the\n"
-"menu. Change settings until you get a correct graphical display.\n"
-"\n"
-"\n"
-"\n"
-"Options\n"
-"\n"
-"   Here you can choose whether you want to have your machine automatically\n"
-"switch to a graphical interface at boot. Obviously, you want to check\n"
-"\"%s\" if your machine is to act as a server, or if you were not successful\n"
-"in getting the display configured."
-msgstr ""
 
 #: ../../standalone/draksplash:1
 #, c-format
@@ -14368,6 +14608,21 @@ msgstr ""
 "نحن الآن سنقوم بتهيئة الوصلة %s.\n"
 "\n"
 "اضغط موافق للمتابعة."
+
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"        - Create Etherboot Enabled Boot Images:\n"
+"        \t\tTo boot a kernel via etherboot, a special kernel/initrd image "
+"must be created.\n"
+"        \t\tmkinitrd-net does much of this work and drakTermServ is just a "
+"graphical interface\n"
+"        \t\tto help manage/customize these images. To create the file \n"
+"        \t\t/etc/dhcpd.conf.etherboot-pcimap.include that is pulled in as an "
+"include in \n"
+"        \t\tdhcpd.conf, you should create the etherboot images for at least "
+"one full kernel."
+msgstr ""
 
 #: ../../printer/main.pm:1 ../../printer/printerdrake.pm:1
 #, c-format
@@ -14443,8 +14698,7 @@ msgstr "إعداد الفأرة"
 msgid "Choose the mount points"
 msgstr "اختر نقاط التحميل"
 
-#: ../../help.pm:1 ../../ugtk.pm:1 ../../standalone/drakTermServ:1
-#: ../../standalone/drakfont:1
+#: ../../help.pm:1 ../../standalone/drakTermServ:1 ../../standalone/drakfont:1
 #, c-format
 msgid "OK"
 msgstr "موافق"
@@ -14458,6 +14712,11 @@ msgstr "اليوغوسلافية (لاتيني)"
 #, c-format
 msgid "Installing"
 msgstr "جاري التثبيت"
+
+#: ../../mouse.pm:1
+#, fuzzy, c-format
+msgid "Logitech MouseMan with Wheel emulation"
+msgstr "Logitech MouseMan"
 
 #: ../../any.pm:1
 #, c-format
@@ -14582,15 +14841,15 @@ msgstr "فقير"
 msgid "Report check result by mail"
 msgstr "if set to yes, report check result by mail."
 
-#: ../../standalone/drakgw:1
-#, c-format
-msgid "The DHCP start range"
-msgstr "حدود DHCP start"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Grenada"
 msgstr "عرينادا"
+
+#: ../../standalone/drakgw:1
+#, c-format
+msgid "The DHCP start range"
+msgstr "حدود DHCP start"
 
 #: ../../any.pm:1
 #, c-format
@@ -14603,22 +14862,11 @@ msgid ", %s sectors"
 msgstr ", %s قطاع"
 
 #: ../../help.pm:1 ../../install_any.pm:1 ../../interactive.pm:1
-#: ../../my_gtk.pm:1 ../../ugtk2.pm:1 ../../modules/interactive.pm:1
+#: ../../ugtk2.pm:1 ../../modules/interactive.pm:1
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "No"
 msgstr "لا"
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid ""
-"Is your printer a multi-function device from HP or Sony (OfficeJet, PSC, "
-"LaserJet 1100/1200/1220/3200/3300 with scanner, Sony IJP-V100), an HP "
-"PhotoSmart or an HP LaserJet 2200?"
-msgstr ""
-"اذا كانت طابعتك جهازاً متعدد الوظائف من HP أو Sony (OfficeJet, PSC, LaserJet "
-"1100/1200/1220/3200/3300 مع ماسح ضوئي, Sony IPJ-V100) أو جهاز HP PhotoSmart "
-"أو HP LaserJet 2200؟"
 
 #: ../../lang.pm:1
 #, c-format
@@ -14685,15 +14933,15 @@ msgstr "خيارات طابعة NetWare"
 msgid "%s BootSplash (%s) preview"
 msgstr "%s BootSplash (%s) معاينة"
 
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "February"
+msgstr "فبراير"
+
 #: ../../standalone/drakfloppy:1
 #, c-format
 msgid "General"
 msgstr "عام"
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "Printing system: "
-msgstr "نظام الطباعة: "
 
 #: ../../security/l10n.pm:1
 #, c-format
@@ -14710,6 +14958,16 @@ msgstr "أضف مستخدم"
 msgid "Network configuration (%d adapters)"
 msgstr "اعدادات الشبكة (%d موائمات)"
 
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "April"
+msgstr "أبريل"
+
+#: ../../standalone/drakconnect:1
+#, fuzzy, c-format
+msgid "Deactivate now"
+msgstr "قم بإزالة التنشيط الآن"
+
 #: ../../any.pm:1 ../../install_any.pm:1 ../../standalone.pm:1
 #, c-format
 msgid "Mandatory package %s is missing"
@@ -14720,7 +14978,7 @@ msgstr "الحزمة الضرورية %s مفقودة"
 msgid "Philippines"
 msgstr "الفيليبين"
 
-#: ../../interactive.pm:1 ../../my_gtk.pm:1 ../../ugtk2.pm:1
+#: ../../interactive.pm:1 ../../ugtk2.pm:1
 #: ../../Xconfig/resolution_and_depth.pm:1 ../../interactive/gtk.pm:1
 #: ../../interactive/http.pm:1 ../../interactive/newt.pm:1
 #: ../../interactive/stdio.pm:1 ../../standalone/drakbackup:1
@@ -14731,6 +14989,11 @@ msgstr "الفيليبين"
 #, c-format
 msgid "Ok"
 msgstr "موافق"
+
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid "drakTermServ Overview"
+msgstr ""
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -14953,6 +15216,11 @@ msgstr "استخدم لـloopback"
 msgid "Mandrake Bug Report Tool"
 msgstr "أداة تقرير العيوب في Mandrake"
 
+#: ../../standalone/printerdrake:1
+#, c-format
+msgid "Apply filter"
+msgstr "طبّق المرشّح"
+
 #: ../../network/adsl.pm:1
 #, c-format
 msgid "use pppoe"
@@ -14983,11 +15251,6 @@ msgstr "انقل"
 msgid "Dvorak (Swedish)"
 msgstr "Dvorak (سويدية)"
 
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "More Options"
-msgstr "خيارات أكثر"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Afghanistan"
@@ -14995,8 +15258,18 @@ msgstr "أفغانستان"
 
 #: ../../standalone/drakbackup:1
 #, c-format
+msgid "More Options"
+msgstr "خيارات أكثر"
+
+#: ../../standalone/drakbackup:1
+#, c-format
 msgid "Delete Hard Drive tar files after backup to other media."
 msgstr "الغ ملفات tar الخلصة بالقرص تاصلب بعد النسخ الى وسيط آخر."
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Burundi"
+msgstr "بوروندي"
 
 #: ../../services.pm:1
 #, c-format
@@ -15009,11 +15282,6 @@ msgstr ""
 "cron هو برنامج UNIX القياسي لتشغيل البرامج المحددة من قبل المستخدم\n"
 "عند أدوقات محددة دورياً. vixie cron يضيف عدداً من المزايا الى UNIX\n"
 "cron الأساسي, بما فيها حماية أمنية أفضل, و خيارات تهيئة أقوى."
-
-#: ../../lang.pm:1
-#, c-format
-msgid "Burundi"
-msgstr "بوروندي"
 
 #: ../../standalone/drakTermServ:1
 #, c-format
@@ -15071,15 +15339,22 @@ msgstr "Set-GID"
 msgid "The encryption keys do not match"
 msgstr "مفاتيح التشفير غير متطابقة"
 
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid ""
+"For a multisession CD, only the first session will erase the cdrw. Otherwise "
+"the cdrw is erased before each backup."
+msgstr ""
+
+#: ../../printer/main.pm:1
+#, fuzzy, c-format
+msgid "USB printer"
+msgstr ", طابعة USB"
+
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Right \"Windows\" key"
 msgstr "مفتاح \"Windows\" الأيمن"
-
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "CDROM / DVDROM"
-msgstr "CDROM / DVDROM"
 
 #: ../../security/help.pm:1
 #, c-format
@@ -15165,6 +15440,11 @@ msgstr "تيرابايت"
 msgid "FATAL"
 msgstr "FATAL"
 
+#: ../../standalone/printerdrake:1
+#, c-format
+msgid "Refresh the list"
+msgstr "تحديث القائمة"
+
 #: ../../standalone/drakpxe:1
 #, c-format
 msgid ""
@@ -15181,7 +15461,7 @@ msgstr ""
 "\n"
 
 #: ../../diskdrake/hd_gtk.pm:1 ../../diskdrake/interactive.pm:1
-#: ../../standalone/drakperm:1
+#: ../../standalone/drakperm:1 ../../standalone/printerdrake:1
 #, c-format
 msgid "Delete"
 msgstr "إلغاء"
@@ -15235,6 +15515,14 @@ msgstr "البروتوكول الأوروبي"
 #, c-format
 msgid ", printer \"%s\" on server \"%s\""
 msgstr ", الطابعة \"%s\" على الخادم \"%s\""
+
+#: ../../standalone/drakbackup:1
+#, fuzzy, c-format
+msgid "Note that currently all 'net' media also use the hard drive."
+msgstr ""
+"تأكد من أن مراقب cron موجود ضمن خدمات النظام. \n"
+"\n"
+"لاحظ أن كل وسائط الشبكة تستخدم القرص الصلب."
 
 #: ../../fsedit.pm:1 ../../install_steps_interactive.pm:1
 #: ../../install_steps.pm:1 ../../diskdrake/dav.pm:1
@@ -15358,6 +15646,11 @@ msgstr "وحدة"
 msgid "Enter the directory to save to:"
 msgstr "فضلاً اختر الدليل الذي سيتم الحفظ فيه:"
 
+#: ../../crypto.pm:1 ../../lang.pm:1
+#, c-format
+msgid "Greece"
+msgstr "اليونان"
+
 #: ../../install_steps_interactive.pm:1 ../../standalone/drakxtv:1
 #, c-format
 msgid "All"
@@ -15368,10 +15661,15 @@ msgstr "الكل"
 msgid "Which printing system (spooler) do you want to use?"
 msgstr "أي نظام طباعة تريد أن تستخدم؟"
 
-#: ../../crypto.pm:1 ../../lang.pm:1
+#: ../../standalone/drakbackup:1
 #, c-format
-msgid "Greece"
-msgstr "اليونان"
+msgid "July"
+msgstr "يوليو"
+
+#: ../../printer/main.pm:1
+#, fuzzy, c-format
+msgid "Prints into %s"
+msgstr ", جاري الطباعة الى %s"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -15454,6 +15752,11 @@ msgstr "طابعة على خادم NetWare"
 msgid "Give the ram size in MB"
 msgstr "اكتب حجم الذاكرة بالميغابايت"
 
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "Friday"
+msgstr "الجمعة"
+
 #: ../../standalone/net_monitor:1
 #, fuzzy, c-format
 msgid "Disconnection from Internet complete."
@@ -15515,6 +15818,11 @@ msgstr "تعذر ايجاد %s على %s"
 msgid "Japanese 106 keys"
 msgstr "اليابانية 106 مفاتيح"
 
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "Could not install the packages needed to share your scanner(s)."
+msgstr ""
+
 #: ../../standalone/drakTermServ:1
 #, c-format
 msgid "This will take a few minutes."
@@ -15524,6 +15832,11 @@ msgstr "سيستغرق هذا بضع دقائق."
 #, c-format
 msgid "Burkina Faso"
 msgstr "بوركينافاسو"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "June"
+msgstr "يونيو"
 
 #: ../../standalone/scannerdrake:1
 #, c-format
@@ -15561,9 +15874,9 @@ msgid "1 minute"
 msgstr "دقيقة واحدة"
 
 #: ../../standalone/drakTermServ:1
-#, fuzzy, c-format
+#, c-format
 msgid "type: fat"
-msgstr "النوع: %s"
+msgstr "النوع: سميك"
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -15579,6 +15892,18 @@ msgstr ", جهاز متعدد الوظائف"
 #, c-format
 msgid "Laos"
 msgstr "لاوس"
+
+#: ../../share/advertising/04-configuration.pl:1
+#, c-format
+msgid ""
+"Mandrake Linux 9.2 provides you with the Mandrake Control Center, a powerful "
+"tool to fully adapt your computer to the use you make of it. Configure and "
+"customize elements such as the security level, the peripherals (screen, "
+"mouse, keyboard...), the Internet connection and much more!"
+msgstr ""
+"يوفر Mandrake Linux 9.2 لك مركز تحكم Mandrake, و وهو أداة قوية لتعديل حاسوبك "
+"ليناسب احتياجاتك و لتهيئة و تخصيص عناصر مثل مستوى الأمن و الأجهزة الملحقة "
+"(الشاشة, الفأرة لوحة المفاتيح...), وصلة الإنترنت و غير ذلك الكثير!"
 
 #: ../../security/help.pm:1
 #, fuzzy, c-format
@@ -15646,6 +15971,11 @@ msgstr ""
 #, c-format
 msgid "Saint Pierre and Miquelon"
 msgstr "سانت بيير و ميكيلون"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "September"
+msgstr "سبتمبر"
 
 #: ../../standalone/draksplash:1
 #, c-format
@@ -15766,7 +16096,7 @@ msgstr "ابني NIC واحدة -->"
 msgid "Marshall Islands"
 msgstr "جزر مارشال"
 
-#: ../../my_gtk.pm:1 ../../ugtk2.pm:1
+#: ../../ugtk2.pm:1
 #, c-format
 msgid "Is this correct?"
 msgstr "هل هذا صحيح ؟ "
@@ -15822,9 +16152,9 @@ msgstr ""
 "هل تريد المتابعة على أي حال؟"
 
 #: ../../install_steps_gtk.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Version: "
-msgstr "الإصدار: %s\n"
+msgstr "الإصدار:"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -15836,10 +16166,20 @@ msgstr "IP الخادم مفقود!"
 msgid "Suriname"
 msgstr "سورينام"
 
+#: ../../network/adsl.pm:1
+#, fuzzy, c-format
+msgid "Use a floppy"
+msgstr "احفظ على قرص مرن"
+
 #: ../../any.pm:1
 #, c-format
 msgid "Enable ACPI"
 msgstr "تمكين ACPI"
+
+#: ../../fs.pm:1
+#, c-format
+msgid "Give write access to ordinary users"
+msgstr ""
 
 #: ../../help.pm:1
 #, c-format
@@ -15850,11 +16190,6 @@ msgstr "بيئات رسومية"
 #, c-format
 msgid "Gibraltar"
 msgstr "جبل طارق"
-
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "on Tape Device"
-msgstr "على الشريط"
 
 #: ../../network/modem.pm:1
 #, c-format
@@ -15896,6 +16231,7 @@ msgstr "حسّن مستوى الأمن"
 #: ../../interactive/gtk.pm:1 ../../standalone/drakTermServ:1
 #: ../../standalone/drakbackup:1 ../../standalone/drakbug:1
 #: ../../standalone/drakconnect:1 ../../standalone/drakfont:1
+#: ../../standalone/drakperm:1 ../../standalone/draksec:1
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "Help"
@@ -15975,6 +16311,11 @@ msgstr ""
 msgid "SMB (Windows 9x/NT) Printer Options"
 msgstr "خيارات طابعة SMB (Windows 9x/NT)"
 
+#: ../../printer/main.pm:1
+#, c-format
+msgid "URI: %s"
+msgstr ""
+
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "Valid user list changed, rewriting config file."
@@ -15999,15 +16340,15 @@ msgstr ""
 msgid "Protocol for the rest of the world"
 msgstr "بروتوكول لبقية العالم"
 
-#: ../../security/l10n.pm:1
-#, c-format
-msgid "Password minimum length and number of digit and upcase letters"
-msgstr ""
-
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Print test pages"
 msgstr "اطبع صفحات اختبارية"
+
+#: ../../standalone/drakconnect:1
+#, fuzzy, c-format
+msgid "Activate now"
+msgstr "قم بالتنشيط الآن"
 
 #: ../../Xconfig/card.pm:1
 #, c-format
@@ -16111,6 +16452,11 @@ msgstr "أعد تشغيل XFS"
 msgid "Add host/network"
 msgstr "أضف مستضيف/شبكة"
 
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "Scannerdrake will not be started now."
+msgstr ""
+
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "Model name"
@@ -16121,11 +16467,6 @@ msgstr "اسم الطراز"
 msgid "Albania"
 msgstr "ألبانيا"
 
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "No CDR/DVDR in drive!"
-msgstr "لا يوجد قرص CD-R/DVD-R في السواقة"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "British Indian Ocean Territory"
@@ -16135,6 +16476,11 @@ msgstr "منطقة جزر المحيط الهادي البريطانية"
 #, c-format
 msgid "Normal Mode"
 msgstr "وضع عادي"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "No CD-R/DVD-R in drive!"
+msgstr "لا يوجد قرص CD-R/DVD-R في السواقة"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -16256,6 +16602,11 @@ msgstr "أجهز وسائط متعددة أخرى"
 msgid "burner"
 msgstr "ناسخ أقراص"
 
+#: ../../standalone/drakbackup:1
+#, fuzzy, c-format
+msgid " (Default is all users)"
+msgstr "المستخدم الإفتراضي"
+
 #: ../../printer/printerdrake.pm:1 ../../standalone/scannerdrake:1
 #, c-format
 msgid "No remote machines"
@@ -16303,6 +16654,11 @@ msgstr "خيار ``تشديد خيارات سطر الأوامر`` بدون قا
 msgid "Internet Connection Sharing currently enabled"
 msgstr "مشاركة الإتصال بالإنترنت ممكنة حاليا"
 
+#: ../../lang.pm:1
+#, c-format
+msgid "United Arab Emirates"
+msgstr "الإمارات العربية المتحدة"
+
 #: ../../network/tools.pm:1 ../../standalone/drakconnect:1
 #, c-format
 msgid "Card IO_0"
@@ -16315,11 +16671,6 @@ msgstr ""
 
 #: ../../lang.pm:1
 #, c-format
-msgid "United Arab Emirates"
-msgstr "الإمارات العربية المتحدة"
-
-#: ../../lang.pm:1
-#, c-format
 msgid "Thailand"
 msgstr "تايلاند"
 
@@ -16327,6 +16678,11 @@ msgstr "تايلاند"
 #, c-format
 msgid "Card IO_1"
 msgstr "Card IO_1"
+
+#: ../../standalone/printerdrake:1
+#, c-format
+msgid "Search:"
+msgstr "ابحث:"
 
 #: ../../lang.pm:1
 #, c-format
@@ -16353,75 +16709,30 @@ msgstr "اعرض كل طابعات CUPS البعيدة المتوفرة"
 msgid "Mandrake Linux Installation %s"
 msgstr "تثبيت Mandrake Linux %s"
 
+#: ../../harddrake/sound.pm:1
+#, c-format
+msgid "Unknown driver"
+msgstr "مشغل غير معروف"
+
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Thai keyboard"
 msgstr "لوحة المفاتيح التايلاندية"
-
-#: ../../network/modem.pm:1
-#, c-format
-msgid "Dialup options"
-msgstr "خيارات الإتصال"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Bouvet Island"
 msgstr "جزيرة بوفيه"
 
+#: ../../network/modem.pm:1
+#, c-format
+msgid "Dialup options"
+msgstr "خيارات الإتصال"
+
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "If no port is given, 631 will be taken as default."
 msgstr "اذا لم يتم اعطاء منفذ, سيتم اتخاذ 631 كمنفذ افتراضي."
-
-#: ../../standalone/draksec:1
-#, c-format
-msgid ""
-"Here, you can setup the security level and administrator of your machine.\n"
-"\n"
-"\n"
-"The Security Administrator is the one who will receive security alerts if "
-"the\n"
-"'Security Alerts' option is set. It can be a username or an email.\n"
-"\n"
-"\n"
-"The Security Level menu enable to select one of the six preconfigured "
-"security\n"
-"provided with msec. These levels range from poor security and ease of use, "
-"to\n"
-"paranoid config, suitable for very sensitive server applications:\n"
-"\n"
-"\n"
-"<span foreground=\"royalblue3\">Poor</span>: This is a totally unsafe but "
-"very\n"
-"easy to use security level. It should only be used for machines not "
-"connected to\n"
-"any network and that are not accessible to everybody.\n"
-"\n"
-"\n"
-"<span foreground=\"royalblue3\">Standard</span>: This is the standard "
-"security\n"
-"recommended for a computer that will be used to connect to the Internet as "
-"a\n"
-"client.\n"
-"\n"
-"\n"
-"<span foreground=\"royalblue3\">High</span>: There are already some\n"
-"restrictions, and more automatic checks are run every night.\n"
-"\n"
-"\n"
-"<span foreground=\"royalblue3\">Higher</span>: The security is now high "
-"enough\n"
-"to use the system as a server which can accept connections from many "
-"clients. If\n"
-"your machine is only a client on the Internet, you should choose a lower "
-"level.\n"
-"\n"
-"\n"
-"<span foreground=\"royalblue3\">Paranoid</span>: This is similar to the "
-"previous\n"
-"level, but the system is entirely closed and security features are at their\n"
-"maximum"
-msgstr ""
 
 #: ../../install_steps_gtk.pm:1 ../../install_steps_interactive.pm:1
 #, c-format
@@ -16452,6 +16763,11 @@ msgstr "Mandrake Online"
 msgid "\t-Network by webdav.\n"
 msgstr "\t-الشبكة عن طريق webdav.\n"
 
+#: ../../printer/main.pm:1
+#, fuzzy, c-format
+msgid ", multi-function device on a parallel port"
+msgstr ", جهاز متعدد الوظائف على المنفذ المتوازي #%s"
+
 #: ../../standalone/drakgw:1 ../../standalone/drakpxe:1
 #, c-format
 msgid ""
@@ -16474,13 +16790,13 @@ msgstr "نعذر ايجاد أقراص صلبة"
 
 #: ../../mouse.pm:1
 #, c-format
-msgid "Logitech CC Series"
-msgstr "Logitech CC Series"
+msgid "2 buttons"
+msgstr "زرّين"
 
 #: ../../mouse.pm:1
 #, c-format
-msgid "2 buttons"
-msgstr "زرّين"
+msgid "Logitech CC Series"
+msgstr "Logitech CC Series"
 
 #: ../../network/isdn.pm:1
 #, c-format
@@ -16501,6 +16817,11 @@ msgstr "احفظ على قرص مرن"
 #, fuzzy, c-format
 msgid "Check open ports"
 msgstr "تم  اكتشافه على المنفذ %s"
+
+#: ../../standalone/printerdrake:1
+#, fuzzy, c-format
+msgid "Edit selected printer"
+msgstr "حرر الخادم المختار"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -16615,7 +16936,7 @@ msgstr ""
 " (المنافذ المتوازية: /dev/lp0, /dev/lp1, ..., مماشل لـ LPT1:, LPT2:, ..., "
 "طابعة USB الأولي: /dev/usb/lp0, طابعة USB الثانية: /dev/usb/lp1, ...)"
 
-#: ../../network/netconnect.pm:1
+#: ../../network/adsl.pm:1 ../../network/netconnect.pm:1
 #, c-format
 msgid "Next"
 msgstr "التالي"
@@ -16690,6 +17011,11 @@ msgstr "أنغويلا"
 msgid "NIS Domain"
 msgstr "نطاق NIS"
 
+#: ../../lang.pm:1
+#, c-format
+msgid "Antarctica"
+msgstr "القطب الجنوبي"
+
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid ""
@@ -16698,11 +17024,6 @@ msgid ""
 msgstr ""
 "\n"
 "-ملفّات المستخدم:\n"
-
-#: ../../lang.pm:1
-#, c-format
-msgid "Antarctica"
-msgstr "القطب الجنوبي"
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -16778,6 +17099,11 @@ msgstr "LPD و LPRng لا تدعم طابعات IPP.\n"
 msgid "Host name or IP."
 msgstr "اسم المستضيف"
 
+#: ../../standalone/printerdrake:1
+#, c-format
+msgid "/_Edit"
+msgstr "/_تحرير"
+
 #: ../../fsedit.pm:1
 #, c-format
 msgid "simple"
@@ -16793,20 +17119,25 @@ msgstr "أمسح الكل"
 msgid "No test pages"
 msgstr "لا صفحات اختبارية"
 
-#: ../../standalone/drakconnect:1
-#, c-format
-msgid "Adapter %s: %s"
-msgstr "المحوّل %s: %s"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Falkland Islands (Malvinas)"
 msgstr "جزر فوكلاند"
 
+#: ../../standalone/drakconnect:1
+#, c-format
+msgid "Adapter %s: %s"
+msgstr "المحوّل %s: %s"
+
 #: ../../standalone/drakfloppy:1
 #, fuzzy, c-format
 msgid "Boot disk creation"
 msgstr "صنع قرص مرن لبدء النظام"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "Monday"
+msgstr "الاثنين"
 
 #: ../../printer/main.pm:1 ../../printer/printerdrake.pm:1
 #, c-format
@@ -16830,6 +17161,7 @@ msgstr "قم بالنسخ الإحتياطي الآن"
 
 #: ../../standalone/drakboot:1 ../../standalone/drakfloppy:1
 #: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
+#: ../../standalone/printerdrake:1
 #, c-format
 msgid "/_File"
 msgstr "/_ملف"
@@ -16847,6 +17179,11 @@ msgid ""
 msgstr ""
 "Launch packet filtering for Linux kernel 2.2 series, to set\n"
 "up a firewall to protect your machine from network attacks."
+
+#: ../../standalone/drakperm:1
+#, fuzzy, c-format
+msgid "Editable"
+msgstr "تعطيل"
 
 #: ../../network/ethernet.pm:1
 #, fuzzy, c-format
@@ -16952,9 +17289,9 @@ msgstr ""
 "لا يوجد مشغل مفتوح المصدر لبطاقة الصوت (%s), لكن هناك مشغل تجاري في \"%s\"."
 
 #: ../../standalone/drakperm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Group :"
-msgstr "مجموعة :"
+msgstr "المجموعة :"
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -16984,7 +17321,7 @@ msgstr "جاري ضبط قنوات التلفاز"
 msgid "Kernel:"
 msgstr "النواة:"
 
-#: ../../standalone/harddrake2:1
+#: ../../standalone/harddrake2:1 ../../standalone/printerdrake:1
 #, c-format
 msgid "/_About..."
 msgstr "/_حول..."
@@ -17049,6 +17386,11 @@ msgstr "اسم الطابعة يجب أن يحتوي فقط على حروف و �
 msgid "Show current interface configuration"
 msgstr "أظهر تهيئة الواجهة الحالية"
 
+#: ../../standalone/printerdrake:1
+#, fuzzy, c-format
+msgid "Add Printer"
+msgstr "طابعة"
+
 #: ../../security/help.pm:1
 #, fuzzy, c-format
 msgid ""
@@ -17079,15 +17421,15 @@ msgstr "انتهى"
 msgid "Web Server"
 msgstr "خادم الويب"
 
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "\tDo not include System Files\n"
-msgstr "\tلا تُضمن ملفات النظام\n"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Chile"
 msgstr "تشيلي"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "\tDo not include System Files\n"
+msgstr "\tلا تُضمن ملفات النظام\n"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -17330,6 +17672,11 @@ msgstr "حمّل من قرص مرن"
 msgid "The following printer was auto-detected. "
 msgstr "تم اكتشاف الطابعة الآتية آلياً. "
 
+#: ../../printer/main.pm:1
+#, fuzzy, c-format
+msgid "Uses command %s"
+msgstr ", باستخدام الأمر %s"
+
 #: ../../standalone/drakTermServ:1
 #, c-format
 msgid "Boot Floppy"
@@ -17367,6 +17714,11 @@ msgstr "تهيئة صورة الإقلاع"
 
 #: ../../lang.pm:1
 #, c-format
+msgid "Georgia"
+msgstr "جورجيا"
+
+#: ../../lang.pm:1
+#, c-format
 msgid "China"
 msgstr "الصين"
 
@@ -17374,11 +17726,6 @@ msgstr "الصين"
 #, c-format
 msgid " (Make sure that all your printers are connected and turned on).\n"
 msgstr " (تأكد من أن كل الطابعات موصولة و تعمل).\n"
-
-#: ../../lang.pm:1
-#, c-format
-msgid "Georgia"
-msgstr "جورجيا"
 
 #: ../../standalone/printerdrake:1
 #, c-format
@@ -17442,10 +17789,20 @@ msgstr "جاري اختيار مدير العرض"
 msgid "Zeroconf Host name"
 msgstr "اسم مستضيف Zeroconf"
 
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "Custom setup/crontab entry:"
+msgstr ""
+
 #: ../../network/network.pm:1 ../../printer/printerdrake.pm:1
 #, c-format
 msgid "IP address should be in format 1.2.3.4"
 msgstr "عنوان IP يجب أن يكون على النسق 1.2.3.4"
+
+#: ../../standalone/printerdrake:1
+#, fuzzy, c-format
+msgid "Configure CUPS printing system"
+msgstr "تغيير نظام الطباعة"
 
 #: ../../lang.pm:1
 #, c-format
@@ -17513,15 +17870,15 @@ msgstr "الأذربيجانية (لاتيني)"
 msgid "Package not installed"
 msgstr "لم يتم تثبيت الحزمة"
 
-#: ../../share/advertising/12-mdkexpert.pl:1
-#, c-format
-msgid "Become a MandrakeExpert"
-msgstr "كن خبيراً في MandrakeExpert"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "American Samoa"
 msgstr "ساموا الأمريكية"
+
+#: ../../share/advertising/12-mdkexpert.pl:1
+#, c-format
+msgid "Become a MandrakeExpert"
+msgstr "كن خبيراً في MandrakeExpert"
 
 #: ../../standalone/drakconnect:1
 #, c-format
@@ -17597,8 +17954,9 @@ msgstr "قد يستغرق مسح الوسيط بعض الوقت."
 msgid "You can't select/unselect this package"
 msgstr "لا يمكنك اختيار/ازالة اختيار هذه الحزمة"
 
-#: ../../diskdrake/interactive.pm:1 ../../harddrake/sound.pm:1
-#: ../../network/modem.pm:1 ../../standalone/drakfloppy:1
+#: ../../keyboard.pm:1 ../../diskdrake/interactive.pm:1
+#: ../../harddrake/sound.pm:1 ../../network/modem.pm:1
+#: ../../standalone/drakfloppy:1
 #, c-format
 msgid "Warning"
 msgstr "تحذير"
@@ -17617,11 +17975,6 @@ msgstr ""
 msgid "Remote host name"
 msgstr "اسم المستضيف البعيد"
 
-#: ../../standalone/drakconnect:1
-#, c-format
-msgid "deactivate now"
-msgstr "قم بإزالة التنشيط الآن"
-
 #: ../../any.pm:1
 #, c-format
 msgid "access to X programs"
@@ -17631,6 +17984,11 @@ msgstr "الوصول الى برامج X"
 #, c-format
 msgid "Computing the size of the Windows partition"
 msgstr "جاري حساب مساحة تجزئة Windows"
+
+#: ../../standalone/printerdrake:1
+#, c-format
+msgid "/_Refresh"
+msgstr "/تح_ديث"
 
 #: ../../crypto.pm:1 ../../lang.pm:1 ../../network/tools.pm:1
 #: ../../standalone/drakxtv:1
@@ -17704,6 +18062,11 @@ msgstr "Zip"
 msgid "Left Alt key"
 msgstr "مفتاح Alt الأيسر"
 
+#: ../../standalone/logdrake:1
+#, fuzzy, c-format
+msgid "Load setting"
+msgstr "حمل الإعدادات"
+
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid ""
@@ -17716,6 +18079,11 @@ msgstr ""
 "\n"
 "لم يتمكن Printerdrake من التعرف على طراز طابعتك %s. فضلاً اختر الطراز الصحيح "
 "من القائمة."
+
+#: ../../standalone/printerdrake:1
+#, fuzzy, c-format
+msgid "Set selected printer as the default printer"
+msgstr "عيّن هذه الطابعة كطابعة افتراضية"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -17893,6 +18261,11 @@ msgstr ""
 msgid "format of floppies supported by the drive"
 msgstr "نسق الأقراص التي تدعمها السواقة"
 
+#: ../../network/adsl.pm:1
+#, c-format
+msgid "Firmware copy failed, file %s not found"
+msgstr ""
+
 #: ../../raid.pm:1
 #, c-format
 msgid "Not enough partitions for RAID level %d\n"
@@ -17984,6 +18357,7 @@ msgid "Georgian (\"Russian\" layout)"
 msgstr "الجورجية (التصميم الروسي)"
 
 #: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
+#: ../../standalone/printerdrake:1
 #, c-format
 msgid "/_Options"
 msgstr "/_خيارات"
@@ -18143,9 +18517,9 @@ msgid "Use network connection to backup"
 msgstr "استخدم الإتصال بالشبكة للنسخ الإحتياطي"
 
 #: ../../standalone/drakfloppy:1
-#, fuzzy, c-format
+#, c-format
 msgid "Kernel version"
-msgstr "اصدارة اللب"
+msgstr "اصدارة النواة"
 
 #: ../../help.pm:1
 #, c-format
@@ -18216,9 +18590,9 @@ msgid "Left Shift key"
 msgstr "مفتاح Shift الأيسر"
 
 #: ../../network/netconnect.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid " local network"
-msgstr "الشبكة/الشبكات المحلية"
+msgstr " الشبكة المحلية"
 
 #: ../../interactive/stdio.pm:1
 #, c-format
@@ -18231,9 +18605,9 @@ msgid "Syslog reports to console 12"
 msgstr ""
 
 #: ../../diskdrake/smbnfs_gtk.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Search new servers"
-msgstr "ابحث في أجهزة الخادم"
+msgstr "ابحث عن خادمات جديدة"
 
 #: ../../lang.pm:1
 #, c-format
@@ -18289,6 +18663,11 @@ msgid ""
 msgstr ""
 "Linuxconf يقوم في بعض الأحيان بالترتيب لعمل بعض الأعمال\n"
 "عند الإقلاع للمحافظة على اعدادات النظام."
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "DVD-R device"
+msgstr "جهاز DVDR"
 
 #: ../../printer/main.pm:1 ../../printer/printerdrake.pm:1
 #, c-format
@@ -18374,10 +18753,10 @@ msgstr ""
 " * Default OS: you can select which OS will boot by default when the Open\n"
 "Firmware Delay expires."
 
-#: ../../mouse.pm:1
+#: ../../standalone/drakbackup:1
 #, c-format
-msgid "No mouse"
-msgstr "لا فأرة"
+msgid "Wednesday"
+msgstr "الأربعاء"
 
 #: ../../crypto.pm:1 ../../lang.pm:1
 #, c-format
@@ -18388,6 +18767,11 @@ msgstr "ألمانيا"
 #, c-format
 msgid "Austria"
 msgstr "النمسا"
+
+#: ../../mouse.pm:1
+#, c-format
+msgid "No mouse"
+msgstr "لا فأرة"
 
 #: ../../standalone/drakbackup:1
 #, fuzzy, c-format
@@ -18404,7 +18788,7 @@ msgstr "if set to yes, check permissions of files in the users' home."
 msgid "Run \"sndconfig\" after installation to configure your sound card"
 msgstr "شغّل \"sndconfig\" بعد التثبيت لتهيئة بطاقة الصوت الخاصة بك"
 
-#: ../../my_gtk.pm:1 ../../ugtk2.pm:1
+#: ../../ugtk2.pm:1
 #, c-format
 msgid "Collapse Tree"
 msgstr "Collapse Tree"
@@ -18475,10 +18859,10 @@ msgstr ""
 msgid "The %s is not supported by this version of Mandrake Linux."
 msgstr "الـ %s غير مدعوم من هذا الإصدار من Mandrake Linux."
 
-#: ../../standalone/drakperm:1
+#: ../../standalone/drakbackup:1
 #, fuzzy, c-format
-msgid "Level 1"
-msgstr "المستوى"
+msgid "tape"
+msgstr "شريط البيانات"
 
 #: ../../standalone/drakconnect:1
 #, c-format
@@ -18494,35 +18878,32 @@ msgstr ""
 "Allow/Forbid the list of users on the system on display managers (kdm and "
 "gdm)."
 
-#: ../../standalone/drakperm:1
-#, fuzzy, c-format
-msgid "Level 2"
-msgstr "المستوى"
+#: ../../mouse.pm:1
+#, c-format
+msgid "Logitech Mouse (serial, old C7 type)"
+msgstr "Logitech Mouse (serial, old C7 type)"
 
 #: ../../partition_table.pm:1
 #, c-format
 msgid "Restoring from file %s failed: %s"
 msgstr "فشلت الإستعادة من الملف %s: %s"
 
-#: ../../mouse.pm:1
+#: ../../fsedit.pm:1
 #, c-format
-msgid "Logitech Mouse (serial, old C7 type)"
-msgstr "Logitech Mouse (serial, old C7 type)"
-
-#: ../../standalone/drakperm:1
-#, fuzzy, c-format
-msgid "Level 3"
-msgstr "المستوى"
-
-#: ../../standalone/drakperm:1
-#, fuzzy, c-format
-msgid "Level 4"
-msgstr "المستوى"
-
-#: ../../standalone/drakperm:1
-#, fuzzy, c-format
-msgid "Level 5"
-msgstr "المستوى"
+msgid ""
+"I can't read the partition table of device %s, it's too corrupted for me :(\n"
+"I can try to go on, erasing over bad partitions (ALL DATA will be lost!).\n"
+"The other solution is to not allow DrakX to modify the partition table.\n"
+"(the error is %s)\n"
+"\n"
+"Do you agree to lose all the partitions?\n"
+msgstr ""
+"لا يمكنني قراءة جدول التجزئات للجهاز %s, يبدو أنه مخرّب :(\n"
+"يمكنني أن أحاول المتابعة مع ازالة التجزئات السيئة (ستضيع كل البيانات!).\n"
+"الحل الآخر هو أن تمنع DrakX من تعديل جدول التقسيمات.\n"
+"(الخطأ هو %s)\n"
+"\n"
+"هل أنت موافق على خسارة كل التجزئات؟\n"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -18554,11 +18935,6 @@ msgstr "تزامن وقت آلي"
 msgid "Backup files not found at %s."
 msgstr "ملفات النسخ الإحتياطي غير موجودة على %s"
 
-#: ../../share/advertising/01-thanks.pl:1
-#, c-format
-msgid "Thank you for choosing Mandrake Linux 9.1"
-msgstr "شكراً لاختيارك Mandrake Linux 9.1"
-
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Armenian (phonetic)"
@@ -18573,6 +18949,11 @@ msgstr "نوع البطاقة"
 #, c-format
 msgid "Thin Client"
 msgstr "عميل نحيف (Thin Client)"
+
+#: ../../share/advertising/01-thanks.pl:1
+#, c-format
+msgid "Thank you for choosing Mandrake Linux 9.2"
+msgstr "شكراً لاختيارك Mandrake Linux 9.2"
 
 #: ../../standalone/drakTermServ:1
 #, c-format
@@ -18725,6 +19106,17 @@ msgstr "هذا المستضيف موجود في القائمة مسبقاً, ل�
 msgid ", USB printer"
 msgstr ", طابعة USB"
 
+#: ../../standalone/drakfloppy:1
+#, fuzzy, c-format
+msgid ""
+"Unable to properly close mkbootdisk:\n"
+"\n"
+"<span foreground=\"Red\"><tt>%s</tt></span>"
+msgstr ""
+"تعذر غلق mkbootdisk: \n"
+" %s \n"
+" %s"
+
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid ""
@@ -18741,6 +19133,11 @@ msgstr "اختر التطبيقات التي ستدعم الخطوط :"
 #, c-format
 msgid "Configure X"
 msgstr "تهيئة X"
+
+#: ../../standalone/drakbackup:1
+#, fuzzy, c-format
+msgid "hd"
+msgstr "تشاد"
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -18860,6 +19257,11 @@ msgstr "غامبيا"
 msgid "Mandrake Control Center"
 msgstr "مركز تحكم Mandrake"
 
+#: ../../printer/main.pm:1
+#, fuzzy, c-format
+msgid "Multi-function device"
+msgstr ", جهاز متعدد الوظائف"
+
 #: ../../network/drakfirewall.pm:1
 #, c-format
 msgid ""
@@ -18870,21 +19272,6 @@ msgstr ""
 "يمكنك ادخال منافذ متنوعة. \n"
 "أمثلة صالحة هي: 139/tcp 139/udp.\n"
 "الق نظرة على /etc/services لمزيد من المعلومات."
-
-#: ../../help.pm:1
-#, c-format
-msgid ""
-"Monitor\n"
-"\n"
-"   The installer will normally automatically detect and configure the\n"
-"monitor connected to your machine. If it is correct, you can choose from\n"
-"this list the monitor you actually have connected to your computer."
-msgstr ""
-"الشاشة\n"
-"\n"
-"   يمكن لبرنامج التثبيت اكتشاف و تهيئة الشاشة المتصلة بماكينتك\n"
-"آلياً. ان لم يصل ذلك, يمكنك اختيار الشاشة التي لديك\n"
-"من القائمة."
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -18958,6 +19345,11 @@ msgstr "اختر الحزم التي تريد تثبيتها"
 #, c-format
 msgid "Papua New Guinea"
 msgstr "بابوا غينيا الجديدة"
+
+#: ../../printer/main.pm:1
+#, fuzzy, c-format
+msgid "Multi-function device on a parallel port"
+msgstr ", جهاز متعدد الوظائف على المنفذ المتوازي #%s"
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -19045,6 +19437,16 @@ msgid ""
 msgstr ""
 "lpd هو مراقب الطباعة الذي يحتاجه أمر lpr للعمل بشل صحيح. أساساً\n"
 "هو خادم يوصل وظائف الطباعة الى الطابعات."
+
+#: ../../keyboard.pm:1
+#, c-format
+msgid "Irish"
+msgstr ""
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "Sunday"
+msgstr "الأحد"
 
 #: ../../standalone/drakconnect:1
 #, c-format
@@ -19138,6 +19540,12 @@ msgstr "أقراص RAID %s\n"
 msgid "Liberia"
 msgstr "ليبريا"
 
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid ""
+"Could not install the packages needed to set up a scanner with Scannerdrake."
+msgstr ""
+
 #: ../../standalone/drakgw:1
 #, c-format
 msgid ""
@@ -19179,6 +19587,17 @@ msgstr "جاري تشغيل \"%s\" ..."
 #, c-format
 msgid "enable radio support"
 msgstr "تمكين دعم الراديو"
+
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"        - Per client /etc/X11/XF86Config-4\\$\\$IP-ADDRESS\\$\\$:\n"
+"        \t\tThrough clusternfs, each diskless client can have its own unique "
+"configuration files\n"
+"        \t\ton the root filesystem of the server. By allowing local client "
+"hardware configuration, \n"
+"        \t\tdrakTermServ will help create these files."
+msgstr ""
 
 #: ../../standalone/scannerdrake:1
 #, c-format
@@ -19345,6 +19764,11 @@ msgstr ""
 "تأكد من صحة القرص المدمج على كمبيوتر مثبّت باستخدام الأمر \"rpm -qpl Mandrake/"
 "RPMS/*.rpm\"\n"
 
+#: ../../share/advertising/06-development.pl:1
+#, c-format
+msgid "Mandrake Linux 9.2: the ultimate development platform"
+msgstr "Mandrake Linux 9.2 هي البيئة الأمثل لتطوير البرامج"
+
 #: ../../standalone/scannerdrake:1
 #, c-format
 msgid "Detected model: %s"
@@ -19371,20 +19795,27 @@ msgstr ""
 msgid "if set to yes, run the daily security checks."
 msgstr "if set to yes, run the daily security checks"
 
-#: ../../standalone/drakbackup:1
-#, fuzzy, c-format
-msgid "Device name to use for backup"
-msgstr "فضلاً أدخل اسم جهاز النسخ الإحتياطي"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Azerbaijan"
 msgstr "أذربيجان"
 
 #: ../../standalone/drakbackup:1
+#, fuzzy, c-format
+msgid "Device name to use for backup"
+msgstr "فضلاً أدخل اسم جهاز النسخ الإحتياطي"
+
+#: ../../standalone/drakbackup:1
 #, c-format
 msgid "No tape in %s!"
 msgstr "لا يوجد شريط في %s!"
+
+#: ../../standalone/drakhelp:1
+#, c-format
+msgid ""
+" --doc <link>          - link to another web page ( for WM welcome "
+"frontend)\n"
+msgstr ""
 
 # U+200F (RTL mark) has been inserted between "Dvorak" and "(US)", so
 # it displays on screen as "(US) Dvorak", following the same schema
@@ -19601,6 +20032,70 @@ msgstr "خادم NFS, خادم SMB, خادم بروكسي, خادم ssh"
 #: ../../share/compssUsers:999
 msgid "Set of tools to read and send mail and news and to browse the Web"
 msgstr "مجموعة من الأدوات لقراءة و ارسال البريد و الأخبار و تصفح الإنترنت"
+
+#~ msgid "-adobe-utopia-regular-r-*-*-25-*-*-*-p-*-iso8859-*,*-r-*"
+#~ msgstr "-adobe-utopia-regular-r-*-*-25-*-*-*-p-*-iso8859-*,*-r-*"
+
+#~ msgid "-adobe-times-bold-r-normal--17-*-100-100-p-*-iso8859-*,*-r-*"
+#~ msgstr "-adobe-times-bold-r-normal--17-*-100-100-p-*-iso8859-*,*-r-*"
+
+#~ msgid "Hostname configuration"
+#~ msgstr "تهيئة اسم المستضيف"
+
+#~ msgid "Hostname"
+#~ msgstr "اسم المستضيف"
+
+#~ msgid "Remote Printers"
+#~ msgstr "الطابعات البعيدة"
+
+#~ msgid "Printing system: "
+#~ msgstr "نظام الطباعة: "
+
+#, fuzzy
+#~ msgid "Level 1"
+#~ msgstr "المستوى"
+
+#, fuzzy
+#~ msgid "Level 2"
+#~ msgstr "المستوى"
+
+#, fuzzy
+#~ msgid "Level 3"
+#~ msgstr "المستوى"
+
+#, fuzzy
+#~ msgid "Level 4"
+#~ msgstr "المستوى"
+
+#, fuzzy
+#~ msgid "Level 5"
+#~ msgstr "المستوى"
+
+#, fuzzy
+#~ msgid "Insert floppy and press %s"
+#~ msgstr "أدخل قرص مرن في %s"
+
+#~ msgid "Load"
+#~ msgstr "حمل"
+
+#~ msgid ""
+#~ "Monitor\n"
+#~ "\n"
+#~ "   The installer will normally automatically detect and configure the\n"
+#~ "monitor connected to your machine. If it is correct, you can choose from\n"
+#~ "this list the monitor you actually have connected to your computer."
+#~ msgstr ""
+#~ "الشاشة\n"
+#~ "\n"
+#~ "   يمكن لبرنامج التثبيت اكتشاف و تهيئة الشاشة المتصلة بماكينتك\n"
+#~ "آلياً. ان لم يصل ذلك, يمكنك اختيار الشاشة التي لديك\n"
+#~ "من القائمة."
+
+#~ msgid "Bad Ip"
+#~ msgstr "IP سيئ"
+
+#~ msgid "Output"
+#~ msgstr "الناتج"
 
 #~ msgid "Please relog into %s to activate the changes"
 #~ msgstr "يرجى اعادة تسجيل الدخول الى %s لتنشيط التغييرات"
@@ -20171,14 +20666,14 @@ msgstr "مجموعة من الأدوات لقراءة و ارسال البريد
 #~ "file.\n"
 #~ "\n"
 #~ "        - Per client /etc/X11/XF86Config-4\\$\\$IP-ADDRESS\\$\\$:\n"
-#~ "        \t\tThrough clusternfs, each diskless client can have it's own "
+#~ "        \t\tThrough clusternfs, each diskless client can have its own "
 #~ "unique configuration files\n"
 #~ "        \t\ton the root filesystem of the server. In the future "
 #~ "drakTermServ will help create these\n"
 #~ "        \t\tfiles.\n"
 #~ "\n"
 #~ "        - Per client system configuration files:\n"
-#~ "        \t\tThrough clusternfs, each diskless client can have it's own "
+#~ "        \t\tThrough clusternfs, each diskless client can have its own "
 #~ "unique configuration files\n"
 #~ "        \t\ton the root filesystem of the server. In the future, "
 #~ "drakTermServ can help create files\n"
@@ -20196,7 +20691,7 @@ msgstr "مجموعة من الأدوات لقراءة و ارسال البريد
 #~ "        \t\tA typical tftp configuration file looks like:\n"
 #~ "        \t\t\n"
 #~ "        \t\tservice tftp\n"
-#~ "        \t\t(\n"
+#~ "\t\t\t{\n"
 #~ "                        disable         = no\n"
 #~ "                        socket_type  = dgram\n"
 #~ "                        protocol        = udp\n"
@@ -20210,7 +20705,7 @@ msgstr "مجموعة من الأدوات لقراءة و ارسال البريد
 #~ "the disable flag to\n"
 #~ "        \t\t'no' and changing the directory path to /var/lib/tftpboot, "
 #~ "where mkinitrd-net\n"
-#~ "        \t\tputs it's images.\n"
+#~ "        \t\tputs its images.\n"
 #~ "\n"
 #~ "        - Create etherboot floppies/CDs:\n"
 #~ "        \t\tThe diskless client machines need either ROM images on the "
@@ -20304,14 +20799,14 @@ msgstr "مجموعة من الأدوات لقراءة و ارسال البريد
 #~ "file.\n"
 #~ "\n"
 #~ "        - Per client /etc/X11/XF86Config-4\\$\\$IP-ADDRESS\\$\\$:\n"
-#~ "        \t\tThrough clusternfs, each diskless client can have it's own "
+#~ "        \t\tThrough clusternfs, each diskless client can have its own "
 #~ "unique configuration files\n"
 #~ "        \t\ton the root filesystem of the server. In the future "
 #~ "drakTermServ will help create these\n"
 #~ "        \t\tfiles.\n"
 #~ "\n"
 #~ "        - Per client system configuration files:\n"
-#~ "        \t\tThrough clusternfs, each diskless client can have it's own "
+#~ "        \t\tThrough clusternfs, each diskless client can have its own "
 #~ "unique configuration files\n"
 #~ "        \t\ton the root filesystem of the server. In the future, "
 #~ "drakTermServ can help create files\n"
@@ -20329,7 +20824,7 @@ msgstr "مجموعة من الأدوات لقراءة و ارسال البريد
 #~ "        \t\tA typical tftp configuration file looks like:\n"
 #~ "        \t\t\n"
 #~ "        \t\tservice tftp\n"
-#~ "        \t\t(\n"
+#~ "\t\t\t{\n"
 #~ "                        disable         = no\n"
 #~ "                        socket_type  = dgram\n"
 #~ "                        protocol        = udp\n"
@@ -20343,7 +20838,7 @@ msgstr "مجموعة من الأدوات لقراءة و ارسال البريد
 #~ "the disable flag to\n"
 #~ "        \t\t'no' and changing the directory path to /var/lib/tftpboot, "
 #~ "where mkinitrd-net\n"
-#~ "        \t\tputs it's images.\n"
+#~ "        \t\tputs its images.\n"
 #~ "\n"
 #~ "        - Create etherboot floppies/CDs:\n"
 #~ "        \t\tThe diskless client machines need either ROM images on the "
@@ -20411,9 +20906,6 @@ msgstr "مجموعة من الأدوات لقراءة و ارسال البريد
 
 #~ msgid "Internet connection & configuration"
 #~ msgstr "وصلة الإنترنت و الإعدادات"
-
-#~ msgid "Configure the connection"
-#~ msgstr "قم بإعداد الإتصال"
 
 #~ msgid "Disconnect"
 #~ msgstr "اقطع الإتصال"
@@ -20995,11 +21487,11 @@ msgstr "مجموعة من الأدوات لقراءة و ارسال البريد
 #~ msgstr "لا بطاقة شبكة وجدت "
 
 #~ msgid ""
-#~ "Mandrake Linux 9.1 has selected the best software for you. Surf the Web "
+#~ "Mandrake Linux 9.2 has selected the best software for you. Surf the Web "
 #~ "and view animations with Mozilla and Konqueror, or read your mail and "
 #~ "handle your personal information with Evolution and Kmail"
 #~ msgstr ""
-#~ "اختار Mandrake Linux 9.1 أفضل البرامج لك. تصفح الإنترنت و استعرض الصر "
+#~ "اختار Mandrake Linux 9.2 أفضل البرامج لك. تصفح الإنترنت و استعرض الصر "
 #~ "المتحركة باستخدام موزيللا و كونكيورر, أو اقرأ بريدك الألكتروني و تعامل مع "
 #~ "معلوماتك الشخصية باستخدام KMail و Evolution"
 
@@ -21013,16 +21505,16 @@ msgstr "مجموعة من الأدوات لقراءة و ارسال البريد
 #~ msgstr "اكتشف أحدث أدوات الوسائط المتعددة و برامج الرسم!"
 
 #~ msgid ""
-#~ "Mandrake Linux 9.1 provides the best Open Source games - arcade, action, "
+#~ "Mandrake Linux 9.2 provides the best Open Source games - arcade, action, "
 #~ "strategy, ..."
 #~ msgstr ""
-#~ "Mandrake Linux 9.1 يوفر أفضل الألعاب مفتوحة المصدر - أركيد, حركة, "
+#~ "Mandrake Linux 9.2 يوفر أفضل الألعاب مفتوحة المصدر - أركيد, حركة, "
 #~ "استراتيجية, ..."
 
 #~ msgid ""
-#~ "Mandrake Linux 9.1 provides a powerful tool to fully customize and "
+#~ "Mandrake Linux 9.2 provides a powerful tool to fully customize and "
 #~ "configure your machine"
-#~ msgstr "يوفر Mandrake Linux 9.1 أداة قوية لتخصيص و تهيئة جهازك"
+#~ msgstr "يوفر Mandrake Linux 9.2 أداة قوية لتخصيص و تهيئة جهازك"
 
 #~ msgid "User interfaces"
 #~ msgstr "واجهات الإستخدام"

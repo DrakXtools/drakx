@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX-ja\n"
-"POT-Creation-Date: 2003-08-13 03:40+0200\n"
+"POT-Creation-Date: 2003-09-09 17:07+0200\n"
 "PO-Revision-Date: 2003-07-27 18:51+0900\n"
 "Last-Translator: UTUMI Hirosi <*>\n"
 "Language-Team: Japanese <ja@li.org>\n"
@@ -62,6 +62,11 @@ msgstr "ネットワークプリンタのポート"
 msgid "Please insert floppy disk:"
 msgstr "フロッピーを挿入してください:"
 
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid "DrakTermServ"
+msgstr ""
+
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "PCMCIA"
@@ -90,6 +95,11 @@ msgstr "どの種類を追加しますか"
 #, c-format
 msgid "Restore partition table"
 msgstr "パーティションテーブルを復旧"
+
+#: ../../standalone/drakconnect:1
+#, fuzzy, c-format
+msgid "Configure hostname..."
+msgstr "マウスを設定"
 
 #: ../../printer/cups.pm:1
 #, c-format
@@ -205,11 +215,6 @@ msgstr "インタフェース:"
 msgid "Select installation class"
 msgstr "インストールクラスを選択"
 
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "on CDROM"
-msgstr "CDROMへ"
-
 #: ../../network/tools.pm:1
 #, c-format
 msgid ""
@@ -270,6 +275,11 @@ msgstr "以下のパッケージがインストールされます"
 #, c-format
 msgid "CUPS configuration"
 msgstr "CUPSの設定"
+
+#: ../../standalone/drakbackup:1
+#, fuzzy, c-format
+msgid "Total progress"
+msgstr "進行状況"
 
 #: ../../lang.pm:1
 #, c-format
@@ -423,6 +433,11 @@ msgstr "変更しました。dmサービスを再起動しますか？"
 msgid "Swiss (French layout)"
 msgstr "スイス(フランス)"
 
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "August"
+msgstr "8 月"
+
 #: ../../raid.pm:1
 #, c-format
 msgid "mkraid failed (maybe raidtools are missing?)"
@@ -442,6 +457,11 @@ msgstr "CPUの第２キャッシュのサイズ"
 #, c-format
 msgid "Soundcard"
 msgstr "サウンドカード"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "Month"
+msgstr "月"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -591,6 +611,11 @@ msgstr "ユーザ名"
 msgid "Left \"Windows\" key"
 msgstr "左側のWindowsキー"
 
+#: ../../lang.pm:1
+#, c-format
+msgid "Guyana"
+msgstr "ガイアナ"
+
 #: ../../standalone/drakTermServ:1
 #, c-format
 msgid "dhcpd Server Configuration"
@@ -605,15 +630,15 @@ msgstr ""
 "ディレクトリ用:\n"
 " ディレクトリやファイルの所有者だけが削除できます"
 
-#: ../../lang.pm:1
-#, c-format
-msgid "Guyana"
-msgstr "ガイアナ"
-
 #: ../../printer/main.pm:1
 #, c-format
 msgid " on Novell server \"%s\", printer \"%s\""
 msgstr " on Novell server \"%s\", printer \"%s\""
+
+#: ../../standalone/printerdrake:1
+#, fuzzy, c-format
+msgid "Printer Name"
+msgstr "印刷キューの名前"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
@@ -1073,20 +1098,15 @@ msgstr ""
 
 #: ../../standalone/drakboot:1 ../../standalone/drakfloppy:1
 #: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
+#: ../../standalone/printerdrake:1
 #, c-format
 msgid "<control>Q"
 msgstr "<control>Q"
 
 #: ../../standalone/drakbackup:1
-#, c-format
-msgid ""
-"Please be sure that the cron daemon is included in your services. \n"
-"\n"
-"Note that currently all 'net' media also use the hard drive."
-msgstr ""
-"サービスにcronデーモンがあることを確認してください.\n"
-"\n"
-"注意: 現在すべてのネットメディアはハードドライブを使います。"
+#, fuzzy, c-format
+msgid "Unable to find backups to restore...\n"
+msgstr "復元するデータを選んでください。"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -1206,11 +1226,6 @@ msgstr "モデルステップ"
 msgid "Rwanda"
 msgstr "ルワンダ"
 
-#: ../../modules/interactive.pm:1
-#, c-format
-msgid "Do you have any %s interfaces?"
-msgstr "%s インタフェースはありますか？"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Switzerland"
@@ -1220,6 +1235,11 @@ msgstr "スイス"
 #, c-format
 msgid "Brunei Darussalam"
 msgstr "ブルネイ・ダルサラーム国"
+
+#: ../../modules/interactive.pm:1
+#, c-format
+msgid "Do you have any %s interfaces?"
+msgstr "%s インタフェースはありますか？"
 
 #: ../../standalone/drakTermServ:1
 #, c-format
@@ -1310,6 +1330,11 @@ msgstr ""
 msgid "Configure Internet Access..."
 msgstr "インターネットアクセスを設定"
 
+#: ../../standalone/drakbackup:1
+#, fuzzy, c-format
+msgid "Please choose the time interval between each backup"
+msgstr "バックアップの間隔を選んでください"
+
 #: ../../crypto.pm:1 ../../lang.pm:1
 #, c-format
 msgid "Norway"
@@ -1359,15 +1384,20 @@ msgstr ""
 msgid "When checked, owner and group won't be changed"
 msgstr "チェックすると、所有者とグループを変更しません"
 
-#: ../../harddrake/data.pm:1
-#, c-format
-msgid "Processors"
-msgstr "プロセッサ"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Bulgaria"
 msgstr "ブルガリア"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "Tuesday"
+msgstr "火曜日"
+
+#: ../../harddrake/data.pm:1
+#, c-format
+msgid "Processors"
+msgstr "プロセッサ"
 
 #: ../../lang.pm:1
 #, c-format
@@ -1400,15 +1430,15 @@ msgstr "パーティション %s は %sになりました"
 msgid "Backup Other files..."
 msgstr "他のファイルをバックアップ"
 
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "SMB server IP"
-msgstr "SMBサーバのIP"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Congo (Kinshasa)"
 msgstr "コンゴ(Kinshasa)"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "SMB server IP"
+msgstr "SMBサーバのIP"
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -1508,11 +1538,6 @@ msgstr "Unicodeをデフォルトにする"
 msgid "the module of the GNU/Linux kernel that handles the device"
 msgstr "デバイスを扱うLinuxカーネルのモジュール"
 
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "DVDR device"
-msgstr "DVDRデバイス"
-
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid "Trying to rescue partition table"
@@ -1594,23 +1619,6 @@ msgstr "ケーブル接続"
 msgid "User"
 msgstr "ユーザ名"
 
-#: ../../fsedit.pm:1
-#, c-format
-msgid ""
-"I can't read the partition table of device %s, it's too corrupted for me :(\n"
-"I can try to go on, erasing over bad partitions (ALL DATA will be lost!).\n"
-"The other solution is to not allow DrakX to modify the partition table.\n"
-"(the error is %s)\n"
-"\n"
-"Do you agree to loose all the partitions?\n"
-msgstr ""
-"%sデバイスのパーティションテーブルを読めません。壊れているようです。\n"
-"不正なパーティションを消せば続行できます(全データが消失します)。\n"
-"DrakXにパーティションテーブルを変更させないこともできます。\n"
-"(エラーは%sです)\n"
-"\n"
-"全パーティションを消去しますか？\n"
-
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "Do new backup before restore (only for incremental backups.)"
@@ -1681,15 +1689,6 @@ msgstr "プリンタの名前/説明/場所"
 msgid "USA (broadcast)"
 msgstr "アメリカ(ブロードキャスト)"
 
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid ""
-"Please choose the\n"
-"media for backup."
-msgstr ""
-"バックアップ先のメディアを\n"
-"選んでください。"
-
 #: ../../Xconfig/card.pm:1
 #, c-format
 msgid "Use Xinerama extension"
@@ -1700,21 +1699,15 @@ msgstr "Xinerama拡張を使う"
 msgid "Loopback"
 msgstr "ループバック"
 
-#: ../../standalone/drakfloppy:1
-#, c-format
-msgid ""
-"Unable to properly close mkbootdisk: \n"
-" %s \n"
-" %s"
-msgstr ""
-"以下のmkbootdiskを適切に閉じられません: \n"
-" %s \n"
-" %s"
-
 #: ../../standalone/drakxtv:1
 #, c-format
 msgid "West Europe"
 msgstr "西ヨーロッパ"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "On CD-R"
+msgstr "CDROMへ"
 
 #: ../../standalone.pm:1
 #, c-format
@@ -1748,6 +1741,11 @@ msgstr "Preference: "
 msgid "Swaziland"
 msgstr "スワジランド"
 
+#: ../../lang.pm:1
+#, c-format
+msgid "Dominican Republic"
+msgstr "ドミニカ共和国"
+
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid "Copying %s"
@@ -1757,11 +1755,6 @@ msgstr "%s をコピー"
 #, c-format
 msgid "Choose color"
 msgstr "色を選んでください"
-
-#: ../../lang.pm:1
-#, c-format
-msgid "Dominican Republic"
-msgstr "ドミニカ共和国"
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -2163,6 +2156,11 @@ msgstr ""
 "自動インストールモードをセットアップしない場合は空のままにしてください\n"
 "\n"
 
+#: ../../printer/cups.pm:1 ../../standalone/printerdrake:1
+#, fuzzy, c-format
+msgid "Configured on other machines"
+msgstr "接続を設定"
+
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "information level that can be obtained through the cpuid instruction"
@@ -2475,6 +2473,11 @@ msgstr ""
 msgid "Netmask:"
 msgstr "ネットマスク:"
 
+#: ../../network/adsl.pm:1
+#, c-format
+msgid "Do it later"
+msgstr ""
+
 #: ../../any.pm:1
 #, c-format
 msgid "Append"
@@ -2511,39 +2514,6 @@ msgstr ""
 "\n"
 "この機能に問題がある場合はこのオプションを切ってください。\n"
 "ただしユーザ自身が上記の点に注意する必要があります。"
-
-#: ../../harddrake/sound.pm:1
-#, c-format
-msgid ""
-"OSS (Open Sound System) was the first sound API. It's an OS independant "
-"sound API (it's available on most unices systems) but it's a very basic and "
-"limited API.\n"
-"What's more, OSS drivers all reinvent the wheel.\n"
-"\n"
-"ALSA (Advanced Linux Sound Architecture) is a modularized architecture "
-"which\n"
-"supports quite a large range of ISA, USB and PCI cards.\n"
-"\n"
-"It also provides a much higher API than OSS.\n"
-"\n"
-"To use alsa, one can either use:\n"
-"- the old compatibility OSS api\n"
-"- the new ALSA api that provides many enhanced features but requires using "
-"the ALSA library.\n"
-msgstr ""
-"OSS(Open Sound System)は最初に開発されたサウンドAPIです。これは\n"
-"OSから独立したサウンドAPI(ほとんどのunicesシステムで利用可能)ですが、\n"
-"非常に基本的で制限されたAPIです。\n"
-"さらに、OSSは全くの車輪の再発明です。\n"
-"\n"
-"ALSA(Advanced Linux Sound Architecture)はモジュール構造をしていて、\n"
-"非常に広範なISA/USB/PCIカードをサポートしています。\n"
-"\n"
-"ALSAはOSSよりずっと優れたAPIを提供します。\n"
-"\n"
-"ALSAを使うと次の利点があります:\n"
-"- 古いOSSとの互換性\n"
-"- 多くの拡張機能の提供。ただしALSAライブラリの使用が必要です。\n"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -2651,6 +2621,11 @@ msgstr "ソマリア"
 msgid "No open source driver"
 msgstr "オープンソースのドライバがありません"
 
+#: ../../standalone/printerdrake:1
+#, c-format
+msgid "Def."
+msgstr ""
+
 #: ../../security/level.pm:1
 #, c-format
 msgid ""
@@ -2674,6 +2649,11 @@ msgstr "ニューカレドニア"
 #, c-format
 msgid "European protocol (EDSS1)"
 msgstr "ヨーロッパのプロトコル(EDSS1)"
+
+#: ../../standalone/printerdrake:1
+#, c-format
+msgid "/_Delete"
+msgstr "/削除(_D)"
 
 #: ../../any.pm:1
 #, c-format
@@ -3033,6 +3013,11 @@ msgstr ""
 msgid "Saint Lucia"
 msgstr "セントルシア"
 
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "November"
+msgstr "11 月"
+
 #: ../../standalone/drakconnect:1
 #, c-format
 msgid "Disconnect..."
@@ -3217,6 +3202,11 @@ msgstr ""
 msgid "All primary partitions are used"
 msgstr "全てのプライマリパーティションが使われています"
 
+#: ../../printer/main.pm:1
+#, fuzzy, c-format
+msgid "LPD server \"%s\", printer \"%s\""
+msgstr " on LPD server \"%s\", printer \"%s\""
+
 #: ../../network/netconnect.pm:1
 #, c-format
 msgid ""
@@ -3273,13 +3263,13 @@ msgstr "ホスト %s"
 
 #: ../../lang.pm:1
 #, c-format
-msgid "Armenia"
-msgstr "アルメニア"
+msgid "Fiji"
+msgstr "フィジー"
 
 #: ../../lang.pm:1
 #, c-format
-msgid "Fiji"
-msgstr "フィジー"
+msgid "Armenia"
+msgstr "アルメニア"
 
 #: ../../any.pm:1
 #, c-format
@@ -3290,6 +3280,11 @@ msgstr "２番目のフロッピードライブ"
 #, c-format
 msgid "About Harddrake"
 msgstr "Harddrakeについて"
+
+#: ../../security/l10n.pm:1
+#, c-format
+msgid "Authorize TCP connections to X Window"
+msgstr "TCP connections X Windowを認める"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -3363,6 +3358,11 @@ msgstr ""
 "\n"
 "%s\n"
 "をシステムで利用できます。\n"
+
+#: ../../printer/main.pm:1
+#, fuzzy, c-format
+msgid "Multi-function device on parallel port #%s"
+msgstr ", multi-function device on parallel port #%s"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -3494,15 +3494,15 @@ msgstr "ルーマニア"
 msgid "Group"
 msgstr "グループ"
 
-#: ../../standalone/scannerdrake:1
-#, c-format
-msgid "choose device"
-msgstr "デバイスを選択"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Canada"
 msgstr "カナダ"
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "choose device"
+msgstr "デバイスを選択"
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -3520,7 +3520,7 @@ msgid "German"
 msgstr "ドイツ"
 
 #: ../../help.pm:1 ../../install_steps_gtk.pm:1 ../../interactive.pm:1
-#: ../../my_gtk.pm:1 ../../ugtk2.pm:1 ../../interactive/newt.pm:1
+#: ../../ugtk2.pm:1 ../../interactive/newt.pm:1
 #: ../../printer/printerdrake.pm:1 ../../standalone/drakbackup:1
 #, c-format
 msgid "Next ->"
@@ -3567,7 +3567,7 @@ msgstr "ギニアビサウ共和国"
 msgid "Horizontal refresh rate"
 msgstr "水平周波数"
 
-#: ../../standalone/drakperm:1
+#: ../../standalone/drakperm:1 ../../standalone/printerdrake:1
 #, fuzzy, c-format
 msgid "Edit"
 msgstr "終了"
@@ -3687,6 +3687,11 @@ msgstr ""
 msgid "Re-generating list of configured scanners ..."
 msgstr "設定したスキャナのリストを再生成中.."
 
+#: ../../modules/interactive.pm:1
+#, fuzzy, c-format
+msgid "Module configuration"
+msgstr "手動設定"
+
 #: ../../harddrake/data.pm:1
 #, c-format
 msgid "Scanner"
@@ -3697,11 +3702,6 @@ msgstr "スキャナ"
 msgid "Warning: testing this graphic card may freeze your computer"
 msgstr ""
 "警告: このグラフィックカードをテストするとマシンがフリーズするかもしれません"
-
-#: ../../standalone/drakconnect:1
-#, c-format
-msgid "Bad Ip"
-msgstr "不正なIp"
 
 #: ../../any.pm:1
 #, c-format
@@ -3744,15 +3744,15 @@ msgstr "中止"
 msgid "No password prompt on %s at port %s"
 msgstr "%s のパスワードプロンプト(ポート %s)がありません"
 
+#: ../../mouse.pm:1
+#, fuzzy, c-format
+msgid "Kensington Thinking Mouse with Wheel emulation"
+msgstr "Kensington Thinking Mouse"
+
 #: ../../standalone/scannerdrake:1
 #, c-format
 msgid "Usage of remote scanners"
 msgstr "リモートスキャナの使用"
-
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "\t-CDROM.\n"
-msgstr "\t-CDROM\n"
 
 #: ../../install_interactive.pm:1
 #, c-format
@@ -3775,7 +3775,7 @@ msgstr "Dvorak(ノルウェー)"
 msgid "Hard Disk Backup Progress..."
 msgstr "ハードディスクバックアップの進行"
 
-#: ../../standalone/drakfloppy:1
+#: ../../standalone/drakconnect:1 ../../standalone/drakfloppy:1
 #, c-format
 msgid "Unable to fork: %s"
 msgstr "%s をフォークできません"
@@ -4007,6 +4007,11 @@ msgstr "テープから復元"
 msgid "Choose the profile to configure"
 msgstr "設定するプロファイルを選んでください"
 
+#: ../../security/l10n.pm:1
+#, c-format
+msgid "Password minimum length and number of digits and upcase letters"
+msgstr "パスワードの最小文字数と数字/大文字の数"
+
 #: ../../network/ethernet.pm:1 ../../network/network.pm:1
 #, c-format
 msgid ""
@@ -4039,6 +4044,11 @@ msgstr "プリンタシステムを再起動中.."
 #, c-format
 msgid "See hardware info"
 msgstr "ハードウェアの情報を見る"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "Day"
+msgstr "日"
 
 #: ../../any.pm:1
 #, c-format
@@ -4091,15 +4101,17 @@ msgstr ""
 msgid "Subnet Mask:"
 msgstr "サブネットマスク:"
 
-#: ../../standalone/drakboot:1
-#, c-format
-msgid "LiLo and Bootsplash themes installation successfull"
-msgstr "LILOと起動スプラッシュテーマのインストールに成功"
-
 #: ../../security/l10n.pm:1
 #, c-format
 msgid "Set password expiration and account inactivation delays"
 msgstr "パスワードの期限とアカウントの無効化を設定"
+
+#: ../../standalone/logdrake:1
+#, c-format
+msgid ""
+"_: load here is a noun, the load of the system\n"
+"Load"
+msgstr ""
 
 #: ../../Xconfig/monitor.pm:1
 #, c-format
@@ -4145,6 +4157,11 @@ msgstr ""
 #, c-format
 msgid "Need hostname, username and password!"
 msgstr "ホスト名とユーザ名とパスワードが必要です"
+
+#: ../../network/adsl.pm:1
+#, fuzzy, c-format
+msgid "Insert floppy"
+msgstr "フロッピーをドライブ %s に入れる"
 
 #: ../../diskdrake/dav.pm:1
 #, c-format
@@ -4204,6 +4221,15 @@ msgstr "パーティションテーブルの変更を反映するには再起動
 msgid "Do not include the browser cache"
 msgstr "ブラウザのキャッシュは含まない"
 
+#: ../../install_steps_interactive.pm:1
+#, c-format
+msgid ""
+"Failed to check filesystem %s. Do you want to repair the errors? (beware, "
+"you can lose data)"
+msgstr ""
+"ファイルシステム %s のチェックに失敗しました。エラーを修復しますか？(注意:"
+"データを失うかもしれません)"
+
 #: ../../standalone/keyboarddrake:1
 #, c-format
 msgid "Please, choose your keyboard layout."
@@ -4259,6 +4285,11 @@ msgstr "GlidePoint"
 msgid "Start: sector %s\n"
 msgstr "開始: セクタ %s\n"
 
+#: ../../standalone/drakconnect:1
+#, fuzzy, c-format
+msgid "No Mask"
+msgstr "不正なマスク"
+
 #: ../../standalone/drakgw:1
 #, c-format
 msgid "Network interface already configured"
@@ -4284,6 +4315,11 @@ msgstr "メールサーバ"
 msgid "Please click on a partition"
 msgstr "パーティションをクリックしてください"
 
+#: ../../printer/main.pm:1
+#, fuzzy, c-format
+msgid "Multi-function device on HP JetDirect"
+msgstr ", multi-function device on HP JetDirect"
+
 #: ../../any.pm:1 ../../standalone/drakbackup:1
 #, c-format
 msgid "Linux"
@@ -4293,11 +4329,6 @@ msgstr "Linux"
 #, c-format
 msgid "Have a nice day!"
 msgstr "終了します"
-
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "across Network"
-msgstr "ネットワークへ"
 
 #: ../../help.pm:1
 #, c-format
@@ -4426,6 +4457,14 @@ msgstr ""
 "パッケージグループを選んでいません。\n"
 "インストールする最低限のものを選んでください:"
 
+#: ../../network/adsl.pm:1
+#, c-format
+msgid ""
+"You need the Alcatel microcode.\n"
+"You can provide it now via a floppy or your windows partition,\n"
+"or skip and do it later."
+msgstr ""
+
 #: ../../diskdrake/dav.pm:1
 #, c-format
 msgid "Please enter the WebDAV server URL"
@@ -4443,6 +4482,7 @@ msgid "Accept"
 msgstr "承諾する"
 
 #: ../../printer/printerdrake.pm:1 ../../standalone/harddrake2:1
+#: ../../standalone/printerdrake:1
 #, c-format
 msgid "Description"
 msgstr "説明"
@@ -4466,11 +4506,6 @@ msgstr "このカードはXFree %s での3Dアクセラレーションが可能�
 #, c-format
 msgid "Choose a monitor"
 msgstr "モニタを選んでください"
-
-#: ../../standalone/drakconnect:1
-#, c-format
-msgid "Bad Mask"
-msgstr "不正なマスク"
 
 #: ../../any.pm:1
 #, c-format
@@ -4576,6 +4611,11 @@ msgstr "カーボベルデ共和国"
 msgid "whether this cpu has the Cyrix 6x86 Coma bug"
 msgstr "このCPUにCyrix 6x86のComaバグがあるかどうか"
 
+#: ../../standalone/printerdrake:1
+#, fuzzy, c-format
+msgid "Loading printer configuration... Please wait"
+msgstr "プリンタ設定の変更"
+
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "early pentiums were buggy and freezed when decoding the F00F bytecode"
@@ -4630,11 +4670,6 @@ msgstr "Userdrake"
 #, c-format
 msgid "Which partition do you want to use for Linux4Win?"
 msgstr "どのパーティションにLinux4Winを入れますか？"
-
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "Backup system"
-msgstr "システムをバックアップ"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -5117,12 +5152,12 @@ msgstr "テーブル"
 msgid "I don't know how to format %s in type %s"
 msgstr "%s を %s でフォーマットする方法が分かりません"
 
-#: ../../standalone/harddrake2:1
+#: ../../standalone/harddrake2:1 ../../standalone/printerdrake:1
 #, c-format
 msgid "Model"
 msgstr "モデル"
 
-#: ../../printer/printerdrake.pm:1
+#: ../../printer/main.pm:1 ../../printer/printerdrake.pm:1
 #, c-format
 msgid "USB printer #%s"
 msgstr "USBプリンタ #%s"
@@ -5213,6 +5248,11 @@ msgstr "リモートマシン上で動いているプリンタを自動的に検
 #, c-format
 msgid "East Timor"
 msgstr "東ティモール"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "On Tape Device"
+msgstr "テープデバイスへ"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -5327,15 +5367,15 @@ msgstr ""
 msgid "Start sector: "
 msgstr "開始セクタ: "
 
-#: ../../standalone/drakperm:1
-#, c-format
-msgid "Read"
-msgstr "読み取り"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Congo (Brazzaville)"
 msgstr "コンゴ(Brazzaville)"
+
+#: ../../standalone/drakperm:1
+#, c-format
+msgid "Read"
+msgstr "読み取り"
 
 #: ../../any.pm:1 ../../install_any.pm:1 ../../standalone.pm:1
 #, c-format
@@ -5391,6 +5431,13 @@ msgstr ""
 msgid "Right Control key"
 msgstr "右側のCtrlキー"
 
+#: ../../network/adsl.pm:1
+#, fuzzy, c-format
+msgid ""
+"Insert a FAT formatted floppy in drive %s with %s in root directory and "
+"press %s"
+msgstr "FAT形式のフロッピーをドライブ %s に挿入"
+
 #: ../../lang.pm:1
 #, c-format
 msgid "Zambia"
@@ -5416,15 +5463,15 @@ msgstr "ルーマニア(qwerty)"
 msgid "Under Devel ... please wait."
 msgstr "開発中です。お待ちください。"
 
-#: ../../crypto.pm:1 ../../lang.pm:1
-#, c-format
-msgid "Czech Republic"
-msgstr "チェコ共和国"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Egypt"
 msgstr "エジプト"
+
+#: ../../crypto.pm:1 ../../lang.pm:1
+#, c-format
+msgid "Czech Republic"
+msgstr "チェコ共和国"
 
 #: ../../help.pm:1 ../../install_steps_interactive.pm:1
 #, c-format
@@ -5551,6 +5598,11 @@ msgstr "赤道ギニア共和国"
 
 #: ../../standalone/drakbackup:1
 #, c-format
+msgid "Backup System"
+msgstr "システムをバックアップ"
+
+#: ../../standalone/drakbackup:1
+#, c-format
 msgid "Build Backup"
 msgstr "バックアップを作成"
 
@@ -5594,12 +5646,117 @@ msgstr ""
 msgid "Kiribati"
 msgstr "キリバス共和国"
 
+#: ../../mouse.pm:1
+#, fuzzy, c-format
+msgid "Logitech Mouse (serial, old C7 type) with Wheel emulation"
+msgstr "Logitech Mouse (serial, old C7 type)"
+
 #: ../../standalone/drakbackup:1
 #, fuzzy, c-format
 msgid "Other (not drakbackup) keys in place already"
 msgstr ""
 "既に他の(drakbackupではない)\n"
 "鍵があります"
+
+#: ../../help.pm:1
+#, c-format
+msgid ""
+"X (for X Window System) is the heart of the GNU/Linux graphical interface\n"
+"on which all the graphical environments (KDE, GNOME, AfterStep,\n"
+"WindowMaker, etc.) bundled with Mandrake Linux rely upon.\n"
+"\n"
+"You will be presented with a list of different parameters to change to get\n"
+"an optimal graphical display: Graphic Card\n"
+"\n"
+"   The installer will normally automatically detect and configure the\n"
+"graphic card installed on your machine. If it is not the case, you can\n"
+"choose from this list the card you actually have installed.\n"
+"\n"
+"   In the case that different servers are available for your card, with or\n"
+"without 3D acceleration, you are then asked to choose the server that best\n"
+"suits your needs.\n"
+"\n"
+"\n"
+"\n"
+"Monitor\n"
+"\n"
+"   The installer will normally automatically detect and configure the\n"
+"monitor connected to your machine. If it is incorrect, you can choose from\n"
+"this list the monitor you actually have connected to your computer.\n"
+"\n"
+"\n"
+"\n"
+"Resolution\n"
+"\n"
+"   Here you can choose the resolutions and color depths available for your\n"
+"hardware. Choose the one that best suits your needs (you will be able to\n"
+"change that after installation though). A sample of the chosen\n"
+"configuration is shown in the monitor.\n"
+"\n"
+"\n"
+"\n"
+"Test\n"
+"\n"
+"   the system will try to open a graphical screen at the desired\n"
+"resolution. If you can see the message during the test and answer \"%s\",\n"
+"then DrakX will proceed to the next step. If you cannot see the message, it\n"
+"means that some part of the autodetected configuration was incorrect and\n"
+"the test will automatically end after 12 seconds, bringing you back to the\n"
+"menu. Change settings until you get a correct graphical display.\n"
+"\n"
+"\n"
+"\n"
+"Options\n"
+"\n"
+"   Here you can choose whether you want to have your machine automatically\n"
+"switch to a graphical interface at boot. Obviously, you want to check\n"
+"\"%s\" if your machine is to act as a server, or if you were not successful\n"
+"in getting the display configured."
+msgstr ""
+"X(X Window System)はLinuxのグラフィカルインタフェースの中心と\n"
+"なる部分で、Mandrake Linuxに収録している全てのグラフィカル環境\n"
+"(KDE, GNOME, AfterStep, WindowMakerなど)はこれに依拠しています。\n"
+"\n"
+"グラフィックカードの項目では、最適なグラフィック表示を得るために\n"
+"さまざまなリストが表示されます。\n"
+"\n"
+"インストーラは多くの場合お使いのマシンにインストールしている\n"
+"グラフィックカードを自動的に検出し、設定します。\n"
+"\n"
+"お使いのカードに数種のサーバが用意されている場合は、必要に合った\n"
+"サーバを選んで次に進みます(3Dアクセラレーションの有無など)。\n"
+"\n"
+"\n"
+"\n"
+"モニタ\n"
+"インストーラは多くの場合お使いのマシンに接続しているモニタを\n"
+"自動的に検出し、設定します。うまく行かない場合はモニタのリストを\n"
+"見て手動で選択してください。\n"
+"\n"
+"\n"
+"\n"
+"解像度\n"
+"\n"
+"お使いのハードウェアで利用可能な解像度と色深度を選択することが\n"
+"できます。必要に合ったものをお選びください(インストールした後で\n"
+"変更することもできます)。選択できる設定の例はモニタに表示されます。\n"
+"\n"
+"\n"
+"\n"
+"テスト\n"
+"システムは指定した解像度でグラフィカルスクリーンを表示しようと\n"
+"します。メッセージが表示され %s と答えることができれば、\n"
+"DrakXは次のステップに進みます。設定の一部が間違っていて\n"
+"12秒以内にメッセージを見ることができなかった場合は、\n"
+"元のメニューに戻ります。正しい表示を得られるまで設定を変更してください。\n"
+"\n"
+"\n"
+"\n"
+"オプション\n"
+"\n"
+"起動時に自動的にグラフィカルインタフェースにするかを選択する\n"
+"ことができます。サーバとしてマシンを動かしたい場合や\n"
+"画面の設定が上手くいかなかった場合は %s を選んでください。"
 
 #: ../../standalone/draksplash:1
 #, c-format
@@ -5674,169 +5831,6 @@ msgstr ""
 "ンタ」に表示されます。CUPSサーバがローカルネットワークに無い場合は、IPアドレ"
 "ス(とオプションでポート番号)を入力してください。"
 
-#: ../../standalone/drakTermServ:1
-#, c-format
-msgid ""
-"drakTermServ Overview\n"
-"\t\t\t   \n"
-"        - Create Etherboot Enabled Boot Images:\n"
-"        \t\tTo boot a kernel via etherboot, a special kernel/initrd image "
-"must be created.\n"
-"        \t\tmkinitrd-net does much of this work and drakTermServ is just a "
-"graphical interface\n"
-"        \t\tto help manage/customize these images. To create the file \n"
-"        \t\t/etc/dhcpd.conf.etherboot-pcimap.include that is pulled in as an "
-"include in \n"
-"        \t\tdhcpd.conf, you should create the etherboot images for at least "
-"one full kernel.\n"
-"\n"
-"        - Maintain /etc/dhcpd.conf:\n"
-"        \t\tTo net boot clients, each client needs a dhcpd.conf entry, "
-"assigning an IP address\n"
-"        \t\tand net boot images to the machine. drakTermServ helps create/"
-"remove these entries.\n"
-"\t\t\t\n"
-"        \t\t(PCI cards may omit the image - etherboot will request the "
-"correct image. You should\n"
-"        \t\talso consider that when etherboot looks for the images, it "
-"expects names like\n"
-"        \t\tboot-3c59x.nbi, rather than boot-3c59x.2.4.19-16mdk.nbi).\n"
-"\t\t\t \n"
-"        \t\tA typical dhcpd.conf stanza to support a diskless client looks "
-"like:\n"
-"        \t\t\n"
-"\t\t\t\thost curly {\n"
-"\t\t\t\t\thardware ethernet        00:20:af:2f:f7:9d;\n"
-"\t\t\t\t\tfixed-address              192.168.192.3;\n"
-"\t\t\t\t\t#type                          fat;\n"
-"\t\t\t\t\tfilename                      \"i386/boot/boot-3c509.2.4.18-6mdk."
-"nbi\";\n"
-"\t\t\t\t\t#hdw_config                true;\n"
-"\t\t\t\t}\n"
-"\t\t\t\n"
-"\t\t\tWhile you can use a pool of IP addresses, rather than setup a specific "
-"entry for\n"
-"\t\t\ta client machine, using a fixed address scheme facilitates using the "
-"functionality\n"
-"\t\t\tof client-specific configuration files that ClusterNFS provides.\n"
-"\t\t\t\n"
-"\t\t\tNote: The \"#type\" entry is only used by drakTermServ.  Clients can "
-"either be 'thin'\n"
-"\t\t\tor 'fat'.  Thin clients run most software on the server via xdmcp, "
-"while fat clients run \n"
-"\t\t\tmost software on the client machine. A special inittab, /etc/inittab\\$"
-"\\$IP=client_ip\\$\\$ is\n"
-"\t\t\twritten for thin clients. System config files xdm-config, kdmrc, and "
-"gdm.conf are \n"
-"\t\t\tmodified if thin clients are used, to enable xdmcp. Since there are "
-"security issues in \n"
-"\t\t\tusing xdmcp, hosts.deny and hosts.allow are modified to limit access "
-"to the local\n"
-"\t\t\tsubnet.\n"
-"\t\t\t\n"
-"\t\t\tNote: The \"#hdw_config\" entry is also only used by drakTermServ.  "
-"Clients can either \n"
-"\t\t\tbe 'true' or 'false'.  'true' enables root login at the client machine "
-"and allows local \n"
-"\t\t\thardware configuration of sound, mouse, and X, using the 'drak' tools. "
-"This is enabled \n"
-"\t\t\tby creating seperate config files associated with the client's IP "
-"address and creating \n"
-"\t\t\tread/write mount points to allow the client to alter the file. Once "
-"you are satisfied \n"
-"\t\t\twith the configuration, you can remove root login priviledges from the "
-"client.\n"
-"\t\t\t\n"
-"\t\t\tNote: You must stop/start the server after adding or changing "
-"clients.\n"
-"\t\t\t\n"
-"        - Maintain /etc/exports:\n"
-"        \t\tClusternfs allows export of the root filesystem to diskless "
-"clients. drakTermServ\n"
-"        \t\tsets up the correct entry to allow anonymous access to the root "
-"filesystem from\n"
-"        \t\tdiskless clients.\n"
-"\n"
-"        \t\tA typical exports entry for clusternfs is:\n"
-"        \t\t\n"
-"        \t\t/                  (ro,all_squash)\n"
-"        \t\t/home              SUBNET/MASK(rw,root_squash)\n"
-"\t\t\t\n"
-"\t\t\tWith SUBNET/MASK being defined for your network.\n"
-"        \t\t\n"
-"        - Maintain /etc/shadow\\$\\$CLIENT\\$\\$:\n"
-"        \t\tFor users to be able to log into the system from a diskless "
-"client, their entry in\n"
-"        \t\t/etc/shadow needs to be duplicated in /etc/shadow\\$\\$CLIENTS\\$"
-"\\$. drakTermServ helps\n"
-"        \t\tin this respect by adding or removing system users from this "
-"file.\n"
-"\n"
-"        - Per client /etc/X11/XF86Config-4\\$\\$IP-ADDRESS\\$\\$:\n"
-"        \t\tThrough clusternfs, each diskless client can have it's own "
-"unique configuration files\n"
-"        \t\ton the root filesystem of the server. By allowing local client "
-"hardware configuration, \n"
-"        \t\tdrakTermServ will help create these files.\n"
-"\n"
-"        - Per client system configuration files:\n"
-"        \t\tThrough clusternfs, each diskless client can have it's own "
-"unique configuration files\n"
-"        \t\ton the root filesystem of the server. By allowing local client "
-"hardware configuration, \n"
-"\t\t\t\tclients can customize files such as /etc/modules.conf, /etc/"
-"sysconfig/mouse, \n"
-"        \t\t/etc/sysconfig/keyboard on a per-client basis.\n"
-"\n"
-"        Note: Enabling local client hardware configuration does enable root "
-"login to the terminal \n"
-"        server on each client machine that has this feature enabled.  Local "
-"configuration can be turned\n"
-"        back off, retaining the configuration files, once the client machine "
-"is configured.\n"
-"\t\t\n"
-"        - /etc/xinetd.d/tftp:\n"
-"        \t\tdrakTermServ will configure this file to work in conjunction "
-"with the images created by\n"
-"        \t\tmkinitrd-net, and the entries in /etc/dhcpd.conf, to serve up "
-"the boot image to each\n"
-"        \t\tdiskless client.\n"
-"\n"
-"        \t\tA typical tftp configuration file looks like:\n"
-"        \t\t\n"
-"        \t\tservice tftp\n"
-"        \t\t(\n"
-"                        disable         = no\n"
-"                        socket_type  = dgram\n"
-"                        protocol        = udp\n"
-"                        wait             = yes\n"
-"                        user             = root\n"
-"                        server          = /usr/sbin/in.tftpd\n"
-"                        server_args  = -s /var/lib/tftpboot\n"
-"        \t\t}\n"
-"        \t\t\n"
-"        \t\tThe changes here from the default installation are changing the "
-"disable flag to\n"
-"        \t\t'no' and changing the directory path to /var/lib/tftpboot, where "
-"mkinitrd-net\n"
-"        \t\tputs it's images.\n"
-"\n"
-"        - Create etherboot floppies/CDs:\n"
-"        \t\tThe diskless client machines need either ROM images on the NIC, "
-"or a boot floppy\n"
-"        \t\tor CD to initate the boot sequence.  drakTermServ will help "
-"generate these images,\n"
-"        \t\tbased on the NIC in the client machine.\n"
-"        \t\t\n"
-"        \t\tA basic example of creating a boot floppy for a 3Com 3c509 "
-"manually:\n"
-"        \t\t\n"
-"        \t\tcat /usr/lib/etherboot/boot1a.bin \\\n"
-"        \t\t\t/usr/lib/etherboot/lzrom/3c509.lzrom > /dev/fd0\n"
-" \n"
-"\n"
-msgstr ""
-
 #: ../../standalone/scannerdrake:1
 #, c-format
 msgid "%s is not in the scanner database, configure it manually?"
@@ -5892,8 +5886,7 @@ msgstr "%s を検出"
 msgid "/Autodetect _printers"
 msgstr "/プリンタを自動検出(_P)"
 
-#: ../../interactive.pm:1 ../../my_gtk.pm:1 ../../ugtk2.pm:1
-#: ../../interactive/newt.pm:1
+#: ../../interactive.pm:1 ../../ugtk2.pm:1 ../../interactive/newt.pm:1
 #, c-format
 msgid "Finish"
 msgstr "完了"
@@ -5950,7 +5943,7 @@ msgstr "個別のパッケージを選択"
 msgid "This partition is not resizeable"
 msgstr "このパーティションはリサイズできません"
 
-#: ../../printer/printerdrake.pm:1
+#: ../../printer/printerdrake.pm:1 ../../standalone/printerdrake:1
 #, c-format
 msgid "Location"
 msgstr "プリンタの場所"
@@ -5959,6 +5952,11 @@ msgstr "プリンタの場所"
 #, c-format
 msgid "USA (cable-hrc)"
 msgstr "アメリカ(ケーブル-hrc)"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Guatemala"
+msgstr "グアテマラ"
 
 # we must keep label narrow, full katakana label is too wide
 #: ../../diskdrake/hd_gtk.pm:1
@@ -5971,11 +5969,6 @@ msgstr "Journalised FS"
 msgid "Ethernet cards promiscuity check"
 msgstr "Ethernetカードのpromiscuityチェック"
 
-#: ../../lang.pm:1
-#, c-format
-msgid "Guatemala"
-msgstr "グアテマラ"
-
 #: ../../standalone/scannerdrake:1
 #, c-format
 msgid "This machine"
@@ -5986,15 +5979,15 @@ msgstr "このマシンで"
 msgid "DOS drive letter: %s (just a guess)\n"
 msgstr "DOSのドライブレター: %s (推定)\n"
 
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "Select the files or directories and click on 'OK'"
-msgstr "ファイルかディレクトリを選んで'OK'をクリックしてください"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Bahrain"
 msgstr "バーレーン"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "Select the files or directories and click on 'OK'"
+msgstr "ファイルかディレクトリを選んで'OK'をクリックしてください"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
@@ -6039,6 +6032,11 @@ msgstr "リモートマシンからのプリンタアクセスを設定します
 #, c-format
 msgid "Maltese (US)"
 msgstr "マルタ(US)"
+
+#: ../../standalone/drakfloppy:1
+#, c-format
+msgid "The creation of the boot floppy has been successfully completed \n"
+msgstr ""
 
 #: ../../services.pm:1
 #, c-format
@@ -6086,15 +6084,13 @@ msgstr "Logitech MouseMan+/FirstMouse+"
 
 #: ../../standalone/drakbackup:1
 #, c-format
-msgid "Not the correct tape label. Tape is labelled %s."
-msgstr "テープのラベルが間違っています。このテープは %s です。"
+msgid "Thursday"
+msgstr "木曜日"
 
 #: ../../standalone/drakbackup:1
 #, c-format
-msgid ""
-"For a mulitsession CD, only the first session will erase the cdrw. Otherwise "
-"the cdrw is erased before each backup."
-msgstr ""
+msgid "Not the correct tape label. Tape is labelled %s."
+msgstr "テープのラベルが間違っています。このテープは %s です。"
 
 #: ../../standalone/drakgw:1
 #, c-format
@@ -6210,6 +6206,11 @@ msgstr ""
 "は、\n"
 "もっと低いレベルを選んでください。"
 
+#: ../../standalone/printerdrake:1
+#, fuzzy, c-format
+msgid "Server Name"
+msgstr "サーバ: "
+
 #: ../../network/tools.pm:1 ../../standalone/drakconnect:1
 #, c-format
 msgid "Account Password"
@@ -6238,6 +6239,29 @@ msgstr ""
 "が前提になります。\n"
 "\n"
 "どのドライブから起動しますか？"
+
+#: ../../install_interactive.pm:1
+#, fuzzy, c-format
+msgid ""
+"WARNING!\n"
+"\n"
+"DrakX will now resize your Windows partition. Be careful: this\n"
+"operation is dangerous. If you have not already done so, you\n"
+"first need to exit the installation, run \"chkdsk c:\" from a\n"
+"Command Prompt under Windows (beware, running graphical program\n"
+"\"scandisk\" is not enough, be sure to use \"chkdsk\" in a\n"
+"Command Prompt!), optionally run defrag, then restart the\n"
+"installation. You should also backup your data.\n"
+"When sure, press Ok."
+msgstr ""
+"警告\n"
+"\n"
+"DrakXはこれからWindowsパーティションのサイズを変更します。\n"
+"この操作は危険です。事前にスキャンディスクを実行していない場合は\n"
+"ここでインストールを中断し、スキャンディスクを実行してください(さらに\n"
+"デフラグを実行したほうが良いでしょう)。\n"
+"データのバックアップもしておくべきです。\n"
+"準備ができたらOKを押してください。"
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -6375,15 +6399,6 @@ msgstr ""
 "システムのエントロピープールを保存し復旧します。高品質な乱数が\n"
 "生成されるようになります。"
 
-#: ../../install_steps_interactive.pm:1
-#, c-format
-msgid ""
-"Failed to check filesystem %s. Do you want to repair the errors? (beware, "
-"you can loose data)"
-msgstr ""
-"ファイルシステム %s のチェックに失敗しました。エラーを修復しますか？(注意:"
-"データを失うかもしれません)"
-
 #: ../../share/advertising/07-server.pl:1
 #, c-format
 msgid "Turn your computer into a reliable server"
@@ -6487,6 +6502,11 @@ msgstr " ("
 msgid "Cpuid level"
 msgstr "Cpuidのレベル"
 
+#: ../../printer/main.pm:1
+#, fuzzy, c-format
+msgid "Novell server \"%s\", printer \"%s\""
+msgstr " on Novell server \"%s\", printer \"%s\""
+
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Mongolian (cyrillic)"
@@ -6555,6 +6575,12 @@ msgstr "ウルグアイ"
 msgid "Benin"
 msgstr "ベニン"
 
+# y, c-format
+#: ../../printer/main.pm:1
+#, fuzzy, c-format
+msgid "SMB/Windows server \"%s\", share \"%s\""
+msgstr " on SMB/Windows server \"%s\", share \"%s\""
+
 #: ../../standalone/drakperm:1
 #, c-format
 msgid "Path selection"
@@ -6569,6 +6595,11 @@ msgstr "ホストの名前/IPアドレス:"
 #, c-format
 msgid "Monitor: %s\n"
 msgstr "モニタ: %s\n"
+
+#: ../../standalone/drakperm:1
+#, fuzzy, c-format
+msgid "Custom & system settings"
+msgstr "カスタム設定"
 
 #: ../../partition_table/raw.pm:1
 #, c-format
@@ -6627,6 +6658,11 @@ msgstr "続ける"
 #, c-format
 msgid "Custom Restore"
 msgstr "カスタム復元"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "Saturday"
+msgstr "土曜日"
 
 #: ../../help.pm:1
 #, c-format
@@ -6701,6 +6737,11 @@ msgstr "インストール/更新"
 msgid "%d packages"
 msgstr "%d 個のパッケージ"
 
+#: ../../crypto.pm:1 ../../lang.pm:1
+#, c-format
+msgid "Costa Rica"
+msgstr "コスタリカ"
+
 #: ../../standalone.pm:1
 #, c-format
 msgid ""
@@ -6750,11 +6791,6 @@ msgstr ""
 "\t- Michael Brown <mbrown\\@fensystems.co.uk>\n"
 "\n"
 
-#: ../../crypto.pm:1 ../../lang.pm:1
-#, c-format
-msgid "Costa Rica"
-msgstr "コスタリカ"
-
 #: ../../security/level.pm:1
 #, c-format
 msgid "Use libsafe for servers"
@@ -6785,27 +6821,15 @@ msgstr ""
 "Drakbackupに割り当てる最大の容量を\n"
 "Mbで入力してください"
 
-#: ../../my_gtk.pm:1
+#: ../../loopback.pm:1
 #, c-format
-msgid "-adobe-utopia-regular-r-*-*-25-*-*-*-p-*-iso8859-*,*-r-*"
-msgstr ""
-"adobe-times-bold-r-normal--17-*-100-100-p-*-iso8859-1,-*-fixed-medium-r-"
-"normal--24-*-100-100-c-*-jisx0208.1983-0,*"
+msgid "Circular mounts %s\n"
+msgstr "巡回マウント %s\n"
 
 #: ../../standalone/drakboot:1
 #, c-format
 msgid "Lilo/grub mode"
 msgstr "LILO/GRUBの選択"
-
-#: ../../standalone/drakfloppy:1
-#, c-format
-msgid "Output"
-msgstr "出力"
-
-#: ../../loopback.pm:1
-#, c-format
-msgid "Circular mounts %s\n"
-msgstr "巡回マウント %s\n"
 
 #: ../../lang.pm:1
 #, c-format
@@ -6852,6 +6876,11 @@ msgid ""
 "running"
 msgstr "選択したサービスが動いていないときに警報を送ります。"
 
+#: ../../standalone/drakbackup:1
+#, fuzzy, c-format
+msgid "Weekday"
+msgstr "水曜日"
+
 # "FS" instead  of "fairuistemu" because we must keep label narrow
 #: ../../diskdrake/hd_gtk.pm:1
 #, c-format
@@ -6887,6 +6916,24 @@ msgstr ""
 msgid "Floppy"
 msgstr "フロッピー"
 
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"        - Maintain /etc/exports:\n"
+"        \t\tClusternfs allows export of the root filesystem to diskless "
+"clients. drakTermServ\n"
+"        \t\tsets up the correct entry to allow anonymous access to the root "
+"filesystem from\n"
+"        \t\tdiskless clients.\n"
+"\n"
+"        \t\tA typical exports entry for clusternfs is:\n"
+"        \t\t\n"
+"        \t\t/                  (ro,all_squash)\n"
+"        \t\t/home              SUBNET/MASK(rw,root_squash)\n"
+"\t\t\t\n"
+"\t\t\tWith SUBNET/MASK being defined for your network."
+msgstr ""
+
 #: ../../standalone/drakfont:1
 #, c-format
 msgid "Ghostscript referencing"
@@ -6921,6 +6968,11 @@ msgstr "SMBサーバのホスト名"
 #, c-format
 msgid "Name Servers:"
 msgstr "ネームサーバ:"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "Minute"
+msgstr "分"
 
 #: ../../install_messages.pm:1
 #, c-format
@@ -6983,6 +7035,11 @@ msgstr ""
 "respective authors and are protected by intellectual property and \n"
 "copyright laws applicable to software programs.\n"
 
+#: ../../standalone/printerdrake:1
+#, fuzzy, c-format
+msgid "/_Expert mode"
+msgstr "エキスパートモード"
+
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Remove this printer from Star Office/OpenOffice.org/GIMP"
@@ -6997,15 +7054,15 @@ msgstr ""
 "Linuxバーチャルサーバは高性能で利便性の高いサーバを\n"
 "構築します。"
 
-#: ../../Xconfig/resolution_and_depth.pm:1
-#, c-format
-msgid "4 billion colors (32 bits)"
-msgstr "40億色 (32 bits)"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Micronesia"
 msgstr "ミクロネシア"
+
+#: ../../Xconfig/resolution_and_depth.pm:1
+#, c-format
+msgid "4 billion colors (32 bits)"
+msgstr "40億色 (32 bits)"
 
 #: ../../steps.pm:1
 #, c-format
@@ -7016,6 +7073,56 @@ msgstr "ライセンス"
 #, c-format
 msgid "This may take a moment to generate the keys."
 msgstr "鍵の生成にはしばらく時間がかかります。"
+
+#: ../../standalone/draksec:1
+#, c-format
+msgid ""
+"Here, you can setup the security level and administrator of your machine.\n"
+"\n"
+"\n"
+"The Security Administrator is the one who will receive security alerts if "
+"the\n"
+"'Security Alerts' option is set. It can be a username or an email.\n"
+"\n"
+"\n"
+"The Security Level menu allows you to select one of the six preconfigured "
+"security levels\n"
+"provided with msec. These levels range from poor security and ease of use, "
+"to\n"
+"paranoid config, suitable for very sensitive server applications:\n"
+"\n"
+"\n"
+"<span foreground=\"royalblue3\">Poor</span>: This is a totally unsafe but "
+"very\n"
+"easy to use security level. It should only be used for machines not "
+"connected to\n"
+"any network and that are not accessible to everybody.\n"
+"\n"
+"\n"
+"<span foreground=\"royalblue3\">Standard</span>: This is the standard "
+"security\n"
+"recommended for a computer that will be used to connect to the Internet as "
+"a\n"
+"client.\n"
+"\n"
+"\n"
+"<span foreground=\"royalblue3\">High</span>: There are already some\n"
+"restrictions, and more automatic checks are run every night.\n"
+"\n"
+"\n"
+"<span foreground=\"royalblue3\">Higher</span>: The security is now high "
+"enough\n"
+"to use the system as a server which can accept connections from many "
+"clients. If\n"
+"your machine is only a client on the Internet, you should choose a lower "
+"level.\n"
+"\n"
+"\n"
+"<span foreground=\"royalblue3\">Paranoid</span>: This is similar to the "
+"previous\n"
+"level, but the system is entirely closed and security features are at their\n"
+"maximum"
+msgstr ""
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -7061,10 +7168,10 @@ msgstr "サウンドの不具合修正"
 msgid "Polish (qwerty layout)"
 msgstr "ポーランド(qwerty)"
 
-#: ../../standalone/drakconnect:1
-#, c-format
-msgid "activate now"
-msgstr "いますぐ有効に"
+#: ../../standalone/printerdrake:1
+#, fuzzy, c-format
+msgid "/_Add Printer"
+msgstr "プリンタ"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -7364,15 +7471,15 @@ msgstr "どのパーティションをリサイズしますか？"
 msgid "United States Minor Outlying Islands"
 msgstr "アメリカ辺境諸島"
 
-#: ../../standalone/logdrake:1
-#, c-format
-msgid "A tool to monitor your logs"
-msgstr "ログを監視するツール"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Djibouti"
 msgstr "ジブチ"
+
+#: ../../standalone/logdrake:1
+#, c-format
+msgid "A tool to monitor your logs"
+msgstr "ログを監視するツール"
 
 #: ../../network/netconnect.pm:1
 #, c-format
@@ -7389,6 +7496,11 @@ msgstr "LPD"
 msgid "Graphics card: %s\n"
 msgstr "グラフィックカード: %s\n"
 
+#: ../../standalone/printerdrake:1
+#, fuzzy, c-format
+msgid "/Set as _Default"
+msgstr " (デフォルト)"
+
 #: ../../security/l10n.pm:1
 #, c-format
 msgid "Accept icmp echo"
@@ -7398,6 +7510,11 @@ msgstr "icmp echoを許可"
 #, c-format
 msgid "Yaboot"
 msgstr "Yaboot"
+
+#: ../../mouse.pm:1
+#, fuzzy, c-format
+msgid "Logitech CC Series with Wheel emulation"
+msgstr "Logitech CC Series"
 
 #: ../../standalone/drakboot:1
 #, c-format
@@ -7487,6 +7604,11 @@ msgstr "デバイスを選んでください"
 #, c-format
 msgid "Remove selected server"
 msgstr "選んだサーバを削除"
+
+#: ../../network/adsl.pm:1
+#, c-format
+msgid "Sagem (using dhcp) usb"
+msgstr "Sagem(dhcpを使用)usb"
 
 #: ../../lang.pm:1
 #, c-format
@@ -7622,6 +7744,11 @@ msgstr "ギリシャ"
 msgid "Saint Kitts and Nevis"
 msgstr "セントキッツ島とネビス島"
 
+#: ../../mouse.pm:1
+#, fuzzy, c-format
+msgid "Generic 3 Button Mouse with Wheel emulation"
+msgstr "汎用の３ボタンマウス"
+
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid ""
@@ -7675,6 +7802,11 @@ msgstr ""
 "エラーが発生しました:\n"
 "%s\n"
 "パラメータを変更してみてください"
+
+#: ../../printer/main.pm:1
+#, fuzzy, c-format
+msgid "TCP/IP host \"%s\", port %s"
+msgstr ", TCP/IP host \"%s\", port %s"
 
 #: ../../standalone/drakperm:1
 #, c-format
@@ -7785,6 +7917,11 @@ msgstr "モンゴル"
 msgid "Mounted\n"
 msgstr "マウント済み\n"
 
+#: ../../standalone/printerdrake:1
+#, fuzzy, c-format
+msgid "Configure CUPS"
+msgstr "Xを設定"
+
 #: ../../help.pm:1
 #, c-format
 msgid "Graphical Interface"
@@ -7871,11 +8008,6 @@ msgstr ", ホスト %s, ポート %s"
 msgid "Monaco"
 msgstr "モナコ"
 
-#: ../../security/l10n.pm:1
-#, c-format
-msgid "Do not send mails when uneeded"
-msgstr "不要なときはメールを送らない"
-
 #: ../../install_interactive.pm:1
 #, c-format
 msgid "Partitioning failed: %s"
@@ -7890,6 +8022,11 @@ msgstr "%s は %s のフォーマットに失敗しました"
 #, c-format
 msgid "Canada (cable)"
 msgstr "カナダ(ケーブル)"
+
+#: ../../standalone/drakfloppy:1
+#, fuzzy, c-format
+msgid "Floppy creation completed"
+msgstr "接続完了"
 
 #: ../../help.pm:1
 #, c-format
@@ -7915,6 +8052,11 @@ msgstr ""
 msgid "Kyrgyzstan"
 msgstr "キルギスタン"
 
+#: ../../printer/main.pm:1
+#, fuzzy, c-format
+msgid "Multi-function device on USB"
+msgstr ", multi-function device on USB"
+
 #: ../../help.pm:1
 #, c-format
 msgid "With basic documentation"
@@ -7936,6 +8078,11 @@ msgstr ""
 "パーティションを作成してください(もしくは既存のものをクリック)。\n"
 "「マウントポイント」を押して' / 'にセットしてください。"
 
+#: ../../lang.pm:1
+#, c-format
+msgid "Western Sahara"
+msgstr "西サハラ"
+
 #: ../../network/network.pm:1
 #, c-format
 msgid "Proxy should be http://..."
@@ -7945,11 +8092,6 @@ msgstr "プロクシは http://.. で始まります"
 #, c-format
 msgid "South Africa"
 msgstr "南アフリカ"
-
-#: ../../lang.pm:1
-#, c-format
-msgid "Western Sahara"
-msgstr "西サハラ"
 
 #: ../../standalone/drakbackup:1
 #, fuzzy, c-format
@@ -7994,6 +8136,11 @@ msgid ""
 msgstr ""
 "このファイルシステムのinode access timesを更新しない\n"
 "(e.g, for faster access on the news spool to speed up news servers)"
+
+#: ../../mouse.pm:1
+#, fuzzy, c-format
+msgid "3 buttons with Wheel emulation"
+msgstr "ボタンのエミュレーション"
 
 #: ../../standalone/drakperm:1
 #, c-format
@@ -8066,6 +8213,11 @@ msgstr "マラウイ"
 msgid "local config: false"
 msgstr "ローカル設定: false"
 
+#: ../../standalone/drakperm:1
+#, fuzzy, c-format
+msgid "System settings"
+msgstr "カスタム設定"
+
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Please choose your type of mouse."
@@ -8093,15 +8245,15 @@ msgstr "イギリス"
 msgid "running"
 msgstr "実行中"
 
-#: ../../standalone/draksec:1
-#, c-format
-msgid "default"
-msgstr "デフォルト"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Indonesia"
 msgstr "インドネシア"
+
+#: ../../standalone/draksec:1
+#, c-format
+msgid "default"
+msgstr "デフォルト"
 
 #: ../../standalone/drakxtv:1
 #, c-format
@@ -8145,6 +8297,11 @@ msgid ""
 msgstr ""
 "弊社のe-storeをご利用ください。全てのLinuxソリューションと製品/各種アイテムの"
 "特別販売をいたしております:"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "March"
+msgstr "3 月"
 
 #: ../../any.pm:1
 #, c-format
@@ -8207,6 +8364,11 @@ msgstr "テレビカード"
 #, c-format
 msgid "Printer on SMB/Windows 95/98/NT server"
 msgstr "Printer on SMB/Windows 95/98/NT server"
+
+#: ../../standalone/printerdrake:1
+#, fuzzy, c-format
+msgid "/_Configure CUPS"
+msgstr "Xを設定"
 
 #: ../../standalone/scannerdrake:1
 #, c-format
@@ -8296,6 +8458,11 @@ msgstr ""
 "提携企業が提供するMandrake Linux互換のプロフェッショナルソリューションを使っ"
 "てコンピュータのパフォーマンスを向上してください"
 
+#: ../../standalone/printerdrake:1
+#, c-format
+msgid "Authors: "
+msgstr "作者: "
+
 #: ../../standalone/drakgw:1
 #, c-format
 msgid "Internet Connection Sharing is now disabled."
@@ -8354,12 +8521,25 @@ msgstr "なし"
 msgid "The entered IP is not correct.\n"
 msgstr "入力したIPは正しくありません\n"
 
+#: ../../standalone/drakbackup:1
+#, fuzzy, c-format
+msgid "Please be sure that the cron daemon is included in your services."
+msgstr ""
+"サービスにcronデーモンがあることを確認してください.\n"
+"\n"
+"注意: 現在すべてのネットメディアはハードドライブを使います。"
+
 #: ../../standalone/drakconnect:1
 #, c-format
 msgid "Ethernet Card"
 msgstr "イーサネットカード"
 
-#: ../../my_gtk.pm:1 ../../services.pm:1 ../../ugtk2.pm:1
+#: ../../standalone/printerdrake:1
+#, fuzzy, c-format
+msgid "Delete selected printer"
+msgstr "選んだルールを削除"
+
+#: ../../services.pm:1 ../../ugtk2.pm:1
 #, c-format
 msgid "Info"
 msgstr "情報"
@@ -8480,13 +8660,6 @@ msgstr "新しいスキャナを検索"
 msgid "Disabling servers..."
 msgstr "サーバを停止しています.."
 
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid ""
-"Please choose the time \n"
-"interval between each backup"
-msgstr "バックアップの間隔を選んでください"
-
 #: ../../standalone/drakboot:1
 #, c-format
 msgid "Installation of %s failed. The following error occured:"
@@ -8583,11 +8756,6 @@ msgstr "LILO/GRUBのインストール"
 #, c-format
 msgid "Israeli"
 msgstr "イスラエル"
-
-#: ../../standalone/logdrake:1
-#, c-format
-msgid "load setting"
-msgstr "負荷の設定"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -8711,13 +8879,13 @@ msgstr "シエラレオネ"
 
 #: ../../lang.pm:1
 #, c-format
-msgid "Andorra"
-msgstr "アンドラ"
+msgid "Botswana"
+msgstr "ボツワナ"
 
 #: ../../lang.pm:1
 #, c-format
-msgid "Botswana"
-msgstr "ボツワナ"
+msgid "Andorra"
+msgstr "アンドラ"
 
 #: ../../standalone/draksec:1
 #, c-format
@@ -8807,6 +8975,11 @@ msgstr ""
 msgid "Automatic Steps Configuration"
 msgstr "自動化するステップの設定"
 
+#: ../../lang.pm:1
+#, c-format
+msgid "Barbados"
+msgstr "バルバドス"
+
 #: ../../share/advertising/02-community.pl:1
 #, c-format
 msgid ""
@@ -8815,11 +8988,6 @@ msgid ""
 msgstr ""
 "オープンソースコミュニティについてもっと詳しく知りたいですか？ フリーソフトの"
 "世界に参加しましょう"
-
-#: ../../lang.pm:1
-#, c-format
-msgid "Barbados"
-msgstr "バルバドス"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -8865,6 +9033,11 @@ msgstr "IP幅の最後:"
 msgid "High"
 msgstr "高い"
 
+#: ../../standalone/printerdrake:1
+#, fuzzy, c-format
+msgid "Add a new printer to the system"
+msgstr "システムにユーザを追加"
+
 #: ../../any.pm:1
 #, c-format
 msgid "NoVideo"
@@ -8880,7 +9053,7 @@ msgstr "デバイスの説明を表示します"
 msgid "Adding printer to Star Office/OpenOffice.org/GIMP"
 msgstr "プリンタを Star Office/OpenOffice.org/GIMP に追加"
 
-#: ../../printer/main.pm:1 ../../printer/printerdrake.pm:1
+#: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Local Printers"
 msgstr "Local Printers"
@@ -8954,6 +9127,11 @@ msgstr "クウェート"
 #, c-format
 msgid "Choose the window manager to run:"
 msgstr "ウィンドウマネージャを選んでください:"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "December"
+msgstr "12 月"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -9064,15 +9242,15 @@ msgstr "グラフィカルインタフェース"
 msgid "Chad"
 msgstr "チャド"
 
-#: ../../Xconfig/card.pm:1 ../../Xconfig/various.pm:1
-#, c-format
-msgid "XFree %s with 3D hardware acceleration"
-msgstr "ハードウェア3DアクセラレーションつきのXFree %s"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "India"
 msgstr "インド"
+
+#: ../../Xconfig/card.pm:1 ../../Xconfig/various.pm:1
+#, c-format
+msgid "XFree %s with 3D hardware acceleration"
+msgstr "ハードウェア3DアクセラレーションつきのXFree %s"
 
 #: ../../lang.pm:1
 #, c-format
@@ -9345,15 +9523,22 @@ msgstr ""
 "お使いのハードの中に「proprietary」ドライバが必要なものがあります。\n"
 "以下の情報をご覧ください: %s"
 
+#: ../../lang.pm:1
+#, c-format
+msgid "Haiti"
+msgstr "ハイチ"
+
 #: ../../network/netconnect.pm:1 ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Detecting devices..."
 msgstr "デバイスを検出中.."
 
-#: ../../lang.pm:1
+#: ../../standalone/drakbackup:1
 #, c-format
-msgid "Haiti"
-msgstr "ハイチ"
+msgid ""
+"Custom allows you to specify your own day and time.  The other options use "
+"run-parts in /etc/crontab."
+msgstr ""
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -9545,14 +9730,6 @@ msgstr "「はい」にするとネットワークデバイスが混乱してい
 msgid "Looking for available packages..."
 msgstr "利用可能なパッケージを探しています"
 
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid ""
-"This should be a comma-seperated list of local users or email addresses that "
-"you want the backup results sent to. You will need a functioning mail "
-"transfer agent setup on your system."
-msgstr ""
-
 #: ../../any.pm:1
 #, c-format
 msgid "Init Message"
@@ -9563,15 +9740,15 @@ msgstr "初期化メッセージ"
 msgid "Rescue partition table"
 msgstr "パーティションテーブルを残す"
 
-#: ../../standalone/net_monitor:1
-#, c-format
-msgid "Connection complete."
-msgstr "接続完了"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Cyprus"
 msgstr "キプロス"
+
+#: ../../standalone/net_monitor:1
+#, c-format
+msgid "Connection complete."
+msgstr "接続完了"
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -9592,6 +9769,11 @@ msgstr "設定ウィザード"
 #, c-format
 msgid "ISDN connection"
 msgstr "ISDN接続"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "CD-R / DVD-R"
+msgstr "CDROM/DVDROM"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -9669,6 +9851,11 @@ msgstr ""
 "CPUの周波数(MHz)(Megahertz which in first approximation may be coarsely "
 "assimilated to number of instructions the cpu is able to execute per second)"
 
+#: ../../standalone/printerdrake:1
+#, fuzzy, c-format
+msgid "Mandrake Linux Printer Management Tool"
+msgstr "Mandrake Linuxのユーザ管理ツール"
+
 #: ../../pkgs.pm:1
 #, c-format
 msgid "important"
@@ -9678,6 +9865,18 @@ msgstr "重要"
 #, c-format
 msgid "Total Progress"
 msgstr "全体の進行状況"
+
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"        - Maintain /etc/shadow\\$\\$CLIENT\\$\\$:\n"
+"        \t\tFor users to be able to log into the system from a diskless "
+"client, their entry in\n"
+"        \t\t/etc/shadow needs to be duplicated in /etc/shadow\\$\\$CLIENTS\\$"
+"\\$. drakTermServ helps\n"
+"        \t\tin this respect by adding or removing system users from this "
+"file."
+msgstr ""
 
 #: ../../help.pm:1
 #, c-format
@@ -9717,15 +9916,15 @@ msgstr ""
 "which parameters need to be passed to the hardware, you'll need to manually\n"
 "configure the driver."
 
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "Users"
-msgstr "ユーザ名"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Aruba"
 msgstr "アルーバ"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "Users"
+msgstr "ユーザ名"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -9746,6 +9945,13 @@ msgstr "パスワードが一致しません"
 #, c-format
 msgid "Examples for correct IPs:\n"
 msgstr "正しいIPの例:\n"
+
+#: ../../standalone/drakbackup:1
+#, fuzzy, c-format
+msgid "Please choose the media for backup."
+msgstr ""
+"バックアップ先のメディアを\n"
+"選んでください。"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -9941,6 +10147,11 @@ msgstr ""
 "フロッピーを正しく作成しました。\n"
 "インストールを再現することができます。"
 
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "Use CD-R/DVD-R to backup"
+msgstr "CD/DVDROMにバックアップ"
+
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "the number of buttons the mouse has"
@@ -10109,6 +10320,11 @@ msgstr ""
 "\n"
 "バックアップ元: \n"
 
+#: ../../standalone/drakbackup:1
+#, fuzzy, c-format
+msgid "custom"
+msgstr "カスタム"
+
 #: ../../standalone/logdrake:1
 #, c-format
 msgid "Content of the file"
@@ -10165,6 +10381,7 @@ msgid "Theme name"
 msgstr "テーマ名"
 
 #: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
+#: ../../standalone/printerdrake:1
 #, c-format
 msgid "/_Help"
 msgstr "/ヘルプ(_H)"
@@ -10173,6 +10390,11 @@ msgstr "/ヘルプ(_H)"
 #, c-format
 msgid "Choosing an arbitrary driver"
 msgstr "ドライバを選択してください"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Cook Islands"
+msgstr "クック諸島"
 
 #: ../../standalone/scannerdrake:1
 #, c-format
@@ -10187,11 +10409,6 @@ msgstr ""
 #, c-format
 msgid "the width of the progress bar"
 msgstr "進行バーの幅"
-
-#: ../../lang.pm:1
-#, c-format
-msgid "Cook Islands"
-msgstr "クック諸島"
 
 #: ../../fs.pm:1
 #, c-format
@@ -10210,17 +10427,16 @@ msgstr "インストール済みフォントを選択しない"
 
 #: ../../any.pm:1 ../../help.pm:1 ../../install_steps_gtk.pm:1
 #: ../../install_steps_interactive.pm:1 ../../interactive.pm:1
-#: ../../my_gtk.pm:1 ../../ugtk2.pm:1 ../../ugtk.pm:1
-#: ../../Xconfig/resolution_and_depth.pm:1 ../../diskdrake/smbnfs_gtk.pm:1
-#: ../../interactive/gtk.pm:1 ../../interactive/http.pm:1
-#: ../../interactive/newt.pm:1 ../../interactive/stdio.pm:1
-#: ../../printer/printerdrake.pm:1 ../../standalone/drakautoinst:1
-#: ../../standalone/drakbackup:1 ../../standalone/drakboot:1
-#: ../../standalone/drakconnect:1 ../../standalone/drakfloppy:1
-#: ../../standalone/drakfont:1 ../../standalone/drakgw:1
-#: ../../standalone/drakperm:1 ../../standalone/draksec:1
-#: ../../standalone/logdrake:1 ../../standalone/mousedrake:1
-#: ../../standalone/net_monitor:1
+#: ../../ugtk2.pm:1 ../../Xconfig/resolution_and_depth.pm:1
+#: ../../diskdrake/smbnfs_gtk.pm:1 ../../interactive/gtk.pm:1
+#: ../../interactive/http.pm:1 ../../interactive/newt.pm:1
+#: ../../interactive/stdio.pm:1 ../../printer/printerdrake.pm:1
+#: ../../standalone/drakautoinst:1 ../../standalone/drakbackup:1
+#: ../../standalone/drakboot:1 ../../standalone/drakconnect:1
+#: ../../standalone/drakfloppy:1 ../../standalone/drakfont:1
+#: ../../standalone/drakgw:1 ../../standalone/drakperm:1
+#: ../../standalone/draksec:1 ../../standalone/logdrake:1
+#: ../../standalone/mousedrake:1 ../../standalone/net_monitor:1
 #, c-format
 msgid "Cancel"
 msgstr "キャンセル"
@@ -10265,31 +10481,15 @@ msgstr "プリンタを削除"
 msgid "View Last Log"
 msgstr "最後のログを見る"
 
-#: ../../install_interactive.pm:1
-#, c-format
-msgid ""
-"WARNING!\n"
-"\n"
-"DrakX will now resize your Windows partition. Be careful:\n"
-"this operation is dangerous. If you have not already done\n"
-"so, you should first exit the installation, run scandisk\n"
-"under Windows (and optionally run defrag), then restart the\n"
-"installation. You should also backup your data.\n"
-"When sure, press Ok."
-msgstr ""
-"警告\n"
-"\n"
-"DrakXはこれからWindowsパーティションのサイズを変更します。\n"
-"この操作は危険です。事前にスキャンディスクを実行していない場合は\n"
-"ここでインストールを中断し、スキャンディスクを実行してください(さらに\n"
-"デフラグを実行したほうが良いでしょう)。\n"
-"データのバックアップもしておくべきです。\n"
-"準備ができたらOKを押してください。"
-
 #: ../../network/drakfirewall.pm:1
 #, c-format
 msgid "Which services would you like to allow the Internet to connect to?"
 msgstr "インターネットがどのサービスに接続するか選んでください。"
+
+#: ../../standalone/printerdrake:1
+#, fuzzy, c-format
+msgid "Connection Type"
+msgstr "接続の種類:"
 
 #: ../../standalone/logdrake:1
 #, c-format
@@ -10358,11 +10558,6 @@ msgstr "テレビチャンネルをスキャン中にエラーが発生"
 #, c-format
 msgid "US keyboard (international)"
 msgstr "アメリカ式キーボード(国際式)"
-
-#: ../../keyboard.pm:1
-#, c-format
-msgid "Saami (swedish/finish)"
-msgstr "サーミ(swedish/finish)"
 
 #: ../../standalone/drakbug:1
 #, c-format
@@ -10471,23 +10666,10 @@ msgstr "確認結果をttyに報告"
 msgid "You must enter a device or file name!"
 msgstr "デバイス名かファイル名を入力してください"
 
-#: ../../standalone/harddrake2:1
+#: ../../standalone/harddrake2:1 ../../standalone/printerdrake:1
 #, c-format
 msgid "/_Quit"
 msgstr "/終了(_Q)"
-
-#: ../../network/adsl.pm:1
-#, c-format
-msgid ""
-"You need the alcatel microcode.\n"
-"Download it at\n"
-"http://www.speedtouchdsl.com/dvrreg_lx.htm\n"
-"and copy the mgmt.o in /usr/share/speedtouch"
-msgstr ""
-"alcatel microcodeが必要です。\n"
-"http://www.speedtouchdsl.com/dvrreg_lx.htm\n"
-"からダウンロードして、\n"
-"mgmt.o を /usr/share/speedtouch にコピーしてください。"
 
 #: ../../Xconfig/various.pm:1
 #, c-format
@@ -10631,11 +10813,6 @@ msgstr "保存するディレクトリを入力してください:"
 msgid "Printing"
 msgstr "印刷"
 
-#: ../../harddrake/sound.pm:1
-#, c-format
-msgid "Unkown driver"
-msgstr "不明なドライバ"
-
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid ""
@@ -10775,6 +10952,11 @@ msgstr "オリヤー"
 msgid "Add a new rule at the end"
 msgstr "新しいルールを末尾に追加"
 
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "LiLo and Bootsplash themes installation successful"
+msgstr "LILOと起動スプラッシュテーマのインストールに成功"
+
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid ""
@@ -10805,6 +10987,11 @@ msgstr "パーティションテーブルを更新せずに終了しますか？
 msgid "Genius NetScroll"
 msgstr "Genius NetScroll"
 
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "On Hard Drive"
+msgstr "ハードドライブへ"
+
 #: ../../standalone.pm:1
 #, c-format
 msgid "Installing packages..."
@@ -10815,15 +11002,15 @@ msgstr "パッケージをインストール中.."
 msgid "Dutch"
 msgstr "オランダ"
 
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "The following packages need to be installed:\n"
-msgstr "以下のパッケージをインストールします:\n"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Angola"
 msgstr "アンゴラ"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "The following packages need to be installed:\n"
+msgstr "以下のパッケージをインストールします:\n"
 
 #: ../../standalone/logdrake:1
 #, c-format
@@ -10900,6 +11087,45 @@ msgstr ""
 "\n"
 "http://www.linux-mandrake.com/en/hardware.php3"
 
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"\t\t\tWhile you can use a pool of IP addresses, rather than setup a specific "
+"entry for\n"
+"\t\t\ta client machine, using a fixed address scheme facilitates using the "
+"functionality\n"
+"\t\t\tof client-specific configuration files that ClusterNFS provides.\n"
+"\t\t\t\n"
+"\t\t\tNote: The \"#type\" entry is only used by drakTermServ.  Clients can "
+"either be 'thin'\n"
+"\t\t\tor 'fat'.  Thin clients run most software on the server via xdmcp, "
+"while fat clients run \n"
+"\t\t\tmost software on the client machine. A special inittab, /etc/inittab\\$"
+"\\$IP=client_ip\\$\\$ is\n"
+"\t\t\twritten for thin clients. System config files xdm-config, kdmrc, and "
+"gdm.conf are \n"
+"\t\t\tmodified if thin clients are used, to enable xdmcp. Since there are "
+"security issues in \n"
+"\t\t\tusing xdmcp, hosts.deny and hosts.allow are modified to limit access "
+"to the local\n"
+"\t\t\tsubnet.\n"
+"\t\t\t\n"
+"\t\t\tNote: The \"#hdw_config\" entry is also only used by drakTermServ.  "
+"Clients can either \n"
+"\t\t\tbe 'true' or 'false'.  'true' enables root login at the client machine "
+"and allows local \n"
+"\t\t\thardware configuration of sound, mouse, and X, using the 'drak' tools. "
+"This is enabled \n"
+"\t\t\tby creating separate config files associated with the client's IP "
+"address and creating \n"
+"\t\t\tread/write mount points to allow the client to alter the file. Once "
+"you are satisfied \n"
+"\t\t\twith the configuration, you can remove root login privileges from the "
+"client.\n"
+"\t\t\t\n"
+"\t\t\tNote: You must stop/start the server after adding or changing clients."
+msgstr ""
+
 #: ../../standalone/drakconnect:1
 #, c-format
 msgid "Configure Local Area Network..."
@@ -10940,15 +11166,15 @@ msgstr "情報"
 msgid "No network card"
 msgstr "ネットワークカードがありません"
 
-#: ../../diskdrake/interactive.pm:1 ../../diskdrake/removable.pm:1
-#, c-format
-msgid "Which filesystem do you want?"
-msgstr "どのファイルシステムにしますか？"
-
 #: ../../mouse.pm:1
 #, c-format
 msgid "3 buttons"
 msgstr "３ボタン"
+
+#: ../../diskdrake/interactive.pm:1 ../../diskdrake/removable.pm:1
+#, c-format
+msgid "Which filesystem do you want?"
+msgstr "どのファイルシステムにしますか？"
 
 #: ../../lang.pm:1
 #, c-format
@@ -11003,15 +11229,15 @@ msgstr "グラフィックカード"
 msgid "Resizing Windows partition"
 msgstr "Windowsパーティションのリサイズ"
 
-#: ../../network/tools.pm:1 ../../standalone/drakconnect:1
-#, c-format
-msgid "Provider dns 1 (optional)"
-msgstr "プロバイダのdns 1(オプション)"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Cameroon"
 msgstr "カメルーン"
+
+#: ../../network/tools.pm:1 ../../standalone/drakconnect:1
+#, c-format
+msgid "Provider dns 1 (optional)"
+msgstr "プロバイダのdns 1(オプション)"
 
 #: ../../install_interactive.pm:1
 #, c-format
@@ -11022,9 +11248,15 @@ msgstr ""
 "%s のパーティション設定ができます。\n"
 "完了後は「w」を使って保存してください。"
 
+#: ../../keyboard.pm:1
+#, c-format
+msgid "Saami (swedish/finnish)"
+msgstr "サーミ(swedish/finnish)"
+
 #: ../../printer/printerdrake.pm:1 ../../standalone/drakTermServ:1
 #: ../../standalone/drakbackup:1 ../../standalone/drakbug:1
 #: ../../standalone/drakfont:1 ../../standalone/net_monitor:1
+#: ../../standalone/printerdrake:1
 #, c-format
 msgid "Close"
 msgstr "閉じる"
@@ -11069,6 +11301,11 @@ msgstr ""
 msgid "Iceland"
 msgstr "アイスランド"
 
+#: ../../standalone/drakconnect:1
+#, fuzzy, c-format
+msgid "Network & Internet Configuration"
+msgstr "ネットワークの設定"
+
 #: ../../common.pm:1
 #, c-format
 msgid "consolehelper missing"
@@ -11089,7 +11326,7 @@ msgstr "FPUにirq vectorがあるかどうか"
 msgid "Ext2"
 msgstr "Ext2"
 
-#: ../../my_gtk.pm:1 ../../ugtk2.pm:1
+#: ../../ugtk2.pm:1
 #, c-format
 msgid "Expand Tree"
 msgstr "ツリーを展開する"
@@ -11110,7 +11347,6 @@ msgstr ""
 "新しい %s ドライバは次のブートストラップでのみ使われます。"
 
 #: ../../network/netconnect.pm:1 ../../printer/printerdrake.pm:1
-#: ../../standalone/drakfloppy:1
 #, c-format
 msgid "Expert Mode"
 msgstr "エキスパートモード"
@@ -11186,6 +11422,24 @@ msgstr "ジンバブエ"
 msgid "When"
 msgstr "いつ"
 
+#: ../../network/adsl.pm:1
+#, c-format
+msgid ""
+"You need the Alcatel microcode.\n"
+"Download it at:\n"
+"%s\n"
+"and copy the mgmt.o in /usr/share/speedtouch"
+msgstr ""
+"alcatel microcodeが必要です。\n"
+"%s\n"
+"からダウンロードして、\n"
+"mgmt.o を /usr/share/speedtouch にコピーしてください。"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "Hour"
+msgstr "時間"
+
 #: ../../network/modem.pm:1 ../../standalone/drakconnect:1
 #, c-format
 msgid "Second DNS Server (optional)"
@@ -11236,13 +11490,6 @@ msgstr ""
 "Drakpermは、権限/所有者/グループ をmsec経由で設定します。\n"
 "標準設定を上書きして自分のルールを編集することもできます。"
 
-#: ../../ugtk.pm:1
-#, c-format
-msgid "-adobe-times-bold-r-normal--17-*-100-100-p-*-iso8859-*,*-r-*"
-msgstr ""
-"adobe-times-bold-r-normal--17-*-100-100-p-*-iso8859-1,-*-fixed-medium-r-"
-"normal--24-*-100-100-c-*-jisx0208.1983-0,*"
-
 #: ../../any.pm:1
 #, c-format
 msgid ""
@@ -11284,6 +11531,25 @@ msgstr "/dev/hda"
 #, c-format
 msgid "/dev/hdb"
 msgstr "/dev/hdb"
+
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"        - Maintain /etc/dhcpd.conf:\n"
+"        \t\tTo net boot clients, each client needs a dhcpd.conf entry, "
+"assigning an IP address\n"
+"        \t\tand net boot images to the machine. drakTermServ helps create/"
+"remove these entries.\n"
+"\t\t\t\n"
+"        \t\t(PCI cards may omit the image - etherboot will request the "
+"correct image. You should\n"
+"        \t\talso consider that when etherboot looks for the images, it "
+"expects names like\n"
+"        \t\tboot-3c59x.nbi, rather than boot-3c59x.2.4.19-16mdk.nbi).\n"
+"\t\t\t \n"
+"        \t\tA typical dhcpd.conf stanza to support a diskless client looks "
+"like:"
+msgstr ""
 
 #: ../../services.pm:1
 #, c-format
@@ -11329,11 +11595,6 @@ msgstr ", USB printer #%s"
 msgid "SILO Installation"
 msgstr "SILOのインストール"
 
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "Use CD/DVDROM to backup"
-msgstr "CD/DVDROMにバックアップ"
-
 #: ../../install_messages.pm:1
 #, c-format
 msgid ""
@@ -11369,6 +11630,16 @@ msgstr ""
 #, c-format
 msgid "paranoid"
 msgstr "極度に高い"
+
+#: ../../security/l10n.pm:1
+#, c-format
+msgid "Do not send mails when unneeded"
+msgstr "不要なときはメールを送らない"
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "Your scanner(s) will not be available on the network."
+msgstr ""
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -11451,7 +11722,7 @@ msgid ""
 "And, of course, push multimedia to its limits with the very latest software "
 "to play videos, audio files and to handle your images or photos."
 msgstr ""
-"Mandrake Linux 9.1では動画/オーディオファイルの再生、画像/写真の整理 を最新の"
+"Mandrake Linux 9.2では動画/オーディオファイルの再生、画像/写真の整理 を最新の"
 "ソフトで行うことができます。"
 
 #: ../../printer/printerdrake.pm:1
@@ -11540,15 +11811,20 @@ msgstr "まずデータのバックアップを取ってください"
 msgid "You have more than one hard drive, which one do you install linux on?"
 msgstr "複数のハードドライブがあります。どれにlinuxをインストールしますか？"
 
+#: ../../lang.pm:1
+#, c-format
+msgid "Eritrea"
+msgstr "エリトリア"
+
 #: ../../standalone/drakTermServ:1
 #, c-format
 msgid "Boot ISO"
 msgstr "起動ISO"
 
-#: ../../lang.pm:1
-#, c-format
-msgid "Eritrea"
-msgstr "エリトリア"
+#: ../../network/adsl.pm:1
+#, fuzzy, c-format
+msgid "Firmware needed"
+msgstr "必要な場合のみ"
 
 #: ../../standalone/drakfont:1
 #, c-format
@@ -11670,6 +11946,11 @@ msgstr ""
 msgid "Add a scanner manually"
 msgstr "手動でスキャナを追加"
 
+#: ../../standalone/printerdrake:1
+#, c-format
+msgid "Refresh"
+msgstr "更新"
+
 #: ../../help.pm:1 ../../diskdrake/interactive.pm:1
 #, c-format
 msgid "Reload partition table"
@@ -11699,6 +11980,11 @@ msgstr "ローカルネットワークが「.0」で終わっていません。�
 #, c-format
 msgid "Boot"
 msgstr "起動"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid " and the CD is in the drive"
+msgstr ""
 
 #: ../../harddrake/v4l.pm:1
 #, c-format
@@ -11784,6 +12070,11 @@ msgstr "セキュリティ管理者:"
 msgid "Set the shell timeout. A value of zero means no timeout."
 msgstr "シェルのタイムアウトを設定。ゼロはタイムアウトなし"
 
+#: ../../network/adsl.pm:1
+#, c-format
+msgid "Firmware copy succeeded"
+msgstr ""
+
 #: ../../security/help.pm:1
 #, c-format
 msgid "if set to yes, check permissions of files in the users' home."
@@ -11824,6 +12115,11 @@ msgstr "プリンタ %s を Star Office/OpenOffice.org/GIMP から削除しま�
 #, c-format
 msgid "Save packages selection"
 msgstr "パッケージの選択を保存する"
+
+#: ../../standalone/printerdrake:1
+#, c-format
+msgid "/_Actions"
+msgstr "/アクション(_A)"
 
 #: ../../standalone/drakautoinst:1
 #, c-format
@@ -11889,15 +12185,15 @@ msgstr "サイズ: "
 msgid "Which sector do you want to move it to?"
 msgstr "どのセクタを移動しますか？"
 
-#: ../../interactive/stdio.pm:1
-#, c-format
-msgid "Do you want to click on this button?"
-msgstr "このボタンをクリックしますか？"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Bahamas"
 msgstr "バハマ"
+
+#: ../../interactive/stdio.pm:1
+#, c-format
+msgid "Do you want to click on this button?"
+msgstr "このボタンをクリックしますか？"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -12018,10 +12314,38 @@ msgstr ""
 "注意: ローカルエリアネットワーク(LAN)を設定するには、専用のネットワークアダプ"
 "タが必要です。"
 
-#: ../../security/l10n.pm:1
-#, c-format
-msgid "Authorize TCP connections X Window"
-msgstr "TCP connections X Windowを認める"
+#: ../../harddrake/sound.pm:1
+#, fuzzy, c-format
+msgid ""
+"OSS (Open Sound System) was the first sound API. It's an OS independent "
+"sound API (it's available on most UNIX(tm) systems) but it's a very basic "
+"and limited API.\n"
+"What's more, OSS drivers all reinvent the wheel.\n"
+"\n"
+"ALSA (Advanced Linux Sound Architecture) is a modularized architecture "
+"which\n"
+"supports quite a large range of ISA, USB and PCI cards.\n"
+"\n"
+"It also provides a much higher API than OSS.\n"
+"\n"
+"To use alsa, one can either use:\n"
+"- the old compatibility OSS api\n"
+"- the new ALSA api that provides many enhanced features but requires using "
+"the ALSA library.\n"
+msgstr ""
+"OSS(Open Sound System)は最初に開発されたサウンドAPIです。これは\n"
+"OSから独立したサウンドAPI(ほとんどのunicesシステムで利用可能)ですが、\n"
+"非常に基本的で制限されたAPIです。\n"
+"さらに、OSSは全くの車輪の再発明です。\n"
+"\n"
+"ALSA(Advanced Linux Sound Architecture)はモジュール構造をしていて、\n"
+"非常に広範なISA/USB/PCIカードをサポートしています。\n"
+"\n"
+"ALSAはOSSよりずっと優れたAPIを提供します。\n"
+"\n"
+"ALSAを使うと次の利点があります:\n"
+"- 古いOSSとの互換性\n"
+"- 多くの拡張機能の提供。ただしALSAライブラリの使用が必要です。\n"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -12063,11 +12387,6 @@ msgid ""
 msgstr ""
 "HardDrakeはハードウェアを検出して、新しい/変更したハードウェアを\n"
 "設定します。"
-
-#: ../../printer/cups.pm:1 ../../printer/main.pm:1
-#, c-format
-msgid "Remote Printers"
-msgstr "リモートプリンタ"
 
 #: ../../fs.pm:1
 #, c-format
@@ -12131,6 +12450,11 @@ msgstr "このホストのスキャナを共有する: "
 msgid "Unselected All"
 msgstr "選択を解除"
 
+#: ../../standalone/printerdrake:1
+#, fuzzy, c-format
+msgid "Printer Management \n"
+msgstr "ユーザの管理 \n"
+
 #: ../../standalone/logdrake:1
 #, c-format
 msgid "Domain Name Resolver"
@@ -12170,6 +12494,17 @@ msgstr "モデム"
 #, c-format
 msgid "Welcome to %s"
 msgstr "%s へようこそ"
+
+#: ../../standalone/drakhelp:1
+#, c-format
+msgid ""
+" drakhelp 0.1\n"
+"Copyright (C) 2003 MandrakeSoft.\n"
+"This is free software and may be redistributed under the terms of the GNU "
+"GPL.\n"
+"\n"
+"Usage: \n"
+msgstr ""
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -12254,15 +12589,20 @@ msgstr ""
 msgid "Cuba"
 msgstr "キューバ"
 
-#: ../../printer/printerdrake.pm:1
+#: ../../standalone/drakbackup:1
 #, c-format
-msgid "Searching for new printers..."
-msgstr "新しいプリンタを検索中.."
+msgid "October"
+msgstr "10 月"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Belize"
 msgstr "ベリーズ"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Searching for new printers..."
+msgstr "新しいプリンタを検索中.."
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -12287,6 +12627,11 @@ msgstr ""
 #, c-format
 msgid " Activate/Disable daily security check."
 msgstr " デイリーセキュリティチェックを有効/無効にする。"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "\t-CD-R.\n"
+msgstr "\t-CDROM\n"
 
 #: ../../security/l10n.pm:1
 #, c-format
@@ -12316,6 +12661,11 @@ msgstr ""
 #, c-format
 msgid "Automatic time synchronization (using NTP)"
 msgstr "自動的に時間を合わせる(NTPを使用)"
+
+#: ../../network/adsl.pm:1
+#, fuzzy, c-format
+msgid "Use my Windows partition"
+msgstr "Windowsパーティションのリサイズ"
 
 #: ../../Xconfig/card.pm:1
 #, c-format
@@ -12352,6 +12702,26 @@ msgid ""
 msgstr ""
 "\n"
 "- システムファイル:\n"
+
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"        - Per client system configuration files:\n"
+"        \t\tThrough clusternfs, each diskless client can have its own unique "
+"configuration files\n"
+"        \t\ton the root filesystem of the server. By allowing local client "
+"hardware configuration, \n"
+"\t\t\t\tclients can customize files such as /etc/modules.conf, /etc/"
+"sysconfig/mouse, \n"
+"        \t\t/etc/sysconfig/keyboard on a per-client basis.\n"
+"\n"
+"        Note: Enabling local client hardware configuration does enable root "
+"login to the terminal \n"
+"        server on each client machine that has this feature enabled.  Local "
+"configuration can be turned\n"
+"        back off, retaining the configuration files, once the client machine "
+"is configured."
+msgstr ""
 
 #: ../../standalone/drakbug:1
 #, c-format
@@ -12400,6 +12770,14 @@ msgstr "暗号鍵"
 msgid "Microsoft IntelliMouse"
 msgstr "Microsoft IntelliMouse"
 
+#: ../../keyboard.pm:1
+#, c-format
+msgid ""
+"This setting will be activated after the installation.\n"
+"During installation, you will need to use the Right Control\n"
+"key to switch between the different keyboard layouts."
+msgstr ""
+
 #: ../../lang.pm:1
 #, c-format
 msgid "Christmas Island"
@@ -12419,6 +12797,11 @@ msgstr "EIDE/SCSI チャンネル"
 #, c-format
 msgid "Set this printer as the default"
 msgstr "このプリンタをデフォルトにする"
+
+#: ../../standalone/drakbackup:1
+#, fuzzy, c-format
+msgid "Verify that %s is the correct path"
+msgstr "正しく設定できましたか？"
 
 #: ../../install_interactive.pm:1
 #, c-format
@@ -12480,8 +12863,13 @@ msgstr "受信速度:"
 msgid "Turks and Caicos Islands"
 msgstr "タークス・ケーコス諸島"
 
+#: ../../standalone/drakconnect:1
+#, c-format
+msgid "No Ip"
+msgstr ""
+
 #: ../../help.pm:1 ../../install_steps_gtk.pm:1 ../../interactive.pm:1
-#: ../../my_gtk.pm:1 ../../ugtk2.pm:1 ../../interactive/newt.pm:1
+#: ../../ugtk2.pm:1 ../../interactive/newt.pm:1
 #: ../../printer/printerdrake.pm:1 ../../standalone/drakbackup:1
 #, c-format
 msgid "<- Previous"
@@ -12504,7 +12892,7 @@ msgstr "ユーザを認証するのにパスワードを使う"
 msgid "Internet Connection Sharing configuration"
 msgstr "インターネット接続の共有設定"
 
-#: ../../my_gtk.pm:1 ../../ugtk2.pm:1
+#: ../../ugtk2.pm:1
 #, c-format
 msgid "Toggle between flat and group sorted"
 msgstr "フラットとグループ別表示を切り替える"
@@ -12538,6 +12926,11 @@ msgstr "OKI winプリンタの設定"
 msgid "Saint Helena"
 msgstr "セントヘレナ"
 
+#: ../../printer/main.pm:1
+#, fuzzy, c-format
+msgid "Parallel port #%s"
+msgstr " on parallel port #%s"
+
 #: ../../help.pm:1 ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Security Level"
@@ -12568,6 +12961,17 @@ msgstr "ポーランド(qwertz)"
 #, c-format
 msgid "Syria"
 msgstr "シリア"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid ""
+"Is your printer a multi-function device from HP or Sony (OfficeJet, PSC, "
+"LaserJet 1100/1200/1220/3200/3300 with scanner, DeskJet 450, Sony IJP-V100), "
+"an HP PhotoSmart or an HP LaserJet 2200?"
+msgstr ""
+"お使いのプリンタは多機能デバイスですか？HPもしくはSony(スキャナつきの "
+"OfficeJet, PSC, LaserJet 1100/1200/1220/3200/3300, DeskJet 450, Sony IJP-"
+"V100), HP PhotoSmart もしくは HP LaserJet 2200"
 
 # NOTE: this message will be displayed by SILO at boot time; that is
 # only the ascii charset will be available
@@ -12622,6 +13026,11 @@ msgstr "ニュージーランド"
 #, c-format
 msgid "This directory should remain within the root filesystem"
 msgstr "このディレクトリはrootファイルシステム内に残してください"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "Across Network"
+msgstr "ネットワークへ"
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -12709,7 +13118,7 @@ msgstr "内部ドメイン名"
 msgid "Card IRQ"
 msgstr "カード IRQ"
 
-#: ../../ugtk.pm:1 ../../standalone/logdrake:1
+#: ../../standalone/logdrake:1
 #, c-format
 msgid "logdrake"
 msgstr "logdrake"
@@ -12840,11 +13249,6 @@ msgstr "オープンファームウェアの遅延"
 msgid "Hungary"
 msgstr "ハンガリー"
 
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "Total progess"
-msgstr "進行状況"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "New Zealand"
@@ -12867,6 +13271,11 @@ msgstr "いくつかの制限に加え、さらに多くの自動確認を毎晩
 msgid "please choose the date to restore"
 msgstr "復元する日付を選んでください"
 
+#: ../../lang.pm:1
+#, c-format
+msgid "Netherlands Antilles"
+msgstr "オランダ領アンティル諸島"
+
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid "Switching from ext2 to ext3"
@@ -12876,11 +13285,6 @@ msgstr "ext2 を ext3 に変更"
 #, c-format
 msgid "LPRng"
 msgstr "LPRng"
-
-#: ../../lang.pm:1
-#, c-format
-msgid "Netherlands Antilles"
-msgstr "オランダ領アンティル諸島"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -12959,8 +13363,13 @@ msgstr "無効な項目には「void」と入力してください"
 
 #: ../../standalone/drakbackup:1
 #, c-format
-msgid "on Hard Drive"
-msgstr "ハードドライブへ"
+msgid "Backups on unmountable media - Use Catalog to restore"
+msgstr ""
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "January"
+msgstr "1 月"
 
 #: ../../security/l10n.pm:1
 #, c-format
@@ -13081,6 +13490,21 @@ msgstr "サウスジョージア島とサウスサンドイッチ島"
 msgid "Japan (broadcast)"
 msgstr "日本(ブロードキャスト)"
 
+#: ../../help.pm:1
+#, c-format
+msgid ""
+"Monitor\n"
+"\n"
+"   The installer will normally automatically detect and configure the\n"
+"monitor connected to your machine. If it is incorrect, you can choose from\n"
+"this list the monitor you actually have connected to your computer."
+msgstr ""
+"モニタ\n"
+"\n"
+"普通はインストーラがお使いのマシンに接続しているモニタを\n"
+"自動的に検出して設定します。うまく行かないようでしたらモニタの\n"
+"リストの中から適切なものを選んでください。"
+
 #: ../../lang.pm:1
 #, c-format
 msgid "Mozambique"
@@ -13136,6 +13560,11 @@ msgstr "Linuxの未来を創ろう!"
 msgid "Local Printer"
 msgstr "Local Printer"
 
+#: ../../network/adsl.pm:1
+#, fuzzy, c-format
+msgid "Floppy access error, unable to mount device %s"
+msgstr "デバイス %s をどこにマウントしますか？"
+
 #: ../../standalone.pm:1
 #, c-format
 msgid "[--file=myfile] [--word=myword] [--explain=regexp] [--alert]"
@@ -13166,20 +13595,20 @@ msgstr "ケーブル接続が検出されました"
 msgid "Permission denied transferring %s to %s"
 msgstr "%s を %s に転送する権限がありません"
 
-#: ../../standalone/harddrake2:1
+#: ../../standalone/harddrake2:1 ../../standalone/printerdrake:1
 #, c-format
 msgid "/_Report Bug"
 msgstr "/バグ報告(_R)"
-
-#: ../../diskdrake/interactive.pm:1
-#, c-format
-msgid "Resize"
-msgstr "リサイズ"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Dominica"
 msgstr "ドミニカ"
+
+#: ../../diskdrake/interactive.pm:1
+#, c-format
+msgid "Resize"
+msgstr "リサイズ"
 
 #: ../../Xconfig/various.pm:1
 #, c-format
@@ -13235,6 +13664,36 @@ msgstr "マウスデバイス: %s\n"
 #, c-format
 msgid "Reselect correct fonts"
 msgstr "正しいフォントを再選択"
+
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"        - /etc/xinetd.d/tftp:\n"
+"        \t\tdrakTermServ will configure this file to work in conjunction "
+"with the images created by\n"
+"        \t\tmkinitrd-net, and the entries in /etc/dhcpd.conf, to serve up "
+"the boot image to each\n"
+"        \t\tdiskless client.\n"
+"\n"
+"        \t\tA typical tftp configuration file looks like:\n"
+"        \t\t\n"
+"        \t\tservice tftp\n"
+"\t\t\t{\n"
+"                        disable         = no\n"
+"                        socket_type  = dgram\n"
+"                        protocol        = udp\n"
+"                        wait             = yes\n"
+"                        user             = root\n"
+"                        server          = /usr/sbin/in.tftpd\n"
+"                        server_args  = -s /var/lib/tftpboot\n"
+"        \t\t}\n"
+"        \t\t\n"
+"        \t\tThe changes here from the default installation are changing the "
+"disable flag to\n"
+"        \t\t'no' and changing the directory path to /var/lib/tftpboot, where "
+"mkinitrd-net\n"
+"        \t\tputs its images."
+msgstr ""
 
 #: ../../help.pm:1
 #, c-format
@@ -13354,6 +13813,11 @@ msgstr ""
 "%s%s\n"
 "はシステムに直接接続しています"
 
+#: ../../network/modem.pm:1
+#, c-format
+msgid "You don't have any winmodem"
+msgstr ""
+
 #: ../../standalone/drakTermServ:1
 #, c-format
 msgid "type: %s"
@@ -13363,6 +13827,14 @@ msgstr "種類: %s"
 #, c-format
 msgid "Slovakian (QWERTY)"
 msgstr "スロバキア(QWERTY)"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid ""
+"This should be a comma-separated list of local users or email addresses that "
+"you want the backup results sent to. You will need a functioning mail "
+"transfer agent setup on your system."
+msgstr ""
 
 #: ../../standalone/draksound:1
 #, c-format
@@ -13537,6 +14009,11 @@ msgstr ""
 msgid "Comoros"
 msgstr "コモロ"
 
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "May"
+msgstr "5 月"
+
 #: ../../standalone/drakboot:1
 #, c-format
 msgid "Yaboot mode"
@@ -13665,6 +14142,11 @@ msgstr ""
 "Perl, Python, C, C++のような複数の言語で変更/作成することができます。GNU gcc "
 "3とベストなオープンソース開発環境に感謝。"
 
+#: ../../standalone/drakbackup:1
+#, fuzzy, c-format
+msgid "No devices found"
+msgstr "イメージが見つかりません"
+
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Truly minimal install (especially no urpmi)"
@@ -13706,15 +14188,15 @@ msgstr ""
 msgid "Where do you want to mount %s?"
 msgstr "%s をどこにマウントしますか？"
 
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "Restore Via Network"
-msgstr "ネットワークから復元"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Algeria"
 msgstr "アルジェリア"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "Restore Via Network"
+msgstr "ネットワークから復元"
 
 #: ../../any.pm:1
 #, c-format
@@ -13736,15 +14218,30 @@ msgstr ""
 msgid "\tBackups use tar and gzip\n"
 msgstr "\tバックアップでtarとgzipを使う\n"
 
+#: ../../standalone/printerdrake:1
+#, fuzzy, c-format
+msgid "Set as default"
+msgstr "デフォルト"
+
 #: ../../Xconfig/card.pm:1
 #, c-format
 msgid "2 MB"
 msgstr "2 MB"
 
+#: ../../printer/main.pm:1 ../../standalone/printerdrake:1
+#, fuzzy, c-format
+msgid "Configured on this machine"
+msgstr "(このマシンで)"
+
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Both Control keys simultaneously"
 msgstr "左右のCtrlを同時に押す"
+
+#: ../../standalone/drakhelp:1
+#, c-format
+msgid " --help                - display this help     \n"
+msgstr ""
 
 #: ../../standalone.pm:1
 #, c-format
@@ -13852,18 +14349,6 @@ msgstr ""
 msgid "Kenya"
 msgstr "ケニア"
 
-#: ../../share/advertising/04-configuration.pl:1
-#, c-format
-msgid ""
-"Mandrake Linux 9.1 provides you with the Mandrake Control Center, a powerful "
-"tool to fully adapt your computer to the use you make of it. Configure and "
-"customize elements such as the security level, the peripherals (screen, "
-"mouse, keyboard...), the Internet connection and much more!"
-msgstr ""
-"Mandrake Linux 9.1にはMandrakeコントロールセンタがあります。これは用途に合わ"
-"せてコンピュータを設定する強力なツールです。セキュリティ水準や周辺機器(画面,"
-"マウス,キーボードなど)、インターネットなどを設定することができます。"
-
 #: ../../diskdrake/hd_gtk.pm:1
 #, c-format
 msgid "Use ``Unmount'' first"
@@ -13888,6 +14373,29 @@ msgstr "first stepの作成"
 #, c-format
 msgid "Both Shift keys simultaneously"
 msgstr "左右のShiftを同時に押す"
+
+#: ../../standalone/drakhelp:1
+#, c-format
+msgid ""
+" --id <id_label>       - load the html help page which refers to id_label\n"
+msgstr ""
+
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"        - Create etherboot floppies/CDs:\n"
+"        \t\tThe diskless client machines need either ROM images on the NIC, "
+"or a boot floppy\n"
+"        \t\tor CD to initate the boot sequence.  drakTermServ will help "
+"generate these images,\n"
+"        \t\tbased on the NIC in the client machine.\n"
+"        \t\t\n"
+"        \t\tA basic example of creating a boot floppy for a 3Com 3c509 "
+"manually:\n"
+"        \t\t\n"
+"        \t\tcat /usr/lib/etherboot/boot1a.bin \\\n"
+"        \t\t\t/usr/lib/etherboot/lzrom/3c509.lzrom > /dev/fd0"
+msgstr ""
 
 #: ../../standalone/scannerdrake:1
 #, c-format
@@ -14083,22 +14591,22 @@ msgstr "utopia 25"
 msgid "Pipe job into a command"
 msgstr "Pipe job into a command"
 
+#: ../../lang.pm:1
+#, c-format
+msgid "Cote d'Ivoire"
+msgstr "コートジボアール"
+
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "new dynamic device name generated by core kernel devfs"
 msgstr "コアカーネルdevfsが生成した新しい動的デバイス名"
 
 #: ../../help.pm:1 ../../install_any.pm:1 ../../interactive.pm:1
-#: ../../my_gtk.pm:1 ../../ugtk2.pm:1 ../../modules/interactive.pm:1
-#: ../../standalone/drakgw:1 ../../standalone/harddrake2:1
+#: ../../ugtk2.pm:1 ../../modules/interactive.pm:1 ../../standalone/drakgw:1
+#: ../../standalone/harddrake2:1
 #, c-format
 msgid "Yes"
 msgstr "はい"
-
-#: ../../lang.pm:1
-#, c-format
-msgid "Cote d'Ivoire"
-msgstr "コートジボアール"
 
 #: ../../network/isdn.pm:1
 #, c-format
@@ -14185,11 +14693,6 @@ msgstr "設定する接続を選んでください"
 #, c-format
 msgid "Please wait, setting security level..."
 msgstr "お待ちください。セキュリティ水準を設定中.."
-
-#: ../../share/advertising/06-development.pl:1
-#, c-format
-msgid "Mandrake Linux 9.1: the ultimate development platform"
-msgstr "Mandrake Linux 9.1は究極の開発用プラットフォームです"
 
 #: ../../network/network.pm:1
 #, c-format
@@ -14285,8 +14788,8 @@ msgstr "ローカルプリンタの共有"
 
 #: ../../install_messages.pm:1
 #, c-format
-msgid "http://www.mandrakelinux.com/en/91errata.php3"
-msgstr "http://www.mandrakelinux.com/en/91errata.php3"
+msgid "http://www.mandrakelinux.com/en/92errata.php3"
+msgstr "http://www.mandrakelinux.com/en/92errata.php3"
 
 #: ../../security/help.pm:1
 #, c-format
@@ -14302,106 +14805,6 @@ msgstr "利用可能なプリンタ"
 #, c-format
 msgid "Empty"
 msgstr "空"
-
-#: ../../help.pm:1
-#, c-format
-msgid ""
-"X (for X Window System) is the heart of the GNU/Linux graphical interface\n"
-"on which all the graphical environments (KDE, GNOME, AfterStep,\n"
-"WindowMaker, etc.) bundled with Mandrake Linux rely upon.\n"
-"\n"
-"You will be presented with a list of different parameters to change to get\n"
-"an optimal graphical display: Graphic Card\n"
-"\n"
-"   The installer will normally automatically detect and configure the\n"
-"graphic card installed on your machine. If it is not the case, you can\n"
-"choose from this list the card you actually have installed.\n"
-"\n"
-"   In the case that different servers are available for your card, with or\n"
-"without 3D acceleration, you are then asked to choose the server that best\n"
-"suits your needs.\n"
-"\n"
-"\n"
-"\n"
-"Monitor\n"
-"\n"
-"   The installer will normally automatically detect and configure the\n"
-"monitor connected to your machine. If it is correct, you can choose from\n"
-"this list the monitor you actually have connected to your computer.\n"
-"\n"
-"\n"
-"\n"
-"Resolution\n"
-"\n"
-"   Here you can choose the resolutions and color depths available for your\n"
-"hardware. Choose the one that best suits your needs (you will be able to\n"
-"change that after installation though). A sample of the chosen\n"
-"configuration is shown in the monitor.\n"
-"\n"
-"\n"
-"\n"
-"Test\n"
-"\n"
-"   the system will try to open a graphical screen at the desired\n"
-"resolution. If you can see the message during the test and answer \"%s\",\n"
-"then DrakX will proceed to the next step. If you cannot see the message, it\n"
-"means that some part of the autodetected configuration was incorrect and\n"
-"the test will automatically end after 12 seconds, bringing you back to the\n"
-"menu. Change settings until you get a correct graphical display.\n"
-"\n"
-"\n"
-"\n"
-"Options\n"
-"\n"
-"   Here you can choose whether you want to have your machine automatically\n"
-"switch to a graphical interface at boot. Obviously, you want to check\n"
-"\"%s\" if your machine is to act as a server, or if you were not successful\n"
-"in getting the display configured."
-msgstr ""
-"X(X Window System)はLinuxのグラフィカルインタフェースの中心と\n"
-"なる部分で、Mandrake Linuxに収録している全てのグラフィカル環境\n"
-"(KDE, GNOME, AfterStep, WindowMakerなど)はこれに依拠しています。\n"
-"\n"
-"グラフィックカードの項目では、最適なグラフィック表示を得るために\n"
-"さまざまなリストが表示されます。\n"
-"\n"
-"インストーラは多くの場合お使いのマシンにインストールしている\n"
-"グラフィックカードを自動的に検出し、設定します。\n"
-"\n"
-"お使いのカードに数種のサーバが用意されている場合は、必要に合った\n"
-"サーバを選んで次に進みます(3Dアクセラレーションの有無など)。\n"
-"\n"
-"\n"
-"\n"
-"モニタ\n"
-"インストーラは多くの場合お使いのマシンに接続しているモニタを\n"
-"自動的に検出し、設定します。うまく行かない場合はモニタのリストを\n"
-"見て手動で選択してください。\n"
-"\n"
-"\n"
-"\n"
-"解像度\n"
-"\n"
-"お使いのハードウェアで利用可能な解像度と色深度を選択することが\n"
-"できます。必要に合ったものをお選びください(インストールした後で\n"
-"変更することもできます)。選択できる設定の例はモニタに表示されます。\n"
-"\n"
-"\n"
-"\n"
-"テスト\n"
-"システムは指定した解像度でグラフィカルスクリーンを表示しようと\n"
-"します。メッセージが表示され %s と答えることができれば、\n"
-"DrakXは次のステップに進みます。設定の一部が間違っていて\n"
-"12秒以内にメッセージを見ることができなかった場合は、\n"
-"元のメニューに戻ります。正しい表示を得られるまで設定を変更してください。\n"
-"\n"
-"\n"
-"\n"
-"オプション\n"
-"\n"
-"起動時に自動的にグラフィカルインタフェースにするかを選択する\n"
-"ことができます。サーバとしてマシンを動かしたい場合や\n"
-"画面の設定が上手くいかなかった場合は %s を選んでください。"
 
 #: ../../standalone/draksplash:1
 #, c-format
@@ -14430,6 +14833,21 @@ msgstr ""
 "\n"
 "\n"
 "「次」を押すと続けます。"
+
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"        - Create Etherboot Enabled Boot Images:\n"
+"        \t\tTo boot a kernel via etherboot, a special kernel/initrd image "
+"must be created.\n"
+"        \t\tmkinitrd-net does much of this work and drakTermServ is just a "
+"graphical interface\n"
+"        \t\tto help manage/customize these images. To create the file \n"
+"        \t\t/etc/dhcpd.conf.etherboot-pcimap.include that is pulled in as an "
+"include in \n"
+"        \t\tdhcpd.conf, you should create the etherboot images for at least "
+"one full kernel."
+msgstr ""
 
 #: ../../printer/main.pm:1 ../../printer/printerdrake.pm:1
 #, c-format
@@ -14505,8 +14923,7 @@ msgstr "マウスを設定"
 msgid "Choose the mount points"
 msgstr "マウントポイントを選択"
 
-#: ../../help.pm:1 ../../ugtk.pm:1 ../../standalone/drakTermServ:1
-#: ../../standalone/drakfont:1
+#: ../../help.pm:1 ../../standalone/drakTermServ:1 ../../standalone/drakfont:1
 #, c-format
 msgid "OK"
 msgstr "OK"
@@ -14520,6 +14937,11 @@ msgstr "ユーゴスラビア(ラテン)"
 #, c-format
 msgid "Installing"
 msgstr "インストール中"
+
+#: ../../mouse.pm:1
+#, fuzzy, c-format
+msgid "Logitech MouseMan with Wheel emulation"
+msgstr "Logitech MouseMan"
 
 #: ../../any.pm:1
 #, c-format
@@ -14645,15 +15067,15 @@ msgstr "低い"
 msgid "Report check result by mail"
 msgstr "確認結果をメールで報告"
 
-#: ../../standalone/drakgw:1
-#, c-format
-msgid "The DHCP start range"
-msgstr "DHCPのスタートレンジ"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Grenada"
 msgstr "グレナダ"
+
+#: ../../standalone/drakgw:1
+#, c-format
+msgid "The DHCP start range"
+msgstr "DHCPのスタートレンジ"
 
 #: ../../any.pm:1
 #, c-format
@@ -14666,22 +15088,11 @@ msgid ", %s sectors"
 msgstr ", %s セクタ"
 
 #: ../../help.pm:1 ../../install_any.pm:1 ../../interactive.pm:1
-#: ../../my_gtk.pm:1 ../../ugtk2.pm:1 ../../modules/interactive.pm:1
+#: ../../ugtk2.pm:1 ../../modules/interactive.pm:1
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "No"
 msgstr "いいえ"
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid ""
-"Is your printer a multi-function device from HP or Sony (OfficeJet, PSC, "
-"LaserJet 1100/1200/1220/3200/3300 with scanner, Sony IJP-V100), an HP "
-"PhotoSmart or an HP LaserJet 2200?"
-msgstr ""
-"お使いのプリンタは多機能デバイスですか？HPもしくはSony(スキャナつきの "
-"OfficeJet, PSC, LaserJet 1100/1200/1220/3200/3300, Sony IJP-V100), HP "
-"PhotoSmart もしくは HP LaserJet 2200"
 
 #: ../../lang.pm:1
 #, c-format
@@ -14748,15 +15159,15 @@ msgstr "Netwareプリンタのオプション"
 msgid "%s BootSplash (%s) preview"
 msgstr "%s 起動スプラッシュ(%s)のプレビュー"
 
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "February"
+msgstr "2 月"
+
 #: ../../standalone/drakfloppy:1
 #, c-format
 msgid "General"
 msgstr "一般"
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "Printing system: "
-msgstr "印刷システム:"
 
 #: ../../security/l10n.pm:1
 #, c-format
@@ -14773,6 +15184,16 @@ msgstr "ユーザを追加"
 msgid "Network configuration (%d adapters)"
 msgstr "ネットワークの設定(%d アダプタ)"
 
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "April"
+msgstr "4 月"
+
+#: ../../standalone/drakconnect:1
+#, fuzzy, c-format
+msgid "Deactivate now"
+msgstr "いますぐ無効に"
+
 #: ../../any.pm:1 ../../install_any.pm:1 ../../standalone.pm:1
 #, c-format
 msgid "Mandatory package %s is missing"
@@ -14783,7 +15204,7 @@ msgstr "必要なパッケージ %s がありません"
 msgid "Philippines"
 msgstr "フィリピン"
 
-#: ../../interactive.pm:1 ../../my_gtk.pm:1 ../../ugtk2.pm:1
+#: ../../interactive.pm:1 ../../ugtk2.pm:1
 #: ../../Xconfig/resolution_and_depth.pm:1 ../../interactive/gtk.pm:1
 #: ../../interactive/http.pm:1 ../../interactive/newt.pm:1
 #: ../../interactive/stdio.pm:1 ../../standalone/drakbackup:1
@@ -14794,6 +15215,11 @@ msgstr "フィリピン"
 #, c-format
 msgid "Ok"
 msgstr "OK"
+
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid "drakTermServ Overview"
+msgstr ""
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -15014,6 +15440,11 @@ msgstr "ループバックを使用"
 msgid "Mandrake Bug Report Tool"
 msgstr "Mandrakeバグ報告ツール"
 
+#: ../../standalone/printerdrake:1
+#, c-format
+msgid "Apply filter"
+msgstr "フィルタを適用"
+
 #: ../../network/adsl.pm:1
 #, c-format
 msgid "use pppoe"
@@ -15044,11 +15475,6 @@ msgstr "変換"
 msgid "Dvorak (Swedish)"
 msgstr "Dvorak(スウェーデン)"
 
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "More Options"
-msgstr "その他のオプション"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Afghanistan"
@@ -15056,8 +15482,18 @@ msgstr "アフガニスタン"
 
 #: ../../standalone/drakbackup:1
 #, c-format
+msgid "More Options"
+msgstr "その他のオプション"
+
+#: ../../standalone/drakbackup:1
+#, c-format
 msgid "Delete Hard Drive tar files after backup to other media."
 msgstr "他のメディアにバックアップしたらハードドライブのtarファイルを削除"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Burundi"
+msgstr "ブルンジ"
 
 #: ../../services.pm:1
 #, c-format
@@ -15070,11 +15506,6 @@ msgstr ""
 "cronはUNIX標準のプログラムで、ユーザが指定したプログラムを定期的に\n"
 "実行します。vixie cronは標準のUNIX cronに高度なセキュリティや\n"
 "強力な設定オプションなどの機能を追加しています。"
-
-#: ../../lang.pm:1
-#, c-format
-msgid "Burundi"
-msgstr "ブルンジ"
 
 #: ../../standalone/drakTermServ:1
 #, c-format
@@ -15132,15 +15563,22 @@ msgstr "GID設定"
 msgid "The encryption keys do not match"
 msgstr "暗号鍵が一致しません"
 
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid ""
+"For a multisession CD, only the first session will erase the cdrw. Otherwise "
+"the cdrw is erased before each backup."
+msgstr ""
+
+#: ../../printer/main.pm:1
+#, fuzzy, c-format
+msgid "USB printer"
+msgstr ", USB printer"
+
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Right \"Windows\" key"
 msgstr "右側のWindowsキー"
-
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "CDROM / DVDROM"
-msgstr "CDROM/DVDROM"
 
 #: ../../security/help.pm:1
 #, c-format
@@ -15224,6 +15662,11 @@ msgstr "TB"
 msgid "FATAL"
 msgstr "致命的"
 
+#: ../../standalone/printerdrake:1
+#, c-format
+msgid "Refresh the list"
+msgstr "リストを更新"
+
 #: ../../standalone/drakpxe:1
 #, c-format
 msgid ""
@@ -15240,7 +15683,7 @@ msgstr ""
 "\n"
 
 #: ../../diskdrake/hd_gtk.pm:1 ../../diskdrake/interactive.pm:1
-#: ../../standalone/drakperm:1
+#: ../../standalone/drakperm:1 ../../standalone/printerdrake:1
 #, c-format
 msgid "Delete"
 msgstr "削除"
@@ -15294,6 +15737,14 @@ msgstr "ヨーロッパのプロトコル"
 #, c-format
 msgid ", printer \"%s\" on server \"%s\""
 msgstr ", printer \"%s\" on server \"%s\""
+
+#: ../../standalone/drakbackup:1
+#, fuzzy, c-format
+msgid "Note that currently all 'net' media also use the hard drive."
+msgstr ""
+"サービスにcronデーモンがあることを確認してください.\n"
+"\n"
+"注意: 現在すべてのネットメディアはハードドライブを使います。"
 
 #: ../../fsedit.pm:1 ../../install_steps_interactive.pm:1
 #: ../../install_steps.pm:1 ../../diskdrake/dav.pm:1
@@ -15420,6 +15871,11 @@ msgstr "デバイス"
 msgid "Enter the directory to save to:"
 msgstr "保存先のディレクトリを入力してください:"
 
+#: ../../crypto.pm:1 ../../lang.pm:1
+#, c-format
+msgid "Greece"
+msgstr "ギリシャ"
+
 #: ../../install_steps_interactive.pm:1 ../../standalone/drakxtv:1
 #, c-format
 msgid "All"
@@ -15430,10 +15886,15 @@ msgstr "全て"
 msgid "Which printing system (spooler) do you want to use?"
 msgstr "どの印刷システム(スプーラ)を使いますか？"
 
-#: ../../crypto.pm:1 ../../lang.pm:1
+#: ../../standalone/drakbackup:1
 #, c-format
-msgid "Greece"
-msgstr "ギリシャ"
+msgid "July"
+msgstr "7 月"
+
+#: ../../printer/main.pm:1
+#, fuzzy, c-format
+msgid "Prints into %s"
+msgstr ", printing to %s"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -15510,6 +15971,11 @@ msgstr "NetWareサーバのプリンタ"
 msgid "Give the ram size in MB"
 msgstr "RAMのサイズをMBで入力"
 
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "Friday"
+msgstr "金曜日"
+
 #: ../../standalone/net_monitor:1
 #, c-format
 msgid "Disconnection from Internet complete."
@@ -15571,6 +16037,11 @@ msgstr "%s が %s で見つかりません"
 msgid "Japanese 106 keys"
 msgstr "日本語106キーボード"
 
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "Could not install the packages needed to share your scanner(s)."
+msgstr ""
+
 #: ../../standalone/drakTermServ:1
 #, c-format
 msgid "This will take a few minutes."
@@ -15580,6 +16051,11 @@ msgstr "数分かかります。"
 #, c-format
 msgid "Burkina Faso"
 msgstr "ブルキナファソ"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "June"
+msgstr "6 月"
 
 #: ../../standalone/scannerdrake:1
 #, c-format
@@ -15635,6 +16111,18 @@ msgstr ", multi-function device"
 #, c-format
 msgid "Laos"
 msgstr "ラオス"
+
+#: ../../share/advertising/04-configuration.pl:1
+#, c-format
+msgid ""
+"Mandrake Linux 9.2 provides you with the Mandrake Control Center, a powerful "
+"tool to fully adapt your computer to the use you make of it. Configure and "
+"customize elements such as the security level, the peripherals (screen, "
+"mouse, keyboard...), the Internet connection and much more!"
+msgstr ""
+"Mandrake Linux 9.2にはMandrakeコントロールセンタがあります。これは用途に合わ"
+"せてコンピュータを設定する強力なツールです。セキュリティ水準や周辺機器(画面,"
+"マウス,キーボードなど)、インターネットなどを設定することができます。"
 
 #: ../../security/help.pm:1
 #, c-format
@@ -15699,6 +16187,11 @@ msgstr ""
 #, c-format
 msgid "Saint Pierre and Miquelon"
 msgstr "セントピエールとミケロン"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "September"
+msgstr "9 月"
 
 #: ../../standalone/draksplash:1
 #, c-format
@@ -15819,7 +16312,7 @@ msgstr "単一NICを構築 -->"
 msgid "Marshall Islands"
 msgstr "マーシャル諸島"
 
-#: ../../my_gtk.pm:1 ../../ugtk2.pm:1
+#: ../../ugtk2.pm:1
 #, c-format
 msgid "Is this correct?"
 msgstr "正しいですか？"
@@ -15890,10 +16383,20 @@ msgstr "IPサーバがありません"
 msgid "Suriname"
 msgstr "スリナム"
 
+#: ../../network/adsl.pm:1
+#, fuzzy, c-format
+msgid "Use a floppy"
+msgstr "フロッピーに保存"
+
 #: ../../any.pm:1
 #, c-format
 msgid "Enable ACPI"
 msgstr "ACPIを許可する"
+
+#: ../../fs.pm:1
+#, c-format
+msgid "Give write access to ordinary users"
+msgstr ""
 
 #: ../../help.pm:1
 #, c-format
@@ -15904,11 +16407,6 @@ msgstr "グラフィカル環境"
 #, c-format
 msgid "Gibraltar"
 msgstr "ジブラルタル"
-
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "on Tape Device"
-msgstr "テープデバイスへ"
 
 #: ../../network/modem.pm:1
 #, c-format
@@ -15950,6 +16448,7 @@ msgstr "セキュリティの最適化"
 #: ../../interactive/gtk.pm:1 ../../standalone/drakTermServ:1
 #: ../../standalone/drakbackup:1 ../../standalone/drakbug:1
 #: ../../standalone/drakconnect:1 ../../standalone/drakfont:1
+#: ../../standalone/drakperm:1 ../../standalone/draksec:1
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "Help"
@@ -16023,6 +16522,11 @@ msgstr ""
 msgid "SMB (Windows 9x/NT) Printer Options"
 msgstr "SMB(Windows9x/NT)プリンタのオプション"
 
+#: ../../printer/main.pm:1
+#, c-format
+msgid "URI: %s"
+msgstr ""
+
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "Valid user list changed, rewriting config file."
@@ -16047,15 +16551,15 @@ msgstr ""
 msgid "Protocol for the rest of the world"
 msgstr "その他のプロトコル"
 
-#: ../../security/l10n.pm:1
-#, c-format
-msgid "Password minimum length and number of digit and upcase letters"
-msgstr "パスワードの最小文字数と数字/大文字の数"
-
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Print test pages"
 msgstr "テストページの印刷"
+
+#: ../../standalone/drakconnect:1
+#, fuzzy, c-format
+msgid "Activate now"
+msgstr "いますぐ有効に"
 
 #: ../../Xconfig/card.pm:1
 #, c-format
@@ -16160,6 +16664,11 @@ msgstr "XFSを再起動"
 msgid "Add host/network"
 msgstr "ホスト/ネットワークを追加"
 
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "Scannerdrake will not be started now."
+msgstr ""
+
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "Model name"
@@ -16170,11 +16679,6 @@ msgstr "モデル名"
 msgid "Albania"
 msgstr "アルバニア"
 
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "No CDR/DVDR in drive!"
-msgstr "CD-R/DVD-Rがドライブにありません"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "British Indian Ocean Territory"
@@ -16184,6 +16688,11 @@ msgstr "インド洋イギリス領"
 #, c-format
 msgid "Normal Mode"
 msgstr "ノーマルモード"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "No CD-R/DVD-R in drive!"
+msgstr "CD-R/DVD-Rがドライブにありません"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -16306,6 +16815,11 @@ msgstr "他のマルチメディアデバイス"
 msgid "burner"
 msgstr "ライタ"
 
+#: ../../standalone/drakbackup:1
+#, fuzzy, c-format
+msgid " (Default is all users)"
+msgstr "デフォルトのユーザ"
+
 #: ../../printer/printerdrake.pm:1 ../../standalone/scannerdrake:1
 #, c-format
 msgid "No remote machines"
@@ -16353,6 +16867,11 @@ msgstr "コマンドラインオプションを制限するにはパスワード
 msgid "Internet Connection Sharing currently enabled"
 msgstr "インターネット接続の共有は現在有効です"
 
+#: ../../lang.pm:1
+#, c-format
+msgid "United Arab Emirates"
+msgstr "アラブ首長国連邦"
+
 #: ../../network/tools.pm:1 ../../standalone/drakconnect:1
 #, c-format
 msgid "Card IO_0"
@@ -16365,11 +16884,6 @@ msgstr "ローカル設定を無効"
 
 #: ../../lang.pm:1
 #, c-format
-msgid "United Arab Emirates"
-msgstr "アラブ首長国連邦"
-
-#: ../../lang.pm:1
-#, c-format
 msgid "Thailand"
 msgstr "タイ"
 
@@ -16377,6 +16891,11 @@ msgstr "タイ"
 #, c-format
 msgid "Card IO_1"
 msgstr "カード IO_1"
+
+#: ../../standalone/printerdrake:1
+#, fuzzy, c-format
+msgid "Search:"
+msgstr "検索"
 
 #: ../../lang.pm:1
 #, c-format
@@ -16403,75 +16922,30 @@ msgstr "利用可能なリモートCUPSプリンタをすべて表示"
 msgid "Mandrake Linux Installation %s"
 msgstr "Mandrake Linuxのインストール %s"
 
+#: ../../harddrake/sound.pm:1
+#, c-format
+msgid "Unknown driver"
+msgstr "不明なドライバ"
+
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Thai keyboard"
 msgstr "タイ式キーボード"
-
-#: ../../network/modem.pm:1
-#, c-format
-msgid "Dialup options"
-msgstr "ダイアルアップのオプション"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Bouvet Island"
 msgstr "ブーヴェ島"
 
+#: ../../network/modem.pm:1
+#, c-format
+msgid "Dialup options"
+msgstr "ダイアルアップのオプション"
+
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "If no port is given, 631 will be taken as default."
 msgstr "ポート番号を指定しない場合は631がデフォルトになります。"
-
-#: ../../standalone/draksec:1
-#, c-format
-msgid ""
-"Here, you can setup the security level and administrator of your machine.\n"
-"\n"
-"\n"
-"The Security Administrator is the one who will receive security alerts if "
-"the\n"
-"'Security Alerts' option is set. It can be a username or an email.\n"
-"\n"
-"\n"
-"The Security Level menu enable to select one of the six preconfigured "
-"security\n"
-"provided with msec. These levels range from poor security and ease of use, "
-"to\n"
-"paranoid config, suitable for very sensitive server applications:\n"
-"\n"
-"\n"
-"<span foreground=\"royalblue3\">Poor</span>: This is a totally unsafe but "
-"very\n"
-"easy to use security level. It should only be used for machines not "
-"connected to\n"
-"any network and that are not accessible to everybody.\n"
-"\n"
-"\n"
-"<span foreground=\"royalblue3\">Standard</span>: This is the standard "
-"security\n"
-"recommended for a computer that will be used to connect to the Internet as "
-"a\n"
-"client.\n"
-"\n"
-"\n"
-"<span foreground=\"royalblue3\">High</span>: There are already some\n"
-"restrictions, and more automatic checks are run every night.\n"
-"\n"
-"\n"
-"<span foreground=\"royalblue3\">Higher</span>: The security is now high "
-"enough\n"
-"to use the system as a server which can accept connections from many "
-"clients. If\n"
-"your machine is only a client on the Internet, you should choose a lower "
-"level.\n"
-"\n"
-"\n"
-"<span foreground=\"royalblue3\">Paranoid</span>: This is similar to the "
-"previous\n"
-"level, but the system is entirely closed and security features are at their\n"
-"maximum"
-msgstr ""
 
 #: ../../install_steps_gtk.pm:1 ../../install_steps_interactive.pm:1
 #, c-format
@@ -16501,6 +16975,11 @@ msgstr "Mandrakeオンライン"
 msgid "\t-Network by webdav.\n"
 msgstr "\t-webdavネットワーク\n"
 
+#: ../../printer/main.pm:1
+#, fuzzy, c-format
+msgid ", multi-function device on a parallel port"
+msgstr ", multi-function device on parallel port #%s"
+
 #: ../../standalone/drakgw:1 ../../standalone/drakpxe:1
 #, c-format
 msgid ""
@@ -16523,13 +17002,13 @@ msgstr "ハードドライブがありません"
 
 #: ../../mouse.pm:1
 #, c-format
-msgid "Logitech CC Series"
-msgstr "Logitech CC Series"
+msgid "2 buttons"
+msgstr "２ボタン"
 
 #: ../../mouse.pm:1
 #, c-format
-msgid "2 buttons"
-msgstr "２ボタン"
+msgid "Logitech CC Series"
+msgstr "Logitech CC Series"
 
 #: ../../network/isdn.pm:1
 #, c-format
@@ -16550,6 +17029,11 @@ msgstr "フロッピーに保存"
 #, c-format
 msgid "Check open ports"
 msgstr "オープンポートを確認"
+
+#: ../../standalone/printerdrake:1
+#, fuzzy, c-format
+msgid "Edit selected printer"
+msgstr "選んだサーバを編集"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -16685,7 +17169,7 @@ msgstr ""
 " (パラレルポート: /dev/lp0, /dev/lp1, .., が LPT1:, LPT2:, .., １台目のUSBプ"
 "リンタ: /dev/usb/lp0, ２台目のUSBプリンタ: /dev/usb/lp1, ..)"
 
-#: ../../network/netconnect.pm:1
+#: ../../network/adsl.pm:1 ../../network/netconnect.pm:1
 #, c-format
 msgid "Next"
 msgstr "次へ"
@@ -16760,6 +17244,11 @@ msgstr "アングィラ島"
 msgid "NIS Domain"
 msgstr "NISドメイン"
 
+#: ../../lang.pm:1
+#, c-format
+msgid "Antarctica"
+msgstr "アンタルチカ"
+
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid ""
@@ -16768,11 +17257,6 @@ msgid ""
 msgstr ""
 "\n"
 "- ユーザファイル:\n"
-
-#: ../../lang.pm:1
-#, c-format
-msgid "Antarctica"
-msgstr "アンタルチカ"
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -16848,6 +17332,11 @@ msgstr "LPDとLPRngはIPPプリンタをサポートしません。\n"
 msgid "Host name or IP."
 msgstr "ホスト名:"
 
+#: ../../standalone/printerdrake:1
+#, c-format
+msgid "/_Edit"
+msgstr "/編集(_E)"
+
 #: ../../fsedit.pm:1
 #, c-format
 msgid "simple"
@@ -16863,20 +17352,25 @@ msgstr "全てをクリア"
 msgid "No test pages"
 msgstr "テストしない"
 
-#: ../../standalone/drakconnect:1
-#, c-format
-msgid "Adapter %s: %s"
-msgstr "アダプタ %s: %s"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Falkland Islands (Malvinas)"
 msgstr "フォークランド諸島(Malvinas)"
 
+#: ../../standalone/drakconnect:1
+#, c-format
+msgid "Adapter %s: %s"
+msgstr "アダプタ %s: %s"
+
 #: ../../standalone/drakfloppy:1
 #, fuzzy, c-format
 msgid "Boot disk creation"
 msgstr "起動ディスクの作成"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "Monday"
+msgstr "月曜日"
 
 #: ../../printer/main.pm:1 ../../printer/printerdrake.pm:1
 #, c-format
@@ -16900,6 +17394,7 @@ msgstr "今すぐパックアップ"
 
 #: ../../standalone/drakboot:1 ../../standalone/drakfloppy:1
 #: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
+#: ../../standalone/printerdrake:1
 #, c-format
 msgid "/_File"
 msgstr "/ファイル(_F)"
@@ -16917,6 +17412,11 @@ msgid ""
 msgstr ""
 "カーネル2.2のパケットフィルタを起動します。これはネットワーク攻撃から\n"
 "マシンを守るためファイアウォールを設定します。"
+
+#: ../../standalone/drakperm:1
+#, fuzzy, c-format
+msgid "Editable"
+msgstr "無効に"
 
 #: ../../network/ethernet.pm:1
 #, c-format
@@ -17046,7 +17546,7 @@ msgstr "テレビチャンネルをスキャン"
 msgid "Kernel:"
 msgstr "カーネル: "
 
-#: ../../standalone/harddrake2:1
+#: ../../standalone/harddrake2:1 ../../standalone/printerdrake:1
 #, c-format
 msgid "/_About..."
 msgstr "/情報(_A)"
@@ -17111,6 +17611,11 @@ msgstr "プリンタ名には文字と数字とアンダースコア(_)しか使
 msgid "Show current interface configuration"
 msgstr "現在のインタフェースの設定を表示"
 
+#: ../../standalone/printerdrake:1
+#, fuzzy, c-format
+msgid "Add Printer"
+msgstr "プリンタ"
+
 #: ../../security/help.pm:1
 #, c-format
 msgid ""
@@ -17139,15 +17644,15 @@ msgstr "終了"
 msgid "Web Server"
 msgstr "Webサーバ"
 
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "\tDo not include System Files\n"
-msgstr "\tシステムファイルは含まない\n"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Chile"
 msgstr "チリ"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "\tDo not include System Files\n"
+msgstr "\tシステムファイルは含まない\n"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -17386,6 +17891,11 @@ msgstr "フロッピーからロード"
 msgid "The following printer was auto-detected. "
 msgstr "以下のプリンタが自動的に検出されました。"
 
+#: ../../printer/main.pm:1
+#, fuzzy, c-format
+msgid "Uses command %s"
+msgstr ", using command %s"
+
 #: ../../standalone/drakTermServ:1
 #, c-format
 msgid "Boot Floppy"
@@ -17423,6 +17933,11 @@ msgstr "起動スプラッシュの画像を設定"
 
 #: ../../lang.pm:1
 #, c-format
+msgid "Georgia"
+msgstr "ジョージア"
+
+#: ../../lang.pm:1
+#, c-format
 msgid "China"
 msgstr "中国"
 
@@ -17430,11 +17945,6 @@ msgstr "中国"
 #, c-format
 msgid " (Make sure that all your printers are connected and turned on).\n"
 msgstr "(すべてのプリンタを接続して電源を入れてください)。\n"
-
-#: ../../lang.pm:1
-#, c-format
-msgid "Georgia"
-msgstr "ジョージア"
 
 #: ../../standalone/printerdrake:1
 #, c-format
@@ -17506,10 +18016,20 @@ msgstr "ディスプレイマネージャを選んでください"
 msgid "Zeroconf Host name"
 msgstr "Zeroconfホスト名"
 
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "Custom setup/crontab entry:"
+msgstr ""
+
 #: ../../network/network.pm:1 ../../printer/printerdrake.pm:1
 #, c-format
 msgid "IP address should be in format 1.2.3.4"
 msgstr "IPアドレスは 1.2.3.4 のように入力してください"
+
+#: ../../standalone/printerdrake:1
+#, fuzzy, c-format
+msgid "Configure CUPS printing system"
+msgstr "印刷システムを変更"
 
 #: ../../lang.pm:1
 #, c-format
@@ -17577,15 +18097,15 @@ msgstr "アゼルバイジャン(ラテン)"
 msgid "Package not installed"
 msgstr "インストールされていません"
 
-#: ../../share/advertising/12-mdkexpert.pl:1
-#, c-format
-msgid "Become a MandrakeExpert"
-msgstr "MandrakeExpertのメンバーになる"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "American Samoa"
 msgstr "サモア(アメリカ)"
+
+#: ../../share/advertising/12-mdkexpert.pl:1
+#, c-format
+msgid "Become a MandrakeExpert"
+msgstr "MandrakeExpertのメンバーになる"
 
 #: ../../standalone/drakconnect:1
 #, c-format
@@ -17657,8 +18177,9 @@ msgstr "メディアの消去にはしばらく時間がかかります。"
 msgid "You can't select/unselect this package"
 msgstr "このパッケージを選択/選択を解除することはできません"
 
-#: ../../diskdrake/interactive.pm:1 ../../harddrake/sound.pm:1
-#: ../../network/modem.pm:1 ../../standalone/drakfloppy:1
+#: ../../keyboard.pm:1 ../../diskdrake/interactive.pm:1
+#: ../../harddrake/sound.pm:1 ../../network/modem.pm:1
+#: ../../standalone/drakfloppy:1
 #, c-format
 msgid "Warning"
 msgstr "警告"
@@ -17677,11 +18198,6 @@ msgstr ""
 msgid "Remote host name"
 msgstr "リモートホスト名"
 
-#: ../../standalone/drakconnect:1
-#, c-format
-msgid "deactivate now"
-msgstr "いますぐ無効に"
-
 #: ../../any.pm:1
 #, c-format
 msgid "access to X programs"
@@ -17691,6 +18207,11 @@ msgstr "Xプログラムへのアクセス"
 #, c-format
 msgid "Computing the size of the Windows partition"
 msgstr "Windowsパーティションのサイズを計算"
+
+#: ../../standalone/printerdrake:1
+#, c-format
+msgid "/_Refresh"
+msgstr "/更新(_R)"
 
 #: ../../crypto.pm:1 ../../lang.pm:1 ../../network/tools.pm:1
 #: ../../standalone/drakxtv:1
@@ -17764,6 +18285,11 @@ msgstr "Zip"
 msgid "Left Alt key"
 msgstr "左側のAltキー"
 
+#: ../../standalone/logdrake:1
+#, fuzzy, c-format
+msgid "Load setting"
+msgstr "負荷の設定"
+
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid ""
@@ -17776,6 +18302,11 @@ msgstr ""
 "\n"
 "Printerdrakeはお使いのプリンタ %s の機種を検出できませんでした。リストの中か"
 "ら正しい機種を選択してください。"
+
+#: ../../standalone/printerdrake:1
+#, fuzzy, c-format
+msgid "Set selected printer as the default printer"
+msgstr "このプリンタをデフォルトにする"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -17952,6 +18483,11 @@ msgstr " ADSL"
 msgid "format of floppies supported by the drive"
 msgstr "ドライブがサポートしているフロッピーの形式"
 
+#: ../../network/adsl.pm:1
+#, c-format
+msgid "Firmware copy failed, file %s not found"
+msgstr ""
+
 #: ../../raid.pm:1
 #, c-format
 msgid "Not enough partitions for RAID level %d\n"
@@ -18043,6 +18579,7 @@ msgid "Georgian (\"Russian\" layout)"
 msgstr "グルジア(ロシア配列)"
 
 #: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
+#: ../../standalone/printerdrake:1
 #, c-format
 msgid "/_Options"
 msgstr "/オプション(_O)"
@@ -18399,6 +18936,11 @@ msgstr ""
 "Linuxconfはシステム設定を維持するため起動時に\n"
 "多様な処理を行うことがあります。"
 
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "DVD-R device"
+msgstr "DVDRデバイス"
+
 #: ../../printer/main.pm:1 ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Printer on remote lpd server"
@@ -18484,10 +19026,10 @@ msgstr ""
 " * Default OS: you can select which OS will boot by default when the Open\n"
 "Firmware Delay expires."
 
-#: ../../mouse.pm:1
+#: ../../standalone/drakbackup:1
 #, c-format
-msgid "No mouse"
-msgstr "マウスなし"
+msgid "Wednesday"
+msgstr "水曜日"
 
 #: ../../crypto.pm:1 ../../lang.pm:1
 #, c-format
@@ -18498,6 +19040,11 @@ msgstr "ドイツ"
 #, c-format
 msgid "Austria"
 msgstr "オーストリア"
+
+#: ../../mouse.pm:1
+#, c-format
+msgid "No mouse"
+msgstr "マウスなし"
 
 #: ../../standalone/drakbackup:1
 #, fuzzy, c-format
@@ -18514,7 +19061,7 @@ msgstr "ユーザのhomeでのファイルの権限を確認"
 msgid "Run \"sndconfig\" after installation to configure your sound card"
 msgstr "インストール後にsndconfigを実行してサウンドカードを設定してください。"
 
-#: ../../my_gtk.pm:1 ../../ugtk2.pm:1
+#: ../../ugtk2.pm:1
 #, c-format
 msgid "Collapse Tree"
 msgstr "ツリーを縮める"
@@ -18590,10 +19137,10 @@ msgstr ""
 msgid "The %s is not supported by this version of Mandrake Linux."
 msgstr "%s はこのバージョンのMandrake Linuxではサポートしていません"
 
-#: ../../standalone/drakperm:1
-#, c-format
-msgid "Level 1"
-msgstr "レベル 1"
+#: ../../standalone/drakbackup:1
+#, fuzzy, c-format
+msgid "tape"
+msgstr "テープ"
 
 #: ../../standalone/drakconnect:1
 #, c-format
@@ -18605,35 +19152,32 @@ msgstr "DHCPクライアント"
 msgid "List users on display managers (kdm and gdm)"
 msgstr "ディスプレイマネージャ(kdmとgdm)にユーザを表示"
 
-#: ../../standalone/drakperm:1
+#: ../../mouse.pm:1
 #, c-format
-msgid "Level 2"
-msgstr "レベル 2"
+msgid "Logitech Mouse (serial, old C7 type)"
+msgstr "Logitech Mouse (serial, old C7 type)"
 
 #: ../../partition_table.pm:1
 #, c-format
 msgid "Restoring from file %s failed: %s"
 msgstr "ファイル %s からの復元は失敗しました: %s"
 
-#: ../../mouse.pm:1
+#: ../../fsedit.pm:1
 #, c-format
-msgid "Logitech Mouse (serial, old C7 type)"
-msgstr "Logitech Mouse (serial, old C7 type)"
-
-#: ../../standalone/drakperm:1
-#, c-format
-msgid "Level 3"
-msgstr "レベル 3"
-
-#: ../../standalone/drakperm:1
-#, c-format
-msgid "Level 4"
-msgstr "レベル 4"
-
-#: ../../standalone/drakperm:1
-#, c-format
-msgid "Level 5"
-msgstr "レベル 5"
+msgid ""
+"I can't read the partition table of device %s, it's too corrupted for me :(\n"
+"I can try to go on, erasing over bad partitions (ALL DATA will be lost!).\n"
+"The other solution is to not allow DrakX to modify the partition table.\n"
+"(the error is %s)\n"
+"\n"
+"Do you agree to lose all the partitions?\n"
+msgstr ""
+"%sデバイスのパーティションテーブルを読めません。壊れているようです。\n"
+"不正なパーティションを消せば続行できます(全データが消失します)。\n"
+"DrakXにパーティションテーブルを変更させないこともできます。\n"
+"(エラーは%sです)\n"
+"\n"
+"全パーティションを消去しますか？\n"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -18665,11 +19209,6 @@ msgstr "自動的に時間を合わせる"
 msgid "Backup files not found at %s."
 msgstr "%s にバックアップファイルがありません"
 
-#: ../../share/advertising/01-thanks.pl:1
-#, c-format
-msgid "Thank you for choosing Mandrake Linux 9.1"
-msgstr "Mandrake Linux 9.1をお選びいただきありがとうございます"
-
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Armenian (phonetic)"
@@ -18684,6 +19223,11 @@ msgstr "カードのモデル:"
 #, c-format
 msgid "Thin Client"
 msgstr "Thinクライアント"
+
+#: ../../share/advertising/01-thanks.pl:1
+#, c-format
+msgid "Thank you for choosing Mandrake Linux 9.2"
+msgstr "Mandrake Linux 9.2をお選びいただきありがとうございます"
 
 #: ../../standalone/drakTermServ:1
 #, c-format
@@ -18836,6 +19380,17 @@ msgstr "このホストは既にリストにあります。重複することは
 msgid ", USB printer"
 msgstr ", USB printer"
 
+#: ../../standalone/drakfloppy:1
+#, fuzzy, c-format
+msgid ""
+"Unable to properly close mkbootdisk:\n"
+"\n"
+"<span foreground=\"Red\"><tt>%s</tt></span>"
+msgstr ""
+"以下のmkbootdiskを適切に閉じられません: \n"
+" %s \n"
+" %s"
+
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid ""
@@ -18852,6 +19407,11 @@ msgstr "このフォントを使用するアプリケーションを選んでく
 #, c-format
 msgid "Configure X"
 msgstr "Xを設定"
+
+#: ../../standalone/drakbackup:1
+#, fuzzy, c-format
+msgid "hd"
+msgstr "チャド"
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -18969,6 +19529,11 @@ msgstr "ガンビア"
 msgid "Mandrake Control Center"
 msgstr "Mandrakeコントロールセンタ"
 
+#: ../../printer/main.pm:1
+#, fuzzy, c-format
+msgid "Multi-function device"
+msgstr ", multi-function device"
+
 #: ../../network/drakfirewall.pm:1
 #, c-format
 msgid ""
@@ -18979,21 +19544,6 @@ msgstr ""
 "各種のポートを入力できます。\n"
 "有効な例: 139/tcp 139/udp\n"
 "詳しくは /etc/services をご覧ください。"
-
-#: ../../help.pm:1
-#, c-format
-msgid ""
-"Monitor\n"
-"\n"
-"   The installer will normally automatically detect and configure the\n"
-"monitor connected to your machine. If it is correct, you can choose from\n"
-"this list the monitor you actually have connected to your computer."
-msgstr ""
-"モニタ\n"
-"\n"
-"普通はインストーラがお使いのマシンに接続しているモニタを\n"
-"自動的に検出して設定します。うまく行かないようでしたらモニタの\n"
-"リストの中から適切なものを選んでください。"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -19068,6 +19618,11 @@ msgstr "インストールするパッケージを選んでください"
 #, c-format
 msgid "Papua New Guinea"
 msgstr "パプアニューギニア"
+
+#: ../../printer/main.pm:1
+#, fuzzy, c-format
+msgid "Multi-function device on a parallel port"
+msgstr ", multi-function device on parallel port #%s"
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -19155,6 +19710,16 @@ msgid ""
 msgstr ""
 "lpdはプリンタデーモンで、lprの動作に必要です。基本的には\n"
 "プリンタに印刷ジョブを振り分けるサーバです。"
+
+#: ../../keyboard.pm:1
+#, c-format
+msgid "Irish"
+msgstr ""
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "Sunday"
+msgstr "日曜日"
 
 #: ../../standalone/drakconnect:1
 #, c-format
@@ -19248,6 +19813,12 @@ msgstr "RAIDディスク %s\n"
 msgid "Liberia"
 msgstr "リベリア"
 
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid ""
+"Could not install the packages needed to set up a scanner with Scannerdrake."
+msgstr ""
+
 #: ../../standalone/drakgw:1
 #, c-format
 msgid ""
@@ -19289,6 +19860,17 @@ msgstr "%s を実行中.."
 #, c-format
 msgid "enable radio support"
 msgstr "ラジオサポートを有効にする"
+
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"        - Per client /etc/X11/XF86Config-4\\$\\$IP-ADDRESS\\$\\$:\n"
+"        \t\tThrough clusternfs, each diskless client can have its own unique "
+"configuration files\n"
+"        \t\ton the root filesystem of the server. By allowing local client "
+"hardware configuration, \n"
+"        \t\tdrakTermServ will help create these files."
+msgstr ""
 
 #: ../../standalone/scannerdrake:1
 #, c-format
@@ -19452,6 +20034,11 @@ msgstr ""
 "CD-ROMドライブかCD-ROMに問題があります。\n"
 "rpm -qpl Mandrake/RPMS/*.rpm でCD-ROMをチェックしてください。\n"
 
+#: ../../share/advertising/06-development.pl:1
+#, c-format
+msgid "Mandrake Linux 9.2: the ultimate development platform"
+msgstr "Mandrake Linux 9.2は究極の開発用プラットフォームです"
+
 #: ../../standalone/scannerdrake:1
 #, c-format
 msgid "Detected model: %s"
@@ -19475,20 +20062,27 @@ msgstr "ログインマネージャを選んでください。"
 msgid "if set to yes, run the daily security checks."
 msgstr "「はい」にするとデイリーセキュリティチェックを実行します。"
 
-#: ../../standalone/drakbackup:1
-#, fuzzy, c-format
-msgid "Device name to use for backup"
-msgstr "バックアップ用デバイスの名前を入力してください"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Azerbaijan"
 msgstr "アゼルバイジャン"
 
 #: ../../standalone/drakbackup:1
+#, fuzzy, c-format
+msgid "Device name to use for backup"
+msgstr "バックアップ用デバイスの名前を入力してください"
+
+#: ../../standalone/drakbackup:1
 #, c-format
 msgid "No tape in %s!"
 msgstr "%s にテープがありません"
+
+#: ../../standalone/drakhelp:1
+#, c-format
+msgid ""
+" --doc <link>          - link to another web page ( for WM welcome "
+"frontend)\n"
+msgstr ""
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -19696,6 +20290,58 @@ msgstr "NFSサーバ,SMBサーバ,プロクシサーバ,SSHサーバ"
 #: ../../share/compssUsers:999
 msgid "Set of tools to read and send mail and news and to browse the Web"
 msgstr "メールとニュースの閲覧/送信ツールと、ウェブブラウズ用ツール"
+
+#~ msgid "-adobe-utopia-regular-r-*-*-25-*-*-*-p-*-iso8859-*,*-r-*"
+#~ msgstr ""
+#~ "adobe-times-bold-r-normal--17-*-100-100-p-*-iso8859-1,-*-fixed-medium-r-"
+#~ "normal--24-*-100-100-c-*-jisx0208.1983-0,*"
+
+#~ msgid "-adobe-times-bold-r-normal--17-*-100-100-p-*-iso8859-*,*-r-*"
+#~ msgstr ""
+#~ "adobe-times-bold-r-normal--17-*-100-100-p-*-iso8859-1,-*-fixed-medium-r-"
+#~ "normal--24-*-100-100-c-*-jisx0208.1983-0,*"
+
+#, fuzzy
+#~ msgid "Hostname configuration"
+#~ msgstr "システムを設定"
+
+#, fuzzy
+#~ msgid "Hostname"
+#~ msgstr "ホスト名:"
+
+#~ msgid "Remote Printers"
+#~ msgstr "リモートプリンタ"
+
+#~ msgid "Printing system: "
+#~ msgstr "印刷システム:"
+
+#~ msgid "Level 1"
+#~ msgstr "レベル 1"
+
+#~ msgid "Level 2"
+#~ msgstr "レベル 2"
+
+#~ msgid "Level 3"
+#~ msgstr "レベル 3"
+
+#~ msgid "Level 4"
+#~ msgstr "レベル 4"
+
+#~ msgid "Level 5"
+#~ msgstr "レベル 5"
+
+#, fuzzy
+#~ msgid "Insert floppy and press %s"
+#~ msgstr "フロッピーをドライブ %s に入れる"
+
+#~ msgid "Load"
+#~ msgstr "読み込み"
+
+#~ msgid "Bad Ip"
+#~ msgstr "不正なIp"
+
+#~ msgid "Output"
+#~ msgstr "出力"
 
 #~ msgid "Please relog into %s to activate the changes"
 #~ msgstr "変更を有効にするには %s に再ログインしてください"
@@ -21605,9 +22251,6 @@ msgstr "メールとニュースの閲覧/送信ツールと、ウェブブラ�
 #~ msgid "Internet connection & configuration"
 #~ msgstr "インターネット接続と設定"
 
-#~ msgid "Configure the connection"
-#~ msgstr "接続を設定"
-
 #~ msgid "Disconnect"
 #~ msgstr "切断"
 
@@ -21925,11 +22568,11 @@ msgstr "メールとニュースの閲覧/送信ツールと、ウェブブラ�
 #~ msgstr "ネットワークカードが見つかりません"
 
 #~ msgid ""
-#~ "Mandrake Linux 9.1 has selected the best software for you. Surf the Web "
+#~ "Mandrake Linux 9.2 has selected the best software for you. Surf the Web "
 #~ "and view animations with Mozilla and Konqueror, or read your mail and "
 #~ "handle your personal information with Evolution and Kmail"
 #~ msgstr ""
-#~ "Mandrake Linux 9.1 は最高のソフトを取りそろえています。ウェブをサーフし"
+#~ "Mandrake Linux 9.2 は最高のソフトを取りそろえています。ウェブをサーフし"
 #~ "て、動画を見るならMozilla と Konqueror があるし、メールの送受信と個人情報"
 #~ "管理はEvolution と Kmailが使えます。"
 
@@ -21943,17 +22586,17 @@ msgstr "メールとニュースの閲覧/送信ツールと、ウェブブラ�
 #~ msgstr "最新のグラフィック/マルチメディアツールをお楽しみください"
 
 #~ msgid ""
-#~ "Mandrake Linux 9.1 provides the best Open Source games - arcade, action, "
+#~ "Mandrake Linux 9.2 provides the best Open Source games - arcade, action, "
 #~ "strategy, ..."
 #~ msgstr ""
-#~ "Mandrake Linux 9.1 には、最高のオープンソースゲームがついてきます。アー"
+#~ "Mandrake Linux 9.2 には、最高のオープンソースゲームがついてきます。アー"
 #~ "ケード型、アクション型、カードゲーム、スポーツ、戦略ゲーム.."
 
 #~ msgid ""
-#~ "Mandrake Linux 9.1 provides a powerful tool to fully customize and "
+#~ "Mandrake Linux 9.2 provides a powerful tool to fully customize and "
 #~ "configure your machine"
 #~ msgstr ""
-#~ "Mandrake Linux 9.1 コントロールセンタは、Mandrake システムのカスタマイズと"
+#~ "Mandrake Linux 9.2 コントロールセンタは、Mandrake システムのカスタマイズと"
 #~ "設定のためのワンストップパネル集です。"
 
 #~ msgid "User interfaces"

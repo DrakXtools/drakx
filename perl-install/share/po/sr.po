@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX\n"
-"POT-Creation-Date: 2003-08-13 03:40+0200\n"
+"POT-Creation-Date: 2003-09-09 17:07+0200\n"
 "PO-Revision-Date: 2003-02-28 18:21+0100\n"
 "Last-Translator: Toma Jankovic <tomaja@net.yu>\n"
 "Language-Team: Serbian <i18n@mandrake.co.yu>\n"
@@ -60,6 +60,11 @@ msgstr "порт мрежног штампача"
 msgid "Please insert floppy disk:"
 msgstr "Убаците дискету:"
 
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid "DrakTermServ"
+msgstr ""
+
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "PCMCIA"
@@ -88,6 +93,11 @@ msgstr "Коју врсту уносa додаjетe ?"
 #, c-format
 msgid "Restore partition table"
 msgstr "Обнови табелу партиција"
+
+#: ../../standalone/drakconnect:1
+#, fuzzy, c-format
+msgid "Configure hostname..."
+msgstr "Подешавање миша"
 
 #: ../../printer/cups.pm:1
 #, c-format
@@ -203,11 +213,6 @@ msgstr "Интерфеjс:"
 msgid "Select installation class"
 msgstr "Изаберите инст.класу"
 
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "on CDROM"
-msgstr "на ЦД уређају"
-
 #: ../../network/tools.pm:1
 #, c-format
 msgid ""
@@ -270,6 +275,11 @@ msgstr "Слeдeћи пакети треба да буду инсталирани"
 #, c-format
 msgid "CUPS configuration"
 msgstr "CUPS конфигурација"
+
+#: ../../standalone/drakbackup:1
+#, fuzzy, c-format
+msgid "Total progress"
+msgstr "Укупан напредак"
 
 #: ../../lang.pm:1
 #, c-format
@@ -423,6 +433,11 @@ msgstr "Мрежа мора да се рестартује. Да ли желите да је рестартујете ?"
 msgid "Swiss (French layout)"
 msgstr "Швајцарски (Француски  распоред)"
 
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "August"
+msgstr "Август"
+
 #: ../../raid.pm:1
 #, c-format
 msgid "mkraid failed (maybe raidtools are missing?)"
@@ -442,6 +457,11 @@ msgstr "Величина (други ниво) процесорског кеша"
 #, c-format
 msgid "Soundcard"
 msgstr "Звучна картицa"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "Month"
+msgstr "Месец"
 
 #: ../../standalone/drakbackup:1
 #, fuzzy, c-format
@@ -593,6 +613,11 @@ msgstr "Корисничко име"
 msgid "Left \"Windows\" key"
 msgstr "Леви \"Windows\" тастер"
 
+#: ../../lang.pm:1
+#, c-format
+msgid "Guyana"
+msgstr "Гвајана"
+
 #: ../../standalone/drakTermServ:1
 #, c-format
 msgid "dhcpd Server Configuration"
@@ -607,15 +632,15 @@ msgstr ""
 "Коришћено з директоријум:\n"
 " само власник директоријума или фајла у овом директоријуму га може избрисати"
 
-#: ../../lang.pm:1
-#, c-format
-msgid "Guyana"
-msgstr "Гвајана"
-
 #: ../../printer/main.pm:1
 #, c-format
 msgid " on Novell server \"%s\", printer \"%s\""
 msgstr "на Novell серверу \"%s\", штампач \"%s\""
+
+#: ../../standalone/printerdrake:1
+#, fuzzy, c-format
+msgid "Printer Name"
+msgstr "Print Queue име:"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
@@ -1076,20 +1101,15 @@ msgstr ""
 
 #: ../../standalone/drakboot:1 ../../standalone/drakfloppy:1
 #: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
+#: ../../standalone/printerdrake:1
 #, c-format
 msgid "<control>Q"
 msgstr "<control>Q"
 
 #: ../../standalone/drakbackup:1
-#, c-format
-msgid ""
-"Please be sure that the cron daemon is included in your services. \n"
-"\n"
-"Note that currently all 'net' media also use the hard drive."
-msgstr ""
-"Проверите да ли је cron демон укључен у ваше сервисе. \n"
-"\n"
-"Можете приметити да сви 'net' медији такође користе хард диск."
+#, fuzzy, c-format
+msgid "Unable to find backups to restore...\n"
+msgstr "Изаберите податке за обнављање..."
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -1212,11 +1232,6 @@ msgstr "Модел stepping"
 msgid "Rwanda"
 msgstr "Руанда"
 
-#: ../../modules/interactive.pm:1
-#, c-format
-msgid "Do you have any %s interfaces?"
-msgstr "Имате ли још %s интерфејса?"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Switzerland"
@@ -1226,6 +1241,11 @@ msgstr "Швајцарска"
 #, c-format
 msgid "Brunei Darussalam"
 msgstr "Брунеји Darussalam"
+
+#: ../../modules/interactive.pm:1
+#, c-format
+msgid "Do you have any %s interfaces?"
+msgstr "Имате ли још %s интерфејса?"
 
 #: ../../standalone/drakTermServ:1
 #, fuzzy, c-format
@@ -1328,6 +1348,13 @@ msgstr ""
 msgid "Configure Internet Access..."
 msgstr "Подеси Интернет приступ..."
 
+#: ../../standalone/drakbackup:1
+#, fuzzy, c-format
+msgid "Please choose the time interval between each backup"
+msgstr ""
+"Изаберите временски интервал \n"
+"између сваког backup-а"
+
 #: ../../crypto.pm:1 ../../lang.pm:1
 #, c-format
 msgid "Norway"
@@ -1381,15 +1408,20 @@ msgstr ""
 msgid "When checked, owner and group won't be changed"
 msgstr "када је селектована, власник и група не могу бити промењени"
 
-#: ../../harddrake/data.pm:1
-#, c-format
-msgid "Processors"
-msgstr "Процесори"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Bulgaria"
 msgstr "Бугарска"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "Tuesday"
+msgstr "Уторак"
+
+#: ../../harddrake/data.pm:1
+#, c-format
+msgid "Processors"
+msgstr "Процесори"
 
 #: ../../lang.pm:1
 #, c-format
@@ -1422,15 +1454,15 @@ msgstr "партиција %s је сада позната као %s"
 msgid "Backup Other files..."
 msgstr "backup-овање осталих фајлова..."
 
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "SMB server IP"
-msgstr "SMB сервер IP:"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Congo (Kinshasa)"
 msgstr "Конго (Киншаса)"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "SMB server IP"
+msgstr "SMB сервер IP:"
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -1532,11 +1564,6 @@ msgstr "Користи Unicode по default-у"
 msgid "the module of the GNU/Linux kernel that handles the device"
 msgstr "модул GNU/Linux кернела који управља тим уређајем"
 
-#: ../../standalone/drakbackup:1
-#, fuzzy, c-format
-msgid "DVDR device"
-msgstr "урeђаj"
-
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid "Trying to rescue partition table"
@@ -1621,25 +1648,6 @@ msgstr "Кабловска конекциja"
 msgid "User"
 msgstr "Корисник"
 
-#: ../../fsedit.pm:1
-#, c-format
-msgid ""
-"I can't read the partition table of device %s, it's too corrupted for me :(\n"
-"I can try to go on, erasing over bad partitions (ALL DATA will be lost!).\n"
-"The other solution is to not allow DrakX to modify the partition table.\n"
-"(the error is %s)\n"
-"\n"
-"Do you agree to loose all the partitions?\n"
-msgstr ""
-"Не могу прочитати табелу партиција уређај %s , много је искварена за мене :"
-"(\n"
-"Покушаћу даље заобилазећи лоше партицијеМогу покушати да форматирам лоше "
-"партициje (СВИ ПОДАЦИ ће бити изгубљени !).\n"
-"Друго рeшeње jе да се DrakX онемогући да модуфикуje табелу партициja.\n"
-"(грeшка je %s)\n"
-"\n"
-"Да ли се пристајете да изгубите све партиције?\n"
-
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "Do new backup before restore (only for incremental backups.)"
@@ -1710,15 +1718,6 @@ msgstr "Име, опис и локација штампача"
 msgid "USA (broadcast)"
 msgstr "USA (broadcast)"
 
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid ""
-"Please choose the\n"
-"media for backup."
-msgstr ""
-"Изаберите\n"
-"медиј за backup."
-
 #: ../../Xconfig/card.pm:1
 #, c-format
 msgid "Use Xinerama extension"
@@ -1729,21 +1728,15 @@ msgstr "Користи Xinerama екстензиjу"
 msgid "Loopback"
 msgstr "Loopback"
 
-#: ../../standalone/drakfloppy:1
-#, c-format
-msgid ""
-"Unable to properly close mkbootdisk: \n"
-" %s \n"
-" %s"
-msgstr ""
-"Не могу коректно да затворим mkbootdisk: \n"
-" %s \n"
-" %s"
-
 #: ../../standalone/drakxtv:1
 #, c-format
 msgid "West Europe"
 msgstr "Западна Европа"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "On CD-R"
+msgstr "на ЦД уређају"
 
 #: ../../standalone.pm:1
 #, c-format
@@ -1777,6 +1770,11 @@ msgstr "Карактеристике: "
 msgid "Swaziland"
 msgstr "Свазиленд"
 
+#: ../../lang.pm:1
+#, c-format
+msgid "Dominican Republic"
+msgstr "Доминиканска Република"
+
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid "Copying %s"
@@ -1786,11 +1784,6 @@ msgstr "Копирање %s"
 #, c-format
 msgid "Choose color"
 msgstr "Изаберите боју"
-
-#: ../../lang.pm:1
-#, c-format
-msgid "Dominican Republic"
-msgstr "Доминиканска Република"
 
 #: ../../keyboard.pm:1
 #, fuzzy, c-format
@@ -2242,6 +2235,11 @@ msgstr ""
 "Оставите га непопуњеним уколико не желите да аутоматски инсталациони мод.\n"
 "\n"
 
+#: ../../printer/cups.pm:1 ../../standalone/printerdrake:1
+#, fuzzy, c-format
+msgid "Configured on other machines"
+msgstr "Подеси сервисе"
+
 #: ../../standalone/harddrake2:1
 #, fuzzy, c-format
 msgid "information level that can be obtained through the cpuid instruction"
@@ -2561,6 +2559,11 @@ msgstr ""
 msgid "Netmask:"
 msgstr "Мрежна маска:"
 
+#: ../../network/adsl.pm:1
+#, c-format
+msgid "Do it later"
+msgstr ""
+
 #: ../../any.pm:1
 #, c-format
 msgid "Append"
@@ -2600,40 +2603,6 @@ msgstr ""
 "\n"
 "Уколико вам неке од ових мера представљају проблем, искључите ову опцију, "
 "али ћете сами морати да подесите ове опције."
-
-#: ../../harddrake/sound.pm:1
-#, c-format
-msgid ""
-"OSS (Open Sound System) was the first sound API. It's an OS independant "
-"sound API (it's available on most unices systems) but it's a very basic and "
-"limited API.\n"
-"What's more, OSS drivers all reinvent the wheel.\n"
-"\n"
-"ALSA (Advanced Linux Sound Architecture) is a modularized architecture "
-"which\n"
-"supports quite a large range of ISA, USB and PCI cards.\n"
-"\n"
-"It also provides a much higher API than OSS.\n"
-"\n"
-"To use alsa, one can either use:\n"
-"- the old compatibility OSS api\n"
-"- the new ALSA api that provides many enhanced features but requires using "
-"the ALSA library.\n"
-msgstr ""
-"OSS (Отворени Систем за Звук)је био прву звучни API. Он је независан звучни "
-"API у односу на оперативни систем(доступан је на већини unices система) али "
-"је прилично рудименаран и ограничен API.\n"
-"Чак шта више, већина драјвера као да поново откирва точак \n"
-"\n"
-"ALSA (Advanced Linux Sound Architecture) је модуларне архитектуре који\n"
-"подржава велики број ISA, USB и PCI картица.\n"
-"\n"
-"Он такође обезбеђује много већи API у односу на  OSS.\n"
-"\n"
-"Да би користили alsa, можете користи или:\n"
-"- стари компатибилни OSS api\n"
-"- нови ALSA api који омогућава много напредне могућности али захтева "
-"коришћење ALSA библиотеке.\n"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -2744,6 +2713,11 @@ msgstr "Сомалија"
 msgid "No open source driver"
 msgstr "Нема open source драјвера"
 
+#: ../../standalone/printerdrake:1
+#, c-format
+msgid "Def."
+msgstr ""
+
 #: ../../security/level.pm:1
 #, c-format
 msgid ""
@@ -2767,6 +2741,11 @@ msgstr "Нова Каледонија"
 #, c-format
 msgid "European protocol (EDSS1)"
 msgstr "Европски протокол (EDSS1)"
+
+#: ../../standalone/printerdrake:1
+#, c-format
+msgid "/_Delete"
+msgstr "/_Бриши"
 
 #: ../../any.pm:1
 #, c-format
@@ -3133,6 +3112,11 @@ msgstr ""
 msgid "Saint Lucia"
 msgstr "Света Луција"
 
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "November"
+msgstr "Новембар"
+
 #: ../../standalone/drakconnect:1
 #, c-format
 msgid "Disconnect..."
@@ -3319,6 +3303,11 @@ msgstr ""
 msgid "All primary partitions are used"
 msgstr "Све примарне партиције су заузете"
 
+#: ../../printer/main.pm:1
+#, fuzzy, c-format
+msgid "LPD server \"%s\", printer \"%s\""
+msgstr "на LPD серверу \"%s\", штампач \"%s\""
+
 #: ../../network/netconnect.pm:1
 #, c-format
 msgid ""
@@ -3375,13 +3364,13 @@ msgstr "Хост %s"
 
 #: ../../lang.pm:1
 #, c-format
-msgid "Armenia"
-msgstr "Јерменија"
+msgid "Fiji"
+msgstr "Фиџи"
 
 #: ../../lang.pm:1
 #, c-format
-msgid "Fiji"
-msgstr "Фиџи"
+msgid "Armenia"
+msgstr "Јерменија"
 
 #: ../../any.pm:1
 #, c-format
@@ -3392,6 +3381,11 @@ msgstr "Други флопи/дискетни урeђаj"
 #, c-format
 msgid "About Harddrake"
 msgstr "О Harddrake-у"
+
+#: ../../security/l10n.pm:1
+#, c-format
+msgid "Authorize TCP connections to X Window"
+msgstr ""
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -3465,6 +3459,11 @@ msgstr ""
 "\n"
 "%s\n"
 "су директно повезани на ваш систем.\n"
+
+#: ../../printer/main.pm:1
+#, fuzzy, c-format
+msgid "Multi-function device on parallel port #%s"
+msgstr ", мулти-функционални уређај на паралелном порту #%s"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -3598,15 +3597,15 @@ msgstr "Румунија"
 msgid "Group"
 msgstr "група"
 
-#: ../../standalone/scannerdrake:1
-#, c-format
-msgid "choose device"
-msgstr "изаберите уређај"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Canada"
 msgstr "Канада"
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "choose device"
+msgstr "изаберите уређај"
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -3624,7 +3623,7 @@ msgid "German"
 msgstr "Немачки"
 
 #: ../../help.pm:1 ../../install_steps_gtk.pm:1 ../../interactive.pm:1
-#: ../../my_gtk.pm:1 ../../ugtk2.pm:1 ../../interactive/newt.pm:1
+#: ../../ugtk2.pm:1 ../../interactive/newt.pm:1
 #: ../../printer/printerdrake.pm:1 ../../standalone/drakbackup:1
 #, c-format
 msgid "Next ->"
@@ -3665,7 +3664,7 @@ msgstr "Гвинеја-Бисао"
 msgid "Horizontal refresh rate"
 msgstr "Хоризонтална фреквенција"
 
-#: ../../standalone/drakperm:1
+#: ../../standalone/drakperm:1 ../../standalone/printerdrake:1
 #, fuzzy, c-format
 msgid "Edit"
 msgstr "Излаз"
@@ -3786,6 +3785,11 @@ msgstr ""
 msgid "Re-generating list of configured scanners ..."
 msgstr "Освежавање листе подешених скенера ..."
 
+#: ../../modules/interactive.pm:1
+#, fuzzy, c-format
+msgid "Module configuration"
+msgstr "Ручна конфигурацијa"
+
 #: ../../harddrake/data.pm:1
 #, c-format
 msgid "Scanner"
@@ -3795,11 +3799,6 @@ msgstr "Скенер"
 #, c-format
 msgid "Warning: testing this graphic card may freeze your computer"
 msgstr "Упозорење: тестирање ове графичке картице може блокирати ваш рачунар"
-
-#: ../../standalone/drakconnect:1
-#, fuzzy, c-format
-msgid "Bad Ip"
-msgstr " IO картицe"
 
 #: ../../any.pm:1
 #, c-format
@@ -3842,15 +3841,15 @@ msgstr "Прекини"
 msgid "No password prompt on %s at port %s"
 msgstr "Без тражења лозинке на %s за порт %s"
 
+#: ../../mouse.pm:1
+#, fuzzy, c-format
+msgid "Kensington Thinking Mouse with Wheel emulation"
+msgstr "Kensington Thinking Mouse"
+
 #: ../../standalone/scannerdrake:1
 #, c-format
 msgid "Usage of remote scanners"
 msgstr "Коришћење удаљених скенера"
-
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "\t-CDROM.\n"
-msgstr "\t-CDROM.\n"
 
 #: ../../install_interactive.pm:1
 #, c-format
@@ -3871,7 +3870,7 @@ msgstr "Дворак (Норвешки)"
 msgid "Hard Disk Backup Progress..."
 msgstr "Напредак Backup-овања хард диска..."
 
-#: ../../standalone/drakfloppy:1
+#: ../../standalone/drakconnect:1 ../../standalone/drakfloppy:1
 #, c-format
 msgid "Unable to fork: %s"
 msgstr "Не могу да форкујем: %s"
@@ -4115,6 +4114,11 @@ msgstr "Обнови са траке"
 msgid "Choose the profile to configure"
 msgstr "Изаберите профил за конфигурисaњe"
 
+#: ../../security/l10n.pm:1
+#, c-format
+msgid "Password minimum length and number of digits and upcase letters"
+msgstr ""
+
 #: ../../network/ethernet.pm:1 ../../network/network.pm:1
 #, c-format
 msgid ""
@@ -4147,6 +4151,11 @@ msgstr "Рестартујем систем за штампaње ..."
 #, c-format
 msgid "See hardware info"
 msgstr "Погледај информације о хардверу"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "Day"
+msgstr "Дан"
 
 #: ../../any.pm:1
 #, c-format
@@ -4200,14 +4209,16 @@ msgstr ""
 msgid "Subnet Mask:"
 msgstr "Subnet маска:"
 
-#: ../../standalone/drakboot:1
-#, c-format
-msgid "LiLo and Bootsplash themes installation successfull"
-msgstr "Инсталација LiLo-а и Bootsplash тема успела"
-
 #: ../../security/l10n.pm:1
 #, c-format
 msgid "Set password expiration and account inactivation delays"
+msgstr ""
+
+#: ../../standalone/logdrake:1
+#, c-format
+msgid ""
+"_: load here is a noun, the load of the system\n"
+"Load"
 msgstr ""
 
 #: ../../Xconfig/monitor.pm:1
@@ -4253,6 +4264,11 @@ msgstr ""
 #, c-format
 msgid "Need hostname, username and password!"
 msgstr "Потребно је име хоста, корисничко име и лозинка!"
+
+#: ../../network/adsl.pm:1
+#, fuzzy, c-format
+msgid "Insert floppy"
+msgstr "Убаците дискету у уређај %s"
 
 #: ../../diskdrake/dav.pm:1
 #, c-format
@@ -4312,6 +4328,15 @@ msgstr "Треба да ресетујете машину за примену измена у табели партиција"
 msgid "Do not include the browser cache"
 msgstr "Не укључуј кеш претраживача"
 
+#: ../../install_steps_interactive.pm:1
+#, c-format
+msgid ""
+"Failed to check filesystem %s. Do you want to repair the errors? (beware, "
+"you can lose data)"
+msgstr ""
+"Неуспешна првера фајл система %s. Да ли желите да поправите грешке? (будите "
+"пажљиви, можете изгубити податке)"
+
 #: ../../standalone/keyboarddrake:1
 #, c-format
 msgid "Please, choose your keyboard layout."
@@ -4367,6 +4392,11 @@ msgstr "GlidePoint"
 msgid "Start: sector %s\n"
 msgstr "Почетак: сектор %s\n"
 
+#: ../../standalone/drakconnect:1
+#, fuzzy, c-format
+msgid "No Mask"
+msgstr "Лош пакет"
+
 #: ../../standalone/drakgw:1
 #, c-format
 msgid "Network interface already configured"
@@ -4392,6 +4422,11 @@ msgstr "Сервер за ел.пошту"
 msgid "Please click on a partition"
 msgstr "Кликните на партицију"
 
+#: ../../printer/main.pm:1
+#, fuzzy, c-format
+msgid "Multi-function device on HP JetDirect"
+msgstr ", мулти-фуункционални уређај на HP JetDirect"
+
 #: ../../any.pm:1 ../../standalone/drakbackup:1
 #, c-format
 msgid "Linux"
@@ -4401,11 +4436,6 @@ msgstr "Linux"
 #, c-format
 msgid "Have a nice day!"
 msgstr "Желимо вам пријатан дан!"
-
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "across Network"
-msgstr "преко Мреже"
 
 #: ../../help.pm:1
 #, c-format
@@ -4534,6 +4564,14 @@ msgstr ""
 "Нисте селектовали ниједну групу пакета.\n"
 "Изаберите минималну инсталацију коју желите:"
 
+#: ../../network/adsl.pm:1
+#, c-format
+msgid ""
+"You need the Alcatel microcode.\n"
+"You can provide it now via a floppy or your windows partition,\n"
+"or skip and do it later."
+msgstr ""
+
 #: ../../diskdrake/dav.pm:1
 #, c-format
 msgid "Please enter the WebDAV server URL"
@@ -4551,6 +4589,7 @@ msgid "Accept"
 msgstr "Прихвати"
 
 #: ../../printer/printerdrake.pm:1 ../../standalone/harddrake2:1
+#: ../../standalone/printerdrake:1
 #, c-format
 msgid "Description"
 msgstr "Опис"
@@ -4574,11 +4613,6 @@ msgstr "Вaша картица може имати 3D хардверску акцелерациjу са XFree %s."
 #, c-format
 msgid "Choose a monitor"
 msgstr "Изаберите монитор"
-
-#: ../../standalone/drakconnect:1
-#, fuzzy, c-format
-msgid "Bad Mask"
-msgstr "Лош пакет"
 
 #: ../../any.pm:1
 #, c-format
@@ -4686,6 +4720,11 @@ msgstr "Капе Верде"
 msgid "whether this cpu has the Cyrix 6x86 Coma bug"
 msgstr "Да ли овај процесор има Cyrix 6x86 Coma баг"
 
+#: ../../standalone/printerdrake:1
+#, fuzzy, c-format
+msgid "Loading printer configuration... Please wait"
+msgstr "Измена конфигурације штампача"
+
 #: ../../standalone/harddrake2:1
 #, fuzzy, c-format
 msgid "early pentiums were buggy and freezed when decoding the F00F bytecode"
@@ -4743,11 +4782,6 @@ msgstr "Userdrake"
 #, c-format
 msgid "Which partition do you want to use for Linux4Win?"
 msgstr "Коју партицију желите да корисите за Linux4Win?"
-
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "Backup system"
-msgstr "Backup-уј систем"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -5244,12 +5278,12 @@ msgstr "Табела"
 msgid "I don't know how to format %s in type %s"
 msgstr "не знам како да форматирам %s у типу %s"
 
-#: ../../standalone/harddrake2:1
+#: ../../standalone/harddrake2:1 ../../standalone/printerdrake:1
 #, c-format
 msgid "Model"
 msgstr "Модел"
 
-#: ../../printer/printerdrake.pm:1
+#: ../../printer/main.pm:1 ../../printer/printerdrake.pm:1
 #, c-format
 msgid "USB printer #%s"
 msgstr "USB штампач #%s"
@@ -5339,6 +5373,11 @@ msgstr "Аутоматски пронађи доступне штампаче на удаљеним машинама"
 #, c-format
 msgid "East Timor"
 msgstr "Источни Тимор"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "On Tape Device"
+msgstr "на уређају за траке"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -5453,15 +5492,15 @@ msgstr ""
 msgid "Start sector: "
 msgstr "Почетни сектор: "
 
-#: ../../standalone/drakperm:1
-#, fuzzy, c-format
-msgid "Read"
-msgstr "Само-читање"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Congo (Brazzaville)"
 msgstr "Конго (Бразавил)"
+
+#: ../../standalone/drakperm:1
+#, fuzzy, c-format
+msgid "Read"
+msgstr "Само-читање"
 
 #: ../../any.pm:1 ../../install_any.pm:1 ../../standalone.pm:1
 #, c-format
@@ -5517,6 +5556,13 @@ msgstr ""
 msgid "Right Control key"
 msgstr "Десни Alt тастер"
 
+#: ../../network/adsl.pm:1
+#, fuzzy, c-format
+msgid ""
+"Insert a FAT formatted floppy in drive %s with %s in root directory and "
+"press %s"
+msgstr "Убаците FAT форматирану празну дискету у уређај %s"
+
 #: ../../lang.pm:1
 #, c-format
 msgid "Zambia"
@@ -5542,15 +5588,15 @@ msgstr "Румунски (qwerty)"
 msgid "Under Devel ... please wait."
 msgstr "У развоју ... молим Вас сачекајте"
 
-#: ../../crypto.pm:1 ../../lang.pm:1
-#, c-format
-msgid "Czech Republic"
-msgstr "Чешка"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Egypt"
 msgstr "Египат"
+
+#: ../../crypto.pm:1 ../../lang.pm:1
+#, c-format
+msgid "Czech Republic"
+msgstr "Чешка"
 
 #: ../../help.pm:1 ../../install_steps_interactive.pm:1
 #, c-format
@@ -5682,6 +5728,11 @@ msgstr "Екваторијална Гвинеја"
 
 #: ../../standalone/drakbackup:1
 #, c-format
+msgid "Backup System"
+msgstr "Backup-уј систем"
+
+#: ../../standalone/drakbackup:1
+#, c-format
 msgid "Build Backup"
 msgstr "Креирај backup"
 
@@ -5725,12 +5776,127 @@ msgstr ""
 msgid "Kiribati"
 msgstr "Кирибати"
 
+#: ../../mouse.pm:1
+#, fuzzy, c-format
+msgid "Logitech Mouse (serial, old C7 type) with Wheel emulation"
+msgstr "Logitech mouse (серијски, стари C7 тип)"
+
 #: ../../standalone/drakbackup:1
 #, fuzzy, c-format
 msgid "Other (not drakbackup) keys in place already"
 msgstr ""
 "Други (не drakbackup)\n"
 "тастери су већ на месту"
+
+#: ../../help.pm:1
+#, fuzzy, c-format
+msgid ""
+"X (for X Window System) is the heart of the GNU/Linux graphical interface\n"
+"on which all the graphical environments (KDE, GNOME, AfterStep,\n"
+"WindowMaker, etc.) bundled with Mandrake Linux rely upon.\n"
+"\n"
+"You will be presented with a list of different parameters to change to get\n"
+"an optimal graphical display: Graphic Card\n"
+"\n"
+"   The installer will normally automatically detect and configure the\n"
+"graphic card installed on your machine. If it is not the case, you can\n"
+"choose from this list the card you actually have installed.\n"
+"\n"
+"   In the case that different servers are available for your card, with or\n"
+"without 3D acceleration, you are then asked to choose the server that best\n"
+"suits your needs.\n"
+"\n"
+"\n"
+"\n"
+"Monitor\n"
+"\n"
+"   The installer will normally automatically detect and configure the\n"
+"monitor connected to your machine. If it is incorrect, you can choose from\n"
+"this list the monitor you actually have connected to your computer.\n"
+"\n"
+"\n"
+"\n"
+"Resolution\n"
+"\n"
+"   Here you can choose the resolutions and color depths available for your\n"
+"hardware. Choose the one that best suits your needs (you will be able to\n"
+"change that after installation though). A sample of the chosen\n"
+"configuration is shown in the monitor.\n"
+"\n"
+"\n"
+"\n"
+"Test\n"
+"\n"
+"   the system will try to open a graphical screen at the desired\n"
+"resolution. If you can see the message during the test and answer \"%s\",\n"
+"then DrakX will proceed to the next step. If you cannot see the message, it\n"
+"means that some part of the autodetected configuration was incorrect and\n"
+"the test will automatically end after 12 seconds, bringing you back to the\n"
+"menu. Change settings until you get a correct graphical display.\n"
+"\n"
+"\n"
+"\n"
+"Options\n"
+"\n"
+"   Here you can choose whether you want to have your machine automatically\n"
+"switch to a graphical interface at boot. Obviously, you want to check\n"
+"\"%s\" if your machine is to act as a server, or if you were not successful\n"
+"in getting the display configured."
+msgstr ""
+"X (или  X Window Систем) је срце GNU/Linux графичког интерфејса\n"
+"на који се ослањају сва графичка окружења (KDE, GNOME, AfterStep,\n"
+"WindowMaker, итд.) која се налазе у Mandrake Linux-у.\n"
+"\n"
+"Биће вам приказана листа са различитим параметрима чијом изменом\n"
+"можете добити оптималан графички приказ: Графичка картица\n"
+"\n"
+"\n"
+"   Програм за инсталацију обично аутоматски детектује и подешава\n"
+"графичку карту која се налази у вашем рачуну. Уколико то није случај, "
+"можете\n"
+"сами да изаберете картицу са листе.\n"
+"\n"
+"   Уколико су различити сервери доступни за вашу картицу, са или\n"
+"вез 3D акцелерације, онда треба да изаберете онај који највише\n"
+"одговара вашим потребама.\n"
+"\n"
+"\n"
+"\n"
+"Монитор\n"
+"\n"
+"   Програм за инсталацију обично аутоматски детектује и подешава\n"
+"монитор који повезан са вашим рачунаром. Уколико се то не деси можете "
+"изабрати\n"
+"сами са листе понуђених монитора\n"
+"\n"
+"   Овде можете изабрати резолуцију и број боја од\n"
+"оних које су понуђене за ваш хардвер. Изаберите оно што највише одговара "
+"вашим потребама\n"
+"(ове опције ћете моћи изменити и након инсталације). Изабрана\n"
+"конфигурације се види на монитору.\n"
+"\n"
+"\n"
+"\n"
+"Тест\n"
+"\n"
+"   систем ће покушати да отвори графички екран у жељеној\n"
+"резолуцији. Уколико можете да видите поруку током теста одговорите са \"Да"
+"\",\n"
+"и DrakX ће наставити са следећим кораком. Уколико не можете да видите "
+"поруку, то\n"
+"значи да је неки део аутотедекције био неправилан и\n"
+"тест ће аутоматски завршити након 12 секунди, отаварајући мени за\n"
+"конфигурацију. Измените опције све док не добијете коректан графички "
+"приказ.\n"
+"\n"
+"\n"
+"\n"
+"Опције\n"
+"\n"
+"   Овде можете да изаберете да ли желите да ваш рачуанр аутоматски\n"
+"пређе на графички интерфејс при стартању. Очигледно, изабраћете\n"
+"\"Не\" уколико је ваша машина сервер, или уколико нисте успели да успешно \n"
+"подесите графички приказ."
 
 #: ../../standalone/draksplash:1
 #, c-format
@@ -5806,169 +5972,6 @@ msgstr ""
 "Уколико ваш CUPS сервер(и) није/нису у вашој локалној мрежи, морате унети IP "
 "aадресу(e) и опционално број порта(ова)да би добавили информације са сервера."
 
-#: ../../standalone/drakTermServ:1
-#, c-format
-msgid ""
-"drakTermServ Overview\n"
-"\t\t\t   \n"
-"        - Create Etherboot Enabled Boot Images:\n"
-"        \t\tTo boot a kernel via etherboot, a special kernel/initrd image "
-"must be created.\n"
-"        \t\tmkinitrd-net does much of this work and drakTermServ is just a "
-"graphical interface\n"
-"        \t\tto help manage/customize these images. To create the file \n"
-"        \t\t/etc/dhcpd.conf.etherboot-pcimap.include that is pulled in as an "
-"include in \n"
-"        \t\tdhcpd.conf, you should create the etherboot images for at least "
-"one full kernel.\n"
-"\n"
-"        - Maintain /etc/dhcpd.conf:\n"
-"        \t\tTo net boot clients, each client needs a dhcpd.conf entry, "
-"assigning an IP address\n"
-"        \t\tand net boot images to the machine. drakTermServ helps create/"
-"remove these entries.\n"
-"\t\t\t\n"
-"        \t\t(PCI cards may omit the image - etherboot will request the "
-"correct image. You should\n"
-"        \t\talso consider that when etherboot looks for the images, it "
-"expects names like\n"
-"        \t\tboot-3c59x.nbi, rather than boot-3c59x.2.4.19-16mdk.nbi).\n"
-"\t\t\t \n"
-"        \t\tA typical dhcpd.conf stanza to support a diskless client looks "
-"like:\n"
-"        \t\t\n"
-"\t\t\t\thost curly {\n"
-"\t\t\t\t\thardware ethernet        00:20:af:2f:f7:9d;\n"
-"\t\t\t\t\tfixed-address              192.168.192.3;\n"
-"\t\t\t\t\t#type                          fat;\n"
-"\t\t\t\t\tfilename                      \"i386/boot/boot-3c509.2.4.18-6mdk."
-"nbi\";\n"
-"\t\t\t\t\t#hdw_config                true;\n"
-"\t\t\t\t}\n"
-"\t\t\t\n"
-"\t\t\tWhile you can use a pool of IP addresses, rather than setup a specific "
-"entry for\n"
-"\t\t\ta client machine, using a fixed address scheme facilitates using the "
-"functionality\n"
-"\t\t\tof client-specific configuration files that ClusterNFS provides.\n"
-"\t\t\t\n"
-"\t\t\tNote: The \"#type\" entry is only used by drakTermServ.  Clients can "
-"either be 'thin'\n"
-"\t\t\tor 'fat'.  Thin clients run most software on the server via xdmcp, "
-"while fat clients run \n"
-"\t\t\tmost software on the client machine. A special inittab, /etc/inittab\\$"
-"\\$IP=client_ip\\$\\$ is\n"
-"\t\t\twritten for thin clients. System config files xdm-config, kdmrc, and "
-"gdm.conf are \n"
-"\t\t\tmodified if thin clients are used, to enable xdmcp. Since there are "
-"security issues in \n"
-"\t\t\tusing xdmcp, hosts.deny and hosts.allow are modified to limit access "
-"to the local\n"
-"\t\t\tsubnet.\n"
-"\t\t\t\n"
-"\t\t\tNote: The \"#hdw_config\" entry is also only used by drakTermServ.  "
-"Clients can either \n"
-"\t\t\tbe 'true' or 'false'.  'true' enables root login at the client machine "
-"and allows local \n"
-"\t\t\thardware configuration of sound, mouse, and X, using the 'drak' tools. "
-"This is enabled \n"
-"\t\t\tby creating seperate config files associated with the client's IP "
-"address and creating \n"
-"\t\t\tread/write mount points to allow the client to alter the file. Once "
-"you are satisfied \n"
-"\t\t\twith the configuration, you can remove root login priviledges from the "
-"client.\n"
-"\t\t\t\n"
-"\t\t\tNote: You must stop/start the server after adding or changing "
-"clients.\n"
-"\t\t\t\n"
-"        - Maintain /etc/exports:\n"
-"        \t\tClusternfs allows export of the root filesystem to diskless "
-"clients. drakTermServ\n"
-"        \t\tsets up the correct entry to allow anonymous access to the root "
-"filesystem from\n"
-"        \t\tdiskless clients.\n"
-"\n"
-"        \t\tA typical exports entry for clusternfs is:\n"
-"        \t\t\n"
-"        \t\t/                  (ro,all_squash)\n"
-"        \t\t/home              SUBNET/MASK(rw,root_squash)\n"
-"\t\t\t\n"
-"\t\t\tWith SUBNET/MASK being defined for your network.\n"
-"        \t\t\n"
-"        - Maintain /etc/shadow\\$\\$CLIENT\\$\\$:\n"
-"        \t\tFor users to be able to log into the system from a diskless "
-"client, their entry in\n"
-"        \t\t/etc/shadow needs to be duplicated in /etc/shadow\\$\\$CLIENTS\\$"
-"\\$. drakTermServ helps\n"
-"        \t\tin this respect by adding or removing system users from this "
-"file.\n"
-"\n"
-"        - Per client /etc/X11/XF86Config-4\\$\\$IP-ADDRESS\\$\\$:\n"
-"        \t\tThrough clusternfs, each diskless client can have it's own "
-"unique configuration files\n"
-"        \t\ton the root filesystem of the server. By allowing local client "
-"hardware configuration, \n"
-"        \t\tdrakTermServ will help create these files.\n"
-"\n"
-"        - Per client system configuration files:\n"
-"        \t\tThrough clusternfs, each diskless client can have it's own "
-"unique configuration files\n"
-"        \t\ton the root filesystem of the server. By allowing local client "
-"hardware configuration, \n"
-"\t\t\t\tclients can customize files such as /etc/modules.conf, /etc/"
-"sysconfig/mouse, \n"
-"        \t\t/etc/sysconfig/keyboard on a per-client basis.\n"
-"\n"
-"        Note: Enabling local client hardware configuration does enable root "
-"login to the terminal \n"
-"        server on each client machine that has this feature enabled.  Local "
-"configuration can be turned\n"
-"        back off, retaining the configuration files, once the client machine "
-"is configured.\n"
-"\t\t\n"
-"        - /etc/xinetd.d/tftp:\n"
-"        \t\tdrakTermServ will configure this file to work in conjunction "
-"with the images created by\n"
-"        \t\tmkinitrd-net, and the entries in /etc/dhcpd.conf, to serve up "
-"the boot image to each\n"
-"        \t\tdiskless client.\n"
-"\n"
-"        \t\tA typical tftp configuration file looks like:\n"
-"        \t\t\n"
-"        \t\tservice tftp\n"
-"        \t\t(\n"
-"                        disable         = no\n"
-"                        socket_type  = dgram\n"
-"                        protocol        = udp\n"
-"                        wait             = yes\n"
-"                        user             = root\n"
-"                        server          = /usr/sbin/in.tftpd\n"
-"                        server_args  = -s /var/lib/tftpboot\n"
-"        \t\t}\n"
-"        \t\t\n"
-"        \t\tThe changes here from the default installation are changing the "
-"disable flag to\n"
-"        \t\t'no' and changing the directory path to /var/lib/tftpboot, where "
-"mkinitrd-net\n"
-"        \t\tputs it's images.\n"
-"\n"
-"        - Create etherboot floppies/CDs:\n"
-"        \t\tThe diskless client machines need either ROM images on the NIC, "
-"or a boot floppy\n"
-"        \t\tor CD to initate the boot sequence.  drakTermServ will help "
-"generate these images,\n"
-"        \t\tbased on the NIC in the client machine.\n"
-"        \t\t\n"
-"        \t\tA basic example of creating a boot floppy for a 3Com 3c509 "
-"manually:\n"
-"        \t\t\n"
-"        \t\tcat /usr/lib/etherboot/boot1a.bin \\\n"
-"        \t\t\t/usr/lib/etherboot/lzrom/3c509.lzrom > /dev/fd0\n"
-" \n"
-"\n"
-msgstr ""
-
 #: ../../standalone/scannerdrake:1
 #, c-format
 msgid "%s is not in the scanner database, configure it manually?"
@@ -6026,8 +6029,7 @@ msgstr "Детектован %s"
 msgid "/Autodetect _printers"
 msgstr "/Аутодетекција _штампача"
 
-#: ../../interactive.pm:1 ../../my_gtk.pm:1 ../../ugtk2.pm:1
-#: ../../interactive/newt.pm:1
+#: ../../interactive.pm:1 ../../ugtk2.pm:1 ../../interactive/newt.pm:1
 #, c-format
 msgid "Finish"
 msgstr "Краj"
@@ -6084,7 +6086,7 @@ msgstr "Поjединaчно бирaње пакетa"
 msgid "This partition is not resizeable"
 msgstr "Овоj партицици ниjе могућe променити величину"
 
-#: ../../printer/printerdrake.pm:1
+#: ../../printer/printerdrake.pm:1 ../../standalone/printerdrake:1
 #, c-format
 msgid "Location"
 msgstr "Локациja"
@@ -6093,6 +6095,11 @@ msgstr "Локациja"
 #, c-format
 msgid "USA (cable-hrc)"
 msgstr "САД (кабл-hrc)"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Guatemala"
+msgstr "Гватемала"
 
 #: ../../diskdrake/hd_gtk.pm:1
 #, c-format
@@ -6107,11 +6114,6 @@ msgstr ""
 "\n"
 "Активирај/Деактивирај проверу промискуитета мрежних картица."
 
-#: ../../lang.pm:1
-#, c-format
-msgid "Guatemala"
-msgstr "Гватемала"
-
 #: ../../standalone/scannerdrake:1
 #, c-format
 msgid "This machine"
@@ -6122,15 +6124,15 @@ msgstr "Ова машина"
 msgid "DOS drive letter: %s (just a guess)\n"
 msgstr "Ознака DOS партиције: %s (само претпоставка)\n"
 
-#: ../../standalone/drakbackup:1
-#, fuzzy, c-format
-msgid "Select the files or directories and click on 'OK'"
-msgstr "Одаберите фајлове или директоријуме и клините на 'Додај'"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Bahrain"
 msgstr "Бахреин"
+
+#: ../../standalone/drakbackup:1
+#, fuzzy, c-format
+msgid "Select the files or directories and click on 'OK'"
+msgstr "Одаберите фајлове или директоријуме и клините на 'Додај'"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
@@ -6179,6 +6181,11 @@ msgstr ""
 msgid "Maltese (US)"
 msgstr "Малтешки (US)"
 
+#: ../../standalone/drakfloppy:1
+#, c-format
+msgid "The creation of the boot floppy has been successfully completed \n"
+msgstr ""
+
 #: ../../services.pm:1
 #, c-format
 msgid ""
@@ -6225,15 +6232,13 @@ msgstr "Logitech MouseMan+/FirstMouse+"
 
 #: ../../standalone/drakbackup:1
 #, c-format
-msgid "Not the correct tape label. Tape is labelled %s."
-msgstr "НИје добра ознака траке. Трака је означена са %s."
+msgid "Thursday"
+msgstr "Четвртак"
 
 #: ../../standalone/drakbackup:1
 #, c-format
-msgid ""
-"For a mulitsession CD, only the first session will erase the cdrw. Otherwise "
-"the cdrw is erased before each backup."
-msgstr ""
+msgid "Not the correct tape label. Tape is labelled %s."
+msgstr "НИје добра ознака траке. Трака је означена са %s."
 
 #: ../../standalone/drakgw:1
 #, c-format
@@ -6354,6 +6359,11 @@ msgstr ""
 "конекције бројних клијената. Напомена: уколико је ваша машина само клијент "
 "на Интернету, требали би да изаберете нижи ниво."
 
+#: ../../standalone/printerdrake:1
+#, fuzzy, c-format
+msgid "Server Name"
+msgstr "Име сервера:"
+
 #: ../../network/tools.pm:1 ../../standalone/drakconnect:1
 #, c-format
 msgid "Account Password"
@@ -6380,6 +6390,28 @@ msgstr ""
 "бутујете.\n"
 "\n"
 "На који драјв се бутујете?"
+
+#: ../../install_interactive.pm:1
+#, fuzzy, c-format
+msgid ""
+"WARNING!\n"
+"\n"
+"DrakX will now resize your Windows partition. Be careful: this\n"
+"operation is dangerous. If you have not already done so, you\n"
+"first need to exit the installation, run \"chkdsk c:\" from a\n"
+"Command Prompt under Windows (beware, running graphical program\n"
+"\"scandisk\" is not enough, be sure to use \"chkdsk\" in a\n"
+"Command Prompt!), optionally run defrag, then restart the\n"
+"installation. You should also backup your data.\n"
+"When sure, press Ok."
+msgstr ""
+"УПОЗОРЕЊЕ!\n"
+"\n"
+"DrakX треба да измени величину Windows партиције. Будите пажљиви: ова\n"
+"операција је опасна. Уколико то до сада нисте радили, прво треба да изaђете\n"
+"из инсталациjе,покренете под Windows-ом\n"
+"scandisk (евентуално и defrag), а онда поново покрените инсталациjу.\n"
+"Ако сте сигурни, притисните ОК (У реду)."
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -6518,15 +6550,6 @@ msgstr ""
 "чува и обнавља системски  entropy pool за већи квалитет генерисaњe\n"
 "случаjних броjевa."
 
-#: ../../install_steps_interactive.pm:1
-#, c-format
-msgid ""
-"Failed to check filesystem %s. Do you want to repair the errors? (beware, "
-"you can loose data)"
-msgstr ""
-"Неуспешна првера фајл система %s. Да ли желите да поправите грешке? (будите "
-"пажљиви, можете изгубити податке)"
-
 #: ../../share/advertising/07-server.pl:1
 #, c-format
 msgid "Turn your computer into a reliable server"
@@ -6632,6 +6655,11 @@ msgstr " ("
 msgid "Cpuid level"
 msgstr "Cpuid ниво"
 
+#: ../../printer/main.pm:1
+#, fuzzy, c-format
+msgid "Novell server \"%s\", printer \"%s\""
+msgstr "на Novell серверу \"%s\", штампач \"%s\""
+
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Mongolian (cyrillic)"
@@ -6703,6 +6731,11 @@ msgstr "Уругвај"
 msgid "Benin"
 msgstr "Бенин"
 
+#: ../../printer/main.pm:1
+#, fuzzy, c-format
+msgid "SMB/Windows server \"%s\", share \"%s\""
+msgstr "на Windows серверу \"%s\", дељени \"%s\""
+
 #: ../../standalone/drakperm:1
 #, c-format
 msgid "Path selection"
@@ -6717,6 +6750,11 @@ msgstr "Име/IP адреса хоста:"
 #, c-format
 msgid "Monitor: %s\n"
 msgstr "Монитор: %s\n"
+
+#: ../../standalone/drakperm:1
+#, fuzzy, c-format
+msgid "Custom & system settings"
+msgstr "Custom диск партиционирaњe"
 
 #: ../../partition_table/raw.pm:1
 #, c-format
@@ -6775,6 +6813,11 @@ msgstr "Настави"
 #, c-format
 msgid "Custom Restore"
 msgstr "Обнављање по жeљи"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "Saturday"
+msgstr "Субота"
 
 #: ../../help.pm:1
 #, fuzzy, c-format
@@ -6854,6 +6897,11 @@ msgstr "Инсталација/Ажурирање"
 msgid "%d packages"
 msgstr "%d пакета"
 
+#: ../../crypto.pm:1 ../../lang.pm:1
+#, c-format
+msgid "Costa Rica"
+msgstr "Костарика"
+
 #: ../../standalone.pm:1
 #, c-format
 msgid ""
@@ -6903,11 +6951,6 @@ msgstr ""
 "\t- Michael Brown <mbrown\\@fensystems.co.uk>\n"
 "\n"
 
-#: ../../crypto.pm:1 ../../lang.pm:1
-#, c-format
-msgid "Costa Rica"
-msgstr "Костарика"
-
 #: ../../security/level.pm:1
 #, c-format
 msgid "Use libsafe for servers"
@@ -6938,25 +6981,15 @@ msgstr ""
 "Унесите максималну величину\n"
 " дозвољену за Drakbackup"
 
-#: ../../my_gtk.pm:1
+#: ../../loopback.pm:1
 #, c-format
-msgid "-adobe-utopia-regular-r-*-*-25-*-*-*-p-*-iso8859-*,*-r-*"
-msgstr "-adobe-utopia-regular-r-*-*-25-*-*-*-p-*-iso8859-*,*-r-*"
+msgid "Circular mounts %s\n"
+msgstr "Кружно монтирaње  %s\n"
 
 #: ../../standalone/drakboot:1
 #, c-format
 msgid "Lilo/grub mode"
 msgstr "Lilo/Grub мод"
-
-#: ../../standalone/drakfloppy:1
-#, c-format
-msgid "Output"
-msgstr "Output"
-
-#: ../../loopback.pm:1
-#, c-format
-msgid "Circular mounts %s\n"
-msgstr "Кружно монтирaње  %s\n"
 
 #: ../../lang.pm:1
 #, c-format
@@ -7003,6 +7036,11 @@ msgid ""
 "running"
 msgstr "Огласиће се аларм уколико један од изабраних сервиса није више активан"
 
+#: ../../standalone/drakbackup:1
+#, fuzzy, c-format
+msgid "Weekday"
+msgstr "Среда"
+
 #: ../../diskdrake/hd_gtk.pm:1
 #, c-format
 msgid "Filesystem types:"
@@ -7035,6 +7073,24 @@ msgstr ""
 #, c-format
 msgid "Floppy"
 msgstr "Флопи"
+
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"        - Maintain /etc/exports:\n"
+"        \t\tClusternfs allows export of the root filesystem to diskless "
+"clients. drakTermServ\n"
+"        \t\tsets up the correct entry to allow anonymous access to the root "
+"filesystem from\n"
+"        \t\tdiskless clients.\n"
+"\n"
+"        \t\tA typical exports entry for clusternfs is:\n"
+"        \t\t\n"
+"        \t\t/                  (ro,all_squash)\n"
+"        \t\t/home              SUBNET/MASK(rw,root_squash)\n"
+"\t\t\t\n"
+"\t\t\tWith SUBNET/MASK being defined for your network."
+msgstr ""
 
 #: ../../standalone/drakfont:1
 #, c-format
@@ -7070,6 +7126,11 @@ msgstr "SMB сервер  host:"
 #, c-format
 msgid "Name Servers:"
 msgstr "Наведи сервере:"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "Minute"
+msgstr "Минут"
 
 #: ../../install_messages.pm:1
 #, c-format
@@ -7137,6 +7198,11 @@ msgstr ""
 "респектативним ауторима и зaштићeне су законима о интелектуаноj своjини и \n"
 "правимa коjи се примeњуjу на софтверске програмe.\n"
 
+#: ../../standalone/printerdrake:1
+#, fuzzy, c-format
+msgid "/_Expert mode"
+msgstr "Eксперт мод"
+
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Remove this printer from Star Office/OpenOffice.org/GIMP"
@@ -7151,15 +7217,15 @@ msgstr ""
 "Linux-ов Виртуелни Сервер, користи се за изградњу брзог и доступног\n"
 "сервера."
 
-#: ../../Xconfig/resolution_and_depth.pm:1
-#, c-format
-msgid "4 billion colors (32 bits)"
-msgstr "4 милијарде боја (32-битна палета)"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Micronesia"
 msgstr "Микронезија"
+
+#: ../../Xconfig/resolution_and_depth.pm:1
+#, c-format
+msgid "4 billion colors (32 bits)"
+msgstr "4 милијарде боја (32-битна палета)"
 
 #: ../../steps.pm:1
 #, c-format
@@ -7170,6 +7236,56 @@ msgstr "Лиценца"
 #, c-format
 msgid "This may take a moment to generate the keys."
 msgstr "Генерисање тастера може да потраје пар тренутака."
+
+#: ../../standalone/draksec:1
+#, c-format
+msgid ""
+"Here, you can setup the security level and administrator of your machine.\n"
+"\n"
+"\n"
+"The Security Administrator is the one who will receive security alerts if "
+"the\n"
+"'Security Alerts' option is set. It can be a username or an email.\n"
+"\n"
+"\n"
+"The Security Level menu allows you to select one of the six preconfigured "
+"security levels\n"
+"provided with msec. These levels range from poor security and ease of use, "
+"to\n"
+"paranoid config, suitable for very sensitive server applications:\n"
+"\n"
+"\n"
+"<span foreground=\"royalblue3\">Poor</span>: This is a totally unsafe but "
+"very\n"
+"easy to use security level. It should only be used for machines not "
+"connected to\n"
+"any network and that are not accessible to everybody.\n"
+"\n"
+"\n"
+"<span foreground=\"royalblue3\">Standard</span>: This is the standard "
+"security\n"
+"recommended for a computer that will be used to connect to the Internet as "
+"a\n"
+"client.\n"
+"\n"
+"\n"
+"<span foreground=\"royalblue3\">High</span>: There are already some\n"
+"restrictions, and more automatic checks are run every night.\n"
+"\n"
+"\n"
+"<span foreground=\"royalblue3\">Higher</span>: The security is now high "
+"enough\n"
+"to use the system as a server which can accept connections from many "
+"clients. If\n"
+"your machine is only a client on the Internet, you should choose a lower "
+"level.\n"
+"\n"
+"\n"
+"<span foreground=\"royalblue3\">Paranoid</span>: This is similar to the "
+"previous\n"
+"level, but the system is entirely closed and security features are at their\n"
+"maximum"
+msgstr ""
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -7216,10 +7332,10 @@ msgstr "Помоћ за подешавање звука"
 msgid "Polish (qwerty layout)"
 msgstr "Пољски (qwerty распоред)"
 
-#: ../../standalone/drakconnect:1
-#, c-format
-msgid "activate now"
-msgstr "Активирај сад"
+#: ../../standalone/printerdrake:1
+#, fuzzy, c-format
+msgid "/_Add Printer"
+msgstr "Штампач"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -7504,15 +7620,15 @@ msgstr "Којоj партицији  желите да промените величину?"
 msgid "United States Minor Outlying Islands"
 msgstr "United States Minor Outlying Islands"
 
-#: ../../standalone/logdrake:1
-#, c-format
-msgid "A tool to monitor your logs"
-msgstr "Алат за прегледање лог датотека"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Djibouti"
 msgstr "Џибути"
+
+#: ../../standalone/logdrake:1
+#, c-format
+msgid "A tool to monitor your logs"
+msgstr "Алат за прегледање лог датотека"
 
 #: ../../network/netconnect.pm:1
 #, c-format
@@ -7529,6 +7645,11 @@ msgstr "LPD"
 msgid "Graphics card: %s\n"
 msgstr "Графичка картица: %s\n"
 
+#: ../../standalone/printerdrake:1
+#, fuzzy, c-format
+msgid "/Set as _Default"
+msgstr " (Подразумевано)"
+
 #: ../../security/l10n.pm:1
 #, c-format
 msgid "Accept icmp echo"
@@ -7538,6 +7659,11 @@ msgstr ""
 #, c-format
 msgid "Yaboot"
 msgstr "Yaboot"
+
+#: ../../mouse.pm:1
+#, fuzzy, c-format
+msgid "Logitech CC Series with Wheel emulation"
+msgstr "Logitech CC серија (серијски)"
 
 #: ../../standalone/drakboot:1
 #, c-format
@@ -7629,6 +7755,11 @@ msgstr "Изаберите уређај !"
 #, c-format
 msgid "Remove selected server"
 msgstr "Уклони селектовани сервер"
+
+#: ../../network/adsl.pm:1
+#, c-format
+msgid "Sagem (using dhcp) usb"
+msgstr "Sagem (користи dhcp) usb"
 
 #: ../../lang.pm:1
 #, c-format
@@ -7767,6 +7898,11 @@ msgstr "Грчки"
 msgid "Saint Kitts and Nevis"
 msgstr "Свети Китс и Невис"
 
+#: ../../mouse.pm:1
+#, fuzzy, c-format
+msgid "Generic 3 Button Mouse with Wheel emulation"
+msgstr "Генерички 3 тастера миш"
+
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid ""
@@ -7820,6 +7956,11 @@ msgstr ""
 "појавила се грешка:\n"
 "%s\n"
 "Покушајте да промените неке од параметара"
+
+#: ../../printer/main.pm:1
+#, fuzzy, c-format
+msgid "TCP/IP host \"%s\", port %s"
+msgstr ", TCP/IP хост \"%s\", порт %s"
 
 #: ../../standalone/drakperm:1
 #, fuzzy, c-format
@@ -7932,6 +8073,11 @@ msgstr "Монголија"
 msgid "Mounted\n"
 msgstr "Монтирано\n"
 
+#: ../../standalone/printerdrake:1
+#, fuzzy, c-format
+msgid "Configure CUPS"
+msgstr "Конфигурисање X-a"
+
 #: ../../help.pm:1
 #, fuzzy, c-format
 msgid "Graphical Interface"
@@ -8021,11 +8167,6 @@ msgstr ", хост \"%s\", порт %s"
 msgid "Monaco"
 msgstr "Монако"
 
-#: ../../security/l10n.pm:1
-#, c-format
-msgid "Do not send mails when uneeded"
-msgstr ""
-
 #: ../../install_interactive.pm:1
 #, c-format
 msgid "Partitioning failed: %s"
@@ -8040,6 +8181,11 @@ msgstr "%s Форматирање  %s није успело"
 #, c-format
 msgid "Canada (cable)"
 msgstr "Канада (кабл)"
+
+#: ../../standalone/drakfloppy:1
+#, fuzzy, c-format
+msgid "Floppy creation completed"
+msgstr "Повезивање завршено."
 
 #: ../../help.pm:1
 #, c-format
@@ -8065,6 +8211,11 @@ msgstr ""
 msgid "Kyrgyzstan"
 msgstr "Киргистан"
 
+#: ../../printer/main.pm:1
+#, fuzzy, c-format
+msgid "Multi-function device on USB"
+msgstr ", мулти-функционални уређај на USB"
+
 #: ../../help.pm:1
 #, fuzzy, c-format
 msgid "With basic documentation"
@@ -8086,6 +8237,11 @@ msgstr ""
 "За ово, креирајте партицију (или кликните на постојећу).\n"
 "Затим изаберите \"Тачка монтирања\" и подесите на `/'"
 
+#: ../../lang.pm:1
+#, c-format
+msgid "Western Sahara"
+msgstr "Западна Сахара"
+
 #: ../../network/network.pm:1
 #, c-format
 msgid "Proxy should be http://..."
@@ -8095,11 +8251,6 @@ msgstr "Proxy треба да буде http://..."
 #, c-format
 msgid "South Africa"
 msgstr "Јужна Африка"
-
-#: ../../lang.pm:1
-#, c-format
-msgid "Western Sahara"
-msgstr "Западна Сахара"
 
 #: ../../standalone/drakbackup:1
 #, fuzzy, c-format
@@ -8142,6 +8293,11 @@ msgid ""
 "Do not update inode access times on this file system\n"
 "(e.g, for faster access on the news spool to speed up news servers)."
 msgstr ""
+
+#: ../../mouse.pm:1
+#, fuzzy, c-format
+msgid "3 buttons with Wheel emulation"
+msgstr "Емулациjа тастерa"
 
 #: ../../standalone/drakperm:1
 #, fuzzy, c-format
@@ -8214,6 +8370,11 @@ msgstr "Малави"
 msgid "local config: false"
 msgstr "Локалне датотеке"
 
+#: ../../standalone/drakperm:1
+#, fuzzy, c-format
+msgid "System settings"
+msgstr "Custom диск партиционирaњe"
+
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Please choose your type of mouse."
@@ -8243,15 +8404,15 @@ msgstr "Велика Британија"
 msgid "running"
 msgstr "покренуто"
 
-#: ../../standalone/draksec:1
-#, c-format
-msgid "default"
-msgstr "default"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Indonesia"
 msgstr "Индонезија"
+
+#: ../../standalone/draksec:1
+#, c-format
+msgid "default"
+msgstr "default"
 
 #: ../../standalone/drakxtv:1
 #, c-format
@@ -8295,6 +8456,11 @@ msgid ""
 msgstr ""
 "Широки распон Linux решења, као и слецијалних понуда производа и 'goodies'-"
 "а, је доступан и преко Интернета у нашем e-маркету:"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "March"
+msgstr "Март"
 
 #: ../../any.pm:1
 #, c-format
@@ -8354,6 +8520,11 @@ msgstr "TV катицa"
 #, c-format
 msgid "Printer on SMB/Windows 95/98/NT server"
 msgstr "Штампач на SMB/Windows 95/98/NT серверу"
+
+#: ../../standalone/printerdrake:1
+#, fuzzy, c-format
+msgid "/_Configure CUPS"
+msgstr "Конфигурисање X-a"
 
 #: ../../standalone/scannerdrake:1
 #, c-format
@@ -8450,6 +8621,11 @@ msgstr ""
 "решења компатибилна са Mandrake Linux-ом. Листа ових партнера је доступна у "
 "MandrakeStore"
 
+#: ../../standalone/printerdrake:1
+#, c-format
+msgid "Authors: "
+msgstr "Аутори"
+
 #: ../../standalone/drakgw:1
 #, c-format
 msgid "Internet Connection Sharing is now disabled."
@@ -8508,12 +8684,25 @@ msgstr "Неиједан"
 msgid "The entered IP is not correct.\n"
 msgstr "Унешена IP адреса није исправна.\n"
 
+#: ../../standalone/drakbackup:1
+#, fuzzy, c-format
+msgid "Please be sure that the cron daemon is included in your services."
+msgstr ""
+"Проверите да ли је cron демон укључен у ваше сервисе. \n"
+"\n"
+"Можете приметити да сви 'net' медији такође користе хард диск."
+
 #: ../../standalone/drakconnect:1
 #, c-format
 msgid "Ethernet Card"
 msgstr "Мрeжна картицa"
 
-#: ../../my_gtk.pm:1 ../../services.pm:1 ../../ugtk2.pm:1
+#: ../../standalone/printerdrake:1
+#, fuzzy, c-format
+msgid "Delete selected printer"
+msgstr "Избриши одабрано правило"
+
+#: ../../services.pm:1 ../../ugtk2.pm:1
 #, c-format
 msgid "Info"
 msgstr "Инфо"
@@ -8636,15 +8825,6 @@ msgstr "Тражим нове скенере"
 msgid "Disabling servers..."
 msgstr "Уклaњам сервисe..."
 
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid ""
-"Please choose the time \n"
-"interval between each backup"
-msgstr ""
-"Изаберите временски интервал \n"
-"између сваког backup-а"
-
 #: ../../standalone/drakboot:1
 #, c-format
 msgid "Installation of %s failed. The following error occured:"
@@ -8756,11 +8936,6 @@ msgstr "LILO/grub инсталација"
 #, c-format
 msgid "Israeli"
 msgstr "Јеврејски"
-
-#: ../../standalone/logdrake:1
-#, c-format
-msgid "load setting"
-msgstr "учитај поставку"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -8885,13 +9060,13 @@ msgstr "Сијера Леоне"
 
 #: ../../lang.pm:1
 #, c-format
-msgid "Andorra"
-msgstr "Андора"
+msgid "Botswana"
+msgstr "Боцвана"
 
 #: ../../lang.pm:1
 #, c-format
-msgid "Botswana"
-msgstr "Боцвана"
+msgid "Andorra"
+msgstr "Андора"
 
 #: ../../standalone/draksec:1
 #, c-format
@@ -8985,6 +9160,11 @@ msgstr ""
 msgid "Automatic Steps Configuration"
 msgstr "Подешавање аутоматизованих корака"
 
+#: ../../lang.pm:1
+#, c-format
+msgid "Barbados"
+msgstr "Барбадос"
+
 #: ../../share/advertising/02-community.pl:1
 #, c-format
 msgid ""
@@ -8993,11 +9173,6 @@ msgid ""
 msgstr ""
 "Да ли желите да сазнате више о Open Source заједници? Прикључите се свету "
 "Беспатног Софтвера!"
-
-#: ../../lang.pm:1
-#, c-format
-msgid "Barbados"
-msgstr "Барбадос"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -9046,6 +9221,11 @@ msgstr "Крај IP распона:"
 msgid "High"
 msgstr "Велика"
 
+#: ../../standalone/printerdrake:1
+#, fuzzy, c-format
+msgid "Add a new printer to the system"
+msgstr "Додај корисника у систем"
+
 #: ../../any.pm:1
 #, c-format
 msgid "NoVideo"
@@ -9061,7 +9241,7 @@ msgstr "Ово поље описује уређај"
 msgid "Adding printer to Star Office/OpenOffice.org/GIMP"
 msgstr "Додајем штампач у Star Office/OpenOffice.org/GIMP"
 
-#: ../../printer/main.pm:1 ../../printer/printerdrake.pm:1
+#: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Local Printers"
 msgstr "Локални штампачи"
@@ -9135,6 +9315,11 @@ msgstr "Кувајт"
 #, c-format
 msgid "Choose the window manager to run:"
 msgstr "Изаберите window менадзер коjи желите да користите:"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "December"
+msgstr "Децембар"
 
 #: ../../standalone/harddrake2:1
 #, fuzzy, c-format
@@ -9245,15 +9430,15 @@ msgstr "Графички интерфејс"
 msgid "Chad"
 msgstr "Чад"
 
-#: ../../Xconfig/card.pm:1 ../../Xconfig/various.pm:1
-#, c-format
-msgid "XFree %s with 3D hardware acceleration"
-msgstr "XFree %s са 3D хардверском акцелерациjом"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "India"
 msgstr "Индија"
+
+#: ../../Xconfig/card.pm:1 ../../Xconfig/various.pm:1
+#, c-format
+msgid "XFree %s with 3D hardware acceleration"
+msgstr "XFree %s са 3D хардверском акцелерациjом"
 
 #: ../../lang.pm:1
 #, c-format
@@ -9527,15 +9712,22 @@ msgstr ""
 "да би нормално функционисалe.\n"
 "Информациjе о њима можете пронaћи на: %s"
 
+#: ../../lang.pm:1
+#, c-format
+msgid "Haiti"
+msgstr "Хаити"
+
 #: ../../network/netconnect.pm:1 ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Detecting devices..."
 msgstr "Детектуjем  урeђаje..."
 
-#: ../../lang.pm:1
+#: ../../standalone/drakbackup:1
 #, c-format
-msgid "Haiti"
-msgstr "Хаити"
+msgid ""
+"Custom allows you to specify your own day and time.  The other options use "
+"run-parts in /etc/crontab."
+msgstr ""
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -9733,14 +9925,6 @@ msgstr ""
 msgid "Looking for available packages..."
 msgstr "Тражим пакете"
 
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid ""
-"This should be a comma-seperated list of local users or email addresses that "
-"you want the backup results sent to. You will need a functioning mail "
-"transfer agent setup on your system."
-msgstr ""
-
 #: ../../any.pm:1
 #, c-format
 msgid "Init Message"
@@ -9751,15 +9935,15 @@ msgstr "Инициjална порукa"
 msgid "Rescue partition table"
 msgstr "Спаси табелу партиција"
 
-#: ../../standalone/net_monitor:1
-#, c-format
-msgid "Connection complete."
-msgstr "Повезивање завршено."
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Cyprus"
 msgstr "Кипар"
+
+#: ../../standalone/net_monitor:1
+#, c-format
+msgid "Connection complete."
+msgstr "Повезивање завршено."
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -9782,6 +9966,11 @@ msgstr "Чаробњаци за конфигурацију"
 #, c-format
 msgid "ISDN connection"
 msgstr "ISDN конекциja"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "CD-R / DVD-R"
+msgstr "CDROM / DVDROM"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -9862,6 +10051,11 @@ msgstr ""
 "Фреквенција процесора у MHz (Mega herz који у првој апроксимацији може бити "
 "сматран за број инструкција које процесор може да изврши у секунди)"
 
+#: ../../standalone/printerdrake:1
+#, fuzzy, c-format
+msgid "Mandrake Linux Printer Management Tool"
+msgstr "Mandrake Linux Програм за управљање корисницима"
+
 #: ../../pkgs.pm:1
 #, c-format
 msgid "important"
@@ -9871,6 +10065,18 @@ msgstr "вaжно"
 #, c-format
 msgid "Total Progress"
 msgstr "Укупни напредак"
+
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"        - Maintain /etc/shadow\\$\\$CLIENT\\$\\$:\n"
+"        \t\tFor users to be able to log into the system from a diskless "
+"client, their entry in\n"
+"        \t\t/etc/shadow needs to be duplicated in /etc/shadow\\$\\$CLIENTS\\$"
+"\\$. drakTermServ helps\n"
+"        \t\tin this respect by adding or removing system users from this "
+"file."
+msgstr ""
 
 #: ../../help.pm:1
 #, fuzzy, c-format
@@ -9922,15 +10128,15 @@ msgstr ""
 "докуменатциjу о хардверу, или са произвођaчевог \n"
 "веб саjтa (уколико имате приступ интернету)."
 
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "Users"
-msgstr "Корисници"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Aruba"
 msgstr "Аруба"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "Users"
+msgstr "Корисници"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -9951,6 +10157,13 @@ msgstr "Неподударност лозинки"
 #, c-format
 msgid "Examples for correct IPs:\n"
 msgstr "Примери правилних IP адреса:\n"
+
+#: ../../standalone/drakbackup:1
+#, fuzzy, c-format
+msgid "Please choose the media for backup."
+msgstr ""
+"Изаберите\n"
+"медиј за backup."
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -10150,6 +10363,11 @@ msgstr ""
 "Дискета је успешно креирана.\n"
 "Сада можете поновити вашу инсталацију."
 
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "Use CD-R/DVD-R to backup"
+msgstr "Користи CD/DVDROM за backup"
+
 #: ../../standalone/harddrake2:1
 #, fuzzy, c-format
 msgid "the number of buttons the mouse has"
@@ -10320,6 +10538,11 @@ msgstr ""
 "\n"
 "Backup Извори: \n"
 
+#: ../../standalone/drakbackup:1
+#, fuzzy, c-format
+msgid "custom"
+msgstr "Избор по жeљи"
+
 #: ../../standalone/logdrake:1
 #, c-format
 msgid "Content of the file"
@@ -10376,6 +10599,7 @@ msgid "Theme name"
 msgstr "Име теме"
 
 #: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
+#: ../../standalone/printerdrake:1
 #, c-format
 msgid "/_Help"
 msgstr "/_Помоћ"
@@ -10384,6 +10608,11 @@ msgstr "/_Помоћ"
 #, c-format
 msgid "Choosing an arbitrary driver"
 msgstr "Бирам одговарајући драјвер"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Cook Islands"
+msgstr "Кукова Острва"
 
 #: ../../standalone/scannerdrake:1
 #, c-format
@@ -10398,11 +10627,6 @@ msgstr ""
 #, c-format
 msgid "the width of the progress bar"
 msgstr "сирина траке са приказом напретка"
-
-#: ../../lang.pm:1
-#, c-format
-msgid "Cook Islands"
-msgstr "Кукова Острва"
 
 #: ../../fs.pm:1
 #, c-format
@@ -10421,17 +10645,16 @@ msgstr "Деселектовани фонтови инсталирани"
 
 #: ../../any.pm:1 ../../help.pm:1 ../../install_steps_gtk.pm:1
 #: ../../install_steps_interactive.pm:1 ../../interactive.pm:1
-#: ../../my_gtk.pm:1 ../../ugtk2.pm:1 ../../ugtk.pm:1
-#: ../../Xconfig/resolution_and_depth.pm:1 ../../diskdrake/smbnfs_gtk.pm:1
-#: ../../interactive/gtk.pm:1 ../../interactive/http.pm:1
-#: ../../interactive/newt.pm:1 ../../interactive/stdio.pm:1
-#: ../../printer/printerdrake.pm:1 ../../standalone/drakautoinst:1
-#: ../../standalone/drakbackup:1 ../../standalone/drakboot:1
-#: ../../standalone/drakconnect:1 ../../standalone/drakfloppy:1
-#: ../../standalone/drakfont:1 ../../standalone/drakgw:1
-#: ../../standalone/drakperm:1 ../../standalone/draksec:1
-#: ../../standalone/logdrake:1 ../../standalone/mousedrake:1
-#: ../../standalone/net_monitor:1
+#: ../../ugtk2.pm:1 ../../Xconfig/resolution_and_depth.pm:1
+#: ../../diskdrake/smbnfs_gtk.pm:1 ../../interactive/gtk.pm:1
+#: ../../interactive/http.pm:1 ../../interactive/newt.pm:1
+#: ../../interactive/stdio.pm:1 ../../printer/printerdrake.pm:1
+#: ../../standalone/drakautoinst:1 ../../standalone/drakbackup:1
+#: ../../standalone/drakboot:1 ../../standalone/drakconnect:1
+#: ../../standalone/drakfloppy:1 ../../standalone/drakfont:1
+#: ../../standalone/drakgw:1 ../../standalone/drakperm:1
+#: ../../standalone/draksec:1 ../../standalone/logdrake:1
+#: ../../standalone/mousedrake:1 ../../standalone/net_monitor:1
 #, c-format
 msgid "Cancel"
 msgstr "Поништи"
@@ -10476,30 +10699,15 @@ msgstr "Уклони штампaч"
 msgid "View Last Log"
 msgstr ""
 
-#: ../../install_interactive.pm:1
-#, c-format
-msgid ""
-"WARNING!\n"
-"\n"
-"DrakX will now resize your Windows partition. Be careful:\n"
-"this operation is dangerous. If you have not already done\n"
-"so, you should first exit the installation, run scandisk\n"
-"under Windows (and optionally run defrag), then restart the\n"
-"installation. You should also backup your data.\n"
-"When sure, press Ok."
-msgstr ""
-"УПОЗОРЕЊЕ!\n"
-"\n"
-"DrakX треба да измени величину Windows партиције. Будите пажљиви: ова\n"
-"операција је опасна. Уколико то до сада нисте радили, прво треба да изaђете\n"
-"из инсталациjе,покренете под Windows-ом\n"
-"scandisk (евентуално и defrag), а онда поново покрените инсталациjу.\n"
-"Ако сте сигурни, притисните ОК (У реду)."
-
 #: ../../network/drakfirewall.pm:1
 #, c-format
 msgid "Which services would you like to allow the Internet to connect to?"
 msgstr "Који сервисе желите да буду доступни преко Инернета?"
+
+#: ../../standalone/printerdrake:1
+#, fuzzy, c-format
+msgid "Connection Type"
+msgstr "Тип конекције :"
 
 #: ../../standalone/logdrake:1
 #, c-format
@@ -10568,11 +10776,6 @@ msgstr "Грешка при скенирању TV канала"
 #, c-format
 msgid "US keyboard (international)"
 msgstr "US тастатура (интернационална)"
-
-#: ../../keyboard.pm:1
-#, c-format
-msgid "Saami (swedish/finish)"
-msgstr ""
 
 #: ../../standalone/drakbug:1
 #, c-format
@@ -10683,23 +10886,10 @@ msgstr "уколико је подешено на да, извештај о провери пошаљите на tty."
 msgid "You must enter a device or file name!"
 msgstr "Морате унети уређај или име фајла!"
 
-#: ../../standalone/harddrake2:1
+#: ../../standalone/harddrake2:1 ../../standalone/printerdrake:1
 #, c-format
 msgid "/_Quit"
 msgstr "/_Крај"
-
-#: ../../network/adsl.pm:1
-#, c-format
-msgid ""
-"You need the alcatel microcode.\n"
-"Download it at\n"
-"http://www.speedtouchdsl.com/dvrreg_lx.htm\n"
-"and copy the mgmt.o in /usr/share/speedtouch"
-msgstr ""
-"Вама је потребан alcatel микро мод.\n"
-"МОжете га Download-овати са\n"
-"http://www.speedtouchdsl.com/dvrreg_lx.htm\n"
-"and copy the mgmt.o in /usr/share/speedtouch"
 
 #: ../../Xconfig/various.pm:1
 #, c-format
@@ -10844,11 +11034,6 @@ msgstr "Унесите директоријум да би сачували:"
 #, c-format
 msgid "Printing"
 msgstr "Штампање"
-
-#: ../../harddrake/sound.pm:1
-#, c-format
-msgid "Unkown driver"
-msgstr "Непознати драјвер"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -11002,6 +11187,11 @@ msgstr "Сирија"
 msgid "Add a new rule at the end"
 msgstr "Додај ново правило на крају"
 
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "LiLo and Bootsplash themes installation successful"
+msgstr "Инсталација LiLo-а и Bootsplash тема успела"
+
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid ""
@@ -11032,6 +11222,11 @@ msgstr "Крај без снимања промена у табеле партиција?"
 msgid "Genius NetScroll"
 msgstr "Genius NetScroll"
 
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "On Hard Drive"
+msgstr "на Хард Диск"
+
 #: ../../standalone.pm:1
 #, c-format
 msgid "Installing packages..."
@@ -11042,15 +11237,15 @@ msgstr "Инсталирам пакете..."
 msgid "Dutch"
 msgstr "Дански"
 
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "The following packages need to be installed:\n"
-msgstr "Слeдeћи пакети треба да буду инсталирани:\n"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Angola"
 msgstr "Ангола"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "The following packages need to be installed:\n"
+msgstr "Слeдeћи пакети треба да буду инсталирани:\n"
 
 #: ../../standalone/logdrake:1
 #, c-format
@@ -11128,6 +11323,45 @@ msgstr ""
 "\n"
 "http://www.linux-mandrake.com/en/hardware.php3"
 
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"\t\t\tWhile you can use a pool of IP addresses, rather than setup a specific "
+"entry for\n"
+"\t\t\ta client machine, using a fixed address scheme facilitates using the "
+"functionality\n"
+"\t\t\tof client-specific configuration files that ClusterNFS provides.\n"
+"\t\t\t\n"
+"\t\t\tNote: The \"#type\" entry is only used by drakTermServ.  Clients can "
+"either be 'thin'\n"
+"\t\t\tor 'fat'.  Thin clients run most software on the server via xdmcp, "
+"while fat clients run \n"
+"\t\t\tmost software on the client machine. A special inittab, /etc/inittab\\$"
+"\\$IP=client_ip\\$\\$ is\n"
+"\t\t\twritten for thin clients. System config files xdm-config, kdmrc, and "
+"gdm.conf are \n"
+"\t\t\tmodified if thin clients are used, to enable xdmcp. Since there are "
+"security issues in \n"
+"\t\t\tusing xdmcp, hosts.deny and hosts.allow are modified to limit access "
+"to the local\n"
+"\t\t\tsubnet.\n"
+"\t\t\t\n"
+"\t\t\tNote: The \"#hdw_config\" entry is also only used by drakTermServ.  "
+"Clients can either \n"
+"\t\t\tbe 'true' or 'false'.  'true' enables root login at the client machine "
+"and allows local \n"
+"\t\t\thardware configuration of sound, mouse, and X, using the 'drak' tools. "
+"This is enabled \n"
+"\t\t\tby creating separate config files associated with the client's IP "
+"address and creating \n"
+"\t\t\tread/write mount points to allow the client to alter the file. Once "
+"you are satisfied \n"
+"\t\t\twith the configuration, you can remove root login privileges from the "
+"client.\n"
+"\t\t\t\n"
+"\t\t\tNote: You must stop/start the server after adding or changing clients."
+msgstr ""
+
 #: ../../standalone/drakconnect:1
 #, c-format
 msgid "Configure Local Area Network..."
@@ -11168,15 +11402,15 @@ msgstr "Информације"
 msgid "No network card"
 msgstr "Није пронађена мрежна картица"
 
-#: ../../diskdrake/interactive.pm:1 ../../diskdrake/removable.pm:1
-#, c-format
-msgid "Which filesystem do you want?"
-msgstr "Коју  датотечни систем желите ?"
-
 #: ../../mouse.pm:1
 #, c-format
 msgid "3 buttons"
 msgstr "3 тастерa"
+
+#: ../../diskdrake/interactive.pm:1 ../../diskdrake/removable.pm:1
+#, c-format
+msgid "Which filesystem do you want?"
+msgstr "Коју  датотечни систем желите ?"
 
 #: ../../lang.pm:1
 #, c-format
@@ -11233,15 +11467,15 @@ msgstr "Графичка картица"
 msgid "Resizing Windows partition"
 msgstr "Прорачунавам границе Windows фајл-система"
 
-#: ../../network/tools.pm:1 ../../standalone/drakconnect:1
-#, c-format
-msgid "Provider dns 1 (optional)"
-msgstr "Проваjдеров dns 1 (опционо)"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Cameroon"
 msgstr "Камерун"
+
+#: ../../network/tools.pm:1 ../../standalone/drakconnect:1
+#, c-format
+msgid "Provider dns 1 (optional)"
+msgstr "Проваjдеров dns 1 (опционо)"
 
 #: ../../install_interactive.pm:1
 #, c-format
@@ -11252,9 +11486,15 @@ msgstr ""
 "Садa можете партиционирати вaш %s хард диск уређај\n"
 "Кaдa завршите,не заборавите да потврдите користeћи `w'"
 
+#: ../../keyboard.pm:1
+#, c-format
+msgid "Saami (swedish/finnish)"
+msgstr ""
+
 #: ../../printer/printerdrake.pm:1 ../../standalone/drakTermServ:1
 #: ../../standalone/drakbackup:1 ../../standalone/drakbug:1
 #: ../../standalone/drakfont:1 ../../standalone/net_monitor:1
+#: ../../standalone/printerdrake:1
 #, c-format
 msgid "Close"
 msgstr "Затвори"
@@ -11298,6 +11538,11 @@ msgstr ""
 msgid "Iceland"
 msgstr "Исланд"
 
+#: ../../standalone/drakconnect:1
+#, fuzzy, c-format
+msgid "Network & Internet Configuration"
+msgstr "Подешавање мрежe"
+
 #: ../../common.pm:1
 #, c-format
 msgid "consolehelper missing"
@@ -11318,7 +11563,7 @@ msgstr "Где год FPU има irq вектор"
 msgid "Ext2"
 msgstr "Ext2"
 
-#: ../../my_gtk.pm:1 ../../ugtk2.pm:1
+#: ../../ugtk2.pm:1
 #, c-format
 msgid "Expand Tree"
 msgstr "Прошири стабло"
@@ -11339,7 +11584,6 @@ msgstr ""
 "Нови \"%s\" драјвер ће бити коришћен само при следећем стартању система."
 
 #: ../../network/netconnect.pm:1 ../../printer/printerdrake.pm:1
-#: ../../standalone/drakfloppy:1
 #, c-format
 msgid "Expert Mode"
 msgstr "Eксперт мод"
@@ -11419,6 +11663,24 @@ msgstr "Зимбабве"
 msgid "When"
 msgstr "Када"
 
+#: ../../network/adsl.pm:1
+#, c-format
+msgid ""
+"You need the Alcatel microcode.\n"
+"Download it at:\n"
+"%s\n"
+"and copy the mgmt.o in /usr/share/speedtouch"
+msgstr ""
+"Вама је потребан alcatel микро мод.\n"
+"МОжете га Download-овати са\n"
+"%s\n"
+"and copy the mgmt.o in /usr/share/speedtouch"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "Hour"
+msgstr "Час"
+
 #: ../../network/modem.pm:1 ../../standalone/drakconnect:1
 #, c-format
 msgid "Second DNS Server (optional)"
@@ -11474,11 +11736,6 @@ msgstr ""
 "ВИ такође можете да едитујете своја сопствена правила која ће бити изнад "
 "default правила."
 
-#: ../../ugtk.pm:1
-#, c-format
-msgid "-adobe-times-bold-r-normal--17-*-100-100-p-*-iso8859-*,*-r-*"
-msgstr "-adobe-times-bold-r-normal--17-*-100-100-p-*-iso8859-*,*-r-*"
-
 #: ../../any.pm:1
 #, c-format
 msgid ""
@@ -11520,6 +11777,25 @@ msgstr "/dev/hda"
 #, c-format
 msgid "/dev/hdb"
 msgstr "/dev/hdb"
+
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"        - Maintain /etc/dhcpd.conf:\n"
+"        \t\tTo net boot clients, each client needs a dhcpd.conf entry, "
+"assigning an IP address\n"
+"        \t\tand net boot images to the machine. drakTermServ helps create/"
+"remove these entries.\n"
+"\t\t\t\n"
+"        \t\t(PCI cards may omit the image - etherboot will request the "
+"correct image. You should\n"
+"        \t\talso consider that when etherboot looks for the images, it "
+"expects names like\n"
+"        \t\tboot-3c59x.nbi, rather than boot-3c59x.2.4.19-16mdk.nbi).\n"
+"\t\t\t \n"
+"        \t\tA typical dhcpd.conf stanza to support a diskless client looks "
+"like:"
+msgstr ""
 
 #: ../../services.pm:1
 #, c-format
@@ -11566,11 +11842,6 @@ msgstr ", USB штампач #%s"
 msgid "SILO Installation"
 msgstr "SILO инсталација"
 
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "Use CD/DVDROM to backup"
-msgstr "Користи CD/DVDROM за backup"
-
 #: ../../install_messages.pm:1
 #, c-format
 msgid ""
@@ -11607,6 +11878,16 @@ msgstr ""
 #, c-format
 msgid "paranoid"
 msgstr "параноидни"
+
+#: ../../security/l10n.pm:1
+#, c-format
+msgid "Do not send mails when unneeded"
+msgstr ""
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "Your scanner(s) will not be available on the network."
+msgstr ""
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -11692,7 +11973,7 @@ msgid ""
 "And, of course, push multimedia to its limits with the very latest software "
 "to play videos, audio files and to handle your images or photos."
 msgstr ""
-"Mandrake Linux 9.1 вам омогућава да доведете свој мултимедијални рачунар до "
+"Mandrake Linux 9.2 вам омогућава да доведете свој мултимедијални рачунар до "
 "крајних граница! Користећи најновији софтвер за слушање музичких и аудио "
 "фајлова, едитовање и организовање ваших слика и фотографија, гледање TV-а и "
 "видеа, и још много тога"
@@ -11785,15 +12066,20 @@ msgstr ""
 "Имате више од jедног хард диска, на коjи од њих желите да инсталирате "
 "Линукс ?"
 
+#: ../../lang.pm:1
+#, c-format
+msgid "Eritrea"
+msgstr "Еритреја"
+
 #: ../../standalone/drakTermServ:1
 #, c-format
 msgid "Boot ISO"
 msgstr "Boot ISO"
 
-#: ../../lang.pm:1
-#, c-format
-msgid "Eritrea"
-msgstr "Еритреја"
+#: ../../network/adsl.pm:1
+#, fuzzy, c-format
+msgid "Firmware needed"
+msgstr "уколико jе потребно"
 
 #: ../../standalone/drakfont:1
 #, c-format
@@ -11932,6 +12218,11 @@ msgstr ""
 msgid "Add a scanner manually"
 msgstr "Ручно инсталација скенера"
 
+#: ../../standalone/printerdrake:1
+#, c-format
+msgid "Refresh"
+msgstr "Освежи"
+
 #: ../../help.pm:1 ../../diskdrake/interactive.pm:1
 #, c-format
 msgid "Reload partition table"
@@ -11963,6 +12254,11 @@ msgstr "Локална Мрежа није завршила са`.0', bailing out."
 #, c-format
 msgid "Boot"
 msgstr "Стартање"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid " and the CD is in the drive"
+msgstr ""
 
 #: ../../harddrake/v4l.pm:1
 #, c-format
@@ -12058,6 +12354,11 @@ msgstr ""
 "\n"
 "Подесите shell паузу. Вредност zero - нула значи да нема паузе."
 
+#: ../../network/adsl.pm:1
+#, c-format
+msgid "Firmware copy succeeded"
+msgstr ""
+
 #: ../../security/help.pm:1
 #, c-format
 msgid "if set to yes, check permissions of files in the users' home."
@@ -12100,6 +12401,11 @@ msgstr "Штампач \"%s\" је успешно уклоњен из Star Office/OpenOffice.org/GIMP-а"
 #, c-format
 msgid "Save packages selection"
 msgstr "Сaчуваj селекциjу пакетa"
+
+#: ../../standalone/printerdrake:1
+#, c-format
+msgid "/_Actions"
+msgstr "/_Акције"
 
 #: ../../standalone/drakautoinst:1
 #, c-format
@@ -12169,15 +12475,15 @@ msgstr "Величина: %s"
 msgid "Which sector do you want to move it to?"
 msgstr "Где желитe да инсталирате стартер?"
 
-#: ../../interactive/stdio.pm:1
-#, c-format
-msgid "Do you want to click on this button?"
-msgstr "Да ли желите да кликнете на овај тастер? "
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Bahamas"
 msgstr "Бахами"
+
+#: ../../interactive/stdio.pm:1
+#, c-format
+msgid "Do you want to click on this button?"
+msgstr "Да ли желите да кликнете на овај тастер? "
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -12301,10 +12607,39 @@ msgstr ""
 "\n"
 "Напоменa: потребанa вам jе мрeжна картица да би подесили локалну мрeжу(LAN)."
 
-#: ../../security/l10n.pm:1
-#, c-format
-msgid "Authorize TCP connections X Window"
+#: ../../harddrake/sound.pm:1
+#, fuzzy, c-format
+msgid ""
+"OSS (Open Sound System) was the first sound API. It's an OS independent "
+"sound API (it's available on most UNIX(tm) systems) but it's a very basic "
+"and limited API.\n"
+"What's more, OSS drivers all reinvent the wheel.\n"
+"\n"
+"ALSA (Advanced Linux Sound Architecture) is a modularized architecture "
+"which\n"
+"supports quite a large range of ISA, USB and PCI cards.\n"
+"\n"
+"It also provides a much higher API than OSS.\n"
+"\n"
+"To use alsa, one can either use:\n"
+"- the old compatibility OSS api\n"
+"- the new ALSA api that provides many enhanced features but requires using "
+"the ALSA library.\n"
 msgstr ""
+"OSS (Отворени Систем за Звук)је био прву звучни API. Он је независан звучни "
+"API у односу на оперативни систем(доступан је на већини unices система) али "
+"је прилично рудименаран и ограничен API.\n"
+"Чак шта више, већина драјвера као да поново откирва точак \n"
+"\n"
+"ALSA (Advanced Linux Sound Architecture) је модуларне архитектуре који\n"
+"подржава велики број ISA, USB и PCI картица.\n"
+"\n"
+"Он такође обезбеђује много већи API у односу на  OSS.\n"
+"\n"
+"Да би користили alsa, можете користи или:\n"
+"- стари компатибилни OSS api\n"
+"- нови ALSA api који омогућава много напредне могућности али захтева "
+"коришћење ALSA библиотеке.\n"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -12348,11 +12683,6 @@ msgid ""
 msgstr ""
 "HardDrake старта испитивање харедвера, и по потреби ђе подесити \n"
 "нови/измењени хардвер."
-
-#: ../../printer/cups.pm:1 ../../printer/main.pm:1
-#, c-format
-msgid "Remote Printers"
-msgstr "Удаљени штампaчи"
 
 #: ../../fs.pm:1
 #, c-format
@@ -12410,6 +12740,11 @@ msgstr "Користи скенере на хостовима: "
 msgid "Unselected All"
 msgstr "Деселектуј Све"
 
+#: ../../standalone/printerdrake:1
+#, fuzzy, c-format
+msgid "Printer Management \n"
+msgstr "Управљање корисницима \n"
+
 #: ../../standalone/logdrake:1
 #, c-format
 msgid "Domain Name Resolver"
@@ -12449,6 +12784,17 @@ msgstr "Модем"
 #, c-format
 msgid "Welcome to %s"
 msgstr "Доброшли у  %s"
+
+#: ../../standalone/drakhelp:1
+#, c-format
+msgid ""
+" drakhelp 0.1\n"
+"Copyright (C) 2003 MandrakeSoft.\n"
+"This is free software and may be redistributed under the terms of the GNU "
+"GPL.\n"
+"\n"
+"Usage: \n"
+msgstr ""
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -12530,15 +12876,20 @@ msgstr ""
 msgid "Cuba"
 msgstr "Куба"
 
-#: ../../printer/printerdrake.pm:1
+#: ../../standalone/drakbackup:1
 #, c-format
-msgid "Searching for new printers..."
-msgstr "Тражим нове штампаче..."
+msgid "October"
+msgstr "Октобар"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Belize"
 msgstr "Белизе"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Searching for new printers..."
+msgstr "Тражим нове штампаче..."
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -12566,6 +12917,11 @@ msgstr ""
 "Аргументи: (arg)\n"
 "\n"
 " Активирај/Деактивирај дневне сигурносне провере."
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "\t-CD-R.\n"
+msgstr "\t-CD-R.\n"
 
 #: ../../security/l10n.pm:1
 #, fuzzy, c-format
@@ -12598,6 +12954,11 @@ msgstr ""
 #, c-format
 msgid "Automatic time synchronization (using NTP)"
 msgstr "Аутоматска синхронизација времена (преко NTP-а)"
+
+#: ../../network/adsl.pm:1
+#, fuzzy, c-format
+msgid "Use my Windows partition"
+msgstr "Прорачунавам границе Windows фајл-система"
 
 #: ../../Xconfig/card.pm:1
 #, c-format
@@ -12634,6 +12995,26 @@ msgid ""
 msgstr ""
 "\n"
 "- Системски фајлови:\n"
+
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"        - Per client system configuration files:\n"
+"        \t\tThrough clusternfs, each diskless client can have its own unique "
+"configuration files\n"
+"        \t\ton the root filesystem of the server. By allowing local client "
+"hardware configuration, \n"
+"\t\t\t\tclients can customize files such as /etc/modules.conf, /etc/"
+"sysconfig/mouse, \n"
+"        \t\t/etc/sysconfig/keyboard on a per-client basis.\n"
+"\n"
+"        Note: Enabling local client hardware configuration does enable root "
+"login to the terminal \n"
+"        server on each client machine that has this feature enabled.  Local "
+"configuration can be turned\n"
+"        back off, retaining the configuration files, once the client machine "
+"is configured."
+msgstr ""
 
 #: ../../standalone/drakbug:1
 #, c-format
@@ -12684,6 +13065,14 @@ msgstr "Кључ за енкрипцију"
 msgid "Microsoft IntelliMouse"
 msgstr "Microsoft IntelliMouse"
 
+#: ../../keyboard.pm:1
+#, c-format
+msgid ""
+"This setting will be activated after the installation.\n"
+"During installation, you will need to use the Right Control\n"
+"key to switch between the different keyboard layouts."
+msgstr ""
+
 #: ../../lang.pm:1
 #, c-format
 msgid "Christmas Island"
@@ -12703,6 +13092,11 @@ msgstr "EIDE/SCSI канал"
 #, c-format
 msgid "Set this printer as the default"
 msgstr "Подеси овај штампач као default"
+
+#: ../../standalone/drakbackup:1
+#, fuzzy, c-format
+msgid "Verify that %s is the correct path"
+msgstr "Да ли је ово исправно подешено?"
 
 #: ../../install_interactive.pm:1
 #, c-format
@@ -12764,8 +13158,13 @@ msgstr "Брзина при ппријему:"
 msgid "Turks and Caicos Islands"
 msgstr "Turks and Caicos Islands"
 
+#: ../../standalone/drakconnect:1
+#, c-format
+msgid "No Ip"
+msgstr ""
+
 #: ../../help.pm:1 ../../install_steps_gtk.pm:1 ../../interactive.pm:1
-#: ../../my_gtk.pm:1 ../../ugtk2.pm:1 ../../interactive/newt.pm:1
+#: ../../ugtk2.pm:1 ../../interactive/newt.pm:1
 #: ../../printer/printerdrake.pm:1 ../../standalone/drakbackup:1
 #, c-format
 msgid "<- Previous"
@@ -12791,7 +13190,7 @@ msgstr ""
 msgid "Internet Connection Sharing configuration"
 msgstr "Конфигурациjа Дeљeња Интернет конекциje"
 
-#: ../../my_gtk.pm:1 ../../ugtk2.pm:1
+#: ../../ugtk2.pm:1
 #, c-format
 msgid "Toggle between flat and group sorted"
 msgstr "Бираjте: равно или групно сортирано"
@@ -12825,6 +13224,11 @@ msgstr "OKI win штампач конфигурација"
 msgid "Saint Helena"
 msgstr "Света Јелена"
 
+#: ../../printer/main.pm:1
+#, fuzzy, c-format
+msgid "Parallel port #%s"
+msgstr " на парелелном порту #%s"
+
 #: ../../help.pm:1 ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Security Level"
@@ -12855,6 +13259,17 @@ msgstr "Пољски (qwertz распоред)"
 #, c-format
 msgid "Syria"
 msgstr "Сирија"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid ""
+"Is your printer a multi-function device from HP or Sony (OfficeJet, PSC, "
+"LaserJet 1100/1200/1220/3200/3300 with scanner, DeskJet 450, Sony IJP-V100), "
+"an HP PhotoSmart or an HP LaserJet 2200?"
+msgstr ""
+"Да ли је ваш уређај више-функционални уређај проиѕвођача HP или Sony "
+"(OfficeJet, PSC, LaserJet 1100/1200/1220/3200/3300 са скенереом, DeskJet "
+"450, Sony IJP-V100),  HP PhotoSmart или HP LaserJet 2200?"
 
 # NOTE: this message will be displayed at boot time; that is
 # only the ascii charset will be available on most machines
@@ -12910,6 +13325,11 @@ msgstr "Нови Зеланд"
 #, c-format
 msgid "This directory should remain within the root filesystem"
 msgstr "Оваj директориjум треба да остане у root-у  датотeчног системa"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "Across Network"
+msgstr "преко Мреже"
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -13000,7 +13420,7 @@ msgstr "Интерно име домена"
 msgid "Card IRQ"
 msgstr "IRQ картицe"
 
-#: ../../ugtk.pm:1 ../../standalone/logdrake:1
+#: ../../standalone/logdrake:1
 #, c-format
 msgid "logdrake"
 msgstr "logdrake"
@@ -13138,11 +13558,6 @@ msgstr "Отпочни Firmware паузу"
 msgid "Hungary"
 msgstr "Мађарска"
 
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "Total progess"
-msgstr "Укупан напредак"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "New Zealand"
@@ -13167,6 +13582,11 @@ msgstr ""
 msgid "please choose the date to restore"
 msgstr "изаберите датум за обнављање"
 
+#: ../../lang.pm:1
+#, c-format
+msgid "Netherlands Antilles"
+msgstr "Холандски Антили"
+
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid "Switching from ext2 to ext3"
@@ -13176,11 +13596,6 @@ msgstr "Мењам ext2 на ext3"
 #, c-format
 msgid "LPRng"
 msgstr "LPRng"
-
-#: ../../lang.pm:1
-#, c-format
-msgid "Netherlands Antilles"
-msgstr "Холандски Антили"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -13260,8 +13675,13 @@ msgstr " унесите `void' за void унос"
 
 #: ../../standalone/drakbackup:1
 #, c-format
-msgid "on Hard Drive"
-msgstr "на Хард Диск"
+msgid "Backups on unmountable media - Use Catalog to restore"
+msgstr ""
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "January"
+msgstr "Јануар"
 
 #: ../../security/l10n.pm:1
 #, fuzzy, c-format
@@ -13391,6 +13811,21 @@ msgstr "Јужна Џорџија и Јужна Сендвичка Острва"
 msgid "Japan (broadcast)"
 msgstr "Јапан (broadcast)"
 
+#: ../../help.pm:1
+#, fuzzy, c-format
+msgid ""
+"Monitor\n"
+"\n"
+"   The installer will normally automatically detect and configure the\n"
+"monitor connected to your machine. If it is incorrect, you can choose from\n"
+"this list the monitor you actually have connected to your computer."
+msgstr ""
+"Монитор\n"
+"\n"
+"   Програм за инсталацију обично аутоматски детектује и подешава\n"
+"монитор повезан на вашу машину. Уколико се то недеси, можете сами\n"
+"сами да изаберете модел монитора са листе."
+
 #: ../../lang.pm:1
 #, c-format
 msgid "Mozambique"
@@ -13446,6 +13881,11 @@ msgstr ""
 msgid "Local Printer"
 msgstr "Локални штампач"
 
+#: ../../network/adsl.pm:1
+#, fuzzy, c-format
+msgid "Floppy access error, unable to mount device %s"
+msgstr "Где бисте да монтирате %s уређај ?"
+
 #: ../../standalone.pm:1
 #, c-format
 msgid "[--file=myfile] [--word=myword] [--explain=regexp] [--alert]"
@@ -13476,20 +13916,20 @@ msgstr "Детектована је кабловска конекциja "
 msgid "Permission denied transferring %s to %s"
 msgstr "Одбијен приступ при трансферу %s на %s"
 
-#: ../../standalone/harddrake2:1
+#: ../../standalone/harddrake2:1 ../../standalone/printerdrake:1
 #, c-format
 msgid "/_Report Bug"
 msgstr "/_Пријавите Баг"
-
-#: ../../diskdrake/interactive.pm:1
-#, c-format
-msgid "Resize"
-msgstr "Промени величину"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Dominica"
 msgstr "Доминикана"
+
+#: ../../diskdrake/interactive.pm:1
+#, c-format
+msgid "Resize"
+msgstr "Промени величину"
 
 #: ../../Xconfig/various.pm:1
 #, c-format
@@ -13545,6 +13985,36 @@ msgstr "Миш је постављен на уређај: %s\n"
 #, c-format
 msgid "Reselect correct fonts"
 msgstr "Поново селектуј исправне фонтове"
+
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"        - /etc/xinetd.d/tftp:\n"
+"        \t\tdrakTermServ will configure this file to work in conjunction "
+"with the images created by\n"
+"        \t\tmkinitrd-net, and the entries in /etc/dhcpd.conf, to serve up "
+"the boot image to each\n"
+"        \t\tdiskless client.\n"
+"\n"
+"        \t\tA typical tftp configuration file looks like:\n"
+"        \t\t\n"
+"        \t\tservice tftp\n"
+"\t\t\t{\n"
+"                        disable         = no\n"
+"                        socket_type  = dgram\n"
+"                        protocol        = udp\n"
+"                        wait             = yes\n"
+"                        user             = root\n"
+"                        server          = /usr/sbin/in.tftpd\n"
+"                        server_args  = -s /var/lib/tftpboot\n"
+"        \t\t}\n"
+"        \t\t\n"
+"        \t\tThe changes here from the default installation are changing the "
+"disable flag to\n"
+"        \t\t'no' and changing the directory path to /var/lib/tftpboot, where "
+"mkinitrd-net\n"
+"        \t\tputs its images."
+msgstr ""
 
 #: ../../help.pm:1
 #, fuzzy, c-format
@@ -13665,6 +14135,11 @@ msgstr ""
 "%s%s\n"
 "су директно повезани на ваш систем"
 
+#: ../../network/modem.pm:1
+#, c-format
+msgid "You don't have any winmodem"
+msgstr ""
+
 #: ../../standalone/drakTermServ:1
 #, c-format
 msgid "type: %s"
@@ -13674,6 +14149,14 @@ msgstr "тип: %s"
 #, c-format
 msgid "Slovakian (QWERTY)"
 msgstr "Словачки (QWERTY)"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid ""
+"This should be a comma-separated list of local users or email addresses that "
+"you want the backup results sent to. You will need a functioning mail "
+"transfer agent setup on your system."
+msgstr ""
 
 #: ../../standalone/draksound:1
 #, c-format
@@ -13788,6 +14271,11 @@ msgstr ""
 #, c-format
 msgid "Comoros"
 msgstr "Комори"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "May"
+msgstr "Мај"
 
 #: ../../standalone/drakboot:1
 #, c-format
@@ -13915,6 +14403,11 @@ msgid ""
 "development environments."
 msgstr ""
 
+#: ../../standalone/drakbackup:1
+#, fuzzy, c-format
+msgid "No devices found"
+msgstr "НИје пронађен image"
+
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Truly minimal install (especially no urpmi)"
@@ -13956,15 +14449,15 @@ msgstr ""
 msgid "Where do you want to mount %s?"
 msgstr "Где бисте да монтирате %s уређај ?"
 
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "Restore Via Network"
-msgstr "Обнови преко Мреже"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Algeria"
 msgstr "Алжир"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "Restore Via Network"
+msgstr "Обнови преко Мреже"
 
 #: ../../any.pm:1
 #, c-format
@@ -13987,15 +14480,30 @@ msgstr ""
 msgid "\tBackups use tar and gzip\n"
 msgstr "\tBackus користи tar и gzip\n"
 
+#: ../../standalone/printerdrake:1
+#, fuzzy, c-format
+msgid "Set as default"
+msgstr "default"
+
 #: ../../Xconfig/card.pm:1
 #, c-format
 msgid "2 MB"
 msgstr "2 MB"
 
+#: ../../printer/main.pm:1 ../../standalone/printerdrake:1
+#, fuzzy, c-format
+msgid "Configured on this machine"
+msgstr "(на овој машини)"
+
 #: ../../keyboard.pm:1
 #, fuzzy, c-format
 msgid "Both Control keys simultaneously"
 msgstr "Оба Shift тастера истовремено"
+
+#: ../../standalone/drakhelp:1
+#, c-format
+msgid " --help                - display this help     \n"
+msgstr ""
 
 #: ../../standalone.pm:1
 #, c-format
@@ -14101,15 +14609,6 @@ msgstr ""
 msgid "Kenya"
 msgstr "Кенија"
 
-#: ../../share/advertising/04-configuration.pl:1
-#, c-format
-msgid ""
-"Mandrake Linux 9.1 provides you with the Mandrake Control Center, a powerful "
-"tool to fully adapt your computer to the use you make of it. Configure and "
-"customize elements such as the security level, the peripherals (screen, "
-"mouse, keyboard...), the Internet connection and much more!"
-msgstr ""
-
 #: ../../diskdrake/hd_gtk.pm:1
 #, c-format
 msgid "Use ``Unmount'' first"
@@ -14134,6 +14633,29 @@ msgstr "креирање првог корака"
 #, c-format
 msgid "Both Shift keys simultaneously"
 msgstr "Оба Shift тастера истовремено"
+
+#: ../../standalone/drakhelp:1
+#, c-format
+msgid ""
+" --id <id_label>       - load the html help page which refers to id_label\n"
+msgstr ""
+
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"        - Create etherboot floppies/CDs:\n"
+"        \t\tThe diskless client machines need either ROM images on the NIC, "
+"or a boot floppy\n"
+"        \t\tor CD to initate the boot sequence.  drakTermServ will help "
+"generate these images,\n"
+"        \t\tbased on the NIC in the client machine.\n"
+"        \t\t\n"
+"        \t\tA basic example of creating a boot floppy for a 3Com 3c509 "
+"manually:\n"
+"        \t\t\n"
+"        \t\tcat /usr/lib/etherboot/boot1a.bin \\\n"
+"        \t\t\t/usr/lib/etherboot/lzrom/3c509.lzrom > /dev/fd0"
+msgstr ""
 
 #: ../../standalone/scannerdrake:1
 #, c-format
@@ -14199,7 +14721,7 @@ msgid ""
 "Mandrake Linux user interfaces which can be fully modified: KDE 3.1, GNOME "
 "2.2, Window Maker, ..."
 msgstr ""
-"Mandrake Linux 9.1 вам доноси 11 различитих грфичких десктоп окружења и "
+"Mandrake Linux 9.2 вам доноси 11 различитих грфичких десктоп окружења и "
 "window менаџера па тако можете изабрати између  GNOME 2, KDE 3, Window "
 "Maker..."
 
@@ -14343,22 +14865,22 @@ msgstr "utopia 25"
 msgid "Pipe job into a command"
 msgstr "Убаци наредбу у команду"
 
+#: ../../lang.pm:1
+#, c-format
+msgid "Cote d'Ivoire"
+msgstr "Обала слоноваче"
+
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "new dynamic device name generated by core kernel devfs"
 msgstr "ново динамичко име уређаја генерисано од стране core kernel devfs"
 
 #: ../../help.pm:1 ../../install_any.pm:1 ../../interactive.pm:1
-#: ../../my_gtk.pm:1 ../../ugtk2.pm:1 ../../modules/interactive.pm:1
-#: ../../standalone/drakgw:1 ../../standalone/harddrake2:1
+#: ../../ugtk2.pm:1 ../../modules/interactive.pm:1 ../../standalone/drakgw:1
+#: ../../standalone/harddrake2:1
 #, c-format
 msgid "Yes"
 msgstr "Да"
-
-#: ../../lang.pm:1
-#, c-format
-msgid "Cote d'Ivoire"
-msgstr "Обала слоноваче"
 
 #: ../../network/isdn.pm:1
 #, c-format
@@ -14445,11 +14967,6 @@ msgstr "Изаберите тип конекције који желите да користите"
 #, c-format
 msgid "Please wait, setting security level..."
 msgstr "Само моменат, подешавам ниво сигурности..."
-
-#: ../../share/advertising/06-development.pl:1
-#, c-format
-msgid "Mandrake Linux 9.1: the ultimate development platform"
-msgstr "Mandrake Linux 9.1 ултимативна развојна платформа"
 
 #: ../../network/network.pm:1
 #, c-format
@@ -14551,8 +15068,8 @@ msgstr "Дељење локалних штампача"
 
 #: ../../install_messages.pm:1
 #, c-format
-msgid "http://www.mandrakelinux.com/en/91errata.php3"
-msgstr "http://www.mandrakelinux.com/en/91errata.php3"
+msgid "http://www.mandrakelinux.com/en/92errata.php3"
+msgstr "http://www.mandrakelinux.com/en/92errata.php3"
 
 #: ../../security/help.pm:1
 #, fuzzy, c-format
@@ -14571,116 +15088,6 @@ msgstr "Доступни штампачи"
 #, c-format
 msgid "Empty"
 msgstr "Празно"
-
-#: ../../help.pm:1
-#, fuzzy, c-format
-msgid ""
-"X (for X Window System) is the heart of the GNU/Linux graphical interface\n"
-"on which all the graphical environments (KDE, GNOME, AfterStep,\n"
-"WindowMaker, etc.) bundled with Mandrake Linux rely upon.\n"
-"\n"
-"You will be presented with a list of different parameters to change to get\n"
-"an optimal graphical display: Graphic Card\n"
-"\n"
-"   The installer will normally automatically detect and configure the\n"
-"graphic card installed on your machine. If it is not the case, you can\n"
-"choose from this list the card you actually have installed.\n"
-"\n"
-"   In the case that different servers are available for your card, with or\n"
-"without 3D acceleration, you are then asked to choose the server that best\n"
-"suits your needs.\n"
-"\n"
-"\n"
-"\n"
-"Monitor\n"
-"\n"
-"   The installer will normally automatically detect and configure the\n"
-"monitor connected to your machine. If it is correct, you can choose from\n"
-"this list the monitor you actually have connected to your computer.\n"
-"\n"
-"\n"
-"\n"
-"Resolution\n"
-"\n"
-"   Here you can choose the resolutions and color depths available for your\n"
-"hardware. Choose the one that best suits your needs (you will be able to\n"
-"change that after installation though). A sample of the chosen\n"
-"configuration is shown in the monitor.\n"
-"\n"
-"\n"
-"\n"
-"Test\n"
-"\n"
-"   the system will try to open a graphical screen at the desired\n"
-"resolution. If you can see the message during the test and answer \"%s\",\n"
-"then DrakX will proceed to the next step. If you cannot see the message, it\n"
-"means that some part of the autodetected configuration was incorrect and\n"
-"the test will automatically end after 12 seconds, bringing you back to the\n"
-"menu. Change settings until you get a correct graphical display.\n"
-"\n"
-"\n"
-"\n"
-"Options\n"
-"\n"
-"   Here you can choose whether you want to have your machine automatically\n"
-"switch to a graphical interface at boot. Obviously, you want to check\n"
-"\"%s\" if your machine is to act as a server, or if you were not successful\n"
-"in getting the display configured."
-msgstr ""
-"X (или  X Window Систем) је срце GNU/Linux графичког интерфејса\n"
-"на који се ослањају сва графичка окружења (KDE, GNOME, AfterStep,\n"
-"WindowMaker, итд.) која се налазе у Mandrake Linux-у.\n"
-"\n"
-"Биће вам приказана листа са различитим параметрима чијом изменом\n"
-"можете добити оптималан графички приказ: Графичка картица\n"
-"\n"
-"\n"
-"   Програм за инсталацију обично аутоматски детектује и подешава\n"
-"графичку карту која се налази у вашем рачуну. Уколико то није случај, "
-"можете\n"
-"сами да изаберете картицу са листе.\n"
-"\n"
-"   Уколико су различити сервери доступни за вашу картицу, са или\n"
-"вез 3D акцелерације, онда треба да изаберете онај који највише\n"
-"одговара вашим потребама.\n"
-"\n"
-"\n"
-"\n"
-"Монитор\n"
-"\n"
-"   Програм за инсталацију обично аутоматски детектује и подешава\n"
-"монитор који повезан са вашим рачунаром. Уколико се то не деси можете "
-"изабрати\n"
-"сами са листе понуђених монитора\n"
-"\n"
-"   Овде можете изабрати резолуцију и број боја од\n"
-"оних које су понуђене за ваш хардвер. Изаберите оно што највише одговара "
-"вашим потребама\n"
-"(ове опције ћете моћи изменити и након инсталације). Изабрана\n"
-"конфигурације се види на монитору.\n"
-"\n"
-"\n"
-"\n"
-"Тест\n"
-"\n"
-"   систем ће покушати да отвори графички екран у жељеној\n"
-"резолуцији. Уколико можете да видите поруку током теста одговорите са \"Да"
-"\",\n"
-"и DrakX ће наставити са следећим кораком. Уколико не можете да видите "
-"поруку, то\n"
-"значи да је неки део аутотедекције био неправилан и\n"
-"тест ће аутоматски завршити након 12 секунди, отаварајући мени за\n"
-"конфигурацију. Измените опције све док не добијете коректан графички "
-"приказ.\n"
-"\n"
-"\n"
-"\n"
-"Опције\n"
-"\n"
-"   Овде можете да изаберете да ли желите да ваш рачуанр аутоматски\n"
-"пређе на графички интерфејс при стартању. Очигледно, изабраћете\n"
-"\"Не\" уколико је ваша машина сервер, или уколико нисте успели да успешно \n"
-"подесите графички приказ."
 
 #: ../../standalone/draksplash:1
 #, c-format
@@ -14712,6 +15119,21 @@ msgstr ""
 "\n"
 "\n"
 "Притисните \"У реду\" за наставак."
+
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"        - Create Etherboot Enabled Boot Images:\n"
+"        \t\tTo boot a kernel via etherboot, a special kernel/initrd image "
+"must be created.\n"
+"        \t\tmkinitrd-net does much of this work and drakTermServ is just a "
+"graphical interface\n"
+"        \t\tto help manage/customize these images. To create the file \n"
+"        \t\t/etc/dhcpd.conf.etherboot-pcimap.include that is pulled in as an "
+"include in \n"
+"        \t\tdhcpd.conf, you should create the etherboot images for at least "
+"one full kernel."
+msgstr ""
 
 #: ../../printer/main.pm:1 ../../printer/printerdrake.pm:1
 #, c-format
@@ -14787,8 +15209,7 @@ msgstr "Подешавање миша"
 msgid "Choose the mount points"
 msgstr "Изаберите тачке монтирања"
 
-#: ../../help.pm:1 ../../ugtk.pm:1 ../../standalone/drakTermServ:1
-#: ../../standalone/drakfont:1
+#: ../../help.pm:1 ../../standalone/drakTermServ:1 ../../standalone/drakfont:1
 #, c-format
 msgid "OK"
 msgstr "ОK"
@@ -14802,6 +15223,11 @@ msgstr "Српски (латиница)"
 #, c-format
 msgid "Installing"
 msgstr "Инсталирам"
+
+#: ../../mouse.pm:1
+#, fuzzy, c-format
+msgid "Logitech MouseMan with Wheel emulation"
+msgstr "Logitech MouseMan"
 
 #: ../../any.pm:1
 #, c-format
@@ -14935,15 +15361,15 @@ msgstr "Бедна"
 msgid "Report check result by mail"
 msgstr "уколико кажете да, пошаљите резултат провере mail-ом."
 
-#: ../../standalone/drakgw:1
-#, c-format
-msgid "The DHCP start range"
-msgstr "DHCP почетак распона"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Grenada"
 msgstr "Гренада"
+
+#: ../../standalone/drakgw:1
+#, c-format
+msgid "The DHCP start range"
+msgstr "DHCP почетак распона"
 
 #: ../../any.pm:1
 #, c-format
@@ -14956,22 +15382,11 @@ msgid ", %s sectors"
 msgstr ", %s сектора"
 
 #: ../../help.pm:1 ../../install_any.pm:1 ../../interactive.pm:1
-#: ../../my_gtk.pm:1 ../../ugtk2.pm:1 ../../modules/interactive.pm:1
+#: ../../ugtk2.pm:1 ../../modules/interactive.pm:1
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "No"
 msgstr "Не"
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid ""
-"Is your printer a multi-function device from HP or Sony (OfficeJet, PSC, "
-"LaserJet 1100/1200/1220/3200/3300 with scanner, Sony IJP-V100), an HP "
-"PhotoSmart or an HP LaserJet 2200?"
-msgstr ""
-"Да ли је ваш уређај више-функционални уређај проиѕвођача HP или Sony "
-"(OfficeJet, PSC, LaserJet 1100/1200/1220/3200/3300 са скенереом, Sony IJP-"
-"V100),  HP PhotoSmart или HP LaserJet 2200?"
 
 #: ../../lang.pm:1
 #, c-format
@@ -15038,15 +15453,15 @@ msgstr "NetWare опције штампача"
 msgid "%s BootSplash (%s) preview"
 msgstr "%s BootSplash (%s) преглед"
 
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "February"
+msgstr "Фебруар"
+
 #: ../../standalone/drakfloppy:1
 #, c-format
 msgid "General"
 msgstr "Општe"
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "Printing system: "
-msgstr "Систем за штампање: "
 
 #: ../../security/l10n.pm:1
 #, c-format
@@ -15063,6 +15478,16 @@ msgstr "Додај корисника"
 msgid "Network configuration (%d adapters)"
 msgstr "Подешавање мрежe (%d адаптерa)"
 
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "April"
+msgstr "Април"
+
+#: ../../standalone/drakconnect:1
+#, fuzzy, c-format
+msgid "Deactivate now"
+msgstr "деактивирај сад"
+
 #: ../../any.pm:1 ../../install_any.pm:1 ../../standalone.pm:1
 #, c-format
 msgid "Mandatory package %s is missing"
@@ -15073,7 +15498,7 @@ msgstr "Текући пакет %s недостаје"
 msgid "Philippines"
 msgstr "Филипини"
 
-#: ../../interactive.pm:1 ../../my_gtk.pm:1 ../../ugtk2.pm:1
+#: ../../interactive.pm:1 ../../ugtk2.pm:1
 #: ../../Xconfig/resolution_and_depth.pm:1 ../../interactive/gtk.pm:1
 #: ../../interactive/http.pm:1 ../../interactive/newt.pm:1
 #: ../../interactive/stdio.pm:1 ../../standalone/drakbackup:1
@@ -15084,6 +15509,11 @@ msgstr "Филипини"
 #, c-format
 msgid "Ok"
 msgstr "У реду"
+
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid "drakTermServ Overview"
+msgstr ""
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -15309,6 +15739,11 @@ msgstr "Користи за loopback"
 msgid "Mandrake Bug Report Tool"
 msgstr "Mandrake Програм за Пријављивање Грешака"
 
+#: ../../standalone/printerdrake:1
+#, c-format
+msgid "Apply filter"
+msgstr "Примени филтер"
+
 #: ../../network/adsl.pm:1
 #, c-format
 msgid "use pppoe"
@@ -15339,11 +15774,6 @@ msgstr "Пребаци"
 msgid "Dvorak (Swedish)"
 msgstr "Дворак (Шведски)"
 
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "More Options"
-msgstr "Више Опција"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Afghanistan"
@@ -15351,8 +15781,18 @@ msgstr "Авганистан"
 
 #: ../../standalone/drakbackup:1
 #, c-format
+msgid "More Options"
+msgstr "Више Опција"
+
+#: ../../standalone/drakbackup:1
+#, c-format
 msgid "Delete Hard Drive tar files after backup to other media."
 msgstr "Обришите tar фајове на тврдом диску након backup-а на други медиј."
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Burundi"
+msgstr "Бурунди"
 
 #: ../../services.pm:1
 #, c-format
@@ -15365,11 +15805,6 @@ msgstr ""
 "cron jе стандардни UNIX програм коjи покрeће корисничке програме\n"
 "прериодично у заказано време. vixie cron  додаjе опциjе простом UNIX cron,"
 "укључуjући бољу  сигурност и бољу подесивост."
-
-#: ../../lang.pm:1
-#, c-format
-msgid "Burundi"
-msgstr "Бурунди"
 
 #: ../../standalone/drakTermServ:1
 #, c-format
@@ -15434,15 +15869,22 @@ msgstr "Подеси-GID"
 msgid "The encryption keys do not match"
 msgstr "Неподударност енкрипционих кључева (лозинки)"
 
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid ""
+"For a multisession CD, only the first session will erase the cdrw. Otherwise "
+"the cdrw is erased before each backup."
+msgstr ""
+
+#: ../../printer/main.pm:1
+#, fuzzy, c-format
+msgid "USB printer"
+msgstr ", USB штампач"
+
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Right \"Windows\" key"
 msgstr "Десни \"Windows\" тастер"
-
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "CDROM / DVDROM"
-msgstr "CDROM / DVDROM"
 
 #: ../../security/help.pm:1
 #, c-format
@@ -15529,6 +15971,11 @@ msgstr "TB"
 msgid "FATAL"
 msgstr "ФАТАЛНА"
 
+#: ../../standalone/printerdrake:1
+#, c-format
+msgid "Refresh the list"
+msgstr "Освежи листу"
+
 #: ../../standalone/drakpxe:1
 #, c-format
 msgid ""
@@ -15545,7 +15992,7 @@ msgstr ""
 "\n"
 
 #: ../../diskdrake/hd_gtk.pm:1 ../../diskdrake/interactive.pm:1
-#: ../../standalone/drakperm:1
+#: ../../standalone/drakperm:1 ../../standalone/printerdrake:1
 #, c-format
 msgid "Delete"
 msgstr "Обриши"
@@ -15599,6 +16046,14 @@ msgstr "Европски протокол"
 #, c-format
 msgid ", printer \"%s\" on server \"%s\""
 msgstr ", штампач \"%s\" на серверу \"%s\""
+
+#: ../../standalone/drakbackup:1
+#, fuzzy, c-format
+msgid "Note that currently all 'net' media also use the hard drive."
+msgstr ""
+"Проверите да ли је cron демон укључен у ваше сервисе. \n"
+"\n"
+"Можете приметити да сви 'net' медији такође користе хард диск."
 
 #: ../../fsedit.pm:1 ../../install_steps_interactive.pm:1
 #: ../../install_steps.pm:1 ../../diskdrake/dav.pm:1
@@ -15722,6 +16177,11 @@ msgstr "урeђаj"
 msgid "Enter the directory to save to:"
 msgstr "Унесите директоријум да би у њега сачували:"
 
+#: ../../crypto.pm:1 ../../lang.pm:1
+#, c-format
+msgid "Greece"
+msgstr "Грчка"
+
 #: ../../install_steps_interactive.pm:1 ../../standalone/drakxtv:1
 #, c-format
 msgid "All"
@@ -15732,10 +16192,15 @@ msgstr "Свe"
 msgid "Which printing system (spooler) do you want to use?"
 msgstr "Који систем за штампaње (spooler) желите да користитe ?"
 
-#: ../../crypto.pm:1 ../../lang.pm:1
+#: ../../standalone/drakbackup:1
 #, c-format
-msgid "Greece"
-msgstr "Грчка"
+msgid "July"
+msgstr "Јул"
+
+#: ../../printer/main.pm:1
+#, fuzzy, c-format
+msgid "Prints into %s"
+msgstr ", штампај на %s"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -15818,6 +16283,11 @@ msgstr "Штампач на NetWare серверу"
 msgid "Give the ram size in MB"
 msgstr "Прикажи величину RAM-а у Mb"
 
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "Friday"
+msgstr "Петак"
+
 #: ../../standalone/net_monitor:1
 #, fuzzy, c-format
 msgid "Disconnection from Internet complete."
@@ -15879,6 +16349,11 @@ msgstr "Не могу пронађем  %s на %s"
 msgid "Japanese 106 keys"
 msgstr "Jапански 106 тастерa"
 
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "Could not install the packages needed to share your scanner(s)."
+msgstr ""
+
 #: ../../standalone/drakTermServ:1
 #, c-format
 msgid "This will take a few minutes."
@@ -15888,6 +16363,11 @@ msgstr "Ово ће потрајати неколико минута."
 #, c-format
 msgid "Burkina Faso"
 msgstr "Буркина Фасо"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "June"
+msgstr "Јун"
 
 #: ../../standalone/scannerdrake:1
 #, c-format
@@ -15943,6 +16423,15 @@ msgstr ", мулти-функционални уређај"
 #, c-format
 msgid "Laos"
 msgstr "Лаос"
+
+#: ../../share/advertising/04-configuration.pl:1
+#, c-format
+msgid ""
+"Mandrake Linux 9.2 provides you with the Mandrake Control Center, a powerful "
+"tool to fully adapt your computer to the use you make of it. Configure and "
+"customize elements such as the security level, the peripherals (screen, "
+"mouse, keyboard...), the Internet connection and much more!"
+msgstr ""
 
 #: ../../security/help.pm:1
 #, fuzzy, c-format
@@ -16012,6 +16501,11 @@ msgstr ""
 #, c-format
 msgid "Saint Pierre and Miquelon"
 msgstr "Свети Пјер и Микелон"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "September"
+msgstr "Септембар"
 
 #: ../../standalone/draksplash:1
 #, c-format
@@ -16132,7 +16626,7 @@ msgstr "Build Single NIC -->"
 msgid "Marshall Islands"
 msgstr "Маршалова Острва"
 
-#: ../../my_gtk.pm:1 ../../ugtk2.pm:1
+#: ../../ugtk2.pm:1
 #, c-format
 msgid "Is this correct?"
 msgstr "Да ли је ово исправно ?"
@@ -16200,10 +16694,20 @@ msgstr "Недостаје IP сервер!"
 msgid "Suriname"
 msgstr "Суринам"
 
+#: ../../network/adsl.pm:1
+#, fuzzy, c-format
+msgid "Use a floppy"
+msgstr "Сними на дискету"
+
 #: ../../any.pm:1
 #, c-format
 msgid "Enable ACPI"
 msgstr "Омогући ACPI"
+
+#: ../../fs.pm:1
+#, c-format
+msgid "Give write access to ordinary users"
+msgstr ""
 
 #: ../../help.pm:1
 #, c-format
@@ -16214,11 +16718,6 @@ msgstr "Графичко Окружeњe"
 #, c-format
 msgid "Gibraltar"
 msgstr "Гилбратлар"
-
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "on Tape Device"
-msgstr "на уређају за траке"
 
 #: ../../network/modem.pm:1
 #, c-format
@@ -16260,6 +16759,7 @@ msgstr "Оптимизуте своју сигурност"
 #: ../../interactive/gtk.pm:1 ../../standalone/drakTermServ:1
 #: ../../standalone/drakbackup:1 ../../standalone/drakbug:1
 #: ../../standalone/drakconnect:1 ../../standalone/drakfont:1
+#: ../../standalone/drakperm:1 ../../standalone/draksec:1
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "Help"
@@ -16341,6 +16841,11 @@ msgstr ""
 msgid "SMB (Windows 9x/NT) Printer Options"
 msgstr "SMB (Windows 9x/NT)  опције штампача"
 
+#: ../../printer/main.pm:1
+#, c-format
+msgid "URI: %s"
+msgstr ""
+
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "Valid user list changed, rewriting config file."
@@ -16363,15 +16868,15 @@ msgstr ""
 msgid "Protocol for the rest of the world"
 msgstr "Протокол за статак светa"
 
-#: ../../security/l10n.pm:1
-#, c-format
-msgid "Password minimum length and number of digit and upcase letters"
-msgstr ""
-
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Print test pages"
 msgstr "Иштампај тест странице"
+
+#: ../../standalone/drakconnect:1
+#, fuzzy, c-format
+msgid "Activate now"
+msgstr "Активирај сад"
 
 #: ../../Xconfig/card.pm:1
 #, c-format
@@ -16477,6 +16982,11 @@ msgstr "Рестартуј XFS"
 msgid "Add host/network"
 msgstr "Додај хоса/мрежу"
 
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "Scannerdrake will not be started now."
+msgstr ""
+
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "Model name"
@@ -16487,11 +16997,6 @@ msgstr "Име модела"
 msgid "Albania"
 msgstr "Албанија"
 
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "No CDR/DVDR in drive!"
-msgstr "Нема CDR/DVDR у уређају!"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "British Indian Ocean Territory"
@@ -16501,6 +17006,11 @@ msgstr "Британска Индијска Океанска Територија"
 #, c-format
 msgid "Normal Mode"
 msgstr "Нормални Мод"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "No CD-R/DVD-R in drive!"
+msgstr "Нема CDR/DVDR у уређају!"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -16626,6 +17136,11 @@ msgstr "Други мултимедијални уређаји"
 msgid "burner"
 msgstr "Штампач"
 
+#: ../../standalone/drakbackup:1
+#, fuzzy, c-format
+msgid " (Default is all users)"
+msgstr "Default штампач"
+
 #: ../../printer/printerdrake.pm:1 ../../standalone/scannerdrake:1
 #, c-format
 msgid "No remote machines"
@@ -16675,6 +17190,11 @@ msgstr ""
 msgid "Internet Connection Sharing currently enabled"
 msgstr "Дeљeње интернет конекциjе jе тренутно омогућено "
 
+#: ../../lang.pm:1
+#, c-format
+msgid "United Arab Emirates"
+msgstr "Уједињени Арапски Емирати"
+
 #: ../../network/tools.pm:1 ../../standalone/drakconnect:1
 #, c-format
 msgid "Card IO_0"
@@ -16687,11 +17207,6 @@ msgstr ""
 
 #: ../../lang.pm:1
 #, c-format
-msgid "United Arab Emirates"
-msgstr "Уједињени Арапски Емирати"
-
-#: ../../lang.pm:1
-#, c-format
 msgid "Thailand"
 msgstr "Тајланд"
 
@@ -16699,6 +17214,11 @@ msgstr "Тајланд"
 #, c-format
 msgid "Card IO_1"
 msgstr "IO_1 картицe"
+
+#: ../../standalone/printerdrake:1
+#, c-format
+msgid "Search:"
+msgstr "Тражи:"
 
 #: ../../lang.pm:1
 #, c-format
@@ -16725,74 +17245,29 @@ msgstr "прикажи све доступне удаљене CUPS штампаче"
 msgid "Mandrake Linux Installation %s"
 msgstr "Mandrake Linux Инсталација %s"
 
+#: ../../harddrake/sound.pm:1
+#, c-format
+msgid "Unknown driver"
+msgstr "Непознати драјвер"
+
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Thai keyboard"
 msgstr " Thai тастатура"
-
-#: ../../network/modem.pm:1
-#, c-format
-msgid "Dialup options"
-msgstr "Dialup опције"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Bouvet Island"
 msgstr "Острва Буве"
 
+#: ../../network/modem.pm:1
+#, c-format
+msgid "Dialup options"
+msgstr "Dialup опције"
+
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "If no port is given, 631 will be taken as default."
-msgstr ""
-
-#: ../../standalone/draksec:1
-#, c-format
-msgid ""
-"Here, you can setup the security level and administrator of your machine.\n"
-"\n"
-"\n"
-"The Security Administrator is the one who will receive security alerts if "
-"the\n"
-"'Security Alerts' option is set. It can be a username or an email.\n"
-"\n"
-"\n"
-"The Security Level menu enable to select one of the six preconfigured "
-"security\n"
-"provided with msec. These levels range from poor security and ease of use, "
-"to\n"
-"paranoid config, suitable for very sensitive server applications:\n"
-"\n"
-"\n"
-"<span foreground=\"royalblue3\">Poor</span>: This is a totally unsafe but "
-"very\n"
-"easy to use security level. It should only be used for machines not "
-"connected to\n"
-"any network and that are not accessible to everybody.\n"
-"\n"
-"\n"
-"<span foreground=\"royalblue3\">Standard</span>: This is the standard "
-"security\n"
-"recommended for a computer that will be used to connect to the Internet as "
-"a\n"
-"client.\n"
-"\n"
-"\n"
-"<span foreground=\"royalblue3\">High</span>: There are already some\n"
-"restrictions, and more automatic checks are run every night.\n"
-"\n"
-"\n"
-"<span foreground=\"royalblue3\">Higher</span>: The security is now high "
-"enough\n"
-"to use the system as a server which can accept connections from many "
-"clients. If\n"
-"your machine is only a client on the Internet, you should choose a lower "
-"level.\n"
-"\n"
-"\n"
-"<span foreground=\"royalblue3\">Paranoid</span>: This is similar to the "
-"previous\n"
-"level, but the system is entirely closed and security features are at their\n"
-"maximum"
 msgstr ""
 
 #: ../../install_steps_gtk.pm:1 ../../install_steps_interactive.pm:1
@@ -16825,6 +17300,11 @@ msgstr "Mandrake Online"
 msgid "\t-Network by webdav.\n"
 msgstr "\t-Мрежа преко webdav.\n"
 
+#: ../../printer/main.pm:1
+#, fuzzy, c-format
+msgid ", multi-function device on a parallel port"
+msgstr ", мулти-функционални уређај на паралелном порту #%s"
+
 #: ../../standalone/drakgw:1 ../../standalone/drakpxe:1
 #, c-format
 msgid ""
@@ -16847,13 +17327,13 @@ msgstr "Није пронађен хард диск"
 
 #: ../../mouse.pm:1
 #, c-format
-msgid "Logitech CC Series"
-msgstr "Logitech CC серија (серијски)"
+msgid "2 buttons"
+msgstr "2 тастерa"
 
 #: ../../mouse.pm:1
 #, c-format
-msgid "2 buttons"
-msgstr "2 тастерa"
+msgid "Logitech CC Series"
+msgstr "Logitech CC серија (серијски)"
 
 #: ../../network/isdn.pm:1
 #, c-format
@@ -16874,6 +17354,11 @@ msgstr "Сними на дискету"
 #, fuzzy, c-format
 msgid "Check open ports"
 msgstr "Детектовано на порту %s"
+
+#: ../../standalone/printerdrake:1
+#, fuzzy, c-format
+msgid "Edit selected printer"
+msgstr "Уреди селектовани сервер"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -17016,7 +17501,7 @@ msgstr ""
 "LPT2:, ..., први USB штампач: /dev/usb/lp0, други USB штампач: /dev/usb/"
 "lp1, ...)."
 
-#: ../../network/netconnect.pm:1
+#: ../../network/adsl.pm:1 ../../network/netconnect.pm:1
 #, c-format
 msgid "Next"
 msgstr "Следећи"
@@ -17092,6 +17577,11 @@ msgstr "Анигла"
 msgid "NIS Domain"
 msgstr "NIS Домен"
 
+#: ../../lang.pm:1
+#, c-format
+msgid "Antarctica"
+msgstr "Антартик"
+
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid ""
@@ -17100,11 +17590,6 @@ msgid ""
 msgstr ""
 "\n"
 "- Кориснички фајлови:\n"
-
-#: ../../lang.pm:1
-#, c-format
-msgid "Antarctica"
-msgstr "Антартик"
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -17181,6 +17666,11 @@ msgstr "LPD и LPRng не подржавају IPP штампаче.\n"
 msgid "Host name or IP."
 msgstr "Име хоста:"
 
+#: ../../standalone/printerdrake:1
+#, c-format
+msgid "/_Edit"
+msgstr "/_Измени"
+
 #: ../../fsedit.pm:1
 #, c-format
 msgid "simple"
@@ -17196,20 +17686,25 @@ msgstr "Очисти све"
 msgid "No test pages"
 msgstr "Без тест странице"
 
-#: ../../standalone/drakconnect:1
-#, c-format
-msgid "Adapter %s: %s"
-msgstr "Адаптeр %s: %s"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Falkland Islands (Malvinas)"
 msgstr "Фокландска Острва"
 
+#: ../../standalone/drakconnect:1
+#, c-format
+msgid "Adapter %s: %s"
+msgstr "Адаптeр %s: %s"
+
 #: ../../standalone/drakfloppy:1
 #, fuzzy, c-format
 msgid "Boot disk creation"
 msgstr "Креирaње boot дискa"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "Monday"
+msgstr "Понедељак"
 
 #: ../../printer/main.pm:1 ../../printer/printerdrake.pm:1
 #, c-format
@@ -17235,6 +17730,7 @@ msgstr "Backup Сад"
 
 #: ../../standalone/drakboot:1 ../../standalone/drakfloppy:1
 #: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
+#: ../../standalone/printerdrake:1
 #, c-format
 msgid "/_File"
 msgstr "/_Фаjл"
@@ -17252,6 +17748,11 @@ msgid ""
 msgstr ""
 "Покрените филтрирање пакета за Linux кернел серије 2.2, да би подесили\n"
 "firewall ради заштите ваше машине од мрежних напада."
+
+#: ../../standalone/drakperm:1
+#, fuzzy, c-format
+msgid "Editable"
+msgstr "онeмогући"
 
 #: ../../network/ethernet.pm:1
 #, fuzzy, c-format
@@ -17386,7 +17887,7 @@ msgstr "Скенирање за TV канале"
 msgid "Kernel:"
 msgstr "Кернел:"
 
-#: ../../standalone/harddrake2:1
+#: ../../standalone/harddrake2:1 ../../standalone/printerdrake:1
 #, c-format
 msgid "/_About..."
 msgstr "/_О..."
@@ -17451,6 +17952,11 @@ msgstr "Име штампaча треба да садржи само словa, броjеве и underscore"
 msgid "Show current interface configuration"
 msgstr "Прикажи тренутну конфигурацију"
 
+#: ../../standalone/printerdrake:1
+#, fuzzy, c-format
+msgid "Add Printer"
+msgstr "Штампач"
+
 #: ../../security/help.pm:1
 #, fuzzy, c-format
 msgid ""
@@ -17481,15 +17987,15 @@ msgstr "Урађено"
 msgid "Web Server"
 msgstr "Веб Сервер"
 
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "\tDo not include System Files\n"
-msgstr "\tНе укључуј Системске Фајлове\n"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Chile"
 msgstr "Чиле"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "\tDo not include System Files\n"
+msgstr "\tНе укључуј Системске Фајлове\n"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -17740,6 +18246,11 @@ msgstr "Учитај са дискете"
 msgid "The following printer was auto-detected. "
 msgstr "Следећи штамач је ауто-детектован."
 
+#: ../../printer/main.pm:1
+#, fuzzy, c-format
+msgid "Uses command %s"
+msgstr ", користим команду %s"
+
 #: ../../standalone/drakTermServ:1
 #, c-format
 msgid "Boot Floppy"
@@ -17777,6 +18288,11 @@ msgstr "Подесите bootsplash слику"
 
 #: ../../lang.pm:1
 #, c-format
+msgid "Georgia"
+msgstr "Грузија"
+
+#: ../../lang.pm:1
+#, c-format
 msgid "China"
 msgstr "Кина"
 
@@ -17784,11 +18300,6 @@ msgstr "Кина"
 #, c-format
 msgid " (Make sure that all your printers are connected and turned on).\n"
 msgstr " (Проверите да ли су сви штампачи повезани и укључени).\n"
-
-#: ../../lang.pm:1
-#, c-format
-msgid "Georgia"
-msgstr "Грузија"
 
 #: ../../standalone/printerdrake:1
 #, c-format
@@ -17859,10 +18370,20 @@ msgstr "Избор менаџера за дисплеј"
 msgid "Zeroconf Host name"
 msgstr "Zeroconf име домаћина (Host name)"
 
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "Custom setup/crontab entry:"
+msgstr ""
+
 #: ../../network/network.pm:1 ../../printer/printerdrake.pm:1
 #, c-format
 msgid "IP address should be in format 1.2.3.4"
 msgstr "IP адреса треба да буде у формату 1.2.3.4"
+
+#: ../../standalone/printerdrake:1
+#, fuzzy, c-format
+msgid "Configure CUPS printing system"
+msgstr "Промените систем за штампање"
 
 #: ../../lang.pm:1
 #, c-format
@@ -17931,15 +18452,15 @@ msgstr "Азербejдзан  (латиница)"
 msgid "Package not installed"
 msgstr "Пакет није инсталиран"
 
-#: ../../share/advertising/12-mdkexpert.pl:1
-#, c-format
-msgid "Become a MandrakeExpert"
-msgstr "Постаните MandrakeExpert"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "American Samoa"
 msgstr "Америчка Самоа"
+
+#: ../../share/advertising/12-mdkexpert.pl:1
+#, c-format
+msgid "Become a MandrakeExpert"
+msgstr "Постаните MandrakeExpert"
 
 #: ../../standalone/drakconnect:1
 #, c-format
@@ -18015,8 +18536,9 @@ msgstr "Брисање медија може да потраје мање времена."
 msgid "You can't select/unselect this package"
 msgstr "Не можете селектовати/деселектовати оваj пакет"
 
-#: ../../diskdrake/interactive.pm:1 ../../harddrake/sound.pm:1
-#: ../../network/modem.pm:1 ../../standalone/drakfloppy:1
+#: ../../keyboard.pm:1 ../../diskdrake/interactive.pm:1
+#: ../../harddrake/sound.pm:1 ../../network/modem.pm:1
+#: ../../standalone/drakfloppy:1
 #, c-format
 msgid "Warning"
 msgstr "Упозорење"
@@ -18035,11 +18557,6 @@ msgstr ""
 msgid "Remote host name"
 msgstr "Име удаљеног host-a"
 
-#: ../../standalone/drakconnect:1
-#, c-format
-msgid "deactivate now"
-msgstr "деактивирај сад"
-
 #: ../../any.pm:1
 #, c-format
 msgid "access to X programs"
@@ -18049,6 +18566,11 @@ msgstr "приступ X програмима"
 #, c-format
 msgid "Computing the size of the Windows partition"
 msgstr "Прорачунавам величину Windows партициjе"
+
+#: ../../standalone/printerdrake:1
+#, c-format
+msgid "/_Refresh"
+msgstr "/_Освежи"
 
 #: ../../crypto.pm:1 ../../lang.pm:1 ../../network/tools.pm:1
 #: ../../standalone/drakxtv:1
@@ -18122,6 +18644,11 @@ msgstr "Зип"
 msgid "Left Alt key"
 msgstr "Десни Alt тастер"
 
+#: ../../standalone/logdrake:1
+#, fuzzy, c-format
+msgid "Load setting"
+msgstr "учитај поставку"
+
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid ""
@@ -18134,6 +18661,11 @@ msgstr ""
 "\n"
 "Printerdrake није могао да детектује ваш модел штампача %s. Изаберите "
 "одговарајући модел са листе."
+
+#: ../../standalone/printerdrake:1
+#, fuzzy, c-format
+msgid "Set selected printer as the default printer"
+msgstr "Подеси овај штампач као default"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -18313,6 +18845,11 @@ msgstr ""
 msgid "format of floppies supported by the drive"
 msgstr "Формат дискета које уређај прихвата"
 
+#: ../../network/adsl.pm:1
+#, c-format
+msgid "Firmware copy failed, file %s not found"
+msgstr ""
+
 #: ../../raid.pm:1
 #, c-format
 msgid "Not enough partitions for RAID level %d\n"
@@ -18405,6 +18942,7 @@ msgid "Georgian (\"Russian\" layout)"
 msgstr "Грузијски (\"Руски\" распоред)"
 
 #: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
+#: ../../standalone/printerdrake:1
 #, c-format
 msgid "/_Options"
 msgstr "/_Опциje"
@@ -18768,6 +19306,11 @@ msgstr ""
 "Linuxconf ђе понекад изводити разне задатке током\n"
 "стартања система ради одржавања и подешавања система."
 
+#: ../../standalone/drakbackup:1
+#, fuzzy, c-format
+msgid "DVD-R device"
+msgstr "урeђаj"
+
 #: ../../printer/main.pm:1 ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Printer on remote lpd server"
@@ -18862,10 +19405,10 @@ msgstr ""
 "као default када Open Firmware \n"
 "пауза заврши."
 
-#: ../../mouse.pm:1
+#: ../../standalone/drakbackup:1
 #, c-format
-msgid "No mouse"
-msgstr "Нема мишa"
+msgid "Wednesday"
+msgstr "Среда"
 
 #: ../../crypto.pm:1 ../../lang.pm:1
 #, c-format
@@ -18876,6 +19419,11 @@ msgstr "Немачкa"
 #, c-format
 msgid "Austria"
 msgstr "Аустрија"
+
+#: ../../mouse.pm:1
+#, c-format
+msgid "No mouse"
+msgstr "Нема мишa"
 
 #: ../../standalone/drakbackup:1
 #, fuzzy, c-format
@@ -18895,7 +19443,7 @@ msgid "Run \"sndconfig\" after installation to configure your sound card"
 msgstr ""
 "Покрените \"sndconfig\" након иснталације да би подесили своју звучну картицу"
 
-#: ../../my_gtk.pm:1 ../../ugtk2.pm:1
+#: ../../ugtk2.pm:1
 #, c-format
 msgid "Collapse Tree"
 msgstr "Скупи стабло"
@@ -18972,10 +19520,10 @@ msgstr ""
 msgid "The %s is not supported by this version of Mandrake Linux."
 msgstr "%s није подржан у овој верзији Mandrake Linux-а."
 
-#: ../../standalone/drakperm:1
+#: ../../standalone/drakbackup:1
 #, fuzzy, c-format
-msgid "Level 1"
-msgstr "Ниво"
+msgid "tape"
+msgstr "Трака"
 
 #: ../../standalone/drakconnect:1
 #, c-format
@@ -18991,35 +19539,34 @@ msgstr ""
 "Дозволи/Не дозволи листу корисника на систему у менаџерима за дисплеј (kdm и "
 "gdm)."
 
-#: ../../standalone/drakperm:1
-#, fuzzy, c-format
-msgid "Level 2"
-msgstr "Ниво"
+#: ../../mouse.pm:1
+#, c-format
+msgid "Logitech Mouse (serial, old C7 type)"
+msgstr "Logitech mouse (серијски, стари C7 тип)"
 
 #: ../../partition_table.pm:1
 #, c-format
 msgid "Restoring from file %s failed: %s"
 msgstr "Отварање из датотекe %s није успело: %s"
 
-#: ../../mouse.pm:1
+#: ../../fsedit.pm:1
 #, c-format
-msgid "Logitech Mouse (serial, old C7 type)"
-msgstr "Logitech mouse (серијски, стари C7 тип)"
-
-#: ../../standalone/drakperm:1
-#, fuzzy, c-format
-msgid "Level 3"
-msgstr "Ниво"
-
-#: ../../standalone/drakperm:1
-#, fuzzy, c-format
-msgid "Level 4"
-msgstr "Ниво"
-
-#: ../../standalone/drakperm:1
-#, fuzzy, c-format
-msgid "Level 5"
-msgstr "Ниво"
+msgid ""
+"I can't read the partition table of device %s, it's too corrupted for me :(\n"
+"I can try to go on, erasing over bad partitions (ALL DATA will be lost!).\n"
+"The other solution is to not allow DrakX to modify the partition table.\n"
+"(the error is %s)\n"
+"\n"
+"Do you agree to lose all the partitions?\n"
+msgstr ""
+"Не могу прочитати табелу партиција уређај %s , много је искварена за мене :"
+"(\n"
+"Покушаћу даље заобилазећи лоше партицијеМогу покушати да форматирам лоше "
+"партициje (СВИ ПОДАЦИ ће бити изгубљени !).\n"
+"Друго рeшeње jе да се DrakX онемогући да модуфикуje табелу партициja.\n"
+"(грeшка je %s)\n"
+"\n"
+"Да ли се пристајете да изгубите све партиције?\n"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -19051,11 +19598,6 @@ msgstr "Аутоматска синхронизација времена (преко NTP-а)"
 msgid "Backup files not found at %s."
 msgstr "Backup фајлви нису пронађени на %s."
 
-#: ../../share/advertising/01-thanks.pl:1
-#, c-format
-msgid "Thank you for choosing Mandrake Linux 9.1"
-msgstr "Хвала вам што сте изабрали Mandrake Linux 9.1"
-
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Armenian (phonetic)"
@@ -19070,6 +19612,11 @@ msgstr "Модел картице :"
 #, c-format
 msgid "Thin Client"
 msgstr "Thin клијент"
+
+#: ../../share/advertising/01-thanks.pl:1
+#, c-format
+msgid "Thank you for choosing Mandrake Linux 9.2"
+msgstr "Хвала вам што сте изабрали Mandrake Linux 9.2"
 
 #: ../../standalone/drakTermServ:1
 #, c-format
@@ -19219,6 +19766,17 @@ msgstr "Овај хост већ постоји на листи, и не може се поново додати.\n"
 msgid ", USB printer"
 msgstr ", USB штампач"
 
+#: ../../standalone/drakfloppy:1
+#, fuzzy, c-format
+msgid ""
+"Unable to properly close mkbootdisk:\n"
+"\n"
+"<span foreground=\"Red\"><tt>%s</tt></span>"
+msgstr ""
+"Не могу коректно да затворим mkbootdisk: \n"
+" %s \n"
+" %s"
+
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid ""
@@ -19235,6 +19793,11 @@ msgstr "Изаберите апликације које ће подржавати фонтове :"
 #, c-format
 msgid "Configure X"
 msgstr "Конфигурисање X-a"
+
+#: ../../standalone/drakbackup:1
+#, fuzzy, c-format
+msgid "hd"
+msgstr "Чад"
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -19355,6 +19918,11 @@ msgstr "Гамбија"
 msgid "Mandrake Control Center"
 msgstr "Mandrake Контролни Центар"
 
+#: ../../printer/main.pm:1
+#, fuzzy, c-format
+msgid "Multi-function device"
+msgstr ", мулти-функционални уређај"
+
 #: ../../network/drakfirewall.pm:1
 #, c-format
 msgid ""
@@ -19365,21 +19933,6 @@ msgstr ""
 "Можете унети различите портове. \n"
 "Исправни примери су: 139/tcp 139/udp.\n"
 "Погледајте /etc/services за информацију."
-
-#: ../../help.pm:1
-#, fuzzy, c-format
-msgid ""
-"Monitor\n"
-"\n"
-"   The installer will normally automatically detect and configure the\n"
-"monitor connected to your machine. If it is correct, you can choose from\n"
-"this list the monitor you actually have connected to your computer."
-msgstr ""
-"Монитор\n"
-"\n"
-"   Програм за инсталацију обично аутоматски детектује и подешава\n"
-"монитор повезан на вашу машину. Уколико се то недеси, можете сами\n"
-"сами да изаберете модел монитора са листе."
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -19454,6 +20007,11 @@ msgstr "Изабери пакете за инсталацију"
 #, c-format
 msgid "Papua New Guinea"
 msgstr "Папуа Нова Гвинеја"
+
+#: ../../printer/main.pm:1
+#, fuzzy, c-format
+msgid "Multi-function device on a parallel port"
+msgstr ", мулти-функционални уређај на паралелном порту #%s"
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -19541,6 +20099,16 @@ msgid ""
 msgstr ""
 "lpd jе print демон потребан  да би lpr радио добро.То jе \n"
 "у основи сервер коjи арбитрира  print послове штампачу(има)."
+
+#: ../../keyboard.pm:1
+#, c-format
+msgid "Irish"
+msgstr ""
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "Sunday"
+msgstr "Недеља"
 
 #: ../../standalone/drakconnect:1
 #, c-format
@@ -19634,6 +20202,12 @@ msgstr "RAID-дискови %s\n"
 msgid "Liberia"
 msgstr "Либерија"
 
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid ""
+"Could not install the packages needed to set up a scanner with Scannerdrake."
+msgstr ""
+
 #: ../../standalone/drakgw:1
 #, c-format
 msgid ""
@@ -19669,6 +20243,17 @@ msgstr "Покрећем \"%s\" ..."
 #, c-format
 msgid "enable radio support"
 msgstr "омогући подршку за радио"
+
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"        - Per client /etc/X11/XF86Config-4\\$\\$IP-ADDRESS\\$\\$:\n"
+"        \t\tThrough clusternfs, each diskless client can have its own unique "
+"configuration files\n"
+"        \t\ton the root filesystem of the server. By allowing local client "
+"hardware configuration, \n"
+"        \t\tdrakTermServ will help create these files."
+msgstr ""
 
 #: ../../standalone/scannerdrake:1
 #, c-format
@@ -19835,6 +20420,11 @@ msgstr ""
 "Проверитe cdrom на инсталираном компjутеру користeћe \"rpm -qpl Mandrake/"
 "RPMS/*.rpm\"\n"
 
+#: ../../share/advertising/06-development.pl:1
+#, c-format
+msgid "Mandrake Linux 9.2: the ultimate development platform"
+msgstr "Mandrake Linux 9.2 ултимативна развојна платформа"
+
 #: ../../standalone/scannerdrake:1
 #, c-format
 msgid "Detected model: %s"
@@ -19861,20 +20451,27 @@ msgstr ""
 msgid "if set to yes, run the daily security checks."
 msgstr "уколико је подешено на да, покрените дневне сигурносне провере."
 
-#: ../../standalone/drakbackup:1
-#, fuzzy, c-format
-msgid "Device name to use for backup"
-msgstr "Унесите име уређаја који користите за backup"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Azerbaijan"
 msgstr "Азербејџан"
 
 #: ../../standalone/drakbackup:1
+#, fuzzy, c-format
+msgid "Device name to use for backup"
+msgstr "Унесите име уређаја који користите за backup"
+
+#: ../../standalone/drakbackup:1
 #, c-format
 msgid "No tape in %s!"
 msgstr "Нема траке у %s!"
+
+#: ../../standalone/drakhelp:1
+#, c-format
+msgid ""
+" --doc <link>          - link to another web page ( for WM welcome "
+"frontend)\n"
+msgstr ""
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -20089,6 +20686,60 @@ msgid "Set of tools to read and send mail and news and to browse the Web"
 msgstr ""
 "Скуп алата за читaње и слaње ел.поште и вести (pine, mutt, tin..) и за "
 "претрaживaњe Интернетa"
+
+#~ msgid "-adobe-utopia-regular-r-*-*-25-*-*-*-p-*-iso8859-*,*-r-*"
+#~ msgstr "-adobe-utopia-regular-r-*-*-25-*-*-*-p-*-iso8859-*,*-r-*"
+
+#~ msgid "-adobe-times-bold-r-normal--17-*-100-100-p-*-iso8859-*,*-r-*"
+#~ msgstr "-adobe-times-bold-r-normal--17-*-100-100-p-*-iso8859-*,*-r-*"
+
+#, fuzzy
+#~ msgid "Hostname configuration"
+#~ msgstr "Конфигурација система"
+
+#, fuzzy
+#~ msgid "Hostname"
+#~ msgstr "Име хоста:"
+
+#~ msgid "Remote Printers"
+#~ msgstr "Удаљени штампaчи"
+
+#~ msgid "Printing system: "
+#~ msgstr "Систем за штампање: "
+
+#, fuzzy
+#~ msgid "Level 1"
+#~ msgstr "Ниво"
+
+#, fuzzy
+#~ msgid "Level 2"
+#~ msgstr "Ниво"
+
+#, fuzzy
+#~ msgid "Level 3"
+#~ msgstr "Ниво"
+
+#, fuzzy
+#~ msgid "Level 4"
+#~ msgstr "Ниво"
+
+#, fuzzy
+#~ msgid "Level 5"
+#~ msgstr "Ниво"
+
+#, fuzzy
+#~ msgid "Insert floppy and press %s"
+#~ msgstr "Убаците дискету у уређај %s"
+
+#~ msgid "Load"
+#~ msgstr "Учитај"
+
+#, fuzzy
+#~ msgid "Bad Ip"
+#~ msgstr " IO картицe"
+
+#~ msgid "Output"
+#~ msgstr "Output"
 
 #~ msgid "Please relog into %s to activate the changes"
 #~ msgstr "Молим, поново унесите %s ради активирања промена"

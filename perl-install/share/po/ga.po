@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX\n"
-"POT-Creation-Date: 2003-08-13 03:40+0200\n"
+"POT-Creation-Date: 2003-09-09 17:07+0200\n"
 "PO-Revision-Date: 2000-08-24 12:00-0000\n"
 "Last-Translator: Alastair McKinstry <mckinstry@computer.org>\n"
 "Language-Team: Irish <ga@li.org>\n"
@@ -56,6 +56,11 @@ msgstr "Printéir Gréasán (lpd)"
 msgid "Please insert floppy disk:"
 msgstr "Cur isteach diosca sa dioscthiomant %s"
 
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid "DrakTermServ"
+msgstr ""
+
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "PCMCIA"
@@ -84,6 +89,11 @@ msgstr "Cén sort iontráil a suimigh do"
 #, fuzzy, c-format
 msgid "Restore partition table"
 msgstr "Scriobh clár-ranna"
+
+#: ../../standalone/drakconnect:1
+#, fuzzy, c-format
+msgid "Configure hostname..."
+msgstr "Cumraigh luchóg"
 
 #: ../../printer/cups.pm:1
 #, fuzzy, c-format
@@ -121,10 +131,11 @@ msgid ""
 "or with native CUPS drivers cannot be transferred."
 msgstr ""
 
+# LK
 #: ../../lang.pm:1
 #, c-format
 msgid "Sri Lanka"
-msgstr ""
+msgstr "Srí Lanca"
 
 #: ../../printer/printerdrake.pm:1
 #, fuzzy, c-format
@@ -190,11 +201,6 @@ msgstr "suimiúil"
 msgid "Select installation class"
 msgstr "Roghnaigh rang feistiú"
 
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "on CDROM"
-msgstr ""
-
 #: ../../network/tools.pm:1
 #, c-format
 msgid ""
@@ -248,6 +254,11 @@ msgstr ""
 msgid "CUPS configuration"
 msgstr "cumraíocht"
 
+#: ../../standalone/drakbackup:1
+#, fuzzy, c-format
+msgid "Total progress"
+msgstr "Bain trial as arís"
+
 #: ../../lang.pm:1
 #, c-format
 msgid "Hong Kong"
@@ -295,10 +306,11 @@ msgstr ""
 msgid ")"
 msgstr ""
 
+# LB
 #: ../../lang.pm:1
 #, c-format
 msgid "Lebanon"
-msgstr ""
+msgstr "An Liobáin"
 
 #: ../../mouse.pm:1
 #, c-format
@@ -362,10 +374,11 @@ msgstr ""
 msgid "Tape"
 msgstr "Cineál"
 
+# MY
 #: ../../lang.pm:1
 #, c-format
 msgid "Malaysia"
-msgstr ""
+msgstr "An Mhalaeisia"
 
 #: ../../printer/printerdrake.pm:1
 #, fuzzy, c-format
@@ -389,6 +402,12 @@ msgstr ""
 msgid "Swiss (French layout)"
 msgstr "Eilvéis (Stíl Francaigh)"
 
+# AT
+#: ../../standalone/drakbackup:1
+#, fuzzy, c-format
+msgid "August"
+msgstr "An Ostair"
+
 #: ../../raid.pm:1
 #, c-format
 msgid "mkraid failed (maybe raidtools are missing?)"
@@ -410,14 +429,20 @@ msgid "Soundcard"
 msgstr "Carta Fuaim"
 
 #: ../../standalone/drakbackup:1
+#, c-format
+msgid "Month"
+msgstr "Mí"
+
+#: ../../standalone/drakbackup:1
 #, fuzzy, c-format
 msgid "Search for files to restore"
 msgstr "Cén cinéal luchóg atá agat?"
 
+# LU
 #: ../../lang.pm:1
 #, c-format
 msgid "Luxembourg"
-msgstr ""
+msgstr "Lucsamburg"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -444,7 +469,7 @@ msgstr "An Iaráic"
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "Bus"
-msgstr ""
+msgstr "GN"
 
 #: ../../lang.pm:1
 #, c-format
@@ -490,10 +515,11 @@ msgstr ""
 msgid "Default desktop"
 msgstr "Gnáth"
 
+# VE
 #: ../../lang.pm:1
 #, c-format
 msgid "Venezuela"
-msgstr ""
+msgstr "Veiniséala"
 
 #: ../../network/network.pm:1 ../../printer/printerdrake.pm:1
 #: ../../standalone/drakconnect:1
@@ -547,6 +573,11 @@ msgstr "Ainm úsáideora"
 msgid "Left \"Windows\" key"
 msgstr ""
 
+#: ../../lang.pm:1
+#, c-format
+msgid "Guyana"
+msgstr "An Ghuáin"
+
 #: ../../standalone/drakTermServ:1
 #, fuzzy, c-format
 msgid "dhcpd Server Configuration"
@@ -559,15 +590,15 @@ msgid ""
 " only owner of directory or file in this directory can delete it"
 msgstr ""
 
-#: ../../lang.pm:1
-#, c-format
-msgid "Guyana"
-msgstr "An Ghuáin"
-
 #: ../../printer/main.pm:1
 #, c-format
 msgid " on Novell server \"%s\", printer \"%s\""
 msgstr ""
+
+#: ../../standalone/printerdrake:1
+#, fuzzy, c-format
+msgid "Printer Name"
+msgstr "Clódóir"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
@@ -898,17 +929,15 @@ msgstr ""
 
 #: ../../standalone/drakboot:1 ../../standalone/drakfloppy:1
 #: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
+#: ../../standalone/printerdrake:1
 #, c-format
 msgid "<control>Q"
 msgstr "<control>E"
 
 #: ../../standalone/drakbackup:1
-#, c-format
-msgid ""
-"Please be sure that the cron daemon is included in your services. \n"
-"\n"
-"Note that currently all 'net' media also use the hard drive."
-msgstr ""
+#, fuzzy, c-format
+msgid "Unable to find backups to restore...\n"
+msgstr "Roghnaight do theangam le do thoil."
 
 #: ../../standalone/harddrake2:1
 #, fuzzy, c-format
@@ -1007,10 +1036,11 @@ msgstr ""
 msgid "POP and IMAP Server"
 msgstr "Freastalaí LDAP"
 
+# MX
 #: ../../lang.pm:1
 #, c-format
 msgid "Mexico"
-msgstr ""
+msgstr "Meicsiceo"
 
 #: ../../standalone/harddrake2:1
 #, fuzzy, c-format
@@ -1022,20 +1052,21 @@ msgstr "Ag formáidiú"
 msgid "Rwanda"
 msgstr ""
 
-#: ../../modules/interactive.pm:1
-#, c-format
-msgid "Do you have any %s interfaces?"
-msgstr "An bhfuil comhéadan %s agat?"
-
+# CH
 #: ../../lang.pm:1
 #, c-format
 msgid "Switzerland"
-msgstr ""
+msgstr "An Eilvéis"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Brunei Darussalam"
 msgstr ""
+
+#: ../../modules/interactive.pm:1
+#, c-format
+msgid "Do you have any %s interfaces?"
+msgstr "An bhfuil comhéadan %s agat?"
 
 #: ../../standalone/drakTermServ:1
 #, fuzzy, c-format
@@ -1093,6 +1124,11 @@ msgstr ""
 msgid "Configure Internet Access..."
 msgstr "Cumraigh gréasánú"
 
+#: ../../standalone/drakbackup:1
+#, fuzzy, c-format
+msgid "Please choose the time interval between each backup"
+msgstr "Roghnaight do theangam le do thoil."
+
 #: ../../crypto.pm:1 ../../lang.pm:1
 #, fuzzy, c-format
 msgid "Norway"
@@ -1136,15 +1172,20 @@ msgstr ""
 msgid "When checked, owner and group won't be changed"
 msgstr ""
 
-#: ../../harddrake/data.pm:1
-#, c-format
-msgid "Processors"
-msgstr ""
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Bulgaria"
 msgstr "An Bhulgáir"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "Tuesday"
+msgstr "Mairt"
+
+#: ../../harddrake/data.pm:1
+#, c-format
+msgid "Processors"
+msgstr ""
 
 #: ../../lang.pm:1
 #, c-format
@@ -1174,15 +1215,15 @@ msgstr ""
 msgid "Backup Other files..."
 msgstr "Droch comhad chúltaca"
 
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "SMB server IP"
-msgstr "IP freastalaí SMP"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Congo (Kinshasa)"
 msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "SMB server IP"
+msgstr "IP freastalaí SMP"
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -1272,11 +1313,6 @@ msgstr ""
 msgid "the module of the GNU/Linux kernel that handles the device"
 msgstr ""
 
-#: ../../standalone/drakbackup:1
-#, fuzzy, c-format
-msgid "DVDR device"
-msgstr "feist"
-
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid "Trying to rescue partition table"
@@ -1354,19 +1390,6 @@ msgstr ""
 msgid "User"
 msgstr "Ainm úsáideora"
 
-#: ../../fsedit.pm:1
-#, fuzzy, c-format
-msgid ""
-"I can't read the partition table of device %s, it's too corrupted for me :(\n"
-"I can try to go on, erasing over bad partitions (ALL DATA will be lost!).\n"
-"The other solution is to not allow DrakX to modify the partition table.\n"
-"(the error is %s)\n"
-"\n"
-"Do you agree to loose all the partitions?\n"
-msgstr ""
-"Ni féidir liom an tábla rainn a léamh, tá máchaillí ann :(\n"
-"Leanfaidh mé orm ag cealú droch rainn"
-
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "Do new backup before restore (only for incremental backups.)"
@@ -1437,13 +1460,6 @@ msgstr ""
 msgid "USA (broadcast)"
 msgstr ""
 
-#: ../../standalone/drakbackup:1
-#, fuzzy, c-format
-msgid ""
-"Please choose the\n"
-"media for backup."
-msgstr "Roghnaight do theangam le do thoil."
-
 #: ../../Xconfig/card.pm:1
 #, c-format
 msgid "Use Xinerama extension"
@@ -1454,18 +1470,15 @@ msgstr ""
 msgid "Loopback"
 msgstr ""
 
-#: ../../standalone/drakfloppy:1
-#, c-format
-msgid ""
-"Unable to properly close mkbootdisk: \n"
-" %s \n"
-" %s"
-msgstr ""
-
 #: ../../standalone/drakxtv:1
 #, fuzzy, c-format
 msgid "West Europe"
 msgstr "Eorap"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "On CD-R"
+msgstr ""
 
 #: ../../standalone.pm:1
 #, c-format
@@ -1493,6 +1506,11 @@ msgstr "Tosaíocht: "
 msgid "Swaziland"
 msgstr ""
 
+#: ../../lang.pm:1
+#, c-format
+msgid "Dominican Republic"
+msgstr ""
+
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid "Copying %s"
@@ -1502,11 +1520,6 @@ msgstr ""
 #, fuzzy, c-format
 msgid "Choose color"
 msgstr "Roghnaigh scáileán"
-
-#: ../../lang.pm:1
-#, c-format
-msgid "Dominican Republic"
-msgstr ""
 
 #: ../../keyboard.pm:1
 #, fuzzy, c-format
@@ -1809,6 +1822,11 @@ msgid ""
 "\n"
 msgstr ""
 
+#: ../../printer/cups.pm:1 ../../standalone/printerdrake:1
+#, fuzzy, c-format
+msgid "Configured on other machines"
+msgstr "Cumraigh seirbhisí"
+
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "information level that can be obtained through the cpuid instruction"
@@ -1847,10 +1865,11 @@ msgstr ""
 msgid "Select the font file or directory and click on 'Add'"
 msgstr ""
 
+# MG
 #: ../../lang.pm:1
 #, c-format
 msgid "Madagascar"
-msgstr ""
+msgstr "Madagascar"
 
 #: ../../standalone/drakbug:1
 #, c-format
@@ -1873,10 +1892,11 @@ msgstr "Mód Coras"
 msgid "Do you want to use this feature?"
 msgstr "Céard a theastaíonn uait a dhéanamh?"
 
+# AT
 #: ../../keyboard.pm:1
-#, c-format
+#, fuzzy, c-format
 msgid "Arabic"
-msgstr ""
+msgstr "An Ostair"
 
 #: ../../standalone/drakbackup:1
 #, fuzzy, c-format
@@ -1985,10 +2005,11 @@ msgstr ""
 msgid "Enable Server"
 msgstr "Freastalaí Printéir"
 
+# uk
 #: ../../keyboard.pm:1
-#, c-format
+#, fuzzy, c-format
 msgid "Ukrainian"
-msgstr ""
+msgstr "Úcráinis"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -2069,6 +2090,11 @@ msgstr ""
 msgid "Netmask:"
 msgstr ""
 
+#: ../../network/adsl.pm:1
+#, c-format
+msgid "Do it later"
+msgstr ""
+
 #: ../../any.pm:1
 #, c-format
 msgid "Append"
@@ -2094,26 +2120,6 @@ msgid ""
 "\n"
 "If some of these measures lead to problems for you, turn this option off, "
 "but then you have to take care of these points."
-msgstr ""
-
-#: ../../harddrake/sound.pm:1
-#, c-format
-msgid ""
-"OSS (Open Sound System) was the first sound API. It's an OS independant "
-"sound API (it's available on most unices systems) but it's a very basic and "
-"limited API.\n"
-"What's more, OSS drivers all reinvent the wheel.\n"
-"\n"
-"ALSA (Advanced Linux Sound Architecture) is a modularized architecture "
-"which\n"
-"supports quite a large range of ISA, USB and PCI cards.\n"
-"\n"
-"It also provides a much higher API than OSS.\n"
-"\n"
-"To use alsa, one can either use:\n"
-"- the old compatibility OSS api\n"
-"- the new ALSA api that provides many enhanced features but requires using "
-"the ALSA library.\n"
 msgstr ""
 
 #: ../../install_steps_interactive.pm:1
@@ -2215,6 +2221,11 @@ msgstr ""
 msgid "No open source driver"
 msgstr ""
 
+#: ../../standalone/printerdrake:1
+#, c-format
+msgid "Def."
+msgstr ""
+
 #: ../../security/level.pm:1
 #, c-format
 msgid ""
@@ -2236,6 +2247,11 @@ msgstr ""
 #, fuzzy, c-format
 msgid "European protocol (EDSS1)"
 msgstr "Eorap (EDS11)"
+
+#: ../../standalone/printerdrake:1
+#, fuzzy, c-format
+msgid "/_Delete"
+msgstr "Scríos"
 
 #: ../../any.pm:1
 #, c-format
@@ -2547,6 +2563,11 @@ msgstr ""
 msgid "Saint Lucia"
 msgstr ""
 
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "November"
+msgstr "Samhain"
+
 #: ../../standalone/drakconnect:1
 #, c-format
 msgid "Disconnect..."
@@ -2711,6 +2732,11 @@ msgstr ""
 msgid "All primary partitions are used"
 msgstr "Tá na ranna príofa uilig úsáidthe"
 
+#: ../../printer/main.pm:1
+#, fuzzy, c-format
+msgid "LPD server \"%s\", printer \"%s\""
+msgstr "Ag dúnadh síos an ghreasán"
+
 #: ../../network/netconnect.pm:1
 #, c-format
 msgid ""
@@ -2765,12 +2791,12 @@ msgstr "ÓstAinm"
 
 #: ../../lang.pm:1
 #, c-format
-msgid "Armenia"
+msgid "Fiji"
 msgstr ""
 
 #: ../../lang.pm:1
 #, c-format
-msgid "Fiji"
+msgid "Armenia"
 msgstr ""
 
 #: ../../any.pm:1
@@ -2781,6 +2807,11 @@ msgstr "Dara dioscthiomáint flapach"
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "About Harddrake"
+msgstr ""
+
+#: ../../security/l10n.pm:1
+#, c-format
+msgid "Authorize TCP connections to X Window"
 msgstr ""
 
 #: ../../standalone/harddrake2:1
@@ -2851,6 +2882,11 @@ msgid ""
 "%s\n"
 "are available on your system.\n"
 msgstr "Níl aon gaireas ghreasán san do chorás!"
+
+#: ../../printer/main.pm:1
+#, fuzzy, c-format
+msgid "Multi-function device on parallel port #%s"
+msgstr "Óstainm Printéir"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -2948,25 +2984,26 @@ msgid ""
 "program.  Just type \"sndconfig\" in a console."
 msgstr ""
 
+# RO 
 #: ../../lang.pm:1
 #, c-format
 msgid "Romania"
-msgstr ""
+msgstr "An Rómáin"
 
 #: ../../standalone/drakperm:1
 #, fuzzy, c-format
 msgid "Group"
 msgstr "Grupa na hOibre"
 
-#: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
-msgid "choose device"
-msgstr "Gaireas bootáil"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Canada"
 msgstr "Ceanada"
+
+#: ../../standalone/scannerdrake:1
+#, fuzzy, c-format
+msgid "choose device"
+msgstr "Gaireas bootáil"
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -2984,7 +3021,7 @@ msgid "German"
 msgstr "Gearmáinis"
 
 #: ../../help.pm:1 ../../install_steps_gtk.pm:1 ../../interactive.pm:1
-#: ../../my_gtk.pm:1 ../../ugtk2.pm:1 ../../interactive/newt.pm:1
+#: ../../ugtk2.pm:1 ../../interactive/newt.pm:1
 #: ../../printer/printerdrake.pm:1 ../../standalone/drakbackup:1
 #, c-format
 msgid "Next ->"
@@ -3021,7 +3058,7 @@ msgstr ""
 msgid "Horizontal refresh rate"
 msgstr "Ráta athnuachana cothrománach"
 
-#: ../../standalone/drakperm:1
+#: ../../standalone/drakperm:1 ../../standalone/printerdrake:1
 #, fuzzy, c-format
 msgid "Edit"
 msgstr "Ext2"
@@ -3130,6 +3167,11 @@ msgstr ""
 msgid "Re-generating list of configured scanners ..."
 msgstr ""
 
+#: ../../modules/interactive.pm:1
+#, fuzzy, c-format
+msgid "Module configuration"
+msgstr "Cumraigh Idirlíon"
+
 #: ../../harddrake/data.pm:1
 #, fuzzy, c-format
 msgid "Scanner"
@@ -3139,11 +3181,6 @@ msgstr "Roghnaigh carta grafachach"
 #, c-format
 msgid "Warning: testing this graphic card may freeze your computer"
 msgstr ""
-
-#: ../../standalone/drakconnect:1
-#, fuzzy, c-format
-msgid "Bad Ip"
-msgstr "I/A Carta"
 
 #: ../../any.pm:1
 #, c-format
@@ -3186,15 +3223,15 @@ msgstr "Tobscoir"
 msgid "No password prompt on %s at port %s"
 msgstr ""
 
+#: ../../mouse.pm:1
+#, fuzzy, c-format
+msgid "Kensington Thinking Mouse with Wheel emulation"
+msgstr "Kensington Thinking Mouse"
+
 #: ../../standalone/scannerdrake:1
 #, fuzzy, c-format
 msgid "Usage of remote scanners"
 msgstr "Úsáid spás saor"
-
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "\t-CDROM.\n"
-msgstr ""
 
 #: ../../install_interactive.pm:1
 #, c-format
@@ -3214,7 +3251,7 @@ msgstr "Dvorak (Ioruais)"
 msgid "Hard Disk Backup Progress..."
 msgstr ""
 
-#: ../../standalone/drakfloppy:1
+#: ../../standalone/drakconnect:1 ../../standalone/drakfloppy:1
 #, c-format
 msgid "Unable to fork: %s"
 msgstr "Teip ar glaoch `fork': %s"
@@ -3339,10 +3376,11 @@ msgid ""
 "\n"
 msgstr ""
 
+# SA
 #: ../../lang.pm:1
 #, c-format
 msgid "Saudi Arabia"
-msgstr ""
+msgstr "An Araib"
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -3397,6 +3435,11 @@ msgstr "Scriobh clár-ranna"
 msgid "Choose the profile to configure"
 msgstr "Roghnagih an úsáidoer gneás:"
 
+#: ../../security/l10n.pm:1
+#, c-format
+msgid "Password minimum length and number of digits and upcase letters"
+msgstr ""
+
 #: ../../network/ethernet.pm:1 ../../network/network.pm:1
 #, c-format
 msgid ""
@@ -3425,6 +3468,11 @@ msgstr "Scríos Printéir"
 #, c-format
 msgid "See hardware info"
 msgstr "Leámh an t-eolais crua-earra"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "Day"
+msgstr "La"
 
 #: ../../any.pm:1
 #, c-format
@@ -3464,14 +3512,16 @@ msgstr ""
 msgid "Subnet Mask:"
 msgstr ""
 
-#: ../../standalone/drakboot:1
-#, c-format
-msgid "LiLo and Bootsplash themes installation successfull"
-msgstr ""
-
 #: ../../security/l10n.pm:1
 #, c-format
 msgid "Set password expiration and account inactivation delays"
+msgstr ""
+
+#: ../../standalone/logdrake:1
+#, c-format
+msgid ""
+"_: load here is a noun, the load of the system\n"
+"Load"
 msgstr ""
 
 #: ../../Xconfig/monitor.pm:1
@@ -3507,6 +3557,11 @@ msgstr ""
 #, c-format
 msgid "Need hostname, username and password!"
 msgstr ""
+
+#: ../../network/adsl.pm:1
+#, fuzzy, c-format
+msgid "Insert floppy"
+msgstr "Cur isteach diosca sa dioscthiomant %s"
 
 #: ../../diskdrake/dav.pm:1
 #, c-format
@@ -3560,6 +3615,13 @@ msgstr "Beidh ort an ríomhaire a aththosnú sula ndéanfar an athrú"
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "Do not include the browser cache"
+msgstr ""
+
+#: ../../install_steps_interactive.pm:1
+#, c-format
+msgid ""
+"Failed to check filesystem %s. Do you want to repair the errors? (beware, "
+"you can lose data)"
 msgstr ""
 
 #: ../../standalone/keyboarddrake:1
@@ -3617,6 +3679,11 @@ msgstr "GlidePoint"
 msgid "Start: sector %s\n"
 msgstr "Tús: teascán %s\n"
 
+#: ../../standalone/drakconnect:1
+#, fuzzy, c-format
+msgid "No Mask"
+msgstr "Pacáiste mícheart"
+
 #: ../../standalone/drakgw:1
 #, fuzzy, c-format
 msgid "Network interface already configured"
@@ -3642,6 +3709,11 @@ msgstr "Freastalaí Printéir"
 msgid "Please click on a partition"
 msgstr "Roghnaigh rann le do thoil"
 
+#: ../../printer/main.pm:1
+#, c-format
+msgid "Multi-function device on HP JetDirect"
+msgstr ""
+
 #: ../../any.pm:1 ../../standalone/drakbackup:1
 #, c-format
 msgid "Linux"
@@ -3650,11 +3722,6 @@ msgstr "Linux"
 #: ../../standalone/drakxtv:1
 #, c-format
 msgid "Have a nice day!"
-msgstr ""
-
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "across Network"
 msgstr ""
 
 #: ../../help.pm:1
@@ -3747,10 +3814,11 @@ msgstr "Freastalaí Printéir"
 msgid "Quit without saving"
 msgstr "Éalaigh gan sabháil"
 
+# YE
 #: ../../lang.pm:1
 #, c-format
 msgid "Yemen"
-msgstr ""
+msgstr "Éimin"
 
 #: ../../share/advertising/11-mnf.pl:1
 #, c-format
@@ -3774,6 +3842,14 @@ msgid ""
 "Please choose the minimal installation you want:"
 msgstr ""
 
+#: ../../network/adsl.pm:1
+#, c-format
+msgid ""
+"You need the Alcatel microcode.\n"
+"You can provide it now via a floppy or your windows partition,\n"
+"or skip and do it later."
+msgstr ""
+
 #: ../../diskdrake/dav.pm:1
 #, fuzzy, c-format
 msgid "Please enter the WebDAV server URL"
@@ -3791,6 +3867,7 @@ msgid "Accept"
 msgstr "Aontaigh"
 
 #: ../../printer/printerdrake.pm:1 ../../standalone/harddrake2:1
+#: ../../standalone/printerdrake:1
 #, c-format
 msgid "Description"
 msgstr "Cuntas"
@@ -3814,11 +3891,6 @@ msgstr ""
 #, c-format
 msgid "Choose a monitor"
 msgstr "Roghnaigh scáileán"
-
-#: ../../standalone/drakconnect:1
-#, fuzzy, c-format
-msgid "Bad Mask"
-msgstr "Pacáiste mícheart"
 
 #: ../../any.pm:1
 #, c-format
@@ -3920,6 +3992,11 @@ msgstr ""
 msgid "whether this cpu has the Cyrix 6x86 Coma bug"
 msgstr ""
 
+#: ../../standalone/printerdrake:1
+#, fuzzy, c-format
+msgid "Loading printer configuration... Please wait"
+msgstr "Cumraigh Idirlíon"
+
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "early pentiums were buggy and freezed when decoding the F00F bytecode"
@@ -3969,11 +4046,6 @@ msgstr "Clódóir"
 #, fuzzy, c-format
 msgid "Which partition do you want to use for Linux4Win?"
 msgstr "Cén rann a bhfuil tú ag iarraidh úsáid mar rann fréamhach"
-
-#: ../../standalone/drakbackup:1
-#, fuzzy, c-format
-msgid "Backup system"
-msgstr "Socraigh córas chomhad"
 
 #: ../../printer/printerdrake.pm:1
 #, fuzzy, c-format
@@ -4037,10 +4109,11 @@ msgstr "Scríos Printéir"
 msgid "Do you want to enable printing on printers in the local network?\n"
 msgstr ""
 
+# TR
 #: ../../lang.pm:1
 #, c-format
 msgid "Turkey"
-msgstr ""
+msgstr "An Tuirc"
 
 #: ../../network/adsl.pm:1
 #, c-format
@@ -4367,12 +4440,12 @@ msgstr "Table"
 msgid "I don't know how to format %s in type %s"
 msgstr "níl a fhios agam conas %s a formáidiú go %s"
 
-#: ../../standalone/harddrake2:1
+#: ../../standalone/harddrake2:1 ../../standalone/printerdrake:1
 #, fuzzy, c-format
 msgid "Model"
 msgstr "Luchóg"
 
-#: ../../printer/printerdrake.pm:1
+#: ../../printer/main.pm:1 ../../printer/printerdrake.pm:1
 #, fuzzy, c-format
 msgid "USB printer #%s"
 msgstr "Gan  Printéir"
@@ -4449,6 +4522,11 @@ msgstr ""
 #: ../../lang.pm:1
 #, c-format
 msgid "East Timor"
+msgstr ""
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "On Tape Device"
 msgstr ""
 
 #: ../../standalone/drakbackup:1
@@ -4560,15 +4638,15 @@ msgstr ""
 msgid "Start sector: "
 msgstr "Teascán tosasch: "
 
-#: ../../standalone/drakperm:1
-#, fuzzy, c-format
-msgid "Read"
-msgstr "Athlódaigh"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Congo (Brazzaville)"
 msgstr ""
+
+#: ../../standalone/drakperm:1
+#, fuzzy, c-format
+msgid "Read"
+msgstr "Athlódaigh"
 
 #: ../../any.pm:1 ../../install_any.pm:1 ../../standalone.pm:1
 #, c-format
@@ -4612,10 +4690,18 @@ msgstr ""
 msgid "Right Control key"
 msgstr "Scríos Printéir"
 
+#: ../../network/adsl.pm:1
+#, fuzzy, c-format
+msgid ""
+"Insert a FAT formatted floppy in drive %s with %s in root directory and "
+"press %s"
+msgstr "Cur isteach diosca sa dioscthiomant %s"
+
+# ZM
 #: ../../lang.pm:1
 #, c-format
 msgid "Zambia"
-msgstr ""
+msgstr "An tSaimbia"
 
 #: ../../security/level.pm:1
 #, c-format
@@ -4637,15 +4723,15 @@ msgstr "Rúisis (Yawerty)"
 msgid "Under Devel ... please wait."
 msgstr ""
 
-#: ../../crypto.pm:1 ../../lang.pm:1
-#, c-format
-msgid "Czech Republic"
-msgstr "An Phoblacht nc tSeic"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Egypt"
 msgstr "An Éigipt"
+
+#: ../../crypto.pm:1 ../../lang.pm:1
+#, c-format
+msgid "Czech Republic"
+msgstr "An Phoblacht nc tSeic"
 
 #: ../../help.pm:1 ../../install_steps_interactive.pm:1
 #, c-format
@@ -4762,6 +4848,11 @@ msgstr ""
 
 #: ../../standalone/drakbackup:1
 #, fuzzy, c-format
+msgid "Backup System"
+msgstr "Socraigh córas chomhad"
+
+#: ../../standalone/drakbackup:1
+#, fuzzy, c-format
 msgid "Build Backup"
 msgstr "Droch comhad chúltaca"
 
@@ -4800,9 +4891,70 @@ msgstr ""
 msgid "Kiribati"
 msgstr ""
 
+#: ../../mouse.pm:1
+#, fuzzy, c-format
+msgid "Logitech Mouse (serial, old C7 type) with Wheel emulation"
+msgstr "Luchóg Logitech (srathach, séan cinéal C7)"
+
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "Other (not drakbackup) keys in place already"
+msgstr ""
+
+#: ../../help.pm:1
+#, c-format
+msgid ""
+"X (for X Window System) is the heart of the GNU/Linux graphical interface\n"
+"on which all the graphical environments (KDE, GNOME, AfterStep,\n"
+"WindowMaker, etc.) bundled with Mandrake Linux rely upon.\n"
+"\n"
+"You will be presented with a list of different parameters to change to get\n"
+"an optimal graphical display: Graphic Card\n"
+"\n"
+"   The installer will normally automatically detect and configure the\n"
+"graphic card installed on your machine. If it is not the case, you can\n"
+"choose from this list the card you actually have installed.\n"
+"\n"
+"   In the case that different servers are available for your card, with or\n"
+"without 3D acceleration, you are then asked to choose the server that best\n"
+"suits your needs.\n"
+"\n"
+"\n"
+"\n"
+"Monitor\n"
+"\n"
+"   The installer will normally automatically detect and configure the\n"
+"monitor connected to your machine. If it is incorrect, you can choose from\n"
+"this list the monitor you actually have connected to your computer.\n"
+"\n"
+"\n"
+"\n"
+"Resolution\n"
+"\n"
+"   Here you can choose the resolutions and color depths available for your\n"
+"hardware. Choose the one that best suits your needs (you will be able to\n"
+"change that after installation though). A sample of the chosen\n"
+"configuration is shown in the monitor.\n"
+"\n"
+"\n"
+"\n"
+"Test\n"
+"\n"
+"   the system will try to open a graphical screen at the desired\n"
+"resolution. If you can see the message during the test and answer \"%s\",\n"
+"then DrakX will proceed to the next step. If you cannot see the message, it\n"
+"means that some part of the autodetected configuration was incorrect and\n"
+"the test will automatically end after 12 seconds, bringing you back to the\n"
+"menu. Change settings until you get a correct graphical display.\n"
+"\n"
+"\n"
+"\n"
+"Options\n"
+"\n"
+"   Here you can choose whether you want to have your machine automatically\n"
+"switch to a graphical interface at boot. Obviously, you want to check\n"
+"\"%s\" if your machine is to act as a server, or if you were not successful\n"
+"in getting the display configured."
 msgstr ""
 
 #: ../../standalone/draksplash:1
@@ -4870,169 +5022,6 @@ msgid ""
 "information from the server(s)."
 msgstr ""
 
-#: ../../standalone/drakTermServ:1
-#, c-format
-msgid ""
-"drakTermServ Overview\n"
-"\t\t\t   \n"
-"        - Create Etherboot Enabled Boot Images:\n"
-"        \t\tTo boot a kernel via etherboot, a special kernel/initrd image "
-"must be created.\n"
-"        \t\tmkinitrd-net does much of this work and drakTermServ is just a "
-"graphical interface\n"
-"        \t\tto help manage/customize these images. To create the file \n"
-"        \t\t/etc/dhcpd.conf.etherboot-pcimap.include that is pulled in as an "
-"include in \n"
-"        \t\tdhcpd.conf, you should create the etherboot images for at least "
-"one full kernel.\n"
-"\n"
-"        - Maintain /etc/dhcpd.conf:\n"
-"        \t\tTo net boot clients, each client needs a dhcpd.conf entry, "
-"assigning an IP address\n"
-"        \t\tand net boot images to the machine. drakTermServ helps create/"
-"remove these entries.\n"
-"\t\t\t\n"
-"        \t\t(PCI cards may omit the image - etherboot will request the "
-"correct image. You should\n"
-"        \t\talso consider that when etherboot looks for the images, it "
-"expects names like\n"
-"        \t\tboot-3c59x.nbi, rather than boot-3c59x.2.4.19-16mdk.nbi).\n"
-"\t\t\t \n"
-"        \t\tA typical dhcpd.conf stanza to support a diskless client looks "
-"like:\n"
-"        \t\t\n"
-"\t\t\t\thost curly {\n"
-"\t\t\t\t\thardware ethernet        00:20:af:2f:f7:9d;\n"
-"\t\t\t\t\tfixed-address              192.168.192.3;\n"
-"\t\t\t\t\t#type                          fat;\n"
-"\t\t\t\t\tfilename                      \"i386/boot/boot-3c509.2.4.18-6mdk."
-"nbi\";\n"
-"\t\t\t\t\t#hdw_config                true;\n"
-"\t\t\t\t}\n"
-"\t\t\t\n"
-"\t\t\tWhile you can use a pool of IP addresses, rather than setup a specific "
-"entry for\n"
-"\t\t\ta client machine, using a fixed address scheme facilitates using the "
-"functionality\n"
-"\t\t\tof client-specific configuration files that ClusterNFS provides.\n"
-"\t\t\t\n"
-"\t\t\tNote: The \"#type\" entry is only used by drakTermServ.  Clients can "
-"either be 'thin'\n"
-"\t\t\tor 'fat'.  Thin clients run most software on the server via xdmcp, "
-"while fat clients run \n"
-"\t\t\tmost software on the client machine. A special inittab, /etc/inittab\\$"
-"\\$IP=client_ip\\$\\$ is\n"
-"\t\t\twritten for thin clients. System config files xdm-config, kdmrc, and "
-"gdm.conf are \n"
-"\t\t\tmodified if thin clients are used, to enable xdmcp. Since there are "
-"security issues in \n"
-"\t\t\tusing xdmcp, hosts.deny and hosts.allow are modified to limit access "
-"to the local\n"
-"\t\t\tsubnet.\n"
-"\t\t\t\n"
-"\t\t\tNote: The \"#hdw_config\" entry is also only used by drakTermServ.  "
-"Clients can either \n"
-"\t\t\tbe 'true' or 'false'.  'true' enables root login at the client machine "
-"and allows local \n"
-"\t\t\thardware configuration of sound, mouse, and X, using the 'drak' tools. "
-"This is enabled \n"
-"\t\t\tby creating seperate config files associated with the client's IP "
-"address and creating \n"
-"\t\t\tread/write mount points to allow the client to alter the file. Once "
-"you are satisfied \n"
-"\t\t\twith the configuration, you can remove root login priviledges from the "
-"client.\n"
-"\t\t\t\n"
-"\t\t\tNote: You must stop/start the server after adding or changing "
-"clients.\n"
-"\t\t\t\n"
-"        - Maintain /etc/exports:\n"
-"        \t\tClusternfs allows export of the root filesystem to diskless "
-"clients. drakTermServ\n"
-"        \t\tsets up the correct entry to allow anonymous access to the root "
-"filesystem from\n"
-"        \t\tdiskless clients.\n"
-"\n"
-"        \t\tA typical exports entry for clusternfs is:\n"
-"        \t\t\n"
-"        \t\t/                  (ro,all_squash)\n"
-"        \t\t/home              SUBNET/MASK(rw,root_squash)\n"
-"\t\t\t\n"
-"\t\t\tWith SUBNET/MASK being defined for your network.\n"
-"        \t\t\n"
-"        - Maintain /etc/shadow\\$\\$CLIENT\\$\\$:\n"
-"        \t\tFor users to be able to log into the system from a diskless "
-"client, their entry in\n"
-"        \t\t/etc/shadow needs to be duplicated in /etc/shadow\\$\\$CLIENTS\\$"
-"\\$. drakTermServ helps\n"
-"        \t\tin this respect by adding or removing system users from this "
-"file.\n"
-"\n"
-"        - Per client /etc/X11/XF86Config-4\\$\\$IP-ADDRESS\\$\\$:\n"
-"        \t\tThrough clusternfs, each diskless client can have it's own "
-"unique configuration files\n"
-"        \t\ton the root filesystem of the server. By allowing local client "
-"hardware configuration, \n"
-"        \t\tdrakTermServ will help create these files.\n"
-"\n"
-"        - Per client system configuration files:\n"
-"        \t\tThrough clusternfs, each diskless client can have it's own "
-"unique configuration files\n"
-"        \t\ton the root filesystem of the server. By allowing local client "
-"hardware configuration, \n"
-"\t\t\t\tclients can customize files such as /etc/modules.conf, /etc/"
-"sysconfig/mouse, \n"
-"        \t\t/etc/sysconfig/keyboard on a per-client basis.\n"
-"\n"
-"        Note: Enabling local client hardware configuration does enable root "
-"login to the terminal \n"
-"        server on each client machine that has this feature enabled.  Local "
-"configuration can be turned\n"
-"        back off, retaining the configuration files, once the client machine "
-"is configured.\n"
-"\t\t\n"
-"        - /etc/xinetd.d/tftp:\n"
-"        \t\tdrakTermServ will configure this file to work in conjunction "
-"with the images created by\n"
-"        \t\tmkinitrd-net, and the entries in /etc/dhcpd.conf, to serve up "
-"the boot image to each\n"
-"        \t\tdiskless client.\n"
-"\n"
-"        \t\tA typical tftp configuration file looks like:\n"
-"        \t\t\n"
-"        \t\tservice tftp\n"
-"        \t\t(\n"
-"                        disable         = no\n"
-"                        socket_type  = dgram\n"
-"                        protocol        = udp\n"
-"                        wait             = yes\n"
-"                        user             = root\n"
-"                        server          = /usr/sbin/in.tftpd\n"
-"                        server_args  = -s /var/lib/tftpboot\n"
-"        \t\t}\n"
-"        \t\t\n"
-"        \t\tThe changes here from the default installation are changing the "
-"disable flag to\n"
-"        \t\t'no' and changing the directory path to /var/lib/tftpboot, where "
-"mkinitrd-net\n"
-"        \t\tputs it's images.\n"
-"\n"
-"        - Create etherboot floppies/CDs:\n"
-"        \t\tThe diskless client machines need either ROM images on the NIC, "
-"or a boot floppy\n"
-"        \t\tor CD to initate the boot sequence.  drakTermServ will help "
-"generate these images,\n"
-"        \t\tbased on the NIC in the client machine.\n"
-"        \t\t\n"
-"        \t\tA basic example of creating a boot floppy for a 3Com 3c509 "
-"manually:\n"
-"        \t\t\n"
-"        \t\tcat /usr/lib/etherboot/boot1a.bin \\\n"
-"        \t\t\t/usr/lib/etherboot/lzrom/3c509.lzrom > /dev/fd0\n"
-" \n"
-"\n"
-msgstr ""
-
 #: ../../standalone/scannerdrake:1
 #, c-format
 msgid "%s is not in the scanner database, configure it manually?"
@@ -5088,8 +5077,7 @@ msgstr "Pointe taca dublach %s"
 msgid "/Autodetect _printers"
 msgstr "Scríos Printéir"
 
-#: ../../interactive.pm:1 ../../my_gtk.pm:1 ../../ugtk2.pm:1
-#: ../../interactive/newt.pm:1
+#: ../../interactive.pm:1 ../../ugtk2.pm:1 ../../interactive/newt.pm:1
 #, c-format
 msgid "Finish"
 msgstr "Criochnaigh"
@@ -5146,7 +5134,7 @@ msgstr ""
 msgid "This partition is not resizeable"
 msgstr ""
 
-#: ../../printer/printerdrake.pm:1
+#: ../../printer/printerdrake.pm:1 ../../standalone/printerdrake:1
 #, c-format
 msgid "Location"
 msgstr "Áit"
@@ -5155,6 +5143,11 @@ msgstr "Áit"
 #, c-format
 msgid "USA (cable-hrc)"
 msgstr ""
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Guatemala"
+msgstr "Guatamala"
 
 #: ../../diskdrake/hd_gtk.pm:1
 #, c-format
@@ -5166,11 +5159,6 @@ msgstr ""
 msgid "Ethernet cards promiscuity check"
 msgstr ""
 
-#: ../../lang.pm:1
-#, c-format
-msgid "Guatemala"
-msgstr "Guatamala"
-
 #: ../../standalone/scannerdrake:1
 #, c-format
 msgid "This machine"
@@ -5181,14 +5169,14 @@ msgstr ""
 msgid "DOS drive letter: %s (just a guess)\n"
 msgstr "Litir Dioscthiománt DOS: %s (buile faoi thuraim)\n"
 
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "Select the files or directories and click on 'OK'"
-msgstr ""
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Bahrain"
+msgstr ""
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "Select the files or directories and click on 'OK'"
 msgstr ""
 
 #: ../../standalone/drakfloppy:1
@@ -5230,6 +5218,11 @@ msgstr ""
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Maltese (US)"
+msgstr ""
+
+#: ../../standalone/drakfloppy:1
+#, c-format
+msgid "The creation of the boot floppy has been successfully completed \n"
 msgstr ""
 
 #: ../../services.pm:1
@@ -5276,14 +5269,12 @@ msgstr "Logitech MouseMan+/FirstMouse+"
 
 #: ../../standalone/drakbackup:1
 #, c-format
-msgid "Not the correct tape label. Tape is labelled %s."
-msgstr ""
+msgid "Thursday"
+msgstr "Deardaoin"
 
 #: ../../standalone/drakbackup:1
 #, c-format
-msgid ""
-"For a mulitsession CD, only the first session will erase the cdrw. Otherwise "
-"the cdrw is erased before each backup."
+msgid "Not the correct tape label. Tape is labelled %s."
 msgstr ""
 
 #: ../../standalone/drakgw:1
@@ -5365,6 +5356,11 @@ msgid ""
 "Internet, you should choose a lower level."
 msgstr ""
 
+#: ../../standalone/printerdrake:1
+#, fuzzy, c-format
+msgid "Server Name"
+msgstr "Freastalaí"
+
 #: ../../network/tools.pm:1 ../../standalone/drakconnect:1
 #, c-format
 msgid "Account Password"
@@ -5385,6 +5381,21 @@ msgid ""
 "System Commander).\n"
 "\n"
 "On which drive are you booting?"
+msgstr ""
+
+#: ../../install_interactive.pm:1
+#, c-format
+msgid ""
+"WARNING!\n"
+"\n"
+"DrakX will now resize your Windows partition. Be careful: this\n"
+"operation is dangerous. If you have not already done so, you\n"
+"first need to exit the installation, run \"chkdsk c:\" from a\n"
+"Command Prompt under Windows (beware, running graphical program\n"
+"\"scandisk\" is not enough, be sure to use \"chkdsk\" in a\n"
+"Command Prompt!), optionally run defrag, then restart the\n"
+"installation. You should also backup your data.\n"
+"When sure, press Ok."
 msgstr ""
 
 #: ../../keyboard.pm:1
@@ -5501,13 +5512,6 @@ msgid ""
 "number generation."
 msgstr ""
 
-#: ../../install_steps_interactive.pm:1
-#, c-format
-msgid ""
-"Failed to check filesystem %s. Do you want to repair the errors? (beware, "
-"you can loose data)"
-msgstr ""
-
 #: ../../share/advertising/07-server.pl:1
 #, c-format
 msgid "Turn your computer into a reliable server"
@@ -5595,6 +5599,11 @@ msgstr ""
 msgid "Cpuid level"
 msgstr "Roghnaigh liebhéal slándáil"
 
+#: ../../printer/main.pm:1
+#, fuzzy, c-format
+msgid "Novell server \"%s\", printer \"%s\""
+msgstr "Printéir Gréasán (lpd)"
+
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Mongolian (cyrillic)"
@@ -5649,15 +5658,21 @@ msgstr ""
 msgid "Accept broadcasted icmp echo"
 msgstr ""
 
+# UY
 #: ../../lang.pm:1
 #, c-format
 msgid "Uruguay"
-msgstr ""
+msgstr "Uragua"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Benin"
 msgstr ""
+
+#: ../../printer/main.pm:1
+#, fuzzy, c-format
+msgid "SMB/Windows server \"%s\", share \"%s\""
+msgstr "SMB/Windows 95/98/NT"
 
 #: ../../standalone/drakperm:1
 #, fuzzy, c-format
@@ -5673,6 +5688,11 @@ msgstr ""
 #, c-format
 msgid "Monitor: %s\n"
 msgstr "Scáileán: %s\n"
+
+#: ../../standalone/drakperm:1
+#, fuzzy, c-format
+msgid "Custom & system settings"
+msgstr "Ag formáidiú"
 
 #: ../../partition_table/raw.pm:1
 #, c-format
@@ -5725,6 +5745,11 @@ msgstr "Lean"
 #, fuzzy, c-format
 msgid "Custom Restore"
 msgstr "Socraithe"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "Saturday"
+msgstr "Sathairn"
 
 #: ../../help.pm:1
 #, c-format
@@ -5793,6 +5818,12 @@ msgstr "Feistiúi/Uadgrádaigh"
 msgid "%d packages"
 msgstr "%d pacáistí"
 
+# CR
+#: ../../crypto.pm:1 ../../lang.pm:1
+#, c-format
+msgid "Costa Rica"
+msgstr "Cósta Rice"
+
 #: ../../standalone.pm:1
 #, c-format
 msgid ""
@@ -5825,11 +5856,6 @@ msgid ""
 "\n"
 msgstr ""
 
-#: ../../crypto.pm:1 ../../lang.pm:1
-#, c-format
-msgid "Costa Rica"
-msgstr ""
-
 #: ../../security/level.pm:1
 #, fuzzy, c-format
 msgid "Use libsafe for servers"
@@ -5855,25 +5881,15 @@ msgid ""
 " allowed for Drakbackup (MB)"
 msgstr ""
 
-#: ../../my_gtk.pm:1
+#: ../../loopback.pm:1
 #, c-format
-msgid "-adobe-utopia-regular-r-*-*-25-*-*-*-p-*-iso8859-*,*-r-*"
+msgid "Circular mounts %s\n"
 msgstr ""
 
 #: ../../standalone/drakboot:1
 #, c-format
 msgid "Lilo/grub mode"
 msgstr "Mód Lilo/Grub"
-
-#: ../../standalone/drakfloppy:1
-#, c-format
-msgid "Output"
-msgstr "Aschur"
-
-#: ../../loopback.pm:1
-#, c-format
-msgid "Circular mounts %s\n"
-msgstr ""
 
 #: ../../lang.pm:1
 #, c-format
@@ -5918,6 +5934,11 @@ msgid ""
 "running"
 msgstr ""
 
+#: ../../standalone/drakbackup:1
+#, fuzzy, c-format
+msgid "Weekday"
+msgstr "Ceádaoin"
+
 #: ../../diskdrake/hd_gtk.pm:1
 #, c-format
 msgid "Filesystem types:"
@@ -5949,6 +5970,24 @@ msgstr ""
 #, fuzzy, c-format
 msgid "Floppy"
 msgstr "Sabháil ar dhiosca flapach"
+
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"        - Maintain /etc/exports:\n"
+"        \t\tClusternfs allows export of the root filesystem to diskless "
+"clients. drakTermServ\n"
+"        \t\tsets up the correct entry to allow anonymous access to the root "
+"filesystem from\n"
+"        \t\tdiskless clients.\n"
+"\n"
+"        \t\tA typical exports entry for clusternfs is:\n"
+"        \t\t\n"
+"        \t\t/                  (ro,all_squash)\n"
+"        \t\t/home              SUBNET/MASK(rw,root_squash)\n"
+"\t\t\t\n"
+"\t\t\tWith SUBNET/MASK being defined for your network."
+msgstr ""
 
 #: ../../standalone/drakfont:1
 #, c-format
@@ -5985,6 +6024,11 @@ msgstr "freastalaí óstann SMB"
 msgid "Name Servers:"
 msgstr "Freastalaí NIS"
 
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "Minute"
+msgstr "Noimeaíd"
+
 #: ../../install_messages.pm:1
 #, c-format
 msgid ""
@@ -6018,6 +6062,11 @@ msgid ""
 "copyright laws applicable to software programs.\n"
 msgstr ""
 
+#: ../../standalone/printerdrake:1
+#, fuzzy, c-format
+msgid "/_Expert mode"
+msgstr "Mód Saineolaí"
+
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Remove this printer from Star Office/OpenOffice.org/GIMP"
@@ -6030,15 +6079,15 @@ msgid ""
 "available server."
 msgstr ""
 
-#: ../../Xconfig/resolution_and_depth.pm:1
-#, c-format
-msgid "4 billion colors (32 bits)"
-msgstr "4 billiún dath (32 giotáin)"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Micronesia"
 msgstr ""
+
+#: ../../Xconfig/resolution_and_depth.pm:1
+#, c-format
+msgid "4 billion colors (32 bits)"
+msgstr "4 billiún dath (32 giotáin)"
 
 #: ../../steps.pm:1
 #, c-format
@@ -6048,6 +6097,56 @@ msgstr ""
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "This may take a moment to generate the keys."
+msgstr ""
+
+#: ../../standalone/draksec:1
+#, c-format
+msgid ""
+"Here, you can setup the security level and administrator of your machine.\n"
+"\n"
+"\n"
+"The Security Administrator is the one who will receive security alerts if "
+"the\n"
+"'Security Alerts' option is set. It can be a username or an email.\n"
+"\n"
+"\n"
+"The Security Level menu allows you to select one of the six preconfigured "
+"security levels\n"
+"provided with msec. These levels range from poor security and ease of use, "
+"to\n"
+"paranoid config, suitable for very sensitive server applications:\n"
+"\n"
+"\n"
+"<span foreground=\"royalblue3\">Poor</span>: This is a totally unsafe but "
+"very\n"
+"easy to use security level. It should only be used for machines not "
+"connected to\n"
+"any network and that are not accessible to everybody.\n"
+"\n"
+"\n"
+"<span foreground=\"royalblue3\">Standard</span>: This is the standard "
+"security\n"
+"recommended for a computer that will be used to connect to the Internet as "
+"a\n"
+"client.\n"
+"\n"
+"\n"
+"<span foreground=\"royalblue3\">High</span>: There are already some\n"
+"restrictions, and more automatic checks are run every night.\n"
+"\n"
+"\n"
+"<span foreground=\"royalblue3\">Higher</span>: The security is now high "
+"enough\n"
+"to use the system as a server which can accept connections from many "
+"clients. If\n"
+"your machine is only a client on the Internet, you should choose a lower "
+"level.\n"
+"\n"
+"\n"
+"<span foreground=\"royalblue3\">Paranoid</span>: This is similar to the "
+"previous\n"
+"level, but the system is entirely closed and security features are at their\n"
+"maximum"
 msgstr ""
 
 #: ../../printer/printerdrake.pm:1
@@ -6095,10 +6194,10 @@ msgstr ""
 msgid "Polish (qwerty layout)"
 msgstr ""
 
-#: ../../standalone/drakconnect:1
-#, c-format
-msgid "activate now"
-msgstr ""
+#: ../../standalone/printerdrake:1
+#, fuzzy, c-format
+msgid "/_Add Printer"
+msgstr "Printéir"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -6163,10 +6262,11 @@ msgstr "Inneal Geata:"
 msgid "Tonga"
 msgstr ""
 
+# TN
 #: ../../lang.pm:1
 #, c-format
 msgid "Tunisia"
-msgstr ""
+msgstr "An Túinéis"
 
 #: ../../standalone/scannerdrake:1
 #, fuzzy, c-format
@@ -6341,14 +6441,14 @@ msgstr ""
 msgid "United States Minor Outlying Islands"
 msgstr ""
 
-#: ../../standalone/logdrake:1
-#, c-format
-msgid "A tool to monitor your logs"
-msgstr ""
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Djibouti"
+msgstr ""
+
+#: ../../standalone/logdrake:1
+#, c-format
+msgid "A tool to monitor your logs"
 msgstr ""
 
 #: ../../network/netconnect.pm:1
@@ -6366,6 +6466,11 @@ msgstr ""
 msgid "Graphics card: %s\n"
 msgstr "Carta Grafach: %s\n"
 
+#: ../../standalone/printerdrake:1
+#, fuzzy, c-format
+msgid "/Set as _Default"
+msgstr "Gnáth"
+
 #: ../../security/l10n.pm:1
 #, c-format
 msgid "Accept icmp echo"
@@ -6375,6 +6480,11 @@ msgstr ""
 #, c-format
 msgid "Yaboot"
 msgstr "Yaboot"
+
+#: ../../mouse.pm:1
+#, fuzzy, c-format
+msgid "Logitech CC Series with Wheel emulation"
+msgstr "Luchóg Logitech CC"
 
 #: ../../standalone/drakboot:1
 #, fuzzy, c-format
@@ -6462,6 +6572,11 @@ msgstr "Roghnaigh carta grafachach"
 #, fuzzy, c-format
 msgid "Remove selected server"
 msgstr "Scrios ciú"
+
+#: ../../network/adsl.pm:1
+#, c-format
+msgid "Sagem (using dhcp) usb"
+msgstr ""
 
 #: ../../lang.pm:1
 #, c-format
@@ -6584,6 +6699,11 @@ msgstr "Greicís"
 msgid "Saint Kitts and Nevis"
 msgstr ""
 
+#: ../../mouse.pm:1
+#, fuzzy, c-format
+msgid "Generic 3 Button Mouse with Wheel emulation"
+msgstr "Luchóg Gnáth 3-cnaipe"
+
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid ""
@@ -6627,6 +6747,11 @@ msgid ""
 "An error occurred:\n"
 "%s\n"
 "Try to change some parameters"
+msgstr ""
+
+#: ../../printer/main.pm:1
+#, c-format
+msgid "TCP/IP host \"%s\", port %s"
 msgstr ""
 
 #: ../../standalone/drakperm:1
@@ -6720,15 +6845,21 @@ msgid ""
 " in the tape drive device %s"
 msgstr ""
 
+# MN
 #: ../../lang.pm:1
 #, c-format
 msgid "Mongolia"
-msgstr ""
+msgstr "An Mhóngóil"
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid "Mounted\n"
 msgstr ""
+
+#: ../../standalone/printerdrake:1
+#, fuzzy, c-format
+msgid "Configure CUPS"
+msgstr "Cumraigh X"
 
 #: ../../help.pm:1
 #, fuzzy, c-format
@@ -6759,10 +6890,11 @@ msgstr ""
 msgid "Detected hardware"
 msgstr "Leámh an t-eolais crua-earra"
 
+# mr
 #: ../../lang.pm:1
-#, c-format
+#, fuzzy, c-format
 msgid "Mauritius"
-msgstr ""
+msgstr "Marataí"
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -6804,15 +6936,11 @@ msgstr ""
 msgid ", host \"%s\", port %s"
 msgstr ""
 
+# MC
 #: ../../lang.pm:1
 #, c-format
 msgid "Monaco"
-msgstr ""
-
-#: ../../security/l10n.pm:1
-#, c-format
-msgid "Do not send mails when uneeded"
-msgstr ""
+msgstr "Monacó"
 
 #: ../../install_interactive.pm:1
 #, c-format
@@ -6828,6 +6956,11 @@ msgstr "Formáidiú %s de %s teipithe"
 #, c-format
 msgid "Canada (cable)"
 msgstr ""
+
+#: ../../standalone/drakfloppy:1
+#, fuzzy, c-format
+msgid "Floppy creation completed"
+msgstr "Athraigh cineál ranna"
 
 #: ../../help.pm:1
 #, fuzzy, c-format
@@ -6853,6 +6986,11 @@ msgstr ""
 msgid "Kyrgyzstan"
 msgstr ""
 
+#: ../../printer/main.pm:1
+#, c-format
+msgid "Multi-function device on USB"
+msgstr ""
+
 #: ../../help.pm:1
 #, fuzzy, c-format
 msgid "With basic documentation"
@@ -6871,6 +7009,11 @@ msgid ""
 "Then choose action ``Mount point'' and set it to `/'"
 msgstr ""
 
+#: ../../lang.pm:1
+#, c-format
+msgid "Western Sahara"
+msgstr ""
+
 #: ../../network/network.pm:1
 #, c-format
 msgid "Proxy should be http://..."
@@ -6879,11 +7022,6 @@ msgstr ""
 #: ../../lang.pm:1 ../../standalone/drakxtv:1
 #, c-format
 msgid "South Africa"
-msgstr ""
-
-#: ../../lang.pm:1
-#, c-format
-msgid "Western Sahara"
 msgstr ""
 
 #: ../../standalone/drakbackup:1
@@ -6926,6 +7064,11 @@ msgstr "Teastáil an luchóg, le do thoil"
 msgid ""
 "Do not update inode access times on this file system\n"
 "(e.g, for faster access on the news spool to speed up news servers)."
+msgstr ""
+
+#: ../../mouse.pm:1
+#, c-format
+msgid "3 buttons with Wheel emulation"
 msgstr ""
 
 #: ../../standalone/drakperm:1
@@ -6989,15 +7132,21 @@ msgstr ""
 msgid "Clean /tmp at each boot"
 msgstr "Glan /tmp nuair a thosnaigh an coráis"
 
+# MW
 #: ../../lang.pm:1
 #, c-format
 msgid "Malawi"
-msgstr ""
+msgstr "Malawi"
 
 #: ../../standalone/drakTermServ:1
 #, fuzzy, c-format
 msgid "local config: false"
 msgstr "Chomaid Áitiúl"
+
+#: ../../standalone/drakperm:1
+#, fuzzy, c-format
+msgid "System settings"
+msgstr "Ag formáidiú"
 
 #: ../../install_steps_interactive.pm:1
 #, fuzzy, c-format
@@ -7016,25 +7165,26 @@ msgid ""
 "(s) should be available:"
 msgstr ""
 
+# UK
 #: ../../lang.pm:1 ../../network/tools.pm:1
 #, c-format
 msgid "United Kingdom"
-msgstr ""
+msgstr "An Ríocht"
 
 #: ../../services.pm:1
 #, c-format
 msgid "running"
 msgstr "ag rith"
 
-#: ../../standalone/draksec:1
-#, c-format
-msgid "default"
-msgstr "gnáth"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Indonesia"
 msgstr "An Indinéis"
+
+#: ../../standalone/draksec:1
+#, c-format
+msgid "default"
+msgstr "gnáth"
 
 #: ../../standalone/drakxtv:1
 #, fuzzy, c-format
@@ -7074,6 +7224,12 @@ msgid ""
 "Our full range of Linux solutions, as well as special offers on products and "
 "other \"goodies\", are available on our e-store:"
 msgstr ""
+
+# mr
+#: ../../standalone/drakbackup:1
+#, fuzzy, c-format
+msgid "March"
+msgstr "Marataí"
 
 #: ../../any.pm:1
 #, c-format
@@ -7131,10 +7287,15 @@ msgstr "Carta Telefís"
 msgid "Printer on SMB/Windows 95/98/NT server"
 msgstr "SMB/Windows 95/98/NT"
 
+#: ../../standalone/printerdrake:1
+#, fuzzy, c-format
+msgid "/_Configure CUPS"
+msgstr "Cumraigh X"
+
 #: ../../standalone/scannerdrake:1
 #, c-format
 msgid ", "
-msgstr ""
+msgstr ", "
 
 #: ../../printer/printerdrake.pm:1
 #, fuzzy, c-format
@@ -7208,6 +7369,11 @@ msgid ""
 "offering professional solutions compatible with Mandrake Linux"
 msgstr ""
 
+#: ../../standalone/printerdrake:1
+#, c-format
+msgid "Authors: "
+msgstr ""
+
 #: ../../standalone/drakgw:1
 #, fuzzy, c-format
 msgid "Internet Connection Sharing is now disabled."
@@ -7266,12 +7432,22 @@ msgstr "Críochnithe"
 msgid "The entered IP is not correct.\n"
 msgstr "An bhfuil seo ceart?"
 
+#: ../../standalone/drakbackup:1
+#, fuzzy, c-format
+msgid "Please be sure that the cron daemon is included in your services."
+msgstr "Roghnaight do theangam le do thoil."
+
 #: ../../standalone/drakconnect:1
 #, c-format
 msgid "Ethernet Card"
 msgstr ""
 
-#: ../../my_gtk.pm:1 ../../services.pm:1 ../../ugtk2.pm:1
+#: ../../standalone/printerdrake:1
+#, fuzzy, c-format
+msgid "Delete selected printer"
+msgstr "Scrios ciú"
+
+#: ../../services.pm:1 ../../ugtk2.pm:1
 #, c-format
 msgid "Info"
 msgstr "Eolas"
@@ -7375,13 +7551,6 @@ msgstr "Printéir áitiúl"
 msgid "Disabling servers..."
 msgstr ""
 
-#: ../../standalone/drakbackup:1
-#, fuzzy, c-format
-msgid ""
-"Please choose the time \n"
-"interval between each backup"
-msgstr "Roghnaight do theangam le do thoil."
-
 #: ../../standalone/drakboot:1
 #, c-format
 msgid "Installation of %s failed. The following error occured:"
@@ -7469,11 +7638,6 @@ msgstr "Feistiú LILO/grub"
 #, c-format
 msgid "Israeli"
 msgstr ""
-
-#: ../../standalone/logdrake:1
-#, fuzzy, c-format
-msgid "load setting"
-msgstr "Ag formáidiú"
 
 #: ../../printer/printerdrake.pm:1
 #, fuzzy, c-format
@@ -7565,12 +7729,12 @@ msgstr ""
 
 #: ../../lang.pm:1
 #, c-format
-msgid "Andorra"
+msgid "Botswana"
 msgstr ""
 
 #: ../../lang.pm:1
 #, c-format
-msgid "Botswana"
+msgid "Andorra"
 msgstr ""
 
 #: ../../standalone/draksec:1
@@ -7652,16 +7816,16 @@ msgstr ""
 msgid "Automatic Steps Configuration"
 msgstr "Cumraíocht Stíl Tosnú"
 
+#: ../../lang.pm:1
+#, c-format
+msgid "Barbados"
+msgstr ""
+
 #: ../../share/advertising/02-community.pl:1
 #, c-format
 msgid ""
 "Want to know more and to contribute to the Open Source community? Get "
 "involved in the Free Software world!"
-msgstr ""
-
-#: ../../lang.pm:1
-#, c-format
-msgid "Barbados"
 msgstr ""
 
 #: ../../standalone/drakbackup:1
@@ -7706,6 +7870,11 @@ msgstr ""
 msgid "High"
 msgstr "Árd"
 
+#: ../../standalone/printerdrake:1
+#, fuzzy, c-format
+msgid "Add a new printer to the system"
+msgstr "Cuir grupa"
+
 #: ../../any.pm:1
 #, c-format
 msgid "NoVideo"
@@ -7721,7 +7890,7 @@ msgstr ""
 msgid "Adding printer to Star Office/OpenOffice.org/GIMP"
 msgstr ""
 
-#: ../../printer/main.pm:1 ../../printer/printerdrake.pm:1
+#: ../../printer/printerdrake.pm:1
 #, fuzzy, c-format
 msgid "Local Printers"
 msgstr "Printéir áitiúl"
@@ -7741,10 +7910,11 @@ msgstr "Freastalaí NIS"
 msgid "Port: %s"
 msgstr "Poirt"
 
+# ES
 #: ../../lang.pm:1
 #, c-format
 msgid "Spain"
-msgstr ""
+msgstr "An Spáinn"
 
 #: ../../standalone/drakTermServ:1
 #, c-format
@@ -7786,15 +7956,21 @@ msgstr ""
 msgid "Belgium"
 msgstr "Belgáiris"
 
+# KW
 #: ../../lang.pm:1
 #, c-format
 msgid "Kuwait"
-msgstr ""
+msgstr "Cuáit"
 
 #: ../../any.pm:1
 #, c-format
 msgid "Choose the window manager to run:"
 msgstr "Roghnaigh an Bainistéoir Fhuinneoga a úsásd:"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "December"
+msgstr "Nollag"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -7892,6 +8068,11 @@ msgstr "X ag tús"
 msgid "Chad"
 msgstr ""
 
+#: ../../lang.pm:1
+#, c-format
+msgid "India"
+msgstr "An India"
+
 #: ../../Xconfig/card.pm:1 ../../Xconfig/various.pm:1
 #, c-format
 msgid "XFree %s with 3D hardware acceleration"
@@ -7899,18 +8080,14 @@ msgstr "XFree %s le luadghearú crua-earraí 3D"
 
 #: ../../lang.pm:1
 #, c-format
-msgid "India"
-msgstr "An India"
-
-#: ../../lang.pm:1
-#, c-format
 msgid "Slovakia"
 msgstr ""
 
+# SG
 #: ../../lang.pm:1
 #, c-format
 msgid "Singapore"
-msgstr ""
+msgstr "Singeapór"
 
 #: ../../lang.pm:1
 #, c-format
@@ -8139,15 +8316,22 @@ msgid ""
 "You can find some information about them at: %s"
 msgstr ""
 
+#: ../../lang.pm:1
+#, c-format
+msgid "Haiti"
+msgstr "Háiti"
+
 #: ../../network/netconnect.pm:1 ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Detecting devices..."
 msgstr ""
 
-#: ../../lang.pm:1
+#: ../../standalone/drakbackup:1
 #, c-format
-msgid "Haiti"
-msgstr "Háiti"
+msgid ""
+"Custom allows you to specify your own day and time.  The other options use "
+"run-parts in /etc/crontab."
+msgstr ""
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -8332,14 +8516,6 @@ msgstr ""
 msgid "Looking for available packages..."
 msgstr "Ag curdach do na pacáistí atá ar fáil"
 
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid ""
-"This should be a comma-seperated list of local users or email addresses that "
-"you want the backup results sent to. You will need a functioning mail "
-"transfer agent setup on your system."
-msgstr ""
-
 #: ../../any.pm:1
 #, c-format
 msgid "Init Message"
@@ -8350,15 +8526,15 @@ msgstr "Scéal Tosnú"
 msgid "Rescue partition table"
 msgstr ""
 
-#: ../../standalone/net_monitor:1
-#, fuzzy, c-format
-msgid "Connection complete."
-msgstr "Athraigh cineál ranna"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Cyprus"
 msgstr "An Chipir"
+
+#: ../../standalone/net_monitor:1
+#, fuzzy, c-format
+msgid "Connection complete."
+msgstr "Athraigh cineál ranna"
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -8379,6 +8555,11 @@ msgstr "Draíodóir Cumraíocht Gréasánú"
 #, fuzzy, c-format
 msgid "ISDN connection"
 msgstr "Cumraigh ISDN"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "CD-R / DVD-R"
+msgstr ""
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -8436,6 +8617,11 @@ msgid ""
 "per second)"
 msgstr ""
 
+#: ../../standalone/printerdrake:1
+#, fuzzy, c-format
+msgid "Mandrake Linux Printer Management Tool"
+msgstr "Feistiú Linux-Mandrake %s"
+
 #: ../../pkgs.pm:1
 #, c-format
 msgid "important"
@@ -8444,6 +8630,18 @@ msgstr "tábhachtach"
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "Total Progress"
+msgstr ""
+
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"        - Maintain /etc/shadow\\$\\$CLIENT\\$\\$:\n"
+"        \t\tFor users to be able to log into the system from a diskless "
+"client, their entry in\n"
+"        \t\t/etc/shadow needs to be duplicated in /etc/shadow\\$\\$CLIENTS\\$"
+"\\$. drakTermServ helps\n"
+"        \t\tin this respect by adding or removing system users from this "
+"file."
 msgstr ""
 
 #: ../../help.pm:1
@@ -8467,15 +8665,15 @@ msgid ""
 "configure the driver."
 msgstr ""
 
-#: ../../standalone/drakbackup:1
-#, fuzzy, c-format
-msgid "Users"
-msgstr "Ainm úsáideora"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Aruba"
 msgstr ""
+
+#: ../../standalone/drakbackup:1
+#, fuzzy, c-format
+msgid "Users"
+msgstr "Ainm úsáideora"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -8496,6 +8694,11 @@ msgstr "Ní mar a chéile na pasfhocail"
 #, c-format
 msgid "Examples for correct IPs:\n"
 msgstr ""
+
+#: ../../standalone/drakbackup:1
+#, fuzzy, c-format
+msgid "Please choose the media for backup."
+msgstr "Roghnaight do theangam le do thoil."
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -8680,6 +8883,11 @@ msgid ""
 "You may now replay your installation."
 msgstr ""
 
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "Use CD-R/DVD-R to backup"
+msgstr ""
+
 #: ../../standalone/harddrake2:1
 #, fuzzy, c-format
 msgid "the number of buttons the mouse has"
@@ -8814,6 +9022,11 @@ msgid ""
 "Backup Sources: \n"
 msgstr ""
 
+#: ../../standalone/drakbackup:1
+#, fuzzy, c-format
+msgid "custom"
+msgstr "Socraithe"
+
 #: ../../standalone/logdrake:1
 #, c-format
 msgid "Content of the file"
@@ -8870,6 +9083,7 @@ msgid "Theme name"
 msgstr "Comh. ainm"
 
 #: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
+#: ../../standalone/printerdrake:1
 #, c-format
 msgid "/_Help"
 msgstr "/C_úidiú"
@@ -8877,6 +9091,11 @@ msgstr "/C_úidiú"
 #: ../../harddrake/sound.pm:1
 #, c-format
 msgid "Choosing an arbitrary driver"
+msgstr ""
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Cook Islands"
 msgstr ""
 
 #: ../../standalone/scannerdrake:1
@@ -8889,11 +9108,6 @@ msgstr ""
 #: ../../standalone/draksplash:1
 #, c-format
 msgid "the width of the progress bar"
-msgstr ""
-
-#: ../../lang.pm:1
-#, c-format
-msgid "Cook Islands"
 msgstr ""
 
 #: ../../fs.pm:1
@@ -8913,17 +9127,16 @@ msgstr ""
 
 #: ../../any.pm:1 ../../help.pm:1 ../../install_steps_gtk.pm:1
 #: ../../install_steps_interactive.pm:1 ../../interactive.pm:1
-#: ../../my_gtk.pm:1 ../../ugtk2.pm:1 ../../ugtk.pm:1
-#: ../../Xconfig/resolution_and_depth.pm:1 ../../diskdrake/smbnfs_gtk.pm:1
-#: ../../interactive/gtk.pm:1 ../../interactive/http.pm:1
-#: ../../interactive/newt.pm:1 ../../interactive/stdio.pm:1
-#: ../../printer/printerdrake.pm:1 ../../standalone/drakautoinst:1
-#: ../../standalone/drakbackup:1 ../../standalone/drakboot:1
-#: ../../standalone/drakconnect:1 ../../standalone/drakfloppy:1
-#: ../../standalone/drakfont:1 ../../standalone/drakgw:1
-#: ../../standalone/drakperm:1 ../../standalone/draksec:1
-#: ../../standalone/logdrake:1 ../../standalone/mousedrake:1
-#: ../../standalone/net_monitor:1
+#: ../../ugtk2.pm:1 ../../Xconfig/resolution_and_depth.pm:1
+#: ../../diskdrake/smbnfs_gtk.pm:1 ../../interactive/gtk.pm:1
+#: ../../interactive/http.pm:1 ../../interactive/newt.pm:1
+#: ../../interactive/stdio.pm:1 ../../printer/printerdrake.pm:1
+#: ../../standalone/drakautoinst:1 ../../standalone/drakbackup:1
+#: ../../standalone/drakboot:1 ../../standalone/drakconnect:1
+#: ../../standalone/drakfloppy:1 ../../standalone/drakfont:1
+#: ../../standalone/drakgw:1 ../../standalone/drakperm:1
+#: ../../standalone/draksec:1 ../../standalone/logdrake:1
+#: ../../standalone/mousedrake:1 ../../standalone/net_monitor:1
 #, c-format
 msgid "Cancel"
 msgstr "Cealaigh"
@@ -8968,23 +9181,15 @@ msgstr "Scríos Printéir"
 msgid "View Last Log"
 msgstr ""
 
-#: ../../install_interactive.pm:1
-#, c-format
-msgid ""
-"WARNING!\n"
-"\n"
-"DrakX will now resize your Windows partition. Be careful:\n"
-"this operation is dangerous. If you have not already done\n"
-"so, you should first exit the installation, run scandisk\n"
-"under Windows (and optionally run defrag), then restart the\n"
-"installation. You should also backup your data.\n"
-"When sure, press Ok."
-msgstr ""
-
 #: ../../network/drakfirewall.pm:1
 #, c-format
 msgid "Which services would you like to allow the Internet to connect to?"
 msgstr ""
+
+#: ../../standalone/printerdrake:1
+#, fuzzy, c-format
+msgid "Connection Type"
+msgstr "Athraigh cineál ranna"
 
 #: ../../standalone/logdrake:1
 #, c-format
@@ -9051,11 +9256,6 @@ msgstr ""
 msgid "US keyboard (international)"
 msgstr "Mearchlár US (idirnaisiúnta)"
 
-#: ../../keyboard.pm:1
-#, c-format
-msgid "Saami (swedish/finish)"
-msgstr ""
-
 #: ../../standalone/drakbug:1
 #, fuzzy, c-format
 msgid "Not installed"
@@ -9084,7 +9284,7 @@ msgstr "Iodálais"
 #: ../../interactive.pm:1
 #, c-format
 msgid "Basic"
-msgstr ""
+msgstr "Gnáth"
 
 #: ../../standalone/drakTermServ:1
 #, c-format
@@ -9153,19 +9353,10 @@ msgstr ""
 msgid "You must enter a device or file name!"
 msgstr "Gaireas Printéir (URI)"
 
-#: ../../standalone/harddrake2:1
+#: ../../standalone/harddrake2:1 ../../standalone/printerdrake:1
 #, fuzzy, c-format
 msgid "/_Quit"
 msgstr "Éalaigh"
-
-#: ../../network/adsl.pm:1
-#, c-format
-msgid ""
-"You need the alcatel microcode.\n"
-"Download it at\n"
-"http://www.speedtouchdsl.com/dvrreg_lx.htm\n"
-"and copy the mgmt.o in /usr/share/speedtouch"
-msgstr ""
 
 #: ../../Xconfig/various.pm:1
 #, c-format
@@ -9291,11 +9482,6 @@ msgstr "Teastáil an luchóg, le do thoil"
 msgid "Printing"
 msgstr "Printéir"
 
-#: ../../harddrake/sound.pm:1
-#, c-format
-msgid "Unkown driver"
-msgstr ""
-
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid ""
@@ -9372,9 +9558,9 @@ msgid ""
 msgstr ""
 
 #: ../../lang.pm:1
-#, c-format
+#, fuzzy, c-format
 msgid "Moldova"
-msgstr ""
+msgstr "Luain"
 
 #: ../../mouse.pm:1
 #, c-format
@@ -9406,6 +9592,11 @@ msgstr ""
 msgid "Add a new rule at the end"
 msgstr "Gan  Printéir"
 
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "LiLo and Bootsplash themes installation successful"
+msgstr ""
+
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid ""
@@ -9431,6 +9622,11 @@ msgstr "Éalaigh gan an clár-ranna a scríobh?"
 msgid "Genius NetScroll"
 msgstr "Genius NetScroll"
 
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "On Hard Drive"
+msgstr ""
+
 #: ../../standalone.pm:1
 #, fuzzy, c-format
 msgid "Installing packages..."
@@ -9441,15 +9637,15 @@ msgstr "Ag feistiál  pacáiste %s"
 msgid "Dutch"
 msgstr ""
 
-#: ../../standalone/drakbackup:1
-#, fuzzy, c-format
-msgid "The following packages need to be installed:\n"
-msgstr "Roghnaigh pacáistí ..."
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Angola"
 msgstr ""
+
+#: ../../standalone/drakbackup:1
+#, fuzzy, c-format
+msgid "The following packages need to be installed:\n"
+msgstr "Roghnaigh pacáistí ..."
 
 #: ../../standalone/logdrake:1
 #, fuzzy, c-format
@@ -9513,6 +9709,45 @@ msgid ""
 "http://www.linux-mandrake.com/en/hardware.php3"
 msgstr ""
 
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"\t\t\tWhile you can use a pool of IP addresses, rather than setup a specific "
+"entry for\n"
+"\t\t\ta client machine, using a fixed address scheme facilitates using the "
+"functionality\n"
+"\t\t\tof client-specific configuration files that ClusterNFS provides.\n"
+"\t\t\t\n"
+"\t\t\tNote: The \"#type\" entry is only used by drakTermServ.  Clients can "
+"either be 'thin'\n"
+"\t\t\tor 'fat'.  Thin clients run most software on the server via xdmcp, "
+"while fat clients run \n"
+"\t\t\tmost software on the client machine. A special inittab, /etc/inittab\\$"
+"\\$IP=client_ip\\$\\$ is\n"
+"\t\t\twritten for thin clients. System config files xdm-config, kdmrc, and "
+"gdm.conf are \n"
+"\t\t\tmodified if thin clients are used, to enable xdmcp. Since there are "
+"security issues in \n"
+"\t\t\tusing xdmcp, hosts.deny and hosts.allow are modified to limit access "
+"to the local\n"
+"\t\t\tsubnet.\n"
+"\t\t\t\n"
+"\t\t\tNote: The \"#hdw_config\" entry is also only used by drakTermServ.  "
+"Clients can either \n"
+"\t\t\tbe 'true' or 'false'.  'true' enables root login at the client machine "
+"and allows local \n"
+"\t\t\thardware configuration of sound, mouse, and X, using the 'drak' tools. "
+"This is enabled \n"
+"\t\t\tby creating separate config files associated with the client's IP "
+"address and creating \n"
+"\t\t\tread/write mount points to allow the client to alter the file. Once "
+"you are satisfied \n"
+"\t\t\twith the configuration, you can remove root login privileges from the "
+"client.\n"
+"\t\t\t\n"
+"\t\t\tNote: You must stop/start the server after adding or changing clients."
+msgstr ""
+
 #: ../../standalone/drakconnect:1
 #, fuzzy, c-format
 msgid "Configure Local Area Network..."
@@ -9553,20 +9788,21 @@ msgstr "Taispeán Eolas"
 msgid "No network card"
 msgstr "ní fuaireathas cárta gréasánú"
 
-#: ../../diskdrake/interactive.pm:1 ../../diskdrake/removable.pm:1
-#, fuzzy, c-format
-msgid "Which filesystem do you want?"
-msgstr "Cén rann atá uait?"
-
 #: ../../mouse.pm:1
 #, c-format
 msgid "3 buttons"
 msgstr "3 cnaipí"
 
+#: ../../diskdrake/interactive.pm:1 ../../diskdrake/removable.pm:1
+#, fuzzy, c-format
+msgid "Which filesystem do you want?"
+msgstr "Cén rann atá uait?"
+
+# MT
 #: ../../lang.pm:1
 #, c-format
 msgid "Malta"
-msgstr ""
+msgstr "Málta"
 
 #: ../../diskdrake/interactive.pm:1
 #, fuzzy, c-format
@@ -9611,15 +9847,15 @@ msgstr "Carta Grafach"
 msgid "Resizing Windows partition"
 msgstr "Ag ríomhadh teorainn na córais-comhadlanna FAT"
 
-#: ../../network/tools.pm:1 ../../standalone/drakconnect:1
-#, fuzzy, c-format
-msgid "Provider dns 1 (optional)"
-msgstr "Roghanna Printéir"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Cameroon"
 msgstr "Camarún"
+
+#: ../../network/tools.pm:1 ../../standalone/drakconnect:1
+#, fuzzy, c-format
+msgid "Provider dns 1 (optional)"
+msgstr "Roghanna Printéir"
 
 #: ../../install_interactive.pm:1
 #, c-format
@@ -9628,9 +9864,15 @@ msgid ""
 "When you are done, don't forget to save using `w'"
 msgstr ""
 
+#: ../../keyboard.pm:1
+#, c-format
+msgid "Saami (swedish/finnish)"
+msgstr ""
+
 #: ../../printer/printerdrake.pm:1 ../../standalone/drakTermServ:1
 #: ../../standalone/drakbackup:1 ../../standalone/drakbug:1
 #: ../../standalone/drakfont:1 ../../standalone/net_monitor:1
+#: ../../standalone/printerdrake:1
 #, c-format
 msgid "Close"
 msgstr "Dún"
@@ -9668,6 +9910,11 @@ msgstr ""
 msgid "Iceland"
 msgstr "An Íoslainn"
 
+#: ../../standalone/drakconnect:1
+#, fuzzy, c-format
+msgid "Network & Internet Configuration"
+msgstr "Cumraíocht Gréasánú"
+
 #: ../../common.pm:1
 #, c-format
 msgid "consolehelper missing"
@@ -9688,7 +9935,7 @@ msgstr ""
 msgid "Ext2"
 msgstr "Ext2"
 
-#: ../../my_gtk.pm:1 ../../ugtk2.pm:1
+#: ../../ugtk2.pm:1
 #, c-format
 msgid "Expand Tree"
 msgstr ""
@@ -9704,7 +9951,6 @@ msgid ""
 msgstr ""
 
 #: ../../network/netconnect.pm:1 ../../printer/printerdrake.pm:1
-#: ../../standalone/drakfloppy:1
 #, c-format
 msgid "Expert Mode"
 msgstr "Mód Saineolaí"
@@ -9763,15 +10009,30 @@ msgstr ""
 msgid "Subnet:"
 msgstr ""
 
+# ZW
 #: ../../lang.pm:1
 #, c-format
 msgid "Zimbabwe"
-msgstr ""
+msgstr "An tSiombáib"
 
 #: ../../standalone/drakbackup:1
 #, fuzzy, c-format
 msgid "When"
 msgstr "Rothar"
+
+#: ../../network/adsl.pm:1
+#, c-format
+msgid ""
+"You need the Alcatel microcode.\n"
+"Download it at:\n"
+"%s\n"
+"and copy the mgmt.o in /usr/share/speedtouch"
+msgstr ""
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "Hour"
+msgstr "Uair"
 
 #: ../../network/modem.pm:1 ../../standalone/drakconnect:1
 #, fuzzy, c-format
@@ -9821,11 +10082,6 @@ msgid ""
 "You can also edit your own rules which will owerwrite the default rules."
 msgstr ""
 
-#: ../../ugtk.pm:1
-#, c-format
-msgid "-adobe-times-bold-r-normal--17-*-100-100-p-*-iso8859-*,*-r-*"
-msgstr "-adobe-times-bold-r-normal--27-*-100-100-p-*-iso8859-*,*-r-*"
-
 #: ../../any.pm:1
 #, c-format
 msgid ""
@@ -9861,6 +10117,25 @@ msgstr "/dev/hda"
 #, c-format
 msgid "/dev/hdb"
 msgstr "/dev/hdb"
+
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"        - Maintain /etc/dhcpd.conf:\n"
+"        \t\tTo net boot clients, each client needs a dhcpd.conf entry, "
+"assigning an IP address\n"
+"        \t\tand net boot images to the machine. drakTermServ helps create/"
+"remove these entries.\n"
+"\t\t\t\n"
+"        \t\t(PCI cards may omit the image - etherboot will request the "
+"correct image. You should\n"
+"        \t\talso consider that when etherboot looks for the images, it "
+"expects names like\n"
+"        \t\tboot-3c59x.nbi, rather than boot-3c59x.2.4.19-16mdk.nbi).\n"
+"\t\t\t \n"
+"        \t\tA typical dhcpd.conf stanza to support a diskless client looks "
+"like:"
+msgstr ""
 
 #: ../../services.pm:1
 #, c-format
@@ -9904,11 +10179,6 @@ msgstr ""
 msgid "SILO Installation"
 msgstr "Roghnaigh rang feistiú"
 
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "Use CD/DVDROM to backup"
-msgstr ""
-
 #: ../../install_messages.pm:1
 #, c-format
 msgid ""
@@ -9932,6 +10202,16 @@ msgstr ""
 #, fuzzy, c-format
 msgid "paranoid"
 msgstr "Paranóid"
+
+#: ../../security/l10n.pm:1
+#, c-format
+msgid "Do not send mails when unneeded"
+msgstr ""
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "Your scanner(s) will not be available on the network."
+msgstr ""
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -10083,14 +10363,19 @@ msgstr ""
 msgid "You have more than one hard drive, which one do you install linux on?"
 msgstr ""
 
+#: ../../lang.pm:1
+#, c-format
+msgid "Eritrea"
+msgstr ""
+
 #: ../../standalone/drakTermServ:1
 #, c-format
 msgid "Boot ISO"
 msgstr ""
 
-#: ../../lang.pm:1
+#: ../../network/adsl.pm:1
 #, c-format
-msgid "Eritrea"
+msgid "Firmware needed"
 msgstr ""
 
 #: ../../standalone/drakfont:1
@@ -10116,10 +10401,11 @@ msgid ""
 "path."
 msgstr ""
 
+# MA
 #: ../../lang.pm:1
 #, c-format
 msgid "Morocco"
-msgstr ""
+msgstr "Maracó"
 
 #: ../../printer/printerdrake.pm:1
 #, fuzzy, c-format
@@ -10206,6 +10492,11 @@ msgstr ""
 msgid "Add a scanner manually"
 msgstr ""
 
+#: ../../standalone/printerdrake:1
+#, c-format
+msgid "Refresh"
+msgstr ""
+
 #: ../../help.pm:1 ../../diskdrake/interactive.pm:1
 #, fuzzy, c-format
 msgid "Reload partition table"
@@ -10235,6 +10526,11 @@ msgstr ""
 #, fuzzy, c-format
 msgid "Boot"
 msgstr "Root"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid " and the CD is in the drive"
+msgstr ""
 
 #: ../../harddrake/v4l.pm:1
 #, fuzzy, c-format
@@ -10295,6 +10591,11 @@ msgstr "Scríos Printéir"
 msgid "Set the shell timeout. A value of zero means no timeout."
 msgstr ""
 
+#: ../../network/adsl.pm:1
+#, c-format
+msgid "Firmware copy succeeded"
+msgstr ""
+
 #: ../../security/help.pm:1
 #, c-format
 msgid "if set to yes, check permissions of files in the users' home."
@@ -10333,6 +10634,11 @@ msgstr ""
 #, fuzzy, c-format
 msgid "Save packages selection"
 msgstr "Roghnú Grúpa Pacáistí"
+
+#: ../../standalone/printerdrake:1
+#, c-format
+msgid "/_Actions"
+msgstr ""
 
 #: ../../standalone/drakautoinst:1
 #, fuzzy, c-format
@@ -10396,15 +10702,15 @@ msgstr "Méid: %s"
 msgid "Which sector do you want to move it to?"
 msgstr "Cén tescán ag a dteastaíonn uait é a bhogadh?"
 
-#: ../../interactive/stdio.pm:1
-#, fuzzy, c-format
-msgid "Do you want to click on this button?"
-msgstr "Céard a theastaíonn uait a dhéanamh?"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Bahamas"
 msgstr ""
+
+#: ../../interactive/stdio.pm:1
+#, fuzzy, c-format
+msgid "Do you want to click on this button?"
+msgstr "Céard a theastaíonn uait a dhéanamh?"
 
 #: ../../printer/printerdrake.pm:1
 #, fuzzy, c-format
@@ -10505,9 +10811,24 @@ msgid ""
 "(LAN)."
 msgstr ""
 
-#: ../../security/l10n.pm:1
+#: ../../harddrake/sound.pm:1
 #, c-format
-msgid "Authorize TCP connections X Window"
+msgid ""
+"OSS (Open Sound System) was the first sound API. It's an OS independent "
+"sound API (it's available on most UNIX(tm) systems) but it's a very basic "
+"and limited API.\n"
+"What's more, OSS drivers all reinvent the wheel.\n"
+"\n"
+"ALSA (Advanced Linux Sound Architecture) is a modularized architecture "
+"which\n"
+"supports quite a large range of ISA, USB and PCI cards.\n"
+"\n"
+"It also provides a much higher API than OSS.\n"
+"\n"
+"To use alsa, one can either use:\n"
+"- the old compatibility OSS api\n"
+"- the new ALSA api that provides many enhanced features but requires using "
+"the ALSA library.\n"
 msgstr ""
 
 #: ../../install_steps_interactive.pm:1
@@ -10545,11 +10866,6 @@ msgid ""
 "HardDrake runs a hardware probe, and optionally configures\n"
 "new/changed hardware."
 msgstr ""
-
-#: ../../printer/cups.pm:1 ../../printer/main.pm:1
-#, fuzzy, c-format
-msgid "Remote Printers"
-msgstr "Scríos Printéir"
 
 #: ../../fs.pm:1
 #, c-format
@@ -10605,6 +10921,11 @@ msgstr ""
 msgid "Unselected All"
 msgstr ""
 
+#: ../../standalone/printerdrake:1
+#, fuzzy, c-format
+msgid "Printer Management \n"
+msgstr "Gan  Printéir"
+
 #: ../../standalone/logdrake:1
 #, fuzzy, c-format
 msgid "Domain Name Resolver"
@@ -10644,6 +10965,17 @@ msgstr "Luchóg"
 #, c-format
 msgid "Welcome to %s"
 msgstr "Fáilte go %s"
+
+#: ../../standalone/drakhelp:1
+#, c-format
+msgid ""
+" drakhelp 0.1\n"
+"Copyright (C) 2003 MandrakeSoft.\n"
+"This is free software and may be redistributed under the terms of the GNU "
+"GPL.\n"
+"\n"
+"Usage: \n"
+msgstr ""
 
 #: ../../install_steps_interactive.pm:1
 #, fuzzy, c-format
@@ -10710,15 +11042,20 @@ msgstr ""
 msgid "Cuba"
 msgstr "Cúba"
 
-#: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
-msgid "Searching for new printers..."
-msgstr "Printéir áitiúl"
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "October"
+msgstr "D. Fómhair"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Belize"
 msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid "Searching for new printers..."
+msgstr "Printéir áitiúl"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -10740,6 +11077,11 @@ msgstr ""
 #: ../../security/help.pm:1
 #, c-format
 msgid " Activate/Disable daily security check."
+msgstr ""
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "\t-CD-R.\n"
 msgstr ""
 
 #: ../../security/l10n.pm:1
@@ -10768,6 +11110,11 @@ msgstr ""
 #, c-format
 msgid "Automatic time synchronization (using NTP)"
 msgstr ""
+
+#: ../../network/adsl.pm:1
+#, fuzzy, c-format
+msgid "Use my Windows partition"
+msgstr "Ag ríomhadh teorainn na córais-comhadlanna FAT"
 
 #: ../../Xconfig/card.pm:1
 #, c-format
@@ -10798,6 +11145,26 @@ msgstr "Roghnaigh mhéarchlár"
 msgid ""
 "\n"
 "- System Files:\n"
+msgstr ""
+
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"        - Per client system configuration files:\n"
+"        \t\tThrough clusternfs, each diskless client can have its own unique "
+"configuration files\n"
+"        \t\ton the root filesystem of the server. By allowing local client "
+"hardware configuration, \n"
+"\t\t\t\tclients can customize files such as /etc/modules.conf, /etc/"
+"sysconfig/mouse, \n"
+"        \t\t/etc/sysconfig/keyboard on a per-client basis.\n"
+"\n"
+"        Note: Enabling local client hardware configuration does enable root "
+"login to the terminal \n"
+"        server on each client machine that has this feature enabled.  Local "
+"configuration can be turned\n"
+"        back off, retaining the configuration files, once the client machine "
+"is configured."
 msgstr ""
 
 #: ../../standalone/drakbug:1
@@ -10847,6 +11214,14 @@ msgstr ""
 msgid "Microsoft IntelliMouse"
 msgstr "Microsoft IntelliMouse"
 
+#: ../../keyboard.pm:1
+#, c-format
+msgid ""
+"This setting will be activated after the installation.\n"
+"During installation, you will need to use the Right Control\n"
+"key to switch between the different keyboard layouts."
+msgstr ""
+
 #: ../../lang.pm:1
 #, c-format
 msgid "Christmas Island"
@@ -10866,6 +11241,11 @@ msgstr ""
 #, c-format
 msgid "Set this printer as the default"
 msgstr ""
+
+#: ../../standalone/drakbackup:1
+#, fuzzy, c-format
+msgid "Verify that %s is the correct path"
+msgstr "An bhfuil seo ceart?"
 
 #: ../../install_interactive.pm:1
 #, c-format
@@ -10927,8 +11307,13 @@ msgstr ""
 msgid "Turks and Caicos Islands"
 msgstr ""
 
+#: ../../standalone/drakconnect:1
+#, c-format
+msgid "No Ip"
+msgstr ""
+
 #: ../../help.pm:1 ../../install_steps_gtk.pm:1 ../../interactive.pm:1
-#: ../../my_gtk.pm:1 ../../ugtk2.pm:1 ../../interactive/newt.pm:1
+#: ../../ugtk2.pm:1 ../../interactive/newt.pm:1
 #: ../../printer/printerdrake.pm:1 ../../standalone/drakbackup:1
 #, c-format
 msgid "<- Previous"
@@ -10949,7 +11334,7 @@ msgstr ""
 msgid "Internet Connection Sharing configuration"
 msgstr "Nasc na hIdirlíon agus cumraíocht"
 
-#: ../../my_gtk.pm:1 ../../ugtk2.pm:1
+#: ../../ugtk2.pm:1
 #, c-format
 msgid "Toggle between flat and group sorted"
 msgstr ""
@@ -10981,6 +11366,11 @@ msgstr "Cumraigh Idirlíon"
 msgid "Saint Helena"
 msgstr ""
 
+#: ../../printer/main.pm:1
+#, fuzzy, c-format
+msgid "Parallel port #%s"
+msgstr "Óstainm Printéir"
+
 #: ../../help.pm:1 ../../install_steps_interactive.pm:1
 #, fuzzy, c-format
 msgid "Security Level"
@@ -10994,10 +11384,11 @@ msgid ""
 "Do you really want to quit now?"
 msgstr ""
 
+# SD
 #: ../../lang.pm:1
 #, c-format
 msgid "Sudan"
-msgstr ""
+msgstr "An tSúdáin"
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -11007,6 +11398,14 @@ msgstr ""
 #: ../../lang.pm:1
 #, c-format
 msgid "Syria"
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid ""
+"Is your printer a multi-function device from HP or Sony (OfficeJet, PSC, "
+"LaserJet 1100/1200/1220/3200/3300 with scanner, DeskJet 450, Sony IJP-V100), "
+"an HP PhotoSmart or an HP LaserJet 2200?"
 msgstr ""
 
 #. -PO: these messages will be displayed at boot time in the BIOS, use only ASCII (7bit)
@@ -11053,6 +11452,11 @@ msgstr ""
 #: ../../fsedit.pm:1
 #, c-format
 msgid "This directory should remain within the root filesystem"
+msgstr ""
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "Across Network"
 msgstr ""
 
 #: ../../keyboard.pm:1
@@ -11128,7 +11532,7 @@ msgstr "Gan  Printéir"
 msgid "Card IRQ"
 msgstr "IRQ na Carta"
 
-#: ../../ugtk.pm:1 ../../standalone/logdrake:1
+#: ../../standalone/logdrake:1
 #, c-format
 msgid "logdrake"
 msgstr "logdrake"
@@ -11247,11 +11651,6 @@ msgstr ""
 msgid "Hungary"
 msgstr "An Ungáir"
 
-#: ../../standalone/drakbackup:1
-#, fuzzy, c-format
-msgid "Total progess"
-msgstr "Bain trial as arís"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "New Zealand"
@@ -11274,6 +11673,11 @@ msgstr ""
 msgid "please choose the date to restore"
 msgstr "Cén cinéal luchóg atá agat?"
 
+#: ../../lang.pm:1
+#, c-format
+msgid "Netherlands Antilles"
+msgstr ""
+
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid "Switching from ext2 to ext3"
@@ -11282,11 +11686,6 @@ msgstr ""
 #: ../../printer/data.pm:1
 #, c-format
 msgid "LPRng"
-msgstr ""
-
-#: ../../lang.pm:1
-#, c-format
-msgid "Netherlands Antilles"
 msgstr ""
 
 #: ../../standalone/drakbackup:1
@@ -11355,8 +11754,13 @@ msgstr ""
 
 #: ../../standalone/drakbackup:1
 #, c-format
-msgid "on Hard Drive"
+msgid "Backups on unmountable media - Use Catalog to restore"
 msgstr ""
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "January"
+msgstr "Éanair"
 
 #: ../../security/l10n.pm:1
 #, fuzzy, c-format
@@ -11436,10 +11840,11 @@ msgstr ""
 msgid "Use .backupignore files"
 msgstr "Droch comhad chúltaca"
 
+# GN
 #: ../../lang.pm:1
 #, c-format
 msgid "Guinea"
-msgstr ""
+msgstr "An Ghuine"
 
 #: ../../network/tools.pm:1
 #, fuzzy, c-format
@@ -11456,10 +11861,21 @@ msgstr ""
 msgid "Japan (broadcast)"
 msgstr ""
 
+#: ../../help.pm:1
+#, c-format
+msgid ""
+"Monitor\n"
+"\n"
+"   The installer will normally automatically detect and configure the\n"
+"monitor connected to your machine. If it is incorrect, you can choose from\n"
+"this list the monitor you actually have connected to your computer."
+msgstr ""
+
+# FIXME
 #: ../../lang.pm:1
 #, c-format
 msgid "Mozambique"
-msgstr ""
+msgstr "Mósaimbic"
 
 #: ../../any.pm:1
 #, c-format
@@ -11511,6 +11927,11 @@ msgstr ""
 msgid "Local Printer"
 msgstr "Printéir áitiúl"
 
+#: ../../network/adsl.pm:1
+#, c-format
+msgid "Floppy access error, unable to mount device %s"
+msgstr ""
+
 #: ../../standalone.pm:1
 #, c-format
 msgid "[--file=myfile] [--word=myword] [--explain=regexp] [--alert]"
@@ -11541,20 +11962,20 @@ msgstr "Cumraigh nasc ghréasán"
 msgid "Permission denied transferring %s to %s"
 msgstr ""
 
-#: ../../standalone/harddrake2:1
+#: ../../standalone/harddrake2:1 ../../standalone/printerdrake:1
 #, c-format
 msgid "/_Report Bug"
 msgstr "/_Tuairaisc Fabht"
-
-#: ../../diskdrake/interactive.pm:1
-#, c-format
-msgid "Resize"
-msgstr "Athméidigh"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Dominica"
 msgstr ""
+
+#: ../../diskdrake/interactive.pm:1
+#, c-format
+msgid "Resize"
+msgstr "Athméidigh"
 
 #: ../../Xconfig/various.pm:1
 #, c-format
@@ -11604,6 +12025,36 @@ msgstr "Gaireas luchóige: %s\n"
 #: ../../standalone/drakfont:1
 #, c-format
 msgid "Reselect correct fonts"
+msgstr ""
+
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"        - /etc/xinetd.d/tftp:\n"
+"        \t\tdrakTermServ will configure this file to work in conjunction "
+"with the images created by\n"
+"        \t\tmkinitrd-net, and the entries in /etc/dhcpd.conf, to serve up "
+"the boot image to each\n"
+"        \t\tdiskless client.\n"
+"\n"
+"        \t\tA typical tftp configuration file looks like:\n"
+"        \t\t\n"
+"        \t\tservice tftp\n"
+"\t\t\t{\n"
+"                        disable         = no\n"
+"                        socket_type  = dgram\n"
+"                        protocol        = udp\n"
+"                        wait             = yes\n"
+"                        user             = root\n"
+"                        server          = /usr/sbin/in.tftpd\n"
+"                        server_args  = -s /var/lib/tftpboot\n"
+"        \t\t}\n"
+"        \t\t\n"
+"        \t\tThe changes here from the default installation are changing the "
+"disable flag to\n"
+"        \t\t'no' and changing the directory path to /var/lib/tftpboot, where "
+"mkinitrd-net\n"
+"        \t\tputs its images."
 msgstr ""
 
 #: ../../help.pm:1
@@ -11710,6 +12161,11 @@ msgid ""
 "are directly connected to your system"
 msgstr "Níl aon gaireas ghreasán san do chorás!"
 
+#: ../../network/modem.pm:1
+#, c-format
+msgid "You don't have any winmodem"
+msgstr ""
+
 #: ../../standalone/drakTermServ:1
 #, fuzzy, c-format
 msgid "type: %s"
@@ -11719,6 +12175,14 @@ msgstr "Cineál: "
 #, c-format
 msgid "Slovakian (QWERTY)"
 msgstr "Slóbaicis (QWERTY)"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid ""
+"This should be a comma-separated list of local users or email addresses that "
+"you want the backup results sent to. You will need a functioning mail "
+"transfer agent setup on your system."
+msgstr ""
 
 #: ../../standalone/draksound:1
 #, fuzzy, c-format
@@ -11747,10 +12211,11 @@ msgstr ""
 msgid "Ftp Server"
 msgstr "Freastalaí NIS"
 
+# UG
 #: ../../lang.pm:1
 #, c-format
 msgid "Uganda"
-msgstr ""
+msgstr "Uganda"
 
 #: ../../standalone/drakfont:1
 #, c-format
@@ -11831,6 +12296,12 @@ msgstr ""
 #, c-format
 msgid "Comoros"
 msgstr ""
+
+# ms
+#: ../../standalone/drakbackup:1
+#, fuzzy, c-format
+msgid "May"
+msgstr "Malaeis"
 
 #: ../../standalone/drakboot:1
 #, c-format
@@ -11953,6 +12424,11 @@ msgid ""
 "development environments."
 msgstr ""
 
+#: ../../standalone/drakbackup:1
+#, fuzzy, c-format
+msgid "No devices found"
+msgstr "Printéir áitiúl"
+
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Truly minimal install (especially no urpmi)"
@@ -11992,15 +12468,15 @@ msgstr ""
 msgid "Where do you want to mount %s?"
 msgstr "Céard a theastaíonn uait a dhéanamh?"
 
-#: ../../standalone/drakbackup:1
-#, fuzzy, c-format
-msgid "Restore Via Network"
-msgstr "Aisig ó comhad"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Algeria"
 msgstr "An Algéir"
+
+#: ../../standalone/drakbackup:1
+#, fuzzy, c-format
+msgid "Restore Via Network"
+msgstr "Aisig ó comhad"
 
 #: ../../any.pm:1
 #, c-format
@@ -12020,14 +12496,29 @@ msgstr ""
 msgid "\tBackups use tar and gzip\n"
 msgstr ""
 
+#: ../../standalone/printerdrake:1
+#, fuzzy, c-format
+msgid "Set as default"
+msgstr "gnáth"
+
 #: ../../Xconfig/card.pm:1
 #, c-format
 msgid "2 MB"
 msgstr "2 MB"
 
+#: ../../printer/main.pm:1 ../../standalone/printerdrake:1
+#, fuzzy, c-format
+msgid "Configured on this machine"
+msgstr "Cumraigh luchóg"
+
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Both Control keys simultaneously"
+msgstr ""
+
+#: ../../standalone/drakhelp:1
+#, c-format
+msgid " --help                - display this help     \n"
 msgstr ""
 
 #: ../../standalone.pm:1
@@ -12118,15 +12609,6 @@ msgstr ""
 msgid "Kenya"
 msgstr "An Chéinia"
 
-#: ../../share/advertising/04-configuration.pl:1
-#, c-format
-msgid ""
-"Mandrake Linux 9.1 provides you with the Mandrake Control Center, a powerful "
-"tool to fully adapt your computer to the use you make of it. Configure and "
-"customize elements such as the security level, the peripherals (screen, "
-"mouse, keyboard...), the Internet connection and much more!"
-msgstr ""
-
 #: ../../diskdrake/hd_gtk.pm:1
 #, c-format
 msgid "Use ``Unmount'' first"
@@ -12150,6 +12632,29 @@ msgstr "Trialaigh an cumraíocht"
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Both Shift keys simultaneously"
+msgstr ""
+
+#: ../../standalone/drakhelp:1
+#, c-format
+msgid ""
+" --id <id_label>       - load the html help page which refers to id_label\n"
+msgstr ""
+
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"        - Create etherboot floppies/CDs:\n"
+"        \t\tThe diskless client machines need either ROM images on the NIC, "
+"or a boot floppy\n"
+"        \t\tor CD to initate the boot sequence.  drakTermServ will help "
+"generate these images,\n"
+"        \t\tbased on the NIC in the client machine.\n"
+"        \t\t\n"
+"        \t\tA basic example of creating a boot floppy for a 3Com 3c509 "
+"manually:\n"
+"        \t\t\n"
+"        \t\tcat /usr/lib/etherboot/boot1a.bin \\\n"
+"        \t\t\t/usr/lib/etherboot/lzrom/3c509.lzrom > /dev/fd0"
 msgstr ""
 
 #: ../../standalone/scannerdrake:1
@@ -12310,22 +12815,22 @@ msgstr ""
 msgid "Pipe job into a command"
 msgstr ""
 
+#: ../../lang.pm:1
+#, c-format
+msgid "Cote d'Ivoire"
+msgstr ""
+
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "new dynamic device name generated by core kernel devfs"
 msgstr ""
 
 #: ../../help.pm:1 ../../install_any.pm:1 ../../interactive.pm:1
-#: ../../my_gtk.pm:1 ../../ugtk2.pm:1 ../../modules/interactive.pm:1
-#: ../../standalone/drakgw:1 ../../standalone/harddrake2:1
+#: ../../ugtk2.pm:1 ../../modules/interactive.pm:1 ../../standalone/drakgw:1
+#: ../../standalone/harddrake2:1
 #, c-format
 msgid "Yes"
 msgstr "Tá"
-
-#: ../../lang.pm:1
-#, c-format
-msgid "Cote d'Ivoire"
-msgstr ""
 
 #: ../../network/isdn.pm:1
 #, c-format
@@ -12405,11 +12910,6 @@ msgstr "Roghnaigh na ranna atá le formáidiú"
 #, fuzzy, c-format
 msgid "Please wait, setting security level..."
 msgstr "Roghnaigh liebhéal slándáil"
-
-#: ../../share/advertising/06-development.pl:1
-#, c-format
-msgid "Mandrake Linux 9.1: the ultimate development platform"
-msgstr ""
 
 #: ../../network/network.pm:1
 #, c-format
@@ -12499,7 +12999,7 @@ msgstr "Printéir áitiúl"
 
 #: ../../install_messages.pm:1
 #, c-format
-msgid "http://www.mandrakelinux.com/en/91errata.php3"
+msgid "http://www.mandrakelinux.com/en/92errata.php3"
 msgstr ""
 
 #: ../../security/help.pm:1
@@ -12516,62 +13016,6 @@ msgstr "Printéir áitiúl"
 #, c-format
 msgid "Empty"
 msgstr "Folamh"
-
-#: ../../help.pm:1
-#, c-format
-msgid ""
-"X (for X Window System) is the heart of the GNU/Linux graphical interface\n"
-"on which all the graphical environments (KDE, GNOME, AfterStep,\n"
-"WindowMaker, etc.) bundled with Mandrake Linux rely upon.\n"
-"\n"
-"You will be presented with a list of different parameters to change to get\n"
-"an optimal graphical display: Graphic Card\n"
-"\n"
-"   The installer will normally automatically detect and configure the\n"
-"graphic card installed on your machine. If it is not the case, you can\n"
-"choose from this list the card you actually have installed.\n"
-"\n"
-"   In the case that different servers are available for your card, with or\n"
-"without 3D acceleration, you are then asked to choose the server that best\n"
-"suits your needs.\n"
-"\n"
-"\n"
-"\n"
-"Monitor\n"
-"\n"
-"   The installer will normally automatically detect and configure the\n"
-"monitor connected to your machine. If it is correct, you can choose from\n"
-"this list the monitor you actually have connected to your computer.\n"
-"\n"
-"\n"
-"\n"
-"Resolution\n"
-"\n"
-"   Here you can choose the resolutions and color depths available for your\n"
-"hardware. Choose the one that best suits your needs (you will be able to\n"
-"change that after installation though). A sample of the chosen\n"
-"configuration is shown in the monitor.\n"
-"\n"
-"\n"
-"\n"
-"Test\n"
-"\n"
-"   the system will try to open a graphical screen at the desired\n"
-"resolution. If you can see the message during the test and answer \"%s\",\n"
-"then DrakX will proceed to the next step. If you cannot see the message, it\n"
-"means that some part of the autodetected configuration was incorrect and\n"
-"the test will automatically end after 12 seconds, bringing you back to the\n"
-"menu. Change settings until you get a correct graphical display.\n"
-"\n"
-"\n"
-"\n"
-"Options\n"
-"\n"
-"   Here you can choose whether you want to have your machine automatically\n"
-"switch to a graphical interface at boot. Obviously, you want to check\n"
-"\"%s\" if your machine is to act as a server, or if you were not successful\n"
-"in getting the display configured."
-msgstr ""
 
 #: ../../standalone/draksplash:1
 #, c-format
@@ -12597,6 +13041,21 @@ msgid ""
 "Press \"%s\" to continue."
 msgstr "Cumraigh nasc ghréasán"
 
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"        - Create Etherboot Enabled Boot Images:\n"
+"        \t\tTo boot a kernel via etherboot, a special kernel/initrd image "
+"must be created.\n"
+"        \t\tmkinitrd-net does much of this work and drakTermServ is just a "
+"graphical interface\n"
+"        \t\tto help manage/customize these images. To create the file \n"
+"        \t\t/etc/dhcpd.conf.etherboot-pcimap.include that is pulled in as an "
+"include in \n"
+"        \t\tdhcpd.conf, you should create the etherboot images for at least "
+"one full kernel."
+msgstr ""
+
 #: ../../printer/main.pm:1 ../../printer/printerdrake.pm:1
 #, fuzzy, c-format
 msgid "Interface \"%s\""
@@ -12620,9 +13079,9 @@ msgid ""
 msgstr ""
 
 #: ../../Xconfig/main.pm:1
-#, c-format
+#, fuzzy, c-format
 msgid "Test"
-msgstr ""
+msgstr "An Tibéid"
 
 #: ../../lang.pm:1
 #, fuzzy, c-format
@@ -12669,8 +13128,7 @@ msgstr "Cumraigh luchóg"
 msgid "Choose the mount points"
 msgstr ""
 
-#: ../../help.pm:1 ../../ugtk.pm:1 ../../standalone/drakTermServ:1
-#: ../../standalone/drakfont:1
+#: ../../help.pm:1 ../../standalone/drakTermServ:1 ../../standalone/drakfont:1
 #, c-format
 msgid "OK"
 msgstr "Ceart go Leor"
@@ -12684,6 +13142,11 @@ msgstr ""
 #, c-format
 msgid "Installing"
 msgstr "Ag Feistiú"
+
+#: ../../mouse.pm:1
+#, fuzzy, c-format
+msgid "Logitech MouseMan with Wheel emulation"
+msgstr "Luchóg MouseMan"
 
 #: ../../any.pm:1
 #, c-format
@@ -12787,14 +13250,14 @@ msgstr "Bocht"
 msgid "Report check result by mail"
 msgstr ""
 
-#: ../../standalone/drakgw:1
-#, c-format
-msgid "The DHCP start range"
-msgstr ""
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Grenada"
+msgstr ""
+
+#: ../../standalone/drakgw:1
+#, c-format
+msgid "The DHCP start range"
 msgstr ""
 
 #: ../../any.pm:1
@@ -12808,19 +13271,11 @@ msgid ", %s sectors"
 msgstr ", %s teascáin"
 
 #: ../../help.pm:1 ../../install_any.pm:1 ../../interactive.pm:1
-#: ../../my_gtk.pm:1 ../../ugtk2.pm:1 ../../modules/interactive.pm:1
+#: ../../ugtk2.pm:1 ../../modules/interactive.pm:1
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "No"
 msgstr "Níl"
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid ""
-"Is your printer a multi-function device from HP or Sony (OfficeJet, PSC, "
-"LaserJet 1100/1200/1220/3200/3300 with scanner, Sony IJP-V100), an HP "
-"PhotoSmart or an HP LaserJet 2200?"
-msgstr ""
 
 #: ../../lang.pm:1
 #, c-format
@@ -12887,15 +13342,15 @@ msgstr "Roghanna Printéir NetWare"
 msgid "%s BootSplash (%s) preview"
 msgstr ""
 
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "February"
+msgstr "Feabhra"
+
 #: ../../standalone/drakfloppy:1
 #, c-format
 msgid "General"
 msgstr "Gnáth"
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "Printing system: "
-msgstr ""
 
 #: ../../security/l10n.pm:1
 #, c-format
@@ -12912,17 +13367,28 @@ msgstr "Suimigh úsáideoir"
 msgid "Network configuration (%d adapters)"
 msgstr "Cumraíocht Gréasánú"
 
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "April"
+msgstr "Aibreáin"
+
+#: ../../standalone/drakconnect:1
+#, c-format
+msgid "Deactivate now"
+msgstr ""
+
 #: ../../any.pm:1 ../../install_any.pm:1 ../../standalone.pm:1
 #, c-format
 msgid "Mandatory package %s is missing"
 msgstr ""
 
+# PH FIXME
 #: ../../lang.pm:1
 #, c-format
 msgid "Philippines"
-msgstr ""
+msgstr "Na hOileáin"
 
-#: ../../interactive.pm:1 ../../my_gtk.pm:1 ../../ugtk2.pm:1
+#: ../../interactive.pm:1 ../../ugtk2.pm:1
 #: ../../Xconfig/resolution_and_depth.pm:1 ../../interactive/gtk.pm:1
 #: ../../interactive/http.pm:1 ../../interactive/newt.pm:1
 #: ../../interactive/stdio.pm:1 ../../standalone/drakbackup:1
@@ -12933,6 +13399,11 @@ msgstr ""
 #, c-format
 msgid "Ok"
 msgstr "Ceart go Leor"
+
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid "drakTermServ Overview"
+msgstr ""
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -13126,6 +13597,11 @@ msgstr ""
 msgid "Mandrake Bug Report Tool"
 msgstr ""
 
+#: ../../standalone/printerdrake:1
+#, c-format
+msgid "Apply filter"
+msgstr ""
+
 #: ../../network/adsl.pm:1
 #, c-format
 msgid "use pppoe"
@@ -13156,19 +13632,24 @@ msgstr ""
 msgid "Dvorak (Swedish)"
 msgstr "Dvorak (Meiriceá)"
 
-#: ../../standalone/drakbackup:1
-#, fuzzy, c-format
-msgid "More Options"
-msgstr "Roghachais modúil:"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Afghanistan"
 msgstr "An Afghanastáin"
 
 #: ../../standalone/drakbackup:1
+#, fuzzy, c-format
+msgid "More Options"
+msgstr "Roghachais modúil:"
+
+#: ../../standalone/drakbackup:1
 #, c-format
 msgid "Delete Hard Drive tar files after backup to other media."
+msgstr ""
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Burundi"
 msgstr ""
 
 #: ../../services.pm:1
@@ -13178,11 +13659,6 @@ msgid ""
 "at periodic scheduled times. vixie cron adds a number of features to the "
 "basic\n"
 "UNIX cron, including better security and more powerful configuration options."
-msgstr ""
-
-#: ../../lang.pm:1
-#, c-format
-msgid "Burundi"
 msgstr ""
 
 #: ../../standalone/drakTermServ:1
@@ -13239,14 +13715,21 @@ msgstr ""
 msgid "The encryption keys do not match"
 msgstr "Ní mar a chéile na pasfhocail"
 
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid ""
+"For a multisession CD, only the first session will erase the cdrw. Otherwise "
+"the cdrw is erased before each backup."
+msgstr ""
+
+#: ../../printer/main.pm:1
+#, fuzzy, c-format
+msgid "USB printer"
+msgstr "Gan  Printéir"
+
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Right \"Windows\" key"
-msgstr ""
-
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "CDROM / DVDROM"
 msgstr ""
 
 #: ../../security/help.pm:1
@@ -13320,6 +13803,11 @@ msgstr "TB"
 msgid "FATAL"
 msgstr "FAT"
 
+#: ../../standalone/printerdrake:1
+#, c-format
+msgid "Refresh the list"
+msgstr ""
+
 #: ../../standalone/drakpxe:1
 #, c-format
 msgid ""
@@ -13331,7 +13819,7 @@ msgid ""
 msgstr ""
 
 #: ../../diskdrake/hd_gtk.pm:1 ../../diskdrake/interactive.pm:1
-#: ../../standalone/drakperm:1
+#: ../../standalone/drakperm:1 ../../standalone/printerdrake:1
 #, c-format
 msgid "Delete"
 msgstr "Scríos"
@@ -13357,9 +13845,9 @@ msgid "Disconnect %s"
 msgstr "Cumraigh nasc ghréasán"
 
 #: ../../standalone/drakconnect:1
-#, c-format
+#, fuzzy, c-format
 msgid "Status:"
-msgstr ""
+msgstr "_Stádas:"
 
 #: ../../network/network.pm:1
 #, c-format
@@ -13384,6 +13872,11 @@ msgstr "Eorap (EDS11)"
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid ", printer \"%s\" on server \"%s\""
+msgstr ""
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "Note that currently all 'net' media also use the hard drive."
 msgstr ""
 
 #: ../../fsedit.pm:1 ../../install_steps_interactive.pm:1
@@ -13503,6 +13996,11 @@ msgstr "feist"
 msgid "Enter the directory to save to:"
 msgstr "Teastáil an luchóg, le do thoil"
 
+#: ../../crypto.pm:1 ../../lang.pm:1
+#, fuzzy, c-format
+msgid "Greece"
+msgstr "Greicís"
+
 #: ../../install_steps_interactive.pm:1 ../../standalone/drakxtv:1
 #, c-format
 msgid "All"
@@ -13513,10 +14011,15 @@ msgstr "Gach Rud"
 msgid "Which printing system (spooler) do you want to use?"
 msgstr "Cén rann atá uait?"
 
-#: ../../crypto.pm:1 ../../lang.pm:1
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "July"
+msgstr "Iuíl"
+
+#: ../../printer/main.pm:1
 #, fuzzy, c-format
-msgid "Greece"
-msgstr "Greicís"
+msgid "Prints into %s"
+msgstr "Earráidh ag scríobh comhad %s"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -13586,6 +14089,11 @@ msgstr "Freastalaí Printéir"
 msgid "Give the ram size in MB"
 msgstr "Tabhair na Méid Cuimhne as MB"
 
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "Friday"
+msgstr "Aoine"
+
 #: ../../standalone/net_monitor:1
 #, fuzzy, c-format
 msgid "Disconnection from Internet complete."
@@ -13639,6 +14147,11 @@ msgstr "Earráid ag oscailt %s do scríobh: %s"
 msgid "Japanese 106 keys"
 msgstr "Seápainis (106 eochair)"
 
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "Could not install the packages needed to share your scanner(s)."
+msgstr ""
+
 #: ../../standalone/drakTermServ:1
 #, c-format
 msgid "This will take a few minutes."
@@ -13648,6 +14161,12 @@ msgstr ""
 #, c-format
 msgid "Burkina Faso"
 msgstr ""
+
+# GN
+#: ../../standalone/drakbackup:1
+#, fuzzy, c-format
+msgid "June"
+msgstr "An Ghuine"
 
 #: ../../standalone/scannerdrake:1
 #, c-format
@@ -13702,6 +14221,15 @@ msgstr ""
 #: ../../lang.pm:1
 #, c-format
 msgid "Laos"
+msgstr ""
+
+#: ../../share/advertising/04-configuration.pl:1
+#, c-format
+msgid ""
+"Mandrake Linux 9.2 provides you with the Mandrake Control Center, a powerful "
+"tool to fully adapt your computer to the use you make of it. Configure and "
+"customize elements such as the security level, the peripherals (screen, "
+"mouse, keyboard...), the Internet connection and much more!"
 msgstr ""
 
 #: ../../security/help.pm:1
@@ -13764,15 +14292,21 @@ msgstr ""
 msgid "Saint Pierre and Miquelon"
 msgstr ""
 
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "September"
+msgstr "M. Fómhair"
+
 #: ../../standalone/draksplash:1
 #, c-format
 msgid "saving Bootsplash theme..."
 msgstr ""
 
+# PT
 #: ../../lang.pm:1
 #, c-format
 msgid "Portugal"
-msgstr ""
+msgstr "An Phortaingéil"
 
 #: ../../modules/interactive.pm:1
 #, c-format
@@ -13881,7 +14415,7 @@ msgstr ""
 msgid "Marshall Islands"
 msgstr ""
 
-#: ../../my_gtk.pm:1 ../../ugtk2.pm:1
+#: ../../ugtk2.pm:1
 #, c-format
 msgid "Is this correct?"
 msgstr "An bhfuil seo ceart?"
@@ -13947,9 +14481,19 @@ msgstr "Óstainm Printéir"
 msgid "Suriname"
 msgstr ""
 
+#: ../../network/adsl.pm:1
+#, fuzzy, c-format
+msgid "Use a floppy"
+msgstr "Sabháil ar dhiosca flapach"
+
 #: ../../any.pm:1
 #, c-format
 msgid "Enable ACPI"
+msgstr ""
+
+#: ../../fs.pm:1
+#, c-format
+msgid "Give write access to ordinary users"
 msgstr ""
 
 #: ../../help.pm:1
@@ -13960,11 +14504,6 @@ msgstr ""
 #: ../../lang.pm:1
 #, c-format
 msgid "Gibraltar"
-msgstr ""
-
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "on Tape Device"
 msgstr ""
 
 #: ../../network/modem.pm:1
@@ -14007,6 +14546,7 @@ msgstr ""
 #: ../../interactive/gtk.pm:1 ../../standalone/drakTermServ:1
 #: ../../standalone/drakbackup:1 ../../standalone/drakbug:1
 #: ../../standalone/drakconnect:1 ../../standalone/drakfont:1
+#: ../../standalone/drakperm:1 ../../standalone/draksec:1
 #: ../../standalone/harddrake2:1
 #, fuzzy, c-format
 msgid "Help"
@@ -14069,6 +14609,11 @@ msgstr ""
 msgid "SMB (Windows 9x/NT) Printer Options"
 msgstr "Roghanna Printéir SMB (Fuinneoga 9x/NT)"
 
+#: ../../printer/main.pm:1
+#, c-format
+msgid "URI: %s"
+msgstr ""
+
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "Valid user list changed, rewriting config file."
@@ -14091,15 +14636,15 @@ msgstr ""
 msgid "Protocol for the rest of the world"
 msgstr "Trialaigh an cumraíocht"
 
-#: ../../security/l10n.pm:1
-#, c-format
-msgid "Password minimum length and number of digit and upcase letters"
-msgstr ""
-
 #: ../../printer/printerdrake.pm:1
 #, fuzzy, c-format
 msgid "Print test pages"
 msgstr "Óstainm Printéir"
+
+#: ../../standalone/drakconnect:1
+#, c-format
+msgid "Activate now"
+msgstr ""
 
 #: ../../Xconfig/card.pm:1
 #, c-format
@@ -14198,6 +14743,11 @@ msgstr ""
 msgid "Add host/network"
 msgstr ""
 
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "Scannerdrake will not be started now."
+msgstr ""
+
 #: ../../standalone/harddrake2:1
 #, fuzzy, c-format
 msgid "Model name"
@@ -14208,11 +14758,6 @@ msgstr "Ainm Modúl"
 msgid "Albania"
 msgstr "An Albáin"
 
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "No CDR/DVDR in drive!"
-msgstr ""
-
 #: ../../lang.pm:1
 #, c-format
 msgid "British Indian Ocean Territory"
@@ -14222,6 +14767,11 @@ msgstr ""
 #, fuzzy, c-format
 msgid "Normal Mode"
 msgstr "Luchóg ar bith"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "No CD-R/DVD-R in drive!"
+msgstr ""
 
 #: ../../printer/printerdrake.pm:1
 #, fuzzy, c-format
@@ -14332,6 +14882,11 @@ msgstr "Eile"
 msgid "burner"
 msgstr "Printéir"
 
+#: ../../standalone/drakbackup:1
+#, fuzzy, c-format
+msgid " (Default is all users)"
+msgstr "Printéir áitiúl"
+
 #: ../../printer/printerdrake.pm:1 ../../standalone/scannerdrake:1
 #, fuzzy, c-format
 msgid "No remote machines"
@@ -14369,6 +14924,12 @@ msgstr ""
 msgid "Internet Connection Sharing currently enabled"
 msgstr ""
 
+# AR
+#: ../../lang.pm:1
+#, c-format
+msgid "United Arab Emirates"
+msgstr "Aontas na nÉimíríochtaí Arabacha"
+
 #: ../../network/tools.pm:1 ../../standalone/drakconnect:1
 #, c-format
 msgid "Card IO_0"
@@ -14379,20 +14940,21 @@ msgstr "I/A_0 Carta"
 msgid "Disable Local Config"
 msgstr ""
 
-#: ../../lang.pm:1
-#, c-format
-msgid "United Arab Emirates"
-msgstr ""
-
+# TH
 #: ../../lang.pm:1
 #, c-format
 msgid "Thailand"
-msgstr ""
+msgstr "An Téalainn"
 
 #: ../../network/tools.pm:1 ../../standalone/drakconnect:1
 #, c-format
 msgid "Card IO_1"
 msgstr "I/A_1 Carta"
+
+#: ../../standalone/printerdrake:1
+#, c-format
+msgid "Search:"
+msgstr "Cuardaigh:"
 
 #: ../../lang.pm:1
 #, c-format
@@ -14419,9 +14981,19 @@ msgstr ""
 msgid "Mandrake Linux Installation %s"
 msgstr "Feistiú Linux-Mandrake %s"
 
+#: ../../harddrake/sound.pm:1
+#, c-format
+msgid "Unknown driver"
+msgstr ""
+
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Thai keyboard"
+msgstr ""
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Bouvet Island"
 msgstr ""
 
 #: ../../network/modem.pm:1
@@ -14429,64 +15001,9 @@ msgstr ""
 msgid "Dialup options"
 msgstr "Roghanna 'Dialup'"
 
-#: ../../lang.pm:1
-#, c-format
-msgid "Bouvet Island"
-msgstr ""
-
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "If no port is given, 631 will be taken as default."
-msgstr ""
-
-#: ../../standalone/draksec:1
-#, c-format
-msgid ""
-"Here, you can setup the security level and administrator of your machine.\n"
-"\n"
-"\n"
-"The Security Administrator is the one who will receive security alerts if "
-"the\n"
-"'Security Alerts' option is set. It can be a username or an email.\n"
-"\n"
-"\n"
-"The Security Level menu enable to select one of the six preconfigured "
-"security\n"
-"provided with msec. These levels range from poor security and ease of use, "
-"to\n"
-"paranoid config, suitable for very sensitive server applications:\n"
-"\n"
-"\n"
-"<span foreground=\"royalblue3\">Poor</span>: This is a totally unsafe but "
-"very\n"
-"easy to use security level. It should only be used for machines not "
-"connected to\n"
-"any network and that are not accessible to everybody.\n"
-"\n"
-"\n"
-"<span foreground=\"royalblue3\">Standard</span>: This is the standard "
-"security\n"
-"recommended for a computer that will be used to connect to the Internet as "
-"a\n"
-"client.\n"
-"\n"
-"\n"
-"<span foreground=\"royalblue3\">High</span>: There are already some\n"
-"restrictions, and more automatic checks are run every night.\n"
-"\n"
-"\n"
-"<span foreground=\"royalblue3\">Higher</span>: The security is now high "
-"enough\n"
-"to use the system as a server which can accept connections from many "
-"clients. If\n"
-"your machine is only a client on the Internet, you should choose a lower "
-"level.\n"
-"\n"
-"\n"
-"<span foreground=\"royalblue3\">Paranoid</span>: This is similar to the "
-"previous\n"
-"level, but the system is entirely closed and security features are at their\n"
-"maximum"
 msgstr ""
 
 #: ../../install_steps_gtk.pm:1 ../../install_steps_interactive.pm:1
@@ -14514,6 +15031,11 @@ msgstr "Bainteach le hIdirlíon"
 msgid "\t-Network by webdav.\n"
 msgstr ""
 
+#: ../../printer/main.pm:1
+#, fuzzy, c-format
+msgid ", multi-function device on a parallel port"
+msgstr "Óstainm Printéir"
+
 #: ../../standalone/drakgw:1 ../../standalone/drakpxe:1
 #, c-format
 msgid ""
@@ -14534,13 +15056,13 @@ msgstr "Printéir áitiúl"
 
 #: ../../mouse.pm:1
 #, c-format
-msgid "Logitech CC Series"
-msgstr "Luchóg Logitech CC"
+msgid "2 buttons"
+msgstr "2 cnaipí"
 
 #: ../../mouse.pm:1
 #, c-format
-msgid "2 buttons"
-msgstr "2 cnaipí"
+msgid "Logitech CC Series"
+msgstr "Luchóg Logitech CC"
 
 #: ../../network/isdn.pm:1
 #, c-format
@@ -14561,6 +15083,11 @@ msgstr "Sabháil ar dhiosca flapach"
 #, fuzzy, c-format
 msgid "Check open ports"
 msgstr "Pointe taca dublach %s"
+
+#: ../../standalone/printerdrake:1
+#, fuzzy, c-format
+msgid "Edit selected printer"
+msgstr "Scrios ciú"
 
 #: ../../printer/printerdrake.pm:1
 #, fuzzy, c-format
@@ -14668,7 +15195,7 @@ msgid ""
 "1st USB printer: /dev/usb/lp0, 2nd USB printer: /dev/usb/lp1, ...)."
 msgstr ""
 
-#: ../../network/netconnect.pm:1
+#: ../../network/adsl.pm:1 ../../network/netconnect.pm:1
 #, fuzzy, c-format
 msgid "Next"
 msgstr "Teacs"
@@ -14733,16 +15260,17 @@ msgstr ""
 msgid "NIS Domain"
 msgstr "Fearannas NIS"
 
+# AQ
+#: ../../lang.pm:1
+#, c-format
+msgid "Antarctica"
+msgstr "an tAntartasch"
+
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid ""
 "\n"
 "- User Files:\n"
-msgstr ""
-
-#: ../../lang.pm:1
-#, c-format
-msgid "Antarctica"
 msgstr ""
 
 #: ../../diskdrake/interactive.pm:1
@@ -14817,6 +15345,11 @@ msgstr ""
 msgid "Host name or IP."
 msgstr "ÓstAinm"
 
+#: ../../standalone/printerdrake:1
+#, fuzzy, c-format
+msgid "/_Edit"
+msgstr "Eagar"
+
 #: ../../fsedit.pm:1
 #, c-format
 msgid "simple"
@@ -14832,20 +15365,25 @@ msgstr "Glan gach ceann"
 msgid "No test pages"
 msgstr ""
 
-#: ../../standalone/drakconnect:1
-#, c-format
-msgid "Adapter %s: %s"
-msgstr ""
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Falkland Islands (Malvinas)"
+msgstr ""
+
+#: ../../standalone/drakconnect:1
+#, c-format
+msgid "Adapter %s: %s"
 msgstr ""
 
 #: ../../standalone/drakfloppy:1
 #, fuzzy, c-format
 msgid "Boot disk creation"
 msgstr "Trialaigh an cumraíocht"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "Monday"
+msgstr "Luain"
 
 #: ../../printer/main.pm:1 ../../printer/printerdrake.pm:1
 #, c-format
@@ -14869,6 +15407,7 @@ msgstr "Socraigh córas chomhad"
 
 #: ../../standalone/drakboot:1 ../../standalone/drakfloppy:1
 #: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
+#: ../../standalone/printerdrake:1
 #, c-format
 msgid "/_File"
 msgstr "/_Comhad"
@@ -14884,6 +15423,11 @@ msgid ""
 "Launch packet filtering for Linux kernel 2.2 series, to set\n"
 "up a firewall to protect your machine from network attacks."
 msgstr ""
+
+#: ../../standalone/drakperm:1
+#, fuzzy, c-format
+msgid "Editable"
+msgstr "Table"
 
 #: ../../network/ethernet.pm:1
 #, fuzzy, c-format
@@ -15006,7 +15550,7 @@ msgstr ""
 msgid "Kernel:"
 msgstr ""
 
-#: ../../standalone/harddrake2:1
+#: ../../standalone/harddrake2:1 ../../standalone/printerdrake:1
 #, fuzzy, c-format
 msgid "/_About..."
 msgstr "/Cúidiú/_Faoi..."
@@ -15071,6 +15615,11 @@ msgstr ""
 msgid "Show current interface configuration"
 msgstr "Cumraigh Idirlíon"
 
+#: ../../standalone/printerdrake:1
+#, fuzzy, c-format
+msgid "Add Printer"
+msgstr "Printéir"
+
 #: ../../security/help.pm:1
 #, c-format
 msgid ""
@@ -15097,15 +15646,15 @@ msgstr "Críochnithe"
 msgid "Web Server"
 msgstr "Freastalaí"
 
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "\tDo not include System Files\n"
-msgstr ""
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Chile"
 msgstr "An tSile"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "\tDo not include System Files\n"
+msgstr ""
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -15291,6 +15840,11 @@ msgstr "Aisig ó dhiosca flapach"
 msgid "The following printer was auto-detected. "
 msgstr "Níl aon gaireas ghreasán san do chorás!"
 
+#: ../../printer/main.pm:1
+#, fuzzy, c-format
+msgid "Uses command %s"
+msgstr "Poirt"
+
 #: ../../standalone/drakTermServ:1
 #, c-format
 msgid "Boot Floppy"
@@ -15328,6 +15882,11 @@ msgstr "Cumraigh seirbhisí"
 
 #: ../../lang.pm:1
 #, c-format
+msgid "Georgia"
+msgstr ""
+
+#: ../../lang.pm:1
+#, c-format
 msgid "China"
 msgstr "An tSín"
 
@@ -15335,11 +15894,6 @@ msgstr "An tSín"
 #, fuzzy, c-format
 msgid " (Make sure that all your printers are connected and turned on).\n"
 msgstr "Cén cinéal luchóg atá agat?"
-
-#: ../../lang.pm:1
-#, c-format
-msgid "Georgia"
-msgstr ""
 
 #: ../../standalone/printerdrake:1
 #, fuzzy, c-format
@@ -15412,10 +15966,20 @@ msgstr ""
 msgid "Zeroconf Host name"
 msgstr "ÓstAinm"
 
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "Custom setup/crontab entry:"
+msgstr ""
+
 #: ../../network/network.pm:1 ../../printer/printerdrake.pm:1
 #, c-format
 msgid "IP address should be in format 1.2.3.4"
 msgstr ""
+
+#: ../../standalone/printerdrake:1
+#, fuzzy, c-format
+msgid "Configure CUPS printing system"
+msgstr "Cumraigh gréasánú"
 
 #: ../../lang.pm:1
 #, c-format
@@ -15480,20 +16044,20 @@ msgstr ""
 msgid "Package not installed"
 msgstr "Eirigh as Feistiú"
 
-#: ../../share/advertising/12-mdkexpert.pl:1
-#, fuzzy, c-format
-msgid "Become a MandrakeExpert"
-msgstr "Saineolaí"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "American Samoa"
 msgstr ""
 
+#: ../../share/advertising/12-mdkexpert.pl:1
+#, fuzzy, c-format
+msgid "Become a MandrakeExpert"
+msgstr "Saineolaí"
+
 #: ../../standalone/drakconnect:1
-#, c-format
+#, fuzzy, c-format
 msgid "Protocol"
-msgstr ""
+msgstr "Portráid"
 
 #: ../../standalone/drakfont:1
 #, fuzzy, c-format
@@ -15556,8 +16120,9 @@ msgstr ""
 msgid "You can't select/unselect this package"
 msgstr ""
 
-#: ../../diskdrake/interactive.pm:1 ../../harddrake/sound.pm:1
-#: ../../network/modem.pm:1 ../../standalone/drakfloppy:1
+#: ../../keyboard.pm:1 ../../diskdrake/interactive.pm:1
+#: ../../harddrake/sound.pm:1 ../../network/modem.pm:1
+#: ../../standalone/drakfloppy:1
 #, c-format
 msgid "Warning"
 msgstr "Rabhadh"
@@ -15574,11 +16139,6 @@ msgstr ""
 msgid "Remote host name"
 msgstr "ÓstAinm"
 
-#: ../../standalone/drakconnect:1
-#, c-format
-msgid "deactivate now"
-msgstr ""
-
 #: ../../any.pm:1
 #, c-format
 msgid "access to X programs"
@@ -15588,6 +16148,11 @@ msgstr ""
 #, fuzzy, c-format
 msgid "Computing the size of the Windows partition"
 msgstr "Cruthaigh rann nua"
+
+#: ../../standalone/printerdrake:1
+#, c-format
+msgid "/_Refresh"
+msgstr ""
 
 #: ../../crypto.pm:1 ../../lang.pm:1 ../../network/tools.pm:1
 #: ../../standalone/drakxtv:1
@@ -15658,6 +16223,11 @@ msgstr ""
 msgid "Left Alt key"
 msgstr ""
 
+#: ../../standalone/logdrake:1
+#, fuzzy, c-format
+msgid "Load setting"
+msgstr "Ag formáidiú"
+
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid ""
@@ -15665,6 +16235,11 @@ msgid ""
 "\n"
 "Printerdrake could not determine which model your printer %s is. Please "
 "choose the correct model from the list."
+msgstr ""
+
+#: ../../standalone/printerdrake:1
+#, c-format
+msgid "Set selected printer as the default printer"
 msgstr ""
 
 #: ../../printer/printerdrake.pm:1
@@ -15809,6 +16384,11 @@ msgstr ""
 msgid "format of floppies supported by the drive"
 msgstr ""
 
+#: ../../network/adsl.pm:1
+#, c-format
+msgid "Firmware copy failed, file %s not found"
+msgstr ""
+
 #: ../../raid.pm:1
 #, c-format
 msgid "Not enough partitions for RAID level %d\n"
@@ -15837,10 +16417,11 @@ msgstr "Ainm Nasc"
 msgid "Macedonian"
 msgstr ""
 
+# ML
 #: ../../lang.pm:1
 #, c-format
 msgid "Mali"
-msgstr ""
+msgstr "Mali"
 
 #: ../../harddrake/data.pm:1
 #, c-format
@@ -15898,6 +16479,7 @@ msgid "Georgian (\"Russian\" layout)"
 msgstr ""
 
 #: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
+#: ../../standalone/printerdrake:1
 #, c-format
 msgid "/_Options"
 msgstr "/_Roghanna"
@@ -15973,10 +16555,11 @@ msgstr ""
 msgid "Israel"
 msgstr "Iosrael"
 
+# fr 
 #: ../../lang.pm:1
 #, c-format
 msgid "French Guiana"
-msgstr ""
+msgstr "Fraincis"
 
 #: ../../lang.pm:1
 #, c-format
@@ -16181,6 +16764,11 @@ msgid ""
 "at boot-time to maintain the system configuration."
 msgstr ""
 
+#: ../../standalone/drakbackup:1
+#, fuzzy, c-format
+msgid "DVD-R device"
+msgstr "feist"
+
 #: ../../printer/main.pm:1 ../../printer/printerdrake.pm:1
 #, fuzzy, c-format
 msgid "Printer on remote lpd server"
@@ -16231,10 +16819,10 @@ msgid ""
 "Firmware Delay expires."
 msgstr ""
 
-#: ../../mouse.pm:1
+#: ../../standalone/drakbackup:1
 #, c-format
-msgid "No mouse"
-msgstr "Luchóg ar bith"
+msgid "Wednesday"
+msgstr "Ceádaoin"
 
 #: ../../crypto.pm:1 ../../lang.pm:1
 #, fuzzy, c-format
@@ -16245,6 +16833,11 @@ msgstr "Gearmáinis"
 #, fuzzy, c-format
 msgid "Austria"
 msgstr "srathach"
+
+#: ../../mouse.pm:1
+#, c-format
+msgid "No mouse"
+msgstr "Luchóg ar bith"
 
 #: ../../standalone/drakbackup:1
 #, fuzzy, c-format
@@ -16261,7 +16854,7 @@ msgstr ""
 msgid "Run \"sndconfig\" after installation to configure your sound card"
 msgstr ""
 
-#: ../../my_gtk.pm:1 ../../ugtk2.pm:1
+#: ../../ugtk2.pm:1
 #, c-format
 msgid "Collapse Tree"
 msgstr ""
@@ -16314,10 +16907,10 @@ msgstr ""
 msgid "The %s is not supported by this version of Mandrake Linux."
 msgstr ""
 
-#: ../../standalone/drakperm:1
+#: ../../standalone/drakbackup:1
 #, fuzzy, c-format
-msgid "Level 1"
-msgstr "leibhéal"
+msgid "tape"
+msgstr "Cineál"
 
 #: ../../standalone/drakconnect:1
 #, c-format
@@ -16329,35 +16922,28 @@ msgstr ""
 msgid "List users on display managers (kdm and gdm)"
 msgstr ""
 
-#: ../../standalone/drakperm:1
-#, fuzzy, c-format
-msgid "Level 2"
-msgstr "leibhéal"
+#: ../../mouse.pm:1
+#, c-format
+msgid "Logitech Mouse (serial, old C7 type)"
+msgstr "Luchóg Logitech (srathach, séan cinéal C7)"
 
 #: ../../partition_table.pm:1
 #, c-format
 msgid "Restoring from file %s failed: %s"
 msgstr ""
 
-#: ../../mouse.pm:1
-#, c-format
-msgid "Logitech Mouse (serial, old C7 type)"
-msgstr "Luchóg Logitech (srathach, séan cinéal C7)"
-
-#: ../../standalone/drakperm:1
+#: ../../fsedit.pm:1
 #, fuzzy, c-format
-msgid "Level 3"
-msgstr "leibhéal"
-
-#: ../../standalone/drakperm:1
-#, fuzzy, c-format
-msgid "Level 4"
-msgstr "leibhéal"
-
-#: ../../standalone/drakperm:1
-#, fuzzy, c-format
-msgid "Level 5"
-msgstr "leibhéal"
+msgid ""
+"I can't read the partition table of device %s, it's too corrupted for me :(\n"
+"I can try to go on, erasing over bad partitions (ALL DATA will be lost!).\n"
+"The other solution is to not allow DrakX to modify the partition table.\n"
+"(the error is %s)\n"
+"\n"
+"Do you agree to lose all the partitions?\n"
+msgstr ""
+"Ni féidir liom an tábla rainn a léamh, tá máchaillí ann :(\n"
+"Leanfaidh mé orm ag cealú droch rainn"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -16389,11 +16975,6 @@ msgstr "Cumraigh ADSL"
 msgid "Backup files not found at %s."
 msgstr ""
 
-#: ../../share/advertising/01-thanks.pl:1
-#, c-format
-msgid "Thank you for choosing Mandrake Linux 9.1"
-msgstr ""
-
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Armenian (phonetic)"
@@ -16407,6 +16988,11 @@ msgstr "Cuimhne Charta (DMA)"
 #: ../../standalone/drakTermServ:1
 #, c-format
 msgid "Thin Client"
+msgstr ""
+
+#: ../../share/advertising/01-thanks.pl:1
+#, c-format
+msgid "Thank you for choosing Mandrake Linux 9.2"
 msgstr ""
 
 #: ../../standalone/drakTermServ:1
@@ -16449,10 +17035,11 @@ msgstr ""
 msgid "Add User -->"
 msgstr "Suimigh úsáideoir"
 
+# na 
 #: ../../lang.pm:1
 #, c-format
 msgid "Nauru"
-msgstr ""
+msgstr "Nárúis"
 
 #: ../../standalone/drakfont:1
 #, fuzzy, c-format
@@ -16557,6 +17144,14 @@ msgstr ""
 msgid ", USB printer"
 msgstr "Gan  Printéir"
 
+#: ../../standalone/drakfloppy:1
+#, c-format
+msgid ""
+"Unable to properly close mkbootdisk:\n"
+"\n"
+"<span foreground=\"Red\"><tt>%s</tt></span>"
+msgstr ""
+
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid ""
@@ -16573,6 +17168,11 @@ msgstr "Roghnaigh na ranna atá le formáidiú"
 #, c-format
 msgid "Configure X"
 msgstr "Cumraigh X"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "hd"
+msgstr ""
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -16686,22 +17286,17 @@ msgstr ""
 msgid "Mandrake Control Center"
 msgstr "Bainteach le hIdirlíon"
 
+#: ../../printer/main.pm:1
+#, c-format
+msgid "Multi-function device"
+msgstr ""
+
 #: ../../network/drakfirewall.pm:1
 #, c-format
 msgid ""
 "You can enter miscellaneous ports. \n"
 "Valid examples are: 139/tcp 139/udp.\n"
 "Have a look at /etc/services for information."
-msgstr ""
-
-#: ../../help.pm:1
-#, c-format
-msgid ""
-"Monitor\n"
-"\n"
-"   The installer will normally automatically detect and configure the\n"
-"monitor connected to your machine. If it is correct, you can choose from\n"
-"this list the monitor you actually have connected to your computer."
 msgstr ""
 
 #: ../../standalone/drakbackup:1
@@ -16772,6 +17367,11 @@ msgstr ""
 #, c-format
 msgid "Papua New Guinea"
 msgstr ""
+
+#: ../../printer/main.pm:1
+#, fuzzy, c-format
+msgid "Multi-function device on a parallel port"
+msgstr "Óstainm Printéir"
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -16854,6 +17454,16 @@ msgid ""
 "basically a server that arbitrates print jobs to printer(s)."
 msgstr ""
 
+#: ../../keyboard.pm:1
+#, c-format
+msgid "Irish"
+msgstr ""
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "Sunday"
+msgstr "Domhnaigh"
+
 #: ../../standalone/drakconnect:1
 #, fuzzy, c-format
 msgid "Internet Connection Configuration"
@@ -16935,6 +17545,12 @@ msgstr "Dioscaí RAID %s\n"
 msgid "Liberia"
 msgstr ""
 
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid ""
+"Could not install the packages needed to set up a scanner with Scannerdrake."
+msgstr ""
+
 #: ../../standalone/drakgw:1
 #, c-format
 msgid ""
@@ -16969,6 +17585,17 @@ msgstr "Scríos Printéir"
 #: ../../harddrake/v4l.pm:1
 #, c-format
 msgid "enable radio support"
+msgstr ""
+
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"        - Per client /etc/X11/XF86Config-4\\$\\$IP-ADDRESS\\$\\$:\n"
+"        \t\tThrough clusternfs, each diskless client can have its own unique "
+"configuration files\n"
+"        \t\ton the root filesystem of the server. By allowing local client "
+"hardware configuration, \n"
+"        \t\tdrakTermServ will help create these files."
 msgstr ""
 
 #: ../../standalone/scannerdrake:1
@@ -17096,6 +17723,11 @@ msgid ""
 "\"\n"
 msgstr ""
 
+#: ../../share/advertising/06-development.pl:1
+#, c-format
+msgid "Mandrake Linux 9.2: the ultimate development platform"
+msgstr ""
+
 #: ../../standalone/scannerdrake:1
 #, fuzzy, c-format
 msgid "Detected model: %s"
@@ -17119,11 +17751,6 @@ msgstr ""
 msgid "if set to yes, run the daily security checks."
 msgstr ""
 
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "Device name to use for backup"
-msgstr ""
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Azerbaijan"
@@ -17131,7 +17758,19 @@ msgstr ""
 
 #: ../../standalone/drakbackup:1
 #, c-format
+msgid "Device name to use for backup"
+msgstr ""
+
+#: ../../standalone/drakbackup:1
+#, c-format
 msgid "No tape in %s!"
+msgstr ""
+
+#: ../../standalone/drakhelp:1
+#, c-format
+msgid ""
+" --doc <link>          - link to another web page ( for WM welcome "
+"frontend)\n"
 msgstr ""
 
 #: ../../keyboard.pm:1
@@ -17345,6 +17984,55 @@ msgstr ""
 #: ../../share/compssUsers:999
 msgid "Set of tools to read and send mail and news and to browse the Web"
 msgstr ""
+
+#~ msgid "-adobe-times-bold-r-normal--17-*-100-100-p-*-iso8859-*,*-r-*"
+#~ msgstr "-adobe-times-bold-r-normal--27-*-100-100-p-*-iso8859-*,*-r-*"
+
+#, fuzzy
+#~ msgid "Hostname configuration"
+#~ msgstr "Cumraigh Idirlíon"
+
+#, fuzzy
+#~ msgid "Hostname"
+#~ msgstr "ÓstAinm"
+
+#, fuzzy
+#~ msgid "Remote Printers"
+#~ msgstr "Scríos Printéir"
+
+#, fuzzy
+#~ msgid "Level 1"
+#~ msgstr "leibhéal"
+
+#, fuzzy
+#~ msgid "Level 2"
+#~ msgstr "leibhéal"
+
+#, fuzzy
+#~ msgid "Level 3"
+#~ msgstr "leibhéal"
+
+#, fuzzy
+#~ msgid "Level 4"
+#~ msgstr "leibhéal"
+
+#, fuzzy
+#~ msgid "Level 5"
+#~ msgstr "leibhéal"
+
+#, fuzzy
+#~ msgid "Insert floppy and press %s"
+#~ msgstr "Cur isteach diosca sa dioscthiomant %s"
+
+#~ msgid "Load"
+#~ msgstr "Lód"
+
+#, fuzzy
+#~ msgid "Bad Ip"
+#~ msgstr "I/A Carta"
+
+#~ msgid "Output"
+#~ msgstr "Aschur"
 
 #~ msgid "Expert Area"
 #~ msgstr "Roghnachais Saineoiaí"
