@@ -376,7 +376,7 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 - drakboot:
   o cleanups
   o disable autologin settings when autologin is disabled
-  o make embedded app look bettero
+  o make embedded app look better
 - harddrake2: 
   o fix #1858 (usb adsl speed touch modem misdetection)
   o provides "options" and "help" pull down menu when embedded
