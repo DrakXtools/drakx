@@ -386,7 +386,6 @@ sub main {
 	    vga16     => sub { $o->{vga16} = $v },
 	    vga       => sub { $o->{vga} = $v },
 	    step      => sub { $o->{steps}{first} = $v },
-	    expert    => sub { $::expert = $v },
 	    meta_class => sub { $o->{meta_class} = $v },
 	    readonly  => sub { $o->{partitioning}{readonly} = $v ne "0" },
 	    display   => sub { $o->{display} = $v },
