@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10.2
-Release: 18mdk
+Release: 19mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -369,6 +369,24 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Mon Apr  4 2005 Olivier Blin <oblin@mandrakesoft.com> 10.2-19mdk
+- drakconnect:
+  o only switch up wireless devices during detection
+  o do not reupload firmware for eagle-usb modems if already done
+  o disconnect internet interface before trying to connect
+- mousedrake: configure wacom devices with synaptics touchpads too
+- printerdrake (Till):
+  o Fixed bug #4319: Printer options cannot be set after renaming the
+    printer or changing the connection type
+  o Fixed bug of PostScript printers with manufacturer-supplied PPD
+    cannot be renamed at all
+  o Fixed bug of print queue being deleted when renaming fails
+  o Fixed bug of printerdrake trying to open a message window when
+    non-interactive queue generation fails
+  o Fixed pre-definition of $printer->{ARGS}, this bug made printerdrake
+    crashing sometimes
+- diskdrake (Pixel): add /usr/local and /opt to suggestions_mntpoints
+
 * Fri Apr  1 2005 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.2-18mdk
 - drakconnect: enable ethernet interfaces during detection, thus
   fixing Ralink wireless detection (blino)
