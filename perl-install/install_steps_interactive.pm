@@ -236,10 +236,15 @@ sub selectInstallClass {
     $o->set_help('selectInstallClassCorpo') if $::corporate;
 
     my $verifInstallClass = sub { $::expert = $c{$_[0]} eq "expert" };
+    my $installMode = $o->{isUpgrade} ? $o->{keepConfiguration} ? __("Update packages only") : __("Update") : __("Install");
 
-    $o->{isUpgrade} = $o->selectInstallClass1($verifInstallClass,
-					      first(list2kv(@c)), ${{reverse %c}}{$::expert ? "expert" : "beginner"},
-					      [ __("Install"), __("Update") ], $o->{isUpgrade} ? "Update" : "Install") eq "Update";
+    $installMode = $o->selectInstallClass1($verifInstallClass,
+					   first(list2kv(@c)), ${{reverse %c}}{$::expert ? "expert" : "beginner"},
+					   [ __("Install"), __("Update"), __("Update packages only") ], $installMode);
+
+    $o->{isUpgrade} = $installMode =~ /Update/;
+    $o->{keepConfiguration} = $installMode =~ /packages only/;
+
     install_steps::selectInstallClass($o);
 }
 
@@ -643,6 +648,34 @@ sub chooseGroups {
 
     $o->{compssUsersChoice}{$_} = 0 foreach map { @{$compssUsers->{$_}{flags}} } grep { !$val{$_} } keys %val;
     $o->{compssUsersChoice}{$_} = 1 foreach map { @{$compssUsers->{$_}{flags}} } grep {  $val{$_} } keys %val;
+
+    log::l("compssUsersChoice: " . (!$val{$_} && "not ") . "selected [$_] as [$o->{compssUsers}{$_}{label}]") foreach keys %val;
+
+    #- if no group have been chosen, ask for using base system only, or no X, or normal.
+    unless (grep { $val{$_} } keys %val) {
+	my $type;
+
+	#- search for what is currently selected.
+	foreach (keys %{$o->{compssUsersChoice}}) {
+	    $o->{compssUsersChoice}{$_} and $type = __("No X");
+	}
+	$o->{compssUsersChoice}{X} and $type = __("With X");
+	$type ||= __("Base system only");
+
+	#- ask user for its choice.
+	my $type = $o->ask_from_list_(_("Type of install"), _("You do not have selected any group of packages
+Please choose the minimal installation you want"), [ __("Base system only"), __("No X"), __("With X"), ], $type);
+
+	#- reselect according to user selection.
+	if ($type eq __("Base system only")) {
+	    $o->{default_packages} = [];
+	    $o->{compssUsersChoice}{$_} = 0 foreach keys %{$o->{compssUsersChoice}};
+	} else {
+	    install_any::setDefaultPackage($o);
+	    $o->{compssUsersChoice}{X} = $type eq __('With X');
+	}
+	install_any::unselectMostPackages($o);
+    }
     1;
 }
 
@@ -820,12 +853,7 @@ sub configureNetwork {
 #-pppConfig moved to any.pm
 #------------------------------------------------------------------------------
 sub installCrypto {
-    my ($o) = @_;
-    my $u = $o->{crypto} ||= {};
-    
-    $::expert and $o->hasNetwork or return;
-
-    is_empty_hash_ref($u) and $o->ask_yesorno('', 
+    my $license =
 _("You have now the possibility to download software aimed for encryption.
 
 WARNING:
@@ -853,33 +881,8 @@ For any queries relating to these agreement, please contact
 Mandrakesoft, Inc.
 2400 N. Lincoln Avenue Suite 243
 Altadena California 91001
-USA")) || return;
-
-    require crypto;
-    eval {
-      $u->{mirror} = $o->ask_from_listf('', 
-					_("Choose a mirror from which to get the packages"), 
-					\&crypto::mirror2text, 
-					[ crypto::mirrors() ], 
-					$u->{mirror});
-    };
-    return if $@;
-
-    #- bring all interface up for installing crypto packages.
-    install_interactive::upNetwork($o);
-
-    my $update_medium = do {
-      my $w = $o->wait_message('', _("Contacting the mirror to get the list of available packages"));
-      crypto::getPackages($o->{prefix}, $o->{packages}, $u->{mirror}); #- make sure $o->{packages} is defined when testing
-    };
-
-    if ($update_medium) {
-	$o->choosePackagesTree($o->{packages}, $update_medium);
-	$o->pkg_install();
-    }
-
-    #- stop interface using ppp only.
-    install_interactive::downNetwork($o, 'pppOnly');
+USA");
+    goto &installUpdates; #- remove old code, keep this one ok though by transfering to installUpdates.
 }
 
 sub installUpdates {
@@ -905,6 +908,8 @@ Do you want to continue ?")) || return;
 	my @mirrors = do { my $w = $o->wait_message('',
 						    _("Contacting Mandrake Linux web site to get the list of available mirrors"));
 			   crypto::mirrors() };
+	#- if no mirror have been found, use current time zone and propose among available.
+	$u->{mirror} ||= crypto::bestMirror($o->{timezone}{timezone});
 	$u->{mirror} = $o->ask_from_treelistf('', 
 					      _("Choose a mirror from which to get the packages"), 
 					      '|',
@@ -926,7 +931,7 @@ Do you want to continue ?")) || return;
 	}
     }
  
-    #- stop interface using ppp only.
+    #- stop interface using ppp only. FIXME REALLY TOCHECK isdn (costly network) ?
     install_interactive::downNetwork($o, 'pppOnly');
 }
 
