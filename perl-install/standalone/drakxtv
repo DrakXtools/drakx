@@ -112,6 +112,8 @@ You can install it by typing \"urpmi xawtv\" as root, in a console.")));
 		  # Note that this'll be broken if/when we implement interactive::qt
 		  my $use_X = $in->isa('interactive::gtk') && -x "/usr/X11R6/bin/xvt";
 		  my $home = $ENV{HOME};
+		  my $is_bttv_loaded = cat_("/proc/modules");
+		  run_program::run('/sbin/modprobe', 'bttv') if $< == 0 && $is_bttv_loaded !~ /bttv/;
 		  my $i = system(($use_X ? "xvt -T '" . N("Scanning for TV channels") . " ...' -e " : "") . 
 				 "scantv -n $norm -f $ftable_id -o $home/.xawtv" .
 				 ($use_X ? "" : " &>$home/tmp/scantv.log;"));
