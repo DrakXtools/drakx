@@ -45,15 +45,20 @@ sub get_config_file {
     map { [ split ' ' ] } grep { !/^#/ } cat_("$::prefix/etc/shorewall/$file");
 }
 
-sub get_net_device() {
+sub get_default_device() {
     my $netcnx = {};
     my $netc = {};
     my $intf = {};
     network::netconnect::read_net_conf($netcnx, $netc, $intf);
     my $default_intf = network::tools::get_default_gateway_interface($netc, $intf);
-    $default_intf->{DEVICE} =~ /^ippp/ && "ippp+" ||
-    $default_intf->{DEVICE} =~ /^ppp/ && "ppp+" ||
     $default_intf->{DEVICE};
+}
+
+sub get_net_device() {
+    my $default_dev = get_default_device();
+    $default_dev =~ /^ippp/ && "ippp+" ||
+    $default_dev =~ /^ppp/ && "ppp+" ||
+    $default_dev;
 }
 
 sub default_interfaces_silent {
