@@ -223,6 +223,7 @@ sub syslog {
 }
 
 sub hasSMP { c::detectSMP() }
+sub hasPCMCIA { -e "/proc/pcmcia" }
 
 sub hasUltra66 {
     die "hasUltra66 deprecated";
