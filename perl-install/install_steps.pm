@@ -329,7 +329,7 @@ sub beforeInstallPackages {
     substInFile { s/%_excludedocs.*//; $_ .= "%_excludedocs yes\n" if eof && $o->{excludedocs} } "$o->{prefix}/etc/rpm/macros";
 
     #- add oem theme if the files exists.
-    mkdir "$o->{prefix}$_" foreach qw(/usr /usr/share);
+    mkdir_p("$o->{prefix}/usr/share");
     install_any::getAndSaveFile("Mandrake/base/oem-theme.rpm", "$o->{prefix}/usr/share/oem-theme.rpm");
 }
 
