@@ -1363,11 +1363,11 @@ sub get_path_str {
 package Gtk2::TreeView;
 # likewise gtk-1.2 function
 sub toggle_expansion {
-    my ($self, $path, $open_all) = @_;
+    my ($self, $path, $b_open_all) = @_;
     if ($self->row_expanded($path)) {
 	$self->collapse_row($path);
     } else {
-	$self->expand_row($path, $open_all || 0);
+	$self->expand_row($path, $b_open_all || 0);
     }
 }
 

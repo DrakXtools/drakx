@@ -6,7 +6,7 @@ package security::l10n;
 
 use common;
 
-sub fields {
+sub fields() {
     return (
             'accept_bogus_error_responses' => N("Accept bogus IPv4 error messages"),
             'accept_broadcasted_icmp_echo' => N("Accept broadcasted icmp echo"),

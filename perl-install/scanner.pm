@@ -246,7 +246,7 @@ sub get_usb_ids_for_port {
 	while (my $line = <DETECT>) {
 	    if ($line =~ /ID\s+([0-9a-f]+):(0x[0-9a-f]+)($|\s+)/) {
 		# Scanner connected via scanner.o kernel module
-		return ("0x$1", "0x$2");
+		return "0x$1", "0x$2";
 		last;
 	    }
 	}
@@ -257,7 +257,7 @@ sub get_usb_ids_for_port {
 	    if ($line =~ /^\s*found\s+USB\s+scanner/i) {
 		if ($line =~ /vendor=(0x[0-9a-f]+)[^0-9a-f]+.*prod(|uct)=(0x[0-9a-f]+)[^0-9a-f]+/) {
 		    # Scanner connected via scanner.o kernel module
-		    return ($1, $3);
+		    return $1, $3;
 		}
 	    }
 	}
