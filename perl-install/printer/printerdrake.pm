@@ -57,7 +57,6 @@ sub config_cups {
 #    $in->set_help('configureRemoteCUPSServer') if $::isInstall;
     #- hack to handle cups remote server printing,
     #- first read /etc/cups/cupsd.conf for variable BrowsePoll address:port
-    my ($server, $port, $autoconf);
     # Return value: 0 when nothing was changed ("Apply" never pressed), 1
     # when "Apply" was at least pressed once.
     my $retvalue = 0;
@@ -598,7 +597,7 @@ sub first_time_dialog {
 }
 
 sub configure_new_printers {
-    my ($printer, $in, $upNetwork) = @_;
+    my ($printer, $in, $_upNetwork) = @_;
 
     # This procedure auto-detects local printers and checks whether
     # there is already a queue for them. If there is no queue for an
@@ -610,7 +609,7 @@ sub configure_new_printers {
     return 1 if $::expert;
     
     # Wait message
-    my $_w = $in->wait_message(N("Printerdrake"),
+    my $w = $in->wait_message(N("Printerdrake"),
 			       N("Searching for new printers..."));
 
     # When HPOJ is running, it blocks the printer ports on which it is
@@ -691,8 +690,8 @@ sub configure_new_printers {
 		$queue .= $i;
 	    }
 	    $printer->{currentqueue}{queue} = $queue;
-	    undef $_w;
-	    $_w = $in->wait_message(N("Printerdrake"),
+	    undef $w;
+	    $w = $in->wait_message(N("Printerdrake"),
 				    ($unknown ?
 				     N("Configuring printer ...") :
 				     N("Configuring printer \"%s\"...",
@@ -719,7 +718,7 @@ sub configure_new_printers {
 					$p->{val}{DESCRIPTION} . N(" on ")) .
 					$p->{port} . N(")");
 		# Remove wait message
-		undef $_w;
+		undef $w;
 		# Choose the printer/driver from the list
 		$printer->{DBENTRY} = 
 		    $in->ask_from_treelist(N("Printer model selection"),
@@ -748,7 +747,7 @@ Printerdrake could not determine which model your printer %s is. Please choose t
 		    $printer->{QUEUE} = $printer->{currentqueue}{queue};
 		}
 		# Restore wait message
-		$_w = $in->wait_message(N("Printerdrake"),
+		$w = $in->wait_message(N("Printerdrake"),
 					N("Configuring printer \"%s\"...",
 					  $printer->{currentqueue}{queue}));
 	    }
@@ -771,13 +770,13 @@ Printerdrake could not determine which model your printer %s is. Please choose t
 	$printer->{complete} = 0;
     }
     # Configure the current printer queues in applications
-    undef $_w;
+    undef $w;
     if ($configapps) {
-	$_w =
+	$w =
 	    $in->wait_message(N("Printerdrake"),
 			      N("Configuring applications..."));
 	printer::main::configureapplications($printer);
-	undef $_w;
+	undef $w;
     }
     undef $printer->{noninteractive};
 }
@@ -1013,7 +1012,6 @@ sub setup_local_autoscan {
     my $menuchoice = "";
     my $oldmenuchoice = "";
     my $device;
-    my $p;
     if ($printer->{configured}{$queue}) {
 	my $p = printer::main::autodetectionentry_for_uri
 	    ($printer->{currentqueue}{connect}, @autodetected);
@@ -1266,11 +1264,12 @@ sub setup_smb {
 	}
 	my $_w = $in->wait_message(N("Printer auto-detection"), N("Scanning network..."));
 	@autodetected = printer::detect::net_smb_detect();
+     my ($server, $share);
 	foreach my $p (@autodetected) {
 	    my $menustr;
 	    if ($p->{port} =~ m!^smb://([^/:]+)/([^/:]+)$!) {
-             my $server = $1;
-             my $share = $2;
+             $server = $1;
+             $share = $2;
          }
 	    if ($p->{val}{DESCRIPTION}) {
 		$menustr = $p->{val}{DESCRIPTION};
@@ -1505,11 +1504,12 @@ sub setup_socket {
 	$autodetect = 1;
 	my $_w = $in->wait_message(N("Printer auto-detection"), N("Scanning network..."));
 	@autodetected = printer::detect::net_detect();
+     my ($host, $port);
 	foreach my $p (@autodetected) {
 	    my $menustr;
 	    if ($p->{port} =~ m!^socket://([^:]+):(\d+)$!) {
-             my $host = $1;
-             my $port = $2;
+             $host = $1;
+             $port = $2;
          }
 	    if ($p->{val}{DESCRIPTION}) {
 		$menustr = $p->{val}{DESCRIPTION};
@@ -1763,7 +1763,7 @@ sub setup_common {
 
     my $ptaldevice = "";
     my $isHPOJ = 0;
-    my $_w;
+    my $w;
     if ($device =~ m!^/dev/! || $device =~ m!^socket://!) {
 	# Ask user whether he has a multi-function device when he didn't
 	# do auto-detection or when auto-detection failed
@@ -1785,14 +1785,14 @@ sub setup_common {
 		!files_exist(qw(/usr/sbin/ptal-mlcd
 					   /usr/sbin/ptal-init
 					   /usr/bin/xojpanel))) {
-		$_w = $in->wait_message(N("Printerdrake"),
+		$w = $in->wait_message(N("Printerdrake"),
 					   N("Installing HPOJ package..."))
 		    if !$printer->{noninteractive};
 		$in->do_pkgs->install('hpoj', 'xojpanel');
 	    }
 	    # Configure and start HPOJ
-	    undef $_w;
-	    $_w = $in->wait_message
+	    undef $w;
+	    $w = $in->wait_message
 		(N("Printerdrake"),
 		 N("Checking device and configuring HPOJ..."))
 		if !$printer->{noninteractive};
@@ -1812,8 +1812,8 @@ sub setup_common {
 						   /usr/lib/libsane-hpoj.so.1),
 						if_(files_exist('/usr/bin/gimp'), 
 						    '/usr/bin/xsane-gimp'))) {
-			undef $_w;
-			$_w = $in->wait_message
+			undef $w;
+			$w = $in->wait_message
 			    (N("Printerdrake"),
 			     N("Installing SANE packages..."))
 			    if !$printer->{noninteractive};
@@ -1838,8 +1838,8 @@ sub setup_common {
 						  /usr/bin/mcopy
 						  /usr/bin/MToolsFM
 						  ))) {
-			undef $_w;
-			$_w = $in->wait_message
+			undef $w;
+			$w = $in->wait_message
 			    (N("Printerdrake"),
 			     N("Installing mtools packages..."))
 			    if !$printer->{noninteractive};
@@ -1854,7 +1854,7 @@ sub setup_common {
 		    # Inform user about how to scan with his MF device
 		    $text = scanner_help($makemodel, "ptal:/$ptaldevice");
 		    if ($text) {
-			undef $_w;
+			undef $w;
 			$in->ask_warn
 			    (N("Scanning on your HP multi-function device"),
 			     $text);
@@ -1863,7 +1863,7 @@ sub setup_common {
 		    # MF device
 		    $text = photocard_help($makemodel, "ptal:/$ptaldevice");
 		    if ($text) {
-			undef $_w;
+			undef $w;
 			$in->ask_warn(N("Photo memory card access on your HP multi-function device"),
 				      $text);
 		    }
@@ -1874,10 +1874,10 @@ sub setup_common {
 		# make the DeviceURI from $device.
 		$printer->{currentqueue}{connect} = $device;
 	    }
-	    $_w = $in->wait_message
+	    $w = $in->wait_message
 		(N("Printerdrake"),
 		 N("Checking device and configuring HPOJ..."))
-		if !$printer->{noninteractive} && !defined($_w);
+		if !$printer->{noninteractive} && !defined($w);
 	} else {
 	    # make the DeviceURI from $device.
 	    $printer->{currentqueue}{connect} = $device;
@@ -1966,7 +1966,7 @@ sub setup_common {
 	    if ($printer::main::thedb{$entry}{make} =~ /Generic/i) {
 		# Database entry for generic printer, check printer
 		# languages (command set)
-		my $cmd = $printer::main::thedb{$entry}{devidcmd};
+		my $_cmd = $printer::main::thedb{$entry}{devidcmd};
 		if ($printer::main::thedb{$entry}{model} =~ 
 		    m!PCL\s*5/5e!i) {
 		    # Generic PCL 5/5e Printer
@@ -2609,7 +2609,7 @@ You should make sure that the page size and the ink type/printing mode (if avail
 				     @simple_options)) ? 1 : 0);
 	    # Group header
 	    if ($printer->{ARGS}[$i]{group} ne $oldgroup[$advanced]) {
-		my $level = $#{$printer->{ARGS}[$i]{grouptrans}};
+		my $_level = $#{$printer->{ARGS}[$i]{grouptrans}};
 		$oldgroup[$advanced] = $printer->{ARGS}[$i]{group};
 		if ($printer->{ARGS}[$i]{group}) {
 		    push(@widgets,
@@ -3167,7 +3167,7 @@ sub start_network {
     } else { return printer::services::start("network") }
 }
 
-sub network_configured {
+sub network_configured() {
     # Do configured networks (/etc/sysconfig/network-scripts/ifcfg*) exist?
     my @netscripts =
 	cat_("ls -1 $::prefix/etc/sysconfig/network-scripts/ |");
@@ -3209,10 +3209,9 @@ sub check_network {
 			require network::netconnect;
 		        network::netconnect::main(
 			     $in->{prefix}, $in->{netcnx} ||= {}, 
-			     $in->{netc}, $in->{mouse}, $in, 
-			     $in->{intf}, 0,
-			     $in->{lang} eq "fr_FR" && 
-			     $in->{keyboard}{KEYBOARD} eq "fr", 0);
+			     $in, $in->{netc}, $in->{mouse}, 
+			     $in->{intf});
+#    my ($prefix, $netcnx, $in, $o_netc, $o_mouse, $o_intf, $o_first_time, $o_noauto) = @_;
 		    } else {
 			system("/usr/sbin/drakconnect");
 		    }
@@ -3459,7 +3458,6 @@ sub setup_default_spooler {
 	    $in->wait_message(N("Printerdrake"),
 			      N("Configuring applications..."));
 	printer::main::configureapplications($printer);
-	undef $_w;
     }
     # Save spooler choice
     printer::default::set_spooler($printer);
@@ -3583,11 +3581,11 @@ sub main {
 	}
 
 	# Configure the current printer queues in applications
-	my $_w =
+	my $w =
 	    $in->wait_message(N("Printerdrake"),
 			      N("Configuring applications..."));
 	printer::main::configureapplications($printer);
-	undef $_w;
+	undef $w;
 
 	# Mark this part as done, it should not be done a second time.
 	if ($::isInstall) {
@@ -3796,7 +3794,7 @@ sub main {
 		$printer->{NEW} = 1;
 		#- Set default values for a new queue
 		$printer_type_inv{$printer->{TYPE}} or 
-		    $printer->{TYPE} = printer::default::printer_type($printer);
+		    $printer->{TYPE} = printer::default::printer_type();
 		$printer->{currentqueue} = { queue    => $queue,
 					     foomatic => 0,
 					     desc     => "",
@@ -4121,7 +4119,6 @@ What do you want to modify on this printer?",
 		my $_w = $in->wait_message(N("Printerdrake"),
 					   N("Configuring applications..."));
 		printer::main::configureapplications($printer);
-		undef $_w;
 	    }
 	    # Delete some variables
 	    foreach (qw(OLD_QUEUE QUEUE TYPE str_type DBENTRY ARGS OLD_CHOICE)) {
