@@ -281,24 +281,31 @@ sub ask_mntpoint_s { #- }{}
 sub doPartitionDisks {
     my ($o) = @_;
 
-    if (arch() =~ /ppc/ && detect_devices::get_mac_generation() =~ /NewWorld/) { #- need to make bootstrap part if NewWorld machine - thx Pixel ;^)
-	if (defined $partition_table::mac::bootstrap_part) {
-	    #- don't do anything if we've got the bootstrap setup
-	    #- otherwise, go ahead and create one somewhere in the drive free space
-	} else {
-            undef = $partition_table::mac::freepart; #- please "perl -w"
-            my $freepart = $partition_table::mac::freepart;
-	    if ($freepart && $freepart->{size} >= 1) {	        
-		log::l("creating bootstrap partition on drive /dev/$freepart->{hd}{device}, block $freepart->{start}");
-		$partition_table::mac::bootstrap_part = $freepart->{part};	
-		log::l("bootstrap now at $partition_table::mac::bootstrap_part");
-                my $p = { start => $freepart->{start}, size => 1 << 11, mntpoint => '' };
-                fs::type::set_pt_type($p, 0x401);
-		fsedit::add($freepart->{hd}, $p, $o->{all_hds}, { force => 1, primaryOrExtended => 'Primary' });
-		$new_bootstrap = 1;    
+    if (arch() =~ /ppc/) {
+	my $generation = detect_devices::get_mac_generation();
+	if ($generation =~ /NewWorld/) {
+	    #- mac partition table
+	    if (defined $partition_table::mac::bootstrap_part) {
+    		#- don't do anything if we've got the bootstrap setup
+    		#- otherwise, go ahead and create one somewhere in the drive free space
 	    } else {
-		$o->ask_warn('', N("No free space for 1MB bootstrap! Install will continue, but to boot your system, you'll need to create the bootstrap partition in DiskDrake"));
+		my $freepart = $partition_table::mac::freepart;
+		if ($freepart && $freepart->{size} >= 1) {
+		    log::l("creating bootstrap partition on drive /dev/$freepart->{hd}{device}, block $freepart->{start}");
+		    $partition_table::mac::bootstrap_part = $freepart->{part};
+		    log::l("bootstrap now at $partition_table::mac::bootstrap_part");
+		    my $p = { start => $freepart->{start}, size => 1 << 11, mntpoint => '' };
+		    fs::type::set_pt_type($p, 0x401);
+		    fsedit::add($freepart->{hd}, $p, $o->{all_hds}, { force => 1, primaryOrExtended => 'Primary' });
+		    $new_bootstrap = 1;
+
+    		} else {
+		    $o->ask_warn('', N("No free space for 1MB bootstrap! Install will continue, but to boot your system, you'll need to create the bootstrap partition in DiskDrake"));
+    		}
 	    }
+	} elsif ($generation =~ /IBM/) {
+	    #- dos partition table
+	    $o->ask_warn('', N("You'll need to create a PPC PReP Boot bootstrap! Install will continue, but to boot your system, you'll need to create the bootstrap partition in DiskDrake"));
 	}
     }
 
@@ -1262,9 +1269,9 @@ sub setupBootloaderBefore {
 sub setupBootloader {
     my ($o, $ent_number) = @_;
     if (arch() =~ /ppc/) {
-	my $machtype = detect_devices::get_mac_generation();
-	if ($machtype !~ /NewWorld/) {
-	    $o->ask_warn('', N("You appear to have an OldWorld or Unknown\n machine, the yaboot bootloader will not work for you.\nThe install will continue, but you'll\n need to use BootX or some other means to boot your machine"));
+	if (detect_devices::get_mac_generation() !~ /NewWorld/ && 
+	    detect_devices::get_mac_model() !~ /IBM/) {
+	    $o->ask_warn('', N("You appear to have an OldWorld or Unknown machine, the yaboot bootloader will not work for you. The install will continue, but you'll need to use BootX or some other means to boot your machine. The kernel argument for the root fs is: root=%s", '/dev/' . fs::get::root_($o->{fstab})->{device}));
 	    log::l("OldWorld or Unknown Machine - no yaboot setup");
 	    return;
 	}
