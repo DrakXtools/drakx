@@ -130,7 +130,7 @@ sub main {
 	    print STDERR "Already in fstab\n" if $::testing;
 	    return;
 	}
-	my $use_supermount = cat_('/etc/fstab') =~ /supermount/;
+	my $useSupermount = cat_('/etc/fstab') =~ /supermount/;
 	set_options($part, $useSupermount);
 	set_mount_point($part, $fstab) or return;
 	
