@@ -210,7 +210,7 @@ $tree->get_selection->signal_connect('changed' => sub {
                        $current_device->{$_} =~ /^(Unknown)/ ? N("Unknown") : 
                        $current_device->{$_} eq 'yes' ? N("Yes") : 
                        $current_device->{$_} eq 'no'  ? N("No") : 
-                       $current_device->{$_}) . "\n\n", { 'foreground' => ($_ eq 'driver' && $current_device->{$_} =~ /^unknown|^Bad:/ ? 'indian red' : 'black') } ])
+                       $current_device->{$_}) . "\n\n", if_($_ eq 'driver' && $current_device->{$_} =~ /^unknown|^Bad:/, { foreground => 'indian red' }) ])
                 } sort keys %$current_device ]);
 
             foreach (keys %$current_device) {
