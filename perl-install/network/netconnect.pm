@@ -124,18 +124,6 @@ sub real_main {
 
       $netc->{autodetect} = {};
 
-
-      my $handle_multiple_cnx = sub {
-          $need_restart_network = 1 if $netcnx->{type} =~ /lan|cable/;
-          my $nb = keys %{$netc->{internet_cnx}};
-          if (1 < $nb) {
-              return "multiple_internet_cnx";
-          } else {
-              $netc->{internet_cnx_choice} = (keys %{$netc->{internet_cnx}})[0] if $nb == 1;
-              return "network_on_boot";
-          }
-      };
-
       my $lan_detect = sub {
           detect($netc->{autodetect}, 'lan');
           modules::interactive::load_category($in, 'network/main|gigabit|pcmcia|usb|wireless', !$::expert, 0);
@@ -192,6 +180,28 @@ sub real_main {
           return "end";
       };
     
+      my $after_start_on_boot_step = sub {
+          return "restart" if $need_restart_network && $::isStandalone && !$::expert;
+          return $offer_to_connect->();
+      };
+
+      my $goto_start_on_boot_ifneeded = sub {
+          return $after_start_on_boot_step->() if $netcnx->{type} =~ /lan|cable/;
+          return "network_on_boot";
+      };
+
+      my $handle_multiple_cnx = sub {
+          $need_restart_network = 1 if $netcnx->{type} =~ /lan|cable/;
+          my $nb = keys %{$netc->{internet_cnx}};
+          if (1 < $nb) {
+              return "multiple_internet_cnx";
+          } else {
+              $netc->{internet_cnx_choice} = (keys %{$netc->{internet_cnx}})[0] if $nb == 1;
+              return $goto_start_on_boot_ifneeded->()
+          }
+      };
+
+      
       # main wizard:
       my $wiz;
       $wiz =
@@ -1104,7 +1114,7 @@ N("Last but not least you can also type in your DNS server IP addresses."),
                             require Data::Dumper;
                             output("$::prefix/etc/sysconfig/drakconnect", Data::Dumper->Dump([ $config ], [ '$p' ]));
                         }
-                        return "network_on_boot";
+                        return $goto_start_on_boot_ifneeded->();
                     },
                    },
                    
@@ -1136,8 +1146,7 @@ N("Last but not least you can also type in your DNS server IP addresses."),
                         
                         network::network::configureNetwork2($in, $::prefix, $netc, $intf);
                         $network_configured = 1;
-                        return "restart" if $need_restart_network && $::isStandalone && !$::expert;
-                        return $offer_to_connect->();
+                        return $after_start_on_boot_step->();
                     },
                    },
 
