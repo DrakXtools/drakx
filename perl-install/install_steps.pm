@@ -404,6 +404,7 @@ sub beforeInstallPackages {
     install_any::getAndSaveFile("install/oem-theme.rpm", "$o->{prefix}/usr/share/oem-theme.rpm");
 }
 
+#- returns number of packages installed, 0 if none were selected.
 sub pkg_install {
     my ($o, @l) = @_;
     log::l("selecting packages " . join(" ", @l));
@@ -420,6 +421,7 @@ sub pkg_install {
 	$o->installPackages;
     } else {
 	log::l("all packages selected are already installed, nothing to do");
+	0;
     }
 }
 
