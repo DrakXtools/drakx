@@ -523,7 +523,7 @@ sub main {
 	$o->{mkbootdisk} = 0;
     }
     unless ($::testing || $::live) {
-	symlink "image", "/tmp/rhimage"; #- for compatibility with new mdk-stage1
+	symlink "rhimage", "/tmp/image"; #- for compatibility with old stage1
 	unlink $_ foreach "/modules/modules.mar", "/sbin/stage1";
     }
 
