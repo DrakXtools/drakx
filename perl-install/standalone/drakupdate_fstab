@@ -19,14 +19,14 @@
 
 use lib qw(/usr/lib/libDrakX);
 
-use standalone;     #- warning, standalone must be loaded very first, for 'explanations'
-
 use detect_devices;
 use common;
 use fsedit;
 use lang;
 use any;
 use fs;
+
+$::isStandalone = 1; #- not using standalone.pm which generates too many logs for drakupdate_fstab purpose
 
 $::testing = $ARGV[0] eq '--test' && shift;
 $::auto = $ARGV[0] eq '--auto' && shift;
