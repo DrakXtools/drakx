@@ -868,7 +868,7 @@ sub report_bug {
       header("partitions"), cat_("/proc/partitions"),
       header("cpuinfo"), cat_("/proc/cpuinfo"),
       header("syslog"), cat_("/tmp/syslog"),
-      header("ddcxinfos"), `$ENV{LD_LOADER} ddcxinfos`,
+      header("ddcxinfos"), ddcxinfos(),
       header("stage1.log"), cat_("/tmp/stage1.log"),
       header("ddebug.log"), cat_("/tmp/ddebug.log"),
       header("install.log"), cat_("$prefix/root/install.log"),
@@ -908,6 +908,16 @@ Allowing this will permit users to simply click on "Share" in konqueror and naut
 'The per-user sharing uses the group "fileshare". 
 You can use userdrake to add a user in this group.
 Or on the command line use: "usermod -G fileshare user_name"');
+    }
+}
+
+sub ddcxinfos {
+    if ($::isInstall && -e "/tmp/ddcxinfos") {
+	cat_("/tmp/ddcxinfos");
+    } else {
+	my @l = `$ENV{LD_LOADER} ddcxinfos`;
+	output("/tmp/ddcxinfos", @l) if $::isInstall;
+	@l;
     }
 }
 

@@ -3,6 +3,7 @@ package Xconfig; # $Id$
 use diagnostics;
 use strict;
 
+use any;
 use common;
 use mouse;
 use devices;
@@ -190,7 +191,7 @@ sub getinfoFromDDC {
     my $o = shift || {};
     my $O = $o->{monitor} ||= {};
     #- return $o if $O->{hsyncrange} && $O->{vsyncrange} && $O->{modelines};
-    my ($m, @l) = `ddcxinfos`;
+    my ($m, @l) = any::ddcxinfos();
     $? == 0 or return $o;
 
     $o->{card}{memory} ||= to_int($m);
