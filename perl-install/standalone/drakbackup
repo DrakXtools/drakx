@@ -171,6 +171,7 @@ my $custom_help;
 my $button_box;
 my $button_box_tmp;
 my $next_widget;
+my $sav_next_widget;
 my $system_state;
 my $restore_state;
 my $save_path_entry;
@@ -1446,8 +1447,8 @@ sub wizard_step3 {
 					  ),
 			      ),
 	    );
-    button_box_wizard_end();
     fonction_env(\$box2, \&wizard_step3, \&wizard_step2, "");
+    button_box_wizard_end();
     $up_box->show_all();
 }
 
@@ -1466,7 +1467,9 @@ sub wizard_step2 {
 						      0, gtkset_sensitive(gtksignal_connect(new Gtk::Button(_("Configure")),
 											    clicked => sub {
 												${$central_widget}->destroy();
+												to_ok();
 												advanced_where_hd(\&wizard_step2);
+												to_normal();
 											    }), $where_hd ),
 									  ),
 					  0, gtkpack_(new Gtk::HBox(0, 15),	      
@@ -1475,7 +1478,9 @@ sub wizard_step2 {
 						      0, gtkset_sensitive(gtksignal_connect(new Gtk::Button(_("Configure")),
 											    clicked => sub {
 												${$central_widget}->destroy();
+												to_ok();
 												advanced_where_net(\&wizard_step2);
+												to_normal();
 											    }), $where_net ),
 						      ),
 # 					  0, gtkpack_(new Gtk::HBox(0, 15),	      
@@ -1502,7 +1507,6 @@ sub wizard_step2 {
 			      ),
 	    );
     $where_net = $where_net_ssh || $where_net_ftp;
-    button_box_wizard();
     foreach ([$check_wizard_hd, \$where_hd], 
 #	     [$check_wizard_cd, \$where_cd], 
 #	     [$check_wizard_tape, \$where_tape],
@@ -1521,6 +1525,7 @@ sub wizard_step2 {
 	}
     if (!$where_hd && !$where_cd && !$where_net) { fonction_env(\$box2, \&wizard_step2, \&wizard, "", \&message_noselect_box)}
     else { fonction_env(\$box2, \&wizard_step2, \&wizard, "", \&wizard_step3)}
+    button_box_wizard();
     $up_box->show_all();
 }
 
@@ -1574,7 +1579,7 @@ sub find_backup_to_restore {
     my @user_backuped_tmp;
 
     @user_backuped = ();
-    -d $path_to_find_restore and my @list_backup_tmp2 = all($path_to_find_restore);
+    -d $path_to_find_restore and @list_backup_tmp2 = all($path_to_find_restore);
     foreach (@list_backup_tmp2) {
 	s/\_base//gi;
 	s/\_incr//gi;
@@ -1715,7 +1720,7 @@ sub select_sys_data_to_restore {
     my @list_tmp = ();
     @sys_list_to_restore = ();
 
-    -d $path_to_find_restore and my @list_tmp = grep /^backup/, all($path_to_find_restore);
+    -d $path_to_find_restore and @list_tmp = grep /^backup/, all($path_to_find_restore);
     my @more_recent = split( ' ', $restore_step_sys_date); 
     my $more_recent = pop @more_recent;
     foreach my $var_exist (grep /\_sys\_/, sort @list_tmp) {
@@ -3344,4 +3349,14 @@ Restore Step:
 	    );
     $central_widget = \$advanced_box_help;
     $up_box->show_all();
+}
+
+sub to_ok {
+    $sav_next_widget = $next_widget;
+    $next_widget = undef;
+    button_box_wizard();
+}
+
+sub to_normal {
+    $next_widget = $sav_next_widget;
 }
