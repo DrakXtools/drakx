@@ -89,6 +89,7 @@ my %cd_devices;
 my $std_device;
 my @tape_devices;
 my $tar_ext = "tar.gz";
+my $in;
 
 # config. FILES -> Default PATH  & Global variables.
 my @sys_files = "/etc";
@@ -294,9 +295,6 @@ sub daemon_mode() {
 }
 
 if (check_for_xserver()) {
-	# I give up, if I don't wrap this somehow, it never comes back when run in 
-	# console or daemon mode - just pegs cpu to 100%
-	# perl_checker has fits though
 	eval { require ugtk2 };
 	die "Can't load ugtk2...\n" if $@;
 	ugtk2->import(qw(:helpers :wrappers :create));
@@ -315,25 +313,16 @@ sub all_user_list() {
 		@user_list_all = $ENV{USER};
 		return;
 	}
-    my $passwdfile = "/etc/passwd";
     my $user;
     my $uid;
     @user_list_all = ();
 
-	local *PASSWD;
-    open(PASSWD, $passwdfile) or exit 1; 
-    while (defined(my $line = <PASSWD>)) {
-		chomp($line);
-		($user, $uid) = (split(/:/, $line))[0, 2];
+	my @passwd = cat_("/etc/passwd");
+	foreach (@passwd) {
+		($user, $uid) = (split(/:/, $_))[0, 2];
 		if ($uid >= 500 && $uid < 65000 || $uid == 0) {
 	    	push @user_list_all, $user;
 		}
-    }
-    close(PASSWD);
-    if ($DEBUG) {
-		print "/--  User list  --/ \n";
-		print " -> $_\n" foreach @user_list_all;
-		print "\n";
     }
 }
 
@@ -373,36 +362,16 @@ sub get_tape_info() {
 
 sub get_free_space {
 	my ($dir) = @_;
-	my @line_data;
-	my $free = "$ENV{HOME}/tmp/free_space";
-	system("df -P $dir | tail -1 > $free");
-
-	local *FREE;
-	open FREE, $free or warn("Can't open $free\n");
-	local $_;
-	while (<FREE>) {
-		@line_data = split(/[ \t,]+/, $_); 
-	}
- 	close FREE;
-	unlink($free);
+	my $free = `df -P $dir | tail -1`;
+	my @line_data = split(/[ \t,]+/, $free); 
 	my $free_space = int($line_data[3] / 1024);
 	return $free_space;	
 }
 
 sub check_storage_quota {
 	my ($dir) = @_;
-	my $used = "$ENV{HOME}/tmp/used_space";
-	my $used_space;
-	system("du $dir > $used");
-	
-	local *USED;
-	open USED, $used or warn("Can't open $used\n");
-	local $_;
-	while (<USED>) {
-		$used_space = $_ / 1024;
-	}
-	close USED;
-	unlink($used);
+	my $used = `du $dir`;	
+	my $used_space = $used / 1024;
 	if ($used_space > $max_space) {
 		return $used_space;
 	} else {
@@ -587,14 +556,13 @@ sub read_cron_files() {
 	} else {
 		$custom_cron = 1;
 		my $tmpcron = "$ENV{HOME}/tmp/crontab.tmp";
-		system("crontab -l | tail +4 > $tmpcron");
-    	my @cronline = grep { /drakbackup/ } cat_($tmpcron);
+		$tmpcron = `crontab -l | tail +4`;
+		my @cronline = grep { /drakbackup/ } $tmpcron;
 		if (@cronline) {
 			@cronline = split(" ", $cronline[0]);
 			my @crondetail = splice(@cronline, 0, 5);			
 			$time_string = join(" ", @crondetail);
 		}
-		unlink($tmpcron);
 	} 
 }
 
@@ -759,8 +727,6 @@ sub write_password_file() {
 	output_p("$cfg_dir/rsync.user", "$passwd_user\n");
 	chmod(0600, "$cfg_dir/rsync.user");
 }
-
-my $in;
 
 sub show_warning {
 	my ($mode, $warning) = @_;
@@ -1516,10 +1482,7 @@ sub build_backup_files() {
 		$catalog .= ":F" if !$backup_other_versions && @list_other;
 		$catalog .= "\n";
 			
-		local *CATALOG;
-		open CATALOG, ">> $cfg_dir/drakbackup_catalog" or show_warning("w", N("Can't create catalog!"));
-		print CATALOG $catalog;
-		close CATALOG;
+		append_to_file("$cfg_dir/drakbackup_catalog", $catalog) or show_warning("w", N("Can't create catalog!"));
 	}
 	
 	#- clean up HD files if del_hd_files and media isn't hd
@@ -1637,10 +1600,7 @@ sub show_status() {
 }
 
 sub results_to_logfile() {
-		local *LOG;
-		open LOG, "> $log_file" or show_warning("w", N("Can't create log file!"));
-		print LOG "$results\n";
-		close LOG;
+	output_p($log_file, $results);
 }
 
 sub file_ok_sel { 
