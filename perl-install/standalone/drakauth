@@ -9,9 +9,7 @@ use interactive;
 use authentication;
 use network::network;
 
-my $netc = {};
-my $intf = {};
-read_all_conf('', $netc, $intf);
+read_all_conf('', my $netc = {}, my $intf = {});
 
 my $in = 'interactive'->vnew('su');
 
