@@ -223,23 +223,12 @@ sub umount($) {
     log::l("calling umount($mntpoint)");
     syscall_('umount', $mntpoint) or die _("error unmounting %s: %s", $mntpoint, "$!");
 
-    my @mtab = cat_('/etc/mtab'); #- don't care about error, if we can't read, we won't manage to write... (and mess mtab)
-    local *F;
-    open F, ">/etc/mtab" or return;
-    foreach (@mtab) { print F $_ unless /(^|\s)$mntpoint\s/; }
+    substInFile { $_ = '' if /(^|\s)$mntpoint\s/ } '/etc/mtab'; #- don't care about error, if we can't read, we won't manage to write... (and mess mtab)
 }
 
 sub mount_part($;$$) {
     my ($part, $prefix, $rdonly) = @_;
 
-    if ($part->{realMntpoint} eq "/tmp/hdimage") {
-	my $dir = "$prefix$part->{mntpoint}";
-	$dir =~ s|/+$||;
-	log::l("special hd case ($dir)");
-	rmdir $dir;
-	symlink "/tmp/hdimage", $dir;
-	return;
-    }
     #- root carrier's link can't be mounted
     loopback::carryRootCreateSymlink($part, $prefix);
 

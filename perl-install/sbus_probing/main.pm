@@ -2,6 +2,7 @@ package sbus_probing::main;
 
 use c;
 use log;
+use common qw(:common);
 use modules;
 
 my %sbus_table_network = (

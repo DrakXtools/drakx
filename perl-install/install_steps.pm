@@ -127,7 +127,7 @@ sub doPartitionDisksBefore {
     my ($o) = @_;
 
     if (cat_("/proc/mounts") =~ m|/\w+/(\S+)\s+/tmp/hdimage\s+(\S+)| && !$o->{partitioning}{readonly}) {
-	$o->{stage1_hd} = { dev => $1, fs => $2 };
+	$o->{stage1_hd} = { device => $1, type => $2 };
 	install_any::getFile("XXX"); #- close still opened filehandle
 	eval { fs::umount("/tmp/hdimage") };
     }
@@ -143,12 +143,16 @@ sub doPartitionDisksAfter {
 	partition_table::write($_) foreach @{$o->{hds}};
 	$_->{rebootNeeded} and $o->rebootNeeded foreach @{$o->{hds}};
     }
-    if (my $s = delete $o->{stage1_hd}) {
-	eval { fs::mount($s->{dev}, "/tmp/hdimage", $s->{fs}) };
-    }
 
     $o->{fstab} = [ fsedit::get_fstab(@{$o->{hds}}, $o->{raid}) ];
     fsedit::get_root($o->{fstab}) or die "Oops, no root partition";
+
+    if (my $s = delete $o->{stage1_hd}) {
+	my ($part) = grep { $_->{device} eq $s->{device} } @{$o->{fstab}};
+	$part->{isMounted} ?
+	  symlinkf("$o->{prefix}$part->{mntpoint}", "/tmp/hdimage") :
+	  eval { fs::mount($s->{dev}, "/tmp/hdimage", $s->{fs}) };
+    }
 
     cat_("/proc/mounts") =~ m|(\S+)\s+/tmp/rhimage nfs| &&
       !grep { $_->{mntpoint} eq "/mnt/nfs" } @{$o->{manualFstab} || []} and
