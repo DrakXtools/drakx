@@ -8,12 +8,8 @@ use modules;
 use run_program;
 use log;
 use network::tools;
-use vars qw(@ISA @EXPORT);
 use MDK::Common::Globals "network", qw($in);
 use MDK::Common::File;
-
-
-@ISA = qw(Exporter);
 
 
 sub write_config {
