@@ -161,7 +161,7 @@ sub setup_postinstall_rpms($$) {
     #- compute closure of package that may be copied, use INSTALL category
     #- in rpmsrate.
     foreach (@{$packages->{needToCopy} || []}) {
-	my $p = pkgs::packageByName($packages, $_);
+	my $p = pkgs::packageByName($packages, $_) or next;
 	pkgs::selectPackage($packages, $p, 0, \%toCopy);
     }
 
