@@ -828,7 +828,7 @@ sub check_enough_space() {
 
 sub write_yaboot {
     my ($bootloader, $_hds) = @_;
-    $bootloader->{prompt} = $bootloader->{timeout};
+    $bootloader->{prompt} ||= $bootloader->{timeout};
 
     if ($bootloader->{message}) {
 	eval { output("$::prefix/boot/message", $bootloader->{message}) }
@@ -917,7 +917,7 @@ sub make_label_lilo_compatible {
 
 sub write_lilo {
     my ($bootloader, $hds) = @_;
-    $bootloader->{prompt} = $bootloader->{timeout};
+    $bootloader->{prompt} ||= $bootloader->{timeout};
 
     my $file2fullname = sub {
 	my ($file) = @_;
