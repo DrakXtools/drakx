@@ -1102,7 +1102,7 @@ sub selectPackagesToUpgrade($$$;$$) {
 					 $toRemove{$otherPackage} = 1; #- force removing for theses other packages, select our.
 				     }
 				 } else {
-				     if (! exists $obsoletedPackages{c::headerGetEntry($header, 'name')}) {
+				     if (exists $obsoletedPackages{c::headerGetEntry($header, 'name')}) {
 					 my @files = c::headerGetEntry($header, 'filenames');
 					 @installedFilesForUpgrade{grep { ($_ !~ m|^/dev/| && $_ !~ m|^/etc/rc.d/| && $_ !~ m|\.la$| &&
 									   ! -d "$prefix/$_" && ! -l "$prefix/$_") } @files} = ();
