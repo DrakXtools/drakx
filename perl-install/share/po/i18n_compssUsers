@@ -24,10 +24,14 @@ sub get {
     @l;
 }
 
+my @l = map { if_(/msgid "(.*)"/, $1) } cat_("DrakX.pot");
+my %l; @l{@l} = ();
+
 foreach (uniq(get(''), get('.desktop'))) {
     if ($_) {
         s/"/\"/g;
         s/\n//g;
+	next if exists $l{$_};
         print qq(
 #: ../../share/compssUsers:999
 msgid "$_"
