@@ -111,11 +111,7 @@ sub getIP {
     my @ip;
     my $ifconfig = '/sbin/ifconfig';
     my @lines = qx|$ifconfig $interface|;
-    foreach(@lines){
-        if(/inet adr:([\d.]+)/){
-	    push @ip, $1;
-	}
-    }
+    my @ip = map { if_(/inet adr:([\d.]+)/, $1) } @lines;
     return wantarray() ? @ip : $ip[0];
 }
 sub cronNetwork {
