@@ -75,6 +75,7 @@ sub basic_seclevel_explanations() {
     my $text = Gtk2::TextView->new;
     use Gtk2::Pango;
     my %common_opts = ('left-margin' => '10', 'right-margin' => '10');
+    # this is a small parser for a Pango Text Attribute Markup Language-like for TextViews widget
     gtktext_insert($text, [ map  {
         if (s!^/span>!!) {
             [ $_, \%common_opts ];
