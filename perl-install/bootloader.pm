@@ -283,23 +283,24 @@ wait %d seconds for default boot.
 	log::l("SMP machine, but no SMP kernel found") unless $isSecure;
 	$isSMP = 0;
     }
-    add_kernel($prefix, $lilo, $kernelVersion, $isSecure ? 'secure' : $isSMP ? 'smp' : '',
+    my $entry = add_kernel($prefix, $lilo, $kernelVersion, $isSecure ? 'secure' : $isSMP ? 'smp' : '',
 	       {
 		label => 'linux',
 		root  => "/dev/$root",
-		$vga_fb ? ( vga => $vga_fb) : (), #- using framebuffer
+		if_($vga_fb, vga => $vga_fb), #- using framebuffer
 	       });
     add_kernel($prefix, $lilo, $kernelVersion, '',
 	       {
 		label => $isSecure || $isSMP ? 'linux-up' : 'linux-nonfb',
 		root  => "/dev/$root",
 	       }) if $isSecure || $isSMP || $vga_fb;
-    my $entry = add_kernel($prefix, $lilo, $kernelVersion, '',
+    my $failsafe = add_kernel($prefix, $lilo, $kernelVersion, '',
 	       {
 		label => 'failsafe',
 		root  => "/dev/$root",
 	       });
-    $entry->{append} .= " failsafe" if $entry && !$lilo->{password};
+    $entry->{append} .= " quiet" if $vga_fb;
+    $failsafe->{append} .= " failsafe" if $failsafe && !$lilo->{password};
 
     #- manage older kernel if installed.
     foreach (qw(2.2 hack)) {
