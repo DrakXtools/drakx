@@ -44,7 +44,7 @@ sub default_spooldir($) { "/var/spool/lpd/" . default_queue($_[0]) }
 sub default_printer_type($) { ($_[0]{mode} eq /cups/ && "URI_") . "LOCAL" }
 sub printer_type($) {
     for ($_[0]{mode}) {
-	/cups/ && return @printer_type_inv{qw(URI_LOCAL URI_NET LOCAL REMOTE SMB)};
+	/cups/ && return @printer_type_inv{qw(URI_LOCAL URI_NET REMOTE SMB)};
 	/lpr/  && return @printer_type_inv{qw(LOCAL REMOTE SMB NCP)};
     }
 }

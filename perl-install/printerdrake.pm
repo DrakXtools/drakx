@@ -48,13 +48,9 @@ sub setup_local($$$) {
 _("Printer Device") => {val => \$printer->{DEVICE}, list => \@port } ],
 					 );
 
-    #- make the DeviceURI from DEVICE.
-    $printer->{DeviceURI} = ($printer->{DEVICE} =~ /usb/ ? "usb:" : "parallel:") . $printer->{DEVICE};
-
-    #- select right DBENTRY according to device selected. #- TODO with cups (keep all configuration files)
     foreach (@parport) {
 	$printer->{DEVICE} eq $_->{port} or next;
-	$printer->{DBENTRY} = $printer::descr_to_db{common::bestMatchSentence2($parport[0]{val}{DESCRIPTION},
+	$printer->{DBENTRY} = $printer::descr_to_db{common::bestMatchSentence2($_->{val}{DESCRIPTION},
 									       @printer::entry_db_description)};
     }
     1;
@@ -63,12 +59,26 @@ _("Printer Device") => {val => \$printer->{DEVICE}, list => \@port } ],
 sub setup_uri_local($$$) {
     my ($printer, $in, $install) = @_;
 
+    my @str = ();
+    my @parport = auto_detect($in);
+    foreach (@parport) {
+	$_->{val}{DESCRIPTION} and push @str, _("A printer, model \"%s\", has been detected on ",
+						$_->{val}{DESCRIPTION}) . $_->{port};
+    }
+
     my @direct_uri = printer::get_direct_uri();
+    @parport and $printer->{DeviceURI} = ($parport[0]{port} =~ /usb/ ? "usb:" : "parallel:") . $parport[0]{port};
+
     return if !$in->ask_from_entries_refH(_("Local Printer Device (URI)"),
 					  _("What URI device is your printer connected to
-(note that parallel:/dev/lp0 is equivalent to LPT1:)?"), [
+(note that parallel:/dev/lp0 is equivalent to LPT1:)?\n") . (join "\n", @str), [
 _("Printer Device URI") => { val => \$printer->{DeviceURI}, list => \@direct_uri } ],
                                          );
+
+    foreach (@parport) {
+	(split ':', $printer->{DeviceURI})[1] eq $_->{port} or next;
+        $printer->{cupsDescr} = common::bestMatchSentence2($_->{val}{DESCRIPTION}, keys %printer::descr_to_ppd);
+    }
    1;
 }
 
@@ -175,6 +185,10 @@ sub setup_gsdriver_cups($$$;$) {
 	$printer->{cupsDescr} = $in->ask_from_treelist('', _("What type of printer do you have?"), '|',
 						       [ keys %printer::descr_to_ppd ], $printer->{cupsDescr}) or return;
 	$printer->{cupsPPD} = $printer::descr_to_ppd{$printer->{cupsDescr}};
+
+	#- install additional filter according to PPD files.
+	$printer->{cupsPPD} =~ /-pnm2ppa\.ppd/ and &$install('pnm2ppa');
+	$printer->{cupsPPD} =~ /-lm1100\.ppd/ and &$install('Lexmark-1100-printer-driver__lm1100');
 
 	$printer->{complete} = 1;
 	printer::copy_printer_params($printer, $printer->{configured}{$printer->{QUEUE}} ||= {});

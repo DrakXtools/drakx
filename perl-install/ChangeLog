@@ -1,3 +1,11 @@
+2000-09-04  François Pons  <fpons@mandrakesoft.com>
+
+	* printerdrake.pm: added pnm2ppa and lm110 support in cups
+	configuration. probe for printer device (parallel) and try to
+	install usb for printer.
+	* printer.pm: removed local printer configuration for cups (keep
+	only local configuration using URI).
+
 2000-09-01  François Pons  <fpons@mandrakesoft.com>
 
 	* Xconfigurator.pm: fixes to configure XF86Config-4 when XFree-3.3
