@@ -360,9 +360,9 @@ sub write_conf {
 	    if ($mouse->{auxmouse}) {
 		if (/DeviceName\s+"Mouse2"/ .. /^EndSection/) {
 		    $found_auxmouse = 1;
-		    $_ = '' if /(ZAxisMapping|Emulate3)/; #- remove existing line
+		    $_ = '' if /(ZAxisMapping|Emulate3|AlwaysCore)/; #- remove existing line
 		    s|^(\s*Protocol\s+).*|$1"$mouse->{auxmouse}{XMOUSETYPE}"|;
-		    s|^(\s*Device\s+).*|$1"/dev/$mouse->{auxmouse}{device}"$str_zaxis_aux|;
+		    s|^(\s*Device\s+).*|$1"/dev/$mouse->{auxmouse}{device}"\n        AlwaysCore$str_zaxis_aux|;
 		}
 	    }
 	} $f if -e $f && !$::testing;
@@ -374,7 +374,8 @@ Section "XInput"
     SubSection "Mouse"
         DeviceName "Mouse2"
         Protocol   "$mouse->{auxmouse}{XMOUSETYPE}"
-        Device     "/dev/$mouse->{auxmouse}{device}"$str_zaxis_aux
+        Device     "/dev/$mouse->{auxmouse}{device}"
+        AlwaysCore$str_zaxis_aux
     EndSubSection
 EndSection
 );
