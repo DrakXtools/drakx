@@ -45,7 +45,6 @@ sub ask_from_list_with_helpW {
 	my $f = sub { $w->{retval} = $_[1]; Gtk->main_quit };
 	my $b;
 	$w->sync;
-	printf "wiz" . $::isWizard . "\n";
 	$::isWizard and my $pixmap = new Gtk::Pixmap( gtkcreate_xpm($w->{window}, $::wizard_xpm)); # or goto nowizard;
 	$::isWizard and gtkset_usize($w->{rwindow}, 500, 400);
 	gtkadd($w->{window},
@@ -60,7 +59,7 @@ sub ask_from_list_with_helpW {
 						      $::isWizard ? $b = new Gtk::RadioButton($b ? ($_, $b) : $_) : ($b = new Gtk::Button($_));
 						      $tips->set_tip($b, $help->{$_}) if $help && $help->{$_};
 						      $_ eq $def and $defW = $b;
-						      $b->signal_connect(clicked => [ $g, $_ ]);
+						      $b->signal_connect(clicked => [ $::isWizard ? $g : $f, $_ ]);
 						      $b;
 						  } @$l, )),
 			 0, new Gtk::HSeparator,
