@@ -30,6 +30,10 @@ use modules;
  "80x34" => '0x0f05',
  "80x60" => '0x0f06',
  "100x30" => '0x0122',
+ "640x480 in 16 bits (FrameBuffer only)" => 785,
+ "800x600 in 16 bits (FrameBuffer only)" => 788,
+ "1024x768 in 16 bits (FrameBuffer only)" => 791,
+ "1280x1024 in 16 bits (FrameBuffer only)" => 794,
 );
 
 my %vga_modes2nb = (

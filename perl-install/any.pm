@@ -196,6 +196,7 @@ You can add some more or change the existing ones."),
 _("Image") => { val => \$e->{kernel_or_dev}, list => [ map { s/$prefix//; $_ } glob_("$prefix/boot/vmlinuz*") ], not_edit => 0 },
 _("Root") => { val => \$e->{root}, list => [ map { "/dev/$_->{device}" } @$fstab ], not_edit => !$::expert },
 _("Append") => \$e->{append},
+_("Video mode") => { val => \$e->{vga}, list => [ keys %bootloader::vga_modes ], not_edit => !$::expert },
 _("Initrd") => { val => \$e->{initrd}, list => [ map { s/$prefix//; $_ } glob_("$prefix/boot/initrd*") ] },
 _("Read-write") => { val => \$e->{'read-write'}, type => 'bool' }
 	    );
@@ -224,6 +225,7 @@ _("Default") => { val => \$default, type => 'bool' },
 		0;
 	    })) {
 	    $b->{default} = $old_default || $default ? $default && $e->{label} : $b->{default};
+	    $e->{vga} = $bootloader::vga_modes{$e->{vga}} || $e->{vga};
 	    require bootloader;
 	    bootloader::configure_entry($prefix, $e); #- hack to make sure initrd file are built.
 
