@@ -553,7 +553,9 @@ sub gtkicons_labels_widget {
     }
     my $fixed = new Gtk::Fixed;
     foreach (@tab) { $fixed->put($_, 75, 65) }
-    my $redraw_function = sub { $fixed->move(@$_) foreach compute_icons($fixed->allocation->[2], $fixed->allocation->[3], 40, 15, 5, @tab) };
+    my $redraw_function = sub { 
+	$fixed->move(@$_) foreach compute_icons($fixed->allocation->[2], $fixed->allocation->[3], 40, 15, 5, @tab);
+    };
     $fixed->signal_connect(expose_event => $redraw_function );
     $fixed->signal_connect(realize => sub {
 			       $fixed->window->set_back_pixmap($background, 0);
