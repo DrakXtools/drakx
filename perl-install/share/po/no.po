@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX VERSION\n"
-"POT-Creation-Date: 2001-09-17 08:26+0200\n"
+"POT-Creation-Date: 2001-09-19 20:51+0200\n"
 "PO-Revision-Date: 2001-08-30 17:25CET\n"
 "Last-Translator: Andreas Bergstrøm <abergstr@halden.net>\n"
 "Language-Team: Norsk\n"
@@ -237,7 +237,7 @@ msgstr "Grafikk-kort: %s"
 msgid "XFree86 server: %s"
 msgstr "XFree86-tjener: %s"
 
-#: ../../Xconfigurator.pm_.c:829 ../../printerdrake.pm_.c:1771
+#: ../../Xconfigurator.pm_.c:829 ../../printerdrake.pm_.c:1885
 #: ../../standalone/draknet_.c:298 ../../standalone/draknet_.c:301
 msgid "Expert Mode"
 msgstr "Ekspertmodus"
@@ -570,14 +570,14 @@ msgid "Delay before booting default image"
 msgstr "Forsinkelse før oppstart av standard bilde"
 
 #: ../../any.pm_.c:157 ../../any.pm_.c:730
-#: ../../install_steps_interactive.pm_.c:934 ../../network/modem.pm_.c:46
-#: ../../printerdrake.pm_.c:381 ../../printerdrake.pm_.c:456
+#: ../../install_steps_interactive.pm_.c:938 ../../network/modem.pm_.c:46
+#: ../../printerdrake.pm_.c:402 ../../printerdrake.pm_.c:481
 #: ../../standalone/draknet_.c:603
 msgid "Password"
 msgstr "Passord"
 
 #: ../../any.pm_.c:158 ../../any.pm_.c:731
-#: ../../install_steps_interactive.pm_.c:935
+#: ../../install_steps_interactive.pm_.c:939
 msgid "Password (again)"
 msgstr "Passord (igjen)"
 
@@ -613,12 +613,12 @@ msgstr ""
 "Opsjon ``Begrense kommandolinje-opsjoner'' kan ikke brukes uten et passord"
 
 #: ../../any.pm_.c:171 ../../any.pm_.c:707
-#: ../../install_steps_interactive.pm_.c:929
+#: ../../install_steps_interactive.pm_.c:933
 msgid "Please try again"
 msgstr "Vennligst prøv igjen"
 
 #: ../../any.pm_.c:171 ../../any.pm_.c:707
-#: ../../install_steps_interactive.pm_.c:929
+#: ../../install_steps_interactive.pm_.c:933
 msgid "The passwords do not match"
 msgstr "Passordene stemmer ikke overens"
 
@@ -659,9 +659,9 @@ msgid "Add"
 msgstr "Legg til"
 
 #: ../../any.pm_.c:217 ../../any.pm_.c:718 ../../diskdrake.pm_.c:161
-#: ../../interactive_http.pm_.c:153 ../../printerdrake.pm_.c:1740
-#: ../../printerdrake.pm_.c:1741 ../../printerdrake.pm_.c:1790
-#: ../../printerdrake.pm_.c:1834
+#: ../../interactive_http.pm_.c:153 ../../printerdrake.pm_.c:1854
+#: ../../printerdrake.pm_.c:1855 ../../printerdrake.pm_.c:1904
+#: ../../printerdrake.pm_.c:1948
 msgid "Done"
 msgstr "Ferdig"
 
@@ -890,8 +890,8 @@ msgstr "Godta bruker"
 msgid "Real name"
 msgstr "Virkelig navn"
 
-#: ../../any.pm_.c:729 ../../printerdrake.pm_.c:380
-#: ../../printerdrake.pm_.c:455
+#: ../../any.pm_.c:729 ../../printerdrake.pm_.c:401
+#: ../../printerdrake.pm_.c:480
 msgid "User name"
 msgstr "Brukernavn"
 
@@ -1057,7 +1057,7 @@ msgstr ""
 "Du bruker for øyeblikket %s som oppstartshåndterer.\n"
 "Klikk på Konfigurer for å starte oppsett-hjelperen."
 
-#: ../../bootlook.pm_.c:104 ../../standalone/drakgw_.c:642
+#: ../../bootlook.pm_.c:104 ../../standalone/drakgw_.c:643
 #: ../../standalone/draknet_.c:280 ../../standalone/tinyfirewall_.c:57
 msgid "Configure"
 msgstr "Konfigurer"
@@ -1094,7 +1094,7 @@ msgstr "OK"
 #: ../../interactive.pm_.c:122 ../../interactive.pm_.c:286
 #: ../../interactive.pm_.c:308 ../../interactive_stdio.pm_.c:27
 #: ../../my_gtk.pm_.c:416 ../../my_gtk.pm_.c:419 ../../my_gtk.pm_.c:716
-#: ../../printerdrake.pm_.c:1124 ../../standalone/drakgw_.c:647
+#: ../../printerdrake.pm_.c:1158 ../../standalone/drakgw_.c:648
 #: ../../standalone/draknet_.c:115 ../../standalone/draknet_.c:147
 #: ../../standalone/draknet_.c:313 ../../standalone/draknet_.c:519
 #: ../../standalone/draknet_.c:658 ../../standalone/tinyfirewall_.c:63
@@ -1953,31 +1953,31 @@ msgstr "på buss %d id %d\n"
 msgid "Options: %s"
 msgstr "Valg: %s"
 
-#: ../../fs.pm_.c:442 ../../fs.pm_.c:452 ../../fs.pm_.c:456 ../../fs.pm_.c:460
-#: ../../fs.pm_.c:464 ../../fs.pm_.c:468
+#: ../../fs.pm_.c:447 ../../fs.pm_.c:457 ../../fs.pm_.c:461 ../../fs.pm_.c:465
+#: ../../fs.pm_.c:469 ../../fs.pm_.c:473
 #, c-format
 msgid "%s formatting of %s failed"
 msgstr "%s formatering av %s mislykket"
 
-#: ../../fs.pm_.c:501
+#: ../../fs.pm_.c:506
 #, c-format
 msgid "I don't know how to format %s in type %s"
 msgstr "Jeg vet ikke hvordan formatere %s i type %s"
 
-#: ../../fs.pm_.c:563
+#: ../../fs.pm_.c:568
 msgid "mount failed"
 msgstr "montering mislykket"
 
-#: ../../fs.pm_.c:582
+#: ../../fs.pm_.c:588
 #, c-format
 msgid "fsck failed with exit code %d or signal %d"
 msgstr "fsck avsluttet med feilkode %d eller signal %d"
 
-#: ../../fs.pm_.c:591 ../../fs.pm_.c:597 ../../partition_table.pm_.c:559
+#: ../../fs.pm_.c:597 ../../fs.pm_.c:603 ../../partition_table.pm_.c:560
 msgid "mount failed: "
 msgstr "montering mislykket: "
 
-#: ../../fs.pm_.c:612 ../../partition_table.pm_.c:555
+#: ../../fs.pm_.c:618 ../../partition_table.pm_.c:556
 #, c-format
 msgid "error unmounting %s: %s"
 msgstr "feil ved demontering av %s: %s"
@@ -2194,19 +2194,15 @@ msgid ""
 "you are not supposed to know them all by heart.\n"
 "\n"
 "If you are performing a standard installation from CDROM, you will first be\n"
-"asked to specify the CDs you currently have. Check the CD labels and\n"
-"highlight the boxes corresponding to the CDs you have available for\n"
-"installation. Click \"OK\" when you are ready to continue.\n"
+"asked to specify the CDs you currently have (in Expert mode only). Check\n"
+"the CD labels and highlight the boxes corresponding to the CDs you have\n"
+"available for installation. Click \"OK\" when you are ready to continue.\n"
 "\n"
 "Packages are sorted in groups corresponding to a particular use of your\n"
 "machine. The groups themselves are sorted into four sections:\n"
 "\n"
 " * \"Workstation\": if you plant to use your machine as a workstation,\n"
 "select one or more of the corresponding groups.\n"
-"\n"
-" * \"Graphical Environment\": this is where you will choose your preferred\n"
-"graphical environment. At least one must be selected if you want to have a\n"
-"graphical workstation!\n"
 "\n"
 " * \"Development\": if the machine is to be used for programming, choose "
 "the\n"
@@ -2216,20 +2212,23 @@ msgid ""
 "be able to select which of the most common services you wish to see\n"
 "installed on the machine.\n"
 "\n"
+" * \"Graphical Environment\": this is where you will choose your preferred\n"
+"graphical environment. At least one must be selected if you want to have a\n"
+"graphical workstation!\n"
+"\n"
 "Moving the mouse cursor over a group name will display a short explanatory\n"
 "text about that group.\n"
 "\n"
-"Clicking the \"Advanced\" button will allow you to select the \"Individual\n"
-"package selection\" option. This is useful if you are familiar with the\n"
-"packages being offered or if you want to have total control over what will\n"
-"be installed.\n"
+"You can check the \"Individual package selection\" box, which is useful if\n"
+"you are familiar with the packages being offered or if you want to have\n"
+"total control over what will be installed.\n"
 "\n"
 "If you started the installation in \"Update\" mode, you can unselect all\n"
 "groups to avoid installing any new package. This is useful for repairing or\n"
 "updating an existing system."
 msgstr ""
 
-#: ../../help.pm_.c:116
+#: ../../help.pm_.c:115
 msgid ""
 "Finally, depending on your choice of whether or not to select individual\n"
 "packages, you will be presented a tree containing all packages classified\n"
@@ -2267,7 +2266,7 @@ msgid ""
 "a floppy."
 msgstr ""
 
-#: ../../help.pm_.c:152
+#: ../../help.pm_.c:151
 msgid ""
 "If you wish to connect your computer to the Internet or to a local network,\n"
 "please choose the correct option. Please turn on your device before\n"
@@ -2290,7 +2289,7 @@ msgid ""
 "have finished configuring your network connection, click \"Cancel\"."
 msgstr ""
 
-#: ../../help.pm_.c:173
+#: ../../help.pm_.c:172
 msgid ""
 "You may now choose which services you wish to start at boot time.\n"
 "\n"
@@ -2308,13 +2307,11 @@ msgid ""
 "enabled on a server. In general, select only the services you really need."
 msgstr ""
 
-#: ../../help.pm_.c:189
+#: ../../help.pm_.c:188
 #, fuzzy
 msgid ""
 "GNU/Linux manages time in GMT (Greenwich Manage Time) and translates it in\n"
-"local time according to the time zone you selected.\n"
-"\n"
-"If you use Microsoft Windows on this computer, choose \"No\"."
+"local time according to the time zone you selected."
 msgstr ""
 "GNU/Linux håndterer tid i GMT (Greenwich Mean Time)\n"
 "og oversetter denne til lokal tid ihht. den tidssonen du har valgt\n"
@@ -2322,7 +2319,7 @@ msgstr ""
 "\n"
 "Hvis du bruker Microsoft Windows på denne maskinen, velg \"Nei\"."
 
-#: ../../help.pm_.c:195
+#: ../../help.pm_.c:192
 msgid ""
 "X (for X Window System) is the heart of the GNU/Linux graphical interface\n"
 "on which all the graphics environments (KDE, Gnome, AfterStep,\n"
@@ -2344,7 +2341,7 @@ msgid ""
 "seconds, restoring the screen."
 msgstr ""
 
-#: ../../help.pm_.c:215
+#: ../../help.pm_.c:212
 msgid ""
 "The first time you try the X configuration, you may not be very satisfied\n"
 "with its display (screen is too small, shifted left or right...). Hence,\n"
@@ -2358,7 +2355,7 @@ msgid ""
 "with any modern graphics card. Then choose \"Test again\" to be sure."
 msgstr ""
 
-#: ../../help.pm_.c:227
+#: ../../help.pm_.c:224
 msgid ""
 "Finally, you will be asked whether you want to see the graphical interface\n"
 "at boot. Note this question will be asked even if you chose not to test the\n"
@@ -2367,7 +2364,7 @@ msgid ""
 "configured."
 msgstr ""
 
-#: ../../help.pm_.c:234
+#: ../../help.pm_.c:231
 msgid ""
 "The Mandrake Linux CDROM has a built-in rescue mode. You can access it by\n"
 "booting from the CDROM, press the >>F1<< key at boot and type >>rescue<< at\n"
@@ -2395,7 +2392,7 @@ msgid ""
 "the whole disk."
 msgstr ""
 
-#: ../../help.pm_.c:258
+#: ../../help.pm_.c:255
 msgid ""
 "At this point you need to choose where on your hard drive to install your\n"
 "Mandrake Linux operating system. If your hard drive is empty or if an\n"
@@ -2462,14 +2459,14 @@ msgid ""
 "know what you are doing."
 msgstr ""
 
-#: ../../help.pm_.c:322
+#: ../../help.pm_.c:319
 msgid ""
 "There you are. Installation is now complete and your GNU/Linux system is\n"
 "ready to use. Just click \"OK\" to reboot the system. You can start\n"
 "GNU/Linux or Windows, whichever you prefer (if you are dual-booting), as\n"
 "soon as the computer has booted up again.\n"
 "\n"
-"The \"Advanced\" button shows two more buttons to:\n"
+"The \"Advanced\" button (in Expert mode only) shows two more buttons to:\n"
 "\n"
 " * \"generate auto-install floppy\": to create an installation floppy disk\n"
 "which will automatically perform a whole installation without the help of\n"
@@ -2495,7 +2492,7 @@ msgid ""
 "\"mformat a:\")"
 msgstr ""
 
-#: ../../help.pm_.c:353
+#: ../../help.pm_.c:350
 msgid ""
 "Any partitions that have been newly defined must be formatted for use\n"
 "(formatting means creating a file system).\n"
@@ -2523,7 +2520,7 @@ msgid ""
 "for bad blocks on the disc."
 msgstr ""
 
-#: ../../help.pm_.c:379
+#: ../../help.pm_.c:376
 msgid ""
 "Your new Mandrake Linux operating system is currently being installed.\n"
 "Depending on the number of packages you will be installing and the speed of\n"
@@ -2533,7 +2530,7 @@ msgid ""
 "Please be patient."
 msgstr ""
 
-#: ../../help.pm_.c:387
+#: ../../help.pm_.c:384
 #, fuzzy
 msgid ""
 "Before continuing you should read carefully the terms of the license. It\n"
@@ -2547,7 +2544,7 @@ msgstr ""
 "med alt den sier, klikk på 'Jeg nekter' knappen. Det vil avsluttet\n"
 "installasjonen. For å fortsette installasjonen, klikk på 'Jeg aksepterer'."
 
-#: ../../help.pm_.c:394
+#: ../../help.pm_.c:391
 msgid ""
 "At this point, it is time to choose the security level desired for the\n"
 "machine. As a rule of thumb, the more exposed the machine is, and the more\n"
@@ -2559,7 +2556,7 @@ msgid ""
 "If you do not know what to choose, keep the default option."
 msgstr ""
 
-#: ../../help.pm_.c:404
+#: ../../help.pm_.c:401
 #, fuzzy
 msgid ""
 "At this point, you need to choose what partition(s) will be used for the\n"
@@ -2700,7 +2697,7 @@ msgstr ""
 "laoss si 50 MB, så kan du kanskje lagre en ekstra kjene og ramdiskbilde for "
 "nødsituasjoner."
 
-#: ../../help.pm_.c:463
+#: ../../help.pm_.c:460
 #, fuzzy
 msgid ""
 "More than one Microsoft Windows partition has been detected on your hard\n"
@@ -2770,11 +2767,11 @@ msgstr ""
 "disken\n"
 "eller partisjonen er kalt \"C:\")."
 
-#: ../../help.pm_.c:494
+#: ../../help.pm_.c:491
 msgid "Please be patient. This operation can take several minutes."
 msgstr "Vær tålmodig. Denne operasjonen kan ta flere minutter."
 
-#: ../../help.pm_.c:497
+#: ../../help.pm_.c:494
 msgid ""
 "DrakX now needs to know if you want to perform a default (\"Recommended\")\n"
 "installation or if you want to have greater control (\"Expert\"). You also\n"
@@ -2803,7 +2800,7 @@ msgid ""
 "this unless you know what you are doing."
 msgstr ""
 
-#: ../../help.pm_.c:524
+#: ../../help.pm_.c:521
 msgid ""
 "Normally, DrakX selects the right keyboard for you (depending on the\n"
 "language you have chosen) and you will not even see this step. However, you\n"
@@ -2818,7 +2815,7 @@ msgid ""
 "supported keyboards."
 msgstr ""
 
-#: ../../help.pm_.c:537
+#: ../../help.pm_.c:534
 msgid ""
 "Please choose your preferred language for installation and system usage.\n"
 "\n"
@@ -2833,7 +2830,7 @@ msgid ""
 "additional locales click the \"OK\" button to continue."
 msgstr ""
 
-#: ../../help.pm_.c:550
+#: ../../help.pm_.c:547
 msgid ""
 "By default, DrakX assumes you have a two-button mouse and will set it up\n"
 "for third-button emulation. DrakX will automatically know whether it is a\n"
@@ -2848,7 +2845,7 @@ msgid ""
 "RETURN to \"Cancel\" and choose again."
 msgstr ""
 
-#: ../../help.pm_.c:563
+#: ../../help.pm_.c:560
 #, fuzzy
 msgid ""
 "Please select the correct port. For example, the COM1 port under MS Windows\n"
@@ -2857,7 +2854,7 @@ msgstr ""
 "Vennligst velg den riktige porten. F.eks., COM1 porten\n"
 "under MS Windows blir kalt ttyS0 i GNU/Linux."
 
-#: ../../help.pm_.c:567
+#: ../../help.pm_.c:564
 msgid ""
 "This is the most crucial decision point for the security of your GNU/Linux\n"
 "system: you have to enter the \"root\" password. \"root\" is the system\n"
@@ -2895,16 +2892,58 @@ msgid ""
 "want to choose \"Local files\" for authentication."
 msgstr ""
 
-#: ../../help.pm_.c:603
-#, fuzzy
+#: ../../help.pm_.c:600
 msgid ""
-"Unless you know specifically otherwise, the usual choice is \"/dev/hda\"\n"
-"(primary master IDE disk) or \"/dev/sda\" (first SCSI disk)."
+"LILO and GRUB are boot loaders for GNU/Linux. This stage, normally, is\n"
+"totally automated. In fact, DrakX analyzes the disk boot sector and acts\n"
+"accordingly, depending on what it finds here:\n"
+"\n"
+" * if Windows boot sector is found, it will replace it with a GRUB/LILO "
+"boot\n"
+"sector. Hence, you will be able to load either GNU/Linux or another OS;\n"
+"\n"
+" * if a GRUB or LILO boot sector is found, it will replace it with a new\n"
+"one;\n"
+"\n"
+"If in doubt, DrakX will display a dialog with various options.\n"
+"\n"
+" * \"Boot loader to use\": you have three choices:\n"
+"\n"
+"    * \"LILO with graphical menu\": if you prefer LILO with its graphical\n"
+"interface.\n"
+"\n"
+"    * \"GRUB\": if you prefer GRUB (text menu).\n"
+"\n"
+"    * \"LILO with text menu\": if you prefer LILO with its text menu "
+"interface.\n"
+"\n"
+" * \"Boot device\": in most cases, you will not change the default\n"
+"(\"/dev/hda\"), but if you prefer, the boot loader can be installed on the\n"
+"second hard drive (\"/dev/hdb\"), or even on a floppy disk (\"/dev/fd0\").\n"
+"\n"
+" * \"Delay before booting the default image\": when rebooting the computer,\n"
+"this is the delay granted to the user to choose - in the boot loader menu,\n"
+"another boot entry than the default one.\n"
+"\n"
+"!! Beware that if you choose not to install a boot loader (by selecting\n"
+"\"Cancel\" here), you must ensure that you have a way to boot your Mandrake\n"
+"Linux system! Also be sure you know what you do before changing any of the\n"
+"options. !!\n"
+"\n"
+"Clicking the \"Advanced\" button in this dialog will offer many advanced\n"
+"options, which are reserved to the expert user.\n"
+"\n"
+"Mandrake Linux installs its own boot loader, which will let you boot either\n"
+"GNU/Linux or any other operating systems which you have on your system.\n"
+"\n"
+"If there is another operating system installed on your machine, it will be\n"
+"automatically added to the boot menu. Here, you can choose to fine-tune the\n"
+"existing options. Double-clicking on an existing entry allows you to change\n"
+"its parameters or remove it; \"Add\" creates a new entry; and \"Done\" goes\n"
+"on to the next installation step."
 msgstr ""
-"Hvis du ikke spesifikt vet en annen måte, så er det vanlige valget\n"
-"\"/dev/hda\" (primær IDE-disk) eller \"/dev/sda\" (første SCSI-disk)."
 
-#: ../../help.pm_.c:607
+#: ../../help.pm_.c:647
 #, fuzzy
 msgid ""
 "LILO (the LInux LOader) and GRUB are boot loaders: they are able to boot\n"
@@ -2928,7 +2967,7 @@ msgstr ""
 "andre kan du fjerne linjene for disse. Men i så tilfelle trenger du\n"
 "en oppstartsdiskett for å starte disse!"
 
-#: ../../help.pm_.c:618
+#: ../../help.pm_.c:658
 #, fuzzy
 msgid ""
 "You must indicate where you wish to place the information required to boot\n"
@@ -2944,7 +2983,7 @@ msgstr ""
 "Med mindre du vet akkurat hva du gjør, velg \"Første sektor av\n"
 "disken (MBR)\"."
 
-#: ../../help.pm_.c:625
+#: ../../help.pm_.c:665
 msgid ""
 "Here we select a printing system for your computer to use. Other OSes may\n"
 "offer you one, but Mandrake offers three.\n"
@@ -2975,7 +3014,7 @@ msgid ""
 "networks."
 msgstr ""
 
-#: ../../help.pm_.c:653
+#: ../../help.pm_.c:693
 msgid ""
 "DrakX is now detecting any IDE devices present in your computer. It will\n"
 "also scan for one or more PCI SCSI card(s) on your system. If a SCSI card\n"
@@ -3004,7 +3043,7 @@ msgid ""
 "on your system)."
 msgstr ""
 
-#: ../../help.pm_.c:680
+#: ../../help.pm_.c:720
 #, fuzzy
 msgid ""
 "You can add additional entries for yaboot, either for other operating\n"
@@ -3122,7 +3161,7 @@ msgstr ""
 "with a '*', if you\n"
 "press TAB to see the boot selections."
 
-#: ../../help.pm_.c:725
+#: ../../help.pm_.c:765
 #, fuzzy
 msgid ""
 "Yaboot is a boot loader for NewWorld MacIntosh hardware. It is able to boot\n"
@@ -3201,7 +3240,7 @@ msgstr ""
 "  - Standard OS: Du kan velge hvilket OS som skal lastes når\n"
 "Open Firmwareforsinkelsen er utløpt."
 
-#: ../../help.pm_.c:758
+#: ../../help.pm_.c:798
 msgid ""
 "Here are presented various parameters concerning your machine. Depending on\n"
 "your installed hardware, you may - or not, see the following entries:\n"
@@ -3233,7 +3272,7 @@ msgid ""
 "associated to it."
 msgstr ""
 
-#: ../../help.pm_.c:787
+#: ../../help.pm_.c:827
 #, fuzzy
 msgid ""
 "Choose the hard drive you want to erase to install your new Mandrake Linux\n"
@@ -3244,7 +3283,7 @@ msgstr ""
 "nye Mandrake Linux partisjon. Vær forsiktig, alle data på denne vil gå tapt\n"
 "og kan ikke bli gjenopprettet."
 
-#: ../../help.pm_.c:792
+#: ../../help.pm_.c:832
 #, fuzzy
 msgid ""
 "Click on \"OK\" if you want to delete all data and partitions present on\n"
@@ -3271,7 +3310,7 @@ msgid ""
 "Can't access kernel modules corresponding to your kernel (file %s is missing)"
 msgstr ""
 
-#: ../../install_any.pm_.c:420
+#: ../../install_any.pm_.c:421
 #, c-format
 msgid ""
 "You have selected the following server(s): %s\n"
@@ -3295,20 +3334,20 @@ msgstr ""
 "\n"
 "Ønsker du virkelig å installere disse tjenerene?\n"
 
-#: ../../install_any.pm_.c:456
+#: ../../install_any.pm_.c:457
 msgid "Can't use broadcast with no NIS domain"
 msgstr "Kan ikke bruke broadcast med intet NIS domene"
 
-#: ../../install_any.pm_.c:792
+#: ../../install_any.pm_.c:793
 #, c-format
 msgid "Insert a FAT formatted floppy in drive %s"
 msgstr "Sett inn en FAT-formatert diskett i stasjon %s"
 
-#: ../../install_any.pm_.c:796
+#: ../../install_any.pm_.c:797
 msgid "This floppy is not FAT formatted"
 msgstr "Denne disketten er ikke FAT-formatert"
 
-#: ../../install_any.pm_.c:808
+#: ../../install_any.pm_.c:809
 msgid ""
 "To use this saved packages selection, boot installation with ``linux "
 "defcfg=floppy''"
@@ -3316,7 +3355,7 @@ msgstr ""
 "For å bruke dette valget av pakker, start installasjonen med'linux "
 "defcfg=floppy'"
 
-#: ../../install_any.pm_.c:830 ../../partition_table.pm_.c:736
+#: ../../install_any.pm_.c:831 ../../partition_table.pm_.c:737
 #, c-format
 msgid "Error reading file %s"
 msgstr "Feil ved lesing av fil %s"
@@ -3561,7 +3600,7 @@ msgstr ""
 msgid "Welcome to %s"
 msgstr "Velkommen til %s"
 
-#: ../../install_steps.pm_.c:504 ../../install_steps.pm_.c:707
+#: ../../install_steps.pm_.c:506 ../../install_steps.pm_.c:709
 msgid "No floppy drive available"
 msgstr "Ingen diskettstasjon tilgjengelig"
 
@@ -3630,12 +3669,12 @@ msgstr "Forbereder installasjon"
 msgid "Installing package %s"
 msgstr "Installerer pakke %s"
 
-#: ../../install_steps_graphical.pm_.c:553 ../../install_steps_gtk.pm_.c:626
-#: ../../install_steps_gtk.pm_.c:630
+#: ../../install_steps_graphical.pm_.c:553 ../../install_steps_gtk.pm_.c:633
+#: ../../install_steps_gtk.pm_.c:637
 msgid "Go on anyway?"
 msgstr "Fortsette uansett?"
 
-#: ../../install_steps_graphical.pm_.c:553 ../../install_steps_gtk.pm_.c:626
+#: ../../install_steps_graphical.pm_.c:553 ../../install_steps_gtk.pm_.c:633
 msgid "There was an error ordering packages:"
 msgstr "Det var en feil ved endring av pakkenes rekkefølge:"
 
@@ -3804,7 +3843,7 @@ msgstr "Vennligst vent, forbereder installasjon"
 msgid "%d packages"
 msgstr "%d pakker"
 
-#: ../../install_steps_gtk.pm_.c:583
+#: ../../install_steps_gtk.pm_.c:590
 msgid ""
 "\n"
 "Warning\n"
@@ -3864,15 +3903,15 @@ msgstr ""
 "respective authors and are protected by intellectual property and \n"
 "copyright laws applicable to software programs.\n"
 
-#: ../../install_steps_gtk.pm_.c:611 ../../install_steps_interactive.pm_.c:148
+#: ../../install_steps_gtk.pm_.c:618 ../../install_steps_interactive.pm_.c:148
 msgid "Accept"
 msgstr "Godta"
 
-#: ../../install_steps_gtk.pm_.c:611 ../../install_steps_interactive.pm_.c:148
+#: ../../install_steps_gtk.pm_.c:618 ../../install_steps_interactive.pm_.c:148
 msgid "Refuse"
 msgstr "Nekte"
 
-#: ../../install_steps_gtk.pm_.c:612
+#: ../../install_steps_gtk.pm_.c:619
 #, c-format
 msgid ""
 "Change your Cd-Rom!\n"
@@ -3887,7 +3926,7 @@ msgstr ""
 "ferdig.\n"
 "Hvis du ikke har den trykk Avbryt for å unngå installasjon fra denne CD'en."
 
-#: ../../install_steps_gtk.pm_.c:630
+#: ../../install_steps_gtk.pm_.c:637
 msgid "There was an error installing packages:"
 msgstr "Det var en feil ved installering av pakkene:"
 
@@ -4138,7 +4177,7 @@ msgstr ""
 "For any question on this document, please contact MandrakeSoft S.A.  \n"
 
 #: ../../install_steps_interactive.pm_.c:168
-#: ../../install_steps_interactive.pm_.c:867
+#: ../../install_steps_interactive.pm_.c:871
 #: ../../standalone/keyboarddrake_.c:28
 msgid "Keyboard"
 msgstr "Tastatur"
@@ -4508,7 +4547,8 @@ msgstr "Automatisk tidssynkronisering (ved hjelp av NTP)"
 msgid "NTP Server"
 msgstr "NTP-tjener"
 
-#: ../../install_steps_interactive.pm_.c:855 ../../printerdrake.pm_.c:92
+#: ../../install_steps_interactive.pm_.c:855
+#: ../../install_steps_interactive.pm_.c:863 ../../printerdrake.pm_.c:104
 msgid "Remote CUPS server"
 msgstr "Fjern-CUPS tjener"
 
@@ -4516,96 +4556,96 @@ msgstr "Fjern-CUPS tjener"
 msgid "No printer"
 msgstr "Ingen skriver"
 
-#: ../../install_steps_interactive.pm_.c:863 ../../steps.pm_.c:27
+#: ../../install_steps_interactive.pm_.c:867 ../../steps.pm_.c:27
 msgid "Summary"
 msgstr "Oppsummering"
 
-#: ../../install_steps_interactive.pm_.c:866
+#: ../../install_steps_interactive.pm_.c:870
 msgid "Mouse"
 msgstr "Mus"
 
-#: ../../install_steps_interactive.pm_.c:868
+#: ../../install_steps_interactive.pm_.c:872
 msgid "Timezone"
 msgstr "Tidssone"
 
-#: ../../install_steps_interactive.pm_.c:869 ../../printerdrake.pm_.c:1667
-#: ../../printerdrake.pm_.c:1738
+#: ../../install_steps_interactive.pm_.c:873 ../../printerdrake.pm_.c:1781
+#: ../../printerdrake.pm_.c:1852
 msgid "Printer"
 msgstr "Skriver"
 
-#: ../../install_steps_interactive.pm_.c:871
+#: ../../install_steps_interactive.pm_.c:875
 msgid "ISDN card"
 msgstr "ISDN-kort"
 
-#: ../../install_steps_interactive.pm_.c:874
+#: ../../install_steps_interactive.pm_.c:878
 msgid "Sound card"
 msgstr "Lydkort"
 
-#: ../../install_steps_interactive.pm_.c:877
+#: ../../install_steps_interactive.pm_.c:881
 msgid "TV card"
 msgstr "TV-kort"
 
-#: ../../install_steps_interactive.pm_.c:913
-#: ../../install_steps_interactive.pm_.c:937
+#: ../../install_steps_interactive.pm_.c:917
 #: ../../install_steps_interactive.pm_.c:941
+#: ../../install_steps_interactive.pm_.c:945
 msgid "LDAP"
 msgstr "LDAP"
 
-#: ../../install_steps_interactive.pm_.c:914
-#: ../../install_steps_interactive.pm_.c:937
-#: ../../install_steps_interactive.pm_.c:950
+#: ../../install_steps_interactive.pm_.c:918
+#: ../../install_steps_interactive.pm_.c:941
+#: ../../install_steps_interactive.pm_.c:954
 msgid "NIS"
 msgstr "NIS"
 
-#: ../../install_steps_interactive.pm_.c:915
-#: ../../install_steps_interactive.pm_.c:937
+#: ../../install_steps_interactive.pm_.c:919
+#: ../../install_steps_interactive.pm_.c:941
 msgid "Local files"
 msgstr "Lokale filer"
 
-#: ../../install_steps_interactive.pm_.c:924
-#: ../../install_steps_interactive.pm_.c:925 ../../steps.pm_.c:24
+#: ../../install_steps_interactive.pm_.c:928
+#: ../../install_steps_interactive.pm_.c:929 ../../steps.pm_.c:24
 msgid "Set root password"
 msgstr "Sett root-passord"
 
-#: ../../install_steps_interactive.pm_.c:926
+#: ../../install_steps_interactive.pm_.c:930
 msgid "No password"
 msgstr "Intet passord"
 
-#: ../../install_steps_interactive.pm_.c:931
+#: ../../install_steps_interactive.pm_.c:935
 #, c-format
 msgid "This password is too simple (must be at least %d characters long)"
 msgstr "Dette passordet er for enkelt (må være minst %d tegn langt)"
 
-#: ../../install_steps_interactive.pm_.c:937 ../../network/modem.pm_.c:47
+#: ../../install_steps_interactive.pm_.c:941 ../../network/modem.pm_.c:47
 #: ../../standalone/draknet_.c:604
 msgid "Authentication"
 msgstr "Autentifikasjon"
 
-#: ../../install_steps_interactive.pm_.c:945
+#: ../../install_steps_interactive.pm_.c:949
 msgid "Authentication LDAP"
 msgstr "Autentisering LDAP"
 
-#: ../../install_steps_interactive.pm_.c:946
+#: ../../install_steps_interactive.pm_.c:950
 msgid "LDAP Base dn"
 msgstr "LDAP grunnleggende dn"
 
-#: ../../install_steps_interactive.pm_.c:947
+#: ../../install_steps_interactive.pm_.c:951
 msgid "LDAP Server"
 msgstr "LDAP-tjener"
 
-#: ../../install_steps_interactive.pm_.c:953
+#: ../../install_steps_interactive.pm_.c:957
 msgid "Authentication NIS"
 msgstr "Autentisering NIS"
 
-#: ../../install_steps_interactive.pm_.c:954
+#: ../../install_steps_interactive.pm_.c:958
 msgid "NIS Domain"
 msgstr "NIS-domene"
 
-#: ../../install_steps_interactive.pm_.c:955
+#: ../../install_steps_interactive.pm_.c:959
 msgid "NIS Server"
 msgstr "NIS-tjener"
 
-#: ../../install_steps_interactive.pm_.c:990
+#: ../../install_steps_interactive.pm_.c:994
 msgid ""
 "A custom bootdisk provides a way of booting into your Linux system without\n"
 "depending on the normal bootloader. This is useful if you don't want to "
@@ -4636,19 +4676,19 @@ msgstr ""
 "en diskett\n"
 "i den første stasjonen og trykk \"Ok\"."
 
-#: ../../install_steps_interactive.pm_.c:1006
+#: ../../install_steps_interactive.pm_.c:1010
 msgid "First floppy drive"
 msgstr "Første diskettstasjon"
 
-#: ../../install_steps_interactive.pm_.c:1007
+#: ../../install_steps_interactive.pm_.c:1011
 msgid "Second floppy drive"
 msgstr "Andre diskettstasjon"
 
-#: ../../install_steps_interactive.pm_.c:1008 ../../printerdrake.pm_.c:1356
+#: ../../install_steps_interactive.pm_.c:1012 ../../printerdrake.pm_.c:1390
 msgid "Skip"
 msgstr "Dropp"
 
-#: ../../install_steps_interactive.pm_.c:1013
+#: ../../install_steps_interactive.pm_.c:1017
 msgid ""
 "A custom bootdisk provides a way of booting into your Linux system without\n"
 "depending on the normal bootloader. This is useful if you don't want to "
@@ -4673,28 +4713,28 @@ msgstr ""
 "etter systemsvikt. Ønsker du å opprette en oppstartsdiskett for systemet "
 "ditt?"
 
-#: ../../install_steps_interactive.pm_.c:1022
+#: ../../install_steps_interactive.pm_.c:1026
 msgid "Sorry, no floppy drive available"
 msgstr "Beklager, ingen diskettstasjon tilgjengelig"
 
-#: ../../install_steps_interactive.pm_.c:1026
+#: ../../install_steps_interactive.pm_.c:1030
 msgid "Choose the floppy drive you want to use to make the bootdisk"
 msgstr "Velg diskettstasjonen du ønsker å bruke for å lage oppstartsdisketten"
 
-#: ../../install_steps_interactive.pm_.c:1030
+#: ../../install_steps_interactive.pm_.c:1034
 #, c-format
 msgid "Insert a floppy in drive %s"
 msgstr "Sett inn en diskett i stasjon %s"
 
-#: ../../install_steps_interactive.pm_.c:1033
+#: ../../install_steps_interactive.pm_.c:1037
 msgid "Creating bootdisk"
 msgstr "Oppretter oppstartdiskett"
 
-#: ../../install_steps_interactive.pm_.c:1040
+#: ../../install_steps_interactive.pm_.c:1044
 msgid "Preparing bootloader"
 msgstr "Klargjør oppstartslaster"
 
-#: ../../install_steps_interactive.pm_.c:1051
+#: ../../install_steps_interactive.pm_.c:1055
 msgid ""
 "You appear to have an OldWorld or Unknown\n"
 " machine, the yaboot bootloader will not work for you.\n"
@@ -4706,11 +4746,11 @@ msgstr ""
 "Installasjonen vil fortsette, men du må\n"
 "bruke BootX for å starte din maskin."
 
-#: ../../install_steps_interactive.pm_.c:1056
+#: ../../install_steps_interactive.pm_.c:1060
 msgid "Do you want to use aboot?"
 msgstr "Ønsker du å bruke aboot?"
 
-#: ../../install_steps_interactive.pm_.c:1059
+#: ../../install_steps_interactive.pm_.c:1063
 msgid ""
 "Error installing aboot, \n"
 "try to force installation even if that destroys the first partition?"
@@ -4718,16 +4758,16 @@ msgstr ""
 "Feil ved installasjon av aboot, \n"
 "prøve å installere selv om det ødelegger den første partisjonen?"
 
-#: ../../install_steps_interactive.pm_.c:1066
+#: ../../install_steps_interactive.pm_.c:1070
 #, fuzzy
 msgid "Installing bootloader"
 msgstr "Installer oppstartslaster"
 
-#: ../../install_steps_interactive.pm_.c:1072
+#: ../../install_steps_interactive.pm_.c:1076
 msgid "Installation of bootloader failed. The following error occured:"
 msgstr "Installasjon av oppstartslaster mislykket. Følgende feil oppsto:"
 
-#: ../../install_steps_interactive.pm_.c:1080
+#: ../../install_steps_interactive.pm_.c:1084
 #, c-format
 msgid ""
 "You may need to change your Open Firmware boot-device to\n"
@@ -4738,34 +4778,34 @@ msgid ""
 "At your next boot you should see the bootloader prompt."
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:1088 ../../standalone/draksec_.c:23
+#: ../../install_steps_interactive.pm_.c:1092 ../../standalone/draksec_.c:23
 msgid "Low"
 msgstr "Lav"
 
-#: ../../install_steps_interactive.pm_.c:1089 ../../standalone/draksec_.c:24
+#: ../../install_steps_interactive.pm_.c:1093 ../../standalone/draksec_.c:24
 msgid "Medium"
 msgstr "Medium"
 
-#: ../../install_steps_interactive.pm_.c:1090 ../../standalone/draksec_.c:25
+#: ../../install_steps_interactive.pm_.c:1094 ../../standalone/draksec_.c:25
 msgid "High"
 msgstr "Høy"
 
-#: ../../install_steps_interactive.pm_.c:1094 ../../standalone/draksec_.c:62
+#: ../../install_steps_interactive.pm_.c:1098 ../../standalone/draksec_.c:62
 msgid "Choose security level"
 msgstr "Velg sikkerhetsnivå"
 
-#: ../../install_steps_interactive.pm_.c:1130
+#: ../../install_steps_interactive.pm_.c:1134
 #: ../../standalone/drakautoinst_.c:80
 #, c-format
 msgid "Insert a blank floppy in drive %s"
 msgstr "Sett inn en tom diskett i stasjon %s"
 
-#: ../../install_steps_interactive.pm_.c:1134
+#: ../../install_steps_interactive.pm_.c:1138
 #: ../../standalone/drakautoinst_.c:82
 msgid "Creating auto install floppy"
 msgstr "Oppretter diskett for autoinstallasjon"
 
-#: ../../install_steps_interactive.pm_.c:1145
+#: ../../install_steps_interactive.pm_.c:1149
 msgid ""
 "Some steps are not completed.\n"
 "\n"
@@ -4775,7 +4815,7 @@ msgstr ""
 "\n"
 "Ønsker du virkelig å avslutte nå?"
 
-#: ../../install_steps_interactive.pm_.c:1156
+#: ../../install_steps_interactive.pm_.c:1160
 msgid ""
 "Congratulations, installation is complete.\n"
 "Remove the boot media and press return to reboot.\n"
@@ -4797,11 +4837,11 @@ msgstr ""
 "Informasjon om konfigurering av systemet ditt finnes i post\n"
 "install-kapittelet i Official Mandrake Linux User's Guide."
 
-#: ../../install_steps_interactive.pm_.c:1168
+#: ../../install_steps_interactive.pm_.c:1172
 msgid "Generate auto install floppy"
 msgstr "Oppretter diskett for autoinstallasjon"
 
-#: ../../install_steps_interactive.pm_.c:1170
+#: ../../install_steps_interactive.pm_.c:1174
 msgid ""
 "The auto install can be fully automated if wanted,\n"
 "in that case it will take over the hard drive!!\n"
@@ -4815,15 +4855,15 @@ msgstr ""
 "\n"
 "Du kanskje ønske å kjøre installasjonen omigjen.\n"
 
-#: ../../install_steps_interactive.pm_.c:1175
+#: ../../install_steps_interactive.pm_.c:1179
 msgid "Automated"
 msgstr "Automatisert"
 
-#: ../../install_steps_interactive.pm_.c:1175
+#: ../../install_steps_interactive.pm_.c:1179
 msgid "Replay"
 msgstr "Gjør igjen"
 
-#: ../../install_steps_interactive.pm_.c:1178
+#: ../../install_steps_interactive.pm_.c:1182
 msgid "Save packages selection"
 msgstr "Lagre pakkevalg"
 
@@ -4891,277 +4931,277 @@ msgstr "Ditt valg? (standard %s) "
 msgid "Your choice? (default %s  enter `none' for none) "
 msgstr "Ditt valg? (standard %s  entre `none' for ingen) "
 
-#: ../../keyboard.pm_.c:139 ../../keyboard.pm_.c:177
+#: ../../keyboard.pm_.c:140 ../../keyboard.pm_.c:178
 msgid "Czech (QWERTZ)"
 msgstr "Tsjekkisk (QWERTZ)"
 
-#: ../../keyboard.pm_.c:140 ../../keyboard.pm_.c:154 ../../keyboard.pm_.c:179
+#: ../../keyboard.pm_.c:141 ../../keyboard.pm_.c:155 ../../keyboard.pm_.c:180
 msgid "German"
 msgstr "Tysk"
 
-#: ../../keyboard.pm_.c:141
+#: ../../keyboard.pm_.c:142
 msgid "Dvorak"
 msgstr "Dvorak"
 
-#: ../../keyboard.pm_.c:142 ../../keyboard.pm_.c:185
+#: ../../keyboard.pm_.c:143 ../../keyboard.pm_.c:186
 msgid "Spanish"
 msgstr "Spansk"
 
-#: ../../keyboard.pm_.c:143 ../../keyboard.pm_.c:186
+#: ../../keyboard.pm_.c:144 ../../keyboard.pm_.c:187
 msgid "Finnish"
 msgstr "Finsk"
 
-#: ../../keyboard.pm_.c:144 ../../keyboard.pm_.c:155 ../../keyboard.pm_.c:187
+#: ../../keyboard.pm_.c:145 ../../keyboard.pm_.c:156 ../../keyboard.pm_.c:188
 msgid "French"
 msgstr "Fransk"
 
-#: ../../keyboard.pm_.c:145 ../../keyboard.pm_.c:210
+#: ../../keyboard.pm_.c:146 ../../keyboard.pm_.c:211
 msgid "Norwegian"
 msgstr "Norsk"
 
-#: ../../keyboard.pm_.c:146
+#: ../../keyboard.pm_.c:147
 msgid "Polish"
 msgstr "Polsk"
 
-#: ../../keyboard.pm_.c:147 ../../keyboard.pm_.c:218
+#: ../../keyboard.pm_.c:148 ../../keyboard.pm_.c:219
 msgid "Russian"
 msgstr "Russisk"
 
-#: ../../keyboard.pm_.c:149 ../../keyboard.pm_.c:220
+#: ../../keyboard.pm_.c:150 ../../keyboard.pm_.c:221
 msgid "Swedish"
 msgstr "Svensk"
 
-#: ../../keyboard.pm_.c:150 ../../keyboard.pm_.c:235
+#: ../../keyboard.pm_.c:151 ../../keyboard.pm_.c:236
 msgid "UK keyboard"
 msgstr "UK-tastatur"
 
-#: ../../keyboard.pm_.c:151 ../../keyboard.pm_.c:156 ../../keyboard.pm_.c:236
+#: ../../keyboard.pm_.c:152 ../../keyboard.pm_.c:157 ../../keyboard.pm_.c:237
 msgid "US keyboard"
 msgstr "US-tastatur"
 
-#: ../../keyboard.pm_.c:158
+#: ../../keyboard.pm_.c:159
 msgid "Albanian"
 msgstr "Albansk"
 
-#: ../../keyboard.pm_.c:159
+#: ../../keyboard.pm_.c:160
 msgid "Armenian (old)"
 msgstr "Armensk (gammel)"
 
-#: ../../keyboard.pm_.c:160
+#: ../../keyboard.pm_.c:161
 msgid "Armenian (typewriter)"
 msgstr "Armensk (skrivemaskin)"
 
-#: ../../keyboard.pm_.c:161
+#: ../../keyboard.pm_.c:162
 msgid "Armenian (phonetic)"
 msgstr "Armensk (phonétic)"
 
-#: ../../keyboard.pm_.c:166
+#: ../../keyboard.pm_.c:167
 msgid "Azerbaidjani (latin)"
 msgstr "Azerbaidjansk (latin)"
 
-#: ../../keyboard.pm_.c:168
+#: ../../keyboard.pm_.c:169
 msgid "Belgian"
 msgstr "Belgisk"
 
-#: ../../keyboard.pm_.c:169
+#: ../../keyboard.pm_.c:170
 msgid "Bulgarian"
 msgstr "Bulgarisk"
 
-#: ../../keyboard.pm_.c:170
+#: ../../keyboard.pm_.c:171
 msgid "Brazilian (ABNT-2)"
 msgstr "Brasiliansk (ABNT-2)"
 
-#: ../../keyboard.pm_.c:171
+#: ../../keyboard.pm_.c:172
 msgid "Belarusian"
 msgstr "Belarusian"
 
-#: ../../keyboard.pm_.c:172
+#: ../../keyboard.pm_.c:173
 msgid "Swiss (German layout)"
 msgstr "Sveisisk (tysk oppsett)"
 
-#: ../../keyboard.pm_.c:173
+#: ../../keyboard.pm_.c:174
 msgid "Swiss (French layout)"
 msgstr "Sveisisk (fransk oppsett)"
 
-#: ../../keyboard.pm_.c:178
+#: ../../keyboard.pm_.c:179
 msgid "Czech (QWERTY)"
 msgstr "Tsjekkisk (QWERTY)"
 
-#: ../../keyboard.pm_.c:180
+#: ../../keyboard.pm_.c:181
 msgid "German (no dead keys)"
 msgstr "Tysk (ingen døde taster)"
 
-#: ../../keyboard.pm_.c:181
+#: ../../keyboard.pm_.c:182
 msgid "Danish"
 msgstr "Dansk"
 
-#: ../../keyboard.pm_.c:182
+#: ../../keyboard.pm_.c:183
 msgid "Dvorak (US)"
 msgstr "Dvorak (US)"
 
-#: ../../keyboard.pm_.c:183
+#: ../../keyboard.pm_.c:184
 msgid "Dvorak (Norwegian)"
 msgstr "Dvorak (Norsk)"
 
-#: ../../keyboard.pm_.c:184
+#: ../../keyboard.pm_.c:185
 msgid "Estonian"
 msgstr "Estlandsk"
 
-#: ../../keyboard.pm_.c:188
+#: ../../keyboard.pm_.c:189
 msgid "Georgian (\"Russian\" layout)"
 msgstr "Georgisk (\"Russisk\" oppsett)"
 
-#: ../../keyboard.pm_.c:189
+#: ../../keyboard.pm_.c:190
 msgid "Georgian (\"Latin\" layout)"
 msgstr "Georgisk (\"Latinsk\" oppsett)"
 
-#: ../../keyboard.pm_.c:190
+#: ../../keyboard.pm_.c:191
 msgid "Greek"
 msgstr "Gresk"
 
-#: ../../keyboard.pm_.c:191
+#: ../../keyboard.pm_.c:192
 msgid "Hungarian"
 msgstr "Ungarsk"
 
-#: ../../keyboard.pm_.c:192
+#: ../../keyboard.pm_.c:193
 msgid "Croatian"
 msgstr "Kroatisk"
 
-#: ../../keyboard.pm_.c:193
+#: ../../keyboard.pm_.c:194
 msgid "Israeli"
 msgstr "Israelsk"
 
-#: ../../keyboard.pm_.c:194
+#: ../../keyboard.pm_.c:195
 msgid "Israeli (Phonetic)"
 msgstr "Israelsk (Phonetic)"
 
-#: ../../keyboard.pm_.c:195
+#: ../../keyboard.pm_.c:196
 msgid "Iranian"
 msgstr "Iransk"
 
-#: ../../keyboard.pm_.c:196
+#: ../../keyboard.pm_.c:197
 msgid "Icelandic"
 msgstr "Islansk"
 
-#: ../../keyboard.pm_.c:197
+#: ../../keyboard.pm_.c:198
 msgid "Italian"
 msgstr "Italiensk"
 
-#: ../../keyboard.pm_.c:199
+#: ../../keyboard.pm_.c:200
 msgid "Japanese 106 keys"
 msgstr "Japansk 106 taster"
 
-#: ../../keyboard.pm_.c:200
+#: ../../keyboard.pm_.c:201
 msgid "Korean keyboard"
 msgstr "Koreansk tastatur"
 
-#: ../../keyboard.pm_.c:201
+#: ../../keyboard.pm_.c:202
 msgid "Latin American"
 msgstr "Latinamerikansk"
 
-#: ../../keyboard.pm_.c:202
+#: ../../keyboard.pm_.c:203
 msgid "Lithuanian AZERTY (old)"
 msgstr "Liauisk AZERTY (gammel)"
 
-#: ../../keyboard.pm_.c:204
+#: ../../keyboard.pm_.c:205
 msgid "Lithuanian AZERTY (new)"
 msgstr "Liauisk AZERTY (ny)"
 
-#: ../../keyboard.pm_.c:205
+#: ../../keyboard.pm_.c:206
 msgid "Lithuanian \"number row\" QWERTY"
 msgstr "Litauisk \"nummer-rekke\" QWERTY"
 
-#: ../../keyboard.pm_.c:206
+#: ../../keyboard.pm_.c:207
 msgid "Lithuanian \"phonetic\" QWERTY"
 msgstr "Litauisk \"phonétic\" QWERTY"
 
-#: ../../keyboard.pm_.c:207
+#: ../../keyboard.pm_.c:208
 #, fuzzy
 msgid "Latvian"
 msgstr "Lokasjon"
 
-#: ../../keyboard.pm_.c:208
+#: ../../keyboard.pm_.c:209
 msgid "Macedonian"
 msgstr "Makedonsk"
 
-#: ../../keyboard.pm_.c:209
+#: ../../keyboard.pm_.c:210
 msgid "Dutch"
 msgstr "Hollansk"
 
-#: ../../keyboard.pm_.c:211
+#: ../../keyboard.pm_.c:212
 msgid "Polish (qwerty layout)"
 msgstr "Polsk (qwerty oppsett)"
 
-#: ../../keyboard.pm_.c:212
+#: ../../keyboard.pm_.c:213
 msgid "Polish (qwertz layout)"
 msgstr "Polsk (qwertz oppsett)"
 
-#: ../../keyboard.pm_.c:213
+#: ../../keyboard.pm_.c:214
 msgid "Portuguese"
 msgstr "Portugisisk"
 
-#: ../../keyboard.pm_.c:214
+#: ../../keyboard.pm_.c:215
 msgid "Canadian (Quebec)"
 msgstr "Canadisk (Quebec)"
 
-#: ../../keyboard.pm_.c:216
+#: ../../keyboard.pm_.c:217
 msgid "Romanian (qwertz)"
 msgstr "Romansk (qwertz)"
 
-#: ../../keyboard.pm_.c:217
+#: ../../keyboard.pm_.c:218
 msgid "Romanian (qwerty)"
 msgstr "Romansk (qwerty)"
 
-#: ../../keyboard.pm_.c:219
+#: ../../keyboard.pm_.c:220
 msgid "Russian (Yawerty)"
 msgstr "Russisk (Yawerty)"
 
-#: ../../keyboard.pm_.c:221
+#: ../../keyboard.pm_.c:222
 msgid "Slovenian"
 msgstr "Slovensk"
 
-#: ../../keyboard.pm_.c:225
+#: ../../keyboard.pm_.c:226
 msgid "Slovakian (QWERTZ)"
 msgstr "Slovakisk (QWERTZ)"
 
-#: ../../keyboard.pm_.c:226
+#: ../../keyboard.pm_.c:227
 msgid "Slovakian (QWERTY)"
 msgstr "Slovakisk (QWERTY)"
 
-#: ../../keyboard.pm_.c:228
+#: ../../keyboard.pm_.c:229
 msgid "Serbian (cyrillic)"
 msgstr ""
 
-#: ../../keyboard.pm_.c:229
+#: ../../keyboard.pm_.c:230
 msgid "Thai keyboard"
 msgstr "Thai-tastatur"
 
-#: ../../keyboard.pm_.c:231
+#: ../../keyboard.pm_.c:232
 #, fuzzy
 msgid "Tajik keyboard"
 msgstr "Thai-tastatur"
 
-#: ../../keyboard.pm_.c:232
+#: ../../keyboard.pm_.c:233
 msgid "Turkish (traditional \"F\" model)"
 msgstr "Tyrkisk (tradisjonell \"F\" modell)"
 
-#: ../../keyboard.pm_.c:233
+#: ../../keyboard.pm_.c:234
 msgid "Turkish (modern \"Q\" model)"
 msgstr "Tyrkisk (moderne \"Q\" modell)"
 
-#: ../../keyboard.pm_.c:234
+#: ../../keyboard.pm_.c:235
 msgid "Ukrainian"
 msgstr "Ukrainsk"
 
-#: ../../keyboard.pm_.c:237
+#: ../../keyboard.pm_.c:238
 msgid "US keyboard (international)"
 msgstr "US-tastatur (internasjonal)"
 
-#: ../../keyboard.pm_.c:238
+#: ../../keyboard.pm_.c:239
 msgid "Vietnamese \"numeric row\" QWERTY"
 msgstr "Vietnamesisk \"nummer-rekke\" QWERTY"
 
-#: ../../keyboard.pm_.c:239
+#: ../../keyboard.pm_.c:240
 #, fuzzy
 msgid "Yugoslavian (latin)"
 msgstr "Azerbaidjansk (latin)"
@@ -5331,7 +5371,7 @@ msgstr ""
 
 #: ../../network/adsl.pm_.c:22
 #, fuzzy
-msgid "Alcatel Speedtouch usb"
+msgid "Alcatel speedtouch usb"
 msgstr "speedtouch usb"
 
 #: ../../network/adsl.pm_.c:22
@@ -5386,7 +5426,7 @@ msgstr ""
 "Ikke noe ethernet nettverksadapter har blitt oppdaget i systemet ditt.\n"
 "Jeg kan ikke sette opp denne tilkoblingstypen."
 
-#: ../../network/ethernet.pm_.c:99 ../../standalone/drakgw_.c:232
+#: ../../network/ethernet.pm_.c:99 ../../standalone/drakgw_.c:233
 msgid "Choose the network interface"
 msgstr "Velg nettverksgrensesnitt"
 
@@ -5398,7 +5438,7 @@ msgstr ""
 "mot Internett"
 
 #: ../../network/ethernet.pm_.c:109 ../../network/ethernet.pm_.c:175
-#: ../../standalone/drakgw_.c:223
+#: ../../standalone/drakgw_.c:224
 msgid "Network interface"
 msgstr "Nettverksgrensesnitt"
 
@@ -5874,7 +5914,7 @@ msgstr "(bootp/dhcp)"
 msgid "Automatic IP"
 msgstr "Automatisk IP"
 
-#: ../../network/network.pm_.c:323 ../../printerdrake.pm_.c:385
+#: ../../network/network.pm_.c:323 ../../printerdrake.pm_.c:406
 msgid "IP address should be in format 1.2.3.4"
 msgstr "IP-adresse bør være i format 1.2.3.4"
 
@@ -6026,11 +6066,11 @@ msgstr "Logg inn (brukernavn)"
 msgid "Account Password"
 msgstr "Passord"
 
-#: ../../partition_table.pm_.c:621
+#: ../../partition_table.pm_.c:622
 msgid "Extended partition not supported on this platform"
 msgstr "Utvidet partisjon ikke støttet på denne plattformen"
 
-#: ../../partition_table.pm_.c:639
+#: ../../partition_table.pm_.c:640
 msgid ""
 "You have a hole in your partition table but I can't use it.\n"
 "The only solution is to move your primary partitions to have the hole next "
@@ -6040,16 +6080,16 @@ msgstr ""
 "Den eneste løsningen er å flytte primærpartisjonene dine for å ha hullet ved "
 "siden av de utvidede partisjonene"
 
-#: ../../partition_table.pm_.c:743
+#: ../../partition_table.pm_.c:744
 #, c-format
 msgid "Restoring from file %s failed: %s"
 msgstr "Gjenoppretting fra fil %s mislykket: %s"
 
-#: ../../partition_table.pm_.c:745
+#: ../../partition_table.pm_.c:746
 msgid "Bad backup file"
 msgstr "Dårlig sikkerhetskopi-fil"
 
-#: ../../partition_table.pm_.c:767
+#: ../../partition_table.pm_.c:768
 #, c-format
 msgid "Error writing to file %s"
 msgstr "Feil ved skriving til fil %s"
@@ -6152,21 +6192,21 @@ msgstr "Skriverenhetens URI"
 msgid "Pipe job into a command"
 msgstr "Pipe inn i kommando"
 
-#: ../../printer.pm_.c:333 ../../printer.pm_.c:754
-#: ../../printerdrake.pm_.c:1193 ../../printerdrake.pm_.c:1906
+#: ../../printer.pm_.c:418 ../../printer.pm_.c:839
+#: ../../printerdrake.pm_.c:1227 ../../printerdrake.pm_.c:2020
 msgid "Unknown model"
 msgstr "Ukjent modell"
 
-#: ../../printer.pm_.c:461 ../../printerdrake.pm_.c:756
+#: ../../printer.pm_.c:546 ../../printerdrake.pm_.c:790
 msgid "Raw printer (No driver)"
 msgstr ""
 
-#: ../../printer.pm_.c:608
+#: ../../printer.pm_.c:693
 #, c-format
 msgid "(on %s)"
 msgstr "(på %s)"
 
-#: ../../printer.pm_.c:610
+#: ../../printer.pm_.c:695
 msgid "(on this machine)"
 msgstr "(på denne maskin)"
 
@@ -6190,7 +6230,18 @@ msgstr ""
 "noen skrivere her; skrivere vil bli oppdaget automatisk.\n"
 "Vennligst velg \"Skriver på en fjern-CUPS tjener\" i dette tilfellet."
 
-#: ../../printerdrake.pm_.c:93
+#: ../../printerdrake.pm_.c:84 ../../printerdrake.pm_.c:88
+#: ../../printerdrake.pm_.c:89 ../../printerdrake.pm_.c:159
+#, fuzzy
+msgid "None"
+msgstr "Ferdig"
+
+#: ../../printerdrake.pm_.c:85 ../../printerdrake.pm_.c:160
+#, fuzzy
+msgid "Choose a default printer!"
+msgstr "Velg standard bruker:"
+
+#: ../../printerdrake.pm_.c:105
 msgid ""
 "With remote CUPS servers, you do not have to configure any \n"
 "printer here; CUPS servers inform your machine automatically\n"
@@ -6216,7 +6267,7 @@ msgstr ""
 "CUPS-tjenerens IPa ddresse og eventuelle portnummer for å få\n"
 "skriverinformasjon fra tjeneren, ellers kan du la de feltene være blanke."
 
-#: ../../printerdrake.pm_.c:105
+#: ../../printerdrake.pm_.c:117
 msgid ""
 "\n"
 "Normally, CUPS is automatically configured according to your\n"
@@ -6227,60 +6278,60 @@ msgid ""
 "CUPS afterwards (command: \"service cups restart\")."
 msgstr ""
 
-#: ../../printerdrake.pm_.c:112 ../../printerdrake.pm_.c:1264
-#: ../../printerdrake.pm_.c:1268 ../../printerdrake.pm_.c:1269
-#: ../../printerdrake.pm_.c:1270 ../../printerdrake.pm_.c:1894
+#: ../../printerdrake.pm_.c:124 ../../printerdrake.pm_.c:1298
+#: ../../printerdrake.pm_.c:1302 ../../printerdrake.pm_.c:1303
+#: ../../printerdrake.pm_.c:1304 ../../printerdrake.pm_.c:2008
 msgid "Close"
 msgstr "Lukk"
 
-#: ../../printerdrake.pm_.c:113
+#: ../../printerdrake.pm_.c:125
 msgid "Apply/Re-read printers"
 msgstr "Bruk/Oppfrisk skriverliste"
 
-#: ../../printerdrake.pm_.c:117
+#: ../../printerdrake.pm_.c:129
 msgid "The IP address should look like 192.168.1.20"
 msgstr "IP-adresse bør være i format 1.2.3.4"
 
-#: ../../printerdrake.pm_.c:122 ../../printerdrake.pm_.c:511
+#: ../../printerdrake.pm_.c:134 ../../printerdrake.pm_.c:541
 msgid "The port number should be an integer!"
 msgstr "Portnummer burde være numerisk"
 
-#: ../../printerdrake.pm_.c:129 ../../printerdrake.pm_.c:1978
+#: ../../printerdrake.pm_.c:141 ../../printerdrake.pm_.c:2092
 msgid "Default printer"
 msgstr "Standardskriver"
 
-#: ../../printerdrake.pm_.c:134
+#: ../../printerdrake.pm_.c:146
 msgid "CUPS server IP"
 msgstr "CUPS tjener IP"
 
-#: ../../printerdrake.pm_.c:135 ../../printerdrake.pm_.c:504
+#: ../../printerdrake.pm_.c:147 ../../printerdrake.pm_.c:534
 msgid "Port"
 msgstr "Port"
 
-#: ../../printerdrake.pm_.c:137
+#: ../../printerdrake.pm_.c:149
 #, fuzzy
 msgid "Automatic CUPS configuration"
 msgstr "Konfigurasjon av automatiske skritt"
 
-#: ../../printerdrake.pm_.c:204
+#: ../../printerdrake.pm_.c:217
 #, fuzzy
 msgid "Detecting devices ..."
 msgstr "Finner enheter..."
 
-#: ../../printerdrake.pm_.c:204
+#: ../../printerdrake.pm_.c:217
 msgid "Test ports"
 msgstr "Test porter"
 
-#: ../../printerdrake.pm_.c:225
+#: ../../printerdrake.pm_.c:238
 #, c-format
 msgid "A printer, model \"%s\", has been detected on "
 msgstr "En skriver, modell \"%s\", ble funnet på "
 
-#: ../../printerdrake.pm_.c:242
+#: ../../printerdrake.pm_.c:255
 msgid "Local Printer Device"
 msgstr "Lokal skriverenhet"
 
-#: ../../printerdrake.pm_.c:243
+#: ../../printerdrake.pm_.c:256
 msgid ""
 "What device is your printer connected to \n"
 "(note that /dev/lp0 is equivalent to LPT1:)?\n"
@@ -6288,25 +6339,25 @@ msgstr ""
 "Hvilken enhet er skriveren din koblet til \n"
 "(merk at /dev/lp0 er det samme som LPT1:)?\n"
 
-#: ../../printerdrake.pm_.c:245
+#: ../../printerdrake.pm_.c:258
 msgid "Printer Device"
 msgstr "Skriverenhet"
 
-#: ../../printerdrake.pm_.c:248
+#: ../../printerdrake.pm_.c:261
 msgid "Device/file name missing!"
 msgstr "Enhets/filnavn mangler!"
 
-#: ../../printerdrake.pm_.c:261 ../../printerdrake.pm_.c:664
-#: ../../printerdrake.pm_.c:752
+#: ../../printerdrake.pm_.c:274 ../../printerdrake.pm_.c:698
+#: ../../printerdrake.pm_.c:786
 #, fuzzy
 msgid "Reading printer database ..."
 msgstr "Leser skriverdata: ..."
 
-#: ../../printerdrake.pm_.c:295
+#: ../../printerdrake.pm_.c:312
 msgid "Remote lpd Printer Options"
 msgstr "Opsjoner for fjern-lpd skriver"
 
-#: ../../printerdrake.pm_.c:296
+#: ../../printerdrake.pm_.c:313
 msgid ""
 "To use a remote lpd printer, you need to supply\n"
 "the hostname of the printer server and the printer name\n"
@@ -6316,27 +6367,27 @@ msgstr ""
 "til skrivertjeneren og kønavnet på den tjeneren som\n"
 "jobbene skal plasseres i."
 
-#: ../../printerdrake.pm_.c:299
+#: ../../printerdrake.pm_.c:316
 msgid "Remote host name"
 msgstr "Fjern-vertsnavn"
 
-#: ../../printerdrake.pm_.c:300
+#: ../../printerdrake.pm_.c:317
 msgid "Remote printer name"
 msgstr "Fjern-skrivers navn"
 
-#: ../../printerdrake.pm_.c:303
+#: ../../printerdrake.pm_.c:320
 msgid "Remote host name missing!"
 msgstr "Det eksterne vertsnavnet mangler!"
 
-#: ../../printerdrake.pm_.c:307
+#: ../../printerdrake.pm_.c:324
 msgid "Remote printer name missing!"
 msgstr "Det eksterne vertsnavnet mangler!"
 
-#: ../../printerdrake.pm_.c:371
+#: ../../printerdrake.pm_.c:392
 msgid "SMB (Windows 9x/NT) Printer Options"
 msgstr "Opsjoner for SMB (Windows 9x/NT) skriver"
 
-#: ../../printerdrake.pm_.c:372
+#: ../../printerdrake.pm_.c:393
 msgid ""
 "To print to a SMB printer, you need to provide the\n"
 "SMB host name (Note! It may be different from its\n"
@@ -6350,35 +6401,35 @@ msgstr ""
 "navnet til skriveren du ønsker tilgang til og anvendelige brukernavn,\n"
 "passord og arbeidsgruppeinformasjon."
 
-#: ../../printerdrake.pm_.c:377
+#: ../../printerdrake.pm_.c:398
 msgid "SMB server host"
 msgstr "SMB-tjener vert"
 
-#: ../../printerdrake.pm_.c:378
+#: ../../printerdrake.pm_.c:399
 msgid "SMB server IP"
 msgstr "SMB-tjener IP"
 
-#: ../../printerdrake.pm_.c:379
+#: ../../printerdrake.pm_.c:400
 msgid "Share name"
 msgstr "Navn deling"
 
-#: ../../printerdrake.pm_.c:382
+#: ../../printerdrake.pm_.c:403
 msgid "Workgroup"
 msgstr "Arbeidsgruppe"
 
-#: ../../printerdrake.pm_.c:389
+#: ../../printerdrake.pm_.c:410
 msgid "Either the server name or the server's IP must be given!"
 msgstr "Servernavnet eller serverens IP må oppgis!"
 
-#: ../../printerdrake.pm_.c:393
+#: ../../printerdrake.pm_.c:414
 msgid "Samba share name missing!"
 msgstr "Samba delenavn mangler!"
 
-#: ../../printerdrake.pm_.c:448
+#: ../../printerdrake.pm_.c:473
 msgid "NetWare Printer Options"
 msgstr "NetWare skriveropsjoner"
 
-#: ../../printerdrake.pm_.c:449
+#: ../../printerdrake.pm_.c:474
 msgid ""
 "To print on a NetWare printer, you need to provide the\n"
 "NetWare print server name (Note! it may be different from its\n"
@@ -6390,27 +6441,27 @@ msgstr ""
 "vertsnavn!) så vel som navnet på skriverkøen til skriveren du ønsker\n"
 "adgang til og anvendelige brukernavn og passord."
 
-#: ../../printerdrake.pm_.c:453
+#: ../../printerdrake.pm_.c:478
 msgid "Printer Server"
 msgstr "Skrivertjener"
 
-#: ../../printerdrake.pm_.c:454
+#: ../../printerdrake.pm_.c:479
 msgid "Print Queue Name"
 msgstr "Skriverkø-navn"
 
-#: ../../printerdrake.pm_.c:459
+#: ../../printerdrake.pm_.c:484
 msgid "NCP server name missing!"
 msgstr "NCP servernavn mangler!"
 
-#: ../../printerdrake.pm_.c:463
+#: ../../printerdrake.pm_.c:488
 msgid "NCP queue name missing!"
 msgstr "NCP kønavn mangler!"
 
-#: ../../printerdrake.pm_.c:497
+#: ../../printerdrake.pm_.c:527
 msgid "Socket Printer Options"
 msgstr "Opsjoner for lokal skriver"
 
-#: ../../printerdrake.pm_.c:498
+#: ../../printerdrake.pm_.c:528
 msgid ""
 "To print to a socket printer, you need to provide the\n"
 "host name of the printer and optionally the port number.\n"
@@ -6424,19 +6475,19 @@ msgstr ""
 "9100, på andre tjenere varierer det. Sjekk manualen til\n"
 "din tjener."
 
-#: ../../printerdrake.pm_.c:503
+#: ../../printerdrake.pm_.c:533
 msgid "Printer host name"
 msgstr "Skriverens vertsnavn"
 
-#: ../../printerdrake.pm_.c:507
+#: ../../printerdrake.pm_.c:537
 msgid "Printer host name missing!"
 msgstr "Skriverens vertsnavn mangler!"
 
-#: ../../printerdrake.pm_.c:536 ../../printerdrake.pm_.c:538
+#: ../../printerdrake.pm_.c:566 ../../printerdrake.pm_.c:568
 msgid "Printer Device URI"
 msgstr "Skriverenhet URI"
 
-#: ../../printerdrake.pm_.c:537
+#: ../../printerdrake.pm_.c:567
 msgid ""
 "You can specify directly the URI to access the printer. The URI must fulfill "
 "either the CUPS or the Foomatic specifications. Note that not all URI types "
@@ -6446,11 +6497,11 @@ msgstr ""
 "CUPS eller Foomatic standarden. Ikke alle typer URIer støttes av "
 "købehandlerene."
 
-#: ../../printerdrake.pm_.c:552
+#: ../../printerdrake.pm_.c:582
 msgid "A valid URI must be entered!"
 msgstr "En korrekt URI må oppgis!"
 
-#: ../../printerdrake.pm_.c:648
+#: ../../printerdrake.pm_.c:682
 msgid ""
 "Every printer needs a name (for example lp).\n"
 "The Description and Location fields do not need \n"
@@ -6460,37 +6511,37 @@ msgstr ""
 "Beskrivelsen og lokalisasjonsfeltene trenger ikke \n"
 "å fylles inn. De er brukerkommentarer."
 
-#: ../../printerdrake.pm_.c:651
+#: ../../printerdrake.pm_.c:685
 msgid "Name of printer"
 msgstr "Navn på skriver"
 
-#: ../../printerdrake.pm_.c:652
+#: ../../printerdrake.pm_.c:686
 msgid "Description"
 msgstr "Beskrivelse"
 
-#: ../../printerdrake.pm_.c:653
+#: ../../printerdrake.pm_.c:687
 msgid "Location"
 msgstr "Lokasjon"
 
-#: ../../printerdrake.pm_.c:667
+#: ../../printerdrake.pm_.c:701
 #, fuzzy
 msgid "Preparing printer database ..."
 msgstr "Leser skriverdata: ..."
 
-#: ../../printerdrake.pm_.c:759
+#: ../../printerdrake.pm_.c:793
 msgid "Printer model selection"
 msgstr "Skrivervalg"
 
-#: ../../printerdrake.pm_.c:760
+#: ../../printerdrake.pm_.c:794
 msgid "Which printer model do you have?"
 msgstr "Hva slags type skriver har du?"
 
-#: ../../printerdrake.pm_.c:832
+#: ../../printerdrake.pm_.c:866
 #, fuzzy
 msgid "OKI winprinter configuration"
 msgstr "Modifiser skriverkonfigurasjon"
 
-#: ../../printerdrake.pm_.c:833
+#: ../../printerdrake.pm_.c:867
 msgid ""
 "You are configuring an OKI laser winprinter. These printers\n"
 "use a very special communication protocol and therefore they\n"
@@ -6502,12 +6553,12 @@ msgid ""
 "by the driver."
 msgstr ""
 
-#: ../../printerdrake.pm_.c:882 ../../printerdrake.pm_.c:912
+#: ../../printerdrake.pm_.c:916 ../../printerdrake.pm_.c:946
 #, fuzzy
 msgid "Lexmark inkjet configuration"
 msgstr "Internett-konfigurasjon"
 
-#: ../../printerdrake.pm_.c:883
+#: ../../printerdrake.pm_.c:917
 msgid ""
 "The inkjet printer drivers provided by Lexmark only support\n"
 "local printers, no printers on remote machines or print server\n"
@@ -6515,7 +6566,7 @@ msgid ""
 "configure it on the machine where it is connected to."
 msgstr ""
 
-#: ../../printerdrake.pm_.c:913
+#: ../../printerdrake.pm_.c:947
 msgid ""
 "To be able to print with your Lexmark inkjet and this\n"
 "configuration, you need the inkjet printer drivers\n"
@@ -6531,7 +6582,7 @@ msgid ""
 "settings with this program."
 msgstr ""
 
-#: ../../printerdrake.pm_.c:1045
+#: ../../printerdrake.pm_.c:1079
 msgid ""
 "Printer default settings\n"
 "You should make sure that the page size and the\n"
@@ -6544,33 +6595,33 @@ msgstr ""
 "er satt riktig. Merk deg at veldig god utskriftskvalitet\n"
 "kan gjøre utskriften treg."
 
-#: ../../printerdrake.pm_.c:1056
+#: ../../printerdrake.pm_.c:1090
 #, c-format
 msgid "Option %s must be an integer number!"
 msgstr "Valg %s må være ett helt tall!"
 
-#: ../../printerdrake.pm_.c:1060
+#: ../../printerdrake.pm_.c:1094
 #, c-format
 msgid "Option %s must be a number!"
 msgstr "Valg %s må være ett tall!"
 
-#: ../../printerdrake.pm_.c:1065
+#: ../../printerdrake.pm_.c:1099
 #, c-format
 msgid "Option %s out of range!"
 msgstr "Valg %s er utenfor rekkevidden!"
 
-#: ../../printerdrake.pm_.c:1102
+#: ../../printerdrake.pm_.c:1136
 #, fuzzy, c-format
 msgid ""
 "Do you want to set this printer (\"%s\")\n"
 "as the default printer?"
 msgstr "Ønsker du virkelig å fjerne skriveren \"%s\"?"
 
-#: ../../printerdrake.pm_.c:1118
+#: ../../printerdrake.pm_.c:1152
 msgid "Test pages"
 msgstr "Testsider"
 
-#: ../../printerdrake.pm_.c:1119
+#: ../../printerdrake.pm_.c:1153
 msgid ""
 "Please select the test pages you want to print.\n"
 "Note: the photo test page can take a rather long time to get printed\n"
@@ -6583,35 +6634,35 @@ msgstr ""
 "skrives ut i det hele tatt. Som regel vil det holde å\n"
 "skrive ut standard testside."
 
-#: ../../printerdrake.pm_.c:1124
+#: ../../printerdrake.pm_.c:1158
 msgid "No test pages"
 msgstr "Ingen testsider"
 
-#: ../../printerdrake.pm_.c:1125
+#: ../../printerdrake.pm_.c:1159
 msgid "Print"
 msgstr "Skriv ut"
 
-#: ../../printerdrake.pm_.c:1127
+#: ../../printerdrake.pm_.c:1161
 msgid "Standard test page"
 msgstr "Standard testside"
 
-#: ../../printerdrake.pm_.c:1130
+#: ../../printerdrake.pm_.c:1164
 msgid "Alternative test page (Letter)"
 msgstr "Alternativ testside (letter)"
 
-#: ../../printerdrake.pm_.c:1133
+#: ../../printerdrake.pm_.c:1167
 msgid "Alternative test page (A4)"
 msgstr "Alternativ testside (A4)"
 
-#: ../../printerdrake.pm_.c:1135
+#: ../../printerdrake.pm_.c:1169
 msgid "Photo test page"
 msgstr "Fototestside"
 
-#: ../../printerdrake.pm_.c:1141 ../../printerdrake.pm_.c:1271
+#: ../../printerdrake.pm_.c:1175 ../../printerdrake.pm_.c:1305
 msgid "Printing test page(s)..."
 msgstr "Skriver ut testside(r)..."
 
-#: ../../printerdrake.pm_.c:1166
+#: ../../printerdrake.pm_.c:1200
 #, c-format
 msgid ""
 "Test page(s) have been sent to the printer.\n"
@@ -6626,7 +6677,7 @@ msgstr ""
 "%s\n"
 "\n"
 
-#: ../../printerdrake.pm_.c:1170
+#: ../../printerdrake.pm_.c:1204
 msgid ""
 "Test page(s) have been sent to the printer.\n"
 "It may take some time before the printer starts.\n"
@@ -6634,22 +6685,22 @@ msgstr ""
 "Testsiden(e) har blitt sendt til skriver-daemonen.\n"
 "Det kan ta litt tid før skriveren starter.\n"
 
-#: ../../printerdrake.pm_.c:1177
+#: ../../printerdrake.pm_.c:1211
 msgid "Did it work properly?"
 msgstr "Virker det som det skal?"
 
-#: ../../printerdrake.pm_.c:1195 ../../printerdrake.pm_.c:1908
+#: ../../printerdrake.pm_.c:1229 ../../printerdrake.pm_.c:2022
 #, fuzzy
 msgid "Raw printer"
 msgstr "Ingen skriver"
 
-#: ../../printerdrake.pm_.c:1203
+#: ../../printerdrake.pm_.c:1237
 msgid ""
 "To print a file from the command line (terminal window) you can either use "
 "the command \"lpr"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:1205
+#: ../../printerdrake.pm_.c:1239
 msgid ""
 " <file>\" or a graphical printing tool: \"xpp <file>\" or \"qtcups <file>\". "
 "The graphical tools allow you to choose the printer and to modify the option "
@@ -6659,8 +6710,8 @@ msgid ""
 "because the file to print is provided by the application.\n"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:1209 ../../printerdrake.pm_.c:1223
-#: ../../printerdrake.pm_.c:1237
+#: ../../printerdrake.pm_.c:1243 ../../printerdrake.pm_.c:1257
+#: ../../printerdrake.pm_.c:1271
 msgid ""
 "\n"
 "The \"lpr\" command also allows to modify the option settings for a "
@@ -6668,7 +6719,7 @@ msgid ""
 "line, e. g. \"lpr"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:1212
+#: ../../printerdrake.pm_.c:1246
 msgid ""
 " -o option=setting -o switch <file>\". To get a list of the options "
 "available for the current printer read either the list shown below or click "
@@ -6676,12 +6727,12 @@ msgid ""
 "\n"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:1217 ../../printerdrake.pm_.c:1231
+#: ../../printerdrake.pm_.c:1251 ../../printerdrake.pm_.c:1265
 msgid ""
 "To print a file from the command line (terminal window) use the command \"lpr"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:1219 ../../printerdrake.pm_.c:1233
+#: ../../printerdrake.pm_.c:1253 ../../printerdrake.pm_.c:1267
 msgid ""
 " <file>\".\n"
 "This command you can also use in the \"Printing command\" field of the "
@@ -6689,7 +6740,7 @@ msgid ""
 "because the file to print is provided by the application.\n"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:1226
+#: ../../printerdrake.pm_.c:1260
 msgid ""
 " -Z option=setting -Z switch <file>\". To get a list of the options "
 "available for the current printer click on the \"Print option list\" "
@@ -6697,7 +6748,7 @@ msgid ""
 "\n"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:1240
+#: ../../printerdrake.pm_.c:1274
 msgid ""
 " -o option=setting -o switch <file>\". To get a list of the options "
 "available for the current printer click on the \"Print option list\" "
@@ -6705,16 +6756,16 @@ msgid ""
 "\n"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:1245
+#: ../../printerdrake.pm_.c:1279
 msgid ""
 "To print a file from the command line (terminal window) use the command \"pdq"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:1247
+#: ../../printerdrake.pm_.c:1281
 msgid " <file>\" or \"lpr"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:1249
+#: ../../printerdrake.pm_.c:1283
 msgid ""
 " <file>\".\n"
 "This command you can also use in the \"Printing command\" field of the "
@@ -6728,7 +6779,7 @@ msgid ""
 "jams.\n"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:1255
+#: ../../printerdrake.pm_.c:1289
 msgid ""
 "\n"
 "The \"pdq\" and \"lpr\" commands also allow to modify the option settings "
@@ -6736,7 +6787,7 @@ msgid ""
 "command line, e. g. \"pdq"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:1258
+#: ../../printerdrake.pm_.c:1292
 msgid ""
 " -aoption=setting -oswitch <file>\".  To get a list of the options available "
 "for the current printer read either the list shown below or click on the "
@@ -6744,27 +6795,27 @@ msgid ""
 "\n"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:1266
+#: ../../printerdrake.pm_.c:1300
 #, fuzzy, c-format
 msgid "Printing on the printer \"%s\""
 msgstr "Tar ned nettverket"
 
-#: ../../printerdrake.pm_.c:1268
+#: ../../printerdrake.pm_.c:1302
 #, fuzzy
 msgid "Print option list"
 msgstr "Opsjoner for skriver"
 
-#: ../../printerdrake.pm_.c:1292 ../../printerdrake.pm_.c:1635
+#: ../../printerdrake.pm_.c:1326 ../../printerdrake.pm_.c:1749
 #: ../../standalone/printerdrake_.c:48
 msgid "Reading printer data ..."
 msgstr "Leser skriverdata: ..."
 
-#: ../../printerdrake.pm_.c:1312 ../../printerdrake.pm_.c:1350
-#: ../../printerdrake.pm_.c:1385
+#: ../../printerdrake.pm_.c:1346 ../../printerdrake.pm_.c:1384
+#: ../../printerdrake.pm_.c:1419
 msgid "Transfer printer configuration"
 msgstr "Overfør skriverkonfigurasjon"
 
-#: ../../printerdrake.pm_.c:1313
+#: ../../printerdrake.pm_.c:1347
 #, c-format
 msgid ""
 "You can copy the printer configuration which you have done \n"
@@ -6781,7 +6832,7 @@ msgstr ""
 "ikke jobber.\n"
 "Ikke alle køer kan overføres grunnet:\n"
 
-#: ../../printerdrake.pm_.c:1321
+#: ../../printerdrake.pm_.c:1355
 msgid ""
 "CUPS does not support printers on Novell servers or printers\n"
 "sending the data into a free-formed command.\n"
@@ -6789,7 +6840,7 @@ msgstr ""
 "CUPS støtter ikke skrivere på Novelltjenere eller skrivere som\n"
 "sender dataene inn i en fritt formet kommando.\n"
 
-#: ../../printerdrake.pm_.c:1324
+#: ../../printerdrake.pm_.c:1358
 msgid ""
 "PDQ only supports local printers, remote LPD printers, and\n"
 "Socket/TCP printers.\n"
@@ -6797,11 +6848,11 @@ msgstr ""
 "PDQ støtter bare lokale skrivere, fjern-LPD skrivere, og\n"
 "Socket/TCP skrivere.\n"
 
-#: ../../printerdrake.pm_.c:1327
+#: ../../printerdrake.pm_.c:1361
 msgid "LPD and LPRng do not support IPP printers.\n"
 msgstr "LPD og LPRng støtter ikke IPP skrivere.\n"
 
-#: ../../printerdrake.pm_.c:1329
+#: ../../printerdrake.pm_.c:1363
 msgid ""
 "In addition, queues not created with this program or\n"
 "\"foomatic-configure\" cannot be transferred."
@@ -6809,7 +6860,7 @@ msgstr ""
 "I tillegg, køer laget med dette programmet\n"
 "eller \"foomatic -configure\" kan ikke overflyttes."
 
-#: ../../printerdrake.pm_.c:1331
+#: ../../printerdrake.pm_.c:1365
 msgid ""
 "\n"
 "Also printers configured with the PPD files provided by\n"
@@ -6820,7 +6871,7 @@ msgstr ""
 "Skrivere konfigurert med PPD filene som produsenten har\n"
 "laget eller med CUPS drivere ikke ikke overflyttes."
 
-#: ../../printerdrake.pm_.c:1334
+#: ../../printerdrake.pm_.c:1368
 msgid ""
 "\n"
 "Mark the printers which you want to transfer and click \n"
@@ -6830,15 +6881,15 @@ msgstr ""
 "Velg skriverene som du vil overflytte og klikk\n"
 "\"Overfør\"."
 
-#: ../../printerdrake.pm_.c:1337
+#: ../../printerdrake.pm_.c:1371
 msgid "Do not transfer printers"
 msgstr "Ikke overfør skrivere"
 
-#: ../../printerdrake.pm_.c:1338 ../../printerdrake.pm_.c:1355
+#: ../../printerdrake.pm_.c:1372 ../../printerdrake.pm_.c:1389
 msgid "Transfer"
 msgstr "Overfør"
 
-#: ../../printerdrake.pm_.c:1351
+#: ../../printerdrake.pm_.c:1385
 #, c-format
 msgid ""
 "A printer named \"%s\" already exists under %s. \n"
@@ -6849,11 +6900,11 @@ msgstr ""
 "Klikk \"Overfør\" for å overskrive.\n"
 "Du kan også gi ett nytt skrivernavn, eller hoppe over denne skriveren."
 
-#: ../../printerdrake.pm_.c:1359
+#: ../../printerdrake.pm_.c:1393
 msgid "Name of printer should contain only letters, numbers and the underscore"
 msgstr "Skrivernavn bør inneholde kun bokstaver, tall og understrek"
 
-#: ../../printerdrake.pm_.c:1364
+#: ../../printerdrake.pm_.c:1398
 #, c-format
 msgid ""
 "The printer \"%s\" already exists,\n"
@@ -6862,16 +6913,16 @@ msgstr ""
 "Skriveren \"%s\" eksisterer allerede,\n"
 "ønsker du å overskrive dens konfigurasjon?"
 
-#: ../../printerdrake.pm_.c:1372
+#: ../../printerdrake.pm_.c:1406
 msgid "New printer name"
 msgstr "Nytt skrivernavn"
 
-#: ../../printerdrake.pm_.c:1375
+#: ../../printerdrake.pm_.c:1409
 #, c-format
 msgid "Transferring %s ..."
 msgstr "Overfører %s ..."
 
-#: ../../printerdrake.pm_.c:1386
+#: ../../printerdrake.pm_.c:1420
 #, c-format
 msgid ""
 "You have transferred your former default printer (\"%s\"),\n"
@@ -6879,45 +6930,108 @@ msgid ""
 "new printing system %s?"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:1397
+#: ../../printerdrake.pm_.c:1431
 #, fuzzy
 msgid "Refreshing printer data ..."
 msgstr "Leser skriverdata: ..."
 
-#: ../../printerdrake.pm_.c:1421 ../../printerdrake.pm_.c:1433
-#: ../../printerdrake.pm_.c:1435
+#: ../../printerdrake.pm_.c:1439 ../../printerdrake.pm_.c:1502
+#: ../../printerdrake.pm_.c:1523
+#, fuzzy
+msgid "Configuration of a remote printer"
+msgstr "Konfigurasjon Lilo/Grub"
+
+#: ../../printerdrake.pm_.c:1440
+#, fuzzy
+msgid "Starting network ..."
+msgstr "Starter tilkoblingen din..."
+
+#: ../../printerdrake.pm_.c:1462 ../../printerdrake.pm_.c:1470
+#: ../../printerdrake.pm_.c:1472
 #, fuzzy
 msgid "Configure the network now"
 msgstr "Konfigurer nettverk"
 
-#: ../../printerdrake.pm_.c:1422
+#: ../../printerdrake.pm_.c:1463
 #, fuzzy
 msgid "Network functionality not configured"
 msgstr "Monitor er ikke konfigurert"
 
-#: ../../printerdrake.pm_.c:1423
-#, c-format
+#: ../../printerdrake.pm_.c:1464
 msgid ""
-"The printing system which you are going to use (%s) needs basic \n"
-"network functionality, but your network functionality is not\n"
-"configured yet. If you go on without network configuration, your\n"
-"printing system will set up a network only consisting of the \n"
-"local machine which does not allow the usage of remote printers\n"
-"or the sharing of a local printer with remote clients, but you\n"
-"can set up local printers usable from your local machine. How do\n"
-" you want to proceed?"
+"You are going to configure a remote printer. This needs working\n"
+"network access, but your network is not configured yet. If you\n"
+"go on without network configuration, you will not be able to\n"
+"use the printer which you are configuring now. How do you want \n"
+"to proceed?"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:1434
+#: ../../printerdrake.pm_.c:1471
 #, fuzzy
 msgid "Go on without configuring the network"
 msgstr "Konfigurerer nettverk"
 
-#: ../../printerdrake.pm_.c:1474
+#: ../../printerdrake.pm_.c:1504
+msgid ""
+"The network configuration done during the installation \n"
+"cannot be started now. Please check whether the network\n"
+"gets accessable after booting your system and correct the\n"
+"configuration using the Mandrake Control Center, section\n"
+"\"Network & Internet\"/\"Connection\", and afterwards set\n"
+"up the printer, also using the Mandrake Control Center,\n"
+"section \"Hardware\"/\"Printer\""
+msgstr ""
+
+#: ../../printerdrake.pm_.c:1511
+msgid ""
+"The network access was not running and could not be \n"
+"started. Please check your configuration and your \n"
+"hardware. Then try to configure your remote printer\n"
+"again."
+msgstr ""
+
+#: ../../printerdrake.pm_.c:1524
+#, fuzzy
+msgid "Restarting printing system ..."
+msgstr "Leser skriverdata: ..."
+
+#: ../../printerdrake.pm_.c:1556
+#, fuzzy
+msgid "high"
+msgstr "Høy"
+
+#: ../../printerdrake.pm_.c:1556
+#, fuzzy
+msgid "paranoid"
+msgstr "Paranoid"
+
+#: ../../printerdrake.pm_.c:1557
+#, c-format
+msgid "Installing a printing system in the %s security level"
+msgstr ""
+
+#: ../../printerdrake.pm_.c:1558
+#, c-format
+msgid ""
+"You are about to install the printing system %s on\n"
+"a system running in the %s security level.\n"
+"\n"
+"This printing system runs a daemon (background process)\n"
+"which waits for print jobs and handles them. This daemon\n"
+"is also accessable by remote machines through the network\n"
+"and so it is a possible point for attacks. Therefore only\n"
+"a few selected daemons are started by default in this\n"
+"security level.\n"
+"\n"
+"Do you really want to configure printing on this\n"
+"machine?"
+msgstr ""
+
+#: ../../printerdrake.pm_.c:1592
 msgid "Starting the printing system at boot time"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:1475
+#: ../../printerdrake.pm_.c:1593
 #, c-format
 msgid ""
 "The printing system (%s) will not be started automatically\n"
@@ -6931,52 +7045,52 @@ msgid ""
 "system turned on again?"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:1497 ../../printerdrake.pm_.c:1532
-#: ../../printerdrake.pm_.c:1562 ../../printerdrake.pm_.c:1595
-#: ../../printerdrake.pm_.c:1672
+#: ../../printerdrake.pm_.c:1620 ../../printerdrake.pm_.c:1652
+#: ../../printerdrake.pm_.c:1679 ../../printerdrake.pm_.c:1709
+#: ../../printerdrake.pm_.c:1786
 msgid "Checking installed software..."
 msgstr "Sjekker installert programvare..."
 
-#: ../../printerdrake.pm_.c:1536
+#: ../../printerdrake.pm_.c:1656
 msgid "Removing LPRng..."
 msgstr "Fjerner LPRng..."
 
-#: ../../printerdrake.pm_.c:1566
+#: ../../printerdrake.pm_.c:1683
 msgid "Removing LPD..."
 msgstr "Fjerner LPD..."
 
-#: ../../printerdrake.pm_.c:1621
+#: ../../printerdrake.pm_.c:1735
 msgid "Select Printer Spooler"
 msgstr "Velg skrivertkøbehandler"
 
-#: ../../printerdrake.pm_.c:1622
+#: ../../printerdrake.pm_.c:1736
 msgid "Which printing system (spooler) do you want to use?"
 msgstr "Hvilket utskriftsystem (spooler) ønsker du å bruke?"
 
-#: ../../printerdrake.pm_.c:1653
+#: ../../printerdrake.pm_.c:1767
 #, fuzzy, c-format
 msgid "Configuring printer \"%s\" ..."
 msgstr "Konfigurer skriver"
 
-#: ../../printerdrake.pm_.c:1700 ../../printerdrake.pm_.c:1732
-#: ../../printerdrake.pm_.c:1909 ../../printerdrake.pm_.c:1971
+#: ../../printerdrake.pm_.c:1814 ../../printerdrake.pm_.c:1846
+#: ../../printerdrake.pm_.c:2023 ../../printerdrake.pm_.c:2085
 msgid "Printer options"
 msgstr "Opsjoner for skriver"
 
-#: ../../printerdrake.pm_.c:1709
+#: ../../printerdrake.pm_.c:1823
 #, fuzzy
 msgid "Preparing PrinterDrake ..."
 msgstr "Leser skriverdata: ..."
 
-#: ../../printerdrake.pm_.c:1739
+#: ../../printerdrake.pm_.c:1853
 msgid "Would you like to configure printing?"
 msgstr "Ønsker du å konfigurere en skriver?"
 
-#: ../../printerdrake.pm_.c:1751
+#: ../../printerdrake.pm_.c:1865
 msgid "Printing system: "
 msgstr ""
 
-#: ../../printerdrake.pm_.c:1765
+#: ../../printerdrake.pm_.c:1879
 msgid ""
 "The following printers are configured.\n"
 "Click on one of them to modify it or\n"
@@ -6984,34 +7098,34 @@ msgid ""
 "\"Add Printer\" to add a new printer."
 msgstr ""
 
-#: ../../printerdrake.pm_.c:1771 ../../standalone/draknet_.c:301
+#: ../../printerdrake.pm_.c:1885 ../../standalone/draknet_.c:301
 msgid "Normal Mode"
 msgstr "Normalt modus"
 
-#: ../../printerdrake.pm_.c:1777 ../../printerdrake.pm_.c:1893
+#: ../../printerdrake.pm_.c:1891 ../../printerdrake.pm_.c:2007
 msgid " (Default)"
 msgstr " (Standard)"
 
-#: ../../printerdrake.pm_.c:1781 ../../printerdrake.pm_.c:1821
+#: ../../printerdrake.pm_.c:1895 ../../printerdrake.pm_.c:1935
 #, fuzzy
 msgid "Printer(s) on remote CUPS server(s)"
 msgstr "Skriver på fjern-CUPS tjener"
 
-#: ../../printerdrake.pm_.c:1782 ../../printerdrake.pm_.c:1822
+#: ../../printerdrake.pm_.c:1896 ../../printerdrake.pm_.c:1936
 #, fuzzy
 msgid "Printer(s) on remote server(s)"
 msgstr "Skriver på fjern-CUPS tjener"
 
-#: ../../printerdrake.pm_.c:1784 ../../printerdrake.pm_.c:1805
-#: ../../printerdrake.pm_.c:1808 ../../printerdrake.pm_.c:1857
+#: ../../printerdrake.pm_.c:1898 ../../printerdrake.pm_.c:1919
+#: ../../printerdrake.pm_.c:1922 ../../printerdrake.pm_.c:1971
 msgid "Add printer"
 msgstr "Legg til skriver"
 
-#: ../../printerdrake.pm_.c:1886
+#: ../../printerdrake.pm_.c:2000
 msgid "Modify printer configuration"
 msgstr "Modifiser skriverkonfigurasjon"
 
-#: ../../printerdrake.pm_.c:1887
+#: ../../printerdrake.pm_.c:2001
 #, c-format
 msgid ""
 "Printer %s: %s %s\n"
@@ -7020,58 +7134,58 @@ msgstr ""
 "Skriver %s %s %s\n"
 "Hva ønsker du å forandre på, på denne maskinen?"
 
-#: ../../printerdrake.pm_.c:1895
+#: ../../printerdrake.pm_.c:2009
 msgid "Do it!"
 msgstr "Gjør det!"
 
-#: ../../printerdrake.pm_.c:1898 ../../printerdrake.pm_.c:1945
+#: ../../printerdrake.pm_.c:2012 ../../printerdrake.pm_.c:2059
 msgid "Printer connection type"
 msgstr "Skrivertilkoblingstype"
 
-#: ../../printerdrake.pm_.c:1899 ../../printerdrake.pm_.c:1949
+#: ../../printerdrake.pm_.c:2013 ../../printerdrake.pm_.c:2063
 msgid "Printer name, description, location"
 msgstr "Skrivernavn, beskrivelse, sted"
 
-#: ../../printerdrake.pm_.c:1901 ../../printerdrake.pm_.c:1964
+#: ../../printerdrake.pm_.c:2015 ../../printerdrake.pm_.c:2078
 msgid "Printer manufacturer, model, driver"
 msgstr "Skriverprodusent, modell, driver"
 
-#: ../../printerdrake.pm_.c:1902 ../../printerdrake.pm_.c:1965
+#: ../../printerdrake.pm_.c:2016 ../../printerdrake.pm_.c:2079
 msgid "Printer manufacturer, model"
 msgstr "Skriverprodusent, modell"
 
-#: ../../printerdrake.pm_.c:1911 ../../printerdrake.pm_.c:1975
+#: ../../printerdrake.pm_.c:2025 ../../printerdrake.pm_.c:2089
 msgid "Set this printer as the default"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:1912 ../../printerdrake.pm_.c:1980
+#: ../../printerdrake.pm_.c:2026 ../../printerdrake.pm_.c:2094
 msgid "Print test pages"
 msgstr "Skriver ut testsider"
 
-#: ../../printerdrake.pm_.c:1913 ../../printerdrake.pm_.c:1982
+#: ../../printerdrake.pm_.c:2027 ../../printerdrake.pm_.c:2096
 msgid "Know how to print with this printer"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:1914 ../../printerdrake.pm_.c:1984
+#: ../../printerdrake.pm_.c:2028 ../../printerdrake.pm_.c:2098
 msgid "Remove printer"
 msgstr "Fjern skriver"
 
-#: ../../printerdrake.pm_.c:1954
+#: ../../printerdrake.pm_.c:2068
 #, fuzzy, c-format
 msgid "Removing old printer \"%s\" ..."
 msgstr "Leser skriverdata: ..."
 
-#: ../../printerdrake.pm_.c:1979
+#: ../../printerdrake.pm_.c:2093
 #, c-format
 msgid "The printer \"%s\" is set as the default printer now."
 msgstr ""
 
-#: ../../printerdrake.pm_.c:1986
+#: ../../printerdrake.pm_.c:2100
 #, c-format
 msgid "Do you really want to remove the printer \"%s\"?"
 msgstr "Ønsker du virkelig å fjerne skriveren \"%s\"?"
 
-#: ../../printerdrake.pm_.c:1988
+#: ../../printerdrake.pm_.c:2102
 #, fuzzy, c-format
 msgid "Removing printer \"%s\" ..."
 msgstr "Leser skriverdata: ..."
@@ -7599,7 +7713,7 @@ msgstr ""
 "Vennligst velg for hvert steg om det skal være som under installasjonen, "
 "eller manuelt"
 
-#: ../../standalone/drakautoinst_.c:112 ../../standalone/drakgw_.c:598
+#: ../../standalone/drakautoinst_.c:112 ../../standalone/drakgw_.c:599
 msgid "Congratulations!"
 msgstr "Gratulerer!"
 
@@ -7611,15 +7725,15 @@ msgstr ""
 "Disketten har blitt generert.\n"
 "Du kan nå gjennomføre installasjonen på nytt."
 
-#: ../../standalone/drakgw_.c:37 ../../standalone/drakgw_.c:180
+#: ../../standalone/drakgw_.c:36 ../../standalone/drakgw_.c:181
 msgid "Internet Connection Sharing"
 msgstr "Deling av Internett tilkobling"
 
-#: ../../standalone/drakgw_.c:118
+#: ../../standalone/drakgw_.c:119
 msgid "Internet Connection Sharing currently enabled"
 msgstr "Deling av Internett tilkobling er slått på"
 
-#: ../../standalone/drakgw_.c:119
+#: ../../standalone/drakgw_.c:120
 msgid ""
 "The setup of Internet connection sharing has already been done.\n"
 "It's currently enabled.\n"
@@ -7631,31 +7745,31 @@ msgstr ""
 "\n"
 "Hva vil du gjøre?"
 
-#: ../../standalone/drakgw_.c:123
+#: ../../standalone/drakgw_.c:124
 msgid "disable"
 msgstr "slå av"
 
-#: ../../standalone/drakgw_.c:123 ../../standalone/drakgw_.c:148
+#: ../../standalone/drakgw_.c:124 ../../standalone/drakgw_.c:149
 msgid "dismiss"
 msgstr "avvis"
 
-#: ../../standalone/drakgw_.c:123 ../../standalone/drakgw_.c:148
+#: ../../standalone/drakgw_.c:124 ../../standalone/drakgw_.c:149
 msgid "reconfigure"
 msgstr "Konfigurer på nytt"
 
-#: ../../standalone/drakgw_.c:126
+#: ../../standalone/drakgw_.c:127
 msgid "Disabling servers..."
 msgstr "Slår av tjenere..."
 
-#: ../../standalone/drakgw_.c:134
+#: ../../standalone/drakgw_.c:135
 msgid "Internet connection sharing is now disabled."
 msgstr "Deling av Internett tilkobling er slått av"
 
-#: ../../standalone/drakgw_.c:143
+#: ../../standalone/drakgw_.c:144
 msgid "Internet Connection Sharing currently disabled"
 msgstr "Deling av Internett tilkobling er slått av"
 
-#: ../../standalone/drakgw_.c:144
+#: ../../standalone/drakgw_.c:145
 msgid ""
 "The setup of Internet connection sharing has already been done.\n"
 "It's currently disabled.\n"
@@ -7667,19 +7781,19 @@ msgstr ""
 "\n"
 "Hva vil du gjøre?"
 
-#: ../../standalone/drakgw_.c:148
+#: ../../standalone/drakgw_.c:149
 msgid "enable"
 msgstr "slå på"
 
-#: ../../standalone/drakgw_.c:155
+#: ../../standalone/drakgw_.c:156
 msgid "Enabling servers..."
 msgstr "Slår på tjenere..."
 
-#: ../../standalone/drakgw_.c:160
+#: ../../standalone/drakgw_.c:161
 msgid "Internet connection sharing is now enabled."
 msgstr "Deling av Internett tilkobling er nå slått på."
 
-#: ../../standalone/drakgw_.c:181
+#: ../../standalone/drakgw_.c:182
 msgid ""
 "You are about to configure your computer to share its Internet connection.\n"
 "With that feature, other computers on your local network will be able to use "
@@ -7696,21 +7810,21 @@ msgstr ""
 "Merk: du trenger et dedikert nettverksadapter for å sette opp et lokalt "
 "nettverk (LAN)."
 
-#: ../../standalone/drakgw_.c:207
+#: ../../standalone/drakgw_.c:208
 #, c-format
 msgid "Interface %s (using module %s)"
 msgstr "Grensesnitt %s (bruker modul %s)"
 
-#: ../../standalone/drakgw_.c:208
+#: ../../standalone/drakgw_.c:209
 #, c-format
 msgid "Interface %s"
 msgstr "Grensesnitt %s"
 
-#: ../../standalone/drakgw_.c:216
+#: ../../standalone/drakgw_.c:217
 msgid "No network adapter on your system!"
 msgstr "Ikke noe nettverksadapter i systemet ditt!"
 
-#: ../../standalone/drakgw_.c:217
+#: ../../standalone/drakgw_.c:218
 msgid ""
 "No ethernet network adapter has been detected on your system. Please run the "
 "hardware configuration tool."
@@ -7718,7 +7832,7 @@ msgstr ""
 "Ikke noe ethernet nettverksadapter har blitt oppdaget i systemet ditt. "
 "Vennligst kjør verktøyet for maskinvarekonfigurasjon."
 
-#: ../../standalone/drakgw_.c:224
+#: ../../standalone/drakgw_.c:225
 #, c-format
 msgid ""
 "There is only one configured network adapter on your system:\n"
@@ -7733,7 +7847,7 @@ msgstr ""
 "\n"
 "Jeg er i ferd med å sette opp ditt lokale nettverk (LAN) med dette adapteret."
 
-#: ../../standalone/drakgw_.c:233
+#: ../../standalone/drakgw_.c:234
 msgid ""
 "Please choose what network adapter will be connected to your Local Area "
 "Network."
@@ -7741,23 +7855,23 @@ msgstr ""
 "Vennligst velg hvilket nettverksadapter som skal kobles til ditt lokale "
 "nettverk (LAN)."
 
-#: ../../standalone/drakgw_.c:242
+#: ../../standalone/drakgw_.c:243
 msgid ""
 "Warning, the network adapter is already configured. I will reconfigure it."
 msgstr ""
 "Advarsel, nettverksadapteret er allerede konfigurert. Jeg vil konfigurere "
 "det på nytt."
 
-#: ../../standalone/drakgw_.c:253
+#: ../../standalone/drakgw_.c:254
 #, c-format
 msgid "Potential LAN address conflict found in current config of %s!\n"
 msgstr "Mulig LAN-adresse konflikt funnet i konfigurasjonen til %s!\n"
 
-#: ../../standalone/drakgw_.c:261 ../../standalone/drakgw_.c:267
+#: ../../standalone/drakgw_.c:262 ../../standalone/drakgw_.c:268
 msgid "Firewalling configuration detected!"
 msgstr "Brannmurkonfigurasjon oppdaget!"
 
-#: ../../standalone/drakgw_.c:262 ../../standalone/drakgw_.c:268
+#: ../../standalone/drakgw_.c:263 ../../standalone/drakgw_.c:269
 msgid ""
 "Warning! An existing firewalling configuration has been detected. You may "
 "need some manual fix after installation."
@@ -7765,20 +7879,20 @@ msgstr ""
 "Advarsel! En eksisterende brannmurkonfigurasjon har blitt oppdaget. Du "
 "trenger muligens å konfigurere noe manuelt etter installasjon."
 
-#: ../../standalone/drakgw_.c:276
+#: ../../standalone/drakgw_.c:277
 msgid "Configuring..."
 msgstr "Konfigurerer..."
 
-#: ../../standalone/drakgw_.c:277
+#: ../../standalone/drakgw_.c:278
 msgid "Configuring scripts, installing software, starting servers..."
 msgstr "Konfigurerer script, installerer programvare, starter tjenere..."
 
-#: ../../standalone/drakgw_.c:310
+#: ../../standalone/drakgw_.c:311
 #, c-format
 msgid "Problems installing package %s"
 msgstr "Problemer ved installering av pakke %s"
 
-#: ../../standalone/drakgw_.c:599
+#: ../../standalone/drakgw_.c:600
 msgid ""
 "Everything has been configured.\n"
 "You may now share Internet connection with other computers on your Local "
@@ -7788,23 +7902,23 @@ msgstr ""
 "Du kan nå dele Internett-tilkobling med andre maskiner på ditt lokale "
 "nettverk ved å bruke automatisk nettverkskonfigurasjon (DHCP)."
 
-#: ../../standalone/drakgw_.c:616
+#: ../../standalone/drakgw_.c:617
 msgid "The setup has already been done, but it's currently disabled."
 msgstr "Oppsett har allerede blitt gjort, men er for øyeblikket slått av."
 
-#: ../../standalone/drakgw_.c:617
+#: ../../standalone/drakgw_.c:618
 msgid "The setup has already been done, and it's currently enabled."
 msgstr "Oppsett har allerede blitt gjort, og er for øyeblikket slått på."
 
-#: ../../standalone/drakgw_.c:618
+#: ../../standalone/drakgw_.c:619
 msgid "No Internet Connection Sharing has ever been configured."
 msgstr "Deling av Internett tilkobling har aldri blitt konfigurert."
 
-#: ../../standalone/drakgw_.c:623
+#: ../../standalone/drakgw_.c:624
 msgid "Internet connection sharing configuration"
 msgstr "Internett deling av tilkobling konfigurasjon"
 
-#: ../../standalone/drakgw_.c:630
+#: ../../standalone/drakgw_.c:631
 #, c-format
 msgid ""
 "Welcome to the Internet Connection Sharing utility!\n"
@@ -8655,6 +8769,14 @@ msgstr "Multimedia - CD-brenning"
 msgid "Scientific Workstation"
 msgstr "Vitenskaplig arbeidsstasjon"
 
+#, fuzzy
+#~ msgid ""
+#~ "Unless you know specifically otherwise, the usual choice is \"/dev/hda\"\n"
+#~ "(primary master IDE disk) or \"/dev/sda\" (first SCSI disk)."
+#~ msgstr ""
+#~ "Hvis du ikke spesifikt vet en annen måte, så er det vanlige valget\n"
+#~ "\"/dev/hda\" (primær IDE-disk) eller \"/dev/sda\" (første SCSI-disk)."
+
 #~ msgid ""
 #~ "The following printers are configured.\n"
 #~ "You can add some more or modify the existing ones."
@@ -8708,9 +8830,6 @@ msgstr "Vitenskaplig arbeidsstasjon"
 
 #~ msgid "Color depth options"
 #~ msgstr "Opsjoner fargedybde"
-
-#~ msgid "Configuration de Lilo/Grub"
-#~ msgstr "Konfigurasjon Lilo/Grub"
 
 #~ msgid "Configure LILO/GRUB"
 #~ msgstr "Konfigurer LILO/GRUB"
