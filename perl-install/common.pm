@@ -55,7 +55,7 @@ sub translate {
     my ($s) = @_;
     $s or return '';
     foreach ('libDrakX', @::textdomains) {
-	my $s2 = $::isInstall && ref($::o) && $::o->isa('interactive::gtk') ? c::dgettext_utf8($_, $s) : c::dgettext($_, $s);
+	my $s2 = $::isInstall && eval { $::o->isa('interactive::gtk') } ? c::dgettext_utf8($_, $s) : c::dgettext($_, $s);
 	return $s2 if $s ne $s2;
     }
     $s;
