@@ -1022,7 +1022,7 @@ to connect to the Internet as a client. There are now security checks. ")),
       4 => formatAlaTeX(_("With this security level, the use of this system as a server becomes possible.
 The security is now high enough to use the system as a server which accept
 connections from many clients. ")),
-      5 => formatAlaTeX(_("We base on the previous level, yet now the system is entirely closed.
+      5 => formatAlaTeX(_("Based on the previous level, but the system is entirely closed.
 Security features are at their maximum.")),
     );
     delete @l{0,1};
