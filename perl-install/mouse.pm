@@ -329,12 +329,14 @@ sub detect() {
 			MOUSETYPE  => "Microsoft",
 			XMOUSETYPE => "Microsoft", wacom => \@wacom };
 
-    if (!modules::get_probeall("usb-interface") && detect_devices::is_a_recent_computer() && $::isInstall) {
+    if (detect_devices::is_a_recent_computer() && $::isInstall) {
 	#- special case for non detected usb interface on a box with no mouse.
 	#- we *must* find out if there really is no usb, otherwise the box may
 	#- not be accessible via the keyboard (if the keyboard is USB)
 	#- the only way to know this is to make a full pci probe
-	modules::load_category('bus/usb', '', 'unsafe'); 
+	modules::get_probeall("usb-interface") or modules::load_category('bus/usb', '', 'unsafe');
+	log::l("trying again to find a usb mouse");
+	sleep 10;
 	if (my $mouse = $fast_mouse_probe->()) {
 	    return $mouse;
 	}
