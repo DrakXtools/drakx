@@ -540,7 +540,7 @@ killall pppd
                                         'sagem'      => 'adiusbadsl',
                                         'speedtouch' => 'speedtouch',
                                        );
-                        my $adsl_device = find { $adsl_devices{$_} eq $ntf_name } keys %adsl_devices;
+                        my $adsl_device = (find { $adsl_devices{$_} eq $ntf_name } keys %adsl_devices) || $ntf_name;
                         return 'adsl_unsupported_eci' if $adsl_device eq 'eci';
                         $netconnect::need_restart_network = member($adsl_device, qw(speedtouch eci));
                         $in->do_pkgs->install($packages{$adsl_device}) if $packages{$adsl_device};
