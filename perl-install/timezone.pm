@@ -9,10 +9,9 @@ use log;
 
 sub getTimeZones {
     my ($prefix) = @_;
-    local *F;
-    open F, "cd $prefix/usr/share/zoneinfo && find [A-Z]* -type f |";
-    my @l = chomp_(<F>);
-    close F or die "cannot list the available zoneinfos";
+    open(my $F, "cd $prefix/usr/share/zoneinfo && find [A-Z]* -type f |");
+    my @l = chomp_(<$F>);
+    close $F or die "cannot list the available zoneinfos";
     sort @l;
 }
 

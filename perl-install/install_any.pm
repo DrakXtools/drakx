@@ -135,9 +135,9 @@ sub getAndSaveFile {
     my ($file, $local) = @_ == 1 ? ("Mandrake/mdkinst$_[0]", $_[0]) : @_;
     local $/ = \ (16 * 1024);
     my $f = ref($file) ? $file : getFile($file) or return;
-    local *F; open F, ">$local" or return;
+    open(my $F, ">$local") or return;
     local $_;
-    while (<$f>) { syswrite F, $_ }
+    while (<$f>) { syswrite $F, $_ }
     1;
 }
 
@@ -586,8 +586,7 @@ sub install_urpmi {
 	my $name = $_->{fakemedium};
 	if ($_->{ignored} || $_->{selected}) {
 	    my $mask = umask 077;
-	    local *LIST;
-	    open LIST, ">$prefix/var/lib/urpmi/list.$name" or log::l("failed to write list.$name");
+	    open(my $LIST, ">$prefix/var/lib/urpmi/list.$name") or log::l("failed to write list.$name");
 	    umask $mask;
 
 	    my $dir = ($_->{prefix} || ${{ nfs => "file://mnt/nfs", 
@@ -603,18 +602,18 @@ sub install_urpmi {
 		#- WARNING this method of build only works because synthesis (or hdlist)
 		#-         has been read.
 		foreach (@{$packages->{depslist}}[$_->{start} .. $_->{end}]) {
-		    print LIST "$dir/".$_->filename."\n";
+		    print $LIST "$dir/".$_->filename."\n";
 		}
 	    } else {
 		#- need to use another method here to build synthesis.
-		local *F; open F, "parsehdlist '$prefix/var/lib/urpmi/hdlist.$name.cz' |";
+		open(my $F, "parsehdlist '$prefix/var/lib/urpmi/hdlist.$name.cz' |");
 		local $_; 
-		while (<F>) {
-		    print LIST "$dir/$_";
+		while (<$F>) {
+		    print $LIST "$dir/$_";
 		}
-		close F;
+		close $F;
 	    }
-	    close LIST;
+	    close $LIST;
 
 	    #- build synthesis file if there are still not existing (ie not copied from mirror).
 	    if (-s "$prefix/var/lib/urpmi/synthesis.hdlist.$name.cz" <= 32) {

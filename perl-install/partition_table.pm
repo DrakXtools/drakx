@@ -793,8 +793,6 @@ sub save {
     my ($hd, $file) = @_;
     my @h = @{$hd}{@fields2save};
     require Data::Dumper;
-    local *F;
-    open F, ">$file"
-      and print F Data::Dumper->Dump([\@h], ['$h']), "\0"
+    eval { output($file, Data::Dumper->Dump([\@h], ['$h']), "\0") }
       or die N("Error writing to file %s", $file);
 }

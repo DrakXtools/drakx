@@ -46,10 +46,7 @@ sub confScanner {
 
 sub add2dll {
     return if member($_[0], chomp_(cat_("$_sanedir/dll.conf")));
-    local *F;
-    open F, ">>$_sanedir/dll.conf" or die "can't write SANE config in $_sanedir/dll.conf: $!";
-    print F "$_[0]\n";
-    close F;
+    append_to_file("$_sanedir/dll.conf", "$_[0]\n");
 }
 
 sub detect {
@@ -123,9 +120,7 @@ sub readScannerDB {
 
 sub updateScannerDBfromUsbtable {
     substInFile { s/END// } "ScannerDB";
-    local *F;
-    open F, ">>ScannerDB" or die "can't write ScannerDB config in ScannerDB: $!";
-    print F "# generated from usbtable by scannerdrake\n";
+    my $to_add = "# generated from usbtable by scannerdrake\n";
     foreach (cat_("$ENV{SHARE_PATH}/ldetect-lst/usbtable")) {
 	my ($vendor_id, $product_id, $mod, $name) = chomp_(split /\s/,$_,4);
 	next if $mod ne '"scanner"';
@@ -134,19 +129,18 @@ sub updateScannerDBfromUsbtable {
 	    print "#[$name] already in ScannerDB!\n";
 	    next;
 	}
-	print F "NAME $name\nDRIVER usb\nCOMMENT usb $vendor_id $product_id\nUNSUPPORTED\n\n";
+	$to_add .= "NAME $name\nDRIVER usb\nCOMMENT usb $vendor_id $product_id\nUNSUPPORTED\n\n";
     }
-    print F "END\n";
-    close F;
+    $to_add .= "END\n";
+
+    append_to_file("ScannerDB", $to_add);
 }
 
 sub updateScannerDBfromSane {
     my ($_sanesrcdir) = @_;
     substInFile { s/END// } "ScannerDB";
 
-    local *Y;
-    open Y, ">>ScannerDB" or die "can't write ScannerDB config in ScannerDB: $!";
-    print Y "# generated from Sane by scannerdrake\n";
+    my $to_add = "# generated from Sane by scannerdrake\n";
     # for compat with our usbtable
     my $sane2DB = { 
 		   "Acer" => "Acer Peripherals Inc.",
@@ -170,7 +164,7 @@ sub updateScannerDBfromSane {
 
     foreach my $f (glob_("$_sanesrcdir/*.desc")) {
 	my $F = common::openFileMaybeCompressed($f);
-	print Y "\n# from $f";
+	$to_add .= "\n# from $f";
 	my ($lineno, $cmd, $val) = 0;
 	my ($name, $intf, $comment, $mfg, $backend);
 	my $fs = {
@@ -183,8 +177,8 @@ sub updateScannerDBfromSane {
 		      if (member($name, keys %$scanner::scannerDB)) {
 			  print "#[$name] already in ScannerDB!\n";
 		      } else {
-			  print Y "\nNAME $name\nSERVER $backend\nDRIVER $intf\n";
-			  print Y "COMMENT $comment\n" if $comment;
+			  $to_add .= "\nNAME $name\nSERVER $backend\nDRIVER $intf\n";
+			  $to_add .= "COMMENT $comment\n" if $comment;
 			  $comment = undef; 
 		      }
 		      $name = $val;
@@ -202,8 +196,8 @@ sub updateScannerDBfromSane {
 		   }
 	$fs->{model}(); # the last one
     }
-    print Y "\nEND\n";
-    close Y;
+    $to_add .= "\nEND\n";
+    append_to_file("ScannerDB", $to_add);
 }
 
 1; #
