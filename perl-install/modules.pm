@@ -101,7 +101,7 @@ sub load_category {
 	eval { load([ $_->{driver}, $_->{options} ]) };
 	$_->{error} = $@;
 
-	$_->{try} = 1 if $_->{driver} eq 'hptraid';
+	$_->{try} = 1 if member($_->{driver}, 'hptraid', 'ohci1394'); #- don't warn when this fails
 
 	!($_->{error} && $_->{try});
     } probe_category($category),
