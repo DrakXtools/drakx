@@ -3214,14 +3214,13 @@ sub find_files_to_restore() {
 				1, $file_wildcard_entry,
 				0, gtksignal_connect(new Gtk2::Button(N("Search Backups")), clicked => sub {
 					local $_ = $file_wildcard_entry->get_text; 
-					s|^\*|\\\*|g;
+					s|^\*|\\*|g;
 					my $wildcard = $_;
 					@possible_sources = glob "$conf{PATH_TO_SAVE}/list*";
 					$model->clear;
 					my $match = 0;
 					foreach my $list (@possible_sources) {
-						my @listing = cat_($list);
-						my @matches = grep { /$wildcard/ } @listing;
+						my @matches = grep { /$wildcard/ } cat_($list);
 						if (@matches) {
 							my $list_entry = $model->append_set(undef, [ 0 => $list, 2 => '' ]);
 							foreach (@matches) {
