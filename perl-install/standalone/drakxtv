@@ -119,7 +119,7 @@ if (@devices) {
     my $configured;
     # TODO: That need some work for multiples TV cards
     foreach (@devices) {
-	   if ($< == 0 && (grep { detect_devices::isTVcard($_) } @devices)) {
+	   if (($< == 0 || $::testing) && (grep { detect_devices::isTVcard($_) } @devices)) {
 		  require harddrake::v4l;
 		  require modules;
 		  modules::mergein_conf('/etc/modules.conf') if !$configured;
