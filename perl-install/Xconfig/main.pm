@@ -160,7 +160,7 @@ sub configure_everything_or_configure_chooser {
     my ($in, $options, $auto, $o_keyboard, $o_mouse) = @_;
     my $raw_X = eval { Xconfig::xfree->read };
 
-    if (!$raw_X) {
+    if (!$raw_X || !is_valid($raw_X)) {
 	log::l("ERROR: bad X config file $@");
 	$in->ask_okcancel('',
 			  N("Your Xorg configuration file is broken, we will ignore it.")) or return;
@@ -215,6 +215,16 @@ sub export_to_install_X {
     $::o->{X}{Xinerama} = 1 if $X->{card}{Xinerama};
 }
 
+sub is_valid {
+    my ($raw_X) = @_;
+
+    my %sections = map { 
+	my @l = $raw_X->get_Sections($_) or return;
+	$_ => \@l;
+    } qw(Files InputDevice Monitor Device Screen ServerLayout);
+
+    $sections{Files}[0]{FontPath};
+}
 
 #- most usefull XFree86-4.0.1 server options. Default values is the first ones.
 our @options_serverflags = (
