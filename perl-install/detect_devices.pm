@@ -549,7 +549,7 @@ sub getECI() {
     grep { member(sprintf("%04x%04x%04x%04x", $_->{vendor}, $_->{id}, $_->{subvendor}, $_->{subid}), @ids) } usb_probe();
 }
 
-sub getNet() { 
+sub is_lan_interface {
     # we want LAN like interfaces here (eg: ath|br|eth|fddi|plip|ra|tr|usb|wifi|wlan).
     # there's also bnep%d for bluetooth, bcp%d...
     # we do this by blacklisting the following interfaces:
@@ -563,7 +563,11 @@ sub getNet() {
     # - get_netdevices() use the SIOCGIFCONF ioctl that does not list interfaces that are down
     # - /proc/net/dev does not list VLAN and IP aliased interfaces
 
-    grep { !/^(?:lo|ippp|isdn|plip|ppp|sit0)/ }
+    $_[0] !~ /^(?:lo|ippp|isdn|plip|ppp|sit0)/;
+}
+
+sub getNet() {
+    grep { is_lan_interface($_) }
       uniq(
            (map { if_(/^\s*([A-Za-z0-9:\.]*):/, $1) } cat_("/proc/net/dev")),
            c::get_netdevices(),
