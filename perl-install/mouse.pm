@@ -144,7 +144,7 @@ sub detect() {
 	    modules::load("usbmouse");
 	    modules::load("mousedev");
 	   };
-	sleep(1);
+	sleep(2);
 	if (!$@ && detect_devices::tryOpen("usbmouse")) {
 	    $wacom or modules::unload("serial"); 
 	    return name2mouse("USB Mouse"), $wacom;

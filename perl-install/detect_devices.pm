@@ -256,8 +256,10 @@ sub probeUSB {
 	if ($@) {
 	    $usb_interface = '';
 	} else {
-	    modules::load("usbkbd");
-	    modules::load("keybdev");
+	    eval {
+		modules::load("usbkbd");
+		modules::load("keybdev");
+	    };
 	}
     } else {
 	$usb_interface = '';
