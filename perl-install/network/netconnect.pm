@@ -166,7 +166,7 @@ ifdown eth0
 		  [
 		   if_(@profiles > 1, { label => _("Choose the profile to configure"), val => \$netcnx->{PROFILE}, list => \@profiles }),
 		   { label => _("Use auto detection"), val => \$netc->{autodetection}, type => 'bool' },
-		   { label => _("Expert Mode"), val => \$::expert, type => 'bool' },
+		   if_($::isStandalone, { label => _("Expert Mode"), val => \$::expert, type => 'bool' }),
 		  ]
 		 ) or goto step_5;
     undef $::Wizard_no_previous;
