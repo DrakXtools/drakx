@@ -55,7 +55,7 @@ sub load {
 
     if ($::testing || $::blank) {
 	log::l("i would load module $_ (" . join(" ", @{$options{$_}}) . ")") foreach @l;
-    } elsif ($::isStandalone || $::live) {
+    } elsif ($::isStandalone || $::live || $::move) {
 	run_program::run('/sbin/modprobe', $_, @{$options{$_}}) 
 	  or !run_program::run('/sbin/modprobe', '-n', $_) #- ignore missing modules
 	  or die "insmod'ing module $_ failed" foreach @l;
