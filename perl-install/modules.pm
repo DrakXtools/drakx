@@ -183,9 +183,7 @@ sub write_preload_conf {
     push @l, 'nvram' if cat_('/proc/bus/input/devices') =~ m!^N: Name="SynPS/2 Synaptics TouchPad"$!m;
     push @l, map { $_->{driver} } probe_category('various/laptop');
     my @l_26 = @l;
-    if (my ($agp) = probe_category('various/agpgart')) {
-	push @l_26, $agp->{driver};
-    }
+    push @l_26, map { $_->{driver} } probe_category('various/agpgart');
     append_to_modules_loaded_at_startup("$::prefix/etc/modules", @l);
     append_to_modules_loaded_at_startup("$::prefix/etc/modprobe.preload", @l_26);
 }
