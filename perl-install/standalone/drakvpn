@@ -743,29 +743,25 @@ Put your mouse over the certificate entry to obtain online help."),
 		val => \$path_section->{1}[1], 
 		list => [ 'certificate', 'pre_shared_key', 'include' ], 
 		help => 
-N("Path Specification
-  path include path;
-	specifies a path to include a file.  See File Inclusion.
-  Example: path include '/etc/racoon'
+N("path include path : specifies a path to include
+a file. See File Inclusion.
+	Example: path include '/etc/racoon'
 
-  path pre_shared_key file;
-	specifies a file containing pre-shared key(s)
-	for various ID(s). See Pre-shared key File.
-  Example: path pre_shared_key '/etc/racoon/psk.txt' ;
+path pre_shared_key file : specifies a file containing
+pre-shared key(s) for various ID(s). See Pre-shared key File.
+	Example: path pre_shared_key '/etc/racoon/psk.txt' ;
 
-  path certificate path;
-  	racoon(8) will search this directory if a certificate or
-	 certificate request is received.
-  Example: path certificate '/etc/cert' ;
+path certificate path : racoon(8) will search this directory
+if a certificate or certificate request is received.
+	Example: path certificate '/etc/cert' ;
 
-File Inclusion
-  include file
-	other configuration files can be included.
+File Inclusion : include file 
+other configuration files can be included.
+	Example: include \"remote.conf\" ;
 
-Pre-shared key File
-  Pre-shared key file defines a pair of the identifier and the
-  shared secret key which are used at Pre-shared key authentication
-  method in phase 1."),
+Pre-shared key File : Pre-shared key file defines a pair
+of the identifier and the shared secret key which are used at
+Pre-shared key authentication method in phase 1."),
 },
 			{ label => N("real file"), val => \$path_section->{1}[2], type => 'entry' },
 		  ]
@@ -808,7 +804,7 @@ network::ipsec::add_section_racoon_conf($proposal_remote_section, $racoon);
 				}; 
 	ask_info('',
 N("Make sure you already have the path sections
-on the top of your %s file.\n
+on the top of your %s file.
 
 You can now choose the sainfo settings.
 Choose continue or previous when you are done.\n", $racoon_conf), $sainfo_section) or goto step_configure_racoon_conf;
@@ -848,7 +844,7 @@ N("Your %s file has several sections.
 
 You can now edit the sainfo section entries.
 
-Choose continue when you are done to write the data.\n", $racoon_conf), $racoon->{$number}) or goto step_configure_racoon_conf;
+Choose continue when you are done to write the data.", $racoon_conf), $racoon->{$number}) or goto step_configure_racoon_conf;
 
 } elsif ($choice =~ /^path/) {
 	$in->ask_from('',
@@ -920,39 +916,210 @@ sub quit_global {
 sub ask_info {
     my ($title, $text, $data) = @_;
 	$in->ask_from($title, $text,
-	[	{ label => N("sainfo_source_address"), val => \$data->{1}[2], type => 'entry' },
-		{ label => N("sainfo_source_proto"), val => \$data->{1}[3], type => 'entry' },
-		{ label => N("sainfo_dest_address"), val => \$data->{1}[5], type => 'entry' },
-		{ label => N("sainfo_dest_proto"), val => \$data->{1}[6], type => 'entry' },
+	[	{ label => N("Sainfo source address"), val => \$data->{1}[2], type => 'entry',
+	help => N("sainfo (source_id destination_id | anonymous) { statements }
+defines the parameters of the IKE phase 2
+(IPsec-SA establishment).
+
+source_id and destination_id are constructed like:
+
+	address address [/ prefix] [[port]] ul_proto
+
+Examples : \n
+sainfo anonymous (accepts connections from anywhere)
+	leave blank this entry if you want anonymous
+
+sainfo address 203.178.141.209 any address 203.178.141.218 any
+	203.178.141.209 is the source address
+
+sainfo address 172.16.1.0/24 any address 172.16.2.0/24 any
+	172.16.1.0/24 is the source address") },
+		{ label => N("Sainfo source protocol"), val => \$data->{1}[3], type => 'entry', 
+	help => N("sainfo (source_id destination_id | anonymous) { statements }
+defines the parameters of the IKE phase 2
+(IPsec-SA establishment).
+
+source_id and destination_id are constructed like:
+
+	address address [/ prefix] [[port]] ul_proto
+
+Examples : \n
+sainfo anonymous (accepts connections from anywhere)
+	leave blank this entry if you want anonymous
+
+sainfo address 203.178.141.209 any address 203.178.141.218 any
+	the first 'any' allows any protocol for the source") },
+		{ label => N("Sainfo destination address"), val => \$data->{1}[5], type => 'entry',
+	help => N("sainfo (source_id destination_id | anonymous) { statements }
+defines the parameters of the IKE phase 2
+(IPsec-SA establishment).
+
+source_id and destination_id are constructed like:
+
+	address address [/ prefix] [[port]] ul_proto
+
+Examples : \n
+sainfo anonymous (accepts connections from anywhere)
+	leave blank this entry if you want anonymous
+
+sainfo address 203.178.141.209 any address 203.178.141.218 any
+	203.178.141.218 is the destination address
+
+sainfo address 172.16.1.0/24 any address 172.16.2.0/24 any
+	172.16.2.0/24 is the destination address") },
+		{ label => N("Sainfo destination protocol"), val => \$data->{1}[6], type => 'entry',
+	help => N("sainfo (source_id destination_id | anonymous) { statements }
+defines the parameters of the IKE phase 2
+(IPsec-SA establishment).
+
+source_id and destination_id are constructed like:
+
+	address address [/ prefix] [[port]] ul_proto
+
+Examples : \n
+sainfo anonymous (accepts connections from anywhere)
+	leave blank this entry if you want anonymous
+
+sainfo address 203.178.141.209 any address 203.178.141.218 any
+	the last 'any' allows any protocol for the destination") },
 		{ label => N("PFS group"), val => \$data->{2}[1],
-            list => [ qw(modp768 modp1024 modp1536) ], },
-		{ label => N("Lifetime number"), val => \$data->{3}[2], type => 'entry' },
-		{ label => N("Lifetime unit"), val => \$data->{3}[3], type => 'entry' },
-		{ label => N("Encryption algorithm"), val => \$data->{4}[1], type => 'entry' },
-		{ label => N("Authentication algorithm"), val => \$data->{5}[1], type => 'entry' },
-		{ label => N("Compression algorithm"), val => \$data->{6}[1], type => 'entry' },
-	]);
-}
+	list => [ qw(modp768 modp1024 modp1536 1 2 5) ],
+	help => N("define the group of Diffie-Hellman exponentiations.
+If you do not require PFS then you can omit this directive.
+Any proposal will be accepted if you do not specify one.
+group is one of following: modp768, modp1024, modp1536.
+Or you can define 1, 2, or 5 as the DH group number.") },
+		{ label => N("Lifetime number"), val => \$data->{3}[2], type => 'entry',
+	help => N("define a lifetime of a certain time which will be pro-
+posed in the phase 1 negotiations.  Any proposal will be
+accepted, and the attribute(s) will be not proposed to
+the peer if you do not specify it(them).  They can be
+individually specified in each proposal.
+
+Examples : \n
+        lifetime time 1 min;    # sec,min,hour
+        lifetime time 1 min;    # sec,min,hour
+        lifetime time 30 sec;
+        lifetime time 30 sec;
+        lifetime time 60 sec;
+	lifetime time 12 hour;
+
+So, here, the lifetime numbers are 1, 1, 30, 30, 60 and 12.
+") },
+		{ label => N("Lifetime unit"), val => \$data->{3}[3],
+	list => [ qw(sec min hour) ],
+	help => N("define a lifetime of a certain time which will be pro-
+posed in the phase 1 negotiations.  Any proposal will be
+accepted, and the attribute(s) will be not proposed to
+the peer if you do not specify it(them).  They can be
+individually specified in each proposal.
+
+Examples : \n
+        lifetime time 1 min;    # sec,min,hour
+        lifetime time 1 min;    # sec,min,hour
+        lifetime time 30 sec;
+        lifetime time 30 sec;
+        lifetime time 60 sec;
+	lifetime time 12 hour ;
+
+So, here, the lifetime units are 'min', 'min', 'sec', 'sec', 'sec' and 'hour'.
+") },
+		{ label => N("Encryption algorithm"), val => \$data->{4}[1],
+	list => [ qw(des 3des des_iv64 des_iv32 rc5 rc4 idea 3idea cast128 blowfish null_enc twofish rijndae) ] },
+      {	label => N("Authentication algorithm"), val => \$data->{5}[1],
+	list => [ qw(des 3des des_iv64 des_iv32 hmac_md5 hmac_sha1 non_auth) ] },
+      {	label => N("Compression algorithm"), val => \$data->{6}[1],
+	list => [ 'deflate' ], allow_empty_list => 1 }
+
+]) }
 
 sub ask_info2 {
     my ($title, $text, $main_remote_section, $proposal_remote_section) = @_;
 	$in->ask_from($title, $text,,
-                   [ { label => N("remote"), val => \$main_remote_section->{1}[1], type => 'entry' },
-                     { label => N("exchange_mode"), val => \$main_remote_section->{2}[1], type => 'entry' },
-                     { label => N("generate_policy"), val => \$main_remote_section->{3}[1], type => 'entry' },
-                     { label => N("passive"), val => \$main_remote_section->{4}[1], type => 'entry' },
-                     { label => N("certificate_type"), val => \$main_remote_section->{5}[1], type => 'entry' },
-                     { label => N("my_certfile"), val => \$main_remote_section->{5}[2], type => 'entry' },
-                     { label => N("my_private_key"), val => \$main_remote_section->{5}[3], type => 'entry' },
-                     { label => N("peers_certfile"), val => \$main_remote_section->{6}[1], type => 'entry' },
-                     { label => N("verify_cert"), val => \$main_remote_section->{7}[1], type => 'entry' },
-                     { label => N("my_identifier"), val => \$main_remote_section->{8}[1], type => 'entry' },
-                     { label => N("peers_identifier"), val => \$main_remote_section->{9}[1], type => 'entry' },
-                     { label => N("proposal"), val => \$proposal_remote_section->{1}[0], type => 'entry' },
-                     { label => N("Encryption algorithm"), val => \$proposal_remote_section->{2}[1], type => 'entry' },
+                   [ { label => N("Remote"), val => \$main_remote_section->{1}[1], type => 'entry',
+	help => N("remote (address | anonymous) [[port]] { statements }
+specifies the parameters for IKE phase 1 for each remote node.
+The default port is 500.  If anonymous is specified, the state-
+ments apply to all peers which do not match any other remote
+directive.\n
+Examples : \n
+remote anonymous
+remote ::1 [8000]") },
+                     { label => N("Exchange mode"), val => \$main_remote_section->{2}[1],
+	list => [ qw(main,agressive agressive,main) ],
+	help => N("defines the exchange mode for phase 1 when racoon is the
+initiator. Also it means the acceptable exchange mode
+when racoon is responder. More than one mode can be
+specified by separating them with a comma. All of the
+modes are acceptable. The first exchange mode is what
+racoon uses when it is the initiator.\n") },
+                     { label => N("Generate policy"), val => \$main_remote_section->{3}[1], 
+	list => [ 'off', 'on' ],
+	help => N("This directive is for the responder.  Therefore you
+should set passive on in order that racoon(8) only
+becomes a responder.  If the responder does not have any
+policy in SPD during phase 2 negotiation, and the direc-
+tive is set on, then racoon(8) will choice the first pro-
+posal in the SA payload from the initiator, and generate
+policy entries from the proposal.  It is useful to nego-
+tiate with the client which is allocated IP address
+dynamically.  Note that inappropriate policy might be
+installed into the responder's SPD by the initiator.  So
+that other communication might fail if such policies
+installed due to some policy mismatches between the ini-
+tiator and the responder.  This directive is ignored in
+the initiator case.  The default value is off.") },
+                     { label => N("Passive"), val => \$main_remote_section->{4}[1], 
+	list => [ 'off', 'on' ], 
+	help => N("If you do not want to initiate the negotiation, set this
+to on.  The default value is off.  It is useful for a
+server.") },
+                     { label => N("Certificate type"), val => \$main_remote_section->{5}[1],
+	list => [ 'x509' ], allow_empty_list => 1 },
+                     { label => N("My certfile"), val => \$main_remote_section->{5}[2], type => 'entry',
+	help => N("Name of the certificate") },
+                     { label => N("My private key"), val => \$main_remote_section->{5}[3], type => 'entry',
+	help => N("Name of the private key") },
+                     { label => N("Peers certfile"), val => \$main_remote_section->{6}[1], type => 'entry',
+	help => N("Name of the peers certificate") },
+                     { label => N("Verify cert"), val => \$main_remote_section->{7}[1],
+	list => [ 'off', 'on' ], 
+	help => N("If you do not want to verify the peer's certificate for
+some reason, set this to off.  The default is on.") },
+                     { label => N("My identifier"), val => \$main_remote_section->{8}[1], type => 'entry',
+	help => N("specifies the identifier sent to the remote host and the
+type to use in the phase 1 negotiation.  address, fqdn,
+user_fqdn, keyid and asn1dn can be used as an idtype.
+they are used like:
+	my_identifier address [address];
+		the type is the IP address.  This is the default
+		type if you do not specify an identifier to use.
+	my_identifier user_fqdn string;
+		the type is a USER_FQDN (user fully-qualified
+		domain name).
+	my_identifier fqdn string;
+		the type is a FQDN (fully-qualified domain name).
+	my_identifier keyid file;
+		the type is a KEY_ID.
+	my_identifier asn1dn [string];
+		the type is an ASN.1 distinguished name.  If
+		string is omitted, racoon(8) will get DN from
+		Subject field in the certificate.\n
+Examples : \n
+my_identifier user_fqdn \"myemail\@mydomain.com\"") },
+                     { label => N("Peers identifier"), val => \$main_remote_section->{9}[1], type => 'entry' },
+                     { label => N("Proposal"), val => \$proposal_remote_section->{1}[0], list => [ 'proposal' ], allow_empty_list => 1 },
+                     { label => N("Encryption algorithm"), val => \$proposal_remote_section->{2}[1], list => [ qw(des 3des blowfish cast128) ],
+	help => N("specify the encryption algorithm used for the
+phase 1 negotiation. This directive must be defined. 
+algorithm is one of following: 
+
+des, 3des, blowfish, cast128 for oakley.
+
+For other transforms, this statement should not be used.") },
                      { label => N("Hash algorithm"), val => \$proposal_remote_section->{3}[1], type => 'entry' },
                      { label => N("Authentication method"), val => \$proposal_remote_section->{4}[1], type => 'entry' },
-                     { label => N("DH group"), val => \$proposal_remote_section->{5}[1], list => [ qw(modp768 modp1024 modp1536) ], },
+                     { label => N("DH group"), val => \$proposal_remote_section->{5}[1], list => [ qw(modp768 modp1024 modp1536 1 2 5) ], },
                    ]);
 }
 
