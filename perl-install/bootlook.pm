@@ -108,9 +108,9 @@ my $menubar = get_main_menu( $window );
 ######### menus end
 
 my $global_vbox = new Gtk::VBox();
-$global_vbox->pack_start (new Gtk::Label(_("Boot style configuration")), 0, 0, 0);
+#$global_vbox->pack_start (new Gtk::Label(_("Boot style configuration")), 0, 0, 0);
 ######## aurora part
-my $a_dedans = new Gtk::VBox(0, 10);
+my $a_dedans = new Gtk::VBox(0, 5);
 $a_dedans->border_width(5);
 my $a_box = new Gtk::VBox(0, 0);
 
@@ -221,10 +221,10 @@ $a_button->set_active($a_mode); # up == false == "0"
 if ($a_mode) {
     my $a = readlink "/etc/aurora/Monitor";
     $a =~ s#/lib/aurora/Monitors/##;
-    $a_c_button->set_active(1) && $pixmap->set($c_pixmap, $c_mask) if ($a eq "NewStyle-Categorizing-WsLib");
-    $a_h_button->set_active(1) && $pixmap->set($h_pixmap, $h_mask) if ($a eq "NewStyle-WsLib");
-    $a_v_button->set_active(1) && $pixmap->set($v_pixmap, $v_mask) if ($a eq "Traditional-WsLib");
-    $a_g_button->set_active(1) && $pixmap->set($g_pixmap, $g_mask) if ($a eq "Traditional-Gtk+");
+    if ($a eq "NewStyle-Categorizing-WsLib") {$a_c_button->set_active(1);  $pixmap->set($c_pixmap, $c_mask);}
+    if ($a eq "NewStyle-WsLib") {$a_h_button->set_active(1);  $pixmap->set($h_pixmap, $h_mask);}
+    if ($a eq "Traditional-WsLib") {$a_v_button->set_active(1); $pixmap->set($v_pixmap, $v_mask);}  
+    if ($a eq "Traditional-Gtk+") {$a_g_button->set_active(1); $pixmap->set($g_pixmap, $g_mask);}
 } else {
     $pixmap->set($t_pixmap, $t_mask);
 }
