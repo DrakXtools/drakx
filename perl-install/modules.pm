@@ -414,7 +414,7 @@ sk98lin acenic
 aironet4500_card com20020-pci hamachi starfire winbond-840
 
 dc395x_trm
-BusLogic seagate fdomain g_NCR5380 tmscsim
+BusLogic seagate fdomain g_NCR5380
 )
 ); #******(missing-2.4)  dpt_i2o aztcd gscd isp16 mcd mcdx optcd cm206 sjcd cdu31a
 
@@ -431,6 +431,7 @@ my @skip_modules_on_stage1 = (
   if_(arch() !~ /ia64/, qw(qla1280)),
   qw(3w-xxxx pci2220i qla2x00 i2o_block),
   qw(gdth eata eata_pio eata_dma ips),
+  'AM53C974', # deprecated by tmscsim
   qw(ac3200 at1700 atp ni5010 ni52 ni65),  #- unused from Jeff
   "u14-34f", #- duplicate from ultrastor.o
 );
