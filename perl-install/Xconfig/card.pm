@@ -509,8 +509,6 @@ sub add_to_card__using_Cards {
     delete @$card{'UTAH_GLX', 'UTAH_GLX_EXPERIMENTAL'} 
       if $force_xf4 || availableRamMB() > 800; #- no Utah GLX if more than 800 Mb (server, or kernel-enterprise, Utha GLX does not work with latest).
 
-    $card->{prefer_xf3} = 1 if $card->{Driver} eq 'neomagic' && !$force_xf4 && $card->{server};
-
     $card;
 }
 
