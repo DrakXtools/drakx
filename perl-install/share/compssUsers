@@ -11,7 +11,7 @@ Office Workstation [icon=office] [path=Workstation] [selected=all] [descr=Office
 Game station [icon=arcade] [path=Workstation] [descr=Amusement programs: arcade, boards, strategy, etc]
 	GAMES
 
-Multimedia station [icon=multimedia] [path=Workstation] [descr=Sound and video playing/editing programs]
+Multimedia station [icon=multimedia] [path=Workstation] [selected=all] [descr=Sound and video playing/editing programs]
 	AUDIO
 	VIDEO
 	GRAPHICS
@@ -34,9 +34,6 @@ Network Computer (client) [icon=terminals] [path=Workstation] [descr=Clients for
 Configuration [icon=configuration] [path=Workstation] [selected=all] [descr=Tools to ease the configuration of your computer]
 	CONFIG
         WEBMIN
-
-Scientific Workstation [icon=sciences] [path=Workstation] [descr=Scientific applications such as gnuplot]
-	SCIENCES
 
 Console Tools [icon=terminals] [path=Workstation] [selected=all] [descr=Editors, shells, file tools, terminals]
 	EDITORS
@@ -66,7 +63,7 @@ Development [icon=editors] [path=Development] [descr=C and C++ development libra
 	DEVELOPMENT
 	EDITORS
 
-Documentation [icon=documentation] [path=Development] [selected=all] [descr=Books and Howto's on Linux and Free Software]
+Documentation [icon=documentation] [path=Development] [descr=Books and Howto's on Linux and Free Software]
 	BOOKS
 
 LSB [icon=documentation] [path=Development] [descr=Linux Standard Base. Third party applications support]
@@ -87,10 +84,6 @@ Database [icon=archiving] [path=Server] [descr=PostgreSQL or MySQL database serv
 
 Firewall/Router [icon=networking] [path=Server] [descr=Internet gateway]
 	NETWORKING_FIREWALLING_SERVER
-
-DNS/NIS [icon=hardware] [path=Server] [descr=Domain Name and Network Information Server] 
-	NIS_SERVER
-	NETWORKING_DNS_SERVER
 
 Network Computer server [icon=networking] [path=Server] [descr=NFS server, SMB server, Proxy server, ssh server]
 	NETWORKING_FILE_SERVER
