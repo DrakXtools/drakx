@@ -17,7 +17,7 @@ sub per_entry_action_box {
 		 N("Options") => \&raw_hd_options,
 		 N("Type") => \&removable_type,
 		);
-	@buttons = map_each {
+	my @buttons = map_each {
 	    my ($txt, $f) = @_;
 	    gtksignal_connect(new Gtk::Button($txt), clicked => sub { try_('', $f, $entry) });
 	} group_by2 @l;
