@@ -98,7 +98,7 @@ sub remove_kernel() {
 sub add_kernel() {
     bootloader::create_link_source();
 
-    my $kernel_str = bootloader::vmlinuz2kernel_str($image);
+    my $kernel_str = bootloader::vmlinuz2kernel_str($image) or die "bad kernel name $image\n";
 
     my $root_part = fs::get::root([ fs::get::fstab($all_hds) ]);
     my %opts = (
