@@ -23,7 +23,8 @@ my @mounts = cat_('/proc/mounts');
 grep { (split)[1] =~ m|^/mnt$| } @mounts or die "Your root device isn't mounted on /mnt (according to /proc/mounts)\n";
 -x '/mnt/sbin/lilo' or die "/mnt/sbin/lilo isn't executable, exiting.\n";
 -r '/mnt/etc/lilo.conf' or die "/mnt/etc/lilo.conf isn't readable, exiting.\n";
-cat_('/mnt/etc/mandrake-release') =~ /Mandrake/ or die "/mnt/etc/mandrake-release doesn't contain 'Mandrake', exiting.\n";
+my ($f) = grep { -f $_ } map { "/mnt/etc/$_" } 'mandrakelinux-release', 'mandrake-release';
+$f && cat_($f) =~ /Mandrake/ or die "$f doesn't contain 'Mandrake', exiting.\n";
 
 print "About to re-install Boot Loader of following Mandrake distro:\n\t",
   chomp_(cat_ "/mnt/etc/mandrake-release"),
@@ -37,6 +38,9 @@ die "error: couldn't exec /mnt/sbin/lilo.\n";
 
 #-------------------------------------------------
 #- $Log$
+#- Revision 1.3  2004/09/28 06:24:30  prigaux
+#- handle /etc/mandrakelinux-release
+#-
 #- Revision 1.2  2004/07/20 02:42:12  prigaux
 #- MandrakeSoft -> Mandrakesoft
 #-
