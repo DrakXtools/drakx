@@ -26,17 +26,17 @@
 #include <net/if.h>
 #include <arpa/inet.h>
 #include <net/route.h>
-#include <resolv.h>
 #include <sys/ioctl.h>
 #include <sys/mount.h>
 #include <stdio.h>
+#include <netdb.h>
+#include <resolv.h>
 
 #include "stage1.h"
 #include "frontend.h"
 #include "modules.h"
 #include "probing.h"
 #include "log.h"
-#include "dns.h"
 #include "mount.h"
 #include "automatic.h"
 #include "dhcp.h"
@@ -166,6 +166,10 @@ int configure_net_device(struct interface_info * intf)
 	close(s);
 
 	intf->is_up = 1;
+
+	/* I need to sleep a bit in order for kernel to finish init of the
+           network device; if not, first sendto() will get an EINVAL */
+	sleep(2);
 	
 	return 0;
 }
@@ -311,6 +315,8 @@ char * guess_netmask(char * ip_addr)
 	struct in_addr addr;
 	unsigned long int tmp;
 
+	log_message("guessing netmask");
+
 	if (!inet_aton(ip_addr, &addr))
 		return "";
 
@@ -386,11 +392,8 @@ static enum return_type setup_network_interface(struct interface_info * intf)
 			gateway.s_addr = 0; /* keep an understandable state */
 		}
 
-		if (!inet_aton(answers[3], &addr)) {
-			log_message("invalid netmask -- back to the guess");
-			inet_aton(guess_netmask(answers[0]), &addr);
-		}
-		else
+		if ((streq(answers[3], "") && inet_aton(guess_netmask(answers[0]), &addr))
+		    || inet_aton(answers[3], &addr))
 			memcpy(&intf->netmask, &addr, sizeof(addr));
 
 		*((uint32_t *) &intf->broadcast) = (*((uint32_t *) &intf->ip) &
@@ -424,20 +427,18 @@ static enum return_type setup_network_interface(struct interface_info * intf)
 
 static enum return_type configure_network(struct interface_info * intf)
 {
-	char ips[50];
-	char * name;
+	struct hostent * host;
 
 	if (hostname && domain)
 		return RETURN_OK;
 
 	wait_message("Trying to resolve hostname...");
-	strcpy(ips, inet_ntoa(intf->ip));
-	name = mygethostbyaddr(ips);
+	host = gethostbyaddr(&(intf->ip), strlen((void *) &(intf->ip)), AF_INET);
 	remove_wait_message();
 
-	if (name) {
-		hostname = strdup(name);
-		domain = strchr(strdup(name), '.') + 1;
+	if (host && host->h_name) {
+		hostname = strdup(host->h_name);
+		domain = strchr(strdup(hostname), '.') + 1;
 		log_message("got hostname and domain from dns entry, %s and %s", hostname, domain);
 		return RETURN_OK;
 	}
@@ -449,13 +450,12 @@ static enum return_type configure_network(struct interface_info * intf)
 
 	if (dns_server.s_addr != 0) {
 		wait_message("Trying to resolve dns...");
-		strcpy(ips, inet_ntoa(dns_server));
-		name = mygethostbyaddr(ips);
+		host = gethostbyaddr(&dns_server, strlen((void *) &dns_server), AF_INET);
 		remove_wait_message();
 	}
 
-	if (name) {
-		domain = strchr(strdup(name), '.') + 1;
+	if (host && host->h_name) {
+		domain = strchr(strdup(host->h_name), '.') + 1;
 		log_message("got domain from DNS fullname, %s", domain);
 	} else {
 		enum return_type results;
@@ -721,7 +721,9 @@ enum return_type ftp_prepare(void)
 		
 		results = load_ramdisk_fd(fd, size);
 		if (results == RETURN_OK)
-			ftp_end_data_command(fd);
+			ftp_end_data_command(ftp_serv_response);
+		else
+			return results;
 
 		method_name = strdup("ftp");
 		add_to_env("HOST", answers[0]);
@@ -782,7 +784,8 @@ enum return_type http_prepare(void)
 
 		log_message("HTTP: size of download %d bytes", size);
 		
-		results = load_ramdisk_fd(fd, size);
+		if (load_ramdisk_fd(fd, size) != RETURN_OK)
+			return RETURN_ERROR;
 
 		method_name = strdup("http");
 		sprintf(location_full, "http://%s/%s", answers[0], answers[1]);
