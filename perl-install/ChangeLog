@@ -1,3 +1,89 @@
+2001/01/31  dam's  <damien@mandrakesoft.com>
+
+	* standalone/draknet: corected translation and conflict.
+
+2001/01/31  François Pons  <fpons@mandrakesoft.com>
+
+	* modules.pm: added missing die if modprobe failed on live upgrade.
+
+	* pkgs.pm: added rpmrebuilddb directory cleaning before, remove old rpm
+	file
+	if everything has been successfull.
+
+	* install_steps.pm: changed to clean selection for non expert as used for
+	group selection
+	because it is not cleaned, need better solution TODO.
+
+2001/01/31  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/be.po, share/po/sp.po, share/po/pt.po, share/po/DrakX.pot,
+	share/po/es.po, share/po/fr.po, share/po/bg.po, share/po/ga.po,
+	share/po/sr.po, share/po/de.po, share/po/et.po, share/po/tr.po,
+	share/po/eu.po, share/po/az.po, share/po/ru.po, share/po/pt_BR.po,
+	share/po/hr.po, share/po/ko.po, share/po/cy.po, share/po/nl.po,
+	share/po/ja.po, share/po/wa.po, share/po/sv.po, share/po/is.po,
+	share/po/hu.po, share/po/zh_TW.Big5.po, share/po/it.po, share/po/id.po,
+	share/po/pl.po, share/po/fi.po, share/po/no.po,
+	share/po/zh_CN.GB2312.po, share/po/th.po, share/po/el.po,
+	share/po/sk.po, share/po/lt.po, share/po/sl.po, share/po/br.po,
+	share/po/ca.po, share/po/gl.po, share/po/lv.po, share/po/uk.po,
+	share/po/eo.po, share/po/ro.po, share/po/da.po, share/po/cs.po,
+	share/po/af.po: updated pot file
+
+	* standalone/draknet: Fixed English typos (in English you DON'T PUT SPACES
+	BEFORE COLON (:);
+	and it is "Profile" and not "Profil")
+	CV:
+	----------------------------------------------------------------------
+
+2001/01/31  Pixel  <pixel@mandrakesoft.com>
+
+	* install_steps_interactive.pm (choosePackagesTree): created, simple
+	ask_many_from_list to choose
+	individual packages
+	(choosePackages): log for debug
+	(choosePackages): don't ask to install in beginner. Max is chosen
+	(setRootPassword): help not based on installClass being server or not
+	(selectInstallClass): remove installClass choice (was
+	normal/devel/server)
+	(chooseGroups): fix for individual package selection flag
+
+	* netconnect.pm (get_net_device): more cleanup syntax
+	(get_net_device): cleanup syntax
+
+	* install_steps.pm (selectLanguage): warning for debug
+	(miscellaneousBefore): don't use installClass to decide to use
+	supermount
+	or not. Choice is done on $::corporate. Can't say "no supermount in
+	server
+	installs" anymore
+	(selectInstallClass): emptied
+	(setupSCSI): don't configure PCMCIA if there is no PCMCIA
+
+	* install_any.pm (g_auto_install): installClass removed
+	(setPackages): do not preselect compssUsers entries
+
+	* install2.pm (main): don't set installClass=normal meta_class desktop
+	(deprecated)
+	(miscellaneous): TYPE= removed (was installClass)
+	(selectInstallClass): don't set $o->{partitions}. diskdrake will have to
+	ask in a set of possibilities
+	($o): replace fclass by fbeginner and fexpert
+	($o): default security level to 2 since it can't be based on
+	installClass (deprecated)
+
+	* install_steps_gtk.pm: restore window size for time being
+
+	* pkgs.pm (psUpdateHdlistsDeps): also copy rpmsrate
+
+	* Xconfigurator.pm (main): better error message for auto_install failing
+
+	* interactive.pm (ask_many_from_list): fix sorting
+
+	* any.pm (set_autologin): log to ensure AUTOLOGIN is not badly set by
+	drakx. Still
+	need finding the guilty
+
 2001/01/31  Pablo Saratxaga <pablo@mandrakesoft.com>
 
 	* keyboard.pm: more kbd corrections
