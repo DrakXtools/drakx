@@ -1308,6 +1308,7 @@ lisa
 mon
 net-snmp
 openldap-servers
+postfix
 samba-server
 saned
 vsftpd
