@@ -51,7 +51,7 @@ sub ask_from_listW {
     }
 }
 
-sub ask_many_from_list_refW {
+sub ask_many_from_list_refW($$$$$) {
     my ($o, $title, $messages, $list, $val) = @_;
     my $n = 0;
     my $w = my_gtk->new('', %$o);
@@ -74,27 +74,50 @@ sub ask_many_from_list_refW {
 
 
 sub ask_from_entries_refW {
-    my ($o, $title, $messages, $l, $val) = @_;
+    my ($o, $title, $messages, $l, $val, %hcallback) = @_;
+    my $num_champs = @{$l};
+    my $ignore = 0;
 
-    my @entry_list = mapn {
-	my $entry = new Gtk::Entry;
-	my $ref = $_[1];
-	my $update = sub { 
-	    ${$ref} = $entry->get_text;
+    my @entries = map { new Gtk::Entry } @{$l};
+    my @updates = mapn { 
+	my ($entry, $ref) = @_;
+	return sub { ${$ref} = $entry->get_text };
+    } \@entries, $val;
+
+    my @updates_inv = mapn { 
+	my ($entry, $ref) = @_;
+	sub { $entry->set_text(${$ref})
 	};
-	$entry->signal_connect(changed => $update);
-	$entry->set_text(${$_[1]})  if ${$_[1]};
+    } \@entries, $val;
+
+
+    for (my $i = 0; $i <$num_champs; $i++) {
+	my $ind = $i;
+	my $callback = sub {
+	    return if $ignore; #handle recursive deadlock
+	    &{$updates[$ind]};
+	    if ($hcallback{changed}) {
+		&{$hcallback{changed}}($ind);
+		#update all the value
+		$ignore = 1;
+		foreach (@updates_inv) { &{$_};}
+		$ignore = 0;
+	    }
+	};
+	my $entry = $entries[$i];
+	$entry->signal_connect(changed => $callback);
+	$entry->set_text(${$val->[$i]})  if ${$val->[$i]};
 	$entry->set_visibility(0) if $_[0] =~ /password/i;
-	&$update;
-	[($_[0], $entry)];
-	} $l, $val;
-    
+#	&{$updates[$i]};
+    }
+    my @entry_list = mapn { [($_[0], $_[1])]} $l, \@entries;
     my $w = my_gtk->new($title, %$o);
     gtkadd($w->{window}, 
 	   gtkpack(
 		   create_box_with_title($w, @$messages),
 		   create_packtable({}, @entry_list),
 		   $w->create_okcancel));
+    
 
     $w->main();
 }

@@ -2,8 +2,12 @@ package install2;
 
 use diagnostics;
 use strict;
+
 use vars qw($o);
 
+########################################################################################
+# misc imports
+########################################################################################
 use common qw(:common :file :system :functional);
 use install_any qw(:all);
 use log;
@@ -23,6 +27,10 @@ use install_steps_graphical;
 
 use Data::Dumper;
 
+
+########################################################################################
+# Steps  table
+########################################################################################
 my %stepsHelp = (
 
 selectLanguage => 
@@ -177,7 +185,7 @@ my @installSteps = (
   configureNetwork   => [ __("Configure networking"), 1, 1, "formatPartitions" ],            
   configureTimezone  => [ __("Configure timezone"), 1, 1, "doInstallStep" ],                 
 #  configureServices => [ __("Configure services"), 0, 0 ],                                  
-  configurePrinter   => [ __("Configure printer"), 1, 0,  ],                                 
+  configurePrinter   => [ __("Configure printer"), 1, 0, "doInstallStep" ],
   setRootPassword    => [ __("Set root password"), 1, 1, "formatPartitions" ],               
   addUser            => [ __("Add a user"), 1, 1, "doInstallStep" ],                         
   createBootdisk     => [ __("Create bootdisk"), 1, 0, "doInstallStep" ],                    
@@ -187,10 +195,11 @@ my @installSteps = (
 );
 
 my (%installSteps, %upgradeSteps, @orderedInstallSteps, @orderedUpgradeSteps);
+
 for (my $i = 0; $i < @installSteps; $i += 2) {
     my %h; @h{@installStepsFields} = @{ $installSteps[$i + 1] };
-    $h{help} = $stepsHelp{$installSteps[$i]} || __("Help");
-    $h{next} = $installSteps[$i + 2];
+    $h{help}    = $stepsHelp{$installSteps[$i]} || __("Help");
+    $h{next}    = $installSteps[$i + 2];
     $h{onError} = $installSteps[$i + 2 * $h{onError}];
     $installSteps{ $installSteps[$i] } = \%h;
     push @orderedInstallSteps, $installSteps[$i];
@@ -211,9 +220,14 @@ for (my $i = 0; $i < @installSteps; $i += 2) {
 
 $installSteps{first} = $installSteps[0];
 
-
+########################################################################################
+# INTERN CONSTANT
+########################################################################################
 my @install_classes = (__("beginner"), __("developer"), __("server"), __("expert"));
 
+########################################################################################
+# Default value
+########################################################################################
 # partition layout for a server
 #NOT YET USED
 my @serverPartitioning = (
@@ -246,7 +260,7 @@ my $default = {
                  complete => 0,
                  str_type => $printer::printer_type[0],
                  QUEUE    => "lp",
-                 SPOOLDIR => "/var/spool/lpd/lp",
+                 SPOOLDIR => "/var/spool/lpd/lp/",
                  DBENTRY  => "DeskJet670",
                  PAPERSIZE => "legal",
                  CRLF      => 0,
@@ -267,18 +281,18 @@ my $default = {
                  SMBUSER   => "user",
                  SMBPASSWD => "passowrd",
                  SMBWORKGROUP => "AS3",
-
                },
     
 #    keyboard => 'de',
 #    display => "192.168.1.9:0",
-
-
 };
 
+########################################################################################
+#$O
 #the big struct which contain, well everything (globals + the interactive methods ...)
 #if you want to do a kickstart file, you just have to add all the required fields (see for example
 #the variable $default)
+########################################################################################
 $o = $::o = { 
 
     default      => $default,              
@@ -305,8 +319,13 @@ $o = $::o = {
 
 };
 
-# each step function are called with two arguments : clicked(because if you are a beginner you can force the 
-# the step) and the entered number
+########################################################################################
+# Steps Functions
+# each step function are called with two arguments : clicked(because if you are a 
+# beginner you can force the the step) and the entered number
+########################################################################################
+
+#------------------------------------------------------------------------------
 sub selectLanguage {
     lang::set($o->{lang} = $o->chooseLanguage);
     $o->{keyboard} = $o->default("keyboard") || keyboard::lang2keyboard($o->{lang});
@@ -320,6 +339,7 @@ sub selectLanguage {
     } 'doInstallStep';
 }
 
+#------------------------------------------------------------------------------
 sub selectKeyboard {
     my ($clicked) = $_[0];
     return if $o->{installClass} eq "beginner" && !$clicked;
@@ -333,6 +353,7 @@ sub selectKeyboard {
     } 'doInstallStep';
 }
 
+#------------------------------------------------------------------------------
 sub selectPath {
     $o->{isUpgrade}    = $o->selectInstallOrUpgrade;
     $o->{steps}        = $o->{isUpgrade} ? \%upgradeSteps : \%installSteps;

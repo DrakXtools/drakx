@@ -150,18 +150,29 @@ sub printerConfig($) {
     return if !$o->{printer}{want};
 
     $o->{printer}{complete} = 0;
-    #std info
-    #Don't wait, if the user enter something, you must remember it
-    #($o->{default}{printer}{QUEUE}, $o->{default}{printer}{SPOOLDIR}) =
-    $o->{printer}{QUEUE}    ||= $o->{default}{printer}{QUEUE};
-    $o->{printer}{SPOOLDIR} ||= $o->{default}{printer}{SPOOLDIR};
-    $o->ask_from_entries_ref(_("Standard Printer Options"),
-			 _("Every print queue (which print jobs are directed to) needs a 
-name (often lp) and a spool directory associated with it. What 
-name and directory should be used for this queue?"),
-			 [_("Name of queue:"), _("Spool directory:")],
-			 [\$o->{printer}{QUEUE}, \$o->{printer}{SPOOLDIR}],
-			);
+    #default value
+    foreach (keys %printer::fields) {
+	foreach (@{$printer::fields{$_}}) {
+	    $o->{printer}{$_} ||= $o->{default}{printer}{$_};
+	}
+	
+    }
+    if ($::expert) {
+	#std info
+	#Don't wait, if the user enter something, you must remember it
+	$o->ask_from_entries_ref(_("Standard Printer Options"),
+				 _("Every print queue (which print jobs are directed to) needs a 
+			   name (often lp) and a spool directory associated with it. What 
+			   name and directory should be used for this queue?"),
+				 [_("Name of queue:"), _("Spool directory:")],
+				 [\$o->{printer}{QUEUE}, \$o->{printer}{SPOOLDIR}],
+				 changed => sub 
+				 { 
+				     $o->{printer}{SPOOLDIR} 
+				       = "$printer::spooldir$o->{printer}{QUEUE}" unless $_[0];
+				 }, 
+				);
+    }
 
     $o->{printer}{str_type} = 
       $o->ask_from_list_(_("Select Printer Connection"),
@@ -184,20 +195,19 @@ name and directory should be used for this queue?"),
 (note that /dev/lp0 is equivalent to LPT1:)?\n");
 	$string .= _("I detect :");
 	$string .= join(", ", @port);
-
+	$o->{printer}{DEVICE}    ||= $port[0];
 	$o->{printer}{DEVICE}    ||= $o->{default}{printer}{DEVICE};
 	
-
-	$o->ask_from_entries_ref(_("Local Printer Device"),
-				 $string,
-				 [_("Printer Device:")],
-				 [\$o->{printer}{DEVICE}],
-				);
+	
+	return if !$o->ask_from_entries_ref(_("Local Printer Device"),
+					    $string,
+					    [_("Printer Device:")],
+					    [\$o->{printer}{DEVICE}],
+					   );
+	#TAKE A GOODDEFAULT TODO
 
     } elsif ($o->{printer}{TYPE} eq "REMOTE") {
-	$o->{printer}{REMOTEHOST}     ||= $o->{default}{printer}{REMOTEHOST};
-	$o->{printer}{REMOTEQUEUE}    ||= $o->{default}{printer}{REMOTEQUEUE};
-	$o->ask_from_entries_ref(_("Remote lpd Printer Options"), 
+	return if !$o->ask_from_entries_ref(_("Remote lpd Printer Options"), 
 				 _("To use a remote lpd print queue, you need to supply 
 the hostname of the printer server and the queue name 
 on that server which jobs should be placed in."),
@@ -206,15 +216,7 @@ on that server which jobs should be placed in."),
 				);
 	
     } elsif ($o->{printer}{TYPE} eq "SMB") {
-	$o->{printer}{SMBHOST}      ||= $o->{default}{printer}{SMBHOST};  
-	$o->{printer}{SMBHOSTIP}    ||= $o->{default}{printer}{SMBHOSTIP}; 
-	$o->{printer}{SMBSHARE}     ||= $o->{default}{printer}{SMBSHARE};  
-	$o->{printer}{SMBUSER}      ||= $o->{default}{printer}{SMBUSER};
-	$o->{printer}{SMBPASSWD}    ||= $o->{default}{printer}{SMBPASSWD};
-	$o->{printer}{SMBWORKGROUP} ||= $o->{default}{printer}{SMBWORKGROUP};
-	
-	
-	$o->ask_from_entries_ref(_("SMB/Windows 95/NT Printer Options"),
+	return if !$o->ask_from_entries_ref(_("SMB/Windows 95/NT Printer Options"),
 				 _("To print to a SMB printer, you need to provide the 
 SMB host name (this is not always the same as the machines 
 TCP/IP hostname) and possibly the IP address of the print server, as 
@@ -228,17 +230,8 @@ applicable user name, password, and workgroup information."),
 				  \$o->{printer}{SMBPASSWD}, \$o->{printer}{SMBWORKGROUP}
 				 ]
 				);
-
-
-	
     } elsif ($o->{printer}{TYPE} eq "NCP") {
-	$o->{printer}{NCPHOST}   ||= $o->{default}{printer}{NCPHOST};
-	$o->{printer}{NCPQUEUE}  ||= $o->{default}{printer}{NCPQUEUE};
-	$o->{printer}{NCPUSER}   ||= $o->{default}{printer}{NCPUSER};
-	$o->{printer}{NCPPASSWD} ||= $o->{default}{printer}{NCPPASSWD};
-	
-
-	$o->ask_from_entries_ref(_("NetWare Printer Options"),
+	return if !$o->ask_from_entries_ref(_("NetWare Printer Options"),
 				 _("To print to a NetWare printer, you need to provide the 
 NetWare print server name (this is not always the same as the machines 
 TCP/IP hostname) as well as the print queue name for the printer you 
@@ -250,15 +243,17 @@ wish to access and any applicable user name and password."),
 				);
     }
     
- 
-#    printer::set_prefix($o->{prefix});
+    unless (($::testing)) {
+	printer::set_prefix($o->{prefix});
+	pkgs::select($o->{packages}, $o->{packages}{'rhs-printfilters'});
+	$o->installPackages($o->{packages});
+    }
     printer::read_printer_db();
     my @entries_db_short     = sort keys %printer::thedb;
     my @entry_db_description = map { $printer::thedb{$_}{DESCR} } @entries_db_short;
     my %descr_to_db          = map { $printer::thedb{$_}{DESCR}, $_ } @entries_db_short;
     my %db_to_descr          = reverse %descr_to_db;
     
-    $o->{printer}{DBENTRY} ||= $o->{default}{printer}{DBENTRY};
     $o->{printer}{DBENTRY} = 
       $descr_to_db{
 		   $o->ask_from_list_(_("Configure Printer"),
@@ -272,7 +267,6 @@ wish to access and any applicable user name and password."),
 
 
     #paper size conf
-    $o->{printer}{PAPERSIZE} ||= $o->{default}{printer}{PAPERSIZE};
     $o->{printer}{PAPERSIZE} = 
       $o->ask_from_list_(_("Paper Size"),
 			 _("Paper Size"),
@@ -281,8 +275,6 @@ wish to access and any applicable user name and password."),
 			);
 
     #resolution size conf
-    $o->{printer}{RESOLUTION} ||= $o->{default}{printer}{RESOLUTION};
-    
     my @list_res = @{$db_entry{RESOLUTION}};
     my @res = map { "${$_}{XDPI}x${$_}{YDPI}" } @list_res;
     if (@list_res) {
@@ -300,14 +292,11 @@ wish to access and any applicable user name and password."),
     # MAJOR HACK 
     # if the printer is an HP, let's do stairstep correction 
     $o->{printer}{CRLF} = $db_entry{DESCR} =~ /HP/;
-
-    $o->{printer}{CRLF} ||= $o->{default}{printer}{CRLF};
     $o->{printer}{CRLF}= $o->ask_yesorno(_("CRLF"),
 					 _("Fix stair-stepping of text?"),
 					 $o->{printer}{CRLF});
 
     #color_depth
-    $o->{printer}{BITSPERPIXEL} ||= $o->{default}{printer}{BITSPERPIXEL};
     my @list_col      = @{$db_entry{BITSPERPIXEL}};
     my @col           = map { "$_->{DEPTH} $_->{DESCR}" } @list_col;
     my %col_to_depth  = map { ("$_->{DEPTH} $_->{DESCR}", $_->{DEPTH}) } @list_col;
@@ -332,20 +321,12 @@ wish to access and any applicable user name and password."),
 			     \@col,
 			     $depth_to_col{$o->{printer}{BITSPERPIXEL}},
 			     )};
-	    
-			    
-			     
-
 	}
     } else {
 	$o->{default}{printer}{BITSPERPIXEL} = "Default";
     }
-    
-    
-
-    #    $o->{printer}{complete} = 1;
+    $o->{printer}{complete} = 1;
     $o->SUPER::printerConfig;
-    
 }
 
 

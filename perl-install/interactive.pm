@@ -91,21 +91,21 @@ sub ask_from_entry($$$;$) {
     $o->ask_from_entryW($title, $message, $def);
 }
 
-sub ask_from_entries($$$$;$) {
-    my ($o, $title, $message, $l, $def) = @_;
+sub ask_from_entries($$$$;$%) {
+    my ($o, $title, $message, $l, $def, %callback) = @_;
 
     my $val = [ map { my $i = $_; \$i } @$def ];
-    $o->ask_from_entries_ref($title, $message, $l, $val) ?
+    $o->ask_from_entries_ref($title, $message, $l, $val, %callback) ?
       [ map { $$_ } @$val ] : undef;
 
 }
 
-sub ask_from_entries_ref($$$$;$) {
-    my ($o, $title, $message, $l, $val) = @_;
+sub ask_from_entries_ref($$$$;$%) {
+    my ($o, $title, $message, $l, $val, %callback) = @_;
     
     $message = ref $message ? $message : [ $message ];
 
-    $o->ask_from_entries_refW($title, $message, $l, $val)
+    $o->ask_from_entries_refW($title, $message, $l, $val, %callback)
     
 }
 sub wait_message($$$) {

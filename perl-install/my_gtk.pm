@@ -73,11 +73,11 @@ sub bigsize($) {
 }
 
 
-sub gtkshow($) { $_[0]->show; $_[0] }
-sub gtkdestroy($) { $_[0] and $_[0]->destroy }
-sub gtkset_usize($$$) { $_[0]->set_usize($_[1],$_[2]); $_[0] }
-sub gtkset_justify($$) { $_[0]->set_justify($_[1]); $_[0] }
-sub gtkset_active($$) { $_[0]->set_active($_[1]); $_[0] }
+sub gtkshow($)         { $_[0]->show; $_[0] }                  
+sub gtkdestroy($)      { $_[0] and $_[0]->destroy }            
+sub gtkset_usize($$$)  { $_[0]->set_usize($_[1],$_[2]); $_[0] }
+sub gtkset_justify($$) { $_[0]->set_justify($_[1]); $_[0] }    
+sub gtkset_active($$)  { $_[0]->set_active($_[1]); $_[0] }     
 
 sub gtksignal_connect($@) {
     my $w = shift;

@@ -1,20 +1,21 @@
-VERSION = 2.2.10-BOOT
-SUDO = sudo
-SO_FILES = c/blib/arch/auto/c/c.so
-PMS = *.pm c/*.pm resize_fat/*.pm po/*.pm pci_probing/*.pm commands install2 diskdrake XFdrake
-ROOTDEST = /export
-DEST = $(ROOTDEST)/Mandrake/mdkinst
-STAGE2 = $(ROOTDEST)/Mandrake/base/mdkinst_stage2
+VERSION     = 2.2.10-BOOT                                                                             
+SUDO        = sudo                                                                                    
+SO_FILES    = c/blib/arch/auto/c/c.so                                                                 
+PMS         = *.pm c/*.pm resize_fat/*.pm po/*.pm pci_probing/*.pm commands install2 diskdrake XFdrake
+ROOTDEST    = /export
+DEST        = $(ROOTDEST)/Mandrake/mdkinst
+STAGE2      = $(ROOTDEST)/Mandrake/base/mdkinst_stage2
+BASE        = $(ROOTDEST)/Mandrake/base
 DESTREP4PMS = $(DEST)/usr/bin/perl-install
-PERL = perl
-LOCALFILES = $(PERL) mouseconfig
-DIRS = po pci_probing
-EXCLUDE = $(LOCALFILES) boot.img xmodmap keymaps consolefonts install
-
-CFLAGS	= -Wall
+PERL        = perl
+LOCALFILES  = $(PERL) mouseconfig
+DIRS        = po pci_probing
+EXCLUDE     = $(LOCALFILES) boot.img xmodmap keymaps consolefonts install
+RPMS        = $(wildcard $(ROOTDEST)/Mandrake/RPMS/*.rpm)
+CFLAGS	    = -Wall
 override CFLAGS  += -pipe
 
-.PHONY: all $(DIRS) tags install clean stage2 full_stage2 verify_c
+.PHONY: all $(DIRS) tags install clean stage2 full_stage2 verify_c 
 
 all: $(SO_FILES) $(DIRS)
 
@@ -64,11 +65,11 @@ test_pms: verify_c
 verify_c:
 	./verify_c $(PMS)
 
-gendepslist: %: %.cc
+gendepslist: %: %.cc 
 	$(CXX) -I/usr/include/rpm $(CFLAGS) $< -lrpm -ldb1 -lz -o $@
 
-depslist: gendepslist
-	./gendepslist $(ROOTDEST)/Mandrake/base/depslist $(ROOTDEST)/Mandrake/RPMS/*.rpm
+$(BASE)/depslist: gendepslist $(RPMS) 
+	./gendepslist $(BASE)depslist $(ROOTDEST)/Mandrake/RPMS/*.rpm
 
 install_pms: all
 	for i in `perl -ne 's/sub (\w+?)_? {.*/$$1/ and print' commands.pm`; do ln -sf commands $(DEST)/usr/bin/$$i; done
@@ -154,7 +155,7 @@ as_root:
 	mount /dev/loop0 /mnt/initrd
 	chmod a+w /mnt/initrd
 
-full_stage2:
+full_stage2: $(BASE)/depslist
 	rm -rf $(DEST)
 	mkdir -p $(DEST)
 	$(MAKE) get_needed_files 
