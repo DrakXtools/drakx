@@ -903,7 +903,6 @@ sub main {
 }
 sub show($) {
     my ($o) = @_;
-    $o->{window}->show;
     $o->{rwindow}->show;
 }
 sub destroy($) {
