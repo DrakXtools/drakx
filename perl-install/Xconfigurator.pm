@@ -2,7 +2,7 @@ package Xconfigurator; # $Id$
 
 use diagnostics;
 use strict;
-use vars qw($in $install @window_managers @depths @monitorSize2resolution @hsyncranges %min_hsync4wres @vsyncranges %depths @resolutions %serversdriver @svgaservers @accelservers @allbutfbservers @allservers %vgamodes %videomemory @ramdac_name @ramdac_id @clockchip_name @clockchip_id %keymap_translate %standard_monitors $XF86firstchunk_text $keyboardsection_start $keyboardsection_start_v4 $keyboardsection_part2 $keyboardsection_part3 $keyboardsection_part3_v4 $keyboardsection_end $pointersection_text $monitorsection_text1 $monitorsection_text2 $monitorsection_text3 $monitorsection_text4 $modelines_text_Trident_TG_96xx $modelines_text $devicesection_text $devicesection_text_v4 $screensection_text1 %lines @options %xkb_options $good_default_monitor $low_default_monitor $layoutsection_v4);
+use vars qw($in $install @window_managers @depths @monitorSize2resolution @hsyncranges %min_hsync4wres @vsyncranges %depths @resolutions %serversdriver @svgaservers @accelservers @allbutfbservers @allservers %vgamodes %videomemory @ramdac_name @ramdac_id @clockchip_name @clockchip_id %keymap_translate %standard_monitors $XF86firstchunk_text $keyboardsection_start $keyboardsection_start_v4 $keyboardsection_part2 $keyboardsection_part3 $keyboardsection_part3_v4 $keyboardsection_end $pointersection_text $monitorsection_text1 $monitorsection_text2 $monitorsection_text3 $monitorsection_text4 $modelines_text_Trident_TG_96xx $modelines_text $devicesection_text $devicesection_text_v4 $screensection_text1 %lines @options %xkb_options $good_default_monitor $low_default_monitor $layoutsection_v4 $modelines_text_apple);
 
 use common qw(:common :file :functional :system);
 use log;
@@ -580,7 +580,7 @@ sub testFinalConfig {
     }
 
     local *F;
-    open F, "|perl" or die '';
+    open F, "|perl 2>/dev/null" or die '';
     print F "use lib qw(", join(' ', @INC), ");\n";
     print F q{
 	use interactive_gtk;
@@ -605,7 +605,8 @@ sub testFinalConfig {
         -r "} . $prefix . q{/$background" && -x "} . $prefix . q{/$qiv" and
             system(($::testing ? "} . $prefix . q{" : "chroot } . $prefix . q{/ ") . "$qiv -y $background");
 
-	exit (interactive_gtk->new->ask_yesorno('', [ _("Is this the correct setting?"), $text ], 0) ? 0 : 222);
+        my $in = interactive_gtk->new;
+	$in->exit($in->ask_yesorno('', [ _("Is this the correct setting?"), $text ], 0) ? 0 : 222);
     };
     my $rc = close F;
     my $err = $?;
