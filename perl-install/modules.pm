@@ -586,6 +586,10 @@ sub read_stage1_conf {
 sub load_thiskind {
     my ($type, $f) = @_;
 
+    #- get_that_type returns the PCMCIA cards. It doesn't know they are already
+    #- loaded, so:
+    read_already_loaded();
+
     grep {
 	$f->($_->{description}, $_->{driver}) if $f;
 	eval { load($_->{driver}, $type) };
