@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10.1
-Release: 0.21mdk
+Release: 0.22mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -327,8 +327,33 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Mon Sep  6 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.1-0.22mdk
+- diskdrake (pixel):
+  o detect linux software raid magic
+  o detect LVM2
+  o misc fixes
+  o fix displaying "mdmd0" instead of "md0"
+- drakboot: ensure we do not enable autologin w/o any user
+- drakconnect (blino):
+  o fix detection in 2.4 kernel for net devices with high traffic
+  o only complain about kernel-2.4.x for h[cs]f modems
+  o fix kppp config reread
+  o read kppp config when user dir is configured
+  o use /dev/modem if no modem was detected (do not crash when we edit
+    a connection whose modem is unplugged)
+- harddrake service: everything should be done automagically now
+- localedrake:
+  o list specific packages to install for japanese when using SCIM
+  o install scim-m17n as well for generic SCIM configuration (more
+    input methods)
+  o log more explanations
+  o set QT_IM_MODULE too since it's needed by Qt-immodule-20040819
+    (UTUMI Hirosi)
+  o disable translations on console for kn, pa, ug too (pablo)
+
 * Mon Sep  6 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.1-0.21mdk
 - misc GUI enhancements
+- diskdrake: be more failsafe with half broken existing raids (pixel)
 - drakconnect: fix crashes (#11100)
 - harddrake service: really add module for storage controllers, AGP
   controllers, TV cards
