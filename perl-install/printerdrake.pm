@@ -216,7 +216,7 @@ sub auto_detect {
     {
 	my $w = $in->wait_message(_("Test ports"), _("Detecting devices ..."));
 	modules::get_alias("usb-interface") and eval { modules::load("printer"); sleep(2); };
-	foreach (qw(parport_pc lp parport_probe parport)) {
+	foreach (qw(lp parport_pc parport_probe parport)) {
 	    eval { modules::unload($_); }; #- on kernel 2.4 parport has to be unloaded to probe again
 	}
 	foreach (qw(parport_pc lp parport_probe)) {
@@ -278,12 +278,28 @@ complete => sub {
     #- Search the database entry which matches the detected printer best
     foreach (@parport) {
 	$device eq $_->{port} or next;
+	my $descr = $_->{val}{DESCRIPTION};
+	# Clean up the description from noise which makes the best match
+	# difficult
+	$descr =~ s/\s+Inc\.//;
+	$descr =~ s/\s+Corp\.//;
+	$descr =~ s/\s+SA\.//;
+	$descr =~ s/\s+S\.\s*A\.//;
+	$descr =~ s/\s+Ltd\.//;
+	$descr =~ s/\s+International//;
+	$descr =~ s/\s+Int\.//;
+	$descr =~ s/\s+\(?[Pp]rinter\)?$//;
+	
         $printer->{DBENTRY} =
-            bestMatchSentence ($_->{val}{DESCRIPTION}, keys %printer::thedb);
+            bestMatchSentence ($descr, keys %printer::thedb);
         # If the manufacturer was not guessed correctly, discard the
         # guess.
-        #$printer->{DBENTRY} =~ /^([\|])|/;
-        #if ($_->{val}{DESCRIPTION} !~ /lc($1)/i) {$printer->{DBENTRY} = ""};
+        $printer->{DBENTRY} =~ /^([^\|]+)\|/;
+        my $guessedmake = lc($1);
+        if (($descr !~ /$guessedmake/i) &&
+            (($guessedmake ne "hp") ||
+             ($descr !~ /Hewlett[\s-]+Packard/i)))
+            {$printer->{DBENTRY} = ""};
     }
     1;
 }
@@ -743,7 +759,7 @@ sub get_db_entry {
 	    }
 	    if ($printer->{DBENTRY} eq "") {
 		# Exact match of make and model did not work, try to clean
-		# ups the model name
+		# up the model name
 		$model =~ s/PS//;
 		$model =~ s/PostScript//;
 		$model =~ s/Series//;
@@ -754,13 +770,18 @@ sub get_db_entry {
 		    }
 		}
 	    }
-	    if (($printer->{DBENTRY} eq "") && 0) {
+	    if (($printer->{DBENTRY} eq "") && ($make ne "")) {
 		# Exact match with cleaned-up model did not work, try a best match
-		$printer->{DBENTRY} = bestMatchSentence("$make|$model", keys %printer::thedb);
+		my $matchstr = "$make|$model";
+		$printer->{DBENTRY} = bestMatchSentence($matchstr, keys %printer::thedb);
 		# If the manufacturer was not guessed correctly, discard the
 		# guess.
-		$printer->{DBENTRY} =~ /^([\|])|/;
-		if (lc($1) ne lc($make)) {$printer->{DBENTRY} = ""};
+		$printer->{DBENTRY} =~ /^([^\|]+)\|/;
+		my $guessedmake = lc($1);
+		if (($matchstr !~ /$guessedmake/i) &&
+		    (($guessedmake ne "hp") ||
+		     ($matchstr !~ /Hewlett[\s-]+Packard/i)))
+		{$printer->{DBENTRY} = ""};
 	    }
 	    # Set the OLD_CHOICE to a non-existing value
 	    $printer->{OLD_CHOICE} = "XXX";
@@ -791,7 +812,14 @@ sub choose_model {
     }
     # Choose the printer/driver from the list
     return ($printer->{DBENTRY} = $in->ask_from_treelist(_("Printer model selection"),
-							 _("Which printer model do you have?"), '|',
+							 _("Which printer model do you have?") .
+							 _("
+
+Please check whether Printerdrake did the 
+auto-detection of your printer model
+correctly. Search the correct model in the
+list when the cursor is standing on a 
+wrong model or on \"Raw printer\"."), '|',
 							 [ keys %printer::thedb ], $printer->{DBENTRY}));
 
 }
