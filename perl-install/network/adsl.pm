@@ -36,25 +36,21 @@ If you don't know, choose 'use pppoe'"),
 	$in->do_pkgs->install("rp-$type") if !$::testing;
 	$netcnx->{type} = "adsl_$type";
 	adsl_conf($netcnx->{"adsl_$type"}, $netc, $intf, $type) or goto conf_adsl_step1;
-    }
-    if ($type eq 'dhcp') {
+    } elsif ($type eq 'dhcp') {
 	$in->do_pkgs->install(qw(dhcpcd)) if !$::testing;
 	go_ethernet($netc, $intf, 'dhcp', '', '', $first_time) or goto conf_adsl_step1;
-    }
-    if ($type eq 'pptp') {
+    } elsif ($type eq 'pptp') {
 	$in->do_pkgs->install(qw(pptp-adsl)) if !$::testing;
 	$netcnx->{type} = "adsl_$type";
 	$netcnx->{"adsl_$type"} = {};
 	adsl_conf($netcnx->{"adsl_$type"}, $netc, $intf, $type) or goto conf_adsl_step1;
-    }
-    if ($type =~ /sagem/) {
+    } elsif ($type =~ /sagem/) {
 	$type = 'sagem' . ($type =~ /dhcp/ ? "_dhcp" : "");
 	$in->do_pkgs->install(qw(adiusbadsl), if_($type =~ /dhcp/, qw(dhcpcd))) if !$::testing;
 	$netcnx->{type} = "adsl_$type";
 	$netcnx->{"adsl_$type"} = {};
 	adsl_conf($netcnx->{"adsl_$type"}, $netc, $intf, $type) or goto conf_adsl_step1;
-    }
-    if ($type =~ /speedtouch/) {
+    } elsif ($type =~ /speedtouch/) {
 	$type = 'speedtouch';
 	$in->do_pkgs->install(qw(speedtouch)) if !$::testing;
 	$netcnx->{type} = "adsl_$type";
@@ -62,7 +58,7 @@ If you don't know, choose 'use pppoe'"),
 	$netcnx->{"adsl_$type"}{vpivci} = '';
 	adsl_conf($netcnx->{"adsl_$type"}, $netc, $intf, $type) or goto conf_adsl_step1;
     }
-    # if ($type =~ /ECI/) {
+    # elsif ($type =~ /ECI/) {
 # 	$type = 'eci';
 # 	$in->do_pkgs->install(qw(eciadsl)) if !$::testing;
 # 	$netcnx->{type} = "adsl_$type";
@@ -70,6 +66,9 @@ If you don't know, choose 'use pppoe'"),
 # 	$netcnx->{"adsl_$type"}{vpivci} = '';
 # 	adsl_conf($netcnx->{"adsl_$type"}, $netc, $intf, $type) or goto conf_adsl_step1;
 #     }
+    else {
+        die "unknown adsl connection type !!!";
+    }
     $type =~ /speedtouch|eci/ or $netconnect::need_restart_network = 1;
     1;
 }
