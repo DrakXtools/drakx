@@ -392,7 +392,7 @@ int mandrake_move_pre(void)
 static enum return_type handle_clp(char* clp, char* live, char* location_live, char* location_mount, int* is_symlink, char* clp_tmpfs)
 {
         static int count = 0;
-        if (IS_LIVE || access(clp, R_OK)) {
+        if (access(clp, R_OK)) {
                 log_message("no %s found (or disabled), trying to fallback on plain tree", clp);
                 if (!access(live, R_OK)) {
                         if (scall(symlink(location_live, location_mount), "symlink"))
