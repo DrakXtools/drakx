@@ -130,7 +130,7 @@ sub geometry_from_edd {
     my $geom = { sectors => 0 + cat_("$edd_dir/legacy_sectors_per_track"), 
 		 heads => 1 + cat_("$edd_dir/legacy_max_head"),
 		 from_edd => 1 };
-    is_geometry_valid_for_the_partition_table($hd, $geom) or return;
+    is_geometry_valid_for_the_partition_table($hd, $geom, 0) or return;
     partition_table::raw::compute_nb_cylinders($geom, $hd->{totalsectors});
 
     log::l("geometry_from_edd $hd->{device} $hd->{volume_id}: " . geometry_to_string($geom));
