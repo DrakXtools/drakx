@@ -324,7 +324,7 @@ sub is_wireless_intf {
 
 sub is_dynamic_ip {
   my ($intf) = @_;
-  every { $_->{BOOTPROTO} eq "static" } values %$intf
+  any { $_->{BOOTPROTO} !~ /^(none|static|)$/ } values %$intf;
 }
 
 1;
