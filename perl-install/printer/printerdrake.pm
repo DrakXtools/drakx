@@ -2634,7 +2634,7 @@ You should make sure that the page size and the ink type/printing mode (if avail
 		    push(@{$choicelists[$i]}, $choice->{comment});
 		    push(@{$shortchoicelists[$i]}, $choice->{value});
 		    if ($choice->{value} eq $optshortdefault) {
-			push(@userinputs, $choice->{comment});
+			$userinputs[$i] = $choice->{comment};
 		    }
 		}
 		push(@widgets,
@@ -2745,6 +2745,9 @@ You should make sure that the page size and the ink type/printing mode (if avail
 	# line arguments
 	@{$printer->{currentqueue}{options}} = ();
 	for ($i = 0; $i <= $#{$printer->{ARGS}}; $i++) {
+	    # We did not show hidden options, so we do not have user input 
+	    # to add to the option list
+	    next if $printer->{ARGS}[$i]{hidden};
 	    push(@{$printer->{currentqueue}{options}}, "-o");
 	    if ($printer->{ARGS}[$i]{type} eq 'enum') {
 		# enumerated option
