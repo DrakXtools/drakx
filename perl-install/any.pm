@@ -281,7 +281,7 @@ You can add some more or change the existing ones."),
 		$prefix = "linux";
 	    } else {
 		$e = { type => 'other' };
-		$prefix = arch() =~ /sparc/ ? "sunos" : arch() =~ /ppc/ ? "macos" : "windows";;
+		$prefix = arch() =~ /sparc/ ? "sunos" : arch() =~ /ppc/ ? "macos" : "windows";
 	    }
 	    $e->{label} = $prefix;
 	    for (my $nb = 0; member($e->{label}, @labels); $nb++) { $e->{label} = "$prefix-$nb" }
@@ -492,11 +492,7 @@ BOOTPROTO="none"
 PEERDNS="$toreplace{peerdns}"
 END
     foreach (1..2) {
-	if ($toreplace{"dns$_"}) {
-	    print IFCFG <<END;
-DNS$_=$toreplace{"dns$_"}
-END
-	}
+	print IFCFG qq(DNS$_=$toreplace{"dns$_"}\n) if $toreplace{"dns$_"};
     }
     close IFCFG;
 

@@ -18,8 +18,8 @@ local $_ = join '', @ARGV;
 $::expert = /-expert/;
 
 print "[$::expert]\n";
-my $keyboard='';
-if ($::expert) { ($keyboard) = grep { !/^-/ } @ARGV;}
+my $keyboard;
+if ($::expert) { ($keyboard) = grep { !/^-/ } @ARGV }
 print "[$keyboard]\n";
 my $in = 'interactive'->vnew('su', 'keyboard');
 

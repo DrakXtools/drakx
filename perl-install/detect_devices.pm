@@ -17,7 +17,7 @@ use c;
 #- Globals
 #-#####################################################################################
 my @netdevices = map { my $l = $_; map { "$l$_" } (0..3) } qw(eth tr fddi plip);
-my %serialprobe = ();
+my %serialprobe;
 
 #-######################################################################################
 #- Functions
@@ -464,7 +464,7 @@ sub hasUltra66 {
 }
 
 sub whatParport() {
-    my @res = ();
+    my @res;
     foreach (0..3) {
 	my $elem = {};
 	local *F;
@@ -512,7 +512,7 @@ sub whatUsbport() {
     # manufacturer and model names, so that they are easily matched to the
     # printer entries in the Foomatic database
     my $i; 
-    my @res = ();
+    my @res;
     foreach $i (0..15) {
 	my $port = "/dev/usb/lp$i";
 	my $realport = devices::make("$port");
@@ -611,7 +611,7 @@ sub probeSerialDevices {
     #- ... but still take some time :-)
     local *F; open F, "$ENV{LD_LOADER} serial_probe |";
     local $_;
-    my %current = (); while (<F>) {
+    my %current; while (<F>) {
 	$serialprobe{$current{DEVICE}} = { %current } and %current = () if /^\s*$/ && $current{DEVICE};
 	$current{$1} = $2 if /^([^=]+)=(.*?)\s*$/;
     }

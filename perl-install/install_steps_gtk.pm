@@ -78,7 +78,7 @@ sub new($$) {
 		elsif (/Permedia2/) { @servers = qw(3DLabs) }
 		else { @servers = qw(Xsun24) }
 	    } elsif (arch() =~ /ia64/) {
-		@servers= 'XFree86';
+		@servers = 'XFree86';
 	    } elsif (arch() eq "ppc") {
 	    	@servers = qw(Xpmac);
             }

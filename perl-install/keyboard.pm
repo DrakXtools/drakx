@@ -1,4 +1,3 @@
-
 package keyboard; # $Id$
 
 use diagnostics;

@@ -247,7 +247,7 @@ sub write_conf {
 	      if $v2 && !$written->{$mod}{$type};
 	}
     }
-    my @l = ();
+    my @l;
     push @l, 'scsi_hostadapter' if !is_empty_array_ref($conf{scsi_hostadapter}{probeall});
     push @l, 'bttv' if grep { $_->{driver} eq 'bttv' } detect_devices::probeall();
     append_to_etc_modules($prefix, @l);

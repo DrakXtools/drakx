@@ -1,4 +1,3 @@
-
 package install2; # $Id$
 
 use diagnostics;

@@ -63,7 +63,7 @@ sub new {
 	    $style->font(Gtk::Gdk::Font->fontset_load("-adobe-utopia-regular-r-*-*-25-*-*-*-p-*-iso8859-*"));
 	    my $w = $style->font->string_width($::Wizard_title);
 	    $draw1->signal_connect(expose_event => sub {
-				       for (my $i=0; $i < (540/$y1); $i++) {
+				       for (my $i = 0; $i < (540/$y1); $i++) {
 					   $draw1->window->draw_pixmap ($draw1->style->bg_gc('normal'),
 									$im_up, 0, 0, 0, $y1*$i,
 									$x1 , $y1);
@@ -75,7 +75,7 @@ sub new {
 				       }
 				   });
 	    $draw2->signal_connect(expose_event => sub {
-				       for (my $i=0; $i < (300/$y2); $i++) {
+				       for (my $i = 0; $i < (300/$y2); $i++) {
 					   $draw2->window->draw_pixmap ($draw2->style->bg_gc('normal'),
 									$im_left, 0, 0, 0, $y2*$i,
 									$x2 , $y2);
@@ -377,7 +377,7 @@ sub gtkctree_children {
     @l;
 }
 
-my @icon_paths = ();
+my @icon_paths;
 sub add_icon_path { push @icon_paths, @_ }
 
 sub icon_paths {
@@ -387,16 +387,16 @@ sub icon_paths {
 sub gtkcreate_xpm {
     my ($f) = @_;
     my $rw = gtkroot();
-    $f =~ m|.xpm$| or $f="$f.xpm";
-    if ($f !~ /\//) { -e "$_/$f" and $f="$_/$f", last foreach icon_paths() }
+    $f =~ m|.xpm$| or $f = "$f.xpm";
+    if ($f !~ /\//) { -e "$_/$f" and $f = "$_/$f", last foreach icon_paths() }
     my @l = Gtk::Gdk::Pixmap->create_from_xpm($rw, new Gtk::Style->bg('normal'), $f) or die "gtkcreate_xpm: missing pixmap file $f";
     @l;
 }
 
 sub gtkcreate_png {
     my ($f) = shift;
-    $f =~ m|.png$| or $f="$f.png";
-    if ($f !~ /\//) { -e "$_/$f" and $f="$_/$f", last foreach icon_paths() }
+    $f =~ m|.png$| or $f = "$f.png";
+    if ($f !~ /\//) { -e "$_/$f" and $f = "$_/$f", last foreach icon_paths() }
     my $im = Gtk::Gdk::ImlibImage->load_image($f) or die "gtkcreate_png: missing png file $f";
     $im->render($im->rgb_width, $im->rgb_height);
     ($im->move_image(), $im->move_mask);
@@ -423,7 +423,7 @@ sub create_pix_text {
     elsif ($background =~ /#(\d+)#(\d+)#(\d+)/) { $color_background = gtkcolor(map{$_*65535/255}($1, $2, $3)) }
     elsif (ref($background) eq 'Gtk::Gdk::Pixmap' && $x_back && $y_back) { $backpix = 1 }
     my $fake_darea = new Gtk::DrawingArea;
-    my $style= $fake_darea->style->copy();
+    my $style = $fake_darea->style->copy();
     if (ref($font) eq 'Gtk::Gdk::Font') {
 	$style->font($font);
     } else {
@@ -679,14 +679,14 @@ sub write_on_pixmap {
     my $gc = Gtk::Gdk::GC->new(gtkroot());
     $gc->set_foreground(gtkcolor(8448, 17664, 40191)); #- in hex : 33, 69, 157
 
-    my $darea= new Gtk::DrawingArea();
+    my $darea = new Gtk::DrawingArea();
     $darea->size($width, $height);
     $darea->set_usize($width, $height);
     my $draw = sub {
 	my $style = new Gtk::Style;
 	#- i18n : you can change the font.
 	$style->font(Gtk::Gdk::Font->fontset_load(_("-adobe-times-bold-r-normal--17-*-100-100-p-*-iso8859-*,*-r-*")));
-	my $y_pos2= $y_pos;
+	my $y_pos2 = $y_pos;
   	foreach (@text) {
   	    $darea->window->draw_string($style->font, $gc, $x_pos, $y_pos2, $_);
   	    $y_pos2 += 20;

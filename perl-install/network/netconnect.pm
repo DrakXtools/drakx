@@ -1,4 +1,3 @@
-
 package network::netconnect;
 
 use diagnostics;
@@ -31,13 +30,13 @@ sub intro {
     read_net_conf($prefix, $netcnx, $netc);
     if (!$::isWizard) {
 	if (connected()) {
-	    $text=_("You are currently connected to internet.") . (-e $disconnect_file ? _("\nYou can disconnect or reconfigure your connection.") : _("\nYou can reconfigure your connection."));
-	    $connected=1;
+	    $text = _("You are currently connected to internet.") . (-e $disconnect_file ? _("\nYou can disconnect or reconfigure your connection.") : _("\nYou can reconfigure your connection."));
+	    $connected = 1;
 	} else {
-	    $text=_("You are not currently connected to Internet.") . (-e $connect_file ? _("\nYou can connect to Internet or reconfigure your connection.") : _("\nYou can reconfigure your connection."));
-	    $connected=0;
+	    $text = _("You are not currently connected to Internet.") . (-e $connect_file ? _("\nYou can connect to Internet or reconfigure your connection.") : _("\nYou can reconfigure your connection."));
+	    $connected = 0;
 	}
-	my @l=(
+	my @l = (
 	       !$connected && -e $connect_file ? { description => _("Connect"),
 						   c => 1} : (),
 	       $connected && -e $disconnect_file ? { description => _("Disconnect"),
@@ -62,11 +61,11 @@ sub intro {
 
 sub detect {
     my ($auto_detect, $net_install) = @_;
-    my $isdn={};
+    my $isdn = {};
     require network::isdn;
     network::isdn->import;
     isdn_detect_backend($isdn);
-    $auto_detect->{isdn}{$_}=$isdn->{$_} foreach qw(description vendor id driver card_type type);
+    $auto_detect->{isdn}{$_} = $isdn->{$_} foreach qw(description vendor id driver card_type type);
     $auto_detect->{isdn}{description} =~ s/.*\|//;
 
     modules::load_category('network/main|usb');
@@ -76,20 +75,20 @@ sub detect {
     require network::adsl;
     network::adsl->import;
     map {
-	(!$net_install and adsl_detect($_->[0])) ? $auto_detect->{adsl}=$_->[0] : $auto_detect->{lan}{$_->[0]}=$_->[1] } @all_cards;
-    my $modem={};
+	(!$net_install and adsl_detect($_->[0])) ? $auto_detect->{adsl} = $_->[0] : $auto_detect->{lan}{$_->[0]} = $_->[1] } @all_cards;
+    my $modem = {};
     require network::modem;
     network::modem->import;
     modem_detect_backend($modem);
-    $modem->{device} and $auto_detect->{modem}=$modem->{device};
+    $modem->{device} and $auto_detect->{modem} = $modem->{device};
 }
 
 sub pre_func {
     my ($text) = @_;
     $in->isa('interactive_gtk') or return;
-    $::Wizard_no_previous=1;
+    $::Wizard_no_previous = 1;
     if ($::isStandalone) {
-	$::Wizard_splash=1;
+	$::Wizard_splash = 1;
 	require my_gtk;
 	my_gtk->import(qw(:wrappers));
 	my $W = my_gtk->new(_("Network Configuration Wizard"));
@@ -103,7 +102,7 @@ sub pre_func {
 		       )
 	      );
 	$W->main;
-	$::Wizard_splash=0;
+	$::Wizard_splash = 0;
     } else {
 	#- for i18n : %s is the type of connection of the list: (modem, isdn, adsl, cable, local network);
 	$in->ask_okcancel(_("Network Configuration Wizard"), _("\n\n\nWe are now going to configure the %s connection.\n\n\nPress OK to continue.",_($_[0])), 1);
@@ -160,7 +159,7 @@ ifdown eth0
 
   step_1:
     $::Wizard_no_previous=1;
-    my @profiles=get_profiles();
+    my @profiles = get_profiles();
     $in->ask_from(_("Network Configuration Wizard"),
 		  _("Welcome to The Network Configuration Wizard.
 
@@ -193,8 +192,8 @@ If you don't want to use the auto detection, deselect the checkbox.
 	     [_("Cable connection"), $netc->{autodetect}{cable}, __("cable connection detected"), \$conf{cable}],
 	     [_("LAN connection"), $netc->{autodetect}{lan}, __("ethernet card(s) detected"), \$conf{lan}]
 	);
-    my $i=0;
-    map { defined $set_default or do { $_->[1] and $set_default=$i }; $i++ } @l;
+    my $i = 0;
+    map { defined $set_default or do { $_->[1] and $set_default = $i }; $i++ } @l;
     @l = (
 [_("Normal modem connection") . if_($netc->{autodetect}{modem}, " - " . _("detected on port %s", $netc->{autodetect}{modem})), \$conf{modem}],
 [_("ISDN connection") . if_($netc->{autodetect}{isdn}{description}, " - " . _("detected %s", $netc->{autodetect}{isdn}{description})), \$conf{isdn}],
@@ -352,9 +351,9 @@ sub save_conf {
     my $adsl;
     my $modem;
     my $isdn;
-    $netcnx->{type} =~ /adsl/ and $adsl=$netcnx->{$netcnx->{type}};
-    $netcnx->{type} eq 'isdn_external' || $netcnx->{type} eq 'modem' and $modem=$netcnx->{$netcnx->{type}};
-    $netcnx->{type} eq 'isdn_internal' and $isdn=$netcnx->{$netcnx->{type}};
+    $netcnx->{type} =~ /adsl/ and $adsl = $netcnx->{$netcnx->{type}};
+    $netcnx->{type} eq 'isdn_external' || $netcnx->{type} eq 'modem' and $modem = $netcnx->{$netcnx->{type}};
+    $netcnx->{type} eq 'isdn_internal' and $isdn = $netcnx->{$netcnx->{type}};
     modules::load_category('network/main|usb');
     require network::ethernet;
     network::ethernet->import;
@@ -500,7 +499,7 @@ sub add_profile {
 
 sub get_profiles {
     my @a;
-    my $i=0;
+    my $i = 0;
     foreach (glob("/etc/sysconfig/network-scripts/drakconnect_conf.*")) {
 	s/.*\.//;
 	$a[$i] = $_;
@@ -511,11 +510,11 @@ sub get_profiles {
 
 sub load_conf {
     my ($netcnx, $netc, $intf)=@_;
-    my $adsl_pptp={};
-    my $adsl_pppoe={};
-    my $modem={};
-    my $isdn_external={};
-    my $isdn={};
+    my $adsl_pptp = {};
+    my $adsl_pppoe = {};
+    my $modem = {};
+    my $isdn_external = {};
+    my $isdn = {};
     my $system_name;
     my $domain_name;
 

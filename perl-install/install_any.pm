@@ -37,7 +37,7 @@ $boot_medium = 1;
 my $postinstall_rpms = '';
 my $current_medium = $boot_medium;
 my $asked_medium = $boot_medium;
-my $cdrom = undef;
+my $cdrom;
 sub useMedium($) {
     #- before ejecting the first CD, there are some files to copy!
     #- does nothing if the function has already been called.

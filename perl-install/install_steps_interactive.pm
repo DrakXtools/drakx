@@ -719,8 +719,8 @@ sub reallyChooseGroups {
 sub chooseCD {
     my ($o, $packages) = @_;
     my @mediums = grep { $_ != $install_any::boot_medium } pkgs::allMediums($packages);
-    my @mediumsDescr = ();
-    my %mediumsDescr = ();
+    my @mediumsDescr;
+    my %mediumsDescr;
 
     if (!common::usingRamdisk()) {
 	#- mono-cd in case of no ramdisk

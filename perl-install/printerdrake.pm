@@ -224,7 +224,7 @@ Do you really want to get your printers auto-detected?"),
 	     _("Do auto-detection"));
 	$do_auto_detect = ($res eq _("Do auto-detection"));
     }
-    my @parport = ();
+    my @parport;
     my $menuentries = {};
     $in->set_help('setupLocal') if $::isInstall;
     if ($do_auto_detect) {
@@ -1497,7 +1497,7 @@ sub setup_options {
 	# range check of the numerical options.
 	my $windowtitle = "$printer->{currentqueue}{make} $printer->{currentqueue}{model}";
 	if ($::expert) {
-	    my $driver = undef;
+	    my $driver;
 	    if ($driver = $printer->{currentqueue}{driver}) {
 		if ($printer->{currentqueue}{foomatic}) {
 		    if ($driver eq 'Postscript') {
@@ -2042,7 +2042,7 @@ sub security_check {
     $in->set_help('securityCheck') if $::isInstall;
 
     # Get security level
-    my $security = undef;
+    my $security;
     if ($::isInstall) {
 	$security = $in->{security};
     } else {

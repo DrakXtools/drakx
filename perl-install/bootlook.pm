@@ -178,7 +178,7 @@ if ($a_mode) {
 $window->show_all();
 Gtk->main_iteration while Gtk->events_pending;
 $::isEmbedded and kill USR2, $::CCPID;
-$inmain=1;
+$inmain = 1;
 Gtk->main;
 Gtk->exit(0);
 

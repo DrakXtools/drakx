@@ -40,7 +40,7 @@ my %static_mirrors = (
 #		      "ackbar" => [ "Ackbar", "/updates", "a", "a" ],
 		     );
 
-my %mirrors = ();
+my %mirrors;
 
 my %deps = (
   'libcrypto.so.0' => 'openssl',

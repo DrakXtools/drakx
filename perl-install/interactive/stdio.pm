@@ -58,7 +58,7 @@ ask_fromW_begin:
 	}
     };
 
-    my @labels = ();
+    my @labels;
     my $format_label = sub { my ($e) = @_; return "`${$e->{val}}' $e->{label} $e->{text}\n" };
     my $do_widget = sub {
 	my ($e, $ind) = @_;

@@ -25,7 +25,7 @@ sub configure_cable {
     #  such as ``mybox.mylab.myco.com''."),
     #  					       [_("Host name:")], [ \$netcnx->{cable}{hostname} ]);
     if ($::expert) {
-	my @m=(
+	my @m = (
 	       { description => "dhcpcd",
 		 c => 1},
 	       { description => "dhcpxd",
@@ -83,7 +83,7 @@ sub conf_network_card {
     my ($netc, $intf, $type, $ipadr, $netadr) = @_;
     #-type =static or dhcp
     any::load_category($in, 'network/main|usb', !$::expert, 1);
-    my @all_cards=conf_network_card_backend($netc, $intf, $type, undef, $ipadr, $netadr);
+    my @all_cards = conf_network_card_backend($netc, $intf, $type, undef, $ipadr, $netadr);
     my $interface;
     @all_cards == () and $in->ask_warn('', _("No ethernet network adapter has been detected on your system.
 I cannot set up this connection type.")) and return;
@@ -97,7 +97,7 @@ I cannot set up this connection type.")) and return;
   l1:
     $::isStandalone and modules::write_conf($prefix);
 
-    my $device=conf_network_card_backend($netc, $intf, $type, $interface, $ipadr, $netadr, $interface);
+    my $device = conf_network_card_backend($netc, $intf, $type, $interface, $ipadr, $netadr, $interface);
 #      if ( $::isStandalone and !($type eq "dhcp")) {
 #  	$in->ask_yesorno(_("Network interface"),
 #  			  _("I'm about to restart the network device:\n") . $device . _("\nDo you agree?"), 1) and configureNetwork2($in, $prefix, $netc, $intf) and system("$prefix/sbin/ifdown $device;$prefix/sbin/ifup $device");
@@ -179,7 +179,7 @@ sub configureNetwork {
     my @all_cards = conf_network_card_backend ($netc, $intf, undef, undef, undef, undef);
 
   configureNetwork_step_1:
-    my $n_card=0;
+    my $n_card = 0;
     $netc ||= {};
     my $last; foreach (@l) {
 	my $intf2 = findIntf($intf ||= {}, $_);

@@ -477,7 +477,7 @@ sub test_mouse {
   					  0, 360*64);
 	    }
 	} elsif ($nb == 3) {
-	    $wait=1;
+	    $wait = 1;
 	    $darea->window->draw_pixmap ($darea->style->bg_gc('normal'),
 					 $aru, 0, 0,
 					 ($darea->allocation->[2]-$width)/2+102, ($darea->allocation->[3]-$height)/2 + 57,
@@ -488,7 +488,7 @@ sub test_mouse {
 					 13, 62);
 	    Gtk->timeout_add(200, sub { $wait = 0 });
 	} elsif ($nb == 4) {
-	    $wait=1;
+	    $wait = 1;
 	    $darea->window->draw_pixmap ($darea->style->bg_gc('normal'),
 					 $ard, 0, 0,
 					 ($darea->allocation->[2]-$width)/2+102, ($darea->allocation->[3]-$height)/2 + 131,

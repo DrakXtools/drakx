@@ -754,7 +754,7 @@ sub read_cups_options ($) {
     }
     my $i;
     my $j;
-    my @args = ();
+    my @args;
     my $line;
     my $inoption = 0;
     my $inchoices = 0;
@@ -833,7 +833,7 @@ sub read_cups_printer_list {
     local *F;
     open F, ($::testing ? "$prefix" : "chroot $prefix/ ") . 
 	"lpstat -v |" || return ();
-    my @printerlist = ();
+    my @printerlist;
     my $line;
     while ($line = <F>) {
 	if ($line =~ m/^\s*device\s+for\s+([^:\s]+):\s*(\S+)\s*$/) {
@@ -860,7 +860,7 @@ sub get_cups_remote_queues {
     local *F;
     open F, ($::testing ? "$prefix" : "chroot $prefix/ ") . 
 	"lpstat -v |" || return ();
-    my @printerlist = ();
+    my @printerlist;
     my $line;
     while ($line = <F>) {
 	if ($line =~ m/^\s*device\s+for\s+([^:\s]+):\s*(\S+)\s*$/) {
@@ -897,7 +897,7 @@ sub set_cups_autoconf {
     }
 
     # Remove all valid "CUPS_CONFIG" lines
-    (/^\s*CUPS_CONFIG/ and $_="") foreach @file_content;
+    (/^\s*CUPS_CONFIG/ and $_ = "") foreach @file_content;
  
     # Insert the new "Printcap" line
     if ($autoconf) {
@@ -975,7 +975,7 @@ sub write_cupsd_conf {
 
 sub read_printers_conf {
     my ($printer) = @_;
-    my $current = undef;
+    my $current;
 
     #- read /etc/cups/printers.conf file.
     #- according to this code, we are now using the following keys for each queues.
@@ -1588,7 +1588,7 @@ sub configure_hpoj {
 	die "Could not open /etc/ptal/$ptaldevice for writing!\n";
 
     # Write file header.
-    $_=`date`;
+    $_ = `date`;
     chomp;
     print CONFIG
 	"# Added $_ by \"printerdrake\".\n".
@@ -2169,7 +2169,7 @@ sub makestarofficeprinterentry {
 			   "BitmapColor=$color", $configfile);
     # Set the default paper size
     if ($ppd =~ /^\s*\*DefaultPageSize:\s*(\S+)\s*$/m) {
-	my $papersize=$1;
+	my $papersize = $1;
 	$configfile = removeentry("$queue.PostScript.$queue",
 				  "PageSize=", $configfile);
 	$configfile = removeentry("$queue.PostScript.$queue",
@@ -2194,7 +2194,7 @@ sub makeopenofficeprinterentry {
     my $ppd = cat_("$prefix/etc/foomatic/$queue.ppd");
     # "PPD_PageSize" line
     if ($ppd =~ /^\s*\*DefaultPageSize:\s*(\S+)\s*$/m) {
-	my $papersize=$1;
+	my $papersize = $1;
 	$configfile = removeentry($queue,
 				  "PPD_PageSize=", $configfile);
 	$configfile = addentry($queue, 
@@ -2353,7 +2353,7 @@ sub getcupsremotequeues {
     local *F;
     open F, ($::testing ? "$prefix" : "chroot $prefix/ ") . 
 	"lpstat -v |" || return ();
-    my @printerlist = ();
+    my @printerlist;
     my $line;
     while ($line = <F>) {
 	if ($line =~ m/^\s*device\s+for\s+([^:\s]+):\s*(\S+)\s*$/) {

@@ -186,7 +186,7 @@ sub ask_standalone_gtk {
     my $W = my_gtk->new(_("Services"));
     my ($x, $y, $w_popup);
     my $nopop = sub { $w_popup and $w_popup->destroy };
-    my $display = sub { $nopop->(); $_[0] and gtkmove(gtkshow(gtkadd($w_popup=new Gtk::Window (-popup),
+    my $display = sub { $nopop->(); $_[0] and gtkmove(gtkshow(gtkadd($w_popup = new Gtk::Window (-popup),
         				       gtksignal_connect(gtkadd(new Gtk::EventBox(),
         				           gtkadd(gtkset_shadow_type(new Gtk::Frame, 'etched_out'),
         					   gtkset_justify(new Gtk::Label($_[0]), 0))),
@@ -229,7 +229,7 @@ sub ask_standalone_gtk {
                                         }}), "@$on_services" =~ /$service/)),
 		  map { my $a = $_;
                       gtkpack__(new Gtk::HBox(0,0), gtksignal_connect(new Gtk::Button(_($a)),
-                          clicked => sub { my $c = "service $service " . (lc($a) eq "start" ? "restart" : lc($a)) . " 2>&1"; local $_=`$c`; s/\033\[[^mG]*[mG]//g;
+                          clicked => sub { my $c = "service $service " . (lc($a) eq "start" ? "restart" : lc($a)) . " 2>&1"; local $_ = `$c`; s/\033\[[^mG]*[mG]//g;
                                            ($started, $action) = $update_service->($service, $l);
                                            $display->($_);
                                          }

@@ -26,6 +26,7 @@ use standalone;     #- warning, standalone must be loaded very first, for 'expla
 use common;
 use detect_devices;
 use interactive;
+use network;
 use log;
 use c;
 use network::netconnect;
@@ -351,7 +352,7 @@ ONBOOT=yes
 #- install and setup the RPM packages
 
 my $rpms_to_install;
-my %rpm2file = (  iptables => '/sbin/iptables',
+my %rpm2file = (iptables => '/sbin/iptables',
 		 'dhcp-server' => '/usr/sbin/dhcpd',
 		 bind => '/usr/sbin/named',
 		 'caching-nameserver' => '/var/named/named.local');
@@ -386,14 +387,15 @@ elsif (!grep(/drakgw/, cat_($rc_firewall_generic))) {
 ");
 }
 
-output($rc_firewall_drakgw, q(#!/bin/sh
+output($rc_firewall_drakgw, sprintf(<<'EOF', $rc_firewall_24, $rc_firewall_24));
+#!/bin/sh
 KERNELMAJ=`uname -r | sed                   -e 's,\..*,,'`
 KERNELMIN=`uname -r | sed -e 's,[^\.]*\.,,' -e 's,\..*,,'`
 
 if [ "$KERNELMAJ" -eq 2 -a "$KERNELMIN" -eq 4 ]; then
-    [ -x ) . $rc_firewall_24 . ' ] && ' . $rc_firewall_24 . q(
+    [ -x %s ] && %s
 fi
-    ));
+EOF
 
 chmod 0700, $rc_firewall_drakgw;
 
@@ -568,7 +570,7 @@ sub pur_gtk_mode
                       _("No Internet Connection Sharing has ever been configured.");
     
     my $window1 = $::isEmbedded ? new Gtk::Plug ($::XID) : new Gtk::Window -toplevel;
-    $window1->signal_connect ( delete_event => sub { Gtk->exit(0); });
+    $window1->signal_connect(delete_event => sub { Gtk->exit(0) });
     $window1->set_position(1);
     $window1->set_title(_("Internet connection sharing configuration"));
     $window1->border_width(10);
@@ -590,13 +592,13 @@ Click on Configure to launch the setup wizard.", $setup_state));
     $vbox1->pack_start($bbox1,0,0,0);
     $bbox1->set_layout(-end);
     my $button_conf = new Gtk::Button _("Configure");
-    $button_conf->signal_connect ( clicked => sub {
+    $button_conf->signal_connect(clicked => sub {
 				       system("/usr/sbin/drakgw --wizard");
 				       kill(USR1, $::CCPID);
 				   });
     $bbox1->add($button_conf);
     my $button_cancel = new Gtk::Button _("Cancel");
-    $button_cancel->signal_connect ( clicked => sub {
+    $button_cancel->signal_connect(clicked => sub {
 					 kill(USR1, $::CCPID);
 				     });
     $bbox1->add($button_cancel);
@@ -611,6 +613,9 @@ Click on Configure to launch the setup wizard.", $setup_state));
 
 #-------------------------------------------------
 #- $Log$
+#- Revision 1.63  2002/07/31 11:59:03  prigaux
+#- make new perl_checker happy
+#-
 #- Revision 1.62  2002/07/23 10:35:55  tvignaud
 #- - Big Move 1: interactive::* hierarchy
 #-

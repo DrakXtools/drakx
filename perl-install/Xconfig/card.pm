@@ -294,7 +294,7 @@ sub install_server {
 
     my $prog = server_binary($card);
 
-    my @packages = ();
+    my @packages;
     push @packages, using_xf4($card) ? 'XFree86-server' : "XFree86-$card->{server}" if ! -x "$::prefix$prog";
 
     #- additional packages to install according available card.

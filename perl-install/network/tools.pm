@@ -46,12 +46,12 @@ sub ask_connect_now {
 	    my $w = $in->wait_message('', _("Testing your connection..."), 1);
 	    connect_backend();
 	    my $s = 30;
-	    $type =~ /modem/ and $s=50;
-	    $type =~ /adsl/ and $s=35;
-	    $type =~ /isdn/ and $s=20;
+	    $type =~ /modem/ and $s = 50;
+	    $type =~ /adsl/ and $s = 35;
+	    $type =~ /isdn/ and $s = 20;
 	    sleep $s;
 	    my $netc = {};
-	    $up=connected();
+	    $up = connected();
 	}
 	my $m = $up ? (_("The system is now connected to Internet.") .
 		     if_($::isInstall, _("For security reason, it will be disconnected now.")) ) :

@@ -74,7 +74,7 @@ sub isdn_write_config_backend {
 	if ($isdn->{id}) {
 	    isdn_detect_backend($isdn);
 	} else {
-	    my $a="";
+	    my $a = "";
 	    defined $isdn->{$_} and $a .= "$_=" . $isdn->{$_} . " " foreach qw(type protocol mem io io0 io1 irq);
 	    $isdn->{driver} eq "hisax" and $a.="id=HiSax";
 	    modules::set_options($isdn->{driver}, $a);
@@ -86,7 +86,7 @@ sub isdn_write_config_backend {
 	    chmod 0600, $f;
 	}
 	foreach my $f ('isdn1B.conf', 'isdn2B.conf') {
-	    my $a=1;
+	    my $a = 1;
 	    substInFile {
 		s/EAZ =.*/EAZ = $isdn->{phone_in}/;
 		s/PHONE_OUT =.*/PHONE_OUT = $isdn->{phone_out}/;
@@ -167,7 +167,7 @@ sub isdn_ask_info {
     my ($isdn, $netc) = @_;
     my $f = "$ENV{SHARE_PATH}/ldetect-lst/isdn.db";
     $f = "$prefix$f" if !-e $f;
-    my $str= $in->ask_from_treelist(_("ISDN Configuration"), _("Select your provider.\nIf it isn't listed, choose Unlisted."),
+    my $str = $in->ask_from_treelist(_("ISDN Configuration"), _("Select your provider.\nIf it isn't listed, choose Unlisted."),
 				     '|', ['Unlisted - edit manually',
 					   read_providers_backend($f)], 'Unlisted - edit manually')
       or return;
@@ -179,7 +179,7 @@ sub isdn_ask_info {
 }
 
 sub isdn_ask_protocol {
-    my @toto=(
+    my @toto = (
 	      { description => $::expert ? _("Europe protocol (EDSS1)") : _("Europe protocol"),
 		protokol => 2},
 	      { description => $::expert ? _("Protocol for the rest of the world\nNo D-Channel (leased lines)") : _("Protocol for the rest of the world"),
