@@ -318,8 +318,8 @@ TYPE=$kind
     write_cnx_script($netc);
 
     unless ($::isStandalone) {
-        $modems{$adsl_device}{modules} and eval { modules::load(@{$modems{$adsl_device}{modules}}) }
-          or log::l "failled to load " . join('', @{$modems{$adsl_device}{modules}}), " modules: $@";
+        $modems{$adsl_device}{modules} && eval { modules::load(@{$modems{$adsl_device}{modules}}) }
+          or log::l("failled to load " . join('', @{$modems{$adsl_device}{modules}}), " modules: $@");
         $modems{$adsl_device}{start} and run_program::rooted($::prefix, $modems{$adsl_device}{start});
     }
 }
