@@ -259,7 +259,7 @@ wait %d seconds for default boot.
 	       {
 		label => $isSecure || $isSMP ? 'linux-up' : 'linux-nonfb',
 		root  => "/dev/$root",
-	       });
+	       }) if !$isSecure && !$isSMP && $vga_fb;
     add_kernel($prefix, $lilo, $kernelVersion, '',
 	       {
 		label => 'failsafe',

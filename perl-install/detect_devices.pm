@@ -46,7 +46,7 @@ sub cdroms() {
     if (my @l2 = getIDEBurners()) {
 	require modules;
 	modules::add_alias('scsi_hostadapter', 'ide-scsi');
-	my $nb = 1 + max(-1, map { $_->{device} =~ /scd(\d+)/ } @l);
+	my $nb = 1 + max(-1, map { $_->{device} =~ /scd (\d+)/x } @l);
 	foreach my $b (@l2) {
 	    log::l("getIDEBurners: $b");
 	    my ($e) = grep { $_->{device} eq $b } @l or next;
@@ -162,15 +162,8 @@ sub getDAC960() {
 sub getNet() {
     grep { hasNetDevice($_) } @netdevices;
 }
-sub getPlip() {
-    foreach (0..2) {
-	hasNetDevice("plip$_") and log::l("plip$_ will be used for PLIP"), return "plip$_";
-    }
-    undef;
-}
 
 sub hasNet() { goto &getNet }
-sub hasPlip() { goto &getPlip }
 sub hasEthernet() { hasNetDevice("eth0"); }
 sub hasTokenRing() { hasNetDevice("tr0"); }
 sub hasNetDevice($) { c::hasNetDevice($_[0]) }

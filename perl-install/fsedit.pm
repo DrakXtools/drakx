@@ -255,7 +255,8 @@ sub check_mntpoint {
     $check->($fake_part) unless $mntpoint eq '/' && $loopbackDevice; #- '/' is a special case, no loop check
 
     die "raid / with no /boot" if $mntpoint eq "/" && isMDRAID($part) && !has_mntpoint("/boot", $hds);
-    die _("You need a true filesystem (ext2, reiserfs) for this mount point\n") if !isTrueFS($part) && member($mntpoint, qw(/ /usr));
+    die _("This directory should remain within the root filesystem") if member($mntpoint, qw(/bin /dev /etc /lib /sbin));
+    die _("You need a true filesystem (ext2, reiserfs) for this mount point\n") if !isTrueFS($part) && member($mntpoint, qw(/ /home /tmp /usr /var));
 #-    if ($part->{start} + $part->{size} > 1024 * $hd->cylinder_size() && arch() =~ /i386/) {
 #-	  die "/boot ending on cylinder > 1024" if $mntpoint eq "/boot";
 #-	  die     "/ ending on cylinder > 1024" if $mntpoint eq "/" && !has_mntpoint("/boot", $hds);

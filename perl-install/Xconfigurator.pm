@@ -386,7 +386,7 @@ sub testConfig($) {
 }
 
 sub testFinalConfig($;$$) {
-    my ($o, $auto, $skiptest) = @_;
+    my ($o, $auto, $skiptest, $skip_badcard) = @_;
 
     $o->{monitor}{hsyncrange} && $o->{monitor}{vsyncrange} or
       $in->ask_warn('', _("Monitor not configured")), return;
@@ -411,8 +411,8 @@ sub testFinalConfig($;$$) {
     my $mesg = _("Do you want to test the configuration?");
     my $def = 1;
     if ($bad_card && !$::isStandalone) {
-	!$::expert || $auto and return 1;
-	$mesg = $mesg . "\n" . _("Warning: testing is dangerous on this graphic card");
+	$skip_badcard and return 1;
+	$mesg = $mesg . "\n" . _("Warning: testing this graphic card may freeze your computer");
 	$def = 0;
     }
     $auto && $def or $in->ask_yesorno(_("Test of the configuration"), $mesg, $def) or return 1;
@@ -727,7 +727,7 @@ Try with another video card or monitor")), return;
 
     #- remove all biggest resolution (keep the small ones for ctl-alt-+)
     #- otherwise there'll be a virtual screen :(
-    $card->{depth}{$depth} = [ grep { $_->[0] <= $wres } @{$card->{depth}{$depth}} ];
+    $_ = [ grep { $_->[0] <= $wres } @$_ ] foreach values %{$card->{depth}};
     $card->{default_wres} = $wres;
     $card->{vga_mode} = $vgamodes{"${wres}xx$depth"} || $vgamodes{"${res}x$depth"}; #- for use with frame buffer.
     $o->{default_depth} = $depth;
@@ -1095,7 +1095,7 @@ sub main {
     }
     my $ok = resolutionsConfiguration($o, auto => $::auto, noauto => $::noauto);
 
-    $ok &&= testFinalConfig($o, $::auto, $o->{skiptest});
+    $ok &&= testFinalConfig($o, $::auto, $o->{skiptest}, $::auto);
 
     my $quit;
     until ($ok || $quit) {

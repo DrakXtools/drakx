@@ -1,5 +1,26 @@
 2000-09-18  Pixel  <pixel@mandrakesoft.com>
 
+	* Xconfigurator.pm (testFinalConfig): don't skip the test in auto
+	if called via "Test again"
+	* Xconfigurator.pm (resolutionsConfiguration): ensure all depth
+	are bounded
+
+	* bootloader.pm (suggest): don't put "linux-nonfb" if "linux" is
+	classic and no-fb
+
+	* fsedit.pm (check_mntpoint): add a check for /etc /lib... which
+	must not be mount points. Also check that /home, /tmp and /usr are
+	on trueFS
+
+	* interactive.pm (ask_from_entries_ref): add bounding of "val" in
+	case of type "range". die if min > max.
+
+2000-09-18  DrakX <install@linux-mandrake.com>
+
+	* snapshot uploaded
+
+2000-09-18  Pixel  <pixel@mandrakesoft.com>
+
 	* install_steps_interactive.pm (choosePartitionsToFormat): nicer
 	partition/device display
 

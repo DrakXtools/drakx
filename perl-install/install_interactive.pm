@@ -87,8 +87,8 @@ sub partitionWizardSolutions {
 		my ($s_root, $s_swap);
 		my $part = $o->ask_from_listf('', _("Which partition do you want to use to put Linux4Win?"), \&partition_table_raw::description, \@ok_forloopback) or return;
 		$o->ask_from_entries_refH('', _("Choose the sizes"), [ 
-		   _("Root partition size in MB: ") => { val => \$s_root, min => 1 + ($min_linux >> 11), max => min($part->{free} - 2 * $max_swap - $min_freewin, $max_linux) >> 11, type => 'range' },
-		   _("Swap partition size in MB: ") => { val => \$s_swap, min => 1 + ($min_swap >> 11),  max => 2 * $max_swap >> 11, type => 'range' },
+		   _("Root partition size in MB: ") => { val => \$s_root, min => 1 + ($min_linux >> 11), max => min($part->{free} - $max_swap - $min_freewin, $max_linux) >> 11, type => 'range' },
+		   _("Swap partition size in MB: ") => { val => \$s_swap, min => 1 + ($min_swap >> 11),  max => $max_swap >> 11, type => 'range' },
 		]) or return;
 		push @{$part->{loopback}}, 
 		  { type => 0x83, loopback_file => '/lnx4win/linuxsys.img', mntpoint => '/',    size => $s_root << 11, device => $part, notFormatted => 1 },
