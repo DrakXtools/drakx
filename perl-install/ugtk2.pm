@@ -12,13 +12,13 @@ use vars qw(@ISA %EXPORT_TAGS @EXPORT_OK @icon_paths $force_center $force_focus 
       gtkadd gtkexpand gtkput gtktext_append gtktext_insert gtkset_size_request gtksize gtkset_justify gtkset_active
       gtkset_sensitive gtkset_visibility gtkset_modal gtkset_border_width gtkmove gtkresize gtkshow
       gtkhide gtkdestroy gtkflush gtkset_mousecursor gtkset_mousecursor_normal gtkset_markup gtkmodify_font gtkset_property
-      gtkset_mousecursor_wait gtkappend_text gtkprepend_text gtkinsert_text gtkroot gtksetstyle) ],
+      gtkset_mousecursor_wait gtkappend_text gtkprepend_text gtkinsert_text gtkroot gtksetstyle gtkappend_page) ],
     helpers => [ qw(add2notebook add_icon_path n_line_size fill_tiled fill_tiled_coords string_size
       get_text_coord gtkcolor gtkset_background gtkfontinfo gtkcreate_img gtkcreate_pixbuf set_back_pixbuf) ],
     create => [ qw(create_box_with_title create_adjustment create_scrolled_window create_hbox create_vbox
       create_dialog destroy_window create_factory_menu create_menu create_notebook create_packtable
       create_vpaned create_hpaned create_okcancel) ],
-    ask => [ qw(ask_warn ask_okcancel ask_yesorno ask_from_entry ask_browse_tree_info
+    ask => [ qw(ask_warn ask_okcancel ask_yesorno ask_from_entry ask_browse_tree_info 
       ask_browse_tree_info_given_widgets ask_dir) ],
 );
 $EXPORT_TAGS{all} = [ map { @$_ } values %EXPORT_TAGS ];
