@@ -102,7 +102,7 @@ sub look_for_ISO_images() {
 
     my $iso_dir = $ENV{ISOPATH};
     #- strip old root and remove iso file from path if present
-    $iso_dir =~ s!^/sysroot!!; $iso_dir =~ s![^/]*.iso$!!;
+    $iso_dir =~ s!^/sysroot!!; $iso_dir =~ s![^/]*\.iso$!!;
 
     foreach my $iso_file (glob("$iso_dir/*.iso")) {
 	my $iso_dev = devices::set_loop($iso_file) or return;
