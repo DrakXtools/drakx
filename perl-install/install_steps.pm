@@ -356,7 +356,7 @@ sub installPackages($$) { #- complete REWORK, TODO and TOCHECK!
 
     if (%{$packages->{state}{ask_remove} || {}}) {
 	log::l("removing : ", join ', ', keys %{$packages->{state}{ask_remove}});
-	pkgs::remove($o->{prefix}, [ keys %{$packages->{state}{ask_remove}} ]);
+	pkgs::remove($o->{prefix}, [ keys %{$packages->{state}{ask_remove}} ], $packages);
     }
 
     #- small transaction will be built based on this selection and depslist.
@@ -559,8 +559,6 @@ sub install_urpmi {
 				   $o->{packages}{mediums});
 	pkgs::saveCompssUsers($o->{prefix}, $o->{packages}, $o->{compssUsers}, $o->{compssUsersSorted});
     }
-
-
 }
 
 sub updateModulesFromFloppy {
