@@ -218,6 +218,7 @@ done
 	o fix boot freeze on hw change: initscript was running us with
 	  stdout redirected to /dev/null; just use a small sh wrapper to
 	  fix it
+     o harddrake::bttv: only log in standalone mode
 
 - spec:
 	o reorder entries in description
