@@ -116,45 +116,65 @@ sub std2 { "-mdk-helvetica-medium-r-normal-*-*-$_[1]-*-*-*-*-$_[0]" }
 sub std_ { std2($_[0], 100), std2($_[0], 100) }
 sub std  { std2($_[0], 100), std2($_[0],  80) }
 
+#- [0]: console font name; [1]: unicode map for console font
+#- [2]: acm file for console font; [3]: X11 fontset
 my %charsets = (
-  "armscii-8"  => [ "arm8",		"armscii8", std_("armscii-8") ],
+  "armscii-8"  => [ "arm8",		"armscii8",	"trivial.trans", 
+	std_("armscii-8") ],
 #- chinese needs special console driver for text mode
-  "Big5"       => [ undef,            undef,
+  "Big5"       => [ undef,		undef,		undef,
 	"-*-*-*-*-*-*-*-*-*-*-*-*-big5-0" ],
-  "gb2312"     => [ undef,            undef,
+  "gb2312"     => [ undef,		undef,		undef,
         "-isas-song ti-medium-r-normal--16-*-*-*-*-*-gb2312.1980-0" ],
-  "iso-8859-1" => [ "lat0-sun16",	"iso15", std("iso8859-1") ],
-  "iso-8859-2" => [ "lat2-sun16",	"iso02", std("iso8859-2") ],
-  "iso-8859-3" => [ "iso03.f16",	"iso03", std_("iso8859-3") ],
-  "iso-8859-4" => [ "lat4u-16",		"iso04", std_("iso8859-4") ],
-  "iso-8859-5" => [ "iso05.f16",	"iso05", std("iso8859-5") ],
+  "iso-8859-1" => [ "t850b",		"cp850",	"cp850_to_iso01.trans",
+	std("iso8859-1") ],
+  "iso-8859-2" => [ "iso02.f16",	"iso02",	"trivial.trans",
+	std("iso8859-2") ],
+  "iso-8859-3" => [ "iso03.f16",	"iso03",	"trivial.trans",
+	std_("iso8859-3") ],
+  "iso-8859-4" => [ "lat4u-16",		"iso04",	"trivial.trans",
+	std_("iso8859-4") ],
+  "iso-8859-5" => [ "iso05.f16",	"iso05",	"trivial.trans",
+	std("iso8859-5") ],
 #- arabic needs special console driver for text mode [acon]
 #- (and gtk support isn't done yet)
-  "iso-8859-6" => [ "iso06.f16",	"iso06", std_("iso8859-6") ],
-  "iso-8859-7" => [ "iso07.f16",	"iso07", std_("iso8859-7") ],
+  "iso-8859-6" => [ "iso06.f16",	"iso06",	"trivial.trans",
+	std_("iso8859-6") ],
+  "iso-8859-7" => [ "iso07.f16",	"iso07",	"trivial.trans",
+	std_("iso8859-7") ],
 #- hebrew needs special console driver for text mode (none yet)
 #- (and gtk support isn't done yet)
-  "iso-8859-8" => [ "iso08.f16",	"iso08", std_("iso8859-8") ],
-  "iso-8859-9" => [ "lat5-16",		"iso09", std("iso8859-9") ],
-  "iso-8859-13" => [ undef,		undef,   std_("iso8859-13") ],
-  "iso-8859-14" => [ undef,		undef,   std_("iso8859-14") ],
-  "iso-8859-15" => [ "lat0-sun16",	"iso15", std("iso8859-15") ],
+  "iso-8859-8" => [ "iso08.f16",	"iso08",	"trivial.trans",
+	std_("iso8859-8") ],
+  "iso-8859-9" => [ "lat5-16",		"iso09",	"trivial.trans",
+	std("iso8859-9") ],
+  "iso-8859-13" => [ "tlat7",		"iso13",	"trivial.trans"
+	std_("iso8859-13") ],
+  "iso-8859-14" => [ "tlat8",		"iso14",	"trivial.trans", 
+	std_("iso8859-14") ],
+  "iso-8859-15" => [ "t850b", 		"cp850b",	"cp850_to_iso01.trans",
+	std("iso8859-15") ],
 #- japanese needs special console driver for text mode [kon2]
-  "jisx0208"   => [ undef,		undef, 
+  "jisx0208"   => [ undef,		undef,		"trivial.trans",
 	"-*-*-*-*-*-*-*-*-*-*-*-*-jisx*.*-0" ],
-  "koi8-r"     => [ "Cyr_a8x16",	"koi2alt", std("koi8-r") ],
-  "koi8-u"     => [ "ruscii_8x16",	"koi2alt", std("koi8-u") ],
-  "cp1251"     => [ undef,		undef, std2("microsoft-cp1251",100) ],
+  "koi8-r"     => [ "Cyr_a8x16",	"koi2alt",	"trivial.trans",
+	std("koi8-r") ],
+  "koi8-u"     => [ "ruscii_8x16",	"koi2alt",	"trivial.trans",
+	std("koi8-u") ],
+  "cp1251"     => [ undef,		undef,		"trivial.trans",
+	std2("microsoft-cp1251",100) ],
 #- korean needs special console driver for text mode
-  "ksc5601"    => [ undef,            undef,
+  "ksc5601"    => [ undef,		undef,		undef,
 	"-*-*-*-*-*-*-*-*-*-*-*-*-ksc5601.1987-*" ],
-  "tis620"     => [ undef,		undef,  std2("tis620.2533-1",120) ],
-  "tcvn"       => [ "tcvn8x16",		"tcvn", std2("tcvn-5712", 130), std2("tcvn-5712", 100) ],
-  "viscii"     => [ "viscii10-8x16",	"viscii",
+  "tis620"     => [ undef,		undef,		"trivial.trans",
+	std2("tis620.2533-1",120) ],
+  "tcvn"       => [ "tcvn8x16",		"tcvn",		"trivial.trans",
+	std2("tcvn-5712", 130), std2("tcvn-5712", 100) ],
+  "viscii"     => [ "viscii10-8x16",	"viscii",	"trivial.trans",
 	"-*-*-*-*-*-*-*-*-*-*-*-*-viscii1.1-1" ],
 #- Farsi (iranian) needs special console driver for text mode [patching acon ?]
 #- (and gtk support isn't done yet)
-  "isiri-3342" => [ undef,		undef,
+  "isiri-3342" => [ undef,		undef,		"trivial.trans",
 	"-*-*-*-*-*-*-*-*-*-*-*-*-isiri-3342" ],
 );
 
@@ -208,12 +228,13 @@ sub write {
 
 	my $c = $charsets{$l->[1] || ''};
 	if ($c && $c->[0] && $c->[1]) {	    
-	    add2hash $h, { SYSFONT => $c->[0], SYSFONTACM => $c->[1] };
+	    add2hash $h, { SYSFONT => $c->[0], UNIMAP => $c->[1], SYSFONTACM => $c->[2] };
 
 	    my $p = "$prefix/usr/lib/kbd";
 	    commands::cp("-f",
 		     "$p/consolefonts/$c->[0].psf.gz",
 		     glob_("$p/consoletrans/$c->[1]*"),
+		     glob_("$p/consoletrans/$c->[2]*"),
 		     "$prefix/etc/sysconfig/console");
 	}
 	add2hash $h, $xim{$lang};
@@ -289,7 +310,7 @@ sub get_x_fontset {
 
     my $l = $languages{$lang}  or return;
     my $c = $charsets{$l->[1]} or return;
-    @$c[2..3];
+    @$c[3..4];
 }
 
 #-######################################################################################
