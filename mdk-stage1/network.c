@@ -924,12 +924,8 @@ enum return_type ftp_prepare(void)
 
 		use_http_proxy = !streq(http_proxy_host, "") && !streq(http_proxy_port, "");
 
-		if (answers[1][0] == '/') {
-                        strcpy(location_full, answers[1]);
-                } else {
-                        strcpy(location_full, "/");
-                        strcat(location_full, answers[1]);
-                }
+		strcpy(location_full, answers[1][0] == '/' ? "" : "/");
+		strcat(location_full, answers[1]);
 
 		if (use_http_proxy) {
 		        log_message("FTP: don't connect to %s directly, will use proxy", answers[0]);
@@ -1061,12 +1057,8 @@ enum return_type http_prepare(void)
 			return http_prepare();
 		}
 
-		if (answers[1][0] == '/') {
-                        strcpy(location_full, answers[1]);
-                } else {
-                        strcpy(location_full, "/");
-                        strcat(location_full, answers[1]);
-                }
+		strcpy(location_full, answers[1][0] == '/' ? "" : "/");
+		strcat(location_full, answers[1]);
 		strcat(location_full, get_ramdisk_realname());
 
 		log_message("HTTP: trying to retrieve %s from %s", location_full, answers[0]);
