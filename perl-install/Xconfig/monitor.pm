@@ -72,15 +72,15 @@ sub configure_auto_install {
 sub choose {
     my ($in, $monitor, $b_auto) = @_;
 
-    my $monitors = monitors();
+    my $monitors_db = monitors_db();
 
-    my $ok = configure_automatic($monitor, $monitors);
+    my $ok = configure_automatic($monitor, $monitors_db);
     if ($b_auto) {
 	log::l("Xconfig::monitor: auto failed") if !$ok;
 	return $ok;
     }
 
-    my %h_monitors = map {; "$_->{VendorName}|$_->{ModelName}" => $_ } @$monitors;
+    my %h_monitors = map {; "$_->{VendorName}|$_->{ModelName}" => $_ } @$monitors_db;
 
   ask_monitor:
     my $merged_name = do {
@@ -113,7 +113,7 @@ sub choose {
 	local $::noauto = 0; #- hey, you asked for plug'n play, so i do probe!
 	delete @$monitor{'VendorName', 'ModelName', 'EISA_ID'};
 	put_in_hash($monitor, getinfoFromDDC());
-	if (configure_automatic($monitor, $monitors)) {
+	if (configure_automatic($monitor, $monitors_db)) {
 	    $monitor->{VendorName} = "Plug'n Play";
 	} else {
 	    $in->ask_warn('', N("Plug'n Play probing failed. Please select the correct monitor"));
@@ -139,11 +139,11 @@ that is beyond the capabilities of your monitor: you may damage your monitor.
 }
 
 sub configure_automatic {
-    my ($monitor, $monitors) = @_;
+    my ($monitor, $monitors_db) = @_;
 
     if ($monitor->{EISA_ID}) {
 	log::l("EISA_ID: $monitor->{EISA_ID}");
-	if (my $mon = find { lc($_->{EISA_ID}) eq $monitor->{EISA_ID} } @$monitors) {
+	if (my $mon = find { lc($_->{EISA_ID}) eq $monitor->{EISA_ID} } @$monitors_db) {
 	    add2hash($monitor, $mon);
 	    log::l("EISA_ID corresponds to: $monitor->{ModelName}");
 	} elsif (!$monitor->{HorizSync} || !$monitor->{VertRefresh}) {
@@ -151,7 +151,7 @@ sub configure_automatic {
 	    delete @$monitor{'VendorName', 'ModelName', 'EISA_ID'};	    
 	}
     } else {
-	if (my $mon = find { $_->{VendorName} eq $monitor->{VendorName} && $_->{ModelName} eq $monitor->{ModelName} } @$monitors) {
+	if (my $mon = find { $_->{VendorName} eq $monitor->{VendorName} && $_->{ModelName} eq $monitor->{ModelName} } @$monitors_db) {
 	    put_in_hash($monitor, $mon);
 	}
     }
@@ -183,13 +183,13 @@ sub getinfoFromDDC() {
     };
 }
 
-sub monitors() {
+sub monitors_db() {
     readMonitorsDB("$ENV{SHARE_PATH}/ldetect-lst/MonitorsDB");
 }
 sub readMonitorsDB {
     my ($file) = @_;
 
-    my @monitors;
+    my @monitors_db;
     my $F = openFileMaybeCompressed($file);
     local $_;
     my $lineno = 0; while (<$F>) {
@@ -200,9 +200,9 @@ sub readMonitorsDB {
 
 	my @fields = qw(VendorName ModelName EISA_ID HorizSync VertRefresh dpms);
 	my %l; @l{@fields} = split /\s*;\s*/;
-	push @monitors, \%l;
+	push @monitors_db, \%l;
     }
-    \@monitors;
+    \@monitors_db;
 }
 
 
