@@ -894,15 +894,6 @@ Please run \"Internet access\" in control center."));
 
     my $param_vbox = Gtk2::VBox->new(0,0);
     my $i = 0;
-    my $extra_netdevice;
-    if ($netcnx->{type} eq 'isdn_internal') {
-        $extra_netdevice = "ppp0";
-    } elsif ($netcnx->{type} eq 'modem' || $netcnx->{type} eq 'isdn_external') {
-        $extra_netdevice = "ppp0" if $netcnx->{type} eq 'modem';
-    } elsif ($netcnx->{type} =~ /adsl/) {
-        $extra_netdevice = "ppp0";
-    }
-    $extra_netdevice = "ippp0" if $netcnx->{type} =~ /^isdn/;
 
     #- duplicated code (waiting for 9.1 to be out to merge everything correctly, avoid bug elsewhere).
     if ($netcnx->{type} =~ /adsl/) {
