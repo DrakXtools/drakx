@@ -178,7 +178,9 @@ sub multi_head_choose {
     my @choices = multi_head_choices('', @cards);
 
     my $tc = $choices[0];
-    if (!$auto) {
+    if ($auto) {
+	@choices == 1 or return;
+    } else {
 	$tc = $in->ask_from_listf(N("Multi-head configuration"),
 				  N("Your system supports multiple head configuration.
 What do you want to do?"), sub { $_[0]{text} }, \@choices) or return;
