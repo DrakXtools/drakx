@@ -574,6 +574,7 @@ sub load_rate_files {
     ($o->{compssUsers}, $o->{gtk_display_compssUsers}) = pkgs::readCompssUsers(
 	-e '/tmp/compssUsers.pl' ? '/tmp/compssUsers.pl' : 'media/media_info/compssUsers.pl'
     );
+    defined $o->{compssUsers} or die "Can't read compssUsers.pl file, aborting installation\n";
 }
 
 sub setPackages {
