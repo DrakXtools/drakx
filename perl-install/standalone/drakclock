@@ -120,16 +120,16 @@ $my_win->{window}->add(gtkpack_(gtkset_border_width(Gtk2::VBox->new, $::isEmbedd
                                                             system("service ntpd start");
                                                         } else {
                                                             if (-e $ntpdlock) { 
-                                                                system("service ntpd stop");
-                                                                system("/sbin/chkconfig --level 35 ntpd off");
-                                                            }
-                                                        }
-                                                        my ($year, $month, $day) = $calendar->get_date;
-                                                        $month++;
-                                                        my ($hour, $min, $sec) = ($adjh->get_value, $adjm->get_value, $adjs->get_value);
-                                                        system("date " .
-                                                               join('', map { print_it0($_) } ($month, $day, $hour, $min, $year)) . '.' . print_it0($sec));
-                                                        -e '/sbin/hwclock' and system('/sbin/hwclock --systohc');
+								system("service ntpd stop");
+								system("/sbin/chkconfig --level 35 ntpd off");
+							    }
+							    my ($year, $month, $day) = $calendar->get_date;
+							    $month++;
+							    my ($hour, $min, $sec) = ($adjh->get_value, $adjm->get_value, $adjs->get_value);
+							    system("date " .
+							    join('', map { print_it0($_) } ($month, $day, $hour, $min, $year)) . '.' . print_it0($sec));
+							}
+							-e '/sbin/hwclock' and system('/sbin/hwclock --systohc');
                                                         system("dcop kicker Panel restart") if $ENV{DESKTOP} eq 'kde';
                                                         ugtk2->exit(0);
                                                     },
