@@ -293,6 +293,7 @@ sub RefreshLocalPrintersFull {
 	my $searchstr = "$p|$model|$connect|$description|$location";
 	push(@LocalReal, $p) if $searchstr =~ /\Q$strfilt/i;
     }
+    printer::services::wait_for_cups();
     foreach my $p (sort { lc($a) cmp lc($b) } @LocalReal) {
 	my $state = ($printer->{SPOOLER} !~ /cups/ ? N("Unknown") :
 		     (printer::cups::queue_enabled($p) ? N("Enabled") :
@@ -328,6 +329,7 @@ sub RefreshRemotePrintersFull {
 	# All remaining to which the search term applies
 	push(@RemoteReal, $p) if $searchstr =~ /\Q$strfilt/i;
     }
+    printer::services::wait_for_cups();
     foreach my $p (sort { lc($a->{queuename}) cmp lc($b->{queuename}) } 
 		   @RemoteReal) {
 	my $queue = $p->{queuename};
