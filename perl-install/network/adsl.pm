@@ -51,6 +51,7 @@ If you don't know, choose 'use pppoe'"), [__("use pppoe"), __("use pptp"), __("u
 	$netcnx->{"adsl_$type"}{vpivci} = '';
 	adsl_conf($netcnx->{"adsl_$type"}, $netc, $intf, $type) or goto conf_adsl_step1;
     }
+    $type =~ /speedtouch/ or $netconnect::need_restart_network = 1;
     1;
 }
 

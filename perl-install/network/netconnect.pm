@@ -200,12 +200,11 @@ ifdown eth0
 			 ) or goto step_1;
 
 #    load_conf ($netcnx, $netc, $intf);
-
     $conf{modem} and do { pre_func("modem"); require network::modem; network::modem::configure($netcnx, $mouse, $netc) or goto step_2 };
     $conf{isdn} and do { pre_func("isdn"); require network::isdn; network::isdn::configure($netcnx, $netc) or goto step_2 };
     $conf{adsl} and do { pre_func("adsl"); require network::adsl; network::adsl::configure($netcnx, $netc, $intf, $first_time) or goto step_2};
-    $conf{cable} and do { pre_func("cable"); require network::ethernet; network::ethernet::configure_cable($netcnx, $netc, $intf, $first_time) or goto step_2 };
-    $conf{lan} and do { pre_func("local network"); require network::ethernet; network::ethernet::configure_lan($netcnx, $netc, $intf, $first_time) or goto step_2 };
+    $conf{cable} and do { pre_func("cable"); require network::ethernet; network::ethernet::configure_cable($netcnx, $netc, $intf, $first_time) or goto step_2; $netconnect::need_restart_network = 1; };
+    $conf{lan} and do { pre_func("local network"); require network::ethernet; network::ethernet::configure_lan($netcnx, $netc, $intf, $first_time) or goto step_2; $netconnect::need_restart_network = 1; };
 
   step_2_1:
     my $nb = keys %{$netc->{internet_cnx}};
@@ -234,6 +233,16 @@ ifdown eth0
 
   step_3:
 
+    network::configureNetwork2($in, $prefix, $netc, $intf);
+
+    if ($netconnect::need_restart_network && $::isStandalone and ($::expert or $in->ask_yesorno(_("Network configuration"),
+							  _("The network needs to be restarted"), 1))) {
+#-	run_program::rooted($prefix, "/etc/rc.d/init.d/network stop");
+	if (!run_program::rooted($prefix, "/etc/rc.d/init.d/network restart")) {
+	    $in->ask_okcancel(_("Network Configuration"), _("A problem occured while restarting the network: \n\n%s", `/etc/rc.d/init.d/network restart`), 0) or return;
+	}
+    }
+
     my $m = _("Congratulations, the network and internet configuration is finished.
 
 The configuration will now be applied to your system.\n") . if_($::isStandalone && $in->isa('interactive_gtk'),
@@ -248,8 +257,6 @@ environnement to avoid hostname changing problem."));
     } else {  $::isStandalone and $in->ask_warn('', $m ); }
 
   step_5:
-
-    network::configureNetwork2($in, $prefix, $netc, $intf);
 
     if ($netcnx->{type} =~ /modem/ || $netcnx->{type} =~ /isdn_external/) {
 	output "$prefix$connect_prog",

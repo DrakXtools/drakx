@@ -61,13 +61,6 @@ sub configure_lan {
     $::isInstall and $in->set_help('configureNetworkIP');
     configureNetwork($netc, $intf, $first_time) or return;
     configureNetwork2($in, $prefix, $netc, $intf);
-    if ($::isStandalone and ($::expert or $in->ask_yesorno(_("Network configuration"),
-							  _("Do you want to restart the network"), 1))) {
-#-	run_program::rooted($prefix, "/etc/rc.d/init.d/network stop");
-	if (!run_program::rooted($prefix, "/etc/rc.d/init.d/network restart")) {
-	    $in->ask_okcancel(_("Network Configuration"), _("A problem occured while restarting the network: \n\n%s", `/etc/rc.d/init.d/network restart`), 0) or return;
-	}
-    }
     $netc->{NETWORKING} = "yes";
     if ($netc->{GATEWAY}) {
 	$netcnx->{type}='lan';
@@ -105,10 +98,10 @@ I cannot set up this connection type.")) and return;
     $::isStandalone and modules::write_conf($prefix);
 
     my $device=conf_network_card_backend($netc, $intf, $type, $interface, $ipadr, $netadr, $interface);
-    if ( $::isStandalone and !($type eq "dhcp")) {
-	$in->ask_yesorno(_("Network interface"),
-			  _("I'm about to restart the network device:\n") . $device . _("\nDo you agree?"), 1) and configureNetwork2($in, $prefix, $netc, $intf) and system("$prefix/sbin/ifdown $device;$prefix/sbin/ifup $device");
-    }
+#      if ( $::isStandalone and !($type eq "dhcp")) {
+#  	$in->ask_yesorno(_("Network interface"),
+#  			  _("I'm about to restart the network device:\n") . $device . _("\nDo you agree?"), 1) and configureNetwork2($in, $prefix, $netc, $intf) and system("$prefix/sbin/ifdown $device;$prefix/sbin/ifup $device");
+#      }
     1;
 }
 
@@ -171,10 +164,10 @@ sub go_ethernet {
     conf_network_card($netc, $intf, $type, $ipadr, $netadr) or return;
     $netc->{NET_INTERFACE}=$netc->{NET_DEVICE};
     configureNetwork($netc, $intf, $first_time) or return;
-    if ( $::isStandalone and $netc->{NET_DEVICE}) {
-	$in->ask_yesorno(_("Network interface"),
-			 _("I'm about to restart the network device %s. Do you agree?", $netc->{NET_DEVICE}), 1) and system("$prefix/sbin/ifdown $netc->{NET_DEVICE}; $prefix/sbin/ifup $netc->{NET_DEVICE}");
-    }
+#      if ( $::isStandalone and $netc->{NET_DEVICE}) {
+#  	$in->ask_yesorno(_("Network interface"),
+#  			 _("I'm about to restart the network device %s. Do you agree?", $netc->{NET_DEVICE}), 1) and system("$prefix/sbin/ifdown $netc->{NET_DEVICE}; $prefix/sbin/ifup $netc->{NET_DEVICE}");
+#      }
     1;
 }
 
