@@ -48,9 +48,10 @@ sub confScanner {
 	next if $line =~ /\$VENDOR/;
 	$line =~ s/\$PRODUCT/$product/g if $product;
 	next if $line =~ /\$PRODUCT/;
-	$line =~ /^(\S+)LINE\s+(.*?)$/;
+	$line =~ /^(\S*)LINE\s+(.*?)$/;
 	my $linetype = $1;
 	$line = $2;
+	next if !$line;
 	if (!$linetype or
 	    ($linetype eq "USB" and ($port =~ /usb/i or $vendor)) or
 	    ($linetype eq "PARPORT" and !$vendor and 
