@@ -60,7 +60,7 @@ sub config_cups {
 	    (
 	     { 
 		 title => N("CUPS printer configuration"),
-		 messages => N("Here you can choose whether the printers connected to this machine should be accessable by remote machines and by which remote machines.") .
+		 messages => N("Here you can choose whether the printers connected to this machine should be accessible by remote machines and by which remote machines.") .
 		     N("You can also decide here whether printers on remote machines should be automatically made available on this machine."),
 	     },
 	     [
@@ -3465,7 +3465,7 @@ sub check_network {
 	(!$dontconfigure || $::isInstall)) {
 	$in->ask_warn(N("Warning"), 
 ($::isInstall ?
-N("The network configuration done during the installation cannot be started now. Please check whether the network is accessable after booting your system and correct the configuration using the %s Control Center, section \"Network & Internet\"/\"Connection\", and afterwards set up the printer, also using the %s Control Center, section \"Hardware\"/\"Printer\"", $shortdistroname, $shortdistroname) :
+N("The network configuration done during the installation cannot be started now. Please check whether the network is accessible after booting your system and correct the configuration using the %s Control Center, section \"Network & Internet\"/\"Connection\", and afterwards set up the printer, also using the %s Control Center, section \"Hardware\"/\"Printer\"", $shortdistroname, $shortdistroname) :
 N("The network access was not running and could not be started. Please check your configuration and your hardware. Then try to configure your remote printer again.")));
 	return 0;
     }
@@ -3519,7 +3519,7 @@ sub security_check {
     if ($in->ask_yesorno(N("Installing a printing system in the %s security level", $securitystr),
 			 N("You are about to install the printing system %s on a system running in the %s security level.
 
-This printing system runs a daemon (background process) which waits for print jobs and handles them. This daemon is also accessable by remote machines through the network and so it is a possible point for attacks. Therefore only a few selected daemons are started by default in this security level.
+This printing system runs a daemon (background process) which waits for print jobs and handles them. This daemon is also accessible by remote machines through the network and so it is a possible point for attacks. Therefore only a few selected daemons are started by default in this security level.
 
 Do you really want to configure printing on this machine?",
 			   $printer::data::spoolers{$spooler}{short_name},
