@@ -888,12 +888,6 @@ sub getAndSaveAutoInstallFloppies {
 	    my $dev = devices::set_loop($img) or log::l("couldn't set loopback device"), return;
 	    find { eval { fs::mount($dev, $mountdir, $_, 0); 1 } } qw(ext2 vfat) or return;
 
-	    if (@imgs == 1 || $img =~ /drivers/) {
-		local $o->{partitioning}{clearall} = !$replay;
-		eval { output("$mountdir/auto_inst.cfg", g_auto_install($replay)) };
-		$@ and log::l("Warning: <", formatError($@), ">");
-	    }
-
 	    if (-e "$mountdir/menu.lst") {
 		# hd_grub boot disk is different than others
 		substInFile {
@@ -914,6 +908,12 @@ sub getAndSaveAutoInstallFloppies {
    All data on this computer is going to be lost,
    including any Windows partitions !!
 " . "07\n";
+	    }
+
+	    if (@imgs == 1 || $img =~ /drivers/) {
+		local $o->{partitioning}{clearall} = !$replay;
+		eval { output("$mountdir/auto_inst.cfg", g_auto_install($replay)) };
+		$@ and log::l("Warning: <", formatError($@), ">");
 	    }
 	
 	    fs::umount($mountdir);
