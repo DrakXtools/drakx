@@ -260,3 +260,8 @@ cvstag:
 nuke_perl:
 	find ../$(PACKAGE)-$(PKGVERSION) -name '*.pm' | xargs perl -pi -e 's/\s*use\s+(diagnostics|strict|vars|warnings).*//g'
 	find ../$(PACKAGE)-$(PKGVERSION)/standalone -type f | xargs perl -pi -e 's/\s*use\s+(diagnostics|strict|vars|warnings).*//g'
+
+dont_run_directly_stage2:
+	rm -f $(DEST)/usr/bin/runinstall2
+	echo -e '#!/bin/sh\n\nexec "/usr/bin/sh"' > $(DEST)/usr/bin/runinstall2
+	chmod a+x $(DEST)/usr/bin/runinstall2
