@@ -54,6 +54,7 @@ my @partitions_signatures = (
     [ 0x283, 0, 'XFSB', 0x200, 'XAGF', 0x400, 'XAGI' ],
     [ 0x383, 0x8000, 'JFS1' ],
     [ 0x82, 4086, "SWAP-SPACE" ],
+    [ 0x82, 4086, "SWAPSPACE2" ],
     [ 0x7,  0x1FE, "\x55\xAA", 0x3, "NTFS" ],
     [ 0xc,  0x1FE, "\x55\xAA", 0x52, "FAT32" ],
 arch() !~ /^sparc/ ? (
