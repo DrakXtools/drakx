@@ -458,6 +458,7 @@ sub main {
     $o->{prefix} = $::testing ? "/tmp/test-perl-install" : $::live ? "" : "/mnt";
     mkdir $o->{prefix}, 0755;
 
+    modules::unload($_) foreach qw(vfat msdos fat);
     modules::load_deps(($::testing ? ".." : "") . "/modules/modules.dep");
     modules::read_stage1_conf($_) foreach "/tmp/conf.modules", "/etc/modules.conf";
     modules::read_already_loaded();
@@ -511,7 +512,6 @@ sub main {
 	$o->{compssListLevel} = 50;
 	push @auto, 'selectInstallClass', 'selectMouse', 'doPartitionDisks', 'choosePackages', 'configureTimezone', 'configureX', 'exitInstall';
     }
-#-    push @auto, 'selectLanguage', 'selectInstallClass', 'selectMouse';
 
     foreach (@auto) {
 	eval "undef *" . (!/::/ && "install_steps_interactive::") . $_;
@@ -545,7 +545,7 @@ sub main {
 	if (my ($file) = glob_('/tmp/ifcfg-*')) {
 	    log::l("found network config file $file");
 	    my $l = network::read_interface_conf($file);
-	    add2hash(network::findIntf($o->{intf} ||= {}, $l->{DEVICE}), $l);
+	    $o->{intf} ||= { $l->{DEVICE} => $l };
 	}
 	if (my ($file) = glob_('/etc/resolv.conf')) {
 	    log::l("found network config file $file");
