@@ -1,5 +1,46 @@
 2005/04/04  Olivier Blin <oblin at mandrakesoft.com>
 
+	* mdk-stage1/thirdparty.h, mdk-stage1/thirdparty.c, mdk-stage1/stage1.c:
+	add thirdparty_load_media_modules(), try to find third party modules on
+	the install media
+
+	* network/netconnect.pm: disconnect internet interface before trying to
+	reconnect (or else some
+	nasty pppd and pppoa may be still alive)
+
+	* detect_devices.pm: getNet(): only up wireless devices
+
+	* mdk-stage1/probing.h, mdk-stage1/probing.c: allow to keep track of
+	orphan devices (no module available)
+
+	* network/adsl.pm: do not reload firmware on eagle-usb modems if already
+	done
+
+	* drakxtools.spec: 10.2-19mdk
+
+2005/04/04  Rafael Garcia-Suarez <rgarciasuarez at mandrakesoft.com>
+
+	* install_any.pm: Try to guess the device associated with the CD-ROM when
+	installing urpmi
+	(bug 14395)
+	/me sux
+
+2005/04/04  Till Kamppeter  <till at mandrakesoft.com>
+
+	* printer/main.pm, printer/printerdrake.pm: 
+	  - Fixed bug #4319: Printer options cannot be set after renaming the
+	printer or changing the connection type
+	  - Fixed bug of PostScript printers with manufacturer-supplied PPD
+	cannot
+	be renamed at all
+	  - Fixed bug of print queue being deleted when renaming fails
+	  - Fixed bug of printerdrake trying to open a message window when
+	  non-interactive queue generation fails
+	  - Fixed pre-definition of $printer->{ARGS}, this bug made printerdrake
+	  crashing sometimes
+
+2005/04/04  Olivier Blin <oblin at mandrakesoft.com>
+
 	* detect_devices.pm: getNet(): only up wireless devices
 
 2005/04/04  Pablo Saratxaga  <pablo at mandrakesoft.com>
@@ -48125,7 +48166,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.1027 2005/04/01 21:41:54 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.1028 2005/04/04 15:36:35 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
