@@ -47,7 +47,6 @@ sub create_boxradio {
 
 	$w->signal_connect(key_press_event => sub {
 	    &$may_go_to_next;
-	    1;
 	});
 	$w->signal_connect(clicked => sub {
  	    ${$e->{val}} = $txt;
@@ -367,12 +366,12 @@ sub ask_fromW {
 	my $may_go_to_next = sub {
 	    my ($w, $event) = @_;
 	    if (!$event || ($event->keyval & 0x7f) == 0xd) {
-		$w->signal_stop_emission_by_name('key_press_event') if $event;
 		if ($ind == $#widgets) {
 		    @widgets == 1 ? $mainw->{ok}->clicked : $mainw->{ok}->grab_focus;
 		} else {
 		    $widgets[$ind+1]{focus_w}->grab_focus;
 		}
+		return 1;  #- prevent an action on the just grabbed focus
 	    }
 	};
 	my $changed = sub { $update->(sub { $common->{callbacks}{changed}($ind) }) };
