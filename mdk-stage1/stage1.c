@@ -560,7 +560,11 @@ void finish_preparing(void)
                         stg1_fatal_message("Fatal error finishing initialization.");
 	}
 #endif
-                
+
+	/* /tmp/syslog is used by the second init, so it must be copied now, not in stage2 */
+	/* we remove it to ensure the old one is not copied over it in stage2 */
+	copy_file("/tmp/syslog", SLASH_LOCATION "/tmp/syslog", NULL);
+	unlink("/tmp/syslog");
 	copy_file("/etc/resolv.conf", SLASH_LOCATION "/etc/resolv.conf", NULL);
 	mkdir(SLASH_LOCATION "/modules", 0755);
 	copy_file("/modules/modules.dep", SLASH_LOCATION "/modules/modules.dep", NULL);
