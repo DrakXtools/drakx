@@ -218,6 +218,7 @@ To use alsa, one can either use:
 It has been reported to oops the kernel on unloading.\n
 The new \"%s\" driver'll only be used on next bootstrap.", $driver, $new_driver)) if $blacklisted;
             do_switch($in, $driver, $new_driver, $device->{sound_slot_index});
+            $device->{current_driver} = $new_driver;
         }
     } elsif ($driver =~ /^Bad:/) {
         $driver =~ s/^Bad://;
