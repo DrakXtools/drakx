@@ -90,7 +90,7 @@ sub real_main {
       my ($module, $auto_ip, $protocol, $onboot, $needhostname, $hotplug, $track_network_id, @fields); # lan config
       my $success = 1;
       my $ethntf = {};
-      my $db_path = "$::prefix/usr/share/apps/kppp/Provider";
+      my $db_path = "/usr/share/apps/kppp/Provider";
       my (%countries, @isp, $country, $provider, $old_provider);
       my $config = {};
       eval(cat_("$::prefix/etc/sysconfig/drakconnect"));
@@ -500,10 +500,10 @@ Take a look at http://www.linmodems.org"),
                         my $type;
 
                         my %pkgs2path = (
-                                         hcfpcimodem => "$::prefix/usr/sbin/hcfpciconfig",
-                                         hsflinmodem => "$::prefix/usr/sbin/hsfconfig",
-                                         ltmodem => "$::prefix/etc/devfs/conf.d/ltmodem.conf",
-                                         slmodem => "$::prefix/usr/sbin/slmodemd",
+                                         hcfpcimodem => "/usr/sbin/hcfpciconfig",
+                                         hsflinmodem => "/usr/sbin/hsfconfig",
+                                         ltmodem => "/etc/devfs/conf.d/ltmodem.conf",
+                                         slmodem => "/usr/sbin/slmodemd",
                                         );
                         
                         my %devices = (ltmodem => '/dev/ttyS14',
@@ -547,15 +547,16 @@ Take a look at http://www.linmodems.org"),
                         network::modem::ppp_read_conf($netcnx, $netc) if !$modem_conf_read;
                         $modem_conf_read = 1;
                         $in->do_pkgs->ensure_is_installed('kdenetwork-kppp-provider', $db_path);
+                        my $p_db_path = "$::prefix$db_path";
                         @isp = map {
                             my $country = $_;
                             map { 
-                                s!$db_path/$country!!;
+                                s!$p_db_path/$country!!;
                                 s/%([0-9]{3})/chr(int($1))/eg;
                                 $countries{$country} ||= translate($country);
                                 join('', $countries{$country}, $_);
-                            } grep { !/.directory$/ } glob_("$db_path/$country/*")
-                        } map { s!$db_path/!!o; s!_! !g; $_ } glob_("$db_path/*");
+                            } grep { !/.directory$/ } glob_("$p_db_path/$country/*")
+                        } map { s!$p_db_path/!!o; s!_! !g; $_ } glob_("$p_db_path/*");
                         $old_provider = $provider;
                     },
                     name => N("Select your provider:"),
@@ -565,7 +566,7 @@ Take a look at http://www.linmodems.org"),
                     post => sub {
                         ($country, $provider) = split('/', $provider);
                         $country = { reverse %countries }->{$country};
-                        my %l = getVarsFromSh("$db_path/$country/$provider");
+                        my %l = getVarsFromSh("$::prefix$db_path/$country/$provider");
                         if (defined $old_provider && $old_provider ne $provider) {
                             $modem->{connection} = $l{Name};
                             $modem->{phone} = $l{Phonenumber};
@@ -677,19 +678,19 @@ Take a look at http://www.linmodems.org"),
                     post => sub {
                         my %packages = (
                                         'eci'        => [ 'eciadsl', 'missing' ],
-                                        'sagem'      => [ 'eagle-usb',  "$::prefix/usr/sbin/eaglectrl" ],
-                                        'speedtouch' => [ 'speedtouch', "$::prefix/usr/sbin/modem_run" ],
+                                        'sagem'      => [ 'eagle-usb',  "/usr/sbin/eaglectrl" ],
+                                        'speedtouch' => [ 'speedtouch', "/usr/sbin/modem_run" ],
                                        );
                         return 'adsl_unsupported_eci' if $ntf_name eq 'eci';
                         # FIXME: check that the package installation succeeds, else retry or abort
-                        $in->do_pkgs->install($packages{$ntf_name}[0]) if $packages{$ntf_name} && !-e $packages{$ntf_name}->[1];
+                        $in->do_pkgs->ensure_is_installed(@{$packages{$ntf_name}}) if $packages{$ntf_name};
                         if ($ntf_name eq 'speedtouch') {
-                            $in->do_pkgs->ensure_is_installed_if_available('speedtouch_mgmt', "$::prefix/usr/share/speedtouch/mgmt.o");
+                            $in->do_pkgs->ensure_is_installed_if_available('speedtouch_mgmt', "/usr/share/speedtouch/mgmt.o");
                             return 'adsl_speedtouch_firmware' if ! -e "$::prefix/usr/share/speedtouch/mgmt.o";
                         }
                         $netcnx->{bus} = $netc->{autodetect}{adsl}{bewan}{bus} if $ntf_name eq 'bewan';
                         if ($ntf_name eq 'bewan' && !$::testing) {
-                            $in->do_pkgs->ensure_is_installed_if_available('unicorn', "$::prefix/usr/bin/bewan_adsl_status");
+                            $in->do_pkgs->ensure_is_installed_if_available('unicorn', "/usr/bin/bewan_adsl_status");
                         }
                         if (exists($isdn_cards{$ntf_name})) {
                             require network::isdn;

@@ -371,7 +371,7 @@ METRIC=$metric
         services::restart("capi4linux");
 
         #- install and run drdsl for dsl connections, once capi driver is loaded
-        $in->do_pkgs->ensure_is_installed_if_available("drdsl", "$::prefix/usr/sbin/drdsl");
+        $in->do_pkgs->ensure_is_installed_if_available("drdsl", "/usr/sbin/drdsl");
         run_program::rooted($::prefix, "/usr/sbin/drdsl");
     }
 
