@@ -267,7 +267,7 @@ sub Done {
     }
     if (!$::isInstall) {
 	my $new = fs::fstab_to_string($all_hds);
-	if ($new ne $all_hds->{current_fstab} && ($::auto || $in->ask_yesorno('', N("Do you want to save /etc/fstab modifications"), 1))) {
+	if ($new ne $all_hds->{current_fstab} && $in->ask_yesorno('', N("Do you want to save /etc/fstab modifications"), 1)) {
 	    $all_hds->{current_fstab} = $new;
 	    fs::write_fstab($all_hds);
 	}
