@@ -718,18 +718,15 @@ You can find a driver on http://eciadsl.flashtux.org/"),
                     pre => $lan_detect,
                     name => N("Select the network interface to configure:"),
                     data =>  sub {
-                        [ { label => N("Net Device"), type => "list", val => \$ntf_name, list => [ sort keys %eth_intf ], 
-                            allow_empty_list => 1, format => sub { $eth_intf{$_[0]} } } ];
-                    },
-                    complete => sub { 
-                        if (!keys %eth_intf) {
-                            $in->ask_warn(N("Error"), $is_wireless ? N("No wireless network adapter on your system!")
-                                          : N("No network adapter on your system!"));
-                            return 1;
-                        };
+                        [ { label => N("Net Device"), type => "list", val => \$ntf_name, list => [ N("Manual choice"), sort keys %eth_intf ], 
+                            allow_empty_list => 1, format => sub { $eth_intf{$_[0]} || $_[0]} } ];
                     },
                     post => sub {
                         $ethntf = $intf->{$ntf_name} ||= { DEVICE => $ntf_name };
+                        if ($ntf_name eq N("Manual choice")) {
+                            modules::interactive::load_category__prompt($in, 'network/main|gigabit|pcmcia|usb|wireless');
+                            return 'lan';
+                        }
                         $::isInstall && $netc->{NET_DEVICE} eq $ethntf->{DEVICE} ? 'lan_alrd_cfg' : 'lan_protocol';
                     },
                    },
