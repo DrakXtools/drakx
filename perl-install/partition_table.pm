@@ -362,7 +362,13 @@ sub read_extended {
     #- in case of extended partitions, the start sector is local to the partition or to the first extended_part!
     $pt->{normal}{start} += $pt->{start};
 
-    verifyInside($pt->{normal}, $extended) or die "partition $pt->{normal}{device} is not inside its extended partition";
+    #- the following verification can broke an existing partition table that is
+    #- correctly read by fdisk or cfdisk. maybe the extended partition can be
+    #- recomputed to get correct size.
+    if (!verifyInside($pt->{normal}, $extended)) {
+	$extended->{size} = $pt->{normal}{start} + $pt->{normal}{size};
+	verifyInside($pt->{normal}, $extended) or die "partition $pt->{normal}{device} is not inside its extended partition";
+    }
 
     if ($pt->{extended}) {
 	$pt->{extended}{start} += $hd->{primary}{extended}{start};
