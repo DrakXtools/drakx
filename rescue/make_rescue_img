@@ -36,6 +36,7 @@ _ "$sudo rm -rf $tmp" if -e $tmp;
 _ "mkdir $tmp";
 _ 'find . -name "*~" | xargs rm -f';
 _ "cp -a tree/* $tmp";
+_ "find $tmp -name CVS | xargs rm -rf";
 _ "cd $tmp; mkdir -p lib tmp modules proc";
 
 
