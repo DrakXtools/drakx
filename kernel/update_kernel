@@ -1,0 +1,92 @@
+#!/bin/bash
+
+ALL_KERNELS="all.kernels"
+
+function create_marfile() {
+    marfile=$1
+    shift
+    $GIBASEDIR/mdk-stage1/mar/mar -c $marfile $*
+}
+
+function create_modules() {
+    kernel_path=$1
+    kern=$2
+    echo "Updating modules in '`pwd`' for kernel '$kern'"
+    cp -f `find $kernel_path/lib/modules/ -name "*.o"` .
+    /sbin/depmod -F $kernel_path/boot/System.map* -e *.o | perl -pe 's/\\\n//' \
+	| perl -ne 's/\.o//g; s/[ \t]+/ /g; print if /: /' > modules.dep
+    perl -pi -e 's/((plip|ppa|imm): parport)/$1 parport_pc/' modules.dep
+
+    modinfo -f '%{filename} %{description}\n' *.o | perl -lne 'print "$1\t$2" if /(.*?)\.o "(.*)"/' > modules.description
+
+    echo -n "packdrake $kern: "
+    ls *.o | packdrake -b9s "modules.cz" 400000
+    echo "done"
+    mv modules.cz ../modules.cz-$kern
+    for i in network cdrom hd usb other pcmcia all; do
+	modules_var="${i}_modules"
+	eval "create_marfile ${i}_modules.mar \$$modules_var"
+    done
+    echo
+}
+
+[ -e $ALL_KERNELS/.main ] && main=$(cat $ALL_KERNELS/.main)
+
+rpm=$(rpm -qp --qf '%{name}' /RPMS/kernel-BOOT-*.rpm | perl -pe 's/kernel-BOOT-(.*)\.(.*)/$1-${2}BOOT/')
+if [ -n "$rpm" -a ! -e $ALL_KERNELS/$rpm ]; then
+    [ -n "$main" ] && rm -rf $ALL_KERNELS/$main
+    cd $ALL_KERNELS
+    rm -rf $rpm ; mkdir $rpm
+    cd $rpm
+    rpm2cpio /RPMS/kernel-BOOT-*.rpm | cpio -id
+    find -type f -name "*.o.gz" | xargs gunzip
+    cd ../..
+
+    for dir in /tftpboot /var/lib/tftpboot; do
+	rm -f $dir/{vmlinuz,network.rdz}
+    done
+fi 
+
+[ -n "$main" -a -e $ALL_KERNELS/$main ] || {
+    cd $ALL_KERNELS
+    main=$(echo 2.* | sed 's/.* //')
+    echo "Choosing $main"
+    echo $main > .main
+    cd ..
+}
+
+ARCH=`uname -m | sed -e 's/i.86/i386/' -e 's/sparc.*/sparc/'`
+
+eval `perl modules.pl images`
+
+if [ "$ARCH" == "i386" ]; then
+    for i in $ALL_KERNELS/*/boot/vmlinuz*; do
+	#disable any existing resolution!!!
+	/usr/sbin/rdev -v $i 65535 #788 #785 
+    done
+else
+    if [ "$ARCH" == "ppc" ]; then
+        cp -f "$KERNEL_BOOT_PATH"/boot/vmlinux .
+    else
+        cp -f "$KERNEL_BOOT_PATH"/boot/vmlinux.gz .
+    fi
+fi
+
+
+GIBASEDIR=`pwd`/..
+
+rm -rf all.modules ; mkdir all.modules
+for i in $ALL_KERNELS/*; do
+	kern=`basename $i`
+	(
+	    mkdir all.modules/$kern
+	    cd all.modules/$kern
+	    if [ "$kern" = "$main" ]; then
+		create_modules ../../$i $kern
+	    else
+		echo "$kern ($main)"
+		create_modules ../../$i $kern 2>/dev/null
+	    fi
+	) || exit 1
+done
+cp -f all.modules/$main/modules.description .

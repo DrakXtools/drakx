@@ -1,7 +1,6 @@
 #!/usr/bin/perl
 
 use MDK::Common;
-use lib qw(../../perl-install);
 
 -x "../mar/mar" or die "\t*FAILED* Sorry, need ../mar/mar binary\n";
 
@@ -37,24 +36,21 @@ my %sanity_check =
   );
 
 foreach $type (keys %t) {
+    my @modulez;
     print STDERR "$type (checks: ", join('/', @{$sanity_check{$type}}), ") ";
     foreach $floppy (@{$t{$type}}) {
-	foreach $marfile (glob("../../all.modules/*/${floppy}_modules.mar")) {
+	foreach $marfile (glob("../../kernel/all.modules/*/${floppy}_modules.mar")) {
 	    -f $marfile or die "\t*FAILED* Sorry, need $marfile mar file\n";
-	    my @modz = `../mar/mar -l $marfile`;
+	    my @modz = map { /(\S+)\.o/ } `../mar/mar -l $marfile`;
 	    if ($marfile !~ /(2\.2\.14)|(other)/) {
 		foreach $mandatory (@{$sanity_check{$type}}) {
-		    grep(/\t$mandatory\.o/, @modz) or die "\t*FAILED* Sanity check should prove that $mandatory.o be part of $marfile\n"
+		    member($mandatory, @modz) or die "\t*FAILED* Sanity check should prove that $mandatory.o be part of $marfile\n"
 		}
 	    }
+	    push @modulez, @modz;
 	    print STDERR ".";
 	}
     }
-
-    my %names_in_stage2 = ( network => [ 'net' ], medias => [ 'scsi', 'disk', 'big' ] );
-    require modules;
-    my @modulez;
-    push @modulez, modules::module_of_type__4update_kernel($_) foreach @{$names_in_stage2{$type}};
 
     print "#ifndef DISABLE_".uc($type)."
 struct pci_module_map ${type}_pci_ids[] = {
