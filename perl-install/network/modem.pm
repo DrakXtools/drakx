@@ -18,7 +18,7 @@ sub ppp_configure {
 
     any::devfssymlinkf($modem, 'modem') if $modem->{device} ne "/dev/modem";
 
-    my %toreplace = map { $_ => $modem->{$_} } qw(connection phone login passwd auth domain dns1 dns2);
+    my %toreplace = map { $_ => $modem->{$_} } qw(auth AutoName connection dns1 dns2 domain IPAddr login passwd phone SubnetMask);
     $toreplace{kpppauth} = ${{ 'Script-based' => 0, 'PAP' => 1, 'Terminal-based' => 2, }}{$modem->{auth}};
     $toreplace{kpppauth} = ${{ 'Script-based' => 0, 'PAP' => 1, 'Terminal-based' => 2, 'CHAP' => 3 }}{$modem->{auth}};
     $toreplace{phone} =~ s/[a-zA-Z]//g;
@@ -32,6 +32,14 @@ sub ppp_configure {
     $toreplace{domain} ||= 'localdomain';
     $toreplace{intf} ||= 'ppp0';
     $toreplace{papname} = ($modem->{auth} eq 'PAP' || $modem->{auth} eq 'CHAP') && $toreplace{login};
+
+    # handle static/dynamic settings:
+    if ($modem->{auto_ip}) {
+        $toreplace{$_} = '0.0.0.0' foreach qw(IPAddr SubnetMask) ;
+    }
+    $toreplace{DNS} if $modem->{auto_dns};
+    $toreplace{Gateway} = '0.0.0.0' if $modem->{auto_gateway};
+
 
     #- build ifcfg-ppp0.
     my $various = <<END;
@@ -119,7 +127,7 @@ END
 
 [Account0]
 ExDNSDisabled=0
-AutoName=0
+AutoName=$toreplace{AutoName}
 ScriptArguments=
 AccountingEnabled=0
 DialString=ATDT
@@ -135,11 +143,11 @@ Command=
 ScriptCommands=
 Authentication=$toreplace{kpppauth}
 DNS=$toreplace{dnsserver}
-SubnetMask=0.0.0.0
+SubnetMask=$toreplace{SubnetMask}
 AccountingFile=
 DefaultRoute=1
 Username=$toreplace{login}
-Gateway=0.0.0.0
+Gateway=$toreplace{Gateway}
 StorePassword=1
 DisconnectCommand=
 
