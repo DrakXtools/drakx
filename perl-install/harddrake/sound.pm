@@ -94,7 +94,8 @@ our %alsa2oss =
      "snd-vxp440"  => [ "unknown" ], # pcmcia
      "snd-vxpocket" => [ "unknown" ], # pcmcia
      "snd-wavefront" => [ "wavefront" ], # isa
-     "snd-ymfpci"  => [ "ymfpci" ]
+     "snd-ymfpci"  => [ "ymfpci" ],
+     "snd-powermac" => [ "dmasound_pmac" ], # mac
      );
 
 
@@ -141,7 +142,8 @@ our %oss2alsa =
      "trident" => [ "snd-ali5451", "snd-trident" ],
      "via82cxxx_audio" => [ "snd-via82xx" ],
      "wavefront" => [ "snd-wavefront" ],
-     "ymfpci"  => [ "snd-ymfpci" ]
+     "ymfpci"  => [ "snd-ymfpci" ],
+     "dmasound_pmac" => [ "snd-powermac" ], # mac
      );
 
 my @blacklist = qw(cs46xx cs4281);
