@@ -1,3 +1,16 @@
+2005/03/23  Olivier Blin <oblin at mandrakesoft.com>
+
+	* mdk-stage1/disk.c: warn that the mount can fail if the partition hasn't
+	been cleanly unmounted
+
+	* install_any.pm: temporarily fallback on /mnt/hd if the hard disk mount
+	point can't be found
+
+2005/03/23  Rafael Garcia-Suarez <rgarciasuarez at mandrakesoft.com>
+
+	* install_any.pm: Fix ejection of cdrom when asking for the supplementary
+	CD. (bug 14902)
+
 2005/03/23  fisher
 
 	* share/po/uk.po: uk tr-tion update
@@ -47394,7 +47407,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.1020 2005/03/23 09:47:23 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.1021 2005/03/23 19:12:47 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
