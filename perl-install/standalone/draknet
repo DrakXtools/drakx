@@ -1,0 +1,63 @@
+#!/usr/bin/perl
+
+#- CHANGE THIS! (dam's)
+# DrakFuck
+
+# Copyright (C) 1999 MandrakeSoft (damien@mandrakesoft.com)
+#
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2, or (at your option)
+# any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+
+use lib ".."; #qw(/usr/lib/libDrakX);
+
+use interactive;
+use netconnect;
+#use Xconfig;
+use c;
+
+local $_ = join '', @ARGV;
+
+#/-h/ and die "usage: DrakFuck[--xf3] [--beginner] [--expert] [--auto] [--noauto] [--skiptest] [--testing]\n";
+
+my $i = {};
+
+$::isStandalone = 1;
+#$::force_xf3 = /-xf3/;
+#$::beginner = /-beginner/;
+#$::expert = /-expert/;
+#$::auto = /-auto/;
+#$::noauto = /-noauto/;
+#$::testing = /-testing/;
+#$i->{skiptest} = /-skiptest/;
+
+#my $f = "/usr/X11R6/lib/X11/Cards";
+#-e $f or system("urpmi --auto XFree86 XFree86-75dpi-fonts");
+#-e $f or die "install XFree86 first!\n";
+
+my $in = vnew interactive;#('su');
+
+#`pidof xfs` > 0 or system("/etc/rc.d/init.d/xfs start");
+
+#system("mount /proc 2>/dev/null"); # ensure /proc is mounted for pci probing
+
+#Xconfig::getinfoFromXF86Config($i) if $0 =~ Xdrakres;
+#Xconfig::getinfo($i);
+
+#Xconfigurator::main('', $i, $in, 0, -e "/etc/pcmcia", sub { system("urpmi --auto XFree86-$_[0]") });
+
+#netconnect::isdn_ask('', $i, $in, -e "/etc/pcmcia");
+netconnect::isdn_detect('', $i, $in, -e "/etc/pcmcia");
+#netconnect::isdn_write_config('', $i, $in, -e "/etc/pcmcia");
+
+$in->exit(0);
