@@ -233,7 +233,7 @@ sub ask_standalone_gtk {
                                            ($started, $action) = $update_service->($service, $l);
                                            $display->($_);
                                          }
-                      )) } (_("Start"), _("Stop"))
+                      )) } (__("Start"), __("Stop"))
 		]
 	    }
             @$l)), 500, 400),
