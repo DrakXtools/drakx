@@ -99,11 +99,10 @@ xfs => N_("Starts the X Font Server (this is mandatory for Xorg to run)."),
 	$s ||= -e "$::prefix/etc/init.d/$name" && cat_("$::prefix/etc/init.d/$name");
 	$s ||= -e "$::prefix/etc/xinetd.d/$name" && cat_("$::prefix/etc/xinetd.d/$name");
 	$s =~ s/\\\s*\n#\s*//mg;
-	if ($s =~ /^# description:\s+\S/sm) {
-	    ($s) = $s =~ /^# description:\s+(.*?)^(?:[^#]|# {0,2}\S)/sm;
-	} else {
-	    ($s) = $s =~ /^#\s*(.*?)^[^#]/sm;
-	}
+	$s = 
+	  $s =~ /^# description:\s+(.*?)^(?:[^#]|# {0,2}\S)/sm ? $1 :
+	  $s =~ /^#\s*(.*?)^[^#]/sm ? $1 : '';
+
 	$s =~ s/#\s*//mg;
     }
     $s =~ s/\n/ /gm; $s =~ s/\s+$//;
