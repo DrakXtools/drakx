@@ -603,7 +603,7 @@ sub setup_thiskind {
 
     my @l = do {
 	my $w;
-	setup_thiskind_backend ($type, $auto, $at_least_one, sub { $w = wait_load_module($in, $type, @_); } );
+	setup_thiskind_backend($type, $auto, $at_least_one, sub { $w = wait_load_module($in, $type, @_) });
     };
 
     if (!$::noauto) {
@@ -644,9 +644,9 @@ sub setup_thiskind_backend {
     my ($type, $auto, $at_least_one, $wait_function) = @_;
     #- for example $wait_function=sub { $w = wait_load_module($in, $type, @_) }
 
-    my @l;
     if (!$::noauto) {
-	@l = modules::load_thiskind($type, $wait_function );
+	my @l = modules::load_thiskind($type, $wait_function, '');
+	@l = modules::load_thiskind($type, $wait_function, 'force') if !@l && $at_least_one;
 	return @l;# sorry to be a sucker, pixel... :)
     }
 }
