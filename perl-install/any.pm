@@ -613,6 +613,11 @@ sub setup_thiskind {
 	return @l if $auto && (@l || !$at_least_one);
     }
     @l = map { $_->{description} } @l;
+
+    if ($at_least_one && !@l) {
+	push @l, load_module($in, $type) || return;
+    }
+
     while (1) {
 	(my $msg_type = $type) =~ s/\|.*//;
 	my $msg = @l ?
@@ -622,8 +627,7 @@ sub setup_thiskind {
 
 	my $opt = [ __("Yes"), __("No") ];
 	push @$opt, __("See hardware info") if $::expert;
-	my $r = "Yes";
-	$r = $in->ask_from_list_('', $msg, $opt, "No") || die 'already displayed' unless $at_least_one && @l == 0;
+	my $r = $in->ask_from_list_('', $msg, $opt, "No") or die 'already displayed';
 	if ($r eq "No") { return @l }
 	if ($r eq "Yes") {
 	    push @l, load_module($in, $type) || next;
