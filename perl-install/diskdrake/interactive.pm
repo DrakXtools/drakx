@@ -831,6 +831,7 @@ sub Options {
 			  }
 		      } else {
 			  delete $options->{'encryption='};
+			  delete $part->{encrypt_key};
 		      }
 		  },
 		 ) or return;
