@@ -96,6 +96,10 @@ foreach my $hw_class (@harddrake::data::tree) {
     } elsif ($Ident eq "AGP") {
         # add agpgart modules to modprobe.preload if needed:
         modules::write_conf();
+    } elsif ($Ident eq "VIDEO") {
+        require harddrake::autoconf;
+        harddrake::autoconf::xconf();
+        undef @configurator_pool;
     }
 
     next unless -x first(split /\s+/, $configurator_pool[0]);
