@@ -700,8 +700,7 @@ sub select_packages {
     }
 
     #- special packages that are to be move to closure always ...
-    foreach (qw(nfs-utils-client numlock usbd hotplug alsa alsa-utils
-                bzflag),
+    foreach (qw(nfs-utils-client numlock usbd hotplug alsa alsa-utils),
 	     exists $options{server} ? qw(Aurora Aurora-Monitor-NewStyle-Categorizing-WsLib bootsplash) : ()) {
 	my $pkg = pkgs::packageByName($o->{packages}, $_);
 	if ($pkg) {
