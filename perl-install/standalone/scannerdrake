@@ -95,7 +95,7 @@ sub auto {
 	    $in->ask_yesorno('Scannerdrake',N("%s is not in the scanner database, configure it manually?", removeverticalbar($_->{val}{DESCRIPTION})),1) and manual();
 	}
     }
-    return changed;
+    return $changed;
 }
 
 sub manual {
