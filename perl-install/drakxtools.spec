@@ -47,12 +47,10 @@ Obsoletes: libdetect0, libdetect0-devel, libdetect-lst, libdetect-lst-devel, det
 Provides: libdetect0, libdetect0-devel, libdetect-lst, libdetect-lst-devel, detect, detect-lst
 
 %description
-Contains adduserdrake, ddcxinfos, diskdrake, drakautoinst, drakbackup,
-drakboot, drakbug, drakbug_report, drakconnect, drakfloppy, drakfont,
-drakgw, drakproxy, draksplash, drakTermServ, drakxservices,
-drakxtv, lsnetdrake, lspcidrake, keyboarddrake, livedrake,
-localedrake, mousedrake, printerdrake, scannerdrake, drakfirewall and
-XFdrake :
+Contains many Mandrake applications simplifying users and
+administrators life on a Mandrake Linux machine. Nearly all of
+them work both under XFree (graphical environment) and in console
+(text environment), allowing easy distant work.
 
 adduserdrake: help you adding a user
 
@@ -67,20 +65,21 @@ Andrew Clausen (libresize).
 
 drakautoinst: help you configure an automatic installation replay
 
-drakbackup: backup and restore your system.
+drakbackup: backup and restore your system
 
-drakboot: configures your boot configuration (Lilo/GRUB, Aurora, X, autologin)
+drakboot: configures your boot configuration (Lilo/GRUB,
+Bootsplash, X, autologin)
 
 drakbug: interactive bug report tool
 
 drakbug_report: help find bugs in DrakX
 
-drakconnet: LAN/Internet connection configuration. It handles
+drakconnect: LAN/Internet connection configuration. It handles
 ethernet, ISDN, DSL, cable, modem.
 
 drakfloppy: boot disk creator
 
-drakfont: import some fonts in the system.
+drakfont: import fonts in the system
 
 drakgw: internet connection sharing
 
@@ -96,26 +95,31 @@ drakxservices: SysV service and dameaons configurator
 
 drakxtv: auto configure tv card for xawtv grabber
 
-keyboarddrake: configures your keyboard (both console and X)
+keyboarddrake: configure your keyboard (both console and X)
 
-liveupdate: live update software.
+liveupdate: live update software
 
-lspcidrake: displays your pci information, *and* the corresponding
-kernel module.
+logdrake: show extracted information from the system logs
 
-localedrake: locale configurator (language, ...)
+lsnetdrake: display available nfs and smb shares
 
-mousedrake: configures and autodetects your mouse
+lspcidrake: display your pci information, *and* the corresponding
+kernel module
 
-printerdrake: detects and configures your printer
+localedrake: language configurator, available both for root
+(system wide) and users (user only)
+
+mousedrake: autodetect and configure your mouse
+
+printerdrake: detect and configure your printer
 
 scannerdrake: scanner configurator
 
 drakfirewall: simple firewall configurator
 
-XFdrake: menu-driven program which walks you through setting up your X
-server. It works on console and under X :)
-It autodetects both monitor and video card if possible.
+XFdrake: menu-driven program which walks you through setting up
+your X server; it autodetects both monitor and video card if
+possible
 
 
 %description newt
