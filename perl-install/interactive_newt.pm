@@ -213,6 +213,12 @@ sub ask_from_entries_refW {
 
     if ($$r != $$cancel && $hcallback{complete}) {
 	my ($error, $focus) = $hcallback{complete}->();
+
+	if ($val->[$focus]{hidden}) {
+	    #-reset all hidden to null, newt doesn't display null entries, disturbing
+	    $_->{hidden} and ${$_->{val}} = '' foreach @$val;
+	}
+
 	#-update all the value
 	&$_ foreach @updates_inv;
 	goto run if $error;
