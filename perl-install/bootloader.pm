@@ -1022,7 +1022,7 @@ sub loadlin_cmd {
     cp_af("$::prefix$e->{kernel_or_dev}", "$::prefix/boot/vmlinuz") unless -e "$::prefix/boot/vmlinuz";
     cp_af("$::prefix$e->{initrd}", "$::prefix/boot/initrd.img") unless -e "$::prefix/boot/initrd.img";
 
-    $e->{label}, sprintf"%s %s initrd=%s root=%s $e->{append}", 
+    $e->{label}, sprintf "%s %s initrd=%s root=%s $e->{append}", 
       lnx4win_file($lilo, "/loadlin.exe", "/boot/vmlinuz", "/boot/initrd.img"),
 	$e->{root} =~ /loop7/ ? "0707" : $e->{root}; #- special to workaround bug in kernel (see #ifdef CONFIG_BLK_DEV_LOOP)
 }

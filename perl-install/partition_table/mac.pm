@@ -257,7 +257,7 @@ sub write($$$;$) {
         syswrite F, pack($dd_format, @$_{@$dd_fields}), psizeof($dd_format) or return 0;
     }
     # zero the rest of the data in the first block.
-    foreach ( 1 .. (494 - ((@ddstowrite) * 8))) {
+    foreach (1 .. (494 - ((@ddstowrite) * 8))) {
      	syswrite F, "\0", 1 or return 0;
     }
     #c::lseek_sector(fileno(F), $sector, 512) or return 0;

@@ -689,7 +689,7 @@ complete => sub {
 
     # Auto-detect printer model (works if host is an ethernet-connected
     # printer)
-    my $modelinfo = printer::detect::getSNMPModel ($remotehost);
+    my $modelinfo = printer::detect::getSNMPModel($remotehost);
     my $auto_hpoj;
     if ((defined($modelinfo)) &&
 	($modelinfo->{MANUFACTURER} ne "") &&
@@ -707,7 +707,7 @@ complete => sub {
 		  "$modelinfo->{MANUFACTURER} $modelinfo->{MODEL}", 
 		  $printer->{currentqueue}{connect}, $auto_hpoj,
                   ({port => $printer->{currentqueue}{connect},
-                    val => $modelinfo}));
+                    val => $modelinfo }));
 
     1;
 }
@@ -1119,7 +1119,7 @@ sub setup_socket {
     # Auto-detect printer model
     my $modelinfo;
     if ($printer->{AUTODETECT}) {
-	$modelinfo = printer::detect::getSNMPModel ($remotehost);
+	$modelinfo = printer::detect::getSNMPModel($remotehost);
     }
     my $auto_hpoj;
     if ((defined($modelinfo)) &&
@@ -1206,7 +1206,7 @@ complete => sub {
 	# Auto-detect printer model (works if host is an ethernet-connected
 	# printer)
 	my $remotehost = $1;
-	my $modelinfo = printer::main::getSNMPModel ($remotehost);
+	my $modelinfo = printer::main::getSNMPModel($remotehost);
         my $auto_hpoj;
         if ((defined($modelinfo)) &&
             ($modelinfo->{MANUFACTURER} ne "") &&
@@ -1580,7 +1580,7 @@ sub get_db_entry {
 		$model =~ s/PS//;
 		$model =~ s/PostScript//;
 		$model =~ s/Series//;
-		for $key (keys %printer::main::thedb) {
+		foreach my $key (keys %printer::main::thedb) {
 		    if ((($::expert) && ($key =~ /^$make\|$model\|.*\(recommended\)$/)) ||
 			((!$::expert) && ($key =~ /^$make\|$model$/))) {
 			$printer->{DBENTRY} = $key;
@@ -1656,7 +1656,7 @@ sub choose_model {
 	$printer->{DBENTRY} = N("Raw printer (No driver)");
     }
     # Choose the printer/driver from the list
-    return ($printer->{DBENTRY} = $in->ask_from_treelist(N("Printer model selection"),
+    return($printer->{DBENTRY} = $in->ask_from_treelist(N("Printer model selection"),
 							 N("Which printer model do you have?") .
 							 N("
 
@@ -2058,8 +2058,8 @@ You should make sure that the page size and the ink type/printing mode (if avail
 			     }
 			 }
 		     }
-		     return (0);
-		 } );
+		     return 0;
+		 });
 	}
 	# Read out the user's choices and generate the appropriate command
 	# line arguments
@@ -2238,7 +2238,7 @@ It may take some time before the printer starts.\n");
 		and return 1;
 	}
     } else {
-	return ($::isWizard ? $res1 : 1);
+	return($::isWizard ? $res1 : 1);
     }
     return 2;
 }
@@ -2418,7 +2418,7 @@ sub copy_queues_from {
 	foreach (@oldqueues) {
 	    push (@queuesselected, 1);
 	    push (@queueentries, { text => $_, type => 'bool', 
-				   val => \$queuesselected[$#queuesselected] } );
+				   val => \$queuesselected[$#queuesselected] });
 	}
 	# LPRng and LPD use the same config files, therefore one sees the 
 	# queues of LPD when one uses LPRng and vice versa, but these queues

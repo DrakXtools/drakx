@@ -231,7 +231,7 @@ sub ask_standalone_gtk {
                                                push @$on_services, $service if !member($service, @$on_services);
                                            } else {
                                                @$on_services = grep { $_ ne $service } @$on_services;
-                                        }}), member($service, @$on_services))),
+                                        } }), member($service, @$on_services))),
 		  map { my $a = $_;
                       gtkpack__(new Gtk::HBox(0,0), gtksignal_connect(new Gtk::Button(translate($a)),
                           clicked => sub { my $c = "service $service " . (lc($a) eq "start" ? "restart" : lc($a)) . " 2>&1"; local $_ = `$c`; s/\033\[[^mG]*[mG]//g;

@@ -46,7 +46,7 @@ sub basename_ { print basename(@_), "\n" }
 sub rmdir_ { foreach (@_) { rmdir $_ or die "rmdir: can't remove $_\n" } }
 sub lsmod { print "Module                  Size  Used by\n"; cat("/proc/modules") }
 sub which { 
-  ARG: foreach (@_) { foreach my $c (split /:/, $ENV{PATH}) { -x "$c/$_" and print("$c/$_\n"), next ARG }}
+  ARG: foreach (@_) { foreach my $c (split /:/, $ENV{PATH}) { -x "$c/$_" and print("$c/$_\n"), next ARG } }
 }
 
 sub grep_ {
@@ -470,7 +470,7 @@ $dev, $size, $used, $free, $use, $mntpoint
 	($size, $free) = MDK::Common::System::df($mntpoint = $h{$dev});
 	$size or next;
 
-	$use = int (100 * ($size - $free) / $size);
+	$use = int(100 * ($size - $free) / $size);
 	$used = $size - $free;
 	if ($h) {
 	    $used = int ($used / 1024) . "M";

@@ -498,7 +498,7 @@ sub main {
  	log::l("switching to newt install cuz not enough memory");
  	$o->{interactive} = "newt";
     }
-    require"install_steps_$o->{interactive}.pm" if $o->{interactive}; #- no space to skip perl2fcalls
+    require "install_steps_$o->{interactive}.pm" if $o->{interactive};
 
     #- needed before accessing floppy (in case of usb floppy)
     modules::load_category('bus/usb'); 

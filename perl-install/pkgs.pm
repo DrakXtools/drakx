@@ -474,7 +474,7 @@ sub read_rpmsrate {
                   (?:\s+|$)
                  )(.*)/x) { #@")) {
 	    ($t, $flag, $data) = ($1,$2,$3);
-	    while ($flag =~ s,^\s*(("[^"]*"|[^"\s]*)*)\s+,$1,) {}
+	    while ($flag =~ s,^\s*(("[^"]*"|[^"\s]*)*)\s+,$1,) { }
 	    my $ok = 0;
 	    $flag = join('||', grep { 
 		if (my ($inv, $p) = /^(!)?HW"(.*)"/) {
@@ -1082,7 +1082,7 @@ sub install($$$;$$) {
 			$retry_pkg = shift @transToInstall;
 			$retry_count = 3;
 			#- now it could be safe to display error message ?
-			cdie ("error installing package list: $name");
+			cdie("error installing package list: $name");
 		    }
 		}
 		#- check if name has been set (so that the following code has been executed already).

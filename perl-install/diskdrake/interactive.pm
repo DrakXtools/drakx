@@ -646,7 +646,7 @@ sub Resize {
 	    }
 	} elsif (isThisFs("reiserfs", $part)) {
 	    write_partitions($in, $hd) or return;
-	    if (defined (my $free = fs::df($part))) {
+	    if (defined(my $free = fs::df($part))) {
 		$nice_resize{reiserfs} = 1;		  
 		$min = max($min, $part->{size} - $free);
 	    }

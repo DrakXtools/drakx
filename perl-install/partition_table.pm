@@ -688,7 +688,7 @@ The only solution is to move your primary partitions to have the hole next to th
     }
 
     if ($e && $part->{start} < $e->{start}) {
-	my $l = first (@{$hd->{extended}});
+	my $l = first(@{$hd->{extended}});
 
 	#- the first is a special case, must recompute its real size
 	$l->{start} = round_down($l->{normal}{start} - 1, $hd->cylinder_size());

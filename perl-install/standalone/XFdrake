@@ -159,10 +159,10 @@ sub ask_for_X_restart {
     open STDOUT, ">/dev/null";
     open STDERR, ">&STDERR";
     c::setsid();
-    exec qw(perl -e), q{
+    exec qw(perl -e), q(
 	my ($wm, $pid) = @ARGV;
 	my $nb;
 	for ($nb = 30; $nb && -e "/proc/$pid"; $nb--) { sleep 1 }
 	system("killall X") if $nb;
-    }, $wm, $pid;
+    ), $wm, $pid;
 }

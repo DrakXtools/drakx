@@ -105,7 +105,7 @@ sub addcupsremoteto {
 		 /^\*PPD-Adobe/)) {
 		$ppdfile = "/etc/foomatic/$queue.ppd";
 	    } else {
-		unlink ("$::prefix/etc/foomatic/$queue.ppd");
+		unlink "$::prefix/etc/foomatic/$queue.ppd";
 		return 0;
 	    }
 	}

@@ -144,7 +144,7 @@ sub add_cups_remote_to_office {
 					       $configprefix,
 					       $configfilecontent);
 	    } else {
-		unlink ("$::prefix/etc/foomatic/$queue.ppd");
+		unlink "$::prefix/etc/foomatic/$queue.ppd";
 		return 0;
 	    }
 	    last if $suite eq 'Star Office';

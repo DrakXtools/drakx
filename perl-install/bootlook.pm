@@ -108,7 +108,7 @@ my %themes = 	('path' =>'/usr/share/bootsplash/themes/',
 		 );
 my ($cur_res) = cat_('/etc/lilo.conf') =~ /vga=(.*)/;
 #- verify that current resolution is ok
-if ( member( $cur_res, qw( 785 788 791 794))) {
+if (member( $cur_res, qw( 785 788 791 794))) {
 	($cur_res) = $bootloader::vga_modes{$cur_res} =~ /^([0-9x]+).*?$/;
 } else {
 	$no_bootsplash = 1;  #- we can't select any theme we're not in Framebuffer mode :-/
@@ -129,7 +129,7 @@ foreach (all('.')) {
 #       $_ eq $themes{'defaut'} and $default = $themes{'defaut'};
 }
 my %combo = ('thms' => '','lilo' => '','boot' => '');
-foreach (keys (%combo)) {
+foreach (keys(%combo)) {
     $combo{$_} = new Gtk::Combo;
     $combo{$_}->set_value_in_list(1, 0);
 }
@@ -200,7 +200,7 @@ sub {
             $in->ask_warn(N("Error"), N("Lilo message not found"));
         }
         #bootsplash install
-        if ( -f $themes{'path'} . $combo{'boot'}->entry->get_text() . $themes{'boot'}{'path'} . "bootsplash-$cur_res.jpg") {
+        if (-f $themes{'path'} . $combo{'boot'}->entry->get_text() . $themes{'boot'}{'path'} . "bootsplash-$cur_res.jpg") {
                 $bootsplash_cont = "# -*- Mode: shell-script -*-
 # Specify here if you want add the splash logo to initrd when
 # generating an initrd. You can specify :
@@ -237,8 +237,8 @@ LOGO_CONSOLE=" . ($keep_logo ? 'yes' : 'no') . "\n";
         }
         #here is mkinitrd time
         if (!$error) {
-            foreach (map { if_(m|^initrd-(.*)\.img|, $1) } all('/boot')){
-                if ( system("mkinitrd -f /boot/initrd-$_.img $_")) {
+            foreach (map { if_(m|^initrd-(.*)\.img|, $1) } all('/boot')) {
+                if (system("mkinitrd -f /boot/initrd-$_.img $_")) {
                     $in->ask_warn(N("Error"),
 				  N("Can't launch mkinitrd -f /boot/initrd-%s.img %s.", $_,$_));
                     $error = 1;
@@ -260,8 +260,8 @@ Launch \"lilo\" as root in command line to complete LiLo theme installation."));
 });
 
 gtkadd($window,
-       gtkpack__ (my $global_vbox = new Gtk::VBox(0,0),
-		  gtkadd (new Gtk::Frame ("$disp_mode"),
+       gtkpack__(my $global_vbox = new Gtk::VBox(0,0),
+		  gtkadd(new Gtk::Frame ("$disp_mode"),
 #			  gtkpack__(new Gtk::VBox(0,0),
 				    (gtkpack_(gtkset_border_width(new Gtk::HBox(0, 0),5),
 					      1,N("You are currently using %s as your boot manager.
@@ -321,19 +321,19 @@ Click on Configure to launch the setup wizard.", $lilogrub),
 # 				    )
 # 			 ),
 		  # X
-		  gtkadd (new Gtk::Frame (N("System mode")),
-			  gtkpack__ (new Gtk::VBox(0, 5),
+		  gtkadd(new Gtk::Frame (N("System mode")),
+			  gtkpack__(new Gtk::VBox(0, 5),
 				     gtksignal_connect(gtkset_active(new Gtk::CheckButton (N("Launch the graphical environment when your system starts")), $x_mode), clicked => sub {
 							   $x_box->set_sensitive(!$x_mode);
 							   $x_mode = !$x_mode;
 						       }),
-				     gtkpack__ (gtkset_sensitive ($x_box, $x_mode),
+				     gtkpack__(gtkset_sensitive ($x_box, $x_mode),
 						gtkset_active($x_no_button  = new Gtk::RadioButton (N("No, I don't want autologin")), !$l_mode),
-						gtkpack__ (new Gtk::HBox(0, 10),
+						gtkpack__(new Gtk::HBox(0, 10),
 							   gtkset_active($x_yes_button = new Gtk::RadioButton((N("Yes, I want autologin with this (user, desktop)")), $x_no_button), $l_mode),
-							   gtkpack__ (new Gtk::VBox(0, 10),
-								      $user_combo,
-								      $desktop_combo
+							   gtkpack__(new Gtk::VBox(0, 10),
+								     $user_combo,
+								     $desktop_combo
 								     )
 							  )
 					       )
@@ -404,7 +404,7 @@ sub isXlaunched {
     }
     close INITTAB;
     $line =~ s/id:([1-6]):initdefault:/$1/;
-    return ($line-3);
+    return $line-3;
 }
 
 sub updateInit {
@@ -454,10 +454,10 @@ sub isAutologin {
     }
     close AUTOLOGIN;
     $line =~ s/AUTOLOGIN=(yes|no)/$1/;
-    chomp ($line);
+    chomp($line);
     $line =  ($line eq "yes");
     my %au = get_autologin('');
-    return ($line && defined $au{autologin});
+    return $line && defined $au{autologin};
 }
 
 sub get_autologin {

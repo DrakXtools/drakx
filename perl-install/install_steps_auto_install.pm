@@ -21,7 +21,7 @@ sub new {
 
     if ($o->{interactive}) {
         my $interactiveClass = "install_steps_$o->{interactive}";
-	require"$interactiveClass.pm"; #- no space to skip perl2fcalls
+	require "$interactiveClass.pm";
 
 	@ISA = ($interactiveClass, @ISA);
 

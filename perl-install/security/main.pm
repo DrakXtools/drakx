@@ -112,7 +112,7 @@ sub draksec_main {
 	my @all_choices = (@yesno_choices, @alllocal_choices);
 	my %options_values;
 
-	foreach ( [ 'network', N("Network Options") ], [ 'system', N("System Options") ] ) {
+	foreach ([ 'network', N("Network Options") ], [ 'system', N("System Options") ]) {
 	    my ($domain, $label) = @$_;
 	    my %values;
 	    

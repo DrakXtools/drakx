@@ -576,7 +576,7 @@ sub set {
 		#- getting the main charset
 		mkdir "$dir/$main_charset";
 		mkdir "$dir/$main_charset/LC_MESSAGES";
-		install_any::getAndSaveFile ("$dir/$main_charset/$_") foreach @LCs, 'LC_MESSAGES/SYS_LC_MESSAGES';
+		install_any::getAndSaveFile("$dir/$main_charset/$_") foreach @LCs, 'LC_MESSAGES/SYS_LC_MESSAGES';
 	    }
 	    mkdir "$dir/$LANG";
 
@@ -764,7 +764,7 @@ sub load_mo {
 	    #- cleanup
 	    eval { rm_rf($localedir) };
 	    eval { mkdir_p(dirname("$localedir/$_/$suffix")) };
-	    install_any::getAndSaveFile ("$localedir/$_/$suffix");
+	    install_any::getAndSaveFile("$localedir/$_/$suffix");
 
 	    -s $f and return $_;
 	}
@@ -801,7 +801,7 @@ sub get_x_fontset {
 	if (! -e "$dir/$f" && $::isInstall && common::usingRamdisk()) {
 	    unlink "$dir/$_" foreach values %bigfonts;
 	    install_any::remove_bigseldom_used ();
-	    install_any::getAndSaveFile ("$dir/$f");
+	    install_any::getAndSaveFile("$dir/$f");
 	}
     }
     my ($big, $small) = @$c[5..6];

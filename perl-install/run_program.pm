@@ -46,7 +46,7 @@ sub raw {
     return 1 if $root && $<;
 
     $root ? $root .= '/' : ($root = '');
-    install_any::check_prog (ref $name ? $name->[0] : $name) if !$root && $::isInstall;
+    install_any::check_prog(ref $name ? $name->[0] : $name) if !$root && $::isInstall;
 
 
     my ($stdout_raw, $stdout_mode, $stderr_raw, $stderr_mode);

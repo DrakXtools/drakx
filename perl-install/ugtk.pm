@@ -410,7 +410,7 @@ sub create_treeitem {
     my $w = new Gtk::TreeItem($name);
     $w->signal_connect(key_press_event => sub {
         my (undef, $e) = @_;
-        local $_ = chr ($e->{keyval});
+        local $_ = chr $e->{keyval};
 
 	if ($e->{keyval} > 0x100) {
 	    my $n;
@@ -736,7 +736,7 @@ sub gtkpowerpack {
 	ref($_[0]) eq 'HASH' || ref($_[0]) eq 'ARRAY' and $RefAttrs = shift;
 	foreach ("expand", "fill", "padding", "pack_end") {
 	    if ($RefDefaultAttrs->{$_} eq 'arg') {
-		ref ($_[0]) and die "error in packing definition\n";
+		ref $_[0] and die "error in packing definition\n";
 		$attr{$_} = shift;
 		ref($RefAttrs) eq 'ARRAY' and shift @$RefAttrs;
 	    } elsif (ref($RefAttrs) eq 'HASH' && defined($RefAttrs->{$_})) {

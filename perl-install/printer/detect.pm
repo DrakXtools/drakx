@@ -87,7 +87,7 @@ sub whatNetPrinter {
 	    } else {
 		if (!defined($modelinfo)) {
 		    # SNMP request to auto-detect model
-		    $modelinfo = getSNMPModel ($ip);
+		    $modelinfo = getSNMPModel($ip);
 		}
 		if (defined($modelinfo)) {
 		    push @res, { port => "socket://$host:$port",

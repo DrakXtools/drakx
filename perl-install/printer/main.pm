@@ -239,7 +239,7 @@ sub read_configured_queues($) {
 	    open F, ($::testing ? $prefix : "chroot $prefix/ ") . 
 		"foomatic-configure -P -q -s $spooler |" or
 		    die "Could not run foomatic-configure";
-	    eval (join('',(<F>))); 
+	    eval join('',(<F>)); 
 	    close F;
 	    if ($service eq "pdq") {
 		#- Have we found queues? PDQ has no damon, so we consider
@@ -260,7 +260,7 @@ sub read_configured_queues($) {
 	open F, ($::testing ? $prefix : "chroot $prefix/ ") . 
 	    "foomatic-configure -P -q -s $printer->{SPOOLER} |" or
 		die "Could not run foomatic-configure";
-	eval (join('',(<F>))); 
+	eval join('',(<F>)); 
 	close F;
     }
     $printer->{configured} = {};
@@ -524,7 +524,7 @@ sub read_foomatic_options ($) {
 		  " $printer->{SPECIAL_OPTIONS}" : "") 
 		    . " |" or
 	    die "Could not run foomatic-configure";
-    eval (join('',(<F>))); 
+    eval join('',(<F>)); 
     close F;
     # Return the arguments field
     return $COMBODATA->{args};
@@ -1337,7 +1337,7 @@ sub configure_hpoj {
 	$bus = "par";
 	$address_arg = printer::detect::parport_addr($device);
 	$address_arg =~ /^\s*-base\s+(\S+)/;
-	eval ("$base_address = $1");
+	eval "$base_address = $1";
     } elsif ($device =~ /socket/) {
 	$bus = "hpjd";
 	$hostname = $model;
@@ -1399,7 +1399,7 @@ sub configure_hpoj {
 		    close F;
 		    chomp $serialnumber_long;
 		}
-		if (cardReaderDetected ($ptalprobedevice)) {
+		if (cardReaderDetected($ptalprobedevice)) {
 		    $cardreader = 1;
 		}
 	    }
@@ -1441,7 +1441,7 @@ sub configure_hpoj {
     }
 
     # Delete any old/conflicting devices
-    deleteDevice ($ptaldevice);
+    deleteDevice($ptaldevice);
     if ($bus eq "par") {
 	while (1) {
 	    my $oldDevname = lookupDevname ("mlc:par:",undef,undef,
@@ -1449,7 +1449,7 @@ sub configure_hpoj {
 	    if (!defined($oldDevname)) {
 		last;
 	    }
-	    deleteDevice ($oldDevname);
+	    deleteDevice($oldDevname);
 	}
     }
 
@@ -1575,7 +1575,7 @@ sub configure_hpoj {
 	    "init.photod.append+=-maxaltports 26\n";
     }
     close(CONFIG);
-    readOneDevice ($ptaldevice);
+    readOneDevice($ptaldevice);
 
     # Restart HPOJ
     printer::services::restart("hpoj");
@@ -1661,7 +1661,7 @@ RIGHTDRIVE=\" \"
 
 sub configureapplications {
     my ($printer) = @_;
-    setcupslink ($printer);
+    setcupslink($printer);
     printer::office::configureoffice('Star Office', $printer);
     printer::office::configureoffice('OpenOffice.Org', $printer);
     printer::gimp::configure($printer);
@@ -1669,23 +1669,23 @@ sub configureapplications {
 
 sub addcupsremotetoapplications {
     my ($printer, $queue) = @_;
-    setcupslink ($printer);
-    return (printer::office::add_cups_remote_to_office('Star Office', $printer, $queue) &&
-	    printer::office::add_cups_remote_to_office('OpenOffice.Org', $printer, $queue) &&
-	    printer::gimp::addcupsremoteto($printer, $queue));
+    setcupslink($printer);
+    return printer::office::add_cups_remote_to_office('Star Office', $printer, $queue) &&
+	   printer::office::add_cups_remote_to_office('OpenOffice.Org', $printer, $queue) &&
+	   printer::gimp::addcupsremoteto($printer, $queue);
 }
 
 sub removeprinterfromapplications {
     my ($printer, $queue) = @_;
-    setcupslink ($printer);
-    return (printer::office::remove_printer_from_office('Star Office', $printer, $queue) &&
-	    printer::office::remove_printer_from_office('OpenOffice.Org', $printer, $queue) &&
-	    printer::gimp::removeprinterfrom($printer, $queue));
+    setcupslink($printer);
+    return printer::office::remove_printer_from_office('Star Office', $printer, $queue) &&
+	   printer::office::remove_printer_from_office('OpenOffice.Org', $printer, $queue) &&
+	   printer::gimp::removeprinterfrom($printer, $queue);
 }
 
 sub removelocalprintersfromapplications {
     my ($printer) = @_;
-    setcupslink ($printer);
+    setcupslink($printer);
     printer::office::remove_local_printers_from_office('Star Office', $printer);
     printer::office::remove_local_printers_from_office('OpenOffice.Org', $printer);
     printer::gimp::removelocalprintersfrom($printer);

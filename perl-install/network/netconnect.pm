@@ -94,7 +94,7 @@ sub pre_func {
 	my $W = my_gtk->new(N("Network Configuration Wizard"));
 	gtkadd($W->{window},
 	       gtkpack_(new Gtk::VBox(0, 0),
-			1, write_on_pixmap(gtkpng ("drakconnect_step"),
+			1, write_on_pixmap(gtkpng("drakconnect_step"),
 					   20,200,
 					   N("We are now going to configure the %s connection.", translate($text)),
 					  ),
@@ -449,7 +449,7 @@ DOMAINNAME2=$netc->{DOMAINNAME2}"
     cp_af("$prefix/etc/sysconfig/network-scripts/drakconnect_conf", "$prefix/etc/sysconfig/network-scripts/drakconnect_conf." . $a);
     chmod 0600, "$prefix/etc/sysconfig/network-scripts/drakconnect_conf";
     chmod 0600, "$prefix/etc/sysconfig/network-scripts/drakconnect_conf." . $a;
-    foreach ( ["$prefix$connect_file", "up"],
+    foreach (["$prefix$connect_file", "up"],
 	      ["$prefix$disconnect_file", "down"],
 	      ["$prefix$connect_prog", "prog"],
 	      ["$prefix/etc/ppp/ioptions1B", "iop1B"],
@@ -473,7 +473,7 @@ sub set_profile {
     -e ($f . "." . $profile) or return;
     $netcnx->{PROFILE}=$profile;
     cp_af($f . "." . $profile, $f);
-    foreach ( ["$prefix$connect_file", "up"],
+    foreach (["$prefix$connect_file", "up"],
 	      ["$prefix$disconnect_file", "down"],
 	      ["$prefix$connect_prog", "prog"],
 	      ["$prefix/etc/ppp/ioptions1B", "iop1B"],

@@ -238,9 +238,7 @@ sub write_conf {
 	} elsif ($type eq 'alias' && $alias =~ /scsi_hostadapter|usb-interface/) {
 	    #- remove old aliases which are replaced by probeall
 	    $_ = '';
-	} elsif (
-	    $conf{$alias}{$type}  &&
-	    $conf{$alias}{$type} ne $module)  {
+	} elsif ($conf{$alias}{$type} && $conf{$alias}{$type} ne $module) {
 	    my $v = join(' ', uniq(deref($conf{$alias}{$type})));
 	    $_ = "$type $alias $v\n";
 	}
