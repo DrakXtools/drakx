@@ -500,7 +500,7 @@ sub selectMouse($) {
 #------------------------------------------------------------------------------
 sub configureNetwork {
     my ($o) = @_;
-    network::configureNetwork2($o, $o->{prefix}, $o->{netc}, $o->{intf});
+    network::configureNetwork2($o->{prefix}, $o->{netc}, $o->{intf});
 }
 
 #------------------------------------------------------------------------------
