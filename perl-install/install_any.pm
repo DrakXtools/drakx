@@ -548,8 +548,8 @@ sub g_auto_install {
     require Data::Dumper;
     output($f, 
 	   "# You should always check the syntax with 'perl -cw auto_inst.cfg.pl' before testing\n",
-	   Data::Dumper->Dump([$o], ['$o']), if_($replay, q(
-package install_steps_auto_install;
+	   Data::Dumper->Dump([$o], ['$o']), if_($replay, 
+qq(\npackage install_steps_auto_install;), q(
 $graphical = 1;
 push @graphical_steps, 'doPartitionDisks', 'choosePartitionsToFormat', 'formatMountPartitions';
 )), "\0");
