@@ -972,7 +972,7 @@ sub Options {
 
 sub is_part_existing {
     my ($part, $all_hds) = @_;
-    $part && any { fsedit::is_same_part($part, $_) } fsedit::get_all_fstab_and_holes($all_hds);
+    $part && any { fsedit::are_same_partitions($part, $_) } fsedit::get_all_fstab_and_holes($all_hds);
 }
 
 sub modifyRAID {

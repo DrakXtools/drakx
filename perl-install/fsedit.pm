@@ -335,7 +335,8 @@ sub is_same_hd {
     }
 }
 
-sub is_same_part {
+#- are_same_partitions() do not look at the device name since things may have changed
+sub are_same_partitions {
     my ($part1, $part2) = @_;
     foreach ('start', 'size', 'type', 'rootDevice') {
 	$part1->{$_} eq $part2->{$_} or return;
