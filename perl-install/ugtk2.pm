@@ -304,16 +304,16 @@ sub n_line_size {
 }
 
 sub create_box_with_title {
-    my $o = shift;
+    my ($o, @l) = @_;
 
-    my $nbline = sum(map { round(length($_) / 60 + 1/2) } map { split "\n" } @_);
+    my $nbline = sum(map { round(length($_) / 60 + 1/2) } map { split "\n" } @l);
     my $box = Gtk2::VBox->new(0,0);
     if ($nbline == 0) {
 	$o->{box_size} = 0;
 	return $box;
     }
     $o->{box_size} = n_line_size($nbline, 'text', $box);
-    if (@_ <= 2 && $nbline > 4) {
+    if (@l <= 2 && $nbline > 4) {
 	$o->{icon} && !$::isWizard and 
 	  eval { gtkpack__($box, gtkset_border_width(gtkpack_(Gtk2::HBox->new(0,0), 1, gtkcreate_img($o->{icon})),5)) };
 	my $wanted = $o->{box_size};
@@ -324,7 +324,7 @@ sub create_box_with_title {
 	$wtext->set_left_margin(3);
 	$wtext->can_focus($has_scroll);
 	$wtext->signal_connect(button_press_event => sub { 1 }); #- disable selecting text and popping the contextual menu (GUI team says it's *horrible* to be able to do select text!)
-	chomp(my $text = join("\n", @_));
+	chomp(my $text = join("\n", @l));
 	my $scroll = create_scrolled_window(gtktext_insert($wtext, $text));
      my $width = 400;
      $scroll->signal_connect(realize => sub {
@@ -335,7 +335,7 @@ sub create_box_with_title {
                                 $o->{rwindow}->queue_resize;
                             });
      $scroll->set_size_request($width, 200);
-	gtkpack_($box, 0, $scroll);
+	gtkpack_($box, $o->{box_allow_grow} || 0, $scroll);
     } else {
 	my $a = !$::no_separator;
 	undef $::no_separator;
@@ -356,7 +356,7 @@ sub create_box_with_title {
 					       my $w = $new_label->($_);
 					       $::isWizard and $w->set_justify("left");
 					       (0, $w);
-					   } @_),
+					   } @l),
 					   1, Gtk2::HBox->new(0,0),
 					  )
 			      ),
@@ -369,7 +369,7 @@ sub create_box_with_title {
 			  my $w = $new_label->($_);
 			  $::isWizard ? gtkpack__(Gtk2::HBox->new(0,0), gtkset_size_request(Gtk2::Label->new, 20, 0), $w)
 			              : $w
-		      } @_),
+		      } @l),
 		      if_($::isWizard, gtkset_size_request(Gtk2::Label->new, 0, 15)),
 		      if_($a, Gtk2::HSeparator->new)
 		     )
