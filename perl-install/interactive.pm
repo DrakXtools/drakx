@@ -20,7 +20,8 @@ use common qw(:common :functional);
 #-     range (with min, max)
 #-     combo (with list, not_edit)
 #-     list (with list, icon2f (aka icon), separator (aka tree), format (aka pre_format function),
-#            help can be a hash or a function)
+#-           help can be a hash or a function)
+#-     entry (the default) (with hidden)
 #
 #- heritate from this class and you'll get all made interactivity for same steps.
 #- for this you need to provide
