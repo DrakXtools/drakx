@@ -22,7 +22,9 @@ sub interactive::do_pkgs {
 sub install {
     my ($o, @l) = @_;
     $o->{in}->suspend;
+    my $wait = $in->wait_message('', _("Installing packages..."));
     my $ret = system('urpmi', '--allow-medium-change', '--auto', '--best-output', @l) == 0;
+    undef $wait;
     $o->{in}->resume;
     $ret;
 }
