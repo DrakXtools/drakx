@@ -1,3 +1,119 @@
+2003/08/26  Pixel  <pixel at mandrakesoft.com>
+
+	* diskdrake/dav.pm: focus_first on the webdav server field
+
+	* keyboard.pm: 
+	  - don't set XkbCompat to group_led, it's better to use grp_led:scroll
+	in
+	XkbOptions
+	  - also set compose:rwin if GRP_TOGGLE is not rwin_toggle. rationale:
+		  Also, for multilayout keyboards, it would be nice to also
+		  in XkbOptions "compose:rwin" to define the right windows
+		  key as the compose key (unless "rwin_toggle" has been
+		  choosen to toggle the layouts) "compose:rwin" is the
+		  default when loading a single latin layout, but is lost
+		  when loading several layouts...
+
+	* any.pm: install "autofs" pkg when using ldap (thanks to Buchan Milne)
+
+	* fs.pm: use fs=ext2:vfat or fs=udf:iso9600 for supermount (it needs
+	supermount-ng)
+
+	* standalone/diskdrake: do embed WebDAV configuration (fix bug #4703)
+
+2003/08/26  Till Kamppeter  <till at mandrakesoft.com>
+
+	* printer/main.pm: If an HPOJ-controlled HP MF device on a parallel port
+	has an URI with
+	model reference (and not port number) tell at least in the menues that
+	it is on a parallel port.
+
+	* printer/printerdrake.pm: Let names of automatically generated queues not
+	contain the word "Series".
+
+2003/08/26  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* modules.pm (add_alias) override current setting when adding an alias
+
+	* standalone/service_harddrake, harddrake/sound.pm: while bootstrapping,
+	only write /etc/modules.conf only if we really altered it
+	(thus preventing depmod to be runned everytime)
+
+	* harddrake/data.pm: explain data struct
+
+	* drakxtools.spec: more last bits for 9.2-2mdk for lord pixel
+	9.2-2mdk
+
+2003/08/25  Alice Lafox  <alice at lafox.com.ua>
+
+	* share/po/ru.po: update
+
+2003/08/25  Fabian Mandelbaum  <fabman at 2vias.com.ar>
+
+	* share/po/es.po: Updated Spanish translations
+
+2003/08/25  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/fa.po: updated po file
+	updated pot file
+
+	* share/po/uz@Cyrl.po, share/po/id.po, share/po/be.po, share/po/ru.po,
+	share/po/ja.po, share/po/he.po, share/po/ga.po, share/po/tr.po,
+	share/po/ms.po, share/po/hr.po, share/po/uz.po, share/po/nb.po,
+	share/po/ko.po, share/po/es.po, share/po/zh_CN.po, share/po/cy.po,
+	share/po/zh_TW.po, share/po/eu.po, share/po/vi.po, share/po/eo.po,
+	share/po/tg.po, share/po/sr@Latn.po, share/po/DrakX.pot, share/po/th.po,
+	share/po/lt.po, share/po/cs.po, share/po/sr.po, share/po/pt.po,
+	share/po/nl.po, share/po/hu.po, share/po/is.po, share/po/fr.po,
+	share/po/uk.po, share/po/sv.po, share/po/de.po, share/po/ca.po,
+	share/po/bs.po, share/po/et.po, share/po/lv.po, share/po/az.po,
+	share/po/it.po, share/po/ro.po, share/po/wa.po, share/po/af.po,
+	share/po/pl.po, share/po/sk.po, share/po/pt_BR.po, share/po/mt.po,
+	share/po/da.po, share/po/ta.po, share/po/fi.po, share/po/sq.po,
+	share/po/el.po, share/po/ar.po, share/po/gl.po, share/po/sl.po,
+	share/po/bg.po: updated pot file
+
+2003/08/25  Till Kamppeter  <till at mandrakesoft.com>
+
+	* printer/main.pm: Distinguish between printers "Configured on this
+	machine" and
+	"Configured on other machines", not any more "Local Printers" and
+	"Remote Printers", so the current dialog is compatible to the new GTK2
+	dialog.
+	Fixed recognition of installed parallel HPOJ-driven MF devices.
+
+	* printer/cups.pm: Distinguish between printers "Configured on this
+	machine" and
+	"Configured on other machines", not any more "Local Printers" and
+	"Remote Printers", so the current dialog is compatible to the new GTK2
+	dialog.
+
+	* printer/printerdrake.pm: Distinguish between printers "Configured on
+	this machine" and
+	"Configured on other machines", not any more "Local Printers" and
+	"Remote Printers", so the current dialog is compatible to the new GTK2
+	dialog.
+	  - Modularized the function main() to have separate subroutines for
+	adding, setting as default, editing, and removing a printer (for new
+	  main window).
+	  - Cleaned up the code of the former function main().
+	  - Re-activated the wizard mode for adding a printer, it works again!
+
+2003/08/25  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* standalone/drakboot: fix drakboot always showing advanced stuff even
+	when --expert was not
+	passed
+
+	* share/po/fr.po: update french translation
+
+	* network/netconnect.pm: fix drakconnect not working on console (found by
+	poulpy) due to having
+	killed pre_func() which used to set a background pixmap in the old
+	days, thus the bogus test that went in.
+
+	* drakxtools.spec: 9.2-1mdk
+
 2003/08/25  Fabian Mandelbaum  <fabman at 2vias.com.ar>
 
 	* share/po/es.po: Updated Spanish translations
@@ -19679,7 +19795,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.822 2003/08/21 18:00:38 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.823 2003/08/25 14:30:01 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
