@@ -134,11 +134,11 @@ $ScanEntry->set_width_chars(4);
 $ScanEntry->set_text($ScanInterval);
 
 $KnownList = Gtk2::SimpleList->new(
-                                      "ESSID" => "text",
-                                      "Mode" => "text",
-                                      "Channel" => "text",
-                                      "DHCP" => "bool",
-                                      "Key" => "text"
+                                      N("ESSID") => "text",
+                                      N("Mode") => "text",
+                                      N("Channel") => "text",
+                                      N("DHCP") => "bool",
+                                      N("Key") => "text"
                                      );
 $KnownList->get_selection->set_mode('single');
 $KnownList->set_reorderable(1);
