@@ -560,7 +560,7 @@ sub allocatePartitions {
 	my $part;
 	while (suggest_part($part = { start => $start, size => 0, maxsize => $size, rootDevice => $dev }, 
 			    $all_hds, $to_add)) {
-	    my ($hd) = fsedit::part2hd($part, $all_hds);
+	    my $hd = fsedit::part2hd($part, $all_hds);
 	    add($hd, $part, $all_hds);
 	    $size -= $part->{size} + $part->{start} - $start;
 	    $start = $part->{start} + $part->{size};

@@ -165,7 +165,7 @@ When sure, press Ok.")) or return;
 		$part->{size} = $size;
 		$part->{isFormatted} = 1;
 		
-		my ($hd) = fsedit::part2hd($part, $all_hds);
+		my $hd = fsedit::part2hd($part, $all_hds);
 		$hd->{isDirty} = $hd->{needKernelReread} = 1;
 		$hd->adjustEnd($part);
 		partition_table::adjust_local_extended($hd, $part);
