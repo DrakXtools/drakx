@@ -92,7 +92,7 @@ my $desktop_combo = Gtk2::ComboBox->new_with_strings(\@sessions, if_(member($aut
 
 my %themes = 	('path' => '/usr/share/bootsplash/themes/',
    	        'sysconfig' => '/etc/sysconfig/bootsplash',
-                'default' => 'Mandrake',
+                'default' => 'Mandrakelinux',
                 'def_thmb' => '/usr/share/libDrakX/pixmaps/nosplash_thumb.png',
                 'lilo' => {'file' => '/lilo/message',
                            'thumb' => '/lilo/thumb.png' },
@@ -126,13 +126,15 @@ if (-r $themes{sysconfig}) {
     }
 }
 
-my @boot_thms = if_(!$themes{default}, qw(default));
+my @boot_thms;
 chdir($themes{path}); #- we must change directory for correct @boot_thms assignement
 foreach (sort(all('.'))) {
     if (-d "$themes{path}$_" && m/^[^.]/) {
         -f "$themes{path}$_$themes{boot}{path}bootsplash-$cur_res.jpg" and push @boot_thms, $_;
     }
 }
+push @boot_thms, $themes{default} unless member($themes{default}, @boot_thms);
+
 my %combo = ('thms' => '', 'lilo' => '');
 foreach (keys(%combo)) {
     $combo{$_} = gtkset_size_request(Gtk2::ComboBox->new_text, 10, -1);
@@ -207,7 +209,7 @@ gtkadd($window,
                                      ok_clicked => sub {
                                          Xconfig::various::runlevel($x_mode ? 5 : 3);
                                          if ($splash_working) {
-                                             $splash_mode and update_bootsplash($combo{boot}->entry->get_text, $splash_mode, $keep_logo);
+                                             update_bootsplash($combo{boot}->entry->get_text, $splash_mode, $keep_logo);
                                          } else {
                                              updateAutologin();
                                          }
@@ -272,14 +274,14 @@ sub update_bootsplash {
 		print "substInFile { s/^LOGO_CONSOLE=.*/LOGO_CONSOLE=$logo_console/ } $themes{sysconfig}\n";
 		print "system($switch_theme, $theme)\n";
 	    } else {
-		print "system($remove_theme, $theme)\n";
+		print "system($remove_theme)\n";
 	    }
  	} else {
 	    if ($splash_mode) {
 		substInFile { s/^LOGO_CONSOLE=.*/LOGO_CONSOLE=$logo_console/ } $themes{sysconfig};
 		system($switch_theme, $theme);
 	    } else {
-		system($remove_theme, $theme);
+		system($remove_theme);
 	    }
  	}
     }
