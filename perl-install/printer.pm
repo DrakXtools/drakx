@@ -421,6 +421,15 @@ sub read_printer_db(;$) {
     }
     close DBPATH;
 
+    # Add raw queue
+    if ($spooler ne "pdq") {
+	$entry->{ENTRY} = _("Raw printer (No driver)");
+	$entry->{driver} = "raw";
+	$entry->{make} = "";
+	$entry->{model} = "Unknown model";
+	map { $thedb{$entry->{ENTRY}}->{$_} = $entry->{$_} } keys %$entry;
+    }
+
     #- Load CUPS driver database if CUPS is used as spooler
     if (($spooler) && ($spooler eq "cups") && ($::expert)) {
 
@@ -706,7 +715,7 @@ sub get_descr_from_ppd {
     my ($printer) = @_;
     my %ppd;
 
-    #- if there is no ppd, this means this is the PostScript generic filter.
+    #- if there is no ppd, this means this is a raw queue.
     local *F; open F, "$prefix/etc/cups/ppd/$printer->{OLD_QUEUE}.ppd" or return "|" . _("Unknown model");
     # "OTHERS|Generic PostScript printer|PostScript (en)";
     local $_;
@@ -768,6 +777,7 @@ sub poll_ppd_base {
 	while (<PPDS>) {
 	    chomp;
 	    my ($ppd, $mf, $descr, $lang) = split /\|/;
+	    if ($ppd eq "raw") {next;}
 	    my ($model, $driver);
 	    if ($descr) {
 		if ($descr =~ /^([^,]+), (.*)$/) {
@@ -862,7 +872,17 @@ sub configure_queue($) {
 		   "$prefix/etc/cups/ppd/$printer->{OLD_QUEUE}.ppd " .
 		   "$prefix/etc/cups/ppd/$printer->{currentqueue}{'queue'}.ppd");
 	}
-    }
+    } else {
+	# Raw queue
+        run_program::rooted($prefix, "foomatic-configure",
+			    "-s", $printer->{currentqueue}{'spooler'},
+			    "-n", $printer->{currentqueue}{'queue'},
+			    "-c", $printer->{currentqueue}{'connect'},
+			    "-d", $printer->{currentqueue}{'driver'},
+			    "-N", $printer->{currentqueue}{'desc'},
+			    "-L", $printer->{currentqueue}{'loc'}
+			    ) or die "foomatic-configure failed";
+    }	  
 
     # Make sure that queue is active
     if ($printer->{SPOOLER} ne "pdq") {

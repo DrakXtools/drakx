@@ -268,6 +268,10 @@ complete => sub {
 	$device eq $_->{port} or next;
         $printer->{DBENTRY} =
             bestMatchSentence ($_->{val}{DESCRIPTION}, keys %printer::thedb);
+        # If the manufacturer was not guessed correctly, discard the
+        # guess.
+        #$printer->{DBENTRY} =~ /^([\|])|/;
+        #if ($_->{val}{DESCRIPTION} !~ /lc($1)/i) {$printer->{DBENTRY} = ""};
     }
     1;
 }
@@ -711,9 +715,13 @@ sub get_db_entry {
 		    }
 		}
 	    }
-	    if ($printer->{DBENTRY} eq "") {
+	    if (($printer->{DBENTRY} eq "") && 0) {
 		# Exact match with cleaned-up model did not work, try a best match
 		$printer->{DBENTRY} = bestMatchSentence("$make|$model", keys %printer::thedb);
+		# If the manufacturer was not guessed correctly, discard the
+		# guess.
+		$printer->{DBENTRY} =~ /^([\|])|/;
+		if (lc($1) ne lc($make)) {$printer->{DBENTRY} = ""};
 	    }
 	    # Set the OLD_CHOICE to a non-existing value
 	    $printer->{OLD_CHOICE} = "XXX";
@@ -737,6 +745,9 @@ sub choose_model {
     if ((keys %printer::thedb) == 0) {
 	my $w = $in->wait_message('', _("Reading printer database ..."));
         printer::read_printer_db($printer->{SPOOLER});
+    }
+    if (!$printer::thedb{$printer->{DBENTRY}}) {
+	$printer->{DBENTRY} = _("Raw printer (No driver)");
     }
     $in->set_help('configurePrinterType') if $::isInstall;
     # Choose the printer/driver from the list
@@ -1724,8 +1735,10 @@ What do you want to modify on this printer?",
 				   _("Printer manufacturer, model")),
 				  (($printer->{configured}{$queue}{'queuedata'}{'make'} ne
 				    "") &&
-				   ($printer->{configured}{$queue}{'queuedata'}{'model'} ne
-				    _("Unknown model")) ?
+				   (($printer->{configured}{$queue}{'queuedata'}{'model'} ne
+				    _("Unknown model")) ||
+				    ($printer->{configured}{$queue}{'queuedata'}{'model'} ne
+				    _("Raw printer"))) ?
 				   _("Printer options") : ()),
 				  (($queue ne $printer->{DEFAULT}) ?
 				   _("Set this printer as the default") : ()),
