@@ -58,7 +58,6 @@ if ($in->ask_from_entries_refH(
 	    $u->{name} or $in->ask_warn('', _("Please give a user name")), return (1,0);
 	    $u->{name} =~ /^[a-z0-9_-]+$/ or $in->ask_warn('', _("The user name must contain only lower cased letters, numbers, `-' and `_'")), return (1,0);
 	    member($u->{name}, map { $_->{name} } @users) and $in->ask_warn('', _("This user name is already added")), return (1,0);
-	    print $u->{icon}, "\n";
 	    return 0;
 	},
 )) {
