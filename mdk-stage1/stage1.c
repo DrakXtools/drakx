@@ -364,7 +364,7 @@ int main(int argc, char **argv, char **env)
 
 	if (IS_RESCUE) {
 		int fd = open("/proc/sys/kernel/real-root-dev", O_RDWR);
-#ifdef __sparc__
+#if defined(__powerpc__) || defined (__sparc__)
 		write(fd, "0x1030000", sizeof("0x1030000")); /* ram3 or sparc */
 #else
 		write(fd, "0x103", sizeof("0x103")); /* ram3 */
