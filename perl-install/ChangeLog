@@ -1,3 +1,52 @@
+2004/02/23  Guillaume Cottenceau  <gc at mandrakesoft.com>
+
+	* rescue/tree/etc/issue: 10.0
+
+2004/02/23  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* network/ethernet.pm: write ethX aliases and ifup/ifdown scripts when
+	configuring a LAN connection
+
+	* standalone/drakconnect (del_intf) keep ethX aliases b/c eg removing eth0
+	will results in eth1 to be
+	renumbered on next boot...
+	(del_intf) down the network interface when deleting it
+	(del_intf) when no network configuration is configured, just report it
+	(del_intf) only list configured interfaces when offering to delete them
+
+	* share/po/ms.po, share/po/sk.po, share/po/gl.po, share/po/pt_BR.po,
+	share/po/th.po, share/po/et.po, share/po/ja.po, share/po/hr.po,
+	share/po/be.po, share/po/ko.po, share/po/DrakX.pot, share/po/sv.po,
+	share/po/sr.po, share/po/pl.po, share/po/fi.po, share/po/he.po,
+	share/po/da.po, share/po/ca.po, share/po/ar.po, share/po/nb.po,
+	share/po/uz.po, diskdrake/interactive.pm, share/po/ro.po,
+	share/po/zh_TW.po, share/po/zh_CN.po, share/po/sr@Latn.po,
+	share/po/sq.po, share/po/it.po, diskdrake/hd_gtk.pm, share/po/eu.po,
+	share/po/es.po, share/po/lv.po, share/po/hu.po, share/po/fa.po,
+	share/po/id.po, share/po/ru.po, share/po/br.po, share/po/sl.po,
+	share/po/nn.po, share/po/tr.po, share/po/mt.po, share/po/ga.po,
+	share/po/mn.po, share/po/uk.po, share/po/lt.po, share/po/cy.po,
+	share/po/tg.po, share/po/bs.po, share/po/mk.po, share/po/wa.po,
+	share/po/is.po, share/po/hi.po, share/po/af.po, share/po/az.po,
+	share/po/pt.po, share/po/fr.po, share/po/ta.po, share/po/vi.po,
+	share/po/nl.po, share/po/de.po, share/po/eo.po, share/po/el.po,
+	share/po/bg.po, share/po/cs.po, share/po/uz@Latn.po: typo fixes (Reinout
+	van Schouwen)
+
+	* drakxtools.spec: 10-7mdk
+	10-6mdk
+
+	* network/netconnect.pm: 
+	  - always write up/down scripts
+	  - only write initscript when starting at boot was choosen (instead of
+	writing
+	it in restart path...)
+	write ethX aliases and ifup/ifdown scripts when configuring a LAN
+	connection
+
+	* network/adsl.pm: fix adsl scripts (especially with sagem8xx modems)
+	add missing space
+
 2004/02/23  Thierry Vignaud  <tvignaud at mandrakesoft.com>
 
 	* share/po/fr.po: fix french translation (upcase label)
@@ -27211,7 +27260,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.883 2004/02/23 10:19:36 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.884 2004/02/23 11:49:09 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
