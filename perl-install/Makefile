@@ -11,7 +11,7 @@ TAGS: $(PMS)
 	etags -o - $^ /usr/lib/perl5/site_perl/*/MDK/Common/*.pm | ./perl2etags > $@
 
 clean:
-	for i in $(DIRS); do $(MAKE) -C $$i clean; done
+	for i in $(DIRS) share/po; do $(MAKE) -C $$i clean; done
 	rm -rf auto ../drakxtools.tar.bz2
 	find . -name "*~" -o -name ".#*" -o -name "TAGS" -o -name "*.old" | xargs rm -f
 
