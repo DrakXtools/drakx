@@ -134,7 +134,9 @@ sub whatUsbport() {
 		$commandset ||= $1;
 		$itemfound = 1;
 	    }
-	    next if !$itemfound;
+	    # Nothing found? Try again if not in the third attempt,
+	    # in the third attempt always accept.
+	    next if !$itemfound && ($j < 3);
 	    # Was there a manufacturer and a model in the string?
 	    if ($manufacturer eq "" || $model eq "") {
 		$manufacturer = "";
