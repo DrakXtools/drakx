@@ -90,9 +90,6 @@ sub probe() {
 	elsif ($_->{driver} =~ /Driver:(.*)/) { $card->{Driver} = $1 }
 	else { internal_error() }
 
-	$_->{VideoRam} = 4096 if $_->{Driver} eq 'i810';
-	$_->{Options}{UseFBDev} = undef if arch() =~ /ppc/ && $_->{Driver} eq 'r128';
-
 	$card;
     } @c;
 
