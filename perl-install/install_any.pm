@@ -445,6 +445,12 @@ sub setPackages {
 			$tmphdlistfile,
 		    );
 		    unlink $tmphdlistfile;
+		    if ($supplmedium) {
+			log::l("read suppl hdlist");
+			$supplmedium->{selected} = 1;
+		    } else {
+			log::l("no suppl hdlist");
+		    }
 		}
 	    } else {
 		$suppl_method = '';
