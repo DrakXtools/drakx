@@ -1074,15 +1074,13 @@ Would you like X to start when you reboot?"), 1);
 		$l{uid} > 500, $l{name};
 	    } cat_("$o->{prefix}/etc/passwd");
 
-	    if (exists $o->{miscellaneous}{autologuser} || $::auto || !@users
-		|| $in->ask_yesorno(_("Autologin at startup"),
+	    exists $o->{miscellaneous}{autologuser} || $::auto || !@users or 
+	      $in->ask_yesorno(_("Autologin at startup"),
 _("I can set up your computer to automatically log on one user.
-Would you like to use this feature?"), 1)) {
-	      $in->ask_from_entries_refH(_("Autologin"),
-					 _("Autologin - Choose default user\n"),
+Would you like to use this feature?"), 1) && $in->ask_from_entries_refH(_("Autologin"),
+					 _("Autologin - Choose default user"),
 					 [ _("Choose the default user :") => {val => \$o->{miscellaneous}{autologuser}, list => \@users, not_edit => 1} ],
 	      );
-	    }
 	}
 	run_program::rooted($prefix, "chkconfig", "--del", "gpm") if $o->{mouse}{device} =~ /ttyS/ && !$::isStandalone;
     }
