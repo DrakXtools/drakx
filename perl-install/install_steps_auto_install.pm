@@ -3,7 +3,7 @@ package install_steps_auto_install; # $Id$
 use diagnostics;
 use strict;
 use lang;
-use vars qw(@ISA);
+use vars qw(@ISA $graphical);
 
 @ISA = qw(install_steps);
 
@@ -16,8 +16,6 @@ use modules;
 use common qw(:common :functional);
 use install_steps;
 use log;
-
-my $graphical = 0;
 
 sub new {
     my ($type, $o) = @_;
