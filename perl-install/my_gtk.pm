@@ -10,7 +10,7 @@ use vars qw(@ISA %EXPORT_TAGS @EXPORT_OK $border);
 @ISA = qw(Exporter);
 %EXPORT_TAGS = (
     helpers => [ qw(create_okcancel createScrolledWindow create_menu create_notebook create_packtable create_hbox create_vbox create_adjustment create_box_with_title create_treeitem) ],
-    wrappers => [ qw(gtksignal_connect gtkradio gtkpack gtkpack_ gtkpack__ gtkpack2 gtkpack3 gtkpack2_ gtkpack2__ gtksetstyle gtkset_tip gtkappenditems gtkappend gtkset_shadow_type gtkset_layout gtkadd gtkput gtktext_insert gtkset_usize gtksize gtkset_justify gtkset_active gtkset_modal gtkset_border_width gtkmove gtkshow gtkhide gtkdestroy gtkset_mousecursor gtkset_mousecursor_normal gtkset_mousecursor_wait gtkset_background gtkset_default_fontset gtkctree_children gtkxpm gtkpng gtkcreate_xpm gtkcreate_png) ],
+    wrappers => [ qw(gtksignal_connect gtkradio gtkpack gtkpack_ gtkpack__ gtkpack2 gtkpack3 gtkpack2_ gtkpack2__ gtksetstyle gtkset_tip gtkappenditems gtkappend gtkset_shadow_type gtkset_layout gtkadd gtkput gtktext_insert gtkset_usize gtksize gtkset_justify gtkset_active gtkset_modal gtkset_border_width gtkmove gtkshow gtkhide gtkdestroy gtkset_mousecursor gtkset_mousecursor_normal gtkset_mousecursor_wait gtkset_background gtkset_default_fontset gtkctree_children gtkxpm gtkpng write_on_pixmap gtkcreate_xpm gtkcreate_png) ],
     ask => [ qw(ask_warn ask_okcancel ask_yesorno ask_from_entry ask_file) ],
 );
 $EXPORT_TAGS{all} = [ map { @$_ } values %EXPORT_TAGS ];
@@ -51,7 +51,7 @@ sub new {
 	-r $rc or $rc = dirname(__FILE__) . "/wizard.rc";
 	Gtk::Rc->parse($rc);
 	$o->{window} = new Gtk::VBox(0,0);
-	$o->{window}->set_border_width(10);
+	$o->{window}->set_border_width($::Wizard_splash ? 0 : 10);
 	$o->{rwindow} = $o->{window};
 	if (!defined($::WizardWindow)) {
 	    $::WizardWindow = new Gtk::Window;
@@ -348,6 +348,35 @@ sub gtkcreate_png {
 sub xpm_d { my $w = shift; Gtk::Gdk::Pixmap->create_from_xpm_d($w->window, undef, @_) }
 sub gtkxpm { new Gtk::Pixmap(gtkcreate_xpm(@_)) }
 sub gtkpng { new Gtk::Pixmap(gtkcreate_png(@_)) }
+sub write_on_pixmap {
+    my ($pixmap, $x_pos, $y_pos, @text)=@_;
+    my ($gdkpixmap, $gdkmask) = $pixmap->get();
+    my ($width, $height) = (540, 250); #($pixmap->allocation->[2], $pixmap->allocation->[3]);
+    my $darea= new Gtk::DrawingArea();
+    $darea->size($width, $height);
+    $darea->set_usize($width, $height);
+    my $first_time=1;
+    my $draw = sub {
+	my $style = new Gtk::Style;
+	#- i18n : you can change the font.
+	$style->font(Gtk::Gdk::Font->fontset_load(_("-adobe-times-bold-r-normal--17-*-100-100-p-*-iso8859-*,*-r-*")));
+	my $y_pos2= $y_pos;
+  	foreach (@text) {
+  	    $gdkpixmap->draw_string($style->font, $darea->style->black_gc, $x_pos, $y_pos2, $_);
+  	    $y_pos2 += 20;
+  	}
+	my $first_time=0;
+    };
+    $darea->signal_connect(expose_event => sub { $first_time and &$draw();
+						 $darea->window->draw_pixmap
+						   ($darea->style->white_gc,
+						    $gdkpixmap, 0, 0,
+						    ($darea->allocation->[2]-$width)/2, ($darea->allocation->[3]-$height)/2,
+						    $width, $height);
+					     });
+    $darea;
+}
+
 #-###############################################################################
 #- createXXX functions
 
