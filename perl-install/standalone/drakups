@@ -149,7 +149,10 @@ Please fill in its name, its driver and its port.", $model, $vendor);
                                         help => N("The port on which is connected your ups") },
                                      ];
                                  },
-                                 next => "end",
+                                 post => sub {
+                                     $port = '/dev/' . $port if $port !~ m!/dev/!;
+                                     return 'end',
+                                 },
                                 },
                       end => {
                               name => sub { 
