@@ -79,6 +79,13 @@ sub enteringStep {
     $o->install_steps::enteringStep($step);
 }
 
+sub rebootNeeded {
+    my ($o) = @_;
+    print "\nWhile partitioning, the partition table re-read failed, needing a reboot\n";
+    print "This is plain wrong for an auto_install\n";
+    errorInStep();
+}
+
 sub ask_warn {
     log::l(ref $_[1] ? join " ", @{$_[1]} : $_[1]);
 }
