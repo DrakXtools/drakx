@@ -25,22 +25,13 @@ sub busy_pids_and_files() {
     } @pids;
 }
 
-sub remove_simple_daemons {
-    my (@busy) = @_;
-    foreach (@busy) {
-	$_->{to_kill} = $_->{cmdline} =~ m!\b(kdesud|kded|kdesktop|kicker|kio_uiserver|klaptopdaemon|artsd|portmap)\b!;
-    }
-    my @auto_killed = grep { $_->{to_restart} || $_->{to_kill} } @busy;
-
-    if (@auto_killed) {
-	kill 15, map { $_->{pid} } @auto_killed;
-	sleep 1;
-
-	$_ and system($_) foreach map { $_->{to_restart} } @auto_killed;
-
-	@busy = busy_pids_and_files(); #- update list
-    }
-    @busy;
+my @to_restart_progs = qw(kded kdesktop kicker);
+my $restart_progs = join(";", @to_restart_progs);
+my @simple_daemons = qw(kdesud kio_uiserver klaptopdaemon artsd portmap);
+sub simple_daemon {
+    my ($e) = @_;
+    my $re = join('|', @to_restart_progs, @simple_daemons);
+    $e->{cmdline} =~ m!\b($re)\b!
 }
 
 my $in = interactive->vnew;
@@ -60,10 +51,10 @@ if (!$ENV{DEBUG} && find { $_->{cmdline} =~ /^($needed_processes)/ } @busy) {
     $in->exit(1);
 }
 
-@busy = remove_simple_daemons(@busy);
-if (@busy) {
+my ($simple_daemons, $bad_busy) = partition { simple_daemon($_) } @busy;
+if (@$bad_busy) {
     warn '*' x 80, "\n";
-    warn join("\n", "$_->{exe} ($_->{cmdline}) =>", map { "  $_" } @{$_->{files}}) . "\n" foreach @busy;
+    warn join("\n", "$_->{exe} ($_->{cmdline}) =>", map { "  $_" } @{$_->{files}}) . "\n" foreach @$bad_busy;
     warn '*' x 80, "\n";
 
     my @progs = map { 
@@ -73,7 +64,7 @@ if (@busy) {
 	$s =~ s!^kdeinit:\s+(\S+).*!$1!;
 	$s =~ s!\s.*!!;
 	$s;
-    } @busy;
+    } @$bad_busy;
 
     my $choice = 'quit';
     my @l = my %l = (
@@ -90,10 +81,20 @@ if (@busy) {
     if ($choice eq 'keep') {
 	exec 'totem' or $in->exit;
     } else {
-	system('sudo', 'kill', map { $_->{pid} } @busy);
+	system('sudo', 'kill', map { $_->{pid} } @$bad_busy);
 	sleep 2;
-	system('sudo', 'kill', '-9', map { $_->{pid} } @busy);
+	system('sudo', 'kill', '-9', map { $_->{pid} } @$bad_busy);
     }
+}
+
+kill 15, map { $_->{pid} } @$simple_daemons;
+sleep 1;
+
+@busy = busy_pids_and_files(); #- update list
+if (@busy) {
+    system($restart_progs);
+    exec 'totem' if $in->ask_okcancel('', N("You can only run with no CDROM support"));
+    $in->exit(1);
 }
 
 my %file2loop = do {
@@ -115,5 +116,6 @@ if (my $pid = fork()) {
 	'--boot-loop', $file2loop{'live_tree_boot.clp'},
 	'--main-loop', $file2loop{'live_tree.clp'},
 	'--totem-pid', $totem_pid,
-	'--user', $ENV{USER};
+	'--user', $ENV{USER},
+	'--restore-cmd', $restart_progs;
 }
