@@ -530,7 +530,7 @@ sub chooseGroups {
     
     my $b = pkgs::saveSelected($packages);
     install_any::unselectMostPackages($o);
-    pkgs::setSelectedFromCompssList($packages, {}, $min_level, 0);
+    pkgs::setSelectedFromCompssList($packages, { CAT_SYSTEM => 1 }, $min_level, 0);
     my $system_size = pkgs::selectedSize($packages);
     my ($sizes, $pkgs) = pkgs::computeGroupSize($packages, $min_level);
     pkgs::restoreSelected($b);
