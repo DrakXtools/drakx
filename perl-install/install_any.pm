@@ -437,6 +437,7 @@ sub prep_net_suppl_media {
     network::netconnect::main($o->{prefix}, $o->{netcnx} ||= {}, $o, $o->{modules_conf}, $o->{netc}, $o->{mouse}, $o->{intf}, 0, 1);
     require install_interactive;
     install_interactive::upNetwork($o);
+    sleep(3);
 }
 
 sub selectSupplMedia {
@@ -506,7 +507,7 @@ sub selectSupplMedia {
 		$url = $o->ask_from_entry('', N("URL of the mirror?")) or return 'error';
 	    }
 	    useMedium($medium_name);
-	    require http;
+	    require http if $suppl_method eq 'http';
 	    require ftp if $suppl_method eq 'ftp';
 	    #- first, try to find an hdlists file
 	    eval { pkgs::psUsingHdlists($o, $suppl_method, $url, $o->{packages}, $medium_name, \&setup_suppl_medium) };

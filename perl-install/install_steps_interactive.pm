@@ -402,8 +402,10 @@ sub askSupplMirror {
     my $u = $o->{updates} ||= {};
     require crypto;
     my @mirrors = do {
-	my $_w = $o->wait_message('', N("Contacting Mandrakelinux web site to get the list of available mirrors..."));
-	crypto::mirrors($o->{distro_type});
+	$o->{distro_type} ||= 'community';
+	#- get the list of mirrors locally, to avoid weird bugs with making an
+	#- http request before ftp at this point of the install
+	crypto::mirrors($o->{distro_type}, 1);
     };
     push @mirrors, '-';
     $o->ask_from_(
@@ -422,7 +424,7 @@ sub askSupplMirror {
 	return $o->ask_from_entry('', $message) || '';
     }
     my $url = "ftp://$u->{mirror}$crypto::mirrors{$u->{mirror}}[1]";
-    $url =~ s!\bmedia/?$!!;
+    $url =~ s!/(?:media/)?main/?\z!!;
     log::l("mirror chosen [$url]");
     return $url;
 }

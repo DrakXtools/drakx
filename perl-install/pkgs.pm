@@ -390,7 +390,8 @@ sub psUpdateHdlistsDeps {
 sub psUsingHdlists {
     my ($o, $method, $o_hdlistsprefix, $o_packages, $o_initialmedium, $o_callback) = @_;
     my $prefix = $o->{prefix};
-    my $listf = install_any::getFile($o_hdlistsprefix ? "$o_hdlistsprefix/media/media_info/hdlists" : 'media/media_info/hdlists')
+    my $is_ftp = $o_hdlistsprefix =~ /^ftp:/;
+    my $listf = install_any::getFile($o_hdlistsprefix && !$is_ftp ? "$o_hdlistsprefix/media/media_info/hdlists" : 'media/media_info/hdlists')
 	or die "no hdlists found";
     my ($suppl_CDs, $deselectionAllowed) = (0, 0);
     if (!$o_packages) {
@@ -409,14 +410,14 @@ sub psUsingHdlists {
 	#- we'll ask afterwards for supplementary CDs, if the hdlists file contains
 	#- a line that begins with "suppl"
 	if (/^suppl/) { $suppl_CDs = 1; next }
-	#- if the hdlists contains a line "askmedia", delection of media found
+	#- if the hdlists contains a line "askmedia", deletion of media found
 	#- in this hdlist is allowed
 	if (/^askmedia/) { $deselectionAllowed = 1; next }
 	my $cdsuppl = index($medium_name, 's') >= 0;
 	m/^\s*(noauto:)?(hdlist\S*\.cz2?)\s+(\S+)\s*(.*)$/ or die qq(invalid hdlist description "$_" in hdlists file);
 	push @hdlists, [ $2, $medium_name, $3, $4, !$1, 
 	    #- hdlist path, suppl CDs are mounted on /mnt/cdrom :
-	    $o_hdlistsprefix ? "$o_hdlistsprefix/media/media_info/$2" : undef,
+	    $o_hdlistsprefix ? ($is_ftp ? "media/media_info/$2" : "$o_hdlistsprefix/media/media_info/$2") : undef,
 	];
 	$cdsuppl ? ($medium_name = ($medium_name + 1) . 's') : ++$medium_name;
     }

@@ -46,16 +46,21 @@ use ftp;
 
 sub mirror2text { $mirrors{$_[0]} && $mirrors{$_[0]}[0] . '|' . $_[0] }
 sub mirrors {
-    my ($o_distro_type) = @_;
+    my ($o_distro_type, $o_use_local_list) = @_;
 
     unless (keys %mirrors) {
-	#- contact the following URL to retrieve list of mirror.
-	#- http://www.linux-mandrake.com/mirrorsfull.list
-	require http;
-	my $f = http::getFile("http://www.linux-mandrake.com/mirrorsfull.list");
+	my $f;
+	if ($o_use_local_list) {
+	    $f = \*DATA;
+	} else {
+	    #- contact the following URL to retrieve the list of mirrors.
+	    #- http://www.linux-mandrake.com/mirrorsfull.list
+	    require http;
+	    my $f = http::getFile("http://www.linux-mandrake.com/mirrorsfull.list");
+	}
 
 	local $SIG{ALRM} = sub { die "timeout" };
-	alarm 60;
+	$o_use_local_list or alarm 60;
 	my $distro_type = $o_distro_type || 'updates';
 	my $sub_dir = $distro_type =~ /cooker|community/ ? '' : '/' . version() . '/main_updates';
 	foreach (<$f>) {
@@ -69,8 +74,10 @@ sub mirrors {
 	    }
 	    $mirrors{$url} = [ $land, $dir . $sub_dir ];
 	}
-	http::getFile('/XXX'); #- close connection.
-	alarm 0; 
+	unless ($o_use_local_list) {
+	    http::getFile('/XXX'); #- close connection.
+	    alarm 0; 
+	}
 
 	#- now add static mirror (in case of something wrong happened above).
 	add2hash(\%mirrors, \%static_mirrors);
@@ -174,3 +181,145 @@ sub get {
 }
 
 1;
+
+#- mirror list, hardcoded here to be used in mini-cds (ftp suppl. media)
+__DATA__
+communityi586:ftp://ftp-linux.cc.gatech.edu/pub/linux/distributions/mandrake/devel/community/i586/media/main
+communityi586:ftp://ftp-stud.fht-esslingen.de/pub/Mirrors/Mandrakelinux/devel/community/i586/media/main
+communityi586:ftp://ftp.gwdg.de/pub/linux/mandrakelinux/devel/community/i586/media/main
+communityi586:ftp://ftp.join.uni-muenster.de/pub/linux/distributions/mandrake-devel/community/i586/media/main
+communityi586:ftp://ftp.lip6.fr/pub/linux/distributions/Mandrakelinux/devel/community/i586/media/main
+communityi586:ftp://ftp.nluug.nl/pub/os/Linux/distr/Mandrake/devel/community/i586/media/main
+communityi586:ftp://ftp.proxad.net/pub/Distributions_Linux/Mandrakelinux/devel/community/i586/media/main
+communityi586:ftp://ftp.sunet.se/pub/Linux/distributions/mandrakelinux/devel/community/i586/media/main
+communityi586:ftp://ftp.surfnet.nl/pub/os/Linux/distr/Mandrakelinux/devel/community/i586/media/main
+communityi586:ftp://ftp.tugraz.at/mirror/Mandrakelinux/devel/community/i586/media/main
+communityi586:ftp://ftp.uninett.no/pub/unix/Linux/Mandrakelinux/devel/community/i586/media/main
+communityi586:ftp://ftp.u-strasbg.fr/pub/linux/distributions/mandrakelinux/devel/community/i586/media/main
+communityi586:ftp://gd.tuwien.ac.at/pub/linux/Mandrakelinux/devel/community/i586/media/main
+communityi586:ftp://jungle.metalab.unc.edu/pub/Linux/distributions/mandrake/Mandrakelinux/devel/community/i586/media/main
+communityi586:ftp://mandrake.contactel.cz/Mandrakelinux/devel/community/i586/media/main
+communityi586:ftp://sunsite.informatik.rwth-aachen.de/pub/Linux/mandrake-devel/community/i586/media/main
+cookeri586:ftp://ftp-linux.cc.gatech.edu/pub/linux/distributions/mandrake/devel/cooker/i586/media/main
+cookeri586:ftp://ftp-stud.fht-esslingen.de/pub/Mirrors/Mandrakelinux/devel/cooker/i586/media/main
+cookeri586:ftp://ftp.club-internet.fr/pub/unix/linux/distributions/Mandrakelinux/devel/cooker/i586/media/main
+cookeri586:ftp://ftp.gwdg.de/pub/linux/mandrakelinux/devel/cooker/i586/media/main
+cookeri586:ftp://ftp.join.uni-muenster.de/pub/linux/distributions/mandrake-devel/cooker/i586/media/main
+cookeri586:ftp://ftp.lip6.fr/pub/linux/distributions/Mandrakelinux/devel/cooker/i586/media/main
+cookeri586:ftp://ftp.nluug.nl/pub/os/Linux/distr/Mandrake/devel/cooker/i586/media/main
+cookeri586:ftp://ftp.proxad.net/pub/Distributions_Linux/Mandrakelinux/devel/cooker/i586/media/main
+cookeri586:ftp://ftp.sunet.se/pub/Linux/distributions/mandrakelinux/devel/cooker/i586/media/main
+cookeri586:ftp://ftp.surfnet.nl/pub/os/Linux/distr/Mandrakelinux/devel/cooker/i586/media/main
+cookeri586:ftp://ftp.tugraz.at/mirror/Mandrakelinux/devel/cooker/i586/media/main
+cookeri586:ftp://ftp.uninett.no/pub/unix/Linux/Mandrakelinux/devel/cooker/i586/media/main
+cookeri586:ftp://ftp.u-strasbg.fr/pub/linux/distributions/mandrakelinux/devel/cooker/i586/media/main
+cookeri586:ftp://gd.tuwien.ac.at/pub/linux/Mandrakelinux/devel/cooker/i586/media/main
+cookeri586:ftp://mandrake.contactel.cz/Mandrakelinux/devel/cooker/i586/media/main
+cookeri586:ftp://sunsite.informatik.rwth-aachen.de/pub/Linux/mandrake-devel/cooker/i586/media/main
+updatesi586:ftp://ftp-linux.cc.gatech.edu/pub/linux/distributions/mandrake/official/updates
+updatesi586:ftp://ftp-stud.fht-esslingen.de/pub/Mirrors/Mandrakelinux/official/updates
+updatesi586:ftp://ftp.club-internet.fr/pub/unix/linux/distributions/Mandrakelinux/official/updates
+updatesi586:ftp://ftp.esat.net/pub/linux/mandrakelinux/official/updates
+updatesi586:ftp://ftp.gwdg.de/pub/linux/mandrakelinux/official/updates
+updatesi586:ftp://ftp.ikoula.com/pub/ftp.mandrake-linux.com/Mandrakelinux/official/updates
+updatesi586:ftp://ftp.join.uni-muenster.de/pub/linux/distributions/mandrake/updates
+updatesi586:ftp://ftp.lip6.fr/pub/linux/distributions/Mandrakelinux/official/updates
+updatesi586:ftp://ftp.nluug.nl/pub/os/Linux/distr/Mandrakelinux/official/updates
+updatesi586:ftp://ftp.pcds.ch/pub/Mandrakelinux/official/updates
+updatesi586:ftp://ftp.prew.hu/pub/Linux/Mandrakelinux/official/updates
+updatesi586:ftp://ftp.proxad.net/pub/Distributions_Linux/Mandrakelinux/official/updates
+updatesi586:ftp://ftp.ps.pl/mirrors/Mandrakelinux/official/updates
+updatesi586:ftp://ftp.sunet.se/pub/Linux/distributions/mandrakelinux/official/updates
+updatesi586:ftp://ftp.surfnet.nl/pub/os/Linux/distr/Mandrakelinux/official/updates
+updatesi586:ftp://ftp.tugraz.at/mirror/Mandrakelinux/official/updates
+updatesi586:ftp://ftp.uninett.no/pub/unix/Linux/Mandrakelinux/official/updates
+updatesi586:ftp://ftp.uni-bayreuth.de/pub/linux/Mandrakelinux/official/updates
+updatesi586:ftp://ftp.u-strasbg.fr/pub/linux/distributions/mandrakelinux/official/updates
+updatesi586:ftp://ftp.vat.tu-dresden.de/pub/Mandrakelinux/official/updates
+updatesi586:ftp://gd.tuwien.ac.at/pub/linux/Mandrakelinux/official/updates
+updatesi586:ftp://jungle.metalab.unc.edu/pub/Linux/distributions/mandrake/Mandrakelinux/official/updates
+updatesi586:ftp://linux.cdpa.nsysu.edu.tw/pub/mandrake/updates
+updatesi586:ftp://mandrake.contactel.cz/Mandrakelinux/official/updates
+updatesi586:ftp://mandrake.mirrors.pair.com/Mandrakelinux/official/updates
+updatesi586:ftp://mirrors.secsup.org/pub/linux/mandrake/Mandrakelinux/official/updates
+updatesi586:ftp://spirit.profinet.sk/mirrors/Mandrake/updates
+updatesi586:ftp://sunsite.informatik.rwth-aachen.de/pub/Linux/mandrake/updates
+updatesi586:ftp://updates.roma2.infn.it/linux/updates/mandrake
+cookerppc:ftp://ftp-linux.cc.gatech.edu/pub/linux/distributions/mandrake/devel/cooker/ppc/media/main
+cookerppc:ftp://ftp-stud.fht-esslingen.de/pub/Mirrors/Mandrakelinux/devel/cooker/ppc/media/main
+cookerppc:ftp://ftp.club-internet.fr/pub/unix/linux/distributions/Mandrakelinux/devel/cooker/ppc/media/main
+cookerppc:ftp://ftp.gwdg.de/pub/linux/mandrakelinux/devel/cooker/ppc/media/main
+cookerppc:ftp://ftp.join.uni-muenster.de/pub/linux/distributions/mandrake-devel/cooker/ppc/media/main
+cookerppc:ftp://ftp.nluug.nl/pub/os/Linux/distr/Mandrake/devel/cooker/ppc/media/main
+cookerppc:ftp://ftp.proxad.net/pub/Distributions_Linux/Mandrakelinux/devel/cooker/ppc/media/main
+cookerppc:ftp://ftp.sunet.se/pub/Linux/distributions/mandrakelinux/devel/cooker/ppc/media/main
+cookerppc:ftp://ftp.surfnet.nl/pub/os/Linux/distr/Mandrakelinux/devel/cooker/ppc/media/main
+cookerppc:ftp://ftp.tugraz.at/mirror/Mandrakelinux/devel/cooker/ppc/media/main
+cookerppc:ftp://ftp.uninett.no/pub/unix/Linux/Mandrakelinux/devel/cooker/ppc/media/main
+cookerppc:ftp://gd.tuwien.ac.at/pub/linux/Mandrakelinux/devel/cooker/ppc/media/main
+cookerppc:ftp://mandrake.contactel.cz/Mandrakelinux/devel/cooker/ppc/media/main
+cookerppc:ftp://sunsite.informatik.rwth-aachen.de/pub/Linux/mandrake-devel/cooker/ppc/media/main
+updatesppc:ftp://ftp-linux.cc.gatech.edu/pub/linux/distributions/mandrake/official/updates/ppc
+updatesppc:ftp://ftp-stud.fht-esslingen.de/pub/Mirrors/Mandrakelinux/official/updates/ppc
+updatesppc:ftp://ftp.club-internet.fr/pub/unix/linux/distributions/Mandrakelinux/official/updates/ppc
+updatesppc:ftp://ftp.esat.net/pub/linux/mandrakelinux/official/updates/ppc
+updatesppc:ftp://ftp.gwdg.de/pub/linux/mandrakelinux/official/updates/ppc
+updatesppc:ftp://ftp.ikoula.com/pub/ftp.mandrake-linux.com/Mandrakelinux/official/updates/ppc
+updatesppc:ftp://ftp.join.uni-muenster.de/pub/linux/distributions/mandrake/updates/ppc
+updatesppc:ftp://ftp.nluug.nl/pub/os/Linux/distr/Mandrakelinux/official/updates/ppc
+updatesppc:ftp://ftp.pcds.ch/pub/Mandrakelinux/official/updates/ppc
+updatesppc:ftp://ftp.proxad.net/pub/Distributions_Linux/Mandrakelinux/official/updates/ppc
+updatesppc:ftp://ftp.ps.pl/mirrors/Mandrakelinux/official/updates/ppc
+updatesppc:ftp://ftp.sunet.se/pub/Linux/distributions/mandrakelinux/official/updates/ppc
+updatesppc:ftp://ftp.surfnet.nl/pub/os/Linux/distr/Mandrakelinux/official/updates/ppc
+updatesppc:ftp://ftp.tugraz.at/mirror/Mandrakelinux/official/updates/ppc
+updatesppc:ftp://ftp.uninett.no/pub/unix/Linux/Mandrakelinux/official/updates/ppc
+updatesppc:ftp://ftp.uni-bayreuth.de/pub/linux/Mandrakelinux/official/updates/ppc
+updatesppc:ftp://ftp.vat.tu-dresden.de/pub/Mandrakelinux/official/updates/ppc
+updatesppc:ftp://gd.tuwien.ac.at/pub/linux/Mandrakelinux/official/updates/ppc
+updatesppc:ftp://jungle.metalab.unc.edu/pub/Linux/distributions/mandrake/Mandrakelinux/official/updates/ppc
+updatesppc:ftp://linux.cdpa.nsysu.edu.tw/pub/mandrake/updates/ppc
+updatesppc:ftp://mandrake.contactel.cz/Mandrakelinux/official/updates/ppc
+updatesppc:ftp://mandrake.mirrors.pair.com/Mandrakelinux/official/updates/ppc
+updatesppc:ftp://mirrors.secsup.org/pub/linux/mandrake/Mandrakelinux/official/updates/ppc
+updatesppc:ftp://spirit.profinet.sk/mirrors/Mandrake/updates/ppc
+updatesppc:ftp://sunsite.informatik.rwth-aachen.de/pub/Linux/mandrake/updates/ppc
+updatesppc:ftp://updates.roma2.infn.it/linux/updates/mandrake/ppc
+cookerx86_64:ftp://ftp-linux.cc.gatech.edu/pub/linux/distributions/mandrake/devel/cooker/amd64/media/main
+cookerx86_64:ftp://ftp-stud.fht-esslingen.de/pub/Mirrors/Mandrakelinux/devel/cooker/amd64/media/main
+cookerx86_64:ftp://ftp.club-internet.fr/pub/unix/linux/distributions/Mandrakelinux/devel/cooker/amd64/media/main
+cookerx86_64:ftp://ftp.gwdg.de/pub/linux/mandrakelinux/devel/cooker/amd64/media/main
+cookerx86_64:ftp://ftp.join.uni-muenster.de/pub/linux/distributions/mandrake-devel/cooker/amd64/media/main
+cookerx86_64:ftp://ftp.nluug.nl/pub/os/Linux/distr/Mandrake/devel/cooker/amd64/media/main
+cookerx86_64:ftp://ftp.proxad.net/pub/Distributions_Linux/Mandrakelinux/devel/cooker/amd64/media/main
+cookerx86_64:ftp://ftp.sunet.se/pub/Linux/distributions/mandrakelinux/devel/cooker/amd64/media/main
+cookerx86_64:ftp://ftp.surfnet.nl/pub/os/Linux/distr/Mandrakelinux/devel/cooker/amd64/media/main
+cookerx86_64:ftp://ftp.tugraz.at/mirror/Mandrakelinux/devel/cooker/amd64/media/main
+cookerx86_64:ftp://ftp.uninett.no/pub/unix/Linux/Mandrakelinux/devel/cooker/amd64/media/main
+cookerx86_64:ftp://gd.tuwien.ac.at/pub/linux/Mandrakelinux/devel/cooker/amd64/media/main
+cookerx86_64:ftp://mandrake.contactel.cz/Mandrakelinux/devel/cooker/amd64/media/main
+updatesx86_64:ftp://ftp-linux.cc.gatech.edu/pub/linux/distributions/mandrake/official/updates/amd64
+updatesx86_64:ftp://ftp-stud.fht-esslingen.de/pub/Mirrors/Mandrakelinux/official/updates/amd64
+updatesx86_64:ftp://ftp.club-internet.fr/pub/unix/linux/distributions/Mandrakelinux/official/updates/amd64
+updatesx86_64:ftp://ftp.esat.net/pub/linux/mandrakelinux/official/updates/amd64
+updatesx86_64:ftp://ftp.gwdg.de/pub/linux/mandrakelinux/official/updates/amd64
+updatesx86_64:ftp://ftp.ikoula.com/pub/ftp.mandrake-linux.com/Mandrakelinux/official/updates/amd64
+updatesx86_64:ftp://ftp.join.uni-muenster.de/pub/linux/distributions/mandrake/updates/amd64
+updatesx86_64:ftp://ftp.nluug.nl/pub/os/Linux/distr/Mandrakelinux/official/updates/amd64
+updatesx86_64:ftp://ftp.pcds.ch/pub/Mandrakelinux/official/updates/amd64
+updatesx86_64:ftp://ftp.proxad.net/pub/Distributions_Linux/Mandrakelinux/official/updates/amd64
+updatesx86_64:ftp://ftp.ps.pl/mirrors/Mandrakelinux/official/updates/amd64
+updatesx86_64:ftp://ftp.sunet.se/pub/Linux/distributions/mandrakelinux/official/updates/amd64
+updatesx86_64:ftp://ftp.surfnet.nl/pub/os/Linux/distr/Mandrakelinux/official/updates/amd64
+updatesx86_64:ftp://ftp.tugraz.at/mirror/Mandrakelinux/official/updates/amd64
+updatesx86_64:ftp://ftp.uninett.no/pub/unix/Linux/Mandrakelinux/official/updates/amd64
+updatesx86_64:ftp://ftp.uni-bayreuth.de/pub/linux/Mandrakelinux/official/updates/amd64
+updatesx86_64:ftp://ftp.vat.tu-dresden.de/pub/Mandrakelinux/official/updates/amd64
+updatesx86_64:ftp://gd.tuwien.ac.at/pub/linux/Mandrakelinux/official/updates/amd64
+updatesx86_64:ftp://jungle.metalab.unc.edu/pub/Linux/distributions/mandrake/Mandrakelinux/official/updates/amd64
+updatesx86_64:ftp://mandrake.contactel.cz/Mandrakelinux/official/updates/amd64
+updatesx86_64:ftp://mandrake.mirrors.pair.com/Mandrakelinux/official/updates/amd64
+updatesx86_64:ftp://mirrors.secsup.org/pub/linux/mandrake/Mandrakelinux/official/updates/amd64
+updatesx86_64:ftp://spirit.profinet.sk/mirrors/Mandrake/updates/amd64
+updatesx86_64:ftp://sunsite.informatik.rwth-aachen.de/pub/Linux/mandrake/updates/amd64
+updatesx86_64:ftp://updates.roma2.infn.it/linux/updates/mandrake/amd64
