@@ -413,6 +413,17 @@ sub selectSupplMedia {
 	    ? (max(map { $_->{medium} =~ /^(\d+)s$/ ? $1 : 0 } values %{$o->{packages}{mediums}}) + 1) . "s"
 	    : int(keys %{$o->{packages}{mediums}}) + 1;
 	local $::isWizard = 0;
+	#- configure network if needed
+	if (!our $asked && !scalar keys %{$o->{intf}}) {
+	    $asked = 1;
+	    #- install basesystem now
+	    $::o->do_pkgs->ensure_is_installed('basesystem', undef, 1);
+	    #- from install_steps_interactive:
+	    local $::expert = $::expert;
+	    require network::netconnect;
+	    network::netconnect::main($o->{prefix}, $o->{netcnx} ||= {}, $o, $o->{modules_conf}, $o->{netc}, $o->{mouse}, $o->{intf}, 0, 1);
+	    install_interactive::upNetwork($o);
+	}
 	local $o->{method} = $suppl_method;
 	if ($suppl_method eq 'cdrom') {
 	    (my $cdromdev) = detect_devices::cdroms();
