@@ -216,7 +216,7 @@ sub write_boot_thm {
 	#- verify all dir exists or create them
 	-d $thm_conf_path.$theme{name}
 	  or mkdir($thm_conf_path.$theme{name});
-     mkdir($thm_conf_path.$theme{name} . $cfg_path) if !-d $thm_conf_path.$theme{name} . "/$cfg_path";
+     mkdir($thm_conf_path.$theme{name} . $cfg_path) if !-d ($thm_conf_path.$theme{name} . $cfg_path);
 	-d $thm_path.$theme{name}
 	  or mkdir($thm_path.$theme{name});
 	-d $thm_path.$theme{name}.'/images/'
@@ -374,8 +374,6 @@ sub mk_frame {
     my @buttons;
     my $u = create_packtable({ col_spacings => 10, row_spacings => 5 },
                              map {
-                                 my $pos = $_;
-                                 my $key = $1 if $pos =~ m/^(\w+)(\s+)?(\w+)?$/;
                                  my @widgets;
 
                                  #- look for label
