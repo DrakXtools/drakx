@@ -457,8 +457,8 @@ sub choosePackages {
     require pkgs;
 
     my $min_size = pkgs::selectedSize($packages);
+    undef $w;
     unless ($min_size < $availableC) {
-	undef $w;
 	$o->ask_warn('', N("Your system does not have enough space left for installation or upgrade (%d > %d)",
 			   $min_size, $availableC));
 	install_steps::rebootNeeded($o);
@@ -466,16 +466,8 @@ sub choosePackages {
 
     my $min_mark = 4;
 
-    my $b = pkgs::saveSelected($packages);
-    my %all_compssUsers_flags = map { $_ => 1 } map { @{$_->{flags}} } @$compssUsers;
-    my $_level = pkgs::setSelectedFromCompssList($packages, \%all_compssUsers_flags, $min_mark, 0);
-    my $max_size = pkgs::selectedSize($packages) + 1; #- avoid division by zero.
-    log::l("max size (level $min_mark) is : " . formatXiB($max_size));
-    pkgs::restoreSelected($b);
-    undef $w;
-
   chooseGroups:
-    $o->chooseGroups($packages, $compssUsers, $min_mark, \$individual, $max_size) if !$o->{isUpgrade} && $o->{meta_class} ne 'desktop';
+    $o->chooseGroups($packages, $compssUsers, $min_mark, \$individual) if !$o->{isUpgrade} && $o->{meta_class} ne 'desktop';
 
     ($o->{packages_}{ind}) =
       pkgs::setSelectedFromCompssList($packages, $o->{rpmsrate_flags_chosen}, $min_mark, $availableC);
@@ -529,7 +521,7 @@ The format is the same as auto_install generated floppies."),
     }
 }
 sub chooseGroups {
-    my ($o, $packages, $compssUsers, $min_level, $individual, $max_size) = @_;
+    my ($o, $packages, $compssUsers, $min_level, $individual) = @_;
 
     #- for all groups available, determine package which belongs to each one.
     #- this will enable getting the size of each groups more quickly due to
@@ -538,7 +530,7 @@ sub chooseGroups {
     
     my $b = pkgs::saveSelected($packages);
     install_any::unselectMostPackages($o);
-    pkgs::setSelectedFromCompssList($packages, {}, $min_level, $max_size);
+    pkgs::setSelectedFromCompssList($packages, {}, $min_level, 0);
     my $system_size = pkgs::selectedSize($packages);
     my ($sizes, $pkgs) = pkgs::computeGroupSize($packages, $min_level);
     pkgs::restoreSelected($b);
