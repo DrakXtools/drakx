@@ -24,7 +24,11 @@ use network;
 use any;
 use fs;
 
-$minAvailableSize = 5 * sqr(1024);
+#- make sure of this place to be available for installation, this could help a lot.
+#- currently doing a very small install use 36Mb of postinstall-rpm, but installing
+#- these packages may eat up to 90Mb (of course not all the server may be installed!).
+#- 50mb may be a good choice to avoid almost all problem of insuficient space left...
+$minAvailableSize = 50 * sqr(1024);
 @filesToSaveForUpgrade = qw(
 /etc/ld.so.conf /etc/fstab /etc/hosts /etc/conf.modules
 );
@@ -551,7 +555,7 @@ END
 	    local *F;
 	    open F, ">$secrets" or die "Can't open $secrets: $!";
 	    print F @l;
-	} else {
+        } else {
 	    local *F;
 	    open F, ">>$secrets" or die "Can't open $secrets: $!";
 	    print F "$toreplace{login}  ppp0  \"$toreplace{passwd}\"\n";
@@ -561,7 +565,8 @@ END
     } #- CHAP is not supported by initscripts, need patching before doing more on that here!
 
     #-install_any::template2userfile($o->{prefix}, "$ENV{SHARE_PATH}/kppprc.in", ".kde/share/config/kppprc", 1, %toreplace);
-    install_any::template2userfile($o->{prefix}, "$ENV{SHARE_PATH}/kppprc.in", "$o->{prefix}/usr/share/config/kppprc", %toreplace);
+    commands::mkdir_("-p", "$o->{prefix}/usr/share/config");
+    template2file("$ENV{SHARE_PATH}/kppprc.in", "$o->{prefix}/usr/share/config/kppprc", %toreplace);
 
     miscellaneousNetwork($o);
 }

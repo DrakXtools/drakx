@@ -1,3 +1,9 @@
+2000-05-03  François Pons  <fpons@mandrakesoft.com>
+
+	* install_steps.pm: updated min size, fixed kppprc generation.
+	* install_any.pm: make sure postinstall-rpm is here before
+	erasing (avoid error on reboot only).
+
 2000-05-02  Pixel  <pixel@mandrakesoft.com>
 
 	* raid.pm (format_part): don't call raid::make if part is already

@@ -175,7 +175,7 @@ sub setup_postinstall_rpms($$) {
     commands::cp((map { "/tmp/rhimage/" . relGetFile(pkgs::packageFile($_)) } @toCopy), $postinstall_rpms);
 }
 sub clean_postinstall_rpms() {
-    $postinstall_rpms and commands::rm('-rf', $postinstall_rpms);
+    $postinstall_rpms and -d $postinstall_rpms and commands::rm('-rf', $postinstall_rpms);
 }
 
 #-######################################################################################
