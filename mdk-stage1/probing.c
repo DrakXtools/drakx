@@ -235,15 +235,19 @@ void probe_that_type(enum driver_type type, enum media_bus bus __attribute__ ((u
 						int device_p = (devbusfn & 0xff) >> 3;
 						int function = (devbusfn & 0xff) & 0x07;
 						char file[100];
-						FILE * sf;
+						int sf;
 						log_message("PCI: device %04x %04x needs full pci probe", vendor, device);
 						sprintf(file, "/proc/bus/pci/%02x/%02x.%d", bus, device_p, function);
-						if (!(sf = fopen(file, "rb"))) {
+						if ((sf = open(file, O_RDONLY)) == -1) {
 							log_message("PCI: could not open file for full probe (%s)", file);
 							continue;
 						}
-						fread(&buf, 48, 1, sf);
-						fclose(sf);
+                                                if (read(sf, buf, 48) == -1) {
+							log_message("PCI: could not read 48 bytes from %s", file);
+                                                        close(sf);
+							continue;
+						}
+						close(sf);
 						memcpy(&subvendor, buf+44, 2);
 						memcpy(&subdevice, buf+46, 2);
 						log_message("PCI: device is actually %04x %04x %04x %04x", vendor, device, subvendor, subdevice);
