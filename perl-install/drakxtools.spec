@@ -315,9 +315,12 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 
 %changelog
 * Tue Aug 26 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.2-2mdk
-- diskdrake: fix WebDAV configuration embedding (#4703) (pixel)
+- diskdrake: (pixel)
+  o fix WebDAV configuration embedding (#4703)
+  o use fs=ext2:vfat or fs=udf:iso9600 for supermount-ng
 - printerdrake: misc fixes (till)
 - service_harddrake: prevent depmod to be runned everytime
+- XFdrake: more fixes for multilayout keyboards
 
 * Mon Aug 25 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.2-1mdk
 - drakfloppy: make it CJK aware
