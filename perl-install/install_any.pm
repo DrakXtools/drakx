@@ -208,7 +208,7 @@ sub searchAndMount4Upgrade {
 
     #- get all ext2 partition that may be root partition.
     my %Parts = my %parts = map { $_->{device} => $_ } grep { isExt2($_) } @{$o->{fstab}};
-    while (%parts) {
+    while (keys(%parts) > 0) {
 	$root = $::beginner ? first(%parts) : $o->selectRootPartition(keys %parts);
 	$root = delete $parts{$root};
 
@@ -217,24 +217,24 @@ sub searchAndMount4Upgrade {
 	    $root->{mntpoint} = "/"; 
 	    log::l("trying to mount root partition $root->{device}");
 	    eval { fs::mount_part($root, $o->{prefix}, 'readonly') };
+	    $r = "/*ERROR*" if $@;
 	}
-	my $found = -d "$r/etc/sysconfig" && [ fs::read_fstab("$r/etc/fstab") ];
+	$found = -d "$r/etc/sysconfig" && [ fs::read_fstab("$r/etc/fstab") ];
 
 	unless ($root->{realMntpoint}) {
 	    log::l("umounting non root partition $root->{device}");
 	    eval { fs::umount_part($root, $o->{prefix}) };
 	}
 
-	last unless is_empty_array_ref($found);
+	last if !is_empty_array_ref($found);
 
 	delete $root->{mntpoint};
 	$o->ask_warn(_("Information"), 
 		     _("%s: This is not a root partition, please select another one.", $root->{device})) unless $::beginner;
-	undef $root;
     }
-    $root or die _("No root partition found");
+    is_empty_array_ref($found) and die _("No root partition found");
 	
-    $o->ask_warn(_("Information"), _("Found root partition : %s", $root->{device}));
+    log::l("Found root partition : $root->{device}");
     $o->{prefix} = $root->{mntpoint};
 
     #- test if the partition has to be fschecked and remounted rw.
