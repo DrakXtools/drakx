@@ -96,13 +96,16 @@ label text
   append $ks ramdisk_size=32000 initrd=$type.rdz $type text
 label patch
   kernel vmlinuz
-  append $ks ramdisk_size=32000 initrd=$type.rdz $type patch
+  append ramdisk_size=32000 initrd=$type.rdz $type patch
 label expert
   kernel vmlinuz
-  append $ks ramdisk_size=32000 initrd=$type.rdz $type expert
+  append ramdisk_size=32000 initrd=$type.rdz $type expert
 label rescue
   kernel vmlinuz
-  append $ks ramdisk_size=32000 initrd=$type.rdz $type rescue rw
+  append ramdisk_size=32000 initrd=$type.rdz $type rescue rw
+label auto
+  kernel vmlinuz
+  append ramdisk_size=32000 initrd=$type.rdz $type auto_install=auto_inst.cfg.pl
 ");
     _ "cp -f $instdir/installinit/ks.cfg $mnt 2>/dev/null";
     _ "sync";

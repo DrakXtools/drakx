@@ -719,7 +719,6 @@ sub setupBootloaderBefore {
 	    $e->{append} .= " prof=Home";
 	}
         lilo::suggest_floppy($o->{bootloader}) if $o->{security} <= 3;
-	$o->{bootloader}{keytable} ||= keyboard::keyboard2kmap($o->{keyboard});
     }
 }
 

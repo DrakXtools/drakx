@@ -61,7 +61,7 @@ sub relGetFile($) {
     local $_ = $_[0];
     m,^(Mandrake|lnx4win)/, and return $_;
     /\.img$/ and return "images/$_";
-    my $dir = m|/| ? "Mandrake/mdkinst" : /^(?:compss|compssList|compssUsers|filelist|depslist.*|hdlist.*)$/ ?
+    my $dir = m|/| ? "Mandrake/mdkinst" : /^(?:compss|compssList|compssUsers|filelist|depslist.*|hdlist.*|auto_inst.*)$/ ?
       "Mandrake/base/": "$::o->{packages}[2]{$asked_medium}{rpmsdir}/";
     "$dir$_";
 }

@@ -1,3 +1,17 @@
+2000-04-26  Pixel  <pixel@mandrakesoft.com>
+
+	* install_any.pm (relGetFile): added auto_inst to files to get
+	from Mandrake/base
+
+	* install2.pm (main): changed auto_inst behaviour
+
+	* standalone/adduserdrake: fix a bug (s/$o/$in/g)
+
+	* interactive_newt.pm (ask_from_entries_refW): now handling
+	complete/changed/focus_out callbacks (at least more than before)	
+
+	* Newt/Newt.xs: added rough callback handling
+
 2000-04-25  François Pons  <fpons@mandrakesoft.com>
 
 	* printerdrake.pm: added support for PPA more easily, allow
@@ -10,7 +24,7 @@
 
 2000-04-25  Pixel  <pixel@mandrakesoft.com>
 
-	* lilo.pm (suggest): moved the generation of the keytable here. It
+	* lilo.pm (install): moved the generation of the keytable here. It
 	is used by both lilo & grub (lilo is not always installed as was
 	assumed)	
 

@@ -53,11 +53,11 @@ if ($in->ask_from_entries_refH(
 	    }
 	},
         complete => sub {
-	    $u->{password} eq $u->{password2} or $o->ask_warn('', [ _("The passwords do not match"), _("Please try again") ]), return (1,3);
-	    $security > 3 && length($u->{password}) < 6 and $o->ask_warn('', _("This password is too simple")), return (1,2);
-	    $u->{name} or $o->ask_warn('', _("Please give a user name")), return (1,0);
-	    $u->{name} =~ /^[a-z0-9_-]+$/ or $o->ask_warn('', _("The user name must contain only lower cased letters, numbers, `-' and `_'")), return (1,0);
-	    member($u->{name}, map { $_->{name} } @users) and $o->ask_warn('', _("This user name is already added")), return (1,0);
+	    $u->{password} eq $u->{password2} or $in->ask_warn('', [ _("The passwords do not match"), _("Please try again") ]), return (1,3);
+	    $security > 3 && length($u->{password}) < 6 and $in->ask_warn('', _("This password is too simple")), return (1,2);
+	    $u->{name} or $in->ask_warn('', _("Please give a user name")), return (1,0);
+	    $u->{name} =~ /^[a-z0-9_-]+$/ or $in->ask_warn('', _("The user name must contain only lower cased letters, numbers, `-' and `_'")), return (1,0);
+	    member($u->{name}, map { $_->{name} } @users) and $in->ask_warn('', _("This user name is already added")), return (1,0);
 	    $u->{icon} = untranslate($u->{icon}, @any::users);
 	    return 0;
 	},

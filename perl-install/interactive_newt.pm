@@ -17,7 +17,6 @@ my @wait_messages;
 
 sub new() {
     Newt::Init;
-    Newt::changeColors;
     Newt::Cls;
     Newt::SetSuspendCallback;
     open STDERR,">/dev/null" if $::isStandalone;
@@ -121,17 +120,18 @@ sub ask_many_from_list_with_help_refW {
 sub ask_from_entries_refW {
     my ($o, $title, $messages, $l, $val, %hcallback) = @_;
     my ($title_, @okcancel) = deref($title);
-    my $ignore = 0; #-to handle recursivity
+    my $ignore; #-to handle recursivity
+    my $old_focus = -2;
 
     #-the widgets
     my @widgets = map {
-	$_->{type} = "entry" if $_->{type} eq "list" && !$_->{not_edit};
+#-	$_->{type} = "entry" if $_->{type} eq "list" && !$_->{not_edit};
 	${$_->{val}} ||= '';
-	if ($_->{type} eq "list" && $_->{not_edit}) {	     
+	if ($_->{type} eq "list") {
 	    $_->{val} ||= $_->{list}[0];
 	    my $w = Newt::Component::Listbox(-1, -1, 1, 0);
 	    $w->ListboxSetWidth(20);
-	    map_index { $w->ListboxAddEntry($_, $_) } @{$_->{list}};
+	    $w->ListboxAddEntry($_) foreach @{$_->{list}};
 	    $w;
 	} elsif ($_->{type} eq "bool") {
 	    Newt::Component::Checkbox(-1, -1, $_->{text} || '', checkval(${$_->{val}}), " *");
@@ -154,17 +154,45 @@ sub ask_from_entries_refW {
 
     my @updates_inv = mapn {
 	 my ($w, $ref) = @_;
-	 my $val = ${$ref->{val}};
 	 sub {
-	     $ref->{type} eq "bool" ?
-	       $w->CheckboxSetValue(checkval($val)) :
-	     $ref->{type} eq "list" ?
-	       $w->ListboxSetCurrentByKey($val) :
-	       $w->EntrySet($val, 1);
+	     my $val = ${$ref->{val}};
+	     $ignore = 1;
+	     if ($ref->{type} eq "bool") {
+		 $w->CheckboxSetValue(checkval($val));
+	     } elsif ($ref->{type} eq "list") {
+		 map_index {
+		     $w->ListboxSetCurrent($::i) if $val eq $_;
+		 } @{$ref->{list}};
+	     } else {
+		 $w->EntrySet($val, 1);
+	     }
+	     $ignore = 0;
 	 };
     } \@widgets, $val;
 
-    map { &{$updates_inv[$_]} } 0..$#widgets;
+    &$_ foreach @updates_inv;
+
+    #- !! callbacks must be kept in a list otherwise perl will free them !!
+    #- (better handling of addCallback needed)
+    my @callbacks = map_index {
+	my $ind = $::i;
+	sub {
+	    return if $ignore; #-handle recursive deadlock
+	    return $old_focus++ if $old_focus == -2; #- handle special first case
+
+	    &$_ foreach @updates;
+
+	    #- TODO: this is very rough :(
+	    if ($old_focus == $ind) {
+		$hcallback{changed}->($ind) if $hcallback{changed};
+	    } else {
+		$hcallback{focus_out}->($ind) if $hcallback{focus_out};
+	    }
+	    &$_ foreach @updates_inv;
+	    $old_focus = $ind;
+	};
+    } @widgets;
+    map_index { $_->addCallback($callbacks[$::i]) } @widgets;
 
     my $grid = Newt::Grid::CreateGrid(3, int @$l);
     map_index {
@@ -174,12 +202,21 @@ sub ask_from_entries_refW {
 
     my ($buttons, $ok, $cancel) = Newt::Grid::ButtonBar(@okcancel);
 
-    my $form = Newt::Component::Form(\undef, '', 0);
+    my $form = Newt::Component::Form(\undef, '', 0) or die;
     my $window = Newt::Grid::GridBasicWindow(first(myTextbox(@$messages)), $grid, $buttons);
     $window->GridWrappedWindow($title_);
     $window->GridAddComponentsToForm($form, 1);
+
+  run:
     my $r = $form->RunForm;
-    map { &{$updates[$_]} } 0..$#widgets;
+    &$_ foreach @updates;
+
+    if ($$r != $$cancel && $hcallback{complete}) {
+	my ($error, $focus) = $hcallback{complete}->();
+	#-update all the value
+	&$_ foreach @updates_inv;
+	goto run if $error;
+    }
     $form->FormDestroy;
     Newt::PopWindow;
     $$r != $$cancel;

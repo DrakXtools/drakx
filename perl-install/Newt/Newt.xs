@@ -9,6 +9,13 @@ static void suspend() {
   newtResume();
 }
 
+static void componentCallback(newtComponent co, void *data) {
+  dSP;
+  PUSHMARK(SP);
+  perl_call_sv((SV *) data, G_DISCARD);
+}
+
+
 typedef newtComponent Newt__Component;
 typedef newtGrid Newt__Grid;
 
@@ -21,38 +28,6 @@ DESTROY()
 	{
 		newtFinished();
 	}
-
-void 
-changeColors()
-  CODE:
-{
-const struct newtColors colors = {
-	"cyan", "black", 			/* root fg, bg */
-	"black", "blue",			/* border fg, bg */
-	"white", "blue",			/* window fg, bg */
-	"white", "black",			/* shadow fg, bg */
-	"white", "blue",			/* title fg, bg */
-	"yellow", "cyan",			/* button fg, bg */
-	"white", "cyan",			/* active button fg, bg */
-	"yellow", "blue",			/* checkbox fg, bg */
-	"blue", "brown",			/* active checkbox fg, bg */
-	"yellow", "blue",			/* entry box fg, bg */
-	"white", "blue",			/* label fg, bg */
-	"black", "cyan",			/* listbox fg, bg */
-	"yellow", "cyan",			/* active listbox fg, bg */
-	"white", "blue",			/* textbox fg, bg */
-	"cyan", "black",			/* active textbox fg, bg */
-	"white", "blue",			/* help line */
-	"yellow", "blue",			/* root text */
-	"blue",					/* scale full */
-	"red",					/* scale empty */
-	"blue", "cyan",				/* disabled entry fg, bg */
-	"white", "blue",			/* compact button fg, bg */
-	"yellow", "red",			/* active & sel listbox */
-	"black", "brown"			/* selected listbox */
-};
-  newtSetColors(colors);
-}
 
 int
 newtInit()
@@ -167,6 +142,13 @@ newtWinMenu(title,text,suggestedWidth,flexDown,flexUp,maxListHeight,list,def,but
 
 MODULE = Newt		PACKAGE = Newt::Component 	PREFIX = newt
 
+void
+addCallback(co, callback)
+  Newt::Component co;
+  SV *callback;
+  CODE:
+  newtComponentAddCallback(co, componentCallback, callback);
+
 Newt::Component
 newtCompactButton(left,top,text)
 	int left;
@@ -239,9 +221,9 @@ newtListboxGetCurrent(co)
 	Newt::Component co;
 
 void
-newtListboxSetCurrentByKey(co,key)
+newtListboxSetCurrent(co,indice)
 	Newt::Component co;
-	char * key;
+	int indice;
 
 void
 newtListboxSetWidth(co,width)
@@ -249,7 +231,7 @@ newtListboxSetWidth(co,width)
 	int width;
 
 int
-newtListboxAddEntry(co,text,data)
+newtListboxAddEntry(co,text)
 	Newt::Component co;
 	const char * text;
 CODE:

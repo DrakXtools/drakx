@@ -544,9 +544,9 @@ sub main {
 	    text      => sub { $o->{interactive} = "newt" },
 	    stdio     => sub { $o->{interactive} = "stdio"},
 	    corporate => sub { $::corporate = 1 },
-	    ks        => sub { $::auto_install = 1 },
-	    kickstart => sub { $::auto_install = 1 },
-	    auto_install => sub { $::auto_install = 1 },
+	    ks        => sub { $::auto_install = $v },
+	    kickstart => sub { $::auto_install = $v },
+	    auto_install => sub { $::auto_install = $v },
 	    simple_themes => sub { $o->{simple_themes} = 1 },
 	    alawindows => sub { $o->{security} = 0; $o->{partitioning}{clearall} = 1; $o->{bootloader}{crushMbr} = 1 },
 	    g_auto_install => sub { $::testing = $::g_auto_install = 1; $o->{partitioning}{auto_allocate} = 1 },
@@ -593,8 +593,12 @@ sub main {
 
     if ($::auto_install) {
 	require install_steps_auto_install;
-	eval { $o = $::o = install_any::loadO($o, "Mandrake/auto_inst.cfg.pl") };
-	eval { $o = $::o = install_any::loadO($o, "floppy") } if $@;
+	if ($::auto_install eq 'floppy') {
+	    eval { $o = $::o = install_any::loadO($o, "auto_inst.cfg.pl") };
+	    eval { $o = $::o = install_any::loadO($o, "floppy") } if $@;
+	} else {
+	    eval { $o = $::o = install_any::loadO($o, $::auto_install) };
+	}
 	if ($@) {
 	    log::l("error using auto_install, continuing");
 	    undef $::auto_install;
