@@ -964,6 +964,20 @@ sub summary {
 
     push @l, {
 	group => N("Security"),
+	label => N("Security Level"),
+	val => sub { 
+	    require security::level;
+	    security::level::to_string($o->{security});
+	},
+	clicked => sub {
+	    require security::level;
+	    security::level::level_choose($o, \$o->{security}, \$o->{libsafe}, \$o->{security_user})
+		and install_any::set_security($o);
+	},
+    };
+
+    push @l, {
+	group => N("Security"),
 	label => N("Firewall"),
 	val => sub { 
 	    require network::shorewall;
