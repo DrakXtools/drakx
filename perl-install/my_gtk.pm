@@ -181,14 +181,12 @@ sub gtkpowerpack {
     #- gtkpowerpack( {expand => 1, fill => 0}, $box...) : the attributes are picked from a specified hash ref
     #- gtkpowerpack(1,0,1, $box, ...) : the attributes are picked from the non-ref list, in the order (expand, fill, padding, pack_end).
     my $RefDefaultAttrs;
-    if (ref($_[0]) eq 'HASH') {
-	$RefDefaultAttrs = shift;
-    } elsif (!ref($_[0])) {
-	my %tmp;
-	foreach my $i ("expand", "fill", "padding", "pack_end") {
-	    !ref($_[0]) ? $tmp{$i} = shift : last
+    if (ref($_[0]) eq 'HASH') { $RefDefaultAttrs = shift }
+    elsif (!ref($_[0])) {
+	$RefDefaultAttrs = {};
+	foreach ("expand", "fill", "padding", "pack_end") {
+	    !ref($_[0]) ? $RefDefaultAttrs->{$_} = shift : last
 	}
-	$RefDefaultAttrs = \%tmp;
     }
     my $box = shift;
 
@@ -196,36 +194,32 @@ sub gtkpowerpack {
 	#- Get attributes (if specified). 4 syntaxes allowed (default values are undef ie. false...) :
 	#- gtkpowerpack({defaultattrs}, $box, $widget1, $widget2, ...) : the attrs are picked from the default ones (if they exist)
 	#- gtkpowerpack($box, {fill=>1, expand=>0, ...}, $widget1, ...) : the attributes are picked from a specified hash ref
-	#- gtkpowerpack($box, [1,0,1], $widget1, ...) : the attributes are picked from the array ref, in the order (expand, fill, padding, pack_end).
-	#- gtkpowerpack({attr=>'arg'}, $box, 1, $widget1, 0, $widget2, etc...) : the 'arg' value will tell gtkpowerpack to always read the attr value directly in the arg list (avoiding confusion between value 0 and Gtk::Label("0"). That can simplify some writings but this arg(s) MUST then be present...
+	#- gtkpowerpack($box, [1,0,1], $widget1, ...) : the attributes are picked from the array ref : (expand, fill, padding, pack_end).
+	#- gtkpowerpack({attr=>'arg'}, $box, 1, $widget1, 0, $widget2, etc...) : the 'arg' value will tell gtkpowerpack to always read the 
+	#- attr value directly in the arg list (avoiding confusion between value 0 and Gtk::Label("0"). That can simplify some writings but
+	#- this arg(s) MUST then be present...
 	my %attr;
-	my $RefAttrs = shift if (ref($_[0]) eq 'HASH' or ref($_[0]) eq 'ARRAY');
-	foreach my $i ("expand", "fill", "padding", "pack_end") {
-	    if (defined($RefDefaultAttrs->{$i}) and $RefDefaultAttrs->{$i} eq 'arg') {
-		if (!ref ($_[0])) {
-		    $attr{$i} = shift;
-		    shift @$RefAttrs if (ref($RefAttrs) eq 'ARRAY')
-		} else {
-		    die "error in packing definition\n"
-		}
-	    } elsif (ref($RefAttrs) eq 'HASH' and defined($RefAttrs->{$i})) {
-		$attr{$i} = $RefAttrs->{$i}
+	my $RefAttrs;
+	ref($_[0]) eq 'HASH' || ref($_[0]) eq 'ARRAY' and $RefAttrs = shift;
+	foreach ("expand", "fill", "padding", "pack_end") {
+	    if ($RefDefaultAttrs->{$_} eq 'arg') {
+		ref ($_[0]) and die "error in packing definition\n";
+		$attr{$_} = shift;
+		ref($RefAttrs) eq 'ARRAY' and shift @$RefAttrs;
+	    } elsif (ref($RefAttrs) eq 'HASH' && defined($RefAttrs->{$_})) {
+		$attr{$_} = $RefAttrs->{$_};
 	    } elsif (ref($RefAttrs) eq 'ARRAY') {
-		$attr{$i} = shift @$RefAttrs
-	    } elsif (defined($RefDefaultAttrs->{$i})) {
-		$attr{$i} = int $RefDefaultAttrs->{$i}
+		$attr{$_} = shift @$RefAttrs;
+	    } elsif (defined($RefDefaultAttrs->{$_})) {
+		$attr{$_} = int $RefDefaultAttrs->{$_};
 	    } else {
-		$attr{$i} = 0
+		$attr{$_} = 0;
 	    }
 	}
-
 	#- Get and pack the widget (create it if necessary when it is a label...)
 	my $widget = ref($_[0]) ? shift : new Gtk::Label(shift);
-	if (! $attr{pack_end}) {
-	    $box->pack_start($widget, $attr{expand}, $attr{fill}, $attr{padding});
-	} else {
-	    $box->pack_end($widget, $attr{expand}, $attr{fill}, $attr{padding});
-	}
+	if ($attr{pack_end}) { $box->pack_end($widget, $attr{expand}, $attr{fill}, $attr{padding})}
+	else { $box->pack_start($widget, $attr{expand}, $attr{fill}, $attr{padding}) }
 	$widget->show;
     }
     $box
@@ -442,7 +436,7 @@ sub get_text_coord {
 
     my ($text, $widget4style, $max_width, $max_height, $can_be_greater, $can_be_smaller, $centeredx, $centeredy, $wrap_char) = @_;
 
-    my $wrap_char ||= ' ';
+    $wrap_char ||= ' ';
     my $idx = 0;
     my $real_width = 0;
     my $real_height = 0;
