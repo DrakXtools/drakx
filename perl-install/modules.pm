@@ -398,9 +398,6 @@ sub add_alias {
     if ($name =~ /^snd-card-/) {
 	$conf{$name}{"post-install"} = "modprobe snd-pcm-oss";
     }
-    if ($alias eq 'scsi_hostadapter') {
-	add_alias('block-major-11', $alias);
-    }
     $alias;
 }
 
