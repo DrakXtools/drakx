@@ -1,0 +1,64 @@
+#!/usr/bin/perl
+
+use lib "../perl-install";
+use common;
+use pkgs;
+
+my @langs = qw(fr en es it de);
+
+@ARGV == 0 or die "usage: make_live\n";
+
+sub installPackages {
+    rename "/etc/rpm/macros", "/etc/rpm/macros.";
+    output_p("/etc/rpm/macros", "%_install_langs " . join(":", @langs) . "\n");
+
+    mkdir_p("$::prefix/var/lib/rpm");
+    mkdir_p("$::prefix/root/drakx");
+
+
+    undef *install_any::setDefaultPackages;
+    *install_any::setDefaultPackages = sub {};
+
+    undef *install_any::getFile;
+    *install_any::getFile = sub {
+	my ($f, $o_method) = @_;
+	log::l("getFile $f:$o_method");
+	open(my $F, '/export/' . install_any::relGetFile($f)) or return;
+	$F;
+    };
+    install_any::setPackages(my $o = $::o = { 
+					     prefix => $::prefix, 
+					     meta_class => 'desktop', 
+					     default_packages => [ qw(XFree86-server XFree86-xfs) ],
+					    });
+
+    my %compssUsersChoice = map { $_ => 1 } map { @{$_->{flags}} } values %{$o->{compssUsers}};
+    $compssUsersChoice{$_} = 1 foreach 'SYSTEM', 'DVD', 'USB';
+    $compssUsersChoice{qq(LOCALES"$_")} = 1 foreach @langs;
+
+    pkgs::setSelectedFromCompssList($o->{packages}, \%compssUsersChoice, 4, 0);
+
+    my @toInstall = pkgs::packagesToInstall($o->{packages});
+    $ENV{DURING_INSTALL} = 1;
+    $ENV{LD_LIBRARY_PATH} = "/lib:/usr/lib:/usr/X11R6/lib:/usr/lib/qt3/lib";
+    pkgs::install($::prefix, 0, \@toInstall, $o->{packages});
+
+    eval { fs::umount("$::prefix/proc") };
+
+    unlink "/etc/rpm/macros";
+    rename "/etc/rpm/macros.", "/etc/rpm/macros";
+}
+
+my $cwd = chomp_(`pwd`);
+$::prefix = "/tmp/live_tree";
+
+{
+    eval { fs::umount("$::prefix/proc") };
+#    eval { rm_rf($::prefix) };
+    output("$::prefix/etc/fstab", "none /proc proc defaults 0 0\n");
+    installPackages();
+    system("chroot $::prefix ldconfig");
+}
+
+system("ln -sf /var/lib/xkb $::prefix/etc/X11/xkb/compiled"); # don't want the relative path, prefering the absolute path
+system("find $::prefix/dev -type b -o -type c | xargs chmod a+rw");
