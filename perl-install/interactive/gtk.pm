@@ -21,11 +21,6 @@ sub leave_console { my ($o) = @_; common::setVirtual(delete $o->{suspended}) }
 
 sub exit { ugtk2::exit(@_) }
 
-sub ask_warn {
-    local $ugtk2::pop_it = 1;
-    &interactive::ask_warn;
-}
-
 sub ask_fileW {
     my ($_o, $title, $dir) = @_;
     my $w = ugtk2->new($title);

@@ -195,7 +195,7 @@ sub ask_from_listf_raw {
 sub ask_from_listf_raw_no_check {
     my ($o, $common, $f, $l, $def) = @_;
 
-    if (@$l <= 2 && !$::isWizard) {
+    if (@$l <= ($::isWizard ? 1 : 2)) {
 	my ($ok, $cancel) = map { $_ && may_apply($f, $_) } @$l;
 	if (length "$ok$cancel" < 70) {
 	    my $ret = eval {
@@ -207,7 +207,7 @@ sub ask_from_listf_raw_no_check {
 	    return $@ ? undef : $ret;
 	}
     }
-    ask_from_($o, $common, [ { val => \$def, type => 'list', list => $l, format => $f } ]) && $def;
+    ask_from_no_check($o, $common, [ { val => \$def, type => 'list', list => $l, format => $f } ]) && $def;
 }
 
 sub ask_from_treelist {
