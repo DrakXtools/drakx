@@ -756,7 +756,7 @@ sub new {
 	    $::WizardWindow = Gtk2::Window->new('toplevel');
 	    $::WizardWindow->signal_connect(delete_event => sub { die 'wizcancel' });
 	    $::WizardTable = Gtk2::Table->new(2, 2, 0);
-	    $::WizardWindow->add($::WizardTable);
+	    $::WizardWindow->add(gtkadd(gtkset_shadow_type(Gtk2::Frame->new, 'out'), $::WizardTable));
 
 	    if ($::isInstall) {
 		$::WizardTable->set_size_request($::windowwidth * 0.90, $::windowheight * ($::logoheight ? 0.73 : 0.9));
