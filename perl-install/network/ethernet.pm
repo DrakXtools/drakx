@@ -42,23 +42,34 @@ sub get_eth_categories() {
 
 # return list of [ intf_name, module, device_description ] tuples such as:
 # [ "eth0", "3c59x", "3Com Corporation|3c905C-TX [Fast Etherlink]" ]
+#
+# this function try several method in order to get interface's driver and description in order to support both:
+# - hotplug managed devices (USB, firewire)
+# - special interfaces (IP aliasing, VLAN)
 sub get_eth_cards {
     my ($modules_conf) = @_;
     my @all_cards = detect_devices::getNet();
 
     my @devs = detect_devices::pcmcia_probe();
     my $saved_driver;
+    # compute device description and return (interface, driver, description) tuples:
     return map {
         my $interface = $_;
         my $description;
+        # 0) get interface's driver through ETHTOOL ioctl or module aliases:
         my $a = c::getNetDriver($interface) || $modules_conf->get_alias($interface);
         $a = "eth1394" if $a eq "ip1394";
+        # 1) try to match a PCMCIA device for device description:
         if (my $b = find { $_->{device} eq $interface } @devs) { # PCMCIA case
             $a = $b->{driver};
             $description = $b->{description};
         } else {
+            # 2) try to lookup a device by hardware address for device description:
+            #    maybe should have we try sysfs first for robustness?
             ($description) = (mapIntfToDevice($interface))[0]->{description};
         }
+        # 3) try to match a device through sysfs for driver & device description:
+        #     (eg: ipw2100 driver for intel centrino do not support ETHTOOL)
         if (!$description) {
             my $drv = readlink("/sys/class/net/$interface/driver");
             if ($drv && $drv =~ s!.*/!!) {
@@ -70,6 +81,8 @@ sub get_eth_cards {
                 $description = $cards[0]{description} if @cards == 1;
             }
         }
+        # 4) try to match a device by driver for device description:
+        #    (eg: madwifi, ndiswrapper, ...)
         if (!$description) {
             my @cards = grep { $_->{driver} eq ($a || $saved_driver) } detect_devices::probeall();
             $description = $cards[0]{description} if @cards == 1;
