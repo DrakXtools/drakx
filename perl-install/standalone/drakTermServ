@@ -1447,12 +1447,12 @@ sub write_dhcpd_config {
 	push @dhcpd_config, "\toption broadcast-address $broadcast;\n" if $broadcast;
 	push @dhcpd_config, qq(\toption domain-name "$domain";\n) if $domain;
 	
-	my $pool_string = "\trange dynamic-bootp " . $pool_start . " " . $pool_end . ";\n" if $pool_start && $pool_end;
+	my $pool_string = $pool_start && $pool_end && "\trange dynamic-bootp " . $pool_start . " " . $pool_end . ";\n";
 	push @dhcpd_config, $pool_string if $pool_string;
 	
-	my $ns_string = "\toption domain-name-servers " . $ns1 if $ns1;
-	$ns_string = $ns_string . ", " . $ns2 if $ns2;
-	$ns_string = $ns_string . ", " . $ns3 if $ns3;
+	my $ns_string = $ns1 && "\toption domain-name-servers " . $ns1;
+	$ns_string = $ns2 && $ns_string . ", " . $ns2;
+	$ns_string = $ns3 && $ns_string . ", " . $ns3;
 	$ns_string = $ns_string . ";\n" if $ns_string;
 	push @dhcpd_config, $ns_string if $ns_string;
 
@@ -1850,23 +1850,11 @@ sub update_hosts_allow {
 sub format_client_entry {
 	#- create a client entry, in proper format
 	my ($client, %ts_clients) = @_;
-	my ($pxe_img) = $ts_clients{$client}{filename} =~ /boot-(.*?)\./; 
-	$pxe_img .= ".zimg.pxe";
-	my $pxe = -f "$tftpboot/$pxe_img";
 	my $entry = "host $client {\n";
 	$entry .= "\thardware ethernet\t$ts_clients{$client}{hardware};\n";
 	$entry .= "\tfixed-address\t\t$ts_clients{$client}{address};\n";
 	$entry .= "\t#type\t\t\t$ts_clients{$client}{type};\n" if $ts_clients{$client}{type};
-	if ($ts_clients{$client}{filename}) {
-		$entry .= join("\n", if_($pxe, qq(\tif substring (option vendor-class-identifier, 0, 9) = "PXEClient"
-\t{
-\t\tfilename\t\t"$pxe_img";
-\t}
-\telse if substring (option vendor-class-identifier, 0, 9) = "Etherboot"
-\t{)), 
-qq(\tfilename\t\t"$ts_clients{$client}{filename}";), 
-		if_($pxe,  qq(\t}))) . "\n";   
-	}
+	$entry .= "\tfilename\t\t\"$ts_clients{$client}{filename}\";\n" if $ts_clients{$client}{filename}; 
 	$entry .= "\t#hdw_config\t\t$ts_clients{$client}{hdw_config};\n" if $ts_clients{$client}{hdw_config};
 	$entry .= "}\n";
 	if ($ts_clients{$client}{type} eq "thin") {
