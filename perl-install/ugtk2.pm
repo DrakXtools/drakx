@@ -359,6 +359,7 @@ sub _create_dialog {
     $dialog->set_position('center-on-parent');  # center-on-parent doesn't work
     $dialog->set_size_request(-1, $o_options->{small} ? -1 : 400);
     $dialog->set_modal(1);
+    $dialog->set_transient_for($o_options->{transient}) if $o_options->{transient};
     $dialog;
 }
 
