@@ -262,6 +262,8 @@ sub ask_from_normalize {
 	} elsif ($e->{type} eq 'label' || !ref($e->{val})) {
 	    $e->{type} = 'label';
 	    $e->{val} = \ (my $v = $e->{val}) if !ref($e->{val});
+	} else {
+	    $e->{type} ||= 'entry';
 	}
 	$e->{disabled} ||= sub { 0 };
     }
