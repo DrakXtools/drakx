@@ -80,8 +80,11 @@ our %l = (
       if_(arch() =~ /^sparc/, qw(pluto)),
       if_(arch() !~ /alpha/ && arch() !~ /sparc/,
         qw(DAC960 dpt_i2o megaraid aacraid cciss cpqarray gdth i2o_block),
-	qw(cpqfc qla2200 qla2300 ataraid hptraid silraid pdcraid pdc-ultra),
+	qw(cpqfc qla2200 qla2300 pdc-ultra),
         qw(ips ppa imm),
+       if_(c::kernel_version =~ /^\Q2.4/,
+	qw(ataraid hptraid silraid pdcraid)
+       ),
       ),
     ],
     pcmcia => [ qw(aha152x_cs fdomain_cs nsp_cs qlogic_cs ide-cs) ], #ide_cs
