@@ -495,16 +495,20 @@ Configure them first by clicking on 'Configure'")),1,1,0);
     $bbox8->set_layout('end');
     my $button_ok = new Gtk2::Button(N("OK"));
     $button_ok->signal_connect(clicked => sub {
-				     foreach (0..$#all_cards) {
-					 my @infos = @{$card_tab[2*$_]};
-                          each_index {
-					     ${$_->[1]} = $infos[2*$::i+1]->get_text();
-                          } @{$card_tab[2*$_+1]};
-				     }
-				     update();
-				     $button_apply->set_sensitive(1);
-				     $window->destroy(); Gtk2->main_quit;
-				 });
+	foreach (0..$#all_cards) {
+	    my @infos = @{$card_tab[2*$_]};
+	    each_index {
+		${$_->[1]} = $infos[2*$::i+1]->get_text();
+	    } @{$card_tab[2*$_+1]};
+	    if ($intf->{"eth$_"}{BOOTPROTO} eq "dhcp") {
+		my $entry = $intf->{"eth$_"};
+		delete @{$intf->{"eth$_"}}{qw(IPADDR NETWORK NETMASK BROADCAST)};
+	    }
+	}
+	update();
+	$button_apply->set_sensitive(1);
+	$window->destroy(); Gtk2->main_quit;
+    });
     $bbox8->add($button_ok);
 
     my $button_cancel = new Gtk2::Button(N("Cancel"));
