@@ -175,9 +175,9 @@ sub create_ctree {
 	for (my $c = $node; $c; $c = $c->row->parent) { 
 	    $tree->expand($c);
 	}
-	foreach (0 .. $#l) {
-	    if ($tree->node_nth($_) == $node) {
-		$tree->set_focus_row($_);
+	for (my $i = 0; $tree->node_nth($i); $i++) {
+	    if ($tree->node_nth($i) == $node) {
+		$tree->set_focus_row($i);
 		last;
 	    }
 	}
