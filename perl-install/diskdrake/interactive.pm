@@ -770,12 +770,11 @@ sub Add2LVM {
     my $lvm = $in->ask_from_listf_('', N("Choose an existing LVM to add to"),
 				  sub { ref $_[0] ? $_[0]{VG_name} : $_[0] },
 				  [ @$lvms, N_("new") ]) or return;
+    require lvm;
     if (!ref $lvm) {
 	# create new lvm
 	my $name = $in->ask_from_entry('', N("LVM name?")) or return;
-	$name =~ s/\W/_/g;
-	$name = substr($name, 0, 63); # max length must be < NAME_LEN / 2  where NAME_LEN is 128
-	$lvm = bless { disks => [], VG_name => $name }, 'lvm';
+	$lvm = new lvm($name);
 	push @$lvms, $lvm;
     }
     raid::make($all_hds->{raids}, $part) if isRAID($part);
@@ -783,7 +782,6 @@ sub Add2LVM {
     push @{$lvm->{disks}}, $part;
     delete $part->{mntpoint};
 
-    require lvm;
     lvm::check($in) if $::isStandalone;
     lvm::vg_add($part);
     lvm::update_size($lvm);

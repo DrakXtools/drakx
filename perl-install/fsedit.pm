@@ -149,7 +149,7 @@ sub lvms {
 	my $name = lvm::get_vg($_) or next;
 	my ($lvm) = grep { $_->{VG_name} eq $name } @lvms;
 	if (!$lvm) {
-	    $lvm = bless { disks => [], VG_name => $name }, 'lvm';
+	    $lvm = new lvm($name);
 	    lvm::update_size($lvm);
 	    lvm::get_lvs($lvm);
 	    push @lvms, $lvm;
@@ -629,7 +629,7 @@ sub auto_allocate_vgs {
     require lvm;
 
     foreach my $vg (@vgs) {
-	my $lvm = bless { disks => [], VG_name => $vg->{VG_name} }, 'lvm';
+	my $lvm = new lvm($vg->{VG_name});
 	push @{$all_hds->{lvms}}, $lvm;
 	
 	my @pvs_ = grep { !$vg->{parts} || $vg->{parts} =~ /\Q$_->{mntpoint}/ } @pvs;
