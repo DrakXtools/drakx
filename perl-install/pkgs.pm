@@ -863,9 +863,6 @@ sub install($$$;$$) {
     c::rpmReadConfigFiles() or die "can't read rpm config files";
     log::l("\tdone");
 
-    my $db = c::rpmdbOpen($prefix) or die "error opening RPM database: ", c::rpmErrorString();
-    log::l("opened rpm database for installing ". scalar @$toInstall ." new packages");
-
     my $callbackOpen = sub {
 	my $f = packageFile($packages{$_[0]});
 	print LOG "$f\n";
@@ -873,6 +870,7 @@ sub install($$$;$$) {
 	$fd ? fileno $fd : -1;
     };
     my $callbackClose = sub { packageSetFlagInstalled(delete $packages{$_[0]}, 1) };
+    my $callbackInstall = sub { &installCallback };
 
     #- do not modify/translate the message used with installCallback since
     #- these are keys during progressing installation, or change in other
@@ -913,65 +911,100 @@ sub install($$$;$$) {
 	    } while (scalar(@transToInstall) == 0); #- avoid null transaction, it a nop that cost a bit.
 	}
 
-	log::l("starting new transaction of ". scalar @transToInstall ." packages, still $nb after that to do");
-	my $trans = c::rpmtransCreateSet($db, $prefix);
-
+	#- extract headers for parent as they are used by callback.
 	extractHeaders($prefix, \@transToInstall, $media->{$medium});
 
-	c::rpmtransAddPackage($trans, $_->{header}, packageName($_), $isUpgrade && packageName($_) !~ /kernel/) #- TODO: replace `named kernel' by `provides kernel'
-	    foreach @transToInstall;
+	my $pid;
+	local (*INPUT, *OUTPUT); pipe INPUT, OUTPUT;
+	if ($pid = fork()) {
+	    close OUTPUT;
+	    my $error_msg = '';
+	    foreach (<INPUT>) {
+		if (/^die:(.*)/) {
+		    $error_msg = $1;
+		    last;
+		} else {
+		    chomp;
+		    my @params = split ":", $_;
+		    if ($params[0] eq 'close') {
+			&$callbackClose($params[1]);
+		    } else {
+			installCallback(@params);
+		    }
+		}
+	    }
+	    $error_msg and $error_msg .= <INPUT>;
+	    waitpid($pid, 0);
+	    close INPUT;
+	    $error_msg and die $error_msg;
+	} else {
+	    #- child process will run each transaction.
+	    eval {
+		close INPUT;
+		select((select(OUTPUT),  $| = 1)[0]);
+		my $db = c::rpmdbOpen($prefix) or die "error opening RPM database: ", c::rpmErrorString();
+		my $trans = c::rpmtransCreateSet($db, $prefix);
+		log::l("opened rpm database for transaction of ". scalar @transToInstall ." new packages, still $nb after that to do");
 
-	my $close = sub {
-	    c::headerFree(delete $_->{header}) foreach @transToInstall;
-	    c::rpmtransFree($trans);
-	};
+		c::rpmtransAddPackage($trans, $_->{header}, packageName($_), $isUpgrade && packageName($_) !~ /kernel/) #- TODO: replace `named kernel' by `provides kernel'
+		    foreach @transToInstall;
 
-	c::rpmdepOrder($trans) or
-	    cdie "error ordering package list: " . c::rpmErrorString(), sub {
+		my $close = sub {
+		    c::rpmtransFree($trans);
+		};
+
+		c::rpmdepOrder($trans) or
+		    cdie "error ordering package list: " . c::rpmErrorString(), sub {
+			&$close();
+			c::rpmdbClose($db);
+		    };
+		c::rpmtransSetScriptFd($trans, fileno LOG);
+
+		log::l("rpmRunTransactions start");
+
+		my @probs = c::rpmRunTransactions($trans, $callbackOpen,
+						  sub { #- callbackClose
+						      print OUTPUT "close:$_[0]\n";
+						  },
+						  sub { #- installCallback
+						      print OUTPUT join(":", @_), "\n";
+						  },
+						  0);
+		log::l("rpmRunTransactions done");
+		log::l("ERROR: rpmRunTransactions pb $_") foreach @probs;
+
 		&$close();
+		log::l("after close");
+		if (@probs) {
+		    my %parts;
+		    @probs = reverse grep {
+			if (s/(installing package) .* (needs (?:.*) on the (.*) filesystem)/$1 $2/) {
+			    $parts{$3} ? 0 : ($parts{$3} = 1);
+			} else { 1; }
+		    } reverse map { s|/mnt||; $_ } @probs;
+
+		    c::rpmdbClose($db);
+		    die "installation of rpms failed:\n  ", join("\n  ", @probs);
+		}
 		c::rpmdbClose($db);
-	    };
-	c::rpmtransSetScriptFd($trans, fileno LOG);
+		log::l("rpm database closed");
+	    }; $@ and print OUTPUT "die:$@\n";
 
-	log::l("rpmRunTransactions start");
-
-	my @probs = c::rpmRunTransactions($trans, $callbackOpen, $callbackClose, \&installCallback, 0);
-	log::l("rpmRunTransactions done");
-	log::l("ERROR: rpmRunTransactions pb $_") foreach @probs;
-
-	if (my @badpkgs = grep { !packageFlagInstalled($_) } @transToInstall) {
-	    cdie "error installing package list: " . join("\n", map { $_->{file} } @badpkgs), sub {
-		&$close();
-		c::rpmdbClose($db);
-	    };
+	    close OUTPUT;
+	    c::_exit(0);
 	}
-	#- check for uninstalled package, avoid keeping them selected to avoid trying installing them
-	foreach (@transToInstall) {
-	    if (!packageFlagInstalled($_)) {
+	c::headerFree(delete $_->{header}) foreach @transToInstall;
+	cleanHeaders($prefix);
+
+	#- check for uninstalled package, avoid keeping them selected to avoid trying installing them again!
+	if (my @badpkgs = grep { !packageFlagInstalled($_) } @transToInstall) {
+	    foreach (@badpkgs) {
 		log::l("bad package $_->{file}");
 		packageSetFlagSelected($_, 0);
 	    }
-	}
-
-	&$close();
-	log::l("after close");
-	if (@probs) {
-	    my %parts;
-	    @probs = reverse grep {
-		if (s/(installing package) .* (needs (?:.*) on the (.*) filesystem)/$1 $2/) {
-		    $parts{$3} ? 0 : ($parts{$3} = 1);
-		} else { 1; }
-	    } reverse map { s|/mnt||; $_ } @probs;
-
-	    c::rpmdbClose($db);
-	    die "installation of rpms failed:\n  ", join("\n  ", @probs);
+	    cdie "error installing package list: " . join("\n", map { $_->{file} } @badpkgs);
 	}
     } while ($nb > 0 && !$pkgs::cancel_install);
-
-    c::rpmdbClose($db);
-    log::l("rpm database closed");
-
-    cleanHeaders($prefix);
 
     loopback::save_boot($loop_boot);
 }

@@ -612,7 +612,7 @@ rpmRunTransactions(trans, callbackOpen, callbackClose, callbackMessage, force)
   	XPUSHs(sv_2mortal(newSVpv(n, 0)));
   	PUTBACK;
   	perl_call_sv(callbackClose, G_DISCARD);
-        free(n); /* was strdup in rpmtransAddPackage  */
+        free(n); /* was strdup in rpmtransAddPackage */
   	break;
       }
 
