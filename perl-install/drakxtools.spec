@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10
-Release: 12mdk
+Release: 13mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -317,6 +317,11 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Thu Feb 26 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10-13mdk
+- drakconnect wizard:
+  o never delete up/down scripts
+  o only write internet service if start at boot requested
+
 * Thu Feb 26 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10-12mdk
 - drakbackup: use ATAPI:/dev/hdX for both 2.4/2.6 compatibility (stew)
 - drakconnect wizard:
