@@ -100,21 +100,31 @@ my %xim = (
   'zh_TW.Big5' => { 
 	ENC => 'big5',
 	XIM => 'xcin',
+	XIM_PROGRAM => 'xcin',
 	XMODIFIERS => '"@im=xcin"',
   },
   'zh_CN' => {
 	ENC => 'gb',
 	XIM => 'xcin-zh_CN',
+	XIM_PROGRAM => 'xcin',
 	XMODIFIERS => '"@im=xcin-zh_CN"',
+  },
+  'zh_CN.GB2312' => {
+	ENC => 'gb',
+	XIM => 'xcin-zh_CN.GB2312',
+	XIM_PROGRAM => 'xcin',
+	XMODIFIERS => '"@im=xcin-zh_CN.GB2312"',
   },
   'ko' => {
 	ENC => 'kr',
 	XIM => 'Ami',
+	XIM_PROGRAM => 'ami',
 	XMODIFIERS => '"@im=Ami"',
   },
   'ja' => {
 	ENC => 'eucj',
 	XIM => 'kinput2',
+	XIM_PROGRAM => 'kinput2'
 	XMODIFIERS => '"@im=kinput2"',
   }
 );
