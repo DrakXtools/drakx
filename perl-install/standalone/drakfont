@@ -156,7 +156,7 @@ foreach my $i (@application) {
 
 # PATH and binary full path
 my $xfs_conffile = '/etc/X11/fs/config';
-my $drakfont_dir = '/home/damien/new2_drakfont'; # '/usr/X11R6/lib/X11/fonts/drakfont';
+my $drakfont_dir = '/home/seb/new2_drakfont'; # '/usr/X11R6/lib/X11/fonts/drakfont';
 my $ttf2pt1 = '/usr/sbin/ttf2pt1';
 my $pfm2afm = '/usr/sbin/pfm2afm';
 my $type1inst = '/usr/sbin/type1inst';
@@ -263,7 +263,7 @@ sub search_dir_font {
 	    }
 	}
     }
-    $interactive and progress($pbar, 2*100/3, _("Search fonts in install list"));
+    $interactive and progress($pbar, 2*100/3, _("done"));
 }
 
 sub search_dir_font_uninstall {
@@ -304,21 +304,30 @@ sub put_font_dir {
 	cp_af($i, $drakfont_dir . "/tmp/tmp");
 	$interactive and progress($pbar1, 100/@font_list, _("Fonts copy"));
     }
+    $interactive and progress($pbar1, 100/@font_list, _("done"));
     system ("cd $drakfont_dir/tmp/tmp   && cp *.ttf ../../ttf");
     system ("cd $drakfont_dir/ttf && $ttmkfdir > fonts.dir" );
     my $restart_xfs = "$chkfontpath -a $drakfont_dir/ttf";
-    $interactive and progress($pbar2, 50, _("True Type fonts installation"));
+#    $interactive and progress($pbar2, 50, _("True Type fonts installation"));
 
 #    my nb += $_ ?1 : 0 foreach ($so, $gs); #add abiword when implemented
     if ($so && $gs)  {
-      foreach my $fontname ( glob ("$drakfont_dir/tmp/tmp/*.ttf") ) { 
+	my @glob_drak = glob ("$drakfont_dir/tmp/tmp/*.ttf");
+      foreach my $fontname (@glob_drak) { 
 	system ("cd $drakfont_dir/tmp/tmp && $ttf2pt1 -b $fontname");
+	$interactive and progress($pbar2, 1/@glob_drak, _("Fonts conversion"));
       }
+#       foreach my $fontname ( glob ("$drakfont_dir/tmp/tmp/*.ttf") ) { 
+# 	system ("cd $drakfont_dir/tmp/tmp && $ttf2pt1 -b $fontname");
+# 	$interactive and progress($pbar2, 15/@font_list, _("Fonts conversion for applications "));
+#       }
       system ("cd $drakfont_dir/tmp/tmp && mv *.gsf *.pfb *.pfm *.afm ../Type1");
       system ("cd $drakfont_dir/tmp/Type1 && $type1inst" );
+#      $interactive and progress($pbar2, 10/@font_list, _("Fonts conversion for applications 2 "));
       system ("cd $drakfont_dir/tmp/Type1 && cat Fontmap >> `rpm -ql ghostscript | grep Fontmap.GS` " );
       system ("cd $drakfont_dir/tmp/Type1 && mv *.pfm *.gsf *.afm *.pfb ../../Type1 ");
       system ("cd $drakfont_dir/Type1 && $type1inst");
+#	$interactive and progress($pbar2, 25, _("Ghostscript referencing"));
       $restart_xfs .= "; $chkfontpath -a $drakfont_dir/Type1";
     }
     if (!$so && $gs)  {
@@ -344,12 +353,13 @@ sub put_font_dir {
       system ("cd $drakfont_dir/Type1 && $type1inst");
       $restart_xfs .= "; $chkfontpath -a $drakfont_dir/Type1";
     }
-    $interactive and  progress($pbar2, 50, _("Fonts conversion for applications"));
+#    $interactive and  progress($pbar2, 25, _("done"));
     rm_rf("$drakfont_dir/tmp/");
     $interactive and  progress($pbar3, 50, _("Suppress temporary Files"));
     print "\n\nretarting xfs......\n";
-    system ($restart_xfs);
     $interactive and  progress($pbar3, 50, _("Restart XFS"));
+    system ($restart_xfs);
+    $interactive and  progress($pbar3, 0, _("done"));
   }
 }
 
@@ -712,34 +722,16 @@ sub import_status {
     $pbar2 = new_with_adjustment Gtk::ProgressBar($adj2);
     $pbar3 = new_with_adjustment Gtk::ProgressBar($adj3);
     gtkpack($font_box,
-	    $table = create_packtable({ col_spacings => 10, row_spacings => 2},
-   [ " ", $pbar->{label} = new Gtk::Label(' ' ), ' '],				 
-   [_("Initial tests"), $pbar, ' '],
-   [ " ", $pbar1->{label} = new Gtk::Label(' ' ), ' '],				 
-   [_("Copy all fonts on your system"), $pbar1, ' '],
-   [ " ", $pbar2->{label} = new Gtk::Label(' ' ), ' '],				 
-   [_("Install & convert Fonts"), $pbar2, ' '],
-   [ " ", $pbar3->{label} = new Gtk::Label(' ' ), ' '],				 
-   [_("Post Install"), $pbar3, ' '],
+	    $table = create_packtable({ col_spacings => 10, row_spacings => 20},
+
+   [_("Initial tests"), $pbar, $pbar->{label} = new Gtk::Label(' ' )],
+   [_("Copy all fonts on your system"), $pbar1,$pbar1->{label} = new Gtk::Label(' ' ) ],
+   [_("Install & convert Fonts"), $pbar2, $pbar2->{label} = new Gtk::Label(' ' ) ],
+   [_("Post Install"), $pbar3,$pbar3->{label} = new Gtk::Label(' ' ) ],
 			    ),
-# 	    $table = create_packtable({ col_spacings => 10, row_spacings => 2},
-#    [ " ", $label1 = new Gtk::Label(' ' )],				 
-#    [_("Initial tests"), $pbar = new_with_adjustment Gtk::ProgressBar($adj), gtkset_sensitive($check1 = new Gtk::CheckButton(), 0)],
-#    [ " ", $label2 = new Gtk::Label(' ' )],				 
-#    [_("Copy all fonts on your system"), $pbar1 = new_with_adjustment Gtk::ProgressBar($adj1), gtkset_sensitive($check2 = new Gtk::CheckButton(), 0)],
-#    [ " ", $label3 = new Gtk::Label(' ' )],				 
-#    [_("Install & convert Fonts"), $pbar2 = new_with_adjustment Gtk::ProgressBar($adj2), gtkset_sensitive($check3 = new Gtk::CheckButton(), 0)],
-#    [ " ", $label4 = new Gtk::Label(' ' )],				 
-#    [_("Post Install"), $pbar3 = new_with_adjustment Gtk::ProgressBar($adj3), gtkset_sensitive($check4 = new Gtk::CheckButton(), 0)],
-# 			    ),
 	   );
     $central_widget = \$table;
     $font_box->show_all();
-    progress($pbar, 0.1, "toto");
-#    my $timer  = Gtk->timeout_add(  5, \&progress_timeout );
-#    my $timer1 = Gtk->timeout_add( 10, \&progress_timeout1 );
-#    my $timer2 = Gtk->timeout_add( 15, \&progress_timeout2 );
-#    my $timer3 = Gtk->timeout_add( 20, \&progress_timeout3 );
     Gtk->main_iteration while Gtk->events_pending;
     backend_mod();
 }
