@@ -98,13 +98,6 @@ sub read {
     } else {
 	    put_in_hash(\%conf, default_interfaces($in));
     };
-    foreach (get_config_file('interfaces')) {
-	my ($name, $interface) = @$_;
-	if ($name eq 'masq') {
-	    $conf{masquerade}{interface} = $interface;
-	    $conf{loc_interface} = [ difference2($conf{loc_interface}, [$interface]) ];
-	}
-    }
     $conf{net_interface} && \%conf;
 }
 
