@@ -20,18 +20,32 @@ sub load_deps($) {
     }
 }
 
+my $module_extension = cat_('/proc/version') =~ /^Linux version 2.4/ ? '.o' : '.ko';
+
+my %mappings = ("usb-ohci" => "ohci-hcd",
+                "usb-uhci" => "uhci-hcd",
+                "uhci" => "uhci-hcd",
+                "printer" => "usblp",
+                "bcm4400" => "b44",
+                "3c559" => "3c359",
+                "3c90x" => "3c59x",
+                "dc395x_trm" => "dc395x",
+                "audigy" => "snd-emu10k1");
+                                  
 sub load {
     my ($name, @options) = @_;
-    $name =~ s/\.o//;
+    $name =~ s/\.k?o$//;
+
+    $name = $mappings{$name} || $name;  #- 2.4 -> 2.6 compat mappings
 
     $conf{$name}{loaded} and return;
     eval { load($_, 'prereq') } foreach @{$deps{$name}};
 
-    system("packdrake -x /modules/modules.cz* /tmp $name.o");
-    -r "/tmp/$name.o" or die "can't find module $name\n";
-    system("/sbin/insmod /tmp/$name.o");
+    system("packdrake -x /modules/modules.cz* /tmp $name$module_extension");
+    -r "/tmp/$name$module_extension" or die "can't find module $name\n";
+    system("/sbin/insmod /tmp/$name$module_extension");
     my $retval = $?;
-    system("rm /tmp/$name.o");
+    system("rm /tmp/$name$module_extension");
     $retval and die("insmod $name failed");
 }
 
