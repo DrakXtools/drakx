@@ -317,8 +317,8 @@ notation (for example, 1.2.3.4).");
     $in->ask_from_entries_refH(_("Configuring network device %s", $intf->{DEVICE}),
 			      (_("Configuring network device %s", $intf->{DEVICE}) . ( $module ? _(" (driver $module)") : '' ) ."\n\n") .
 			      $text,
-			     [ { label => _("IP address"), val => \$intf->{IPADDR} }, 
-			       { label => _("Netmask"),     val => \$intf->{NETMASK} },
+			     [ { label => _("IP address"), val => \$intf->{IPADDR}, disabled => sub { $pump } },
+			       { label => _("Netmask"),     val => \$intf->{NETMASK}, disabled => sub { $pump } },
 			       { label => _("Automatic IP"), val => \$pump, type => "bool", text => _("(bootp/dhcp)") },
 			       if_($intf->{wireless_eth},
 			       { label => "WIRELESS_MODE", val => \$intf->{WIRELESS_MODE}, list => [ "Ad-hoc", "Managed", "Master", "Repeater", "Secondary", "Auto"] },
