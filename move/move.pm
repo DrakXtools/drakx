@@ -104,8 +104,11 @@ sub init {
 
     modules::load_category('multimedia/sound');
 
+    system('sysctl -w kernel.hotplug="/bin/true"');
     modules::load_category('bus/usb'); 
+    eval { modules::load('usb-storage', 'sd_mod') };
     install_steps::setupSCSI($o);
+    system('sysctl -w kernel.hotplug="/sbin/hotplug"');
     handleMoveKey($o);
 
 drakx_stuff:
