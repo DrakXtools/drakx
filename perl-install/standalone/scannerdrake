@@ -37,7 +37,7 @@ for (@ARGV) {
 }
 
 $in = 'interactive'->vnew('su', 'default');
-#$in->do_pkgs->install('sane-backends', 'xsane', if_($in->do_pkgs->is_installed('gimp'),'xsane-gimp'));
+$in->do_pkgs->install('sane-backends', 'xsane', if_($in->do_pkgs->is_installed('gimp'),'xsane-gimp'));
 if ($::Manual) {manual(); quit();}
 my $wait = $in->wait_message(_("Test ports"), _("Detecting devices ..."));
 @f = scanner::findScannerUsbport();
@@ -114,6 +114,9 @@ sub quit {
 
 #-----------------------------------------------
 # $Log$
+# Revision 1.11  2002/03/11 06:43:36  yduret
+# re-re-re-re-re-re-uncomment the pkgs check line.
+#
 # Revision 1.10  2002/03/10 15:25:10  yduret
 # added ASK DEVICE support
 #
