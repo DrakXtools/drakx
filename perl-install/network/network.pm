@@ -441,7 +441,10 @@ sub configureNetwork2 {
             #- symlink resolv.conf in install root too so that updates and suppl media can be added
             symlink "$etc/resolv.conf", "/etc/resolv.conf";
         }
-        write_interface_conf("$etc/sysconfig/network-scripts/ifcfg-$_", $intf->{$_}, $netc, $::prefix) foreach grep { !/^ppp\d+/ } keys %$intf;
+        foreach (grep { !/^ppp\d+/ } keys %$intf) {
+	    unlink("$etc/sysconfig/network-scripts/$_");
+	    write_interface_conf("$etc/sysconfig/network-scripts/ifcfg-$_", $intf->{$_}, $netc, $::prefix);
+	}
         add2hosts("$etc/hosts", $netc->{HOSTNAME}, "127.0.0.1") if $netc->{HOSTNAME};
         add2hosts("$etc/hosts", "localhost", "127.0.0.1");
 
