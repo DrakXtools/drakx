@@ -58,7 +58,7 @@ sub runlevel {
     if ($runlevel) {
 	substInFile { s/^id:\d:initdefault:\s*$/id:$runlevel:initdefault:\n/ } $f if !$::testing;
     } else {
-	cat_($f) =~ /^id:(\d):initdefault:\s*$/ && $1;
+	cat_($f) =~ /^id:(\d):initdefault:\s*$/m && $1;
     }
 }
 
