@@ -42,7 +42,7 @@ sub smbclient {
     my $group = $server->{group} ? " -W $server->{group}" : '';
 
     my $U = $server->{username} ? sprintf("%s/%s%%%s", @$server{'domain', 'username', 'password'}) : '%';
-    `smbclient -U $U -L $name $ip$group`;
+    `smbclient -U $U -L $name $ip$group 2>/dev/null`;
 }
 
 sub find_servers {
