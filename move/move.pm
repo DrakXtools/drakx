@@ -403,9 +403,11 @@ sub install2::startMove {
     output("/var/run/console/$username", 1);
     run_program::run('pam_console_apply');
 
-    run_program::raw({ detach => 1 }, '/usr/bin/dnotify', '-MCR', '/etc', '-r', '-e', '/usr/bin/etc-monitorer.pl', '{}') or die "dnotify not found!";
-    output '/var/lib/machine_ident', machine_ident();
-    
+    if (cat_('/proc/mounts') =~ m|\s/home\s|) {
+        run_program::raw({ detach => 1 }, '/usr/bin/dnotify', '-MCR', '/etc', '-r', '-e', '/usr/bin/etc-monitorer.pl', '{}') or die "dnotify not found!";
+        output '/var/lib/machine_ident', machine_ident();
+    }
+
     if (fork()) {
 	sleep 1;
         log::l("DrakX waves bye-bye");
