@@ -422,7 +422,7 @@ sub configureNetwork2 {
     add2hosts("$etc/hosts", $netc->{HOSTNAME}, map { $_->{IPADDR} } values %$intf);
 
     if (grep { $_->{BOOTPROTO} =~ /^(dhcp)$/ } values %$intf) {
-	$in->do_pkgs->install('dhcpcd');
+	$in->do_pkgs->install($netc->{dhcp_client} ? $netc->{dhcp_client} : 'dhcpcd');
     }
     if (grep { $_->{BOOTPROTO} =~ /^(pump|bootp)$/ } values %$intf) {
 	$in->do_pkgs->install('pump');
