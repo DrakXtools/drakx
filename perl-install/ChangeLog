@@ -1,3 +1,162 @@
+2004/02/13  David Baudens  <baudens at mandrakesoft.com>
+
+	* share/po/fr.po: Fix </b> in advertiesment #5
+
+	* share/advertising/drweb.pl, share/advertising/list-dwd,
+	share/advertising/list-dis, share/advertising/list-ppp,
+	share/advertising/drweb.png, share/advertising/list-pwp,
+	share/advertising/list: 
+	  - Add DRWeb's advertisement
+	  - Add list for each version
+
+2004/02/13  Damien Chaumette  <dchaumette at mandrakesoft.com>
+
+	* network/netconnect.pm: 
+	  - do not flush /etc/sysconfig/drakconnect with an empty hash
+	  - move $offer_to_connect after %adsl_devices declaration (fix typo?)
+	s/$config/$p/ for drakconnect conf file
+
+	* standalone/drakconnect: forgotten modem page, to be traduced, not yet
+	usable (please don't hurt me)
+	  - nice ethernet names back
+	  - fix adsl via ethernet bug
+	  - fix apply settings bug
+	  - fix and shrink sub apply
+	  - drop $gui and $config
+	  - add new hash style $p
+
+2004/02/13  Guillaume Cottenceau  <gc at mandrakesoft.com>
+
+	* modules.pm: fix deps problem because of 2.4/2.6 mappings, better support
+	2.4 and 2.6 alltogether by keeping 2.4 names in modules.conf
+
+2004/02/13  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/fa.po, share/po/ms.po, share/po/id.po, share/po/sk.po,
+	share/po/ru.po, share/po/gl.po, share/po/pt_BR.po, share/po/br.po,
+	share/po/th.po, share/po/sl.po, share/po/et.po, share/po/ja.po,
+	share/po/hr.po, share/po/tr.po, share/po/mt.po, share/po/ga.po,
+	share/po/be.po, share/po/uk.po, share/po/mn.po, share/po/ko.po,
+	share/po/DrakX.pot, share/po/sv.po, share/po/sr.po, share/po/pl.po,
+	share/po/fi.po, share/po/lt.po, share/po/he.po, share/po/cy.po,
+	share/po/ca.po, share/po/da.po, share/po/ar.po, share/po/tg.po,
+	share/po/nb.po, share/po/bs.po, share/po/uz.po, share/po/ro.po,
+	share/po/mk.po, share/po/wa.po, share/po/is.po, share/po/af.po,
+	share/po/hi.po, share/po/az.po, share/po/zh_TW.po, share/po/zh_CN.po,
+	share/po/pt.po, share/po/vi.po, share/po/ta.po, share/po/fr.po,
+	share/po/sr@Latn.po, share/po/sq.po, share/po/nl.po, share/po/it.po,
+	share/po/eu.po, share/po/es.po, share/po/de.po, share/po/eo.po,
+	share/po/lv.po, share/po/el.po, share/po/cs.po, share/po/bg.po,
+	share/po/hu.po, share/po/uz@Latn.po: updated pot file
+
+	* share/advertising/dwd-09.pl: USE ASCII OR UTF-8 ONLY; **DON'T** USE
+	ISO-8859-1!
+
+2004/02/13  Pixel  <pixel at mandrakesoft.com>
+
+	* install_steps_interactive.pm: add a warning when choosing security level
+	> 2 and having a windows partition
+	(since in that case we won't have umask=0) (bugzilla #4731)
+
+	* modules/interactive.pm: don't have a wait_message above another empty
+	wait_message when probing hardware
+
+	* bootloader.pm: fix reading grub config (esp. when /boot is a separate
+	partition)
+	(nb for titi: join($xx, $yy) is *not* useful)
+	try hard to update_bootloader_for_renumbered_partitions()
+	create read_grub_device_map()
+
+	* install2.pm: in boolean context, "any" is better than "find"
+	  - have usb-storage as a scsi_hostadapter by default
+	  - remove it if unneeded for normal boot (cf comment in the code)
+
+	* modules.pm: 
+	  - have usb-storage as a scsi_hostadapter by default
+	  - remove it if unneeded for normal boot (cf comment in the code)
+
+	* diskdrake/interactive.pm: try hard to
+	update_bootloader_for_renumbered_partitions()
+
+	* mdk-stage1/init.c: sleep 10 only when debugging
+
+	* interactive.pm: no need for this
+
+2004/02/13  Stew Benedict  <sbenedict at mandrakesoft.com>
+
+	* standalone/drakbackup: Fix QA reports of crash on file search, failure
+	to report ftp error.
+
+2004/02/13  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* share/po/fr.po: update
+	update
+
+	* standalone/icons/printerdrake.png, standalone/icons/drakgw.png,
+	standalone/icons/scannerdrake.png, standalone/icons/drakvpn.png,
+	standalone/icons/drakfirewall.png,
+	standalone/icons/wiz_scannerdrake.png, standalone/drakpxe,
+	standalone/icons/wiz_firewall.png, pixmaps/printerdrake.png,
+	standalone/icons/wiz_drakvpn.png, standalone/drakgw,
+	standalone/icons/logdrake.png, standalone/icons/wiz_printerdrake.png,
+	standalone/icons/wiz_drakgw.png, standalone/icons/wiz_logdrake.png,
+	standalone/icons/wiz_drakconnect.png, standalone/icons/drakconnect.png,
+	printer/printerdrake.pm: new banner icons
+
+	* standalone/harddrake2: do not force black color for fields values, this
+	badly conflict with
+	inverted accessibility themes
+	remove statusbar on interface team request
+
+	* network/netconnect.pm: new banner icons
+	offer_to_connect: fix indentation
+
+	* harddrake/data.pm: only look for local printers (do not perform heavy
+	network probe)
+
+	* modules.pm: handle wireless modules
+
+	* standalone/drakconnect: new banner icons
+	remove useless comment
+	new banner icons
+
+	* ugtk2.pm (create_scrolled_window) add relief for TreeViews too
+	(interface team
+	request)
+	(new) simplify WizardTable
+	(Gtk2::Banner->new) fix default banner size
+	(new) use new Gtk2::Banner object for banner
+	remove uneeded variable
+	(Gtk2::Banner) move that widget from mcc into ugtk2 so that all tools
+	can reuise it for their banners
+
+	* interactive.pm (vnew) do not complaint about being run as root when
+	--testing was passed
+
+	* drakxtools.spec: 10-0.14mdk
+	10-0.13mdk
+
+	* Makefile.config: add drakvpn
+
+	* standalone/drakvpn: verbs must be upcased on buttons!!!
+	new banner icons
+
+2004/02/12  Pixel  <pixel at mandrakesoft.com>
+
+	* bootloader.pm: in get_kernels_and_labels():
+	  - change internal data structure
+	  - change regexp matching kernel names (was broken for
+	2.4.25-0.pre7.3mdk)
+	  - default to kernel 2.4 when lsb is installed
+
+2004/02/12  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* ugtk2.pm (new) simplify banner rendering, make it cpu lighter
+
+	* network/netconnect.pm: ask isp for ip and gateway by default (#7705)
+
+	* standalone/drakclock (DrawPointAt) simplify draw_points call
+
 2004/02/12  David Baudens  <baudens at mandrakesoft.com>
 
 	* share/advertising/dwd-09.pl: Update text to reflect reality
@@ -25963,7 +26122,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.869 2004/02/12 12:23:22 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.870 2004/02/12 23:29:36 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
