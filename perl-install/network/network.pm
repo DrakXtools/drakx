@@ -530,11 +530,11 @@ sub wpa_supplicant_configure {
             ssid => qq("$ethntf->{WIRELESS_ESSID}"),
             psk => network::tools::convert_key_for_wpa_supplicant($ethntf->{WIRELESS_ENC_KEY}),
         });
-        services::start_service_on_boot("tmdns");
+        services::start_service_on_boot('wpa_supplicant');
         services::restart('wpa_supplicant');
     } else {
-        services::stop("tmdns");
-        services::do_not_start_service_on_boot("tmdns");
+        services::stop('wpa_supplicant');
+        services::do_not_start_service_on_boot('wpa_supplicant');
     }
 }
 
