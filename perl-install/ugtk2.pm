@@ -940,9 +940,6 @@ sub new {
 		    my $d = ${{ $Gtk2::Gdk::Keysyms{F2} => 'screenshot' }}{$event->keyval};
 		    if ($d eq 'screenshot') {
 			common::take_screenshot();
-		    } elsif (chr($event->keyval) eq 'e' && member('mod1-mask', @{$event->state})) {  #- alt-e
-			log::l("Switching to " . ($::expert ? "beginner" : "expert"));
-			$::expert = !$::expert;
 		    }
 		    0;
 		});
