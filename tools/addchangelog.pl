@@ -6,7 +6,7 @@
 
 $date = (split('/', `grep ChangeLog perl-install/CVS/Entries`))[3];
 
-@changelog = `(cvs log -d ">$date" mdk-stage1 ; cd perl-install; cvs log -d ">$date") | $script`;
+@changelog = `(cvs log -d ">$date" docs mdk-stage1 rescue tools ; cd perl-install; cvs log -d ">$date") | $script`;
 @before = `cat perl-install/ChangeLog`;
 
 open F, ">perl-install/ChangeLog";
