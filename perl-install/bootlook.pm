@@ -47,7 +47,7 @@ my @usernames;
 parse_etc_passwd();
 
 my $no_bootsplash;
-my $x_mode = isXlaunched();
+my $x_mode = any::runlevel() == 5;
 my $a_mode = -e "/etc/aurora/Monitor" ? 1 : 0;
 my $l_mode = isAutologin();
 my %auto_mode = get_autologin("");
@@ -337,7 +337,7 @@ Click on Configure to launch the setup wizard.", $lilogrub),
 				    )
 			 ),
 		 gtkadd(gtkset_layout(new Gtk::HButtonBox, 'end'),
-			 gtksignal_connect(new Gtk::Button(N("OK")), clicked => sub { updateInit(); updateAutologin(); updateAurora(); $::isEmbedded ? kill('USR1',$::CCPID) : Gtk->exit(0) }),
+			 gtksignal_connect(new Gtk::Button(N("OK")), clicked => sub { any::runlevel($x_mode ? 5 : 3); updateAutologin(); updateAurora(); $::isEmbedded ? kill('USR1',$::CCPID) : Gtk->exit(0) }),
 			 gtksignal_connect(new Gtk::Button(N("Cancel")), clicked => sub { $::isEmbedded ? kill('USR1', $::CCPID) : Gtk->exit(0) })
 			)
 	       )
@@ -387,26 +387,6 @@ sub get_wm {
 
 sub print_hello {
   print("mcdtg !\n");
-}
-
-#-------------------------------------------------------------
-# launch X functions
-#-------------------------------------------------------------
-
-sub isXlaunched {
-    my $line;
-    local *INITTAB;
-    open INITTAB, "/etc/inittab" or die N("can not open /etc/inittab for reading: %s", $!);
-    while (<INITTAB>) {
-	if (/id:([1-6]):initdefault:/) { $line = $_; last }
-    }
-    $line =~ s/id:([1-6]):initdefault:/$1/;
-    return $line-3;
-}
-
-sub updateInit {
-    my $runlevel = $x_mode ? 5 : 3;
-    substInFile { s/^id:\d:initdefault:\s*$/id:$runlevel:initdefault:\n/ } "/etc/inittab";
 }
 
 #-------------------------------------------------------------
