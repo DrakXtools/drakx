@@ -330,8 +330,7 @@ sub create_box_with_title {
 	undef $::no_separator;
      my $new_label = sub {
          my ($txt) = @_;
-         my $w = ref($txt) ? $txt : gtknew('WrappedLabel', text => $txt);
-         gtkset_name($w, "Title");
+         ref($txt) ? $txt : gtknew('WrappedLabel', text => $txt);
      };
 	if ($o->{icon} && (!$::isWizard || $::isInstall)) {
 	    gtkpack__($box,
@@ -940,7 +939,6 @@ sub _create_window {
 
     my $w = gtknew('Window', 
 		   if_(!$::isInstall && !$::isWizard, border_width => 5),
-		   widget_name => 'Title',
 		   position_policy => !$::isInstall && !$::isStandalone ? 'center-always' : 'center-on-parent',
 		   if_(!$::isInstall, icon_no_error => wm_icon()),
 
