@@ -297,7 +297,7 @@ sub UpdateAvailable() {
 		m!Quality:(\S*)/! and $signal = $1;
 		if (/key:(\S*)\s/) {
 			$wep = $1;
-			print("Mode: $mode, WEP: $wep, Signal: $signal\n");
+			print("ESSID: $essid, Mode: $mode, WEP: $wep, Signal: $signal\n");
 			push @{$AvailableList->{data}}, [$essid, $mode, $wep, $signal];
 		}
 	}
