@@ -743,6 +743,8 @@ sub report_bug {
       header("modules.conf"), cat_("$prefix/etc/modules.conf"),
       header("lilo.conf"), cat_("$prefix/etc/lilo.conf"),
       header("menu.lst"), cat_("$prefix/boot/grub/menu.lst"),
+      header("XF86Config"), cat_("$prefix/etc/X11/XF86Config"),
+      header("XF86Config-4"), cat_("$prefix/etc/X11/XF86Config-4"),
       header("/etc/modules"), cat_("$prefix/etc/modules"),
       map_index { even($::i) ? header($_) : $_ } @other;
 }
