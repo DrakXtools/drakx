@@ -187,14 +187,17 @@ enum return_type ask_from_list_comments(char *msg, char ** elems, char ** elems_
 
 	i = 0;
 	while (elems && *elems) {
-		items[i] = malloc(sizeof(char) * (strlen(*elems) + strlen(*elems_comments) + 4));
+		int j = (*elems_comments) ? strlen(*elems_comments) : 0;
+		items[i] = malloc(sizeof(char) * (strlen(*elems) + j + 4));
 		strcpy(items[i], *elems);
-		strcat(items[i], " (");
-		strcat(items[i], *elems_comments);
-		strcat(items[i], ")");
+		if (*elems_comments) {
+			strcat(items[i], " (");
+			strcat(items[i], *elems_comments);
+			strcat(items[i], ")");
+		}
+		elems_comments++;
 		i++;
 		elems++;
-		elems_comments++;
 	}
 	items[i] = NULL;
 

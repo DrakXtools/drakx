@@ -203,4 +203,11 @@ tar-mkinitrd_helper: clean
 
 ifeq (.depend,$(wildcard .depend))
 include .depend
-endif                                           
+endif
+
+
+*-CDROM.o: %-CDROM.o: %.o
+
+*-DISK.o: %-DISK.o: %.o
+
+*-NETWORK.o: %-NETWORK.o: %.o

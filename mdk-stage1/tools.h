@@ -39,6 +39,7 @@ void add_to_env(char * name, char * value);
 void handle_env(char ** env);
 char ** grab_env(void);
 char ** list_directory(char * direct);
+int string_array_length(char ** a);
 
 struct param_elem
 {
@@ -47,6 +48,6 @@ struct param_elem
 };
 
 #define ptr_begins_static_str(pointer,static_str) (!strncmp(pointer,static_str,sizeof(static_str)-1))
-
+#define streq !strcmp
 
 #endif

@@ -30,6 +30,7 @@
 #include "log.h"
 #include "mar/mar-extract-only.h"
 #include "frontend.h"
+#include "modules_descr.h"
 
 #include "modules.h"
 
@@ -346,7 +347,24 @@ enum return_type ask_insmod(enum driver_type type)
 
 	snprintf(msg, sizeof(msg), "Which driver should I try to gain %s access?", mytype);
 
-	results = ask_from_list(msg, mar_list_contents(archive_name), &choice);
+	{
+		char ** drivers = mar_list_contents(archive_name);
+		char ** descrs = malloc(sizeof(char *) * string_array_length(drivers));
+		char ** p_drivers = drivers;
+		char ** p_descrs = descrs;
+		while (p_drivers && *p_drivers) {
+			int i;
+			*p_descrs = NULL;
+			for (i = 0 ; i < modules_descriptions_num ; i++) {
+				if (!strncmp(*p_drivers, modules_descriptions[i].module, strlen(modules_descriptions[i].module))
+				    && (*p_drivers)[strlen(modules_descriptions[i].module)] == '.') /* one contains '.o' not the other */
+					*p_descrs = modules_descriptions[i].descr;
+			}
+			p_drivers++;
+			p_descrs++;
+		}
+		results = ask_from_list_comments(msg, drivers, descrs, &choice);
+	}
 
 	if (results == RETURN_OK) {
 		choice[strlen(choice)-2] = '\0'; /* remove trailing .o */

@@ -408,3 +408,16 @@ char ** list_directory(char * direct)
 	tmp[i] = NULL;
 	return memdup(tmp, sizeof(char*) * (i+1));
 }
+
+
+int string_array_length(char ** a)
+{
+	int i = 0;
+	if (!a)
+		return -1;
+	while (a && *a) {
+		a++;
+		i++;
+	}
+	return i;
+}

@@ -254,73 +254,31 @@ void end_progression(void)
 enum return_type ask_from_list_comments(char *msg, char ** elems, char ** elems_comments, char ** choice)
 {
 	char ** sav_elems = elems;
-	int i, j;
+	int i = 1;
+	int j = 0;
 
-	printf("> %s\n(0) Cancel\n", msg);
-	i = 1;
+	printf("> %s\n[ 0] Cancel", msg);
+
 	while (elems && *elems) {
-		printf("(%d) %s (%s)\n", i, *elems, *elems_comments);
-		i++;
-		elems++;
-		elems_comments++;
-	}
-
-	printf("? ");
-
-	j = get_int_response();
-
-	if (j == 0)
-		return RETURN_BACK;
-
-	if (j >= 1 && j < i) {
-		*choice = strdup(sav_elems[j-1]);
-		return RETURN_OK;
-	}
-
-	return RETURN_ERROR;
-}
-
-
-enum return_type ask_from_list(char *msg, char ** elems, char ** choice)
-{
-	char ** sav_elems = elems;
-	int i, j;
-
-	i = 0;
-	while (elems && *elems) {
-		i++;
-		elems++;
-	}
-
-	if (i < 10) {
-		printf("> %s\n(0) Cancel\n", msg);
-		for (j=0; j<i; j++)
-			printf("(%d) %s\n", j+1, sav_elems[j]);
-	}
-	else {
-		printf("> %s\n( 0) Cancel\n", msg);
-		if (i < 20)
-			for (j=0; j<i; j++)
-				printf("(%2d) %s\n", j+1, sav_elems[j]);
-		else {
-			if (i < 40)
-				for (j=0; j<i-1; j += 2)
-					printf("(%2d) %-34s (%2d) %s\n", j+1, sav_elems[j], j+2, sav_elems[j+1]);
-			else
-				for (j=0; j<i-3; j += 4)
-					printf("(%2d) %-14s (%2d) %-14s (%2d) %-14s (%2d) %s\n",
-					       j+1, sav_elems[j], j+2, sav_elems[j+1], j+3, sav_elems[j+2], j+4, sav_elems[j+3]);
-			if (j < i) {
-				while (j < i) {
-					printf("(%2d) %-14s ", j+1, sav_elems[j]);
-					j++;
-				}
+		if (elems_comments && *elems_comments) {
+			printf("\n[%2d] %s (%s)", i, *elems, *elems_comments);
+			j = 0;
+		} else {
+			if (j == 0)
 				printf("\n");
-			}
+			printf("[%2d] %-14s ", i, *elems);
+			j++;
 		}
+		if (j == 4)
+			j = 0;
+		
+		if (elems_comments)
+			elems_comments++;
+		i++;
+		elems++;
 	}
 
-	printf("? "); 
+	printf("\n? "); 
 
 	j = get_int_response();
 
@@ -333,6 +291,12 @@ enum return_type ask_from_list(char *msg, char ** elems, char ** choice)
 	}
 
 	return RETURN_ERROR;
+}
+
+
+enum return_type ask_from_list(char *msg, char ** elems, char ** choice)
+{
+	return ask_from_list_comments(msg, elems, NULL, choice);
 }
 
 
