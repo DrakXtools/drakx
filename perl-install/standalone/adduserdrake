@@ -18,77 +18,22 @@ my @etc_pass_fields = qw(name pw uid gid realname home shell);
 my @shells = grep { -x $_ } map { "/bin/$_" } qw(bash tcsh zsh ash ksh);
 my $isMD5 = cat_("/etc/pam.d/passwd") =~ /md5/;
 my $isShadow = cat_("/etc/pam.d/passwd") =~ /shadow/;
-my $security = $ENV{SECURE_LEVEL};
 
 
+my $users = {}; 
+my $in;
 
 if (my @l = grep { ! /^-/ } @ARGV) {
-    addusers(map {{ name => $_, realname => $_ }} @l);
-    exit 0;
+    $users->{$_} = { name => $_, realname => $_ } foreach @l;
+} else {
+    $in = interactive->vnew('su');
+    any::ask_users('', $in, $users, $ENV{SECURE_LEVEL});
 }
 
-my $in = interactive->vnew('su');
-my @users; 
+system("adduser", $_) foreach keys %$users;
+any::addUsers('', $users);
 
-new:
-$u = { icon => translate('automagic') };
-if ($in->ask_from_entries_refH(
-        [ _("Add user"), _("Accept user"), _("Done") ],
-        _("Enter a user\n%s", $users ? _("(already added %s)", join(", ", map { $_->{realname} || $_->{name} } @users)) : ''),
-        [ 
-	 { label => _("Real name"), val => \$u->{realname} },
-	 { label => _("User name"), val => \$u->{name} },
-	   if_($security >= 2,
-         { label => _("Password"), val => \$u->{password}, hidden => 1 },
-         { label => _("Password (again)"), val => \$u->{password2}, hidden => 1 },
-	   ), if_(!$::beginner,
-         { label => _("Shell"), val => \$u->{shell}, list => \@shells, not_edit => !$::expert } 
-	   ), if_($security <= 3,
-	 { label => _("Icon"), val => \$u->{icon}, list => [ any::facesnames() ], icon2f => \&any::face2xpm },
-	   ),
-        ],
-        focus_out => sub {
-	    if ($_[0] eq 0) {
-		$u->{name} ||= lc first($u->{realname} =~ /((\w|-)+)/);
-	    }
-	},
-        complete => sub {
-	    $u->{password} eq $u->{password2} or $in->ask_warn('', [ _("The passwords do not match"), _("Please try again") ]), return (1,3);
-	    $security > 3 && length($u->{password}) < 6 and $in->ask_warn('', _("This password is too simple")), return (1,2);
-	    $u->{name} or $in->ask_warn('', _("Please give a user name")), return (1,0);
-	    $u->{name} =~ /^[a-z0-9_-]+$/ or $in->ask_warn('', _("The user name must contain only lower cased letters, numbers, `-' and `_'")), return (1,0);
-	    member($u->{name}, map { $_->{name} } @users) and $in->ask_warn('', _("This user name is already added")), return (1,0);
-	    return 0;
-	},
-)) {
-    push @users, $u;
-    goto new;
-}
+any::write_passwd_user('', $_, $isMD5) foreach values %$users;
+system("pwconv") if $isShadow;
 
-addusers(@users);
-
-sub addusers {
-    my @u = map { $_->{name} } my @users = @_;
-
-    foreach (@users) {
-	$_->{pw} = any::crypt($_->{password}, $isMD5);
-	$_->{shell} ||= "/bin/bash";
-    }
-
-    system("adduser $_") foreach @u;
-    any::addUsers('', @_);
-
-    substInFile {
-	foreach my $u (@users) {
-	    if (/^$u->{name}:/) {
-		chomp;
-		my %l; @l{@etc_pass_fields} = split ':';
-		add2hash($u, \%l);
-		$_ = join(':', @$u{@etc_pass_fields}) . "\n";
-	    }
-	}
-    } "/etc/passwd";
-    system("pwconv") if $isShadow;
-}
-
-$in->exit(0);
+$in->exit(0) if $in;
