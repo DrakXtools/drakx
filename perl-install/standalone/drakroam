@@ -168,6 +168,7 @@ sub UpdateAll {
 sub UpdateRoaming() {
 	my $status = (any { /wlandetect$/ } run_program::get_stdout("ps", "-A")) ? "on" : "off";
 	$RoamStatus->set_text("Roaming: $status");
+	return FALSE; #- do not update again if launched on timeout
 }
 
 sub UpdateStatus() {
@@ -280,12 +281,12 @@ sub WriteConfig() {
 
 sub StartRoam {
 	system("killall wlandetect; $WLanDetect -d -t $ScanInterval &");
-	&UpdateRoaming
+	Glib::Timeout->add(1000, \&UpdateRoaming);
 }
 
 sub StopRoam {
 	system("killall wlandetect");
-	&UpdateRoaming;
+	Glib::Timeout->add(1000, \&UpdateRoaming);
 }
 
 sub SetInterval() {
