@@ -32,6 +32,7 @@ our %adsl_data = (
                    vpi => 8,
                    vci => 23,
                    Encapsulation => 6,
+                   method => 'pppoa',
                   },
 
                   N("France") . "|Free non dégroupé 512/128" =>
@@ -173,6 +174,7 @@ our %adsl_data = (
                    vpi => 8,
                    vci => 30,
                    Encapsulation => 6,
+                   method => 'pppoa',
                   },
 
                   N("Poland") . "|Telekomunikacja Polska (TPSA/neostrada)" =>
@@ -196,6 +198,7 @@ our %adsl_data = (
                    vpi => 8,
                    vci => 23,
                    Encapsulation => 6,
+                   method => 'pppoa',
                   },
 
                   N("Spain") . "|Telefónica IP dinámica" =>
@@ -240,6 +243,7 @@ our %adsl_data = (
                    vpi => 0,
                    vci => 26,
                    Encapsulation => 6,
+                   method => 'pppoa',
                   },
 
                   N("United Kingdom") . "|British Telecom " =>
@@ -247,6 +251,7 @@ our %adsl_data = (
                    vpi => 0,
                    vci => 26,
                    Encapsulation => 6,
+                   method => 'pppoa',
                   },
                  );
 
