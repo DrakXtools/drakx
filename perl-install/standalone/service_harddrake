@@ -53,7 +53,7 @@ foreach (@harddrake::data::tree) {
     $msg .= "- " . harddrake::data::custom_id($ID{$_}, $item) . " was added\n" foreach @added;
     @added || @was_removed or next;
     harddrake::data::set_removable_configurator($Ident, first(values %$oldconfig, values %ID), \$configurator);
-    next unless -x $configurator;
+    next unless -x first(split /\s+/, $configurator);
     my ($pid, $no);
     $SIG{ALRM} = sub { $no = 1; kill 15, $pid };
     unless ($pid = fork()) {
