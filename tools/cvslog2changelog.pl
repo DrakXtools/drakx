@@ -79,5 +79,6 @@ BEGIN {
 	      'fabman'  => 'Fabian Mandelbaum  <fabman at 2vias.com.ar>',
               'erwan'   => 'Erwan Velu  <erwan at mandrakesoft.com>',
               'nplanel' => 'Nicolas Planel  <nplanel at mandrakesoft.com>',
+              'rgarciasuarez' => 'Rafael Garcia-Suarez <rgarciasuarez at mandrakesoft.com>',
 	     );
 }
