@@ -917,9 +917,9 @@ sub configure_net {
     if (!$netcnx->{type}) {
         $in->ask_warn(
                     N("Warning"),
-                    #-PO: here "Internet access" should be translated the same was as in control-center
+                    #-PO: here "Add Connexion" should be translated the same was as in control-center
                     N("You don't have any configured Internet connection.
-Please run \"Internet access\" in control center."));
+Run the \"Add Connexion\" assistant from the Mandrakelinux Control Center"));
         $in->exit;
     }
     my $cnx = {};
