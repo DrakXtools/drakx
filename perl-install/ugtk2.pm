@@ -14,7 +14,7 @@ use vars qw(@ISA %EXPORT_TAGS @EXPORT_OK @icon_paths $force_center $force_focus 
       gtkhide gtkdestroy gtkflush gtkset_mousecursor gtkset_mousecursor_normal gtkset_markup
       gtkset_mousecursor_wait gtkappend_text gtkprepend_text gtkinsert_text gtkroot gtksetstyle) ],
     helpers => [ qw(add2notebook add_icon_path n_line_size fill_tiled fill_tiled_coords string_size
-      get_text_coord gtkcolor gtkset_background gtkfontinfo gtkcreate_img gtkcreate_pixbuf) ],
+      get_text_coord gtkcolor gtkset_background gtkfontinfo gtkcreate_img gtkcreate_pixbuf set_back_pixbuf) ],
     create => [ qw(create_box_with_title create_adjustment create_scrolled_window create_hbox create_vbox
       create_dialog destroy_window create_factory_menu create_menu create_notebook create_packtable
       create_vpaned create_hpaned create_okcancel) ],
@@ -531,6 +531,15 @@ sub gtkfontinfo {
     }
     $metrics->unref;
     %fontinfo;
+}
+
+sub set_back_pixbuf {
+    my ($widget, $pixbuf) = @_;
+    my $window = $widget->window;
+    my ($width, $height) = ($pixbuf->get_width, $pixbuf->get_height);
+    my $pixmap = Gtk2::Gdk::Pixmap->new($window, $width, $height, $window->get_depth);
+    $pixbuf->render_to_drawable($pixmap, $widget->style->fg_gc('normal'), 0, 0, 0, 0, $width, $height, 'none', 0, 0);
+    $window->set_back_pixmap($pixmap, 0);
 }
 
 sub fill_tiled_coords {
