@@ -23,7 +23,7 @@ sub new() {
     bless {}, $_[0];
 }
 
-sub end { Newt::Finished }
+sub end() { Newt::Finished }
 END { end() }
 
 sub myTextbox {
@@ -62,7 +62,7 @@ sub ask_from_listW {
 	}
 	my $i; map_index { $i = $::i if $def eq $_ } @$l;
 	my ($r, $e) = Newt::WinMenu($title, $mesg, 40, 5, 5, 8, $l, $i, @okcancel);
-	return if $r > 1;
+	$r > 1 and die "ask_from_list cancel";
 	if ($special) {
 	    $r ? $okcancel[0] : $l->[$e];
 	} else {

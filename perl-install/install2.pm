@@ -227,14 +227,7 @@ sub selectMouse {
     add2hash($o->{mouse} ||= {}, { mouse::read($o->{prefix}) }) if $o->{isUpgrade} && !$clicked;
 
     $o->selectMouse($clicked);
-    addToBeDone { 
-	mouse::write($o->{prefix}, $o->{mouse});
-	my $t = "modprobe usbmouse\n";
-	substInFile { 
-	    s/$t//;
-	    $_ .= $t if eof;
-	} "$o->{prefix}/etc/rc.d/rc.local" if $o->{mouse}{FULLNAME} =~ /USB/i;
-    } 'doInstallStep';
+    addToBeDone { mouse::write($o->{prefix}, $o->{mouse}) } 'doInstallStep';
 }
 
 #------------------------------------------------------------------------------

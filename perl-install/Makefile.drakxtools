@@ -1,0 +1,30 @@
+DIRS = ddcprobe po Newt c pci_probing resize_fat
+PREFIX = 
+SBINDEST = $(PREFIX)/usr/sbin
+ETCDEST = $(PREFIX)/etc/gtk
+BINDEST = $(PREFIX)/usr/bin
+LIBDEST = $(PREFIX)/usr/lib/libDrakX
+X11DEST = $(PREFIX)/usr/X11R6/lib/X11
+
+.PHONY: $(DIRS)
+
+all: $(DIRS)
+
+$(DIRS):
+	install -d auto
+	$(MAKE) -C $@
+
+install:
+	install -d $(BINDEST) $(ETCDEST) $(SBINDEST) $(LIBDEST) $(X11DEST) $(DIRS:%=$(LIBDEST)/%)
+	install diskdrake XFdrake ddcprobe/ddcxinfos $(SBINDEST)
+
+	for i in *.pm ; do perl -pe '$$_ = "\n" if /\s*use\s+(diagnostics|vars|strict)/' $$i > $(LIBDEST)/$$i ; done
+	install -m 644 MonitorsDB $(X11DEST)
+	install -m 644 diskdrake.rc $(ETCDEST)
+	install -m 644 po/*.po $(LIBDEST)/po
+	install -m 644 $(patsubst %,Newt/%.pm,Newt) $(LIBDEST)/Newt
+	install -m 644 $(patsubst %,c/%.pm,stuff) $(LIBDEST)/c
+	install -m 644 $(patsubst %,pci_probing/%.pm,main pcitable pci_class) $(LIBDEST)/pci_probing
+	install -m 644 $(patsubst %,resize_fat/%.pm,main any boot_sector c_rewritten dir_entry directory fat info_sector io) $(LIBDEST)/resize_fat
+	cp -rf auto $(LIBDEST)
+

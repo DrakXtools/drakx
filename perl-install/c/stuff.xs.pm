@@ -576,6 +576,10 @@ headerRead(fd, magicp)
   OUTPUT:
   RETVAL
 
+void
+headerFree(header)
+  void *header
+
 char *
 headerGetEntry_string(h, query)
   void *h
