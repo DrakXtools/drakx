@@ -4,6 +4,8 @@ package network::adsl_consts; # $Id$
 
 use vars qw(@ISA @EXPORT);
 use common;
+use utf8;
+use encoding "utf8";
 
 @ISA = qw(Exporter);
 @EXPORT = qw(@adsl_data);
@@ -143,7 +145,7 @@ our %adsl_data = (
                   {
                    vpi => 0,
                    vci => 23,
-                   Encapsulation => 1,
+                   Encapsulation => 3,
                    method => 'pppoe',
                   },
 
@@ -151,7 +153,7 @@ our %adsl_data = (
                   {
                    vpi => 8,
                    vci => 23,
-                   Encapsulation => 1,
+                   Encapsulation => 3,
                    method => 'pppoe',
                   },
 
@@ -159,7 +161,7 @@ our %adsl_data = (
                   {
                    vpi => 8,
                    vci => 23,
-                   Encapsulation => 1,
+                   Encapsulation => 3,
                    method => 'pppoe',
                   },
 
@@ -167,7 +169,7 @@ our %adsl_data = (
                   {
                    vpi => 0,
                    vci => 27,
-                   Encapsulation => 1,
+                   Encapsulation => 3,
                    method => 'pppoe',
                   },
 
@@ -175,7 +177,7 @@ our %adsl_data = (
                   {
                    vpi => 0,
                    vci => 20,
-                   Encapsulation => 1,
+                   Encapsulation => 3,
                    method => 'pppoe',
                   },
 
@@ -183,7 +185,7 @@ our %adsl_data = (
                   {
                    vpi => 0,
                    vci => 23,
-                   Encapsulation => 1,
+                   Encapsulation => 3,
                    method => 'pppoe',
                   },
 
@@ -191,7 +193,7 @@ our %adsl_data = (
                   {
                    vpi => 8,
                    vci => 23,
-                   Encapsulation => 1,
+                   Encapsulation => 3,
                    method => 'pppoe',
                   },
 
@@ -199,7 +201,7 @@ our %adsl_data = (
                   {
                    vpi => 0,
                    vci => 23,
-                   Encapsulation => 1,
+                   Encapsulation => 3,
                    method => 'pppoe',
                   },
 
@@ -207,7 +209,7 @@ our %adsl_data = (
                   {
                    vpi => 0,
                    vci => 0xc8,
-                   Encapsulation => 1,
+                   Encapsulation => 3,
                    method => 'pppoe',
                   },
 
@@ -215,7 +217,7 @@ our %adsl_data = (
                   {
                    vpi => 0,
                    vci => 23,
-                   Encapsulation => 1,
+                   Encapsulation => 3,
                    method => 'pppoe',
                   },
 
@@ -223,7 +225,7 @@ our %adsl_data = (
                   {
                    vpi => 8,
                    vci => 20,
-                   Encapsulation => 1,
+                   Encapsulation => 3,
                    method => 'pppoe',
                   },
 
@@ -231,7 +233,7 @@ our %adsl_data = (
                   {
                    vpi => 0,
                    vci => 20,
-                   Encapsulation => 1,
+                   Encapsulation => 3,
                    method => 'pppoe',
                   },
 
@@ -239,7 +241,7 @@ our %adsl_data = (
                   {
                    vpi => 0,
                    vci => 23,
-                   Encapsulation => 1,
+                   Encapsulation => 3,
                    method => 'pppoe',
                   },
 
@@ -247,7 +249,7 @@ our %adsl_data = (
                   {
                    vpi => 8,
                    vci => 23,
-                   Encapsulation => 1,
+                   Encapsulation => 3,
                    method => 'pppoe',
                   },
 
@@ -255,7 +257,7 @@ our %adsl_data = (
                   {
                    vpi => 8,
                    vci => 51,
-                   Encapsulation => 1,
+                   Encapsulation => 3,
                    method => 'pppoe',
                   },
 
@@ -263,7 +265,7 @@ our %adsl_data = (
                   {
                    vpi => 8,
                    vci => 23,
-                   Encapsulation => 1,
+                   Encapsulation => 3,
                    method => 'pppoe',
                   },
 
@@ -271,7 +273,7 @@ our %adsl_data = (
                   {
                    vpi => 0,
                    vci => 20,
-                   Encapsulation => 1,
+                   Encapsulation => 3,
                    method => 'pppoe',
                   },
 
@@ -279,7 +281,7 @@ our %adsl_data = (
                   {
                    vpi => 0,
                    vci => 20,
-                   Encapsulation => 1,
+                   Encapsulation => 3,
                    method => 'pppoe',
                   },
 
@@ -287,7 +289,7 @@ our %adsl_data = (
                   {
                    vpi => 0,
                    vci => 23,
-                   Encapsulation => 1,
+                   Encapsulation => 3,
                    method => 'pppoe',
                   },
 
@@ -295,7 +297,7 @@ our %adsl_data = (
                   {
                    vpi => 0,
                    vci => 23,
-                   Encapsulation => 1,
+                   Encapsulation => 3,
                    method => 'pppoe',
                   },
 
