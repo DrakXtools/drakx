@@ -2862,6 +2862,16 @@ sub start_network {
     } else { return printer::services::start("network") }
 }
 
+sub network_configured {
+    # Do configured networks (/etc/sysconfig/network-scripts/ifcfg*) exist?
+    my @netscripts =
+	cat_("ls -1 $::prefix/etc/sysconfig/network-scripts/ |");
+    my $netconfigured = 0;
+    ( /ifcfg-/ and !/(ifcfg-lo|:|rpmsave|rpmorig|rpmnew)/ and
+      !/(~|\.bak)$/ and $netconfigured = 1) foreach @netscripts;
+    return $netconfigured;
+}
+
 sub check_network {
 
     # This routine is called whenever the user tries to configure a remote
@@ -2877,12 +2887,10 @@ sub check_network {
 
     $in->set_help('checkNetwork') if $::isInstall;
 
-    # First check: Does /etc/sysconfig/network-scripts/drakconnect_conf exist
-    # (otherwise the network is not configured yet and drakconnect has to be
-    # started)
+    # First check: Do configured networks
+    # (/etc/sysconfig/network-scripts/ifcfg*) exist?
 
-    if (!files_exist("/etc/sysconfig/network-scripts/drakconnect_conf") &&
-	!$dontconfigure) {
+    if (!$dontconfigure && !network_configured()) {
 	my $go_on = 0;
 	while (!$go_on) {
 	    my $choice = N("Configure the network now");
@@ -2903,7 +2911,7 @@ sub check_network {
 		    } else {
 			system("/usr/sbin/drakconnect");
 		    }
-		    $go_on = files_exist("/etc/sysconfig/network-scripts/drakconnect_conf");
+		    $go_on = network_configured();
 		} else {
 		    return 1;
 		}
@@ -2914,7 +2922,7 @@ sub check_network {
     }
 
     # Do not try to start the network if it is not configured
-    if (!files_exist("/etc/sysconfig/network-scripts/drakconnect_conf")) { return 0 }
+    if (!network_configured()) { return 0 }
 
     # Second check: Is the network running?
 
