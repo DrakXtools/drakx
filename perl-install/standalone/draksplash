@@ -262,7 +262,7 @@ QUIET='.$quiet;
 
 
 #- Desc  => read the current bootsplash theme configuration if exist
-sub get_this_thm_res_conf {
+sub get_this_thm_res_conf() {
   	member($first{widgets}{combo}{name}->entry->get_text , giv_exist_thm())
 	  and $theme{name} = $first{widgets}{combo}{name}->entry->get_text
 	  and thm_in_this_res(1) 
