@@ -2,7 +2,7 @@ package ugtk2;
 
 use diagnostics;
 use strict;
-use vars qw(@ISA %EXPORT_TAGS @EXPORT_OK @icon_paths $wm_icon $force_center_at_pos $force_center $force_focus $grab $border); #- leave it on one line, for automatic removal of the line at package creation
+use vars qw(@ISA %EXPORT_TAGS @EXPORT_OK @icon_paths $wm_icon $force_center_at_pos $force_focus $grab $border); #- leave it on one line, for automatic removal of the line at package creation
 
 @ISA = qw(Exporter);
 %EXPORT_TAGS = (
@@ -839,7 +839,7 @@ sub new {
     if ($o->{pop_it}) {
 	$o->{rwindow} = _create_window(
 	    title => $title, 
-	    position_policy => $force_center ? 'center_always' : 'center-on-parent',
+	    position_policy => !$::isInstall && !$::isStandalone ? 'center_always' : 'center-on-parent',
 	    modal => $grab || $o->{grab} || $o->{modal},
 	    if_(!$::isInstall, icon_no_error => wm_icon()),
 	    if_($o->{transient} && $o->{transient} =~ /Gtk2::Window/, transient_for => $o->{transient}), 

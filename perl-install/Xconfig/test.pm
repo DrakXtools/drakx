@@ -98,7 +98,6 @@ sub test {
         use common;
 
         $::prefix = "%s";
-        $::isStandalone = 1;
 
         lang::bindtextdomain();
 
@@ -106,7 +105,6 @@ sub test {
         Gtk2->init;
 
         gtkset_background(200 * 257, 210 * 257, 210 * 257);
-        $ugtk2::force_center = 1;
 	$ugtk2::force_focus = 1;
         my $text = Gtk2::Label->new;
         my $time = 12;
