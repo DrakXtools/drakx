@@ -1246,6 +1246,11 @@ sub miscellaneous {
     if ($o->{meta_class} ne 'desktop' && !$o->{isUpgrade}) {
 	require security::level;
 	security::level::level_choose($o, \$o->{security}, \$o->{libsafe}, \$o->{security_user});
+
+	if ($o->{security} > 2 && find { isFat($_) } @{$o->{fstab}}) {
+	    $o->ask_okcancel('', N("In this security level, access to the files in the Windows partition is restricted to the administrator."))
+	      or goto &miscellaneous;
+	}
     }
 
     install_steps::miscellaneous($o);
