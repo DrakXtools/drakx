@@ -427,9 +427,9 @@ sub configure_queue($) {
 
 
     ($filein, $file) = &$get_name_file("general.cfg");
-    $fieldname{ascps_trans} = ($dbentry->{GSDRIVER} eq "POSTSCRIPT") ? "NO" : "YES";
-    $fieldname{desiredto}   = ($entry->{GSDRIVER} eq "TEXT") ? "ps" : "asc";
-    $fieldname{papersize}   = $entry->{PAPERSIZES} ? $entry->{PAPERSIZES} : "letter";
+    $fieldname{ascps_trans} = ($dbentry->{GSDRIVER} eq "POSTSCRIPT") ? "YES" : "NO";
+    $fieldname{desiredto}   = ($dbentry->{GSDRIVER} ne "TEXT") ? "ps" : "asc";
+    $fieldname{papersize}   = $entry->{PAPERSIZE} ? $entry->{PAPERSIZE} : "letter";
     $fieldname{printertype} = $entry->{TYPE};
     create_config_file($filein, $file, %fieldname);
 
@@ -437,19 +437,20 @@ sub configure_queue($) {
     ($filein, $file) = &$get_name_file("postscript.cfg");
     %fieldname = ();
     $fieldname{gsdevice}       = $dbentry->{GSDRIVER};
-    $fieldname{papersize}      = $entry->{PAPERSIZES} ? $entry->{PAPERSIZES} : "letter";
-    $fieldname{resolution}     = ($entry->{RESOLUTION} eq "Default") ? "Default" : "";
-    $fieldname{color}          =
-      do {
-	  if ($dbentry->{GSDRIVER} eq "uniprint") {
-	      ($entry->{BITSPERPIXEL} eq "Default") ? "-dBitsPerPixel=Default" : "";
-	  } else {
-	      $entry->{BITSPERPIXEL};
-	  }
-      };
+    $fieldname{papersize}      = $entry->{PAPERSIZE} ? $entry->{PAPERSIZE} : "letter";
+    $fieldname{resolution}     = $entry->{RESOLUTION}; #-($entry->{RESOLUTION} eq "Default") ? "Default" : "";
+    $fieldname{color}          = $entry->{BITSPERPIXEL} ne "Default" &&
+      (($dbentry->{GSDRIVER} ne "uniprint" && "-dBitsPerPixel=") . $entry->{BITSPERPIXEL});
+#-      do {
+#-	  if ($dbentry->{GSDRIVER} ne "uniprint") {
+#-	      ($entry->{BITSPERPIXEL} eq "Default") ? "-dBitsPerPixel=Default" : "";
+#-	  } else {
+#-	      $entry->{BITSPERPIXEL};
+#-	  }
+#-      };
     $fieldname{reversepages}   = "NO";
     $fieldname{extragsoptions} = "";
-    $fieldname{pssendeof}      = ($dbentry->{GSDRIVER} eq "POSTSCRIPT") ? "NO" : "YES";
+    $fieldname{pssendeof}      = ($dbentry->{GSDRIVER} ne "POSTSCRIPT") ? "NO" : "YES";
     $fieldname{nup}            = "1";
     $fieldname{rtlftmar}       = "18";
     $fieldname{topbotmar}      = "18";
@@ -460,7 +461,7 @@ sub configure_queue($) {
     %fieldname = ();
     $fieldname{textonlyoptions} = "";
     $fieldname{crlftrans}       = $entry->{CRLF} ? "YES" : "";
-    $fieldname{textsendeof}     = "1";
+    $fieldname{textsendeof}     = ($dbentry->{GSDRIVER} eq "POSTSCRIPT") ? "NO" : "YES";
     create_config_file($filein, $file, %fieldname);
 
     if ($entry->{TYPE} eq "SMB") {
@@ -495,7 +496,7 @@ sub configure_queue($) {
     }
 
     print PRINTCAP $intro_printcap_test;
-    printf PRINTCAP "##PRINTTOOL3##  %s %s %s %s %s %s %s \n",
+    printf PRINTCAP "##PRINTTOOL3##  %s %s %s %s %s %s %s%s\n",
       $entry->{TYPE},
 	$dbentry->{GSDRIVER},
 	  $entry->{RESOLUTION},
@@ -503,7 +504,7 @@ sub configure_queue($) {
 	      "{}",
 		$dbentry->{ENTRY},
 		  $entry->{BITSPERPIXEL},
-		    $entry->{CRLF} ? "1" : "";
+		    $entry->{CRLF} ? " 1" : "";
 
 
     print PRINTCAP "$entry->{QUEUE}:\\\n";

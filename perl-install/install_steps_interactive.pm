@@ -96,11 +96,29 @@ sub selectRootPartition($@) {
 #------------------------------------------------------------------------------
 sub selectInstallClass($@) {
     my ($o, @classes) = @_;
-    my %c; $c{$_} = ucfirst translate($_) foreach @classes;
-    $o->{installClass} = ${{reverse %c}}{
-      $o->ask_from_list(_("Install Class"),
-			_("What installation class do you want?"),
-			[ map { $c{$_} } @classes ], $c{$o->{installClass}})};
+    my @c = qw(beginner specific expert);
+    my %c = (
+	     beginner  => _("Recommended"),
+	     specific  => _("Personalized"),
+	     expert    => _("Expert"),
+	    );
+    my $installClass = ${{reverse %c}}{$o->ask_from_list(_("Install Class"),
+							 _("What installation class do you want?"),
+							 [ map { $c{$_} } @c ], $c{$o->{installClass}} || $c{specific})};
+    $::expert   = $installClass eq "expert";
+    $::beginner = $installClass eq "beginner";
+
+    if ($::beginner) {
+	$o->{installClass} = $installClass;
+    } else {
+	my %c = (
+		 developer => _("Developement"),
+		 server    => _("Server"),
+		);
+	$o->{installClass} = ${{reverse %c}}{$o->ask_from_list(_("Install Class"),
+							       _("What usage do you want?"),
+							       [ values %c ], $c{$o->{installClass}})};
+    }
     install_steps::selectInstallClass($o);
 }
 
@@ -341,8 +359,6 @@ sub printerConfig($) {
 
     $o->{printer}{complete} = 0;
     if ($::expert) {
-	#std info
-	#Don't wait, if the user enter something, you must remember it
 	$o->ask_from_entries_ref(_("Local Printer Options"),
 				 _("Every print queue (which print jobs are directed to) needs a
 name (often lp) and a spool directory associated with it. What
@@ -392,8 +408,6 @@ name and directory should be used for this queue?"),
 					    [_("Printer Device:")],
 					    [{val => \$o->{printer}{DEVICE}, list => \@port }],
 					   );
-	#-TAKE A GOODDEFAULT TODO
-
     } elsif ($o->{printer}{TYPE} eq "REMOTE") {
 	return if !$o->ask_from_entries_ref(_("Remote lpd Printer Options"),
 					    _("To use a remote lpd print queue, you need to supply
@@ -425,9 +439,8 @@ applicable user name, password, and workgroup information."),
 		 }
 		 return 0;
 	     },
-
 					   );
-    } else {#($o->{printer}{TYPE} eq "NCP") {
+    } elsif ($o->{printer}{TYPE} eq "NCP") {
 	return if !$o->ask_from_entries_ref(_("NetWare Printer Options"),
 	    _("To print to a NetWare printer, you need to provide the
 NetWare print server name (Note! it may be different from its
@@ -440,81 +453,85 @@ wish to access and any applicable user name and password."),
 					   );
     }
 
+    my $action;
+    my @action = qw(ascii ps change done);
+    my %action = (
+		  ascii  => _("Print test ascii page"),
+		  ps     => _("Print test postscript page"),
+		  change => _("Change printer"),
+		  done   => _("Done"),
+		 );
 
+    do {
+	$o->{printer}{DBENTRY} =
+	  $printer::descr_to_db{
+				$o->ask_from_list_(_("Configure Printer"),
+						   _("What type of printer do you have?"),
+						   [@printer::entry_db_description],
+						   $printer::db_to_descr{$o->{printer}{DBENTRY}},
+						  )
+			       };
 
-    $o->{printer}{DBENTRY} =
-      $printer::descr_to_db{
-		   $o->ask_from_list_(_("Configure Printer"),
-				      _("What type of printer do you have?"),
-				      [@printer::entry_db_description],
-				      $printer::db_to_descr{$o->{printer}{DBENTRY}},
-				     )
-		  };
+	my %db_entry = %{$printer::thedb{$o->{printer}{DBENTRY}}};
 
-    my %db_entry = %{$printer::thedb{$o->{printer}{DBENTRY}}};
-
-
-    #-paper size conf
-    $o->{printer}{PAPERSIZE} =
-      $o->ask_from_list_(_("Paper Size"),
-			 _("Paper Size"),
-			 \@printer::papersize_type,
-			 $o->{printer}{PAPERSIZE}
-			);
-
-    #-resolution size conf
-    my @list_res = @{$db_entry{RESOLUTION}};
-    my @res = map { "${$_}{XDPI}x${$_}{YDPI}" } @list_res;
-    if (@list_res) {
-	$o->{printer}{RESOLUTION} = $o->ask_from_list_(_("Resolution"),
-						       _("Resolution"),
-						       \@res,
-						       $o->{printer}{RESOLUTION},
-						      );
-    } else {
-	$o->{printer}{RESOLUTION} = "Default";
-    }
-
-    $o->{printer}{CRLF} = $db_entry{DESCR} =~ /HP/;
-    $o->{printer}{CRLF}= $o->ask_yesorno(_("CRLF"),
-					 _("Fix stair-stepping text?"),
-					 $o->{printer}{CRLF});
-
-
-    #-color_depth
-    if ($db_entry{BITSPERPIXEL}) {
-	my @list_col      = @{$db_entry{BITSPERPIXEL}};
+	my @list_res = @{$db_entry{RESOLUTION} || []};
+	my @res = map { "$_->{XDPI}x$_->{YDPI}" } @list_res;
+	my @list_col      = @{$db_entry{BITSPERPIXEL} || []};
 	my @col           = map { "$_->{DEPTH} $_->{DESCR}" } @list_col;
 	my %col_to_depth  = map { ("$_->{DEPTH} $_->{DESCR}", $_->{DEPTH}) } @list_col;
 	my %depth_to_col  = reverse %col_to_depth;
+	my $is_uniprint = $db_entry{GSDRIVER} eq "uniprint";
 
-	if (@list_col) {
-	    my $is_uniprint = $db_entry{GSDRIVER} eq "uniprint";
-	    if ($is_uniprint) {
-		$o->{printer}{BITSPERPIXEL} =
-		  $col_to_depth{$o->ask_from_list_
-				(_("Configure Uniprint Driver"),
-				 _("You may now set the Uniprint driver options for this printer."),
-				 \@col,
-				 $depth_to_col{$o->{printer}{BITSPERPIXEL}},
-				)};
+	$o->{printer}{RESOLUTION} = "Default" unless @list_res;
+	$o->{printer}{CRLF} = $db_entry{DESCR} =~ /HP/;
+	$o->{printer}{BITSPERPIXEL} = "Default" unless @list_col;
 
-	    } else {
-		$o->{printer}{BITSPERPIXEL} =
-		  $col_to_depth{$o->ask_from_list_
-				(_("Configure Color Depth"),
-				 _("You may now configure the color options for this printer."),
-				 \@col,
-				 $depth_to_col{$o->{printer}{BITSPERPIXEL}},
-				)};
+	$o->{printer}{BITSPERPIXEL} = $depth_to_col{$o->{printer}{BITSPERPIXEL}} || $o->{printer}{BITSPERPIXEL}; #- translate.
+
+	my @l = (
+_("Paper Size") => { val => \$o->{printer}{PAPERSIZE}, type => 'list', , not_edit => !$::expert, list => \@printer::papersize_type },
+@list_res ? (
+_("Resolution") => { val => \$o->{printer}{RESOLUTION}, type => 'list', , not_edit => !$::expert, list => \@res } ) : (),
+_("Fix stair-stepping text?") => { val => \$o->{printer}{CRLF}, type => "bool" },
+@list_col ? (
+$is_uniprint ? (
+_("Uniprint driver options") => { val => \$o->{printer}{BITSPERPIXEL}, type => 'list', , not_edit => !$::expert, list => \@col } ) : (
+_("Color depth options") => { val => \$o->{printer}{BITSPERPIXEL}, type => 'list', , not_edit => !$::expert, list => \@col } ), ) : ()
+);
+
+	$o->ask_from_entries_ref('',
+				 _("Printer options"),
+				 [ grep_index { even($::i) } @l ],
+				 [ grep_index {  odd($::i) } @l ]);
+
+	$o->{printer}{BITSPERPIXEL} = $col_to_depth{$o->{printer}{BITSPERPIXEL}} || $o->{printer}{BITSPERPIXEL}; #- translate.
+
+	$o->{printer}{complete} = 1;
+	install_steps::printerConfig($o);
+	$o->{printer}{complete} = 0;
+	do {
+	    $action = ${{reverse %action}}{$o->ask_from_list('', _("What do you want to do"),
+							     [ map { $action{$_} } @action ], $action{'done'})};
+
+	    my $pidlpd;
+	    my $testpage = ($action eq 'ascii' && ".asc" ||
+			    $action eq 'ps' && (($o->{printer}{PAPERSIZE} eq 'a4' && "-a4") .".ps"));
+	    $testpage = $testpage && "/usr/lib/rhs/rhs-printfilters/testpage$testpage";
+
+	    if ($testpage) {
+		#- restart lpd with blank spool queue.
+		foreach (("/var/spool/lpd/$o->{printer}{QUEUE}/lock", "/var/spool/lpd/lpd.lock")) {
+		    $pidlpd = (cat_("$o->{prefix}$_"))[0]; kill 'TERM', $pidlpd if $pidlpd;
+		    unlink "$o->{prefix}$_";
+		}
+		run_program::rooted($o->{prefix}, "lprm", "-P$o->{printer}{QUEUE}", "-");
+		run_program::rooted($o->{prefix}, "lpd");
+
+		run_program::rooted($o->{prefix}, "lpr", "-P$o->{printer}{QUEUE}", $testpage);
 	    }
-	} else {
-	    $o->{printer}{BITSPERPIXEL} = "Default";
-	}
-    }
+	} while ($action ne 'change' && $action ne 'done');
+    } while ($action ne 'done');
     $o->{printer}{complete} = 1;
-
-    install_steps::printerConfig($o);
 }
 
 

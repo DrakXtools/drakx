@@ -157,7 +157,7 @@ $o = $::o = {
                  PAPERSIZE => "legal",
                  CRLF      => 0,
 
-                 DEVICE    => "/dev/lp",
+                 DEVICE    => "/dev/lp0",
 
                  REMOTEHOST => "",
                  REMOTEQUEUE => "",
@@ -249,8 +249,6 @@ sub selectPath {
 sub selectInstallClass {
     $o->selectInstallClass(@install_classes);
 
-    $::expert   = $o->{installClass} eq "expert";
-    $::beginner = $o->{installClass} eq "beginner";
     $o->{partitions} ||= $suggestedPartitions{$o->{installClass}};
 
     if ($o->{steps}{choosePackages}{entered} >= 1 && !$o->{steps}{doInstallStep}{done}) {
