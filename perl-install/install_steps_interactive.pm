@@ -228,7 +228,7 @@ name and directory should be used for this queue?"),
 				 changed => sub 
 				 { 
 				     $o->{printer}{SPOOLDIR} 
-				       = "$printer::spooldir$o->{printer}{QUEUE}" unless $_[0];
+				       = "$printer::spooldir/$o->{printer}{QUEUE}" unless $_[0];
 				 },
 				);
     }
@@ -242,13 +242,17 @@ name and directory should be used for this queue?"),
     $o->{printer}{TYPE} = $printer::printer_type{$o->{printer}{str_type}};
     
     if ($o->{printer}{TYPE} eq "LOCAL") {
-	eval { modules::load("lp"); };
+	{
+	    my $w = $o->wait_message(_("Test ports"), _("Detecting devices..."));
+	    eval { modules::load("lp"); };
+	}
 	my @port = ();
 	foreach ("lp0", "lp1", "lp2") {
 	    local *LP;
 	    push @port, "/dev/$_" if open LP, ">/dev/$_"
 	}
 	eval { modules::unload("lp") };
+	
 #	@port =("lp0", "lp1", "lp2");
 	$o->{printer}{DEVICE}    = $port[0] if $port[0];
 
@@ -350,33 +354,35 @@ wish to access and any applicable user name and password."),
 
 
     #color_depth
-    my @list_col      = @{$db_entry{BITSPERPIXEL}};
-    my @col           = map { "$_->{DEPTH} $_->{DESCR}" } @list_col;
-    my %col_to_depth  = map { ("$_->{DEPTH} $_->{DESCR}", $_->{DEPTH}) } @list_col;
-    my %depth_to_col  = reverse %col_to_depth;
-
-    if (@list_col) {
-	my $is_uniprint = $db_entry{GSDRIVER} eq "uniprint";
-	if ($is_uniprint) {
-	    $o->{printer}{BITSPERPIXEL} = 
-	      $col_to_depth{$o->ask_from_list_
-			    (_("Configure Uniprint Driver"),
-			     _("You may now configure the uniprint options for this printer."),
-			     \@col,
-			     $depth_to_col{$o->{printer}{BITSPERPIXEL}},
-			    )};
+    if ($db_entry{BITSPERPIXEL}) {
+	my @list_col      = @{$db_entry{BITSPERPIXEL}};
+	my @col           = map { "$_->{DEPTH} $_->{DESCR}" } @list_col;
+	my %col_to_depth  = map { ("$_->{DEPTH} $_->{DESCR}", $_->{DEPTH}) } @list_col;
+	my %depth_to_col  = reverse %col_to_depth;
+	
+	if (@list_col) {
+	    my $is_uniprint = $db_entry{GSDRIVER} eq "uniprint";
+	    if ($is_uniprint) {
+		$o->{printer}{BITSPERPIXEL} = 
+		  $col_to_depth{$o->ask_from_list_
+				(_("Configure Uniprint Driver"),
+				 _("You may now configure the uniprint options for this printer."),
+				 \@col,
+				 $depth_to_col{$o->{printer}{BITSPERPIXEL}},
+				)};
 	    
+	    } else {
+		$o->{printer}{BITSPERPIXEL} = 
+		  $col_to_depth{$o->ask_from_list_
+				(_("Configure Color Depth"),
+				 _("You may now configure the color options for this printer."),
+				 \@col,
+				 $depth_to_col{$o->{printer}{BITSPERPIXEL}},
+				)};
+	    }
 	} else {
-	    $o->{printer}{BITSPERPIXEL} = 
-	      $col_to_depth{$o->ask_from_list_
-			    (_("Configure Color Depth"),
-			     _("You may now configure the color options for this printer."),
-			     \@col,
-			     $depth_to_col{$o->{printer}{BITSPERPIXEL}},
-			    )};
+	    $o->{printer}{BITSPERPIXEL} = "Default";
 	}
-    } else {
-	$o->{printer}{BITSPERPIXEL} = "Default";
     }
     $o->{printer}{complete} = 1;
 
@@ -415,13 +421,12 @@ sub addUser($) {
     my @fields = qw(name password password2 realname);
 
     my @shells = install_any::shells($o);
-    @shells = qw( /bin/bash /nide);
 
     $o->ask_from_entries_ref(_("Add user"),
 			     _("Enter a user"),
 			     [_("User name"), _("Password"), _("Password (again)"), _("Real name"), _("Shell"),],
 			     [(map { \$sup->{$_}} @fields), 
-			      {val => \$sup->{shell}, list => \@shells},
+			      {val => \$sup->{shell}, list => \@shells, not_edit => !$::expert},
 			     ],
 			     complete => sub {
 			     $sup->{password} eq $sup->{password2} or $o->ask_warn('', [ _("You must enter the same password"), _("Please try again") ]), return (1,2);

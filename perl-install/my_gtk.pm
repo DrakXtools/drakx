@@ -334,7 +334,7 @@ sub _ask_from_entry($$@) {
 }
 sub _ask_from_list($$$$) {
     my ($o, $messages, $l, $def) = @_;
-    my $list = new Gtk::List;
+    my $list = new Gtk::List();
     my ($first_time, $starting_word) = (1, '');
     my (@widgets, $timeout);
     $list->signal_connect(select_child => sub {
@@ -374,13 +374,35 @@ sub _ask_from_list($$$$) {
 #	push @::ask_from_list_widgets, $w; # hack!! to not get SIGSEGV
 	push @widgets, $w;
     } @$l;
+#    $scroll_win->set_policy("automatic","automatic");
+#    my $scroll_win = @widgets > 15 ? gtkset_usize(createScrolledWindow($list), 200, 280) : $list;
     gtkadd($list, @widgets);
+#    $list->set_selection_mode("extended");
+    my $scroll_win = do {
+	if (@widgets > 15) {
+	    my $win = createScrolledWindow($list);
+	    gtkset_usize($win, 200, 280);
+	    $list->set_focus_vadjustment($win->get_vadjustment);
+	    $list->set_focus_hadjustment($win->get_hadjustment);
+#	    my $adj = create_adjustment(45,0,200);
+#	    $win->set_hadjustment($adj);
+#	    my $adj = $win->get_vadjustment;
+#	    $adj->set_value(45200);
+#	    $list->set_focus_vadjustment(new Gtk::Adjustment(45));
+#	    $widgets[$def]->visible(1);
+#	    $list->set_focus_child($widgets[$def]);
+#           $list->select_item($def);
+#	    $widgets[$def]->toggle_focus_row();
+	    $win;
+	} else {
+	    $list;
+	}
+    };
     gtkadd($o->{window}, 
 	   gtkpack($o->create_box_with_title(@$messages), 
-		   @widgets > 15 ? 
-		     gtkset_usize(createScrolledWindow($list), 200, 280) : 
-		     $list));
+		   $scroll_win));
     $widgets[$def]->grab_focus;
+
 }
 
 sub _ask_warn($@) {

@@ -255,7 +255,7 @@ my $PRINTER_FILTER_DIR = "/usr/lib/rhs/rhs-printfilters";
     NCP      => [qw(NCPHOST NCPQUEUE NCPUSER NCPPASSWD)],
 );
 @papersize_type = qw(letter legal ledger a3 a4);
-$spooldir       = "/var/spool/lpd/";
+$spooldir       = "/var/spool/lpd";
 
 #-#####################################################################################
 
@@ -329,10 +329,12 @@ sub read_printer_db(;$) {
 #------------------------------------------------------------------------------
 sub create_spool_dir($) {
     my ($queue_path) = @_;
-    my $complete_path = "$prefix$queue_path";
-
-    mkdir "$complete_path", 0755
-      or die "An error has occurred - can't create $complete_path : $!";
+    my $complete_path = "$prefix/$queue_path";
+    
+    unless (-d $complete_path) {
+	mkdir "$complete_path", 0755
+	  or die "An error has occurred - can't create $complete_path : $!";
+    }
 	
     #-redhat want that "drwxr-xr-x root lp"
     my $gid_lp = (getpwnam("lp"))[3];
@@ -348,7 +350,7 @@ sub create_spool_dir($) {
 #------------------------------------------------------------------------------
 sub create_config_file($$%) {
     my ($inputfile, $outpufile, %toreplace) = @_;
-    my ($in, $out) = ("$prefix$inputfile", "$prefix$outpufile");
+    my ($in, $out) = ("$prefix/$inputfile", "$prefix/$outpufile");
     local *OUT;
     local *IN;
     
@@ -356,20 +358,18 @@ sub create_config_file($$%) {
 
     open IN , "<$in"  or die "Can't open $in $!";
     if ($::testing) {
-	open OUT, ">$out" or die "Can't open $out $!";
-    } else {
 	*OUT = *STDOUT
+    } else {
+	open OUT, ">$out" or die "Can't open $out $!";
     }
     
     while (<IN>) {
 	if (/@@@(.*)@@@/) {
-	    my $r = $toreplace{$1} or die "I can't replace $1";
+	    my $r = $toreplace{$1};
 	    s/@@@(.*)@@@/$r/g;
 	}
 	print OUT;
     }
-   
-    
 }
 
 
@@ -414,7 +414,7 @@ sub configure_queue($) {
 
     my $get_name_file = sub { 
 	my ($name) = @_; 
-	("$PRINTER_FILTER_DIR/$name.in", "$entry->{SPOOLDIR}$name")
+	("$PRINTER_FILTER_DIR/$name.in", "$entry->{SPOOLDIR}/$name")
     };
     my ($filein, $file);
     my %fieldname = ();
@@ -484,9 +484,9 @@ sub configure_queue($) {
     #-now the printcap file
     local *PRINTCAP;
     if ($::testing) {
-	open PRINTCAP, ">$prefix/etc/printcap" or die "Can't open printcap file $!";
-    } else {
 	*PRINTCAP = *STDOUT;
+    } else {
+	open PRINTCAP, ">$prefix/etc/printcap" or die "Can't open printcap file $!";
     }
     
     print PRINTCAP $intro_printcap_test;
@@ -513,11 +513,11 @@ sub configure_queue($) {
     } else {
 	#- (pcentry->Type == (PRINTER_SMB | PRINTER_NCP))
 	print PRINTCAP "\t:lp=/dev/null:\\\n";
-	print PRINTCAP "\t:af=$entry->{SPOOLDIR}acct\\\n";
+	print PRINTCAP "\t:af=$entry->{SPOOLDIR}/acct\\\n";
     }
 
     #- cheating to get the input filter!
-    print PRINTCAP "\t:if=$entry->{SPOOLDIR}filter:\n";
+    print PRINTCAP "\t:if=$entry->{SPOOLDIR}/filter:\n";
 	
 }
 

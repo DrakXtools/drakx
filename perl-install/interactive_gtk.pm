@@ -86,6 +86,7 @@ sub ask_from_entries_refW {
 	    $depth_combo->set_use_arrows_always(1);
 	    $depth_combo->entry->set_editable(!$_->{not_edit});
 	    $depth_combo->set_popdown_strings(@{$_->{list}});
+	    $depth_combo->disable_activate;
 	    $depth_combo;
 	} else {
 	    new Gtk::Entry;
@@ -126,7 +127,7 @@ sub ask_from_entries_refW {
 	comb_entry($entry,$val->[$i])->signal_connect(changed => $callback);
 	comb_entry($entry,$val->[$i])->signal_connect(activate => sub {
 				   ($ind == ($num_champs -1)) ?
-				     $w->{ok}->grab_focus() : comb_entry($entries[$ind+1],$val->[$ind+1])->grab_focus();
+				     ($w->{ok}->grab_focus(), ) : (comb_entry($entries[$ind+1],$val->[$ind+1])->grab_focus(),$_[0]->signal_emit_stop("activate")) ;
 			       });
 	comb_entry($entry,$val->[$i])->set_text(${$val->[$i]{val}})  if ${$val->[$i]{val}};
 	comb_entry($entry,$val->[$i])->set_visibility(0) if $l->[$i] =~ /password/i;

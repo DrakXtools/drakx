@@ -287,10 +287,11 @@ $o = $::o = {
                    GMT      => 1,
                 },
     printer => { 
+                 want     => 1,
                  complete => 0,
                  str_type => $printer::printer_type[0],
                  QUEUE    => "lp",
-                 SPOOLDIR => "/var/spool/lpd/lp/",
+                 SPOOLDIR => "/var/spool/lpd/lp",
                  DBENTRY  => "DeskJet670",
                  PAPERSIZE => "legal",
                  CRLF      => 0,
@@ -473,7 +474,7 @@ sub configureNetwork {
 sub configureTimezone { 
     my ($clicked) = $_[0];
     my $f = "$o->{prefix}/etc/sysconfig/clock";
-    return if ((-s $f) || 0) > 0 && $_[1] == 1 && !$clicked;
+    return if ((-s $f) || 0) > 0 && $_[1] == 1 && !$clicked && !$::testing;
 
     $o->timeConfig($f);
 }

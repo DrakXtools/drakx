@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: panoramix VERSION\n"
-"POT-Creation-Date: 1999-09-05 13:02+0200\n"
+"POT-Creation-Date: 1999-09-05 23:27+0200\n"
 "PO-Revision-Date: 1999-08-25 11:07+0200\n"
 "Last-Translator: Terje Bjerkelia <terje@bjerkelia.com>\n"
 "Language-Team: norwegian\n"
@@ -64,8 +64,8 @@ msgstr "En feil oppsto, prøv å endre noen parametere"
 msgid "Automatic resolutions"
 msgstr "Automatiske oppløsninger"
 
-#: ../Xconfigurator.pm_.c:333 ../install_steps_interactive.pm_.c:294
-#: ../install_steps_interactive.pm_.c:295
+#: ../Xconfigurator.pm_.c:333 ../install_steps_interactive.pm_.c:341
+#: ../install_steps_interactive.pm_.c:342
 msgid "Resolution"
 msgstr "Oppløsning"
 
@@ -515,7 +515,7 @@ msgstr "Les nøye!"
 msgid "all data on this partition will be lost"
 msgstr "alle data på denne partisjonen vil gå tapt"
 
-#: ../diskdrake.pm_.c:136 ../install2.pm_.c:404 ../install_steps.pm_.c:76
+#: ../diskdrake.pm_.c:136 ../install2.pm_.c:405 ../install_steps.pm_.c:69
 #: ../install_steps_interactive.pm_.c:33
 msgid "Error"
 msgstr "Feil"
@@ -670,7 +670,7 @@ msgstr "Du må starte maskinen på nytt for at modifiseringene skal tre i kraft"
 msgid "Computing fat filesystem bounds"
 msgstr "Beregner fat filsystemgrense"
 
-#: ../diskdrake.pm_.c:425 ../diskdrake.pm_.c:461 ../interactive_gtk.pm_.c:169
+#: ../diskdrake.pm_.c:425 ../diskdrake.pm_.c:461 ../interactive_gtk.pm_.c:173
 msgid "Resizing"
 msgstr "Endrer størrelse"
 
@@ -1013,7 +1013,8 @@ msgstr "Konfigurer X"
 msgid "Configure printer"
 msgstr "Konfigurer X"
 
-#: ../install2.pm_.c:187 ../install_steps_graphical.pm_.c:447
+#: ../install2.pm_.c:187 ../install_steps_interactive.pm_.c:400
+#: ../install_steps_interactive.pm_.c:401
 msgid "Set root password"
 msgstr "Sett root passord"
 
@@ -1053,7 +1054,7 @@ msgstr "ekspert"
 msgid "server"
 msgstr "tjener"
 
-#: ../install2.pm_.c:414
+#: ../install2.pm_.c:415
 msgid ""
 "An error has occurred - no valid devices were found on which to create new "
 "filesystems. Please check your hardware for the cause of this problem"
@@ -1061,156 +1062,70 @@ msgstr ""
 "En feil har oppstått - ingen gyldige enheter ble funnet for å opprette nye "
 "filsystemer. Vennligst sjekk maskinvaren din for årsaken til dette problemet"
 
-#: ../install2.pm_.c:429
+#: ../install2.pm_.c:430
 msgid "partitioning failed: no root filesystem"
 msgstr "partisjonering feilet: intet root filsystem"
 
-#: ../install_steps.pm_.c:274
+#: ../install_steps.pm_.c:269
 msgid "no floppy available"
 msgstr ""
 
-#: ../install_steps_graphical.pm_.c:209
+#: ../install_steps_graphical.pm_.c:225
 msgid "Hide"
 msgstr "Gjem"
 
-#: ../install_steps_graphical.pm_.c:209
+#: ../install_steps_graphical.pm_.c:225
 msgid "Show All"
 msgstr "Vis alle"
 
-#: ../install_steps_graphical.pm_.c:213
+#: ../install_steps_graphical.pm_.c:229
 msgid "Select All"
 msgstr "Velg alle"
 
-#: ../install_steps_graphical.pm_.c:213
+#: ../install_steps_graphical.pm_.c:229
 msgid "Unselect All"
 msgstr "Fjern alle"
 
-#: ../install_steps_graphical.pm_.c:280
+#: ../install_steps_graphical.pm_.c:296
 msgid "Choose the packages you want to install"
 msgstr "Velg pakker du ønsker å installere"
 
-#: ../install_steps_graphical.pm_.c:291
+#: ../install_steps_graphical.pm_.c:307
 msgid " Mb"
 msgstr "Mb"
 
-#: ../install_steps_graphical.pm_.c:291
+#: ../install_steps_graphical.pm_.c:307
 msgid "Total size: "
 msgstr "Total størrelse: "
 
-#: ../install_steps_graphical.pm_.c:292
+#: ../install_steps_graphical.pm_.c:308
 msgid "Info"
 msgstr ""
 
-#: ../install_steps_graphical.pm_.c:317
+#: ../install_steps_graphical.pm_.c:334
 msgid "Installing"
 msgstr "Installerer"
 
-#: ../install_steps_graphical.pm_.c:323
+#: ../install_steps_graphical.pm_.c:340
 msgid "Please wait, "
 msgstr "Vennligst vent, "
 
-#: ../install_steps_graphical.pm_.c:325
+#: ../install_steps_graphical.pm_.c:342
 msgid "Time remaining "
 msgstr "Tid som gjenstår "
 
-#: ../install_steps_graphical.pm_.c:326
+#: ../install_steps_graphical.pm_.c:343
 msgid "Total time "
 msgstr "Total tid "
 
-#: ../install_steps_graphical.pm_.c:331
+#: ../install_steps_graphical.pm_.c:348
 msgid "preparing installation"
 msgstr "forbereder installasjon"
 
-#: ../install_steps_graphical.pm_.c:352
+#: ../install_steps_graphical.pm_.c:369
 #, c-format
 msgid "installing package %s"
 msgstr "installerer pakke %s"
-
-#: ../install_steps_graphical.pm_.c:383
-#, c-format
-msgid "Configuring network device %s"
-msgstr "Konfigurerer nettverks-enhet %s"
-
-#: ../install_steps_graphical.pm_.c:391
-msgid "IP address:"
-msgstr "IP adresse:"
-
-#: ../install_steps_graphical.pm_.c:392
-msgid "Netmask:"
-msgstr "Nettmaske:"
-
-#: ../install_steps_graphical.pm_.c:401
-msgid "IP address should be in format 1.2.3.4"
-msgstr ""
-
-#: ../install_steps_graphical.pm_.c:414
-#, fuzzy
-msgid "Configuring network"
-msgstr "Konfigurer nettverk"
-
-#: ../install_steps_graphical.pm_.c:422
-#, fuzzy
-msgid "Host name:"
-msgstr "Brukernavn"
-
-#: ../install_steps_graphical.pm_.c:423
-#, fuzzy
-msgid "DNS server:"
-msgstr "tjener"
-
-#: ../install_steps_graphical.pm_.c:424
-msgid "Gateway:"
-msgstr ""
-
-#: ../install_steps_graphical.pm_.c:425
-msgid "Gateway device:"
-msgstr ""
-
-#: ../install_steps_graphical.pm_.c:450 ../install_steps_graphical.pm_.c:479
-msgid "Password"
-msgstr "Passord"
-
-#: ../install_steps_graphical.pm_.c:451 ../install_steps_graphical.pm_.c:480
-msgid "Password (again)"
-msgstr "Passord (igjen)"
-
-#: ../install_steps_graphical.pm_.c:460 ../install_steps_graphical.pm_.c:495
-msgid "Please try again"
-msgstr "Vennligst prøv igjen"
-
-#: ../install_steps_graphical.pm_.c:460 ../install_steps_graphical.pm_.c:495
-msgid "You must enter the same password"
-msgstr "Du må skrive inn det samme passordet"
-
-#: ../install_steps_graphical.pm_.c:461
-msgid "This password is too simple"
-msgstr "Dette passordet er for enkelt"
-
-#: ../install_steps_graphical.pm_.c:474
-msgid "Add user"
-msgstr "Legg til bruker"
-
-#: ../install_steps_graphical.pm_.c:478
-msgid "User name"
-msgstr "Brukernavn"
-
-#: ../install_steps_graphical.pm_.c:481
-msgid "Real name"
-msgstr "Virkelig navn"
-
-#: ../install_steps_graphical.pm_.c:482
-msgid "Shell"
-msgstr "Skall"
-
-#: ../install_steps_graphical.pm_.c:497
-msgid "Please give a user name"
-msgstr "Vennligst oppgi et brukernavn"
-
-#: ../install_steps_graphical.pm_.c:498
-#, fuzzy
-msgid ""
-"The user name must contain only lower cased letters, numbers, `-' and `_'"
-msgstr "Brukernavnet kan kun inneholde bokstaver, tall, `-' og `_'"
 
 #: ../install_steps_interactive.pm_.c:33
 msgid "An error occurred"
@@ -1256,109 +1171,117 @@ msgstr ""
 "Du må starte maskinen på nytt for at modifiseringene av partisjonstabellen "
 "skal tre i kraft"
 
-#: ../install_steps_interactive.pm_.c:98
+#: ../install_steps_interactive.pm_.c:97
 msgid "Choose the partitions you want to format"
 msgstr "Velg de partisjonene du ønsker å formatere"
 
-#: ../install_steps_interactive.pm_.c:109
+#: ../install_steps_interactive.pm_.c:108
 #, c-format
 msgid "Formatting partition %s"
 msgstr "Formaterer partisjon %s"
 
-#: ../install_steps_interactive.pm_.c:122
+#: ../install_steps_interactive.pm_.c:125
 msgid "Keep the current IP configuration"
 msgstr "Behold nåværende IP-konfigurasjon"
 
-#: ../install_steps_interactive.pm_.c:123
+#: ../install_steps_interactive.pm_.c:126
 msgid "Reconfigure network now"
 msgstr "Rekonfigurer nettverket nå"
 
-#: ../install_steps_interactive.pm_.c:124
+#: ../install_steps_interactive.pm_.c:127
 msgid "Don't set up networking"
 msgstr "Ikke sett opp nettverk"
 
-#: ../install_steps_interactive.pm_.c:126
-#: ../install_steps_interactive.pm_.c:132
+#: ../install_steps_interactive.pm_.c:129
+#: ../install_steps_interactive.pm_.c:135
 msgid "Network Configuration"
 msgstr "Nettverks-konfigurasjon"
 
-#: ../install_steps_interactive.pm_.c:127
+#: ../install_steps_interactive.pm_.c:130
 msgid "LAN networking has already been configured. Do you want to:"
 msgstr "LAN nettverket har allerede blitt konfigurert. Vil du:"
 
-#: ../install_steps_interactive.pm_.c:133
+#: ../install_steps_interactive.pm_.c:136
 msgid ""
 "Do you want to configure LAN (not dialup) networking for your installed "
 "system?"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:179
+#: ../install_steps_interactive.pm_.c:222
 msgid "Standard Printer Options"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:180
+#: ../install_steps_interactive.pm_.c:223
 msgid ""
 "Every print queue (which print jobs are directed to) needs a \n"
 "name (often lp) and a spool directory associated with it. What \n"
 "name and directory should be used for this queue?"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:183
+#: ../install_steps_interactive.pm_.c:226
 msgid "Name of queue:"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:183
+#: ../install_steps_interactive.pm_.c:226
 msgid "Spool directory:"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:194
+#: ../install_steps_interactive.pm_.c:237
 msgid "Select Printer Connection"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:195
+#: ../install_steps_interactive.pm_.c:238
 msgid "How is the printer connected?"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:213
+#: ../install_steps_interactive.pm_.c:246
+msgid "Detecting devices..."
+msgstr ""
+
+#: ../install_steps_interactive.pm_.c:246
+msgid "Test ports"
+msgstr ""
+
+#: ../install_steps_interactive.pm_.c:260
 msgid "Local Printer Device"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:214
+#: ../install_steps_interactive.pm_.c:261
 msgid ""
 "What device is your printer connected to  \n"
 "(note that /dev/lp0 is equivalent to LPT1:)?\n"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:215
+#: ../install_steps_interactive.pm_.c:262
 #, fuzzy
 msgid "Printer Device:"
 msgstr "Enhet: "
 
-#: ../install_steps_interactive.pm_.c:221
+#: ../install_steps_interactive.pm_.c:268
 msgid "Remote lpd Printer Options"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:222
+#: ../install_steps_interactive.pm_.c:269
 msgid ""
 "To use a remote lpd print queue, you need to supply \n"
 "the hostname of the printer server and the queue name \n"
 "on that server which jobs should be placed in."
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:225
+#: ../install_steps_interactive.pm_.c:272
 #, fuzzy
 msgid "Remote hostname:"
 msgstr "Brukernavn"
 
-#: ../install_steps_interactive.pm_.c:225
+#: ../install_steps_interactive.pm_.c:272
 msgid "Remote queue:"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:230
+#: ../install_steps_interactive.pm_.c:277
 msgid "SMB/Windows 95/NT Printer Options"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:231
+#: ../install_steps_interactive.pm_.c:278
 msgid ""
 "To print to a SMB printer, you need to provide the \n"
 "SMB host name (this is not always the same as the machines \n"
@@ -1367,42 +1290,42 @@ msgid ""
 "applicable user name, password, and workgroup information."
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:236
+#: ../install_steps_interactive.pm_.c:283
 #, fuzzy
 msgid "SMB server IP:"
 msgstr "tjener"
 
-#: ../install_steps_interactive.pm_.c:236
+#: ../install_steps_interactive.pm_.c:283
 #, fuzzy
 msgid "SMB server host:"
 msgstr "tjener"
 
-#: ../install_steps_interactive.pm_.c:237
-#: ../install_steps_interactive.pm_.c:251
+#: ../install_steps_interactive.pm_.c:284
+#: ../install_steps_interactive.pm_.c:298
 #, fuzzy
 msgid "Password:"
 msgstr "Passord"
 
-#: ../install_steps_interactive.pm_.c:237
+#: ../install_steps_interactive.pm_.c:284
 #, fuzzy
 msgid "Share name:"
 msgstr "Brukernavn"
 
-#: ../install_steps_interactive.pm_.c:237
-#: ../install_steps_interactive.pm_.c:251
+#: ../install_steps_interactive.pm_.c:284
+#: ../install_steps_interactive.pm_.c:298
 #, fuzzy
 msgid "User name:"
 msgstr "Brukernavn"
 
-#: ../install_steps_interactive.pm_.c:238
+#: ../install_steps_interactive.pm_.c:285
 msgid "Workgroup:"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:245
+#: ../install_steps_interactive.pm_.c:292
 msgid "NetWare Printer Options"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:246
+#: ../install_steps_interactive.pm_.c:293
 msgid ""
 "To print to a NetWare printer, you need to provide the \n"
 "NetWare print server name (this is not always the same as the machines \n"
@@ -1410,56 +1333,112 @@ msgid ""
 "wish to access and any applicable user name and password."
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:250
+#: ../install_steps_interactive.pm_.c:297
 msgid "Print Queue Name:"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:250
+#: ../install_steps_interactive.pm_.c:297
 msgid "Printer Server:"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:272
+#: ../install_steps_interactive.pm_.c:319
 #, fuzzy
 msgid "Configure Printer"
 msgstr "Konfigurer X"
 
-#: ../install_steps_interactive.pm_.c:273
+#: ../install_steps_interactive.pm_.c:320
 #, fuzzy
 msgid "What type of printer do you have?"
 msgstr "Hva slags brukertype vil du ha?"
 
-#: ../install_steps_interactive.pm_.c:284
-#: ../install_steps_interactive.pm_.c:285
+#: ../install_steps_interactive.pm_.c:331
+#: ../install_steps_interactive.pm_.c:332
 msgid "Paper Size"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:304
+#: ../install_steps_interactive.pm_.c:351
 msgid "CRLF"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:305
+#: ../install_steps_interactive.pm_.c:352
 msgid "Fix stair-stepping of text?"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:320
+#: ../install_steps_interactive.pm_.c:368
 #, fuzzy
 msgid "Configure Uniprint Driver"
 msgstr "Konfigurer X"
 
-#: ../install_steps_interactive.pm_.c:321
+#: ../install_steps_interactive.pm_.c:369
 msgid "You may now configure the uniprint options for this printer."
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:329
+#: ../install_steps_interactive.pm_.c:377
 #, fuzzy
 msgid "Configure Color Depth"
 msgstr "Konfigurer X"
 
-#: ../install_steps_interactive.pm_.c:330
+#: ../install_steps_interactive.pm_.c:378
 msgid "You may now configure the color options for this printer."
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:350
+#: ../install_steps_interactive.pm_.c:402
+#: ../install_steps_interactive.pm_.c:427
+msgid "Password"
+msgstr "Passord"
+
+#: ../install_steps_interactive.pm_.c:402
+#: ../install_steps_interactive.pm_.c:427
+msgid "Password (again)"
+msgstr "Passord (igjen)"
+
+#: ../install_steps_interactive.pm_.c:405
+#: ../install_steps_interactive.pm_.c:432
+msgid "Please try again"
+msgstr "Vennligst prøv igjen"
+
+#: ../install_steps_interactive.pm_.c:405
+#: ../install_steps_interactive.pm_.c:432
+msgid "You must enter the same password"
+msgstr "Du må skrive inn det samme passordet"
+
+#: ../install_steps_interactive.pm_.c:406
+#: ../install_steps_interactive.pm_.c:433
+msgid "This password is too simple"
+msgstr "Dette passordet er for enkelt"
+
+#: ../install_steps_interactive.pm_.c:425
+msgid "Add user"
+msgstr "Legg til bruker"
+
+#: ../install_steps_interactive.pm_.c:426
+#, fuzzy
+msgid "Enter a user"
+msgstr "Legg til en bruker"
+
+#: ../install_steps_interactive.pm_.c:427
+msgid "Real name"
+msgstr "Virkelig navn"
+
+#: ../install_steps_interactive.pm_.c:427
+msgid "Shell"
+msgstr "Skall"
+
+#: ../install_steps_interactive.pm_.c:427
+msgid "User name"
+msgstr "Brukernavn"
+
+#: ../install_steps_interactive.pm_.c:434
+msgid "Please give a user name"
+msgstr "Vennligst oppgi et brukernavn"
+
+#: ../install_steps_interactive.pm_.c:435
+#, fuzzy
+msgid ""
+"The user name must contain only lower cased letters, numbers, `-' and `_'"
+msgstr "Brukernavnet kan kun inneholde bokstaver, tall, `-' og `_'"
+
+#: ../install_steps_interactive.pm_.c:455
 msgid ""
 "A custom bootdisk provides a way of booting into your Linux system without\n"
 "depending on the normal bootloader. This is useful if you don't want to "
@@ -1473,44 +1452,44 @@ msgid ""
 "failures. Would you like to create a bootdisk for your system?"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:358
+#: ../install_steps_interactive.pm_.c:463
 msgid "Sorry, no floppy drive available"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:361
+#: ../install_steps_interactive.pm_.c:466
 #, fuzzy
 msgid "Choose the floppy drive you want to use to make the bootdisk"
 msgstr "Velg de partisjonene du ønsker å formatere"
 
-#: ../install_steps_interactive.pm_.c:365
+#: ../install_steps_interactive.pm_.c:470
 #, c-format
 msgid "Insert a floppy in drive %s"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:366
+#: ../install_steps_interactive.pm_.c:471
 #, fuzzy
 msgid "Creating bootdisk"
 msgstr "Opprett oppstartdiskett"
 
-#: ../install_steps_interactive.pm_.c:372
+#: ../install_steps_interactive.pm_.c:478
 msgid "First sector of boot partition"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:372
+#: ../install_steps_interactive.pm_.c:478
 msgid "First sector of drive"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:375
+#: ../install_steps_interactive.pm_.c:481
 #, fuzzy
 msgid "Lilo Installation"
 msgstr "Installerer"
 
-#: ../install_steps_interactive.pm_.c:376
+#: ../install_steps_interactive.pm_.c:482
 #, fuzzy
 msgid "Where do you want to install the bootloader?"
 msgstr "Hvor vil du montere %s enheten?"
 
-#: ../install_steps_interactive.pm_.c:386
+#: ../install_steps_interactive.pm_.c:493
 msgid ""
 "Congratulations, installation is complete.\n"
 "Remove the boot media and press return to reboot.\n"
@@ -1521,43 +1500,43 @@ msgid ""
 "install chapter of the Official Linux Mandrake User's Guide."
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:399
+#: ../install_steps_interactive.pm_.c:510
 #, fuzzy, c-format
 msgid "What %s card have you?"
 msgstr "Hva slags scsi-kort har du?"
 
-#: ../install_steps_interactive.pm_.c:409
+#: ../install_steps_interactive.pm_.c:520
 msgid "Autoprobe"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:409
+#: ../install_steps_interactive.pm_.c:520
 msgid "Specify options"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:416
+#: ../install_steps_interactive.pm_.c:527
 msgid "Module options:"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:434
+#: ../install_steps_interactive.pm_.c:546
 #, fuzzy, c-format
 msgid "Installing driver for %s card %s"
 msgstr "Installerer driver for scsi-kort %s"
 
-#: ../install_steps_interactive.pm_.c:435
+#: ../install_steps_interactive.pm_.c:547
 #, c-format
 msgid "(module %s)"
 msgstr "(modul %s)"
 
-#: ../install_steps_interactive.pm_.c:448
+#: ../install_steps_interactive.pm_.c:561
 #, fuzzy, c-format
 msgid "Found %s %s interfaces"
 msgstr " scsi grensesnitt"
 
-#: ../install_steps_interactive.pm_.c:449
+#: ../install_steps_interactive.pm_.c:562
 msgid "Do you have another one?"
 msgstr "Har du enda ett?"
 
-#: ../install_steps_interactive.pm_.c:450
+#: ../install_steps_interactive.pm_.c:563
 #, fuzzy, c-format
 msgid "Do you have an %s interface?"
 msgstr "Har du et scsi grensesnitt"
@@ -1568,7 +1547,7 @@ msgid "Starting step `%s'\n"
 msgstr "Starter steg `%s'\n"
 
 #: ../interactive.pm_.c:42 ../interactive.pm_.c:52 ../my_gtk.pm_.c:174
-#: ../my_gtk.pm_.c:316 ../my_gtk.pm_.c:390
+#: ../my_gtk.pm_.c:316 ../my_gtk.pm_.c:412
 msgid "Ok"
 msgstr "Ok"
 
@@ -1584,7 +1563,7 @@ msgstr "Ja"
 msgid "Cancel"
 msgstr "Avbryt"
 
-#: ../interactive.pm_.c:118
+#: ../interactive.pm_.c:125
 msgid "Please wait"
 msgstr "Vennligst vent"
 
@@ -1757,6 +1736,27 @@ msgstr "Dårlig backup-fil"
 #, c-format
 msgid "Error writing to file %s"
 msgstr "Feil ved skriving til fil %s"
+
+#~ msgid "Configuring network device %s"
+#~ msgstr "Konfigurerer nettverks-enhet %s"
+
+#~ msgid "IP address:"
+#~ msgstr "IP adresse:"
+
+#~ msgid "Netmask:"
+#~ msgstr "Nettmaske:"
+
+#, fuzzy
+#~ msgid "Configuring network"
+#~ msgstr "Konfigurer nettverk"
+
+#, fuzzy
+#~ msgid "Host name:"
+#~ msgstr "Brukernavn"
+
+#, fuzzy
+#~ msgid "DNS server:"
+#~ msgstr "tjener"
 
 #, fuzzy
 #~ msgid "Printer"
