@@ -489,9 +489,9 @@ sub create_okcancel {
     if (defined $o_cancel || defined $o_ok) {
         $cancel = $o_cancel;
     } elsif (!$::Wizard_no_previous) {
-        $cancel = $::isWizard ? N("<- Previous") : N("Cancel");
+        $cancel = $::isWizard ? N("Previous") : N("Cancel");
     }
-    my $ok = defined $o_ok ? $o_ok : $::isWizard ? ($::Wizard_finished ? N("Finish") : N("Next ->")) : N("Ok");
+    my $ok = defined $o_ok ? $o_ok : $::isWizard ? ($::Wizard_finished ? N("Finish") : N("Next")) : N("Ok");
     my $bok = $ok && gtksignal_connect($w->{ok} = Gtk2::Button->new($ok), clicked => $w->{ok_clicked} || sub { $w->{retval} = 1; Gtk2->main_quit });
     my $bprev;
     if ($cancel) {
