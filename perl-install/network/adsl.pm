@@ -6,7 +6,7 @@ use network::tools;
 use network::ethernet;
 
 use vars qw(@ISA @EXPORT);
-use globals qw($in $prefix $install);
+use globals "network", qw($in $prefix $install);
 
 @ISA = qw(Exporter);
 @EXPORT = qw(adsl_ask_info adsl_detect adsl_conf adsl_conf_backend);

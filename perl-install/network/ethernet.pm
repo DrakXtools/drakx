@@ -6,7 +6,7 @@ use any;
 use detect_devices;
 use common qw(:file);
 use vars qw(@ISA @EXPORT);
-use globals qw($in $prefix $install);
+use globals "network", qw($in $prefix $install);
 
 @ISA = qw(Exporter);
 @EXPORT = qw(conf_network_card conf_network_card_backend go_ethernet);
@@ -49,6 +49,7 @@ Default is dhcpcd"),
 sub configure_lan {
     my ($netcnx, $netc, $intf, $first_time) = @_;
     $::isInstall and $in->set_help('configureNetworkIP');
+    print "plop2 ------------ $in ----------- \n";
     require Data::Dumper;
     print "plop :" . Data::Dumper->Dump([\$in], ['$in']) . "\n";
     network::configureNetwork($prefix, $netc, $in, $intf, $first_time) or return;

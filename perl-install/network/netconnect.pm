@@ -18,7 +18,7 @@ use commands;
 #require Data::Dumper;
 
 use network::tools;
-use globals qw($in $prefix $install);
+use globals "network", qw($in $prefix $install);
 
 $connect_file = "/etc/sysconfig/network-scripts/net_cnx_up";
 $disconnect_file = "/etc/sysconfig/network-scripts/net_cnx_down";
@@ -26,12 +26,11 @@ $connect_prog = "/etc/sysconfig/network-scripts/net_cnx_pg";
 
 #- intro is called only in standalone.
 sub intro {
-    (my $prefix, my $netcnx, my $in, my $install) = @_;
-    globals::init(in => $in, prefix => $prefix, install => $install);
+    my ($prefix, $netcnx, $in, $install) = @_;
     my ($netc, $mouse, $intf) = ({}, {}, {});
     my $text;
     my $connected;
-    read_net_conf($netcnx, $netc);
+    read_net_conf($prefix, $netcnx, $netc);
     if (!$::isWizard) {
 	if (connected($netc)) {
 	    $text=_("You are currently connected to internet.") . (-e $disconnect_file ? _("\nYou can disconnect or reconfigure your connection.") : _("\nYou can reconfigure your connection."));
@@ -85,7 +84,7 @@ sub detect {
 }
 
 sub main {
-    (my $prefix, my $netcnx, my $netc, my $mouse, my $in, my $intf, my $install, my $first_time, my $direct_fr) = @_;
+    my ($prefix, $netcnx, $netc, $mouse, $in, $intf, $install, $first_time, $direct_fr) = @_;
     globals::init(in => $in, prefix => $prefix, install => $install);
     $netc->{minus_one}=0; #When one configure an eth in dhcp without gateway
     $::isInstall and $in->set_help('configureNetwork');
@@ -167,7 +166,11 @@ ifdown eth0
     $conf{isdn} and do { require network::isdn; network::isdn::configure($netcnx, $netc) or goto step_2 };
     $conf{adsl} and do { require network::adsl; network::adsl::configure($netcnx, $netc, $intf, $first_time) or goto step_2 };
     $conf{cable} and do { require network::ethernet; network::ethernet::configure_cable($netcnx, $netc, $intf, $first_time) or goto step_2 };
-    $conf{lan} and do { require network::ethernet; network::ethernet::configure_lan($netcnx, $netc, $intf, $first_time) or goto step_2 };
+    $conf{lan} and do { 
+    print "plop2 ------------ $in ----------- \n";
+require network::ethernet; 
+    print "plop3 ------------ $in ----------- \n";
+network::ethernet::configure_lan($netcnx, $netc, $intf, $first_time) or goto step_2 };
 
   step_3:
 
@@ -483,7 +486,7 @@ sub get_net_device {
 }
 
 sub read_net_conf {
-    my ($netcnx, $netc)=@_;
+    my ($prefix, $netcnx, $netc)=@_;
     add2hash($netcnx, { getVarsFromSh("$prefix/etc/sysconfig/draknet") });
     $netc->{$_} = $netcnx->{$_} foreach 'NET_DEVICE', 'NET_INTERFACE';
 #-    print "type : $netcnx->{type}\n device : $netcnx->{NET_DEVICE}\n interface : $netcnx->{NET_INTERFACE}\n";
