@@ -1,3 +1,73 @@
+2004/01/09  Damien Chaumette  <dchaumette at mandrakesoft.com>
+
+	* standalone/drakconnect: information box fully fonctionnal for ethernet
+	cards
+
+2004/01/09  Pixel  <pixel at mandrakesoft.com>
+
+	* share/po/Makefile: get translated strings in directory gi/perl-install
+	to have xxx.pm instead of ../../xxx.pm
+
+	* install_any.pm: http://serv.mydomain/pub/install must get split into
+	server:serv.mydomain and
+	directory:/pub/install, and not directory:pub/install
+	simplify
+
+	* interactive.pm, do_pkgs.pm: new do_pkgs package which get rid of
+	pkgs_interactive::* which was in install_any
+	and standalone, and partially duplicated
+
+	* fs.pm, install_steps_gtk.pm: remove a few other SIG{__DIE__}
+
+	* standalone.pm: new do_pkgs package which get rid of pkgs_interactive::*
+	which was in install_any
+	and standalone, and partially duplicated
+	perl_checker compliance
+	simplify, cleanup
+
+2004/01/09  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* standalone/drakconnect: share translations with harddrake
+
+	* harddrake/data.pm: tag megaraid controllers as scsi ones
+
+	* common.pm: enable other packages to override libDrakx translations with
+	those
+	from their own domains (eg: prevent mcc to display "partition de
+	demarrage" instead of "demarrage" in french for "boot" ...)
+
+	* share/po/br.po: update
+
+2004/01/08  Damien Chaumette  <dchaumette at mandrakesoft.com>
+
+	* standalone/drakconnect: 
+	  - informations afford copy/paste (mac address)
+	  - add module name to informations
+	  - perl_checker compliant
+
+2004/01/08  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/et.po: updated Estonian file
+
+2004/01/08  Pixel  <pixel at mandrakesoft.com>
+
+	* standalone/drakauth, any.pm, authentication.pm, install_any.pm,
+	install_steps_interactive.pm: 
+	  - integrate chkauth (which is now deprecated)
+	  - new module authentication
+
+	* install_steps_auto_install.pm: display the error
+
+	* common.pm: better override formatError than replacing all the
+	formatError with formatError_and_log
+	(goal: get log'ing even now that SIG{__DIE__} is not there anymore)
+	add formatError_and_log (to get log'ing even now that SIG{__DIE__} is
+	not there anymore)
+
+	* install2.pm: no need to log the error twice, errorInStep will take care
+	of it
+	display the error
+
 2004/01/08  Damien Chaumette  <dchaumette at mandrakesoft.com>
 
 	* network/adsl.pm: fix sagem net_cnx_up (thanks to QA team)
@@ -22576,7 +22646,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.847 2003/09/23 09:45:58 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.848 2004/01/08 18:17:01 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
