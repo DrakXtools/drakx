@@ -33,26 +33,26 @@ my %languages = my @languages = (
   'ar'  => [ 'Arabic',			'iso-8859-6', 'ar', 'ar' ],
 #'az_AZ.ISO-8859-9E'=> [ 'Azeri (Latin)','iso-8859-9e','az', 'az:tr' ],
 'az_AZ.UTF-8'=> [ 'Azeri (Latin)',	'utf_az',     'az', 'az:tr' ],
-  'be'  => [ 'Belarussian (CP1251)',	'cp1251',     'be', 'be:be_BY.CP1251:ru_RU.CP1251' ],
-'be_BY.UTF-8'  => [ 'Belarussian (UTF-8)','utf_1251',   'be', 'be:be_BY.CP1251:ru_RU.CP1251' ],
+  'be'  => [ 'Belarussian|CP1251',	'cp1251',     'be', 'be:be_BY.CP1251:ru_RU.CP1251' ],
+'be_BY.UTF-8'  => [ 'Belarussian|UTF-8','utf_1251',   'be', 'be:be_BY.CP1251:ru_RU.CP1251' ],
 #- provide aliases for some not very standard names used in po files...
-  'bg'  => [ 'Bulgarian (CP1251)',	'cp1251',     'bg', 'bg:bg.CP1251:bg_BG.CP1251:bg_BG' ],
-'bg_BG.UTF-8'=> [ 'Bulgarian (UTF-8)',	'utf_1251',   'bg', 'bg:bg.CP1251:bg_BG.CP1251:bg_BG' ],
+  'bg'  => [ 'Bulgarian|CP1251',	'cp1251',     'bg', 'bg:bg.CP1251:bg_BG.CP1251:bg_BG' ],
+'bg_BG.UTF-8'=> [ 'Bulgarian|UTF-8',	'utf_1251',   'bg', 'bg:bg.CP1251:bg_BG.CP1251:bg_BG' ],
   'br'  => [ 'Brezhoneg',		'iso-8859-15','br', 'br:fr_FR:fr' ],
   'bs'  => [ 'Bosnian',			'iso-8859-2', 'bs', 'bs:hr:sr' ],
 'ca_ES' => [ 'Catalan',		'iso-8859-15','ca', 'ca:es_ES:es:fr_FR:fr' ],
   'cs'  => [ 'Czech',			'iso-8859-2', 'cs', 'cs' ],
-  'cy'  => [ 'Cymraeg (Welsh)','iso-8859-14','cy', 'cy:en_GB:en' ],
-'cy_GB.UTF-8'=> [ 'Cymraeg (Welsh) (UTF-8)','utf_14',   'cy', 'cy:en_GB:en' ],
+  'cy'  => [ 'Cymraeg (Welsh)|ISO-8859-14','iso-8859-14','cy', 'cy:en_GB:en' ],
+'cy_GB.UTF-8'=> [ 'Cymraeg (Welsh)|UTF-8','utf_14',   'cy', 'cy:en_GB:en' ],
   'da'  => [ 'Danish',			'iso-8859-1', 'da', 'da' ],		
 'de_AT' => [ 'German|Austria',		'iso-8859-15','de', 'de_AT:de' ],
 'de_BE' => [ 'German|Belgium',		'iso-8859-15','de', 'de_BE:de' ],
 'de_CH' => [ 'German|Switzerland',	'iso-8859-1', 'de', 'de_CH:de' ],
 'de_DE' => [ 'German|Germany',		'iso-8859-15','de', 'de_DE:de' ],
-  'el'  => [ 'Greek',        'iso-8859-7', 'el', 'el' ],
-'el_GR.UTF-8'=> [ 'Greek (UTF-8)',        'utf_el',     'el', 'el' ],
-  'eo'  => [ 'Esperanto (UTF-8)',		'iso-8859-3', 'eo', 'eo' ],
-'eo_XX.UTF-8'=> [ 'Esperanto (UTF-8)',	'utf_3',      'eo', 'eo' ],
+  'el'  => [ 'Greek|ISO-8859-7',        'iso-8859-7', 'el', 'el' ],
+'el_GR.UTF-8'=> [ 'Greek|UTF-8',        'utf_el',     'el', 'el' ],
+  'eo'  => [ 'Esperanto|UTF-8',		'iso-8859-3', 'eo', 'eo' ],
+'eo_XX.UTF-8'=> [ 'Esperanto|UTF-8',	'utf_3',      'eo', 'eo' ],
 'es_AR' => [ 'Spanish|Argentina',	'iso-8859-1', 'es', 'es_AR:es_UY:es:es_ES' ],
 'es_ES' => [ 'Spanish|Spain (modern sorting)',	'iso-8859-15', 'es', 'es_ES:es' ],
 'es@tradicional' => [ 'Spanish|Spain (traditional sorting)', 'iso-8859-1', 'es', 'es' ],
@@ -73,8 +73,8 @@ my %languages = my @languages = (
 'gl_ES' => [ 'Galego (Galician)','iso-8859-15','gl', 'gl:es_ES:pt_PT:pt_BR:es:pt' ],
 #-'gv'	=> [ 'Manx gaelic',		'iso-8859-14','gv', 'gv:en_GB:en' ],
 #- 'iw' was the old code for hebrew language
-  'he'  => [ 'Hebrew',	'iso-8859-8', 'he', 'he:iw_IL' ],
-'he_IL.UTF-8'=> [ 'Hebrew (UTF-8)',	'utf_he',     'he', 'he:iw_IL' ],
+  'he'  => [ 'Hebrew|ISO-8859-8',	'iso-8859-8', 'he', 'he:iw_IL' ],
+'he_IL.UTF-8'=> [ 'Hebrew|UTF-8',	'utf_he',     'he', 'he:iw_IL' ],
   'hr'  => [ 'Croatian',		'iso-8859-2', 'hr', 'hr' ],
   'hu'  => [ 'Hungarian', 		'iso-8859-2', 'hu', 'hu' ],
 #'hy_AM.ARMSCII-8'=> [ 'Armenian|ARMSCII-8','armscii-8','hy','hy' ],
@@ -86,19 +86,19 @@ my %languages = my @languages = (
 'it_CH' => [ 'Italian|Switzerland',	'iso-8859-1', 'it', 'it_IT:it' ],
 'it_IT' => [ 'Italian|Italy','iso-8859-15','it', 'it_IT:it' ],
 #-'iu'  => [ 'Inuktitut', 		'unicodeIU',  'iu', 'iu' ],
-  'ja'  => [ 'Japanese',		'jisx0208',   'ja', 'ja_JP.ujis:ja' ],
-'ja_JP.UTF-8'=> [ 'Japanese (UTF-8)',	'utf_ja',     'ja', 'ja_JP.ujis:ja' ],
+  'ja'  => [ 'Japanese|EUC-JP',		'jisx0208',   'ja', 'ja_JP.ujis:ja' ],
+'ja_JP.UTF-8'=> [ 'Japanese|UTF-8',	'utf_ja',     'ja', 'ja_JP.ujis:ja' ],
 'ka_GE.UTF-8'=> [ 'Georgian',  		'utf_ka',     'ka', 'ka' ],
 #-'kl'  => [ 'Greenlandic (inuit)',	'iso-8859-1', 'kl', 'kl' ],
-  'ko'  => [ 'Korean',           'ksc5601',    'ko', 'ko' ],
-'ko_KR.UTF-8'=> [ 'Korean (UTF-8)',       'utf_ko',     'ko', 'ko' ],
+  'ko'  => [ 'Korean|EUC-KR',           'ksc5601',    'ko', 'ko' ],
+'ko_KR.UTF-8'=> [ 'Korean|UTF-8',       'utf_ko',     'ko', 'ko' ],
 #-'kw'	=> [ 'Cornish gaelic',		'iso-8859-14','kw', 'kw:en_GB:en' ],
 #-'lo'  => [ 'Laotian',			'mulelao-1',  'lo', 'lo' ],
   'lt'  => [ 'Lithuanian',		'iso-8859-13','lt', 'lt' ],
   'lv'  => [ 'Latvian',			'iso-8859-13','lv', 'lv' ],   
   'mi'	=> [ 'Maori',			'iso-8859-13','mi', 'mi' ],
-  'mk'  => [ 'Macedonian (Cyrillic)','iso-8859-5', 'mk', 'mk' ],
-'mk_MK.UTF-8'=> [ 'Macedonian (Cyrillic) (UTF-8)','utf_1251',   'mk', 'mk' ],
+  'mk'  => [ 'Macedonian (Cyrillic)|ISO-8859-5','iso-8859-5', 'mk', 'mk' ],
+'mk_MK.UTF-8'=> [ 'Macedonian (Cyrillic)|UTF-8','utf_1251',   'mk', 'mk' ],
   'ms'  => [ 'Malay',			'iso-8859-1', 'ms', 'ms' ],
 # 'mt'  => [ 'Maltese|ISO-8859-3',	'iso-8859-3', 'mt', 'mt' ],
 'mt_MT.UTF-8'=> [ 'Maltese',	'utf_3',      'mt', 'mt' ],
@@ -131,7 +131,7 @@ my %languages = my @languages = (
 'ta_IN.UTF-8'=> [ 'Tamil',		'utf_1',      'ta', 'ta' ],
 'tg_TJ.UTF-8'=> [ 'Tajik',		'utf_koi',    'tg', 'tg' ],
   'th'  => [ 'Thai|TIS-620',            'tis620',     'th', 'th' ],
-'th_TH.UTF-8'=> [ 'Thai (UTF-8)',         'utf_th',     'th', 'th' ],
+'th_TH.UTF-8'=> [ 'Thai|UTF-8',         'utf_th',     'th', 'th' ],
   'tr'  => [ 'Turkish',	 		'iso-8859-9', 'tr', 'tr' ],
 #-'tt_RU.UTF-8'=> [ 'Tatar',		'koi8-k',  'tg', 'tg' ],
 #-'ur'	=> [ 'Urdu',			'cp1256',     'ur', 'ur' ],  
@@ -147,14 +147,14 @@ my %languages = my @languages = (
 # NOTE: 'zh' must be in the LANGUAGE list, it is not used for translations
 # themselves but is needed for our selection of locales-xx packages
 # and the language dependent packages resolution
-#'zh_HK.Big5' => [ 'Chinese|Traditional|Hong Kong|Big5', 'Big5', 'zh_TW.Big5', 'zh_TW.Big5:zh_TW.big5:zh_TW:zh_HK:zh' ],
-#'zh_HK.UTF-8' => [ 'Chinese|Traditional|Hong Kong|UTF-8','utf_tw','zh_HK', 'zh_HK:zh_TW.Big5:zh_TW.big5:zh_TW:zh_CN.GB2312:zh_CN:zh' ],
-'zh_TW.Big5' => [ 'Chinese|Traditional|Big5', 'Big5', 'zh_TW.Big5', 'zh_TW.Big5:zh_TW.big5:zh_TW:zh_HK:zh' ],
-'zh_TW.UTF-8' => [ 'Chinese|Traditional|UTF-8','utf_tw','zh_TW.Big5','zh_TW.Big5:zh_TW.big5:zh_TW:zh_HK:zh_CN.GB2312:zh_CN:zh' ],
-'zh_CN.GB2312' => [ 'Chinese|Simplified|GB2312', 'gb2312', 'zh_CN.GB2312', 'zh_CN.GB2312:zh_CN.gb2312:zh_CN:zh' ],
-'zh_CN.UTF-8' => [ 'Chinese|Simplified|UTF-8','utf_cn','zh_CN', 'zh_CN.GB2312:zh_CN.gb2312:zh_CN:zh:zh_TW:zh_HK' ],
+#'zh_HK.Big5' => [ 'Chinese|Traditional|Hong Kong|Big5', 'Big5', 'zh_TW.Big5', 'zh_TW.Big5:zh_TW:zh_HK:zh' ],
+#'zh_HK.UTF-8' => [ 'Chinese|Traditional|Hong Kong|UTF-8','utf_tw','zh_HK', 'zh_HK:zh_TW.Big5:zh_TW:zh' ],
+'zh_TW.Big5' => [ 'Chinese|Traditional|Big5', 'Big5', 'zh_TW.Big5', 'zh_TW.Big5:zh_TW:zh_HK:zh' ],
+'zh_TW.UTF-8' => [ 'Chinese|Traditional|UTF-8','utf_tw','zh_TW.Big5','zh_TW.Big5:zh_TW.big5:zh_TW:zh_HK:zh' ],
+'zh_CN.GB2312' => [ 'Chinese|Simplified|GB2312', 'gb2312', 'zh_CN.GB2312', 'zh_CN.GB2312:zh_CN:zh' ],
+'zh_CN.UTF-8' => [ 'Chinese|Simplified|UTF-8','utf_cn','zh_CN', 'zh_CN.GB2312:zh_CN:zh' ],
 # does this one works? 
-#'zh_CN.GB18030' => [ 'Chinese|Simplified|GB18030','gb2312','zh_CN', 'zh_CN.GB2312:zh_CN.gb2312:zh_CN:zh:zh_TW:zh_HK' ],
+#'zh_CN.GB18030' => [ 'Chinese|Simplified|GB18030','gb2312','zh_CN', 'zh_CN.GB2312:zh_CN:zh' ],
 );
 @languages = map { $_->[0] } group_by2(@languages);
 
@@ -289,10 +289,6 @@ my %charsets = (
 	"gb2312", "936", "-*-*-*-*-*-*-*-*-*-*-*-*-gb2312.1980-0" ],
   "utf_cn"     => [ undef,		undef,		undef,
 	"utf8", undef, "-*-*-*-*-*-*-*-*-*-*-*-*-gb2312.1980-0" ],
-  "georgian-academy" => [ "t_geors", "geors.uni",	"trivial.trans",
-	undef,  undef, "-*-*-*-*-*-*-*-*-*-*-*-*-georgian-academy" ],
-  "georgian-ps" => [ "t_geors",		"geors.uni",	"geors_to_geops.trans",
-	undef,  undef, "-*-*-*-*-*-*-*-*-*-*-*-*-georgian-academy" ],
   "utf_ka"      => [ "t_geors",		"geors.uni",	"geors_to_geops.trans",
 	"utf8",  undef, "-*-*-*-*-*-*-*-*-*-*-*-*-georgian-academy" ],
   "iso-8859-1" => [ "lat0-sun16",	undef,		"iso15",
@@ -307,8 +303,8 @@ my %charsets = (
 	"iso8859-3", undef, std_("iso8859-3") ],
   "utf_3" => [ "iso03.f16",	undef,		"iso03",
 	"utf8", undef, std_("iso8859-3") ],
-  "iso-8859-4" => [ "lat4u-16",		undef,		"iso04",
-	"iso8859-4", "775", std_("iso8859-4") ],
+#  "iso-8859-4" => [ "lat4u-16",		undef,		"iso04",
+#	"iso8859-4", "775", std_("iso8859-4") ],
   "iso-8859-5" => [ "iso05.f16",	"iso05",	"trivial.trans",
   	"iso8859-5", "855", sub { std("microsoft-cp1251", @_) } ],
 #-#- arabic needs special console driver for text mode [acon]
@@ -338,8 +334,6 @@ my %charsets = (
 	"iso8859-15", "850", sub { std("iso8859-15", @_) } ],
   "utf_15" => [ "lat0-sun16",	undef,		"iso15",
 	"utf8", undef, sub { std("iso8859-15", @_) } ],
-  "iso-8859-9e" => [ "tiso09e",		"iso09",	"trivial.trans",
-	"iso8859-9", "857", std2("iso8859-9e",10) ],
   "utf_az"      => [ "tiso09e",		"iso09",	"trivial.trans",
 	"utf8", undef, std2("iso8859-9e",10) ],
 #- japanese needs special console driver for text mode [kon2]
@@ -351,26 +345,22 @@ my %charsets = (
 	"koi8-r", "866", sub { std("microsoft-cp1251", @_) } ],
   "koi8-u"     => [ "UniCyr_8x16",	undef,		"koi8-u",
 	"koi8-u", "866", sub { std("microsoft-cp1251", @_) } ],
-  "koi8-k"     => [ "koi8-k",		"iso01",	"trivial.trans",
-	"koi8-u", "866", std("koi8-k") ],
   "utf_koi"     => [ "koi8-k",		"iso01",	"trivial.trans",
 	"utf8", undef, std("koi8-k") ],
-  "tatar-cyr"  => [ "tatar-cyr",	undef,		"cp1251",
-	undef, undef, std("tatar-cyr") ],
   "cp1251"     => [ "UniCyr_8x16",	undef,		"cp1251",
 	"cp1251", "866", sub { std("microsoft-cp1251", @_) } ],
   "utf_1251"   => [ "UniCyr_8x16",	undef,		"cp1251",
 	"utf8", undef, sub { std("microsoft-cp1251", @_) } ],
 #- Yiddish needs special console driver for text mode [acon]
 #- (and gtk support isn't done yet)
-  "cp1255"     => [ "iso08.f16",        "iso08",        "trivial.trans",
-	"cp1255", "862", std_("microsoft-cp1255") ],
+#  "cp1255"     => [ "iso08.f16",        "iso08",        "trivial.trans",
+#	"cp1255", "862", std_("microsoft-cp1255") ],
   "utf_he"     => [ "iso08.f16",        "iso08",        "trivial.trans",
 	"utf8", "862", std_("microsoft-cp1255") ],
 #- Urdu needs special console driver for text mode [acon]
 #- (and gtk support isn't done yet)
-  "cp1256"     => [ undef,              undef,          "trivial.trans",
-	undef, "864", std_("microsoft-cp1255") ],
+#  "cp1256"     => [ undef,              undef,          "trivial.trans",
+#	undef, "864", std_("microsoft-cp1255") ],
 #- korean needs special console driver for text mode
   "ksc5601"    => [ undef,		undef,		undef,
 	"euc-kr", "949", "-*-*-*-*-*-*-*-*-*-*-*-*-ksc5601.1987-*" ],
@@ -390,10 +380,10 @@ my %charsets = (
 	"utf8", undef, std2("tcvn-5712", 13), std2("tcvn-5712", 10) ],
 #- Farsi (iranian) needs special console driver for text mode [acon]
 #- (and gtk support isn't done yet)
-  "isiri-3342" => [ undef,		undef,		"trivial.trans",
-	undef, undef, "-*-*-*-*-*-*-*-*-*-*-*-*-isiri-3342" ],
-  "tscii-0" => [ "tamil",		undef,		"trivial.trans",
-	undef, undef, "-*-*-*-*-*-*-*-*-*-*-*-*-tscii-0" ],
+#  "isiri-3342" => [ undef,		undef,		"trivial.trans",
+#	undef, undef, "-*-*-*-*-*-*-*-*-*-*-*-*-isiri-3342" ],
+#  "tscii-0" => [ "tamil",		undef,		"trivial.trans",
+#	undef, undef, "-*-*-*-*-*-*-*-*-*-*-*-*-tscii-0" ],
   "unicode" => [ undef,			undef,		"trivial.trans",
 	"utf8", undef, "-*-*-*-*-*-*-*-*-*-*-*-*-iso10646-1" ],
 );
@@ -603,7 +593,7 @@ sub set {
 	} else {
 	    $ENV{LANGUAGE}  = lang2LANGUAGE($lang);
 	}
-	load_mo() ;
+	load_mo();
     } else {
 	# stick with the default (English) */
 	delete $ENV{LANG};

@@ -129,7 +129,7 @@ my %lang2keyboard =
 my %usb2drakxkbd =
 (
   0x00 => undef, #- the keyboard don't tell its layout
-  0x01 => 'ar',
+#-0x01 => 'ar',
   0x02 => 'be',
 #-0x03 => 'ca', #- "Canadian bilingual" ??
   0x04 => 'qc', #- Canadian French
@@ -158,7 +158,7 @@ my %usb2drakxkbd =
   0x1b => 'ch_de',
   0x1c => 'ch_de',
   0x1d => 'ch_de', #- USB spec says just "Swiss"
-  0x1e => 'tw', # Taiwan
+#-0x1e => 'tw', # Taiwan
   0x1f => 'tr_q',
   0x20 => 'uk',
   0x21 => 'us',
@@ -222,7 +222,7 @@ arch() =~ /^sparc/ ? (
  "hr" => [ __("Croatian"),	 "croat",           "hr",    0 ],
  "il" => [ __("Israeli"),        "il-8859_8",       "il",    1 ],
  "il_phonetic" => [ __("Israeli (Phonetic)"), "hebrew", "il_phonetic", 1 ],
- "ir" => [ __("Iranian"),        "ir-isiri3342",    "ir",    1 ],
+ "ir" => [ __("Iranian"),        "ir-isiri_3342",   "ir",    1 ],
  "is" => [ __("Icelandic"),      "is-latin1",       "is",    0 ],
  "it" => [ __("Italian"),        "it-latin1",       "it",    0 ],
 #"iu" => [ __("Inuktitut"),      "iu",              "iu",    1 ],
@@ -254,12 +254,12 @@ arch() =~ /^sparc/ ? (
  "sk" => [ __("Slovakian (QWERTZ)"), "sk-qwertz",   "sk",    0 ],
  "sk_qwerty" => [ __("Slovakian (QWERTY)"), "sk-qwerty", "sk_qwerty", 0 ],
 # TODO: console map
- "sr" => [ __("Serbian (cyrillic)"), "yu",          "sr",    0 ],
+ "sr" => [ __("Serbian (cyrillic)"), "sr",          "sr",    0 ],
 # no console kbd that I'm aware of
  "tml" => [ __("Tamil"),	 "us",              "tml",   1 ],
  "th" => [ __("Thai keyboard"),  "th",              "th",    1 ],
 # TODO: console map
- "tj" => [ __("Tajik keyboard"), "tj",              "tj",    1 ],
+ "tj" => [ __("Tajik keyboard"), "ru4",             "tj",    1 ],
  "tr_f" => [ __("Turkish (traditional \"F\" model)"), "trf", "tr_f", 0 ],
  "tr_q" => [ __("Turkish (modern \"Q\" model)"), "tr_q-latin5", "tr", 0 ],
 #-"tw => [ __("Chineses bopomofo"), "tw",           "tw",    1 ],
@@ -268,7 +268,7 @@ arch() =~ /^sparc/ ? (
  "us" => [ __("US keyboard"),    "us",              "us",    0 ],
  "us_intl" => [ __("US keyboard (international)"), "us-latin1", "us_intl", 0 ],
  "vn" => [ __("Vietnamese \"numeric row\" QWERTY"),"vn-tcvn", "vn(toggle)", 0 ], 
- "yu" => [ __("Yugoslavian (latin)"), "yu",         "yu",    0 ],
+ "yu" => [ __("Yugoslavian (latin)"), "sr",         "yu",    0 ],
 ),
 );
 
