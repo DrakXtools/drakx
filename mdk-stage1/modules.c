@@ -530,7 +530,10 @@ enum return_type ask_insmod(enum driver_type type)
 			p_modules++;
 			p_descrs++;
 		}
-		results = ask_from_list_comments(msg, modules, descrs, &choice);
+		if (modules && *modules)
+			results = ask_from_list_comments(msg, modules, descrs, &choice);
+		else
+			results = RETURN_BACK;
 	}
 
 	if (results == RETURN_OK) {
