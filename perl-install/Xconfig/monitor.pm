@@ -9,8 +9,11 @@ use any;
 use log;
 
 
-my $good_default_monitor = arch() !~ /ppc/ ? 'Generic|1024x768 @ 70 Hz' :
-  detect_devices::get_mac_model =~ /^iBook/ ? 'Apple|iBook 800x600' : 'Apple|iMac/PowerBook 1024x768';
+sub good_default_monitor {
+    arch() =~ /ppc/ ? 
+      (detect_devices::get_mac_model =~ /^iBook/ ? 'Apple|iBook 800x600' : 'Apple|iMac/PowerBook 1024x768') :
+      (detect_devices::isLaptop() ? 'Generic|Flat Panel 1024x768' : 'Generic|1024x768 @ 70 Hz');
+}
 
 my @VertRefresh_ranges = ("50-70", "50-90", "50-100", "40-150");
 
@@ -80,7 +83,7 @@ sub choose {
 	    my $merged_name = $monitor->{VendorName} . '|' . $monitor->{ModelName};
 
 	    if (!exists $h_monitors{$merged_name}) {
-		$merged_name = $monitor->{HorizSync} ? 'Custom' : $good_default_monitor;
+		$merged_name = $monitor->{HorizSync} ? 'Custom' : good_default_monitor();
 	    } else {
 		$merged_name;
 	    }
