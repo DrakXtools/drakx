@@ -409,7 +409,7 @@ sub lilo_choice
     $::expert=1;
   ask:
     local $::isEmbedded = 0;
-    any::setupBootloader($in, $bootloader, $hds, $fstab, $ENV{SECURE_LEVEL}) or $in->exit(0);
+    any::setupBootloader($in, $bootloader, $hds, $fstab, $ENV{SECURE_LEVEL}) or return;
     eval { bootloader::install('', $bootloader, $fstab, $hds) };  
     if ($@) {
 	$in->ask_warn('', 
