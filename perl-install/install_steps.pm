@@ -441,29 +441,21 @@ Consoles 1,3,4,7 may also contain interesting information";
 
     $o->install_urpmi;
 
-#    #- update language and icons for KDE.
-#    update_gnomekderc($_, 'Locale', Language => "") foreach list_skels($o->{prefix}, '.kderc');
-#    log::l("updating kde icons according to available devices");
-#    install_any::kdeicons_postinstall($o->{prefix});
-
     if ($o->{lang} =~ /^(zh_TW|th|vi|be|bg)/) {
 	#- skip since we don't have the right font (it badly fails at least for zh_TW)
     } elsif (my $LANG = lang::lang2LANG($o->{lang})) {
 	my $kdmrc = "$o->{prefix}/usr/share/config/kdm/kdmrc";
 
-	my $charset = lang::lang2charset($o->{lang});
-	$charset = '' if member($charset, 'iso-8859-1', 'iso-8859-15'); #- keep the default for those
-	$charset = 'jisx0208.1983-0' if $charset eq 'jisx0208';
-	$charset = 'ksc5601.1987-0' if $charset eq 'ksc5601';
-
+	my $kde_charset = lang::charset2kde_charset(lang::lang2charset($o->{lang}));
 	my $welcome = c::to_utf8(_("Welcome to %s", '%n'));
 	substInFile { 
 	    s/^(GreetString)=.*/$1=$welcome/;
 	    s/^(Language)=.*/$1=$LANG/;
-	    if ($charset) {
-		s/^(StdFont)=.*/$1=*,12,5,$charset,50,0/;
-		s/^(FailFont)=.*/$1=*,12,5,$charset,75,0/;
-		s/^(GreetFont)=.*/$1=*,24,5,$charset,50,0/;
+	    if (!member($kde_charset, 'iso8859-1', 'iso8859-15')) { 
+		#- don't keep the default for those
+		s/^(StdFont)=.*/$1=*,12,5,$kde_charset,50,0/;
+		s/^(FailFont)=.*/$1=*,12,5,$kde_charset,75,0/;
+		s/^(GreetFont)=.*/$1=*,24,5,$kde_charset,50,0/;
 	    }
 	} "$o->{prefix}/usr/share/config/kdm/kdmrc";
 
