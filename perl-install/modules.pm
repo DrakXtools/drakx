@@ -408,7 +408,7 @@ sub unload($;$) {
     my ($m, $remove_alias) = @_; 
     if ($::testing) {
 	log::l("rmmod $m");
-    } else {	
+    } else {
 	run_program::run("rmmod", $m) && delete $conf{$m}{loaded};
     }
     remove_alias($m) if $remove_alias;
@@ -536,11 +536,18 @@ sub load_thiskind($;&$) {
     }
 
     if ($type eq 'scsi') {
+	#- hey, we're allowed to pci probe :)   let's do a lot of probing!
+
+	#- probe for USB SCSI.
+	if (my ($c) = grep { /usb-/ } map { $_->[1] } pci_probing::main::probe('')) {
+	    eval { load($c, "SERIAL_USB"); load("usb-storage", $type); sleep(1); };
+	    -d "/proc/scsi/usb" ? push(@devs, [ "usb-storage", "usb-storage" ]) : unload("usb-storage");
+	}
+	#- probe for parport SCSI.
 	foreach ("imm", "ppa") {
 	    eval { load($_, $type); push @devs, [ $_, $_ ] };
 	    last if !$@;
 	}
-	#- hey, we're allowed to pci probe :)   let's do a lot of probing!
 	if (my ($c) = pci_probing::main::probe('AUDIO')) {
 	    add_alias("sound", $c->[1]) if pci_probing::main::check($c->[1]);
 	}
@@ -592,19 +599,4 @@ sub load_ide {
 	delete $conf{"ide-mod"}{options};
 	load_multi(qw(ide-probe ide-disk ide-cd));
     }
-}
-
-sub load_usbscsi { #- TODO
-    require pci_probing::main;
-    eval {
-	if (my ($c) = grep { /usb-/ } map { $_->[1] } pci_probing::main::probe('')) {
-	    load($c, "SERIAL_USB"); load("usb-storage");
-	    sleep(1);
-	    if (!$@ && -e "/proc/scsi/usb/0") {
-		return 1;
-	    }
-	    unload("usb-storage");
-	}
-    };
-    0;
 }

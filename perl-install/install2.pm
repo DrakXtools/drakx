@@ -390,6 +390,7 @@ sub miscellaneous {
 	setVarsInSh($f, { 
             MOUSE => bool2yesno($o->{mouse}{device} eq "usbmouse"),
 	    KBD => bool2yesno(int grep { /^keybdev\.c: Adding keyboard/ } detect_devices::syslog()),
+	    ZIP => bool2yesno(-d "/proc/scsi/usb"),
 	    getVarsFromSh($f),
 	});
 
