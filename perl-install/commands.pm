@@ -367,7 +367,11 @@ sub more {
     my $tty = devices::make('tty');
     local *IN; open IN, "<$tty" or die "can't open $tty\n";
     my $n = 0; while (<>) {
-	++$n == 25 and $n = <IN>, $n = 0;
+	if (++$n == 25) {
+	    my $v = <IN>;
+	    $v =~ /^q/ and exit 0;
+	    $n = 0;
+	}
 	print
     }
 }
