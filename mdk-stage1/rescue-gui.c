@@ -192,7 +192,10 @@ int main(int argc __attribute__ ((unused)), char **argv __attribute__ ((unused))
 		}
 		if (ptr_begins_static_str(choice, reboot_)) {
 			finish_frontend();
+                        sync(); sync();
+                        sleep(2);
 			unmount_filesystems();
+                        sync(); sync();
 			printf("rebooting system\n");
 			sleep(2);
 			reboot(0xfee1dead, 672274793, 0x01234567);
