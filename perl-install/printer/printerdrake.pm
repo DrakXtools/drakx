@@ -593,7 +593,7 @@ sub first_time_dialog {
     undef $w;
 
     # Show dialog
-    $in->ask_yesorno(N("Printerdrake"), $dialogtext, 0);
+    return $in->ask_yesorno(N("Printerdrake"), $dialogtext, 0);
 }
 
 sub configure_new_printers {
