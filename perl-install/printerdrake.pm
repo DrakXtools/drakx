@@ -2556,7 +2556,7 @@ sub main {
 		$::isWizard = 1;
 		# Wizard welcome screen
 		$::Wizard_no_previous = 1;
-		undef ($::Wizard_no_cancel, $::Wizard_finished);
+		undef $::Wizard_no_cancel; undef $::Wizard_finished;
 		wizard_welcome($printer, $in) or do {
 		    wizard_close($in, 0);
 		    next;
