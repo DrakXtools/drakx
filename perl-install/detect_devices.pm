@@ -58,7 +58,7 @@ sub get_mac_model() {
 	open(FILE, "/proc/device-tree/model") || die "Can't open /proc/device-tree/model";
 	my $mac_model = "";
 	local $_ = "";
-	while(<FILE>){
+	while (<FILE>){
 		$mac_model = $_;
 	}
 	close(FILE);
