@@ -474,7 +474,7 @@ NOTE THIS IS EXPERIMENTAL SUPPORT AND MAY FREEZE YOUR COMPUTER.", xfree4_version
     if (arch() =~ /ppc/ && $ENV{DISPLAY}) {
 	push @choices, { text => N("Xpmac (installation display driver)"), code => sub { 
 			     #- HACK: re-allowing XFree 3
-			     $::force_xf4 = 0;
+			     $force_xf4 = 0;
 			     $card->{server} = "Xpmac";
 			     $card->{prefer_xf3} = 1;
 			 } };
