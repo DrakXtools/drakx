@@ -1,3 +1,148 @@
+2003/02/28  alus
+
+	* share/po/pl.po: updated
+
+2003/02/28  Daouda Lo  <daouda@mandrakesoft.com>
+
+	* standalone/drakhelp: 
+	  - fix the check of mandrake_doc installed package (gc)
+
+2003/02/28  fabman
+
+	* share/po/es.po: updated Spanish translations. Some fuzzy left
+
+2003/02/28  François Pons  <fpons@mandrakesoft.com>
+
+	* network/modem.pm: add LT WinModem support by searching ltmodem package.
+
+	* drakxtools.spec: ltmodem support reminder.
+	fixes for drakconnect.
+
+	* any.pm: install acpi and acpid if "Enable ACPI" is ok.
+
+	* standalone/drakconnect: removed profile management entry point.
+
+2003/02/28  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* install_gtk.pm: fix theming in --doc mode
+
+	* mdk-stage1/init.c: moltes powered (for deush)
+
+	* lang.pm: remove temporiraly lo because utf_lo is not in the charsets
+	hash
+	put new pablo's images (less large, add missing ones)
+	sort langs in lang.pm
+
+	* mdk-stage1/modules.c, mdk-stage1/.cvsignore: hd_usb.img ->
+	hdcdrom_usb.img
+
+	* standalone/draksplash, standalone/drakfirewall, standalone/logdrake,
+	standalone/drakpxe, standalone/keyboarddrake, standalone/drakboot,
+	standalone/mousedrake, standalone/drakbackup, standalone/drakconnect,
+	standalone/drakxtv, standalone/adduserdrake, standalone/drakxservices,
+	standalone/drakproxy, standalone/livedrake, standalone/harddrake2,
+	standalone/drakfont, standalone/drakgw, standalone/drakperm,
+	standalone/scannerdrake: reflect in standalone drakxtools the removal of
+	DrakX icons
+
+	* pixmaps/langs/lang-zh_CN.png, pixmaps/langs/lang-sl.png,
+	pixmaps/langs/lang-hy.png, pixmaps/langs/lang-de.png,
+	pixmaps/langs/lang-cy.png, pixmaps/langs/lang-it.png,
+	pixmaps/langs/lang-eu.png, pixmaps/langs/lang-ca.png,
+	pixmaps/langs/lang-sp.png, pixmaps/langs/lang-mr.png,
+	pixmaps/langs/lang-am.png, pixmaps/langs/lang-nb.png,
+	pixmaps/langs/lang-kn.png, pixmaps/langs/lang-gd.png,
+	pixmaps/langs/lang-bn.png, pixmaps/langs/lang-lo.png,
+	pixmaps/langs/lang-el.png, pixmaps/langs/lang-ia.png,
+	pixmaps/langs/lang-pt_BR.png, pixmaps/langs/lang-sv.png,
+	pixmaps/langs/lang-mi.png, pixmaps/langs/lang-bg.png,
+	pixmaps/langs/lang-fo.png, pixmaps/langs/lang-kw.png,
+	pixmaps/langs/lang-hu.png, pixmaps/langs/lang-ur.png,
+	pixmaps/langs/lang-iu.png, pixmaps/langs/lang-az.png,
+	pixmaps/langs/lang-mt.png, pixmaps/langs/lang-et.png,
+	pixmaps/langs/lang-wa.png, pixmaps/langs/lang-sq.png,
+	pixmaps/langs/lang-he.png, pixmaps/langs/lang-eo.png,
+	pixmaps/langs/lang-ta.png, pixmaps/langs/lang-ga.png,
+	pixmaps/langs/lang-sr.png, pixmaps/langs/lang-lt.png,
+	pixmaps/langs/lang-oc.png, pixmaps/langs/lang-ms.png,
+	pixmaps/langs/lang-mk.png, pixmaps/langs/lang-lv.png,
+	pixmaps/langs/lang-zh_TW.png, pixmaps/langs/lang-is.png,
+	pixmaps/langs/lang-ro.png, pixmaps/langs/lang-be.png,
+	pixmaps/langs/lang-fr.png, pixmaps/langs/lang-te.png,
+	pixmaps/langs/lang-hr.png, pixmaps/langs/lang-no.png,
+	pixmaps/langs/lang-en_GB.png, pixmaps/langs/lang-sk.png,
+	pixmaps/langs/lang-uk.png, pixmaps/langs/lang-br.png,
+	pixmaps/langs/lang-en_US.png, pixmaps/langs/lang-bs.png,
+	pixmaps/langs/lang-nl.png, pixmaps/langs/lang-af.png,
+	pixmaps/langs/lang-tr.png, pixmaps/langs/lang-pt.png,
+	pixmaps/langs/lang-gl.png, pixmaps/langs/lang-uz.png,
+	pixmaps/langs/lang-pl.png, pixmaps/langs/lang-hi.png,
+	pixmaps/langs/lang-id.png, pixmaps/langs/lang-mn.png,
+	pixmaps/langs/lang-yi.png, pixmaps/langs/lang-fi.png,
+	pixmaps/langs/lang-ka.png, pixmaps/langs/lang-ru.png,
+	pixmaps/langs/lang-nn.png, pixmaps/langs/lang-gv.png,
+	pixmaps/langs/lang-th.png, pixmaps/langs/lang-cs.png,
+	pixmaps/langs/lang-ko.png, pixmaps/langs/lang-tg.png,
+	pixmaps/langs/lang-tt.png, pixmaps/langs/lang-da.png,
+	pixmaps/langs/lang-ja.png, pixmaps/langs/lang-vi.png,
+	pixmaps/langs/lang-es.png: put new pablo's images (less large, add
+	missing ones)
+	sort langs in lang.pm
+
+	* detect_devices.pm: let hasSMP don't exit DrakX in testing mode because
+	/dev/mem is not accessible
+
+	* mdk-stage1/Makefile: fix deps problem when re-running make
+	hd_usb.img -> hdcdrom_usb.img
+
+	* share/po/ja.po: reduce a translation size so that groups choice still
+	has the "ok" button shown
+	reduce some translations sizes to make diskdrake at least usable ("ok"
+	button was hidden!)
+
+	* share/po/fr.po: update
+
+	* ugtk2.pm: perl checko says we need to use parentheses with ref
+	hugly hack because GtkLabel doesn't wrap when using languages that don't
+	contain spaces
+
+	* drakxtools.spec: cøws gó mòõh
+
+2003/02/28  Pablo Saratxaga  <pablo@mandrakesoft.com>
+
+	* share/po/help-de.pot, share/po/help-it.pot, share/po/help-fr.pot,
+	share/po/help-es.pot: updated pot file
+
+	* standalone/harddrake2: i18n fixes
+
+	* standalone/drakpxe: fixed bad English string
+
+	* share/po/id.po, share/po/sk.po, share/po/ru.po, share/po/gl.po,
+	share/po/pt_BR.po, share/po/br.po, share/po/th.po, share/po/sl.po,
+	share/po/no.po, share/po/hr.po, share/po/tr.po, share/po/mt.po,
+	share/po/ga.po, share/po/be.po, share/po/uk.po, share/po/ko.po,
+	share/po/DrakX.pot, share/po/sv.po, share/po/sr.po, share/po/pl.po,
+	share/po/fi.po, share/po/lt.po, share/po/he.po, share/po/sp.po,
+	share/po/cy.po, share/po/ca.po, share/po/da.po, share/po/ar.po,
+	share/po/tg.po, share/po/bs.po, share/po/uz.po, share/po/ro.po,
+	share/po/wa.po, share/po/is.po, share/po/af.po, share/po/az.po,
+	share/po/zh_TW.po, share/po/zh_CN.po, share/po/pt.po, share/po/vi.po,
+	share/po/ta.po, share/po/fr.po, share/po/sq.po, share/po/it.po,
+	share/po/nl.po, share/po/eu.po, share/po/es.po, share/po/de.po,
+	share/po/eo.po, share/po/el.po, share/po/cs.po, share/po/bg.po,
+	share/po/lv.po, share/po/hu.po: updated pot file
+	updated pot file
+
+	* share/po/et.po, share/po/ja.po: updated pot file
+	Updated Estonian file
+	updated pot file
+
+2003/02/28  Pixel  <pixel@mandrakesoft.com>
+
+	* install_steps_interactive.pm: ensure the $::expert flag in netconnect
+	doesn't propagate to the rest of the
+	install
+
 2003/02/28  Frederic Lepied  <flepied@mandrakesoft.com>
 
 	* network/netconnect.pm: allow to switch in expert mode during install.
@@ -13473,7 +13618,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.797 2003/02/27 23:15:18 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.798 2003/02/28 10:42:40 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
