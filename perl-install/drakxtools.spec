@@ -391,8 +391,7 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
   o detect slamr, slusb and ltmodem modules for modems (fredl)
 - drakupdate_fstab: handle options in any order (fix harddrake service
   regarding amove media as well as regarding cdroms, burners and dvds)
-- harddrake service:
-  o service_harddrake: log which tools are runned
+- harddrake service: log which tools are runned
 
 * Wed Sep  8 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.1-0.24mdk
 - drakboot (blino, #11282):
