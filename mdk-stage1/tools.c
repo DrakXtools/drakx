@@ -409,14 +409,6 @@ enum return_type load_ramdisk_fd(int ramdisk_fd, int size)
 	if (my_mount(ramdisk, STAGE2_LOCATION, "ext2", 1))
 		return RETURN_ERROR;
 
-	if (IS_RESCUE) {
-		if (umount(STAGE2_LOCATION)) {
-			log_perror(ramdisk);
-			return RETURN_ERROR;
-		}
-		return RETURN_OK; /* fucksike, I lost several hours wondering why the kernel won't see the rescue if it is alreay mounted */
-	}
-
 	return RETURN_OK;
 }
 
