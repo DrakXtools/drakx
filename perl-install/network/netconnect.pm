@@ -89,7 +89,7 @@ sub get_subwizard {
       my ($network_configured, $direct_net_install, $cnx_type, $type, $interface, @cards, @all_cards, @devices);
       my (%connections, %rconnections, @connection_list);
       my ($modem, $modem_name, $modem_conf_read, $modem_dyn_dns, $modem_dyn_ip);
-      my ($adsl_type, $adsl_protocol, $adsl_device, @adsl_devices, $adsl_failed, $adsl_answer);
+      my ($adsl_type, $adsl_protocol, $adsl_device, @adsl_devices, $adsl_failed, $adsl_answer, %adsl_data, $adsl_data, $adsl_provider);
       my ($ntf_name, $ipadr, $netadr, $gateway_ex, $up, $isdn, $isdn_type, $need_restart_network);
       my ($module, $text, $auto_ip, $onboot, $needhostname, $hotplug, $track_network_id, @fields); # lan config
       my $success = 1;
@@ -544,11 +544,31 @@ killall pppd
                         return 'adsl_unsupported_eci' if $adsl_device eq 'eci';
                         $netconnect::need_restart_network = member($adsl_device, qw(speedtouch eci));
                         $in->do_pkgs->install($packages{$adsl_device}) if $packages{$adsl_device};
+                        return 'adsl_sagem800' if $adsl_device eq 'sagem';
                         if ($adsl_device eq 'speedtouch' && !$::testing) {
                             $in->do_pkgs->what_provides("speedtouch_mgmt") and 
                               $in->do_pkgs->ensure_is_installed('speedtouch_mgmt', '/usr/share/speedtouch/mgmt.o', 'auto');
                             return 'adsl_speedtouch_firmware' if ! -e "$prefix/usr/share/speedtouch/mgmt.o";
                         }
+                        return 'adsl_protocol';
+                    },
+                   },
+
+                   
+                   adsl_sagem800 =>
+                   {
+                    pre => sub {
+                        require network::adsl_consts;
+                        %adsl_data = %network::adsl_consts::adsl_data;
+                    },
+                    name => N("Please choose your ADSL provider"),
+                    data => sub { 
+                        [ { label => N("Provider:"), type => "list", val => \$adsl_provider, separator => '|', list => [ keys %adsl_data ] } ];
+                    },
+                    next => 'adsl_protocol',
+                    post => sub {
+                        $adsl_data = $adsl_data{$adsl_provider};
+                        $adsl_protocol = $adsl_data->{method} if $adsl_data->{method};
                         return 'adsl_protocol';
                     },
                    },
