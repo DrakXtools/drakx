@@ -151,7 +151,7 @@ sub partitionWizardSolutions {
 		    $pkg->new($part->{device}, devices::make($part->{device}));
 		};
 		$@ and die N("The FAT resizer is unable to handle your partition, 
-the following error occured: %s", $@);
+the following error occured: %s", formatError($@));
 		my $min_win = do {
 		    my $_w = $o->wait_message(N("Resizing"), N("Computing the size of the Windows partition"));
 		    $resize_fat->min_size;
@@ -186,7 +186,7 @@ When sure, press Ok.")) or return;
 		};
 		if (my $err = $@) {
 		    $part->{size} = $oldsize;
-		    die N("FAT resizing failed: %s", $err);
+		    die N("FAT resizing failed: %s", formatError($err));
 		}
 
 		$part->{isFormatted} = 1;
@@ -271,7 +271,7 @@ sub partitionWizard {
 		  [ { val => \$sol, list => \@solutions, format => sub { $_[0][1] }, type => 'list' } ]);
     log::l("partitionWizard calling solution $sol->[1]");
     my $ok = eval { $sol->[2]->() };
-    $@ and $o->ask_warn('', N("Partitioning failed: %s", $@));
+    $@ and $o->ask_warn('', N("Partitioning failed: %s", formatError($@)));
     $ok or goto &partitionWizard;
     1;
 }
