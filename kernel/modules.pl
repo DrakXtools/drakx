@@ -75,9 +75,9 @@ sub flatten_and_check {
 	if (my @bad = difference2(\@l, [ category2modules($category) ])) {
 	    foreach (@bad) {
 		if (my $cat = module2category($_)) {
-		    warn "module $_ is in category $cat, not in $category\n";
+		    warn "ERROR in modules.pl: module $_ is in category $cat, not in $category\n";
 		} else {
-		    warn "unknown module $_\n";
+		    warn "ERROR in modules.pl: unknown module $_\n";
 		}
 	    }
 	    exit 1;
