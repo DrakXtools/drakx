@@ -717,7 +717,7 @@ sub load_thiskind {
     );
     grep {
 	$f->($_->{description}, $_->{driver}) if $f;
-	eval { load($_->{driver}, $type) };
+	eval { load($_->{driver}, $type, $_->{options}) };
 	$_->{error} = $@;
 
 	!($@ && $_->{try});
@@ -729,8 +729,17 @@ sub get_that_type {
     my ($type) = @_;
 
     grep {
-	my $l = $drivers{$_->{driver}};
-	($_->{type} =~ /$type/ || $l && $l->{type} =~ /$type/) && detect_devices::check($_);
+	if ($type eq 'isdn') {
+	    my $b = $_->{driver} =~ /ISDN:(.*),?(.*)/;
+	    if ($b) {
+		$_->{driver} = $1;
+		$_->{options} = $2;
+	    }
+	    $b;
+	} else {
+		my $l = $drivers{$_->{driver}};
+		($_->{type} =~ /$type/ || $l && $l->{type} =~ /$type/) && detect_devices::check($_);
+	}
     } detect_devices::probeall('');
 }
 
