@@ -483,7 +483,7 @@ sub add_alias {
     my ($alias, $name) = @_;
     $name =~ /ignore/ and return;
     /\Q$alias/ && $conf{$_}{alias} && $conf{$_}{alias} eq $name and return $_ foreach keys %conf;
-    $alias .= $scsi++ || '' if $alias eq 'scsi_hostadapter';
+    $alias .= ++$scsi if $alias eq 'scsi_hostadapter';
     log::l("adding alias $alias to $name");
     $conf{$alias}{alias} ||= $name;
     if ($name =~ /^snd-card-/) {
@@ -638,7 +638,7 @@ sub read_conf($;$) {
     foreach (cat_($file)) {
 	do {
 	    $c{$2}{$1} = $3;
-	    $$scsi = max($$scsi, $1 || 0) if /^\s*alias\s+scsi_hostadapter(\d*)/ && $scsi; #- space added to make perl2fcalls happy!
+	    $$scsi = max($$scsi, $1 || 0) if /^\s*alias\s+scsi_hostadapter(\d*)/ && $scsi;
 	} if /^\s*(\S+)\s+(\S+)\s+(.*?)\s*$/;
     }
     #- cheating here: not handling aliases of aliases
@@ -666,17 +666,21 @@ sub write_conf {
     my $file = "$prefix/etc/modules.conf";
     rename "$prefix/etc/conf.modules", $file; #- make the switch to new name if needed
 
-    my @scsi_hostadapters = $scsi ? map { "scsi_hostadapter$_" } ('', 1..$scsi-1) : ();
-    $conf{'scsi-hosts'}{probeall} = join(' ', @scsi_hostadapters) if @scsi_hostadapters;
+    my @scsi_hostadapters = $scsi ? map { "scsi_hostadapter$_" } (1 .. $scsi) : ();
+    $conf{scsi_hostadapter}{probeall} = join(' ', @scsi_hostadapters) if @scsi_hostadapters;
 
-    #- remove the post-install supermount stuff. We now do it in /etc/modules
     #- Substitute new aliases in modules.conf (if config has changed)
-    substInFile { $_ = '' if /^post-install supermount/ } $file;
     substInFile {
-	my ($type,$alias,$module) = split /\s+/, $_;
-	if ($type ne "loaded"     &&
-	    $conf{$alias}{alias}  &&
-	    $conf{$alias}{alias} !~ /$module/)  {
+	my ($type,$alias,$module) = split /\s+/, chomp_($_), 3;
+	if ($type eq 'post-install' && $alias eq 'supermount') {	    
+	    #- remove the post-install supermount stuff.
+	    $_ = '';
+	} elsif ($type eq 'alias' && $alias eq 'scsi_hostadapter') {
+	    #- remove old alias scsi_hostadapter which is replaced by probeall
+	    $_ = '';
+	} elsif ($type ne "loaded"     &&
+	    $conf{$alias}{$type}  &&
+	    $conf{$alias}{$type} ne $module)  {
 	    $_ = "$type $alias $conf{$alias}{alias} \n"; 
 	}
     } $file;
