@@ -9,33 +9,24 @@ compile and run safely.
 Sources installation:
 
   First grab the gi.tar.bz2 archive and untar it in your home directory.
+cd to gi
+If you're not Pixel, run this:
+for i in `du -a | grep CVS/Root | cut -f 2`
+do
+  sed -e 's/prigaux/anoncvs/' $i > $i.tmp
+  mv $i.tmp $i
+done
 
-  Make at temporary directory, say ~/tmp-gi.
-  cd to ~/tmp and get the cvs version of DrakX :
-export CVSROOT=:pserver:anoncvs@linux-mandrake.com:/home/cvs/cooker
+Then, log yourself into the cvs:
 cvs login
-Passwd: cvs
-cvs checkout gi
+(The Password is 'cvs')
+And update the gi package:
+cvs update -P
 
-  Then, tar the cvs version and untar it ontop of the ~/gi directory.
-
-To sum up, do the following:
-
-cd
-tar xfy gi.tar.bz2
-mkdir ~/tmp-gi
-cd ~/tmp-gi
-export CVSROOT=:pserver:anoncvs@linux-mandrake.com:/home/cvs/cooker
-cvs login  (passwd=cvs)
-cvs co gi
-tar cfy cvs-gi.tar.bz2 gi
-cd ..
-tar xfy tmp-gi/cvs-gi.tar.bz2
-rm -Rf tmp-gi
 --------------------------------------------------------------------------
 
 
 -- 
  DindinX <odin@mandrakesoft.com>
- Last change: Tue Feb  8 17:40:48 CET 2000
+ Last change: Thu Feb 10 17:26:41 CET 2000
 
