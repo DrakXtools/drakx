@@ -120,7 +120,7 @@ sub init {
     mkdir "/etc/$_" foreach qw(X11);
     touch '/etc/modules.conf';
     touch '/etc/modprobe.conf';
-    symlinkf "/proc/mounts", "/etc/mtab";
+    cp_f('/proc/mounts', '/etc/mtab');
 
     #- these files need be writable but we need a sensible first contents
     cp_f("/image/etc/$_", '/etc') foreach qw(passwd passwd- group sudoers fstab);
@@ -528,7 +528,7 @@ after_autoconf:
     require timezone;
     timezone::write($o->{timezone});
 
-    $o->{useSupermount} = 1;
+    $o->{useSupermount} = 'magicdev';
     fs::set_removable_mntpoints($o->{all_hds});    
     fs::set_all_default_options($o->{all_hds}, %$o, lang::fs_options($o->{locale}));
 
@@ -663,7 +663,7 @@ sub install2::startMove {
 	    eval { swap::swapon($_->{device}) };
 	} elsif ($_->{mntpoint} && !$_->{isMounted} && !$::noauto) {
 	    mkdir_p($_->{mntpoint});
-	    run_program::run('mount', $_->{mntpoint});
+	    run_program::run('mount', $_->{mntpoint}) if $_->{options} !~ /noauto/;
 	}
     }
 

@@ -10,6 +10,7 @@ foreach my $dir (@ARGV) {
     my @etcfiles = glob_("$dir/*");
     foreach (@etcfiles) {
         if ($_ eq '/etc/sudoers'           #- /etc/sudoers can't be a link
+	    || $_ eq '/etc/mtab'           #- same for /etc/mtab
             || !-f                                 
             || -l && readlink =~ m|^/|) {  #- we want to trap relative symlinks only
             next;
