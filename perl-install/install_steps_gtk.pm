@@ -279,7 +279,7 @@ sub choosePackagesTree {
 				} else {
 				    foreach my $root (@{$o->{compssUsers}}) {
 					my (@firstchoice, @others);
-					my %fl = map { $_ => 1 } @{$root->{flags}};
+					my %fl = map { ("CAT_$_" => 1) } @{$root->{flags}};
 					foreach my $p (@{$packages->{depslist}}) {
 					    !$o_limit_medium || pkgs::packageMedium($packages, $p) == $o_limit_medium or next;
 					    my @flags = $p->rflags;
