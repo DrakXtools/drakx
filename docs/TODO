@@ -36,6 +36,8 @@ stage1 & cdrom: add ability in expert to choose the scsi cdrom drive to use
 (7.1) sparc ehancement, avoid V7+ machine target (div and mul not in v7 standard)
 
 (7.1)syslinux in graphical mode to be improved for heavily bogus BIOSes.
+(7.1)install in 800x600
+- need handling of both 640x480 (mostly for VGA16) and 800x600
 
 (7.1)individual package selection: double click is tiring...
 (7.1)better help for partitioning in newbie
@@ -46,18 +48,10 @@ crypto: add a cancel & progress bar while downloading
 error handling (like reading hdlist)
 (7.1)progression bar on crypto.
 
-(7.1)install in 800x600
-- need handling of both 640x480 (mostly for VGA16) and 800x600
-
 (7.1)Improved network configuration (PPP and/or Ethernet)
 PPPoE install and configuration (SuSE includes it, DHCP-like)
-
 (7.1)standalone applications for configuration (netdrake, timetool, authentificationconf, soundcard)
-
 (7.1) improve printerdrake to at least have the same functionalities as printtool.
-
-(?)enable the testing of the mouse type (under X) (wheel)
-possibility to specify the mouse
 
 (7.2 or later)horizontal sub-steps
 
@@ -91,7 +85,6 @@ use option nocheck to mount for upgrades
 -fixes needing thinking-----------------------------------------------------------------
 bug: changing mem= in miscellaneous doesn't modify lilo conf if you backtrack
 
-ask_many_from_list can't keyboard scroll
 
 with /usr, /usr/local and /usr/local/e mount points i get an error at step mounting local filesystems
 
@@ -203,6 +196,8 @@ hibernation on laptop -> clock not restored
 
 # in 2.3.15 "Silicon Integrated Systems [SiS]|SiS900 10/100 Ethernet" is handled
 
+(?)enable the testing of the mouse type (under X) (wheel)
+possibility to specify the mouse
 
 -(?)---------------------------------------------------------------------------------
 (?) lilo-0.22-19mdk is buggy with boot=/dev/hde & root=/dev/sda13, it needs
@@ -494,3 +489,5 @@ in expert: blank, create hda5 at beginning, create hda6 at the end, create hda7
 in the middle, remove the first one. Result hda5 at the end and bug.
 
 (obsolete) have a better time estimation of the remaining time in install packages
+
+(done,dindinx+pix)ask_many_from_list can't keyboard scroll

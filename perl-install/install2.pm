@@ -423,6 +423,7 @@ sub configureTimezone {
 	#- can't be done in install cuz' timeconfig %post creates funny things
 	add2hash($o->{timezone}, { timezone::read($f) });
     }
+    $o->{timezone}{timezone} ||= timezone::bestTimezone(lang::lang2text($o->{lang}));
     $o->{timezone}{UTC} = !$::beginner && !grep { isFat($_) } @{$o->{fstab}} unless exists $o->{timezone}{UTC};
     $o->timeConfig($f, $clicked);
 }

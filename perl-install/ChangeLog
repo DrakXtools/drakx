@@ -1,3 +1,14 @@
+2000-03-26  Pixel  <pixel@mandrakesoft.com>
+
+	* install_any.pm (install_urpmi): full support for multi-hdlist's	
+
+	* pkgs.pm (extractHeaders): look for hdlist in /tmp instead of
+	$prefix/var/lib/urpmi
+	* pkgs.pm (psUsingHdlists): put hdlist's in /var/lib/urpmi with a
+	fake name. Access via /tmp/$hdlist is given for non-fake name
+
+	* detect_devices.pm (hasHPT): return undef if no htp (silly me :-/)
+
 2000-03-25  Pixel  <pixel@mandrakesoft.com>
 
 	* lilo.pm: updated to the new format of entries. It was an hash.

@@ -54,7 +54,8 @@ sub getFile {
     my $f = shift;
     my ($ftp, $retr) = new(@_ ? @_ : fromEnv);
     $$retr->close if $$retr;
-    $$retr = $ftp->retr(install_any::relGetFile($f));
+    $$retr   = $ftp->retr(install_any::relGetFile($f)) or rewindGetFile();
+    $$retr ||= $ftp->retr(install_any::relGetFile($f));    
 }
 
 sub rewindGetFile() {

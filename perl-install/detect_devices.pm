@@ -202,7 +202,7 @@ sub hasHPT {
     cat_("/proc/cmdline") =~ /(ide2=(\S+)(\s+ide3=(\S+))?)/ and return $1;
 
     require pci_probing::main;
-    my @l = map { $_->[0] } grep { $_->[1] =~ /(HPT|Ultra66)/ } pci_probing::main::probe('STORAGE_OTHER', 'more');
+    my @l = map { $_->[0] } grep { $_->[1] =~ /(HPT|Ultra66)/ } pci_probing::main::probe('STORAGE_OTHER', 'more') or return;
     
     my $ide = sprintf "ide2=0x%x,0x%x ide3=0x%x,0x%x", map_index { hex($_) + (odd($::i) ? 1 : -1) } do {
 	if (@l == 2) {

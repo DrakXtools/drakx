@@ -128,7 +128,7 @@ sub extractHeaders($$$) {
     cleanHeaders($prefix);
 
     run_program::run("extract_archive",
-		     "$prefix/var/lib/urpmi/$medium->{hdlist}",
+		     "/tmp/$medium->{hdlist}",
 		     "$prefix/tmp/headers",
 		     map { packageHeaderFile($_) } @$pkgs);
 
@@ -269,8 +269,8 @@ sub skipSetWithProvides {
     packageSetFlagSkip($_, 1) foreach grep { $_ } map { $_, packageProvides($_) } map { packageByName($packages, $_) } @l;
 }
 
-sub psUsingHdlists($) {
-    my ($prefix) = @_;
+sub psUsingHdlists {
+    my ($prefix, $method) = @_;
     my $listf = install_any::getFile('hdlists') or die "no hdlists found";
     my @packages = ({}, [], {});
     my @hdlists;
@@ -288,20 +288,24 @@ sub psUsingHdlists($) {
 	my ($hdlist, $medium) = @$_;
 	my $f = install_any::getFile($hdlist) or die "no $hdlist found";
 
+	my $fakemedium = $method . ($medium || 1);
 	$packages[2]{$medium} = { hdlist => $hdlist,
 				  medium => $medium, #- default medium is ''.
+				  fakemedium => $fakemedium,
 				  min    => scalar keys %{$packages[0]},
 				  max    => -1, #- will be updated after reading current hdlist.
 				};
 
 	#- copy hdlist file directly to $prefix/var/lib/urpmi, this will be used
 	#- for getting header of package during installation or after by urpmi.
-	my $newf = "$prefix/var/lib/urpmi/$hdlist";
+	my $newf = "$prefix/var/lib/urpmi/hdlist.$fakemedium.cz2";
 	-e $newf and do { unlink $newf or die "cannot remove $newf: $!"; };
 	local *F;
 	open F, ">$newf" or die "cannot create $newf: $!";
 	my ($buf, $sz); while (($sz = sysread($f, $buf, 16384))) { syswrite(F, $buf) }
 	close F;
+
+	symlinkf $newf, "/tmp/$hdlist";
 
 	#- extract filename from archive, this take advantage of verifying
 	#- the archive too.
@@ -724,6 +728,9 @@ sub install($$$;$$) {
 
     return if $::g_auto_install || !scalar(@$toInstall);
 
+    #- for root loopback'ed /boot
+    my $loop_boot = readlink "$prefix/boot"; unlink "$prefix/boot"; mkdir "$prefix/boot", 0755;
+
     #- first stage to extract some important informations
     #- about the packages selected. this is used to select
     #- one or many transaction.
@@ -746,8 +753,7 @@ sub install($$$;$$) {
     my $callbackOpen = sub {
 	my $f = packageFile($packages{$_[0]});
 	print LOG "$f\n";
-	my $fd = install_any::getFile($f) or install_any::rewindGetFile();
-	$fd ||=  install_any::getFile($f) or log::l("ERROR: bad file $f");
+	my $fd = install_any::getFile($f);
 	$fd ? fileno $fd : -1;
     };
     my $callbackClose = sub { packageSetFlagInstalled(delete $packages{$_[0]}, 1) };
@@ -827,7 +833,13 @@ sub install($$$;$$) {
     log::l("rpm database closed");
 
     cleanHeaders($prefix);
-    install_any::rewindGetFile(); #- make sure to reopen the connection, usefull for ftp.
+
+    if ($loop_boot) {
+	my @files = glob_("$prefix/boot/*");
+	commands::cp("-f", @files, $loop_boot) if @files;
+	commands::rm("-rf", "$prefix/boot");
+	symlink $loop_boot, "$prefix/boot";
+    }
 }
 
 sub remove($$) {

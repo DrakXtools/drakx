@@ -349,7 +349,8 @@ sub write_fstab($;$$) {
 	      
 	  local $_->{mntpoint} = do { 
 	      $passno = 0;
-	      "/initrd/loopfs" } if loopback::carryRootLoopback($_);
+	      "/initrd/loopfs";
+	  } if loopback::carryRootLoopback($_);
 
 	  add_options($options, "loop") if isLoopback($_) && !isSwap($_); #- no need for loop option for swap files
 

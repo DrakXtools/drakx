@@ -112,8 +112,11 @@ sub rewindGetFile() {
 #- Functions
 #-######################################################################################
 sub kernelVersion {
-    local $_ = readlink("$::o->{prefix}/boot/vmlinuz") || $::testing && "vmlinuz-2.2.testversion" or die "I couldn't find the kernel package!";
-    first(/vmlinuz-(.*)/);
+    my ($o) = @_;
+    local $_ = readlink("$::o->{prefix}/boot/vmlinuz") and return first(/vmlinuz-(.*)/);
+
+    my $p = pkgs::packageByName($o->{packages}, "kernel") or die "I couldn't find the kernel package!";
+    pkgs::packageVersion($p) . "-" . pkgs::packageRelease($p);
 }
 
 
@@ -170,7 +173,7 @@ sub setPackages($) {
 
     require pkgs;
     if (!$o->{packages} || is_empty_hash_ref($o->{packages}[0])) {
-	$o->{packages} = pkgs::psUsingHdlists($o->{prefix});
+	$o->{packages} = pkgs::psUsingHdlists($o->{prefix}, $o->{method});
 
 	push @{$o->{default_packages}}, "nfs-utils-clients" if $o->{method} eq "nfs";
 	push @{$o->{default_packages}}, "numlock" if $o->{miscellaneous}{numlock};
@@ -458,7 +461,7 @@ sub setupFB {
 	    }
 	}
     }
-    if (lilo::add_kernel($o->{prefix}, $o->{bootloader}, kernelVersion(), 'fb',
+    if (lilo::add_kernel($o->{prefix}, $o->{bootloader}, kernelVersion($o), 'fb',
 			 {
 			  label => 'linux-fb',
 			  root => lilo::get("/boot/vmlinuz", $o->{bootloader})->{root},
@@ -548,34 +551,32 @@ sub fsck_option() {
 }
 
 sub install_urpmi {
-    my ($prefix, $method) = @_;
-
-    (my $name = _("installation")) =~ s/\s/_/g; #- in case translators are too good :-/
-
-    my $hdlist = "$prefix/var/lib/urpmi/hdlist";
-    symlink "$hdlist.cz2", "hdlist.$name.cz2" or log::l("symlink failed " . __FILE__ . " " . __LINE__);
+    my ($prefix, $method, $mediums) = @_;
 
     {
 	local *F = getFile("depslist");
 	output("$prefix/var/lib/urpmi/depslist", <F>);
     }
-    {
+    my @cfg = map_index {
+	my $name = $_->{fakemedium};
+
 	local *LIST;
 	open LIST, ">$prefix/var/lib/urpmi/list.$name" or log::l("failed to write list.$name"), return;
 
 	my $dir = ${{ nfs => "file://mnt/nfs", 
-                      hd => "file:/" . hdInstallPath,
+                      hd => "file:/" . hdInstallPath(),
 		      ftp => $ENV{URLPREFIX},
 		      http => $ENV{URLPREFIX},
-		      cdrom => "removable_cdrom_1://mnt/cdrom" }}{$method};
+		      cdrom => "removable_cdrom_$::i://mnt/cdrom" }}{$method} . "/Mandrake/RPMS$_->{medium}";
 
-	local *FILES; open FILES, "bzip2 -dc $hdlist.cz2 2>/dev/null | hdlist2names - |";
-	chop, print LIST "$dir/Mandrake/RPMS/$_\n" foreach <FILES>;
+	local *FILES; open FILES, "bzip2 -dc /tmp/$_->{hdlist} 2>/dev/null | hdlist2names - |";
+	chop, print LIST "$dir/$_\n" foreach <FILES>;
 	close FILES or log::l("hdlist2names failed"), return;
 
-	$dir .= "/Mandrake/RPMS with ../base/hdlist.cz2" if $method =~ /ftp|http/;
-	eval { output "$prefix/etc/urpmi/urpmi.cfg", "$name $dir\n" };
-    }
+	$dir .= " with ../base/$_->{hdlist}" if $method =~ /ftp|http/;
+	"$name $dir\n";
+    } values %$mediums;
+    eval { output "$prefix/etc/urpmi/urpmi.cfg", @cfg };
 }
 
 sub list_passwd() {

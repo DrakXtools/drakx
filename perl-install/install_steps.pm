@@ -293,7 +293,7 @@ Consoles 1,3,4,7 may also contain interesting information";
 
     my $pkg = pkgs::packageByName($o->{packages}, 'urpmi');
     if ($pkg && pkgs::packageFlagSelected($pkg)) {
-	install_any::install_urpmi($o->{prefix}, $o->{method});
+	install_any::install_urpmi($o->{prefix}, $o->{method}, $o->{packages}[2]);
 	substInFile { s/^urpmi\n//; $_ .= "urpmi\n" if eof } "$msec/group.conf" if -d $msec;
     }
 
@@ -584,10 +584,10 @@ sub createBootdisk($) {
 
     if (arch() =~ /^sparc/) {
 	require silo;
-        silo::mkbootdisk($o->{prefix}, install_any::kernelVersion(), $dev, $o->{bootloader}{perImageAppend});
+        silo::mkbootdisk($o->{prefix}, install_any::kernelVersion($o), $dev, $o->{bootloader}{perImageAppend});
     } else {
 	require lilo;
-        lilo::mkbootdisk($o->{prefix}, install_any::kernelVersion(), $dev, $o->{bootloader}{perImageAppend});
+        lilo::mkbootdisk($o->{prefix}, install_any::kernelVersion($o), $dev, $o->{bootloader}{perImageAppend});
     }
     $o->{mkbootdisk} = $dev;
 }
@@ -637,10 +637,10 @@ sub setupBootloaderBefore {
 	}
     } elsif (arch() =~ /^sparc/) {
 	require silo;
-        silo::suggest($o->{prefix}, $o->{bootloader}, $o->{hds}, $o->{fstab}, install_any::kernelVersion());
+        silo::suggest($o->{prefix}, $o->{bootloader}, $o->{hds}, $o->{fstab}, install_any::kernelVersion($o));
     } else {
 	require lilo;
-        lilo::suggest($o->{prefix}, $o->{bootloader}, $o->{hds}, $o->{fstab}, install_any::kernelVersion());
+        lilo::suggest($o->{prefix}, $o->{bootloader}, $o->{hds}, $o->{fstab}, install_any::kernelVersion($o));
         lilo::suggest_floppy($o->{bootloader}) if $o->{security} <= 3;
 	$o->{bootloader}{keytable} ||= keyboard::keyboard2kmap($o->{keyboard});
     }

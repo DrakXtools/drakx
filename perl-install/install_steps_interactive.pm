@@ -544,10 +544,9 @@ sub timeConfig {
     my ($o, $f, $clicked) = @_;
 
     require timezone;
-    $o->{timezone}{timezone} ||= timezone::bestTimezone(lang::lang2text($o->{lang}));
     $o->{timezone}{timezone} = $o->ask_from_treelist('', _("Which is your timezone?"), '/', [ timezone::getTimeZones($::g_auto_install ? '' : $o->{prefix}) ], $o->{timezone}{timezone});
     $o->{timezone}{UTC} = $o->ask_yesorno('', _("Is your hardware clock set to GMT?"), $o->{timezone}{UTC}) if $::expert || $clicked;
-    install_steps::timeConfig($o,$f);
+    install_steps::timeConfig($o, $f);
 }
 
 #------------------------------------------------------------------------------

@@ -219,6 +219,7 @@ sub createScrolledWindow($) {
     member(ref $W, qw(Gtk::CList Gtk::CTree Gtk::Text)) ?
       $w->add($W) :
       $w->add_with_viewport($W);
+    $W->can("set_focus_vadjustment") and $W->set_focus_vadjustment($w->get_vadjustment);
     $W->show;
     $w
 }

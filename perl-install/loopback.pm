@@ -39,6 +39,9 @@ sub carryRootCreateSymlink {
 	eval { commands::mkdir_("-p", dirname($mntpoint)) };
 	#- do non-relative link for install, should be changed to relative link before rebooting
 	symlink "/initrd/loopfs", $mntpoint;
+
+	mkdir "/initrd/loopfs/boot", 0755;
+	symlink "/initrd/loopfs/boot", "$prefix/boot";
     }
     #- indicate kernel to keep initrd
     mkdir "$prefix/initrd", 0755;

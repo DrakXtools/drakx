@@ -197,3 +197,38 @@ On a test machine, make a network install, switch to console (ctrl-alt-F2), ente
 
 then, on another computer:
 % DISPLAY=test_machine:0 xwd -root | convert - screenshot.png
+
+********************************************************************************
+* Adding a new step to DrakX ***************************************************
+********************************************************************************
+Say we want to add a question for setting "alawindows" option.
+We put it pretty early in the install, let's say after "Select Installation
+Class".
+
+1. in install2.pm
+
+add
+
+  selectAlawindows => [ __("A la windows or not"), 0, 1, '' ],
+
+after
+
+  selectInstallClass => [ __("Select installation class"), 1, 1, '' ],
+
+the 0, 1, '' means not "redoable", "skip on error", "don't hide"
+
+2. add your function selectAlawindows in install2.pm
+
+sub selectAlawindows  { $o->selectAlawindows }
+
+3. add your function selectAlawindows in install_steps_interactive.pm
+
+sub selectAlawindows {
+    my ($o) = @_;
+    $o->{alawindows} = $o->ask_yesorno('', _("Throw everything away as windobe does?"), 1);
+}
+
+4. add your function selectAlawindows in install_steps.pm (not needed in that
+case, except for auto_install)
+
+sub selectAlawindows  {}
