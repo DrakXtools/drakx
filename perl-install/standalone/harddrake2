@@ -179,7 +179,7 @@ my (%data, %configurators);
 $tree->append_column(my $pixcolumn  = Gtk2::TreeViewColumn->new_with_attributes(undef, Gtk2::CellRendererPixbuf->new, 'pixbuf' => 0));
 $tree->append_column(my $textcolumn = Gtk2::TreeViewColumn->new_with_attributes(undef, Gtk2::CellRendererText->new, 'text' => 1));
 $tree->set_headers_visible(0);
-my $selection = gtksignal_connect($tree->get_selection(), 'changed' => sub {
+$tree->get_selection()->signal_connect('changed' => sub {
     my ($select) = @_;
     my ($model, $iter) = $select->get_selected();
     if ($model) {
@@ -324,12 +324,12 @@ sub strip_first_underscore {
 
 sub rename_field {
     my ($dev, $field, $new_field) = @_;
-    if ($_->{$field}) {
-        if ($_->{$new_field}) {
-            $_->{$new_field} .= " ($_->{$field})";
+    if ($dev->{$field}) {
+        if ($dev->{$new_field}) {
+            $dev->{$new_field} .= " ($_->{$field})";
         } else {
-            $_->{$new_field} = $_->{$field};
+            $dev->{$new_field} = $_->{$field};
         }
-        delete $_->{$field};
+        delete $dev->{$field};
     }
 }
