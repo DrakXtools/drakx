@@ -156,7 +156,7 @@ sub setup_printer_connection {
 }
 
 sub auto_detect {
-    my ($in, $local, $network, $smb) = @_;
+    my ($local, $network, $smb) = @_;
     if ($local) {
 	modules::get_probeall("usb-interface") and eval { modules::load("printer") };
 	eval { modules::unload(qw(lp parport_pc parport_probe parport)) }; #- on kernel 2.4 parport has to be unloaded to probe again
@@ -256,10 +256,11 @@ sub setup_local_autoscan {
     my ($printer, $in, $upNetwork) = @_;
     my (@port, @str, $device);
     my $queue = $printer->{OLD_QUEUE};
+    my $expert_or_modify = ($::expert || !$printer->{NEW});
     my $do_auto_detect = 
-	(($::expert &&
+	(($expert_or_modify &&
 	  $printer->{AUTODETECT}) ||
-	 (!$::expert &&
+	 (!$expert_or_modify &&
 	  ($printer->{AUTODETECTLOCAL} ||
 	   $printer->{AUTODETECTNETWORK} ||
 	   $printer->{AUTODETECTSMB})));
@@ -274,17 +275,21 @@ sub setup_local_autoscan {
     my $menuentries = {};
     $in->set_help('setupLocal') if $::isInstall;
     if ($do_auto_detect) {
+	if ((!$::testing) &&
+	    ($printer->{AUTODETECTSMB}) &&
+	    (!printer::files_exist((qw(/usr/bin/smbclient))))) {
+	    $in->do_pkgs->install('samba-client');
+	}
 	my $w = $in->wait_message(_("Printer auto-detection"), _("Detecting devices..."));
 	# When HPOJ is running, it blocks the printer ports on which it is
 	# configured, so we stop it here. If it is not installed or not 
 	# configured, this command has no effect.
 	printer::stop_service("hpoj");
-	@autodetected = auto_detect($in,
-				    $::expert ||
+	@autodetected = auto_detect($expert_or_modify ||
 				    $printer->{AUTODETECTLOCAL},
-				    !$::expert && 
+				    !$expert_or_modify && 
 				    $printer->{AUTODETECTNETWORK},
-				    !$::expert && 
+				    !$expert_or_modify && 
 				    $printer->{AUTODETECTSMB});
 	# We have more than one printer, so we must ask the user for a queue
 	# name in the fully automatic printer configuration.
@@ -475,7 +480,7 @@ sub setup_local_autoscan {
 	    $manualconf = 1 if (($printer->{MANUAL}) || (!$do_auto_detect));
 	    if (!$in->ask_from_
 		(
-		 { title => ($::expert ?
+		 { title => ($expert_or_modify ?
 			     _("Local Printer") :
 			     _("Available printers")),
 		   messages => (($do_auto_detect ?
@@ -531,6 +536,13 @@ sub setup_local_autoscan {
 		undef $printer->{MANUAL};
 	    }
 	}
+    }
+
+    #- LPD and LPRng need netcat ('nc') to access to socket printers
+    if ((($printer->{SPOOLER} eq 'lpd') || ($printer->{SPOOLER} eq 'lprng')) &&
+        (!$::testing) && ($device =~ /^socket:/) &&
+        (!printer::files_exist((qw(/usr/bin/nc))))) {
+        $in->do_pkgs->install('nc');
     }
 
     # Do configuration of multi-function devices and look up model name
@@ -660,31 +672,100 @@ sub setup_smb {
 	}
     }
 
-    return if !$in->ask_from(_("SMB (Windows 9x/NT) Printer Options"),
-_("To print to a SMB printer, you need to provide the SMB host name (Note! It may be different from its TCP/IP hostname!) and possibly the IP address of the print server, as well as the share name for the printer you wish to access and any applicable user name, password, and workgroup information."), [
-{ label => _("SMB server host"), val => \$smbserver },
-{ label => _("SMB server IP"), val => \$smbserverip },
-{ label => _("Share name"), val => \$smbshare },
-{ label => _("User name"), val => \$smbuser },
-{ label => _("Password"), val => \$smbpassword, hidden => 1 },
-{ label => _("Workgroup"), val => \$workgroup }, ],
-complete => sub {
-    unless ((network::is_ip($smbserverip)) || ($smbserverip eq "")) {
-	$in->ask_warn('', _("IP address should be in format 1.2.3.4"));
-	return (1,1);
+    my $autodetect = 0;
+    my @autodetected;
+    my $menuentries;
+    my @menuentrieslist;
+    my $menuchoice = "";
+    my $oldmenuchoice = "";
+    if ($printer->{AUTODETECT}) {
+	$autodetect = 1;
+	my $w = $in->wait_message(_("Printer auto-detection"), _("Scanning network..."));
+	@autodetected = auto_detect(0, 0, 1);
+	for my $p (@autodetected) {
+	    my $menustr;
+	    $p->{port} =~ m!^smb://([^/:]+)/([^/:]+)$!;
+	    my $server = $1;
+	    my $share = $2;
+	    if ($p->{val}{DESCRIPTION}) {
+		$menustr = $p->{val}{DESCRIPTION};
+		$menustr .= _(", printer \"%s\" on server \"%s\"",
+			      $share, $server);
+	    } else {
+		$menustr = _("Printer \"%s\" on server \"%s\"",
+			     $share, $server);
+	    }
+	    $menuentries->{$menustr} = $p->{port};
+	    if (($server eq $smbserver) &&
+		($share eq $smbshare)) {
+		$menuchoice = $menustr;
+	    }
+	}
+	@menuentrieslist = sort {
+	    $menuentries->{$a} cmp $menuentries->{$b};
+	} keys(%{$menuentries});
+	if (($printer->{configured}{$queue}) &&
+	    ($printer->{currentqueue}{connect} =~ m/^smb:/) &&
+	    ($menuchoice eq "")) {
+	    my $menustr;
+	    if ($printer->{currentqueue}{make}) {
+		$menustr = "$printer->{currentqueue}{make} $printer->{currentqueue}{model}";
+		$menustr .= _(", printer \"%s\" on server \"%s\"",
+			      $smbshare, $smbserver);
+	    } else {
+		$menustr = _("Printer \"%s\" on server \"%s\"",
+			     $smbshare, $smbserver);
+	    }
+	    $menuentries->{$menustr} = "smb://$smbserver/$smbshare";
+	    unshift(@menuentrieslist, $menustr);
+	    $menuchoice = $menustr;
+	}
+	if ($#menuentrieslist < 0) {
+	    $autodetect = 0;
+	} elsif ($menuchoice eq "") {
+	    $menuchoice = $menuentrieslist[0];
+	    $menuentries->{$menuentrieslist[0]} =~
+		m!^smb://([^/:]+)/([^/:]+)$!;
+	    $smbserver = $1;
+	    $smbshare = $2;
+	}
+	$oldmenuchoice = $menuchoice;
     }
-    unless (($smbserver ne "") || ($smbserverip ne "")) {
-	$in->ask_warn('', _("Either the server name or the server's IP must be given!"));
-	return (1,0);
-    }
-    unless ($smbshare ne "") {
-	$in->ask_warn('', _("Samba share name missing!"));
-	return (1,2);
-    }
-    unless ($smbpassword eq "") {
-	local $::isWizard = 0;
-	my $yes = $in->ask_yesorno(_("SECURITY WARNING!"),
-_("You are about to set up printing to a Windows account with password. Due to a fault in the architecture of the Samba client software the password is put in clear text into the command line of the Samba client used to transmit the print job to the Windows server. So it is possible for every user on this machine to display the password on the screen by issuing commands as \"ps auxwww\".
+
+    return 0 if !$in->ask_from
+	(_("SMB (Windows 9x/NT) Printer Options"),
+	 _("To print to a SMB printer, you need to provide the SMB host name (Note! It may be different from its TCP/IP hostname!) and possibly the IP address of the print server, as well as the share name for the printer you wish to access and any applicable user name, password, and workgroup information.") .
+	 ($autodetect ? _(" If the desired printer was auto-detected, simply choose it from the list and then add user name, password, and/or workgroup if needed.") : ""),
+	 [{ label => _("SMB server host"), val => \$smbserver },
+	  { label => _("SMB server IP"), val => \$smbserverip },
+	  { label => _("Share name"), val => \$smbshare },
+	  { label => _("User name"), val => \$smbuser },
+	  { label => _("Password"), val => \$smbpassword, hidden => 1 },
+	  { label => _("Workgroup"), val => \$workgroup },
+	  ($autodetect ?
+	   { label => _("Auto-detected"),
+	     val => \$menuchoice, list => \@menuentrieslist, 
+	     not_edit => 0, format => \&translate, sort => 0,
+	     allow_empty_list => 1, type => 'combo' }
+	   : ()) ],
+	 complete => sub {
+	     unless ((network::is_ip($smbserverip)) || ($smbserverip eq "")) {
+		 $in->ask_warn('', _("IP address should be in format 1.2.3.4"));
+		 return (1,1);
+	     }
+	     unless (($smbserver ne "") || ($smbserverip ne "")) {
+		 $in->ask_warn('', _("Either the server name or the server's IP must be given!"));
+		 return (1,0);
+	     }
+	     unless ($smbshare ne "") {
+		 $in->ask_warn('', _("Samba share name missing!"));
+		 return (1,2);
+	     }
+	     unless ($smbpassword eq "") {
+		 local $::isWizard = 0;
+		 my $yes = $in->ask_yesorno
+		     (_("SECURITY WARNING!"),
+		      _("You are about to set up printing to a Windows account with password. Due to a fault in the architecture of the Samba client software the password is put in clear text into the command line of the Samba client used to transmit the print job to the Windows server. So it is possible for every user on this machine to display the password on the screen by issuing commands as \"ps auxwww\".
 
 We recommend to make use of one of the following alternatives (in all cases you have to make sure that only machines from your local network have access to your Windows server, for example by means of a firewall):
 
@@ -693,19 +774,29 @@ Use a password-less account on your Windows server, as the \"GUEST\" account or 
 Set up your Windows server to make the printer available under the LPD protocol. Then set up printing from this machine with the \"%s\" connection type in Printerdrake.
 
 ", _("Printer on remote lpd server")) .
-($::expert ? 
-_("Set up your Windows server to make the printer available under the IPP protocol and set up printing from this machine with the \"%s\" connection type in Printerdrake.
+		      ($::expert ? 
+		       _("Set up your Windows server to make the printer available under the IPP protocol and set up printing from this machine with the \"%s\" connection type in Printerdrake.
 
 ", _("Enter a printer device URI")) : "") .
 _("Connect your printer to a Linux server and let your Windows machine(s) connect to it as a client.
 
 Do you really want to continue setting up this printer as you are doing now?"), 0);
-	return 0 if $yes;
-	return (1,2);
-    }
-    return 0;
-}
-    );
+		 return 0 if $yes;
+		 return (1,2);
+	     }
+	     return 0;
+	 },
+	 changed => sub {
+	     return 0 if !$autodetect;
+	     if ($oldmenuchoice ne $menuchoice) {
+		 $menuentries->{$menuchoice} =~ m!^smb://([^/:]+)/([^/:]+)$!;
+		 $smbserver = $1;
+		 $smbshare = $2;
+		 $oldmenuchoice = $menuchoice;
+	     }
+	     return 0;
+	 }
+	 );
     #- make the DeviceURI from, try to probe for available variable to
     #- build a suitable URI.
     $printer->{currentqueue}{connect} =
@@ -759,7 +850,7 @@ sub setup_ncp {
 	}
     }
 
-    return if !$in->ask_from(_("NetWare Printer Options"),
+    return 0 if !$in->ask_from(_("NetWare Printer Options"),
 _("To print on a NetWare printer, you need to provide the NetWare print server name (Note! it may be different from its TCP/IP hostname!) as well as the print queue name for the printer you wish to access and any applicable user name and password."), [
 { label => _("Printer Server"), val => \$ncpserver },
 { label => _("Print Queue Name"), val => \$ncpqueue },
@@ -803,15 +894,23 @@ sub setup_socket {
     my ($hostname, $port, $uri, $remotehost,$remoteport);
     my $queue = $printer->{OLD_QUEUE};
     if (($printer->{configured}{$queue}) &&
-	($printer->{currentqueue}{connect} =~ m/^socket:/)) {
+	($printer->{currentqueue}{connect} =~  m!^(socket:|ptal:/hpjd:)!)) {
 	$uri = $printer->{currentqueue}{connect};
-	($remotehost, $remoteport) = $uri =~ m!^\s*socket://([^/:]+):([0-9]+)/?\s*$!;
+	if ($uri =~ m!^ptal:!) {
+	    if ($uri =~ m!^ptal:/hpjd:([^/:]+):([0-9]+)/?\s*$!) {
+		my $ptalport = $2 - 9100;
+		($remotehost, $remoteport) = ($1, $ptalport);
+	    } elsif ($uri =~ m!^ptal:/hpjd:([^/:]+)\s*$!) {
+		($remotehost, $remoteport) = ($1, 9100);
+	    }
+	} else {
+	    ($remotehost, $remoteport) =
+		$uri =~ m!^\s*socket://([^/:]+):([0-9]+)/?\s*$!;
+	}
     } else {
 	$remotehost = "";
 	$remoteport = "9100";
     }
-
-    if (0) {
 
     my $autodetect = 0;
     my @autodetected;
@@ -822,67 +921,101 @@ sub setup_socket {
     if ($printer->{AUTODETECT}) {
 	$autodetect = 1;
 	my $w = $in->wait_message(_("Printer auto-detection"), _("Scanning network..."));
-	@autodetected = auto_detect($in, 0, 1, 0);
+	@autodetected = auto_detect(0, 1, 0);
 	for my $p (@autodetected) {
 	    my $menustr;
+	    $p->{port} =~ m!^socket://([^:]+):(\d+)$!;
+	    my $host = $1;
+	    my $port = $2;
 	    if ($p->{val}{DESCRIPTION}) {
 		$menustr = $p->{val}{DESCRIPTION};
-		$p->{port} =~ m!^socket://([^:]+):(\d+)$!;
-		$menustr .= _(", network printer \"%s\", port %s", $1, $2);
-
+		$menustr .= _(", host \"%s\", port %s",
+			      $host, $port);
 	    } else {
-		$p->{port} =~ m!^socket://([^:]+):(\d+)$!;
-		$menustr = _("Network printer \"%s\", port %s", $1, $2);
+		$menustr = _("Host \"%s\", port %s", $host, $port);
 	    }
-	    $menustr .= " ($p->{port})";
 	    $menuentries->{$menustr} = $p->{port};
+	    if (($host eq $remotehost) &&
+		($host eq $remotehost)) {
+		$menuchoice = $menustr;
+	    }
 	}
 	@menuentrieslist = sort { 
 	    $menuentries->{$a} cmp $menuentries->{$b};
 	} keys(%{$menuentries});
 	if (($printer->{configured}{$queue}) &&
-	    ($printer->{currentqueue}{connect} =~ m/^socket:/)) {
-	    my $uri = $printer->{currentqueue}{connect};
+	    ($printer->{currentqueue}{connect} =~ m!^(socket:|ptal:/hpjd:)!) &&
+	    ($menuchoice eq "")) {
 	    my $menustr;
 	    if ($printer->{currentqueue}{make}) {
 		$menustr = "$printer->{currentqueue}{make} $printer->{currentqueue}{model}";
-		$uri =~ m!^socket://([^:]+):(\d+)$!;
-		$menustr .= _(", network printer \"%s\", port %s", $1, $2);
+		$menustr .= _(", host \"%s\", port %s",
+			      $remotehost, $remoteport);
 	    } else {
-		$uri =~ m!^socket://([^:]+):(\d+)$!;
-		$menustr = _("Network printer \"%s\", port %s", $1, $2);
+		$menustr = _("Host \"%s\", port %s",
+			      $remotehost, $remoteport);
 	    }
-	    $menustr .= " ($uri)";
-	    $menuentries->{$menustr} = $uri;
+	    $menuentries->{$menustr} = "socket://$remotehost:$remoteport";
 	    unshift(@menuentrieslist, $menustr);
+	    $menuchoice = $menustr;
 	}
 	if ($#menuentrieslist < 0) {
 	    $autodetect = 0;
+	} elsif ($menuchoice eq "") {
+	    $menuchoice = $menuentrieslist[0];
+	    $menuentries->{$menuentrieslist[0]} =~ m!^socket://([^:]+):(\d+)$!;
+	    $remotehost = $1;
+	    $remoteport = $2;
 	}
+	$oldmenuchoice = $menuchoice;
     }
 
-    }
-
-    return if !$in->ask_from(_("TCP/Socket Printer Options"),
-_("To print to a TCP or socket printer, you need to provide the host name of the printer and optionally the port number. On HP JetDirect servers the port number is usually 9100, on other servers it can vary. See the manual of your hardware."), [
-{ label => _("Printer host name"), val => \$remotehost },
-{ label => _("Port"), val => \$remoteport } ],
-complete => sub {
-    unless ($remotehost ne "") {
-	$in->ask_warn('', _("Printer host name missing!"));
-	return (1,0);
-    }
-    unless ($remoteport =~ /^[0-9]+$/) {
-	$in->ask_warn('', _("The port number should be an integer!"));
-	return (1,1);
-    }
-    return 0;
-}
-					 );
-
+    return 0 if !$in->ask_from_
+	({
+	     title => _("TCP/Socket Printer Options"),
+	     messages => ($autodetect ?
+			  _("Choose one of the auto-detected printers from the list or enter the hostname or IP and the optional port number (default is 9100) into the input fields.") :
+			  _("To print to a TCP or socket printer, you need to provide the host name or IP of the printer and optionally the port number (default is 9100). On HP JetDirect servers the port number is usually 9100, on other servers it can vary. See the manual of your hardware.")),
+		 callbacks => {
+		 complete => sub {
+		     unless ($remotehost ne "") {
+			 $in->ask_warn
+			     ('', _("Printer host name or IP missing!"));
+			 return (1,0);
+		     }
+		     unless ($remoteport =~ /^[0-9]+$/) {
+			 $in->ask_warn('', _("The port number should be an integer!"));
+			 return (1,1);
+		     }
+		     return 0;
+		 },
+		 changed => sub {
+		     return 0 if !$autodetect;
+		     if ($oldmenuchoice ne $menuchoice) {
+			 $menuentries->{$menuchoice} =~ m!^socket://([^:]+):(\d+)$!;
+			 $remotehost = $1;
+			 $remoteport = $2;
+			 $oldmenuchoice = $menuchoice;
+		     }
+		     return 0;
+		 }
+	     }
+	 },
+	 [
+	  { label => ($autodetect ? "" : _("Printer host name or IP")),
+	    val => \$remotehost },
+	  { label => ($autodetect ? "" : _("Port")), val => \$remoteport },
+	  ($autodetect ?
+	   { val => \$menuchoice, list => \@menuentrieslist, 
+	     not_edit => 0, format => \&translate, sort => 0,
+	     allow_empty_list => 1, type => 'list' }
+	   : ())
+	  ]
+	 );
+    
     #- make the Foomatic URI
     $printer->{currentqueue}{connect} = 
-    join '', ("socket://$remotehost", $remoteport ? (":$remoteport") : ());
+	join '', ("socket://$remotehost", $remoteport ? (":$remoteport") : ());
 
     #- LPD and LPRng need netcat ('nc') to access to socket printers
     if ((($printer->{SPOOLER} eq 'lpd') || ($printer->{SPOOLER} eq 'lprng'))&& 
@@ -893,11 +1026,12 @@ complete => sub {
 
     # Auto-detect printer model (works if host is an ethernet-connected
     # printer)
-    my $modelinfo = detect_devices::getSNMPModel ($remotehost);
+    my $modelinfo = undef;
+    if ($printer->{AUTODETECT}) {
+	$modelinfo = detect_devices::getSNMPModel ($remotehost);
+    }
     my $auto_hpoj;
     if ((defined($modelinfo)) && ($modelinfo->{MANUFACTURER} ne "")) {
-        $in->ask_warn('', _("Detected model: %s %s",
-                            $modelinfo->{MANUFACTURER}, $modelinfo->{MODEL}));
         $auto_hpoj = 1;
     } else {
 	$auto_hpoj = 0;
@@ -910,7 +1044,6 @@ complete => sub {
 		  $printer->{currentqueue}{connect}, $auto_hpoj,
                   ({port => $printer->{currentqueue}{connect},
                     val => $modelinfo}));
-
     1;
 }
 
@@ -1048,92 +1181,100 @@ sub setup_common {
 
     my $ptaldevice = "";
     my $isHPOJ = 0;
-    if (!$do_auto_detect) {
-	local $::isWizard = 0;
-	$isHPOJ = $in->ask_yesorno(_("Local Printer"),
-				   _("Is your printer a multi-function device from HP (OfficeJet, PSC, LaserJet 1100/1200/1220/3200/3300 with scanner), an HP PhotoSmart or an HP LaserJet 2200?"), 0);
-    }
-    if (($makemodel =~ /HP\s+OfficeJet/i) ||
-	($makemodel =~ /HP\s+PSC/i) ||
-	($makemodel =~ /HP\s+PhotoSmart/i) ||
-	($makemodel =~ /HP\s+LaserJet\s+1100/i) ||
-	($makemodel =~ /HP\s+LaserJet\s+1200/i) ||
-	($makemodel =~ /HP\s+LaserJet\s+1220/i) ||
-	($makemodel =~ /HP\s+LaserJet\s+2200/i) ||
-	($makemodel =~ /HP\s+LaserJet\s+3200/i) ||
-	($makemodel =~ /HP\s+LaserJet\s+33.0/i) ||
-	($isHPOJ)) {
-	# Install HPOJ package
-	if ((!$::testing) &&
-	    (!printer::files_exist((qw(/usr/sbin/ptal-mlcd
-				       /usr/sbin/ptal-init
-				       /usr/bin/xojpanel))))) {
-	    my $w = $in->wait_message('', _("Installing HPOJ package..."));
-	    $in->do_pkgs->install('hpoj', 'xojpanel');
+    if ($device !~ /^smb:/) {
+	if (!$do_auto_detect) {
+	    local $::isWizard = 0;
+	    $isHPOJ = $in->ask_yesorno(_("Local Printer"),
+				       _("Is your printer a multi-function device from HP (OfficeJet, PSC, LaserJet 1100/1200/1220/3200/3300 with scanner), an HP PhotoSmart or an HP LaserJet 2200?"), 0);
 	}
-	# Configure and start HPOJ
-	my $w = $in->wait_message
-	    ('', _("Checking device and configuring HPOJ..."));
-	$ptaldevice = printer::configure_hpoj($device, @autodetected);
-
-	if ($ptaldevice) {
-	    # Configure scanning with SANE on the MF device
-	    if (($makemodel !~ /HP\s+PhotoSmart/i) &&
-		($makemodel !~ /HP\s+LaserJet\s+2200/i)) {
-		# Install SANE
-		if ((!$::testing) &&
-		    (!printer::files_exist((qw(/usr/bin/scanimage
-					       /usr/bin/xscanimage
-					       /usr/bin/xsane
-					       /etc/sane.d/dll.conf
-					       /usr/lib/libsane-hpoj.so.1),
-					    (printer::files_exist
-					     ('/usr/bin/gimp') ? 
-					     '/usr/bin/xsane-gimp' : 
-					     ()))))) {
-		    my $w = $in->wait_message
-			('', _("Installing SANE packages..."));
-		    $in->do_pkgs->install('sane-backends', 'sane-frontends',
-					  'xsane', 'libsane-hpoj0',
-					  if_($in->do_pkgs->is_installed
-					      ('gimp'),'xsane-gimp'));
+	if (($makemodel =~ /HP\s+OfficeJet/i) ||
+	    ($makemodel =~ /HP\s+PSC/i) ||
+	    ($makemodel =~ /HP\s+PhotoSmart/i) ||
+	    ($makemodel =~ /HP\s+LaserJet\s+1100/i) ||
+	    ($makemodel =~ /HP\s+LaserJet\s+1200/i) ||
+	    ($makemodel =~ /HP\s+LaserJet\s+1220/i) ||
+	    ($makemodel =~ /HP\s+LaserJet\s+2200/i) ||
+	    ($makemodel =~ /HP\s+LaserJet\s+3200/i) ||
+	    ($makemodel =~ /HP\s+LaserJet\s+33.0/i) ||
+	    ($isHPOJ)) {
+	    # Install HPOJ package
+	    if ((!$::testing) &&
+		(!printer::files_exist((qw(/usr/sbin/ptal-mlcd
+					   /usr/sbin/ptal-init
+					   /usr/bin/xojpanel))))) {
+		my $w = $in->wait_message('', _("Installing HPOJ package..."));
+		$in->do_pkgs->install('hpoj', 'xojpanel');
+	    }
+	    # Configure and start HPOJ
+	    my $w = $in->wait_message
+		('', _("Checking device and configuring HPOJ..."));
+	    $ptaldevice = printer::configure_hpoj($device, @autodetected);
+	    
+	    if ($ptaldevice) {
+		# Configure scanning with SANE on the MF device
+		if (($makemodel !~ /HP\s+PhotoSmart/i) &&
+		    ($makemodel !~ /HP\s+LaserJet\s+2200/i)) {
+		    # Install SANE
+		    if ((!$::testing) &&
+			(!printer::files_exist((qw(/usr/bin/scanimage
+						   /usr/bin/xscanimage
+						   /usr/bin/xsane
+						   /etc/sane.d/dll.conf
+						   /usr/lib/libsane-hpoj.so.1),
+						(printer::files_exist
+						 ('/usr/bin/gimp') ? 
+						 '/usr/bin/xsane-gimp' : 
+						 ()))))) {
+			my $w = $in->wait_message
+			    ('', _("Installing SANE packages..."));
+			$in->do_pkgs->install('sane-backends',
+					      'sane-frontends',
+					      'xsane', 'libsane-hpoj0',
+					      if_($in->do_pkgs->is_installed
+						  ('gimp'),'xsane-gimp'));
+		    }
+		    # Configure the HPOJ SANE backend
+		    printer::config_sane();
 		}
-		# Configure the HPOJ SANE backend
-		printer::config_sane();
-	    }
-	    # Configure photo card access with mtools and MToolsFM
-	    if (($makemodel =~ /HP\s+PhotoSmart/i) ||
-		($makemodel =~ /HP\s+PSC\s*9[05]0/i) ||
-		($makemodel =~ /HP\s+OfficeJet\s+D\s*1[45]5/i)) {
-		# Install mtools and MToolsFM
-		if ((!$::testing) &&
-		    (!printer::files_exist(qw(/usr/bin/mdir
-					      /usr/bin/mcopy
-					      /usr/bin/MToolsFM
-					      )))) {
-		    my $w = $in->wait_message
-			('', _("Installing mtools packages..."));
-		    $in->do_pkgs->install('mtools', 'MToolsFM');
+		# Configure photo card access with mtools and MToolsFM
+		if (($makemodel =~ /HP\s+PhotoSmart/i) ||
+		    ($makemodel =~ /HP\s+PSC\s*9[05]0/i) ||
+		    ($makemodel =~ /HP\s+OfficeJet\s+D\s*1[45]5/i)) {
+		    # Install mtools and MToolsFM
+		    if ((!$::testing) &&
+			(!printer::files_exist(qw(/usr/bin/mdir
+						  /usr/bin/mcopy
+						  /usr/bin/MToolsFM
+						  )))) {
+			my $w = $in->wait_message
+			    ('', _("Installing mtools packages..."));
+			$in->do_pkgs->install('mtools', 'MToolsFM');
+		    }
+		    # Configure mtools/MToolsFM for photo card access
+		    printer::config_photocard();
 		}
-		# Configure mtools/MToolsFM for photo card access
-		printer::config_photocard();
+		
+		my $text = "";
+		# Inform user about how to scan with his MF device
+		$text = scanner_help($makemodel, "ptal:/$ptaldevice");
+		if ($text) {
+		    $in->ask_warn
+			(_("Scanning on your HP multi-function device"),
+			 $text);
+		}
+		# Inform user about how to access photo cards with his MF
+		# device
+		$text = photocard_help($makemodel, "ptal:/$ptaldevice");
+		if ($text) {
+		    $in->ask_warn(_("Photo memory card access on your HP multi-function device"),
+				  $text);
+		}
+		# make the DeviceURI from $ptaldevice.
+		$printer->{currentqueue}{connect} = "ptal:/" . $ptaldevice;
+	    } else {
+		# make the DeviceURI from $device.
+		$printer->{currentqueue}{connect} = $device;
 	    }
-
-	    my $text = "";
-	    # Inform user about how to scan with his MF device
-	    $text = scanner_help($makemodel, "ptal:/$ptaldevice");
-	    if ($text) {
-		$in->ask_warn(_("Scanning on your HP multi-function device"),
-			      $text);
-	    }
-	    # Inform user about how to access photo cards with his MF device
-	    $text = photocard_help($makemodel, "ptal:/$ptaldevice");
-	    if ($text) {
-		$in->ask_warn(_("Photo memory card access on your HP multi-function device"),
-			      $text);
-	    }
-	    # make the DeviceURI from $ptaldevice.
-	    $printer->{currentqueue}{connect} = "ptal:/" . $ptaldevice;
 	} else {
 	    # make the DeviceURI from $device.
 	    $printer->{currentqueue}{connect} = $device;
@@ -2879,7 +3020,7 @@ sub main {
 		    # eval to catch wizard cancel. The wizard stuff should 
 		    # be in a separate function with steps. see dragw.
 		    # (dams)
-		    $printer->{TYPE} = "LOCAL";
+		    $::expert or $printer->{TYPE} = "LOCAL";
 		  step_1:
 		    !$::expert or choose_printer_type($printer, $in) or
 			goto step_0;
@@ -2945,7 +3086,7 @@ sub main {
 		};
 		wizard_close($in, 0) if ($@ =~ /wizcancel/);
 	    } else {
-		$printer->{TYPE} = "LOCAL";
+		$::expert or $printer->{TYPE} = "LOCAL";
 		!$::expert or choose_printer_type($printer, $in) or next;
 		#- Cancelling the printer connection type window
 		#- should not restart printerdrake in recommended mode,

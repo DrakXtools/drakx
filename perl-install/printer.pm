@@ -1488,8 +1488,8 @@ sub configure_hpoj {
     setupVariables ();
     readDeviceInfo ();
 
-    # Get the model ID as auto-detected
-    $device =~ m!^/dev/\S*lp(\d+)$!;
+    $device =~ m!^/dev/\S*lp(\d+)$! or $device =~ m!^socket://([^:]+)$! or
+	$device =~ m!^socket://([^:]+):(\d+)$!;
     my $model = $1;
     my $model_long = $1;
     my $serialnumber = "";
@@ -1499,73 +1499,98 @@ sub configure_hpoj {
     my $bus;
     my $address_arg = "";
     my $base_address = "";
+    my $hostname = "";
+    my $port = $2;
     if ($device =~ /usb/) {
 	$bus = "usb";
-    } else {
+    } elsif ($device =~ /par/) {
 	$bus = "par";
 	$address_arg = parport_addr($device);
 	$address_arg =~ /^\s*-base\s+(\S+)/;
 	eval ("$base_address = $1");
+    } elsif ($device =~ /socket/) {
+	$bus = "hpjd";
+	$hostname = $model;
+	return "" if ($port) && (($port < 9100) || ($port > 9103));
+	if (($port) && ($port != 9100)) {
+	    $port -= 9100;
+	    $hostname .= ":$port";
+	}
+    } else {
+	return "";
     }
     my $devdata;
-
     foreach (@autodetected) {
 	$device eq $_->{port} or next;
 	$devdata = $_;
 	$model = $_->{val}{MODEL};
 	$serialnumber = $_->{val}{SERIALNUMBER};
 	# Check if the device is really an HP multi-function device
-	stop_service("hpoj");
-	run_program::rooted($prefix, 
-			    "ptal-mlcd", "$bus:probe", "-device", 
-			    $device, split(' ',$address_arg));
+	if ($bus ne "hpjd") {
+	    # Start ptal-mlcd daemon for locally connected devices
+	    stop_service("hpoj");
+	    run_program::rooted($prefix, 
+				"ptal-mlcd", "$bus:probe", "-device", 
+				$device, split(' ',$address_arg));
+	}
 	$device_ok = 0;
-	local *F; 
-	if (open F, ($::testing ? $prefix : "chroot $prefix/ ") . "/usr/bin/ptal-devid mlc:$bus:probe |") {
+	local *F;
+	my $ptalprobedevice =
+	    ($bus eq "hpjd" ? "hpjd:$hostname" : "mlc:$bus:probe");
+	if (open F, ($::testing ? $prefix : "chroot $prefix/ ") . "/usr/bin/ptal-devid $ptalprobedevice |") {
 	    my $devid = join("", <F>);
 	    close F;
 	    if ($devid) {
 		$device_ok = 1;
-		if (open F, ($::testing ? $prefix : "chroot $prefix/ ") . "/usr/bin/ptal-devid mlc:$bus:probe -long -mdl 2>/dev/null |") {
+		if (open F, ($::testing ? $prefix : "chroot $prefix/ ") . "/usr/bin/ptal-devid $ptalprobedevice -long -mdl 2>/dev/null |") {
 		    $model_long = join("", <F>);
 		    close F;
 		    chomp $model_long;
 		}
-		if (open F, ($::testing ? $prefix : "chroot $prefix/ ") . "/usr/bin/ptal-devid mlc:$bus:probe -long -sern 2>/dev/null |") {
+		if (open F, ($::testing ? $prefix : "chroot $prefix/ ") . "/usr/bin/ptal-devid $ptalprobedevice -long -sern 2>/dev/null |") {
 		    $serialnumber_long = join("", <F>);
 		    close F;
 		    chomp $serialnumber_long;
 		}
-		if (cardReaderDetected ("mlc:$bus:probe")) {
+		if (cardReaderDetected ($ptalprobedevice)) {
 		    $cardreader = 1;
 		}
 	    }
 	}
-	if (open F, ($::testing ? $prefix : "chroot $prefix/ ") . "ps auxwww | grep \"ptal-mlcd $bus:probe\" | grep -v grep | ") {
-	    my $line = <F>;
-	    if ($line =~ /^\s*\S+\s+(\d+)\s+/) {
-		my $pid = $1;
-		kill (15, $pid);
+	if ($bus ne "hpjd") {
+	    # Stop ptal-mlcd daemon for locally connected devices
+	    if (open F, ($::testing ? $prefix : "chroot $prefix/ ") . "ps auxwww | grep \"ptal-mlcd $bus:probe\" | grep -v grep | ") {
+		my $line = <F>;
+		if ($line =~ /^\s*\S+\s+(\d+)\s+/) {
+		    my $pid = $1;
+		    kill (15, $pid);
+		}
+		close F;
 	    }
-	    close F;
+	    start_service("hpoj");
 	}
-	start_service("hpoj");
 	last;
     }
     # No, it is not an HP multi-function device.
     return "" if (!$device_ok);
 
     # Determine the ptal device name from already existing config files
-    my $ptaldevice = lookupDevname ("mlc:$bus:", $model_long, 
+    my $ptalprefix =
+	($bus eq "hpjd" ? "hpjd:" : "mlc:$bus:");
+    my $ptaldevice = lookupDevname ($ptalprefix, $model_long, 
 				    $serialnumber_long, $base_address);
 
     # It's all done for us, the device is already configured
     return $ptaldevice if defined($ptaldevice);
 
     # Determine the ptal name for a new device
-    $ptaldevice = $model;
-    $ptaldevice =~ s![\s/]+!_!g;
-    $ptaldevice = "mlc:$bus:$ptaldevice";
+    if ($bus eq "hpjd") {
+	$ptaldevice = "hpjd:$hostname";
+    } else {
+	$ptaldevice = $model;
+	$ptaldevice =~ s![\s/]+!_!g;
+	$ptaldevice = "mlc:$bus:$ptaldevice";
+    }
 
     # Delete any old/conflicting devices
     deleteDevice ($ptaldevice);
@@ -1683,7 +1708,7 @@ sub configure_hpoj {
 	    "# By default ptal-printd isn't started for hpjd: devices.\n".
 	    "# If for some reason you want to start it for this device, then\n".
 	    "# uncomment the following line:\n".
-	    "# init.printd.start=1\n";
+	    "init.printd.start=1\n";
     }
 
     print CONFIG
