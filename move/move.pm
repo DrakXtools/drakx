@@ -361,7 +361,7 @@ seconds before detecting again.
 You may also proceed without an USB key - you'll still be
 able to use Mandrake Move as a normal live Mandrake
 Operating System.")),
-                            ok => N("Detect again USB key"),
+                            ok => N("Detect USB key again"),
                             cancel => N("Continue without USB key") }) or return;
 
         key_mount($o, 'reread');
