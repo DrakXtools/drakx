@@ -659,25 +659,29 @@ sub chooseGroups {
 
     #- if no group have been chosen, ask for using base system only, or no X, or normal.
     unless ($o->{isUpgrade} || grep { $val{$_} } keys %val) {
-	my $type;
+	my $type = 
+	  $o->{compssUsersChoice}{X} ? 2 :
+	  grep { $_ } values %{$o->{compssUsersChoice}} ? 1 : 0;
 
-	#- search for what is currently selected.
-	foreach (keys %{$o->{compssUsersChoice}}) {
-	    $o->{compssUsersChoice}{$_} and $type = __("No X");
-	}
-	$o->{compssUsersChoice}{X} and $type = __("With X");
-	$type ||= __("Base system only");
+	my @choices = (
+	    _("Truly minimal install (especially no urpmi)"),
+	    _("Base system (no X, including urpmi)"),
+	    _("With X"),
+	);
 
 	#- ask user for its choice.
-	$type = $o->ask_from_list_(_("Type of install"), _("You do not have selected any group of packages
-Please choose the minimal installation you want"), [ __("Base system only"), __("No X"), __("With X"), ], $type) or return &chooseGroups;
+	$type = $o->ask_from_listf(_("Type of install"), 
+				   _("You do not have selected any group of packages
+Please choose the minimal installation you want"), 
+				   sub { $choices[$_[0]] }, [ 0 .. $#choices ], $type);
+	defined $type or return &chooseGroups;
 
 	#- reselect according to user selection.
-	if ($type eq __("Base system only")) {
-	    $o->{compssUsersChoice}{$_} = 0 foreach keys %{$o->{compssUsersChoice}};
-	} else {
+	if ($type) {
 	    install_any::setDefaultPackages($o, 'clean');
-	    $o->{compssUsersChoice}{X} = $type eq 'With X';
+	    $o->{compssUsersChoice}{X} = $type == 2;
+	} else {
+	    $o->{compssUsersChoice}{$_} = 0 foreach keys %{$o->{compssUsersChoice}};
 	}
 	install_any::unselectMostPackages($o);
     }
