@@ -1,3 +1,126 @@
+2003/01/07  Pixel  <pixel@mandrakesoft.com>
+
+	* bootloader.pm (method_choices): returns the choices of bootloaders
+	(lilo, grub, yaboot...) + cleanup
+	(suggest_onmbr): "lilo" and "grub" are now "unsafe" "on_mbr" choices
+	  - renaming of $lilo with $bootloader
+	  - $bootloader->{methods} is replaced by the much simpler
+	$bootloader->{method},
+	the special handling of grub (which need to also generate lilo.conf)
+	  is nicely handled in bootloader::install()
+	  - cleanup error handling: it was using the ugly (though safe)
+	/tmp/.error
+	  temporary file, better use an exception
+
+	* any.pm: 
+	  - part of setupBootloader() are now in setupBootloader__mbr_or_not(),
+	setupBootloader__general() and setupBootloader__boot_bios_drive()
+	  - this allows the creation of the new setupBootloader_simple() which
+	is
+	somehow similar to the old setupBootloader() in beginner mode
+	  - setupBootloader() is now always expert mode
+
+	* interactive.pm: nicer debug message
+
+	* steps.pm: move setupBootloader before summary
+
+	* install_steps.pm, install2.pm, install_steps_interactive.pm: 
+	  - adapt to new setupBootloader
+	  - add bootloader configuration in summary (still rough)
+	  - various cleanup
+
+2003/01/06  Daouda Lo  <daouda@mandrakesoft.com>
+
+	* standalone.pm: 
+	  - perl checker
+	  - no retval
+	  - function on_request_help to display online help.
+	  - use it as callback to help button or help menu.
+
+	* standalone/drakbug: 
+	  - support help system
+	  - remove unused function
+
+2003/01/06  Pablo Saratxaga  <pablo@mandrakesoft.com>
+
+	* keyboard.pm: synchronized with XFree86 4.2.99 keyboard layout names
+
+2003/01/06  Pixel  <pixel@mandrakesoft.com>
+
+	* install_steps.pm, install_steps_interactive.pm: fix typos (thanks
+	perl_checko!)
+	selectInstallClass now automatically detect if an existing install is
+	there,
+	and propose update or install based on this
+
+	* bootloader.pm: when reading existing config, remove double quotes around
+	the default label
+
+	* install2.pm (selectKeyboard): read existing keyboard config even if not
+	upgrading (it
+	won't do anything when not upgrading :)
+	(selectInstallClass): do not move step doPartitionDisks after setupSCSI
+	on
+	upgrade (since the "upgrade" part of the job of doPartitionDisks is now
+	done in selectInstallClass)
+	(selectMouse): "addToBeDone mouse::write()" was done only on upgrade,
+	replace it with an "addToBeDone" done in any case which only does
+	"mouse::write()" if $o->{isUpgrade} is set (since isUpgrade *will* be
+	set
+	correctly but is not set at this step)
+
+	* steps.pm: 
+	  - selectMouse is now just after selectLanguage
+	  - selectSCSI is before selectInstallClass
+
+	* Makefile: when taking files from perl-GTK2, don't
+	/usr/lib/libDrakX/ugtk2.pm since we don't need it
+
+	* install_interactive.pm (partition_with_diskdrake): fix reloading
+	partition table
+
+	* common.pm: common::secured_file() is a wrapper around
+	c::is_secure_file()
+
+	* any.pm: fix "Where do you want to install the bootloader?" dialog box
+
+	* fs.pm (mount): do not fsck.ext2 when mounting readonly
+
+	* swap.pm: replace *F with $F
+	fix an *old* bug causing pbs when formatting more than one partition
+	using
+	format v0 (occurs when the sizes differ)
+
+2003/01/06  Thierry Vignaud  <tvignaud@mandrakesoft.com>
+
+	* drakxtools.spec: require a recent enough ldetect-lst for fixed usb hubs
+	detection
+	9.1-0.7mdk
+
+	* printer/main.pm: fix displaying list of availlable printer spoolers
+
+	* printer/printerdrake.pm: fix displaying of spooler list
+
+	* printer/gimp.pm: fix printerdrake regarding gimp configuration
+
+	* standalone/logdrake: perl_checker fixes
+	prevent one to write in log buffer
+
+	* printer/data.pm: put full data in all variants of the data structure
+
+	* share/po/fr.po: update french translation
+
+2003/01/05  Pixel  <pixel@mandrakesoft.com>
+
+	* any.pm: in bootloader configuration, add return values to Add and Remove
+	callbacks
+
+	* interactive.pm: 
+	  - callbacks "Add", "Modify" and "Remove" return undef when they fail
+	  - callback "Add" return the new added element (not handled by
+	interactive emulation, but correctly handled by interactive::gtk native
+	ask_from__add_modify_removeW)
+
 2003/01/05  Pixel  <pixel@mandrakesoft.com>
 
 	* any.pm: in bootloader configuration, add return values to Add and Remove
@@ -7401,7 +7524,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.760 2003/01/03 00:06:08 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.761 2003/01/05 13:26:00 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
