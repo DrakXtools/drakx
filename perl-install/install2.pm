@@ -448,6 +448,8 @@ sub main {
     }
     require"install_steps_$o->{interactive}.pm" if $o->{interactive}; #- no space to skip perl2fcalls
 
+    # needed before accessing floppy (in case of usb floppy)
+    $::noauto or modules::load_thiskind("usb"); 
  
     eval { $o = $::o = install_any::loadO($o, "patch") } if $patch;
     eval { $o = $::o = install_any::loadO($o, $cfg) } if $cfg;
@@ -459,7 +461,6 @@ sub main {
     } modules::get_that_type('sound');
 
     #- needed very early for install_steps_gtk
-    $::noauto or modules::load_thiskind("usb"); 
     eval { ($o->{mouse}, @{$o->{wacom} = []}) = mouse::detect() } unless $o->{nomouseprobe} || $o->{mouse};
 
     $o->{lang} = lang::set($o->{lang}); #- mainly for defcfg

@@ -83,6 +83,8 @@ sub floppies() {
 	if_($info && $info ne '(null)', { device => $_, media_type => 'fd', info => $info })
     } qw(fd0 fd1);
     my @ide = ls120s() and modules::load("ide-floppy");
+
+    eval { modules::load("usb-storage") } if usbStorage();
     my @scsi = grep { $_->{media_type} eq 'fd' } getSCSI();
     @ide, @scsi, @fds;
 }
@@ -352,7 +354,7 @@ sub whatParport() {
 sub usbMice      { grep { $_->{media_type} =~ /\|Mouse/ && $_->{driver} !~ /Tablet:wacom/} usb_probe() }
 sub usbWacom     { grep { $_->{driver} =~ /Tablet:wacom/ } usb_probe() }
 sub usbKeyboards { grep { $_->{media_type} =~ /\|Keyboard/ } usb_probe() }
-sub usbZips      { grep { $_->{media_type} =~ /Mass Storage\|/ } usb_probe() }
+sub usbStorage   { grep { $_->{media_type} =~ /Mass Storage\|/ } usb_probe() }
 
 sub whatUsbport() {
     my ($i, $elem, @res) = (0, {});

@@ -746,7 +746,7 @@ sub load_thiskind {
     my @try_modules = (
       if_($type =~ /scsi/,
 	  if_(arch() !~ /ppc/, 'imm', 'ppa'),
-	  if_(detect_devices::usbZips(), 'usb-storage'),
+	  if_(detect_devices::usbStorage(), 'usb-storage'),
       ),
       if_(arch() =~ /ppc/, 
 	  if_($type =~ /scsi/, 'mesh', 'mac53c94'),
