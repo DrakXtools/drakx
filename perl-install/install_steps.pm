@@ -586,12 +586,18 @@ GridHeight=70
 	rename "$o->{prefix}/usr/share/bootsplash/oem-message-graphic",
 	  "$o->{prefix}/usr/share/bootsplash/themes/Mandrake/lilo/message";
     }
+    my $redo_bootsplash;
     foreach (qw(oem-bootsplash-800x600.jpg oem-bootsplash-1024x768.jpg oem-bootsplash-1200x1024.jpg
                 oem-bootsplash-1600x1200.jpg)) {
 	if (-e "$o->{prefix}/usr/share/bootsplash/themes/Mandrake/images/$_" && "$o->{prefix}/usr/share/bootsplash/$_") {
 	    rename "$o->{prefix}/usr/share/bootsplash/themes/Mandrake/images/$_", "$o->{prefix}/usr/share/bootsplash/$_.mdkgiorig";
 	    rename "$o->{prefix}/usr/share/bootsplash/$_", "$o->{prefix}/usr/share/bootsplash/themes/Mandrake/images/$_";
+	    ++$redo_bootsplash;
 	}
+    }
+    if ($redo_bootsplash && -x "$o->{prefix}/usr/share/loader/make-initrd") {
+	#- redo bootsplash installation for changes to take effects...
+	run_program::rooted($o->{prefix}, "/usr/share/loader/make-initrd", "-n");
     }
 
     if ($o->{blank} || $o->{updatemodules}) {
