@@ -92,7 +92,7 @@ sub selectLanguage {
     if ($o->{keyboard_unsafe} || !$o->{keyboard}) {
 	$o->{keyboard_unsafe} = 1;
 	$o->{keyboard} = keyboard::lang2keyboard($o->{lang});
-	selectKeyboard($o) unless $::live;
+	selectKeyboard($o) if !$::live;
     }
 }
 #------------------------------------------------------------------------------
@@ -409,17 +409,8 @@ Consoles 1,3,4,7 may also contain interesting information";
 
     #- make sure some services have been enabled (or a catastrophic restart will occur).
     #- these are normally base package post install scripts or important services to start.
-    run_program::rooted($o->{prefix}, "chkconfig", "--add", "random");
-    run_program::rooted($o->{prefix}, "chkconfig", "--add", "netfs");
-    run_program::rooted($o->{prefix}, "chkconfig", "--add", "network");
-    run_program::rooted($o->{prefix}, "chkconfig", "--add", "rawdevices");
-    run_program::rooted($o->{prefix}, "chkconfig", "--add", "sound");
-    run_program::rooted($o->{prefix}, "chkconfig", "--add", "kheader");
-    run_program::rooted($o->{prefix}, "chkconfig", "--add", "usb");
-    run_program::rooted($o->{prefix}, "chkconfig", "--add", "keytable");
-    run_program::rooted($o->{prefix}, "chkconfig", "--add", "syslog");
-    run_program::rooted($o->{prefix}, "chkconfig", "--add", "crond");
-    run_program::rooted($o->{prefix}, "chkconfig", "--add", "portmap");
+    run_program::rooted($o->{prefix}, "chkconfig", "--add", $_) foreach
+			qw(random netfs network rawdevices sound kheader usb keytable syslog crond portmap);
 
     #- call update-menus at the end of package installation
     run_program::rooted($o->{prefix}, "update-menus");
