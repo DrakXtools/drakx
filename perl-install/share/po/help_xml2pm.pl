@@ -86,7 +86,7 @@ sub $_() {
     N($s);
 }
 EOF
-	my @nb = $main =~ /\%s/g; @nb == @inside or die "bad \%s in $_\n";
+	my @nb = $main =~ /\%s/g; @nb == @inside or die "help.pm error: bad \%s in sub $_\n";
     }
 }
 
@@ -233,8 +233,8 @@ sub rewrite2_ {
 	"\n$text\n";
     } elsif (member($tree->{tag},  
 		    'acronym', 'application', 'emphasis',  
-		    'keycombo', 'note', 'sect1', 'sect2',
-		    'superscript', 'systemitem', 
+		    'keycombo', 'note', 'sect1', 'sect2', 'sect3',
+		    'superscript', 'systemitem', 'option',
 		    'tip', 'ulink', 'xref', 'varlistentry', 'variablelist', 'term',
 		    'phrase', 'hardware',
 		   )) {
