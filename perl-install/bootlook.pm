@@ -96,9 +96,157 @@ my $a_button = new Gtk::CheckButton(_("Launch Aurora at boot time"));
 my $a_box = new Gtk::VBox(0, 0);
 my $x_box = new Gtk::VBox(0, 0);
 my $disp_mode = arch() =~ /ppc/ ? _("Yaboot mode") : _("Lilo/grub mode");
+
+my %themes = 	('path'=>'/usr/share/bootsplash/themes/',
+		 'default'=>'Mandrake',
+		 'def_thmb'=>'/usr/share/libDrakX/pixmaps/nosplash_thumb.png',
+		 'lilo'=>{'file'=>'/lilo/message',
+			  'thumb'=>'/lilo/thumb.png'} ,
+		 'boot'=>{'path'=>'/images/',
+			  'thumb'=>'/images/thumb.png',},
+		 );
+my ($cur_res) = cat_('/etc/lilo.conf') =~ /vga=(.*)/;
+
+#- verify that current resolution is ok
+if ( member( $cur_res, qw( 785 788 791 794) ) ) {
+	($cur_res) = $bootloader::vga_modes{$cur_res} =~ /^([0-9x]+).*?$/;
+} else {
+	$no_bootsplash = 1;  #- we can't select any theme we're not in Framebuffer mode :-/
+}
+
+#- and check that lilo is the correct loader
+$no_bootsplash ||= chomp_(`detectloader -q`) ne 'LILO';
+
+my @thms;
+my @lilo_thms = ($themes{'default'})?():qw(default);
+my @boot_thms = ($themes{'default'})?():qw(default);
+chdir($themes{'path'}); #- we must change directory for correct @thms assignement
+foreach (glob("*")) {
+    if (-d $themes{'path'} . $_ && m/^[^.]/) {
+	push @thms, $_;
+	-f $themes{'path'} . $_ . $themes{'lilo'}{'file'} and push @lilo_thms, $_;
+	-f $themes{'path'} . $_ . $themes{'boot'}{'path'} . "bootsplash-$cur_res.jpg" and push @boot_thms, $_;
+    }
+#       $_ eq $themes{'defaut'} and $default = $themes{'defaut'};
+}
+my %combo = ('thms'=> '','lilo'=> '','boot'=> '');
+foreach (keys (%combo)) {
+    $combo{$_} = new Gtk::Combo;
+    $combo{$_}->set_value_in_list(1, 0);
+}
+
+$combo{'thms'}->set_popdown_strings(@thms);
+$combo{'lilo'}->set_popdown_strings(@lilo_thms);
+$combo{'boot'}->set_popdown_strings(@boot_thms);
+
+my $lilo_pic = new Gtk::Pixmap(gtkcreate_png($themes{'def_thmb'}));
+my $boot_pic = new Gtk::Pixmap(gtkcreate_png($themes{'def_thmb'}));
+my $thm_button = new Gtk::Button(_("Install themes"));
+my $logo_thm = new Gtk::CheckButton(_("Display theme under console"));
+my $keep_logo = 1;
+$logo_thm->set_active(1);
+$logo_thm->signal_connect(clicked => sub { invbool(\$keep_logo) });
+
+#- ******** action to take on changing combos values
+
+$combo{'thms'}->entry->signal_connect(changed => sub {
+    my $thm_txt = $combo{'thms'}->entry->get_text();
+    $combo{'lilo'}->entry->set_text(member($thm_txt, @lilo_thms) ? $thm_txt : ($themes{'default'} || 'default'));
+    $combo{'boot'}->entry->set_text(member($thm_txt, @boot_thms) ? $thm_txt : ($themes{'default'} || 'default'));
+    
+});
+
+$combo{'lilo'}->entry->signal_connect(changed => sub {
+    my $new_file = $themes{'path'} . $combo{'lilo'}->entry->get_text() . $themes{'lilo'}{'thumb'};
+    $lilo_pic->set(gtkcreate_png(-r $new_file ? $new_file : $themes{'def_thmb'}));
+});
+
+$combo{'boot'}->entry->signal_connect( changed => sub {
+    my $new_file = $themes{'path'}.$combo{'boot'}->entry->get_text().$themes{'boot'}{'thumb'};
+    if (! -f $new_file && -f $themes{'path'}.$combo{'boot'}->entry->get_text().$themes{'boot'}{'path'}."bootsplash-$cur_res.jpg"){
+	system("convert -scale 159x119 ".$themes{'path'}.$combo{'boot'}->entry->get_text().$themes{'boot'}{'path'}."bootsplash-$cur_res.jpg $new_file") and $in->ask_warn(_("Error"),_("Can't create Bootsplash preview"));
+    }
+    $boot_pic->set(gtkcreate_png(-r $new_file ? $new_file : $themes{'def_thmb'}));
+});
+
+$combo{'thms'}->entry->set_text($themes{'default'});
+
+$thm_button->signal_connect('clicked',
+
+sub {
+        my $error = 0;
+        my $boot_conf_file = '/etc/sysconfig/bootsplash';
+	my $lilomsg = '/boot/lilo-graphic/message';
+        #lilo installation
+        if (-f $themes{'path'}.$combo{'lilo'}->entry->get_text() . $themes{'lilo'}{'file'}) {
+	    use File::Copy;
+	    copy($lilomsg,"/boot/lilo-graphic/message.old") or $in->ask_warn(_("Error"), _("unable to backup lilo message"));
+	    copy($themes{'path'} . $combo{'lilo'}->entry->get_text() . $themes{'lilo'}{'file'}, $lilomsg) or $in->ask_warn(_("Error"), _("can't change lilo message"));
+	} else {
+            $error = 1;
+            $in->ask_warn(_("Error"), _("Lilo message not found"));
+        }
+        #bootsplash install
+        if ( -f $themes{'path'} . $combo{'boot'}->entry->get_text() . $themes{'boot'}{'path'} . "bootsplash-$cur_res.jpg") {
+                $bootsplash_cont = "# -*- Mode: shell-script -*-
+# Specify here if you want add the splash logo to initrd when
+# generating an initrd. You can specify :
+#
+# SPLASH=no to don't have a splash screen
+#
+# SPLASH=auto to make autodetect the splash screen
+#
+# SPLASH=INT When Integer could be 800x600 1024x768 1280x1024
+#
+SPLASH=$cur_res
+# Choose the themes. The should be based in
+# /usr/share/bootsplash/themes/
+THEME=" . $combo{'boot'}->entry->get_text() . "
+# Say yes here if you want to leave the logo on the console.
+# Three options :
+#
+# LOGO_CONSOLE=no don't display logo under console.
+#
+# LOGO_CONSOLE=yes display logo under console.
+#
+# LOGO_CONSOLE=theme leave the theme to decide.
+#
+LOGO_CONSOLE=" . ($keep_logo ? 'yes' : 'no') . "\n";
+                if (-f $boot_conf_file) {
+                        eval { output($boot_conf_file, $bootsplash_cont) };
+                        $@ and $in->ask_warn(_("Error"), _("Can't write /etc/sysconfig/bootsplash."));
+                } else {
+                    $in->ask_warn(_("Error"), _("Can't write /etc/sysconfig/bootsplash\nFile not found."));
+                    $error = 1;
+                }
+        } else {
+                $in->ask_warn("Error","BootSplash screen not found");
+        }
+        #here is mkinitrd time
+        if (!$error) {
+            foreach (map { if_(m|^/boot/initrd-(.*)\.img|, $1) } glob '/boot/*'){
+                if ( system("mkinitrd -f /boot/initrd-$_.img $_" ) ) {
+                    $in->ask_warn(_("Error"),
+				  _("Can't launch mkinitrd -f /boot/initrd-".$_.".img $_.
+Type \"mkinitrd -f /boot/initrd-".$_.".img $_\" in command line as root."));
+                    $error = 1;
+                }
+            }
+        }
+        if (system('lilo')) {
+            $in->ask_warn(_("Error"),
+_("Can't relaunch LiLo!
+Launch \"lilo\" as root in command line to complete LiLo theme installation."));
+            $error = 1;
+        }
+	$in->ask_warn(_(($error)?"Error":"Notice"),
+		      _($error?"Theme installation failed!":"LiLo and Bootsplash themes installation successfull"));
+    }
+);
+
 gtkadd($window,
        gtkpack__ (my $global_vbox = new Gtk::VBox(0,0),
-		  gtkadd (new Gtk::Frame ($disp_mode),
+		  gtkadd (new Gtk::Frame ("$disp_mode"),
 #			  gtkpack__(new Gtk::VBox(0,0),
 				    (gtkpack_(gtkset_border_width(new Gtk::HBox(0, 0),5),
 					      1,_("You are currently using %s as your boot manager.
@@ -109,6 +257,25 @@ Click on Configure to launch the setup wizard.", $lilogrub),
 #				   )
 				     
 			 ),
+                #Splash Selector
+                gtkadd(my $thm_frame = new Gtk::Frame( _("Splash selection") ),
+                       gtkpack__(gtkset_border_width(new Gtk::HBox(0,5),5),
+                                 gtkpack__(new Gtk::VBox(0,5),
+                                           _("Themes"),
+                                           $combo{'thms'},
+                                           _("\nSelect a theme for\nlilo and bootsplash,\nyou can choose\nthem separatly"),
+                                           $logo_thm),
+                                 gtkpack__(new Gtk::VBox(0,5),
+                                           _("Lilo screen"),
+                                           $combo{'lilo'},
+                                           $lilo_pic),
+                                 gtkpack__(new Gtk::VBox(0,5),
+                                           _("Bootsplash"),
+                                           $combo{'boot'},
+                                           $boot_pic,
+                                           $thm_button))
+                      ),
+
 		  # aurora
 # 		  gtkadd (new Gtk::Frame (_("Boot mode")),
 # 			  gtkpack__ (new Gtk::HBox(0,0),
@@ -176,9 +343,10 @@ if ($a_mode) {
 }
 
 $window->show_all();
+$no_bootsplash and $thm_frame->hide();
 Gtk->main_iteration while Gtk->events_pending;
 $::isEmbedded and kill USR2, $::CCPID;
-$inmain = 1;
+$inmain=1;
 Gtk->main;
 Gtk->exit(0);
 
