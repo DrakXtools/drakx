@@ -1454,23 +1454,60 @@ sub copy_foomatic_queue {
 
 sub configure_hpoj {
     my ($device, @autodetected) = @_;
+
+    # Make the subroutines of /usr/sbin/ptal-init available
+    local *PTALINIT;
+    open PTALINIT, "/usr/sbin/ptal-init" || do {
+	die "unable to open /usr/sbin/ptal-init";
+    };
+    my @ptalinitfunctions; # subroutine definitions in /usr/sbin/ptal-init
+    while(<PTALINIT>) {
+	if (m!sub main!) {
+	    last;
+	} elsif (m!^[^\#]!) {
+	    push (@ptalinitfunctions, $_);
+	}
+    }
+    close PTALINIT;
+    eval "@ptalinitfunctions
+    sub getDevnames {
+        return (%devnames)
+    }
+    sub getConfigInfo {
+        return (%configInfo)
+    }";
+
+    # Read the HPOJ config file and check whether this device is already
+    # configured
+    setupVariables();
+    readDeviceInfo();
+
     # Get the model ID as auto-detected
     $device =~ m!^/dev/\S*lp(\d+)$!;
     my $model = $1;
+    my $serialnumber = "";
     my $device_ok = 1;
+    my $bus;
+    my $address_arg = "";
+    my $base_address = "";
+    if ($device =~ /usb/) {
+	$bus = "usb";
+    } else {
+	$bus = "par";
+	$address_arg = parport_addr($device);
+	$address_arg =~ /^\s*-base\s+(\S+)/;
+	eval ("$base_address = $1;");
+    }
+    my $devdata;
+
     foreach (@autodetected) {
 	$device eq $_->{port} or next;
+	$devdata = $_;
 	$model = $_->{val}{MODEL};
+	$serialnumber = $_->{val}{SERIALNUMBER};
+	undef $_->{val}{CARDREADER};
 	# Check if the device is really an HP multi-function device
 	stop_service("hpoj");
-	my $bus;
-	my $address_arg = "";
-	if ($device =~ /usb/) {
-	    $bus = "usb";
-	} else {
-	    $bus = "par";
-	    $address_arg = parport_addr($device);
-	}
 	run_program::rooted($prefix, 
 			    "ptal-mlcd", "$bus:probe", "-device", 
 			    "$device", split(' ',$address_arg));
@@ -1479,7 +1516,12 @@ sub configure_hpoj {
 	if (open F, ($::testing ? "$prefix" : "chroot $prefix/ ") . "/usr/bin/ptal-devid mlc:$bus:probe |") {
 	    my $devid = join("", <F>);
 	    close F;
-	    if ($devid) {$device_ok = 1};
+	    if ($devid) {
+		$device_ok = 1;
+		if (cardReaderDetected("mlc:$bus:probe")) {
+		    $_->{val}{CARDREADER} = 1;
+		}
+	    }
 	}
 	if (open F, ($::testing ? "$prefix" : "chroot $prefix/ ") . "ps auxwww | grep \"ptal-mlcd $bus:probe\" | grep -v grep | ") {
 	    my $line = <F>;
@@ -1495,89 +1537,162 @@ sub configure_hpoj {
     # No, it is not an HP multi-function device.
     return "" if (!$device_ok);
     #$device = "/dev/usb/lp1"; $model = "DeskJet 990C";
-    # Read the HPOJ config file and check whether this device is already
-    # configured
-    my $deviceconfigured = 0;
-    my $ptaldevice;
-    my $hpoj_config = "/etc/ptal-start.conf";
-    local *HPOJCONFIG; 
-    if (open HPOJCONFIG, ("< $prefix$hpoj_config")) {
-	while ($line = <HPOJCONFIG>) {
-	    chomp $line;
-	    # Comment or blank line
-	    next if (($line =~ /^\s*\#/) || ($line =~ /^\s*$/));
-	    # Only lines beginning with "ptal-mlcd" are interesting.
-	    next if ($line !~ /^\s*ptal-mlcd\s+(\S+)\s+/);
-	    $ptaldevice = "mlc:$1";
-	    if ($ptaldevice =~ /^mlc:par:(\d+)$/) {
-		# Parallel device
-		next if ($device =~ /usb/);
-		if ($line =~ m!-device\s+$device!) {
-		    # Our new device is parallel and already configured
-		    # by the current line
-		    $deviceconfigured = 1;
-		    last;
-		}
-	    } elsif ($ptaldevice =~ /^mlc:usb:(.+)$/) {
-		# USB device
-		next if ($device !~ /usb/);
-		if ($line =~ /-devidmatch\s+(\"[^\"]*\")/) {
-		    $configuredmodel = $1;
-		    $configuredmodel =~ s/\"//g;
-		    $configuredmodel =~ s/^mdl://;
-		    $configuredmodel =~ s/^model://;
-		    $configuredmodel =~ s/;$//;
-		    if ($configuredmodel eq $model) {
-			# Our new device is USB and already configured
-			# by the current line
-			$deviceconfigured = 1;
-			last;
-		    }
-		} elsif ($line =~ m!-device\s+(/dev/usb/lp\d+)!) {
-		    if ($1 eq $device) {
-			# Our new device is USB and already configured
-			# by the current line
-			$deviceconfigured = 1;
-			last;
-		    }
-		}
-	    }
-	}
-	close HPOJCONFIG;
-    }
+
+    # Determine the ptal device name
+    my $ptaldevice = lookupDevname("mlc:$bus:", $model, $serialnumber,
+				   $base_address);
+
+
 
     # It's all done for us, the device is already configured
-    return $ptaldevice if $deviceconfigured;
+    return $ptaldevice if defined($ptaldevice);
 
-    # Configure the device
-    my $entry;
-    if ($device =~ /usb/) {
-	# USB device
-	my $ptaldevicemodel = $model;
-	$ptaldevicemodel =~ s/\s+/_/g;
-	if ($model =~ /^\d+$/) {
-	    $entry = "\nptal-mlcd usb:$ptaldevicemodel -device $device \$PTAL_MLCD_CMDLINE_APPEND\nptal-printd mlc:usb:$ptaldevicemodel \$PTAL_PRINTD_CMDLINE_APPEND\n";
-	} else {
-	    $entry = "\nptal-mlcd usb:$ptaldevicemodel -device /dev/usb/lp* -devidmatch \"$model;\" \$PTAL_MLCD_CMDLINE_APPEND\nptal-printd mlc:usb:$ptaldevicemodel \$PTAL_PRINTD_CMDLINE_APPEND\n";
+    # Determine the ptal name for the device
+    $ptaldevice = $model;
+    $ptaldevice =~ s![\s/]+!_!g;
+    $ptaldevice = "mlc:$bus:$ptaldevice";
+
+    # Delete any old/conflicting devices
+    &deleteDevice($ptaldevice);
+    if ($bus eq "par") {
+	while (1) {
+	    my $oldDevname=&lookupDevname("mlc:par:",undef,undef,
+					  $base_address);
+	    if (!defined($oldDevname)) {
+		last;
+	    }
+	    &deleteDevice($oldDevname);
 	}
-	$ptaldevice = "mlc:usb:$ptaldevicemodel";
-    } else {
-	# parallel device
-	# auto-detect the parallel port addresses
-	$device =~ m!^/dev/lp(\d+)$!;
-	my $portnumber = $1;
-	my $address_arg = parport_addr($device);
-	$entry = "\nptal-mlcd par:$portnumber -device $device$address_arg \$PTAL_MLCD_CMDLINE_APPEND\nptal-printd mlc:par:$portnumber \$PTAL_PRINTD_CMDLINE_APPEND\n";
-	$ptaldevice = "mlc:par:$portnumber";
     }
 
-    # Add new entry to HPOJ's config file
-    open(HPOJCONFIG,">> $prefix$hpoj_config") ||
-	die "Could not open $hpoj_config for writing!\n";
-    print HPOJCONFIG $entry;
-    close HPOJCONFIG;
+    # Configure the device
+
+    # Open configuration file
+    local *CONFIG;
+    open(CONFIG,"> /etc/ptal/$ptaldevice") ||
+	die "Could not open /etc/ptal/$ptaldevice for writing!\n";
+
+    # Write file header.
+    $_=`date`;
+    chomp;
+    print CONFIG
+	"# Added $_ by \"printerdrake\".\n".
+	"\n".
+	"# The basic format for this file is \"key[+]=value\".\n".
+	"# If you say \"+=\" instead of \"=\", then the value is appended to any\n".
+	"# value already defined for this key, rather than replacing it.\n".
+	"\n".
+	"# Comments must start at the beginning of the line.  Otherwise, they may\n".
+	"# be interpreted as being part of the value.\n".
+	"\n".
+	"# If you have multiple devices and want to define options that apply to\n".
+	"# all of them, then put them in the file /etc/ptal/defaults, which is read\n".
+	"# in before this file.\n".
+	"\n".
+	"# The format version of this file:\n".
+	"#   ptal-init ignores devices with incorrect/missing versions.\n".
+	"init.version=1\n";
+
+    # Write model string.
+    if ($model !~ /\S/) {
+	print CONFIG
+	    "\n".
+	    "# \"printerdrake\" couldn't read the model but added this device anyway:\n".
+	    "# ";
+    } else {
+	print CONFIG
+	    "\n".
+	    "# The device model that was originally detected on this port:\n".
+	    "#   If this ever changes, then you should re-run \"printerdrake\"\n".
+	    "#   to delete and re-configure this device.\n";
+	if ($bus eq "par") {
+	    print CONFIG
+		"#   Comment out if you don't care what model is really connected to this\n".
+		"#   parallel port.\n";
+	}
+    }
+    print CONFIG
+	"init.mlcd.append+=-devidmatch \"$model\"\n";
+
+    # Write serial-number string.
+    if ($serialnumber!~/\S/) {
+	print CONFIG
+	    "\n".
+	    "# The device's serial number is unknown.\n".
+	    "# ";
+    } else {
+	print CONFIG
+	    "\n".
+	    "# The serial number of the device that was originally detected on this port:\n"
+	    ;
+	if ($bus=~/^[pu]/) {
+	    print CONFIG
+		"#   Comment out if you want to disable serial-number matching.\n";
+	}
+    }
+    print CONFIG
+	"init.mlcd.append+=-devidmatch \"$serialnumber\"\n";
+
+    if ($bus=~/^[pu]/) {
+	print CONFIG
+	    "\n".
+	    "# Standard options passed to ptal-mlcd:\n".
+	    "init.mlcd.append+=";
+	if ($bus eq "usb") {
+	    # Important: don't put more quotes around /dev/usb/lp[0-9]*,
+	    # because ptal-mlcd currently does no globbing:
+	    print CONFIG "-device /dev/usb/lp[0-9]*";
+	} elsif ($bus eq "par") {
+	    print CONFIG "$address_arg -device $device";
+	}
+	print CONFIG "\n".
+	    "\n".
+	    "# ptal-mlcd's remote console can be useful for debugging, but may be a\n".
+	    "# security/DoS risk otherwise.  In any case, it's accessible with the\n".
+	    "# command \"ptal-connect mlc:<XXX>:<YYY> -service PTAL-MLCD-CONSOLE\".\n".
+	    "# Uncomment the following line if you want to enable this feature for\n".
+	    "# this device:\n".
+	    "# init.mlcd.append+=-remconsole\n".
+	    "\n".
+	    "# If you need to pass any other command-line options to ptal-mlcd, then\n".
+	    "# add them to the following line and uncomment the line:\n".
+	    "# init.mlcd.append+=\n".
+	    "\n".
+	    "# By default ptal-printd is started for mlc: devices.  If you use CUPS,\n".
+	    "# then you may not be able to use ptal-printd, and you can uncomment the\n".
+	    "# following line to disable ptal-printd for this device:\n".
+	    "# init.printd.start=0\n";
+    } else {
+	print CONFIG
+	    "\n".
+	    "# By default ptal-printd isn't started for hpjd: devices.\n".
+	    "# If for some reason you want to start it for this device, then\n".
+	    "# uncomment the following line:\n".
+	    "# init.printd.start=1\n";
+    }
+
+    print CONFIG
+	"\n".
+	"# If you need to pass any additional command-line options to ptal-printd,\n".
+	"# then add them to the following line and uncomment the line:\n".
+	"# init.printd.append+=\n";
+    if (defined($_->{val}{CARDREADER})) {
+	print CONFIG
+	    "\n".
+	    "# Uncomment the following line to enable ptal-photod for this device:\n".
+	    "init.photod.start=1\n".
+	    "\n".
+	    "# If you have more than one photo-card-capable peripheral and you want to\n".
+	    "# assign particular TCP port numbers and mtools drive letters to each one,\n".
+	    "# then change the line below to use the \"-portoffset <n>\" option.\n".
+	    "init.photod.append+=-maxaltports 26\n";
+    }
+    close(CONFIG);
+    readOneDevice($ptaldevice);
+
     # Restart HPOJ
     restart_service("hpoj");
+
     # Return HPOJ device name to form the URI
     return $ptaldevice;
 }
@@ -1603,16 +1718,14 @@ sub parport_addr{
 sub config_sane {
     my ($ptaldevice) = @_;
 
-    # Create config file for HP backend
-    output("$prefix/etc/sane.d/hp.conf",
-	   "$ptaldevice\noption connect-ptal\n");
-
-    # Add HP backend to /etc/sane.d/dll.conf if needed
-    return if member("hp", chomp_(cat_("$prefix/etc/sane.d/dll.conf")));
+    # Add HPOJ backend to /etc/sane.d/dll.conf if needed (no individual
+    # config file /etc/sane.d/hpoj.conf necessary, the HPOJ driver finds the
+    # scanner automatically)
+    return if member("hpoj", chomp_(cat_("$prefix/etc/sane.d/dll.conf")));
     local *F;
     open F, ">> $prefix/etc/sane.d/dll.conf" or 
 	die "can't write SANE config in /etc/sane.d/dll.conf: $!";
-    print F "hp\n";
+    print F "hpoj\n";
     close F;
 }
 
