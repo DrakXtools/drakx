@@ -217,7 +217,7 @@ sub set_synaptics {
     $raw_X->remove_InputDevices('synaptics');
 
     my $layout = get_ServerLayout($raw_X)->{InputDevice} ||= [];
-    @$layout = grep { $_->{val} !~ /^"Synaptics Mouse/ } @$layout;
+    @$layout = grep { $_->{val} !~ /^"SynapticsMouse/ } @$layout;
 
     @synaptics or return;
     add_load_module($raw_X, "synaptics");
