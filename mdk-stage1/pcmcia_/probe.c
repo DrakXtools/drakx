@@ -118,9 +118,13 @@ pci_id_t pci_id[] = {
     { 0x1179, 0x060f, "yenta_socket", "Toshiba ToPIC97" }, 
     { 0x1179, 0x0617, "yenta_socket", "Toshiba ToPIC100" }, 
     { 0x119b, 0x1221, "i82365", "Omega Micro 82C092G" }, 
-    { 0x1524, 0x1411, "yenta_socket", "ENE Technology CB1411" },
     { 0x8086, 0x1221, "i82092", "Intel 82092AA_0" }, 
     { 0x8086, 0x1222, "i82092", "Intel 82092AA_1" }, 
+    { 0x1524, 0x1211, "yenta_socket", "ENE 1211" },
+    { 0x1524, 0x1225, "yenta_socket", "ENE 1225" },
+    { 0x1524, 0x1410, "yenta_socket", "ENE 1410" },
+    { 0x1524, 0x1411, "yenta_socket", "ENE Technology CB1411" },
+    { 0x1524, 0x1420, "yenta_socket", "ENE 1420" },
 };
 #define PCI_COUNT (sizeof(pci_id)/sizeof(pci_id_t))
 
