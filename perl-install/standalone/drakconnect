@@ -203,14 +203,19 @@ sub manage {
     @all_cards = network::ethernet::get_eth_cards($modules_conf);
     my %name = network::ethernet::get_eth_cards_names($modules_conf, @all_cards);
     foreach (keys %name) {
-	$p->{/eth|ath|wlan/ ? $name{$_} : $_} = { name => $_ };
-	$p->{name}{intf} = $_;
+	my $dev = /eth|ath|wlan/ ? $name{$_} : $_;
+	$p->{$dev} = {
+                      name => $_ ,
+                      intf => $intf->{$_}
+                     };
     }
     while (my ($device, $interface) = each %$intf) {
-        my $type;
         exists $name{$device} and next;
-        $type = network::tools::get_interface_type($interface) and $p->{$type} = { name => $device };
-        $p->{name}{intf} = $intf->{$device};
+        my $type = network::tools::get_interface_type($interface);
+        $p->{$type || $device} = {
+                                  name => $device,
+                                  intf => $interface
+                                 };
     }
 
     $window->{rwindow}->add(gtkpack_(Gtk2::VBox->new,
@@ -349,7 +354,7 @@ sub build_notebook {
 
 	if ($is_ethernet) {
             my $proto = $gui->{intf}{BOOTPROTO};
-            $proto->{protocols} = { static => N("static"), dhcp => N("DHCP") };
+            $proto->{protocols} = { none => N("none"), static => N("static"), dhcp => N("DHCP") };
             $proto->set_popdown_strings(values %{$proto->{protocols}});
             $proto->set_text($proto->{protocols}{$intf->{BOOTPROTO}});
             foreach ($gui->{intf}{IPADDR}, $gui->{intf}{NETMASK}, $gui->{netc}{GATEWAY}) {
