@@ -75,7 +75,7 @@ sub mkinitrd {
 
 sub read() {
     my $file = sprintf("/etc/%s.conf", arch() =~ /sparc/ ? 'silo' : arch() =~ /ppc/ ? 'yaboot' : 'lilo');
-    my $bootloader = $file =~ /lilo/ && detect_bootloader() =~ /GRUB/ ? read_grub() : read_lilo($file);
+    my $bootloader = $file =~ /lilo/ && detect_bootloader() =~ /GRUB/ && -f "/boot/grub/menu.lst" ? read_grub() : read_lilo($file);
     if (my $default = find { $_ && $_->{append} } get_label($bootloader->{default}, $bootloader), @{$bootloader->{entries}}) {
 	$bootloader->{perImageAppend} ||= $default->{append};
     }
