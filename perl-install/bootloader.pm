@@ -1064,7 +1064,7 @@ IconIndex=0
 sub install {
     my ($lilo, $fstab, $hds) = @_;
 
-    if (my ($p) = grep { $lilo->{boot} =~ /\Q$_->{device}/ } @$fstab) {
+    if (my ($p) = grep { $lilo->{boot} eq "/dev/$_->{device}" } @$fstab) {
 	die _("You can't install the bootloader on a %s partition\n", partition_table::type2fs($p))
 	  if isThisFs('xfs', $p);
     }
