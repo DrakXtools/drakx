@@ -128,7 +128,7 @@ You can install it by typing \"urpmi xawtv\" as root, in a console.")));
     }
 }
 
-my @devices = grep { $_->{media_type} eq 'MULTIMEDIA_VIDEO' || $_->{driver} eq 'usbvision' } detect_devices::probeall(1);
+my @devices = grep { $_->{media_type} eq 'MULTIMEDIA_VIDEO' || $_->{driver} eq 'usbvision' } detect_devices::probeall();
 push @devices, { driver => 'bttv', description => 'dummy' } if $::testing && !@devices;
 if (@devices) {
     # TODO: That need some work for multiples TV cards

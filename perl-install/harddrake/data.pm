@@ -8,7 +8,7 @@ our @ISA = qw(Exporter);
 our @EXPORT_OK = qw(version tree);
 our ($version, $sbindir, $bindir) = ("9.1.1", "/usr/sbin", "/usr/bin");
 
-my @devices = detect_devices::probeall(1);
+my @devices = detect_devices::probeall();
 
 # Update me each time you handle one more devices class (aka configurator)
 sub unknown() {

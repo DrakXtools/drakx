@@ -406,15 +406,15 @@ sub getSerialModem {
 }
 
 sub getModem() {
-    my @pci_modems = grep { $_->{driver} =~ /www.linmodems.org/ } probeall(0);
+    my @pci_modems = grep { $_->{driver} =~ /www.linmodems.org/ } probeall();
     getSerialModem({}), @pci_modems;
 }
 
 sub getSpeedtouch() {
-    grep { $_->{description} eq 'Alcatel|USB ADSL Modem (Speed Touch)' } probeall(0);
+    grep { $_->{description} eq 'Alcatel|USB ADSL Modem (Speed Touch)' } probeall();
 }
 sub getSagem() {
-    grep { $_->{description} eq 'Analog Devices Inc.|USB ADSL modem' } probeall(0);
+    grep { $_->{description} eq 'Analog Devices Inc.|USB ADSL modem' } probeall();
 }
 
 sub getNet() {
@@ -504,16 +504,13 @@ sub pcmcia_probe() {
     @devs;
 }
 
-# pci_probe with $probe_type is unsafe for pci! (bug in kernel&hardware)
 # pcmcia_probe provides field "device", used in network.pm
 # => probeall with $probe_type is unsafe
-sub probeall {
-    my ($probe_type) = @_;
-
+sub probeall() {
     return if $::noauto;
 
     require sbus_probing::main;
-    pci_probe($probe_type), usb_probe(), pcmcia_probe(), sbus_probing::main::probe();
+    pci_probe(), usb_probe(), pcmcia_probe(), sbus_probing::main::probe();
 }
 sub matching_desc {
     my ($regexp) = @_;
@@ -675,12 +672,6 @@ sub raidAutoStart {
 	raidAutoStartIoctl() or raidAutoStartRaidtab(@parts);
     }
 }
-
-sub is_a_recent_computer() {
-    my ($frequence) = map { /cpu MHz\s*:\s*(.*)/ } cat_("/proc/cpuinfo");
-    $frequence > 600;
-}
-
 
 sub usb_description2removable {
     local ($_) = @_;

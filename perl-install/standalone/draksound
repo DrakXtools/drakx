@@ -31,7 +31,7 @@ my $in = 'interactive'->vnew('su');
 
 modules::mergein_conf('/etc/modules.conf');
 
-my @devices = grep { $_->{media_type} eq 'MULTIMEDIA_AUDIO' } detect_devices::probeall(1);
+my @devices = grep { $_->{media_type} eq 'MULTIMEDIA_AUDIO' } detect_devices::probeall();
 if (@devices) {
     # TODO: That need some work for multiples sound cards
     map_index {
