@@ -706,6 +706,12 @@ sub get_of_dev {
     $of_dev;
 }
 
+sub check_enough_space() {
+    my $e = "$::prefix/boot/.enough_space";
+    output $e, 1; -s $e or die N("not enough room in /boot");
+    unlink $e;
+}
+
 sub install_yaboot {
     my ($bootloader, $_fstab, $_hds) = @_;
     $bootloader->{prompt} = $bootloader->{timeout};
@@ -1037,9 +1043,7 @@ quit
 EOF
 ";
    
-    my $e = "$::prefix/boot/.enough_space";
-    output $e, 1; -s $e or die N("not enough room in /boot");
-    unlink $e;
+    check_enough_space();
     $f;
 }
 
