@@ -47,5 +47,4 @@ if_((arch() !~ /alpha/) && (arch() !~ /ppc/),
 }
 
 
-#- Wonderful perl :(
-1;
+__END__
