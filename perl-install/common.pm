@@ -688,6 +688,14 @@ sub formatError {
     $err;
 }
 
+sub backtrace {
+    my $s;
+    for (my $i = 1; caller($i); $i++) {
+	my ($package, $file, $line, $func) = caller($i);
+	$s .= "$func() called from $file:$line\n";
+    }
+    $s;
+}
 
 #-######################################################################################
 #- Wonderful perl :(
