@@ -740,7 +740,7 @@ sub appli_choice {
 								       0, my $check44 = new Gtk::CheckButton(),),
 							   ),
 					       0, gtkpack_(new Gtk::HBox(0,10),
-							   1, gtktext_insert(gtkset_editable($text, 0), "Before installing any fonts, be sure that you have the right to use and install them on your system.\n\n-You can install the fonts using the normal way. In rare cases, bogus fonts may hang up your X Server."),
+							   1, gtktext_insert(gtkset_editable($text, 0), _("Before installing any fonts, be sure that you have the right to use and install them on your system.\n\n-You can install the fonts using the normal way. In rare cases, bogus fonts may hang up your X Server.")),
 							   0, new Gtk::VScrollbar($text->vadj),
 							   0, new Gtk::VBox(0,10),
 							   ),
