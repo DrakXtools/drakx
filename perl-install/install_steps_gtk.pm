@@ -348,9 +348,11 @@ sub choosePackagesTree {
 				my @n = map { pkgs::packageByName($packages, $_) } @_;
 				my %l;
 				my $isSelection = !$n[0]->flag_selected;
+				my $i = 0;
                                 foreach (@n) {
                                     #pkgs::togglePackageSelection($packages, $_, my $l = {});
                                     #@l{grep {$l->{$_}} keys %$l} = ();
+				    $i++; log::l("$i:toggle of $_");
                                     pkgs::togglePackageSelection($packages, $_, \%l);
                                 }
 				if (my @l = map { $packages->{depslist}[$_]->name } keys %l) {
@@ -380,6 +382,21 @@ sub choosePackagesTree {
 				    }
 				} else {
 				    $o->ask_warn('', N("You can't select/unselect this package"));
+				    my @ask_unselect = grep { $packages->{state}{rejected}{$_}{backtrack} }
+				      keys %{$packages->{state}{rejected} || {}};
+				    my @l = map { my $rb = $packages->{state}->{rejected}{$_}{backtrack};
+						  my @froms = keys %{$rb->{closure} || {}};
+						  my @unsatisfied = @{$rb->{unsatisfied} || []};
+						  my $s = join ", ", ((map { sprintf("due to missing %s", $_) } @froms),
+								      (map { sprintf("due to unsatisfied %s", $_) } @unsatisfied),
+								      $rb->{promote} && !$rb->{keep} ? sprintf("trying to promote %s", join(", ", @{$rb->{promote}})) : @{[]},
+								      $rb->{keep} ? sprintf("in order to keep %s", join(", ", @{$rb->{keep}})) : @{[]},
+								     );
+						  $_ . ($s ? " ($s)" : '');
+					      } sort @ask_unselect;
+
+				    @ask_unselect and log::l("package cannot be selected or unselected for the following reason:",
+							     map { "\n    $_" } @l);
 				}
 			    },
 			    grep_allowed_to_toggle => sub {
