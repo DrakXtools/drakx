@@ -19,9 +19,6 @@ sub new {
 sub enter_console { my ($o) = @_; $o->{suspended} = common::setVirtual(1) }
 sub leave_console { my ($o) = @_; common::setVirtual(delete $o->{suspended}) }
 
-sub suspend {}
-sub resume {}
-
 sub exit { 
     gtkset_mousecursor_normal(); #- for restoring a normal in any case on standalone
     my_gtk::flush();

@@ -234,8 +234,5 @@ sub wait_message_endW {
     Newt::PopWindow;
 }
 
-sub kill {
-}
-
 
 1;
