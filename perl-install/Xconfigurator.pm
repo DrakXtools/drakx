@@ -154,7 +154,7 @@ sub cardConfigurationAuto() {
 	    my $card = { identifier => ($c[$i]{description} . (@c > 1 && " $i")) };
 	    $card->{type} = $1 if /Card:(.*)/;
 	    $card->{server} = $1 if /Server:(.*)/;
-	    $card->{flags}{needVideoRam} = /86c368|S3/;
+	    $card->{flags}{needVideoRam} = /86c368|S3 Inc/;
 	    $card->{busid} = "PCI:$c[$i]{pci_bus}:$c[$i]{pci_device}:$c[$i]{pci_function}";
 	    push @{$card->{lines}}, @{$lines{$card->{identifier}} || []};
 	    push @cards, $card;
@@ -545,8 +545,7 @@ sub testFinalConfig {
     $skiptest || $o->{card}{server} =~ 'FBDev|Sun' and return 1; #- avoid testing with these.
 
     #- needed for bad cards not restoring cleanly framebuffer
-    my $bad_card = $o->{card}{identifier} =~ /i740|ViRGE/;
-    $bad_card ||= $o->{card}{identifier} =~ /Rage Mobility (?:P\/M|L) / ||  $o->{card}{identifier} =~ /3D Rage LT/;
+    my $bad_card = $o->{card}{identifier} =~ /i740|ViRGE|S3 Inc|Rage Mobility (?:P\/M|L) |3D Rage LT/;
     $bad_card ||= $o->{card}{use_xf4}; #- TODO obsoleted to check, when using fbdev of XFree 4!
     log::l("the graphic card does not like X in framebuffer") if $bad_card;
 
