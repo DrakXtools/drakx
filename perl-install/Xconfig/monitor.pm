@@ -149,7 +149,7 @@ sub getinfoFromDDC {
 
     my ($h, $v, $size, @m) = @l;
     { 
-        VideoRam => $VideoRam,
+        VideoRam_probed => to_int($VideoRam),
         HorizSync => first($h =~ /^(\S*)/), 
         VertRefresh => first($v =~ /^(\S*)/),
         size => to_float($size),

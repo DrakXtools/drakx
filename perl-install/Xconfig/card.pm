@@ -254,8 +254,8 @@ sub configure_auto_install {
 
     $card->{prog} = install_server($card, $options, $do_pkgs);
     if ($card->{needVideoRam} && !$card->{VideoRam}) {
-	$card->{VideoRam} = 4096;
-	log::l("argh, I need to know VideoRam! Taking a default value: VideoRam = $card->{VideoRam}");
+	$card->{VideoRam} = $options->{VideoRam_probed} || 4096;
+	log::l("argh, I need to know VideoRam! Taking " . ($options->{probed_VideoRam} ? "the probed" : "a default") . " value: VideoRam = $card->{VideoRam}");
     }
     to_raw_X($card, $raw_X);
     $card;
@@ -278,7 +278,7 @@ sub configure {
     $card->{prog} = install_server($card, $options, $do_pkgs);
     
     $in->ask_from('', _("Select the memory size of your graphics card"),
-		  [ { val => \ ($card->{VideoRam} = 4096),
+		  [ { val => \ ($card->{VideoRam} = $options->{VideoRam_probed} || 4096),
 		      type => 'list',
 		      list => [ ikeys %VideoRams ],
 		      format => sub { translate($VideoRams{$_[0]}) },

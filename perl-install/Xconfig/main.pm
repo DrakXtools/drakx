@@ -35,8 +35,9 @@ sub configure_resolution {
 sub configure_everything_auto_install {
     my ($raw_X, $do_pkgs, $old_X, $options) = @_;
     
-    my $card = Xconfig::card::configure_auto_install($raw_X, $do_pkgs, $old_X, $options) or return;
     my $monitor = Xconfig::monitor::configure_auto_install($raw_X, $old_X) or return;
+    $options->{VideoRam_probed} = $monitor->{VideoRam_probed};
+    my $card = Xconfig::card::configure_auto_install($raw_X, $do_pkgs, $old_X, $options) or return;
     Xconfig::screen::configure($raw_X, $card) or return;
     my $resolution = Xconfig::resolution_and_depth::configure_auto_install($raw_X, $card, $monitor, $old_X);
 
@@ -51,8 +52,9 @@ sub configure_everything {
     my ($in, $raw_X, $do_pkgs, $auto, $options) = @_;
     my $X = {};
     my $ok = 1;
-    $ok &&= $X->{card} = Xconfig::card::configure($in, $raw_X, $do_pkgs, $auto, $options);
     $ok &&= $X->{monitor} = Xconfig::monitor::configure($in, $raw_X, $auto);
+    $options->{VideoRam_probed} = $X->{monitor}{VideoRam_probed};
+    $ok &&= $X->{card} = Xconfig::card::configure($in, $raw_X, $do_pkgs, $auto, $options);
     $ok &&= Xconfig::screen::configure($raw_X, $X->{card});
     $ok &&= $X->{resolution} = Xconfig::resolution_and_depth::configure($in, $raw_X, $X->{card}, $X->{monitor}, $auto);
     $ok &&= Xconfig::test::test($in, $raw_X, $X->{card}, $auto);
