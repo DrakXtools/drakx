@@ -329,6 +329,13 @@ sub move_fonts {
     system("cd $src_dir && mv @fonts $dest_dir") if @fonts;
 }
 
+sub put_font_dir_real {
+    my ($subdir, $command, $progress, $title) = @_;
+    system("cd $drakfont_dir/$subdir && $fccache && $command");
+    interactive_progress($pbar2, $progress, $title);
+    return "$chkfontpath -a $drakfont_dir/$subdir";
+}
+
 sub put_font_dir() {
     -e "/usr/share/ghostscript" or do { $gs = 0; print "ghostscript is not installed on your system...\n" };
     if (@font_list) {
@@ -346,11 +353,7 @@ sub put_font_dir() {
         }
         system('cd ' . $drakfont_dir . '/tmp/tmp  && cp *.ttf ../../ttf; chmod 644 ../../ttf/*ttf');
         interactive_progress($pbar2, 0.20, N("please wait during ttmkfdir..."));
-
-        my $ttfdir = $drakfont_dir . "/ttf";
-        system("cd $ttfdir && $fccache && $ttmkfdir -u > fonts.dir");
-        interactive_progress($pbar2, 0.10, N("True Type install done"));
-        my $update_chkfontpath = "$chkfontpath -a $drakfont_dir/ttf";
+        my $update_chkfontpath = put_font_dir_real("ttf", "$ttmkfdir -u > fonts.dir", 0.10, N("True Type install done"));
 
         if ($gs) {
             convert_ttf_fonts([ glob("$drakfont_dir/tmp/tmp/*.ttf") ], 1);
@@ -365,19 +368,13 @@ sub put_font_dir() {
                 system("cd $drakfont_dir/tmp/Type1 && cat Fontmap >> `rpm -ql ghostscript | grep Fontmap.GS` ");
                 move_fonts("$drakfont_dir/tmp/Type1", "../../Type1", qw(afm gsf pfb pfm));
             }
-            my $type1dir = $drakfont_dir . "/Type1";
-            system("cd $type1dir && $fccache && $type1inst");
-            interactive_progress($pbar2, 0.05, N("Ghostscript referencing"));
-            $update_chkfontpath .= "; $chkfontpath -a $drakfont_dir/Type1";
+            $update_chkfontpath .= "; " . put_font_dir_real("Type1", $type1inst, 0.05, N("Ghostscript referencing"));
         } elsif ($so) {
             convert_ttf_fonts([ glob("$drakfont_dir/tmp/tmp/*.ttf") ]);
             convert_fonts([ glob("$drakfont_dir/tmp/tmp/*.pfm") ], $pfm2afm, "PFM");
             move_fonts("$drakfont_dir/tmp/tmp", "../Type1", qw(afm));
             move_fonts("$drakfont_dir/tmp/Type1", "../../Type1", qw(afm));
-            my $type1dir = $drakfont_dir . "/Type1";
-            system("cd $type1dir && $fccache && $type1inst");
-            interactive_progress($pbar2, 0.14, N("type1inst building"));
-            $update_chkfontpath .= "; $chkfontpath -a $drakfont_dir/Type1";
+            $update_chkfontpath .= put_font_dir_real("Type1", $type1inst, 0.14, N("type1inst building"));
         }
 
         interactive_progress($pbar2, 1, N("done"));
