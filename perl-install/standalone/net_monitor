@@ -1,0 +1,171 @@
+#!/usr/bin/perl
+
+# Monitor
+
+# Copyright (C) 1999 MandrakeSoft (damien@mandrakesoft.com)
+#
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2, or (at your option)
+# any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+
+use Gtk;
+use lib qw(/usr/lib/libDrakX);
+use interactive;
+use standalone;
+use my_gtk qw(:helpers :wrappers);
+use Data::Dumper;
+use common qw(:common :file :functional :system);
+
+my $default_intf;
+init Gtk;
+$::isEmbedded = ($::XID, $::CCPID) = "@ARGV" =~ /--embedded (\w+) (\w+)/;
+($default_intf) = "@ARGV" =~ /--defaultintf (\w+)/;
+my $window1 = $::isEmbedded ? new Gtk::Plug ($::XID) : new Gtk::Window -toplevel;
+$window1->signal_connect ( delete_event => sub { Gtk->exit(0); });
+$window1->set_position(1);
+$window1->set_title(_("Network monitoring"));
+$window1->set_policy(0, 0, 1);
+$window1->set_border_width(5);
+#$::isEmbedded or $window1->set_usize(500, 400);
+
+my @interfaces;
+my $monitor = {};
+gtkadd($window1,
+       gtkpack_(new Gtk::VBox(0,5),
+		0, _("Network Monitoring"),
+		1, gtkpack_(new Gtk::HBox(0,5),
+			    1, my $notebook = new Gtk::Notebook,
+			    0, gtkpack_(new Gtk::VBox(0,5),
+					1, gtkadd(gtkset_shadow_type(new Gtk::Frame("Statistics"), 'etched_out'),
+						  gtkpack__(gtkset_border_width(new Gtk::VBox(0,5),5),
+				      gtkpack__(new Gtk::HBox(0,0), _("Receiving Average Speed : "), my $label_avsr = new Gtk::Label("")),
+				      gtkpack__(new Gtk::HBox(0,0), _("Receiving Current Speed : "), my $label_cusr = new Gtk::Label("")),
+				      gtkpack__(new Gtk::HBox(0,0), _("Sending Average Speed : "), my $label_avst = new Gtk::Label("")),
+				      gtkpack__(new Gtk::HBox(0,0), _("Sending Current Speed : "), my $label_cust = new Gtk::Label("")),
+							   )
+						 ),
+					0, my $button_connect = new Gtk::Button("connect"),
+					0, new Gtk::HSeparator,
+					0, my $button_more = new Gtk::Button("more")
+				       )
+			   ),
+		0, new Gtk::Statusbar,
+	       )
+      );
+$window1->show_all();
+$window1->set_policy (1, 1, 1);
+update();
+my ($labelr, $labelt);
+my $time_tag = Gtk->timeout_add(1000, sub {
+				    get_val();
+				    foreach(@interfaces) {
+					my $intf = $_;
+					my $recv = $monitor->{$intf}{val}->[0];
+					my $transmit = $monitor->{$intf}{val}->[8];
+					my $refr = $monitor->{$intf}{referencer};
+					my $reft = $monitor->{$intf}{referencet};
+					push(@{$monitor->{$intf}{stack_r}}, $recv - $refr);
+					shift @{$monitor->{$intf}{stack_r}} if @{$monitor->{$intf}{stack_r}} > 300;
+					$labelr->set(formatXiB($recv - $monitor->{$intf}{initialr}));
+					$monitor->{$intf}{referencer} = $recv;
+					push(@{$monitor->{$intf}{stack_t}}, $transmit - $reft);
+					shift @{$monitor->{$intf}{stack_t}} if @{$monitor->{$intf}{stack_t}} > 300;
+					$monitor->{$intf}{referencet} = $transmit;
+					$labelt->set(formatXiB($transmit - $monitor->{$intf}{initialt}));
+					$monitor->{$intf}{avgsr}+=reicv;
+					$monitor->{$intf}{avgst}+=transmit;
+					draw_monitor($monitor->{$intf});
+				    }
+				    1;
+				});
+my $time_tag = Gtk->timeout_add(5000, \&update);
+Gtk->main;
+Gtk->exit(0);
+
+sub get_val {
+    my @ret;
+    my $a = cat_("/proc/net/dev");
+    $a =~ s/^.*?\n.*?\n//;
+    $a =~ s/^\s*lo:.*?\n//;
+    my @line = split(/\n/, $a);
+    foreach(@line) {
+	s/\s*(\w*)://;
+	my $intf=$1;
+	push (@ret,$intf);
+	$monitor->{$intf}{val} = [split()];
+	$monitor->{$intf}{intf} = $intf;
+    }
+    @ret;
+}
+
+sub update {
+    my @intfs = get_val();
+    foreach(@intfs) {
+	my $intf = $_;
+	if(!member($intf,@interfaces)) {
+	    push (@interfaces, $intf);
+	    $default_intf = $intf;
+	    $monitor->{$intf}{initialr} = $monitor->{$intf}{val}->[0];
+	    $monitor->{$intf}{initialt}=$monitor->{$intf}{val}->[8];
+	    $notebook->append_page(gtkshow(my $page = gtkpack_(new Gtk::VBox(0,0),
+					       0, gtkpack__(gtkset_border_width(new Gtk::HBox(0,0), 5),
+							    gtksize(my $darea = $monitor->{$intf}{darea} = new Gtk::DrawingArea(),300, 150)),
+					       0, gtkpack__(gtkset_border_width(new Gtk::HBox(0,0), 5),
+							    _("sent : "), $labelt = new Gtk::Label("0")),
+					       0, gtkpack__(gtkset_border_width(new Gtk::HBox(0,0), 5),
+							    _("received : "), $labelr = new Gtk::Label(_("0"))),
+					   )),
+				   new Gtk::Label($intf));
+	    $notebook->set_page($notebook->page_num($page));
+	    $monitor->{$intf}{pixmap_db} = new Gtk::Gdk::Pixmap($darea->window, 300, 150);
+	    $monitor->{$intf}{referencer}=$monitor->{$intf}{val}->[0];
+	    $monitor->{$intf}{referencet}=$monitor->{$intf}{val}->[8];
+	    $monitor->{$intf}{pixmap_db}->draw_rectangle ($monitor->{$intf}{darea}->style->black_gc, 1, 0, 0, 300, 150);
+	    $darea->signal_connect( expose_event => sub {
+					$darea->window->draw_pixmap ($darea->style->bg_gc('normal'),
+								     $monitor->{$intf}{pixmap_db}, 0, 0, 0, 0, 300, 150);
+				    });
+	}
+	$label_avs->set("");
+    }
+}
+
+sub draw_monitor {
+    my ($o) = @_;
+    $o->{pixmap_db}->draw_rectangle ($o->{darea}->style->black_gc, 1, 0, 0, 300, 150);
+#    my @c = map { $step+=2; ($step, $_); } @{$o->{stack_r}};
+#    print "\n##\n" . Data::Dumper->Dump([@c],['$c']) . "\n##\n";
+#    $o->{pixmap_db}->draw_segments($o->{darea}->style->white_gc, @c);
+    my $maxr = 0;
+    foreach (@{$o->{stack_r}}) {
+	$maxr = $_ if $_>$maxr;
+    }
+    my $maxt = 0;
+    foreach (@{$o->{stack_t}}) {
+	$maxt = $_ if $_>$maxt;
+    }
+    $ech = $maxr + $maxt;
+    $ech == 0 and $ech = 1;
+    my $step=0;
+    foreach (@{$o->{stack_t}}) {
+	$o->{pixmap_db}->draw_rectangle($o->{darea}->style->white_gc, 1, $step, 0, 1, $_*150/$ech);
+	$step++;
+    }
+    my $step=0;
+    foreach (@{$o->{stack_r}}) {
+	$o->{pixmap_db}->draw_rectangle($o->{darea}->style->white_gc, 1, $step, 151-$_*150/$ech, 1, $_*150/$ech);
+	$step++;
+    }
+    $o->{darea}->draw(undef);
+}
+
