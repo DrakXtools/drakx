@@ -97,7 +97,7 @@ sub invCorrectSize { ($_[0] - $C) / $B }
 sub selectedSize {
     my ($packages) = @_;
     my $size = 0;
-    my (%skip_added, %skip_removed);
+    my %skip;
     #- take care of packages selected...
     foreach (@{$packages->{depslist}}) {
 	if ($_->flag_selected) {
@@ -105,14 +105,14 @@ sub selectedSize {
 	    #- if a package is obsoleted with the same name it should
 	    #- have been selected, so a selected new package obsoletes
 	    #- all the old package.
-	    exists $skip_added{$_->name} and next; $skip_added{$_->name} = undef;
+	    exists $skip{$_->name} and next; $skip{$_->name} = undef;
 	    $size -= $packages->{sizes}{$_->name};
 	}
     }
     #- but remove size of package being obsoleted or removed.
     foreach ((map { /(.*)\.[^\.]*$/ } keys %{$packages->{state}{obsoleted}}), keys %{$packages->{state}{ask_remove}}) {
 	my ($name) = /(.*)-[^\-]*-[^\-]*$/ or next;
-	exists $skip_removed{$name} and next; $skip_removed{$name} = undef;
+	exists $skip{$name} and next; $skip{$name} = undef;
 	$size -= $packages->{sizes}{$name};
     }
     $size;
