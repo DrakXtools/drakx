@@ -18,7 +18,7 @@ use log;
 #- languages, carefully choosen)
 my %languages = (
   'en'  => [ 'English (US)',		undef,	      'en', 'en_US:en' ],
-  'en'  => [ 'English (UK)',		'iso-8859-1', 'en', 'en_GB:en' ],
+'en_GB' => [ 'English (UK)',		'iso-8859-1', 'en', 'en_GB:en' ],
   'af'  => [ 'Afrikaans',		'iso-8859-1', 'af', 'af:en_ZA' ],
 #-'ar'  => [ 'Arabic',			'iso-8859-6', 'ar', 'ar' ],
   'bg'  => [ 'Bulgarian',		'cp1251',     'bg', 'bg' ],
@@ -206,12 +206,11 @@ sub load_po($) {
     my ($lang) = @_;
     my ($s, $from, $to, $state, $fuzzy);
 
-
     $s .= "package po::I18N;\n";
     $s .= "\%$lang = (";
 
 #-  $lang = substr($lang, 0, 2);
-    my $f; -e ($f = "$_/po/$lang.po ") and last foreach @INC;
+    my $f; -e ($f = "$_/po/$lang.po") and last foreach @INC;
     unless (-e $f) {
 	-e ($f = "$_") and last foreach @INC;
 	$f = commands::install_cpio("$f/po", "$lang.po");
