@@ -223,7 +223,7 @@ sub prepare_write_fstab {
 	my ($freq, $passno) =
 	  exists $_->{freq} ?
 	    ($_->{freq}, $_->{passno}) :
-	  isTrueFS($_) && $_->{options} !~ /encryption=/ ? 
+	  isTrueFS($_) && $_->{options} !~ /encryption=/ && !$_->{is_removable} ? 
 	    (1, $_->{mntpoint} eq '/' ? 1 : loopback::carryRootLoopback($_) ? 0 : 2) : 
 	    (0, 0);
 
@@ -444,11 +444,11 @@ user,exec,dev,suid )."),
 
 sub set_default_options {
     my ($part, %opts) = @_;
-    #- opts are: is_removable useSupermount security iocharset codepage
+    #- opts are: useSupermount security iocharset codepage
 
     my ($options, $unknown) = mount_options_unpack($part);
 
-    if ($opts{is_removable}) {
+    if ($part->{is_removable}) {
 	$options->{supermount} = $opts{useSupermount} && !($opts{useSupermount} eq 'magicdev' && $part->{media_type} eq 'cdrom');
 	$part->{type} = !$options->{supermount} ? 'auto' :
 	  $part->{media_type} eq 'cdrom' ? 'udf:iso9660' : 'ext2:vfat';
@@ -482,7 +482,7 @@ sub set_default_options {
 
 	put_in_hash($options, {
 			       user => 1, noexec => 0,
-			      }) if $opts{is_removable};
+			      }) if $part->{is_removable};
 
 	put_in_hash($options, {
 			       'umask=0' => $opts{security} < 3, 'umask=0022' => $opts{security} < 4,
@@ -526,10 +526,8 @@ sub set_all_default_options {
     my ($all_hds, %opts) = @_;
     #- opts are: useSupermount security iocharset codepage
 
-    my @removables = @{$all_hds->{raw_hds}};
-
     foreach my $part (fsedit::get_really_all_fstab($all_hds)) {
-	set_default_options($part, %opts, is_removable => member($part, @removables));
+	set_default_options($part, %opts);
     }
 }
 
@@ -550,6 +548,9 @@ sub get_raw_hds {
     my ($prefix, $all_hds) = @_;
 
     push @{$all_hds->{raw_hds}}, detect_devices::removables();
+    $_->{is_removable} = 1 foreach @{$all_hds->{raw_hds}};
+    $_->{is_removable} = 1 foreach map { partition_table::get_normal_parts($_) } grep { $_->{usb_media_type} } @{$all_hds->{hds}};
+
     get_major_minor(@{$all_hds->{raw_hds}});
 
     my @fstab = read_fstab($prefix, "/etc/fstab", 'keep_freq_passno');
