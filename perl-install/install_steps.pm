@@ -339,8 +339,9 @@ sub addUser($) {
 	} else {
 	    my $u = $_->{uid} || ($_->{oldu} = (stat("$p$_->{home}"))[4]);
 	    my $g = $_->{gid} || ($_->{oldg} = (stat("$p$_->{home}"))[5]);
-	    if (!$u || getpwuid($u)) { for ($u = 500; getpwuid($u) || $uids{$u}; $u++) {} }
-	    if (!$g || getgrgid($g)) { for ($g = 500; getgrgid($g) || $gids{$g}; $g++) {} }
+	    #- search for available uid above 501 else initscripts may fail to change llanguage for KDE.
+	    if (!$u || getpwuid($u)) { for ($u = 501; getpwuid($u) || $uids{$u}; $u++) {} }
+	    if (!$g || getgrgid($g)) { for ($g = 501; getgrgid($g) || $gids{$g}; $g++) {} }
 
 	    $_->{home} ||= "/home/$_->{name}";
 	    $_->{uid} = $u; $uids{$u} = 1;

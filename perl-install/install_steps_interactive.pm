@@ -101,7 +101,7 @@ sub selectInstallClass($@) {
     my @c = qw(beginner specific expert);
     my %c = (
 	     beginner  => _("Recommended"),
-	     specific  => _("Personalized"),
+	     specific  => _("Customized"),
 	     expert    => _("Expert"),
 	    );
     my $installClass = ${{reverse %c}}{$o->ask_from_list(_("Install Class"),
@@ -496,9 +496,9 @@ wish to access and any applicable user name and password."),
     my $action;
     my @action = qw(ascii ps both done);
     my %action = (
-		  ascii  => _("Yes, print ascii page"),
-		  ps     => _("Yes, print postscript page"),
-		  both   => _("Yes, print both pages"),
+		  ascii  => _("Yes, print ascii test page"),
+		  ps     => _("Yes, print postscript test page"),
+		  both   => _("Yes, print both test pages"),
 		  done   => _("No"),
 		 );
 
