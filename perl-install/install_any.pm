@@ -841,9 +841,7 @@ sub install_urpmi {
 	    #- compute correctly reference to media/media_info
 	    my $with;
 	    if ($_->{update}) {
-		#- an update medium always use "../base/hdlist.cz";
-		#- FIXME
-		$with = "../base/hdlist.cz";
+		$with = "media_info/hdlist.cz";
 	    } elsif ($_->{with_hdlist}) {
 		$with = $_->{with_hdlist};
 	    } else {

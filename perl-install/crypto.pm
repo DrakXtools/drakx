@@ -67,7 +67,7 @@ sub mirrors {
 		my $qu = quotemeta $_;
 		$url =~ /\.$qu(?:\..*)?$/ and $land = $url2land{$_};
 	    }
-	    $dir =~ s!/RPMS$!!;
+	    $dir =~ s!/main$!!;
 	    $mirrors{$url} = [ $land, $dir . $sub_dir ];
 	}
 	http::getFile('/XXX'); #- close connection.
@@ -134,7 +134,7 @@ sub getPackages {
     #- get pubkey file first as we cannot handle 2 files opened simultaneously.
     my $pubkey;
     eval {
-	my $fpubkey = getFile("../media_info/pubkey", $mirror);
+	my $fpubkey = getFile("media_info/pubkey", $mirror);
 	$pubkey = [ $packages->parse_armored_file($fpubkey) ];
     };
 
@@ -147,7 +147,7 @@ sub getPackages {
     
     #- extract hdlist of crypto, then depslist.
     require pkgs;
-    my $update_medium = pkgs::psUsingHdlist($prefix, 'ftp', $packages, "hdlist-updates.cz", "1u", "RPMS",
+    my $update_medium = pkgs::psUsingHdlist($prefix, 'ftp', $packages, "hdlist-updates.cz", "1u", "main",
 					    "Updates for Mandrakelinux " . version(), 1, $fhdlist, $pubkey);
     if ($update_medium) {
 	log::l("read updates hdlist");
