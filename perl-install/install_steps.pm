@@ -881,7 +881,7 @@ sub setupBootloader($) {
 #------------------------------------------------------------------------------
 sub configureXBefore {
     my ($o) = @_;
-    my $xkb = $o->{X}{keyboard}{xkb_keymap} || keyboard::keyboard2xkb($o->{keyboard});
+    my $xkb = $o->{X}{keyboard}{XkbLayout} || keyboard::keyboard2xkb($o->{keyboard});
     $xkb = '' if !($xkb && $xkb =~ /([^(]*)/ && -e "$o->{prefix}/usr/X11R6/lib/X11/xkb/symbols/$1");
     if (!$xkb && (my $f = keyboard::xmodmap_file($o->{keyboard}))) {
 	cp_af($f, "$o->{prefix}/etc/X11/xinit/Xmodmap");	
@@ -891,7 +891,7 @@ sub configureXBefore {
 	my $f = "$o->{prefix}/etc/sysconfig/i18n";
 	setVarsInSh($f, add2hash_({ XKB_IN_USE => $xkb ? '': 'no' }, { getVarsFromSh($f) }));
     }
-    $o->{X}{keyboard}{xkb_keymap} = $xkb;
+    $o->{X}{keyboard}{XkbLayout} = $xkb;
     $o->{X}{mouse} = $o->{mouse};
     $o->{X}{wacom} = $o->{wacom};
 
@@ -921,12 +921,12 @@ sub configureX {
 sub configureXAfter {
     my ($o) = @_;
     if ($o->{X}{card}{server} eq 'FBDev') {
-	unless (install_any::setupFB($o, Xconfigurator::getVGAMode($o->{X}))) {
+	install_any::setupFB($o, $o->{X}{card}{bios_vga_mode}) or do {
 	    log::l("disabling automatic start-up of X11 if any as setup framebuffer failed");
-	    any::runlevel($o->{prefix}, 3) unless $::testing; #- disable automatic start-up of X11 on error.
-	}
+	    any::runlevel($o->{prefix}, 3); #- disable automatic start-up of X11 on error.
+	};
     }
-    if ($o->{X}{default_depth} >= 16 && $o->{X}{card}{default_wres} >= 1024) {
+    if ($o->{X}{default_depth} >= 16 && $o->{X}{card}{default_x_res} >= 1024) {
 	log::l("setting large icon style for kde");
 	install_any::kderc_largedisplay($o->{prefix});
     }

@@ -2,19 +2,20 @@ package Xconfigurator; # $Id$
 
 use diagnostics;
 use strict;
-use vars qw($in $do_pkgs @window_managers @depths @monitorSize2resolution @hsyncranges %min_hsync4wres @vsyncranges %depths @resolutions %serversdriver @svgaservers @accelservers @allbutfbservers @allservers @allbutfbdrivers @alldrivers %vgamodes %videomemory @ramdac_name @ramdac_id @clockchip_name @clockchip_id %keymap_translate %standard_monitors $XF86firstchunk_text $keyboardsection_start $keyboardsection_start_v4 $keyboardsection_part2 $keyboardsection_part3 $keyboardsection_part3_v4 $keyboardsection_end $pointersection_text $monitorsection_text1 $monitorsection_text2 $monitorsection_text3 $monitorsection_text4 $modelines_text_Trident_TG_96xx $modelines_text_ext $modelines_text $devicesection_text $devicesection_text_v4 $screensection_text1 %lines @options %xkb_options $good_default_monitor $low_default_monitor $layoutsection_v4 $modelines_text_apple);
+use vars qw($in $do_pkgs);
 
 use common;
 use log;
 use detect_devices;
 use run_program;
 use Xconfigurator_consts;
+use Xconfig;
 use any;
 use modules;
 
 my $tmpconfig = "/tmp/Xconfig";
 
-my ($prefix, %monitors, %standard_monitors_);
+my ($prefix);
 
 
 sub xtest {
@@ -24,58 +25,6 @@ sub xtest {
       c::Xtest($display);    
 }
 
-sub getVGAMode($) { $_[0]->{card}{vga_mode} || $vgamodes{"640x480x16"}; }
-
-sub readCardsDB {
-    my ($file) = @_;
-    my ($card, %cards);
-
-    my $F = common::openFileMaybeCompressed($file);
-
-    my ($lineno, $cmd, $val) = 0;
-    my $fs = {
-        LINE => sub { push @{$card->{lines}}, $val unless $val eq "VideoRam" },
-	NAME => sub {
-	    $cards{$card->{type}} = $card if $card;
-	    $card = { type => $val };
-	},
-	SEE => sub {
-	    my $c = $cards{$val} or die "Error in database, invalid reference $val at line $lineno";
-
-	    push @{$card->{lines}}, @{$c->{lines} || []};
-	    add2hash($card->{flags}, $c->{flags});
-	    add2hash($card, $c);
-	},
-	CHIPSET => sub {
-	    $card->{chipset} = $val;
-	    $card->{flags}{needChipset} = 1 if $val eq 'GeForce DDR';
-	    $card->{flags}{needVideoRam} = 1 if member($val, qw(mgag10 mgag200 RIVA128 SiS6326));
-	},
-	SERVER => sub { $card->{server} = $val; },
-	DRIVER => sub { $card->{driver} = $val; },
-	RAMDAC => sub { $card->{ramdac} = $val; },
-	DACSPEED => sub { $card->{dacspeed} = $val; },
-	CLOCKCHIP => sub { $card->{clockchip} = $val; $card->{flags}{noclockprobe} = 1; },
-	NOCLOCKPROBE => sub { $card->{flags}{noclockprobe} = 1 },
-	UNSUPPORTED => sub { $card->{flags}{unsupported} = 1 },
-	COMMENT => sub {},
-    };
-
-    local $_;
-    while (<$F>) { $lineno++;
-	s/\s+$//;
-	/^#/ and next;
-	/^$/ and next;
-	/^END/ and do { $cards{$card->{type}} = $card if $card; last };
-
-	($cmd, $val) = /(\S+)\s*(.*)/ or next; #log::l("bad line $lineno ($_)"), next;
-
-	my $f = $fs->{$cmd};
-
-	$f ? $f->() : log::l("unknown line $lineno ($_)");
-    }
-    \%cards;
-}
 sub readCardsNames {
     my $file = "$ENV{SHARE_PATH}/ldetect-lst/CardsNames";
     map { (split '=>')[0] } grep { !/^#/ } catMaybeCompressed($file);
@@ -104,17 +53,15 @@ sub realName2CardName {
 }
 sub updateCardAccordingName {
     my ($card, $name) = @_;
-    my $cards = readCardsDB("$ENV{SHARE_PATH}/ldetect-lst/Cards+");
-
-    add2hash($card->{flags}, $cards->{$name}{flags});
-    add2hash($card, $cards->{$name});
+    my $cards = Xconfig::readCardsDB("$ENV{SHARE_PATH}/ldetect-lst/Cards+");
+    Xconfig::add2card($card, $cards->{$name});
     $card;
 }
 
 sub readMonitorsDB {
     my ($file) = @_;
 
-    %monitors and return;
+    my (%monitors, %standard_monitors);
 
     my $F = common::openFileMaybeCompressed($file);
     local $_;
@@ -134,66 +81,58 @@ sub readMonitorsDB {
 	}
 	$monitors{"$l{vendor}|$l{type}"} = \%l;
     }
-    while (my ($k, $v) = each %standard_monitors) {
-	$monitors{'Generic|' . translate($k)} = $standard_monitors_{$k} = 
+    while (my ($k, $v) = each %Xconfigurator_consts::standard_monitors) {
+	$monitors{'Generic|' . translate($k)} = $standard_monitors{$k} = 
 	  { hsyncrange => $v->[1], vsyncrange => $v->[2] };
     }
+    \%monitors, \%standard_monitors;
 }
 
 sub keepOnlyLegalModes {
     my ($card, $monitor) = @_;
-    my $mem = 1024 * ($card->{memory} || ($card->{server} eq 'FBDev' ? 2048 : 32768)); #- limit to 2048x1536x64
+    my $mem = 1024 * ($card->{VideoRam} || ($card->{server} eq 'FBDev' ? 2048 : 32768)); #- limit to 2048x1536x64
     my $hsync = max(split(/[,-]/, $monitor->{hsyncrange}));
 
     while (my ($depth, $res) = each %{$card->{depth}}) {
 	@$res = grep {
 	    $mem >= product(@$_, $depth / 8) &&
-	    $hsync >= ($min_hsync4wres{$_->[0]} || 0) &&
-	    ($card->{server} ne 'FBDev' || $vgamodes{"$_->[0]x$_->[1]x$depth"})
+	    $hsync >= ($Xconfigurator_consts::min_hsync4x_res{$_->[0]} || 0) &&
+	    ($card->{server} ne 'FBDev' || (Xconfigurator_consts::bios_vga_modes($_->[0], $depth))[2] == $_->[1])
 	} @$res;
 	delete $card->{depth}{$depth} if @$res == 0;
     }
 }
 
 sub cardConfigurationAuto() {
-    my @cards;
-    if (my @c = grep { $_->{driver} =~ /(Card|Server):/ } detect_devices::probeall()) {
-	@c >= 2 && $c[0]{description} eq $c[1]{description} && $c[0]{description} =~ /82830 CGC/ and shift @c;
-	foreach my $i (0..$#c) {
-	    local $_ = $c[$i]->{driver};
-	    my $card = { identifier => ($c[$i]{description} . (@c > 1 && " $i")) };
-	    $card->{type} = $1 if /Card:(.*)/;
-	    $card->{server} = $1 if /Server:(.*)/;
-	    $card->{driver} = $1 if /Driver:(.*)/;
-	    $card->{flags}{needVideoRam} = /86c368|S3 Inc|Tseng.*ET6\d00/;
-	    $card->{busid} = "PCI:$c[$i]{pci_bus}:$c[$i]{pci_device}:$c[$i]{pci_function}";
-	    push @{$card->{lines}}, @{$lines{$card->{identifier}} || []};
-	    push @cards, $card;
-	}
+    my @c = grep { $_->{driver} =~ /(Card|Server|Driver):/ } detect_devices::probeall();
+
+    if (@c >= 2 && $c[0]{driver} eq $c[1]{driver} && $c[0]{driver} eq 'Card:Intel 830') {
+	shift @c;
     }
+    my @cards = map_index {
+	my $card = { 
+	    identifier => $_->{description} . (@c > 1 && " $::i"),
+	    busid => "PCI:$_->{pci_bus}:$_->{pci_device}:$_->{pci_function}",
+	};
+	if    ($_->{driver} =~ /Card:(.*)/)   { $card->{type} = $1 }
+	elsif ($_->{driver} =~ /Server:(.*)/) { $card->{server} = $1 }
+	elsif ($_->{driver} =~ /Driver:(.*)/) { $card->{driver} = $1 }
+	else { internal_error() }
+	
+	$card;
+    } @c;
     #- take a default on sparc if nothing has been found.
     if (arch() =~ /^sparc/ && !@cards) {
         log::l("Using probe with /proc/fb as nothing has been found!");
 	local $_ = cat_("/proc/fb");
-	if (/Mach64/) { push @cards, { server => "Mach64" } }
-	elsif (/Permedia2/) { push @cards, { server => "3DLabs" } }
-	else { push @cards, { server => "Sun24" } }
+	@cards = { server => /Mach64/ ? "Mach64" : /Permedia2/ ? "3DLabs" : "Sun24" };
     }
     #- special case for dual head card using only one busid.
-    @cards = map { my $dup = $_->{identifier} =~ /MGA G[45]50/ ? 2 : 1;
-		   if ($dup > 1) {
-		       my @result;
-		       my $orig = $_;
-		       foreach (1..$dup) {
-			   my $card = {};
-			   add2hash($card, $orig);
-			   push @result, $card;
-		       }
-		       @result;
-		   } else {
-		       ($_);
-		   }
-	       } @cards;
+    @cards = map { 
+	my $dup = member($_->{type}, 'Matrox Millennium G450', 'Matrox Millennium G550') ? 2 : 1;
+	map { {%$_} } ($_) x $dup;
+    } @cards;
+
     #- make sure no type are already used, duplicate both screen
     #- and rename type (because used as id).
     if (@cards > 1) {
@@ -207,11 +146,54 @@ sub cardConfigurationAuto() {
     #- in case of only one cards, remove all busid reference, this will avoid
     #- need of change of it if the card is moved.
     #- on many PPC machines, card is on-board, busid is important, leave?
-    @cards == 1 and delete $cards[0]{busid} if arch() !~ /ppc/;
+    if (@cards == 1 && arch() !~ /ppc/) {
+	delete $cards[0]{busid};
+    }
+
     @cards;
 }
 
-sub cardConfiguration(;$$$) {
+sub install_server {
+    my ($card, $cardOptions) = @_;
+
+    my $prog = "/usr/X11R6/bin/" . 
+      ($card->{use_xf4} ? 'XFree86' : 
+       $card->{server} =~ /Sun(.*)/ ? "Xsun$1" : 
+       $card->{server} eq 'Xpmac' ? 'Xpmac' :
+       "XF86_$card->{server}");
+
+    my @packages = ();
+    -x "$prefix$prog" or push @packages, $card->{use_xf4} ? 'XFree86-server' : "XFree86-$card->{server}";
+
+    #- additional packages to install according available card.
+    #- add XFree86-libs-DRI here if using DRI (future split of XFree86 TODO)
+    if ($card->{DRI_GLX}) {
+	push @packages, 'Glide_V5' if $card->{type} eq 'Voodoo5 (generic)';
+	push @packages, 'Glide_V3-DRI' if member($card->{type}, 'Voodoo3 (generic)', 'Voodoo Banshee (generic)');
+	push @packages, 'XFree86-glide-module' if $card->{type} =~ /Voodoo/;
+    }
+    if ($card->{UTAH_GLX}) {
+	push @packages, 'Mesa';
+    }
+    #- 3D acceleration configuration for XFree 4 using NVIDIA driver (TNT, TN2 and GeForce cards only).
+    push @packages, @{$cardOptions->{allowNVIDIA_rpms}} if $card->{driver2} eq 'nvidia' && $cardOptions->{allowNVIDIA_rpms};
+
+    $do_pkgs->install(@packages) if @packages;
+    -x "$prefix$prog" or die "server $card->{server} is not available (should be in $prefix$prog)";
+
+    #- make sure everything is correct at this point, packages have really been installed
+    #- and driver and GLX extension is present.
+    if ($card->{driver2} eq 'nvidia' &&
+	-e "$prefix/usr/X11R6/lib/modules/drivers/nvidia_drv.o" &&
+	-e "$prefix/usr/X11R6/lib/modules/extensions/libglx.so") {
+	log::l("Using specific NVIDIA driver and GLX extensions");
+	$card->{driver} = 'nvidia';
+    }
+
+    $prog;
+}
+
+sub cardConfiguration {
     my ($card, $noauto, $cardOptions) = @_;
     $card ||= {};
 
@@ -228,7 +210,7 @@ sub cardConfiguration(;$$$) {
 	    $card->{Xinerama} = $_[0];
 	};
 	foreach (@cards) {
-	    unless ($_->{driver} && !$_->{flags}{unsupported}) {
+	    if (!$_->{driver}) {
 		log::l("found card \"$_->{identifier}\" not supported by XF4, disabling mutli-head support");
 		$configure_multi_head = undef;
 	    }
@@ -253,7 +235,7 @@ What do you want to do?"), sub { translate($_[0]{text}) }, \@choices) or return;
 	$tc->{code} and $tc->{code}();
     } else {
 	#- only one head found, configure it as before.
-	add2hash($card, $cards[0]) unless $noauto;
+	add2hash($card, $cards[0]) if !$noauto;
 	delete $card->{cards}; delete $card->{Xinerama};
     }
     $card->{server} = 'FBDev' unless !$cardOptions->{allowFB} || $card->{server} || $card->{driver} || $card->{type} || $noauto;
@@ -265,12 +247,11 @@ What do you want to do?"), sub { translate($_[0]{text}) }, \@choices) or return;
       or return unless $card->{type} || $card->{server} || $card->{driver};
 
     updateCardAccordingName($card, $card->{type}) if $card->{type};
-    add2hash($card, { vendor => "Unknown", board => "Unknown" });
 
     #- check to use XFree 4 or XFree 3.3.
-    $card->{use_xf4} = $card->{driver} && !$card->{flags}{unsupported};
+    $card->{use_xf4} = $card->{driver};
     $card->{force_xf4} ||= arch() =~ /ppc|ia64/; #- try to figure out ugly hack for PPC (recommend XF4 always so...)
-    $card->{prefer_xf3} = !$card->{force_xf4} && ($card->{type} =~ /NeoMagic /);
+    $card->{prefer_xf3} = !$card->{force_xf4} && $card->{type} =~ /NeoMagic /;
     #- take into account current environment in standalone to keep
     #- the XFree86 version.
     if ($::isStandalone) {
@@ -282,7 +263,7 @@ What do you want to do?"), sub { translate($_[0]{text}) }, \@choices) or return;
     if ($card->{type} eq 'Other|Unlisted') {
 	undef $card->{type};
 
-	my @list = ('server', $cardOptions->{allowFB} ? @allservers : @allbutfbservers);
+	my @list = ('server', $cardOptions->{allowFB} ? @Xconfigurator_consts::allservers : @Xconfigurator_consts::allbutfbservers);
 	my $default_server = if_(!$card->{use_xf4} || $card->{prefer_xf3}, $card->{server} || $cards[0]{server}) || 'server';
 	$card->{server} = $in->ask_from_list(_("X server"), _("Choose a X server"), \@list, $default_server) or return;
 
@@ -292,7 +273,7 @@ What do you want to do?"), sub { translate($_[0]{text}) }, \@choices) or return;
 	    $card->{server} = $card->{prefer_xf3} = undef;
 	    $card->{use_xf4} = $card->{force_xf4} = 1;
 	    $card->{driver} = $in->ask_from_list(_("X driver"), _("Choose a X driver"),
-						 ($cardOptions->{allowFB} ? \@alldrivers : \@allbutfbdrivers),
+						 ($cardOptions->{allowFB} ? \@Xconfigurator_consts::alldrivers : \@Xconfigurator_consts::allbutfbdrivers),
 						 $card->{driver} || $fake_card->{driver} || $cards[0]{driver}) or return;
 	} else {
 	    $card->{driver} = $card->{use_xf4} = $card->{force_xf4} = undef;
@@ -301,77 +282,31 @@ What do you want to do?"), sub { translate($_[0]{text}) }, \@choices) or return;
     }
 
     foreach ($card, @{$card->{cards} || []}) {
-	$_->{memory} = 4096,  delete $_->{depth} if $_->{driver} eq 'i810';
-	$_->{memory} = 16384, delete $_->{depth} if $_->{chipset} =~ /PERMEDIA/ && $_->{memory} <= 1024;
+	$_->{VideoRam} = 4096,  delete $_->{depth} if $_->{driver} eq 'i810';
+	$_->{VideoRam} = 16384, delete $_->{depth} if $_->{Chipset} =~ /PERMEDIA/ && $_->{VideoRam} <= 1024;
     }
     if (availableRamMB() > 800 || arch() =~ /ppc/) {
 	#- No 3D XFree 3.3 for PPC
 	#- and no Utah GLX if more than 800 Mb (server, or kernel-enterprise, Utha GLX does not work with latest).
-	$card->{Utah_glx} = $card->{Utah_glx_EXPERIMENTAL} = '';
-    } else {
-	#- 3D acceleration configuration for XFree 3.3 using Utah-GLX.
-	$card->{Utah_glx} = ($card->{identifier} =~ /Matrox.* G[24]00/ || #- 8bpp does not work.
-			     $card->{identifier} =~ /Rage X[CL]/ ||
-			     $card->{identifier} =~ /3D Rage (?:LT|Pro)/);
-                             #- NOT WORKING $card->{type} =~ /Intel 810/);
-	#- 3D acceleration configuration for XFree 3.3 using Utah-GLX
-	#- but EXPERIMENTAL that may freeze the machine (FOR INFO NOT USED).
-	$card->{Utah_glx_EXPERIMENTAL} = ($card->{identifier} =~ /[nN]Vidia.*T[nN]T2?/ || #- all RIVA/GeForce comes from NVIDIA ...
-					  $card->{identifier} =~ /[nN]Vidia.*NV[56]/ ||   #- and may freeze (gltron).
-					  $card->{identifier} =~ /[nN]Vidia.*Vanta/ ||
-					  $card->{identifier} =~ /[nN]Vidia.*GeForce/ ||
-					  $card->{identifier} =~ /[nN]Vidia.*NV1[15]/ ||
-					  $card->{identifier} =~ /[nN]Vidia.*Quadro/ ||
-					  $card->{identifier} =~ /Riva.*128/ || # moved here as not working correctly enough
-					  $card->{identifier} =~ /S3.*Savage.*3D/ || #- only this one is evoluting.
-					  $card->{identifier} =~ /Rage Mobility [PL]/ ||
-					  $card->{identifier} =~ /SiS.*6C?326/ || #- prefer 16bit, other ?
-					  $card->{identifier} =~ /SiS.*6C?236/ ||
-					  $card->{identifier} =~ /SiS.*630/);
+	$card->{UTAH_GLX} = $card->{UTAH_GLX_EXPERIMENTAL} = '';
     }
-    #- 3D acceleration configuration for XFree 4 using DRI.
-    $card->{DRI_glx} = ($card->{identifier} =~ /Voodoo [35]|Voodoo Banshee/ || #- 16bit only
-			$card->{identifier} =~ /Matrox.* G[245][05]0/ || #- prefer 16bit with AGP only
-			$card->{identifier} =~ /8281[05].* CGC/ || #- 16bits (Intel 810 & 815).
-			$card->{identifier} =~ /Radeon / || #- 16bits preferable ?
-			$card->{identifier} =~ /Rage 128|Rage Mobility M/) && #- 16 and 32 bits, prefer 16bit as no DMA.
-			  !($card->{identifier} =~ /Radeon 8500/); #- remove Radeon 8500 wich doesn't work with DRI (4.2).
-    #- 3D acceleration configuration for XFree 4 using DRI but EXPERIMENTAL that may freeze the machine (FOR INFO NOT USED).
-    $card->{DRI_glx_EXPERIMENTAL} = ($card->{identifier} =~ /SiS.*6C?326/ || #- prefer 16bit, other ?
-				     $card->{identifier} =~ /SiS.*6C?236/ ||
-				     $card->{identifier} =~ /SiS.*630/);
-    #- 3D acceleration configuration for XFree 4 using NVIDIA driver (TNT, TN2 and GeForce cards only).
-    $card->{NVIDIA_glx} = $cardOptions->{allowNVIDIA_rpms} && ($card->{identifier} =~ /[nN]Vidia.*T[nN]T2/ || #- TNT2 cards
-							       $card->{identifier} =~ /[nN]Vidia.*NV[56]/ ||
-							       $card->{identifier} =~ /[nN]Vidia.*Vanta/ ||
-							       $card->{identifier} =~ /[nN]Vidia.*GeForce/ || #- GeForce cards
-							       $card->{identifier} =~ /[nN]Vidia.*NV1[15]/ ||
-							       $card->{identifier} =~ /[nN]Vidia.*Quadro/);
-
-    #- hack for SiS 640 for laptop.
-    if ($card->{identifier} =~ /SiS.*640/ and detect_devices::isLaptop()) {
-	$card->{use_xf4} = $card->{force_xf4} = '';
-	$card->{prefer_xf3} = 1;
-	$card->{server} = 'FBDev';
-    }
-
     #- XFree version available, better to parse available package and get version from it.
     my ($xf4_ver, $xf3_ver) = ("4.2.0", "3.3.6");
     #- basic installation, use of XFree 4.2 or XFree 3.3.
     my $xf3_tc = { text => _("XFree %s", $xf3_ver),
-		   code => sub { $card->{Utah_glx} = $card->{DRI_glx} = $card->{NVIDIA_glx} = ''; $card->{use_xf4} = '';
+		   code => sub { $card->{UTAH_GLX} = $card->{DRI_GLX} = ''; $card->{use_xf4} = '';
 				 log::l("Using XFree $xf3_ver") } };
     my $msg = _("Which configuration of XFree do you want to have?");
     my @choices = $card->{use_xf4} ? (if_($card->{prefer_xf3}, $xf3_tc),
 				      if_(!$card->{prefer_xf3} || $::expert || $noauto, 
 					  { text => _("XFree %s", $xf4_ver),
-					    code => sub { $card->{Utah_glx} = $card->{DRI_glx} = $card->{NVIDIA_glx} = '';
+					    code => sub { $card->{UTAH_GLX} = $card->{DRI_GLX} = '';
 							  log::l("Using XFree $xf4_ver") } }),
 				      if_(!$card->{prefer_xf3} && !$card->{force_xf4} && ($::expert || $noauto), $xf3_tc)) : $xf3_tc;
     #- try to figure if 3D acceleration is supported
     #- by XFree 3.3 but not XFree 4 then ask user to keep XFree 3.3 ?
-    if ($card->{Utah_glx} && !$card->{force_xf4}) {
-	$msg = ($card->{use_xf4} && !($card->{DRI_glx} || $card->{NVIDIA_glx}) && !$card->{prefer_xf3} ?
+    if ($card->{UTAH_GLX} && !$card->{force_xf4}) {
+	$msg = ($card->{use_xf4} && !$card->{DRI_GLX} && !$card->{prefer_xf3} ?
 _("Your card can have 3D hardware acceleration support but only with XFree %s.
 Your card is supported by XFree %s which may have a better support in 2D.", $xf3_ver, $xf4_ver) :
 _("Your card can have 3D hardware acceleration support with XFree %s.", $xf3_ver)) . "\n\n\n" . $msg;
@@ -382,31 +317,31 @@ _("Your card can have 3D hardware acceleration support with XFree %s.", $xf3_ver
     }
 
     #- an expert user may want to try to use an EXPERIMENTAL 3D acceleration.
-    if ($::expert && $card->{use_xf4} && $card->{DRI_glx_EXPERIMENTAL} && !$card->{Xinerama}) {
+    if ($::expert && $card->{use_xf4} && $card->{DRI_GLX_EXPERIMENTAL} && !$card->{Xinerama}) {
 	$msg =
 _("Your card can have 3D hardware acceleration support with XFree %s,
 NOTE THIS IS EXPERIMENTAL SUPPORT AND MAY FREEZE YOUR COMPUTER.", $xf4_ver) . "\n\n\n" . $msg;
 	push @choices, { text => _("XFree %s with EXPERIMENTAL 3D hardware acceleration", $xf4_ver),
-			 code => sub { $card->{DRI_glx} = 'EXPERIMENTAL';
+			 code => sub { $card->{DRI_GLX} = 'EXPERIMENTAL';
 				       log::l("Using XFree $xf4_ver with EXPERIMENTAL 3D hardware acceleration") } };
     }
 
     #- an expert user may want to try to use an EXPERIMENTAL 3D acceleration, currenlty
     #- this is with Utah GLX and so, it can provide a way of testing.
-    if ($::expert && $card->{Utah_glx_EXPERIMENTAL} && !$card->{force_xf4}) {
-	$msg = ($card->{use_xf4} && !($card->{DRI_glx} || $card->{NVIDIA_glx}) && !$card->{prefer_xf3} ?
+    if ($::expert && $card->{UTAH_GLX_EXPERIMENTAL} && !$card->{force_xf4}) {
+	$msg = ($card->{use_xf4} && !$card->{DRI_GLX} && !$card->{prefer_xf3} ?
 _("Your card can have 3D hardware acceleration support but only with XFree %s,
 NOTE THIS IS EXPERIMENTAL SUPPORT AND MAY FREEZE YOUR COMPUTER.
 Your card is supported by XFree %s which may have a better support in 2D.", $xf3_ver, $xf4_ver) :
 _("Your card can have 3D hardware acceleration support with XFree %s,
 NOTE THIS IS EXPERIMENTAL SUPPORT AND MAY FREEZE YOUR COMPUTER.", $xf3_ver)) . "\n\n\n" . $msg;
 	push @choices, { text => _("XFree %s with EXPERIMENTAL 3D hardware acceleration", $xf3_ver),
-			 code => sub { $card->{use_xf4} = ''; $card->{Utah_glx} = 'EXPERIMENTAL';
+			 code => sub { $card->{use_xf4} = ''; $card->{UTAH_GLX} = 'EXPERIMENTAL';
 				       log::l("Using XFree $xf3_ver with EXPERIMENTAL 3D hardware acceleration") } };
     }
 
     #- ask the expert or any user on second pass user to enable or not hardware acceleration support.
-    if ($card->{use_xf4} && ($card->{DRI_glx} || $card->{NVIDIA_glx}) && !$card->{Xinerama}) {
+    if ($card->{use_xf4} && $card->{DRI_GLX} && !$card->{Xinerama}) {
 	$msg = _("Your card can have 3D hardware acceleration support with XFree %s.", $xf4_ver) . "\n\n\n" . $msg;
 	$::expert || $noauto or @choices = (); #- keep all user by default with XFree 4 including 3D acceleration.
 	unshift @choices, { text => _("XFree %s with 3D hardware acceleration", $xf4_ver),
@@ -414,8 +349,11 @@ NOTE THIS IS EXPERIMENTAL SUPPORT AND MAY FREEZE YOUR COMPUTER.", $xf3_ver)) . "
     }
     if (arch() =~ /ppc/) {
 	#- not much choice for PPC - we only have XF4, and Xpmac from the installer   
-	@choices = { text => _("XFree %s", $xf4_ver), code => sub { $card->{xpmac} = ''; log::l("Using XFree $xf4_ver") } };
-	push @choices, { text => _("Xpmac (installation display driver)"), code => sub { $card->{xpmac} = 1 }} if ($ENV{DISPLAY});
+	@choices = { text => _("XFree %s", $xf4_ver), code => sub { $card->{use_xf4} = 1; log::l("Using XFree $xf4_ver") } };
+	push @choices, { text => _("Xpmac (installation display driver)"), code => sub { 
+			     $card->{server} = "Xpmac";
+			     $card->{use_xf4} = '';
+			 }} if $ENV{DISPLAY};
     }
     #- examine choice of user, beware the list MUST NOT BE REORDERED AS the first item should be the
     #- proposed one by DrakX.
@@ -423,105 +361,48 @@ NOTE THIS IS EXPERIMENTAL SUPPORT AND MAY FREEZE YOUR COMPUTER.", $xf3_ver)) . "
     #- in case of class discarding, this can help ...
     $tc or $tc = $choices[0];
     $tc->{code} and $tc->{code}();
-    
-    if ($card->{xpmac} eq "1") {
-	log::l("Use Xpmac - great...");
-	#- define this stuff just so XF86Config isn't empty - we don't need it for Xpmac
-	$card->{type} = "Xpmac Frame Buffer Driver";
-	$card->{vendor} = $card->{board} = "None";
-	$card->{driver} = $card->{server} = "Xpmac";
-    }
-    	
-    $card->{prog} = "/usr/X11R6/bin/" . ($card->{use_xf4} ? 'XFree86' : $card->{server} =~ /Sun(.*)/ ?
-					 "Xsun$1" : "XF86_$card->{server}");
 
-    #- additional packages to install according available card.
-    #- add XFree86-libs-DRI here if using DRI (future split of XFree86 TODO)
-    my @l = ();
-    if ($card->{DRI_glx}) {
-	push @l, 'Glide_V5' if $card->{identifier} =~ /Voodoo 5/;
-	push @l, 'Glide_V3-DRI' if $card->{identifier} =~ /Voodoo (3|Banshee)/;
-	push @l, 'XFree86-glide-module' if $card->{identifier} =~ /Voodoo/;
-    } elsif ($card->{NVIDIA_glx}) {
-	push @l, @{$cardOptions->{allowNVIDIA_rpms}};
-    }
-    if ($card->{Utah_glx}) {
-	push @l, 'Mesa' if !$card->{use_xf4};
-    }
-    if ($card->{xpmac} eq "1") {
-	push @l, 'XFree86-Xpmac';
-	$card->{use_xf4} = '';
-	$card->{prog} = "/usr/X11R6/bin/Xpmac";
-	$card->{server} = 'Xpmac';
-    }
-
-    unless ($::g_auto_install) {
-	if (-x "$prefix$card->{prog}") {
-	    @l and $do_pkgs->install(@l);
-	} else {
-	    $do_pkgs->install($card->{use_xf4} ? 'XFree86-server' : "XFree86-$card->{server}", @l);
-	}
-	-x "$prefix$card->{prog}" or die "server $card->{server} is not available (should be in $prefix$card->{prog})";
-    }
+    $card->{prog} = install_server($card);
 
     #- check for Matrox G200 PCI cards, disable AGP in such cases, causes black screen else.
-    if ($card->{identifier} =~ /Matrox.* G[24]00/ && $card->{identifier} !~ /AGP/) {
+    if (member($card->{type}, 'Matrox Millennium 200', 'Matrox Millennium 200', 'Matrox Mystique') && $card->{identifier} !~ /AGP/) {
 	log::l("disabling AGP mode for Matrox card, as it seems to be a PCI card");
 	log::l("this is only used for XFree 3.3.6, see /etc/X11/glx.conf");
 	substInFile { s/^\s*#*\s*mga_dma\s*=\s*\d+\s*$/mga_dma = 0\n/ } "$prefix/etc/X11/glx.conf";
     }
-    #- make sure everything is correct at this point, packages have really been installed
-    #- and driver and GLX extension is present.
-    if ($card->{NVIDIA_glx} && !$card->{DRI_glx} && (-e "$prefix/usr/X11R6/lib/modules/drivers/nvidia_drv.o" &&
-						     -e "$prefix/usr/X11R6/lib/modules/extensions/libglx.so")) {
-	log::l("Using specific NVIDIA driver and GLX extensions");
-	$card->{driver} = 'nvidia';
-	foreach (@{$cardOptions->{allowNVIDIA_rpms}}) { #- hack as NVIDIA_kernel package does not do it actually (8.1 OEM).
-	    if (/NVIDIA_kernel-([^\-]*)-([^\-]*)(?:-(.*))?/ && -e "$prefix/boot/System.map-$1-$2$3") {
-		run_program::rooted($prefix, "/sbin/depmod", "-a", "-F", "/boot/System.map-$1-$2$3", "$1-$2$3");
-	    }
-	}
-    } else {
-	$card->{NVIDIA_glx} = '';
-    }
 
     delete $card->{depth}{32} if $card->{type} =~ /S3 Trio3D|SiS/;
     $card->{options}{sw_cursor} = 1 if $card->{type} =~ /S3 Trio3D|SiS 6326/;
-    unless ($card->{type}) {
-	$card->{flags}{noclockprobe} = member($card->{server}, qw(I128 S3 S3V Mach64));
-    }
     $card->{options_xf3}{power_saver} = 1;
     $card->{options_xf4}{DPMS} = 'on';
+    
+    $card->{VideoRam} ||= $in->ask_from_listf_('', _("Select the memory size of your graphics card"),
+					       sub { $Xconfigurator_consts::VideoRams{$_[0]} },
+					       [ sort keys %Xconfigurator_consts::VideoRams ]) || return
+						 if $card->{flags}{needVideoRam};
 
-    $card->{flags}{needVideoRam} and
-      $card->{memory} ||= $videomemory{$in->ask_from_list_('', _("Select the memory size of your graphics card"),
-							   [ sort { $videomemory{$a} <=> $videomemory{$b} }
-							     keys %videomemory]) || return};
 
     #- hack for ATI Mach64 cards where two options should be used if using Utah-GLX.
-    if ($card->{identifier} =~ /Rage X[CL]/ ||
-	$card->{identifier} =~ /Rage Mobility [PL]/ ||
-	$card->{identifier} =~ /3D Rage (?:LT|Pro)/) {
-	$card->{options_xf3}{no_font_cache} = $card->{Utah_glx};
-	$card->{options_xf3}{no_pixmap_cache} = $card->{Utah_glx};
+    if (member($card->{type}, 'ATI Mach64 Utah', 'ATI Rage Mobility')) {
+	$card->{options_xf3}{no_font_cache} = $card->{UTAH_GLX};
+	$card->{options_xf3}{no_pixmap_cache} = $card->{UTAH_GLX};
     }
     #- hack for SiS cards where an option should be used if using Utah-GLX.
-    if ($card->{identifier} =~ /SiS.*6C?326/ ||
-	$card->{identifier} =~ /SiS.*6C?236/ ||
-	$card->{identifier} =~ /SiS.*630/) {
-	$card->{options_xf3}{no_pixmap_cache} = $card->{Utah_glx};
+    if (member($card->{type}, 'SiS 6326', 'SiS 630')) {
+	$card->{options_xf3}{no_pixmap_cache} = $card->{UTAH_GLX};
     }
 
     #- 3D acceleration configuration for XFree 4 using DRI, this is enabled by default
     #- but for some there is a need to specify VideoRam (else it won't run).
-    if ($card->{DRI_glx}) {
-	$card->{identifier} =~ /Matrox.* G[245][05]0/ and $card->{flags}{needVideoRam} = 'fakeVideoRam';
-	$card->{identifier} =~ /8281[05].* CGC/ and ($card->{flags}{needVideoRam}, $card->{memory}) = ('fakeVideoRam', 16384);
+    if ($card->{DRI_GLX}) {
+	$card->{flags}{needVideoRam} = 1 if $card->{identifier} =~ /Matrox.* G[245][05]0/;
+	($card->{flags}{needVideoRam}, $card->{VideoRam}) = (1, 16384)
+	  if member($card->{type}, 'Intel 810', 'Intel 815');
 	#- always enable (as a reminder for people using a better AGP mode to change it at their own risk).
 	$card->{options_xf4}{AGPMode} = '1';
 	#- hack for ATI Rage 128 card using a bttv or peripheral with PCI bus mastering exchange
 	#- AND using DRI at the same time.
-	if ($card->{identifier} =~ /Rage 128|Rage Mobility M/) {
+	if (member($card->{type}, 'ATI Rage 128', 'ATI Rage 128 Mobility')) {
 	    $card->{options_xf4}{UseCCEFor2D} = (detect_devices::matching_desc('Bt8[47][89]') ||
 						 detect_devices::matching_desc('TV') ||
 						 detect_devices::matching_desc('AG GMV1')) ? 'true' : 'false';
@@ -532,16 +413,16 @@ NOTE THIS IS EXPERIMENTAL SUPPORT AND MAY FREEZE YOUR COMPUTER.", $xf3_ver)) . "
 }
 
 sub optionsConfiguration($) {
-    my ($o) = @_;
+    my ($X) = @_;
     my @l;
     my %l;
 
-    foreach (@options) {
-	if ($o->{card}{server} eq $_->[1] && $o->{card}{identifier} =~ /$_->[2]/) {
-	    my $options = 'options_' . ($o->{card}{server} eq 'XFree86' ? 'xf4' : 'xf3');
-	    $o->{card}{$options}{$_->[0]} ||= 0;
-	    unless ($l{$_->[0]}) {
-		push @l, { label => $_->[0], val => \$o->{card}{$options}{$_->[0]}, type => 'bool' };
+    foreach (@Xconfigurator_consts::options) {
+	if ($X->{card}{server} eq $_->[1] && $X->{card}{identifier} =~ /$_->[2]/) {
+	    my $options = 'options_' . ($X->{card}{server} eq 'XFree86' ? 'xf4' : 'xf3');
+	    $X->{card}{$options}{$_->[0]} ||= 0;
+	    if (!$l{$_->[0]}) {
+		push @l, { label => $_->[0], val => \$X->{card}{$options}{$_->[0]}, type => 'bool' };
 		$l{$_->[0]} = 1;
 	    }
 	}
@@ -555,24 +436,24 @@ sub monitorConfiguration(;$$) {
     my $monitor = shift || {};
     my $useFB = shift || 0;
 
-    readMonitorsDB("$ENV{SHARE_PATH}/ldetect-lst/MonitorsDB");
+    my ($monitors, $standard_monitors_) = readMonitorsDB("$ENV{SHARE_PATH}/ldetect-lst/MonitorsDB");
 
     if ($monitor->{EISA_ID}) {
 	log::l("EISA_ID: $monitor->{EISA_ID}");
-	if (my ($mon) = grep { lc($_->{eisa}) eq $monitor->{EISA_ID} } values %monitors) {
+	if (my ($mon) = grep { lc($_->{eisa}) eq $monitor->{EISA_ID} } values %$monitors) {
 	    add2hash($monitor, $mon);
 	    log::l("EISA_ID corresponds to: $monitor->{type}");
 	}
     }
     if ($monitor->{hsyncrange} && $monitor->{vsyncrange}) {
-	add2hash($monitor, { type => "monitor1", vendor => "Unknown", model => "Unknown" });
+	add2hash($monitor, { type => "monitor1" });
 	return $monitor;
     }
 
-    my $good_default = (arch() =~ /ppc/ ? 'Apple|' : 'Generic|') . translate($good_default_monitor);
+    my $good_default = (arch() =~ /ppc/ ? 'Apple|' : 'Generic|') . translate($Xconfigurator_consts::good_default_monitor);
     $monitor->{type} ||=
-      ($::auto_install ? $low_default_monitor :
-       $in->ask_from_treelist(_("Monitor"), _("Choose a monitor"), '|', ['Custom', keys %monitors], $good_default));
+      ($::auto_install ? $Xconfigurator_consts::low_default_monitor :
+       $in->ask_from_treelist(_("Monitor"), _("Choose a monitor"), '|', ['Custom', keys %$monitors], $good_default));
     if ($monitor->{type} eq 'Custom') {
 	$in->ask_from('',
 _("The two critical parameters are the vertical refresh rate, which is the rate
@@ -582,76 +463,78 @@ sync rate, which is the rate at which scanlines are displayed.
 It is VERY IMPORTANT that you do not specify a monitor type with a sync range
 that is beyond the capabilities of your monitor: you may damage your monitor.
  If in doubt, choose a conservative setting."),
-				  [ { val => \$monitor->{hsyncrange}, list => \@hsyncranges, label => _("Horizontal refresh rate"), not_edit => 0 },
-				    { val => \$monitor->{vsyncrange}, list => \@vsyncranges, label => _("Vertical refresh rate"), not_edit => 0 } ]);
+				  [ { val => \$monitor->{hsyncrange}, list => \@Xconfigurator_consts::hsyncranges, label => _("Horizontal refresh rate"), not_edit => 0 },
+				    { val => \$monitor->{vsyncrange}, list => \@Xconfigurator_consts::vsyncranges, label => _("Vertical refresh rate"), not_edit => 0 } ]);
     } else {
-	add2hash($monitor, $monitors{$monitor->{type}} || $standard_monitors_{$monitor->{type}});
+	add2hash($monitor, $monitors->{$monitor->{type}} || $standard_monitors_->{$monitor->{type}});
     }
-    add2hash($monitor, { type => "Unknown", vendor => "Unknown", model => "Unknown", manual => 1 });
+    add2hash($monitor, { type => "monitor1", manual => 1 });
 }
 
-sub testConfig($) {
-    my ($o) = @_;
-    my ($resolutions, $clocklines);
+sub finalize_config {
+    my ($X) = @_;
 
-    write_XF86Config($o, $tmpconfig);
+    $X->{monitor}{ModeLines_xf3} .= $Xconfigurator_consts::ModeLines_text_standard;
+    $X->{monitor}{ModeLines_xf3} .= $Xconfigurator_consts::ModeLines_text_ext;
+    $X->{monitor}{ModeLines}     .= $Xconfigurator_consts::ModeLines_text_ext;
 
-    unlink "/tmp/.X9-lock";
-    #- restart_xfs;
-
-    my $f = $tmpconfig . ($o->{card}{use_xf4} && "-4");
-    local *F; open F, "$prefix$o->{card}{prog} :9 -probeonly -pn -xf86config $f 2>&1 |";
-    local $_;
-    while (<F>) {
-	$o->{card}{memory} ||= $2 if /(videoram|Video RAM):\s*(\d*)/;
-
-	# look for clocks
-	push @$clocklines, $1 if /clocks: (.*)/ && !/(pixel |num)clocks:/;
-
-	push @$resolutions, [ $1, $2 ] if /: Mode "(\d+)x(\d+)": mode clock/;
-	print;
+    #- clean up duplicated ModeLines
+    foreach ($X->{monitor}{ModeLines}, $X->{monitor}{ModeLines_xf3}) {
+	s/Modeline/ModeLine/g; #- normalize
+	my @l = reverse split "\n";
+	my %seen;
+	@l = grep {
+	    !/^\s*Mode[lL]ine\s+(\S+)\s+(\S+)\s+(.*)/ || !$seen{"$1 $2"}++;
+	} @l;
+	$_ = join("\n", reverse @l);
     }
-    close F or die "X probeonly failed";
 
-    ($resolutions, $clocklines);
+    $X->{keyboard}{XkbModel} ||= 
+      arch() =~ /sparc/ ? 'sun' :
+      $X->{keyboard}{XkbLayout} eq 'jp' ? 'jp106' : 
+      $X->{keyboard}{XkbLayout} eq 'br' ? 'abnt2' : 'pc105';
+
+}
+
+sub check_config {
+    my ($X) = @_;
+
+    finalize_config($X);
+
+    $X->{monitor}{hsyncrange} && $X->{monitor}{vsyncrange} or die _("Monitor not configured") . "\n";
+    $X->{card}{server} || $X->{card}{driver} or die _("Graphics card not configured yet") . "\n";
+    $X->{card}{depth} or die _("Resolutions not chosen yet") . "\n";
+}
+
+#- needed for bad cards not restoring cleanly framebuffer, according to which version of XFree are used.
+sub check_bad_card {
+    my ($card) = @_;
+    my $bad_card = $card->{use_xf4} ? $card->{BAD_FB_RESTORE} : $card->{BAD_FB_RESTORE_XF3};
+    $bad_card ||= $card->{driver} eq 'i810' || $card->{driver} eq 'fbdev';
+    $bad_card ||= $card->{identifier} =~ /S3.*ViRGE/ if $::live;
+    $bad_card ||= $card->{driver} eq 'nvidia' if !$::isStandalone; #- avoid testing during install at any price.
+
+    log::l("the graphics card does not like X in framebuffer") if $bad_card;
+
+    !$bad_card;
 }
 
 sub testFinalConfig {
-    my ($o, $auto, $skiptest, $skip_badcard) = @_;
-
-    $o->{monitor}{hsyncrange} && $o->{monitor}{vsyncrange} or
-      $in->ask_warn('', _("Monitor not configured")), return;
-
-    $o->{card}{server} || $o->{card}{driver} or
-      $in->ask_warn('', _("Graphics card not configured yet")), return;
-
-    $o->{card}{depth} or
-      $in->ask_warn('', _("Resolutions not chosen yet")), return;
+    my ($X, $auto, $skiptest, $skip_badcard) = @_;
 
     my $f = "/etc/X11/XF86Config.test";
-    write_XF86Config($o, $::testing ? $tmpconfig : "$prefix/$f");
-
-    $skiptest || $o->{card}{server} =~ 'FBDev|Sun' and return 1; #- avoid testing with these.
-
-    #- needed for bad cards not restoring cleanly framebuffer, according to which version of XFree are used.
-    my $bad_card = ($o->{card}{use_xf4} ?
-		    $o->{card}{identifier} =~ /Matrox|Rage Mobility [PL]|SiS.*SG86C2.5|SiS.*559[78]|SiS.*300|SiS.*540|SiS.*6C?326|SiS.*6C?236|Tseng.*ET6\d00|Riva.*128/ :
-		    $o->{card}{identifier} =~ /i740|Rage Mobility [PL]|3D Rage LT|Rage 128/);
-    $::live and $bad_card ||= $o->{card}{identifier} =~ /S3.*ViRGE/;
-    log::l("the graphics card does not like X in framebuffer") if $bad_card;
-
-    my $verybad_card = $o->{card}{driver} eq 'i810' || $o->{card}{driver} eq 'fbdev';
-    $verybad_card ||= $o->{card}{driver} eq 'nvidia' && !$::isStandalone; #- avoid testing during install at any price.
-    $bad_card || $verybad_card and return 1; #- deactivating bad_card test too.
-
-    my $mesg = _("Do you want to test the configuration?");
-    my $def = 1;
-    if ($bad_card && !$::isStandalone) {
-	$skip_badcard and return 1;
-	$mesg = $mesg . "\n" . _("Warning: testing this graphics card may freeze your computer");
-	$def = 0;
+    
+    eval { write_XF86Config($X, $::testing ? $tmpconfig : "$prefix/$f") };
+    if (my $err = $@) {
+	$in->ask_warn('', $err);
+	return;
     }
-    $auto && $def or $in->ask_yesorno(_("Test of the configuration"), $mesg, $def) or return 1;
+
+    $skiptest || $X->{card}{server} =~ 'FBDev|Sun' and return 1; #- avoid testing with these.
+
+    check_bad_card($X->{card}) or return 1;
+
+    $in->ask_yesorno(_("Test of the configuration"), _("Do you want to test the configuration?"), 1) or return 1 if !$auto;
 
     unlink "$prefix/tmp/.X9-lock";
 
@@ -671,8 +554,8 @@ sub testFinalConfig {
 	system("xauth add :9 . `mcookie`");
 	open STDERR, ">$f_err";
 	chroot $prefix if $prefix;
-	exec $o->{card}{prog}, 
-	  if_($o->{card}{prog} !~ /Xsun/, "-xf86config", ($::testing ? $tmpconfig : $f) . ($o->{card}{use_xf4} && "-4")),
+	exec $X->{card}{prog}, 
+	  if_($X->{card}{prog} !~ /Xsun/, "-xf86config", ($::testing ? $tmpconfig : $f) . ($X->{card}{use_xf4} && "-4")),
 	  ":9" or c::_exit(0);
     }
 
@@ -680,12 +563,12 @@ sub testFinalConfig {
 
     my $b = before_leaving { unlink $f_err };
 
-    unless (xtest(":9")) {
+    if (!xtest(":9")) {
 	local $_;
 	local *F; open F, $f_err;
       i: while (<F>) {
-	    if ($o->{card}{use_xf4}) {
-		if (/^\(EE\)/ && $_ !~ /Disabling/ || /^Fatal\b/) {
+	    if ($X->{card}{use_xf4}) {
+		if (/^\(EE\)/ && !/Disabling/ || /^Fatal\b/) {
 		    my @msg = !/error/ && $_ ;
 		    while (<F>) {
 			/reporting a problem/ and last;
@@ -759,7 +642,7 @@ sub allowedDepth($) {
     my ($card) = @_;
     my %allowed_depth;
 
-    if ($card->{Utah_glx} || $card->{DRI_glx}) {
+    if ($card->{UTAH_GLX} || $card->{DRI_GLX}) {
 	$allowed_depth{16} = 1; #- this is the default.
 	$card->{identifier} =~ /Voodoo 5/ and $allowed_depth{24} = undef;
 	$card->{identifier} =~ /Matrox.* G[245][05]0/ and $allowed_depth{24} = undef;
@@ -781,7 +664,7 @@ sub allowedDepth($) {
 }
 
 sub autoDefaultDepth($$) {
-    my ($card, $wres_wanted) = @_;
+    my ($card, $x_res_wanted) = @_;
     my ($best, $depth);
 
     #- check for forced depth according to current environment.
@@ -797,9 +680,9 @@ sub autoDefaultDepth($$) {
 	$depth = max($depth || 0, $d);
 
 	#- try to have resolution_wanted
-	$best = max($best || 0, $d) if $r->[0][0] >= $wres_wanted;
+	$best = max($best || 0, $d) if $r->[0][0] >= $x_res_wanted;
 	$best = $card->{suggest_depth}, last if ($card->{suggest_depth} &&
-						 $card->{suggest_wres} && $r->[0][0] >= $card->{suggest_wres});
+						 $card->{suggest_x_res} && $r->[0][0] >= $card->{suggest_x_res});
     }
     $best || $depth or die "no valid modes";
 }
@@ -812,8 +695,8 @@ sub autoDefaultResolution {
     }
 	
     my ($size) = @_;
-    $monitorSize2resolution[round($size || 14)] || #- assume a small monitor (size is in inch)
-    $monitorSize2resolution[-1]; #- no corresponding resolution for this size. It means a big monitor, take biggest we have
+    $Xconfigurator_consts::monitorSize2resolution[round($size || 14)] || #- assume a small monitor (size is in inch)
+    $Xconfigurator_consts::monitorSize2resolution[-1]; #- no corresponding resolution for this size. It means a big monitor, take biggest we have
 }
 
 sub chooseResolutionsGtk($$;$) {
@@ -823,7 +706,7 @@ sub chooseResolutionsGtk($$;$) {
     my_gtk->import(qw(:helpers :wrappers));
 
     my $W = my_gtk->new(_("Resolution"));
-    my %txt2depth = reverse %depths;
+    my %txt2depth = reverse %Xconfigurator_consts::depths;
     my ($r, $depth_combo, %w2depth, %w2h, %w2widget, $pix_monitor, $pix_colors, $w2_combo);
     $w2_combo = new Gtk::Combo;
     my $best_w;
@@ -842,18 +725,18 @@ sub chooseResolutionsGtk($$;$) {
     $chosen_w = $best_w;
     $chosen_w ||= 640; #- safe guard ?
 
-    my $set_depth = sub { $depth_combo->entry->set_text(translate($depths{$chosen_depth})) };
+    my $set_depth = sub { $depth_combo->entry->set_text(translate($Xconfigurator_consts::depths{$chosen_depth})) };
 
     #- the set function is usefull to toggle the CheckButton with the callback being ignored
     my $ignore;
     my $no_human; # is the w2_combo->entry changed by a human?
-    my $set = sub { $ignore = 1; $_[0] and $_[0]->set_active(1); $ignore = 0; };
+    my $set = sub { $ignore = 1; $_[0] and $_[0]->set_active(1); $ignore = 0 };
 
     my %monitor;
     $monitor{$_} = [ gtkcreate_png("monitor-" . $_ . ".png") ] foreach (640, 800, 1024, 1280);
     $monitor{$_} = [ gtkcreate_png("monitor-" . 1024 . ".png") ] foreach (1152);
     #- add default icons for resolutions not taken into account (assume largest image available).
-    $monitor{$_} ||= [ gtkcreate_png("monitor-" . 1280 . ".png") ] foreach map { (split 'x', $_)[0] } @resolutions;
+    $monitor{$_} ||= [ gtkcreate_png("monitor-" . 1280 . ".png") ] foreach map { (split 'x', $_)[0] } @Xconfigurator_consts::resolutions;
 
     my $pixmap_mo = new Gtk::Pixmap( $monitor{$chosen_w}[0]  , $monitor{$chosen_w}[1] );
 
@@ -868,7 +751,7 @@ sub chooseResolutionsGtk($$;$) {
 			       $chosen_w = $w;
 			       $no_human=1;
 			       $w2_combo->entry->set_text($w . "x" . $w2h{$w});
-			       unless (member($chosen_depth, @{$w2depth{$w}})) {
+			       if (!member($chosen_depth, @{$w2depth{$w}})) {
 				   $chosen_depth = max(@{$w2depth{$w}});
 				   &$set_depth();
 			       }
@@ -894,13 +777,13 @@ sub chooseResolutionsGtk($$;$) {
 			       ),
 		    0, gtkadd($W->create_okcancel(_("Ok"), _("More")),
 			      $::isEmbedded ?
-			      gtksignal_connect(new Gtk::Button(_("Expert Mode")), clicked => sub { system ("XFdrake --expert"); }) :
+			      gtksignal_connect(new Gtk::Button(_("Expert Mode")), clicked => sub { system ("XFdrake --expert") }) :
 			      gtksignal_connect(new Gtk::Button(_("Show all")), clicked => sub { $W->{retval} = 1; $chosen_w = 0; Gtk->main_quit })),
 		    ));
     $depth_combo->disable_activate;
     $depth_combo->set_use_arrows_always(1);
     $depth_combo->entry->set_editable(0);
-    $depth_combo->set_popdown_strings(map { translate($depths{$_}) } grep { $allowed_depth{$_} } ikeys(%{$card->{depth}}));
+    $depth_combo->set_popdown_strings(map { translate($Xconfigurator_consts::depths{$_}) } grep { $Xconfigurator_consts::allowed_depth{$_} } ikeys(%{$card->{depth}}));
     $depth_combo->entry->signal_connect(changed => sub {
         $chosen_depth = $txt2depth{untranslate($depth_combo->entry->get_text, keys %txt2depth)};
         my $w = $card->{depth}{$chosen_depth}[0][0];
@@ -949,24 +832,24 @@ sub chooseResolutions($$;$) {
 
 
 sub resolutionsConfiguration {
-    my ($o, $auto) = @_;
-    my $card = $o->{card};
+    my ($X, $auto) = @_;
+    my $card = $X->{card};
 
-    #- For the mono and vga16 server, no further configuration is required.
-    if (member($card->{server}, "Mono", "VGA16")) {
+    #- For the vga16 server, no further configuration is required.
+    if ($card->{server} eq "VGA16") {
 	$card->{depth}{8} = [[ 640, 480 ]];
 	return;
     } elsif ($card->{server} =~ /Sun/) {
 	$card->{depth}{2} = [[ 1152, 864 ]] if $card->{server} =~ /^(SunMono)$/;
 	$card->{depth}{8} = [[ 1152, 864 ]] if $card->{server} =~ /^(SunMono|Sun)$/;
 	$card->{depth}{24} = [[ 1152, 864 ]] if $card->{server} =~ /^(SunMono|Sun|Sun24)$/;
-	$card->{default_wres} = 1152;
-	$o->{default_depth} = max(keys %{$card->{depth}});
+	$card->{default_x_res} = 1152;
+	$X->{default_depth} = max(keys %{$card->{depth}});
 	return 1; #- aka we cannot test, assumed as good (should be).
     }
     if (is_empty_hash_ref($card->{depth})) {
-	$card->{depth}{$_} = [ map { [ split "x" ] } @resolutions ]
-	  foreach @depths;
+	$card->{depth}{$_} = [ map { [ split "x" ] } @Xconfigurator_consts::resolutions ]
+	  foreach @Xconfigurator_consts::depths;
     }
     #- sort resolutions in each depth
     foreach (values %{$card->{depth}}) {
@@ -976,26 +859,26 @@ sub resolutionsConfiguration {
     }
 
     #- remove unusable resolutions (based on the video memory size and the monitor hsync rate)
-    keepOnlyLegalModes($card, $o->{monitor});
+    keepOnlyLegalModes($card, $X->{monitor});
 
-    my $res = $o->{resolution_wanted} || $card->{suggest_wres} || autoDefaultResolution($o->{monitor}{size});
-    my $wres = first(split 'x', $res);
+    my $res = $X->{resolution_wanted} || $card->{suggest_x_res} || autoDefaultResolution($X->{monitor}{size});
+    my $x_res = first(split 'x', $res);
 
     #- take the first available resolution <= the wanted resolution
-    eval { $wres = max map { first(grep { $_->[0] <= $wres } @$_)->[0] } values %{$card->{depth}} };
-    my $depth = eval { $o->{default_depth} || autoDefaultDepth($card, $wres) };
+    eval { $x_res = max map { first(grep { $_->[0] <= $x_res } @$_)->[0] } values %{$card->{depth}} };
+    my $depth = eval { $X->{default_depth} || autoDefaultDepth($card, $x_res) };
 
-    $auto or ($depth, $wres) = chooseResolutions($card, $depth, $wres) or return;
+    $auto or ($depth, $x_res) = chooseResolutions($card, $depth, $x_res) or return;
 
-    #- if nothing has been found for wres,
+    #- if nothing has been found for x_res,
     #- try to find if memory used by mode found match the memory available
     #- card, if this is the case for a relatively low resolution ( < 1024 ),
     #- there could be a problem.
-    #- memory in KB is approximated by $wres*$dpeth/14 which is little less
+    #- memory in KB is approximated by $x_res*$dpeth/14 which is little less
     #- than memory really used, (correct factor is 13.65333 for w/h ratio of 1.33333).
-    if (!$wres || $auto && ref($in) !~ /class_discard/ && ($wres < 1024 && ($card->{memory} / ($wres * $depth / 14)) > 2)) {
+    if (!$x_res || $auto && ref($in) !~ /class_discard/ && ($x_res < 1024 && ($card->{VideoRam} / ($x_res * $depth / 14)) > 2)) {
 	delete $card->{depth};
-	return resolutionsConfiguration($o);
+	return resolutionsConfiguration($X);
     }
 
     #- needed in auto mode when all has been provided by the user
@@ -1003,18 +886,19 @@ sub resolutionsConfiguration {
 
     #- remove all biggest resolution (keep the small ones for ctl-alt-+)
     #- otherwise there'll be a virtual screen :(
-    $_ = [ grep { $_->[0] <= $wres } @$_ ] foreach values %{$card->{depth}};
-    $card->{default_wres} = $wres;
-    $card->{vga_mode} = $vgamodes{"${wres}xx$depth"} || $vgamodes{"${res}x$depth"}; #- for use with frame buffer.
-    $o->{default_depth} = $depth;
+    $_ = [ grep { $_->[0] <= $x_res } @$_ ] foreach values %{$card->{depth}};
+    $card->{default_x_res} = $x_res;
+    $card->{bios_vga_mode} = (Xconfigurator_consts::bios_vga_modes($x_res, $depth))[0]; #- for use with frame buffer.
+    $X->{default_depth} = $depth;
     1;
 }
 
-
 #- Create the XF86Config file.
 sub write_XF86Config {
-    my ($o, $file) = @_;
+    my ($X, $file) = @_;
     my $O;
+
+    check_config($X);
 
     $::g_auto_install and return;
 
@@ -1022,31 +906,33 @@ sub write_XF86Config {
     open F, ">$file"   or die "can't write XF86Config in $file: $!";
     open G, ">$file-4" or die "can't write XF86Config in $file-4: $!";
 
-    print F $XF86firstchunk_text;
-    print G $XF86firstchunk_text;
+    print F $Xconfigurator_consts::XF86firstchunk_text;
+    print G $Xconfigurator_consts::XF86firstchunk_text;
 
     #- Write keyboard section.
-    $O = $o->{keyboard};
-    print F $keyboardsection_start;
-    print G $keyboardsection_start_v4;
-    print F qq(    XkbDisable\n) unless $O->{xkb_keymap};
-    print G qq(    Option "XkbDisable"\n) unless $O->{xkb_keymap};
-    print F $keyboardsection_part3;
-    print G $keyboardsection_part3_v4;
+    $O = $X->{keyboard};
 
-    $O->{xkb_model} ||= 
-      arch() =~ /sparc/ ? 'sun' :
-      $O->{xkb_keymap} eq 'jp' ? 'jp106' : 
-      $O->{xkb_keymap} eq 'br' ? 'abnt2' : 'pc105';
-    print F qq(    XkbModel        "$O->{xkb_model}"\n);
-    print G qq(    Option "XkbModel" "$O->{xkb_model}"\n);
+    print F '
+Section "Keyboard"
+    Protocol    "Standard"
+';
+    print G '
+Section "InputDevice"
+    Identifier "Keyboard1"
+    Driver      "Keyboard"
+';
 
-    print F qq(    XkbLayout       "$O->{xkb_keymap}"\n);
-    print G qq(    Option "XkbLayout" "$O->{xkb_keymap}"\n);
-    print F join '', map { "    $_\n" } @{$xkb_options{$O->{xkb_keymap}} || []};
-    print G join '', map { /(\S+)(.*)/; qq(    Option "$1" $2\n) } @{$xkb_options{$O->{xkb_keymap}} || []};
-    print F $keyboardsection_end;
-    print G $keyboardsection_end;
+    print F qq(    XkbDisable\n) if !$O->{XkbLayout};
+    print G qq(    Option "XkbDisable"\n) if !$O->{XkbLayout};
+
+    print F qq(    XkbModel        "$O->{XkbModel}"\n);
+    print G qq(    Option "XkbModel" "$O->{XkbModel}"\n);
+    print F qq(    XkbLayout       "$O->{XkbLayout}"\n);
+    print G qq(    Option "XkbLayout" "$O->{XkbLayout}"\n);
+    print F join '', map { "    $_\n" } @{$Xconfigurator_consts::XkbOptions{$O->{XkbLayout}} || []};
+    print G join '', map { /(\S+)(.*)/; qq(    Option "$1" $2\n) } @{$Xconfigurator_consts::XkbOptions{$O->{XkbLayout}} || []};
+    print F "\nEndSection\n\n";
+    print G "\nEndSection\n\n";
 
     #- Write pointer section.
     my $pointer = sub {
@@ -1068,45 +954,32 @@ sub write_XF86Config {
 	print G qq(    Option "ZAxisMapping" "4 5"\n) if $O->{nbuttons} > 3;
 	print G qq(    Option "ZAxisMapping" "6 7"\n) if $O->{nbuttons} > 5;
 
-	print F "#" unless $O->{nbuttons} < 3;
-	print G "#" unless $O->{nbuttons} < 3;
+	print F "#" if $O->{nbuttons} >= 3;
+	print G "#" if $O->{nbuttons} >= 3;
 	print F ($id > 1 && "    ") . qq(    Emulate3Buttons\n);
 	print G qq(    Option "Emulate3Buttons"\n);
-	print F "#" unless $O->{nbuttons} < 3;
-	print G "#" unless $O->{nbuttons} < 3;
+	print F "#" if $O->{nbuttons} >= 3;
+	print G "#" if $O->{nbuttons} >= 3;
 	print F ($id > 1 && "    ") . qq(    Emulate3Timeout    50\n\n);
 	print G qq(    Option "Emulate3Timeout"    "50"\n\n);
-	print F "# ChordMiddle is an option for some 3-button Logitech mice\n\n";
-	print G "# ChordMiddle is an option for some 3-button Logitech mice\n\n";
-	print F "#" unless $O->{chordmiddle};
-	print G "#" unless $O->{chordmiddle};
-	print F ($id > 1 && "    ") . qq(    ChordMiddle\n\n);
-	print G qq(    Option "ChordMiddle"\n\n);
-	print F ($id > 1 && "    ") . "    ClearDTR\n" if $O->{cleardtrrts};
-	print F ($id > 1 && "    ") . "    ClearRTS\n\n"  if $O->{cleardtrrts};
 	$id > 1 and print F qq(    EndSubSection\n);
 	print F "EndSection\n\n\n";
 	print G "EndSection\n\n\n";
     };
-    print F $pointersection_text;
-    print G $pointersection_text;
-    $pointer->($o->{mouse}, 1);
-    $o->{mouse}{auxmouse} and $pointer->($o->{mouse}{auxmouse}, 2);
+    $pointer->($X->{mouse}, 1);
+    $pointer->($X->{mouse}{auxmouse}, 2) if $X->{mouse}{auxmouse};
 
     #- write module section for version 3.
-    if (@{$o->{wacom}} || $o->{card}{Utah_glx}) {
-	print F qq(Section "Module"
-);
-	print F qq(    Load "xf86Wacom.so"\n) if @{$o->{wacom}};
-	print F qq(    Load "glx-3.so"\n) if $o->{card}{Utah_glx}; #- glx.so may clash with server version 4.
-	print F qq(EndSection
-
-);
+    if (@{$X->{wacom}} || $X->{card}{UTAH_GLX}) {
+	print F qq(Section "Module"\n);
+	print F qq(    Load "xf86Wacom.so"\n) if @{$X->{wacom}};
+	print F qq(    Load "glx-3.so"\n) if $X->{card}{UTAH_GLX}; #- glx.so may clash with server version 4.
+	print F qq(EndSection\n\n);
     }
 
     #- write wacom device support.
-    foreach (1 .. @{$o->{wacom}}) {
-	my $dev = "/dev/" . $o->{wacom}[$_-1];
+    foreach (1 .. @{$X->{wacom}}) {
+	my $dev = "/dev/" . $X->{wacom}[$_-1];
 	print F $dev =~ /input\/event/ ? qq(
 Section "XInput"
     SubSection "WacomStylus"
@@ -1157,9 +1030,9 @@ EndSection
 );
     }
 
-    foreach (1..@{$o->{wacom}}) {
-	my $dev = "/dev/" . $o->{wacom}[$_-1];
-	print G $dev =~ /input\/event/ ? qq(
+    foreach (1..@{$X->{wacom}}) {
+	my $dev = "/dev/" . $X->{wacom}[$_-1];
+	print G $dev =~ m|input/event| ? qq(
 Section "InputDevice"
     Identifier	"Stylus$_"
     Driver	"wacom"
@@ -1216,36 +1089,28 @@ Section "Module"
 # This loads the DBE extension module.
     Load	"dbe"
 );
-    unless ($o->{card}{DRI_glx} && $o->{card}{driver} eq 'r128') {
+    if (!($X->{card}{DRI_GLX} && $X->{card}{driver} eq 'r128')) {
 	print G qq(
 # This loads the Video for Linux module.
     Load        "v4l"
 );
     }
-    if ($o->{card}{DRI_glx}) {
+
+    #- For example, this loads the NVIDIA GLX extension module.
+    #- When DRI_GLX_SPECIAL is set, DRI_GLX is also set
+    if ($X->{card}{DRI_GLX_SPECIAL}) {
+	print G $X->{card}{DRI_GLX_SPECIAL};
+    } elsif ($X->{card}{DRI_GLX}) {
 	print G qq(
     Load	"glx"
     Load	"dri"
 );
-    } elsif ($o->{card}{NVIDIA_glx}) {
-	print G qq(
-# This loads the NVIDIA GLX extension module.
-# IT IS IMPORTANT TO KEEP NAME AS FULL PATH TO libglx.so ELSE
-# IT WILL LOAD XFree86 glx module and the server will crash.
-
-    Load        "/usr/X11R6/lib/modules/extensions/libglx.so"
-);
     }
     print G qq(
-
-# This loads the miscellaneous extensions module, and disables
-# initialisation of the XFree86-DGA extension within that module.
 
     SubSection	"extmod"
 	#Option	"omit xfree86-dga"
     EndSubSection
-
-# This loads the Type1 and FreeType font modules
 
     Load	"type1"
     Load	"freetype"
@@ -1257,70 +1122,48 @@ Section "DRI"
     Mode	0666
 EndSection
 
-) if $o->{card}{DRI_glx};
+) if $X->{card}{DRI_GLX};
 
     #- Write monitor section.
-    $O = $o->{monitor};
-    print F $monitorsection_text1;
-    print G $monitorsection_text1;
+    $O = $X->{monitor};
+    print F qq(\nSection "Monitor"\n);
+    print G qq(\nSection "Monitor"\n);
     print F qq(    Identifier "$O->{type}"\n);
     print G qq(    Identifier "$O->{type}"\n);
-    print G qq(    UseModes   "Mac Modes"\n) if arch() =~ /ppc/;
-    print F qq(    VendorName "$O->{vendor}"\n);
-    print G qq(    VendorName "$O->{vendor}"\n);
-    print F qq(    ModelName  "$O->{model}"\n\n);
-    print G qq(    ModelName  "$O->{model}"\n\n);
-    print F $monitorsection_text2;
-    print G $monitorsection_text2;
     print F qq(    HorizSync  $O->{hsyncrange}\n\n);
     print G qq(    HorizSync  $O->{hsyncrange}\n\n);
-    print F $monitorsection_text3;
-    print G $monitorsection_text3;
     print F qq(    VertRefresh $O->{vsyncrange}\n\n);
     print G qq(    VertRefresh $O->{vsyncrange}\n\n);
-    print F $monitorsection_text4;
-    print F ($O->{modelines} || '') . ($o->{card}{type} eq "TG 96" ?
-				       $modelines_text_Trident_TG_96xx : "$modelines_text$modelines_text_ext");
-    print G $modelines_text_ext;
+    print F $O->{ModeLines_xf3} if $O->{ModeLines_xf3};
+    print F $O->{ModeLines} if $O->{ModeLines};
+    print G $O->{ModeLines} if $O->{ModeLines};
     print F "\nEndSection\n\n\n";
     print G "\nEndSection\n\n\n";
-    print G $modelines_text_apple if arch() =~ /ppc/;
-    foreach (2..@{$o->{card}{cards} || []}) {
+    foreach (2..@{$X->{card}{cards} || []}) {
 	print G qq(Section "Monitor"\n);
 	print G qq(    Identifier "monitor$_"\n);
-	print G qq(    VendorName "$O->{vendor}"\n);
-	print G qq(    ModelName  "$O->{model}"\n\n);
 	print G qq(    HorizSync   $O->{hsyncrange}\n);
 	print G qq(    VertRefresh $O->{vsyncrange}\n);
 	print G qq(EndSection\n\n\n);
     }
 
     #- Write Device section.
-    $O = $o->{card};
-    print F $devicesection_text;
-    print G $devicesection_text_v4;
+    $O = $X->{card};
+    print F $Xconfigurator_consts::devicesection_text;
     print F qq(Section "Device"\n);
     print F qq(    Identifier  "$O->{type}"\n);
-    print F qq(    VendorName  "$O->{vendor}"\n);
-    print F qq(    BoardName   "$O->{board}"\n);
+    print F qq(    Chipset     "$O->{Chipset}"\n) if $O->{Chipset};
 
-    print F "#" if $O->{chipset} && !$O->{flags}{needChipset};
-    print F qq(    Chipset     "$O->{chipset}"\n) if $O->{chipset};
-
-    print F "#" if $O->{memory} && !$O->{flags}{needVideoRam};
-    print F "    VideoRam    $O->{memory}\n" if $O->{memory};
+    print F "#" if $O->{VideoRam} && !$O->{flags}{needVideoRam};
+    print F "    VideoRam    $O->{VideoRam}\n" if $O->{VideoRam};
 
     print F map { "    $_\n" } @{$O->{lines} || []};
 
-    print F qq(    Ramdac      "$O->{ramdac}"\n) if $O->{ramdac};
-    print F qq(    Dacspeed    "$O->{dacspeed}"\n) if $O->{dacspeed};
+    #- Obsolete stuff, no existing card still need this
+    print F qq(    Ramdac      "$O->{Ramdac}"\n) if $O->{Ramdac};
+    print F qq(    Dacspeed    "$O->{Dacspeed}"\n) if $O->{Dacspeed};
+    print F qq(    Clockchip   "$O->{Clockchip}"\n) if $O->{Clockchip};
 
-    if ($O->{clockchip}) {
-	print F qq(    Clockchip   "$O->{clockchip}"\n);
-    } else {
-	print F "    # Clock lines\n";
-	print F "    Clocks $_\n" foreach (@{$O->{clocklines}});
-    }
     print F qq(
 
     # Uncomment following option if you see a big white block        
@@ -1344,20 +1187,16 @@ EndSection
     foreach (@{$O->{cards} || [ $O ]}) {
 	print G qq(Section "Device"\n);
 	print G qq(    Identifier  "$_->{type}"\n);
-	print G qq(    VendorName  "$_->{vendor}"\n);
-	print G qq(    BoardName   "$_->{board}"\n);
 	print G qq(    Driver      "$_->{driver}"\n);
-	print G "#" if $_->{memory} && !$_->{flags}{needVideoRam};
-	print G "    VideoRam    $_->{memory}\n" if $_->{memory};
+	print G "#" if $_->{VideoRam} && !$_->{flags}{needVideoRam};
+	print G "    VideoRam    $_->{VideoRam}\n" if $_->{VideoRam};
 	print G map { "    $_\n" } @{$_->{lines} || []};
-	print G qq(    Ramdac      "$_->{ramdac}"\n) if $_->{ramdac};
-	print G qq(    Dacspeed    "$_->{dacspeed}"\n) if $_->{dacspeed};
-	if ($_->{clockchip}) {
-	    print G qq(    Clockchip   "$_->{clockchip}"\n);
-	} else {
-	    print G "    # Clock lines\n";
-	    print G "    Clocks $_\n" foreach (@{$_->{clocklines}});
-	}
+
+	#- Obsolete stuff, no existing card still need this
+	print G qq(    Ramdac      "$_->{Ramdac}"\n) if $_->{Ramdac};
+	print G qq(    Dacspeed    "$_->{Dacspeed}"\n) if $_->{Dacspeed};
+	print G qq(    Clockchip   "$_->{clockchip}"\n) if $_->{clockchip};
+
 	print G qq(
 
     # Uncomment following option if you see a big white block        
@@ -1374,10 +1213,6 @@ EndSection
         }
 	print G "EndSection\n\n\n";
     }
-
-    #- Write Screen sections.
-    print F $screensection_text1, "\n";
-    print G $screensection_text1, "\n";
 
     my $subscreen = sub {
 	my ($f, $server, $defdepth, $depths) = @_;
@@ -1400,45 +1235,32 @@ EndSection
 Section "Screen"
     Driver "$server"
     Device      "$device"
-    Monitor     "$o->{monitor}{type}"
+    Monitor     "$X->{monitor}{type}"
 ); #-"
 	$subscreen->(*F, $server, $defdepth, $depths);
     };
 
-    #- SVGA screen section.
-    print F qq(
-# The Colour SVGA server
-);
+    &$screen("svga", $X->{default_depth}, $O->{type}, $O->{depth}) 
+      if $O->{server} eq 'SVGA';
 
-    if (member($O->{server}, @svgaservers)) {
-	&$screen("svga", $o->{default_depth}, $O->{type}, $O->{depth});
-    } else {
-	&$screen("svga", '', "Generic VGA", { 8 => [[ 320, 200 ]] });
-    }
+    &$screen("accel", $X->{default_depth}, $O->{type}, $O->{depth})
+      if $Xconfigurator_consts::serversdriver{$O->{server}} eq 'accel';
 
-    &$screen("vga16", '',
-	     (member($O->{server}, "Mono", "VGA16") ? $O->{type} : "Generic VGA"),
-	     { '' => [[ 640, 480 ], [ 800, 600 ]]});
+    &$screen("fbdev", $X->{default_depth}, $O->{type}, $O->{depth});
 
-    &$screen("vga2", '',
-	     (member($O->{server}, "Mono", "VGA16") ? $O->{type} : "Generic VGA"),
-	     { '' => [[ 640, 480 ], [ 800, 600 ]]});
-
-    &$screen("accel", $o->{default_depth}, $O->{type}, $O->{depth});
-
-    &$screen("fbdev", $o->{default_depth}, $O->{type}, $O->{depth});
+    &$screen("vga16", '', "Generic VGA", { '' => [[ 640, 480 ], [ 800, 600 ]]});
 
     print G qq(
 Section "Screen"
     Identifier "screen1"
     Device      "$O->{type}"
-    Monitor     "$o->{monitor}{type}"
+    Monitor     "$X->{monitor}{type}"
 );
     #- hack for DRI with Matrox card at 24 bpp, need another command.
-    $O->{DRI_glx} && $O->{identifier} =~ /Matrox.* G[245][05]0/ && $o->{default_depth} == 24 and
+    $O->{DRI_GLX} && $O->{identifier} =~ /Matrox.* G[245][05]0/ && $X->{default_depth} == 24 and
       print G "    DefaultFbBpp      32\n";
     #- bpp 32 not handled by XF4
-    $subscreen->(*G, "svga", min($o->{default_depth}, 24), $O->{depth});
+    $subscreen->(*G, "svga", min($X->{default_depth}, 24), $O->{depth});
     foreach (2..@{$O->{cards} || []}) {
 	my $device = $O->{cards}[$_ - 1]{type};
 	print G qq(
@@ -1448,10 +1270,10 @@ Section "Screen"
     Monitor     "monitor$_"
 );
 	#- hack for DRI with Matrox card at 24 bpp, need another command.
-	$O->{DRI_glx} && $O->{identifier} =~ /Matrox.* G[245][05]0/ && $o->{default_depth} == 24 and
+	$O->{DRI_GLX} && $O->{identifier} =~ /Matrox.* G[245][05]0/ && $X->{default_depth} == 24 and
 	  print G "    DefaultFbBpp      32\n";
 	#- bpp 32 not handled by XF4
-	$subscreen->(*G, "svga", min($o->{default_depth}, 24), $O->{depth});
+	$subscreen->(*G, "svga", min($X->{default_depth}, 24), $O->{depth});
     }
 
     print G qq(
@@ -1467,96 +1289,52 @@ Section "ServerLayout"
     print G '#' if defined $O->{Xinerama} && !$O->{Xinerama};
     print G qq(    Option     "Xinerama" "on"\n) if defined $O->{Xinerama};
 
-    print G '
-    InputDevice "Mouse1" "CorePointer"
-';
-    $o->{mouse}{auxmouse} and print G '
-    InputDevice "Mouse2" "SendCoreEvents"
-';
-    foreach (1..@{$o->{wacom}}) {
+    print G qq(\n    InputDevice "Mouse1" "CorePointer"\n);
+    print G qq(\n    InputDevice "Mouse2" "SendCoreEvents"\n) if $X->{mouse}{auxmouse};
+
+    foreach (1..@{$X->{wacom}}) {
 	print G qq(
     InputDevice "Stylus$_" "AlwaysCore"
     InputDevice "Eraser$_" "AlwaysCore"
     InputDevice "Cursor$_" "AlwaysCore"
 );
     }
-    print G '
-    InputDevice "Keyboard1" "CoreKeyboard"
-EndSection
-'; #-"
+    print G qq(    InputDevice "Keyboard1" "CoreKeyboard"\n);
+    print G "\nEndSection\n\n";
 
     close F;
     close G;
 }
 
-sub XF86check_link {
-    my ($ext) = @_;
-
-    my $f = "$prefix/etc/X11/XF86Config$ext";
-    touch($f);
-
-    my $l = "$prefix/usr/X11R6/lib/X11/XF86Config$ext";
-
-    if (-e $l && (stat($f))[1] != (stat($l))[1]) { #- compare the inode, must be the sames
-	-e $l and unlink($l) || die "can't remove bad $l";
-	symlinkf "../../../../etc/X11/XF86Config$ext", $l;
-    }
-}
-
-sub info {
-    my ($o) = @_;
-    my $info;
-    my $xf_ver = $o->{card}{use_xf4} ? "4.2.0" : "3.3.6";
-    my $title = ($o->{card}{DRI_glx} || $o->{card}{NVIDIA_glx} || $o->{Utah_glx} ?
-		 _("XFree %s with 3D hardware acceleration", $xf_ver) : _("XFree %s", $xf_ver));
-
-    $info .= _("Keyboard layout: %s\n", $o->{keyboard}{xkb_keymap});
-    $info .= _("Mouse type: %s\n", $o->{mouse}{XMOUSETYPE});
-    $info .= _("Mouse device: %s\n", $o->{mouse}{device}) if $::expert;
-    $info .= _("Monitor: %s\n", $o->{monitor}{type});
-    $info .= _("Monitor HorizSync: %s\n", $o->{monitor}{hsyncrange}) if $::expert;
-    $info .= _("Monitor VertRefresh: %s\n", $o->{monitor}{vsyncrange}) if $::expert;
-    $info .= _("Graphics card: %s\n", $o->{card}{type});
-    $info .= _("Graphics card identification: %s\n", $o->{card}{identifier}) if $::expert;
-    $info .= _("Graphics memory: %s kB\n", $o->{card}{memory}) if $o->{card}{memory};
-    if ($o->{default_depth} and my $depth = $o->{card}{depth}{$o->{default_depth}}) {
-	$info .= _("Color depth: %s\n", translate($depths{$o->{default_depth}}));
-	$info .= _("Resolution: %s\n", join "x", @{$depth->[0]}) if $depth && !is_empty_array_ref($depth->[0]);
-    }
-    $info .= _("XFree86 server: %s\n", $o->{card}{server}) if $o->{card}{server};
-    $info .= _("XFree86 driver: %s\n", $o->{card}{driver}) if $o->{card}{driver};
-    "$title\n\n$info";
-}
-
 sub show_info {
-    my ($o) = @_;
-    $in->ask_warn('', info($o));
+    my ($X) = @_;
+    $in->ask_warn('', Xconfig::info($X));
 }
 
 #- Program entry point.
 sub main {
-    ($prefix, my $o, $in, $do_pkgs, my $cardOptions) = @_;
-    $o ||= {};
+    ($prefix, my $X, $in, $do_pkgs, my $cardOptions) = @_;
+    $X ||= {};
 
-    XF86check_link('');
-    XF86check_link('-4');
+    Xconfig::XF86check_link($prefix, '');
+    Xconfig::XF86check_link($prefix, '-4');
 
     {
 	my $w = $in->wait_message('', _("Preparing X-Window configuration"), 1);
 
-	$o->{card} = cardConfiguration($o->{card}, $::noauto, $cardOptions);
+	$X->{card} = cardConfiguration($X->{card}, $::noauto, $cardOptions);
 
-	$o->{monitor} = monitorConfiguration($o->{monitor}, $o->{card}{server} eq 'FBDev');
+	$X->{monitor} = monitorConfiguration($X->{monitor}, $X->{card}{server} eq 'FBDev');
     }
-    my $ok = resolutionsConfiguration($o, $::auto);
+    my $ok = resolutionsConfiguration($X, $::auto);
 
-    $ok &&= testFinalConfig($o, $::auto, $o->{skiptest}, $::auto);
+    $ok &&= testFinalConfig($X, $::auto, $X->{skiptest}, $::auto);
 
     my $quit;
     until ($ok || $quit) {
 	ref($in) =~ /discard/ and die "automatic X configuration failed, ensure you give hsyncrange and vsyncrange with non-DDC aware videocards/monitors";
 
-	$in->set_help('configureXmain') unless $::isStandalone;
+	$in->set_help('configureXmain') if !$::isStandalone;
 
 	my $f;
 	$in->ask_from_(
@@ -1567,14 +1345,14 @@ sub main {
 		}, [
 		    { format => sub { $_[0][0] }, val => \$f,
 		      list => [
-	   [ _("Change Monitor") => sub { $o->{monitor} = monitorConfiguration() } ],
+	   [ _("Change Monitor") => sub { $X->{monitor} = monitorConfiguration() } ],
            [ _("Change Graphics card") => sub { my $card = cardConfiguration('', 'noauto', $cardOptions);
-					       $card and $o->{card} = $card } ],
+					       $card and $X->{card} = $card } ],
                     if_($::expert, 
-           [ _("Change Server options") => sub { optionsConfiguration($o) } ]),
-	   [ _("Change Resolution") => sub { resolutionsConfiguration($o) } ],
-	   [ _("Show information") => sub { show_info($o) } ],
-	   [ _("Test again") => sub { $ok = testFinalConfig($o, 1) } ],
+           [ _("Change Server options") => sub { optionsConfiguration($X) } ]),
+	   [ _("Change Resolution") => sub { resolutionsConfiguration($X) } ],
+	   [ _("Show information") => sub { show_info($X) } ],
+	   [ _("Test again") => sub { $ok = testFinalConfig($X, 1) } ],
 	   [ _("Quit") => sub { $quit = 1 } ],
 			       ],
 		    }
@@ -1586,28 +1364,26 @@ sub main {
 	$ok = $in->ask_yesorno('', _("Keep the changes?
 The current configuration is:
 
-%s", info($o)));
+%s", Xconfig::info($X)));
     }
     if ($ok) {
-	unless ($::testing) {
+	if (!$::testing) {
 	    my $f = "$prefix/etc/X11/XF86Config";
 	    if (-e "$f.test") {
 		rename $f, "$f.old" or die "unable to make a backup of XF86Config";
 		rename "$f-4", "$f-4.old";
 		rename "$f.test", $f;
 		rename "$f.test-4", "$f-4";
-		if ($o->{card}{server} !~ /Xpmac/) {
-		    symlinkf "../..$o->{card}{prog}", "$prefix/etc/X11/X";
-		}
+		symlinkf "../..$X->{card}{prog}", "$prefix/etc/X11/X" if $X->{card}{server} !~ /Xpmac/;
 	    }
 	}
 
 	if (!$::isStandalone || $0 !~ /Xdrakres/) {
-	    $in->set_help('configureXxdm') unless $::isStandalone;
-	    my $run = exists $o->{xdm} ? $o->{xdm} : $::auto || $in->ask_yesorno(_("Graphical interface at startup"),
+	    $in->set_help('configureXxdm') if !$::isStandalone;
+	    my $run = exists $X->{xdm} ? $X->{xdm} : $::auto || $in->ask_yesorno(_("Graphical interface at startup"),
 _("I can setup your computer to automatically start the graphical interface (XFree) upon booting.
 Would you like XFree to start when you reboot?"), 1);
-	    any::runlevel($prefix, $run ? 5 : 3) unless $::testing;
+	    any::runlevel($prefix, $run ? 5 : 3) if !$::testing;
 	}
 	if ($::isStandalone && $in->isa('interactive_gtk')) {
 	    if (my $wm = any::running_window_manager()) {
@@ -1622,7 +1398,7 @@ Would you like XFree to start when you reboot?"), 1);
 		    exec qw(perl -e), q{
                         my $wm = shift;
   		        for (my $nb = 30; $nb && `pidof "$wm"` > 0; $nb--) { sleep 1 }
-  		        system("killall X ; killall -15 xdm gdm kdm prefdm") unless `pidof "$wm"` > 0;
+  		        system("killall X ; killall -15 xdm gdm kdm prefdm") if !(`pidof "$wm"` > 0);
   		    }, $wm;
 		}
 	    } else {

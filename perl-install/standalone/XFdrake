@@ -60,45 +60,36 @@ Xconfig::getinfo($i);
 Xconfig::getinfoFromXF86Config($i); #- take default from here at least.
 
 my $allowNVIDIA_rpms;
-my (%list, %select);
-#- local *F;
-#- open F, "/var/lib/urpmi/depslist.ordered";
-#- while (<F>) {
-#-     /(.*NVIDIA.*)-([^-]*)-([^-]*)\s+/ and $list{$1} = 1;
-#- }
-#- close F;
-#-   now replaced by the following code using directly urpm library.
-eval {
-    require urpm;
-    my $urpm = new urpm;
-    $urpm->read_config(nocheck_access => 1);
-    foreach (grep { !$_->{ignore} } @{$urpm->{media} || []}) {
-	$urpm->parse_synthesis($_);
-    }
-    foreach (@{$urpm->{params}{depslist} || []}) {
-	$_->{name} =~ /NVIDIA/ and $list->{$_->{name}} = 1;
-    }
-};
-if ($list{NVIDIA_GLX}) {
+{
+    my (%list, %select);
     eval {
-	my ($version, $release, $ext) = `uname -r` =~ /([^-]*)-([^-]*mdk)(\S*)/;
-	$ext and $ext = "-$ext";
-	$list{"NVIDIA_kernel-$version-$release$ext"} or die "no NVIDIA kernel for current kernel";
-	$select{"NVIDIA_kernel-$version-$release$ext"} = 1;
-	foreach (`rpm -qa kernel-2* kernel-smp-2* kernel-enterprise-2* kernel-secure-2* kernel kernel-smp kernel-entreprise kernel22 kernel22-smp kernel22-secure`) {
-	    ($ext, $version, $release) = /kernel[^-]*(-\D[^-]*)-([^-]*)-([^-]*mdk)?/;
-	    $release or ($version, $release) = $version =~ /(.*?)\.(\d+mdk)/;
-	    $list{"NVIDIA_kernel-$version-$release$ext"} and $select{"NVIDIA_kernel-$version-$release$ext"} = 1;
+	require urpm;
+	my $urpm = new urpm;
+	$urpm->read_config(nocheck_access => 1);
+	foreach (grep { !$_->{ignore} } @{$urpm->{media} || []}) {
+	    $urpm->parse_synthesis($_);
 	}
-	$allowNVIDIA_rpms = [ keys(%select), "NVIDIA_GLX" ];
+	foreach (@{$urpm->{params}{depslist} || []}) {
+	    $_->{name} =~ /NVIDIA/ and $list->{$_->{name}} = 1;
+	}
+    };
+    if ($list{NVIDIA_GLX}) {
+	eval {
+	    my ($version, $release, $ext) = c::kernel_version() =~ /([^-]*)-([^-]*mdk)(\S*)/;
+	    $ext and $ext = "-$ext";
+	    $list{"NVIDIA_kernel-$version-$release$ext"} or die "no NVIDIA kernel for current kernel";
+	    $select{"NVIDIA_kernel-$version-$release$ext"} = 1;
+	    foreach (`rpm -qa kernel-2* kernel-smp-2* kernel-enterprise-2* kernel-secure-2* kernel kernel-smp kernel-entreprise kernel22 kernel22-smp kernel22-secure`) {
+		($ext, $version, $release) = /kernel[^-]*(-\D[^-]*)-([^-]*)-([^-]*mdk)?/;
+		$release or ($version, $release) = $version =~ /(.*?)\.(\d+mdk)/;
+		$list{"NVIDIA_kernel-$version-$release$ext"} and $select{"NVIDIA_kernel-$version-$release$ext"} = 1;
+	    }
+	    $allowNVIDIA_rpms = [ keys(%select), "NVIDIA_GLX" ];
+	}
     }
-}
-if (!$allowNVIDIA_rpms) {
-    my ($uname_r) = `uname -r` =~ /(\S+)/;
-    $allowNVIDIA_rpms = ((-e "/lib/modules/$uname_r/kernel/drivers/char/NVdriver.o.gz" ||
-			  -e "/lib/modules/$uname_r/kernel/drivers/char/NVdriver.o") &&
-			 -e "/usr/X11R6/lib/modules/drivers/nvidia_drv.o" &&
-			 -e "/usr/X11R6/lib/modules/extensions/libglx.so") && []; #- empty list but true.
+    if (!$allowNVIDIA_rpms) {
+	$allowNVIDIA_rpms = system("modprobe NVdriver 2>/dev/null") == 0 && []; #- empty list but true.
+    }
 }
 
 $::isEmbedded and kill USR2, $::CCPID;
