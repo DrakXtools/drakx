@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 1.1.9
-Release: 23mdk
+Release: 24mdk
 Url: http://www.linux-mandrake.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -262,6 +262,9 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && \
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog 
+* Thu Aug 29 2002 Guillaume Cottenceau <gc@mandrakesoft.com> 1.1.9-24mdk
+- snapshot for display_info availability in ask_browse for rpmdrake
+
 * Thu Aug 29 2002 Pixel <pixel@mandrakesoft.com> 1.1.9-23mdk
 - drakupdate_fstab first appearance
 
