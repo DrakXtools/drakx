@@ -1,3 +1,21 @@
+2000-03-13  Pixel  <pixel@mandrakesoft.com>
+
+	* detect_devices.pm (floppies): don't return hash but the device name
+
+2000-03-12  Pixel  <pixel@mandrakesoft.com>
+
+	* install_steps_interactive.pm (choosePackages): compute the
+	max_size very simply (sum of all package sizes), otherwise too costly
+
+	* pkgs.pm (install): call cleanHeaders at the end
+	* pkgs.pm (cleanHeaders): created
+
+	* install2.pm (miscellaneous): /etc/msec/init.sh is now
+	/usr/sbin/msec (yoann thanks for not telling :pp)
+
+	* pkgs.pm (install): remove the $prefix of mountpoints for not
+	enough room to install error message
+
 2000-03-13  François Pons  <fpons@mandrakesoft.com>
 
 	* pkgs.pm, install_any.pm: small correction for multiple media
@@ -10,6 +28,14 @@
 	one.
 
 2000-03-11  Pixel  <pixel@mandrakesoft.com>
+
+	* my_gtk.pm (_create_window): add callback on focus to
+	ensure_focus. The result is no more 3 focus states with 2 buttons.
+
+	* interactive_gtk.pm (ask_from_treelistW): better keyboard handling
+
+	* raid.pm (make): check the result of mkraid. Suggest raidtools
+	are missing in standalone diskdrake
 
 	* devices.pm (set_loop): created, searches for an available
 	loopback and sets the file to it

@@ -320,6 +320,8 @@ sub _create_window($$) {
     $w->signal_connect(delete_event => sub { undef $o->{retval}; Gtk->main_quit });
     $w->set_uposition(@{$my_gtk::force_position || $o->{force_position}}) if $my_gtk::force_position || $o->{force_position};
 
+    $w->signal_connect('focus' => sub { Gtk->idle_add(sub { $w->ensure_focus($_[0]); 0 }, $_[1]) }) if $w->can('ensure_focus');
+
     $w->signal_connect("key_press_event" => sub {
 	my $d = ${{ 65470 => 'help',
 	            65481 => 'next',

@@ -135,12 +135,16 @@ sub format_part {
 sub formatMount_part {
     my ($part, $raid, $fstab, $prefix, $callback) = @_;
 
-    if (my $p = up_mount_point($part->{mntpoint}, $fstab)) {
-	formatMount_part($p, $raid, $fstab, $prefix, $callback);
-    }
+    log::l("formatMount_part: $part->{mntpoint}\n");
+
     if (isLoopback($part)) {
 	formatMount_part($part->{device}, $raid, $fstab, $prefix, $callback);
     }
+    if (my $p = up_mount_point($part->{mntpoint}, $fstab)) {
+	formatMount_part($p, $raid, $fstab, $prefix, $callback) unless loopback::carryRootLoopback($part);
+    }
+
+    log::l("formatMount_part: $part->{mntpoint} really\n");
 
     if ($part->{toFormat}) {
 	$callback->($part) if $callback;
@@ -153,6 +157,9 @@ sub formatMount_all {
     my ($raid, $fstab, $prefix, $callback) = @_;
     formatMount_part($_, $raid, $fstab, $prefix, $callback) 
       foreach sort { isLoopback($a) ? 1 : -1 } grep { $_->{mntpoint} } @$fstab;
+
+    #- ensure the link is there
+    loopback::carryRootCreateSymlink($_, $prefix) foreach @$fstab;    
 }
 
 sub mount($$$;$) {
@@ -202,7 +209,10 @@ sub umount($) {
 sub mount_part($;$$) {
     my ($part, $prefix, $rdonly) = @_;
 
-    $part->{isMounted} and return;
+    #- root carrier's link can't be mounted
+    loopback::carryRootCreateSymlink($part, $prefix);
+
+    return if $part->{isMounted};
 
     unless ($::testing) {
 	if (isSwap($part)) {
@@ -210,11 +220,15 @@ sub mount_part($;$$) {
 	} else {
 	    $part->{mntpoint} or die "missing mount point";
 
-	    eval { modules::load('loop') } if isLoopback($part);
-	    $part->{real_device} = devices::set_loop($prefix . loopback::file($part)) || die if isLoopback($part);
-	    local $part->{device} = $part->{real_device} if isLoopback($part);
-
-	    mount(devices::make($part->{device}), ($prefix || '') . $part->{mntpoint}, type2fs($part->{type}), $rdonly);
+	    my $dev = $part->{device};
+	    my $mntpoint = ($prefix || '') . $part->{mntpoint};
+	    if (isLoopback($part)) {
+		eval { modules::load('loop') };
+		$dev = $part->{real_device} = devices::set_loop($prefix . loopback::file($part)) || die;
+	    } elsif (loopback::carryRootLoopback($part)) {
+		$mntpoint = "/initrd/loopfs";
+	    }
+	    mount(devices::make($dev), $mntpoint, type2fs($part->{type}), $rdonly);
 	}
     }
     $part->{isMounted} = $part->{isFormatted} = 1; #- assume that if mount works, partition is formatted
@@ -228,6 +242,8 @@ sub umount_part($;$) {
     unless ($::testing) {
 	if (isSwap($part)) {
 	    swap::swapoff($part->{device});
+	} elsif (loopback::carryRootLoopback($part)) {
+	    umount("/initrd/loopfs");
 	} else {
 	    umount(($prefix || '') . $part->{mntpoint} || devices::make($part->{device}));
 	    c::del_loop(delete $part->{real_device}) if isLoopback($part);
@@ -321,10 +337,15 @@ sub write_fstab($;$$) {
 	  isNfs($_) and $dir = '', $options = $_->{options} || 'ro,nosuid,rsize=8192,wsize=8192';
 	  isFat($_) and $options = $_->{options} || "user,exec";
 
-	  my $dev = isLoopback($_) ? loopback::file($_) :
-	    $_->{device} =~ /^\// ? $_->{device} : "$dir$_->{device}";
+	  my $dev = isLoopback($_) ? 
+	    ($_->{mntpoint} eq '/' ? "/initrd/loopfs$_->{loopback_file}" : loopback::file($_)) :
+	    ($_->{device} =~ /^\// ? $_->{device} : "$dir$_->{device}");
 	      
-	  add_options($options, "loop") if isLoopback($_);
+	  local $_->{mntpoint} = do { 
+	      $passno = 0;
+	      "/initrd/loopfs" } if loopback::carryRootLoopback($_);
+
+	  add_options($options, "loop") if isLoopback($_) && !isSwap($_); #- no need for loop option for swap files
 
 	  #- keep in mind the new line for fstab.
 	  @new{($_->{mntpoint}, $dev)} = undef;

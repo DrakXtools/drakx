@@ -153,7 +153,7 @@ sub selectMouse {
 			    [ mouse::serial_ports_names() ]));
     }
 
-    $o->setup_thiskind('serial_usb', !$::expert, 0) if $o->{mouse}{device} eq "usbmouse";
+    $o->setup_thiskind('SERIAL_USB', !$::expert, 0) if $o->{mouse}{device} eq "usbmouse";
 
     $o->SUPER::selectMouse;
 }
@@ -218,7 +218,7 @@ sub choosePartitionsToFormat($$) {
     $o->ask_many_from_list_ref('', _("Choose the partitions you want to format"),
 			       [ map { $label{$_} } @l ],
 			       [ map { \$_->{toFormat} } @l ]) or die "cancel";
-    @l = grep { $_->{toFormat} } @l;
+    @l = grep { $_->{toFormat} && !isLoopback($_) } @l;
     $o->ask_many_from_list_ref('', _("Check bad blocks?"),
 			       [ map { $label{$_} } @l ],
 			       [ map { \$_->{toFormatCheck} } @l ]) or goto &choosePartitionsToFormat if $::expert;
@@ -269,10 +269,7 @@ sub choosePackages {
 
 	$o->chooseGroups($packages, $compssUsers, $compssUsersSorted);
 
-	my %save_selected; $save_selected{$_->{file}} = pkgs::packageFlagSelected($_) foreach values %{$packages->[0]};
-	pkgs::setSelectedFromCompssList($o->{compssListLevels}, $packages, 1, 0, $o->{installClass});
-	my $max_size = pkgs::selectedSize($packages);
-	pkgs::packageSetFlagSelected($_, $save_selected{$_->{file}}) foreach values %{$packages->[0]};
+	my $max_size = int (sum map { pkgs::packageSize($_) } values %{$packages->[0]});
 
 	 if (!$::beginner && $max_size > $available) {
 	     $o->ask_okcancel('', 

@@ -23,6 +23,28 @@ sub loopbacks {
     map { map { @{$_->{loopback} || []} } partition_table::get_normal_parts($_) } @_;
 }
 
+sub carryRootLoopback {
+    my ($part) = @_;
+    $_->{mntpoint} eq '/' and return 1 foreach @{$part->{loopback} || []};
+    0;
+}
+
+sub carryRootCreateSymlink {
+    my ($part, $prefix) = @_;
+
+    carryRootLoopback($part) or return;
+
+    my $mntpoint = "$prefix$part->{mntpoint}";
+    unless (-e $mntpoint) {
+	eval { commands::mkdir_("-p", dirname($mntpoint)) };
+	#- do non-relative link for install, should be changed to relative link before rebooting
+	symlink "/initrd/loopfs", $mntpoint;
+    }
+    #- indicate kernel to keep initrd
+    mkdir "$prefix/initrd", 0755;
+}
+
+
 sub format_part {
     my ($part, $prefix) = @_;
     fs::mount_part($part->{device}, $prefix);
@@ -37,6 +59,8 @@ sub create {
     return $f if -e $f;
 
     eval { commands::mkdir_("-p", dirname($f)) };
+
+    log::l("creating loopback file $f");
     
     local *F;
     open F, ">$f" or die "failed to create loopback file";
@@ -49,8 +73,9 @@ sub create {
 sub getFree {
     my ($part, $prefix) = @_;
 
-    unless ($part->{freespace}) {
-	$part->{isFormatted} || !$part->{notFormatted} or return;
+    if ($part->{isFormatted} || !$part->{notFormatted}) {
+	$part->{freespace} = $part->{size};
+    } elsif (!$part->{freespace}) {
 	isMountableRW($part) or return;
 
 	my $dir = "/tmp/loopback_tmp";

@@ -50,9 +50,10 @@ sub cdroms() {
     @l;
 }
 sub floppies() {
-    (grep { tryOpen($_) } qw(fd0 fd1)),
-    (grep { $_->{type} eq 'fd' } get());
+    my @ide = map { $_->{device} } grep { $_->{type} eq 'fd' } get() and modules::load("ide-floppy");
+    (grep { tryOpen($_) } qw(fd0 fd1)), @ide;
 }
+#- example ls120, model = "LS-120 SLIM 02 UHD Floppy"
 
 sub isZipDrive() { $_[0]->{info} =~ /ZIP\s+\d+/ } #- accept ZIP 100, untested for bigger ZIP drive.
 #-sub isJazzDrive() { $_[0]->{info} =~ /JAZZ?\s+/ } #- untested.

@@ -135,10 +135,21 @@ sub detect() {
     my ($r, $wacom) = mouseconfig(); return ($r, $wacom) if $r;
 
     require pci_probing::main;
-    if (my ($c) = pci_probing::main::probe("serial_usb")) {
-	eval { modules::load($c->[1], "serial_usb") };
+    if (my ($c) = pci_probing::main::probe("SERIAL_USB")) {
+	eval { 
+	    modules::load($c->[1], "SERIAL_USB");
+	    modules::load("usbmouse");
+	    modules::load("mousedev");
+	   };
 	sleep(1);
-	do { $wacom or modules::unload("serial"); return name2mouse("USB Mouse"), $wacom } if !$@ && detect_devices::tryOpen("usbmouse");
+	do { 
+	    $wacom or modules::unload("serial"); 
+	    modules::load("usbkbd");
+	    modules::load("keybdev");
+	    return name2mouse("USB Mouse"), $wacom;
+	} if !$@ && detect_devices::tryOpen("usbmouse");
+	modules::unload("mousedev");
+	modules::unload("usbmouse");
 	modules::unload($c->[1], 'remove_alias');
     }
 

@@ -116,12 +116,16 @@ sub packageFile {
     $pkg->{file} . "." . c::headerGetEntry($pkg->{header}, 'arch') . ".rpm";
 }
 
+sub cleanHeaders {
+    my ($prefix) = @_;
+    commands::rm("-rf", "$prefix/tmp/headers") if -e "$prefix/tmp/headers";
+}
 
 #- get all headers from an hdlist file.
 sub extractHeaders($$$) {
     my ($prefix, $pkgs, $medium) = @_;
 
-    commands::rm("-rf", "$prefix/tmp/headers") if -e "$prefix/tmp/headers";
+    cleanHeaders($prefix);
 
     run_program::run("extract_archive",
 		     "$prefix/var/lib/urpmi/$medium->{hdlist}",
@@ -375,7 +379,7 @@ sub getProvides($) {
     foreach my $pkg (@{$packages->[1]}) {
 	map { my $provided = $packages->[1][$_] or die "invalid package index $_";
 	      packageFlagBase($provided) or push @{$provided->{provides} ||= []}, $pkg;
-	  } map { split '\|' } packageDepsId($pkg);
+	  } map { split '\|' } grep { !/^NOTFOUND_/ } packageDepsId($pkg);
     }
 }
 
@@ -742,7 +746,8 @@ sub install($$$;$$) {
     my $callbackOpen = sub {
 	my $f = packageFile($packages{$_[0]});
 	print LOG "$f\n";
-	my $fd = install_any::getFile($f) or log::l("ERROR: bad file $f");
+	my $fd = install_any::getFile($f) or install_any::rewindGetFile();
+	$fd ||=  install_any::getFile($f) or log::l("ERROR: bad file $f");
 	$fd ? fileno $fd : -1;
     };
     my $callbackClose = sub { packageSetFlagInstalled(delete $packages{$_[0]}, 1) };
@@ -811,7 +816,7 @@ sub install($$$;$$) {
 		if (s/(installing package) .* (needs (?:.*) on the (.*) filesystem)/$1 $2/) {
 		    $parts{$3} ? 0 : ($parts{$3} = 1);
 		} else { 1; }
-	    } reverse @probs;
+	    } reverse map { s|/mnt||; $_ } @probs;
 
 	    c::rpmdbClose($db);
 	    die "installation of rpms failed:\n  ", join("\n  ", @probs);
@@ -821,6 +826,7 @@ sub install($$$;$$) {
     c::rpmdbClose($db);
     log::l("rpm database closed");
 
+    cleanHeaders($prefix);
     install_any::rewindGetFile(); #- make sure to reopen the connection, usefull for ftp.
 }
 

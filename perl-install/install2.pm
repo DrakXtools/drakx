@@ -58,7 +58,7 @@ my (%installSteps, @orderedInstallSteps);
   configurePrinter   => [ __("Configure printer"), 1, 0, '', "doInstallStep" ],
   setRootPassword    => [ __("Set root password"), 1, 1, '', "formatPartitions" ],
   addUser            => [ __("Add a user"), 1, 1, '', "doInstallStep" ],
-arch() =~ /alpha/ ? (
+arch() !~ /alpha/ ? (
   createBootdisk     => [ __("Create a bootdisk"), 1, 0, '', "doInstallStep" ],
 ) : (),
   setupBootloader    => [ __("Install bootloader"), 1, 1, '', "doInstallStep" ],
@@ -372,7 +372,7 @@ sub doInstallStep {
 
     $o->beforeInstallPackages;
     $o->installPackages($o->{packages});
-    $o->afterInstallPackages;
+    $o->afterInstallPackages;    
 }
 #------------------------------------------------------------------------------
 sub miscellaneous {
@@ -386,10 +386,16 @@ sub miscellaneous {
             TYPE => $o->{installClass},
             SECURITY => $o->{security},
         });
+	
+	setVarsInSh("$o->{prefix}/etc/sysconfig/usb", { 
+            MOUSE => bool2yesno($o->{mouse}{device} eq "usbmouse"),
+	    KEYBOARD => bool2yesno(int grep { /^keybdev\.c: Adding keyboard/ } detect_devices::syslog()),
+	});
+
 	install_any::fsck_option();
 
 	local $ENV{LILO_PASSWORD} = $o->{lilo}{password};
-	run_program::rooted($o->{prefix}, "/etc/security/msec/init.sh", $o->{security});
+	run_program::rooted($o->{prefix}, "/usr/sbin/msec", $o->{security});
     } 'doInstallStep';
 }
 

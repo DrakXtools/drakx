@@ -8,7 +8,7 @@ use network;
 
 my $sock;
 
-sub getFile($) {
+sub getFile {
     local($^W) = 0;
 
     my ($host, $port, $path) = $ENV{URLPREFIX} =~ m,^http://([^/:]+)(?::(\d+))?(/\S*)?$,;

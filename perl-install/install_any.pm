@@ -82,7 +82,7 @@ sub errorOpeningFile($) {
 
     return;
 }
-sub getFile($) {
+sub getFile {
     local $^W = 0;
     if ($::o->{method} && $::o->{method} eq "ftp") {
 	require ftp;
@@ -91,7 +91,7 @@ sub getFile($) {
 	require http;
 	*install_any::getFile = sub { http::getFile($_[0]) or errorOpeningFile($_[0]) };
     } else {
-	*install_any::getFile = sub($) {
+	*install_any::getFile = sub {
 	    open getFile, "/tmp/rhimage/" . relGetFile($_[0]) or return errorOpeningFile($_[0]);
 	    *getFile;
 	};

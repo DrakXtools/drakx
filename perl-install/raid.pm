@@ -127,7 +127,8 @@ sub make {
     eval { commands::modprobe(module($part)) };
     run_program::run("raidstop", $dev);
     &write($raid, "/etc/raidtab");
-    run_program::run("mkraid", "--really-force", $dev);
+    run_program::run("mkraid", "--really-force", $dev) or die
+	$::isStandalone ? _("mkraid failed (maybe raidtools are missing?)") : _("mkraid failed");
 }
 
 sub format_part($$) {

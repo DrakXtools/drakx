@@ -28,6 +28,7 @@ arch() =~ /^sparc/ ? (
   { mntpoint => "/",        size =>  50 << 11, type => 0x83, ratio => 1, maxsize => 300 << 11 },
   { mntpoint => "swap",     size =>  30 << 11, type => 0x82, ratio => 1, maxsize => 250 << 11 },
 ),
+  { mntpoint => "/boot",    size =>  16 << 11, type => 0x83, ratio => 1, maxsize =>  30 << 11 },
   { mntpoint => "/usr",     size => 200 << 11, type => 0x83, ratio => 6, maxsize =>1500 << 11 },
   { mntpoint => "/home",    size =>  50 << 11, type => 0x83, ratio => 3 },
   { mntpoint => "/var",     size => 200 << 11, type => 0x83, ratio => 1, maxsize =>1000 << 11 },
@@ -232,6 +233,8 @@ sub has_mntpoint($$) {
 sub check_mntpoint {
     my ($mntpoint, $hd, $part, $hds, $loopbackDevice) = @_;
 
+    ref $loopbackDevice or undef $loopbackDevice;
+
     $mntpoint eq '' || isSwap($part) || isRAID($part) and return;
 
     local $_ = $mntpoint;
@@ -248,13 +251,14 @@ sub check_mntpoint {
 	push @seen, $p->{mntpoint} || return;
 	@seen > 1 && $p->{mntpoint} eq $mntpoint and die _("Circular mounts %s\n", join(", ", @seen));
 	if (my $part = fs::up_mount_point($p->{mntpoint}, $fstab)) {
-	    $check->($part, @seen);
+	    #- '/' carrier is a special case, it will be mounted first
+	    $check->($part, @seen) unless loopback::carryRootLoopback($p);
 	}
 	if (isLoopback($p)) {
 	    $check->($p->{device}, @seen);
 	}
     };
-    $check->($fake_part);
+    $check->($fake_part) unless $mntpoint eq '/' && $loopbackDevice; #- '/' is a special case, no loop check
 
 #-    if ($part->{start} + $part->{size} > 1024 * $hd->cylinder_size() && arch() =~ /i386/) {
 #-	  die "/boot ending on cylinder > 1024" if $mntpoint eq "/boot";

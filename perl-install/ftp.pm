@@ -50,7 +50,7 @@ sub new {
     wantarray ? @l : $l[0];
 }
 
-sub getFile($) {
+sub getFile {
     my $f = shift;
     my ($ftp, $retr) = new(@_ ? @_ : fromEnv);
     $$retr->close if $$retr;

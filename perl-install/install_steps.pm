@@ -240,6 +240,14 @@ sub installPackages($$) { #- complete REWORK, TODO and TOCHECK!
 sub afterInstallPackages($) {
     my ($o) = @_;
 
+    -x "$o->{prefix}/usr/bin/dumpkeys" or die 
+"Some important packages didn't get installed properly.
+
+Please switch to console 2 (using ctrl-alt-f2)
+and look at the log file /tmp/ddebug.log
+
+Consoles 1,3,4,7 may also contain interesting information";
+
     pkgs::done_db();
 
     #-  why not? cuz weather is nice today :-) [pixel]
@@ -642,6 +650,7 @@ sub setupBootloader($) {
         silo::install($o->{prefix}, $o->{bootloader});
     } else {
         lilo::install_grub($o->{prefix}, $o->{bootloader}, $o->{fstab});
+        lilo::install($o->{prefix}, $o->{bootloader}, $o->{fstab});
     }
 }
 

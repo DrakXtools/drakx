@@ -91,16 +91,19 @@ F1 help.msg
 F2 boot.msg
 label linux
   kernel vmlinuz
-  append $ks ramdisk=32000 initrd=$type.rdz mdkinst $type
+  append $ks ramdisk_size=32000 initrd=$type.rdz $type
+label text
+  kernel vmlinuz
+  append $ks ramdisk_size=32000 initrd=$type.rdz $type text
+label patch
+  kernel vmlinuz
+  append $ks ramdisk_size=32000 initrd=$type.rdz $type patch
 label expert
   kernel vmlinuz
-  append $ks expert ramdisk=32000 initrd=$type.rdz mdkinst $type
-label ks
-  kernel vmlinuz
-  append ks ramdisk=32000 initrd=$type.rdz mdkinst $type
+  append $ks ramdisk_size=32000 initrd=$type.rdz $type expert
 label rescue
   kernel vmlinuz
-  append rescue root=/dev/fd0 load_ramdisk=1 prompt_ramdisk=1
+  append $ks ramdisk_size=32000 initrd=$type.rdz $type rescue rw
 ");
     _ "cp -f $instdir/installinit/ks.cfg $mnt 2>/dev/null";
     _ "sync";
@@ -120,8 +123,8 @@ sub boot_img_alpha {
 
     mkdir "$mnt/etc", 0777;
     output("$mnt/etc/aboot.conf", 
-"0:vmlinux.gz initrd=$type.rdz mdkinst rw ramdisk=32000 $type
-1:vmlinux.gz initrd=$type.rdz mdkinst rw ramdisk=32000 text $type
+"0:vmlinux.gz initrd=$type.rdz rw ramdisk_size=32000 $type
+1:vmlinux.gz initrd=$type.rdz rw ramdisk_size=32000 text $type
 ");
     _ "sync";
     _ "df $mnt";
@@ -167,19 +170,19 @@ image=/$boot/vmlinux.gz
   label=linux
   alias=install
   initrd=/$boot/live.rdz
-  append=mdkinst ramdisk=32000
+  append=ramdisk_size=32000
 image=/$boot/vmlinux.gz
   label=text
   initrd=/$boot/live.rdz
-  append=mdkinst ramdisk=32000 text
+  append=ramdisk_size=32000 text
 image=/$boot/vmlinux.gz
   label=expert
   initrd=/$boot/live.rdz
-  append=mdkinst ramdisk=32000 expert
+  append=ramdisk_size=32000 expert
 image=/$boot/vmlinux.gz
   label=ks
   initrd=/$boot/live.rdz
-  append=mdkinst ramdisk=32000 ks
+  append=ramdisk_size=32000 ks
 ");
 
 	output("$dir/$boot/README", "
@@ -219,7 +222,7 @@ read-write
 image=/vmlinux.gz
   label=linux
   initrd=/$type.rdz
-  append=mdkinst ramdisk=32000 $type
+  append=ramdisk_size=32000 $type
 ");
 	_ "genromfs -d $dir -f /dev/ram -A 2048,/.. -a 512 -V \'DrakX boot disk\'";
 	_ "$sudo mount -t romfs /dev/ram $mnt";

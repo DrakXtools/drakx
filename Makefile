@@ -15,7 +15,7 @@ BOOT_RDZ = $(BOOT_IMG:%.img=%.rdz)
 BINS = install/install install/full-install install/local-install install/installinit/init
 DIRS = tools install install/installinit perl-install
 ifeq (i386,$(ARCH))
-DIRS += lnx4win
+#DIRS += lnx4win
 endif
 
 ROOTDEST = /export
@@ -26,7 +26,7 @@ UPLOAD_DEST_CONTRIB = $(UPLOAD_DEST_)/contrib
 AUTOBOOT = $(ROOTDEST)/dosutils/autoboot/mdkinst
 
 
-.PHONY: dirs $(FLOPPY_IMG) install
+.PHONY: dirs $(FLOPPY_IMG) install network_ks.rdz pcmcia_ks.rdz
 
 install: build autoboot
 	for i in images misc Mandrake Mandrake/base; do install -d $(ROOTDEST)/$$i ; done
@@ -59,7 +59,9 @@ endif
 dirs:
 	for i in $(DIRS); do make -C $$i; done
 
-$(BOOT_RDZ): dirs modules
+network_ks.rdz pcmcia_ks.rdz: %_ks.rdz: %.rdz
+
+network.rdz pcmcia.rdz hd.rdz cdrom.rdz: dirs modules
 	./make_boot_img $@ $(@:%.rdz=%)
 
 $(BOOT_IMG): %.img: %.rdz

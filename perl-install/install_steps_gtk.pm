@@ -459,7 +459,7 @@ sub choosePackagesTree {
 		}
 		&$update_size;
 	    } else {
-		$o->ask_warn('', _("This is a mandatory package, it can't unselected"));
+		$o->ask_warn('', _("This is a mandatory package, it can't be unselected"));
 	    }
 	}
     };

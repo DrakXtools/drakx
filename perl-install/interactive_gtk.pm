@@ -85,8 +85,7 @@ sub ask_from_treelistW {
 	    my $s; $tree->expand($wtree{$s .= "$_$separator"}) foreach split $sep, $root;
 	    foreach my $nb (1 .. @$l) {
 		if ($tree->node_nth($nb) == $node) {
-		    $tree->set_focus_row($nb);
-		    Gtk->idle_add(sub { $tree->node_moveto($node, 0, 0.5, 0); 0 });
+		    $tree->set_focus_row($ndef = $nb);
 		    last;
 		}
 	    }
@@ -117,17 +116,23 @@ sub ask_from_treelistW {
     $tree->signal_connect(key_press_event => sub {
         my ($w, $e) = @_;
 	my $c = chr $e->{keyval};
-
-	if ($e->{keyval} >= 0x100) {
-	    &$leave if $c eq "\r" || $c eq "\x8d";
+	$curr or return;
+	if ($e->{keyval} >= 0x100 ? $c eq "\r" || $c eq "\x8d" : $c eq ' ') {
+	    if ($curr->row->is_leaf) { &$leave }
+	    else { $tree->toggle_expansion($curr) }
 	}
 	1;
     });
 
+    $tree->grab_focus;
+    $tree->set_row_height($tree->style->font->ascent + $tree->style->font->descent + 1);
+    $w->{rwindow}->show;
+
     if ($wdef) {
 	$tree->select($wdef);
+	$tree->node_moveto($wdef, 0, 0.5, 0);
     }
-    $tree->grab_focus;
+
 
     $w->main or die "ask_from_list cancel";
 }
@@ -297,7 +302,7 @@ sub wait_messageW($$$) {
 		   @$messages,
 		   $w->{wait_messageW} = new Gtk::Label($W)));
     $w->{rwindow}->set_position('center') if $::isStandalone;
-    $w->{wait_messageW}->signal_connect(expose_event => sub { print "expose_event\n"; $w->{displayed} = 1 });
+    $w->{wait_messageW}->signal_connect(expose_event => sub { $w->{displayed} = 1 });
     $w->sync until $w->{displayed};
     $w;
 }

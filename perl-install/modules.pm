@@ -382,7 +382,7 @@ sub load {
     push @{$loaded{$type}}, $name;
 
     if ($type) {
-	add_alias('usbmouse', $name) if $type =~ /serial_usb/i;
+	add_alias('usb-interface', $name) if $type =~ /SERIAL_USB/i;
 	add_alias('scsi_hostadapter', $name) if $type eq "scsi" || $type eq $type_aliases{scsi};
     }
     $conf{$name}{options} = join " ", @options if @options;

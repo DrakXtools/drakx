@@ -233,7 +233,7 @@ sub write($$;$) {
     my ($prefix, $keyboard, $isNotDelete) = @_;
 
     setVarsInSh("$prefix/etc/sysconfig/keyboard", { KEYTABLE => keyboard2kmap($keyboard), $isNotDelete ? () : (BACKSPACE => "Delete") });
-    run_program::rooted($prefix, "dumpkeys > /etc/sysconfig/console/default.kmap") or die "dumpkeys failed";
+    run_program::rooted($prefix, "dumpkeys > /etc/sysconfig/console/default.kmap") or log::l("dumpkeys failed");
 }
 
 sub read($) {
