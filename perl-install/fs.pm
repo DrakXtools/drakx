@@ -73,6 +73,12 @@ sub format_dos($@) {
     run_program::run("mkdosfs", devices::make($dev), @options) or die _("%s formatting of %s failed", "dos", $dev);
 }
 
+sub format_hfs($@) {
+    my ($dev, @options) = @_;
+
+    run_program::run("hformat", devices::make($dev), @options) or die _("%s formatting of %s failed", "HFS", $dev);
+}
+
 sub format_part($;@) {
     my ($part, @options) = @_;
 
@@ -86,6 +92,8 @@ sub format_part($;@) {
         format_dos($part->{device}, @options);
     } elsif (isWin($part)) {
         format_dos($part->{device}, @options, '-F', 32);
+    } elsif (isHFS($part)) {
+        format_hfs($part->{device}, @options, '-l', "\"Untitled\"");
     } elsif (isSwap($part)) {
 	my $check_blocks = grep { /^-c$/ } @options;
         swap::make($part->{device}, $check_blocks);
