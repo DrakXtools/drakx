@@ -3394,8 +3394,7 @@ You should make sure that the page size and the ink type/printing mode (if avail
 		$oldgroup[$advanced] = $printer->{ARGS}[$i]{group};
 		if ($printer->{ARGS}[$i]{group}) {
 		    push(@widgets,
-			 { val => unhexify
-			       (join(" / ", 
+			 { val => unhexify(join(" / ", 
 				     @{$printer->{ARGS}[$i]{grouptrans}})),
 			   advanced => $advanced });
 		}
