@@ -16,7 +16,7 @@ use loopback;
 use c;
 
 
-our %preferred = map { $_ => undef } qw(perl-GTK postfix mdkkdm myspell-en_US gcc gcc-cpp gcc-c++ proftpd ghostscript-X vim-minimal kernel db1 db2 ispell-en Bastille-Curses-module nautilus libxpm4 zlib1 libncurses5 harddrake cups apache);
+our %preferred = map { $_ => undef } qw(perl-base XFree86-libs gstreamer-oss openjade ctags glibc curl sane-backends perl-GTK postfix mdkkdm gcc gcc-cpp gcc-c++ proftpd ghostscript-X vim-minimal kernel db1 db2 libxpm4 zlib1 libncurses5 harddrake cups apache);
 
 #- lower bound on the left ( aka 90 means [90-100[ )
 our %compssListDesc = (
@@ -218,21 +218,29 @@ sub packageRequest {
 
 sub packageCallbackChoices {
     my ($urpm, $_db, $_state, $choices) = @_;
-    my $prefer;
-    foreach my $pkg (@$choices) {
-	#- examine first an explicitely prefered package.
-	exists $preferred{$pkg->name} and $prefer = $pkg;
-	#- or if a kernel has to be chosen, chose the basic one.
-	$pkg->name =~ /kernel-\d/ and $prefer ||= $pkg;
-	#- or even if a package requires a specific locales which
-	#- is already selected.
-	foreach ($pkg->requires_nosense) {
-	    /locales-/ or next;
-	    my $p = packageByName($urpm, $_) or next;
-	    $p->flag_available and $prefer ||= $pkg;
+    if (my $prefer = find { exists $preferred{$_->name} } @$choices) {
+	$prefer;
+    } else {
+	my @l = grep {
+	    #- or if a kernel has to be chosen, chose the basic one.
+	    $_->name =~ /kernel-\d/ and return $_;
+
+	    #- or even if a package requires a specific locales which
+	    #- is already selected.
+	    find {
+		/locales-/ && do {
+		    my $p = packageByName($urpm, $_);
+		    $p && $p->flag_available;
+		};
+	    } $_->requires_nosense;
+	} @$choices;
+	if (!@l) {
+	    push @l, $choices->[0];
+	    log::l("packageCallbackChoices: default choice from ", join(",", map { $urpm->{depslist}[$_]->name } keys %{$_state->{selected}}), " in ", join(",", map { $_->name } @$choices));
 	}
+	#-log::l("packageCallbackChoices: chosen " . join(" ", map { $_->name } @l));
+	@l;
     }
-    $prefer || $choices->[0]; #- first one (for instance).
 }
 
 #- selection, unselection of package.
