@@ -324,6 +324,16 @@ our @isdndata =
     type => '36',
     card => 'pci',
    },
+   { description => "BeWAN R834 (USB)",
+    driver => 'hisax_st5481',
+    type => '99',
+    card => 'usb',
+   },
+   { description => "Gazel 128 (USB)",
+    driver => 'hisax_st5481',
+    type => '99',
+    card => 'usb',
+   },
   );
 
 1;
