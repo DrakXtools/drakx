@@ -599,7 +599,7 @@ sub setupBootloader {
     my ($o, $more) = @_;
     my $b = $o->{bootloader};
 
-    if ($::beginner && ($more == 1 || $b->{bootUnsafe})) {
+    if ($::beginner && $more == ($b->{bootUnsafe} ? 0 : 1)) {
 	my @l = (__("First sector of drive (MBR)"), __("First sector of boot partition"));
 
 	my $boot = $o->{hds}[0]{device};
