@@ -1,28 +1,9 @@
 #!/usr/bin/perl
 
-%compat_arch = (
-		'noarch'  => '',
-		'i386'    => 'noarch',
-		'i486'    => 'i386',
-		'i586'    => 'i486',
-		'i686'    => 'i586',
-		'i786'    => 'i686',
-		'k6'      => 'i586',
-		'k7'      => 'k6',
-		'k8'      => 'k7',
-		'alpha'   => 'noarch',
-		'sparc'   => 'noarch',
-		'sparc32' => 'sparc',
-		'sparc64' => 'sparc32',
-		'ia64'	  => 'noarch',
-	       );
+use MDK::Common;
 
-$arch = `uname -m` || 'unknownarch';
-$arch =~ s/\s//g;
-
-print join ' ', map {
-		      my $arch = $arch;
+print join(' ', map {
+		      my $arch = arch();
 		      $arch = $compat_arch{$arch} while $arch && !-e "$_.$arch";
 		      -e "$_.$arch" ? "$_.$arch" : $_;
-		    } @ARGV;
-print "\n";
+		    } @ARGV), "\n";
