@@ -1781,7 +1781,7 @@ sub makestarofficeprinterentry {
     # Make an entry in the "[ports]" section
     $configfile = removeentry("ports", "$queue=", $configfile);
     $configfile = addentry("ports", 
-			   "$queue=lpr -P $queue",
+			   "$queue=/usr/bin/lpr -P $queue",
 			   $configfile);
     # Make printer's section
     $configfile = addsection("$queue,PostScript,$queue", $configfile);
@@ -1846,7 +1846,7 @@ sub makeopenofficeprinterentry {
     # "Command" line
     $configfile = removeentry($queue, "Command=", $configfile);
     $configfile = addentry($queue, 
-			   "Command=lpr -P $queue",
+			   "Command=/usr/bin/lpr -P $queue",
 			   $configfile);
     # "Comment" line 
     $configfile = removeentry($queue, "Comment=", $configfile);
@@ -1927,7 +1927,11 @@ sub findsofficeconfigfile {
     my @configfilenames = ("/usr/lib/*/share/xp3/Xpdefaults",
 			   "/usr/local/lib/*/share/xp3/Xpdefaults",
 			   "/usr/local/*/share/xp3/Xpdefaults",
-			   "/opt/*/share/xp3/Xpdefaults");
+			   "/opt/*/share/xp3/Xpdefaults",
+			   "/*/share/xp3/Xpdefaults",
+			   "/*/*/share/xp3/Xpdefaults",
+			   "/*/*/*/share/xp3/Xpdefaults",
+			   "/*/*/*/*/share/xp3/Xpdefaults");
     my $configfilename = "";
     for $configfilename (@configfilenames) {
 	local *F;
@@ -1945,7 +1949,11 @@ sub findopenofficeconfigfile {
 	("/usr/lib/*/share/psprint/psprint.conf",
 	 "/usr/local/lib/*/share/psprint/psprint.conf",
 	 "/usr/local/*/share/psprint/psprint.conf",
-	 "/opt/*/share/psprint/psprint.conf");
+	 "/opt/*/share/psprint/psprint.conf",
+	 "/*/share/psprint/psprint.conf",
+	 "/*/*/share/psprint/psprint.conf",
+	 "/*/*/*/share/psprint/psprint.conf",
+	 "/*/*/*/*/share/psprint/psprint.conf");
     my $configfilename = "";
     for $configfilename (@configfilenames) {
 	local *F;
