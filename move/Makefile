@@ -40,13 +40,13 @@ install: build
 	sudo cp -f $(patsubst %, $(INSTALL)/pixmaps/langs/lang-%.png, $(LANG_FILES)) $(DEST_LIVETREE)/usr/share/langs
 
 	 #- overwrite /usr/lib/libDrakX files of the live tree with those in CVS
-	sudo cp -f $(addprefix $(INSTALL)/, $(shell cd $(DEST_LIVETREE)/usr/lib/libDrakX ; ls *.pm)) $(DEST_LIVETREE)/usr/lib/libDrakX || :
+	(cd $(DEST_LIVETREE)/usr/lib/libDrakX ; find -name "*.pm") | egrep -v 'ctxhelp|drakfirsttime' | (cd $(INSTALL) ; sudo cpio -pLumd $(DEST_LIVETREE)/usr/lib/libDrakX/)
 
 	 #- overwrite stuff.so of drakxtools because it doesn't contain C_DRAKX stuff
 	sudo cp -f ../perl-install/c/blib/arch/auto/stuff/stuff.so $(DEST_LIVETREE)/usr/lib/libDrakX/auto/c/stuff
 
 	 #- duplicated :(
-	sudo perl -pi -e 's/#[-+].*//; $$_ = "\n" if (/^=(head|begin)/ .. /^=cut/) || /use (diagnostics|vars|strict)/' $(DEST_STAGE2)/*.pm $(DEST_LIVETREE)/usr/lib/libDrakX/*.pm
+	sudo perl -pi -e 's/#[-+].*//; $$_ = "\n" if (/^=(head|begin)/ .. /^=cut/) || /use (diagnostics|vars|strict)/' $(DEST_STAGE2)/*.pm `find $(DEST_LIVETREE)/usr/lib/libDrakX -name "*.pm"`
 
 	sudo mkdir -p $(DEST_LIVETREE)/move
 	sudo cp -f $(addprefix data/, $(DATA_FILES)) $(DEST_LIVETREE)/move
