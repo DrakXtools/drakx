@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2003-08-21 16:19+0200\n"
+"POT-Creation-Date: 2003-08-22 01:01+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -320,15 +320,6 @@ msgstr ""
 #: ../../standalone/scannerdrake:1 ../../standalone/scannerdrake:1
 #, c-format
 msgid "Edit selected host"
-msgstr ""
-
-#: ../../network/adsl.pm:1
-#, c-format
-msgid ""
-"You need the alcatel microcode.\n"
-"Download it at\n"
-"http://prdownloads.sourceforge.net/speedtouch/speedtouch-20011007.tar.bz2\n"
-"and copy the mgmt.o in /usr/share/speedtouch"
 msgstr ""
 
 #: ../../standalone/drakbackup:1
@@ -2016,7 +2007,7 @@ msgstr ""
 msgid "Netmask:"
 msgstr ""
 
-#: ../../network/adsl.pm:1 ../../network/adsl.pm:1
+#: ../../network/adsl.pm:1
 #, c-format
 msgid "Do it later"
 msgstr ""
@@ -2043,23 +2034,6 @@ msgid ""
 "- when printer information is broadcasted, it does not contain \"localhost\" as the server name.\n"
 "\n"
 "If some of these measures lead to problems for you, turn this option off, but then you have to take care of these points."
-msgstr ""
-
-#: ../../harddrake/sound.pm:1
-#, c-format
-msgid ""
-"OSS (Open Sound System) was the first sound API. It's an OS independant sound API (it's available on most unices systems) but it's a very basic and limited API.\n"
-"What's more, OSS drivers all reinvent the wheel.\n"
-"\n"
-"ALSA (Advanced Linux Sound Architecture) is a modularized architecture which\n"
-"supports quite a large range of ISA, USB and PCI cards.\n"
-"\n"
-"It also provides a much higher API than OSS.\n"
-"\n"
-"To use alsa, one can either use:\n"
-"- the old compatibility OSS api\n"
-"- the new ALSA api that provides many enhanced features but requires using the ALSA library.\n"
-""
 msgstr ""
 
 #: ../../install_steps_interactive.pm:1
@@ -3708,6 +3682,14 @@ msgid ""
 "Please choose the minimal installation you want:"
 msgstr ""
 
+#: ../../network/adsl.pm:1
+#, c-format
+msgid ""
+"You need the Alcatel microcode.\n"
+"You can provide it now via a floppy or your windows partition,\n"
+"or skip and do it later."
+msgstr ""
+
 #: ../../diskdrake/dav.pm:1
 #, c-format
 msgid "Please enter the WebDAV server URL"
@@ -4476,14 +4458,14 @@ msgstr ""
 msgid "Start sector: "
 msgstr ""
 
-#: ../../standalone/drakperm:1
-#, c-format
-msgid "Read"
-msgstr ""
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Congo (Brazzaville)"
+msgstr ""
+
+#: ../../standalone/drakperm:1
+#, c-format
+msgid "Read"
 msgstr ""
 
 #: ../../any.pm:1 ../../install_any.pm:1 ../../standalone.pm:1
@@ -4521,6 +4503,11 @@ msgstr ""
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Right Control key"
+msgstr ""
+
+#: ../../network/adsl.pm:1
+#, c-format
+msgid "Insert a FAT formatted floppy in drive %s with %s in root directory and press %s"
 msgstr ""
 
 #: ../../lang.pm:1
@@ -5852,6 +5839,45 @@ msgstr ""
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "This may take a moment to generate the keys."
+msgstr ""
+
+#: ../../standalone/draksec:1
+#, c-format
+msgid ""
+"Here, you can setup the security level and administrator of your machine.\n"
+"\n"
+"\n"
+"The Security Administrator is the one who will receive security alerts if the\n"
+"'Security Alerts' option is set. It can be a username or an email.\n"
+"\n"
+"\n"
+"The Security Level menu allows you to select one of the six preconfigured security levels\n"
+"provided with msec. These levels range from poor security and ease of use, to\n"
+"paranoid config, suitable for very sensitive server applications:\n"
+"\n"
+"\n"
+"<span foreground=\"royalblue3\">Poor</span>: This is a totally unsafe but very\n"
+"easy to use security level. It should only be used for machines not connected to\n"
+"any network and that are not accessible to everybody.\n"
+"\n"
+"\n"
+"<span foreground=\"royalblue3\">Standard</span>: This is the standard security\n"
+"recommended for a computer that will be used to connect to the Internet as a\n"
+"client.\n"
+"\n"
+"\n"
+"<span foreground=\"royalblue3\">High</span>: There are already some\n"
+"restrictions, and more automatic checks are run every night.\n"
+"\n"
+"\n"
+"<span foreground=\"royalblue3\">Higher</span>: The security is now high enough\n"
+"to use the system as a server which can accept connections from many clients. If\n"
+"your machine is only a client on the Internet, you should choose a lower level.\n"
+"\n"
+"\n"
+"<span foreground=\"royalblue3\">Paranoid</span>: This is similar to the previous\n"
+"level, but the system is entirely closed and security features are at their\n"
+"maximum"
 msgstr ""
 
 #: ../../printer/printerdrake.pm:1
@@ -9522,6 +9548,15 @@ msgstr ""
 msgid "When"
 msgstr ""
 
+#: ../../network/adsl.pm:1
+#, c-format
+msgid ""
+"You need the Alcatel microcode.\n"
+"Download it at:\n"
+"%s\n"
+"and copy the mgmt.o in /usr/share/speedtouch"
+msgstr ""
+
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "Hour"
@@ -10268,6 +10303,23 @@ msgid ""
 "Note: you need a dedicated Network Adapter to set up a Local Area Network (LAN)."
 msgstr ""
 
+#: ../../harddrake/sound.pm:1
+#, c-format
+msgid ""
+"OSS (Open Sound System) was the first sound API. It's an OS independent sound API (it's available on most UNIX(tm) systems) but it's a very basic and limited API.\n"
+"What's more, OSS drivers all reinvent the wheel.\n"
+"\n"
+"ALSA (Advanced Linux Sound Architecture) is a modularized architecture which\n"
+"supports quite a large range of ISA, USB and PCI cards.\n"
+"\n"
+"It also provides a much higher API than OSS.\n"
+"\n"
+"To use alsa, one can either use:\n"
+"- the old compatibility OSS api\n"
+"- the new ALSA api that provides many enhanced features but requires using the ALSA library.\n"
+""
+msgstr ""
+
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "No free space for 1MB bootstrap! Install will continue, but to boot your system, you'll need to create the bootstrap partition in DiskDrake"
@@ -10519,7 +10571,7 @@ msgstr ""
 msgid "Automatic time synchronization (using NTP)"
 msgstr ""
 
-#: ../../network/adsl.pm:1 ../../network/adsl.pm:1
+#: ../../network/adsl.pm:1
 #, c-format
 msgid "Use my Windows partition"
 msgstr ""
@@ -11289,6 +11341,11 @@ msgstr ""
 msgid "Local Printer"
 msgstr ""
 
+#: ../../network/adsl.pm:1
+#, c-format
+msgid "Floppy access error, unable to mount device %s"
+msgstr ""
+
 #: ../../standalone.pm:1
 #, c-format
 msgid "[--file=myfile] [--word=myword] [--explain=regexp] [--alert]"
@@ -11514,6 +11571,11 @@ msgid ""
 "\n"
 "%s%s\n"
 "are directly connected to your system"
+msgstr ""
+
+#: ../../network/modem.pm:1
+#, c-format
+msgid "You don't have any winmodem"
 msgstr ""
 
 #: ../../standalone/drakTermServ:1
@@ -12325,11 +12387,6 @@ msgstr ""
 msgid "Empty"
 msgstr ""
 
-#: ../../network/adsl.pm:1
-#, c-format
-msgid "Firmware copy failed !"
-msgstr ""
-
 #: ../../standalone/draksplash:1
 #, c-format
 msgid "text width"
@@ -12787,11 +12844,6 @@ msgstr ""
 msgid "Lilo screen"
 msgstr ""
 
-#: ../../network/adsl.pm:1
-#, c-format
-msgid "Insert floppy and press %s"
-msgstr ""
-
 #: ../../bootloader.pm:1 ../../help.pm:1
 #, c-format
 msgid "LILO with graphical menu"
@@ -13213,14 +13265,6 @@ msgstr ""
 msgid ""
 "Your system supports multiple head configuration.\n"
 "What do you want to do?"
-msgstr ""
-
-#: ../../network/adsl.pm:1
-#, c-format
-msgid ""
-"You need the alcatel microcode.\n"
-"You can provide it now via a floppy or your windows partition,\n"
-"or skip and do it later."
 msgstr ""
 
 #: ../../steps.pm:1
@@ -13752,7 +13796,7 @@ msgstr ""
 msgid "Suriname"
 msgstr ""
 
-#: ../../network/adsl.pm:1 ../../network/adsl.pm:1
+#: ../../network/adsl.pm:1
 #, c-format
 msgid "Use a floppy"
 msgstr ""
@@ -14236,45 +14280,6 @@ msgstr ""
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "If no port is given, 631 will be taken as default."
-msgstr ""
-
-#: ../../standalone/draksec:1
-#, c-format
-msgid ""
-"Here, you can setup the security level and administrator of your machine.\n"
-"\n"
-"\n"
-"The Security Administrator is the one who will receive security alerts if the\n"
-"'Security Alerts' option is set. It can be a username or an email.\n"
-"\n"
-"\n"
-"The Security Level menu enable to select one of the six preconfigured security\n"
-"provided with msec. These levels range from poor security and ease of use, to\n"
-"paranoid config, suitable for very sensitive server applications:\n"
-"\n"
-"\n"
-"<span foreground=\"royalblue3\">Poor</span>: This is a totally unsafe but very\n"
-"easy to use security level. It should only be used for machines not connected to\n"
-"any network and that are not accessible to everybody.\n"
-"\n"
-"\n"
-"<span foreground=\"royalblue3\">Standard</span>: This is the standard security\n"
-"recommended for a computer that will be used to connect to the Internet as a\n"
-"client.\n"
-"\n"
-"\n"
-"<span foreground=\"royalblue3\">High</span>: There are already some\n"
-"restrictions, and more automatic checks are run every night.\n"
-"\n"
-"\n"
-"<span foreground=\"royalblue3\">Higher</span>: The security is now high enough\n"
-"to use the system as a server which can accept connections from many clients. If\n"
-"your machine is only a client on the Internet, you should choose a lower level.\n"
-"\n"
-"\n"
-"<span foreground=\"royalblue3\">Paranoid</span>: This is similar to the previous\n"
-"level, but the system is entirely closed and security features are at their\n"
-"maximum"
 msgstr ""
 
 #: ../../install_steps_gtk.pm:1 ../../install_steps_interactive.pm:1
@@ -15333,7 +15338,7 @@ msgstr ""
 msgid "You can't select/unselect this package"
 msgstr ""
 
-#: ../../diskdrake/interactive.pm:1 ../../harddrake/sound.pm:1 ../../network/adsl.pm:1 ../../network/modem.pm:1 ../../standalone/drakfloppy:1
+#: ../../diskdrake/interactive.pm:1 ../../harddrake/sound.pm:1 ../../network/modem.pm:1 ../../network/modem.pm:1 ../../standalone/drakfloppy:1
 #, c-format
 msgid "Warning"
 msgstr ""
@@ -15572,6 +15577,11 @@ msgstr ""
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "format of floppies supported by the drive"
+msgstr ""
+
+#: ../../network/adsl.pm:1
+#, c-format
+msgid "Firmware copy failed, file %s not found"
 msgstr ""
 
 #: ../../raid.pm:1

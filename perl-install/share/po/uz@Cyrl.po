@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX-uz@Cyrl\n"
-"POT-Creation-Date: 2003-08-21 16:19+0200\n"
+"POT-Creation-Date: 2003-08-22 01:01+0200\n"
 "PO-Revision-Date: 2003-08-18 01:08+0200\n"
 "Last-Translator: Mashrab Kuvatov <kmashrab@uni-bremen.de>\n"
 "Language-Team: Uzbek <uz-li@yahoogroups.com>\n"
@@ -336,20 +336,6 @@ msgstr "Тўхтатиш"
 #, c-format
 msgid "Edit selected host"
 msgstr "Танланган компютерни тузатиш"
-
-#: ../../network/adsl.pm:1
-#, c-format
-msgid ""
-"You need the alcatel microcode.\n"
-"Download it at\n"
-"http://prdownloads.sourceforge.net/speedtouch/speedtouch-20011007.tar.bz2\n"
-"and copy the mgmt.o in /usr/share/speedtouch"
-msgstr ""
-"Сизга alcatel микро-коди керкак.\n"
-"Уни\n"
-"http://prdownloads.sourceforge.net/speedtouch/speedtouch-20011007.tar.bz2\n"
-"дан ёзиб олинг ва mgmt.o файлини /usr/share/speedtouch директориясига "
-"кўчиринг."
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -2290,26 +2276,6 @@ msgid ""
 "but then you have to take care of these points."
 msgstr ""
 
-#: ../../harddrake/sound.pm:1
-#, c-format
-msgid ""
-"OSS (Open Sound System) was the first sound API. It's an OS independant "
-"sound API (it's available on most unices systems) but it's a very basic and "
-"limited API.\n"
-"What's more, OSS drivers all reinvent the wheel.\n"
-"\n"
-"ALSA (Advanced Linux Sound Architecture) is a modularized architecture "
-"which\n"
-"supports quite a large range of ISA, USB and PCI cards.\n"
-"\n"
-"It also provides a much higher API than OSS.\n"
-"\n"
-"To use alsa, one can either use:\n"
-"- the old compatibility OSS api\n"
-"- the new ALSA api that provides many enhanced features but requires using "
-"the ALSA library.\n"
-msgstr ""
-
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid ""
@@ -4087,6 +4053,14 @@ msgstr ""
 "Сиз ҳеч қандай пакетлар гуруҳини танламадингиз.\n"
 "Илтимос сиз истаган минимал ўрнатишни танланг:"
 
+#: ../../network/adsl.pm:1
+#, c-format
+msgid ""
+"You need the Alcatel microcode.\n"
+"You can provide it now via a floppy or your windows partition,\n"
+"or skip and do it later."
+msgstr ""
+
 #: ../../diskdrake/dav.pm:1
 #, c-format
 msgid "Please enter the WebDAV server URL"
@@ -4889,15 +4863,15 @@ msgstr ""
 msgid "Start sector: "
 msgstr "Бошланғич сектор: "
 
-#: ../../standalone/drakperm:1
-#, c-format
-msgid "Read"
-msgstr "Ўқиш"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Congo (Brazzaville)"
 msgstr "Конго (Браззавилле)"
+
+#: ../../standalone/drakperm:1
+#, c-format
+msgid "Read"
+msgstr "Ўқиш"
 
 #: ../../any.pm:1 ../../install_any.pm:1 ../../standalone.pm:1
 #, c-format
@@ -4942,6 +4916,13 @@ msgstr ""
 #, c-format
 msgid "Right Control key"
 msgstr "Ўнг Ctrl тугмаси"
+
+#: ../../network/adsl.pm:1
+#, fuzzy, c-format
+msgid ""
+"Insert a FAT formatted floppy in drive %s with %s in root directory and "
+"press %s"
+msgstr "Илтимос %s ускунасига формати FAT бўлган дискетни қўйинг"
 
 #: ../../lang.pm:1
 #, c-format
@@ -6350,6 +6331,56 @@ msgstr "Лицензия"
 #, c-format
 msgid "This may take a moment to generate the keys."
 msgstr "Калитларни яратиш бир оз вақтни олиши мумкин."
+
+#: ../../standalone/draksec:1
+#, c-format
+msgid ""
+"Here, you can setup the security level and administrator of your machine.\n"
+"\n"
+"\n"
+"The Security Administrator is the one who will receive security alerts if "
+"the\n"
+"'Security Alerts' option is set. It can be a username or an email.\n"
+"\n"
+"\n"
+"The Security Level menu allows you to select one of the six preconfigured "
+"security levels\n"
+"provided with msec. These levels range from poor security and ease of use, "
+"to\n"
+"paranoid config, suitable for very sensitive server applications:\n"
+"\n"
+"\n"
+"<span foreground=\"royalblue3\">Poor</span>: This is a totally unsafe but "
+"very\n"
+"easy to use security level. It should only be used for machines not "
+"connected to\n"
+"any network and that are not accessible to everybody.\n"
+"\n"
+"\n"
+"<span foreground=\"royalblue3\">Standard</span>: This is the standard "
+"security\n"
+"recommended for a computer that will be used to connect to the Internet as "
+"a\n"
+"client.\n"
+"\n"
+"\n"
+"<span foreground=\"royalblue3\">High</span>: There are already some\n"
+"restrictions, and more automatic checks are run every night.\n"
+"\n"
+"\n"
+"<span foreground=\"royalblue3\">Higher</span>: The security is now high "
+"enough\n"
+"to use the system as a server which can accept connections from many "
+"clients. If\n"
+"your machine is only a client on the Internet, you should choose a lower "
+"level.\n"
+"\n"
+"\n"
+"<span foreground=\"royalblue3\">Paranoid</span>: This is similar to the "
+"previous\n"
+"level, but the system is entirely closed and security features are at their\n"
+"maximum"
+msgstr ""
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -10251,6 +10282,20 @@ msgstr "Зимбабве"
 msgid "When"
 msgstr "Қачон"
 
+#: ../../network/adsl.pm:1
+#, c-format
+msgid ""
+"You need the Alcatel microcode.\n"
+"Download it at:\n"
+"%s\n"
+"and copy the mgmt.o in /usr/share/speedtouch"
+msgstr ""
+"Сизга alcatel микро-коди керкак.\n"
+"Уни\n"
+"%s\n"
+"дан ёзиб олинг ва mgmt.o файлини /usr/share/speedtouch директориясига "
+"кўчиринг."
+
 #: ../../standalone/drakbackup:1
 #, fuzzy, c-format
 msgid "Hour"
@@ -11038,6 +11083,26 @@ msgid ""
 "\n"
 "Note: you need a dedicated Network Adapter to set up a Local Area Network "
 "(LAN)."
+msgstr ""
+
+#: ../../harddrake/sound.pm:1
+#, c-format
+msgid ""
+"OSS (Open Sound System) was the first sound API. It's an OS independent "
+"sound API (it's available on most UNIX(tm) systems) but it's a very basic "
+"and limited API.\n"
+"What's more, OSS drivers all reinvent the wheel.\n"
+"\n"
+"ALSA (Advanced Linux Sound Architecture) is a modularized architecture "
+"which\n"
+"supports quite a large range of ISA, USB and PCI cards.\n"
+"\n"
+"It also provides a much higher API than OSS.\n"
+"\n"
+"To use alsa, one can either use:\n"
+"- the old compatibility OSS api\n"
+"- the new ALSA api that provides many enhanced features but requires using "
+"the ALSA library.\n"
 msgstr ""
 
 #: ../../install_steps_interactive.pm:1
@@ -12115,6 +12180,11 @@ msgstr "Linux'нинг келажагини яратинг!"
 msgid "Local Printer"
 msgstr "Локал принтер"
 
+#: ../../network/adsl.pm:1
+#, fuzzy, c-format
+msgid "Floppy access error, unable to mount device %s"
+msgstr "%s ускунани қаерга уламоқчисиз?"
+
 #: ../../standalone.pm:1
 #, c-format
 msgid "[--file=myfile] [--word=myword] [--explain=regexp] [--alert]"
@@ -12351,6 +12421,11 @@ msgstr ""
 "\n"
 "%s%s\n"
 "системангизга тўғридан-тўғри уланган."
+
+#: ../../network/modem.pm:1
+#, c-format
+msgid "You don't have any winmodem"
+msgstr ""
 
 #: ../../standalone/drakTermServ:1
 #, c-format
@@ -13215,11 +13290,6 @@ msgstr "Мавжуд бўлган принтерлар"
 msgid "Empty"
 msgstr "Бўш"
 
-#: ../../network/adsl.pm:1
-#, c-format
-msgid "Firmware copy failed !"
-msgstr ""
-
 #: ../../standalone/draksplash:1
 #, c-format
 msgid "text width"
@@ -13721,11 +13791,6 @@ msgstr "Диск қисмини (%s) директорияга (%s) улаш му
 msgid "Lilo screen"
 msgstr "Lilo ойнаси"
 
-#: ../../network/adsl.pm:1
-#, fuzzy, c-format
-msgid "Insert floppy and press %s"
-msgstr "Дискетни %s'га қўйинг"
-
 #: ../../bootloader.pm:1 ../../help.pm:1
 #, c-format
 msgid "LILO with graphical menu"
@@ -14171,14 +14236,6 @@ msgstr "Босиб чиқариш системасини ўзгартириш"
 msgid ""
 "Your system supports multiple head configuration.\n"
 "What do you want to do?"
-msgstr ""
-
-#: ../../network/adsl.pm:1
-#, c-format
-msgid ""
-"You need the alcatel microcode.\n"
-"You can provide it now via a floppy or your windows partition,\n"
-"or skip and do it later."
 msgstr ""
 
 #: ../../steps.pm:1
@@ -15253,56 +15310,6 @@ msgstr "Буве Ороли"
 #, c-format
 msgid "If no port is given, 631 will be taken as default."
 msgstr "Агар ҳеч қандай порт кўрсатилмаса, андоза сифатида 631 қабул қилинади."
-
-#: ../../standalone/draksec:1
-#, c-format
-msgid ""
-"Here, you can setup the security level and administrator of your machine.\n"
-"\n"
-"\n"
-"The Security Administrator is the one who will receive security alerts if "
-"the\n"
-"'Security Alerts' option is set. It can be a username or an email.\n"
-"\n"
-"\n"
-"The Security Level menu enable to select one of the six preconfigured "
-"security\n"
-"provided with msec. These levels range from poor security and ease of use, "
-"to\n"
-"paranoid config, suitable for very sensitive server applications:\n"
-"\n"
-"\n"
-"<span foreground=\"royalblue3\">Poor</span>: This is a totally unsafe but "
-"very\n"
-"easy to use security level. It should only be used for machines not "
-"connected to\n"
-"any network and that are not accessible to everybody.\n"
-"\n"
-"\n"
-"<span foreground=\"royalblue3\">Standard</span>: This is the standard "
-"security\n"
-"recommended for a computer that will be used to connect to the Internet as "
-"a\n"
-"client.\n"
-"\n"
-"\n"
-"<span foreground=\"royalblue3\">High</span>: There are already some\n"
-"restrictions, and more automatic checks are run every night.\n"
-"\n"
-"\n"
-"<span foreground=\"royalblue3\">Higher</span>: The security is now high "
-"enough\n"
-"to use the system as a server which can accept connections from many "
-"clients. If\n"
-"your machine is only a client on the Internet, you should choose a lower "
-"level.\n"
-"\n"
-"\n"
-"<span foreground=\"royalblue3\">Paranoid</span>: This is similar to the "
-"previous\n"
-"level, but the system is entirely closed and security features are at their\n"
-"maximum"
-msgstr ""
 
 #: ../../install_steps_gtk.pm:1 ../../install_steps_interactive.pm:1
 #, c-format
@@ -16421,8 +16428,7 @@ msgid "You can't select/unselect this package"
 msgstr ""
 
 #: ../../diskdrake/interactive.pm:1 ../../harddrake/sound.pm:1
-#: ../../network/adsl.pm:1 ../../network/modem.pm:1
-#: ../../standalone/drakfloppy:1
+#: ../../network/modem.pm:1 ../../standalone/drakfloppy:1
 #, c-format
 msgid "Warning"
 msgstr "Диққат"
@@ -16681,6 +16687,11 @@ msgstr ""
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "format of floppies supported by the drive"
+msgstr ""
+
+#: ../../network/adsl.pm:1
+#, c-format
+msgid "Firmware copy failed, file %s not found"
 msgstr ""
 
 #: ../../raid.pm:1
@@ -18284,6 +18295,10 @@ msgstr "NFS сервери, SMB сервери, Прокси сервери, SSH
 #: ../../share/compssUsers:999
 msgid "Set of tools to read and send mail and news and to browse the Web"
 msgstr ""
+
+#, fuzzy
+#~ msgid "Insert floppy and press %s"
+#~ msgstr "Дискетни %s'га қўйинг"
 
 #, fuzzy
 #~ msgid "Load"
