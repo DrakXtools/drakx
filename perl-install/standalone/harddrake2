@@ -94,6 +94,15 @@ my %fields =
       lun => [ N("Logical unit number"), N("the SCSI target number (LUN). SCSI devices connected to a host are uniquely identified by a
 channel number, a target id and a logical unit number") ],
      },
+     MEMORY =>
+     {
+      'Installed Size' => [ N("Installed size"), N("Installed size of the memory bank") ],
+      'Enabled Size' => [ N("Enabled Size"), N("Enabled size of the memory bank") ],
+      'name' => [ N("Type"), N("tyme of the memory device") ],
+      'Current Speed' => [ N("Speed"), N("Speed of the memory bank") ],
+      'Bank Connections' => [ N("Bank connections"), '' ],
+      'Socket Designation' => [ N("Name"), N("Socket designation of the memory bank") ],
+     },
      MOUSE =>
      {
       "device" => [ N("Device file"), N("the device file used to communicate with the kernel driver for the mouse") ],

@@ -239,6 +239,15 @@ our @tree =
      },
 
      {
+      class => "MEMORY",
+      string => N("Memory"),
+      icon => "memory.png",
+      configurator => "",
+      detector => sub { grep { member($_->{name}, 'Cache', 'Memory Module') } detect_devices::dmidecode() },
+      checked_on_boot => 1,
+     },
+
+     {
       class => "AGP",
       string => N("AGP controllers"),
       icon => "memory.png",
@@ -429,6 +438,9 @@ sub custom_id {
     defined($device->{device}) ? $device->{device} :
         (defined($device->{processor}) ? 
          N("cpu # ") . $device->{processor} . ": " . $device->{'model name'} :
+         $device->{"Socket Designation"} ?
+         "$device->{name} (" . $device->{"Socket Designation"} . ")" :
+         $device->{name} ? $device->{name} :
          (defined($device->{description}) ? $device->{description} : $str));
 }
 
