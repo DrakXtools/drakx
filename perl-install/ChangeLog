@@ -1,3 +1,124 @@
+2001/03/13  Pixel  <pixel@mandrakesoft.com>
+
+	* standalone/drakgw: pixelization
+
+	* install_steps_interactive.pm (chooseGroups): size computed should work
+
+	* share/rpmsrate: moved icewm to SYSTEM with !KDE !GNOME
+
+	* install_steps.pm, common.pm, install_any.pm: renamef created and used
+
+2001/03/12  dam's  <damien@mandrakesoft.com>
+
+	* Makefile: removed wizard pixmap from install
+
+	* pixmaps/wiz_internet.png, pixmaps/wiz_internet_left.png: updated
+	added pixmap for wizard
+
+	* my_gtk.pm: new wizard layout, with pixmaps.
+	added ugly workaround for ugly Hseparator
+
+	* share/step-red.png, share/step-orange.png, share/step-orange-click.png,
+	share/step-green-click.png, share/step-green.png, share/step-red-on.png,
+	share/step-orange-on.png, share/step-green-on.png,
+	share/step-green_s.png, share/step-red-click.png: removing bad png
+	files...
+
+	* share/help.png: new help button. blah
+
+	* install_any.pm: typo
+
+	* pixmaps/wiz_default_left.png, pixmaps/wiz_default_up.png: updated
+
+	* netconnect.pm: corrected askokcancel -> askyesorno
+
+	* interactive.pm: corrected bad okcanel in wizard mode
+
+	* install_steps_interactive.pm: added $::isInstall
+
+	* share/logo-mandrake_trans.png: new logo for other themes
+
+	* services.pm: removed use Data::Dumper
+	corrected bug in display
+
+2001/03/12  François Pons  <fpons@mandrakesoft.com>
+
+	* modules.pm, lang.pm, commands.pm, detect_devices.pm, pkgs.pm,
+	live_install2: fixed live update between GLIBC 2.1 and GLIBC 2.2. should
+	work for other
+	combination but not tested. fixed locale usage and gtk environment
+	interaction (added LOCPATH, GCONV_PATH and GTK_EXE_PREFIX).
+	created LD_LOADER environment variable to keep track of right ELF loader
+	to be used for the GLIBC used by the live update. added internal PATH
+	to LD_LIBRARY_PATH as ELF loader only check this one and not PATH.
+
+2001/03/12  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* standalone/drakgw: 
+	  - make it work as a wizard
+	  - make it work with iptables (kernel-2.4)
+
+	* modules.pm: reflect Jeff Garzik's answers to my questions on kernel@
+
+2001/03/12  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/be.po, share/po/DrakX.pot, share/po/zh_CN.GB2312.po,
+	share/po/th.po, share/po/bg.po, share/po/de.po, share/po/tr.po,
+	share/po/eu.po, share/po/az.po, share/po/br.po, share/po/ca.po,
+	share/po/cy.po, share/po/uk.po, share/po/wa.po, share/po/da.po,
+	share/po/cs.po, share/po/zh_TW.Big5.po, share/po/af.po: Updated Basque
+	file
+
+2001/03/12  Pixel  <pixel@mandrakesoft.com>
+
+	* install_steps.pm (afterInstallPackages): save the compssUsers flattened
+	for rpmdrake
+
+	* install_steps_interactive.pm (summary): remove 'clicked' (labels are
+	used)
+	put everything in %compssUsers, use field flags for the flags :)
+
+	* pkgs.pm (computeGroupSize): log what is found
+	(saveCompssUsers): make it work
+	(readCompssUsers): clean-up
+	(saveCompssUsers): created
+	put everything in %compssUsers, use field flags for the flags :)
+	(computeGroupSize): created
+
+	* share/rpmsrate: lower Zope (anyway Zope is not in main)
+
+	* fsedit.pm (hds): search for existing lvm in @hds *and* @lvms
+
+	* commands.pm (loadkeys): created
+
+	* install_any.pm (setPackages): don't readCompssUsers with $o->{packages}
+	(setPackages): kernel-secure doesn't exist anymore, use kernel22-secure.
+	don't use kernel-secure as a kernel-smp.
+	put everything in %compssUsers, use field flags for the flags :)
+	(setPackages): set compssUsersChoice "3D" if 3D enabled graphic card
+
+	* interactive_gtk.pm (ask_from_entries_refW): add $set for "label" entries
+	add "label" type
+
+	* share/compssUsers: change the path format
+
+	* detect_devices.pm (get_mac_model): fix for perl2fcalls
+
+	* interactive.pm: add "label" type
+
+2001/03/12  warly
+
+	* share/compssUsers: add some NETWORKING_* that were empty
+	dispach some DEVELOPMENT and SERVER to more appropriate groups
+	added path
+
+	* share/rpmsrate: add some NETWORKING_* that were empty
+	dispach some DEVELOPMENT and SERVER to more appropriate groups
+
+2001/03/11  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* ftp.pm: do not retry on 550 file unavailable
+
 2001/03/12  Pixel  <pixel@mandrakesoft.com>
 
 	* install_any.pm (setPackages): set compssUsersChoice "3D" if 3D enabled
