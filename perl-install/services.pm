@@ -273,19 +273,32 @@ sub doit {
     }
 }
 
+sub services_raw() {
+    local $ENV{LANGUAGE} = 'C';
+    my (@services, @xinetd_services);
+    foreach (run_program::rooted_get_stdout($::prefix, '/sbin/chkconfig', '--list')) {
+	if (my ($name, $on_off) = m!^\t(\S+):\s*(on|off)!) {
+	    push @xinetd_services, [ $name, $on_off eq 'on' ];
+	} elsif (my ($name, $l) = m!^(\S+)\s+(0:(on|off).*)!) {
+	    push @services, [ $name, [ $l =~ /(\d+):on/g ] ];
+	}
+    }
+    \@services, \@xinetd_services;
+}
+
 #- returns: 
 #--- the listref of installed services
 #--- the listref of "on" services
 sub services() {
-    local $ENV{LANGUAGE} = 'C';
-    my @raw_l = map { chomp; $_ } run_program::rooted_get_stdout($::prefix, '/sbin/chkconfig', '--list');
-    my @l;
+    my ($services, $xinetd_services) = services_raw();
+    my @l = @$xinetd_services;
     if ($::isInstall) {
-        @l = sort { $a->[0] cmp $b->[0] } map { [ /([^\s:]+)/, /\bon\b/ ] } grep { !/:$/ } @raw_l;
+        push @l, map { [ $_->[0], @{$_->[1]} > 1 ] } @$services;
     } else {
         my $runlevel = (split " ", `/sbin/runlevel`)[1];
-        @l = sort { $a->[0] cmp $b->[0] } map { [ /([^\s:]+)/, /^\t/ ? /\bon\b/ : /\b$runlevel:on\b/ ] } grep { !/:$/ } @raw_l;
+        push @l, map { [ $_->[0], member($runlevel, @{$_->[1]}) ] } @$services;
     }
+    @l = sort { $a->[0] cmp $b->[0] } @l;
     [ map { $_->[0] } @l ], [ map { $_->[0] } grep { $_->[1] } @l ];
 }
 
