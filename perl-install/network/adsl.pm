@@ -242,6 +242,7 @@ usepeerdns
 defaultroute)
               );
         
+	my $pty_option = $modems{$adsl_device}{server}{$adsl_type} && "pty $modems{$adsl_device}{server}{$adsl_type}";
 	output("$::prefix/etc/ppp/peers/ppp0",
 qq(noauth
 noipdefault
@@ -255,7 +256,7 @@ maxfail 25
 persist
 usepeerdns
 defaultroute
-pty $modems{$adsl_device}{server}{$adsl_type}
+$pty_option
 user "$adsl->{login}"
 ));
 
