@@ -66,12 +66,15 @@ my %languages = (
 #-'lo'  => [ 'Laotian',			'mulelao-1',  'lo', 'lo' ],
   'lt'  => [ 'Lithuanian',		'iso-8859-13','lt', 'lt' ],
   'lv'  => [ 'Latvian',			'iso-8859-13','lv', 'lv' ],   
+#-'mi'	=> [ 'Maori',			'iso-8859-1', 'mi', 'mi' ],
 #-'mk'  => [ 'Macedonian (Cyrillic)',	'iso-8859-5', 'mk', 'mk:sp:sr' ],
 #-'mk_latin'=> [ 'Macedonian (Latin)',	'iso-8859-2', 'mk_latin', 'mk_latin:sr' ],
 #-'ms'  => [ 'Malay',			'iso-8859-1', 'ms', 'ms' ],
   'nl'  => [ 'Dutch (Netherlands)',	'iso-8859-1', 'nl', 'nl_NL:nl' ],
-  'no'  => [ 'Norwegian (Bokmaal)',	'iso-8859-1', 'no', 'no:no@nynorsk' ],
-'no@nynorsk' => [ 'Norwegian (Nynorsk)','iso-8859-1', 'no', 'no@nynorsk:no' ],
+# 'nb' is the new locale name in glibc 2.2
+  'no'  => [ 'Norwegian (Bokmaal)',	'iso-8859-1', 'no', 'no:nb:no@nynorsk:no_NY' ],
+# no_NY is used by KDE (but not standard); 'ny' is the new locale in glibc 2.2
+'no@nynorsk' => [ 'Norwegian (Nynorsk)','iso-8859-1', 'no', 'no@nynorsk:ny:no_NY:no' ],
 #-'oc'  => [ 'Occitan',			'iso-8859-1', 'oc', 'oc:fr_FR' ],
 #-'pd'	=> [ 'Plauttdietsch',		'iso-8859-1', 'pd', 'pd' ],
 #-'ph'  => [ 'Pilipino',		'iso-8859-1', 'ph', 'ph' ],
@@ -86,6 +89,7 @@ my %languages = (
   'sp'  => [ 'Serbian (Cyrillic)',	'iso-8859-5', 'sp', 'sp:sr' ],
   'sr'  => [ 'Serbian (Latin)',		'iso-8859-2', 'sr', 'sr' ],
   'sv'  => [ 'Swedish',			'iso-8859-1', 'sv', 'sv' ],
+#-'ta'	=> [ 'Tamil',			'tscii-0',    'ta', 'ta' ],
   'th'  => [ 'Thai',                    'tis620',     'th', 'th' ],
   'tr'  => [ 'Turkish',	 		'iso-8859-9', 'tr', 'tr' ],
 'uk_UA' => [ 'Ukrainian', 		'koi8-u',     'uk', 'uk_UA:uk' ],
@@ -195,6 +199,8 @@ my %charsets = (
 #- (and gtk support isn't done yet)
   "isiri-3342" => [ undef,		undef,		"trivial.trans",
 	"-*-*-*-*-*-*-*-*-*-*-*-*-isiri-3342" ],
+  "tscii-0" => [ undef,			undef,		"trivial.trans",
+	"-*-*-*-*-*-*-*-*-*-*-*-*-tscii-0" ],
 );
 
 #-######################################################################################
