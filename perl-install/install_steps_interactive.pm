@@ -57,8 +57,8 @@ sub selectLanguage($) {
     install_steps::selectLanguage($o);
 
     $o->{useless_thing_accepted} = $o->ask_from_list_('', 
-"Wanring no wrranty, be carfull it's gonna explose ytou romcpature", 
-		       [ _("Accept"), _("Refuse") ], _("Accept")) eq _("Accept") or exit(1) unless $o->{useless_thing_accepted};
+"Warning no warranty", 
+		       [ __("Accept"), __("Refuse") ], "Accept") eq "Accept" or exit(1) unless $o->{useless_thing_accepted};
 }
 #------------------------------------------------------------------------------
 sub selectKeyboard($) {
