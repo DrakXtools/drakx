@@ -19,7 +19,7 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 
-use lib ".."; #qw(/usr/lib/libDrakX);
+use lib qw(/usr/lib/libDrakX);
 
 use interactive;
 use netconnect;
@@ -30,7 +30,7 @@ local $_ = join '', @ARGV;
 
 #/-h/ and die "usage: DrakFuck[--xf3] [--beginner] [--expert] [--auto] [--noauto] [--skiptest] [--testing]\n";
 
-my $i = {};
+my $isdn = {};
 
 $::isStandalone = 1;
 #$::force_xf3 = /-xf3/;
@@ -45,19 +45,8 @@ $::isStandalone = 1;
 #-e $f or system("urpmi --auto XFree86 XFree86-75dpi-fonts");
 #-e $f or die "install XFree86 first!\n";
 
-my $in = vnew interactive;#('su');
+my $in = vnew interactive('su');
 
-#`pidof xfs` > 0 or system("/etc/rc.d/init.d/xfs start");
-
-#system("mount /proc 2>/dev/null"); # ensure /proc is mounted for pci probing
-
-#Xconfig::getinfoFromXF86Config($i) if $0 =~ Xdrakres;
-#Xconfig::getinfo($i);
-
-#Xconfigurator::main('', $i, $in, 0, -e "/etc/pcmcia", sub { system("urpmi --auto XFree86-$_[0]") });
-
-#netconnect::isdn_ask('', $i, $in, -e "/etc/pcmcia");
-netconnect::isdn_detect('', $i, $in, -e "/etc/pcmcia");
-#netconnect::isdn_write_config('', $i, $in, -e "/etc/pcmcia");
+netconnect::net_connect('', $isdn, $in, -e "/etc/pcmcia");
 
 $in->exit(0);

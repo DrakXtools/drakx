@@ -220,7 +220,7 @@ _("Default") => { val => \$default, type => 'bool' },
 	    $b->{default} = $old_default || $default ? $default && $e->{label} : $b->{default};
 	    require bootloader;
 	    bootloader::configure_entry($prefix, $e); #- hack to make sure initrd file are built.
-	    
+
 	    push @{$b->{entries}}, $e if $c eq "Add";
 	} else {
 	    @{$b->{entries}} = grep { $_ != $e } @{$b->{entries}};
@@ -231,7 +231,7 @@ _("Default") => { val => \$default, type => 'bool' },
 
 sub setAutologin {
   my ($prefix, $user, $wm) = @_; 
-  my $f = "$prefix/etc/X11/xdm/xdm_config";
+  my $f = "$prefix/etc/X11/xdm/xdm-config";
   my $t1 = "DisplayManager._0.autoUser:";
   my $t2 = "DisplayManager._0.autoString:";
   substInFile { s/^(\Q$t1\E|\Q$t2\E).*\n//; $_ .= "$t1\t$user\n$t2\t$wm\n" if eof && $user } $f;
