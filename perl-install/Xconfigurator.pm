@@ -769,6 +769,7 @@ sub main {
 	   __("Test again") => sub { $ok = testFinalConfig($o, 1) },
 	   __("Quit") => sub { $quit = 1 },
         );
+	$in->set_help('configureXmain') unless $::isStandalone;
 	my $f = $in->ask_from_list_(['XFdrake'],
 				 _("What do you want to do?"),
 				 [ grep { !ref } @c ]);
@@ -810,6 +811,7 @@ sub main {
 	    }
 	    $in->ask_warn('', _("Please log out and then use Ctrl-Alt-BackSpace")) unless $found;
 	} else {
+	    $in->set_help('configureXxdm') unless $::isStandalone;
 	    my $run = $o->{xdm} || $::auto || $in->ask_yesorno(_("X at startup"),
 _("I can set up your computer to automatically start X upon booting.
 Would you like X to start when you reboot?"), 1);

@@ -681,10 +681,18 @@ sub create_help_window {
 #-		    1, createScrolledWindow($w_help = new Gtk::XmHTML)));
 		    1, createScrolledWindow($w_help = new Gtk::Text)));
 #-    $w_help->source($o->{step} ? translate($o->{steps}{$o->{step}}{help}) : '');
-    gtktext_insert($w_help, $o->{step} ? formatAlaTeX(translate($o->{steps}{$o->{step}}{help})) : '');
+    gtktext_insert($w_help, $o->{step} ? formatAlaTeX(translate($help::steps{$o->{step}})) : '');
 
     $w->show;
     $o->{help_window} = $w;
+}
+
+sub set_help { 
+    shift;
+    gtktext_insert($w_help, 
+		   formatAlaTeX(join "\n", 
+				map { translate($help::steps{$_}) } @_));
+    1;
 }
 
 #------------------------------------------------------------------------------

@@ -131,12 +131,15 @@ sub selectMouse {
 	$name = $o->ask_from_list_('', _("What is the type of your mouse?"), [ mouse::names() ], $name);
 	$o->{mouse} = mouse::name2mouse($name);
     }
-    $o->{mouse}{XEMU3} = 'yes' if $o->{mouse}{nbuttons} < 3 && (!$::expert || $o->ask_yesorno('', _("Emulate third button?"), 1));
+    $o->{mouse}{XEMU3} = 'yes'; #- if $o->{mouse}{nbuttons} < 3 && $o->ask_yesorno('', _("Emulate third button?"), 1);
 
-    $o->{mouse}{device} = mouse::serial_ports_names2dev(
-	$o->ask_from_list(_("Mouse Port"),
-			  _("Which serial port is your mouse connected to?"),
-			  [ mouse::serial_ports_names() ])) if $o->{mouse}{device} eq "ttyS";
+    if ($o->{mouse}{device} eq "ttyS") {
+	$o->set_help('selectSerialPort');
+	$o->{mouse}{device} = mouse::serial_ports_names2dev(
+	  $o->ask_from_list(_("Mouse Port"),
+			    _("Which serial port is your mouse connected to?"),
+			    [ mouse::serial_ports_names() ]));
+    }
 
     $o->setup_thiskind('serial_usb', !$::expert, 0) if $o->{mouse}{device} eq "usbmouse";
 
@@ -327,6 +330,7 @@ sub configureNetworkIntf {
     delete $intf->{NETWORK};
     delete $intf->{BROADCAST};
     my @fields = qw(IPADDR NETMASK);
+    $o->set_help('configureNetworkIP');
     $o->ask_from_entries_ref(_("Configuring network device %s", $intf->{DEVICE}),
 _("Please enter the IP configuration for this machine.
 Each item should be entered as an IP address in dotted-decimal
@@ -382,10 +386,12 @@ sub pppConfig {
 	}
     }
 
-    $m->{device} ||= mouse::serial_ports_names2dev(
+    $m->{device} ||= $o->set_help('selectSerialPort') && 
+                     mouse::serial_ports_names2dev(
 	$o->ask_from_list('', _("Which serial port is your modem connected to?"),
 			  [ mouse::serial_ports_names ]));
 
+    $o->set_help('configureNetworkISP');
     install_steps::pppConfig($o) if $o->ask_from_entries_refH('',
 							      _("Dialup options"), [
 _("Connection name") => \$m->{connection},
@@ -471,6 +477,10 @@ sub setRootPassword($) {
     $sup->{password2} ||= $sup->{password} ||= "";
 
     return if $o->{security} < 1 && !$clicked;
+
+    $o->set_help("setRootPassword", 
+		 $o->{installClass} eq "server" || $::expert ? "setRootPasswordMd5" : (),
+		 $::beginner ? () : "setRootPasswordNIS");
 
     $o->ask_from_entries_refH([_("Set root password"), _("Ok"), $o->{security} > 2 ? () : _("No password")],
 			 _("Set root password"), [
@@ -596,14 +606,17 @@ sub setupBootloader {
     if ($::beginner && $more == 1) {
 	my @l = (__("First sector of drive (MBR)"), __("First sector of boot partition"));
 
+	$o->set_help('setupBootloaderBeginner');
 	my $boot = $o->{hds}[0]{device};
 	my $onmbr = "/dev/$boot" eq $b->{boot};
 	$b->{boot} = "/dev/$boot" if $o->ask_from_list_(_("LILO Installation"),
 			     _("Where do you want to install the bootloader?"),
 			     \@l, $l[!$onmbr]) eq $l[0];
     } elsif ($more || !$::beginner) {
+	$o->set_help("setupBootloaderGeneral");
+
 	$::expert and $o->ask_yesorno('', _("Do you want to use LILO?"), 1) || return;
-    
+
 	my @l = (
 _("Boot device") => { val => \$b->{boot}, list => [ map { "/dev/$_" } (map { $_->{device} } @{$o->{hds}}, @{$o->{fstab}}), detect_devices::floppies ], not_edit => !$::expert },
 _("Linear (needed for some SCSI drives)") => { val => \$b->{linear}, type => "bool", text => _("linear") },
@@ -629,9 +642,10 @@ _("Restrict command line options") => { val => \$b->{restricted}, type => "bool"
     }
 
     until ($::beginner && $more <= 1) {
+	$o->set_help('setupBootloaderAddEntry');
 	my $c = $o->ask_from_list_([''], 
 _("Here are the following entries in LILO.
-You can add some more or change the existent ones."),
+You can add some more or change the existing ones."),
 		[ (sort @{[map_each { "$::b->{label} ($::a)" . ($b->{default} eq $::b->{label} && "  *") } %{$b->{entries}}]}), __("Add"), __("Done") ],
 	);
 	$c eq "Done" and last;
@@ -713,6 +727,7 @@ sub miscellaneousNetwork {
     my ($o, $clicked) = @_;
     my $u = $o->{miscellaneous} ||= {};
 
+    $o->set_help('configureNetworkProxy');
     !$::beginner || $clicked and $o->ask_from_entries_ref('',
        _("Proxies configuration"),
        [ _("HTTP proxy"),

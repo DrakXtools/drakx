@@ -1,7 +1,44 @@
+style "checkradiobutton" {
+  engine "pixmap" {
+    image 
+      {
+        function        = CHECK
+	recolorable     = TRUE
+	shadow          = OUT
+	overlay_file    = "marble3d-check1.png"
+	overlay_stretch = FALSE
+      }
+    image 
+      {
+        function        = CHECK
+	recolorable     = TRUE
+	shadow          = IN
+	overlay_file    = "marble3d-check2.png"
+	overlay_stretch = FALSE
+      }
+    image 
+      {
+        function        = FOCUS
+	recolorable     = TRUE
+	overlay_file    = "focus.png"
+	overlay_border  = { 4, 4, 4, 4 }
+	overlay_stretch = TRUE
+      }
+  }
+}
+
 style "button"
 {
   engine "pixmap" 
     {
+    image 
+      {
+        function        = FOCUS
+	recolorable     = TRUE
+	overlay_file    = "focus.png"
+	overlay_border  = { 4, 4, 4, 4 }
+	overlay_stretch = TRUE
+      }
     image 
       {
         function        = BOX
@@ -144,3 +181,6 @@ widget_class "*Gtk*List*" style "entry"
 widget_class "*GtkNotebook*" style "notebook"
 widget "*GtkButton" style "button"
 widget "*background*" style "background"
+
+class "GtkRadioButton" style "checkradiobutton"
+class "GtkCheckButton" style "checkradiobutton"

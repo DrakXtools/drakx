@@ -13,7 +13,6 @@ use vars qw($o);
 use common qw(:common :file :system :functional);
 use install_any qw(:all);
 use log;
-use help;
 use commands;
 use network;
 use lang;
@@ -38,7 +37,7 @@ use install_steps_interactive;
 my (%installSteps, @orderedInstallSteps);
 {    
     my @installStepsFields = qw(text redoable onError hidden needs); 
-    #entered reachable toBeDone help next done;
+    #entered reachable toBeDone next done;
     my @installSteps = (
   selectLanguage     => [ __("Choose your language"), 1, 1, '' ],
   selectInstallClass => [ __("Select installation class"), 1, 1, '' ],
@@ -65,7 +64,6 @@ my (%installSteps, @orderedInstallSteps);
 );
     for (my $i = 0; $i < @installSteps; $i += 2) {
 	my %h; @h{@installStepsFields} = @{ $installSteps[$i + 1] };
-	$h{help}    = $help::steps{$installSteps[$i]} || __("Help");
 	$h{previous}= $installSteps[$i - 2] if $i >= 2;
 	$h{next}    = $installSteps[$i + 2];
 	$h{entered} = 0;
@@ -627,7 +625,7 @@ sub main {
     install_any::lnx4win_postinstall($o->{prefix}) if $o->{lnx4win};
     install_any::killCardServices();
 
-    run_program::rooted($o->{prefix}, "kudzu", "-q"); # -q <=> fermetagueuleconnard
+#-    run_program::rooted($o->{prefix}, "kudzu", "-q"); # -q <=> fermetagueuleconnard
 
     #- have the really bleeding edge ddebug.log for this f*cking msec :-/
     eval { commands::cp('-f', "/tmp/ddebug.log", "$o->{prefix}/root") };
