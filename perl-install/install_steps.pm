@@ -502,12 +502,12 @@ GridHeight=70
 	    $o->{$_} eq "1" and $o->{$_} = $l[0] || die _("No floppy drive available");
 	}
 
-	$o->{blank} and $o->copyKernelFromDiskette();
-	$o->{updatemodules} and $o->updateModulesFromDiskette();
+	$o->{blank} and $o->copyKernelFromFloppy();
+	$o->{updatemodules} and $o->updateModulesFromFloppy();
     }
 }
 
-sub copyKernelFromDiskette {
+sub copyKernelFromFloppy {
     my ($o) = @_;
     return if $::testing || !$o->{blank};
 
@@ -519,7 +519,7 @@ sub copyKernelFromDiskette {
     fs::umount("/floppy");
 }
 
-sub updateModulesFromDiskette {
+sub updateModulesFromFloppy {
     my ($o) = @_;
     return if $::testing || !$o->{updatemodules};
 
