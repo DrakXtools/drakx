@@ -165,7 +165,7 @@ hard drive partitions must be defined.
 
 
 To create partitions, you must first select a hard drive. You can select the
-disk for partitioning by clicking on \"hda\" for the firs IDE drive, \"hdb\" for
+disk for partitioning by clicking on \"hda\" for the first IDE drive, \"hdb\" for
 the second or \"sda\" for the first SCSI drive and so on.
 
 
