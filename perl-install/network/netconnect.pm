@@ -159,7 +159,7 @@ ifdown eth0
     my $i=0;
     map { defined $set_default or do { $_->[1] and $set_default=$i; }; $i++; } @l;
     my $e = $in->ask_from_entries_refH(_("Network Configuration Wizard"),
-				       _("Choose"),
+				       _("Choose the connection you want to configure"),
 				       [
 					map { {
 					    label => $_->[0] . if_($_->[1], " - " . _ ($_->[2], $_->[1])),
@@ -171,8 +171,27 @@ ifdown eth0
 
     my $pre_func = sub {
 	$::Wizard_no_previous=1;
-	#$_[0] is the type of connection of the list: (modem, isdn, adsl, cable, local network);
-	$in->ask_okcancel(_("Network Configuration"), _("\n\n\nWe are now going to configure the %s connection.\n\n\nPress next to begin.",_($_[0])), 1);
+	if (ref($in) =~ /gtk/) {
+	    $::Wizard_splash=1;
+	    require my_gtk;
+	    my_gtk->import(qw(:wrappers));
+	    my $W = my_gtk->new(_("Network Configuration Wizard"));
+	    gtkadd($W->{window},
+		   gtkpack_(new Gtk::VBox(0, 0),
+			    1, write_on_pixmap(gtkpng ("draknet_step"),
+					       20,60,
+					       _("We are now going to configure the %s connection.",_($_[0])),
+					       _("Press next to begin."),
+					      ),
+			    0, $W->create_okcancel
+			   )
+		  );
+	    $W->main;
+	    $::Wizard_splash=0;
+	} else {
+	    #- for i18n : %s is the type of connection of the list: (modem, isdn, adsl, cable, local network);
+	    $in->ask_okcancel(_("Network Configuration Wizard"), _("\n\n\nWe are now going to configure the %s connection.\n\n\nPress next to begin.",_($_[0])), 1);
+	}
 	undef $::Wizard_no_previous;
     };
     $conf{modem} and do { &$pre_func("modem"); require network::modem; network::modem::configure($netcnx, $mouse, $netc) or goto step_2 };
@@ -202,7 +221,7 @@ ifdown eth0
 
     my $m = _("Congratulation, The network and internet configuration is finished.
 
-The configuration will now be applied to your system.") . if_($::isStandalone,
+The configuration will now be applied to your system.\n") . if_($::isStandalone,
 _("After that is done, we recommend you to restart your X
 environnement to avoid hostname changing problem."));
     if ($::isWizard) {
