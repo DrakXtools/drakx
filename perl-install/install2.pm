@@ -487,6 +487,7 @@ sub exitInstall { $o->exitInstall(getNextStep() eq "exitInstall") }
 #-######################################################################################
 sub main {
     $SIG{__DIE__} = sub { chomp(my $err = $_[0]); log::l("warning: $err") };
+    $SIG{SEGV} = sub { my $msg = "Seems like memory is missing as the install crashes"; print "$msg\n"; log::l($msg) };
 
     $::beginner = $::expert = $::g_auto_install = 0;
 

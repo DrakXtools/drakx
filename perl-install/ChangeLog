@@ -1,7 +1,17 @@
 2000-02-11  Pixel  <pixel@mandrakesoft.com>
 
+	* install2.pm (main): add a callback on SEGV
+	-> message printed
+	-> that way, ENDs are called (otherwise skipped)
+
 	* install_steps_interactive.pm (setup_thiskind): handles the undef
 	value returned by load_thiskind
+	
+	* install_steps_interactive.pm (exitInstall): do not call
+	install_steps::exitInstall
+
+	* install_steps (exitInstall): removed
+	* install_steps (END): added (it does ejectCdrom)
 
 	* install_steps_interactive.pm (load_thiskind): returns undef if
 	error loading a module

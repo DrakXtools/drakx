@@ -1060,8 +1060,6 @@ Information on configuring your system is available in the post
 install chapter of the Official Linux-Mandrake User's Guide.")) if $alldone && !$::g_auto_install;
 
     $::global_wait = $o->wait_message('', _("Shutting down"));
-
-    $o->SUPER::exitInstall;
 }
 
 

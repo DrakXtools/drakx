@@ -752,7 +752,7 @@ sub cleanIfFailedUpgrade($) {
 }
 
 #------------------------------------------------------------------------------
-sub exitInstall { install_any::ejectCdrom; }
+END { install_any::ejectCdrom }
 
 #-######################################################################################
 #- Wonderful perl :(
