@@ -1117,6 +1117,7 @@ sub install($$$;$$) {
 								      my ($p) = @_;
 								      $check_installed ||= $pkg->compare_pkg($p) == 0;
 								  });
+						$check_installed or log::l($pkg->name . " not installed, " . c::rpmErrorString());
 						$check_installed and print OUTPUT "close:$id\n";
 					    }, callback_inst => sub {
 						my ($_data, $type, $id, $subtype, $amount, $total) = @_;
