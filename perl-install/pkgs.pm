@@ -165,15 +165,16 @@ sub packageById {
 
 sub bestKernelPackage {
     my ($packages) = @_;
-    my $best;
+    my ($best, $best2);
 
     foreach (keys %{$packages->{provides}{kernel}}) {
 	my $pkg = $packages->{depslist}[$_] or next;
-	$pkg->name =~ /kernel-\d/ or next;
-	!$best || $pkg->compare_pkg($best) > 0 and $best = $pkg;
+	$pkg->name =~ /kernel-\d/ and $best = $pkg, last;
+	$pkg->name =~ /kernel-i686/ and $best = $pkg;
+	$pkg->name =~ /kernel-enterprise/ and $best2 = $pkg;
     }
 
-    $best;
+    $best || $best2;
 }
 
 sub packagesOfMedium {
