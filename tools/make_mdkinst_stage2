@@ -72,7 +72,7 @@ $MKE2FS -N $[$inodes + 50] $STAGE2
 $SUDO mount -t ext2 $STAGE2 $MNTPOINT -o loop
 
 rmdir $MNTPOINT/lost+found
-$SUDO cp -a $STAGE2TMP/* $MNTPOINT
+$SUDO cp -a $STAGE2TMP/* $MNTPOINT || exit 1
 $SUDO rm -rf $STAGE2TMP
 
 df $MNTPOINT
