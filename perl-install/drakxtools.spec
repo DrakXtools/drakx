@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 1.1.9
-Release: 38mdk
+Release: 39mdk
 Url: http://www.linux-mandrake.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -273,6 +273,9 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_sbindir/convert-
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog 
+* Fri Sep 06 2002 David BAUDENS <baudens@mandrakesoft.com> 1.1.9-39mdk
+- Re-add old obsolete Aurora's images needed by drakboot (this is stupid)
+
 * Fri Sep 06 2002 David BAUDENS <baudens@mandrakesoft.com> 1.1.9-38mdk
 - Update mdk_logo.png
 
