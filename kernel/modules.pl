@@ -50,7 +50,7 @@ my %modules_only_for_all_img = (
 
     qw(dc395x_trm mptscsih BusLogic fdomain),
     qw(pci2220i eata eata_pio eata_dma),
-    'aic7xxx_old',
+    'aic7xxx_old', 'qlogicisp',
     'dtc',
   ],
 
