@@ -51,14 +51,24 @@ DEFS = -DVERSION=\"$(VERSION)\" -DSPAWN_SHELL $(ADDITIONAL_DEFS) -D_FILE_OFFSET_
 
 COMPILE = $(CC) $(DEFS) $(CFLAGS)
 
+ifeq (ppc, $(ARCH))
+INIT_HEADERS=init-libc-headers.h
+else
+ifeq (DIETLIBC, $(L))
+INIT_HEADERS=minilibc.h
+else
+INIT_HEADERS=init-libc-headers.h
+endif
+endif
 
- #- stage1 "loader"
+INIT_DEFS = -DINIT_HEADERS=\"$(INIT_HEADERS)\"
+
 ifeq (DIETLIBC, $(L))
 INITSRC = minilibc.c init.c
-INIT_DEFS = -DINIT_HEADERS=\"minilibc.h\" -fno-builtin
+INIT_DEFS += -fno-builtin
 else
 INITSRC = init.c
-INIT_DEFS = -DINIT_HEADERS=\"init-libc-headers.h\" $(GLIBC_INCLUDES)
+INIT_DEFS += $(GLIBC_INCLUDES)
 endif
 
 INIT_DEFS_ADD = -DBINARY=\"/sbin/stage1\"
