@@ -347,6 +347,7 @@ sub main {
     umask 022;
 
     $::isInstall = 1;
+    $::no_ugtk_init = 1;
     $::expert = $::g_auto_install = 0;
 
 #-    c::unlimit_core() unless $::testing;

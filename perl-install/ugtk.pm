@@ -15,7 +15,7 @@ $EXPORT_TAGS{all} = [ map { @$_ } values %EXPORT_TAGS ];
 
 use Gtk;
 
-unless ($::isInstall) {
+if (!$::no_ugtk_init) {
     !$ENV{DISPLAY} || system('/usr/X11R6/bin/xtest') and die "Cannot be run in console mode.\n";
     Gtk->init;
     eval { require Gtk::Gdk::Pixbuf; Gtk::Gdk::Pixbuf->init };
