@@ -257,7 +257,8 @@ my $vol_name = 'Drakbackup';
 my $good_restore_path = 1;
 
 # allow not-root user with own config
-if ($ENV{USER} ne 'root') {
+if ($ENV{HOME} ne '/root') {
+	standalone::explanations("Running as $ENV{USER}...");
 	$cfg_dir = "$user_home/.drakbackup/";
 	$save_path = $cfg_dir . "backups";
 	-d $save_path or mkdir_p $save_path;
@@ -4750,7 +4751,7 @@ N("Description:
   Drakbackup allows you to restore your system to
   a user selected directory.
 
-  Per default all backup will be stored on your
+  Per default all backups will be stored on your
   /var/lib/drakbackup directory
 
   Configuration file:
