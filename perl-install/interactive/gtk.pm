@@ -445,34 +445,72 @@ sub ask_fromW {
 	    $size = 2;
 	} elsif ($e->{type} =~ /list/) {
 
-	    my $quit_if_double_click = 
-	      #- i'm the only one, double click means accepting
-	      @$l == 1 || $e->{quit_if_double_click} ? 
-		sub { if ($_[1]->type =~ /^2/) { $mainw->{retval} = 1; Gtk2->main_quit } } : ''; 
-
-	    my @para = ($e, $may_go_to_next, $changed, $quit_if_double_click);
-	    my $use_boxradio = exists $e->{gtk}{use_boxradio} ? $e->{gtk}{use_boxradio} : @{$e->{list}} <= 8;
-
 	    $e->{formatted_list} = [ map { may_apply($e->{format}, $_) } @{$e->{list}} ];
-
-	    if ($e->{help}) {
-		#- used only when needed, as key bindings are dropped by List (ListStore does not seems to accepts Tooltips).
-		($w, $set, $focus_w) = $use_boxradio ? create_boxradio(@para) : create_list(@para);
-	    } elsif ($e->{type} eq 'treelist') {
-		($w, $set, $size) = create_treeview_tree(@para, $e->{tree_expanded});
-		$e->{saved_default_val} = ${$e->{val}};  #- during realization, signals will mess up the default val :(
-	    } else {
-		($w, $set, $focus_w) = $use_boxradio ? create_boxradio(@para) : create_treeview_list(@para);
-	    }
-	    if (@{$e->{list}} > (@$l == 1 ? 10 : 4)) {
-		$has_scroll = 1;
-		$expand = 1;
-		$real_w = create_scrolled_window($w);
-		$size = (@$l == 1 ? 10 : 4);
-	    } else {
-		$size ||= @{$e->{list}};
-	    }
 	    $width = max(map { length } @{$e->{list}});
+
+	    if (my $actions = $e->{add_modify_remove}) {
+		my %buttons;
+		my $do_action = sub {
+		    @{$e->{list}} || $_[0] eq 'Add' or return;
+		    my $r = $actions->{$_[0]}->(${$e->{val}});
+		    defined $r or return;
+
+		    if ($_[0] eq 'Add') {
+			${$e->{val}} = $r;
+		    } elsif ($_[0] eq 'Remove') {
+			${$e->{val}} = $e->{list}[0];
+		    }
+		    $e->{formatted_list} = [ map { may_apply($e->{format}, $_) } @{$e->{list}} ];
+		    my $list = $w->get_model;
+		    $list->clear;
+		    $list->append_set([ 0 => $_ ])->free foreach @{$e->{formatted_list}};
+		    $changed->();
+		    $buttons{$_}->set_sensitive(@{$e->{list}} != ()) foreach 'Modify', 'Remove';
+		};
+		my @actions = (N_("Add"), N_("Modify"), N_("Remove"));
+
+		$width += max(map { length(translate($_)) } @actions);
+		$has_scroll = $expand = 1;
+		$size = 6;
+		($w, $set, $focus_w) = create_treeview_list($e, $may_go_to_next, $changed, 
+							    sub { $do_action->('Modify') if $_[1]->type =~ /^2/ });
+
+		%buttons = map {
+		    my $action = $_;
+		    $action => gtksignal_connect(Gtk2::Button->new(translate($action)),
+						 clicked => sub { $do_action->($action) });
+		} @actions;
+		$real_w = gtkpack_(Gtk2::HBox->new(0,0),
+				   1, create_scrolled_window($w), 
+				   0, gtkpack__(Gtk2::VBox->new(0,0), map { $buttons{$_} } @actions));
+		$real_w->set_data(must_grow => 1)
+	    } else {
+
+		my $quit_if_double_click = 
+		  #- i'm the only one, double click means accepting
+		  @$l == 1 || $e->{quit_if_double_click} ? 
+		    sub { if ($_[1]->type =~ /^2/) { $mainw->{retval} = 1; Gtk2->main_quit } } : ''; 
+
+		my @para = ($e, $may_go_to_next, $changed, $quit_if_double_click);
+		my $use_boxradio = exists $e->{gtk}{use_boxradio} ? $e->{gtk}{use_boxradio} : @{$e->{list}} <= 8;
+
+		if ($e->{help}) {
+		    #- used only when needed, as key bindings are dropped by List (ListStore does not seems to accepts Tooltips).
+		    ($w, $set, $focus_w) = $use_boxradio ? create_boxradio(@para) : create_list(@para);
+		} elsif ($e->{type} eq 'treelist') {
+		    ($w, $set, $size) = create_treeview_tree(@para, $e->{tree_expanded});
+		    $e->{saved_default_val} = ${$e->{val}}; #- during realization, signals will mess up the default val :(
+		} else {
+		    ($w, $set, $focus_w) = $use_boxradio ? create_boxradio(@para) : create_treeview_list(@para);
+		}
+		if (@{$e->{list}} > (@$l == 1 ? 10 : 4) || $e->{add_modify_remove}) {
+		    $has_scroll = $expand = 1;
+		    $real_w = create_scrolled_window($w);
+		    $size = (@$l == 1 ? 10 : 4);
+		} else {
+		    $size ||= @{$e->{list}};
+		}
+	    }
 	} else {
 	    if ($e->{type} eq "combo") {
 		$w = Gtk2::Combo->new;
@@ -617,6 +655,18 @@ sub ask_browse_tree_info_refW {
     my ($o, $common) = @_;
     add2hash($common, { wait_message => sub { $o->wait_message(@_) } });
     ugtk2::ask_browse_tree_info($common);
+}
+
+
+sub ask_from__add_modify_removeW {
+    my ($o, $title, $message, $l, %callback) = @_;
+
+    my $e = $l->[0];
+    my $chosen_element;
+    put_in_hash($e, { allow_empty_list => 1, gtk => { use_boxradio => 0 }, sort => 0,
+		      val => \$chosen_element, type => 'list', add_modify_remove => \%callback });
+
+    $o->ask_from($title, $message, $l, %callback);
 }
 
 sub wait_messageW($$$) {
