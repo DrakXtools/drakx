@@ -131,14 +131,11 @@ sub add_entry($$) {
 
     foreach (@$entries) {
 	if ($_->{label} eq $v->{label}) {
-	    if (compare_entries($_, $v)) {
-		$_->{label} = "old${freeold}_$_->{label}";
-	    } else {
-		$v = undef; #- avoid inserting it twice as another entry already exists !
-	    }
+	    compare_entries($_, $v) or return; #- avoid inserting it twice as another entry already exists !
+	    $_->{label} = "old${freeold}_$_->{label}";
 	}
     }
-    $v and push @$entries, $v;
+    push @$entries, $v;
 }
 
 sub add_kernel($$$$$) {
