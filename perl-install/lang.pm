@@ -1083,12 +1083,12 @@ sub write {
        		      font => charset2kde_font($charset, 0),
        	          ));
 
-	configure_kdeglobals($locale, $confdir);
-
     eval {
 	my $confdir = $::prefix . ($b_user_only ? "$ENV{HOME}/.kde" : '/usr') . '/share/config';
 
 	-d $confdir or die 'not configuring kde config files since it is not installed/used';
+
+	configure_kdeglobals($locale, $confdir);
 
 	my %qt_xim = (zh => 'Over The Spot', ko => 'On The Spot', ja => 'On The Spot');
 	if ($b_user_only && (my $qt_xim = $qt_xim{locale_to_main_locale($locale->{lang})})) {
