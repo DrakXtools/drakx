@@ -1,6 +1,6 @@
 include ../../Makefile.config
 
-PMSFILES = $(wildcard $(ALLPMS:%=../../%))
+PMSFILES = $(wildcard $(ALLPMS:%=../../%) ../../../move/move.pm)
 
 POFILES = $(wildcard *.po)
 MOFILES = $(POFILES:%.po=%.mo)
