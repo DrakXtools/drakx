@@ -560,6 +560,7 @@ sub save_notebook {
     $gui->{intf_bool}{HWADDR} and (bool2yesno($gui->{intf_bool}{HWADDR}->get_active) eq 'yes' ? ($intf->{HWADDR} = 'yes') : delete $intf->{HWADDR});
 
     $intf->{BOOTPROTO} eq 'static' and (check_field($intf, 'IPADDR', 'NETMASK') or return 0);
+    check_field($netc, 'GATEWAY') or return 0;
     1;
 }
 
