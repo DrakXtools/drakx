@@ -750,7 +750,7 @@ sub install_urpmi {
 			print $LIST "$ldir/".$_->filename."\n";
 		    }
 		} else {
-		    #- need to use another method here to build synthesis.
+		    #- need to use another method here to build list file.
 		    open(my $F, "parsehdlist '$prefix/var/lib/urpmi/hdlist.$name.cz' |");
 		    local $_; 
 		    while (<$F>) {
