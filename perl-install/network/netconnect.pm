@@ -124,6 +124,15 @@ killall pppd
           my $need_to_ask = $modem->{device} || !$netc->{autodetect}{winmodem};
           return $need_to_ask ? "ppp_choose" : "ppp_choose2";
       };
+
+      my $handle_multiple_cnx = sub {
+          my $nb = keys %{$netc->{internet_cnx}};
+          if (1 < $nb) {
+          } else {
+              $netc->{internet_cnx_choice} = (keys %{$netc->{internet_cnx}})[0] if $nb == 1;
+              return $::isInstall ? "network_on_boot" : "apply_settings"
+          }
+      };
     
       # main wizard:
       my $wiz;
@@ -711,7 +720,7 @@ You may also enter the IP address of the gateway if you have one."),
                             return 1;
                         }
                     },
-                    next => "miscellaneous_choose",
+                    post => $handle_multiple_cnx,
                    },
                    
                    dhcp_hostname => 
@@ -728,24 +737,15 @@ You may also enter the IP address of the gateway if you have one."),
                             return 1;
                         }
                     },
-                    next => "miscellaneous_choose",
+                    post => $handle_multiple_cnx,
                    },
                    
                    multiple_internet_cnx => 
                    {
-                    pre => sub {
-                        my $nb = keys %{$netc->{internet_cnx}};
-                        if ($nb > 1) {
-                            # BUG: remember to remove reference to profiles in mcc if we do not restore this feature
-                            $in->ask_from("",
-                                          N("You have configured multiple ways to connect to the Internet.\nChoose the one you want to use.\n\n") . if_(!$::isStandalone, "You may want to configure some profiles after the installation, in the Mandrake Control Center"),
-                                          [ { label => N("Internet connection"), val => \$netc->{internet_cnx_choice}, list => [ keys %{$netc->{internet_cnx}} ] } ]
-                                         ) or goto step_2;
-                        } elsif ($nb == 1) {
-                            $netc->{internet_cnx_choice} = (keys %{$netc->{internet_cnx}})[0];
-                        }
-                                             },
-                    post => sub { $::isInstall ? "miscellaneous_choose" : "apply_settings" },
+                    name => N("You have configured multiple ways to connect to the Internet.\nChoose the one you want to use.\n\n") . if_(!$::isStandalone, "You may want to configure some profiles after the installation, in the Mandrake Control Center"),
+                    data => [ { label => N("Internet connection"), val => \$netc->{internet_cnx_choice}, 
+                                list => [ keys %{$netc->{internet_cnx}} ] } ],
+                    post => sub { $::isInstall ? "network_on_boot" : "apply_settings" },
                    },
                    
                    apply_settings => 
