@@ -21,7 +21,7 @@ use partition_table_mac;
 use log;
 
 
-@important_types = ('Linux native', 'Linux swap', 'DOS FAT16', 'Win98 FAT32', 'Linux RAID');
+@important_types = ('Linux native', 'ReiserFS', 'Linux swap', 'DOS FAT16', 'Win98 FAT32', 'Linux RAID');
 
 @fields2save = qw(primary extended totalsectors);
 
@@ -31,8 +31,9 @@ my %types = (
 arch() =~ /^ppc/ ? (
   0x401	=> 'Apple Partition',
   0x402	=> 'Apple HFS Partition',
-) : (),
-arch() =~ /^sparc/ ? (
+) : (
+  0x183 => 'ReiserFS',
+), arch() =~ /^sparc/ ? (
   0x1 => 'SunOS boot',
   0x2 => 'SunOS root',
   0x3 => 'SunOS swap',
@@ -177,6 +178,7 @@ arch() !~ /^sparc/ ? (
   0x1e => 'vfat',
   0x82 => 'swap',
   0x83 => 'ext2',
+  0x183=> 'reiserfs',
   0x402 => 'hfs',
   nfs  => 'nfs', #- hack
 );

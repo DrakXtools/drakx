@@ -74,6 +74,11 @@ sub hds($$) {
 	    cdie($@) unless $flags->{eraseBadPartitions};
 	    partition_table_raw::zero_MBR($hd);
 	}
+	#- special case for type overloading (eg: reiserfs is 0x183)
+	foreach (grep { isExt2($_) } partition_table::get_normal_parts($hd)) {
+	    my $type = typeOfPart($_->{device});
+	    $_->{type} = $type if $type > 0x100;
+	}
 	push @hds, $hd;
     }
     [ @hds ];
