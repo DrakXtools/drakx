@@ -1,3 +1,174 @@
+2005/03/23  Pixel  <pixel at mandrakesoft.com>
+
+	* Xconfig/monitor.pm: probe_using_X on neomagic can return rubbish, so
+	prefer probe_DMI() (even if dmi probe is quite fuzzy...)
+
+2005/03/22  Olivier Blin <oblin at mandrakesoft.com>
+
+	* share/rpmsrate: install atmel firmwares for hardware using at76* modules
+	install prism54-firmware for prism54 devices only
+	kernel 2.4 isn't needed anymore for this hardware
+	install xine-esd on Gnome desktops so that totem works when esd is
+	running
+
+	* mdk-stage1/disk.c: dirname may modify the string, so copy it first
+
+2005/03/22  Pixel  <pixel at mandrakesoft.com>
+
+	* Xconfig/resolution_and_depth.pm: perl_checker fix
+	choose the default background best matching the resolution
+
+	* standalone/keyboarddrake: we require_root_capability, so do it ASAP
+	(bugzilla #13619)
+	clean-up
+	put the question inside the interactive code
+
+	* Xconfig/main.pm: try a little harder to know if we must write the config
+	file.
+	this is still not enough though
+	put X conf read in Xconfig::main
+
+	* diskdrake/interactive.pm, lvm.pm: ensure {lv_name} is set when calling
+	check_mntpoint() from Create() (via check()) (bugzilla #14253)
+
+	* any.pm: be more explicit
+	when calling adduser, don't forget {realname} or {home} if we have them
+	(bugzilla #13805)
+	no acpi means acpi=on, not the contrary (bugzilla #13935)
+
+	* install_steps.pm: acpi=on is the default
+
+	* install_steps_interactive.pm: handle the return value of
+	any::setupBootloader() (bugzilla #13641)
+
+	* standalone/XFdrake: put X conf read in Xconfig::main
+
+	* standalone/drakauth, authentication.pm: SmartCard authentication needs a
+	(bloody) proprietary package,
+	only propose it when the package is available
+
+	* Xconfig/xfree.pm: try a little harder to know if we must write the
+	config file.
+	this is still not enough though
+
+2005/03/22  Stew Benedict  <sbenedict at mandrakesoft.com>
+
+	* install_steps_gtk.pm, share/list.i386, mouse.pm: XBox - get xpad to work
+	in install (added xset)
+
+	* harddrake/sound.pm: XBox - add options "xbox=1" for sound driver (thx
+	Thierry)
+
+2005/03/22  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* standalone/harddrake2: help perl_checker
+	install packages needed for hw support
+
+	* drakxtools.spec: 10.2-11mdk
+
+	* interactive.pm: perl_checker cleanup
+
+2005/03/22  Warly  <warly at mandrakesoft.com>
+
+	* share/rpmsrate: fix kdegraphics-common duplicate problem
+
+2005/03/22  willysr
+
+	* share/po/id.po: Fix Typo
+	Updated
+	Fix Typo
+	Updated
+
+2005/03/21  Funda Wang <fundawang at linux.net.cn>
+
+	* keyboard.pm: fixed wrongly spelled us_intl for lb locale.
+
+	* share/po/bn.po, share/po/ms.po, share/po/sk.po, share/po/gl.po,
+	share/po/pt_BR.po, share/po/th.po, share/po/et.po, share/po/ja.po,
+	share/po/hr.po, share/po/be.po, share/po/ko.po, share/po/DrakX.pot,
+	share/po/sv.po, share/po/sr.po, share/po/pl.po, share/po/fi.po,
+	share/po/he.po, share/po/ca.po, share/po/da.po, share/po/ar.po,
+	share/po/ltg.po, share/po/nb.po, share/po/ky.po, share/po/uz.po,
+	share/po/ro.po, share/po/zh_TW.po, share/po/zh_CN.po,
+	share/po/sr@Latn.po, share/po/sq.po, share/po/it.po, share/po/eu.po,
+	share/po/es.po, share/po/lv.po, share/po/hu.po, share/po/fa.po,
+	share/po/id.po, share/po/ru.po, share/po/sl.po, share/po/nn.po,
+	share/po/tr.po, share/po/mt.po, share/po/ga.po, share/po/mn.po,
+	share/po/uk.po, share/po/am.po, share/po/lt.po, share/po/cy.po,
+	share/po/tg.po, share/po/bs.po, share/po/fur.po, share/po/mk.po,
+	share/po/wa.po, install_messages.pm, share/po/is.po, share/po/hi.po,
+	share/po/af.po, share/po/az.po, share/po/pt.po, share/po/vi.po,
+	share/po/fr.po, share/po/ta.po, share/po/nl.po, share/po/de.po,
+	share/po/tl.po, share/po/eo.po, share/po/bg.po, share/po/cs.po,
+	share/po/el.po, share/po/uz@Latn.po: s/102errata/errata/. There will not
+	be an 10.2, and errara.php3
+	is allways pointed to latest errata :/
+
+2005/03/21  marco
+
+	* share/po/it.po: Successivo -> Next
+
+2005/03/21  Olivier Blin <oblin at mandrakesoft.com>
+
+	* share/rpmsrate: install kwifimanager on wireless-aware kde desktops
+
+	* mdk-stage1/network.c: rephrase message (#14813)
+
+	* mouse.pm: help perl_checker
+	use specific Synaptics settings for ALPS devices (#14512)
+
+	* detect_devices.pm: handle wireless hardware type
+	is_lan_interface: do not list wifi%d interfaces as LAN devices (#14523)
+
+	* Xconfig/xfree.pm: remove useless function to improve readability and
+	please Titi
+	use specific Synaptics settings for ALPS devices (#14512)
+	use new recommended settings for synaptics-0.14.0
+	factorize and minimal comments
+
+2005/03/21  Pixel  <pixel at mandrakesoft.com>
+
+	* do_pkgs.pm: add ->is_available
+
+	* ugtk2.pm: don't use show_all, it unhides hidden summary (bugzilla
+	#13941)
+
+	* rescue/make_partimage_save_rest_all: addmd5 to the generated iso
+	factorize
+
+	* bootloader.pm: enhance yaboot macos entry handling (mostly written by
+	cjw) (bugzilla #14642)
+
+2005/03/21  Rafael Garcia-Suarez <rgarciasuarez at mandrakesoft.com>
+
+	* install_any.pm: Don't copy RPMs from supplementary media, except
+	supplementary CDs
+	Factorize code on opening CD tray.
+	This, and the previous change, fixed bug #14850.
+	Force opening of cdrom tray when asking for a supplementary CD.
+	Allow to eject non-mounted cdroms
+
+2005/03/21  rstandtke
+
+	* share/po/de.po: some additions
+
+2005/03/21  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* detect_devices.pm (getUPS) enforce "hidups" as driver for BackPro UPSes
+
+	* drakxtools.spec: 10.2-10mdk
+
+	* standalone/drakups (add_device_wizard) set extra parameters if present
+
+2005/03/21  Warly  <warly at mandrakesoft.com>
+
+	* share/rpmsrate: install kdegraphics-common to support camera
+
+2005/03/21  willysr
+
+	* share/po/id.po: Fix typo
+	Updated
+
 2005/03/21  Olivier Blin <oblin at mandrakesoft.com>
 
 	* drakxtools.spec: force net_applet start from menu (#14858)
@@ -47164,7 +47335,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.1018 2005/03/18 20:50:49 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.1019 2005/03/21 13:54:16 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
