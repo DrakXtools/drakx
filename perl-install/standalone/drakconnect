@@ -445,12 +445,7 @@ Configure them first by clicking on 'Configure'")),1,1,0);
 					 ),0,0,0);
 	#	$list->append($_+1, "eth$_", $intf->{"eth$_"}{IPADDR}, $intf->{"eth$_"}{BOOTPROTO}, $all_cards[$_]->[1]);
 	#	$list->set_selectable($_, 0);
-	my $hbox_local = new Gtk2::HBox(0,0);
-	my $pix = gtkcreate_img("/usr/share/libDrakX/pixmaps/eth_card_mini.png");
-	$hbox_local->pack_start($pix,0,0,0);
-	$hbox_local->pack_start(new Gtk2::Label("eth$_"),0,0,0);
-	$hbox_local->show_all;
-	$notebook->append_page($vbox_local, $hbox_local);
+	$notebook->append_page($vbox_local, Gtk2::Label->new("eth$_"));
     }
     my $bbox8 = new Gtk2::HButtonBox;
     $vbox0->pack_start($bbox8,0,0,10);
