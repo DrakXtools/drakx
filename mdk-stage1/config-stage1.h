@@ -29,7 +29,6 @@
 
 #define RAMDISK_LOCATION "/install/stage2/"
 #define SLASH_LOCATION   "/sysroot"
-#define STAGE2_LOCATION  SLASH_LOCATION "/tmp/stage2"
 
 #ifdef MANDRAKE_MOVE
 #define MEM_LIMIT_MOVE 120
@@ -51,8 +50,9 @@
 #define IMAGE_LOCATION_DIR SLASH_LOCATION "/tmp/"
 #define IMAGE_LOCATION_REL "image"
 #define IMAGE_LOCATION IMAGE_LOCATION_DIR IMAGE_LOCATION_REL
-#define IMAGE_LOCATION_REAL "/tmp/image"
 #define STAGE2_LOCATION_ROOTED "/tmp/stage2"
+#define STAGE2_LOCATION  SLASH_LOCATION STAGE2_LOCATION_ROOTED
+
 #endif
 
 
