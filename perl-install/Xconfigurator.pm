@@ -271,25 +271,25 @@ What do you want to do?"), sub { translate($_[0]{text}) }, \@choices) or return;
 				      #- $card->{type} =~ /S3 ViRGE/ || #- 15bits only
 				      $card->{identifier} =~ /Rage Mobility (?:P\/M|L) / ||
 				      $card->{type} =~ /SiS/);
-    #- 3D acceleration configuration for XFree 4.0 using DRI.
+    #- 3D acceleration configuration for XFree 4 using DRI.
     $card->{DRI_glx} = ($card->{identifier} =~ /Voodoo [35]/ || $card->{identifier} =~ /Voodoo Banshee/ || #- 16bit only
 			$card->{identifier} =~ /Matrox.* G[24][05]0.*AGP/ || #- prefer 16bit with AGP only
 			$card->{identifier} =~ /8281[05].* CGC/ || #- 16bits (Intel 810 & 815).
 			#$card->{identifier} =~ /Radeon / || #- 16bits preferable ?
 			$card->{identifier} =~ /Rage 128/); #- 16 and 32 bits, prefer 16bit as no DMA.
-    #- 3D acceleration configuration for XFree 4.0 using DRI but EXPERIMENTAL that may freeze the machine (FOR INFO NOT USED).
+    #- 3D acceleration configuration for XFree 4 using DRI but EXPERIMENTAL that may freeze the machine (FOR INFO NOT USED).
     $card->{DRI_glx_EXPERIMENTAL} = ($card->{identifier} =~ /SiS.*6C?326/ || #- prefer 16bit, other ?
 				     $card->{identifier} =~ /SiS.*6C?236/ ||
 				     $card->{identifier} =~ /SiS.*630/ ||
 				     $card->{identifier} =~ /Radeon /); #- 16bits preferable ?
-    #- 3D acceleration configuration for XFree 4.0 using NVIDIA driver (TNT, TN2 and GeForce cards only).
+    #- 3D acceleration configuration for XFree 4 using NVIDIA driver (TNT, TN2 and GeForce cards only).
     $card->{NVIDIA_glx} = $cardOptions->{allowNVIDIA_rpms} && ($card->{identifier} =~ /[nN]Vidia.*T[nN]T2/ || #- TNT2 cards
 							       $card->{identifier} =~ /[nN]Vidia.*NV[56]/ ||
 							       $card->{identifier} =~ /[nN]Vidia.*Vanta/ ||
 							       $card->{identifier} =~ /[nN]Vidia.*GeForce/ || #- GeForce cards
 							       $card->{identifier} =~ /[nN]Vidia.*NV1[15]/ ||
 							       $card->{identifier} =~ /[nN]Vidia.*Quadro/);
-    #- check to use XFree 4.0 or XFree 3.3.
+    #- check to use XFree 4 or XFree 3.3.
     $card->{use_xf4} = $card->{driver} && !$card->{flags}{unsupported};
     $card->{force_xf4} = arch() =~ /ppc/; #- try to figure out ugly hack for PPC (recommend XF4 always so...)
     $card->{prefer_xf3} = !$card->{force_xf4} && ($card->{type} =~ /RIVA TNT/ ||
@@ -304,8 +304,8 @@ What do you want to do?"), sub { translate($_[0]{text}) }, \@choices) or return;
 	readlink("$prefix/etc/X11/X") =~ /XF86_/ and $card->{prefer_xf3} = !$card->{force_xf4};
     }
 
-    #- basic installation, use of XFree 4.0 or XFree 3.3.
-    my ($xf4_ver, $xf3_ver) = ("4.0.3", "3.3.6");
+    #- basic installation, use of XFree 4.1 or XFree 3.3.
+    my ($xf4_ver, $xf3_ver) = ("4.1.0", "3.3.6");
     my $xf3_tc = { text => _("XFree %s", $xf3_ver),
 		   code => sub { $card->{Utah_glx} = $card->{DRI_glx} = $card->{NVIDIA_glx} = ''; $card->{use_xf4} = '';
 				 log::l("Using XFree $xf3_ver") } };
@@ -318,7 +318,7 @@ What do you want to do?"), sub { translate($_[0]{text}) }, \@choices) or return;
 							  log::l("Using XFree $xf4_ver") } }),
 				      if_(!$card->{prefer_xf3} && $::expert, $xf3_tc)) : $xf3_tc;
     #- try to figure if 3D acceleration is supported
-    #- by XFree 3.3 but not XFree 4.0 then ask user to keep XFree 3.3 ?
+    #- by XFree 3.3 but not XFree 4 then ask user to keep XFree 3.3 ?
     if ($card->{Utah_glx}) {
 	$msg = ($card->{use_xf4} && !($card->{DRI_glx} || $card->{NVIDIA_glx}) && !$card->{prefer_xf3} ?
 _("Your card can have 3D hardware acceleration support but only with XFree %s.
@@ -357,7 +357,7 @@ NOTE THIS IS EXPERIMENTAL SUPPORT AND MAY FREEZE YOUR COMPUTER.", $xf3_ver)) . "
     #- ask the expert user to enable or not hardware acceleration support.
     if ($card->{use_xf4} && ($card->{DRI_glx} || $card->{NVIDIA_glx})) {
 	$msg = _("Your card can have 3D hardware acceleration support with XFree %s.", $xf4_ver) . "\n\n\n" . $msg;
-	$::expert or @choices = (); #- keep all user by default with XFree 4.0 including 3D acceleration.
+	$::expert or @choices = (); #- keep all user by default with XFree 4 including 3D acceleration.
 	unshift @choices, { text => _("XFree %s with 3D hardware acceleration", $xf4_ver),
 			    code => sub { log::l("Using XFree $xf4_ver with 3D hardware acceleration") } };
     }
@@ -429,7 +429,7 @@ NOTE THIS IS EXPERIMENTAL SUPPORT AND MAY FREEZE YOUR COMPUTER.", $xf3_ver)) . "
 	$card->{options_xf3}{no_pixmap_cache} = $card->{Utah_glx};
     }
 
-    #- 3D acceleration configuration for XFree 4.0 using DRI, this is enabled by default
+    #- 3D acceleration configuration for XFree 4 using DRI, this is enabled by default
     #- but for some there is a need to specify VideoRam (else it won't run).
     if ($card->{DRI_glx}) {
 	$card->{identifier} =~ /Matrox.* G[24]00/ and $card->{flags}{needVideoRam} = 'fakeVideoRam';
@@ -541,7 +541,7 @@ sub testFinalConfig {
     #- needed for bad cards not restoring cleanly framebuffer
     my $bad_card = $o->{card}{identifier} =~ /i740|ViRGE/;
     $bad_card ||= $o->{card}{identifier} =~ /Rage Mobility (?:P\/M|L) / ||  $o->{card}{identifier} =~ /3D Rage LT/;
-    $bad_card ||= $o->{card}{use_xf4}; #- TODO obsoleted to check, when using fbdev of XFree 4.0!
+    $bad_card ||= $o->{card}{use_xf4}; #- TODO obsoleted to check, when using fbdev of XFree 4!
     log::l("the graphic card does not like X in framebuffer") if $bad_card;
 
     my $verybad_card = $o->{card}{driver} eq 'i810';
