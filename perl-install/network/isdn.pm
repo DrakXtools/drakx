@@ -69,7 +69,7 @@ sub setup_capi_conf {
     my ($capi_card) = @_;
 
     $in->do_pkgs->ensure_is_installed('isdn4k-utils', "$::prefix/etc/rc.d/init.d/capi4linux"); #- capi4linux service
-    is_module_installed($capi_card->{driver}) or $in->do_pkgs->install($capi_card->{driver});
+    is_module_installed($capi_card->{driver}) or $in->do_pkgs->install($capi_card->{packages});
     if ($capi_card->{firmware} && ! -f "$::prefix/usr/lib/isdn/$capi_card->{firmware}") {
         $in->do_pkgs->install("$capi_card->{driver}-firmware");
     }
@@ -187,7 +187,7 @@ sub get_capi_card {
     } @isdn_capi or return;
 
     #- check if the capi driver is available
-    unless (is_module_installed($capi_card->{driver}) || $in->do_pkgs->check_kernel_module_packages($capi_card->{driver})) {
+    unless (is_module_installed($capi_card->{driver}) || ($capi_card->{packages} = $in->do_pkgs->check_kernel_module_packages("$capi_card->{driver}-kernel"))) {
         log::explanations("a capi driver ($capi_card->{driver}) exists to replace $isdn->{driver}, but it isn't installed and no packages provide it");
         return;
     }
