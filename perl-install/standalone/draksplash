@@ -467,7 +467,7 @@ sub make_boot_frame() {
 	  #- calculation of the 2 angle of text box and progress bar
 	  set_thm_values();
 	  my $_w = $in->wait_message('', N("Generating preview ..."));
-       my $txt_tl_yy 	= $theme{boot_conf}{tx}*$font_size{w}; 
+       my $txt_tl_xx 	= $theme{boot_conf}{tx}*$font_size{w}; 
        my $txt_tl_yy 	= $theme{boot_conf}{ty}*$font_size{h};
        my $txt_width 	= $theme{boot_conf}{tw}*$font_size{w};
        my $txt_height	= $theme{boot_conf}{th}*$font_size{h};
