@@ -407,7 +407,7 @@ sub ask_fromW {
 		$get_all->();
 		$mainw->{rwindow}->hide;
 		if (my $v = $e->{clicked_may_quit}()) {
-		    $o->{retval} = $v;
+		    $mainw->{retval} = $v;
 		    Gtk->main_quit;
 		}
 		$mainw->{rwindow}->show;
