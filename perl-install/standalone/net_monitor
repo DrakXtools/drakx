@@ -73,7 +73,7 @@ my $time_tag = Gtk->timeout_add(1000, sub {
 					my $refr = $monitor->{$intf}{referencer};
 					my $reft = $monitor->{$intf}{referencet};
 					$monitor->{sr} += $recv - $refr;
-					$monitor->{st} += $transmit - reft;
+					$monitor->{st} += $transmit - $reft;
 					push(@{$monitor->{$intf}{stack_r}}, $recv - $refr);
 					shift @{$monitor->{$intf}{stack_r}} if @{$monitor->{$intf}{stack_r}} > 300;
 					$labelr->set(formatXiB($recv - $monitor->{$intf}{initialr}));
@@ -89,7 +89,7 @@ my $time_tag = Gtk->timeout_add(1000, sub {
 				    $monitor->{$_} = 0 foreach ('sr', 'st');
 				    1;
 				});
-my $time_tag = Gtk->timeout_add(5000, \&update);
+my $time_tag2 = Gtk->timeout_add(5000, \&update);
 Gtk->main;
 Gtk->exit(0);
 
@@ -158,13 +158,21 @@ sub draw_monitor {
     $ech = $maxr + $maxt;
     $ech == 0 and $ech = 1;
     my $step=0;
+    my $color = my_gtk::gtkcolor(65535, 65535, 655);
+
+    my $gc = new Gtk::Gdk::GC($o->{darea}->window);
+    $gc->set_foreground($color); #$color
+
+#$o->{darea}->get_style->copy();
+#    print "\n##\n" . Data::Dumper->Dump([$gc],['$gc']) . "\n##\n";
+#    $o->{darea}->set_style ($style);
     foreach (@{$o->{stack_t}}) {
-	$o->{pixmap_db}->draw_rectangle($o->{darea}->style->white_gc, 1, $step, 0, 1, $_*150/$ech);
+	$o->{pixmap_db}->draw_rectangle($gc, 1, $step, 0, 1, $_*150/$ech);
 	$step++;
     }
-    my $step=0;
+    $step=0;
     foreach (@{$o->{stack_r}}) {
-	$o->{pixmap_db}->draw_rectangle($o->{darea}->style->white_gc, 1, $step, 151-$_*150/$ech, 1, $_*150/$ech);
+	$o->{pixmap_db}->draw_rectangle($gc, 1, $step, 151-$_*150/$ech, 1, $_*150/$ech);
 	$step++;
     }
     $o->{darea}->draw(undef);
