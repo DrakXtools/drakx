@@ -25,7 +25,7 @@ sub resume {}
 sub exit { 
     gtkset_mousecursor_normal(); #- for restoring a normal in any case on standalone
     my_gtk::flush();
-    c::_exit($_[0]) #- workaround 
+    c::_exit($_[1]) #- workaround 
 }
 
 sub ask_warn {

@@ -28,7 +28,7 @@ sub leave_console { Newt::Resume }
 sub suspend { Newt::Suspend }
 sub resume { Newt::Resume }
 sub end() { Newt::Finished }
-sub exit() { end; exit($_[0]) }
+sub exit() { end; exit($_[1]) }
 END { end() }
 
 sub myTextbox {
