@@ -1,3 +1,66 @@
+2004/01/20  hilbert
+
+	* share/po/zh_TW.po: This is a test commit
+
+2004/01/20  Pixel  <pixel at mandrakesoft.com>
+
+	* fs.pm: fix mount point /tmp/image for the cdrom in generated /etc/fstab
+
+	* install_steps.pm: help perl_checker seeing charsetChanged even if known
+	install_steps_* can be seen
+	kernel 2.6 .ko adaptation
+
+	* share/advertising/Makefile: CVS has all the advertisings, but only
+	upload the dwd (download) one
+
+	* modules.pm, modules/parameters.pm: kernel 2.6 .ko adaptation
+
+	* install_steps_interactive.pm: help perl_checker seeing charsetChanged
+	even if known install_steps_* can be seen
+
+	* lang.pm: disable wen and dns until fixed
+
+	* commands.pm: cleanup & kernel 2.6 .ko adaptation
+
+2004/01/20  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* network/modem.pm: handle more kppp options from new steps
+	make sections more visible in generated kppprc conf file
+	simpkify %toreplace build
+
+	* network/netconnect.pm: use checkbow's label
+	dyn hostname is a boolean
+	  - split ppp steps into account, ip, dns and gateway parameters step
+	  - offer to configure more ip, dns and gateway parameters
+	rename ppp_choose as ppp_account
+	typo fix
+	simplify
+	go to wireless step if needed
+	always go to hostname step (shared by all paths)
+	kill old cable step
+	install requested dhcp client
+	add hidden option enabling to select dhcp client
+	skip protocol step when configuring cable connection
+	cable is like lan but with dhcp
+	set connection type at one point only
+	load adsl wizard on demand
+	(get_subwizard) introduce the infrastructure that enable to load a
+	part of a wizard from another module
+	init modem data structure when manually selecting a serial port
+	fix modem dns servers reading
+	keep entered data when stepping back to dialup options step
+	do not mix modem choice and modem configuration, so that we keep
+	entered data when stepping back and forward
+	pass dynamically build data into interactive layer when configuring
+	modems
+	fix device (was broken due to the fact we kept all the data collected
+	about modems)
+
+	* install_gtk.pm: fix set_default_direction() call
+
+	* network/adsl.pm: fix wizard layer usage (b/c of new api)
+	remove useless parameter
+
 2004/01/20  Alice Lafox  <alice at lafox.com.ua>
 
 	* share/po/ru.po: part. update
@@ -23567,7 +23630,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.850 2004/01/12 16:05:23 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.851 2004/01/20 12:04:50 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
