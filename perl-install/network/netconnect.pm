@@ -84,7 +84,7 @@ sub real_main {
       my (%connections, @connection_list, $is_wireless);
       my ($modem, $modem_name, $modem_conf_read, $modem_dyn_dns, $modem_dyn_ip);
       my $cable_no_auth;
-      my ($adsl_type, @adsl_devices, $adsl_failed, $adsl_answer, %adsl_data, $adsl_data, $adsl_provider, $adsl_old_provider);
+      my ($adsl_type, @adsl_devices, $adsl_failed, $adsl_answer, %adsl_cards, %adsl_data, $adsl_data, $adsl_provider, $adsl_old_provider);
       my ($ntf_name, $gateway_ex, $up, $need_restart_network);
       my ($isdn, $isdn_name, $isdn_type, %isdn_cards, @isdn_dial_methods);
       my $my_isdn = join('', N("Manual choice"), " (", N("Internal ISDN card"), ")");
@@ -149,7 +149,7 @@ sub real_main {
                      find { $_->{device} eq $ntf_name } detect_devices::pcmcia_probe());
       };
 
-      my %adsl_devices = (
+      my %adsl_descriptions = (
                           speedtouch => N("Alcatel speedtouch USB modem"),
                           sagem => N("Sagem USB modem"),
                           bewan => N("Bewan modem"),
@@ -707,9 +707,14 @@ Take a look at http://www.linmodems.org"),
                         @adsl_devices = keys %eth_intf;
 
                         detect($modules_conf, $netc->{autodetect}, 'adsl');
-                        foreach my $modem (keys %adsl_devices) {
-                            push @adsl_devices, $modem if $netc->{autodetect}{adsl}{$modem};
+                        %adsl_cards = ();
+                        foreach my $modem_type (keys %{$netc->{autodetect}{adsl}}) {
+                            foreach my $modem (@{$netc->{autodetect}{adsl}{$modem_type}}) {
+                                my $name = join(': ', $adsl_descriptions{$modem_type}, $modem->{description});
+                                $adsl_cards{$name} = [ $modem_type, $modem ];
+                            }
                         }
+                        push @adsl_devices, keys %adsl_cards;
 
                         detect($modules_conf, $netc->{autodetect}, 'isdn');
                         if (my @isdn_modems = @{$netc->{autodetect}{isdn}}) {
@@ -720,7 +725,7 @@ Take a look at http://www.linmodems.org"),
                     },
                     name => N("ADSL configuration") . "\n\n" . N("Select the network interface to configure:"),
                     data =>  [ { label => N("Net Device"), type => "list", val => \$ntf_name, allow_empty_list => 1,
-                               list => \@adsl_devices, format => sub { $eth_intf{$_[0]} || $adsl_devices{$_[0]} || $_[0] } } ],
+                               list => \@adsl_devices, format => sub { $eth_intf{$_[0]} || $_[0] } } ],
                     post => sub {
                         my %packages = (
                                         'eci'        => [ 'eciadsl', 'missing' ],
@@ -728,16 +733,20 @@ Take a look at http://www.linmodems.org"),
                                         'speedtouch' => [ 'speedtouch', "/usr/sbin/modem_run" ],
                                        );
                         return 'adsl_unsupported_eci' if $ntf_name eq 'eci';
-                        # FIXME: check that the package installation succeeds, else retry or abort
-                        $in->do_pkgs->ensure_is_installed(@{$packages{$ntf_name}}) if $packages{$ntf_name};
-                        if ($ntf_name eq 'speedtouch') {
-                            $in->do_pkgs->ensure_is_installed_if_available('speedtouch_mgmt', "/usr/share/speedtouch/mgmt.o");
-                            return 'adsl_speedtouch_firmware' if ! -e "$::prefix/usr/share/speedtouch/mgmt.o";
-                        }
-                        $netcnx->{bus} = $netc->{autodetect}{adsl}{bewan}{bus} if $ntf_name eq 'bewan';
-                        if ($ntf_name eq 'bewan' && !$::testing) {
-                            if (my $unicorn_packages = $in->do_pkgs->check_kernel_module_packages('unicorn-kernel', 'unicorn')) {
-                                $in->do_pkgs->install(@$unicorn_packages);
+                        if (exists $adsl_cards{$ntf_name}) {
+                            my $modem;
+                            ($ntf_name, $modem) = @{$adsl_cards{$ntf_name}};
+                            # FIXME: check that the package installation succeeds, else retry or abort
+                            $in->do_pkgs->ensure_is_installed(@{$packages{$ntf_name}}) if $packages{$ntf_name};
+                            if ($ntf_name eq 'speedtouch') {
+                                $in->do_pkgs->ensure_is_installed_if_available('speedtouch_mgmt', "/usr/share/speedtouch/mgmt.o");
+                                return 'adsl_speedtouch_firmware' if ! -e "$::prefix/usr/share/speedtouch/mgmt.o";
+                            }
+                            $netcnx->{bus} = $modem->{bus} if $ntf_name eq 'bewan';
+                            if ($ntf_name eq 'bewan' && !$::testing) {
+                                if (my $unicorn_packages = $in->do_pkgs->check_kernel_module_packages('unicorn-kernel', 'unicorn')) {
+                                    $in->do_pkgs->install(@$unicorn_packages);
+                                }
                             }
                         }
                         if (exists($isdn_cards{$ntf_name})) {
@@ -836,7 +845,7 @@ and copy the mgmt.o in /usr/share/speedtouch", 'http://prdownloads.sourceforge.n
                    {
                     pre => sub {
                         # preselect right protocol for ethernet though connections:
-                        if (!exists $adsl_devices{$ntf_name}) {
+                        if (!exists $adsl_descriptions{$ntf_name}) {
                             $ethntf = $intf->{$ntf_name} ||= { DEVICE => $ntf_name };
                             $adsl_type ||= $ethntf->{BOOTPROTO} || "dhcp";
                             #- FIXME: use static instead of manual as key in %adsl_types

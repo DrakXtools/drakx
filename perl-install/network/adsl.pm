@@ -86,10 +86,10 @@ sub adsl_probe_info {
 sub adsl_detect() {
     my $adsl = {};
     require detect_devices;
-    ($adsl->{bewan}) = detect_devices::getBewan();
-    ($adsl->{speedtouch}) = detect_devices::getSpeedtouch();
-    ($adsl->{sagem}) = detect_devices::getSagem();
-    ($adsl->{eci}) = detect_devices::getECI();
+    @{$adsl->{bewan}} = detect_devices::getBewan();
+    @{$adsl->{speedtouch}} = detect_devices::getSpeedtouch();
+    @{$adsl->{sagem}} = detect_devices::getSagem();
+    @{$adsl->{eci}} = detect_devices::getECI();
     return $adsl;
 }
 
