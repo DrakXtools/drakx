@@ -961,14 +961,14 @@ sub remove_bigseldom_used {
 
 
 ################################################################################
-package interactive_pkgs;
+package pkgs_interactive;
 use run_program;
 use common;
 use pkgs;
 
 sub install_steps::do_pkgs {
     my ($o) = @_;
-    bless { o => $o }, 'interactive_pkgs';
+    bless { o => $o }, 'pkgs_interactive';
 }
 
 sub install {

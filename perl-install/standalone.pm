@@ -12,11 +12,11 @@ c::bindtextdomain('libDrakX', "/usr/share/locale");
 
 
 ################################################################################
-package interactive_pkgs;
+package pkgs_interactive;
 
 sub interactive::do_pkgs {
     my ($in) = @_;
-    bless { in => $in }, 'interactive_pkgs';
+    bless { in => $in }, 'pkgs_interactive';
 }
 
 sub install {
