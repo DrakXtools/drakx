@@ -57,7 +57,7 @@ sub mirrors {
 	local $SIG{ALRM} = sub { die "timeout" };
 	alarm 60;
 	my $distro_type = $o_distro_type || 'updates';
-	my $sub_dir = $distro_type =~ /cooker|community/ ? '' : '/' . version();
+	my $sub_dir = $distro_type =~ /cooker|community/ ? '' : '/' . version() . '/main_updates';
 	foreach (<$f>) {
 	    my ($arch, $url, $dir) = m|$distro_type([^:]*):ftp://([^/]*)(/\S*)| or next;
 	    MDK::Common::System::compat_arch($arch) or
@@ -147,7 +147,8 @@ sub getPackages {
     
     #- extract hdlist of crypto, then depslist.
     require pkgs;
-    my $update_medium = pkgs::psUsingHdlist($prefix, 'ftp', $packages, "hdlist-updates.cz", "1u", "main",
+    my $update_medium = pkgs::psUsingHdlist($prefix, 'ftp', $packages, "hdlist-updates.cz", "1u",
+					    $::o->{distro_type} =~ /cooker|community/ ? "main" : "",
 					    "Updates for Mandrakelinux " . version(), 1, $fhdlist, $pubkey);
     if ($update_medium) {
 	log::l("read updates hdlist");
