@@ -56,7 +56,7 @@ sub setupBootloader {
 
     $more++ if $b->{bootUnsafe};
 
-    if ($::beginner && $more == 1) {
+    if ($::beginner && $more >= 1) {
 	my @l = (__("First sector of drive (MBR)"), __("First sector of boot partition"));
 
 	$in->set_help('setupBootloaderBeginner') unless $::isStandalone;

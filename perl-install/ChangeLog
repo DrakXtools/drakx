@@ -6,8 +6,10 @@
 	* install2.pm: removed create boot disk and create auto install disk on
 	sparc*. force writing of /etc/conf.modules for step setupBootloader.
 	* install_steps_interactive.pm: added missing $prefix for glob_. call
-	configure_entry in setupSILO.
+	configure_entry in setupSILO. fixed cancel or None entry on setupBootloader.
 	* modules.pm: updated alias for sparc*.
+	* any.pm: fixed proprable wrong test for setupBootloader in beginner at
+	the very beginning.
 
 2000-05-24  François Pons  <fpons@mandrakesoft.com>
 

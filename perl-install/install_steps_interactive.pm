@@ -777,7 +777,7 @@ failures. Would you like to create a bootdisk for your system?"),
 #------------------------------------------------------------------------------
 sub setupLILO {
     my ($o, $more) = @_;
-    any::setupBootloader($o, $o->{bootloader}, $o->{hds}, $o->{fstab}, $o->{security}, $o->{prefix}, $more) unless $o->{lnx4win};
+    $o->{lnx4win} or any::setupBootloader($o, $o->{bootloader}, $o->{hds}, $o->{fstab}, $o->{security}, $o->{prefix}, $more) or return;
 
     eval { $o->SUPER::setupBootloader };
     if ($@) {
