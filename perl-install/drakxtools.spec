@@ -49,6 +49,7 @@ Prereq: rpm-helper
 Summary: Main Hardware Configuration/Information Tool
 Group: System/Configuration/Hardware
 Requires: %name = %version-%release
+Requires: sane-backends
 
 %description
 Contains many Mandrake applications simplifying users and
