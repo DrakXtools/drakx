@@ -136,7 +136,7 @@ change_image($boot_pic, $themes{default});
 
 my $_thm_button = Gtk2::Button->new(N("Install themes"));
 my $_B_create = gtksignal_connect(Gtk2::Button->new(N("Create new theme")), clicked => sub { system('/usr/sbin/draksplash ') });
-			  
+
 #- ******** action to take on changing combos values
 
 $combo{boot}->entry->signal_connect(changed => sub { change_image($boot_pic, $combo{boot}->entry->get_text) });
@@ -147,16 +147,15 @@ gtkadd($window,
        gtkpack_(Gtk2::VBox->new(0,0),
                 ($splash_working ?
                  (1, gtkpack_(gtkset_border_width(Gtk2::VBox->new(0, 5), 5),
-                              0, gtksignal_connect(gtkset_active(Gtk2::CheckButton->new(N("Use graphical boot")), $splash_mode), 
+                              0, gtksignal_connect(gtkset_active(Gtk2::CheckButton->new(N("Use graphical boot")), $splash_mode),
                                                clicked => sub {
                                                    $splash_mode = !$splash_mode;
-        					   if ($boot_warn && $no_bootsplash && $splash_mode) { 
-						       if ($in->ask_yesorno(N("Warning"), 
+        					   if ($boot_warn && $no_bootsplash && $splash_mode) {
+						       if ($in->ask_yesorno(N("Warning"),
 						   [ N("Your system bootloader is not in framebuffer mode. To activate graphical boot, select a graphic video mode from the bootloader configuration tool.") . "\n" .
                                                      N("Do you want to configure it now ?") ])) {
                                                            enable_framebuffer();
                                                            #- it would be nice to get available themes for new cur_res here
-                                                           $splash_mode = 1
                                                        };
                                                        $boot_warn = 0
 						    }
@@ -239,7 +238,7 @@ sub lilo_choice() {
     };
     my $err = $@;
     if ($err && $err !~ /wizcancel/) {
-        # BUG: note that the following message won't speak about the right bootloader if user is currently switching between 
+        # BUG: note that the following message won't speak about the right bootloader if user is currently switching between
         # various bootloaders and if the error occured before boot sector get overwritten by bootloader installer
         $in->ask_warn(N("Error"), 
                       [ N("Installation of %s failed. The following error occured:", $bootloader->{method}), $err ]);
@@ -329,5 +328,5 @@ Be sure your video card supports the mode you choose."),
     };
     die if $@ && $@ !~ /^wizcancel/;
     $::WizardWindow->destroy;
-    return $vga;
+    $vga;
 }
