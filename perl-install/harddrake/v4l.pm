@@ -262,7 +262,7 @@ If your card is misdetected, you can force the right tuner and card types here. 
         if ($options) {
             log::l("[harddrake::bttv] $options");
 #             log::explanations("modified file /etc/modules.conf ($options)") if $::isStandalone;
-              modules::set_options("bttv", $options);
+              modules::set_options($driver, $options);
           }
         return 1;
     }
