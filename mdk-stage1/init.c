@@ -439,7 +439,7 @@ int main(int argc __attribute__ ((unused)), char **argv __attribute__ ((unused))
 		return 0;
 
 	sync(); sync();
-	sleep(5);
+	sleep(2);
 
 	printf("sending termination signals...");
 	kill(-1, 15);
