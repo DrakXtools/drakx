@@ -563,7 +563,7 @@ sub set_append_with_key {
 	my ($_simple, $dict) = @_;
 
 	if ($val eq '') {
-	    @$dict = grep { $_ ne $key } @$dict;
+	    @$dict = grep { $_->[0] ne $key } @$dict;
 	} else {
 	    push @$dict, [ $key, $val ];
 	}
