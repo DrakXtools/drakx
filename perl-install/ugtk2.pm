@@ -34,19 +34,10 @@ $EXPORT_TAGS{all} = [ map { @$_ } values %EXPORT_TAGS ];
 use c;
 use log;
 use common;
+use mygtk2 qw(gtknew); #- do not import gtkadd which conflicts with ugtk2 version
 
 use Gtk2;
 use Gtk2::Gdk::Keysyms;
-
-unless ($::no_ugtk_init) {
-    !check_for_xserver() and print("Cannot be run in console mode.\n"), c::_exit(0);
-    $::one_message_has_been_translated and warn("N() was called from $::one_message_has_been_translated BEFORE gtk2 initialisation, replace it with a N_() AND a translate() later.\n"), c::_exit(1);
-
-    Gtk2->init;
-    c::bind_textdomain_codeset($_, 'UTF8') foreach 'libDrakX', @::textdomains;
-    $::need_utf8_i18n = 1;
-}
-Gtk2->croak_execeptions if (!$::no_ugtk_init || $::isInstall) && 0.95 < $Gtk2::VERSION;
 
 
 $border = 5;
@@ -61,7 +52,7 @@ $border = 5;
 # you're building.
 
 sub gtkdestroy                { $_[0] and $_[0]->destroy }
-sub gtkflush()                { Gtk2->main_iteration while Gtk2->events_pending }
+sub gtkflush()                { mygtk2::flush() }
 sub gtkhide                   { $_[0]->hide; $_[0] }
 sub gtkmove                   { $_[0]->window->move($_[1], $_[2]); $_[0] }
 sub gtkpack                   { gtkpowerpack(1, 1, @_) }
@@ -288,7 +279,7 @@ sub create_scrolled_window {
     $W->set_left_margin(6) if ref($W) =~ /Gtk2::TextView/;
     $W->show;
     if (ref($W) =~ /Gtk2::TextView|Gtk2::TreeView/) {
-    	gtkadd(gtkset_shadow_type(Gtk2::Frame->new, 'in'), $w);
+    	gtknew('Frame', shadow_type => 'in', child => $w);
     } else {
 	$w;
     }
@@ -305,7 +296,7 @@ sub create_box_with_title {
     my ($o, @l) = @_;
 
     my $nbline = sum(map { round(length($_) / 60 + 1/2) } map { split "\n" } @l);
-    my $box = Gtk2::VBox->new(0,0);
+    my $box = gtknew('VBox');
     if ($nbline == 0) {
 	$o->{box_size} = 0;
 	return $box;
@@ -313,26 +304,26 @@ sub create_box_with_title {
     $o->{box_size} = n_line_size($nbline, 'text', $box);
     if (@l <= 2 && $nbline > 4) {
 	$o->{icon} && !$::isWizard and 
-	  eval { gtkpack__($box, gtkset_border_width(gtkpack_(Gtk2::HBox->new(0,0), 1, gtkcreate_img($o->{icon})),5)) };
+	  eval { gtkpack__($box, gtknew('HBox', border_width => 5, children_loose => [ gtkcreate_img($o->{icon}) ])) };
 	my $wanted = $o->{box_size};
 	$o->{box_size} = min(200, $o->{box_size});
 	my $has_scroll = $o->{box_size} < $wanted;
 
-	my $wtext = Gtk2::TextView->new;
+	chomp(my $text = join("\n", @l));
+	my $wtext = gtknew('TextView', text => $text);
 	$wtext->set_left_margin(3);
 	$wtext->can_focus($has_scroll);
 	$wtext->signal_connect(button_press_event => sub { 1 }); #- disable selecting text and popping the contextual menu (GUI team says it's *horrible* to be able to do select text!)
-	chomp(my $text = join("\n", @l));
-	my $scroll = create_scrolled_window(gtktext_insert($wtext, $text));
-     my $width = 400;
-     $scroll->signal_connect(realize => sub {
+	my $scroll = create_scrolled_window($wtext);
+	my $width = 400;
+	$scroll->signal_connect(realize => sub {
                                 my $layout = $wtext->create_pango_layout($text);
                                 $layout->set_width(($width - 10) * Gtk2::Pango->scale);
                                 $wtext->set_size_request($width,  min(200, ($layout->get_pixel_size)[1] + 10));
                                 $scroll->set_size_request($width, min(200, ($layout->get_pixel_size)[1] + 10));
                                 $o->{rwindow}->queue_resize;
                             });
-     $scroll->set_size_request($width, 200);
+	$scroll->set_size_request($width, 200);
 	gtkpack_($box, $o->{box_allow_grow} || 0, $scroll);
     } else {
 	my $a = !$::no_separator;
@@ -344,32 +335,32 @@ sub create_box_with_title {
      };
 	if ($o->{icon} && (!$::isWizard || $::isInstall)) {
 	    gtkpack__($box,
-		      gtkpack_(Gtk2::HBox->new(0,0),
-			       0, gtkset_size_request(Gtk2::VBox->new(0,0), 15, 0),
+		      gtknew('HBox', children => [
+			       0, gtknew('VBox', width => 15),
 			       0, eval { gtkcreate_img($o->{icon}) },
-			       0, gtkset_size_request(Gtk2::VBox->new(0,0), 15, 0),
-			       1, gtkpack_($o->{box_title} = Gtk2::VBox->new(0,0),
-					   1, Gtk2::HBox->new(0,0),
+			       0, gtknew('VBox', width => 15),
+			       1, $o->{box_title} = gtknew('VBox', children_loose => [
+					 gtknew('HBox', children => [
 					   (map {
 					       my $w = $new_label->($_);
 					       $::isWizard and $w->set_justify("left");
 					       (0, $w);
 					   } @l),
-					   1, Gtk2::HBox->new(0,0),
-					  )
-			      ),
-		      if_($a, Gtk2::HSeparator->new)
+					   1, gtknew('HBox'),
+					  ]) ])
+		      ]),
+		      if_($a, gtknew('HSeparator'))
 		     );
 	} else {
 	    gtkpack__($box,
-		      if_($::isWizard, gtkset_size_request(Gtk2::Label->new, 0, 10)),
+		      if_($::isWizard, gtknew('Label', height => 10)),
 		      (map {
 			  my $w = $new_label->($_);
-			  $::isWizard ? gtkpack__(Gtk2::HBox->new(0,0), gtkset_size_request(Gtk2::Label->new, 20, 0), $w)
+			  $::isWizard ? gtknew('HBox', children_tight => [ gtknew('Label', width => 20), $w ])
 			              : $w;
 		      } @l),
-		      if_($::isWizard, gtkset_size_request(Gtk2::Label->new, 0, 15)),
-		      if_($a, Gtk2::HSeparator->new)
+		      if_($::isWizard, gtknew('Label', height => 15)),
+		      if_($a, gtknew('HSeparator')),
 		     );
 	}
     }
@@ -377,13 +368,17 @@ sub create_box_with_title {
 
 sub _create_dialog {
     my ($title, $o_options) = @_;
-    my $dialog = Gtk2::Dialog->new;
-    $dialog->set_title($title);
-    $dialog->set_position('center-on-parent');  # center-on-parent doesn't work
+    my $options = $o_options || {};
+
+    #- keep compatibility with "transient" now called "transient_for"
+    $options->{transient_for} = delete $options->{transient} if $options->{transient};
+
+    my $dialog = gtknew('Dialog', title => $title, 
+			position_policy => 'center-on-parent', # center-on-parent doesn't work
+			modal => 1,
+			%$options,
+			);
     may_set_icon($dialog, $wm_icon || $::Wizard_pix_up || "wiz_default_up.png");
-    $dialog->set_size_request($o_options->{width} || -1, $o_options->{height} || -1);
-    $dialog->set_modal(1);
-    $dialog->set_transient_for($o_options->{transient}) if $o_options->{transient};
     $dialog;
 }
 
@@ -396,25 +391,25 @@ sub create_dialog {
     $dialog->set_border_width(10);
     my $text = ref($label) ? $label : $o_options->{use_markup} ? gtkset_markup(Gtk2::WrappedLabel->new, $label) : Gtk2::WrappedLabel->new($label);
     gtkpack($dialog->vbox,
-            gtkpack_(Gtk2::HBox->new,
+            gtknew('HBox', children => [
                      if_($o_options->{stock},
                          0, Gtk2::Image->new_from_stock($o_options->{stock}, 'dialog'),
-                         0, Gtk2::Label->new("   "),
+                         0, gtknew('Label', text => "   "),
                         ),
                      1, $o_options->{scroll} ? create_scrolled_window($text, [ 'never', 'automatic' ]) : $text,
-                    ),
+                    ]),
            );
 
     if ($o_options->{cancel}) {
-	my $button2 = Gtk2::Button->new(N("Cancel"));
-	$button2->signal_connect(clicked => sub { $ret = 0; $dialog->destroy; Gtk2->main_quit });
-	$button2->can_default(1);
-	$dialog->action_area->pack_start($button2, 1, 1, 0);
+	$dialog->action_area->pack_start(
+	    gtknew('Button', text => N("Cancel"),
+		   clicked => sub { $ret = 0; $dialog->destroy; Gtk2->main_quit },
+		   can_default => 1), 
+	    1, 1, 0);
     }
 
-    my $button = Gtk2::Button->new(N("Ok"));
-    $button->can_default(1);
-    $button->signal_connect(clicked => sub { $ret = 1; $dialog->destroy; Gtk2->main_quit });
+    my $button = gtknew('Button', text => N("Ok"), can_default => 1,
+			clicked => sub { $ret = 1; $dialog->destroy; Gtk2->main_quit });
     $dialog->action_area->pack_start($button, 1, 1, 0);
     $button->grab_default;
 
@@ -511,21 +506,21 @@ sub create_okcancel {
         $cancel = $::isWizard ? N("Previous") : N("Cancel");
     }
     my $ok = defined $o_ok ? $o_ok : $::isWizard ? ($::Wizard_finished ? N("Finish") : N("Next")) : N("Ok");
-    my $bok = $ok && gtksignal_connect($w->{ok} = Gtk2::Button->new($ok), clicked => $w->{ok_clicked} || sub { $w->{retval} = 1; Gtk2->main_quit });
+    my $bok = $ok && ($w->{ok} = gtknew('Button', text => $ok, clicked => $w->{ok_clicked} || sub { $w->{retval} = 1; Gtk2->main_quit }));
     my $bprev;
     if ($cancel) {
-        $bprev = gtksignal_connect($w->{cancel} = Gtk2::Button->new($cancel), clicked => $w->{cancel_clicked} || 
+        $bprev = $w->{cancel} = gtknew('Button', text => $cancel, clicked => $w->{cancel_clicked} || 
                                    sub { log::l("default cancel_clicked"); undef $w->{retval}; Gtk2->main_quit });
     }
-    $w->{wizcancel} = gtksignal_connect(Gtk2::Button->new(N("Cancel")), clicked => sub { die 'wizcancel' }) if $::isWizard && !$::isInstall;
-    my $f = sub { $w->{buttons}{$_[0][0]} = gtksignal_connect(Gtk2::Button->new($_[0][0]), clicked => $_[0][1]) };
+    $w->{wizcancel} = gtknew('Button', text => N("Cancel"), clicked => sub { die 'wizcancel' }) if $::isWizard && !$::isInstall;
+    my $f = sub { $w->{buttons}{$_[0][0]} = gtknew('Button', text => $_[0][0], clicked => $_[0][1]) };
     my @left  = ((map { $f->($_) } grep {  $_->[2] && !$_->[3] } @other),
                   map { $f->($_) } grep { !$_->[2] && !$_->[3] } @other);
     my @right = ((map { $f->($_) } grep {  $_->[2] &&  $_->[3] } @other),
                   map { $f->($_) } grep { !$_->[2] &&  $_->[3] } @other);
     # we put space to group buttons in two packs (but if there's only one when not in wizard mode)
     # but in the installer where all windows run in wizard mode because of design even when not in a wizard step
-    $bprev = Gtk2::Label->new if !$cancel && $::Wizard_no_previous && !@left && !@right;
+    $bprev = gtknew('Label') if !$cancel && $::Wizard_no_previous && !@left && !@right;
     if ($::isWizard) {
         # wizard mode: order is cancel/left_extras/white/right_extras/prev/next
         unshift @left, $w->{wizcancel} if !$::isInstall;
@@ -533,27 +528,26 @@ sub create_okcancel {
     } else { 
         # normal mode: cancel/ok button follow GNOME's HIG
         unshift @left, $bprev;
-        push @left, Gtk2::Label->new if $ok && $cancel; # space buttons but if there's only one button
+        push @left, gtknew('Label') if $ok && $cancel; # space buttons but if there's only one button
         push @right, $bok;
     }
 
-    gtkpack(Gtk2::VBox->new,
-            Gtk2::HSeparator->new,
-            gtkpack(Gtk2::HBox->new,
-                    (map {
-                        gtkpack(
-                                create_hbox($_->[1]),
-                                (map {
-                                    $_->can_default($::isWizard);
-                                    $_;
-                                } grep { $_ } @{$_->[0]})
-                               );
+    gtknew('VBox', children_loose => [
+            gtknew('HSeparator'),
+            gtknew('HBox', children_loose => [
+                   map {
+		       gtknew('HButtonBox', layout => $_->[1],
+			      children_loose => [
+				  map {
+				      $_->can_default($::isWizard);
+				      $_;
+				  } grep { $_ } @{$_->[0]} 
+			      ]);
                     } ([ \@left, 'start' ],
                        [ \@right,  'end' ],
                       )
-                    )
-                   ),
-           );
+                    ]),
+           ]);
 }
 
 sub _setup_paned {
@@ -620,74 +614,9 @@ sub may_set_icon {
     }
 }
 
-# gtktext_insert() can be used with any of choose one of theses styles:
-# - no tags:
-#   gtktext_insert($textview, "My text..");
-# - anonymous tags:
-#   gtktext_insert($textview, [ [ 'first text',  { 'foreground' => 'blue', 'background' => 'green', ... } ],
-#			        [ 'second text' ],
-#		                [ 'third', { 'font' => 'Serif 15', ... } ],
-#                               ... ]);
-# - named tags:
-#   $textview->{tags} = {
-#                        'blue_green' => { 'foreground' => 'blue', 'background' => 'green', ... },
-#                        'big_font' => { 'font' => 'Serif 35', ... },
-#                       }
-#   gtktext_insert($textview, [ [ 'first text',  'blue_green' ],
-#		                [ 'second', 'big_font' ],
-#                               ... ]);
-# - mixed anonymous and named tags:
-#   $textview->{tags} = {
-#                        'blue_green' => { 'foreground' => 'blue', 'background' => 'green', ... },
-#                        'big_font' => { 'font' => 'Serif 35', ... },
-#                       }
-#   gtktext_insert($textview, [ [ 'first text',  'blue_green' ],
-#			        [ 'second text' ],
-#		                [ 'third', 'big_font' ],
-#		                [ 'fourth', { 'font' => 'Serif 15', ... } ],
-#                               ... ]);
-sub gtktext_insert {
-    my ($textview, $t, %opts) = @_;
-    my $buffer = $textview->get_buffer;
-    $buffer->{tags} ||= {};
-    $buffer->{gtk_tags} ||= {};
-    my $gtk_tags = $buffer->{gtk_tags};
-    my $tags = $buffer->{tags};
-    if (ref($t) eq 'ARRAY') {
-        $opts{append} or $buffer->set_text('');
-        foreach my $token (@$t) {
-            my ($item, $tag) = @$token;
-            my $iter1 = $buffer->get_end_iter;
-            if ($item =~ /^Gtk2::Gdk::Pixbuf/) {
-                $buffer->insert_pixbuf($iter1, $item);
-                next;
-            }
-            if ($tag) {
-                if (ref($tag)) {
-                    # use anonymous tags
-                    $buffer->insert_with_tags($iter1, $item, $buffer->create_tag(undef, %$tag));
-                } else {
-                    # fast text insertion:
-                    # since in some contexts (eg: localedrake, rpmdrake), we use quite a lot of identical tags,
-                    # it's much more efficient and less memory pressure to use named tags
-                    $gtk_tags->{$tag} ||= $buffer->create_tag($tag, %{$tags->{$token->[1]}});
-                    $buffer->insert_with_tags($iter1, $item, $gtk_tags->{$tag});
-                }
-            } else {
-                $buffer->insert($iter1, $item);
-            }
-        }
-    } else {
-        $buffer->set_text($t);
-    }
-    #- the following line is needed to move the cursor to the beginning, so that if the
-    #- textview has a scrollbar, it won't scroll to the bottom when focusing (#3633)
-    $buffer->place_cursor($buffer->get_start_iter);
-    $textview->set_wrap_mode($opts{wrap_mode} || 'word');
-    $textview->set_editable($opts{editable} || 0);
-    $textview->set_cursor_visible($opts{visible} || 0);
-    $textview;
-}
+sub gtktext_insert { &mygtk2::_text_insert }
+sub icon_paths { &mygtk2::_icon_paths }
+sub add_icon_path { &mygtk2::add_icon_path }
 
 # extracts interesting font metrics for a given widget
 sub gtkfontinfo {
@@ -760,7 +689,7 @@ sub fill_tiled {
 
 sub add2notebook {
     my ($n, $title, $book) = @_;
-    $n->append_page($book, gtkshow(Gtk2::Label->new($title)));
+    $n->append_page($book, gtkshow(gtknew('Label', text => $title)));
     $book->show;
 }
 
@@ -903,16 +832,6 @@ sub gtkset_background {
     $root->draw_rectangle($gc, 1, 0, 0, $w, $h);
 }
 
-sub add_icon_path { push @icon_paths, @_ }
-sub icon_paths() {
-   (@icon_paths, (exists $ENV{SHARE_PATH} ? ($ENV{SHARE_PATH}, "$ENV{SHARE_PATH}/icons", "$ENV{SHARE_PATH}/libDrakX/pixmaps") : ()),
-    "/usr/lib/libDrakX/icons", "pixmaps", 'standalone/icons', '/usr/share/rpmdrake/icons');
-}  
-add_icon_path(@icon_paths,
-	      exists $ENV{SHARE_PATH} ? "$ENV{SHARE_PATH}/libDrakX/pixmaps" : (),
-	      '/usr/lib/libDrakX/icons', 'standalone/icons');
-
-
 
 # -=-=---=-=---=-=---=-=---=-=---=-=---=-=---=-=---=-=---=-=---=-=---=-=---
 #                 toplevel window creation helper
@@ -946,8 +865,8 @@ sub new {
 
 	if ($::isInstall) {
 	    gtkadd($o->{rwindow}, 
-		   gtkadd(gtkset_shadow_type(Gtk2::Frame->new(undef), 'out'),
-			  $o->{window} = gtkset_border_width(gtkset_shadow_type(Gtk2::Frame->new(undef), 'none'), 3)
+		   gtknew('Frame', shadow_type => 'out', child =>
+			  $o->{window} = gtknew('Frame', shadow_type => 'none', border_width => 3)
 			 ));
 	} else {
 	    $o->{window} = $o->{rwindow};
@@ -957,11 +876,10 @@ sub new {
 	$o->{rwindow}->set_transient_for($o->{transient}) if $o->{transient} && $o->{transient} =~ /Gtk2::Window/;
 
     } else {
-	$o->{rwindow} = $o->{window} = Gtk2::VBox->new(0,0);
-	$o->{window}->set_border_width($::Wizard_splash ? 0 : 10);
+	$o->{rwindow} = $o->{window} = gtknew('VBox', border_width => $::Wizard_splash ? 0 : 10);
 	set_main_window_size($o);
 
-	$::WizardTable ||= Gtk2::VBox->new(0, 0);
+	$::WizardTable ||= gtknew('VBox');
 
 	if (!$::Plug && $o->{isEmbedded}) {
 	    $::Plug = $::WizardWindow = gtkshow(Gtk2::Plug->new($::XID));
@@ -970,7 +888,7 @@ sub new {
 	    gtkadd($::Plug, $::WizardTable);
 	} elsif (!$::WizardWindow) {
 	    $::WizardWindow = _create_window($title);
-	    gtkadd($::WizardWindow, gtkadd(gtkset_shadow_type(Gtk2::Frame->new, 'out'), $::WizardTable));
+	    gtkadd($::WizardWindow, gtknew('Frame', shadow_type => 'out', child => $::WizardTable));
 
 	    if ($::isInstall) {
 		$::WizardWindow->signal_connect(key_press_event => sub {
@@ -1140,7 +1058,7 @@ sub _ask_warn($@) {
     my ($o, @msgs) = @_;
     gtkadd($o->{window},
 	  gtkpack($o->create_box_with_title(@msgs),
-		 gtksignal_connect(my $w = Gtk2::Button->new(N("Ok")), "clicked" => sub { Gtk2->main_quit }),
+		  my $w = gtknew('Button', text => N("Ok"), clicked => sub { Gtk2->main_quit }),
 		 ),
 	  );
     $w->grab_focus;
@@ -1205,16 +1123,16 @@ sub ask_browse_tree_info {
     $textcolumn->set_max_width(200);
 
     gtkadd($w->{window}, 
-	   gtkpack_(Gtk2::VBox->new(0,5),
+	   gtknew('VBox', spacing => 5, children => [
 		    0, $common->{message},
-		    1, gtkpack(Gtk2::HBox->new(0,0),
+		    1, gtknew('HBox', children_loose => [
 			       create_scrolled_window($tree),
-			       gtkadd(Gtk2::Frame->new(N("Info")),
-				      create_scrolled_window(my $info = Gtk2::TextView->new),
-				     )),
-		    0, my $box1 = Gtk2::HBox->new(0,15),
-		    0, my $box2 = Gtk2::HBox->new(0,10),
-		   ));
+			       gtknew('Frame', text => N("Info"), child =>
+				      create_scrolled_window(my $info = gtknew('TextView')),
+				     ) ]),
+		    0, my $box1 = gtknew('HBox', spacing => 15),
+		    0, my $box2 = gtknew('HBox', spacing => 10),
+		   ]));
     #gtkpack__($box2, my $toolbar = Gtk2::Toolbar->new('horizontal', 'icons'));
     gtkpack__($box2, my $toolbar = Gtk2::Toolbar->new);
 
@@ -1222,23 +1140,22 @@ sub ask_browse_tree_info {
     @l = reverse @l if !$::isInstall;
     my @buttons = map {
 	my ($t, $val) = @$_;
-	$box2->pack_end(my $w = gtksignal_connect(Gtk2::Button->new($t), clicked => sub {
-						      $w->{retval} = $val;
-						      Gtk2->main_quit;
-						  }), 0, 1, 20);
+	$box2->pack_end(my $w = gtknew('Button', text => $t, clicked => sub {
+					   $w->{retval} = $val;
+					   Gtk2->main_quit;
+				       }), 0, 1, 20);
 	$w;
     } @l;
     @buttons = reverse @buttons if !$::isInstall;    
 
-    gtkpack__($box2, gtksignal_connect(Gtk2::Button->new(N("Help")), clicked => sub {
+    gtkpack__($box2, gtknew('Button', text => N("Help"), clicked => sub {
 					   ask_warn(N("Help"), $common->{interactive_help}->());
 				       })) if $common->{interactive_help};
 
     if ($common->{auto_deps}) {
-	gtkpack__($box1, gtksignal_connect(gtkset_active(Gtk2::CheckButton->new($common->{auto_deps}), $common->{state}{auto_deps}),
-					clicked => sub { invbool \$common->{state}{auto_deps} }));
+	gtkpack__($box1, gtknew('CheckButton', text => $common->{auto_deps}, val => \$common->{state}{auto_deps}));
     }
-    $box1->pack_end(my $status = Gtk2::Label->new, 0, 1, 20);
+    $box1->pack_end(my $status = gtknew('Label'), 0, 1, 20);
 
     $w->{window}->set_size_request(map { $_ - 2 * $border - 4 } $::windowwidth, $::windowheight) if !$::isInstall;
     $buttons[0]->grab_focus;
@@ -1523,7 +1440,7 @@ sub gtk_TextView_get_log {
 sub gtk_new_TextView_get_log {
     my ($command, $filter_output, $when_command_is_over) = @_;
 
-    my $log_w = gtkset_editable(Gtk2::TextView->new, 0);
+    my $log_w = gtknew('TextView', editable => 0);
     my $log_scroll = create_scrolled_window($log_w);  #- $log_scroll is a frame, not a ScrolledWindow, so giving $log_scroll->child
     my $pid = gtk_TextView_get_log($log_w, $log_scroll->child, $command, $filter_output, $when_command_is_over) or return;
     $log_scroll, $pid;
@@ -1697,16 +1614,14 @@ sub set {
 package Gtk2::WrappedLabel;
 sub new {
     my ($_type, $o_text, $o_align) = @_;
-    ugtk2::gtkset_alignment(ugtk2::gtkset_line_wrap(Gtk2::Label->new($o_text || ''), 1), $o_align || 0, 0.5);
+    mygtk2::gtknew('WrappedLabel', text => $o_text || '', alignment => [ $o_align || 0, 0.5 ]);
 }
 
 
 package Gtk2::Entry;
 sub new_with_text {
-    my ($_class, @text) = @_;
-    my $entry = Gtk2::Entry->new;
-    @text and $entry->set_text(@text);
-    return $entry;
+    my ($_class, $o_text) = @_;
+    mygtk2::gtknew('Entry', text => $o_text);
 }
 
 
