@@ -19,6 +19,7 @@ use common qw(:system :file);
 use interactive;
 use log;
 use c;
+use detect_devices;
 
 local $_ = join '', @ARGV;
 
@@ -162,11 +163,14 @@ my @configured_devices = map { /ifcfg-(\S+)/; $1 } `ls /etc/sysconfig/network-sc
 my %aliased_devices; (/^alias\s+(eth[0-9])\s+(\S+)/) and ($aliased_devices{$1} = $2) foreach (`cat /etc/modules.conf`);
 my @cards_to_ignore = (); #= @{netconnect::configured_devices};
 log::l("Information from netconnect: ignoring card $_\n") foreach (@cards_to_ignore);
+my @all_cards_getnet = detect_devices::getNet();
 my @all_cards;
-foreach my $dev (keys %aliased_devices)
-  { grep(/$dev/,@cards_to_ignore) or (push @all_cards, "Interface $dev (using module $aliased_devices{$dev})") };
+foreach my $card (@all_cards_getnet)
+{
+    next if grep(/$card/, @cards_to_ignore);
+    push @all_cards, exists $aliased_devices{$card} ? "Interface $card (using module $aliased_devices{$card})" : "Interface $card";
+}
 
- 
 #  print "pci_detection: "; print ">".$_->[2]."< " foreach (@pci_ethernet_cards);
 #  print "\nconfigured: "; print ">".$_."< " foreach (@configured_devices);
 #  print "\nactive: "; print ">".$_."< " foreach (@active_devices);
@@ -263,7 +267,6 @@ my @chain_rules;
 #		  _("The local network is about to be configured.\n") .
 #		    "You will then be able to connect other computers to this network, with automatic ".
 #		    "DHCP configuration."), 1) or $in->exit(0);
-
 
 #- **********************************
 #- * 2nd step: configure
@@ -455,7 +458,7 @@ subnet $lan_address.0 netmask 255.255.255.0 {
 	option domain-name "homelan.org";
 	option domain-name-servers $lan_address.1;
 
-	range dynamic-bootp $lan_address.16 $lan_address.255;
+	range dynamic-bootp $lan_address.16 $lan_address.253;
 	default-lease-time 21600;
 	max-lease-time 43200;
 }
