@@ -495,7 +495,7 @@ sub getOtherDeps($$) {
       or log::l("other depslist has not same package as hdlist file");
 }
 
-sub getDeps($) {
+sub getDeps {
     my ($prefix, $packages) = @_;
 
     #- this is necessary for urpmi.
@@ -684,7 +684,7 @@ sub readCompssUsers {
 }
 
 sub setSelectedFromCompssList {
-    my ($packages, $compssUsersChoice, $min_level, $max_size, $install_class) = @_;
+    my ($packages, $compssUsersChoice, $min_level, $max_size) = @_;
     $compssUsersChoice->{TRUE} = 1; #- ensure TRUE is set
     my $nb = selectedSize($packages);
     foreach my $p (sort { packageRate($b) <=> packageRate($a) } values %{$packages->{names}}) {
@@ -725,6 +725,74 @@ sub saveSelected {
 sub restoreSelected {
     my ($packages, $l, $flags) = @{$_[0]};
     mapn { pkgs::packageSetFlagSelected(@_) } $l, $flags;
+}
+
+sub computeGroupSize {
+    my ($packages, $min_level) = @_;
+
+    sub inside {
+	my ($l1, $l2) = @_;
+	my $i = 0;
+	return if @$l1 > @$l2;
+	foreach (@$l1) {
+	    my $c;
+	    while ($c = $l2->[$i++] cmp $_ ) {
+		return if $c == 1 || $i > @$l2;
+	    }
+	}
+	1;
+    }
+
+    sub or_ify {
+	my ($first, @other) = @_;
+	my @l = split('\|\|', $first);
+	foreach (@other) {
+	    @l = map {
+		my $n = $_;
+		map { "$_&&$n" } @l;
+	    } split('\|\|');
+	}
+	@l;
+    }
+    sub or_clean {
+	my (@l) = map { [ sort split('&&') ] } @_;
+	my @r;
+	B: while (@l) {
+	    my $e = shift @l;
+	    foreach (@r, @l) {
+		inside($e, $_) and next B;
+	    }
+	    push @r, $e;
+	}
+	join("\t", map { join('&&', @$_) } @r);
+    }
+    my (%group, %memo);
+
+    foreach my $p (values %{$packages->{names}}) {
+	my ($rate, @flags) = packageRateRFlags($p);
+	next if !$rate || $rate < $min_level;
+
+	my $flags = join("\t", @flags = or_ify(@flags));
+	$group{$_} = $flags =~ /SYSTEM/ ? 'SYSTEM' : ($memo{$flags} ||= or_clean(@flags));
+
+	#- determine the packages that will be selected when selecting $p. the packages are not selected.
+	my %newSelection;
+	selectPackage($packages, $p, 0, \%newSelection);
+	foreach (grep { $newSelection{$_} } keys %newSelection) {
+	    my $s = $group{$_} || do {
+		$packages->{names}{$_}[$VALUES] =~ /\t(.*)/;
+		join("\t", or_ify(split("\t", $1)));
+	    };
+	    my $m = "$flags\t$s";
+	    $group{$_} = $m =~ /SYSTEM/ ? 'SYSTEM' : ($memo{$m} ||= or_clean(@flags, split("\t", $s)));
+	}
+    }
+    my (%sizes);
+    while (my ($k, $v) = each %group) {
+	$sizes{$v} += packageSize($packages->{names}{$k});
+    }
+    print formatXiB($sizes{$_}) , " => $_ ", join(",", @{$pkgs{$_}}), "\n" foreach sort keys %sizes;
+    \%sizes;
 }
 
 
@@ -1066,7 +1134,7 @@ sub selectPackagesToUpgrade($$$;$$) {
 	    close OUTPUT;
 	    open STDIN, "<&INPUT_CHILD";
 	    open STDOUT, ">&OUTPUT_CHILD";
-	    exec if_($ENV{LD_LOADER}, $ENV{LD_LOADER}), "parsehdlist", "--interactive", map { "/tmp/$_->{hdlist}" } values %{$packages->{mediums}}
+	    exec "parsehdlist", "--interactive", map { "/tmp/$_->{hdlist}" } values %{$packages->{mediums}}
 	      or c::_exit(1);
 	}
 
