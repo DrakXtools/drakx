@@ -178,7 +178,7 @@ sub makeprinterentry {
     } elsif ($ppd =~ /Foomatic\s*\+\s*gimp\s*\-\s*print/im) {
 	# GhostScript + Foomatic driver
 	$gimpprintqueue = 1;
-	$ppd =~ /\-sModel=((escp2|pcl|bjc|lexmark)\-[^\s\"']*)/im and
+	$ppd =~ /\-sModel=((escp2|pcl|bjc|lexmark)\-[^\s\"\']*)/im and
 	$gimpprintdriver = $1;
     }
     if ($gimpprintqueue) {
@@ -211,10 +211,12 @@ sub makeprinterentry {
 
 sub findconfigfiles() {
     my @configfilenames = (if_(-d "$::prefix/usr/lib/gimp/1.2", ".gimp-1.2/printrc"),
-                           if_(-d "$::prefix/usr/lib/gimp/1.3", ".gimp-1.3/printrc"));
+                           if_(-d "$::prefix/usr/lib/gimp/1.3", ".gimp-1.3/printrc"),
+                           if_(-d "$::prefix/usr/lib/gimp/2.0", ".gimp-2.0/printrc"));
     return () unless @configfilenames;
     my @filestotreat;
     foreach (&list_passwd()) {
+	last if ($#filestotreat > 50);
         my ($username, undef, $uid, $gid, undef, undef, undef, $homedir) = @$_;
         next if 0 < $uid && $uid < 500 || $username eq "nobody";
         foreach my $file (@configfilenames) {
