@@ -41,6 +41,8 @@
 *** make tool names be black or blue (like in rpmdrake & harddrake2 guies) (#2695)
 *** hide non executable programs instead of warning at runtime if program isn't executable
 *** make more program being options rather than depandancies (ie like rpmdrake and drakwizard)
+*** add scrollbars if below 800x600
+*** add scrollbars for too big translated messages
 ** harddrake: colorize the internal help
 ** rpmdrake
 *** save mode (sort by group, mdk choice, ...)
@@ -50,12 +52,16 @@
 ** main package updates:
 *** rpm-4.2
 *** kernel-2.6 (if availlable and stabilized: not probable) ?
+    at least, keep kernel-2.4.x
 ** add new packages:
 *** kernel-mosix
-*** dvb packages
+*** dvb packages: vcr, vdr, ...
 ** icewm/windowmaker/other wm
 *** export BROWSER like gnome/kde (look at /etc/gnome/gnomerc)
 
 * hardware support
 ** kernel: update alsa, bttv, dvb & saa7134 drivers for better hardware support
+   add "REGISTER ^dvb/adapter[0-9]+/[^/]+$ PERMISSIONS root.video 0660" to devfsd
+** add cx88 driver from http://bytesex.org/snapshot
 ** isa detection/probing in ldetect ? (#118, #497) => need some old hw in order to test
+   probably not
