@@ -458,7 +458,7 @@ sub installPackages {
     my $text = Gtk2::Label->new;
     my ($advertising, $change_time, $i);
     my $show_advertising if 0;
-    $show_advertising = to_bool(@install_any::advertising_images) && $o->{locale}{lang} =~ /en|fr|es|de/ if !defined $show_advertising;
+    $show_advertising = to_bool(@install_any::advertising_images) if !defined $show_advertising;
     my ($msg, $msg_time_remaining, $msg_time_total) = map { Gtk2::Label->new($_) } '', (N("Estimating")) x 2;
     my ($progress, $progress_total) = map { Gtk2::ProgressBar->new } (1..2);
     gtkadd($w->{window}, my $box = Gtk2::VBox->new(0,10));
