@@ -430,8 +430,7 @@ sub addToBeDone(&$) {
 sub setAuthentication {
     my ($o) = @_;
     my ($shadow, $ldap, $nis, $winbind, $winpass) = @{$o->{authentication} || {}}{qw(shadow LDAP NIS winbind winpass)};
-    my $p = $o->{prefix};
-    any::enableShadow($p) if $shadow;
+    any::enableShadow() if $shadow;
     if ($ldap) {
 	$o->pkg_install(qw(chkauth openldap-clients nss_ldap pam_ldap));
 	run_program::rooted($o->{prefix}, "/usr/sbin/chkauth", "ldap", "-D", $o->{netc}{LDAPDOMAIN}, "-s", $ldap);
@@ -445,9 +444,9 @@ sub setAuthentication {
 	substInFile {
 	    $_ = "#~$_" unless /^#/;
 	    $_ .= "$t $nis\n" if eof;
-	} "$p/etc/yp.conf";
+	} "$::prefix/etc/yp.conf";
 	require network;
-	network::write_conf("$p/etc/sysconfig/network", $o->{netc});
+	network::write_conf("$::prefix/etc/sysconfig/network", $o->{netc});
     } elsif ($winbind) {
 	my $domain = $o->{netc}{WINDOMAIN};
 	$domain =~ tr/a-z/A-Z/;
