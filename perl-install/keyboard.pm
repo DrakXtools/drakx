@@ -450,8 +450,8 @@ sub xmodmap_file {
 sub setxkbmap {
     my ($keyboard) = @_;
     my $xkb = keyboard::keyboard2full_xkb($keyboard) or return;
-    run_program::rooted($::prefix, 'setxkbmap', '-option', '') if $xkb->{XkbOptions}; #- need re-initialised other toggles are cumulated
-    run_program::rooted($::prefix, 'setxkbmap', $xkb->{XkbLayout}, '-model' => $xkb->{XkbModel}, '-option' => $xkb->{XkbOptions} || '', '-compat' => $xkb->{XkbCompat} || '');
+    run_program::run('setxkbmap', '-option', '') if $xkb->{XkbOptions}; #- need re-initialised other toggles are cumulated
+    run_program::run('setxkbmap', $xkb->{XkbLayout}, '-model' => $xkb->{XkbModel}, '-option' => $xkb->{XkbOptions} || '', '-compat' => $xkb->{XkbCompat} || '');
 }
 
 sub setup {
@@ -488,8 +488,12 @@ sub setup {
 	    c::_exit(0);
 	}
     }
-    my $f = xmodmap_file($keyboard);
-    eval { run_program::run('xmodmap', $f) } if $f && !$::testing && $ENV{DISPLAY};
+    if (-x "/usr/X11R6/bin/setxkbmap") {
+	setxkbmap($keyboard);
+    } else {
+	my $f = xmodmap_file($keyboard);
+	eval { run_program::run('xmodmap', $f) } if $f && !$::testing && $ENV{DISPLAY};
+    }
 }
 
 sub write {
