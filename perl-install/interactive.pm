@@ -137,7 +137,6 @@ sub ask_okcancel {
 
 sub ask_warn_ {
     my ($o, $common) = @_;
-    local $::isWizard = 0;
     ask_from_listf_raw_no_check($o, $common, undef, [ N("Ok") ]);
 }
 
