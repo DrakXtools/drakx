@@ -15,13 +15,14 @@
 
 use lib qw(/usr/lib/libDrakX);
 
-use common;
 use interactive;
 use standalone;
 use log;
 use c;
-use netconnect;
+use network::netconnect;
 use detect_devices;
+
+use MDK::Common;
 
 $::isInstall and die "Not supported during install.\n";
 
@@ -193,7 +194,7 @@ my @configured_devices = map { /ifcfg-(\S+)/ } `ls /etc/sysconfig/network-script
 my %aliased_devices; 
 /^\s*alias\s+(eth[0-9])\s+(\S+)/ and $aliased_devices{$1} = $2 foreach cat_("/etc/modules.conf");
 
-my $card_netconnect = netconnect::get_net_device();
+my $card_netconnect = network::netconnect::get_net_device();
 defined $card_netconnect and log::l("[drakgw] Information from netconnect: ignore card $card_netconnect");
 
 my @cards = grep {
@@ -656,6 +657,10 @@ Click on Configure to launch the setup wizard.", $setup_state));
 
 #-------------------------------------------------
 #- $Log$
+#- Revision 1.46  2001/08/06 13:11:35  yduret
+#- use MDK::Common;
+#- use network::netconnect; and update functions call from netconnect
+#-
 #- Revision 1.45  2001/07/24 22:39:28  prigaux
 #- move to MDK::Common, bool->to_bool
 #-
