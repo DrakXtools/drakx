@@ -2419,7 +2419,7 @@ sub security_check {
     if ($::isInstall) {
 	$security = $in->{security};
     } else {
-	$security = printer::get_security_level();
+	$security = any::get_secure_level();
     }
 
     # Exit silently if the spooler is PDQ

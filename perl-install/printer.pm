@@ -307,26 +307,6 @@ sub network_running {
     return 0;
 }
 
-sub get_security_level {
-    # Get security level by reading /etc/profile (only after install).
-    # This is a preliminary solution until msec puts the security level
-    # definition into the correct file.
-    $file = "/etc/profile";
-    if (-f $file) {
-	local *F; 
-	open F, "< $file" || return 0;
-	while (my $line = <F>) {
-	    if ($line =~ /^\s*SECURE_LEVEL=([0-5])\s*$/) {
-		close F;
-		return $1;
-	    }
-	}
-	close F;
-    }
-    return 0;
-}
-    
-
 sub spooler_in_security_level {
     # Was the current spooler already added to the current security level?
     my ($spooler, $level) = @_;
