@@ -21,7 +21,7 @@
 use strict;
 use diagnostics;
 use lib qw(/usr/lib/libDrakX);
-
+use any;
 use standalone;
 use common;
 use ugtk2 qw(:all);
@@ -120,7 +120,7 @@ gtkadd($window->{window},
 							 $options .= "&distro_code=$distrocode";
 							 $options .= "&kernel=$kernel_release" if $kernel_release;
 							 print($bugzilla . "?" . $options . "\n");
-							 connect_bugzilla($bugzilla . "?" . $options);
+							 any::launch_browser_with_wm($bugzilla . "?" . $options);
 						 }
 						),
 			    0, gtksignal_connect(Gtk2::Button->new(N("Close")), clicked => sub { ugtk2->exit(0) }),
@@ -178,16 +178,4 @@ sub get_package {
     $rpm_package;
 }
 
-sub connect_bugzilla {
-    my ($url) = @_;
-# let's not force people to click ok in order to launch the browser (vdanen)
-#	my $_w = create_dialog(N("Please wait"), N("connecting to %s...", $wizard_name)); 
-#	sleep(3);
-    exec $ENV{BROWSER},$url if exists $ENV{BROWSER};
-    my @browser = qw(mozilla konqueror galeon);
-    foreach (@browser) {
-	if (-e "/usr/bin/$_") { log::explanations("Contacting $url with $_\n "); exec $_,$url } 
-    }
-    create_dialog(N("Error"), N("No browser available! Please install one"));
-}
 
