@@ -82,6 +82,7 @@ sub install_rpm($)
 
 sub fatal_quit($)
 {
+    log::l("[drakgw] FATAL: $_[0]\n");
     (defined $wait_configuring) and (undef $wait_configuring);
     $in->ask_warn('', $_[0]);
     $in->exit(-1);
