@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX VERSION\n"
-"POT-Creation-Date: 2000-09-28 14:46+0200\n"
+"POT-Creation-Date: 2000-09-29 18:39+0200\n"
 "PO-Revision-Date: 1999-08-25 11:07+0200\n"
 "Last-Translator: Terje Bjerkelia <terje@bjerkelia.com>\n"
 "Language-Team: norwegian\n"
@@ -515,7 +515,7 @@ msgid "Delay before booting default image"
 msgstr "Forsinkelse før oppstart av standard bilde"
 
 #: ../../any.pm_.c:134 ../../install_steps_interactive.pm_.c:772
-#: ../../install_steps_interactive.pm_.c:823 ../../netconnect.pm_.c:507
+#: ../../install_steps_interactive.pm_.c:823 ../../netconnect.pm_.c:519
 #: ../../printerdrake.pm_.c:94 ../../printerdrake.pm_.c:128
 #: ../../standalone/adduserdrake_.c:42
 msgid "Password"
@@ -571,7 +571,7 @@ msgid "Add"
 msgstr "Legg til"
 
 #: ../../any.pm_.c:165 ../../diskdrake.pm_.c:45
-#: ../../install_steps_interactive.pm_.c:817 ../../netconnect.pm_.c:746
+#: ../../install_steps_interactive.pm_.c:817 ../../netconnect.pm_.c:798
 #: ../../printerdrake.pm_.c:353 ../../standalone/adduserdrake_.c:36
 msgid "Done"
 msgstr "Ferdig"
@@ -650,54 +650,54 @@ msgstr "Tom etikett er ikke tillatt"
 msgid "This label is already used"
 msgstr "Denne etiketten er allerede i bruk"
 
-#: ../../any.pm_.c:498
+#: ../../any.pm_.c:499
 #, c-format
 msgid "Found %s %s interfaces"
 msgstr "Fant %s %s grensesnitt"
 
-#: ../../any.pm_.c:499
+#: ../../any.pm_.c:500
 msgid "Do you have another one?"
 msgstr "Har du enda ett?"
 
-#: ../../any.pm_.c:500
+#: ../../any.pm_.c:501
 #, c-format
 msgid "Do you have any %s interfaces?"
 msgstr "Har du noen %s grensesnitt?"
 
-#: ../../any.pm_.c:502 ../../interactive.pm_.c:81 ../../my_gtk.pm_.c:485
-#: ../../netconnect.pm_.c:78 ../../netconnect.pm_.c:428
+#: ../../any.pm_.c:503 ../../interactive.pm_.c:81 ../../my_gtk.pm_.c:485
+#: ../../netconnect.pm_.c:80 ../../netconnect.pm_.c:439
 #: ../../printerdrake.pm_.c:234
 msgid "No"
 msgstr "Nei"
 
-#: ../../any.pm_.c:502 ../../interactive.pm_.c:81 ../../my_gtk.pm_.c:485
-#: ../../netconnect.pm_.c:76 ../../netconnect.pm_.c:426
+#: ../../any.pm_.c:503 ../../interactive.pm_.c:81 ../../my_gtk.pm_.c:485
+#: ../../netconnect.pm_.c:78 ../../netconnect.pm_.c:437
 msgid "Yes"
 msgstr "Ja"
 
-#: ../../any.pm_.c:503
+#: ../../any.pm_.c:504
 msgid "See hardware info"
 msgstr "Se maskinvareinfo"
 
 #. -PO: the first %s is the card type (scsi, network, sound,...)
 #. -PO: the second is the vendor+model name
-#: ../../any.pm_.c:520
+#: ../../any.pm_.c:521
 #, c-format
 msgid "Installing driver for %s card %s"
 msgstr "Installerer driver for %s kort %s"
 
-#: ../../any.pm_.c:521
+#: ../../any.pm_.c:522
 #, c-format
 msgid "(module %s)"
 msgstr "(modul %s)"
 
 #. -PO: the %s is the driver type (scsi, network, sound,...)
-#: ../../any.pm_.c:532
+#: ../../any.pm_.c:533
 #, c-format
 msgid "Which %s driver should I try?"
 msgstr "Hvilken %s driver skal jeg prøve?"
 
-#: ../../any.pm_.c:540
+#: ../../any.pm_.c:541
 #, c-format
 msgid ""
 "In some cases, the %s driver needs to have extra information to work\n"
@@ -716,20 +716,20 @@ msgstr ""
 "burde\n"
 "ikke forårsake noen skader."
 
-#: ../../any.pm_.c:545
+#: ../../any.pm_.c:546
 msgid "Autoprobe"
 msgstr "Automatisk sondering"
 
-#: ../../any.pm_.c:545
+#: ../../any.pm_.c:546
 msgid "Specify options"
 msgstr "Spesifiser opsjoner"
 
-#: ../../any.pm_.c:549
+#: ../../any.pm_.c:550
 #, c-format
 msgid "You may now provide its options to module %s."
 msgstr "Du kan nå gi dens opsjoner til modul %s."
 
-#: ../../any.pm_.c:555
+#: ../../any.pm_.c:556
 #, c-format
 msgid ""
 "You may now provide its options to module %s.\n"
@@ -740,11 +740,11 @@ msgstr ""
 "Opsjonene er i format ``name=value name2=value2 ...''.\n"
 "F.eks., ``io=0x300 irq=7''"
 
-#: ../../any.pm_.c:558
+#: ../../any.pm_.c:559
 msgid "Module options:"
 msgstr "Modulopsjoner:"
 
-#: ../../any.pm_.c:568
+#: ../../any.pm_.c:569
 #, c-format
 msgid ""
 "Loading module %s failed.\n"
@@ -852,16 +852,16 @@ msgstr "Skrivebord"
 msgid "Start Menu"
 msgstr "Startmeny"
 
-#: ../../common.pm_.c:599
+#: ../../common.pm_.c:610
 #, c-format
 msgid "%d minutes"
 msgstr "%d minutter"
 
-#: ../../common.pm_.c:601
+#: ../../common.pm_.c:612
 msgid "1 minute"
 msgstr "1 minutt"
 
-#: ../../common.pm_.c:603
+#: ../../common.pm_.c:614
 #, c-format
 msgid "%d seconds"
 msgstr "%d sekunder"
@@ -1582,10 +1582,10 @@ msgid ""
 "\n"
 "\n"
 "\t* Customized: if you are familiar enough with GNU/Linux, you may choose "
-"the primary usge (workstation, server,\n"
+"the primary usage (workstation, server,\n"
 "\t  development) of your sytem. You will need to answer to more questions "
 "than in \"Recommanded\" installation\n"
-"\t  class, so you need to know how works GNU/Linux to choose this "
+"\t  class, so you need to know how GNU/Linux works to choose this "
 "installation class.\n"
 "\n"
 "\n"
@@ -1738,7 +1738,7 @@ msgid ""
 "Because the effects of the partitioning process are usually irreversible,\n"
 "partitioning can be intimidating and stressful if you are an inexperienced "
 "user.\n"
-"This wizard simplifies this process. Before begining, please consult the "
+"This wizard simplifies this process. Before beginning, please consult the "
 "manual\n"
 "and take your time.\n"
 "\n"
@@ -3085,25 +3085,25 @@ msgstr ""
 "Du kan nå partisjonere %s.\n"
 "Når du er ferdig ikke glem å lagre med `w'"
 
-#: ../../install_interactive.pm_.c:202
+#: ../../install_interactive.pm_.c:203
 #, fuzzy
 msgid "I can't find any room for installing"
 msgstr "Jeg kan ikke legge til flere partisjoner"
 
-#: ../../install_interactive.pm_.c:205
+#: ../../install_interactive.pm_.c:206
 msgid "The DrakX Partitioning wizard found the following solutions:"
 msgstr "DrakX partisjonsveiviseren fant disse løsningene:"
 
-#: ../../install_interactive.pm_.c:210
+#: ../../install_interactive.pm_.c:211
 #, c-format
 msgid "Partitioning failed: %s"
 msgstr "Partisjonering feilet: %s"
 
-#: ../../install_interactive.pm_.c:225
+#: ../../install_interactive.pm_.c:226
 msgid "Bringing up the network"
 msgstr "Henter opp nettverket"
 
-#: ../../install_interactive.pm_.c:230
+#: ../../install_interactive.pm_.c:231
 msgid "Bringing down the network"
 msgstr "Tar ned nettverket"
 
@@ -3121,7 +3121,7 @@ msgstr ""
 msgid "Duplicate mount point %s"
 msgstr "Dupliser monteringspunkt %s"
 
-#: ../../install_steps.pm_.c:379
+#: ../../install_steps.pm_.c:376
 msgid ""
 "Some important packages didn't get installed properly.\n"
 "Either your cdrom drive or your cdrom is defective.\n"
@@ -3133,12 +3133,12 @@ msgstr ""
 "Sjekk cd-platen på en installert maskin med \"rpm -qpl "
 "Mandrake/RPMS/*.rpm\"\n"
 
-#: ../../install_steps.pm_.c:452
+#: ../../install_steps.pm_.c:448
 #, c-format
 msgid "Welcome to %s"
 msgstr "Velkommen til %s"
 
-#: ../../install_steps.pm_.c:664
+#: ../../install_steps.pm_.c:660
 msgid "No floppy drive available"
 msgstr "Ingen diskettstasjon tilgjengelig"
 
@@ -3399,6 +3399,10 @@ msgstr "En feil oppsto"
 msgid "Please, choose a language to use."
 msgstr "Vennligst velg språk som skal brukes."
 
+#: ../../install_steps_interactive.pm_.c:70
+msgid "License agreement"
+msgstr ""
+
 #: ../../install_steps_interactive.pm_.c:71
 msgid ""
 " Introduction\n"
@@ -3416,7 +3420,7 @@ msgid ""
 "\n"
 "Please read carefully this document. This document is a license agreement "
 "between you and  \n"
-"MandrakeSoft S.A., 42, rue d'Aboukir, 75002 Paris - France, which applies to "
+"MandrakeSoft S.A., 43, rue d'Aboukir, 75002 Paris - France, which applies to "
 "the Software Products.\n"
 "By installing, duplicating or using the Software Products in any manner, you "
 "explicitly \n"
@@ -3558,7 +3562,7 @@ msgid ""
 "the dispute will be referred to the appropriate Courts of Law of Paris - "
 "France.\n"
 "For any question on this document, please contact MandrakeSoft S.A.,  \n"
-"42, rue d'Aboukir, 75002 Paris - France\n"
+"43, rue d'Aboukir, 75002 Paris - France\n"
 msgstr ""
 
 #: ../../install_steps_interactive.pm_.c:173
@@ -4629,21 +4633,21 @@ msgstr "Neste ->"
 msgid "Is this correct?"
 msgstr "Er dette riktig?"
 
-#: ../../netconnect.pm_.c:81
+#: ../../netconnect.pm_.c:83
 msgid "Internet configuration"
 msgstr "Internett-konfigurasjon"
 
-#: ../../netconnect.pm_.c:82
-msgid "Do you want to try to connect to the internet now?"
+#: ../../netconnect.pm_.c:84
+msgid "Do you want to try to connect to the Internet now?"
 msgstr "Vil du prøve å koble opp mot Internett nå?"
 
-#: ../../netconnect.pm_.c:117 ../../netconnect.pm_.c:191
+#: ../../netconnect.pm_.c:119 ../../netconnect.pm_.c:191
 #: ../../netconnect.pm_.c:210 ../../netconnect.pm_.c:222
 #: ../../netconnect.pm_.c:234
 msgid "ISDN Configuration"
 msgstr "ISDN-konfigurasjon"
 
-#: ../../netconnect.pm_.c:117
+#: ../../netconnect.pm_.c:119
 msgid ""
 "Select your provider.\n"
 " If it's not in the list, choose Unlisted"
@@ -4651,59 +4655,59 @@ msgstr ""
 "Velg din tilbyder.\n"
 " Hvis den ikke er i listen, velg ikke i listen"
 
-#: ../../netconnect.pm_.c:134
+#: ../../netconnect.pm_.c:136
 msgid "Connection Configuration"
 msgstr "Konfigurasjon tilknytning."
 
-#: ../../netconnect.pm_.c:135
+#: ../../netconnect.pm_.c:137
 msgid "Please fill or check the field below"
 msgstr "Vennnligst fyll eller merk feltet under"
 
-#: ../../netconnect.pm_.c:137
+#: ../../netconnect.pm_.c:139
 msgid "Card IRQ"
 msgstr "Kort IRQ"
 
-#: ../../netconnect.pm_.c:138
+#: ../../netconnect.pm_.c:140
 msgid "Card mem (DMA)"
 msgstr "Kort mem (DMA)"
 
-#: ../../netconnect.pm_.c:139
+#: ../../netconnect.pm_.c:141
 msgid "Card IO"
 msgstr "Kort IO"
 
-#: ../../netconnect.pm_.c:140
+#: ../../netconnect.pm_.c:142
 msgid "Card IO_0"
 msgstr "Kort IO_0"
 
-#: ../../netconnect.pm_.c:141
+#: ../../netconnect.pm_.c:143
 msgid "Card IO_1"
 msgstr "Kort IO_1"
 
-#: ../../netconnect.pm_.c:142
+#: ../../netconnect.pm_.c:144
 msgid "Your personnal phone number"
 msgstr "Ditt telefonnummer"
 
-#: ../../netconnect.pm_.c:144
+#: ../../netconnect.pm_.c:146
 msgid "Provider name (ex provider.net)"
 msgstr "Navn tilbyder (f.eks. tilbyder.net)"
 
-#: ../../netconnect.pm_.c:145
+#: ../../netconnect.pm_.c:147
 msgid "Provider phone number"
 msgstr "Telefonnummer tilbyder"
 
-#: ../../netconnect.pm_.c:146
+#: ../../netconnect.pm_.c:148
 msgid "Provider dns 1"
 msgstr "Tilbyder dns 1"
 
-#: ../../netconnect.pm_.c:147
+#: ../../netconnect.pm_.c:149
 msgid "Provider dns 2"
 msgstr "Tilbyder dns 2"
 
-#: ../../netconnect.pm_.c:148
+#: ../../netconnect.pm_.c:150
 msgid "Dialing mode"
 msgstr "Oppringningsmodus"
 
-#: ../../netconnect.pm_.c:149
+#: ../../netconnect.pm_.c:151
 msgid ""
 "Time (secs) of inactivity after which\n"
 "it hangs up. (leave blank to disable it)"
@@ -4711,25 +4715,17 @@ msgstr ""
 "Tid (sek) uten aktivitet før\n"
 "nedkobling. (la være tom for å ikke bruke denne)"
 
-#: ../../netconnect.pm_.c:150
+#: ../../netconnect.pm_.c:152
 msgid "Account Login (user name)"
 msgstr "Logg inn (brukernavn)"
 
-#: ../../netconnect.pm_.c:151
+#: ../../netconnect.pm_.c:153
 msgid "Account Password"
 msgstr "Passord"
 
-#: ../../netconnect.pm_.c:152
+#: ../../netconnect.pm_.c:154
 msgid "Confirm Password"
 msgstr "Bekreft passord"
-
-#: ../../netconnect.pm_.c:184
-msgid "Germany"
-msgstr "Tyskland"
-
-#: ../../netconnect.pm_.c:184
-msgid "Germany (1TR6)"
-msgstr "Tyskland (1TR6)"
 
 #: ../../netconnect.pm_.c:186
 msgid "Europe"
@@ -4803,11 +4799,11 @@ msgstr ""
 "Jeg har oppdaget et ISDN PCI-kort, men jeg vet ikke hviklet type. Vennligst "
 "velg et PCI-kort i neste skjermbilde."
 
-#: ../../netconnect.pm_.c:275
+#: ../../netconnect.pm_.c:277
 msgid "No ISDN PCI card found. Please select one on the next screen."
 msgstr "Ingen ISDN PCI-kort funnet. Vennligst velg et i neste skjermbilde."
 
-#: ../../netconnect.pm_.c:306
+#: ../../netconnect.pm_.c:309
 #, fuzzy
 msgid ""
 "No ethernet network adapter has been detected on your system.\n"
@@ -4816,177 +4812,214 @@ msgstr ""
 "Ikke noe ethernet nettverksadapter har blitt oppdaget i systemet ditt. "
 "Vennligst kjør verktøyet for maskinvarekonfigurasjon."
 
-#: ../../netconnect.pm_.c:310 ../../standalone/drakgw_.c:222
+#: ../../netconnect.pm_.c:313 ../../standalone/drakgw_.c:222
 msgid "Choose the network interface"
 msgstr "Velg nettverksgrensesnitt"
 
-#: ../../netconnect.pm_.c:311
+#: ../../netconnect.pm_.c:314
 msgid ""
-"Please choose which network adapter you want to use to connect to internet"
+"Please choose which network adapter you want to use to connect to Internet"
 msgstr ""
 "Vennligst velg hvilket nettverksadapter du ønsker å bruke til å koble opp\n"
 "mot Internett"
 
-#: ../../netconnect.pm_.c:327 ../../netconnect.pm_.c:560
-#: ../../netconnect.pm_.c:685 ../../standalone/drakgw_.c:217
+#: ../../netconnect.pm_.c:329 ../../netconnect.pm_.c:599
+#: ../../netconnect.pm_.c:725 ../../standalone/drakgw_.c:217
 msgid "Network interface"
 msgstr "Nettverksgrensesnitt"
 
-#: ../../netconnect.pm_.c:328
+#: ../../netconnect.pm_.c:330
 #, fuzzy
 msgid "I'm about to restart the network device $device. Do you agree?"
 msgstr "Jeg er i ferd med å starte nettverksgrensesnittet på nytt. Er du enig?"
 
-#: ../../netconnect.pm_.c:431
+#: ../../netconnect.pm_.c:442
 msgid "ADSL configuration"
 msgstr "ADSL-konfigurasjon"
 
-#: ../../netconnect.pm_.c:432
+#: ../../netconnect.pm_.c:443
 msgid "Do you want to start your connection at boot?"
 msgstr "Ønsker du å starte tilkoblingen din ved oppstart?"
 
-#: ../../netconnect.pm_.c:488
+#: ../../netconnect.pm_.c:500
 msgid "Try to find a modem?"
 msgstr "Prøve å finne et modem?"
 
-#: ../../netconnect.pm_.c:498
+#: ../../netconnect.pm_.c:510
 msgid "Please choose which serial port your modem is connected to."
 msgstr "Vennligst velg hvilken serieport modemet ditt koblet til."
 
-#: ../../netconnect.pm_.c:503
+#: ../../netconnect.pm_.c:515
 msgid "Dialup options"
 msgstr "Opsjoner oppringt"
 
-#: ../../netconnect.pm_.c:504
+#: ../../netconnect.pm_.c:516
 msgid "Connection name"
 msgstr "Navn tilknytning"
 
-#: ../../netconnect.pm_.c:505
+#: ../../netconnect.pm_.c:517
 msgid "Phone number"
 msgstr "Telefonnummer"
 
-#: ../../netconnect.pm_.c:506
+#: ../../netconnect.pm_.c:518
 msgid "Login ID"
 msgstr "Login ID"
 
-#: ../../netconnect.pm_.c:508
+#: ../../netconnect.pm_.c:520
 msgid "Authentication"
 msgstr "Autentifikasjon"
 
-#: ../../netconnect.pm_.c:508
+#: ../../netconnect.pm_.c:520
 msgid "PAP"
 msgstr "PAP"
 
-#: ../../netconnect.pm_.c:508
+#: ../../netconnect.pm_.c:520
 msgid "Script-based"
 msgstr "Scriptbasert"
 
-#: ../../netconnect.pm_.c:508
+#: ../../netconnect.pm_.c:520
 msgid "Terminal-based"
 msgstr "Terminalbasert"
 
-#: ../../netconnect.pm_.c:509
+#: ../../netconnect.pm_.c:521
 msgid "Domain name"
 msgstr "Domenenavn"
 
-#: ../../netconnect.pm_.c:511
+#: ../../netconnect.pm_.c:523
 msgid "First DNS Server"
 msgstr "Første DNS-tjener"
 
-#: ../../netconnect.pm_.c:512
+#: ../../netconnect.pm_.c:524
 msgid "Second DNS Server"
 msgstr "Andre DNS-tjener"
 
-#: ../../netconnect.pm_.c:536
-msgid "Connect to internet"
-msgstr "Koble opp mot Internett"
+#: ../../netconnect.pm_.c:553
+msgid ""
+"\n"
+"You can disconnect or reconfigure your connection."
+msgstr ""
 
-#: ../../netconnect.pm_.c:538
-msgid "Disconnect from internet"
-msgstr "Koble ned fra Internett"
-
-#: ../../netconnect.pm_.c:540
-msgid "Configure internet connection"
+#: ../../netconnect.pm_.c:553 ../../netconnect.pm_.c:557
+#, fuzzy
+msgid ""
+"\n"
+"You can reconfigure your connection."
 msgstr "Konfigurer Internett-tilkobling"
 
-#: ../../netconnect.pm_.c:543
+#: ../../netconnect.pm_.c:553
+msgid "You are currently connected to Internet and everything seems to work."
+msgstr ""
+
+#: ../../netconnect.pm_.c:557
+#, fuzzy
+msgid ""
+"\n"
+"You can connect to Internet or reconfigure your connection."
+msgstr "Koble opp mot Internett / Konfigurer lokalt nettverk"
+
+#: ../../netconnect.pm_.c:557
+#, fuzzy
+msgid "You are not currently connected to Internet."
+msgstr "Ikke koble opp mot Internett"
+
+#: ../../netconnect.pm_.c:560
+msgid ""
+"The interface $netcnx->{NET_INTERFACE} is configured and loaded, but you "
+"cannot access to Internet.\n"
+"I suggest you to disconnect, and reconfigure the Internet connection."
+msgstr ""
+
+#: ../../netconnect.pm_.c:566
+#, fuzzy
+msgid "Connect to Internet"
+msgstr "Koble opp mot Internett"
+
+#: ../../netconnect.pm_.c:568
+#, fuzzy
+msgid "Disconnect from Internet"
+msgstr "Koble ned fra Internett"
+
+#: ../../netconnect.pm_.c:570
+msgid "Configure Internet connection"
+msgstr "Konfigurer Internett-tilkobling"
+
+#: ../../netconnect.pm_.c:573
 msgid "Internet connection & configuration"
 msgstr "Internett tilkobling & konfigurasjon"
 
-#: ../../netconnect.pm_.c:544
-msgid "What do you wish to do?"
-msgstr "Hva ønsker du å gjøre?"
-
-#: ../../netconnect.pm_.c:561 ../../netconnect.pm_.c:686
+#: ../../netconnect.pm_.c:600 ../../netconnect.pm_.c:726
 #, fuzzy
 msgid ""
 "I'm about to restart the network device $netc->{NET_DEVICE}. Do you agree?"
 msgstr "Jeg er i ferd med å starte nettverksgrensesnittet på nytt. Er du enig?"
 
-#: ../../netconnect.pm_.c:575
-msgid "Connect to internet with a normal modem"
+#: ../../netconnect.pm_.c:615
+#, fuzzy
+msgid "Connect to Internet with a normal modem"
 msgstr "Koble opp mot Internett med vanlig modem"
 
-#: ../../netconnect.pm_.c:593
-msgid "Connect to internet using ISDN"
+#: ../../netconnect.pm_.c:633
+#, fuzzy
+msgid "Connect to Internet using ISDN"
 msgstr "Koble opp mot Internett med ISDN"
 
-#: ../../netconnect.pm_.c:598
+#: ../../netconnect.pm_.c:638
 msgid "Internal ISDN card"
 msgstr "Internt ISDN-kort"
 
-#: ../../netconnect.pm_.c:600
+#: ../../netconnect.pm_.c:640
 #, fuzzy
 msgid "External ISDN modem"
 msgstr "Eksternt modem"
 
-#: ../../netconnect.pm_.c:603 ../../netconnect.pm_.c:636
-#: ../../netconnect.pm_.c:648 ../../netconnect.pm_.c:672
-#: ../../netconnect.pm_.c:719
+#: ../../netconnect.pm_.c:643 ../../netconnect.pm_.c:676
+#: ../../netconnect.pm_.c:688 ../../netconnect.pm_.c:712
+#: ../../netconnect.pm_.c:759
 msgid "Connect to the Internet"
 msgstr "Koble opp mot Internett"
 
-#: ../../netconnect.pm_.c:604
+#: ../../netconnect.pm_.c:644
 msgid "What kind is your ISDN connection?"
 msgstr "Hva slags type er ISDN-tilknytningen din?"
 
-#: ../../netconnect.pm_.c:622
-msgid "Connect to internet using DSL (or ADSL)"
+#: ../../netconnect.pm_.c:662
+#, fuzzy
+msgid "Connect to Internet using DSL (or ADSL)"
 msgstr "Koble opp mot Internett med DSL (eller ADSL)"
 
-#: ../../netconnect.pm_.c:631
+#: ../../netconnect.pm_.c:671
 msgid "France"
 msgstr "Frankrike"
 
-#: ../../netconnect.pm_.c:633
+#: ../../netconnect.pm_.c:673
 msgid "Other countries"
 msgstr "Andre land"
 
-#: ../../netconnect.pm_.c:637
+#: ../../netconnect.pm_.c:677
 msgid "In which country are you located ?"
 msgstr "I hvilket land er du ?"
 
-#: ../../netconnect.pm_.c:643
+#: ../../netconnect.pm_.c:683
 msgid "Alcatel modem"
 msgstr "Alcatel modem"
 
-#: ../../netconnect.pm_.c:645
+#: ../../netconnect.pm_.c:685
 msgid "ECI modem"
 msgstr "ECI modem"
 
-#: ../../netconnect.pm_.c:649
+#: ../../netconnect.pm_.c:689
 msgid "If your adsl modem is an Alcatel one, choose Alcatel. Otherwise, ECI."
 msgstr "Hvis adsl modemet ditt er Alcatel, velg Alcatel. ellers, ECI."
 
-#: ../../netconnect.pm_.c:667
+#: ../../netconnect.pm_.c:707
 msgid "use pppoe"
 msgstr "bruk pppoe"
 
-#: ../../netconnect.pm_.c:669
+#: ../../netconnect.pm_.c:709
 msgid "don't use pppoe"
 msgstr "ikke bruk pppoe"
 
-#: ../../netconnect.pm_.c:673
+#: ../../netconnect.pm_.c:713
 msgid ""
 "The most common way to connect with adsl is dhcp + pppoe.\n"
 "However, it exists some connection that only use dhcp.\n"
@@ -4996,11 +5029,12 @@ msgstr ""
 "Men, det eksisterer noen tilkoblinger som bare bruker dhcp.\n"
 "Hvis du ikke vet, velg 'bruk pppoe'"
 
-#: ../../netconnect.pm_.c:696
-msgid "Connect to internet using Cable"
+#: ../../netconnect.pm_.c:736
+#, fuzzy
+msgid "Connect to Internet using Cable"
 msgstr "Koble opp mot Internett med kabel"
 
-#: ../../netconnect.pm_.c:720
+#: ../../netconnect.pm_.c:760
 msgid ""
 "Which dhcp client do you want to use?\n"
 "Default is dhcpd"
@@ -5008,23 +5042,28 @@ msgstr ""
 "Hvilken dhcp klient ønsker du å bruke?\n"
 "Standard er dhcpd"
 
-#: ../../netconnect.pm_.c:733
+#: ../../netconnect.pm_.c:774
+#, fuzzy
+msgid "Disable Internet Connection"
+msgstr "Konfigurer Internett-tilkobling"
+
+#: ../../netconnect.pm_.c:785
 msgid "Configure local network"
 msgstr "Konfigurer lokalt nettverk"
 
-#: ../../netconnect.pm_.c:733
+#: ../../netconnect.pm_.c:785
 msgid "Reconfigure local network"
 msgstr "Rekonfigurer lokalt nettverk"
 
-#: ../../netconnect.pm_.c:740
+#: ../../netconnect.pm_.c:792
 msgid "Disable networking"
 msgstr "slå av nettverk"
 
-#: ../../netconnect.pm_.c:750
+#: ../../netconnect.pm_.c:802
 msgid "Connect to the Internet / Configure local Network"
 msgstr "Koble opp mot Internett / Konfigurer lokalt nettverk"
 
-#: ../../netconnect.pm_.c:751
+#: ../../netconnect.pm_.c:803
 msgid ""
 "Local networking has already been configured.\n"
 "Do you want to:"
@@ -5032,15 +5071,15 @@ msgstr ""
 "Lokalt nettverk har allerede blitt konfigurert.\n"
 "Vil du:"
 
-#: ../../netconnect.pm_.c:752
+#: ../../netconnect.pm_.c:804
 msgid "How do you want to connect to the Internet?"
 msgstr "Hvordan vil du koble opp mot Internett?"
 
-#: ../../netconnect.pm_.c:769
+#: ../../netconnect.pm_.c:825
 msgid "Network Configuration"
 msgstr "Nettverkskonfigurasjon"
 
-#: ../../netconnect.pm_.c:770
+#: ../../netconnect.pm_.c:826
 msgid ""
 "Now that your Internet connection is configured,\n"
 "your computer can be configured to share its Internet connection.\n"
@@ -5060,7 +5099,7 @@ msgstr ""
 msgid "no network card found"
 msgstr "ingen nettverkskort funnet"
 
-#: ../../network.pm_.c:271 ../../network.pm_.c:333
+#: ../../network.pm_.c:271 ../../network.pm_.c:337
 msgid "Configuring network"
 msgstr "Konfigurerer nettverk"
 
@@ -5076,11 +5115,11 @@ msgstr ""
 "Vertsnavnet ditt bør være et full-kvalifisert vertsnavn,\n"
 "som ``minboks.mittlab.mittfirma.no''."
 
-#: ../../network.pm_.c:276 ../../network.pm_.c:338
+#: ../../network.pm_.c:276 ../../network.pm_.c:342
 msgid "Host name"
 msgstr "Vertsnavn"
 
-#: ../../network.pm_.c:290
+#: ../../network.pm_.c:294
 msgid ""
 "WARNING: This device has been previously configured to connect to the "
 "Internet.\n"
@@ -5092,7 +5131,7 @@ msgstr ""
 "Trykk OK for å beholde enhetens konfigurasjon.\n"
 "Modifisering av feltene nedenfor vil overskrive denne konfigurasjonen."
 
-#: ../../network.pm_.c:295
+#: ../../network.pm_.c:299
 msgid ""
 "Please enter the IP configuration for this machine.\n"
 "Each item should be entered as an IP address in dotted-decimal\n"
@@ -5102,32 +5141,32 @@ msgstr ""
 "Hvert element bør entres som en IP-adresse i punkt-desimal\n"
 "notasjon (f.eks, 1.2.3.4)."
 
-#: ../../network.pm_.c:304 ../../network.pm_.c:305
+#: ../../network.pm_.c:308 ../../network.pm_.c:309
 #, c-format
 msgid "Configuring network device %s"
 msgstr "Konfigurerer nettverksenhet %s"
 
-#: ../../network.pm_.c:307
+#: ../../network.pm_.c:311
 msgid "Automatic IP"
 msgstr "Automatisk IP"
 
-#: ../../network.pm_.c:307
+#: ../../network.pm_.c:311
 msgid "IP address"
 msgstr "IP-adresse"
 
-#: ../../network.pm_.c:307
+#: ../../network.pm_.c:311
 msgid "Netmask"
 msgstr "Nettmaske"
 
-#: ../../network.pm_.c:308
+#: ../../network.pm_.c:312
 msgid "(bootp/dhcp)"
 msgstr "(bootp/dhcp)"
 
-#: ../../network.pm_.c:314 ../../printerdrake.pm_.c:98
+#: ../../network.pm_.c:318 ../../printerdrake.pm_.c:98
 msgid "IP address should be in format 1.2.3.4"
 msgstr "IP-adresse bør være i format 1.2.3.4"
 
-#: ../../network.pm_.c:334
+#: ../../network.pm_.c:338
 msgid ""
 "Please enter your host name.\n"
 "Your host name should be a fully-qualified host name,\n"
@@ -5139,35 +5178,35 @@ msgstr ""
 "så som ``minboks.mittlab.mittfirma.no''.\n"
 "Du kan også entre IP-adressen til gateway'en hvis du har en"
 
-#: ../../network.pm_.c:339
+#: ../../network.pm_.c:343
 msgid "DNS server"
 msgstr "DNS-tjener"
 
-#: ../../network.pm_.c:340
+#: ../../network.pm_.c:344
 msgid "Gateway"
 msgstr "Gateway"
 
-#: ../../network.pm_.c:341
+#: ../../network.pm_.c:345
 msgid "Gateway device"
 msgstr "Gateway-enhet"
 
-#: ../../network.pm_.c:351
+#: ../../network.pm_.c:355
 msgid "Proxies configuration"
 msgstr "Konfigurasjon proxy"
 
-#: ../../network.pm_.c:352
+#: ../../network.pm_.c:356
 msgid "HTTP proxy"
 msgstr "HTTP-proxy"
 
-#: ../../network.pm_.c:353
+#: ../../network.pm_.c:357
 msgid "FTP proxy"
 msgstr "FTP-proxy"
 
-#: ../../network.pm_.c:359
+#: ../../network.pm_.c:363
 msgid "Proxy should be http://..."
 msgstr "Proxy burde være http://..."
 
-#: ../../network.pm_.c:360
+#: ../../network.pm_.c:364
 msgid "Proxy should be ftp://..."
 msgstr "Proxy burde være ftp://..."
 
@@ -6071,6 +6110,27 @@ msgstr "Setter sikkerhetsnivå"
 msgid "Choose the tool you want to use"
 msgstr "Velg verktøyet du ønsker å bruke"
 
+#: ../../standalone/livedrake_.c:23
+#, fuzzy
+msgid "Change Cd-Rom"
+msgstr "Endre oppløsning"
+
+#: ../../standalone/livedrake_.c:24
+#, fuzzy
+msgid ""
+"Please insert the Installation Cd-Rom in your drive and press Ok when done.\n"
+"If you don't have it, press Cancel to avoid live upgrade."
+msgstr ""
+"Bytt CD!\n"
+"\n"
+"Vennligst sett inn CD'en merket \"%s\" i stasjonen og trykk Ok når du er "
+"ferdig.\n"
+"Hvis du ikke har den trykk Avbryt for å unngå installasjon fra denne CD'en."
+
+#: ../../standalone/livedrake_.c:34
+msgid "Unable to start live upgrade !!!\n"
+msgstr ""
+
 #: ../../standalone/mousedrake_.c:32
 msgid "no serial_usb found\n"
 msgstr "ingen serie_usb funnet\n"
@@ -6291,6 +6351,15 @@ msgstr "Finner tillatelser"
 #: ../../standalone/rpmdrake_.c:360
 msgid "Finding leaves takes some time"
 msgstr "Finne tillatelser vil ta litt tid"
+
+#~ msgid "Germany"
+#~ msgstr "Tyskland"
+
+#~ msgid "Germany (1TR6)"
+#~ msgstr "Tyskland (1TR6)"
+
+#~ msgid "What do you wish to do?"
+#~ msgstr "Hva ønsker du å gjøre?"
 
 #~ msgid "Install/Rescue"
 #~ msgstr "Installering/Redning"
@@ -6842,9 +6911,6 @@ msgstr "Finne tillatelser vil ta litt tid"
 
 #~ msgid "automagic"
 #~ msgstr "Automagisk"
-
-#~ msgid "Do not connect to internet"
-#~ msgstr "Ikke koble opp mot Internett"
 
 #~ msgid "Have you been provided with a hostname?"
 #~ msgstr "Har du et vertsnavn?"

@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX VERSION\n"
-"POT-Creation-Date: 2000-09-28 14:46+0200\n"
+"POT-Creation-Date: 2000-09-29 18:39+0200\n"
 "PO-Revision-Date: 1999-08-09 16:39+0200\n"
 "Last-Translator: Jankovic Tomislav <tomaja@net.yu>\n"
 "Language-Team: Serbian (cyrillic)\n"
@@ -513,7 +513,7 @@ msgid "Delay before booting default image"
 msgstr "Пауза пре стартања default image-а"
 
 #: ../../any.pm_.c:134 ../../install_steps_interactive.pm_.c:772
-#: ../../install_steps_interactive.pm_.c:823 ../../netconnect.pm_.c:507
+#: ../../install_steps_interactive.pm_.c:823 ../../netconnect.pm_.c:519
 #: ../../printerdrake.pm_.c:94 ../../printerdrake.pm_.c:128
 #: ../../standalone/adduserdrake_.c:42
 msgid "Password"
@@ -569,7 +569,7 @@ msgid "Add"
 msgstr "Додај"
 
 #: ../../any.pm_.c:165 ../../diskdrake.pm_.c:45
-#: ../../install_steps_interactive.pm_.c:817 ../../netconnect.pm_.c:746
+#: ../../install_steps_interactive.pm_.c:817 ../../netconnect.pm_.c:798
 #: ../../printerdrake.pm_.c:353 ../../standalone/adduserdrake_.c:36
 msgid "Done"
 msgstr "Урађено"
@@ -648,54 +648,54 @@ msgstr "Празна ознака није дозвољена"
 msgid "This label is already used"
 msgstr "Ова ознака је већ у употреби"
 
-#: ../../any.pm_.c:498
+#: ../../any.pm_.c:499
 #, c-format
 msgid "Found %s %s interfaces"
 msgstr "Пронађено  %s %s интерфејсa"
 
-#: ../../any.pm_.c:499
+#: ../../any.pm_.c:500
 msgid "Do you have another one?"
 msgstr "Да ли имате још један?"
 
-#: ../../any.pm_.c:500
+#: ../../any.pm_.c:501
 #, c-format
 msgid "Do you have any %s interfaces?"
 msgstr "Имате ли још %s интерфејса?"
 
-#: ../../any.pm_.c:502 ../../interactive.pm_.c:81 ../../my_gtk.pm_.c:485
-#: ../../netconnect.pm_.c:78 ../../netconnect.pm_.c:428
+#: ../../any.pm_.c:503 ../../interactive.pm_.c:81 ../../my_gtk.pm_.c:485
+#: ../../netconnect.pm_.c:80 ../../netconnect.pm_.c:439
 #: ../../printerdrake.pm_.c:234
 msgid "No"
 msgstr "Не"
 
-#: ../../any.pm_.c:502 ../../interactive.pm_.c:81 ../../my_gtk.pm_.c:485
-#: ../../netconnect.pm_.c:76 ../../netconnect.pm_.c:426
+#: ../../any.pm_.c:503 ../../interactive.pm_.c:81 ../../my_gtk.pm_.c:485
+#: ../../netconnect.pm_.c:78 ../../netconnect.pm_.c:437
 msgid "Yes"
 msgstr "Да"
 
-#: ../../any.pm_.c:503
+#: ../../any.pm_.c:504
 msgid "See hardware info"
 msgstr "Погледај информације о хардверу"
 
 #. -PO: the first %s is the card type (scsi, network, sound,...)
 #. -PO: the second is the vendor+model name
-#: ../../any.pm_.c:520
+#: ../../any.pm_.c:521
 #, c-format
 msgid "Installing driver for %s card %s"
 msgstr "Инсталирам драјвер за %s картицу %s"
 
-#: ../../any.pm_.c:521
+#: ../../any.pm_.c:522
 #, c-format
 msgid "(module %s)"
 msgstr "(модул %s)"
 
 #. -PO: the %s is the driver type (scsi, network, sound,...)
-#: ../../any.pm_.c:532
+#: ../../any.pm_.c:533
 #, c-format
 msgid "Which %s driver should I try?"
 msgstr "Који %s драјвер да пробам?"
 
-#: ../../any.pm_.c:540
+#: ../../any.pm_.c:541
 #, c-format
 msgid ""
 "In some cases, the %s driver needs to have extra information to work\n"
@@ -711,20 +711,20 @@ msgstr ""
 "сами да унесете додатне податке за њега, или да их драјвер сам одреди?\n"
 "Могуће је да ће проба заглавити ваш рачунар, али неће нанети никакву штету."
 
-#: ../../any.pm_.c:545
+#: ../../any.pm_.c:546
 msgid "Autoprobe"
 msgstr "Аутоматска проба"
 
-#: ../../any.pm_.c:545
+#: ../../any.pm_.c:546
 msgid "Specify options"
 msgstr "Наведите опције"
 
-#: ../../any.pm_.c:549
+#: ../../any.pm_.c:550
 #, c-format
 msgid "You may now provide its options to module %s."
 msgstr "Можете навести његове опције за модул %s."
 
-#: ../../any.pm_.c:555
+#: ../../any.pm_.c:556
 #, c-format
 msgid ""
 "You may now provide its options to module %s.\n"
@@ -735,11 +735,11 @@ msgstr ""
 "Опције су у формату ``име=вредност име2=вредност2 ...''.\n"
 "На пример, ``io=0x300 irq=7''"
 
-#: ../../any.pm_.c:558
+#: ../../any.pm_.c:559
 msgid "Module options:"
 msgstr "Опције модула:"
 
-#: ../../any.pm_.c:568
+#: ../../any.pm_.c:569
 #, c-format
 msgid ""
 "Loading module %s failed.\n"
@@ -841,16 +841,16 @@ msgstr "Десктоп"
 msgid "Start Menu"
 msgstr "Старт мени "
 
-#: ../../common.pm_.c:599
+#: ../../common.pm_.c:610
 #, c-format
 msgid "%d minutes"
 msgstr "%d минутa"
 
-#: ../../common.pm_.c:601
+#: ../../common.pm_.c:612
 msgid "1 minute"
 msgstr "1 минут"
 
-#: ../../common.pm_.c:603
+#: ../../common.pm_.c:614
 #, c-format
 msgid "%d seconds"
 msgstr "%d секунди"
@@ -1564,10 +1564,10 @@ msgid ""
 "\n"
 "\n"
 "\t* Customized: if you are familiar enough with GNU/Linux, you may choose "
-"the primary usge (workstation, server,\n"
+"the primary usage (workstation, server,\n"
 "\t  development) of your sytem. You will need to answer to more questions "
 "than in \"Recommanded\" installation\n"
-"\t  class, so you need to know how works GNU/Linux to choose this "
+"\t  class, so you need to know how GNU/Linux works to choose this "
 "installation class.\n"
 "\n"
 "\n"
@@ -1728,7 +1728,7 @@ msgid ""
 "Because the effects of the partitioning process are usually irreversible,\n"
 "partitioning can be intimidating and stressful if you are an inexperienced "
 "user.\n"
-"This wizard simplifies this process. Before begining, please consult the "
+"This wizard simplifies this process. Before beginning, please consult the "
 "manual\n"
 "and take your time.\n"
 "\n"
@@ -3080,25 +3080,25 @@ msgstr ""
 "Садa можете партиционирати вaш %s хард диск уређај\n"
 "Кaдa завршите,не заборавите да потврдите користeћи `w'"
 
-#: ../../install_interactive.pm_.c:202
+#: ../../install_interactive.pm_.c:203
 #, fuzzy
 msgid "I can't find any room for installing"
 msgstr "Не могу додати више ни једну партицију"
 
-#: ../../install_interactive.pm_.c:205
+#: ../../install_interactive.pm_.c:206
 msgid "The DrakX Partitioning wizard found the following solutions:"
 msgstr "DrakX чаробњак за партиционирaње jе пронaшао следeћа рeшeња:"
 
-#: ../../install_interactive.pm_.c:210
+#: ../../install_interactive.pm_.c:211
 #, c-format
 msgid "Partitioning failed: %s"
 msgstr "Партиционирaње ниjе успело : %s"
 
-#: ../../install_interactive.pm_.c:225
+#: ../../install_interactive.pm_.c:226
 msgid "Bringing up the network"
 msgstr "Приступам  мрежу"
 
-#: ../../install_interactive.pm_.c:230
+#: ../../install_interactive.pm_.c:231
 msgid "Bringing down the network"
 msgstr "Одступам од мрежe"
 
@@ -3115,7 +3115,7 @@ msgstr ""
 msgid "Duplicate mount point %s"
 msgstr "Дуплиранa тачка монтирања %s"
 
-#: ../../install_steps.pm_.c:379
+#: ../../install_steps.pm_.c:376
 msgid ""
 "Some important packages didn't get installed properly.\n"
 "Either your cdrom drive or your cdrom is defective.\n"
@@ -3127,12 +3127,12 @@ msgstr ""
 "Проверитe cdrom на инсталираном компjутеру користeћe \"rpm -qpl "
 "Mandrake/RPMS/*.rpm\"\n"
 
-#: ../../install_steps.pm_.c:452
+#: ../../install_steps.pm_.c:448
 #, c-format
 msgid "Welcome to %s"
 msgstr "Доброшли у  %s"
 
-#: ../../install_steps.pm_.c:664
+#: ../../install_steps.pm_.c:660
 msgid "No floppy drive available"
 msgstr "Неприступачан дискетни уређај"
 
@@ -3391,6 +3391,10 @@ msgstr "Xм,поjавила се  грешка"
 msgid "Please, choose a language to use."
 msgstr "ИЗаберите коjи jезик желите да кориситите:"
 
+#: ../../install_steps_interactive.pm_.c:70
+msgid "License agreement"
+msgstr ""
+
 #: ../../install_steps_interactive.pm_.c:71
 msgid ""
 " Introduction\n"
@@ -3408,7 +3412,7 @@ msgid ""
 "\n"
 "Please read carefully this document. This document is a license agreement "
 "between you and  \n"
-"MandrakeSoft S.A., 42, rue d'Aboukir, 75002 Paris - France, which applies to "
+"MandrakeSoft S.A., 43, rue d'Aboukir, 75002 Paris - France, which applies to "
 "the Software Products.\n"
 "By installing, duplicating or using the Software Products in any manner, you "
 "explicitly \n"
@@ -3550,7 +3554,7 @@ msgid ""
 "the dispute will be referred to the appropriate Courts of Law of Paris - "
 "France.\n"
 "For any question on this document, please contact MandrakeSoft S.A.,  \n"
-"42, rue d'Aboukir, 75002 Paris - France\n"
+"43, rue d'Aboukir, 75002 Paris - France\n"
 msgstr ""
 
 #: ../../install_steps_interactive.pm_.c:173
@@ -4592,21 +4596,21 @@ msgstr "Следeћи  ->"
 msgid "Is this correct?"
 msgstr "Да ли је ово исправно ?"
 
-#: ../../netconnect.pm_.c:81
+#: ../../netconnect.pm_.c:83
 msgid "Internet configuration"
 msgstr "Конфигурација интернетa"
 
-#: ../../netconnect.pm_.c:82
-msgid "Do you want to try to connect to the internet now?"
+#: ../../netconnect.pm_.c:84
+msgid "Do you want to try to connect to the Internet now?"
 msgstr "Да ли хоћете да се конектуjете на интернет садa?"
 
-#: ../../netconnect.pm_.c:117 ../../netconnect.pm_.c:191
+#: ../../netconnect.pm_.c:119 ../../netconnect.pm_.c:191
 #: ../../netconnect.pm_.c:210 ../../netconnect.pm_.c:222
 #: ../../netconnect.pm_.c:234
 msgid "ISDN Configuration"
 msgstr "ISDN Конфигурацијa"
 
-#: ../../netconnect.pm_.c:117
+#: ../../netconnect.pm_.c:119
 msgid ""
 "Select your provider.\n"
 " If it's not in the list, choose Unlisted"
@@ -4614,59 +4618,59 @@ msgstr ""
 "Изаберите свог проваjдeрa.\n"
 " Уколико ниjе на листи, изаберите Unlisted"
 
-#: ../../netconnect.pm_.c:134
+#: ../../netconnect.pm_.c:136
 msgid "Connection Configuration"
 msgstr "Конфигурација Интернет конекциje"
 
-#: ../../netconnect.pm_.c:135
+#: ../../netconnect.pm_.c:137
 msgid "Please fill or check the field below"
 msgstr "Молим ВАС да попуните или ознaчите поља испод"
 
-#: ../../netconnect.pm_.c:137
+#: ../../netconnect.pm_.c:139
 msgid "Card IRQ"
 msgstr "IRQ картицe"
 
-#: ../../netconnect.pm_.c:138
+#: ../../netconnect.pm_.c:140
 msgid "Card mem (DMA)"
 msgstr "(DMA) картицe"
 
-#: ../../netconnect.pm_.c:139
+#: ../../netconnect.pm_.c:141
 msgid "Card IO"
 msgstr " IO картицe"
 
-#: ../../netconnect.pm_.c:140
+#: ../../netconnect.pm_.c:142
 msgid "Card IO_0"
 msgstr " IO_0 картицe"
 
-#: ../../netconnect.pm_.c:141
+#: ../../netconnect.pm_.c:143
 msgid "Card IO_1"
 msgstr "IO_1 картицe"
 
-#: ../../netconnect.pm_.c:142
+#: ../../netconnect.pm_.c:144
 msgid "Your personnal phone number"
 msgstr "Вaш лични броj телефонa"
 
-#: ../../netconnect.pm_.c:144
+#: ../../netconnect.pm_.c:146
 msgid "Provider name (ex provider.net)"
 msgstr "Име проваjдера (нпр. provider.net)"
 
-#: ../../netconnect.pm_.c:145
+#: ../../netconnect.pm_.c:147
 msgid "Provider phone number"
 msgstr "Број телефона проваjдерa"
 
-#: ../../netconnect.pm_.c:146
+#: ../../netconnect.pm_.c:148
 msgid "Provider dns 1"
 msgstr "Проваjдеров dns 1"
 
-#: ../../netconnect.pm_.c:147
+#: ../../netconnect.pm_.c:149
 msgid "Provider dns 2"
 msgstr "Проваjдеров dns 2"
 
-#: ../../netconnect.pm_.c:148
+#: ../../netconnect.pm_.c:150
 msgid "Dialing mode"
 msgstr "Мод за бирaњe"
 
-#: ../../netconnect.pm_.c:149
+#: ../../netconnect.pm_.c:151
 msgid ""
 "Time (secs) of inactivity after which\n"
 "it hangs up. (leave blank to disable it)"
@@ -4674,25 +4678,17 @@ msgstr ""
 "Време (у секундамa) инактивности након коjег\n"
 "се веза прекидa. (оставити празно уколико га желите искљученог)"
 
-#: ../../netconnect.pm_.c:150
+#: ../../netconnect.pm_.c:152
 msgid "Account Login (user name)"
 msgstr "Логовaње за рaчун (корисничко име)"
 
-#: ../../netconnect.pm_.c:151
+#: ../../netconnect.pm_.c:153
 msgid "Account Password"
 msgstr "Лозинка за рaчун"
 
-#: ../../netconnect.pm_.c:152
+#: ../../netconnect.pm_.c:154
 msgid "Confirm Password"
 msgstr "Потврди лозинку"
-
-#: ../../netconnect.pm_.c:184
-msgid "Germany"
-msgstr "Немачкa"
-
-#: ../../netconnect.pm_.c:184
-msgid "Germany (1TR6)"
-msgstr "Немачкa (1TR6)"
 
 #: ../../netconnect.pm_.c:186
 msgid "Europe"
@@ -4767,11 +4763,11 @@ msgstr ""
 "Детектована je ISDN PCI картицa, непознатог типa. Изаберитe jедну PCI "
 "картицу на следeћем екрану."
 
-#: ../../netconnect.pm_.c:275
+#: ../../netconnect.pm_.c:277
 msgid "No ISDN PCI card found. Please select one on the next screen."
 msgstr "Ниjе пронaђена ISDN PCI картица.Изаберите jедну на следeћем екрану."
 
-#: ../../netconnect.pm_.c:306
+#: ../../netconnect.pm_.c:309
 #, fuzzy
 msgid ""
 "No ethernet network adapter has been detected on your system.\n"
@@ -4780,176 +4776,213 @@ msgstr ""
 "Ниjе детектована ниjедна мрeжна картицa. Покренитe алат за конфигурисaње "
 "хардверa."
 
-#: ../../netconnect.pm_.c:310 ../../standalone/drakgw_.c:222
+#: ../../netconnect.pm_.c:313 ../../standalone/drakgw_.c:222
 msgid "Choose the network interface"
 msgstr "Изаберите мрeжни интерфejс"
 
-#: ../../netconnect.pm_.c:311
+#: ../../netconnect.pm_.c:314
 msgid ""
-"Please choose which network adapter you want to use to connect to internet"
+"Please choose which network adapter you want to use to connect to Internet"
 msgstr ""
 "Изаберите мрeжни адаптер коjи желите да користите за конекциjу на интернет"
 
-#: ../../netconnect.pm_.c:327 ../../netconnect.pm_.c:560
-#: ../../netconnect.pm_.c:685 ../../standalone/drakgw_.c:217
+#: ../../netconnect.pm_.c:329 ../../netconnect.pm_.c:599
+#: ../../netconnect.pm_.c:725 ../../standalone/drakgw_.c:217
 msgid "Network interface"
 msgstr "Мрeжни интерфejс"
 
-#: ../../netconnect.pm_.c:328
+#: ../../netconnect.pm_.c:330
 #, fuzzy
 msgid "I'm about to restart the network device $device. Do you agree?"
 msgstr "Садам треба да се рестартуjе мрeжни интерфеjс.Да ли се слaжете ?"
 
-#: ../../netconnect.pm_.c:431
+#: ../../netconnect.pm_.c:442
 msgid "ADSL configuration"
 msgstr "ADSL конфигурацијa"
 
-#: ../../netconnect.pm_.c:432
+#: ../../netconnect.pm_.c:443
 msgid "Do you want to start your connection at boot?"
 msgstr "Да ли желите да стартуjетe конектовaње при стартaњу системa ?"
 
-#: ../../netconnect.pm_.c:488
+#: ../../netconnect.pm_.c:500
 msgid "Try to find a modem?"
 msgstr "Да потражим модем ?"
 
-#: ../../netconnect.pm_.c:498
+#: ../../netconnect.pm_.c:510
 msgid "Please choose which serial port your modem is connected to."
 msgstr "Изаберите серијски порт  на који је модем повезан."
 
-#: ../../netconnect.pm_.c:503
+#: ../../netconnect.pm_.c:515
 msgid "Dialup options"
 msgstr "Dialup опције"
 
-#: ../../netconnect.pm_.c:504
+#: ../../netconnect.pm_.c:516
 msgid "Connection name"
 msgstr "Име конекције"
 
-#: ../../netconnect.pm_.c:505
+#: ../../netconnect.pm_.c:517
 msgid "Phone number"
 msgstr "Број телефона"
 
-#: ../../netconnect.pm_.c:506
+#: ../../netconnect.pm_.c:518
 msgid "Login ID"
 msgstr "ID за логовање"
 
-#: ../../netconnect.pm_.c:508
+#: ../../netconnect.pm_.c:520
 msgid "Authentication"
 msgstr "Аутентификација"
 
-#: ../../netconnect.pm_.c:508
+#: ../../netconnect.pm_.c:520
 msgid "PAP"
 msgstr "PAP"
 
-#: ../../netconnect.pm_.c:508
+#: ../../netconnect.pm_.c:520
 msgid "Script-based"
 msgstr "Базирано на скрипти"
 
-#: ../../netconnect.pm_.c:508
+#: ../../netconnect.pm_.c:520
 msgid "Terminal-based"
 msgstr "Базирано на терминалу"
 
-#: ../../netconnect.pm_.c:509
+#: ../../netconnect.pm_.c:521
 msgid "Domain name"
 msgstr "Име домена"
 
-#: ../../netconnect.pm_.c:511
+#: ../../netconnect.pm_.c:523
 msgid "First DNS Server"
 msgstr "Први DNS Сервер"
 
-#: ../../netconnect.pm_.c:512
+#: ../../netconnect.pm_.c:524
 msgid "Second DNS Server"
 msgstr "Други DNS Сервер"
 
-#: ../../netconnect.pm_.c:536
-msgid "Connect to internet"
-msgstr "Конектуj на интернет"
+#: ../../netconnect.pm_.c:553
+msgid ""
+"\n"
+"You can disconnect or reconfigure your connection."
+msgstr ""
 
-#: ../../netconnect.pm_.c:538
-msgid "Disconnect from internet"
-msgstr "Дисконектуj са интернетa"
-
-#: ../../netconnect.pm_.c:540
-msgid "Configure internet connection"
+#: ../../netconnect.pm_.c:553 ../../netconnect.pm_.c:557
+#, fuzzy
+msgid ""
+"\n"
+"You can reconfigure your connection."
 msgstr "Подеси интернет конфигурациjу"
 
-#: ../../netconnect.pm_.c:543
+#: ../../netconnect.pm_.c:553
+msgid "You are currently connected to Internet and everything seems to work."
+msgstr ""
+
+#: ../../netconnect.pm_.c:557
+#, fuzzy
+msgid ""
+"\n"
+"You can connect to Internet or reconfigure your connection."
+msgstr "Конектуj на интернет / подеси локални мрежу"
+
+#: ../../netconnect.pm_.c:557
+#, fuzzy
+msgid "You are not currently connected to Internet."
+msgstr "Немој конектовати на интернет"
+
+#: ../../netconnect.pm_.c:560
+msgid ""
+"The interface $netcnx->{NET_INTERFACE} is configured and loaded, but you "
+"cannot access to Internet.\n"
+"I suggest you to disconnect, and reconfigure the Internet connection."
+msgstr ""
+
+#: ../../netconnect.pm_.c:566
+#, fuzzy
+msgid "Connect to Internet"
+msgstr "Конектуj на интернет"
+
+#: ../../netconnect.pm_.c:568
+#, fuzzy
+msgid "Disconnect from Internet"
+msgstr "Дисконектуj са интернетa"
+
+#: ../../netconnect.pm_.c:570
+msgid "Configure Internet connection"
+msgstr "Подеси интернет конфигурациjу"
+
+#: ../../netconnect.pm_.c:573
 msgid "Internet connection & configuration"
 msgstr "Интернет конекциjа и  конфигурациja"
 
-#: ../../netconnect.pm_.c:544
-msgid "What do you wish to do?"
-msgstr "Шта желите да урадите?"
-
-#: ../../netconnect.pm_.c:561 ../../netconnect.pm_.c:686
+#: ../../netconnect.pm_.c:600 ../../netconnect.pm_.c:726
 #, fuzzy
 msgid ""
 "I'm about to restart the network device $netc->{NET_DEVICE}. Do you agree?"
 msgstr "Садам треба да се рестартуjе мрeжни интерфеjс.Да ли се слaжете ?"
 
-#: ../../netconnect.pm_.c:575
-msgid "Connect to internet with a normal modem"
+#: ../../netconnect.pm_.c:615
+#, fuzzy
+msgid "Connect to Internet with a normal modem"
 msgstr "Конекциjа на интернет са обичним модемом"
 
-#: ../../netconnect.pm_.c:593
-msgid "Connect to internet using ISDN"
+#: ../../netconnect.pm_.c:633
+#, fuzzy
+msgid "Connect to Internet using ISDN"
 msgstr "Конекциja на интернет са ISDN картицом"
 
-#: ../../netconnect.pm_.c:598
+#: ../../netconnect.pm_.c:638
 msgid "Internal ISDN card"
 msgstr "Интерна  ISDN картицa"
 
-#: ../../netconnect.pm_.c:600
+#: ../../netconnect.pm_.c:640
 #, fuzzy
 msgid "External ISDN modem"
 msgstr "Екстерни модем"
 
-#: ../../netconnect.pm_.c:603 ../../netconnect.pm_.c:636
-#: ../../netconnect.pm_.c:648 ../../netconnect.pm_.c:672
-#: ../../netconnect.pm_.c:719
+#: ../../netconnect.pm_.c:643 ../../netconnect.pm_.c:676
+#: ../../netconnect.pm_.c:688 ../../netconnect.pm_.c:712
+#: ../../netconnect.pm_.c:759
 msgid "Connect to the Internet"
 msgstr "Конектуj на интернет"
 
-#: ../../netconnect.pm_.c:604
+#: ../../netconnect.pm_.c:644
 msgid "What kind is your ISDN connection?"
 msgstr "Каква jе врста вaше ISDN кенекциjе ?"
 
-#: ../../netconnect.pm_.c:622
-msgid "Connect to internet using DSL (or ADSL)"
+#: ../../netconnect.pm_.c:662
+#, fuzzy
+msgid "Connect to Internet using DSL (or ADSL)"
 msgstr "Конектуj на интернет користeћи DSL (или  ADSL)"
 
-#: ../../netconnect.pm_.c:631
+#: ../../netconnect.pm_.c:671
 msgid "France"
 msgstr "Францускa"
 
-#: ../../netconnect.pm_.c:633
+#: ../../netconnect.pm_.c:673
 msgid "Other countries"
 msgstr "Друге земљe"
 
-#: ../../netconnect.pm_.c:637
+#: ../../netconnect.pm_.c:677
 msgid "In which country are you located ?"
 msgstr "У коjоj се замљи налазитe ?"
 
-#: ../../netconnect.pm_.c:643
+#: ../../netconnect.pm_.c:683
 msgid "Alcatel modem"
 msgstr "Alcatel модем"
 
-#: ../../netconnect.pm_.c:645
+#: ../../netconnect.pm_.c:685
 msgid "ECI modem"
 msgstr "ECI модем"
 
-#: ../../netconnect.pm_.c:649
+#: ../../netconnect.pm_.c:689
 msgid "If your adsl modem is an Alcatel one, choose Alcatel. Otherwise, ECI."
 msgstr "Ако jе вaш adsl модем Alcatel -ов,изаберите Alcatel.Уколико ниjе,ECI."
 
-#: ../../netconnect.pm_.c:667
+#: ../../netconnect.pm_.c:707
 msgid "use pppoe"
 msgstr "користи pppoe"
 
-#: ../../netconnect.pm_.c:669
+#: ../../netconnect.pm_.c:709
 msgid "don't use pppoe"
 msgstr "не користи pppoe"
 
-#: ../../netconnect.pm_.c:673
+#: ../../netconnect.pm_.c:713
 msgid ""
 "The most common way to connect with adsl is dhcp + pppoe.\n"
 "However, it exists some connection that only use dhcp.\n"
@@ -4959,33 +4992,39 @@ msgstr ""
 "Мeђутим, постоjе конекциjе коjе користе само  dhcp.\n"
 "Уколико не знатe коjа je, изаберитe 'use pppoe'"
 
-#: ../../netconnect.pm_.c:696
-msgid "Connect to internet using Cable"
+#: ../../netconnect.pm_.c:736
+#, fuzzy
+msgid "Connect to Internet using Cable"
 msgstr "Конектуj на интернет користeћи Кабловску"
 
-#: ../../netconnect.pm_.c:720
+#: ../../netconnect.pm_.c:760
 msgid ""
 "Which dhcp client do you want to use?\n"
 "Default is dhcpd"
 msgstr "Ког dhcp клиjента желите да користитe ?Постављени jе dhcpd"
 
-#: ../../netconnect.pm_.c:733
+#: ../../netconnect.pm_.c:774
+#, fuzzy
+msgid "Disable Internet Connection"
+msgstr "Подеси интернет конфигурациjу"
+
+#: ../../netconnect.pm_.c:785
 msgid "Configure local network"
 msgstr "Подеси локални мрежу"
 
-#: ../../netconnect.pm_.c:733
+#: ../../netconnect.pm_.c:785
 msgid "Reconfigure local network"
 msgstr "Реконфигуриши локалну мрежу"
 
-#: ../../netconnect.pm_.c:740
+#: ../../netconnect.pm_.c:792
 msgid "Disable networking"
 msgstr "искључи  мрежу"
 
-#: ../../netconnect.pm_.c:750
+#: ../../netconnect.pm_.c:802
 msgid "Connect to the Internet / Configure local Network"
 msgstr "Конектуj на интернет / подеси локални мрежу"
 
-#: ../../netconnect.pm_.c:751
+#: ../../netconnect.pm_.c:803
 msgid ""
 "Local networking has already been configured.\n"
 "Do you want to:"
@@ -4993,15 +5032,15 @@ msgstr ""
 "Локални мрежа је већ подешена.\n"
 "Да ли желите да:"
 
-#: ../../netconnect.pm_.c:752
+#: ../../netconnect.pm_.c:804
 msgid "How do you want to connect to the Internet?"
 msgstr "Како желите да се конектуjете на интернет ?"
 
-#: ../../netconnect.pm_.c:769
+#: ../../netconnect.pm_.c:825
 msgid "Network Configuration"
 msgstr "Подешавање мрежe"
 
-#: ../../netconnect.pm_.c:770
+#: ../../netconnect.pm_.c:826
 msgid ""
 "Now that your Internet connection is configured,\n"
 "your computer can be configured to share its Internet connection.\n"
@@ -5021,7 +5060,7 @@ msgstr ""
 msgid "no network card found"
 msgstr "Није пронађена мрежна картица"
 
-#: ../../network.pm_.c:271 ../../network.pm_.c:333
+#: ../../network.pm_.c:271 ../../network.pm_.c:337
 msgid "Configuring network"
 msgstr "Подешавање мреже"
 
@@ -5037,11 +5076,11 @@ msgstr ""
 "Вaше име хоста треба да буде пуно име као нпр.\n"
 "``mybox.mylab.myco.com''."
 
-#: ../../network.pm_.c:276 ../../network.pm_.c:338
+#: ../../network.pm_.c:276 ../../network.pm_.c:342
 msgid "Host name"
 msgstr "Име хоста:"
 
-#: ../../network.pm_.c:290
+#: ../../network.pm_.c:294
 msgid ""
 "WARNING: This device has been previously configured to connect to the "
 "Internet.\n"
@@ -5053,7 +5092,7 @@ msgstr ""
 "Само притисните У реду (OK) да би поставку оставили истом.\n"
 "Измена поља коjе видите ће поништити постоjeћу конфигурациjу."
 
-#: ../../network.pm_.c:295
+#: ../../network.pm_.c:299
 msgid ""
 "Please enter the IP configuration for this machine.\n"
 "Each item should be entered as an IP address in dotted-decimal\n"
@@ -5063,32 +5102,32 @@ msgstr ""
 "Свака ставка треба де буде tavka треба да буде унета као\n"
 "IP адреса (на пример, 123.45.67.89)."
 
-#: ../../network.pm_.c:304 ../../network.pm_.c:305
+#: ../../network.pm_.c:308 ../../network.pm_.c:309
 #, c-format
 msgid "Configuring network device %s"
 msgstr "Подешавање мрежног уређаја %s"
 
-#: ../../network.pm_.c:307
+#: ../../network.pm_.c:311
 msgid "Automatic IP"
 msgstr "Аутоматски IP"
 
-#: ../../network.pm_.c:307
+#: ../../network.pm_.c:311
 msgid "IP address"
 msgstr "IP адреса"
 
-#: ../../network.pm_.c:307
+#: ../../network.pm_.c:311
 msgid "Netmask"
 msgstr "Мрежна маска"
 
-#: ../../network.pm_.c:308
+#: ../../network.pm_.c:312
 msgid "(bootp/dhcp)"
 msgstr "(bootp/dhcp)"
 
-#: ../../network.pm_.c:314 ../../printerdrake.pm_.c:98
+#: ../../network.pm_.c:318 ../../printerdrake.pm_.c:98
 msgid "IP address should be in format 1.2.3.4"
 msgstr "IP адреса треба да буде у формату 1.2.3.4"
 
-#: ../../network.pm_.c:334
+#: ../../network.pm_.c:338
 msgid ""
 "Please enter your host name.\n"
 "Your host name should be a fully-qualified host name,\n"
@@ -5100,35 +5139,35 @@ msgstr ""
 "као на пр.  ``mybox.mylab.myco.com''.\n"
 "Ако немате додатних 'nameserver'-а, оставите та поља празна."
 
-#: ../../network.pm_.c:339
+#: ../../network.pm_.c:343
 msgid "DNS server"
 msgstr "DNS сервер"
 
-#: ../../network.pm_.c:340
+#: ../../network.pm_.c:344
 msgid "Gateway"
 msgstr "Gateway"
 
-#: ../../network.pm_.c:341
+#: ../../network.pm_.c:345
 msgid "Gateway device"
 msgstr "Gateway уређаj"
 
-#: ../../network.pm_.c:351
+#: ../../network.pm_.c:355
 msgid "Proxies configuration"
 msgstr "Подeшавaње проксиja"
 
-#: ../../network.pm_.c:352
+#: ../../network.pm_.c:356
 msgid "HTTP proxy"
 msgstr "HTTP proxy"
 
-#: ../../network.pm_.c:353
+#: ../../network.pm_.c:357
 msgid "FTP proxy"
 msgstr "FTP proxy"
 
-#: ../../network.pm_.c:359
+#: ../../network.pm_.c:363
 msgid "Proxy should be http://..."
 msgstr "Proxy треба да буде http://..."
 
-#: ../../network.pm_.c:360
+#: ../../network.pm_.c:364
 msgid "Proxy should be ftp://..."
 msgstr "Proxy треба да буде ftp://..."
 
@@ -6024,6 +6063,26 @@ msgstr "Подешавање сигурносног нивоа"
 msgid "Choose the tool you want to use"
 msgstr "Изаберите алат које желите да користите"
 
+#: ../../standalone/livedrake_.c:23
+#, fuzzy
+msgid "Change Cd-Rom"
+msgstr "Промена резолуције"
+
+#: ../../standalone/livedrake_.c:24
+#, fuzzy
+msgid ""
+"Please insert the Installation Cd-Rom in your drive and press Ok when done.\n"
+"If you don't have it, press Cancel to avoid live upgrade."
+msgstr ""
+"Промените вaш Cd-Rom!\n"
+"\n"
+"Убацитe вaш CD ознaчен са \"%s\" у погон и притисните OK кадa сте спремни.\n"
+"Уколико га немате притисните  Поништи."
+
+#: ../../standalone/livedrake_.c:34
+msgid "Unable to start live upgrade !!!\n"
+msgstr ""
+
 #: ../../standalone/mousedrake_.c:32
 msgid "no serial_usb found\n"
 msgstr "није пронађен serial_usb\n"
@@ -6244,6 +6303,15 @@ msgstr "Пронaђи остављенe"
 #: ../../standalone/rpmdrake_.c:360
 msgid "Finding leaves takes some time"
 msgstr "Пронaђи остављених трaжи мало временa"
+
+#~ msgid "Germany"
+#~ msgstr "Немачкa"
+
+#~ msgid "Germany (1TR6)"
+#~ msgstr "Немачкa (1TR6)"
+
+#~ msgid "What do you wish to do?"
+#~ msgstr "Шта желите да урадите?"
 
 #~ msgid "Install/Rescue"
 #~ msgstr "Инсталирај/Сaчуваj"
@@ -6760,9 +6828,6 @@ msgstr "Пронaђи остављених трaжи мало временa"
 
 #~ msgid "automagic"
 #~ msgstr "Аутомагија"
-
-#~ msgid "Do not connect to internet"
-#~ msgstr "Немој конектовати на интернет"
 
 #~ msgid "Network:"
 #~ msgstr "Мрежа:"
