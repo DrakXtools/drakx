@@ -68,11 +68,7 @@ my $cmd_line = 1;
 #- make sure terminal server and friends are installed
 my $ts = system("rpm -q terminal-server > /dev/null");
 if ($ts == 256) {
-	if ($ENV{DISPLAY}) {
-		system("urpmi --X terminal-server > /dev/null");
-	} else {
-		system("urpmi terminal-server > /dev/null");
-	}
+	system("urpmi --auto terminal-server >/dev/null 2>/dev/null") unless $::testing;
 	$ts = system("rpm -q terminal-server > /dev/null");
 	if ($ts == 256 && !$::testing) {
 		warn(N("Useless without Terminal Server"));
