@@ -949,6 +949,7 @@ notation (for example, 1.2.3.4).")),
                         $ethntf->{NEEDHOSTNAME} = bool2yesno($needhostname);
                         $ethntf->{MII_NOT_SUPPORTED} = bool2yesno(!$hotplug);
                         $ethntf->{HWADDR} = $track_network_id or delete $ethntf->{HWADDR};
+                        $netc->{$_} = $ethntf->{DEVICE} foreach qw(NET_DEVICE NET_INTERFACE);
                         $in->do_pkgs->install($netc->{dhcp_client}) if $auto_ip;
                         return $is_wireless ? "wireless" : "static_hostname";
                     },
