@@ -10,7 +10,7 @@ print "waiting for X";
 foreach (1..30) {
     print ".";
     sleep 1;
-    print("no X server :(\n"), exit 1 if !fuzzy_pidofs(qr/\b$_[0]\b/);
+    print("no X server :(\n"), exit 1 if !fuzzy_pidofs(qr/\bX_move\b/);
     $nb++ if c::Xtest(':0');
     if ($nb > 2) { #- one succeeded test is not enough :-(
         print "found\n";
