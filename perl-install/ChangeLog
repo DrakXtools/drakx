@@ -1,3 +1,414 @@
+2004/09/27  Gwenole Beauchesne  <gbeauchesne at mandrakesoft.com>
+
+	* share/rpmsrate.corpo-server: mandrakegalaxy
+
+	* share/rpmsrate.corpo-desktop: clean-ups (factor out) + fixes for lib64
+	packages
+
+2004/09/27  Olivier Blin <oblin at mandrakesoft.com>
+
+	* network/netconnect.pm: we really support all linmodems (including Hsf
+	and Hcf ones) with 2.6 kernels
+
+2004/09/27  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/cs.po: updated Czech file
+
+	* share/po/bn.po: updated Bengali and Ukrainian files
+
+	* share/po/uk.po: updated Ukrainian file
+	updated Bengali and Ukrainian files
+
+	* lang.pm: fixed KDE font names to match currently shiped Xfs font names
+
+2004/09/27  Pixel  <pixel at mandrakesoft.com>
+
+	* partition_table/lvm_PV.pm: fix typos
+	simplify and handle LVM2, *but* since creating a LVM2 PV on a non
+	partitioned
+	drive doesn't modify the MBR, it won't help if the MBR is empty or a
+	valid dos
+	partition table, since those are checked first... but i won't change
+	this so
+	late in the release cycle
+
+	* fs.pm: fix typo
+
+	* partition_table/dos.pm: fail if legacy_sectors_per_track or
+	legacy_max_head doesn't exist instead of returning garbage (bugzilla
+	#11738)
+	perl_checker compliance
+	don't call compute_nb_cylinders() before checking {sectors} and {heads}
+	are valid
+
+	* pkgs.pm, install2.pm: better logging
+
+	* Makefile: remove from perl-Gtk2 directories from /tmp/list to have less
+	warnings
+
+2004/09/27  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* lang.pm: fix last commit
+
+	* standalone/drakperm (get_user_or_group) list users rather than groups
+	when requested for
+	(anthill #1161)
+
+2004/09/27  Warly  <warly at mandrakesoft.com>
+
+	* share/rpmsrate.corpo-server, share/rpmsrate.corpo-desktop: add ximian
+	connector with evolution and change mdkonline to mdkonline-backend
+
+2004/09/26  (Hilbert) <h at mandrake.org>
+
+	* share/po/zh_TW.po: perl-install:1310
+	Manual choice
+
+2004/09/26  Olivier Blin <oblin at mandrakesoft.com>
+
+	* standalone/net_monitor: I am stupid, start when asked to start, stop
+	when asked to stop
+
+	* standalone/net_applet: fix again running processes detection
+	(go2state) do not destroy/re-create menu if state hasn't changed, or
+	else the menu may disappear without any reason
+
+	* standalone/drakroam (ConnectNow) specify device to iwconfig when
+	applying settings (partial fix for #11279)
+
+2004/09/26  rcasha
+
+	* share/po/mt.po: var
+
+2004/09/25  (Hilbert) <h at mandrake.org>
+
+	* share/po/zh_TW.po: DrakX-zh_TW: 1283
+	The most common
+
+2004/09/24  Frederic Lepied  <flepied at mandrakesoft.com>
+
+	* install_steps.pm: Mandrakelinux
+
+	* share/rpmsrate: slmodem-kernel and bluez-utils
+
+2004/09/24  Pixel  <pixel at mandrakesoft.com>
+
+	* printer/printerdrake.pm: don't ask when $in is not set in
+	security_check()
+
+	* install_steps_interactive.pm: oops, i missed a ->cleanupPrinter here.
+	inline it here too
+	install_steps must not call a method only defined in
+	install_steps_interactive, inline it
+
+	* standalone/bootloader-config: fix typos in usage
+
+	* install_steps.pm: install_steps must not call a method only defined in
+	install_steps_interactive, inline it
+
+	* fsedit.pm: increase the max size of the swap
+
+2004/09/24  Reinout van Schouwen  <reinout at cs.vu.nl>
+
+	* share/po/nl.po: Updated Dutch (nl) translation
+	by Reinout van Schouwen <reinout@cs.vu.nl>
+	* DrakX
+
+2004/09/24  Rafael Garcia-Suarez <rgarciasuarez at mandrakesoft.com>
+
+	* install_any.pm: Fix field name
+	Remove dead code
+	Better handling of relative paths
+	Ask only once for a supplementary CD
+	Fix 10.0-style paths
+
+	* pkgs.pm: Save hdlists and synthesis as user root
+	Remove unused code
+
+2004/09/24  tsdgeos
+
+	* share/po/ca.po: Small catalan updates
+
+2004/09/24  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* network/netconnect.pm: do not disable ifplugd support for wireless cards
+
+	* standalone/drakups (add_device_wizard) refix list refreshing on UPS
+	adding
+
+	* drakxtools.spec: fix 10.1-11mdk's changelog
+	10.1-11mdk
+
+2004/09/23  Olivier Blin <oblin at mandrakesoft.com>
+
+	* standalone/drakupdate_fstab: allow SYNC=no option in
+	/etc/sysconfig/dynamic
+
+	* network/modem.pm (ppp_configure) add a specific udev script in addition
+	to the udev
+	rules file to create /dev/modem (ttySL0 is a symlink, udev won't be
+	called when it's created)
+
+	* network/netconnect.pm: install kernel packages for winmodems
+
+	* network/adsl.pm (adsl_probe_info) fix old typo, do not reset vpi and vci
+	if vpi is
+	zero
+
+2004/09/23  Pixel  <pixel at mandrakesoft.com>
+
+	* install_interactive.pm: call fsedit::auto_allocate() with
+	$o->{partitions} so be able to fix a partitioning scheme in a defcfg
+
+2004/09/23  rcasha
+
+	* share/po/mt.po: var
+
+2004/09/23  Rafael Garcia-Suarez <rgarciasuarez at mandrakesoft.com>
+
+	* Makefile.config, Makefile: Introducing TMPDIR
+
+	* install_any.pm: Missing bit from the trunk
+
+2004/09/23  rstandtke
+
+	* share/po/de.po: some additions and fixes
+
+2004/09/23  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* share/rpmsrate: do not install scim for hindic (native keyboards're
+	availlable)
+	gives a change to be on CDs to skim
+
+	* share/po/br.po: update
+
+	* lang.pm: add support for SKIM IM
+	install x-unikey for vietnamese (aka sync with share/rpmsrate)
+	use Sazanami Gothic for everything in japanese (Yukiko Bando)
+
+2004/09/22  Olivier Blin <oblin at mandrakesoft.com>
+
+	* standalone/net_monitor: simplify
+
+	* network/adsl_consts.pm: rename "|Télé2 128k " as "|Télé2" so that users
+	don't choose a random
+	provider with wrong vci/vpi settings
+
+	* network/netconnect.pm: use ttySL0 for slmodem, so that a symlink to
+	/dev/modem is done (#8947
+	again)
+
+2004/09/22  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/et.po: updated Estonian file
+
+	* share/po/ja.po: updated Japanese file
+
+2004/09/22  Pixel  <pixel at mandrakesoft.com>
+
+	* partition_table/dos.pm: remove the backtrace
+	more logging
+
+	* install2.pm: don't set {meta_class} from file VERSION when it is already
+	given on cmdline
+
+	* fsedit.pm: fix an old ugly typo
+
+	* partition_table.pm: better logging
+
+	* devices.pm: module aes is now named aes-i586 (bugzilla #11588)
+
+	* lvm.pm: call pvremove on every PVs when destroying a VG (to clear the
+	LVM2 magic) (bugzilla #11579)
+
+	* fs.pm: silently ignore encrypted filesystems with no encrypt_key
+	don't add /dev/pts line in fstab anymore (it's done in initrd and udev)
+
+2004/09/22  rcasha
+
+	* share/po/mt.po: var
+
+2004/09/22  Rafael Garcia-Suarez <rgarciasuarez at mandrakesoft.com>
+
+	* install_steps.pm, install_steps_interactive.pm: New method
+	selectSupplMedia
+
+	* Makefile: Separate mdkinst_stage2 step in makefile
+
+	* pkgs.pm: Don't read packages twice
+	Fix variable name
+	Handle reading multiple "hdlists" files (for supplementary media)
+	More CD­rom mountpoint flexibility
+	Better error reporting with rpm installation failures
+	Always return a hashref from pkgs::packageMedium()
+
+	* install_any.pm: A trimmed-down version of the supplementary media
+	handling routine of
+	10.1 community. It handles only supplementary CDs.
+	Selection of supplementary media is now a method.
+	Backport utility functions from 10.1
+	Cope with different cd-rom mountpoints
+
+2004/09/22  Tibor Pittich  <Tibor.Pittich at phuture.sk>
+
+	* share/po/sk.po: updated slovak translation
+
+2004/09/22  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* share/po/br.po: before exclamation marks, ellipsises, question marks and
+	colons:
+	  - replace spaces by non breaking spaces where appropriate
+	  - add missing spaces
+
+	* share/po/fr.po: fix badly phrased translation
+	before exclamation marks, ellipsises, question marks and colons:
+	  - replace spaces by non breaking spaces where appropriate
+	  - add missing spaces
+	fix a translation
+
+2004/09/21  David Baudens  <baudens at mandrakesoft.com>
+
+	* share/advertising/lpi.png, share/advertising/list-pwp,
+	share/advertising/lpi.pl, share/advertising/list-dwd,
+	share/advertising/list-dis, share/advertising/list-ppp: Add LPI
+	advertisement
+
+2004/09/21  Funda Wang <fundawang at linux.net.cn>
+
+	* share/po/zh_CN.po: Updated Simplified Chinese translation
+
+2004/09/21  Gwenole Beauchesne  <gbeauchesne at mandrakesoft.com>
+
+	* mdk-stage1/pcmcia_/cs.h, mdk-stage1/pcmcia_/cardmgr.c,
+	mdk-stage1/pcmcia_/ds.h, mdk-stage1/pcmcia_/yacc_config.h,
+	mdk-stage1/pcmcia_/cs_types.h, mdk-stage1/pcmcia_/vg468.h,
+	mdk-stage1/pcmcia_/yacc_config.c, mdk-stage1/pcmcia_/i82365.h,
+	mdk-stage1/pcmcia_/driver_ops.h, mdk-stage1/pcmcia_/cirrus.h: clean-up,
+	merge, fix pcmcia subsystem to make it work on x86_64
+
+	* mdk-stage1/init.c: dirty little hack from pixel/gc to let mdk stage1
+	work with newer kernels
+	("testing" variable is supposedly obsolete btw)
+
+	* mdk-stage1/rescue-gui.c: make it possible to restore windows boot loader
+	on x86_64 too
+
+	* share/rpmsrate: rebreakify, tv likes it
+	  - use correct name for mandrakegalaxy
+	  - install cxoffice if available
+	  - move rp-pppoe to appropriate location
+
+	* rescue/list.x86_64: add grub stuff to rescue
+
+	* bootloader.pm: run grub installation program in chroot so that to avoid
+	weird pbs at times
+
+	* mdk-stage1/stage1.c: same dirtly little hack (a cleanup actually)
+
+	* share/list: add missing gtk module (im-cedilla), arrangements for new
+	pango
+
+	* mdk-stage1/Makefile: pcmcia works on x86_64 too, update stage1 build for
+	10.0
+
+	* mdk-stage1/dietlibc/include/sys/io.h: define io ports on x86_64 too for
+	pcmcia stuff
+
+2004/09/21  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/eu.po: updated Basque file
+
+2004/09/21  Pixel  <pixel at mandrakesoft.com>
+
+	* Xconfig/main.pm: allow ignoring X config file when it contains errors
+
+	* mouse.pm: don't allow a broken X configuration to break mouse
+	configuration
+
+2004/09/21  Tibor Pittich  <Tibor.Pittich at phuture.sk>
+
+	* share/po/sk.po: updated slovak translation
+
+2004/09/21  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* share/po/br.po: update
+	typo fix
+
+2004/09/21  Warly  <warly at mandrakesoft.com>
+
+	* pkgs.pm: temporary workarround to fix extra CD
+
+	* install_steps_gtk.pm: do not display workstation entries in corporate
+	server
+
+	* share/rpmsrate, share/compssUsers.corpo-server,
+	share/rpmsrate.corpo-server, share/po/DrakX.pot,
+	share/rpmsrate.corpo-desktop, share/advertising/dwd-01.pl,
+	share/themes-corporate.rc, share/list, share/po/fr.po: Added some
+	corporate specific changes
+
+	* install_steps_interactive.pm: Display group selection in corporate
+
+	* any.pm: do not use default autologin in corporate
+
+	* Makefile: revert wrongly uploaded Makefile
+	Added some corporate specific changes
+
+	* install_gtk.pm: use corporate gtk theme in corporate
+
+2004/09/21  Youcef Rabah Rahal <rahal at arabeyes.org>
+
+	* share/po/ar.po: Arabic translation
+	Arabic translation
+
+2004/09/20  Olivier Blin <oblin at mandrakesoft.com>
+
+	* network/adsl.pm (adsl_conf_backend) do not let speedtouch-start launch
+	connection
+
+	* network/network.pm: more zeroconf fixes (zcip isn't a service, stop
+	tmdns service if
+	zeroconf is disabled, check tmdns init file in prefix/etc)
+
+	* network/netconnect.pm: do not write config two times for lan connections
+
+2004/09/20  Pixel  <pixel at mandrakesoft.com>
+
+	* diskdrake/interactive.pm, devices.pm, fs/type.pm, fs/mount_options.pm,
+	install_steps.pm, standalone/drakupdate_fstab, install_any.pm,
+	install_steps_interactive.pm, partition_table.pm: 
+	  - add field {part_number} for partitions
+	(handle it in subpart_from_wild_device_name(), partition_table::read())
+	  - create migrate_device_names() to handle the change of device names
+	when
+	  changing kernel&modules (eg: hde->hda or hda->sda)
+	  - change prototype of install_any::use_root_part()
+	  (prefix is dropped, optional $in is added)
+	  - create fs::type::can_be_this_fs_type() and use it
+	  - create devices::part_number() and devices::part_prefix() and use
+	them
+
+	* fs.pm: perl_checker compliance
+	  - add field {part_number} for partitions
+	(handle it in subpart_from_wild_device_name(), partition_table::read())
+	  - create migrate_device_names() to handle the change of device names
+	when
+	  changing kernel&modules (eg: hde->hda or hda->sda)
+	  - change prototype of install_any::use_root_part()
+	  (prefix is dropped, optional $in is added)
+	  - create fs::type::can_be_this_fs_type() and use it
+	  - create devices::part_number() and devices::part_prefix() and use
+	them
+
+2004/09/20  Rafael Garcia-Suarez <rgarciasuarez at mandrakesoft.com>
+
+	* pkgs.pm: Fix supplementary CDs with any kind of media
+
+2004/09/20  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* security/help.pm: add translator hints; real fix will be in mdk10.2:
+	s!N("(.*?) \"(ALL)\" (.*?)"!N("\1 %s \3", N("\2"))! and the like
+
 2004/09/20  Olivier Blin <oblin at mandrakesoft.com>
 
 	* standalone/net_monitor: remove connection time timer if connection fails
@@ -39649,7 +40060,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.971 2004/09/15 00:45:00 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.972 2004/09/20 10:09:44 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
