@@ -880,7 +880,7 @@ sub new {
 	$o->{rwindow} = _create_window($title);
 	$o->{rwindow}->set_position('center-on-parent');
 
-	if ($::isInstall || $::isEmbedded) {
+	if ($::isInstall) {
 	    gtkadd($o->{rwindow}, 
 		   gtkadd(gtkset_shadow_type(Gtk2::Frame->new(undef), 'out'),
 			  $o->{window} = gtkset_border_width(gtkset_shadow_type(Gtk2::Frame->new(undef), 'none'), 3)
@@ -892,7 +892,7 @@ sub new {
 	  $force_center || $o->{force_center} || 
 	    @interactive::objects && $::isStandalone && !$o->{transient}; #- no need to center when set_transient is used
 	$o->{rwindow}->set_modal(1) if $grab || $o->{grab} || $o->{modal};
-	$o->{rwindow}->set_transient_for($o->{transient}) if $o->{transient};
+	$o->{rwindow}->set_transient_for($o->{transient}) if $o->{transient} =~/Gtk2::Window/;
 
     } else {
 	$o->{rwindow} = $o->{window} = Gtk2::VBox->new(0,0);
