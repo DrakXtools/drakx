@@ -541,14 +541,14 @@ retry_mount:
                                         goto succeeded;
 
                                 if (prevt == 0)
-                                        clnt_perror(mclient, "mount");
+                                        log_message(clnt_sperror(mclient, "mount"));
                                 auth_destroy(mclient->cl_auth);
                                 clnt_destroy(mclient);
                                 mclient = 0;
                                 close(msock);
 			} else {
 				if (prevt == 0)
-					clnt_pcreateerror("mount");
+					log_message(clnt_spcreateerror("mount"));
 			}
 			prevt = t;
 
