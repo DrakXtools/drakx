@@ -124,7 +124,7 @@ sub ask_install_simple {
 sub ask_install {
     my ($in, $prefix) = @_;
     my %root_services = (
-			 _("Printing") => [ qw(cups lpr oki4daemon) ],
+			 _("Printing") => [ qw(cups cupslpd lpr oki4daemon) ],
 			 _("Internet") => [ qw(httpd ftp proftpd wuftpd) ],
 			 _("File sharing") => [ qw(nfs nfslock smb nettalk) ],
 			 _("System") => [ qw(usb usbd pcmcia irda xinetd inetd kudzu harddrake apmd sound network xfs) ],
