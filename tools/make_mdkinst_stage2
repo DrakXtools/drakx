@@ -51,12 +51,6 @@ rm -f $STAGE2TMP/usr/*/pango/*/modules/pango-{arabic,hangul,hebrew,indic,thai}-x
 rm -rf $STAGE2TMP{/usr/bin/brltty,/etc/brltty,/lib/brltty}
 rm -rf $STAGE2TMP/usr/share/locale_special
 
-(   # only keeping UTF-8
-    cd $STAGE2TMP/usr/share/locale; 
-    mv UTF-8 ..
-    rm -rf *
-    mv ../UTF-8 .
-)
 for i in /usr/share/keymaps /usr/share/xmodmap; do
     name=`basename $i`
     (cd $STAGE2TMP/$i ; ls * | $BUILD_ARCHIVE -b9s ../$name.cz2 400000)
