@@ -520,10 +520,11 @@ sub ask_fromW {
 	    }
 	} else {
 	    if ($e->{type} eq "combo") {
-		$w = Gtk2::Combo->new;
-		$w->set_use_arrows_always(1);
-		$w->entry->set_editable(!$e->{not_edit});
-		$w->disable_activate;
+		$w = $e->{not_edit} ? Gtk2::OptionMenu->new : Gtk2::Combo->new;
+          if (!$e->{not_edit}) {
+              $w->set_use_arrows_always(1);
+              $w->disable_activate;
+          }
 
 		my @formatted_list = map { may_apply($e->{format}, $_) } @{$e->{list}};
 
