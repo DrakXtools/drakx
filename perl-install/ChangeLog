@@ -1,3 +1,216 @@
+2003/01/07  Daouda Lo  <daouda@mandrakesoft.com>
+
+	* standalone/drakbug: 
+	  - new way to use request help
+
+	* standalone.pm: 
+	  - compress code (pixel)
+	  - use ask_warn when no browser is found on the system and BROWSER env
+	var not set.
+
+2003/01/07  Damien Chaumette  <dchaumette@mandrakesoft.com>
+
+	* network/network.pm: add network::easy_dhcp function. Quietly setup eth0
+	in dhcp and restart network.
+
+2003/01/07  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* rescue/tree/etc/issue: version 9.1 cooker
+
+	* rescue/devices.pl: init doesn't like anymore that /etc/initctl is
+	already here
+	(breaks any communication to init :/); remove /etc/initctl from
+	the initial filesystem, and let init create it as a fifo during
+	boot
+
+2003/01/07  Pablo Saratxaga  <pablo@mandrakesoft.com>
+
+	* share/po/th.po: converted th.po to UTF-8
+
+	* share/po/pl.po: converted pl.po to utf-8
+
+2003/01/07  Pixel  <pixel@mandrakesoft.com>
+
+	* steps.pm: move "configureX" step before "summary" step
+	move setupBootloader before summary
+
+	* any.pm: "require bootloader" where needed
+	use "if any" instead of "if grep", and various other occurences of
+	"any", "every", "partition"
+	  - part of setupBootloader() are now in setupBootloader__mbr_or_not(),
+	setupBootloader__general() and setupBootloader__boot_bios_drive()
+	  - this allows the creation of the new setupBootloader_simple() which
+	is
+	somehow similar to the old setupBootloader() in beginner mode
+	  - setupBootloader() is now always expert mode
+
+	* printer/printerdrake.pm: 
+	  - fix autodetection code (remember me to teach titi that "and" in list
+	context is bad)
+	  - use printer::detect::whatNetPrinter directly (instead of
+	net_detect() +
+	net_smb_detect()), it is faster when one wants both
+	use "if any" instead of "if grep", and various other occurences of
+	"any", "every", "partition"
+
+	* install_steps_interactive.pm (summary): add X configuration
+	(configureX): this step is now always automatic. don't call
+	configureXAfter() when config failed
+	use "if any" instead of "if grep", and various other occurences of
+	"any", "every", "partition"
+	  - adapt to new setupBootloader
+	  - add bootloader configuration in summary (still rough)
+	  - various cleanup
+
+	* crypto.pm: cleanup and add a comment (!)
+
+	* install_steps.pm: cleanup
+	fix looking for broken alternatives
+	use "if any" instead of "if grep", and various other occurences of
+	"any", "every", "partition"
+	  - adapt to new setupBootloader
+	  - add bootloader configuration in summary (still rough)
+	  - various cleanup
+
+	* network/network.pm, Xconfig/xfreeX.pm, network/smb.pm, lang.pm,
+	network/drakfirewall.pm, raid.pm, diskdrake/smbnfs_gtk.pm,
+	partition_table.pm, printer/main.pm, diskdrake/interactive.pm, pkgs.pm,
+	interactive/newt.pm, fs.pm, standalone/drakfont, network/ethernet.pm,
+	common.pm, detect_devices.pm, modules.pm, install_any.pm, timezone.pm:
+	use "if any" instead of "if grep", and various other occurences of
+	"any", "every", "partition"
+
+	* Xconfig/card.pm (configure): do not do card_config__not_listed in $auto
+	mode
+	(configure): return without doing anything when probe fails or
+	needVideoRam in $auto mode
+	(multi_head_choose): be completly automatic in $auto mode
+	use "if any" instead of "if grep", and various other occurences of
+	"any", "every", "partition"
+
+	* bootloader.pm: use "if any" instead of "if grep", and various other
+	occurences of "any", "every", "partition"
+	(method_choices): returns the choices of bootloaders (lilo, grub,
+	yaboot...) + cleanup
+	(suggest_onmbr): "lilo" and "grub" are now "unsafe" "on_mbr" choices
+	  - renaming of $lilo with $bootloader
+	  - $bootloader->{methods} is replaced by the much simpler
+	$bootloader->{method},
+	the special handling of grub (which need to also generate lilo.conf)
+	  is nicely handled in bootloader::install()
+	  - cleanup error handling: it was using the ugly (though safe)
+	/tmp/.error
+	  temporary file, better use an exception
+
+	* printer/detect.pm (detect): don't use net_smb_detect() and net_detect(),
+	call
+	whatNetPrinter() directly asking for both network & smb (faster)
+
+	* Xconfig/various.pm (various): in $auto mode, don't ask about tvout
+
+	* install_gtk.pm, install_steps_gtk.pm: 
+	  - remove help (which was at the bottom)
+	  - wizard style
+	  - focus "Next" button by default (this is rough, some dialog boxes
+	*need* changes
+	before being able to complete (think root password dialog))
+	use "if any" instead of "if grep", and various other occurences of
+	"any", "every", "partition"
+
+	* install_interactive.pm: fsedit::part2hd() returns a scalar, no need to
+	do "my ($hd) = fsedit::part2hd(...)"
+	use "if any" instead of "if grep", and various other occurences of
+	"any", "every", "partition"
+
+	* ugtk2.pm, interactive/gtk.pm: 
+	  - remove help (which was at the bottom)
+	  - wizard style
+	  - focus "Next" button by default (this is rough, some dialog boxes
+	*need* changes
+	before being able to complete (think root password dialog))
+
+	* diskdrake/hd_gtk.pm: fix ugly global setting of $ugtk2::pop_it
+	use "if any" instead of "if grep", and various other occurences of
+	"any", "every", "partition"
+
+	* interactive.pm: fix ask_okcancel in wizard mode
+	use "if any" instead of "if grep", and various other occurences of
+	"any", "every", "partition"
+	nicer debug message
+
+	* Xconfig/resolution_and_depth.pm (configure): in $auto mode, use
+	$default_resolution without asking
+	use "if any" instead of "if grep", and various other occurences of
+	"any", "every", "partition"
+
+	* Xconfig/monitor.pm: don't do anything when automatic configuration fails
+	in $auto mode
+	use "if any" instead of "if grep", and various other occurences of
+	"any", "every", "partition"
+
+	* Xconfig/main.pm (configure_everything): in $auto mode, don't test nor
+	ask when the config failed
+
+	* fsedit.pm: fsedit::part2hd() returns a scalar, no need to do "my ($hd) =
+	fsedit::part2hd(...)"
+	fix typo (operator priority related)
+	use "if any" instead of "if grep", and various other occurences of
+	"any", "every", "partition"
+
+	* partition_table/raw.pm: use internal_error instead of die for better
+	error message (esp. backtrace)
+
+	* install2.pm: 
+	  - remove help (which was at the bottom)
+	  - wizard style
+	  - focus "Next" button by default (this is rough, some dialog boxes
+	*need* changes
+	before being able to complete (think root password dialog))
+	cleanup
+	  - adapt to new setupBootloader
+	  - add bootloader configuration in summary (still rough)
+	  - various cleanup
+
+2003/01/07  Thierry Vignaud  <tvignaud@mandrakesoft.com>
+
+	* harddrake/data.pm: forgot to commit threat-hub-as-usb-controllers...
+
+	* standalone/draksound: perl_checker fix
+	let it ask for root capabilites if launched in standalone mode
+
+	* printer/printerdrake.pm: printerdrake is back alive
+
+	* printer/gimp.pm: fix new data structure usage
+	fixes
+	  - remove useless $_ setting
+	  - simplify overgianted look for functions
+	  - mask isprinterconfigured() as bogus: if $done is 1 then
+	$sectionfound *is* already 1
+	  - simplify by reusing list_passwd()
+	  - simplify program flow
+	  - one perl_checker fix
+	  - simplify directories list building
+	  - simplify test: if a file is a plain regular file, testing if it's a
+	  directory is useless;
+	  anyway, this test is probably bogus and should just be -e and not -f
+
+	* printer/office.pm: fix new data structure usage
+
+	* printer/main.pm: printerdrake is back alive
+	perl_checker fix
+	beautify
+	simplif installed spoolers "detection"
+
+	* Xconfig/card.pm: fix pixel sucks(bis)
+
+	* ugtk2.pm: CList and CTree being deprecated and unsupported in perl-gtk2,
+	don't bother handle them
+
+	* drakxtools.spec: 9.1-0.9mdk
+	9.1-0.8mdk
+
+	* Xconfig/resolution_and_depth.pm: fix pixel sucks
+
 2003/01/07  Pixel  <pixel@mandrakesoft.com>
 
 	* bootloader.pm (method_choices): returns the choices of bootloaders
@@ -7524,7 +7737,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.761 2003/01/05 13:26:00 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.762 2003/01/07 01:30:49 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
