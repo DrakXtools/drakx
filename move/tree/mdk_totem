@@ -73,7 +73,7 @@ if (@$bad_busy) {
 		    );
 
     $in->ask_from_({ 
-		     title => N("Error"),
+		     title => N("Read carefully!"),
 		     messages => N("You can't use another CDROM when the following programs are running: 
 %s", join(", ", uniq(sort @progs))) }, 
 		  [ { type => 'list', val => \$choice, list => first(list2kv(@l)), format => sub { $l{$_[0]} } } ]) or $in->exit;
