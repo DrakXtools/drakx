@@ -47,7 +47,7 @@ int ensure_dev_exists(char *dev)
 	if (!stat(dev, &buf))
 		return 0; /* if the file already exists, we assume it's correct */
 
-	if (name[0] == 's' && name[1] == 'd') {
+	if (ptr_begins_static_str(name, "sd")) {
 		/* SCSI disks */
 		major = 8;
 		minor = (name[2] - 'a') << 4;
@@ -55,7 +55,7 @@ int ensure_dev_exists(char *dev)
 			minor += 10 + (name[4] - '0');
 		else if (name[3])
 			minor += (name[3] - '0');
-	} else if (name[0] == 'h' && name[1] == 'd') {
+	} else if (ptr_begins_static_str(name, "hd")) {
 		/* IDE disks/cd's */
 		if (name[2] == 'a')
 			major = 3, minor = 0;
@@ -80,7 +80,7 @@ int ensure_dev_exists(char *dev)
 			minor += 10 + (name[4] - '0');
 		else if (name[3])
 			minor += (name[3] - '0');
-	} else if (name[0] == 's' && name[1] == 'r') {
+	} else if (ptr_begins_static_str(name , "sr")) {
 		/* SCSI cd's */
 		major = 11;
 		minor = name[2] - '0';
