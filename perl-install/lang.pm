@@ -19,19 +19,21 @@ use log;
 #- languages, carefully choosen)
 my %languages = (
   'en'  => [ 'English',			undef,	      'en', 'en_US' ],
-  'hy'  => [ 'Armenian',                'armscii-8',  'hy', 'hy' ],
-'zh_TW.Big5' => [ 'Chinese (Big5)',     'Big5', 'zh_TW.Big5', 'zh_TW.Big5:zh_TW.big5' ],
-'fr_FR' => [ 'French (France)',		'iso-8859-1', 'fr', 'fr_FR' ],
-  'ka'  => [ 'Georgian',                'georgian-academy', 'ka', 'ka' ],
 'de_DE' => [ 'German (Germany)',	'iso-8859-1', 'de', 'de_DE' ],
   'el'  => [ 'Greek',                   'iso-8859-7', 'el', 'el' ],
+'es_ES' => [ 'Spanish (Spain)',		'iso-8859-1', 'es', 'es' ],
+'fr_FR' => [ 'French (France)',		'iso-8859-1', 'fr', 'fr_FR' ],
+#- Galician users may want to also have spanish and portuguese languages 
+  'gl'  => [ 'Galician',		'iso-8859-1', 'gl', 'gl:es:pt' ],
   'hu'  => [ 'Hungarian', 		'iso-8859-2', 'hu', 'hu' ],
-  'is'  => [ 'Icelandic', 		'iso-8859-1', 'is', 'is' ],
+  'hy'  => [ 'Armenian',                'armscii-8',  'hy', 'hy' ],
 #- 'in' was the old code for indonesian language; by putting LANGUAGE=id:in
 #- we catch the few catalog files still using the wrong code
   'id'  => [ 'Indonesian',		'iso-8859-1', 'id', 'id:in' ],
+  'is'  => [ 'Icelandic', 		'iso-8859-1', 'is', 'is' ],
   'it'  => [ 'Italian',   		'iso-8859-1', 'it', 'it_IT' ],
   'ja'  => [ 'Japanese',		'jisx0208',   'ja', 'ja_JP.ujis' ],
+  'ka'  => [ 'Georgian',                'georgian-academy', 'ka', 'ka' ],
   'ko'  => [ 'Korean',                  'ksc5601',    'ko', 'ko' ],
   'no'  => [ 'Norwegian (Bokmaal)',	'iso-8859-1', 'no', 'no:no@nynorsk' ],
 'no@nynorsk' => [ 'Norwegian (Nynorsk)','iso-8859-1','no', 'no@nynorsk' ],
@@ -40,7 +42,6 @@ my %languages = (
   'ro'  => [ 'Romanian',  		'iso-8859-2', 'ro', 'ro' ],
   'ru'  => [ 'Russian',   		'koi8-r',     'ru', 'ru' ],
   'sk'  => [ 'Slovak',    		'iso-8859-2', 'sk', 'sk' ],
-'es_ES' => [ 'Spanish (Spain)',		'iso-8859-1', 'es', 'es' ],
   'tr'  => [ 'Turkish',	 		'iso-8859-9', 'tr', 'tr' ],
   'uk'  => [ 'Ukrainian', 		'koi8-u',     'uk', 'uk' ],
   'vi'  => [ 'Vietnamese (TCVN)',       'tcvn',       'vi',
@@ -48,6 +49,7 @@ my %languages = (
 'vi_VN.viscii' => [ 'Vietnamese (VISCII)','viscii',   'vi',
 				        'vi_VN.viscii:vi_VN.tcvn-viscii1.1-1' ],
   'wa'  => [ 'Walon',     		'iso-8859-1', 'wa', 'wa:fr_BE' ],
+'zh_TW.Big5' => [ 'Chinese (Big5)',     'Big5', 'zh_TW.Big5', 'zh_TW.Big5:zh_TW.big5' ],
 );
 
 my %charsets = (
@@ -88,6 +90,12 @@ my %charsets = (
   "iso-8859-9" => [ "lat5-16",		        "iso09",
 	"*-helvetica-medium-r-normal--14-*-*-*-*-iso8859-1," .
 	"*-helvetica-medium-r-normal--14-*-*-*-*-iso8859-9" ],
+  "iso-8859-13" => [ "??????",			"?????",
+	"*-helvetica-medium-r-normal--14-*-*-*-*-iso8859-1," .
+	"*-helvetica-medium-r-normal--14-*-*-*-*-iso8859-13" ],
+  "iso-8859-14" => [ "??????",			"?????",
+	"*-helvetica-medium-r-normal--14-*-*-*-*-iso8859-1," .
+	"*-helvetica-medium-r-normal--14-*-*-*-*-iso8859-14" ],
   "iso-8859-15" => [ "lat0-sun16",		"iso15",
 	"*-helvetica-medium-r-normal--14-*-*-*-*-iso8859-1," .
 	"*-helvetica-medium-r-normal--14-*-*-*-*-iso8859-15" ],
@@ -134,7 +142,7 @@ sub set {
     if ($lang) {
 	$ENV{LC_ALL}    = $lang;
 	$ENV{LANG}      = $languages{$lang}[2];
-	$ENV{LANGUAGES} = $languages{$lang}[3];
+	$ENV{LANGUAGE}  = $languages{$lang}[3];
     } else {
 	# stick with the default (English) */
 	delete $ENV{LANG};
