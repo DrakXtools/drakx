@@ -1,3 +1,115 @@
+2004/03/10  Florin Grad  <florin at mandrakesoft.com>
+
+	* standalone/drakgw: fix the 8669 bug
+
+2004/03/10  fwang
+
+	* share/po/zh_CN.po: update
+	update
+
+2004/03/10  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/tl.po: Updated Filipino file
+
+2004/03/10  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* mdk-stage1/probing.c (get_net_devices) increase max number of detectable
+	net cards from 6 to 10
+
+2004/03/09  Fabian Mandelbaum  <fabman at 2vias.com.ar>
+
+	* share/po/es.po: Updated Spanish translations
+
+2004/03/09  Pixel  <pixel at mandrakesoft.com>
+
+	* modules.pm: special case to handle imm & ppa on kernel 2.6:
+	  - need parport_pc
+	  - modules insmod always succeed, so need to check
+	/proc/sys/dev/parport/parport0/devices/{imm,ppa}
+
+	* keyboard.pm: keyboard::load() causes some errors on kernel 2.4, ignoring
+	them
+
+	* Xconfig/card.pm: catch exception (bugzilla #8726)
+
+2004/03/09  Stew Benedict  <sbenedict at mandrakesoft.com>
+
+	* standalone/drakbackup: Reverse trivial translation typo. Change
+	the_time() usage.
+	Fix breakage introduced in config rewrite.
+	All wizard methods should end at config summary.
+	Support for plain tar. Deal with mixture of formats on restore. (#8676)
+	Fix issue with first incremental pass not using base as comparison.
+	Rework most file selections to use the same sub, drop other subs.
+
+2004/03/09  Till Kamppeter  <till at mandrakesoft.com>
+
+	* printer/printerdrake.pm: Made more clear choices in the first-time
+	dialog of printerdrake.
+
+2004/03/09  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* standalone/draksplash: fix boot_conf_path usage
+	rename thm_conf_path as boot_conf_path to prevent confusion with
+	thm_path
+	(write_boot_thm) simplify through mkdir_p()
+	misc perl_checker cleanups
+	fix config file path (directory is now named config, not cfg)
+
+	* harddrake/data.pm: really, really fix ISDN cards detection :-(
+	really adapt to new network::isdn::isdn_detect_backend() API
+
+	* share/po/fr.po: respect upcase letters
+
+	* network/isdn.pm (read_providers_backend) add prototype in order to
+	please lord perl_checker
+
+	* standalone/drakbackup: fix crash in wizard (#8654) (setVarsInSh use
+	output instead of output_p...)
+	(the_time) simplify
+
+	* network/netconnect.pm: fix isdn config step
+	isdn config step: enable to alter defined but empty fields
+	fix parameters reading/writin in isdn config step: take parameters
+	from isdn data structure, not cnx one
+	fix isdn config step by using runtime references
+
+2004/03/08  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/ms.po, share/po/sk.po, share/po/gl.po, share/po/pt_BR.po,
+	share/po/th.po, share/po/et.po, share/po/ja.po, share/po/hr.po,
+	share/po/be.po, share/po/ko.po, share/po/DrakX.pot, share/po/sv.po,
+	share/po/sr.po, share/po/pl.po, share/po/fi.po, share/po/he.po,
+	share/po/ca.po, share/po/da.po, share/po/ar.po, share/po/ltg.po,
+	share/po/nb.po, share/po/uz.po, share/po/ro.po, share/po/zh_TW.po,
+	share/po/zh_CN.po, share/po/sr@Latn.po, share/po/sq.po, share/po/it.po,
+	share/po/eu.po, share/po/es.po, share/po/lv.po, share/po/hu.po,
+	share/po/fa.po, share/po/id.po, share/po/ru.po, share/po/br.po,
+	share/po/sl.po, share/po/nn.po, share/po/tr.po, share/po/mt.po,
+	share/po/ga.po, share/po/mn.po, share/po/uk.po, share/po/lt.po,
+	share/po/cy.po, share/po/tg.po, share/po/bs.po, share/po/mk.po,
+	share/po/wa.po, share/po/is.po, share/po/hi.po, share/po/af.po,
+	share/po/az.po, share/po/pt.po, share/po/fr.po, share/po/ta.po,
+	share/po/vi.po, share/po/nl.po, share/po/de.po, share/po/tl.po,
+	share/po/eo.po, share/po/bg.po, share/po/cs.po, share/po/el.po,
+	share/po/uz@Latn.po: updated pot file
+
+2004/03/08  Pixel  <pixel at mandrakesoft.com>
+
+	* install_any.pm: fix typo
+	in generate_automatic_stage1_params():
+	  - handle FTP via HTTP proxy (bugzilla #8699)
+	  - cleanup using a different data-structure
+
+	* modules.pm: a missing module is now an error, that way it won't be in
+	scsi_hostadapters. In load_category(), exception is caught, so no pb
+	when using load_category(). But beware, this may break!
+
+2004/03/08  Stew Benedict  <sbenedict at mandrakesoft.com>
+
+	* standalone/drakbackup: Fix to prevent saving host passwd when user
+	requests not to (#8700).
+
 2004/03/08  Pixel  <pixel at mandrakesoft.com>
 
 	* modules.pm: a missing module is now an error, that way it won't be in
@@ -28670,7 +28782,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.905 2004/03/08 15:21:09 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.906 2004/03/08 16:02:53 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
