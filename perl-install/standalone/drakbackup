@@ -4529,7 +4529,7 @@ sub interactive_mode {
     die "Can't load ugtk2...\n" if $@;
     ugtk2->import(qw(:helpers :wrappers :create));
 
-    $in = 'interactive'->vnew('', 'default');
+    $in = 'interactive'->vnew;
 
     my $box;
     $my_win = ugtk2->new('drakbackup');

@@ -126,7 +126,7 @@ my @menu_items =
      }
      );
 
-$in = 'interactive'->vnew('su', 'default');
+$in = 'interactive'->vnew('su');
 
 my $wait = $in->wait_message(N("Please wait"), N("Detection in progress"));
 gtkflush();

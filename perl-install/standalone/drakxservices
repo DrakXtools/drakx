@@ -10,7 +10,7 @@ use interactive;
 use services;
 use log;
 
-my $in = 'interactive'->vnew('su', 'services');
+my $in = 'interactive'->vnew('su');
 begin:
 my $l = services::ask($in);
 services::doit($in, $l) if $l;

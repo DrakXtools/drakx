@@ -9,7 +9,7 @@ use common;
 use ugtk2 qw(:helpers :wrappers :create);
 use interactive;
 
-my $in = 'interactive'->vnew('su', 'default');
+my $in = 'interactive'->vnew('su');
 local $_ = join '', @ARGV;
 
 #- vars declaration

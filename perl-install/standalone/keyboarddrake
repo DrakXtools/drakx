@@ -17,7 +17,7 @@ if (my ($kb) = grep { !/^-/ } @ARGV) {
     keyboard::KEYBOARD2text($kb) or die "bad keyboard $kb\n";
     $keyboard->{KEYBOARD} = $kb;
 } else {
-    $in = 'interactive'->vnew('su', 'keyboard');
+    $in = 'interactive'->vnew('su');
 
   choose:
     $keyboard->{KEYBOARD} = $in->ask_from_listf(N("Keyboard"),

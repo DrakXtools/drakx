@@ -52,7 +52,7 @@ my $netc = {};
 my $intf = {};
 network::read_all_conf('', $netc, $intf);
 
-my $in = 'interactive'->vnew('su', 'default');
+my $in = 'interactive'->vnew('su');
 $::Wizard_title = N("PXE Server Configuration");
 
 !$::isEmbedded && $in->isa('interactive::gtk') and $::isWizard = 1;

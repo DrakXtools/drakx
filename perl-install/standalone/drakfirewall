@@ -23,7 +23,7 @@ use standalone;     #- warning, standalone must be loaded very first, for 'expla
 use interactive;
 use network::drakfirewall;
 
-my $in = 'interactive'->vnew('su', 'default');
+my $in = 'interactive'->vnew('su');
 
 network::drakfirewall::main($in);
 

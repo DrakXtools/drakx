@@ -38,7 +38,7 @@ use Xconfig::various;
 use log;
 use bootloader;
 
-my $in = 'interactive'->vnew('su', 'bootloader');
+my $in = 'interactive'->vnew('su');
 
 if (!$in->isa('interactive::gtk')) {
     lilo_choice();

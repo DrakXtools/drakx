@@ -11,7 +11,7 @@ use interactive;
 my $true = 1;
 
 
-my $in = 'interactive'->vnew('su', 'default');
+my $in = 'interactive'->vnew('su');
 
 my $window = ugtk2->new;
 $window->{rwindow}->signal_connect(delete_event => \&CloseAppWindow);

@@ -27,7 +27,7 @@ use any;
 use common;
 
 my $u = { getVarsFromSh('/etc/profile.d/proxy.sh') };
-my $in = 'interactive'->vnew('su', 'network');
+my $in = 'interactive'->vnew('su');
 network::network::miscellaneous_choose($in, $u, 1, 1);
 network::network::proxy_configure($u);
 $in->exit(0);

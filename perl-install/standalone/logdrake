@@ -30,7 +30,7 @@ use ugtk2 qw(:wrappers :helpers :create);
 
 $::isInstall and die "Not supported during install.\n";
 
-my $in = 'interactive'->vnew('su', 'default');
+my $in = 'interactive'->vnew('su');
 my $cron_hourly = "/etc/cron.hourly/logdrake_service";
 
 #- parse arguments list.
