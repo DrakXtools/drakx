@@ -153,6 +153,9 @@ sub add_kind2notebook {
 sub general_action_box {
     my ($box, $nowizard) = @_;
     $_->widget->destroy foreach $box->children;
+
+    gtkadd($box, gtksignal_connect(Gtk2::Button->new(N("Help")), clicked => $in->{interactive_help})) if $in->{interactive_help};
+
     my @actions = (if_($::isInstall && !$nowizard, N_("Wizard")), 
 		   diskdrake::interactive::general_possible_actions($in, $all_hds), 
 		   N_("Done"));
