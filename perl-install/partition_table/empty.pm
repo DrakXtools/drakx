@@ -30,7 +30,7 @@ sub read($$) {
 
     partition_table::raw::zero_MBR($hd);
 
-    $hd->{primary}{raw};
+    $hd->{primary}{raw}, $hd->{primary}{info};
 }
 
 1;
