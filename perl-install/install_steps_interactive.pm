@@ -426,11 +426,11 @@ sub choosePackages {
 }
 
 sub choosePackagesTree {
-    my ($o, $packages, $limit_to_medium) = @_;
+    my ($o, $packages, $o_limit_to_medium) = @_;
 
     $o->ask_many_from_list('', N("Choose the packages you want to install"),
 			   {
-			    list => [ grep { !$limit_to_medium || pkgs::packageMedium($packages, $_) == $limit_to_medium }
+			    list => [ grep { !$o_limit_to_medium || pkgs::packageMedium($packages, $_) == $o_limit_to_medium }
 				      @{$packages->{depslist}} ],
 			    value => \&URPM::Package::flag_selected,
 			    label => \&URPM::Package::name,
