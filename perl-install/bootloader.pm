@@ -879,13 +879,14 @@ sub dev2bios {
     my $start = substr($where, 0, 2);
 
     my $translate = sub {
-	$_ eq $where ? "aaa" : #- if exact match, value it first
-	  /^$start(.*)/ ? "ad$1" : #- if same class (ide/scsi/ultra66), value it before other classes
-	    $_;
+	my ($dev) = @_;
+	$dev eq $where ? "aaa" : #- if exact match, value it first
+	  $dev =~ /^$start(.*)/ ? "ad$1" : #- if same class (ide/scsi/ultra66), value it before other classes
+	  $dev;
     };
     @dev = map { $_->[0] }
            sort { $a->[1] cmp $b->[1] }
-	   map { [ $_, &$translate ] } @dev;
+	   map { [ $_, $translate->($_) ] } @dev;
 
     s/x(d.)/h$1/ foreach @dev; #- switch back;
 
