@@ -571,9 +571,13 @@ sub unload {
     }
 }
 
+sub cz_file { 
+    "/lib/modules" . (arch() eq 'sparc64' && "64") . ".cz-" . c::kernel_version();
+}
+
 sub load_raw {
     my @l = map { my ($i, @i) = @$_; [ $i, \@i ] } grep { $_->[0] !~ /ignore/ } @_;
-    my $cz = "/lib/modules" . (arch() eq 'sparc64' && "64") . ".cz-" . c::kernel_version();
+    my $cz = cz_file();
     if (!-e $cz) {
 	unlink $_ foreach glob_("/lib/modules*.cz*");
 	require install_any;
