@@ -10,7 +10,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX-no\n"
-"POT-Creation-Date: 2003-03-24 22:30+0100\n"
+"POT-Creation-Date: 2003-04-22 14:33+0200\n"
 "PO-Revision-Date: 2003-03-13 06:52+0100\n"
 "Last-Translator: Per Øyvind Karlsen <peroyvind@sintrax.net>\n"
 "Language-Team: Norwegian Bokmål <cooker-i18n@linux-mandrake.com>\n"
@@ -28,7 +28,7 @@ msgstr ""
 "Per-bruker deling benytter gruppen \"fileshare\". \n"
 "Du kan bruke userdrake til å legge til en bruker i denne gruppen."
 
-#: ../../any.pm:1 ../../install_steps_gtk.pm:1
+#: ../../any.pm:1 ../../help.pm:1 ../../install_steps_gtk.pm:1
 #: ../../install_steps_interactive.pm:1 ../../interactive.pm:1
 #: ../../my_gtk.pm:1 ../../ugtk2.pm:1 ../../ugtk.pm:1
 #: ../../Xconfig/resolution_and_depth.pm:1 ../../diskdrake/smbnfs_gtk.pm:1
@@ -95,7 +95,7 @@ msgstr "Tillat alle brukere"
 msgid "No sharing"
 msgstr "Ingen deling"
 
-#: ../../any.pm:1 ../../install_steps_interactive.pm:1
+#: ../../any.pm:1 ../../help.pm:1 ../../install_steps_interactive.pm:1
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid "More"
@@ -116,17 +116,17 @@ msgstr "Vennligst velg ditt land."
 msgid " / Region"
 msgstr "Reunion"
 
-#: ../../any.pm:1 ../../install_steps_interactive.pm:1
+#: ../../any.pm:1 ../../help.pm:1 ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Country"
 msgstr "Land"
 
-#: ../../any.pm:1
+#: ../../any.pm:1 ../../help.pm:1
 #, c-format
 msgid "All languages"
 msgstr "Alle språk"
 
-#: ../../any.pm:1
+#: ../../any.pm:1 ../../help.pm:1
 #, c-format
 msgid "Use Unicode by default"
 msgstr "Bruk Unicode som standard"
@@ -154,7 +154,7 @@ msgstr "Velg vindushåndtereren som skal kjøres:"
 msgid "Choose the default user:"
 msgstr "Velg standard bruker:"
 
-#: ../../any.pm:1
+#: ../../any.pm:1 ../../help.pm:1
 #, c-format
 msgid "Do you want to use this feature?"
 msgstr "Ønsker du å bruke denne finessen?"
@@ -192,7 +192,7 @@ msgstr "Passord (igjen)"
 msgid "Password"
 msgstr "Passord"
 
-#: ../../any.pm:1 ../../printer/printerdrake.pm:1
+#: ../../any.pm:1 ../../help.pm:1 ../../printer/printerdrake.pm:1
 #, c-format
 msgid "User name"
 msgstr "Brukernavn"
@@ -202,15 +202,16 @@ msgstr "Brukernavn"
 msgid "Real name"
 msgstr "Virkelig navn"
 
-#: ../../any.pm:1
+#: ../../any.pm:1 ../../help.pm:1
 #, c-format
 msgid "Accept user"
 msgstr "Godta bruker"
 
-#: ../../any.pm:1 ../../diskdrake/dav.pm:1 ../../diskdrake/hd_gtk.pm:1
-#: ../../diskdrake/removable.pm:1 ../../diskdrake/smbnfs_gtk.pm:1
-#: ../../interactive/http.pm:1 ../../printer/printerdrake.pm:1
-#: ../../standalone/drakbackup:1 ../../standalone/scannerdrake:1
+#: ../../any.pm:1 ../../help.pm:1 ../../diskdrake/dav.pm:1
+#: ../../diskdrake/hd_gtk.pm:1 ../../diskdrake/removable.pm:1
+#: ../../diskdrake/smbnfs_gtk.pm:1 ../../interactive/http.pm:1
+#: ../../printer/printerdrake.pm:1 ../../standalone/drakbackup:1
+#: ../../standalone/scannerdrake:1
 #, c-format
 msgid "Done"
 msgstr "Ferdig"
@@ -440,7 +441,7 @@ msgstr "Kernel Boot Timeout"
 msgid "Open Firmware Delay"
 msgstr "Åpne firmwareforsinkelse"
 
-#: ../../any.pm:1
+#: ../../any.pm:1 ../../help.pm:1
 #, c-format
 msgid "Boot device"
 msgstr "Oppstartsenhet"
@@ -450,7 +451,7 @@ msgstr "Oppstartsenhet"
 msgid "Init Message"
 msgstr "Initmelding"
 
-#: ../../any.pm:1
+#: ../../any.pm:1 ../../help.pm:1
 #, c-format
 msgid "Bootloader to use"
 msgstr "Oppstartslaster som skal brukes"
@@ -557,7 +558,7 @@ msgstr "LILO/grub-installasjon"
 msgid "SILO Installation"
 msgstr "SILO-installasjon"
 
-#: ../../any.pm:1 ../../printer/printerdrake.pm:1
+#: ../../any.pm:1 ../../help.pm:1 ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Skip"
 msgstr "Dropp"
@@ -747,12 +748,12 @@ msgstr "Yaboot"
 msgid "Grub"
 msgstr "Grub"
 
-#: ../../bootloader.pm:1
+#: ../../bootloader.pm:1 ../../help.pm:1
 #, c-format
 msgid "LILO with text menu"
 msgstr "LILO med tekstmeny"
 
-#: ../../bootloader.pm:1
+#: ../../bootloader.pm:1 ../../help.pm:1
 #, c-format
 msgid "LILO with graphical menu"
 msgstr "LILO med grafisk meny"
@@ -1056,14 +1057,14 @@ msgid "%s formatting of %s failed"
 msgstr "%s formatering av %s mislykket"
 
 #: ../../help.pm:1
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Click on \"Next ->\" if you want to delete all data and partitions present\n"
-"on this hard drive. Be careful, after clicking on \"Next ->\", you will not\n"
-"be able to recover any data and partitions present on this hard drive,\n"
-"including any Windows data.\n"
+"Click on \"%s\" if you want to delete all data and partitions present on\n"
+"this hard drive. Be careful, after clicking on \"%s\", you will not be able\n"
+"to recover any data and partitions present on this hard drive, including\n"
+"any Windows data.\n"
 "\n"
-"Click on \"<- Previous\" to stop this operation without losing any data and\n"
+"Click on \"%s\" to stop this operation without losing any data and\n"
 "partitions present on this hard drive."
 msgstr ""
 "Klikk på \"Neste ->\" hvis du ønsker å slette alle data og partisjoner på "
@@ -1077,81 +1078,94 @@ msgstr ""
 "og\n"
 "partisjoner på denne harddisken."
 
-#: ../../help.pm:1
+#: ../../help.pm:1 ../../install_steps_gtk.pm:1 ../../interactive.pm:1
+#: ../../my_gtk.pm:1 ../../ugtk2.pm:1 ../../interactive/newt.pm:1
+#: ../../printer/printerdrake.pm:1
 #, c-format
+msgid "<- Previous"
+msgstr "<- Forrige"
+
+#: ../../help.pm:1 ../../install_steps_gtk.pm:1 ../../interactive.pm:1
+#: ../../my_gtk.pm:1 ../../ugtk2.pm:1 ../../interactive/newt.pm:1
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Next ->"
+msgstr "Neste ->"
+
+#: ../../help.pm:1
+#, fuzzy, c-format
 msgid ""
 "Choose the hard drive you want to erase in order to install your new\n"
-"Mandrake Linux partition. Be careful, all data present on it will be lost\n"
-"and will not be recoverable!"
+"Mandrake Linux partition. Be careful, all data present on this partition\n"
+"will be lost and will not be recoverable!"
 msgstr ""
 "Velg den harddisken du ønsker å slette for å installere din nye Mandrake\n"
 "Linux partisjon. Vær forsiktig, alle data på denne vil gå tapt og vil ikke\n"
 "kunne gjenopprettes!"
 
 #: ../../help.pm:1
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"As a review, DrakX will present a summary of various information it has\n"
-"about your system. Depending on your installed hardware, you may have some\n"
-"or all of the following entries. Each entry is made up of the configuration\n"
-"item to be configured, followed by a quick summary of the current\n"
-"configuration. Click on the corresponding \"Configure\" button to change\n"
-"that.\n"
+"As a review, DrakX will present a summary of information it has about your\n"
+"system. Depending on your installed hardware, you may have some or all of\n"
+"the following entries. Each entry is made up of the configuration item to\n"
+"be configured, followed by a quick summary of the current configuration.\n"
+"Click on the corresponding \"%s\" button to change that.\n"
 "\n"
-" * \"Keyboard\": check the current keyboard map configuration and change\n"
-"that if necessary.\n"
+" * \"%s\": check the current keyboard map configuration and change that if\n"
+"necessary.\n"
 "\n"
-" * \"Country\": check the current country selection. If you are not in this\n"
-"country, click on the \"Configure\" button and choose another one. If your\n"
-"country is not in the first list shown, click the \"More\" button to get\n"
-"the complete country list.\n"
+" * \"%s\": check the current country selection. If you are not in this\n"
+"country, click on the \"%s\" button and choose another one. If your country\n"
+"is not in the first list shown, click the \"%s\" button to get the complete\n"
+"country list.\n"
 "\n"
-" * \"Timezone\": By default, DrakX deduces your time zone based on the\n"
-"country you have chosen. You can click on the \"Configure\" button here if\n"
-"this is not correct.\n"
+" * \"%s\": By default, DrakX deduces your time zone based on the country\n"
+"you have chosen. You can click on the \"%s\" button here if this is not\n"
+"correct.\n"
 "\n"
-" * \"Mouse\": check the current mouse configuration and click on the button\n"
-"to change it if necessary.\n"
+" * \"%s\": check the current mouse configuration and click on the button to\n"
+"change it if necessary.\n"
 "\n"
-" * \"Printer\": clicking on the \"Configure\" button will open the printer\n"
+" * \"%s\": clicking on the \"%s\" button will open the printer\n"
 "configuration wizard. Consult the corresponding chapter of the ``Starter\n"
 "Guide'' for more information on how to setup a new printer. The interface\n"
 "presented there is similar to the one used during installation.\n"
 "\n"
-" * \"Sound card\": if a sound card is detected on your system, it is\n"
-"displayed here. If you notice the sound card displayed is not the one that\n"
-"is actually present on your system, you can click on the button and choose\n"
+" * \"%s\": if a sound card is detected on your system, it is displayed\n"
+"here. If you notice the sound card displayed is not the one that is\n"
+"actually present on your system, you can click on the button and choose\n"
 "another driver.\n"
 "\n"
-" * \"Graphical Interface\": by default, DrakX configures your graphical\n"
-"interface in \"800x600\" or \"1024x768\" resolution. If that does not suits\n"
-"you, click on \"Configure\" to reconfigure your graphical interface.\n"
+" * \"%s\": by default, DrakX configures your graphical interface in\n"
+"\"800x600\" or \"1024x768\" resolution. If that does not suit you, click on\n"
+"\"%s\" to reconfigure your graphical interface.\n"
 "\n"
-" * \"TV card\": if a TV card is detected on your system, it is displayed\n"
-"here. If you have a TV card and it is not detected, click on \"Configure\"\n"
-"to try to configure it manually.\n"
+" * \"%s\": if a TV card is detected on your system, it is displayed here.\n"
+"If you have a TV card and it is not detected, click on \"%s\" to try to\n"
+"configure it manually.\n"
 "\n"
-" * \"ISDN card\": if an ISDN card is detected on your system, it will be\n"
-"displayed here. You can click on \"Configure\" to change the parameters\n"
-"associated with the card.\n"
+" * \"%s\": if an ISDN card is detected on your system, it will be displayed\n"
+"here. You can click on \"%s\" to change the parameters associated with the\n"
+"card.\n"
 "\n"
-" * \"Network\": If you want to configure your Internet or local network\n"
-"access now.\n"
+" * \"%s\": If you want to configure your Internet or local network access\n"
+"now.\n"
 "\n"
-" * \"Security Level\": this entry offers you to redefine the security level\n"
-"as set in a previous step ().\n"
+" * \"%s\": this entry allows you to redefine the security level as set in a\n"
+"previous step ().\n"
 "\n"
-" * \"Firewall\": if you plan to connect your machine to the Internet, it's\n"
-"a good idea to protect you from intrusions by setting up a firewall.\n"
-"Consult the corresponding section of the ``Starter Guide'' for details\n"
-"about firewall settings.\n"
+" * \"%s\": if you plan to connect your machine to the Internet, it's a good\n"
+"idea to protect yourself from intrusions by setting up a firewall. Consult\n"
+"the corresponding section of the ``Starter Guide'' for details about\n"
+"firewall settings.\n"
 "\n"
-" * \"Bootloader\": if you wish to change your bootloader configuration,\n"
-"click that button. This should be reserved to advanced users.\n"
+" * \"%s\": if you wish to change your bootloader configuration, click that\n"
+"button. This should be reserved to advanced users.\n"
 "\n"
-" * \"Services\": you'll be able here to control finely which services will\n"
-"be run on your machine. If you plan to use this machine as a server it's a\n"
-"good idea to review this setup."
+" * \"%s\": here you'll be able to fine control which services will be run\n"
+"on your machine. If you plan to use this machine as a server it's a good\n"
+"idea to review this setup."
 msgstr ""
 "Som en oppsummering vil DrakX gi deg en oversikt over ymse informasjon\n"
 "som den har om systemet ditt. Avhengig av installert maskinvare, kan du ha\n"
@@ -1223,13 +1237,88 @@ msgstr ""
 "maskin. Hvis du skal bruke maskinen som tjener er det lurt å kontrollere "
 "dette."
 
+#: ../../help.pm:1 ../../install_steps_interactive.pm:1 ../../services.pm:1
+#, c-format
+msgid "Services"
+msgstr "Tjenester"
+
+#: ../../help.pm:1 ../../install_steps_interactive.pm:1
+#, c-format
+msgid "Bootloader"
+msgstr "Oppstartslaster"
+
+#: ../../help.pm:1 ../../install_steps_interactive.pm:1
+#, c-format
+msgid "Firewall"
+msgstr "Brannmur"
+
+#: ../../help.pm:1 ../../install_steps_interactive.pm:1
+#, c-format
+msgid "Security Level"
+msgstr "Sikkerhetsnivå"
+
+#: ../../help.pm:1 ../../install_steps_interactive.pm:1
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "Network"
+msgstr "Nettverk"
+
+#: ../../help.pm:1 ../../install_steps_gtk.pm:1 ../../standalone/drakbackup:1
+#: ../../standalone/drakboot:1 ../../standalone/drakgw:1
+#, c-format
+msgid "Configure"
+msgstr "Konfigurer"
+
 #: ../../help.pm:1
 #, c-format
+msgid "ISDN card"
+msgstr "ISDN-kort"
+
+#: ../../help.pm:1 ../../install_steps_interactive.pm:1
+#, c-format
+msgid "TV card"
+msgstr "TV-kort"
+
+#: ../../help.pm:1
+#, fuzzy, c-format
+msgid "Graphical Interface"
+msgstr "Grafisk grensesnitt"
+
+#: ../../help.pm:1 ../../install_steps_interactive.pm:1
+#, c-format
+msgid "Sound card"
+msgstr "Lydkort"
+
+#: ../../help.pm:1 ../../install_steps_interactive.pm:1
+#: ../../harddrake/data.pm:1 ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Printer"
+msgstr "Skriver"
+
+#: ../../help.pm:1 ../../install_steps_interactive.pm:1
+#: ../../harddrake/data.pm:1
+#, c-format
+msgid "Mouse"
+msgstr "Mus"
+
+#: ../../help.pm:1 ../../install_steps_interactive.pm:1
+#, c-format
+msgid "Timezone"
+msgstr "Tidssone"
+
+#: ../../help.pm:1 ../../install_steps_interactive.pm:1
+#: ../../standalone/keyboarddrake:1
+#, c-format
+msgid "Keyboard"
+msgstr "Tastatur"
+
+#: ../../help.pm:1
+#, fuzzy, c-format
 msgid ""
-"\"Sound card\": if a sound card is detected on your system, it is displayed\n"
-"here. If you notice the sound card displayed is not the one that is\n"
-"actually present on your system, you can click on the button and choose\n"
-"another driver."
+"\"%s\": if a sound card is detected on your system, it is displayed here.\n"
+"If you notice the sound card displayed is not the one that is actually\n"
+"present on your system, you can click on the button and choose another\n"
+"driver."
 msgstr ""
 "\"Lydkort\": hvis et lydkort blir oppdaget på systemet ditt, blir det\n"
 "vist her. Hvis du oppdager at lydkortet som blir vist her ikke er det som\n"
@@ -1237,7 +1326,7 @@ msgstr ""
 "å velge en annen driver."
 
 #: ../../help.pm:1
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "Yaboot is a bootloader for NewWorld Macintosh hardware and can be used to\n"
 "boot GNU/Linux, MacOS or MacOSX. Normally, MacOS and MacOSX are correctly\n"
@@ -1258,8 +1347,8 @@ msgid ""
 "choose between CD, OF boot, MacOS or Linux;\n"
 "\n"
 " * Kernel Boot Timeout: this timeout is similar to the LILO boot delay.\n"
-"After selecting Linux, you will have this delay in 0.1 second before your\n"
-"default kernel description is selected;\n"
+"After selecting Linux, you will have this delay in 0.1 second increments\n"
+"before your default kernel description is selected;\n"
 "\n"
 " * Enable CD Boot?: checking this option allows you to choose ``C'' for CD\n"
 "at the first boot prompt.\n"
@@ -1306,7 +1395,7 @@ msgstr ""
 "Open Firmwareforsinkelsen er utløpt."
 
 #: ../../help.pm:1
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "You can add additional entries in yaboot for other operating systems,\n"
 "alternate kernels, or for an emergency boot image.\n"
@@ -1319,8 +1408,8 @@ msgid ""
 " * Label: this is the name you will have to type at the yaboot prompt to\n"
 "select this boot option.\n"
 "\n"
-" * Image: this would be the name of the kernel to boot. Typically, vmlinux\n"
-"or a variation of vmlinux with an extension.\n"
+" * Image: this is the name of the kernel to boot. Typically, vmlinux or a\n"
+"variation of vmlinux with an extension.\n"
 "\n"
 " * Root: the \"root\" device or ``/'' for your Linux installation.\n"
 "\n"
@@ -1402,14 +1491,14 @@ msgstr ""
 "valgene."
 
 #: ../../help.pm:1
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "DrakX will first detect any IDE devices present in your computer. It will\n"
 "also scan for one or more PCI SCSI cards on your system. If a SCSI card is\n"
 "found, DrakX will automatically install the appropriate driver.\n"
 "\n"
 "Because hardware detection is not foolproof, DrakX may fail in detecting\n"
-"your hard drives. If so, You'll have to specify your hardware by hand.\n"
+"your hard drives. If so, you'll have to specify your hardware by hand.\n"
 "\n"
 "If you had to manually specify your PCI SCSI adapter, DrakX will ask if you\n"
 "want to configure options for it. You should allow DrakX to probe the\n"
@@ -1441,26 +1530,26 @@ msgstr ""
 "for din maskinvare, så må du manuelt konfigurere driveren."
 
 #: ../../help.pm:1
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "Now, it's time to select a printing system for your computer. Other OSs may\n"
-"offer you one, but Mandrake Linux offers two. Each of the printing systems\n"
-"is best for a particular type of configuration.\n"
+"offer you one, but Mandrake Linux offers two. Each of the printing system\n"
+"is best suited to particular types of configuration.\n"
 "\n"
-" * \"pdq\" -- which is an acronym for ``print, don't queue'', is the choice\n"
+" * \"%s\" -- which is an acronym for ``print, don't queue'', is the choice\n"
 "if you have a direct connection to your printer, you want to be able to\n"
-"panic out of printer jams, and you do not have networked printers. (\"pdq\n"
-"\" will handle only very simple network cases and is somewhat slow when\n"
-"used with networks.) It's recommended that you use \"pdq\" if this is your\n"
-"first experience with GNU/Linux.\n"
+"panic out of printer jams, and you do not have networked printers. (\"%s\"\n"
+"will handle only very simple network cases and is somewhat slow when used\n"
+"with networks.) It's recommended that you use \"pdq\" if this is your first\n"
+"experience with GNU/Linux.\n"
 "\n"
-" * \"CUPS\" - `` Common Unix Printing System'', is an excellent choice for\n"
+" * \"%s\" - `` Common Unix Printing System'', is an excellent choice for\n"
 "printing to your local printer or to one halfway around the planet. It is\n"
 "simple to configure and can act as a server or a client for the ancient\n"
 "\"lpd \" printing system, so it compatible with older operating systems\n"
-"that may still need print services. While quite powerful, the basic setup\n"
+"which may still need print services. While quite powerful, the basic setup\n"
 "is almost as easy as \"pdq\". If you need to emulate a \"lpd\" server, make\n"
-"sure to turn on the \"cups-lpd \" daemon. \"CUPS\" includes graphical\n"
+"sure you turn on the \"cups-lpd \" daemon. \"%s\" includes graphical\n"
 "front-ends for printing or choosing printer options and for managing the\n"
 "printer.\n"
 "\n"
@@ -1479,7 +1568,7 @@ msgstr ""
 "anbefalt at du bruker \"pdq\" hvis dette er din første erfaring med GNU/"
 "Linux.\n"
 "\n"
-" * \"CUPS\" -- ``Common Unix Printing System'', er perfekt til å printe til\n"
+" * \"%s\" -- ``Common Unix Printing System'', er perfekt til å printe til\n"
 "din egen lokale printer, og også til printerene på andre siden av kloden.\n"
 "Den er simpel og kan opptrå som både printer og klient for det "
 "forhistoriske\n"
@@ -1488,7 +1577,7 @@ msgstr ""
 "som fortsatt trenger utskriftstjenester. Selv om den er ganske kraftig, så "
 "er\n"
 "basis-oppsettet nesten like enkelt som \"pdq\". Hvis du trenger åemulere en\n"
-"\"lpd\"-server, må du slå på \"cups-lpd\"-daemonen. \"CUPS\" inkluderer "
+"\"lpd\"-server, må du slå på \"cups-lpd\"-daemonen. \"%s\" inkluderer "
 "etgrafisk grensesnitt for utskrift eller oppsett av skriver og styring av "
 "skriver.\n"
 "\n"
@@ -1499,8 +1588,18 @@ msgstr ""
 "ved å kjøre PrinterDrake\n"
 "fra Mandrake Control Center og klikke på expert-knappen."
 
+#: ../../help.pm:1 ../../printer/cups.pm:1 ../../printer/data.pm:1
+#, c-format
+msgid "CUPS"
+msgstr "CUPS"
+
 #: ../../help.pm:1
 #, c-format
+msgid "pdq"
+msgstr ""
+
+#: ../../help.pm:1
+#, fuzzy, c-format
 msgid ""
 "LILO and grub are GNU/Linux bootloaders. Normally, this stage is totally\n"
 "automated. DrakX will analyze the disk boot sector and act according to\n"
@@ -1514,12 +1613,7 @@ msgid ""
 "one.\n"
 "\n"
 "If it cannot make a determination, DrakX will ask you where to place the\n"
-"bootloader.\n"
-"\n"
-"\"Boot device\": in most cases, you will not change the default (\"First\n"
-"sector of drive (MBR)\"), but if you prefer, the bootloader can be\n"
-"installed on the second hard drive (\"/dev/hdb\"), or even on a floppy disk\n"
-"(\"On Floppy\")."
+"bootloader."
 msgstr ""
 "LILO og grub er oppstartslastere for GNU/Linux. Vanligvis er dette trinnet\n"
 "helt automatisk. DrakX vil analysere oppstartssektoren på harddisken og\n"
@@ -1546,16 +1640,16 @@ msgstr ""
 "på en diskett (\"På diskett\"). "
 
 #: ../../help.pm:1
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "After you have configured the general bootloader parameters, the list of\n"
 "boot options that will be available at boot time will be displayed.\n"
 "\n"
 "If there are other operating systems installed on your machine they will\n"
 "automatically be added to the boot menu. You can fine-tune the existing\n"
-"options by clicking \"Add\" to create a new entry; selecting an entry and\n"
-"clicking \"Modify\" or \"Remove\" to modify or remove it. \"OK\" validates\n"
-"your changes.\n"
+"options by clicking \"%s\" to create a new entry; selecting an entry and\n"
+"clicking \"%s\" or \"%s\" to modify or remove it. \"%s\" validates your\n"
+"changes.\n"
 "\n"
 "You may also not want to give access to these other operating systems to\n"
 "anyone who goes to the console and reboots the machine. You can delete the\n"
@@ -1584,35 +1678,59 @@ msgstr ""
 "trenge\n"
 "en oppstartsdiskett for å kunne starte opp disse andre operativsystemene! "
 
-#: ../../help.pm:1
+#: ../../help.pm:1 ../../ugtk2.pm:1 ../../ugtk.pm:1
+#: ../../network/netconnect.pm:1 ../../standalone/drakTermServ:1
+#: ../../standalone/drakbackup:1 ../../standalone/drakboot:1
+#: ../../standalone/drakconnect:1 ../../standalone/drakfont:1
+#: ../../standalone/net_monitor:1
 #, c-format
+msgid "OK"
+msgstr "OK"
+
+#: ../../help.pm:1 ../../interactive.pm:1 ../../interactive/gtk.pm:1
+#, c-format
+msgid "Remove"
+msgstr "Fjern"
+
+#: ../../help.pm:1 ../../interactive.pm:1 ../../interactive/gtk.pm:1
+#, c-format
+msgid "Modify"
+msgstr "Modifiser"
+
+#: ../../help.pm:1 ../../interactive.pm:1 ../../interactive/gtk.pm:1
+#: ../../standalone/drakbackup:1 ../../standalone/drakfont:1
+#, c-format
+msgid "Add"
+msgstr "Legg til"
+
+#: ../../help.pm:1
+#, fuzzy, c-format
 msgid ""
-"This dialog allows to finely tune your bootloader:\n"
+"This dialog allows you to fine tune your bootloader:\n"
 "\n"
-" * \"Bootloader to use\": there are three choices for your bootloader:\n"
+" * \"%s\": there are three choices for your bootloader:\n"
 "\n"
-"    * \"GRUB\": if you prefer grub (text menu).\n"
+"    * \"%s\": if you prefer grub (text menu).\n"
 "\n"
-"    * \"LILO with text menu\": if you prefer LILO with its text menu\n"
-"interface.\n"
+"    * \"%s\": if you prefer LILO with its text menu interface.\n"
 "\n"
-"    * \"LILO with graphical menu\": if you prefer LILO with its graphical\n"
-"interface.\n"
+"    * \"%s\": if you prefer LILO with its graphical interface.\n"
 "\n"
-" * \"Boot device\": in most cases, you will not change the default\n"
-"(\"/dev/hda\"), but if you prefer, the bootloader can be installed on the\n"
-"second hard drive (\"/dev/hdb\"), or even on a floppy disk (\"/dev/fd0\");\n"
+" * \"%s\": in most cases, you will not change the default (\"%s\"), but if\n"
+"you prefer, the bootloader can be installed on the second hard drive\n"
+"(\"%s\"), or even on a floppy disk (\"%s\");\n"
 "\n"
-" * \"Delay before booting the default image\": after a boot or a reboot of\n"
-"the computer, this is the delay given to the user at the console to select\n"
-"a boot entry other than the default.\n"
+" * \"%s\": after a boot or a reboot of the computer, this is the delay\n"
+"given to the user at the console to select a boot entry other than the\n"
+"default.\n"
 "\n"
 "!! Beware that if you choose not to install a bootloader (by selecting\n"
-"\"Skip\"), you must ensure that you have a way to boot your Mandrake Linux\n"
-"system! Be sure you know what you do before changing any of the options. !!\n"
+"\"%s\"), you must ensure that you have a way to boot your Mandrake Linux\n"
+"system! Be sure you know what you are doing before changing any of the\n"
+"options. !!\n"
 "\n"
-"Clicking the \"Advanced\" button in this dialog will offer advanced options\n"
-"that are reserved for the expert user."
+"Clicking the \"%s\" button in this dialog will offer advanced options which\n"
+"are normally reserved for the expert user."
 msgstr ""
 "Denne dialogen lar deg finjustere din oppstartslaster:\n"
 "\n"
@@ -1648,24 +1766,55 @@ msgstr ""
 "Ved å velge \"Avansert\" i denne menyen så vil du få mange avanserte valg, \n"
 "som er reservert for ekspertbrukere."
 
+#: ../../help.pm:1 ../../interactive.pm:1
+#, c-format
+msgid "Advanced"
+msgstr "Avansert"
+
+#: ../../help.pm:1
+#, fuzzy, c-format
+msgid "Delay before booting the default image"
+msgstr "Forsinkelse før man starter opp med standard imagefil"
+
 #: ../../help.pm:1
 #, c-format
+msgid "/dev/fd0"
+msgstr "/dev/fd0"
+
+#: ../../help.pm:1
+#, c-format
+msgid "/dev/hdb"
+msgstr "/dev/hdb"
+
+#: ../../help.pm:1
+#, c-format
+msgid "/dev/hda"
+msgstr "/dev/hda"
+
+#: ../../help.pm:1
+#, fuzzy, c-format
+msgid "GRUB"
+msgstr "GB"
+
+#: ../../help.pm:1
+#, fuzzy, c-format
 msgid ""
 "This is the most crucial decision point for the security of your GNU/Linux\n"
 "system: you have to enter the \"root\" password. \"Root\" is the system\n"
-"administrator and is the only one authorized to make updates, add users,\n"
+"administrator and is the only user authorized to make updates, add users,\n"
 "change the overall system configuration, and so on. In short, \"root\" can\n"
 "do everything! That is why you must choose a password that is difficult to\n"
 "guess - DrakX will tell you if the password that you chose too easy. As you\n"
 "can see, you are not forced to enter a password, but we strongly advise you\n"
-"against. GNU/Linux is as prone to operator error as any other operating\n"
-"system. Since \"root\" can overcome all limitations and unintentionally\n"
-"erase all data on partitions by carelessly accessing the partitions\n"
-"themselves, it is important that it be difficult to become \"root\".\n"
+"against this. GNU/Linux is just as prone to operator error as any other\n"
+"operating system. Since \"root\" can overcome all limitations and\n"
+"unintentionally erase all data on partitions by carelessly accessing the\n"
+"partitions themselves, it is important that it be difficult to become\n"
+"\"root\".\n"
 "\n"
 "The password should be a mixture of alphanumeric characters and at least 8\n"
-"characters long. Never write down the \"root\" password -- it makes it too\n"
-"easy to compromise a system.\n"
+"characters long. Never write down the \"root\" password -- it makes it far\n"
+"too easy to compromise a system.\n"
 "\n"
 "One caveat -- do not make the password too long or complicated because you\n"
 "must be able to remember it!\n"
@@ -1673,18 +1822,19 @@ msgid ""
 "The password will not be displayed on screen as you type it in. To reduce\n"
 "the chance of a blind typing error you will need to enter the password\n"
 "twice. If you do happen to make the same typing error twice, this\n"
-"``incorrect'' password will have to be used the first time you connect.\n"
+"``incorrect'' password will be the one you will have use the first time you\n"
+"connect.\n"
 "\n"
 "If you wish access to this computer to be controlled by an authentication\n"
-"server, click the \"Advanced\" button.\n"
+"server, click the \"%s\" button.\n"
 "\n"
 "If your network uses either LDAP, NIS, or PDC Windows Domain authentication\n"
-"services, select the appropriate one as \"authentication\". If you do not\n"
-"know which to use, ask your network administrator.\n"
+"services, select the appropriate one for \"%s\". If you do not know which\n"
+"one to use, you should ask your network administrator.\n"
 "\n"
-"If you happen to have problems with reminding passwords, you can choose to\n"
-"have \"No password\", if your computer won't be connected to the Internet,\n"
-"and if you trust anybody having access to it."
+"If you happen to have problems with remembering passwords, if your computer\n"
+"will never be connected to the internet or that you absolutely trust\n"
+"everybody who uses your computer, you can choose to have \"%s\"."
 msgstr ""
 "Dette er det mest kritisike valget med hensyn til sikkerheten på ditt\n"
 "GNU/Linux system: du må skrive inn \"root\"-passordet. \"Root\" er\n"
@@ -1729,6 +1879,16 @@ msgstr ""
 "hvis maskinen din ikke er koblet til internett og du stoler på alle som har "
 "tilgang til den."
 
+#: ../../help.pm:1 ../../install_steps_interactive.pm:1
+#, c-format
+msgid "No password"
+msgstr "Intet passord"
+
+#: ../../help.pm:1
+#, fuzzy, c-format
+msgid "authentication"
+msgstr "Autentifikasjon"
+
 #: ../../help.pm:1
 #, c-format
 msgid ""
@@ -1739,7 +1899,7 @@ msgstr ""
 "Windows blir kalt \"ttyS0\" i GNU/Linux."
 
 #: ../../help.pm:1
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "Usually, DrakX has no problems detecting the number of buttons on your\n"
 "mouse. If it does, it assumes you have a two-button mouse and will\n"
@@ -1749,7 +1909,7 @@ msgid ""
 "a PS/2, serial or USB interface.\n"
 "\n"
 "If for some reason you wish to specify a different type of mouse, select it\n"
-"from the provided list.\n"
+"from the list provided.\n"
 "\n"
 "If you choose a mouse other than the default, a test screen will be\n"
 "displayed. Use the buttons and wheel to verify that the settings are\n"
@@ -1760,11 +1920,11 @@ msgid ""
 "Wheel mice are occasionally not detected automatically, so you will need to\n"
 "select your mouse from a list. Be sure to select the one corresponding to\n"
 "the port that your mouse is attached to. After selecting a mouse and\n"
-"pressing the \"Next ->\" button, a mouse image is displayed on-screen.\n"
-"Scroll the mouse wheel to ensure that it is activated correctly. Once you\n"
-"see the on-screen scroll wheel moving as you scroll your mouse wheel, test\n"
-"the buttons and check that the mouse pointer moves on-screen as you move\n"
-"your mouse."
+"pressing the \"%s\" button, a mouse image is displayed on-screen. Scroll\n"
+"the mouse wheel to ensure that it is activated correctly. Once you see the\n"
+"on-screen scroll wheel moving as you scroll your mouse wheel, test the\n"
+"buttons and check that the mouse pointer moves on-screen as you move your\n"
+"mouse."
 msgstr ""
 "DrakX oppdager vanligvis antall knapper på musen din. Hvis ikke, så vil den\n"
 "anta at du har en to-knappers mus og vil sette opp treknappers-emulering.\n"
@@ -1790,27 +1950,26 @@ msgstr ""
 "og bevegelsene er riktig."
 
 #: ../../help.pm:1
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "Your choice of preferred language will affect the language of the\n"
 "documentation, the installer and the system in general. Select first the\n"
 "region you are located in, and then the language you speak.\n"
 "\n"
-"Clicking on the \"Advanced\" button will allow you to select other\n"
-"languages to be installed on your workstation, thereby installing the\n"
-"language-specific files for system documentation and applications. For\n"
-"example, if you will host users from Spain on your machine, select English\n"
-"as the default language in the tree view and \"Espanol\" in the Advanced\n"
-"section.\n"
+"Clicking on the \"%s\" button will allow you to select other languages to\n"
+"be installed on your workstation, thereby installing the language-specific\n"
+"files for system documentation and applications. For example, if you will\n"
+"host users from Spain on your machine, select English as the default\n"
+"language in the tree view and \"%s\" in the Advanced section.\n"
 "\n"
 "Note that you're not limited to choosing a single additional language. You\n"
-"may choose several ones, or even install them all by selecting the \"All\n"
-"languages\" box. Selecting support for a language means translations,\n"
-"fonts, spell checkers, etc. for that language will be installed.\n"
-"Additionally, the \"Use Unicode by default\" checkbox allows to force the\n"
-"system to use unicode (UTF-8). Note however that this is an experimental\n"
-"feature. If you select different languages requiring different encoding the\n"
-"unicode support will be installed anyway.\n"
+"may choose several ones, or even install them all by selecting the \"%s\"\n"
+"box. Selecting support for a language means translations, fonts, spell\n"
+"checkers, etc. for that language will be installed. Additionally, the\n"
+"\"%s\" checkbox allows you to force the system to use unicode (UTF-8). Note\n"
+"however that this is an experimental feature. If you select different\n"
+"languages requiring different encoding the unicode support will be\n"
+"installed anyway.\n"
 "\n"
 "To switch between the various languages installed on the system, you can\n"
 "launch the \"/usr/sbin/localedrake\" command as \"root\" to change the\n"
@@ -1848,17 +2007,22 @@ msgstr ""
 
 #: ../../help.pm:1
 #, c-format
+msgid "Espanol"
+msgstr ""
+
+#: ../../help.pm:1
+#, fuzzy, c-format
 msgid ""
 "Depending on the default language you chose in Section , DrakX will\n"
 "automatically select a particular type of keyboard configuration. However,\n"
-"you might not have a keyboard that corresponds exactly to your language:\n"
-"for example, if you are an English speaking Swiss person, you may have a\n"
-"Swiss keyboard. Or if you speak English but are located in Quebec, you may\n"
-"find yourself in the same situation where your native language and keyboard\n"
-"do not match. In either case, this installation step will allow you to\n"
-"select an appropriate keyboard from a list.\n"
+"you may not have a keyboard that corresponds exactly to your language: for\n"
+"example, if you are an English speaking Swiss person, you may have a Swiss\n"
+"keyboard. Or if you speak English but are located in Quebec, you may find\n"
+"yourself in the same situation where your native language and keyboard do\n"
+"not match. In either case, this installation step will allow you to select\n"
+"an appropriate keyboard from a list.\n"
 "\n"
-"Click on the \"More \" button to be presented with the complete list of\n"
+"Click on the \"%s\" button to be presented with the complete list of\n"
 "supported keyboards.\n"
 "\n"
 "If you choose a keyboard layout based on a non-Latin alphabet, the next\n"
@@ -1879,7 +2043,7 @@ msgstr ""
 "som vil bytte mellom latin og ikke-latinsk tastaturoppsett."
 
 #: ../../help.pm:1
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "This step is activated only if an old GNU/Linux partition has been found on\n"
 "your machine.\n"
@@ -1887,13 +2051,12 @@ msgid ""
 "DrakX now needs to know if you want to perform a new install or an upgrade\n"
 "of an existing Mandrake Linux system:\n"
 "\n"
-" * \"Install\": For the most part, this completely wipes out the old\n"
-"system. If you wish to change how your hard drives are partitioned, or\n"
-"change the file system, you should use this option. However, depending on\n"
-"your partitioning scheme, you can prevent some of your existing data from\n"
-"being over- written.\n"
+" * \"%s\": For the most part, this completely wipes out the old system. If\n"
+"you wish to change how your hard drives are partitioned, or change the file\n"
+"system, you should use this option. However, depending on your partitioning\n"
+"scheme, you can prevent some of your existing data from being over-written.\n"
 "\n"
-" * \"Upgrade\": this installation class allows you to update the packages\n"
+" * \"%s\": this installation class allows you to update the packages\n"
 "currently installed on your Mandrake Linux system. Your current\n"
 "partitioning scheme and user data is not altered. Most of other\n"
 "configuration steps remain available, similar to a standard installation.\n"
@@ -1928,11 +2091,22 @@ msgstr ""
 
 #: ../../help.pm:1
 #, c-format
+msgid "Upgrade"
+msgstr "Oppgrader"
+
+#: ../../help.pm:1 ../../install_steps_gtk.pm:1
+#: ../../install_steps_interactive.pm:1 ../../standalone/drakbackup:1
+#, c-format
+msgid "Install"
+msgstr "Installer"
+
+#: ../../help.pm:1
+#, fuzzy, c-format
 msgid ""
-"\"Country\": check the current country selection. If you are not in this\n"
-"country, click on the \"Configure\" button and choose another one. If your\n"
-"country is not in the first list shown, click the \"More\" button to get\n"
-"the complete country list."
+"\"%s\": check the current country selection. If you are not in this\n"
+"country, click on the \"%s\" button and choose another one. If your country\n"
+"is not in the first list shown, click the \"%s\" button to get the complete\n"
+"country list."
 msgstr ""
 "\"Land\": Sjekk ditt valg av land. Dersom du ikke befinner deg i dette "
 "landet,\n"
@@ -1941,10 +2115,10 @@ msgstr ""
 "den første lista, klikk på \"Mer\" knappen for å få den fullstendige lista. "
 
 #: ../../help.pm:1
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "More than one Microsoft partition has been detected on your hard drive.\n"
-"Please choose the one you want to resize in order to install your new\n"
+"Please choose which one you want to resize in order to install your new\n"
 "Mandrake Linux operating system.\n"
 "\n"
 "Each partition is listed as follows: \"Linux name\", \"Windows name\"\n"
@@ -2011,11 +2185,11 @@ msgstr ""
 "eller partisjonen er kalt \"C:\")."
 
 #: ../../help.pm:1
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "At this point, you need to choose which partition(s) will be used for the\n"
 "installation of your Mandrake Linux system. If partitions have already been\n"
-"defined, either from a previous installation of GNU/Linux or from another\n"
+"defined, either from a previous installation of GNU/Linux or by another\n"
 "partitioning tool, you can use existing partitions. Otherwise, hard drive\n"
 "partitions must be defined.\n"
 "\n"
@@ -2025,43 +2199,40 @@ msgid ""
 "\n"
 "To partition the selected hard drive, you can use these options:\n"
 "\n"
-" * \"Clear all\": this option deletes all partitions on the selected hard\n"
-"drive\n"
+" * \"%s\": this option deletes all partitions on the selected hard drive\n"
 "\n"
-" * \"Auto allocate\": this option enables you to automatically create ext3\n"
-"and swap partitions in free space of your hard drive\n"
+" * \"%s\": this option enables you to automatically create ext3 and swap\n"
+"partitions in the free space of your hard drive\n"
 "\n"
-"\"More\": gives access to additional features:\n"
+"\"%s\": gives access to additional features:\n"
 "\n"
-" * \"Save partition table\": saves the partition table to a floppy. Useful\n"
-"for later partition-table recovery, if necessary. It is strongly\n"
-"recommended that you perform this step.\n"
+" * \"%s\": saves the partition table to a floppy. Useful for later\n"
+"partition-table recovery if necessary. It is strongly recommended that you\n"
+"perform this step.\n"
 "\n"
-" * \"Restore partition table\": allows you to restore a previously saved\n"
-"partition table from a floppy disk.\n"
+" * \"%s\": allows you to restore a previously saved partition table from a\n"
+"floppy disk.\n"
 "\n"
-" * \"Rescue partition table\": if your partition table is damaged, you can\n"
-"try to recover it using this option. Please be careful and remember that it\n"
-"doesn't always work.\n"
+" * \"%s\": if your partition table is damaged, you can try to recover it\n"
+"using this option. Please be careful and remember that it doesn't always\n"
+"work.\n"
 "\n"
-" * \"Reload partition table\": discards all changes and reloads the\n"
-"partition table that was originally on the hard drive.\n"
+" * \"%s\": discards all changes and reloads the partition table that was\n"
+"originally on the hard drive.\n"
 "\n"
-" * \"Removable media automounting\": unchecking this option will force\n"
-"users to manually mount and unmount removable medias such as floppies and\n"
-"CD-ROMs.\n"
+" * \"%s\": unchecking this option will force users to manually mount and\n"
+"unmount removable media such as floppies and CD-ROMs.\n"
 "\n"
-" * \"Wizard\": use this option if you wish to use a wizard to partition\n"
-"your hard drive. This is recommended if you do not have a good\n"
-"understanding of partitioning.\n"
+" * \"%s\": use this option if you wish to use a wizard to partition your\n"
+"hard drive. This is recommended if you do not have a good understanding of\n"
+"partitioning.\n"
 "\n"
-" * \"Undo\": use this option to cancel your changes.\n"
+" * \"%s\": use this option to cancel your changes.\n"
 "\n"
-" * \"Toggle to normal/expert mode\": allows additional actions on\n"
-"partitions (type, options, format) and gives more information about the\n"
-"hard drive.\n"
+" * \"%s\": allows additional actions on partitions (type, options, format)\n"
+"and gives more information about the hard drive.\n"
 "\n"
-" * \"Done\": when you are finished partitioning your hard drive, this will\n"
+" * \"%s\": when you are finished partitioning your hard drive, this will\n"
 "save your changes back to disk.\n"
 "\n"
 "When defining the size of a partition, you can finely set the partition\n"
@@ -2166,7 +2337,57 @@ msgstr ""
 "nødsituasjoner."
 
 #: ../../help.pm:1
+#, fuzzy, c-format
+msgid "Toggle between normal/expert mode"
+msgstr "Skift til normalmodus"
+
+#: ../../help.pm:1 ../../diskdrake/interactive.pm:1
 #, c-format
+msgid "Undo"
+msgstr "Angre"
+
+#: ../../help.pm:1 ../../diskdrake/hd_gtk.pm:1
+#, c-format
+msgid "Wizard"
+msgstr "Wizard"
+
+#: ../../help.pm:1 ../../diskdrake/interactive.pm:1
+#, c-format
+msgid "Removable media automounting"
+msgstr "Fjernbart media automontering"
+
+#: ../../help.pm:1 ../../diskdrake/interactive.pm:1
+#, c-format
+msgid "Reload partition table"
+msgstr "Last partisjonstabell på nytt"
+
+#: ../../help.pm:1 ../../diskdrake/interactive.pm:1
+#, c-format
+msgid "Rescue partition table"
+msgstr "Nødpartisjonstabell"
+
+#: ../../help.pm:1 ../../diskdrake/interactive.pm:1
+#, c-format
+msgid "Restore partition table"
+msgstr "Redde partisjonstabell"
+
+#: ../../help.pm:1 ../../diskdrake/interactive.pm:1
+#, c-format
+msgid "Save partition table"
+msgstr "Lagre partisjonstabeller"
+
+#: ../../help.pm:1 ../../diskdrake/interactive.pm:1
+#, c-format
+msgid "Auto allocate"
+msgstr "Automatisk allokering"
+
+#: ../../help.pm:1 ../../diskdrake/interactive.pm:1
+#, c-format
+msgid "Clear all"
+msgstr "Fjern alle"
+
+#: ../../help.pm:1
+#, fuzzy, c-format
 msgid ""
 "At this point, DrakX will allow you to choose the security level desired\n"
 "for the machine. As a rule of thumb, the security level should be set\n"
@@ -2174,7 +2395,7 @@ msgid ""
 "directly exposed to the Internet. The trade-off of a higher security level\n"
 "is generally obtained at the expense of ease of use.\n"
 "\n"
-"If you do not know what to choose, keep the default option."
+"If you do not know what to choose, stay with the default option."
 msgstr ""
 "På dette punktet så vil DrakX la deg velge sikkerhetsnivået som er ønsket "
 "for\n"
@@ -2186,19 +2407,19 @@ msgstr ""
 "Hvis du ikke vet hva du skal velge, behold standardvalget."
 
 #: ../../help.pm:1
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "At the time you are installing Mandrake Linux, it is likely that some\n"
 "packages have been updated since the initial release. Bugs may have been\n"
 "fixed, security issues resolved. To allow you to benefit from these\n"
-"updates, you are now able to download them from the Internet. Check \"Yes\"\n"
-"if you have a working Internet connection, or \"No\" if you prefer to\n"
+"updates, you are now able to download them from the Internet. Check \"%s\"\n"
+"if you have a working Internet connection, or \"%s\" if you prefer to\n"
 "install updated packages later.\n"
 "\n"
-"Choosing \"Yes\" will display a list of places from which updates can be\n"
-"retrieved. Choose the one nearest you. A package-selection tree will\n"
-"appear: review the selection, and press \"Install\" to retrieve and install\n"
-"the selected package(s), or \"Cancel\" to abort."
+"Choosing \"%s\" will display a list of places from which updates can be\n"
+"retrieved. You should choose one nearer to you. A package-selection tree\n"
+"will appear: review the selection, and press \"%s\" to retrieve and install\n"
+"the selected package(s), or \"%s\" to abort."
 msgstr ""
 "Når du installerer Mandrake Linux, er det sannsynlig at enkelte pakker\n"
 "er blitt oppdatert siden denne versjonen ble sluppet. noen feil kan ha\n"
@@ -2213,8 +2434,22 @@ msgstr ""
 "installere de valgte pakkene. Du kan også klikke \"Avbryt\" for å avbryte\n"
 "dette trinnet. "
 
-#: ../../help.pm:1
+#: ../../help.pm:1 ../../install_any.pm:1 ../../interactive.pm:1
+#: ../../my_gtk.pm:1 ../../ugtk2.pm:1 ../../modules/interactive.pm:1
+#: ../../standalone/drakgw:1 ../../standalone/harddrake2:1
 #, c-format
+msgid "Yes"
+msgstr "Ja"
+
+#: ../../help.pm:1 ../../install_any.pm:1 ../../interactive.pm:1
+#: ../../my_gtk.pm:1 ../../ugtk2.pm:1 ../../modules/interactive.pm:1
+#: ../../standalone/harddrake2:1
+#, c-format
+msgid "No"
+msgstr "Nei"
+
+#: ../../help.pm:1
+#, fuzzy, c-format
 msgid ""
 "Any partitions that have been newly defined must be formatted for use\n"
 "(formatting means creating a file system).\n"
@@ -2233,13 +2468,13 @@ msgid ""
 "the selected partitions will be deleted and you will not be able to recover\n"
 "it.\n"
 "\n"
-"Click on \"Next ->\" when you are ready to format partitions.\n"
+"Click on \"%s\" when you are ready to format partitions.\n"
 "\n"
-"Click on \"<- Previous\" if you want to choose another partition for your\n"
-"new Mandrake Linux operating system installation.\n"
+"Click on \"%s\" if you want to choose another partition for your new\n"
+"Mandrake Linux operating system installation.\n"
 "\n"
-"Click on \"Advanced\" if you wish to select partitions that will be checked\n"
-"for bad blocks on the disk."
+"Click on \"%s\" if you wish to select partitions that will be checked for\n"
+"bad blocks on the disk."
 msgstr ""
 "Nye partisjoner må formateres før de kan brukes (formatering betyr\n"
 "å lage et filsystem).\n"
@@ -2264,35 +2499,34 @@ msgstr ""
 "av Mandrake Linux. "
 
 #: ../../help.pm:1
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "There you are. Installation is now complete and your GNU/Linux system is\n"
-"ready to use. Just click \"Next ->\" to reboot the system. The first thing\n"
-"you should see after your computer has finished doing its hardware tests is\n"
-"the bootloader menu, giving you the choice of which operating system to\n"
-"start.\n"
+"ready to use. Just click \"%s\" to reboot the system. The first thing you\n"
+"should see after your computer has finished doing its hardware tests is the\n"
+"bootloader menu, giving you the choice of which operating system to start.\n"
 "\n"
-"The \"Advanced\" button shows two more buttons to:\n"
+"The \"%s\" button shows two more buttons to:\n"
 "\n"
-" * \"generate auto-install floppy\": to create an installation floppy disk\n"
-"that will automatically perform a whole installation without the help of an\n"
-"operator, similar to the installation you just configured.\n"
+" * \"%s\": to create an installation floppy disk that will automatically\n"
+"perform a whole installation without the help of an operator, similar to\n"
+"the installation you just configured.\n"
 "\n"
 "   Note that two different options are available after clicking the button:\n"
 "\n"
-"    * \"Replay\". This is a partially automated installation. The\n"
-"partitioning step is the only interactive procedure.\n"
+"    * \"%s\". This is a partially automated installation. The partitioning\n"
+"step is the only interactive procedure.\n"
 "\n"
-"    * \"Automated\". Fully automated installation: the hard disk is\n"
-"completely rewritten, all data is lost.\n"
+"    * \"%s\". Fully automated installation: the hard disk is completely\n"
+"rewritten, all data is lost.\n"
 "\n"
 "   This feature is very handy when installing a number of similar machines.\n"
 "See the Auto install section on our web site for more information.\n"
 "\n"
-" * \"Save packages selection\"(*): saves a list of the package selected in\n"
-"this installation. To use this selection with another installation, insert\n"
-"the floppy and start the installation. At the prompt, press the [F1] key\n"
-"and type >>linux defcfg=\"floppy\" <<.\n"
+" * \"%s\"(*): saves a list of the packages selected in this installation.\n"
+"To use this selection with another installation, insert the floppy and\n"
+"start the installation. At the prompt, press the [F1] key and type >>linux\n"
+"defcfg=\"floppy\" <<.\n"
 "\n"
 "(*) You need a FAT-formatted floppy (to create one under GNU/Linux, type\n"
 "\"mformat a:\")"
@@ -2333,8 +2567,33 @@ msgstr ""
 "skriv\n"
 "\"mformat a:\". "
 
-#: ../../help.pm:1
+#: ../../help.pm:1 ../../install_steps_interactive.pm:1
 #, c-format
+msgid "Save packages selection"
+msgstr "Lagre pakkevalg"
+
+#: ../../help.pm:1 ../../install_steps_interactive.pm:1
+#, c-format
+msgid "Automated"
+msgstr "Automatisert"
+
+#: ../../help.pm:1 ../../install_steps_interactive.pm:1
+#, c-format
+msgid "Replay"
+msgstr "Gjør igjen"
+
+#: ../../help.pm:1
+#, fuzzy, c-format
+msgid "generate auto-install floppy"
+msgstr "Oppretter diskett for autoinstallasjon"
+
+#: ../../help.pm:1 ../../install_steps_interactive.pm:1
+#, c-format
+msgid "Reboot"
+msgstr "Restart"
+
+#: ../../help.pm:1
+#, fuzzy, c-format
 msgid ""
 "At this point, you need to decide where you want to install the Mandrake\n"
 "Linux operating system on your hard drive. If your hard drive is empty or\n"
@@ -2352,51 +2611,49 @@ msgid ""
 "\n"
 "Depending on your hard drive configuration, several options are available:\n"
 "\n"
-" * \"Use free space\": this option will perform an automatic partitioning\n"
-"of your blank drive(s). If you use this option there will be no further\n"
-"prompts.\n"
+" * \"%s\": this option will perform an automatic partitioning of your blank\n"
+"drive(s). If you use this option there will be no further prompts.\n"
 "\n"
-" * \"Use existing partition\": the wizard has detected one or more existing\n"
-"Linux partitions on your hard drive. If you want to use them, choose this\n"
-"option. You will then be asked to choose the mount points associated with\n"
-"each of the partitions. The legacy mount points are selected by default,\n"
-"and for the most part it's a good idea to keep them.\n"
+" * \"%s\": the wizard has detected one or more existing Linux partitions on\n"
+"your hard drive. If you want to use them, choose this option. You will then\n"
+"be asked to choose the mount points associated with each of the partitions.\n"
+"The legacy mount points are selected by default, and for the most part it's\n"
+"a good idea to keep them.\n"
 "\n"
-" * \"Use the free space on the Windows partition\": if Microsoft Windows is\n"
-"installed on your hard drive and takes all the space available on it, you\n"
-"have to create free space for Linux data. To do so, you can delete your\n"
-"Microsoft Windows partition and data (see ``Erase entire disk'' solution)\n"
-"or resize your Microsoft Windows FAT partition. Resizing can be performed\n"
-"without the loss of any data, provided you previously defragment the\n"
-"Windows partition and that it uses the FAT format. Backing up your data is\n"
-"strongly recommended.. Using this option is recommended if you want to use\n"
-"both Mandrake Linux and Microsoft Windows on the same computer.\n"
+" * \"%s\": if Microsoft Windows is installed on your hard drive and takes\n"
+"all the space available on it, you will have to create free space for\n"
+"Linux. To do so, you can delete your Microsoft Windows partition and data\n"
+"(see ``Erase entire disk'' solution) or resize your Microsoft Windows FAT\n"
+"partition. Resizing can be performed without the loss of any data, provided\n"
+"you have previously defragmented the Windows partition and that it uses the\n"
+"FAT format. Backing up your data is strongly recommended.. Using this\n"
+"option is recommended if you want to use both Mandrake Linux and Microsoft\n"
+"Windows on the same computer.\n"
 "\n"
 "   Before choosing this option, please understand that after this\n"
 "procedure, the size of your Microsoft Windows partition will be smaller\n"
 "then when you started. You will have less free space under Microsoft\n"
 "Windows to store your data or to install new software.\n"
 "\n"
-" * \"Erase entire disk\": if you want to delete all data and all partitions\n"
-"present on your hard drive and replace them with your new Mandrake Linux\n"
-"system, choose this option. Be careful, because you will not be able to\n"
-"undo your choice after you confirm.\n"
+" * \"%s\": if you want to delete all data and all partitions present on\n"
+"your hard drive and replace them with your new Mandrake Linux system,\n"
+"choose this option. Be careful, because you will not be able to undo your\n"
+"choice after you confirm.\n"
 "\n"
 "   !! If you choose this option, all data on your disk will be deleted. !!\n"
 "\n"
-" * \"Remove Windows\": this will simply erase everything on the drive and\n"
-"begin fresh, partitioning everything from scratch. All data on your disk\n"
-"will be lost.\n"
+" * \"%s\": this will simply erase everything on the drive and begin fresh,\n"
+"partitioning everything from scratch. All data on your disk will be lost.\n"
 "\n"
 "   !! If you choose this option, all data on your disk will be lost. !!\n"
 "\n"
-" * \"Custom disk partitioning\": choose this option if you want to manually\n"
-"partition your hard drive. Be careful -- it is a powerful but dangerous\n"
-"choice and you can very easily lose all your data. That's why this option\n"
-"is really only recommended if you have done something like this before and\n"
-"have some experience. For more instructions on how to use the DiskDrake\n"
-"utility, refer to the ``Managing Your Partitions '' section in the\n"
-"``Starter Guide''."
+" * \"%s\": choose this option if you want to manually partition your hard\n"
+"drive. Be careful -- it is a powerful but dangerous choice and you can very\n"
+"easily lose all your data. That's why this option is really only\n"
+"recommended if you have done something like this before and have some\n"
+"experience. For more instructions on how to use the DiskDrake utility,\n"
+"refer to the ``Managing Your Partitions '' section in the ``Starter\n"
+"Guide''."
 msgstr ""
 "Du må nå avgjøre hvor på din(e) harddisk(er) du ønsker å installere\n"
 "Mandrake Linux. Hvis din harddisk er tom, eller et eksisterende\n"
@@ -2460,14 +2717,45 @@ msgstr ""
 "hvordan dette trinnet utføres, se oppstartsguidens kapittel om "
 "partisjonering."
 
-#: ../../help.pm:1
+#: ../../help.pm:1 ../../install_interactive.pm:1
 #, c-format
+msgid "Custom disk partitioning"
+msgstr "Egendefinert diskpartisjonering"
+
+#: ../../help.pm:1
+#, fuzzy, c-format
+msgid "Remove Windows"
+msgstr "Fjern Windows(TM)"
+
+#: ../../help.pm:1 ../../install_interactive.pm:1
+#, c-format
+msgid "Erase entire disk"
+msgstr "Slette hele disken"
+
+#: ../../help.pm:1 ../../install_interactive.pm:1
+#, c-format
+msgid "Use the free space on the Windows partition"
+msgstr "Bruk den ledige plassen på Windows partisjonen"
+
+#: ../../help.pm:1
+#, fuzzy, c-format
+msgid "Use existing partition"
+msgstr "Bruk eksisterende partisjon"
+
+#: ../../help.pm:1 ../../install_interactive.pm:1
+#, c-format
+msgid "Use free space"
+msgstr "Bruk ledig plass"
+
+#: ../../help.pm:1
+#, fuzzy, c-format
 msgid ""
-"Finally, you will be asked whether you want to see the graphical interface\n"
-"at boot. Note this question will be asked even if you chose not to test the\n"
-"configuration. Obviously, you want to answer \"No\" if your machine is to\n"
-"act as a server, or if you were not successful in getting the display\n"
-"configured."
+"Options\n"
+"\n"
+"   Here you can choose whether you want to have your machine automatically\n"
+"switch to a graphical interface at boot. Obviously, you want to check\n"
+"\"%s\" if your machine is to act as a server, or if you were not successful\n"
+"in getting the display configured."
 msgstr ""
 "Til slutt vil du bli spurt om du ønsker å starte det grafiske grensesnittet\n"
 "når maskinen starter. Dette spørsmålet vil bli stilt selv om du velger å\n"
@@ -2476,11 +2764,11 @@ msgstr ""
 "hvis du ikke kunne konfigurere det grafiske grensesnittet."
 
 #: ../../help.pm:1
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "In the case that different servers are available for your card, with or\n"
-"without 3D acceleration, you are then proposed to choose the server that\n"
-"best suits your needs."
+"without 3D acceleration, you are then asked to choose the server that best\n"
+"suits your needs."
 msgstr ""
 "I tilfelle det er flere tjenere tilgjengelig for ditt kort, enten med eller "
 "uten\n"
@@ -2488,13 +2776,13 @@ msgstr ""
 "passer dine behov."
 
 #: ../../help.pm:1
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "Resolution\n"
 "\n"
-"   You can choose here resolutions and color depth between those available\n"
-"for your hardware. Choose the one that best suit your needs (you will be\n"
-"able to change that after installation though). A sample of the chosen\n"
+"   Here you can choose the resolutions and color depths available for your\n"
+"hardware. Choose the one that best suits your needs (you will be able to\n"
+"change that after installation though). A sample of the chosen\n"
 "configuration is shown in the monitor."
 msgstr ""
 "Oppløsning\n"
@@ -2505,13 +2793,13 @@ msgstr ""
 "er vist i skjermen. "
 
 #: ../../help.pm:1
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "Monitor\n"
 "\n"
-"   The installer can normally automatically detect and configure the\n"
-"monitor connected to your machine. If it is not the case, you can choose in\n"
-"this list the monitor you actually own."
+"   The installer will normally automatically detect and configure the\n"
+"monitor connected to your machine. If it is correct, you can choose from\n"
+"this list the monitor you actually have connected to your computer."
 msgstr ""
 "Skjerm\n"
 "\n"
@@ -2520,38 +2808,38 @@ msgstr ""
 "du velge fra denne lista hvilken skjerm du har. "
 
 #: ../../help.pm:1
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "X (for X Window System) is the heart of the GNU/Linux graphical interface\n"
 "on which all the graphical environments (KDE, GNOME, AfterStep,\n"
 "WindowMaker, etc.) bundled with Mandrake Linux rely upon.\n"
 "\n"
-"You will be presented the list of different parameters to change to get an\n"
-"optimal graphical display: Graphic Card\n"
+"You will be presented with a list of different parameters to change to get\n"
+"an optimal graphical display: Graphic Card\n"
 "\n"
-"   The installer can normally automatically detect and configure the\n"
+"   The installer will normally automatically detect and configure the\n"
 "graphic card installed on your machine. If it is not the case, you can\n"
-"choose in this list the card you actually own.\n"
+"choose from this list the card you actually have installed.\n"
 "\n"
 "   In the case that different servers are available for your card, with or\n"
-"without 3D acceleration, you are then proposed to choose the server that\n"
-"best suits your needs.\n"
+"without 3D acceleration, you are then asked to choose the server that best\n"
+"suits your needs.\n"
 "\n"
 "\n"
 "\n"
 "Monitor\n"
 "\n"
-"   The installer can normally automatically detect and configure the\n"
-"monitor connected to your machine. If it is not the case, you can choose in\n"
-"this list the monitor you actually own.\n"
+"   The installer will normally automatically detect and configure the\n"
+"monitor connected to your machine. If it is correct, you can choose from\n"
+"this list the monitor you actually have connected to your computer.\n"
 "\n"
 "\n"
 "\n"
 "Resolution\n"
 "\n"
-"   You can choose here resolutions and color depth between those available\n"
-"for your hardware. Choose the one that best suit your needs (you will be\n"
-"able to change that after installation though). A sample of the chosen\n"
+"   Here you can choose the resolutions and color depths available for your\n"
+"hardware. Choose the one that best suits your needs (you will be able to\n"
+"change that after installation though). A sample of the chosen\n"
 "configuration is shown in the monitor.\n"
 "\n"
 "\n"
@@ -2559,7 +2847,7 @@ msgid ""
 "Test\n"
 "\n"
 "   the system will try to open a graphical screen at the desired\n"
-"resolution. If you can see the message during the test and answer \"Yes\",\n"
+"resolution. If you can see the message during the test and answer \"%s\",\n"
 "then DrakX will proceed to the next step. If you cannot see the message, it\n"
 "means that some part of the autodetected configuration was incorrect and\n"
 "the test will automatically end after 12 seconds, bringing you back to the\n"
@@ -2569,9 +2857,9 @@ msgid ""
 "\n"
 "Options\n"
 "\n"
-"   You can here choose whether you want to have your machine automatically\n"
+"   Here you can choose whether you want to have your machine automatically\n"
 "switch to a graphical interface at boot. Obviously, you want to check\n"
-"\"No\" if your machine is to act as a server, or if you were not successful\n"
+"\"%s\" if your machine is to act as a server, or if you were not successful\n"
 "in getting the display configured."
 msgstr ""
 "X (X Window System) er hjertet i GNU/Linux sitt grafiske grensesnitt som\n"
@@ -2637,17 +2925,17 @@ msgstr ""
 "konfigurere det grafiske grensesnittet."
 
 #: ../../help.pm:1
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "Graphic Card\n"
 "\n"
-"   The installer can normally automatically detect and configure the\n"
+"   The installer will normally automatically detect and configure the\n"
 "graphic card installed on your machine. If it is not the case, you can\n"
-"choose in this list the card you actually own.\n"
+"choose from this list the card you actually have installed.\n"
 "\n"
 "   In the case that different servers are available for your card, with or\n"
-"without 3D acceleration, you are then proposed to choose the server that\n"
-"best suits your needs."
+"without 3D acceleration, you are then asked to choose the server that best\n"
+"suits your needs."
 msgstr ""
 "Skjermkort\n"
 "\n"
@@ -2662,20 +2950,20 @@ msgstr ""
 "akselerasjon, kan du velge tjeneren som best passer dine behov."
 
 #: ../../help.pm:1
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "GNU/Linux manages time in GMT (Greenwich Mean Time) and translates it to\n"
 "local time according to the time zone you selected. If the clock on your\n"
 "motherboard is set to local time, you may deactivate this by unselecting\n"
-"\"Hardware clock set to GMT \", which will let GNU/Linux know that the\n"
-"system clock and the hardware clock are in the same timezone. This is\n"
-"useful when the machine also hosts another operating system like Windows.\n"
+"\"%s\", which will let GNU/Linux know that the system clock and the\n"
+"hardware clock are in the same timezone. This is useful when the machine\n"
+"also hosts another operating system like Windows.\n"
 "\n"
-"The \"Automatic time synchronization \" option will automatically regulate\n"
-"the clock by connecting to a remote time server on the Internet. For this\n"
-"feature to work, you must have a working Internet connection. It is best to\n"
-"choose a time server located near you. This option actually installs a time\n"
-"server that can used by other machines on your local network."
+"The \"%s\" option will automatically regulate the clock by connecting to a\n"
+"remote time server on the Internet. For this feature to work, you must have\n"
+"a working Internet connection. It is best to choose a time server located\n"
+"near you. This option actually installs a time server that can used by\n"
+"other machines on your local network as well."
 msgstr ""
 "GNU/Linux passer tiden i GMT (Greenwich Mean Time), og oversetter denne\n"
 "ti llokal tid avhengig av tidssonen du valgte. Dersom klokka på ditt "
@@ -2695,14 +2983,24 @@ msgstr ""
 "kan brukes av andre maskiner på ditt lokale nettverk. "
 
 #: ../../help.pm:1
+#, fuzzy, c-format
+msgid "Automatic time synchronization"
+msgstr "Automatisk tidssynkronisering (ved hjelp av NTP)"
+
+#: ../../help.pm:1 ../../install_steps_interactive.pm:1
 #, c-format
+msgid "Hardware clock set to GMT"
+msgstr "Maskinvareklokken din satt til GMT"
+
+#: ../../help.pm:1
+#, fuzzy, c-format
 msgid ""
 "This dialog is used to choose which services you wish to start at boot\n"
 "time.\n"
 "\n"
 "DrakX will list all the services available on the current installation.\n"
-"Review each one carefully and uncheck those which are not always needed at\n"
-"boot time.\n"
+"Review each one carefully and uncheck those which are not needed at boot\n"
+"time.\n"
 "\n"
 "A short explanatory text will be displayed about a service when it is\n"
 "selected. However, if you are not sure whether a service is useful or not,\n"
@@ -2737,12 +3035,12 @@ msgstr ""
 "trenger."
 
 #: ../../help.pm:1
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"\"Printer\": clicking on the \"Configure\" button will open the printer\n"
-"configuration wizard. Consult the corresponding chapter of the ``Starter\n"
-"Guide'' for more information on how to setup a new printer. The interface\n"
-"presented there is similar to the one used during installation."
+"\"%s\": clicking on the \"%s\" button will open the printer configuration\n"
+"wizard. Consult the corresponding chapter of the ``Starter Guide'' for more\n"
+"information on how to setup a new printer. The interface presented there is\n"
+"similar to the one used during installation."
 msgstr ""
 "\"Skriver\": Klikk på \"Konfigurer\" knappen for å åpne skriverveiviseren.\n"
 "Konsulter det korresponderende kapitlet i oppstartsguiden for mer\n"
@@ -2750,14 +3048,14 @@ msgstr ""
 "brukes her er tilsvarende det som benyttes under installasjon."
 
 #: ../../help.pm:1
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "You will now set up your Internet/network connection. If you wish to\n"
-"connect your computer to the Internet or to a local network, click \"Next\n"
-"->\". Mandrake Linux will attempt to autodetect network devices and modems.\n"
-"If this detection fails, uncheck the \"Use auto detection\" box. You may\n"
-"also choose not to configure the network, or to do it later, in which case\n"
-"clicking the \"Cancel\" button will take you to the next step.\n"
+"connect your computer to the Internet or to a local network, click \"%s\".\n"
+"Mandrake Linux will attempt to autodetect network devices and modems. If\n"
+"this detection fails, uncheck the \"%s\" box. You may also choose not to\n"
+"configure the network, or to do it later, in which case clicking the \"%s\"\n"
+"button will take you to the next step.\n"
 "\n"
 "When configuring your network, the available connections options are:\n"
 "traditional modem, ISDN modem, ADSL connection, cable modem, and finally a\n"
@@ -2796,8 +3094,13 @@ msgstr ""
 "er\n"
 "beskrevet i oppstartsguiden for å sette opp din forbindelse. "
 
-#: ../../help.pm:1
+#: ../../help.pm:1 ../../network/netconnect.pm:1
 #, c-format
+msgid "Use auto detection"
+msgstr "Bruk automatisk oppdagelse"
+
+#: ../../help.pm:1
+#, fuzzy, c-format
 msgid ""
 "If you told the installer that you wanted to individually select packages,\n"
 "it will present a tree containing all packages classified by groups and\n"
@@ -2813,17 +3116,17 @@ msgid ""
 "installed. By default Mandrake Linux will automatically start any installed\n"
 "services at boot time. Even if they are safe and have no known issues at\n"
 "the time the distribution was shipped, it is entirely possible that that\n"
-"security holes are discovered after this version of Mandrake Linux was\n"
+"security holes were discovered after this version of Mandrake Linux was\n"
 "finalized. If you do not know what a particular service is supposed to do\n"
-"or why it is being installed, then click \"No\". Clicking \"Yes \" will\n"
+"or why it is being installed, then click \"%s\". Clicking \"%s\" will\n"
 "install the listed services and they will be started automatically by\n"
 "default during boot. !!\n"
 "\n"
-"The \"Automatic dependencies\" option is used to disable the warning dialog\n"
-"which appears whenever the installer automatically selects a package to\n"
-"resolve a dependency issue. Some packages have relationships between each\n"
-"other such that installation of a package requires that some other program\n"
-"is already installed. The installer can determine which packages are\n"
+"The \"%s\" option is used to disable the warning dialog which appears\n"
+"whenever the installer automatically selects a package to resolve a\n"
+"dependency issue. Some packages have relationships between each other such\n"
+"that installation of a package requires that some other program is also\n"
+"rerquired to be installed. The installer can determine which packages are\n"
 "required to satisfy a dependency to successfully complete the installation.\n"
 "\n"
 "The tiny floppy disk icon at the bottom of the list allows you to load a\n"
@@ -2879,6 +3182,11 @@ msgstr ""
 
 #: ../../help.pm:1
 #, c-format
+msgid "Automatic dependencies"
+msgstr ""
+
+#: ../../help.pm:1
+#, fuzzy, c-format
 msgid ""
 "It is now time to specify which programs you wish to install on your\n"
 "system. There are thousands of packages available for Mandrake Linux, and\n"
@@ -2888,47 +3196,45 @@ msgid ""
 "Packages are sorted into groups corresponding to a particular use of your\n"
 "machine. Mandrake Linux has four predefined installations available. You\n"
 "can think of these installation classes as containers for various packages.\n"
-"You can mix and match applications from the various containers, so a\n"
+"You can mix and match applications from the various groups, so a\n"
 "``Workstation'' installation can still have applications from the\n"
-"``Development'' container installed.\n"
+"``Development'' group installed.\n"
 "\n"
-" * \"Workstation\": if you plan to use your machine as a workstation,\n"
-"select one or more of the applications that are in the workstation\n"
-"container.\n"
+" * \"%s\": if you plan to use your machine as a workstation, select one or\n"
+"more of the applications that are in the workstation group.\n"
 "\n"
-" * \"Development\": if plan on using your machine for programming, choose\n"
-"the appropriate packages from the container.\n"
+" * \"%s\": if plan on using your machine for programming, choose the\n"
+"appropriate packages from that group.\n"
 "\n"
-" * \"Server\": if your machine is intended to be a server, select which of\n"
-"the more common services you wish to install on your machine.\n"
+" * \"%s\": if your machine is intended to be a server, select which of the\n"
+"more common services you wish to install on your machine.\n"
 "\n"
-" * \"Graphical Environment\": this is where you will choose your preferred\n"
-"graphical environment. At least one must be selected if you want to have a\n"
-"graphical interface available.\n"
+" * \"%s\": this is where you will choose your preferred graphical\n"
+"environment. At least one must be selected if you want to have a graphical\n"
+"interface available.\n"
 "\n"
 "Moving the mouse cursor over a group name will display a short explanatory\n"
 "text about that group. If you unselect all groups when performing a regular\n"
 "installation (as opposed to an upgrade), a dialog will pop up proposing\n"
 "different options for a minimal installation:\n"
 "\n"
-" * \"With X\": install the minimum number of packages possible to have a\n"
+" * \"%s\": install the minimum number of packages possible to have a\n"
 "working graphical desktop.\n"
 "\n"
-" * \"With basic documentation\": installs the base system plus basic\n"
-"utilities and their documentation. This installation is suitable for\n"
-"setting up a server.\n"
+" * \"%s\": installs the base system plus basic utilities and their\n"
+"documentation. This installation is suitable for setting up a server.\n"
 "\n"
-" * \"Truly minimal install\": will install the absolute minimum number of\n"
-"packages necessary to get a working Linux system. With this installation\n"
-"you will only have a command line interface. The total size of this\n"
-"installation is 65 megabytes.\n"
+" * \"%s\": will install the absolute minimum number of packages necessary\n"
+"to get a working Linux system. With this installation you will only have a\n"
+"command line interface. The total size of this installation is about 65\n"
+"megabytes.\n"
 "\n"
-"You can check the \"Individual package selection\" box, which is useful if\n"
-"you are familiar with the packages being offered or if you want to have\n"
-"total control over what will be installed.\n"
+"You can check the \"%s\" box, which is useful if you are familiar with the\n"
+"packages being offered or if you want to have total control over what will\n"
+"be installed.\n"
 "\n"
-"If you started the installation in \"Upgrade\" mode, you can unselect all\n"
-"groups to avoid installing any new package. This is useful for repairing or\n"
+"If you started the installation in \"%s\" mode, you can unselect all groups\n"
+"to avoid installing any new package. This is useful for repairing or\n"
 "updating an existing system."
 msgstr ""
 "Det er nå på tide å spesifisere hvilke programmer du ønsker å installere på\n"
@@ -2997,6 +3303,47 @@ msgstr ""
 "grupper for å unngå å installere noen nye pakker. Dette er nyttig for\n"
 "reparasjon eller oppdatering av et eksisterende system."
 
+#: ../../help.pm:1 ../../install_steps_gtk.pm:1
+#: ../../install_steps_interactive.pm:1
+#, c-format
+msgid "Individual package selection"
+msgstr "Individuelt pakkevalg"
+
+#: ../../help.pm:1
+#, fuzzy, c-format
+msgid "Truly minimal install"
+msgstr "Minimal installasjon"
+
+#: ../../help.pm:1
+#, fuzzy, c-format
+msgid "With basic documentation"
+msgstr "Med grunnleggende dokumentasjon (anbefalt!)"
+
+#: ../../help.pm:1 ../../install_steps_interactive.pm:1
+#, c-format
+msgid "With X"
+msgstr "Med X"
+
+#: ../../help.pm:1
+#, c-format
+msgid "Graphical Environment"
+msgstr "Grafisk miljø"
+
+#: ../../help.pm:1 ../../diskdrake/dav.pm:1
+#, c-format
+msgid "Server"
+msgstr "Tjener"
+
+#: ../../help.pm:1
+#, c-format
+msgid "Development"
+msgstr "Utvikling"
+
+#: ../../help.pm:1
+#, c-format
+msgid "Workstation"
+msgstr "Arbeidstasjon"
+
 #: ../../help.pm:1
 #, c-format
 msgid ""
@@ -3009,9 +3356,9 @@ msgstr ""
 "CD og be deg sette i en den rette CD'en som kreves."
 
 #: ../../help.pm:1
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Here are Listed the existing Linux partitions detected on your hard drive.\n"
+"Listed here are the existing Linux partitions detected on your hard drive.\n"
 "You can keep the choices made by the wizard, since they are good for most\n"
 "common installations. If you make any changes, you must at least define a\n"
 "root partition (\"/\"). Do not choose too small a partition or you will not\n"
@@ -3076,45 +3423,44 @@ msgstr ""
 "\"nest laveste SCSI-ID\", etc."
 
 #: ../../help.pm:1
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"GNU/Linux is a multi-user system, meaning each user can have their own\n"
+"GNU/Linux is a multi-user system, meaning each user may have their own\n"
 "preferences, their own files and so on. You can read the ``Starter Guide''\n"
-"to learn more about multi-user systems. But unlike \"root\", which is the\n"
+"to learn more about multi-user systems. But unlike \"root\", who is the\n"
 "system administrator, the users you add at this point will not be\n"
 "authorized to change anything except their own files and their own\n"
-"configuration, protecting the system from unintentional or malicious\n"
-"changes that impact the system as a whole. You will have to create at least\n"
-"one regular user for yourself -- this is the account which you should use\n"
-"for routine, day-to-day use. Although it is very easy to log in as \"root\"\n"
-"to do anything and everything, it may also be very dangerous! A mistake\n"
-"could mean that your system would not work any more. If you make a serious\n"
-"mistake as a regular user, the worst that will happen is that you will lose\n"
-"some information, but not affect the entire system.\n"
+"configurations, protecting the system from unintentional or malicious\n"
+"changes that impact on the system as a whole. You will have to create at\n"
+"least one regular user for yourself -- this is the account which you should\n"
+"use for routine, day-to-day use. Although it is very easy to log in as\n"
+"\"root\" to do anything and everything, it may also be very dangerous! A\n"
+"very simple mistake could mean that your system will not work any more. If\n"
+"you make a serious mistake as a regular user, the worst that will happen is\n"
+"that you will lose some information, but not affect the entire system.\n"
 "\n"
 "The first field asks you for a real name. Of course, this is not mandatory\n"
 "-- you can actually enter whatever you like. DrakX will use the first word\n"
-"you typed in and copy it to the \"User name\" field, which is the name this\n"
-"user will enter to log onto the system. If you like, you may override the\n"
-"default and change the username. The next step is to enter a password. From\n"
-"a security point of view, a non-privileged (regular) user password is not\n"
-"as crucial as the \"root\" password, but that is no reason to neglect it by\n"
-"making it blank or too simple: after all, your files could be the ones at\n"
-"risk.\n"
+"you typed in this field and copy it to the \"%s\" field, which is the name\n"
+"this user will enter to log onto the system. If you like, you may override\n"
+"the default and change the username. The next step is to enter a password.\n"
+"From a security point of view, a non-privileged (regular) user password is\n"
+"not as crucial as the \"root\" password, but that is no reason to neglect\n"
+"it by making it blank or too simple: after all, your files could be the\n"
+"ones at risk.\n"
 "\n"
-"Once you click on \"Accept user\", you can add other users. Add a user for\n"
-"each one of your friends: your father or your sister, for example. Click\n"
-"\"Next ->\" when you have finished adding users.\n"
+"Once you click on \"%s\", you can add other users. Add a user for each one\n"
+"of your friends: your father or your sister, for example. Click \"%s\" when\n"
+"you have finished adding users.\n"
 "\n"
-"Clicking the \"Advanced\" button allows you to change the default \"shell\"\n"
-"for that user (bash by default).\n"
+"Clicking the \"%s\" button allows you to change the default \"shell\" for\n"
+"that user (bash by default).\n"
 "\n"
-"When you are finished adding all users, you will be asked to choose a user\n"
+"When you have finished adding users, you will be asked to choose a user\n"
 "that can automatically log into the system when the computer boots up. If\n"
 "you are interested in that feature (and do not care much about local\n"
-"security), choose the desired user and window manager, then click \"Next\n"
-"->\". If you are not interested in this feature, uncheck the \"Do you want\n"
-"to use this feature?\" box."
+"security), choose the desired user and window manager, then click \"%s\".\n"
+"If you are not interested in this feature, uncheck the \"%s\" box."
 msgstr ""
 "GNU/Linux er ett flerbrukersystem, og dette betyr at hver bruker kan ha\n"
 "sine egne instillinger, sine egne filer osv. Du kan lese ``Starter "
@@ -3164,18 +3510,23 @@ msgstr ""
 "finessen?\"-boksen."
 
 #: ../../help.pm:1
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "Before continuing, you should carefully read the terms of the license. It\n"
 "covers the entire Mandrake Linux distribution. If you do agree with all the\n"
-"terms in it, check the \"Accept\" box. If not, simply turn off your\n"
-"computer."
+"terms in it, check the \"%s\" box. If not, simply turn off your computer."
 msgstr ""
 "Før du går videre bør du lese lisensen nøye.\n"
 " Den dekker hele\n"
 "Mandrake Linux distribusjonen og hvis du ikke er enig med alt den sier,\n"
 " klikk på \"Jeg nekter\" knappen som øyeblikkelig avslutter installasjonen.\n"
 "For å fortsette installasjonen, klikk på \"Jeg aksepterer\" knappen."
+
+#: ../../help.pm:1 ../../install_steps_gtk.pm:1
+#: ../../install_steps_interactive.pm:1 ../../standalone/drakautoinst:1
+#, c-format
+msgid "Accept"
+msgstr "Godta"
 
 #: ../../install2.pm:1
 #, c-format
@@ -3244,20 +3595,6 @@ msgstr ""
 "\n"
 " \n"
 "Ønsker du å fjerne disse pakkene?\n"
-
-#: ../../install_any.pm:1 ../../interactive.pm:1 ../../my_gtk.pm:1
-#: ../../ugtk2.pm:1 ../../modules/interactive.pm:1
-#: ../../standalone/harddrake2:1
-#, c-format
-msgid "No"
-msgstr "Nei"
-
-#: ../../install_any.pm:1 ../../interactive.pm:1 ../../my_gtk.pm:1
-#: ../../ugtk2.pm:1 ../../modules/interactive.pm:1 ../../standalone/drakgw:1
-#: ../../standalone/harddrake2:1
-#, c-format
-msgid "Yes"
-msgstr "Ja"
 
 #: ../../install_any.pm:1
 #, c-format
@@ -3333,11 +3670,6 @@ msgstr "Bruk fdisk"
 
 #: ../../install_interactive.pm:1
 #, c-format
-msgid "Custom disk partitioning"
-msgstr "Egendefinert diskpartisjonering"
-
-#: ../../install_interactive.pm:1
-#, c-format
 msgid "ALL existing partitions and their data will be lost on drive %s"
 msgstr "ALLE eksisterende partisjoner og deres data vil være tapt på disk %s"
 
@@ -3345,11 +3677,6 @@ msgstr "ALLE eksisterende partisjoner og deres data vil være tapt på disk %s"
 #, c-format
 msgid "You have more than one hard drive, which one do you install linux on?"
 msgstr "Du har mer enn en harddisk, hvilken ønsker du å installere linux på?"
-
-#: ../../install_interactive.pm:1
-#, c-format
-msgid "Erase entire disk"
-msgstr "Slette hele disken"
 
 #: ../../install_interactive.pm:1
 #, c-format
@@ -3448,11 +3775,6 @@ msgstr "Hvilken partisjonstype ønsker du å forandre størrelse på?"
 
 #: ../../install_interactive.pm:1
 #, c-format
-msgid "Use the free space on the Windows partition"
-msgstr "Bruk den ledige plassen på Windows partisjonen"
-
-#: ../../install_interactive.pm:1
-#, c-format
 msgid "There is no FAT partition to use as loopback (or not enough space left)"
 msgstr ""
 "Det finnes ingen FAT partisjon til å bruke som loopback (eller ikke nok "
@@ -3497,11 +3819,6 @@ msgstr "Bruk eksisterende partisjon"
 #, c-format
 msgid "Not enough free space to allocate new partitions"
 msgstr "Ikke nok plass til å allokere en ny partisjon"
-
-#: ../../install_interactive.pm:1
-#, c-format
-msgid "Use free space"
-msgstr "Bruk ledig plass"
 
 #: ../../install_interactive.pm:1 ../../install_steps.pm:1
 #, c-format
@@ -3886,7 +4203,6 @@ msgstr "Entrer trinn `%s'\n"
 #: ../../Xconfig/resolution_and_depth.pm:1 ../../diskdrake/hd_gtk.pm:1
 #: ../../interactive/gtk.pm:1 ../../standalone/drakTermServ:1
 #: ../../standalone/drakbackup:1 ../../standalone/drakbug:1
-#: ../../standalone/harddrake2:1
 #, c-format
 msgid "Help"
 msgstr "Hjelp"
@@ -3895,12 +4211,6 @@ msgstr "Hjelp"
 #, c-format
 msgid "not configured"
 msgstr "ikke konfigurert"
-
-#: ../../install_steps_gtk.pm:1 ../../standalone/drakbackup:1
-#: ../../standalone/drakboot:1 ../../standalone/drakgw:1
-#, c-format
-msgid "Configure"
-msgstr "Konfigurer"
 
 #: ../../install_steps_gtk.pm:1 ../../install_steps_interactive.pm:1
 #, c-format
@@ -3936,12 +4246,6 @@ msgstr ""
 #, c-format
 msgid "Refuse"
 msgstr "Nekte"
-
-#: ../../install_steps_gtk.pm:1 ../../install_steps_interactive.pm:1
-#: ../../standalone/drakautoinst:1
-#, c-format
-msgid "Accept"
-msgstr "Godta"
 
 #: ../../install_steps_gtk.pm:1
 #, c-format
@@ -4003,19 +4307,6 @@ msgstr "Oppdaterer pakkevalg"
 #, c-format
 msgid "Load/Save on floppy"
 msgstr "Lagre på/hente fra diskett"
-
-#: ../../install_steps_gtk.pm:1 ../../interactive.pm:1 ../../my_gtk.pm:1
-#: ../../ugtk2.pm:1 ../../interactive/newt.pm:1
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "<- Previous"
-msgstr "<- Forrige"
-
-#: ../../install_steps_gtk.pm:1 ../../install_steps_interactive.pm:1
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "Install"
-msgstr "Installer"
 
 #: ../../install_steps_gtk.pm:1
 #, c-format
@@ -4105,18 +4396,6 @@ msgstr "Andre"
 msgid "Total size: %d / %d MB"
 msgstr "Total størrelse: %d / %d MB"
 
-#: ../../install_steps_gtk.pm:1 ../../interactive.pm:1 ../../my_gtk.pm:1
-#: ../../ugtk2.pm:1 ../../interactive/newt.pm:1
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "Next ->"
-msgstr "Neste ->"
-
-#: ../../install_steps_gtk.pm:1 ../../install_steps_interactive.pm:1
-#, c-format
-msgid "Individual package selection"
-msgstr "Individuelt pakkevalg"
-
 #: ../../install_steps_gtk.pm:1 ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Package Group Selection"
@@ -4137,21 +4416,6 @@ msgstr ""
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
-msgid "Save packages selection"
-msgstr "Lagre pakkevalg"
-
-#: ../../install_steps_interactive.pm:1
-#, c-format
-msgid "Automated"
-msgstr "Automatisert"
-
-#: ../../install_steps_interactive.pm:1
-#, c-format
-msgid "Replay"
-msgstr "Gjør igjen"
-
-#: ../../install_steps_interactive.pm:1
-#, c-format
 msgid ""
 "The auto install can be fully automated if wanted,\n"
 "in that case it will take over the hard drive!!\n"
@@ -4169,11 +4433,6 @@ msgstr ""
 #, c-format
 msgid "Generate auto install floppy"
 msgstr "Oppretter diskett for autoinstallasjon"
-
-#: ../../install_steps_interactive.pm:1
-#, c-format
-msgid "Reboot"
-msgstr "Restart"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -4362,12 +4621,6 @@ msgstr "Autentifikasjon"
 msgid "This password is too short (it must be at least %d characters long)"
 msgstr "Dette passordet er for enkelt (må være minst %d tegn langt)"
 
-#. -PO: keep this short or else the buttons will not fit in the window
-#: ../../install_steps_interactive.pm:1
-#, c-format
-msgid "No password"
-msgstr "Intet passord"
-
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Set root password"
@@ -4386,11 +4639,6 @@ msgid "Services: %d activated for %d registered"
 msgstr "Tjenester: %d aktivert for %d registrert"
 
 #: ../../install_steps_interactive.pm:1 ../../services.pm:1
-#, c-format
-msgid "Services"
-msgstr "Tjenester"
-
-#: ../../install_steps_interactive.pm:1 ../../services.pm:1
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "System"
@@ -4401,11 +4649,6 @@ msgstr "System"
 #, c-format
 msgid "%s on %s"
 msgstr "%s på %s"
-
-#: ../../install_steps_interactive.pm:1
-#, c-format
-msgid "Bootloader"
-msgstr "Oppstartslaster"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -4422,25 +4665,10 @@ msgstr "deaktiver"
 msgid "activated"
 msgstr "aktivert"
 
-#: ../../install_steps_interactive.pm:1
-#, c-format
-msgid "Firewall"
-msgstr "Brannmur"
-
 #: ../../install_steps_interactive.pm:1 ../../steps.pm:1
 #, c-format
 msgid "Security"
 msgstr "Sikkerhet"
-
-#: ../../install_steps_interactive.pm:1
-#, c-format
-msgid "Security Level"
-msgstr "Sikkerhetsnivå"
-
-#: ../../install_steps_interactive.pm:1 ../../standalone/drakbackup:1
-#, c-format
-msgid "Network"
-msgstr "Nettverk"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -4456,11 +4684,6 @@ msgstr "Grafisk grensesnitt"
 #, c-format
 msgid "Hardware"
 msgstr "Maskinvare"
-
-#: ../../install_steps_interactive.pm:1
-#, c-format
-msgid "TV card"
-msgstr "TV-kort"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -4480,11 +4703,6 @@ msgstr "Har du et ISA lydkort?"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
-msgid "Sound card"
-msgstr "Lydkort"
-
-#: ../../install_steps_interactive.pm:1
-#, c-format
 msgid "Remote CUPS server"
 msgstr "Fjern-CUPS tjener"
 
@@ -4492,27 +4710,6 @@ msgstr "Fjern-CUPS tjener"
 #, c-format
 msgid "No printer"
 msgstr "Ingen skriver"
-
-#: ../../install_steps_interactive.pm:1 ../../harddrake/data.pm:1
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "Printer"
-msgstr "Skriver"
-
-#: ../../install_steps_interactive.pm:1 ../../harddrake/data.pm:1
-#, c-format
-msgid "Mouse"
-msgstr "Mus"
-
-#: ../../install_steps_interactive.pm:1
-#, c-format
-msgid "Timezone"
-msgstr "Tidssone"
-
-#: ../../install_steps_interactive.pm:1 ../../standalone/keyboarddrake:1
-#, c-format
-msgid "Keyboard"
-msgstr "Tastatur"
 
 #: ../../install_steps_interactive.pm:1 ../../steps.pm:1
 #, c-format
@@ -4528,11 +4725,6 @@ msgstr "NTP-tjener"
 #, c-format
 msgid "Automatic time synchronization (using NTP)"
 msgstr "Automatisk tidssynkronisering (ved hjelp av NTP)"
-
-#: ../../install_steps_interactive.pm:1
-#, c-format
-msgid "Hardware clock set to GMT"
-msgstr "Maskinvareklokken din satt til GMT"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -4646,11 +4838,6 @@ msgstr "Virkelig minimal installasjon (uten urpmi)"
 #, c-format
 msgid "With basic documentation (recommended!)"
 msgstr "Med grunnleggende dokumentasjon (anbefalt!)"
-
-#: ../../install_steps_interactive.pm:1
-#, c-format
-msgid "With X"
-msgstr "Med X"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -4963,27 +5150,6 @@ msgstr "Fullfør"
 #, c-format
 msgid "Basic"
 msgstr "Grunnleggende"
-
-#: ../../interactive.pm:1
-#, c-format
-msgid "Advanced"
-msgstr "Avansert"
-
-#: ../../interactive.pm:1 ../../interactive/gtk.pm:1
-#, c-format
-msgid "Remove"
-msgstr "Fjern"
-
-#: ../../interactive.pm:1 ../../interactive/gtk.pm:1
-#, c-format
-msgid "Modify"
-msgstr "Modifiser"
-
-#: ../../interactive.pm:1 ../../interactive/gtk.pm:1
-#: ../../standalone/drakbackup:1 ../../standalone/drakfont:1
-#, c-format
-msgid "Add"
-msgstr "Legg til"
 
 #: ../../interactive.pm:1
 #, c-format
@@ -7615,14 +7781,6 @@ msgstr "Velg språk"
 msgid "utopia 25"
 msgstr "utopia 25"
 
-#: ../../ugtk2.pm:1 ../../ugtk.pm:1 ../../network/netconnect.pm:1
-#: ../../standalone/drakTermServ:1 ../../standalone/drakbackup:1
-#: ../../standalone/drakboot:1 ../../standalone/drakconnect:1
-#: ../../standalone/drakfont:1 ../../standalone/net_monitor:1
-#, c-format
-msgid "OK"
-msgstr "OK"
-
 #: ../../ugtk2.pm:1 ../../ugtk.pm:1 ../../standalone/logdrake:1
 #, c-format
 msgid "logdrake"
@@ -7803,7 +7961,7 @@ msgstr ""
 
 #: ../../Xconfig/main.pm:1 ../../diskdrake/dav.pm:1
 #: ../../diskdrake/interactive.pm:1 ../../diskdrake/removable.pm:1
-#: ../../diskdrake/smbnfs_gtk.pm:1 ../../standalone/harddrake2:1
+#: ../../diskdrake/smbnfs_gtk.pm:1
 #, c-format
 msgid "Options"
 msgstr "Valg"
@@ -8091,11 +8249,6 @@ msgstr "Vennligst tast inn WebDAV tjener URL'en."
 msgid "Mount point"
 msgstr "Monteringspunkt"
 
-#: ../../diskdrake/dav.pm:1
-#, c-format
-msgid "Server"
-msgstr "Tjener"
-
 #: ../../diskdrake/dav.pm:1 ../../diskdrake/interactive.pm:1
 #: ../../diskdrake/smbnfs_gtk.pm:1
 #, c-format
@@ -8218,11 +8371,6 @@ msgstr ""
 #, c-format
 msgid "Choose action"
 msgstr "Velg handling"
-
-#: ../../diskdrake/hd_gtk.pm:1
-#, c-format
-msgid "Wizard"
-msgstr "Wizard"
 
 #: ../../diskdrake/hd_gtk.pm:1
 #, c-format
@@ -8812,31 +8960,6 @@ msgstr ""
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
-msgid "Removable media automounting"
-msgstr "Fjernbart media automontering"
-
-#: ../../diskdrake/interactive.pm:1
-#, c-format
-msgid "Reload partition table"
-msgstr "Last partisjonstabell på nytt"
-
-#: ../../diskdrake/interactive.pm:1
-#, c-format
-msgid "Rescue partition table"
-msgstr "Nødpartisjonstabell"
-
-#: ../../diskdrake/interactive.pm:1
-#, c-format
-msgid "Restore partition table"
-msgstr "Redde partisjonstabell"
-
-#: ../../diskdrake/interactive.pm:1
-#, c-format
-msgid "Save partition table"
-msgstr "Lagre partisjonstabeller"
-
-#: ../../diskdrake/interactive.pm:1
-#, c-format
 msgid ""
 "To have more partitions, please delete one to be able to create an extended "
 "partition"
@@ -8858,16 +8981,6 @@ msgstr "Alle primære partisjoner er i bruk"
 #, c-format
 msgid "Hard drive information"
 msgstr "Harddisk informasjon"
-
-#: ../../diskdrake/interactive.pm:1
-#, c-format
-msgid "Auto allocate"
-msgstr "Automatisk allokering"
-
-#: ../../diskdrake/interactive.pm:1
-#, c-format
-msgid "Clear all"
-msgstr "Fjern alle"
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -8898,11 +9011,6 @@ msgstr "Skift til ekspertmodus"
 #, c-format
 msgid "Toggle to normal mode"
 msgstr "Skift til normalmodus"
-
-#: ../../diskdrake/interactive.pm:1
-#, c-format
-msgid "Undo"
-msgstr "Angre"
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -9094,11 +9202,6 @@ msgstr "Diskett"
 
 #: ../../harddrake/sound.pm:1
 #, c-format
-msgid "Let me pick any driver"
-msgstr "La meg velge driver"
-
-#: ../../harddrake/sound.pm:1
-#, c-format
 msgid "Driver:"
 msgstr "Driver:"
 
@@ -9120,6 +9223,11 @@ msgstr ""
 #, c-format
 msgid "Choosing an arbitratry driver"
 msgstr "Valg av en annen driver"
+
+#: ../../harddrake/sound.pm:1
+#, c-format
+msgid "Let me pick any driver"
+msgstr "La meg velge driver"
 
 #: ../../harddrake/sound.pm:1
 #, c-format
@@ -9200,11 +9308,6 @@ msgstr ""
 #, c-format
 msgid "No open source driver"
 msgstr "Ingen kjent open source driver"
-
-#: ../../harddrake/sound.pm:1 ../../standalone/drakconnect:1
-#, c-format
-msgid "Please Wait... Applying the configuration"
-msgstr "Vennligst vent . . . Setter konfigurasjonen på plass"
 
 #: ../../harddrake/sound.pm:1
 #, c-format
@@ -9298,6 +9401,11 @@ msgstr ""
 #, c-format
 msgid "No alternative driver"
 msgstr "Ingen alternativ driver"
+
+#: ../../harddrake/sound.pm:1 ../../standalone/drakconnect:1
+#, c-format
+msgid "Please Wait... Applying the configuration"
+msgstr "Vennligst vent . . . Setter konfigurasjonen på plass"
 
 #: ../../harddrake/v4l.pm:1
 #, c-format
@@ -10195,11 +10303,6 @@ msgstr "Ekspertmodus"
 
 #: ../../network/netconnect.pm:1
 #, c-format
-msgid "Use auto detection"
-msgstr "Bruk automatisk oppdagelse"
-
-#: ../../network/netconnect.pm:1
-#, c-format
 msgid "Choose the profile to configure"
 msgstr "Velg profilen som skal konfigureres"
 
@@ -10644,11 +10747,6 @@ msgstr "På CUPS tjener \"%s\""
 #, c-format
 msgid "Remote Printers"
 msgstr "Fjern-skrivere"
-
-#: ../../printer/cups.pm:1 ../../printer/data.pm:1
-#, c-format
-msgid "CUPS"
-msgstr "CUPS"
 
 #: ../../printer/cups.pm:1
 #, c-format
@@ -14830,6 +14928,11 @@ msgstr ""
 
 #: ../../standalone/drakbackup:1
 #, c-format
+msgid "%s"
+msgstr "%s"
+
+#: ../../standalone/drakbackup:1
+#, c-format
 msgid "Please select data to backup..."
 msgstr "Vennligst velg data til å ta sikkerhetskopi av..."
 
@@ -16502,13 +16605,13 @@ msgstr "Bruk"
 
 #: ../../standalone/drakconnect:1
 #, c-format
-msgid "Click here to launch the wizard ->"
-msgstr "Klikk her for å starte veiviseren ->"
+msgid "Wizard..."
+msgstr "Wizard..."
 
 #: ../../standalone/drakconnect:1
 #, c-format
-msgid "Wizard..."
-msgstr "Wizard..."
+msgid "Click here to launch the wizard ->"
+msgstr "Klikk her for å starte veiviseren ->"
 
 #: ../../standalone/drakconnect:1
 #, c-format
@@ -18252,8 +18355,8 @@ msgstr "Oppdaget maskinvare"
 
 #: ../../standalone/harddrake2:1
 #, c-format
-msgid "Harddrake2 version "
-msgstr "Harddrake2 versjon "
+msgid "Harddrake2 version %s"
+msgstr "Harddrake2 versjon %s"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -18261,15 +18364,12 @@ msgid "Detection in progress"
 msgstr "oppdagelse pågår"
 
 #: ../../standalone/harddrake2:1
-#, c-format
-msgid "Author:"
-msgstr "Utgiver:"
-
-#: ../../standalone/harddrake2:1
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "This is HardDrake, a Mandrake hardware configuration tool.\n"
-"Version:"
+"Version: %s\n"
+"Author: Thierry Vignaud <tvignaud\\@mandrakesoft.com>\n"
+"\n"
 msgstr ""
 "Dette er HardDrake, et Mandrake maskinvare konfigureringsverktøy.\n"
 "Versjon:"
@@ -19656,10 +19756,6 @@ msgstr ""
 "gnumeric), pdf fremvisere etc"
 
 #: ../../share/compssUsers:999
-msgid "Workstation"
-msgstr "Arbeidstasjon"
-
-#: ../../share/compssUsers:999
 msgid "Game station"
 msgstr "Spillstasjon"
 
@@ -19731,10 +19827,6 @@ msgstr ""
 "K Desktop Environment, basis grafikkmiljø med en samling av passende verktøy"
 
 #: ../../share/compssUsers:999
-msgid "Graphical Environment"
-msgstr "Grafisk miljø"
-
-#: ../../share/compssUsers:999
 msgid "Gnome Workstation"
 msgstr "Gnome arbeidstasjon"
 
@@ -19753,10 +19845,6 @@ msgstr "Andre grafiske skrivebord"
 #: ../../share/compssUsers:999
 msgid "Icewm, Window Maker, Enlightenment, Fvwm, etc"
 msgstr "Icewm, Window Maker, Enlightenment, Fvwm etc"
-
-#: ../../share/compssUsers:999
-msgid "Development"
-msgstr "Utvikling"
 
 #: ../../share/compssUsers:999
 msgid "C and C++ development libraries, programs and include files"
@@ -19827,33 +19915,30 @@ msgid "NFS server, SMB server, Proxy server, ssh server"
 msgstr "NFS-tjener, SMB-tjener, Proxy-tjener, SSH-tjener"
 
 #: ../../share/compssUsers:999
-msgid "Audio station"
-msgstr "Lydstasjon"
-
-#: ../../share/compssUsers:999
-msgid "Sound playing/editing programs"
-msgstr "Lyd avspilling/redigeringsprogrammer"
-
-#: ../../share/compssUsers:999
-msgid "Video station"
-msgstr "Videostasjon"
-
-#: ../../share/compssUsers:999
-msgid "Video playing programs"
-msgstr "Video avspillingsprogrammer"
-
-#: ../../share/compssUsers:999
-msgid "Graphic station"
-msgstr "Grafikkstasjon"
-
-#: ../../share/compssUsers:999
-msgid "Graphics programs"
-msgstr "Grafikkprogrammer"
-
-#: ../../share/compssUsers:999
 msgid "Set of tools to read and send mail and news and to browse the Web"
 msgstr ""
 "Sett med verktøy for å lese og sende e-post og nyheter for åsurfe på nett"
+
+#~ msgid "Author:"
+#~ msgstr "Utgiver:"
+
+#~ msgid "Audio station"
+#~ msgstr "Lydstasjon"
+
+#~ msgid "Sound playing/editing programs"
+#~ msgstr "Lyd avspilling/redigeringsprogrammer"
+
+#~ msgid "Video station"
+#~ msgstr "Videostasjon"
+
+#~ msgid "Video playing programs"
+#~ msgstr "Video avspillingsprogrammer"
+
+#~ msgid "Graphic station"
+#~ msgstr "Grafikkstasjon"
+
+#~ msgid "Graphics programs"
+#~ msgstr "Grafikkprogrammer"
 
 #~ msgid "Printer sharing"
 #~ msgstr "Skriverdeling"
@@ -19901,9 +19986,6 @@ msgstr ""
 
 #~ msgid "GDI Laser Printer using the Zenographics ZJ-Stream Format"
 #~ msgstr "GDI Laserskriver som benytter \"Zenographics ZJ stream\" format"
-
-#~ msgid "%s"
-#~ msgstr "%s"
 
 #~ msgid "Office"
 #~ msgstr "Office"
@@ -19975,12 +20057,10 @@ msgstr ""
 #~ "button\n"
 #~ "to change it if necessary.\n"
 #~ "\n"
-#~ " * \"Keyboard\": check the current keyboard map configuration and click "
-#~ "on\n"
+#~ " * \"%s\": check the current keyboard map configuration and click on\n"
 #~ "the button to change that if necessary.\n"
 #~ "\n"
-#~ " * \"Country\": check the current country selection. If you are not in "
-#~ "this\n"
+#~ " * \"%s\": check the current country selection. If you are not in this\n"
 #~ "country, click on the button and choose another one.\n"
 #~ "\n"
 #~ " * \"Timezone\": By default, DrakX deduces your time zone based on the\n"
@@ -20275,9 +20355,6 @@ msgstr ""
 #~ "Enten bruker du LILO og denne ikke virker, eller du bruker ikke LILO og "
 #~ "du trenger ikke /boot"
 
-#~ msgid "Upgrade"
-#~ msgstr "Oppgrader"
-
 #~ msgid "Do you want to configure another printer?"
 #~ msgstr "Ønsker du å konfigurere enda en skriver?"
 
@@ -20303,8 +20380,7 @@ msgstr ""
 #~ "button\n"
 #~ "to change it if necessary;\n"
 #~ "\n"
-#~ " * \"Keyboard\": check the current keyboard map configuration and click "
-#~ "on\n"
+#~ " * \"%s\": check the current keyboard map configuration and click on\n"
 #~ "the button to change that if necessary;\n"
 #~ "\n"
 #~ " * \"Timezone\": DrakX, by default, guesses your time zone from the\n"
@@ -20340,8 +20416,7 @@ msgstr ""
 #~ "endren\n"
 #~ "den om nødvendig.\n"
 #~ "\n"
-#~ " * \"Keyboard\": sjekk det gjeldende keyboardoppsettet og klikk på "
-#~ "knappen for\n"
+#~ " * \"%s\": sjekk det gjeldende keyboardoppsettet og klikk på knappen for\n"
 #~ "å forandre om nødvendig.\n"
 #~ "\n"
 #~ " * \"Timezone\": DrakX gjetter tidssonen din ut i fra språket du\n"
@@ -20701,8 +20776,7 @@ msgstr ""
 #~ "are\n"
 #~ "finish adding all the users you want, select \"Done\".\n"
 #~ "\n"
-#~ "Clicking the \"Advanced\" button allows you to change the default \"shell"
-#~ "\"\n"
+#~ "Clicking the \"%s\" button allows you to change the default \"shell\"\n"
 #~ "for that user (bash by default).\n"
 #~ "\n"
 #~ "When you are finished adding all users, you will be proposed to choose a\n"
@@ -20874,9 +20948,6 @@ msgstr ""
 
 #~ msgid "What is the root partition (/) of your system?"
 #~ msgstr "Hva er rotpartisjonen (/) på ditt system?"
-
-#~ msgid "ISDN card"
-#~ msgstr "ISDN-kort"
 
 #~ msgid "Specify CUPS server"
 #~ msgstr "Spesifiser CUPS tjener"
