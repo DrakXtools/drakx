@@ -196,7 +196,7 @@ sub add_kernel {
 	symlinkf("initrd-$version.img", "$::prefix$initrd") or cp_af("$::prefix/boot/initrd-$version.img", "$::prefix$initrd");
     }
 
-    my $label = $ext =~ /-(default)/ ? $1 : $ext =~ /\d\./ ? sanitize_ver("linux$ext") : "linux$ext";
+    my $label = $ext =~ /-(default)/ ? $1 : ($ext =~ /\d\./ ? sanitize_ver("linux$ext") : "linux$ext");
 
     #- more yaboot concessions - PPC
     if (arch() =~ /ppc/) {
@@ -489,6 +489,7 @@ wait %d seconds for default boot.
 	my %nbs;
 	foreach (@$hds) {
 	    foreach (@{$_->{primary}{normal}}) {
+		my $from_magic = { type => fsedit::typeOfPart($_->{device}) };
 		my $label = isNT($_) ? 'NT' : isDos($_) ? 'dos' : 'windows';
 		add_entry($lilo,
 			  {
@@ -499,7 +500,7 @@ wait %d seconds for default boot.
 			   table => "/dev/$_->{rootDevice}"
 				),
 			   unsafe => 1
-			  }) if isNT($_) || isFat($_) && isFat({ type => fsedit::typeOfPart($_->{device}) });
+			  }) if isNT($from_magic) || isFat($from_magic);
 	    }
 	}
     }
