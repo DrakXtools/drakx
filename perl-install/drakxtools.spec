@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 9.3
-Release: 4mdk
+Release: 5mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -315,6 +315,16 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Sat Nov  8 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.3-5mdk
+- drakconnect: fix lan always marked as detected even
+- harddrake2: 
+  o do not display "unknown module" in red for modems known to not
+    need any module (#3047)
+  o enumerate cpus from 1 instead of 0 (#4704)
+  o typo fix #6134: (JAZ drives are nothing to do with jazz music)
+  o list acx100_pci as a wireless network cards driver so that one can
+    set wireless parameters for it (#6312)
+
 * Fri Nov  7 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.3-4mdk
 - drakconnect:
   o mcc view: fix network interfaces list update (really remove from
@@ -325,7 +335,7 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 
 * Thu Nov  6 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.3-3mdk
 - drakconnect:
-  o fix wireless cards detection (#3690, #5814, ...)
+  o fix wireless cards detection (#3690, #4181, #5143, #5814, ...)
   o always list sagem_dhcp in list, showing it only in expert mode is
     confusing
 - drakconnect/localedrake: fix a few unstranslated strings
