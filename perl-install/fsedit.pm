@@ -278,6 +278,7 @@ sub undo($) {
 sub move {
     my ($hd, $part, $hd2, $sector2) = @_;
 
+    my $part1 = { %$part };
     my $part2 = { %$part };
     $part2->{start} = $sector2;
     $part2->{size} += partition_table::cylinder_size($hd2) - 1;
@@ -293,21 +294,23 @@ sub move {
     sysopen F, $hd->{file}, 0 or die '';
     sysopen G, $hd2->{file}, 2 or die _("Error opening %s for writing: %s", $hd2->{file}, "$!");
 
-    my $base = $part->{start};
+    my $base = $part1->{start};
     my $base2 = $part2->{start};
-    my $step = 1 << 10;
+    my $step = 10;
     if ($hd eq $hd2) {
-	$part->{start} == $part2->{start} and return;
-	$step = min($step, abs($part->{start} - $part2->{start}));
+	$base == $base2 and return;
+	$step = min($step, abs($base2 - $base));
 
-	if ($part->{start} < $part2->{start}) {
-	    $base  += $part->{size} - $step;
-	    $base2 += $part->{size} - $step;
+	if ($base < $base2) {
+	    $base  += $part1->{size} - $step;
+	    $base2 += $part1->{size} - $step;
 	    $step = -$step;
 	}
     }
 
     my $f = sub {
+	$base  < 0 and $base2 += -$base,  $base  = 0;
+	$base2 < 0 and $base  += -$base2, $base2 = 0;
 	c::lseek_sector(fileno(F), $base,  0) or die "seeking to sector $base failed on drive $hd->{device}";
 	c::lseek_sector(fileno(G), $base2, 0) or die "seeking to sector $base2 failed on drive $hd2->{device}";
 
@@ -316,10 +319,11 @@ sub move {
 	syswrite G, $buf;
     };
 
-    for (my $i = 0; $i < $part->{size} / abs($step); $i++, $base += $step, $base2 += $step) {
+    for (my $i = 0; $i < $part1->{size} / abs($step); $i++, $base += $step, $base2 += $step) {
+	print "$base $base2\n";
 	&$f($step);
     }
-    if (my $v = $part->{size} % abs($step) * sign($step)) {
+    if (my $v = ($part1->{size} % abs($step)) * sign($step)) {
 	$base += $v;
 	$base2 += $v;
 	&$f($v);

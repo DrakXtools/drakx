@@ -184,7 +184,7 @@ sub tryWrite($) {
 
 sub syslog {
     -r "/tmp/syslog" and return map { /<\d+>(.*)/ } cat_("/tmp/syslog");
-    `dmesg`
+    `dmesg`;
 }
 
 sub hasSMP {
