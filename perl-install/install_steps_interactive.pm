@@ -420,7 +420,7 @@ sub choosePackages {
     $o->choosePackagesTree($packages) or goto chooseGroups if $individual;
 
     install_any::warnAboutRemovedPackages($o, $o->{packages});
-    install_any::warnAboutNaughtyServers($o) or goto chooseGroups;
+    install_any::warnAboutNaughtyServers($o) or goto chooseGroups if !$o->{isUpgrade};
 }
 
 sub choosePackagesTree {
