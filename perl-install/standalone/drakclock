@@ -68,58 +68,59 @@ $my_win->{window}->add(gtkpack_(Gtk2::VBox->new(0,0),
                                             1, gtkpack_(Gtk2::VBox->new(0,0),
                                                         0, $calendar,
                                                         0, $button_time,
-							1, gtkadd(gtkset_shadow_type(Gtk2::Frame->new(N("Network Time Protocol")), 'etched_in'),
-								  gtkpack_(Gtk2::VBox->new(0, 3),
-									   0, Gtk2::Label->new(N("Your computer can synchronize its clock\n with a remote time server using NTP")),
-									   0, gtksignal_connect(gtkset_active($check_ntp = Gtk2::CheckButton->new(N("Enable Network Time Protocol")), $mode),  clicked => sub { 
-												    $mode = !$mode; 
-												    $hb_ntp->set_sensitive($mode);
-												    if (!-e $ntpfile && $mode == 1)
-												      { install_ntp() }
-												}),
-									   0, gtkpack_($hb_ntp = Gtk2::HBox->new(0, 2),
-										       0, Gtk2::Label->new(N("Server:")),
-										       1, $combo_ntpserver = Gtk2::Combo->new
-										      )
-									  ))
-						       ),
+                                                        1, gtkadd(gtkset_shadow_type(Gtk2::Frame->new(N("Network Time Protocol")), 'etched_in'),
+                                                                  gtkpack_(Gtk2::VBox->new(0, 3),
+                                                                           0, Gtk2::Label->new(N("Your computer can synchronize its clock\n with a remote time server using NTP")),
+                                                                           0, gtksignal_connect(gtkset_active($check_ntp = Gtk2::CheckButton->new(N("Enable Network Time Protocol")), $mode),  clicked => sub { 
+                                                                                                    $mode = !$mode; 
+                                                                                                    $hb_ntp->set_sensitive($mode);
+                                                                                                    if (!-e $ntpfile && $mode == 1) {
+                                                                                                        install_ntp();
+                                                                                                    }
+                                                                                                }),
+                                                                           0, gtkpack_($hb_ntp = Gtk2::HBox->new(0, 2),
+                                                                                       0, Gtk2::Label->new(N("Server:")),
+                                                                                       1, $combo_ntpserver = Gtk2::Combo->new
+                                                                                      )
+                                                                          ))
+                                                       ),
                                             1, gtkpack_(Gtk2::VBox->new(0,0),
                                                         0, gtkpack_(Gtk2::HBox->new(0,0),
                                                                     0, $drawing_area = gtkset_size_request(Gtk2::DrawingArea->new, @image_size),
-                                                                    ),
+                                                                   ),
                                                         0, gtkpack_(Gtk2::HBox->new(1,0),
                                                                     0, Gtk2::HBox->new(1,0),
                                                                     0, my $spinner_h = Gtk2::SpinButton->new($adjh, 0, 0),
                                                                     0, my $spinner_m = Gtk2::SpinButton->new($adjm, 0, 0),
                                                                     0, my $spinner_s = Gtk2::SpinButton->new($adjs, 0, 0),
-                                                                    ),
-                                                        ),
-                                            ),
+                                                                   ),
+                                                       ),
+                                           ),
                                 0, create_okcancel(my $w =
                                                    {
                                                     cancel_clicked => sub { ugtk2->exit(0) },
                                                     ok_clicked => sub {
-									   if ($check_ntp->get_active) {
-									       my $choosed_serv = $combo_ntpserver->entry->get_text;
-									       $choosed_serv =~ s/(\S+)\s*(.*)$/$1/;
-									       timezone::ntp_server($1);
-									       system("/sbin/chkconfig --level 35 ntpd on");
-									       system("service ntpd restart");
-									   } else {
-									       if (-e $ntpdlock) { 
-										   system("service ntpd stop");
-										   system("/sbin/chkconfig --level 35 ntpd off");
-									       }
-									   }
-									   my ($year, $month, $day) = $calendar->get_date;
-									   $month++;
-									   my ($hour, $min, $sec) = ($adjh->get_value, $adjm->get_value, $adjs->get_value);
-									   system("date " .
-										  join('', map { print_it0($_) } ($month, $day, $hour, $min, $year)) . '.' . print_it0($sec));
-									   -e '/sbin/hwclock' and system('/sbin/hwclock --systohc');
-									   system("dcop kicker Panel restart") if $ENV{DESKTOP} eq 'kde';
-									   ugtk2->exit(0);
-                                            },
+                                                        if ($check_ntp->get_active) {
+                                                            my $choosed_serv = $combo_ntpserver->entry->get_text;
+                                                            $choosed_serv =~ s/(\S+)\s*(.*)$/$1/;
+                                                            timezone::ntp_server($1);
+                                                            system("/sbin/chkconfig --level 35 ntpd on");
+                                                            system("service ntpd restart");
+                                                        } else {
+                                                            if (-e $ntpdlock) { 
+                                                                system("service ntpd stop");
+                                                                system("/sbin/chkconfig --level 35 ntpd off");
+                                                            }
+                                                        }
+                                                        my ($year, $month, $day) = $calendar->get_date;
+                                                        $month++;
+                                                        my ($hour, $min, $sec) = ($adjh->get_value, $adjm->get_value, $adjs->get_value);
+                                                        system("date " .
+                                                               join('', map { print_it0($_) } ($month, $day, $hour, $min, $year)) . '.' . print_it0($sec));
+                                                        -e '/sbin/hwclock' and system('/sbin/hwclock --systohc');
+                                                        system("dcop kicker Panel restart") if $ENV{DESKTOP} eq 'kde';
+                                                        ugtk2->exit(0);
+                                                    },
                                                    },
                                                    undef, undef, '',
                                                    [ N("Reset"), sub {
@@ -132,8 +133,8 @@ $my_win->{window}->add(gtkpack_(Gtk2::VBox->new(0,0),
                                                          $its_reset = 0;
                                                      } ]
                                                   ),
-                                )
-                       );
+                               )
+                      );
 $button_reset = $w->{buttons}{N("Reset")};
 
 my $servers = get_server();
