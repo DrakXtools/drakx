@@ -1596,7 +1596,7 @@ sub set {
 package Gtk2::WrappedLabel;
 sub new {
     my ($_type, $o_text, $o_align) = @_;
-    ugtk2::gtkset_alignment(ugtk2::gtkset_line_wrap(Gtk2::Label->new, 1), $o_align || 0, 0.5);
+    ugtk2::gtkset_alignment(ugtk2::gtkset_line_wrap(Gtk2::Label->new($o_text || ''), 1), $o_align || 0, 0.5);
 }
 
 
