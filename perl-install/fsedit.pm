@@ -502,7 +502,7 @@ sub auto_allocate_vgs {
 
     my @vgs = grep { $_->{VG_name} } @$suggestions or return 0;
 
-    partition_table::write(@{$all_hds->{hds}});
+    partition_table::write($_) foreach @{$all_hds->{hds}};
 
     require lvm;
 
