@@ -66,7 +66,7 @@ my $in = 'interactive'->vnew('su');
 if ($type eq 'fileshare') {
     require any;
     any::fileshare_config($in, '');
-    $in->exit(0);
+    $in->exit(0); #- !! not reached if userdrake is called
 }
 
 my $all_hds = fsedit::get_hds({}, $in);

@@ -891,7 +891,7 @@ Allowing this will permit users to simply click on \"Share\" in konqueror and na
 N("The per-user sharing uses the group \"fileshare\". 
 You can use userdrake to add a user to this group.")
 	}, [])) {
-	    if (!fork()) { exec "userdrake" or c::_exit(0) }
+	    exec "userdrake"; #- exec instead of fork&exec so that the root XAUTHORITY is kept valid
 	}
     }
 }
