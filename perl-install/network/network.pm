@@ -143,28 +143,15 @@ sub write_interface_conf {
 
 sub add2hosts {
     my ($file, $hostname, @ips) = @_;
-    my %l;
-    $l{$_} = $hostname foreach @ips;
 
-    foreach (cat_($file)) {
-	m/\s*(\S+)(.*)/;
-	my ($ip, $host) = ($1, $2);
-	$l{$ip} ||= $host if $host !~ /^\s*$hostname\s*$/;
-    }
+    my %l = map { if_(/\s*(\S+)(.*)/, $1 => $2) }
+            grep { !/\s+\Q$hostname\E\s*$/ } cat_($file);
+
+    my $sub_hostname = $hostname =~ /(.*?)\./ ? " $1" : '';
+    $l{$_} = "\t\t$hostname$sub_hostname" foreach grep { $_ } @ips;
+
     log::l("writing host information to $file");
-    local *F;
-    open F, ">$file" or die "cannot write $file: $!";
-    while (my ($ip, $v) = each %l) {
-	$ip or next;
-	print F $ip;
-	if ($v =~ /^\s/) {
-	    print F $v;
-	} else {
-	    print F "\t\t$v";
-	    print F " $1" if $v =~ /(.*?)\./;
-	}
-	print F "\n";
-    }
+    output($file, map { "$_$l{$_}\n" } keys %l);
 }
 
 # The interface/gateway needs to be configured before this will work!
