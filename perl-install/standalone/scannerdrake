@@ -45,7 +45,7 @@ if (!files_exist('/usr/bin/scanimage',
 			      'xsane-gimp'));
 }
 if ($::Manual) { manual(); quit() }
-$::CCPID and $0 !~ /logdrake/ and kill 'USR2', $::CCPID;
+$::CCPID and kill 'USR2', $::CCPID;
 my $wait = $in->wait_message(N("Scannerdrake"),
 			     N("Searching for configured scanners ..."));
 my @c = scanner::configured();
