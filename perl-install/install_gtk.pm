@@ -45,7 +45,8 @@ sub install_theme {
 
     load_rc($_) foreach "themes-$o->{theme}", "install", "themes";
 
-    my $pango_font_name = "";
+    my $pango_font_name_10 = "";
+    my $pango_font_name_12 = "";
     if (my $pango_font = lang::lang2pango_font($o->{lang})) {
 	$pango_font_name_10 = "font_name = \"$pango_font 10\""
 	$pango_font_name_12 = "font_name = \"$pango_font 12\""
