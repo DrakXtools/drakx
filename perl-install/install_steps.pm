@@ -252,14 +252,46 @@ sub pppConfig {
     my ($o) = @_;
     $o->{modem} or return;
 
-    symlinkf($o->{modem}{device}, "$o->{prefix}/dev/modem");
+    symlinkf($o->{modem}{device}, "$o->{prefix}/dev/modem") or log::l("creation of $o->{prefix}/dev/modem failed");
     install_any::pkg_install($o, "ppp");
 
     my %toreplace;
     $toreplace{$_} = $o->{modem}{$_} foreach qw(connection phone login passwd auth domain);
+    $toreplace{kpppauth} = ${{ 'Script-based' => 0, PAP => 1, 'Terminal-based' => 2, CHAP => 3, }}{$o->{modem}{auth}};
     $toreplace{phone} =~ s/[^\d]//g;
     $toreplace{dnsserver} = join '', map { "$o->{modem}{$_}," } "dns1", "dns2";
-    
+
+    $toreplace{connection} ||= 'DialupConnection';
+    $toreplace{domain} ||= 'localdomain';
+    $toreplace{intf} ||= 'ppp0';
+
+    if ($o->{modem}{auth} eq 'PAP') {
+	template2file("/usr/share/ifcfg-ppp.pap.in", "$o->{prefix}/etc/sysconfig/network-scripts/ifcfg-ppp0", %toreplace);
+	template2file("/usr/share/chat-ppp.pap.in", "$o->{prefix}/etc/sysconfig/network-scripts/chat-ppp0", %toreplace);
+
+	my @l = cat_("$o->{prefix}/etc/ppp/pap-secrets");
+	my $replaced = 0;
+	do { $replaced ||= 1
+	       if s/^\s*$toreplace{connection}\s+ppp0\s+(\S+)/$toreplace{connection}  ppp0  $toreplace{passwd}/; } foreach @l;
+	if ($replaced) {
+	    open F, ">$o->{prefix}/etc/ppp/pap-secrets" or die "Can't open $o->{prefix}/etc/ppp/pap-secrets $!";
+	    print F @l;
+	} else {
+	    open F, ">>$o->{prefix}/etc/ppp/pap-secrets" or die "Can't open $o->{prefix}/etc/ppp/pap-secrets $!";
+	    print F "$toreplace{connection}  ppp0  $toreplace{passwd}\n";
+	}
+    } elsif ($o->{modem}{auth} eq 'Terminal-based' || $o->{modem}{auth} eq 'Script-based') {
+	template2file("/usr/share/ifcfg-ppp.script.in", "$o->{prefix}/etc/sysconfig/network-scripts/ifcfg-ppp0", %toreplace);
+	template2file("/usr/share/chat-ppp.script.in", "$o->{prefix}/etc/sysconfig/network-scripts/chat-ppp0", %toreplace);
+    } #- no CHAP currently.
+
+    #- build /etc/resolv.conf according to ppp configuration since there is no other network configuration.
+    open F, ">$o->{prefix}/etc/resolv.conf" or die "Can't open $o->{prefix}/etc/resolv.conf $!";
+    print F "domain $o->{modem}{domain}\n";
+    print F "nameserver $o->{modem}{dns1}\n" if $o->{modem}{dns1};
+    print F "nameserver $o->{modem}{dns2}\n" if $o->{modem}{dns2};
+    close F;
+
     foreach ("$o->{prefix}/root", "$o->{prefix}/etc/skel") {
 	template2file("/usr/share/kppprc.in", "$_/.kde/share/config/kppprc", %toreplace) if -d "$_/.kde/share/config";
     }
@@ -456,6 +488,9 @@ sub miscellaneous {
 sub exitInstall { 
     install_any::unlockCdroms;
     install_any::ejectCdrom;
+
+    #-  ala pixel? :-) [fpons]
+    sync(); sync();
 }
 
 #-######################################################################################

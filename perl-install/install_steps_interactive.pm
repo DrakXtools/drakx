@@ -244,7 +244,7 @@ sub choosePackages {
 sub configureNetwork($) {
     my ($o, $first_time) = @_;
     local $_;
-    if ($o->{intf}) {
+    if ($o->{intf} && $o->{netc}{NETWORKING} ne 'false') {
 	if (!$::beginner && $first_time) {
 	    my @l = (
 		     __("Keep the current IP configuration"),
@@ -345,7 +345,7 @@ sub pppConfig {
     my ($o) = @_;
     my $m = $o->{modem} ||= {};
 
-    unless ($m->{device} || $::expert && $o->ask_yesorno('', _("Skip modem autodetection?"), 1)) {
+    unless ($m->{device} || $::expert && $o->ask_yesorno('', _("Try to find a modem?"), 1)) {
 	foreach (0..3) {
 	    next if readlink("$o->{prefix}/dev/mouse") =~ /ttyS$_/;
 	    detect_devices::hasModem("$o->{prefix}/dev/ttyS$_")
@@ -358,7 +358,7 @@ sub pppConfig {
 			  [ mouse::serial_ports_names ]));
 
     install_steps::pppConfig($o) if $o->ask_from_entries_refH('',
-							     _("Dialup options"), [
+							      _("Dialup options"), [
 _("Connection name") => \$m->{connection},
 _("Phone number") => \$m->{phone},
 _("Login ID") => \$m->{login},
@@ -583,7 +583,7 @@ sub setRootPassword($) {
 
     return if $o->{security} < 1 && !$clicked;
 
-    $o->ask_from_entries_refH([_("Set root password"), _("Ok"), $o->{security} > 3 ? () : _("No password")],
+    $o->ask_from_entries_refH([_("Set root password"), _("Ok"), $o->{security} > 2 ? () : _("No password")],
 			 _("Set root password"), [
 _("Password") => { val => \$sup->{password},  hidden => 1 },
 _("Password (again)") => { val => \$sup->{password2}, hidden => 1 },
@@ -808,12 +808,12 @@ _("Default") => { val => \$default, type => 'bool' },
 sub miscellaneous {
     my ($o, $clicked) = @_;
     my %l = (
-	0 => _("Windows(TM)"),
-	1 => _("Poor"),
+	#- abusive 0 => _("Windows(TM)"),
+	#- unused 1 => _("Poor"),
 	2 => _("Low"),
 	3 => _("Medium"),
 	4 => _("High"),
-	5 => _("Paranoid"),
+	#- unused 5 => _("Paranoid"),
     );
     my $u = $o->{miscellaneous} ||= {};
     exists $u->{LAPTOP} or $u->{LAPTOP} = 1;

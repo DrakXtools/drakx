@@ -139,7 +139,7 @@ get_needed_files: $(DIRS)
 
 	cp -a keymaps $(DEST)/usr/share
 	cp -a consolefonts $(DEST)/usr/share
-	cp kppprc.in modparm.lst MonitorsDB $(DEST)/usr/share
+	cp ifcfg-ppp.* chat-ppp.* kppprc.in modparm.lst MonitorsDB $(DEST)/usr/share
 	cp logo-mandrake.xpm $(DEST)/usr/share
 	cp -a themes $(DEST)/usr/share/gtk
 	cp compss compssUsers compssList $(ROOTDEST)/Mandrake/base
