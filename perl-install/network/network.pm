@@ -1,4 +1,4 @@
-package network::network; # $Id$
+package network::network; # $Id$wir
 
 use diagnostics;
 use strict;
@@ -422,7 +422,7 @@ sub configureNetwork2 {
     my ($in, $prefix, $netc, $intf) = @_;
     my $etc = "$prefix/etc";
 
-    $netc->{wireless_eth} and $in->do_pkgs->install('wireless-tools');
+    $netc->{wireless_eth} and $in->do_pkgs->install(qw(wireless-tools wlan_cs wavelan_cs aironet_cs aironet4500_cs hermes airo orinico_cs orinico ));
     write_conf("$etc/sysconfig/network", $netc);
     write_resolv_conf("$etc/resolv.conf", $netc);
     write_interface_conf("$etc/sysconfig/network-scripts/ifcfg-$_->{DEVICE}", $_, $prefix) foreach grep { $_->{DEVICE} } values %$intf;
