@@ -19,8 +19,7 @@ sub ppp_configure {
     any::devfssymlinkf($modem, 'modem') if $modem->{device} ne "/dev/modem";
 
     my %toreplace = map { $_ => $modem->{$_} } qw(auth AutoName connection dns1 dns2 domain IPAddr login passwd phone SubnetMask);
-    $toreplace{kpppauth} = ${{ 'Script-based' => 0, 'PAP' => 1, 'Terminal-based' => 2, }}{$modem->{auth}};
-    $toreplace{kpppauth} = ${{ 'Script-based' => 0, 'PAP' => 1, 'Terminal-based' => 2, 'CHAP' => 3 }}{$modem->{auth}};
+    $toreplace{kpppauth} = ${{ N('Script-based') => 0, N('PAP') => 1, N('Terminal-based') => 2, N('CHAP') => 3, N('PAP/CHAP') => 4 }}{$modem->{auth}};
     $toreplace{phone} =~ s/[a-zA-Z]//g;
     $toreplace{dnsserver} = join ',', map { $modem->{$_} } "dns1", "dns2";
     $toreplace{dnsserver} .= $toreplace{dnsserver} && ',';
