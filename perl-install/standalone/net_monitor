@@ -41,10 +41,11 @@ $window1->set_position(1);
 $window1->set_title(_("Network Monitoring"));
 #$window1->set_policy(0, 0, 0);
 $window1->set_border_width(5);
-#$::isEmbedded or $window1->set_usize(500, 400);
+#$::isEmbedded or $window1->set_usize(600, 200);
 
 my $colorr = my_gtk::gtkcolor(50400, 655, 20000);
 my $colort = my_gtk::gtkcolor(55400, 65400, 655);
+my $colora = my_gtk::gtkcolor(655, 50400, 655);
 my $isconnected=0;
 my @interfaces;
 my $monitor = {};
@@ -79,12 +80,16 @@ gtkadd($window1,
 							   )
 						 ),
 					0, gtkadd(gtkset_shadow_type(new Gtk::Frame(_("Statistics")), 'etched_out'),
-						  gtkpack__(gtkset_border_width(new Gtk::VBox(0,5),5),
-							    gtkpack__(new Gtk::HBox(0,0),
-								      _("Sending Speed: "), my $label_st = new Gtk::Label("")),
-							    gtkpack__(new Gtk::HBox(0,0),
-								      _("Receiving Speed: "), my $label_sr = new Gtk::Label("")),
-							   )
+						  create_packtable({ col_spacings => 1, row_spacings => 1},
+						   [ "", "instantaneous" , "average"],
+						   [ _("Sending Speed:"), my $label_st = new Gtk::Label(""), my $label_sta=new Gtk::Label("na")],
+						   [ _("Receiving Speed:"),my $label_sr= new Gtk::Label(""), my $label_sra=new Gtk::Label("na")],
+								  )
+#						  gtkpack__(gtkset_border_width(new Gtk::VBox(0,5),5),
+#							    gtkpack__(new Gtk::HBox(0,0),
+#								      _("Sending Speed: "), my $label_st = new Gtk::Label("")),
+#							    gtkpack__(new Gtk::HBox(0,0),
+#								      _("Receiving Speed: "), my $label_sr = new Gtk::Label("")),
 						 ),
 					0, gtksignal_connect(my $button_connect = new Gtk::Button(), clicked => \&connection),
 					0, new Gtk::HSeparator,
@@ -105,6 +110,8 @@ my $gct = new Gtk::Gdk::GC($window1->window);
 $gct->set_foreground($colort);
 my $gcr = new Gtk::Gdk::GC($window1->window);
 $gcr->set_foreground($colorr);
+my $gca = new Gtk::Gdk::GC($window1->window);
+$gca->set_foreground($colora);
 my ($pix_c_map, $pix_c_mask) = gtkcreate_png("net_c.png");
 my ($pix_d_map, $pix_d_mask) = gtkcreate_png("net_d.png");
 $button_connect->add(gtkpack__(new Gtk::VBox(0,3),
@@ -171,18 +178,47 @@ sub rescan {
 	my $reft = $monitor->{$intf}{referencet};
 	$monitor->{sr} += $recv - $refr;
 	$monitor->{st} += $transmit - $reft;
+
+	$monitor->{$intf}{recva} += $recv - $refr;
+	$monitor->{$intf}{recvan}++;
+	if ($monitor->{$intf}{recvan} > 9) {
+	    push(@{$monitor->{$intf}{stack_ra}}, $monitor->{$intf}{recva}/10);
+	    $monitor->{$intf}{recva} = $monitor->{$intf}{recvan} = 0;
+	} else { push(@{$monitor->{$intf}{stack_ra}}, -1) }
+	shift @{$monitor->{$intf}{stack_ra}} if @{$monitor->{$intf}{stack_ra}} > 250;
+
 	push(@{$monitor->{$intf}{stack_r}}, $recv - $refr);
 	shift @{$monitor->{$intf}{stack_r}} if @{$monitor->{$intf}{stack_r}} > 250;
 	$labelr->set(formatXiB($recv - $monitor->{$intf}{initialr}));
 	$monitor->{$intf}{referencer} = $recv;
+
+	$monitor->{$intf}{transmita} += $transmit - $reft;
+	$monitor->{$intf}{transmitan}++;
+	if ($monitor->{$intf}{transmitan} > 9) {
+	    push(@{$monitor->{$intf}{stack_ta}}, $monitor->{$intf}{transmita}/10);
+	    $monitor->{$intf}{transmita} = $monitor->{$intf}{transmitan} = 0;
+	} else { push(@{$monitor->{$intf}{stack_ta}}, -1) }
+	shift @{$monitor->{$intf}{stack_ta}} if @{$monitor->{$intf}{stack_ta}} > 250;
+
 	push(@{$monitor->{$intf}{stack_t}}, $transmit - $reft);
 	shift @{$monitor->{$intf}{stack_t}} if @{$monitor->{$intf}{stack_t}} > 250;
-	$monitor->{$intf}{referencet} = $transmit;
 	$labelt->set(formatXiB($transmit - $monitor->{$intf}{initialt}));
+	$monitor->{$intf}{referencet} = $transmit;
+
 	draw_monitor($monitor->{$intf});
     }
     $label_sr->set(formatXiB($monitor->{sr}) . "/s");
     $label_st->set(formatXiB($monitor->{st}) . "/s");
+    $monitor->{sra} += $monitor->{sr};
+    $monitor->{sta} += $monitor->{st};
+    $monitor->{nba} ++;
+    if($monitor->{nba} > 9) {
+	$label_sra->set(formatXiB($monitor->{sra}/10) . "/s");
+	$label_sta->set(formatXiB($monitor->{sta}/10) . "/s");
+	$monitor->{sra} = 0;
+	$monitor->{sta} = 0;
+	$monitor->{nba} = 0;
+    }
     $label_cnx_type->set($netcnx->{type});
     $monitor->{$_} = 0 foreach ('sr', 'st');
     1;
@@ -267,26 +303,29 @@ sub draw_monitor {
     my ($o) = @_;
     defined $o->{darea} or return;
     $o->{pixmap_db}->draw_rectangle ($o->{darea}->style->black_gc, 1, 0, 0, 300, 150);
-#    my @c = map { $step+=2; ($step, $_); } @{$o->{stack_r}};
-#    print "\n##\n" . Data::Dumper->Dump([@c],['$c']) . "\n##\n";
-#    $o->{pixmap_db}->draw_segments($o->{darea}->style->white_gc, @c);
     my $maxr = 0;
-    foreach (@{$o->{stack_r}}) {
-	$maxr = $_ if $_>$maxr;
-    }
+    foreach (@{$o->{stack_r}}) { $maxr = $_ if $_>$maxr }
     my $maxt = 0;
-    foreach (@{$o->{stack_t}}) {
-	$maxt = $_ if $_>$maxt;
-    }
+    foreach (@{$o->{stack_t}}) { $maxt = $_ if $_>$maxt }
     my $ech = $maxr + $maxt;
     $ech == 0 and $ech = 1;
-#    my $gcr = new Gtk::Gdk::GC($o->{darea}->window);
-#    $gcr->set_foreground($colorr);
-#    my $gct = new Gtk::Gdk::GC($o->{darea}->window);
-#    $gct->set_foreground($colort);
     my $step=50;
     foreach (@{$o->{stack_t}}) {
 	$o->{pixmap_db}->draw_rectangle($gct, 1, $step, 0, 1, $_*150/$ech);
+	$step++;
+    }
+    $step=50;
+    my ($av1, $av2, $last_a);
+    foreach (@{$o->{stack_ta}}) {
+	if($_ != -1) {
+	    if( !defined $av1) { $av1 = $_ } else { defined $av2 or $av2 = $_ }
+	    if ($av1 && $av2) {
+		$o->{pixmap_db}->draw_line($gca, $step-10, $av1*150/$ech, $step, $av2*150/$ech);
+		$av1 = $av2;
+		undef $av2;
+		$last_a = $step-50;
+	    }
+	}
 	$step++;
     }
     $step=50;
@@ -294,6 +333,20 @@ sub draw_monitor {
 	$o->{pixmap_db}->draw_rectangle($gcr, 1, $step, 151-$_*150/$ech, 1, $_*150/$ech);
 	$step++;
     }
+    $step=50;
+    ($av1, $av2) = undef;
+    foreach (@{$o->{stack_ra}}) {
+	if($_ != -1) {
+	    if(!defined $av1) { $av1 = $_ } else { defined $av2 or $av2 = $_ }
+	    if ((defined $av1) && (defined $av2)) {
+		$o->{pixmap_db}->draw_line($gca, $step-10, 151-$av1*150/$ech, $step, 151-$av2*150/$ech);
+		$av1 = $av2;
+		undef $av2;
+	    }
+	}
+	$step++;
+    }
+
     my $gcl = new Gtk::Gdk::GC($o->{darea}->window);
     $gcl->set_foreground($o->{darea}->window->get_colormap->color_white());
     $gcl->set_line_attributes (1, 'on-off-dash', 'not-last', 'round');
@@ -302,8 +355,14 @@ sub draw_monitor {
     for (my $i = 30;$i<=120;$i+=30) {
 	$o->{pixmap_db}->draw_line($gcl, 50, $i, 300, $i);
 	my ($gc2, $text);
-	my $dif1 = abs(150-@{$o->{stack_r}}[@{$o->{stack_r}}-1]*150/$ech - $i);
-	my $dif2 = abs(@{$o->{stack_t}}[@{$o->{stack_t}}-1]*150/$ech - $i);
+	my ($dif1, $dif2);
+	if ($last_a) {
+	    $dif1 = abs(150-@{$o->{stack_ra}}[$last_a]*150/$ech - $i);
+	    $dif2 = abs(@{$o->{stack_ta}}[$last_a]*150/$ech - $i);
+	} else {
+	    $dif1 = abs(150-@{$o->{stack_r}}[@{$o->{stack_r}}-1]*150/$ech - $i);
+	    $dif2 = abs(@{$o->{stack_t}}[@{$o->{stack_t}}-1]*150/$ech - $i);
+	}
 	if ($dif1 < $dif2) {
 	    $text = formatXiB((150-$i)*$ech/150);
 	    $gc2=$gcr;
