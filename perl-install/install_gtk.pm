@@ -146,7 +146,7 @@ sub create_steps_window {
     my $w = bless {}, 'ugtk2';
     my $offset = 20;
     $w->{rwindow} = $w->{window} = 
-      gtknew('Window', width => ($::stepswidth - $offset), widget_name => 'Steps', title => 'skip',
+      gtknew('Window', width => ($::stepswidth - $offset), widget_name => 'Steps',
 	     position => [ lang::text_direction_rtl() ? ($::rootwidth - $::stepswidth - $offset) : $offset, 150 ],
 	     child => gtknew('VBox', spacing => 6, children_tight => \@l));
     $w->show;
@@ -182,7 +182,7 @@ sub create_logo_window {
     $w->{rwindow} = $w->{window} = 
       gtknew('Window', 
 	     width => $::logowidth, height => $::logoheight, 
-	     title => 'skip', widget_name => 'logo',
+	     widget_name => 'logo',
 	     child => gtknew('Image', file => $file),
 	 );
     $w->show;
