@@ -493,7 +493,7 @@ sub ask_fromW {
 	my $width = max(250, $max_width * 5);
 	$mainw->{box_width} = min($::windowheight * 0.7, $width);
 
-	my $height = max(200, my_gtk::n_line_size($mainw->{box_size}, 'various', $mainw->{rwindow}));
+	my $height = max(200, my_gtk::n_line_size($always_total_size, 'various', $mainw->{rwindow}));
 	$mainw->{box_height} = min($::windowheight * 0.7, $height);
 
 	my $has = $width > $mainw->{box_width} || $height > $mainw->{box_height};
