@@ -508,7 +508,7 @@ my %gtkqt_im =
                XMODIFIERS => '"@im=kinput2"',
               },
    scim => {
-            GTK_IM_MODULE => 'scimuim-xim',
+            GTK_IM_MODULE => 'scim',
             XIM_PROGRAM => 'scim -d',
             XMODIFIERS => '"@im=SCIM"',
            },
