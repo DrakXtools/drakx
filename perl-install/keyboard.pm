@@ -157,10 +157,10 @@ arch() =~ /^sparc/ ? (
 #- Bosnia and Croatia use the same layout, but people are confused if there
 #- isn't an antry for their country
  "bs" => [ N_("Bosnian"),	 "croat",           "hr",    0 ],
- "by" => [ N_("Belarusian"),      "by-cp1251",      "by",    1 ],
+ "by" => [ N_("Belarusian"),     "by-cp1251",       "by",    1 ],
  "ch_de" => [ N_("Swiss (German layout)"), "sg-latin1", "de_CH", 0 ],
  "ch_fr" => [ N_("Swiss (French layout)"), "fr_CH-latin1", "fr_CH", 0 ],
- "cz" => [ N_("Czech (QWERTZ)"), "cz-latin2",       "cz",    0 ],
+ "cz" => [ N_("Czech (QWERTZ)"), "cz",              "cz",    0 ],
  "cz_qwerty" => [ N_("Czech (QWERTY)"), "cz-lat2", "cz_qwerty", 0 ],
  "de" => [ N_("German"),         "de-latin1",       "de",    0 ],
  "de_nodeadkeys" => [ N_("German (no dead keys)"), "de-latin1-nodeadkeys", "de(nodeadkeys)", 0 ],
