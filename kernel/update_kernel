@@ -2,6 +2,12 @@
 
 ALL_KERNELS="all.kernels"
 
+# move stuff to this new "kernel" directory
+if [ ! -d all.kernels ]; then
+  mv ../all.kernels .
+  rm -rf ../all.modules
+fi
+
 function create_marfile() {
     marfile=$1
     shift
