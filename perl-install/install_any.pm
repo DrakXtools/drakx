@@ -332,7 +332,7 @@ sub setPackages {
 	push @{$o->{default_packages}}, "kernel-pcmcia-cs" if $o->{pcmcia};
 	push @{$o->{default_packages}}, "raidtools" if !is_empty_array_ref($o->{all_hds}{raids});
 	push @{$o->{default_packages}}, "lvm" if !is_empty_array_ref($o->{all_hds}{lvms});
-	push @{$o->{default_packages}}, "usbd" if modules::get_alias("usb-interface");
+	push @{$o->{default_packages}}, "usbd", "hotplug" if modules::get_alias("usb-interface");
 	push @{$o->{default_packages}}, "reiserfsprogs" if grep { isThisFs("reiserfs", $_) } @{$o->{fstab}};
 	push @{$o->{default_packages}}, "xfsprogs" if grep { isThisFs("xfs", $_) } @{$o->{fstab}};
 	push @{$o->{default_packages}}, "jfsprogs" if grep { isThisFs("jfs", $_) } @{$o->{fstab}};
