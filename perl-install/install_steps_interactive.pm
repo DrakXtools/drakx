@@ -331,7 +331,10 @@ Continue at your own risk!"));
 			if (defined $partition_table_mac::freepart_start && $partition_table_mac::freepart_size >= 1) {
 				my ($hd) = $partition_table_mac::freepart_device;
 				log::l("creating bootstrap partition on drive /dev/$hd->{device}, block $partition_table_mac::freepart_start");
+    			$partition_table_mac::bootstrap_part = $partition_table_mac::freepart_part;	
+				log::l("bootstrap now at $partition_table_mac::bootstrap_part");
     			fsedit::add($hd, { start => $partition_table_mac::freepart_start, size => 1 << 11, type => 0x401, mntpoint => '' }, $o->{hds}, { force => 1, primaryOrExtended => 'Primary' });    
+				run_program::run("hformat", $partition_table_mac::bootstrap_part) or die "hformat of $partition_table_mac::bootstrap_part failed";
 			} else {
 				die "no free space for 1MB bootstrap";
 			}
@@ -958,7 +961,16 @@ try to force installation even if that destroys the first partition?"));
 			   grep { !/^Warning:/ } cat_("$o->{prefix}/tmp/.error") ]);
 	    unlink "$o->{prefix}/tmp/.error";
 	    die "already displayed";
-	}
+	} elsif (arch() =~ /ppc/) {
+		open(FILE, "$o->{prefix}/tmp/of_boot_dev") || die "Can't open $o->{prefix}/tmp/of_boot_dev";
+		my $of_boot = "";
+		local $_ = "";
+		while (<FILE>){
+			$of_boot = $_;
+		}
+		unlink "$o->{prefix}/tmp/.error";
+		$o->ask_warn('', _("You will need to change your Open Firmware boot-device to\n enable the bootloader.  Hold down Command-Option-O-F\n at reboot and enter:\n setenv boot-device $of_boot,\\ofboot.b\n Then type: shut-down\nAt your next boot you should see the bootloader prompt."));
+    }
     }
 }
 

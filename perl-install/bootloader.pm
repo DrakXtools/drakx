@@ -501,6 +501,12 @@ sub install_yaboot($$$) {
 	}
     }
     log::l("Installing boot loader...");
+    close F;
+    my $f = "$prefix/tmp/of_boot_dev";
+	open F, ">$f" or die "cannot create file: $f";
+	my $of_dev = get_of_dev($prefix, $lilo->{boot});
+	print F "$of_dev";
+	close F;
     $::testing and return;
     run_program::rooted($prefix, "/sbin/ybin", "2>", "/tmp/.error") or die "ybin failed";
     unlink "$prefix/tmp/.error";	

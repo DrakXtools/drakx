@@ -2,7 +2,7 @@ package partition_table_mac; # $Id$
 
 use diagnostics;
 #use strict;   - fixed other PPC code to comply, but program bails on empty partition table - sbenedict
-use vars qw(@ISA $freepart_device $bootstrap_part $freepart_start $freepart_size $macos_part);
+use vars qw(@ISA $freepart_device $bootstrap_part $freepart_start $freepart_size $freepart_part $macos_part);
 
 @ISA = qw(partition_table_raw);
 
@@ -144,6 +144,7 @@ sub read($$) {
                 		$freepart_start = $h{start};
                 		$freepart_size = $h{size}/2048;
                 		$freepart_device = $hd;
+                		$freepart_part = "/dev/" . $hd->{device} . ($i+1);
                 		log::l("free apple partition found on drive /dev/$freepart_device->{device}, block $freepart_start, size $freepart_size");
                 	}
                     next;

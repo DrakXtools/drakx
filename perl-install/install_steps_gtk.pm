@@ -47,10 +47,11 @@ sub new($$) {
 
 	    my $launchX = sub {
 		my $ok = 1;
+		my $xpmac_opts = cat_("/proc/cmdline");        		
 		local $SIG{CHLD} = sub { $ok = 0 if waitpid(-1, c::WNOHANG()) > 0 };
 		unless (fork) {
 		    exec $_[0], (arch() =~ /^sparc/ || arch() eq "ppc" ? () : ("-kb")), "-dpms","-s" ,"240",
-		      ($_[0] =~ /Xpmac/ ? ("-mode", "17", "-depth", "32") : ()),
+		      ($_[0] =~ /Xpmac/ ? $xpmac_opts !~ /ofonly/ ? ("-mode", "17", "-depth", "32") : ("-mach64"):()),
 		      ($_[0] =~ /Xsun/ || $_[0] =~ /Xpmac/ ? ("-fp", "/usr/X11R6/lib/X11/fonts:unscaled") :
 		       ("-allowMouseOpenFail", "-xf86config", $f)) or exit 1;
 		}
