@@ -461,14 +461,6 @@ sub killCardServices {
     $pid and kill(15, $pid); #- send SIGTERM
 }
 
-sub hdInstallPath() {
-    cat_("/proc/mounts") =~ m|/\w+/(\S+)\s+/tmp/hdimage| or return;
-    my ($part) = grep { $_->{device} eq $1 } @{$::o->{fstab}};    
-    $part->{mntpoint} or grep { $_->{mntpoint} eq "/mnt/hd" } @{$::o->{fstab}} and return;
-    $part->{mntpoint} ||= "/mnt/hd";
-    $part->{mntpoint} . first(readlink("/tmp/image") =~ m|^/tmp/hdimage/(.*)|);
-}
-
 sub unlockCdrom(;$) {
     my ($cdrom) = @_;
     $cdrom or cat_("/proc/mounts") =~ m,(/(?:dev|tmp)/\S+)\s+(?:/mnt/cdrom|/tmp/image), and $cdrom = $1;
@@ -499,8 +491,17 @@ sub setupFB {
     1;
 }
 
+sub hdInstallPath() {
+    my $tail = first(readlink("/tmp/image") =~ m|^/tmp/hdimage/(.*)|);
+    my $head = first(readlink("/tmp/hdimage") =~ m|$::o->{prefix}(.*)|);
+    $tail && "$head/$tail";
+}
+
 sub install_urpmi {
     my ($prefix, $method, $mediums) = @_;
+
+    #- rare case where urpmi cannot be installed (no hd install path).
+    $method eq 'disk' && !hdInstallPath() and return;
 
     my @cfg = map_index {
 	my $name = $_->{fakemedium};
@@ -1039,18 +1040,6 @@ sub remove_bigseldom_used {
       ((map { @$_ } @bigseldom_used_groups),
        qw(mkreiserfs resize_reiserfs),
       );
-}
-
-sub cond_umount_hdimage() {
-    if (cat_("/proc/mounts") =~ m|/\w+/(\S+)\s+/tmp/hdimage\s+(\S+)| && !$::o->{partitioning}{readonly} && common::usingRamdisk()) {
-	$::o->{stage1_hd} = { device => $1, type => $2 };
-	getFile("XXX"); #- close still opened filehandle
-	eval { fs::umount("/tmp/hdimage") };
-    }
-}
-sub cond_remount_hdimage {
-    my $s = shift || delete $::o->{stage1_hd} or return;
-    fs::mount($s->{device}, '/tmp/hdimage', $s->{type});
 }
 
 ################################################################################
