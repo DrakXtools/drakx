@@ -25,4 +25,4 @@ foreach my $file (cat_($file_list)) {
     }
 }
 
-print "$_\n" foreach uniq(@l);
+print "$_\n" foreach sort uniq(@l);

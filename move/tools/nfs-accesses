@@ -6,11 +6,12 @@ use Getopt::Long;
 GetOptions('no-link' => \ (my $no_link), 
 	   'no-dir' => \ (my $no_dir),
 	   'full-dirs=s', \ (my $full_dirs),
+	   'ip=s' => \ (my $wanted_ip),
 	  );
 
 my @skipped_dirs = (
 		    '/usr/share/fonts', 
-		    '/lib/modules/2.4.22-18mdk',
+		    '/lib/modules/2.4.22-21mdk',
 		    '/usr/X11R6/lib/modules/extensions',
 		    '/usr/X11R6/lib/X11/fonts',
 		    '/usr/lib/kbd/keymaps',
@@ -20,17 +21,15 @@ my @skipped_dirs = (
 
 my $skipped_dirs = '/tmp/live_tree(' . join('|', map { quotemeta } @skipped_dirs) . ')/';
 if ($full_dirs) {
-    my @l = chomp_(MDK::Common::File::cat_or_die($full_dirs));
+    my @l = chomp_(map { MDK::Common::File::cat_or_die($_) } split(' ', $full_dirs));
     $full_dirs = '/tmp/live_tree(' . join('|', map { quotemeta } @l) . ')/';
 }
 
 open(my $F, "tac /var/log/kernel/warnings |");
 
-my $wanted_ip;
-
 my @l;
 while (<$F>) {
-    my ($ip, $file) = /kernel: nfsd (.*?): (.*)/ or next; 
+    my ($ip, $file) = /kernel: nfsd \((.*?)\): (.*)/ or next; 
 
     if ($wanted_ip) {
 	$wanted_ip eq $ip or next;
@@ -51,4 +50,4 @@ while (<$F>) {
     last if $file eq '/tmp/live_tree/usr/bin/totem';
 }
 
-print "$_\n" foreach uniq(@l);
+print "$_\n" foreach sort uniq(@l);
