@@ -34,6 +34,6 @@ verif2:
 	grep "^msgid" DrakX.pot | sort | diff - tmp.pot.light | grep "^>" || true
 
 $(PMSCFILES): %_.c: %
-	perl -lpe 's|^(__?\()| $$1|; s,\Qs/#.*//,,; s|//|/""/|g; s,(^|[^\$$])#([^+].*),\1/*\2*/,; s|$$|\\n\\|' $< > $@
+	./fake_c.pl $< > $@
 
 #	for i in *.po; do echo -n "$i "; msgfmt -v $i 2>&1; done | perl -e 'print map { $_->[0] } sort { $a->[1] <=> $b->[1] } map { [ $_, (split)[1] ] } <>'
