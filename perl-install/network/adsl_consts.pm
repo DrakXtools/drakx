@@ -204,14 +204,6 @@ our %adsl_data = (
                    Encapsulation => 1,
                   },
                   
-                  N("Spain") . "|Retevision " =>
-                  {
-                   vpi => 8,
-                   vci => 23,
-                   Encapsulation => 6,
-                   method => 'pppoa',
-                  },
-
                   N("Spain") . "|Telefónica IP dinámica" =>
                   {
                    vpi => 8,
