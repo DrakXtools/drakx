@@ -818,8 +818,6 @@ sub runlevel {
     }
 }
 
-sub to_utf8 { c::iconv($_[0], $lang::charset || 'ISO-8859-1', "utf-8") }
-
 sub report_bug {
     my ($prefix, @other) = @_;
 

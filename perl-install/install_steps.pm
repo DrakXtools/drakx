@@ -446,9 +446,25 @@ Consoles 1,3,4,7 may also contain interesting information";
 #    log::l("updating kde icons according to available devices");
 #    install_any::kdeicons_postinstall($o->{prefix});
 
-    if ($o->{lang} !~ /^(ja|ko|zh|ru|th|vi|be|bg)/) {
-	my $welcome = any::to_utf8(_("Welcome to %s", '%n'));
-	substInFile { s/^(GreetString)=.*/$1=$welcome/ } "$o->{prefix}/usr/share/config/kdm/kdmrc";
+    if ($o->{lang} =~ /^(zh_TW|th|vi|be|bg)/) {
+	#- skip since we don't have the right font (it badly fails at least for zh_TW)
+    } elsif (my $LANG = lang::lang2LANG($o->{lang})) {
+	my $kdmrc = "$o->{prefix}/usr/share/config/kdm/kdmrc";
+
+	my $charset = lang::lang2charset($o->{lang});
+	$charset = '' if member($charset, 'iso-8859-1', 'iso-8859-15'); #- keep the default for those
+	$charset = 'jisx0208.1983-0' if $charset eq 'jisx0208';
+	$charset = 'ksc5601.1987-0' if $charset eq 'ksc5601';
+
+	my $welcome = c::to_utf8 (_("Welcome to %s", '%n'));
+	substInFile { 
+	    s/^(GreetString)=.*/$1=$welcome/;
+	    s/^(Language)=.*/$1=$LANG/;
+	    s/^(StdFont)=.*/$1=*,12,5,$charset,50,0/;
+	    s/^(FailFont)=.*/$1=*,12,5,$charset,75,0/;
+	    s/^(GreetFont)=.*/$1=*,24,5,$charset,50,0/;
+	} "$o->{prefix}/usr/share/config/kdm/kdmrc";
+
     }
     install_any::disable_user_view($o->{prefix}) if $o->{security} >= 3 || $o->{authentication}{NIS};
     run_program::rooted($o->{prefix}, "kdeDesktopCleanup");
