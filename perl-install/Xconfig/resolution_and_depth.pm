@@ -1,0 +1,185 @@
+package Xconfig::resolution_and_depth; # $Id$
+
+use diagnostics;
+use strict;
+
+use Xconfig::card;
+use Xconfig::monitor;
+use common;
+
+
+our %depth2text = (
+      8 => __("256 colors (8 bits)"),
+     15 => __("32 thousand colors (15 bits)"),
+     16 => __("65 thousand colors (16 bits)"),
+     24 => __("16 million colors (24 bits)"),
+     32 => __("4 billion colors (32 bits)"),
+);
+our @depths_available = ikeys(%depth2text);
+
+my %min_hsync4x_res = (
+     640 => 31.5,
+     800 => 35.1,
+    1024 => 35.5,
+    1152 => 44.0,
+    1280 => 51.0,
+    1400 => 65.5,
+    1600 => 75.0,
+    1920 => 90.0,
+    2048 => 136.5,
+);
+
+my @bios_vga_modes = (
+    { bios => 769, X =>  640, Y =>  480, Depth =>  8 },
+    { bios => 771, X =>  800, Y =>  600, Depth =>  8 },
+    { bios => 773, X => 1024, Y =>  768, Depth =>  8 },
+    { bios => 775, X => 1280, Y => 1024, Depth =>  8 },
+    { bios => 784, X =>  640, Y =>  480, Depth => 15 },
+    { bios => 787, X =>  800, Y =>  600, Depth => 15 },
+    { bios => 790, X => 1024, Y =>  768, Depth => 15 },
+    { bios => 793, X => 1280, Y => 1024, Depth => 15 },
+    { bios => 785, X =>  640, Y =>  480, Depth => 16 },
+    { bios => 788, X =>  800, Y =>  600, Depth => 16 },
+    { bios => 791, X => 1024, Y =>  768, Depth => 16 },
+    { bios => 794, X => 1280, Y => 1024, Depth => 16 },
+);
+
+sub size2default_resolution {
+    my ($size) = @_; #- size in inch
+
+    if (arch() =~ /ppc/) {
+	return "1024x768" if detect_devices::get_mac_model =~ /^PowerBook|^iMac/;
+    }
+
+    my %monitorSize2resolution = (
+	13 => "640x480",
+	14 => "800x600",
+	15 => "800x600",
+	16 => "1024x768",
+	17 => "1024x768",
+	18 => "1024x768",
+	19 => "1280x1024",
+	20 => "1280x1024",
+	21 => "1600x1200",
+	22 => "1600x1200",
+    );
+    $monitorSize2resolution{round($size)} || ($size < 13 ? "640x480" : "1600x1200");
+}
+
+sub allowed {
+    my ($card) = @_;
+
+    my ($prefered_depth, @depths, @resolutions, @resolution_and_depth);
+    
+    my $using_xf4 = Xconfig::card::using_xf4($card);
+
+    if ($using_xf4 ? $card->{Driver} eq 'fbdev' : $card->{server} eq 'FBDev') {
+	push @resolution_and_depth, grep { $_->{Depth} == 16 } @bios_vga_modes;
+    } elsif ($using_xf4) {
+	if ($card->{use_DRI_GLX} || $card->{use_UTAH_GLX}) {
+	    $prefered_depth = 16;
+	    push @depths, 16;
+	    push @depths, 24 if member($card->{Driver}, 'mga', 'tdfx', 'r128', 'radeon');
+	}
+    } else {
+	   if ($card->{server} eq 'Sun24')   { push @depths, 24, 8, 2 }
+	elsif ($card->{server} eq 'Sun')     { push @depths, 8, 2 }
+	elsif ($card->{server} eq 'SunMono') { push @depths, 2 }
+	elsif ($card->{server} eq 'VGA16')   { push @depths, 8; push @resolutions, '640x480' }
+        elsif ($card->{BoardName} =~ /SiS/)  { push @depths, 24, 16, 8 }
+        elsif ($card->{BoardName} eq 'S3 Trio3D') { push @depths, 24, 16, 8 }
+    }
+    if (!@resolution_and_depth || @depths || @resolutions) {
+	@depths = grep { !($using_xf4 && /32/) } (our @depths_available) if !@depths;
+	@resolutions = @Xconfig::xfreeX::resolutions if !@resolutions;
+
+	push @resolution_and_depth,
+	  map {
+	      my $Depth = $_;
+	      map { /(\d+)x(\d+)/; { X => $1, Y => $2, Depth => $Depth } } @resolutions;
+	  } @depths;
+    }
+    $prefered_depth, @resolution_and_depth;
+}
+
+# ($card->{VideoRam} || ($card->{server} eq 'FBDev' ? 2048 : 32768))
+sub filter_using_VideoRam {
+    my ($VideoRam, @resolutions) = @_;
+    my $mem = 1024 * $VideoRam;
+    grep { $_->{X} * $_->{Y} * $_->{Depth}/8 <= $mem } @resolutions;
+    
+}
+sub filter_using_HorizSync {
+    my ($HorizSync, @resolutions) = @_;
+    my $hsync = max(split(/[,-]/, $HorizSync));
+    grep { ($min_hsync4x_res{$_->{X}} || 0) <= $hsync } @resolutions;
+}
+
+sub choose {
+    my ($in, $default_resolution, @resolutions) = @_;
+
+    if (0 && $in->isa('interactive::gtk')) {
+	chooseResolutionsGtk($default_resolution, @resolutions);
+    } else {
+	$in->ask_from_listf(_("Resolutions"), "",
+			    sub { "$_->{X}x$_->{Y} $_->{Depth}bpp" },
+			    \@resolutions, $default_resolution || {});
+    }
+}
+
+
+sub choices {
+    my ($raw_X, $resolution_wanted, $card, $monitor) = @_;
+    $resolution_wanted ||= {};
+
+    my ($prefered_depth, @resolutions) = allowed($card);
+
+    @resolutions = filter_using_HorizSync($monitor->{HorizSync}, @resolutions) if $monitor->{HorizSync};
+    @resolutions = filter_using_VideoRam($card->{VideoRam}, @resolutions) if $card->{VideoRam};
+
+    my $x_res = do {
+	my $res = $resolution_wanted->{X} || size2default_resolution($monitor->{size});
+	my $x_res = first(split 'x', $res);
+	#- take the first available resolution <= the wanted resolution
+	max map { if_($_->{X} <= $x_res, $_->{X}) } @resolutions;
+    };
+
+    my @matching = grep { $_->{X} eq $x_res } @resolutions;
+    my @Depths = map { $_->{Depth} } @matching;
+
+    my $Depth = $resolution_wanted->{Depth};
+    $Depth = $prefered_depth if !$Depth || !member($Depth, @Depths);
+    $Depth = max(@Depths)    if !$Depth || !member($Depth, @Depths);
+
+    #- finding it in @resolutions (well @matching)
+    #- (that way, we check it exists, and we get field "bios" for fbdev)
+    my ($default_resolution) = grep { $_->{Depth} eq $Depth } @matching;
+
+    $default_resolution, @resolutions;
+}
+
+sub configure {
+    my ($in, $raw_X, $card, $monitor, $auto) = @_;
+
+    my ($default_resolution, @resolutions) = choices($raw_X, $raw_X->get_resolution, $card, $monitor);
+
+    $default_resolution = choose($in, $default_resolution, @resolutions) or return;
+    $raw_X->set_resolution($default_resolution);
+
+    $default_resolution;
+}
+
+sub configure_auto_install {
+    my ($raw_X, $card, $monitor, $old_X) = @_;
+
+    my $resolution_wanted = { X => $old_X->{resolution_wanted}, Depth => $old_X->{default_depth} };
+
+    my ($default_resolution) = choices($raw_X, $raw_X->get_resolution, $card, $monitor);
+    $default_resolution or die "you selected an unusable depth";
+
+    $raw_X->set_resolution($default_resolution);
+
+    $default_resolution;
+}
+
+1;

@@ -3,7 +3,7 @@ package Xconfig::parse; # $Id$
 use diagnostics;
 use strict;
 
-use MDK::Common;
+use common;
 
 
 sub read_XF86Config {
@@ -55,8 +55,9 @@ sub raw_from_file { #- internal
 	if (/^$/) {
 	    $comment .= "\n" if $comment;
 	    next;
-	} elsif (/^#\s+(.*)/) {
-	    $comment .= "# $1\n";
+	} elsif (/^#\W/) {
+	    s/^#\s+/# /;
+	    $comment .= "$_\n";
 	    next;
 	}
 
@@ -89,8 +90,12 @@ sub raw_from_file { #- internal
 	    my $comment_on_line;
 	    s/(\s*#.*)/$comment_on_line = $1; ''/e;
 
+	    if (/^$/) {
+		die "$line: weird";
+	    }
+
 	    (my $name, my $Option, $_)  = 
- 	      /^Option\s*"(.*?)"(.*)/ ? ($1, 1, $2) : /^(\S+)(.*)/ ? ($1, 0, $2) : internal_error();
+ 	      /^Option\s*"(.*?)"(.*)/ ? ($1, 1, $2) : /^(\S+)(.*)/ ? ($1, 0, $2) : internal_error($_);
 	    my ($val) = /(\S.*)/;
 
 	    my %e = (Option => $Option, commented => $commented, comment_on_line => $comment_on_line, pre_comment => $comment);
@@ -128,13 +133,13 @@ my %kind_names = (
     Mouse    => [ qw(DeviceName Protocol Device AlwaysCore Emulate3Buttons Emulate3Timeout) ], # Subsection in XInput
     Keyboard => [ qw(Protocol Driver XkbModel XkbLayout XkbDisable) ],
     Monitor  => [ qw(Identifier VendorName ModelName HorizSync VertRefresh) ],
-    Device   => [ qw(Identifier VendorName BoardName Chipset Driver VideoRam Screen BusID) ],
+    Device   => [ qw(Identifier VendorName BoardName Chipset Driver VideoRam Screen BusID DPMS power_saver) ],
     Display  => [ qw(Depth Modes) ], # Subsection in Device
     Screen   => [ qw(Identifier Driver Device Monitor DefaultColorDepth) ],
-    InputDevice => [ qw(Identifier Driver Protocol Device XkbModel XkbLayout XkbDisable Emulate3Buttons Emulate3Timeout) ],
-    ServerLayout => [ qw(Identifier Screen) ],
+    InputDevice => [ qw(Identifier Driver Protocol Device Type Mode XkbModel XkbLayout XkbDisable Emulate3Buttons Emulate3Timeout) ],
+    ServerLayout => [ qw(Identifier) ],
 );
-my @want_string = qw(Identifier DeviceName VendorName ModelName BoardName Driver Device Chipset Monitor Protocol XkbModel XkbLayout);
+my @want_string = qw(Identifier DeviceName VendorName ModelName BoardName Driver Device Chipset Monitor Protocol XkbModel XkbLayout Load);
 
 %kind_names = map_each { lc $::a => [ map { lc } @$::b ] } %kind_names;
 @want_string = map { lc } @want_string;
