@@ -935,9 +935,9 @@ sub _create_window($$) {
     my ($wi, $he);
     $w->signal_connect(size_allocate => sub {
 	my (undef, $event) = @_;
-	my $w_size = $event->values;
-	return if $w_size->[2] == $wi && $w_size->[3] == $he; #BUG
-	(undef, undef, $wi, $he) = @$w_size;
+	my @w_size = $event->values;
+	return if $w_size[2] == $wi && $w_size[3] == $he; #BUG
+	(undef, undef, $wi, $he) = @w_size;
 
 	my ($X, $Y, $Wi, $He) = @{$force_center || $o->{force_center}};
         $w->set_uposition(max(0, $X + ($Wi - $wi) / 2), max(0, $Y + ($He - $he) / 2));
