@@ -1496,6 +1496,7 @@ sub show_status() {
 sub adduser {
 	my ($cmd_line, $username) = @_;
 	my @active_users = cat_("/etc/shadow");
+	my @passwd_users = cat_("/etc/passwd");
 	my @ts_users = cat_('/etc/shadow$$CLIENT$$');
 	my $is_user = any { /$username/ } @active_users;
 	my $add_fail = 0;
@@ -1503,6 +1504,7 @@ sub adduser {
 	
 	if ($is_user) {
 		my @shadow_entry = grep { /$username/ } @active_users;
+		my @passwd_entry = grep { /$username/ } @passwd_users;
 		my $is_ts_user = any { /$username/ } @ts_users;
 		if ($is_ts_user) {
 			my @ts_shadow = grep { /$username/ } @ts_users;
@@ -1510,7 +1512,7 @@ sub adduser {
 				$in_already = 1;
 			} else {
 				#in but password changed
-				print "$username passwd bad in Terminal Server - rewriting...\n";
+				print N("%s passwd bad in Terminal Server - rewriting...\n", $username);
 				deluser($cmd_line, $username);				
 				adduser($cmd_line, $username);				
 			}
@@ -1520,17 +1522,20 @@ sub adduser {
 			open(FHANDLE, '>> /etc/shadow$$CLIENT$$');
 			print FHANDLE $shadow_entry[0] or $add_fail = 1; 
 			close FHANDLE;
+			open(FHANDLE, '>> /etc/passwd$$CLIENT$$');
+			print FHANDLE $passwd_entry[0] or $add_fail = 1; 
+			close FHANDLE;
 			$in_already = 0;
 		}
 	}	
 		
 	if ($cmd_line == 1) {
-		print "$username is not a user..\n" if !($is_user);
-		print "$username is already a Terminal Server user\n" if $in_already;
+		print N("%s is not a user..\n", $username) if !($is_user);
+		print N("%s is already a Terminal Server user\n", $username) if $in_already;
 		if ($add_fail == 1 || $in_already || !$is_user) {
-			print "Addition of $username to Terminal Server failed!\n";
+			print N("Addition of %s to Terminal Server failed!\n", $username);
 		} else {		
-			print "$username added to Terminal Server\n";	
+			print N("%s added to Terminal Server\n", $username);	
 		}
 		return;
 	} else {
@@ -1544,7 +1549,9 @@ sub deluser {
 	my $i;
 	my $user_deleted;
 	my @ts_users = cat_('/etc/shadow$$CLIENT$$');
+	my @passwd_users = cat_('/etc/passwd$$CLIENT$$');
 	my $is_ts_user = any { /$username/ } @ts_users;
+	my $is_passwd_user = any { /$username/ } @passwd_users;
 	
 	if ($is_ts_user) {
 		$i = 0;
@@ -1562,11 +1569,27 @@ sub deluser {
 		close FHANDLE;
 	}
 	
+	if ($is_passwd_user) {
+		$i = 0;
+		foreach my $user (@passwd_users) {
+			if ($user =~ /$username/) {
+				splice(@passwd_users, $i, 1);
+				$user_deleted = 1;
+				last;
+			}
+			$i++;
+		}
+		local *FHANDLE;
+		open(FHANDLE, '> /etc/passwd$$CLIENT$$');
+		print FHANDLE $_ foreach @passwd_users;
+		close FHANDLE;
+	}
+
 	if ($cmd_line == 1) {
 		if ($user_deleted) {
-			print "Deleted $username...\n";
+			print N("Deleted %s...\n", $username);
 		} else {
-			print "$username not found...\n";
+			print N("%s not found...\n", $username);
 		}
 		return;
 	}	
