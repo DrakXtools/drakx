@@ -53,7 +53,7 @@ sub init {
     symlinkf "/proc/mounts", "/etc/mtab";
 
     #- these files need be writable but we need a sensible first contents
-    system("cp /image/etc/$_ /etc") foreach qw(passwd group sudoers fstab);
+    system("cp /image/etc/$_ /etc") foreach qw(passwd passwd- group sudoers fstab);
 
     #- these files are typically opened in read-write mode, we need them copied
     mkdir_p("/etc/$_"), system("cp -R /image/etc/$_/* /etc/$_")
@@ -67,7 +67,7 @@ sub init {
 
     #- ro things
     symlinkf_short("/image/etc/$_", "/etc/$_")
-      foreach qw(alternatives shadow man.config services shells pam.d security inputrc ld.so.conf 
+      foreach qw(alternatives man.config services shells pam.d security inputrc ld.so.conf 
                  DIR_COLORS bashrc profile rc.d init.d devfsd.conf gtk-2.0 pango fonts modules.devfs 
                  dynamic hotplug gnome-vfs-2.0 gnome-vfs-mime-magic gtk gconf menu menu-methods nsswitch.conf default login.defs 
                  skel ld.so.cache openoffice xinetd.d xinetd.conf syslog.conf sysctl.conf sysconfig/networking/ifcfg-lo
