@@ -20,12 +20,6 @@ our %l = (
         qw(3c501 3c503 3c505 3c507 3c509 3c515), # 3c90x
 	qw(82596 abyss ac3200 acenic aironet4500_card at1700 atp com20020-pci),
         qw(cs89x0 de600 de620 r8169),
-	#qw(defxx orinoco_plx), # most unused
-        #qw(dmfe e100 e1000 e2100 eepro eepro100 eexpress epic100 eth16i), # depca dgrs 
-        #qw(hp hp-plus hp100), # hamachi ewrk3 ibmtr
-        #w(lance ne ne2k-pci ), #old_tulip natsemi ni5010 ni52 ni65 nvnet olympic pcnet32 plip rcpci
-        #w(sb1000 tlan tmspci tulip via-rhine), #sktr sis900 sk98lin smc-ultra smc9194 starfire tg3 
-        #w(ns83820), #wd winbond-840 yellowfin 
         qw(defxx orinoco_plx), # most unused
         qw(depca dgrs dmfe e100 e1000 e2100 eepro eepro100 eexpress epic100 eth16i),
         qw(ewrk3 hamachi hp hp-plus hp100 ibmtr),
