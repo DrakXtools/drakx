@@ -497,7 +497,7 @@ sub create_packtable {
 }
 
 sub create_okcancel {
-    my ($w, $o_ok, $o_cancel, $o_spread, @other) = @_;
+    my ($w, $o_ok, $o_cancel, $_o_spread, @other) = @_;
     # @other is a list of extra buttons (usually help (eg: XFdrake/drakx caller) or advanced (eg: interactive caller) button)
     # extra buttons have the following structure [ label, handler, is_first, pack_right ]
     local $::isWizard = $::isWizard && !$w->{pop_it};
