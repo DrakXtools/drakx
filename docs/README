@@ -140,7 +140,11 @@ images/*.img
 	they are now in "other.img", 
 
 	blank.img is a blank boot image without a kernel nor initrd. this image
-	can be used to generate custom boot disk.
+	can be used to generate custom boot disk (to use it:
+	compile your custom kernel with everything needed
+	compiled in the kernel, not as a module (loop.o, ext3.o
+	if needed, usb stuff, etc) and put the "vmlinuz" on the
+	blank.img, then boot on it)
 
 	if you think one of those modules is used a lot, tell me, i may find some room
 	to put it back on the main floppies.
