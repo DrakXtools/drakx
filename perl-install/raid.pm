@@ -11,6 +11,7 @@ use partition_table qw(:types);
 use run_program;
 use devices;
 use commands;
+use modules;
 use fs;
 
 sub nb($) { 
@@ -120,7 +121,7 @@ sub make {
     my ($raid, $part) = @_;
     isMDRAID($_) and make($raid, $_) foreach @{$part->{disks}};
     my $dev = devices::make($part->{device});
-    eval { commands::modprobe(module($part)) };
+    eval { modules::load(module($part)) };
     run_program::run("raidstop", $dev);
     &write($raid, "/etc/raidtab");
     run_program::run("mkraid", "--really-force", $dev) or die
