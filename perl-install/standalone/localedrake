@@ -42,7 +42,7 @@ eval {
     local $::isWizard = 1;
     local $::Wizard_no_previous = 1;
   language:
-    $locale->{lang} = any::selectLanguage($in, $locale->{lang}) or $in->exit(0);
+    $locale->{lang} = any::selectLanguage($in, $locale->{lang});
     undef $::Wizard_no_previous;
     select_country() or goto language;
 };
