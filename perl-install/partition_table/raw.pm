@@ -146,7 +146,7 @@ sub zero_MBR {
     my $type = arch() =~ /ia64/ ? 'gpt' : arch() eq "alpha" ? "bsd" : arch() =~ /^sparc/ ? "sun" : arch() eq "ppc" ? "mac" : "dos";
     #- override standard mac type on PPC for IBM machines to dos
     $type = "dos" if arch() =~ /ppc/ && detect_devices::get_mac_model() =~ /^IBM/;
-    require("partition_table/$type.pm");
+    require "partition_table/$type.pm";
     bless $hd, "partition_table::$type";
     $hd->{primary} = $hd->clear_raw();
     delete $hd->{extended};

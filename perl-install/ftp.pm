@@ -41,7 +41,7 @@ sub new {
 	$ftp->binary;
 	$ftp->cwd($prefix);
 
-	my @l = ($ftp, \ (my $retr = undef));
+	my @l = ($ftp, \ (my $retr));
 	$hosts{"$host$prefix"} = \@l;
 	@l;
     } };

@@ -464,7 +464,7 @@ sub read_one($$) {
 	foreach ('empty', @parttype, 'lvm_PV', 'unknown') {
 	    /unknown/ and die "unknown partition table format on disk " . $hd->{file};
 	    eval {
-		require("partition_table/$_.pm");
+		require "partition_table/$_.pm";
 		bless $hd, "partition_table::$_";
 		($pt, $info) = $hd->read($sector);
 		log::l("found a $_ partition table on $hd->{file} at sector $sector");

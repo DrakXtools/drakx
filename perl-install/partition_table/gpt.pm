@@ -81,7 +81,7 @@ sub crc32 {
     my $crc = 0xFFFFFFFF;
     foreach (unpack "C*", $buffer) {
 	my $subcrc = ($crc ^ $_) & 0xFF;
-        for (my $j = 8; $j > 0; $j--){
+        for (my $j = 8; $j > 0; $j--) {
 	    my $b = $subcrc & 1;
 	    $subcrc = ($subcrc >> 1) & 0x7FFFFFFF;
 	    $subcrc = $subcrc ^ 0xEDB88320 if $b;
