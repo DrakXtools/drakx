@@ -11,6 +11,8 @@ use run_program;
 use Xconfigurator_consts;
 use any;
 use modules;
+use Data::Dumper;
+use my_gtk qw(:helpers :wrappers);
 
 my $tmpconfig = "/tmp/Xconfig";
 
@@ -576,7 +578,7 @@ sub chooseResolutionsGtk($$;$) {
 
     my $W = my_gtk->new(_("Resolution"));
     my %txt2depth = reverse %depths;
-    my ($r, $depth_combo, %w2depth, %w2h, %w2widget);
+    my ($r, $depth_combo, %w2depth, %w2h, %w2widget, $pix_monitor, $pix_colors, $w2_combo);
 
     my $best_w;
     while (my ($depth, $res) = each %{$card->{depth}}) {
@@ -593,6 +595,7 @@ sub chooseResolutionsGtk($$;$) {
 
     #- the set function is usefull to toggle the CheckButton with the callback being ignored
     my $ignore;
+    my $no_human; # is the w2_combo->entry changed by a human?
     my $set = sub { $ignore = 1; $_[0]->set_active(1); $ignore = 0; };
 
     while (my ($w, $h) = each %w2h) {
@@ -602,6 +605,8 @@ sub chooseResolutionsGtk($$;$) {
 	$r->signal_connect("clicked" => sub {
 			       $ignore and return;
 			       $chosen_w = $w;
+			       $no_human=1;
+			       $w2_combo->entry->set_text($w . "x" . $w2h{$w});
 			       unless (member($chosen_depth, @{$w2depth{$w}})) {
 				   $chosen_depth = max(@{$w2depth{$w}});
 				   &$set_depth();
@@ -614,13 +619,21 @@ sub chooseResolutionsGtk($$;$) {
 						     _("Graphic card: %s", $card->{type}) :
 						     _("XFree86 server: %s", $card->{server})) . ")"
 					     ),
-		    1, gtkpack(new Gtk::HBox(0,20),
-			       $depth_combo = new Gtk::Combo,
-			       gtkpack_(new Gtk::VBox(0,0),
-					map {; 0, $w2widget{$_} } ikeys(%w2widget),
-					),
+		    1, gtkpack2(new Gtk::VBox(0,0),
+				gtkpack2__(new Gtk::VBox(0, $::isEmbedded ? 15 : 0),
+					   if_($::isEmbedded, $pix_monitor = gtkpng ("monitor")),
+					   if_(!$::isEmbedded, map {$w2widget{$_} } ikeys(%w2widget)),
+					   gtkpack2(new Gtk::HBox(0,0),
+						    create_packtable({ col_spacings => 5, row_spacings => 5},
+	     [ if_($::isEmbedded,$w2_combo = new Gtk::Combo) , new Gtk::Label("")],
+	     [ $depth_combo = new Gtk::Combo, gtkadd(gtkset_shadow_type(new Gtk::Frame, 'etched_out'), $pix_colors = gtkpng ("colors")) ],
+							     ),
+						   ),
+					  ),
 			       ),
 		    0, gtkadd($W->create_okcancel,
+			      $::isEmbedded ?
+			      gtksignal_connect(new Gtk::Button(_("Expert Mode")), clicked => sub { system ("XFdrake --expert --testing"); }) :
 			      gtksignal_connect(new Gtk::Button(_("Show all")), clicked => sub { $W->{retval} = 1; $chosen_w = 0; Gtk->main_quit })),
 		    ));
     $depth_combo->disable_activate;
@@ -628,10 +641,23 @@ sub chooseResolutionsGtk($$;$) {
     $depth_combo->entry->set_editable(0);
     $depth_combo->set_popdown_strings(map { translate($depths{$_}) } ikeys(%{$card->{depth}}));
     $depth_combo->entry->signal_connect(changed => sub {
-       $chosen_depth = $txt2depth{untranslate($depth_combo->entry->get_text, keys %txt2depth)};
-       my $w = $card->{depth}{$chosen_depth}[0][0];
-       $chosen_w > $w and &$set($w2widget{$chosen_w = $w});
+        $chosen_depth = $txt2depth{untranslate($depth_combo->entry->get_text, keys %txt2depth)};
+        my $w = $card->{depth}{$chosen_depth}[0][0];
+        $chosen_w > $w and &$set($w2widget{$chosen_w = $w});
+	$pix_colors->set(gtkcreate_png("colors8.png")) if $chosen_depth >= 8;
+	$pix_colors->set(gtkcreate_png("colors16.png")) if $chosen_depth >= 15;
+	$pix_colors->set(gtkcreate_png("colors.png")) if $chosen_depth >=24;
     });
+    if ($::isEmbedded) {
+	$w2_combo->disable_activate;
+	$w2_combo->set_use_arrows_always(1);
+	$w2_combo->entry->set_editable(0);
+	$w2_combo->set_popdown_strings(map { $_ . "x" . $w2h{$_} } keys %w2h);
+	$w2_combo->entry->signal_connect(changed => sub {
+	    ($chosen_w) = $w2_combo->entry->get_text =~ /([^x]*)x.*/;
+	    $no_human ? $no_human=0 : $w2widget{$chosen_w}->set_active(1);
+	});
+    }
     &$set_depth();
     $W->{ok}->grab_focus;
 
