@@ -777,10 +777,8 @@ sub setupBootloaderBefore {
     my ($o) = @_;
 
     require bootloader;
-    if (my @l = detect_devices::IDEburners()) {
+    if (my @l = (grep { $_->{interface_type} eq 'ide' } detect_devices::burners(), detect_devices::zips())) {
 	bootloader::add_append($o->{bootloader}, $_->{device}, 'ide-scsi') foreach @l;
-	#- in that case, also add ide-floppy otherwise ide-scsi will be used!
-	bootloader::add_append($o->{bootloader}, $_->{device}, 'ide-floppy') foreach detect_devices::ide_zips();
     }
     if ($o->{miscellaneous}{HDPARM}) {
 	bootloader::add_append($o->{bootloader}, $_, 'autotune') foreach grep { /ide.*/ } all("/proc/ide");

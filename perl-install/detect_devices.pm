@@ -21,6 +21,9 @@ my %serialprobe = ();
 #-######################################################################################
 #- Functions
 #-######################################################################################
+sub dev_is_devfs { -e "/dev/.devfsd" }
+
+
 sub get {
     #- Detect the default BIOS boot harddrive is kind of tricky. We may have IDE,
     #- SCSI and RAID devices on the same machine. From what I see so far, the default
@@ -31,50 +34,42 @@ sub get {
 
     getIDE(), getSCSI(), getDAC960(), getCompaqSmartArray(), getATARAID();
 }
-sub hds() { grep { $_->{media_type} eq 'hd' && ($::isStandalone || !isRemovableDrive($_)) } get(); }
-sub zips() { grep { member($_->{media_type}, 'fd', 'hd') && isZipDrive($_) } get(); }
-sub ide_zips() { grep { member($_->{media_type}, 'fd', 'hd') && isZipDrive($_) } getIDE(); }
-#-sub jazzs() { grep { member($_->{media_type}, 'fd', 'hd') && isJazDrive($_) } get(); }
-sub ls120s() { grep { member($_->{media_type}, 'fd', 'hd') && isLS120Drive($_) } get(); }
-sub cdroms() { 
-    my @l = grep { $_->{media_type} eq 'cdrom' } get(); 
-    if (my @l2 = IDEburners()) {
+sub hds         { grep { $_->{media_type} eq 'hd' && ($::isStandalone || !isRemovableDrive($_)) } get() }
+sub cdroms      { grep { $_->{media_type} eq 'cdrom' } get() }
+sub burners     { grep { $_->{media_type} eq 'cdrom' && isBurner($_) } get() }
+sub dvdroms     { grep { $_->{media_type} eq 'cdrom' && isDvdDrive($_) } get() }
+sub zips        { grep { member($_->{media_type}, 'fd', 'hd') && isZipDrive($_) } get() }
+#-sub jazzs     { grep { member($_->{media_type}, 'fd', 'hd') && isJazDrive($_) } get() }
+sub ls120s      { grep { member($_->{media_type}, 'fd', 'hd') && isLS120Drive($_) } get() }
+
+sub cdroms__faking_ide_scsi {
+    my @l = cdroms();
+    return @l if $::isStandalone;
+    if (my @l_ide = grep { $_->{interface_type} eq 'ide' && isBurner($_) } @l) {
 	require modules;
 	modules::add_alias('scsi_hostadapter', 'ide-scsi');
 	my $nb = 1 + max(-1, map { $_->{device} =~ /scd(\d+)/ } @l);
-	foreach my $i (@l2) {	    
-	    log::l("IDEBurner: $i->{device}");
-	    my ($e) = grep { $_->{device} eq $i->{device} } @l;
+	foreach my $e (@l_ide) {	    
+	    log::l("IDEBurner: $e->{device}");
 	    $e->{device} = "scd" . $nb++;
 	}
     }
     @l;
 }
-sub burners    { grep { $_->{media_type} eq 'cdrom' && isBurner($_) } get() }
-sub IDEburners { grep { $_->{media_type} eq 'cdrom' && isBurner($_) } getIDE() }
-sub dvdroms    { grep { $_->{media_type} eq 'cdrom' && isDvdDrive($_) } get() }
-
-sub get_mac_model() {
-    my $mac_model = cat_("/proc/device-tree/model") || die "Can't open /proc/device-tree/model";
-    log::l("Mac model: $mac_model");
-    $mac_model;	
-}
-
-sub get_mac_generation() {
-    my $generation = cat_("/proc/cpuinfo") || die "Can't open /proc/cpuinfo";
-    my @genarray = split(/\n/, $generation);
-    my $count = 0;
-    while ($count <= @genarray) {
-	if ($genarray[$count] =~ /pmac-generation/) {
-	    @genarray = split(/:/, $genarray[$count]);
-	    return $genarray[1];
+sub zips__faking_ide_scsi {
+    my @l = zips();
+    return @l if $::isStandalone;
+    if (my @l_ide = grep { $_->{interface_type} eq 'ide' } @l) {
+	require modules;
+	modules::add_alias('scsi_hostadapter', 'ide-scsi');
+	my $nb = 1 + max(-1, map { if_($_->{device} =~ /sd(\s+)/, ord($1) - ord('a')) } getSCSI());
+	foreach my $e (@l_ide) {	    
+	    log::l("IDE Zip: $e->{device}");
+	    $e->{device} = "sd" . chr(ord('a') + $nb++);
 	}
-	$count++;
     }
-    return "Unknown Generation";	
+    @l;
 }
-
-sub dev_is_devfs { -e "/dev/.devfsd" }
 
 sub floppies() {
     require modules;
@@ -194,7 +189,7 @@ sub getIDE() {
 	my $info = chomp_(cat_("$d/model")) || "(none)";
 
 	my $num = ord (($d =~ /(.)$/)[0]) - ord 'a';
-	push @idi, { media_type => $type, device => basename($d), info => $info, bus => $num/2, id => $num%2 };
+	push @idi, { media_type => $type, device => basename($d), info => $info, bus => $num/2, id => $num%2, interface_type => 'ide' };
     }
     get_sys_cdrom_info(@idi);
     @idi;
@@ -211,7 +206,7 @@ sub getCompaqSmartArray() {
 	for (my $i = 0; -r ($f = "${prefix}$i"); $i++) {
 	    foreach (cat_($f)) {
 		if (m|^\s*($name/.*?):|) {
-		    push @idi, { device => $1, info => "Compaq RAID logical disk", media_type => 'hd' };
+		    push @idi, { device => $1, info => "Compaq RAID logical disk", media_type => 'hd', interface_type => 'ida' };
 		}
 	    }
 	}
@@ -226,7 +221,7 @@ sub getDAC960() {
     #- /dev/rd/c0d0: RAID-7, Online, 17928192 blocks, Write Thru0123456790123456789012
     foreach (syslog()) {
 	my ($device, $info) = m|/dev/(rd/.*?): (.*?),| or next;
-	$idi{$device} = { info => $info, media_type => 'hd', device => $device };
+	$idi{$device} = { info => $info, media_type => 'hd', device => $device, interface_type => 'dac960' };
     }
     values %idi;
 }
@@ -235,7 +230,7 @@ sub getATARAID {
     my %l;
     foreach (syslog()) {
 	my ($device) = m|^\s*(ataraid/d\d+):| or next;
-	$l{$device} = { info => 'ATARAID block device', media_type => 'hd', device => $device };
+	$l{$device} = { info => 'ATARAID block device', media_type => 'hd', device => $device, interface_type => 'ataraid' };
 	log::l("ATARAID: $device");
     }
     values %l;
@@ -365,6 +360,26 @@ sub tryWrite($) {
 sub syslog {
     -r "/tmp/syslog" and return map { /<\d+>(.*)/ } cat_("/tmp/syslog");
     `$ENV{LD_LOADER} /bin/dmesg`;
+}
+
+sub get_mac_model() {
+    my $mac_model = cat_("/proc/device-tree/model") || die "Can't open /proc/device-tree/model";
+    log::l("Mac model: $mac_model");
+    $mac_model;	
+}
+
+sub get_mac_generation() {
+    my $generation = cat_("/proc/cpuinfo") || die "Can't open /proc/cpuinfo";
+    my @genarray = split(/\n/, $generation);
+    my $count = 0;
+    while ($count <= @genarray) {
+	if ($genarray[$count] =~ /pmac-generation/) {
+	    @genarray = split(/:/, $genarray[$count]);
+	    return $genarray[1];
+	}
+	$count++;
+    }
+    return "Unknown Generation";	
 }
 
 sub hasSMP { c::detectSMP() }

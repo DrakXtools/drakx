@@ -444,8 +444,9 @@ sub get_raw_hds {
 
     $all_hds->{raw_hds} = 
       [ 
-       detect_devices::floppies(), detect_devices::cdroms(), 
-       (map { $_->{device} .= '4'; $_ } detect_devices::zips())
+       detect_devices::floppies(), 
+       detect_devices::cdroms__faking_ide_scsi(), 
+       map { $_->{device} .= 4; $_ } detect_devices::zips__faking_ide_scsi(),
       ];
     get_major_minor(@{$all_hds->{raw_hds}});
 

@@ -729,7 +729,6 @@ sub write_conf {
     }
     my @l = ();
     push @l, 'scsi_hostadapter' if !is_empty_array_ref($conf{scsi_hostadapter}{probeall});
-    push @l, 'ide-floppy' if detect_devices::ide_zips();
     push @l, 'bttv' if grep { $_->{driver} eq 'bttv' } detect_devices::probeall();
     my $l = join '|', map { '^\s*'.$_.'\s*$' } @l;
     log::l("to put in modules ", join(", ", @l));
