@@ -347,7 +347,7 @@ sub create_okcancel {
 sub create_box_with_title($@) {
     my $o = shift;
 
-    $o->{box_size} = map { split "\n" } @_;
+    $o->{box_size} = sum(map { round(length($_) / 60 + 0.5) } map { split "\n" } @_);
     $o->{box} = new Gtk::VBox(0,0);
     if (@_ <= 2 && $o->{box_size} > 4) {
 	my $font = $o->{box}->style->font;

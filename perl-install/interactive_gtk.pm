@@ -13,7 +13,7 @@ use my_gtk qw(:helpers :wrappers);
 my $forgetTime = 1000; #- in milli-seconds
 
 sub new {
-    $::windowheight ||= 400 if $::isStandalone;
+    ($::windowheight, $::windowwidth) = my_gtk::gtkroot()->get_size if $::isStandalone;
     goto &interactive::new;
 }
 sub enter_console { my ($o) = @_; $o->{suspended} = common::setVirtual(1) }
@@ -140,13 +140,14 @@ sub create_ctree {
     my $sep = quotemeta $e->{separator};
     my $tree = Gtk::CTree->new(1, 0);
 
-    my (%wtree, %wleaves);
+    my (%wtree, %wleaves, $size);
     my $parent; $parent = sub {
 	if (my $w = $wtree{"$_[0]$e->{separator}"}) { return $w }
 	my $s;
 	foreach (split $sep, $_[0]) {
 	    $wtree{"$s$_$e->{separator}"} ||= 
 	      $tree->insert_node($s ? $parent->($s) : undef, undef, [$_], 5, (undef) x 4, 0, 0);
+	    $size++ if !$s;
 	    $s .= "$_$e->{separator}";
 	}
 	$wtree{$s};
@@ -251,7 +252,7 @@ sub create_ctree {
     $tree, sub {
 	my $v = may_apply($e->{format}, $_[0]);
 	$select->($wleaves{$v} || return);
-    };
+    }, $size;
 }
 
 sub create_list {
@@ -399,7 +400,7 @@ sub ask_from_entries_refW {
 		#- used only when needed, as key bindings are dropped by List (CList does not seems to accepts Tooltips).
 		($w, $set) = create_list(@para);
 	    } elsif ($e->{type} eq 'treelist') {
-		($w, $set) = create_ctree(@para);
+		($w, $set, $size) = create_ctree(@para);
 	    } else {
 		($w, $set) = $::isWizard ? create_boxradio(@para) : create_clist(@para);
 	    }
@@ -407,7 +408,7 @@ sub ask_from_entries_refW {
 		$has_scroll = 1;
 		$expand = 1;
 		$real_w = createScrolledWindow($w);
-		$size += @{$e->{list}};
+		$size ||= @{$e->{list}};
 	    }
 	} else {
 	    if ($e->{type} eq "combo") {
@@ -438,6 +439,7 @@ sub ask_from_entries_refW {
 	  icon_w => -e $e->{icon} ? gtkpng($e->{icon}) : '' };
     };
     @widgets_always   = map_index { $create_widget->($_, $::i      ) } @$l;
+    my $always_total_size = $total_size;
     @widgets_advanced = map_index { $create_widget->($_, $::i + @$l) } @$l2;
 
     my $set_advanced = sub {
@@ -462,7 +464,7 @@ sub ask_from_entries_refW {
 		   if_($common->{ok} || $::isWizard, 
 		       0, $mainw->create_okcancel($common->{ok}, $common->{cancel}, '', @$l2 ? $advanced_button : ())));
     my @adv = map { warp_text($_) } @{$common->{advanced_messages}};
-    $total_size += @adv;
+    $always_total_size += $mainw->{box_size};
     $advanced_pack = 
       gtkpack_(new Gtk::VBox(0,0),
 	       0, '',
@@ -472,7 +474,7 @@ sub ask_from_entries_refW {
 
     $pack->pack_start($advanced_pack, 1, 1, 0);
     gtkadd($mainw->{window}, $pack);
-    $mainw->{window}->set_usize(0, min($total_size >= 10 ? 350 : 200, $::windowheight - 60)) if $has_scroll;
+    $mainw->{rwindow}->set_default_size(0, min(max(200, $always_total_size * 20), 350, $::windowheight * 0.7)) if $has_scroll;
     $set_advanced->(0);
     (@widgets ? $widgets[0]{w} : $common->{focus_cancel} ? $mainw->{cancel} : $mainw->{ok})->grab_focus();
 
