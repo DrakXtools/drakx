@@ -407,10 +407,11 @@ Consoles 1,3,4,7 may also contain interesting information";
     #-  why not? cuz weather is nice today :-) [pixel]
     common::sync(); common::sync();
 
-    if (do {
+    my $have_devfsd = do {
 	my $p = pkgs::packageByName($o->{packages}, 'devfsd');
 	$p && $p->flag_installed
-    }) {
+    };
+    if ($have_devfsd) {
         require bootloader;
 	bootloader::may_append($o->{bootloader}, devfs => 'mount');
     }
@@ -424,7 +425,7 @@ Consoles 1,3,4,7 may also contain interesting information";
     #- for mandrake_firstime
     touch "$o->{prefix}/var/lock/TMP_1ST";
 
-    any::config_dvd($o->{prefix});
+    any::config_dvd($o->{prefix}, $have_devfsd);
     any::config_mtools($o->{prefix});
 
     any::writeandclean_ldsoconf($o->{prefix});
