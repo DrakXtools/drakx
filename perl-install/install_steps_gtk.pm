@@ -522,7 +522,7 @@ sub installPackages {
 
 	    $i++;
 	    my $old_i_image = $i_image;
-	    $i_image = int($i / $nb * $nb_images);
+	    $i_image = int($i / $nb * $nb_images) % $nb_images;
 	    if ($old_i_image ne $i_image) {
 		my $f = "$dir/ad-$i_image.png";
 		log::l("advertising $f");
