@@ -653,6 +653,10 @@ sub configureNetwork {
 	    output_with_perm($f, 0755, "\nif$_ eth0\n");
 	}
 	output "$o->{prefix}/etc/sysconfig/network-scripts/net_cnx_pg", "\n/usr/sbin/drakconnet\n";
+
+	$o->{netcnx}{$_} = $o->{netc}{$_} foreach qw(NET_DEVICE NET_INTERFACE);
+	$o->{netcnx}{NET_INTERFACE} and set_net_conf($o->{netcnx}, $o->{netc});
+	save_conf($o->{netcnx}, $o->{netc}, $o->{intf});
     }
 }
 
