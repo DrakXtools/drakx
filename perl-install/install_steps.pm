@@ -221,7 +221,7 @@ sub choosePartitionsToFormat($$) {
 	    my $t = isLoopback($_) ? 
 	      eval { fsedit::typeOfPart($o->{prefix} . loopback::file($_)) } :
 	      fsedit::typeOfPart($_->{device});
-	    $_->{toFormatUnsure} = $_->{mntpoint} eq "/" ||
+	    $_->{toFormatUnsure} = $_->{mntpoint} eq "/" && !$o->{doNotFormatRootByDefault} ||
 	      #- if detected dos/win, it's not precise enough to just compare the types (too many of them)
 	      (!$t || isOtherAvailableFS({ type => $t }) ? !isOtherAvailableFS($_) : $t != $_->{type});
 	}
@@ -237,6 +237,8 @@ sub formatMountPartitions {
 sub setPackages {
     my ($o) = @_;
     install_any::setPackages($o);
+    pkgs::selectPackagesAlreadyInstalled($o->{packages}, $o->{prefix})
+	if -r "$o->{prefix}/var/lib/rpm/packages.rpm" && !$o->{isUpgrade};
 }
 sub selectPackagesToUpgrade {
     my ($o) = @_;
