@@ -9,6 +9,7 @@ use common;
 use ugtk2 qw(:create :helpers :wrappers);
 use interactive;
 use harddrake::data;  #- needs to stay after use-ugtk2 as long as this module defines globals containing some N()
+use POSIX qw(:sys_wait_h);
 
 
 # { field => [ short_translation, full_description] }
@@ -298,7 +299,14 @@ foreach (@harddrake::data::tree) {
     $parent_iter->free;
 }
 
-$SIG{CHLD} = sub { undef $pid; $statusbar->pop($sig_id) };
+$SIG{CHLD} = sub {
+    undef $pid;
+    $statusbar->pop($sig_id);
+    # reap zombies
+    my $child_pid;
+    do { $child_pid = waitpid(-1, POSIX::WNOHANG) } until $child_pid > 0;
+};
+
 $w->{rwindow}->signal_connect(delete_event => \&quit_global);
 $w->{rwindow}->set_position('center') unless $::isEmbedded;
 
@@ -321,7 +329,6 @@ $w->{rwindow}->show_all;
 undef $wait;
 gtkset_mousecursor_normal();
 $_->hide foreach $module_cfg_button, $config_button; # hide buttons while no device
-$SIG{CHLD} = 'IGNORE';
 $w->main;
 
 
