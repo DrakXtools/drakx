@@ -96,6 +96,7 @@ sub allowed {
 	    $prefered_depth = 16;
 	    push @depths, 16, 24;
 	}
+        $card->{card_name} eq 'RIVA128' and @depths = qw(8 15 24);  #- X doesn't even start in 16bpp for RIVA128
     } elsif ($card->{use_UTAH_GLX}) {
 	$prefered_depth = 16;
 	push @depths, 16;
