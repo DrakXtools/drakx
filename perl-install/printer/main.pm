@@ -1033,7 +1033,6 @@ sub clientnetworks {
 	}
     }
 
-   print "##### (!$havedenyfromall || $havedenyfromnotall || !$havebrowsedenyall || $havebrowsedenynotall || !$haveallowfromlocalhost || $haveallowedhostwithoutbrowseaddress || $havebrowseaddresswithoutallowedhost || $haveallowedhostwithoutbrowseallow || $havebrowseallowwithoutallowedhost)\n";
     my $configunsupported = (!$havedenyfromall || $havedenyfromnotall ||
 			     !$havebrowsedenyall || $havebrowsedenynotall ||
 			     !$haveallowfromlocalhost ||
