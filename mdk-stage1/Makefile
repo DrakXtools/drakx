@@ -29,7 +29,7 @@ ARCH := $(patsubst sparc%,sparc,$(ARCH))
  #- We can leave "-g" forever since stripping will remove everything
 CFLAGS = -Os -g -Wall -Werror -fomit-frame-pointer
 INCLUDES = -I.
-DEFS = -D_GNU_SOURCE=1 -DVERSION=\"$(VERSION)\" -DUSE_LOGDEV
+DEFS = -D_GNU_SOURCE=1 -DVERSION=\"$(VERSION)\" -DUSE_LOGDEV -DSPAWN_SHELL
 
 COMPILE = $(CC) $(DEFS) $(INCLUDES) $(CFLAGS)
 
@@ -37,31 +37,32 @@ COMPILE = $(CC) $(DEFS) $(INCLUDES) $(CFLAGS)
  #- stage1 "loader"
 INITSRC = minilibc.c init.c
 
- #- stage1 itself
-STAGE1SRC = #stage1.c cdrom.c devices.c
+INITOBJS = $(subst .c,.o,$(INITSRC))
+
+
+ #- stage1 itself (minus stage1.c)
+STAGE1SRC = log.c #cdrom.c devices.c
+
+STAGE1OBJS = $(subst .c,.o,$(STAGE1SRC))
 
 
 ALLSRC = $(INITSRC) $(STAGE1SRC)
 
 
-STATIC = -static
-
 ifeq (i386, $(ARCH))
-MINILIBC=minilibc.o
-LDFLAGS = -nostdlib /usr/lib/crt1.o
+MINILIC=minilibc.o
+LDFLAGS_INIT = -static -nostdlib /usr/lib/crt1.o
+LDFLAGS_STAGE1 = -static
 STATIC=-static
-else
+endif
 ifeq (sparc, $(ARCH))
 MINILIBC=minilibc.o /usr/lib/libc.a
-LDFLAGS = -nostdlib /usr/lib/crt1.o
-STATIC=-static
-else
-STATIC=-static
-endif
+LDFLAGS_INIT = -static -nostdlib /usr/lib/crt1.o
+LDFLAGS_STAGE1 = -static
 endif
 
 
-BINS = init
+BINS = init stage1-network
 
 
 #ifeq (i386, $(ARCH))
@@ -91,24 +92,27 @@ dirs:
 		[ "$$n" = "." ] || make -C $$n ;\
 	done
 
+
+init: $(INITOBJS)
+	$(CC) $(LDFLAGS_INIT) -o $@ $(INITOBJS)
+
+stage1-network: $(STAGE1OBJS) stage1-network.o $(NETOBJS)
+	$(CC) $(LDFLAGS_STAGE1) -o $@ $(STAGE1OBJS) stage1-network.o $(NETOBJS)
+
+
 .c.o:
 	$(COMPILE) -c $<
 
-init: init.o $(MINILIBC)
-	$(CC) $(STATIC) $(LDFLAGS) -o $@ init.o $(MINILIBC)
+stage1-network.o: stage1.c
+	$(COMPILE) -DNETWORK_INSTALL -o $@ -c $<
 
-stage1-network: stage1-network.o $(OBJS) $(NETOBJS)
-	$(CC) -g $(STATIC) -o $@ $^ -lpopt     \
-        -lkudzu_loader ../isys/libisys.a ../balkan/libbalkan.a \
-	$(MODULELINKAGE) \
-        -lpump -lbz2 -lz -lresolv -lnewt -lslang -lpci
 
 clean: 
 	@echo -e "*** CLEANING in all directories\n"
 	@for n in $(DIRS); do \
 		(cd $$n; make clean) \
 	done
-	rm -f *.o .depend $(BINS)
+	rm -f *.o .depend *.rdz *.img $(BINS)
 
 deps:
 	$(CPP) $(CFLAGS) -DHAVE_CONFIG_H -M $(ALLSRC) > .depend

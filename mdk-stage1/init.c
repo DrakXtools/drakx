@@ -58,7 +58,7 @@ int testing;
 
 void fatal_error(char *msg)
 {
-	printf("FATAL ERROR: %s\n\nI can't recover from this, please reboot manually and send bugreport.\n", msg);
+	printf("FATAL ERROR IN INIT: %s\n\nI can't recover from this, please reboot manually and send bugreport.\n", msg);
 	while (1);
 }
 
@@ -102,7 +102,6 @@ void doklog(char * fn)
 	{
 		print_error("error opening /tmp/syslog");
 		sleep(5);
-		close(in);
 		return;
 	}
 
@@ -113,9 +112,12 @@ void doklog(char * fn)
 		close(in);
 		close(out);
 		close(log);
+		sleep(1);
 		return;
 	}
 	
+	printf("logging process forked.\n");
+
 	close(0); 
 	close(1);
 	close(2);
@@ -205,8 +207,9 @@ void doklog(char * fn)
 			readfd = accept(sock, (struct sockaddr *) &sockaddr, &s);
 			if (readfd < 0)
 			{
-				if (out >= 0) write(out, "error in accept\n", 16);
-				write(log, "error in accept\n", 16);
+				char * msg_error = "error in accept\n";
+				if (out >= 0) write(out, msg_error, strlen(msg_error));
+				write(log, msg_error, strlen(msg_error));
 				close(sock);
 				sock = -1;
 			}
@@ -387,12 +390,9 @@ int main(int argc, char **argv)
 	int fd;
 	int abnormal_termination = 0;
 	int end_stage2 = 0;
-	char * child_argv[20];
 	
 	/* getpid() != 1 should work, by linuxrc tends to get a larger pid */
 	testing = (getpid() > 50);
-
-	printf("*** TESTING MODE ***\n");
 
 	if (!testing)
 	{
@@ -400,8 +400,11 @@ int main(int argc, char **argv)
 		printf("\033[9;0]");
 		printf("\033[8]");
 	}
+	else
+		printf("*** TESTING MODE ***\n");
 
-	printf("--- Hi. Linux-Mandrake install initializer starting. ---\n");
+
+	printf("\n--- Hi. Linux-Mandrake install initializer starting. ---\n");
 	printf("VERSION: %s\n", VERSION);
 
 	
@@ -453,7 +456,6 @@ int main(int argc, char **argv)
 	if (!testing) 
 		doklog("/dev/tty4");
 
-
 	/* Go into normal init mode - keep going, and then do a orderly shutdown
 	   when:
 	   
@@ -466,17 +468,9 @@ int main(int argc, char **argv)
 	if (!(installpid = fork()))
 	{
 		/* child */
-		int index;
+		char * child_argv[2];
 		child_argv[0] = "/sbin/stage1";
-
-		index = 1;
-		while (argv[index])
-		{
-			/* should be strdup but I don't have malloc */
-			child_argv[index] = argv[index];
-			index++;
-		}
-		child_argv[index] = NULL;
+		child_argv[1] = NULL;
 
 		printf("execing: %s\n", child_argv[0]);
 		execve(child_argv[0], child_argv, env);
