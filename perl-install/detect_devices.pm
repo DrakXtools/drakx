@@ -593,7 +593,8 @@ sub isLaptop() {
     hasPCMCIA() || (matching_desc('C&T.*655[45]\d') || matching_desc('C&T.*68554') ||
 		    matching_desc('Neomagic.*Magic(Media|Graph)') ||
 		    matching_desc('ViRGE.MX') || matching_desc('S3.*Savage.*[IM]X') ||
-		    matching_desc('ATI.*(Mobility|LT)'));
+		    matching_desc('ATI.*(Mobility|LT)'))
+                || cat_('/proc/cpuinfo') =~ /\bmobile\b/i;
 }
 
 sub usbMice()      { grep { $_->{media_type} =~ /\|Mouse/ && $_->{driver} !~ /Tablet:wacom/ ||
