@@ -466,24 +466,29 @@ Take a look at http://www.linmodems.org"),
                         return "ppp_provider" if $ntf_name =~ m!^/dev/!;
                         return "choose_serial_port" if !$ntf_name;
 
-                        my %relocations = (ltmodem => $in->do_pkgs->check_kernel_module_packages('ltmodem'));
                         my $type;
+
+                        my %pkgs2path = (
+                                         hcfpcimodem => '/usr/sbin/hcfpciconfig',
+                                         hsflinmodem => '/usr/sbin/hsfconfig',
+                                         ltmodem => '/etc/devfs/conf.d/ltmodem.conf',
+                                        );
+                        
+                        my %devices = (ltmodem => '/dev/ttyS14',
+                                       hsflinmodem => '/dev/ttySHSF0'
+                                      );
+                        
                         
                         if (my $driver = $netc->{autodetect}{modem}{$modem_name}{driver}) {
                             $driver =~ /^Hcf:/ and $type = "hcfpcimodem";
                             $driver =~ /^Hsf:/ and $type = "hsflinmodem";
                             $driver =~ /^LT:/  and $type = "ltmodem";
-                            $relocations{$type} || $type && $in->do_pkgs->what_provides($type) or $type = undef;
+                            $type = undef if !($type && ( -f $pkgs2path{$type} || $in->do_pkgs->ensure_is_installed_if_available($type, $pkgs2path{$type})));
+                            $modem->{device} = $devices{$type} || '/dev/modem' if $type; # automatically linked by /etc/devfs/conf entry
                         }
                         
-                        return "no_supported_winmodem" if !$type;
-
-                        $in->do_pkgs->install($relocations{$type} ? @{$relocations{$type}} : $type);
-
-                        #$type eq 'ltmodem' and $netc->{autodetect}{modem} = '/dev/ttyS14';
-
                         #- fallback to modem configuration (beware to never allow test it).
-                        return "ppp_provider";
+                        return $type ? "ppp_provider" : "no_supported_winmodem";
                     },
                    },
 
