@@ -393,12 +393,13 @@ sub _create_dialog {
 sub create_dialog {
     my ($title, $label, $o_options) = @_;
     my $ret = 0;
-    my $dialog = _create_dialog($title, $o_options);
+    my $dialog =  gtkset_border_width(_create_dialog($title, $o_options), 10);
     $dialog->set_border_width(10);
     my $text = ref($label) ? $label : $o_options->{use_markup} ? gtkset_markup(Gtk2::WrappedLabel->new, $label) : Gtk2::WrappedLabel->new($label);
     gtkpack($dialog->vbox,
             gtkpack_(Gtk2::HBox->new,
                      if_($o_options->{stock}, 0, Gtk2::Image->new_from_stock($o_options->{stock}, 'dialog')),
+                     0, Gtk2::Label->new("   "),
                      1, $o_options->{scroll} ? create_scrolled_window($text, [ 'never', 'automatic' ]) : $text,
                     ),
            );
