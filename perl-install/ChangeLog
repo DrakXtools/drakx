@@ -1,3 +1,33 @@
+2004/10/01  Pixel  <pixel at mandrakesoft.com>
+
+	* share/rpmsrate: revert part of the commit that was not done on purpose
+	(nb: don't modify rpmsrate *after* running clean-rpmsrate)
+
+	* pkgs.pm: fix logging rpmsrate_flags_chosen
+
+	* share/compssUsers.pl, share/compssUsers-powerpack.pl,
+	share/compssUsers-discovery.pl, share/compssUsers-powerpackplus.pl:
+	dynamically choose the compssUsers based on meta_class, so now we have
+	only one compssUsers.pl
+
+	* install2.pm: 
+	  - prosuite is now named powerpackplus
+	  - simplify the code searching for the meta_class
+	fix logging rpmsrate_flags_chosen
+
+2004/09/30  (Hilbert) <h at mandrake.org>
+
+	* share/po/zh_TW.po: 1612: Edit selected server
+
+2004/09/30  marco
+
+	* share/po/it.po: fix
+
+2004/09/30  Thomas Backlund  <tmb at mandrake.org>
+
+	* share/po/fi.po: Updated translations, 100% translated, was 17 fuzzy, 78
+	untranslated.
+
 2004/09/30  David Baudens  <baudens at mandrakesoft.com>
 
 	* share/compssUsers.powerpack, share/rpmsrate, share/compssUsers.pl,
@@ -40323,7 +40353,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.976 2004/09/29 08:20:24 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.977 2004/09/30 14:02:30 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
