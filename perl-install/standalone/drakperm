@@ -106,12 +106,12 @@ my $tips = new Gtk2::Tooltips;
 $W->add(gtkpack_(Gtk2::VBox->new(0,5),
                  0, Gtk2::WrappedLabel->new(N("Drakperm is used to see files to use in order to fix permissions, owners, and groups via msec.\nYou can also edit your own rules which will owerwrite the default rules.")),
                  1, gtkadd(Gtk2::Frame->new,
-                           gtkpack_(Gtk2::VBox->new(0,5),
-                                    0, gtkadd(Gtk2::HBox->new(0,5),
-                                              Gtk2::Label->new(N("The current security level is %s
+                           gtkpack_(Gtk2::VBox->new,
+                                    0, Gtk2::WrappedLabel->new(N("The current security level is %s.
 Select permissions to see/edit", $level)),
-                                              $combo_perm
-                              ),
+                                    0, gtkpack_(gtkset_layout(Gtk2::HButtonBox->new, 'spread'),
+                                                0, $combo_perm,
+                                               ),
                                     1, create_scrolled_window($permList),
                                     0, my $up_down_box = gtkadd(Gtk2::HBox->new(0, 5), @buttons =
                                                                 map {
@@ -123,16 +123,17 @@ Select permissions to see/edit", $level)),
                                                                    [ N("Add a rule"), N("Add a new rule at the end"), \&add_callback ],
                                                                    [ N("Delete"), N("Delete selected rule"), \&del_callback ], 
                                                                    [ N("Edit"), N("Edit current rule"), \&edit_callback ])),
-                                    0, gtkpack(Gtk2::HButtonBox->new,
-                                               gtksignal_connect(Gtk2::Button->new(N("Help")), clicked => 
-                                                                 sub { unless (fork()) { exec("drakhelp --id drakperm") } }),
-                                               Gtk2::Label->new(""),
-                                               gtksignal_connect(Gtk2::Button->new(N("Cancel")), clicked => sub { ugtk2->exit }),
-                                               gtksignal_connect(Gtk2::Button->new(N("Ok")), clicked => \&save_perm),
-                              )
-                       )
-                 )
-          )
+                                    0, Gtk2::VBox->new,
+                                   ),
+                          ),
+                 0, gtkpack(Gtk2::HButtonBox->new,
+                            gtksignal_connect(Gtk2::Button->new(N("Help")), clicked => 
+                                              sub { unless (fork()) { exec("drakhelp --id drakperm") } }),
+                            Gtk2::Label->new(""),
+                            gtksignal_connect(Gtk2::Button->new(N("Cancel")), clicked => sub { ugtk2->exit }),
+                            gtksignal_connect(Gtk2::Button->new(N("Ok")), clicked => \&save_perm),
+                           )
+                )
        );
 $W->show_all;
 $w->{rwindow}->set_position('center') unless $::isEmbedded;
