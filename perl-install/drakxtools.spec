@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 9.2
-Release: 11mdk
+Release: 12mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -315,6 +315,46 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Tue Sep 16 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.2-12mdk
+- diskdrake: (pixel)
+  o fix growing ext2/ext3 partitions
+  o handle beos partitions with filesystem befs (#5523)
+- drakbackup/drakTermServ: (stew)
+  o use hd as default daemon media
+  o fix translation issues (Arpad Biro)
+  o fix user cron misbehavior (Keld Jørn Simonsen)
+- drakTermServ:
+  o fix translation issues (Arpad Biro),
+  o fix help text format
+- drakboot: when "Back" is pressed, restore the list of entries in
+  bootloader (#5680) (pixel)
+- drakbug: add support for bug submission about stable releases into
+  anthill (stew)
+- drakconnect: (poulpy)
+  o fix adsl support regarding ppoe.conf (#5674)
+  o fix speedtouch (#5056)
+- draksound:
+  o do not overwrite current driver if it's a viable driver for the
+    current sound card (#5488)
+  o show the current driver too (being preselected) so that users do
+    not get confused
+- drakupdate_fstab: fix supermount handling (pixel)
+- fix hidden or cutted buttons (#1919, #2364, #2705, #3667, ...)
+- harddrake service: switch to verbose mode when using bootsplash
+  (warly)
+- localedrake: fix chinese input (#4408)
+- printerdrake: (till)
+  o fix LIDIL devices management
+  o really handle PSC 1xxx and OfficeJet 4xxx
+  o added support for user-mode-only HPOJ devices (HP PSC 1xxx and
+    OfficeJet 4xxx) (#5641)
+- standalone tools: speedup startup by invoking "rpm -qa" only once (fpons)
+- XFdrake:
+  o use 24bit for fglrx in automatic mode (fpons)
+  o prevent lost Xauth access (pixel)
+  o fix logout from gnome (pixel)
+  o fix not translated test page (pixel)
+
 * Thu Sep 11 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.2-11mdk
 - drakboot: misc fixes (pixel, fpons)
 - drakconnect:
