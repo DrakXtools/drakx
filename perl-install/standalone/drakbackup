@@ -847,13 +847,13 @@ return(1);
 			[ '-re', 'No such file or directory', sub { $bad_dir = 1; exp_continue } ],
 #			[ '-re', '%', sub { update_scp_progress(); exp_continue; } ],
 			[ eof => sub {
-					if (!$spawn_ok) { show_warning("f", _("No password prompt on $host_name at port $scp_port")) }					
-					if ($bad_passwd) { show_warning("f", _("Bad password on $host_name")) }
-					if ($no_perm) { show_warning("f", _("Permission denied transferring $_ to $host_name")) }
-					if ($bad_dir) { show_warning("f", _("Can't find $host_path on $host_name")) }
+					if (!$spawn_ok) { show_warning("f", _("No password prompt on %s at port %s", $host_name, $scp_port)) }					
+					if ($bad_passwd) { show_warning("f", _("Bad password on %s", $host_name)) }
+					if ($no_perm) { show_warning("f", _("Permission denied transferring %s to %s", $_, $host_name)) }
+					if ($bad_dir) { show_warning("f", _("Can't find %s on %s", $host_path, $host_name)) }
 				} 
 			],
-			[ timeout => sub { show_warning("f", _("$host_name not responding")) } ],
+			[ timeout => sub { show_warning("f", _("%s not responding", $host_name)) } ],
 		); 
 
 		my $exit_stat = $exp->exitstatus;
@@ -1084,7 +1084,7 @@ sub build_tape {
 	$command = "mt -f $tape_device status"; 
 	spawn_progress($command, "Checking for tape");
 	if ($log_buff =~ /DR_OPEN/) {
-		show_warning("f", _("No tape in $tape_device!"));
+		show_warning("f", _("No tape in %s!", $tape_device));
 		return(1);
 	}	
 	
@@ -1539,7 +1539,7 @@ sub filedialog_generic {
 	my ($fileops, $prompt, $widget, $set_var) = @_; 
 	my $file_dialog;
 	
-    $file_dialog = gtksignal_connect(new Gtk::FileSelection(_("%s",$prompt)), destroy => sub { $file_dialog->destroy() } );
+    $file_dialog = gtksignal_connect(new Gtk::FileSelection(_($prompt)), destroy => sub { $file_dialog->destroy() } );
     $file_dialog->ok_button->signal_connect(clicked => sub { 
 		${$set_var} = ($file_dialog->get_filename());
 		${$widget}->set_text(${$set_var}); 
@@ -1558,7 +1558,7 @@ sub filedialog {
     $file_dialog->ok_button->child->set(_("Add"));
     $file_dialog->cancel_button->signal_connect(clicked => sub { $file_dialog->destroy() });
     $file_dialog->cancel_button->child->set(_("Close"));
-#    $file_dialog->set_filename(_("Select the files or directories and click on 'Add'"));
+#   $file_dialog->set_filename(_("Select the files or directories and click on 'Add'"));
     $file_dialog->show();
 }
 
@@ -1774,7 +1774,7 @@ sub advanced_where_net_types {
 	 		0, gtkpack_(new Gtk::HBox(0,10),
 	 			0, my $check_where_use_net = new Gtk::CheckButton(_("Use network connection to backup") ),
 				1, new Gtk::HBox(0,10),
-	 			0, new Gtk::Label("Net Method:"),
+	 			0, new Gtk::Label(_("Net Method:")),
 	 			0, gtkset_sensitive(my $entry_net_type = new Gtk::Combo(), $where_net),
 	 		),	 
 	 		0, gtkpack_(new Gtk::HBox(0,5),
