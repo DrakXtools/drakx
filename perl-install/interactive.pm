@@ -151,12 +151,13 @@ sub ask_from_entries_ref($$$$;$%) {
     $o->ask_from_entries_refW($title, $message, $l, $val_hash, %callback)
 
 }
-sub wait_message($$$) {
-    my ($o, $title, $message) = @_;
+sub wait_message($$$;$) {
+    my ($o, $title, $message, $temp) = @_;
 
     $message = ref $message ? $message : [ $message ];
 
     my $w = $o->wait_messageW($title, [ _("Please wait"), @$message ]);
+    push @tempory::objects, $w if $temp;
     my $b = before_leaving { $o->wait_message_endW($w) };
 
     #- enable access through set
