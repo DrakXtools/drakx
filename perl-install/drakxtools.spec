@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 1.1.9
-Release: 12mdk
+Release: 13mdk
 Url: http://www.linux-mandrake.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -49,7 +49,7 @@ Provides: libdetect0, libdetect0-devel, libdetect-lst, libdetect-lst-devel, dete
 %description
 Contains adduserdrake, ddcxinfos, diskdrake, drakautoinst, drakbackup,
 drakboot, drakbug, drakbug_report, drakconnect, drakfloppy, drakfont,
-drakgw, drakproxy, draksec, drakTermServ, drakxservices,
+drakgw, drakproxy, drakTermServ, drakxservices,
 drakxtv, lsnetdrake, lspcidrake, keyboarddrake, livedrake,
 localedrake, mousedrake, printerdrake, scannerdrake, tinyfirewall and
 XFdrake :
@@ -85,8 +85,6 @@ drakfont: import some fonts in the system.
 drakgw: internet connection sharing
 
 drakproxy: proxies configuration
-
-draksec: security configurator (security levels, ...)
 
 drakTermServ: mandrake terminal server configurator
 
@@ -261,6 +259,9 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && \
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog 
+* Mon Aug 19 2002 Pixel <pixel@mandrakesoft.com> 1.1.9-13mdk
+- snapshot (including better XFdrake)
+
 * Wed Aug 14 2002 Pixel <pixel@mandrakesoft.com> 1.1.9-12mdk
 - snapshot (fix diskdrake making a hell of fstab)
 
