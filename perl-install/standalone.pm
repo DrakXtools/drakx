@@ -144,13 +144,6 @@ Copyright (C) 1999-2002 MandrakeSoft by <install\@mandrakesoft.com>
 ",  $::license, "\n";
 }
 
-sub on_request_help {
-    my ($o, $link) = @_;
-    my $browser = $ENV{BROWSER} || MDK::Common::Func::find { -x "/usr/bin/$_" } qw(mozilla konqueror galeon) or $o->ask_warn('', N("No browser is installed on your system, Please install one if you want to browse the help system"));
-    log::explanations("Connection to help system at $link");
-    system("$browser $link &");
-}
-
 ################################################################################
 package pkgs_interactive;
 
