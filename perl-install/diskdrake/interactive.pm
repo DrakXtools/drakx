@@ -1028,7 +1028,7 @@ sub check_type {
 	$in->ask_warn('', formatError($err));
 	return;
     }
-    if ($::isStandalone) {
+    if ($::isStandalone && $type->{fs_type}) {
 	fs::format::check_package_is_installed($in->do_pkgs, $type->{fs_type}) or return;
     }
     1;
