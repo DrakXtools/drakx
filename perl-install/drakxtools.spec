@@ -195,9 +195,12 @@ done
 %config(noreplace) %{_sysconfdir}/logrotate.d/drakxtools-http
 
 %changelog 
-* Fri Jul  5 2002 Thierry Vignaud <tvignaud@mandrakesoft.com> 1.1.8-1mdk
+* Fri Jul  5 2002 Daouda LO <daouda@mandrakesoft.com> 1.1.8-1mdk
 - snapshot
-- add harddrake support
+- new entries: 
+	o harddrake2 : new hardware detection && configuration tool
+	o drakbugreport: bug reporting tool a la Kde (not working!)
+	o drakTermServ : configuration tool for diskless stations.
 
 * Tue Jun 18 2002 Frederic Lepied <flepied@mandrakesoft.com> 1.1.7-99mdk
 - added new draksec from Christian and a new way to build the packages (make rpm)
