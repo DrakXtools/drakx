@@ -180,7 +180,7 @@ static void expert_third_party_modules(void)
 	enum return_type results;
 	char * floppy_mount_location = "/tmp/floppy";
 	char ** modules;
-	char final_name[500] = "/tmp/floppy/";
+	char final_name[500];
 	char * choice;
 	int rc;
 	char * questions[] = { "Options", NULL };
@@ -212,7 +212,7 @@ static void expert_third_party_modules(void)
 		return;
 	}
 
-	strcat(final_name, choice);
+	sprintf(final_name, "%s/%s", floppy_mount_location, choice);
 
 	results = ask_from_entries("Please enter the options:", questions, &answers, 24, NULL);
 	if (results != RETURN_OK) {
@@ -284,7 +284,7 @@ static enum return_type method_select_and_prepare(void)
 #endif
 	means[i] = NULL;
 
-	results = ask_from_list_auto("Please choose the mean of installation.", means, &choice, "method", means_auto);
+	results = ask_from_list_auto("Please choose the installation method.", means, &choice, "method", means_auto);
 
 	if (results != RETURN_OK)
 		return 	method_select_and_prepare();
