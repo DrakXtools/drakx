@@ -354,6 +354,7 @@ foreach (@classes) {
             # do not display unknown driver for system bridges that're managed by kernel core:
             delete $_->{driver} if $_->{driver} eq "unknown" && ($Ident =~ /^ATA_STORAGE|BRIDGE|SMB_CONTROLLER$/ || $_->{description} =~ /3Com.*5610/);
         }
+        rename_field($_, 'usb_description', 'description');
         # split description into manufacturer/description
         ($_->{Vendor}, $_->{description}) = split(/\|/, $_->{description}) if $_->{description};
 
@@ -391,7 +392,6 @@ foreach (@classes) {
             delete $hd->{extended_partitions} if $hd->{extended_partitions} eq '0';
         }
         rename_field($_, 'usb_bus', 'bus');
-        rename_field($_, 'usb_description', 'description');
         rename_field($_, 'usb_driver', 'driver');
         rename_field($_, 'usb_id', 'id');
         rename_field($_, 'usb_media_type', 'media_type');
