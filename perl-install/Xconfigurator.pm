@@ -327,7 +327,8 @@ What do you want to do?"), sub { translate($_[0]{text}) }, \@choices) or return;
 			$card->{identifier} =~ /Matrox.* G[245][05]0/ || #- prefer 16bit with AGP only
 			$card->{identifier} =~ /8281[05].* CGC/ || #- 16bits (Intel 810 & 815).
 			$card->{identifier} =~ /Radeon / || #- 16bits preferable ?
-			$card->{identifier} =~ /Rage 128|Rage Mobility M/); #- 16 and 32 bits, prefer 16bit as no DMA.
+			$card->{identifier} =~ /Rage 128|Rage Mobility M/) && #- 16 and 32 bits, prefer 16bit as no DMA.
+			  !($card->{identifier} =~ /Radeon 8500/); #- remove Radeon 8500 wich doesn't work with DRI (4.2).
     #- 3D acceleration configuration for XFree 4 using DRI but EXPERIMENTAL that may freeze the machine (FOR INFO NOT USED).
     $card->{DRI_glx_EXPERIMENTAL} = ($card->{identifier} =~ /SiS.*6C?326/ || #- prefer 16bit, other ?
 				     $card->{identifier} =~ /SiS.*6C?236/ ||
