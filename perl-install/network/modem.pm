@@ -9,7 +9,7 @@ use network::tools;
 use Data::Dumper;
 
 sub configure {
-    my ($in, $netcnx, $mouse, $netc, $intf) = @_;
+    my ($in, $netcnx, $mouse, $netc, $_intf) = @_;
     $netcnx->{type} = 'modem';
     my $modem = $netcnx->{$netcnx->{type}};
 #    $netcnx->{$netcnx->{type}} = {};
