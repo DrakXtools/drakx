@@ -1,3 +1,160 @@
+2003/02/20  alus
+
+	* share/po/pl.po: typo fix
+
+2003/02/20  Damien Chaumette  <dchaumette@mandrakesoft.com>
+
+	* network/network.pm: dhcp fix
+
+2003/02/20  gbeauchesne
+
+	* mdk-stage1/dietlibc/dietfeatures.h: Disable back WANT_TZFILE_PARSER,
+	0.22 fixed strftime() problem
+
+	* share/rpmsrate: Better defaults for OOo
+
+	* mdk-stage1/dns.c: Fix mygethostbyaddr(), struct in is not a NULL
+	terminated string.
+	i.e. len has to be either sizeof(in.s_addr) or INADDRSZ.
+
+2003/02/20  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* install_steps_interactive.pm: install the potentially needed locales
+	country when user selected
+	another country
+	Gtk2::Label::set is deprecated
+	add a PO comment to try to keep buttons in the window..
+
+	* share/themes-galaxy.rc: logo is aso white on blue
+
+	* mdk-stage1/dns.c: fix potential segfault thx to gwenole
+
+	* share/po/fr.po: some misc fixes
+	translate iraq
+
+	* fs.pm: thx rekcehc_lrep
+
+	* install_steps_gtk.pm: Gtk2::Label::set is deprecated
+	fix bold diplay of texts in adverts
+
+	* share/logo-mandrake.png, services.pm, interactive.pm: Gtk2::Label::set
+	is deprecated
+
+	* ugtk2.pm: try to handle case with large fonts (CJK for example) ->
+	branch on TextView
+	when the box will be quite large
+
+2003/02/20  Pablo Saratxaga  <pablo@mandrakesoft.com>
+
+	* share/po/id.po, share/po/sk.po, share/po/ru.po, share/po/gl.po,
+	share/po/pt_BR.po, share/po/br.po, share/po/th.po, share/po/sl.po,
+	share/po/no.po, share/po/et.po, share/po/ja.po, share/po/hr.po,
+	share/po/tr.po, share/po/mt.po, share/po/ga.po, share/po/be.po,
+	share/po/uk.po, share/po/ko.po, share/po/DrakX.pot, share/po/sv.po,
+	share/po/sr.po, share/po/pl.po, share/po/fi.po, share/po/lt.po,
+	share/po/he.po, share/po/sp.po, share/po/cy.po, share/po/ca.po,
+	share/po/da.po, share/po/ar.po, share/po/tg.po, share/po/bs.po,
+	share/po/uz.po, share/po/ro.po, share/po/wa.po, share/po/is.po,
+	share/po/af.po, share/po/az.po, share/po/zh_TW.po, share/po/zh_CN.po,
+	share/po/pt.po, share/po/vi.po, share/po/ta.po, share/po/fr.po,
+	share/po/sq.po, share/po/it.po, share/po/nl.po, share/po/es.po,
+	share/po/de.po, share/po/eo.po, share/po/el.po, share/po/cs.po,
+	share/po/bg.po, share/po/lv.po, share/po/hu.po: corrected Russian
+	translation
+
+	* share/po/eu.po: changed encoding
+	corrected Russian translation
+
+2003/02/20  Pixel  <pixel@mandrakesoft.com>
+
+	* fsedit.pm: don't let diskdrake detect ext3/reiserfs/jfs/xfs on a type
+	0x7 partition
+	  - simplify check_mntpoint
+	  - fix checking mount point in Mount_point()
+
+	* partition_table.pm: set {device_windobe} for 0x107 *and* 0x7 (since
+	0x107 is not set correctly at this stage)
+	(otherwise this causes mount points /mnt/win_ /mnt/win_1...)
+
+	* diskdrake/interactive.pm: 
+	  - simplify check_mntpoint
+	  - fix checking mount point in Mount_point()
+
+	* bootloader.pm: 
+	  - add "Force No APIC"
+	  - rename add_append() to set_append()
+	(since it can be used to remove a key)
+	  - add remove_append_simple()
+
+	* install_steps_interactive.pm: help perl_checker find the N("...") the
+	#-PO corresponds to
+
+	* any.pm: 
+	  - add "Force No APIC"
+	  - rename add_append() to set_append()
+	(since it can be used to remove a key)
+	  - add remove_append_simple()
+	add XF86Config and XF86Config-4 to report.bug
+	no autologin by default if more than one users
+
+	* Xconfig/card.pm: log manually chosen graphic card
+	log why auto X config failed (needVideoRam)
+
+	* ugtk2.pm: ensure {box_size} is set (to have less warnings)
+
+	* standalone/diskdrake, interactive.pm: have less warnings when debugging
+
+	* pkgs.pm: prefer myspell-en_US
+
+	* install_steps.pm: 
+	  - add "Force No APIC"
+	  - rename add_append() to set_append()
+	(since it can be used to remove a key)
+	  - add remove_append_simple()
+	usb is runned by rc.sysinit, and doesn't like "chkconfig --add" anymore
+
+	* install2.pm: {brltty}{device} is optional, default is ttyS0 or ttyS1 (?)
+	fix brltty support
+
+	* interactive/gtk.pm: set a minimum size for Gtk2::HScale's (mainly used
+	for resizing partitions)
+	fix $ok_clicked when there is no ok button
+	have less warnings when debugging
+
+2003/02/20  Stew Benedict  <sbenedict@mandrakesoft.com>
+
+	* standalone/drakTermServ: Partial gtk2 update - still needs work on
+	TreeViews
+
+2003/02/20  Till Kamppeter  <till@mandrakesoft.com>
+
+	* printer/main.pm, printer/printerdrake.pm: 
+	  - Improved/fixed generation of printer list entries from
+	manufacturer-supplied PostScript PPD files
+	  - Removed forgotten debug mode
+	  - Disabled wizard-mode temporarily
+
+	* install_steps_interactive.pm: Made sure that printerdrake does not open
+	its main window when called during the preparation of the "Summary"
+	screen.
+
+2003/02/20  Thierry Vignaud  <tvignaud@mandrakesoft.com>
+
+	* standalone/harddrake2: 
+	  - prevent any l10n problem by having only one path string when both
+	creating the menu and acessing a menu widget (aka translate menu
+	  paths only once), which also nicely cut down the translators job.
+	  - decrease diagnostics pragma verbosity (aka remove big fat warning
+	  messages)
+
+	* drakxtools.spec: 9.1-2mdk
+
+	* standalone/logdrake: fix #1829
+
+	* share/po/fr.po: further updates
+	translate all countrie names
+	update french translation
+
 2003/02/20  Pixel  <pixel@mandrakesoft.com>
 
 	* ugtk2.pm: ensure {box_size} is set (to have less warnings)
@@ -12213,7 +12370,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.788 2003/02/19 14:25:22 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.789 2003/02/20 01:27:49 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
