@@ -184,6 +184,7 @@ sub selectMouse {
 	eval { modules::load('serial') } if $mouse->{device} =~ /ttyS/;
 
 	if (!$::testing) {
+	    devices::make($mouse->{device});
 	    symlinkf($mouse->{device}, "/dev/mouse");
 	    c::setMouseLive($ENV{DISPLAY}, mouse::xmouse2xId($mouse->{XMOUSETYPE}), $mouse->{nbuttons} < 3);
 	}
