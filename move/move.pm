@@ -13,7 +13,7 @@ use lang;
 use Digest::MD5 qw(md5_hex);
 
 my @ALLOWED_LANGS = qw(en_US fr es it de);
-our ($using_existing_user_config, $using_existing_host_config);
+my ($using_existing_user_config, $using_existing_host_config);
 my $key_sysconf = '/home/.sysconf';
 my $virtual_key_part;
 
