@@ -91,11 +91,11 @@ sub setupBootloader {
     my ($in, $b, $hds, $fstab, $security, $prefix, $more) = @_;
 
     $more++ if $b->{bootUnsafe};
-	$more = 2 if arch() =~ /ppc/; #- no auto for PPC yet
+    $more = 2 if arch() =~ /ppc/; #- no auto for PPC yet
 	
     if (!$::expert && $more < 1) {
 	#- automatic
-    } elsif (!$::expert) {
+    } elsif (!$::expert && arch() !~ /ia64/) {
 	my @l = (__("First sector of drive (MBR)"), __("First sector of boot partition"));
 
 	$in->set_help('setupBootloaderBeginner') unless $::isStandalone;
@@ -149,7 +149,7 @@ sub setupBootloader {
 { label => _("Bootloader to use"), val => \$bootloader, list => [ keys(%bootloaders) ], format => \&translate },
     arch() =~ /sparc/ ? (
 { label => _("Bootloader installation"), val => \$silo_install_lang, list => \@silo_install_lang },
-) : (
+) : if_(arch() !~ /ia64/,
 { label => _("Boot device"), val => \$b->{boot}, list => [ map { "/dev/$_" } (map { $_->{device} } (@$hds, grep { !isFat($_) } @$fstab)), detect_devices::floppies() ], not_edit => !$::expert },
 { label => _("LBA (doesn't work on old BIOSes)"), val => \$b->{lba32}, type => "bool", text => "lba", advanced => 1 },
 { label => _("Compact"), val => \$b->{compact}, type => "bool", text => _("compact"), advanced => 1 },
@@ -249,7 +249,7 @@ You can add some more or change the existing ones."),
 { label => _("Image"), val => \$e->{kernel_or_dev}, list => [ map { s/$prefix//; $_ } glob_("$prefix/boot/vmlinuz*") ], not_edit => 0 },
 { label => _("Root"), val => \$e->{root}, list => [ map { "/dev/$_->{device}" } @$fstab ], not_edit => !$::expert },
 { label => _("Append"), val => \$e->{append} },
-arch =~ /ppc/ ? () : (
+  if_(arch !~ /ppc|ia64/,
 { label => _("Video mode"), val => \$e->{vga}, list => [ keys %bootloader::vga_modes ], not_edit => !$::expert },
 ),
 { label => _("Initrd"), val => \$e->{initrd}, list => [ map { s/$prefix//; $_ } glob_("$prefix/boot/initrd*") ] },
@@ -259,7 +259,7 @@ arch =~ /ppc/ ? () : (
 	} else {
 	    @l = ( 
 { label => _("Root"), val => \$e->{kernel_or_dev}, list => [ map { "/dev/$_->{device}" } @$fstab ], not_edit => !$::expert },
-if_(arch() !~ /sparc|ppc/,
+if_(arch() !~ /sparc|ppc|ia64/,
 { label => _("Table"), val => \$e->{table}, list => [ '', map { "/dev/$_->{device}" } @$hds ], not_edit => !$::expert },
 { label => _("Unsafe"), val => \$e->{unsafe}, type => 'bool' }
 ),

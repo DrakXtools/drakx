@@ -244,14 +244,16 @@ sub suggest {
 	 useboot => $boot,
 	} :
 	{
-	 boot => "/dev/" . ($onmbr ? $hds->[0]{device} : fsedit::get_root($fstab, 'boot')->{device}),
 	 bootUnsafe => $unsafe,
-	 map => "/boot/map",
 	 default => "linux",
 	 lba32 => 1,
 	 entries => [],
 	 timeout => $onmbr && 5,
+	   if_(arch() =~ /ia64/,
+	 boot => "/dev/" . ($onmbr ? $hds->[0]{device} : fsedit::get_root($fstab, 'boot')->{device}),
+	 map => "/boot/map",
 	 install => "/boot/boot.b",
+         ),
 	});
 
     if (!$lilo->{message} || $lilo->{message} eq "1") {
@@ -607,6 +609,17 @@ sub install_lilo ($$) {
     my ($prefix, $lilo, $fstab, $hds) = @_;
     $lilo->{prompt} = $lilo->{timeout};
 
+    my $file2fullname = sub {
+	my ($file) = @_;
+	if (arch() =~ /ia64/) {
+	    (my $part, $file) = fsedit::file2dev($prefix, $fstab, $file);
+	    my %hds = map_index { $_ => "hd$::i" } sort map { $_->{device} } @$hds;
+	    $dev2efi->{$part->{device}} . ":" . $file;
+	} else {
+	    $file
+	}
+    };
+
     #- try to use a specific stage2 if defined and present.
     -e "$prefix/boot/$lilo->{methods}{lilo}" and symlinkf $lilo->{methods}{lilo}, "$prefix/boot/lilo";
     log::l("stage2 of lilo used is " . readlink "$prefix/boot/lilo");
@@ -663,9 +676,9 @@ wait %d seconds for default boot.
 	    $label =~ s/\s/_/g; #- lilo doesn't like spaces
 	    print F "\tlabel=$label"; 
 
-	    if ($_->{type} eq "image") {
-		print F "\troot=$_->{root}";
-		print F "\tinitrd=$_->{initrd}" if $_->{initrd};
+	    if ($_->{type} eq "image") {		
+		print F "\troot=", $file2fullname->($_->{root});
+		print F "\tinitrd=", $file2fullname->($_->{initrd}) if $_->{initrd};
 		print F "\tappend=\"$_->{append}\"" if $_->{append};
 		print F "\tvga=$_->{vga}" if $_->{vga};
 		print F "\tread-write" if $_->{'read-write'};
@@ -739,22 +752,8 @@ sub install_grub {
     }
     my $bootIsReiser = isReiserfs(fsedit::get_root($fstab, 'boot'));
     my $file2grub = sub {	
-	my $file = expand_symlinks "$prefix$_[0]"; #- grub in reiserfs doesn't handle symlinks.
-	unless ($file =~ s/^$prefix//) {
-	    my ($fs) = grep { loopback::carryRootLoopback($_) } @$fstab or die;
-	    log::l("found $fs->{mntpoint}");
-	    $file =~ s|/initrd/loopfs|$fs->{mntpoint}|;
-	}
-	my ($fs);
-	foreach (@$fstab) {
-	    my $m = $_->{mntpoint};
-	    $fs = $_ if 
-	      $file =~ /^$m/ && 
-	      (!$fs || length $fs->{mntpoint} < length $m);
-	}
-	$fs or die "file2grub not found $file";
-	$file =~ s|$fs->{mntpoint}/?|/|;
-	dev2grub($fs->{device}, \%dev2bios) . $file;
+	my ($part, $file) = fsedit::file2dev($prefix, $fstab, $file);
+	dev2grub($part->{device}, \%dev2bios) . $file;
     };
     {
 	local *F;
