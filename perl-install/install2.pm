@@ -357,7 +357,7 @@ sub selectLanguage {
 #------------------------------------------------------------------------------
 sub selectKeyboard {
     my ($clicked) = $_[0];
-    return if $o->{installClass} eq "beginner" && !$clicked;
+    return if $::beginner && !$clicked;
 
     $o->selectKeyboard;
     #if we go back to the selectKeyboard, you must rewrite
@@ -378,7 +378,8 @@ sub selectPath {
 sub selectInstallClass {
     $o->selectInstallClass(@install_classes);
 
-    $::expert = $o->{installClass} eq "expert";
+    $::expert   = $o->{installClass} eq "expert";
+    $::beginner = $o->{installClass} eq "beginner";
     $o->{partitions} = $suggestedPartitions{$o->{installClass}};
 
     addToBeDone {
@@ -389,7 +390,7 @@ sub selectInstallClass {
 #------------------------------------------------------------------------------
 sub setupSCSI {
     my ($clicked) = $_[0];
-    $o->{autoSCSI} ||= $o->{installClass} eq "beginner";
+    $o->{autoSCSI} ||= $::beginner;
 
     $o->setupSCSI($o->{autoSCSI} && !$clicked);
 }
