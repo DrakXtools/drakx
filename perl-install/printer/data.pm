@@ -76,7 +76,7 @@ our %spoolers = ('pdq' => {
 					  $::isInstall ? 'curl' : 'webfetch'],
 					 [ qw(/usr/lib/cups/cgi-bin/printers.cgi
 					      /sbin/ifconfig
-					      /usr/bin/xpp,
+					      /usr/bin/xpp
 					      /usr/share/cups/model/postscript.ppd.gz),
 					   $::isInstall ? '/usr/bin/curl' : '/usr/bin/wget' ] ],
 		     'alternatives' => [

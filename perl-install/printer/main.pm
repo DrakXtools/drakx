@@ -1351,6 +1351,32 @@ sub get_direct_uri {
     @direct_uri;
 }
 
+sub clean_manufacturer_name {
+    my ($make) = @_;
+    # Clean some manufacturer's names so that every manufacturer has only
+    # one entry in the tree list
+    $make =~ s/^CANON\W.*$/CANON/i;
+    $make =~ s/^LEXMARK.*$/LEXMARK/i;
+    $make =~ s/^HEWLETT?[\s\-]*PACKARD/HP/i;
+    $make =~ s/^SEIKO[\s\-]*EPSON/EPSON/i;
+    $make =~ s/^KYOCERA[\s\-]*MITA/KYOCERA/i;
+    $make =~ s/^CITOH/C.ITOH/i;
+    $make =~ s/^OKI(|[\s\-]*DATA)/OKIDATA/i;
+    $make =~ s/^(SILENTWRITER2?|COLORMATE)/NEC/i;
+    $make =~ s/^(XPRINT|MAJESTIX)/XEROX/i;
+    $make =~ s/^QMS-PS/QMS/i;
+    $make =~ s/^(PERSONAL|LASERWRITER)/APPLE/i;
+    $make =~ s/^DIGITAL/DEC/i;
+    $make =~ s/\s+Inc\.//i;
+    $make =~ s/\s+Corp\.//i;
+    $make =~ s/\s+SA\.//i;
+    $make =~ s/\s+S\.\s*A\.//i;
+    $make =~ s/\s+Ltd\.//i;
+    $make =~ s/\s+International//i;
+    $make =~ s/\s+Int\.//i;
+    return $make;
+}    
+
 sub ppd_entry_str {
     my ($mf, $descr, $lang) = @_;
     my ($model, $driver);
@@ -1370,7 +1396,11 @@ sub ppd_entry_str {
 	# Split model and driver
 	$descr =~ s/\s*Series//i;
 	$descr =~ s/\((.*?(PostScript|PS.*).*?)\)/$1/i;
-	if (($descr =~ /^([^,]+[^,\s])\s*(\(v?\d\d\d\d\.\d\d\d\).*)$/i) ||
+	if (($descr =~
+	     /^\s*(Generic\s*PostScript\s*Printer)\s*,?\s*(.*)$/i) ||
+	    ($descr =~
+	     /^\s*(PostScript\s*Printer)\s*,?\s*(.*)$/i) ||
+	    ($descr =~ /^([^,]+[^,\s])\s*(\(v?\d\d\d\d\.\d\d\d\).*)$/i) ||
 	    ($descr =~ /^([^,]+[^,\s])\s+(PS.*)$/i) ||
 	    ($descr =~ /^([^,]+[^,\s])\s*(PostScript.*)$/i) ||
 	    ($descr =~ /^([^,]+[^,\s])\s*(v\d+\.\d+.*)$/i) ||
@@ -1396,20 +1426,27 @@ sub ppd_entry_str {
 	    $driver = "PostScript";
 	}
     }
+    # Remove manufacturer's name from the beginning of the model
+    # name (do not do this with manufacturer names which contain
+    # odd characters)
+    $model =~ s/^$mf[\s\-]+//i 
+	if ($mf and ($mf !~ /[\\\/\(\)\[\]\|\.\$\@\%\*\?]/));
+    # Clean some manufacturer's names
+    $mf = clean_manufacturer_name($mf);
     # Rename Canon "BJC XXXX" models into "BJC-XXXX" so that the 
     # models do not appear twice
     if ($mf eq "CANON") {
 	$model =~ s/BJC\s+/BJC-/;
     }
-    # Remove manufacturer's name from the beginning of the model
-    # name
-    $model =~ s/^$mf[\s\-]+// if $mf;
-    # Clean some manufacturer's names
-    $mf =~ s/^HEWLETT[\s\-]*PACKARD/HP/i;
-    $mf =~ s/^SEIKO[\s\-]*EPSON/EPSON/i;
-    $mf =~ s/^KYOCERA[\s\-]*MITA/KYOCERA/i;
-    $mf =~ s/^CITOH/C.ITOH/i;
-    $mf =~ s/^OKI([\s\-]*DATA|)/OKIDATA/i;
+    # New MF devices from Epson have mis-spelled name in PPD files for
+    # native CUPS drivers of GIMP-Print
+    if ($mf eq "EPSON") {
+	$model =~ s/Stylus CX\-/Stylus CX/;
+    }
+    # Try again to remove manufacturer's name from the beginning of the 
+    # model name, this with the cleaned manufacturer name
+    $model =~ s/^$mf[\s\-]+//i 
+	if ($mf and ($mf !~ /[\\\/\(\)\[\]\|\.\$\@\%\*\?]/));
     # Put out the resulting description string
     uc($mf) . '|' . $model . '|' . $driver .
       ($lang && " (" . lc(substr($lang, 0, 2)) . ")");
@@ -1483,29 +1520,38 @@ sub poll_ppd_base {
 		my $key = ppd_entry_str($mf, $descr, $lang);
 		$key =~ /^[^\|]+\|([^\|]+)\|(.*)$/;
 		my ($model, $driver) = ($1, $2);
+		# Clean some manufacturer's names
+		$mf = clean_manufacturer_name($mf);
 		# Remove language tag
-		$driver =~ s/\s*\([a-z]{2}(|_[A-Z]{2})\s*$//;
+		$driver =~ s/\s*\([a-z]{2}(|_[A-Z]{2})\)\s*$//;
+		# Recommended Foomatic PPD? Extract "(recommended)"
+		my $isrecommended = 
+		    ($driver =~ s/\s+\(recommended\)\s*$//i);
 		# Remove trailing white space
 		$driver =~ s/\s+$//;
+		# For Foomatic: Driver with "GhostScript + "
+		my $fullfoomaticdriver = $driver;
 		# Foomatic PPD? Extract driver name
 		my $isfoomatic = 
 		    ($driver =~ s/^\s*(GhostScript|Foomatic)\s*\+\s*//i);
-		# Recommended Foomatic PPD? Extract "(recommended)"
-		my $isrecommended = ($driver =~ s/^\s+\(rcommended\)$//i);
 		# Foomatic PostScript driver?
-		$isfoomatic ||= ($driver =~ /^PostScript$/i);
+		$isfoomatic ||= ($descr =~ /Foomatic/i);
 		# Native CUPS?
 		my $isnativecups = ($driver =~ /CUPS/i);
 		# Native PostScript
 		my $isnativeps = (!$isfoomatic and !$isnativecups);
-		print "#####$key###|$driver|$isnativeps|$isrecommended|\n";
-		if (!$isfoomatic) {
-		    $driver = "PPD";
-		}
 		# Key without language tag (key as it was produced for the
 		# entries from the Foomatic XML database)
 		my $keynolang = $key;
-		$keynolang =~ s/\s*\([a-z]{2}(|_[A-Z]{2})\s*$//;
+		$keynolang =~ s/\s*\([a-z]{2}(|_[A-Z]{2})\)\s*$//;
+		if (!$isfoomatic) {
+		    # Driver is PPD when the PPD is a non-Foomatic one
+		    $driver = "PPD";
+		} else {
+		    # Remove language tag in menu entry when PPD is from
+		    # Foomatic
+		    $key = $keynolang;
+		}
 		if (!$::expert) {
 		    # Remove driver from printer list entry when in
 		    # recommended mode
@@ -1535,6 +1581,16 @@ sub poll_ppd_base {
 			# Remove the old entry
 			delete $thedb{$key};
 		    }
+		} elsif (((defined 
+			   $thedb{"$mf|$model|$fullfoomaticdriver"}) ||
+			  (defined 
+			   $thedb{"$mf|$model|$fullfoomaticdriver (recommended)"})) && 
+			 ($isfoomatic)) {
+		    # Expert mode: There is already an entry for the
+		    # same printer/driver combo produced by the
+		    # Foomatic XML database, so do not make a second
+		    # entry
+		    next;
 		} elsif (defined
 			 $thedb{"$mf|$model|PostScript (recommended)"} &&
 			 ($isnativeps)) {
@@ -1548,28 +1604,48 @@ sub poll_ppd_base {
 		    }
 		    delete
 			$thedb{"$mf|$model|PostScript (recommended)"};
-		    $key .= " (recommended)";
-		} elsif (($key =~ /PostScript\s*\(recommended\)/i) &&
-			 (my @nativepskeys = grep {
+		    if (!$isrecommended) {
+			$key .= " (recommended)";
+		    }
+		} elsif (($driver =~ /PostScript/i) &&
+			 $isrecommended && $isfoomatic &&
+			 (my @foundkeys = grep {
 			     /^$mf\|$model\|/ && !/CUPS/i &&
 			     $thedb{$_}{driver} eq "PPD" 
 			 } keys %thedb)) {
 		    # Expert mode: "Foomatic + Postscript" driver is
 		    # recommended and there was a PostScript PPD? Make
-		    # this PPD the recommended one
-		    my $firstnativeps = $nativepskeys[0];
-		    for (keys %{$thedb{$firstnativeps}}) {
-			$thedb{"$firstnativeps (recommended)"}{$_} =
-			  $thedb{$firstnativeps}{$_};
+		    # the PostScript PPD the recommended one
+		    my $firstfound = $foundkeys[0];
+		    if (!(grep {/\(recommended\)/} @foundkeys)) {
+			# Do it only if none of the native PostScript
+			# PPDs for this printer is already "recommended"
+			for (keys %{$thedb{$firstfound}}) {
+			    $thedb{"$firstfound (recommended)"}{$_} =
+				$thedb{$firstfound}{$_};
+			}
+			delete $thedb{$firstfound};
 		    }
-		    delete $thedb{$firstnativeps};
 		    $key =~ s/\s*\(recommended\)//;
-		} elsif (defined $thedb{"$keynolang"} && ($isfoomatic)) {
-		    # Expert mode: There is already an entry for the
-		    # same printer/driver combo produced by the
-		    # Foomatic XML database, so do not make a second
-		    # entry
-		    next;
+		} elsif (($driver !~ /PostScript/i) &&
+			 $isrecommended && $isfoomatic &&
+			 (my @foundkeys = grep {
+			     /^$mf\|$model\|.*\(recommended\)/ && 
+			     !/CUPS/i && $thedb{$_}{driver} eq "PPD" 
+			 } keys %thedb)) {
+		    # Expert mode: Foomatic driver other than "Foomatic +
+		    # Postscript" is recommended and there was a PostScript 
+		    # PPD which was recommended? Make The Foomatic driver
+		    # the recommended one
+		    foreach my $sourcekey (@foundkeys) {
+			# Remove the "recommended" tag
+			my $destkey = $sourcekey;
+			$destkey =~ s/\s+\(recommended\)\s*$//i;
+			for (keys %{$thedb{$sourcekey}}) {
+			    $thedb{$destkey}{$_} = $thedb{$sourcekey}{$_};
+			}
+			delete $thedb{$sourcekey};
+		    }
 		}
 	        $thedb{$key}{ppd} = $ppd;
 		$thedb{$key}{make} = $mf;
@@ -1587,10 +1663,6 @@ sub poll_ppd_base {
 	#- before.
 	sleep 1;
     }
-#   Only for debugging, will be removed before MDK 9.1
-#    print map {
-#	"##### |$_|$thedb{$_}{make}|$thedb{$_}{model}|$thedb{$_}{driver}|\n";
-#    } keys %thedb
     #scalar(keys %descr_to_ppd) > 5 or 
     #  die "unable to connect to cups server";
 

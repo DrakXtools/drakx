@@ -1650,26 +1650,24 @@ sub setup_common {
 	    ($_->{val}{MANUFACTURER}, $_->{val}{MODEL},
 	     $_->{val}{DESCRIPTION}, $_->{val}{'COMMAND SET'},
 	     $_->{val}{SKU});
+	# Clean some manufacturer's names
+	my $descrmake = printer::main::clean_manufacturer_name($automake);
 	if ($automake && $autosku) {
-	    $descr = "$automake|$autosku";
+	    $descr = "$descrmake|$autosku";
 	} elsif ($automake && $automodel) {
-	    $descr = "$automake|$automodel";
+	    $descr = "$descrmake|$automodel";
 	} else {
 	    $descr = $autodescr;
 	    $descr =~ s/ /\|/;
 	}
-	$descr =~ s/^$automake\|\s*$automake\s*/$automake\|/;
+	# Remove manufacturer's name from the beginning of the
+	# description (do not do this with manufacturer names which
+	# contain odd characters)
+	$descr =~ s/^$descrmake\|\s*$descrmake\s*/$descrmake\|/i
+	    if ($descrmake and 
+		($descrmake !~ /[\\\/\(\)\[\]\|\.\$\@\%\*\?]/));
 	# Clean up the description from noise which makes the best match
 	# difficult
-	$descr =~ s/Seiko\s+Epson/Epson/i;
-	$descr =~ s/Kyocera[\s\-]*Mita/Kyocera/i;
-	$descr =~ s/\s+Inc\.//i;
-	$descr =~ s/\s+Corp\.//i;
-	$descr =~ s/\s+SA\.//i;
-	$descr =~ s/\s+S\.\s*A\.//i;
-	$descr =~ s/\s+Ltd\.//i;
-	$descr =~ s/\s+International//i;
-	$descr =~ s/\s+Int\.//i;
 	$descr =~ s/\s+[Ss]eries//i;
 	$descr =~ s/\s+\(?[Pp]rinter\)?$//i;
 	$printer->{DBENTRY} = "";
@@ -2340,9 +2338,10 @@ sub setup_options {
 	    } elsif ($printer->{ARGS}[$i]{type} eq 'bool') {
 		# boolean option
 		push(@choicelists, [($printer->{ARGS}[$i]{comment_true} ||
-				     $printer->{ARGS}[$i]{name}),
+				     $printer->{ARGS}[$i]{name} || "Yes"),
 				    ($printer->{ARGS}[$i]{comment_false} ||
-				     $printer->{ARGS}[$i]{name_false})]);
+				     $printer->{ARGS}[$i]{name_false} ||
+				     "No")]);
 		push(@shortchoicelists, []);
 		my $numdefault = 
 		    ($optshortdefault =~ m!^\s*(true|on|yes|1)\s*$! ? 
