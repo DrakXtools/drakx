@@ -121,6 +121,28 @@ install/images/*.img
 install/images/boot.iso
 	iso image to burn enabling any install (cdrom/hd/nfs/ftp)
 
+  Boot from cdrom:
+  - boot.iso : iso image to burn
+  
+  Boot from hd (esp. usb key):
+  - all.img : fat16 image to dd on a partition (hint: sda1)
+    - it seems some bioses don't use the code on MBR (sda), 
+      or at least skip it when it's blanked
+      (eg: "dd if=/dev/zero of=/dev/sda bs=1 count=446")
+    - some bioses need it. I had some luck using
+      dd if=/usr/lib/extipl/aldebaran.bin of=/dev/sda
+      (install package extipl first)
+  
+  Boot from network:
+  - all.rdz + vmlinuz via pxe
+  
+  Boot from floppy:
+  - cdrom.img : to install from a cdrom (but not a usb drive)
+  - network.img + network_drivers.img : to install from network
+  - hd_grub.img : to install from hd
+
+  dd for windows: http://uranus.it.swin.edu.au/~jn/linux/rawwrite/dd.htm
+
 ********************************************************************************
 * logs *************************************************************************
 ********************************************************************************
