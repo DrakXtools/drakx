@@ -38,6 +38,7 @@ void * memdup(void *src, size_t size);
 void add_to_env(char * name, char * value);
 void handle_env(char ** env);
 char ** grab_env(void);
+char ** list_directory(char * direct);
 
 struct param_elem
 {

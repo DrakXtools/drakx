@@ -24,8 +24,6 @@
 #include <stdio.h>
 #include <string.h>
 #include <sys/mount.h>
-#include <dirent.h>
-#include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
 #include "stage1.h"
@@ -38,22 +36,18 @@
 
 #include "disk.h"
 
-
-static char * list_directory(char * direct)
+static char * disk_extract_list_directory(char * direct)
 {
-	char tmp[500] = "";
-	int nb = 0;
-	struct dirent *ep;
-	DIR *dp = opendir(direct);
-	while (dp && nb < 5 && (ep = readdir(dp))) {
-		if (strcmp(ep->d_name, ".") && strcmp(ep->d_name, "..")) {
-			strcat(tmp, strdup(ep->d_name));
-			strcat(tmp, "\n");
-			nb++;
-		}
+	char ** full = list_directory(direct);
+	char tmp[2000] = "";
+	int i;
+	for (i=0; i<5 ; i++) {
+		if (!full || !*full)
+			break;
+		strcat(tmp, *full);
+		strcat(tmp, "\n");
+		full++;
 	}
-	if (dp)
-		closedir(dp);
 	return strdup(tmp);
 }
 
@@ -129,7 +123,7 @@ static enum return_type try_with_device(char *dev_name)
 	if (access(location_full, R_OK)) {
 		error_message("Directory or ISO image file could not be found on partition.\n"
 			      "Here's a short extract of the files in the root of the partition:\n"
-			      "%s", list_directory(disk_own_mount));
+			      "%s", disk_extract_list_directory(disk_own_mount));
 		umount(disk_own_mount);
 		return try_with_device(dev_name);
 	}
@@ -152,7 +146,7 @@ static enum return_type try_with_device(char *dev_name)
 			error_message("I can't find the " DISTRIB_NAME " Distribution in the specified directory. "
 				      "(I need the subdirectory " RAMDISK_LOCATION ")\n"
 				      "Here's a short extract of the files in the directory:\n"
-				      "%s", list_directory(IMAGE_LOCATION));
+				      "%s", disk_extract_list_directory(IMAGE_LOCATION));
 			umount(disk_own_mount);
 			return try_with_device(dev_name);
 		}
@@ -168,7 +162,7 @@ static enum return_type try_with_device(char *dev_name)
 			error_message("I can't find the " DISTRIB_NAME " Distribution in the specified directory. "
 				      "(I need the subdirectory " LIVE_LOCATION ")\n"
 				      "Here's a short extract of the files in the directory:\n"
-				      "%s", list_directory(IMAGE_LOCATION));
+				      "%s", disk_extract_list_directory(IMAGE_LOCATION));
 			umount(disk_own_mount);
 			return try_with_device(dev_name);
 		}

@@ -27,6 +27,8 @@
 #include <string.h>
 #include <ctype.h>
 #include <stdio.h>
+#include <dirent.h>
+#include <sys/types.h>
 #include <zlib.h>
 #include "stage1.h"
 #include "log.h"
@@ -336,4 +338,23 @@ void add_to_env(char * name, char * value)
 	my_env[env_size] = strdup(tmp);
 	env_size++;
 	my_env[env_size] = NULL;
+}
+
+
+char ** list_directory(char * direct)
+{
+	char * tmp[500];
+	int i = 0;
+	struct dirent *ep;
+	DIR *dp = opendir(direct);
+	while (dp && (ep = readdir(dp))) {
+		if (strcmp(ep->d_name, ".") && strcmp(ep->d_name, "..")) {
+			tmp[i] = strdup(ep->d_name);
+			i++;
+		}
+	}
+	if (dp)
+		closedir(dp);
+	tmp[i] = NULL;
+	return memdup(tmp, sizeof(char*) * (i+1));
 }

@@ -294,7 +294,7 @@ static enum return_type insmod_with_options(char * mod, enum driver_type type)
 		error_message("Insmod failed.");
 		return RETURN_ERROR;
 	}
-
+	
 	add_modules_conf(options);
 
 	return RETURN_OK;

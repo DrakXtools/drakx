@@ -43,6 +43,8 @@
 #include "modules.h"
 #include "tools.h"
 #include "automatic.h"
+#include "mount.h"
+#include "insmod-busybox/insmod.h"
 
 #ifndef DISABLE_CDROM
 #include "cdrom.h"
@@ -71,7 +73,7 @@ void fatal_error(char *msg)
 
 
 /* spawns a shell on console #2 */
-void spawn_shell(void)
+static void spawn_shell(void)
 {
 	int fd;
 	pid_t pid;
@@ -109,7 +111,61 @@ void spawn_shell(void)
 }
 
 
-enum return_type method_select_and_prepare(void)
+static void expert_third_party_modules(void)
+{
+	enum return_type results;
+	char * floppy_mount_location = "/tmp/floppy";
+	char ** modules;
+	char final_name[500] = "/tmp/floppy/";
+	char * choice;
+	int rc;
+	char * questions[] = { "Options", NULL };
+	char ** answers;
+
+	results = ask_yes_no("If you want to insert third-party kernel modules, insert "
+			     "a Linux (ext2fs) formatted floppy containing the modules and confirm. Otherwise, select \"no\".");;
+	if (results != RETURN_OK)
+		return;
+	
+	if (my_mount("/dev/fd0", floppy_mount_location, "ext2") == -1) {
+		error_message("I can't find a Linux ext2 floppy in first floppy drive.");
+		return expert_third_party_modules();
+	}
+
+	modules = list_directory("/tmp/floppy");
+
+	if (!modules || !*modules) {
+		error_message("No modules found on floppy disk.");
+		umount(floppy_mount_location);
+		return expert_third_party_modules();
+	}
+
+	results = ask_from_list("Which driver would you like to insmod?", modules, &choice);
+	if (results != RETURN_OK) {
+		umount(floppy_mount_location);
+		return;
+	}
+
+	strcat(final_name, choice);
+
+	results = ask_from_entries("Please enter the options:", questions, &answers, 24);
+	if (results != RETURN_OK) {
+		umount(floppy_mount_location);
+		return expert_third_party_modules();
+	}
+
+	rc = insmod_call(final_name, answers[0]);
+	umount(floppy_mount_location);
+
+	if (rc) {
+		log_message("\tfailed.");
+		error_message("Insmod failed.");
+	}
+
+	return expert_third_party_modules();
+}
+
+static enum return_type method_select_and_prepare(void)
 {
 	enum return_type results;
 	char * choice;
@@ -193,6 +249,9 @@ int main(int argc, char **argv, char **env)
 	spawn_shell();
 	init_modules_insmoding();
 	init_frontend();
+
+	if (IS_EXPERT)
+		expert_third_party_modules();
 
 	ret = method_select_and_prepare();
 
