@@ -48,9 +48,7 @@ if [ -x "/tmp/drakx/mdkinst/usr/bin/perl-install/live_install2" ]; then
 	/bin/cp -a /tmp/drakx/mdkinst/usr/X11R6/lib/X11/$i /usr/X11R6/lib/X11/$i
     done
 
-#    /bin/mkdir -p /usr/share/gtk
-#    /bin/rm -rf /usr/share/gtk/themes
-#    /bin/ln -s /tmp/drakx/mdkinst/usr/share/gtk/themes /usr/share/gtk/themes
+    # gtk ressource for live.
     export GTK_DATA_PREFIX=/tmp/drakx/mdkinst/usr
 
     # get correct fonts for DrakX.
