@@ -45,7 +45,12 @@ sub ensure_is_installed_if_available {
         $do->what_provides($pkg) and $do->install($pkg);
     }
 }
-    
+
+sub is_available {
+    my ($do, $name) = @_;
+    $do->are_available($name);
+}
+
 sub is_installed {
     my ($do, $name) = @_;
     $do->are_installed($name);
