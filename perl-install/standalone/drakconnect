@@ -906,7 +906,7 @@ Please run \"Internet access\" in control center."));
 	network::adsl::adsl_probe_info($cnx, $netc, $intf);
     }
     my @conf_data = (
-		     [ N("Domain name"), \$cnx->{domain} ],
+		     [ N("Domain name"), \$netc->{DOMAINNAME} ],
 		     [ N("First DNS Server (optional)"), \$netc->{dnsServer3} ], # \$cnx->{dns1}
 		     [ N("Second DNS Server (optional)"), \$netc->{dnsServer2} ], #\$cnx->{dns2}
                     );
