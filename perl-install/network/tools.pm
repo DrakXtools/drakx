@@ -152,7 +152,7 @@ sub connected_bg__raw {
 	fcntl($fd, c::F_SETFL(), c::O_NONBLOCK()) or die "can't fcntl F_SETFL: $!";
 	my $a  = <$fd>;
      $$status = $a if defined $a;
-    } else { $$kid_pipe = connected2() }
+    } else { $$kid_pipe = check_link_beat() }
 }
 
 sub connected_bg {
@@ -182,7 +182,7 @@ sub test_connected {
     } elsif ($cmd == 1) {
         if ($current_connection_status != -2) {
              $current_connection_status = -2;
-             $kid_pipe_connect = connected2();
+             $kid_pipe_connect = check_link_beat();
         }
     } elsif ($cmd == 2) {
         if (defined($kid_pipe_connect)) {
@@ -193,7 +193,7 @@ sub test_connected {
     return $current_connection_status;
 }
 
-sub connected2() {
+sub check_link_beat() {
     bg_command->new(sub {
                         require Net::Ping;
                         print Net::Ping->new("icmp")->ping("mandrakesoft.com") ? 1 : 0;
