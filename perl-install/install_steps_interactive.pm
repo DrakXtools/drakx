@@ -640,6 +640,12 @@ sub chooseGroups {
     };
 
     while (1) {
+	if ($available_size < 140) {
+	    # too small to choose anything. Defaulting to no group chosen
+	    $val{$_} = 0 foreach %val;
+	    last;
+	}
+
 	$o->reallyChooseGroups($size_to_display, $individual, \%val) or return;
 	last if pkgs::correctSize($size / sqr(1024)) < $available_size;
        
