@@ -1,3 +1,250 @@
+2003/02/21  Damien Chaumette  <dchaumette@mandrakesoft.com>
+
+	* network/network.pm: no need to use regexp
+
+	* drakxtools.spec: 4mdk
+
+	* network/isdn.pm: $isdn->{is_light} wasn't set while using autodetection,
+	rpm wasn't installed
+
+	* network/tools.pm: oups... hu... nothing
+
+	* network/netconnect.pm: oups... hu... nothing
+	get back password input for adsl
+
+2003/02/21  florin
+
+	* network/netconnect.pm: add isdn check in get_net_device
+
+2003/02/21  gbeauchesne
+
+	* mdk-stage1/dietlibc/libcruft/dnscruft2.c: Better fix for DNS resolver
+	bug
+
+2003/02/21  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* ugtk2.pm: embedded should segfault a bit less if I don't let the
+	embedded
+	window creation destroy the destroy handler
+	workaround what seems to be a gtk bug (#1445)
+	gtk seems to loop (and take 100% user cpu) when
+	I change the pixbuf of a gtkcellrendererpixbuf
+	in a treeview that is not currently displayed
+
+2003/02/21  Pablo Saratxaga  <pablo@mandrakesoft.com>
+
+	* share/po/id.po, share/po/sk.po, share/po/ru.po, share/po/gl.po,
+	share/po/pt_BR.po, share/po/br.po, share/po/th.po, share/po/sl.po,
+	share/po/no.po, share/po/et.po, share/po/ja.po, share/po/hr.po,
+	share/po/tr.po, share/po/mt.po, share/po/ga.po, share/po/be.po,
+	share/po/uk.po, share/po/ko.po, share/po/DrakX.pot, share/po/sv.po,
+	share/po/sr.po, share/po/pl.po, share/po/fi.po, share/po/lt.po,
+	share/po/he.po, share/po/sp.po, share/po/cy.po, share/po/ca.po,
+	share/po/da.po, share/po/ar.po, share/po/tg.po, share/po/bs.po,
+	share/po/uz.po, share/po/ro.po, share/po/wa.po, share/po/is.po,
+	share/po/af.po, share/po/az.po, share/po/zh_TW.po, share/po/zh_CN.po,
+	share/po/pt.po, share/po/vi.po, share/po/ta.po, share/po/fr.po,
+	share/po/sq.po, share/po/it.po, share/po/nl.po, share/po/eu.po,
+	share/po/es.po, share/po/de.po, share/po/eo.po, share/po/el.po,
+	share/po/cs.po, share/po/bg.po, share/po/lv.po, share/po/hu.po: updated
+	Estonian and Dutch files
+	updated Danish file
+
+	* help.pm: fixed a typo
+
+2003/02/21  Pixel  <pixel@mandrakesoft.com>
+
+	* ugtk2.pm: when isEmbedded, use $::WizardTable to allow non pop_it when
+	not visible
+
+	* pixmaps/colors16.png: 
+	  - make it the same range as colors.png and colors8.png
+	  - it is a 64 colors image (note that colors8 is 16 colors)
+
+	* services.pm (ask_standalone_gtk): ensure popup is not destroyed more
+	than once
+
+	* fsedit.pm: use test_for_bad_drives even after install (esp. to detect
+	removed usb-storage
+	devices still visible in /proc/scsi/scsi)
+
+	* install_steps_interactive.pm: "Generate auto install floppy" and "Save
+	packages selection" are now available in advanced
+
+	* Xconfig/resolution_and_depth.pm: fix setting the image & colors in
+	resolution chooser
+
+2003/02/21  Till Kamppeter  <till@mandrakesoft.com>
+
+	* printer/printerdrake.pm: 
+	  - Fixed text of "Refresh printer list" button when list is empty.
+	  - Let printerdrake clean up its datastructure after auto-installing
+	printers in the beginning of the "Summary" installation step.
+
+2003/02/20  florin
+
+	* network/shorewall.pm: update 2 rules for the pptp dsl internet
+	connection
+
+2003/02/20  François Pons  <fpons@mandrakesoft.com>
+
+	* install_steps_interactive.pm: added wait message when building groups.
+
+2003/02/20  gbeauchesne
+
+	* mdk-stage1/dns.c: Fix mygethostbyaddr(), struct in is not a NULL
+	terminated string.
+	i.e. len has to be either sizeof(in.s_addr) or INADDRSZ.
+
+	* mdk-stage1/dietlibc/libcruft/dnscruft2.c: Workaround DNS resolver bug on
+	64-bit platforms.
+
+	* mdk-stage1/dietlibc/syscalls.s/lstat64.S,
+	mdk-stage1/dietlibc/libregex/rx.c, mdk-stage1/dietlibc/include/string.h,
+	mdk-stage1/dietlibc/libugly/strftime.c,
+	mdk-stage1/dietlibc/i386/ldexp.S, mdk-stage1/dietlibc/i386/sin.S,
+	mdk-stage1/dietlibc/lib/strerror.c, mdk-stage1/dietlibc/dietstdio.h,
+	mdk-stage1/dietlibc/include/sys/vfs.h,
+	mdk-stage1/dietlibc/include/unistd.h, mdk-stage1/dietlibc/i386/mmap64.S,
+	mdk-stage1/dietlibc/i386/vfork.S,
+	mdk-stage1/dietlibc/libstdio/fdglue2.c,
+	mdk-stage1/dietlibc/alpha/errlist.S,
+	mdk-stage1/dietlibc/include/dirent.h, mdk-stage1/dietlibc/sparc/urem.S,
+	mdk-stage1/dietlibc/libcruft/scandir64.c,
+	mdk-stage1/dietlibc/include/assert.h, mdk-stage1/dietlibc/lib/__isnan.c,
+	mdk-stage1/dietlibc/sparc/umul.S,
+	mdk-stage1/dietlibc/i386/dyn_syscalls.S, mdk-stage1/dietlibc/CHANGES,
+	mdk-stage1/dietlibc/libstdio/fflush.c,
+	mdk-stage1/dietlibc/libcruft/sysconf.c,
+	mdk-stage1/dietlibc/syscalls.s/pause.S,
+	mdk-stage1/dietlibc/include/termios.h,
+	mdk-stage1/dietlibc/syscalls.s/n_sigprocmask.S,
+	mdk-stage1/dietlibc/diet.c, mdk-stage1/dietlibc/FAQ,
+	mdk-stage1/dietlibc/syscalls.s/socketcall.S,
+	mdk-stage1/dietlibc/include/sys/poll.h,
+	mdk-stage1/dietlibc/sparc/Makefile.add,
+	mdk-stage1/dietlibc/syscalls.s/n_sigsuspend.S,
+	mdk-stage1/dietlibc/include/dlfcn.h,
+	mdk-stage1/dietlibc/syscalls.s/umount2.S,
+	mdk-stage1/dietlibc/include/sys/time.h,
+	mdk-stage1/dietlibc/include/signal.h,
+	mdk-stage1/dietlibc/libcruft/alphasort64.c,
+	mdk-stage1/dietlibc/libshell/glob.c,
+	mdk-stage1/dietlibc/syscalls.s/n_sigpending.S,
+	mdk-stage1/dietlibc/include/stdarg-cruft.h,
+	mdk-stage1/dietlibc/lib/signal.c, mdk-stage1/dietlibc/lib/__dtostr.c,
+	mdk-stage1/dietlibc/lib/__isinf.c, mdk-stage1/dietlibc/syscalls.s/ipc.S,
+	mdk-stage1/dietlibc/include/sys/types.h, mdk-stage1/dietlibc/Makefile,
+	mdk-stage1/dietlibc/libstdio/fread.c,
+	mdk-stage1/dietlibc/syscalls.s/n_sigaction.S,
+	mdk-stage1/dietlibc/syscalls.s/fstat64.S,
+	mdk-stage1/dietlibc/libugly/tzfile.c,
+	mdk-stage1/dietlibc/lib/__v_printf.c,
+	mdk-stage1/dietlibc/sparc/errlist.S, mdk-stage1/dietlibc/i386/memchr.S,
+	mdk-stage1/dietlibc/syscalls.s/msync.S,
+	mdk-stage1/dietlibc/i386/libm2.S, mdk-stage1/dietlibc/sparc/udiv.S,
+	mdk-stage1/dietlibc/i386/cos.S, mdk-stage1/dietlibc/include/sys/ioctl.h,
+	mdk-stage1/dietlibc/syscalls.s/errlist.S,
+	mdk-stage1/dietlibc/syscalls.s/stat64.S,
+	mdk-stage1/dietlibc/libugly/strndup.c: Merge with dietlibc 0.22-1mdk
+
+2003/02/20  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* mdk-stage1/dns.c: fix potential segfault thx to gwenole
+
+	* install_steps_interactive.pm: oops i didn't understand the internals of
+	wait_message hence breaking it. hopes that will fix.
+	install the potentially needed locales country when user selected
+	another country
+	Gtk2::Label::set is deprecated
+
+	* install_steps_gtk.pm, services.pm: Gtk2::Label::set is deprecated
+
+	* share/logo-mandrake.png: update shadow
+	Gtk2::Label::set is deprecated
+
+	* interactive.pm: oops i didn't understand the internals of wait_message
+	hence breaking it. hopes that will fix.
+	Gtk2::Label::set is deprecated
+
+	* install_gtk.pm, ugtk2.pm: change a bit position of main window and steps
+	window
+	in steps window, have titles in grey
+
+	* fs.pm: thx rekcehc_lrep
+
+	* any.pm: cows go møøh
+
+2003/02/20  Pixel  <pixel@mandrakesoft.com>
+
+	* network/shorewall.pm: fix florin: replace $prefix with $::prefix
+
+	* help.pm: fix typos
+
+	* any.pm: allow Cancel in setupBootloader__entries
+	  - add "Force No APIC"
+	  - rename add_append() to set_append()
+	(since it can be used to remove a key)
+	  - add remove_append_simple()
+
+	* install_steps.pm, bootloader.pm: 
+	  - add "Force No APIC"
+	  - rename add_append() to set_append()
+	(since it can be used to remove a key)
+	  - add remove_append_simple()
+
+	* network/network.pm: use detect_devices::pcmcia_probe() instead of
+	detect_devices::probeall()
+	  - read_resolv_conf() reads DOMAINNAME & DOMAINNAME2
+	  - read_resolv_conf() reads /etc/resolv.conf by default
+	  - read_resolv_conf_raw() created
+
+	* install_steps_interactive.pm: help perl_checker find the N("...") the
+	#-PO corresponds to
+
+	* diskdrake/interactive.pm: have ask_okcancel instead of ask_warn on
+	cdie's
+	add catch_cdie's around fsedit::check_mntpoint and fsedit::add
+
+	* install2.pm: {brltty}{device} is optional, default is ttyS0 or ttyS1 (?)
+
+	* fsedit.pm: warn non-ascii chars in mount point (cf bug #1588)
+	use cdie instead of die for warnings
+
+	* Xconfig/card.pm: don't vivify @cards
+
+	* install_steps_gtk.pm: fix $check_complete use in gtk summary
+
+2003/02/20  Stew Benedict  <sbenedict@mandrakesoft.com>
+
+	* standalone/drakTermServ: perl_checker
+	Finish gtk2 port.
+
+2003/02/20  Thierry Vignaud  <tvignaud@mandrakesoft.com>
+
+	* standalone/drakgw: don't use gtk+2 deprecated functions
+
+	* bootlook.pm: 
+	  - add --testing support
+	  - fix #1923 (aka reuse consolided code instead of using deprecated
+	code)
+	  - minor cleanup
+	  - skip comments while parsing /etc/lilo.conf
+	don't use gtk+2 deprecated functions
+
+	* drakxtools.spec: 9.1-3mdk
+
+	* standalone/harddrake2: perl_checker fix
+	  - prevent any l10n problem by having only one path string when both
+	creating the menu and acessing a menu widget (aka translate menu
+	  paths only once), which also nicely cut down the translators job.
+	  - decrease diagnostics pragma verbosity (aka remove big fat warning
+	  messages)
+
+	* share/po/fr.po: further updates
+	translate all countrie names
+	update french translation
+
 2003/02/20  alus
 
 	* share/po/pl.po: typo fix
@@ -12370,7 +12617,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.789 2003/02/20 01:27:49 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.790 2003/02/20 15:14:33 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
