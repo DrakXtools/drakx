@@ -20,7 +20,7 @@ $window->{rwindow}->signal_connect(delete_event => \&CloseAppWindow);
 unless ($in->do_pkgs->is_installed('ImageMagick')) {
     $in->ask_okcancel(N("Error"), N("package 'ImageMagick' is required to be able to complete configuration.\nClick \"Ok\" to install 'ImageMagick' or \"Cancel\" to quit")) 
         && $in->do_pkgs->install('ImageMagick')
-        or &CloseAppWindow;
+        or CloseAppWindow();
 }
 
 #- application vars
@@ -78,7 +78,7 @@ my %first = ('frame' => new Gtk2::Frame(N("first step creation")),
                          },
                  'combo' => { 
                      'res' => ['800x600', '1024x768', '1280x1024'],
-                     'name' => [ $theme{name} , &giv_exist_thm ]
+                     'name' => [ $theme{name} , giv_exist_thm() ]
                      }
              },
              'pos' => [ 'name', 'res', 'file', 'boot_conf', #'save', #'kill'
@@ -153,7 +153,7 @@ $first{widgets}{combo}{res}->entry->signal_connect(changed => sub {
 	$boot_conf_frame{frame} = new Gtk2::Frame(N("Configure bootsplash picture"));
 	&make_boot_frame;
 	$first_vbox->add($boot_conf_frame{frame});
-	member($theme{name}, &giv_exist_thm) and &thm_in_this_res and &get_this_thm_res_conf || $in->ask_warn(N("Notice"), N("This theme does not yet have a bootsplash in %s !", $theme{res}{res}));
+	member($theme{name}, giv_exist_thm()) and thm_in_this_res() and get_this_thm_res_conf() || $in->ask_warn(N("Notice"), N("This theme does not yet have a bootsplash in %s !", $theme{res}{res}));
       });
 #- go to bootsplash configuration step 2
 #$first{widgets}{button}{boot_conf}->signal_connect(clicked => sub{show_act(\%boot_conf_frame) } );
@@ -168,7 +168,7 @@ $first{widgets}{button}{file}->signal_connect(clicked => sub {
 	$file_dialog->show;
 });
 #- changing theme name
-$first{widgets}{combo}{name}->entry->signal_connect(changed => sub { &get_this_thm_res_conf; $theme{name} = $first{widgets}{combo}{name}->entry->get_text });
+$first{widgets}{combo}{name}->entry->signal_connect(changed => sub { get_this_thm_res_conf(); $theme{name} = $first{widgets}{combo}{name}->entry->get_text });
 #**************************************************
 
 
@@ -265,10 +265,10 @@ QUIET='.$quiet;
 
 #- Desc  => read the current bootsplash theme configuration if exist
 sub get_this_thm_res_conf {
-  	member($first{widgets}{combo}{name}->entry->get_text , &giv_exist_thm)
+  	member($first{widgets}{combo}{name}->entry->get_text , giv_exist_thm())
 	  and $theme{name} = $first{widgets}{combo}{name}->entry->get_text
-	  and &thm_in_this_res(1) 
-	  and &read_boot_conf;
+	  and thm_in_this_res(1) 
+	  and read_boot_conf();
 	  -f $thm_path.$theme{name}."/images/bootsplash-".$theme{res}{res}.".jpg"
 	    and $first{widgets}{label}{file}->set_text($thm_path.$theme{name}."/images/bootsplash-".$theme{res}{res}.".jpg");
 	  return 1;
@@ -304,7 +304,7 @@ sub set_scale_values() {
 #- return=> (bool)
 sub thm_in_this_res {
   my ($check_res) = @_;
-  (-f $thm_path.$theme{name}."/images/bootsplash-".$theme{res}{res}.".jpg") ? return 1 : $check_res == 1 ? return &which_res_exist : return 0;
+  (-f $thm_path.$theme{name}."/images/bootsplash-".$theme{res}{res}.".jpg") ? return 1 : $check_res == 1 ? return which_res_exist() : return 0;
 }
 
 sub which_res_exist() {
@@ -399,7 +399,7 @@ sub mk_frame {
 	    and $ref->{widgets}{button}{$1} = new Gtk2::Button($ref->{widget}{button}{$1})
 	    and  $hboxes{$key}->add($ref->{widgets}{button}{$1});
 	  #- look for tooltips
-	  $ref->{widget}{tooltip}{$1} and &tool_tip($1, \%$ref);
+	  $ref->{widget}{tooltip}{$1} and tool_tip($1, \%$ref);
 	  $box->add($hboxes{$key});
 	}
 	$ref->{frame}->add($box);
@@ -438,7 +438,7 @@ sub make_boot_frame() {
 	}); 
 	#- quit button
 	$boot_conf_frame{widgets}{button}{kill}->signal_connect(clicked => \&CloseAppWindow);
-	$boot_conf_frame{widgets}{button}{save}->signal_connect(clicked => sub { &write_boot_thm });
+	$boot_conf_frame{widgets}{button}{save}->signal_connect(clicked => \&write_boot_thm);
 	#- return to first screen
 	#$boot_conf_frame{widgets}{button}{annul}->signal_connect(clicked => sub { show_act( \%first ) } );
 	#- made a preview
@@ -449,7 +449,7 @@ sub make_boot_frame() {
 	    return 0;
 	  }
 	  #- calculation of the 2 angle of text box and progress bar
-	  &set_thm_values;
+	  set_thm_values();
 	  my $_w = $in->wait_message('', N("Generating preview ..."));
        my $txt_tl_x 	= $theme{boot_conf}{tx}*$font_size{w}; 
        my $txt_tl_y 	= $theme{boot_conf}{ty}*$font_size{h};
@@ -459,7 +459,7 @@ sub make_boot_frame() {
        my $prog_tl_y 	= $theme{boot_conf}{py};
        my $prog_width	= $theme{boot_conf}{pw};
        my $prog_height  = $theme{boot_conf}{ph};
-	  &show_prev($first{widgets}{label}{file}->get,$txt_tl_x,$txt_tl_y,$txt_width,$txt_height,$prog_tl_x,$prog_tl_y,$prog_width,$prog_height);
+	  show_prev($first{widgets}{label}{file}->get,$txt_tl_x,$txt_tl_y,$txt_width,$txt_height,$prog_tl_x,$prog_tl_y,$prog_width,$prog_height);
 	});
 	$boot_conf_frame{frame}->show_all;
 #	- check scales values are possibly correct
@@ -467,7 +467,7 @@ sub make_boot_frame() {
 	
 	foreach my $k (keys %{$theme{boot_conf}}) {
 		$k =~ m/[tp][hwyx]/
-		  and $adj{$k}->signal_connect(value_changed => sub { &check_boot_scales($k) });
+		  and $adj{$k}->signal_connect(value_changed => \&check_boot_scales);
 	}
 }
 
