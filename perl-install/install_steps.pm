@@ -12,6 +12,7 @@ use run_program;
 use lilo;
 use lang;
 use keyboard;
+use printer;
 use pkgs;
 use log;
 use fsedit;
