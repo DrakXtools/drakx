@@ -64,15 +64,15 @@ $_ = join('', @$_) foreach $main_format, $partitionEntry_format, $guid_format;
 my $magic = "EFI PART";
 
 sub generate_guid {
-	local *F;
-	open F, devices::make("random") or die "Could not open /dev/random for GUID generation";
-	read F, $tmp, psizeof($guid_format);
-	close F;
+    my $tmp;
+    local *F;
+    open F, devices::make("random") or die "Could not open /dev/random for GUID generation";
+    read F, $tmp, psizeof($guid_format);
 	
-	my %guid; @guid{@$guid_fields} = unpack $guid_format, $tmp;
-	$guid{clock_seq} = ($guid{clock_seq} & 0x3fff) | 0x8000;
-	$guid{time_hi_and_version} = ($guid{time_hi_and_version} & 0x0fff) | 0x4000;
-	pack($guid_format, @guid{@$guid_fields});
+    my %guid; @guid{@$guid_fields} = unpack $guid_format, $tmp;
+    $guid{clock_seq} = ($guid{clock_seq} & 0x3fff) | 0x8000;
+    $guid{time_hi_and_version} = ($guid{time_hi_and_version} & 0x0fff) | 0x4000;
+    pack($guid_format, @guid{@$guid_fields});
 }
 
 sub crc32 {
