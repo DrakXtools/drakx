@@ -120,17 +120,17 @@ int my_mount(char *dev, char *location, char *fs)
 
 	if (stat(location, &buf)) {
 		if (mkdir(location, 0755)) {
-			log_message("could not create location dir");
+			log_perror("could not create location dir");
 			return -1;
 		}
 	} else if (!S_ISDIR(buf.st_mode)) {
 		log_message("not a dir %s, will unlink and mkdir", location);
 		if (unlink(location)) {
-			log_message("could not unlink %s", location);
+			log_perror("could not unlink");
 			return -1;
 		}
 		if (mkdir(location, 0755)) {
-			log_message("could not create location dir");
+			log_perror("could not create location dir");
 			return -1;
 		}
 	}
@@ -141,6 +141,10 @@ int my_mount(char *dev, char *location, char *fs)
 	if (!strcmp(fs, "vfat")) {
 		my_insmod("vfat");
 		opts = "check=relaxed";
+	}
+
+	if (!strcmp(fs, "reiserfs")) {
+		my_insmod("reiserfs");
 	}
 
 	if (!strcmp(fs, "iso9660")) {

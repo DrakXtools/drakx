@@ -55,19 +55,11 @@ void probe_that_type(enum driver_type type)
 		ask_insmod(type);
 	else { 
 		/* ---- PCI probe */
-		char * mytype;
 		FILE * f;
 		int len = 0;
 		char buf[200];
 		struct pci_module_map * pcidb = NULL;
 
-		if (type == SCSI_ADAPTERS)
-			mytype = "SCSI";
-		else if (type == NETWORK_DEVICES)
-			mytype = "NET";
-		else
-			return;
-		
 		f = fopen("/proc/bus/pci/devices", "rb");
     
 		if (!f) {
@@ -105,7 +97,7 @@ void probe_that_type(enum driver_type type)
 #ifndef DISABLE_MEDIAS
 					if (type == SCSI_ADAPTERS) {
 						/* insmod takes time, let's use the wait message */
-						wait_message("Installing %s driver for %s", mytype, pcidb[i].name);
+						wait_message("Installing %s", pcidb[i].name);
 						my_insmod(pcidb[i].module);
 						remove_wait_message();
 					}
@@ -113,7 +105,7 @@ void probe_that_type(enum driver_type type)
 #ifndef DISABLE_NETWORK
 					if (type == NETWORK_DEVICES) {
 						/* insmod is quick, let's use the info message */
-						info_message("Found %s driver for %s", mytype, pcidb[i].name);
+						info_message("Found %s", pcidb[i].name);
 						my_insmod(pcidb[i].module);
 					}
 #endif

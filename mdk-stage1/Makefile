@@ -108,7 +108,7 @@ LDFLAGS_STAGE1 = -static
 endif
 
 
-BINS = init stage1-full stage1-cdrom stage1-network
+BINS = init stage1-full stage1-cdrom stage1-network stage1-disk
 
 
 #ifeq (i386, $(ARCH))
