@@ -246,10 +246,12 @@ done
 
 %changelog 
 * Fri Jul 12 2002 Thierry Vignaud <tvignaud@mandrakesoft.com> 1.1.8-6mdk
+- able to restart WindowMaker if needed
 - draknet is dead; vival el drakconnect
 - no need to write /etc/sysconfig/harddrake2/previous_hw in %%post
   since harddrake2 service doesn't configure anything if previous
   config was empty
+- fix usb mac mouse detection
 
 * Thu Jul 11 2002 Thierry Vignaud <tvignaud@mandrakesoft.com> 1.1.8-5mdk
 - drakx :
