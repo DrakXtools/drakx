@@ -7,10 +7,10 @@ use detect_devices;
 use common qw(:file :common);
 use run_program;
 use vars qw(@ISA @EXPORT);
-use globals "network", qw($in $prefix $install);
+use globals "network", qw($in $prefix $install $connect_file $disconnect_file);
 
 @ISA = qw(Exporter);
-@EXPORT = qw(conf_network_card conf_network_card_backend go_ethernet);
+@EXPORT = qw(configureNetwork conf_network_card conf_network_card_backend go_ethernet);
 
 sub configure_cable {
     my ($netcnx, $netc, $intf, $first_time) = @_;
@@ -189,7 +189,6 @@ ifdown $netc->{NET_DEVICE}
 
 sub configureNetwork {
     my ($netc, $intf, $first_time) = @_;
-    print "plop3 -- $prefix \n";
     local $_;
     any::setup_thiskind($in, 'net', !$::expert, 1);
     my @l = detect_devices::getNet() or die _("no network card found");

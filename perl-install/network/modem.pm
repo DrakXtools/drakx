@@ -7,7 +7,7 @@ use detect_devices;
 use mouse;
 use network::tools;
 use vars qw(@ISA @EXPORT);
-use globals "network", qw($in $prefix $install);
+use globals "network", qw($in $prefix $install $connect_file $disconnect_file);
 
 @ISA = qw(Exporter);
 @EXPORT = qw(pppConfig modem_detect_backend);
@@ -55,7 +55,7 @@ sub pppConfig {
 { label => _("First DNS Server (optional)"), val => \$modem->{dns1} },
 { label => _("Second DNS Server (optional)"), val => \$modem->{dns2} },
     ]) or return;
-    any::pppConfig($modem, $install);
+    any::pppConfig($in, $modem, $prefix, $install);
     $netc->{$_}='ppp0' foreach 'NET_DEVICE', 'NET_INTERFACE';
     1;
 }

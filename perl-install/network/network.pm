@@ -16,7 +16,7 @@ use log;
 use vars qw(@ISA @EXPORT);
 
 @ISA = qw(Exporter);
-@EXPORT = qw(resolv configureNetworkIntf netmask dns is_ip configureNetwork masked_ip findIntf addDefaultRoute all write_interface_conf read_all_conf dnsServers guessHostname configureNetworkNet read_resolv_conf getVarsFromSh read_interface_conf add2hosts gateway configureNetwork2 write_conf sethostname miscellaneousNetwork down_it read_conf write_resolv_conf up_it);
+@EXPORT = qw(resolv configureNetworkIntf netmask dns is_ip masked_ip findIntf addDefaultRoute all write_interface_conf read_all_conf dnsServers guessHostname configureNetworkNet read_resolv_conf getVarsFromSh read_interface_conf add2hosts gateway configureNetwork2 write_conf sethostname miscellaneousNetwork down_it read_conf write_resolv_conf up_it);
 
 #-######################################################################################
 #- Functions

@@ -3,7 +3,7 @@ package network::netconnect;
 
 use diagnostics;
 use strict;
-use vars qw($in $install $prefix $isdn_init @isdndata %isdnid2type $connect_file $disconnect_file $connect_prog);
+use vars qw($isdn_init @isdndata %isdnid2type);
 
 use common qw(:common :file :functional :system);
 use log;
@@ -18,11 +18,8 @@ use commands;
 #require Data::Dumper;
 
 use network::tools;
-use globals "network", qw($in $prefix $install);
+use globals "network", qw($in $prefix $install $connect_file $disconnect_file $connect_prog);
 
-$connect_file = "/etc/sysconfig/network-scripts/net_cnx_up";
-$disconnect_file = "/etc/sysconfig/network-scripts/net_cnx_down";
-$connect_prog = "/etc/sysconfig/network-scripts/net_cnx_pg";
 
 #- intro is called only in standalone.
 sub intro {
@@ -30,6 +27,9 @@ sub intro {
     my ($netc, $mouse, $intf) = ({}, {}, {});
     my $text;
     my $connected;
+    my $connect_file = "/etc/sysconfig/network-scripts/net_cnx_up";
+    my $disconnect_file = "/etc/sysconfig/network-scripts/net_cnx_down";
+    my $connect_prog = "/etc/sysconfig/network-scripts/net_cnx_pg";
     read_net_conf($prefix, $netcnx, $netc);
     if (!$::isWizard) {
 	if (connected($netc)) {
@@ -85,7 +85,13 @@ sub detect {
 
 sub main {
     my ($prefix, $netcnx, $netc, $mouse, $in, $intf, $install, $first_time, $direct_fr) = @_;
-    globals::init(in => $in, prefix => $prefix, install => $install);
+    globals::init(
+		  in => $in,
+		  prefix => $prefix,
+		  install => $install,
+		  connect_file => "/etc/sysconfig/network-scripts/net_cnx_up",
+		  disconnect_file => "/etc/sysconfig/network-scripts/net_cnx_down",
+		  connect_prog => "/etc/sysconfig/network-scripts/net_cnx_pg" );
     $netc->{minus_one}=0; #When one configure an eth in dhcp without gateway
     $::isInstall and $in->set_help('configureNetwork');
     $::isStandalone and read_net_conf($netcnx, $netc); # REDONDANCE with intro. FIXME

@@ -6,7 +6,7 @@ use modules;
 use log;
 use network::tools;
 use vars qw(@ISA @EXPORT);
-use globals "network", qw($in $prefix $install);
+use globals "network", qw($in $prefix $install; $connect_file $disconnect_file);
 
 @ISA = qw(Exporter);
 @EXPORT = qw(isdn_write_config isdn_write_config_backend get_info_providers_backend isdn_ask_info isdn_ask_protocol isdn_ask isdn_detect isdn_detect_backend isdn_get_list isdn_get_info);
@@ -191,7 +191,7 @@ If you have a PCMCIA card, you have to know the irq and io of your card.
     $e = $in->ask_from_listf(_("ISDN Configuration"),
 				    _("Which is your ISDN card ?"),
 				    sub { $_[0]{description} },
-				    [ grep {$_->{card} eq $isdn->{card_type}; } @isdndata ] ) or goto isdn_ask_step_1;
+				    [ grep {$_->{card} eq $isdn->{card_type}; } @network::netconnect::isdndata ] ) or goto isdn_ask_step_1;
     $isdn->{driver}='hisax';
     $e->{$_} and $isdn->{$_} = $e->{$_} foreach qw(type mem io io0 io1 irq);
 
@@ -236,7 +236,7 @@ sub isdn_detect_backend {
   	$isdn->{$_} = $c->{$_} foreach qw(description vendor id driver options);
 	$isdn->{$_} = sprintf("%0x", $isdn->{$_}) foreach ('vendor', 'id');
 	$isdn->{card_type} = 'pci';
-	$isdn->{type} = $isdnid2type{$isdn->{vendor} . $isdn->{id}}; #If the card is not listed, type is void. You have to ask it then.
+	$isdn->{type} = $network::netconnect::isdnid2type{$isdn->{vendor} . $isdn->{id}}; #If the card is not listed, type is void. You have to ask it then.
     }
 }
 
@@ -244,7 +244,7 @@ sub isdn_detect_backend {
 #- output : descriptions : list of strings
 
 sub isdn_get_list {
-    map { $_->{description} } @isdndata;
+    map { $_->{description} } @network::netconnect::isdndata;
 }
 
 #- isdn_get_info : return isdn card infos. This function is not use internally.
@@ -253,7 +253,7 @@ sub isdn_get_list {
 
 sub isdn_get_info {
     my ($desc) = @_;
-    foreach (@isdndata) {
+    foreach (@network::netconnect::isdndata) {
 	return $_ if ($_->{description} eq $desc);
     }
 }
