@@ -348,6 +348,12 @@ sub getIDE() {
     @idi;
 }
 
+sub block_devices() {
+    -d '/sys/block' 
+      ? map { s|!|/|; $_ } all('/sys/block') 
+      : map { $_->{dev} } devices::read_proc_partitions_raw();
+}
+
 sub getCompaqSmartArray() {
     my (@idi, $f);
 
@@ -357,12 +363,14 @@ sub getCompaqSmartArray() {
 
 	my ($name) = m|/(.*)|;
 	for (my $i = 0; -r ($f = "${prefix}$i"); $i++) {
-	    foreach (cat_($f)) {
-                if (my ($raw_device) = m|^\s*($name/.*?):|) {
-                    my $device = -d "/dev/$raw_device" ? "$raw_device/disc" : $raw_device;
-                    push @idi, { device => $device, prefix => $raw_device . 'p', info => "Compaq RAID logical disk",
-				 media_type => 'hd', bus => 'ida' };
-		}
+	    my @raw_devices = cat_($f) =~ m|^\s*($name/.*?):|gm;
+	    @raw_devices or @raw_devices = grep { m!^$name/! } block_devices();
+
+	    foreach my $raw_device (@raw_devices) {
+		my $device = -d "/dev/$raw_device" ? "$raw_device/disc" : $raw_device;
+		push @idi, { device => $device, prefix => $raw_device . 'p', 
+			     info => "Compaq RAID logical disk",
+			     media_type => 'hd', bus => $name };
 	    }
 	}
     }
