@@ -383,13 +383,13 @@ sub create_dialog {
     $text->set_line_wrap(1);
 
     if ($o_options->{cancel}) {
-	my $button2 = Gtk2::Button->new_from_stock('gtk-cancel');
+	my $button2 = Gtk2::Button->new(N("Cancel"));
 	$button2->signal_connect(clicked => sub { $ret = 0; $dialog->destroy; Gtk2->main_quit });
 	$button2->can_default(1);
 	$dialog->action_area->pack_start($button2, 1, 1, 0);
     }
 
-    my $button = Gtk2::Button->new_from_stock('gtk-ok');
+    my $button = Gtk2::Button->new(N("Ok"));
     $button->can_default(1);
     $button->signal_connect(clicked => sub { $ret = 1; $dialog->destroy; Gtk2->main_quit });
     $dialog->action_area->pack_start($button, 1, 1, 0);
@@ -470,15 +470,15 @@ sub create_packtable {
 sub create_okcancel {
     my ($w, $o_ok, $o_cancel, $o_spread, @other) = @_;
     my $wizard_buttons = $::isWizard && !$w->{pop_it};
-    my $cancel = defined $o_cancel || defined $o_ok ? $o_cancel : $wizard_buttons ? 'gtk-go-back' : 'gtk-cancel';
-    my $ok = defined $o_ok ? $o_ok : $wizard_buttons ? ($::Wizard_finished ? N("Finish") : 'gtk-go-forward') : 'gtk-ok';
-    my $b1 = gtksignal_connect($w->{ok} = Gtk2::Button->new_from_stock($ok), clicked => $w->{ok_clicked} || sub { $w->{retval} = 1; Gtk2->main_quit });
-    my $b2 = $cancel && gtksignal_connect($w->{cancel} = Gtk2::Button->new_from_stock($cancel), clicked => $w->{cancel_clicked} || sub { log::l("default cancel_clicked"); undef $w->{retval}; Gtk2->main_quit });
-    gtksignal_connect($w->{wizcancel} = Gtk2::Button->new_from_stock('gtk-cancel'), clicked => sub { die 'wizcancel' }) if $wizard_buttons && !$::isInstall;
+    my $cancel = defined $o_cancel || defined $o_ok ? $o_cancel : $wizard_buttons ? N("<- Previous") : N("Cancel");
+    my $ok = defined $o_ok ? $o_ok : $wizard_buttons ? ($::Wizard_finished ? N("Finish") : N("Next ->")) : N("Ok");
+    my $b1 = gtksignal_connect($w->{ok} = Gtk2::Button->new($ok), clicked => $w->{ok_clicked} || sub { $w->{retval} = 1; Gtk2->main_quit });
+    my $b2 = $cancel && gtksignal_connect($w->{cancel} = Gtk2::Button->new($cancel), clicked => $w->{cancel_clicked} || sub { log::l("default cancel_clicked"); undef $w->{retval}; Gtk2->main_quit });
+    gtksignal_connect($w->{wizcancel} = Gtk2::Button->new(N("Cancel")), clicked => sub { die 'wizcancel' }) if $wizard_buttons && !$::isInstall;
     my @l = grep { $_ } $wizard_buttons ? (if_(!$::isInstall, $w->{wizcancel}), 
                                            if_(!$::Wizard_no_previous, $b2), $b1) : ($b2, $b1);
-    my @l2 = map { gtksignal_connect(Gtk2::Button->new_from_stock($_->[0]), clicked => $_->[1]) } grep {  $_->[2] } @other;
-    my @r2 = map { gtksignal_connect(Gtk2::Button->new_from_stock($_->[0]), clicked => $_->[1]) } grep { !$_->[2] } @other;
+    my @l2 = map { gtksignal_connect(Gtk2::Button->new($_->[0]), clicked => $_->[1]) } grep {  $_->[2] } @other;
+    my @r2 = map { gtksignal_connect(Gtk2::Button->new($_->[0]), clicked => $_->[1]) } grep { !$_->[2] } @other;
 
     my $box = create_hbox($o_spread || "edge");
     
@@ -974,7 +974,7 @@ sub _create_window($$) {
 
 sub ask_warn       { my $w = ugtk2->new(shift @_, grab => 1); $w->_ask_warn(@_); main($w) }
 sub ask_yesorno    { my $w = ugtk2->new(shift @_, grab => 1); $w->_ask_okcancel(@_, N("Yes"), N("No")); main($w) }
-sub ask_okcancel   { my $w = ugtk2->new(shift @_, grab => 1); $w->_ask_okcancel(@_, N("Is this correct?"), 'gtk-ok', 'gtk-cancel'); main($w) }
+sub ask_okcancel   { my $w = ugtk2->new(shift @_, grab => 1); $w->_ask_okcancel(@_, N("Is this correct?"), N("Ok"), N("Cancel")); main($w) }
 sub ask_from_entry { my $w = ugtk2->new(shift @_, grab => 1); $w->_ask_from_entry(@_); main($w) }
 sub ask_dir        { my $w = ugtk2->new(shift @_, grab => 1); $w->_ask_dir(@_); main($w) }
 
@@ -997,7 +997,7 @@ sub _ask_warn($@) {
     my ($o, @msgs) = @_;
     gtkadd($o->{window},
 	  gtkpack($o->create_box_with_title(@msgs),
-		 gtksignal_connect(my $w = Gtk2::Button->new_from_stock('gtk-ok'), "clicked" => sub { Gtk2->main_quit }),
+		 gtksignal_connect(my $w = Gtk2::Button->new(N("Ok")), "clicked" => sub { Gtk2->main_quit }),
 		 ),
 	  );
     $w->grab_focus;
@@ -1073,7 +1073,7 @@ sub ask_browse_tree_info {
     @l = reverse @l if !$::isInstall;
     my @buttons = map {
 	my ($t, $val) = @$_;
-	$box2->pack_end(my $w = gtksignal_connect(Gtk2::Button->new_from_stock($t), clicked => sub {
+	$box2->pack_end(my $w = gtksignal_connect(Gtk2::Button->new($t), clicked => sub {
 						      $w->{retval} = $val;
 						      Gtk2->main_quit;
 						  }), 0, 1, 20);
@@ -1081,7 +1081,7 @@ sub ask_browse_tree_info {
     } @l;
     @buttons = reverse @buttons if !$::isInstall;    
 
-    gtkpack__($box2, gtksignal_connect(Gtk2::Button->new_from_stock('gtk-help'), clicked => sub {
+    gtkpack__($box2, gtksignal_connect(Gtk2::Button->new(N("Help")), clicked => sub {
 					   ask_warn(N("Help"), $common->{interactive_help}->())
 				       })) if $common->{interactive_help};
 

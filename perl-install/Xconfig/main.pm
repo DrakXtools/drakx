@@ -99,7 +99,7 @@ sub configure_chooser_raw {
 
     my $ok;
     $in->ask_from_({ interactive_help_id => 'configureX_chooser',
-		     if_($::isStandalone, ok => $in->isa('interactive::gtk') ? 'gtk-quit' : N("Quit")) }, 
+		     if_($::isStandalone, ok => N("Quit")) }, 
 		   [
 		    { label => N("Graphic Card"), val => \$texts{card}, clicked => sub { 
 			  $may_set->('card', Xconfig::card::configure($in, $raw_X, $do_pkgs, 0, $options));

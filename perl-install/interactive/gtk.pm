@@ -479,7 +479,7 @@ sub ask_fromW {
 
 		%buttons = map {
 		    my $action = $_;
-		    $action => gtksignal_connect(Gtk2::Button->new_from_stock(translate($action)),
+		    $action => gtksignal_connect(Gtk2::Button->new(translate($action)),
 						 clicked => sub { $do_action->($action) });
 		} @actions;
 		$real_w = gtkpack_(Gtk2::HBox->new(0,0),
@@ -644,7 +644,7 @@ sub ask_fromW {
 	       1, $create_widgets->($advanced_total_size, @widgets_advanced));
 
     my @help = if_($common->{interactive_help}, 
-		   [ 'gtk-help', sub { 
+		   [ N("Help"), sub { 
 			 my $message = $common->{interactive_help}->() or return;
 			 $o->ask_warn(N("Help"), $message);
 		     }, 1 ]);
@@ -754,11 +754,11 @@ sub kill {
 }
 
 sub ok {
-    'gtk-ok'
+    N("Ok");
 }
 
 sub cancel {
-    'gtk-cancel'
+    N("Cancel");
 }
 
 1;

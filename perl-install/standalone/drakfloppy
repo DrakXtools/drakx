@@ -111,12 +111,12 @@ $window->{window}->add(
                                                   ),
                                          ),
                                 0, gtkpack__(new Gtk2::HButtonBox(),
-                                             gtksignal_connect(Gtk2::Button->new_from_stock('gtk-cancel'),
+                                             gtksignal_connect(Gtk2::Button->new(N("Cancel")),
                                                                clicked => sub { ugtk2->exit(0) }
                                                               ),
-                                             gtksignal_connect(Gtk2::Button->new_from_stock('gtk-preferences'), clicked => \&pref_dialog),
+                                             gtksignal_connect(Gtk2::Button->new(N("Preferences")), clicked => \&pref_dialog),
                                              gtksignal_connect(gtkset_tip($tips, 
-                                                                          Gtk2::Button->new_from_stock('gtk-ok'),
+                                                                          Gtk2::Button->new(N("Ok")),
                                                                           N("Build the disk")),
                                                                clicked => \&build_it
                                                               ),
@@ -202,8 +202,8 @@ sub pref_dialog() {
     @temp_modules = ();
 
     gtkpack($dialog->action_area,
-            gtksignal_connect(Gtk2::Button->new_from_stock('gtk-cancel'), clicked => sub { $dialog->destroy }),
-            gtksignal_connect(Gtk2::Button->new_from_stock('gtk-ok'), clicked => sub { 
+            gtksignal_connect(Gtk2::Button->new(N("Cancel")), clicked => sub { $dialog->destroy }),
+            gtksignal_connect(Gtk2::Button->new(N("Ok")), clicked => sub { 
                                   # save values:
                                   $options{$_} = $buttons{$_}->get_active foreach keys %buttons;
                                   my $val;

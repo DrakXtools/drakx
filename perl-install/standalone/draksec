@@ -234,7 +234,7 @@ $notebook->append_page(gtkshow(create_scrolled_window(gtkpack_(new Gtk2::VBox(0,
 
 
 ####################### OK CANCEL BUTTONS ##################################
-my $bok = gtksignal_connect(Gtk2::Button->new_from_stock('gtk-ok'),
+my $bok = gtksignal_connect(Gtk2::Button->new(N("Ok")),
                             'clicked' => sub {
                                 my $seclevel_value = $seclevel_entry->entry->get_text;
                                 my $secadmin_check_value = $secadmin_check->get_active;
@@ -281,7 +281,7 @@ my $bok = gtksignal_connect(Gtk2::Button->new_from_stock('gtk-ok'),
                                 ugtk2->exit(0);
                             });
 
-my $bcancel = gtksignal_connect(Gtk2::Button->new_from_stock('gtk-cancel'),
+my $bcancel = gtksignal_connect(Gtk2::Button->new(N("Cancel")),
                                 'clicked' => sub { ugtk2->exit(0) });
 gtkpack_($vbox,
          1, gtkshow($notebook),

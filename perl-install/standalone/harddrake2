@@ -180,10 +180,9 @@ $w->{window}->add(gtkpack_(0, Gtk2::VBox->new(0, 0),
                                             ),
                            0, $statusbar = Gtk2::Statusbar->new,
                            if_($::isEmbedded, 0, gtkpack(create_hbox(),
-                                                         gtksignal_connect(Gtk2::Button->new_from_stock('gtk-preferences'), 'event' => popup_menu($opt_menu), $menubar),
-                                                         gtksignal_connect(Gtk2::Button->new_from_stock('gtk-help'), 'event' => popup_menu($help_menu), $menubar),
-                                                         gtksignal_connect(Gtk2::Button->new_from_stock('gtk-quit'),
-                                                                           'clicked' => \&quit_global),
+                                                         gtksignal_connect(Gtk2::Button->new(N("Options")), event => popup_menu($opt_menu), $menubar),
+                                                         gtksignal_connect(Gtk2::Button->new(N("Help")), event => popup_menu($help_menu), $menubar),
+                                                         gtksignal_connect(Gtk2::Button->new(N("Quit")), clicked => \&quit_global),
                                                          ),
                                )
                            )

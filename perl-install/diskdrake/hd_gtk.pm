@@ -152,7 +152,7 @@ sub general_action_box {
     my ($box, $nowizard, $interactive_help) = @_;
     $_->destroy foreach $box->get_children;
 
-    gtkadd($box, gtksignal_connect(Gtk2::Button->new_from_stock('gtk-help'), clicked => $interactive_help)) if $interactive_help;
+    gtkadd($box, gtksignal_connect(Gtk2::Button->new(N("Help")), clicked => $interactive_help)) if $interactive_help;
 
     my @actions = (if_($::isInstall && !$nowizard, N_("Wizard")), 
 		   diskdrake::interactive::general_possible_actions($in, $all_hds), 

@@ -121,7 +121,7 @@ gtkadd($window1->{window},
                                                                                        ? system('/usr/sbin/logdrake --file=/var/log/messages &')
                                                                                          : system('/usr/X11R6/bin/xvt -e "tail -f /var/log/messages " &')
                                                                                      }),
-                                                               gtksignal_connect(my $button_close = Gtk2::Button->new_from_stock('gtk-close'), clicked => sub { ugtk2->exit(0) }),
+                                                               gtksignal_connect(my $button_close = Gtk2::Button->new(N("Close")), clicked => sub { ugtk2->exit(0) }),
                                                               )
                                                    )
                                        )
@@ -328,11 +328,11 @@ sub change_color {
     my $doit;
     $dialog->vbox->add(my $colorsel = Gtk2::ColorSelection->new);
     gtkpack($dialog->action_area,
-            gtksignal_connect(Gtk2::Button->new_from_stock('gtk-cancel'), clicked => sub {
+            gtksignal_connect(Gtk2::Button->new(N("Cancel")), clicked => sub {
                                   $doit = 1;
                                   $dialog->destroy;
                               }),
-            gtksignal_connect(Gtk2::Button->new_from_stock('gtk-ok'), clicked => sub { 
+            gtksignal_connect(Gtk2::Button->new(N("Ok")), clicked => sub { 
                                   $dialog->destroy;
                               }),
            );
