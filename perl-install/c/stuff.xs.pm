@@ -363,14 +363,6 @@ kernel_version()
   OUTPUT:
   RETVAL
 
-char *
-kernel_arch()
-  CODE:
-  struct utsname u;
-  if (uname(&u) == 0) RETVAL = u.machine; else RETVAL = NULL;
-  OUTPUT:
-  RETVAL
-
 int
 set_loop(dev_fd, file)
   int dev_fd
