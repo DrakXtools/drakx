@@ -379,15 +379,18 @@ sub gtkctree_children {
     @l;
 }
 
-my @icon_paths = ($ENV{SHARE_PATH}, "$ENV{SHARE_PATH}/icons", "$ENV{SHARE_PATH}/libDrakX/pixmaps", "/usr/lib/libDrakX/icons", "pixmaps", 'standalone/icons');
+my @icon_paths = ();
+sub add_icon_path { push @icon_paths, @_ }
 
-sub add_icon_path { @icon_paths = uniq(@icon_paths, @_) }
+sub icon_paths {
+    (@icon_paths, $ENV{SHARE_PATH}, "$ENV{SHARE_PATH}/icons", "$ENV{SHARE_PATH}/libDrakX/pixmaps", "/usr/lib/libDrakX/icons", "pixmaps", 'standalone/icons');
+}
 
 sub gtkcreate_xpm {
     my ($f) = @_;
     my $rw = gtkroot();
     $f =~ m|.xpm$| or $f="$f.xpm";
-    if ( $f !~ /\//) { -e "$_/$f" and $f="$_/$f", last foreach @icon_paths }
+    if ( $f !~ /\//) { -e "$_/$f" and $f="$_/$f", last foreach icon_paths() }
     my @l = Gtk::Gdk::Pixmap->create_from_xpm($rw, new Gtk::Style->bg('normal'), $f) or die "gtkcreate_xpm: missing pixmap file $f";
     @l;
 }
@@ -395,7 +398,7 @@ sub gtkcreate_xpm {
 sub gtkcreate_png {
     my ($f) = shift;
     $f =~ m|.png$| or $f="$f.png";
-    if ( $f !~ /\//) { -e "$_/$f" and $f="$_/$f", last foreach @icon_paths }
+    if ( $f !~ /\//) { -e "$_/$f" and $f="$_/$f", last foreach icon_paths() }
     my $im = Gtk::Gdk::ImlibImage->load_image($f) or die "gtkcreate_png: missing png file $f";
     $im->render($im->rgb_width, $im->rgb_height);
     ($im->move_image(), $im->move_mask);
