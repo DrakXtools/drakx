@@ -693,9 +693,10 @@ sub dev2grub {
 
 sub install_grub {
     my ($prefix, $lilo, $fstab, $hds) = @_;
-    my %dev2bios = 
+    my %dev2bios = (
       (map_index { $_ => "fd$::i" } detect_devices::floppies()),
-      (map_index { $_ => "hd$::i" } dev2bios($hds, $lilo->{boot}));
+      (map_index { $_ => "hd$::i" } dev2bios($hds, $lilo->{boot})),
+    );
 
     {
 	my %bios2dev = reverse %dev2bios;
