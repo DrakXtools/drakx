@@ -593,10 +593,7 @@ notation (for example, 1.2.3.4).")),
                         $in->do_pkgs->install($netcnx->{dhcp_client}) if $auto_ip;
 
                         #FIXME "wireless" if $ethntf->{wireless_eth};
-                        # FIXME: only ask for zeroconf if no dynamic host *AND* no adsl/isdn/modem (aka type being lan|wireless)
-                        return is_dynamic_ip($intf) ?
-                          (is_dynamic_host($ethntf) ? "dhcp_hostname" : "zeroconf") 
-                            : "static_hostname";
+                        return "static_hostname";
                     },
                    },
                    
