@@ -475,7 +475,7 @@ sub parse_pxelinux_cfg {
 	    } elsif (/^\s*(LOCALBOOT|KERNEL|APPEND)\s+(.*)/i) {
 		$entry->{$1} = $2;
 	    } else {
-		log::l("ignoring line (titi_sucks) in file $file due to parsing error");
+		log::l("ignoring line in file $file due to parsing error");
 	    }
 	}
 	$entry and push @{$pxelinux_cfg{entry}}, $entry;
