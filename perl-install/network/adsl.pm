@@ -106,7 +106,26 @@ sub adsl_conf {
     adsl_ask_info($adsl, $netc, $adsl_type) or return;
   adsl_conf_step_2:
     $adsl_type =~ /sagem|speedtouch|eci/ or conf_network_card($netc, $intf, 'static', '10.0.0.10') or goto adsl_conf_step_1;
-    adsl_conf_backend($adsl, $netc, $adsl_type);
+    adsl_conf_backend($adsl, $netc, $adsl_type) or goto adsl_conf_step_1;
+    1;
+}
+
+sub load_firmware_floppy {
+    my ($file, $destination) = @_;
+    
+    $in->ask_okcancel(N("Insert floppy"), N("Insert floppy and press %s", N("Next"))) or return;
+    
+    fs::mount(devices::make(detect_devices::floppy()), "/mnt", "vfat", 'readonly');
+    my $_b = before_leaving { fs::umount("/mnt") };
+    
+    if (-e "/mnt/$file") {
+	system("cp /mnt/$file $destination");	
+	$in->ask_warn('', N("Firmware copy succeed"));
+    } else {
+	log::l("File not found");
+	$in->ask_warn(N("Warning"), N("Firmware copy failed !"));
+	return;
+    }
     1;
 }
 
@@ -187,12 +206,28 @@ user "$adsl->{login}"
 						      ['ppp-compress-26', 'ppp_deflate'];
 	$::isStandalone and modules::write_conf($prefix);
 	$in->do_pkgs->what_provides("speedtouch_mgmt") and $in->do_pkgs->install('speedtouch_mgmt');
-	-e "$prefix/usr/share/speedtouch/mgmt.o" or $in->ask_warn('', N("You need the alcatel microcode.
+	-e "/usr/share/speedtouch/mgmt.o" and return 1;
+      
+      firmware:
+	
+	my $l = [ N("Use a floppy"),
+		  N("Use my Windows partition"),
+		  N("Do it later"),
+		];
+	
+	my $answer = $in->ask_from_list_(N("Firmware needed"),
+					 N("You need the alcatel microcode.
+You can provide it now via a floppy or your windows partition,
+or skip and do it later."), $l) or return;
+	
+	$answer eq N("Use a floppy") and load_firmware_floppy("mgmt.o", "/usr/share/speedtouch/") || goto firmware;
+	$answer eq N("Use my Windows partition") and goto firmware; # to be done
+	$answer eq N("Do it later") and $in->ask_warn('', N("You need the alcatel microcode.
 Download it at
-http://www.speedtouchdsl.com/dvrreg_lx.htm
+http://prdownloads.sourceforge.net/speedtouch/speedtouch-20011007.tar.bz2
 and copy the mgmt.o in /usr/share/speedtouch"));
     }
-
+    
     if ($adsl_type eq 'eci') {
 	my ($vpi, $vci) = $netc->{vpivci} =~ /(\d+)_(\d+)/ or return;
 	output("$prefix/etc/ppp/peers/adsl", 
