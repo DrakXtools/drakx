@@ -325,7 +325,7 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 - draksound: (#5403)
   o make sure to use OptionMenu instead of Combo boxes
   o move help into a tooltip
-- package installation: ensure rpmdb is closed (fpons)
+- upate translations
 
 * Tue Sep 16 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.2-12mdk
 - diskdrake: (pixel)
