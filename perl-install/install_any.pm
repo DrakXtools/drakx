@@ -328,9 +328,10 @@ sub setPackages {
 	foreach (map { substr($_, 0, 2) } lang::langs($o->{langs})) {
 	    pkgs::packageByName($o->{packages}, "locales-$_") or next;
 	    push @{$o->{default_packages}}, "locales-$_";
+	}
+	foreach (lang::langs($o->{langs})) {
 	    $o->{compssUsersChoice}{qq(LOCALES"$_")} = 1;
 	}
- 
 	#- for the first time, select package to upgrade.
 	#- TOCHECK this may not be the best place for that as package are selected at some other point.
 	$o->selectPackagesToUpgrade if $o->{isUpgrade};
