@@ -208,7 +208,7 @@ endif
 	$(MAKE) -C share/po install SUDO= NAME=libDrakX LOCALEDIR=$(DEST)/usr/share/locale_special
 
 #	ga and sl are disabled because too few messages are translated
-	rm -rf $(DEST)/usr/share/locale_special/{ga,sl}
+	rm -rf $(DEST)/usr/share/locale_special/{be,ga,fur}
 
 ifeq (y,$(USE_PCMCIA))
 	cp -a /etc/pcmcia $(DEST)/etc
