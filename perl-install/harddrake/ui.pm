@@ -175,7 +175,7 @@ sub new {
     foreach (@harddrake::data::tree) {
 	   my ($Ident, $title, $icon, $configurator, $detector) = @$_;
 	   next if (ref($detector) ne "CODE"); #skip class witouth detector
-	   print _("Probing $Ident class\n");
+	   print _("Probing %s class\n", $Ident);
 	   next if $Ident =~ /(MODEM|PRINTER|MOUSE)/ && "@ARGV" =~ /test/;
 	   my @devices = &$detector;
 	   next if (!listlength(@devices)); # Skip empty class (no devices)
