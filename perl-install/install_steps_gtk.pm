@@ -341,8 +341,7 @@ sub choosePackagesTree {
 			    build_tree => sub {
 				my ($add_node, $flat) = @_;
 				if ($flat) {
-				    foreach (sort grep { my $pkg = pkgs::packageByName($packages, $_);
-							 pkgs::packageMedium($pkg)->{selected} } keys %{$packages->{names}}) {
+				    foreach (sort keys %{$packages->{names}}) {
 					$add_node->($_, undef);
 				    }
 				} else {
