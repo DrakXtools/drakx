@@ -131,10 +131,10 @@ sub apply_functions {
     substInFile {
         foreach my $function (@list) { s/^$function.*\n// }
         if (eof) {
-            print "\n", join("\n", map { 
+            $_ .= join("\n", if_(!$_, ''), (map { 
                 my $value = $msec->get_function_value($_);
                 if_($value ne 'default', "$_ ($value)");
-            } @list);
+            } @list), "");
         }
     } $msec->{functions}{values_file};
 }
