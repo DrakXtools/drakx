@@ -642,7 +642,6 @@ sub ask_fromW {
     { local $::no_scroll = 1;
     $advanced_pack = 
       gtkpack_(Gtk2::VBox->new(0,0),
-	       0, '',
 	       (map { (0, Gtk2::Label->new($_)) } @adv),
 	       0, Gtk2::HSeparator->new,
 	       1, $create_widgets->($advanced_total_size, @widgets_advanced));
