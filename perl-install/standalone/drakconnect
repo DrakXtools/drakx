@@ -54,6 +54,8 @@ my $in = 'interactive'->vnew('su', 'network');
 $::Wizard_pix_up = "wiz_drakconnect.png";
 $::Wizard_title = "Network & Internet Configuration";
 
+my $activate_profile = 0; #- deactivated by default (in order to keep code)
+
 MDK::Common::Globals::init(
 	      in => $in,
 	      prefix => '',
@@ -88,60 +90,60 @@ $combo1->entry->set_text($netcnx->{PROFILE} || "default");
 $combo1->entry->set_editable(0);
 my $button_del = new Gtk2::Button(N("Del profile..."));
 $button_del->signal_connect(clicked => sub {
-				 my $dialog = new_dialog();
-				 $dialog->vbox->pack_start(new Gtk2::Label(N("Profile to delete:")),1,1,0);
- 				 my $combo_dialog = new Gtk2::Combo;
-				 $combo_dialog->set_popdown_strings(grep { ! /default/ } network::netconnect::get_profiles());
-				 $combo_dialog->entry->set_editable(0);
-				 $dialog->vbox->pack_start($combo_dialog,1,1,0);
-				 my $bbox_dialog = new Gtk2::HButtonBox;
-				 $dialog->action_area->add($bbox_dialog);
-				 $bbox_dialog->set_layout('end');
-				 my $button_ok = new Gtk2::Button(N("OK"));
-				 $button_ok->signal_connect(clicked => sub {
-								  network::netconnect::del_profile($netcnx, $combo_dialog->entry->get_text());
-								  $netcnx->{PROFILE} eq $combo_dialog->entry->get_text() and $netcnx->{PROFILE} = "default";
-								  Gtk2->main_quit();
-							      });
-				 $bbox_dialog->add($button_ok);
-				 my $button_cancel = new Gtk2::Button(N("Cancel"));
-				 $button_cancel->signal_connect(clicked => sub { Gtk2->main_quit() });
-				 $bbox_dialog->add($button_cancel);
-				 $dialog->show_all;
-				 $dialog->set_modal(1);
-				 Gtk2->main();
-				 $dialog->destroy;
-				 $combo1->entry->set_text(-e "/etc/sysconfig/network-scripts/drakconnect_conf." . $combo1->entry->get_text ? $combo1->entry->get_text : "default");
-				 $combo1->set_popdown_strings(network::netconnect::get_profiles());
-				 apply();
-			     });
+				my $dialog = new_dialog();
+				$dialog->vbox->pack_start(new Gtk2::Label(N("Profile to delete:")),1,1,0);
+				my $combo_dialog = new Gtk2::Combo;
+				$combo_dialog->set_popdown_strings(grep { ! /default/ } network::netconnect::get_profiles());
+				$combo_dialog->entry->set_editable(0);
+				$dialog->vbox->pack_start($combo_dialog,1,1,0);
+				my $bbox_dialog = new Gtk2::HButtonBox;
+				$dialog->action_area->add($bbox_dialog);
+				$bbox_dialog->set_layout('end');
+				my $button_ok = new Gtk2::Button(N("OK"));
+				$button_ok->signal_connect(clicked => sub {
+							       network::netconnect::del_profile($netcnx, $combo_dialog->entry->get_text());
+							       $netcnx->{PROFILE} eq $combo_dialog->entry->get_text() and $netcnx->{PROFILE} = "default";
+							       Gtk2->main_quit();
+							   });
+				$bbox_dialog->add($button_ok);
+				my $button_cancel = new Gtk2::Button(N("Cancel"));
+				$button_cancel->signal_connect(clicked => sub { Gtk2->main_quit() });
+				$bbox_dialog->add($button_cancel);
+				$dialog->show_all;
+				$dialog->set_modal(1);
+				Gtk2->main();
+				$dialog->destroy;
+				$combo1->entry->set_text(-e "/etc/sysconfig/network-scripts/drakconnect_conf." . $combo1->entry->get_text ? $combo1->entry->get_text : "default");
+				$combo1->set_popdown_strings(network::netconnect::get_profiles());
+				apply();
+			    });
 $button_del->set_sensitive(network::netconnect::get_profiles() > 1);
 my $button_new = new Gtk2::Button(N("New profile..."));
 $button_new->signal_connect(clicked => sub {
-				 my $dialog = new_dialog();
-				 $dialog->vbox->pack_start(new Gtk2::Label(N("Name of the profile to create (the new profile is created as a copy of the current one) :")),1,1,0);
-				 my $entry_dialog = new Gtk2::Entry;
-				 $dialog->vbox->pack_start($entry_dialog,1,1,0);
-				 my $bbox_dialog = new Gtk2::HButtonBox;
-				 $dialog->action_area->add($bbox_dialog);
-				 $bbox_dialog->set_layout('end');
-				 my $button_ok = new Gtk2::Button(N("OK"));
-				 $button_ok->signal_connect(clicked => sub {
-								  network::netconnect::add_profile($netcnx, $entry_dialog->get_text());
-								  $netcnx->{PROFILE} = $entry_dialog->get_text();
-								  Gtk2->main_quit();
-							      });
-				 $bbox_dialog->add($button_ok);
-				 my $button_cancel = new Gtk2::Button(N("Cancel"));
-				 $button_cancel->signal_connect(clicked => sub { Gtk2->main_quit() });
-				 $bbox_dialog->add($button_cancel);
-				 $dialog->show_all;
-				 $dialog->set_modal(1);
-				 Gtk2->main();
-				 $dialog->destroy;
-				 $combo1->entry->set_text(-e "/etc/sysconfig/network-scripts/drakconnect_conf." . $netcnx->{PROFILE} ? $netcnx->{PROFILE} : "default");
-				 $combo1->set_popdown_strings(network::netconnect::get_profiles());
-});
+				my $dialog = new_dialog();
+				$dialog->vbox->pack_start(new Gtk2::Label(N("Name of the profile to create (the new profile is created as a copy of the current one) :")),1,1,0);
+				my $entry_dialog = new Gtk2::Entry;
+				$dialog->vbox->pack_start($entry_dialog,1,1,0);
+				my $bbox_dialog = new Gtk2::HButtonBox;
+				$dialog->action_area->add($bbox_dialog);
+				$bbox_dialog->set_layout('end');
+				my $button_ok = new Gtk2::Button(N("OK"));
+				$button_ok->signal_connect(clicked => sub {
+							       network::netconnect::add_profile($netcnx, $entry_dialog->get_text());
+							       $netcnx->{PROFILE} = $entry_dialog->get_text();
+							       Gtk2->main_quit();
+							   });
+				$bbox_dialog->add($button_ok);
+				my $button_cancel = new Gtk2::Button(N("Cancel"));
+				$button_cancel->signal_connect(clicked => sub { Gtk2->main_quit() });
+				$bbox_dialog->add($button_cancel);
+				$dialog->show_all;
+				$dialog->set_modal(1);
+				Gtk2->main();
+				$dialog->destroy;
+				$combo1->entry->set_text(-e "/etc/sysconfig/network-scripts/drakconnect_conf." . $netcnx->{PROFILE} ? $netcnx->{PROFILE} : "default");
+				$combo1->set_popdown_strings(network::netconnect::get_profiles());
+			    });
 my $hostname = chomp_(`hostname`);
 
 #attach(table, child, left_attach, right_attach, top_attach, bottom_attach, xoptions, yoptions, xpadding, ypadding)
@@ -199,12 +201,14 @@ my ($bbox0, $label_host, $int_state);
 
 $window1->{window}->add(
                         gtkpack_(Gtk2::VBox->new(0,10),
-                                 0, gtkpack_(Gtk2::HBox->new(0,0),
-                                             0, new Gtk2::Label(N("Profile: ")),
-                                             0, $combo1,
-                                             0, $button_del,
-                                             0, $button_new,
-                                             ),
+				 if_($activate_profile,
+				     0, gtkpack_(Gtk2::HBox->new(0,0),
+						 0, new Gtk2::Label(N("Profile: ")),
+						 0, $combo1,
+						 0, $button_del,
+						 0, $button_new,
+						),
+				 ),
                                  0, gtkpack_(Gtk2::HBox->new(0,0),
                                              0, new Gtk2::Label(N("Hostname: ")),
                                              0, $label_host = new Gtk2::Label($hostname),
