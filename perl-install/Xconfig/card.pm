@@ -119,9 +119,9 @@ sub to_raw_X {
     $raw_X->{xfree4}->remove_load_module('v4l') if $card->{use_DRI_GLX} && $card->{Driver} eq 'r128';
 
     #- Specific ATI fglrx driver default options
-    if($card->{Driver} eq 'fglrx') {
+    if ($card->{Driver} eq 'fglrx') {
 	# $default_ATI_fglrx_config need to be move in proprietary ?
-	$card->{raw_LINES} = $default_ATI_fglrx_config if !$card->{raw_LINES};
+	$card->{raw_LINES} ||= $default_ATI_fglrx_config;
     }
 }
 
