@@ -115,7 +115,7 @@ sub main {
     my $timeout = Gtk->timeout_add(1000, sub { gtkset_mousecursor_normal(); 1 });
     my $b = before_leaving { Gtk->timeout_remove($timeout) };
     $o->show;
-    $o->{rwindow}->window->set_events(['key_press_mask', 'key_release_mask', 'exposure_mask']);
+    $o->{rwindow}->window->set_events(['key_press_mask', 'key_release_mask', 'exposure_mask']) if !$::isEmbedded;
 
     do {
 	local $::setstep = 1;
