@@ -37,7 +37,7 @@ our @tree =
          #- generic NIC detection for USB seems broken (class, subclass, 
          #- protocol report are not accurate) so I'll need to verify against
          #- known drivers :-(
-         my @usbnet = qw/CDCEther catc kaweth pegasus usbnet/;
+         my @usbnet = qw(CDCEther catc kaweth pegasus usbnet);
          # should be taken from detect_devices.pm or modules.pm. it's identical
          
          grep { $_->{media_type} =~ /^NETWORK/ || member($_->{driver}, @usbnet) || $_->{type} eq 'network' } @devices}, 1 ],
