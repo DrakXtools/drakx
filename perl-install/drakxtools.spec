@@ -334,9 +334,10 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 - drakbackup: fix dropped .txt files when running mkisofs (stew)
   (Anthill #799)
 - drakconnect (#9669):
- o prevent identification mismatch on ethtool results
- o fix card name lookup when driver does not support GDRVINFO command
-   from ETHTOOL ioctl and there's only one card managed by this driver
+  o prevent identification mismatch on ethtool results
+  o fix card name lookup when driver does not support GDRVINFO command
+    from ETHTOOL ioctl and there's only one card managed by this
+    driver
 - switch from deprecated OptionMenu into new ComboBox widget
 
 * Mon May 24 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10-36mdk
