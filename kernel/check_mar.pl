@@ -7,7 +7,7 @@ my $mar = '../mdk-stage1/mar/mar';
 
 my %sanity_check = (
     cdrom => [ 
-	qw(sym53c8xx),
+	qw(aic7xxx),
 	if_(arch() !~ /ppc|x86_64/, 'advansys'),
     ],
     all => [ 
