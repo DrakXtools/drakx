@@ -485,7 +485,7 @@ static void find_media(enum media_bus bus)
 	fd = open("/proc/scsi/scsi", O_RDONLY);
 	if (fd != -1) {
                 FILE * f;
-                char buf[512];
+                char buf[2048];
 
 		enum { SCSI_TOP, SCSI_HOST, SCSI_VENDOR, SCSI_TYPE } state = SCSI_TOP;
 		char * start, * chptr, * next, * end;
