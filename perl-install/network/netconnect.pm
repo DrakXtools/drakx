@@ -182,7 +182,7 @@ sub real_main {
 
       my $offer_to_connect = sub {
           return "ask_connect_now" if $netc->{internet_cnx_choice} eq 'adsl' && !member($adsl_type, qw(manual dhcp));
-          return "ask_connect_now" if member($netc->{internet_cnx_choice}, qw(modem isdn));
+          return "ask_connect_now" if member($netc->{internet_cnx_choice}, qw(modem isdn isdn_external));
           return "end";
       };
     
