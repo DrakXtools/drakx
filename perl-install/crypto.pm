@@ -108,6 +108,7 @@ sub bestMirror {
 sub version {
     require pkgs;
     my $pkg = pkgs::packageByName($::o->{packages}, 'mandrake-release');
+    return '8.2'; #- very dangerous but for testing waiting for post 8.2 distrib TODO
     $pkg && $pkg->version || '8.2'; #- safe but dangerous ;-)
 }
 
