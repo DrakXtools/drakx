@@ -65,7 +65,7 @@ sub handle_etcfiles {
 
 }
 
-sub handle_virtual_key {
+sub handle_virtual_key() {
     return if $key_disabled;
     if (my ($device, $file, $options) = cat_('/proc/cmdline') =~ /\bvirtual_key=([^,\s]+),([^,\s]+)(,\S+)?/) {
         log::l("using device=$device file=$file as a virtual key with options $options");
@@ -105,6 +105,7 @@ sub init {
 
     mkdir "/etc/$_" foreach qw(X11);
     touch '/etc/modules.conf';
+    touch '/etc/modprobe.conf';
     symlinkf "/proc/mounts", "/etc/mtab";
 
     #- these files need be writable but we need a sensible first contents
@@ -149,7 +150,7 @@ sub init {
     #- or O_RDWR -> in that case, they should be handled in the
     #- OVERWRITE section of data/etcfiles)
     foreach (chomp_(cat_('/image/move/all-etcfiles'))) {
-        -f or symlinkf_short("/image$_", $_);
+        -f $_ or symlinkf_short("/image$_", $_);
     }
 
     #- free up stage1 memory
@@ -158,6 +159,7 @@ sub init {
 
     #- devfsd needed for devices accessed by old names
     fs::mount("none", "/dev", "devfs", 0);
+    fs::mount("none", "/dev/pts", "devpts", 0);
     run_program::run('/sbin/devfsd', '/dev');
 
     -d '/lib/modules/' . c::kernel_version() or warn("ERROR: kernel package " . c::kernel_version() . " not installed\n"), c::_exit(1);
@@ -274,7 +276,7 @@ sub key_umount {
     eval { fs::umount_part($_) foreach key_parts($o); 1 };
 }
 
-sub machine_ident {
+sub machine_ident() {
     #- , c::get_hw_address('eth0');       before detect of network :(
     md5_hex(join '', (map { (split)[1] } cat_('/proc/bus/pci/devices')));
 }
@@ -342,7 +344,7 @@ sub key_installfiles {
     unlink($_), run_program::run('cp', "/image$_", $_) foreach qw(/etc/sudoers);
 }
 
-sub reboot {
+sub reboot() {
     output('/var/run/rebootctl', "reboot");  #- tell X_move to not respawn
     run_program::run('killall', 'X');  #- kill it ourselves to be sure that it won't lock console when killed by our init
     exit 0;
@@ -419,8 +421,8 @@ unplug it, remove write protection, and then plug it again.")),
     close F;
     unlink '/home/.touched';
 
-    my $wait = $using_existing_host_config
-               || $o->wait_message(N("Setting up USB key"), N("Please wait, setting up system configuration files on USB key..."));
+    my $_wait = $using_existing_host_config
+                || $o->wait_message(N("Setting up USB key"), N("Please wait, setting up system configuration files on USB key..."));
     key_installfiles('full');
 
     setup_userconf($o);
@@ -452,7 +454,7 @@ sub install2::configMove {
 
     $::noauto and goto after_autoconf;
 
-    my $wait = $o->wait_message(N("Auto configuration"), N("Please wait, detecting and configuring devices..."));
+    my $_wait = $o->wait_message(N("Auto configuration"), N("Please wait, detecting and configuring devices..."));
 
     #- automatic printer, timezone, network configs
     require install_steps_interactive;
@@ -470,7 +472,7 @@ sub install2::configMove {
 
 after_autoconf:
     require timezone;
-    timezone::write($o->{prefix}, $o->{timezone});
+    timezone::write($o->{timezone});
 
     $o->{useSupermount} = 1;
     fs::set_removable_mntpoints($o->{all_hds});    
@@ -479,7 +481,7 @@ after_autoconf:
     require install_any;
     install_any::write_fstab($o);
 
-    modules::write_conf('');
+    modules::write_conf();
     require mouse;
     mouse::write_conf($o, $o->{mouse}, 1);  #- write xfree mouse conf
     detect_devices::install_addons('');
@@ -636,7 +638,7 @@ sub install2::startMove {
     if (cat_('/proc/mounts') =~ m|\s/home\s|) {
         output '/var/lib/machine_ident', machine_ident();
         run_program::run('/usr/bin/etc-monitorer.pl', uniq map { dirname($_) } (chomp_(`find /etc -type f`),
-                                                                                grep { readlink !~ m|^/| } chomp_(`find /etc -type l`)));
+                                                                                grep { readlink($_) !~ m|^/| } chomp_(`find /etc -type l`)));
         run_program::raw({ detach => 1 }, '/usr/bin/dnotify', '-MCRD', '/etc', '-r', '-e', '/usr/bin/etc-monitorer.pl', '{}') or die "dnotify not found!";
     }
 
@@ -662,7 +664,7 @@ sub install2::startMove {
         $ENV{XDM_MANAGED} = '/var/run/rebootctl,maysd,mayfn,sched';  #- for reboot/halt availability of "logout" by kde
         $ENV{GDMSESSION} = 1;  #- disable ~/.xsession-errors in Xsession (waste of usb key writes)
 	$ENV{LD_LIBRARY_PATH} = "$home/lib";
-        chdir;
+        chdir $home;
 	exec 'startkde_move';
     } else {
 	exec 'xwait', '-permanent' or c::_exit(0);
@@ -686,8 +688,6 @@ sub automatic_xconf {
 	require class_discard;
 	Xconfig::main::configure_everything_auto_install($o->{raw_X}, class_discard->new, {},
                                                          { allowNVIDIA_rpms => sub { [] }, allowATI_rpms => sub { [] }, allowFB => $o->{allowFB} });
-    
-	my $card = Xconfig::card::from_raw_X($o->{raw_X});
     }
 
     my ($Driver) = cat_('/etc/X11/XF86Config-4') =~ /Section "Device".*Driver\s*"(.*?)"/s;
