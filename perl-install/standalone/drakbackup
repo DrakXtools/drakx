@@ -1,4 +1,4 @@
-#!/usr/bin/perl
+#!/usr/bin/perl -w
 #
 #  Copyright (C) 2001 MandrakeSoft by Sebastien DUPONT <dupont_s@epita.fr>
 #  Redistribution of this file is permitted under the terms of the GNU
@@ -242,6 +242,7 @@ my $cdrw_erase = 0;
 my $no_critical_sys = 1;
 my $send_mail = 0;
 my $user_mail;
+my @user_info;
 
 foreach (@ARGV) {
     /--default/ and backend_mode();
@@ -942,36 +943,37 @@ sub advanced_what{
     $up_box->show_all();
 }
 
+
 sub advanced_where_net_ftp {
     my ($previous_function) = @_,
     my $box_where_net;
     
     gtkpack($advanced_box,
-	    $box_where_net = gtkpack__(new Gtk::VBox(0, 15),
-	 new Gtk::HSeparator,
-	 my $check_where_net_ftp = new Gtk::CheckButton( _("Use FTP connection to backup") ),
-	 new Gtk::HSeparator,
-	 gtkpack_(new Gtk::HBox(0,10),
+	    $box_where_net = gtkpack_(new Gtk::VBox(0, 15),
+	 0, new Gtk::HSeparator,
+	 0, my $check_where_net_ftp = new Gtk::CheckButton( _("Use FTP connection to backup") ),
+	 0, new Gtk::HSeparator,
+	 0, gtkpack_(new Gtk::HBox(0,10),
 		     0, gtkset_sensitive(new Gtk::Label(_("Please enter the host name or IP.")), $where_net_ftp),
 		     1, new Gtk::HBox(0,10),
 		     0, gtkset_sensitive(my $host_name_entry = new Gtk::Entry(), $where_net_ftp),
 		     ),
-	 gtkpack_(new Gtk::HBox(0,10),
-	 gtkset_sensitive(new Gtk::Label(_("Please enter the directory to\n put the backup on this host.")), $where_net_ftp),
+	 0, gtkpack_(new Gtk::HBox(0,10),
+	 0, gtkset_sensitive(new Gtk::Label(_("Please enter the directory to\n put the backup on this host.")), $where_net_ftp),
 		     1, new Gtk::HBox(0,10),
 		     0, gtkset_sensitive(my $host_path_entry = new Gtk::Entry(), $where_net_ftp), 
 		     ),
-	 gtkpack_(new Gtk::HBox(0,10),
+	 0, gtkpack_(new Gtk::HBox(0,10),
 		     0, gtkset_sensitive(new Gtk::Label(_("Please enter your login")), $where_net_ftp),
 		     1, new Gtk::HBox(0,10),
 		     0, gtkset_sensitive(my $login_user_entry = new Gtk::Entry(), $where_net_ftp),
 		     ),
-	 gtkpack_(new Gtk::HBox(0,10),
+	 0, gtkpack_(new Gtk::HBox(0,10),
 		     0, gtkset_sensitive(new Gtk::Label(_("Please enter your password")),  $where_net_ftp),
 		     1, new Gtk::HBox(0,10),
 		     0, gtkset_sensitive(my $passwd_user_entry = new Gtk::Entry(), $where_net_ftp),
-		  ),
-	 gtkpack_(new Gtk::HBox(0,10),
+		     ),
+	 0, gtkpack_(new Gtk::HBox(0,10),
 	   1, new Gtk::HBox(0,10),
 	   0, gtkset_sensitive(my $check_remember_pass = new Gtk::CheckButton( _("Remember this password")), $where_net_ftp),
 		     ),
@@ -1232,15 +1234,15 @@ sub advanced_where{
 					  1, gtksignal_connect(my $button_where_net = new Gtk::Button(), clicked => sub { 
 #					      $box_where->destroy(); advanced_where_net(); }),
 					      $box_where->destroy(); advanced_where_net_ftp(); }),
-					  1, gtksignal_connect(my $button_where_cd = new Gtk::Button(),  clicked => sub { 
-					      ${$central_widget}->destroy(); 
-					      if (require_rpm("mkisofs", "cdrecord", "toto")) { advanced_where_cd(); }
-					      else { 
-						  print "have to install @list_of_rpm_to_install...\n";
-						  ${$central_widget}->destroy();
-						  install_rpm(\&advanced_where);
-						  }
-					  }),
+#					  1, gtksignal_connect(my $button_where_cd = new Gtk::Button(),  clicked => sub { 
+#					      ${$central_widget}->destroy(); 
+#					      if (require_rpm("mkisofs", "cdrecord", "toto")) { advanced_where_cd(); }
+#					      else { 
+#						  print "have to install @list_of_rpm_to_install...\n";
+#						  ${$central_widget}->destroy();
+#						  install_rpm(\&advanced_where);
+#						  }
+#					  }),
 					  1, gtksignal_connect(my $button_where_hd = new Gtk::Button(),  clicked => sub { 
 					      ${$central_widget}->destroy(); advanced_where_hd(); }),
 #					  1, gtksignal_connect(my $button_where_tape = new Gtk::Button(),  clicked => sub { 
@@ -1255,11 +1257,11 @@ sub advanced_where{
 				   new Gtk::Label(_("Network")),
 				   new Gtk::HBox(0, 5)
 				   ));
-    $button_where_cd->add(gtkpack(new Gtk::HBox(0,10),
-				  new Gtk::Pixmap($pix_cd_map, $pix_cd_mask),
-				  new Gtk::Label(_("CDROM / DVDROM")),
-				  new Gtk::HBox(0, 5)
-				  ));
+#    $button_where_cd->add(gtkpack(new Gtk::HBox(0,10),
+#				  new Gtk::Pixmap($pix_cd_map, $pix_cd_mask),
+#				  new Gtk::Label(_("CDROM / DVDROM")),
+#				  new Gtk::HBox(0, 5)
+# 				  ));
     $button_where_hd->add(gtkpack(new Gtk::HBox(0,10),
 				  new Gtk::Pixmap($pix_hd_map, $pix_hd_mask),
 				  new Gtk::Label(_("HardDrive / NFS")),
