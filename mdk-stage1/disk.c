@@ -304,7 +304,9 @@ static enum return_type try_with_device(char *dev_name)
 		stage2_isos[stage2_iso_number] = NULL;
 
 		if (stage2_iso_number > 0) {
-			results = ask_from_list("Please choose the ISO image to be used to install the " DISTRIB_NAME " Distribution, or cancel to use as a mirrored directory", stage2_isos, file);
+			results = ask_from_list("Please choose the ISO image to be used to install the " DISTRIB_NAME
+						" Distribution, or cancel to use this directory as a mirror tree.",
+						stage2_isos, file);
 			if (results == RETURN_OK) {
 				strcat(location_full, "/");
 				strcat(location_full, *file);
