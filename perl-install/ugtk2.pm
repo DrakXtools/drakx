@@ -2,7 +2,7 @@ package ugtk2;
 
 use diagnostics;
 use strict;
-use vars qw(@ISA %EXPORT_TAGS @EXPORT_OK @icon_paths $force_center $force_focus $force_position $grab $pop_it $border); #- leave it on one line, for automatic removal of the line at package creation
+use vars qw(@ISA %EXPORT_TAGS @EXPORT_OK @icon_paths $force_center_at_pos $force_center $force_focus $grab $pop_it $border); #- leave it on one line, for automatic removal of the line at package creation
 use lang;
 
 $::o = { locale => lang::read() } if !$::isInstall;
@@ -866,40 +866,51 @@ sub new {
 
 
     my $o = bless { %opts }, $type;
-    $o->_create_window($title);
     while (my $e = shift @tempory::objects) { $e->destroy }
 
-    $o->{pop_it} ||= $pop_it || !$::isWizard && !$::isEmbedded || $::WizardTable && do {
+    $o->{isWizard} ||= $::isWizard;
+    $o->{isEmbedded} ||= $::isEmbedded;
+
+    $o->{pop_it} ||= $pop_it || !$o->{isWizard} && !$o->{isEmbedded} || $::WizardTable && do {
 	my @l = $::WizardTable->get_children;
-	pop @l if !$::isInstall && $::isWizard; #- don't take into account the DrawingArea
+	pop @l if !$::isInstall && $o->{isWizard}; #- don't take into account the DrawingArea
 	any { $_->visible } @l;
     };
 
     if ($o->{pop_it}) {
+	$o->{rwindow} = _create_window($o, $title);
+
+	if ($::isInstall) {
+	    gtkadd($o->{rwindow}, 
+		   gtkadd(gtkset_shadow_type(Gtk2::Frame->new(undef), 'out'),
+			  $o->{window} = gtkset_border_width(gtkset_shadow_type(Gtk2::Frame->new(undef), 'none'), 3)
+			 ));
+	} else {
+	    $o->{window} = $o->{rwindow};
+	}
 	$o->{rwindow}->set_position('center_always') if 
-	  $::isStandalone && ($force_center || $o->{force_center}) || 
+	  $force_center || $o->{force_center} || 
 	    @interactive::objects && $::isStandalone && !$o->{transient}; #- no need to center when set_transient is used
-	push @interactive::objects, $o if !$opts{no_interactive_objects};
 	$o->{rwindow}->set_modal(1) if ($grab || $o->{grab} || $o->{modal}) && !$::isInstall;
 	$o->{rwindow}->set_transient_for($o->{transient}) if $o->{transient};
-    }
 
-    if ($::isWizard && !$o->{pop_it}) {
-	$o->{isWizard} = 1;
-	$o->{window} = Gtk2::VBox->new(0,0);
+    } elsif ($o->{isWizard}) {
+	$o->{rwindow} = $o->{window} = Gtk2::VBox->new(0,0);
 	$o->{window}->set_border_width($::Wizard_splash ? 0 : 10);
-	$o->{rwindow} = $o->{window};
 	set_main_window_size($o);
-	if (!defined($::WizardWindow) && !$::isEmbedded) {
-	    $::WizardWindow = Gtk2::Window->new('toplevel');
-	    $::WizardWindow->signal_connect(delete_event => sub { die 'wizcancel' });
-	    $::WizardWindow->signal_connect(expose_event => \&_XSetInputFocus) if $force_focus || $o->{force_focus};
 
-	    $::WizardTable = Gtk2::Table->new(2, 2, 0);
+	$::WizardTable ||= Gtk2::Table->new(2, 2, 0);
+
+	if (!$::Plug && $o->{isEmbedded}) {
+	    $::Plug = $::WizardWindow = gtkshow(Gtk2::Plug->new($::XID));
+	    flush();
+	    $::Plug->add($::WizardTable);
+	} elsif (!$::WizardWindow) {
+	    $::WizardWindow = _create_window($o, $title);
+
 	    $::WizardWindow->add(gtkadd(gtkset_shadow_type(Gtk2::Frame->new, 'out'), $::WizardTable));
 
 	    if ($::isInstall) {
-		$::WizardWindow->set_uposition($::stepswidth + $::windowwidth * 0.04 + ($::move && 50), $::logoheight + $::windowheight * ($::logoheight ? 0.12 : 0.05));
 		$::WizardWindow->signal_connect(key_press_event => sub {
 		    my (undef, $event) = @_;
 		    my $d = ${{ $Gtk2::Gdk::Keysyms{F2} => 'screenshot' }}{$event->keyval};
@@ -911,54 +922,30 @@ sub new {
 		    }
 		    0;
 		});
-	    } elsif (!$::isEmbedded) {
+	    } elsif (!$o->{isEmbedded}) {
 		my $draw1 = Gtk2::DrawingArea->new;
 		$draw1->set_size_request(540, 100);
-		my $draw2 = Gtk2::DrawingArea->new;
-		$draw2->set_size_request(100, 300);
 		my $pixbuf_up = gtkcreate_pixbuf($::Wizard_pix_up || "wiz_default_up.png");
-		my $pixbuf_left = gtkcreate_pixbuf($::Wizard_pix_left || "wiz_default_left.png");
 		$draw1->modify_font(Gtk2::Pango::FontDescription->from_string(N("utopia 25")));
 		$draw1->signal_connect(expose_event => sub {
 					   my $height = $pixbuf_up->get_height;
-					   for (my $i = 0; $i < 540/$height; $i++) {
+					   for (my $i = 0; $i < 540 / $height; $i++) {
 					       $pixbuf_up->render_to_drawable($draw1->window,
 									      $draw1->style->bg_gc('normal'),
-									      0, 0, 0, $height*$i, -1, -1, 'none', 0, 0);
+									      0, 0, 0, $height * $i, -1, -1, 'none', 0, 0);
 					       my $layout = $draw1->create_pango_layout($::Wizard_title);
 					       $draw1->window->draw_layout($draw1->style->white_gc, 40, 62, $layout);
-					   }
-				       });
-		$draw2->signal_connect(expose_event => sub {
-					   my $height = $pixbuf_left->get_height;
-					   for (my $i = 0; $i < 300/$height; $i++) {
-					       $pixbuf_left->render_to_drawable($draw2->window,
-										$draw2->style->bg_gc('normal'),
-										0, 0, 0, $height*$i, -1, -1, 'none', 0, 0);
 					   }
 				       });
 
 		$::WizardWindow->set_position('center_always') if !$::isStandalone;
 		$::WizardTable->attach($draw1, 0, 2, 0, 1, 'fill', 'fill', 0, 0);
 	    }
-	    $::WizardWindow->show_all;
-	    flush();
 	}
-	$::WizardTable->attach($o->{window}, 0, 2, 1, 2, ['fill', 'expand'], ['fill', 'expand'], 0, 0) if !$::isEmbedded;
-    }
-
-    if ($::isEmbedded && !$o->{pop_it}) {
-	$o->{isEmbedded} = 1;
-	$o->{window} = new Gtk2::HBox(0,0);
-	$o->{rwindow} = $o->{window};
-	if (!$::Plug) {
-	    $::Plug = gtkshow(Gtk2::Plug->new($::XID));
-	    flush();
-	    $::WizardTable = Gtk2::Table->new(2, 2, 0);
-	    $::Plug->add($::WizardTable);
-	}
+	$::WizardWindow->set_title($title);
+	$::WizardWindow->show_all;
+	flush();
 	$::WizardTable->attach($o->{window}, 0, 2, 1, 2, ['fill', 'expand'], ['fill', 'expand'], 0, 0);
-	$::WizardTable->show;
     }
     $o->{rwindow}->signal_connect(destroy => sub { $o->{destroyed} = 1 });
 
@@ -966,9 +953,7 @@ sub new {
 }
 sub set_main_window_size {
     my ($o) = @_;
-    my ($width, $height) = 
-      $::isInstall ? ($::windowwidth * 0.90, $::windowheight * ($::logoheight ? 0.73 : 0.9)) :
-	$o->{isWizard} ? (540, 360) : (600, 400);    
+    my ($width, $height) = $::isInstall ? (576, 418) : $o->{isWizard} ? (540, 360) : (600, 400);
     $o->{window}->set_size_request($width, $height);
 }
 
@@ -1016,16 +1001,19 @@ END { &exit() }
 sub _create_window($$) {
     my ($o, $title) = @_;
     my $w = Gtk2::Window->new('toplevel');
-    my $inner = gtkadd(gtkset_shadow_type(Gtk2::Frame->new(undef), 'out'),
-		       my $f = gtkset_border_width(gtkset_shadow_type(Gtk2::Frame->new(undef), 'none'), 3)
-		      );
-    gtkadd($w, $inner) if !$::noBorder;
+
     $w->set_name("Title");
     $w->set_title($title);
 
-    $w->signal_connect(expose_event => \&_XSetInputFocus) if $force_focus || $o->{force_focus};
-    $w->signal_connect(delete_event => sub { if ($::isWizard) { $w->destroy; die 'wizcancel' } else { Gtk2->main_quit } });
-    $w->set_uposition(@{$force_position || $o->{force_position}}) if $force_position || $o->{force_position};
+    $w->signal_connect(expose_event => \&_XSetInputFocus) if $force_focus;
+    $w->signal_connect(delete_event => sub { 
+	if ($::isWizard) {
+	    $w->destroy; 
+	    die 'wizcancel';
+	} else { 
+	    Gtk2->main_quit;
+	} 
+    });
 
     if ($::isInstall && $::o->{mouse}{unsafe}) {
 	$w->add_events('pointer-motion-mask');
@@ -1037,20 +1025,21 @@ sub _create_window($$) {
 	});
     }
 
-    my ($wi, $he);
-    $w->signal_connect(size_allocate => sub {
-	my (undef, $event) = @_;
-	my @w_size = $event->values;
-	return if $w_size[2] == $wi && $w_size[3] == $he; #BUG
-	(undef, undef, $wi, $he) = @w_size;
+    if ($force_center_at_pos) {
+	my ($wi, $he);
 
-	my ($X, $Y, $Wi, $He) = @{$force_center || $o->{force_center}};
-        $w->set_uposition(max(0, $X + ($Wi - $wi) / 2), max(0, $Y + ($He - $he) / 2));
+	$w->signal_connect(size_allocate => sub {
+	    my (undef, $event) = @_;
+	    my @w_size = $event->values;
+	    return if $w_size[2] == $wi && $w_size[3] == $he; #BUG
+	    (undef, undef, $wi, $he) = @w_size;
+	    
+	    my ($X, $Y, $Wi, $He) = @$force_center_at_pos;
+            $w->set_uposition(max(0, $X + ($Wi - $wi) / 2), max(0, $Y + ($He - $he) / 2));
+	});
+    }
 
-    }) if $::isInstall && ($force_center || $o->{force_center}) && !($force_position || $o->{force_position});
-
-    $o->{window} = $::noBorder ? $w : $f;
-    $o->{rwindow} = $w;
+    $w;
 }
 
 sub _XSetInputFocus {
