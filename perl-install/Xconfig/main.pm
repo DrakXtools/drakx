@@ -159,7 +159,14 @@ sub configure_chooser {
 
 sub configure_everything_or_configure_chooser {
     my ($in, $options, $auto, $o_keyboard, $o_mouse) = @_;
-    my $raw_X = Xconfig::xfree->read;
+    my $raw_X = eval { Xconfig::xfree->read };
+
+    if (!$raw_X) {
+	log::l("ERROR: bad X config file $@");
+	$in->ask_okcancel('',
+			  N("Your Xorg configuration file is broken, we will ignore it.")) or return;
+	$raw_X = [];
+    }
 
     if (is_empty_array_ref($raw_X)) {
 	$raw_X = Xconfig::default::configure($o_keyboard, $o_mouse);
