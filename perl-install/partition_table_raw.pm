@@ -120,6 +120,7 @@ sub zero_MBR {
     my ($hd) = @_;
     #- force the standard partition type for the architecture
     my $type = arch() eq "alpha" ? "bsd" : arch() =~ /^sparc/ ? "sun" : arch() eq "ppc" ? "mac" : "dos";
+    require("partition_table_$type.pm");
     bless $hd, "partition_table_$type";
     $hd->{primary} = $hd->clear_raw();
     delete $hd->{extended};

@@ -1,5 +1,17 @@
 2000-09-18  Pixel  <pixel@mandrakesoft.com>
 
+	* install_steps_interactive.pm (choosePartitionsToFormat): nicer
+	partition/device display
+
+	* partition_table_raw.pm (zero_MBR): add on the fly require of the
+	good partition_table_$type
+
+	* detect_devices.pm (cdroms): fix (yet again) the scd$nb device
+	assignment to ide burners
+
+	* install_steps.pm (afterInstallPackages): comment out a part of
+	the icons mess messing
+
 	* Xconfigurator.pm (cardConfiguration): move Unlisted to
 	Other/Unlisted
 	* share/CardsNames: updated (for Voodoo5)

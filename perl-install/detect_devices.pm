@@ -45,11 +45,12 @@ sub cdroms() {
     my @l = grep { $_->{type} eq 'cdrom' } get(); 
     if (my @l2 = getIDEBurners()) {
 	require modules;
-	my $nb = first(modules::add_alias('scsi_hostadapter', 'ide-scsi') =~ /(\d*)/) + 1;
+	modules::add_alias('scsi_hostadapter', 'ide-scsi');
+	my $nb = 1 + max(-1, map { $_->{device} =~ /scd(\d+)/ } @l);
 	foreach my $b (@l2) {
 	    log::l("getIDEBurners: $b");
 	    my ($e) = grep { $_->{device} eq $b } @l or next;
-	    $e->{device} = "scd" . ($nb++ || 0);
+	    $e->{device} = "scd" . $nb++;
 	}
     }
     @l;

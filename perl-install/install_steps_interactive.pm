@@ -67,7 +67,7 @@ translated etc. that varies from language to language).") if $o->{lang} !~ /^en/
     
     $o->{useless_thing_accepted} = $o->ask_from_list_('', 
 						      "License - no warranty", 
-						      [ __("Accept"), __("Refuse") ], "Accept") eq "Accept" or _exit(1) unless $o->{useless_thing_accepted};
+						      [ __("Accept"), __("Refuse") ], "Accept") eq "Accept" or $o->exit unless $o->{useless_thing_accepted};
 }
 #------------------------------------------------------------------------------
 sub selectKeyboard($) {
@@ -286,7 +286,7 @@ sub choosePartitionsToFormat($$) {
 			 isSwap($_) ? type2name($_->{type}) : $_->{mntpoint}, 
 			 isLoopback($_) ? 
                              $::expert && loopback::file($_) : 
-                             "(" . partition_table_raw::description($_) . ")") foreach @l;
+                             partition_table_raw::description($_)) foreach @l;
 
     $o->ask_many_from_list_ref('', _("Choose the partitions you want to format"),
 			       [ map { $label{$_} } @l ],

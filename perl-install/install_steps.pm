@@ -432,10 +432,10 @@ Consoles 1,3,4,7 may also contain interesting information";
 	substInFile { s/^urpmi\n//; $_ .= "urpmi\n" if eof } "$msec/group.conf" if -d $msec;
     }
 
-    #- update language and icons for KDE.
-    update_userkderc($o->{prefix}, 'Locale', Language => "");
-    log::l("updating kde icons according to available devices");
-    install_any::kdeicons_postinstall($o->{prefix});
+#    #- update language and icons for KDE.
+#    update_userkderc($o->{prefix}, 'Locale', Language => "");
+#    log::l("updating kde icons according to available devices");
+#    install_any::kdeicons_postinstall($o->{prefix});
 
     my $welcome = _("Welcome to %s", "HOSTNAME");
     substInFile { s/^(GreetString)=.*/$1=$welcome/ } "$o->{prefix}/usr/share/config/kdmrc";
