@@ -242,4 +242,8 @@ sub set_permissions {
 	or die "Could not start chmod!";
 }
 
+sub mdk_rel {
+    chomp_(cat_("/etc/mandrake-release")
+}
+
 1;

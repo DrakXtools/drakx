@@ -68,9 +68,7 @@ my @generic_tool = keys %{$mdk_app};
 my @all_drakxtools = @{ $mdk_app->{N("Standalone Tools")} };
 push(@generic_tool,@all_drakxtools);
 
-my $kernel_release = chomp_(`uname -r`);
-$kernel_release .= "";
-my $mdk_release = chomp_(cat_("/etc/mandrake-release"));
+my $kernel_release = chomp_(`uname -r`) . "";
 
 my $table = new Gtk::Table(4,2, 'TRUE');
 #$table->set_border_width(5);
@@ -88,7 +86,7 @@ $package->set_text("...");
 $table->attach(my $kernel_rel = new Gtk::Entry(), 1, 2, 2, 3, 'fill', 'fill',0,0);
 $kernel_rel->set_text($kernel_release);
 $table->attach(my $mdk_rel = new Gtk::Entry(), 1, 2, 3, 4, 'fill', 'fill',0,0);
-$mdk_rel->set_text($mdk_release);
+$mdk_rel->set_text(mdk_rel());
 
 gtkpack2__(
 	   gtkpack2__(my $vbx = new Gtk::VBox(0,5),
@@ -169,7 +167,7 @@ sub get_package {
 }
 
 sub parse_release {
-    my ($rel) = cat_('/etc/mandrake-release') =~ /release\s(\S+\s\(.*\))/;
+    my ($rel) = mdk_rel() =~ /release\s(\S+\s\(.*\))/;
     $rel;
 }
 

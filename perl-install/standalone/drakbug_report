@@ -2,12 +2,12 @@
 
 use lib qw(/usr/lib/libDrakX);
 
-use MDK::Common;
+use common;
 use any;
 
 my %other = (
     'rpm -qa' => join('', sort `rpm -qa`),
-    'mandrake version' => cat_('/etc/redhat-release'),
+    'mandrake version' => mdk_rel(),
     'df' => join('', `df`),
 );
 
