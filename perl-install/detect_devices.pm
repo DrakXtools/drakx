@@ -179,7 +179,7 @@ sub pci_probe {
     my ($probe_type) = @_;
     map {
 	my %l;
-	@l{qw(vendor id subvendor subid type driver description)} = split "\t";
+	@l{qw(vendor id subvendor subid pci_bus pci_device pci_function type driver description)} = split "\t";
 	$l{$_} = hex $l{$_} foreach qw(vendor id subvendor subid);
 	$l{bus} = 'PCI';
 	\%l
