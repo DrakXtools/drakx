@@ -700,10 +700,21 @@ sub mount {
 	    #- without knowing it, / is forced to be mounted with notail
 	    # if $where =~ m|/(boot)?$|;
 	    $mount_opt = 'notail'; #- notail in any case
+	} elsif ($fs eq 'jfs' && !$rdonly) {
+	    #- needed if the system is dirty otherwise mounting read-write simply fails
+	    run_program::run("fsck.jfs", $dev) or die "fsck.jfs failed";
 	} elsif ($fs eq 'ext2') {
-	    run_program::run("fsck.ext2", "-a", $dev);
-	    $? & 0x0100 and log::l("fsck corrected partition $dev");
-	    $? & 0xfeff and die _("fsck failed with exit code %d or signal %d", $? >> 8, $? & 255);
+	    foreach ('-a', '-y') {
+		run_program::run("fsck.ext2", $_, $dev);
+		my $err = $?;
+		if ($err & 0x0100) { log::l("fsck corrected partition $dev") }
+		if ($err & 0xfeff) {
+		    my $txt = sprintf("fsck failed on %s with exit code %d or signal %d", $dev, $err >> 8, $err & 255);
+		    $_ eq '-y' ? die($txt) : cdie($txt);
+		} else {
+		    last;
+		}
+	    }
 	}
 	if (member($fs, @fs_modules)) {
 	    eval { modules::load($fs) };
@@ -803,10 +814,9 @@ sub umount_part {
 sub mount_all($;$$) {
     my ($fstab, $prefix) = @_;
 
-    #- TODO fsck, create check_mount_all ?
     log::l("mounting all filesystems");
 
-    #- order mount by alphabetical ordre, that way / < /home < /home/httpd...
+    #- order mount by alphabetical order, that way / < /home < /home/httpd...
     foreach (sort { $a->{mntpoint} cmp $b->{mntpoint} } grep { isSwap($_) || $_->{mntpoint} && isTrueFS($_) } @$fstab) {
 	mount_part($_, $prefix);
     }

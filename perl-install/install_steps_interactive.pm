@@ -468,13 +468,18 @@ sub choosePartitionsToFormat {
 sub formatMountPartitions {
     my ($o, $fstab) = @_;
     my $w;
-    fs::formatMount_all($o->{all_hds}{raids}, $o->{fstab}, $o->{prefix}, sub {
-	my ($part) = @_;
-	$w ||= $o->wait_message('', _("Formatting partitions"));
-	$w->set(isLoopback($part) ?
-		_("Creating and formatting file %s", $part->{loopback_file}) :
-		_("Formatting partition %s", $part->{device}));
-    });
+    catch_cdie {
+        fs::formatMount_all($o->{all_hds}{raids}, $o->{fstab}, $o->{prefix}, sub {
+        	my ($part) = @_;
+        	$w ||= $o->wait_message('', _("Formatting partitions"));
+        	$w->set(isLoopback($part) ?
+        		_("Creating and formatting file %s", $part->{loopback_file}) :
+        		_("Formatting partition %s", $part->{device}));
+        });
+    } sub { 
+	$@ =~ /fsck failed on (\S+)/ or return;
+	$o->ask_yesorno('', _("Failed to check filesystem %s. Do you want to repair the errors? (beware, you can loose data)", $1), 1);
+    };
     die _("Not enough swap space to fulfill installation, please add some") if availableMemory < 40 * 1024;
 }
 
