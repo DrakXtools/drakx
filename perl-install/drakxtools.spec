@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10.2
-Release: 11mdk
+Release: 12mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -368,6 +368,10 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Wed Mar 23 2005 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.2-12mdk
+- XFdrake: fix probing on neomagic (pixel)
+- harddrake: package rpmsrate so that installing hw packages works
+
 * Tue Mar 22 2005 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.2-11mdk
 - drakconnect: do not list wifi* interfaces (blino, #14523)
 - harddrake2: install packages needed for hw support
