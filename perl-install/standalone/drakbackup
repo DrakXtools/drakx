@@ -247,7 +247,9 @@ foreach (@ARGV) {
 
 sub show_conf {
     print "DrakBakckup configuration:\n\n";
-    print cat_("$cfg_file"). "\n";
+    read_conf_file();
+    system_state();
+    print $system_state . "\n";
     exit(0);
 }
 
@@ -1611,11 +1613,12 @@ sub system_state {
         @list_other and $system_state .= "\t\t$_\n" foreach @list_other;
         $where_hd and $system_state .= _("\n- Save on Hard drive on path : %s\n", $save_path);
 	$where_net_ftp and $system_state .= _("\n- Save on FTP on host : %s\n", $host_name);
+	$where_net_ftp and $system_state .= _("\t\t user name: $login_user\n\t\t on path: $host_path \n");
 	$system_state .= _("\n- Options:\n");
 	$backup_sys or $system_state .= _("\tDo not include System Files\n");
 	if ($comp_mode) { $system_state .= _("\tBackups use tar and bzip2\n "); }
 	else { $system_state .= _("\tBackups use tar and gzip\n"); }   
-	$system_state .= _("\n- Daemon include :\n");
+	$system_state .= _("\n- Daemon ($when_space) include :\n");
 	$hd_daemon and $system_state .= _("\t-Hard drive.\n");    
 	$cd_daemon and $system_state .= _("\t-CDROM.\n");    
 	$ftp_daemon and $system_state .= _("\t-Network by FTP.\n");    
