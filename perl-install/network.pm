@@ -445,7 +445,7 @@ sub configureNetwork2 {
     $netc->{wireless_eth} and $install->('wireless-tools');
     write_conf("$etc/sysconfig/network", $netc);
     write_resolv_conf("$etc/resolv.conf", $netc);
-    write_interface_conf("$etc/sysconfig/network-scripts/ifcfg-$_->{DEVICE}", $_) foreach values %$intf;
+    write_interface_conf("$etc/sysconfig/network-scripts/ifcfg-$_->{DEVICE}", $_) foreach grep { $_->{DEVICE} } values %$intf;
     add2hosts("$etc/hosts", $netc->{HOSTNAME}, map { $_->{IPADDR} } values %$intf);
 
     grep { $_->{BOOTPROTO} =~ /^(dhcp)$/ } values %$intf and $install && $install->('dhcpcd');
