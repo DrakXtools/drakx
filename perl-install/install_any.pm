@@ -664,44 +664,6 @@ sub kderc_largedisplay {
     } $_ foreach list_skels($prefix, '.kde/share/config/kfmrc');
 }
 
-sub kdeicons_postinstall {
-    my ($prefix) = @_;
-
-    #- parse etc/fstab file to search for dos/win, floppy, zip, cdroms icons.
-    #- handle both supermount and fsdev usage.
-    my %l = (
-	     'cdrom' => [ 'cdrom', 'Cd-Rom' ],
-	     'zip' => [ 'zip', 'Zip' ],
-	     'floppy-ls' => [ 'floppy', 'LS-120' ],
-	     'floppy' => [ 'floppy', 'Floppy' ],
-    );
-    foreach (fs::read_fstab($prefix, "/etc/fstab")) {
-
-	my ($name_, $nb) = $_->{mntpoint} =~ m|.*/(\S+?)(\d*)$/|;
-	my ($name, $text) = @{$l{$name_} || []};
-
-	my $f = ${{
-	    supermount => sub { $name .= '.fsdev' if $name },
-	    vfat => sub { $name = 'Dos_'; $text = $name_ },
-	}}{$_->{type}};
-	&$f if $f;
-
-	template2userfile($prefix, 
-			  "$ENV{SHARE_PATH}/$name.kdelnk.in",
-			  "Desktop/$text" .  ($nb && " $nb") . ".kdelnk",
-			  1, %$_) if $name;
-    }
-
-    # rename the .kdelnk to the name found in the .kdelnk as kde doesn't use it
-    # for displaying
-    foreach my $dir (grep { -d $_ } list_skels($prefix, 'Desktop')) {
-	foreach (grep { /\.kdelnk$/ } all($dir)) {
-	    cat_("$dir/$_") =~ /^Name\[\Q$ENV{LANG}\E\]=(.{2,14})$/m
-	      and rename "$dir/$_", "$dir/$1.kdelnk";
-	}
-    }
-}
-
 sub kdemove_desktop_file {
     my ($prefix) = @_;
     my @toMove = qw(doc.kdelnk news.kdelnk updates.kdelnk home.kdelnk printer.kdelnk floppy.kdelnk cdrom.kdelnk FLOPPY.kdelnk CDROM.kdelnk);
