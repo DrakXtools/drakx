@@ -2222,10 +2222,10 @@ sub autodetectionentry_for_uri {
 		return $p;
 	    }
 	}
-    } elsif ($uri =~ m!^hp:/(usb|par)/!) {
+    } elsif ($uri =~ m!^hp:/(usb|par|net)/!) {
 	# HP printer (controlled by HPLIP)
 	my $hplipdevice = $uri;
-	$hplipdevice =~ m!^hp:/(usb|par)/(\S+?)(\?serial=(\S+)|)$!;
+	$hplipdevice =~ m!^hp:/(usb|par|net)/(\S+?)(\?serial=(\S+)|)$!;
 	my $model = $2;
 	my $serial = $4;
 	$model =~ s/_/ /g;
@@ -2540,6 +2540,53 @@ sub start_hplip_manual {
     }
     return @uris;
 }
+
+sub remove_hpoj_config {
+    my ($device, @autodetected) = @_;
+
+    for my $d (@autodetected) {
+	$device eq $d->{port} or next;
+	my $bus;
+	if ($device =~ /usb/) {
+	    $bus = "usb";
+	} elsif ($device =~ /par/ ||
+		 $device =~ m!/dev/lp! ||
+		 $device =~ /printers/) {
+	    $bus = "par";
+	} elsif ($device =~ /socket/) {
+	    $bus = "hpjd";
+	}
+	my $path = "$::prefix/etc/ptal";
+	opendir PTALDIR, "$path";
+	while (my $file = readdir(PTALDIR)) {
+	    next if $file !~ /^(mlc:|)$bus:/;
+	    $file = "$path/$file";
+	    if ($bus eq "hpjd") {
+		$device =~ m!^socket://(\S+?)(:\d+|)$!;
+		my $host = $1;
+		if ($file =~ /$host/) {
+		    closedir PTALDIR;
+		    unlink ($file) or return $file;
+		    printer::services::restart("hpoj");
+		    return undef;
+		} 
+	    } else {
+		if ((grep { /$d->{val}{MODEL}/ } chomp_(cat_($file))) &&
+		    ((!$d->{val}{SERIALNUMBER}) ||
+		     (grep { /$d->{val}{SERIALNUMBER}/ } 
+		      chomp_(cat_($file))))) {
+		    closedir PTALDIR;
+		    unlink ($file) or return $file;
+		    printer::services::restart("hpoj");
+		    return undef;
+		}
+	    }
+	}
+	last;
+    }
+    closedir PTALDIR;
+    return undef;
+}    
 
 sub configure_hpoj {
     my ($device, @autodetected) = @_;

@@ -2148,6 +2148,21 @@ sub setup_common {
 			};
 		}
 	    }
+	    # Remove old HPOJ configuration for this device
+	    if (-f "/usr/sbin/ptal-mlcd") { # HPOJ installed?
+		if (my $configfile =
+		    printer::main::remove_hpoj_config($device, @autodetected)) {
+		    if (!$printer->{noninteractive} && !$::noX) {
+			undef $w;
+			local $::isWizard = 0;
+			$in->ask_warn
+			    (N("Error"),
+			     N("Could not remove your old HPOJ configuration file %s for your %s! ",
+			       $configfile, $makemodel) .
+			     N("Please remove the file manually and restart HPOJ."));
+		    }
+		}
+	    }
 	    # Start HPLIP and get device URI
 	    undef $w;
 	    $w = $in->wait_message(
