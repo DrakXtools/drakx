@@ -364,7 +364,7 @@ sub _create_dialog {
     my $dialog = Gtk2::Dialog->new;
     $dialog->set_title($title);
     $dialog->set_position('center-on-parent');  # center-on-parent doesn't work
-    $dialog->set_size_request(-1, $o_options->{small} ? -1 : 400);
+    $dialog->set_size_request($o_options->{height} || -1, $o_options->{height} || -1);
     $dialog->set_modal(1);
     $dialog->set_transient_for($o_options->{transient}) if $o_options->{transient};
     $dialog;
@@ -406,21 +406,21 @@ sub create_dialog {
 sub info_dialog {
     my ($title, $label, $o_options) = @_;
     $o_options ||= { };
-    add2hash_($o_options, { small => 1, stock => 'gtk-dialog-info' });
+    add2hash_($o_options, { stock => 'gtk-dialog-info' });
     create_dialog($title, $label, $o_options);
 }
 
 sub warn_dialog {
     my ($title, $label, $o_options) = @_;
     $o_options ||= { };
-    add2hash_($o_options, { small => 1, stock => 'gtk-dialog-warning', cancel => 1 });
+    add2hash_($o_options, { stock => 'gtk-dialog-warning', cancel => 1 });
     create_dialog($title, $label, $o_options);
 }
 
 sub err_dialog {
     my ($title, $label, $o_options) = @_;
     $o_options ||= { };
-    add2hash_($o_options, { small => 1, stock => 'gtk-dialog-error' });
+    add2hash_($o_options, { stock => 'gtk-dialog-error' });
     create_dialog($title, $label, $o_options);
 }
 
