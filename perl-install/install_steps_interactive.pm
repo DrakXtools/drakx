@@ -383,12 +383,13 @@ Continue at your own risk!"));
 	    #- don't do anything if we've got the bootstrap setup
 	    #- otherwise, go ahead and create one somewhere in the drive free space
 	} else {
-	    if (defined $partition_table::mac::freepart_start && $partition_table::mac::freepart_size >= 1) {	        
-		my ($hd) = $partition_table::mac::freepart_device;
-		log::l("creating bootstrap partition on drive /dev/$hd->{device}, block $partition_table::mac::freepart_start");
-		$partition_table::mac::bootstrap_part = $partition_table::mac::freepart_part;	
+            undef = $partition_table::mac::freepart; #- please "perl -w"
+            my $freepart = $partition_table::mac::freepart;
+	    if ($freepart && $freepart->{size} >= 1) {	        
+		log::l("creating bootstrap partition on drive /dev/$freepart->{hd}{device}, block $freepart->{start}");
+		$partition_table::mac::bootstrap_part = $freepart->{part};	
 		log::l("bootstrap now at $partition_table::mac::bootstrap_part");
-		fsedit::add($hd, { start => $partition_table::mac::freepart_start, size => 1 << 11, type => 0x401, mntpoint => '' }, $o->{all_hds}, { force => 1, primaryOrExtended => 'Primary' });
+		fsedit::add($freepart->{hd}, { start => $freepart->{start}, size => 1 << 11, type => 0x401, mntpoint => '' }, $o->{all_hds}, { force => 1, primaryOrExtended => 'Primary' });
 		$new_bootstrap = 1;    
 	    } else {
 		$o->ask_warn('',_("No free space for 1MB bootstrap! Install will continue, but to boot your system, you'll need to create the bootstrap partition in DiskDrake"));
@@ -958,7 +959,7 @@ sub configureTimezone {
     ]) or goto &configureTimezone
 	    if $::expert || $clicked;
     if ($ntp) {
-	my @servers = split("\n", $timezone::ntp_servers);
+	my @servers = split("\n", timezone::ntp_servers());
 
 	$o->ask_from('', '',
 	    [ { label => _("NTP Server"), val => \$o->{timezone}{ntp}, list => \@servers, not_edit => 0 } ]

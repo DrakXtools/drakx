@@ -2,7 +2,7 @@ package timezone; # $Id$
 
 use diagnostics;
 use strict;
-use vars qw($ntp_servers);
+use vars;
 
 use common;
 use log;
@@ -157,7 +157,7 @@ sub sexProb($) {
     $nb ? $prob / $nb : 0.5;
 }
 
-$ntp_servers = 
+sub ntp_servers { 
 q(Australia (ntp.adelaide.edu.au)
 Australia (ntp.saard.net)
 Australia (time.esec.com.au)
@@ -194,5 +194,6 @@ United states IN (gilbreth.ecn.purdue.edu)
 United states IN (harbor.ecn.purdue.edu)
 United states IN (molecule.ecn.purdue.edu)
 );
+}
 
 1;

@@ -2,7 +2,7 @@ package partition_table::mac; # $Id$
 
 use diagnostics;
 #use strict;   - fixed other PPC code to comply, but program bails on empty partition table - sbenedict
-use vars qw(@ISA $freepart_device $bootstrap_part $freepart_start $freepart_size $freepart_part $macos_part);
+use vars qw(@ISA $freepart $bootstrap_part $macos_part);
 
 @ISA = qw(partition_table::raw);
 
@@ -144,14 +144,11 @@ sub read($$) {
                     $h{pName} =~ /swap/i ? ($h{type} = 0x82) : ($h{type} = 0x83);
                 } elsif ($h{pType} =~ /^Apple_Free/i) {
                 	#- need to locate a 1MB partition to setup a bootstrap on
-                	if (defined $freepart_start && $freepart_size >= 1) {
-                		#- already found a suitable partition
+                	if ($freepart && $freepart->{size} >= 1) {
+			    #- already found a suitable partition
                 	} else {
-                		$freepart_start = $h{start};
-                		$freepart_size = $h{size}/2048;
-                		$freepart_device = $hd;
-                		$freepart_part = "/dev/" . $hd->{device} . ($i+1);
-                		log::l("free apple partition found on drive /dev/$freepart_device->{device}, block $freepart_start, size $freepart_size");
+			    $freepart = { start => $h{start}, size => $h{size}/2048, hd => $hd, part => "/dev/$hd->{device}" . ($i+1) };
+			    log::l("free apple partition found on drive /dev/$freepart->{hd}{device}, block $freepart->{start}, size $freepart->{size}");
                 	}
 			$h{type} = 0x0;
 			$h{pName} = 'Extra';                    
