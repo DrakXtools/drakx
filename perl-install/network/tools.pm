@@ -35,7 +35,7 @@ sub write_secret_backend {
 
 sub unquotify {
     my ($word) = @_;
-    ($a, $b, $c) = $$word =~ /"(.*)"|'(.*)'|(.*)/;
+    my ($a, $b, $c) = $$word =~ /"(.*)"|'(.*)'|(.*)/;
     $$word = $a ? $a : $b ? $b : $c;
 }
 
@@ -63,7 +63,7 @@ sub passwd_by_login {
     unquotify \$login;
     my $secret = read_secret_backend();
     foreach (@$secret) {
-	return $_->{passwd} if ($_->{login} eq $login);
+	return $_->{passwd} if $_->{login} eq $login;
     }
 }
 

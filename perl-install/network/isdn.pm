@@ -169,7 +169,7 @@ sub isdn_read_config {
 	}
 	NEXT:
 	foreach my $f ('isdn1B.conf', 'isdn2B.conf') {
-	    foreach (cat_ ("$prefix/etc/isdn/$f")) {
+	    foreach (cat_("$prefix/etc/isdn/$f")) {
 		/^\s*EAZ\s*=\s*(.*)/ and $isdn->{phone_in} = $1;
 		/^\s*PHONE_OUT\s*=\s*(.*)/ and $isdn->{phone_out} = $1;
 		if (/^\s*NAME\s*=\s*ippp0/ .. /PPPBIND\s*=\s*0/) {
@@ -178,22 +178,22 @@ sub isdn_read_config {
 	    }
 	}
     } else {
-	my %match = (I4L_USERNAME => login,
-		     I4L_LOCALMSN => phone_in,
-		     I4L_REMOTE_OUT => phone_out,
-		     I4L_DIALMODE => dialing_mode,
-		     I4L_MODULE => driver,
-		     I4L_TYPE => type,
-		     I4L_IRQ => irq,
-		     I4L_MEMBASE => mem,
-		     I4L_PORT => io,
-		     I4L_IO0 => io0,
-		     I4L_IO1 => io1,
-		     I4L_FIRMWARE => firmware);
+	my %match = (I4L_USERNAME => 'login',
+		     I4L_LOCALMSN => 'phone_in',
+		     I4L_REMOTE_OUT => 'phone_out',
+		     I4L_DIALMODE => 'dialing_mode',
+		     I4L_MODULE => 'driver',
+		     I4L_TYPE => 'type',
+		     I4L_IRQ => 'irq',
+		     I4L_MEMBASE => 'mem',
+		     I4L_PORT => 'io',
+		     I4L_IO0 => 'io0',
+		     I4L_IO1 => 'io1',
+		     I4L_FIRMWARE => 'firmware');
 	foreach ('link/myisp', 'card/mycard') {
 	    my %conf = getVarsFromSh("$prefix/etc/isdn/profile/$_");
 	    foreach (keys %conf) {	 
-		$isdn->{$match{"$_"}} = $conf{"$_"} if $match{$_};
+		$isdn->{$match{$_}} = $conf{$_} if $match{$_};
 	    }
 	}
     }

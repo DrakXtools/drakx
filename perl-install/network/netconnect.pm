@@ -398,7 +398,7 @@ PPPConnectionName=$modem->{connection}
 PPPProviderDomain=$modem->{domain}
 PPPLogin=$modem->{login}
 PPPAuthentication=$modem->{auth}
-PPPSpecialCommand=" . ($netcnx->{type} eq 'isdn_external' ? $netcnx->{isdn_external}{special_command} : '') if ($conf{modem});
+PPPSpecialCommand=" . ($netcnx->{type} eq 'isdn_external' ? $netcnx->{isdn_external}{special_command} : '') if $conf{modem};
 
     $str .= "
 ADSLInterfacesList=
@@ -407,7 +407,7 @@ ADSLType=" . ($netcnx->{type} =~ /adsl/ ? $netcnx->{type} : '') . "
 ADSLProviderDomain=$netc->{DOMAINNAME2}
 ADSLLogin=$adsl->{login}
 " . #ADSLPassword=$adsl->{passwd}
-"DOMAINNAME2=$netc->{DOMAINNAME2}" if ($conf{adsl});
+"DOMAINNAME2=$netc->{DOMAINNAME2}" if $conf{adsl};
 
     output_with_perm("$prefix/etc/sysconfig/network-scripts/drakconnect_conf", 0600, $str);
     my $a = $netcnx->{PROFILE} ? $netcnx->{PROFILE} : "default";
