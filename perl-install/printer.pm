@@ -112,7 +112,7 @@ sub set_permissions {
     # We only need to set the permissions during installation to be able to
     # print test pages. After installation the devfsd daemon does the business
     # automatically.
-    if (!$isInstall) {return 1;}
+    if (!$::isInstall) {return 1;}
     if ($owner && $group) {
         run_program::rooted($prefix, "/bin/chown", "$owner.$group", $file)
 	    || die "Could not start chown!";
