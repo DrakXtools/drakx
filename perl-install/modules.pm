@@ -248,8 +248,8 @@ sub mergein_conf {
 }
 
 sub write_conf() {
-    my $file = "$prefix/etc/modules.conf";
-    rename "$prefix/etc/conf.modules", $file; #- make the switch to new name if needed
+    my $file = "$::prefix/etc/modules.conf";
+    rename "$::prefix/etc/conf.modules", $file; #- make the switch to new name if needed
 
     #- Substitute new aliases in modules.conf (if config has changed)
     substInFile {
@@ -286,11 +286,11 @@ sub write_conf() {
     my @l;
     push @l, 'scsi_hostadapter' if !is_empty_array_ref($conf{scsi_hostadapter}{probeall});
     push @l, 'bttv' if any { $_->{driver} eq 'bttv' } detect_devices::probeall();
-    append_to_modules_loaded_at_startup("$prefix/etc/modules", @l);
-    append_to_modules_loaded_at_startup("$prefix/etc/modprobe.preload", @l);
+    append_to_modules_loaded_at_startup("$::prefix/etc/modules", @l);
+    append_to_modules_loaded_at_startup("$::prefix/etc/modprobe.preload", @l);
 
     #- use module-init-tools script for the moment
-    run_program::rooted($::prefix, "/sbin/generate-modprobe.conf", ">", "/etc/modprobe.conf") if -e "$prefix/etc/modprobe.conf";
+    run_program::rooted($::prefix, "/sbin/generate-modprobe.conf", ">", "/etc/modprobe.conf") if -e "$::prefix/etc/modprobe.conf";
 }
 
 sub append_to_modules_loaded_at_startup {
