@@ -96,6 +96,11 @@ static enum return_type try_with_device(char *dev_name)
 	parts[i] = NULL;
 	fclose(f);
 
+	if (parts[0] == NULL) {
+		error_message("No partitions found.");
+		return RETURN_ERROR;
+	}
+
 	results = ask_from_list_comments("Please choose the partition where is copied the " DISTRIB_NAME " Distribution.",
 					 parts, parts_comments, &choice);
 	if (results != RETURN_OK)
