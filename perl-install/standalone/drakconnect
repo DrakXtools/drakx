@@ -578,6 +578,11 @@ Create one first by clicking on 'Configure'")),1,1,0);
 @mask = (0,0,0,0,0,0,1,0,1,1,1,1,0,0,0,0,0,0,0,0,0,0,1,0,0,0) if $netcnx->{type} =~ /adsl/;
 @mask = (0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0) if $netcnx->{type} eq 'cable';
 
+    #- duplicated code (waiting for 9.1 to be out to merge everything correctly, avoid bug elsewhere).
+    if ($netcnx->{type} =~ /adsl/) {
+	require network::adsl;
+	network::adsl::adsl_probe_info($cnx, $netc, $intf, undef);
+    }
     my @conf_data = ([ N("Card IRQ"), \$cnx->{irq} ],
 		     [ N("Card mem (DMA)"), \$cnx->{mem} ],
 		     [ N("Card IO"), \$cnx->{io} ],
