@@ -123,7 +123,7 @@ TTY_WARN => N("if set to yes, reports check result to tty."),
 
 'set_shell_history_size' => N("Set shell commands history size. A value of -1 means unlimited."),
 
-'set_shell_timeout' => N("Set the shell timeout. A value of zero means no timeout."),
+'set_shell_timeout' => N("Set the shell timeout. A value of zero means no timeout.") . "\n\n" . N("Timeout unit is second"),
 
 'set_user_umask' => N("Set the user umask."),
 );
