@@ -3,6 +3,53 @@
 	* network/adsl.pm, network/tools.pm: corrected speedtouch
 
 	* install_gtk.pm: removed comments
+
+2001/09/06  François Pons  <fpons@mandrakesoft.com>
+
+	* Xconfigurator.pm: cleanup for bad card and prefer XF3, so now using
+	XFree 4.1.0 is not bad, and
+	all NVIDIA card are no more considered bad.
+	avoid using @resolutions_laptop, now use only @resolutions, this means
+	1400x1050
+	is available to other, use XFree86 4.1.0 builtin timings for 1400x1050
+	(so
+	1400x1050 is no more printed as modeline for XFree 4.1.0 configuration
+	file).
+
+	* install_steps.pm: removed some cards for allowing frame buffer.
+	fix log when configuring printer queue.
+
+	* Xconfigurator_consts.pm: added 1400, 1920 and 2048 for %min_hsync4wres.
+	cleaned up a bit and using XFree86 4.1.0 builtin timings for 1400x1050
+	and
+	1920x1440, 2048x1536 has no modeline (but its min hsync is really high).
+
+	* pkgs.pm: fixed retry of package 3 times everytime even if first install
+	succeeded, now
+	after first successfull install, go to next package to install.
+
+	* install_any.pm: update printer data for g_auto_install.
+
+2001/09/06  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* standalone/drakgw: works now ;p
+
+2001/09/06  Pixel  <pixel@mandrakesoft.com>
+
+	* install2.pm: fix keyboard config + some cleanup
+	cleanup (use /proc/self instead of /proc/$$)
+
+	* install_steps.pm, install_steps_interactive.pm, keyboard.pm: fix
+	keyboard config + some cleanup
+
+	* fs.pm (merge_fstabs): correction allowing manual_fstab to not give the
+	type
+
+2001/09/06  dam's  <damien@mandrakesoft.com>
+
+	* network/adsl.pm, network/tools.pm: corrected speedtouch
+
+	* install_gtk.pm: removed comments
 	new mouse test
 
 2001/09/06  François Pons  <fpons@mandrakesoft.com>
