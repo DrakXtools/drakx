@@ -6,7 +6,7 @@ use vars qw(@ISA %EXPORT_TAGS @EXPORT_OK @important_types @fields2save);
 
 @ISA = qw(Exporter);
 %EXPORT_TAGS = (
-    types => [ qw(type2name type2fs name2type fs2type isExtended isExt2 isSwap isDos isWin isFat isPrimary isNfs) ],
+    types => [ qw(type2name type2fs name2type fs2type isExtended isExt2 isSwap isDos isWin isFat isPrimary isNfs isRAID) ],
 );
 @EXPORT_OK = map { @$_ } values %EXPORT_TAGS;
 
@@ -167,6 +167,7 @@ sub name2type($) {
 }
 
 sub isExtended($) { $_[0]{type} == 5 || $_[0]{type} == 0xf }
+sub isRAID($) { $_[0]{type} == 0xfd }
 sub isSwap($) { $type2fs{$_[0]{type}} eq 'swap' }
 sub isExt2($) { $type2fs{$_[0]{type}} eq 'ext2' }
 sub isDos($) { $ {{ 1=>1, 4=>1, 6=>1 }}{$_[0]{type}} }
@@ -219,7 +220,7 @@ sub verifyInside($$) {
 
 sub verifyParts_ {
     foreach my $i (@_) { foreach (@_) {
-	$i != $_ and verifyNotOverlap($i, $_) || die "partitions $i->{start} $i->{size} and $_->{start} $_->{size} are overlapping!";
+	$i != $_ and verifyNotOverlap($i, $_) || cdie "partitions sector #$i->{start} ($i->{size}bytes) and sector #$_->{start} ($_->{size}bytes) are overlapping!";
     }}
 }
 sub verifyParts($) {
@@ -293,6 +294,8 @@ sub adjust_main_extended($) {
 
 sub get_normal_parts($) {
     my ($hd) = @_;
+
+    $hd->{raid} and return grep {$_} @{$hd->{raid}};
 
     @{$hd->{primary}{normal} || []}, map { $_->{normal} } @{$hd->{extended} || []}
 }

@@ -172,9 +172,11 @@ sub getHds {
   getHds: 
     $o->{hds} = catch_cdie { fsedit::hds(\@drives, $o->{partitioning}) }
       sub {
-	$o->ask_warn(_("Error"),
-_("I can't read your partition table, it's too corrupted for me :(
-I'll try to go on blanking bad partitions")) unless $o->{partitioning}{readonly};
+	my ($err) = $@ =~ /(.*) at /;
+	$@ =~ /overlapping/ and $o->ask_warn('', $@), return 1;
+	$o->ask_okcancel(_("Error"),
+[_("I can't read your partition table, it's too corrupted for me :(
+I'll try to go on blanking bad partitions"), $err]) unless $o->{partitioning}{readonly};
 	$ok = 0; 1 
     };
 
@@ -339,7 +341,7 @@ sub unlockCdroms() {
       foreach detect_devices::cdroms();
 }
 sub ejectCdrom() {
-    ioctl detect_devices::tryOpen($_), c::CDROMEJECT(), 1
+    eval { ioctl detect_devices::tryOpen($_), c::CDROMEJECT(), 1 }
       foreach map { first split } grep { m|/tmp/rhimage| } cat_("/proc/mounts");
 }
 

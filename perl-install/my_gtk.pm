@@ -239,19 +239,20 @@ sub create_menu($@) {
     $w
 }
 
+sub add2notebook {
+    my ($n, $title, $book) = @_;
+
+    my ($w1, $w2) = map { new Gtk::Label($_) } $title, $title;
+    $book->{widget_title} = $w1;
+    $n->append_page_menu($book, $w1, $w2);
+    $book->show;
+    $w1->show;
+    $w2->show;
+}
+
 sub create_notebook(@) {
     my $n = new Gtk::Notebook;
-    while (@_) {
-	my $title = shift;
-	my $book = shift;
-
-	my ($w1, $w2) = map { new Gtk::Label($_) } $title, $title;
-	$book->{widget_title} = $w1;
-	$n->append_page_menu($book, $w1, $w2);
-	$book->show;
-	$w1->show;
-	$w2->show;
-    }
+    add2notebook($n, splice(@_, 0, 2)) while @_;
     $n
 }
 

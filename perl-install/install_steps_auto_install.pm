@@ -23,7 +23,7 @@ sub ask_warn {
     log::l(ref $_[1] ? join " ", @{$_[1]} : $_[1]);
 }
 
-sub errorInStep { 
+sub errorInStep {
     print "error :(\n"; 
     print "switch to console f2 for a shell\n";
     print "press to return to reboot\n";

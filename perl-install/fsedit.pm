@@ -94,6 +94,12 @@ sub get_fstab(@) {
     map { partition_table::get_normal_parts($_) } @_;
 }
 
+sub hasRAID {
+    my $b = 0;
+    map { $b ||= isRAID($_) } get_fstab(@_);
+    $b;
+}
+
 sub get_root($) {
     my ($fstab) = @_;
     $_->{mntpoint} eq "/" and return $_ foreach @$fstab;

@@ -235,7 +235,7 @@ sub write_fstab($;$$) {
 
 	  #- tested? devices::make("$prefix/$dir$_->{device}") if $_->{device} && $dir && !$_->{noMakeDevice};
 	  eval { devices::make("$prefix/$dir$_->{device}") } if $_->{device} && $dir;
-	  mkdir "$prefix/$_->{mntpoint}", 0755 if $_->{mntpoint};
+	  mkdir "$prefix/$_->{mntpoint}", 0755 if $_->{mntpoint} && !isSwap($_);
 
 	  [ ( $_->{device} =~ /^\// ? $_->{device} : "$dir$_->{device}" ),
 	    $_->{mntpoint}, type2fs($_->{type}), $options, $freq, $passno ];

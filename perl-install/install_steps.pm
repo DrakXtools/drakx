@@ -15,6 +15,7 @@ use modules;
 use run_program;
 use lilo;
 use lang;
+use raid;
 use keyboard;
 use printer;
 use pkgs;
@@ -166,7 +167,7 @@ sub choosePartitionsToFormat($$) {
 sub formatPartitions {
     my $o = shift;
     foreach (@_) {
-	fs::format_part($_) if $_->{toFormat};
+	raid::format_part($o->{raid}, $_) if $_->{toFormat};
     }
 }
 

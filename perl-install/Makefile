@@ -82,8 +82,6 @@ install_pms: $(DIRS)
 	cp *.rc $(DESTREP4PMS)
 	install -d $(DESTREP4PMS)/po
 	cp -f po/*.po* $(DESTREP4PMS)/po ||:
-	ln -sf perl-install/install2 $(DEST)/usr/bin
-	ln -sf perl-install/commands $(DEST)/usr/bin
 	chmod a+x $(DESTREP4PMS)/install2
 	chmod a+x $(DESTREP4PMS)/commands
 	chmod a+x $(DESTREP4PMS)/XFdrake
@@ -133,7 +131,7 @@ get_needed_files: $(DIRS)
 	cd $(DEST)/usr/bin ; mv insmod insmod_
 	rmdir $(DEST)/bin $(DEST)/sbin
 
-	ln -sf ash $(DEST)/usr/bin/sh
+	perl -ane 'symlink "$$F[1]", "$(DEST)/usr/bin/$$F[0]"' aliases
 
 	tar xfy locales.tar.bz2 -C $(DEST)
 #	DEST=$(DEST) perl -I. -MForMakefile -e 'locale()'
@@ -155,7 +153,6 @@ get_needed_files: $(DIRS)
 		cp -f ../modules/pristine/* $(DEST)/lib/modules ||: ; \
 	fi
 
-	ln -s install2 $(DEST)/usr/bin/runinstall2
 #	echo -e "#!/bin/sh\n\nexec '/usr/bin/sh'" > $(DEST)/usr/bin/runinstall2
 #	chmod a+x $(DEST)/usr/bin/runinstall2
 

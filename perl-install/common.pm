@@ -6,9 +6,9 @@ use vars qw(@ISA %EXPORT_TAGS @EXPORT_OK $printable_chars $sizeof_int $bitof_int
 
 @ISA = qw(Exporter);
 %EXPORT_TAGS = (
-    common     => [ qw(__ even odd min max sqr sum sign product bool invbool listlength bool2text text2bool to_int to_float ikeys member divide is_empty_array_ref is_empty_hash_ref add2hash add2hash_ set_new set_add round round_up round_down first second top uniq translate untranslate warp_text formatAlaTeX formatLines) ],
+    common     => [ qw(__ even odd min max sqr sum and_ or_ sign product bool invbool listlength bool2text text2bool to_int to_float ikeys member divide is_empty_array_ref is_empty_hash_ref add2hash add2hash_ set_new set_add round round_up round_down first second top uniq translate untranslate warp_text formatAlaTeX formatLines) ],
     functional => [ qw(fold_left compose map_index grep_index map_each grep_each map_tab_hash mapn mapn_ difference2 before_leaving catch_cdie cdie) ],
-    file       => [ qw(dirname basename touch all glob_ cat_ symlinkf chop_ mode typeFromMagic) ],
+    file       => [ qw(dirname basename touch all glob_ cat_ output symlinkf chop_ mode typeFromMagic) ],
     system     => [ qw(sync makedev unmakedev psizeof strcpy gettimeofday syscall_ salt getVarsFromSh setVarsInSh setVarsInCsh substInFile availableRam availableMemory removeXiBSuffix template2file) ],
     constant   => [ qw($printable_chars $sizeof_int $bitof_int $SECTORSIZE) ],
 );
@@ -42,6 +42,8 @@ sub odd($)  { $_[0] % 2 == 1 }
 sub min { fold_left { $a < $b ? $a : $b } @_ }
 sub max { fold_left { $a > $b ? $a : $b } @_ }
 sub sum { fold_left { $a + $b } @_ }
+sub and_{ fold_left { $a && $b } @_ }
+sub or_ { fold_left { $a || $b } @_ }
 sub sqr { $_[0] * $_[0] }
 sub sign { $_[0] <=> 0 }
 sub product { fold_left { $a * $b } @_ }
@@ -64,6 +66,7 @@ sub bool2text { $_[0] ? "true" : "false" }
 sub text2bool { my $t = lc($_[0]); $t eq "true" || $t eq "yes" ? 1 : 0 }
 sub strcpy { substr($_[0], $_[2] || 0, length $_[1]) = $_[1] }
 sub cat_ { local *F; open F, $_[0] or $_[1] ? die "cat of file $_[0] failed: $!\n" : return; my @l = <F>; wantarray ? @l : join '', @l }
+sub output { my $f = shift; local *F; open F, ">$f" or die "output in file $f failed: $!\n"; print F foreach @_; }
 sub linkf { unlink $_[1]; link $_[0], $_[1] }
 sub symlinkf { unlink $_[1]; symlink $_[0], $_[1] }
 sub chop_ { map { my $l = $_; chomp $l; $l } @_ }

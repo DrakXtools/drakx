@@ -21,6 +21,7 @@ use run_program;
 use commands;
 use fsedit;
 use network;
+use raid;
 use mouse;
 use modules;
 use lang;
@@ -36,7 +37,7 @@ use lilo;
 #-######################################################################################
 sub errorInStep($$) {
     my ($o, $err) = @_;
-    $err =~ s/(.*) at .*?$/$1\./ unless $::testing; #- avoid error message.
+    $err =~ s/ at .*?$/\./ unless $::testing; #- avoid error message.
     $o->ask_warn(_("Error"), [ _("An error occurred"), $err ]);
 }
 
@@ -211,7 +212,7 @@ sub formatPartitions {
     foreach (@_) {
 	if ($_->{toFormat}) {
 	    $w->set(_("Formatting partition %s", $_->{device}));
-	    fs::format_part($_);
+	    raid::format_part($o->{raid}, $_);
 	}
     }
 }
@@ -595,7 +596,7 @@ _("Use NIS") => { val => \$o->{authentification}{NIS}, type => 'bool', text => _
 			 ], 
 			 complete => sub {
 			     $sup->{password} eq $sup->{password2} or $o->ask_warn('', [ _("The passwords do not match"), _("Please try again") ]), return (1,1);
-			     length $sup->{password} < ($o->{security} > 3 ? 10 : 6)
+			     length $sup->{password} < 2 * $o->{security}
 			       and $o->ask_warn('', _("This password is too simple")), return (1,0);
 			     return 0
 			 }

@@ -230,7 +230,7 @@ sub readCompssList($$$) {
 	$e or log::l("neither packages nor categories");
 	my $p = $e->{$name} or log::l("unknown entry $name (in compssList)"), next;
 
-	@values = map { $_ + 40 } @values if $name =~ /$s$r$/i;
+	@values = map { $_ + 68 } @values if $name =~ /$s$r$/i;
 	$p->{values} = \@values;
     }
     $level;
