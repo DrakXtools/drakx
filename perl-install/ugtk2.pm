@@ -21,7 +21,7 @@ use vars qw(@ISA %EXPORT_TAGS @EXPORT_OK @icon_paths $force_center $force_focus 
 
     create => [ qw(create_adjustment create_box_with_title create_dialog create_factory_menu create_factory_popup_menu
                    create_hbox create_hpaned create_menu create_notebook create_okcancel create_packtable
-                   create_scrolled_window create_vbox create_vpaned destroy_window ) ],
+                   create_scrolled_window create_vbox create_vpaned destroy_window _create_dialog ) ],
 
     ask => [ qw(ask_browse_tree_info ask_browse_tree_info_given_widgets ask_dir ask_from_entry ask_okcancel ask_warn
                 ask_yesorno ) ],
@@ -355,16 +355,24 @@ sub create_box_with_title {
     }
 }
 
+sub _create_dialog {
+    my ($title, $o_options) = @_;
+    my $dialog = Gtk2::Dialog->new;
+    $dialog->signal_connect(delete_event => sub { Gtk2->main_quit });
+    $dialog->set_title($title);
+    $dialog->set_position('center-on-parent');  # center-on-parent doesn't work
+    $dialog->set_size_request(-1, 400) if !$o_options->{small};
+    $dialog->set_modal(1);
+    $dialog;
+}
+
+
 # drakfloppy / drakfont / harddrake2
 sub create_dialog {
     my ($title, $label, $o_options) = @_;
     my $ret = 0;
-    my $dialog = Gtk2::Dialog->new;
-    $dialog->signal_connect(delete_event => sub { Gtk2->main_quit });
-    $dialog->set_title($title);
+    my $dialog = _create_dialog($title, $o_options);
     $dialog->set_border_width(10);
-    $dialog->set_position('center-on-parent');  # center-on-parent doesn't work
-    $dialog->set_size_request(-1, 400);
     my $text = $o_options->{use_markup} ? gtkset_markup(Gtk2::Label->new(), $label) : Gtk2::Label->new($label);
     $dialog->vbox->pack_start(create_scrolled_window($text, [ 'never', 'automatic' ]), 1, 1, 0);
     $text->set_line_wrap(1);
@@ -383,7 +391,6 @@ sub create_dialog {
     }
 
     $dialog->show_all;
-    $dialog->set_modal(1);
     Gtk2->main;
     $ret;
 }
