@@ -385,7 +385,7 @@ sub choosePackages {
     log::l("max size (level $min_mark) is : " . formatXiB($max_size));
     pkgs::restoreSelected($b);
 
-    $o->chooseGroups($packages, $compssUsers, $min_mark, \$individual, $max_size) unless $o->{isUpgrade} || $::corporate;
+    $o->chooseGroups($packages, $compssUsers, $min_mark, \$individual, $max_size) if !$o->{isUpgrade} && !$::corporate;
 
     ($o->{packages_}{ind}) =
       pkgs::setSelectedFromCompssList($packages, $o->{compssUsersChoice}, $min_mark, $availableC);
