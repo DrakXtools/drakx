@@ -107,7 +107,7 @@ my $keep_logo = 1;
 
 if (-r $themes{sysconfig}) {
     local $_;
-    while (cat_("$themes{sysconfig}") {
+    foreach (cat_("$themes{sysconfig}")) {
 	/^SPLASH=no/ and $splash_mode = 0;
 	/^THEME=(.*)/ and  -f "$themes{path}$1$themes{boot}{path}bootsplash-$cur_res.jpg" and $themes{default} = $1;
 	/^LOGO_CONSOLE=(.*)/ and $keep_logo = $1 ne 'no';
