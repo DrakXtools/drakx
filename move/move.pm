@@ -15,7 +15,7 @@ use log;
 sub init {
     #- rw things
     mkdir "/$_" foreach qw(home mnt root etc var);
-    mkdir_p "/var/$_" foreach qw(log run spool lib/xkb lock/subsys);
+    mkdir_p "/var/$_" foreach qw(log run/console spool lib/xkb lock/subsys);
     mkdir_p "/etc/$_" foreach qw(X11);
     touch '/etc/modules.conf';
     symlinkf "/proc/mounts", "/etc/mtab";
@@ -26,6 +26,8 @@ sub init {
                  DIR_COLORS bashrc profile profile.d rc.d init.d devfsd.conf devfs gtk-2.0 pango fonts modules.devfs 
                  dynamic gnome-vfs-2.0 gnome-vfs-mime-magic gtk gconf menu menu-methods nsswitch.conf default login.defs 
                  skel ld.so.cache);
+    symlinkf "/image/etc/X11/$_", "/etc/X11/$_" foreach qw(encodings.dir app-defaults applnk fs lbxproxy proxymngr rstart wmsession.d xinit.d xinit xkb xserver xsm);
+
 
     #- free up stage1 memory
     fs::umount($_) foreach qw(/stage1/proc /stage1);
