@@ -516,7 +516,7 @@ msgstr "Aktiver ACPI"
 #: ../../any.pm:1
 #, c-format
 msgid "Delay before booting default image"
-msgstr "Forsinkelse før oppstart av standard bilde"
+msgstr "Forsinkelse før man starter opp med standard imagefil"
 
 #: ../../any.pm:1
 #, c-format
@@ -1617,7 +1617,7 @@ msgid ""
 msgstr ""
 "Denne dialogen lar deg finjustere din oppstartslaster:\n"
 "\n"
-" * \"Oppstartslaster å bruke:\": du har tre valg:\n"
+" * \"Oppstartslaster som skal brukes:\": du har tre valg:\n"
 "\n"
 "    * \"GRUB\": hvis du foretrekker grub (tekstmeny);\n"
 "\n"
@@ -1630,11 +1630,11 @@ msgstr ""
 " * * \"Oppstartsenhet\": I de fleste tilfeller, så vil du ikke endre\n"
 "standard (\"/dev/hda\"), men hvis du foretrekker det, så kan "
 "oppstartslasteren\n"
-"installert på en annen harddisk (feks. \"/dev/hdb\"), eller til og med. på "
+"installeres på en annen harddisk (feks. \"/dev/hdb\"), eller til og med. på "
 "en\n"
 "diskett (\"/dev/fd0\");\n"
 "\n"
-" * * \"Forsinkelse før man starter opp med standard image\": når du "
+" * * \"Forsinkelse før man starter opp med standard imagefil\": når du "
 "restarter\n"
 "maskinen, så er dette hvor lang tid brukeren har på å velge ett annet valg\n"
 "enn det som er standard.\n"
@@ -1769,7 +1769,7 @@ msgid ""
 msgstr ""
 "DrakX oppdager vanligvis antall knapper på musen din. Hvis ikke, så vil den\n"
 "anta at du har en to-knappers mus og vil sette opp treknappers-emulering.\n"
-"Dem tredje museknappen kan på en toknappers mus kan bli brukt ved å\n"
+"Den tredje museknappen kan på en toknappers mus kan bli brukt ved å\n"
 "trykke ned både høyre og venstre museknapp samtidig. DrakX vil\n"
 "automatisk oppdage om din mus bruker PS/2, seriell eller USB-grensesnitt.\n"
 "\n"
@@ -1784,9 +1784,9 @@ msgstr ""
 "Noen ganger så blir ikke musehjulet automatisk oppdaget. Du vil da måtte\n"
 "velge manuelt fra listen. Vær sikker på at du velger en som er på riktig "
 "port.\n"
-"Etter at du har klikket på \"Neste ->\" knappen, så vil et musebilde bli "
+"Etter at du har klikket på \"Neste ->\" knappen så vil et musebilde bli "
 "vist. Du\n"
-"må da bevege musehjulet for å aktivere det riktig. Så sjekk om at alle "
+"må da bevege musehjulet for å aktivere det riktig. Så sjekk at alle "
 "knappene\n"
 "og bevegelsene er riktig."
 
@@ -1937,9 +1937,9 @@ msgid ""
 msgstr ""
 "\"Land\": Sjekk ditt valg av land. Dersom du ikke befinner deg i dette "
 "landet,\n"
-"Klikk på \"Konfigurer\" knappen og velg et annet. Dersom ditt lanf ikke er "
+"Klikk på \"Konfigurer\" knappen og velg et annet. Dersom ditt land ikke er "
 "i\n"
-"den første lista, klikk \"Mer\" knappen for å få den fullstendige lista. "
+"den første lista, klikk på \"Mer\" knappen for å få den fullstendige lista. "
 
 #: ../../help.pm:1
 #, c-format
@@ -2184,7 +2184,7 @@ msgstr ""
 "Men, et høyere sikkerhetsnivå går gjerne på beskostning av "
 "brukervennligheten.\n"
 "\n"
-"Hvis du ikke vet hva du skal velge, behold standard valget."
+"Hvis du ikke vet hva du skal velge, behold standardvalget."
 
 #: ../../help.pm:1
 #, c-format
@@ -2516,7 +2516,7 @@ msgid ""
 msgstr ""
 "Skjerm\n"
 "\n"
-"   Installasjonsrutinen kan vanligvis automatisk detektere og sette opp\n"
+"   Installasjonsrutinen kan vanligvis automatisk oppdage og sette opp\n"
 "skjermen som er koblet til maskinen din. Dersom dette ikke fungerer, kan\n"
 "du velge fra denne lista hvilken skjerm du har. "
 
@@ -2576,14 +2576,15 @@ msgid ""
 "in getting the display configured."
 msgstr ""
 "X (X Window System) er hjertet i GNU/Linux sitt grafiske grensesnitt som\n"
-"alle de grafiske miljøene (KDE, GNOME Afterstep, Windowmaker etc)\n"
+"alle de grafiske miljøene (KDE, GNOME Afterstep, Windowmaker etc.)\n"
 "som følger med GNU/Linux er avhengige av.\n"
 "\n"
-"Du vil få en liste med forkjellige parameter som kan forandres for å få et\n"
+"Du vil få en liste med forkjellige parametre som kan forandres for å få et\n"
 "optimalt grafisk grensesnitt.\n"
 "\n"
 "Skjermkort\n"
-"   Installasjonsrutinen kan vanligvis detektere og konfigurere skjermkortet\n"
+"   Installasjonsrutinen kan vanligvis automatisk oppdage og konfigurere "
+"skjermkortet\n"
 "som er installert i din maskin. Dersom dette ikke er mulig, kan du velge \n"
 "kortet fra denne listen manuelt.\n"
 "\n"
@@ -2596,7 +2597,8 @@ msgstr ""
 "\n"
 "Skjerm\n"
 "\n"
-"Installasjonsrutinen kan normalt detektere og konfigurere skjermen som\n"
+"Installasjonsrutinen kan normalt automatisk oppdage og konfigurere skjermen "
+"som\n"
 "er koblet til skjermkortet. Hvis dette ikke er mulig, kan du velge fra "
 "listen\n"
 "hvilken skjerm du har.\n"
@@ -2610,12 +2612,12 @@ msgstr ""
 "er tilgjengelige for din maskinvare. Velg den kombinasjonen som best passer\n"
 "dine behov (Du kan forandre dette etter installasjon). En prøve av den "
 "valgte\n"
-"konfigurasjonen vil vises i skjermen,\n"
+"konfigurasjonen vil vises i skjermen.\n"
 "\n"
 "\n"
 "\n"
 "   Systemet vil forsøke å starte det grafiske grensesnittet i den valgte\n"
-"oppløsningen. Dersom du kan se meldingen som vises under teste og \n"
+"oppløsningen. Dersom du kan se meldingen som vises under testen og \n"
 "svarer \"Ja\" Vil DrakX fortsette til neste trinn. Hvis du ikke kan se "
 "meldingen\n"
 "betyr det at en del av konfigurasjonen er gal, og testen vil avsluttes etter "
@@ -2650,7 +2652,7 @@ msgid ""
 msgstr ""
 "Skjermkort\n"
 "\n"
-"   Installasjonsrutinenkan vanligvis automatisk finne og sette opp "
+"   Installasjonsrutinen kan vanligvis automatisk finne og sette opp "
 "skjermkortet\n"
 "som er installert i maskinen din. Hvis dette ikke lar seg gjøre, kan du "
 "velge\n"
@@ -2773,7 +2775,7 @@ msgstr ""
 "Du kan nå sette opp din internett/nettverksforbindelse. Hvis du ønsker\n"
 "å koble maskinen din til internett eller et lokalt nettverk, klikk \"Neste ->"
 "\".\n"
-"Mandrake Linux vil forsøke å autodetektere dine nettverksenheter og\n"
+"Mandrake Linux vil forsøke å automatisk oppdage dine nettverksenheter og\n"
 "modem. Dersom deteksjonen ikke fungerer, fjern haken for autodeteksjon.\n"
 "Du kan også velge å ikke sette opp nettverket, du kan da klikke \"Avbryt\"\n"
 "knappen for å gå videre.\n"
@@ -2938,7 +2940,7 @@ msgstr ""
 "lignende applikasjoner.\n"
 "\n"
 "Pakkene er delt inn i grupper som korresponderer til typisk bruk av din "
-"maskin\n"
+"maskin.\n"
 "Mandrake Linux har fire forhåndsdefinerte installasjoner tilgjengelige. Du "
 "kan\n"
 "tenke på disse installasjonsklassene som kontainere for forskjellige "
@@ -2955,7 +2957,7 @@ msgstr ""
 "ønskede\n"
 "pakkene fra kontaineren.\n"
 "\n"
-" * \"Server\": hvis maskinen skal brukes som server, velg vilke av de mest "
+" * \"Tjener\": hvis maskinen skal brukes som tjener, velg vilke av de mest "
 "vanlige\n"
 "tjenester som du ønsker installert på din maskin.\n"
 "\n"
@@ -3557,7 +3559,7 @@ msgid ""
 "install chapter of the Official Mandrake Linux User's Guide."
 msgstr ""
 "Gratulerer, installasjonen er fullført.\n"
-"Fjern oppstartsmediet og trykk return for å starte på nytt.\n"
+"Fjern oppstartsmediet og trykk enter for å starte på nytt.\n"
 "\n"
 "\n"
 "For informasjon om endringer som er tilgjengelige for denne utgaven av "
@@ -4956,7 +4958,7 @@ msgstr "Ok"
 #: ../../interactive/newt.pm:1
 #, c-format
 msgid "Finish"
-msgstr "Avslutt"
+msgstr "Fullfør"
 
 #: ../../interactive.pm:1 ../../standalone/draksec:1
 #, c-format
@@ -7820,7 +7822,7 @@ msgstr "Oppløsning"
 #: ../../Xconfig/main.pm:1 ../../Xconfig/monitor.pm:1
 #, c-format
 msgid "Monitor"
-msgstr "Monitor"
+msgstr "Skjerm"
 
 #: ../../Xconfig/main.pm:1
 #, c-format
@@ -8032,17 +8034,17 @@ msgstr "Grafikk-kort: %s\n"
 #: ../../Xconfig/various.pm:1
 #, c-format
 msgid "Monitor VertRefresh: %s\n"
-msgstr "Monitor VertRefresh: %s\n"
+msgstr "Skjerm VertRefresh: %s\n"
 
 #: ../../Xconfig/various.pm:1
 #, c-format
 msgid "Monitor HorizSync: %s\n"
-msgstr "Monitor HorizSync: %s\n"
+msgstr "Skjerm HorizSync: %s\n"
 
 #: ../../Xconfig/various.pm:1
 #, c-format
 msgid "Monitor: %s\n"
-msgstr "Monitor: %s\n"
+msgstr "Skjerm: %s\n"
 
 #: ../../Xconfig/various.pm:1
 #, c-format
@@ -8082,7 +8084,7 @@ msgstr "URL'en må begynne med http:// eller https://"
 #: ../../diskdrake/dav.pm:1
 #, c-format
 msgid "Please enter the WebDAV server URL"
-msgstr "Vennligst entre WebDAV tjener URL'en."
+msgstr "Vennligst tast inn WebDAV tjener URL'en."
 
 #: ../../diskdrake/dav.pm:1 ../../diskdrake/interactive.pm:1
 #: ../../diskdrake/removable.pm:1 ../../diskdrake/smbnfs_gtk.pm:1
@@ -8943,7 +8945,7 @@ msgstr "Brukernavn"
 msgid ""
 "Please enter your username, password and domain name to access this host."
 msgstr ""
-"Vennligst entre brukernavnet ditt, passordet og domenenavnet for å få "
+"Vennligst tast inn brukernavnet ditt, passordet og domenenavnet for å få "
 "tilgang til denne verten."
 
 #: ../../diskdrake/smbnfs_gtk.pm:1
@@ -9342,8 +9344,8 @@ msgid ""
 "here. Just select your tv card parameters if needed."
 msgstr ""
 "For de fleste moderne TV-kort klarer bttv modulen til GNU/Linuxkjernen å\n"
-"autodetektere de fleste korrekte parameterene.\n"
-"Dersom kortet ditt er feildetektert, kan du spesifisere den korrekte "
+"oppdage de fleste korrekte parameterene automatisk.\n"
+"Dersom kortet ditt er feiloppdaget, kan du spesifisere den korrekte "
 "mottager\n"
 "og korrtypen her. Velg TVkortparameterne om nødvendig."
 
@@ -9365,7 +9367,7 @@ msgstr "Ukjent|CPH05X (bt878) [mange leverandører]"
 #: ../../harddrake/v4l.pm:1
 #, c-format
 msgid "Auto-detect"
-msgstr "Automatisk detektering"
+msgstr "Automatisk oppdagelse"
 
 #: ../../interactive/newt.pm:1
 #, c-format
@@ -10139,7 +10141,7 @@ msgstr "Lokalt nettverksoppkobling"
 #: ../../network/netconnect.pm:1
 #, c-format
 msgid "cable connection detected"
-msgstr "Kabeltilkobling detektert"
+msgstr "Kabeltilkobling oppdaget"
 
 #: ../../network/netconnect.pm:1
 #, c-format
@@ -10195,7 +10197,7 @@ msgstr "Ekspertmodus"
 #: ../../network/netconnect.pm:1
 #, c-format
 msgid "Use auto detection"
-msgstr "Bruk automatisk detektering"
+msgstr "Bruk automatisk oppdagelse"
 
 #: ../../network/netconnect.pm:1
 #, c-format
@@ -10210,7 +10212,7 @@ msgid ""
 "We are about to configure your internet/network connection.\n"
 "If you don't want to use the auto detection, deselect the checkbox.\n"
 msgstr ""
-"Velkommen til nettverkskonfigurasjon hjelperen\n"
+"Velkommen til nettverkskonfigurasjonshjelperen\n"
 "\n"
 "Vi skal nå konfigurere din internett/nettverksoppkobling.\n"
 "Hvis du ikke ønsker å bruke automatisk oppdagelse, fjern krysset\n"
@@ -10368,10 +10370,10 @@ msgid ""
 "such as ``mybox.mylab.myco.com''.\n"
 "You may also enter the IP address of the gateway if you have one."
 msgstr ""
-"Vennligst entre vertsnavnet ditt.\n"
-"Vertsnavnet ditt bør være et full-kvalifisert vertsnavn,\n"
+"Vennligst tast inn vertsnavnet ditt.\n"
+"Vertsnavnet ditt bør være et fullkvalifisert vertsnavn,\n"
 "så som ``minboks.mittlab.mittfirma.no''.\n"
-"Du kan også entre IP-adressen til gateway'en hvis du har en"
+"Du kan også taste inn IP-adressen til gateway'en hvis du har en"
 
 #: ../../network/network.pm:1
 #, c-format
@@ -10461,8 +10463,8 @@ msgid ""
 "Each item should be entered as an IP address in dotted-decimal\n"
 "notation (for example, 1.2.3.4)."
 msgstr ""
-"Vennligst entre IP-konfigurasjonen for denne maskinen.\n"
-"Hvert element bør entres som en IP-adresse i punkt-desimal\n"
+"Vennligst tast inn inn IP-konfigurasjonen for denne maskinen.\n"
+"Hvert element bør skrives som en IP-adresse i punkt-desimal\n"
 "notasjon (f.eks, 1.2.3.4)."
 
 #: ../../network/network.pm:1
@@ -11230,13 +11232,11 @@ msgid ""
 "configuration, you will not be able to use the printer which you are "
 "configuring now. How do you want to proceed?"
 msgstr ""
-"Du er i ferd med å sette opp en nettverksskriver. Dette krever at "
-"nettverket\n"
+"Du er i ferd med å sette opp en nettverksskriver. Dette krever at nettverket "
 "er konfigurert, men dette er ikke gjort. Hvis du fortsetter uten å sette "
 "opp\n"
 "nettverket, vil du ikke bli i stand til å bruke skriveren du setter opp. "
-"Hvordan\n"
-"vil du fortsette?"
+"Hvordan vil du fortsette?"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -12069,8 +12069,9 @@ msgid ""
 "Choose one of the auto-detected printers from the list or enter the hostname "
 "or IP and the optional port number (default is 9100) in the input fields."
 msgstr ""
-"velg en av de autodetekterte skriverne fra lista eller angi vertsnavn eller "
-"IP adresse og eventuelt et portnummer (standard er 9100) i tekstfeltene. "
+"Velg en av de automatisk oppdagede skriverne fra lista eller angi vertsnavn "
+"eller IP adresse og eventuelt et portnummer (standard er 9100) i "
+"tekstfeltene. "
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -12095,7 +12096,7 @@ msgstr "Scanner nettverk ..."
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Printer auto-detection"
-msgstr "Automatisk detektering av skriver"
+msgstr "Automatisk oppdagelse av skriver"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -12225,7 +12226,7 @@ msgstr "Servernavnet eller serverens IP må oppgis!"
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Auto-detected"
-msgstr "Automatisk detektert"
+msgstr "Automatisk oppdaget"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -12253,9 +12254,9 @@ msgid ""
 " If the desired printer was auto-detected, simply choose it from the list "
 "and then add user name, password, and/or workgroup if needed."
 msgstr ""
-" Dersom den ønskede skriveren ble automatisk detektert, kan du ganske enkelt "
-"velge den fra lista, og deretter legge til brukernavn, passord og/eller "
-"arbeidsgruppe om nødvendig. "
+" Dersom den ønskede skriveren ble automatisk oppdaget automatisk, kan du "
+"ganske enkelt velge den fra lista, og deretter legge til brukernavn, passord "
+"og/eller arbeidsgruppe om nødvendig. "
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -12327,7 +12328,7 @@ msgstr "Manuell konfigurasjon"
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "You must choose/enter a printer/device!"
-msgstr "Du må velge/entre en skriver/enhet!"
+msgstr "Du må velge/taste inn en skriver/enhet!"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -12349,8 +12350,8 @@ msgid ""
 "Please choose the port that your printer is connected to or enter a device "
 "name/file name in the input line"
 msgstr ""
-"Vennligst velg en port hvor skriveren din er tilkoblet eller entre en enhet "
-"navn/filnavn i input-linjen"
+"Vennligst velg en port hvor skriveren din er tilkoblet eller tast inn en "
+"enhet navn/filnavn i input-linjen"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -12452,7 +12453,7 @@ msgid ""
 "equivalent to LPT1:, LPT2:, ..., 1st USB printer: /dev/usb/lp0, 2nd USB "
 "printer: /dev/usb/lp1, ...)."
 msgstr ""
-"Ingen lokal skriver funnet! For manuelt å installere en skriver entre et "
+"Ingen lokal skriver funnet! For å manuelt installere en skriver entré et "
 "enhets-navn/filnavn i input-linjen (Parallelporter: /dev/lp0, /dev/lp1, ..., "
 "lik LPT1:, LPT2:, ..., 1st USB skriver: /dev/usb/lp0, 2nd USB skriver: /dev/"
 "usb/lp1, ...)."
@@ -12518,18 +12519,18 @@ msgstr ""
 "\"Fil\" menyen).\n"
 "\n"
 "Hvis du ønsker å legge til, fjerne, eller gi en skriver ett nytt navn, eller "
-"vis du ønsker å gjøre om standard valg (papir, utskriftkvalitet, .....), "
-"velg \"Skriver\" i \"Hardware\" delen av Mandrake Control Center."
+"vis du ønsker å gjøre om standardvalg (papir, utskriftkvalitet, .....), velg "
+"\"Skriver\" i \"Hardware\" delen av Mandrake Control Center."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Auto-detect printers connected to machines running Microsoft Windows"
-msgstr "Autodetekter skrivere som er koblet til Windowsmaskiner"
+msgstr "Oppdag skrivere som er koblet til Windowsmaskiner automatisk"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Auto-detect printers connected directly to the local network"
-msgstr "Autodetekter skrivere koblet direkte til det lokale nettverket"
+msgstr "Oppdag skrivere koblet direkte til det lokale nettverket automatisk"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -12558,7 +12559,7 @@ msgstr ""
 "maskinen.\n"
 "\n"
 "Dersom du har en skriver koblet til denne maskinen, plugg dem inn i maskinen "
-"og skru dem på så de kan detekteres automatisk.\n"
+"og skru dem på så de kan oppdages automatisk.\n"
 "\n"
 "Klikk på \"Neste\" når du er klar, eller på \"Avbryt\" dersom du ikke ønsker "
 "å sette opp skrivere nå. "
@@ -12590,12 +12591,12 @@ msgstr ""
 "maskinen eller direkte til nettverket.\n"
 "\n"
 "Dersom du har en skriver koblet til denne maskinen, plugg dem inn i maskinen "
-"og skru dem på så de kan detekteres automatisk. Skrivere på nettverket må "
-"også være skrudd på og koblet til.\n"
+"og skru dem på så de kan oppdages automatisk. Skrivere på nettverket må også "
+"være skrudd på og koblet til.\n"
 "\n"
-"Legg merke til at autodetektering av skrivere på nettverket tar lenger enn "
-"detektering av skrivere som er koblet til denne maskinen. Skru derfor av "
-"autodetektering av nettverkskrivere dersom du ikke trenger det.\n"
+"Legg merke til at automatisk oppdagelse av skrivere på nettverket tar lenger "
+"enn oppdagelse av skrivere som er koblet til denne maskinen. Skru derfor av "
+"Automatisk oppdagelse av nettverkskrivere dersom du ikke trenger det.\n"
 "\n"
 "Klikk \"Neste\" når du er ferdig, eller \"Avbryt\" dersom du ikke ønsker å "
 "sette opp skrivere nå. "
@@ -12629,12 +12630,12 @@ msgstr ""
 "maskinen, direkte til nettverket, eller til en windowsmaskin på nettverket.\n"
 "\n"
 "Dersom du har en skriver koblet til denne maskinen, plugg dem inn i maskinen "
-"og skru dem på så de kan detekteres automatisk. Skrivere på nettverket eller "
+"og skru dem på så de kan oppdages automatisk. Skrivere på nettverket eller "
 "som er tilkobler windowsmaskiner må også være skrudd på og koblet til.\n"
 " \n"
-"Legg merke til at autodetektering av skrivere på nettverket tar lenger enn "
-"detektering av skrivere som er koblet til denne maskinen. Skru derfor av "
-"autodetektering av nettverkskrivere dersom du ikke trenger det.\n"
+"Legg merke til at automatisk oppdagelse av skrivere på nettverket tar lenger "
+"enn oppdagelse av skrivere som er koblet til denne maskinen. Skru derfor av "
+"Automatisk oppdagelse av nettverkskrivere dersom du ikke trenger det.\n"
 "\n"
 "Klikk \"Neste\" når du er ferdig, eller \"Avbryt\" dersom du ikke ønsker å "
 "sette opp skrivere nå. "
@@ -12659,8 +12660,8 @@ msgstr ""
 "brukt fra denne maskin, og også fra andre maskiner i nettverket.\n"
 "\n"
 "Den spør etter all nødvendig informasjon for å sette opp skriveren og gir "
-"deg tilgang til alle tilgjengelige skriverdrivere, drivervalg og skriver "
-"tilkoblinger."
+"deg tilgang til alle tilgjengelige skriverdrivere, drivervalg og "
+"skrivertilkoblinger."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -12991,9 +12992,9 @@ msgstr ""
 "valget: CUPS-tjenerene informerer maskinen din automatisk om skriverene. "
 "Alle skriverene som før øyeblikket er kjent for maskinen din er listet i "
 "\"Fjern-skrivere\" seksjonen i hovedvinduet til Printerdrake. Hvis CUPS-"
-"tjeneren din ikke er i ditt lokale nettverk, må du entre CUPS-tjeneren(e)s "
-"IP-adresse(r) og evt. portnummeret for å få skriver-informasjon fra tjeneren"
-"(e)."
+"tjeneren din ikke er i ditt lokale nettverk, må du taste inn CUPS-tjeneren(e)"
+"s IP-adresse(r) og evt. portnummeret for å få skriver-informasjon fra "
+"tjeneren(e)."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -13057,7 +13058,8 @@ msgstr "Cups skriverdeling-konfigurasjon"
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Printer auto-detection (Local, TCP/Socket, and SMB printers)"
-msgstr "Autodetektering av skrivere (lokale, TCP/sokkel, og SMB skrivere)"
+msgstr ""
+"Automatisk oppdagelse av skrivere (lokale, TCP/sokkel, og SMB skrivere)"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -15039,8 +15041,8 @@ msgid ""
 "Restore Selected\n"
 "Catalog Entry"
 msgstr ""
-"Gjenopprett valge\n"
-"katalogentre"
+"Gjenopprett valgte\n"
+"katalogentré"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -17160,7 +17162,7 @@ msgstr ""
 "DHCP-tjener konfigurasjon.\n"
 "\n"
 "Her kan du velge forskjellige valg for DHCP-tjener konfigurasjonen.\n"
-"HVis du ikke vet hva en opsjon gjør, bare la den være som den er.\n"
+"Hvis du ikke vet hva en opsjon gjør, bare la den være som den er.\n"
 "\n"
 
 #: ../../standalone/drakgw:1
@@ -19746,7 +19748,7 @@ msgid ""
 "A graphical environment with user-friendly set of applications and desktop "
 "tools"
 msgstr ""
-"Et grafisk miljø med et brukervennlig sett med applikasjoner og skrivebords- "
+"Et grafisk miljø med et brukervennlig sett med applikasjoner og skrivebords-"
 "verktøy"
 
 #: ../../share/compssUsers:999
@@ -19807,7 +19809,7 @@ msgstr "PostgreSQL eller MySQL database tjener"
 
 #: ../../share/compssUsers:999
 msgid "Firewall/Router"
-msgstr "Server, Brannmur/ruter"
+msgstr "Tjener, Brannmur/ruter"
 
 #: ../../share/compssUsers:999
 msgid "Internet gateway"
