@@ -43,8 +43,8 @@ Provides: kudzu, kudzu-devel, libdetect0, libdetect0-devel, libdetect-lst, libde
 Summary: Main Hardware Configuration/Information Tool
 Group: System/Configuration/Hardware
 Requires: %name = %version-%release
-Obsoletes: kudzu, kudzu-devel, libdetect0, libdetect0-devel, libdetect-lst, libdetect-lst-devel, detect, detect-lst
-Provides: kudzu, kudzu-devel, libdetect0, libdetect0-devel, libdetect-lst, libdetect-lst-devel, detect, detect-lst
+Obsoletes: libdetect0, libdetect0-devel, libdetect-lst, libdetect-lst-devel, detect, detect-lst
+Provides: libdetect0, libdetect0-devel, libdetect-lst, libdetect-lst-devel, detect, detect-lst
 
 %description
 Contains adduserdrake, ddcxinfos, diskdrake, drakautoinst, drakbackup,
