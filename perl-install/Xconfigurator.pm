@@ -974,22 +974,22 @@ sub write_XF86Config {
 	print F $dev =~ /input\/event/ ? qq(
 Section "XInput"
     SubSection "WacomStylus"
-        DeviceName "Stylus$_"
         Port "$dev"
+        DeviceName "Stylus$_"
         USB
         AlwaysCore
         Mode Absolute
     EndSubSection
     SubSection "WacomCursor"
-        DeviceName "Cursor$_"
         Port "$dev"
+        DeviceName "Cursor$_"
         USB
         AlwaysCore
         Mode Relative
     EndSubSection
     SubSection "WacomEraser"
-        DeviceName "Eraser$_"
         Port "$dev"
+        DeviceName "Eraser$_"
         USB
         AlwaysCore
         Mode Absolute
@@ -999,20 +999,20 @@ EndSection
 ) : qq(
 Section "XInput"
     SubSection "WacomStylus"
-        DeviceName "Stylus$_"
         Port "$dev"
+        DeviceName "Stylus$_"
         AlwaysCore
         Mode Absolute
     EndSubSection
     SubSection "WacomCursor"
-        DeviceName "Sursor$_"
         Port "$dev"
+        DeviceName "Sursor$_"
         AlwaysCore
         Mode Relative
     EndSubSection
     SubSection "WacomEraser"
-        DeviceName "Eraser$_"
         Port "$dev"
+        DeviceName "Eraser$_"
         AlwaysCore
         Mode Absolute
     EndSubSection
