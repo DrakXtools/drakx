@@ -21,7 +21,7 @@ sub read($$) {
     my ($hd, $sector) = @_;
     my $tmp;
 
-    my $magic = "\0" x 256;
+    my $magic = "\0" x 512;
 
     local *F; partition_table_raw::openit($hd, *F) or die "failed to open device";
     c::lseek_sector(fileno(F), $sector, 0) or die "reading of partition in sector $sector failed";
