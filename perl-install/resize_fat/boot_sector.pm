@@ -9,6 +9,7 @@ use resize_fat::any;
 use resize_fat::directory;
 
 
+#- Oops, this will be unresizable on big-endian machine. trapped by signature.
 my $format = "a3 a8 S C S C S S C S S S I I I S S I S S a458 S";
 my @fields = (
     'boot_jump',		#- boot strap short or near jump

@@ -6,6 +6,7 @@ use strict;
 use common qw(:system);
 use resize_fat::io;
 
+#- Oops, this will be unresizable on big-endian machine. trapped by signature.
 my $format = "a484 I I I a16";
 my @fields = (
     'unused',

@@ -35,11 +35,11 @@ read_fat(fd, offset, size, magic)
   if (lseek(fd, offset, SEEK_SET) != offset ||
       read(fd, fat, size) != size) {
     free(fat); fat = NULL;
-    croak("reading FAT failed");
+    croak("read_fat: reading FAT failed");
   }
   if (magic != *(unsigned char *) fat) {
     free(fat); fat = NULL;
-    croak("FAT has invalid signature");
+    croak("read_fat: FAT has invalid signature");
   }
 }
 
@@ -72,9 +72,9 @@ scan_fat(nb_clusters_, type_size_)
   short *p;
   
   type_size = type_size_; nb_clusters = nb_clusters_;
-  bad_cluster_value = type_size ? 0xffffff7 : 0xfff7;
+  bad_cluster_value = type_size == 32 ? 0xffffff7 : 0xfff7;
 
-  if (type_size % 16) fprintf(stderr, "unable to handle type_size"), exit(1);
+  if (type_size % 16) croak("scan_fat: unable to handle FAT%d", type_size);
   type_size /= 16;
 
   for (p = fat + 2 * type_size; p < fat + type_size * (nb_clusters + 2); p += type_size) {
@@ -111,7 +111,7 @@ void
 allocate_fat_flag(size)
   int size
   CODE:
-  fat_flag_map = malloc(size);
+  fat_flag_map = calloc(size, 1);
 
 int
 checkFat(cluster, type, name)
@@ -151,8 +151,8 @@ void
 allocate_fat_remap(size)
   int size
   CODE:
-  fat_remap_size = size / 4;
-  fat_remap = (unsigned int *) malloc(size);
+  fat_remap_size = size;
+  fat_remap = (unsigned int *) calloc(size, sizeof(unsigned int *));
 
 unsigned int
 fat_remap(cluster)
@@ -161,8 +161,8 @@ fat_remap(cluster)
   if (cluster >= bad_cluster_value) {
     RETVAL = cluster; /* special cases */
   } else {
-    if (fat_remap == NULL) croak("fat_remap NULL in fat_remap");
-    if (cluster >= fat_remap_size) croak("cluster %d >= %d in fat_remap", cluster, fat_remap_size);
+    if (fat_remap == NULL) croak("fat_remap: NULL in fat_remap");
+    if (cluster >= fat_remap_size) croak("fat_remap: cluster %d >= %d in fat_remap", cluster, fat_remap_size);
     RETVAL = fat_remap[cluster];
   }
   OUTPUT:

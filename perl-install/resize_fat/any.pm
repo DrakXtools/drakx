@@ -38,7 +38,7 @@ sub last_used($) {
 
     #- count in negative so absolute value count back to 2.
     foreach (-($fs->{nb_clusters}+1)..-2) { return -$_ if resize_fat::c_rewritten::flag(-$_) }
-    return 2;
+    die "any: empty FAT table";
 }
 #- patch to get the function last_unmoveable that return the last unmoveable cluster of a fs.
 sub last_unmoveable($) {
@@ -46,7 +46,7 @@ sub last_unmoveable($) {
 
     #- count in negative so absolute value count back to 2.
     foreach (-($fs->{nb_clusters}+1)..-2) { return -$_ if 0x8 & resize_fat::c_rewritten::flag(-$_) }
-    return 2;
+    die "any: empty FAT table";
 }
 
 #- calculates the minimum size of a partition, in physical sectors
@@ -58,10 +58,18 @@ sub min_size($) {
     #- It's done on purpose since we're moving all directories. So at the worse
     #- moment, 2 directories are there, but that way nothing wrong can happen :)
     my $min_cluster_count = max(2 + $count->{used} + $count->{bad} + $count->{dirs}, min_cluster_count($fs));
-    $min_cluster_count = max($min_cluster_count, 2 + last_unmoveable($fs));
+    $min_cluster_count = max($min_cluster_count, last_unmoveable($fs));
 
-    $min_cluster_count * divide($fs->{cluster_size}, $SECTORSIZE) +
-	divide($fs->{cluster_offset}, $SECTORSIZE);
+    my $size = $min_cluster_count * divide($fs->{cluster_size}, $SECTORSIZE) +
+      divide($fs->{cluster_offset}, $SECTORSIZE) +
+    64*1024*1024 / $SECTORSIZE; #- help with such more sectors (ie 64Mb).
+    
+    #- help zindozs again with 512Mb+ at least else partition is ignored.
+    if ($resize_fat::isFAT32) {
+        $size = max($size, 524*1024*1024 / $SECTORSIZE);
+    }
+    $size;
+
 }
 #- calculates the maximum size of a partition, in physical sectors
 sub max_size($) {
@@ -76,7 +84,7 @@ sub max_size($) {
 sub used_size($) {
     my ($fs) = @_;
 
-    my $used_cluster_count = max(2 + last_used($fs), min_cluster_count($fs));
+    my $used_cluster_count = max(last_used($fs), min_cluster_count($fs));
 
     $used_cluster_count * divide($fs->{cluster_size}, $SECTORSIZE) +
 	divide($fs->{cluster_offset}, $SECTORSIZE);
@@ -103,10 +111,9 @@ sub flag_clusters {
 	$nb_dirs += $nb if $type == $DIRECTORY;
 	0;
     };
-    resize_fat::c_rewritten::allocate_fat_flag($fs->{nb_clusters} + 2);
 
-    #- patch to reset contents of memory allocated by allocate_fat_flag
-    foreach (0..$fs->{nb_clusters} + 1) { resize_fat::c_rewritten::set_flag($_, 0) }
+    #- this must call allocate_fat_flag that zeroes the buffer allocated.
+    resize_fat::c_rewritten::allocate_fat_flag($fs->{nb_clusters} + 2);
 
     resize_fat::directory::traverse_all($fs, $f);
     $fs->{clusters}{count}{dirs} = $nb_dirs;
