@@ -62,7 +62,6 @@ sub load {
     } else {
 	load_raw(map { [ $_ => $options{$_} ] } @l);
     }
-    post_load(@l);
     sleep 2 if any { /^(usb-storage|mousedev|printer)$/ } @l;
 
     if ($network_module) {
@@ -357,6 +356,15 @@ sub read_already_loaded() {
 sub when_load {
     my ($name, @options) = @_;
 
+    if ($name =~ /usb-[uo]hci/) {
+        eval {
+            require fs; fs::mount('/proc/bus/usb', '/proc/bus/usb', 'usbdevfs');
+            #- ensure keyboard is working, the kernel must do the job the BIOS was doing
+            sleep 4;
+            load("usbkbd", "keybdev") if detect_devices::usbKeyboards();
+        }
+    }
+
     load('snd-pcm-oss') if $name =~ /^snd-/;
     add_alias('ieee1394-controller', $name) if member($name, 'ohci1394');
     add_probeall('usb-interface', $name) if $name =~ /usb-[uo]hci/ || $name eq 'ehci-hcd';
@@ -408,19 +416,6 @@ sub load_raw {
 
     die "insmod'ing module " . join(", ", map { $_->[0] } @failed) . " failed" if @failed;
 
-}
-
-sub post_load {
-    my @modules = @_;
-
-    if (any { /usb-[uo]hci/ } @modules) {
-        eval {
-            require fs; fs::mount('/proc/bus/usb', '/proc/bus/usb', 'usbdevfs');
-            #- ensure keyboard is working, the kernel must do the job the BIOS was doing
-            sleep 4;
-            load("usbkbd", "keybdev") if detect_devices::usbKeyboards();
-        }
-    }
 }
 
 sub get_parameters {
