@@ -290,8 +290,10 @@ sub ask_mntpoint_s {
 	$o->ask_from('', 
 				  _("Choose the mount points"),
 				  [ map { { label => partition_table::description($_), 
-					    val => \$_->{mntpoint}, not_edit => 0, list => [ '', fsedit::suggestions_mntpoint(fsedit::empty_all_hds()) ] }
-					} @fstab ]) or return;
+					    val => \$_->{mntpoint},
+					    not_edit => 0,
+					    list => [ '', fsedit::suggestions_mntpoint(fsedit::empty_all_hds()) ] }
+					} grep { !$_->{real_mntpoint} || common::usingRamdisk() } @fstab ]) or return;
     }
     $o->SUPER::ask_mntpoint_s($fstab);
 }
