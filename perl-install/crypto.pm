@@ -32,7 +32,7 @@ sub mirrors() { keys %mirrors }
 sub dir { $mirrors{$_[0]}[1] . '/' . (arch() !~ /i.86/ && ((arch() =~ /sparc/ ? "sparc" : arch()). '/')) . $::VERSION }
 sub ftp($) { ftp::new($_[0], dir($_[0])) }
 
-sub getFile($$) {
+sub getFile {
     my ($file, $host) = @_;
     $host ||= $crypto::host;
     log::l("getting crypto file $file on directory " . dir($host) . " with login $mirrors{$host}[2]");
