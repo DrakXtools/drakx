@@ -181,8 +181,8 @@ my $log_text = new Gtk::Text(undef, undef);
 my $refcount_search;
 #### far from window
 gtkadd($window,
-       gtkpack_(new Gtk::VBox(0,5),
-		if_(!$::isExplain, 0, _("A tool to monitor your logs")),
+       gtkpack_(new Gtk::VBox(0,0),
+		if_(!$::isExplain && !$::isEmbedded, 0, _("A tool to monitor your logs")),
 		if_(!$::isFile, 0, gtkadd(new Gtk::Frame(_("Settings")),
 					   gtkpack__(new Gtk::VBox(0,2),
 						     gtkpack__(new Gtk::VBox(0,2),
@@ -493,8 +493,6 @@ print F $r;
 
 
 sub save {
-    #$file_dialog = new Gtk::FileSelection(_("Save as.."));
-    #$file_dialog->show();
     $::isWizard=0;
     $yy = $in->ask_file(_("Save as.."),"/root") or return;
     output($yy,$log_text->get_chars(0,$log_text->get_length()));
