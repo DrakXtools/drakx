@@ -1184,7 +1184,7 @@ failures. Would you like to create a bootdisk for your system?")),
 	      }, [ { val => \$o->{mkbootdisk}, list => \@l, format => sub { $l{$_[0]} || $_[0] } } ]
             ) or return;
         }
-        $o->ask_warn('', _("Insert a floppy in drive %s", $l{$o->{mkbootdisk}} || $o->{mkbootdisk}));
+        $o->ask_warn('', _("Insert a floppy in %s", $l{$o->{mkbootdisk}} || $o->{mkbootdisk}));
     }
 
     my $w = $o->wait_message('', _("Creating bootdisk"));
