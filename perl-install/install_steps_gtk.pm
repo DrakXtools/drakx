@@ -535,42 +535,35 @@ sub installPackages {
 	    $change_time = time();
 	    my $f = $install_any::advertising_images[$i++ % @install_any::advertising_images];
 	    log::l("advertising $f");
-	    eval { my $pl = $f; $pl =~ s/\.png$/\.pl/;
-		   my ($width, $height, @data);
-		   $in->ask_warn('', "avant evalcat");
-		   eval(cat_($pl));
-		   $in->ask_warn('', "wi : $width | he : $height \ndata :\n @data");
-		   my ($pix, undef) = gtkcreate_png($f);
-		   my $dbl_area;
-		   my $darea = new Gtk::DrawingArea;
-		   gtkpack($box, $advertising = gtksignal_connect(gtkset_usize($darea, $width, $height), expose_event => sub {
-			   eval {
+	    my $pl = $f; $pl =~ s/\.png$/\.pl/;
+	    my ($width, $height, @data);
+	    eval(cat_($pl));
+	    my ($pix, undef) = gtkcreate_png($f);
+	    my $dbl_area;
+	    my $darea = new Gtk::DrawingArea;
+	    gtkpack($box, $advertising = gtksignal_connect(gtkset_usize($darea, $width, $height), expose_event => sub {
 			       if (!defined($dbl_area)) {
-				   $in->ask_warn('', "pix $pix | darea $darea \n ");
 				   $dbl_area = new Gtk::Gdk::Pixmap($darea->window, $width, $height);
 				   $dbl_area->draw_pixmap($darea->style->bg_gc('normal'),
-							  $pix, 0, 0, $width, $height);
-				   my $font = $darea->style->font;
-				   my $style= new Gtk::Style;
-				   $style->font(Gtk::Gdk::Font->fontset_load($font));
+							  $pix, 0, 0, 0, 0, $width, $height);
 				   my $gc_text = new Gtk::Gdk::GC($darea->window);
-				   $gc_text->set_foreground(gtkcolor(255, 255, 255));
+				   $gc_text->set_foreground(gtkcolor(65535, 65535, 65535));
 				   foreach (@data) {
 				       my ($width, $height, $lines, $widths, $heights, $ascents, $descents) =
-					 get_text_coord ($_->[0], $style, $_->[3], $_->[4], 1, 0, 1, 1);
+					 get_text_coord ($_->[0], $darea->style, $_->[3], $_->[4], 1, 0, 1, 1);
 				       my $i = 0;
 				       foreach (@{$lines}) {
-					   $dbl_area->draw_string($style->font, $gc_text,
-								  ${$widths}[$i], ${$ascents}[$i] + ${$heights}[$i], $_);
+					   $dbl_area->draw_string($darea->style->font, $gc_text,
+								  ${$widths}[$i], ${$heights}[$i], $_);
+					   $dbl_area->draw_string($darea->style->font, $gc_text,
+								  ${$widths}[$i] + 1, ${$heights}[$i], $_);
 					   $i++;
 				       }
 				   }
-			       } else {
-				   $darea->window->draw_pixmap($darea->style->bg_gc('normal'),
-							       $dbl_area, 0, 0, 0, 0, $width, $height);
 			       }
-			   }}));
-	       }
+			       $darea->window->draw_pixmap($darea->style->bg_gc('normal'),
+							   $dbl_area, 0, 0, 0, 0, $width, $height);
+			   }));
 	} else {
 	    $advertising = undef;
 	}
