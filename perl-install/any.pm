@@ -1063,6 +1063,11 @@ sub set_authentication {
 	} "$::prefix/etc/yp.conf";
 	require network;
 	network::write_conf("$::prefix/etc/sysconfig/network", $netc);
+
+	$when_network_is_up->(sub {
+	    run_program::rooted($::prefix, 'nisdomainname', $domain);
+	    run_program::rooted($::prefix, 'service', 'ypbind', 'restart');
+	}) if !$::isInstall; #- TODO: also do it during install since nis can be useful to resolve domain names. Not done because 9.2-RC
     } elsif ($winbind) {
 	my $domain = $netc->{WINDOMAIN};
 	$domain =~ tr/a-z/A-Z/;
