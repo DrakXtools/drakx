@@ -50,6 +50,7 @@ my @conx_type = ('modem', 'isdn_internal', 'isdn_external', 'adsl', 'cable', 'la
 
 my $in = 'interactive'->vnew('su', 'network');
 !$::isEmbedded && $in->isa('interactive::gtk') and $::isWizard = 1;
+$::isWizard = 0;
 $::Wizard_pix_up = "wiz_drakconnect.png";
 $::Wizard_title = "Network & Internet Configuration";
 
@@ -61,7 +62,7 @@ MDK::Common::Globals::init(
 	      connect_prog => "/etc/sysconfig/network-scripts/net_cnx_pg"
 	     );
 
-$::isEmbedded && ref($in) =~ /gtk/ or goto dd;
+#$::isEmbedded && ref($in) =~ /gtk/ or goto dd;
 require ugtk2;
 import ugtk2 qw(:helpers :wrappers :create);
 my $expert_mode = 0;
@@ -69,6 +70,7 @@ network::netconnect::read_net_conf('', $netcnx, $netc);
 modules::load_category('net');
 my @all_cards = network::ethernet::conf_network_card_backend($netc, $intf);
 network::netconnect::load_conf($netcnx, $netc, $intf);
+network::network::probe_netcnx_type('', $netc, $intf, $netcnx);
 
 my $window1 = ugtk2->new('drakconnect');
 $window1->{rwindow}->signal_connect(delete_event => sub { ugtk2->exit(0) });
