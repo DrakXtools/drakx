@@ -156,14 +156,14 @@ $notebook->append_page(gtkshow(gtkpack_(new Gtk2::VBox(0, 0),
                                                               push(@sec_levels, $current_level) unless member($current_level, @sec_levels);
                                                               $seclevel_entry = new_nonedit_combo(\@sec_levels, $current_level);
                                                               
-                                                              new Gtk2::Label(N("Security Level:")), $seclevel_entry;
+                                                              Gtk2::WrappedLabel->new(N("Security Level:")), $seclevel_entry;
                                                           }
                                                           ],
-                                                        [ new Gtk2::Label(N("Security Alerts:")), 
+                                                        [ Gtk2::WrappedLabel->new(N("Security Alerts:")), 
                                                           my $secadmin_check = gtksignal_connect(Gtk2::CheckButton->new, toggled => sub {
                                                                                                      $secadmin_entry->set_sensitive($_[0]->get_active);
                                                                                                  }) ],
-                                                        [ new Gtk2::Label(N("Security Administrator:")),
+                                                        [ Gtk2::WrappedLabel->new(N("Security Administrator:")),
                                                           $secadmin_entry = Gtk2::Entry->new_with_text($msec->get_check_value("MAIL_USER")) ]))),
                                new Gtk2::Label(N("Basic options")));
                        
