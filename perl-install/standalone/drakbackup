@@ -2547,24 +2547,27 @@ sub build_backup_cd_box {
 
 sub build_backup_box {
     $box2->destroy();
+    my ($pix_cd_map, $pix_cd_mask) = gtkcreate_png("ic82-CD-40");
+    my ($pix_hd_map, $pix_hd_mask) = gtkcreate_png("ic82-discdurwhat-40");
+    my ($pix_options_map, $pix_options_mask) = gtkcreate_png("ic82-moreoption-40");
 
     gtkadd($advanced_box,
 	   $box2 = gtkpack_(new Gtk::HBox(0, 15),	
 			    1, new Gtk::VBox(0, 5),	
 			    1, gtkpack_(new Gtk::VBox(0, 15),	
 					1, new Gtk::VBox(0, 5),	
-					1, gtksignal_connect(new Gtk::Button(_(" Backup Now from configuration file ")),
+					1, gtksignal_connect(my $button_from_conf_file = new Gtk::Button(),
 							     clicked => sub { ${$central_widget}->destroy();
 									      build_backup_box_see_conf();
 									  }),
 					0, new Gtk::VBox(0, 5),	
-					1, gtksignal_connect(new Gtk::Button(_(" Backup Now on CDROM ")), 
+					1, gtksignal_connect(my $button_on_cd = new Gtk::Button(), 
 							     clicked => sub { ${$central_widget}->destroy(); 
 									      $where_cd = 1;
 									      build_backup_cd_box();
 									  }),
 					0, new Gtk::VBox(0, 5),	
-					1, gtksignal_connect(new Gtk::Button(_(" View Backup Configuration.  ")), 
+					1, gtksignal_connect(my $button_see_conf = new Gtk::Button(), 
 							     clicked => sub { ${$central_widget}->destroy();
 									      build_backup_box_see_conf();
 									  }),
@@ -2573,6 +2576,23 @@ sub build_backup_box {
 			    1, new Gtk::VBox(0, 5),	
 			    ),
 	   );
+
+    $button_from_conf_file->add(gtkpack(new Gtk::HBox(0,10),
+			      new Gtk::Pixmap($pix_hd_map, $pix_hd_mask),
+			      new Gtk::Label(_(" Backup Now from configuration file ")),
+			      new Gtk::HBox(0, 5)
+			      ));
+    $button_on_cd->add(gtkpack(new Gtk::HBox(0,10),
+			      new Gtk::Pixmap($pix_cd_map, $pix_cd_mask),
+			      new Gtk::Label(_(" Backup Now on CDROM ")),
+			      new Gtk::HBox(0, 5)
+			      ));
+    $button_see_conf->add(gtkpack(new Gtk::HBox(0,10),
+			      new Gtk::Pixmap($pix_options_map, $pix_options_mask),
+			      new Gtk::Label(_(" View Backup Configuration.  ")),
+			      new Gtk::HBox(0, 5)
+			      ));
+
     $custom_help = "options";
     button_box_restore_main();
     $central_widget = \$box2;
