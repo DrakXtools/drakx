@@ -112,8 +112,8 @@ If you don't want to use the auto detection, deselect the checkbox.
 			    },
 			 [
 			  if_(@profiles > 1, { label => N("Choose the profile to configure"), val => \$netcnx->{PROFILE}, list => \@profiles }),
-			  { label => N("Use auto detection"), val => \$netc->{autodetection}, type => 'bool' },
-			  { label => N("Expert Mode"), val => \$::expert, type => 'bool' },
+			  { text => N("Use auto detection"), val => \$netc->{autodetection}, type => 'bool' },
+			  { text => N("Expert Mode"), val => \$::expert, type => 'bool' },
 			 ]
 			) or goto step_5 }; $in->exit(0) if $@ =~ /wizcancel/;
     undef $::Wizard_no_previous;
@@ -139,7 +139,7 @@ If you don't want to use the auto detection, deselect the checkbox.
 			    messages => N("Choose the connection you want to configure"),
 			    interactive_help_id => 'configureNetwork',
 			  },
-			 [ map { { label => $_->[0], val => $_->[1], type => 'bool' } } @l ],
+			 [ map { { text => $_->[0], val => $_->[1], type => 'bool' } } @l ],
 			 changed => sub {
 			     return if !$netc->{autodetection};
 			     my $c = 0;
