@@ -1077,7 +1077,7 @@ connections from many clients. Note: if your machine is only a client on the Int
             N("Please choose the desired security level") . "\n\n" .
             join('', map { "$l{$_}: " . formatAlaTeX($help{$_}) . "\n\n" } ikeys %l),
             [
-              { label => N("Security level"), val => $security, list => [ sort keys %l ], format => sub { $l{$_} } },
+              { label => N("Security level"), val => $security, list => [ sort keys %l ], format => sub { $l{$_[0]} } },
                 if_($in->do_pkgs->is_installed('libsafe') && arch() =~ /^i.86/,
                 { label => N("Use libsafe for servers"), val => $libsafe, type => 'bool', text =>
                   N("A library which defends against buffer overflow and format string attacks.") }),
