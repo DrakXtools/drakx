@@ -569,6 +569,10 @@ sub main {
 	$o->{compssListLevel} = 4;
 	push @auto, 'selectInstallClass', 'doPartitionDisks', 'choosePackages', 'configureTimezone', 'exitInstall';
     }
+    if ($::recovery) {
+	$o->{partitioning}{use_existing_root} = 1;
+	push @auto, 'selectLanguage', 'selectInstallClass', 'doPartitionDisks', 'formatPartitions';
+    }
 
     foreach (@auto) {
 	my $s = $o->{steps}{/::(.*)/ ? $1 : $_} or next;
