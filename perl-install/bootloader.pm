@@ -827,6 +827,10 @@ sub set_profiles {
 
 sub get_of_dev {
     my ($unix_dev) = @_;
+
+    eval { fs::mount('none', '$::prefix/sys', 'sysfs', 0) } if -d "$::prefix/sys/devices";
+    devices::make("$::prefix$unix_dev");
+
     my $of_dev;
     run_program::rooted_or_die($::prefix, "/usr/sbin/ofpath", ">", \$of_dev, $unix_dev);
     chomp($of_dev);
