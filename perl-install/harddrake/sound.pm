@@ -174,7 +174,7 @@ sub switch {
 
     foreach (@blacklist) { $blacklisted = 1 if $driver eq $_ }
     my @alternative = @{get_alternative($driver)};
-    unless ($driver eq $device->{driver} or member($device->{driver}, @alternative)) {
+    unless ($driver eq $device->{driver} || member($device->{driver}, @alternative)) {
 	push @alternative, @{get_alternative($device->{driver})}, $device->{driver}
     }
     if (@alternative) {
