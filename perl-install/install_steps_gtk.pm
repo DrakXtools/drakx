@@ -572,7 +572,7 @@ sub installPackages {
 _("Change your Cd-Rom!
 
 Please insert the Cd-Rom labelled \"%s\" in your drive and press Ok when done.
-If you don't have it, press Cancel to avoid installation from this Cd-Rom.", pkgs::mediumDescr($packages, $medium));
+If you don't have it, press Cancel to avoid installation from this Cd-Rom.", pkgs::mediumDescr($o->{packages}, $medium));
 
 	#- if not using a cdrom medium, always abort.
 	$method eq 'cdrom' && $o->ask_okcancel('', $msg);
