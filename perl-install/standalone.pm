@@ -258,7 +258,7 @@ sub are_installed {
 
 sub remove {
     my ($o, @l) = @_;
-    my $wait = $o->{in}->wait_message('', N("Removing packages..."));
+    my $_wait = $o->{in}->wait_message('', N("Removing packages..."));
     $o->{in}->suspend;
     log::explanations("removed packages @l");
     my $ret = system('rpm', '-e', @l) == 0;
