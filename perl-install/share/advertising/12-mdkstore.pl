@@ -7,7 +7,7 @@ $icon_dx = 0;
 $icon_dy = 0;
 @data = (
 	 [ _("Strategic partners"), 0, 0, 400, 20, 1],
-	 [ _("MandrakeSoft works alongside a selection of companies offering professional solutions compatible with Mandrake Linux. A list of these partners is available on the MandrakeStore."), 0, 30, 400, 50, 0 ],
+	 [ _("MandrakeSoft works alongside a selection of companies offering professional solutions compatible with Mandrake Linux. A list of these partners is available on the MandrakeStore"), 0, 30, 400, 50, 0 ],
 	 [ _("www.mandrakestore.com/license"), 0, 60, 400, 80, 0 ],
 #	 [ 'text', $x, $y, $area_width, $area_height ],
 	);
