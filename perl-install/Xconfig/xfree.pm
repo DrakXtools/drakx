@@ -239,9 +239,9 @@ sub set_synaptics {
                   MaxTapTime => { val => 180, Option => 1 },
                   MaxTapMove => { val => 220, Option => 1 },
                   VertScrollDelta => { val => 100, Option => 1 },
-                  MinSpeed => { val => 0.06, Option => 1 },
-                  MaxSpeed => { val => 0.12, Option => 1 },
-                  AccelFactor => { val => 0.0010, Option => 1 },
+                  MinSpeed => { val => '0.06', Option => 1 },
+                  MaxSpeed => { val => '0.12', Option => 1 },
+                  AccelFactor => { val => '0.0010', Option => 1 },
                   SHMConfig => { val => "on", Option => 1 },
                 };
         $raw_X->add_Section('InputDevice', $h);
