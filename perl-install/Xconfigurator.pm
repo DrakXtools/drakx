@@ -451,6 +451,8 @@ sub chooseResolutionsGtk($$;$) {
 }
 
 sub chooseResolutions($$;$) {
+    goto &chooseResolutionsGtk if ref($in) =~ /gtk/;
+
     my ($card, $chosen_depth, $chosen_w) = @_;
 
     my $best_w;

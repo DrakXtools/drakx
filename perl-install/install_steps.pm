@@ -259,8 +259,8 @@ sub pppConfig {
     $toreplace{phone} =~ s/[^\d]//g;
     $toreplace{dnsserver} = ($o->{modem}{dns1} && "$o->{modem}{dns1},") . ($o->{modem}{dns2} && "$o->{modem}{dns2},");
     $toreplace{exdnsdisabled} = $o->{modem}{exdnsdisabled} ? 1 : 0;
-    install_any::translate_file("/usr/share/kppprc.in" ,"$o->{prefix}/root/.kde/share/config/kppprc", %toreplace);
-    install_any::translate_file("/usr/share/kppprc.in" ,"$o->{prefix}/etc/skel/.kde/share/config/kppprc", %toreplace);
+    template2file("/usr/share/kppprc.in" ,"$o->{prefix}/root/.kde/share/config/kppprc", %toreplace);
+    template2file("/usr/share/kppprc.in" ,"$o->{prefix}/etc/skel/.kde/share/config/kppprc", %toreplace);
 }
 
 #------------------------------------------------------------------------------

@@ -9,7 +9,7 @@ use vars qw(@ISA %EXPORT_TAGS @EXPORT_OK $printable_chars $sizeof_int $bitof_int
     common     => [ qw(__ even odd min max sqr sum sign product bool invbool listlength bool2text text2bool to_int to_float ikeys member divide is_empty_array_ref is_empty_hash_ref add2hash add2hash_ set_new set_add round round_up round_down first second top uniq translate untranslate warp_text formatAlaTeX formatLines) ],
     functional => [ qw(fold_left compose map_index grep_index map_each grep_each map_tab_hash mapn mapn_ difference2 before_leaving catch_cdie cdie) ],
     file       => [ qw(dirname basename touch all glob_ cat_ symlinkf chop_ mode typeFromMagic) ],
-    system     => [ qw(sync makedev unmakedev psizeof strcpy gettimeofday syscall_ salt getVarsFromSh setVarsInSh setVarsInCsh substInFile availableRam availableMemory removeXiBSuffix) ],
+    system     => [ qw(sync makedev unmakedev psizeof strcpy gettimeofday syscall_ salt getVarsFromSh setVarsInSh setVarsInCsh substInFile availableRam availableMemory removeXiBSuffix template2file) ],
     constant   => [ qw($printable_chars $sizeof_int $bitof_int $SECTORSIZE) ],
 );
 @EXPORT_OK = map { @$_ } values %EXPORT_TAGS;
@@ -237,17 +237,13 @@ sub unmakedev { $_[0] >> 8, $_[0] & 0xff }
 
 sub translate {
     my ($s) = @_;
-    my ($lang) = substr($ENV{LC_ALL} || $ENV{LANGUAGE} || $ENV{LC_MESSAGES} || $ENV{LANG} || '', 0, 2);
+    my ($lang) = substr($ENV{LC_ALL} || $ENV{LANGUAGE} || $ENV{LC_MESSAGES} || $ENV{LANG} || 'us', 0, 2);
 
-    if ($lang) {
-	require 'lang.pm';
-	lang::load_po ($lang) unless defined $po::I18N::{$lang}; #- the space if needed to mislead perl2fcalls (as lang is not included here)
-	$po::I18N::{$lang} or return $s;
-	my $l = *{$po::I18N::{$lang}};
-	$l->{$s} || $s;
-    } else {
-	$s; #- should avoid some strange behaviour if no lang defined.
-    }
+    require 'lang.pm';
+    lang::load_po ($lang) unless defined $po::I18N::{$lang}; #- the space if needed to mislead perl2fcalls (as lang is not included here)
+    $po::I18N::{$lang} or return $s;
+    my $l = *{$po::I18N::{$lang}};
+    $l->{$s} || $s;
 }
 
 sub untranslate($@) {
@@ -342,6 +338,23 @@ sub setVarsInCsh {
     local *F;
     open F, "> $_[0]" or die "cannot create config file $file";
     $l->{$_} and print F "setenv $_ $l->{$_}\n" foreach @fields;
+}
+
+sub template2file($$%) {
+    my ($inputfile, $outputfile, %toreplace) = @_;
+    local *OUT; local *IN;
+
+    open IN , $inputfile  or die "Can't open $inputfile $!";
+    if ($::testing) {
+	*OUT = *STDOUT;
+    } else {
+	open OUT, ">$outputfile" or die "Can't open $outputfile $!";
+    }
+
+    while (<IN>) {
+	s/@@@(.*?)@@@/$toreplace{$1}/g;
+	print OUT;
+    }
 }
 
 sub substInFile(&@) {

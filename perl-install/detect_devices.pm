@@ -218,6 +218,12 @@ sub hasModem($) {
     $probe{CLASS} =~ /Modem/i && $probe{DESCRIPTION};
 }
 
+sub hasMousePS2() {
+    my $f = detect_devices::tryOpen("psaux");
+    my $t; sysread($f, $t, 256) or return;
+    $t eq "\xFE";
+}
+
 #-######################################################################################
 #- Wonderful perl :(
 #-######################################################################################

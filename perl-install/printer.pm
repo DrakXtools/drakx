@@ -44,7 +44,7 @@ use Data::Dumper;
 
 =cut
 
-use common qw(:common);
+use common qw(:common :system);
 use commands;
 
 #-#####################################################################################
@@ -355,7 +355,7 @@ sub create_spool_dir($) {
 #------------------------------------------------------------------------------
 sub create_config_file($$%) {
     my ($inputfile, $outputfile, %toreplace) = @_;
-    install_any::translate_file("$prefix/$inputfile", "$prefix/$outputfile", %toreplace);
+    template2file("$prefix/$inputfile", "$prefix/$outputfile", %toreplace);
 }
 
 

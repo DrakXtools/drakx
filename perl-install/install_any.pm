@@ -422,23 +422,3 @@ sub fsck_option() {
     my $y = $::o->{security} < 3 && $::beginner && "-y ";
     substInFile { s/^(\s*fsckoptions=)(-y )?/$1$y/ } "$::o->{prefix}/etc/rc.d/rc.sysinit";
 }
-
-sub translate_file($$%) {
-    my ($inputfile, $outputfile, %toreplace) = @_;
-    local *OUT; local *IN;
-
-    open IN , $inputfile  or die "Can't open $inputfile $!";
-    if ($::testing) {
-	*OUT = *STDOUT;
-    } else {
-	open OUT, ">$outputfile" or die "Can't open $outputfile $!";
-    }
-
-    while (<IN>) {
-	if (/@@@(.*)@@@/) {
-	    my $r = $toreplace{$1};
-	    s/@@@(.*)@@@/$r/g;
-	}
-	print OUT;
-    }
-}
