@@ -322,7 +322,7 @@ sub setDefaultPackages {
     push @{$o->{default_packages}}, "kernel22" if !$::oem && c::kernel_version() =~ /^\Q2.2/;
     push @{$o->{default_packages}}, "raidtools" if !is_empty_array_ref($o->{all_hds}{raids});
     push @{$o->{default_packages}}, "lvm" if !is_empty_array_ref($o->{all_hds}{lvms});
-    push @{$o->{default_packages}}, "alsa", "alsa-utils" if modules::get_alias("sound-slot-0") =~ /^snd-card-/;
+    push @{$o->{default_packages}}, "alsa", "alsa-utils" if modules::get_alias("sound-slot-0") =~ /^snd-/;
     push @{$o->{default_packages}}, uniq(grep { $_ } map { fsedit::package_needed_for_partition_type($_) } @{$o->{fstab}});
 
     #- if no cleaning needed, populate by default, clean is used for second or more call to this function.
