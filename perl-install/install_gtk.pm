@@ -74,7 +74,7 @@ sub default_theme {
 sub install_theme {
     my ($o) = @_;
 
-    $o->{theme} ||= default_theme();
+    $o->{theme} ||= default_theme($o);
     load_rc($o, "themes-$o->{theme}");
 
     Gtk2::Rc->parse_string(q(
