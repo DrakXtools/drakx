@@ -173,9 +173,13 @@ sub whatUsbport() {
 }
 
 sub whatNetPrinter {
-    my ($network, $smb) = @_;
+    my ($network, $smb, $timeout) = @_;
 
     my (@res);
+
+    # Set timeouts for "nmap"
+    $timeout = 4000 if !$timeout;
+    my $irtimeout = $timeout / 2;
 
     # Which ports should be scanned?
     my @portstoscan;
@@ -198,16 +202,17 @@ sub whatNetPrinter {
     # delays caused by machines blocking their ports with a firewall
     local *F;
     open F, ($::testing ? "" : "chroot $::prefix/ ") .
-	qq(/bin/sh -c "export LC_ALL=C; nmap -r -P0 --host_timeout 400 --initial_rtt_timeout 200 -p $portlist $hostlist" |)
+	qq(/bin/sh -c "export LC_ALL=C; nmap -r -P0 --host_timeout $timeout --initial_rtt_timeout $irtimeout -p $portlist $hostlist" 2> /dev/null |)
 	or return @res;
     my ($host, $ip, $port, $modelinfo) = ("", "", "", "");
     while (my $line = <F>) {
 	chomp $line;
 
 	# head line of the report of a host with the ports in question open
-	#if ($line =~ m/^\s*Interesting\s+ports\s+on\s+(\S*)\s*\(([0-9]+\.[0-9]+\.[0-9]+\.[0-9]+)\)\s*:\s*$/i) {
-	if ($line =~ m/^\s*Interesting\s+ports\s+on\s+(\S*)\s*\((\S+)\)\s*:\s*$/i) {
+	if (($line =~ m/^\s*Interesting\s+ports\s+on\s+(\S*)\s*\((\S+)\)\s*:\s*$/i) ||
+	    ($line =~ m/^\s*Interesting\s+ports\s+on\s+(\S+)\s*:\s*$/i)) {
 	    ($host, $ip) = ($1, $2);
+	    $ip = $host if !$ip;
 	    $host = $ip if $host eq "";
 	    $port = "";
 
@@ -264,7 +269,7 @@ sub getNetworkInterfaces() {
 	
     local *IFCONFIG_OUT;
     open IFCONFIG_OUT, ($::testing ? "" : "chroot $::prefix/ ") .
-	'/bin/sh -c "export LC_ALL=C; ifconfig" |' or return ();
+	'/bin/sh -c "export LC_ALL=C; ifconfig" 2> /dev/null |' or return ();
     while (my $readline = <IFCONFIG_OUT>) {
 	# New entry ...
 	if ($readline =~ /^(\S+)\s/) {
@@ -295,7 +300,7 @@ sub getIPsOfLocalMachine() {
 	
     local *IFCONFIG_OUT;
     open IFCONFIG_OUT, ($::testing ? "" : "chroot $::prefix/ ") .
-	'/bin/sh -c "export LC_ALL=C; ifconfig" |' or return ();
+	'/bin/sh -c "export LC_ALL=C; ifconfig" 2> /dev/null |' or return ();
     while (my $readline = <IFCONFIG_OUT>) {
 	# New entry ...
 	if ($readline =~ /^(\S+)\s/) {
@@ -337,7 +342,7 @@ sub getIPsInLocalNetworks() {
 	
     local *IFCONFIG_OUT;
     open IFCONFIG_OUT, ($::testing ? "" : "chroot $::prefix/ ") .
-	'/bin/sh -c "export LC_ALL=C; ifconfig" |' or return ();
+	'/bin/sh -c "export LC_ALL=C; ifconfig" 2> /dev/null |' or return ();
     while (my $readline = <IFCONFIG_OUT>) {
 	# New entry ...
 	if ($readline =~ /^(\S+)\s/) {
@@ -369,7 +374,7 @@ sub getIPsInLocalNetworks() {
     foreach my $bcast (@local_bcasts) {
 	local *F;
 	open F, ($::testing ? "" : "chroot $::prefix/ ") . 
-	    qq(/bin/sh -c "export LC_ALL=C; ping -w 1 -b -n $bcast | cut -f 4 -d ' ' | sed s/:// | egrep '^[0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+' | uniq | sort" |) 
+	    qq(/bin/sh -c "export LC_ALL=C; ping -w 1 -b -n $bcast 2> /dev/null | cut -f 4 -d ' ' | sed s/:// | egrep '^[0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+' | uniq | sort" |) 
 	    or next;
 	local $_;
 	while (<F>) { chomp; push @addresses, $_ }
@@ -377,7 +382,7 @@ sub getIPsInLocalNetworks() {
 	if (-x "/usr/bin/nmblookup") {
 	    local *F;
 	    open F, ($::testing ? "" : "chroot $::prefix/ ") . 
-		qq(/bin/sh -c "export LC_ALL=C; nmblookup -B $bcast \\* | cut -f 1 -d ' ' | egrep '^[0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+' | uniq | sort" |)
+		qq(/bin/sh -c "export LC_ALL=C; nmblookup -B $bcast \\* 2> /dev/null | cut -f 1 -d ' ' | egrep '^[0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+' | uniq | sort" |)
 		or next;
 	    local $_;
 	    while (<F>) { 
@@ -396,7 +401,7 @@ sub getSMBPrinterShares {
     # SMB request to auto-detect shares
     local *F;
     open F, ($::testing ? "" : "chroot $::prefix/ ") .
-	qq(/bin/sh -c "export LC_ALL=C; smbclient -N -L $host" |) or return ();
+	qq(/bin/sh -c "export LC_ALL=C; smbclient -N -L $host" 2> /dev/null |) or return ();
     my $insharelist = 0;
     my @shares;
     while (my $l = <F>) {
@@ -428,7 +433,7 @@ sub getSNMPModel {
     # SNMP request to auto-detect model
     local *F;
     open F, ($::testing ? $::prefix : "chroot $::prefix/ ") .
-	qq(/bin/sh -c "scli -v 1 -c 'show printer info' $host" |) or
+	qq(/bin/sh -c "scli -v 1 -c 'show printer info' $host" 2> /dev/null |) or
 	return { CLASS => 'PRINTER',
 		 MODEL => N("Unknown Model"),
 		 MANUFACTURER => "",
@@ -489,7 +494,7 @@ sub network_running() {
     # If the network is not running return 0, otherwise 1.
     local *F; 
     open F, ($::testing ? $::prefix : "chroot $::prefix/ ") . 
-	'/bin/sh -c "export LC_ALL=C; /sbin/ifconfig" |' or
+	'/bin/sh -c "export LC_ALL=C; /sbin/ifconfig" 2> /dev/null |' or
 	    die 'Could not run "ifconfig"!';
     while (my $line = <F>) {
 	if ($line !~ /^lo\s+/ && # The loopback device can have been 
