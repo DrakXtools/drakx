@@ -27,27 +27,6 @@ done
 /bin/cp -a "$dir/../../Mandrake/mdkinst" "/tmp/drakx"
 
 if [ -x "/tmp/drakx/mdkinst/usr/bin/perl-install/live_install2" ]; then
-    perlcoredir=/usr/lib/perl5/5.6.0/i386-linux/CORE
-    cd /tmp/drakx/mdkinst/usr/bin/perl-install
-    if [ -x $perlcoredir/libperl.so ]; then
-	/bin/mv $perlcoredir/libperl.so /tmp/drakx/mdkinst
-    fi
-    /bin/mkdir -p $perlcoredir
-    /bin/cp -a /tmp/drakx/mdkinst/$perlcoredir/libperl.so $perlcoredir/libperl.so
-
-    if [ -x /usr/bin/packdrake ]; then
-	/bin/mv /usr/bin/packdrake /tmp/drakx/mdkinst
-    fi
-    /bin/cp -a /tmp/drakx/mdkinst/usr/bin/packdrake /usr/bin/packdrake
-
-    for i in MonitorsDB CardsNames Cards+
-    do
-	if [ -e /usr/share/ldetect-lst/$i ]; then
-	    /bin/mv /usr/share/ldetect-lst/X11/$i /tmp/drakx/mdkinst
-	fi
-	/bin/cp -a /tmp/drakx/mdkinst/usr/share/ldetect-lst/X11/$i /usr/share/ldetect-lst/X11/$i
-    done
-
     # gtk ressource for live.
     export GTK_DATA_PREFIX=/tmp/drakx/mdkinst/usr
 
