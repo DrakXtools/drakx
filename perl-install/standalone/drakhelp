@@ -27,7 +27,7 @@ my %launchhelp = (
 		  'kwin' => sub { system("mdklaunchhelp " . $path . "&") },
 		  'gnome-session' => sub { system("yelp ghelp://" . $path . "&") },
 		  'other' => sub { my $browser = $ENV{BROWSER} || find { -x "/usr/bin/$_" } qw(mozilla konqueror galeon) or $in->ask_warn('drakhelp', N("No browser is installed on your system, Please install one if you want to browse the help system"));
-				    standalone::explanations("Connection to help system at $link");
+				    standalone::explanations("Connection to help system at $path");
 				    system("$browser " . $path . "&") 
 				}
 		 );
