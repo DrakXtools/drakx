@@ -78,7 +78,7 @@
 # -->> /usr/X11R6/lib/X11/fonts/drakfont
 
 use Gtk;
-use lib qw(/usr/lib/libDrakX);
+use lib qw(..);
 use interactive;
 use standalone;
 use my_gtk qw(:helpers :wrappers);
@@ -621,7 +621,8 @@ sub about {
 	    $about_box = gtkpack_(new Gtk::VBox(0,10),
 	       1, gtkpack_(new Gtk::HBox(0,0),
 			   1, gtktext_insert(gtkset_editable($text, 1), "
- Copyright (C) 2001 by MandrakeSoft (sdupont\@mandrakesoft.com)
+ Copyright (C) 2001 by MandrakeSoft 
+	DUPONT Sebastien sdupont\@mandrakesoft.com
 
  This program is free software; you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
