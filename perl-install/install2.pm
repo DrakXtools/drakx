@@ -519,6 +519,7 @@ sub main {
     eval { $o = $::o = install_any::loadO($o, "patch"); log::l("successfully read patch") } if $patch;
 
     eval { modules::load("af_packet") };
+    eval { fs::mount('none', '/sys', 'sysfs', 0) };
 
     require harddrake::sound;
     harddrake::sound::configure_sound_slots();
