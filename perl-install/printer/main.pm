@@ -2147,6 +2147,15 @@ sub configure_hpoj {
 		    s!etcPtal="/etc/ptal"!etcPtal="$::prefix/etc/ptal"!g;
 		    s!varLock="/var/lock"!varLock="$::prefix/var/lock"!g;
 		    s!varRunPrefix="/var/run"!varRunPrefix="$::prefix/var/run"!g;
+		    s!/sbin/lsmod!/usr/bin/lsmod!g;
+		    s!/sbin/modprobe!/usr/bin/modprobe!g;
+		    s!/sbin/rmmod!/usr/bin/rmmod!g;
+		    s!(my\s*\$osPlatform\s*=\s*).*?$!$1"Linux";!g;
+		    s!chomp\s*\$osPlatform\s*;\s*$!!g;
+		    s!(my\s*\$linuxVersion\s*=\s*).*?$!$1"$kernelversion";!g;
+		    s!^\s*\$linuxVersion\s*=~\s*s.*$!!g;
+		    s!chomp\s*\$linuxVersion\s*;\s*$!!g;
+		    s!(my\s*\$usbprintermodule\s*=\s*).*?$!$1"$usbprintermodule";!g;
 		}
 		push @ptalinitfunctions, $_;
 	    }

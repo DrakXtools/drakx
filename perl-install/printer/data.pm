@@ -11,6 +11,7 @@ use vars qw(@ISA @EXPORT);
 
 our $kernelversion = `uname -r 2>/dev/null`;
 $kernelversion =~ s/^(\s*)(\d+\.\d+)(\..*)$/$2/;
+chomp $kernelversion;
 
 our $usbprintermodule = ($kernelversion eq '2.6' ? "usblp" : "printer");
 
