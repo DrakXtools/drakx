@@ -952,6 +952,8 @@ Please run \"Internet access\" in control center."));
                                                                           if ($label_host) {
                                                                               update();
                                                                               $button_apply->set_sensitive(1);
+                                                                          } else {
+                                                                              write_resolv_conf("/etc/resolv.conf", $netc);
                                                                           }
                                                                           $exit_dialogsub->();
                                                                       }),
