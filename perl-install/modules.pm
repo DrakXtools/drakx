@@ -186,7 +186,9 @@ sub read_conf {
 
     foreach (cat_($file)) {
 	next if /^\s*#/;
+	s/#.*$//;
 	my ($type, $alias, $val) = split(/\s+/, chomp_($_), 3) or next;
+	$val =~ s/\s+$//;
 
 	$val = [ split ' ', $val ] if $type eq 'probeall';
 
