@@ -1,3 +1,84 @@
+2001/09/18  dam's  <damien@mandrakesoft.com>
+
+	* network/adsl.pm, my_gtk.pm: corrected Speedtouch -> speedtouch
+
+	* network/netconnect.pm: don't ask to connect if lan or dhcp
+
+	* standalone/drakgw: debug
+
+2001/09/18  François Pons  <fpons@mandrakesoft.com>
+
+	* rescue/tree/etc/oem: added X group with SYSTEM.
+	finally work arounded rpm bug by flepied.
+
+	* detect_devices.pm: added back full pci probe for stage2 command lspci.
+	removed full pci probe for stringlist (used for generating report_bug).
+
+	* install_steps_interactive.pm: now finally really fixed printer label in
+	summary dialog.
+	fixed printer description in summary (again).
+	fixed no printer displayed (at least, print Remote CUPS server).
+
+	* commands.pm: make lspci a full pci probe instead of safe pci probe.
+
+2001/09/18  gbeauchesne
+
+	* Xconfigurator.pm: 
+	  - Force XFree 4 on IA-64. No XFree 3.3.X there...
+
+	* tools/ia64/elilo.efi: 
+	  - elilo 3.1
+
+2001/09/18  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* install2.pm: don't create bootdisk by default
+
+	* standalone/drakautoinst: have "manual" and "replay" translated
+
+	* share/po/fr.po: misc
+
+2001/09/18  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/nl.po, share/po/hu.po: updated Dutch and Hungarian files
+
+2001/09/18  Pixel  <pixel@mandrakesoft.com>
+
+	* lang.pm, share/gen_locales.sh, share/locales-skeleton.tar.bz2: 
+	  - remove ISO-8859-5, KOI8-R and KOI8-U
+	  - cleanup packdrake extracting locales
+	  - cleanup/fixes lang.pm
+
+	* install_steps.pm: fix setting kdmrc for latin1
+
+	* any.pm (write_passwd_user): fix setting "pw" field (for auto_installs)
+
+	* install_steps_gtk.pm, pkgs.pm: tentative to correct install time for big
+	installs
+
+2001/09/17  François Pons  <fpons@mandrakesoft.com>
+
+	* rescue/list: updated for rpm 4.0.3.
+
+	* rescue/tree/etc/oem: updated for 8.1, contains workaround for bug of
+	"rpm --root" but need more testing.
+
+	* standalone/XFdrake: removed comment.
+	added support to configure NVIDIA driver if everything is correctly
+	installed.
+
+2001/09/17  Pixel  <pixel@mandrakesoft.com>
+
+	* fs.pm, fsedit.pm: 
+	  - '--' to separate options for supermount + small workaround (ro and
+	exec before --)
+	  - fix nfs in manualFstab (for auto_installs, reported by David
+	Eastcott)
+
+2001/09/17  Till Kamppeter <till@mandrakesoft.com>
+
+	* printer.pm: Fixed bug of /etc/foomatic/defaultspooler not been written
+	in expert install.
+
 2001/09/17  dam's  <damien@mandrakesoft.com>
 
 	* network/network.pm: no expert mode needed to choose gateway
