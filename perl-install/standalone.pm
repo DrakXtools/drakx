@@ -169,20 +169,11 @@ sub install {
 	return 1;
     }
 
-    my $wait;
-    if ($o->{in}->isa('interactive::newt')) {
-	$o->{in}->suspend;
-    } else {
-	$wait = $o->{in}->wait_message('', N("Installing packages..."));
-    }
+    my $wait = $o->{in}->wait_message('', N("Installing packages..."));
+    $o->{in}->suspend;
     log::explanations("installed packages @l");
     my $ret = system('urpmi', '--allow-medium-change', '--auto', '--best-output', '--no-verify-rpm', @l) == 0;
-
-    if ($o->{in}->isa('interactive::newt')) {
-	$o->{in}->resume;
-    } else {
-	undef $wait;
-    }
+    $o->{in}->resume;
     $ret;
 }
 
@@ -250,24 +241,24 @@ sub check_kernel_module_packages {
 
 sub what_provides {
     my ($_o, $name) = @_;
-    my ($what) = split '\n', `urpmq '$name' 2>/dev/null`;
-    split '\|', $what;
+    split('\|', chomp_(run_program::get_stdout('urpmq', $name)));
 }
 
 sub is_installed {
-    my ($_o, @l) = @_;
-    run_program::run('/bin/rpm', '>', '/dev/null', '-q', @l);
+    my ($o, $name) = @_;
+    are_installed($o, $name);
 }
 
 sub are_installed {
     my ($_o, @l) = @_;
     my @l2;
-    run_program::run('/bin/rpm', '>', \@l2, '-q', '--qf', "%{name}\n", @l);
-    intersection(\@l, [ map { chomp_($_) } @l2 ]);
+    run_program::run('/bin/rpm', '>', \@l2, '-q', '--qf', "%{name}\n", @l); #- don't care about the return value
+    intersection(\@l, [ chomp_(@l2) ]); #- can't return directly @l2 since it contains things like "package xxx is not installed"
 }
 
 sub remove {
     my ($o, @l) = @_;
+    my $wait = $o->{in}->wait_message('', N("Removing packages..."));
     $o->{in}->suspend;
     log::explanations("removed packages @l");
     my $ret = system('rpm', '-e', @l) == 0;
@@ -277,11 +268,7 @@ sub remove {
 
 sub remove_nodeps {
     my ($o, @l) = @_;
-    $o->{in}->suspend;
-    log::explanations("removed (with --nodeps) packages @l");
-    my $ret = system('rpm', '-e', '--nodeps', @l) == 0;
-    $o->{in}->resume;
-    $ret;
+    remove($o, '--nodeps', @l) == 0;
 }
 
 ################################################################################
