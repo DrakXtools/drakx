@@ -409,7 +409,7 @@ sub write_fstab($;$$) {
 
     my %new;
     @to_add = grep { 
-	if (!$new{$_->[0]} && !$new{$_->[1]}) {
+	if ($_->[0] eq 'none' || !$new{$_->[0]} && !$new{$_->[1]}) {
 	    #- keep in mind the new line for fstab.
 	    @new{$_->[0], $_->[1]} = (1, 1);
 	    1;
