@@ -283,12 +283,15 @@ sub expand_tree {
 # the function
 #-------------------------------------------------------------
 sub build_it() {
-    my $co = "/sbin/mkbootdisk --noprompt --verbose --device " . $device_combo->entry->get_text;
-    $co .= " --mkinitrdargs -f" if $options{force};
-    $co .= " --mkinitrdargs --ifneeded" if $options{needed};
-    $co .= " --mkinitrdargs --omit-scsi-modules" if $options{scsi};
-    $co .= " --mkinitrdargs --omit-raid-modules" if $options{raid};
-    $co .= join(" --mkinitrdargs --with=", @modules);
+    my $initrd_args = join(' ',
+                           if_($options{force},  "-f"),
+                           if_($options{needed}, "--ifneeded"),
+                           if_($options{scsi},   "--omit-scsi-modules"),
+                           if_($options{raid},   "--omit-raid-modules"),
+                           if_(@modules, map { my $i = $_; $i =~ s@.*/@@; "--with=$i" } @modules),
+                          );
+    $initrd_args = "--mkinitrdargs \"$initrd_args\"" if $initrd_args;
+    my $co = join(' ', "/sbin/mkbootdisk --noprompt --verbose --device", $device_combo->entry->get_text, $initrd_args);
     $options{MODULES} = join(' ', @modules);
     setVarsInSh($conffile, \%options);
 
