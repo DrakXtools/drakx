@@ -2,44 +2,77 @@
 | (*) Automatic install
 \----------------------
 
-This feature is used to replace redhat kickstart. I use the kernel
-parameter "automatic" with the following keywords:
-
-from list:
-	method          nfs, ftp, http, cdrom, disk
-	network         static, dhcp
-	interface	eth0, eth1, ..
-
-giving (string) values:
-    (static IP infos)
-	ip
-	dns
-	gateway
-	netmask
-
-    (2nd step network config)
-	hostname
-	domain
-
-    (3rd step nfs, ftp, http installs)
-	server
-	directory
-
-    (3rd step ftp only)
-	user
-	pass
-
-    (2nd step disk install)
-	disk
-
-    (3rd step disk install)
-	partition
-
-    (4th step disk install)
-	directory
-
-
-Keywords must be passed with commas and colons, that is for example:
+This feature is used to replace redhat kickstart. It uses the kernel
+parameter "automatic" with keywords separated with commas and colons, on
+the following genres:
 
 	automatic=method:nfs,network:static,ip:192.168.1.24,server:192.168.1.7,directory:/stable/i586
+
+	automatic=method:ftp,network:dhcp,server:ftp.ciril.fr,directory:/pub/linux/mandrake-devel/cooker
+
+	automatic=method:ftp,interface:eth1,network:dhcp,...
+
+	automatic=method:ftp,network:adsl,adsluser:XXX,adslpass:XXX,...
+
+	automatic=method:cdrom
+
+	automatic=method:disk,disk:hdb,partition:hdb7
+
+
+The keywords correspond to each "virtual" question answered automatically,
+either from a list or from a free field.
+
+
+Keywords are:
+
+
+`method' <- (nfs,ftp,http,cdrom,disk)
+
+if nfs/ftp/http:
+
+    `network' <- (static,dhcp,adsl)
+
+    if multiple interfaces detected:
+
+        `interface' <- (list-of-detected-interfaces)
+
+    fi
+
+    if static:
+
+        `ip', `dns', `gateway', `netmask' (free fields)
+
+    elsif adsl:
+
+	`adsluser', `adslpass' (free field)
+
+    fi
+
+    if resolving fails:
+
+        `hostname', `domain' (free fields)
+
+    fi   
+
+    `server', `directory' (free fields)
+
+    if ftp:
+
+        `user', `pass' (free fields)
+
+    fi
+
+fi
+
+if disk:
+
+    `disk' <- (list-of-detected-disks)
+
+    `partition' <- (list-of-detected-partitions)
+
+    `directory' (free fields)
+
+fi
+
+
 

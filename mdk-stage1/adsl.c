@@ -116,7 +116,7 @@ enum return_type perform_adsl(struct interface_info * intf)
 {
 	struct in_addr addr;
 	char * questions[] = { "Username", "Password", NULL };
-	char * questions_auto[] = { "user", "pass", NULL };
+	char * questions_auto[] = { "adsluser", "adslpass", NULL };
 	static char ** answers = NULL;
 	enum return_type results;
 
