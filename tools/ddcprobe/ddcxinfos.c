@@ -45,17 +45,21 @@ int main(void)
 	pci_config_type = 1;
 
 	/* Get VBE information */
+#ifdef HAVE_VBE
 	if (box_is_xbox() == 1) {
 	  if (get_fb_info(vbe_info) == 0)
 	    return 1;
 	} else {
+#endif
 	  /* Initialize Int10 */
 	  if (InitInt10(pci_config_type)) return 1;
 	  if (vbe_get_vbe_info(vbe_info) == 0) {
 	    FreeInt10();
 	    return 1;
 	  }
+#ifdef HAVE_VBE
 	}
+#endif
 	printf("%dKB of video ram\n", vbe_info->memory_size / 1024);
 
 	/* List supported standard modes */
@@ -68,10 +72,10 @@ int main(void)
 		     known_vesa_modes[i].x,
 		     known_vesa_modes[i].y
 		     );
-#endif
 	/* optimal on a TV, just return canned values */
 	if (box_is_xbox() == 1)
 	  printf("%d %d %d\n", 16777216, 640, 480);
+#endif
 	printf("\n");
 
 	/* Get EDID information */
