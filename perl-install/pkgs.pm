@@ -1214,7 +1214,7 @@ sub selectPackagesToUpgrade($$$;$$) {
     }
 }
 
-sub allowedToUpgrade { $_[0] !~ /^(kernel|kernel-secure|kernel-smp|kernel-linus|hackkernel)$/ }
+sub allowedToUpgrade { $_[0] !~ /^(kernel|kernel22|kernel2.2|kernel-secure|kernel-smp|kernel-linus|kernel-linus2.2|hackkernel|kernel-enterprise)$/ }
 
 sub installCallback {
 #    my $msg = shift;
