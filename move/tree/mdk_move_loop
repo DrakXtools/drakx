@@ -49,6 +49,6 @@ my %file2loop = get_file2loop(@names);
 
 foreach my $name (@names) {
     my $file = name2file($name);
-    my $loop = $file2loop{$file} or die "unknown name $name\n";
+    my $loop = $file2loop{$file} or next;
     $f->($loop, $file);
 }
