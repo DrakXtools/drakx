@@ -1,3 +1,97 @@
+2002/08/19  alus
+
+	* share/po/pl.po: one fix
+
+2002/08/19  Christian Belisle  <cbelisle@mandrakesoft.com>
+
+	* standalone/draksec: 
+	  - draksec is now in his own package
+
+2002/08/19  Damien Chaumette  <dchaumette@mandrakesoft.com>
+
+	* network/network.pm: o remove old /etc/hosts entries for the hostname
+	before adding new one
+
+2002/08/19  fcrozat
+
+	* share/rpmsrate: Make sure nautilus-gtkhtml is installed by default for
+	GNOME
+
+2002/08/19  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/ta.po: Added Tamil file
+
+	* share/po/pt.po: updated Portuguese file
+
+2002/08/19  Pixel  <pixel@mandrakesoft.com>
+
+	* Makefile.config: remove dir security
+
+	* proxy.pm: add $Id: $
+
+	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
+	more accurate than
+	$::isWizard && !$my_gtk::pop_it and $::isEmbedded && !$my_gtk::pop_it,
+	since
+	when the Plug is full, the window is not embedded.
+
+	* install_any.pm (getAndSaveAutoInstallFloppy): ensure mount fail doesn't
+	cause any pb
+
+	* detect_devices.pm: add scsi Optical Device recognition (thanks to
+	Michael Riss)
+	(without this, a hard drive following the optical device gets assigned
+	sda
+	whereas sda is the optical device and the hard drive really is sdb)
+
+	* fs.pm: fix checking the return value of fsck.jfs
+
+	* my_gtk.pm: in my_gtk object, set {isEmbedded} if embedded and {isWizard}
+	if displayed wizard mode
+
+	* Xconfig/monitor.pm (readMonitorsDB): now return a list instead of a hash
+	to handle same name entries with different EISA_ID
+	(configure_automatic): handle EISA_ID but no VertRefresh/HorizSync
+	(happens for some hardware)
+	(choose): handle user asking for "Plug'n Play" monitor and ddcxinfos
+	failing
+
+	* Xconfig/main.pm: replace "xxx => eval { }" with "xxx => scalar eval {}"
+
+2002/08/19  Till Kamppeter  <till@mandrakesoft.com>
+
+	* printerdrake.pm: s/drakconnet/drakconnect/ (Thank you for adding this
+	bug, Titi)
+
+2002/08/19  Thierry Vignaud  <tvignaud@mandrakesoft.com>
+
+	* modules.pm: add remove_modules
+
+2002/08/18  alus
+
+	* share/po/pl.po: updated translation
+
+2002/08/18  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/ca.po: updated Catalan file
+
+	* share/po/id.po, share/po/da.po: updated Danish and Indonesian files
+
+	* share/po/cs.po, share/po/hu.po: updated Czech and Hungarian files
+
+2002/08/18  Pixel  <pixel@mandrakesoft.com>
+
+	* bootloader.pm: since lba32 is the default in lilo.conf
+	  - write "geometric" when lba32 is not set
+	  - don't write lba32 (useless)
+
+2002/08/18  Till Kamppeter  <till@mandrakesoft.com>
+
+	* printer.pm, printerdrake.pm: Fixed HP multi-function device
+	configuration during the installation:
+	  - Fixed mistyped package name for "mtoolsfm"
+	 - Set links for photo card reader auto-detection to work
+
 2002/08/17  Pablo Saratxaga <pablo@mandrakesoft.com>
 
 	* share/po/id.po, share/po/ru.po, share/po/gl.po, share/po/pt_BR.po,
