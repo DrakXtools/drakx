@@ -114,8 +114,8 @@ sub write {
 
     my %ports_by_proto;
     foreach (split ' ', $conf->{ports}) {
-	m!^(\d+)/(udp|tcp|icmp)$! or die "bad port $_\n";
-	push @{$ports_by_proto{$2}}, $1;
+	m!^(\d+(:\d+)?)/(udp|tcp|icmp)$! or die "bad port $_\n";
+	push @{$ports_by_proto{$3}}, $1;
     }
 
     set_config_file("zones", 
