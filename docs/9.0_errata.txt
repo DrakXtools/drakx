@@ -31,6 +31,13 @@
 
    SHOULD BE: work well in all locales.
 
+ o Drakfont:
+   =========
+
+   drakfont get stopped in stat64("/mnt/nt/winnt/fonts/8514oem.fon",
+   ...) on ntfs partitions.
+   there's a bug in ntfs.o fs module of the kernel
+
  o Install: 
    ========
  
@@ -58,6 +65,17 @@
    to the mouse section of /etc/X11/XF86Config-4 manually fixes the
    middle-button problem. STATUS: Not fixed.
 
+
+
+   Sometimes, XFree86 can cause sound glitches because of intensive
+   pci bus usage.
+   Adding the line
+
+      Option "PciRetry" "true"
+
+   to the "Device" section /etc/X11/XF86Config-4 fixes these boxes.
+
+
  o Printer drivers
    ===============
 
@@ -65,3 +83,11 @@
    not work. STATUS: Fixed on linuxprinting.org, needs to be packaged
    in "printer-drivers".
 
+o kernel:
+  =======
+
+  Sometimes reboot stops on "illegal seek" message (having /usr on /
+  fs fix it)
+
+  Sometimes process get blocked in D-state on ntfs partitions (see
+  drakfont)
