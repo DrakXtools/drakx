@@ -169,6 +169,7 @@ sub get_existing {
     foreach my $md (active_mds()) {
 	my $conf = parse_mdadm_conf(scalar run_program::get_stdout('mdadm', '--detail', '--brief', devices::make($md)));
 
+	@{$conf->{ARRAY}} or next;
 	@{$conf->{ARRAY}} == 1 or internal_error("too many answers");
 	my $raw_part = $conf->{ARRAY}[0];
 
