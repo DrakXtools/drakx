@@ -29,10 +29,10 @@ sub detect {
                  $auto_detect->{adsl} = network::adsl::adsl_detect();
              },
              modem => sub {
-                 $auto_detect->{modem} = { map { ($_->{description} || "$_->{MANUFACTURER}|$_->{DESCRIPTION} ($_->{device})") => $_ } detect_devices::getModem() };
+                 $auto_detect->{modem} = { map { $_->{description} || "$_->{MANUFACTURER}|$_->{DESCRIPTION} ($_->{device})" => $_ } detect_devices::getModem() };
              },
             );
-    $l{$_}->() foreach ($o_class || (keys %l));
+    $l{$_}->() foreach $o_class || keys %l;
     return;
 }
 
@@ -64,10 +64,10 @@ sub detect_timezone() {
 sub get_subwizard {
     my ($wiz, $type) = @_;
     my %net_conf_callbacks = (adsl => sub { require network::adsl; &network::adsl::get_wizard },
-                              cable => sub { require network::ethernet; &network::ethernet::get_wizard },
-                              isdn => sub { require network::isdn; &network::isdn::get_wizard },
-                              lan => sub { require network::ethernet; &network::ethernet::get_wizard },
-                              modem => sub { require network::modem; &network::modem::get_wizard },
+                              #cable => sub { require network::ethernet; &network::ethernet::get_wizard },
+                              #isdn => sub { require network::isdn; &network::isdn::get_wizard },
+                              #lan => sub { require network::ethernet; &network::ethernet::get_wizard },
+                              #modem => sub { require network::modem; &network::modem::get_wizard },
                              );
     $net_conf_callbacks{$type}->($wiz);
 }
@@ -137,7 +137,7 @@ sub real_main {
       my $find_lan_module = sub { 
           if (my $dev = find { $_->{device} eq $ethntf->{DEVICE} } detect_devices::pcmcia_probe()) { # PCMCIA case
               $module = $dev->{driver};
-          } elsif (my $dev = find { $_->[0] eq $ethntf->{DEVICE} } @all_cards) {
+          } elsif ($dev = find { $_->[0] eq $ethntf->{DEVICE} } @all_cards) {
               $module = $dev->[1];
           } else { $module = "" }
       };
@@ -247,7 +247,7 @@ sub real_main {
                             my ($string, $type) = @$_;
                             $connections{$string} = $type;
                         }
-                        @connection_list = ({ val => \$cnx_type, type => 'list', list => [ map { $_->[0] } @connections ], });
+                        @connection_list = { val => \$cnx_type, type => 'list', list => [ map { $_->[0] } @connections ], };
                     },
                     if_(!$::isInstall, no_back => 1),
                     name => N("Choose the connection you want to configure"),
@@ -312,14 +312,15 @@ sub real_main {
                    },
                    
                    
-                   go_ethernet => 
-                   {
-                    pre => sub {
-                        conf_network_card($netc, $intf, $type, $ipadr, $netadr) or return;
-                        $netc->{NET_INTERFACE} = $netc->{NET_DEVICE};
-                        configureNetwork($netc, $intf, $first_time) or return;
-                    },
-                   },
+                   # KILLME?: no longer called and deprecated fonction calls :-(
+                   #go_ethernet => 
+                   #{
+                   # pre => sub {
+                   #     conf_network_card($netc, $intf, $type, $ipadr, $netadr) or return;
+                   #     $netc->{NET_INTERFACE} = $netc->{NET_DEVICE};
+                   #     configureNetwork($netc, $intf, $first_time) or return; 
+                   # },
+                   #},
 
                    
                    isdn =>
@@ -498,7 +499,7 @@ Take a look at http://www.linmodems.org"),
                             $driver =~ /^Hcf:/ and $type = "hcfpcimodem";
                             $driver =~ /^Hsf:/ and $type = "hsflinmodem";
                             $driver =~ /^LT:/  and $type = "ltmodem";
-                            $type = undef if !($type && ( -f $pkgs2path{$type} || $in->do_pkgs->ensure_is_installed_if_available($type, $pkgs2path{$type})));
+                            $type = undef if !($type && (-f $pkgs2path{$type} || $in->do_pkgs->ensure_is_installed_if_available($type, $pkgs2path{$type})));
                             $modem->{device} = $devices{$type} || '/dev/modem' if $type; # automatically linked by /etc/devfs/conf entry
                         }
                         
@@ -665,7 +666,7 @@ killall pppd
                                         'speedtouch' => [ 'speedtouch', "$::prefix/usr/share/speedtouch/speedtouch.sh" ],
                                        );
                         return 'adsl_unsupported_eci' if $ntf_name eq 'eci';
-                        $in->do_pkgs->install($packages{$ntf_name}->[0]) if $packages{$ntf_name} && !-e $packages{$ntf_name}->[1];
+                        $in->do_pkgs->install($packages{$ntf_name}[0]) if $packages{$ntf_name} && !-e $packages{$ntf_name}->[1];
                         if ($ntf_name eq 'speedtouch') {
                             $in->do_pkgs->ensure_is_installed_if_available('speedtouch_mgmt', "$::prefix/usr/share/speedtouch/mgmt.o");
                             return 'adsl_speedtouch_firmware' if ! -e "$::prefix/usr/share/speedtouch/mgmt.o";
@@ -1071,9 +1072,9 @@ I cannot set up this connection type.")), return;
                     format => sub { my ($e) = @_; $e->[0] . ($e->[1] ? " (using module $e->[1])" : "") },
                     
                     post => sub {
-                        write_ether_conf();
+                        network::ethernet::write_ether_conf();
                         modules::write_conf() if $::isStandalone;
-                        my $_device = conf_network_card_backend($netc, $intf, $type, $interface->[0], $ipadr, $netadr);
+                        my $_device = network::ethernet::conf_network_card_backend($netc, $intf, $type, $interface->[0], $ipadr, $netadr);
                         return "lan";
                     },
                    },
