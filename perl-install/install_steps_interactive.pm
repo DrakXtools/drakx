@@ -953,7 +953,9 @@ sub load_thiskind {
     if ($type =~ /scsi/i && cat_("/proc/cmdline") !~ /ide2=/) {
 	log::l("HPT: looking for HPT");
 	my @l = grep { $_->[1] =~ /HPT/ } pci_probing::main::probe('STORAGE_OTHER', 'more');
-	if (@l == 2) {
+	if (@l == 2 && $o->ask_yesorno('', 
+_("Linux does not yet fully support ultra dma 66 HPT.
+As a work-around i can make a custom floppy giving access the hard drive on ide2 and ide3"))) {
 	    log::l("HPT: found");
 	    my $ide = sprintf "ide2=0x%x,0x%x ide3=0x%x,0x%x", map { 
 		my ($a, $b) = (split ' ', $_->[0])[3,4];
@@ -972,7 +974,9 @@ sub load_thiskind {
 		last if !$@ && -e "/floppy/syslinux.cfg";
 
 		eval { fs::umount("/floppy") };		    
-		$o->ask_warn('', _("Enter a floppy (all data will be lost)"));
+		$o->ask_warn('', 
+_("Enter a floppy to create an HTP enabled boot
+(all data on floppy will be lost)"));
 		if (my $fd = install_any::getFile("$image.img")) {
 		    local *OUT;
 		    open OUT, ">$dev" or log::l("failed to write $dev"), return;
@@ -980,15 +984,21 @@ sub load_thiskind {
 		    print OUT foreach <$fd>;
 		}
 	    }
-	    log::l("HTP: modifying syslinux.cfg");
-	    substInFile { s/(?=$)/ $ide/ if /^\s*append\s/ } "/floppy/syslinux.cfg";	
-	    fs::umount("/floppy");
-	    log::l("HPT: all done");
+	    if (-e "/floppy/syslinux.cfg") {
+		log::l("HTP: modifying syslinux.cfg");
+		substInFile { s/(?=$)/ $ide/ if /^\s*append\s/ } "/floppy/syslinux.cfg";	
+		fs::umount("/floppy");
+		log::l("HPT: all done");
 
-	    $o->ask_warn('', $nb_try ? 
-			 _("It is necessary to restart installation booting on the floppy") :
-			 _("It is necessary to restart installation with the new parameters"));
-	    install_steps::rebootNeeded($o);	    
+		$o->ask_okcancel('', $nb_try ? 
+			     _("It is necessary to restart installation booting on the floppy") :
+			     _("It is necessary to restart installation with the new parameters")) and
+		  install_steps::rebootNeeded($o);
+	    } else {
+		$o->ask_warn('', 
+_("Failed to create an HTP boot floppy.
+You may have to restart installation and give ``%s'' at the prompt", $ide));
+	    }
 	}
     }
 }
