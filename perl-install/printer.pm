@@ -702,11 +702,13 @@ sub restart_queue($) {
     run_program::rooted($prefix, "lpd"); sleep 1;
 }
 
-sub print_pages($$@) {
+sub print_pages($@) {
     my ($queue, @pages) = @_;
 
     require run_program;
-    run_program::rooted($prefix, "lpr", "-P$queue", $_) foreach @pages;
+    foreach (@pages) {
+	run_program::rooted($prefix, "lpr", "-P$queue", $_);
+    }
 
     sleep 5; #- allow lpr to send pages.
     local *F;

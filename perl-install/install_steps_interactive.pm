@@ -333,12 +333,16 @@ sub chooseGroups {
 
 sub chooseCD {
     my ($o, $packages) = @_;
-    my @mediums = pkgs::allMediums($packages);
+    my @mediums = grep { $_ > 1 } pkgs::allMediums($packages);
+
+    #- if no other medium available or a poor beginner.
+    #- note first CD is always selected and should not be unselected!
+    return if scalar(@mediums) == 0 || $::beginner;
 
     $o->ask_many_from_list_ref('',
 			       _("Choose other CD to install"),
-			       [ map { _("Cd-Rom labeled \"%s\"", pkgs::mediumDescr($packages, $_)) } grep { $_ > 1 } @mediums ],
-			       [ map { \$packages->[2]{$_}{selected} } grep { $_ } @mediums ] #- check for change!
+			       [ map { _("Cd-Rom labeled \"%s\"", pkgs::mediumDescr($packages, $_)) } @mediums ],
+			       [ map { \$packages->[2]{$_}{selected} } @mediums ] #- check for change!
 			      ) or goto &chooseCD unless $::beginner;
 }
 

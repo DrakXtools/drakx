@@ -130,7 +130,7 @@ sub ask_from_list_with_help {
 #- defaults to simple ask_from_list
 sub ask_from_list_with_helpW {
     my ($o, $title, $messages, $l, $help, $def) = @_;
-    ask_from_listW($o, $title, $messages, $l, $def);
+    $o->ask_from_listW($o, $title, $messages, $l, $def);
 }
 
 sub ask_from_list2_with_help_($$$$$;$) {
