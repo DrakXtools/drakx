@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 9.2
-Release: 0.13mdk
+Release: 0.14mdk
 Url: http://www.mandrakelinux.com/en/drakx.php2
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -312,6 +312,46 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Mon Jul 14 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.2-0.14mdk
+- drakboot: fix /etc/lilo.conf generation when reading grub config by setting
+  valid "boot=" parameter
+- drakconnect, drakfloppy: make checkboxes out of ugly "expert <-> normal modes"
+  buttons (saner gui)
+- drakconnect:
+  o kill duplicated code, share it with drakfloppy and others
+  o renew GUI:
+    * make sub windows be modal, centered on parent and trancient dialogs
+      instead of toplevel windows
+    * fix "Internet connection configuration" dialog
+    * fix layout of main window:
+      + pack together expert mode toggle and wizard button
+      + merge wizard label and button
+- drakfloppy:
+  o fix warning on menu building
+  o fix module browsing after gtk2-perl-xs switch
+  o support new 2.5.x kernels' kbuild
+  o fix old brown paper bug (mdk8.2/9.0 :-() not passing extra selected modules
+    to mkinitrd
+  o fix unable to pick a module again after having removed ot from selection
+  o renew GUI:
+    * window with enabled expert options is too big when embedded: let's move
+      expert options into a sub dialog
+    * use stock dialogs
+- draksec:
+  o translate msec options' default values
+  o display descriptions rather than raw function names
+- drakTermserv: fix entry filling
+- logdrake: fix crash when called from net_monitor
+- net_monitor: switch from gtk+-1.2.x to gtk+-2.2.x
+- sanitize guis, especially button layouts:
+  o use std layout (ButtonBoxes) for buttons everywhere
+  o use stock items everywhere
+  o let interactive apps using stock items on x11 and old drak translated items
+    in other backends
+  o pack buttons always in the same order and places
+  o use OptionMenu instead of Combo Boxes when the user is selecting from a
+    fixed set of options
+
 * Thu Jul 10 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.2-0.13mdk
 - drakfloppy: one cannot edit output buffer
 - drakperm: fix crash when moving lines around sorted columns
