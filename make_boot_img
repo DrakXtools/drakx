@@ -37,8 +37,8 @@ my @kernels = grep { /^2/ } all('kernel/all.kernels');
 
 
 my @all_images = (
-		  if_($arch =~ /i.86/, 'cdrom.img', 'cdrom-changedisk.img', 'pcmcia.img', 'isolinux', 'hd_grub.img'),
-		  if_($arch =~ /x86_64/, 'cdrom.img', 'isolinux'),
+		  if_($arch =~ /i.86/, 'cdrom.img', 'cdrom-changedisk.img', 'pcmcia.img', 'isolinux', 'boot.iso', 'hd_grub.img'),
+		  if_($arch =~ /x86_64/, 'cdrom.img', 'isolinux', 'boot.iso'),
 		  if_($arch =~ /ia64/, 'all.img'),
 		 );
 
@@ -55,6 +55,8 @@ foreach my $img (@images) {
 	if (my ($tftpboot) = grep { -e $_ } qw(/tftpboot /var/lib/tftpboot)) {
 	    system("/bin/cp -f isolinux/alt0/* $tftpboot 2>/dev/null");
 	}
+    } elsif ($img =~ /boot.iso/) {
+	boot_iso($img);
     } elsif ($extension eq 'rdz') {
 	initrd($tmp_mnt_initrd, $type, $I, "$img-$_") foreach @kernels;
     } elsif ($extension eq 'img') {
@@ -748,4 +750,22 @@ quit
 EOF
     close $G;
     unlink $mapfile;
+}
+
+sub boot_iso {
+    my ($iso) = @_;
+
+    my $cfg = cat_('isolinux/isolinux.cfg') or die 'isolinux missing';
+    $cfg =~ s/automatic=method:\w+,?//gm;
+
+    eval { rm_rf('.boot_iso') };
+    mkdir_p('.boot_iso/isolinux');
+    _ "cd .boot_iso/isolinux ; ln -s ../../isolinux/* .";
+   
+    my $cfg_file = '.boot_iso/isolinux/isolinux.cfg';
+    unlink $cfg_file;
+    output($cfg_file, $cfg);
+
+    _ "mkisofs -r -f -J -cache-inodes -V 'Mdk Boot ISO' -b isolinux/isolinux.bin -c isolinux/boot.cat -no-emul-boot -boot-load-size 4 -boot-info-table -o $iso .boot_iso";
+    rm_rf('.boot_iso');
 }
