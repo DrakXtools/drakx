@@ -12,6 +12,8 @@ use network;
 use network::tools;
 use MDK::Common::Globals "network", qw($in $prefix $connect_file $disconnect_file $connect_prog);
 
+use Data::Dumper;
+
 my	%conf;
 #- intro is called only in standalone.
 sub intro {
