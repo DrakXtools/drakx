@@ -611,17 +611,23 @@ sub selectLanguage {
     if ($::isInstall) {
 	my $langs = $o_langs_ || {};
 	my $using_images = $in->isa('interactive::gtk') && !$in->{vga16};
-
-	#- to create the default value, use the first location for that value :/
-	$lang = if_(!$::move, first(lang::l2location($lang)).'|').$lang;
 	
 	my %name2l = map { lang::l2name($_) => $_ } lang::list_langs();
 	my $listval2val = sub { $_[0] =~ /\|(.*)/ ? $1 : $_[0] };
 
-	my @langs = map { my $l = $_; uniq_ { $_->[0] } map { [ $::move ? $l : "$_|$l", $_, $l ] } lang::l2location($l) } lang::list_langs();
 	#- since gtk version will use images (function image2f) we need to sort differently
 	my $sort_func = $using_images ? \&lang::l2transliterated : \&lang::l2name;
-	@langs = map { $_->[0] } sort { $sort_func->($a->[2]) cmp $sort_func->($b->[2]) } @langs;
+	my @langs = sort { $sort_func->($a) cmp $sort_func->($b) } lang::list_langs();
+	if (@langs > 15) {
+	    my $add_location = sub {
+		my ($l) = @_;
+		map { "$_|$l" } lang::l2location($l);
+	    };
+	    @langs = map { $add_location->($_) } @langs;
+
+	    #- to create the default value, use the first location for that value :/
+	    $lang = first($add_location->($lang));
+	}
 
         my $last_utf8 = $in->{locale}{utf8};
 	add2hash($common, { cancel => '',
