@@ -356,12 +356,13 @@ Continue at your own risk!"));
 
     if ($o->{isUpgrade}) {
 	# either one root is defined (and all is ok), or we take the first one we find
-	my $p = 
-	  fsedit::get_root_($o->{fstab}) ||
-	  $o->ask_from_listf(_("Root Partition"),
-			     _("What is the root partition (/) of your system?"),
-			     \&partition_table_raw::description, 
-			     [ install_any::find_root_parts($o->{fstab}, $o->{prefix}) ]) or die "setstep exitInstall\n";
+	my $p = fsedit::get_root_($o->{fstab});
+        if (!$p) {
+            my @l = install_any::find_root_parts($o->{fstab}, $o->{prefix}) or die _("No root partition found to perform an upgrade");
+	    $p = $o->ask_from_listf(_("Root Partition"),
+			            _("What is the root partition (/) of your system?"),
+			            \&partition_table_raw::description, \@l) or die "setstep exitInstall\n";
+        }
 	install_any::use_root_part($o->{fstab}, $p, $o->{prefix});
     } elsif ($::expert && ref($o) =~ /gtk/) {
         install_interactive::partition_with_diskdrake($o, $o->{hds});
