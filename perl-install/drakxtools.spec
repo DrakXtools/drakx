@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10.1
-Release: 9mdk
+Release: 10mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -339,6 +339,23 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Fri Sep 17 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.1-10mdk
+- drakbackup: use radio buttons in media selection (wildman)
+- drakconnect (blino):
+  o better looking description list in drivers list (me)
+  o remove the "speedtch off" alias (fix mdk10.0 upgrade)
+  o don't write aliases for pcmcia cards, thus fixing the pcmcia
+    service startup
+  o stop capi service before new config is written so that capiinit
+    can unload the old driver
+  o make isdn over capi work again
+  o do not ask which driver to use when only capidrv is supported
+  o install unicorn-kernel package for Bewan modems if available
+  o add "Unlisted - edit manually" entry in modem provider list (#11549)
+- harddrake service (blino):
+  o probe firewire and pcmcia network devices too
+  o update iftab when new ethernet devices are detected
+
 * Wed Sep 15 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.1-9mdk
 - drakconnect:
   o don't create empty pppoe.conf if the package isn't installed
