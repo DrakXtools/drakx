@@ -355,7 +355,7 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 - drakbackup: some drives don't return "ATIP info from disk" (stew)
 - drakclock: check /etc/init.d/ntpd instead of /etc/ntp.conf for ntp
   installation (daouda)
-- drakfont: attempt to correct bug #9423 (dam's)
+- drakfont: fix font importing (#9423) (dam's)
 - drakconnect (manage interface): fix insensitive IPADDR, NETMASK and
   GATEWAY fields by default are not sensitive by default in DHCP
   (broken by #8498 fix) (poulpyà
