@@ -461,7 +461,7 @@ sub test_mouse {
 	$mouse->{nbuttons} = max($mouse->{nbuttons}, 5); #- it means, the mouse has more than 3 buttons...
 	$draw_rect->(1, 0, [ $x, $y, $w, $h ]);
 
-	my $offset = 0 if 0;
+	my $offset if 0;
 	$offset += $_[0] if $_[0];
 	my $step = 10;
 	for (my $i = $offset % $step; $i < $h; $i += $step) {
