@@ -442,7 +442,7 @@ sub build_notebook {
 		gtkpack_(Gtk2::VBox->new(0,0),
 			 map { (0, gtkpack_(Gtk2::VBox->new(0,0),
 					    1, Gtk2::Label->new($_->[0]),
-					    0, $gui->{netcnx}{$_->[1]} = gtksignal_connect(Gtk2::Entry->new,
+					    0, $gui->{intf}{$_->[1]} = gtksignal_connect(Gtk2::Entry->new,
 											   key_press_event => $apply),
 					   ),
 			       );
