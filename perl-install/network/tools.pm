@@ -270,9 +270,7 @@ sub get_internet_connection {
     my ($netc, $intf, $o_gw_intf) = @_;
     my @routes = `$::prefix/sbin/ip route show`;
     my ($gw_intf, $is_up, $gw_address);
-    $gw_intf = $o_gw_intf || get_default_gateway_interface($netc, $intf) ||
-      if_(`$::prefix/sbin/ip route show` =~ m!^[0-9a-f./]*\s+dev\s+(\S+)!m, $1)
-      or return;
+    $gw_intf = $o_gw_intf || get_default_gateway_interface($netc, $intf) or return;
     $is_up = to_bool(grep { /\s+dev\s+$gw_intf(?:\s+|$)/ } @routes);
     ($gw_address) = join('', @routes) =~ /^default\s+via\s+(\S+).*\s+dev\s+$gw_intf(?:\s+|$)/m;
     return $gw_intf, $is_up, $gw_address, $netc->{dnsServer};
