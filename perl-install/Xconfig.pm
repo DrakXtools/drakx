@@ -165,11 +165,11 @@ sub getinfoFromXF86Config {
     $mouse{auxmouse}{nbuttons} ||= 3;
     mouse::update_type_name(\%mouse); #- allow getting fullname (type|name).
     mouse::update_type_name($mouse{auxmouse});
+    delete $mouse{auxmouse} unless $mouse{auxmouse}{XMOUSETYPE}; #- only take care of a true mouse.
 
     #- try to merge with $o, the previous has been obtained by ddcxinfos.
     add2hash($o->{keyboard} ||= {}, \%keyboard);
     add2hash($o->{mouse} ||= {}, \%mouse);
-    add2hash($o->{mouse}{auxmouse} ||= {}, $mouse{auxmouse}) if $mouse{auxmouse}{XMOUSETYPE};
     @{$o->{wacom} || []} > 0 or $o->{wacom} = [ keys %wacom ];
     add2hash($o->{monitor} ||= {}, \%monitor);
 
