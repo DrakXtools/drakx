@@ -2747,15 +2747,16 @@ sub install_spooler {
 		my $w = $in->wait_message(_("Printerdrake"),
 					  _("Checking installed software..."));
 		if ((!$::testing) &&
-		    (!printer::files_exist((qw(/usr/lib/cups/cgi-bin/printers.cgi
-					       /sbin/ifconfig
-					       /usr/bin/xpp
-					       /usr/bin/curl),
-					    ($::expert ? 
-					     "/usr/share/cups/model/postscript.ppd.gz" : ())
-					    )))) {
+		    ((!printer::files_exist((qw(/usr/lib/cups/cgi-bin/printers.cgi
+						/sbin/ifconfig
+						/usr/bin/xpp),
+					     ($::expert ? 
+					      "/usr/share/cups/model/postscript.ppd.gz" : ())
+					     ))) ||
+		     ((!printer::files_exist((qw(/usr/bin/wget)))) &&
+		      (!printer::files_exist((qw(/usr/bin/curl))))))) {
 		    $in->do_pkgs->install(('cups', 'net-tools', 'xpp',
-					   'curl',
+					   'webfetch',
 					   ($::expert ? 'cups-drivers' : ())));
 		}
 		# Try to start the network when CUPS is the spooler, so that
@@ -3206,6 +3207,11 @@ sub main {
 		    # Toggle expert mode and standard mode
 		    if ($menuchoice eq "\@usermode") {
 			printer::set_usermode(!$::expert);
+			# make sure that the "cups-drivers" package gets
+			# installed when switching into expert mode
+			if (($::expert) && ($printer->{SPOOLER} eq "cups")) {
+			    install_spooler($printer, $in, $upNetwork);
+			}
 			# Read printer database for the new user mode
 			%printer::thedb = ();
 			#my $w = $in->wait_message(_("Printerdrake"), 

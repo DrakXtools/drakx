@@ -2286,15 +2286,23 @@ sub configurestaroffice {
     my $configfilecontent = readsofficeconfigfile($configfilename);
     # Update remote CUPS queues
     if (0 && ($printer->{SPOOLER} eq "cups") && 
-	(-x "$prefix/usr/bin/curl")) {
+	((-x "$prefix/usr/bin/curl") || (-x "$prefix/usr/bin/wget"))) {
 	my @printerlist = getcupsremotequeues();
 	for my $listentry (@printerlist) {
 	    next if !($listentry =~ /^([^\|]+)\|([^\|]+)$/);
 	    my $queue = $1;
 	    my $server = $2;
-	    eval(run_program::rooted
-		 ($prefix, "curl", "-o", "/etc/foomatic/$queue.ppd",
-		  "http://$server:631/printers/$queue.ppd"));
+	    if (-x "$prefix/usr/bin/wget") {
+		eval(run_program::rooted
+		     ($prefix, "/usr/bin/wget", "-O",
+		      "/etc/foomatic/$queue.ppd",
+		      "http://$server:631/printers/$queue.ppd"));
+	    } else {
+		eval(run_program::rooted
+		     ($prefix, "/usr/bin/curl", "-o",
+		      "/etc/foomatic/$queue.ppd",
+		      "http://$server:631/printers/$queue.ppd"));
+	    }
 	    if (-r "$prefix/etc/foomatic/$queue.ppd") {
 		$configfilecontent = 
 		    makestarofficeprinterentry($printer, $queue,
@@ -2351,15 +2359,23 @@ sub configureopenoffice {
     my $configfilecontent = readsofficeconfigfile($configfilename);
     # Update remote CUPS queues
     if (0 && ($printer->{SPOOLER} eq "cups") && 
-	(-x "$prefix/usr/bin/curl")) {
+	((-x "$prefix/usr/bin/curl") || (-x "$prefix/usr/bin/wget"))) {
 	my @printerlist = getcupsremotequeues();
 	for my $listentry (@printerlist) {
 	    next if !($listentry =~ /^([^\|]+)\|([^\|]+)$/);
 	    my $queue = $1;
 	    my $server = $2;
-	    eval(run_program::rooted
-		 ($prefix, "curl", "-o", "/etc/foomatic/$queue.ppd",
-		  "http://$server:631/printers/$queue.ppd"));
+	    if (-x "$prefix/usr/bin/wget") {
+		eval(run_program::rooted
+		     ($prefix, "/usr/bin/wget", "-O",
+		      "/etc/foomatic/$queue.ppd",
+		      "http://$server:631/printers/$queue.ppd"));
+	    } else {
+		eval(run_program::rooted
+		     ($prefix, "/usr/bin/curl", "-o",
+		      "/etc/foomatic/$queue.ppd",
+		      "http://$server:631/printers/$queue.ppd"));
+	    }
 	    if (-r "$prefix/etc/foomatic/$queue.ppd") {
 		$configfilecontent = 
 		    makeopenofficeprinterentry($printer, $queue,
@@ -2416,7 +2432,7 @@ sub addcupsremotetostaroffice {
     my $configfilecontent = readsofficeconfigfile($configfilename);
     # Update remote CUPS queues
     if (($printer->{SPOOLER} eq "cups") && 
-	(-x "$prefix/usr/bin/curl")) {
+	((-x "$prefix/usr/bin/curl") || (-x "$prefix/usr/bin/wget"))) {
 	my @printerlist = getcupsremotequeues();
 	for my $listentry (@printerlist) {
 	    next if !($listentry =~ /^([^\|]+)\|([^\|]+)$/);
@@ -2425,10 +2441,17 @@ sub addcupsremotetostaroffice {
 	    my $server = $2;
 	    # Remove server name from queue name
 	    $q =~ s/^([^@]*)@.*$/$1/;
-	    eval(run_program::rooted
-		 ($prefix, "/usr/bin/curl", "-o",
-		  "/etc/foomatic/$queue.ppd",
-		  "http://$server:631/printers/$q.ppd"));
+	    if (-x "$prefix/usr/bin/wget") {
+		eval(run_program::rooted
+		     ($prefix, "/usr/bin/wget", "-O",
+		      "/etc/foomatic/$queue.ppd",
+		      "http://$server:631/printers/$q.ppd"));
+	    } else {
+		eval(run_program::rooted
+		     ($prefix, "/usr/bin/curl", "-o",
+		      "/etc/foomatic/$queue.ppd",
+		      "http://$server:631/printers/$q.ppd"));
+	    }
 	    # Does the file exist and is it not an error message?
 	    if ((-r "$prefix/etc/foomatic/$queue.ppd") &&
 		(cat_("$prefix/etc/foomatic/$queue.ppd") =~ 
@@ -2459,7 +2482,7 @@ sub addcupsremotetoopenoffice {
     my $configfilecontent = readsofficeconfigfile($configfilename);
     # Update remote CUPS queues
     if (($printer->{SPOOLER} eq "cups") && 
-	(-x "$prefix/usr/bin/curl")) {
+	((-x "$prefix/usr/bin/curl") || (-x "$prefix/usr/bin/wget"))) {
 	my @printerlist = getcupsremotequeues();
 	for my $listentry (@printerlist) {
 	    next if !($listentry =~ /^([^\|]+)\|([^\|]+)$/);
@@ -2468,10 +2491,17 @@ sub addcupsremotetoopenoffice {
 	    my $server = $2;
 	    # Remove server name from queue name
 	    $q =~ s/^([^@]*)@.*$/$1/;
-	    eval(run_program::rooted
-		 ($prefix, "/usr/bin/curl", "-o",
-		  "/etc/foomatic/$queue.ppd",
-		  "http://$server:631/printers/$q.ppd"));
+	    if (-x "$prefix/usr/bin/wget") {
+		eval(run_program::rooted
+		     ($prefix, "/usr/bin/wget", "-O",
+		      "/etc/foomatic/$queue.ppd",
+		      "http://$server:631/printers/$q.ppd"));
+	    } else {
+		eval(run_program::rooted
+		     ($prefix, "/usr/bin/curl", "-o",
+		      "/etc/foomatic/$queue.ppd",
+		      "http://$server:631/printers/$q.ppd"));
+	    }
 	    # Does the file exist and is it not an error message?
 	    if ((-r "$prefix/etc/foomatic/$queue.ppd") &&
 		(cat_("$prefix/etc/foomatic/$queue.ppd") =~ 
@@ -2965,7 +2995,7 @@ sub addcupsremotetogimp {
     my @printerlist = getcupsremotequeues();
     my $ppdfile = "";
     if (($printer->{SPOOLER} eq "cups") && 
-	(-x "$prefix/usr/bin/curl")) {
+	((-x "$prefix/usr/bin/curl") || (-x "$prefix/usr/bin/wget"))) {
 	for my $listentry (@printerlist) {
 	    next if !($listentry =~ /^([^\|]+)\|([^\|]+)$/);
 	    my $q = $1;
@@ -2973,10 +3003,17 @@ sub addcupsremotetogimp {
 	    my $server = $2;
 	    # Remove server name from queue name
 	    $q =~ s/^([^@]*)@.*$/$1/;
-	    eval(run_program::rooted
-		 ($prefix, "/usr/bin/curl", "-o",
-		  "/etc/foomatic/$queue.ppd",
-		  "http://$server:631/printers/$q.ppd"));
+	    if (-x "$prefix/usr/bin/wget") {
+		eval(run_program::rooted
+		     ($prefix, "/usr/bin/wget", "-O",
+		      "/etc/foomatic/$queue.ppd",
+		      "http://$server:631/printers/$q.ppd"));
+	    } else {
+		eval(run_program::rooted
+		     ($prefix, "/usr/bin/curl", "-o",
+		      "/etc/foomatic/$queue.ppd",
+		      "http://$server:631/printers/$q.ppd"));
+	    }
 	    # Does the file exist and is it not an error message?
 	    if ((-r "$prefix/etc/foomatic/$queue.ppd") &&
 		(cat_("$prefix/etc/foomatic/$queue.ppd") =~ 
