@@ -199,6 +199,14 @@ sub real_main {
           return "network_on_boot";
       };
 
+      my $save_cnx = sub {
+          if (keys %$config) {
+              require Data::Dumper;
+              output("$::prefix/etc/sysconfig/drakconnect", Data::Dumper->Dump([ $config ], [ '$p' ]));
+          }
+          return $goto_start_on_boot_ifneeded->();
+      };
+
       my $handle_multiple_cnx = sub {
           $need_restart_network = 1 if $netcnx->{type} =~ /adsl|cable|lan/;
           my $nb = keys %{$netc->{internet_cnx}};
@@ -206,6 +214,7 @@ sub real_main {
               return "multiple_internet_cnx";
           } else {
               $netc->{internet_cnx_choice} = (keys %{$netc->{internet_cnx}})[0] if $nb == 1;
+              $save_cnx->();
               return $goto_start_on_boot_ifneeded->()
           }
       };
@@ -1130,13 +1139,7 @@ N("Last but not least you can also type in your DNS server IP addresses."),
                         [ { label => N("Internet connection"), val => \$netc->{internet_cnx_choice}, 
                             list => [ keys %{$netc->{internet_cnx}} ] } ];
                     },
-                    post => sub {
-                        if (keys %$config) {
-                            require Data::Dumper;
-                            output("$::prefix/etc/sysconfig/drakconnect", Data::Dumper->Dump([ $config ], [ '$p' ]));
-                        }
-                        return $goto_start_on_boot_ifneeded->();
-                    },
+                    post => $save_cnx,
                    },
                    
                    apply_settings => 
