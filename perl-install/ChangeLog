@@ -1,3 +1,96 @@
+2004/10/11  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* drakxtools.spec: 10.1-24mdk
+
+2004/10/10  Keld Jørn Simonsen  <keld at dkuug.dk>
+
+	* share/po/da.po: updates
+	gi/perl-install/share/po/da.po
+
+2004/10/10  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/fa.po: updated Persian file
+
+	* share/po/uk.po: updated Ukrainian file
+
+	* share/po/uz.po, share/po/pl.po, share/po/zh_TW.po, share/po/pt.po,
+	share/po/fr.po, share/po/hu.po, share/po/uz@Latn.po: updated Uzbek
+	files; checked various po files against latest *.pot
+
+	* share/po/ja.po: updated Japanese file
+
+	* share/po/nb.po, share/po/es.po: updated Spanish and BokmÃ¥l files
+
+	* share/po/it.po: updated Italian file
+
+2004/10/10  vljubovic
+
+	* share/po/bs.po: Fixing Bosnian translation
+
+2004/10/09  Arkadiusz Lipiec  <alipiec at elka.pw.edu.pl>
+
+	* share/po/pl.po: Updated
+
+2004/10/09  José JORGE <jjorge at free.fr>
+
+	* share/po/pt.po: melo
+
+2004/10/09  Olivier Blin <oblin at mandrakesoft.com>
+
+	* network/adsl.pm (adsl_conf_backend) don't write ifcfg-ppp0 for
+	static/dhcp connections
+
+	* network/network.pm (configureNetwork2) remove
+	/etc/sysconfig/network-scripts/ethX files
+	that may have been created by sagem scripts
+
+	* standalone/drakconnect: remove /etc/sysconfig/network-scripts/ethX files
+
+2004/10/08  (Hilbert) <h at mandrake.org>
+
+	* share/po/zh_TW.po: 1660:Welcome to the Printer Setup Wizard
+
+2004/10/08  José JORGE <jjorge at free.fr>
+
+	* share/po/pt.po: jorge
+
+2004/10/08  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/et.po, share/po/fr.po: updated Estonian po file
+
+2004/10/08  Rafael Garcia-Suarez <rgarciasuarez at mandrakesoft.com>
+
+	* share/po/fr.po: Missing French translations
+
+2004/10/08  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* network/adsl_consts.pm: fix encapsulation for chinese ISPs (Funda Wang,
+	#10965)
+
+	* share/rpmsrate: 
+	  - install ppp for RTC modems
+	  - install kppp too if KDE is selected
+	  - install drivers for HSF and HCF modems
+
+	* .perl_checker: perl_checker cannot currently parse the "encoding" and
+	the "utf8" modules
+
+	* network/netconnect.pm: try /dev/ttyS14 too for serial modems (ie
+	internal PCI modems that
+	don't need any driver but export a serial port instead)
+	start slmodemd when installing it (thus preventing the average user to
+	have to restart his machine in order to get a working connection)
+	fix H[CS]F modems configuration (kernel packages were renamed)
+
+	* drakxtools.spec: one more change for 10.1-23mdk
+	10.1-23mdk
+	10.1-22mdk
+
+2004/10/08  Warly  <warly at mandrakesoft.com>
+
+	* share/rpmsrate: Simplify complicated Flags for ppp and kdenetwork-ppp
+	add shareutils installed by default in SYSTEM
+
 2004/10/08  Pablo Saratxaga  <pablo at mandrakesoft.com>
 
 	* share/po/et.po, share/po/fr.po: updated Estonian po file
@@ -40836,7 +40929,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.984 2004/10/08 03:13:46 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.985 2004/10/08 05:28:16 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
