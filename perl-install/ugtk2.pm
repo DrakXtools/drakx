@@ -42,7 +42,7 @@ use Gtk2;
 use Gtk2::Gdk::Keysyms;
 
 unless ($::no_ugtk_init) {
-    !check_for_xserver() and die "Cannot be run in console mode.\n";
+    !check_for_xserver() and print("Cannot be run in console mode.\n"), c::_exit(0);
     $::one_message_has_been_translated and warn("N() was called from $::one_message_has_been_translated BEFORE gtk2 initialisation, replace it with a N_() AND a translate() later.\n"), c::_exit(1);
 
     Gtk2->init;
