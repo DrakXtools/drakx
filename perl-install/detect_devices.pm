@@ -203,7 +203,7 @@ sub matching_desc {
     grep { $_->{description} =~ /$regexp/i } probeall();
 }
 sub stringlist { 
-    map { " $_->{description} ($_->{class} $_->{driver})" } probeall(1); 
+    map { " $_->{description} ($_->{type} $_->{driver})" } probeall(1); 
 }
 sub check {
     my ($l) = @_;
