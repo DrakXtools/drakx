@@ -533,16 +533,16 @@ sub suggest {
     if (!$bootloader->{message} || $bootloader->{message} eq "1") {
 	my $msg_en =
 #-PO: these messages will be displayed at boot time in the BIOS, use only ASCII (7bit)
-N_("Welcome to %s the operating system chooser!
+N_("Welcome to the operating system chooser!
 
 Choose an operating system from the list above or
-wait %d seconds for default boot.
+wait for default boot.
 
 ");
 	my $msg = translate($msg_en);
 	#- use the english version if more than 20% of 8bits chars
 	$msg = $msg_en if int(grep { $_ & 0x80 } unpack "c*", $msg) / length($msg) > 0.2;
-	$bootloader->{message} = sprintf $msg, arch() =~ /sparc/ ? "SILO" : "LILO", $bootloader->{timeout};
+	$bootloader->{message} = $msg;
     }
 
     add2hash_($bootloader, { memsize => $1 }) if cat_("/proc/cmdline") =~ /\bmem=(\d+[KkMm]?)(?:\s.*)?$/;
@@ -1093,7 +1093,6 @@ sub write_grub_config {
 	$bootloader->{$_} and print F "$_ $bootloader->{$_}" foreach qw(timeout);
 
 	print F "color black/cyan yellow/cyan";
-	print F "i18n ", $file2grub->("/boot/grub/messages");
 	print F "keytable ", $file2grub->($bootloader->{keytable}) if $bootloader->{keytable};
 	print F "serial --unit=$1 --speed=$2\nterminal --timeout=" . ($bootloader->{timeout} || 0) . " console serial" if get_append($bootloader, 'console') =~ /ttyS(\d),(\d+)/;
 
@@ -1140,24 +1139,6 @@ install $s1 d $dev $s2 p $m
 quit
 EOF
 ";
-
-     output "$::prefix/boot/grub/messages", map { substr(translate($_) . "\n", 0, 78) } ( #- ensure the translated messages are not too big the hard way
-#-PO: these messages will be displayed at boot time in the BIOS, use only ASCII (7bit)
-#-PO: and keep them smaller than 79 chars long
-N_("Welcome to GRUB the operating system chooser!"),
-#-PO: these messages will be displayed at boot time in the BIOS, use only ASCII (7bit)
-#-PO: and keep them smaller than 79 chars long
-N_("Use the %c and %c keys for selecting which entry is highlighted."),
-#-PO: these messages will be displayed at boot time in the BIOS, use only ASCII (7bit)
-#-PO: and keep them smaller than 79 chars long
-N_("Press enter to boot the selected OS, 'e' to edit the"),
-#-PO: these messages will be displayed at boot time in the BIOS, use only ASCII (7bit)
-#-PO: and keep them smaller than 79 chars long
-N_("commands before booting, or 'c' for a command-line."),
-#-PO: these messages will be displayed at boot time in the BIOS, use only ASCII (7bit)
-#-PO: and keep them smaller than 79 chars long
-N_("The highlighted entry will be booted automatically in %d seconds."),
-);
    
     my $e = "$::prefix/boot/.enough_space";
     output $e, 1; -s $e or die \N("not enough room in /boot");
