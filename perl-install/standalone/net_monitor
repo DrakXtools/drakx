@@ -51,7 +51,7 @@ my $in = 'interactive'->vnew;
 
 
 my $window1 = ugtk2->new(N("Network Monitoring"));
-$window1->{rwindow}->signal_connect(delete_event => sub { ugtk2->exit(0) });
+$window1->{rwindow}->signal_connect(delete_event => \&main_quit);
 
 unless ($::isEmbedded) {
     $window1->{rwindow}->set_position('center');
@@ -80,7 +80,9 @@ my $grid_interval = 30;
 my $arrow_space = 6;
 my $arrow_size = 5;
 
-my $use_same_scale = 1;
+my $cfg_file = $< ? "$ENV{HOME}/.net_monitorrc" : "/etc/sysconfig/net_monitorrc";
+my %config = getVarsFromSh($cfg_file);
+my $use_same_scale = text2bool($config{use_same_scale});
 
 network::netconnect::read_net_conf($netcnx, $netc, $intf);
 MDK::Common::Globals::init(in => $in);
@@ -113,7 +115,7 @@ gtkadd($window1->{window},
                 0, gtksignal_connect(gtkset_active(new Gtk2::CheckButton(N("Use same scale for received and transmitted")), $use_same_scale), clicked => sub { $use_same_scale = !$use_same_scale }),
                 0, gtkpack(create_hbox('edge'),
                            gtksignal_connect(my $button_connect = gtkset_sensitive(Gtk2::Button->new(N("Wait please")), 0), clicked => \&connection),
-                           gtksignal_connect(my $button_close = Gtk2::Button->new(N("Close")), clicked => sub { ugtk2->exit(0) }),
+                           gtksignal_connect(my $button_close = Gtk2::Button->new(N("Close")), clicked => \&main_quit),
                           ),
                 0, my $statusbar = Gtk2::Statusbar->new
                ),
@@ -161,10 +163,16 @@ $SIG{CHLD} = sub {
 
 
 $window1->main;
-ugtk2->exit(0);
+main_quit();
 
 my $during_connection;
 my $first;
+
+sub main_quit() {
+    $config{use_same_scale} = bool2yesno($use_same_scale);
+    setVarsInSh($cfg_file, \%config);
+    ugtk2->exit(0);
+}
 
 sub bg_command_as_root {
     my $name = shift;
