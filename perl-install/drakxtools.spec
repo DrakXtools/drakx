@@ -292,7 +292,14 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 
 %changelog
 * Tue Mar  4 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.1-14mdk
-- drakperm: fix #1776
+- drakperm:
+  o fix #1776
+  o fix small memory leak (tree iterators)
+  o restore edit dialog on doble click
+- logdrake: restore "pre gtk+-2 port" search  behavior
+  o empty log buffer on search startup
+  o freeze buffer while searching
+  o scroll down the log buffer on filling
 - localedrake: don't categorize langs, for better looking (since
   most people will have very few of them) (gc)
 
@@ -333,7 +340,7 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
   o make embedded app look bettero
 - harddrake2: 
   o fix #1858 (usb adsl speed touch modem misdetection)
-  o provides options and hel pull down menu when embedded
+  o provides "options" and "help" pull down menu when embedded
   o detect firewire controllers
 - drakedm: strip empty lines
 - lot of network fixes (francois)
