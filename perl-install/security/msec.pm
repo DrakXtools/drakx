@@ -28,9 +28,10 @@ sub config_security_user {
 sub get_functions {
     my $prefix = $_;
     my @functions = ();
-    my @ignore_list = qw(indirect commit_changes closelog error initlog log set_secure_level 
+    ## TODO handle 3 last functions here so they can be removed from this list
+    my @ignore_list = qw(indirect commit_changes closelog error initlog log set_secure_level
                                        set_security_conf set_server_level print_changes get_translation
-                                       password_aging password_length enable_libsafe create_server_link);
+                                       enable_libsafe password_aging password_length create_server_link);
     my $file = "$prefix/usr/share/msec/mseclib.py";
     my $function = '';
 
@@ -70,45 +71,90 @@ sub get_value {
     $value;
 }
 
-sub set_option {
-    my ($prefix, $option, $value) =@_;
-    my %functions_hash = ( );
-    my $key = "";
+sub get_checks {
+    my ($prefix) = $_;
+    my %checks = ();
+    my $check_file = "$prefix/etc/security/msec/security.conf";
+    my $def_check = "$prefix/var/lib/msec/security.conf";
+    my @ignore_list = qw(MAIL_USER);
+    my $key = '';
 
-    my $msec_options = "$prefix/etc/security/msec/level.local";
+    open F, $def_check;
+    while (<F>) {
+        ($key, undef) = split(/=/, $_);
+        if(!(member($key, @ignore_list))) { $checks{$key} = "default"; }
+    }
+    close F;
 
-    if(-e $msec_options) {
-        open F, $msec_options;
-        while(<F>) {
-            if (!($_ =~ /^from mseclib/) && $_ ne "\n") {
-                my ($name, $value_set) = split (/\(/, $_);
-                chop $value_set; chop $value_set;
-                $functions_hash{$name} = $value_set;
+    if (-e $check_file) {
+        open F, $check_file;
+        while (<F>) {
+            ($key, undef) = split(/=/, $_);
+            if(!(member($key, @ignore_list))) {
+                (undef, $checks{$key}) = split(/=/, $_);
+                chop $checks{$key};
             }
         }
         close F;
     }
 
-    $functions_hash{$option} = $value;
+    %checks;
+}
 
-    open F, '>'.$msec_options;
-    print F "from mseclib import *\n\n";
-    foreach $key (keys %functions_hash) {
-        if ($functions_hash{$key} ne "default") {
-            print F "$key"."($functions_hash{$key})\n";
+sub config_option {
+    my ($prefix, $option, $value, $category) =@_;
+    my %options_hash = ( );
+    my $key = "";
+    my $options_file = "";
+
+    if($category eq "functions") { $options_file = "$prefix/etc/security/msec/level.local"; }
+    elsif($category eq "checks") { $options_file ="$prefix/etc/security/msec/security.conf"; }
+
+    if(-e $options_file) {
+        open F, $options_file;
+        if($category eq "functions") {
+            while(<F>) {
+                  if (!($_ =~ /^from mseclib/) && $_ ne "\n") {
+                      my ($name, $value_set) = split (/\(/, $_);
+                      chop $value_set; chop $value_set;
+                      $options_hash{$name} = $value_set;
+                  }
+             }
+         }
+         elsif($category eq "checks") {
+             %options_hash = getVarsFromSh($options_file);
+         }
+         close F;
+    }
+
+    $options_hash{$option} = $value;
+
+    open F, '>'.$options_file;
+    if ($category eq "functions") { print F "from mseclib import *\n\n"; }
+    foreach $key (keys %options_hash) {
+        if ($options_hash{$key} ne "default") {
+            if($category eq "functions") { print F "$key"."($options_hash{$key})\n"; }
+            elsif($category eq "checks") { print F "$key=$options_hash{$key}\n"; }
         }
     }
     close F;
 }
 
 sub get_options {
-    my ($prefix, $security) = @_;
+    my ($prefix, $category) = @_;
     my %options = ();
-    my @functions = get_functions($prefix);
+    my @functions = ();
+    my @checks = ();
     my $key = "";
 
-    foreach $key (@functions) {
-        $options{$key} = get_value($prefix, $key);
+    if ($category eq "functions") {
+        @functions = get_functions($prefix);
+        foreach $key (@functions) {
+            $options{$key} = get_value($prefix, $key);
+        }
+    }
+    elsif ($category eq "checks") {
+        %options = get_checks($prefix);
     }
 
     %options;
@@ -171,7 +217,7 @@ sub choose_security_level {
     );
 }
 
-sub choose_options {
+sub choose_functions {
     my ($in, $rfunctions, $signal, $security) = @_;
     my $i = 0;
     my @display = ();
@@ -192,13 +238,44 @@ sub choose_options {
         $i++;
     }
 
+    # TODO find a way to add the button outside of the scrolling zone
     $in->ask_from(
         ("DrakSec - Advanced Options"),
         ("You can customize the following options. For more information, see the mseclib manual page."),
         [
-        { val =>_("Basic Options"), type => 'button', clicked_may_quit => sub { $$signal = 0; print "";} },
+        { val => _("Basic Options"), type => 'button', clicked_may_quit => sub { $$signal = 0; print ""; } },
+        { val => _("Security Checks"), type => 'button', clicked_may_quit => sub {$$signal = 2; print ""; } },
         @display
         ],
+    );
+}
+
+sub choose_checks {
+    my ($in, $roptions, $signal, $security) = @_;
+    my $i = 0;
+    my @display = ();
+    my $key = '';
+    my $def_checks = "/var/lib/msec/security.conf";
+
+    my %defaults = getVarsFromSh($def_checks);
+
+    foreach $key (keys %$roptions) {
+        if ($defaults{$key} eq "yes" || $defaults{$key} eq "no") {
+            $display[$i] = { label => $key." (default=$defaults{$key})", val => \$$roptions{$key}, list => ["yes", "no", "default"] };
+        }
+        else { $display[$i] = { label => $key." (default=$defaults{$key})", val => \$$roptions{$key} };
+        }
+        $i++;
+    }
+
+    $in->ask_from(
+            ("DrakSec - Security Checks"),
+            ("You can customize the following security checks. For more information, see the mseclib manual page."),
+            [
+            { val => _("Basic Options"), type => 'button', clicked_may_quit => sub { $$signal = 0; print ""; } },
+            { val => _("Security Checks"), type => 'button', clicked_may_quit => sub {$$signal = 2; print ""; } },
+            @display
+            ],
     );
 }
 

@@ -27,12 +27,12 @@ sub show_page {
     if ($page == 2) {
         if(security::msec::choose_checks($in, \%options, \$signal, $security)) {
             foreach $key (keys %options) {
-                security::msec::set_check('', $key, $options{$key});
+                security::msec::config_option('', $key, $options{$key}, "checks");
     } } }
    elsif ($page == 1) {
-        if(security::msec::choose_options($in, \%options, \$signal, $security)) {
+        if(security::msec::choose_functions($in, \%options, \$signal, $security)) {
             foreach $key (keys %options) {
-                security::msec::config_option('', $key, $options{$key});
+                security::msec::config_option('', $key, $options{$key}, "functions");
     } } }
     elsif ($page == 0) {
         if(security::msec::choose_security_level($in, \$security, \$libsafe, \$sec_user, \$signal)) {
