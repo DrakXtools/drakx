@@ -210,7 +210,7 @@ Examples:
 		ippp+ for a isdn connection.
 ", $card_netconnect),
       [ { label => N("Net Device"), val => \$card_netconnect, type => 'entry' } ])
-		  or goto step_warning_already_conf;
+		  or goto step_ask_confirm;
 
 my @cards = grep {
     log::l("[drakgw] Have network card: $_");
