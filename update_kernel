@@ -20,7 +20,7 @@ function create_marfile() {
               && echo "WARNING! in $marfile, $k is missing (required by $i)"
         done
     done
-    ../mdk-stage1/mar/mar -c $marfile $(ls $*)
+    ../mdk-stage1/mar/mar -c $marfile $*
 }
 
 
