@@ -394,6 +394,7 @@ sub log_output__real() {
 
 sub alert_config() {
     local $::isEmbedded = 0;
+    undef $::WizardTable;
     my $conffile = "/etc/sysconfig/mail_alert";
     my %options = getVarsFromSh($conffile);
     $options{LOAD} ||= 3;
