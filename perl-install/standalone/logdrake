@@ -205,11 +205,10 @@ sub search() {
 
 my $timer;
 
-my (@logs, %tags);
+my @logs;
 
 sub parse_file {
   my ($file, $descr) = @_;
-  undef %tags;
 
   $file =~ s/\.gz$//;
   my ($pbar, $win_pb);
@@ -287,36 +286,6 @@ sub parse_file {
   log_output__real();
 }
 
-sub text_append {
-    my ($textview, $t, %opts) = @_;
-    my $buffer = $textview->get_buffer;
-    $buffer->{tags} ||= {};
-    my $gtk_tags = $buffer->{tags};
-    if (ref($t) eq 'ARRAY') {
-        foreach my $token (@$t) {
-            my $iter1 = $buffer->get_end_iter;
-            if ($token->[0] =~ /^Gtk2::Gdk::Pixbuf/) {
-                $buffer->insert_pixbuf($iter1, $token->[0]);
-                next;
-            }
-            if ($token->[1]) {
-                my $tag = $token->[1];
-                $gtk_tags->{$tag} ||= $buffer->create_tag($tag, %{$tags{$token->[1]}});
-                $buffer->insert_with_tags($iter1, $token->[0], $gtk_tags->{$tag});
-            } else {
-                $buffer->insert($iter1, $token->[0]);
-            }
-        }
-    } else {
-        $buffer->set_text($t);
-    }
-    #- the following line is needed to move the cursor to the beginning, so that if the
-    #- textview has a scrollbar, it won't scroll to the bottom when focusing (#3633)
-    $buffer->place_cursor($buffer->get_start_iter);
-    $textview->set_wrap_mode($opts{wrap_mode} || 'word');
-    $textview->set_editable($opts{editable} || 0);
-    $textview->set_cursor_visible($opts{visible} || 0);
-}
 
 ##########################################################################################
 
@@ -376,13 +345,13 @@ sub log_output {
     my ($text, $font, $col) = @_;
     my $tag = join('', $font, $col);
     push @logs, [ $text, $tag ];
-    $tags{$tag} ||= { if_($font, font => $font), foreground => $col };
+    $log_buf->{tags}{$tag} ||= { if_($font, font => $font), foreground => $col };
 }
 
 sub log_output__real() {
-    text_append($log_text, \@logs);
-    undef @logs;
+    ugtk2::gtktext_insert($log_text, \@logs, { append => !($isExplain || $isTail) });
     $log_text->scroll_to_iter($log_buf->get_end_iter, 0, 1, 0.5, 0.5);
+    undef @logs;
 }
 
 
