@@ -554,7 +554,8 @@ sub get_descr_from_ppd {
     my %ppd;
 
     #- if there is no ppd, this means this is the PostScript generic filter.
-    local *F; open F, "$prefix/etc/cups/ppd/$printer->{OLD_QUEUE}.ppd" or return "OTHERS|Generic PostScript printer|PostScript (en)";
+    local *F; open F, "$prefix/etc/cups/ppd/$printer->{OLD_QUEUE}.ppd" or return "|" . _("Unknown model");
+    # "OTHERS|Generic PostScript printer|PostScript (en)";
     local $_;
     while (<F>) {
 	/^\*([^\s:]*)\s*:\s*\"([^\"]*)\"/ and do { $ppd{$1} = $2; next };

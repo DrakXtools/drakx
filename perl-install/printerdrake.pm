@@ -1412,7 +1412,11 @@ What do you want to modify on this printer?",
 				  ($::expert ?
 				   _("Printer manufacturer, model, driver") :
 				   _("Printer manufacturer, model")),
-				  _("Printer options"),
+				  (($printer->{configured}{$queue}{make} ne
+				    "") &&
+				   ($printer->{configured}{$queue}{model} ne
+				    _("Unknown model")) ?
+				   _("Printer options") : ()),
 				  _("Print test pages"),
 				  _("Remove printer") ] } ] ) ) {
 		# Stay in the queue edit window until the user clicks "Close"
