@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX for MDK 9.2\n"
-"POT-Creation-Date: 2003-09-09 17:07+0200\n"
+"POT-Creation-Date: 2003-09-16 13:45+0200\n"
 "PO-Revision-Date: 2003-01-20 13:35+0200\n"
 "Last-Translator: Naim Daka <naim70@freesurf.ch>\n"
 "Language-Team: Albanian <LL@li.org>\n"
@@ -65,9 +65,9 @@ msgid "Please insert floppy disk:"
 msgstr "Ju lutemi futni një disketë flopi në lexues:"
 
 #: ../../standalone/drakTermServ:1
-#, fuzzy, c-format
+#, c-format
 msgid "DrakTermServ"
-msgstr "Riçfaqe drakTermServ"
+msgstr "DrakTermServ"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -194,7 +194,7 @@ msgstr ""
 "Nëse konfigurohet, dërgoje një raport mail në këtë adresë e-mail përdryshe "
 "dërgoje tek administratori (root)."
 
-#: ../../standalone/drakconnect:1
+#: ../../modules/interactive.pm:1 ../../standalone/drakconnect:1
 #, c-format
 msgid "Parameters"
 msgstr "Parametrat"
@@ -514,6 +514,11 @@ msgstr "Bus"
 msgid "Iraq"
 msgstr "Iraki"
 
+#: ../../standalone/drakbug:1
+#, c-format
+msgid "connecting to %s ..."
+msgstr "lidhje në %s ..."
+
 #: ../../standalone/drakgw:1
 #, c-format
 msgid "Potential LAN address conflict found in current config of %s!\n"
@@ -559,6 +564,21 @@ msgstr "Hulumtoi polisat e instaluara"
 #, c-format
 msgid "Default desktop"
 msgstr "Tryezë me marrëveshje"
+
+#: ../../standalone/drakbug:1
+#, c-format
+msgid ""
+"To submit a bug report, click on the button report.\n"
+"This will open  a web browser window on %s\n"
+" where you'll find a form to fill in.  The information displayed above will "
+"be \n"
+"transferred to that server."
+msgstr ""
+"Për ta nënshtruar një raport bug-i, kliko mbi kopsën raport.\n"
+"Kjo do të hapë një dritare shfletuese në %s\n"
+" që nga aty, ju do të gjeni një formularë për ta mbushur. Infomacioni i\n"
+" paraqitur\n"
+"do të trasferohet në server."
 
 #: ../../lang.pm:1
 #, c-format
@@ -1147,6 +1167,61 @@ msgid ""
 msgstr ""
 "Protokol për pjesën tjetër të botës\n"
 "Pa D-Kanal (vija të huazuara)"
+
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"        - /etc/xinetd.d/tftp:\n"
+"        \tdrakTermServ will configure this file to work in conjunction with "
+"the images created\n"
+"        \tby mkinitrd-net, and the entries in /etc/dhcpd.conf, to serve up "
+"the boot image to \n"
+"        \teach diskless client.\n"
+"\n"
+"        \tA typical tftp configuration file looks like:\n"
+"        \t\t\n"
+"        \tservice tftp\n"
+"\t\t\t{\n"
+"                        disable         = no\n"
+"                        socket_type  = dgram\n"
+"                        protocol        = udp\n"
+"                        wait             = yes\n"
+"                        user             = root\n"
+"                        server          = /usr/sbin/in.tftpd\n"
+"                        server_args  = -s /var/lib/tftpboot\n"
+"        \t}\n"
+"        \t\t\n"
+"        \tThe changes here from the default installation are changing the "
+"disable flag to\n"
+"        \t'no' and changing the directory path to /var/lib/tftpboot, where "
+"mkinitrd-net\n"
+"        \tputs its images."
+msgstr ""
+"        - /etc/xinetd.d/tftp:\n"
+"        \t\tdrakTermServ do të konfiguroj këtë skedare të funksionoj në "
+"bashkim me imazhet e krijuara nga\n"
+"        \t\tmkinitrd-net, dhe të hyrjeve në /etc/dhcpd.conf, për te servuar "
+"secilin imazhe me nisje të udhëzuar\n"
+"        \t\ttë një klienti me disk të vogël.\n"
+"\n"
+"        \t\tNjë konfigurim tipik i skedares tftp duket sikur:\n"
+"        \t\t\n"
+"        \tservice tftp\n"
+"\t\t\t{\n"
+"                        disable         = no\n"
+"                        socket_type  = dgram\n"
+"                        protocol        = udp\n"
+"                        wait             = yes\n"
+"                        user             = root\n"
+"                        server          = /usr/sbin/in.tftpd\n"
+"                        server_args  = -s /var/lib/tftpboot\n"
+"        \t}\n"
+"        \t\t\n"
+"        \t\tNdryshimet këtu nga instalimi me marrëveshje kanë ndërruar "
+"shenjat e lira në\n"
+"        \t\t'no' ndërrimin e repertorit me shtegnë /var/lib/tftpboot, ku "
+"mkinitrd-net\n"
+"        \t\tfutë imazhet e saja."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -1822,15 +1897,15 @@ msgstr ""
 msgid "Use the %c and %c keys for selecting which entry is highlighted."
 msgstr "Përdorni çelsat %c dhe %c për të caktuar hyrjet tuaja zgjedhëse"
 
-#: ../../standalone/drakperm:1
-#, c-format
-msgid "Enable \"%s\" to execute the file"
-msgstr "Mundësoje \"%s\" ekzekutimin e skedares"
-
 #: ../../mouse.pm:1
 #, c-format
 msgid "Generic 2 Button Mouse"
 msgstr "Mini satandard me 2 Kopsa"
+
+#: ../../standalone/drakperm:1
+#, c-format
+msgid "Enable \"%s\" to execute the file"
+msgstr "Mundësoje \"%s\" ekzekutimin e skedares"
 
 #: ../../lvm.pm:1
 #, c-format
@@ -3067,6 +3142,36 @@ msgstr "Kjo është një pako e nevojshme, dhe nuk mund çzgjedhet"
 
 #: ../../standalone/drakTermServ:1
 #, c-format
+msgid ""
+"        - Create etherboot floppies/CDs:\n"
+"        \tThe diskless client machines need either ROM images on the NIC, or "
+"a boot floppy\n"
+"        \tor CD to initate the boot sequence.  drakTermServ will help "
+"generate these\n"
+"        \timages, based on the NIC in the client machine.\n"
+"        \t\t\n"
+"        \tA basic example of creating a boot floppy for a 3Com 3c509 "
+"manually:\n"
+"        \t\t\n"
+"        \tcat /usr/lib/etherboot/boot1a.bin \\\n"
+"        \t\t/usr/lib/etherboot/lzrom/3c509.lzrom > /dev/fd0"
+msgstr ""
+"        - Krijo nisje të udhëzuar të ether (ethetboot) flopi/CDs:\n"
+"        \tPër klientat me disqe të vogla, në makina nevojiten imazhet e tyre "
+"ROM, në NIC apo\n"
+"        \tnjë flopi disk me nisje të udhëzuar ose CD për të inicializuar "
+"sekuencat me nisje\n"
+"        \ttë udhëzuar. drakTermServ do ndihmojë në prodhimin e këtyre imazheve,\n"
+"        \ttë bazuar në NIC në makina kliente.\n"
+"        \t\t\n"
+"        \tNjë shembull bazues për krijimin e një diskete floppy me nisje të "
+"udhëzuar për një 3Com 3c509 manuale:\n"
+"        \t\t\n"
+"        \tcat /usr/lib/etherboot/boot1a.bin \\\n"
+"        \t\t/usr/lib/etherboot/lzrom/3c509.lzrom > /dev/fd0"
+
+#: ../../standalone/drakTermServ:1
+#, c-format
 msgid "Etherboot ISO image is %s"
 msgstr "Imazhi ISO Etherboot është %s"
 
@@ -3482,34 +3587,6 @@ msgstr "Fshehi skedaret"
 msgid "Auto-detect printers connected to this machine"
 msgstr "Zbulo automatikisht stampuesit e lidhur në këtë makinë"
 
-#: ../../standalone/drakxtv:1
-#, c-format
-msgid ""
-"XawTV isn't installed!\n"
-"\n"
-"\n"
-"If you do have a TV card but DrakX has neither detected it (no bttv nor "
-"saa7134\n"
-"module in \"/etc/modules\") nor installed xawtv, please send the\n"
-"results of \"lspcidrake -v -f\" to \"install\\@mandrakesoft.com\"\n"
-"with subject \"undetected TV card\".\n"
-"\n"
-"\n"
-"You can install it by typing \"urpmi xawtv\" as root, in a console."
-msgstr ""
-"XawTV nuk është i instaluar!\n"
-"\n"
-"\n"
-"Nëse ju posedoni një kartelë TV dhe DrakX nuk e ka zbuluar atë (asnjë modul "
-"bttv dhe saa7134\n"
-"në \"/etc/modules\") ose nuk e ka instaluar xawtv, ju lutemi dërgoni\n"
-"rezultatet e \"lspcidrake -v -f\" në \"install\\@mandrakesoft.com\"\n"
-"me lëndën \"undetected TV card\".\n"
-"\n"
-"\n"
-"Ju mund ta instaloni atë duke shtypur \"urpmi xawtv\" si përdorues "
-"administrator (root), në konsolë."
-
 #: ../../any.pm:1
 #, c-format
 msgid "Sorry, no floppy drive available"
@@ -3777,9 +3854,9 @@ msgid "Re-generating list of configured scanners ..."
 msgstr "Ri-prodhimi i listës së skanerve konfigurues ..."
 
 #: ../../modules/interactive.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Module configuration"
-msgstr "Konfigurimi manuel"
+msgstr "Modul Konfigurimi"
 
 #: ../../harddrake/data.pm:1
 #, c-format
@@ -4087,7 +4164,7 @@ msgstr "Gjeometria: %s cilindrat, %s kokat, %s sektorët\n"
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Printing on the printer \"%s\""
-msgstr "Stampin në stampuesin \"%s\""
+msgstr "Stampim në stampuesin \"%s\""
 
 #: ../../standalone/drakTermServ:1
 #, c-format
@@ -4100,6 +4177,19 @@ msgstr ""
 #, c-format
 msgid "Restore From Tape"
 msgstr "Riparoje Nga Kaseta"
+
+#: ../../standalone/drakbug:1
+#, c-format
+msgid ""
+"To submit a bug report, click the report button, which will open your "
+"default browser\n"
+"to Anthill where you will be able to upload the above information as a bug "
+"report."
+msgstr ""
+"Për ta nënshtruar një raport bug-i, kliko mbi kopsën raport, e cila do të "
+"hapë një dritare shfletuese me marrëveshje\n"
+"që nga aty, ju do të gjeni një formularë për ta mbushur. Infomacioni bug i\n"
+"paraqitur do të raportohet."
 
 #: ../../network/netconnect.pm:1
 #, c-format
@@ -4266,7 +4356,7 @@ msgstr ""
 msgid "Need hostname, username and password!"
 msgstr "Ka navojë për emër ftues, emër përdoruesi dhe parulla!"
 
-#: ../../network/adsl.pm:1
+#: ../../network/tools.pm:1
 #, c-format
 msgid "Insert floppy"
 msgstr "Futeni disketën"
@@ -4411,10 +4501,17 @@ msgstr "Interfaci i Rrjetit është veçse i konfiguraur"
 msgid "Couldn't access the floppy!"
 msgstr "Nuk mund të hyjë në lexuesin e disketës flopi!"
 
-#: ../../standalone/drakbug:1
+#: ../../install_messages.pm:1
 #, c-format
-msgid "connecting to Bugzilla wizard ..."
-msgstr "lidhja në asistentin Bugzilla ... "
+msgid ""
+"Warning: Free Software may not necessarily be patent free, and some Free\n"
+"Software included may be covered by patents in your country. For example, "
+"the\n"
+"MP3 decoders included may require a licence for further usage (see\n"
+"http://www.mp3licensing.com for more details). If you are unsure if a "
+"patent\n"
+"may be applicable to you, check your local laws."
+msgstr ""
 
 #: ../../network/drakfirewall.pm:1
 #, c-format
@@ -4602,6 +4699,11 @@ msgstr "Pranoje"
 #, c-format
 msgid "Description"
 msgstr "Përshkrimi"
+
+#: ../../standalone/drakbug:1
+#, c-format
+msgid "Please enter summary text."
+msgstr "Ju lutemi futni tekstin përmbledhës."
 
 #: ../../fsedit.pm:1
 #, c-format
@@ -5579,7 +5681,7 @@ msgstr ""
 msgid "Right Control key"
 msgstr "Çelësi Kontrollues Djathtas"
 
-#: ../../network/adsl.pm:1
+#: ../../network/tools.pm:1
 #, c-format
 msgid ""
 "Insert a FAT formatted floppy in drive %s with %s in root directory and "
@@ -6726,6 +6828,32 @@ msgstr "Kujdes : Adresa IP %s është veçse e rezervuar !"
 msgid "busmouse"
 msgstr "min bus"
 
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"        - Create Etherboot Enabled Boot Images:\n"
+"        \tTo boot a kernel via etherboot, a special kernel/initrd image must "
+"be created.\n"
+"        \tmkinitrd-net does much of this work and drakTermServ is just a "
+"graphical \n"
+"        \tinterface to help manage/customize these images. To create the "
+"file \n"
+"        \t/etc/dhcpd.conf.etherboot-pcimap.include that is pulled in as an "
+"include in \n"
+"        \tdhcpd.conf, you should create the etherboot images for at least "
+"one full kernel."
+msgstr ""
+"        - Krijo nisje me Etherboot, Imazh i Aktivizuar me Boot:\n"
+"        \tPër të nisur një bërthamë via nisje me udhëzim në Ether, një imazh "
+"imazhe speciale duhet të krijohet në bërthamë/initrd.\n"
+"        \tmkinitrd-net nuk është një punim me rëndësi drakTermServ por është "
+"vetëm një interfac grafike \n"
+"        \tpër të ndihmuar në qeverisjen/personalizimin e këtyre imazheve. "
+"Për të krijuar \n"
+"\t\tskedare /etc/dkcpd.conf.etherboot-pcimap.inlude ato do të tërhiqen sikur "
+"përfshirje të dhcpd.conf, dhe ju \n"
+"\t\tduhet të krijoni një imazh më së paku të etherboot në bërthamë."
+
 #: ../../network/tools.pm:1 ../../standalone/drakconnect:1
 #, c-format
 msgid "Account Login (user name)"
@@ -7108,37 +7236,6 @@ msgstr ""
 #, c-format
 msgid "Floppy"
 msgstr "Disketë Floppy"
-
-#: ../../standalone/drakTermServ:1
-#, c-format
-msgid ""
-"        - Maintain /etc/exports:\n"
-"        \t\tClusternfs allows export of the root filesystem to diskless "
-"clients. drakTermServ\n"
-"        \t\tsets up the correct entry to allow anonymous access to the root "
-"filesystem from\n"
-"        \t\tdiskless clients.\n"
-"\n"
-"        \t\tA typical exports entry for clusternfs is:\n"
-"        \t\t\n"
-"        \t\t/                  (ro,all_squash)\n"
-"        \t\t/home              SUBNET/MASK(rw,root_squash)\n"
-"\t\t\t\n"
-"\t\t\tWith SUBNET/MASK being defined for your network."
-msgstr ""
-"        - Mirëmbajtja /etc/exports:\n"
-"        \t\tClusternfs lejon exportimin e sistemit të sekdareve root dhe të "
-"klientave në disk më të vogël. drakTermServ\n"
-"        \t\trregullon dhe korigjon hyrjet e lejuara anonime në sistemin e "
-"skedareve root nga\n"
-"        \t\tklientat me disk më të vogël.\n"
-"\n"
-"        \t\tExportime tipike me hyrje për clusternfs janë:\n"
-"        \t\t\n"
-"        \t\t/                  (ro,all_squash)\n"
-"        \t\t/home              NDËR-RRJET/MASKUAR(rw,root_squash)\n"
-"\t\t\t\n"
-"\t\t\tMe NDËR-RRJET/MASKUAR përcaktohet rrjeti i juaj (network)."
 
 #: ../../standalone/drakfont:1
 #, c-format
@@ -7800,6 +7897,11 @@ msgstr "Shpërndarja e Lidhjes Internet"
 msgid "Choose file"
 msgstr "Zgjedhe skedaren"
 
+#: ../../standalone/drakbug:1
+#, c-format
+msgid "Summary: "
+msgstr "Përmbledhje:"
+
 #: ../../network/shorewall.pm:1
 #, c-format
 msgid ""
@@ -7879,6 +7981,24 @@ msgstr "Teritorit Franqez Jugor"
 #, c-format
 msgid "the vendor name of the processor"
 msgstr "emri i shitësit të këtij procesori"
+
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"        - Maintain %s:\n"
+"        \tFor users to be able to log into the system from a diskless "
+"client, their entry in\n"
+"        \t/etc/shadow needs to be duplicated in %s. drakTermServ\n"
+"        \thelps in this respect by adding or removing system users from this "
+"file."
+msgstr ""
+"        - Mirëmbajtja %s:\n"
+"        \t\tPër përdoruesit që të janë në gjendje të lidhen në sistem nga "
+"një klient me disk më të vogël, hyrjet e tyre në\n"
+"        \t\t/etc/shadow kanë nevojë të dyfishohen në %s. drakTermServ e "
+"ndihmonë\n"
+"        \t\tkëtë me një respekt duke shtuar apo zhdukur përdorues të "
+"sistemit nga kjo skedare."
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -8205,6 +8325,11 @@ msgstr "Riparoi Përdoruesit"
 #, c-format
 msgid "Encryption key for %s"
 msgstr "Çelës i kriptuar për %s"
+
+#: ../../install_steps_interactive.pm:1
+#, c-format
+msgid "Do you want to recover your system?"
+msgstr "A dëshironi ta zbuloni sistemin tuaj?"
 
 #: ../../services.pm:1
 #, c-format
@@ -8654,6 +8779,11 @@ msgstr "/_Konfigurim i CUPS"
 msgid ", "
 msgstr ", "
 
+#: ../../standalone/drakbug:1
+#, c-format
+msgid "Submit lspci"
+msgstr "Nënshtroje lspci"
+
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Remove selected host/network"
@@ -8897,6 +9027,11 @@ msgstr ""
 "\n"
 "Do ta konfiguroj kartelën tuaj të Zonës së Rrjetit Lokal me këtë përshtatës."
 
+#: ../../standalone/drakbug:1
+#, c-format
+msgid "Submit cpuinfo"
+msgstr "Nënshtroje cpuinfo"
+
 #: ../../install_steps_gtk.pm:1
 #, c-format
 msgid "Minimal install"
@@ -8906,6 +9041,11 @@ msgstr "Instalim minimal"
 #, c-format
 msgid "Ethiopia"
 msgstr "Etiopia"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "YES"
+msgstr "PO"
 
 #: ../../security/l10n.pm:1
 #, c-format
@@ -8936,7 +9076,7 @@ msgstr "Madhësia totale: %d / %d MB"
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "disabled"
-msgstr "jo i lirë"
+msgstr "i nxënë"
 
 #: ../../standalone/scannerdrake:1
 #, c-format
@@ -9248,15 +9388,6 @@ msgstr "Tipi i instalimit"
 #, c-format
 msgid "Printer \"%s\" on SMB/Windows server \"%s\""
 msgstr "Stampues \"%s\" mbi serverin SMB/Windows \"%s\""
-
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid ""
-"\n"
-"- Daemon (%s) include:\n"
-msgstr ""
-"\n"
-"- Daemon (%s) përfshinë:\n"
 
 #: ../../modules/parameters.pm:1
 #, c-format
@@ -9582,6 +9713,11 @@ msgstr "Frekuencë Horizontale Sinkronizuese: %s\n"
 msgid "Path"
 msgstr "Shtegu"
 
+#: ../../standalone/drakbug:1
+#, c-format
+msgid "NOT FOUND"
+msgstr "NUK GJINDET"
+
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid ""
@@ -9625,7 +9761,7 @@ msgstr ""
 #: ../../standalone/scannerdrake:1
 #, c-format
 msgid "Add host"
-msgstr "Shto një ftues"
+msgstr "Shtoje një ftues"
 
 #: ../../harddrake/sound.pm:1
 #, c-format
@@ -10192,25 +10328,6 @@ msgstr "me rëndësi"
 msgid "Total Progress"
 msgstr "Përparsi Totale"
 
-#: ../../standalone/drakTermServ:1
-#, c-format
-msgid ""
-"        - Maintain /etc/shadow\\$\\$CLIENT\\$\\$:\n"
-"        \t\tFor users to be able to log into the system from a diskless "
-"client, their entry in\n"
-"        \t\t/etc/shadow needs to be duplicated in /etc/shadow\\$\\$CLIENTS\\$"
-"\\$. drakTermServ helps\n"
-"        \t\tin this respect by adding or removing system users from this "
-"file."
-msgstr ""
-"        - Mirëmbajtja /etc/shadow\\$\\$CLIENT\\$\\$:\n"
-"        \t\tPër përdoruesit që të janë në gjendje të lidhen në sistem nga "
-"një klient me disk më të vogël, hyrjet e tyre në\n"
-"        \t\t/etc/shadow kanë nevojë të dyfishohen në /etc/shadow\\$\\$CLIENTS"
-"\\$\\$. drakTermServ e ndihmonë\n"
-"        \t\tkëtë me një respekt duke shtuar apo zhdukur përdorues të "
-"sistemit nga kjo skedare."
-
 #: ../../help.pm:1
 #, c-format
 msgid ""
@@ -10343,6 +10460,40 @@ msgstr ""
 "Përdori regjistrimet Njëra pas Tjetrës/Ndryshueshëm (mos e zëvendëso "
 "regjistrimin e vjetër)"
 
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"        - Maintain /etc/dhcpd.conf:\n"
+"        \tTo net boot clients, each client needs a dhcpd.conf entry, "
+"assigning an IP \n"
+"        \taddress and net boot images to the machine. drakTermServ helps "
+"create/remove \n"
+"        \tthese entries.\n"
+"\t\t\t\n"
+"        \t(PCI cards may omit the image - etherboot will request the correct "
+"image. \n"
+"\t\t\tYou should also consider that when etherboot looks for the images, it "
+"expects \n"
+"\t\t\tnames like boot-3c59x.nbi, rather than boot-3c59x.2.4.19-16mdk.nbi).\n"
+"\t\t\t \n"
+"        \tA typical dhcpd.conf stanza to support a diskless client looks "
+"like:"
+msgstr ""
+"        - Mirëmbajtje e /etc/dhcpd.conf:\n"
+"        \t\tPër një nisje me udhëzim të klientave në rrjet, secili klient ka "
+"nevojë, për një hyrje të nënshkruar në adresën IP\n"
+"        \t\tdhe imazhi me nisje të udhëzuar në makinë. drakTermServ do të "
+"ndihmojë në krijimin/zhdukjen e këtyre hyrjeve.\n"
+"\t\t\t\n"
+"        \t\t(kartela PCI mund të largojë imazhin - etherboot dhe ta kërkojë "
+"një imazhë korrekt. Ju duhet\n"
+"        \t\tta konsideroni njashtu se kur etherboot i kërkon imazhet, ai "
+"mundohet të takoj me emra sikur\n"
+"        \t\tboot-3c59x.nbi, më parë se boot-3c59x.2.4.19-16mdk.nbi).\n"
+"\t\t\t \n"
+"        \t\tAjo pjesë tipike dhcpd.conf përkrahë një klient disku më të "
+"vogël i cili duket sikur:"
+
 #: ../../harddrake/sound.pm:1
 #, c-format
 msgid "There's no known driver for your sound card (%s)"
@@ -10461,6 +10612,15 @@ msgid ""
 msgstr ""
 "koordinatat në x të zonës së tekstit\n"
 "në numrat e karakterëve"
+
+#: ../../fsedit.pm:1
+#, c-format
+msgid ""
+"You may not be able to install lilo (since lilo doesn't handle a LV on "
+"multiple PVs)"
+msgstr ""
+"Është e mundur që nuk mund të instalohet lilo (prej se nuk përmban një LV në "
+"PV-të e dyfishta)"
 
 #: ../../install_steps_gtk.pm:1
 #, c-format
@@ -10761,6 +10921,16 @@ msgstr "Emri i ftuesit nevojitet"
 msgid "Unselect fonts installed"
 msgstr "Çzgjedhi polisat e instaluara"
 
+#: ../../mouse.pm:1
+#, c-format
+msgid "Wheel"
+msgstr "Rrota"
+
+#: ../../standalone/drakbug:1
+#, c-format
+msgid "Submit kernel version"
+msgstr "Nënshtroje versionin e bërthamës"
+
 #: ../../any.pm:1 ../../help.pm:1 ../../install_steps_gtk.pm:1
 #: ../../install_steps_interactive.pm:1 ../../interactive.pm:1
 #: ../../ugtk2.pm:1 ../../Xconfig/resolution_and_depth.pm:1
@@ -10781,11 +10951,6 @@ msgstr "Anulo"
 #, c-format
 msgid "Searching for configured scanners ..."
 msgstr "Hulumtim në konfigurmin e skanerve..."
-
-#: ../../mouse.pm:1
-#, c-format
-msgid "Wheel"
-msgstr "Rrota"
 
 #: ../../harddrake/data.pm:1
 #, c-format
@@ -10854,6 +11019,11 @@ msgstr "Me marrëveshje"
 #, c-format
 msgid "Button 2 Emulation"
 msgstr "Imitues i Kopsës 2"
+
+#: ../../standalone/drakbug:1
+#, c-format
+msgid "Please enter a package name."
+msgstr "Ju lutemi futni emrin e pakos."
 
 #: ../../security/l10n.pm:1
 #, c-format
@@ -10937,6 +11107,11 @@ msgstr ""
 " E drejtë autori (C) 2002 nga MandrakeSoft \n"
 "\tStew Benedict sbenedict\\@mandrakesoft.com\n"
 "\n"
+
+#: ../../install_messages.pm:1
+#, c-format
+msgid "http://www.mandrakelinux.com/en/92errata.php3"
+msgstr "http://www.mandrakelinux.com/en/92errata.php3"
 
 #: ../../lang.pm:1
 #, c-format
@@ -11105,6 +11280,81 @@ msgstr "Çelës kriptues i sistemit të skedareve"
 #, c-format
 msgid "Gujarati"
 msgstr "Gujarati"
+
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"        While you can use a pool of IP addresses, rather than setup a "
+"specific entry for\n"
+"        a client machine, using a fixed address scheme facilitates using the "
+"functionality\n"
+"        of client-specific configuration files that ClusterNFS provides.\n"
+"\t\t\t\n"
+"        Note: The '#type' entry is only used by drakTermServ.  Clients can "
+"either be 'thin'\n"
+"        or 'fat'.  Thin clients run most software on the server via xdmcp, "
+"while fat clients run \n"
+"        most software on the client machine. A special inittab, %s is\n"
+"        written for thin clients. System config files xdm-config, kdmrc, and "
+"gdm.conf are \n"
+"        modified if thin clients are used, to enable xdmcp. Since there are "
+"security issues in \n"
+"        using xdmcp, hosts.deny and hosts.allow are modified to limit access "
+"to the local\n"
+"        subnet.\n"
+"\t\t\t\n"
+"        Note: The '#hdw_config' entry is also only used by drakTermServ.  "
+"Clients can either \n"
+"        be 'true' or 'false'.  'true' enables root login at the client "
+"machine and allows local \n"
+"        hardware configuration of sound, mouse, and X, using the 'drak' "
+"tools. This is enabled \n"
+"        by creating separate config files associated with the client's IP "
+"address and creating \n"
+"        read/write mount points to allow the client to alter the file. Once "
+"you are satisfied \n"
+"        with the configuration, you can remove root login privileges from "
+"the client.\n"
+"\t\t\t\n"
+"        Note: You must stop/start the server after adding or changing "
+"clients."
+msgstr ""
+"\t\t\tPërderisa ju i përdorni rrjedhat e adresave IP, më mirë është që t' "
+"instaloni hyrjet për\n"
+"\t\t\tnjë klient makine, përdorimi i adresave fikse shematike do të "
+"lehtësojnë përdorimin e funksionimit të\n"
+"\t\t\tnjë klienti-specifik për konfgurimin e skedareve të furnizuara "
+"ClusterNFS.\n"
+"\t\t\t\n"
+"\t\t\tShënim: Hyrja \"#type\" përdoret vetëm nga drakTermServ. Klientat mund "
+"të jenë të \"tiny\"\n"
+"\t\t\tapo të 'fat'. Klientat e hollë nisin më së shumti programe në server "
+"via xdmcp, përderisa klientat e trashë nisin më së shumti\n"
+"\t\t\tprograme në makina kliente. Në tabelë hyrëse speciale (inittab), %s "
+"është\n"
+"\t\t\tshkruar për klienta të hollë. Systemi konfigurues i skedareve xdm-"
+"config, kdmrc, dhe gdm.conf ndryshohet\n"
+"\t\t\tnëse këta klienta të hollë përdoren tani, në xdmcp të lirë për "
+"përdorim. Prej se janë siguruarë kalimet në përdorimin e xdmcp,\n"
+"\t\t\thosts.deny dhe hosts.allow janë ndryshuar kufijt e hyrjeve në ndër "
+"rrjetet\n"
+"\t\t\tlokale.\n"
+"\t\t\t\n"
+"\t\t\tShënim: Hyrja \"#hdw_config\" njashtu përdoret nga drakTermServ. "
+"Klientat mund të jenë \n"
+"të 'true' (vërtet) apo të 'false' (rrejshëm). 'true' mundësojn një lidhje "
+"administratori në makinën e klientit, dhe njashtu \n"
+"\t\t\tmundëson konfigurimin e mjeteve, p.sh. të zërit, minit, dhe X, duke "
+"pëdoruru veglat 'drak'. Kjo mund të bëhet me\n"
+"\t\t\tkrijimin e një konfigurimi e skedareve të ndara duke i bashkangjitur "
+"me adresën IP të klientave tjerë dhe krijimin \n"
+"\t\t\te pikava montuese lexim/shkrim për tu mondësuar klientave ndryshimin e "
+"skedares. Mbasi që ju jeni i kënaqur me \n"
+"\t\t\tkonfigurimin e bërë, ju mund ta zhdukni lidhjen administrator të "
+"privilegjuar nga ky klient.\n"
+"\t\t\t\n"
+"\t\t\tShënim: Ju duhet ta ndalni/nisni serverin mbasi ti shtoni apo ti "
+"ndryshoni klientat."
 
 #: ../../interactive/stdio.pm:1
 #, c-format
@@ -11431,81 +11681,6 @@ msgstr ""
 "\n"
 "\n"
 "http://www.linux-mandrake.com/en/hardware.php3"
-
-#: ../../standalone/drakTermServ:1
-#, c-format
-msgid ""
-"\t\t\tWhile you can use a pool of IP addresses, rather than setup a specific "
-"entry for\n"
-"\t\t\ta client machine, using a fixed address scheme facilitates using the "
-"functionality\n"
-"\t\t\tof client-specific configuration files that ClusterNFS provides.\n"
-"\t\t\t\n"
-"\t\t\tNote: The \"#type\" entry is only used by drakTermServ.  Clients can "
-"either be 'thin'\n"
-"\t\t\tor 'fat'.  Thin clients run most software on the server via xdmcp, "
-"while fat clients run \n"
-"\t\t\tmost software on the client machine. A special inittab, /etc/inittab\\$"
-"\\$IP=client_ip\\$\\$ is\n"
-"\t\t\twritten for thin clients. System config files xdm-config, kdmrc, and "
-"gdm.conf are \n"
-"\t\t\tmodified if thin clients are used, to enable xdmcp. Since there are "
-"security issues in \n"
-"\t\t\tusing xdmcp, hosts.deny and hosts.allow are modified to limit access "
-"to the local\n"
-"\t\t\tsubnet.\n"
-"\t\t\t\n"
-"\t\t\tNote: The \"#hdw_config\" entry is also only used by drakTermServ.  "
-"Clients can either \n"
-"\t\t\tbe 'true' or 'false'.  'true' enables root login at the client machine "
-"and allows local \n"
-"\t\t\thardware configuration of sound, mouse, and X, using the 'drak' tools. "
-"This is enabled \n"
-"\t\t\tby creating separate config files associated with the client's IP "
-"address and creating \n"
-"\t\t\tread/write mount points to allow the client to alter the file. Once "
-"you are satisfied \n"
-"\t\t\twith the configuration, you can remove root login privileges from the "
-"client.\n"
-"\t\t\t\n"
-"\t\t\tNote: You must stop/start the server after adding or changing clients."
-msgstr ""
-"\t\t\tPërderisa ju i përdorni rrjedhat e adresave IP, më mirë është që t' "
-"instaloni hyrjet për\n"
-"\t\t\tnjë klient makine, përdorimi i adresave fikse shematike do të "
-"lehtësojnë përdorimin e funksionimit të\n"
-"\t\t\tnjë klienti-specifik për konfgurimin e skedareve të furnizuara "
-"ClusterNFS.\n"
-"\t\t\t\n"
-"\t\t\tShënim: Hyrja \"#type\" përdoret vetëm nga drakTermServ. Klientat mund "
-"të jenë të \"tiny\"\n"
-"\t\t\tapo të 'fat'. Klientat e hollë nisin më së shumti programe në server "
-"via xdmcp, përderisa klientat e trashë nisin më së shumti\n"
-"\t\t\tprograme në makina kliente. Në tabelë hyrëse speciale (inittab), /etc/"
-"inittab\\$\\$IP=client_ip\\$\\$ është\n"
-"\t\t\tshkruar për klienta të hollë. Systemi konfigurues i skedareve xdm-"
-"config, kdmrc, dhe gdm.conf ndryshohet\n"
-"\t\t\tnëse këta klienta të hollë përdoren tani, në xdmcp të lirë për "
-"përdorim. Prej se janë siguruarë kalimet në përdorimin e xdmcp,\n"
-"\t\t\thosts.deny dhe hosts.allow janë ndryshuar kufijt e hyrjeve në ndër "
-"rrjetet\n"
-"\t\t\tlokale.\n"
-"\t\t\t\n"
-"\t\t\tShënim: Hyrja \"#hdw_config\" njashtu përdoret nga drakTermServ. "
-"Klientat mund të jenë \n"
-"të 'true' (vërtet) apo të 'false' (rrejshëm). 'true' mundësojn një lidhje "
-"administratori në makinën e klientit, dhe njashtu \n"
-"\t\t\tmundëson konfigurimin e mjeteve, p.sh. të zërit, minit, dhe X, duke "
-"pëdoruru veglat 'drak'. Kjo mund të bëhet me\n"
-"\t\t\tkrijimin e një konfigurimi e skedareve të ndara duke i bashkangjitur "
-"me adresën IP të klientave tjerë dhe krijimin \n"
-"\t\t\te pikava montuese lexim/shkrim për tu mondësuar klientave ndryshimin e "
-"skedares. Mbasi që ju jeni i kënaqur me \n"
-"\t\t\tkonfigurimin e bërë, ju mund ta zhdukni lidhjen administrator të "
-"privilegjuar nga ky klient.\n"
-"\t\t\t\n"
-"\t\t\tShënim: Ju duhet ta ndalni/nisni serverin mbasi ti shtoni apo ti "
-"ndryshoni klientat."
 
 #: ../../standalone/drakconnect:1
 #, c-format
@@ -11923,38 +12098,14 @@ msgstr "/dev/hda"
 msgid "/dev/hdb"
 msgstr "/dev/hdb"
 
-#: ../../standalone/drakTermServ:1
+#: ../../standalone/drakbug:1
 #, c-format
 msgid ""
-"        - Maintain /etc/dhcpd.conf:\n"
-"        \t\tTo net boot clients, each client needs a dhcpd.conf entry, "
-"assigning an IP address\n"
-"        \t\tand net boot images to the machine. drakTermServ helps create/"
-"remove these entries.\n"
-"\t\t\t\n"
-"        \t\t(PCI cards may omit the image - etherboot will request the "
-"correct image. You should\n"
-"        \t\talso consider that when etherboot looks for the images, it "
-"expects names like\n"
-"        \t\tboot-3c59x.nbi, rather than boot-3c59x.2.4.19-16mdk.nbi).\n"
-"\t\t\t \n"
-"        \t\tA typical dhcpd.conf stanza to support a diskless client looks "
-"like:"
+"Application Name\n"
+"or Full Path:"
 msgstr ""
-"        - Mirëmbajtje e /etc/dhcpd.conf:\n"
-"        \t\tPër një nisje me udhëzim të klientave në rrjet, secili klient ka "
-"nevojë, për një hyrje të nënshkruar në adresën IP\n"
-"        \t\tdhe imazhi me nisje të udhëzuar në makinë. drakTermServ do të "
-"ndihmojë në krijimin/zhdukjen e këtyre hyrjeve.\n"
-"\t\t\t\n"
-"        \t\t(kartela PCI mund të largojë imazhin - etherboot dhe ta kërkojë "
-"një imazhë korrekt. Ju duhet\n"
-"        \t\tta konsideroni njashtu se kur etherboot i kërkon imazhet, ai "
-"mundohet të takoj me emra sikur\n"
-"        \t\tboot-3c59x.nbi, më parë se boot-3c59x.2.4.19-16mdk.nbi).\n"
-"\t\t\t \n"
-"        \t\tAjo pjesë tipike dhcpd.conf përkrahë një klient disku më të "
-"vogël i cili duket sikur:"
+"Emri i Aplikaciont\n"
+"apo Shtegu i Plot:"
 
 #: ../../services.pm:1
 #, c-format
@@ -12046,7 +12197,7 @@ msgstr "Mos i dërgo letrat që nuk nevojiten"
 #: ../../standalone/scannerdrake:1
 #, c-format
 msgid "Your scanner(s) will not be available on the network."
-msgstr ""
+msgstr "Skaneri(et) (t)juaj nuk do të jetë i lirë në rrjet."
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -12344,27 +12495,6 @@ msgstr "Problemet gjatë instalimit të pakove %s"
 msgid "You will receive an alert if the load is higher than this value"
 msgstr "Ju do të pranoni një alert nëse ngarkesa e makinës, e kalon këtë vlerë"
 
-#: ../../standalone/drakbug:1
-#, c-format
-msgid ""
-"\n"
-"\n"
-"To submit a bug report, click on the button report.\n"
-"This will open  a web browser window  on https://drakbug.mandrakesoft.com\n"
-" where you'll find a form to fill in.The information displayed above will "
-"be \n"
-"transferred to that server\n"
-"\n"
-msgstr ""
-"\n"
-"\n"
-"Për ta nënshtruar një raport bug-i, kliko mbi kopsën raport.\n"
-"Kjo do të hapë një dritare shfletuese në https://drakbug.mandrakesoft.com\n"
-" që nga aty, ju do të gjeni një formularë për ta mbushur. Infomacioni i\n"
-" paraqitur\n"
-"do të trasferohet në server\n"
-"\n"
-
 #: ../../standalone/scannerdrake:1
 #, c-format
 msgid "Add a scanner manually"
@@ -12506,7 +12636,7 @@ msgid "Set the shell timeout. A value of zero means no timeout."
 msgstr ""
 "Konfiguroje kohën dalëse të shell. Vlera zero d.m.th. asnjë kohë dalëse."
 
-#: ../../network/adsl.pm:1
+#: ../../network/tools.pm:1
 #, c-format
 msgid "Firmware copy succeeded"
 msgstr "Kopjim i sukseshëm i Firmware"
@@ -12889,11 +13019,6 @@ msgstr ""
 "Stampuesi \"%s\" ekziston më heret,\n"
 "a dëshironi me të vërtetë ta zëvendësoni këtë konfigurim?"
 
-#: ../../install_steps_interactive.pm:1
-#, c-format
-msgid "No partition available"
-msgstr "Asnjë ndarje e lirë"
-
 #: ../../standalone/scannerdrake:1
 #, c-format
 msgid "Use the scanners on hosts: "
@@ -12903,6 +13028,11 @@ msgstr "Përdori skanerët në ftuesit:"
 #, c-format
 msgid "Unselected All"
 msgstr "Gjitha të Çzgjedhurat"
+
+#: ../../install_steps_interactive.pm:1 ../../network/tools.pm:1
+#, c-format
+msgid "No partition available"
+msgstr "Asnjë ndarje e lirë"
 
 #: ../../standalone/printerdrake:1
 #, c-format
@@ -12944,7 +13074,7 @@ msgstr "Ndërtoje Bërthamë të plotë -->"
 msgid "modem"
 msgstr "modemi"
 
-#: ../../install_steps.pm:1
+#: ../../lang.pm:1
 #, c-format
 msgid "Welcome to %s"
 msgstr "Mirësevini në %s"
@@ -13027,6 +13157,15 @@ msgstr ""
 #, c-format
 msgid "Not the correct CD label. Disk is labelled %s."
 msgstr "Nuk është një CD korrekte. Ky Disk është i etiketuar me %s."
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid ""
+"\n"
+"- Daemon, %s via:\n"
+msgstr ""
+"\n"
+"- Daemon, (%s) via:\n"
 
 #: ../../standalone/drakgw:1
 #, c-format
@@ -13165,40 +13304,6 @@ msgstr ""
 "\n"
 "- Skedare të Sistemit:\n"
 
-#: ../../standalone/drakTermServ:1
-#, c-format
-msgid ""
-"        - Per client system configuration files:\n"
-"        \t\tThrough clusternfs, each diskless client can have its own unique "
-"configuration files\n"
-"        \t\ton the root filesystem of the server. By allowing local client "
-"hardware configuration, \n"
-"\t\t\t\tclients can customize files such as /etc/modules.conf, /etc/"
-"sysconfig/mouse, \n"
-"        \t\t/etc/sysconfig/keyboard on a per-client basis.\n"
-"\n"
-"        Note: Enabling local client hardware configuration does enable root "
-"login to the terminal \n"
-"        server on each client machine that has this feature enabled.  Local "
-"configuration can be turned\n"
-"        back off, retaining the configuration files, once the client machine "
-"is configured."
-msgstr ""
-"        - Sistemi konfigurues i skedareve për secilin klient:\n"
-"        \t\tNëpër clusternfs, secili klient me disk të vogël mund të posedoj "
-"një konfigurim të veqantë në skedare\n"
-"        \t\tnë sistemin e skedareve root në server. Në të ardhmën "
-"drakTermServ drakTermServ do të ndihmojë në krijimin e këtyre skedareve\n"
-"        \t\tsi për shembull /etc/modules.conf, /etc/sysconfig/mouse, \n"
-"        \t\t/etc/sysconfig/keyboard në secilin klient të tbazuar.\n"
-"\n"
-"        Shënim: lejimi i konfigurmit të materialit nga ana e klientave, nuk "
-"ka nevojë për një lidhje administratori, në terminal serveri \n"
-"        në secilin klient të makinës, kjo mundësi do të jetë në disponim. "
-"Konfigurimi lokal mund të kthehet mbrapa,\n"
-"        përkrahja e konfigurimit të skedares, mbasi që makina e klientit "
-"është konfiguruar me parë."
-
 #: ../../standalone/drakbug:1
 #, c-format
 msgid "Standalone Tools"
@@ -13255,6 +13360,9 @@ msgid ""
 "During installation, you will need to use the Right Control\n"
 "key to switch between the different keyboard layouts."
 msgstr ""
+"Këto rregullime do të aktivizohen mbasë instalimit.\n"
+"Gjatë instalimit, ju duhet ti përdorni kopsat e sakta\n"
+"Kontrolluese që të kaloni në çfaqje të tjera të tastierave."
 
 #: ../../lang.pm:1
 #, c-format
@@ -14050,7 +14158,7 @@ msgstr "Ndërtoni një ardhmëri Linux!"
 msgid "Local Printer"
 msgstr "Stampues Lokal"
 
-#: ../../network/adsl.pm:1
+#: ../../network/tools.pm:1
 #, c-format
 msgid "Floppy access error, unable to mount device %s"
 msgstr "Gabim hyrës në floppy, i pa mudnur montimi mbi mjetin %s?"
@@ -14154,61 +14262,6 @@ msgstr "Mjeti min: %s\n"
 #, c-format
 msgid "Reselect correct fonts"
 msgstr "Rizgjedhi polisat korrekte"
-
-#: ../../standalone/drakTermServ:1
-#, c-format
-msgid ""
-"        - /etc/xinetd.d/tftp:\n"
-"        \t\tdrakTermServ will configure this file to work in conjunction "
-"with the images created by\n"
-"        \t\tmkinitrd-net, and the entries in /etc/dhcpd.conf, to serve up "
-"the boot image to each\n"
-"        \t\tdiskless client.\n"
-"\n"
-"        \t\tA typical tftp configuration file looks like:\n"
-"        \t\t\n"
-"        \t\tservice tftp\n"
-"\t\t\t{\n"
-"                        disable         = no\n"
-"                        socket_type  = dgram\n"
-"                        protocol        = udp\n"
-"                        wait             = yes\n"
-"                        user             = root\n"
-"                        server          = /usr/sbin/in.tftpd\n"
-"                        server_args  = -s /var/lib/tftpboot\n"
-"        \t\t}\n"
-"        \t\t\n"
-"        \t\tThe changes here from the default installation are changing the "
-"disable flag to\n"
-"        \t\t'no' and changing the directory path to /var/lib/tftpboot, where "
-"mkinitrd-net\n"
-"        \t\tputs its images."
-msgstr ""
-"        - /etc/xinetd.d/tftp:\n"
-"        \t\tdrakTermServ do të konfiguroj këtë skedare të funksionoj në "
-"bashkim me imazhet e krijuara nga\n"
-"        \t\tmkinitrd-net, dhe të hyrjeve në /etc/dhcpd.conf, për te servuar "
-"secilin imazhe me nisje të udhëzuar\n"
-"        \t\ttë një klienti me disk të vogël.\n"
-"\n"
-"        \t\tNjë konfigurim tipik i skedares tftp duket sikur:\n"
-"        \t\t\n"
-"        \t\tservice tftp\n"
-"\t\t\t{\n"
-"                        disable         = no\n"
-"                        socket_type  = dgram\n"
-"                        protocol        = udp\n"
-"                        wait             = yes\n"
-"                        user             = root\n"
-"                        server          = /usr/sbin/in.tftpd\n"
-"                        server_args  = -s /var/lib/tftpboot\n"
-"        \t\t}\n"
-"        \t\t\n"
-"        \t\tNdryshimet këtu nga instalimi me marrëveshje kanë ndërruar "
-"shenjat e lira në\n"
-"        \t\t'no' ndërrimin e repertorit me shtegnë /var/lib/tftpboot, ku "
-"mkinitrd-net\n"
-"        \t\tfutë imazhet e saja."
 
 #: ../../help.pm:1
 #, c-format
@@ -14545,6 +14598,11 @@ msgstr "maj"
 msgid "Yaboot mode"
 msgstr "Modë me nisje të udhëzuar"
 
+#: ../../mouse.pm:1
+#, c-format
+msgid "Generic 3 Button Mouse"
+msgstr "Mini satandard me 3 Kopsa"
+
 #: ../../standalone/drakxtv:1
 #, c-format
 msgid "USA (cable)"
@@ -14559,11 +14617,6 @@ msgstr ""
 "I pa mundur ringarkimi i Lilo!\n"
 "Ngarkoje \"lilo\" në linjën komanduese si përdorues administrator (root) për "
 "të përfunduar instalimin e temës LILO."
-
-#: ../../mouse.pm:1
-#, c-format
-msgid "Generic 3 Button Mouse"
-msgstr "Mini satandard me 3 Kopsa"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -14913,35 +14966,6 @@ msgid ""
 msgstr ""
 " --id <id_label>       - ngarkoje faqen ndihmuese html e cila referohet në "
 "id_etiketë\n"
-
-#: ../../standalone/drakTermServ:1
-#, c-format
-msgid ""
-"        - Create etherboot floppies/CDs:\n"
-"        \t\tThe diskless client machines need either ROM images on the NIC, "
-"or a boot floppy\n"
-"        \t\tor CD to initate the boot sequence.  drakTermServ will help "
-"generate these images,\n"
-"        \t\tbased on the NIC in the client machine.\n"
-"        \t\t\n"
-"        \t\tA basic example of creating a boot floppy for a 3Com 3c509 "
-"manually:\n"
-"        \t\t\n"
-"        \t\tcat /usr/lib/etherboot/boot1a.bin \\\n"
-"        \t\t\t/usr/lib/etherboot/lzrom/3c509.lzrom > /dev/fd0"
-msgstr ""
-"        - Krijo nisje të udhëzuar të ether (ethetboot) flopi/CDs:\n"
-"        \t\tPër klientat me disqe të vogla, në makina nevojiten imazhet e "
-"tyre ROM, në NIC apo një flopi disk me nisje të udhëzuar\n"
-"        \t\tapo CD për të inicializuar sekuencat me nisje të udhëzuar. "
-"drakTermServ do ndihmojë në prodhimin e këtyre imazheve,\n"
-"        \t\ttë bazuar në NIC në makina kliente.\n"
-"        \t\t\n"
-"        \t\tNjë shembull bazues për krijimin e një diskete floppy me nisje "
-"të udhëzuar për një 3Com 3c509 manuale:\n"
-"        \t\t\n"
-"        \t\tcat /usr/lib/etherboot/boot1a.bin \\\n"
-"        \t\t\t/usr/lib/etherboot/lzrom/3c509.lzrom > /dev/fd0"
 
 #: ../../standalone/scannerdrake:1
 #, c-format
@@ -15341,11 +15365,6 @@ msgstr "Emri i pronës"
 msgid "Sharing of local printers"
 msgstr "Shpëndarja e stampuesve lokal"
 
-#: ../../install_messages.pm:1
-#, c-format
-msgid "http://www.mandrakelinux.com/en/92errata.php3"
-msgstr "http://www.mandrakelinux.com/en/92errata.php3"
-
 #: ../../security/help.pm:1
 #, c-format
 msgid "Enable/Disable libsafe if libsafe is found on the system."
@@ -15356,6 +15375,11 @@ msgstr ""
 #, c-format
 msgid "Available printers"
 msgstr "Stampuesit e lirë"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "NO"
+msgstr "JO"
 
 #: ../../diskdrake/hd_gtk.pm:1 ../../diskdrake/interactive.pm:1
 #, c-format
@@ -15389,31 +15413,6 @@ msgstr ""
 "\n"
 "\n"
 "Shtypni mbi \"%s\" për vazhduar."
-
-#: ../../standalone/drakTermServ:1
-#, c-format
-msgid ""
-"        - Create Etherboot Enabled Boot Images:\n"
-"        \t\tTo boot a kernel via etherboot, a special kernel/initrd image "
-"must be created.\n"
-"        \t\tmkinitrd-net does much of this work and drakTermServ is just a "
-"graphical interface\n"
-"        \t\tto help manage/customize these images. To create the file \n"
-"        \t\t/etc/dhcpd.conf.etherboot-pcimap.include that is pulled in as an "
-"include in \n"
-"        \t\tdhcpd.conf, you should create the etherboot images for at least "
-"one full kernel."
-msgstr ""
-"        - Krijo nisje me Etherboot, Imazhe i Lirë me Nisje Boot:\n"
-"        \t\tPër të nisur një bërthamë via nisje me udhëzim në Ether,\n"
-"        \t\tnjë imazhe speciale duhet të krijohet në bërthamë/initrd.\n"
-"        \t\tmkinitrd-net nuk është një punim me rëndësi drakTermServ por "
-"është vetëm një interfac grafikë\n"
-"        \t\tpër të ndihmuar në qeverisjen/personalizimin e këtyre imazheve.\n"
-"        \t\tPër të krijuar skedare /etc/dkcpd.conf.etherboot-pcimap.inlude\n"
-"         \t\tato do të tërhiqen sikur përfshirje të dhcpd.conf, dhe ju "
-"duhet\n"
-"         \t\ttë krijoni një imazh më së paku të etherboot në bërthamë."
 
 #: ../../printer/main.pm:1 ../../printer/printerdrake.pm:1
 #, c-format
@@ -16261,6 +16260,23 @@ msgstr "FATALË"
 msgid "Refresh the list"
 msgstr "Rifreskoje listën"
 
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"        - Per client %s:\n"
+"        \tThrough clusternfs, each diskless client can have its own unique "
+"configuration files\n"
+"        \ton the root filesystem of the server. By allowing local client "
+"hardware configuration, \n"
+"        \tdrakTermServ will help create these files."
+msgstr ""
+"        - Për secilin klient %s:\n"
+"        \t\tNëpër clusternfs, secili klient me disk të vogël mund të posedoj "
+"një konfigurim të veqantë në skedare dhe\n"
+"        \t\tnë sistemin e skedareve root në server. Në të ardhmën "
+"drakTermServ do të ndihmojë në krijimin e këtyre\n"
+"        \t\tskedareve."
+
 #: ../../standalone/drakpxe:1
 #, c-format
 msgid ""
@@ -16634,6 +16650,8 @@ msgstr "Japonishtë me 106 kopsa"
 #, c-format
 msgid "Could not install the packages needed to share your scanner(s)."
 msgstr ""
+"Nuk mund ti instaloj pakotë, që nevojiten në shpërndarjen e skanerit(ve) "
+"tuaj."
 
 #: ../../standalone/drakTermServ:1
 #, c-format
@@ -16830,12 +16848,17 @@ msgstr "Përgjithshëm"
 msgid "Cylinder %d to %d\n"
 msgstr "Cilindri %d në %d\n"
 
+#: ../../standalone/drakbug:1
+#, c-format
+msgid "YOUR TEXT HERE"
+msgstr "TEKSTI I JUAJ KËTU"
+
 #: ../../standalone/drakconnect:1
 #, c-format
 msgid "New profile..."
 msgstr "Profil i Ri..."
 
-#: ../../standalone/draksec:1
+#: ../../modules/interactive.pm:1 ../../standalone/draksec:1
 #, c-format
 msgid "NONE"
 msgstr "ASNJË"
@@ -17249,7 +17272,7 @@ msgstr "Klasë e medias"
 #, c-format
 msgid "You need to log out and back in again for changes to take effect"
 msgstr ""
-"Ju duhet të lidheni jashtë tij dhe të hyni prapë për ndryshimet bëra më parë."
+"Ju duhet të lidheni jashtë tij dhe të hyni prapë për ndryshimet bëra më parë"
 
 #: ../../standalone/scannerdrake:1
 #, c-format
@@ -17274,7 +17297,7 @@ msgstr "Shtoje ftusin/rrjetin"
 #: ../../standalone/scannerdrake:1
 #, c-format
 msgid "Scannerdrake will not be started now."
-msgstr ""
+msgstr "Scannerdrake nuk do të niset tani."
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -17423,6 +17446,11 @@ msgstr "Tjetër mjet MultiMedia"
 msgid "burner"
 msgstr "gdhendës"
 
+#: ../../standalone/drakbug:1
+#, c-format
+msgid "Bug Description/System Information"
+msgstr "Informacion Bug mbi Pëshkrimin/Sistemit"
+
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid " (Default is all users)"
@@ -17556,6 +17584,40 @@ msgstr "Opcionet me thirrje telefonike"
 #, c-format
 msgid "If no port is given, 631 will be taken as default."
 msgstr "Nëse asnjë port nuk jepet, 631 do të pranohet me marrëveshje."
+
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"        - Per client system configuration files:\n"
+"        \tThrough clusternfs, each diskless client can have its own unique "
+"configuration files\n"
+"        \ton the root filesystem of the server. By allowing local client "
+"hardware configuration, \n"
+"        \tclients can customize files such as /etc/modules.conf, /etc/"
+"sysconfig/mouse, \n"
+"        \t/etc/sysconfig/keyboard on a per-client basis.\n"
+"\n"
+"        Note: Enabling local client hardware configuration does enable root "
+"login to the terminal \n"
+"        server on each client machine that has this feature enabled.  Local "
+"configuration can be\n"
+"        turned back off, retaining the configuration files, once the client "
+"machine is configured."
+msgstr ""
+"        - Sistemi konfigurues i skedareve për secilin klient:\n"
+"        \tNëpër clusternfs, secili klient me disk të vogël mund të posedoj "
+"një konfigurim të veqantë në skedare\n"
+"        \tnë sistemin e skedareve root në server. Në të ardhmën drakTermServ "
+"drakTermServ do të ndihmojë në krijimin e këtyre skedareve\n"
+"        \tsi për shembull /etc/modules.conf, /etc/sysconfig/mouse, \n"
+"        \t/etc/sysconfig/keyboard në secilin klient të tbazuar.\n"
+"\n"
+"        Shënim: lejimi i konfigurmit të materialit nga ana e klientave, nuk "
+"ka nevojë për një lidhje administratori, në terminal serveri \n"
+"        në secilin klient të makinës, kjo mundësi do të jetë në disponim. "
+"Konfigurimi lokal mund të kthehet mbrapa,\n"
+"        përkrahja e konfigurimit të skedares, mbasi që makina e klientit "
+"është konfiguruar me parë."
 
 #: ../../install_steps_gtk.pm:1 ../../install_steps_interactive.pm:1
 #, c-format
@@ -17781,7 +17843,7 @@ msgstr ""
 "LPT2:, ..., stampues 1-rë USB: /dev/usb/lp0, stampues 2-të USB: /dev/usb/"
 "lp1, ...)."
 
-#: ../../network/adsl.pm:1 ../../network/netconnect.pm:1
+#: ../../network/netconnect.pm:1 ../../network/tools.pm:1
 #, c-format
 msgid "Next"
 msgstr "Tjetri"
@@ -19123,7 +19185,7 @@ msgstr " adsl"
 msgid "format of floppies supported by the drive"
 msgstr "formatimi i disketave flopi, përkrahet nga ky lexues"
 
-#: ../../network/adsl.pm:1
+#: ../../network/tools.pm:1
 #, c-format
 msgid "Firmware copy failed, file %s not found"
 msgstr "Kopjimi i Firmware dështoi, skedarje %s nuk është prezente"
@@ -19792,9 +19854,9 @@ msgid "The %s is not supported by this version of Mandrake Linux."
 msgstr "%s nuk përkrahet nga ky version i Mandrake Linux."
 
 #: ../../standalone/drakbackup:1
-#, fuzzy, c-format
+#, c-format
 msgid "tape"
-msgstr "Kasetë"
+msgstr "kasetë"
 
 #: ../../standalone/drakconnect:1
 #, c-format
@@ -19834,6 +19896,11 @@ msgstr ""
 "(gabimi është %s)\n"
 "\n"
 "A pajtoheni që ti humbni të gjitha ndarjetë?\n"
+
+#: ../../standalone/drakbug:1
+#, c-format
+msgid "Find Package"
+msgstr "Hulumtoje Pakon"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -19949,6 +20016,37 @@ msgstr "Konfigurimi LAN (rrjet lokal)"
 #, c-format
 msgid "hard disk model"
 msgstr "modeli i diskut të fort (hard disk)"
+
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"        - Maintain /etc/exports:\n"
+"        \tClusternfs allows export of the root filesystem to diskless "
+"clients. drakTermServ\n"
+"        \tsets up the correct entry to allow anonymous access to the root "
+"filesystem from\n"
+"        \tdiskless clients.\n"
+"\n"
+"        \tA typical exports entry for clusternfs is:\n"
+"        \t\t\n"
+"        \t/\t\t\t\t\t(ro,all_squash)\n"
+"        \t/home\t\t\t\tSUBNET/MASK(rw,root_squash)\n"
+"\t\t\t\n"
+"        \tWith SUBNET/MASK being defined for your network."
+msgstr ""
+"        - Mirëmbajtja /etc/exports:\n"
+"        \t\tClusternfs lejon exportimin e sistemit të sekdareve root dhe të "
+"klientave në disk më të vogël. drakTermServ\n"
+"        \t\trregullon dhe korigjon hyrjet e lejuara anonime në sistemin e "
+"skedareve root nga\n"
+"        \t\tklientat me disk më të vogël.\n"
+"\n"
+"        \t\tExportime tipike me hyrje për clusternfs janë:\n"
+"        \t\t\n"
+"        \t/\t\t\t\t\t(ro,all_squash)\n"
+"        \t\t/home              NDËR-RRJET/MASKUAR(rw,root_squash)\n"
+"\t\t\t\n"
+"\t\t\tMe NDËR-RRJET/MASKUAR përcaktohet rrjeti i juaj (network)."
 
 #: ../../fsedit.pm:1
 #, c-format
@@ -20069,9 +20167,9 @@ msgid "Configure X"
 msgstr "Konfigurim i X"
 
 #: ../../standalone/drakbackup:1
-#, fuzzy, c-format
+#, c-format
 msgid "hd"
-msgstr "Qadit"
+msgstr "hd"
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -20139,15 +20237,15 @@ msgstr "tastierë Angleze"
 msgid "Unmount"
 msgstr "Demonto"
 
-#: ../../standalone/drakfont:1
-#, c-format
-msgid "Uninstall Fonts"
-msgstr "Dezinstaloi Polisat"
-
 #: ../../mouse.pm:1
 #, c-format
 msgid "Microsoft Explorer"
 msgstr "Microsoft Explorer"
+
+#: ../../standalone/drakfont:1
+#, c-format
+msgid "Uninstall Fonts"
+msgstr "Dezinstaloi Polisat"
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -20482,6 +20580,8 @@ msgstr "Liberia"
 msgid ""
 "Could not install the packages needed to set up a scanner with Scannerdrake."
 msgstr ""
+"Nuk mund ti instaloj pakotë që nevojiten për rregullimin e skanerit me "
+"Scannerdrake."
 
 #: ../../standalone/drakgw:1
 #, c-format
@@ -20524,23 +20624,6 @@ msgstr "Nisja e \"%s\" ..."
 #, c-format
 msgid "enable radio support"
 msgstr "aktivizoje përkrahjen radio"
-
-#: ../../standalone/drakTermServ:1
-#, c-format
-msgid ""
-"        - Per client /etc/X11/XF86Config-4\\$\\$IP-ADDRESS\\$\\$:\n"
-"        \t\tThrough clusternfs, each diskless client can have its own unique "
-"configuration files\n"
-"        \t\ton the root filesystem of the server. By allowing local client "
-"hardware configuration, \n"
-"        \t\tdrakTermServ will help create these files."
-msgstr ""
-"        - Për secilin klient /etc/X11/XF86Config-4\\$\\$IP-ADDRESS\\$\\$:\n"
-"        \t\tNëpër clusternfs, secili klient me disk të vogël mund të posedoj "
-"një konfigurim të veqantë në skedare dhe\n"
-"        \t\tnë sistemin e skedareve root në server. Në të ardhmën "
-"drakTermServ do të ndihmojë në krijimin e këtyre\n"
-"        \t\tskedareve."
 
 #: ../../standalone/scannerdrake:1
 #, c-format
@@ -20978,6 +21061,32 @@ msgstr ""
 "Përgjithësia a veglave për leximin, dërgimin e letrave elektronike dhe "
 "shfletimin e Webit."
 
+#~ msgid ""
+#~ "XawTV isn't installed!\n"
+#~ "\n"
+#~ "\n"
+#~ "If you do have a TV card but DrakX has neither detected it (no bttv nor "
+#~ "saa7134\n"
+#~ "module in \"/etc/modules\") nor installed xawtv, please send the\n"
+#~ "results of \"lspcidrake -v -f\" to \"install\\@mandrakesoft.com\"\n"
+#~ "with subject \"undetected TV card\".\n"
+#~ "\n"
+#~ "\n"
+#~ "You can install it by typing \"urpmi xawtv\" as root, in a console."
+#~ msgstr ""
+#~ "XawTV nuk është i instaluar!\n"
+#~ "\n"
+#~ "\n"
+#~ "Nëse ju posedoni një kartelë TV dhe DrakX nuk e ka zbuluar atë (asnjë "
+#~ "modul bttv dhe saa7134\n"
+#~ "në \"/etc/modules\") ose nuk e ka instaluar xawtv, ju lutemi dërgoni\n"
+#~ "rezultatet e \"lspcidrake -v -f\" në \"install\\@mandrakesoft.com\"\n"
+#~ "me lëndën \"undetected TV card\".\n"
+#~ "\n"
+#~ "\n"
+#~ "Ju mund ta instaloni atë duke shtypur \"urpmi xawtv\" si përdorues "
+#~ "administrator (root), në konsolë."
+
 #~ msgid "-adobe-utopia-regular-r-*-*-25-*-*-*-p-*-iso8859-*,*-r-*"
 #~ msgstr "-adobe-utopia-regular-r-*-*-25-*-*-*-p-*-iso8859-*,*-r-*"
 
@@ -21013,14 +21122,6 @@ msgstr ""
 
 #~ msgid "Level 5"
 #~ msgstr "Niveli 5"
-
-#, fuzzy
-#~ msgid "Insert floppy and press %s"
-#~ msgstr "Futni një disketë në %s"
-
-#, fuzzy
-#~ msgid "Load"
-#~ msgstr "Polonia"
 
 #~ msgid "Bad Ip"
 #~ msgstr "Ip e pa pranueshme"
@@ -21331,9 +21432,6 @@ msgstr ""
 
 #~ msgid "Please enter the host name or IP."
 #~ msgstr "Ju lutemi futni emrin e ftuesit apo IP."
-
-#~ msgid "Please enter your login"
-#~ msgstr "Ju lutemi futni emrin lidhës"
 
 #~ msgid ""
 #~ " Copyright (C) 2001-2002 MandrakeSoft by DUPONT Sebastien <dupont_s"
@@ -22987,275 +23085,6 @@ msgstr ""
 
 #~ msgid "Discover MandrakeClub and Mandrake Corporate Club"
 #~ msgstr "Zbuloni MandrakeClub dhe Mandrake Corporate Club"
-
-#~ msgid ""
-#~ "drakTermServ Overview\n"
-#~ "\t\t\t   \n"
-#~ "        - Create Etherboot Enabled Boot Images:\n"
-#~ "        \t\tTo boot a kernel via etherboot, a special kernel/initrd image "
-#~ "must be created.\n"
-#~ "        \t\tmkinitrd-net does much of this work and drakTermServ is just "
-#~ "a graphical interface\n"
-#~ "        \t\tto help manage/customize these images.\n"
-#~ "\n"
-#~ "        - Maintain /etc/dhcpd.conf:\n"
-#~ "        \t\tTo net boot clients, each client needs a dhcpd.conf entry, "
-#~ "assigning an IP address\n"
-#~ "        \t\tand net boot images to the machine. drakTermServ helps create/"
-#~ "remove these entries.\n"
-#~ "\t\t\t\n"
-#~ "        \t\t(PCI cards may omit the image - etherboot will request the "
-#~ "correct image. You should\n"
-#~ "        \t\talso consider that when etherboot looks for the images, it "
-#~ "expects names like\n"
-#~ "        \t\tboot-3c59x.nbi, rather than boot-3c59x.2.4.19-16mdk.nbi).\n"
-#~ "\t\t\t \n"
-#~ "        \t\tA typical dhcpd.conf stanza to support a diskless client "
-#~ "looks like:\n"
-#~ "        \t\t\n"
-#~ "\t\t\t\thost curly {\n"
-#~ "\t\t\t\t\thardware ethernet        00:20:af:2f:f7:9d;\n"
-#~ "\t\t\t\t\tfixed-address              192.168.192.3;\n"
-#~ "\t\t\t\t\t#type                          fat;\n"
-#~ "\t\t\t\t\tfilename                      \"i386/boot/boot-3c509.2.4.18-"
-#~ "6mdk.nbi\";\n"
-#~ "\t\t\t\t}\n"
-#~ "\t\t\t\n"
-#~ "\t\t\tWhile you can use a pool of IP addresses, rather than setup a "
-#~ "specific entry for\n"
-#~ "\t\t\ta client machine, using a fixed address scheme facilitates using "
-#~ "the functionality\n"
-#~ "\t\t\tof client-specific configuration files that ClusterNFS provides.\n"
-#~ "\t\t\t\n"
-#~ "\t\t\tNote: The \"#type\" entry is only used by drakTermServ.  Clients "
-#~ "can either be \"thin\"\n"
-#~ "\t\t\tor 'fat'.  Thin clients run most software on the server via xdmcp, "
-#~ "while fat clients run most\n"
-#~ "\t\t\tsoftware on the client machine. A special inittab, /etc/inittab\\$\\"
-#~ "$IP=client_ip\\$\\$ is\n"
-#~ "\t\t\twritten for thin clients. System config files xdm-config, kdmrc, "
-#~ "and gdm.conf are modified\n"
-#~ "\t\t\tif thin clients are used, to enable xdmcp. Since there are security "
-#~ "issues in using xdmcp,\n"
-#~ "\t\t\thosts.deny and hosts.allow are modified to limit access to the "
-#~ "local subnet.\n"
-#~ "\t\t\t\n"
-#~ "\t\t\tNote: You must stop/start the server after adding or changing "
-#~ "clients.\n"
-#~ "\t\t\t\n"
-#~ "        - Maintain /etc/exports:\n"
-#~ "        \t\tClusternfs allows export of the root filesystem to diskless "
-#~ "clients. drakTermServ\n"
-#~ "        \t\tsets up the correct entry to allow anonymous access to the "
-#~ "root filesystem from\n"
-#~ "        \t\tdiskless clients.\n"
-#~ "\n"
-#~ "        \t\tA typical exports entry for clusternfs is:\n"
-#~ "        \t\t\n"
-#~ "        \t\t/                  (ro,all_squash)\n"
-#~ "        \t\t/home              SUBNET/MASK(rw,root_squash)\n"
-#~ "\t\t\t\n"
-#~ "\t\t\tWith SUBNET/MASK being defined for your network.\n"
-#~ "        \t\t\n"
-#~ "        - Maintain /etc/shadow\\$\\$CLIENT\\$\\$:\n"
-#~ "        \t\tFor users to be able to log into the system from a diskless "
-#~ "client, their entry in\n"
-#~ "        \t\t/etc/shadow needs to be duplicated in /etc/shadow\\$\\$CLIENTS"
-#~ "\\$\\$. drakTermServ helps\n"
-#~ "        \t\tin this respect by adding or removing system users from this "
-#~ "file.\n"
-#~ "\n"
-#~ "        - Per client /etc/X11XF86Config-4\\$\\$IP-ADDRESS\\$\\$:\n"
-#~ "        \t\tThrough clusternfs, each diskless client can have its own "
-#~ "unique configuration files\n"
-#~ "        \t\ton the root filesystem of the server. In the future "
-#~ "drakTermServ will help create these\n"
-#~ "        \t\tfiles.\n"
-#~ "\n"
-#~ "        - Per client system configuration files:\n"
-#~ "        \t\tThrough clusternfs, each diskless client can have its own "
-#~ "unique configuration files\n"
-#~ "        \t\ton the root filesystem of the server. In the future, "
-#~ "drakTermServ can help create files\n"
-#~ "        \t\tsuch as /etc/modules.conf, /etc/sysconfig/mouse, /etc/"
-#~ "sysconfig/keyboard on a per-client\n"
-#~ "        \t\tbasis.\n"
-#~ "\n"
-#~ "        - /etc/xinetd.d/tftp:\n"
-#~ "        \t\tdrakTermServ will configure this file to work in conjunction "
-#~ "with the images created by\n"
-#~ "        \t\tmkinitrd-net, and the entries in /etc/dhcpd.conf, to serve up "
-#~ "the boot image to each\n"
-#~ "        \t\tdiskless client.\n"
-#~ "\n"
-#~ "        \t\tA typical tftp configuration file looks like:\n"
-#~ "        \t\t\n"
-#~ "        \t\tservice tftp\n"
-#~ "\t\t\t{\n"
-#~ "                        disable         = no\n"
-#~ "                        socket_type  = dgram\n"
-#~ "                        protocol        = udp\n"
-#~ "                        wait             = yes\n"
-#~ "                        user             = root\n"
-#~ "                        server          = /usr/sbin/in.tftpd\n"
-#~ "                        server_args  = -s /var/lib/tftpboot\n"
-#~ "        \t\t}\n"
-#~ "        \t\t\n"
-#~ "        \t\tThe changes here from the default installation are changing "
-#~ "the disable flag to\n"
-#~ "        \t\t'no' and changing the directory path to /var/lib/tftpboot, "
-#~ "where mkinitrd-net\n"
-#~ "        \t\tputs its images.\n"
-#~ "\n"
-#~ "        - Create etherboot floppies/CDs:\n"
-#~ "        \t\tThe diskless client machines need either ROM images on the "
-#~ "NIC, or a boot floppy\n"
-#~ "        \t\tor CD to initate the boot sequence.  drakTermServ will help "
-#~ "generate these images,\n"
-#~ "        \t\tbased on the NIC in the client machine.\n"
-#~ "        \t\t\n"
-#~ "        \t\tA basic example of creating a boot floppy for a 3Com 3c509 "
-#~ "manually:\n"
-#~ "        \t\t\n"
-#~ "        \t\tcat /usr/lib/etherboot/boot1a.bin \\\n"
-#~ "        \t\t\t/usr/lib/etherboot/lzrom/3c509.lzrom > /dev/fd0\n"
-#~ " \n"
-#~ "\n"
-#~ msgstr ""
-#~ "Riçfaqe drakTermServ\n"
-#~ "\t\t\t   \n"
-#~ "        - Krijo nisje me Etherboot, Imazhe i Lirë me Nisje Boot:\n"
-#~ "        \t\tPër të nisur një bërthamë via nisje me udhëzim në Ether, një "
-#~ "imazhe speciale duhet të krojohet bërthamë/initrd.\n"
-#~ "        \t\tmkinitrd-net nuk është një punim me rëndësi drakTermServ por "
-#~ "vetëm është një interfac grafike\n"
-#~ "        \t\tpër të ndihmuar në qeverisje/personalizimin e këtyre "
-#~ "imazheve.\n"
-#~ "\n"
-#~ "        - Mirëmbajtje e /etc/dhcpd.conf:\n"
-#~ "        \t\tPër nisje me udhëzim të klientave në rrjet, secili klient ka "
-#~ "nevojë, për një hyrje të nënshkrua në adresën IP\n"
-#~ "        \t\tdhe imazhi me nisje të udhëzuar në makinë. drakTermServ do të "
-#~ "ndihmojëkrijimin/zhdukjen e këtyre hyrjeve.\n"
-#~ "\t\t\t\n"
-#~ "        \t\t(kartela PCI mund të largojë imazhin - etherboot dhe ta "
-#~ "kërkojë një imazhë korrekt. Ju duhet\n"
-#~ "        \t\tta konsideroni njashtu se kur etherboot i kërkon imazhet, ai "
-#~ "mundohet të takoj me emra sikur\n"
-#~ "        \t\tboot-3c59x.nbi, më parë se boot-3c59x.2.4.19-16mdk.nbi).\n"
-#~ "\t\t\t \n"
-#~ "        \t\tAjo pjesë tipike dhcpd.conf përkrahë një klient disku më të "
-#~ "vogël i cili duket sikur:\n"
-#~ "        \t\t\n"
-#~ "\t\t\t\tftues i dredhur {\n"
-#~ "\t\t\t\t\tmjet etherneti        00:20:af:2f:f7:9d;\n"
-#~ "\t\t\t\t\tadres-fiksuar          192.168.192.3;\n"
-#~ "\t\t\t\t\t#tip                       fat;*/\n"
-#~ "\t\t\t\t\temri i skedares           \"i386/boot/boot-3c509.2.4.18-6mdk.nbi"
-#~ "\";\n"
-#~ "\t\t\t\t}\n"
-#~ "\t\t\t\n"
-#~ "\t\t\tPërderisa ju përdorni rrjedhat e adresave IP, më mirë është që të "
-#~ "instaloni hyrjet për\n"
-#~ "\t\t\tnjë klient makine, përdorimi i adresave fikse shemat do të "
-#~ "lehtësojnë përdorimin e funksionit\n"
-#~ "\t\t\ttë një klienti-specifik për konfgurimin e skedareve që ClusterNFS "
-#~ "pajis.\n"
-#~ "\t\t\t\n"
-#~ "\t\t\tShënim: Hyrja \"#tip\" përdoret vetëm nga drakTermServ. Klientat "
-#~ "mund të jenë të \"hollë\"\n"
-#~ "\t\t\tapo të 'trashë'. Klientat e hollë nisin më së shumti programe në "
-#~ "server via xdmcp, përderisa klientat e trashë nisin më së shumti\n"
-#~ "\t\t\tprograme në makina kliente. Në tabelë hyrëse speciale (inittab), /"
-#~ "etc/inittab\\$\\$IP=klient_ip\\$\\$ është\n"
-#~ "\t\t\tshkruar për klienta të hollë. Systemi konfigurues i skedareve xdm-"
-#~ "config, kdmrc, dhe gdm.conf ndryshohen\n"
-#~ "\t\t\tnëse kliantat e hollë janë të përdorur, në xdmcp të lirë për "
-#~ "përdorim. Prej se janë të siguruara kalimet në përdorimin e xdmcp,\n"
-#~ "\t\t\thosts.deny dhe hosts.allow janë ndryshuar kufijt e hyrjeve në ndër "
-#~ "rrjetet lokale.\n"
-#~ "\t\t\t\n"
-#~ "\t\t\tShënim: Ju duhet ta ndalni/nisni serverin mbasi të shtoni apo ti "
-#~ "ndërroni klientat.\n"
-#~ "\t\t\t\n"
-#~ "        - Mirëmbajtja /etc/exports:\n"
-#~ "        \t\tClusternfs lejon exporimin e sistemit të sekdareve root dhe "
-#~ "të klientave në disk më të vogël. drakTermServ\n"
-#~ "        \t\trregullon dhe korogjon hyrjet për të lejuar hyrje anonime në "
-#~ "sistemin e skedareve root nga\n"
-#~ "        \t\tklientat në disk më të vogël.\n"
-#~ "\n"
-#~ "        \t\tExportime tipike me hyrje për clusternfs janë:\n"
-#~ "        \t\t\n"
-#~ "        \t\t/                  (ro,all_squash)\n"
-#~ "        \t\t/home              SUBNET/MASK(rw,root_squash)\n"
-#~ "\t\t\t\n"
-#~ "\t\t\tMe NDËR-RRJET/MASKUAT përcaktohet rrjeti i juaj (network).\n"
-#~ "        \t\t\n"
-#~ "        - Mirëmbajtja /etc/shadow\\$\\$KLIENT\\$\\$:\n"
-#~ "        \t\tPër përdorues të janë në gjendje të kyqen në sistem nga një "
-#~ "klient me disk më të vogël, hyrjet e tyre në\n"
-#~ "        \t\t/etc/shadow kanë nevojë të dyfishohen në /etc/shadow\\$\\"
-#~ "$KLIENTAT\\$\\$. drakTermServ e ndihmonë\n"
-#~ "        \t\tkëtë me një respekt duke shtuar apo zhdukur përdorues të "
-#~ "sistemit nga kjo skedare.\n"
-#~ "\n"
-#~ "        - Për secilin klient /etc/X11XF86Config-4\\$\\$IP-ADDRESS\\$\\$:\n"
-#~ "        \t\tNëpër clusternfs, secili klient me disk të vogël mund të "
-#~ "posedoj një konfigurim të veqantë në skedare dhe\n"
-#~ "        \t\tnë sistemin e skedareve root në server. Në të ardhmën "
-#~ "drakTermServ do të ndihmojë në krijimin e këtyre\n"
-#~ "        \t\tskedareve.\n"
-#~ "\n"
-#~ "        - Sistem konfigurues i skedareve për secilin klient:\n"
-#~ "        \t\tNëpër clusternfs, secili klient me disk të vogël mund të "
-#~ "posedoj një konfigurim të veqantë në skedare\n"
-#~ "        \t\tnë sistemin e skedareve root në server. Në të ardhmën "
-#~ "drakTermServ drakTermServ do të ndihmojë në krijimin e këtyre skedareve\n"
-#~ "        \t\tsi për shembull /etc/modules.conf, /etc/sysconfig/mouse, /etc/"
-#~ "sysconfig/keyboard në secilin klient\n"
-#~ "        \t\tbazuar.\n"
-#~ "\n"
-#~ "        - /etc/xinetd.d/tftp:\n"
-#~ "        \t\tdrakTermServ do të konfiguroj këtë skedare të funksionoj në "
-#~ "bashkim me imazhet e krijuara nga\n"
-#~ "        \t\tmkinitrd-net, dhe të hyrjeve në /etc/dhcpd.conf, për të "
-#~ "servuar për secilin imazhe me nisje të udhëzuar\n"
-#~ "        \t\ttë një klienti me disk të vogël.\n"
-#~ "\n"
-#~ "        \t\tNjë konfigurim tipik i skedares tftp duket sikur:\n"
-#~ "        \t\t\n"
-#~ "        \t\tservise tftp\n"
-#~ "\t\t\t{\n"
-#~ "                        jo i lirë         = no\n"
-#~ "                        tip_lugu       = dgram\n"
-#~ "                        protokol        = udp\n"
-#~ "                        një moment       = yes\n"
-#~ "                        përdorues        = root\n"
-#~ "                        server          = /usr/sbin/in.tftpd\n"
-#~ "                        server_args  = -s /var/lib/tftpboot\n"
-#~ "        \t\t}\n"
-#~ "        \t\t\n"
-#~ "        \t\tNdryshimet këtu nga instalimi me marrëveshje kanë ndryshuar "
-#~ "shenjat e lira në\n"
-#~ "        \t\t'no' ndërrimin e repertorit me shteg në /var/lib/tftpboot, ku "
-#~ "mkinitrd-net\n"
-#~ "        \t\tfutë imazhet e saja.\n"
-#~ "\n"
-#~ "        - Krijo nisje të udhëzuar të ether (ethetboot) flopi të/CDs:\n"
-#~ "        \t\tPër klientat me disqe të vogëla, në makina nevojiten imazhe "
-#~ "të tyre ROM, në NIC apo një flopi disk me nisje të udhëzuar\n"
-#~ "        \t\tapo CD për të inicializuar sekuencat me nisje të udhëzuar.  "
-#~ "drakTermServ do ndihmojë në prodhimin e këtyre imazheve,\n"
-#~ "        \t\ttë bazuar në NIC në makina kliente.\n"
-#~ "        \t\t\n"
-#~ "        \t\tNjë shembull bazues për krijimin e një diskete floppy me "
-#~ "nisje të udhëzuar për një 3Com 3c509 manuale:\n"
-#~ "        \t\t\n"
-#~ "        \t\tcat /usr/lib/etherboot/boot1a.bin /\\n        \t\t\t/usr/lib/"
-#~ "etherboot/lzrom/3c509.lzrom > /dev/fd0\n"
-#~ " \n"
-#~ "\n"
 
 #~ msgid "DrakFloppy Error: %s"
 #~ msgstr "Gabim DrakFloppy: %s"
