@@ -5,6 +5,7 @@ chomp $dir;
 $dir .= "/../../..";
 
 #- allow devfsd to enable a faster upgrade.
+system "modprobe loop";
 system "killall devfsd >/dev/null 2>/dev/null";
 
 #- perl version of the install, we use directly the version we found,
