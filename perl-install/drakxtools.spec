@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10.1
-Release: 19mdk
+Release: 20mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -347,6 +347,23 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Tue Oct  5 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.1-20mdk
+- drakups:
+  o fix port for MGE's USB UPSes
+  o fix drivers for MGE UPSes
+  o fix installing nut
+  o add support for "American Power Conversion" UPSes
+  o restart upsd daemon once nut config is written
+  o write config in pure wizard mode
+  o when manual adding an UPS:
+   * fix reading driver DB
+   * fix reading driver from the list
+- diskdrake: do not fail with c0d0p* devices (pixel)
+- drakconnect: applying changes can be quite time expensive,
+  especially with ppp and wifi connections thus let's show a "wait"
+  message
+- drakfont: fix closing import dialog (#11052)
+
 * Tue Oct  5 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.1-19mdk
 - drakconnect: 
   o ADSL DB (baud):
