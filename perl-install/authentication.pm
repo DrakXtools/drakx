@@ -63,17 +63,17 @@ sub ask_parameters {
 	
 	#$netc->{LDAPDOMAIN} = $s;
 	$in->ask_from('',
-		     N("\nAuthentication LDAP\n"),
-		     [ { label => N("\nServer Information :")},
-		     { label => N("\tLDAP Server\n"), val => \$authentication->{LDAP_server} },
-		     { label => N("\tUse SSL connection"), val => \$authentication->{LDAP_ssl}, type => 'bool' },
-		     { label => N("\nUser Base :")},
-		     { label => N("\tBase :"), val => \$authentication->{LDAP_users_db} },
-		     { label => N("\tScope :\n"), val => \$authentication->{LDAP_scope}, list => [map {$_->[0] } group_by2(@scope)], format => sub { $scope{$_[0]} } },
-		     { label => N("\nBind Server :")},
-		     { label => N("\tUse Anonymous Bind"), val => \$anonymous, type => 'bool' },
-		     { label => N("\tDistinguished Name"), val => \$authentication->{LDAP_user}, disabled => sub { $anonymous } },
-		     { label => N("\tPassword\n"), val => \$authentication->{LDAP_passwd}, disabled => sub { $anonymous } },
+		     "\n" . N("Authentication LDAP") . "\n",
+		     [ { label => "\n" . N("Server Information:") },
+		     { label => "\t" . N("LDAP Server") . "\n", val => \$authentication->{LDAP_server} },
+		     { label => "\t" . N("Use SSL connection"), val => \$authentication->{LDAP_ssl}, type => 'bool' },
+		     { label => "\n" . N("User Base:") },
+		     { label => "\t" . N("Base:"), val => \$authentication->{LDAP_users_db} },
+		     { label => "\t" . N("Scope:") . "\n", val => \$authentication->{LDAP_scope}, list => [map { $_->[0] } group_by2(@scope)], format => sub { $scope{$_[0]} } },
+		     { label => "\n" . N("Bind Server:") . "\n" },
+		     { label => "\t" . N("Use Anonymous Bind"), val => \$anonymous, type => 'bool' },
+		     { label => "\t" . N("Distinguished Name"), val => \$authentication->{LDAP_user}, disabled => sub { $anonymous } },
+		     { label => "\t" . N("Password") . "\n", val => \$authentication->{LDAP_passwd}, disabled => sub { $anonymous } },
 		     ]) or return;
     } elsif ($kind eq 'AD') {
 	
