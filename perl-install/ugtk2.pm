@@ -925,15 +925,11 @@ sub new {
 		$draw1->set_size_request(540, 100);
 		my $pixbuf_up = gtkcreate_pixbuf($::Wizard_pix_up || "wiz_default_up.png");
 		$draw1->modify_font(Gtk2::Pango::FontDescription->from_string(N("utopia 25")));
+		$draw1->signal_connect(realize => sub { set_back_pixbuf($draw1, $pixbuf_up) });
 		$draw1->signal_connect(expose_event => sub {
 					   my $height = $pixbuf_up->get_height;
-					   for (my $i = 0; $i < 540 / $height; $i++) {
-					       $pixbuf_up->render_to_drawable($draw1->window,
-									      $draw1->style->bg_gc('normal'),
-									      0, 0, 0, $height * $i, -1, -1, 'none', 0, 0);
-					       my $layout = $draw1->create_pango_layout($::Wizard_title);
-					       $draw1->window->draw_layout($draw1->style->white_gc, 40, 62, $layout);
-					   }
+                            my $layout = $draw1->create_pango_layout($::Wizard_title);
+                            $draw1->window->draw_layout($draw1->style->white_gc, 40, 62, $layout);
 				       });
 
 		$::WizardWindow->set_position('center_always') if !$::isStandalone;
