@@ -146,10 +146,10 @@ foreach (@ARGV) {
 	print N("\nUsage: %s  [--auto] [--beginner] [--expert] [-h|--help] [--noauto] [--testing] [-v|--version] ", $progname),
        if_($usages{$progname}, common::translate($usages{$progname})), "\n";
 #    print N("\nUsage: "), $::usage, "\n" if $::usage;
-	exit(0);
+	CORE::exit(0);
     } elsif (/^-(-version|v)$/) {
 	version();
-	exit(0);
+	CORE::exit(0);
     } elsif (/^--embedded$/) {
 	$::XID = splice @ARGV, $i, 1;
 	$::isEmbedded = 1;
