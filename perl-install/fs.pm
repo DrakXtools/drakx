@@ -140,6 +140,7 @@ sub add2all_hds {
 	my $s = 
 	    isThisFs('nfs', $_) ? 'nfss' :
 	    isThisFs('smbfs', $_) ? 'smbs' :
+	    isThisFs('davfs', $_) ? 'davs' :
 	    'special';
 	push @{$all_hds->{$s}}, $_;
     }
@@ -202,7 +203,7 @@ sub prepare_write_fstab {
     my @smb_credentials;
     my @l = map { 
 	my $device = 
-	  $_->{device} eq 'none' || member($_->{type}, qw(nfs smbfs)) ? 
+	  $_->{device} eq 'none' || member($_->{type}, qw(nfs smbfs davfs)) ? 
 	      $_->{device} : 
 	  isLoopback($_) ? 
 	      ($_->{mntpoint} eq '/' ? "/initrd/loopfs" : "$_->{loopback_device}{mntpoint}") . $_->{loopback_file} :
@@ -312,6 +313,7 @@ sub mount_options_unpack {
 		  vfat => [ qw(umask=0) ],
 		  nfs => [ qw(rsize=8192 wsize=8192) ],
 		  smbfs => [ qw(username= password=) ],
+		  davfs => [ qw(username= password= uid= gid=) ],
 		  reiserfs => [ 'notail' ],
 		 );
     push @{$per_fs{$_}}, 'usrquota', 'grpquota' foreach 'ext2', 'ext3', 'xfs';
@@ -525,6 +527,7 @@ sub get_raw_hds {
     my @fstab = read_fstab($prefix, "/etc/fstab", 'all_options');
     $all_hds->{nfss} = [ grep { isThisFs('nfs', $_) } @fstab ];
     $all_hds->{smbs} = [ grep { isThisFs('smbfs', $_) } @fstab ];
+    $all_hds->{davs} = [ grep { isThisFs('davfs', $_) } @fstab ];
     $all_hds->{special} = [
        (grep { isThisFs('tmpfs', $_) } @fstab),
        { device => 'none', mntpoint => '/proc', type => 'proc' },
@@ -680,7 +683,7 @@ sub mount {
 
     my @fs_modules = qw(vfat hfs romfs ufs reiserfs xfs jfs ext3);
 
-    if (member($fs, 'smb', 'smbfs', 'nfs', 'ntfs') && $::isStandalone) {
+    if (member($fs, 'smb', 'smbfs', 'nfs', 'davfs', 'ntfs') && $::isStandalone) {
 	system('mount', '-t', $fs, $dev, $where, '-o', $options) == 0 or die _("mounting partition %s in directory %s failed", $dev, $where);
 	return; #- do not update mtab, already done by mount(8)
     } elsif (member($fs, 'ext2', 'proc', 'usbdevfs', 'iso9660', @fs_modules)) {

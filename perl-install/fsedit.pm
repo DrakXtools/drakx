@@ -79,7 +79,7 @@ sub typeOfPart {
 #- Functions
 #-######################################################################################
 sub empty_all_hds {
-    { hds => [], lvms => [], raids => [], loopbacks => [], raw_hds => [], nfss => [], smbs => [], special => [] };
+    { hds => [], lvms => [], raids => [], loopbacks => [], raw_hds => [], nfss => [], smbs => [], davs => [], special => [] };
 }
 sub recompute_loopbacks {
     my ($all_hds) = @_;
@@ -311,7 +311,7 @@ sub get_really_all_fstab {
     my ($all_hds) = @_;
     my @parts = map { partition_table::get_normal_parts($_) } all_hds($all_hds);
     my @raids = grep { $_ } @{$all_hds->{raids}};
-    @parts, @raids, @{$all_hds->{loopbacks}}, @{$all_hds->{raw_hds}}, @{$all_hds->{nfss}}, @{$all_hds->{smbs}};
+    @parts, @raids, @{$all_hds->{loopbacks}}, @{$all_hds->{raw_hds}}, @{$all_hds->{nfss}}, @{$all_hds->{smbs}}, @{$all_hds->{davs}};
 }
 sub get_all_fstab_and_holes {
     my ($all_hds) = @_;

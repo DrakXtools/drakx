@@ -148,6 +148,7 @@ struct all_hds {
   raw_hd raw_hds[]
   raw_hd nfss[]
   raw_hd smbs[]
+  raw_hd davs[]
   raw_hd special[]
 
   # internal: if fstab_to_string($all_hds) eq current_fstab then no need to save
