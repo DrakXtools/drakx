@@ -2184,8 +2184,8 @@ sub configure_hpoj {
 	$serialnumber = $_->{val}{SERIALNUMBER};
 	services::stop("hpoj") if ($bus ne "hpjd");
 	# Check if the device is really an HP multi-function device
-	my $libusb = 0;
-	foreach $libusb (0, 1) {
+	#my $libusb = 0;
+	foreach my $libusb (0, 1) {
 	    # Do access via libusb/user mode only if we have a USB device
 	    next if ($libusb && ($bus ne "usb"));
 	    my $printermoduleunloaded = 0;
