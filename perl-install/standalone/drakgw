@@ -303,7 +303,8 @@ my %rpm2file = ( ipchains => '/sbin/ipchains',
 		 'caching-nameserver' => '/var/named/named.local');
 
 #- first: try to install all in one step
-$in->do_pkgs->install(grep { !-e $rpm2file{$_} } keys %rpm2file);
+my @needed_to_install = grep { !-e $rpm2file{$_} } keys %rpm2file;
+@needed_to_install and $in->do_pkgs->install(@needed_to_install);
 #- second: try one by one if failure detected
 if (grep { !-e $rpm2file{$_} } keys %rpm2file) {
     foreach (keys %rpm2file) {
@@ -665,6 +666,9 @@ Click on Configure to launch the setup wizard.", $setup_state));
 
 #-------------------------------------------------
 #- $Log$
+#- Revision 1.55  2001/10/02 10:28:14  gc
+#- don't call pkgs_install when no package needs to be installed
+#-
 #- Revision 1.54  2001/09/18 20:36:20  damien
 #- debug
 #-
