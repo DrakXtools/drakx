@@ -298,6 +298,7 @@ run_program::run('tune2fs', '-L', "MDK-PKGS", "/dev/$mnt_pkgs->{device}") if $mn
 
 substInFile {
     s!defaults\s!defaults,ro ! if m!/mnt/packages!;
+    s!defaults\s!defaults,umask=0000 ! if m!/mnt/share!;
     s!/dev/$home->{device}!LABEL=MDK-HOME!g;
     s!/dev/$mnt_pkgs->{device}!LABEL=MDK-PKGS!g;
 } "$::prefix/etc/fstab";
