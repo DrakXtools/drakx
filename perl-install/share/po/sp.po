@@ -1189,6 +1189,17 @@ msgid "You can't use a LVM Logical Volume for mount point %s"
 msgstr "Не можете користити логичку LVM партициjу за тaчку монтирaња %s"
 
 #: ../../fsedit.pm:1
+#, fuzzy, c-format
+msgid ""
+"You've selected a software RAID partition as root (/).\n"
+"No bootloader is able to handle this without a /boot partition.\n"
+"Please be sure to add a /boot partition"
+msgstr ""
+"Изабрали сте софтверску RAID партициjу као root (/).\n"
+"Ниjедан стартер не може да ради са тим без /boot партициje.\n"
+"Зато пазите дa додате /boot партициjу"
+
+#: ../../fsedit.pm:1
 #, c-format
 msgid "There is already a partition with mount point %s\n"
 msgstr "Већ постоји партиција са тачком монтирања %s\n"
@@ -8589,41 +8600,6 @@ msgstr "Морате рестартовати рачунар да би се измене извршиле"
 #, c-format
 msgid "Partition table of drive %s is going to be written to disk!"
 msgstr "Табела партиција за уређај %s ће бити записана на диск!"
-
-#: ../../diskdrake/interactive.pm:1
-#, fuzzy, c-format
-msgid ""
-"You've selected a software RAID partition as root (/).\n"
-"No bootloader is able to handle this without a /boot partition.\n"
-"Please be sure to add a /boot partition"
-msgstr ""
-"Изабрали сте софтверску RAID партициjу као root (/).\n"
-"Ниjедан стартер не може да ради са тим без /boot партициje.\n"
-"Зато пазите дa додате /boot партициjу"
-
-#: ../../diskdrake/interactive.pm:1
-#, c-format
-msgid ""
-"The partition you've selected to add as root (/) is physically located "
-"beyond\n"
-"the 1024th cylinder of the hard drive, and you have no /boot partition.\n"
-"If you plan to use the LILO boot manager, be careful to add a /boot partition"
-msgstr ""
-"Партиција коју сте изабрали за root (/) је физички лоцирана изнад\n"
-"1024-тог цилиндра хард диска,и немате /boot партицију.\n"
-"Уколико планирате да кориситите LILO boot менаджер, морате\n"
-"додати /boot партицији."
-
-#: ../../diskdrake/interactive.pm:1
-#, c-format
-msgid ""
-"Sorry I won't accept to create /boot so far onto the drive (on a cylinder > "
-"1024).\n"
-"Either you use LILO and it won't work, or you don't use LILO and you don't "
-"need /boot"
-msgstr ""
-"Није могуће креирати /boot за сада на хард диску (на цилиндру > 1024).\n"
-"Или користите LILO који не ради, или га не користите па вам не треба /boot"
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -19575,6 +19551,27 @@ msgstr "Личне финансиje"
 #: ../../share/compssUsers:999
 msgid "Programs to manage your finances, such as gnucash"
 msgstr "Програми за управљaње вaшим финансиjамa, као што jе gnucash"
+
+#~ msgid ""
+#~ "The partition you've selected to add as root (/) is physically located "
+#~ "beyond\n"
+#~ "the 1024th cylinder of the hard drive, and you have no /boot partition.\n"
+#~ "If you plan to use the LILO boot manager, be careful to add a /boot "
+#~ "partition"
+#~ msgstr ""
+#~ "Партиција коју сте изабрали за root (/) је физички лоцирана изнад\n"
+#~ "1024-тог цилиндра хард диска,и немате /boot партицију.\n"
+#~ "Уколико планирате да кориситите LILO boot менаджер, морате\n"
+#~ "додати /boot партицији."
+
+#~ msgid ""
+#~ "Sorry I won't accept to create /boot so far onto the drive (on a cylinder "
+#~ "> 1024).\n"
+#~ "Either you use LILO and it won't work, or you don't use LILO and you "
+#~ "don't need /boot"
+#~ msgstr ""
+#~ "Није могуће креирати /boot за сада на хард диску (на цилиндру > 1024).\n"
+#~ "Или користите LILO који не ради, или га не користите па вам не треба /boot"
 
 #~ msgid "Upgrade"
 #~ msgstr "Ажурирање"

@@ -1050,6 +1050,14 @@ msgstr ""
 #: ../../fsedit.pm:1
 #, c-format
 msgid ""
+"You've selected a software RAID partition as root (/).\n"
+"No bootloader is able to handle this without a /boot partition.\n"
+"Please be sure to add a /boot partition"
+msgstr ""
+
+#: ../../fsedit.pm:1
+#, c-format
+msgid ""
 "There is already a partition with mount point %s\n"
 ""
 msgstr ""
@@ -6963,29 +6971,6 @@ msgstr ""
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid "Partition table of drive %s is going to be written to disk!"
-msgstr ""
-
-#: ../../diskdrake/interactive.pm:1
-#, c-format
-msgid ""
-"You've selected a software RAID partition as root (/).\n"
-"No bootloader is able to handle this without a /boot partition.\n"
-"Please be sure to add a /boot partition"
-msgstr ""
-
-#: ../../diskdrake/interactive.pm:1
-#, c-format
-msgid ""
-"The partition you've selected to add as root (/) is physically located beyond\n"
-"the 1024th cylinder of the hard drive, and you have no /boot partition.\n"
-"If you plan to use the LILO boot manager, be careful to add a /boot partition"
-msgstr ""
-
-#: ../../diskdrake/interactive.pm:1
-#, c-format
-msgid ""
-"Sorry I won't accept to create /boot so far onto the drive (on a cylinder > 1024).\n"
-"Either you use LILO and it won't work, or you don't use LILO and you don't need /boot"
 msgstr ""
 
 #: ../../diskdrake/interactive.pm:1

@@ -1158,6 +1158,17 @@ msgstr "Du kan ikke bruke LVM logisk volum som monteringspunkt %s"
 
 #: ../../fsedit.pm:1
 #, c-format
+msgid ""
+"You've selected a software RAID partition as root (/).\n"
+"No bootloader is able to handle this without a /boot partition.\n"
+"Please be sure to add a /boot partition"
+msgstr ""
+"Du har valgt en programvare RAID partisjon som root (/).\n"
+"Ingen oppstartslaster kan håndtere dette uten en /boot partisjon.\n"
+"Så vær nøye med å legge til en /boot partisjon"
+
+#: ../../fsedit.pm:1
+#, c-format
 msgid "There is already a partition with mount point %s\n"
 msgstr "Det finnes allerede en partisjon med monteringspunkt %s\n"
 
@@ -8205,44 +8216,6 @@ msgstr "Du må starte maskinen på nytt for at modifiseringene skal tre i kraft"
 #, c-format
 msgid "Partition table of drive %s is going to be written to disk!"
 msgstr "Partisjonstabellen på disk %s blir nå skrevet til disk!"
-
-#: ../../diskdrake/interactive.pm:1
-#, c-format
-msgid ""
-"You've selected a software RAID partition as root (/).\n"
-"No bootloader is able to handle this without a /boot partition.\n"
-"Please be sure to add a /boot partition"
-msgstr ""
-"Du har valgt en programvare RAID partisjon som root (/).\n"
-"Ingen oppstartslaster kan håndtere dette uten en /boot partisjon.\n"
-"Så vær nøye med å legge til en /boot partisjon"
-
-#: ../../diskdrake/interactive.pm:1
-#, c-format
-msgid ""
-"The partition you've selected to add as root (/) is physically located "
-"beyond\n"
-"the 1024th cylinder of the hard drive, and you have no /boot partition.\n"
-"If you plan to use the LILO boot manager, be careful to add a /boot partition"
-msgstr ""
-"Partisjonen du valgte å legge til som root (/) er lokalisert fysisk "
-"bortenfor\n"
-"den 1024'de sylinderen på hard-disken, og du har ingen /boot partisjon.\n"
-"Hvis du skal bruke oppstartshåndtereren LILO, vær nøye med å legge til en\n"
-"/boot partisjon"
-
-#: ../../diskdrake/interactive.pm:1
-#, c-format
-msgid ""
-"Sorry I won't accept to create /boot so far onto the drive (on a cylinder > "
-"1024).\n"
-"Either you use LILO and it won't work, or you don't use LILO and you don't "
-"need /boot"
-msgstr ""
-"Beklager, jeg vil ikke tillate oppretting av /boot så lange inne på disken "
-"(på en sylinder > 1024).\n"
-"Enten bruker du LILO og denne ikke virker, eller du bruker ikke LILO og du "
-"trenger ikke /boot"
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -18556,6 +18529,31 @@ msgstr "Personlig finans"
 #: ../../share/compssUsers:999
 msgid "Programs to manage your finances, such as gnucash"
 msgstr "Programmer for å håndtere dine finanser, så som gnucash"
+
+#~ msgid ""
+#~ "The partition you've selected to add as root (/) is physically located "
+#~ "beyond\n"
+#~ "the 1024th cylinder of the hard drive, and you have no /boot partition.\n"
+#~ "If you plan to use the LILO boot manager, be careful to add a /boot "
+#~ "partition"
+#~ msgstr ""
+#~ "Partisjonen du valgte å legge til som root (/) er lokalisert fysisk "
+#~ "bortenfor\n"
+#~ "den 1024'de sylinderen på hard-disken, og du har ingen /boot partisjon.\n"
+#~ "Hvis du skal bruke oppstartshåndtereren LILO, vær nøye med å legge til "
+#~ "en\n"
+#~ "/boot partisjon"
+
+#~ msgid ""
+#~ "Sorry I won't accept to create /boot so far onto the drive (on a cylinder "
+#~ "> 1024).\n"
+#~ "Either you use LILO and it won't work, or you don't use LILO and you "
+#~ "don't need /boot"
+#~ msgstr ""
+#~ "Beklager, jeg vil ikke tillate oppretting av /boot så lange inne på "
+#~ "disken (på en sylinder > 1024).\n"
+#~ "Enten bruker du LILO og denne ikke virker, eller du bruker ikke LILO og "
+#~ "du trenger ikke /boot"
 
 #~ msgid "Upgrade"
 #~ msgstr "Oppgrader"
