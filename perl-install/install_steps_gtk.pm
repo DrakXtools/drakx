@@ -634,7 +634,7 @@ sub summary_prompt {
 
 sub deselectFoundMedia {
     #- group by CD
-    my (undef, $hdlists) = @_;
+    my ($o, $hdlists) = @_;
     my %cdlist;
     my @hdlist2;
     my @corresp;
@@ -654,31 +654,33 @@ sub deselectFoundMedia {
 	}
 	++$i;
     }
-    my $w = ugtk2->new("");
     my @selection = (1) x @hdlist2;
     my $copy_rpms_on_disk = 0;
-    $i = -1;
-    $w->sync;
-    #- TODO check available size for copying rpms from infos in hdlists file
-    ugtk2::gtkadd(
-	$w->{window},
-	gtkpack(
-	    Gtk2::VBox->new(0, 5),
-	    Gtk2::WrappedLabel->new(N("The following installation media have been found.
+    if ($o->{method} !~ /-iso$/) {
+	my $w = ugtk2->new("");
+	$i = -1;
+	$w->sync;
+	#- TODO check available size for copying rpms from infos in hdlists file
+	ugtk2::gtkadd(
+	    $w->{window},
+	    gtkpack(
+		Gtk2::VBox->new(0, 5),
+		Gtk2::WrappedLabel->new(N("The following installation media have been found.
 If you want to skip some of them, you can unselect them now.")),
-	    (map { ++$i; gtknew('CheckButton', text => $_->[3], active_ref => \$selection[$i]) } @hdlist2),
-	    gtknew('HSeparator'),
-	    Gtk2::WrappedLabel->new(N("You have the possibility to copy the contents of the CDs on the hard drive before installation.
+		(map { ++$i; gtknew('CheckButton', text => $_->[3], active_ref => \$selection[$i]) } @hdlist2),
+		gtknew('HSeparator'),
+		Gtk2::WrappedLabel->new(N("You have the possibility to copy the contents of the CDs on the hard drive before installation.
 It will then continue from the hard drive and the packages will remain available once the system will be fully installed.")),
-	    gtknew('CheckButton', text => N("Copy whole CDs"), active_ref => \$copy_rpms_on_disk),
-	    gtknew('HSeparator'),
-	    #- TODO only show this for cdrom install method ?
-	    gtknew('HBox', children_tight => [
-		gtknew('Button', text => N("Next"), clicked => sub { Gtk2->main_quit }),
-	    ]),
-	),
-    );
-    $w->main;
+		gtknew('CheckButton', text => N("Copy whole CDs"), active_ref => \$copy_rpms_on_disk),
+		gtknew('HSeparator'),
+		#- TODO only show this for cdrom install method ?
+		gtknew('HBox', children_tight => [
+		    gtknew('Button', text => N("Next"), clicked => sub { Gtk2->main_quit }),
+		]),
+	    ),
+	);
+	$w->main;
+    }
     $i = -1;
     my $l = [ grep { $selection[++$i] } @hdlist2 ];
     my @l2; $i = 0;
