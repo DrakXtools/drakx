@@ -1,3 +1,107 @@
+2002/02/27  fabman
+
+	* share/po/es.po: converted to UTF-8
+
+2002/02/27  François Pons  <fpons@mandrakesoft.com>
+
+	* crypto.pm: fix missing version listed when doing update.
+
+2002/02/27  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* share/po/fr.po: a few translations
+
+	* mdk-stage1/rescue-gui.c, rescue/restore_ms_boot, rescue/list.i386,
+	rescue/make_rescue_img: add "restore Windows Boot Loader" to rescue
+
+	* install_steps_interactive.pm: formatAlaTex for congratz msg
+	xfs + bootdisk = warning_msg
+
+	* share/rpmsrate: flightgear is now fully lowercase
+	glaxium
+
+	* mdk-stage1/pcmcia_/probe.c: add Keld Jørn Simonsen <keld@dkuug.dk>'s O2
+	Micro
+	CardBus controller, and two other PCI entries which
+	have close descriptions
+
+	* mdk-stage1/pcmcia_/merge_from_pcitable: misc
+	also report when pcitable is "too old"
+	write a short perl program to easily merge new
+	cardbus controllers from pcitable into probe.c
+
+2002/02/27  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/eu.po: updated po file
+
+2002/02/27  Pixel  <pixel@mandrakesoft.com>
+
+	* share/rpmsrate: simplify pyDict
+
+	* install_steps_interactive.pm: ensure a keyboard is only once available,
+	either in advanced or normal, but
+	not in both (tx2fredl)
+
+	* share/po/da.po: 
+	  - it is UTF-8
+	  - fix line splitting
+
+	* lang.pm: workaround iso-8859-1 charset based languages not displayed
+	correctly at install
+	  - %lang2country is the authority, so if the country given by
+	%lang2country doesn't exist in KDE, return C
+	  - fix be,sp,sr
+	  - s/def/default/ (typo)
+	  - add some utf kde fonts
+
+2002/02/27  Thierry Vignaud  <tvignaud@mandrakesoft.com
+
+	* share/po/fr.po: update french translation
+
+	* standalone/drakxtv: 
+	  - simplify an ACTION||fallback;fallback into ACTION;fallback
+	  - print a message saying that xawtv can be used now at the end of the
+	channels auto-probing in case of direct use from cl and not from
+	  XawTV wrapper (from qa test) aka let the world be better :-)
+
+	* share/po/br.po: minor update
+	update brezhoneg translation
+
+2002/02/26  dam's  <damien@mandrakesoft.com>
+
+	* modparm.pm: corrected bad sprintf
+
+2002/02/26  fabman
+
+	* share/po/es.po: updated spanish translations
+
+2002/02/26  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* mdk-stage1/Makefile: version 8.2
+
+2002/02/26  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/fr.po, share/po/sv.po, share/po/hu.po: updated po files
+
+2002/02/26  Pixel  <pixel@mandrakesoft.com>
+
+	* diskdrake/smbnfs_gtk.pm, diskdrake/removable.pm,
+	diskdrake/interactive.pm: propose some mount points for
+	removable/nfs/smb
+
+	* install_steps_interactive.pm: if no sound card are detected AND the user
+	selected things needing a sound card, propose a special case for ISA
+	cards
+
+	* share/rpmsrate: add sndconfig in INSTALL (installed when user say Yes
+	when asked for a ISA
+	sound card)
+
+	* my_gtk.pm (@icon_paths): ease testing
+
+2002/02/26  siegel
+
+	* share/po/de.po: updates
+
 2002/02/26  dam's  <damien@mandrakesoft.com>
 
 	* standalone/drakfont: corrected ttf/TTF and xfs restart
