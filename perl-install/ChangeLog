@@ -1,3 +1,43 @@
+2004/02/20  fwang
+
+	* share/po/zh_CN.po: update
+
+2004/02/20  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* lang.pm: uim-anthy works ok in on-the-spot mode with KDE
+
+2004/02/20  Pixel  <pixel at mandrakesoft.com>
+
+	* install_steps_interactive.pm: fix warning LSB chosen implies kernel 2.4
+
+	* fs.pm: add umask=0022 capability, and use it for security level 3
+
+	* share/compssUsers, share/compssUsers.server: Gnome is no good, GNOME is
+	good
+
+	* bootloader.pm (update_for_renumbered_partitions):
+	  - handle no grub config
+	  - skip modifications when dev2grub fail
+	(since the device not in device.map means the device is currently unused
+	for booting)
+
+	* modules.pm, install_steps.pm: alias agpgart should be only for 2.6,
+	since code doesn't allow this easily,
+	adding the agp module to modprobe.preload
+
+2004/02/20  Stew Benedict  <sbenedict at mandrakesoft.com>
+
+	* standalone/drakbackup: Shrink code per Thierry.
+
+2004/02/20  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* network/adsl_consts.pm: remove debug statement
+	aliase Free non dégroupé 1024/256 on "Free non dégroupé 512/128" (#7615)
+
+	* network/adsl.pm: fix writing aliases (fix broken speedtouch)
+
+	* drakxtools.spec: 10-1mdk
+
 2004/02/20  Guillaume Cottenceau  <gc at mandrakesoft.com>
 
 	* interactive/gtk.pm, install_gtk.pm, ugtk2.pm: don't force buttons a size
@@ -26872,7 +26912,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.877 2004/02/19 21:03:06 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.878 2004/02/20 11:29:29 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
