@@ -19,6 +19,7 @@ use common qw(:system :file);
 use interactive;
 use log;
 use c;
+use netconnect;
 use detect_devices;
 
 local $_ = join '', @ARGV;
@@ -160,14 +161,14 @@ my @configured_devices = map { /ifcfg-(\S+)/; $1 } `ls /etc/sysconfig/network-sc
 
 #my @active_devices = `/sbin/ifconfig | grep ^[a-z] | awk '{print \$1}'`; chop @active_devices;
 
-my %aliased_devices; (/^alias\s+(eth[0-9])\s+(\S+)/) and ($aliased_devices{$1} = $2) foreach (`cat /etc/modules.conf`);
-my @cards_to_ignore = (); #= @{netconnect::configured_devices};
-log::l("Information from netconnect: ignoring card $_\n") foreach (@cards_to_ignore);
+my %aliased_devices; (/^alias\s+(eth[0-9])\s+(\S+)/) and ($aliased_devices{$1} = $2) foreach cat_("/etc/modules.conf");
+my $card_netconnect = netconnect::get_net_device("/");
+(defined $card_netconnect) and log::l("Information from netconnect: ignoring card $card_netconnect\n");
 my @all_cards_getnet = detect_devices::getNet();
 my @all_cards;
 foreach my $card (@all_cards_getnet)
 {
-    next if grep(/$card/, @cards_to_ignore);
+    next if ($card eq $card_netconnect);
     push @all_cards, exists $aliased_devices{$card} ? "Interface $card (using module $aliased_devices{$card})" : "Interface $card";
 }
 
