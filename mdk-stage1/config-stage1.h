@@ -47,9 +47,16 @@
 #define DISTRIB_NAME "Mandrakelinux"
 
 #define LIVE_LOCATION_REL "install/stage2/live/"
+
+/* the remote media is mounted in 
+   - IMAGE_LOCATION_DIR "nfsimage", and IMAGE_LOCATION is a symlink image -> nfsimage/mdk/mirror/dir
+   - IMAGE_LOCATION_DIR "hdimage",  and IMAGE_LOCATION is a symlink image -> hdimage/mdk/mirror/dir
+   - directly in IMAGE_LOCATION (for cdroms and .iso images)
+ */
 #define IMAGE_LOCATION_DIR SLASH_LOCATION "/tmp/"
 #define IMAGE_LOCATION_REL "image"
 #define IMAGE_LOCATION IMAGE_LOCATION_DIR IMAGE_LOCATION_REL
+
 #define STAGE2_LOCATION_ROOTED "/tmp/stage2"
 #define STAGE2_LOCATION  SLASH_LOCATION STAGE2_LOCATION_ROOTED
 
