@@ -32,9 +32,9 @@ my %mice =
      [ 5, 'ps/2', 'MouseManPlusPS/2', N_("Logitech MouseMan+") ],
      [ 5, 'imps2', 'IMPS/2', N_("Generic PS2 Wheel Mouse") ],
      [ 5, 'ps/2', 'GlidePointPS/2', N_("GlidePoint") ],
-     c::kernel_version() =~ /^\Q2.6/ ?
-       [ 5, 'ps/2', 'auto-dev', N_("Synaptics Touchpad") ] :
-       [ 5, 'imps2', 'auto', N_("Automatic") ],
+     if_(c::kernel_version() !~ /^\Q2.6/,
+       [ 5, 'imps2', 'auto', N_("Automatic") ]
+	 ),
      '',
      [ 5, 'ps/2', 'ThinkingMousePS/2', N_("Kensington Thinking Mouse") ],
      [ 5, 'netmouse', 'NetMousePS/2', N_("Genius NetMouse") ],
@@ -86,6 +86,7 @@ my %mice =
  N_("Universal") =>
  [ [ 'input/mice' ],
    [ [ 7, 'ps/2', 'ExplorerPS/2', N_("Any PS/2 & USB mice") ],
+     [ 5, 'ps/2', 'auto-dev', N_("Synaptics Touchpad") ],
    ] ],
     ),
 
