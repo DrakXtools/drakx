@@ -91,7 +91,10 @@ sub detect_timezone() {
                           );
       my %l10n_lan_protocols = (
                                static => N("Manual configuration"),
-                               dhcp   => N("Automatic IP (BOOTP/DHCP/Zeroconf)"),
+                               dhcp   => N("Automatic IP (BOOTP/DHCP)"),
+                               if_(0,
+                               dhcp_zeroconf   => N("Automatic IP (BOOTP/DHCP/Zeroconf)"),
+                                  )
                               );
 
 
@@ -557,6 +560,7 @@ Modifying the fields below will override this configuration."),
                         $auto_ip = $l10n_lan_protocols{defined $auto_ip ? ($auto_ip ? 'dhcp' : 'static') :$ethntf->{BOOTPROTO}} || 0;
                     },
                     name => sub { 
+                        N("Zeroconf hostname resolution");
                         N("Configuring network device %s (driver %s)", $ethntf->{DEVICE}, $module) . "\n\n" .
                           N("The following protocols can be used to configure an ethernet connection. Please choose the one you want to use")
                     },
