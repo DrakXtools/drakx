@@ -76,10 +76,11 @@ sub ask_many_from_list_refW($$$$$) {
 
 sub ask_from_entries_refW {
     my ($o, $title, $messages, $l, $val, %hcallback) = @_;
+    my ($title_, @okcancel) = ref $title ? @$title : $title;
     my $num_fields = @{$l};
     my $ignore = 0; #-to handle recursivity
 
-    my $w = my_gtk->new($title, %$o);
+    my $w = my_gtk->new($title_, %$o);
     #-the widgets
     my @widgets = map {
 	if ($_->{type} eq "list") {
@@ -99,7 +100,7 @@ sub ask_from_entries_refW {
 	    new Gtk::Entry;
 	}
     } @{$val};
-    my $ok      = $w->create_okcancel;
+    my $ok = $w->create_okcancel(@okcancel);
 
     sub widget {
 	my ($w, $ref) = @_;

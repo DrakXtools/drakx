@@ -278,11 +278,14 @@ sub addUser($) {
     my $p = $o->{prefix};
     my @passwd = cat_("$p/etc/passwd");;
 
-    !$u{name} || getpwnam($u{name}) and return;
-
-    for ($u{uid} = 500; getpwuid($u{uid}); $u{uid}++) {}
-    for ($u{gid} = 500; getgrgid($u{gid}); $u{gid}++) {}
+    return if !$u{name} || getpwnam($u{name});
     $u{home} ||= "/home/$u{name}";
+
+    my (%uids, %gids); 
+    foreach (glob_("/home")) { my ($u, $g) = (stat($_))[4,5]; $uids{$u} = 1; $gids{$g} = 1; }
+    my ($old_uid, $old_gid) = ($u{uid}, $u{gid}) = (stat($u{home}))[4,5];
+    if (getpwuid($u{uid})) { for ($u{uid} = 500; getpwuid($u{uid}) || $uids{$u{uid}}; $u{uid}++) {} }
+    if (getgrgid($u{gid})) { for ($u{gid} = 500; getgrgid($u{gid}) || $gids{$u{gid}}; $u{gid}++) {} }
 
     $u{password} = crypt_($u{password}) if $u{password};
 
@@ -295,8 +298,11 @@ sub addUser($) {
     open F, ">> $p/etc/group" or die "can't append to group file: $!";
     print F "$u{name}::$u{gid}:\n";
 
-    eval { commands::cp("-f", "$p/etc/skel", "$p$u{home}") }; $@ and log::l("copying of skel failed: $@"), mkdir("$p$u{home}", 0750);
-    commands::chown_("-r", "$u{uid}.$u{gid}", "$p$u{home}");
+    unless (-d "$p$u{home}") {
+	eval { commands::cp("-f", "$p/etc/skel", "$p$u{home}") }; 
+	if ($@) { log::l("copying of skel failed: $@"); mkdir("$p$u{home}", 0750); }
+    }
+    commands::chown_("-r", "$u{uid}.$u{gid}", "$p$u{home}") if $u{uid} != $old_uid || $u{gid} != $old_gid;
 }
 
 #------------------------------------------------------------------------------

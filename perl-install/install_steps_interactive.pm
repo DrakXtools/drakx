@@ -55,6 +55,11 @@ sub selectLanguage($) {
 					[ lang::list() ],
 					lang::lang2text($o->{lang})));
     install_steps::selectLanguage($o);
+
+    $o->{useless_thing_accepted} = $o->ask_from_list_('', 
+_("Wanring no wrranty, be carfull it's gonna explose ytou romcpature"), 
+		       [ _("Accept"), _("Refuse") ], "Accept") eq "Accept" or exit(1) unless $o->{useless_thing_accepted};
+
 }
 #------------------------------------------------------------------------------
 sub selectKeyboard($) {
@@ -135,7 +140,7 @@ sub ask_mntpoint_s {
 	my %l; $l{&$msg} = $_ foreach @fstab;
 	my $e = $o->ask_from_list('', 
 				  _("Which partition do you want to use as your root partition"), 
-				  [ keys %l ]);
+				  [ sort keys %l ]);
 	(fsedit::get_root($fstab) || {})->{mntpoint} = '';
 	$l{$e}{mntpoint} = '/';
     } else {
@@ -525,8 +530,8 @@ sub addUser($) {
     my @shells = install_any::shells($o);
 
     $o->ask_from_entries_ref(
-        _("Add user"),
-        _("Enter a user"),
+        [ _("Add user"), _("Add user"), _("Done") ],
+        _("Enter a user\n%s", $o->{users} ? _("(already added %s)", join(", ", @{$o->{users}})) : ''),
         [ _("Real name"), _("User name"), _("Password"), _("Password (again)"), _("Shell") ],
         [ \$u->{realname}, \$u->{name},
 	  {val => \$u->{password}, hidden => 1}, {val => \$u->{password2}, hidden => 1},
@@ -534,7 +539,7 @@ sub addUser($) {
         ],
         focus_out => sub {
 	    if ($_[0] eq 0) {
-		$u->{name} = lc first($u->{realname} =~ /((\w|-)+)/);
+		$u->{name} ||= lc first($u->{realname} =~ /((\w|-)+)/);
 	    }
 	},
         complete => sub {
@@ -546,8 +551,9 @@ sub addUser($) {
 	},
     ) or return;
     install_steps::addUser($o);
+    push @{$o->{users}}, $o->{user}{realname};
     $o->{user} = {};
-    goto &addUser if $::expert;
+    goto &addUser;#- if $::expert;
 }
 
 

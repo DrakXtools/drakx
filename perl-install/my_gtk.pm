@@ -388,18 +388,21 @@ sub _ask_from_list($$$$) {
 
 	Gtk->timeout_remove($timeout) if $timeout; $timeout = '';
 
-	if ($e->{state} & 4) {
-	    #- control pressed
-	    $start_reg = $start_reg ? '' : "^" if $c eq "s";
-	} elsif ($e->{keyval} >= 0x100) {
+	if ($e->{keyval} >= 0x100) {
 	    &$leave if $c eq "\r" || $c eq "\x8d";
-	    $starting_word = '';
+	    $starting_word = '' if $e->{keyval} != 0xffe4; # control
 	} else {
-	    &$leave if $c eq ' ';
+	    if ($e->{state} & 4) {
+		#- control pressed
+		$c eq "s" or return 1;
+		$start_reg and $start_reg = '', return 1;
+		$curr++;
+	    } else {
+		&$leave if $c eq ' ';
 
-	    $curr++ if $starting_word eq '' || $starting_word eq $c;
-	    $starting_word .= $c unless $starting_word eq $c;
-
+		$curr++ if $starting_word eq '' || $starting_word eq $c;
+		$starting_word .= $c unless $starting_word eq $c;
+	    }
 	    my $word = quotemeta $starting_word;
 	    my $j; for ($j = 0; $j < @$l; $j++) {
 		 $l->[($j + $curr) % @$l] =~ /$start_reg$word/i and last;

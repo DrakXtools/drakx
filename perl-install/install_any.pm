@@ -56,8 +56,11 @@ sub kernelVersion {
 
 
 sub getNextStep {
-    my ($s) = $::o->{steps}{first};
-    $s = $::o->{steps}{$s}{next} while $::o->{steps}{$s}{done};
+    my ($s, $old);
+    for ($s = $::o->{steps}{first}; $::o->{steps}{$s}{done}; $s = $::o->{steps}{$s}{next}) {
+	$::o->{steps}{$s}{reachable} or return $old;
+	$old = $s;
+    }
     $s;
 }
 
