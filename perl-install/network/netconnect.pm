@@ -1071,8 +1071,8 @@ notation (for example, 1.2.3.4).")),
                         $netc->{$_} = $ethntf->{DEVICE} foreach qw(NET_DEVICE NET_INTERFACE);
                         if ($auto_ip) {
                             $in->do_pkgs->install($netc->{dhcp_client});
-                            #- delete gateway settings if reconfiguring the gateway interface to dhcp
-                            if ($netc->{GATEWAYDEV} eq $ntf_name || @all_cards > 1) {
+                            #- delete gateway settings if gateway device is invalid or if reconfiguring the gateway interface to dhcp
+                            if (!$netc->{GATEWAYDEV} || !exists $eth_intf{$netc->{GATEWAYDEV}} || $netc->{GATEWAYDEV} eq $ntf_name) {
                                 delete $netc->{GATEWAY};
                                 delete $netc->{GATEWAYDEV};
                             }
