@@ -331,11 +331,7 @@ my $content = join('', cat_($FilePointer));
 my $AboutWindow = Gtk2::Dialog->new("Drakroam Info", $w->{window},
                                     'destroy-with-parent',
                                     'gtk-ok' => 'none');
-my $AboutLabel = Gtk2::Label->new($content);
-my $DialogScroll = Gtk2::ScrolledWindow->new;
-#$DialogScroll->set_policy('automatic', 'automatic');
-$DialogScroll->add_with_viewport($AboutLabel);
-$AboutWindow->vbox->add($DialogScroll);
+$AboutWindow->vbox->add(create_scrolled_window(Gtk2::Label->new($content)));
 $AboutWindow->signal_connect(response => sub { $_[0]->destroy });
 $AboutWindow->show_all;
 }
