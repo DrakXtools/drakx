@@ -43,11 +43,12 @@ sub handle_etcfiles {
 }
 
 sub handle_virtual_key {
-    if (my ($device, $file) = cat_('/proc/cmdline') =~ /\bvirtual_key=(\S+),(\S+)/) {
-        log::l("using device=$device file=$file as a virtual key");
+    if (my ($device, $file, $options) = cat_('/proc/cmdline') =~ /\bvirtual_key=([^,\s]+),([^,\s]+)(,\S+)?/) {
+        log::l("using device=$device file=$file as a virtual key with options $options");
         my $dir = '/virtual_key_mount';
         mkdir $dir;
         run_program::run('mount', $device, $dir);
+        $options =~ /format/ and run_program::run('mkdosfs', "$dir$file");
         require devices;
         my $loop = devices::find_free_loop();
         run_program::run('losetup', $loop, "$dir$file");
