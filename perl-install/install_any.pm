@@ -26,7 +26,7 @@ use log;
 #-######################################################################################
 sub relGetFile($) {
     local $_ = $_[0];
-    my $dir = m|/| ? "mdkinst" : 
+    my $dir = m|/| ? "mdkinst" :
       (member($_, qw(compss compssList depslist hdlist)) ? "base" : "RPMS");
     $_ = "Mandrake/$dir/$_";
     s/i386/i586/;
@@ -117,19 +117,19 @@ sub setPackages($$) {
 	$o->{packages} = pkgs::psUsingDirectory() if !$useHdlist || $@;
 
 	pkgs::getDeps($o->{packages});
-	
+
 	$o->{compss} = pkgs::readCompss($o->{packages});
 	$o->{compssListLevels} = pkgs::readCompssList($o->{packages});
 	$o->{compssListLevels} ||= $install_classes;
 	push @{$o->{base}}, "kernel-smp" if detect_devices::hasSMP();
 	push @{$o->{base}}, "kernel-pcmcia-cs" if $o->{pcmcia};
     }
-    
+
     do {
 	my $p = $o->{packages}{$_} or log::l("missing base package $_"), next;
 	pkgs::select($o->{packages}, $p, 1);
     } foreach @{$o->{base}};
-    
+
     pkgs::setShowFromCompss($o->{compss}, $o->{installClass}, $o->{lang});
     pkgs::setSelectedFromCompssList($o->{compssListLevels}, $o->{packages}, getAvailableSpace($o) * 0.7, $o->{installClass}, $o->{lang});
 }

@@ -9,7 +9,7 @@ use strict;
 use common qw(:common :functional);
 
 #- heritate from this class and you'll get all made interactivity for same steps.
-#- for this you need to provide 
+#- for this you need to provide
 #- - ask_from_listW(o, title, messages, arrayref, default) returns one string of arrayref
 #- - ask_many_from_listW(o, title, messages, arrayref, arrayref2) returns many strings of arrayref
 #-
@@ -19,7 +19,7 @@ use common qw(:common :functional);
 #- - messages is an refarray of strings
 #- - default is an optional string (default is in arrayref)
 #- - arrayref is an arrayref of strings
-#- - arrayref2 contains booleans telling the default state, 
+#- - arrayref2 contains booleans telling the default state,
 #-
 #- ask_from_list and ask_from_list_ are wrappers around ask_from_biglist and ask_from_smalllist
 #-
@@ -58,7 +58,7 @@ sub ask_okcancel($$$;$) {
 }
 
 sub ask_from_list_ {
-    my ($o, $title, $message, $l, $def) = @_;    
+    my ($o, $title, $message, $l, $def) = @_;
     @$l == 0 and die '';
     @$l == 1 and return $l->[0];
     goto &ask_from_list2_;
@@ -116,7 +116,7 @@ sub ask_from_entries($$$$;$%) {
     my $val = [ map { my $i = $_; \$i } @{$def || [('') x @$l]} ];
 
     $o->ask_from_entries_ref($title, $message, $l, $val, %callback) ?
-      map { $$_ } @$val : 
+      map { $$_ } @$val :
       undef;
 }
 #- can get a hash of callback: focus_out changed and complete
@@ -126,7 +126,7 @@ sub ask_from_entries_ref($$$$;$%) {
     my ($o, $title, $message, $l, $val, %callback) = @_;
 
     return unless @$l;
-    
+
     $message = ref $message ? $message : [ $message ];
 
     my $val_hash = [ map {
@@ -139,7 +139,7 @@ sub ask_from_entries_ref($$$$;$%) {
     } @$val ];
 
     $o->ask_from_entries_refW($title, $message, $l, $val_hash, %callback)
-    
+
 }
 sub wait_message($$$) {
     my ($o, $title, $message) = @_;

@@ -56,11 +56,11 @@ sub ask_many_from_list_refW($$$$$) {
     my ($o, $title, $messages, $list, $val) = @_;
     my $n = 0;
     my $w = my_gtk->new('', %$o);
-    gtkadd($w->{window}, 
+    gtkadd($w->{window},
 	   gtkpack(create_box_with_title($w, @$messages),
 		   gtkpack(new Gtk::VBox(0,0),
-			   map { 
-			       my $nn = $n++; 
+			   map {
+			       my $nn = $n++;
 			       my $o = Gtk::CheckButton->new($_);
 			       $o->set_active(${$val->[$nn]});
 			       $o->signal_connect(clicked => sub { ${$val->[$nn]} = !${$val->[$nn]} });
@@ -77,11 +77,11 @@ sub ask_many_from_list_refW($$$$$) {
 sub ask_from_entries_refW {
     my ($o, $title, $messages, $l, $val, %hcallback) = @_;
     my $num_fields = @{$l};
-    my $ignore = 0; #-to handle recursivity 
+    my $ignore = 0; #-to handle recursivity
 
     my $w       = my_gtk->new($title, %$o);
     #-the widgets
-    my @entries = map { 
+    my @entries = map {
 	if ($_->{type} eq "list") {
 	    my $depth_combo = new Gtk::Combo;
 	    $depth_combo->set_use_arrows_always(1);
@@ -101,12 +101,12 @@ sub ask_from_entries_refW {
 	($ref->{type} eq "list" && @{$ref->{list}}) ? $entry->entry : $entry
     }
 
-    my @updates = mapn { 
+    my @updates = mapn {
 	my ($entry, $ref) = @_;
 	sub { ${$ref->{val}} = comb_entry($entry, $ref)->get_text };
     } \@entries, $val;
 
-    my @updates_inv = mapn { 
+    my @updates_inv = mapn {
 	my ($entry, $ref) = @_;
 	sub { comb_entry($entry, $ref)->set_text(${$ref->{val}})
 	};
@@ -152,13 +152,13 @@ sub ask_from_entries_refW {
 	   my $c = chr $e->{keyval};
 	   if ($c eq "\x8d")
 	     {
-		 #-don't know why it works, i believe that 
+		 #-don't know why it works, i believe that
 		 #-i must say before &$go_to_next, but with it doen't work HACK!
 		 $w->signal_emit_stop("key_press_event");
 	     }
 	    ;
 	    });
-	
+
 	$entry->set_text(${$val->[$i]{val}})  if ${$val->[$i]{val}};
 	$entry->set_visibility(0) if $val->[$i]{hidden};
 	&{$updates[$i]};
@@ -166,7 +166,7 @@ sub ask_from_entries_refW {
 
     my @entry_list = mapn { [($_[0], $_[1])]} $l, \@entries;
 
-    gtkadd($w->{window}, 
+    gtkadd($w->{window},
 	   gtkpack(
 		   create_box_with_title($w, @$messages),
 		   create_packtable({}, @entry_list),
@@ -200,9 +200,9 @@ sub wait_messageW($$$) {
 
     my $w = my_gtk->new(_("Resizing"), %$o, grab => 1);
     my $W = pop @$message;
-    gtkadd($w->{window}, 
-	   gtkpack(new Gtk::VBox(0,0), 
-		   @$message, 
+    gtkadd($w->{window},
+	   gtkpack(new Gtk::VBox(0,0),
+		   @$message,
 		   $w->{wait_messageW} = new Gtk::Label($W)));
     $w->sync;
     $w;

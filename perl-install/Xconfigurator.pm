@@ -19,7 +19,7 @@ my ($prefix, %cards, %monitors);
 
 sub setVirtual($) {
     my $vt = '';
-    local *C; 
+    local *C;
     sysopen C, "/dev/console", 2 or die "failed to open /dev/console: $!";
     ioctl(C, c::VT_GETSTATE(), $vt) or die "ioctl VT_GETSTATE failed";
     ioctl(C, c::VT_ACTIVATE(), $_[0]) or die "ioctl VT_ACTIVATE failed";
@@ -37,7 +37,7 @@ sub readCardsDB {
     open F, $file or die "file $file not found";
 
     my ($lineno, $cmd, $val) = 0;
-    my $fs = { 
+    my $fs = {
         LINE => sub { push @{$card->{lines}}, $val unless $val eq "VideoRam" },
 	NAME => sub {
 	    $cards{$card->{type}} = $card if $card;
@@ -45,13 +45,13 @@ sub readCardsDB {
 	},
 	SEE => sub {
 	    my $c = $cards{$val} or die "Error in database, invalid reference $val at line $lineno";
-	    
+
 	    push @{$card->{lines}}, @{$c->{lines} || []};
 	    add2hash($card->{flags}, $c->{flags});
 	    add2hash($card, $c);
 	},
-	CHIPSET => sub { 
-	    $card->{chipset} = $val; 
+	CHIPSET => sub {
+	    $card->{chipset} = $val;
 	    $card->{flags}{needVideoRam} = 1 if member($val, qw(mgag10 mgag200 RIVA128));
 	},
 	SERVER => sub { $card->{server} = $val; },
@@ -78,7 +78,7 @@ sub readCardsDB {
     push @{$cards{S3}{lines}}, $s3_comment;
     push @{$cards{'CL-GD'}{lines}}, $cirrus_comment;
 
-    #- this entry is broken in X11R6 cards db 
+    #- this entry is broken in X11R6 cards db
     $cards{I128}{flags}{noclockprobe} = 1;
 }
 
@@ -98,13 +98,13 @@ sub readMonitorsDB {
 	my @fields = qw(type bandwidth hsyncrange vsyncrange);
 	my @l = split /\s*;\s*/;
 	@l == @fields or log::l("bad line $lineno ($_)"), next;
-	
+
 	my %l; @l{@fields} = @l;
 	$monitors{$l{type}} = \%l;
     }
     while (my ($k, $v) = each %standard_monitors) {
-	$monitors{$k} = 
-	  $monitors{$v->[0]} = 
+	$monitors{$k} =
+	  $monitors{$v->[0]} =
 	    { hsyncrange => $v->[1], vsyncrange => $v->[2] };
     }
 }
@@ -115,7 +115,7 @@ sub rewriteInittab {
 	local (*F, *G);
 	open F, "$prefix/etc/inittab" or die "cannot open $prefix/etc/inittab: $!";
 	open G, "> $prefix/etc/inittab-" or die "cannot write in $prefix/etc/inittab-: $!";
-    
+
 	foreach (<F>) {
 	    print G /^(id:)[35](:initdefault:)\s*$/ ? "$1$runlevel$2\n" : $_; # **
 	}
@@ -130,13 +130,13 @@ sub keepOnlyLegalModes {
     my $hsync = max(split(/[,-]/, $monitor->{hsyncrange}));
 
     while (my ($depth, $res) = each %{$card->{depth}}) {
-	@$res = grep { 
+	@$res = grep {
 	    $mem >= product(@$_, $depth / 8) &&
 	    $hsync >= ($min_hsync4wres{$_->[0]} || 0)
 	} @$res;
 	delete $card->{depth}{$depth} if @$res == 0;
     }
-    
+
 }
 
 sub cardConfigurationAuto() {
@@ -158,7 +158,7 @@ sub cardConfiguration(;$$) {
 
     add2hash($card, $cards{$card->{type}}) if $card->{type}; #- try to get info from given type
     $card->{type} = undef unless $card->{server}; #- bad type as we can't find the server
-	
+
     add2hash($card, cardConfigurationAuto()) unless $card->{server} || $noauto;
     $card->{type} = $in->ask_from_list('', _("Choose a graphic card"), ['Unlisted', keys %cards]) unless $card->{type} || $card->{server};
     $card->{type} = undef, $card->{server} = $in->ask_from_list('', _("Choose a X server"), \@allservers) if $card->{type} eq "Unlisted";
@@ -170,7 +170,7 @@ sub cardConfiguration(;$$) {
 
     -x "$prefix$card->{prog}" or !defined $install or &$install($card->{server});
     -x "$prefix$card->{prog}" or die "server $card->{server} is not available (should be in $prefix$card->{prog})";
-	
+
     unless ($::testing) {
 	unlink("$prefix/etc/X11/X");
 	symlink("../..$card->{prog}", "$prefix/etc/X11/X");
@@ -181,10 +181,10 @@ sub cardConfiguration(;$$) {
     }
 
     $card->{flags}{needVideoRam} and
-      $card->{memory} ||= 
-	$videomemory{$in->ask_from_list_('', 
-					 _("Select the memory size of your graphic card"), 
-					 [ sort { $videomemory{$a} <=> $videomemory{$b} } 
+      $card->{memory} ||=
+	$videomemory{$in->ask_from_list_('',
+					 _("Select the memory size of your graphic card"),
+					 [ sort { $videomemory{$a} <=> $videomemory{$b} }
 					   keys %videomemory])};
     $card;
 }
@@ -198,7 +198,7 @@ sub monitorConfiguration(;$) {
 
     add2hash($monitor, { type => $in->ask_from_list('', _("Choose a monitor"), ['Unlisted', keys %monitors]) }) unless $monitor->{type};
     if ($monitor->{type} eq 'Unlisted') {
-	$in->ask_from_entries_ref('', 
+	$in->ask_from_entries_ref('',
 _("The two critical parameters are the vertical refresh rate, which is the rate
 at which the whole screen is refreshed, and most importantly the horizontal
 sync rate, which is the rate at which scanlines are displayed.
@@ -257,7 +257,7 @@ sub testFinalConfig($;$) {
 
     write_XF86Config($o, $::testing ? $tmpconfig : "$prefix/etc/X11/XF86Config");
 
-    $auto 
+    $auto
       or $in->ask_yesorno(_("Test configuration"), _("Do you want to test the configuration?"))
       or return 1;
 
@@ -314,7 +314,7 @@ sub autoResolutions($;$) {
 
     $nowarning || $in->ask_okcancel(_("Automatic resolutions"),
 _("To find the available resolutions i will try different ones.
-Your screen will blink... 
+Your screen will blink...
 You can switch if off if you want, you'll hear a beep when it's over")) or return;
 
     #- swith to virtual console 1 (hopefully not X :)
@@ -354,7 +354,7 @@ sub autoDefaultDepth($$) {
 
 sub autoDefaultResolution(;$) {
     my $size = round(shift || 14); #- assume a small monitor (size is in inch)
-    $monitorSize2resolution[$size] || 
+    $monitorSize2resolution[$size] ||
       $monitorSize2resolution[$#monitorSize2resolution]; #- no corresponding resolution for this size. It means a big monitor, take biggest we have
 }
 
@@ -431,17 +431,17 @@ sub resolutionsConfiguration($%) {
 	return;
     }
 
-    #- some of these guys hate to be poked               
+    #- some of these guys hate to be poked
     #- if we dont know then its at the user's discretion
-    #-my $manual ||= 
-    #-	$card->{server} =~ /^(TGA|Mach32)/ || 
+    #-my $manual ||=
+    #-	$card->{server} =~ /^(TGA|Mach32)/ ||
     #-	$card->{name} =~ /^Riva 128/ ||
     #-	$card->{chipset} =~ /^(RIVA128|mgag)/ ||
     #-	$::expert;
     #-
-    #-my $unknown = 
+    #-my $unknown =
     #-	member($card->{server}, qw(S3 S3V I128 Mach64)) ||
-    #-	member($card->{type}, 
+    #-	member($card->{type},
     #-	       "Matrox Millennium (MGA)",
     #-	       "Matrox Millennium II",
     #-	       "Matrox Millennium II AGP",
@@ -455,18 +455,18 @@ sub resolutionsConfiguration($%) {
     #-
     #-$unknown and $manual ||= !$in->ask_okcancel('', [ _("I can try to autodetect information about graphic card, but it may freeze :("),
     #-							_("Do you want to try?") ]);
-    
+
     if (is_empty_hash_ref($card->{depth})) {
-	$card->{depth}{$_} = [ map { [ split "x" ] } @resolutions ] 
+	$card->{depth}{$_} = [ map { [ split "x" ] } @resolutions ]
 	  foreach @depths;
 
 	unless ($options{noauto}) {
-	    if ($options{nowarning} || $in->ask_okcancel(_("Automatic resolutions"), 
+	    if ($options{nowarning} || $in->ask_okcancel(_("Automatic resolutions"),
 _("I can try to find the available resolutions (eg: 800x600).
 Alas it can freeze sometimes
 Do you want to try?"))) {
 		autoResolutions($o, $options{nowarning});
-		is_empty_hash_ref($card->{depth}) and $in->ask_warn('', 
+		is_empty_hash_ref($card->{depth}) and $in->ask_warn('',
 _("No valid modes found
 Try with another video card or monitor")), return;
 	    }
@@ -505,7 +505,7 @@ Try with another video card or monitor")), return;
 }
 
 
-#- Create the XF86Config file. 
+#- Create the XF86Config file.
 sub write_XF86Config {
     my ($o, $file) = @_;
     my $O;
@@ -515,7 +515,7 @@ sub write_XF86Config {
 
     print F $XF86firstchunk_text;
 
-    #- Write keyboard section.     
+    #- Write keyboard section.
     $O = $o->{keyboard};
     print F $keyboardsection_start;
 
@@ -524,12 +524,12 @@ sub write_XF86Config {
     print F qq(    XkbLayout       "$O->{xkb_keymap}"\n);
     print F $keyboardsection_end;
 
-    #- Write pointer section.     
+    #- Write pointer section.
     $O = $o->{mouse};
     print F $pointersection_text1;
     print F qq(    Protocol    "$O->{XMOUSETYPE}"\n);
     print F qq(    Device      "/dev/$O->{device}"\n);
-    #- this will enable the "wheel" or "knob" functionality if the mouse supports it 
+    #- this will enable the "wheel" or "knob" functionality if the mouse supports it
     print F "    ZAxisMapping 4 5\n" if
       member($O->{XMOUSETYPE}, qw(IntelliMouse IMPS/2 ThinkingMousePS/2 NetScrollPS/2 NetMousePS/2 MouseManPlusPS/2));
 
@@ -545,7 +545,7 @@ sub write_XF86Config {
     print F "    ClearRTS\n\n"  if $O->{cleardtrrts};
     print F "EndSection\n\n\n";
 
-    #- Write monitor section.     
+    #- Write monitor section.
     $O = $o->{monitor};
     $O->{modelines} .= $o->{card}{type} eq "TG 96" ? $modelines_text_Trident_TG_96xx : $modelines_text;
 
@@ -564,7 +564,7 @@ sub write_XF86Config {
     print F $O->{modelines} || ($o->{card}{type} eq "TG 96" ? $modelines_text_Trident_TG_96xx : $modelines_text);
     print F "\nEndSection\n\n\n";
 
-    #- Write Device section.     
+    #- Write Device section.
     $O = $o->{card};
     print F $devicesection_text;
     print F qq(Section "Device"\n);
@@ -588,7 +588,7 @@ sub write_XF86Config {
     }
     print F "EndSection\n\n\n";
 
-    #- Write Screen sections.     
+    #- Write Screen sections.
     print F $screensection_text1;
 
     my $screen = sub {
@@ -612,7 +612,7 @@ Section "Screen"
 	}
 	print F "EndSection\n";
     }; #-"
-    
+
     #- SVGA screen section.
     print F qq(
 # The Colour SVGA server
@@ -625,11 +625,11 @@ Section "Screen"
     }
 
     &$screen("vga16", '',
-	     (member($O->{server}, "Mono", "VGA16") ? $O->{type} : "Generic VGA"), 
+	     (member($O->{server}, "Mono", "VGA16") ? $O->{type} : "Generic VGA"),
 	     { '' => [[ 640, 480 ], [ 800, 600 ]]});
 
     &$screen("vga2", '',
-	     (member($O->{server}, "Mono", "VGA16") ? $O->{type} : "Generic VGA"), 
+	     (member($O->{server}, "Mono", "VGA16") ? $O->{type} : "Generic VGA"),
 	     { '' => [[ 640, 480 ], [ 800, 600 ]]});
 
     &$screen("accel", $O->{default_depth}, $O->{type}, $O->{depth});
@@ -666,7 +666,7 @@ sub show_info {
     $in->ask_warn('', $info);
 }
 
-#- Program entry point. 
+#- Program entry point.
 sub main {
     my $o;
     ($prefix, $o, $in, $install) = @_;
@@ -679,7 +679,7 @@ sub main {
     $o->{monitor} = monitorConfiguration($o->{monitor});
 
     my $ok = resolutionsConfiguration($o, auto => $::auto, noauto => $::noauto);
-    
+
     $ok &&= testFinalConfig($o, $::auto);
 
     my $quit;
@@ -689,7 +689,7 @@ sub main {
 	   __("Change Monitor") => sub { $o->{monitor} = monitorConfiguration() },
            __("Change Graphic card") => sub { $o->{card} = cardConfiguration('', 'noauto') },
 	   __("Change Resolution") => sub { resolutionsConfiguration($o, noauto => 1) },
-	   __("Automatical resolutions search") => sub { 
+	   __("Automatical resolutions search") => sub {
 	       delete $o->{card}{depth};
 	       resolutionsConfiguration($o, nowarning => 1);
 	   },
@@ -697,22 +697,22 @@ sub main {
 	   __("Test again") => sub { $ok = testFinalConfig($o, 1) },
 	   __("Quit") => sub { $quit = 1 },
         );
-	&{$c{$in->ask_from_list_('', 
+	&{$c{$in->ask_from_list_('',
 				 _("What do you want to do?"),
 				 [ grep { !ref } @c ])}};
     }
 
     if ($ok) {
-	my $run = $o->{xdm} || $::auto || $in->ask_yesorno(_("X at startup"), 
+	my $run = $o->{xdm} || $::auto || $in->ask_yesorno(_("X at startup"),
 _("I can set up your computer to automatically start X upon booting.
 Would you like X to start when you reboot?"));
 
 	rewriteInittab($run ? 5 : 3) unless $::testing;
 
 	$in->ask_warn(_("X successfully configured"),
-_("Configuration file has been written. Take a look at it before running 'startx'. 
-Within the server press ctrl, alt and '+' simultaneously to cycle video resolutions. 
-Pressing ctrl, alt and backspace simultaneously immediately exits the server 
+_("Configuration file has been written. Take a look at it before running 'startx'.
+Within the server press ctrl, alt and '+' simultaneously to cycle video resolutions.
+Pressing ctrl, alt and backspace simultaneously immediately exits the server
 For further configuration, refer to /usr/X11R6/lib/X11/doc/README.Config.")) unless $::auto;
     }
 }

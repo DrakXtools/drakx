@@ -40,7 +40,7 @@ sub min_size($) {
     #- moment, 2 directories are there, but that way nothing wrong can happen :)
     my $min_cluster_count = max(2 + $count->{used} + $count->{bad} + $count->{dirs}, min_cluster_count($fs));
 
-    $min_cluster_count * divide($fs->{cluster_size}, $SECTORSIZE) + 
+    $min_cluster_count * divide($fs->{cluster_size}, $SECTORSIZE) +
 	divide($fs->{cluster_offset}, $SECTORSIZE);
 }
 #- calculates the maximum size of a partition, in physical sectors
@@ -53,7 +53,7 @@ sub max_size($) {
 	divide($fs->{cluster_offset}, $SECTORSIZE);
 }
 
-#- fills in $fs->{fat_flag_map}. 
+#- fills in $fs->{fat_flag_map}.
 #- Each FAT entry is flagged as either FREE, FILE or DIRECTORY.
 sub flag_clusters {
     my ($fs) = @_;

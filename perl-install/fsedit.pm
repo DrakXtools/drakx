@@ -17,14 +17,14 @@ use log;
 #- Globals
 #-#####################################################################################
 my @suggestions = (
-  { mntpoint => "/boot",    minsize =>  10 << 11, size =>  16 << 11, type => 0x83 }, 
-  { mntpoint => "/",        minsize =>  50 << 11, size => 100 << 11, type => 0x83 }, 
+  { mntpoint => "/boot",    minsize =>  10 << 11, size =>  16 << 11, type => 0x83 },
+  { mntpoint => "/",        minsize =>  50 << 11, size => 100 << 11, type => 0x83 },
   { mntpoint => "swap",     minsize =>  30 << 11, size =>  60 << 11, type => 0x82 },
-  { mntpoint => "/usr",     minsize => 200 << 11, size => 600 << 11, type => 0x83 }, 
-  { mntpoint => "/home",    minsize =>  50 << 11, size => 200 << 11, type => 0x83 }, 
-  { mntpoint => "/var",     minsize => 200 << 11, size => 250 << 11, type => 0x83 }, 
-  { mntpoint => "/tmp",     minsize =>  50 << 11, size => 100 << 11, type => 0x83 }, 
-  { mntpoint => "/mnt/iso", minsize => 700 << 11, size => 800 << 11, type => 0x83 }, 
+  { mntpoint => "/usr",     minsize => 200 << 11, size => 600 << 11, type => 0x83 },
+  { mntpoint => "/home",    minsize =>  50 << 11, size => 200 << 11, type => 0x83 },
+  { mntpoint => "/var",     minsize => 200 << 11, size => 250 << 11, type => 0x83 },
+  { mntpoint => "/tmp",     minsize =>  50 << 11, size => 100 << 11, type => 0x83 },
+  { mntpoint => "/mnt/iso", minsize => 700 << 11, size => 800 << 11, type => 0x83 },
 );
 my @suggestions_mntpoints = qw(/mnt/dos);
 
@@ -32,9 +32,9 @@ my @suggestions_mntpoints = qw(/mnt/dos);
 #-######################################################################################
 #- Functions
 #-######################################################################################
-sub suggestions_mntpoint($) { 
+sub suggestions_mntpoint($) {
     my ($hds) = @_;
-    sort grep { !/swap/ && !has_mntpoint($_, $hds) } 
+    sort grep { !/swap/ && !has_mntpoint($_, $hds) }
       (@suggestions_mntpoints, map { $_->{mntpoint} } @suggestions);
 }
 
@@ -50,10 +50,10 @@ sub hds($$) {
 	$hd = { (%$_, %$hd) };
 	$hd->{file} = $file;
 	$hd->{prefix} = $hd->{device};
-	# for RAID arrays of format c0d0p1 
+	# for RAID arrays of format c0d0p1
 	$hd->{prefix} .= "p" if $hd->{prefix} =~ m,(rd|ida)/,;
 
-	eval { partition_table::read($hd, $flags->{clearall}) }; 
+	eval { partition_table::read($hd, $flags->{clearall}) };
 	if ($@) {
 	    &cdie($@) unless $flags->{eraseBadPartitions};
 	    partition_table_raw::zero_MBR($hd);
@@ -74,13 +74,13 @@ sub suggest_part($$$;$) {
 
     my $has_swap = grep { isSwap($_) } get_fstab(@$hds);
 
-    my ($best, $second) = 
+    my ($best, $second) =
       grep { $part->{size} >= $_->{minsize} }
       grep { ! has_mntpoint($_->{mntpoint}, $hds) || isSwap($_) && !$has_swap }
 	@$suggestions or return;
 
-    $best = $second if 
-      $best->{mntpoint} eq '/boot' && 
+    $best = $second if
+      $best->{mntpoint} eq '/boot' &&
       $part->{start} + $best->{minsize} > 1024 * partition_table::cylinder_size($hd); #- if the empty slot is beyond the 1024th cylinder, no use having /boot
 
     defined $best or return; #- sorry no suggestion :(
@@ -105,7 +105,7 @@ sub suggest_part($$$;$) {
 #-	 $text .= " - Model " . $_->{info};
 #-	 $text .= " array" if $_->{device} =~ /^c.d/;
 #-
-#-	 #- truncate at 50 columns for now 
+#-	 #- truncate at 50 columns for now
 #-	 $text = substr $text, 0, 50;
 #-    }
 #-    #-TODO TODO
@@ -208,7 +208,7 @@ sub auto_allocate($;$) {
     my ($hds, $suggestions) = @_;
     allocatePartitions($hds, [
 			      grep { ! has_mntpoint($_->{mntpoint}, $hds) }
-			      @{ $suggestions || \@suggestions } 
+			      @{ $suggestions || \@suggestions }
 			     ]);
     map { partition_table::assign_device_numbers($_) } @$hds;
 }
@@ -231,7 +231,7 @@ sub undo($) {
     foreach (@$hds) {
 	my $h; eval pop @{$_->{undo}} || next;
 	@{$_}{@partition_table::fields2save} = @$h;
-	
+
 	$_->{isDirty} = $_->{needKernelReread} = 1;
     }
 }
@@ -246,7 +246,7 @@ sub move {
     {
 	local ($part2->{notFormatted}, $part2->{isFormatted}); #- do not allow partition::add to change this
 	partition_table::add($hd2, $part2);
-    }    
+    }
 
     return if $part2->{notFormatted} && !$part2->{isFormatted} || $::testing;
 
@@ -271,7 +271,7 @@ sub move {
     my $f = sub {
 	c::lseek_sector(fileno(F), $base,  0) or die "seeking to sector $base failed on drive $hd->{device}";
 	c::lseek_sector(fileno(G), $base2, 0) or die "seeking to sector $base2 failed on drive $hd2->{device}";
-    
+
 	my $buf;
 	sysread F, $buf, $SECTORSIZE * abs($_[0]) or die '';
 	syswrite G, $buf;
@@ -320,4 +320,4 @@ sub rescuept($) {
 #-######################################################################################
 #- Wonderful perl :(
 #-######################################################################################
-1; # 
+1; #

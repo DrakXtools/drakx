@@ -18,10 +18,10 @@ use vars qw(@ISA %EXPORT_TAGS @EXPORT_OK $printable_chars $sizeof_int $bitof_int
 #-#####################################################################################
 #- Globals
 #-#####################################################################################
-$printable_chars = "\x20-\x7E";     
-$sizeof_int      = psizeof("i");    
-$bitof_int       = $sizeof_int * 8; 
-$SECTORSIZE      = 512;             
+$printable_chars = "\x20-\x7E";
+$sizeof_int      = psizeof("i");
+$bitof_int       = $sizeof_int * 8;
+$SECTORSIZE      = 512;
 
 #-#####################################################################################
 #- Functions
@@ -230,7 +230,7 @@ sub warp_text($;$) {
     my ($text, $width) = @_;
     $width ||= 80;
 
-    my @l; 
+    my @l;
     foreach (split "\n", $text) {
 	my $t = '';
 	foreach (split /\s+/, $_) {
@@ -251,7 +251,7 @@ sub getVarsFromSh($) {
     local *F;
     open F, $_[0] or return;
     foreach (<F>) {
-	my ($v, $val, $val2) = 
+	my ($v, $val, $val2) =
 	  /^\s*			# leading space
 	   (\w+) =		# variable
 	   (
@@ -280,7 +280,7 @@ sub best_match {
     my ($str, @lis) = @_;
     my @words = split /\W+/, $str;
     my ($max, $res) = 0;
-    
+
     foreach (@lis) {
 	my $count = 0;
 	foreach my $i (@words) {
@@ -298,7 +298,7 @@ sub bestMatchSentence {
     my @s = split /\W+/, shift;
     foreach (@_) {
 	my $count = 0;
-	foreach my $e (@s) { 
+	foreach my $e (@s) {
 	    $count++ if /$e/i;
 	}
 	$best = $count, $bestSentence = $_ if $count > $best;
@@ -314,7 +314,7 @@ sub bestMatchSentence2 {
     my @s = split /\W+/, shift;
     foreach (@_) {
 	my $count = 0;
-	foreach my $e (@s) { 
+	foreach my $e (@s) {
 	    $count+= length ($e) if /$e/i;
 	}
 	$best = $count, $bestSentence = $_ if $count > $best;
@@ -326,4 +326,4 @@ sub bestMatchSentence2 {
 #-######################################################################################
 #- Wonderful perl :(
 #-######################################################################################
-1; # 
+1; #

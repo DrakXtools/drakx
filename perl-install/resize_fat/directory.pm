@@ -42,7 +42,7 @@ sub traverse($$$) {
 
 	my $entry; @{$entry}{@fields} = unpack $format, $$raw;
 
-	&$f($entry) 
+	&$f($entry)
 	    and	$$raw = pack $format, @{$entry}{@fields};
     }
     $directory;
@@ -56,7 +56,7 @@ sub traverse_all($$) {
 
 	&$f($entry);
 
-        resize_fat::dir_entry::is_directory($entry) 
+        resize_fat::dir_entry::is_directory($entry)
 	    and traverse($fs, resize_fat::io::read_file($fs, resize_fat::dir_entry::get_cluster($entry)), $traverse_all);
 
 	undef; #- no need to write back (cf traverse)

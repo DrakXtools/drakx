@@ -1,7 +1,7 @@
 package printer;
 #-#####################################################################################
 
-=head1 NAME 
+=head1 NAME
 
 printer - supply methods for manage the printer related files directory handles
 
@@ -56,11 +56,11 @@ use commands;
 
 =item *
 
-an entry in the 'printerdb' file, which describes each type of 
+an entry in the 'printerdb' file, which describes each type of
 supported printer:
 
 	StartEntry: DeskJet550
-	  GSDriver: cdj550 
+	  GSDriver: cdj550
 	  Description: {HP DeskJet 550C/560C/6xxC series}
 	  About: { \
 		     This driver supports the HP inkjet printers which have \
@@ -83,14 +83,14 @@ supported printer:
 
 Example of data-struct:
 
-	my %ex_printerdb_entry = 
+	my %ex_printerdb_entry =
 	  (
 	   ENTRY    => "DeskJet550",                               #-Human-readable name of the entry
 	   GSDRIVER => "cdj550",                                   #-gs driver used by this printer
 	   DESCR    => "HP DeskJet 550C/560C/6xxC series",         #-Single line description of printer
 	   ABOUT    => "
-	   This driver supports the HP inkjet printers which have 
-	   color capability using both black and color cartridges 
+	   This driver supports the HP inkjet printers which have
+	   color capability using both black and color cartridges
 		...",                                              #-Lengthy description of printer
 	   RESOLUTION   => [                                       #-List of resolutions supported
 			    {
@@ -110,79 +110,79 @@ Example of data-struct:
 
 =item *
 
-A printcap entry only represents a subset of possible options available       
-Sufficient for the simple configuration we are interested in 
+A printcap entry only represents a subset of possible options available
+Sufficient for the simple configuration we are interested in
 there is also some text in the template (.in) file in the spooldir
 
-	# /etc/printcap                                                          
-	#                                                                        
+	# /etc/printcap
+	#
 	# Please don't edit this file directly unless you know what you are doing
 	# Be warned that the control-panel printtool requires a very strict forma
-	# Look at the printcap(5) man page for more info.                        
-	#                                                                        
-	# This file can be edited with the printtool in the control-panel.       
-										 
+	# Look at the printcap(5) man page for more info.
+	#
+	# This file can be edited with the printtool in the control-panel.
+
 	##PRINTTOOL3## LOCAL uniprint NAxNA letter {} U_NECPrinwriter2X necp2x6 1
-	lpname:\                                                                 
-		:sd=/var/spool/lpd/lpnamespool:\                                 
-		:mx#45:\                                                         
-		:sh:\                                                            
-		:lp=/dev/device:\                                                
-		:if=/var/spool/lpd/lpnamespool/filter:                           
-	##PRINTTOOL3## REMOTE st800 360x180 a4 {} EpsonStylus800 Default 1       
-	remote:\                                                                 
-		:sd=/var/spool/lpd/remotespool:\                                 
-		:mx#47:\                                                         
-		:sh:\                                                            
-		:rm=remotehost:\                                                 
-		:rp=remotequeue:\                                                
-		:if=/var/spool/lpd/remotespool/filter:                           
-	##PRINTTOOL3## SMB la75plus 180x180 letter {} DECLA75P Default {}        
-	smb:\                                                                    
-		:sd=/var/spool/lpd/smbspool:\                                    
-		:mx#46:\                                                         
-		:sh:\                                                            
-		:if=/var/spool/lpd/smbspool/filter:\                             
-		:af=/var/spool/lpd/smbspool/acct:\                               
-		:lp=/dev/null:                                                   
-	##PRINTTOOL3## NCP ap3250 180x180 letter {} EpsonAP3250 Default {}       
-	ncp:\                                                                    
-		:sd=/var/spool/lpd/ncpspool:\                                    
-		:mx#46:\                                                         
-		:sh:\                                                            
-		:if=/var/spool/lpd/ncpspool/filter:\                             
-		:af=/var/spool/lpd/ncpspool/acct:\                               
-		:lp=/dev/null:                                                   
+	lpname:\
+		:sd=/var/spool/lpd/lpnamespool:\
+		:mx#45:\
+		:sh:\
+		:lp=/dev/device:\
+		:if=/var/spool/lpd/lpnamespool/filter:
+	##PRINTTOOL3## REMOTE st800 360x180 a4 {} EpsonStylus800 Default 1
+	remote:\
+		:sd=/var/spool/lpd/remotespool:\
+		:mx#47:\
+		:sh:\
+		:rm=remotehost:\
+		:rp=remotequeue:\
+		:if=/var/spool/lpd/remotespool/filter:
+	##PRINTTOOL3## SMB la75plus 180x180 letter {} DECLA75P Default {}
+	smb:\
+		:sd=/var/spool/lpd/smbspool:\
+		:mx#46:\
+		:sh:\
+		:if=/var/spool/lpd/smbspool/filter:\
+		:af=/var/spool/lpd/smbspool/acct:\
+		:lp=/dev/null:
+	##PRINTTOOL3## NCP ap3250 180x180 letter {} EpsonAP3250 Default {}
+	ncp:\
+		:sd=/var/spool/lpd/ncpspool:\
+		:mx#46:\
+		:sh:\
+		:if=/var/spool/lpd/ncpspool/filter:\
+		:af=/var/spool/lpd/ncpspool/acct:\
+		:lp=/dev/null:
 
 Example of data-struct:
 
-	my %ex_printcap_entry = 
+	my %ex_printcap_entry =
 	  (
 	   QUEUE    => "lpname",                            #-Queue name, can have multi separated by '|'
-	
+
 	   #-if you want something different from the default
 	   SPOOLDIR => "/var/spool/lpd/lpnamespool/",        #-Spool directory
 	   IF       => "/var/spool/lpd/lpnamespool/filter",  #-input filter
-	   
+
 	   #- commentaire inserer dans le printcap pour que printtool retrouve ses petits
-	   DBENTRY      => "DeskJet670",                    #-entry in printer database for this printer  
-	
+	   DBENTRY      => "DeskJet670",                    #-entry in printer database for this printer
+
 	   RESOLUTION   => "NAxNA",                         #-ghostscript resolution to use
 	   PAPERSIZE    => "letter",                        #-Papersize
-	   BITSPERPIXEL => "necp2x6",                       #-ghostscript color option                    
-	   CRLF         => 1 ,                              #-Whether or not to do CR/LF xlation         
-	
+	   BITSPERPIXEL => "necp2x6",                       #-ghostscript color option
+	   CRLF         => 1 ,                              #-Whether or not to do CR/LF xlation
+
 	   TYPE         => "LOCAL",
-	
+
 	   #- LOCAL
 	   DEVICE   => "/dev/device",                       #-Print device
-	   
-	   #- REMOTE (lpd) printers only 
+
+	   #- REMOTE (lpd) printers only
 	   REMOTEHOST   => "remotehost",                     #-Remote host (not used for all entries)
-	   REMOTEQUEUE  => "remotequeue",                    #-Queue on the remote machine                
-	
-	
-	   #-SMB (LAN Manager) only 
+	   REMOTEQUEUE  => "remotequeue",                    #-Queue on the remote machine
+
+
+	   #-SMB (LAN Manager) only
 	   #- in spooldir/.config
 	   #-share='\\hostname\printername'
 	   #-hostip=1.2.3.4
@@ -191,27 +191,27 @@ Example of data-struct:
 	   #-workgroup='AS3'
 	   SMBHOST   => "hostname",                              #-Server name (NMB name, can have spaces)
 	   SMBHOSTIP => "1.2.3.4",                               #-Can optional specify and IP address for host
-	   SMBSHARE  => "printername",                           #-Name of share on the SMB server             
-	   SMBUSER   => "user",                                  #-User to log in as on SMB server             
-	   SMBPASSWD => "passowrd",                              #-Corresponding password                      
-	   SMBWORKGROUP => "AS3",                                #-SMB workgroup name                          
+	   SMBSHARE  => "printername",                           #-Name of share on the SMB server
+	   SMBUSER   => "user",                                  #-User to log in as on SMB server
+	   SMBPASSWD => "passowrd",                              #-Corresponding password
+	   SMBWORKGROUP => "AS3",                                #-SMB workgroup name
 	   AF        => "/var/spool/lpd/smbspool/acct",           #-accounting filter (needed for smbprint)
-	
-	   #- NCP (NetWare) only 
+
+	   #- NCP (NetWare) only
 	   #- in spooldir/.config
 	   #-server=printerservername
 	   #-queue=queuename
 	   #-user=user
 	   #-password=pass
-	   NCPHOST   => "printerservername",            #-Server name (NCP name)                      
-	   NCPQUEUE  => "queuename",                    #-Queue on server                             
-	   NCPUSER   => "user",                         #-User to log in as on NCP server             
-	   NCPPASSWD => "pass",                         #-Corresponding password                      
-			
+	   NCPHOST   => "printerservername",            #-Server name (NCP name)
+	   NCPQUEUE  => "queuename",                    #-Queue on server
+	   NCPUSER   => "user",                         #-User to log in as on NCP server
+	   NCPPASSWD => "pass",                         #-Corresponding password
+
 	  )
 	;
 
-=cut 
+=cut
 
 #-#####################################################################################
 
@@ -243,11 +243,11 @@ my $PRINTER_FILTER_DIR = "/usr/lib/rhs/rhs-printfilters";
     "local"             => "LOCAL",
     "Remote lpd"        => "REMOTE",
     "SMB/Windows 95/NT" => "SMB",
-    "NetWare"           => "NCP",   
+    "NetWare"           => "NCP",
 );
 %printer_type_inv = reverse %printer_type;
 
-%fields = ( 
+%fields = (
     STANDARD => [qw(QUEUE SPOOLDIR IF)],
     SPEC     => [qw(DBENTRY RESOLUTION PAPERSIZE BITSPERPIXEL CRLF)],
     LOCAL    => [qw(DEVICE)],
@@ -280,22 +280,22 @@ sub read_printer_db(;$) {
 
     local *DBPATH;		#-don't have to do close
     open DBPATH, $dbpath or die "An error has occurred on $dbpath : $!";
-      
+
     while (<DBPATH>) {
 	if (/^StartEntry:\s(\w*)/) {
 	    my $entryname = $1;
 	    my $entry;
-	      
+
 	    $entry->{ENTRY} = $entryname;
-	      
-	  WHILE : 
+
+	  WHILE :
 	      while (<DBPATH>) {
 		SWITCH: {
 		      /GSDriver:\s*(\w*)/      and do { $entry->{GSDRIVER} = $1; last SWITCH };
 		      /Description:\s*{(.*)}/  and do { $entry->{DESCR}    = $1; last SWITCH };
 		      /About:\s*{(.*)}/        and do { $entry->{ABOUT}    = $1; last SWITCH };
-		      /About:\s*{(.*)/ 
-			and do 
+		      /About:\s*{(.*)/
+			and do
 			  {
 			      my $string = "$1\n";
 			      while (<DBPATH>) {
@@ -303,9 +303,9 @@ sub read_printer_db(;$) {
 				  $string .= $_;
 			      }
 			  };
-		      /Resolution:\s*{(.*)}\s*{(.*)}\s*{(.*)}/ 
+		      /Resolution:\s*{(.*)}\s*{(.*)}\s*{(.*)}/
 			and do { push @{$entry->{RESOLUTION}}, { XDPI => $1, YDPI => $2, DESCR => $3 }; last SWITCH };
-		      /BitsPerPixel:\s*{(.*)}\s*{(.*)}/ 
+		      /BitsPerPixel:\s*{(.*)}\s*{(.*)}/
 			and do { push @{$entry->{BITSPERPIXEL}}, {DEPTH => $1, DESCR => $2}; last SWITCH };
 
 		      /EndEntry/ and last WHILE;
@@ -314,7 +314,7 @@ sub read_printer_db(;$) {
 	    $thedb{$entryname} = $entry;
 	}
     }
-    
+
     @entries_db_short     = sort keys %printer::thedb;
     @entry_db_description = map { $printer::thedb{$_}{DESCR} } @entries_db_short;
     %descr_to_db          = map { $printer::thedb{$_}{DESCR}, $_ } @entries_db_short;
@@ -324,7 +324,7 @@ sub read_printer_db(;$) {
 
 
 #-******************************************************************************
-#- write functions 
+#- write functions
 #-******************************************************************************
 
 #------------------------------------------------------------------------------
@@ -333,30 +333,30 @@ sub read_printer_db(;$) {
 sub create_spool_dir($) {
     my ($queue_path) = @_;
     my $complete_path = "$prefix/$queue_path";
-    
+
     unless (-d $complete_path) {
 	mkdir "$complete_path", 0755
 	  or die "An error has occurred - can't create $complete_path : $!";
     }
-	
+
     #-redhat want that "drwxr-xr-x root lp"
     my $gid_lp = (getpwnam("lp"))[3];
-    chown 0, $gid_lp, $complete_path 
+    chown 0, $gid_lp, $complete_path
       or die "An error has occurred - can't chgrp $complete_path to lp $!";
 }
 
 #------------------------------------------------------------------------------
 #-given the input spec file 'input', and the target output file 'output'
-#-we set the fields specified by fieldname to the values in fieldval    
-#-nval  is the number of fields to set                                  
-#-Doesnt currently catch error exec'ing sed yet                         
+#-we set the fields specified by fieldname to the values in fieldval
+#-nval  is the number of fields to set
+#-Doesnt currently catch error exec'ing sed yet
 #------------------------------------------------------------------------------
 sub create_config_file($$%) {
     my ($inputfile, $outpufile, %toreplace) = @_;
     my ($in, $out) = ("$prefix/$inputfile", "$prefix/$outpufile");
     local *OUT;
     local *IN;
-    
+
     #-TODO my $oldmask = umask 0755;
 
     open IN , $in  or die "Can't open $in $!";
@@ -365,7 +365,7 @@ sub create_config_file($$%) {
     } else {
 	open OUT, ">$out" or die "Can't open $out $!";
     }
-    
+
     while (<IN>) {
 	if (/@@@(.*)@@@/) {
 	    my $r = $toreplace{$1};
@@ -389,7 +389,7 @@ sub copy_master_filter($) {
 }
 
 #------------------------------------------------------------------------------
-#- given a PrintCap Entry, create the spool dir and special 
+#- given a PrintCap Entry, create the spool dir and special
 #- rhs-printfilters related config files which are required
 #------------------------------------------------------------------------------
 my $intro_printcap_test = "
@@ -411,12 +411,12 @@ sub configure_queue($) {
     $entry->{SPOOLDIR} ||= "$spooldir";
     $entry->{IF}       ||= "$spooldir/$entry->{QUEUE}/filter";
     $entry->{AF}       ||= "$spooldir/$entry->{QUEUE}/acct";
-    
+
     my $queue_path      = "$entry->{SPOOLDIR}";
     create_spool_dir($queue_path);
 
-    my $get_name_file = sub { 
-	my ($name) = @_; 
+    my $get_name_file = sub {
+	my ($name) = @_;
 	("$PRINTER_FILTER_DIR/$name.in", "$entry->{SPOOLDIR}/$name")
     };
     my ($filein, $file);
@@ -431,13 +431,13 @@ sub configure_queue($) {
     $fieldname{printertype} = $entry->{TYPE};
     create_config_file($filein, $file, %fieldname);
 
-    #- successfully created general.cfg, now do postscript.cfg 
+    #- successfully created general.cfg, now do postscript.cfg
     ($filein, $file) = &$get_name_file("postscript.cfg");
     %fieldname = ();
     $fieldname{gsdevice}       = $dbentry->{GSDRIVER};
     $fieldname{papersize}      = $entry->{PAPERSIZES} ? $entry->{PAPERSIZES} : "letter";
     $fieldname{resolution}     = ($entry->{RESOLUTION} eq "Default") ? "Default" : "";
-    $fieldname{color}          = 
+    $fieldname{color}          =
       do {
 	  if ($dbentry->{GSDRIVER} eq "uniprint") {
 	      ($entry->{BITSPERPIXEL} eq "Default") ? "-dBitsPerPixel=Default" : "";
@@ -452,7 +452,7 @@ sub configure_queue($) {
     $fieldname{rtlftmar}       = "18";
     $fieldname{topbotmar}      = "18";
     create_config_file($filein, $file, %fieldname);
-	
+
     #- finally, make textonly.cfg
     ($filein, $file) = &$get_name_file("textonly.cfg");
     %fieldname = ();
@@ -491,7 +491,7 @@ sub configure_queue($) {
     } else {
 	open PRINTCAP, ">$prefix/etc/printcap" or die "Can't open printcap file $!";
     }
-    
+
     print PRINTCAP $intro_printcap_test;
     printf PRINTCAP "##PRINTTOOL3##  %s %s %s %s %s %s %s \n",
       $entry->{TYPE},
@@ -503,14 +503,14 @@ sub configure_queue($) {
 		  $entry->{BITSPERPIXEL},
 		    $entry->{CRLF} ? "1" : "";
 
-	
+
     print PRINTCAP "$entry->{QUEUE}:\\\n";
     print PRINTCAP "\t:sd=$entry->{SPOOLDIR}:\\\n";
     print PRINTCAP "\t:mx#0:\\\n\t:sh:\\\n";
-	   
+
     if ($entry->{TYPE} eq "LOCAL") {
 	print PRINTCAP "\t:lp=$entry->{DEVICE}:\\\n";
-    } elsif ($entry->{TYPE} eq "REMOTE") { 
+    } elsif ($entry->{TYPE} eq "REMOTE") {
 	print PRINTCAP "\t:rm=$entry->{REMOTEHOST}:\\\n";
 	print PRINTCAP "\t:rp=$entry->{REMOTEQUEUE}:\\\n";
     } else {
@@ -521,12 +521,12 @@ sub configure_queue($) {
 
     #- cheating to get the input filter!
     print PRINTCAP "\t:if=$entry->{SPOOLDIR}/filter:\n";
-	
+
 }
 
 
 #------------------------------------------------------------------------------
-#- interface function 
+#- interface function
 #------------------------------------------------------------------------------
 
 #------------------------------------------------------------------------------
@@ -565,7 +565,7 @@ sub test {
 #-######################################################################################
 #- Wonderful perl :(
 #-######################################################################################
-1; # 
+1; #
 
 =head1 AUTHOR
 

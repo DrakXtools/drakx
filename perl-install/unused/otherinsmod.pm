@@ -18,7 +18,7 @@ sub insmod {
     }
 
     my $rc = insmod_main($tmpname || $file, @_);
-   
+
     unlink($tmpname);
 
     return $rc;

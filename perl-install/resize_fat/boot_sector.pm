@@ -48,12 +48,12 @@ my @fields = (
 #- on success, 0 on failureparameters: filesystem an empty structure to fill.
 sub read($) {
     my ($fs) = @_;
-    
+
     my $boot = eval { resize_fat::io::read($fs, 0, $SECTORSIZE) }; $@ and die "reading boot sector failed on device $fs->{fs_name}";
     @{$fs}{@fields} = unpack $format, $boot;
 
     $fs->{nb_sectors} = $fs->{small_nb_sectors} || $fs->{big_nb_sectors};
-    $fs->{cluster_size} = $fs->{cluster_size_in_sectors} * $fs->{sector_size}; 
+    $fs->{cluster_size} = $fs->{cluster_size_in_sectors} * $fs->{sector_size};
 
     $fs->{boot_sign} == 0xAA55 or die "Invalid signature for a MS-based filesystem.";
     $fs->{nb_fats} == 2 or die "Weird number of FATs: $fs->{nb_fats}, not 2.",
@@ -75,7 +75,7 @@ sub read($) {
 	$fs->{info_offset} = $fs->{info_offset_in_sectors} * $fs->{sector_size};
 	$resize_fat::bad_cluster_value = 0xffffff7;
     }
-    
+
     $fs->{fat_offset} = $fs->{nb_reserved} * $fs->{sector_size};
     $fs->{fat_size} = $fs->{fat_length} * $fs->{sector_size};
     $fs->{root_dir_offset} = $fs->{fat_offset} + $fs->{fat_size} * $fs->{nb_fats};
@@ -84,7 +84,7 @@ sub read($) {
 
     $fs->{nb_fat_entries} = divide($fs->{fat_size}, $fs->{fs_type_size} / 8);
 
-    #- - 2 because clusters 0 & 1 doesn't exist 
+    #- - 2 because clusters 0 & 1 doesn't exist
     $fs->{nb_clusters} = divide($fs->{nb_sectors} * $fs->{sector_size} - $fs->{cluster_offset}, $fs->{cluster_size}) - 2;
 
     $fs->{dir_entries_per_cluster} = divide($fs->{cluster_size}, psizeof($format));

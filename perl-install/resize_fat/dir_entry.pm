@@ -57,7 +57,7 @@ sub is_special_entry($) {
 #- return true if entry has been modified
 sub remap {
     my ($fat_remap, $entry) = @_;
-	
+
     is_special_entry($entry) and return;
 
     my $cluster = get_cluster($entry);

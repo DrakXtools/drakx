@@ -16,7 +16,7 @@ my $logDebugMessages = 0;
 #-######################################################################################
 sub fd() { fileno LOG }
 
-sub l { 
+sub l {
     $logOpen or openLog();
     print LOG "* ", @_, "\n";
     print LOG2 "* ", @_, "\n";
@@ -31,7 +31,7 @@ sub openLog(;$) {
 	open LOG, "> $_[0]";# or die "no log possible :(";
     } else {
 	open LOG, "> /dev/tty3" or open LOG, ">> /tmp/install.log";# or die "no log possible :(";
-    } 
+    }
     open LOG2, ">> /tmp/ddebug.log";# or die "no log possible :(";
     select((select(LOG), $| = 1)[0]);
     select((select(LOG2), $| = 1)[0]);

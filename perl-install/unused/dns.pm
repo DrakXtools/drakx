@@ -1,7 +1,7 @@
 use diagnostics;
 use strict;
 
-# This is dumb, but glibc doesn't like to do hostname lookups w/o libc.so 
+# This is dumb, but glibc doesn't like to do hostname lookups w/o libc.so
 
 
 #TODO TODO
@@ -10,7 +10,7 @@ sub doQuery {
 #
 #    _res.retry = 2;
 #
-#    len = res_search(query, C_IN, queryType, (void *) &response, 
+#    len = res_search(query, C_IN, queryType, (void *) &response,
 #		     sizeof(response));
 #    if (len <= 0) return -1;
 #
@@ -20,44 +20,44 @@ sub doQuery {
 #
 #    data = response.buf + sizeof(HEADER);
 #    end = response.buf + len;
-#    
-#    # skip the question 
+#
+#    # skip the question
 #    data += dn_skipname(data, end) + QFIXEDSZ;
 #
-#    # parse the answer(s) 
+#    # parse the answer(s)
 #    while (--ancount >= 0 && data < end) {
 #
-#      # skip the domain name portion of the RR record 
+#      # skip the domain name portion of the RR record
 #      data += dn_skipname(data, end);
 #
-#      # get RR information 
+#      # get RR information
 #      GETSHORT(type, data);
-#      data += INT16SZ; # skipp class 
-#      data += INT32SZ; # skipp TTL 
+#      data += INT16SZ; # skipp class
+#      data += INT32SZ; # skipp TTL
 #      GETSHORT(len,  data);
 #
 #      if (type == T_PTR) {
-#	 # we got a pointer 
+#	 # we got a pointer
 #	 len = dn_expand(response.buf, end, data, name, sizeof(name));
 #	 if (len <= 0) return -1;
 #	 if (queryType == T_PTR && domainName) {
-#	   # we wanted a pointer 
+#	   # we wanted a pointer
 #	   *domainName = malloc(strlen(name) + 1);
 #	   strcpy(*domainName, name);
 #	   return 0;
 #	 }
 #      } else if (type == T_A) {
-#	 # we got an address 
+#	 # we got an address
 #	 if (queryType == T_A && ipNum) {
-#	   # we wanted an address 
+#	   # we wanted an address
 #	   memcpy(ipNum, data, sizeof(*ipNum));
 #	   return 0;
 #	 }
 #      }
 #
-#      # move ahead to next RR 
+#      # move ahead to next RR
 #      data += len;
-#    } 
+#    }
 #
 #    return -1;
 }

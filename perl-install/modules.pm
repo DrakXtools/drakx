@@ -187,24 +187,24 @@ sub load($;$@) {
 	log::l("i try to install $name module (@options)");
     } else {
 	$conf{$name}{loaded} and return;
-	
+
 	$type ||= $drivers{$name}{type};
-	
+
 	load($_, 'prereq') foreach @{$deps{$name}};
 	load_raw($name, @options);
     }
 
-    $conf{'scsi_hostadapter' . ($scsi++ || '')}{alias} = $name 
+    $conf{'scsi_hostadapter' . ($scsi++ || '')}{alias} = $name
       if $type eq 'scsi';
 
     $conf{$name}{options} = join " ", @options if @options;
 }
 
-sub unload($) { 
+sub unload($) {
     if ($::testing) {
 	log::l("rmmod $_[0]");
     } else {
-	run_program::run("rmmod", $_[0]); 
+	run_program::run("rmmod", $_[0]);
     }
 }
 
@@ -284,11 +284,11 @@ sub write_conf {
     }
 }
 
-sub get_stage1_conf { 
+sub get_stage1_conf {
     %conf = read_conf($_[1], \$scsi);
     add2hash(\%conf, $_[0]);
     $conf{parport_lowlevel}{alias} ||= "parport_pc";
-    $conf{pcmcia_core}{"pre-install"} ||= "/etc/rc.d/init.d/pcmcia start";    
+    $conf{pcmcia_core}{"pre-install"} ||= "/etc/rc.d/init.d/pcmcia start";
     $conf{plip}{"pre-install"} ||= "modprobe parport_pc ; echo 7 > /proc/parport/0/irq";
     \%conf;
 }
@@ -298,13 +298,13 @@ sub load_thiskind($;&) {
 
     my @devs = pci_probing::main::probe($type);
     log::l("pci probe found " . scalar @devs . " $type devices");
-	
+
     my %devs; foreach (@devs) {
 	my ($text, $mod) = @$_;
 	$devs{$mod}++ and log::l("multiple $mod devices found"), next;
 	$drivers{$mod} or log::l("module $mod not in install table"), next;
 	log::l("found driver for $mod");
-	&$f($text, $mod) if $f; 
+	&$f($text, $mod) if $f;
 	load($mod, $type);
     }
     @devs;

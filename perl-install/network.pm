@@ -36,19 +36,19 @@ sub write_conf {
     my ($file, $netc) = @_;
 
     add2hash($netc, {
-		     NETWORKING => "yes", 
-		     FORWARD_IPV4 => "false", 
+		     NETWORKING => "yes",
+		     FORWARD_IPV4 => "false",
 		     HOSTNAME => "localhost.localdomain",
 		     });
     add2hash($netc, { DOMAINNAME => $netc->{HOSTNAME} =~ /\.(.*)/ });
-		     
+
     setVarsInSh($file, $netc, qw(NETWORKING FORWARD_IPV4 HOSTNAME DOMAINNAME GATEWAY GATEWAYDEV));
 }
 
 sub write_resolv_conf {
     my ($file, $netc) = @_;
 
-    #- We always write these, even if they were autoconfigured. Otherwise, the reverse name lookup in the install doesn't work. 
+    #- We always write these, even if they were autoconfigured. Otherwise, the reverse name lookup in the install doesn't work.
     unless ($netc->{DOMAINNAME} || dnsServers($netc)) {
 	unlink($file);
 	log::l("neither domain name nor dns server are configured");
@@ -62,7 +62,7 @@ sub write_resolv_conf {
     print F "nameserver $_\n" foreach dnsServers($netc);
     print F "#$_" foreach @l;
 
-    #-res_init();		# reinit the resolver so DNS changes take affect 
+    #-res_init();		# reinit the resolver so DNS changes take affect
     1;
 }
 
@@ -71,7 +71,7 @@ sub write_interface_conf {
 
     my @ip = split '\.', $intf->{IPADDR};
     my @mask = split '\.', $intf->{NETMASK};
-    add2hash($intf, { 
+    add2hash($intf, {
 		     BROADCAST => join('.', mapn { int $_[0] | ~int $_[1] & 255 } \@ip, \@mask),
 		     NETWORK   => join('.', mapn { int $_[0] &      $_[1]       } \@ip, \@mask),
 		     ONBOOT => "yes",
@@ -103,7 +103,7 @@ sub add2hosts {
     }
 }
 
-# The interface/gateway needs to be configured before this will work! 
+# The interface/gateway needs to be configured before this will work!
 sub guessHostname {
     my ($prefix, $netc, $intf) = @_;
 
@@ -185,14 +185,14 @@ sub dns {
     my @masked = masked_ip($ip) =~ $ip_regexp;
     $masked[3]  = 12;
     join (".", @masked);
-    
+
 }
 sub gateway {
     my ($ip) = @_;
     my @masked = masked_ip($ip) =~ $ip_regexp;
     $masked[3]  = 1;
     join (".", @masked);
-    
+
 }
 
 #-######################################################################################

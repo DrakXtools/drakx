@@ -29,7 +29,7 @@ my %types = (
   4 => "DOS 16-bit <32M",
   5 => "Extended",
   6 => "DOS FAT16",
-  7 => "OS/2 HPFS",               #- or QNX? 
+  7 => "OS/2 HPFS",               #- or QNX?
   8 => "AIX",
   9 => "AIX bootable",
   10 => "OS/2 Boot Manager",
@@ -40,28 +40,28 @@ my %types = (
   0x12 => "Compaq setup",
   0x40 => "Venix 80286",
   0x51 => "Novell?",
-  0x52 => "Microport",            #- or CPM? 
-  0x63 => "GNU HURD",             #- or System V/386? 
+  0x52 => "Microport",            #- or CPM?
+  0x63 => "GNU HURD",             #- or System V/386?
   0x64 => "Novell Netware 286",
   0x65 => "Novell Netware 386",
   0x75 => "PC/IX",
-  0x80 => "Old MINIX",            #- Minix 1.4a and earlier 
-  
-  0x81 => "Linux/MINIX", #- Minix 1.4b and later 
+  0x80 => "Old MINIX",            #- Minix 1.4a and earlier
+
+  0x81 => "Linux/MINIX", #- Minix 1.4b and later
   0x82 => "Linux swap",
   0x83 => "Linux native",
-  
+
   0x93 => "Amoeba",
-  0x94 => "Amoeba BBT",           #- (bad block table) 
+  0x94 => "Amoeba BBT",           #- (bad block table)
   0xa5 => "BSD/386",
   0xb7 => "BSDI fs",
   0xb8 => "BSDI swap",
   0xc7 => "Syrinx",
-  0xdb => "CP/M",                 #- or Concurrent DOS? 
+  0xdb => "CP/M",                 #- or Concurrent DOS?
   0xe1 => "DOS access",
   0xe3 => "DOS R/O",
   0xf2 => "DOS secondary",
-  0xff => "BBT"                   #- (bad track table) 
+  0xff => "BBT"                   #- (bad track table)
 );
 
 my %type2fs = (
@@ -83,7 +83,7 @@ my %fs2type = reverse %type2fs;
 
 1;
 
-sub important_types { $_[0] and return sort values %types; @important_types } 
+sub important_types { $_[0] and return sort values %types; @important_types }
 
 sub type2name($) { $types{$_[0]} || 'unknown' }
 sub type2fs($) { $type2fs{$_[0]} }
@@ -103,7 +103,7 @@ sub isPrimary($$) {
     0;
 }
 
-sub cylinder_size($) { 
+sub cylinder_size($) {
     my ($hd) = @_;
     $hd->{geom}{sectors} * $hd->{geom}{heads};
 }
@@ -112,7 +112,7 @@ sub adjustStart($$) {
     my ($hd, $part) = @_;
     my $end = $part->{start} + $part->{size};
 
-    $part->{start} = round_up($part->{start}, 
+    $part->{start} = round_up($part->{start},
 			       $part->{start} % cylinder_size($hd) < 2 * $hd->{geom}{sectors} ?
 			       $hd->{geom}{sectors} : cylinder_size($hd));
     $part->{size} = $end - $part->{start};
@@ -157,8 +157,8 @@ sub verifyPrimary($) {
 sub assign_device_numbers($) {
     my ($hd) = @_;
 
-    my $i = 1; 
-    $_->{device} = $hd->{prefix} . $i++ foreach @{$hd->{primary}{raw}}, 
+    my $i = 1;
+    $_->{device} = $hd->{prefix} . $i++ foreach @{$hd->{primary}{raw}},
                                                 map { $_->{normal} } @{$hd->{extended} || []};
 
     #- try to figure what the windobe drive letter could be!
@@ -237,8 +237,8 @@ sub read_one($$) {
 
 sub read($;$) {
     my ($hd, $clearall) = @_;
-    my $pt = $clearall ? 
-      partition_table_raw::clear_raw() : 
+    my $pt = $clearall ?
+      partition_table_raw::clear_raw() :
       read_one($hd, 0) || return 0;
 
     $hd->{primary} = $pt;
@@ -297,7 +297,7 @@ sub write($) {
     }
     $hd->{isDirty} = 0;
 
-    #- now sync disk and re-read the partition table 
+    #- now sync disk and re-read the partition table
     if ($hd->{needKernelReread}) {
 	sync();
 	partition_table_raw::kernel_read($hd);
@@ -309,7 +309,7 @@ sub active($$) {
     my ($hd, $part) = @_;
 
     $_->{active} = 0 foreach @{$hd->{primary}{normal}};
-    $part->{active} = 0x80;   
+    $part->{active} = 0x80;
 }
 
 
@@ -363,7 +363,7 @@ sub add_extended($$) {
 	my $end = $e->{start} + $e->{size};
 	my $start = min($e->{start}, $part->{start});
 	$end = max($end, $part->{start} + $part->{size}) - $start;
-	
+
 	{ #- faking a resizing of the main extended partition to test for problems
 	    local $e->{start} = $start;
 	    local $e->{size} = $end - $start;
@@ -388,7 +388,7 @@ The only solution is to move your primary partitions to have the hole next to th
 	  ($hd->{primary}, -1) : #- -1 size will be computed by adjust_main_extended
 	  (top(@{$hd->{extended}}), $part->{size});
 	my %ext = ( type => 5, start => $part->{start}, size => $ext_size );
-    
+
 	raw_add($ext->{raw}, \%ext);
 	$ext->{extended} = \%ext;
 	push @{$hd->{extended}}, { %ext, raw => [ $part, {}, {}, {} ], normal => $part };
@@ -411,7 +411,7 @@ sub add($$;$$) {
 
     my $e = $hd->{primary}{extended};
 
-    if ($primaryOrExtended eq 'Primary' || 
+    if ($primaryOrExtended eq 'Primary' ||
 	$primaryOrExtended ne 'Extended' && is_empty_array_ref($hd->{primary}{normal})) {
 	eval { add_primary($hd, $part) };
 	return unless $@;
@@ -428,7 +428,7 @@ sub next($$) {
     my ($hd, $part) = @_;
 
     first(
-	  sort { $a->{start} <=> $b->{start} } 
+	  sort { $a->{start} <=> $b->{start} }
 	  grep { $_->{start} >= $part->{start} + $part->{size} }
 	  get_normal_parts($hd)
 	 );
@@ -483,6 +483,6 @@ sub save($$) {
     my @h = @{$hd}{@fields2save};
     local *F;
     open F, ">$file"
-      and print F Data::Dumper->Dump([\@h], ['$h']), "\0" 
+      and print F Data::Dumper->Dump([\@h], ['$h']), "\0"
       or die _("Error writing to file %s", $file);
 }

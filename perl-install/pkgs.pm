@@ -119,17 +119,17 @@ sub psUsingHdlist() {
 
 	$packages{$name} = {
              name => $name, header => $header, selected => 0, deps => [],
-	     version => c::headerGetEntry($header, 'version'), 
+	     version => c::headerGetEntry($header, 'version'),
 	     release => c::headerGetEntry($header, 'release'),
 	     size    => c::headerGetEntry($header, 'size'),
         };
     }
     log::l("psUsingHdlist read " . scalar keys(%packages) . " headers");
-    
+
     \%packages;
 }
 
-sub chop_version($) { 
+sub chop_version($) {
     first($_[0] =~ /(.*)-[^-]+-[^-.]+/) || $_[0];
 }
 
@@ -281,7 +281,7 @@ sub install($$) {
     foreach my $p (@$toInstall) {
 	eval { getHeader($p) }; $@ and next;
 	$p->{file} ||= sprintf "%s-%s-%s.%s.rpm",
-	                       $p->{name}, $p->{version}, $p->{release}, 
+	                       $p->{name}, $p->{version}, $p->{release},
 			       c::headerGetEntry(getHeader($p), 'arch');
 	c::rpmtransAddPackage($trans, getHeader($p), $p->{file}, $p->{name} !~ /kernel/); #- TODO: replace `named kernel' by `provides kernel'
 	$nb++;
@@ -296,7 +296,7 @@ sub install($$) {
     log::ld("starting installation: ", $nb, " packages, ", $total, " bytes");
 
     #- !! do not translate these messages, they are used when catched (cf install_steps_graphical)
-    my $callbackOpen = sub { 
+    my $callbackOpen = sub {
 	my $fd = install_any::getFile($_[0]) or log::l("bad file $_[0]");
 	$fd ? fileno $fd : -1;
     };
@@ -304,7 +304,7 @@ sub install($$) {
     my $callbackStart = sub { log::ld("starting installing package ", $_[0]) };
     my $callbackProgress = sub { log::ld("progressing installation ", $_[0], "/", $_[1]) };
 
-    if (my @probs = c::rpmRunTransactions($trans, $callbackOpen, $callbackClose, 
+    if (my @probs = c::rpmRunTransactions($trans, $callbackOpen, $callbackClose,
 					  $callbackStart, $callbackProgress, 0)) {
 	my %parts;
 	@probs = reverse grep {
@@ -314,7 +314,7 @@ sub install($$) {
 	} reverse @probs;
 	die "installation of rpms failed:\n  ", join("\n  ", @probs);
     }
-    c::rpmtransFree($trans); 
+    c::rpmtransFree($trans);
     c::rpmdbClose($db);
     log::l("rpm database closed");
 

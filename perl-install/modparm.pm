@@ -39,7 +39,7 @@ sub read_modparm_file($) {
 sub get_options_result($@) {
   my ($module, @value) = @_;
 
-  mapn { 
+  mapn {
       my ($a, $b) = @_;
       $a ? "$b=$a" : ()
   } \@value, [ keys %{$modparm_hash{$module}} ];

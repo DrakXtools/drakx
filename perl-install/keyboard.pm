@@ -38,7 +38,7 @@ my %keyboards = (
  "fr" => [ __("French"),         "fr-latin1",   "fr" ],
 #- georgian keyboards have to be written...
 #-"ge_ru"=>[__("Georgian (\"Russian\" layout)","ge_ru-georgian_academy","ge_ru"],
-#-"ge_la"=>[__("Georgian ("\Latin\" layout)","ge_la-georgian_academy","ge_ru"], 
+#-"ge_la"=>[__("Georgian ("\Latin\" layout)","ge_la-georgian_academy","ge_ru"],
  "gr" => [ __("Greek"),          "gr-8859_7",   "gr" ],
  "hu" => [ __("Hungarian"),      "hu-latin2",   "hu" ],
  "il" => [ __("Israelian"),      "il-8859_8",   "il" ],
@@ -51,7 +51,7 @@ my %keyboards = (
  "pt" => [ __("Portuguese"),     "pt-latin1",   "pt" ],
  "qc" => [ __("Canadian (Quebec)"), "qc-latin1","qc" ],
  "ru" => [ __("Russian"),        "ru-koi8",     "ru" ],
- "se" => [ __("Swedish"),        "se-latin1",   "se" ],  
+ "se" => [ __("Swedish"),        "se-latin1",   "se" ],
  "sf" => [ __("Swiss (french layout)"), "sf-latin1", "sf" ],
  "sg" => [ __("Swiss (german layout)"), "sg-latin1", "sg" ],
  "si" => [ __("Slovenian"),      "si-latin1",   "si" ],
@@ -86,7 +86,7 @@ sub kmap($) {
 
 sub lang2keyboard($) {
     local ($_) = @_;
-    $keyboards{$_} && $_ || $lang2keyboard{$_} || substr($_, 0, 2);    
+    $keyboards{$_} && $_ || $lang2keyboard{$_} || substr($_, 0, 2);
 }
 
 sub load($) {

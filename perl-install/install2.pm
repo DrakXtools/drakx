@@ -34,26 +34,26 @@ use run_program;
 #-######################################################################################
 my @installStepsFields = qw(text redoable onError needs entered reachable toBeDone help next done);
 my @installSteps = (
-  selectLanguage     => [ __("Choose your language"), 1, 1 ],                                
-  selectPath         => [ __("Choose install or upgrade"), 0, 0 ],                           
-  selectInstallClass => [ __("Select installation class"), 1, 1, "selectPath" ],             
+  selectLanguage     => [ __("Choose your language"), 1, 1 ],
+  selectPath         => [ __("Choose install or upgrade"), 0, 0 ],
+  selectInstallClass => [ __("Select installation class"), 1, 1, "selectPath" ],
   selectMouse        => [ __("Configure mouse"), 1, 1 ],
-  selectKeyboard     => [ __("Choose your keyboard"), 1, 1 ],                                
-  setupSCSI          => [ __("Setup SCSI"), 1, 0 ],	                                     
-  partitionDisks     => [ __("Setup filesystems"), 1, 0 ],                                   
-  formatPartitions   => [ __("Format partitions"), 1, -1, "partitionDisks" ],                
-  choosePackages     => [ __("Choose packages to install"), 1, 1, "selectInstallClass" ],    
-  doInstallStep      => [ __("Install system"), 1, -1, ["formatPartitions", "selectPath"] ], 
-  configureNetwork   => [ __("Configure networking"), 1, 1, "formatPartitions" ],            
-  configureTimezone  => [ __("Configure timezone"), 1, 1, "doInstallStep" ],                 
-#-  configureServices => [ __("Configure services"), 0, 0 ],                                  
+  selectKeyboard     => [ __("Choose your keyboard"), 1, 1 ],
+  setupSCSI          => [ __("Setup SCSI"), 1, 0 ],
+  partitionDisks     => [ __("Setup filesystems"), 1, 0 ],
+  formatPartitions   => [ __("Format partitions"), 1, -1, "partitionDisks" ],
+  choosePackages     => [ __("Choose packages to install"), 1, 1, "selectInstallClass" ],
+  doInstallStep      => [ __("Install system"), 1, -1, ["formatPartitions", "selectPath"] ],
+  configureNetwork   => [ __("Configure networking"), 1, 1, "formatPartitions" ],
+  configureTimezone  => [ __("Configure timezone"), 1, 1, "doInstallStep" ],
+#-  configureServices => [ __("Configure services"), 0, 0 ],
   configurePrinter   => [ __("Configure printer"), 1, 0, "doInstallStep" ],
-  setRootPassword    => [ __("Set root password"), 1, 1, "formatPartitions" ],               
-  addUser            => [ __("Add a user"), 1, 1, "doInstallStep" ],                         
-  createBootdisk     => [ __("Create bootdisk"), 1, 0, "doInstallStep" ],                    
-  setupBootloader    => [ __("Install bootloader"), 1, 1, "doInstallStep" ],                 
+  setRootPassword    => [ __("Set root password"), 1, 1, "formatPartitions" ],
+  addUser            => [ __("Add a user"), 1, 1, "doInstallStep" ],
+  createBootdisk     => [ __("Create bootdisk"), 1, 0, "doInstallStep" ],
+  setupBootloader    => [ __("Install bootloader"), 1, 1, "doInstallStep" ],
   configureX         => [ __("Configure X"), 1, 0, "formatPartitions" ],
-  exitInstall        => [ __("Exit install"), 0, 0, "alldone" ],                             
+  exitInstall        => [ __("Exit install"), 0, 0, "alldone" ],
 );
 
 my (%installSteps, %upgradeSteps, @orderedInstallSteps, @orderedUpgradeSteps);
@@ -80,28 +80,28 @@ my @install_classes = (__("beginner"), __("developer"), __("server"), __("expert
 #- partition layout
 my %suggestedPartitions = (
   beginner => [
-    { mntpoint => "/boot", size =>  16 << 11, type => 0x83 }, 
+    { mntpoint => "/boot", size =>  16 << 11, type => 0x83 },
     { mntpoint => "swap",  size => 128 << 11, type => 0x82 },
-    { mntpoint => "/",     size => 700 << 11, type => 0x83 }, 
-    { mntpoint => "/home", size => 300 << 11, type => 0x83 }, 
+    { mntpoint => "/",     size => 700 << 11, type => 0x83 },
+    { mntpoint => "/home", size => 300 << 11, type => 0x83 },
   ],
   developer => [
-    { mntpoint => "/boot", size =>  16 << 11, type => 0x83 }, 
+    { mntpoint => "/boot", size =>  16 << 11, type => 0x83 },
     { mntpoint => "swap",  size => 128 << 11, type => 0x82 },
-    { mntpoint => "/",     size => 200 << 11, type => 0x83 }, 
-    { mntpoint => "/usr",  size => 600 << 11, type => 0x83 }, 
-    { mntpoint => "/home", size => 500 << 11, type => 0x83 }, 
+    { mntpoint => "/",     size => 200 << 11, type => 0x83 },
+    { mntpoint => "/usr",  size => 600 << 11, type => 0x83 },
+    { mntpoint => "/home", size => 500 << 11, type => 0x83 },
   ],
   server => [
-    { mntpoint => "/boot", size =>  16 << 11, type => 0x83 }, 
+    { mntpoint => "/boot", size =>  16 << 11, type => 0x83 },
     { mntpoint => "swap",  size => 512 << 11, type => 0x82 },
-    { mntpoint => "/",     size => 200 << 11, type => 0x83 }, 
-    { mntpoint => "/usr",  size => 600 << 11, type => 0x83 }, 
-    { mntpoint => "/var",  size => 600 << 11, type => 0x83 }, 
-    { mntpoint => "/home", size => 500 << 11, type => 0x83 }, 
+    { mntpoint => "/",     size => 200 << 11, type => 0x83 },
+    { mntpoint => "/usr",  size => 600 << 11, type => 0x83 },
+    { mntpoint => "/var",  size => 600 << 11, type => 0x83 },
+    { mntpoint => "/home", size => 500 << 11, type => 0x83 },
   ],
   expert => [
-    { mntpoint => "/",     size => 200 << 11, type => 0x83 }, 
+    { mntpoint => "/",     size => 200 << 11, type => 0x83 },
   ],
 );
 
@@ -111,23 +111,23 @@ my %suggestedPartitions = (
 #-if you want to do a kickstart file, you just have to add all the required fields (see for example
 #-the variable $default)
 #-#######################################################################################
-$o = $::o = { 
+$o = $::o = {
     bootloader => { onmbr => 1, linear => 0, message => 1, keytable => 1, timeout => 50 },
     autoSCSI   => 0,
     mkbootdisk => 1, #- no mkbootdisk if 0 or undef,   find a floppy with 1
 #-    packages   => [ qw() ],
     partitioning => { clearall => 0, eraseBadPartitions => 0, auto_allocate => 0, autoformat => 0 },
 #-    partitions => [
-#-		      { mntpoint => "/boot", size =>  16 << 11, type => 0x83 }, 
-#-		      { mntpoint => "/",     size => 256 << 11, type => 0x83 }, 
-#-		      { mntpoint => "/usr",  size => 512 << 11, type => 0x83, growable => 1 }, 
-#-		      { mntpoint => "/var",  size => 256 << 11, type => 0x83 }, 
-#-		      { mntpoint => "/home", size => 512 << 11, type => 0x83, growable => 1 }, 
+#-		      { mntpoint => "/boot", size =>  16 << 11, type => 0x83 },
+#-		      { mntpoint => "/",     size => 256 << 11, type => 0x83 },
+#-		      { mntpoint => "/usr",  size => 512 << 11, type => 0x83, growable => 1 },
+#-		      { mntpoint => "/var",  size => 256 << 11, type => 0x83 },
+#-		      { mntpoint => "/home", size => 512 << 11, type => 0x83, growable => 1 },
 #-		      { mntpoint => "swap",  size =>  64 << 11, type => 0x82 }
-#-		    { mntpoint => "/boot", size =>  16 << 11, type => 0x83 }, 
-#-		    { mntpoint => "/",     size => 300 << 11, type => 0x83 }, 
+#-		    { mntpoint => "/boot", size =>  16 << 11, type => 0x83 },
+#-		    { mntpoint => "/",     size => 300 << 11, type => 0x83 },
 #-		    { mntpoint => "swap",  size =>  64 << 11, type => 0x82 },
-#-		   { mntpoint => "/usr",  size => 400 << 11, type => 0x83, growable => 1 }, 
+#-		   { mntpoint => "/usr",  size => 400 << 11, type => 0x83, growable => 1 },
 #-	     ],
     shells => [ map { "/bin/$_" } qw(bash tcsh zsh ash ksh) ],
     lang         => 'en',
@@ -138,7 +138,7 @@ $o = $::o = {
 #-                   timezone => "Europe/Paris",
                    GMT      => 1,
                 },
-    printer => { 
+    printer => {
                  want     => 1,
                  complete => 0,
                  str_type => $printer::printer_type[0],
@@ -167,11 +167,11 @@ $o = $::o = {
                },
 #-    superuser => { password => 'a', shell => '/bin/bash', realname => 'God' },
 #-    user => { name => 'foo', password => 'bar', home => '/home/foo', shell => '/bin/bash', realname => 'really, it is foo' },
-    
+
 #-    keyboard => 'de',
 #-    display => "192.168.1.9:0",
-    steps        => \%installSteps,        
-    orderedSteps => \@orderedInstallSteps, 
+    steps        => \%installSteps,
+    orderedSteps => \@orderedInstallSteps,
 
     base => [ qw(basesystem initscripts console-tools mkbootdisk anacron rhs-hwdiag utempter ldconfig chkconfig ntsysv mktemp setup filesystem SysVinit bdflush crontabs dev e2fsprogs etcskel fileutils findutils getty_ps grep groff gzip hdparm info initscripts isapnptools kbdconfig kernel less ldconfig lilo logrotate losetup man mkinitrd mingetty modutils mount net-tools passwd procmail procps psmisc mandrake-release rootfiles rpm sash sed setconsole setserial shadow-utils sh-utils slocate stat sysklogd tar termcap textutils time timeconfig tmpwatch util-linux vim-minimal vixie-cron which cpio) ],
 #- for the list of fields available for user and superuser, see @etc_pass_fields in install_steps.pm
@@ -191,7 +191,7 @@ $o = $::o = {
 
 #-######################################################################################
 #- Steps Functions
-#- each step function are called with two arguments : clicked(because if you are a 
+#- each step function are called with two arguments : clicked(because if you are a
 #- beginner you can force the the step) and the entered number
 #-######################################################################################
 
@@ -206,7 +206,7 @@ sub selectLanguage {
 }
 
 #------------------------------------------------------------------------------
-sub selectMouse { 
+sub selectMouse {
     $o->selectMouse($_[0]);
     addToBeDone { mouse::write($o->{mouse}, $o->{prefix}); } 'formatPartitions';
 }
@@ -251,7 +251,7 @@ sub partitionDisks {
 	$o->{drives} = [ detect_devices::hds() ];
 	$o->{hds} = catch_cdie { fsedit::hds($o->{drives}, $o->{partitioning}) }
 	  sub {
-	      $o->ask_warn(_("Error"), 
+	      $o->ask_warn(_("Error"),
 _("I can't read your partition table, it's too corrupted for me :(
 I'll try to go on blanking bad partitions"));
 	      1;
@@ -286,7 +286,7 @@ sub formatPartitions {
 	$o->formatPartitions(@{$o->{fstab}});
 	fs::mount_all([ grep { isExt2($_) || isSwap($_) } @{$o->{fstab}} ], $o->{prefix});
     }
-    mkdir "$o->{prefix}/$_", 0755 foreach qw(dev etc etc/sysconfig etc/sysconfig/network-scripts 
+    mkdir "$o->{prefix}/$_", 0755 foreach qw(dev etc etc/sysconfig etc/sysconfig/network-scripts
                                              home mnt root tmp var var/tmp var/lib var/lib/rpm);
 }
 
@@ -294,7 +294,7 @@ sub formatPartitions {
 #-PADTODO
 sub choosePackages {
     $o->setPackages($o, \@install_classes) if $_[1] == 1;
-    $o->choosePackages($o->{packages}, $o->{compss}); 
+    $o->choosePackages($o->{packages}, $o->{compss});
     $o->{packages}{$_}{selected} = 1 foreach @{$o->{base}};
 }
 
@@ -306,13 +306,13 @@ sub doInstallStep {
 }
 
 #------------------------------------------------------------------------------
-sub configureNetwork { 
+sub configureNetwork {
     my ($clicked, $entered) = @_;
-    $o->configureNetwork($entered == 1 && !$clicked) 
+    $o->configureNetwork($entered == 1 && !$clicked)
 }
 #------------------------------------------------------------------------------
 #-PADTODO
-sub configureTimezone { 
+sub configureTimezone {
     my ($clicked) = $_[0];
     my $f = "$o->{prefix}/etc/sysconfig/clock";
     return if ((-s $f) || 0) > 0 && $_[1] == 1 && !$clicked && !$::testing;
@@ -326,7 +326,7 @@ sub configurePrinter  { $o->printerConfig   }
 #------------------------------------------------------------------------------
 sub setRootPassword   { $o->setRootPassword }
 #------------------------------------------------------------------------------
-sub addUser { 
+sub addUser {
     $o->addUser;
 
     addToBeDone {
@@ -379,10 +379,10 @@ sub main {
 	    $o->{partitioning}{auto_allocate} = 1;
 	} elsif (/--pcmcia/) {
 	    $o->{pcmcia} = shift;
-	}       
+	}
     }
 
-    #-  if this fails, it's okay -- it might help with free space though 
+    #-  if this fails, it's okay -- it might help with free space though
     unlink "/sbin/install" unless $::testing;
     unlink "/sbin/insmod"  unless $::testing;
 
@@ -400,7 +400,7 @@ sub main {
     mkdir $o->{prefix}, 0755;
     mkdir $o->{root}, 0755;
 
-    #-  make sure we don't pick up any gunk from the outside world 
+    #-  make sure we don't pick up any gunk from the outside world
     $ENV{PATH} = "/usr/bin:/bin:/sbin:/usr/sbin:/usr/X11R6/bin:$o->{prefix}/sbin:$o->{prefix}/bin:$o->{prefix}/usr/sbin:$o->{prefix}/usr/bin:$o->{prefix}/usr/X11R6/bin";
     $ENV{LD_LIBRARY_PATH} = "";
 
@@ -427,15 +427,15 @@ sub main {
     $o->{prefix} = $::testing ? "/tmp/test-perl-install" : "/mnt";
     mkdir $o->{prefix}, 0755;
 
-    #-  make sure we don't pick up any gunk from the outside world 
+    #-  make sure we don't pick up any gunk from the outside world
     $ENV{PATH} = "/usr/bin:/bin:/sbin:/usr/sbin:/usr/X11R6/bin:$o->{prefix}/sbin:$o->{prefix}/bin:$o->{prefix}/usr/sbin:$o->{prefix}/usr/bin:$o->{prefix}/usr/X11R6/bin";
     $ENV{LD_LIBRARY_PATH} = "";
 
     #- needed very early for install_steps_graphical
     eval { $o->{mouse} ||= mouse::detect() };
 
-    $::o = $o = $::auto_install ? 
-      install_steps->new($o) : 
+    $::o = $o = $::auto_install ?
+      install_steps->new($o) :
       install_steps_graphical->new($o);
 
     $o->{netc} = network::read_conf("/tmp/network");
@@ -475,7 +475,7 @@ sub main {
 	last if $o->{step} eq 'exitInstall';
     }
     killCardServices();
-    
+
     log::l("installation complete, leaving");
 
     if ($::g_auto_install) {
@@ -489,7 +489,7 @@ sub main {
     }
 }
 
-sub killCardServices { 
+sub killCardServices {
     my $pid = chop_(cat_("/tmp/cardmgr.pid"));
     $pid and kill(15, $pid); #- send SIGTERM
 }

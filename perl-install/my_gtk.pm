@@ -40,7 +40,7 @@ sub main($;$) {
 
     do {
 	local $::setstep = 1;
-	Gtk->main 
+	Gtk->main
     } while ($o->{retval} && $f && !&$f());
     $o->destroy;
     $o->{retval}
@@ -51,7 +51,7 @@ sub show($) {
     $o->{rwindow}->show;
     $o->{rwindow}->grab_add if $my_gtk::grab || $o->{grab};
 }
-sub destroy($) { 
+sub destroy($) {
     my ($o) = @_;
     $o->{rwindow}->grab_remove if $my_gtk::grab || $o->{grab};
     $o->{rwindow}->destroy;
@@ -69,16 +69,16 @@ sub sync($) {
 sub flush(;$) {
     Gtk->main_iteration while Gtk->events_pending;
 }
-sub bigsize($) { 
-    $_[0]{rwindow}->set_usize(600,400); 
+sub bigsize($) {
+    $_[0]{rwindow}->set_usize(600,400);
 }
 
 
-sub gtkshow($)         { $_[0]->show; $_[0] }                  
-sub gtkdestroy($)      { $_[0] and $_[0]->destroy }            
+sub gtkshow($)         { $_[0]->show; $_[0] }
+sub gtkdestroy($)      { $_[0] and $_[0]->destroy }
 sub gtkset_usize($$$)  { $_[0]->set_usize($_[1],$_[2]); $_[0] }
-sub gtkset_justify($$) { $_[0]->set_justify($_[1]); $_[0] }    
-sub gtkset_active($$)  { $_[0]->set_active($_[1]); $_[0] }     
+sub gtkset_justify($$) { $_[0]->set_justify($_[1]); $_[0] }
+sub gtkset_active($$)  { $_[0]->set_active($_[1]); $_[0] }
 
 sub gtksignal_connect($@) {
     my $w = shift;
@@ -88,7 +88,7 @@ sub gtksignal_connect($@) {
 sub gtkpack($@) {
     my $box = shift;
     foreach (@_) {
-	my $l = $_; 
+	my $l = $_;
 	ref $l or $l = new Gtk::Label($l);
 	$box->pack_start($l, 1, 1, 0);
 	$l->show;
@@ -98,7 +98,7 @@ sub gtkpack($@) {
 sub gtkpack_($@) {
     my $box = shift;
     for (my $i = 0; $i < @_; $i += 2) {
-	my $l = $_[$i + 1]; 
+	my $l = $_[$i + 1];
 	ref $l or $l = new Gtk::Label($l);
 	$box->pack_start($l, $_[$i], 1, 0);
 	$l->show;
@@ -107,10 +107,10 @@ sub gtkpack_($@) {
 }
 sub gtkappend($@) {
     my $w = shift;
-    foreach (@_) { 
-	my $l = $_; 
+    foreach (@_) {
+	my $l = $_;
 	ref $l or $l = new Gtk::Label($l);
-	$w->append($l); 
+	$w->append($l);
 	$l->show;
     }
     $w
@@ -118,7 +118,7 @@ sub gtkappend($@) {
 sub gtkadd($@) {
     my $w = shift;
     foreach (@_) {
-	my $l = $_; 
+	my $l = $_;
 	ref $l or $l = new Gtk::Label($l);
 	$w->add($l);
 	$l->show;
@@ -155,7 +155,7 @@ sub gtkset_background {
     my $color = gtkcolor($r, $g, $b);
     $gc->set_foreground($color);
     $root->set_background($color);
-    
+
     my ($h, $w) = $root->get_size;
     $root->draw_rectangle($gc, 1, 0, 0, $w, $h);
 }
@@ -283,13 +283,13 @@ sub _create_window($$) {
 	    my $w = new Gtk::DrawingArea;
 	    $w->set_usize($border, $border);
 	    $w->set_events(['exposure_mask']);
-	    $w->signal_connect_after(expose_event => 
+	    $w->signal_connect_after(expose_event =>
 		sub { $w->window->draw_rectangle($w->style->black_gc, 1, 0, 0, @{$w->allocation}[2,3]); 1 }
 	    );
 	    $w->show;
 	    $w;
 	};
-	
+
 	$t->attach(&$new(), 0, 1, 0, 3, [],              , ["expand","fill"], 0, 0);
 	$t->attach(&$new(), 1, 2, 0, 1, ["expand","fill"], [],                0, 0);
 	$t->attach($f,      1, 2, 1, 2, ["expand","fill"], ["expand","fill"], 0, 0);
@@ -305,7 +305,7 @@ sub _create_window($$) {
     $w->set_uposition(@{$my_gtk::force_position || $o->{force_position}}) if $my_gtk::force_position || $o->{force_position};
 
     $w->signal_connect(size_allocate => sub {
-	my ($wi, $he) = @{$_[1]}[2,3]; 
+	my ($wi, $he) = @{$_[1]}[2,3];
 	my ($X, $Y, $Wi, $He) = @{$my_gtk::force_center || $o->{force_center}};
         $w->set_uposition(max(0, $X + ($Wi - $wi) / 2), max(0, $Y + ($He - $he) / 2));
     }) if ($my_gtk::force_center || $o->{force_center}) && !($my_gtk::force_position || $o->{force_position}) ;
@@ -352,8 +352,8 @@ sub _ask_from_list($$$$) {
     my (@widgets, $timeout, $curr);
 
     my $leave = sub { $o->{retval} = $l->[$curr]; Gtk->main_quit };
-    my $select = sub { 
-	$list->focus_row($_[0]); 
+    my $select = sub {
+	$list->focus_row($_[0]);
 	$list->select_row($_[0], 0);
 	$list->moveto($_[0], 0, 0.5, 0);
     };
@@ -368,7 +368,7 @@ sub _ask_from_list($$$$) {
 	my $c = chr $e->{keyval};
 
 	Gtk->timeout_remove($timeout) if $timeout; $timeout = '';
-	
+
 	if ($e->{keyval} >= 0x100) {
 	    &$leave if $c eq "\r" || $c eq "\x8d";
 	    $starting_word = '';
@@ -377,7 +377,7 @@ sub _ask_from_list($$$$) {
 
 	    $curr++ if $starting_word eq '' || $starting_word eq $c;
 	    $starting_word .= $c unless $starting_word eq $c;
-	
+
 	    my $word = quotemeta $starting_word;
 	    my $j; for ($j = 0; $j < @$l; $j++) {
 		 $l->[($j + $curr) % @$l] =~ /^$word/i and last;
@@ -385,21 +385,21 @@ sub _ask_from_list($$$$) {
 	    $j == @$l ?
 	      $starting_word = '' :
 	      &$select(($j + $curr) % @$l);
-	
+
 	    $w->{timeout} = $timeout = Gtk->timeout_add($forgetTime, sub { $timeout = $starting_word = ''; 0 } );
 	}
 	1;
     });
     $list->set_selection_mode('browse');
 
-    gtkadd($o->{window}, 
-	   gtkpack($o->create_box_with_title(@$messages), 
+    gtkadd($o->{window},
+	   gtkpack($o->create_box_with_title(@$messages),
 		   @$l > 15 ? gtkset_usize(createScrolledWindow($list), 200, 280) : $list));
 
     $o->sync; #- otherwise the moveto is not done
     map_index {
 	$list->append($_);
-	&$select($::i) if $def && $_ eq $def; 
+	&$select($::i) if $def && $_ eq $def;
     } @$l;
 
     $list->grab_focus;
@@ -463,9 +463,9 @@ sub _ask_file($$) {
 #-	  my $id = $w->signal_connect(key_press_event => sub {
 #-	       my ($w, $e) = @_;
 #-	       my $c = chr $e->{keyval};
-#-	  
+#-
 #-	       Gtk->timeout_remove($timeout) if $timeout; $timeout = '';
-#-	  
+#-
 #-	       if ($e->{keyval} >= 0x100) {
 #-		     if ($c eq "\r" || $c eq "\x8d") {
 #-			 $list->select_item($i);
@@ -474,14 +474,14 @@ sub _ask_file($$) {
 #-	       } else {
 #-		     my $curr = $i + bool($starting_word eq '' || $starting_word eq $c);
 #-		     $starting_word .= $c unless $starting_word eq $c;
-#-	  
+#-
 #-		     my $j; for ($j = 0; $j < @$l; $j++) {
 #-			 $l->[($j + $curr) % @$l] =~ /^$starting_word/i and last;
 #-		     }
 #-		     $j == @$l ?
 #-		       $starting_word = '' :
 #-		       $widgets[($j + $curr) % @$l]->grab_focus;
-#-	  
+#-
 #-		     $w->{timeout} = $timeout = Gtk->timeout_add($forgetTime, sub { $timeout = $starting_word = ''; 0 } );
 #-	       }
 #-	       1;
@@ -500,8 +500,8 @@ sub _ask_file($$) {
 #-	      $list;
 #-	  }
 #-    };
-#-    gtkadd($o->{window}, 
-#-	     gtkpack($o->create_box_with_title(@$messages), 
+#-    gtkadd($o->{window},
+#-	     gtkpack($o->create_box_with_title(@$messages),
 #-		     $scroll_win));
 #-    $widgets[$def]->grab_focus;
 #-

@@ -39,15 +39,15 @@ sub basename_ { print basename(@_), "\n" }
 sub rmdir_ { foreach (@_) { rmdir $_ or die "rmdir: can't remove $_\n" } }
 sub lsmod { print "Module                  Size  Used by\n"; cat("/proc/modules"); }
 
-sub grep_ { 
+sub grep_ {
     my ($h, $v, $i) = getopts(\@_, qw(hvi));
     @_ == 0 || $h and die "usage: grep <regexp> [files...]\n";
     my $r = shift;
     $r = qr/$r/i if $i;
-    @ARGV = @_; (/$r/ ? $v || print : $v && print) while <> 
+    @ARGV = @_; (/$r/ ? $v || print : $v && print) while <>
 }
 
-sub tr_ { 
+sub tr_ {
     my ($s, $c, $d) = getopts(\@_, qw(s c d));
     @_ >= 1 + (!$d || $s) or die "usage: tr [-c] [-s [-d]] <set1> <set2> [files...]\n    or tr [-c] -d <set1> [files...]\n";
     my $set1 = shift;
@@ -65,7 +65,7 @@ sub mount {
     "       (if /dev/ is left off the device name, a temporary node will be created)\n";
 
     my ($dev, $where) = @_;
-    $fs ||= $where =~ /:/ ? "nfs" : 
+    $fs ||= $where =~ /:/ ? "nfs" :
             $dev =~ /fd/ ? "vfat" : "ext2";
 
     require 'fs.pm';
@@ -79,7 +79,7 @@ sub umount {
     fs::umount($_[0]);
 }
 
-sub mkdir_ { 
+sub mkdir_ {
     my ($rec) = getopts(\@_, qw(p));
 
     my $mkdir; $mkdir = sub {
@@ -119,9 +119,9 @@ sub ln {
     ($soft ? symlink($source, $dest) : link($source, $dest)) or die "ln failed: $!\n";
 }
 
-sub rm { 
+sub rm {
     my ($rec, undef) = getopts(\@_, qw(rf));
-    
+
     my $rm; $rm = sub {
 	foreach (@_) {
 	    if (-d $_) {
@@ -134,7 +134,7 @@ sub rm {
     &$rm(@_);
 }
 
-sub chmod_ { 
+sub chmod_ {
     @_ >= 2 or die "usage: chmod <mode> <files>\n";
 
     my $mode = shift;
@@ -206,14 +206,14 @@ sub ls {
 
     @_ or @_ = '.';
     @_ == 1 && -d $_[0] and @_ = glob_($_[0]);
-    foreach (sort @_) { 
+    foreach (sort @_) {
 	if ($l) {
 	    my @s = lstat or warn("can't stat file $_\n"), next;
 	    formline(
 "@<<<<<<<<< @<<<<<<< @<<<<<<< @>>>>>>>> @>>>>>>>>>>>>>>> @*\n",
 		     rights($s[2]), getpwuid $s[4] || $s[4], getgrgid $s[5] || $s[5],
-		     $s[6] ? join ", ", unmakedev($s[6]) : $s[7], 
-		     scalar localtime $s[9], -l $_ ? "$_ -> " . readlink $_ : $_); 
+		     $s[6] ? join ", ", unmakedev($s[6]) : $s[7],
+		     scalar localtime $s[9], -l $_ ? "$_ -> " . readlink $_ : $_);
 	    print $^A; $^A = '';
 	} else { print "$_\n"; }
     }
@@ -261,7 +261,7 @@ sub ps {
 
     open PS, ">&STDOUT";
     format PS_TOP =
-  PID   CMD
+  PID  %CPU CMD
 .
     format PS =
 @>>>>  @>>> @<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
@@ -336,20 +336,20 @@ sub strings {
 sub hexdump {
     my $i = 0; $/ = \16; @ARGV = @_; while (<>) {
 	printf "%08lX  ", $i; $i += 16;
-	print join(" ", map({ sprintf "%02X", $_ } unpack("C*", $_)), 
-		   ($_ =~ s/[^$printable_chars]/./og, $_)[1]), "\n"; 
+	print join(" ", map({ sprintf "%02X", $_ } unpack("C*", $_)),
+		   ($_ =~ s/[^$printable_chars]/./og, $_)[1]), "\n";
     }
 }
 
-sub more { 
+sub more {
     @ARGV = @_;
     require 'devices.pm';
     my $tty = devices::make('tty');
-    local *IN; open IN, "<$tty" or die "can't open $tty\n"; 
-    my $n = 0; while (<>) { 
-	++$n == 25 and $n = <IN>, $n = 0; 
-	print 
-    } 
+    local *IN; open IN, "<$tty" or die "can't open $tty\n";
+    my $n = 0; while (<>) {
+	++$n == 25 and $n = <IN>, $n = 0;
+	print
+    }
 }
 
 sub pack_ {
@@ -363,7 +363,7 @@ sub pack_ {
 
 	    local *F;
 	    open F, $_ or die "can't read file $_: $!\n";
-	    while (read F, $t, $BUFFER_SIZE) { print $t; }    
+	    while (read F, $t, $BUFFER_SIZE) { print $t; }
 	}
     }
 }
@@ -382,7 +382,7 @@ sub unpack_ {
 	print "$filename\n";
 	my $dir = dirname($filename);
 	-d $dir or mkdir_('-p', $dir);
-	
+
 	local *G;
 	open G, "> $filename" or die "can't write file $filename: $!\n";
 	while ($size) {
@@ -462,5 +462,5 @@ $dev, $size, $used, $free, $use, $mntpoint
 #-######################################################################################
 #- Wonderful perl :(
 #-######################################################################################
-1; # 
+1; #
 

@@ -6,7 +6,7 @@ use mouse;
 # otherwise uses the rule substr($keymap, 0, 2)
 my %keymap_translate = (
     cf => "ca_enhanced",
-    uk => "gb", 
+    uk => "gb",
 );
 
 
@@ -34,7 +34,7 @@ sub getinfoFromXF86Config {
     my (%c, $depth);
 
     $o->{card}{server} ||= $1 if readlink("/etc/X11/X") =~ /XF86_ (\w+)$/x; #- /x for perl2fcalls
-    
+
     local *F;
     open F, "/etc/X11/XF86Config" or return {};
     foreach (<F>) {
@@ -52,7 +52,7 @@ sub getinfoFromXF86Config {
 	    $c{memory} ||= $1 if /^\s*VideoRam\s+(\d+)/;
 	    $c{vendor} ||= $1 if /^\s*VendorName\s+"(.*?)"/;
 	    $c{board} ||= $1 if /^\s*BoardName\s+"(.*?)"/;
-		
+
 	    push @{$c{lines}}, $_ unless /(Section|Identifier|VideoRam|VendorName|BoardName)/;
 	} elsif (/^Section "Monitor"/ .. /^EndSection/) {
 	    $o->{monitor}{type} ||= $1 if /^\s*Identifier\s+"(.*?)"/;

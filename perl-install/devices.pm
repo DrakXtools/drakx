@@ -46,7 +46,7 @@ sub make($) {
 	$file = "$prefix/dev/$_";
 	-e $file or $file = "$prefix/tmp/$_";
     }
-    -e $file and return $file; #- assume nobody takes fun at creating files named as device	
+    -e $file and return $file; #- assume nobody takes fun at creating files named as device
 
     if (/^sd(.)(\d{0,2})/) {
 	$type = c::S_IFBLK();
@@ -54,7 +54,7 @@ sub make($) {
 	$minor = 16 * (ord($1) - ord('a')) + ($2 || 0);
     } elsif (/^hd(.)(\d{0,2})/) {
 	$type = c::S_IFBLK();
-	($major, $minor) = 
+	($major, $minor) =
 	    @{ $ {{'a' => [3, 0], 'b' => [3, 64],
 		   'c' => [22,0], 'd' => [22,64],
 		   'e' => [33,0], 'f' => [33,64],
@@ -76,7 +76,7 @@ sub make($) {
 	$major = 72 + $1;
 	$minor = 16 * $2 + ($4 || 0);
     } else {
-	($type, $major, $minor) = 
+	($type, $major, $minor) =
 	    @{ $ {{"aztcd"   => [ c::S_IFBLK(), 29, 0 ],
 		   "bpcd"    => [ c::S_IFBLK(), 41, 0 ],
 		   "cdu31a"  => [ c::S_IFBLK(), 15, 0 ],
@@ -99,10 +99,10 @@ sub make($) {
 		   "sjcd"    => [ c::S_IFBLK(), 18, 0 ],
 	       }}{$_} or die "unknown device $_" };
     }
-    
+
     #- make a directory for this inode if needed.
-    mkdir dirname($file), 0755;   
-    
+    mkdir dirname($file), 0755;
+
     syscall_('mknod', $file, $type | 0600, makedev($major, $minor)) or die "mknod failed (dev $_): $!";
 
     $file;

@@ -19,7 +19,7 @@ sub readln {
 
 sub check_it {
     my ($i, $n) = @_;
-    $i =~ /^\s*\d+\s*$/ && 1 <= $i && $i <= $n    
+    $i =~ /^\s*\d+\s*$/ && 1 <= $i && $i <= $n
 }
 
 sub ask_from_listW {
@@ -41,10 +41,10 @@ sub ask_from_listW {
 	} until (@l == 1);
 	$l[0];
     } else {
-	my $n = 0; foreach (@$list) { 
+	my $n = 0; foreach (@$list) {
 	    $n++;
 	    $def eq $_ and $def = $n;
-	    print "$n: $_\n"; 
+	    print "$n: $_\n";
 	}
 	do {
 	    defined $i and print _("Bad choice, try again\n");
@@ -59,9 +59,9 @@ sub ask_many_from_list_refW {
     my ($o, $title, $messages, $list, $val) = @_;
     my @defaults;
     print map { "$_\n" } @$messages;
-    my $n = 0; foreach (@$list) { 
-	$n++; 
-	print "$n: $_\n"; 
+    my $n = 0; foreach (@$list) {
+	$n++;
+	print "$n: $_\n";
 	push @defaults, $n if ${$val->[$n - 1]};
     }
     my $i;

@@ -15,8 +15,8 @@ my $nb_primary = 4;
 my $offset = $common::SECTORSIZE - length($magic) - $nb_primary * common::psizeof($format);
 
 my @MBR_signatures = (
-    [ 'LILO', 0x6,  'LILO' ],
-    [ 'DOS',  0xa0, '\x25\x03\x4E\x02\x\xCD\x13' ],
+    [ 'LILO', 0x6,  "LILO" ],
+    [ 'DOS',  0xa0, "\x25\x03\x4E\x02\xCD\x13" ],
 );
 
 sub compute_CHS($$) {
@@ -45,7 +45,7 @@ sub sector2CHS($$) {
 sub get_geometry($) {
     my ($dev) = @_;
     my $g = "";
-   
+
     local *F; sysopen F, $dev, 0 or return;
     ioctl(F, c::HDIO_GETGEO(), $g) or return;
 
@@ -56,7 +56,7 @@ sub get_geometry($) {
 
 sub openit($$;$) { sysopen $_[1], $_[0]{file}, $_[2] || 0; }
 
-# cause kernel to re-read partition table 
+# cause kernel to re-read partition table
 sub kernel_read($) {
     my ($hd) = @_;
     local *F; openit($hd, \*F) or return 0;
@@ -119,7 +119,8 @@ sub typeOfMBR($) {
     foreach (@MBR_signatures) {
 	my ($name, $offset, $signature) = @$_;
 	sysseek(F, $offset, 0) or next;
-	sysread(F, $tmp, length $signature) && $tmp eq $signature and return $name;
+	sysread(F, $tmp, length $signature);
+	$tmp eq $signature and return $name;
     }
     undef;
 }

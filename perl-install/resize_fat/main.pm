@@ -57,8 +57,8 @@ sub new($$$) {
 sub copy_clusters {
     my ($fs, $cluster) = @_;
     my @buffer;
-    my $flush = sub { 
-	while (@buffer) { 
+    my $flush = sub {
+	while (@buffer) {
 	    my $cluster = shift @buffer;
 	    resize_fat::io::write_cluster($fs, $cluster, shift @buffer);
 	}
@@ -75,7 +75,7 @@ sub copy_clusters {
 sub construct_dir_tree {
     my ($fs) = @_;
 
-    if ($resize_fat::isFAT32) { 
+    if ($resize_fat::isFAT32) {
 	#- fat32's root must remain in the first 64k clusters
 	#- so don't set it as DIRECTORY, it will be specially handled
 	$fs->{fat_flag_map}[$fs->{fat32_root_dir_cluster}] = $resize_fat::any::FREE;
@@ -84,8 +84,8 @@ sub construct_dir_tree {
     for (my $cluster = 2; $cluster < $fs->{nb_clusters} + 2; $cluster++) {
 	$fs->{fat_flag_map}[$cluster] == $resize_fat::any::DIRECTORY or next;
 
-      resize_fat::io::write_cluster($fs, 
-				    $fs->{fat_remap}[$cluster], 
+      resize_fat::io::write_cluster($fs,
+				    $fs->{fat_remap}[$cluster],
 				  resize_fat::directory::remap($fs, resize_fat::io::read_cluster($fs, $cluster)));
     }
 
@@ -100,8 +100,8 @@ sub construct_dir_tree {
     if ($resize_fat::isFAT32) {
 	my $cluster = $fs->{fat32_root_dir_cluster};
 
-	resize_fat::io::write_cluster($fs, 
-		      $fs->{fat_remap}[$cluster], 
+	resize_fat::io::write_cluster($fs,
+		      $fs->{fat_remap}[$cluster],
 		      resize_fat::directory::remap($fs, resize_fat::io::read_cluster($fs, $cluster)));
     } else {
 	resize_fat::io::write($fs, $fs->{root_dir_offset}, $fs->{root_dir_size},
@@ -114,7 +114,7 @@ sub max_size($) { &resize_fat::any::max_size }
 
 #- resize
 #- - size is in sectors
-#- - checks boundaries before starting 
+#- - checks boundaries before starting
 #- - copies all data beyond new_cluster_count behind the frontier
 sub resize {
     my ($fs, $size) = @_;
@@ -135,7 +135,7 @@ sub resize {
     log::l("resize_fat: Allocating new clusters");
     resize_fat::fat::allocate_remap($fs, $new_nb_clusters);
 
-    log::l("resize_fat: Copying files"); 
+    log::l("resize_fat: Copying files");
     copy_clusters($fs, $new_nb_clusters);
 
     log::l("resize_fat: Copying directories");
@@ -147,7 +147,7 @@ sub resize {
 
     $fs->{nb_sectors} = $size;
     $fs->{nb_clusters} = $new_nb_clusters;
-    $fs->{clusters}{count}->{free} = 
+    $fs->{clusters}{count}->{free} =
 	$fs->{nb_clusters} - $fs->{clusters}{count}->{used} - $fs->{clusters}->{count}->{bad} - 2;
 
     $fs->{system_id} = 'was here!';

@@ -3,20 +3,20 @@ package help;
 use common qw(:common);
 
 %steps = (
-selectLanguage => 
+selectLanguage =>
  __("Choose preferred language for install and system usage."),
 
 selectKeyboard =>
  __("Choose on the list of keyboards, the one corresponding to yours"),
 
-selectPath => 
+selectPath =>
  __("Choose \"Installation\" if there are no previous versions of Linux
 installed, or if you wish use to multiple distributions or versions.
 
 Choose \"Update\" if you wish to update a previous version of Mandrake
 Linux: 5.1 (Venice), 5.2 (Leeloo), 5.3 (Festen) or 6.0 (Venus)."),
 
-selectInstallClass => 
+selectInstallClass =>
  __("Select:
   - Beginner: If you have not installed Linux before, or wish to install
 the distribution elected \"Product of the year\" for 1999, click here.
@@ -29,9 +29,9 @@ this.
   - Expert: If you know GNU/Linux and want to perform a highly
 customized installation, this Install Class is for you."),
 
-setupSCSI => 
+setupSCSI =>
  __("The system did not detect a SCSI card. If you have one (or several)
-click on \"Yes\" and choose the module(s) to be tested. Otherwise, 
+click on \"Yes\" and choose the module(s) to be tested. Otherwise,
 select \"No\".
 
 If you don't know if your computer has SCSI interfaces, consult the
@@ -39,7 +39,7 @@ original documentation delivered with the computer, or if you use
 Microsoft Windows 95/98, inspect the information available via the \"Control
 panel\", \"System's icon, \"Device Manager\" tab."),
 
-partitionDisks => 
+partitionDisks =>
  __("At this point, hard drive partitions must be defined. (Unless you
 are overwriting a previous install of Linux and have already defined
 your hard drives partitions as desired.) This operation consists of
@@ -52,14 +52,14 @@ usually irreversible, partitioning can be intimidating and stressful to
 the inexperienced. DiskDrake simplifies the process so that it need not
 be. Consult the documentation and take your time before proceeding."),
 
-formatPartitions => 
+formatPartitions =>
  __("Any partitions that have been newly defined must be formatted for
 use. At this time, you may wish to re-format some pre-existing
 partitions to erase the data they contain. Note: it is not necessary to
 re-format pre-existing partitions, particularly if they contain files or
 data you wish to keep. Typically retained are: /home and /usr/local."),
 
-choosePackages => 
+choosePackages =>
  __("You may now select the packages you wish to install.
 
 Please note that some packages require the installation of others. These
@@ -72,11 +72,11 @@ Information on each category and specific package is available in the
 area titled \"Info\". This is located above the buttons: [confirmation]
 [selection] [unselection]."),
 
-doInstallStep => 
+doInstallStep =>
  __("The packages selected are now being installed. This operation
 should only take a few minutes."),
 
-configureMouse => 
+configureMouse =>
  __("Help"),
 
 configureNetwork =>
@@ -91,7 +91,7 @@ configureServices =>
 configurePrinter =>
  __("Help"),
 
-setRootPassword => 
+setRootPassword =>
  __("An administrator password for your Linux system must now be
 assigned. The password must be entered twice to verify that both
 password entries are identical.
@@ -112,7 +112,7 @@ addUser =>
  __("You can now authorize one or more people to use your Linux
 system. Each user account will have their own customizable environment.
 
-It is very important that you create a regular user account, even if 
+It is very important that you create a regular user account, even if
 there will only be one principle user of the system. The administrative
 \"root\" account should not be used for day to day operation of the
 computer.  It is a security risk.  The use of a regular user account
@@ -130,7 +130,7 @@ to place the information required to boot to Linux.
 Unless you know exactly what you are doing, choose \"First sector of
 drive\"."),
 
-configureX => 
+configureX =>
  __("It is now time to configure the video card and monitor
 configuration for the X Window Graphic User Interface (GUI). First
 select your monitor. Next, you may test the configuration and change
@@ -141,20 +141,20 @@ exitInstall =>
 
 #- ################################################################################
 %steps_long = (
-selectLanguage => 
+selectLanguage =>
  __("Choose preferred language for install and system usage."),
 
 selectKeyboard =>
  __("Choose on the list of keyboards, the one corresponding to yours"),
 
-selectPath => 
+selectPath =>
  __("Choose \"Installation\" if there are no previous versions of Linux
 installed, or if you wish use to multiple distributions or versions.
 
 Choose \"Update\" if you wish to update a previous version of Mandrake
 Linux: 5.1 (Venice), 5.2 (Leeloo), 5.3 (Festen) or 6.0 (Venus)."),
 
-selectInstallClass => 
+selectInstallClass =>
  __("Select:
   - Beginner: If you have not installed Linux before, or wish to install
 the distribution elected \"Product of the year\" for 1999, click here.
@@ -167,9 +167,9 @@ this.
   - Expert: If you know GNU/Linux and want to perform a highly
 customized installation, this Install Class is for you."),
 
-setupSCSI => 
+setupSCSI =>
  __("The system did not detect a SCSI card. If you have one (or several)
-click on \"Yes\" and choose the module(s) to be tested. Otherwise, 
+click on \"Yes\" and choose the module(s) to be tested. Otherwise,
 select \"No\".
 
 If you don't know if your computer has SCSI interfaces, consult the
@@ -177,7 +177,7 @@ original documentation delivered with the computer, or if you use
 Microsoft Windows 95/98, inspect the information available via the \"Control
 panel\", \"System's icon, \"Device Manager\" tab."),
 
-partitionDisks => 
+partitionDisks =>
  __("At this point, hard drive partitions must be defined. (Unless you
 are overwriting a previous install of Linux and have already defined
 your hard drives partitions as desired.) This operation consists of
@@ -190,14 +190,14 @@ usually irreversible, partitioning can be intimidating and stressful to
 the inexperienced. DiskDrake simplifies the process so that it need not
 be. Consult the documentation and take your time before proceeding."),
 
-formatPartitions => 
+formatPartitions =>
  __("Any partitions that have been newly defined must be formatted for
 use. At this time, you may wish to re-format some pre-existing
 partitions to erase the data they contain. Note: it is not necessary to
 re-format pre-existing partitions, particularly if they contain files or
 data you wish to keep. Typically retained are: /home and /usr/local."),
 
-choosePackages => 
+choosePackages =>
  __("You may now select the packages you wish to install.
 
 Please note that some packages require the installation of others. These
@@ -210,11 +210,11 @@ Information on each category and specific package is available in the
 area titled \"Info\". This is located above the buttons: [confirmation]
 [selection] [unselection]."),
 
-doInstallStep => 
+doInstallStep =>
  __("The packages selected are now being installed. This operation
 should only take a few minutes."),
 
-configureMouse => 
+configureMouse =>
  __("Help"),
 
 configureNetwork =>
@@ -229,7 +229,7 @@ configureServices =>
 configurePrinter =>
  __("Help"),
 
-setRootPassword => 
+setRootPassword =>
  __("An administrator password for your Linux system must now be
 assigned. The password must be entered twice to verify that both
 password entries are identical.
@@ -250,7 +250,7 @@ addUser =>
  __("You can now authorize one or more people to use your Linux
 system. Each user account will have their own customizable environment.
 
-It is very important that you create a regular user account, even if 
+It is very important that you create a regular user account, even if
 there will only be one principle user of the system. The administrative
 \"root\" account should not be used for day to day operation of the
 computer.  It is a security risk.  The use of a regular user account
@@ -268,7 +268,7 @@ to place the information required to boot to Linux.
 Unless you know exactly what you are doing, choose \"First sector of
 drive\"."),
 
-configureX => 
+configureX =>
  __("It is now time to configure the video card and monitor
 configuration for the X Window Graphic User Interface (GUI). First
 select your monitor. Next, you may test the configuration and change

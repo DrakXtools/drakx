@@ -17,7 +17,7 @@ my $signature_page = "\0" x $pagesize;
 # the architectures can actually store into the page tables
 # and on 32bit architectures it is limited to 2GB at the
 # same time.
-# Old swap format keeps the limit of 8*pagesize*(pagesize - 10) 
+# Old swap format keeps the limit of 8*pagesize*(pagesize - 10)
 
 my $V0_MAX_PAGES = 8 * $pagesize - 10;
 my $V1_OLD_MAX_PAGES = int 0x7fffffff / $pagesize - 1;
@@ -39,7 +39,7 @@ sub check_blocks {
     my $badpages_field_v1 = \substr($signature_page, psizeof($signature_format_v1));
 
     for (my $i = 0; $i < $nbpages; $i++) {
-	
+
 	$last_read_ok || sysseek($fd, $i * $pagesize, 0) or die "seek failed";
 
 	unless ($last_read_ok = sysread($fd, $buffer, $pagesize)) {
@@ -53,7 +53,7 @@ sub check_blocks {
     }
 
     #- TODO: add interface
-    
+
     $badpages and log::l("$badpages bad pages\n");
     return $badpages;
 }
@@ -96,7 +96,7 @@ sub make($;$) {
     } elsif ($version == 0) {
 	for (my $i = 0; $i < $nbpages; $i++) { vec($signature_page, $i, 1) = 1; }
     }
-	
+
     $version == 0 and !vec($signature_page, 0, 1) and die "bad block on first page";
     vec($signature_page, 0, 1) = 0;
 
@@ -106,7 +106,7 @@ sub make($;$) {
     $goodpages > 0 or die "all blocks are bad";
 
     log::l("Setting up swapspace on $devicename version $version, size = " . $goodpages * $pagesize . " bytes");
-    
+
     strcpy($signature_page, $version == 0 ? "SWAP-SPACE" : "SWAPSPACE2", $pagesize - 10);
 
     my $offset = ($version == 0) ? 0 : 1024;
@@ -129,5 +129,5 @@ sub swapon($) {
     syscall_('swapon', devices::make($_[0]), 0) or die "swapon($_[0]) failed: $!";
 }
 sub swapoff($) {
-    syscall_('swapoff', devices::make($_[0])) or die "swapoff($_[0]) failed: $!"; 
+    syscall_('swapoff', devices::make($_[0])) or die "swapoff($_[0]) failed: $!";
 }

@@ -124,7 +124,7 @@ sub next($$) {
     endianness(vec($fs->{fat}, $cluster, $fs->{fs_type_size}), $fs->{fs_type_size});
 
 }
-sub set_next($$$) { 
+sub set_next($$$) {
     my ($fs, $cluster, $new_v) = @_;
     $cluster > $fs->{nb_clusters} + 2 and die "fat::set_next: cluster $cluster outside filesystem";
     vec($fs->{fat}, $cluster, $fs->{fs_type_size}) = endianness($new_v, $fs->{fs_type_size});

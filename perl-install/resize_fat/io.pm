@@ -26,7 +26,7 @@ sub read_cluster($$) {
     my $buf;
 
     eval {
-	$buf = &read($fs, 
+	$buf = &read($fs,
 		     $fs->{cluster_offset} + $cluster * $fs->{cluster_size},
 		     $fs->{cluster_size});
     }; @$ and die "reading cluster #$cluster failed on device $fs->{fs_name}";
@@ -36,9 +36,9 @@ sub write_cluster($$$) {
     my ($fs, $cluster, $buf) = @_;
 
     eval {
-    &write($fs, 
+    &write($fs,
 	   $fs->{cluster_offset} + $cluster * $fs->{cluster_size},
-	   $fs->{cluster_size}, 
+	   $fs->{cluster_size},
 	   $buf);
     }; @$ and die "writing cluster #$cluster failed on device $fs->{fs_name}";
 }

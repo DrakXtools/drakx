@@ -22,7 +22,7 @@ sub read_fstab($) {
 
     local *F;
     open F, $file or return;
-    
+
     map {
 	my ($dev, $mntpoint, @l) = split;
 	$dev =~ s,/(tmp|dev)/,,;
@@ -53,7 +53,7 @@ sub get_mntpoints_from_fstab($) {
 	    $p->{device} eq $_->{device} or next;
 	    $p->{mntpoint} ||= $_->{mntpoint};
 	    $p->{options} ||= $_->{options};
-	    $_->{type} ne 'auto' && $_->{type} ne type2fs($p->{type}) and 
+	    $_->{type} ne 'auto' && $_->{type} ne type2fs($p->{type}) and
 		log::l("err, fstab and partition table do not agree for $_->{device} type: " . (type2fs($p->{type}) || type2name($p->{type})) . " vs $_->{type}");
 	}
     }
@@ -97,11 +97,11 @@ sub format_part($;$) {
 }
 
 sub mount($$$;$) {
-    my ($dev, $where, $fs, $rdonly) = @_; 
+    my ($dev, $where, $fs, $rdonly) = @_;
     log::l("mounting $dev on $where as type $fs");
-  
+
     -d $where or commands::mkdir_('-p', $where);
-    
+
     if ($fs eq 'nfs') {
 	log::l("calling nfs::mount($dev, $where)");
 	nfs::mount($dev, $where) or die _("nfs mount failed");
@@ -119,7 +119,7 @@ sub mount($$$;$) {
 	    eval { modules::load('vfat') }; #- try using vfat
 	    eval { modules::load('msdos') } if $@; #- otherwise msdos...
 	}
-  
+
 	log::l("calling mount($dev, $where, $fs, $flag, $mount_opt)");
 	syscall_('mount', $dev, $where, $fs, $flag, $mount_opt) or die _("mount failed: ") . "$!";
     }
@@ -129,7 +129,7 @@ sub mount($$$;$) {
 }
 
 #- takes the mount point to umount (can also be the device)
-sub umount($) { 
+sub umount($) {
     my ($mntpoint) = @_;
     syscall_('umount', $mntpoint) or die _("error unmounting %s: %s", $mntpoint, "$!");
 
@@ -141,9 +141,9 @@ sub umount($) {
 
 sub mount_part($;$) {
     my ($part, $prefix) = @_;
-    
+
     $part->{isMounted} and return;
-    
+
     if (isSwap($part)) {
 	swap::swapon($part->{device});
     } else {
@@ -194,8 +194,8 @@ sub write($$) {
     unshift @cd_drives, grep { $_->{type} eq 'iso9660' } read_fstab("/proc/mounts");
     log::l("found cdrom drive(s) " . join(', ', map { $_->{device} } @cd_drives));
 
-    #- cd-rom rooted installs have the cdrom mounted on /dev/root which 
-    #- is not what we want to symlink to /dev/cdrom.                    
+    #- cd-rom rooted installs have the cdrom mounted on /dev/root which
+    #- is not what we want to symlink to /dev/cdrom.
     my $cddev = first(grep { $_ ne 'root' } map { $_->{device} } @cd_drives);
 
     log::l("resetting /etc/mtab");
@@ -217,14 +217,14 @@ sub write_fstab($;$$) {
     my ($fstab, $prefix, $cddev) = @_;
     $prefix ||= '';
 
-    my @to_add = 
+    my @to_add =
       map {
 	  my ($dir, $options, $freq, $passno) = qw(/dev/ defaults 0 0);
 	  $options ||= $_->{options};
 
 	  isExt2($_) and ($freq, $passno) = (1, ($_->{mntpoint} eq '/') ? 1 : 2);
 	  isNfs($_) and ($dir, $options) = ('', 'ro');
-	  
+
 	  [ "$dir$_->{device}", $_->{mntpoint}, type2fs($_->{type}), $options, $freq, $passno ];
 
       } grep { $_->{mntpoint} && type2fs($_->{type}) } @$fstab;

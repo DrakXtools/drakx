@@ -58,7 +58,7 @@ my %charsets = (
   "Big5"       => [ "?????",                    "????",
         "*-helvetica-medium-r-normal--14-*-*-*-*-*-iso8859-1," .
         "-taipei-*-medium-r-normal--16-*-*-*-*-*-big5-0" ],
-  "iso-8859-1" => [ "lat0-sun16.psf",		"iso15", 
+  "iso-8859-1" => [ "lat0-sun16.psf",		"iso15",
 	"*-helvetica-medium-r-normal--14-*-*-*-*-iso8859-1" ],
   "iso-8859-2" => [ "lat2-sun16.psf",		"iso02",
 	"*-helvetica-medium-r-normal--14-*-*-*-*-iso8859-1," .
@@ -105,7 +105,7 @@ my %charsets = (
 #- korean needs special console driver for text mode
   "ksc5601"    => [ "?????",                    "?????",
         "*-helvetica-medium-r-normal--14-*-*-*-*-iso8859-1," .
-        "-*-*-medium-*-*--14-*-*-*-*-*-ksc5601.1987-*" ], 
+        "-*-*-medium-*-*--14-*-*-*-*-*-ksc5601.1987-*" ],
   "tcvn"       => [ "tcvn8x16.psf",		"tcvn",
 	"*-helvetica-medium-r-normal--14-*-*-*-*-iso8859-1," .
 	"*-helvetica-medium-r-normal--14-*-*-*-*-tcvn-5712" ],
@@ -133,8 +133,8 @@ sub set {
 
     if ($lang) {
 	$ENV{LC_ALL}    = $lang;
-	$ENV{LANG}      = $languages{$lang}[2]; 
-	$ENV{LANGUAGES} = $languages{$lang}[3]; 
+	$ENV{LANG}      = $languages{$lang}[2];
+	$ENV{LANGUAGES} = $languages{$lang}[3];
     } else {
 	# stick with the default (English) */
 	delete $ENV{LANG};
@@ -164,9 +164,9 @@ sub write {
 	    &$f("SYSFONTACM", $c->[1]);
 
 	    my $p = "$prefix/usr/lib/kbd";
-	    commands::cp("-f", 
-		     "$p/consolefonts/$c->[0].gz", 
-		     glob_("$p/consoletrans/$c->[1]*"), 
+	    commands::cp("-f",
+		     "$p/consolefonts/$c->[0].gz",
+		     glob_("$p/consoletrans/$c->[1]*"),
 		     "$prefix/etc/sysconfig/console");
 	}
     }
@@ -181,7 +181,7 @@ sub write {
 #-	   $fontFile = $c->[0];
 #-    }
 #-
-#-    # text mode font  
+#-    # text mode font
 #-    log::l("loading font /usr/share/consolefonts/$fontFile");
 #-    #c::loadFont("/tmp/$fontFile") or log::l("error in loadFont: one of PIO_FONT PIO_UNIMAPCLR PIO_UNIMAP PIO_UNISCRNMAP failed: $!");
 #-    #print STDERR "\033(K";

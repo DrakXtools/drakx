@@ -29,7 +29,7 @@ use fs;
 #-######################################################################################
 sub new($$) {
     my ($type, $o) = @_;
-    
+
     bless $o, ref $type || $type;
     return $o;
 }
@@ -51,7 +51,7 @@ sub enteringStep($$) {
 	    my @l = ref $needs ? @$needs : $needs;
 	    $reachable = min(map { $o->{steps}{$_}{done} || 0 } @l);
 	}
-	$o->{steps}{$s}{reachable} = 1 if $reachable; 
+	$o->{steps}{$s}{reachable} = 1 if $reachable;
     }
 }
 sub leavingStep($$) {
@@ -62,7 +62,7 @@ sub leavingStep($$) {
 
     while (my $f = shift @{$o->{steps}{$step}{toBeDone} || []}) {
 	eval { &$f() };
-	$o->ask_warn(_("Error"), [ 
+	$o->ask_warn(_("Error"), [
 _("An error occurred, i don't know how to handle it nicely,
 so continue at your own risk :("), $@ ]) if $@;
     }
@@ -86,9 +86,9 @@ sub selectLanguage {
     }
 }
 #------------------------------------------------------------------------------
-sub selectKeyboard { 
+sub selectKeyboard {
     my ($o) = @_;
-    keyboard::setup($o->{keyboard}) 
+    keyboard::setup($o->{keyboard})
   }
 #------------------------------------------------------------------------------
 sub selectPath {}
@@ -113,7 +113,7 @@ sub rebootNeeded($) {
 sub choosePartitionsToFormat($$) {
     my ($o, $fstab) = @_;
 
-    foreach (@$fstab) { 
+    foreach (@$fstab) {
 	$_->{toFormat} = ($_->{mntpoint} && isExt2($_) || isSwap($_)) &&
 	  ($_->{notFormatted} || $o->{partitioning}{autoformat});
     }
@@ -158,7 +158,7 @@ sub afterInstallPackages($) {
 }
 
 #------------------------------------------------------------------------------
-sub selectMouse($) { 
+sub selectMouse($) {
     my ($o) = @_;
 }
 
@@ -173,7 +173,7 @@ sub configureNetwork($) {
     network::add2hosts("$etc/hosts", $o->{netc}{HOSTNAME}, map { $_->{IPADDR} } @{$o->{intf}});
     network::sethostname($o->{netc}) unless $::testing;
     network::addDefaultRoute($o->{netc}) unless $::testing;
-    #-res_init();		#- reinit the resolver so DNS changes take affect     
+    #-res_init();		#- reinit the resolver so DNS changes take affect
 }
 
 #------------------------------------------------------------------------------
@@ -182,7 +182,7 @@ sub pcmciaConfig($) {
     my $t = $o->{pcmcia};
     my $f = "$o->{prefix}/etc/sysconfig/pcmcia";
 
-    # should be set after installing the package above else the file will be renamed.
+    #- should be set after installing the package above else the file will be renamed.
     setVarsInSh($f, {
 	PCMCIA    => $t ? "yes" : "no",
 	PCIC      => $t,
@@ -278,7 +278,7 @@ sub createBootdisk($) {
 
     my @l = detect_devices::floppies();
 
-    $dev = shift @l || die _("no floppy available") 
+    $dev = shift @l || die _("no floppy available")
       if $dev eq "1"; #- special case meaning autochoose
 
     return if $::testing;

@@ -36,11 +36,11 @@ $resolution_wanted = "1024x768";
 }
 
 %videomemory = (
-    __("256 kb") => 256, 
-    __("512 kb") => 512, 
-    __("1 mb") => 1024, 
-    __("2 mb") => 2048, 
-    __("4 mb") => 4096, 
+    __("256 kb") => 256,
+    __("512 kb") => 512,
+    __("1 mb") => 1024,
+    __("2 mb") => 2048,
+    __("4 mb") => 4096,
     __("8 mb") => 8192,
     __("16 mb or more") => 16384,
 );
@@ -87,7 +87,7 @@ $resolution_wanted = "1024x768";
 	1600 => 75.0,
 );
 
-#- * Screen/video card configuration. 
+#- * Screen/video card configuration.
 %ramdacs = (
     __("No RAMDAC Setting (recommended)")               => '',
     __("AT&T 20C490 (S3 and AGX servers, ARK driver)"), => 'att20c490',
@@ -149,22 +149,22 @@ $resolution_wanted = "1024x768";
 $intro_text = "
 This program will create a basic XF86Config file, based on menu selections you make.
 
-The XF86Config file usually resides in /usr/X11R6/lib/X11 or /etc/X11. A 
-sample XF86Config file is supplied with XFree86; it is configured for a 
-standard VGA card and monitor with 640x480 resolution. 
+The XF86Config file usually resides in /usr/X11R6/lib/X11 or /etc/X11. A
+sample XF86Config file is supplied with XFree86; it is configured for a
+standard VGA card and monitor with 640x480 resolution.
 
-You can either take the sample XF86Config as a base and edit it for your 
-configuration, or let this program produce a base XF86Config file for your 
-configuration and fine-tune it. Refer to /usr/X11R6/lib/X11/doc/README.Config 
-for a detailed overview of the configuration process. 
+You can either take the sample XF86Config as a base and edit it for your
+configuration, or let this program produce a base XF86Config file for your
+configuration and fine-tune it. Refer to /usr/X11R6/lib/X11/doc/README.Config
+for a detailed overview of the configuration process.
 
-For accelerated servers (including accelerated drivers in the SVGA server), 
-there are many chipset and card-specific options and settings. This program 
-does not know about these. On some configurations some of these settings must 
-be specified. Refer to the server man pages and chipset-specific READMEs. 
+For accelerated servers (including accelerated drivers in the SVGA server),
+there are many chipset and card-specific options and settings. This program
+does not know about these. On some configurations some of these settings must
+be specified. Refer to the server man pages and chipset-specific READMEs.
 
-Before continuing with this program, make sure you know the chipset and 
-amount of video memory on your video card. SuperProbe can help with this.  
+Before continuing with this program, make sure you know the chipset and
+amount of video memory on your video card. SuperProbe can help with this.
 It is also helpful if you know what server you want to run.";
 
 $finalcomment_text = "
@@ -195,38 +195,38 @@ $cirrus_comment = '
 ';
 
 $probeonlywarning_text = '
-It is possible that the hardware detection routines in the server some how 
-cause the system to crash and the screen to remain blank. If this is the 
-case, skip this step the next time. The server may need a 
-Ramdac, ClockChip or special option (e.g. "nolinear" for S3) to probe 
+It is possible that the hardware detection routines in the server some how
+cause the system to crash and the screen to remain blank. If this is the
+case, skip this step the next time. The server may need a
+Ramdac, ClockChip or special option (e.g. "nolinear" for S3) to probe
 and start-up correctly.
 ';
 
 $monitorintro_text = __('
-Now we want to set the specifications of the monitor. The two critical 
-parameters are the vertical refresh rate, which is the rate at which the 
-the whole screen is refreshed, and most importantly the horizontal sync rate, 
+Now we want to set the specifications of the monitor. The two critical
+parameters are the vertical refresh rate, which is the rate at which the
+the whole screen is refreshed, and most importantly the horizontal sync rate,
 which is the rate at which scanlines are displayed.
 
-The valid range for horizontal sync and vertical sync should be documented 
-in the manual of your monitor. If in doubt, check the monitor database 
+The valid range for horizontal sync and vertical sync should be documented
+in the manual of your monitor. If in doubt, check the monitor database
 /usr/X11R6/lib/X11/doc/Monitors to see if your monitor is there.
 ');
 
 $hsyncintro_text = __('
-You must indicate the horizontal sync range of your monitor. You can either 
+You must indicate the horizontal sync range of your monitor. You can either
 select one of the predefined ranges below that correspond to industry-
 standard monitor types, or give a specific range.
 
-It is VERY IMPORTANT that you do not specify a monitor type with a horizontal 
-sync range that is beyond the capabilities of your monitor. If in doubt, 
+It is VERY IMPORTANT that you do not specify a monitor type with a horizontal
+sync range that is beyond the capabilities of your monitor. If in doubt,
 choose a conservative setting.
 ');
 
 $vsyncintro_text = __('
-You must indicate the vertical sync range of your monitor. You can either 
+You must indicate the vertical sync range of your monitor. You can either
 select one of the predefined ranges below that correspond to industry-
-standard monitor types, or give a specific range. For interlaced modes, 
+standard monitor types, or give a specific range. For interlaced modes,
 the number that counts is the high one (e.g. 87 Hz rather than 43 Hz).
 ');
 
@@ -234,7 +234,7 @@ $XF86firstchunk_text = '
 # File generated by XConfigurator.
 
 # **********************************************************************
-# Refer to the XF86Config(4/5) man page for details about the format of 
+# Refer to the XF86Config(4/5) man page for details about the format of
 # this file.
 # **********************************************************************
 
@@ -264,7 +264,7 @@ EndSection
 
 Section "ServerFlags"
 
-    # Uncomment this to cause a core dump at the spot where a signal is 
+    # Uncomment this to cause a core dump at the spot where a signal is
     # received.  This may leave the console in an unusable state, but may
     # provide a better stack trace in the core dump to aid in debugging
     #NoTrapSignals
@@ -299,14 +299,14 @@ Section "Keyboard"
 
     AutoRepeat  500 5
 
-    # Let the server do the NumLock processing.  This should only be 
+    # Let the server do the NumLock processing.  This should only be
     # required when using pre-R6 clients
     #ServerNumLock
 
     # Specify which keyboard LEDs can be user-controlled (eg, with xset(1))
     #Xleds      1 2 3
 
-    #To set the LeftAlt to Meta, RightAlt key to ModeShift, 
+    #To set the LeftAlt to Meta, RightAlt key to ModeShift,
     #RightCtl key to Compose, and ScrollLock key to ModeLock:
 
     LeftAlt        Meta
@@ -535,9 +535,9 @@ Modeline "1600x1200"  220    1600 1616 1808 2080  1200 1204 1207 1244 +HSync +VS
 # 1280x1024 @ 100 Hz, 107.16 kHz hsync
 Modeline "1280x1024"  181.75 1280 1312 1440 1696  1024 1031 1046 1072 -HSync -VSync
 
-# 1800x1440 @ 64Hz, 96.15 kHz hsync 
+# 1800x1440 @ 64Hz, 96.15 kHz hsync
 ModeLine "1800X1440"  230    1800 1896 2088 2392 1440 1441 1444 1490 +HSync +VSync
-# 1800x1440 @ 70Hz, 104.52 kHz hsync 
+# 1800x1440 @ 70Hz, 104.52 kHz hsync
 ModeLine "1800X1440"  250    1800 1896 2088 2392 1440 1441 1444 1490 +HSync +VSync
 
 # 512x384 @ 78 Hz, 31.50 kHz hsync
