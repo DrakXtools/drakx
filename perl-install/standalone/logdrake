@@ -349,6 +349,7 @@ sub alert_config() {
     my %options = getVarsFromSh($conffile);
     $options{LOAD} ||= 3;
     $options{MAIL} ||= "root";
+    $options{SMTP} ||= "localhost";
     
     my $service = {
 		  httpd => N("Apache World Wide Web Server"), 
@@ -403,15 +404,20 @@ sub alert_config() {
                                  },
                          email => {
                                    name => N("Alert configuration") . "\n\n" .
-                                   N("Please enter your email address below "),
+                                   N("Please enter your email address below ") . "\n" .
+                                   N("and enter the name (or the IP) of the smtp server you whish to use"),
                                    data => [
-                                            { label => "Email", val => \$options{MAIL},
-                                            },
+                                            { label => "Email address", val => \$options{MAIL} },
+                                            { label => "Email server", val => \$options{SMTP} },
                                            ],
                                    complete => sub {
                                        if ($options{MAIL} !~ /[\w.-]*\@[\w.-]/ && !member($options{MAIL}, map { $_->[0] } list_passwd())) {
-                                           err_dialog(N("Wrong email"), N("\"%s\" neither is a valid email nor is an existing local user!",
+                                           err_dialog(N("Error"), N("\"%s\" neither is a valid email nor is an existing local user!",
                                                                           $options{MAIL}));
+                                           return 1;
+                                       }
+                                       if (member($options{MAIL}, map { $_->[0] } list_passwd()) && $options{SMP} !~ /localhost/) {
+                                           err_dialog(N("Error"), N("\"%s\" is a local user but you did not select a local smtp, so you must use a complete email address!", $options{MAIL}));
                                            return 1;
                                        }
                                    },
@@ -457,14 +463,15 @@ $r .= "Load is huge: $load\n" if $load > $options{LOAD};
 
 #- report it
 if ($r) {
-	my $F;
-	open $F, '|/usr/sbin/sendmail -oi -t';
-	print $F qq(Subject: logdrake Mail Alert
-From: root\@localhost
-To: $options{MAIL}
-);
-	print $F "*** " . chomp_(`date`) . " ***\n";
-	print $F $r;
+    use Mail::Mailer;
+    my $mailer = Mail::Mailer->new('smtp', Server => $options{SMTP});
+    $mailer->open({ From    => 'root@localhost',
+                    To      => $options{MAIL},
+                    Subject => "DrakLog Mail Alert",
+                  })
+      or die "Can't open: $!\n";
+    print $mailer $r;
+    $mailer->close;
 }
 
 # EOF);
