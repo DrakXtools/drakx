@@ -1029,6 +1029,7 @@ sub ask_browse_tree_info {
 					   $w->{retval} = $val;
 					   Gtk2->main_quit;
 				       }), 0, 1, 20);
+	$w->show;
 	$w;
     } @l;
     @buttons = reverse @buttons if !$::isInstall;    
@@ -1041,10 +1042,11 @@ sub ask_browse_tree_info {
 	gtkpack__($box1, gtknew('CheckButton', text => $common->{auto_deps}, active_ref => \$common->{state}{auto_deps}));
     }
     $box1->pack_end(my $status = gtknew('Label'), 0, 1, 20);
+    $status->show;
 
     $w->{window}->set_size_request(map { $_ - 2 * $border - 4 } $::windowwidth, $::windowheight) if !$::isInstall;
     $buttons[0]->grab_focus;
-    $w->{rwindow}->show_all;
+    $w->{rwindow}->show;
 
     #- TODO: $tree->queue_draw is a workaround to a bug in gtk-2.2.1; submit it in their bugzilla
     my @toolbar = (ftout  =>  [ N("Expand Tree"), sub { $tree->expand_all; $tree->queue_draw } ],
