@@ -111,7 +111,7 @@ sub gtkbuttonset {
 
 sub create_pixbutton {
     my ($label, $pix, $reverse_order) = @_;
-    gtkadd(new Gtk::Button(), gtkpack_(new Gtk::HBox(0, 3), 1, "", $reverse_order ? (0, $label, $pix ? (0, $pix) : ()) : ($pix ? (0, $pix) : (), 0, $label), 1, "" ));
+    gtkadd(new Gtk::Button(), gtkpack_(new Gtk::HBox(0, 3), 1, "", $reverse_order ? (0, $label, $pix ? (0, $pix) : ()) : ($pix ? (0, $pix) : (), 0, $label), 1, ""));
 }
 
 sub gtkentry {
