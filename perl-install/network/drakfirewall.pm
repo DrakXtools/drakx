@@ -68,8 +68,11 @@ sub port2server {
 sub check_ports_syntax {
     my ($ports) = @_;
     foreach (split ' ', $ports) {
-	my ($nb) = m!^(\d+)/(tcp|udp)$! or return $_;
-	1 <= $nb && $nb <= 65535 or return $_;
+	my ($nb, $range, $nb2) = m!^(\d+)(:(\d+))?/(tcp|udp)$! or return $_;
+	foreach my $port ($nb, if_($range, $nb2)) {
+	    1 <= $port && $port <= 65535 or return $_;
+	}
+	$nb < $nb2 or return $_ if $range;
     }
     '';
 }
@@ -165,7 +168,9 @@ Have a look at /etc/services for information."),
 			    if (my $invalid_port = check_ports_syntax($unlisted)) {
 				$in->ask_warn('', N("Invalid port given: %s.
 The proper format is \"port/tcp\" or \"port/udp\", 
-where port is between 1 and 65535.", $invalid_port));
+where port is between 1 and 65535.
+
+You can also give a range of ports (eg: 24300:24350/udp)", $invalid_port));
 				return 1;
 			    }
 			},
