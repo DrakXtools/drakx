@@ -5,7 +5,7 @@ use run_program;
 use network::tools;
 use network::ethernet;
 use modules;
-
+use Data::Dumper;
 use vars qw(@ISA @EXPORT);
 use MDK::Common::Globals "network", qw($in $prefix);
 
@@ -34,7 +34,7 @@ If you don't know, choose 'use pppoe'"), $l) or return;
     if ($type eq 'pppoe') {
 	$in->do_pkgs->install("rp-$type");
 	$netcnx->{type} = "adsl_$type";
-	$netcnx->{"adsl_$type"} = {};
+#	$netcnx->{"adsl_$type"} = {};
 	adsl_conf($netcnx->{"adsl_$type"}, $netc, $intf, $type) or goto conf_adsl_step1;
 	#-network::configureNetwork($prefix, $netc, $in, $intf, $first_time);
 #  	if ($::isStandalone and $netc->{NET_DEVICE}) {
@@ -83,9 +83,11 @@ If you don't know, choose 'use pppoe'"), $l) or return;
 }
 
 sub adsl_ask_info {
-    my ($adsl, $netc, $intf) = @_;
+    my ($adsl, $netc, $intf, $adsl_type) = @_;
+    my $pppoe_file = "/etc/ppp/pppoe.conf";
+    my $pppoe_conf = { getVarsFromSh($pppoe_file) } if ($adsl_type =~ /pppoe/ && -f $pppoe_file);
     add2hash($netc, { dnsServer2 => '', dnsServer3 => '', DOMAINNAME2 => '' });
-    add2hash($adsl, { login => '', passwd => '', passwd2 => '' });
+    add2hash($adsl, { login => "$pppoe_conf->{USER}", passwd => '', passwd2 => '' });
     ask_info2($adsl, $netc);
 }
 
@@ -101,7 +103,7 @@ sub adsl_conf {
     my ($adsl, $netc, $intf, $adsl_type) = @_;
 
   adsl_conf_step_1:
-    adsl_ask_info($adsl, $netc, $intf) or return;
+    adsl_ask_info ($adsl, $netc, $intf, $adsl_type) or return;
   adsl_conf_step_2:
     $adsl_type =~ /speedtouch|eci/ or conf_network_card($netc, $intf, 'static', '10.0.0.10') or goto adsl_conf_step_1;
     adsl_conf_backend($adsl, $netc, $adsl_type);

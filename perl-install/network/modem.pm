@@ -8,17 +8,19 @@ use mouse;
 use network::tools;
 use vars qw(@ISA @EXPORT);
 use MDK::Common::Globals "network", qw($in $prefix);
+use Data::Dumper;
 
 @ISA = qw(Exporter);
 @EXPORT = qw(pppConfig);
 
 sub configure {
-    my ($netcnx, $mouse, $netc) = @_;
+    my ($netcnx, $mouse, $netc, $intf) = @_;
     $netcnx->{type} = 'modem';
-    $netcnx->{$netcnx->{type}} = {};
-    $netcnx->{modem}{device} = $netc->{autodetect}{modem};
-  modem_step_1:
-    pppConfig($netcnx->{$netcnx->{type}}, $mouse, $netc) or return;
+#    $netcnx->{$netcnx->{type}} = {};
+#    $netcnx->{modem}{device} = $netc->{autodetect}{modem};
+#  modem_step_1:
+    $netcnx->{$netcnx->{type}}->{login} = ($netcnx->{$netcnx->{type}}->{auth} eq 'PAP' || $netcnx->{$netcnx->{type}}->{auth} eq 'CHAP') && $intf->{ppp0}{PAPNAME};
+    pppConfig($netcnx->{$netcnx->{type}}, $mouse, $netc, $intf) or return;
     write_cnx_script($netc, "modem",
 q(
 /sbin/route del default
@@ -31,7 +33,7 @@ killall pppd
 }
 
 sub pppConfig {
-    my ($modem, $mouse, $netc) = @_;
+    my ($modem, $mouse, $netc, $intf) = @_;
 
     $mouse ||= {};
     $mouse->{device} ||= readlink "$prefix/dev/mouse";

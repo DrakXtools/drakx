@@ -8,7 +8,7 @@ use modules;
 use any;
 use mouse;
 use network;
-
+use Data::Dumper;
 use network::tools;
 use MDK::Common::Globals "network", qw($in $prefix $connect_file $disconnect_file $connect_prog);
 
@@ -215,8 +215,8 @@ If you don't want to use the auto detection, deselect the checkbox.
 			  }
 			 ) or goto step_1;
 
-#    load_conf ($netcnx, $netc, $intf);
-    $conf{modem} and do { pre_func("modem"); require network::modem; network::modem::configure($netcnx, $mouse, $netc) or goto step_2 };
+    load_conf ($netcnx, $netc, $intf);
+    $conf{modem} and do { pre_func("modem"); require network::modem; network::modem::configure($netcnx, $mouse, $netc, $intf) or goto step_2 };
     $conf{winmodem} and do { pre_func("winmodem"); require network::modem; network::modem::winmodemConfigure($netc) or goto step_2 }; 
     $conf{isdn} and do { pre_func("isdn"); require network::isdn; network::isdn::configure($netcnx, $netc) or goto step_2 };
     $conf{adsl} and do { pre_func("adsl"); require network::adsl; network::adsl::configure($netcnx, $netc, $intf, $first_time) or goto step_2 };
@@ -496,6 +496,7 @@ sub get_profiles {
     map { if_(/drakconnect_conf\.(.*)/, $1) } all("$::prefix/etc/sysconfig/network-scripts");
 }
 
+
 sub load_conf {
     my ($netcnx, $netc, $intf) = @_;
     my $adsl_pptp = {};
@@ -508,21 +509,21 @@ sub load_conf {
 
     if (-e "$prefix/etc/sysconfig/network-scripts/drakconnect_conf") {
 	foreach (cat_("$prefix/etc/sysconfig/network-scripts/drakconnect_conf")) {
-	    /^DNSPrimaryIP=(.*)$/ and $netc->{dnsServer} = $1;
-	    /^DNSSecondaryIP=(.*)$/ and $netc->{dnsServer2} = $1;
-	    /^DNSThirdIP=(.*)$/ and $netc->{dnsServer3} = $1;
+#	    /^DNSPrimaryIP=(.*)$/ and $netc->{dnsServer} = $1;
+#	    /^DNSSecondaryIP=(.*)$/ and $netc->{dnsServer2} = $1;
+#	    /^DNSThirdIP=(.*)$/ and $netc->{dnsServer3} = $1;
 	    /^InternetAccessType=(.*)$/ and $netcnx->{type} = $1;
 	    /^InternetInterface=(.*)$/ and $netcnx->{NET_INTERFACE} = $1;
 	    /^InternetGateway=(.*)$/ and $netc->{GATEWAY} = $1;
-	    /^SystemName=(.*)$/ and $system_name = $1;
-	    /^DomainName=(.*)$/ and $domain_name = $1;
-	    /^Eth([0-9])Known=true$/ and $intf->{"eth$1"}{DEVICE} = "eth$1";
-	    /^Eth([0-9])IP=(.*)$/ && $intf->{"eth$1"}{DEVICE} and $intf->{"eth$1"}{IPADDR} = $2;
-	    /^Eth([0-9])Mask=(.*)\n/ && $intf->{"eth$1"}{DEVICE} and $intf->{"eth$1"}{NETMASK} = $2;
-	    /^Eth([0-9])BootProto=(.*)\n/ && $intf->{"eth$1"}{DEVICE} and $intf->{"eth$1"}{BOOTPROTO} = $2;
-	    /^Eth([0-9])OnBoot=(.*)\n/ && $intf->{"eth$1"}{DEVICE} and $intf->{"eth$1"}{ONBOOT} = $2;
-	    /^Eth([0-9])Hostname=(.*)\n/ && $intf->{"eth$1"}{DEVICE} and $netc->{HOSTNAME} = $2;
-	    /^Eth([0-9])Driver=(.*)\n/ && $intf->{"eth$1"}{DEVICE} and $intf->{"eth$1"}{driver} = $2;
+#	    /^SystemName=(.*)$/ and $system_name = $1;
+#	    /^DomainName=(.*)$/ and $domain_name = $1;
+# 	    /^Eth([0-9])Known=true$/ and $intf->{"eth$1"}{DEVICE} = "eth$1";
+# 	    /^Eth([0-9])IP=(.*)$/ && $intf->{"eth$1"}{DEVICE} and $intf->{"eth$1"}{IPADDR} = $2;
+# 	    /^Eth([0-9])Mask=(.*)\n/ && $intf->{"eth$1"}{DEVICE} and $intf->{"eth$1"}{NETMASK} = $2;
+# 	    /^Eth([0-9])BootProto=(.*)\n/ && $intf->{"eth$1"}{DEVICE} and $intf->{"eth$1"}{BOOTPROTO} = $2;
+# 	    /^Eth([0-9])OnBoot=(.*)\n/ && $intf->{"eth$1"}{DEVICE} and $intf->{"eth$1"}{ONBOOT} = $2;
+# 	    /^Eth([0-9])Hostname=(.*)\n/ && $intf->{"eth$1"}{DEVICE} and $netc->{HOSTNAME} = $2;
+# 	    /^Eth([0-9])Driver=(.*)\n/ && $intf->{"eth$1"}{DEVICE} and $intf->{"eth$1"}{driver} = $2;
 	    /^ISDNDriver=(.*)$/ and $isdn->{driver} = $1;
 	    /^ISDNDeviceType=(.*)$/ and $isdn->{type} = $1;
 	    /^ISDNIrq=(.*)/ and $isdn->{irq} = $1;
@@ -549,18 +550,18 @@ sub load_conf {
 	    /^PPPProviderDomain=(.*)$/ and $modem->{domain} = $1;
 	    /^PPPProviderDNS1=(.*)$/ and $modem->{dns1} = $1;
 	    /^PPPProviderDNS2=(.*)$/ and $modem->{dns2} = $1;
-	    /^PPPLogin=(.*)$/ and $modem->{login} = $1;
+	    #/^PPPLogin=(.*)$/ and $modem->{login} = $1;
 	    /^PPPPassword=(.*)$/ and $modem->{passwd} = $1;
 	    /^PPPAuthentication=(.*)$/ and $modem->{auth} = $1;
 	    if (/^PPPSpecialCommand=(.*)$/) {
 		$netcnx->{type} eq 'isdn_external' and $netcnx->{$netcnx->{type}}{special_command} = $1;
 	    }
-	    /^ADSLLogin=(.*)$/ and $adsl_pppoe->{login} = $1;
-	    /^ADSLPassword=(.*)$/ and $adsl_pppoe->{passwd} = $1;
+#	    /^ADSLLogin=(.*)$/ and $adsl_pppoe->{login} = $1;
+#	    /^ADSLPassword=(.*)$/ and $adsl_pppoe->{passwd} = $1;
 	    /^DOMAINNAME2=(.*)$/ and $netc->{DOMAINNAME2} = $1;
 	}
     }
-    $system_name && $domain_name and $netc->{HOSTNAME} = join '.', $system_name, $domain_name;
+#    $system_name && $domain_name and $netc->{HOSTNAME} = join ('.', $system_name, $domain_name);
     $adsl_pptp->{$_} = $adsl_pppoe->{$_} foreach 'login', 'passwd', 'passwd2';
     $isdn_external->{$_} = $modem->{$_} foreach 'device', 'connection', 'phone', 'domain', 'dns1', 'dns2', 'login', 'passwd', 'auth';
     $netcnx->{adsl_pptp} = $adsl_pptp;
@@ -568,15 +569,16 @@ sub load_conf {
     $netcnx->{modem} = $modem;
     $netcnx->{modem} = $isdn_external;
     $netcnx->{isdn_internal} = $isdn;
-    -e "$prefix/etc/sysconfig/network" and put_in_hash($netc, network::read_conf("$prefix/etc/sysconfig/network"));
-    foreach (glob_("$prefix/etc/sysconfig/ifcfg-*")) {
-	my $l = network::read_interface_conf($_);
-	$intf->{$l->{DEVICE}} = $l;
-    }
-    my $file = "$prefix/etc/resolv.conf";
-    if (-e $file) {
-	put_in_hash($netc, network::read_resolv_conf($file));
-    }
+#     -e "$prefix/etc/sysconfig/network" and put_in_hash($netc, network::read_conf("$prefix/etc/sysconfig/network"));
+#     foreach (glob_("$prefix/etc/sysconfig/ifcfg-*")) {
+# 	my $l = network::read_interface_conf($_);
+# 	$intf->{$l->{DEVICE}} = $l;
+#     }
+#     my $file = "$prefix/etc/resolv.conf";
+#     if (-e $file) {
+# 	put_in_hash($netc, network::read_resolv_conf($file));
+#     }
+    network::read_all_conf($prefix, $netc, $intf);
 }
 
 #- ensures the migration from old config files

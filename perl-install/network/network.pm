@@ -114,7 +114,7 @@ sub write_resolv_conf {
 	    @new, @old;
 	};
 	output($file, @search, @nameserver, (map { "# $_\n" } @unknown), "\n# ppp temp entry\n");
-
+	
 	#-res_init();		# reinit the resolver so DNS changes take affect
 	1;
     } else {
@@ -417,7 +417,7 @@ sub read_all_conf {
     add2hash($netc, read_conf("$prefix/etc/sysconfig/network")) if -r "$prefix/etc/sysconfig/network";
     add2hash($netc, read_resolv_conf("$prefix/etc/resolv.conf")) if -r "$prefix/etc/resolv.conf";
     foreach (all("$prefix/etc/sysconfig/network-scripts")) {
-	if (/ifcfg-(\w+)/ && $1 ne 'lo' && $1 !~ /ppp/) {
+	if (/ifcfg-(\w+)/ && $1 ne 'lo') {
 	    my $intf = findIntf($intf, $1);
 	    add2hash($intf, { getVarsFromSh("$prefix/etc/sysconfig/network-scripts/$_") });
 	}

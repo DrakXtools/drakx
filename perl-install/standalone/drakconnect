@@ -601,6 +601,7 @@ Create one first by clicking on 'Configure'")),1,1,0);
     my $vbox2 = new Gtk2::VBox(0,0);
     $frame1->add($vbox2);
     my $i = 0;
+
     my @conf_data = ([N("Card IRQ"), \$cnx->{irq} ],
 		     [N("Card mem (DMA)"), \$cnx->{mem} ],
 		     [N("Card IO"), \$cnx->{io} ],
