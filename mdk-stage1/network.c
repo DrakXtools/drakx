@@ -684,7 +684,8 @@ static int mirrorlist_entry_split(const char *entry, char *mirror[4]) /* mirror 
 }
 
 
-static int choose_mirror_from_host_list(char *mirrorlist[][4], const char *protocol, char *medium, char **selected_host, char **filepath) {
+static int choose_mirror_from_host_list(char *mirrorlist[][4], const char *protocol, char *medium, char **selected_host, char **filepath)
+{
 	enum return_type results;
 	char *hostlist[MIRRORLIST_MAX_ITEMS+1] = { "Specify the mirror manually", "-----" };
 	int hostlist_index = 2, mirrorlist_index;
@@ -737,7 +738,8 @@ static int choose_mirror_from_host_list(char *mirrorlist[][4], const char *proto
 }
 
 
-static int choose_mirror_from_list(char *http_proxy_host, char *http_proxy_port, const char *protocol, char **selected_host, char **filepath) {
+static int choose_mirror_from_list(char *http_proxy_host, char *http_proxy_port, const char *protocol, char **selected_host, char **filepath)
+{
 	enum return_type results;
 	char *mirrorlist[MIRRORLIST_MAX_ITEMS+1][4];
 	int mirrorlist_number = 0;
