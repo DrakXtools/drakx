@@ -324,9 +324,10 @@ sub detect() {
     } elsif (@wacom) {
 	#- in case only a wacom has been found, assume an inexistant mouse (necessary).
 	fullname2mouse('none|No mouse', wacom => \@wacom);
+    } elsif (c::kernel_version() =~ /^\Q2.6/) {
+	fullname2mouse('Universal|Any PS/2 & USB mice', unsafe => 1);
     } else {
-	#- defaults to generic serial mouse on ttyS0.
-	fullname2mouse("serial|Generic 2 Button Mouse", unsafe => 1);
+	fullname2mouse("PS/2|Automatic", unsafe => 1);
     }
 }
 
