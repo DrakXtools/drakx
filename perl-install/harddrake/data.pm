@@ -17,8 +17,10 @@ sub unknown {
 
 
 # tree format ("CLASS_ID", "type", "type_icon", configurator, detect_sub)
-# NEVER, NEVER alter CLASS_ID or you'll harddrake2 service to detect changes
+# NEVER, NEVER alter CLASS_ID or you'll see harddrake2 service detect changes
 # in hw configuration ... :-(
+
+# FIXME: add translated items
 
 our @tree =
     (

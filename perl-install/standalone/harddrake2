@@ -116,7 +116,7 @@ gtkflush();
 # Build the gui
 add_icon_path('/usr/share/pixmaps/harddrake2/');
 $w = ugtk2->new(N("Harddrake2 version ") . $harddrake::data::version);
-$w->{window}->set_size_request(760, 550) unless $::isEmbedded;
+$w->{window}->set_size_request(805, 550) unless $::isEmbedded;
 my ($menubar, $factory) = create_factory_menu($w->{rwindow}, @menu_items);
 my $tree_model = Gtk2::TreeStore->new(Gtk2::GType->OBJECT, Gtk2::GType->STRING);
 my $statusbar;
