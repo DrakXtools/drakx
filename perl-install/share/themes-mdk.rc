@@ -136,12 +136,12 @@ style "window"
 
 style "any"
 {
-  base[NORMAL]	  = { 0.75, 0, 0.4 }
-  bg[NORMAL]      = { 0.75, 0, 0.4 }
-  bg[INSENSITIVE] = { 1, 0.6, 0.75 }
-  base[INSENSITIVE]={ 1, 0.6, 0.75 }
-  bg[ACTIVE]      = { 1, 0.6, 0.75 }
-  bg[PRELIGHT]    = { 0.75, 0.2, 0.6 }
+  base[NORMAL]	  = { 0.2, 0.2, 0.4 }
+  bg[NORMAL]      = { 0.2, 0.2, 0.4 }
+  bg[INSENSITIVE] = { 0.6, 0.6, 0.8 }
+  base[INSENSITIVE]={ 0.6, 0.6, 0.8 }
+  bg[ACTIVE]      = { 0.6, 0.6, 0.8 }
+  bg[PRELIGHT]    = { 0.4, 0.4, 0.6 }
   
   text[NORMAL]	  = { 1.0, 1.0, 1.0 }
   fg[NORMAL]  	  = { 1.0, 1.0, 1.0 }
@@ -151,17 +151,17 @@ style "any"
   fg[PRELIGHT]    = { 0.8, 0.8, 1.0 }
 
   bg[SELECTED] = { 1.0, 1.0, 1.0 }
-  fg[SELECTED] = { 0.75, 0, 0.4 }
+  fg[SELECTED] = { 0.2, 0.2, 0.4 }
 }
 
 style "drawing"
 {
-  base[NORMAL]	  = { 1, 0.6, 0.75 }
-  bg[NORMAL]      = { 0.75, 0.2, 0.6 }
-  bg[INSENSITIVE] = { 0.75, 0, 0.4 }
-  base[INSENSITIVE]={ 0.75, 0, 0.4 }
-  bg[ACTIVE]      = { 0.75, 0, 0.4 }
-  bg[PRELIGHT]    = { 0.75, 0.2, 0.6 }
+  base[NORMAL]	  = { 0.6, 0.6, 0.8 }
+  bg[NORMAL]      = { 0.4, 0.4, 0.6 }
+  bg[INSENSITIVE] = { 0.2, 0.2, 0.4 }
+  base[INSENSITIVE]={ 0.2, 0.2, 0.4 }
+  bg[ACTIVE]      = { 0.2, 0.2, 0.4 }
+  bg[PRELIGHT]    = { 0.4, 0.4, 0.6 }
   
   bg[SELECTED] = { 1.0, 1.0, 1.0 }
   fg[SELECTED] = { 0.1, 0.1, 0.1 }
@@ -169,21 +169,21 @@ style "drawing"
 
 style "entry"
 {
-  base[NORMAL] = { 0.75, 0.2, 0.6 }
-  base[ACTIVE] = { 0.75, 0.2, 0.6 }
+  base[NORMAL] = { 0.4, 0.4, 0.6 }
+  base[ACTIVE] = { 0.4, 0.4, 0.6 }
   fg[NORMAL]   = { 1.0, 1.0, 1.0 }
 }
 
 style "notebook"
 {
-  bg[NORMAL]      = { 0.75, 0.2, 0.6 }
-  bg[ACTIVE]      = { 0.75, 0, 0.4 }
+  bg[NORMAL]      = { 0.4, 0.4, 0.6 }
+  bg[ACTIVE]      = { 0.2, 0.2, 0.4 }
   fg[NORMAL]      = { 1.0, 1.0, 1.0 }
 }
 
 style "button" = "any"
 {
-  bg[NORMAL] = { 0.75, 0.2, 0.6 }
+  bg[NORMAL] = { 0.4, 0.4, 0.6 }
   fg[NORMAL] = { 1.0, 1.0, 1.0 }
   bg[PRELIGHT] = { 0.36, 0.36, 0.56 }
   fg[PRELIGHT] = { 0.8, 0.8, 1.0 }
@@ -191,14 +191,14 @@ style "button" = "any"
 
 style "background"
 {
-  bg[NORMAL] = { 1, 0.6, 0.75 }
+  bg[NORMAL] = { 0.6, 0.6, 0.8 }
   bg[PRELIGHT] = { 0.8, 0.8, 0.99 }
 }
 
 style "steps"
 {
   engine "pixmap" { image { function = FLAT_BOX } }
-  bg[NORMAL] = { 0.75, 0.2, 0.6 }
+  bg[NORMAL] = { 0.4, 0.4, 0.6 }
   fg[NORMAL] = { 1.0, 1.0, 1.0 }
 }
 
