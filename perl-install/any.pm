@@ -239,6 +239,8 @@ sub setupBootloader__general {
 
     ($b->{method}, my $method_choices) = bootloader::method_choices($fstab);
     my $profiles = bootloader::has_profiles($b);
+    my $previous_acpi_val = bootloader::get_append($b, 'acpi');
+    my $force_acpi = $previous_acpi_val eq 'on';
     my $memsize = bootloader::get_append($b, 'mem');
     my $prev_clean_tmp = my $clean_tmp = any { $_->{mntpoint} eq '/tmp' } @{$all_hds->{special} ||= []};
     my $prev_boot = $b->{boot};
@@ -259,6 +261,9 @@ sub setupBootloader__general {
             { label => N("Video mode"), val => \$b->{vga}, list => [ keys %bootloader::vga_modes ], not_edit => !$::expert, format => sub { $bootloader::vga_modes{$_[0]} }, advanced => 1 },
 		),
             { label => N("Delay before booting default image"), val => \$b->{timeout} },
+	        if_($previous_acpi_val,
+            { label => N("Force ACPI"), val => \$force_acpi, type => 'bool' },
+		),
 		if_($security >= 4 || $b->{password} || $b->{restricted},
             { label => N("Password"), val => \$b->{password}, hidden => 1 },
             { label => N("Password (again)"), val => \$b->{password2}, hidden => 1 },
@@ -305,6 +310,10 @@ sub setupBootloader__general {
 
     bootloader::set_profiles($b, $profiles);
     bootloader::add_append($b, "mem", $memsize);
+    if ($previous_acpi_val) {
+	my $s = $force_acpi ? 'on' : 'off';
+	bootloader::add_append($b, acpi => $s) if $s ne $previous_acpi_val;
+    }
 
     if ($prev_clean_tmp != $clean_tmp) {
 	if ($clean_tmp) {
