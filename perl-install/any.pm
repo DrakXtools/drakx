@@ -751,6 +751,8 @@ sub ask_users {
 	rpm => _("access to rpm tools"),
 	wheel => _("allow \"su\""),
 	adm => _("access to administrative files"),
+	ntools => _("access to network tools"),
+	ctools => _("access to compilation tools"),
     );
     while (1) {
 	$u->{password2} ||= $u->{password} ||= '';
