@@ -203,6 +203,7 @@ sub setupBootloader__general {
     $b->{vga} ||= 'normal';
     if (arch() !~ /ppc/) {
 	$in->ask_from_({ messages => N("Bootloader main options"),
+                      title => N("Boot Style Configuration"),
 			 interactive_help_id => 'setupBootloader',
 		       }, [
             { label => N("Bootloader to use"), val => \$b->{method}, list => [ keys %$method_choices ], format => sub { $method_choices->{$_[0]} } },
