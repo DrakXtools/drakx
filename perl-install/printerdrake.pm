@@ -1171,7 +1171,7 @@ Printing status:\n%s\n\n", @lpq_output);
 	    $dialogtext = _("Test page(s) have been sent to the printer.
 It may take some time before the printer starts.\n");
 	}
-	if ($printer->{configured}{$printer->{OLD_QUEUE}}) {
+	if ($printer->{NEW} == 0) {
 	    $in->ask_warn('',$dialogtext);
 	    return 1;
 	} else {
@@ -1182,6 +1182,100 @@ It may take some time before the printer starts.\n");
 	return 1;
     }
     return 0;
+}
+
+sub printer_help {
+    my ($printer, $in) = @_;
+    my $spooler = $printer->{SPOOLER};
+    my $queue = $printer->{QUEUE};
+    my $default = $printer->{DEFAULT};
+    my $raw = 0;
+    if (($printer->{configured}{$queue}{'queuedata'}{'model'} eq
+	 _("Unknown model")) ||
+	($printer->{configured}{$queue}{'queuedata'}{'model'} eq
+	 _("Raw printer"))) {
+	$raw = 1;
+    }
+    #my $foomatic = $printer->{configured}{$queue}{queuedata}{foomatic};
+    #my $ppd = $printer->{configured}{$queue}{queuedata}{ppd};
+    my $dialogtext;
+    if ($spooler eq "cups") {
+	$dialogtext =
+_("To print a file from the command line (terminal window) you can either use the command \"lpr") .
+($queue ne $default ? " -P $queue" : "") .
+_(" <file>\" or a graphical printing tool: \"xpp <file>\" or \"qtcups <file>\". The graphical tools allow you to choose the printer and to modify the option settings easily.
+These commands you can also use in the \"Printing command\" field of the printing dialogs of many applications, but here do not supply the file name because the file to print is provided by the application.
+") .
+(!$raw ?
+_("
+The \"lpr\" command also allows to modify the option settings for a particular printing job. Simply add the desired settings to the command line, e. g. \"lpr") .
+($queue ne $default ? " -P $queue" : "") .
+_(" -o option=setting -o switch <file>\". To get a list of the options available for the current printer read either the list shown below or click on the \"Print option list\" button.
+
+") . printer::lphelp_output($printer) : "");
+    } elsif ($spooler eq "lprng") {
+	$dialogtext =
+_("To print a file from the command line (terminal window) use the command \"lpr") .
+($queue ne $default ? " -P $queue" : "") . 
+_(" <file>\".
+This command you can also use in the \"Printing command\" field of the printing dialogs of many applications. But here do not supply the file name because the file to print is provided by the application.
+") .
+(!$raw ?
+_("
+The \"lpr\" command also allows to modify the option settings for a particular printing job. Simply add the desired settings to the command line, e. g. \"lpr") .
+($queue ne $default ? " -P $queue" : "") .
+_(" -Z option=setting -Z switch <file>\". To get a list of the options available for the current printer click on the \"Print option list\" button.
+
+") : "");
+    } elsif ($spooler eq "lpd") {
+	$dialogtext =
+_("To print a file from the command line (terminal window) use the command \"lpr") .
+($queue ne $default ? " -P $queue" : "") .
+_(" <file>\".
+This command you can also use in the \"Printing command\" field of the printing dialogs of many applications. But here do not supply the file name because the file to print is provided by the application.
+") .
+(!$raw ?
+_("
+The \"lpr\" command also allows to modify the option settings for a particular printing job. Simply add the desired settings to the command line, e. g. \"lpr") .
+($queue ne $default ? " -P $queue" : "") .
+_(" -o option=setting -o switch <file>\". To get a list of the options available for the current printer click on the \"Print option list\" button.
+
+") : "");
+    } elsif ($spooler eq "pdq") {
+	$dialogtext =
+_("To print a file from the command line (terminal window) use the command \"pdq") .
+($queue ne $default ? " -P $queue" : "") .
+_(" <file>\" or \"lpr") .
+($queue ne $default ? " -P $queue" : "") .
+_(" <file>\".
+This command you can also use in the \"Printing command\" field of the printing dialogs of many applications. But here do not supply the file name because the file to print is provided by the application.
+You can also use the graphical interface \"xpdq\" for setting options and handling printing jobs.
+If you are using KDE as desktop environment you have a \"panic button\", an icon on the desktop, labeled with \"STOP Printer!\", which stops all print jobs immediately when you click it. This is for example useful for paper jams.
+") .
+(!$raw ?
+_("
+The \"pdq\" and \"lpr\" commands also allow to modify the option settings for a particular printing job. Simply add the desired settings to the command line, e. g. \"pdq") . 
+($queue ne $default ? " -P $queue" : "") .
+_(" -aoption=setting -oswitch <file>\".  To get a list of the options available for the current printer read either the list shown below or click on the \"Print option list\" button.
+
+") . printer::pdqhelp_output($printer) : "");
+    }
+    if (!$raw) {
+        my $choice;
+        while ($choice ne _("Close")) {
+	    $choice = $in->ask_from_list_
+	        (_("Printing on the printer \"%s\"", $queue),
+		 $dialogtext,
+		 [ _("Print option list"), _("Close") ],
+		 _("Close"));
+	    if ($choice ne _("Close")) {
+		my $w = $in->wait_message('', _("Printing test page(s)..."));
+	        printer::print_optionlist($printer);
+	    }
+	}
+    } else {
+	$in->ask_warn('',$dialogtext);
+    }
 }
 
 sub copy_queues_from {
@@ -1400,108 +1494,120 @@ sub install_spooler {
     my ($printer, $in) = @_;
     if (!$::testing) {
 	if ($printer->{SPOOLER} eq "cups") {
-	    if ((!$::testing) &&
-		(!printer::files_exist((qw(/usr/lib/cups/cgi-bin/printers.cgi
-					   /sbin/ifconfig
-					   /usr/bin/xpp
-					   /usr/bin/qtcups),
-					(printer::files_exist("/usr/bin/kwin")?
-					 "/usr/bin/kups" : ()),
-					($::expert ? 
-					 "/usr/share/cups/model/postscript.ppd.gz" : ())
-				    )))) {
-		$in->do_pkgs->install(('cups', 'net-tools', 'xpp', 'qtcups', 
-				       if_($in->do_pkgs->is_installed('kdebase'), 'kups'),
-				       ($::expert ? 'cups-drivers' : ())));
+	    {
+		my $w = $in->wait_message('', _("Checking installed software..."));
+		if ((!$::testing) &&
+		    (!printer::files_exist((qw(/usr/lib/cups/cgi-bin/printers.cgi
+					       /sbin/ifconfig
+					       /usr/bin/xpp
+					       /usr/bin/qtcups),
+					    (printer::files_exist("/usr/bin/kwin")?
+					     "/usr/bin/kups" : ()),
+					    ($::expert ? 
+					     "/usr/share/cups/model/postscript.ppd.gz" : ())
+					    )))) {
+		    $in->do_pkgs->install(('cups', 'net-tools', 'xpp', 'qtcups', 
+					   if_($in->do_pkgs->is_installed('kdebase'), 'kups'),
+					   ($::expert ? 'cups-drivers' : ())));
+		}
+		# Check whether the network functionality is configured and
+		# running
+		if (!check_network($printer, $in)) {return 0};
+		# Start daemon
+	        printer::start_service("cups");
+		# Set the CUPS tools as defaults for "lpr", "lpq", "lprm", ...
+	        printer::set_alternative("lpr","/usr/bin/lpr-cups");
+	        printer::set_alternative("lpq","/usr/bin/lpq-cups");
+	        printer::set_alternative("lprm","/usr/bin/lprm-cups");
+	        printer::set_alternative("lp","/usr/bin/lp-cups");
+	        printer::set_alternative("cancel","/usr/bin/cancel-cups");
+	        printer::set_alternative("lpstat","/usr/bin/lpstat-cups");
+	        printer::set_alternative("lpc","/usr/sbin/lpc-cups");
+		# Remove PDQ panic buttons from the user's KDE Desktops
+	        printer::pdq_panic_button("remove");
 	    }
-	    # Check whether the network functionality is configured and
-	    # running
-	    if (!check_network($printer, $in)) {return 0};
-	    # Start daemon
-	    printer::start_service("cups");
 	    # Should it be started at boot time?
 	    start_spooler_on_boot($printer, $in, "cups");
-	    # Set the CUPS tools as defaults for "lpr", "lpq", "lprm", ...
-	    printer::set_alternative("lpr","/usr/bin/lpr-cups");
-	    printer::set_alternative("lpq","/usr/bin/lpq-cups");
-	    printer::set_alternative("lprm","/usr/bin/lprm-cups");
-	    printer::set_alternative("lp","/usr/bin/lp-cups");
-	    printer::set_alternative("cancel","/usr/bin/cancel-cups");
-	    printer::set_alternative("lpstat","/usr/bin/lpstat-cups");
-	    printer::set_alternative("lpc","/usr/sbin/lpc-cups");
-	    # Remove PDQ panic buttons from the user's KDE Desktops
-	    printer::pdq_panic_button("remove");
 	} elsif ($printer->{SPOOLER} eq "lpd") {
-	    # "lpr" conflicts with "LPRng", remove "LPRng"
-	    if ((!$::testing) &&
-		(printer::files_exist((qw(/usr/lib/filters/lpf))))) {
-		my $w = $in->wait_message('', _("Removing LPRng..."));
-		$in->do_pkgs->remove_nodeps('LPRng');
+	    {
+		my $w = $in->wait_message('', _("Checking installed software..."));
+		# "lpr" conflicts with "LPRng", remove "LPRng"
+		if ((!$::testing) &&
+		    (printer::files_exist((qw(/usr/lib/filters/lpf))))) {
+		    my $w = $in->wait_message('', _("Removing LPRng..."));
+		    $in->do_pkgs->remove_nodeps('LPRng');
+		}
+		if ((!$::testing) &&
+		    (!printer::files_exist((qw(/usr/sbin/lpf
+					       /usr/sbin/lpd
+					       /sbin/ifconfig))))) {
+		    $in->do_pkgs->install(('lpr', 'net-tools'));
+		}
+		# Check whether the network functionality is configured and
+		# running
+		if (!check_network($printer, $in)) {return 0};
+		# Start daemon
+	        printer::restart_service("lpd");
+		# Set the LPD tools as defaults for "lpr", "lpq", "lprm", ...
+	        printer::set_alternative("lpr","/usr/bin/lpr-lpd");
+	        printer::set_alternative("lpq","/usr/bin/lpq-lpd");
+	        printer::set_alternative("lprm","/usr/bin/lprm-lpd");
+	        printer::set_alternative("lpc","/usr/sbin/lpc-lpd");
+		# Remove PDQ panic buttons from the user's KDE Desktops
+	        printer::pdq_panic_button("remove");
 	    }
-	    if ((!$::testing) &&
-		(!printer::files_exist((qw(/usr/sbin/lpf
-					   /usr/sbin/lpd
-					   /sbin/ifconfig))))) {
-		$in->do_pkgs->install(('lpr', 'net-tools'));
-	    }
-	    # Check whether the network functionality is configured and
-	    # running
-	    if (!check_network($printer, $in)) {return 0};
-	    # Start daemon
-	    printer::restart_service("lpd");
 	    # Should it be started at boot time?
 	    start_spooler_on_boot($printer, $in, "lpd");
-	    # Set the LPD tools as defaults for "lpr", "lpq", "lprm", ...
-	    printer::set_alternative("lpr","/usr/bin/lpr-lpd");
-	    printer::set_alternative("lpq","/usr/bin/lpq-lpd");
-	    printer::set_alternative("lprm","/usr/bin/lprm-lpd");
-	    printer::set_alternative("lpc","/usr/sbin/lpc-lpd");
-	    # Remove PDQ panic buttons from the user's KDE Desktops
-	    printer::pdq_panic_button("remove");
 	} elsif ($printer->{SPOOLER} eq "lprng") {
-	    # "LPRng" conflicts with "lpr", remove "lpr"
-	    if ((!$::testing) &&
-		(printer::files_exist((qw(/usr/sbin/lpf))))) {
-		my $w = $in->wait_message('', _("Removing LPD..."));
-		$in->do_pkgs->remove_nodeps('lpr');
+	    {
+		my $w = $in->wait_message('', _("Checking installed software..."));
+		# "LPRng" conflicts with "lpr", remove "lpr"
+		if ((!$::testing) &&
+		    (printer::files_exist((qw(/usr/sbin/lpf))))) {
+		    my $w = $in->wait_message('', _("Removing LPD..."));
+		    $in->do_pkgs->remove_nodeps('lpr');
+		}
+		if ((!$::testing) &&
+		    (!printer::files_exist((qw(/usr/lib/filters/lpf
+					       /usr/sbin/lpd
+					       /sbin/ifconfig))))) {
+		    $in->do_pkgs->install('LPRng', 'net-tools');
+		}
+		# Check whether the network functionality is configured and
+		# running
+		if (!check_network($printer, $in)) {return 0};
+		# Start daemon
+	        printer::restart_service("lpd");
+		# Set the LPRng tools as defaults for "lpr", "lpq", "lprm", ...
+	        printer::set_alternative("lpr","/usr/bin/lpr-lpd");
+	        printer::set_alternative("lpq","/usr/bin/lpq-lpd");
+	        printer::set_alternative("lprm","/usr/bin/lprm-lpd");
+	        printer::set_alternative("lp","/usr/bin/lp-lpd");
+	        printer::set_alternative("cancel","/usr/bin/cancel-lpd");
+	        printer::set_alternative("lpstat","/usr/bin/lpstat-lpd");
+	        printer::set_alternative("lpc","/usr/sbin/lpc-lpd");
+		# Remove PDQ panic buttons from the user's KDE Desktops
+	        printer::pdq_panic_button("remove");
 	    }
-	    if ((!$::testing) &&
-		(!printer::files_exist((qw(/usr/lib/filters/lpf
-					   /usr/sbin/lpd
-					   /sbin/ifconfig))))) {
-		$in->do_pkgs->install('LPRng', 'net-tools');
-	    }
-	    # Check whether the network functionality is configured and
-	    # running
-	    if (!check_network($printer, $in)) {return 0};
-	    # Start daemon
-	    printer::restart_service("lpd");
 	    # Should it be started at boot time?
 	    start_spooler_on_boot($printer, $in, "lpd");
-	    # Set the LPRng tools as defaults for "lpr", "lpq", "lprm", ...
-	    printer::set_alternative("lpr","/usr/bin/lpr-lpd");
-	    printer::set_alternative("lpq","/usr/bin/lpq-lpd");
-	    printer::set_alternative("lprm","/usr/bin/lprm-lpd");
-	    printer::set_alternative("lp","/usr/bin/lp-lpd");
-	    printer::set_alternative("cancel","/usr/bin/cancel-lpd");
-	    printer::set_alternative("lpstat","/usr/bin/lpstat-lpd");
-	    printer::set_alternative("lpc","/usr/sbin/lpc-lpd");
-	    # Remove PDQ panic buttons from the user's KDE Desktops
-	    printer::pdq_panic_button("remove");
 	} elsif ($printer->{SPOOLER} eq "pdq") {
-	    if ((!$::testing) &&
-		(!printer::files_exist((qw(/usr/bin/pdq
-					   /usr/X11R6/bin/xpdq))))) {
-		$in->do_pkgs->install('pdq');
+	    {
+		my $w = $in->wait_message('', _("Checking installed software..."));
+		if ((!$::testing) &&
+		    (!printer::files_exist((qw(/usr/bin/pdq
+					       /usr/X11R6/bin/xpdq))))) {
+		    $in->do_pkgs->install('pdq');
+		}
+		# PDQ has no daemon, so nothing needs to be started
+		
+		# Set the PDQ tools as defaults for "lpr", "lpq", "lprm", ...
+	        printer::set_alternative("lpr","/usr/bin/lpr-pdq");
+	        printer::set_alternative("lpq","/usr/bin/lpq-foomatic");
+	        printer::set_alternative("lprm","/usr/bin/lprm-foomatic");
+		# Add PDQ panic buttons to the user's KDE Desktops
+	        printer::pdq_panic_button("add");
 	    }
-	    # PDQ has no daemon, so nothing needs to be started
-
-	    # Set the PDQ tools as defaults for "lpr", "lpq", "lprm", ...
-	    printer::set_alternative("lpr","/usr/bin/lpr-pdq");
-	    printer::set_alternative("lpq","/usr/bin/lpq-foomatic");
-	    printer::set_alternative("lprm","/usr/bin/lprm-foomatic");
-	    # Add PDQ panic buttons to the user's KDE Desktops
-	    printer::pdq_panic_button("add");
 	}
     }
     1;
@@ -1583,7 +1689,7 @@ sub main {
 
     }
 
-    # If we have chosen a spooler, install it and mark it as the default.
+    # If we have chosen a spooler, install it and mark it as default spooler
     if (($printer->{SPOOLER}) && ($printer->{SPOOLER} ne '')) {
 	if (!install_spooler($printer, $in)) {return;}
         printer::set_default_spooler($printer);
@@ -1657,7 +1763,10 @@ sub main {
 		    # "Standard mode" button is clicked.
 		    $expertswitch = !$in->ask_from_(
 			{messages =>
-			     _("The following printers are configured.\nYou can add some more or modify the existing ones."),
+			     _("The following printers are configured.
+Click on one of them to modify it or
+to get information about it or on 
+\"Add Printer\" to add a new printer."),
 			 cancel => ($::isInstall ? 
 				    ('') : ($::expert ? 
 				  _("Normal Mode") : _("Expert Mode"))),
@@ -1726,6 +1835,7 @@ sub main {
 	    $queue eq _("Done") and last;
 	}
 	if ($newqueue) {
+	    $printer->{NEW} = 1;
 	    #- Set default values for a new queue
 	    $printer::printer_type_inv{$printer->{TYPE}} or 
 		$printer->{TYPE} = printer::default_printer_type($printer);
@@ -1770,6 +1880,7 @@ sub main {
 		$queue = $printer->{QUEUE};
 	    }
 	} else {
+	    $printer->{NEW} = 0;
 	    # Modify a queue, ask which part should be modified
 	    $in->set_help('modifyPrinterMenu') if $::isInstall;
 	    if ($in->ask_from_
@@ -1793,13 +1904,14 @@ What do you want to modify on this printer?",
 				  (($printer->{configured}{$queue}{'queuedata'}{'make'} ne
 				    "") &&
 				   (($printer->{configured}{$queue}{'queuedata'}{'model'} ne
-				    _("Unknown model")) ||
+				    _("Unknown model")) &&
 				    ($printer->{configured}{$queue}{'queuedata'}{'model'} ne
 				    _("Raw printer"))) ?
 				   _("Printer options") : ()),
 				  (($queue ne $printer->{DEFAULT}) ?
 				   _("Set this printer as the default") : ()),
 				  _("Print test pages"),
+				  _("Know how to print with this printer"),
 				  _("Remove printer") ] } ] ) ) {
 		# Stay in the queue edit window until the user clicks "Close"
 		# or deletes the queue
@@ -1868,6 +1980,8 @@ What do you want to modify on this printer?",
 				  _("The printer \"%s\" is set as the default printer now.", $queue));
 		} elsif ($modify eq _("Print test pages")) {
 		    print_testpages($printer, $in, $upNetwork);
+		} elsif ($modify eq _("Know how to print with this printer")) {
+		    printer_help($printer, $in);
 		} elsif ($modify eq _("Remove printer")) {
 		    if ($in->ask_yesorno('',
            _("Do you really want to remove the printer \"%s\"?", $queue), 1)) {
@@ -1923,6 +2037,7 @@ What do you want to modify on this printer?",
     delete($printer->{ARGS});
     delete($printer->{complete});
     delete($printer->{OLD_CHOICE});
+    delete($printer->{NEW});
     #use Data::Dumper;
     #print "###############################################################################\n", Dumper($printer); 
 

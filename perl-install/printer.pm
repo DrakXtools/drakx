@@ -224,7 +224,7 @@ sub set_alternative {
 }    
 
 sub pdq_panic_button {
-    my $setting = @_[0];
+    my $setting = $_[0];
     run_program::rooted($prefix, "/usr/sbin/pdqpanicbutton", "--$setting")
 	|| die "Could not $setting PDQ panic buttons!";
 }
@@ -1042,6 +1042,48 @@ sub print_pages($@) {
 	grep { !/^no entries/ && !(/^Rank\s+Owner/ .. /^\s*$/) } <F>;
     close F;
     @lpq_output;
+}
+
+sub lphelp_output {
+    my ($printer) = @_;
+    my $queue = $printer->{QUEUE};
+    my $lphelp = "/usr/bin/lphelp";
+
+    local *F; 
+    open F, ($::testing ? "$prefix" : "chroot $prefix/ ") . "$lphelp $queue |";
+    $helptext = join("", <F>);
+    close F;
+    return $helptext;
+}
+
+sub pdqhelp_output {
+    my ($printer) = @_;
+    my $queue = $printer->{QUEUE};
+    my $pdq = "/usr/bin/pdq";
+
+    local *F; 
+    open F, ($::testing ? "$prefix" : "chroot $prefix/ ") . "$pdq -h -P $queue  2>&1 |";
+    $helptext = join("", <F>);
+    close F;
+    return $helptext;
+}
+
+sub print_optionlist {
+    my ($printer) = @_;
+    my $queue = $printer->{QUEUE};
+    my $lpr = "/usr/bin/foomatic-printjob";
+
+    # Print the option list pages
+    if ($printer->{configured}{$queue}{queuedata}{foomatic}) {
+        run_program::rooted($prefix, $lpr, "-s", $printer->{SPOOLER},
+			    "-P", $queue, "-o", "docs",
+			    $FOOMATIC_DEFAULT_SPOOLER);
+    } elsif ($printer->{configured}{$queue}{queuedata}{ppd}) {
+	system(($::testing ? "$prefix" : "chroot $prefix/ ") .
+	       "/usr/bin/lphelp $queue | " .
+	       ($::testing ? "$prefix" : "chroot $prefix/ ") .
+	       "$lpr -s $printer->{SPOOLER} -P $queue");
+    }
 }
 
 # ---------------------------------------------------------------
