@@ -1,0 +1,89 @@
+#!/usr/bin/perl
+
+# scannerdrake $Id$
+# Yves Duret <yduret at mandrakesoft.com>
+# Copyright (C) 2001 MandrakeSoft
+# 
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2, or (at your option)
+# any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+
+use lib qw(/usr/lib/libDrakX);
+use interactive;
+use common;
+use standalone;
+use scanner;
+
+$::isEmbedded = ($::XID, $::CCPID) = "@ARGV" =~ /--embedded (\w+) (\w+)/;
+for (@ARGV) {
+    /^--version$/ and die 'version: $Id$ '."\n";
+    /^--help$/ and die 'logdrake [--version] [--help] [--manual] [--device=dev]';
+    /^--update$/ and do {scanner::updateScannerDBfromUsbtable(); quit();};
+    /^--manual$/ and main(1);
+    /^--device=(.*)$/ and do { $::isFile = ($::File) = $1; next };
+}
+
+main();
+
+sub main {
+    $in = 'interactive'->vnew(su, 'default');
+    #$in->do_pkgs->install('sane-backends', 'xsane', if_($in->do_pkgs->is_installed('gimp'),'xsane-gimp'));
+    if ($_[0]) {
+	manual(); quit();
+    }
+    my $wait = $in->wait_message(_("Test ports"), _("Detecting devices ..."));
+    @f = scanner::findScannerUsbport();
+    $wait=undef;
+    (@f) ? auto() : manual();
+    quit();
+}
+
+sub auto {
+    foreach (@f) { 
+	if (member($_->{val}{DESCRIPTION}), keys %$scanner::scannerDB) {
+	    my $name = $_->{val}{DESCRIPTION};
+	    $name =~ s/\s$//; #some HP entry have a trailing space, i will correct usbtable asap
+	    $in->ask_yesorno('scannerdrake',_("%s found on %s, configuring it ?",$name,$_->{port}),1) or manual();
+	    tryConfScanner($name, $_->{port});
+	}
+    }
+}
+
+sub manual {
+    my $s = $in->ask_from_treelist('scannerdrake', _("Select a scanner"), '|', [keys %$scanner::scannerDB]) or return;
+    # DRIVER usb or scsi
+    tryConfScanner($s);
+}
+
+sub dynamic {
+}
+
+sub tryConfScanner {
+    # take care if interactive ouptut is needed (unsupported..)
+    my ($model, $port) = @_;
+    if ($scanner::scannerDB->{$model}{flags}{unsupported}) {
+	$in->ask_warn('scannerdrake', _("This %s scanner is unsupported", $model));
+	return;
+    }
+    scanner::confScanner($model,$port);
+}
+
+sub quit {
+    $::isEmbedded ? kill(USR1, $::CCPID) : $in->exit(0);
+}
+
+#-----------------------------------------------
+# $Log$
+# Revision 1.1  2001/10/10 12:45:48  yduret
+# first apparition on earth..
+#
