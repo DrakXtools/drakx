@@ -1,6 +1,5 @@
 #!/usr/bin/perl 
 #
-# DiskDrake
 # Copyright (C) 2001 by MandrakeSoft (sdupont@mandrakesoft.com)
 #
 # This program is free software; you can redistribute it and/or modify
@@ -438,11 +437,6 @@ sub remove_gs_fonts {
 	output($FontmapGS, @Fontmap_new );
     }
 }
-
-# remove this directory of the de fontpath if there is only 2 files in directory (fonts.dir & fonts.scale)
-# do type1inst in this path
-# peu etre un petit pb avec "/etc/rc.d/init.d/xfs restart"
-
 
 sub remove_fonts {
     my @list_dir;
@@ -907,3 +901,6 @@ sub progress {
 
 # option strong: verifier strong  ttmkfdir -c ???
 # gestion abiword, netscape, gimp....
+# remove this directory of the de fontpath if there is only 2 files in directory (fonts.dir & fonts.scale)
+# do type1inst in this path
+# peu etre un petit pb avec "/etc/rc.d/init.d/xfs restart"
