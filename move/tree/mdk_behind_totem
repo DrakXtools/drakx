@@ -42,7 +42,7 @@ umount_cd() {
 
     ln -sf /image_always/lib /
 
-    if [ -l /image ]; then
+    if [ -L /image ]; then
 	rm -f /image
     else
 	umount /image && \
