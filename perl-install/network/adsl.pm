@@ -152,8 +152,6 @@ nodeflate
 novj novjccomp 
 lcp-echo-interval 20 
 lcp-echo-failure 3 
-mtu 1200 
-mru 1200 
 sync 
 ),
                   },
@@ -279,8 +277,6 @@ nopcomp
 novj novjccomp
 lcp-echo-interval 20
 lcp-echo-failure 3
-mtu 1200
-mru 1200
 sync
 persist
 user $adsl->{login}
