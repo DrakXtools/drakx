@@ -255,7 +255,7 @@ sub setupBootloader__general {
                 arch() =~ /sparc/ ? (
             { label => N("Bootloader installation"), val => \$b->{use_partition}, list => [ 0, 1 ], format => sub { $silo_install_lang[$_[0]] } },
 		) : if_(arch() !~ /ia64/,
-            { label => N("Boot device"), val => \$b->{boot}, list => [ map { "/dev/$_" } (map { $_->{device} } (@{$all_hds->{hds}}, grep { !isFat($_) } @$fstab)), detect_devices::floppies_dev() ], not_edit => !$::expert },
+            { label => N("Boot device"), val => \$b->{boot}, list => [ map { "/dev/$_" } (map { $_->{device} } (@{$all_hds->{hds}}, grep { !isFat_or_NTFS($_) } @$fstab)), detect_devices::floppies_dev() ], not_edit => !$::expert },
             { label => N("Compact"), val => \$b->{compact}, type => "bool", text => N("compact"), advanced => 1 },
             { label => N("Video mode"), val => \$b->{vga}, list => [ keys %bootloader::vga_modes ], not_edit => !$::expert, format => sub { $bootloader::vga_modes{$_[0]} }, advanced => 1 },
 		),

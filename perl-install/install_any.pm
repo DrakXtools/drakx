@@ -287,7 +287,7 @@ sub preConfigureTimezone {
 
     $o->{timezone}{timezone} ||= timezone::bestTimezone(lang::lang2text($o->{lang}));
 
-    my $utc = every { !isFat($_) && !isNT($_) } @{$o->{fstab}};
+    my $utc = every { !isFat_or_NTFS($_) } @{$o->{fstab}};
     my $ntp = timezone::ntp_server($o->{prefix});
     add2hash_($o->{timezone}, { UTC => $utc, ntp => $ntp });
 }
@@ -1005,7 +1005,7 @@ sub getHds {
     $o->{fstab} = [ fsedit::get_all_fstab($all_hds) ];
     fs::merge_info_from_mtab($o->{fstab});
 
-    my @win = grep { isFat($_) && isFat({ type => fsedit::typeOfPart($_->{device}) }) } @{$o->{fstab}};
+    my @win = grep { isFat_or_NTFS($_) && isFAT_or_NTFS({ type => fsedit::typeOfPart($_->{device}) }) } @{$o->{fstab}};
     log::l("win parts: ", join ",", map { $_->{device} } @win) if @win;
     if (@win == 1) {
 	#- Suggest /boot/efi on ia64.
@@ -1014,14 +1014,6 @@ sub getHds {
 	my %w; foreach (@win) {
 	    my $v = $w{$_->{device_windobe}}++;
 	    $_->{mntpoint} = $_->{unsafeMntpoint} = "/mnt/win_" . lc($_->{device_windobe}) . ($v ? $v+1 : ''); #- lc cuz of StartOffice(!) cf dadou
-	}
-    }
-
-    {
-	my @nt = grep { isNT($_) && isNT({ type => fsedit::typeOfPart($_->{device}) }) } @{$o->{fstab}};
-	log::l("nt parts: ", join ",", map { $_->{device} } @nt) if @nt;
-	my $i; foreach (@nt) {
-	    $_->{mntpoint} = $_->{unsafeMntpoint} = "/mnt/nt" . ($i++ ? $i : '');
 	}
     }
 

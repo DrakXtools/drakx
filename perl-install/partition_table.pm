@@ -6,7 +6,7 @@ use vars qw(@ISA %EXPORT_TAGS @EXPORT_OK @important_types @important_types2 @fie
 
 @ISA = qw(Exporter);
 %EXPORT_TAGS = (
-    types => [ qw(type2name type2fs name2type fs2type isExtended isExt2 isThisFs isTrueFS isSwap isDos isWin isFat isSunOS isOtherAvailableFS isPrimary isRawLVM isRawRAID isRAID isLVM isNT isMountableRW isNonMountable isPartOfLVM isPartOfRAID isPartOfLoopback isLoopback isMounted isBusy isSpecial maybeFormatted isApple isAppleBootstrap) ],
+    types => [ qw(type2name type2fs name2type fs2type isExtended isExt2 isThisFs isTrueFS isSwap isDos isWin isFat isFat_or_NTFS isSunOS isOtherAvailableFS isPrimary isRawLVM isRawRAID isRAID isLVM isMountableRW isNonMountable isPartOfLVM isPartOfRAID isPartOfLoopback isLoopback isMounted isBusy isSpecial maybeFormatted isApple isAppleBootstrap) ],
 );
 @EXPORT_OK = map { @$_ } values %EXPORT_TAGS;
 
@@ -62,7 +62,7 @@ if_(arch() =~ /^ppc/,
   0x4 => 'DOS 16-bit FAT (up to 32M)',
   0x5 => 'DOS 3.3+ Extended Partition',
   0x6 => 'DOS FAT16',
-  0x7 => 'NTFS (or HPFS)',
+  0x7 => 'NTFS',
   0x8 => 'OS/2 (v1.0-1.3 only) / AIX boot partition / SplitDrive / Commodore DOS / DELL partition spanning multiple drives / QNX 1.x and 2.x ("qny")',
 ),
   0x9 => 'AIX data partition / Coherent filesystem / QNX 1.x and 2.x ("qnz")',
@@ -235,8 +235,8 @@ sub isExt2 { type2fs($_[0]) eq 'ext2' }
 sub isDos { arch() !~ /^sparc/ && ${{ 1 => 1, 4 => 1, 6 => 1 }}{$_[0]{type}} }
 sub isWin { ${{ 0xb => 1, 0xc => 1, 0xe => 1, 0x1b => 1, 0x1c => 1, 0x1e => 1 }}{$_[0]{type}} }
 sub isFat { isDos($_[0]) || isWin($_[0]) }
+sub isFat_or_NTFS { isDos($_[0]) || isWin($_[0]) || $_[0]{type} == 0x7 }
 sub isSunOS { arch() =~ /sparc/ && ${{ 0x1 => 1, 0x2 => 1, 0x4 => 1, 0x6 => 1, 0x7 => 1, 0x8 => 1 }}{$_[0]{type}} }
-sub isNT { arch() !~ /^sparc/ && $_[0]{type} == 0x7 }
 sub isApple { type2fs($_[0]) eq 'apple' && defined $_[0]{isDriver} }
 sub isAppleBootstrap { type2fs($_[0]) eq 'apple' && defined $_[0]{isBoot} }
 sub isHiddenMacPart { defined $_[0]{isMap} }
@@ -244,7 +244,7 @@ sub isHiddenMacPart { defined $_[0]{isMap} }
 sub isThisFs { type2fs($_[1]) eq $_[0] }
 sub isTrueFS { member(type2fs($_[0]), qw(ext2 reiserfs xfs jfs ext3)) }
 
-sub isOtherAvailableFS { isFat($_[0]) || isSunOS($_[0]) || isThisFs('hfs', $_[0]) || isThisFs('ntfs', $_[0]) } #- other OS that linux can access its filesystem
+sub isOtherAvailableFS { isFat_or_NTFS($_[0]) || isSunOS($_[0]) || isThisFs('hfs', $_[0]) } #- other OS that linux can access its filesystem
 sub isMountableRW { (isTrueFS($_[0]) || isOtherAvailableFS($_[0])) && !isThisFs('ntfs', $_[0]) }
 sub isNonMountable { isRawRAID($_[0]) || isRawLVM($_[0]) }
 
@@ -369,11 +369,11 @@ sub assign_device_numbers {
     #
     #- first verify there's at least one primary dos partition, otherwise it
     #- means it is a secondary disk and all will be false :(
-    my ($c, @others) = grep { isFat($_) } @{$hd->{primary}{normal}};
+    my ($c, @others) = grep { isFat_or_NTFS($_) } @{$hd->{primary}{normal}};
 
     $i = ord 'C';
     $c->{device_windobe} = chr($i++) if $c;
-    $_->{device_windobe} = chr($i++) foreach grep { isFat($_) } map { $_->{normal} } @{$hd->{extended}};
+    $_->{device_windobe} = chr($i++) foreach grep { isFat_or_NTFS($_) } map { $_->{normal} } @{$hd->{extended}};
     $_->{device_windobe} = chr($i++) foreach @others;
 }
 

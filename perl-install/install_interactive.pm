@@ -180,7 +180,7 @@ When sure, press Ok.")) or return;
 
     if (@$fstab && @hds_rw) {
 	$solutions{wipe_drive} =
-	  [ 10, fsedit::is_one_big_fat($hds) ? N("Remove Windows(TM)") : N("Erase entire disk"), 
+	  [ 10, fsedit::is_one_big_fat_or_NT($hds) ? N("Remove Windows(TM)") : N("Erase entire disk"), 
 	    sub {
 		$o->set_help('takeOverHdChoose');
 		my $hd = $o->ask_from_listf('', N("You have more than one hard drive, which one do you install linux on?"),

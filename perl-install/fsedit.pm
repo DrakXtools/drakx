@@ -386,12 +386,12 @@ sub free_space {
     sum map { $_->{size} } get_holes(@_);
 }
 
-sub is_one_big_fat {
+sub is_one_big_fat_or_NT {
     my ($hds) = @_;
     @$hds == 1 or return;
 
     my @l = get_fstab(@$hds);
-    @l == 1 && isFat($l[0]) && free_space(@$hds) < 10 << 11;
+    @l == 1 && isFat_or_NTFS($l[0]) && free_space(@$hds) < 10 << 11;
 }
 
 sub file2part {

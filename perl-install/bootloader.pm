@@ -521,10 +521,10 @@ wait %d seconds for default boot.
 	my %nbs;
 	foreach (@$hds) {
 	    foreach (@{$_->{primary}{normal}}) {
-		isNT($_) || isFat($_) or next;
+		isFat_or_NTFS($_) or next;
 		my $from_magic = { type => fsedit::typeOfPart($_->{device}) };
-		isNT($from_magic) || isFat($from_magic) or next;
-		my $label = isNT($_) ? 'NT' : isDos($_) ? 'dos' : 'windows';
+		isFat_or_NTFS($from_magic) or next;
+		my $label = isDos($_) ? 'dos' : 'windows';
 		add_entry($bootloader,
 			  {
 			   type => 'other',
