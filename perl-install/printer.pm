@@ -398,7 +398,7 @@ sub set_alternative {
 
 sub pdq_panic_button {
     my $setting = $_[0];
-    if (-f "/usr/sbin/pdqpanicbutton") {
+    if (-f "$prefix/usr/sbin/pdqpanicbutton") {
         run_program::rooted($prefix, "/usr/sbin/pdqpanicbutton", "--$setting")
 	    || die "Could not $setting PDQ panic buttons!";
     }
@@ -1463,8 +1463,8 @@ sub configure_hpoj {
     # the subroutine definitions stay valid after leaving this subroutine.
     if (!$ptalinitread) {
 	local *PTALINIT;
-	open PTALINIT, "/usr/sbin/ptal-init" || do {
-	    die "unable to open /usr/sbin/ptal-init";
+	open PTALINIT, "$prefix/usr/sbin/ptal-init" || do {
+	    die "unable to open $prefix/usr/sbin/ptal-init";
 	};
 	my @ptalinitfunctions; # subroutine definitions in /usr/sbin/ptal-init
 	while (<PTALINIT>) {
@@ -2296,7 +2296,12 @@ sub findsofficeconfigfile {
 	if (open F, "ls -r $prefix$configfilename 2> /dev/null |") {
 	    my $filename = <F>;
 	    close F;
-	    if ($filename) {return $filename};
+	    if ($filename) {
+		if ($prefix ne "") {
+		    $filename =~ s:^$prefix::;
+		}
+		return $filename;
+	    }
 	}
     }
     return "";
@@ -2314,7 +2319,12 @@ sub findopenofficeconfigfile {
 	if (open F, "ls -r $prefix$configfilename 2> /dev/null |") {
 	    my $filename = <F>;
 	    close F;
-	    if ($filename) {return $filename};
+	    if ($filename) {
+		if ($prefix ne "") {
+		    $filename =~ s:^$prefix::;
+		}
+		return $filename;
+	    }
 	}
     }
     return "";
