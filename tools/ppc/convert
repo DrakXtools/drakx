@@ -1,0 +1,5 @@
+#!/bin/sh
+
+mv $1.orig $1.Unix
+tr "\n" "\r" < $1.Unix > $1.MacOS
+perl -e '@line = <>; $line = join("\r\n", split(/\n/, join("", @line))); print $line; print "\r\n";' < $1.Unix > $1.DOS
