@@ -310,9 +310,6 @@ sub set {
 		my $packer = new packdrake("$ENV{SHARE_PATH}/locale.cz2");
 		$packer->extract_archive("$ENV{SHARE_PATH}/locale", "UTF-8", $languages{$lang}[2]);
 	    };
-	    #require 'run_program.pm';
-	    #run_program::run("packdrake", "-x", "$ENV{SHARE_PATH}/locale.cz2", "$ENV{SHARE_PATH}/locale", "UTF-8");
-	    #run_program::run("packdrake", "-x", "$ENV{SHARE_PATH}/locale.cz2", "$ENV{SHARE_PATH}/locale", $languages{$lang}[2]);
 	}
 
 #- set all LC_* variables to a unique locale ("C"), and only redefine
@@ -480,7 +477,7 @@ sub load_console_font {
     my ($f, $u, $m) = @{$charsets{$charset} || []};
 
     require run_program;
-    run_program::run('consolechars', '-v',
+    run_program::run(if_($ENV{LD_LOADER}, $ENV{LD_LOADER}), 'consolechars', '-v',
 		          ('-f', $f || 'lat0-sun16'),
 		     $u ? ('-u', $u) : (),
 		     $m ? ('-m', $m) : ());
