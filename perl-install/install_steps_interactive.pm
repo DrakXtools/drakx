@@ -833,7 +833,7 @@ sub configureTimezone {
 	my $servers = timezone::ntp_servers();
 	$o->{timezone}{ntp} ||= 'pool.ntp.org';
 
-	$in->ask_from_({},
+	$o->ask_from_({},
 	    [ { label => N("NTP Server"), val => \$o->{timezone}{ntp}, list => [ keys %$servers ], not_edit => 0,
 		format => sub { $servers->{$_[0]} ? "$servers->{$_[0]} ($_[0])" : $_[0] } } ]
         ) or goto &configureTimezone;
