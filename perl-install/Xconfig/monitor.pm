@@ -72,7 +72,10 @@ sub choose {
     my $monitors = monitors();
 
     my $ok = configure_automatic($monitor, $monitors);
-    return $ok if $auto;
+    if ($auto) {
+	log::l("Xconfig::monitor: auto failed") if !$ok;
+	return $ok;
+    }
 
     my %h_monitors = map {; "$_->{VendorName}|$_->{ModelName}" => $_ } @$monitors;
 
