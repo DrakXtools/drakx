@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 9.2
-Release: 0.33mdk
+Release: 0.34mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -314,6 +314,24 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Sat Aug 23 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.2-0.34mdk
+- disdrake: explain why ntfs resizing had failled (pixel)
+- drakbacup: (stew)
+  o fix crash on file select of "Other" finish custom cron
+    configuration
+  o normal users can now do cron backups
+- drakconnect:
+  o fix no detection in expert mode
+  o better firmware load from floppy managment (poulpy)
+  o fix pppoa use for speedtouch USB (poulpy)
+- drakfirewall: add samba in services list
+- drakperm: make security level menu be more understandable & usuable
+- draksec: translate default value in help tooltips too
+- fix CJK wrapping in more places
+- make interactive button order be the same as gtk dialogs one and our
+  dialogs but only in standalone mode
+- misc fixes from pixel
+
 * Thu Aug 21 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.2-0.33mdk
 - fix CJK wrapping in interactive tools (#4642)
 - remove ugly border around standalone tools
