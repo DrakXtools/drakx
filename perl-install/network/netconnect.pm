@@ -85,8 +85,6 @@ sub detect_timezone() {
       my $ethntf = {};
       use Data::Dumper;
 
-      my %yesno = (yes => N("Yes"), no => N("No"));
-
       my %wireless_mode = (N("Ad-hoc") => "Ad-hoc", 
                            N("Managed") => "Managed", 
                            N("Master") => "Master",
@@ -779,15 +777,21 @@ You may also enter the IP address of the gateway if you have one."),
                    apply_settings => 
                    {
                     name => N("Configuration is complete, do you want to apply settings ?"),
-                                      data => [], # FIXME: yesorno
+                    type => "yesorno",
                     next => "network_on_boot",
                    },
                    
                    network_on_boot => 
                    {
                     pre => sub {
-                        member($netc->{internet_cnx_choice}, ('adsl', 'isdn')) and $netc->{at_boot} = $in->ask_yesorno(N("Network Configuration Wizard"), N("Do you want to start the connection at boot?"));
-                        
+                        # condition is :
+                        member($netc->{internet_cnx_choice}, ('adsl', 'isdn')); # and $netc->{at_boot} = $in->ask_yesorno(N("Network Configuration Wizard"), N("Do you want to start the connection at boot?"));
+                    },
+                    name => N("Do you want to start the connection at boot?"),
+                    type => "yesorno",
+                    post => sub {
+                        my ($res) = @_;
+                        $netc->{at_boot} = $res;
                         if ($netc->{internet_cnx_choice}) {
                             write_cnx_script($netc);
                             $netcnx->{type} = $netc->{internet_cnx}{$netc->{internet_cnx_choice}}{type};
@@ -799,9 +803,8 @@ You may also enter the IP address of the gateway if you have one."),
                         
                         network::network::configureNetwork2($in, $::prefix, $netc, $intf);
                         $network_configured = 1;
+                        $::isInstall ? "restart" : "ask_connect_now";
                     },
-                    name => N("Do you want to start the connection at boot?"),
-                    data => [], # FIXME yes/no
                    },
 
                    restart => 
@@ -824,7 +827,7 @@ You may also enter the IP address of the gateway if you have one."),
                    {
                     no_back => 1,
                     name => N("Do you want to try to connect to the Internet now?"),
-                    data => [], # FIXME: yes/no
+                    type => "yesorno",
                     post => sub {
                         my ($a) = @_;
                         my ($type) = $netc->{internet_cnx_choice};
