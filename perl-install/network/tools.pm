@@ -8,7 +8,7 @@ use vars qw(@ISA @EXPORT @EXPORT_OK);
 use MDK::Common::System qw(getVarsFromSh);
 
 @ISA = qw(Exporter);
-@EXPORT = qw(connect_backend connected connected_bg disconnect_backend is_dynamic_ip is_wireless_intf passwd_by_login read_providers_backend read_secret_backend set_cnx_script test_connected write_cnx_script write_initscript write_secret_backend);
+@EXPORT = qw(connect_backend connected connected_bg disconnect_backend is_dynamic_ip passwd_by_login read_providers_backend read_secret_backend set_cnx_script test_connected write_cnx_script write_initscript write_secret_backend);
 
 our $connect_prog   = "/etc/sysconfig/network-scripts/net_cnx_pg";
 my $connect_file    = "/etc/sysconfig/network-scripts/net_cnx_up";
@@ -212,11 +212,6 @@ sub use_floppy {
     return '/mnt', $failed;
 }
 
-
-sub is_wireless_intf {
-    my ($module) = @_;
-    member($module, qw(acx100_pci airo aironet_cs aironet4500_cs airo_cs airport at76c503 hermes netwave_cs orinoco_cs prism2_usb orinoco ray_cs usbvnet_rfmd wavelan_cs wvlan_cs))
-}
 
 sub is_dynamic_ip {
   my ($intf) = @_;
