@@ -142,8 +142,9 @@ sub probe_category {
 	    my $b = $_->{driver} =~ /ISDN:([^,]*),?([^,]*)(?:,firmware=(.*))?/;
 	    if ($b) {
                 $_->{driver} = $1;
+                $_->{type} = $2;
+                $_->{type} =~ s/type=//;
                 $_->{firmware} = $3;
-                ($_->{type}) = $2 =~ /type=(\d+)/;
                 $_->{driver} eq "hisax" and $_->{options} .= " id=HiSax";
 	    }
 	    $b;
