@@ -1063,7 +1063,8 @@ sub ask_browse_tree_info {
     $tree->append_column(Gtk2::TreeViewColumn->new_with_attributes(undef, Gtk2::CellRendererText->new, 'text' => 2));
     $tree->set_headers_visible(0);
     $tree->set_rules_hint(1);
-    #TODO CHANGE METHOD WHICH DOES NOT EXISTS $textcolumn->set_minmax_width(200);
+    $textcolumn->set_min_width(200);
+    $textcolumn->set_max_width(200);
 
     gtkadd($w->{window}, 
 	   gtkpack_(Gtk2::VBox->new(0,5),
