@@ -1,3 +1,204 @@
+2002/08/20  alus
+
+	* share/po/pl.po: Upper Case
+	updated translation
+
+2002/08/20  Damien Chaumette  <dchaumette@mandrakesoft.com>
+
+	* network/adsl.pm: o ECI adsl config fix
+
+2002/08/20  François Pons  <fpons@mandrakesoft.com>
+
+	* install_any.pm: make sure kernel is selected during upgrade.
+
+	* pkgs.pm: fixed ldconfig not visible in packages tree.
+	fixed ldconfig not selected for installation.
+	added bestKernelPackage.
+
+2002/08/20  Jonathan Gotti  <jgotti@mandrakesoft.com>
+
+	* standalone/draksplash: a tool for bootsplash theme creation
+
+	* drakxtools.spec: adding draksplash
+
+	* Makefile.config: adding draksplash in STANDALONEPMS_
+
+2002/08/20  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/keyboards.tar.bz2, keyboard.pm: merged keyboards with XFree86
+
+	* share/po/ta.po, share/po/hu.po: updated po file
+	updated pot file
+
+	* share/po/id.po, share/po/sk.po, share/po/ru.po, share/po/gl.po,
+	share/po/pt_BR.po, share/po/br.po, share/po/th.po, share/po/sl.po,
+	share/po/no.po, share/po/et.po, share/po/ja.po, share/po/hr.po,
+	share/po/tr.po, share/po/mt.po, share/po/ga.po, share/po/be.po,
+	share/po/uk.po, share/po/ko.po, share/po/DrakX.pot, share/po/sv.po,
+	share/po/sr.po, share/po/pl.po, share/po/fi.po, share/po/lt.po,
+	share/po/sp.po, share/po/cy.po, share/po/ca.po, share/po/da.po,
+	share/po/ar.po, share/po/bs.po, share/po/ro.po, share/po/wa.po,
+	share/po/is.po, share/po/af.po, share/po/az.po, share/po/zh_TW.po,
+	share/po/zh_CN.po, share/po/pt.po, share/po/vi.po, share/po/fr.po,
+	share/po/nl.po, share/po/it.po, share/po/eu.po, share/po/es.po,
+	share/po/de.po, share/po/eo.po, share/po/lv.po, share/po/cs.po,
+	share/po/bg.po, share/po/el.po: updated pot file
+
+	* lang.pm: Removed fallback languages for "bs" (there are enough native
+	translations now)
+
+2002/08/20  Pixel  <pixel@mandrakesoft.com>
+
+	* my_gtk.pm: 
+	  - in destroy, detect if program is going to leave, in that case
+	don't do anything, especially don't set the waiting mouse cursor
+	another thing is that calling flush() at this moment causes segfault
+	so don't do it and no more segfault :)
+	(now, if someone finds out what this 4 is about... but you cares, it
+	works :)
+	this fixes program ending on an exception
+	  - also add END() calling exit() (in case a program forgets to (heurk)
+	call exit())
+
+	* share/keymaps.tar.bz2: update to correspond to keyboard.pm
+
+	* mouse.pm: fix the use of create_okcancel
+
+	* keyboard.pm: fix pablo... uh no, too hard. fix his typo instead ;p
+	  - drop the loadkeys_files (it is unused)
+	  - add more precise check of the existence of .bkmap's and that
+	share/keymaps.tar.bz2 is up to date
+
+	* install_steps_interactive.pm: firewire configuration is only automatic
+	add firewire controller configuration
+
+	* standalone/drakbackup: fix $'s in i18n'ed strings
+
+	* standalone/XFdrake: when restarting X, don't kill kdm/gdm/xdm, they
+	don't need this (worse, they don't respawn)
+
+	* install_steps.pm, modules.pm: add firewire controller configuration
+
+	* drakxtools.spec: 
+	  - fix dangling waiting watch mousecursor (well, please test!)
+	  - adding draksplash (nathan)
+
+2002/08/20  Stew Benedict  <sbenedict@mandrakesoft.com>
+
+	* standalone/drakbackup: remove unused subs
+	disable forced "backup before restore" that erases previous backup
+	more work towards tracking backed up files for future recovery
+
+2002/08/20  Till Kamppeter  <till@mandrakesoft.com>
+
+	* standalone/scannerdrake: 
+	  - Let all occurences of "Seiko Epson" replaced by "Epson" both in the
+	scanner names read from the ScannerDB and in the names resulting from
+	scanner auto-detection (names from usbtable). So the user gets
+	presented "Epson" and usbtable can have "Epson" names where ScannerDB
+	can have "Seiko Epson" names.
+	  - If a scanner is listed as "unsupported" in ScannerDB, the user gets
+	a message instead of scannerdrake silently exiting.
+	Fixed parantheses of a "member" function, fixed typos.
+
+	* scanner.pm: 
+	  - Let all occurences of "Seiko Epson" replaced by "Epson" both in the
+	scanner names read from the ScannerDB and in the names resulting from
+	scanner auto-detection (names from usbtable). So the user gets
+	presented "Epson" and usbtable can have "Epson" names where ScannerDB
+	can have "Seiko Epson" names.
+	  - If a scanner is listed as "unsupported" in ScannerDB, the user gets
+	a message instead of scannerdrake silently exiting.
+
+	* printer.pm: Taken LPRng from spooler menu in printerdrake.
+
+2002/08/20  Thierry Vignaud  <tvignaud@mandrakesoft.com>
+
+	* standalone/logdrake: s/one of the selected service/one of the selected
+	services/
+	(spoted by Arpad Biro)
+
+	* standalone/draksound: 
+	  - simplify
+	  - allocate sound slots in the same order as install2.pm (aka in
+	modules::probe_category('multimedia/sound') order)
+	add draksound: allow to switch between alsa and oss;
+	should result in better sound support
+
+	* harddrake/TODO: instead of generating my own list of module descriptions
+	from
+	list_modules.pm list of sound modules, just
+	usemodules::category2modules_and_description
+
+	* standalone/service_harddrake: 
+	  - kill dead code
+	  - more use of MDK::Common
+	  - use draksound wizard
+	  - boot: only check for removed/added disks, video card, ethernet
+	devices and mouse
+
+	* ugtk.pm: kill debugging prints
+
+	* help.pm: s/enter a disk/insert a disk/ (Arpad Biro)
+
+	* standalone/drakbackup: typo fixed seen by Arpad Biro:
+	s/durind/during/
+	s/an user/a user/
+	s/select select/select/
+	s/propogate/propagate/
+
+	* harddrake/data.pm: 
+	  - use draksound wizard
+	  - boot: only check for removed/added disks, video card, ethernet
+	devices and mouse
+	don't put dvd burners in both dvd and burners classes but only in
+	burners
+
+	* harddrake/Makefile, harddrake/gen_snd_list, harddrake/sound.pm: instead
+	of generating my own list of module descriptions from
+	list_modules.pm list of sound modules, just
+	usemodules::category2modules_and_description
+	add draksound: allow to switch between alsa and oss;
+	should result in better sound support
+
+	* docs/Partition-ends-after-end-of-disk.txt: typo fix
+
+	* bootlook.pm: s/mkinird/mkinitrd/ (Arpad Biro)
+
+2002/08/19  alus
+
+	* share/po/pl.po: one fix
+
+2002/08/19  Pixel  <pixel@mandrakesoft.com>
+
+	* Makefile.config: remove dir security
+
+	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
+	more accurate than
+	$::isWizard && !$my_gtk::pop_it and $::isEmbedded && !$my_gtk::pop_it,
+	since
+	when the Plug is full, the window is not embedded.
+
+	* fs.pm: fix checking the return value of fsck.jfs
+
+	* my_gtk.pm: in my_gtk object, set {isEmbedded} if embedded and {isWizard}
+	if displayed wizard mode
+
+	* Xconfig/monitor.pm (readMonitorsDB): now return a list instead of a hash
+	to handle same name entries with different EISA_ID
+	(configure_automatic): handle EISA_ID but no VertRefresh/HorizSync
+	(happens for some hardware)
+	(choose): handle user asking for "Plug'n Play" monitor and ddcxinfos
+	failing
+
+	* Xconfig/main.pm: replace "xxx => eval { }" with "xxx => scalar eval {}"
+
+2002/08/19  Thierry Vignaud  <tvignaud@mandrakesoft.com>
+
+	* modules.pm: typo fix spoted by Arpad Biro
+
+	* standalone/drakbackup: s/progess/progress/ (Arpad Biro)
+
 2002/08/19  alus
 
 	* share/po/pl.po: one fix
@@ -27,7 +228,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: $
+	* proxy.pm: add $Id: ChangeLog,v 1.723 2002/08/19 21:17:47 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
