@@ -440,8 +440,7 @@ sub configureNetwork($) {
 	#-	      my $wait = $o->wait_message(_("Hostname"), _("Determining host name and domain..."));
 	#-	      network::guessHostname($o->{prefix}, $o->{netc}, $o->{intf});
 	#-	  }
-	$last->{BOOTPROTO} =~ /^(dhcp|bootp)$/ ||
-	  $o->configureNetworkNet($o->{netc}, $last ||= {}, @l) or return;
+	$o->configureNetworkNet($o->{netc}, $last ||= {}, @l) if $last->{BOOTPROTO} !~ /^(dhcp|bootp)$/;
     }
     install_steps::configureNetwork($o);
 
@@ -1180,7 +1179,7 @@ sub setup_thiskind {
 	$r = $o->ask_from_list_('', $msg, $opt, "No") unless $at_least_one && @l == 0;
 	if ($r eq "No") { return }
 	elsif ($r eq "Yes") {
-	    push @l, $o->load_module($type) || return;
+	    push @l, $o->load_module($type) || next;
 	} else {
 	    #-eval { commands::modprobe("isapnp") };
 	    require pci_probing::main;

@@ -156,7 +156,7 @@ sub selectInstallClass1 {
 			 $radio->set_active($_ eq $def); $radio } @$l),
 		   gtkadd(create_hbox(),
 			  map { my $v = $_; 
-				my $b = new Gtk::Button($_);
+				my $b = new Gtk::Button(translate($_));
 				$focused = $b if $_ eq $def2;
 				gtksignal_connect($b, "clicked" => sub { $w->{retval} = $v; Gtk->main_quit });
 			    } @$l2)

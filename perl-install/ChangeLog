@@ -1,5 +1,13 @@
 2000-05-05  Pixel  <pixel@mandrakesoft.com>
 
+	* install_steps_interactive.pm (setup_thiskind): replace return by
+	next in case load_module fails.
+
+	* install_steps_gtk.pm (selectInstallClass1): translate Install/Upgrade
+
+	* Xconfigurator.pm (cardConfiguration): force xf4 for rage 128's
+	* Xconfigurator.pm (testFinalConfig): force $bad_card for xf4
+
 	* pkgs.pm (correctSize): updated for 7.1
 
 	* install_any.pm (getAvailableSpace): move the removing of

@@ -70,7 +70,7 @@ sub setupBootloader {
 	$in->set_help("setupBootloaderGeneral") unless $::isStandalone;
 
 	if ($::expert) {
-	    my $m = $in->ask_from_list_('', _("Which bootloader(s) do you want to use?"), [ keys(%{$b->{methods}}), __("None") ]) or return;
+	    my $m = $in->ask_from_list_('', _("Which bootloader(s) do you want to use?"), [ keys(%{$b->{methods}}), __("None") ], 'grub') or return;
 	    $b->{methods}{$_} = 0 foreach keys %{$b->{methods}};
 	    $b->{methods}{$m} = 1 if $m ne "None";
 	}

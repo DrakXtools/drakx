@@ -168,6 +168,7 @@ sub cardConfiguration(;$$$) {
     add2hash($card, cardName2card($card->{type})) if $card->{type};
     add2hash($card, { vendor => "Unknown", board => "Unknown" });
 
+    $::xf4 = $card->{identifier} =~ /Rage 128/ if !$::expert;
     $card->{prog} = "/usr/X11R6/bin/" . ($::xf4 && $card->{driver} ? 'XFree86' : "XF86_$card->{server}");
 
     -x "$prefix$card->{prog}" or $install && do {
@@ -299,6 +300,7 @@ sub testFinalConfig($;$$) {
     #- needed for bad cards not restoring cleanly framebuffer
     my $bad_card = $o->{card}{identifier} =~ /i740|ViRGE/;
     $bad_card ||= $o->{card}{identifier} eq "ATI|3D Rage P/M Mobility AGP 2x";
+    $bad_card ||= $::xf4;
     log::l("the graphic card does not like X in framebuffer") if $bad_card;
 
     my $mesg = _("Do you want to test the configuration?");

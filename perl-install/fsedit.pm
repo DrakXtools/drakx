@@ -185,7 +185,7 @@ sub suggest_part($$$;$) {
       grep { $_->{size} <= ($part->{maxsize} || $part->{size}) }
       grep { !has_mntpoint($_->{mntpoint}, $hds) || isSwap($_) && !$has_swap }
       grep { !$_->{hd} || $_->{hd} eq $hd->{device} }
-      grep { !$part->{type} || $part->{type} == $_->{type} || isTrueFS($part->{type}) && isTrueFS($_->{type}) }
+      grep { !$part->{type} || $part->{type} == $_->{type} || isTrueFS($part) && isTrueFS($_) }
 	@$suggestions or return;
 
 #-    if (arch() =~ /^i386/) {
