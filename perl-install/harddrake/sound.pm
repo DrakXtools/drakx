@@ -151,7 +151,7 @@ sub switch {
     my $alternative = get_alternative($driver);
     if ($alternative) {
 	   my $new_driver = $alternative->[0];
-	   if ($new_driver eq "unknown") {
+	   if ($new_driver eq 'unknown') {
 		  $in->ask_warn(_("No alternative driver"),
 							_("There's no known OSS/ALSA alternative driver for your sound card (%s)",
 							  $device->{description}));
@@ -165,6 +165,7 @@ sub switch {
 						  }, allow_empty_list => 1 }
 						  ]))
 	   {
+		  return if ($new_driver eq $driver);
 		  standalone::explanations("switching audio driver from '$driver' to '$new_driver'\n");
 		  do_switch($driver, $new_driver);
 	   }
@@ -176,9 +177,9 @@ sub switch {
 	   $in->ask_warn(_("Unkown driver"), 
 							 _("The \"%s\" driver for your sound card is unlisted\n
 Please send the output of the \"lspcidrake -v\" command to
-Thierry Vignaud <tvignaud at mandrakesoft dot com>
-with subject: unlisted sound driver")
-							   , $driver);
+<install at mandrakesoft dot com>
+with subject: unlisted sound driver \"%s\"")
+							   , $driver, $driver);
     }
 }
 
