@@ -294,7 +294,7 @@ sub configure {
 
     xfree_and_glx_choose($in, $card, $auto) or return;
 
-    if ($card->{card_name} eq 'Intel 865') {
+    if (member($card->{card_name}, 'Intel 845', 'Intel 85x', 'Intel 865') {
 	$raw_X->{xfree4}->get_Section('ServerFlags')->{DontVTSwitch} = [ { val => 'yes', Option => 1 } ];
     }
 
