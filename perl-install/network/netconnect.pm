@@ -457,7 +457,8 @@ sub read_raw_net_conf {
     my ($suffix) = @_;
     my $dir = "$::prefix/etc/sysconfig/network-scripts";
 #    $suffix = $suffix ? ".$suffix" : '';
-    rename "$dir/draknet$suffix", "$dir/drakconnect$suffix";
+my $file = "$dir/draknet$suffix";
+    rename $file, "$dir/drakconnect$suffix" if -e $file;
     getVarsFromSh("$dir/drakconnect_conf");
 }
 
