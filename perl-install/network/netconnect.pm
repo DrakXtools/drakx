@@ -220,7 +220,7 @@ sub get_subwizard {
                         }
                         @connection_list = ({ val => \$cnx_type, type => 'list', list => [ map { $_->[0] } @connections ], });
                     },
-                    if_($::isInstall, no_back => 1),
+                    if_(!$::isInstall, no_back => 1),
                     name => N("Choose the connection you want to configure"),
                     interactive_help_id => 'configureNetwork',
                     data => \@connection_list,
