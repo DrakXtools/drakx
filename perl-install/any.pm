@@ -31,7 +31,8 @@ sub face2xpm {
 sub facesnames {
     my ($prefix) = @_;
     my $dir = facesdir($prefix);
-    grep { -e "$dir/$_.png" } map { /(.*)\.xpm/ } all($dir);
+    my @l = grep { /^[A-Z]/ } all($dir);
+    grep { -e "$dir/$_.png" } map { /(.*)\.xpm/ } @l ? @l : all($dir);
 }
 
 sub addKdmIcon {
@@ -124,27 +125,33 @@ sub setupBootloader {
 
 	my @silo_install_lang = (_("First sector of drive (MBR)"), _("First sector of boot partition"));
 	my $silo_install_lang = $silo_install_lang[$b->{use_partition}];
-	my @l = (
-arch() =~ /sparc/ ? (
+	my $profiles = bootloader::has_profiles($b);
+	my $memsize = bootloader::get_append('mem');
+
+	$b->{vga} ||= 'Normal';
+	$in->ask_from_entries_refH('', _("Bootloader main options"), [
+    arch() =~ /sparc/ ? (
 { label => _("Bootloader installation"), val => \$silo_install_lang, list => \@silo_install_lang },
 ) : (
 { label => _("Boot device"), val => \$b->{boot}, list => [ map { "/dev/$_" } (map { $_->{device} } (@$hds, grep { !isFat($_) } @$fstab)), detect_devices::floppies() ], not_edit => !$::expert },
-{ label => _("LBA (doesn't work on old BIOSes)"), val => \$b->{lba32}, type => "bool", text => "lba" },
-{ label => _("Compact"), val => \$b->{compact}, type => "bool", text => _("compact") },
-{ label => _("Video mode"), val => \$b->{vga}, list => [ keys %bootloader::vga_modes ], not_edit => !$::expert },
+{ label => _("LBA (doesn't work on old BIOSes)"), val => \$b->{lba32}, type => "bool", text => "lba", advanced => 1 },
+{ label => _("Compact"), val => \$b->{compact}, type => "bool", text => _("compact"), advanced => 1 },
+{ label => _("Video mode"), val => \$b->{vga}, list => [ keys %bootloader::vga_modes ], not_edit => !$::expert, advanced => 1 },
 ),
 { label => _("Delay before booting default image"), val => \$b->{timeout} },
-$security < 4 ? () : (
+    if_($security >= 4,
 { label => _("Password"), val => \$b->{password}, hidden => 1 },
 { label => _("Password (again)"), val => \$b->{password2}, hidden => 1 },
 { label => _("Restrict command line options"), val => \$b->{restricted}, type => "bool", text => _("restrict") },
-)
-	);
-	@l = @l[0..1] unless $::expert; #- take "bootloader installation" and "delay before ..." on SPARC.
-
-	$b->{vga} ||= 'Normal';
-	$in->ask_from_entries_refH('', _("Bootloader main options"), \@l,
+    ),
+{ label => _("Clean /tmp at each boot"), val => \$b->{CLEAN_TMP}, type => 'bool', advanced => 1 },
+{ label => _("Precise RAM size if needed (found %d MB)", availableRamMB()), val => \$memsize, advanced => 1 },
+    if_(detect_devices::hasPCMCIA,
+{ label => _("Enable multi profiles"), val => \$profiles, type => 'bool', advanced => 1 },
+    ),
+],
 				 complete => sub {
+				     !$memsize || $memsize =~ /K$/ || $memsize =~ s/^(\d+)M?$/$1M/i or $in->ask_warn('', _("Give the ram size in MB")), return 1;
 #-				     $security > 4 && length($b->{password}) < 6 and $in->ask_warn('', _("At this level of security, a password (and a good one) in lilo is requested")), return 1;
 				     $b->{restricted} && !$b->{password} and $in->ask_warn('', _("Option ``Restrict command line options'' is of no use without a password")), return 1;
 				     $b->{password} eq $b->{password2} or !$b->{restricted} or $in->ask_warn('', [ _("The passwords do not match"), _("Please try again") ]), return 1;
@@ -153,6 +160,9 @@ $security < 4 ? () : (
 				) or return 0;
 	$b->{use_partition} = $silo_install_lang eq _("First sector of drive (MBR)") ? 0 : 1;
 	$b->{vga} = $bootloader::vga_modes{$b->{vga}} || $b->{vga};
+
+	bootloader::set_profiles($b, $profiles);
+	bootloader::add_append($b, "mem", $memsize);
     }
 
     while ($::expert || $more > 1) {
