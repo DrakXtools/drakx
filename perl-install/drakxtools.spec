@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10.2
-Release: 0.14mdk
+Release: 0.15mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -367,6 +367,10 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Fri Jan 21 2005 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.2-0.15mdk
+- fix mygtk2 for drakloop (pixel)
+- printerdrake: fix main loop (daouda)
+
 * Fri Jan 21 2005 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.2-0.14mdk
 - drakconnect: update ISP db (baud)
 - harddrake: fix pcmcia controllers detection
