@@ -25,7 +25,7 @@ points, select \"New\".")) },
 			    my $dav = $_;
 			    { label => $dav->{device}, val => $dav->{mntpoint}, clicked_may_quit => sub { config($in, $dav, $all_hds); 1 } } } @$davs),
 			 { val => N("New"), clicked_may_quit => sub { create($in, $all_hds); 1 } },
-			 { val => N("Quit"), icon => "exit", clicked_may_quit => sub { $quit = 1 } },
+			 { val => N("Quit"), clicked_may_quit => sub { $quit = 1 } },
 		       ]);
     } until $quit;
 
