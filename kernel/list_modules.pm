@@ -1,4 +1,4 @@
-package list_modules;
+package list_modules; # $Id$
 
 use MDK::Common;
 
