@@ -352,7 +352,7 @@ sub choosePackagesTree {
                                 foreach (@n) {
                                     #pkgs::togglePackageSelection($packages, $_, my $l = {});
                                     #@l{grep {$l->{$_}} keys %$l} = ();
-				    $i++; log::l("$i:toggle of $_");
+				    $i++; log::l("$i:toggle of ".$_->fullname);
                                     pkgs::togglePackageSelection($packages, $_, \%l);
                                 }
 				if (my @l = map { $packages->{depslist}[$_]->name } keys %l) {
