@@ -639,9 +639,9 @@ sub installPackages {
 
     my $old = \&pkgs::installCallback;
     local *pkgs::installCallback = sub {
-	my ($data, $type, $id, $subtype, $_amount, $_total) = @_;
+	my ($data, $type, $id, $subtype, $_amount, $total_) = @_;
 	if ($type eq 'user' && $subtype eq 'install') {
-	    $total = $_total;
+	    $total = $total_;
 	} elsif ($type eq 'inst' && $subtype eq 'start') {
 	    my $p = $data->{depslist}[$id];
 	    $w->set(N("Installing package %s\n%d%%", $p->name, $total && 100 * $current / $total));
