@@ -10,6 +10,7 @@ use Socket;
 
 use common qw(:common :file :system :functional);
 use detect_devices;
+use run_program;
 use log;
 
 #-######################################################################################
@@ -45,6 +46,14 @@ sub read_interface_conf {
     $intf{isPtp} = $intf{NETWORK} eq '255.255.255.255';
     $intf{isUp} = 1;
     \%intf;
+}
+
+sub up_it {
+    my ($prefix, $intfs) = @_;
+    $_->{isUp} and return foreach @$intfs;
+    my $f = "/etc/resolv.conf"; symlink "$prefix/$f", $f;
+    run_program::rooted($prefix, "/etc/rc.d/init.d/network", "start");
+    $_->{isUp} = 1 foreach @$intfs;
 }
 
 sub write_conf {
@@ -148,7 +157,10 @@ sub sethostname {
 
 sub resolv($) {
     my ($name) = @_;
-    is_ip($name) ? $name : join(".", unpack "C4", (gethostbyname $name)[4]);
+    is_ip($name) and return $name;
+    my $a = join(".", unpack "C4", (gethostbyname $name)[4]);
+    log::l("resolved $name in $a");
+    $a;
 }
 
 sub dnsServers {

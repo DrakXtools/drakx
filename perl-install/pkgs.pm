@@ -216,7 +216,7 @@ sub readCompss($) {
 }
 
 sub readCompssList($$$) {
-    my ($packages, $compss_, $lang) = @_;
+    my ($packages, $compss_) = @_;
     my $f = install_any::getFile("compssList") or die "can't find compssList";
     local $_ = <$f>;
     my $level = [ split ];
@@ -234,8 +234,9 @@ sub readCompssList($$$) {
 	my $p = $e->{$name} or log::l("unknown entry $name (in compssList)"), next;
 	$p->{values} = \@values;
     }
-    my $locales = "locales-" . substr($lang, 0, 2);
-    if (my $p = $packages->{$locales}) {
+    foreach (split ':', $ENV{LANGUAGE}) {
+	my $locales = "locales-" . substr($_, 0, 2);
+	my $p = $packages->{$locales} or next;
 	foreach ($locales, @{$p->{provides} || []}) {
 	    my $p = $packages->{$_} or next;
 	    $p->{values} = [ map { $_ + 70 } @{$p->{values}} ];

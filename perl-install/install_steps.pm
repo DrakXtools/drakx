@@ -342,6 +342,7 @@ sub installCrypto {
     my $u = $o->{crypto} or return; $u->{mirror} or return;
     my ($packages, %done);
     my $dir = "$o->{prefix}/tmp";
+    network::up_it($o->{prefix}, $o->{intf}) if $o->{intf};
 
     local *install_any::getFile = sub {
 	local *F;

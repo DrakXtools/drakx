@@ -127,7 +127,7 @@ sub setPackages($) {
 	pkgs::getDeps($o->{packages});
 
 	my $c; ($o->{compss}, $c) = pkgs::readCompss($o->{packages});
-	$o->{compssListLevels} = pkgs::readCompssList($o->{packages}, $c, $o->{lang});
+	$o->{compssListLevels} = pkgs::readCompssList($o->{packages}, $c);
 	$o->{compssUsers} = pkgs::readCompssUsers($o->{packages}, $o->{compss});
 
 	grep { !$o->{packages}{$_} && log::l("missing base package $_") } @{$o->{base}} and die "missing some base packages";

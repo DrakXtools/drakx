@@ -406,7 +406,16 @@ _("Second DNS Server") => \$m->{dns2},
 sub installCrypto {
     my ($o) = @_;
     my $u = $o->{crypto} ||= {};
-    $::expert && $o->{intf} && $o->{netc}{NETWORKING} ne 'false' or return;
+    
+    $::expert or return;
+    if ($o->{intf} && $o->{netc}{NETWORKING} ne 'false') {
+	my $w = $o->wait_message('', _("Bringing up the network"));
+	network::up_it($o->{prefix}, $o->{intf});
+    } elsif ($o->{modem}) {
+	run_program::rooted($o->{prefix}, "ifup", "ppp0");
+    } else {
+	return;
+    }
     
     is_empty_hash_ref($u) and $o->ask_yesorno('', 
 "Do you want to download cryptographic packages?
@@ -744,7 +753,7 @@ sub miscellaneous {
 _("Use hard drive optimisations?") => { val => \$u->{HDPARM}, type => 'bool', text => _("(may cause data corruption)") },
 _("Choose security level") => { val => \$s, list => [ map { $l{$_} } ikeys %l ], not_edit => 1 },
 _("Precise RAM size if needed (found %d MB)", availableRam / 1024 + 3) => \$u->{memsize}, #- add three for correction.
-_("Removable media automounting") => { val => $o->{useSupermount}, type => 'bool', text => 'supermount' },
+_("Removable media automounting") => { val => \$o->{useSupermount}, type => 'bool', text => 'supermount' },
      $u->{numlock} ? (
 _("Enable num lock at startup") => { val => \$u->{numlock}, type => 'bool' },
      ) : (),
