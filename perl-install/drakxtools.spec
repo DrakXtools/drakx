@@ -324,6 +324,7 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
     * sort lan protocols
   o manage interface: update (poulpy)
 - drakvpn: one can now start from scratch with ipsec.conf (florin)
+- enforce gnome button order everywhere
 - harddrake: really fix doble blanked ISDN detection
 - mousedrake (pixel):
   o detection defaults on automatic choices
