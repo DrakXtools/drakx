@@ -269,7 +269,7 @@ sub search_windows_font {
 
 sub is_a_font {
     local $_ = $_[0];
-    /.ttf$/i || /.pfa$/i || /.pfb$/i || /.pcf$/i || /.pcf.gz$/i || /.pfm$/i || /.gsf$/;
+    /\.ttf$/i || /\.pfa$/i || /\.pfb$/i || /\.pcf$/i || /\.pcf\.gz$/i || /\.pfm$/i || /\.gsf$/;
 }
 
 # Optimisation de cette etape indispensable
