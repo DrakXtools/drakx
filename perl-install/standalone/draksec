@@ -274,7 +274,6 @@ gtkappend_page($notebook, gtkshow(gtkpack_(Gtk2::VBox->new,
                                                                                        my $i = $_;
                                                                                        my $opt = $inv_fields{$i} || $i;
                                                                                        $security_checks_value{$i} = new_nonedit_combo([ 'yes', 'no', 'default' ], $msec->get_check_value($opt));
-                                                                                       my $entry = $security_checks_value{$i}->entry;
                                                                                        register_help_entry($i, $msec->get_check_default($opt), $opt);
                                                                                        [ gtkshow(Gtk2::WrappedLabel->new($i)), resize($security_checks_value{$i}) ];
                                                                                    } sort map { $fields{$_} || $_ } $msec->list_checks)))),

@@ -23,7 +23,6 @@ use list_modules;
 use detect_devices;
 use log;
 
-my $has_nvaudio = -x '/lib/modules/' . c::kernel_version() . '/';
 
 our %alsa2oss = 
     (
