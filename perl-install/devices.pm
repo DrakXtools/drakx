@@ -140,6 +140,7 @@ sub entry {
 		   "optcd"   => [ c::S_IFBLK(), 17, 0 ],
 		   "kbd"     => [ c::S_IFCHR(), 11, 0 ],
 		   "psaux"   => [ c::S_IFCHR(), 10, 1 ],
+		   "atibm"   => [ c::S_IFCHR(), 10, 3 ],
 		   "random"  => [ c::S_IFCHR(), 1,  8 ],
 		   "sbpcd"   => [ c::S_IFBLK(), 25, 0 ],
 		   "sjcd"    => [ c::S_IFBLK(), 18, 0 ],
