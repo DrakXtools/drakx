@@ -32,6 +32,10 @@ use common;
 use my_gtk qw(:helpers);
 use ugtk qw(:helpers);
 
+#- languages that can't be displayed with gtk1, so we unset translations
+#- for them until this tool is ported to gtk2
+if ($ENV{LANGUAGE} =~ /\b(ar|he|hi|ta)/) { $ENV{LANGUAGE} = "C" };
+
 require_root_capability();
 
 my $expert_mode = 0;

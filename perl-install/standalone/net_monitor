@@ -23,6 +23,10 @@ use lib qw(/usr/lib/libDrakX);
 use strict;
 use standalone;     #- warning, standalone must be loaded very first, for 'explanations'
 
+#- languages that can't be displayed with gtk1, so we unset translations
+#- for them until this tool is ported to gtk2
+if ($ENV{LANGUAGE} =~ /\b(ar|he|hi|ta)/) { $ENV{LANGUAGE} = "C" };
+
 use my_gtk qw(:helpers :wrappers);
 use common;
 use network::netconnect;

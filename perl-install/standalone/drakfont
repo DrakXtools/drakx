@@ -362,7 +362,7 @@ sub put_font_dir {
         my $ttfdir = $drakfont_dir . "/ttf";
 	# mkttfdir only knows about iso-8859-1, using ttmkfdir -u instead -- pablo
         #`$mkttfdir $ttfdir`;
-       	system("cd $ttfdir && $fccache . && $ttmkfdir -u > fonts.dir");
+       	system("cd $ttfdir && $fccache && $ttmkfdir -u > fonts.dir");
         $interactive and progress($pbar2, 0.10, N("True Type install done"));
         my $update_chkfontpath = "$chkfontpath -a $drakfont_dir/ttf";
 
@@ -379,7 +379,7 @@ sub put_font_dir {
 	      and system("cd $drakfont_dir/tmp/Type1 && cat Fontmap >> `rpm -ql ghostscript | grep Fontmap.GS` ");
             system("cd $drakfont_dir/tmp/Type1 && mv *.pfm *.gsf *.afm *.pfb ../../Type1 ");
             my $type1dir = $drakfont_dir . "/Type1";
-            system("cd $type1dir && $fccache . && $type1inst");
+            system("cd $type1dir && $fccache && $type1inst");
             $interactive and progress($pbar2, 0.05, N("Ghostscript referencing"));
             $update_chkfontpath .= "; $chkfontpath -a $drakfont_dir/Type1";
         }
@@ -395,7 +395,7 @@ sub put_font_dir {
             system("cd $drakfont_dir/tmp/Type1 && cat Fontmap >> `rpm -ql ghostscript | grep Fontmap.GS` ");
             system("cd $drakfont_dir/tmp/Type1 && mv *.pfm *.afm *.gsf *.pfb ../../Type1 ");
             my $type1dir = $drakfont_dir . "/Type1";
-            system("cd $type1dir && $fccache . && $type1inst");
+            system("cd $type1dir && $fccache && $type1inst");
             $interactive and progress($pbar2, 0.05, N("Ghostscript referencing"));
             $update_chkfontpath .= "; $chkfontpath -a $drakfont_dir/Type1";
         }
@@ -414,7 +414,7 @@ sub put_font_dir {
             system("cd $drakfont_dir/tmp/tmp && mv  *.afm ../Type1");
             system("cd $drakfont_dir/tmp/Type1 && mv *.afm ../../Type1 ");
             my $type1dir = $drakfont_dir . "/Type1";
-            system("cd $type1dir && $fccache . && $type1inst");
+            system("cd $type1dir && $fccache && $type1inst");
             $interactive and progress($pbar2, 0.14, N("type1inst building"));
             $update_chkfontpath .= "; $chkfontpath -a $drakfont_dir/Type1";
         }
@@ -463,7 +463,7 @@ sub remove_fonts {
 	    if (/.ttf$/) {
 		rm_rf($_);
 		# rebuild of the fonts.dir and fc-cache files
-       		system("cd `dirname $_` && $fccache . && $ttmkfdir -u > fonts.dir");
+       		system("cd `dirname $_` && $fccache && $ttmkfdir -u > fonts.dir");
 	    }
             else { rm_rf($i) }
         }
