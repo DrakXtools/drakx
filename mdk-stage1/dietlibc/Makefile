@@ -51,7 +51,6 @@ load:
 
 clean:
 	rm -f *.o *.a t t1 compile load exports mapfile libdietc.so
-	$(MAKE) -C examples clean
 
 tar: clean
 	cd .. && tar cvvf dietlibc.tar.bz2 dietlibc --use=bzip2
