@@ -903,6 +903,7 @@ enum return_type ftp_prepare(void)
 	enum return_type results;
 	struct utsname kernel_uname;
 	char *http_proxy_host, *http_proxy_port;
+	int use_http_proxy;
 
 	if (!ramdisk_possible()) {
 		stg1_error_message("FTP install needs more than %d Mbytes of memory (detected %d Mbytes). You may want to try an NFS install.",
@@ -915,14 +916,15 @@ enum return_type ftp_prepare(void)
 	if (results != RETURN_OK)
 		return results;
 
-        get_http_proxy(&http_proxy_host, &http_proxy_port);
+	get_http_proxy(&http_proxy_host, &http_proxy_port);
+	use_http_proxy = http_proxy_host && http_proxy_port && !streq(http_proxy_host, "") && !streq(http_proxy_port, "");
+
 	uname(&kernel_uname);
 
 	do {
 		char location_full[500];
 		int ftp_serv_response = -1;
 		int fd, size;
-		int use_http_proxy;
 		char ftp_hostname[500];
 
 		if (!IS_AUTOMATIC) {
@@ -933,6 +935,15 @@ enum return_type ftp_prepare(void)
 
 			if (results == RETURN_BACK)
 				return ftp_prepare();
+
+                        if (use_http_proxy) {
+                            results = ask_yes_no("Do you want to use this HTTP proxy for FTP connections too ?");
+
+			    if (results == RETURN_BACK)
+				return ftp_prepare();
+
+                            use_http_proxy = results == RETURN_OK;
+                        }
 		}
 
 		results = ask_from_entries_auto("Please enter the name or IP address of the FTP server, "
@@ -943,8 +954,6 @@ enum return_type ftp_prepare(void)
 			unset_automatic(); /* we are in a fallback mode */
 			return ftp_prepare();
 		}
-
-		use_http_proxy = http_proxy_host && http_proxy_port && !streq(http_proxy_host, "") && !streq(http_proxy_port, "");
 
 		strcpy(location_full, answers[1][0] == '/' ? "" : "/");
 		strcat(location_full, answers[1]);
