@@ -350,13 +350,11 @@ sub getCPUs {
     my (@cpus, $cpu);
     foreach (cat_("/proc/cpuinfo")) {
 	   if (/^processor/) {
-		  next unless $cpu;
-		  push @cpus, $cpu;
+		  push @cpus, $cpu if $cpu;
 		  $cpu = {};
-	   } else {
-		  /(\S*)\s*:\s*(\S*)/;
-		  $cpu->{$1} = $2 if $1;
 	   }
+	   /(\S*)\s*:\s*(\S*)/;
+	   $cpu->{$1} = $2 if $1;
     }
     push @cpus, $cpu;
     @cpus;
