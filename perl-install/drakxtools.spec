@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10.2
-Release: 13mdk
+Release: 14mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -368,6 +368,14 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Fri Mar 25 2005 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.2-14mdk
+- drakroam:
+  o do not crash (blino)
+  o fix translations
+- net_applet (blino):
+  o ask for root password if needed when setting a new profile
+  o force refresh if asked by user from the menu
+
 * Thu Mar 24 2005 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.2-13mdk
 - banners: make banner be RTL aware (aka follow language direction and
   display itself mirrored for RTL languages) (#11910)
