@@ -706,6 +706,7 @@ sub write_lilo_conf {
     $lilo->{prompt} = $lilo->{timeout};
 
     delete $lilo->{linear} if $lilo->{lba32};
+    $lilo->{geometric} = !$lilo->{lba32} && !$lilo->{linear} if arch() !~ /ia64/;
 
     my $file2fullname = sub {
 	my ($file) = @_;
@@ -756,7 +757,7 @@ sub write_lilo_conf {
 
 	local $lilo->{default} = make_label_lilo_compatible($lilo->{default});
 	$lilo->{$_} and print F "$_=$lilo->{$_}" foreach qw(boot map install vga default keytable);
-	$lilo->{$_} and print F $_ foreach qw(linear lba32 compact prompt nowarn restricted);
+	$lilo->{$_} and print F $_ foreach qw(linear geometric compact prompt nowarn restricted);
 	print F "append=\"$lilo->{append}\"" if $lilo->{append};
  	print F "password=", $lilo->{password} if $lilo->{password}; #- also done by msec
 	print F "timeout=", round(10 * $lilo->{timeout}) if $lilo->{timeout};
