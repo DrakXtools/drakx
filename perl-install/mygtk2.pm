@@ -616,7 +616,7 @@ sub _gtknew_handle_children {
 #- * if the {child} doesn't handle the method, we try with the {real_window}
 #-   (eg : add_accel_group set_position set_default_size
 #- * a few methods are handled specially
-my %for_real_window = map { $_ => 1 } qw(show_all);
+my %for_real_window = map { $_ => 1 } qw(show_all size_request);
 sub mygtk2::MagicWindow::AUTOLOAD {
     my ($w, @args) = @_;
 
