@@ -555,61 +555,39 @@ sub setRootPassword {
     my ($o) = @_;
     my $p = $o->{prefix};
     my $u = $o->{superuser} ||= {};
-
-    $u->{pw} ||= $u->{password} && any::crypt($u->{password}, $o->{authentication}{md5});
-
-    my @lines = cat_(my $f = "$p/etc/passwd") or log::l("missing passwd file"), return;
-
-    local *F;
-    open F, "> $f" or die "failed to write file $f: $!\n";
-    foreach (@lines) {
-	if (/^root:/) {
-	    add2hash($u, any::unpack_passwd($_));
-	    $_ = any::pack_passwd($_);
-	}
-	print F $_;
-    }
+    local $o->{superuser}{name} = 'root';
+    any::write_passwd_user($o->{prefix}, $o->{superuser}, $o->{authentication}{md5});
 }
 
 #------------------------------------------------------------------------------
 
-sub addUser($) {
+sub addUser {
     my ($o) = @_;
     my $p = $o->{prefix};
+    my $users = $o->{users} ||= [];
 
     my (%uids, %gids); 
     foreach (glob_("$p/home")) { my ($u, $g) = (stat($_))[4,5]; $uids{$u} = 1; $gids{$g} = 1; }
 
-    my %done;
-    my @l = grep {
-	if (!$_->{name} || getpwnam($_->{name}) || $done{$_->{name}}) { 
-	    0;
-	} else {
-	    $_->{home} ||= "/home/$_->{name}";
+    foreach (@$users) {
+	$_->{home} ||= "/home/$_->{name}";
 
-	    my $u = $_->{uid} || ($_->{oldu} = (stat("$p$_->{home}"))[4]);
-	    my $g = $_->{gid} || ($_->{oldg} = (stat("$p$_->{home}"))[5]);
-	    #- search for available uid above 501 else initscripts may fail to change language for KDE.
-	    if (!$u || getpwuid($u)) { for ($u = 501; getpwuid($u) || $uids{$u}; $u++) {} }
-	    if (!$g || getgrgid($g)) { for ($g = 501; getgrgid($g) || $gids{$g}; $g++) {} }
+	my $u = $_->{uid} || ($_->{oldu} = (stat("$p$_->{home}"))[4]);
+	my $g = $_->{gid} || ($_->{oldg} = (stat("$p$_->{home}"))[5]);
+	#- search for available uid above 501 else initscripts may fail to change language for KDE.
+	if (!$u || getpwuid($u)) { for ($u = 501; getpwuid($u) || $uids{$u}; $u++) {} }
+	if (!$g || getgrgid($g)) { for ($g = 501; getgrgid($g) || $gids{$g}; $g++) {} }
+	
+	$_->{uid} = $u; $uids{$u} = 1;
+	$_->{gid} = $g; $gids{$g} = 1;
+    }
 
-	    $_->{uid} = $u; $uids{$u} = 1;
-	    $_->{gid} = $g; $gids{$g} = 1;
-	    $_->{pw} ||= $_->{password} && any::crypt($_->{password}, $o->{authentication}{md5});
-	    $_->{shell} ||= "/bin/bash";
-	    $done{$_->{name}} = 1;
-	}
-    } @{$o->{users} || []};
-    my @passwd = cat_("$p/etc/passwd");
-
-    local *F;
-    open F, ">> $p/etc/passwd" or die "can't append to passwd file: $!";
-    print F any::pack_passwd($_) foreach @l;
+    any::write_passwd_user($p, $_, $o->{authentication}{md5}) foreach @$users;
 
     open F, ">> $p/etc/group" or die "can't append to group file: $!";
-    print F "$_->{name}:x:$_->{gid}:\n" foreach @l;
+    print F "$_->{name}:x:$_->{gid}:\n" foreach @$users;
 
-    foreach my $u (@l) {
+    foreach my $u (@$users) {
 	if (! -d "$p$u->{home}") {
 	    my $mode = $o->{security} < 2 ? 0755 : 0750;
 	    eval { commands::cp("-f", "$p/etc/skel", "$p$u->{home}") };
@@ -623,8 +601,7 @@ sub addUser($) {
 	eval { commands::chown_("-r", "$u->{uid}.$u->{gid}", "$p$u->{home}") }
 	    if $u->{uid} != $u->{oldu} || $u->{gid} != $u->{oldg};
     }
-    require any;
-    any::addUsers($o->{prefix}, @l);
+    any::addUsers($o->{prefix}, $users);
 }
 
 #------------------------------------------------------------------------------
@@ -755,10 +732,7 @@ sub configureX {
     { local $::testing = 0; #- unset testing
       local $::auto = 1;
       $o->{X}{skiptest} = 1;
-      Xconfigurator::main($o->{prefix}, $o->{X}, class_discard->new, $o->{allowFB}, bool($o->{pcmcia}), sub {
-	  my ($server, @l) = @_;
-	  $o->pkg_install("XFree86-$server", @l);
-      });
+      Xconfigurator::main($o->{prefix}, $o->{X}, class_discard->new, $o->{allowFB}, bool($o->{pcmcia}), sub { $o->pkg_install(@_) });
     }
     $o->configureXAfter;
 }
