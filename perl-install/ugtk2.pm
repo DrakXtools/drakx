@@ -1094,6 +1094,7 @@ sub ask_browse_tree_info {
 	$toolbar->append_item(undef, $toolbar{$_}[0], undef, gtkcreate_img("$_.png"), $toolbar{$_}[1]);
     }
 
+    $pixcolumn->{is_pix} = 1;
     $common->{widgets} = { w => $w, tree => $tree, tree_model => $tree_model, textcolumn => $textcolumn, pixcolumn => $pixcolumn,
                            info => $info, status => $status };
     ask_browse_tree_info_given_widgets($common);
@@ -1289,9 +1290,9 @@ sub ask_browse_tree_info_given_widgets {
 	0;
     });
     $w->{tree}->signal_connect(button_press_event => sub {  #- not too good, but CellRendererPixbuf doesn't have the needed signals :(
-	my ($returns, $path, $column) = $w->{tree}->get_path_at_pos($_[1]->x, $_[1]->y);
-	if ($returns) {
-	    Gtk2->equals($column, $w->{pixcolumn}) and $mouse_toggle_pending = $w->{tree_model}->get($path, 0);
+	my ($path, $column) = $w->{tree}->get_path_at_pos($_[1]->x, $_[1]->y);
+	if ($path && $column) {
+	    $column->{is_pix} and $mouse_toggle_pending = $w->{tree_model}->get($path, 0);
 	}
     });
     $common->{rebuild_tree}->();
