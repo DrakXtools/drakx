@@ -68,7 +68,7 @@ eval `find $STAGE2TMP | perl -MMDK::Common -lne '-l or $s += round_up(-s, 1024);
 mkdir -p $MNTPOINT 2>/dev/null
 for i in $MNTPOINT $STAGE2; do $SUDO umount $i 2>/dev/null ; done
 dd if=/dev/zero of=$STAGE2 bs=1k count=$[ $size + 1024 + 200 ]
-$MKE2FS -N $[$inodes + 50] $STAGE2
+$MKE2FS -N $[$inodes + 200] $STAGE2
 $SUDO mount -t ext2 $STAGE2 $MNTPOINT -o loop
 
 rmdir $MNTPOINT/lost+found
@@ -76,6 +76,7 @@ $SUDO cp -a $STAGE2TMP/* $MNTPOINT || exit 1
 $SUDO rm -rf $STAGE2TMP
 
 df $MNTPOINT
+df -i $MNTPOINT
 $SUDO umount $STAGE2
 rmdir $MNTPOINT
 
