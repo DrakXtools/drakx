@@ -130,7 +130,7 @@ sub default_ATI_fglrx_config() { our $default_ATI_fglrx_config }
 sub probe() {
 #-for Pixel tests
 #-    my @c = { driver => 'Card:Matrox Millennium G400 DualHead', description => 'Matrox|Millennium G400 Dual HeadCard' };
-    my @c = grep { $_->{driver} =~ /(Card|Server|Driver):/ } detect_devices::probeall();
+    my @c = detect_devices::matching_driver('(Card|Server|Driver):');
 
     my @cards = map {
 	my @l = $_->{description} =~ /(.*?)\|(.*)/;

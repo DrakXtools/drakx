@@ -412,7 +412,7 @@ sub getSerialModem {
 }
 
 sub getModem() {
-    my @pci_modems = grep { $_->{driver} =~ /www.linmodems.org/ } probeall();
+    my @pci_modems = matching_driver('www\.linmodems\.org');
     getSerialModem({}), @pci_modems;
 }
 
@@ -573,6 +573,10 @@ sub probeall() {
 sub matching_desc {
     my ($regexp) = @_;
     grep { $_->{description} =~ /$regexp/i } probeall();
+}
+sub matching_driver {
+    my ($regexp) = @_;
+    grep { $_->{driver} =~ /$regexp/i } probeall();
 }
 sub stringlist() { 
     map {
