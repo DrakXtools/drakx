@@ -179,7 +179,7 @@ sub new($$) {
 		    exec $_[0], "-dpms","-s" ,"240", "-allowMouseOpenFail", "-xf86config", $f or exit 1;
 		}
 		foreach (1..15) {
-		    sleep 1;
+		    sleep 1000;
 		    return 0 if !$ok;
 		    return 1 if c::Xtest($ENV{DISPLAY});
 		}
@@ -210,15 +210,16 @@ sub new($$) {
 		    !$o->{vga16} && listlength(cat_("/proc/fb")) or next;
 
 		    $o->{allowFB} = &$launchX("XF86_$_") #- keep in mind FB is used.
-		      and last;
+		      and goto OK;
 		} else {
 		    $o->{vga16} = 1 if /VGA16/;
-		    &$launchX("XF86_$_") and last;
+		    &$launchX("XF86_$_") and goto OK;
 		}
 	    }
+	    return undef;
 	}
     }
-    @themes = @themes_vga16 if $o->{simple_themes} || $o->{vga16};
+  OK: @themes = @themes_vga16 if $o->{simple_themes} || $o->{vga16};
 
     init_sizes();
     install_theme($o);

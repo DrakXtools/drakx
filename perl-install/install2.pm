@@ -479,7 +479,8 @@ sub exitInstall { $o->exitInstall(getNextStep() eq "exitInstall") }
 #-######################################################################################
 sub main {
     $SIG{__DIE__} = sub { chomp(my $err = $_[0]); log::l("warning: $err") };
-    $SIG{SEGV} = sub { my $msg = "Seems like memory is missing as the install crashes"; print "$msg\n"; log::l($msg);  
+    $SIG{SEGV} = sub { my $msg = "segmentation fault: seems like memory is missing as the install crashes"; print "$msg\n"; log::l($msg);
+		       require install_steps_auto_install;
 		       install_steps_auto_install::errorInStep();
 		   };
 
@@ -590,15 +591,24 @@ sub main {
     #- needed very early for install_steps_gtk
     eval { ($o->{mouse}, $o->{wacom}) = mouse::detect() } unless $o->{nomouseprobe} || $o->{mouse};
 
-    $::o = $o = $::auto_install ?
-      install_steps_auto_install->new($o) :
-	$o->{interactive} eq "stdio" ?
-      install_steps_stdio->new($o) :
-	$o->{interactive} eq "newt" ?
-      install_steps_newt->new($o) :
-	$o->{interactive} eq "gtk" ?
-      install_steps_gtk->new($o) :
-	die "unknown install type";
+    my $o_;
+    while (1) {
+	require"install_steps_$o->{interactive}.pm";
+    	$o_ = $::auto_install ?
+    	  install_steps_auto_install->new($o) :
+    	    $o->{interactive} eq "stdio" ?
+    	  install_steps_stdio->new($o) :
+    	    $o->{interactive} eq "newt" ?
+    	  install_steps_newt->new($o) :
+    	    $o->{interactive} eq "gtk" ?
+    	  install_steps_gtk->new($o) :
+    	    die "unknown install type";
+	$o_ and last;
+
+	$o->{interactive} = "newt";
+	require install_steps_newt;
+    }
+    $::o = $o = $o_;
 
     $o->{netc} = network::read_conf("/tmp/network");
     if (my ($file) = glob_('/tmp/ifcfg-*')) {

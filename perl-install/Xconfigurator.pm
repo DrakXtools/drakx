@@ -99,7 +99,7 @@ sub cardName2RealName {
 }
 sub cardName2card {
     my ($name) = @_;
-    readCardsDB("$prefix/usr/X11R6/lib/X11/Cards")->{$name};
+    readCardsDB("/usr/X11R6/lib/X11/Cards")->{$name};
 }
 
 sub readMonitorsDB {
