@@ -711,7 +711,6 @@ sub Resize {
 
     undef $@;
     my $_b = before_leaving { $@ and $part->{size} = $oldsize };
-    my $wait = $in->wait_message(N("Resizing"), '');
 
     my $adjust = sub {
 	my ($write_partitions) = @_;
@@ -727,6 +726,8 @@ sub Resize {
     };
 
     $adjust->(1) or return if $size > $oldsize;
+
+    my $wait = $in->wait_message(N("Resizing"), '');
 
     if ($nice_resize{fat}) {
 	local *log::l = sub { $wait->set(join(' ', @_)) };
