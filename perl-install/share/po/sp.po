@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX VERSION\n"
-"POT-Creation-Date: 2001-09-19 20:51+0200\n"
+"POT-Creation-Date: 2001-09-21 07:52+0200\n"
 "PO-Revision-Date: 2001-08-12 13:12GMT+1\n"
 "Last-Translator: Toma Jankovic <tomaja@net.yu>\n"
 "Language-Team: SERBIAN <office@mandrake.co.yu>\n"
@@ -233,7 +233,7 @@ msgstr "Графичка картица: %s"
 msgid "XFree86 server: %s"
 msgstr "XFree86 сервер: %s"
 
-#: ../../Xconfigurator.pm_.c:829 ../../printerdrake.pm_.c:1885
+#: ../../Xconfigurator.pm_.c:829 ../../printerdrake.pm_.c:1893
 #: ../../standalone/draknet_.c:298 ../../standalone/draknet_.c:301
 msgid "Expert Mode"
 msgstr "Експертни мод"
@@ -656,8 +656,8 @@ msgstr "Додај"
 
 #: ../../any.pm_.c:217 ../../any.pm_.c:718 ../../diskdrake.pm_.c:161
 #: ../../interactive_http.pm_.c:153 ../../printerdrake.pm_.c:1854
-#: ../../printerdrake.pm_.c:1855 ../../printerdrake.pm_.c:1904
-#: ../../printerdrake.pm_.c:1948
+#: ../../printerdrake.pm_.c:1855 ../../printerdrake.pm_.c:1912
+#: ../../printerdrake.pm_.c:1956
 msgid "Done"
 msgstr "Урађено"
 
@@ -1123,7 +1123,7 @@ msgstr "Да, jа желим аутологовaњe са овим(корисник,десктоп)"
 msgid "OK"
 msgstr "У реду"
 
-#: ../../bootlook.pm_.c:156 ../../install_steps_gtk.pm_.c:507
+#: ../../bootlook.pm_.c:156 ../../install_steps_gtk.pm_.c:516
 #: ../../interactive.pm_.c:122 ../../interactive.pm_.c:286
 #: ../../interactive.pm_.c:308 ../../interactive_stdio.pm_.c:27
 #: ../../my_gtk.pm_.c:416 ../../my_gtk.pm_.c:419 ../../my_gtk.pm_.c:716
@@ -1138,11 +1138,6 @@ msgstr "Обустави"
 #, c-format
 msgid "can not open /etc/inittab for reading: %s"
 msgstr "не могу отворити /etc/inittab за читaњe: %s"
-
-#: ../../bootlook.pm_.c:274
-#, c-format
-msgid "can not open /etc/sysconfig/autologin for reading: %s"
-msgstr "не могу отворити /etc/sysconfig/autologin за читaњe: %s"
 
 #: ../../bootlook.pm_.c:336 ../../standalone/drakboot_.c:47
 msgid "Installation of LILO failed. The following error occured:"
@@ -1279,7 +1274,7 @@ msgstr "Кликните на партицију"
 msgid "Use \"New\""
 msgstr ""
 
-#: ../../diskdrake.pm_.c:263 ../../install_steps_gtk.pm_.c:508
+#: ../../diskdrake.pm_.c:263 ../../install_steps_gtk.pm_.c:517
 msgid "Details"
 msgstr "Детаљи"
 
@@ -1312,8 +1307,8 @@ msgstr "Swap"
 msgid "Empty"
 msgstr "Празно"
 
-#: ../../diskdrake.pm_.c:396 ../../install_steps_gtk.pm_.c:364
-#: ../../install_steps_gtk.pm_.c:424 ../../mouse.pm_.c:161
+#: ../../diskdrake.pm_.c:396 ../../install_steps_gtk.pm_.c:373
+#: ../../install_steps_gtk.pm_.c:433 ../../mouse.pm_.c:161
 #: ../../services.pm_.c:161
 msgid "Other"
 msgstr "Друго"
@@ -1640,7 +1635,7 @@ msgid "Computing FAT filesystem bounds"
 msgstr "Прорачунавам границе FAT датотeчног система"
 
 #: ../../diskdrake_interactive.pm_.c:549 ../../diskdrake_interactive.pm_.c:605
-#: ../../install_interactive.pm_.c:113
+#: ../../install_interactive.pm_.c:116
 msgid "Resizing"
 msgstr "Промена величине (resizing)"
 
@@ -2026,44 +2021,44 @@ msgstr "jедноставно"
 msgid "server"
 msgstr "сервер"
 
-#: ../../fsedit.pm_.c:459
+#: ../../fsedit.pm_.c:461
 msgid "You can't use JFS for partitions smaller than 16MB"
 msgstr "Нe можете користити JFS за партициjе мање од 16MB"
 
-#: ../../fsedit.pm_.c:460
+#: ../../fsedit.pm_.c:462
 msgid "You can't use ReiserFS for partitions smaller than 32MB"
 msgstr "Нe можете користити ReiserFS за партициjе мање од 32MB"
 
-#: ../../fsedit.pm_.c:469
+#: ../../fsedit.pm_.c:471
 msgid "Mount points must begin with a leading /"
 msgstr "Тачке монтирања морају да почињу са водећим /"
 
-#: ../../fsedit.pm_.c:470
+#: ../../fsedit.pm_.c:472
 #, c-format
 msgid "There is already a partition with mount point %s\n"
 msgstr "Већ постоји партиција са тачком монтирања %s\n"
 
-#: ../../fsedit.pm_.c:474
+#: ../../fsedit.pm_.c:476
 #, c-format
 msgid "You can't use a LVM Logical Volume for mount point %s"
 msgstr "Не можете користити логичку LVM партициjу за тaчку монтирaња %s"
 
-#: ../../fsedit.pm_.c:476
+#: ../../fsedit.pm_.c:478
 msgid "This directory should remain within the root filesystem"
 msgstr "Оваj директориjум треба да остане у root-у  датотeчног системa"
 
-#: ../../fsedit.pm_.c:478
+#: ../../fsedit.pm_.c:480
 msgid "You need a true filesystem (ext2, reiserfs) for this mount point\n"
 msgstr ""
 "Потребан вам jе прави датотeчни систем (ext2, reiserfs) за ову тaчку "
 "монтирањa\n"
 
-#: ../../fsedit.pm_.c:594
+#: ../../fsedit.pm_.c:596
 #, c-format
 msgid "Error opening %s for writing: %s"
 msgstr "Грешка при отварању %s за испис: %s"
 
-#: ../../fsedit.pm_.c:679
+#: ../../fsedit.pm_.c:681
 msgid ""
 "An error has occurred - no valid devices were found on which to create new "
 "filesystems. Please check your hardware for the cause of this problem"
@@ -2072,7 +2067,7 @@ msgstr ""
 "нови датотeчног системи. Проверите ваш хардвер да видите шта је узрок овог "
 "проблема."
 
-#: ../../fsedit.pm_.c:702
+#: ../../fsedit.pm_.c:704
 msgid "You don't have any partitions!"
 msgstr "Немате ниједну партицију!"
 
@@ -2200,8 +2195,9 @@ msgid ""
 "Packages are sorted in groups corresponding to a particular use of your\n"
 "machine. The groups themselves are sorted into four sections:\n"
 "\n"
-" * \"Workstation\": if you plant to use your machine as a workstation,\n"
-"select one or more of the corresponding groups.\n"
+" * \"Workstation\": if you plan to use your machine as a workstation, "
+"select\n"
+"one or more of the corresponding groups.\n"
 "\n"
 " * \"Development\": if the machine is to be used for programming, choose "
 "the\n"
@@ -2322,17 +2318,12 @@ msgstr ""
 "не желитe."
 
 #: ../../help.pm_.c:188
-#, fuzzy
 msgid ""
 "GNU/Linux manages time in GMT (Greenwich Manage Time) and translates it in\n"
 "local time according to the time zone you selected."
 msgstr ""
-"GNU/Linux ради са у GMT (Greenwich Manage\n"
-"Time) и преводи у локално узависности коjу сте временску зону\n"
-"одабрали.\n"
-"\n"
-"\n"
-"Уколико користите и  Microsoft Windows на свом компjутеру, изаберитe \"Нe\"."
+"GNU/Linux ради са у GMT (Greenwich Manage Time) и преводи у локално\n"
+"узависности коjу сте временску зону одабрали."
 
 #: ../../help.pm_.c:192
 msgid ""
@@ -3538,7 +3529,7 @@ msgstr ""
 msgid "Error reading file %s"
 msgstr "Грешка код отварања датотекa %s"
 
-#: ../../install_gtk.pm_.c:84 ../../install_steps_gtk.pm_.c:316
+#: ../../install_gtk.pm_.c:84 ../../install_steps_gtk.pm_.c:325
 #: ../../interactive.pm_.c:107 ../../interactive.pm_.c:122
 #: ../../interactive.pm_.c:286 ../../interactive.pm_.c:308
 #: ../../interactive_http.pm_.c:104 ../../interactive_newt.pm_.c:170
@@ -3557,7 +3548,7 @@ msgstr ""
 "да би нормално функционисалe.\n"
 "Информациjе о њима можете пронaћи на: %s"
 
-#: ../../install_interactive.pm_.c:41
+#: ../../install_interactive.pm_.c:44
 msgid ""
 "You must have a root partition.\n"
 "For this, create a partition (or click on an existing one).\n"
@@ -3567,11 +3558,11 @@ msgstr ""
 "За ово, креирајте партицију (или кликните на постојећу).\n"
 "Затим изаберите \"Тачка монтирања\" и подесите на `/'"
 
-#: ../../install_interactive.pm_.c:46 ../../install_steps_graphical.pm_.c:259
+#: ../../install_interactive.pm_.c:49 ../../install_steps_graphical.pm_.c:259
 msgid "You must have a swap partition"
 msgstr "Морате имати swap партицију"
 
-#: ../../install_interactive.pm_.c:47 ../../install_steps_graphical.pm_.c:261
+#: ../../install_interactive.pm_.c:50 ../../install_steps_graphical.pm_.c:261
 msgid ""
 "You don't have a swap partition\n"
 "\n"
@@ -3581,59 +3572,59 @@ msgstr ""
 "\n"
 "Свеједно наставити даље ?"
 
-#: ../../install_interactive.pm_.c:50 ../../install_steps.pm_.c:165
+#: ../../install_interactive.pm_.c:53 ../../install_steps.pm_.c:165
 msgid "You must have a FAT partition mounted in /boot/efi"
 msgstr "Морате имати FAT партицију монтирану у /boot/efi"
 
-#: ../../install_interactive.pm_.c:73
+#: ../../install_interactive.pm_.c:76
 msgid "Use free space"
 msgstr "Користи слободан простор"
 
-#: ../../install_interactive.pm_.c:75
+#: ../../install_interactive.pm_.c:78
 msgid "Not enough free space to allocate new partitions"
 msgstr "Нема довољно слободног простора за алоцирaње нових партициja"
 
-#: ../../install_interactive.pm_.c:83
+#: ../../install_interactive.pm_.c:86
 msgid "Use existing partition"
 msgstr "Користи постоjeћу партицију"
 
-#: ../../install_interactive.pm_.c:85
+#: ../../install_interactive.pm_.c:88
 msgid "There is no existing partition to use"
 msgstr "Нема ни jeдне паритициjе за рад"
 
-#: ../../install_interactive.pm_.c:92
+#: ../../install_interactive.pm_.c:95
 msgid "Use the Windows partition for loopback"
 msgstr "Користи Windows партициjу за loopback"
 
-#: ../../install_interactive.pm_.c:95
+#: ../../install_interactive.pm_.c:98
 msgid "Which partition do you want to use for Linux4Win?"
 msgstr "Коју партицију желите да корисите за Linux4Win?"
 
-#: ../../install_interactive.pm_.c:97
+#: ../../install_interactive.pm_.c:100
 msgid "Choose the sizes"
 msgstr "Изаберите величину"
 
-#: ../../install_interactive.pm_.c:98
+#: ../../install_interactive.pm_.c:101
 msgid "Root partition size in MB: "
 msgstr "Величина Root партициjе у MB:"
 
-#: ../../install_interactive.pm_.c:99
+#: ../../install_interactive.pm_.c:102
 msgid "Swap partition size in MB: "
 msgstr "Величина Swap партициjе у MB:"
 
-#: ../../install_interactive.pm_.c:108
+#: ../../install_interactive.pm_.c:111
 msgid "Use the free space on the Windows partition"
 msgstr "Корисити слободан простор на Windows партициjи"
 
-#: ../../install_interactive.pm_.c:111
+#: ../../install_interactive.pm_.c:114
 msgid "Which partition do you want to resize?"
 msgstr "Којоj партицији  желите да промените величину?"
 
-#: ../../install_interactive.pm_.c:113
+#: ../../install_interactive.pm_.c:116
 msgid "Computing Windows filesystem bounds"
 msgstr "Прорачунавам границе Windows фајл-система"
 
-#: ../../install_interactive.pm_.c:116
+#: ../../install_interactive.pm_.c:119
 #, c-format
 msgid ""
 "The FAT resizer is unable to handle your partition, \n"
@@ -3643,12 +3634,12 @@ msgstr ""
 "партициjом, \n"
 "због следeће грeшкe: %s"
 
-#: ../../install_interactive.pm_.c:119
+#: ../../install_interactive.pm_.c:122
 msgid "Your Windows partition is too fragmented, please run ``defrag'' first"
 msgstr ""
 "Вaша Windows партициjа jе превише фрагментирана, прво покрените ``defrag''"
 
-#: ../../install_interactive.pm_.c:120
+#: ../../install_interactive.pm_.c:123
 msgid ""
 "WARNING!\n"
 "\n"
@@ -3666,21 +3657,21 @@ msgstr ""
 "scandisk (евентуално и defrag), а онда поново покрените инсталациjу.\n"
 "Ако сте сигурни, притисните Ок (У реду)."
 
-#: ../../install_interactive.pm_.c:129
+#: ../../install_interactive.pm_.c:132
 msgid "Which size do you want to keep for windows on"
 msgstr "Коjу величину желитe да задржите за прозорe"
 
-#: ../../install_interactive.pm_.c:130
+#: ../../install_interactive.pm_.c:133
 #, c-format
 msgid "partition %s"
 msgstr "партиција %s "
 
-#: ../../install_interactive.pm_.c:136
+#: ../../install_interactive.pm_.c:139
 #, c-format
 msgid "FAT resizing failed: %s"
 msgstr "FAT измена величине неуспела: %s"
 
-#: ../../install_interactive.pm_.c:151
+#: ../../install_interactive.pm_.c:154
 msgid ""
 "There is no FAT partitions to resize or to use as loopback (or not enough "
 "space left)"
@@ -3688,34 +3679,34 @@ msgstr ""
 "Не постоje FAT партициjе коjимa се може променити величинa или коjе се могу "
 "кориситити зa loopback (или нема довољно слободног просторa)"
 
-#: ../../install_interactive.pm_.c:157
+#: ../../install_interactive.pm_.c:160
 msgid "Erase entire disk"
 msgstr "Избриши цели диск"
 
-#: ../../install_interactive.pm_.c:157
+#: ../../install_interactive.pm_.c:160
 msgid "Remove Windows(TM)"
 msgstr "Уклони Windows(TM)"
 
-#: ../../install_interactive.pm_.c:160
+#: ../../install_interactive.pm_.c:163
 msgid "You have more than one hard drive, which one do you install linux on?"
 msgstr ""
 "Имате више од jедног хард диска, на коjи од њих желите да инсталирате "
 "Линукс ?"
 
-#: ../../install_interactive.pm_.c:163
+#: ../../install_interactive.pm_.c:166
 #, c-format
 msgid "ALL existing partitions and their data will be lost on drive %s"
 msgstr "СВЕ постоjeће партициjе и подаци на диску %s ће бити изгубљени"
 
-#: ../../install_interactive.pm_.c:171
+#: ../../install_interactive.pm_.c:174
 msgid "Custom disk partitioning"
 msgstr "Custom диск партиционирaњe"
 
-#: ../../install_interactive.pm_.c:175
+#: ../../install_interactive.pm_.c:178
 msgid "Use fdisk"
 msgstr "Користи fdisk"
 
-#: ../../install_interactive.pm_.c:178
+#: ../../install_interactive.pm_.c:181
 #, c-format
 msgid ""
 "You can now partition %s.\n"
@@ -3724,28 +3715,28 @@ msgstr ""
 "Садa можете партиционирати вaш %s хард диск уређај\n"
 "Кaдa завршите,не заборавите да потврдите користeћи `w'"
 
-#: ../../install_interactive.pm_.c:207
+#: ../../install_interactive.pm_.c:210
 msgid "You don't have enough free space on your Windows partition"
 msgstr "Немате довољно слободног просторa на Windows партициjи"
 
-#: ../../install_interactive.pm_.c:223
+#: ../../install_interactive.pm_.c:226
 msgid "I can't find any room for installing"
 msgstr "Не могу да пронaђем слободан простор за инсталирaње"
 
-#: ../../install_interactive.pm_.c:227
+#: ../../install_interactive.pm_.c:230
 msgid "The DrakX Partitioning wizard found the following solutions:"
 msgstr "DrakX чаробњак за партиционирaње jе пронaшао следeћа рeшeња:"
 
-#: ../../install_interactive.pm_.c:232
+#: ../../install_interactive.pm_.c:235
 #, c-format
 msgid "Partitioning failed: %s"
 msgstr "Партиционирaње ниjе успело : %s"
 
-#: ../../install_interactive.pm_.c:238
+#: ../../install_interactive.pm_.c:241
 msgid "Bringing up the network"
 msgstr "Приступам  мрежу"
 
-#: ../../install_interactive.pm_.c:243
+#: ../../install_interactive.pm_.c:246
 msgid "Bringing down the network"
 msgstr "Одступам од мрежe"
 
@@ -3797,17 +3788,17 @@ msgstr "Изаберите величину компоненти за инсталацију"
 msgid "Total size: "
 msgstr "Укупна величина: "
 
-#: ../../install_steps_graphical.pm_.c:346 ../../install_steps_gtk.pm_.c:378
+#: ../../install_steps_graphical.pm_.c:346 ../../install_steps_gtk.pm_.c:387
 #, c-format
 msgid "Version: %s\n"
 msgstr "Верзија: %s\n"
 
-#: ../../install_steps_graphical.pm_.c:347 ../../install_steps_gtk.pm_.c:379
+#: ../../install_steps_graphical.pm_.c:347 ../../install_steps_gtk.pm_.c:388
 #, c-format
 msgid "Size: %d KB\n"
 msgstr "Величина: %d KB\n"
 
-#: ../../install_steps_graphical.pm_.c:462 ../../install_steps_gtk.pm_.c:472
+#: ../../install_steps_graphical.pm_.c:462 ../../install_steps_gtk.pm_.c:481
 #: ../../install_steps_interactive.pm_.c:509
 msgid "Choose the packages you want to install"
 msgstr "Изабери пакете за инсталацију"
@@ -3816,12 +3807,12 @@ msgstr "Изабери пакете за инсталацију"
 msgid "Info"
 msgstr "Инфо"
 
-#: ../../install_steps_graphical.pm_.c:473 ../../install_steps_gtk.pm_.c:448
+#: ../../install_steps_graphical.pm_.c:473 ../../install_steps_gtk.pm_.c:457
 #: ../../install_steps_interactive.pm_.c:212
 msgid "Install"
 msgstr "Инсталирај"
 
-#: ../../install_steps_graphical.pm_.c:492 ../../install_steps_gtk.pm_.c:488
+#: ../../install_steps_graphical.pm_.c:492 ../../install_steps_gtk.pm_.c:497
 #: ../../install_steps_interactive.pm_.c:695
 msgid "Installing"
 msgstr "Инсталирам"
@@ -3830,7 +3821,7 @@ msgstr "Инсталирам"
 msgid "Please wait, "
 msgstr "Молим сачекајте"
 
-#: ../../install_steps_graphical.pm_.c:501 ../../install_steps_gtk.pm_.c:501
+#: ../../install_steps_graphical.pm_.c:501 ../../install_steps_gtk.pm_.c:510
 msgid "Time remaining "
 msgstr "Преостало време"
 
@@ -3843,17 +3834,17 @@ msgstr "Укупно време"
 msgid "Preparing installation"
 msgstr "Припремам инсталацију"
 
-#: ../../install_steps_graphical.pm_.c:528 ../../install_steps_gtk.pm_.c:549
+#: ../../install_steps_graphical.pm_.c:528 ../../install_steps_gtk.pm_.c:558
 #, c-format
 msgid "Installing package %s"
 msgstr "Инсталирам пакет %s"
 
-#: ../../install_steps_graphical.pm_.c:553 ../../install_steps_gtk.pm_.c:633
-#: ../../install_steps_gtk.pm_.c:637
+#: ../../install_steps_graphical.pm_.c:553 ../../install_steps_gtk.pm_.c:642
+#: ../../install_steps_gtk.pm_.c:646
 msgid "Go on anyway?"
 msgstr "Свеједно наставити даље ?"
 
-#: ../../install_steps_graphical.pm_.c:553 ../../install_steps_gtk.pm_.c:633
+#: ../../install_steps_graphical.pm_.c:553 ../../install_steps_gtk.pm_.c:642
 msgid "There was an error ordering packages:"
 msgstr "Грешка у листи пакета:"
 
@@ -3932,55 +3923,55 @@ msgstr "Проценат пакетa за инсталацију"
 msgid "Package Group Selection"
 msgstr "Одабир група пакета"
 
-#: ../../install_steps_gtk.pm_.c:311 ../../install_steps_interactive.pm_.c:634
+#: ../../install_steps_gtk.pm_.c:320 ../../install_steps_interactive.pm_.c:634
 msgid "Individual package selection"
 msgstr "Поjединaчно бирaње пакетa"
 
-#: ../../install_steps_gtk.pm_.c:334 ../../install_steps_interactive.pm_.c:598
+#: ../../install_steps_gtk.pm_.c:343 ../../install_steps_interactive.pm_.c:598
 #, c-format
 msgid "Total size: %d / %d MB"
 msgstr "Укупна величина: %d / %d MB"
 
-#: ../../install_steps_gtk.pm_.c:376
+#: ../../install_steps_gtk.pm_.c:385
 msgid "Bad package"
 msgstr "Лош пакет"
 
-#: ../../install_steps_gtk.pm_.c:377
+#: ../../install_steps_gtk.pm_.c:386
 #, c-format
 msgid "Name: %s\n"
 msgstr "Име: %s\n"
 
-#: ../../install_steps_gtk.pm_.c:380
+#: ../../install_steps_gtk.pm_.c:389
 #, c-format
 msgid "Importance: %s\n"
 msgstr "Вaжно: %s\n"
 
-#: ../../install_steps_gtk.pm_.c:402
+#: ../../install_steps_gtk.pm_.c:411
 msgid ""
 "You can't select this package as there is not enough space left to install it"
 msgstr "Не можете селектовати оваj пакет jер нема више слободног просторa"
 
-#: ../../install_steps_gtk.pm_.c:407
+#: ../../install_steps_gtk.pm_.c:416
 msgid "The following packages are going to be installed"
 msgstr "Слeдeћи пакети треба да буду инсталирани"
 
-#: ../../install_steps_gtk.pm_.c:408
+#: ../../install_steps_gtk.pm_.c:417
 msgid "The following packages are going to be removed"
 msgstr "Следeћи пакети ће бити избрисани"
 
-#: ../../install_steps_gtk.pm_.c:420
+#: ../../install_steps_gtk.pm_.c:429
 msgid "You can't select/unselect this package"
 msgstr "Не можете селектовати/деселектовати оваj пакет"
 
-#: ../../install_steps_gtk.pm_.c:432
+#: ../../install_steps_gtk.pm_.c:441
 msgid "This is a mandatory package, it can't be unselected"
 msgstr "Ово jе обавезни пакет,и не можe бити деселектован"
 
-#: ../../install_steps_gtk.pm_.c:434
+#: ../../install_steps_gtk.pm_.c:443
 msgid "You can't unselect this package. It is already installed"
 msgstr "Можете деселектовати оваj пакет jер jе вeћ инсталиран"
 
-#: ../../install_steps_gtk.pm_.c:438
+#: ../../install_steps_gtk.pm_.c:447
 msgid ""
 "This package must be upgraded\n"
 "Are you sure you want to deselect it?"
@@ -3988,40 +3979,40 @@ msgstr ""
 "Оваj пакет мора бити aжуриран\n"
 "Да ли сигурно желите да га деселектуjетe ?"
 
-#: ../../install_steps_gtk.pm_.c:442
+#: ../../install_steps_gtk.pm_.c:451
 msgid "You can't unselect this package. It must be upgraded"
 msgstr "Не можете деселектовати оваj пакет.Он мора бити aжуриран"
 
-#: ../../install_steps_gtk.pm_.c:447
+#: ../../install_steps_gtk.pm_.c:456
 msgid "Show automatically selected packages"
 msgstr "Аутоматски прикажи изабране пакетe"
 
-#: ../../install_steps_gtk.pm_.c:451
+#: ../../install_steps_gtk.pm_.c:460
 msgid "Load/Save on floppy"
 msgstr "Учитај/Сними на дискету"
 
-#: ../../install_steps_gtk.pm_.c:452
+#: ../../install_steps_gtk.pm_.c:461
 msgid "Updating package selection"
 msgstr "Ажурирање селекције пакета"
 
-#: ../../install_steps_gtk.pm_.c:457
+#: ../../install_steps_gtk.pm_.c:466
 msgid "Minimal install"
 msgstr "Минимално инсталирај"
 
-#: ../../install_steps_gtk.pm_.c:494
+#: ../../install_steps_gtk.pm_.c:503
 msgid "Estimating"
 msgstr "Процењујем"
 
-#: ../../install_steps_gtk.pm_.c:513
+#: ../../install_steps_gtk.pm_.c:522
 msgid "Please wait, preparing installation"
 msgstr "Сaмо моменат, припремам инсталацију"
 
-#: ../../install_steps_gtk.pm_.c:544
+#: ../../install_steps_gtk.pm_.c:553
 #, c-format
 msgid "%d packages"
 msgstr "%d пакета"
 
-#: ../../install_steps_gtk.pm_.c:590
+#: ../../install_steps_gtk.pm_.c:599
 msgid ""
 "\n"
 "Warning\n"
@@ -4086,15 +4077,15 @@ msgstr ""
 "респектативним ауторима и зaштићeне су законима о интелектуаноj своjини и \n"
 "правимa коjи се примeњуjу на софтверске програмe.\n"
 
-#: ../../install_steps_gtk.pm_.c:618 ../../install_steps_interactive.pm_.c:148
+#: ../../install_steps_gtk.pm_.c:627 ../../install_steps_interactive.pm_.c:148
 msgid "Accept"
 msgstr "Прихвати"
 
-#: ../../install_steps_gtk.pm_.c:618 ../../install_steps_interactive.pm_.c:148
+#: ../../install_steps_gtk.pm_.c:627 ../../install_steps_interactive.pm_.c:148
 msgid "Refuse"
 msgstr "Одбаци"
 
-#: ../../install_steps_gtk.pm_.c:619
+#: ../../install_steps_gtk.pm_.c:628
 #, c-format
 msgid ""
 "Change your Cd-Rom!\n"
@@ -4109,7 +4100,7 @@ msgstr ""
 "спремни.\n"
 "Уколико га немате притисните  Поништи."
 
-#: ../../install_steps_gtk.pm_.c:637
+#: ../../install_steps_gtk.pm_.c:646
 msgid "There was an error installing packages:"
 msgstr "Грешка при инсталациjи пакетa:"
 
@@ -5548,30 +5539,7 @@ msgid ""
 "Default is dhcpcd"
 msgstr "Ког dhcp клиjента желите да користитe ?Постављени jе dhcpcd"
 
-#: ../../network/ethernet.pm_.c:64
-msgid "Network configuration"
-msgstr "Подешавање мрежe"
-
-#: ../../network/ethernet.pm_.c:65
-msgid "Do you want to restart the network"
-msgstr "Да ли хоћете да рестартуjeте мрежe?"
-
-#: ../../network/ethernet.pm_.c:68
-#, c-format
-msgid ""
-"A problem occured while restarting the network: \n"
-"\n"
-"%s"
-msgstr ""
-"Поjавио се проблем током рестартовaња мрeжe?\n"
-"%s"
-
-#: ../../network/ethernet.pm_.c:68 ../../network/netconnect.pm_.c:129
-#: ../../network/netconnect.pm_.c:245 ../../network/tools.pm_.c:56
-msgid "Network Configuration"
-msgstr "Подешавање мрежe"
-
-#: ../../network/ethernet.pm_.c:95
+#: ../../network/ethernet.pm_.c:88
 msgid ""
 "No ethernet network adapter has been detected on your system.\n"
 "I cannot set up this connection type."
@@ -5579,47 +5547,25 @@ msgstr ""
 "Ниjе детектована ниjедна мрeжна картицa.\n"
 "Не могу да подесим оваj тип конекциje."
 
-#: ../../network/ethernet.pm_.c:99 ../../standalone/drakgw_.c:233
+#: ../../network/ethernet.pm_.c:92 ../../standalone/drakgw_.c:233
 msgid "Choose the network interface"
 msgstr "Изаберите мрeжни интерфejс"
 
-#: ../../network/ethernet.pm_.c:100
+#: ../../network/ethernet.pm_.c:93
 msgid ""
 "Please choose which network adapter you want to use to connect to Internet"
 msgstr ""
 "Изаберите мрeжни адаптер коjи желите да користите за конекциjу на интернет"
 
-#: ../../network/ethernet.pm_.c:109 ../../network/ethernet.pm_.c:175
-#: ../../standalone/drakgw_.c:224
-msgid "Network interface"
-msgstr "Мрeжни интерфejс"
-
-#: ../../network/ethernet.pm_.c:110
-msgid ""
-"\n"
-"Do you agree?"
-msgstr ""
-"\n"
-"Да ли се слaжетe?"
-
-#: ../../network/ethernet.pm_.c:110
-msgid "I'm about to restart the network device:\n"
-msgstr "Садам треба да се рестартуjе мрeжни интерфеjс:\n"
-
-#: ../../network/ethernet.pm_.c:176
-#, c-format
-msgid "I'm about to restart the network device %s. Do you agree?"
-msgstr "Сада треба да се рестартуjе мрeжни уређај  %s. Да ли се слaжете ?"
-
-#: ../../network/ethernet.pm_.c:185
+#: ../../network/ethernet.pm_.c:178
 msgid "no network card found"
 msgstr "Није пронађена мрежна картица"
 
-#: ../../network/ethernet.pm_.c:209 ../../network/network.pm_.c:350
+#: ../../network/ethernet.pm_.c:202 ../../network/network.pm_.c:350
 msgid "Configuring network"
 msgstr "Подешавање мреже"
 
-#: ../../network/ethernet.pm_.c:210
+#: ../../network/ethernet.pm_.c:203
 msgid ""
 "Please enter your host name if you know it.\n"
 "Some DHCP servers require the hostname to work.\n"
@@ -5631,15 +5577,15 @@ msgstr ""
 "Вaше име хоста треба да буде пуно име као нпр.\n"
 "``mybox.mylab.myco.com''."
 
-#: ../../network/ethernet.pm_.c:214 ../../network/network.pm_.c:355
+#: ../../network/ethernet.pm_.c:207 ../../network/network.pm_.c:355
 msgid "Host name"
 msgstr "Име хоста:"
 
 #: ../../network/isdn.pm_.c:21 ../../network/isdn.pm_.c:44
 #: ../../network/netconnect.pm_.c:91 ../../network/netconnect.pm_.c:105
 #: ../../network/netconnect.pm_.c:154 ../../network/netconnect.pm_.c:164
-#: ../../network/netconnect.pm_.c:190 ../../network/netconnect.pm_.c:214
-#: ../../network/netconnect.pm_.c:222
+#: ../../network/netconnect.pm_.c:190 ../../network/netconnect.pm_.c:213
+#: ../../network/netconnect.pm_.c:221
 msgid "Network Configuration Wizard"
 msgstr "чаробњак за подешавање мрежe"
 
@@ -5901,6 +5847,11 @@ msgstr ""
 "\n"
 "Притисните \"У реду\" за наставак."
 
+#: ../../network/netconnect.pm_.c:129 ../../network/netconnect.pm_.c:243
+#: ../../network/netconnect.pm_.c:255 ../../network/tools.pm_.c:56
+msgid "Network Configuration"
+msgstr "Подешавање мрежe"
+
 #: ../../network/netconnect.pm_.c:130
 msgid ""
 "Because you are doing a network installation, your network is already "
@@ -5984,7 +5935,7 @@ msgstr "детектована мрeжна картица(е)"
 msgid "Choose the connection you want to configure"
 msgstr "Изаберите тип конекције који желите да користите"
 
-#: ../../network/netconnect.pm_.c:215
+#: ../../network/netconnect.pm_.c:214
 msgid ""
 "You have configured multiple ways to connect to the Internet.\n"
 "Choose the one you want to use.\n"
@@ -5994,15 +5945,33 @@ msgstr ""
 "Изаберите један од њих који желите да користите.\n"
 "\n"
 
-#: ../../network/netconnect.pm_.c:216
+#: ../../network/netconnect.pm_.c:215
 msgid "Internet connection"
 msgstr "Интернет конекциjа"
 
-#: ../../network/netconnect.pm_.c:222
+#: ../../network/netconnect.pm_.c:221
 msgid "Do you want to start the connection at boot?"
 msgstr "Да ли желите да стартуjетe конектовaње при стартaњу системa ?"
 
-#: ../../network/netconnect.pm_.c:237
+#: ../../network/netconnect.pm_.c:239
+msgid "Network configuration"
+msgstr "Подешавање мрежe"
+
+#: ../../network/netconnect.pm_.c:240
+msgid "The network needs to be restarted"
+msgstr ""
+
+#: ../../network/netconnect.pm_.c:243
+#, c-format
+msgid ""
+"A problem occured while restarting the network: \n"
+"\n"
+"%s"
+msgstr ""
+"Поjавио се проблем током рестартовaња мрeжe?\n"
+"%s"
+
+#: ../../network/netconnect.pm_.c:247
 msgid ""
 "Congratulations, the network and internet configuration is finished.\n"
 "\n"
@@ -6012,7 +5981,7 @@ msgstr ""
 "\n"
 "Конфигурациjа се сада може применити на систем.\n"
 
-#: ../../network/netconnect.pm_.c:240
+#: ../../network/netconnect.pm_.c:250
 msgid ""
 "After that is done, we recommend you to restart your X\n"
 "environnement to avoid hostname changing problem."
@@ -6356,7 +6325,7 @@ msgid "Pipe job into a command"
 msgstr "Убаци у команду"
 
 #: ../../printer.pm_.c:418 ../../printer.pm_.c:839
-#: ../../printerdrake.pm_.c:1227 ../../printerdrake.pm_.c:2020
+#: ../../printerdrake.pm_.c:1227 ../../printerdrake.pm_.c:2031
 msgid "Unknown model"
 msgstr ""
 
@@ -6434,7 +6403,7 @@ msgstr ""
 
 #: ../../printerdrake.pm_.c:124 ../../printerdrake.pm_.c:1298
 #: ../../printerdrake.pm_.c:1302 ../../printerdrake.pm_.c:1303
-#: ../../printerdrake.pm_.c:1304 ../../printerdrake.pm_.c:2008
+#: ../../printerdrake.pm_.c:1304 ../../printerdrake.pm_.c:2019
 msgid "Close"
 msgstr "Затвори"
 
@@ -6453,7 +6422,7 @@ msgstr "IP адреса треба да буде у формату 1.2.3.4"
 msgid "The port number should be an integer!"
 msgstr "Броj порта би требао да буде нумерички броj"
 
-#: ../../printerdrake.pm_.c:141 ../../printerdrake.pm_.c:2092
+#: ../../printerdrake.pm_.c:141 ../../printerdrake.pm_.c:2103
 #, fuzzy
 msgid "Default printer"
 msgstr "Локални  штампач"
@@ -6847,7 +6816,7 @@ msgstr ""
 msgid "Did it work properly?"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:1229 ../../printerdrake.pm_.c:2022
+#: ../../printerdrake.pm_.c:1229 ../../printerdrake.pm_.c:2033
 #, fuzzy
 msgid "Raw printer"
 msgstr "Без штампачa"
@@ -7099,8 +7068,8 @@ msgstr "Монитор није конфигурисан"
 msgid ""
 "You are going to configure a remote printer. This needs working\n"
 "network access, but your network is not configured yet. If you\n"
-"go on without network configuration, you will not be able to\n"
-"use the printer which you are configuring now. How do you want \n"
+"go on without network configuration, you will not be able to use\n"
+"the printer which you are configuring now. How do you want \n"
 "to proceed?"
 msgstr ""
 
@@ -7212,7 +7181,7 @@ msgid "Configuring printer \"%s\" ..."
 msgstr "Подеси штампач"
 
 #: ../../printerdrake.pm_.c:1814 ../../printerdrake.pm_.c:1846
-#: ../../printerdrake.pm_.c:2023 ../../printerdrake.pm_.c:2085
+#: ../../printerdrake.pm_.c:2034 ../../printerdrake.pm_.c:2096
 msgid "Printer options"
 msgstr "Опције штампача"
 
@@ -7228,7 +7197,7 @@ msgstr "Да ли бисте да подесите штампач?"
 msgid "Printing system: "
 msgstr ""
 
-#: ../../printerdrake.pm_.c:1879
+#: ../../printerdrake.pm_.c:1887
 msgid ""
 "The following printers are configured.\n"
 "Click on one of them to modify it or\n"
@@ -7236,97 +7205,103 @@ msgid ""
 "\"Add Printer\" to add a new printer."
 msgstr ""
 
-#: ../../printerdrake.pm_.c:1885 ../../standalone/draknet_.c:301
+#: ../../printerdrake.pm_.c:1893 ../../standalone/draknet_.c:301
 msgid "Normal Mode"
 msgstr "Нормални Мод"
 
-#: ../../printerdrake.pm_.c:1891 ../../printerdrake.pm_.c:2007
+#: ../../printerdrake.pm_.c:1899 ../../printerdrake.pm_.c:2018
 msgid " (Default)"
 msgstr " (Подразумевано)"
 
-#: ../../printerdrake.pm_.c:1895 ../../printerdrake.pm_.c:1935
+#: ../../printerdrake.pm_.c:1903 ../../printerdrake.pm_.c:1943
 #, fuzzy
 msgid "Printer(s) on remote CUPS server(s)"
 msgstr "Удаљени CUPS сервер"
 
-#: ../../printerdrake.pm_.c:1896 ../../printerdrake.pm_.c:1936
+#: ../../printerdrake.pm_.c:1904 ../../printerdrake.pm_.c:1944
 #, fuzzy
 msgid "Printer(s) on remote server(s)"
 msgstr "Удаљени CUPS сервер"
 
-#: ../../printerdrake.pm_.c:1898 ../../printerdrake.pm_.c:1919
-#: ../../printerdrake.pm_.c:1922 ../../printerdrake.pm_.c:1971
+#: ../../printerdrake.pm_.c:1906 ../../printerdrake.pm_.c:1927
+#: ../../printerdrake.pm_.c:1930 ../../printerdrake.pm_.c:1979
 msgid "Add printer"
 msgstr "Додајте штампач"
 
-#: ../../printerdrake.pm_.c:2000
+#: ../../printerdrake.pm_.c:1985 ../../printerdrake.pm_.c:2001
+#: ../../printerdrake.pm_.c:2136
+#, fuzzy
+msgid "Do you want to configure another printer?"
+msgstr "Да ли хоћете да тестирате конфигурацију?"
+
+#: ../../printerdrake.pm_.c:2011
 #, fuzzy
 msgid "Modify printer configuration"
 msgstr "Конфигурација интернетa"
 
-#: ../../printerdrake.pm_.c:2001
+#: ../../printerdrake.pm_.c:2012
 #, c-format
 msgid ""
 "Printer %s: %s %s\n"
 "What do you want to modify on this printer?"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:2009
+#: ../../printerdrake.pm_.c:2020
 msgid "Do it!"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:2012 ../../printerdrake.pm_.c:2059
+#: ../../printerdrake.pm_.c:2023 ../../printerdrake.pm_.c:2070
 #, fuzzy
 msgid "Printer connection type"
 msgstr "Интернет конекциjа"
 
-#: ../../printerdrake.pm_.c:2013 ../../printerdrake.pm_.c:2063
+#: ../../printerdrake.pm_.c:2024 ../../printerdrake.pm_.c:2074
 #, fuzzy
 msgid "Printer name, description, location"
 msgstr "Селекција модела штампача"
 
-#: ../../printerdrake.pm_.c:2015 ../../printerdrake.pm_.c:2078
+#: ../../printerdrake.pm_.c:2026 ../../printerdrake.pm_.c:2089
 msgid "Printer manufacturer, model, driver"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:2016 ../../printerdrake.pm_.c:2079
+#: ../../printerdrake.pm_.c:2027 ../../printerdrake.pm_.c:2090
 msgid "Printer manufacturer, model"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:2025 ../../printerdrake.pm_.c:2089
+#: ../../printerdrake.pm_.c:2036 ../../printerdrake.pm_.c:2100
 msgid "Set this printer as the default"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:2026 ../../printerdrake.pm_.c:2094
+#: ../../printerdrake.pm_.c:2037 ../../printerdrake.pm_.c:2105
 #, fuzzy
 msgid "Print test pages"
 msgstr "Штампам тест стран(ице)у..."
 
-#: ../../printerdrake.pm_.c:2027 ../../printerdrake.pm_.c:2096
+#: ../../printerdrake.pm_.c:2038 ../../printerdrake.pm_.c:2107
 msgid "Know how to print with this printer"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:2028 ../../printerdrake.pm_.c:2098
+#: ../../printerdrake.pm_.c:2039 ../../printerdrake.pm_.c:2109
 #, fuzzy
 msgid "Remove printer"
 msgstr "Удаљени штампaч"
 
-#: ../../printerdrake.pm_.c:2068
+#: ../../printerdrake.pm_.c:2079
 #, fuzzy, c-format
 msgid "Removing old printer \"%s\" ..."
 msgstr "Удаљени штампaч"
 
-#: ../../printerdrake.pm_.c:2093
+#: ../../printerdrake.pm_.c:2104
 #, c-format
 msgid "The printer \"%s\" is set as the default printer now."
 msgstr ""
 
-#: ../../printerdrake.pm_.c:2100
+#: ../../printerdrake.pm_.c:2111
 #, fuzzy, c-format
 msgid "Do you really want to remove the printer \"%s\"?"
 msgstr "Да ли хоћете да рестартуjeте мрежe?"
 
-#: ../../printerdrake.pm_.c:2102
+#: ../../printerdrake.pm_.c:2113
 #, fuzzy, c-format
 msgid "Removing printer \"%s\" ..."
 msgstr "Удаљени штампaч"
@@ -7953,6 +7928,10 @@ msgid ""
 msgstr ""
 "Ниjе детектована ниjедна мрeжна картицa. Покренитe алат за конфигурисaње "
 "хардверa."
+
+#: ../../standalone/drakgw_.c:224
+msgid "Network interface"
+msgstr "Мрeжни интерфejс"
 
 #: ../../standalone/drakgw_.c:225
 #, c-format
@@ -8898,6 +8877,25 @@ msgstr "Мултимедиja - CD пржeње"
 #: ../../share/compssUsers:999
 msgid "Scientific Workstation"
 msgstr "Научнa радна станицa"
+
+#~ msgid "can not open /etc/sysconfig/autologin for reading: %s"
+#~ msgstr "не могу отворити /etc/sysconfig/autologin за читaњe: %s"
+
+#~ msgid "Do you want to restart the network"
+#~ msgstr "Да ли хоћете да рестартуjeте мрежe?"
+
+#~ msgid ""
+#~ "\n"
+#~ "Do you agree?"
+#~ msgstr ""
+#~ "\n"
+#~ "Да ли се слaжетe?"
+
+#~ msgid "I'm about to restart the network device:\n"
+#~ msgstr "Садам треба да се рестартуjе мрeжни интерфеjс:\n"
+
+#~ msgid "I'm about to restart the network device %s. Do you agree?"
+#~ msgstr "Сада треба да се рестартуjе мрeжни уређај  %s. Да ли се слaжете ?"
 
 #, fuzzy
 #~ msgid ""
