@@ -26,12 +26,12 @@ sub init {
     mkdir_p "/etc/$_" foreach qw(X11);
     touch '/etc/modules.conf';
     symlinkf "/proc/mounts", "/etc/mtab";
-    mkdir_p $_ foreach qw(/etc/rpm /etc/sysconfig /etc/sysconfig/console/consoletrans /etc/sysconfig/console/consolefonts);
+    mkdir_p $_ foreach qw(/etc/devfs/conf.d /etc/rpm /etc/sysconfig /etc/sysconfig/console/consoletrans /etc/sysconfig/console/consolefonts);
  
     #- ro things
     symlinkf "/image/etc/$_", "/etc/$_" 
       foreach qw(alternatives shadow man.config services shells pam.d security inputrc ld.so.conf 
-                 DIR_COLORS bashrc profile profile.d rc.d init.d devfsd.conf devfs gtk-2.0 pango fonts modules.devfs 
+                 DIR_COLORS bashrc profile profile.d rc.d init.d devfsd.conf gtk-2.0 pango fonts modules.devfs 
                  dynamic gnome-vfs-2.0 gnome-vfs-mime-magic gtk gconf menu menu-methods nsswitch.conf default login.defs 
                  skel ld.so.cache openoffice);
     symlinkf "/image/etc/X11/$_", "/etc/X11/$_"
