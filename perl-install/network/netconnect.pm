@@ -766,7 +766,7 @@ If you don't know, choose 'use pppoe'"),
                     post => sub {
                         $netc->{internet_cnx_choice} = 'adsl';
                         network::adsl::adsl_conf_backend($in, $netcnx, $netc, $ntf_name, $adsl_type); #FIXME
-                        $config->{adsl} = { kind => "$ntf_name", protocol => $adsl_type };
+                        $config->{adsl} = { kind => $ntf_name, protocol => $adsl_type };
                         $handle_multiple_cnx->();
                     },
                    },
@@ -787,7 +787,7 @@ You can find a driver on http://eciadsl.flashtux.org/"),
                     name => N("Select the network interface to configure:"),
                     data =>  sub {
                         [ { label => N("Net Device"), type => "list", val => \$ntf_name, list => [ N("Manual choice"), sort keys %eth_intf ], 
-                            allow_empty_list => 1, format => sub { $eth_intf{$_[0]} || $_[0]} } ];
+                            allow_empty_list => 1, format => sub { $eth_intf{$_[0]} || $_[0] } } ];
                     },
                     post => sub {
                         $ethntf = $intf->{$ntf_name} ||= { DEVICE => $ntf_name };
