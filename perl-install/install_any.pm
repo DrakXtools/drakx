@@ -948,7 +948,7 @@ sub getHds {
 	goto getHds;
     }
     if (!$::testing) {
-	@$hds = grep { partition_table_raw::test_for_bad_drives($_) } @$hds;
+	@$hds = grep { eval { partition_table_raw::test_for_bad_drives($_) }; !$@ } @$hds;
     }
 
     $ok = fsedit::verifyHds($hds, $flags->{readonly}, $ok)

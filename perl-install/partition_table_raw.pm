@@ -141,7 +141,7 @@ sub test_for_bad_drives {
     my $sector = $hd->{geom}{sectors} - 1;
     
 
-    local *F; openit($hd, *F, 2) or return;
+    local *F; openit($hd, *F, 2) or die "can't open device";
 
     my $seek = sub {
 	c::lseek_sector(fileno(F), $sector, 0) or die "seeking to sector $sector failed";
