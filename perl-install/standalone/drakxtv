@@ -1,0 +1,93 @@
+#!/usr/bin/perl
+# DrakxTV
+
+# Copyright (C) 2002 MandrakeSoft (tvignaud@mandrakesoft.com)
+#
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2, or (at your option)
+# any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+
+# If we ever want to autoconf the tv card at install time, we should
+# make a package out of this.
+# Maybe we'll have to for harddrake2
+#package tvdrake;
+
+use lib qw(/usr/lib/libDrakX);
+use interactive;
+use strict;
+use detect_devices;
+
+sub scan4channels {
+    my $in = shift;
+    my ($i, $ftable_id, $norm, $check);
+
+    my %freqtables = (
+		      _("USA (bcast)") => 0, _("USA (cable)") => 1, _("USA (cable-hrc)") => 2, _("Canada (cable)") => 15,
+		      _("Japan (bcast)") => 3, _("Japan (cable)") => 4, _("China (bcast)") => 12,
+		      _("West Europe") => 5, _("East Europe") => 6, _("Italy") => 7, _("Ireland") => 10, _("France") => 11,
+		      _("Newzealand") => 8, _("Australia") => 9,				 
+		      _("Southafrica") => 13,
+		      _("Argentina") => 14,
+		      _("All") => -1
+		      );
+
+    my %tv_norms = ("SECAM" => 2,
+		    "PAL" => 0,
+		    "NTSC" => 1,
+		    "PAL" => 0,
+		    "NTSC" => 1,
+		    "SECAM" => 2,
+		    "PAL-NC" => 3,
+		    "PAL-M" => 4,
+		    "PAL-N" => 5,
+		    "NTSC-JP" => 6,
+#		     "AUTO" => 7
+		    );
+
+
+
+    $in->ask_from("TVdrake",
+			   _("Please,\ntype in your tv norm and country"),
+			   [
+			    { label => _("TV norm :"), val => \$norm, list => [keys %tv_norms], not_edit => 1, type => 'combo'},
+			    { label => _("Area :"), val => \$ftable_id, list => [keys %freqtables], not_edit => 1, sort => 1},
+			    ],
+			   complete => sub { 
+				  my $wait = $in->wait_message('Please wait',
+							       _("Scanning for TV channels in progress ..."));
+				  $ftable_id = "france -a " if ($freqtables{$ftable_id} eq -1);
+				  system( (( -x "/usr/X11R6/bin/xvt") ?
+					   "xvt -title '"._("Scanning for TV channels")." ...' -e " : "")
+					  . "scantv -n $norm -f $ftable_id -o ~/.xawtv");
+				  $in->exit(0);
+			   },
+			   ) or $in->exit(0);
+    $in->exit(0);
+}
+
+
+sub is_tv {
+    foreach (grep { $_->{media_type} eq 'MULTIMEDIA_VIDEO' } detect_devices::probeall(1)) {
+	   return 1;
+    }
+    0;
+}
+
+scan4channels('interactive'->vnew()) if (is_tv);
+
+# TODO :
+# - try to figure out country from locale ?
+# - try to figure out tv norm from country ?
+# - use Video-Capture-V4l-0.221 ?
+# - reput kwintv and test it ? => still buggy it seems ...
+# - configure kwintv and zapping ? => they've already wizards :-(
