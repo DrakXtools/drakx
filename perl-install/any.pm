@@ -915,8 +915,14 @@ sub ask_window_manager_to_logout {
 	'wmaker' => "killall -USR1 wmaker",
     );
     my $cmd = $h{$wm} or return;
-    $ENV{ICEAUTHORITY} ||= "$ENV{HOME}/.ICEauthority"; #- used by gnome-session
-    $cmd = "su $ENV{USER} -c '$cmd'" if $wm eq 'kwin' && $> == 0;
+    if ($wm eq 'gnome-session') {
+	#- NB: consolehelper doesn't destroy $HOME whereas kdesu does
+	#- for gnome, we use consolehelper, so below works
+	$ENV{ICEAUTHORITY} ||= "$ENV{HOME}/.ICEauthority";
+    } elsif ($wm eq 'kwin' && $> == 0) {
+	#- we can't use dcop when we are root
+	$cmd = "su $ENV{USER} -c '$cmd'";
+    }
     system($cmd);
     1;
 }
