@@ -440,7 +440,7 @@ Consoles 1,3,4,7 may also contain interesting information";
 
     my $welcome = _("Welcome to %s", "HOSTNAME");
     substInFile { s/^(GreetString)=.*/$1=$welcome/ } "$o->{prefix}/usr/share/config/kdmrc";
-    substInFile { s/^(UserView)=true/$1=false/ } "$o->{prefix}/usr/share/config/kdmrc" if $o->{security} >= 3;
+    substInFile { s/^(UserView)=true/$1=false/ } "$o->{prefix}/usr/share/config/kdmrc" if $o->{security} >= 3 || $o->{authentication}{NIS};
     run_program::rooted($o->{prefix}, "kdeDesktopCleanup");
 
     #- konsole and gnome-terminal are lamers in exotic languages, link them to something better
@@ -534,7 +534,7 @@ sub configurePrinter {
     }
     #- if at least one queue is configured, configure it.
     if ($use_cups || $use_lpr) {
-	$o->pkg_install(($use_cups ? ('cups-drivers') : ()), ($use_lpr ? ('rhs-printfilters') : ()));
+	$o->pkg_install(if_($use_cups, 'cups-drivers'), if_($use_lpr, 'rhs-printfilters'));
 
 	require printer;
 	eval { add2hash($o->{printer}, printer::getinfo($o->{prefix})) }; #- get existing configuration.
