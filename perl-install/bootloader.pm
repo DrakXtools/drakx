@@ -585,7 +585,8 @@ sub may_append_with_key {
 sub get_append_memsize {
     my ($b) = @_;
     my ($_simple, $dict) = unpack_append($b->{perImageAppend});
-    find { $_->[0] eq 'mem' && append__mem_is_memsize($_->[1]) } @$dict;
+    my $e = find { $_->[0] eq 'mem' && append__mem_is_memsize($_->[1]) } @$dict;
+    $e && $e->[1];
 }
 
 sub set_append_memsize {
