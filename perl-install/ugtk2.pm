@@ -503,8 +503,8 @@ sub create_okcancel {
         require any;
         $wm_is_kde = $::isInstall || any::running_window_manager() eq "kwin" || 0;
     }
-    my @l2 = map { gtksignal_connect(Gtk2::Button->new($_->[0]), clicked => $_->[1]) } grep {  $_->[2] } @other;
-    my @r2 = map { gtksignal_connect(Gtk2::Button->new($_->[0]), clicked => $_->[1]) } grep { !$_->[2] } @other;
+    my @l2 = map { $w->{buttons}{$_->[0]} = gtksignal_connect(Gtk2::Button->new($_->[0]), clicked => $_->[1]) } grep {  $_->[2] } @other;
+    my @r2 = map { $w->{buttons}{$_->[0]} = gtksignal_connect(Gtk2::Button->new($_->[0]), clicked => $_->[1]) } grep { !$_->[2] } @other;
     # we put space to group buttons in two packs (but if there's only one when not in wizard mode)
     # but in the installer where all windows run in wizard mode because of design even when not in a wizard step
     my @extras = (@l2, @r2);
