@@ -181,9 +181,9 @@ sub set {
 	update_ldap_conf(
 			 host => $authentication->{LDAP_server},
 			 base => $domain,
-			 nss_base_shadow => $domain."?sub",
-			 nss_base_passwd => $domain."?sub",
-			 nss_base_group => $domain."?sub",
+			 nss_base_shadow => $domain . "?sub",
+			 nss_base_passwd => $domain . "?sub",
+			 nss_base_group => $domain . "?sub",
 			);
     } elsif ($kind eq 'AD') {
 	$in->do_pkgs->install(qw(nss_ldap pam_krb5 libsasl2-plug-gssapi));
@@ -347,7 +347,7 @@ sub set_pam_authentication {
     );
     my %before_first = (
 	session => 
-	  intersection(\@authentication_kinds, [ 'winbind', 'krb5','ldap' ]) 
+	  intersection(\@authentication_kinds, [ 'winbind', 'krb5', 'ldap' ]) 
 	    ? pam_format_line('session', 'optional', 'pam_mkhomedir', 'skel=/etc/skel/', 'umask=0022') :
 	  member('castella', @authentication_kinds)
 	    ? pam_format_line('session', 'optional', 'pam_castella') : '',
