@@ -17,6 +17,7 @@ clean:
 
 check:
 	$(MAKE) -C share/po check
+	perl -I. -Mlang -e 'lang::check'
 
 tar-drakxtools: clean
 	rm -rf standalone/pixmaps
