@@ -2,7 +2,7 @@ package pkgs; # $Id$
 
 use diagnostics;
 use strict;
-use vars qw(*LOG @preferred $limitMinTrans %compssListDesc);
+use vars qw(*LOG %preferred $limitMinTrans %compssListDesc);
 
 use common qw(:common :file :functional :system);
 use install_any;
@@ -17,7 +17,8 @@ use c;
 
 
 
-@preferred = qw(perl-GTK postfix wu-ftpd ghostscript-X vim-minimal kernel ispell-en);
+my @preferred = qw(perl-GTK postfix wu-ftpd ghostscript-X vim-minimal kernel db1 db2 ispell-en);
+@preferred{@preferred} = ();
 
 #- lower bound on the left ( aka 90 means [90-100[ )
 %compssListDesc = (
@@ -225,19 +226,20 @@ sub selectPackage { #($$;$$$)
     #- is only used for unselection, not selection)
     unless (packageFlagSelected($pkg)) {
 	foreach (packageDepsId($pkg)) {
-	    my $preferred;	    
 	    if (/\|/) {
 		#- choice deps should be reselected recursively as no
 		#- closure on them is computed, this code is exactly the
 		#- same as pixel's one.
-		my %preferred; @preferred{@preferred} = ();
+		my $preferred;	    
 		foreach (split '\|') {
 		    my $dep = packageById($packages, $_) or next;
 		    $preferred ||= $dep;
 		    packageFlagSelected($dep) and $preferred = $dep, last;
 		    exists $preferred{packageName($dep)} and $preferred = $dep;
 		}
-		selectPackage($packages, $preferred, $base, $otherOnly, $check_recursion) if $preferred;
+		$preferred or die "unable to find a package for choice";
+		packageFlagSelected($preferred) or log::l("selecting default package as $preferred->[$FILE]");
+		selectPackage($packages, $preferred, $base, $otherOnly, $check_recursion);
 	    } else {
 		#- deps have been closed except for choices, so no need to
 		#- recursively apply selection, expand base on it.
