@@ -443,12 +443,14 @@ sub test_mouse {
     my ($bw, $bh) = ($width / 3, $height / 3);
 
     gtkadd($w->{window}, 
-	   gtkpack(new Gtk::VBox(0,0),
+	   gtkpack(my $vbox_grab = new Gtk::VBox(0,0),
 		   my $darea = gtkset_usize(new Gtk::DrawingArea, $width+1, $height+1),
-		   '',
-		   create_okcancel($w, '', '', "edge"),
+#		   '',
+		   my $okcancel = create_okcancel($w, '', '', "edge"),
 		  ),
 	  );
+
+    $okcancel->set_uposition(2, $height-30);
 
     my $draw_rect; $draw_rect = sub {
 	my ($black, $fill, $rect) = @_;
@@ -506,6 +508,10 @@ sub test_mouse {
     $w->{cancel}->grab_focus;
 #    my $timeout = Gtk->timeout_add(1000, sub { if ($time-- == 0) { log::l("timeout test_mouse"); undef $w->{retval}; Gtk->main_quit } 1 });
 #    my $b = before_leaving { log::l("removing timeout"); Gtk->timeout_remove($timeout) };
+    $w->{window}->realize;
+    Gtk::Gdk->pointer_grab($darea->window, 1,
+			   [ 'pointer_motion_mask'], 
+			   $darea->window, undef ,0);
     $w->main;
 }
 
