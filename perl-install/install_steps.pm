@@ -94,13 +94,13 @@ sub selectLanguage {
 
     #- for auto_install compatibility with old $o->{lang}
     $o->{locale} = lang::system_locales_to_ourlocale($o->{lang}, $o->{lang}) if $o->{lang};
-
-    lang::set($o->{locale}{lang}, !$o->isa('interactive::gtk'));
     $o->{locale}{langs} ||= { $o->{locale}{lang} => 1 };
 
     if (!exists $o->{locale}{country}) {
 	$o->{locale}{country} = $1 if lang::l2locale($o->{locale}{lang}) =~ /^.._(..)/;
     }
+
+    lang::set($o->{locale}, !$o->isa('interactive::gtk'));
 
     lang::langs_selected($o->{locale});
     log::l("selectLanguage: pack_langs: ", lang::pack_langs($o->{locale}{langs}), " utf8-flag: ", to_bool($o->{locale}{utf8}));
