@@ -382,6 +382,9 @@ void probe_that_type(enum driver_type type, enum media_bus bus __attribute__ ((u
                 my_insmod("usb-storage", SCSI_ADAPTERS, NULL, 0); 
                 if (module_already_present("ieee1394"))
                         my_insmod("sbp2", SCSI_ADAPTERS, NULL, 0);
+                wait_message("Detecting USB mass-storage devices.");
+                sleep(10); /* sucking background work */
+                remove_wait_message();
         }
 }
 
