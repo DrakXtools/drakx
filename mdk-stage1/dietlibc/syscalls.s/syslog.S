@@ -1,3 +1,3 @@
 #include "syscalls.h"
 
-syscall(syslog,syslog)
+syscall(syslog,__syscall_syslog)

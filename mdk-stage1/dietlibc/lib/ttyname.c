@@ -1,7 +1,6 @@
 #include "dietfeatures.h"
 #include <unistd.h>
 #include <sys/stat.h>
-#include <string.h>
 
 #ifdef __linux__
 

@@ -1,15 +1,27 @@
-all: start.o dietlibc.a
-
 ARCH=$(shell uname -m | sed 's/i[4-9]86/i386/')
+
+OBJDIR=bin-$(ARCH)
+
+all: $(OBJDIR) $(OBJDIR)/start.o $(OBJDIR)/dietlibc.a $(OBJDIR)/liblatin1.a $(OBJDIR)/librpc.a $(OBJDIR)/elftrunc $(OBJDIR)/diet
 
 CFLAGS=-pipe
 CROSS=
 
-VPATH=syscalls.c
+CC=gcc
 
-SYSCALLOBJ=$(patsubst syscalls.s/%.S,%.o,$(wildcard syscalls.s/*.S))
+VPATH=lib:libstdio:libugly:libcruft:libcrypt:libshell:liblatin1:librpc:libregex:syscalls.c
 
-LIBOBJ=$(patsubst lib/%.c,%.o,$(wildcard lib/*.c))
+SYSCALLOBJ=$(patsubst syscalls.s/%.S,$(OBJDIR)/%.o,$(wildcard syscalls.s/*.S))
+
+LIBOBJ=$(patsubst lib/%.c,$(OBJDIR)/%.o,$(wildcard lib/*.c))
+LIBUGLYOBJ=$(patsubst libugly/%.c,$(OBJDIR)/%.o,$(wildcard libugly/*.c))
+LIBSTDIOOBJ=$(patsubst libstdio/%.c,$(OBJDIR)/%.o,$(wildcard libstdio/*.c))
+LIBCRUFTOBJ=$(patsubst libcruft/%.c,$(OBJDIR)/%.o,$(wildcard libcruft/*.c))
+LIBCRYPTOBJ=$(patsubst libcrypt/%.c,$(OBJDIR)/%.o,$(wildcard libcrypt/*.c))
+LIBSHELLOBJ=$(patsubst libshell/%.c,$(OBJDIR)/%.o,$(wildcard libshell/*.c))
+
+LIBRPCOBJ=$(patsubst librpc/%.c,$(OBJDIR)/%.o,$(wildcard librpc/*.c))
+LIBREGEXOBJ=$(patsubst libregex/%.c,$(OBJDIR)/%.o,$(wildcard libregex/*.c))
 
 include $(ARCH)/Makefile.add
 
@@ -17,63 +29,124 @@ ifeq ($(CFLAGS),-pipe)
 CFLAGS+=-O -fomit-frame-pointer
 endif
 
-#CFLAGS += -g
-CFLAGS += -Wall
+ifneq ($(DEBUG),)
+CFLAGS = -g
+COMMENT = :
+endif
+CFLAGS += -Wall -Wno-switch
+
+PWD=$(shell pwd)
 
 .SUFFIXES:
 .SUFFIXES: .S .c
 
-%.o: %.S
-	$(CROSS)gcc -I. -Iinclude $(CFLAGS) -c $<
+$(OBJDIR):
+	mkdir $@
 
-%.o: %.c
-	$(CROSS)gcc -I. -Iinclude $(CFLAGS) -c $<
-#	$(CROSS)strip -x -R .comment -R .note $@
+% :: %,v
 
-dietlibc.a: $(SYSCALLOBJ) $(LIBOBJ) __longjmp.o longjmp.o setjmp.o \
-start.o unified.o mmap.o
-	$(CROSS)ar cru dietlibc.a $^
+$(OBJDIR)/%.o: %.S
+	$(CROSS)$(CC) -I. -Iinclude $(CFLAGS) -c $< -o $@
 
-libdietc.so: dietlibc.a
+$(OBJDIR)/%.o: %.c
+	$(CROSS)$(CC) -I. -Iinclude $(CFLAGS) -c $< -o $@
+	$(COMMENT) $(CROSS)strip -x -R .comment -R .note $@
+
+DIETLIBC_OBJ = $(SYSCALLOBJ) $(LIBOBJ) $(LIBSTDIOOBJ) $(LIBUGLYOBJ) \
+$(LIBCRUFTOBJ) $(LIBCRYPTOBJ) $(LIBSHELLOBJ) $(LIBREGEXOBJ) \
+$(OBJDIR)/__longjmp.o $(OBJDIR)/setjmp.o $(OBJDIR)/unified.o \
+$(OBJDIR)/mmap.o $(OBJDIR)/clone.o
+
+$(OBJDIR)/dietlibc.a: $(DIETLIBC_OBJ) $(OBJDIR)/start.o
+	$(CROSS)ar cru $@ $(DIETLIBC_OBJ)
+
+$(OBJDIR)/librpc.a: $(LIBRPCOBJ)
+	$(CROSS)ar cru $@ $(LIBRPCOBJ)
+
+LIBLATIN1_OBJS=$(patsubst liblatin1/%.c,$(OBJDIR)/%.o,$(wildcard liblatin1/*.c))
+$(OBJDIR)/liblatin1.a: $(LIBLATIN1_OBJS)
+	$(CROSS)ar cru $@ $^
+
+$(OBJDIR)/libdietc.so: $(OBJDIR)/dietlibc.a
 	$(CROSS)ld -whole-archive -shared -o $@ $^
 
 $(SYSCALLOBJ): syscalls.h
 
-djb: compile load
+$(OBJDIR)/elftrunc: contrib/elftrunc.c $(OBJDIR)/start.o $(OBJDIR)/dietlibc.a
+	$(CROSS)$(CC) -Iinclude $(CFLAGS) -nostdlib -o $@ $^ -lgcc
 
-compile:
-	echo 'exec gcc $(CFLAGS) -I$(HOME)/projects/dietlibc/include -c $${1+"$$@"}' > $@
+$(OBJDIR)/diet: diet.c $(OBJDIR)/start.o $(OBJDIR)/dietlibc.a
+	$(CROSS)$(CC) -Iinclude $(CFLAGS) -nostdlib -o $@ $^ -DDIETHOME=\"$(PWD)\"
+	$(CROSS)strip -R .comment -R .note $@
+
+$(OBJDIR)/djb: $(OBJDIR)/compile $(OBJDIR)/load
+
+$(OBJDIR)/compile:
+	echo 'exec gcc $(CFLAGS) -I$(PWD)/$(OBJDIR)/include -c $${1+"$$@"}' > $@
 	chmod 755 $@
 
-load:
-	echo 'main="$$1"; shift; exec gcc -nostdlib -o "$$main" $(HOME)/projects/dietlibc/start.o "$$main".o $${1+"$$@"} $(HOME)/projects/dietlibc/dietlibc.a -lgcc'  > $@
+$(OBJDIR)/load:
+	echo 'main="$$1"; shift; exec gcc -nostdlib -o "$$main" $(PWD)/$(OBJDIR)/start.o "$$main".o $${1+"$$@"} $(PWD)/$(OBJDIR)/dietlibc.a -lgcc'  > $@
 	chmod 755 $@
 
 clean:
-	rm -f *.o *.a t t1 compile load exports mapfile libdietc.so
+	rm -f *.o *.a t t1 compile load elftrunc exports mapfile libdietc.so
+	rm -rf bin-*
+	$(MAKE) -C examples clean
 
 tar: clean
-	cd .. && tar cvvf dietlibc.tar.bz2 dietlibc --use=bzip2
+	rm -f armv4l
+	ln -sf arm armv4l
+	cd ..; tar cvvf dietlibc.tar.bz2 dietlibc --use=bzip2 --exclude CVS
 
-exports: dietlibc.a
-	nm -g dietlibc.a | grep -w T | awk '{ print $$3 }' | sort -u > exports
+$(OBJDIR)/exports: $(OBJDIR)/dietlibc.a
+	nm -g $(OBJDIR)/dietlibc.a | grep -w T | awk '{ print $$3 }' | sort -u > $(OBJDIR)/exports
 
 .PHONY: t t1
 t:
-	$(CROSS)gcc -g $(CFLAGS) -fno-builtin -nostdlib -Iinclude -o t t.c start.o dietlibc.a -lgcc -Wl,-Map,mapfile
+	$(CROSS)$(CC) -g $(CFLAGS) -fno-builtin -nostdlib -Iinclude -o t t.c $(OBJDIR)/start.o $(OBJDIR)/dietlibc.a -lgcc -Wl,-Map,mapfile
 
 t1:
-	$(CROSS)gcc -g -o t1 t.c
+	$(CROSS)$(CC) -g -o t1 t.c
 
-install:
-	cp start.o $(prefix)/lib/dietstart.o
-	cp dietlibc.a $(prefix)/lib/libdietc.a
+install: $(OBJDIR)/start.o $(OBJDIR)/dietlibc.a $(OBJDIR)/liblatin1.a $(OBJDIR)/elftrunc $(OBJDIR)/diet
+	cp $(OBJDIR)/start.o $(INSTALLPREFIX)$(prefix)/lib/dietstart.o
+	cp $(OBJDIR)/dietlibc.a $(INSTALLPREFIX)$(prefix)/lib/libdietc.a
+	cp $(OBJDIR)/liblatin1.a $(INSTALLPREFIX)$(prefix)/lib/libdietlatin1.a
+	cp $(OBJDIR)/diet $(INSTALLPREFIX)$(prefix)/bin/diet
 
 .PHONY: sparc ppc mips arm alpha i386
 
-sparc ppc alpha i386:
-	$(MAKE) ARCH=$@ CROSS=$@-linux- all t libdietc.so
+arm sparc ppc alpha i386:
+	$(MAKE) ARCH=$@ CROSS=$@-linux- all t bin-$@/libdietc.so
 
-mips arm:
-	$(MAKE) ARCH=$@ CROSS=$@-linux-gnu- all t libdietc.so
+mips:
+	$(MAKE) ARCH=$@ CROSS=$@-linux-gnu- all t bin-$@/libdietc.so
 
+cross:
+	$(MAKE) arm sparc ppc alpha i386 mips
+
+
+# these depend on dietfeatures.h for large file backward compatibility
+$(OBJDIR)/__fstat64.o $(OBJDIR)/__lstat64.o $(OBJDIR)/__stat64.o: dietfeatures.h
+
+# these depend on dietfeatures.h for thread support
+$(OBJDIR)/alloc.o $(OBJDIR)/perror.o $(OBJDIR)/logging.o $(OBJDIR)/unified.o: dietfeatures.h
+
+# these depend on dietfeatures.h for linker warnings
+$(OBJDIR)/assert_fail.o $(OBJDIR)/sprintf.o $(OBJDIR)/vsnprintf.o $(OBJDIR)/___div.o $(OBJDIR)/fflush.o $(OBJDIR)/setvbuf.o $(OBJDIR)/system.o $(OBJDIR)/sendfile.o $(OBJDIR)/setenv.o: dietfeatures.h
+
+# these depend on dietfeatures.h for buffered stdio
+fclose.o $(OBJDIR)/fdglue.o $(OBJDIR)/fflush.o $(OBJDIR)/fgetc.o $(OBJDIR)/fputc.o $(OBJDIR)/fread.o $(OBJDIR)/fseek.o $(OBJDIR)/printf.o $(OBJDIR)/setvbuf.o $(OBJDIR)/stderr.o $(OBJDIR)/stdin.o $(OBJDIR)/stdout.o $(OBJDIR)/fwrite.o $(OBJDIR)/puts.o: dietfeatures.h
+
+# these depend on dietfeatures.h for fast string routines
+strcasecmp.o $(OBJDIR)/strcat.o $(OBJDIR)/strchr.o $(OBJDIR)/strcmp.o $(OBJDIR)/strcpy.o $(OBJDIR)/strlen.o $(OBJDIR)/strncasecmp.o $(OBJDIR)/strncat.o $(OBJDIR)/strrchr.o: dietfeatures.h
+
+# these depend on dietfeatures.h for /proc
+$(OBJDIR)/tty.o: dietfeatures.h
+
+# these depend on dietfeatures.h for ungetc support ;-)
+$(OBJDIR)/ungetc.o: dietfeatures.h
+
+# these depend on dietfeatures.h for WANT_TZFILE_PARSER
+$(OBJDIR)/localtime_r.o: dietfeatures.h

@@ -2,6 +2,9 @@
 
 #include "dietfeatures.h"
 #include <sys/types.h>
+#ifdef WANT_THREAD_SAVE
+#include <pthread.h>
+#endif
 
 #define BUFSIZE 128
 
@@ -9,10 +12,18 @@ typedef struct __file {
   int fd;
   int flags;
 #ifdef WANT_BUFFERED_STDIO
-  int seekofs;
-  int bm;
+  unsigned int bs;	/* read: bytes in buffer */
+  unsigned int bm;	/* position in buffer */
   char buf[BUFSIZE];
-  struct __file *next;
+  struct __file *next;	/* for fflush */
+#endif
+  pid_t popen_kludge;
+#ifdef WANT_UNGETC
+  char ungetbuf;
+  char ungotten;
+#endif
+#ifdef WANT_THREAD_SAVE
+  pthread_mutex_t m;
 #endif
 } FILE;
 
@@ -22,6 +33,12 @@ extern FILE *__stdio_root;
 #define EOFINDICATOR 2
 #define BUFINPUT 4
 #define BUFLINEWISE 8
+#define NOBUF 16
+#define UNSEEKABLE 32
+
+#define _IONBF 0
+#define _IOLBF 1
+#define _IOFBF 2
 
 /* internal function to flush buffer.
  * However, if next is BUFINPUT and the buffer is an input buffer, it
@@ -45,7 +62,7 @@ int putc(int c, FILE *stream);
 int putchar(int c);
 int puts(const char *s);
 
-int fseek( FILE *stream, long offset, int whence);
+long fseek( FILE *stream, long offset, int whence);
 long ftell( FILE *stream);
 void rewind( FILE *stream);
 int fgetpos( FILE *stream, fpos_t *pos);

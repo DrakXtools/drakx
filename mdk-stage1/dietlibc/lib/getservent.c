@@ -5,6 +5,7 @@
 #include <errno.h>
 #include <netinet/in.h>
 #include <string.h>
+#include <ctype.h>
 
 static int servicesfd=-1;
 static char* servicesmap;
@@ -14,29 +15,13 @@ static char* aliases[10];
 
 static char *cur;
 
-static inline int isalpha(char c) {
-  return (c>='a' && c<='z') || (c>='A' && c<='Z');
-}
-
-static inline int isdigit(char c) {
-  return (c>='0' && c<='9');
-}
-
-static inline int isalnum(char c) {
-  return isalpha(c) || isdigit(c);
-}
-
-static inline int isblank(char c) {
-  return (c==' ' || c=='\t');
-}
-
 /* nameserver	42/tcp		name		# IEN 116 */
 struct servent *getservent(void) {
   static struct servent se;
   char *last;
   int aliasidx;
   if (servicesfd<0) {
-    servicesfd=open("/etc/services",O_RDONLY);
+    servicesfd=open(_PATH_SERVICES,O_RDONLY);
     if (servicesfd<0) return 0;
     serviceslen=lseek(servicesfd,0,SEEK_END);
     servicesmap=mmap(0,serviceslen,PROT_READ|PROT_WRITE,MAP_PRIVATE,servicesfd,0);
@@ -71,17 +56,17 @@ again:
   if (*cur!='/') goto parseerror;
   cur++;
   se.s_proto=cur;
-  while (cur<last && isalpha(*cur)) cur++;
+  while (cur<last && isalpha(*cur)) ++cur;
   if (cur>=last) return 0;
   if (*cur=='\n') { *cur++=0; return &se; }
   *cur=0; cur++;
   /* now the aliases */
-  for (aliasidx=0;aliasidx<10;aliasidx++) {
-    while (cur<last && isblank(*cur)) cur++;
+  for (aliasidx=0;aliasidx<10;++aliasidx) {
+    while (cur<last && isblank(*cur)) ++cur;
     aliases[aliasidx]=cur;
-    while (cur<last && isalpha(*cur)) cur++;
+    while (cur<last && isalpha(*cur)) ++cur;
+    if (*cur=='\n') { *cur++=0; ++aliasidx; break; }
     if (cur>=last || !isblank(*cur)) break;
-    if (*cur=='\n') { *cur++=0; break; }
     *cur++=0;
   }
   aliases[aliasidx]=0;
@@ -99,8 +84,13 @@ error:
   return 0;
 }
 
+void setservent(int stayopen) {
+  cur=servicesmap;
+}
+
 struct servent *getservbyname(const char *name, const char *proto) {
   struct servent *s;
+  setservent(0);
   for (s=getservent(); s; s=getservent()) {
     char **tmp;
 #if 0
@@ -109,6 +99,16 @@ struct servent *getservbyname(const char *name, const char *proto) {
     write(1,"/",1);
     write(1,s->s_proto,strlen(s->s_proto));
     write(1,"\n",1);
+    if (!strcmp(name,"auth")) {
+      tmp=s->s_aliases;
+      write(1,"  aka ",5);
+      while (*tmp) {
+	write(1,*tmp,strlen(*tmp));
+	write(1,", ",2);
+	++tmp;
+      }
+      write(1,"\n",1);
+    }
 #endif
     if (!strcmp(name,s->s_name) && !strcmp(proto,s->s_proto))
       return s;
@@ -126,10 +126,6 @@ struct servent *getservbyport(int port, const char *proto) {
       return s;
   }
   return 0;
-}
-
-void setservent(int stayopen) {
-  cur=servicesmap;
 }
 
 void endservent(void) {

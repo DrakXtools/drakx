@@ -1,5 +1,6 @@
 #include "syscalls.h"
+#include "dietwarning.h"
 
-.weak __libc_sendfile
-__libc_sendfile:
-syscall(sendfile,sendfile)
+syscall_weak(sendfile,sendfile,__libc_sendfile)
+
+link_warning(sendfile,"sendfile is not portable and does not support large files")

@@ -3,32 +3,10 @@
 #include <sys/types.h>
 #include <stdlib.h>
 #include <string.h>
+#include "dietwarning.h"
 
 extern int __ltostr(char *s, int size, unsigned long i, int base, char UpCase);
 extern int __dtostr(double d,char *buf,int maxlen,int prec);
-
-#include <unistd.h>
-void print_int(int fd, int i)
-{
-	char buf[10];
-	char * chptr = buf + 9;
-	int j = 0;
-	
-	if (i < 0)
-	{
-		write(1, "-", 1);
-		i = -1 * i;
-	}
-	
-	while (i)
-	{
-		*chptr-- = '0' + (i % 10);
-		j++;
-		i = i / 10;
-	}
-	
-	write(fd, chptr + 1, j);
-}
 
 int vsnprintf (char *str, size_t size, const char *format, va_list arg_ptr)
 {
@@ -78,7 +56,7 @@ inn_vsnprintf:
 	goto inn_vsnprintf;
 
       case 'l':
-	flag_long=1;
+	++flag_long;
 	goto inn_vsnprintf;
 
       case '0':
@@ -111,10 +89,19 @@ inn_vsnprintf:
 	format=pb;
 	goto inn_vsnprintf;
 
+      case '*':
+	width=va_arg(arg_ptr,int);
+	goto inn_vsnprintf;
+
       case '.':
 	flag_dot=1;
-	preci=strtol(format,&pb,10);
-	format=pb;
+	if (*format=='*') {
+	  preci=va_arg(arg_ptr,int);
+	  ++format;
+	} else {
+	  preci=strtol(format,&pb,10);
+	  format=pb;
+	}
 	goto inn_vsnprintf;
 
 /* Format conversion chars */
@@ -130,6 +117,8 @@ inn_vsnprintf:
 	if (!pb) pb="(null)";
 #endif
 	buf_len=strlen(pb);
+	if (flag_dot && buf_len>preci) buf_len=preci;
+	if (buf_len>size-apos) buf_len=size-apos;
 
 print_out:
 	if (str) {
@@ -137,17 +126,16 @@ print_out:
 	  {
 	    for (pad=width-buf_len; pad>0; --pad) str[apos++]=padwith;
 	  }
-	  for(i=0;(pb[i])&&(apos<size);i++) { str[apos++]=pb[i]; } /* strncpy */
+	  for(i=0;i<buf_len;++i) { str[apos++]=pb[i]; } /* strncpy */
 	  if (width && (flag_left))
 	  {
 	    for (pad=width-buf_len; pad>0; --pad) str[apos++]=padwith;
 	  }
 	} else {
-	  if (width)
-	    apos+=width;
-	  else {
-	    int a=strlen(pb);
-	    if (a>size) apos+=size; else apos+=a;
+	  if (width) {
+	    apos+=width>buf_len?width:buf_len;
+	  } else {
+	    apos+=size>buf_len?buf_len:size;
 	  }
 	}
 
@@ -214,10 +202,18 @@ num_vsnprintf:
 	goto print_out;
 
 #ifdef WANT_FLOATING_POINT_IN_PRINTF
+      case 'f':
       case 'g':
 	{
 	  double d=va_arg(arg_ptr,double);
-	  buf_len=__dtostr(d,buf,sizeof(buf),6);
+	  buf_len=__dtostr(d,buf,sizeof(buf),width?width:6);
+	  if (flag_dot) {
+	    char *tmp;
+	    if ((tmp=strchr(buf,'.'))) {
+	      while (preci>-1 && *++tmp) --preci;
+	      *tmp=0;
+	    }
+	  }
 	  pb=buf;
 	  goto print_out;
 	}
@@ -237,3 +233,6 @@ num_vsnprintf:
   if (str) str[apos]=0;
   return apos;
 }
+
+link_warning("vsnprintf","warning: the printf functions add several kilobytes of bloat.")
+

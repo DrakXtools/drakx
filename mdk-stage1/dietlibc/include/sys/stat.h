@@ -7,31 +7,31 @@
 #include <linux/stat.h>
 #include <asm/stat.h>
 
-#ifdef __alpha__
+#ifndef STAT64_HAS_BROKEN_ST_INO
 #define __NO_STAT64
 #endif
 
-#define stat(file,buf) __dietstat(file,buf)
-#define fstat(file,buf) __dietfstat(file,buf)
-#define lstat(file,buf) __dietlstat(file,buf)
+extern int stat(const char *__file, struct stat *__buf) __THROW;
+extern int fstat(int __fd, struct stat *__buf) __THROW;
+extern int lstat(const char *__file, struct stat *__buf) __THROW;
 
-#define stat64(file,buf) __dietstat64(file,buf)
-#define fstat64(file,buf) __dietfstat64(file,buf)
-#define lstat64(file,buf) __dietlstat64(file,buf)
+#ifdef __NO_STAT64
+#undef _FILE_OFFSET_BITS
+#else
+extern int stat64(const char *__file, struct stat64 *__buf) __THROW;
+extern int fstat64(int __fd, struct stat64 *__buf) __THROW;
+extern int lstat64(const char *__file, struct stat64 *__buf) __THROW;
+#endif
+
+#if _FILE_OFFSET_BITS == 64
+#define lstat(file,buf) lstat64(file,buf)
+#define fstat(file,buf) fstat64(file,buf)
+#define stat stat64
+#endif
 
 #define major(dev) (((dev)>>8) & 0xff)
 #define minor(dev) ((dev) & 0xff)
 #define makedev(major, minor) ((((unsigned int) (major)) << 8) | ((unsigned int) (minor)))
-
-extern int __dietstat (const char *__file, struct stat *__buf) __THROW;
-extern int __dietfstat (int __fd, struct stat *__buf) __THROW;
-extern int __dietlstat (const char *__file, struct stat *__buf) __THROW;
-
-#ifndef __NO_STAT64
-extern int __dietstat64 (const char *__file, struct stat64 *__buf) __THROW;
-extern int __dietfstat64 (int __fd, struct stat64 *__buf) __THROW;
-extern int __dietlstat64 (const char *__file, struct stat64 *__buf) __THROW;
-#endif
 
 extern int chmod (const char *__file, mode_t __mode) __THROW;
 
@@ -44,5 +44,9 @@ extern int mkdir (const char *__path, mode_t __mode) __THROW;
 extern int mknod (const char *__path, mode_t __mode, dev_t __dev) __THROW;
 
 extern int mkfifo (const char *__path, mode_t __mode) __THROW;
+
+#define S_IREAD S_IRUSR
+#define S_IWRITE S_IWUSR
+#define S_IEXEC S_IXUSR
 
 #endif

@@ -7,7 +7,7 @@
 clone:
 .global __clone
 .type __clone,@function
-clone:
+__clone:
 	ldiq	$0, EINVAL
 	beq	$16, .Lerror
 	beq	$17, .Lerror
@@ -17,7 +17,7 @@ clone:
 	stq	$19, 8($17)
 	mov	$18, $16
 
-	lda	$0, __NR_pipe($31)
+	lda	$0, __NR_clone($31)
 	callsys
 	bne	$19, .Lerror
 
@@ -38,5 +38,5 @@ clone:
 
 	ldgp	$gp, 0($26)
 	mov	$0,  $16
-	jsr	$26, _exit
+	jsr	$26, exit
 

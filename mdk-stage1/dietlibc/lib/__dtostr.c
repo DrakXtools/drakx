@@ -1,3 +1,4 @@
+#include <stdio.h>
 /* convert double to string.  Helper for sprintf. */
 
 int __dtostr(double d,char *buf,int maxlen,int prec) {
@@ -14,8 +15,14 @@ int __dtostr(double d,char *buf,int maxlen,int prec) {
   char *oldbuf=buf;
   int initial=1;
 
+  if (d==0.0) {
+    *buf='0'; ++buf;
+    goto done;
+  }
   if (s) { d=-d; *buf='-'; --maxlen; buf++; }
-  if ((i=e10)>=0) {
+/*  printf("e=%d e10=%d prec=%d\n",e,e10,prec); */
+  if (e10>=0) {
+    i=e10;
     while (i>10) { tmp=tmp*1e10; i-=10; }
     while (i>1) { tmp=tmp*10; --i; }
   } else {
@@ -52,6 +59,20 @@ int __dtostr(double d,char *buf,int maxlen,int prec) {
   }
   /* step 5: loop through the digits, inserting the decimal point when
    * appropriate */
+  if (d<1.0) {
+    double x=1.0;
+    int first=1;
+    do {
+      if (--maxlen<0) return buf-oldbuf;
+      *buf='0'; ++buf;
+      if (first) {
+	first=0;
+	*buf='.'; ++buf;
+	if (--maxlen<0) return buf-oldbuf;
+      }
+      x/=10.0;
+    } while (x>d);
+  }
   for (; prec>0; ) {
     double tmp2=d/tmp;
     char c;
@@ -77,6 +98,7 @@ int __dtostr(double d,char *buf,int maxlen,int prec) {
     } else
       tmp/=10.0;
   }
+done:
   *buf=0;
   return buf-oldbuf;
 }

@@ -85,7 +85,8 @@ typedef long int __jmp_buf[58];
 
 #ifndef __ASSEMBLER__
 
-typedef int __sig_atomic_t;
+typedef int sig_atomic_t;
+#define __sig_atomic_t sig_atomic_t
 
 # define _SIGSET_NWORDS	(1024 / (8 * sizeof (unsigned long int)))
 typedef struct
@@ -115,6 +116,7 @@ extern void siglongjmp (sigjmp_buf __env, int __val)
      __THROW __attribute__ ((__noreturn__));
 
 #define setjmp(env) __sigsetjmp(env,0)
+#define sigsetjmp(a,b) __sigsetjmp(a,b)
 
 #endif
 

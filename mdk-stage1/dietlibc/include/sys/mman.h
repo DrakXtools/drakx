@@ -4,6 +4,11 @@
 #include <sys/cdefs.h>
 #include <sys/types.h>
 #include <linux/mman.h>
+#include <asm/page.h>
+
+#ifndef PAGE_SIZE
+#warning PAGE_SIZE undefined
+#endif
 
 #define MAP_FAILED      ((void *) -1)
 
@@ -21,5 +26,8 @@ extern int mincore (void *__start, size_t __len, unsigned char *__vec);
 extern void *mmap64 (void *__addr, size_t __len, int __prot,
 		     int __flags, int __fd, off64_t __offset) __THROW;
 #endif
+
+int mlockall(int flags) __THROW;
+int munlockall(void) __THROW;
 
 #endif
