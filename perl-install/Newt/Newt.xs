@@ -63,6 +63,9 @@ newtFinished()
 void
 newtCls()
 
+#void
+#newtSuspend()
+
 int
 newtCenteredWindow(width,height,title)
 	int width;

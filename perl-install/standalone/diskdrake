@@ -30,6 +30,7 @@ use detect_devices;
 use fsedit;
 use fs;
 use log;
+use c;
 
 local $_ = join '', @ARGV;
 
@@ -68,4 +69,4 @@ fs::get_mntpoints_from_fstab($fstab);
 fs::check_mounted($fstab);
 diskdrake::main($hds, {}, $in);
 
-exec "true";
+$in->exit(0);

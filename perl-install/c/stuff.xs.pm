@@ -5,6 +5,7 @@ print '
 
 #include <ctype.h>
 #include <unistd.h>
+#include <syslog.h>
 #include <fcntl.h>
 #include <resolv.h>
 #include <sys/types.h>
@@ -94,6 +95,21 @@ lseek_sector(fd, sector, offset)
   RETVAL = llseek(fd, (long long) sector * SECTORSIZE + offset, SEEK_SET) >= 0;
   OUTPUT:
   RETVAL
+
+void
+openlog(ident)
+  char *ident
+  CODE:
+  openlog(ident, 0, 0);
+
+void
+closelog()
+
+void
+syslog(mesg)
+  char *mesg
+  CODE:
+  syslog(LOG_WARNING, mesg);
 
 void
 setsid()

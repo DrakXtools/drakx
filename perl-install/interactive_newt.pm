@@ -20,10 +20,12 @@ sub new() {
     Newt::changeColors;
     Newt::Cls;
     Newt::SetSuspendCallback;
+    open STDERR,">/dev/null";
     bless {}, $_[0];
 }
 
 sub end() { Newt::Finished }
+sub exit() { end; exit($_[0]) }
 END { end() }
 
 sub myTextbox {

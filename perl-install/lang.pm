@@ -200,7 +200,7 @@ sub load_po($) {
     $s .= "\%$lang = (";
 
 #-  $lang = substr($lang, 0, 2);
-    my $f; -e ($f = "$_/po/$lang.po") and last foreach @INC;
+    my $f; -e ($f = "$_/po/$lang.po ") and last foreach @INC;
     unless (-e $f) {
 	-e ($f = "$_") and last foreach @INC;
 	$f = commands::install_cpio("$f/po", "$lang.po");

@@ -245,6 +245,38 @@ sub selectLanguage {
 sub doPartitionDisks($$) {
     my ($o, $hds, $raid) = @_;
 
+    if (!$::isStandalone && fsedit::is_one_big_fat($hds)) {
+	#- wizard
+	my $min_linux = 600 << 11;
+	my $min_freewin = 100 << 11;
+
+	my ($part) = fsedit::get_fstab(@{$o->{hds}});
+	my $w = $o->wait_message(_("Resizing"), _("Computing fat filesystem bounds"));
+	my $resize_fat = eval { resize_fat::main->new($part->{device}, devices::make($part->{device})) };
+	my $min_win = $resize_fat->min_size;
+	if (!$@ && $part->{size} > $min_linux + $min_freewin + $min_win && $o->ask_okcancel('', 
+_("TODO"))) {
+	    my $oldsize = $part->{size};
+	    $hds->[0]{isDirty} = $hds->[0]{needKernelReread} = 1;
+	    $part->{size} -= $min_linux;
+	    partition_table::adjustEnd($hds->[0], $part);
+
+	    local *log::l = sub { $w->set(join(' ', @_)) };
+	    eval { $resize_fat->resize($part->{size}) };
+	    if ($@) {
+		$part->{size} = $oldsize;
+		$o->ask_warn('', _("Automatic resizing failed"));
+	    } else {
+		$part->{isFormatted} = 1;
+		eval { fsedit::auto_allocate($hds, $o->{partitions}) };
+		if (!$@) {
+		    partition_table::write($hds->[0]) unless $::testing;
+		    return;
+		}
+	    }
+	}
+    }
+
     while (1) {
 	diskdrake::main($hds, $raid, interactive_gtk->new, $o->{partitions});
 	if (!grep { isSwap($_) } fsedit::get_fstab(@{$o->{hds}})) {

@@ -7,6 +7,7 @@ use interactive;
 use keyboard;
 use Xconfigurator_consts;
 use common qw(:system);
+use c;
 
 local $_ = join '', @ARGV;
 
@@ -15,7 +16,7 @@ local $_ = join '', @ARGV;
 $::expert = /--expert/;
 $::isStandalone = 1;
 
-my $in = vnew interactive;
+my $in = vnew interactive('su');
 
 my $keyboard = keyboard::text2keyboard(
       $in->ask_from_list_(_("Keyboard"),
@@ -42,4 +43,4 @@ substInFile {
 
 keyboard::write('', $keyboard, $isNotDelete);
 
-exec 'true' if ref($in) =~ /gtk/; #- workaround for perl-GTK
+$in->exit(0);

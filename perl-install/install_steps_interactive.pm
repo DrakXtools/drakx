@@ -787,6 +787,7 @@ sub setupXfree {
     { local $::testing = 0; #- unset testing
       local $::auto = $::beginner;
       local $::noauto = $::expert && !$o->ask_yesorno('', _("Try to find PCI devices?"), 1);
+      $::noauto = $::noauto; #- no warning
 
       Xconfigurator::main($o->{prefix}, $o->{X}, $o, $o->{allowFB}, sub {
          install_any::pkg_install($o, "XFree86-$_[0]");

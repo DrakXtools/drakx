@@ -1,0 +1,30 @@
+#!/usr/bin/perl
+
+use lib qw(/usr/lib/libDrakX);
+
+use common qw(:common :functional);
+use interactive;
+
+local $_ = join '', @ARGV;
+
+/-h/ and die "usage: drakxservices\n";
+
+$::isStandalone = 1;
+
+my $in = vnew interactive('su');
+
+my @l = map { chop; $_ } `cd /etc/rc.d/init.d ; grep -l "chkconfig:" *`;
+my @before = map { bool(@_ = glob("/etc/rc.d/rc*.d/*$_"))  } @l;
+
+my $after = $in->ask_many_from_list("drakxservices",
+_("Choose which services should be automatically started at boot time"),
+    \@l, \@before);
+
+mapn { 
+    my ($name, $before, $after) = @_;
+    if ($before != $after) {
+	system("chkconfig", $after ? "--add" : "--del", $name);
+    }
+} \@l, \@before, $after;
+
+$in->exit(0);

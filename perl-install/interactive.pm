@@ -39,17 +39,25 @@ sub new($) {
 }
 
 sub vnew {
+    my ($type, $su) = @_;
+    $su = $su eq "su";
     require c;
     if (c::Xtest($ENV{DISPLAY} ||= ":0")) {
+	$su && $> && exec "kdesu", "-c", "$0 @ARGV";
 	require interactive_gtk;
 	interactive_gtk->new;
     } else {
+	$su && $> && die "you must be root to run this program";
+	require 'log.pm';
 	undef *log::l;
 	*log::l = sub {}; # otherwise, it will bother us :(
 	require interactive_newt;
 	interactive_newt->new;
     }
 }
+
+sub end {}
+sub exit { exit($_[0]) }
 
 #-######################################################################################
 #- Interactive functions

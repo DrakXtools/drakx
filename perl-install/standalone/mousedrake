@@ -5,6 +5,7 @@ use lib qw(/usr/lib/libDrakX);
 use common qw(:system);
 use interactive;
 use mouse;
+use c;
 
 local $_ = join '', @ARGV;
 
@@ -15,7 +16,7 @@ $::noauto = /--noauto/;
 $::testing = /--testing/;
 $::isStandalone = 1;
 
-my $in = vnew interactive;
+my $in = vnew interactive('su');
 
 my $mouse = mouse::detect() unless $::noauto;
 
@@ -48,4 +49,4 @@ substInFile {
     }
 } $f if -e $f && !$::testing;
 
-exec 'true' if ref($in) =~ /gtk/; #- workaround for perl-GTK
+$in->exit(0);

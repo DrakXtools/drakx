@@ -105,17 +105,50 @@ sub get_root($) {
 }
 sub get_root_ { get_root([ get_fstab(@{$_[0]}) ]) }
 
+sub is_one_big_fat {
+    my ($hds) = @_;
+    @$hds == 1 or return;
+
+    my @l = fsedit::get_fstab(@$hds);
+    @l == 1 && isFat($l[0]) && fsedit::free_space(@$hds) < 10 << 11;
+}
+
 
 sub computeSize($$$$) {
     my ($part, $best, $hds, $suggestions) = @_;
     my $max = $part->{maxsize} || $part->{size};
-    my $tot_ratios = sum(map { $_->{ratio} } grep { !has_mntpoint($_->{mntpoint}, $hds) } @$suggestions);
+    return min($max, $best->{size}) unless $best->{ratio};
 
-    min($max,
-	$best->{maxsize} || $max, 
-	$best->{size} 
-	+ free_space(@$hds)
-	* ($tot_ratios && $best->{ratio} / $tot_ratios));
+    my $free_space = free_space(@$hds);
+    my @l = my @L = grep { 
+	if (!has_mntpoint($_->{mntpoint}, $hds) && $free_space >= $_->{size}) {
+	    $free_space -= $_->{size};
+	    1;
+	} else { 0 } } @$suggestions;
+
+    my $tot_ratios = 0;
+    while (1) {
+	my $old_free_space = $free_space;
+	my $old_tot_ratios = $tot_ratios;
+
+	$tot_ratios = sum(map { $_->{ratio} } @l);
+	last if $tot_ratios == $old_tot_ratios;
+
+	@l = grep { 
+	    if ($_->{ratio} && $_->{maxsize} && $tot_ratios &&
+		$_->{size} + $_->{ratio} / $tot_ratios * $old_free_space >= $_->{maxsize}) {
+		return min($max, $best->{maxsize}) if $best->{mntpoint} eq $_->{mntpoint};
+		$free_space -= $_->{maxsize} - $_->{size};
+		0;
+	    } else {
+		$_->{ratio};
+	    } 
+	} @l;
+    }
+    my $size = min($max, $best->{size} + $free_space * ($tot_ratios && $best->{ratio} / $tot_ratios));
+
+    #- verify other entry can fill the hole
+    if (grep { $_->{size} < $max - $size } @L) { $size } else { $max }
 }
 
 sub suggest_part($$$;$) {

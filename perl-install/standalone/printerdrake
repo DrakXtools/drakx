@@ -22,6 +22,7 @@ use lib qw(/usr/lib/libDrakX);
 
 use interactive;
 use printerdrake;
+use c;
 
 local $_ = join '', @ARGV;
 
@@ -35,8 +36,8 @@ $::skiptest = /--skiptest/;
 $::testing = /--testing/;
 $::isStandalone = 1;
 
-my $in = vnew interactive;
+my $in = vnew interactive('su');
 
 printerdrake::main('', printerdrake::getinfo(''), $in, sub { `urpmi --auto $_[0]` });
 
-exec 'true' if ref($in) =~ /gtk/; #- workaround for perl-GTK
+$in->exit(0);

@@ -123,6 +123,12 @@ $o = $::o = {
 #-    packages   => [ qw() ],
     partitioning => { clearall => 0, eraseBadPartitions => 0, auto_allocate => 0, autoformat => 0 }, #- , readonly => 0
 #-    security => 2,
+  partitions => [
+    { mntpoint => "/boot", size =>  10 << 11, type => 0x83, maxsize => 30 << 11 },
+    { mntpoint => "/",     size => 300 << 11, type => 0x83, ratio => 5, maxsize => 1500 << 11 },
+    { mntpoint => "swap",  size =>  64 << 11, type => 0x82, ratio => 1, maxsize => 250 << 11 },
+    { mntpoint => "/home", size => 300 << 11, type => 0x83, ratio => 5 },
+  ],
 #-    partitions => [
 #-		      { mntpoint => "/boot", size =>  16 << 11, type => 0x83 },
 #-		      { mntpoint => "/",     size => 256 << 11, type => 0x83 },
@@ -604,7 +610,7 @@ sub main {
 	   "DRAKX_PASSWORD=$o->{lilo}{password}\n",
 	   'DRAKX_USERS="', join(" ", map { $_->{name} } @{$o->{users} || []}), qq("\n));
     run_program::rooted($o->{prefix}, "/etc/security/msec/init.sh", $o->{security});
-    unlink "$o->{prefix}/tmp/secure.DrakX";
+#    unlink "$o->{prefix}/tmp/secure.DrakX";
 
     run_program::rooted($o->{prefix}, "kudzu", "-q"); # -q <=> fermetagueuleconnard
 

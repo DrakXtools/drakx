@@ -19,6 +19,10 @@ use my_gtk qw(:helpers :wrappers);
 #-    $o->SUPER::ask_warn(@_);
 #-}
 
+sub exit { 
+    c::_exit($_[0]) #- workaround 
+}
+
 sub ask_from_listW {
     my ($o, $title, $messages, $l, $def) = @_;
 
