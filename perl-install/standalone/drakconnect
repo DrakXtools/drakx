@@ -311,9 +311,10 @@ sub build_notebook {
     if ($intf->{pages}{'TCP/IP'}) {
 	gtkpack($gui->{sheet}{'TCP/IP'} = Gtk2::HBox->new,
                 gtkadd(gtkcreate_frame(N("IP configuration")), 
-                       gtkpack_(gtkset_border_width(Gtk2::VBox->new, 5),
+                       gtkpack_(gtkset_border_width(Gtk2::VBox->new(0,10), 5),
                                 if_($is_ethernet, 
                                      0, gtkpack__(Gtk2::HBox->new,
+						  Gtk2::Label->new(N("Protocol")),
                                                   $gui->{intf}{BOOTPROTO} = gtksignal_connect(Gtk2::OptionMenu->new,
                                                                             changed => sub { 
                                                                             return if !$_[0]->realized;
@@ -349,8 +350,10 @@ sub build_notebook {
                          1, gtkadd(gtkcreate_frame(N("DNS servers")), 
                                    gtkpack(Gtk2::VBox->new(0,0),
                                            Gtk2::Label->new($intf->{dns1} || $netc->{dnsServer}),
-                                           Gtk2::Label->new($intf->{dns2} || $netc->{dnsServer2}),
-                                           Gtk2::Label->new($intf->{dns3} || $netc->{dnsServer3})),
+                                           if_($intf->{dns2} || $netc->{dnsServer2},
+						Gtk2::Label->new($intf->{dns2} || $netc->{dnsServer2})),
+                                           if_($intf->{dns3} || $netc->{dnsServer3},
+						Gtk2::Label->new($intf->{dns3} || $netc->{dnsServer3}))),
                                   ),
                          1, gtkadd(gtkcreate_frame(N("Search Domain")), 
                                    Gtk2::Label->new($intf->{domain} || $netc->{DOMAINNAME} || 'none'),
@@ -375,7 +378,7 @@ sub build_notebook {
     }
     
     if ($intf->{pages}{Wireless}) {
-	gtkpack($gui->{sheet}{Wireless} = Gtk2::HBox->new(0,0),
+	gtkpack(gtkset_border_width($gui->{sheet}{Wireless} = Gtk2::HBox->new(0,10), 5),
 		gtkpack_(Gtk2::VBox->new(0,0),
 			 map { (0, gtkpack_(Gtk2::VBox->new(0,0),
 					    1, Gtk2::Label->new($_->[0]),
@@ -409,37 +412,36 @@ sub build_notebook {
     }
     
     if ($intf->{pages}{Options}) {
-	gtkpack($gui->{sheet}{Options} = Gtk2::VBox->new(0,0),	    
-		gtkpack__(Gtk2::VBox->new(0,0),
-			  $gui->{intf_bool}{ONBOOT} = gtksignal_connect(Gtk2::CheckButton->new(N("Start at boot")),
-									toggled => $apply),
-			  if_($is_ethernet,
-                               map { ($gui->{intf_bool}{$_->[0]} = gtksignal_connect(Gtk2::CheckButton->new($_->[1]),
-                                                                                     toggled => $apply))
-                                 } ([ "HWADDR", N("Track network card id (useful for laptops)") ],
-                                    [ "MII_NOT_SUPPORTED", N("Network Hotplugging") ],
-                                   ),		     
-                              ),
-			  if_($interface eq 'isdn',
-                               gtkpack(Gtk2::HBox->new(0,0),
-                                       gtkpack__(new Gtk2::VBox(0,0),
-                                                 Gtk2::Label->new(N("Dialing mode")),
-                                                 my @dialing_mode_radio = gtkradio(("auto") x 2, "manual"),
-                                                ),
-                                       Gtk2::VSeparator->new,
-                                       gtkpack__(new Gtk2::VBox(0,0),
-                                                 Gtk2::Label->new(N("Connection speed")),
-                                                 my @speed_radio = gtkradio(("64 Kb/s") x 2, "128 Kb/s"),
-                                                ),
-                                      ),
-                               gtkpack_(Gtk2::HBox->new(0,0),
-                                        0, Gtk2::Label->new(N("Connection timeout (in sec)")),
-                                        1, gtksignal_connect($gui->{intf}{huptimeout} = Gtk2::Entry->new,
-                                                             key_press_event => $apply),
+	gtkpack__(gtkset_border_width($gui->{sheet}{Options} = Gtk2::VBox->new(0,10), 5),	    
+                  $gui->{intf_bool}{ONBOOT} = gtksignal_connect(Gtk2::CheckButton->new(N("Start at boot")),
+                                                                toggled => $apply),
+                  if_($is_ethernet,
+                      map { ($gui->{intf_bool}{$_->[0]} = gtksignal_connect(Gtk2::CheckButton->new($_->[1]),
+                                                                            toggled => $apply))
+                        } ([ "HWADDR", N("Track network card id (useful for laptops)") ],
+                           [ "MII_NOT_SUPPORTED", N("Network Hotplugging") ],
+                          ),		     
+                     ),
+                  if_($interface eq 'isdn',
+                      gtkpack(Gtk2::HBox->new(0,0),
+                              gtkpack__(new Gtk2::VBox(0,0),
+                                        Gtk2::Label->new(N("Dialing mode")),
+                                        my @dialing_mode_radio = gtkradio(("auto") x 2, "manual"),
                                        ),
+                              Gtk2::VSeparator->new,
+                              gtkpack__(new Gtk2::VBox(0,0),
+                                        Gtk2::Label->new(N("Connection speed")),
+                                        my @speed_radio = gtkradio(("64 Kb/s") x 2, "128 Kb/s"),
+                                       ),
+                             ),
+                      gtkpack__(Gtk2::HBox->new(0,5),
+                               Gtk2::Label->new(N("Connection timeout (in sec)")),
+                               gtksignal_connect($gui->{intf}{huptimeout} = Gtk2::Entry->new,
+                                                    key_press_event => $apply),
                               ),
-			 ));
-	$dialing_mode_radio[0]->signal_connect(toggled => sub { $gui->{intf_radio}{dialing_mode} = 'auto'; $apply->() });
+                     ),
+                 );
+        $dialing_mode_radio[0]->signal_connect(toggled => sub { $gui->{intf_radio}{dialing_mode} = 'auto'; $apply->() });
 	$dialing_mode_radio[1]->signal_connect(toggled => sub { $gui->{intf_radio}{dialing_mode} = 'static'; $apply->() });
 	$speed_radio[0]->signal_connect(toggled => sub { $gui->{intf_radio}{speed} = '64'; $apply->() });
 	$speed_radio[1]->signal_connect(toggled => sub { $gui->{intf_radio}{speed} = '128'; $apply->() });
@@ -452,7 +454,7 @@ sub build_notebook {
 	if ($interface_kind =~ /^speedtouch|sagem$/) {
 	    $gui->{description} = $interface_kind eq 'speedtouch' ? 'Alcatel|USB ADSL Modem (Speed Touch)' : 'Analog Devices Inc.|USB ADSL modem';
 	}
-	gtkpack_(gtkset_border_width($gui->{sheet}{Account} = Gtk2::VBox->new, 5),
+	gtkpack_(gtkset_border_width($gui->{sheet}{Account} = Gtk2::VBox->new(0,10), 5),
 		 if_($interface eq 'modem',
                       0, gtkpack(Gtk2::VBox->new(1,0),
 				 gtkpack__(Gtk2::HBox->new, Gtk2::Label->new(N("Authentication"))),
@@ -478,7 +480,7 @@ sub build_notebook {
     }
     
     if ($intf->{pages}{Modem}) {
-	gtkpack(gtkset_border_width($gui->{sheet}{Modem} = Gtk2::HBox->new(0,0), 5),
+	gtkpack(gtkset_border_width($gui->{sheet}{Modem} = Gtk2::HBox->new(0,10), 5),
 		if_($interface eq 'modem',
                      gtkpack__(Gtk2::VBox->new(0,5),
                                (map { (gtkpack(Gtk2::VBox->new(1,0),
@@ -559,7 +561,7 @@ sub build_notebook {
             }
 	}
 	
-	gtkpack($gui->{sheet}{Information} = Gtk2::VBox->new(0,0),
+	gtkpack(gtkset_border_width($gui->{sheet}{Information} = Gtk2::VBox->new(0,10), 5),
 		gtktext_insert(Gtk2::TextView->new,
 			       join('',
 				    map { $_->[0] . ": \x{200e}" . $_->[1] . "\n" } (
