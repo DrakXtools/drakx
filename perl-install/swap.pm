@@ -3,6 +3,7 @@ package swap; # $Id$
 use diagnostics;
 use strict;
 
+use MDK::Common::DataStructure;
 use common;
 use log;
 use devices;
@@ -100,14 +101,14 @@ sub make($;$) {
     $version == 0 and !vec($signature_page, 0, 1) and die "bad block on first page";
     vec($signature_page, 0, 1) = 0;
 
-    $version == 1 and strcpy($signature_page, pack($signature_format_v1, $version, $nbpages - 1, $badpages));
+    $version == 1 and MDK::Common::DataStructure::strcpy($signature_page, pack($signature_format_v1, $version, $nbpages - 1, $badpages));
 
     my $goodpages = $nbpages - $badpages - 1;
     $goodpages > 0 or die "all blocks are bad";
 
     log::l("Setting up swapspace on $devicename version $version, size = " . $goodpages * $pagesize . " bytes");
 
-    strcpy($signature_page, $version == 0 ? "SWAP-SPACE" : "SWAPSPACE2", $pagesize - 10);
+    MDK::Common::DataStructure::strcpy($signature_page, $version == 0 ? "SWAP-SPACE" : "SWAPSPACE2", $pagesize - 10);
 
     my $offset = ($version == 0) ? 0 : 1024;
     sysseek(F, $offset, 0) or die "unable to rewind swap-device: $!";
