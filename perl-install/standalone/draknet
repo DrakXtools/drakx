@@ -47,7 +47,7 @@ my @conx_type = ('modem', 'isdn_internal', 'isdn_external', 'adsl', 'cable', 'la
 
 my $in = vnew interactive('su', 'network');
 
-globals::init(
+MDK::Common::Globals::init(
 	      in => $in,
 	      prefix => '',
 	      connect_file => "/etc/sysconfig/network-scripts/net_cnx_up",
