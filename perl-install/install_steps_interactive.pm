@@ -300,8 +300,8 @@ sub chooseGroups {
 	}
     }
     my $f = "$o->{prefix}/etc/sysconfig/desktop";
-    output($f, "KDE\n") if $o->{compssUsersChoice}{KDE};
     output($f, "GNOME\n") if $o->{compssUsersChoice}{Gnome};
+    output($f, "KDE\n") if $o->{compssUsersChoice}{KDE};
 }
 
 #------------------------------------------------------------------------------
@@ -506,17 +506,11 @@ pursuant to a court decision) arising out of use, possession, or the sole
 downloading of these software, to which customer and/or end user could
 eventually have access after having sign up the present agreement.
 
-The present agreement shall be governed and construed pursuant to the laws of
-France except to the extent that the application of local laws is required by
-mandatory laws of public order. However this agreement expressly excludes any
-conflict of laws, principles, choice of law or rule to the contrary. Therefore
-French laws shall prevail on any other local laws.
-
 For any queries relating to these agreement, please contact 
-Mandrakesoft
-43, rue d'Aboukir
-75002 Paris
-FRANCE")) || return;
+Mandrakesoft, Inc.
+2400 N. Lincoln Avenue Suite 243
+Altadena California 91001
+USA")) || return;
 
     require crypto;
     eval {
