@@ -51,7 +51,7 @@ static enum return_type try_with_device(char *dev_name)
 		return results;
 	}	
 
-	if (access("/tmp/image/Mandrake/mdkinst", R_OK)) {
+	if (access("/tmp/image" LIVE_LOCATION, R_OK)) {
 		enum return_type results;
 		umount("/tmp/image");
 		results = ask_yes_no("That CDROM disc does not seem to be a " DISTRIB_NAME " Installation CDROM.\nRetry with another disc?");
@@ -66,7 +66,7 @@ static enum return_type try_with_device(char *dev_name)
 		load_ramdisk(); /* we don't care about return code, we'll do it live if we failed */
 
 	if (IS_RESCUE)
-		umount("/tmp/image"); /* TOCHECK */
+		umount("/tmp/image");
 
 	method_name = strdup("cdrom");
 	return RETURN_OK;

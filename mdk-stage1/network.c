@@ -602,7 +602,7 @@ enum return_type nfs_prepare(void)
 	}
 
 	if (IS_RESCUE)
-		umount("/tmp/image"); /* TOCHECK */
+		umount("/tmp/image");
 
 	method_name = strdup("nfs");
 	return RETURN_OK;

@@ -89,7 +89,8 @@ static enum return_type try_with_device(char *dev_name)
 	parts[i] = NULL;
 	fclose(f);
 
-	results = ask_from_list_comments("Please choose the partition where is copied the " DISTRIB_NAME " Distribution.", parts, parts_comments, &choice);
+	results = ask_from_list_comments("Please choose the partition where is copied the " DISTRIB_NAME " Distribution.",
+					 parts, parts_comments, &choice);
 	if (results != RETURN_OK)
 		return results;
 
@@ -103,9 +104,8 @@ static enum return_type try_with_device(char *dev_name)
 		return try_with_device(dev_name);
 	}
 
-	results = ask_from_entries("Please enter the directory containing the " DISTRIB_NAME " Distribution.",
-				   questions_location, &answers_location, 24);
-	if (results != RETURN_OK) {
+	if (ask_from_entries("Please enter the directory containing the " DISTRIB_NAME " Distribution.",
+			     questions_location, &answers_location, 24) != RETURN_OK) {
 		umount("/tmp/disk");
 		return try_with_device(dev_name);
 	}
@@ -124,27 +124,46 @@ static enum return_type try_with_device(char *dev_name)
 	unlink("/tmp/image");
 	symlink(location_full, "/tmp/image");
 
-	if (access("/tmp/image/Mandrake/mdkinst", R_OK)) {
-		error_message("I can't find the " DISTRIB_NAME " Distribution in the specified directory.\n"
-			      "Here's a short extract of the files in the directory:\n"
-			      "%s", list_directory("/tmp/image"));
-		if (umount("/tmp/disk"))
-			log_message("umount failed");
-		unlink("/tmp/image");
-		return try_with_device(dev_name);
-	}
-
-	log_message("found the " DISTRIB_NAME " Installation, good news!");
-
-	if (IS_SPECIAL_STAGE2) {
+	if (IS_SPECIAL_STAGE2 || ramdisk_possible()) {
+		/* RAMDISK install */
+		if (access("/tmp/image" RAMDISK_LOCATION, R_OK)) {
+			error_message("I can't find the " DISTRIB_NAME " Distribution in the specified directory. "
+				      "(I need the directory " RAMDISK_LOCATION ")\n"
+				      "Here's a short extract of the files in the directory:\n"
+				      "%s", list_directory("/tmp/image"));
+			umount("/tmp/disk");
+			unlink("/tmp/image");
+			return try_with_device(dev_name);
+		}
 		if (load_ramdisk() != RETURN_OK) {
 			error_message("Could not load program into memory");
 			return try_with_device(dev_name);
 		}
+	} else {
+		/* LIVE install */
+		char p;
+		if (access("/tmp/image" LIVE_LOCATION, R_OK)) {
+			error_message("I can't find the " DISTRIB_NAME " Distribution in the specified directory. "
+				      "(I need the directory " LIVE_LOCATION ")\n"
+				      "Here's a short extract of the files in the directory:\n"
+				      "%s", list_directory("/tmp/image"));
+			umount("/tmp/disk");
+			unlink("/tmp/image");
+			return try_with_device(dev_name);
+		}
+		if (readlink("/tmp/image" LIVE_LOCATION "/usr/bin/runinstall2", &p, 1) != 1) {
+			error_message("The " DISTRIB_NAME " Distribution seems to be copied on a Windows partition. "
+				      "You need more memory to perform an installation from a Windows partition. "
+				      "Another solution if to copy the " DISTRIB_NAME " Distribution on a Linux partition.");
+			umount("/tmp/disk");
+			unlink("/tmp/image");
+			return try_with_device(dev_name);
+		}
+		log_message("found the " DISTRIB_NAME " Installation, good news!");
 	}
 
 	if (IS_RESCUE)
-		umount("/tmp/image"); /* TOCHECK */
+		umount("/tmp/image");
 
 	method_name = strdup("disk");
 	return RETURN_OK;
