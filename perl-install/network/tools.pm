@@ -139,7 +139,7 @@ sub write_initscript {
 		;;
 	restart)
 		$0 stop
-		echo -n "Waiting 10 sec before restarting the internet connection."
+		echo "Waiting 10 sec before restarting the internet connection."
 		sleep 10
 		$0 start
 		;;
