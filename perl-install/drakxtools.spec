@@ -189,7 +189,7 @@ cat > $RPM_BUILD_ROOT%_menudir/harddrake-ui <<EOF
 	needs="X11"\
 	section="Configuration/Hardware"\
 	title="HardDrake"\
-	longtitle="Show extracted information from the system logs"\
+	longtitle="Hardware Central Configuration/information tool"\
 	command="/usr/sbin/harddrake2"\
 	icon="harddrake.png"
 EOF
