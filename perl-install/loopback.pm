@@ -77,9 +77,12 @@ sub create {
     log::l("creating loopback file $f ($part->{size} sectors)");
 
     local *F;
+    my $block_size = 128;
+    my $s = "\0" x (512 * $block_size);
     sysopen F, $f, 2 | c::O_CREAT() or die "failed to create loopback file";
-    sysseek F, ($part->{size} << 9) - 1, 0 or die "failed to create loopback file";
-    syswrite F, "\0" or die "failed to create loopback file";
+    for (my $i = 0; $i < $part->{size}; $i += $block_size) {
+	syswrite F, $s or die "failed to create loopback file";
+    }
 }
 
 sub getFree {
