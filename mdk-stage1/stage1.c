@@ -194,16 +194,7 @@ int main(int argc, char **argv)
 		fatal_error("could not open and parse modules dependencies");
 	init_frontend();
 
-#ifndef DISABLE_CDROM
-	if (IS_CDROM) {
-		/* try as automatic as possible with cdrom bootdisk */
-		ret = cdrom_prepare();
-		if (ret != RETURN_OK)
-			ret = method_select_and_prepare();
-	}
-	else
-#endif
-		ret = method_select_and_prepare();
+	ret = method_select_and_prepare();
 
 	finish_frontend();
 	close_log();

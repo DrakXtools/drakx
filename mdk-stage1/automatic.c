@@ -85,7 +85,7 @@ char * get_auto_value(char * auto_param)
 
 enum return_type ask_from_list_auto(char *msg, char ** elems, char ** choice, char * auto_param, char ** elems_auto)
 {
-	if (!IS_AUTOMATIC || IS_AUTOMATIC_ERROR_OCCURED)
+	if (!IS_AUTOMATIC)
 		return ask_from_list(msg, elems, choice);
 	else {
 		char * tmp = get_auto_value(auto_param);
@@ -104,7 +104,7 @@ enum return_type ask_from_list_auto(char *msg, char ** elems, char ** choice, ch
 
 enum return_type ask_from_entries_auto(char *msg, char ** questions, char *** answers, int entry_size, char ** questions_auto)
 {
-	if (!IS_AUTOMATIC || IS_AUTOMATIC_ERROR_OCCURED)
+	if (!IS_AUTOMATIC)
 		return ask_from_entries(msg, questions, answers, entry_size);
 	else {
 		char * tmp_answers[50];

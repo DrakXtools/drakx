@@ -213,6 +213,8 @@ enum return_type ask_insmod(enum driver_type type)
 	enum return_type results;
 	char * choice;
 
+	unset_param(MODE_AUTOMATIC); /* we are in a fallback mode */
+
 	if (type == SCSI_ADAPTERS)
 		mytype = "SCSI";
 	else if (type == NETWORK_DEVICES)

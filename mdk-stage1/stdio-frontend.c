@@ -87,7 +87,7 @@ void error_message(char *msg, ...)
 	va_start(args, msg);
 	va_end(args);
 	blocking_msg("> Error! ", msg, args);
-	set_param(MODE_AUTOMATIC_ERROR_OCCURED);
+	unset_param(MODE_AUTOMATIC);
 }
 
 void info_message(char *msg, ...)

@@ -106,14 +106,21 @@ enum return_type cdrom_prepare(void)
 		return cdrom_prepare();
 	}
 
-	results = ask_from_list_comments("Please choose the CDROM drive to use for the installation.", medias, medias_models, &choice);
-
-	if (results != RETURN_OK)
+	if (IS_AUTOMATIC) {
+		results = try_with_device(*medias);
+		if (results != RETURN_OK)
+			unset_param(MODE_AUTOMATIC);
 		return results;
-
+	}
+	else
+		results = ask_from_list_comments("Please choose the CDROM drive to use for the installation.", medias, medias_models, &choice);
+		
 	results = try_with_device(choice);
 	if (results == RETURN_OK)
 		return RETURN_OK;
+	if (results == RETURN_BACK)
+		return cdrom_prepare();
+
 	i = ask_insmod(SCSI_ADAPTERS);
 	if (i == RETURN_BACK)
 		return RETURN_BACK;

@@ -81,8 +81,6 @@ void process_cmdline(void)
 		tmp_params[p].value = value;
 		if (!strcmp(name, "expert")) set_param(MODE_EXPERT);
 		if (!strcmp(name, "rescue")) set_param(MODE_RESCUE);
-		if (!strcmp(name, "pcmcia")) set_param(MODE_PCMCIA);
-		if (!strcmp(name, "cdrom")) set_param(MODE_CDROM);
 		if (!strcmp(name, "special_stage2")) set_param(MODE_SPECIAL_STAGE2);
 		if (!strcmp(name, "automatic")) {
 			set_param(MODE_AUTOMATIC);
@@ -132,6 +130,11 @@ char * get_param_valued(char *param_name)
 void set_param(int i)
 {
 	stage1_mode |= i;
+}
+
+void unset_param(int i)
+{
+	stage1_mode &= ~i;
 }
 
 
