@@ -9,12 +9,12 @@ use common;
 my @all_servers = 
 (
   { 
-   name => N("Web Server"),
+   name => N_("Web Server"),
    pkg => 'apache apache-mod_perl boa',
    ports => '80/tcp 443/tcp',
   },
   {
-   name => N("Domain Name Server"),
+   name => N_("Domain Name Server"),
    pkg => 'bind',
    ports => '53/tcp 53/udp',
   },
@@ -29,12 +29,12 @@ my @all_servers =
    ports => '20/tcp 21/tcp',
   },
   {
-   name => N("Mail Server"),
+   name => N_("Mail Server"),
    pkg => 'sendmail postfix qmail',
    ports => '25/tcp',
   },
   {
-   name => N("POP and IMAP Server"),
+   name => N_("POP and IMAP Server"),
    pkg => 'imap courier-imap-pop',
    ports => '109/tcp 110/tcp 143/tcp',
   },
@@ -168,7 +168,7 @@ where port is between 1 and 65535.", $invalid_port));
 		   } },
 		  [ 
 		   { text => N("Everything (no firewall)"), val => \$disabled, type => 'bool' },
-		   (map { { text => $_->{name}, val => \$_->{on}, type => 'bool', disabled => sub { $disabled } } } @l),
+		   (map { { text => translate($_->{name}), val => \$_->{on}, type => 'bool', disabled => sub { $disabled } } } @l),
 		   { label => N("Other ports"), val => \$unlisted, advanced => 1, disabled => sub { $disabled } }
 		  ]) or return;
 
