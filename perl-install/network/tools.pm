@@ -5,6 +5,7 @@ use run_program;
 use c;
 use vars qw(@ISA @EXPORT);
 use MDK::Common::Globals "network", qw($in $prefix $disconnect_file $connect_prog $connect_file);
+use MDK::Common::System qw(getVarsFromSh);
 
 @ISA = qw(Exporter);
 @EXPORT = qw(write_cnx_script write_secret_backend write_initscript ask_connect_now connect_backend disconnect_backend read_providers_backend ask_info2 type2interface connected connected_bg connected2 disconnected);
@@ -91,7 +92,7 @@ sub ask_info2 {
 		   if__($cnx->{phone_out}, { label => _("Provider phone number"), val => \$cnx->{phone_out} }),
 		   if__($netc->{dnsServer2}, { label => _("Provider dns 1 (optional)"), val => \$netc->{dnsServer2} }),
 		   if__($netc->{dnsServer3}, { label => _("Provider dns 2 (optional)"), val => \$netc->{dnsServer3} }),
-		   if__($cnx->{vpivci}, { label => _("Choose your country"), val => \$netc->{vpivci}, list => ['Netherlands', 'France', 'Belgium', 'Italy', 'UK', 'USA'] }),
+		   if__($cnx->{vpivci}, { label => _("Choose your country"), val => \$netc->{vpivci}, list => detect_timezone() }),
 		   if__($cnx->{dialing_mode}, { label => _("Dialing mode"), val => \$cnx->{dialing_mode},list=>["auto","manual"]}),
 		   if__($cnx->{speed}, { label => _("Connection speed"), val => \$cnx->{speed}, list => ["64 Kb/s", "128 Kb/s"]}),
 		   if__($cnx->{huptimeout}, { label => _("Connection timeout (in sec)"), val => \$cnx->{huptimeout} }),
@@ -105,6 +106,24 @@ sub ask_info2 {
 	}
     }
     1;
+}
+
+sub detect_timezone {
+    my %tmz2country = ( 
+		       'Europe/Paris' => _("France"),
+		       'Europe/Amsterdam' => _("Netherlands"),
+		       'Europe/Rome' => _("Italy"),
+		       'Europe/Brussels' => _("Belgium"), 
+		       'America/New_York' => _("United States"),
+		       'Europe/London' => _("United Kingdom") 
+		      );
+    my %tm_parse = MDK::Common::System::getVarsFromSh('/etc/sysconfig/clock');
+    foreach (keys %tmz2country) {
+	if ($_ eq $tm_parse{ZONE}) {
+	    unshift @country, $tmz2country{$_};
+	} else { push @country, $tmz2country{$_} };
+    }
+    \@country;
 }
 
 sub type2interface {
