@@ -497,8 +497,6 @@ sub create_okcancel {
     if ($cancel) {
         $bprev = gtksignal_connect($w->{cancel} = Gtk2::Button->new($cancel), clicked => $w->{cancel_clicked} || 
                                    sub { log::l("default cancel_clicked"); undef $w->{retval}; Gtk2->main_quit });
-    } elsif($::Wizard_no_previous) { # prevent one button to be centered (eg: "finish" in wizards)
-        $bprev = Gtk2::Label->new;
     }
     $w->{wizcancel} = gtksignal_connect(Gtk2::Button->new(N("Cancel")), clicked => sub { die 'wizcancel' }) if $::isWizard && !$::isInstall;
     if (!defined $wm_is_kde) {
@@ -510,6 +508,7 @@ sub create_okcancel {
     # we put space to group buttons in two packs (but if there's only one when not in wizard mode)
     # but in the installer where all windows run in wizard mode because of design even when not in a wizard step
     my @extras = (@l2, @r2);
+    $bprev = Gtk2::Label->new if !$cancel && $::Wizard_no_previous && !@extras;
     my (@first, @last); # buttons lists
     if ($::isWizard) {
         # wizard mode: order is cancel/extras/white/prev/next
