@@ -1,3 +1,50 @@
+2002/01/17  dam's  <damien@mandrakesoft.com>
+
+	* network/tools.pm, network/netconnect.pm: draknet : success message only
+	if success
+
+	* my_gtk.pm: added timeout for redrawing icon widget
+
+2002/01/17  fcrozat
+
+	* share/rpmsrate: kdebase-nsplugins will be installed by default when
+	selecting KDE
+
+2002/01/17  François Pons  <fpons@mandrakesoft.com>
+
+	* pkgs.pm: avoid upgrading a package by selection on files unless it has
+	been obsoleted.
+
+2002/01/17  Pixel  <pixel@mandrakesoft.com>
+
+	* diskdrake.pm: check the mountpoint is valid for encrypting (disallow "/"
+	and "/usr")
+
+	* fsedit.pm, diskdrake_interactive.pm: better error message when auto
+	allocate doesn't do anything
+	check the mountpoint is valid for encrypting (disallow "/" and "/usr")
+
+	* fs.pm: do not create /swap
+
+	* services.pm: move service apcupsd from Printing to System
+
+	* bootloader.pm: fix many disks bios remapping (esp. booting on scsi when
+	ide is present)
+
+2002/01/17  sdupont
+
+	* standalone/drakbackup: stable version for qa pkg.
+	(without unstables options)
+
+2002/01/16  Pixel  <pixel@mandrakesoft.com>
+
+	* any.pm: fix cancel on scsi module loading
+
+2002/01/16  sdupont
+
+	* standalone/drakbackup: update send mail.
+	(pixel mode. ;))
+
 2002/01/16  Guillaume Cottenceau  <gc@mandrakesoft.com>
 
 	* install_steps_interactive.pm: installUpdates: use formatAlaTeX
