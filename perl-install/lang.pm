@@ -680,9 +680,9 @@ sub charset2kde_font {
     my $font = $charset2kde_font{$charset} || $charset2kde_font{default};
     my $r = $font->[$type] || $font->[0];
 
-    #- the format is "font-name,size,5,kdecharset,0,0" I have no idea of the
+    #- the format is "font-name,size,-1,5,0,0,0,0,0,0" I have no idea of the
     #- meaning of that "5"...
-    "$r,5,$kdecharset,0,0";
+    "$r,-1,5,0,0,0,0,0,0";
 }
 
 # this define pango name fonts (like "NimbusSans L") depending
