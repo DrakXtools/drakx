@@ -351,11 +351,6 @@ enum return_type mount_clp_may_preload(char *clp_name, char *location_mount, int
 #endif
 
 #ifndef MANDRAKE_MOVE
-static void save_stuff_for_rescue(void)
-{
-        copy_file("/etc/resolv.conf", STAGE2_LOCATION "/etc/resolv.conf", NULL);
-}
-
 enum return_type load_ramdisk_fd(int ramdisk_fd, int size)
 {
 	BZFILE * st2;
@@ -415,7 +410,6 @@ enum return_type load_ramdisk_fd(int ramdisk_fd, int size)
 		return RETURN_ERROR;
 
 	if (IS_RESCUE) {
-		save_stuff_for_rescue();
 		if (umount(STAGE2_LOCATION)) {
 			log_perror(ramdisk);
 			return RETURN_ERROR;
