@@ -77,7 +77,7 @@ $SUDO rm -rf $STAGE2TMP
 
 df $MNTPOINT
 df -i $MNTPOINT
-$SUDO umount $STAGE2
+$SUDO umount $MNTPOINT
 rmdir $MNTPOINT
 
 echo bzipping $STAGE2

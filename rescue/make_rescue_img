@@ -122,7 +122,7 @@ if (arch() =~ /ppc/) {
 }
 
 mkdir_p($mnt);
-__ "$sudo umount $rescue 2>/dev/null";
+__ "$sudo umount $mnt 2>/dev/null";
 
 _ "dd if=/dev/zero of=$rescue bs=1k count=$size";
 _ "$mke2fs $rescue";
@@ -133,7 +133,7 @@ _ "$sudo chown -R root.root $tmp";
 _ "$sudo cp -a $tmp/* $mnt";
 _ "$sudo rm -rf $tmp";
 
-_ "$sudo umount $rescue";
+_ "$sudo umount $mnt";
 _ "rmdir $mnt";
 
 _ "bzip2 -f -9 $rescue";
