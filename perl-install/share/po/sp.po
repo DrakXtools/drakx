@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX\n"
 "POT-Creation-Date: 2002-12-05 19:52+0100\n"
-"PO-Revision-Date: 2003-02-27 21:17+0100\n"
+"PO-Revision-Date: 2003-02-28 18:21+0100\n"
 "Last-Translator: Toma Jankovic <tomaja@net.yu>\n"
 "Language-Team: Serbian <i18n@mandrake.co.yu>\n"
 "MIME-Version: 1.0\n"
@@ -114,9 +114,9 @@ msgid "Country"
 msgstr "Земља"
 
 #: ../../any.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "All languages"
-msgstr "Изаберите језик"
+msgstr "Сви језици"
 
 #: ../../any.pm:1
 #, c-format
@@ -497,12 +497,12 @@ msgstr "Ограничена командна линика - опције"
 #: ../../any.pm:1
 #, c-format
 msgid "Force No APIC"
-msgstr ""
+msgstr "Обавезно No APIC"
 
 #: ../../any.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Enable ACPI"
-msgstr "Омогући стартaње са CD-a?"
+msgstr "Омогући ACPI"
 
 #: ../../any.pm:1
 #, c-format
@@ -560,9 +560,9 @@ msgid "On Floppy"
 msgstr "На дискету"
 
 #: ../../any.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "First sector of the root partition"
-msgstr "Први сектор стартне партиције"
+msgstr "Први сектор root партиције"
 
 #: ../../any.pm:1
 #, c-format
@@ -972,9 +972,9 @@ msgid "There is already a partition with mount point %s\n"
 msgstr "Већ постоји партиција са тачком монтирања %s\n"
 
 #: ../../fsedit.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Mount points should contain only alphanumerical characters"
-msgstr "Име штампaча треба да садржи само словa, броjеве и underscore"
+msgstr "Тачке монтирања треба да садрже само алфанумеричке карактере"
 
 #: ../../fsedit.pm:1
 #, c-format
@@ -1112,7 +1112,7 @@ msgstr ""
 "и нeће се моћи повратити!"
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "As a review, DrakX will present a summary of various information it has\n"
 "about your system. Depending on your installed hardware, you may have some\n"
@@ -1161,16 +1161,18 @@ msgid ""
 "displayed here. You can click on the button to change the parameters\n"
 "associated with the card."
 msgstr ""
-"Овде су приказани различити параметри везани за вашу машину. У зависности\n"
-"од вашег инсталираног хардвера, можетеy - или не морате, погледајте "
-"следеће \n"
-"уносе:\n"
+"Слично списку, DrakX ће приказати зажетак различитих инормација о\n"
+"вашем систему. У зависности од инстлараног хардвера, можете имати неке\n"
+"или све уносе:\n"
 "\n"
 " * \"Миш\": проверите тренутне поставке за миша и кликните на тастер\n"
 "да бих променили уколико је неопходно.\n"
 "\n"
 " * \"Тастатура\": проверите тренутни расоред тастатуре tion и кликните на\n"
 "тастер да би направили измене уколико су потребне.\n"
+"\n"
+" * \"Држава\": проверите тренутни унос за земљу. Уколико се не налазите\n"
+"у овој земљи, кликните на тастер и изаберите другу.\n"
 "\n"
 " * \"Временска зона\": DrakX, по default-у, погађа вашу временску зону у \n"
 "зависности који се језик\n"
@@ -1501,7 +1503,7 @@ msgstr ""
 "мрежа."
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "LILO and grub are GNU/Linux bootloaders. Normally, this stage is totally\n"
 "automated. DrakX will analyze the disk boot sector and act according to\n"
@@ -1547,6 +1549,32 @@ msgid ""
 "floppy disk must be blank or have non-critical data on it - DrakX will\n"
 "format the floppy and will rewrite the whole disk."
 msgstr ""
+"LILO и grub су GNU/Linux стартери. Обично је овај корак\n"
+"аутоматизован. DrakX ће анализирати boot сектор диска и понашаће се у "
+"складу \n"
+"са оним шта пронађе:\n"
+"\n"
+" * уколико пронађе Windows boot сектор, он ће га заменити са grub/LILO\n"
+"boot сектор. На овај начин ћете бити у могућности да покренете или GNU/Linux "
+"или неки\n"
+"други OS.\n"
+"\n"
+" * уколико пронађе grub или LILO boot сектор, он ће га заменити са новим\n"
+"новим.\n"
+"\n"
+"Уколико не може да одреди које је боот сектор у питању, DrakX ће вас питати "
+"где да смести\n"
+"стартер.\n"
+"\n"
+"\"Boot уређај\": у већини случајева, нећете морати да мењате default поставку"
+"(\"Први\n"
+"сектор на диску (MBR)\"), али ако то желите, стартер се може инсталирати\n"
+"на други хард диск (\"/dev/hdb\"), или чак на дискету \n"
+"(\"На дискету\").\n"
+"\n"
+"Означите \"Крирај стартни диск\" да би себи омогућили стартни медиј за\n"
+"не дај боже јер то може бити једини начин да подигнете систем.\n"
+"\n"
 "Mandrake Linux CDROM има уграђен спасилачки мод. Можете му приступити\n"
 "подизаем система преко CDROM-а, притисните >>F1<< тастер при стартању и "
 "укуцајте >>rescue<< у\n"
@@ -2600,6 +2628,13 @@ msgid ""
 "able to change that after installation though). A sample of the chosen\n"
 "configuration is shown in the monitor."
 msgstr ""
+"Резолуција\n"
+"\n"
+"   Овде можете изабрати резолуцију и број боја које су\n"
+"доступне за ваш хардвер. Изаберите оно што највише одговара вашим потребама "
+"(ове опције ћете моћи\n"
+"да промените и након инсталације). Пример изабране\n"
+"конфигурације је приказан на монитору."
 
 #: ../../help.pm:1
 #, c-format
@@ -3394,6 +3429,9 @@ msgid ""
 "To ensure data integrity after resizing the partition(s), \n"
 "filesystem checks will be run on your next boot into Windows(TM)"
 msgstr ""
+"Да би осигурали интегритет након промене величине партиције(а), \n"
+"провера фајл система ће бити покренута када се следећи пут улогујете у "
+"Windows(TM)"
 
 #: ../../install_interactive.pm:1
 #, c-format
@@ -4553,14 +4591,14 @@ msgid "Which is your timezone?"
 msgstr "Коjа jе вaша временска зонa ?"
 
 #: ../../install_steps_interactive.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Would you like to try again?"
-msgstr "Да ли бисте да подесите штампач?"
+msgstr "Да ли желите да пробате поново?"
 
 #: ../../install_steps_interactive.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Unable to contact mirror %s"
-msgstr "Не могу да форкујем: %s"
+msgstr "Не могу да контактирам мирор %s"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -7520,9 +7558,9 @@ msgid "Exit install"
 msgstr "Излаз из инсталације"
 
 #: ../../steps.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Install updates"
-msgstr "Инсталирај системске update-ове"
+msgstr "Инсталирај update-ове"
 
 #: ../../steps.pm:1
 #, c-format
@@ -7550,9 +7588,9 @@ msgid "Add a user"
 msgstr "Додај корисника"
 
 #: ../../steps.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Root password"
-msgstr "Без лозинке"
+msgstr "Root лозинка"
 
 #: ../../steps.pm:1
 #, c-format
@@ -8977,7 +9015,7 @@ msgstr "SCSI контролери"
 #: ../../harddrake/data.pm:1
 #, c-format
 msgid "Firewire controllers"
-msgstr ""
+msgstr "Firewire контролери"
 
 #: ../../harddrake/data.pm:1
 #, c-format
@@ -10396,9 +10434,9 @@ msgid "Start at boot"
 msgstr "Покрени при стартaњу"
 
 #: ../../network/network.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Assign host name from DHCP address"
-msgstr "Молим Вас унесете име хоста или IP адресу.\n"
+msgstr "Доделите име хоста за DHCP адресу"
 
 #: ../../network/network.pm:1
 #, c-format
@@ -10411,9 +10449,9 @@ msgid "Track network card id (useful for laptops)"
 msgstr "Track мрежна картица id (корисно за лаптоп рачунаре)"
 
 #: ../../network/network.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "DHCP host name"
-msgstr "Име хоста:"
+msgstr "DHCP име хоста"
 
 #: ../../network/network.pm:1 ../../standalone/drakconnect:1
 #: ../../standalone/drakgw:1
@@ -10697,9 +10735,9 @@ msgid "Unknown model"
 msgstr "Непознати модел"
 
 #: ../../printer/main.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "%s (Port %s)"
-msgstr "Порт"
+msgstr "%s (Порт %s)"
 
 #: ../../printer/main.pm:1
 #, c-format
@@ -11030,10 +11068,9 @@ msgstr ""
 "Освежи листу штампача (да би приказао све доступне удаљене CUPS штампаче)"
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Display all available remote CUPS printers"
-msgstr ""
-"Освежи листу штампача (да би приказао све доступне удаљене CUPS штампаче)"
+msgstr "прикажи све доступне удаљене CUPS штампаче"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -12661,6 +12698,10 @@ msgid ""
 "Printerdrake could not determine which model your printer %s is. Please "
 "choose the correct model from the list."
 msgstr ""
+"\n"
+"\n"
+"Printerdrake није могао да детектује ваш модел штампача %s. Изаберите "
+"одговарајући модел са листе."
 
 #: ../../printer/printerdrake.pm:1 ../../standalone/scannerdrake:1
 #, c-format
@@ -12670,12 +12711,12 @@ msgstr ")"
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid " on "
-msgstr ""
+msgstr " укљ.  "
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "("
-msgstr ""
+msgstr "("
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -12804,14 +12845,14 @@ msgid "Checking your system..."
 msgstr "Проверавам ваш систем..."
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Restarting CUPS..."
-msgstr "Рестартуј XFS"
+msgstr "Рестартујем CUPS..."
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "This server is already in the list, it cannot be added again.\n"
-msgstr "Овај хост/мрежа већ постоји на листи, и не може се поново додати.\n"
+msgstr "Овај сервер већ постоји на листи, и не може се поново додати.\n"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -12819,39 +12860,39 @@ msgid "Examples for correct IPs:\n"
 msgstr "Примери правилних IP адреса:\n"
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "The entered IP is not correct.\n"
-msgstr "Унешена хост/мрежна IP адреса није исправна.\n"
+msgstr "Унешена IP адреса није исправна.\n"
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Server IP missing!"
-msgstr "Недостаје име NCP сервера!"
+msgstr "Недостаје IP сервер!"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Enter IP address and port of the host whose printers you want to use."
-msgstr ""
+msgstr "Унесите IP адресу и порт хоста чије штампаче желите да користите."
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Accessing printers on remote CUPS servers"
-msgstr "Штампач или Удаљени CUPS сервер"
+msgstr "Приступам шампачима на удаљеним CUPS серверима"
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Remove selected server"
-msgstr "Уклони селектованог хоста/мрежу"
+msgstr "Уклони селектовани сервер"
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Edit selected server"
-msgstr "Уреди селектованог хоста/мрежу"
+msgstr "Уреди селектовани сервер"
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Add server"
-msgstr "Додај корисника"
+msgstr "Додај сервер"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -12860,6 +12901,9 @@ msgid ""
 "do this if the servers do not broadcast their printer information into the "
 "local network."
 msgstr ""
+"Овде можете додати CUPS сервере чије штампаче желите да користите. Ово треба "
+"да урадите само уколико сервери не шаљу информације о штампачу на локалну "
+"мрежу."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -12879,7 +12923,7 @@ msgstr "Унешена хост/мрежна IP адреса није исправна.\n"
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Host/network IP address missing."
-msgstr ""
+msgstr "Недостаје хост/мрежна IP адреса."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -12964,16 +13008,23 @@ msgid ""
 "address(es) and optionally the port number(s) here to get the printer "
 "information from the server(s)."
 msgstr ""
+"Да би приступили штампачима на удаљеним CUPS серверима у вашој локалној "
+"мрежи требасамо да укључите опцију \"Аутоматски пронађи доступне штампаче на "
+"удаљеним машинама\"; CUPS сервери ће известити вашу машину о штампачима "
+"аутоматски. Сви штампачи који су тренутно познати вашој машини ће бити "
+"приказани у секцији \"Удаљени штампачи\" у главном прозору Printerdrake. "
+"Уколико ваш CUPS сервер(и) није/нису у вашој локалној мрежи, морате унети IP "
+"aадресу(e) и опционално број порта(ова)да би добавили информације са сервера."
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "None"
-msgstr "Урађено"
+msgstr "Неиједан"
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Additional CUPS servers: "
-msgstr "На CUPS сервер \"%s\""
+msgstr "Додатни CUPS сервери: "
 
 #: ../../printer/printerdrake.pm:1 ../../standalone/scannerdrake:1
 #, c-format
@@ -13159,6 +13210,8 @@ msgid ""
 "if set to yes, check for empty passwords, for no password in /etc/shadow and "
 "for users with the 0 id other than root."
 msgstr ""
+"уколико је подешене на да, проверите празне лозинке, без лозинке у /etc/"
+"shadow и  кориснике са 0 id различих од root."
 
 #: ../../security/help.pm:1
 #, c-format
@@ -14989,7 +15042,7 @@ msgstr ""
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "%s"
-msgstr ""
+msgstr "%s"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -17916,7 +17969,7 @@ msgid "(default value: %s)"
 msgstr "(подразумевана вредност: %s)"
 
 #: ../../standalone/draksec:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Standard: This is the standard security recommended for a computer that will "
 "be used to connect\n"
@@ -17953,14 +18006,14 @@ msgstr ""
 "клијент на Интернету, требали би \n"
 "\t      да изаберете нижи ниво.\n"
 "\n"
-"Параноја:  Ово је слично предходном нивоу, али је у потпуности затворен и "
+"Параноидни:  Ово је слично предходном нивоу, али је у потпуности затворен и "
 "сигурносне\n"
 "                опције су на њиховом максимуму\n"
 "\n"
 "Администратор сигурности:\n"
 "               Уколико је опција 'Сигурносни аларми' активна, аларми ће бити "
 "послани  ка својим корисницима (корисничко име или\n"
-"\t       email)"
+"       email)"
 
 #: ../../standalone/draksound:1
 #, c-format
@@ -18744,12 +18797,12 @@ msgstr "Coma bug"
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "special capacities of the driver (burning ability and or DVD support)"
-msgstr ""
+msgstr "специјални капацитети уређаја (burning опција и или подршка за DVD)"
 
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "Drive capacity"
-msgstr ""
+msgstr "Капацитет уређаја"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -19588,7 +19641,7 @@ msgstr "Научнa радна станицa"
 
 #: ../../share/compssUsers:999
 msgid "Scientific applications such as gnuplot"
-msgstr ""
+msgstr "Научне апликације као што је gnuplot"
 
 #: ../../share/compssUsers:999
 msgid "Console Tools"
@@ -19666,12 +19719,10 @@ msgid "Apache, Pro-ftpd"
 msgstr "Apache, Pro-ftpd"
 
 #: ../../share/compssUsers:999
-#, fuzzy
 msgid "Mail"
-msgstr "Мали"
+msgstr "Пошта"
 
 #: ../../share/compssUsers:999
-#, fuzzy
 msgid "Postfix mail server"
 msgstr "Postfix mail сервер"
 
@@ -19770,6 +19821,38 @@ msgstr "Личне финансиje"
 #: ../../share/compssUsers:999
 msgid "Programs to manage your finances, such as gnucash"
 msgstr "Програми за управљaње вaшим финансиjамa, као што jе gnucash"
+
+#~ msgid ""
+#~ "You are about to configure your computer to install a PXE server as a "
+#~ "DHCP server\n"
+#~ "and a TFTP server to build an installation server.\n"
+#~ "With that feature, other computers on your local network will be "
+#~ "installable using from this computer.\n"
+#~ "\n"
+#~ "Make sure you have configured your Network/Internet access using "
+#~ "drakconnect before going any further.\n"
+#~ "\n"
+#~ "Note: you need a dedicated Network Adapter to set up a Local Area Network "
+#~ "(LAN)."
+#~ msgstr ""
+#~ "Вaш рачунар можете подесити да инсталира PXE сервер као DHCP сервер.\n"
+#~ "као и TFTP север да би креирао инсталациони сервер.\n"
+#~ "Са овом опциjом, други компjутери на вaшоj локалноj мрeжи ће моћи да "
+#~ "користе инсталацију са овог рачунара.\n"
+#~ "\n"
+#~ "Проверите да ли је подешена ваша Мрежни/Интернет приступ преко "
+#~ "drakconnect пре него што наставимо.\n"
+#~ "\n"
+#~ "Напоменa: потребанa вам jе мрeжна картица да би подесили локалну мрeжу"
+#~ "(LAN)."
+
+#~ msgid ""
+#~ "The cpu frequency in Mhz (Mega herz which in first approximation may be "
+#~ "coarsely assimilated to number of instructions the cpu is able to execute "
+#~ "per second)"
+#~ msgstr ""
+#~ "Фреквенција процесора у Mhz (Mega herz који у првој апроксимацији може "
+#~ "бити сматран за број инструкција које процесор може да изврши у секунди)"
 
 #~ msgid "Force ACPI"
 #~ msgstr "Присили на ACPI"
