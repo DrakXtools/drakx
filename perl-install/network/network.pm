@@ -70,7 +70,7 @@ sub write_conf {
 		     if_(!$netc->{DHCP}, HOSTNAME => "localhost.$netc->{DOMAINNAME}"),
 		    });
 
-    setVarsInSh($file, $netc, if_(!$netc->{DHCP}, HOSTNAME), qw(NETWORKING FORWARD_IPV4 DOMAINNAME GATEWAY GATEWAYDEV NISDOMAIN));
+    setVarsInSh($file, $netc, if_(!$netc->{DHCP}, 'HOSTNAME'), qw(NETWORKING FORWARD_IPV4 DOMAINNAME GATEWAY GATEWAYDEV NISDOMAIN));
 }
 
 sub write_resolv_conf {
@@ -146,7 +146,7 @@ sub write_interface_conf {
     
     $intf->{BOOTPROTO} =~ s/dhcp.*/dhcp/; #- TODO: avoid obfuscating BOOTPROTO, waiting for zeroconf conf details 
 
-    setVarsInSh($file, $intf, qw(DEVICE BOOTPROTO IPADDR NETMASK NETWORK BROADCAST ONBOOT HWADDR), if_($intf->{wireless_eth}, qw(WIRELESS_MODE WIRELESS_ESSID WIRELESS_NWID WIRELESS_FREQ WIRELESS_SENS WIRELESS_RATE WIRELESS_ENC_KEY WIRELESS_RTS WIRELESS_FRAG WIRELESS_IWCONFIG WIRELESS_IWSPY WIRELESS_IWPRIV)), if_($dhcp_hostname, DHCP_HOSTNAME), if_(!$dhcp_hostname, NEEDHOSTNAME));
+    setVarsInSh($file, $intf, qw(DEVICE BOOTPROTO IPADDR NETMASK NETWORK BROADCAST ONBOOT HWADDR), if_($intf->{wireless_eth}, qw(WIRELESS_MODE WIRELESS_ESSID WIRELESS_NWID WIRELESS_FREQ WIRELESS_SENS WIRELESS_RATE WIRELESS_ENC_KEY WIRELESS_RTS WIRELESS_FRAG WIRELESS_IWCONFIG WIRELESS_IWSPY WIRELESS_IWPRIV)), if_($dhcp_hostname, 'DHCP_HOSTNAME'), if_(!$dhcp_hostname, 'NEEDHOSTNAME'));
 }
 
 sub add2hosts {
@@ -330,9 +330,9 @@ notation (for example, 1.2.3.4).");
 	         ],
 	         complete => sub {
 			 $intf->{BOOTPROTO} = $pump ? if_($dhcp, "dhcp") . if_($zeroconf, "zeroconf") : "static";
-			 if ($pump and !$dhcp and !$zeroconf ) { 
+			 if ($pump and !$dhcp and !$zeroconf) {
 			     $in->ask_warn('', N("For an Automatic IP you have to select at least one protocol : dhcp or zeroconf"));
-			     return (1,$i);
+			     return 1;
 			 }
 			 return 0 if $pump;
 	         	 for (my $i = 0; $i < @fields; $i++) {
@@ -433,7 +433,7 @@ sub read_all_conf {
 }
 
 sub easy_dhcp {
-    my ($in, $netc, $intf) = @_;
+    my ($_in, $netc, $intf) = @_;
 
     return if text2bool($netc->{NETWORKING});
 

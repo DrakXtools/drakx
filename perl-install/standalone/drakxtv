@@ -101,7 +101,7 @@ You can install it by typing \"urpmi xawtv\" as root, in a console.")));
 
 	   if ($in->ask_from("TVdrake", N("Please,\ntype in your tv norm and country"),
                           [
-					  { label => N("TV norm:"), val => \$norm, list => [ "NTSC", "NTSC-JP","PAL", "PAL-M", "PAL-N", "PAL-NC", "SECAM" ], type => 'combo' },
+                           { label => N("TV norm:"), val => \$norm, list => [ "NTSC", "NTSC-JP", "PAL", "PAL-M", "PAL-N", "PAL-NC", "SECAM" ], type => 'combo' },
 					  { label => N("Area:"), val => \$ftable_id, list => [keys %freqtables], format => sub { $freqtables{$_[0]} }, sort => 1 },
 					  ]
 					 ))

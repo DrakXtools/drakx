@@ -30,7 +30,7 @@ if (!$mouse || !$::auto) {
 	#- and adding the nice test mouse to it
 	Gtk2->timeout_add(100, sub {
 			     defined $::Plug && defined $::Plug->child or return 1;
-			     mouse::test_mouse_standalone($mouse,$::Plug->child);
+			     mouse::test_mouse_standalone($mouse, $::Plug->child);
 			     0;
 			 });
     }

@@ -163,7 +163,7 @@ If you don't want to use the auto detection, deselect the checkbox.
 			  { label => N("Use auto detection"), val => \$netc->{autodetection}, type => 'bool' },
 			  if_($::isStandalone, { label => N("Expert Mode"), val => \$::expert, type => 'bool' }),
 			 ]
-			) or goto step_5; }; $in->exit(0) if $@ =~ /wizcancel/;
+			) or goto step_5 }; $in->exit(0) if $@ =~ /wizcancel/;
     undef $::Wizard_no_previous;
     set_profile($netcnx);
     if ($netc->{autodetection}) {
@@ -212,7 +212,7 @@ If you don't want to use the auto detection, deselect the checkbox.
 	eval { $in->ask_from(N("Network Configuration Wizard"),
 			     N("You have configured multiple ways to connect to the Internet.\nChoose the one you want to use.\n\n") . if_(!$::isStandalone, "You may want to configure some profiles after the installation, in the Mandrake Control Center"),
 			     [ { label => N("Internet connection"), val => \$netc->{internet_cnx_choice}, list => [ keys %{$netc->{internet_cnx}} ] } ]
-			    ) or goto step_2; }; $in->exit(0) if $@ =~ /wizcancel/;
+			    ) or goto step_2 }; $in->exit(0) if $@ =~ /wizcancel/;
     } elsif ($nb == 1) {
 	$netc->{internet_cnx_choice} = (keys %{$netc->{internet_cnx}})[0];
     }
@@ -256,7 +256,7 @@ Test your connection via net_monitor or mcc. If your connection doesn't work, yo
     if ($::isWizard) {
 	$::Wizard_no_previous = 1;
 	$::Wizard_finished = 1;
-	eval { $in->ask_okcancel(N("Network Configuration"), $m, 1); }; $in->exit(0) if $@ =~ /wizcancel/;
+	eval { $in->ask_okcancel(N("Network Configuration"), $m, 1) }; $in->exit(0) if $@ =~ /wizcancel/;
 	undef $::Wizard_no_previous;
 	undef $::Wizard_finished;
     } else { $::isStandalone and $in->ask_warn('', $m) }

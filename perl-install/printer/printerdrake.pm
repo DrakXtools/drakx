@@ -100,7 +100,7 @@ sub config_cups {
 		},
 		disabled => sub {
 		    (!$printer->{cupsconfig}{localprintersshared});
-		}},
+		} },
 	      { text => N("Automatically find available printers on remote machines"), type => 'bool',
 		val => \$printer->{cupsconfig}{remotebroadcastsaccepted} },
 	      if_($::expert,
@@ -145,7 +145,7 @@ If some of these measures lead to problems for you, turn this option off, but th
 			     clicked_may_quit => sub {
 				 $buttonclicked = "add";
 				 1; 
-			     }},
+			     } },
 			   { val => N("Edit selected host/network"), 
 			     type => 'button',
 			     clicked_may_quit => sub {
@@ -154,7 +154,7 @@ If some of these measures lead to problems for you, turn this option off, but th
 			     },
 			     disabled => sub {
 				 return ($#{$sharehosts->{list}} < 0);
-			     }},
+			     } },
 			   { val => N("Remove selected host/network"), 
 			     type => 'button',
 			     clicked_may_quit => sub {
@@ -163,18 +163,18 @@ If some of these measures lead to problems for you, turn this option off, but th
 			     },
 			     disabled => sub {
 				 return ($#{$sharehosts->{list}} < 0);
-			     }},
+			     } },
 			   { val => N("Done"), 
 			     type => 'button',
 			     clicked_may_quit => sub {
 				 $buttonclicked = "";
 				 $subdone = 1;
 				 1; 
-			     }},
+			     } },
 			   ]
 			 );
-		    if (($buttonclicked eq "add") ||
-			($buttonclicked eq "edit")) {
+		    if ($buttonclicked eq "add" ||
+			$buttonclicked eq "edit") {
 			my ($hostchoice, $ip);
 			if ($buttonclicked eq "add") {
 			    # Use first entry as default for a new entry
@@ -193,7 +193,7 @@ If some of these measures lead to problems for you, turn this option off, but th
 			my @menu = (N("Local network(s)"));
 			my @interfaces = 
 			    printer::detect::getNetworkInterfaces();
-		        for my $interface (@interfaces) {
+		        foreach my $interface (@interfaces) {
 			    push (@menu,
 				  (N("Interface \"%s\"", $interface)));
 			}
