@@ -41,6 +41,9 @@ foreach (cat_($cfg_file)) {
     $dm = uc($1) if /^DISPLAYMANAGER=(.*)$/; 
 }
 
+my @raw_list = sort keys %dm;
+my @list = $::expert ? @raw_list : (grep { -e $dm{$_}->[1] } @raw_list) or @raw_list;
+
 start:
 if ($in->ask_from(N("Choosing a display manager"),
                                formatAlaTeX(N("X11 Display Manager allows you to graphically log
@@ -48,7 +51,8 @@ into your system with the X Window System running and supports running
 several different X sessions on your local machine at the same time.")),
                                [
                                 {
-                                 list => [ sort keys %dm ],
+                                 allow_empty_list => 1,
+                                 list => \@list,
                                  val => \$dm,
                                  type => 'list',
                                  format => sub { $dm{$_[0]}[0] },
