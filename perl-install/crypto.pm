@@ -158,3 +158,5 @@ sub get {
     }
     int @files;
 }
+
+1;
