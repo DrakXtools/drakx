@@ -633,7 +633,7 @@ sub check_field {
 
 sub add_intf() {
     $::isWizard = 1;
-    network::netconnect::load_conf($netcnx, $netc, $intf);
+    network::netconnect::read_net_conf($netcnx, $netc, $intf);
     # network::netconnect::add_interface($in, $netcnx);
     network::netconnect::main('', $netcnx, $in, $netc, undef, $intf);
     $in->exit(0);

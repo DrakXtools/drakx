@@ -261,7 +261,8 @@ sub real_main {
                     data => \@connection_list,
                     post => sub {
                         $is_wireless = $cnx_type eq N("Wireless connection");
-                        load_conf($netcnx, $netc, $intf) if $::isInstall;  # :-(
+                        #- why read again the net_conf here ?
+                        read_net_conf($netcnx, $netc, $intf) if $::isInstall;  # :-(
                         $type = $netcnx->{type} = $connections{$cnx_type};
                         if ($type eq 'cable') {
                             $auto_ip = 1;
@@ -1373,14 +1374,6 @@ sub get_profiles() {
     map { if_(m!([^/]*)/$!, $1) } glob("$::prefix/etc/netprofile/profiles/*/");
 }
 
-sub load_conf {
-    my ($netcnx, $netc, $intf) = @_;
-    my $current = { getVarsFromSh("$::prefix/etc/netprofile/current") };
-    
-    $netcnx->{PROFILE} = $current->{PROFILE} || 'default';
-    network::network::read_all_conf($::prefix, $netc, $intf, $netcnx);
-}
-
 sub get_net_device() {
     my $connect_file = $network::tools::connect_file;
     my $network_file = "$::prefix/etc/sysconfig/network";
@@ -1396,9 +1389,16 @@ sub get_net_device() {
 }
 
 sub read_net_conf {
-    my (undef, $netcnx, $netc) = @_;
-    $netc->{$_} = $netcnx->{$_} foreach 'NET_DEVICE', 'NET_INTERFACE';
-    $netcnx->{$netcnx->{type}} ||= {};
+    my ($netcnx, $netc, $intf) = @_;
+    my $current = { getVarsFromSh("$::prefix/etc/netprofile/current") };
+
+    $netcnx->{PROFILE} = $current->{PROFILE} || 'default';
+    network::network::read_all_conf($::prefix, $netc, $intf, $netcnx);
+
+    foreach ('NET_DEVICE', 'NET_INTERFACE') {
+        $netc->{$_} = $netcnx->{$_} if $netcnx->{$_}
+    }
+    $netcnx->{$netcnx->{type}} ||= {} if $netcnx->{type};
 }
 
 sub start_internet {

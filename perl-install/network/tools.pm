@@ -191,9 +191,8 @@ sub is_dynamic_host {
 
 sub reread_net_conf {
     my ($netcnx, $netc, $intf) = @_;
-    network::netconnect::read_net_conf('', $netcnx, $netc);
+    network::netconnect::read_net_conf($netcnx, $netc, $intf);
     modules::load_category('net');
-    network::netconnect::load_conf($netcnx, $netc, $intf);
 }
 
 sub convert_wep_key_for_iwconfig {

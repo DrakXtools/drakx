@@ -82,8 +82,7 @@ my $arrow_size = 5;
 
 my $use_same_scale = 1;
 
-network::netconnect::load_conf($netcnx, $netc, $intf);
-network::netconnect::read_net_conf('', $netcnx, $netc);
+network::netconnect::read_net_conf($netcnx, $netc, $intf);
 MDK::Common::Globals::init(in => $in);
 
 gtkadd($window1->{window},
