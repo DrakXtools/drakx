@@ -187,11 +187,13 @@ sub isdn_ask {
  isdn_ask_step_1:
     my $e = $in->ask_from_list_(N("ISDN Configuration"),
 				$label . "\n" . N("What kind of card do you have?"),
-				[ N_("ISA / PCMCIA"), N_("PCI"), N_("I don't know") ]
+				[ N_("ISA / PCMCIA"), N_("PCI"), N_("USB"), N_("I don't know") ]
 			       ) or return;
  isdn_ask_step_1b:
     if ($e =~ /PCI/) {
 	$isdn->{card_type} = 'pci';
+    } elsif ($e =~ /USB/) {
+	$isdn->{card_type} = 'usb';
     } else {
 	$in->ask_from_list_(N("ISDN Configuration"),
 			    N("
@@ -247,7 +249,7 @@ sub isdn_detect_backend {
     if (my ($c) = modules::probe_category('network/isdn')) {
   	$isdn->{$_} = $c->{$_} foreach qw(description vendor id driver options firmware);
 	$isdn->{$_} = sprintf("%0x", $isdn->{$_}) foreach 'vendor', 'id';
-	$isdn->{card_type} = 'pci';
+	$isdn->{card_type} = $c->{bus} eq 'USB' ? 'usb' : 'pci';
 	($isdn->{type}) = $isdn->{options} =~ /type=(\d+)/;
 #	$c->{options} !~ /id=HiSax/ && $isdn->{driver} eq "hisax" and $c->{options} .= " id=HiSax";
 	if ($c->{options} !~ /protocol=/ && $isdn->{protocol} =~ /\d/) {
