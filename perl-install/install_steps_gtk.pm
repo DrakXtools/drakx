@@ -258,6 +258,21 @@ sub selectLanguage {
 }
 
 #------------------------------------------------------------------------------
+sub selectMouse {
+    my ($o, $force) = @_;
+    my $old_dev = $o->{mouse}{device};
+    $o->SUPER::selectMouse($force);
+
+    my $dev = $o->{mouse}{device};
+    if ($old_dev ne $dev && $dev =~ /ttyS/) {
+	log::l("telling X server to use another mouse");
+	eval { commands::modprobe("serial") };
+	symlinkf($dev, "/dev/mouse");
+	c::setMouseMicrosoft($ENV{DISPLAY});
+    }
+}
+
+#------------------------------------------------------------------------------
 sub doPartitionDisks($$) {
     my ($o, $hds, $raid) = @_;
 
@@ -494,6 +509,10 @@ sub installPackages {
 						),
 			       $text,
 			       $progress_total,
+			       '',
+			       gtkadd(create_hbox(),
+				      gtksignal_connect(new Gtk::Button(_("Cancel")), 
+							clicked => sub { $pkgs::cancel_install = 1 })),
 			      )));
     $msg->set(_("Preparing installation"));
     $w->sync;
@@ -563,6 +582,10 @@ _("There was an error ordering packages:"), $1, _("Go on anyway?") ], 1) and ret
 	  }
 	  0;
       };
+    if ($pkgs::cancel_install) {
+	$pkgs::cancel_install = 0;
+	die "setstep choosePackages\n";
+    }
     $w->destroy;
 }
 
@@ -773,6 +796,8 @@ sub init_sizes() {
 sub createXconf($$$) {
     my ($file, $mouse_type, $mouse_dev, $wacom_dev) = @_;
 
+    symlinkf($mouse_dev, "/dev/mouse");
+
     my $wacom;
     if ($wacom_dev) {
 	$wacom_dev = devices::make($wacom_dev);
@@ -835,7 +860,7 @@ EndSection
 
 Section "Pointer"
    Protocol    "$mouse_type"
-   Device      "/dev/$mouse_dev"
+   Device      "/dev/mouse"
    Emulate3Buttons
    Emulate3Timeout    50
 EndSection

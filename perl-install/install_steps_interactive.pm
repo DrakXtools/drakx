@@ -137,10 +137,8 @@ sub selectInstallClass($@) {
 sub selectMouse {
     my ($o, $force) = @_;
 
-    my $name = $o->{mouse}{FULLNAME};
-    if (!$name || $::expert || $force) {
-	$name ||= "Generic Mouse (serial)";
-	$name = $o->ask_from_list_('', _("What is the type of your mouse?"), [ mouse::names() ], $name);
+    if ($o->{mouse}{unsafe} || !$::beginner || $force) {
+	my $name = $o->ask_from_list_('', _("What is the type of your mouse?"), [ mouse::names() ], $o->{mouse}{FULLNAME});
 	$o->{mouse} = mouse::name2mouse($name);
     }
     $o->{mouse}{XEMU3} = 'yes' if $o->{mouse}{nbuttons} < 3; #- if $o->{mouse}{nbuttons} < 3 && $o->ask_yesorno('', _("Emulate third button?"), 1);
@@ -279,7 +277,7 @@ _("You need %dMB for a full install of the groups you selected.
 You can go on anyway, but be warned that you won't get all packages", $max_size / sqr(1024)), 1) or goto &choosePackages
 	 }
 
-	 my $size2install = $::beginner ? $available * 0.7 : $o->chooseSizeToInstall($packages, $min_size, min($max_size, $available * 0.9)) or goto &choosePackages;
+	 my $size2install = $::beginner && $first_time ? $available * 0.7 : $o->chooseSizeToInstall($packages, $min_size, min($max_size, $available * 0.9)) or goto &choosePackages;
 
 	 ($o->{packages_}{ind}) = 
 	   pkgs::setSelectedFromCompssList($o->{compssListLevels}, $packages, 1, $size2install, $o->{installClass});

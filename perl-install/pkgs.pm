@@ -821,7 +821,7 @@ sub install($$$;$$) {
 	    c::rpmdbClose($db);
 	    die "installation of rpms failed:\n  ", join("\n  ", @probs);
 	}
-    } while ($nb > 0);
+    } while ($nb > 0 && !$pkgs::cancel_install);
 
     c::rpmdbClose($db);
     log::l("rpm database closed");

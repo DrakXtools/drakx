@@ -11,6 +11,8 @@ use vars qw(@ISA);
 #-######################################################################################
 use install_steps_interactive;
 use interactive_newt;
+use install_any;
+use devices;
 use common qw(:common);
 
 my $banner = __();
@@ -29,9 +31,25 @@ sub new($$) {
     banner('');
     Newt::PushHelpLine(_("  <Tab>/<Alt-Tab> between elements  | <Space> selects | <F12> next screen "));
 
-    $o->{partitioning}{readonly} = 1; #- needed til diskdrake is graphic only...
-
     (bless {}, ref $type || $type)->SUPER::new($o);
+}
+
+sub doPartitionDisks($$) {
+    my ($o, $hds, $raid) = @_;
+
+    Newt::Suspend();
+    foreach (@$hds) {
+	print 
+_("You can now partition your %s hard drive
+When you are done, don't forget to save using `w'", $_->{device});
+	print "\n\n";
+	my $pid = fork or exec "fdisk", devices::make($_->{device});
+	waitpid($pid, 0);
+    }
+    Newt::Resume();
+
+    install_any::getHds($o);
+    $o->ask_mntpoint_s($o->{fstab});
 }
 
 sub enteringStep {

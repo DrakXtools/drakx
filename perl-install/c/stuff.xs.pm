@@ -80,16 +80,15 @@ Xtest(display)
   RETVAL
 
 void
-setMouse(display, type)
+setMouseMicrosoft(display)
   char *display
-  int type
   CODE:
   {
     XF86MiscMouseSettings mseinfo;
     Display *d = XOpenDisplay(display);
     if (d) {
       if (XF86MiscGetMouseSettings(d, &mseinfo) == True) {
-        mseinfo.type = type;
+        mseinfo.type = MTYPE_MICROSOFT;
         mseinfo.flags = 128;
         XF86MiscSetMouseSettings(d, &mseinfo);
         XFlush(d);
