@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 1.1.9
-Release: 4mdk
+Release: 5mdk
 Url: http://www.linux-mandrake.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -260,6 +260,9 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && \
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog 
+* Mon Aug  5 2002 Guillaume Cottenceau <gc@mandrakesoft.com> 1.1.9-5mdk
+- snapshot for rpmdrake
+
 * Fri Aug  2 2002 Guillaume Cottenceau <gc@mandrakesoft.com> 1.1.9-4mdk
 - have interactive::gtk::exit in my_gtk so that my_gtk apps can call
   it and then fix the problem of clock mouse cursor on exit
