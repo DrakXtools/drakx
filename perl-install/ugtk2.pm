@@ -1275,8 +1275,10 @@ sub ask_browse_tree_info_given_widgets {
     my ($curr, $prev_label, $idle, $mouse_toggle_pending);
     my (%wtree, %ptree, %pix, %node_state, %state_stats);
     my $update_size = sub {
-	my $new_label = $common->{get_status}();
-	$prev_label ne $new_label and $w->{status}->set($prev_label = $new_label);
+	if ($w->{status}) {
+	    my $new_label = $common->{get_status}();
+	    $prev_label ne $new_label and $w->{status}->set($prev_label = $new_label);
+	}
     };
     
     my $set_node_state_flat = sub {
