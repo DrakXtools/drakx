@@ -1,5 +1,20 @@
 2004/02/23  Thierry Vignaud  <tvignaud at mandrakesoft.com>
 
+	* share/po/fr.po: fix french translation (upcase label)
+
+	* standalone/drakconnect: fix ability to set ip parameters broken by
+	localizing bootproto
+
+	* drakxtools.spec: 10-6mdk
+	10-5mdk
+
+	* network/adsl.pm: fix adsl scripts (especially with sagem8xx modems)
+	add missing space
+	(adsl_conf_backend) speedtouch config need vpi/vci as decimal numbers
+	whereas sagem8xx wants hexa numbers
+
+2004/02/23  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
 	* harddrake/data.pm: do not tag some ata raid controllers as unknown hw
 
 	* share/po/fr.po: fix french translation (upcase label)
@@ -27196,7 +27211,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.882 2004/02/23 09:06:51 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.883 2004/02/23 10:19:36 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
