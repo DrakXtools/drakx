@@ -200,7 +200,6 @@ sub setupBootloader__general {
     my $prev_boot = $b->{boot};
 
     $b->{password2} ||= $b->{password} ||= '';
-    $b->{vga} ||= 'normal';
     if (arch() !~ /ppc/) {
 	$in->ask_from_({ messages => N("Bootloader main options"),
 			 title => N("Boot Style Configuration"),
