@@ -121,7 +121,7 @@ our %l = (
       if_(arch() !~ /^ppc/, qw(i2c-hydra i2c-ibm_iic i2c-mpc)),
     ],
     pcmcia => [
-      if_(arch() !~ /^sparc/, qw(i82365 i82092 pd6729 tcic yenta_socket)), # cb_enabler
+      if_(arch() !~ /^sparc/, qw(au1x00_ss i82365 i82092 pd6729 tcic vrc4171_card vrc4173_cardu yenta_socket)), # cb_enabler
     ],
     usb_keyboard => [ qw(usbkbd keybdev) ],
    #serial_cs
