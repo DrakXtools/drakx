@@ -492,6 +492,7 @@ sub read_net_conf {
     add2hash($netcnx, { getVarsFromSh("$prefix/etc/sysconfig/draknet") });
     $netc->{$_} = $netcnx->{$_} foreach 'NET_DEVICE', 'NET_INTERFACE';
 #-    print "type : $netcnx->{type}\n device : $netcnx->{NET_DEVICE}\n interface : $netcnx->{NET_INTERFACE}\n";
+    $netcnx->{$netcnx->{type}}||={};
     add2hash($netcnx->{$netcnx->{type}}, { getVarsFromSh("$prefix/etc/sysconfig/draknet." . $netcnx->{type}) });
 }
 
