@@ -244,7 +244,7 @@ $pid, $rss, $cpu, $cmd
 	my @l = split(' ', cat_("/proc/$pid/stat"));
 	$cpu = sprintf "%2.1f", max(0, min(99, ($l[13] + $l[14]) * 100 / $hertz / ($uptime - $l[21] / $hertz)));
 	$rss = (split ' ', cat_("/proc/$pid/stat"))[23] * $page;
-	(($cmd) = cat_("/proc/$pid/cmdline")) =~ s/\0/ /g;
+	($cmd = cat_("/proc/$pid/cmdline")) =~ s/\0/ /g;
 	$cmd ||= (split ' ', (cat_("/proc/$pid/stat"))[0])[1];
 	write PS;
     }
