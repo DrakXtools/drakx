@@ -1037,6 +1037,7 @@ sub copy_queues_from {
     my @queuesselected;
     my $newspoolerstr;
     my $oldspoolerstr;
+    my $noninteractive = 0;
     {
 	my $w = $in->wait_message('', _("Reading printer data ..."));
 	@oldqueues = printer::get_copiable_queues($oldspooler, $newspooler);
@@ -1047,8 +1048,16 @@ sub copy_queues_from {
 	    push (@queueentries, { text => $_, type => 'bool', 
 				   val => \$queuesselected[$#queuesselected] });
 	}
+	# LPRng and LPD use the same config files, therefore one sees the 
+	# queues of LPD when one uses LPRng and vice versa, but these queues
+	# do not work. So automatically transfer all queues when switching
+	# between LPD and LPRng.
+	if (($oldspooler =~ /^lp/) && ($newspooler =~ /^lp/)) {
+	    $noninteractive = 1;
+	}
     }
-    if ($in->ask_from_entries_refH_powered
+    if ($noninteractive ||
+	$in->ask_from_entries_refH_powered
 	({ title => _("Transfer printer configuration"),
 	   messages => _("You can copy the printer configuration which you have done 
 for the spooler %s to %s, your current spooler. All the
@@ -1085,6 +1094,7 @@ Mark the printers which you want to transfer and click
                 my $oldqueue = $_;
                 my $newqueue = $_;
                 if ((!$printer->{configured}{$newqueue}) ||
+		    ($noninteractive) ||
 		    ($in->ask_from_entries_refH_powered
 	             ({ title => _("Transfer printer configuration"),
 	                messages => _("A printer named \"%s\" already exists under %s. 
