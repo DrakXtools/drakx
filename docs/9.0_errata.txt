@@ -93,3 +93,8 @@ o kernel:
 
   Sometimes process get blocked in D-state on ntfs partitions (see
   drakfont)
+
+  i810_audio mistakely say to modules.pm through modules.*map it
+  handles nforces whereas it lacks some workaround nvidia and alsa
+  uses
+  workaround: perl-install/patch/patch-nforce.pl
