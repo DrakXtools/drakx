@@ -25,6 +25,6 @@ DrakX.pot: $(PMSFILES)
 	perl i18n_compssUsers 2>/dev/null >> $@
 
 $(PMSCFILES): %_.c: %
-	perl -pe 's|^(__?\()| $$1|; s,(^|[^\$$])#([^+].*),\1/*\2*\/,; s|$$|\\n\\|' $< > $@
+	perl -pe 's|^(__?\()| $$1|; s|//|/|g; s,(^|[^\$$])#([^+].*),\1/*\2*\/,; s|$$|\\n\\|' $< > $@
 
 #	for i in *.po; do echo -n "$i "; msgfmt -v $i 2>&1; done | perl -e 'print map { $_->[0] } sort { $a->[1] <=> $b->[1] } map { [ $_, (split)[1] ] } <>'
