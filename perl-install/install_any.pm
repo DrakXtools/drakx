@@ -878,6 +878,16 @@ sub install_urpmi {
 		close $LIST;
 	    }
 
+	    #- build a names file
+	    if (open my $F, ">", "$prefix/var/lib/urpmi/names.$name") {
+		if (defined $_->{start} && defined $_->{end}) {
+		    foreach ($_->{start} .. $_->{end}) {
+			print $F $packages->{depslist}[$_]->name . "\n";
+		    }
+		}
+		close $F;
+	    }
+
 	    #- build synthesis file if there are still not existing (ie not copied from mirror).
 	    if (-s "$prefix/var/lib/urpmi/synthesis.hdlist.$name.cz" <= 32) {
 		unlink "$prefix/var/lib/urpmi/synthesis.hdlist.$name.cz";
