@@ -682,13 +682,88 @@ sub getSMBPrinterShares {
     return @shares;
 }
 
-sub whatNetPrinter () {
+sub getIPsInLocalNetworks {
+
+    # subroutine determines the list of all hosts reachable in the local
+    # networks by means of pinging the broadcast addresses.
+    
+    # Read the output of "ifconfig" to determine the broadcast addresses of
+    # the local networks
+    my $dev_is_localnet = 0;
+    my @local_bcasts = ();
+    my $current_bcast = "";
+	
+    if (-x "/sbin/ifconfig") {
+	local *IFCONFIG_OUT;
+	open IFCONFIG_OUT, "export LC_ALL=C; /sbin/ifconfig|" or die "Couldn't run \"ifconfig\"!";
+	while (my $readline = <IFCONFIG_OUT>) {
+	    # New entry ...
+	    if ($readline =~ /^(\S+)\s/) {
+		my $dev = $1;
+		# ... for a local network (eth = ethernet, 
+		#     vmnet = VMWare,
+		#     ethernet card connected to ISP excluded)?
+		$dev_is_localnet = (($dev =~ /^eth/) || ($dev =~ /^vmnet/));
+		# delete previous address
+		$current_bcast = "";
+	    }
+	    # Are we in the important line now?
+	    if ($readline =~ /\sBcast:([0-9]+\.[0-9]+\.[0-9]+\.[0-9]+)\s/) {
+		# Rip out the broadcast IP address
+		$current_bcast = $1;
+		
+		# Are we in an entry for a local network?
+		if ($dev_is_localnet == 1) {
+		    # Store current IP address
+		    push @local_bcasts, $current_bcast;
+		}
+	    }
+	}
+	close(IFCONFIG_OUT);
+    }
+
+    my @addresses;
+    # Now ping all broadcast addresses 
+    for my $bcast (@local_bcasts) {
+	local *F;
+	open F, "ping -w 1 -b -n $bcast | cut -f 4 -d \" \" | sed s/:// | egrep \"^[0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+\" | uniq |" or next;
+	while (<F>) {chomp; push @addresses, $_;}
+	close F;
+    }
+
+    @addresses;
+}
+
+sub whatNetPrinter {
+
+    my ($network, $smb) = @_;
+
     my $i; 
     my @res;
 
+    # Which ports should be scanned?
+    my @portstoscan = ();
+    if ($smb) {
+	push @portstoscan, "139";
+    }
+    if ($network) {
+	push @portstoscan, "4010", "4020", "4030", "5503", "9100-9104";
+    }
+    return () if $#portstoscan < 0;
+    my $portlist = join (",", @portstoscan);
+    
+    # Which hosts should be scanned?
+    # (Applying nmap to a whole network is very time-consuming, because nmap
+    #  waits for a certain timeout period on non-existing hosts, so we get a 
+    #  lists of existing hosts by pinging the broadcast addresses for existing
+    #  hosts and then scanning only them, which is much faster)
+    my @hostips = getIPsInLocalNetworks();
+    return () if $#hostips < 0;
+    my $hostlist = join (" ", @hostips);
+
     # Scan network for printers
     local *F;
-    open F, "export LC_ALL=\"C\"; nmap -p 139,4010,4020,4030,5503,9100-9104 `route | egrep \"^[0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+\" | cut -f 1 -d \" \" | grep -v \"127\\.0\\.0\\.0\" | sed \"s/\\.0\$/\\.*/\"` |" ||
+    open F, "export LC_ALL=\"C\"; nmap -p $portlist $hostlist |" ||
 	return @res;
     my $host = "";
     my $ip = "";
@@ -754,9 +829,10 @@ sub whatNetPrinter () {
 #-MANUFACTURER:Hewlett-Packard;
 #-DESCRIPTION:HP LaserJet 1100 Printer;
 #-COMMAND SET:MLC,PCL,PJL;
-sub whatPrinter() {
-    #my @res = (whatParport(), whatUsbport(), whatNetPrinter());
-    my @res = (whatParport(), whatUsbport());
+sub whatPrinter {
+    my ($local, $network, $smb) = @_;
+    my @res = (($local ? (whatParport(), whatUsbport()) : ()), 
+	       ($network || $smb ? whatNetPrinter($network,$smb) : ()));
     grep { $_->{val}{CLASS} eq "PRINTER"} @res;
 }
 

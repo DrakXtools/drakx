@@ -18,15 +18,30 @@ sub choose_printer_type {
     $in->set_help('configurePrinterConnected') if $::isInstall;
     my $queue = $printer->{OLD_QUEUE};
     $printer->{str_type} = $printer::printer_type_inv{$printer->{TYPE}};
-    $printer->{str_type} = 
-	$in->ask_from_list_(_("Select Printer Connection"),
-			    _("How is the printer connected?") .
-			    ($printer->{SPOOLER} eq "cups" ?
-			     _("
-Printers on remote CUPS servers you do not have to configure here; these printers will be automatically detected.") : ()),
-			    [ printer::printer_type($printer) ],
-			    $printer->{str_type},
-			    ) or return 0;
+    my $autodetect = 0;
+    $autodetect = 1 if ($printer->{AUTODETECT});
+    my @printertypes = printer::printer_type($printer);
+    $in->ask_from_(
+		   { title => _("Select Printer Connection"),
+		     messages => _("How is the printer connected?") .
+			 ($printer->{SPOOLER} eq "cups" ?
+			  _("
+Printers on remote CUPS servers you do not have to configure here; these printers will be automatically detected.") : ())
+		     },
+		   [
+		    { val => \$printer->{str_type},
+		      list => \@printertypes, 
+		      not_edit => 1, sort => 0,
+		      type => 'list' },
+		    { text => _("Printer auto-detection (Local, TCP/Socket, and SMB printers)"),
+		      type => 'bool', val => \$autodetect }
+		    ]
+		   ) or return 0;
+    if ($autodetect) {
+	$printer->{AUTODETECT} = 1;
+    } else {
+	undef $printer->{AUTODETECT};
+    }
     $printer->{TYPE} = $printer::printer_type{$printer->{str_type}};
     1;
 }
@@ -127,7 +142,8 @@ sub setup_printer_connection {
     # Choose the appropriate connection config dialog
     my $done = 1;
     for ($printer->{TYPE}) {
-	/LOCAL/     and setup_local    ($printer, $in) and last;
+	/LOCAL/     and setup_local_autoscan ($printer, $in, $upNetwork)
+	    and last;
 	/LPD/       and setup_lpd      ($printer, $in, $upNetwork) and last;
 	/SOCKET/    and setup_socket   ($printer, $in, $upNetwork) and last;
 	/SMB/       and setup_smb      ($printer, $in, $upNetwork) and last;
@@ -140,21 +156,26 @@ sub setup_printer_connection {
 }
 
 sub auto_detect {
-    my ($in) = @_;
-    {
+    my ($in, $local, $network, $smb) = @_;
+    if ($local) {
 	modules::get_probeall("usb-interface") and eval { modules::load("printer") };
 	eval { modules::unload(qw(lp parport_pc parport_probe parport)) }; #- on kernel 2.4 parport has to be unloaded to probe again
 	eval { modules::load(qw(parport_pc lp parport_probe)) }; #- take care as not available on 2.4 kernel (silent error).
     }
-    my $b = before_leaving { eval { modules::unload("parport_probe") } };
-    detect_devices::whatPrinter();
+    my $b = before_leaving { eval { modules::unload("parport_probe") } }
+    if $local;
+    detect_devices::whatPrinter($local, $network, $smb);
 }
 
 sub wizard_welcome {
     my ($printer, $in) = @_;
     my $ret;
-    my $autodetect = 1;
-    $autodetect = 0 if ($printer->{NOAUTODETECT});
+    my $autodetectlocal = 0;
+    my $autodetectnetwork = 0;
+    my $autodetectsmb = 0;
+    $autodetectlocal = 1 if ($printer->{AUTODETECTLOCAL});
+    $autodetectnetwork = 1 if ($printer->{AUTODETECTNETWORK});
+    $autodetectsmb = 1 if ($printer->{AUTODETECTSMB});
     if ($in) {
 	eval {
 	    if ($::expert) {
@@ -168,23 +189,49 @@ This wizard allows you to install local or remote printers to be used from this 
 It asks you for all necessary information to set up the printer and gives you access to all available printer drivers, driver options, and printer connection types."));
 	    } else {
 		$ret = $in->ask_from_
-		    ({title => _("Local Printer"),
-		      messages => _("
+		    ({title => _("Add a new printer"),
+		      messages => ($printer->{SPOOLER} ne "pdq" ? _("
 Welcome to the Printer Setup Wizard
 
-This wizard will help you to install your printer(s) connected to this computer.
+This wizard will help you to install your printer(s) connected to this computer, connected directly to the network or to a remote Windows machine.
 
-Please plug in your printer(s) on this computer and turn it/them on. Click on \"Next\" when you are ready, and on \"Cancel\" when you do not want to set up your printer(s) now.
+If you have printer(s) connected to this machine, Please plug it/them in on this computer and turn it/them on so that they can be auto-detected. Also your network printer(s) and you Windows machines must be connected and turned on.
 
-Note that some computers can crash during the printer auto-detection, turn off \"Auto-detect printers\" to do a printer installation without auto-detection. Use the \"Expert Mode\" of printerdrake when you want to set up printing on a remote printer if printerdrake does not list it automatically.")},
+Note that auto-detecting printers on the network takes longer than the auto-detection of only the printers connected to this machine. So turn off the auto-detection of network and/or Windows-hosted printers when you don't need it.
+
+ Click on \"Next\" when you are ready, and on \"Cancel\" when you do not want to set up your printer(s) now.") : _("
+Welcome to the Printer Setup Wizard
+
+This wizard will help you to install your printer(s) connected to this computer or connected directly to the network.
+
+If you have printer(s) connected to this machine, Please plug it/them in on this computer and turn it/them on so that they can be auto-detected. Also your network printer(s) must be connected and turned on.
+
+Note that auto-detecting printers on the network takes longer than the auto-detection of only the printers connected to this machine. So turn off the auto-detection of network printers when you don't need it.
+
+ Click on \"Next\" when you are ready, and on \"Cancel\" when you do not want to set up your printer(s) now."))},
 		     [
-		      { text => _("Auto-detect printers"), type => 'bool',
-			val => \$autodetect},
+		      { text => _("Auto-detect printers connected to this machine"), type => 'bool',
+			val => \$autodetectlocal},
+		      { text => _("Auto-detect printers connected directly to the local network"), type => 'bool',
+			val => \$autodetectnetwork},
+		      ($printer->{SPOOLER} ne "pdq" ?
+		       { text => _("Auto-detect printers connected to machines running Microsoft Windows"), type => 'bool',
+			 val => \$autodetectsmb } : ())
 		      ]);
-		if (!$autodetect) {
-		    $printer->{NOAUTODETECT} = 1;
+		if ($autodetectlocal) {
+		    $printer->{AUTODETECTLOCAL} = 1;
 		} else {
-		    undef $printer->{NOAUTODETECT};
+		    undef $printer->{AUTODETECTLOCAL};
+		}
+		if ($autodetectnetwork) {
+		    $printer->{AUTODETECTNETWORK} = 1;
+		} else {
+		    undef $printer->{AUTODETECTNETWORK};
+		}
+		if ($autodetectsmb && ($printer->{SPOOLER} ne "pdq")) {
+		    $printer->{AUTODETECTSMB} = 1;
+		} else {
+		    undef $printer->{AUTODETECTSMB};
 		}
 	    }
 	};
@@ -205,25 +252,24 @@ If you want to add, remove, or rename a printer, or if you want to change the de
     }
 }
 
-sub setup_local {
-    my ($printer, $in) = @_;
+sub setup_local_autoscan {
+    my ($printer, $in, $upNetwork) = @_;
     my (@port, @str, $device);
     my $queue = $printer->{OLD_QUEUE};
-    my $do_auto_detect;
-    if ((!$::expert) && ($::isWizard)) {
-	$do_auto_detect = !$printer->{NOAUTODETECT};
-    } else {
-	local $::isWizard = 0;
-	my $res = $in->ask_from_list_
-	    (_("Auto-Detection of Printers"),
-	     _("Printerdrake is able to auto-detect your locally connected parallel and USB printers for you, but note that on some systems the auto-detection CAN FREEZE YOUR SYSTEM AND THIS CAN LEAD TO CORRUPTED FILE SYSTEMS! So do it ON YOUR OWN RISK!
+    my $do_auto_detect = 
+	(($::expert &&
+	  $printer->{AUTODETECT}) ||
+	 (!$::expert &&
+	  ($printer->{AUTODETECTLOCAL} ||
+	   $printer->{AUTODETECTNETWORK} ||
+	   $printer->{AUTODETECTSMB})));
 
-Do you really want to get your printers auto-detected?"),
-	     [_("Do auto-detection"),
-	      _("Set up printer manually")],
-	     _("Do auto-detection"));
-	$do_auto_detect = ($res eq _("Do auto-detection"));
+    # If the user requested auto-detection of remote printers, check
+    # whether the network functionality is configured and running
+    if ($printer->{AUTODETECTNETWORK} || $printer->{AUTODETECTSMB}) {
+	if (!check_network($printer, $in, $upNetwork)) { return 0 };
     }
+
     my @autodetected;
     my $menuentries = {};
     $in->set_help('setupLocal') if $::isInstall;
@@ -233,7 +279,13 @@ Do you really want to get your printers auto-detected?"),
 	# configured, so we stop it here. If it is not installed or not 
 	# configured, this command has no effect.
 	printer::stop_service("hpoj");
-	@autodetected = auto_detect($in);
+	@autodetected = auto_detect($in,
+				    $::expert ||
+				    $printer->{AUTODETECTLOCAL},
+				    !$::expert && 
+				    $printer->{AUTODETECTNETWORK},
+				    !$::expert && 
+				    $printer->{AUTODETECTSMB});
 	# We have more than one printer, so we must ask the user for a queue
 	# name in the fully automatic printer configuration.
 	$printer->{MORETHANONE} = ($#autodetected > 0);
@@ -414,58 +466,59 @@ Do you really want to get your printers auto-detected?"),
 		    return 0;
 		}
 	    } else {
-		$in->ask_warn(_("Local Printer"),
-			      _("No local printer found!\n\n") . 
-			      ($::isInstall ? _("Network printers can only be installed after the installation. Choose \"Hardware\" and then \"Printer\" in the Mandrake Control Center.") :
-			       _("To install network printers, click \"Cancel\", switch to the \"Expert Mode\", and click \"Add a new printer\" again.")));
+		$in->ask_warn(_("Printer auto-detection"),
+			      _("No printer found!"));
 		return 0;
 	    }
 	} else {
 	    my $manualconf = 0;
 	    $manualconf = 1 if (($printer->{MANUAL}) || (!$do_auto_detect));
-	    if (!$in->ask_from_(
-	    { title => _("Local Printer"),
-	     messages => (($do_auto_detect ?
-			  ($::expert ?
-			   (($#menuentrieslist == 0) ?
-_("The following printer was auto-detected, if it is not the one you want to configure, enter a device name/file name in the input line") :
-_("Here is a list of all auto-detected printers. Please choose the printer you want to set up or enter a device name/file name in the input line")) :
-			   (($#menuentrieslist == 0) ?
-_("The following printer was auto-detected. The configuration of the printer will work fully automatically. If your printer was not correctly detected or if you prefer a customized printer configuration, turn on \"Manual configuration\".") :
-_("Here is a list of all auto-detected printers. Please choose the printer you want to set up. The configuration of the printer will work fully automatically. If your printer was not correctly detected or if you prefer a customized printer configuration, turn on \"Manual configuration\"."))) :
-			  ($::expert ?
-_("Please choose the port where your printer is connected to or enter a device name/file name in the input line") :
-_("Please choose the port where your printer is connected to."))) .
-			 ($::expert ?
-_(" (Parallel Ports: /dev/lp0, /dev/lp1, ..., equivalent to LPT1:, LPT2:, ..., 1st USB printer: /dev/usb/lp0, 2nd USB printer: /dev/usb/lp1, ...).") :
-			  ())), 
-             callbacks => {
-		 complete => sub {
-		     unless ($menuchoice ne "") {
-			 $in->ask_warn('', _("You must choose/enter a printer/device!"));
-			 return (1,0);
-		     }
-		     return 0;
-		 },
-		 changed => sub {
-		     if ($oldmenuchoice ne $menuchoice) {
-			 $device = $menuentries->{$menuchoice};
-			 $oldmenuchoice = $menuchoice;
-		     }
-		     return 0;
-		 }
-	     }},
-            [
-	     ($::expert ? 
-	      { val => \$device } : ()),
-	     { val => \$menuchoice, list => \@menuentrieslist, 
-	       not_edit => !$::expert, format => \&translate, sort => 0,
-	       allow_empty_list => 1, type => 'list' },
-	     (((!$::expert) && ($do_auto_detect) && ($printer->{NEW})) ? 
-	      { text => _("Manual configuration"), type => 'bool',
-		val => \$manualconf } : ()),
-	    ]
-	    )) {
+	    if (!$in->ask_from_
+		(
+		 { title => ($::expert ?
+			     _("Local Printer") :
+			     _("Available printers")),
+		   messages => (($do_auto_detect ?
+				 ($::expert ?
+				  (($#menuentrieslist == 0) ?
+				   _("The following printer was auto-detected, if it is not the one you want to configure, enter a device name/file name in the input line") :
+				   _("Here is a list of all auto-detected printers. Please choose the printer you want to set up or enter a device name/file name in the input line")) :
+				  (($#menuentrieslist == 0) ?
+				   _("The following printer was auto-detected. The configuration of the printer will work fully automatically. If your printer was not correctly detected or if you prefer a customized printer configuration, turn on \"Manual configuration\".") :
+				   _("Here is a list of all auto-detected printers. Please choose the printer you want to set up. The configuration of the printer will work fully automatically. If your printer was not correctly detected or if you prefer a customized printer configuration, turn on \"Manual configuration\"."))) :
+				 ($::expert ?
+				  _("Please choose the port where your printer is connected to or enter a device name/file name in the input line") :
+				  _("Please choose the port where your printer is connected to."))) .
+				($::expert ?
+				 _(" (Parallel Ports: /dev/lp0, /dev/lp1, ..., equivalent to LPT1:, LPT2:, ..., 1st USB printer: /dev/usb/lp0, 2nd USB printer: /dev/usb/lp1, ...).") :
+				 ())), 
+				 callbacks => {
+				     complete => sub {
+					 unless ($menuchoice ne "") {
+					     $in->ask_warn('', _("You must choose/enter a printer/device!"));
+					     return (1,0);
+					 }
+					 return 0;
+				     },
+				     changed => sub {
+					 if ($oldmenuchoice ne $menuchoice) {
+					     $device = $menuentries->{$menuchoice};
+					     $oldmenuchoice = $menuchoice;
+					 }
+					 return 0;
+				     }
+				 }},
+		 [
+		  ($::expert ? 
+		   { val => \$device } : ()),
+		  { val => \$menuchoice, list => \@menuentrieslist, 
+		    not_edit => !$::expert, format => \&translate, sort => 0,
+		    allow_empty_list => 1, type => 'list' },
+		  (((!$::expert) && ($do_auto_detect) && ($printer->{NEW})) ? 
+		   { text => _("Manual configuration"), type => 'bool',
+		     val => \$manualconf } : ()),
+		  ]
+		 )) {
 		return 0;
 	    }
 	    if ($device ne $menuentries->{$menuchoice}) {
@@ -746,6 +799,7 @@ sub setup_socket {
     if (!check_network($printer, $in, $upNetwork)) { return 0 };
 
     $in->set_help('setupSocket') if $::isInstall;
+
     my ($hostname, $port, $uri, $remotehost,$remoteport);
     my $queue = $printer->{OLD_QUEUE};
     if (($printer->{configured}{$queue}) &&
@@ -755,6 +809,58 @@ sub setup_socket {
     } else {
 	$remotehost = "";
 	$remoteport = "9100";
+    }
+
+    if (0) {
+
+    my $autodetect = 0;
+    my @autodetected;
+    my $menuentries;
+    my @menuentrieslist;
+    my $menuchoice = "";
+    my $oldmenuchoice = "";
+    if ($printer->{AUTODETECT}) {
+	$autodetect = 1;
+	my $w = $in->wait_message(_("Printer auto-detection"), _("Scanning network..."));
+	@autodetected = auto_detect($in, 0, 1, 0);
+	for my $p (@autodetected) {
+	    my $menustr;
+	    if ($p->{val}{DESCRIPTION}) {
+		$menustr = $p->{val}{DESCRIPTION};
+		$p->{port} =~ m!^socket://([^:]+):(\d+)$!;
+		$menustr .= _(", network printer \"%s\", port %s", $1, $2);
+
+	    } else {
+		$p->{port} =~ m!^socket://([^:]+):(\d+)$!;
+		$menustr = _("Network printer \"%s\", port %s", $1, $2);
+	    }
+	    $menustr .= " ($p->{port})";
+	    $menuentries->{$menustr} = $p->{port};
+	}
+	@menuentrieslist = sort { 
+	    $menuentries->{$a} cmp $menuentries->{$b};
+	} keys(%{$menuentries});
+	if (($printer->{configured}{$queue}) &&
+	    ($printer->{currentqueue}{connect} =~ m/^socket:/)) {
+	    my $uri = $printer->{currentqueue}{connect};
+	    my $menustr;
+	    if ($printer->{currentqueue}{make}) {
+		$menustr = "$printer->{currentqueue}{make} $printer->{currentqueue}{model}";
+		$uri =~ m!^socket://([^:]+):(\d+)$!;
+		$menustr .= _(", network printer \"%s\", port %s", $1, $2);
+	    } else {
+		$uri =~ m!^socket://([^:]+):(\d+)$!;
+		$menustr = _("Network printer \"%s\", port %s", $1, $2);
+	    }
+	    $menustr .= " ($uri)";
+	    $menuentries->{$menustr} = $uri;
+	    unshift(@menuentrieslist, $menustr);
+	}
+	if ($#menuentrieslist < 0) {
+	    $autodetect = 0;
+	}
+    }
+
     }
 
     return if !$in->ask_from(_("TCP/Socket Printer Options"),
@@ -2502,6 +2608,12 @@ sub main {
         printer::set_default_spooler($printer);
     }
 
+    # Turn on printer autodetection by default
+    $printer->{AUTODETECT} = 1;
+    $printer->{AUTODETECTLOCAL} = 1;
+    $printer->{AUTODETECTNETWORK} = 1;
+    $printer->{AUTODETECTSMB} = 1;
+
     # Control variables for the main loop
     my ($menuchoice, $cursorpos, $queue, $continue, $newqueue, $editqueue, $expertswitch, $menushown) = ('', '::', $defaultprname, 1, 0, 0, 0, 0);
     # Cursor position in queue modification window
@@ -2879,7 +2991,6 @@ sub main {
 		}
 	    };
 	    undef $printer->{MANUAL} if $printer->{MANUAL};
-	    undef $printer->{NOAUTODETECT} if $printer->{NOAUTODETECT};
 	} else {
 	    $printer->{NEW} = 0;
 	    # Modify a queue, ask which part should be modified
@@ -3109,7 +3220,7 @@ What do you want to modify on this printer?",
 	    delete($printer->{configured}{$queue}{queuedata}{menuentry});
 	}
     }
-	foreach (qw(Old_queue QUEUE TYPE str_type currentqueue DBENTRY ARGS complete OLD_CHOICE NEW MORETHANONE MANUALMODEL))
-	{ delete $printer->{$_} };
+    foreach (qw(Old_queue QUEUE TYPE str_type currentqueue DBENTRY ARGS complete OLD_CHOICE NEW MORETHANONE MANUALMODEL AUTODETECT AUTODETECTLOCAL AUTODETECTNETWORK AUTODETECTSMB))
+    { delete $printer->{$_} };
 }
 
