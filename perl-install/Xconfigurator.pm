@@ -702,7 +702,7 @@ sub testFinalConfig {
     open F, "|perl 2>/dev/null" or die '';
     print F "use lib qw(", join(' ', @INC), ");\n";
     print F q{
-        use lang;
+        require lang;
 	use interactive_gtk;
         use my_gtk qw(:wrappers);
 
