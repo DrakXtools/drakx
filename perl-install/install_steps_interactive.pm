@@ -196,7 +196,7 @@ sub selectInstallClass {
 	_("Expert")	 => "expert",
       ),
     );
-    %s = @c = (_("Expert") => "expert") if $::expert && !$clicked;
+    %c = @c = (_("Expert") => "expert") if $::expert && !$clicked;
 
     $o->set_help('selectInstallClassCorpo') if $::corporate;
 
@@ -395,9 +395,10 @@ sub choosePartitionsToFormat($$) {
 
 sub formatMountPartitions {
     my ($o, $fstab) = @_;
-    my $w = $o->wait_message('', _("Formatting partitions"));
+    my $w;
     fs::formatMount_all($o->{raid}, $o->{fstab}, $o->{prefix}, sub {
 	my ($part) = @_;
+	$w ||= $o->wait_message('', _("Formatting partitions"));
 	$w->set(isLoopback($part) ?
 		_("Creating and formatting file %s", loopback::file($part)) :
 		_("Formatting partition %s", $part->{device}));
