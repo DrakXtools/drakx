@@ -292,8 +292,8 @@ enum return_type disk_prepare(void)
 
 	if (count == 1) {
 		results = try_with_device(*medias);
-		if (results == RETURN_OK)
-			return RETURN_OK;
+		if (results != RETURN_ERROR)
+			return results;
 		i = ask_insmod(SCSI_ADAPTERS);
 		if (i == RETURN_BACK)
 			return RETURN_BACK;
@@ -308,8 +308,8 @@ enum return_type disk_prepare(void)
 		return results;
 
 	results = try_with_device(choice);
-	if (results == RETURN_OK)
-		return RETURN_OK;
+	if (results != RETURN_ERROR)
+		return results;
 	i = ask_insmod(SCSI_ADAPTERS);
 	if (i == RETURN_BACK)
 		return RETURN_BACK;
