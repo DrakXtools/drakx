@@ -34,6 +34,7 @@ my $direct = /-direct/;
 my $in = 'interactive'->vnew('su', 'default');
 
 my $imagefile = "/root/drakx/replay_install.img";
+my $imagefile2 = "/root/drakx/replay_install_drivers.img";
 -f $imagefile or $in->ask_warn(N("Error!"), 
 			       N("I can't find needed image file `%s'.", $imagefile), 1), quit_global($in, 0);
 
@@ -82,6 +83,22 @@ do {
     $again = $@; #- grrr... $@ is localized in code block :-(
 } while $again;
 fs::mount($dev, $mountdir, 'vfat', 0);
+
+if (-f $imagefile2) {
+    do {
+        eval { fs::umount($mountdir) };
+        $in->ask_okcancel('', N("Insert another blank floppy in drive %s (for drivers disk)", $floppy), 1) or quit_global($in, 0);
+        log::explanations(N("Creating auto install floppy (drivers disk)"));
+        my $_w = $in->wait_message('', N("Creating auto install floppy"));
+        eval {
+            commands::dd("if=$imagefile2", "of=$dev", "bs=1440", "count=1024");
+            common::sync();
+        };
+        $again = $@; #- grrr... $@ is localized in code block :-(
+    } while $again;
+    fs::mount($dev, $mountdir, 'ext2', 0);
+}
+
 my $cfgfile = "$mountdir/auto_inst.cfg";
 eval(cat_($cfgfile));
 my $o_old = $o; # BUG (maybe install's $::o ?)

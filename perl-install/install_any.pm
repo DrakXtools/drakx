@@ -712,17 +712,27 @@ sub g_auto_install {
 
 sub getAndSaveInstallFloppy {
     my ($o, $where) = @_;
+    my @generated_floppies;
     if ($postinstall_rpms && -d $postinstall_rpms && -r "$postinstall_rpms/auto_install.img") {
 	log::l("getAndSaveInstallFloppy: using file saved as $postinstall_rpms/auto_install.img");
 	cp_af("$postinstall_rpms/auto_install.img", $where);
+        push @generated_floppies, $where;
     } else {
 	my $image = cat_("/proc/cmdline") =~ /pcmcia/ ? "pcmcia" :
 	  arch() =~ /ia64|ppc/ ? "all"  : #- we only use all.img there
 	  ${{ disk => 'hd_grub', cdrom => 'cdrom', ftp => 'network', nfs => 'network', http => 'network' }}{$o->{method}};
 	$image .= arch() =~ /sparc64/ && "64"; #- for sparc64 there are a specific set of image.
+        if ($image eq 'network') {
+            my $boot = $where;
+            $boot =~ s/(.*)\.img$/$1_boot.img/ or $boot .= '_boot.img';
+            getAndSaveFile("images/$image.img", $boot) or log::l("failed to write Install Floppy ($image.img) to $boot"), return;
+            push @generated_floppies, $boot;
+            $image .= '_drivers';
+        }
 	getAndSaveFile("images/$image.img", $where) or log::l("failed to write Install Floppy ($image.img) to $where"), return;
+        push @generated_floppies, $where;
     }
-    1;
+    return @generated_floppies;
 }
 
 sub getAndSaveAutoInstallFloppy {
@@ -771,11 +781,15 @@ sub getAndSaveAutoInstallFloppy {
 
 	my $param = 'kickstart=floppy ' . generate_automatic_stage1_params($o);
 
-	getAndSaveInstallFloppy($o, $imagefile) or return;
+	my @generated_floppies = getAndSaveInstallFloppy($o, $imagefile);
+        @generated_floppies or return;
 
 	my $dev = devices::set_loop($imagefile) or log::l("couldn't set loopback device"), return;
-        eval { fs::mount($dev, $mountdir, 'vfat', 0); 1 } or return;
-
+        foreach my $fs (qw(ext2 vfat)) {
+            eval { fs::mount($dev, $mountdir, $fs, 0); 1 } and goto mount_ok;
+        }
+        return;
+      mount_ok:
 	substInFile { 
 	    s/timeout.*/$replay ? 'timeout 1' : ''/e;
 	    s/^(\s*append)/$1 $param/ 
@@ -796,8 +810,18 @@ sub getAndSaveAutoInstallFloppy {
 	rmdir $mountdir;
 	devices::del_loop($dev);
 	require commands;
-	commands::dd("if=$imagefile", "of=$where", "bs=1440", "count=1024");
-	unlink $imagefile;
+        while (defined($imagefile = shift @generated_floppies)) {
+            commands::dd("if=$imagefile", "of=$where", "bs=1440", "count=1024");
+            if (@generated_floppies) {
+                if ($where =~ m|^/dev|) {
+                    $o->ask_warn('', N("Please insert another floppy for drivers disk"), 1);
+                } else {
+                    $where =~ s/(.*)\.img/$1_drivers.img/;
+                }
+            }
+            unlink $imagefile;
+            common::sync();
+        }
     }
     1;
 }
