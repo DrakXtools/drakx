@@ -183,7 +183,7 @@ sub setup_postinstall_rpms($$) {
     }
     @toCopy{@needToCopyIfRequiresSatisfied} = ();
 
-    my @toCopy = map { pkgs::packageByName($packages, $_) } keys %toCopy;
+    my @toCopy = grep { $_ } map { pkgs::packageByName($packages, $_) } keys %toCopy;
 
     #- extract headers of package, this is necessary for getting
     #- the complete filename of each package.
