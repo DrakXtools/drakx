@@ -126,10 +126,12 @@ sub get_ports() {
 }
 
 sub set_ports {
-    my ($in, $disabled, $ports) = @_;
-    my $shorewall = network::shorewall::read($in) || network::shorewall::default_interfaces($in) or die N("No network card");
+    my ($do_pkgs, $disabled, $ports, $o_in) = @_;
+
+    my $shorewall = network::shorewall::read($o_in) or return;
+
     if (!$disabled || -x "$::prefix/sbin/shorewall") {
-	$in->do_pkgs->ensure_binary_is_installed('shorewall', 'shorewall', $::isInstall) or return;
+	$do_pkgs->ensure_binary_is_installed('shorewall', 'shorewall', $::isInstall) or return;
     
 	$shorewall->{disabled} = $disabled;
 	$shorewall->{ports} = $$ports;
@@ -203,5 +205,13 @@ sub main {
 
     ($disabled, my $ports) = choose($in, $disabled, $servers, $unlisted) or return;
 
-    set_ports($in, $disabled, $ports);
+    set_ports($in->do_pkgs, $disabled, $ports, $in);
+}
+
+sub main_auto_install {
+    my ($do_pkgs, $disabled) = @_;
+
+    my $possible_servers = default_from_pkgs($do_pkgs);
+
+    set_ports($do_pkgs, $disabled, to_ports($possible_servers, ''));
 }
