@@ -316,7 +316,7 @@ sub setupBootloader__general {
     }
 
     if ($prev_clean_tmp != $clean_tmp) {
-	if ($clean_tmp) {
+	if ($clean_tmp && !fsedit::has_mntpoint('/tmp', $all_hds)) {
 	    push @{$all_hds->{special}}, { device => 'none', mntpoint => '/tmp', type => 'tmpfs' };
 	} else {
 	    @{$all_hds->{special}} = grep { $_->{mntpoint} eq '/tmp' } @{$all_hds->{special}};
