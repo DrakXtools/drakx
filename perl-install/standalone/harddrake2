@@ -96,7 +96,9 @@ channel number, a target id and a logical unit number") ],
      },
      MEMORY =>
      {
-      'Installed Size' => [ N("Installed size"), N("Installed size of the memory bank") ],
+      'Installed Size' => [ 
+          #-PO: here, "size" is the size of the ram chip (eg: 128Mo, 256Mo, ...)
+          N("Installed size"), N("Installed size of the memory bank") ],
       'Enabled Size' => [ N("Enabled Size"), N("Enabled size of the memory bank") ],
       'name' => [ N("Type"), N("type of the memory device") ],
       'Current Speed' => [ N("Speed"), N("Speed of the memory bank") ],
