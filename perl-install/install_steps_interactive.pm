@@ -554,7 +554,7 @@ The format is the same as auto_install generated floppies."),
 					    while (1) {
 						my $w = $o->wait_message(_("Package selection"), _("Loading from floppy"));
 						log::l("load package selection from floppy");
-						my $O = eval { install_any::loadO({}, 'floppy') };
+						my $O = eval { install_any::loadO(undef, 'floppy') };
 						if ($@) {
 						    $w = undef; #- close wait message.
 						    $o->ask_okcancel('', _("Insert a floppy containing package selection"))
