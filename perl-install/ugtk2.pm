@@ -377,7 +377,7 @@ sub create_dialog {
 
 # drakfloppy / logdrake
 sub destroy_window {
-	my($widget, $windowref, $w2) = @_;
+	my ($widget, $windowref, $w2) = @_;
 	$$windowref = undef;
 	$w2 = undef if defined $w2;
 	0;
@@ -750,7 +750,7 @@ sub new {
 	$o->{isEmbedded} = 1;
 	$o->{window} = new Gtk2::HBox(0,0);
 	$o->{rwindow} = $o->{window};
-	$::Plug ||= new Gtk2::Plug ($::XID);
+	$::Plug ||= new Gtk2::Plug($::XID);
 	$::Plug->show;
 	flush();
 	$::Plug->add($o->{window});
@@ -1025,9 +1025,9 @@ sub ask_browse_tree_info {
 			       my $go = gtksignal_connect(Gtk2::Button->new($common->{ok}), clicked => sub {
 							      $w->{retval} = 1;
 							      Gtk2->main_quit }),
-			       $common->{cancel} ? (gtksignal_connect(Gtk2::Button->new($common->{cancel}), clicked => sub {
+			       $common->{cancel} ? gtksignal_connect(Gtk2::Button->new($common->{cancel}), clicked => sub {
 									  $w->{retval} = 0;
-									  Gtk2->main_quit }))
+									  Gtk2->main_quit })
 			                         : (),
 			      )));
     gtkpack__($l, my $toolbar = Gtk2::Toolbar->new('horizontal', 'icons'));
