@@ -1624,7 +1624,7 @@ sub main {
 			     _("The following printers are configured.\nYou can add some more or modify the existing ones."),
 			 cancel => ($::isInstall ? 
 				    ('') : ($::expert ? 
-					  'Normal Mode' : 'Expert Mode')),
+				  _("Normal Mode") : _("Expert Mode"))),
 			},
 			# List the queues
 			[ { val => \$queue, format => \&translate,
