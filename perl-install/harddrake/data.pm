@@ -304,6 +304,19 @@ our @tree =
      },
 
      {
+      class => "RAID_STORAGE",
+      string => N("RAID controllers"),
+      icon => "ide_hd.png",
+      configurator => "",
+      detector => sub { 
+          require list_modules;
+          my @modules = list_modules::category2modules('disk/hardware_raid');
+          f(grep { member($_->{driver}, @modules) } @devices);
+      },
+      checked_on_boot => 1,
+     },
+
+     {
       class => "FIREWIRE_CONTROLLER",
       string => N("Firewire controllers"),
       icon => "usb.png",
