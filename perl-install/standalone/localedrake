@@ -34,6 +34,8 @@ if (defined $klang) {
 my $locale = lang::read($>);
 my $in = 'interactive'->vnew;
 
+$::Wizard_title = N("LocaleDrake");
+
 sub select_country() {
     any::selectCountry($in, $locale);  
 }
