@@ -223,7 +223,7 @@ sub get_tape_info() {
 	my @line_data;
 	my $info = "$ENV{HOME}/tmp/dmesg";
 	@tape_devices = ();
-	system("dmesg | grep 'st[0-9] at' > $info");
+	system("dmesg -s 100000 | grep 'st[0-9] at' > $info");
 
 	my @info = cat_($info);
 	foreach (@info) {
@@ -544,7 +544,7 @@ sub ftp_client() {
 		$ftp = 0;
 	}
 	return 1 if !$ftp;
-	$ftp->binary();
+	$ftp->binary;
 	$ftp->cwd($conf{HOST_PATH}); 
     foreach (@file_list_to_send_by_ftp) {
 		$interactive and $pbar->set_fraction(0);
@@ -3608,7 +3608,7 @@ sub restore_ftp {
     else {  $ftp = Net::FTP->new($hostname, Debug => 0) or return 1 }
     $ftp->login($username, $userpass);
     $ftp->cwd($hostpath);
-    $ftp->binary();
+    $ftp->binary;
 
 	my $wild_card = catalog_to_wildcard($cat_entry);
 		
