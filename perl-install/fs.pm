@@ -201,6 +201,8 @@ sub mount($$$;$) {
 #	nfs::mount($dev, $where) or die _("nfs mount failed");
     } elsif ($fs eq 'smb') {
 	die "no smb yet...";
+    } elsif ($fs eq 'ext2') {
+	run_program::run("fsck.ext2", $dev);
     } else {
 	$dev = devices::make($dev) if $fs ne 'proc' && $fs ne 'usbdevfs';
 
