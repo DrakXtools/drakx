@@ -85,6 +85,30 @@ sub set_wacoms {
 
 sub depths { 8, 15, 16, 24, 32 }
 
+sub set_resolution {
+    my ($raw_X, $resolution, $o_Screen_) = @_;
+    
+    foreach my $Screen ($o_Screen_ ? $o_Screen_ : $raw_X->get_screens) {
+	$Screen ||= $raw_X->get_default_screen or internal_error('no screen');
+
+	$Screen->{DefaultColorDepth} = { val => $resolution->{Depth} };
+	$Screen->{Display} = [ map {
+	    my $modes = do {
+		if ($raw_X->is_fbdev($Screen)) {
+		    '"default"';
+		} else {
+		    my @Modes = grep { 
+			if_(m/(\d+)x(\d+)/,
+			    $1 <= $resolution->{X} && (!$resolution->{Y} || $2 <= $resolution->{Y}));
+		    } reverse @Xconfig::xfreeX::resolutions;
+		    join(" ", map { qq("$_") } @Modes);
+		}
+	    };
+	    { l => { Depth => { val => $_ }, Modes => { val => $modes } } };
+	} $raw_X->depths ];
+    }
+}
+
 sub get_device_section_fields {
     qw(VendorName BoardName Chipset VideoRam); #-);
 }

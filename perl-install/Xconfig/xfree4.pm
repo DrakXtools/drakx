@@ -84,13 +84,16 @@ sub set_wacoms {
 
 sub depths { 8, 15, 16, 24 }
 sub set_resolution {
-    my ($raw_X, $resolution, $Screen) = @_;
+    my ($raw_X, $resolution, $o_Screen_) = @_;
+    
+    foreach my $Screen ($o_Screen_ ? $o_Screen_ : $raw_X->get_screens) {
+	$Screen ||= $raw_X->get_default_screen or internal_error('no screen');
 
-    $resolution = +{ %$resolution };
-    #- XFree4 doesn't like depth 32, silently replacing it with 24
-    $resolution->{Depth} = 24 if $resolution->{Depth} eq '32';
-
-    $raw_X->SUPER::set_resolution($resolution, $Screen);
+	$Screen->{DefaultColorDepth} = { val => $resolution->{Depth} eq '32' ? 24 : $resolution->{Depth} };
+	$Screen->{Display} = [ map {
+	    { l => { Depth => { val => $_ }, Virtual => { val => join(' ', @$resolution{'X', 'Y'}) } } };
+	} $raw_X->depths ];
+    }
 }
 
 sub get_device_section_fields {

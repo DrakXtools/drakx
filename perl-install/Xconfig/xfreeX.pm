@@ -172,34 +172,10 @@ sub get_resolution {
 
     my $depth = val($Screen->{DefaultColorDepth});
     my $Display = find { !$depth || val($_->{l}{Depth}) eq $depth } @{$Screen->{Display} || []} or return {};
-    val($Display->{l}{Modes}) =~ /(\d+)x(\d+)/ or return {};
+    $Display->{l}{Virtual} && val($Display->{l}{Virtual}) =~ /(\d+)\s+(\d+)/ or
+      val($Display->{l}{Modes}) =~ /(\d+)x(\d+)/ or return {};
     { X => $1, Y => $2, Depth => val($Display->{l}{Depth}) };
 }
-
-sub set_resolution {
-    my ($raw_X, $resolution, $o_Screen_) = @_;
-    
-    foreach my $Screen ($o_Screen_ ? $o_Screen_ : $raw_X->get_screens) {
-	$Screen ||= $raw_X->get_default_screen or internal_error('no screen');
-
-	$Screen->{DefaultColorDepth} = { val => $resolution->{Depth} };
-	$Screen->{Display} = [ map {
-	    my $modes = do {
-		if ($raw_X->is_fbdev($Screen)) {
-		    '"default"';
-		} else {
-		    my @Modes = grep { 
-                  if_(m/(\d+)x(\d+)/,
-                      $1 <= $resolution->{X} && (!$resolution->{Y} || $2 <= $resolution->{Y}));
-		    } reverse our @resolutions;
-		    join(" ", map { qq("$_") } @Modes);
-		}
-	    };
-	    { l => { Depth => { val => $_ }, Modes => { val => $modes } } };
-	} $raw_X->depths ];
-    }
-}
-
 
 #-##############################################################################
 #- common to xfree3 and xfree4
