@@ -3513,11 +3513,12 @@ sub check_network {
 					    N("Go on without configuring the network") ] } ])) {
 		if ($choice eq N("Configure the network now")) {
 		    if ($::isInstall) {
+			my $o = $in;
 			require network::netconnect;
 		        network::netconnect::main(
-			     $in->{prefix}, $in->{netcnx} ||= {}, 
-			     $in, $in->{netc}, $in->{mouse}, 
-			     $in->{intf});
+			     $o->{prefix}, $o->{netcnx} ||= {}, 
+			     $in, $o->{modules_conf}, $o->{netc}, $o->{mouse}, 
+			     $o->{intf});
 #    my ($prefix, $netcnx, $in, $o_netc, $o_mouse, $o_intf, $o_first_time, $o_noauto) = @_;
 		    } else {
 			system("/usr/sbin/drakconnect");

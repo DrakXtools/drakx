@@ -475,7 +475,7 @@ sub setDefaultPackages {
     push @{$o->{default_packages}}, "numlock" if $o->{miscellaneous}{numlock};
     push @{$o->{default_packages}}, "raidtools" if !is_empty_array_ref($o->{all_hds}{raids});
     push @{$o->{default_packages}}, "lvm2" if !is_empty_array_ref($o->{all_hds}{lvms});
-    push @{$o->{default_packages}}, "alsa", "alsa-utils" if any { modules::get_alias("sound-slot-$_") =~ /^snd-/ } 0 .. 4;
+    push @{$o->{default_packages}}, "alsa", "alsa-utils" if any { $o->{modules_conf}->get_alias("sound-slot-$_") =~ /^snd-/ } 0 .. 4;
     push @{$o->{default_packages}}, "grub" if isLoopback(fsedit::get_root($o->{fstab}));
     push @{$o->{default_packages}}, uniq(grep { $_ } map { fsedit::package_needed_for_partition_type($_) } @{$o->{fstab}});
 
@@ -503,7 +503,7 @@ sub setDefaultPackages {
     $o->{compssUsersChoice}{UTF8} = $o->{locale}{utf8};
     $o->{compssUsersChoice}{BURNER} = 1 if detect_devices::burners();
     $o->{compssUsersChoice}{DVD} = 1 if detect_devices::dvdroms();
-    $o->{compssUsersChoice}{USB} = 1 if modules::get_probeall("usb-interface");
+    $o->{compssUsersChoice}{USB} = 1 if $o->{modules_conf}->get_probeall("usb-interface");
     $o->{compssUsersChoice}{PCMCIA} = 1 if detect_devices::hasPCMCIA();
     $o->{compssUsersChoice}{HIGH_SECURITY} = 1 if $o->{security} > 3;
     $o->{compssUsersChoice}{BIGMEM} = 1 if !$::oem && availableRamMB() > 800 && arch() !~ /ia64|x86_64/;
@@ -1265,7 +1265,7 @@ sub remove_bigseldom_used() {
 #- pcmcia various
 #-###############################################################################
 sub configure_pcmcia {
-    my ($pcic) = @_;
+    my ($modules_conf, $pcic) = @_;
 
     #- try to setup pcmcia if cardmgr is not running.
     my $running if 0;
@@ -1283,7 +1283,7 @@ sub configure_pcmcia {
     sleep(3);
     
     #- make sure to be aware of loaded module by cardmgr.
-    modules::read_already_loaded();
+    modules::read_already_loaded($modules_conf);
 }
 
 sub write_pcmcia {

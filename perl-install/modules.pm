@@ -1,15 +1,13 @@
 package modules; # $Id$
 
 use strict;
-use vars qw(%conf);
 
 use common;
 use detect_devices;
 use run_program;
 use log;
 use list_modules;
-
-%conf = ();
+use modules::any_conf;
 
 sub modules_descriptions() {
     my $f = '/lib/modules/' . c::kernel_version() . '/modules.description';
@@ -51,55 +49,54 @@ sub mapping_26_24 {
 #- module loading
 #-###############################################################################
 # handles dependencies
-# eg: load('vfat', 'reiserfs', [ ne2k => 'io=0xXXX', 'dma=5' ])
-sub load {
-    #- keeping the order of modules
-    my %options;
-    my @l = map {
-	my ($name, @options) = ref($_) ? @$_ : $_;
-	$options{$name} = \@options;
-	dependencies_closure(mapping_24_26($name));
-    } @_;
-
-    @l = difference2([ uniq(@l) ], [ map { my $s = $_; $s =~ s/_/-/g; $s, $_ } loaded_modules() ]) or return;
-
-    my $network_module = do {
-	my ($network_modules, $other) = partition { module2category($_) =~ m,network/(main|gigabit|usb|wireless), } @l;
-	if (@$network_modules > 1) {
-	    # do it one by one
-	    load($_) foreach @$network_modules;
-	    load(@$other);
-	    return;
-	}
-	$network_modules->[0];
-    };
-    my @network_devices = $network_module ? detect_devices::getNet() : ();
-
+sub load_raw {
+    my ($l, $h_options) = @_;
     if ($::testing) {
-	log::l("i would load module $_ (" . join(" ", @{$options{$_}}) . ")") foreach @l;
+	log::l("i would load module $_ ($h_options->{$_})") foreach @$l;
     } elsif ($::isStandalone || $::move) {
-	run_program::run('/sbin/modprobe', $_, @{$options{$_}}) 
+	run_program::run('/sbin/modprobe', $_, split(' ', $h_options->{$_})) 
 	  or !run_program::run('/sbin/modprobe', '-n', $_) #- ignore missing modules
-	  or die "insmod'ing module $_ failed" foreach @l;
+	  or die "insmod'ing module $_ failed" foreach @$l;
     } else {
-	load_raw_install(\@l, \%options);
+	load_raw_install($l, $h_options);
     }
-    sleep 2 if any { /^(usb-storage|mousedev|printer)$/ } @l;
-
-    if ($network_module) {
-	set_alias($_, $network_module) foreach difference2([ detect_devices::getNet() ], \@network_devices);
-    }
-
-    @l = grep {
-	if (c::kernel_version() =~ /^\Q2.6/ && member($_, 'imm', 'ppa') 
-	    && ! -d "/proc/sys/dev/parport/parport0/devices/$_") {
-	    log::l("$_ loaded but is not useful, removing");
-	    unload($_);
-	    0;
-	} else { 1 }
+    sleep 2 if any { /^(usb-storage|mousedev|printer)$/ } @$l;
+}
+sub load {
+    my (@l) = @_;
+    @l = map {
+	dependencies_closure(mapping_24_26($_));
     } @l;
 
-    when_load($_, @{$options{$_}}) foreach @l;
+    @l = remove_loaded_modules(@l) or return;
+
+    load_raw(\@l, {});
+}
+
+# eg: load_and_configure($modules_conf, 'vfat', 'reiserfs', [ ne2k => 'io=0xXXX', 'dma=5' ])
+sub load_and_configure {
+    my ($conf, $module, $o_options) = @_;
+
+    my $category = module2category($module) || '';
+    my $network_devices = $category =~ m!network/(main|gigabit|usb|wireless)! && [ detect_devices::getNet() ];
+
+    my @l = remove_loaded_modules(dependencies_closure(mapping_24_26($module))) or return;
+    load_raw(\@l, { $module => $o_options });
+
+    if ($network_devices) {
+	$conf->set_alias($_, $module) foreach difference2([ detect_devices::getNet() ], $network_devices);
+    }
+
+    if (c::kernel_version() =~ /^\Q2.6/ && member($module, 'imm', 'ppa') 
+	&& ! -d "/proc/sys/dev/parport/parport0/devices/$module") {
+	log::l("$module loaded but is not useful, removing");
+	unload($module);
+	return;
+    }
+
+    $conf->set_options($module, $o_options) if $o_options;
+
+    when_load($conf, $module);
 }
 
 sub unload {
@@ -111,11 +108,7 @@ sub unload {
 }
 
 sub load_category {
-    my ($category, $o_wait_message) = @_;
-
-    #- probe_category returns the PCMCIA cards. It doesn't know they are already
-    #- loaded, so:
-    read_already_loaded();
+    my ($conf, $category, $o_wait_message) = @_;
 
     my @try_modules = (
       if_($category =~ /scsi/,
@@ -130,7 +123,7 @@ sub load_category {
     );
     grep {
 	$o_wait_message->($_->{description}, $_->{driver}) if $o_wait_message;
-	eval { load([ $_->{driver}, if_($_->{options}, $_->{options}) ]) };
+	eval { load_and_configure($conf, $_->{driver}, $_->{options}) };
 	$_->{error} = $@;
 
 	$_->{try} = 1 if member($_->{driver}, 'hptraid', 'ohci1394'); #- don't warn when this fails
@@ -166,87 +159,6 @@ sub probe_category {
 #-###############################################################################
 #- modules.conf functions
 #-###############################################################################
-sub get_alias {
-    my ($alias) = @_;
-    $conf{$alias}{alias};
-}
-sub get_probeall {
-    my ($alias) = @_;
-    $conf{$alias}{probeall};
-}
-sub get_options {
-    my ($name) = @_;
-    $conf{$name}{options};
-}
-sub set_options {
-    my ($name, $new_option) = @_;
-    log::l(qq(set option "$new_option" for module "$name"));
-    $conf{$name}{options} = $new_option;
-}
-sub get_parameters {
-    map { if_(/(.*)=(.*)/, $1 => $2) } split(' ', get_options($_[0]));
-}
-sub set_alias { 
-    my ($alias, $module) = @_;
-    $module =~ /ignore/ and return;
-    /\Q$alias/ && $conf{$_}{alias} && $conf{$_}{alias} eq $module and return $_ foreach keys %conf;
-    log::l("adding alias $alias to $module");
-    $conf{$alias}{alias} = $module;
-    $alias;
-}
-sub add_probeall {
-    my ($alias, $module) = @_;
-
-    my $l = $conf{$alias}{probeall} ||= [];
-    @$l = uniq(@$l, $module);
-    log::l("setting probeall $alias to @$l");
-}
-sub remove_probeall {
-    my ($alias, $module) = @_;
-
-    my $l = $conf{$alias}{probeall} ||= [];
-    @$l = grep { $_ ne $module } @$l;
-    log::l("setting probeall $alias to @$l");
-}
-
-sub remove_alias {
-    my ($name) = @_;
-    log::l(qq(removing alias "$name"));
-    remove_alias_regexp("^$name\$");
-}
-
-sub remove_alias_regexp {
-    my ($aliased) = @_;
-    log::l(qq(removing all aliases that match "$aliased"));
-    foreach (keys %conf) {
-        delete $conf{$_}{alias} if /$aliased/;
-    }
-}
-
-sub remove_alias_regexp_byname {
-    my ($name) = @_;
-    log::l(qq(removing all aliases which names match "$name"));
-    foreach (keys %conf) {
-        delete $conf{$_} if /$name/;
-    }
-}
-
-sub remove_module {
-    my ($name) = @_;
-    remove_alias($name);
-    log::l("removing module $name");
-    delete $conf{$name};
-    0;
-}
-
-sub set_sound_slot {
-    my ($alias, $module) = @_;
-    if (my $old = $conf{$alias}{alias}) {
-	$conf{$old} and delete $conf{$old}{above};
-    }
-    set_alias($alias, $module);
-    $conf{$module}{above} = 'snd-pcm-oss' if $module =~ /^snd-/;
-}
 
 sub read_conf {
     my ($file) = @_;
@@ -262,7 +174,9 @@ sub read_conf {
 	my ($type, $module, $val) = split(/\s+/, chomp_($_), 3) or next;
 	$val =~ s/\s+$//;
 
-	$val = [ split ' ', $val ] if $type eq 'probeall';
+	if ($type eq 'probeall') {
+	    $val = [ split ' ', $val ];
+	}
 
 	$c{$module}{$type} = $val;
     }
@@ -286,22 +200,8 @@ sub read_conf {
     \%c;
 }
 
-sub mergein_conf_raw {
-    my ($file) = @_;
-    my $modconfref = read_conf($file);
-    while (my ($key, $value) = each %$modconfref) {
-	$conf{$key}{alias} ||= $value->{alias};
-	$conf{$key}{above} ||= $value->{above};
-	$conf{$key}{options} = $value->{options} if $value->{options};
-	push @{$conf{$key}{probeall} ||= []}, deref($value->{probeall}) if $value->{probeall};
-    }
-}
-sub mergein_conf() {
-    my $file = "$::prefix/etc/modules.conf";
-    mergein_conf_raw($file) if -r $file;
-}
-
-sub write_conf() {
+sub write_conf {
+    my ($conf) = @_;
     my $file = "$::prefix/etc/modules.conf";
     rename "$::prefix/etc/conf.modules", $file; #- make the switch to new name if needed
 
@@ -314,12 +214,12 @@ sub write_conf() {
 	} elsif ($type eq 'alias' && $module =~ /scsi_hostadapter|usb-interface/) {
 	    #- remove old aliases which are replaced by probeall
 	    $_ = '';
-	} elsif ($type eq 'above' && !defined $conf{$module}{above}) {
+	} elsif ($type eq 'above' && !defined $conf->{$module}{above}) { #TODO
 	    $_ = '';
-	} elsif ($type eq 'alias' && !defined $conf{$module}{alias}) { 
+	} elsif ($type eq 'alias' && !defined $conf->{$module}{alias}) { #TODO
 	    $_ = '';
-	} elsif ($conf{$module}{$type} && $conf{$module}{$type} ne $val) {
-	    my $v = join(' ', uniq(deref($conf{$module}{$type})));
+	} elsif ($conf->{$module}{$type} && $conf->{$module}{$type} ne $val) { #TODO
+	    my $v = join(' ', uniq(deref($conf->{$module}{$type}))); #TODO
 	    $_ = "$type $module $v\n";
 	}
     } $file;
@@ -327,7 +227,7 @@ sub write_conf() {
     my $written = read_conf($file);
 
     open(my $F, ">> $file") or die("cannot write module config file $file: $!\n");
-    while (my ($mod, $h) = each %conf) {
+    while (my ($mod, $h) = each %$conf) { #TODO
 	while (my ($type, $v) = each %$h) {
 	    my $v2 = join(' ', uniq(deref($v)));
 	    print $F "$type $mod $v2\n" 
@@ -337,13 +237,15 @@ sub write_conf() {
     #- use module-init-tools script for the moment
     run_program::rooted($::prefix, "/sbin/generate-modprobe.conf", ">", "/etc/modprobe.conf") if -e "$::prefix/etc/modprobe.conf";
 
-    write_preload_conf();
+    write_preload_conf($conf);
 }
 
-sub write_preload_conf() {
+sub write_preload_conf {
+    my ($conf) = @_;
     my @l;
-    push @l, 'scsi_hostadapter' if !is_empty_array_ref($conf{scsi_hostadapter}{probeall});
-    push @l, grep { detect_devices::matching_driver("^$_\$") } qw(bttv cx8800 saa7134);
+    push @l, 'scsi_hostadapter' if !is_empty_array_ref($conf->get_probeall('scsi_hostadapter'));
+    push @l, intersection([ qw(bttv cx8800 saa7134) ],
+			  [ map { $_->{driver} } detect_devices::probeall() ]);
     my @l_26 = @l;
     if (my ($agp) = probe_category('various/agpgart')) {
 	push @l_26, $agp->{driver};
@@ -370,8 +272,14 @@ sub append_to_modules_loaded_at_startup {
 sub loaded_modules() { 
     map { /(\S+)/ } cat_("/proc/modules");
 }
-sub read_already_loaded() { 
-    when_load($_) foreach reverse loaded_modules();
+sub remove_loaded_modules {
+    my (@l) = @_;
+    difference2([ uniq(@l) ], [ map { my $s = $_; $s =~ s/_/-/g; $s, $_ } loaded_modules() ])
+}
+
+sub read_already_loaded { 
+    my ($conf) = @_;
+    when_load($conf, $_) foreach reverse loaded_modules();
 }
 
 my $module_extension = c::kernel_version() =~ /^\Q2.4/ ? 'o' : 'ko';
@@ -382,29 +290,27 @@ sub name2file {
 }
 
 sub when_load {
-    my ($name, @options) = @_;
+    my ($conf, $name) = @_;
 
     $name = mapping_26_24($name); #- need to stay with 2.4 names, modutils will allow booting 2.4 and 2.6
 
-    $conf{$name}{options} = join " ", @options if @options;
-
     if (my $category = module2category($name)) {
-	when_load_category($name, $category);
+	when_load_category($conf, $name, $category);
     }
 
-    if (my $above = $conf{$name}{above}) {
+    if (my $above = $conf->get_above($name)) {
 	load($above); #- eg: for snd-pcm-oss set by set_sound_slot()
     }
 }
 
 sub when_load_category {
-    my ($name, $category) = @_;
+    my ($conf, $name, $category) = @_;
 
     if ($category =~ m,disk/(scsi|hardware_raid|usb|firewire),) {
-	add_probeall('scsi_hostadapter', $name);
+	$conf->add_probeall('scsi_hostadapter', $name);
 	eval { load('sd_mod') };
     } elsif ($category eq 'bus/usb') {
-	add_probeall('usb-interface', $name);
+	$conf->add_probeall('usb-interface', $name);
         -f '/proc/bus/usb/devices' or eval {
             require fs; fs::mount('/proc/bus/usb', '/proc/bus/usb', 'usbdevfs');
             #- ensure keyboard is working, the kernel must do the job the BIOS was doing
@@ -412,11 +318,11 @@ sub when_load_category {
             load("usbkbd", "keybdev") if detect_devices::usbKeyboards();
         }
     } elsif ($category eq 'bus/firewire') {
-	set_alias('ieee1394-controller', $name);
+	$conf->set_alias('ieee1394-controller', $name);
     } elsif ($category =~ /sound/) {
-	my $sound_alias = find { /^sound-slot-[0-9]+$/ && $conf{$_}{alias} eq $name } keys %conf;
+	my $sound_alias = find { /^sound-slot-[0-9]+$/ && $conf->get_alias($_) eq $name } $conf->modules;
 	$sound_alias ||= 'sound-slot-0';
-	set_sound_slot($sound_alias, $name);
+	$conf->set_sound_slot($sound_alias, $name);
     }
 }
 
@@ -451,7 +357,7 @@ sub load_raw_install {
 	my $m = '/tmp/' . name2file($_);
 	if (-e $m) {
             my $stdout;
-            my $rc = run_program::run(["/usr/bin/insmod_", "insmod"], '2>', \$stdout, $m, @{$options->{$_}});
+            my $rc = run_program::run(["/usr/bin/insmod_", "insmod"], '2>', \$stdout, $m, split(' ', $options->{$_}));
             log::l(chomp_($stdout)) if $stdout;
             if ($rc) {
                 unlink $m;

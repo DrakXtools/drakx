@@ -279,7 +279,7 @@ my %pll_lst =
      );
 
 sub config {
-    my ($in, $driver) = @_;
+    my ($in, $modules_conf, $driver) = @_;
 
     my $min_gbuffers = 2;
     my $max_gbuffers = 32;
@@ -290,7 +290,7 @@ sub config {
     my %rvs_cards_list = reverse %cards_list;
 
     # get the existing options (if there are any)
-    my $current = modules::get_options($driver);
+    my $current = $modules_conf->get_options($driver);
 
     foreach (split(/\s+/,$current)) {
         $conf{$1} = $2 if /^(gbuffers|tuner|radio|pll)=(.+)/;
@@ -326,7 +326,7 @@ If your card is misdetected, you can force the right tuner and card types here. 
         if ($options) {
             log::l(qq([harddrake::v4l] set "$options" options for $driver));
 #             log::explanations("modified file /etc/modules.conf ($options)") if $::isStandalone;
-              modules::set_options($driver, $options);
+              $modules_conf->set_options($driver, $options);
           }
         return 1;
     }

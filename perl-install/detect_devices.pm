@@ -412,7 +412,7 @@ sub getCPUs() {
 }
 
 sub getSoundDevices() {
-    (arch() =~ /ppc/ ? \&modules::load_category : \&modules::probe_category)->('multimedia/sound');
+    modules::probe_category('multimedia/sound');
 }
 
 sub isTVcard { member($_[0]{driver}, qw(bttv cx8800 saa7134 usbvision)) }
@@ -422,7 +422,7 @@ sub getTVcards() {
 }
 
 sub getSerialModem {
-    my ($o_mouse) = @_;
+    my ($modules_conf, $o_mouse) = @_;
     my $mouse = $o_mouse || {};
     $mouse->{device} = readlink "/dev/mouse";
     my $serdev = arch() =~ /ppc/ ? "macserial" : "serial";
@@ -441,14 +441,15 @@ sub getSerialModem {
     my @devs = pcmcia_probe();
     foreach my $modem (@modems) {
         #- add an alias for macserial on PPC
-        modules::set_alias('serial', $serdev) if arch() =~ /ppc/ && $modem->{device};
+        $modules_conf->set_alias('serial', $serdev) if arch() =~ /ppc/ && $modem->{device};
         foreach (@devs) { $_->{type} =~ /serial/ and $modem->{device} = $_->{device} }
     }
     @modems;
 }
 
-sub getModem() {
-    getSerialModem({}), matching_driver('www\.linmodems\.org');
+sub getModem {
+    my ($modules_conf) = @_;
+    getSerialModem($modules_conf, {}), matching_driver('www\.linmodems\.org');
 }
 
 sub getSpeedtouch() {

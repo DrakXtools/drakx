@@ -13,23 +13,23 @@ use network::tools;
 use MDK::Common::Globals "network", qw($in);
 
 sub detect {
-    my ($auto_detect, $o_class) = @_;
+    my ($modules_conf, $auto_detect, $o_class) = @_;
     my %l = (
              isdn => sub {
                  require network::isdn;
-                 $auto_detect->{isdn} = network::isdn::detect_backend();
+                 $auto_detect->{isdn} = network::isdn::detect_backend($modules_conf);
              },
              lan => sub { # ethernet
-                 modules::load_category('network/main|gigabit|usb');
+                 modules::load_category($modules_conf, 'network/main|gigabit|usb');
                  require network::ethernet;
-                 $auto_detect->{lan} = { map { $_->[0] => $_->[1] } network::ethernet::get_eth_cards() };
+                 $auto_detect->{lan} = { map { $_->[0] => $_->[1] } network::ethernet::get_eth_cards($modules_conf) };
              },
              adsl => sub {
                  require network::adsl;
                  $auto_detect->{adsl} = network::adsl::adsl_detect();
              },
              modem => sub {
-                 $auto_detect->{modem} = { map { $_->{description} || "$_->{MANUFACTURER}|$_->{DESCRIPTION} ($_->{device})" => $_ } detect_devices::getModem() };
+                 $auto_detect->{modem} = { map { $_->{description} || "$_->{MANUFACTURER}|$_->{DESCRIPTION} ($_->{device})" => $_ } detect_devices::getModem($modules_conf) };
              },
             );
     $l{$_}->() foreach $o_class || keys %l;
@@ -74,7 +74,7 @@ sub get_subwizard {
 
 # configuring all network devices
 sub real_main {
-      my ($_prefix, $netcnx, $in, $o_netc, $o_mouse, $o_intf, $o_first_time, $o_noauto) = @_;
+      my ($_prefix, $netcnx, $in, $modules_conf, $o_netc, $o_mouse, $o_intf, $o_first_time, $o_noauto) = @_;
       my $netc  = $o_netc  ||= {};
       my $mouse = $o_mouse ||= {};
       my $intf  = $o_intf  ||= {};
@@ -120,15 +120,13 @@ sub real_main {
 
       read_net_conf($netcnx, $netc, $intf);
 
-      modules::mergein_conf();
-
       $netc->{autodetect} = {};
 
       my $lan_detect = sub {
-          detect($netc->{autodetect}, 'lan');
-          modules::interactive::load_category($in, 'network/main|gigabit|pcmcia|usb|wireless', !$::expert, 0);
-          @all_cards = network::ethernet::get_eth_cards();
-          %eth_intf = network::ethernet::get_eth_cards_names(@all_cards);
+          detect($modules_conf, $netc->{autodetect}, 'lan');
+          modules::interactive::load_category($in, $modules_conf, 'network/main|gigabit|pcmcia|usb|wireless', !$::expert, 0);
+          @all_cards = network::ethernet::get_eth_cards($modules_conf);
+          %eth_intf = network::ethernet::get_eth_cards_names($modules_conf, @all_cards);
           require list_modules;
           %eth_intf = map { $_->[0] => join(': ', $_->[0], $_->[2]) }
             grep { to_bool($is_wireless) == c::isNetDeviceWirelessAware($_->[0]) } @all_cards;
@@ -332,7 +330,7 @@ sub real_main {
                    isdn =>
                    {
                     pre=> sub {
-                        detect($netc->{autodetect}, 'isdn');
+                        detect($modules_conf, $netc->{autodetect}, 'isdn');
                         %isdn_cards = map { $_->{description} => $_ } @{$netc->{autodetect}{isdn}};
                     },
                     name => N("Select the network interface to configure:"),
@@ -347,7 +345,7 @@ sub real_main {
                         if ($isdn_name eq $my_isdn) {
                             return "isdn_ask";
                         } elsif ($isdn_name eq N("External ISDN modem")) {
-                            detect($netc->{autodetect}, 'modem');
+                            detect($modules_conf, $netc->{autodetect}, 'modem');
                             $netc->{isdntype} = 'isdn_external';
                             $netcnx->{isdn_external}{device} = network::modem::first_modem($netc);
                             network::isdn::read_config($netcnx->{isdn_external});
@@ -463,7 +461,7 @@ Take a look at http://www.linmodems.org"),
                    {
                     pre => sub {
                         require network::modem;
-                        detect($netc->{autodetect}, 'modem');
+                        detect($modules_conf, $netc->{autodetect}, 'modem');
                     },
                     name => N("Select the modem to configure:"),
                     data => sub {
@@ -646,7 +644,7 @@ killall pppd
                     pre => sub {
                         get_subwizard($wiz, 'adsl');
                         $lan_detect->();
-                        detect($netc->{autodetect}, 'adsl');
+                        detect($modules_conf, $netc->{autodetect}, 'adsl');
                         @adsl_devices = keys %eth_intf;
                         foreach my $modem (keys %adsl_devices) {
                             push @adsl_devices, $modem if $netc->{autodetect}{adsl}{$modem};
@@ -813,7 +811,7 @@ If you don't know, choose 'use pppoe'"),
                     },
                     post => sub {
                         $netc->{internet_cnx_choice} = 'adsl';
-                        network::adsl::adsl_conf_backend($in, $netcnx, $netc, $ntf_name, $adsl_type, $netcnx); #FIXME
+                        network::adsl::adsl_conf_backend($in, $modules_conf, $netcnx, $netc, $ntf_name, $adsl_type, $netcnx); #FIXME
                         $config->{adsl} = { kind => $ntf_name, protocol => $adsl_type };
                         $handle_multiple_cnx->();
                     },
@@ -840,7 +838,7 @@ You can find a driver on http://eciadsl.flashtux.org/"),
                     post => sub {
                         $ethntf = $intf->{$ntf_name} ||= { DEVICE => $ntf_name };
                         if ($ntf_name eq "Manually load a driver") {
-                            modules::interactive::load_category__prompt($in, 'network/main|gigabit|pcmcia|usb|wireless');
+                            modules::interactive::load_category__prompt($in, $modules_conf, 'network/main|gigabit|pcmcia|usb|wireless');
                             return 'lan';
                         }
                         $::isInstall && $netc->{NET_DEVICE} eq $ethntf->{DEVICE} ? 'lan_alrd_cfg' : 'lan_protocol';
@@ -1055,8 +1053,8 @@ See iwpriv(8) man page for further information."),
                    {
                     pre => sub {
                         #-type =static or dhcp
-                        modules::interactive::load_category($in, 'network/main|gigabit|usb', !$::expert, 1);
-                        @all_cards = network::ethernet::get_eth_cards() or 
+                        modules::interactive::load_category($in, $modules_conf, 'network/main|gigabit|usb', !$::expert, 1);
+                        @all_cards = network::ethernet::get_eth_cards($modules_conf) or 
                           # FIXME: fix this
                           $in->ask_warn(N("Error"), N("No ethernet network adapter has been detected on your system.
 I cannot set up this connection type.")), return;
@@ -1069,7 +1067,7 @@ I cannot set up this connection type.")), return;
                     
                     post => sub {
                         network::ethernet::write_ether_conf();
-                        modules::write_conf() if $::isStandalone;
+                        $modules_conf->write if $::isStandalone;
                         my $_device = network::ethernet::conf_network_card_backend($netc, $intf, $type, $interface->[0], $ipadr, $netadr);
                         return "lan";
                     },
@@ -1182,7 +1180,7 @@ It is not necessary on most networks."),
                     type => "yesorno",
                     post => sub {
                         my ($a) = @_;
-                        network::ethernet::write_ether_conf($in, $netcnx, $netc, $intf) if $netcnx->{type} eq 'lan';
+                        network::ethernet::write_ether_conf($in, $modules_conf, $netcnx, $netc, $intf) if $netcnx->{type} eq 'lan';
                         if ($a && !$::testing && !run_program::rooted($::prefix, "/etc/rc.d/init.d/network restart")) {
                             $success = 0;
                             $in->ask_okcancel(N("Network Configuration"), 
@@ -1332,8 +1330,8 @@ fi
 }
 
 sub main {
-    my ($_prefix, $netcnx, $in, $o_netc, $o_mouse, $o_intf, $o_first_time, $o_noauto) = @_;
-    eval { real_main('', , $netcnx, $in, $o_netc, $o_mouse, $o_intf, $o_first_time, $o_noauto) };
+    my ($_prefix, $netcnx, $in, $modules_conf, $o_netc, $o_mouse, $o_intf, $o_first_time, $o_noauto) = @_;
+    eval { real_main('', , $netcnx, $in, $modules_conf, $o_netc, $o_mouse, $o_intf, $o_first_time, $o_noauto) };
     my $err = $@;
     if ($err) { # && $in->isa('interactive::gtk')
         local $::isEmbedded = 0; # to prevent sub window embedding
@@ -1404,7 +1402,7 @@ sub start_internet {
     my ($o) = @_;
     init_globals($o);
     #- give a chance for module to be loaded using kernel-BOOT modules...
-    $::isStandalone or modules::load_category('network/main|gigabit|usb');
+    $::isStandalone or modules::load_category($o->{modules_conf}, 'network/main|gigabit|usb');
     run_program::rooted($::prefix, $network::tools::connect_file);
 }
 
@@ -1430,7 +1428,7 @@ local $in = class_discard->new;
 
 network::netconnect::init_globals($in);
 my %i;
-&network::netconnect::detect(\%i);
+network::netconnect::detect($modules_conf, \%i);
 print Dumper(\%i),"\n";
 
 =cut

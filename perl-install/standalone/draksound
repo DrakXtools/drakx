@@ -29,18 +29,19 @@ use detect_devices;
 
 my $in = 'interactive'->vnew('su');
 
-modules::mergein_conf();
+
+my $modules_conf = modules::any_conf->read;
 
 if (my @devices = modules::probe_category('multimedia/sound')) {
     # TODO: That need some work for multiples sound cards
     map_index {
 	   # allocate sound-slot in the same order as install2.pm
 	   # fill $device->{driver} with the right sound-slot-XX or default driver if missing sound-slot [real fix'll be in harddrake service]
-	   my $driver = modules::get_alias("sound-slot-$::i");
-	   $driver = modules::get_alias($driver) if $driver =~ /sound-card/; # alsaconf ...
+	   my $driver = $modules_conf->get_alias("sound-slot-$::i");
+	   $driver = $modules_conf->get_alias($driver) if $driver =~ /sound-card/; # alsaconf ...
 	   $_->{current_driver} = $driver if $driver;
 	   $_->{sound_slot_index} = $::i;
-	   harddrake::sound::config($in, $_, $::i);
+	   harddrake::sound::config($in, $modules_conf, $_, $::i);
 	 } @devices;
 } else {
     $in->ask_warn(N("No Sound Card detected!"), 
@@ -54,5 +55,5 @@ http://www.linux-mandrake.com/en/hardware.php3") .
 N("\n\n\nNote: if you've an ISA PnP sound card, you'll have to use the alsaconf or the sndconfig program.  Just type \"alsaconf\" or \"sndconfig\" in a console.")));
 }
 
-modules::write_conf();
+$modules_conf->write;
 $in->exit(0);

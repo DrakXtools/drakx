@@ -206,7 +206,7 @@ sub selectMouse {
     }
     
     if ($o->{mouse}{device} eq "usbmouse") {
-	modules::interactive::load_category($o, 'bus/usb', 1, 1);
+	modules::interactive::load_category($o, $o->{modules_conf}, 'bus/usb', 1, 1);
 	eval { 
 	    devices::make("usbmouse");
 	    modules::load(qw(hid mousedev usbmouse));
@@ -223,7 +223,7 @@ sub setupSCSI {
     if (!$::noauto && arch() =~ /i.86/) {
 	if ($o->{pcmcia} ||= !$::testing && c::pcmcia_probe()) {
 	    my $w = $o->wait_message(N("PCMCIA"), N("Configuring PCMCIA cards..."));
-	    my $results = install_any::configure_pcmcia($o->{pcmcia});
+	    my $results = install_any::configure_pcmcia($o->{modules_conf}, $o->{pcmcia});
 	    undef $w;
 	    $results and $o->ask_warn('', $results);
 	}
@@ -232,11 +232,11 @@ sub setupSCSI {
 	my $_w = $o->wait_message(N("IDE"), N("Configuring IDE"));
 	modules::load(modules::category2modules('disk/cdrom'));
     }
-    modules::interactive::load_category($o, 'bus/firewire', 1);
+    modules::interactive::load_category($o, $o->{modules_conf}, 'bus/firewire', 1);
 
     my $have_non_scsi = detect_devices::hds(); #- at_least_one scsi device if we have no disks
-    modules::interactive::load_category($o, 'disk/scsi|hardware_raid|firewire', 1, !$have_non_scsi);
-    modules::interactive::load_category($o, 'disk/scsi|hardware_raid|firewire') if !detect_devices::hds(); #- we really want a disk!
+    modules::interactive::load_category($o, $o->{modules_conf}, 'disk/scsi|hardware_raid|firewire', 1, !$have_non_scsi);
+    modules::interactive::load_category($o, $o->{modules_conf}, 'disk/scsi|hardware_raid|firewire') if !detect_devices::hds(); #- we really want a disk!
 
     install_interactive::tellAboutProprietaryModules($o);
 
@@ -692,7 +692,7 @@ sub installPackages {
 	my ($method, $medium) = @_;
 
 	#- if not using a cdrom medium or an iso image, always abort.
-	return unless install_any::method_allows_medium_change($method) && !$::oem;
+	return if !install_any::method_allows_medium_change($method) || $::oem;
 
 	my $name = pkgs::mediumDescr($o->{packages}, $medium);
 	local $| = 1; print "\a";
@@ -743,7 +743,7 @@ sub updateModulesFromFloppy {
 sub configureNetwork {
     my ($o) = @_;
     require network::network;
-    network::network::easy_dhcp($o->{netc}, $o->{intf}) and $o->{netcnx}{type} = 'lan';
+    network::network::easy_dhcp($o->{modules_conf}, $o->{netc}, $o->{intf}) and $o->{netcnx}{type} = 'lan';
     $o->SUPER::configureNetwork;
 }
 
@@ -930,7 +930,7 @@ sub summary {
 	group => N("System"),
 	label => N("Mouse"),
 	val => sub { translate($o->{mouse}{type}) . ' ' . translate($o->{mouse}{name}) },
-	clicked => sub { $o->selectMouse(1); mouse::write($o, $o->{mouse}) },
+	clicked => sub { $o->selectMouse(1); mouse::write($o->do_pkgs, $o->{mouse}) },
     };
 
     push @l, {
@@ -968,7 +968,7 @@ sub summary {
 	    },
 	    clicked => sub {
 	        require harddrake::sound; 
-	        harddrake::sound::config($o, $device);
+	        harddrake::sound::config($o, $o->{modules_conf}, $device);
 	    },
 	};
      $sound_index++;
@@ -999,7 +999,7 @@ sub summary {
 	    val => sub { $tv->{description} }, 
 	    clicked => sub { 
 	        require harddrake::v4l; 
-	        harddrake::v4l::config($o, $tv->{driver});
+	        harddrake::v4l::config($o, $o->{modules_conf}, $tv->{driver});
 	    }
 	};
     }
@@ -1018,7 +1018,7 @@ sub summary {
 	clicked => sub { 
 	    local $::expert = $::expert;
 	    require network::netconnect;
-	    network::netconnect::main($o->{prefix}, $o->{netcnx} ||= {}, $o, $o->{netc}, $o->{mouse}, $o->{intf}, 0, 1);
+	    network::netconnect::main($o->{prefix}, $o->{netcnx} ||= {}, $o, $o->{modules_conf}, $o->{netc}, $o->{mouse}, $o->{intf}, 0, 1);
 	    #- in case netcnx type is not updated.
 	    require network::network;
 	    network::network::probe_netcnx_type($o->{prefix}, $o->{netc}, $o->{intf}, $o->{netcnx});

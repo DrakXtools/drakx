@@ -96,7 +96,7 @@ sub adsl_detect() {
 }
 
 sub adsl_conf_backend {
-    my ($in, $adsl, $netc, $adsl_device, $adsl_type, $o_netcnx) = @_;
+    my ($in, $modules_conf, $adsl, $netc, $adsl_device, $adsl_type, $o_netcnx) = @_;
     # FIXME: should not be needed:
     defined $o_netcnx and $netc->{adsltype} = $o_netcnx->{type};
     $netc->{adsltype} ||= "adsl_$adsl_type";
@@ -307,8 +307,8 @@ TYPE=$kind
     
     # set aliases:
     if (exists $modems{$adsl_device}{aliases}) {
-        modules::set_alias($_->[0], $_->[1]) foreach @{$modems{$adsl_device}{aliases}};
-        $::isStandalone and modules::write_conf();
+        $modules_conf->set_alias($_->[0], $_->[1]) foreach @{$modems{$adsl_device}{aliases}};
+        $::isStandalone and $modules_conf->write;
     }
 
     $netc->{NET_INTERFACE} = 'ppp0';

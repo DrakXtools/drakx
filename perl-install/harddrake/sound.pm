@@ -137,7 +137,10 @@ sub rooted { run_program::rooted($::prefix, @_) }
 
 sub unload { modules::unload(@_) if $::isStandalone || $blacklisted }
 
-sub load { modules::load(@_) if $::isStandalone || $blacklisted }
+sub load { 
+    my ($modules_conf, $name) = @_;
+    modules::load_and_configure($modules_conf, $name) if $::isStandalone || $blacklisted;
+}
 
 sub get_alternative {
     my ($driver) = @_;
@@ -145,7 +148,7 @@ sub get_alternative {
 }
 
 sub do_switch {
-    my ($in, $old_driver, $new_driver, $index) = @_;
+    my ($in, $modules_conf, $old_driver, $new_driver, $index) = @_;
     return if $old_driver eq $new_driver;
     my $_wait = $in->wait_message(N("Please wait"), N("Please Wait... Applying the configuration"));
     log::explanations("removing old $old_driver\n");
@@ -154,14 +157,14 @@ sub do_switch {
         rooted("service alsa stop") if $old_driver =~ /^snd-/ && !$blacklisted;
         unload($old_driver);    # run_program("/sbin/modprobe -r $driver"); # just in case ...
     }
-    modules::remove_module($old_driver);
-    modules::set_sound_slot("sound-slot-$index", $new_driver);
-    modules::write_conf();
+    $modules_conf->remove_module($old_driver);
+    $modules_conf->set_sound_slot("sound-slot-$index", $new_driver);
+    $modules_conf->write;
     if ($new_driver =~ /^snd-/) {   # new driver is an alsa one
         $in->do_pkgs->ensure_is_installed('alsa-utils', '/usr/sbin/alsactl');
         rooted("service alsa start") if $::isStandalone && !$blacklisted;
         rooted("/sbin/chkconfig --add alsa")  if $::isStandalone;
-        load($new_driver) if $::isStandalone;   # service alsa is buggy
+        load($modules_conf, $new_driver) if $::isStandalone;   # service alsa is buggy
     } else { rooted("/sbin/chkconfig --del alsa") }
     log::explanations("loading new $new_driver\n");
     rooted("/sbin/chkconfig --add sound"); # just in case ...
@@ -169,7 +172,7 @@ sub do_switch {
 }
 
 sub switch {
-    my ($in, $device) = @_;
+    my ($in, $modules_conf, $device) = @_;
     my $driver = $device->{current_driver} || $device->{driver};
 
     foreach (@blacklist) { $blacklisted = 1 if $driver eq $_ }
@@ -187,7 +190,7 @@ sub switch {
                           N("There's no known OSS/ALSA alternative driver for your sound card (%s) which currently uses \"%s\"",
                             $device->{description}, $driver),
                           [
-                           &get_any_driver_entry($in, $driver, $device),
+                           get_any_driver_entry($in, $modules_conf, $driver, $device),
                           ]
                          );
         } elsif ($in->ask_from_({ title => N("Sound configuration"),
@@ -218,7 +221,7 @@ To use alsa, one can either use:
                                     val => N("Trouble shooting"), disabled => sub {},
                                     clicked => sub { &trouble($in) }
                                 },
-                                &get_any_driver_entry($in, $driver, $device),
+                                get_any_driver_entry($in, $modules_conf, $driver, $device),
                                 ]))
         {
             return if $new_driver eq $device->{current_driver};
@@ -226,7 +229,7 @@ To use alsa, one can either use:
             $in->ask_warn(N("Warning"), N("The old \"%s\" driver is blacklisted.\n
 It has been reported to oops the kernel on unloading.\n
 The new \"%s\" driver'll only be used on next bootstrap.", $device->{current_driver}, $new_driver)) if $blacklisted;
-            do_switch($in, $device->{current_driver}, $new_driver, $device->{sound_slot_index});
+            do_switch($in, $modules_conf, $device->{current_driver}, $new_driver, $device->{sound_slot_index});
             $device->{current_driver} = $new_driver;
         }
     } elsif ($driver =~ /^Bad:/) {
@@ -238,7 +241,7 @@ The new \"%s\" driver'll only be used on next bootstrap.", $device->{current_dri
         $in->ask_from(N("No known driver"), 
                       N("There's no known driver for your sound card (%s)",
                         $device->{description}),
-                      [ &get_any_driver_entry($in, $driver, $device) ]);
+                      [ get_any_driver_entry($in, $modules_conf, $driver, $device) ]);
     } else {
         $in->ask_warn(N("Unknown driver"), 
                       N("Error: The \"%s\" driver for your sound card is unlisted",
@@ -248,7 +251,8 @@ The new \"%s\" driver'll only be used on next bootstrap.", $device->{current_dri
 }
 
 sub config {
-    switch(@_);
+    my ($in, $modules_conf, $device) = @_;
+    switch($in, $modules_conf, $device);
 }
 
 
@@ -278,7 +282,7 @@ initlevel 3
 }
 
 sub get_any_driver_entry {
-    my ($in, $driver, $device) = @_;
+    my ($in, $modules_conf, $driver, $device) = @_;
     return () if $::isInstall;
     +{
         val => N("Let me pick any driver"), disabled => sub {},
@@ -293,7 +297,7 @@ The current driver for your \"%s\" sound card is \"%s\" ", $device->{description
                                { label => N("Driver:"), val => \$driver, list => [ category2modules("multimedia/sound") ], type => 'combo', default => $driver, sort =>1, separator => '|' },
                               ]
                              )) {
-                do_switch($in, $old_driver, $driver, $device->{sound_slot_index});
+                do_switch($in, $modules_conf, $old_driver, $driver, $device->{sound_slot_index});
                 goto end;
             }
         }
@@ -301,16 +305,17 @@ The current driver for your \"%s\" sound card is \"%s\" ", $device->{description
 }
 
 
-sub configure_sound_slots() {
+sub configure_sound_slots {
+    my ($modules_conf) = @_;
     my $altered = 0;
     each_index {
-        my $default_driver = modules::get_alias("sound-slot-$::i");
+        my $default_driver = $modules_conf->get_alias("sound-slot-$::i");
         if (!member($default_driver, @{get_alternative($_->{driver})}, $_->{driver})) {
             $altered ||= $default_driver;
-            modules::set_sound_slot("sound-slot-$::i", $_->{driver});
+            $modules_conf->set_sound_slot("sound-slot-$::i", $_->{driver});
         }
     } detect_devices::getSoundDevices();
-    modules::write_conf() if $altered && $::isStandalone;
+    $modules_conf->write if $altered && $::isStandalone;
 }
 
 

@@ -358,7 +358,7 @@ sub modprobe {
     my $name = shift;
     require modules;
     modules::load_dependencies("/modules/modules.dep");
-    modules::load([ $name, @_ ]);
+    modules::load_raw([ $name ], { $name => join(' ', @_) });
 }
 
 sub route {

@@ -153,10 +153,10 @@ sub acceptLicense {}
 #------------------------------------------------------------------------------
 sub setupSCSI {
     my ($o) = @_;
-    install_any::configure_pcmcia($o->{pcmcia}) if $o->{pcmcia};
+    install_any::configure_pcmcia($o->{modules_conf}, $o->{pcmcia}) if $o->{pcmcia};
     modules::load(modules::category2modules('disk/cdrom'));
-    modules::load_category('bus/firewire');
-    modules::load_category('disk/scsi|hardware_raid|firewire');
+    modules::load_category($o->{modules_conf}, 'bus/firewire');
+    modules::load_category($o->{modules_conf}, 'disk/scsi|hardware_raid|firewire');
 
     install_any::getHds($o);
 }
@@ -955,7 +955,7 @@ sub upNetwork {
 	symlinkf("$o->{prefix}/etc/$_", "/etc/$_") foreach qw(resolv.conf protocols services);
     }
     member($o->{method}, qw(ftp http nfs)) and return 1;
-    modules::write_conf();
+    $o->{modules_conf}->write;
     if (hasNetwork($o)) {
 	if ($o->{netcnx}{type} =~ /adsl|lan|cable/) {
 	    log::l("starting network ($o->{netcnx}{type})");
@@ -981,7 +981,7 @@ sub downNetwork {
     my ($o, $costlyOnly) = @_;
 
     $o->{method} eq "ftp" || $o->{method} eq "http" || $o->{method} eq "nfs" and return 1;
-    modules::write_conf();
+    $o->{modules_conf}->write;
     if (hasNetwork($o)) {
 	if (!$costlyOnly) {
 	    require network::netconnect;

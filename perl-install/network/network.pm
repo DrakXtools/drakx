@@ -363,14 +363,14 @@ sub probe_netcnx_type {
 }
 
 sub easy_dhcp {
-    my ($netc, $intf) = @_;
+    my ($modules_conf, $netc, $intf) = @_;
 
     return if text2bool($netc->{NETWORKING});
 
     require modules;
     require network::ethernet;
-    modules::load_category('network/main|gigabit|usb');
-    my @all_cards = network::ethernet::get_eth_cards();
+    modules::load_category($modules_conf, 'network/main|gigabit|usb');
+    my @all_cards = network::ethernet::get_eth_cards($modules_conf);
 
     #- only for a single network card
     (any { $_->[0] eq 'eth0' } @all_cards) && (every { $_->[0] ne 'eth1' } @all_cards) or return;

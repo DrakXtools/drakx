@@ -120,7 +120,8 @@ sub get_info_providers_backend {
 sub read_providers_backend() { map { /(.*?)=>/ } catMaybeCompressed($file) }
 
 
-sub detect_backend() {
+sub detect_backend {
+    my ($modules_conf) = @_;
     my @isdn;
     require detect_devices;
      each_index {
@@ -132,7 +133,7 @@ sub detect_backend() {
         $isdn->{description} =~ s/.*\|//;
 #	$c->{options} !~ /id=HiSax/ && $isdn->{driver} eq "hisax" and $c->{options} .= " id=HiSax";
 	if ($c->{options} !~ /protocol=/ && $isdn->{protocol} =~ /\d/) {
-	    modules::set_options($c->{driver}, $c->{options} . " protocol=" . $isdn->{protocol});
+	    $modules_conf->set_options($c->{driver}, $c->{options} . " protocol=" . $isdn->{protocol});
 	}
 	$c->{options} =~ /protocol=(\d)/ and $isdn->{protocol} = $1;
 	push @isdn, $isdn;

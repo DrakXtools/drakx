@@ -6,8 +6,8 @@ use common;
 sub config_window {
     my ($in, $data) = @_;
     require modules;
-    modules::mergein_conf();
-    my %conf = modules::get_parameters($data->{driver});
+    my $modules_conf = modules::any_conf->read;
+    my %conf = $modules_conf->get_parameters($data->{driver});
     require modules::parameters;
     my @l;
     foreach (modules::parameters::parameters($data->{driver})) {
@@ -22,20 +22,20 @@ sub config_window {
     if ($in->ask_from(N("Module configuration"), N("You can configure each parameter of the module here."), \@l)) {
 	   my $options = join(' ', map { if_($conf{$_}, "$_=$conf{$_}") } keys %conf);
 	   if ($options) {
-		  modules::set_options($data->{driver}, $options);
-		    modules::write_conf();
-		}
+	       $modules_conf->set_options($data->{driver}, $options);
+	       $modules_conf->write;
+	   }
     }
 }
 
 sub load_category {
-    my ($in, $category, $b_auto, $b_at_least_one) = @_;
+    my ($in, $modules_conf, $category, $b_auto, $b_at_least_one) = @_;
 
     my @l;
     {
 	my $w;
 	my $wait_message = sub { undef $w; $w = wait_load_module($in, $category, @_) };
-	@l = modules::load_category($category, $wait_message);
+	@l = modules::load_category($modules_conf, $category, $wait_message);
 	undef $w; #- help perl_checker
     }
     if (my @err = grep { $_ } map { $_->{error} } @l) {
@@ -47,20 +47,20 @@ sub load_category {
     @l = map { $_->{description} } @l;
 
     if ($b_at_least_one && !@l) {
-	@l = load_category__prompt($in, $category) or return;
+	@l = load_category__prompt($in, $modules_conf, $category) or return;
     }
 
-    load_category__prompt_for_more($in, $category, @l);
+    load_category__prompt_for_more($in, $modules_conf, $category, @l);
 }
 
 sub load_category__prompt_for_more {
-    my ($in, $category, @l) = @_;
+    my ($in, $modules_conf, $category, @l) = @_;
 
     (my $msg_type = $category) =~ s/\|.*//;
 
     while (1) {
 	my $msg = @l ?
-	  [ N("Found %s %s interfaces", join(", ", map { qq("$_") } @l)),
+	  [ N("Found %s interfaces", join(", ", map { qq("$_") } @l)),
 	    N("Do you have another one?") ] :
 	  N("Do you have any %s interfaces?", $msg_type);
 
@@ -71,7 +71,7 @@ sub load_category__prompt_for_more {
 		       [ { list => [ N_("Yes"), N_("No"), N_("See hardware info") ], val => \$r, type => 'list', format => \&translate } ]);
 	if ($r eq "No") { return @l }
 	if ($r eq "Yes") {
-	    push @l, load_category__prompt($in, $category) || next;
+	    push @l, load_category__prompt($in, $modules_conf, $category) || next;
 	} else {
 	    $in->ask_warn('', join("\n", detect_devices::stringlist()));
 	}
@@ -98,18 +98,18 @@ sub load_module__ask_options {
 		      N("You may now provide options to module %s.\nNote that any address should be entered with the prefix 0x like '0x123'", $module_descr), 
 		      [ map { { label => $_->[0] . ($_->[1] ? " ($_->[1])" : ''), help => $_->[2], val => \$_->[3] } } @parameters ],
 		     ) or return;
-	[ map { if_($_->[3], "$_->[0]=$_->[3]") } @parameters ];
+	join(' ', map { if_($_->[3], "$_->[0]=$_->[3]") } @parameters);
     } else {
 	my $s = $in->ask_from_entry('',
 N("You may now provide options to module %s.
 Options are in format ``name=value name2=value2 ...''.
 For instance, ``io=0x300 irq=7''", $module_descr), N("Module options:")) or return;
-	[ split ' ', $s ];
+	$s;
     }
 }
 
 sub load_category__prompt {
-    my ($in, $category) = @_;
+    my ($in, $modules_conf, $category) = @_;
 
     (my $msg_type = $category) =~ s/\|.*//;
     my %available_modules = map_each { $::a => $::b ? "$::a ($::b)" : $::a } modules::category2modules_and_description($category);
@@ -135,7 +135,7 @@ not cause any damage.", $module_descr)), [ N_("Autoprobe"), N_("Specify options"
 	eval {
 	    my $_w = wait_load_module($in, $category, $module_descr, $module);
 	    log::l("user asked for loading module $module (type $category, desc $module_descr)");
-	    modules::load([ $module, @$options ]);
+	    modules::load_and_configure($modules_conf, $module, $options);
 	};
 	return $module_descr if !$@;
 

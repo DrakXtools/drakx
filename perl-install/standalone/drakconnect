@@ -51,7 +51,8 @@ if ($in->isa('interactive::gtk')) {
     require ugtk2;
     ugtk2->import(qw(:create :dialogs :helpers :wrappers));
 }
-network::tools::reread_net_conf($netcnx, $netc, $intf);
+my $modules_conf = modules::any_conf->read;
+network::tools::reread_net_conf($modules_conf, $netcnx, $netc, $intf);
 $::Wizard_title = N("Network & Internet Configuration");
 $::Wizard_pix_up = "drakconnect.png";
 
@@ -122,7 +123,7 @@ $list->signal_connect(button_press_event => sub {
                           configure_lan() if $event->type eq '2button-press';
                       });
 
-update_list();
+update_list($modules_conf);
 
 my ($label_host, $int_state);
 
@@ -203,8 +204,8 @@ sub manage {
   
     eval(cat_('/etc/sysconfig/drakconnect'));
 
-    @all_cards = network::ethernet::get_eth_cards();
-    my %name = network::ethernet::get_eth_cards_names(@all_cards);
+    @all_cards = network::ethernet::get_eth_cards($modules_conf);
+    my %name = network::ethernet::get_eth_cards_names($modules_conf, @all_cards);
     foreach (keys %name) {
 	$p->{/eth|ath|wlan/ ? $name{$_} : $_} = { kind => $_ };
     }
@@ -269,7 +270,7 @@ sub build_tree {
 	$intf->{save} = sub { 
             $netc->{internet_cnx_choice} = 'adsl';
             $netc->{at_boot} = $intf->{ONBOOT} eq 'yes' ? 1 : 0;
-            network::adsl::adsl_conf_backend($in, $intf, $netc, $interface_kind, $protocol) 
+            network::adsl::adsl_conf_backend($in, $modules_conf, $intf, $netc, $interface_kind, $protocol) 
           };
     } 
     elsif ($interface eq 'modem') {
@@ -633,7 +634,7 @@ sub check_field {
 
 sub add_intf() {
     $::isWizard = 1;
-    network::netconnect::main('', $netcnx, $in, $netc, undef, $intf);
+    network::netconnect::main('', $netcnx, $in, $modules_conf, $netc, undef, $intf);
     $in->exit(0);
 }
 
@@ -705,8 +706,9 @@ sub get_intf_ip {
 
 my %intf;
 
-sub update_list() {
-    @all_cards = network::ethernet::get_eth_cards();
+sub update_list {
+    my ($modules_conf) = @_;
+    @all_cards = network::ethernet::get_eth_cards($modules_conf);
     my %new_intf = map { @$_ } @all_cards;
     my @new_intf = sort keys %new_intf;
     foreach my $interface (difference2(\@new_intf, [ keys %intf ])) {

@@ -10,15 +10,14 @@ use mouse;
 
 
 sub configure {
-    my ($keyboard, $mouse) = @_;
+    my ($o_keyboard, $o_mouse) = @_;
 
-    $keyboard ||= keyboard::read();
-    $mouse ||= do {
+    my $keyboard = $o_keyboard || keyboard::read();
+    my $mouse = $o_mouse || do {
 	my $mouse = mouse::read(); 
-	add2hash($mouse, mouse::detect()) if !$::noauto;
+	add2hash($mouse, mouse::detect(modules::any_conf->read)) if !$::noauto;
 	$mouse;
     };
-
 
     my $raw_X = Xconfig::xfree->empty_config;
 

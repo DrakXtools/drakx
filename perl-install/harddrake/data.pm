@@ -46,6 +46,7 @@ sub set_removable_remover {
     return "/usr/sbin/drakupdate_fstab --no-flag --del $device->{device}" if is_removable($class);
 }
 
+my $modules_conf = modules::any_conf->read;
 
 # Format is (HW class ID, l18n class name, icon, config tool , is_to_be_detected_on_boot)
 our @tree =
@@ -183,7 +184,7 @@ our @tree =
       string => N("ISDN adapters"),
       icon => "modem.png",
       configurator => "$sbindir/drakconnect",
-      detector => sub { require network::isdn; my $isdn = network::isdn::detect_backend(); if_(@$isdn, f(@$isdn)) },
+      detector => sub { require network::isdn; my $isdn = network::isdn::detect_backend($modules_conf); if_(@$isdn, f(@$isdn)) },
       checked_on_boot => 0,
      },
 
@@ -208,7 +209,7 @@ our @tree =
       string => N("Modem"),
       icon => "modem.png",
       configurator => "$sbindir/drakconnect",
-      detector => sub { detect_devices::getModem() },
+      detector => sub { detect_devices::getModem($modules_conf) },
       checked_on_boot => 0,
      },
 
@@ -260,8 +261,7 @@ our @tree =
       detector => sub { 
           require mouse;
           require modules;
-          modules::mergein_conf();
-          &mouse::detect();
+          mouse::detect($modules_conf);
       },
       checked_on_boot => 1,
      },

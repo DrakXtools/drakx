@@ -13,14 +13,14 @@ use c;
 
 my $in = 'interactive'->vnew('su');
 
-modules::mergein_conf();
+my $modules_conf = modules::any_conf->read;
 
 begin:
 my $mouse = mouse::read();
 my %old = %$mouse;
 
 if (!$::noauto) {
-    my $probed_mouse = mouse::detect();
+    my $probed_mouse = mouse::detect($modules_conf);
     $mouse = $probed_mouse if !$mouse->{XMOUSETYPE} || !$probed_mouse->{unsafe};
 }
 
@@ -29,14 +29,14 @@ if (!$mouse || !$::auto) {
     my $test_hbox;
     my $name = $in->ask_from_treelistf('mousedrake', N("Please choose your mouse type."), '|',
 				       sub { join '|', map { translate($_) } split '\|', $_[0] },
-				       [ mouse::fullnames ], 
+				       [ mouse::fullnames() ], 
 				       $mouse->{type} . '|' . $mouse->{name});
     $name or $in->exit(0);
     my $mouse_chosen = mouse::fullname2mouse($name);
     $mouse = $mouse_chosen if !($mouse->{type} eq $mouse_chosen->{type} && $mouse->{name} eq $mouse_chosen->{name});
 
     if ($mouse->{device} eq "usbmouse") {
-	modules::load_category('bus/usb') or die 'no usb bus found\n';
+	modules::load_category($modules_conf, 'bus/usb') or die 'no usb bus found\n';
 	modules::load(qw(hid mousedev usbmouse));
     }
 
@@ -51,7 +51,7 @@ if (!$mouse || !$::auto) {
     $test_hbox and $test_hbox->destroy;
 }
 
-mouse::write_conf($in, $mouse, 1);
+mouse::write_conf($in->do_pkgs, $modules_conf, $mouse, 1);
 
 if ($in->isa('interactive::gtk') && mouse::change_mouse_live($mouse, \%old)) {
 

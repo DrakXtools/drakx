@@ -107,7 +107,7 @@ sub selectMouse {
 
     installStepsCall($o, $auto, 'selectMouse', !$first_time || $clicked);
 
-    addToBeDone { mouse::write($o, $o->{mouse}) if !$o->{isUpgrade} || $clicked } 'installPackages';
+    addToBeDone { mouse::write($o->do_pkgs, $o->{mouse}) if !$o->{isUpgrade} || $clicked } 'installPackages';
 }
 
 #------------------------------------------------------------------------------
@@ -198,7 +198,7 @@ sub formatPartitions {
 	#- when usb-storage is in scsi_hostadapter, 
 	#- hotplug + scsimon do not load sd_mod/sr_mod when needed
 	#- (eg: when plugging a usb key)
-	modules::remove_probeall('scsi_hostadapter', 'usb-storage');
+	$o->{modules_conf}->remove_probeall('scsi_hostadapter', 'usb-storage');
     }
 
     require raid;
@@ -290,7 +290,7 @@ sub setupBootloader {
     my ($_clicked, $ent_number, $auto) = @_;
     return if $::uml_install;
 
-    modules::write_conf();
+    $o->{modules_conf}->write;
 
     installStepsCall($o, $auto, 'setupBootloaderBefore') if $ent_number == 1;
     installStepsCall($o, $auto, 'setupBootloader', $ent_number);
@@ -303,7 +303,7 @@ sub configureX {
 
     #- done here and also at the end of install2.pm, just in case...
     install_any::write_fstab($o);
-    modules::write_conf();
+    $o->{modules_conf}->write;
 
     require pkgs;
     installStepsCall($o, $auto, 'configureX') if !$::testing && eval { pkgs::packageByName($o->{packages}, 'xorg-x11')->flag_installed } && !$o->{X}{disabled};
@@ -457,8 +457,9 @@ sub main {
     eval { spawnShell() };
 
     modules::load_dependencies(($::testing ? ".." : "") . "/modules/modules.dep");
-    modules::mergein_conf_raw('/tmp/modules.conf');
-    modules::read_already_loaded();
+    require modules::modules_conf;
+    $o->{modules_conf} = modules::modules_conf->read('/tmp/modules.conf');
+    modules::read_already_loaded($o->{modules_conf});
 
     #- done before auto_install is called to allow the -IP feature on auto_install file name
     if (-e '/tmp/network') {
@@ -527,7 +528,7 @@ sub main {
     require "install_steps_$o->{interactive}.pm" if $o->{interactive};
 
     #- needed before accessing floppy (in case of usb floppy)
-    modules::load_category('bus/usb'); 
+    modules::load_category($o->{modules_conf}, 'bus/usb'); 
 
     #- oem patch should be read before to still allow patch or defcfg.
     eval { $o = $::o = install_any::loadO($o, "Mandrake/base/patch-oem.pl"); log::l("successfully read oem patch") };
@@ -541,7 +542,7 @@ sub main {
     eval { modules::load("af_packet") };
 
     require harddrake::sound;
-    harddrake::sound::configure_sound_slots();
+    harddrake::sound::configure_sound_slots($o->{modules_conf});
 
     #- need to be after oo-izing $o
     if ($o->{brltty}) {
@@ -573,7 +574,7 @@ sub main {
 	if ($o->{mouse}) {
 	    mouse::load_modules($o->{mouse});
 	} else {
-	    eval { $o->{mouse} = mouse::detect() } if !$o->{nomouseprobe};
+	    eval { $o->{mouse} = mouse::detect($o->{modules_conf}) } if !$o->{nomouseprobe};
 	}
     }
 
@@ -663,7 +664,7 @@ sub main {
     install_any::log_sizes($o);
     install_any::remove_advertising($o);
     install_any::write_fstab($o);
-    modules::write_conf();
+    $o->{modules_conf}->write;
     detect_devices::install_addons($o->{prefix});
 
     #- save recovery file if needed (ie disk style install).

@@ -2277,7 +2277,7 @@ sub configure_hpoj {
 		    my $usbdev = usbdevice($_->{val});
 		    if (defined($usbdev)) {
 			# Unload kernel module "printer"/"usblp"
-			if (modules::get_probeall("usb-interface")) {
+			if (modules::any_conf->read->get_probeall("usb-interface")) {
 			    eval(modules::unload($usbprintermodule));
 			    $printermoduleunloaded = 1;
 			}

@@ -20,7 +20,7 @@ my $last_boot_config = $hw_sysconfdir."/previous_hw";
 
 $last_boot_config .= '_X11' if $invert_do_it;
 
-modules::mergein_conf();
+my $modules_conf = modules::any_conf->read;
 
 # autoreconfigure the mouse on major kernel change:
 my $prev_kernel = { getVarsFromSh("$hw_sysconfdir/kernel") }->{KERNEL};
@@ -31,7 +31,7 @@ if ($curr_kernel ne $prev_kernel) {
     log::explanations("Autoconfiguring mouse since we switched between 2.4.x and 2.6.x kernels");
     require class_discard;
     require mouse;
-    mouse::write_conf(class_discard->new, mouse::detect(), 1);
+    mouse::write_conf(class_discard->new, $modules_conf, mouse::detect($modules_conf), 1);
 }
 
 if (find { $_->{driver} =~ /Card:NVIDIA/ } detect_devices::probeall()) {
@@ -89,7 +89,7 @@ foreach my $hw_class (@harddrake::data::tree) {
     log::explanations("removed $Ident: " . harddrake::data::custom_id($oldconfig->{$_}, $item)) foreach @was_removed;
     log::explanations("added $Ident: " . harddrake::data::custom_id($ID{$_}, $item)) foreach @added;
 
-    modules::load('ohci1394') if $Ident eq 'FIREWIRE_CONTROLLER' && any { $_->{driver} eq 'ohci1394' } @added;
+    modules::load_and_configure($modules_conf, 'ohci1394') if $Ident eq 'FIREWIRE_CONTROLLER' && any { $_->{driver} eq 'ohci1394' } @added;
     @added || @was_removed or next;
     my @configurator_pool;
     if (harddrake::data::is_removable($Ident)) {
@@ -105,20 +105,20 @@ foreach my $hw_class (@harddrake::data::tree) {
     if ($Ident eq "AUDIO") {
         # automatic sound slots configuration
         rm_rf("/etc/asound.state");
-        harddrake::sound::configure_sound_slots();
+        harddrake::sound::configure_sound_slots($modules_conf);
         next;
     } elsif ($Ident eq "ETHERNET") {
-        modules::remove_alias_regexp('^(wlan|eth)[0-9]*$');
-        modules::load_category('network/main|gigabit|usb|wireless');
+        $modules_conf->remove_alias_regexp('^(wlan|eth)[0-9]*$');
+        modules::load_category($modules_conf, 'network/main|gigabit|usb|wireless');
         require network::ethernet;
-        network::ethernet::configure_eth_aliases();
-        modules::write_conf();
+        network::ethernet::configure_eth_aliases($modules_conf);
+        $modules_conf->write;
     } elsif ($Ident eq "AGP") {
         # add agpgart modules to modprobe.preload if needed:
-        modules::write_conf();
+        $modules_conf->write;
     } elsif ($Ident eq "VIDEO") {
         require harddrake::autoconf;
-        harddrake::autoconf::xconf();
+        harddrake::autoconf::xconf($modules_conf, {});
         next;
     }
 

@@ -115,16 +115,16 @@ my @devices = detect_devices::getTVcards();
 push @devices, { driver => 'bttv', description => 'dummy' } if $::testing && !@devices;
 if (@devices) {
     my $not_canceled = 1;
-    my $configured;
+    my $modules_conf;
     # TODO: That need some work for multiples TV cards
     each_index {
 	   if (($< == 0 || $::testing) && (grep { detect_devices::isTVcard($_) } @devices)) {
 		  require harddrake::v4l;
 		  require modules;
-		  modules::mergein_conf() if !$configured;
-		  $configured++;
-		  $not_canceled &&= harddrake::v4l::config($in, $_->{driver});
-		  modules::write_conf();
+
+		  $modules_conf ||= modules::any_conf->read;
+		  $not_canceled &&= harddrake::v4l::config($in, $modules_conf, $_->{driver});
+		  $modules_conf->write;
 	   }
 	   scan4channels() if $not_canceled;
     } @devices

@@ -201,7 +201,7 @@ sub read() {
 }
 
 sub write {
-    my ($in, $mouse) = @_;
+    my ($do_pkgs, $mouse) = @_;
     local $mouse->{FULLNAME} = qq("$mouse->{type}|$mouse->{name}"); #-"
     local $mouse->{XEMU3} = bool2yesno($mouse->{nbuttons} < 3);
     local $mouse->{WHEEL} = bool2yesno($mouse->{nbuttons} > 3);
@@ -214,7 +214,7 @@ sub write {
     any::devfssymlinkf($mouse->{auxmouse}, 'mouse1') if $mouse->{auxmouse};
 
 
-    various_xfree_conf($in, $mouse);
+    various_xfree_conf($do_pkgs, $mouse);
 
     if (arch() =~ /ppc/) {
 	my $s = join('',
@@ -229,8 +229,10 @@ sub write {
     }
 }
 
-sub probe_wacom_devices() {
-    modules::get_probeall("usb-interface") or return;
+sub probe_wacom_devices {
+    my ($modules_conf) = @_;
+
+    $modules_conf->get_probeall("usb-interface") or return;
     my (@l) = detect_devices::usbWacom() or return;
 
     log::l("found usb wacom $_->{driver} $_->{description} ($_->{type})") foreach @l;
@@ -268,7 +270,9 @@ sub detect_serial() {
     $mouse, @wacom;
 }
 
-sub detect() {
+sub detect {
+    my ($modules_conf) = @_;
+
     if (arch() =~ /^sparc/) {
 	return fullname2mouse("sunmouse|Sun - Mouse");
     }
@@ -280,10 +284,10 @@ sub detect() {
 			      "busmouse|1 button");
     }
 
-    my @wacom = probe_wacom_devices();
+    my @wacom = probe_wacom_devices($modules_conf);
 
     if (c::kernel_version() =~ /^\Q2.6/) {
-	modules::get_probeall("usb-interface") and eval { modules::load('usbhid') };
+	$modules_conf->get_probeall("usb-interface") and eval { modules::load('usbhid') };
 	if (cat_('/proc/bus/input/devices') =~ /^H: Handlers=mouse/m) {
 	    return fullname2mouse('Universal|Any PS/2 & USB mice', wacom => \@wacom);
 	}
@@ -296,7 +300,7 @@ sub detect() {
 	    $ps2_mouse and detect_devices::hasMousePS2("psaux"); #- fake another open in order for XFree to see the mouse.
 	}
 
-	if (modules::get_probeall("usb-interface")) {
+	if ($modules_conf->get_probeall("usb-interface")) {
 	    sleep 2;
 	    if (my (@l) = detect_devices::usbMice()) {
 		log::l(join('', "found usb mouse $_->{driver} $_->{description} (", if_($_->{type}, $_->{type}), ")")) foreach @l;
@@ -371,7 +375,7 @@ sub set_xfree_conf {
 }
 
 sub various_xfree_conf {
-    my ($in, $mouse) = @_;
+    my ($do_pkgs, $mouse) = @_;
 
     {
 	my $f = "$::prefix/etc/X11/xinit.d/mouse_buttons";
@@ -386,7 +390,7 @@ sub various_xfree_conf {
 	if (!$mouse->{auxmouse} || $mouse->{auxmouse}{nbuttons} <= 5) {
 	    unlink($f);
 	} else {
-	    $in->do_pkgs->install('xinput');
+	    $do_pkgs->install('xinput');
 	    output_with_perm($f, 0755, "xinput set-button-map Mouse2 1 2 3 6 7 4 5\n");
 	}
     }
@@ -404,10 +408,10 @@ sub various_xfree_conf {
 #-  $mouse->{MOUSETYPE} : type of the mouse : string : ex "ps/2"
 #-  $mouse->{XEMU3} : emulate 3rd button : string : 'yes' or 'no'
 sub write_conf {
-    my ($in, $mouse, $b_keep_auxmouse_unchanged) = @_;
+    my ($do_pkgs, $modules_conf, $mouse, $b_keep_auxmouse_unchanged) = @_;
 
-    &write($in, $mouse);
-    modules::write_conf() if $mouse->{device} eq "usbmouse" && !$::testing;
+    &write($do_pkgs, $mouse);
+    $modules_conf->write if $mouse->{device} eq "usbmouse" && !$::testing;
 
     require Xconfig::xfree;
     my $xfree_conf = Xconfig::xfree->read;
@@ -567,8 +571,7 @@ mouse - Perl functions to handle mice
 
    require modules;
    require mouse;
-   modules::mergein_conf();
-   mouse::detect();
+   mouse::detect(modules::any_conf->read);
 
 =head1 DESCRIPTION
 
