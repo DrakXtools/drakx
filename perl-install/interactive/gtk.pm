@@ -597,13 +597,15 @@ sub ask_fromW {
         ($advanced) = @_;
         $advanced ? $advanced_pack->show : $advanced_pack->hide;
     };
+    my $first_time = 1;
     my $set_advanced = sub {
 	($advanced) = @_;
 	$set_default_size->() if $advanced;
-	$update->($common->{callbacks}{advanced}) if $advanced;
+	$update->($common->{callbacks}{advanced}) if $advanced & !$first_time;
 	$set_advanced_raw->($advanced);
 	@widgets = (@widgets_always, if_($advanced, @widgets_advanced));
 	$mainw->sync; #- for $set_all below (mainly for the set of clist)
+	$first_time = 0 if $first_time;
 	$set_all->(); #- must be done when showing advanced lists (to center selected value)
     };
     my $advanced_button = [ $common->{advanced_label}, 
