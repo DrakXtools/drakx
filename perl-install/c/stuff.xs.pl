@@ -52,6 +52,7 @@ typedef __uint8_t u8;
 #include <ext2fs/ext2fs.h>
 
 // for UPS on USB:
+# define HID_MAX_USAGES 1
 #include <linux/hiddev.h>
 
 #include <libldetect.h>
