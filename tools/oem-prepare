@@ -9,7 +9,7 @@ open F, "$dir/VERSION" or die "no installation found on $dir";
 while (<F>) {
     /[\s-]fr/ and $lang = 'fr';
     /\[lang[=:]([^]]*)\]/ and $lang = $1;
-    /\[server\]/ and $options{server} = '';
+    /[\[\-]server[\]\-]/ and $options{server} = '';
 }
 close F;
 

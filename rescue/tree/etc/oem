@@ -123,7 +123,7 @@ open F, "/cdrom/VERSION" or die "no installation cdrom found on $cd";
 while (<F>) {
     /[\s-]fr/ and $options{lang} = 'fr';
     /\[lang[=:]([^]]*)\]/ and $options{lang} = $1;
-    /\[server\]/ and $options{server} = '';
+    /[\[\-]server[\]\-]/ and $options{server} = '';
     /\[boot_entries[=:]([^]]*)\]/ and $options{boot_entries} = $1;
     /\[ext2\]/ and $options{fs} = "ext2";
     /\[ext3\]/ and $options{fs} = "ext3";
@@ -726,15 +726,6 @@ sub select_packages {
 	    delete $pkg->{selected};
 	}
     }
-
-    #- special packages that are to be removed always... BEWARE THIS IS A HACK !!!
-#    foreach (qw(gmc gcc3.0 gcc3.0-c++ gcc3.0-cpp libstdc++3.0 libstdc++3.0-devel)) {
-#	my $pkg = pkgs::packageByName($o->{packages}, $_);
-#	if ($pkg) {
-#	    delete $pkg->{closure};
-#	    delete $pkg->{selected};
-#	}
-#    }
 
     $o->{packages};
 }
