@@ -1,5 +1,35 @@
 2001/08/29  François Pons  <fpons@mandrakesoft.com>
 
+	* pkgs.pm: fixed if undef encountered in depslist when installing package
+	(traversing
+	depslist as $depOrder).
+
+2001/08/29  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* standalone/drakgw, standalone/drakautoinst: quit_global
+
+	* share/po/fr.po: minor fix
+
+2001/08/29  Pixel  <pixel@mandrakesoft.com>
+
+	* install_steps_interactive.pm: fix language selection
+
+	* c.pm: better error message when function c::foo() is missing
+
+	* install_steps_gtk.pm (installPackages): have Ok button by default for
+	asking for changing CD
+
+	* bootloader.pm (mkbootdisk): cleanup
+
+	* rescue/dirs, rescue/make_rescue_img: make it work (do not have the dev
+	in /)
+
+	* devices.pm: remove fd0H1440 and fd1H1440
+
+	* modules.pm: remove "msdos"
+
+2001/08/29  François Pons  <fpons@mandrakesoft.com>
+
 	* mouse.pm: improved write_conf to enable multi-mice if only once mice is
 	already defined.
 
