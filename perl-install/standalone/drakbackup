@@ -4200,28 +4200,37 @@ sub button_box_main {
 
 ################################################  MESSAGES  ################################################  
 
-sub send_mail_pb {
+sub dialog_one {
     $table->destroy();
+    my ($label) = @_;
     my ($pix_warn_map, $pix_warn_mask) = gtkcreate_png('warning');
     
     gtkadd($advanced_box,
-	   $box2 = gtkpack_(new Gtk::HBox(0, 15),	
-			    1, new Gtk::VBox(0, 5),	
-			    0, gtkpack_(new Gtk::HBox(0, 15),	
-					0, new Gtk::VBox(0, 5),	
-					0, new Gtk::Pixmap($pix_warn_map, $pix_warn_mask),
-					0, N("Error during sendmail.
-  Your report mail was not sent.
-  Please configure sendmail"),
-				),
-			    0, new Gtk::VBox(0, 5),	
-			    1, new Gtk::VBox(0, 5),	
-			    ),
-	   );
+           $box2 = gtkpack_(new Gtk::HBox(0, 15),	
+                            1, new Gtk::VBox(0, 5),	
+                            0, gtkpack_(new Gtk::HBox(0, 15),	
+                                        0, new Gtk::VBox(0, 5),	
+                                        0, new Gtk::Pixmap($pix_warn_map, $pix_warn_mask),
+                                        0, $label),
+                            0, new Gtk::VBox(0, 5),	
+                            1, new Gtk::VBox(0, 5),	
+                            ),
+           );
     button_box_restore_main();
     $custom_help = "mail_pb";
     $central_widget = \$box2;
     $up_box->show_all();    
+}
+
+sub send_mail_pb {
+    dialog_one(N("Error during sendmail.
+  Your report mail was not sent.
+  Please configure sendmail"));
+}
+
+sub client_ftp_pb {
+    dialog_one(N("Error during sending file via FTP.
+ Please correct your FTP configuration."));
 }
 
 sub install_rpm {
@@ -4247,28 +4256,6 @@ sub install_rpm {
     $up_box->show_all();
 }
 
-sub client_ftp_pb {
-    $table->destroy();
-    my ($pix_warn_map, $pix_warn_mask) = gtkcreate_png('warning');
-    
-    gtkadd($advanced_box,
-	   $box2 = gtkpack_(new Gtk::HBox(0, 15),	
-			    1, new Gtk::VBox(0, 5),	
-			    0, gtkpack_(new Gtk::HBox(0, 15),	
-					0, new Gtk::VBox(0, 5),	
-					0, new Gtk::Pixmap($pix_warn_map, $pix_warn_mask),
-					0, N("Error during sending file via FTP.
- Please correct your FTP configuration."),
-					),
-			    0, new Gtk::VBox(0, 5),	
-			    1, new Gtk::VBox(0, 5),	
-			    ),
-	   );
-    button_box_restore_main();
-    $custom_help = "mail_pb";
-    $central_widget = \$box2;
-    $up_box->show_all();    
-}
 
 sub message_norestore_box {
     $box2->destroy();
