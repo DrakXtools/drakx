@@ -2639,7 +2639,8 @@ What do you want to modify on this printer?",
 		     cancel => _("Close"),
 		     ok => _("Do it!")
 		     },
-		    [ { val => \$modify, format => \&translate,
+		    [ { val => \$modify, format => \&translate, 
+			type => 'list',
 			list => [ ($printer->{configured}{$queue} ?
 				   (_("Printer connection type"),
 				    _("Printer name, description, location"),
