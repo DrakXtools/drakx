@@ -968,13 +968,13 @@ sub suggest_mount_points {
 sub find_root_parts {
     my ($fstab, $prefix) = @_;
     map { 
-	if (my $handle = any::inspect($_, $prefix)) {
-	    if (my $s = cat_("$handle->{dir}/etc/mandrake-release")) {
-		chomp($s);
-		$s =~ s/\s+for\s+\S+//;
-		log::l("find_root_parts found $_->{device}: $s");
-		{ release => $s, part => $_ };
-	    } else { () }
+	my $handle = any::inspect($_, $prefix);
+	my $s = $handle && cat_("$handle->{dir}/etc/mandrake-release");
+	if ($s) {
+	    chomp($s);
+	    $s =~ s/\s+for\s+\S+//;
+	    log::l("find_root_parts found $_->{device}: $s");
+	    { release => $s, part => $_ };
 	} else { () }
     } @$fstab;
 }
