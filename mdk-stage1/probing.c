@@ -225,6 +225,7 @@ void probe_that_type(enum driver_type type, enum media_bus bus __attribute__ ((u
 			unsigned int i;
 			unsigned short vendor, device, subvendor, subdevice, class_, class_prog, devbusfn;
 			const char *name, *module;
+			enum driver_type type_ = type;
 
 			if (!fgets(buf, sizeof(buf), f)) break;
 	
@@ -265,6 +266,7 @@ void probe_that_type(enum driver_type type, enum media_bus bus __attribute__ ((u
 					class_prog == 0x20 ? "ehci-hcd" : NULL;
 				if (module) {
 					name = "USB Controller";
+					type_ = USB_CONTROLLERS;
 					goto found_pci_device;
 				}
 			}
@@ -296,7 +298,7 @@ void probe_that_type(enum driver_type type, enum media_bus bus __attribute__ ((u
 			continue;
 
 		found_pci_device:
-			discovered_device(type, vendor, device, subvendor, subdevice, name, module);
+			discovered_device(type_, vendor, device, subvendor, subdevice, name, module);
 		}
 	end_pci_probe:;
 		if (f)
