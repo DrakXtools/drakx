@@ -128,7 +128,6 @@ sub create_steps_window {
     gtkadd($w->{window},
 	   gtkpack_(Gtk2::VBox->new(0,0),
 		    (map { (1, $_) } map {
-			my $step_name = $_;
 			my $step = $o->{steps}{$_};
 			my $darea = Gtk2::DrawingArea->new;
 			my $in_button;
