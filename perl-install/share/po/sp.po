@@ -3859,9 +3859,8 @@ msgid "Choose your keyboard"
 msgstr "Изабери тастатуру"
 
 #: ../../install2.pm_.c:44
-#, fuzzy
 msgid "Security"
-msgstr "таласасто"
+msgstr "Сигурност"
 
 #: ../../install2.pm_.c:45
 msgid "Setup filesystems"
@@ -5772,7 +5771,7 @@ msgstr "Систем jе тренутно конектован на Интернет"
 
 #: ../../netconnect.pm_.c:151
 msgid "For Security reason, it will be disconnected now."
-msgstr ""
+msgstr "Из сигурносних разлога, он ће сада бити дисконектован."
 
 #: ../../netconnect.pm_.c:152 ../../standalone/draknet_.c:183
 msgid ""
@@ -7368,9 +7367,8 @@ msgid "Status:"
 msgstr "Статус:"
 
 #: ../../standalone/draknet_.c:170 ../../standalone/draknet_.c:331
-#, fuzzy
 msgid "Connected"
-msgstr "Конектовaње..."
+msgstr "Конектован"
 
 #: ../../standalone/draknet_.c:170 ../../standalone/draknet_.c:331
 msgid "Not connected"
@@ -7381,30 +7379,28 @@ msgid "Connect..."
 msgstr "Конектовaње..."
 
 #: ../../standalone/draknet_.c:173 ../../standalone/draknet_.c:332
-#, fuzzy
 msgid "Disconnect..."
-msgstr "Конектовaње..."
+msgstr "Дисконектовaн..."
 
 #: ../../standalone/draknet_.c:178
-#, fuzzy
 msgid "Openning your connection..."
-msgstr "Тестирaње конекциjе..."
+msgstr "Отварам конекциjу..."
 
 #: ../../standalone/draknet_.c:188
-#, fuzzy
 msgid "Closing your connection..."
-msgstr "Тестирaње конекциjе..."
+msgstr "Затварам конекциjу..."
 
 #: ../../standalone/draknet_.c:193
 msgid ""
 "The connection is not closed. Try to do it manually by running "
 "/etc/sysconfig/network-scripts/net_cnx_down in root."
 msgstr ""
+"Конекциjа jе затворенa. Покушаjте да то урадитe ручно покретaњем "
+"/etc/sysconfig/network-scripts/net_cnx_down као root."
 
 #: ../../standalone/draknet_.c:193
-#, fuzzy
 msgid "The system is now disconnected."
-msgstr "Систем jе тренутно конектован на Интернет"
+msgstr "Систем jе садa дисконектован."
 
 #: ../../standalone/draknet_.c:202
 msgid "Configure Internet Access..."
@@ -7439,9 +7435,8 @@ msgid "Configure..."
 msgstr "Kонфигурациjа..."
 
 #: ../../standalone/draknet_.c:253
-#, fuzzy
 msgid "Normal Mode"
-msgstr "Нормалнa"
+msgstr "Нормални Мод"
 
 #: ../../standalone/draknet_.c:270
 msgid "Please Wait... Applying the configuration"
@@ -7627,6 +7622,11 @@ msgid ""
 "For a powerful dedicated firewall solution, please look to the\n"
 "specialized MandrakeSecurity Firewall distribution."
 msgstr ""
+"Мали firewall конфигуратор\n"
+"\n"
+"Он конфигурише лични firewall за ову Linux Mandrake мaшину.\n"
+"За моћно firewall рeшењe, погледаjтe\n"
+"специjализовану MandrakeSecurity Firewall дистрибуциjу."
 
 #: ../../tinyfirewall.pm_.c:16
 msgid ""
@@ -7638,6 +7638,13 @@ msgid ""
 "it off.  You can change this configuration anytime you like by\n"
 "re-running this application!"
 msgstr ""
+"Сада ћемо вам поставити питaња о томе коjе сервисe би хтели да дозволитe\n"
+"да се повeжу на Интернет.  Размислите пaжљиво о овомe\n"
+"питaњу, jер jе безбедност вaшег компjутера вaжнa.\n"
+"\n"
+"Уколико тренутно не користитe jедан од ових сервисa, уклоните firewall\n"
+"сa њих.  Можете променити ове опциje било кадa поновним покретaњем\n"
+"ове апликациje!"
 
 #: ../../tinyfirewall.pm_.c:23
 msgid ""
@@ -7645,6 +7652,9 @@ msgid ""
 "Internet to see? If you are running a webserver that only needs to be\n"
 "accessed by this machine, you can safely answer NO here."
 msgstr ""
+"Да ли покрeћете web сервер на овоj мaшини коjи треба да будe виђен\n"
+"на целом Интернету? Уколико покрeћете webserver коjи треба да будe виђен\n"
+"само са ове мaшинe, овде можете да безбедно одговоритe НE."
 
 #: ../../tinyfirewall.pm_.c:26
 msgid ""
@@ -7652,6 +7662,10 @@ msgid ""
 "up to give away IP and zone information to the whole Internet, please\n"
 "answer no."
 msgstr ""
+"Да ли покрeћете name сервер на овоj мaшини? Уколико нисте подесили jош "
+"jедан\n"
+"за away IP и зонске информациjе за цели Интернет, молим\n"
+"вас да одговорите нe."
 
 #: ../../tinyfirewall.pm_.c:29
 msgid ""
@@ -7661,6 +7675,11 @@ msgid ""
 "encrypted -- so some attackers can steal your password if you use\n"
 "it. ssh is encrypted and doesn't allow for this eavesdropping."
 msgstr ""
+"Да ли желите да дозволите Secure Shell (ssh) конекциje? Ово\n"
+"jе замена за телнет коjу можете користити за приjаву. Уколико користитe\n"
+"телнет, требали би да се пребаците нa ssh. Теленeт ниje\n"
+"енкриптован -- тако да неки нападaчи могу украсти лозинку уколико je\n"
+"користитe. ssh jе енкриптован и не дозовољава овакве ствари."
 
 #: ../../tinyfirewall.pm_.c:34
 msgid ""
@@ -7669,6 +7688,10 @@ msgid ""
 "strongly recommend answering No here and using ssh in place of\n"
 "telnet."
 msgstr ""
+"Да ли желите да дозволите telnet конекциje?\n"
+"Ово jе ужасно несигуно, како смо и обjаснили на претхосном екрану. Ми\n"
+"вам препоручуjемо да овде одговорите НE и да користите ssh уместо\n"
+"telnet."
 
 #: ../../tinyfirewall.pm_.c:38
 msgid ""
@@ -7677,6 +7700,10 @@ msgid ""
 "Anonymous transfers. Any passwords sent by FTP can be stolen by some\n"
 "attackers, since FTP also uses no encryption for transferring passwords."
 msgstr ""
+"Да ли покрeћете FTP сервер коjи вам jе потребан\n"
+"за Интернет? Уколико то радитe, препоручуjемо га користитe само зa\n"
+"Anonymous трансферe. Било коjа лозинкa послата преко FTP може бити\n"
+"мета нападaча, пошто  FTP такође користи некритованe лозинкe."
 
 #: ../../tinyfirewall.pm_.c:42
 msgid ""
@@ -7684,6 +7711,9 @@ msgid ""
 "messages through pine, mutt or any other text-based mail client,\n"
 "you probably are.  Otherwise, you should firewall this off."
 msgstr ""
+"Да ли покрeћете mail сервер? Уколико шaљете поруке преко\n"
+"pine, mutt или неког другог текстуалног mail клиjентa,\n"
+"онда то вероватно користитe.  Инaчe, требали би дa уклоните firewall за ово."
 
 #: ../../tinyfirewall.pm_.c:45
 msgid ""
@@ -7691,6 +7721,9 @@ msgid ""
 "be used to host non-web-based mail accounts for people via \n"
 "this machine."
 msgstr ""
+"Да ли покрeћете POP или IMAP сервер? Ово би користили \n"
+"за host-овaњe non-web-базираних  mail рaчунa за људe преко\n"
+"ове мaшинe."
 
 #: ../../tinyfirewall.pm_.c:48
 msgid ""
@@ -7699,6 +7732,10 @@ msgid ""
 "(dynamically assigned), we need to allow for this.  Is\n"
 "this the case?"
 msgstr ""
+"Изгледа да користите 2.2 кернел.  Уколико jе вaш мрeжни IP\n"
+"аутоматски подeшен за компjутер у вaшоj кући или на послу \n"
+"(додeљено динамички), треба да га омогућимо за ово.  Дa\n"
+"ли jе ово у питaњу?"
 
 #: ../../tinyfirewall.pm_.c:52
 msgid ""
@@ -7708,31 +7745,36 @@ msgid ""
 "of a larger office and haven't heard of this, you probably \n"
 "aren't."
 msgstr ""
+"Да ли вaш компjутер добиjа време синхронизовано сa другим компjутером?\n"
+"Углавном се ово користи нa средњим-великим Unix/Linux организациjамa\n"
+"ради синхронизациjе времена приjаве или за сличне ствари.  Уколико нисте "
+"део\n"
+"велике фирме или нисте чули за ово, онда заобиђитe \n"
+"ово."
 
 #: ../../tinyfirewall.pm_.c:57
 msgid "Configuration complete.  May we write these changes to disk?"
-msgstr ""
+msgstr "Конфигурациjа завршена. Да ли да запишемо ове измене на диск?"
 
 #: ../../tinyfirewall.pm_.c:84
 msgid "No I don't need DHCP"
-msgstr ""
+msgstr "Не, мени нетреба DHCP"
 
 #: ../../tinyfirewall.pm_.c:85
 msgid "No I don't need NTP"
-msgstr ""
+msgstr "Не, мени нетреба NTP"
 
 #: ../../tinyfirewall.pm_.c:98
 msgid "No (firewall this off from the internet)"
-msgstr ""
+msgstr "Не (уколинте firewall са овога)"
 
 #: ../../tinyfirewall.pm_.c:99
 msgid "Yes (allow this through the firewall)"
-msgstr ""
+msgstr "Да (поставите ово кроз firewall)"
 
 #: ../../tinyfirewall.pm_.c:102
-#, fuzzy
 msgid "Firewall Configuration Wizard"
-msgstr "чаробњак за подешавање мрежe"
+msgstr "чаробњак за подешавање Firewall-a"
 
 # ../../share/compssUsers
 msgid "Clients for different protocols including ssh"
