@@ -15,6 +15,8 @@
 #include <stdlib.h>
 #include <stdarg.h>
 
+#include <probing.h>
+
 #include "frontend.h"
 
 
