@@ -345,7 +345,7 @@ sub proxy_configure {
     update_gnomekderc($kde_config_file,
                       "Proxy Settings",
                       AuthMode => 0,
-                      ProxyType => ($u->{http_proxy} || $u->{ftp_proxy}) ? 4 : 0,
+                      ProxyType => $u->{http_proxy} || $u->{ftp_proxy} ? 4 : 0,
                       ftpProxy => "ftp_proxy",
                       httpProxy => "http_proxy",
                       httpsProxy => "http_proxy"
