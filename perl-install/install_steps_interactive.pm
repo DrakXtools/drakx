@@ -18,7 +18,7 @@ use lang;
 use keyboard;
 use fs;
 use log;
-
+use printer;
 1;
 
 sub errorInStep($$) {
@@ -195,9 +195,60 @@ sub printerConfig($) {
 				);
 
     } elsif ($o->{printer}{TYPE} eq "REMOTE") {
+	$o->{printer}{REMOTEHOST}     ||= $o->{default}{printer}{REMOTEHOST};
+	$o->{printer}{REMOTEQUEUE}    ||= $o->{default}{printer}{REMOTEQUEUE};
+	$o->ask_from_entries_ref(_("Remote lpd Printer Options"), 
+				 _("To use a remote lpd print queue, you need to supply 
+				   the hostname of the printer server and the queue name 
+				   on that server which jobs should be placed in."),
+				 [_("Remote hostname:"), _("Remote queue:")],
+				 [\$o->{printer}{REMOTEHOST}, \$o->{printer}{REMOTEQUEUE}],
+				);
 	
     } elsif ($o->{printer}{TYPE} eq "SMB") {
+	$o->{printer}{SMBHOST}      ||= $o->{default}{printer}{SMBHOST};  
+	$o->{printer}{SMBHOSTIP}    ||= $o->{default}{printer}{SMBHOSTIP}; 
+	$o->{printer}{SMBSHARE}     ||= $o->{default}{printer}{SMBSHARE};  
+	$o->{printer}{SMBUSER}      ||= $o->{default}{printer}{SMBUSER};
+	$o->{printer}{SMBPASSWD}    ||= $o->{default}{printer}{SMBPASSWD};
+	$o->{printer}{SMBWORKGROUP} ||= $o->{default}{printer}{SMBWORKGROUP};
+	
+	
+	$o->ask_from_entries_ref(_("SMB/Windows 95/NT Printer Options"),
+				 _("To print to a SMB printer, you need to provide the 
+	SMB host name (this is not always the same as the machines 
+	TCP/IP hostname) and possibly the IP address of the print server, as 
+	well as the share name for the printer you wish to access and any 
+	applicable user name, password, and workgroup information."),
+				 [_("SMB server host:"), _("SMB server IP:"),
+				  _("Share name:"), _("User name:"), _("Password:"),
+				  _("Workgroup:")],
+				 [\$o->{printer}{SMBHOST}, \$o->{printer}{SMBHOSTIP},
+				  \$o->{printer}{SMBSHARE}, \$o->{printer}{SMBUSER},
+				  \$o->{printer}{SMBPASSWD}, \$o->{printer}{SMBWORKGROUP}
+				 ]
+				);
+
+
+	
     } elsif ($o->{printer}{TYPE} eq "NCP") {
+	$o->{printer}{NCPHOST}   ||= $o->{default}{printer}{NCPHOST};
+	$o->{printer}{NCPQUEUE}  ||= $o->{default}{printer}{NCPQUEUE};
+	$o->{printer}{NCPUSER}   ||= $o->{default}{printer}{NCPUSER};
+	$o->{printer}{NCPPASSWD} ||= $o->{default}{printer}{NCPPASSWD};
+	
+
+	$o->ask_from_entries_ref(_("NetWare Printer Options"),
+				 _("To print to a NetWare printer, you need to provide the 
+	                           NetWare print server name (this is not always the same as the machines 
+	                           TCP/IP hostname) 
+	                           as well as the print queue name for the printer you wish to access and any 
+	                           applicable user name and password."),
+				 [_("Printer Server:"), _("Print Queue Name:"), 
+				  _("User name:"), _("Password:")],
+				 [\$o->{printer}{NCPHOST}, \$o->{printer}{NCPQUEUE},
+				  \$o->{printer}{NCPUSER}, \$o->{printer}{NCPPASSWD}],
+				);
     }
     
  

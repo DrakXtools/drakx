@@ -9,7 +9,7 @@ use vars qw(%thedb %printer_type %printer_type_inv @papersize_type);
 # misc imports
 ########################################################################################
 use Data::Dumper;
-
+use commands;
 ########################################################################################
 # pixel imports
 ########################################################################################
@@ -342,7 +342,7 @@ sub copy_master_filter($) {
 
 
     unless ($::testing) {
-	cp($master_filter, $complete_path) or die "Can't copy $master_filter to $complete_path $!";
+	commands::cp($master_filter, $complete_path) or die "Can't copy $master_filter to $complete_path $!";
     } 
     
     

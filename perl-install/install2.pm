@@ -250,6 +250,24 @@ my $default = {
                  DBENTRY  => "DeskJet670",
                  PAPERSIZE => "legal",
                  CRLF      => 0,
+
+                 DEVICE    => "/dev/dev1",
+
+                 REMOTEHOST => "padhost",
+                 REMOTEQUEUE => "padqueue",
+
+                 NCPHOST   => "printerservername",
+                 NCPQUEUE  => "queuename",
+                 NCPUSER   => "user",
+                 NCPPASSWD => "pass",
+
+                 SMBHOST   => "hostname",
+                 SMBHOSTIP => "1.2.3.4",
+                 SMBSHARE  => "printername",
+                 SMBUSER   => "user",
+                 SMBPASSWD => "passowrd",
+                 SMBWORKGROUP => "AS3",
+
                },
     
 #    keyboard => 'de',

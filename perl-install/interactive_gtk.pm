@@ -84,7 +84,7 @@ sub ask_from_entries_refW {
 	};
 	$entry->signal_connect(changed => $update);
 	$entry->set_text(${$_[1]})  if ${$_[1]};
-	$entry->set_visibility(0) if $_[0] =~ /password/;
+	$entry->set_visibility(0) if $_[0] =~ /password/i;
 	&$update;
 	[($_[0], $entry)];
 	} $l, $val;
