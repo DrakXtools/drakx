@@ -1422,6 +1422,14 @@ sub install_spooler {
 	    printer::start_service("cups");
 	    # Should it be started at boot time?
 	    start_spooler_on_boot($printer, $in, "cups");
+	    # Set the CUPS tools as defaults for "lpr", "lpq", "lprm", ...
+	    printer::set_alternative("lpr","/usr/bin/lpr-cups");
+	    printer::set_alternative("lpq","/usr/bin/lpq-cups");
+	    printer::set_alternative("lprm","/usr/bin/lprm-cups");
+	    printer::set_alternative("lp","/usr/bin/lp-cups");
+	    printer::set_alternative("cancel","/usr/bin/cancel-cups");
+	    printer::set_alternative("lpstat","/usr/bin/lpstat-cups");
+	    printer::set_alternative("lpc","/usr/sbin/lpc-cups");
 	} elsif ($printer->{SPOOLER} eq "lpd") {
 	    # "lpr" conflicts with "LPRng", remove "LPRng"
 	    if ((!$::testing) &&
@@ -1442,6 +1450,11 @@ sub install_spooler {
 	    printer::restart_service("lpd");
 	    # Should it be started at boot time?
 	    start_spooler_on_boot($printer, $in, "lpd");
+	    # Set the LPD tools as defaults for "lpr", "lpq", "lprm", ...
+	    printer::set_alternative("lpr","/usr/bin/lpr-lpd");
+	    printer::set_alternative("lpq","/usr/bin/lpq-lpd");
+	    printer::set_alternative("lprm","/usr/bin/lprm-lpd");
+	    printer::set_alternative("lpc","/usr/sbin/lpc-lpd");
 	} elsif ($printer->{SPOOLER} eq "lprng") {
 	    # "LPRng" conflicts with "lpr", remove "lpr"
 	    if ((!$::testing) &&
@@ -1462,6 +1475,14 @@ sub install_spooler {
 	    printer::restart_service("lpd");
 	    # Should it be started at boot time?
 	    start_spooler_on_boot($printer, $in, "lpd");
+	    # Set the LPD tools as defaults for "lpr", "lpq", "lprm", ...
+	    printer::set_alternative("lpr","/usr/bin/lpr-lpd");
+	    printer::set_alternative("lpq","/usr/bin/lpq-lpd");
+	    printer::set_alternative("lprm","/usr/bin/lprm-lpd");
+	    printer::set_alternative("lp","/usr/bin/lp-lpd");
+	    printer::set_alternative("cancel","/usr/bin/cancel-lpd");
+	    printer::set_alternative("lpstat","/usr/bin/lpstat-lpd");
+	    printer::set_alternative("lpc","/usr/sbin/lpc-lpd");
 	} elsif ($printer->{SPOOLER} eq "pdq") {
 	    if ((!$::testing) &&
 		(!printer::files_exist((qw(/usr/bin/pdq
@@ -1469,6 +1490,11 @@ sub install_spooler {
 		$in->do_pkgs->install('pdq');
 	    }
 	    # PDQ has no daemon, so nothing needs to be started
+
+	    # Set the LPD tools as defaults for "lpr", "lpq", "lprm", ...
+	    printer::set_alternative("lpr","/usr/bin/lpr-pdq");
+	    printer::set_alternative("lpq","/usr/bin/lpq-foomatic");
+	    printer::set_alternative("lprm","/usr/bin/lprm-foomatic");
 	}
     }
     1;
@@ -1504,6 +1530,8 @@ sub setup_default_spooler {
 	%printer::thedb = ();
 	#my $w = $in->wait_message('', _("Reading printer database ..."));
 	#printer::read_printer_db($printer->{SPOOLER});
+	# Save spooler choice
+        printer::set_default_spooler($printer);
     }
     return $printer->{SPOOLER};
 }
