@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 9.1
-Release: 0.27mdk
+Release: 0.28mdk
 Url: http://www.linux-mandrake.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -18,7 +18,7 @@ Obsoletes: draksec
 %package newt
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Group: System/Configuration/Other
-Requires: perl-base >= 1:5.8.0-10mdk, urpmi, modutils >= 2.3.11, ldetect-lst >= 0.1.4-1mdk, usermode-consoleonly >= 1.44-4mdk, msec >= 0.38
+Requires: perl-base >= 1:5.8.0-10mdk, urpmi, modutils >= 2.3.11, ldetect-lst >= 0.1.7-2mdk, usermode-consoleonly >= 1.44-4mdk, msec >= 0.38
 Obsoletes: diskdrake setuptool
 Obsoletes: mouseconfig kbdconfig printtool drakfloppy
 Provides: diskdrake setuptool mouseconfig kbdconfig printtool
@@ -290,6 +290,16 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog 
+* Thu Feb 13 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.1-0.28mdk
+- vastly improved scannerdrake (till):
+  o fixed scsi/usb/parrallel scanners detection
+  o new known scanners
+  o support scanners with multiple ports 
+  o better configuration files
+  o fix "SnapScan" <-> "snapscan" bug
+  o fix "HP scanners had no manufacturer field"
+- drakxservices fixes (pixel)
+
 * Wed Feb 12 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.1-0.27mdk
 - fix embedded drakconnect: 
   o no crash on expert "configure" buttons
