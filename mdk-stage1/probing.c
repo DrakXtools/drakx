@@ -120,6 +120,41 @@ char * get_net_intf_description(char * intf_name)
 }
 #endif
 
+void discovered_device(enum driver_type type,
+		       unsigned short vendor, unsigned short device, unsigned short subvendor, unsigned short subdevice,
+		       const char * description, const char * driver)
+{
+	log_message("PCI: device %04x %04x %04x %04x is \"%s\", driver is %s", vendor, device, subvendor, subdevice, description, driver);
+#ifndef DISABLE_MEDIAS
+	if (type == SCSI_ADAPTERS) {
+		int wait_msg = 0;
+		enum insmod_return failed;
+		if (IS_AUTOMATIC) {
+			wait_message("Loading driver for SCSI adapter:\n \n%s", description);
+			wait_msg = 1;
+		} else
+			stg1_info_message("About to load driver for SCSI adapter:\n \n%s", description);
+		failed = my_insmod(driver, SCSI_ADAPTERS, NULL);
+		if (wait_msg)
+			remove_wait_message();
+		warning_insmod_failed(failed);
+	}
+#endif
+#ifndef DISABLE_NETWORK
+	if (type == NETWORK_DEVICES) {
+		stg1_info_message("About to load driver for network device:\n \n%s", description);
+		prepare_intf_descr(description);
+		warning_insmod_failed(my_insmod(driver, NETWORK_DEVICES, NULL));
+		if (intf_descr_for_discover) /* for modules providing more than one net intf */
+			net_discovered_interface(NULL);
+	}
+#endif
+#ifdef ENABLE_USB
+	if (type == USB_CONTROLLERS)
+		my_insmod(driver, USB_CONTROLLERS, NULL);
+#endif
+}
+
 #ifdef ENABLE_USB
 void probe_that_type(enum driver_type type, enum media_bus bus)
 #else
@@ -129,9 +164,11 @@ void probe_that_type(enum driver_type type, enum media_bus bus __attribute__ ((u
 	/* ---- PCI probe ---------------------------------------------- */
 	{
 		FILE * f;
-		int len = 0;
+		unsigned int len = 0;
+		unsigned int len_full = 0;
 		char buf[200];
 		struct pci_module_map * pcidb = NULL;
+		struct pci_module_map_full * pcidb_full = NULL;
 
 		switch (type) {
 #ifndef DISABLE_PCIADAPTERS
@@ -143,12 +180,16 @@ void probe_that_type(enum driver_type type, enum media_bus bus __attribute__ ((u
 			already_probed_scsi_adapters = 1;
 			pcidb = medias_pci_ids;
 			len   = medias_num_ids;
+			pcidb_full = medias_pci_ids_full;
+			len_full   = medias_num_ids_full;
 			break;
 #endif
 #ifndef DISABLE_NETWORK
 		case NETWORK_DEVICES:
 			pcidb = network_pci_ids;
 			len   = network_num_ids;
+			pcidb_full = network_pci_ids_full;
+			len_full   = network_num_ids_full;
 			break;
 #endif
 #endif
@@ -177,48 +218,48 @@ void probe_that_type(enum driver_type type, enum media_bus bus __attribute__ ((u
 		}
 
 		while (1) {
-			int i, garb, vendor, device;
+			unsigned int i;
+			unsigned short vendor, device, subvendor, subdevice, devbusfn;
+			subvendor = 0xFFFF;
 
 			if (!fgets(buf, sizeof(buf), f)) break;
 		
-			sscanf(buf, "%x %x", &garb, &vendor);
-			device = vendor & 0xFFFF; /* because scanf from dietlibc does not support %4f */
-			vendor = (vendor >> 16) & 0xFFFF;
+			sscanf(buf, "%hx %x", &devbusfn, &i);
+			device = i;
+			vendor = i >> 16;
  
-			for (i = 0; i < len; i++) {
-				if (pcidb[i].vendor == vendor && pcidb[i].device == device) {
-					log_message("PCI: device %04x %04x is \"%s\" (%s)", vendor, device, pcidb[i].name, pcidb[i].module);
-#ifndef DISABLE_MEDIAS
-					if (type == SCSI_ADAPTERS) {
-						int wait_msg = 0;
-						enum insmod_return failed;
-						if (IS_AUTOMATIC) {
-							wait_message("Loading driver for SCSI adapter:\n \n%s", pcidb[i].name);
-							wait_msg = 1;
-						} else
-							stg1_info_message("About to load driver for SCSI adapter:\n \n%s", pcidb[i].name);
-						failed = my_insmod(pcidb[i].module, SCSI_ADAPTERS, NULL);
-						if (wait_msg)
-							remove_wait_message();
-						warning_insmod_failed(failed);
-
+			for (i = 0; i < len_full; i++)
+				if (pcidb_full[i].vendor == vendor && pcidb_full[i].device == device) {
+					if (subvendor == 0xFFFF) {
+						int bus = devbusfn >> 8;
+						int device_p = (devbusfn & 0xff) >> 3;
+						int function = (devbusfn & 0xff) & 0x07;
+						char file[100];
+						FILE * sf;
+						log_message("PCI: device %04x %04x needs full pci probe", vendor, device);
+						sprintf(file, "/proc/bus/pci/%02x/%02x.%d", bus, device_p, function);
+						if (!(sf = fopen(file, "rb"))) {
+							log_message("PCI: could not open file for full probe (%s)", file);
+							continue;
+						}
+						fread(&buf, 48, 1, sf);
+						fclose(sf);
+						memcpy(&subvendor, buf+44, 2);
+						memcpy(&subdevice, buf+46, 2);
+						log_message("PCI: device is actually %04x %04x %04x %04x", vendor, device, subvendor, subdevice);
 					}
-#endif
-#ifndef DISABLE_NETWORK
-					if (type == NETWORK_DEVICES) {
-						stg1_info_message("About to load driver for network device:\n \n%s", pcidb[i].name);
-						prepare_intf_descr(pcidb[i].name);
-						warning_insmod_failed(my_insmod(pcidb[i].module, NETWORK_DEVICES, NULL));
-						if (intf_descr_for_discover) /* for modules providing more than one net intf */
-							net_discovered_interface(NULL);
+					if (pcidb_full[i].subvendor == subvendor && pcidb_full[i].subdevice == subdevice) {
+						discovered_device(type, vendor, device, subvendor, subdevice, pcidb_full[i].name, pcidb_full[i].module);
+						goto next_pci_device;
 					}
-#endif
-#ifdef ENABLE_USB
-					if (type == USB_CONTROLLERS)
-						my_insmod(pcidb[i].module, USB_CONTROLLERS, NULL);
-#endif
 				}
-			}
+			
+			for (i = 0; i < len; i++)
+				if (pcidb[i].vendor == vendor && pcidb[i].device == device) {
+					discovered_device(type, vendor, device, 0xFFFF, 0xFFFF, pcidb[i].name, pcidb[i].module);
+					goto next_pci_device;
+				}
+		next_pci_device:;
 		}
 		fclose(f);
 	end_pci_probe:;
