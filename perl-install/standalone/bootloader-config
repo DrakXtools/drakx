@@ -128,7 +128,7 @@ sub add_entry() {
     my $entry = {
 		  type => $image ? 'image' : 'other',
 		  label => $label,
-		  kernel_or_dev => $image || $other,
+		  kernel_or_dev => $image || $chainload,
 		 };
     bootloader::add_entry($bootloader, $entry);
     modify_bootloader();
