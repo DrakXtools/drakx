@@ -1,6 +1,6 @@
 #!/usr/bin/perl 
 #
-# Copyright (C) 2001 by MandrakeSoft (sbenedict@mandrakesoft.com)
+# Copyright (C) 2002 by MandrakeSoft (sbenedict@mandrakesoft.com)
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -47,11 +47,10 @@ use my_gtk qw(:helpers :wrappers);
 use common;
 use run_program;
 
-#use strict;
+use strict;
 use Config;
 use POSIX;
 
-#turn off su for now - just testing - need to run as root or sudo
 my $in = 'interactive'->vnew('su');
 
 my @buff;	#- used o display status info
@@ -80,6 +79,21 @@ if ("@ARGV" =~ /--help|-h/) {
 --delclient      : delete a client machine from MTS (requires MAC address, IP, nbi image name)
 );
     exit(0);
+}
+
+#- make sure terminal server and friends are installed
+my $ts = system("rpm -qa | grep terminal-server > /dev/null");
+if ($ts == 256) { 
+	if ($ENV{'DISPLAY'}) {
+		system("urpmi --X terminal-server > /dev/null");
+	} else {
+		system("urpmi terminal-server > /dev/null");
+	}
+	$ts = system("rpm -qa | grep terminal-server > /dev/null");
+	if ($ts eq 256) {
+		warn("Useless without Terminal Server");
+		exit(1);
+	}
 }
 
 if ("@ARGV" =~ /--enable/) {
@@ -233,7 +247,7 @@ sub interactive_mode {
 							       gtksignal_connect(new Gtk::Button(_("Help")),clicked =>
 										 sub { ${$central_widget}->destroy(); help() }),
 							       gtksignal_connect(new Gtk::Button(_("Close")), clicked => sub {
-										     $::isEmbedded and kill USR1, $::CCPID;
+										     $::isEmbedded and kill "USR1", $::CCPID;
 										     Gtk->main_quit() }),
 							      ),
 						    ),
@@ -247,7 +261,7 @@ sub interactive_mode {
     $window1->show_all();    
 
     Gtk->main_iteration while Gtk->events_pending;
-    $::isEmbedded and kill USR2, $::CCPID;
+    $::isEmbedded and kill "USR2", $::CCPID;
     Gtk->main;
     Gtk->exit(0);
 }
@@ -657,16 +671,16 @@ sub maintain_clients {
 
 	#- entry boxes for client data entry
 	my $label_host = new Gtk::Label("Client Name:");
-	$label_host->set_justify(left);
+	$label_host->set_justify('left');
 	my $entry_host = new Gtk::Entry(20);
 	my $label_mac = new Gtk::Label("MAC Address:");
-	$label_mac->set_justify(left);
+	$label_mac->set_justify('left');
 	my $entry_mac = new Gtk::Entry(20);
 	my $label_ip = new Gtk::Label("IP Address:");
-	$label_ip->set_justify(left);
+	$label_ip->set_justify('left');
 	my $entry_ip = new Gtk::Entry(20);
 	my $label_nbi = new Gtk::Label("Kernel Netboot Image:");
-	$label_nbi->set_justify(left);
+	$label_nbi->set_justify('left');
 	my $entry_nbi = new Gtk::Combo();
 
 	my @images = grep(/\.nbi/, all("/var/lib/tftpboot/"));
@@ -751,42 +765,42 @@ sub dhcpd_config {
 	#- entry boxes for data entry
 	my $box_subnet = new Gtk::HBox(0,0);
 	my $label_subnet = new Gtk::Label("Subnet:");
-	$label_subnet->set_justify(right);
+	$label_subnet->set_justify('right');
 	my $entry_subnet = new Gtk::Entry(20);	
 	$box_subnet->pack_end($entry_subnet, 0, 0, 10);
 	$box_subnet->pack_end($label_subnet, 0, 0, 10);
 	
 	my $box_netmask = new Gtk::HBox(0,0);
 	my $label_netmask = new Gtk::Label("Netmask:");
-	$label_netmask->set_justify(left);
+	$label_netmask->set_justify('left');
 	my $entry_netmask = new Gtk::Entry(20);
 	$box_netmask->pack_end($entry_netmask, 0, 0, 10);
 	$box_netmask->pack_end($label_netmask, 0, 0, 10);
 	
 	my $box_routers = new Gtk::HBox(0,0);
 	my $label_routers = new Gtk::Label("Routers:");
-	$label_routers->set_justify(left);
+	$label_routers->set_justify('left');
 	my $entry_routers = new Gtk::Entry(20);
 	$box_routers->pack_end($entry_routers, 0, 0, 10);
 	$box_routers->pack_end($label_routers, 0, 0, 10);
 	
 	my $box_subnet_mask = new Gtk::HBox(0,0);
 	my $label_subnet_mask = new Gtk::Label("Subnet Mask:");
-	$label_subnet_mask->set_justify(left);
+	$label_subnet_mask->set_justify('left');
 	my $entry_subnet_mask = new Gtk::Entry();
 	$box_subnet_mask->pack_end($entry_subnet_mask, 0, 0, 10);
 	$box_subnet_mask->pack_end($label_subnet_mask, 0, 0, 10);
 	
 	my $box_broadcast = new Gtk::HBox(0,0);
 	my $label_broadcast = new Gtk::Label("Broadcast Address:");
-	$label_broadcast->set_justify(left);
+	$label_broadcast->set_justify('left');
 	my $entry_broadcast = new Gtk::Entry(20);
 	$box_broadcast->pack_end($entry_broadcast, 0, 0, 10);
 	$box_broadcast->pack_end($label_broadcast, 0, 0, 10);
 	
 	my $box_domain = new Gtk::HBox(0,0);
 	my $label_domain = new Gtk::Label("Domain Name:");
-	$label_domain->set_justify(left);
+	$label_domain->set_justify('left');
 	my $entry_domain = new Gtk::Entry(20);
 	$box_domain->pack_end($entry_domain, 0, 0, 10);
 	$box_domain->pack_end($label_domain, 0, 0, 10);
@@ -794,7 +808,7 @@ sub dhcpd_config {
 	my $box_name_servers = new Gtk::HBox(0,0);
 	my $box_name_servers_entry = new Gtk::VBox(0,0);
 	my $label_name_servers = new Gtk::Label("Name Servers:");
-	$label_name_servers->set_justify(left);
+	$label_name_servers->set_justify('left');
 	my $entry_name_server1 = new Gtk::Entry();
 	my $entry_name_server2 = new Gtk::Entry();
 	my $entry_name_server3 = new Gtk::Entry();
@@ -947,7 +961,7 @@ sub write_eb_image {
 		if ( -e "/tmp/eb.iso" ) {
 			$in->ask_warn('',_("Etherboot ISO image is %s", "/tmp/$nic.iso"))
 		} else { 
-			$in->ask_warn('',_("Something went wrong!"))
+			$in->ask_warn('',_("Something went wrong! - Is mkisofs installed?"))
 		}		
 	}
 }
@@ -1000,7 +1014,7 @@ sub disable_ts {
 	@buff = ();
 	$buff[0] = "Disabling Terminal Server...\n\n";
 	$buff[1] = "\tRestoring original /etc/dhcpd.conf...\n";
-	cp_af("/etc/dhcpd.conf.mdkTS", "/etc/dhcpd.conf");
+	cp_af("/etc/dhcpd.conf.mdkTS", "/etc/dhcpd.conf") if (-e "/etc/dhcpd.conf.mdkTS");
 	my $buff_index = toggle_chkconfig("off", "dhcpd", 2);
 	$buff[$buff_index] = "\tRestoring default /etc/exports...\n";
 	cp_af("/etc/exports.mdkTS", "/etc/exports");
@@ -1157,7 +1171,7 @@ sub deluser {
 			if ($user =~ /$username/) {
 				splice (@ts_users, $i, 1);
 				$user_deleted = 1;
-				break;
+				break();
 			}
 			$i++;
 		}			
