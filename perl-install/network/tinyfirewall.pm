@@ -1,8 +1,9 @@
-package tinyfirewall; # $Id$
+package network::tinyfirewall; # $Id$
 
 use diagnostics;
 use strict;
 
+use network::shorewall;
 use common;
 
 my @all_servers = 
@@ -99,21 +100,31 @@ sub default_from_pkgs {
 }
 
 sub get_ports {
+    my ($ports) = @_;
+    my $shorewall = network::shorewall::read() or return;
+    \$shorewall->{ports};
 }
 
 sub set_ports {
-    my ($ports) = @_;
-    print "set_ports $$ports\n";
+    my ($disabled, $ports) = @_;
+
+    my $shorewall = network::shorewall::read() || network::shorewall::default_interfaces() or die '';
+    $shorewall->{disabled} = $disabled;
+    $shorewall->{ports} = $$ports;
+
+    network::shorewall::write($shorewall);
 }
 
 sub get_conf {
-    my ($in, $ports) = @_;
+    my ($in, $disabled, $ports) = @_;
 
     my $possible_servers = default_from_pkgs($in);
     $_->{hide} = 0 foreach @$possible_servers;
 
-    if ($ports ||= get_ports()) {
-	from_ports($ports);
+    if ($ports) {
+	$disabled, from_ports($ports);
+    } elsif (my $shorewall = network::shorewall::read()) {
+	$shorewall->{disabled}, from_ports(\$shorewall->{ports});
     } else {
 	$in->ask_okcancel('', _("tinyfirewall configurator
 
@@ -121,12 +132,12 @@ This configures a personal firewall for this Mandrake Linux machine.
 For a powerful dedicated firewall solution, please look to the
 specialized MandrakeSecurity Firewall distribution."), 1) or return;
 
-	$possible_servers, '';
+	$disabled, $possible_servers, '';
     }
 }
 
 sub choose {
-    my ($in, $servers, $unlisted) = @_;
+    my ($in, $disabled, $servers, $unlisted) = @_;
 
     $_->{on} = 0 foreach @all_servers;
     $_->{on} = 1 foreach @$servers;
@@ -148,21 +159,22 @@ where port is between 1 and 65535.", $invalid_port));
 			},
 		   }},
 		  [ 
-		   (map { { text => $_->{name}, val => \$_->{on}, type => 'bool' } } @l),
-		   { label => _("Other ports"), val => \$unlisted, advanced => 1 }
+		   { text => _("Everything (no firewall)"), val => \$disabled, type => 'bool' },
+		   (map { { text => $_->{name}, val => \$_->{on}, type => 'bool', disabled => sub { $disabled } } } @l),
+		   { label => _("Other ports"), val => \$unlisted, advanced => 1, disabled => sub { $disabled } }
 		  ]) or return;
 
-    to_ports([ grep { $_->{on} } @l ], $unlisted);
+    $disabled, to_ports([ grep { $_->{on} } @l ], $unlisted);
 }
 
 sub main {
-    my ($in) = @_;
+    my ($in, $disabled) = @_;
 
-    my ($servers, $unlisted) = get_conf($in) or return;
+    ($disabled, my $servers, my $unlisted) = get_conf($in, $disabled) or return;
 
     $in->do_pkgs->ensure_is_installed('shorewall', '/sbin/shorewall', $::isInstall) or return;
 
-    my $ports = choose($in, $servers, $unlisted) or return;
+    ($disabled, my $ports) = choose($in, $disabled, $servers, $unlisted) or return;
 
-    set_ports($ports);
+    set_ports($disabled, $ports);
 }

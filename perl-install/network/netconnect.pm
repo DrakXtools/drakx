@@ -331,6 +331,11 @@ fi
     $netcnx->{type} =~ /adsl/ or system("/sbin/chkconfig --del adsl 2> /dev/null");
     save_conf($netcnx, $netc, $intf);
 
+    if ($::isInstall && $::o->{security} >= 3) {
+	require network::tinyfirewall;
+	network::tinyfirewall::main($in, $::o->{security} <= 3);
+    }
+    
 #-    if ($netc->{NET_DEVICE} and $netc->{NETWORKING} ne 'no' and $::isStandalone and $::expert) {
 #-	  exists $netc->{nb_cards} or do {
 #-	      any::load_category($in, 'network/main|usb', !$::expert, 1);
