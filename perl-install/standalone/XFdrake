@@ -141,7 +141,7 @@ sub ask_for_X_restart {
 
     $in->ask_okcancel('', N("Please relog into %s to activate the changes", ucfirst(lc $wm)), 1) or return;
 
-    fork and return;
+    fork() and return;
     any::ask_window_manager_to_logout($wm);
     
     open STDIN, "</dev/zero";
