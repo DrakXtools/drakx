@@ -62,7 +62,7 @@ enum return_type try_with_directory(char *directory, char *method_live, char *me
 		log_message("\"%s\" exists and is a directory, looking for iso files", directory);
 
 		for (file = list_directory(directory); *file; file++) {
-			char isofile[500], install_location[600];
+			char isofile[500];
 
 			if (strstr(*file, ".iso") != *file + strlen(*file) - 4)
 				/* file doesn't end in .iso, skipping */
@@ -77,18 +77,11 @@ enum return_type try_with_directory(char *directory, char *method_live, char *me
 				continue;
 			}
 
-			strcpy(install_location, IMAGE_LOCATION);
-
-			if (IS_RESCUE || ramdisk_possible())
-				strcat(install_location, get_ramdisk_realname()); /* RAMDISK install */
-			else
-				strcat(install_location, LIVE_LOCATION); /* LIVE install */
-
-			if (access(install_location, R_OK)) {
-				log_message("ISO image \"%s\" doesn't contain stage2 installer", isofile);
-			} else {
+			if (image_has_stage2()) {
 				log_message("stage2 installer found in ISO image \"%s\"", isofile);
 				stage2_isos[stage2_iso_number++] = strdup(*file);
+			} else {
+				log_message("ISO image \"%s\" doesn't contain stage2 installer", isofile);
 			}
 
 			umount(IMAGE_LOCATION);
