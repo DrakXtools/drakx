@@ -257,7 +257,7 @@ static void expert_third_party_modules(void)
 		return expert_third_party_modules();
 	}
 
-	rc = insmod_call(final_name, answers[0]);
+	rc = insmod_local_file(final_name, answers[0]);
 	umount(floppy_mount_location);
 
 	if (rc) {

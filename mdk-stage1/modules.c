@@ -132,6 +132,29 @@ static enum return_type ensure_additional_modules_available(void)
                 return RETURN_OK;
 }
 
+int insmod_local_file(char * path, char * options)
+{
+        if (kernel_version() <= 4) {
+                return insmod_call(path, options);
+        } else {
+                void *file;
+                unsigned long len;
+                int rc;
+                
+                file = grab_file(path, &len);
+                
+                if (!file) {
+                        log_perror(asprintf_("\terror reading %s", path));
+                        return -1;
+                }
+                
+                rc = init_module(file, len, options ? options : "");
+                if (rc)
+                        log_message("\terror: %s", moderror(errno));
+                return rc;
+        }
+}
+
 /* unarchive and insmod given module
  * WARNING: module must not contain the trailing ".o"
  */
@@ -164,25 +187,11 @@ static enum insmod_return insmod_archived_file(const char * mod_name, char * opt
 		return INSMOD_FAILED;
 
 	strcat(final_name, module_name);
-        if (kernel_version() <= 4) {
-                rc = insmod_call(final_name, options);
-        } else {
-                void *file;
-                unsigned long len;
 
-                file = grab_file(final_name, &len);
-
-                if (!file) {
-                        log_perror(asprintf_("\terror reading %s", final_name));
-                        return INSMOD_FAILED;
-                }
-
-                rc = init_module(file, len, options ? options : "");
-                if (rc)
-                        log_message("\terror %s", moderror(errno));
-        }
+        rc = insmod_local_file(final_name, options);
 
 	unlink(final_name); /* sucking no space left on device */
+
 	if (rc) {
 		log_message("\tfailed");
 		return INSMOD_FAILED;
@@ -572,7 +581,7 @@ void update_modules(void)
 		while (entry && *entry) {
 			if (!strncmp(*entry, module, strlen(module)) && (*entry)[strlen(module)] == '.') {
 				sprintf(final_name, "%s/%s", floppy_mount_location, *entry);
-				if (insmod_call(final_name, options)) {
+				if (insmod_local_file(final_name, options)) {
 					log_message("\t%s (floppy): failed", *entry);
 					stg1_error_message("Insmod %s (floppy) failed.", *entry);
 				}
