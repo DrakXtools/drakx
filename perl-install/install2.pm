@@ -272,10 +272,9 @@ sub doPartitionDisks {
 
 sub formatPartitions {
     $o->{steps}{choosePackages}{done} = 0;
-    unless ($o->{isUpgrade}) {
-	$o->choosePartitionsToFormat($o->{fstab});
-	$o->formatMountPartitions($o->{fstab}) unless $::testing;
-    }
+    $o->choosePartitionsToFormat($o->{fstab}) unless $o->{isUpgrade};
+    $o->formatMountPartitions($o->{fstab}) unless $::testing;
+
     mkdir "$o->{prefix}/$_", 0755 foreach 
       qw(dev etc etc/profile.d etc/sysconfig etc/sysconfig/console etc/sysconfig/network-scripts
 	home mnt tmp var var/tmp var/lib var/lib/rpm var/lib/urpmi);
@@ -608,7 +607,6 @@ sub main {
 	$o->{partitioning}{use_existing_root} = 1;
 	$o->{partitioning}{auto_allocate} = 1;
 	$o->{compssListLevel} = 50;
-	$o->{doNotFormatRootByDefault} = 1;
 	push @auto, 'selectInstallClass', 'selectMouse', 'doPartitionDisks', 'choosePackages', 'configureTimezone', 'exitInstall';
     }
 
