@@ -245,7 +245,44 @@ sub build_cd_fct {
 sub build_floppy_fct {
 }
 
+sub status_report {
+    my $table;
+    my $pbar =   new Gtk::ProgressBar;
+    my $pbar1 =  new Gtk::ProgressBar;
+    my $pbar2 =  new Gtk::ProgressBar;
+    my $pbar3 =  new Gtk::ProgressBar;
+    gtkpack($up_box,
+	    $table = create_packtable({ col_spacings => 10, row_spacings => 50},
+   ["",""], 
+   [_("Backup system files"), $pbar, $pbar->{label} = new Gtk::Label(' ' )],
+   [_("Backup user files"), $pbar1,$pbar1->{label} = new Gtk::Label(' ' ) ],
+   [_("Backup other files"), $pbar2, $pbar2->{label} = new Gtk::Label(' ' ) ],
+   [_("Post Install"), $pbar3,$pbar3->{label} = new Gtk::Label(' ' ) ],
+				      ),
+	    );
+    $central_widget = \$table;
+    $up_box->show_all();
+    Gtk->main_iteration while Gtk->events_pending;
+
+}
+
 sub build_backup_files {
+    if ($where_hd) {
+	$backup_sys and system("tar cvfz $save_path/backup_sys.tar.gz @sys_files");
+	@list_other and system("tar cvfz $save_path/backup_other.tar.gz @list_other");
+	if ($backup_user) {
+	    foreach (@user_list) {
+		system("tar cvfz $save_path/backup_user_$_.tar.gz /home/$_");
+	    }
+	}
+    }
+    if ($where_net) {
+	
+    }
+    if ($where_cd) {
+	
+    }
+
 
 }
 
@@ -771,12 +808,18 @@ sub restore {
 							   $retore_box3->destroy();
 						       }),
 						       0, gtksignal_connect(new Gtk::Button(_("Custom Restore")), clicked => sub {
-							   $retore_box3->destroy();  
+							   $retore_box3->destroy();   
 							   gtkpack($retore_box2,
 								   $retore_box3 = gtkpack_(new Gtk::VBox(0,10),
-											   new Gtk::VBox(0,10),
-											   new Gtk::Button("toto"),),
-								   ),					     
+								   1,  new Gtk::VBox(0,10),
+							           0, my $check_restore_sys = new Gtk::CheckButton(_("Restore system")),
+							           0, my $check_restore_user = new Gtk::CheckButton(_("Restore Users")),
+							           0, my $check_restore_other = new Gtk::CheckButton(_("Restore Other")),
+								   1, new Gtk::VBox(0,10),
+								   0, gtkpack_(new Gtk::HBox(0,10),
+									    0, new Gtk::Button(_("Custom Restore")),
+									    ),
+								   ),),					     
 						       }),
 							     ),
 						 1, new Gtk::HBox(0,10),
@@ -856,7 +899,9 @@ sub interactive_mode_my {
 						       0, new Gtk::Pixmap($pix_r_map, $pix_r_mask),
 						       1, gtkpack_(new Gtk::VBox(0, 1),	
 								   1, gtksignal_connect(new Gtk::Button(_(" Build Backup ")), 
-											clicked => sub {  Gtk->main_quit() }),
+											clicked => sub {# ${$central_widget}->destroy();
+													# status_report();
+													 build_backup_files(); }),
 								   1, gtksignal_connect(new Gtk::Button(_("     Restore      ")), 
 										  clicked => sub {${$central_widget}->destroy(); restore();}),
 								   ),
