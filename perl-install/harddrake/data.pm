@@ -267,20 +267,6 @@ our @tree =
      },
 
      {
-      class => "MOUSE",
-      string => N("Mouse"),
-      icon => "hw_mouse.png",
-      configurator => "$sbindir/mousedrake",
-      detector => sub { 
-          require mouse;
-          require modules;
-          mouse::detect($modules_conf);
-      },
-      checked_on_boot => 1,
-      automatic => 1,
-     },
-
-     {
       class => "JOYSTICK",
       string => N("Joystick"),
       icon => "joystick.png",
@@ -373,6 +359,31 @@ our @tree =
       configurator => "$sbindir/drakups",
       detector => sub { detect_devices::getUPS() },
       checked_on_boot => 0,
+     },
+     
+     {
+      class => "KEYBOARD",
+      string => N("Keyboard"),
+      icon => "usb.png",
+      configurator => "$sbindir/keyboardrake",
+      detector => sub {
+          f(grep { $_->{description} =~ /Keyboard/i } @devices),
+          grep { $_->{bus} ne 'usb' && $_->{driver} eq 'kbd' } detect_devices::getInputDevices();
+      },
+      checked_on_boot => 0,
+     },
+
+     {
+      class => "MOUSE",
+      string => N("Mouse"),
+      icon => "hw_mouse.png",
+      configurator => "$sbindir/mousedrake",
+      detector => sub {
+          f(grep { $_->{driver} =~ /^Mouse:/ } @devices),
+            grep { $_->{bus} ne 'usb' && $_->{driver} =~ /mouse/ } detect_devices::getInputDevices();
+      },
+      checked_on_boot => 1,
+      automatic => 1,
      },
      
      {
