@@ -233,7 +233,7 @@ sub ask_standalone_gtk {
                       )) } (N_("Start"), N_("Stop"))
 		]
 	    }
-            @$l)), 500, 400),
+            @$l), [ $::isEmbedded ? 'automatic' : 'never', 'automatic' ]), -1, $::isEmbedded ? -1 : 400),
             0, gtkpack(gtkset_border_width(Gtk2::HBox->new(0,0),5), $W->create_okcancel)
             ))
 	  );
