@@ -153,7 +153,7 @@ sub do_switch {
         rooted("service alsa start") unless $blacklisted;
         rooted("/sbin/chkconfig --add alsa");
         load($new_driver); # service alsa is buggy
-    } else { run_program::run("/sbin/chkconfig --del alsa") }
+    } else { rooted("/sbin/chkconfig --del alsa") }
     log::explanations("loading new $new_driver\n");
     rooted("/sbin/chkconfig --add sound"); # just in case ...
     rooted("service sound start") unless $blacklisted;
