@@ -294,7 +294,7 @@ sub read {
     my %keyf = getVarsFromSh("$prefix/etc/sysconfig/keyboard");
     my $keytable = $keyf{KEYTABLE};
     keyboard2kmap($_) eq $keytable and return $_ foreach keys %keyboards;
-    $keyboards{$keytable} ? $keytable : 'us_intl';
+    $keyboards{$keytable} && $keytable; #- keep track of unknown keyboard.
 }
 
 #-######################################################################################
