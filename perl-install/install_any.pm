@@ -652,7 +652,7 @@ push @graphical_steps, 'doPartitionDisks', 'choosePartitionsToFormat', 'formatMo
 
 
 sub g_default_packages {
-    my ($o) = @_;
+    my ($o, $quiet) = @_;
 
     my $floppy = detect_devices::floppy();
 
@@ -671,7 +671,7 @@ sub g_default_packages {
 	   Data::Dumper->Dump([ { default_packages => pkgs::selected_leaves($o->{packages}) } ], ['$o']), "\0");
     fs::umount("/floppy");
 
-    $o->ask_warn('', _("To use this saved packages selection, boot installation with ``linux defcfg=floppy''"));
+    $quiet or $o->ask_warn('', _("To use this saved packages selection, boot installation with ``linux defcfg=floppy''"));
 }
 
 sub loadO {
