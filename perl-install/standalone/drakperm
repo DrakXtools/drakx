@@ -287,7 +287,14 @@ sub row_setting_dialog {
                     });
     my %perms;
     $ok->signal_connect(clicked => sub {
-                            $iter ||= $treeModel->append; # create new item when adding a new one
+                            if (!$iter) {  # create new item when adding a new one
+                                $iter = $treeModel->append;
+                                my $first_iter = $treeModel->get_iter_first;
+                                if ($first_iter) {
+                                    $treeModel->move_after($iter, $first_iter);
+                                    $treeModel->swap($iter, $first_iter);
+                                }
+                            }
                             $treeModel->set($iter, 1 => $file->get_text);
                             if ($usr_check->get_active) {
                                 $treeModel->set($iter, 2 => 'current');
