@@ -1,3 +1,64 @@
+2001/08/23  dam's  <damien@mandrakesoft.com>
+
+	* network/netconnect.pm: at_boot connection,resolvconf in profiles
+
+	* standalone/draksec: addedlibsafe option
+
+	* network/adsl.pm: restart network after having tested adsl. experimental
+
+2001/08/23  François Pons  <fpons@mandrakesoft.com>
+
+	* install_steps_gtk.pm: removed unusefull greping when building package
+	tree.
+
+2001/08/23  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* share/rpmsrate: work on GAMES section
+
+2001/08/23  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/lv.po: updated Latvian file
+
+2001/08/23  Pixel  <pixel@mandrakesoft.com>
+
+	* install_any.pm (cond_umount_hdimage): do not unmount /tmp/hdimage if not
+	using ramdisk
+	(disable_user_view): damned kdmrc moved
+
+	* diskdrake_interactive.pm: cancel at startup will now exit
+	ask wether to save fstab
+	(part_possible_actions): have "Mount point" first to please fpons
+
+	* fs.pm: keep the freq&passno of /etc/fstab
+
+	* tools/i386/netboot/menu.lst.example,
+	tools/i386/netboot/make_boot_network,
+	tools/i386/netboot/automatic.para.default: as we now have
+	menu.lst.example, i remove automatic.para for more flexibility
+
+	* lang.pm: fix locale support when usingRamdisk
+
+2001/08/22  anoncvs
+
+	* share/po/zh_CN.GB2312.po: * Wed Aug 22 2001 DU Xiaoming
+	<dxiaoming@mandrakesoft.com>
+	Updated chinese (simplied) translation.
+
+2001/08/22  Pixel  <pixel@mandrakesoft.com>
+
+	* share/gen_locales.sh, share/locales-skeleton.tar.bz2: fix ru KOI8-R
+
+	* network/nfs.pm: pleac perl_checker
+
+	* interactive_gtk.pm: more intelligent setting back the selected value in
+	the clist and ctree
+	(done already for entry)
+	  - fix entries editing causing the cursor to go to the end of line
+	  - select the text
+
+	* c/stuff.xs.pm, install_steps.pm, pkgs.pm: do init_db inside pkg_inside
+	otherwise LOG is closed and rpmlib tries to write in it and ...
+
 2001/08/22  anoncvs
 
 	* share/po/zh_CN.GB2312.po: * Wed Aug 22 2001 DU Xiaoming
