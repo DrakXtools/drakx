@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 9.2
-Release: 0.30mdk
+Release: 0.31mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -314,11 +314,10 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
-* Tue Aug 19 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.2-0.30mdk
+* Tue Aug 19 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.2-0.31mdk
 - drakbackup: user definable crontab entry (stew)
 
 - drakconnect:
-  o allow hostname change in mcc (poulpy)
   o fix up/down interface detection (poulpy)
   o fix some more previous buttons in drakconnect wizard mode
   o fix crash on interface enabling/disabling
@@ -349,6 +348,11 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 
 - fix misc issues with shadow passwords and package managment
   (francois/pixel)
+* Sun Aug 17 2003 Damien Chaumette <dchaumette@mandrakesoft.com> 9.2-0.30mdk
+
+- drakconnect mcc: 
+  - allow hostname change
+  - dhcp to static fixes
 
 * Tue Aug 12 2003 Guillaume Cottenceau <gc@mandrakesoft.com> 9.2-0.29mdk
 - drakconnect: fix message (#4564)
