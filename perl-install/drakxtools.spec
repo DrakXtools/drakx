@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10.2
-Release: 0.19mdk
+Release: 0.20mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -248,7 +248,7 @@ cat > $RPM_BUILD_ROOT%_sysconfdir/X11/xinit.d/net_applet <<EOF
 #!/bin/sh
 DESKTOP=\$1
 case \$DESKTOP in
-   KDE|GNOME|IceWM) exec /usr/bin/net_applet;;
+   KDE|GNOME|IceWM|Fluxbox|XFce4) exec /usr/bin/net_applet;;
 esac
 EOF
 
@@ -357,6 +357,13 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Tue Feb  8 2005 Olivier Blin <oblin@mandrakesoft.com> 10.2-0.20mdk
+- drakconnect:
+  o basic ndiswrapper support
+  o add default connection methods for some DSL ISP
+- drakproxy: gnome proxy support
+- net_applet: start automatically in fluxbox and XFce4 too
+
 * Fri Feb  4 2005 Olivier Blin <blino@mandrake.org> 10.2-0.19mdk
 - drakconnect: add bpalogin support for cable connections
 
