@@ -168,7 +168,7 @@ sub write_interface_conf {
 
     $intf->{BOOTPROTO} =~ s/dhcp.*/dhcp/;
 
-    local $intf->{WIRELESS_ENC_KEY} = qq("$intf->{WIRELESS_ENC_KEY}") if $intf->{WIRELESS_ENC_KEY} !~ /"/;
+    local $intf->{WIRELESS_ENC_KEY} = network::tools::convert_wep_key_for_iwconfig($intf->{WIRELESS_ENC_KEY});
     setVarsInSh($file, $intf, qw(DEVICE BOOTPROTO IPADDR NETMASK NETWORK BROADCAST ONBOOT HWADDR MII_NOT_SUPPORTED), 
                 qw(WIRELESS_MODE WIRELESS_ESSID WIRELESS_NWID WIRELESS_FREQ WIRELESS_SENS WIRELESS_RATE WIRELESS_ENC_KEY WIRELESS_RTS WIRELESS_FRAG WIRELESS_IWCONFIG WIRELESS_IWSPY WIRELESS_IWPRIV),
                 if_($intf->{BOOTPROTO} eq "dhcp", qw(DHCP_HOSTNAME NEEDHOSTNAME))
@@ -344,6 +344,7 @@ sub read_all_conf {
 	if (/^ifcfg-([A-Za-z0-9.:]+)$/ && $1 ne 'lo') {
 	    my $intf = findIntf($intf, $1);
 	    add2hash($intf, { getVarsFromSh("$::prefix/etc/sysconfig/network-scripts/$_") });
+            $intf->{WIRELESS_ENC_KEY} = network::tools::get_wep_key_from_iwconfig($intf->{WIRELESS_ENC_KEY});
 	}
     }
     $netcnx->{type} or probe_netcnx_type($::prefix, $netc, $intf, $netcnx);

@@ -189,4 +189,21 @@ sub reread_net_conf {
     network::network::probe_netcnx_type('', $netc, $intf, $netcnx);
 }
 
+sub convert_wep_key_for_iwconfig {
+    #- 5 or 13 characters, consider the key as ASCII and prepend "s:"
+    #- else consider the key as hexadecimal, do not strip dashes 
+    #- always quote the key as string
+    my ($key) = @_;
+    unquotify \$key;
+    member(length($key), (5, 13)) ? qq("s:$key") : qq("$key");
+}
+
+sub get_wep_key_from_iwconfig {
+    #- strip "s:" if the key is 5 or 13 characters (ASCII)
+    #- else the key as hexadecimal, do not modify
+    my ($key) = @_;
+    $key =~ s/^s:// if member(length($key), (7,15));
+    $key;
+}
+
 1;
