@@ -548,10 +548,10 @@ my %IM_config =
             },
    gcin => {
              GTK_IM_MODULE => 'gcin',
-             XIM => 'xcin',
+             XIM => 'gcin',
              XIM_PROGRAM => 'gcin',
-             XMODIFIERS => '@im=xcin',
-   			},
+             XMODIFIERS => '@im=gcin',
+            },
    'im-ja' => {
                GTK_IM_MODULE => 'im-ja',
                XIM => 'im-ja-xim-server',
