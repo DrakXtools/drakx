@@ -515,6 +515,7 @@ killall pppd
                         network::modem::ppp_configure($in, $modem);
                         $netc->{$_} = 'ppp0' foreach 'NET_DEVICE', 'NET_INTERFACE';
                         $handle_multiple_cnx->();
+                        $in->do_pkgs->install('kdenetwork-kppp');
                     },
                    },
 
