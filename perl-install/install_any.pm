@@ -338,7 +338,6 @@ sub setPackages {
 	push @{$o->{default_packages}}, "kernel-enterprise" if !$::oem && (availableRamMB() > 800) && (arch() !~ /ia64/);
 	push @{$o->{default_packages}}, "kernel22" if !$::oem && c::kernel_version() =~ /^\Q2.2/;
 	push @{$o->{default_packages}}, "kernel-smp" if detect_devices::hasSMP();
-	push @{$o->{default_packages}}, "pcmcia-cs" if $o->{pcmcia};
 	push @{$o->{default_packages}}, "raidtools" if !is_empty_array_ref($o->{all_hds}{raids});
 	push @{$o->{default_packages}}, "lvm" if !is_empty_array_ref($o->{all_hds}{lvms});
 	push @{$o->{default_packages}}, "usbd", "hotplug" if modules::get_alias("usb-interface");
