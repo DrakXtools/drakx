@@ -1263,12 +1263,8 @@ sub configureX {
     install_steps::configureXBefore($o);
     symlink "$o->{prefix}/etc/gtk", "/etc/gtk";
 
-    my $options = { 
-	allowFB => $o->{allowFB},
-    };
-
     require Xconfig::main;
-    if (my $raw_X = Xconfig::main::configure_everything_or_configure_chooser($o, $options, !$expert, $o->{keyboard}, $o->{mouse})) {
+    if (my $raw_X = Xconfig::main::configure_everything_or_configure_chooser($o, install_any::X_options_from_o($o), !$expert, $o->{keyboard}, $o->{mouse})) {
 	$o->{raw_X} = $raw_X;
 	install_steps::configureXAfter($o);
     }

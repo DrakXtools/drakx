@@ -274,7 +274,7 @@ sub configure {
 }
 
 sub install_server {
-    my ($card, $_options, $do_pkgs) = @_;
+    my ($card, $options, $do_pkgs) = @_;
 
     my $prog = "$::prefix/usr/X11R6/bin/Xorg";
 
@@ -287,6 +287,10 @@ sub install_server {
 	push @packages, 'Glide_V5' if $card->{card_name} eq 'Voodoo5 (generic)';
 	push @packages, 'Glide_V3-DRI' if member($card->{card_name}, 'Voodoo3 (generic)', 'Voodoo Banshee (generic)');
 	push @packages, 'xorg-x11-glide-module' if $card->{card_name} =~ /Voodoo/;
+    }
+
+    if ($options->{freeDriver}) {
+	delete $card->{Driver2};
     }
 
     my %proprietary_Driver2 = (

@@ -1140,6 +1140,14 @@ sub log_sizes {
 	   formatXiB(sum(run_program::rooted_get_stdout($o->{prefix}, 'rpm', '-qa', '--queryformat', '%{size}\n')))) if -x "$o->{prefix}/bin/rpm";
 }
 
+sub X_options_from_o {
+    my ($o) = @_;
+    { 
+	freeDriver => $o->{freeDriver},
+	allowFB => $o->{allowFB},
+    };
+}
+
 sub copy_advertising {
     my ($o) = @_;
 

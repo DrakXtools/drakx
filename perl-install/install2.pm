@@ -387,6 +387,7 @@ sub main {
 	    vga       => sub { $o->{vga} = $v },
 	    step      => sub { $o->{steps}{first} = $v },
 	    meta_class => sub { $o->{meta_class} = $v },
+	    freeDriver => sub { $o->{freeDriver} = $v },
 	    readonly  => sub { $o->{partitioning}{readonly} = $v ne "0" },
 	    display   => sub { $o->{display} = $v },
 	    askdisplay => sub { print "Please enter the X11 display to perform the install on ? "; $o->{display} = chomp_(scalar(<STDIN>)) },
