@@ -6,7 +6,7 @@ use standalone;     #- warning, standalone must be loaded very first, for 'expla
 
 use common;
 use interactive;
-use mouse;
+use any;
 use c;
 
 local $_ = join '', @ARGV;
@@ -21,10 +21,7 @@ my $in = 'interactive'->vnew('su', 'security');
 begin:
 $::isEmbedded and kill USR2, $::CCPID;
 
-
-my $security =
-  cat_("/etc/profile.d/msec.sh") =~ /export SECURE_LEVEL=(\d+)/ ? $1 :
-  $ENV{SECURE_LEVEL} || 2;
+my $security = any::get_secure_level('');
 my $libsafe = any::config_libsafe('');
 
 if (any::choose_security_level($in, \$security, \$libsafe)) {

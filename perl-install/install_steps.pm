@@ -918,8 +918,8 @@ sub miscellaneousBefore {
     my ($o) = @_;
 
     my %s = getVarsFromSh("$o->{prefix}/etc/sysconfig/system");
-    $o->{miscellaneous}{HDPARM} ||= $s{HDPARM} if exists $s{HDPARM};
-    $o->{security} ||= $s{SECURITY} if exists $s{SECURITY};
+    $o->{miscellaneous}{HDPARM} = $s{HDPARM} if exists $s{HDPARM};
+    $o->{security} = any::get_secure_level($o->{prefix}) || $o->{security};
 
     add2hash_($o->{miscellaneous} ||= {}, { numlock => !detect_devices::isLaptop() });
 }
