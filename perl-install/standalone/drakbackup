@@ -4613,7 +4613,7 @@ sub interactive_mode {
 	   $my_win->{rwindow}->set_position(1);
 	   $my_win->{rwindow}->set_title(N("Drakbackup"));
     }
-    $my_win->{rwindow}->signal_connect (delete_event => sub { Gtk->exit(0) });
+    $my_win->{rwindow}->signal_connect (delete_event => sub { my_gtk->exit(0) });
     my ($pix_u_map, $pix_u_mask) = gtkcreate_png("drakbackup.540x57");
     read_conf_file();     
 

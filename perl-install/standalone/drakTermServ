@@ -37,7 +37,6 @@
 #	Michael Brown <mbrown@fensystems.co.uk>
 #
 
-use Gtk;
 use lib qw(/usr/lib/libDrakX);
 
 use standalone;     #- warning, standalone must be loaded very first, for 'explanations'
@@ -201,13 +200,13 @@ x:5:respawn:/usr/X11R6/bin/X -ac -query $server_ip\n";
 
 sub cursor_wait {
 	# turn the cursor to a watch
-	$window1->window->set_cursor(new Gtk::Gdk::Cursor(150));	
+	$window1->{rwindow}->window->set_cursor(new Gtk::Gdk::Cursor(150));	
 	Gtk->main_iteration while Gtk->events_pending;
 }
 
 sub cursor_norm {
 	# restore normal cursor
-	$window1->window->set_cursor(new Gtk::Gdk::Cursor(68));
+	$window1->{rwindow}->window->set_cursor(new Gtk::Gdk::Cursor(68));
 	Gtk->main_iteration while Gtk->events_pending;
 }
 
@@ -231,16 +230,17 @@ sub display_error {
 sub interactive_mode {
     my $font_sel;
 #    $interactive = 1;
-    init Gtk;
-    $window1 = $::isEmbedded ? new Gtk::Plug ($::XID) : new Gtk::Window -toplevel;
-    $window1->signal_connect (delete_event => sub { Gtk->exit(0) });
-    $window1->set_position(1);
-    $window1->set_title(N("Mandrake Terminal Server Configuration"));
-    $window1->set_border_width(5);
+    $window1 = my_gtk->new('drakTermServ');
+    $window1->{rwindow}->signal_connect (delete_event => sub { my_gtk->exit(0) });
+    unless ($::isEmbedded) {
+        $window1->{rwindow}->set_position(1);
+        $window1->{rwindow}->set_title(N("Mandrake Terminal Server Configuration"));
+    }
+    $window1->{rwindow}->set_border_width(5);
     my ($pix_user_map, $pix_user_mask) = gtkcreate_png("ic82-network-40");    
     my ($pix_u_map, $pix_u_mask) = gtkcreate_png("drakTS.620x57");
 
-    gtkadd($window1,
+    gtkadd($window1->{window},
 	   gtkpack_(new Gtk::VBox(0,2),
 		    if_(!$::isEmbedded, 0,  new Gtk::Pixmap($pix_u_map, $pix_u_mask)),
 		    1, gtkpack_(new Gtk::HBox(0,2),
@@ -308,14 +308,12 @@ sub interactive_mode {
 		),
 	);
     $central_widget = \$main_box;
-    $window1->show_all;
-    $window1->realize;
-    $window1->show_all();    
+    $window1->{rwindow}->show_all;
+    $window1->{rwindow}->realize;
+    $window1->{rwindow}->show_all();    
 
-    Gtk->main_iteration while Gtk->events_pending;
-    $::isEmbedded and kill 'USR2', $::CCPID;
-    Gtk->main;
-    Gtk->exit(0);
+    $window1->main;
+    my_gtk->exit(0);
 }
 
 sub about {

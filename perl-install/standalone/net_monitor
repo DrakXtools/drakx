@@ -18,7 +18,6 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 
-use Gtk;
 use lib qw(/usr/lib/libDrakX);
 
 use strict;
@@ -49,7 +48,7 @@ my $in = 'interactive'->vnew('su', 'default');
 
 
 my $window1 = my_gtk->new('net_monitor');
-$window1->{rwindow}->signal_connect(delete_event => sub { Gtk->exit(0) });
+$window1->{rwindow}->signal_connect(delete_event => sub { my_gtk->exit(0) });
 $window1->{rwindow}->set_position(1);
 $window1->{rwindow}->set_title(N("Network Monitoring"));
 $window1->{rwindow}->set_policy(1, 1, 1);
@@ -116,7 +115,7 @@ gtkadd($window1->{rwindow},
 								  ? system('/usr/sbin/logdrake --file=/var/log/messages &')
 								    : system('/usr/X11R6/bin/xvt -e "tail -f /var/log/messages " &')
 						 }),
-							      gtksignal_connect(my $button_close = new Gtk::Button(N("Close")), clicked => sub { Gtk->exit(0) }),
+							      gtksignal_connect(my $button_close = new Gtk::Button(N("Close")), clicked => sub { my_gtk->exit(0) }),
 							     )
 						  )
 				       )

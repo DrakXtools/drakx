@@ -516,21 +516,23 @@ sub quit_global {
 }
 
 sub pur_gtk_mode {
-    require Gtk;
-    init Gtk;
+    require my_gtk;
+    import my_gtk qw(:helpers :wrappers);
     my $setup_state = $shorewall && $shorewall->{masquerade} ? 
                          ($shorewall->{disabled} ? 
 			  N("The setup has already been done, but it's currently disabled.") :
 			  N("The setup has already been done, and it's currently enabled.")) :
 			 N("No Internet Connection Sharing has ever been configured.");
     
-    my $window1 = $::isEmbedded ? new Gtk::Plug ($::XID) : new Gtk::Window -toplevel;
-    $window1->signal_connect(delete_event => sub { Gtk->exit(0) });
-    $window1->set_position(1);
-    $window1->set_title(N("Internet connection sharing configuration"));
-    $window1->border_width(10);
+    my $window1 = my_gtk->new('drakgw');
+    $window1->{rwindow}->signal_connect(delete_event => sub { my_gtk->exit(0) });
+    unless ($::isEmbedded) {
+        $window1->{rwindow}->set_position(1);
+        $window1->{rwindow}->set_title(N("Internet connection sharing configuration"));
+    }
+    $window1->{rwindow}->border_width(10);
     my $vbox1 = new Gtk::VBox(0,0);
-    $window1->add($vbox1);
+    $window1->{rwindow}->add($vbox1);
     my $hbox1 = new Gtk::HBox(0,0);
     $vbox1->pack_start($hbox1,1,1,0);
     my $label1 = new Gtk::Label(
@@ -557,10 +559,8 @@ Click on Configure to launch the setup wizard.", $setup_state));
 					 kill('USR1', $::CCPID);
 				     });
     $bbox1->add($button_cancel);
-    $window1->show_all();
-    Gtk->main_iteration while Gtk->events_pending;
-    $::isEmbedded and kill 'USR2', $::CCPID;
-    Gtk->main;
-    Gtk->exit(0);
+    $window1->{rwindow}->show_all();
+    $window1->main;
+    my_gtk->exit(0);
     
 }
