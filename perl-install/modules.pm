@@ -621,14 +621,10 @@ sub read_stage1_conf {
     mergein_conf($_[0]);
 
     if (arch() =~ /sparc/) {
-	$conf{parport_lowlevel}{alias} ||= "parport_ax";
-	$conf{plip}{"pre-install"} ||= "modprobe parport_ax ; echo 7 > /proc/parport/0/irq"; #- TOCHECK
     } elsif (arch() =~ /ppc/) {
-    $conf{pcmcia_core}{"pre-install"} ||= "CARDMGR_OPTS=-f /etc/rc.d/init.d/pcmcia start";    	
+	$conf{pcmcia_core}{"pre-install"} ||= "CARDMGR_OPTS=-f /etc/rc.d/init.d/pcmcia start";    	
     } else {
-	$conf{parport_lowlevel}{alias} ||= "parport_pc";
 	$conf{pcmcia_core}{"pre-install"} ||= "CARDMGR_OPTS=-f /etc/rc.d/init.d/pcmcia start";
-	$conf{plip}{"pre-install"} ||= "modprobe parport_pc ; echo 7 > /proc/parport/0/irq";
     }
 }
 
