@@ -152,7 +152,7 @@ sub doPartitionDisksAfter {
 
     # do not use devfs with root software raid
     foreach ($o->{bootloader}{perImageAppend}) {
-	$_ .= ' devfs=' . (isRAID(fsedit::get_root($o->{fstab})) ? 'nomount' : 'mount') if !/devfs=/;
+	$_ .= ' devfs=mount' if !/devfs=/;
     }
     
     if (arch() =~ /ppc/ && detect_devices::get_mac_generation =~ /NewWorld/) {
