@@ -278,7 +278,7 @@ You can add some more or change the existing ones."),
   if_(arch !~ /ppc|ia64/,
 { label => _("Video mode"), val => \$e->{vga}, list => [ keys %bootloader::vga_modes ], format => sub { $bootloader::vga_modes{$_[0]} }, not_edit => !$::expert },
 ),
-{ label => _("Initrd"), val => \$e->{initrd}, list => [ map { s/$prefix//; $_ } glob_("$prefix/boot/initrd*") ] },
+{ label => _("Initrd"), val => \$e->{initrd}, list => [ map { s/$prefix//; $_ } glob_("$prefix/boot/initrd*") ], not_edit => 0 },
 { label => _("Read-write"), val => \$e->{'read-write'}, type => 'bool' }
 	    );
 	    @l = @l[0..2] unless $::expert;
