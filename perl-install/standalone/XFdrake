@@ -93,7 +93,7 @@ my $allowNVIDIA_rpms;
 }
 
 $::isEmbedded and kill USR2, $::CCPID;
-Xconfigurator::main('', $i, $in, $in->do_pkgs, 
+Xconfigurator::main($i, $in, $in->do_pkgs, 
 		    { allowFB          => $::expert,
 		      allowNVIDIA_rpms => $allowNVIDIA_rpms });
 !$::isEmbedded and $in->exit(0);
