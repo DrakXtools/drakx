@@ -3,8 +3,8 @@ GRAPHICAL_DESKTOP
   4 icewm
   3 Epplets WMRack WindowMaker blackbox enlightenment ethemes gtk-themes icepref
     wmakerconf xlockmore
-  2 AfterStep AfterStep-APPS wmnet
-  1 fvwm fvwm2 lesstif-mwm xbanner
+  2 wmnet
+  1 lesstif-mwm xbanner
 
 GNOME
   4 gnome-tiles gnome-users-guide gdm gmc gnome-applets
@@ -27,7 +27,8 @@ VIDEO
 
 OFFICE
   5 LOCALES"en" staroffice-en
-  4 abisuite cbb gaddr ical lyx xpdf
+  4 !KDE !GNOME abisuite 
+  4 cbb gaddr ical lyx xpdf
   3 wv 
   2 units
   GNOME
@@ -48,12 +49,6 @@ SOUND
     xmms-kjofol-skins xmms-mikmod xmms-more-vis-plugins
   3 GNOME gnome-audio-extra 
 
-BOOKS
-  5 lpg
-  4 faq nag
-  3 lame
-  2 sag vimguide
-
 ACCESSIBILITY
   2 gtkeyboard
 
@@ -69,7 +64,7 @@ PUBLISHING
   5 LPR rhs-printfilters
 
 SHELLS
-  4 bash-doc zsh zsh-doc
+  3 bash-doc zsh zsh-doc
   2 eshell pdksh tcsh
   1 bash1
 
@@ -82,9 +77,9 @@ SCIENCES
 
 EDITORS
   5 hexedit vim-enhanced
-  4 emacs-X11 nedit
+  4 emacs-X11
   3 GXedit emacs-leim jed-xjed xemacs xemacs-extras xemacs-info yudit
-  2 cooledit emacs-tramp joe
+  2 nedit cooledit emacs-tramp joe
   1 auctex emacs-el jed xemacs-el emacs-nox
   GNOME
     4 gedit
@@ -112,8 +107,7 @@ TERMINALS
 
 NETWORKING_CHAT
   CLIENT
-    4 ytalk
-    3 talk
+    3 talk ytalk
     2 GNOME gabber gaim
   SERVER
     3 talk-server
@@ -146,15 +140,15 @@ NETWORKING_MAIL
   CLIENT
     5 fetchmail mailx metamail
     4 faces
-    3 exmh pine urlview xmailbox
+    3 urlview xmailbox
     2 FaxMail comsat elm faces-xface
-    1 mutt fetchmail-daemon fetchmailconf
+    1 exmh mutt fetchmail-daemon fetchmailconf
 
 NETWORKING_NEWS
   CLIENT
-    3 slrn-pull tin trn xrn
+    3 slrn tin trn xrn
     2 GNOME pan
-    1 slrn
+    1 slrn-pull
   SERVER
     5 inn 
 
@@ -302,7 +296,7 @@ WEB_SERVER
 
 SERVER
   5 nfs-utils
-  3 inn intimed mcserv nscd tftp tftp-server anonftp dhcp gated imap pidentd
+  3 intimed mcserv nscd tftp tftp-server anonftp dhcp gated imap pidentd
     postfix rdate routed samba wu-ftpd bind bootparamd caching-nameserver
     cleanfeed timed ucd-snmp xntp3 leafnode rsh-server squid sympa vnc-server
     am-utils cvsweb finger-server heartbeat jabber mars-nwe openssh-server
