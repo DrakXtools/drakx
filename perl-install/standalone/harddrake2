@@ -120,9 +120,9 @@ my @menu_items =
      {   path => $menus{help}.N("/_About..."), 
          callback => sub {
              $in->ask_warn(N("About Harddrake"), 
-                           join("", N("This is HardDrake, a Mandrake hardware configuration tool.\nVersion:"), " $harddrake::data::version\n", 
-                                 N("Author:"), " Thierry Vignaud <tvignaud\@mandrakesoft.com> \n\n",
-                                 formatAlaTeX($::license)));
+                           N("This is HardDrake, a Mandrake hardware configuration tool.\nVersion: %s
+Author: Thierry Vignaud <tvignaud\@mandrakesoft.com>\n\n", $harddrake::data::version) .
+                           formatAlaTeX($::license));
          }
      }
      );
@@ -137,7 +137,7 @@ gtkflush();
 # Build the gui
 add_icon_path('/usr/share/pixmaps/harddrake2/');
 $::noBorder = 1;
-$w = ugtk2->new(N("Harddrake2 version ") . $harddrake::data::version);
+$w = ugtk2->new(N("Harddrake2 version %s", $harddrake::data::version));
 local $::main_window;   # fake diagnostics pragma
 my ($menubar, $factory, $opt_menu, $help_menu);
 if ($::isEmbedded) {
@@ -150,7 +150,7 @@ if ($::isEmbedded) {
     $w->{window}->set_size_request(805, 550);
 }
 
-my $tree_model = Gtk2::TreeStore->new(Gtk2::GType->OBJECT, Gtk2::GType->STRING);
+my $tree_model = Gtk2::TreeStore->new(Gtk2::GType->OBJECT, Gtk2::GType->STRING, Gtk2::GType->INT);
 my ($statusbar, $sig_id);
 $w->{window}->add(gtkpack_(0, Gtk2::VBox->new(0, 0),
                            if_(!$::isEmbedded, 0, $menubar),
@@ -181,8 +181,8 @@ $w->{window}->add(gtkpack_(0, Gtk2::VBox->new(0, 0),
                                             ),
                            0, $statusbar = Gtk2::Statusbar->new,
                            if_($::isEmbedded, 0, gtkpack(create_hbox(),
-                                                         gtksignal_connect(Gtk2::Button->new(N("Options")), 'event' => popup_menu($opt_menu), $menubar),
-                                                         gtksignal_connect(Gtk2::Button->new(N("Help")), 'event' => popup_menu($help_menu), $menubar),
+                                                         gtksignal_connect(Gtk2::Button->new($menus{options}), 'event' => popup_menu($opt_menu), $menubar),
+                                                         gtksignal_connect(Gtk2::Button->new($menus{help}), 'event' => popup_menu($help_menu), $menubar),
                                                          gtksignal_connect(Gtk2::Button->new(N("Quit")),
                                                                            'clicked' => \&quit_global),
                                                          ),
@@ -192,7 +192,7 @@ $w->{window}->add(gtkpack_(0, Gtk2::VBox->new(0, 0),
 
 $frame->set_size_request(300, 450) unless $::isEmbedded;
 #    $tree->set_column_auto_resize(0, 1);
-my (%data, %configurators);
+my (@data, @configurators);
 $tree->append_column(my $pixcolumn  = Gtk2::TreeViewColumn->new_with_attributes(undef, Gtk2::CellRendererPixbuf->new, 'pixbuf' => 0));
 $tree->append_column(my $textcolumn = Gtk2::TreeViewColumn->new_with_attributes(undef, Gtk2::CellRendererText->new, 'text' => 1));
 $tree->set_headers_visible(0);
@@ -200,21 +200,21 @@ $tree->get_selection()->signal_connect('changed' => sub {
     my ($select) = @_;
     my ($model, $iter) = $select->get_selected();
     if ($model) {
-        my $id = $model->get($iter, 1);
+        my $idx = $model->get($iter, 2);
         $iter->free;
-        $current_device = $data{$id};
+        $current_device = $data[$idx];
         
-        if ($current_device) {
+        if ($idx ne -1) {
             gtktext_insert($text, [ map  {
 
                 # The U+200E character is to force LTR display, as what what follows the colon is always in LTR (device names, paths, etc),
                 # this ensures proper displaying of names like /dev/fd0 (otherwise it gets 'dev/fd0/').
                 # it must come *after* the space, as the space must follow the colon following the direction of writting.
-                if_($fields{$_}[0], [ $fields{$_}[0] . ": \x{200e}", { 'foreground' => 'royalblue3', 'weight' => Gtk2::Pango->WEIGHT_BOLD } ],
-                    [ ($_ && $current_device->{$_} =~ /^(unknown)/ ? N("unknown") :
-                       $_ && $current_device->{$_} =~ /^(Unknown)/ ? N("Unknown") : 
-                       $_ && $current_device->{$_} eq 'yes' ? N("Yes") : 
-                       $_ && $current_device->{$_} eq 'no'  ? N("No") : 
+                if_($_ && $fields{$_}[0], [ $fields{$_}[0] . ": \x{200e}", { 'foreground' => 'royalblue3', 'weight' => Gtk2::Pango->WEIGHT_BOLD } ],
+                    [ ($current_device->{$_} =~ /^(unknown)/ ? N("unknown") :
+                       $current_device->{$_} =~ /^(Unknown)/ ? N("Unknown") : 
+                       $current_device->{$_} eq 'yes' ? N("Yes") : 
+                       $current_device->{$_} eq 'no'  ? N("No") : 
                        $current_device->{$_}) . "\n\n", { 'foreground' => ($_ eq 'driver' && $current_device->{$_} =~ /^unknown|^Bad:/ ? 'indian red' : 'black') } ])
                 } sort keys %$current_device ]);
 
@@ -225,7 +225,7 @@ $tree->get_selection()->signal_connect('changed' => sub {
             # if we've valid driver, let's offer to configure it, else hide buttons 
             show_hide(defined($current_device->{driver}) && $current_device->{driver} !~ /^unknown|^Bad|^Card|^Hsf|^Removable:|\|/, $module_cfg_button);
             
-            $current_configurator = $configurators{$id};
+            $current_configurator = $configurators[$idx];
             show_hide(-x first(split /\s+/, $current_configurator), $config_button);  # strip arguments for -x test
             return 1;
         }
@@ -234,6 +234,8 @@ $tree->get_selection()->signal_connect('changed' => sub {
     $config_button->hide;
     $module_cfg_button->hide;
 });
+
+my $index = 0;
 
 # Fill the graphic devices tree with a "tree branch" widget per device category
 foreach (@harddrake::data::tree) {
@@ -247,7 +249,7 @@ foreach (@harddrake::data::tree) {
     my @devices = &$detector;
     next unless @devices; # Skip empty class (no devices)
 
-    my $parent_iter = $tree_model->append_set(undef, [ 0 => gtkcreate_pixbuf($icon), 1 => $title ]);
+    my $parent_iter = $tree_model->append_set(undef, [ 0 => gtkcreate_pixbuf($icon), 1 => $title, 2 => -1 ]);
 
     # Fill the graphic tree with a "tree leaf" widget per device
     foreach (@devices) {
@@ -287,13 +289,12 @@ foreach (@harddrake::data::tree) {
         foreach my $i (qw(MOUSETYPE XMOUSETYPE auxmouse devfs_prefix id pci_bus pci_device pci_function subid subvendor unsafe usb_bus usb_pci_bus usb_pci_device usb_vendor val vendor wacom)) { delete $_->{$i} };
 
         my $custom_id = harddrake::data::custom_id($_, $title);
-        $custom_id .= ' ' while $data{$custom_id}; # get a unique id for eg bt8xx audio/video funtions
         foreach my $field (qw(devfs_device device)) {
             $_->{$field} = '/dev/'.$_->{$field} if $_->{$field};
         }
-        $tree_model->append_set($parent_iter, [ 1 => $custom_id ])->free;
-        $data{$custom_id} = $_;
-        $configurators{$custom_id} = $configurator;
+        $tree_model->append_set($parent_iter, [ 1 => $custom_id, 2 => $index++ ])->free;
+        push @data, $_;
+        push @configurators, $configurator;
     }
     $tree->expand_row($tree_model->get_path($parent_iter), 1) unless $title eq N_("Unknown/Others");
     $parent_iter->free;
