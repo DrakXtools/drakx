@@ -621,7 +621,7 @@ sub install_urpmi {
 }
 
 ";
-    } sort { $a->{medium} <=> $b->{medium} } values %$mediums;
+    } sort { $a->{medium} <=> $b->{medium} } grep { $_->{selected} } values %$mediums;
     eval { output "$prefix/etc/urpmi/urpmi.cfg", @cfg };
 }
 
