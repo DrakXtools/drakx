@@ -227,11 +227,8 @@ sub allowNVIDIA_rpms {
 #-######################################################################################
 sub kernelVersion {
     my ($o) = @_;
-    require pkgs;
-    my $p = pkgs::packageByName($o->{packages}, "kernel");
-    $p  ||= pkgs::packageByName($o->{packages}, "kernel22");
-    $p or die "I couldn't find the kernel package!";
-    pkgs::packageVersion($p) . "-" . pkgs::packageRelease($p);
+    my $kernel = readlink "$o->{prefix}/boot/vmlinuz" || first(all("$o->{prefix}/boot"));
+    first($kernel =~ /vmlinuz-(.*)/);
 }
 
 
