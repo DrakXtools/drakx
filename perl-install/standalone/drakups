@@ -131,7 +131,7 @@ Please fill in its name, its driver and its port.", $model, $vendor);
                                  data => sub {
                                      [
                                       { label => N("Name:"),   val => \$name, help => N("The name of your ups") },
-                                      { label => N("Driver:"), val => \$driver, help => N("The driver that manage your ups") },
+                                      { label => N("Driver:"), val => \$driver, help => N("The driver that manages your ups") },
                                       { label => N("Port:"),   val => \$port, format => \&mouse::serial_port2text, type => "combo",
                                         list => [ &mouse::serial_ports() ], not_edit => 0, 
                                         help => N("The port on which is connected your ups") },
