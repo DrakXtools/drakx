@@ -369,7 +369,7 @@ sub quit_global() {
 
 sub configure_lan {
     my ($prefix, $netcnx, undef, $intf) = @_;
-    my $window = _create_dialog(N("LAN configuration"));
+    my $window = _create_dialog(N("LAN configuration"), { small => 1 });
     my @card_tab;
 
     if (@all_cards < 1) {
@@ -508,7 +508,7 @@ Create one first by clicking on 'Configure'")),1,1,0);
     }
     my $cnx = {};
     $cnx = $netcnx->{$netcnx->{type}};
-    my $window = _create_dialog(N("Internet connection configuration"));
+    my $window = _create_dialog(N("Internet connection configuration"), { small => 1 });
     $window->signal_connect(delete_event => sub { Gtk2->main_quit });
     $window->set_border_width(10);
 
