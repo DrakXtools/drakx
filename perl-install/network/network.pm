@@ -73,7 +73,8 @@ sub read_squid_conf {
 }
 
 sub read_tmdns_conf {
-    { if_(cat_($_[0]) =~ /^\s*hostname\s*=\s*(\w+)/m, ZEROCONF_HOSTNAME => $1) };
+    my ($file) = @_;
+    { if_(cat_($file) =~ /^\s*hostname\s*=\s*(\w+)/m, ZEROCONF_HOSTNAME => $1) };
 }
 
 sub write_conf {
