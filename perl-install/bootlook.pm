@@ -297,14 +297,16 @@ sub updateInit
 sub updateAurora
 {
     if ($a_mode) {
-	mapn { if (_$_[0]->get_active()) {
-	    symlinkf("/lib/aurora/Monitors/$_[1]", "/etc/aurora/Monitor");
-	    $in->standalone::pkgs_install($_[2]) if !(-e "/lib/aurora/Monitors/$_[1]");
-	}
-	   },
-	  (["$a_h_button","NewStyle-WsLib",qw(Aurora-Monitor-NewStyle-WsLib)],
-	   ["$a_v_button","Traditional-WsLib", qw(Aurora-Monitor-Traditional-WsLib)],
-	   ["$a_g_button","Traditional-Gtk+", qw(Aurora-Monitor-Traditional-Gtk+)]);
+	mapn { 
+	    print " !!\n";
+	    if ($_[0]) {
+		symlinkf("/lib/aurora/Monitors/$_[1]", "/etc/aurora/Monitor");
+		$in->standalone::pkgs_install($_[2]) if !(-e "/lib/aurora/Monitors/$_[1]");
+	    }
+	},
+	([$a_h_button->get_active(), "NewStyle-WsLib",    qw(Aurora-Monitor-NewStyle-WsLib)],
+	 [$a_v_button->get_active(), "Traditional-WsLib", qw(Aurora-Monitor-Traditional-WsLib)],
+	 [$a_g_button->get_active(), "Traditional-Gtk+",  qw(Aurora-Monitor-Traditional-Gtk+)]);
 	
 # 	if ($a_h_button->get_active()) {
 # 	    symlinkf("/lib/aurora/Monitors/NewStyle-WsLib",    "/etc/aurora/Monitor");	    
