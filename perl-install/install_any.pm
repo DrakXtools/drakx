@@ -834,7 +834,12 @@ sub loadO {
     if ($f =~ /^(floppy|patch)$/) {
 	my $f = $f eq "floppy" ? 'auto_inst.cfg' : "patch";
 	unless ($::testing) {
-	    fs::mount(devices::make(detect_devices::floppy()), "/mnt", (arch() =~ /sparc/ ? "romfs" : "vfat"), 'readonly');
+            my $dev = devices::make(detect_devices::floppy());
+            foreach my $fs (arch() =~ /sparc/ ? 'romfs' : ('ext2', 'vfat')) {
+                eval { fs::mount($dev, '/mnt', $fs, 'readonly'); 1 } and goto mount_ok;
+            }
+            die "Couldn't mount floppy [$dev]";
+          mount_ok:
 	    $f = "/mnt/$f";
 	}
 	-e $f or $f .= '.pl';
