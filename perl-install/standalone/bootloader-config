@@ -1,0 +1,120 @@
+#!/usr/bin/perl
+
+use lib qw(/usr/lib/libDrakX);
+use Getopt::Long;
+
+use common;
+use bootloader;
+
+
+my %options = (
+	       'action=s' => \ (my $action),
+	       'kernel-version=s' => \ (my $kernel_version), 
+
+	       'vmlinuz=s' => \ (my $vmlinuz), 
+	       'initrd-options=s' => \ (my $initrd_options),
+	       'no-link' => \ (my $nolink),
+	       'no-entry' => \ (my $no_entry),
+	       'no-launch' => \ (my $no_launch),
+	       'no-initrd' => \ (my $no_initrd),	       
+	      );
+
+GetOptions(%options) or die "usage: Releve " . join(' ', map { "[--$_]" } keys %options) . "\n";
+
+my @known_actions = qw(add-kernel remove-kernel update-splash remove-splash detectloader);
+$action && member($action, @known_actions) or die "<action> must be one of " . join(' ', @known_actions) . "\n";
+
+if ($vmlinuz) {
+    if (my $ver = bootloader::vmlinuz2version($vmlinuz)) {
+	if ($kernel_version) {
+	    $kernel_version eq $ver or die "$kernel_version and $ver don't match (hint: don't pass both --vmlinuz and --kernel-version)\n";
+	} else {
+	    $kernel_version = $ver;
+	}
+    }
+    $vmlinuz = "/boot/$vmlinuz" if $vmlinuz !~ m!^/!;
+} elsif ($kernel_version) {
+    $vmlinuz = "/boot/vmlinuz-$kernel_version";
+}
+
+
+my $all_hds = fsedit::get_hds();
+fs::get_info_from_fstab($all_hds, '');
+my $hds = $all_hds->{hds};
+
+my $bootloader = bootloader::read([ fsedit::get_fstab(@$hds) ]) or die "Cannot find a boot loader installed\n";
+
+
+$action =~ s/-/_/g;
+$::{$action}->();
+
+
+#-###############################################################################
+sub remove_now_broken_boot_symlinks() {
+    foreach (glob("/boot/vmlinuz*"), glob("/boot/initrd*")) {
+	-l $_ && !-e $_ or next;
+	log::l("removing now broken symlink $_");
+	unlink $_;
+    }
+}
+sub remove_kernel() {
+    unlink "/lib/modules/$kernel_version/build";
+    remove_now_broken_boot_symlinks();
+
+
+    my ($to_remove, $to_keep) = partition {
+	$_->{kernel_or_dev} && $_->{kernel_or_dev} eq $vmlinuz;
+    } @{$bootloader->{entries}};
+
+    $_->{initrd} && unlink $_->{initrd} foreach @$to_remove;
+
+#    foreach (@$to_keep) {
+#	$_->{kernel_or_dev} && bootloader::expand_vmlinuz_symlink($_->{kernel_or_dev}) eq $vmlinuz or next;
+#    }
+
+    @{$bootloader->{entries}} = @$to_keep;
+
+
+    modify_bootloader();
+}    
+
+
+#-###############################################################################
+sub add_kernel() {
+    bootloader::create_link_source();
+
+    my $kernel_str = bootloader::vmlinuz2kernel_str($vmlinuz);
+    my $root_part = fsedit::get_root([ fsedit::get_fstab(@$hds) ]);
+    bootloader::add_kernel($bootloader, $kernel_str, 
+			   { 
+			    root => "/dev/$root_part->{device}", 
+			    initrd_options => $initrd_options,
+			    if_($bootloader->{default_vga}, vga => $bootloader->{default_vga}),
+			   }, $nolink, $no_initrd);
+
+    modify_bootloader();
+}
+
+sub modify_bootloader() {
+    !$no_entry or return;
+
+    bootloader::action($bootloader, 'write', $hds);
+    bootloader::action($bootloader, 'when_config_changed', $hds) if !$no_launch;
+}
+
+#-###############################################################################
+sub update_splash() {
+    foreach (@{$bootloader->{entries}}) {
+	bootloader::make_boot_splash($_->{initrd}, $_->{vga}) if $_->{initrd};
+    }
+}
+
+sub remove_splash() {
+    foreach (@{$bootloader->{entries}}) {
+	bootloader::remove_boot_splash($_->{initrd}) if $_->{initrd};
+    }
+}
+
+sub detectloader() {
+    print $bootloader && uc(bootloader::main_method($bootloader->{method})), "\n";
+}
