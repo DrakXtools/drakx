@@ -214,15 +214,15 @@ sub load_perms() {
         local *F;
         open F, $file;
         
+        my @editable = if_($file ne $perm_files{editable}, editable => $pixbuf);
         local $_;
-        my $is_uneditable = $file ne $perm_files{editable};
         while (<F>) {
             next if /^#/;
             # Editable, Path, User, Group, Permissions
             if (m/^(\S+)\s+([^.\s]+)\.(\S+)?\s+(\d+)/) {
-                push @rules, { if_($is_uneditable, editable => $pixbuf), path => $1, user => $2, group => $3, perms => $4, index => $index };
+                push @rules, { @editable, path => $1, user => $2, group => $3, perms => $4, index => $index };
             } elsif (m/^(\S+)\s+current?\s+(\d+)/) {
-                push @rules, { if_($is_uneditable, editable => $pixbuf), path => $1, user => 'current', group => '', perms => $2, index => $index };
+                push @rules, { @editable, path => $1, user => 'current', group => '', perms => $2, index => $index };
             } else {
                 warn "unparsable \"$_\"line";
             }
