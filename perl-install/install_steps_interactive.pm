@@ -188,10 +188,10 @@ sub selectInstallClass {
     my ($o, $clicked) = @_;
 
     my %c = my @c = (
-      $::corporate ? () : (
+      if_(!$::corporate,
 	_("Recommended") => "beginner",
       ),
-      $o->{meta_class} eq 'desktop' ? () : (
+      if_($o->{meta_class} ne 'desktop',
 	_("Customized")  => "specific",
 	_("Expert")	 => "expert",
       ),
@@ -521,8 +521,8 @@ sub chooseGroups {
 			     },
 			     label => sub { translate($_) . ($size{$_} ? sprintf " (%d%s)", $size{$_}, _("MB") : '') },
 			   },
-			   $o->{meta_class} eq 'desktop' ? { list => [ _("All") ], ref => sub { \$all }, shadow => 0 } : (),
-			   $individual ? { list => [ _("Individual package selection") ], ref => sub { $individual } } : (),
+			   if_($o->{meta_class} eq 'desktop', { list => [ _("All") ], ref => sub { \$all }, shadow => 0 }),
+			   if_($individual, { list => [ _("Individual package selection") ], ref => sub { $individual } }),
 			  ) or return;
     if ($all) {
 	$o->{compssUsersChoice}{$_} = 1 foreach map { @{$compssUsers->{$_}} } @{$o->{compssUsersSorted}};
@@ -749,17 +749,17 @@ sub setRootPassword {
     return if $o->{security} < 1 && !$clicked;
 
     $o->set_help("setRootPassword", 
-		 $o->{installClass} =~ "server" || $::expert ? "setRootPasswordMd5" : (),
-		 $::beginner ? () : "setRootPasswordNIS");
+		 if_($o->{installClass} =~ "server" || $::expert, "setRootPasswordMd5"),
+		 if_(!$::beginner, "setRootPasswordNIS");
 
-    $o->ask_from_entries_refH([_("Set root password"), _("Ok"), $o->{security} > 2 || $::corporate ? () : _("No password")],
+    $o->ask_from_entries_refH([_("Set root password"), _("Ok"), if_($o->{security} <= 2 && !$::corporate, _("No password"))],
 			 [ _("Set root password"), "\n" ], [
 _("Password") => { val => \$sup->{password},  hidden => 1 },
 _("Password (again)") => { val => \$sup->{password2}, hidden => 1 },
-  $o->{installClass} eq "server" || $::expert ? (
+  if_($o->{installClass} eq "server" || $::expert,
 _("Use shadow file") => { val => \$o->{authentication}{shadow}, type => 'bool', text => _("shadow") },
 _("Use MD5 passwords") => { val => \$o->{authentication}{md5}, type => 'bool', text => _("MD5") },
-  ) : (), $::beginner ? () : (
+  ), if_(!$::beginner,
 _("Use NIS") => { val => \$nis, type => 'bool', text => _("yellow pages") },
   )
 			 ],
@@ -799,17 +799,17 @@ sub addUser {
     if (($o->{security} >= 1 || $clicked)) {
 	$u->{icon} = translate($u->{icon});
 	if ($o->ask_from_entries_refH(
-        [ _("Add user"), _("Accept user"), $o->{security} >= 4 && !@{$o->{users}} ? () : _("Done") ],
+        [ _("Add user"), _("Accept user"), if_($o->{security} < 4 || @{$o->{users}}, _("Done")) ],
         _("Enter a user\n%s", $o->{users} ? _("(already added %s)", join(", ", map { $_->{realname} || $_->{name} } @{$o->{users}})) : ''),
         [ 
 	 _("Real name") => \$u->{realname},
 	 _("User name") => \$u->{name},
-	   $o->{security} < 2 ? () : (
+	   if_($o->{security} >= 2,
          _("Password") => {val => \$u->{password}, hidden => 1},
          _("Password (again)") => {val => \$u->{password2}, hidden => 1},
-	   ), $::beginner ? () : (
+	   ), if_(!$::beginner,
          _("Shell") => {val => \$u->{shell}, list => [ any::shells($o->{prefix}) ], not_edit => !$::expert} 
-	   ), $o->{security} > 3 ? () : (
+	   ), if_($o->{security} <= 3,
 	 _("Icon") => {val => \$u->{icon}, list => [ any::facesnames($o->{prefix}) ], icon2f => sub { any::face2xpm($_[0], $o->{prefix}) } },
 	   ),
         ],
@@ -956,16 +956,15 @@ sub miscellaneous {
 _("Use hard drive optimisations?") => { val => \$u->{HDPARM}, type => 'bool', text => _("(may cause data corruption)") },
 _("Choose security level") => { val => \$s, list => [ map { $l{$_} } ikeys %l ] },
 _("Precise RAM size if needed (found %d MB)", availableRamMB()) => \$u->{memsize},
-arch() !~ /^sparc/ ? (
-_("Removable media automounting") => { val => \$o->{useSupermount}, type => 'bool', text => 'supermount' }, ) : (),
-     $::expert ? (
+   if_(arch() !~ /^sparc/,
+_("Removable media automounting") => { val => \$o->{useSupermount}, type => 'bool', text => 'supermount' },
+   ), if_($::expert,
 _("Clean /tmp at each boot") => { val => \$u->{CLEAN_TMP}, type => 'bool' },
-     ) : (),
-     $o->{pcmcia} && $::expert ? (
+   ), $o->{pcmcia} && $::expert ? (
 _("Enable multi profiles") => { val => \$u->{profiles}, type => 'bool' },
-     ) : (
+   ) : (
 _("Enable num lock at startup") => { val => \$u->{numlock}, type => 'bool' },
-     ),
+   ),
      ], complete => sub {
 	    !$u->{memsize} || $u->{memsize} =~ s/^(\d+)M?$/$1M/i or $o->ask_warn('', _("Give the ram size in MB")), return 1;
 	    my %m = reverse %l; $ENV{SECURE_LEVEL} = $o->{security} = $m{$s};
