@@ -402,6 +402,7 @@ sub askSupplMirror {
     my $u = $o->{updates} ||= {};
     require crypto;
     my @mirrors = do {
+	#- Direct the user to the community mirror tree for an install from a mini-iso
 	$o->{distro_type} ||= 'community';
 	#- get the list of mirrors locally, to avoid weird bugs with making an
 	#- http request before ftp at this point of the install
