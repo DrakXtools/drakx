@@ -104,6 +104,7 @@ get_needed_files: $(DIRS) mo_files
 	install -d $(DEST)/usr/lib
 	install -d $(DEST)/usr/$(LIB)
 	install -d $(DEST)/usr/share
+	install -d $(DEST)/usr/share/langs
 	install -d $(DEST)/usr/share/gtk
 	install -d $(DEST)/usr/share/xmodmap
 	install -d $(DEST)/usr/X11R6/lib/X11
@@ -168,8 +169,8 @@ endif
 
 	cd share ; cp -a consolefonts devices symlinks $(DEST)/usr/share
 	-cd share ; cp -f *.png $(DEST)/usr/share
-	-cd pixmaps ; cp -af *.png *.xpm langs $(DEST)/usr/share ; rm -f $(DEST)/usr/share/wiz_*
-	unneeded=`perl -I. -Mlang -e 'lang::get_unneeded_png_lang_files'`; cd $(DEST)/usr/share; rm -f $$unneeded
+	-cd pixmaps ; cp -af *.png *.xpm $(DEST)/usr/share ; rm -f $(DEST)/usr/share/wiz_*
+	cp `perl -I. -Mlang -e 'lang::png_lang_files()'` $(DEST)/usr/share/langs
 	cd share ; cp compssUsers compssUsers.* rpmsrate $(ROOTDEST)/Mandrake/base
 
 	clean-rpmsrate $(ROOTDEST)/Mandrake/base/rpmsrate $(ROOTDEST)/Mandrake/RPMS*
