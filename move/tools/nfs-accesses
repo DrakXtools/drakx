@@ -3,10 +3,13 @@
 use MDK::Common;
 use Getopt::Long;
 
+my $first_file = '/usr/bin/totem';
+
 GetOptions('no-link' => \ (my $no_link), 
 	   'no-dir' => \ (my $no_dir),
 	   'full-dirs=s', \ (my $full_dirs),
 	   'ip=s' => \ (my $wanted_ip),
+	   'first-file=s' => \$first_file,
 	  );
 
 my @skipped_dirs = (
@@ -29,7 +32,7 @@ open(my $F, "tac /var/log/kernel/warnings |");
 
 my @l;
 while (<$F>) {
-    my ($ip, $file) = /kernel: nfsd \((.*?)\): (.*)/ or next; 
+    my ($ip, $rfile) = /kernel: nfsd \((.*?)\): (.*)/ or next; 
 
     if ($wanted_ip) {
 	$wanted_ip eq $ip or next;
@@ -37,7 +40,7 @@ while (<$F>) {
 	warn "choosing $ip\n";
 	$wanted_ip = $ip;
     }
-    $file = join('/', '', reverse split('/', $file));
+    my $file = join('/', '', reverse split('/', $rfile));
 
     last if $file =~ m!/tmp/live_tree/move/(devices|symlinks)!;
 
@@ -47,7 +50,7 @@ while (<$F>) {
 	    unshift @l, $s;
 	}
     }
-    last if $file eq '/tmp/live_tree/usr/bin/totem';
+    last if $file eq "/tmp/live_tree$first_file" || $rfile eq $first_file;
 }
 
-print "$_\n" foreach sort uniq(@l);
+print "$_\n" foreach sort(uniq(@l));
