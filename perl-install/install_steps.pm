@@ -839,7 +839,8 @@ sub setupBootloaderBefore {
 	    $p && $p->flag_installed;
 	} 'Aurora', 'bootsplash';
         bootloader::suggest($o->{prefix}, $o->{bootloader}, $o->{all_hds}{hds}, $o->{fstab},
-			    ($force_vga || $vga && $need_fb) && $o->{vga}, $o->{meta_class} ne 'server');
+			    vga_fb => ($force_vga || $vga && $need_fb) && $o->{vga}, 
+			    quiet => $o->{meta_class} ne 'server');
 	bootloader::suggest_floppy($o->{bootloader}) if $o->{security} <= 3 && arch() !~ /ppc/;
 
 	$o->{bootloader}{keytable} ||= keyboard::keyboard2kmap($o->{keyboard});

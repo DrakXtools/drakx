@@ -305,7 +305,7 @@ sub get_kernels_and_labels {
 }
 
 sub suggest {
-    my ($prefix, $lilo, $hds, $fstab, $vga_fb, $quiet) = @_;
+    my ($prefix, $lilo, $hds, $fstab, %options) = @_;
     my $root_part = fsedit::get_root($fstab);
     my $root = isLoopback($root_part) ? "loop7" : $root_part->{device};
     my $boot = fsedit::get_root($fstab, 'boot')->{device};
@@ -379,11 +379,11 @@ wait %d seconds for default boot.
     while (my ($ext, $version) = each %labels) {
 	my $entry = add_kernel($prefix, $lilo, $version, $ext, $root,
 	       {
-		if_($vga_fb && $ext eq '', vga => $vga_fb), #- using framebuffer
+		if_($options{vga_fb} && $ext eq '', vga => $options{vga_fb}), #- using framebuffer
 	       });
-	$entry->{append} .= " quiet" if $vga_fb && $version !~ /smp|enterprise/ && $quiet;
+	$entry->{append} .= " quiet" if $options{vga_fb} && $version !~ /smp|enterprise/ && $options{quiet};
 
-	if ($vga_fb && $ext eq '') {
+	if ($options{vga_fb} && $ext eq '') {
 	    add_kernel($prefix, $lilo, $version, $ext, $root, { label => 'linux-nonfb' });
 	}
     }
