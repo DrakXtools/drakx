@@ -704,13 +704,7 @@ sub configureNetwork {
 			      $first_time, $o->{lang} eq "fr_FR" && $o->{keyboard}{KEYBOARD} eq "fr", $noauto);
 }
 
-#-configureNetworkIntf moved to network
-
-#-configureNetworkNet moved to network
 #------------------------------------------------------------------------------
-#-pppConfig moved to any.pm
-#------------------------------------------------------------------------------
-
 sub installUpdates {
     my ($o) = @_;
     my $u = $o->{updates} ||= {};
