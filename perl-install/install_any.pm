@@ -515,8 +515,13 @@ sub selectSupplMedia {
 		log::l("psUsingHdlists failed: $@");
 	    } else {
 		#- copy latest compssUsers.pl and rpmsrate somewhere locally
-		getAndSaveFile("$url/media/media_info/compssUsers.pl", "/tmp/compssUsers.pl");
-		getAndSaveFile("$url/media/media_info/rpmsrate", "/tmp/rpmsrate");
+		if ($suppl_method eq 'ftp') {
+		    getAndSaveFile("media/media_info/compssUsers.pl", "/tmp/compssUsers.pl");
+		    getAndSaveFile("media/media_info/rpmsrate", "/tmp/rpmsrate");
+		} else {
+		    getAndSaveFile("$url/media/media_info/compssUsers.pl", "/tmp/compssUsers.pl");
+		    getAndSaveFile("$url/media/media_info/rpmsrate", "/tmp/rpmsrate");
+		}
 		useMedium($prev_asked_medium); #- back to main medium
 		return $suppl_method;
 	    }
