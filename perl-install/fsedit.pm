@@ -94,8 +94,8 @@ sub lvms {
 }
 
 sub get_hds {
-    my ($flags, $o_in) = @_;
-    $flags ||= {};
+    my ($o_flags, $o_in) = @_;
+    my $flags = $o_flags || {};
     $flags->{readonly} && ($flags->{clearall} || $flags->{clear}) and die "conflicting flags readonly and clear/clearall";
 
     my @drives = detect_devices::hds();
