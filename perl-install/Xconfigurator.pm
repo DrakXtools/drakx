@@ -2,7 +2,7 @@ package Xconfigurator; # $Id$
 
 use diagnostics;
 use strict;
-use vars qw($in $do_pkgs @window_managers @depths @monitorSize2resolution @hsyncranges %min_hsync4wres @vsyncranges %depths @resolutions %serversdriver @svgaservers @accelservers @allbutfbservers @allservers %vgamodes %videomemory @ramdac_name @ramdac_id @clockchip_name @clockchip_id %keymap_translate %standard_monitors $XF86firstchunk_text $keyboardsection_start $keyboardsection_start_v4 $keyboardsection_part2 $keyboardsection_part3 $keyboardsection_part3_v4 $keyboardsection_end $pointersection_text $monitorsection_text1 $monitorsection_text2 $monitorsection_text3 $monitorsection_text4 $modelines_text_Trident_TG_96xx $modelines_text_ext $modelines_text $devicesection_text $devicesection_text_v4 $screensection_text1 %lines @options %xkb_options $good_default_monitor $low_default_monitor $layoutsection_v4 $modelines_text_apple);
+use vars qw($in $do_pkgs @window_managers @depths @monitorSize2resolution @hsyncranges %min_hsync4wres @vsyncranges %depths @resolutions %serversdriver @svgaservers @accelservers @allbutfbservers @allservers @allbutfbdrivers @alldrivers %vgamodes %videomemory @ramdac_name @ramdac_id @clockchip_name @clockchip_id %keymap_translate %standard_monitors $XF86firstchunk_text $keyboardsection_start $keyboardsection_start_v4 $keyboardsection_part2 $keyboardsection_part3 $keyboardsection_part3_v4 $keyboardsection_end $pointersection_text $monitorsection_text1 $monitorsection_text2 $monitorsection_text3 $monitorsection_text4 $modelines_text_Trident_TG_96xx $modelines_text_ext $modelines_text $devicesection_text $devicesection_text_v4 $screensection_text1 %lines @options %xkb_options $good_default_monitor $low_default_monitor $layoutsection_v4 $modelines_text_apple);
 
 use common;
 use log;
@@ -91,6 +91,17 @@ sub cardName2RealName {
     }
     $name;
 }
+sub realName2CardName {
+    my ($real) = @_;
+    my $file = "$ENV{SHARE_PATH}/ldetect-lst/CardsNames";
+    foreach (catMaybeCompressed($file)) {
+	chop;
+	next if /^#/;	  
+	my ($name, $real_) = split '=>';
+	return $name if $real eq $real_;
+    }
+    return;
+}
 sub updateCardAccordingName {
     my ($card, $name) = @_;
     my $cards = readCardsDB("$ENV{SHARE_PATH}/ldetect-lst/Cards+");
@@ -152,6 +163,7 @@ sub cardConfigurationAuto() {
 	    my $card = { identifier => ($c[$i]{description} . (@c > 1 && " $i")) };
 	    $card->{type} = $1 if /Card:(.*)/;
 	    $card->{server} = $1 if /Server:(.*)/;
+	    $card->{driver} = $1 if /Driver:(.*)/;
 	    $card->{flags}{needVideoRam} = /86c368|S3 Inc|Tseng.*ET6\d00/;
 	    $card->{busid} = "PCI:$c[$i]{pci_bus}:$c[$i]{pci_device}:$c[$i]{pci_function}";
 	    push @{$card->{lines}}, @{$lines{$card->{identifier}} || []};
@@ -244,11 +256,48 @@ What do you want to do?"), sub { translate($_[0]{text}) }, \@choices) or return;
 	delete $card->{cards}; delete $card->{Xinerama};
     }
     $card->{server} = 'FBDev' unless !$cardOptions->{allowFB} || $card->{server} || $card->{driver} || $card->{type} || $noauto;
-    $card->{type} = cardName2RealName($in->ask_from_treelist(_("Graphic card"), _("Select a graphic card"), '|', ['Other|Unlisted', readCardsNames()])) or return unless $card->{type} || $card->{server} || $card->{driver};
-    undef $card->{type}, $card->{server} = $in->ask_from_list(_("X server"), _("Choose a X server"), $cardOptions->{allowFB} ? \@allservers : \@allbutfbservers ) or return if $card->{type} eq 'Other|Unlisted';
+
+    my $currentRealName = realName2CardName($card->{type} || $cards[0]{type}) || 'Other|Unlisted';
+    $card->{type} = cardName2RealName($in->ask_from_treelist(_("Graphic card"),
+							     _("Select a graphic card"), '|', ['Other|Unlisted', readCardsNames()],
+							     $currentRealName))
+      or return unless $card->{type} || $card->{server} || $card->{driver};
 
     updateCardAccordingName($card, $card->{type}) if $card->{type};
     add2hash($card, { vendor => "Unknown", board => "Unknown" });
+
+    #- check to use XFree 4 or XFree 3.3.
+    $card->{use_xf4} = $card->{driver} && !$card->{flags}{unsupported};
+    $card->{force_xf4} ||= arch() =~ /ppc|ia64/; #- try to figure out ugly hack for PPC (recommend XF4 always so...)
+    $card->{prefer_xf3} = !$card->{force_xf4} && ($card->{type} =~ /NeoMagic /);
+    #- take into account current environment in standalone to keep
+    #- the XFree86 version.
+    if ($::isStandalone) {
+	readlink("$prefix/etc/X11/X") =~ /XFree86/ and $card->{prefer_xf3} = 0;
+	readlink("$prefix/etc/X11/X") =~ /XF86_/ and $card->{prefer_xf3} = !$card->{force_xf4};
+    }
+
+    #- manage X 3.3.6 or above 4.2.0 specific server or driver.
+    if ($card->{type} eq 'Other|Unlisted') {
+	undef $card->{type};
+
+	my @list = ('server', $cardOptions->{allowFB} ? @allservers : @allbutfbservers);
+	my $default_server = if_(!$card->{use_xf4} || $card->{prefer_xf3}, $card->{server} || $cards[0]{server}) || 'server';
+	$card->{server} = $in->ask_from_list(_("X server"), _("Choose a X server"), \@list, $default_server) or return;
+
+	if ($card->{server} eq 'server') {
+	    my $fake_card = {};
+	    updateCardAccordingName($fake_card, $cards[0]{type}) if $cards[0]{type};
+	    $card->{server} = $card->{prefer_xf3} = undef;
+	    $card->{use_xf4} = $card->{force_xf4} = 1;
+	    $card->{driver} = $in->ask_from_list(_("X driver"), _("Choose a X driver"),
+						 ($cardOptions->{allowFB} ? \@alldrivers : \@allbutfbdrivers),
+						 $card->{driver} || $fake_card->{driver} || $cards[0]{driver}) or return;
+	} else {
+	    $card->{driver} = $card->{use_xf4} = $card->{force_xf4} = undef;
+	    $card->{prefer_xf3} = 1;
+	}
+    }
 
     foreach ($card, @{$card->{cards} || []}) {
 	$_->{memory} = 4096,  delete $_->{depth} if $_->{driver} eq 'i810';
@@ -290,16 +339,6 @@ What do you want to do?"), sub { translate($_[0]{text}) }, \@choices) or return;
 							       $card->{identifier} =~ /[nN]Vidia.*GeForce/ || #- GeForce cards
 							       $card->{identifier} =~ /[nN]Vidia.*NV1[15]/ ||
 							       $card->{identifier} =~ /[nN]Vidia.*Quadro/);
-    #- check to use XFree 4 or XFree 3.3.
-    $card->{use_xf4} = $card->{driver} && !$card->{flags}{unsupported};
-    $card->{force_xf4} ||= arch() =~ /ppc|ia64/; #- try to figure out ugly hack for PPC (recommend XF4 always so...)
-    $card->{prefer_xf3} = !$card->{force_xf4} && ($card->{type} =~ /NeoMagic /);
-    #- take into account current environment in standalone to keep
-    #- the XFree86 version.
-    if ($::isStandalone) {
-	readlink("$prefix/etc/X11/X") =~ /XFree86/ and $card->{prefer_xf3} = 0;
-	readlink("$prefix/etc/X11/X") =~ /XF86_/ and $card->{prefer_xf3} = !$card->{force_xf4};
-    }
 
     #- hack for SiS 640 for laptop.
     if ($card->{identifier} =~ /SiS.*640/ and detect_devices::isLaptop()) {
@@ -308,8 +347,9 @@ What do you want to do?"), sub { translate($_[0]{text}) }, \@choices) or return;
 	$card->{server} = 'FBDev';
     }
 
-    #- basic installation, use of XFree 4.2 or XFree 3.3.
+    #- XFree version available, better to parse available package and get version from it.
     my ($xf4_ver, $xf3_ver) = ("4.2.0", "3.3.6");
+    #- basic installation, use of XFree 4.2 or XFree 3.3.
     my $xf3_tc = { text => _("XFree %s", $xf3_ver),
 		   code => sub { $card->{Utah_glx} = $card->{DRI_glx} = $card->{NVIDIA_glx} = ''; $card->{use_xf4} = '';
 				 log::l("Using XFree $xf3_ver") } };
@@ -1503,7 +1543,8 @@ sub main {
 		    { format => sub { $_[0][0] }, val => \$f,
 		      list => [
 	   [ _("Change Monitor") => sub { $o->{monitor} = monitorConfiguration() } ],
-           [ _("Change Graphic card") => sub { $o->{card} = cardConfiguration('', 'noauto', $cardOptions) } ],
+           [ _("Change Graphic card") => sub { my $card = cardConfiguration('', 'noauto', $cardOptions);
+					       $card and $o->{card} = $card } ],
                     if_($::expert, 
            [ _("Change Server options") => sub { optionsConfiguration($o) } ]),
 	   [ _("Change Resolution") => sub { resolutionsConfiguration($o) } ],
