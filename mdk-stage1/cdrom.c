@@ -77,10 +77,10 @@ static enum return_type do_with_device(char * dev_name, char * dev_model)
 #ifndef MANDRAKE_MOVE
 	if (IS_RESCUE || ramdisk_possible())
 		load_ramdisk(); /* we don't care about return code, we'll do it live if we failed */
-#endif
 
 	if (IS_RESCUE)
 		umount(IMAGE_LOCATION);
+#endif
 
         add_to_env("METHOD", "cdrom");
 	return RETURN_OK;
