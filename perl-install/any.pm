@@ -965,7 +965,7 @@ sub fileshare_config {
 		$in->ask_okcancel('', _("The package %s needs to be installed. Do you want to install it?", $type2file{$wanted[0]}[1]), 1) or return;
 	    } else {
 		my %choices;
-		my $wanted = $in->ask_many_from_list('', _("You can export using NFS or Samba. Which one do you want"),
+		my $wanted = $in->ask_many_from_list('', _("You can export using NFS or Samba. Please select which you'd like to use."),
 						  { list => \@wanted }) or return;
 		@wanted = @$wanted or return;
 	    }
@@ -979,7 +979,7 @@ sub fileshare_config {
     }
 
     my $r = $in->ask_from_list_('fileshare',
-_("Do you want to allow users to export some directories in their home?
+_("Would you like to allow users to share some of their directories?
 Allowing this will permit users to simply click on \"Share\" in konqueror and nautilus.
 
 \"Custom\" permit a per-user granularity.
@@ -1047,7 +1047,7 @@ or to the Internet. There is no password access."),
       2 => _("This is the standard security recommended for a computer that will be used to connect to the Internet as a client."),
       3 => _("There are already some restrictions, and more automatic checks are run every night."),
       4 => _("With this security level, the use of this system as a server becomes possible.
-The security is now high enough to use the system as a server which accept
+The security is now high enough to use the system as a server which can accept
 connections from many clients. Note: if your machine is only a client on the Internet, you should better choose a lower level."),
       5 => _("This is similar to the previous level, but the system is entirely closed and security features are at their maximum."),
     );
