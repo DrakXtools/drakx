@@ -1053,7 +1053,7 @@ END { &exit() }
 sub _create_window {
     my ($title) = @_;
     my $w = Gtk2::Window->new('toplevel');
-    $w->set_border_width(5) if !$::isInstall;
+    $w->set_border_width(5) if !$::isInstall && !$::isWizard;
 
     $w->set_name("Title");
     $w->set_title($title || '');
