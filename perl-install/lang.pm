@@ -237,7 +237,13 @@ sub load_po($) {
 
 	if (/^(#|$)/ && $state != 3) {
 	    $state = 3;
-	    $s .= qq("$from" => "$to",\n) if $from;
+	    if (my @l = $to =~ /%(\d+)\$/g) {
+		$to =~ s/%(\d+)\$/%/g;
+		$to = qq([ "$to", ) . join(",", map { $_ - 1 } @l) . " ],";
+	    } else {
+		$to = qq("$to");
+	    }
+	    $s .= qq("$from" => $to,\n) if $from;
 	    $from = $to = '';
 	}
 	$to .= (/"(.*)"/)[0] if $state == 1;

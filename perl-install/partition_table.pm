@@ -436,8 +436,14 @@ sub remove($$) {
 	}
 	$i++;
     }
+
+    my ($first, $second, $third) = map { $_->{normal} } @{$hd->{extended} || []};
+    if ($third && $first eq $part) {
+	die "Can't handle removing hda5 when hda6 is not the second partition" if $second->{start} > $third->{start};
+    }      
+
     #- otherwise search it in extended partitions
-    foreach (@{$hd->{extended}}) {
+    foreach (@{$hd->{extended} || []}) {
 	$_->{normal} eq $part or next;
 
 	delete $_->{normal}; #- remove it

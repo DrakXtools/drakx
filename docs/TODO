@@ -1,25 +1,23 @@
+pcmcia.img does not handle hd/cdrom
+
 cyrillic font buggy in DrakX
+
+remove xfs user from kdm
+
+bug in users: mandrake user is added twice in strange installs
+(mixed of security 0 + ???)
 
 mandrake_doc-xx, the symlink is no good in /usr/doc/mandrake as 
 
 in ftp install, bug with X server install with wu-ftpd 2.6 (see http://www.wu-ftpd.org/broken-clients.html)
 
-remove xfs user from kdm
-
+--------------------------------------------------------------------------------
 bug rpmdrake: just after installing a package, switch to `Installed', the package has wrong name
-
-bug in users: mandrake user is added twice in strange installs
-(mixed of security 0 + ???)
-
-bug in diskdrake:
-in expert: blank, create hda5 at beginning, create hda6 at the end, create hda7
-in the middle, remove the first one. Result hda5 at the end and bug.
 
 urpmi: pb if XXX-devel requires XXX = 1.2.3 and we updgrade XXX-1.2.3
 
 standalone applications for configuration (netdrake, authentificationconf, soundcard)
 
---------------------------------------------------------------------------------
 Xconfiguration: if "can't open fixed font", relaunch xfs.
 
 bug in defcfg in with lang=fr_FR, display is buggy
@@ -37,6 +35,10 @@ msec custom
 paride in stage1
 
 bug in diskdrake: can in strange cases create a primary partition at sector #0
+
+(done,pix(partly, protection against bugging))bug in diskdrake:
+in expert: blank, create hda5 at beginning, create hda6 at the end, create hda7
+in the middle, remove the first one. Result hda5 at the end and bug.
 
 (pix)add paride.o (and the others)
 

@@ -488,18 +488,8 @@ sub addUser($) {
 	eval { commands::chown_("-r", "$u->{uid}.$u->{gid}", "$p$u->{home}") }
 	    if $u->{uid} != $u->{oldu} || $u->{gid} != $u->{oldg};
 
-	my $msec = "$o->{prefix}/etc/security/msec";
-	substInFile { s/^$u->{name}\n//; $_ .= "$u->{name}\n" if eof } "$msec/user.conf" if -d $msec;
     }
-    run_program::rooted($o->{prefix}, "/etc/security/msec/init-sh/grpuser.sh --refresh");
-
-    my @users = qw(tie brunette default girl woman-blond);
-    my @u = @users; push @u, @users while @u < @l; @u = @u[0..$#l];
-    foreach (@l) {
-	my $u = splice(@u, rand(@u), 1); #- known biased (see cookbook for better)
-	symlink "../../../../icons/util-$u.xpm", "$o->{prefix}/usr/share/apps/kdm/pics/users/$_->{name}.xpm";
-    }
-    symlinkf "../../../../icons/util-hat.xpm", "$o->{prefix}/usr/share/apps/kdm/pics/users/root.xpm";
+    any::addUsers($o->{prefix}, map { $_->{name} } @l);
 }
 
 #------------------------------------------------------------------------------

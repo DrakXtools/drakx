@@ -70,12 +70,12 @@ Mandrake/base/mdkinst_stage2.gz
 	generated from Mandrake/mdkinst tree using misc/make_mdkinst_stage2
 	See ``Ramdisk or not'' below for more.
 
-images/gi_*.img
+images/*.img
 	boot images to use with DrakX. Use:
-	- gi_hd for hard-disk install
-	- gi_cdrom for cdrom install
-	- gi_network for ftp/nfs install
-	- gi_pcmcia for pcmcia install (see ``PCMCIA install'' below for more)
+	- hd for hard-disk install
+	- cdrom for cdrom install
+	- network for ftp/nfs install
+	- pcmcia for pcmcia install (see ``PCMCIA install'' below for more)
 
 
 Some optional files :
@@ -127,9 +127,9 @@ not'' to know if you have to regenerate the mdkinst_stage2.gz)
 * PCMCIA install ***************************************************************
 ********************************************************************************
 If the media you use to install is a pcmcia device, you have two choices:
-- use the gi_pcmcia boot disk
+- use the pcmcia boot disk
 - use another boot disk and it will ask you a supplementary disk. Give it the
-gi_pcmcia disk.
+pcmcia disk.
 
 
 ********************************************************************************
@@ -169,8 +169,8 @@ Modules can be found in at least 3 places:
 - in /lib/modules/modules.cpio.bz2
 
 /modules/modules.cgz is used in stage1. It contains only modules interesting for
-one kind of install. For example in an gi_hd install, it contains scsi modules.
-For an gi_network install, it contains network card modules.
+one kind of install. For example in an hd install, it contains scsi modules.
+For an network install, it contains network card modules.
 
 /lib/modules/ contains modules that should be in /lib/modules/modules.cpio.bz2
 but are not for speed up. The serial.o module is there to speed up mouseconfig.

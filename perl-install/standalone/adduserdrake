@@ -4,6 +4,7 @@ use lib qw(/usr/lib/libDrakX);
 
 use common qw(:common :functional :system :file);
 use interactive;
+use any;
 
 local $_ = join '', @ARGV;
 
@@ -50,26 +51,25 @@ if ($in->ask_from_entries_refH(
 	},
 )) {
     push @users, $u;
-    $u->{pw} = $isMD5 ? c::crypt_md5($u->{password}, salt(8)) : crypt($u->{password}, salt(2));
-    system("adduser $u->{name}");
-    substInFile {
+    $u->{pw} = $isMD5 ? c::crypt_md5($u->{password}, salt(8)) : crypt($u->{password}, salt(2));  
+    $u = {};
+    goto new;
+}
+my @u = map { $_->{name} } @users;
+
+system("adduser $_") foreach @u;
+any::addUsers('', @u);
+
+substInFile {
+    foreach my $u (@users) {
 	if (/^$u->{name}:/) {
 	    chomp;
 	    my %l; @l{@etc_pass_fields} = split ':';
 	    add2hash($u, \%l);
 	    $_ = join(':', @$u{@etc_pass_fields}) . "\n";
 	}
-    } "/etc/passwd";
-
-    system("pwconv") if $isShadow;
-
-    my $msec = "/etc/security/msec";
-    substInFile { s/^$u->{name}\n//; $_ .= "$u->{name}\n" if eof } "$msec/user.conf" if -d $msec;
-    system("$msec/init-sh/grpuser.sh --refresh");
-     
-    $u = {};
-    goto new;
-}
-
+    }
+} "/etc/passwd";
+system("pwconv") if $isShadow;
 
 $in->exit(0);

@@ -34,7 +34,12 @@ sub fold_left(&@) {
     $a
 }
 
-sub _ { my $s = shift @_; sprintf translate($s), @_ }
+sub _ {
+    my $s = shift @_; my $t = translate($s);
+    $t && ref $t or return sprintf $t, @_;
+    my ($T, @p) = @$t;
+    sprintf $T, @_[@p];
+}
 #-delete $main::{'_'};
 sub __ { $_[0] }
 sub even($) { $_[0] % 2 == 0 }

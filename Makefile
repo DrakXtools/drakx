@@ -1,5 +1,5 @@
-BOOT_IMG = gi_hd.img gi_cdrom.img gi_network.img gi_network_ks.img gi_pcmcia.img gi_pcmcia_ks.img
-BINS = install/install install/local-install install/installinit/init
+BOOT_IMG = hd.img cdrom.img network.img network_ks.img pcmcia.img pcmcia_ks.img
+BINS = install/install install/full-install install/local-install install/installinit/init
 DIRS = tools install install/installinit perl-install lnx4win
 ROOTDEST = /export
 
@@ -17,7 +17,7 @@ dirs:
 	for i in $(DIRS); do make -C $$i; done
 
 $(BOOT_IMG): dirs modules
-	./make_boot_img $@ $(@:gi_%.img=%)
+	./make_boot_img $@ $(@:%.img=%)
 
 tar: clean
 	cd .. ; tar cfy gi.tar.bz2 gi
@@ -39,10 +39,10 @@ upload: tar install
 	touch /tmp/mdkinst_done
 	cd $(ROOTDEST)/Mandrake ; tar cfz mdkinst.tgz mdkinst
 
-	lftp -c "open -u devel mandrakesoft.com; cd ~/cooker/cooker/images ; mput $(ROOTDEST)/images/gi_*.img"
+	lftp -c "open -u devel mandrakesoft.com; cd ~/cooker/cooker/images ; mput $(ROOTDEST)/images/*.img"
 	lftp -c "open -u devel mandrakesoft.com; cd ~/tmp ; put $(ROOTDEST)/Mandrake/mdkinst.tgz ; put /tmp/mdkinst_done ; cd ~/cooker/cooker/Mandrake/base ; put $(ROOTDEST)/Mandrake/base/mdkinst_stage2.gz ; put ~/gi/perl-install/compss ; put ~/gi/perl-install/compssList ; put ~/gi/perl-install/compssUsers ; cd ~/cooker/cooker/misc ; put ~/gi/tools/make_mdkinst_stage2 "
 	lftp -c "open -u devel mandrakesoft.com; cd ~/cooker/contrib/others/src ; put ~/gi.tar.bz2"
 	rm -f $(ROOTDEST)/Mandrake/mdkinst.tgz
 	rm -f /tmp/mdkinst_done
 
-# mkisofs -R -b images/gi_cdrom.img -c images/.catalog /tmp/r /mnt/disk/ | cdrecord -v -eject speed=6 dev=1,0 -
+# mkisofs -R -b images/cdrom.img -c images/.catalog /tmp/r /mnt/disk/ | cdrecord -v -eject speed=6 dev=1,0 -
