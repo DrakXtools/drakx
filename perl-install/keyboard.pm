@@ -198,7 +198,9 @@ arch() eq "ppc" ? (
  "it" => [ __("Italian"),        "it-latin1",   "it" ],
 #"iu" => [ __("Inuktitut"),      "iu",		"iu" ],
  "jp" => [ __("Japanese 106 keys"), "jp106",	"jp" ],
- "kr" => [ __("Korean keyboard"),"us",	"kr" ],
+#There is no XKB korean file yet; but using xmodmap one disables
+# some functioanlity; "us" used for XKB until this is fixed
+ "kr" => [ __("Korean keyboard"),"us",	"us" ],
  "la" => [ __("Latin American"), "la-latin1",   "la" ],
  "lt" => [ __("Lithuanian AZERTY (old)"), "lt-latin7","lt_a" ],
 #- TODO: write a console kbd map for lt_new
