@@ -1,5 +1,51 @@
 2001/09/13  dam's  <damien@mandrakesoft.com>
 
+	* my_gtk.pm: shadow reduced to 5 pixels
+
+	* standalone/draknet, network/isdn.pm: isdn timeout works now.
+
+2001/09/13  François Pons  <fpons@mandrakesoft.com>
+
+	* Xconfigurator.pm: fix for missing Xinerama for Matrox cards.
+	fix for Matrox G550 support, now add DRI support.
+	disable any question to user about XF3 if he choose a dual head
+	configuration.
+	disable DRI if Xinerama has been chosen.
+	updated Rage Mobility regexp for bad_card, added bad_card for XF4 as
+	Tseng ET6\d00.
+	avoid creating /etc/X11/XF86Config* file if --g_auto_install.
+
+	* services.pm: updated repartition of services into category, network
+	category are commented so
+	that service will to "Other" one.
+
+	* Xconfigurator_consts.pm: removed ugly Modeline 1024x768 which causes
+	trouble to XFree86 4.1.0.
+
+	* install_any.pm: updates 3D category according Matrox G550 and Radeon
+	card.
+
+	* install_steps.pm: synced with Xconfigurator bad_card class of video card
+	to avoid using frame
+	buffer, added ET6\d00 style card which seems to have problem.
+
+2001/09/13  Pixel  <pixel@mandrakesoft.com>
+
+	* keyboard.pm: filtered the list from lang2keyboard to display only valid
+	keyboards
+
+	* c/stuff.xs.pm: add partition adding on the fly trick
+
+	* partition_table.pm: BLKPG_ADD_PARTITION support (aka adding partition on
+	the fly without rebooting on a device with some already mounted
+	partitions)
+
+	* install_steps.pm: do not translate kdm GreetString in ja|ko|zh (what
+	about ru?)
+	in kdmrc GreetString, magic string HOSTNAME replaced by %n
+
+2001/09/13  dam's  <damien@mandrakesoft.com>
+
 	* standalone/draknet, network/isdn.pm: isdn timeout works now.
 
 2001/09/13  François Pons  <fpons@mandrakesoft.com>
