@@ -40,7 +40,7 @@ for i in zh_CN.GB2312 zh_TW.Big5 ; do
 done
 cd .. ; rm -rf .tmp2
 
-for i in common  C armscii-8 en_US.UTF-8 iso8859-1 iso8859-13 iso8859-14 iso8859-15 iso8859-2 iso8859-3 iso8859-5 iso8859-7 iso8859-9 iso8859-9e ja ko koi8-r koi8-u microsoft-cp1251 microsoft-cp1255 microsoft-cp1256 th_TH vi_VN zh_CN zh_TW ; do
+for i in common  C armscii-8 en_US.UTF-8 iso8859-1 iso8859-13 iso8859-14 iso8859-15 iso8859-2 iso8859-3 iso8859-5 iso8859-7 iso8859-9 iso8859-9e ja ko koi8-r koi8-u microsoft-cp1251 microsoft-cp1255 microsoft-cp1256 th_TH vi_VN.tcvn zh_CN zh_TW.big5 ; do
     cp -a /usr/X11R6/lib/X11/locale/$i usr/X11R6/lib/X11/locale
 done
 
