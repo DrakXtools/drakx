@@ -84,7 +84,6 @@ sub detect {
 
 sub pre_func {
     my ($text) = @_;
-    print "PLOP $text PLOP\n";
     $::Wizard_no_previous=1;
     if ($in->isa('interactive_gtk')) {
 	$::Wizard_splash=1;
