@@ -736,8 +736,8 @@ Take a look at http://www.linmodems.org"),
                         }
                         $netcnx->{bus} = $netc->{autodetect}{adsl}{bewan}{bus} if $ntf_name eq 'bewan';
                         if ($ntf_name eq 'bewan' && !$::testing) {
-                            if (my @unicorn_packages = $in->do_pkgs->check_kernel_module_packages('unicorn-kernel', 'unicorn')) {
-                                $in->do_pkgs->install(@unicorn_packages);
+                            if (my $unicorn_packages = $in->do_pkgs->check_kernel_module_packages('unicorn-kernel', 'unicorn')) {
+                                $in->do_pkgs->install(@$unicorn_packages);
                             }
                         }
                         if (exists($isdn_cards{$ntf_name})) {
