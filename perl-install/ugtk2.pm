@@ -48,8 +48,8 @@ unless ($::no_ugtk_init) {
     Gtk2->init;
     c::bind_textdomain_codeset($_, 'UTF8') foreach 'libDrakX', @::textdomains;
     $::need_utf8_i18n = 1;
-    Gtk2->croak_execeptions if 0.95 < $Gtk2::VERSION;
 }
+Gtk2->croak_execeptions if (!$::no_ugtk_init || $::isInstall) && 0.95 < $Gtk2::VERSION ;
 
 
 $border = 5;
