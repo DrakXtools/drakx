@@ -301,9 +301,7 @@ sub pppConfig {
     print F "nameserver $o->{modem}{dns2}\n" if $o->{modem}{dns2};
     close F;
 
-    foreach ("$o->{prefix}/root", "$o->{prefix}/etc/skel") {
-	template2file("/usr/share/kppprc.in", "$_/.kde/share/config/kppprc", %toreplace) if -d "$_/.kde/share/config";
-    }
+    install_any::template2userfile($o->{prefix}, "/usr/share/kppprc.in", ".kde/share/config/kppprc", 1, %toreplace);
 
     miscellaneousNetwork($o);
 }
@@ -383,7 +381,7 @@ sub addUser($) {
 	} else {
 	    my $u = $_->{uid} || ($_->{oldu} = (stat("$p$_->{home}"))[4]);
 	    my $g = $_->{gid} || ($_->{oldg} = (stat("$p$_->{home}"))[5]);
-	    #- search for available uid above 501 else initscripts may fail to change llanguage for KDE.
+	    #- search for available uid above 501 else initscripts may fail to change language for KDE.
 	    if (!$u || getpwuid($u)) { for ($u = 501; getpwuid($u) || $uids{$u}; $u++) {} }
 	    if (!$g || getgrgid($g)) { for ($g = 501; getgrgid($g) || $gids{$g}; $g++) {} }
 
@@ -401,7 +399,7 @@ sub addUser($) {
     print F join(':', @$_{@etc_pass_fields}), "\n" foreach @l;
 
     open F, ">> $p/etc/group" or die "can't append to group file: $!";
-    print F "$_->{name}::$_->{gid}:\n" foreach @l;
+    print F "$_->{name}:x:$_->{gid}:\n" foreach @l;
 
     foreach (@l) {
 	if (! -d "$p$_->{home}") {
