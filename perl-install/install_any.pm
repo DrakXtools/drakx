@@ -472,10 +472,6 @@ sub setAuthentication {
 	run_program::rooted($o->{prefix}, "chkconfig", "--level", "35", "winbind", "on");
 	mkdir "$o->{prefix}/home/$domain", 0755;
 	
-	#- just temporary until samba packages fixed
-	mkdir "$o->{prefix}/var/log/samba", 0755;
-        mkdir "$o->{prefix}/var/run/samba", 0755;
-
 	#- defer running smbpassword - no network yet
 	$winbind = $winbind . "%" . $winpass;
 	addToBeDone {
