@@ -235,8 +235,8 @@ foreach ([ 'network', N("Network Options") ], [ 'system', N("System Options") ])
 ######################## PERIODIC CHECKS ###################################
 my %security_checks_value;
 
-                                        0, Gtk2::Label->new($help_msg),
 gtkappend_page($notebook, gtkshow(gtkpack_(Gtk2::VBox->new,
+                                        0, Gtk2::Label->new($help_msg),
                                         1, create_scrolled_window(create_packtable($common_opts,
                                                                                    map {
                                                                                        my $i = $_;
