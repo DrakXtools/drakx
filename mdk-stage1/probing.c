@@ -163,7 +163,7 @@ void probe_that_type(enum driver_type type, enum media_bus bus __attribute__ ((u
 {
 	/* ---- PCI probe ---------------------------------------------- */
 	{
-		FILE * f;
+		FILE * f = NULL;
 		unsigned int len = 0;
 		unsigned int len_full = 0;
 		char buf[200];
@@ -265,8 +265,9 @@ void probe_that_type(enum driver_type type, enum media_bus bus __attribute__ ((u
 				}
 		next_pci_device:;
 		}
-		fclose(f);
 	end_pci_probe:;
+		if (f)
+                        fclose(f);
 	}
 
 
@@ -276,7 +277,7 @@ void probe_that_type(enum driver_type type, enum media_bus bus __attribute__ ((u
 		static int already_probed_usb_controllers = 0;
 		static int already_mounted_usbdev = 0;
 
-		FILE * f;
+		FILE * f = NULL;
 		int len = 0;
 		char buf[200];
 		struct usb_module_map * usbdb = NULL;
@@ -340,8 +341,9 @@ void probe_that_type(enum driver_type type, enum media_bus bus __attribute__ ((u
 				}
 			}
 		}
-		fclose(f);
 	end_usb_probe:;
+		if (f)
+                        fclose(f);
 	}
 #endif
 }

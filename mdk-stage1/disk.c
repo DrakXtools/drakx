@@ -86,6 +86,7 @@ static const char * detect_partition_type(char * dev)
 	int partitions_signatures_nb = sizeof(partitions_signatures) / sizeof(struct partition_detection_info);
 	int i;
 	int fd;
+        const char *part_type = NULL;
 
 	char device_fullname[50];
 	strcpy(device_fullname, "/dev/");
@@ -124,12 +125,13 @@ static const char * detect_partition_type(char * dev)
 			continue;
 
 	detect_partition_found_it:
-		return partitions_signatures[i].name;
+		part_type = partitions_signatures[i].name;
+                break;
 	}
 
  detect_partition_type_end:
 	close(fd);
-	return NULL;
+	return part_type;
 }
 
 static char * disk_extract_list_directory(char * direct)
