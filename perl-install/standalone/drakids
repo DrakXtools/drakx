@@ -31,6 +31,14 @@ for (0, 1, 2) {
     $blacklist->get_column($_)->set_sort_column_id($_ == 0 ? 1 : $_ + 2);
 }
 
+my $whitelist = Gtk2::SimpleList->new(addr => 'hidden',
+                                      N("Attacker") => 'text',
+                                  );
+$whitelist->get_selection->set_mode('multiple');
+$whitelist->set_headers_clickable(1);
+$whitelist->get_column(0)->signal_connect('clicked', \&sort_by_column, $whitelist->get_model);
+$whitelist->get_column(0)->set_sort_column_id(0);
+
 my $activefw = activefw->new(sub {
     my ($con, $msg) = @_;
     handle_blacklist($msg->get_args_list) if
@@ -49,20 +57,30 @@ my $activefw = activefw->new(sub {
       $msg->get_member eq "Init";
 });
 init_blacklist();
+init_whitelist();
 
-my $w = ugtk2->new(N("Active Firewall : Blacklist"));
+my $w = ugtk2->new(N("Active Firewall"));
 gtkpack($w->{window},
-        gtknew('VBox', spacing => 5, children => [
-            1, gtknew('ScrolledWindow', width => 600, height => 400, child => $blacklist),
-            0, gtknew('HBox', children_loose => [
-                   gtknew('HButtonBox', layout => 'start', children_loose => [
-                       gtknew('Button', text => N("Remove from blacklist"), clicked => \&unblacklist)
-                   ]),
-                   gtknew('HButtonBox', layout => 'end', children_loose => [
-                       gtknew('Button', text => N("Quit"), clicked => sub { Gtk2->main_quit })
-                   ])
+        gtknew('Notebook', children => [
+            gtknew('Label', text => N("Blacklist")),
+            gtknew('VBox', spacing => 5, children => [
+                1, gtknew('ScrolledWindow', width => 600, height => 400, child => $blacklist),
+                0, gtknew('HButtonBox', layout => 'edge', children_loose => [
+                    gtknew('Button', text => N("Remove from blacklist"), clicked => sub { unblacklist(get_selected_blacklist()) }),
+                    gtknew('Button', text => N("Move to whitelist"), clicked => sub { whitelist(get_selected_blacklist()) }),
+                    gtknew('Button', text => N("Quit"), clicked => sub { Gtk2->main_quit })
+                ]),
             ]),
-        ]));
+            gtknew('Label', text => N("Whitelist")),
+            gtknew('VBox', spacing => 5, children => [
+                1, gtknew('ScrolledWindow', width => 600, height => 400, child => $whitelist),
+                0, gtknew('HButtonBox', layout => 'edge', children_loose => [
+                    gtknew('Button', text => N("Remove from whitelist"), clicked => sub { unwhitelist(get_selected_whitelist()) }),
+                    gtknew('Button', text => N("Quit"), clicked => sub { Gtk2->main_quit })
+                ]),
+            ]),
+        ]),
+);
 $w->show;
 Gtk2->main;
 
@@ -78,6 +96,7 @@ sub sort_by_column {
 sub handle_init {
     $activefw->find_daemon;
     init_blacklist();
+    init_whitelist();
 }
 
 sub init_blacklist {
@@ -108,9 +127,27 @@ sub handle_blacklist {
     ];
 }
 
+sub get_selected_blacklist {
+    uniq(map { $blacklist->{data}[$_][0] } $blacklist->get_selected_indices);
+}
+
 sub unblacklist {
-    my @addr = uniq(map { $blacklist->{data}[$_][0] } $blacklist->get_selected_indices);
+    my @addr = @_;
     $activefw->unblacklist($_) foreach @addr;
     #- delete from the list even if the above calls were unsuccessful
     @{$blacklist->{data}} = grep { !member($_->[0], @addr) } @{$blacklist->{data}};
+}
+
+sub init_whitelist {
+    @{$whitelist->{data}} = map { [ $_ ] } $activefw->get_whitelist;
+}
+
+sub whitelist {
+    my @addr = @_;
+    unblacklist(@addr);
+    $activefw->whitelist($_) foreach @addr;
+}
+
+sub unwhitelist {
+    $activefw->unwhitelist($_) foreach @_;
 }
