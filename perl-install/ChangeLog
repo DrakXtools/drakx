@@ -1,3 +1,62 @@
+2005/03/23  fisher
+
+	* share/po/uk.po: uk tr-tion update
+
+2005/03/23  Olivier Blin <oblin at mandrakesoft.com>
+
+	* mdk-stage1/disk.c: warn that the mount can fail if the partition hasn't
+	been cleanly unmounted
+
+	* install_any.pm: temporarily fallback on /mnt/hd if the hard disk mount
+	point can't be found
+
+	* network/adsl.pm: make Bewan PCI modems work (drop MTU config entries)
+
+2005/03/23  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* keyboard.pm: changed tifinagh kbd to "tifinagh(phonetic)", to avoid
+	conflicts
+	with future moroccan standard layout (as will be used in schools etc)
+	which is a bit different
+
+2005/03/23  pmaryanov
+
+	* share/po/ru.po: fixed 'Load/Save selection' and 'No details'
+	translated 'Smart Card'
+	fixed 'Allow all users'
+
+2005/03/23  Pixel  <pixel at mandrakesoft.com>
+
+	* Xconfig/monitor.pm: probe_using_X on neomagic can return rubbish, so
+	prefer probe_DMI() (even if dmi probe is quite fuzzy...)
+
+2005/03/23  Rafael Garcia-Suarez <rgarciasuarez at mandrakesoft.com>
+
+	* install_steps_gtk.pm: Fix detection of available space when copying rpms
+	on disk (bug 14790)
+
+	* install_any.pm: Fix ejection of cdrom when asking for the supplementary
+	CD. (bug 14902)
+
+2005/03/23  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* share/po/br.po: update
+	typo fix
+
+	* Makefile.drakxtools, Makefile: package rpmsrate
+
+	* drakxtools.spec: 10.2-12mdk
+
+2005/03/23  Warly  <warly at mandrakesoft.com>
+
+	* share/rpmsrate: Add ufraw-gimp with gimp and ufraw in photo (for
+	handling raw images from digital camera)
+
+2005/03/23  willysr
+
+	* share/po/id.po: Fix Typo
+	Updated
+
 2005/03/23  Pixel  <pixel at mandrakesoft.com>
 
 	* Xconfig/monitor.pm: probe_using_X on neomagic can return rubbish, so
@@ -47335,7 +47394,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.1019 2005/03/21 13:54:16 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.1020 2005/03/23 09:47:23 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
