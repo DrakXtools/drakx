@@ -463,9 +463,9 @@ sub get_text_coord {
 sub fill_tiled {
     my ($w, $pix, $bitmap, $x_back, $y_back, $width, $height) = @_;
     my ($x2, $y2) = (0, 0);
-    while(1) {
+    while (1) {
 	$x2 = 0;
-	while(1) {
+	while (1) {
 	    print "tiled($width, $height) x : $x2 - y : $y2\n";
 	    $pix->draw_pixmap($w->style->bg_gc('normal'),
 			      $bitmap, 0, 0, $x2, $y2, $x_back, $y_back);
