@@ -447,8 +447,8 @@ sub update() {
 		$statusbar->pop(1);
 		$statusbar->push(1, $isconnected == 1 ? N("Connected") : N("Not connected"));
 	    }
-         $button_connect->set("label", $isconnected == 1 ? N("Disconnect %s", $netcnx->{type}) : N("Connect %s", $netcnx->{type}));
-	    $button_connect->set_sensitive(1);
+            $button_connect->set("label", $isconnected == 1 ? N("Disconnect %s", $netcnx->{type}) : N("Connect %s", $netcnx->{type}));
+	    $button_connect->set_sensitive(scalar(@interfaces));
 	}
     if (!(-e $network::tools::connect_file && -e $network::tools::disconnect_file)) {
 	$button_connect->set_sensitive(0);
