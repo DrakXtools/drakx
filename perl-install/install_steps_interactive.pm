@@ -50,21 +50,21 @@ sub kill_action {
 sub selectLanguage($) {
     my ($o) = @_;
 
-    $o->ask_from_entries_refH(
+    $o->ask_from_entries_refH_powered(
 	{ messages => _("Please, choose a language to use."),
 	  advanced_messages => _("You can choose other languages that will be available after install"),
 	  callbacks => {
-	      changed => sub { $o->{langs}{$o->{lang}} = 1 },
+	      focus_out => sub { $o->{langs}{$o->{lang}} = 1 },
 	  },
 	},
 	[ { val => \$o->{lang}, type => 'list', 
 	    format => \&lang::lang2text, list => [ lang::list() ] },
 	  (map {;
-	       { val => \$o->{langs}{$_}, type => 'bool', disabled => sub { $o->{langs}{all} },
-		 text => lang::lang2text($_)
+	       { val => \$o->{langs}{$_->[0]}, type => 'bool', disabled => sub { $o->{langs}{all} },
+		 text => $_->[1], advanced => 1,
 	       } 
-	   } lang::list()),
-	  { val => \$o->{langs}{all}, type => 'bool', text => _("All") }
+	   } sort { $a->[1] cmp $b->[1] } map { [ $_, lang::lang2text($_) ] } lang::list()),
+	  { val => \$o->{langs}{all}, type => 'bool', text => _("All"), advanced => 1 }
 	]);
 
     install_steps::selectLanguage($o);
