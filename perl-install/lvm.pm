@@ -43,17 +43,22 @@ sub check {
 sub get_vg {
     my ($part) = @_;
     my $dev = expand_symlinks(devices::make($part->{device}));
+    install_any::check_prog ("pvdisplay") if $::isInstall;
     (split(':', `pvdisplay -c $dev`))[1];
 }
 
 sub update_size {
     my ($lvm) = @_;
+    install_any::check_prog ("vgdisplay") if $::isInstall;
     my @l = split(':', `vgdisplay -c -D $lvm->{LVMname}`);
     $lvm->{totalsectors} = ($lvm->{PE_size} = $l[12]) * $l[13];
 }
 
 sub get_lvs {
     my ($lvm) = @_;
+    install_any::check_prog ("vgdisplay") if $::isInstall;
+    my @l = `vgdisplay -v -D $lvm->{LVMname}`;
+    install_any::check_prog ("lvdisplay") if $::isInstall;
     $lvm->{primary}{normal} = 
       [
        map {
@@ -61,7 +66,7 @@ sub get_lvs {
 	   { device => $_, 
 	     type => $type || 0x83,
 	     size => (split(':', `lvdisplay -D -c /dev/$_`))[6] }
-       } map { m|^LV Name\s+/dev/(\S+)| ? $1 : () } `vgdisplay -v -D $lvm->{LVMname}`
+       } map { m|^LV Name\s+/dev/(\S+)| ? $1 : () } @l
       ];
 }
 

@@ -1029,7 +1029,6 @@ sub write_fstab {
 }
 
 my @bigseldom_used_groups = (
-  [ qw(pvcreate pvdisplay vgchange vgcreate vgdisplay vgextend vgremove vgscan lvcreate lvdisplay lvremove /lib/liblvm.so) ],
 );
 
 sub check_prog {
@@ -1076,6 +1075,7 @@ sub remove_bigseldom_used {
     unlink glob_("/usr/share/gtk/themes/$_*") foreach qw(marble3d);
     unlink(m|^/| ? $_ : "/usr/bin/$_") foreach 
       ((map { @$_ } @bigseldom_used_groups),
+       qw(pvcreate pvdisplay vgchange vgcreate vgdisplay vgextend vgremove vgscan lvcreate lvdisplay lvremove /lib/liblvm.so),
        qw(mkreiserfs resize_reiserfs mkfs.xfs),
       );
 }
