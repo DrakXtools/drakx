@@ -1078,7 +1078,7 @@ sub selectPackagesToUpgrade($$$;$$) {
 				 } else {
 				     if (! exists $obsoletedPackages{c::headerGetEntry($header, 'name')}) {
 					 my @files = c::headerGetEntry($header, 'filenames');
-					 @installedFilesForUpgrade{grep { ($_ !~ m|^/etc/rc.d/| && $_ !~ m|\.la$| &&
+					 @installedFilesForUpgrade{grep { ($_ !~ m|^/dev/| && $_ !~ m|^/etc/rc.d/| && $_ !~ m|\.la$| &&
 									   ! -d "$prefix/$_" && ! -l "$prefix/$_") } @files} = ();
 				     }
 				 }
@@ -1111,7 +1111,7 @@ sub selectPackagesToUpgrade($$$;$$) {
 					     my ($header) = @_;
 					     $cumulSize += c::headerGetEntry($header, 'size');
 					     my @files = c::headerGetEntry($header, 'filenames');
-					     @installedFilesForUpgrade{grep { ($_ !~ m|^/etc/rc.d/| && $_ !~ m|\.la$| &&
+					     @installedFilesForUpgrade{grep { ($_ !~ m|^/dev/| && $_ !~ m|^/etc/rc.d/| && $_ !~ m|\.la$| &&
 									   ! -d "$prefix/$_" && ! -l "$prefix/$_") } @files} = ();
 					 });
 
@@ -1147,7 +1147,7 @@ sub selectPackagesToUpgrade($$$;$$) {
 		unless (packageFlagSelected($p)) {
 		    my $toSelect = 0;
 		    $ask_child->(packageName($p), "files", sub {
-				     if ($_[0] !~  m|^/etc/rc.d/| &&  $_ !~ m|\.la$| && exists $installedFilesForUpgrade{$_[0]}) {
+				     if ($_[0] !~ m|^/dev/| && $_[0] !~  m|^/etc/rc.d/| &&  $_ !~ m|\.la$| && exists $installedFilesForUpgrade{$_[0]}) {
 					 ++$toSelect if ! -d "$prefix/$_[0]" && ! -l "$prefix/$_[0]";
 				     }
 				     delete $installedFilesForUpgrade{$_[0]};
