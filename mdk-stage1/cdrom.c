@@ -50,7 +50,7 @@ static enum return_type try_with_device(char *dev_name, char * dev_model)
 		unset_param(MODE_AUTOMATIC); /* we are in a fallback mode */
 		remove_wait_message();
 
-		sprintf(msg, "I can't access a CDROM disc (drive %s).\nRetry?", dev_model);
+		snprintf(msg, sizeof(msg), "I can't access a CDROM disc (drive %s).\nRetry?", dev_model);
 		results = ask_yes_no(msg);
 		if (results == RETURN_OK)
 			return try_with_device(dev_name, dev_model);
