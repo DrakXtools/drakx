@@ -791,7 +791,7 @@ sub rpmDbOpen {
 	    my $rebuilddb_dir = "$prefix/var/lib/rpmrebuilddb.$$";
 	    -d $rebuilddb_dir and log::l("removing stale directory $rebuilddb_dir"), rm_rf($rebuilddb_dir);
 
-	    URPM::DB::rebuild("$prefix/") or log::l("rebuilding of rpm database failed: " . c::rpmErrorString()), c::_exit(2);
+	    URPM::DB::rebuild($prefix) or log::l("rebuilding of rpm database failed: " . c::rpmErrorString()), c::_exit(2);
 
 	    c::_exit(0);
 	}
