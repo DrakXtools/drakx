@@ -1623,10 +1623,12 @@ sub client_hdw_config {
 		cp_af("/etc/X11/XF86Config", "/etc/X11/XF86Config$suffix") if -f "/etc/X11/XF86Config";
 		cp_af("/etc/X11/XF86Config-4\$\$CLIENT\$\$", "/etc/X11/XF86Config-4$suffix") if -f "/etc/X11/XF86Config-4\$\$CLIENT\$\$";
 		cp_af("/dev/null", "/etc/modules.conf$suffix");
+		cp_af("/dev/null", "/etc/modules$suffix");
 		# create mount points so they can be edited by the client
 		my $mnt_access = "$client_ip(rw,no_root_squash)";
 		append_to_file("/etc/exports", "/etc/sysconfig/mouse$suffix\t$mnt_access\n");
 		append_to_file("/etc/exports", "/etc/modules.conf$suffix\t$mnt_access\n");
+		append_to_file("/etc/exports", "/etc/modules$suffix\t$mnt_access\n");
 		append_to_file("/etc/exports", "/etc/X11/XF86Config$suffix\t$mnt_access\n");
 		append_to_file("/etc/exports", "/etc/X11/XF86Config-4$suffix\t$mnt_access\n");
 	} else {
@@ -1653,6 +1655,7 @@ sub clean_client_config {
 	eval { rm_rf("/etc/shadow$suffix") };
 	eval { rm_rf("/etc/sysconfig/mouse$suffix") };
 	eval { rm_rf("/etc/modules.conf$suffix") };
+	eval { rm_rf("/etc/modules$suffix") };
 	eval { rm_rf("/etc/X11/XF86Config$suffix") };
 	eval { rm_rf("/etc/X11/XF86Config-4$suffix") };
 	remove_client_mounts($client_ip);
