@@ -95,6 +95,5 @@ Storable::store(\%config, $last_boot_config);
 
 # automatic sound slots configuration
 harddrake::sound::configure_sound_slots();
-modules::write_conf();
 
 $in->exit(0) if $in;
