@@ -91,6 +91,7 @@ sub get_lvs {
 
 	   { device => $device, 
 	     lv_name => $_,
+	     rootDevice => $lvm->{VG_name},
 	     fs_type => $fs_type || 'ext2',
 	     size => get_lv_size($device) };
        } @l
