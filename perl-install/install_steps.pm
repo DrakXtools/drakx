@@ -456,7 +456,7 @@ Consoles 1,3,4,7 may also contain interesting information";
 	$charset = 'jisx0208.1983-0' if $charset eq 'jisx0208';
 	$charset = 'ksc5601.1987-0' if $charset eq 'ksc5601';
 
-	my $welcome = c::to_utf8 (_("Welcome to %s", '%n'));
+	my $welcome = c::to_utf8(_("Welcome to %s", '%n'));
 	substInFile { 
 	    s/^(GreetString)=.*/$1=$welcome/;
 	    s/^(Language)=.*/$1=$LANG/;
