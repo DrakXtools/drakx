@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10.2
-Release: 0.11mdk
+Release: 0.12mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -367,6 +367,23 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Wed Jan 19 2005 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.2-0.12mdk
+- diskdrake: progress bar when formatting ext3 (pixel)
+- drakauth: fix switching back nsswitch.conf to local authentication
+  (pixel, #13024)
+- drakbackup: custom cron configuration (stew, #13056)
+- drakboot: do not create a maping table when uneeded (#12307)
+- drakconnect: fix bug introduced by mygtk2 (pixel)
+- drakfirewall: fix ethernet card detection (pixel, #12996)
+- harddrake2: fix crash on opening help windows
+- interactive layer: separate alignement for basic and advanced
+  entries (pixel)
+- XFdrake (pixel):
+  o when reading an existing X config file, ensure it is not too bad,
+    otherwise propose to start from scratch (#8548)
+  o set up framebuffer in standalone mode too
+  o for fbdev, advise to reboot instead of restarting X server
+
 * Wed Jan 12 2005 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.2-0.11mdk
 - harddrake2: display the menubar and the banner when embedded
 
