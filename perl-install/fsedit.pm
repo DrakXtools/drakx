@@ -560,62 +560,6 @@ sub undo {
     
 }
 
-sub move {
-    my ($hd, $part, $hd2, $sector2) = @_;
-
-    die 'TODO'; # doesn't work for the moment
-    my $part1 = { %$part };
-    my $part2 = { %$part };
-    $part2->{start} = $sector2;
-    $part2->{size} += $hd2->cylinder_size - 1;
-    partition_table::remove($hd, $part);
-    {
-	local ($part2->{notFormatted}, $part2->{isFormatted}); #- do not allow partition::add to change this
-	partition_table::add($hd2, $part2);
-    }
-
-    return if $part2->{notFormatted} && !$part2->{isFormatted} || $::testing;
-
-    local (*F, *G);
-    sysopen F, $hd->{file}, 0 or die '';
-    sysopen G, $hd2->{file}, 2 or die N("Error opening %s for writing: %s", $hd2->{file}, $!);
-
-    my $base = $part1->{start};
-    my $base2 = $part2->{start};
-    my $step = 10;
-    if ($hd eq $hd2) {
-	$base == $base2 and return;
-	$step = min($step, abs($base2 - $base));
-
-	if ($base < $base2) {
-	    $base  += $part1->{size} - $step;
-	    $base2 += $part1->{size} - $step;
-	    $step = -$step;
-	}
-    }
-
-    my $f = sub {
-	$base  < 0 and $base2 += -$base,  $base  = 0;
-	$base2 < 0 and $base  += -$base2, $base2 = 0;
-	c::lseek_sector(fileno(F), $base,  0) or die "seeking to sector $base failed on drive $hd->{device}";
-	c::lseek_sector(fileno(G), $base2, 0) or die "seeking to sector $base2 failed on drive $hd2->{device}";
-
-	my $buf;
-	sysread F, $buf, $SECTORSIZE * abs($_[0]) or die '';
-	syswrite G, $buf;
-    };
-
-    for (my $i = 0; $i < $part1->{size} / abs($step); $i++, $base += $step, $base2 += $step) {
-	print "$base $base2\n";
-	&$f($step);
-    }
-    if (my $v = ($part1->{size} % abs($step)) * sign($step)) {
-	$base += $v;
-	$base2 += $v;
-	&$f($v);
-    }
-}
-
 sub change_type {
     my ($type, $hd, $part) = @_;
     $type->{pt_type} != $part->{pt_type} || $type->{fs_type} ne $part->{fs_type} or return;

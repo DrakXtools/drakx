@@ -426,7 +426,6 @@ sub part_possible_actions {
         N_("Type")             => '!isBusy && $::expert && (!readonly || $part->{pt_type} == 0x83)',
         N_("Options")          => '$::expert',
         N_("Resize")	       => '!isBusy && !readonly && !isSpecial || isLVM($hd) && isMounted && $part->{fs_type} eq "xfs"',
-        N_("Move")             => '!isBusy && !readonly && !isSpecial && $::expert && 0', # disable for the moment
         N_("Format")           => '!isBusy && !readonly && ($::expert || $::isStandalone)',
         N_("Mount")            => '!isBusy && (hasMntpoint || isSwap) && maybeFormatted && ($::expert || $::isStandalone)',
         N_("Add to RAID")      => '!isBusy && isRawRAID && (!isSpecial || isRAID)',
@@ -786,17 +785,6 @@ filesystem checks will be run on your next boot into Windows(TM)"));
     }
 
     $adjust->(0) if $size < $oldsize;
-}
-sub Move {
-    my ($in, $hd, $part, $all_hds) = @_;
-    my $hd2 = $in->ask_from_listf(N("Move"),
-				  N("Which disk do you want to move it to?"), \&partition_table::description, @{$all_hds->{hds}}) or return;
-    my $start2 = $in->ask_from_entry(N("Sector"),
-				     N("Which sector do you want to move it to?"));
-    defined $start2 or return;
-
-    my $_w = $in->wait_message(N("Moving"), N("Moving partition..."));
-    fsedit::move($hd, $part, $hd2, $start2);
 }
 sub Format {
     my ($in, $hd, $part, $all_hds) = @_;
