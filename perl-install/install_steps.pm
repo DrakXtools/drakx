@@ -409,25 +409,8 @@ Consoles 1,3,4,7 may also contain interesting information";
     run_program::rooted($o->{prefix}, "chkconfig", "--add", "kheader");
     run_program::rooted($o->{prefix}, "chkconfig", "--add", "portmap");
 
-    #- remove the nasty acon...
-    run_program::rooted($o->{prefix}, "chkconfig", "--del", "acon") unless $ENV{LANGUAGE} =~ /ar/;
-
-    #- make the mdk fonts last in available fonts for buggy kde
-    run_program::rooted($o->{prefix}, "chkfontpath", "--remove", "/usr/X11R6/lib/X11/fonts/mdk");
-    run_program::rooted($o->{prefix}, "chkfontpath", "--add", "/usr/X11R6/lib/X11/fonts/mdk");
-
     #- call update-menus at the end of package installation
     run_program::rooted($o->{prefix}, "update-menus");
-
-    #- create /etc/sysconfig/desktop file according to user choice and presence of /usr/bin/kdm or /usr/bin/gdm.
-    my $f = "$o->{prefix}/etc/sysconfig/desktop";
-    if ($o->{compssUsersChoice}{KDE} && -x "$o->{prefix}/usr/bin/kdm") {
-	log::l("setting desktop to KDE");
-	output($f, "KDE\n");
-    } elsif ($o->{compssUsersChoice}{GNOME} && -x "$o->{prefix}/usr/bin/gdm") {
-	log::l("setting desktop to GNOME");
-	output($f, "GNOME\n");
-    }
 
     if ($o->{pcmcia}) {
 	substInFile { s/.*(TaskBarShowAPMStatus).*/$1=1/ } "$o->{prefix}/usr/lib/X11/icewm/preferences";
@@ -468,29 +451,6 @@ Consoles 1,3,4,7 may also contain interesting information";
 	    symlinkf("X11/rxvt.sh", $f) if -e $f;
 	}
     }
-
-#-    my $hasttf;
-#-    my $dest = "/usr/X11R6/lib/X11/fonts/drakfont";
-#-    foreach my $d (map { $_->{mntpoint} } grep { isFat($_) } @{$o->{fstab}}) {
-#-	  foreach my $D (map { "$d/$_" } grep { m|^win|i } all("$o->{prefix}$d")) {
-#-	      $D .= "/fonts";
-#-	      -d "$o->{prefix}$D" or next;
-#-	      log::l("found win font dir $D");
-#-	      if (!$hasttf) {
-#-		  $hasttf = $o->ask_okcancel('', 
-#-_("Some true type fonts from windows have been found on your computer.
-#-Do you want to use them? Be sure you have the right to use them under Linux."), 1) or goto nottf;
-#-		  mkdir "$o->{prefix}$dest", 0755;
-#-	      }
-#-	      /(.*)\.ttf/i and symlink "$D/$_", "$o->{prefix}$dest/$1.ttf" foreach grep { /\.ttf/i } all("$o->{prefix}$D");
-#-	  }
-#-    }
-#-  nottf:
-#-    if ($hasttf) {
-#-	  run_program::rooted($o->{prefix}, "ttmkfdir", "-d", $dest, "-o", "$dest/fonts.dir");
-#-	  run_program::rooted($o->{prefix}, "chkfontpath", "--add", $dest);
-#-    }
-
     foreach (list_skels($o->{prefix}, '.kde/share/config/kfmrc')) {
 	my $found;
 	substInFile {
@@ -842,10 +802,6 @@ sub miscellaneous {
     if ($o->{miscellaneous}{HDPARM}) {
 	$_ .= join('', map { " $_=autotune" } grep { /ide.*/ } all("/proc/ide")) if !/ide.=autotune/;
     }
-    if (my $m = detect_devices::hasUltra66()) {
-	#$_ .= " $m" if !/ide.=0x/; #- add it back to support Ultra66 on ide modules.
-    }
-
     #- keep some given parameters
     #-TODO
 
