@@ -1495,4 +1495,19 @@ sub selected_leaves {
     } grep { $l{$_} } keys %l ];
 }
 
+
+sub naughtyServers {
+    my ($packages) = @_;
+
+    my @naughtyServers = qw(FreeWnn MySQL am-utils boa cfengine cups
+finger-server freeswan imap jabber leafnode lpr mon ntp
+openssh-server pidentd postfix postgresql-server proftpd rwall rwho
+telnet-server webmin wu-ftpd ypbind); # portmap nfs-utils-clients
+
+    grep {
+	my $p = packageByName($packages, $_);
+	$p && packageFlagSelected($p);
+    } @naughtyServers;
+}
+
 1;

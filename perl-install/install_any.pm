@@ -366,6 +366,24 @@ sub unselectMostPackages {
     pkgs::selectPackage($o->{packages}, pkgs::packageByName($o->{packages}, $_) || next) foreach @{$o->{default_packages}};
 }
 
+sub warnAboutNaughtyServers {
+    my ($o) = @_;
+    my @naughtyServers = pkgs::naughtyServers($o->{packages}) or return 1;
+    if (!$o->ask_yesorno('', 
+formatAlaTeX(_("You have selected the following server(s): %s
+
+
+These servers are activated by default. They don't have any known security
+issues, but some new could be found. In that case, you must make sure to upgrade
+as soon as possible.
+
+
+Do you really want to install these servers?
+", join(", ", @naughtyServers))), 1)) {
+	pkgs::unselectPackage($o->{packages}, pkgs::packageByName($o->{packages}, $_)) foreach @naughtyServers;
+    }
+}
+
 sub addToBeDone(&$) {
     my ($f, $step) = @_;
 

@@ -500,6 +500,8 @@ sub choosePackages {
       pkgs::setSelectedFromCompssList($packages, $o->{compssUsersChoice}, $min_mark, $size2install);
 
     $o->choosePackagesTree($packages) if $individual;
+
+    install_any::warnAboutNaughtyServers($o);
 }
 
 sub chooseSizeToInstall {
