@@ -8,7 +8,7 @@ use run_program;
 use log;
 use list_modules;
 
-our %conf;
+my %conf;
 
 sub category2modules_and_description {
     my ($categories) = @_;
@@ -390,6 +390,14 @@ sub load_raw {
     }
 }
 
+sub get_parameters {
+    my %conf;
+    foreach (split(' ', get_options($_[0]))) {
+	   /(.*)=(.*)/;
+	   $conf{$1} = $2;
+    };
+    %conf;
+}
 
 
 1;
