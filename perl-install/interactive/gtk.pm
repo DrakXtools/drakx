@@ -658,7 +658,7 @@ sub ask_fromW {
     $pack->pack_start($always_pack, 1, 1, 0); $always_pack->show;
     $pack->pack_start($advanced_pack, 1, 1, 0);
     if ($buttons_pack) {
-	if ($::isWizard && !$mainw->{pop_it}) {
+	if ($::isWizard && !$mainw->{pop_it} && $::isInstall) {
 	    $buttons_pack->set_size_request($::windowwidth * 0.9 - 20, -1);
 	    $buttons_pack = gtkpack__(Gtk2::HBox->new(0,0), $buttons_pack);
 	}
