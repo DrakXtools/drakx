@@ -176,6 +176,38 @@ sub write_smb_conf {
 	template shell = /bin/bash
 	winbind use default domain = yes
 ");
+
+sub write_smb_ads_conf {
+    my ($domain,$realm) = @_;
+
+    #- was going to just have a canned config in samba-winbind
+    #- and replace the domain, but sylvestre/buchan didn't bless it yet
+
+    my $f = "$::prefix/etc/samba/smb.conf";
+    rename $f, "$f.orig";
+    output($f, "
+[global]
+        workgroup = $domain
+        realm  = $realm
+        server string = Samba Member %v
+        security = ads
+        encrypt passwords = Yes
+        password server = *
+        log file = /var/log/samba/log.%m
+        max log size = 50
+        socket options = TCP_NODELAY SO_RCVBUF=8192 SO_SNDBUF=8192
+        os level = 18
+        local master = No
+        dns proxy = No
+        winbind uid = 10000-20000
+        winbind gid = 10000-20000
+        winbind separator = +
+        template homedir = /home/%D/%U
+        template shell = /bin/bash
+        winbind use default domain = yes
+");
+}
+
 }
 
 1;
