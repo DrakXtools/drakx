@@ -1361,7 +1361,7 @@ sub clean_manufacturer_name {
     $make =~ s/^SEIKO[\s\-]*EPSON/EPSON/i;
     $make =~ s/^KYOCERA[\s\-]*MITA/KYOCERA/i;
     $make =~ s/^CITOH/C.ITOH/i;
-    $make =~ s/^OKI(|[\s\-]*DATA)/OKIDATA/i;
+    $make =~ s/^OKI(|[\s\-]*DATA)\s*$/OKIDATA/i;
     $make =~ s/^(SILENTWRITER2?|COLORMATE)/NEC/i;
     $make =~ s/^(XPRINT|MAJESTIX)/XEROX/i;
     $make =~ s/^QMS-PS/QMS/i;
@@ -1400,11 +1400,15 @@ sub ppd_entry_str {
 	     /^\s*(Generic\s*PostScript\s*Printer)\s*,?\s*(.*)$/i) ||
 	    ($descr =~
 	     /^\s*(PostScript\s*Printer)\s*,?\s*(.*)$/i) ||
-	    ($descr =~ /^([^,]+[^,\s])\s*(\(v?\d\d\d\d\.\d\d\d\).*)$/i) ||
-	    ($descr =~ /^([^,]+[^,\s])\s+(PS.*)$/i) ||
-	    ($descr =~ /^([^,]+[^,\s])\s*(PostScript.*)$/i) ||
-	    ($descr =~ /^([^,]+[^,\s])\s*(v\d+\.\d+.*)$/i) ||
-	    ($descr =~ /^([^,]+),\s*(.+)$/)) {
+	    ($descr =~ /^([^,]+[^,\s])\s*,?\s*(Foomatic.*)$/i) ||
+	    ($descr =~ /^([^,]+[^,\s])\s*,?\s*(GhostScript.*)$/i) ||
+	    ($descr =~ /^([^,]+[^,\s])\s*,?\s*(CUPS.*)$/i) ||
+	    ($descr =~
+	     /^([^,]+[^,\s])\s*,?\s*(\(v?\d\d\d\d\.\d\d\d\).*)$/i) ||
+	    ($descr =~ /^([^,]+[^,\s])\s*,?\s*(v\d+\.\d+.*)$/i) ||
+	    ($descr =~ /^([^,]+[^,\s])\s*,?\s*(PostScript.*)$/i) ||
+	    ($descr =~ /^([^,]+[^,\s])\s*,?\s+(PS.*)$/i) ||
+	    ($descr =~ /^([^,]+)\s*,?\s*(.+)$/)) {
 	    $model = $1;
 	    $driver = $2;
 	    $model =~ s/[\-\s,]+$//;
@@ -1442,6 +1446,11 @@ sub ppd_entry_str {
     # native CUPS drivers of GIMP-Print
     if ($mf eq "EPSON") {
 	$model =~ s/Stylus CX\-/Stylus CX/;
+    }
+    # Remove the "Oki" from the beginning of the model names of Okidata
+    # printers
+    if ($mf eq "OKIDATA") {
+	$model =~ s/Oki\s+//i;
     }
     # Try again to remove manufacturer's name from the beginning of the 
     # model name, this with the cleaned manufacturer name
