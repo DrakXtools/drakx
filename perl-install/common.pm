@@ -46,7 +46,12 @@ sub unmakedev { $_[0] >> 8, $_[0] & 0xff }
 
 sub translate {
     my ($s) = @_;
-    $s ? c::dgettext('libDrakX', $s) : '';
+    $s or return '';
+    foreach ('libDrakX', @::textdomains) {
+	my $s2 = c::dgettext($_, $s);
+	return $s2 if $s ne $s2;
+    }
+    $s;
 }
 
 sub untranslate {
