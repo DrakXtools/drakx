@@ -60,6 +60,17 @@ sub handle_virtual_key {
     }
 }
 
+sub setup_userconf {
+    my ($o) = @_;
+    if (!@{$o->{users}} && `getent passwd 501` =~ /([^:]+):/) {
+        log::l("passwd/501 is $1");
+        $o->{users} = [ { name => $1 } ];
+	$ENV{HOME} = "/home/$1"; #- used by lang::read()  :-/
+        print "using existing user configuration\n";
+        $using_existing_user_config = 1;
+    }
+}
+
 #- run very soon at stage2 start, setup things on tmpfs rw / that
 #- were not necessary to start stage2 itself (there were setup
 #- by stage1 of course)
@@ -138,12 +149,7 @@ sub init {
     key_mount($o);
     cat_('/proc/cmdline') =~ /\bcleankey\b/ and eval { rm_rf $key_sysconf };
     key_installfiles('simple');
-    if (`getent passwd 501` =~ /([^:]+):/) {
-        $o->{users} = [ { name => $1 } ];
-	$ENV{HOME} = "/home/$1"; #- used by lang::read()  :-/
-        print "using existing user configuration\n";
-        $using_existing_user_config = 1;
-    }
+    setup_userconf($o);
     if (-f '/etc/X11/X') {
         print "using existing host configuration\n";
         $using_existing_host_config = 1;
@@ -298,6 +304,7 @@ sub key_installfiles {
             symlinkf($_, $path);
         }
         $done = 1;
+        $::o->{steps}{configMove}{done} = 1;
     }
 
     #- /etc/sudoers can't be a link
@@ -373,6 +380,8 @@ unplug it, remove write protection, and then plug it again.")),
     my $wait = $using_existing_host_config
                || $o->wait_message(N("Setting up USB key"), N("Please wait, setting up system configuration files on USB key..."));
     key_installfiles('full');
+
+    setup_userconf($o);
 }
 
 sub enable_service {
