@@ -322,7 +322,8 @@ sub help {
         - Maintain /etc/dhcpd.conf:
         		To net boot clients, each client needs a dhcpd.conf entry, assigning an IP address
         		and net boot images to the machine. drakTermServ helps create/remove these entries.
-
+			(PCI cards may omit the image - etherboot will ask for the correct image)
+			
         		A typical dhcpd.conf stanza to support a diskless client looks like:
         		
 				host curly {
@@ -979,7 +980,7 @@ sub write_eb_image {
 		system("dd if=/dev/zero of=/tmp/eb/eb.img bs=512 seek=72 count=2808");
 		system("mkisofs -b eb.img -o /tmp/$nic.iso /tmp/eb");
 		rm_rf("/tmp/eb");
-		if ( -e "/tmp/eb.iso" ) {
+		if ( -e "/tmp/$nic.iso" ) {
 			$in->ask_warn('',_("Etherboot ISO image is %s", "/tmp/$nic.iso"))
 		} else { 
 			$in->ask_warn('',_("Something went wrong! - Is mkisofs installed?"))
