@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 9.2
-Release: 0.31mdk
+Release: 0.32mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -9,7 +9,7 @@ Group: System/Configuration/Other
 Requires: %{name}-newt = %version-%release, perl-Gtk2 >= 0.90-5mdk, /usr/X11R6/bin/xtest, font-tools, usermode >= 1.63-5mdk, perl-MDK-Common >= 1.1.2-2mdk, gurpmi
 Conflicts: drakconf < 9.1-14mdk
 Conflicts: rpmdrake < 2.1-29mdk
-BuildRequires: gettext, libgtk+-x11-2.0-devel, ldetect-devel >= 0.4.9, ncurses-devel, newt-devel, perl-devel >= 1:5.8.0-20mdk, libext2fs-devel, perl-MDK-Common-devel >= 1.1.3-1mdk
+BuildRequires: gettext, libgtk+-x11-2.0-devel, ldetect-devel >= 0.4.9-3mdk, ncurses-devel, newt-devel, perl-devel >= 1:5.8.0-20mdk, libext2fs-devel, perl-MDK-Common-devel >= 1.1.3-1mdk
 BuildRoot: %_tmppath/%name-buildroot
 Provides: draksec
 Obsoletes: draksec
@@ -314,6 +314,12 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Tue Aug 19 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.2-0.32mdk
+- pci hardware discovery: do full-probe by default
+- show advanced options by default if --expert was passed or if expect
+  checkbox was checked (#4353)
+- drakconnect: fix internet reconnection (poulpy)
+
 * Tue Aug 19 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.2-0.31mdk
 - drakbackup: user definable crontab entry (stew)
 
