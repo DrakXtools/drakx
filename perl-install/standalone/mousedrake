@@ -31,6 +31,26 @@ my ($mouse) = mouse::detect() unless $::noauto;
 my $time_tag2;
 
 #- now try to merge $curr_env->{mouse} with $mouse.
+
+# Hack to read symlinks (when they are used in existing config):
+# This prevents mousedrake from doing stupid things like
+# ln -sf mouse /dev/mouse (this was done by me after it read
+# an old XF86Config, not -4, and found "/dev/mouse" there).
+# 2002 July 13, imz@altlinux.ru
+if ( $curr_env->{mouse}{device} eq "mouse" ) {
+    $curr_env->{mouse}{device} = 
+	( readlink "$prefix/dev/mouse" 
+	  or ( log::l("reading $prefix/dev/mouse symlink failed"), 
+	       $mouse->{device} ) );
+}
+if ( $curr_env->{mouse}{auxmouse}{device} eq "mouse1" ) {
+    $curr_env->{mouse}{auxmouse}{device} = 
+	( readlink "$prefix/dev/mouse1" 
+	  or ( log::l("reading $prefix/dev/mouse1 symlink failed"),
+	       $mouse->{auxmouse}{device} ) );
+}
+# End of the hack.
+
 $mouse->{XMOUSETYPE} eq $curr_env->{mouse}{XMOUSETYPE} ||
     $mouse->{XMOUSETYPE} eq 'PS/2' && ($curr_env->{mouse}{XMOUSETYPE} =~ m|PS/2| ||
 				       $curr_env->{mouse}{auxmouse}{XMOUSETYPE} =~ m|PS/2|) and $mouse = $curr_env->{mouse};
