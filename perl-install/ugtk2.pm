@@ -106,6 +106,13 @@ sub gtkappenditems {
     $w
 }
 
+# append page to a notebook
+sub gtkappend_page {
+    my $w = shift;
+    $w->append_page(@_);
+    $w
+}
+
 sub gtkbuttonset {
     gtkdestroy($_[0]->child);
     gtkadd($_[0], gtkshow($_[1]))
