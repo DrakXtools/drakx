@@ -301,12 +301,12 @@ sub build_it() {
     $co .= join(" --mkinitrdargs --with=", map { $_->[0] } @modules);
     $co .= " " . $kernel_combo->entry->get_text;
     $co .= " 2>&1 |";
-    warn_dialog(N("Warning"), N("Be sure a media is present for the device %s",  $device_combo->entry->get_text)) or return;
+    $::testing or warn_dialog(N("Warning"), N("Be sure a media is present for the device %s",  $device_combo->entry->get_text)) or return;
     # we test if the media is present
   test:
     my $a = "dd count=1 if=/dev/null of=" . $device_combo->entry->get_text . " 2>&1";
     my $b = `$a`;
-    if ($b =~ /dd/) {
+    if (!$::testing && $b =~ /dd/) {
         err_dialog(N("Error"), N("There is no medium or it is write-protected for device %s.\nPlease insert one.", $device_combo->entry->get_text), { cancel => 1 }) ? goto test : return 0;
     }
   
