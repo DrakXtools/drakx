@@ -3538,6 +3538,13 @@ sub main {
     # clicked on the "Configure" button in the "Summary" step. We do not
     # call it during the preparation of the "Summary" screen.
     if (!$::isInstall || $install_step == 1) {
+	# Ask for a spooler when none is defined yet
+	$printer->{SPOOLER} ||= 
+	    setup_default_spooler($printer, $in, $upNetwork) || return;
+    
+	# Save the default spooler
+	printer::default::set_spooler($printer);
+
 	mainwindow_interactive($printer, $in, $upNetwork);
     }
     # In the installation we call the clean-up manually when we leave 
@@ -3615,6 +3622,12 @@ sub init {
     printer::main::configureapplications($printer);
     undef $w;
     
+    # Turn on printer autodetection by default
+    $printer->{AUTODETECT} = 1;
+    $printer->{AUTODETECTLOCAL} = 1;
+    $printer->{AUTODETECTNETWORK} = 1;
+    $printer->{AUTODETECTSMB} = 1;
+    
     # Mark this part as done, it should not be done a second time.
     if ($::isInstall) {
 	$::printerdrake_initialized = 1;
@@ -3627,19 +3640,6 @@ sub mainwindow_interactive {
 
     my ($printer, $in, $upNetwork) = @_;
 
-    # Ask for a spooler when none is defined yet
-    $printer->{SPOOLER} ||= 
-	setup_default_spooler($printer, $in, $upNetwork) || return;
-    
-    # Save the default spooler
-    printer::default::set_spooler($printer);
-
-    # Turn on printer autodetection by default
-    $printer->{AUTODETECT} = 1;
-    $printer->{AUTODETECTLOCAL} = 1;
-    $printer->{AUTODETECTNETWORK} = 1;
-    $printer->{AUTODETECTSMB} = 1;
-    
     # Control variables for the main loop
     my ($menuchoice, $cursorpos) = ('', '::');
 
