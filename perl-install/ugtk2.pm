@@ -557,10 +557,9 @@ sub gtktext_insert {
     } else {
 	$buffer->set_text($t, -1);
     }
-    #- the following lines are needed to move the cursor mark to the beginning, so that if the
+    #- the following line is needed to move the cursor to the beginning, so that if the
     #- textview has a scrollbar, it won't scroll to the bottom when focusing (#3633)
-    $buffer->move_mark_by_name('selection_bound', my $beg = $buffer->get_start_iter); $beg->free;
-    $buffer->move_mark_by_name('insert',          my $end = $buffer->get_start_iter); $end->free;
+    $buffer->place_cursor(my $iter = $buffer->get_start_iter); $iter->free;
     $textview->set_wrap_mode($opts->{wrap_mode} || 'word');
     $textview->set_editable($opts->{editable} || 0);
     $textview->set_cursor_visible($opts->{visible} || 0);

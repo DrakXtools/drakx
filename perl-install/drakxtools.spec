@@ -1,14 +1,14 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 9.1
-Release: 29mdk
+Release: 30mdk
 Url: http://www.mandrakelinux.com/en/drakx.php2
 Source0: %name-%version.tar.bz2
 License: GPL
 Group: System/Configuration/Other
 # Temporary requires for tools that still use gtk+1 (mainly drakfloppy and net_monitor)
 Requires: perl-GTK >= 0.6123, perl-GTK-GdkImlib, perl-GTK-GdkPixbuf
-Requires: %{name}-newt = %version-%release, perl-GTK2 >= 0.0.cvs.2003.03.04.1-2mdk, XFree86-100dpi-fonts, XFree86-75dpi-fonts, /usr/X11R6/bin/xtest, font-tools, usermode >= 1.63-5mdk, perl-MDK-Common >= 1.0.4-14mdk
+Requires: %{name}-newt = %version-%release, perl-GTK2 >= 0.0.cvs.2003.04.03.1, XFree86-100dpi-fonts, XFree86-75dpi-fonts, /usr/X11R6/bin/xtest, font-tools, usermode >= 1.63-5mdk, perl-MDK-Common >= 1.0.4-14mdk
 Conflicts: drakconf < 9.1-3mdk 
 BuildRequires: gettext, libgtk+-x11-2.0-devel, ldetect-devel >= 0.4.8, ncurses-devel, newt-devel, perl-devel, libext2fs-devel, perl-MDK-Common-devel
 BuildRoot: %_tmppath/%name-buildroot
@@ -303,6 +303,9 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Thu Apr  3 2003 Guillaume Cottenceau <gc@mandrakesoft.com> 9.1-30mdk
+- ugtk2.pm: fix slight pb with gtktext_insert (#3633)
+
 * Fri Mar 28 2003 Pixel <pixel@mandrakesoft.com> 9.1-29mdk
 - use ServerFlags DontVTSwitch for i845, i865 and i85x
 
