@@ -254,6 +254,7 @@ unplug it, remove write protection, and then plug it again.")),
     unlink '/home/.touched';
 
     my $wait = $o->wait_message(N("Setting up USB key"), N("Please wait, setting up system configuration files on USB key..."));
+
     mkdir '/home/.sysconf';
     my $sysconf = '/home/.sysconf/' . machine_ident();
     if (!-d $sysconf) {
@@ -271,7 +272,11 @@ unplug it, remove write protection, and then plug it again.")),
             symlinkf($_, $path);
         }
     }
+    #- /etc/sudoers can't be a link
+    unlink($_), system("cp /image/$_ $_") foreach qw(/etc/sudoers);
+
     $wait = undef;
+
 }
 
 sub install2::startMove {
