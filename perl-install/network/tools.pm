@@ -261,15 +261,20 @@ sub get_default_gateway_interface {
     (find { get_interface_type($intf->{$_}) eq 'ethernet' && $intf->{$_}{BOOTPROTO} eq 'dhcp' } @intfs);
 }
 
+sub get_interface_status {
+    my ($gw_intf) = @_;
+    my @routes = `$::prefix/sbin/ip route show`;
+    my $is_up = to_bool(grep { /\s+dev\s+$gw_intf(?:\s+|$)/ } @routes);
+    my ($gw_address) = join('', @routes) =~ /^default\s+via\s+(\S+).*\s+dev\s+$gw_intf(?:\s+|$)/m;
+    return $is_up, $gw_address;
+}
+
 #- returns (gateway_interface, interface is up, gateway address, dns server address)
 sub get_internet_connection {
     my ($netc, $intf, $o_gw_intf) = @_;
-    my @routes = `$::prefix/sbin/ip route show`;
     my ($gw_intf, $is_up, $gw_address);
     $gw_intf = $o_gw_intf || get_default_gateway_interface($netc, $intf) or return;
-    $is_up = to_bool(grep { /\s+dev\s+$gw_intf(?:\s+|$)/ } @routes);
-    ($gw_address) = join('', @routes) =~ /^default\s+via\s+(\S+).*\s+dev\s+$gw_intf(?:\s+|$)/m;
-    return $gw_intf, $is_up, $gw_address, $netc->{dnsServer};
+    return $gw_intf, get_interface_status($gw_intf), $netc->{dnsServer};
 }
 
 sub get_interface_type {
