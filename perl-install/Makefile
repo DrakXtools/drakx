@@ -131,7 +131,9 @@ endif
 #	echo -e '#!/bin/sh\n\nexec "/usr/bin/sh"' > $(DEST)/usr/bin/runinstall2
 #	chmod a+x $(DEST)/usr/bin/runinstall2
 
-	tar xyC $(DEST) -f ../install/install1_pcmcia.tar.bz2 ./etc/pcmcia
+	tar xyC $(DEST) -f ../install/install1_pcmcia.$(ARCH).tar.bz2 ./etc/pcmcia
+
+	find $(DEST) -name CVS | xargs rm -rf
 
 full_stage2:
 	if [ `id -u` = 0 ]; then rm -rf $(DEST); else $(SUDO) rm -rf $(DEST); fi

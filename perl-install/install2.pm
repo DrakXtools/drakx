@@ -58,7 +58,7 @@ my (%installSteps, @orderedInstallSteps);
   configurePrinter   => [ __("Configure printer"), 1, 0, '', "doInstallStep" ],
   setRootPassword    => [ __("Set root password"), 1, 1, '', "formatPartitions" ],
   addUser            => [ __("Add a user"), 1, 1, '', "doInstallStep" ],
-arch() =~ /alpha/ ? : (
+arch() =~ /alpha/ ? (
   createBootdisk     => [ __("Create a bootdisk"), 1, 0, '', "doInstallStep" ],
 ) : (),
   setupBootloader    => [ __("Install bootloader"), 1, 1, '', "doInstallStep" ],

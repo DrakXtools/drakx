@@ -932,6 +932,7 @@ sub setupBootloaderBefore {
 
 #------------------------------------------------------------------------------
 sub setupBootloader {
+    my ($o) = @_;
     if (arch() =~ /^i386/) {
 	$o->ask_yesorno('', _("Do you want to use aboot?"), 1) or return;
 	$o->SUPER::setupBootloader;	
