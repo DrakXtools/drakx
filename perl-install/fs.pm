@@ -750,8 +750,7 @@ sub mount {
 		my $err = $?;
 		die "fsck.jfs failed" if $err & 0xfc00;
 	    };
-	} elsif ($fs eq 'ext2' || $fs eq 'ext3' && $::isInstall && !$::o->{isUpgrade}) {
-	    if (!$b_rdonly) {
+	} elsif ($fs eq 'ext2' && !$b_rdonly) {
 		$o_wait_message->(N("Checking %s", $dev)) if $o_wait_message;
 		foreach ('-a', '-y') {
 		    run_program::raw({ timeout => 60 * 60 }, "fsck.ext2", $_, $dev);
@@ -766,9 +765,6 @@ sub mount {
 			last;
 		    }
 		}
-	    }
-	    # really mount as ext2 during install for speed up
-	    $fs = 'ext2';
 	}
 	if (member($fs, @fs_modules)) {
 	    eval { modules::load($fs) };
