@@ -150,6 +150,8 @@ sub packageFile {
     "$1$2." . c::headerGetEntry($pkg->{header}, 'arch') . ".rpm";
 }
 
+sub packageSelectedOrInstalled { my ($pkg) = @_; packageFlagSelected($pkg) || packageFlagInstalled($pkg) }
+
 sub packageId {
     my ($packages, $pkg) = @_;
     my $i = 0;
@@ -812,7 +814,6 @@ sub selectPackagesAlreadyInstalled {
 			     my $version_rel_test = $version_cmp > 0 || $version_cmp == 0 &&
 			       versionCompare(c::headerGetEntry($header, 'release'), packageRelease($p)) >= 0;
 			     $version_rel_test or log::l("keeping an older package, avoiding selecting $p->{file}");
-			     packageSetFlagSelected($p, 1);
 			     packageSetFlagInstalled($p, 1);
 			 }
 		     });
