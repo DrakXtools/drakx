@@ -932,7 +932,10 @@ sub setupBootloaderBefore {
 
 #------------------------------------------------------------------------------
 sub setupBootloader {
-    if (arch() =~ /^sparc/) {
+    if (arch() =~ /^i386/) {
+	$o->ask_yesorno('', _("Do you want to use aboot?"), 1) or return;
+	$o->SUPER::setupBootloader;	
+    } elsif (arch() =~ /^sparc/) {
 	&setupSILO;
     } else {
 	&setupLILO;
@@ -1131,7 +1134,7 @@ sub load_thiskind {
     if ($type =~ /scsi/i && cat_("/proc/cmdline") !~ /ide2=/) {
 	require pci_probing::main;
 	my @l = map { $_->[0] } grep { $_->[1] =~ /(HPT|Ultra66)/ } pci_probing::main::probe('STORAGE_OTHER', 'more');
-	if ($o->ask_yesorno('', 
+	if (@l && $o->ask_yesorno('', 
 _("Linux does not yet fully support ultra dma 66.
 As a work-around i can make a custom floppy giving access the hard drive on ide2 and ide3"), 1)) {
 	    log::l("HPT|Ultra66: found");

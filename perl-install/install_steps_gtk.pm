@@ -278,7 +278,7 @@ When sure, press Ok."))) {
 	    my $oldsize = $part->{size};
 	    $hd->{isDirty} = $hd->{needKernelReread} = 1;
 	    $part->{size} -= min($max_linux, $part->{size} - $min_win);
-	    partition_table::adjustEnd($hd, $part);
+	    $hd->adjustEnd($part);
 	    partition_table::adjust_local_extended($hd, $part);
 	    partition_table::adjust_main_extended($hd);
 

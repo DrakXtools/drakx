@@ -6,12 +6,14 @@ function f() {
     v=`perl -Iperl-install -e "use modules; print qq(\\$_.o\n) foreach modules::module_of_type(\"$1\")"` 
 }
 
+ARCH=`uname -m | sed -e 's/i.86/i386/' -e 's/sparc.*/sparc/'`
+
 f "scsi|disk" ; SCSI_DRIVERS=$v
 f "net" ; NETWORK_DRIVERS=$v
 f "scsi|cdrom" ; CD_DRIVERS=$v
 f "pcmcia" ; PCMCIA_DRIVERS=$v
 
-FSMODULES="vfat.o fat.o"
+[ $ARCH == "i386" ] && FSMODULES="vfat.o fat.o"
 
 NETWORK_MODULES="$FSMODULES $NETWORK_DRIVERS"
 CDROM_MODULES="  $FSMODULES $CD_DRIVERS"
@@ -20,19 +22,22 @@ PCMCIA_MODULES=" $FSMODULES $PCMCIA_DRIVERS 8390.o lockd.o nfs.o sunrpc.o isofs.
 LNX4WIN_MODULES="$FSMODULES loop.o isofs.o"
 NOT_USEFULL_IN_STAGE1="nls_*.o parport_probe.o raid*.o serial.o smbfs.o usb-*.o"
 
-echo $NETWORK_DRIVERS
-
 PCMCIA_INSTALLMODULES="pcmcia_core.o tcic.o ds.o i82365.o"
 
-cp -f $KERNEL_BOOT_PATH/boot/vmlinuz* vmlinuz
+if [ "$ARCH" == "i386" ]; then
+    #set 640x480x16 resolution on boot.
+    cp -f $KERNEL_BOOT_PATH/boot/vmlinuz* vmlinuz
+    /usr/sbin/rdev -v vmlinuz 785
+    cp -f vmlinuz /export/lnx4win
+
+    rm -rf install_pcmcia_modules ; install -d install_pcmcia_modules
+    install -d lnx4win/initrd/modules
+else
+    cp -f "$KERNEL_BOOT_PATH"/boot/vmlinux.gz .
+fi
 cp -f $KERNEL_BOOT_PATH/boot/System.map* System.map
 
-#set 640x480x16 resolution on boot.
-/usr/sbin/rdev -v vmlinuz 785
-
 rm -rf modules ; install -d modules
-rm -rf install_pcmcia_modules ; install -d install_pcmcia_modules
-install -d lnx4win/initrd/modules
 (cd modules ; 
     cp -f `find ../"$KERNEL_BOOT_PATH"/lib/modules/ -name "*.o"` .
     /sbin/depmod -m ../System.map -i -e *.o | grep ': ' | sed 's/\.o//g' > modules.dep
@@ -43,9 +48,9 @@ install -d lnx4win/initrd/modules
     ls $CDROM_MODULES   | cpio --quiet -H crc -o | gzip -9 > cdrom_modules.cgz	
     ls $HD_MODULES      | cpio --quiet -H crc -o | gzip -9 > hd_modules.cgz     
     ls $PCMCIA_MODULES  | cpio --quiet -H crc -o | gzip -9 > pcmcia_modules.cgz
+[ "$ARCH" == "i386" ] && {
     cp $PCMCIA_INSTALLMODULES ../install_pcmcia_modules/
     cp -f $LNX4WIN_MODULES modules.dep ../lnx4win/initrd/modules
+}
     rm -f $NETWORK_MODULES $CDROM_MODULES $HD_MODULES $PCMCIA_MODULES $PCMCIA_INSTALLMODULES $NOT_USEFULL_IN_STAGE1 # leave in the directory non-install1 used modules
 )
-
-cp -f vmlinuz /export/lnx4win

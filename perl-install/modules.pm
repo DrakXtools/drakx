@@ -131,6 +131,7 @@ arch() =~ /^sparc/ ? (
 #  "pci2000" => "Perceptive Solutions PCI-2000", # TODO
   "qlogicisp" => "Qlogic ISP",
   "sym53c8xx" => "Symbios 53c8xx",
+  "scsi_mod" => "scsi_mod",
 }],
 [ 'disk', {
 arch() =~ /^sparc/ ? (
@@ -147,6 +148,7 @@ arch() =~ /^sparc/ ? (
   "eata_dma" => "EATA DMA Adapters",
   "ppa" => "Iomega PPA3 (parallel port Zip)",
   "imm" => "Iomega Zip (new driver)",
+  "ide-disk" => "IDE disk",
 ),
 }],
 [ 'cdrom', {
@@ -165,6 +167,7 @@ arch() !~ /^sparc/ ? (
 ) : (),
   "isofs" => "iso9660",
   "ide-cd" => "ide-cd",
+  "cdrom" => "cdrom",
 }],
 [ 'sound', {
 arch() !~ /^sparc/ ? (
@@ -289,6 +292,10 @@ my %type_aliases = (
   scsi => 'disk',
 );
 
+my @skip_modules_on_stage1 =
+  arch() =~ /alpha/ ? qw(sb1000) :
+  ();
+
 
 my @drivers_fields = qw(text type);
 %drivers = ();
@@ -308,7 +315,8 @@ while (my ($k, $v) = each %drivers) {
 
 sub module_of_type($) {
     my ($type) = @_;
-    grep { $drivers{$_}{type} =~ /^($type)$/ } keys %drivers;
+    my %skip; @skip{@skip_modules_on_stage1} = ();
+    grep { !exists $skip{$_} } grep { $drivers{$_}{type} =~ /^($type)$/ } keys %drivers;
 }
 
 sub text_of_type($) {

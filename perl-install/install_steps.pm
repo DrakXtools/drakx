@@ -613,7 +613,13 @@ sub readBootloaderConfigBeforeInstall {
 
 sub setupBootloaderBefore {
     my ($o) = @_;
-    if (arch() =~ /^sparc/) {
+    if (arch() =~ /alpha/) {
+	if (my $dev = fsedit::get_root($o->{fstab})) {
+	    $o->{bootloader}{boot} ||= "/dev/$dev->{rootDevice}";
+	    $o->{bootloader}{root} ||= "/dev/$dev->{device}";
+	    $o->{bootloader}{part_nb} ||= first($dev->{device} =~ /(\d+)/);
+	}
+    } elsif (arch() =~ /^sparc/) {
 	require silo;
         silo::suggest($o->{prefix}, $o->{bootloader}, $o->{hds}, $o->{fstab}, install_any::kernelVersion());
     } else {
@@ -627,7 +633,18 @@ sub setupBootloader($) {
     my ($o) = @_;
     return if $::g_auto_install;
 
-    if (arch() =~ /^sparc/) {
+    if (arch() =~ /alpha/) {
+	return if $::testing;
+	my $b = $o->{bootloader};
+	$b->{boot} or $o->ask_warn('', "Can't install aboot, not a bsd disklabel"), return;
+	
+	run_program::rooted($o->{prefix}, "swriteboot", $b->{boot}, "/boot/bootlx");
+	run_program::rooted($o->{prefix}, "abootconf", $b->{boot}, $b->{part_nb});
+ 
+	output "$o->{prefix}/etc/aboot.conf", 
+	  map_index { "$::i:$b->{part_nb}$_ root=$b->{root} $b->{perImageAppend}\n" }
+	    map { /$o->{prefix}(.*)/ } eval { glob_("$o->{prefix}/boot/vmlinux*") };
+    } elsif (arch() =~ /^sparc/) {
         silo::install($o->{prefix}, $o->{bootloader});
     } else {
         lilo::install($o->{prefix}, $o->{bootloader});

@@ -415,7 +415,7 @@ sub write($) {
 	$_->{normal}{local_start} = $_->{normal}{start} - $_->{start};
 	$_->{extended} and $_->{extended}{local_start} = $_->{extended}{start} - $hd->{primary}{extended}{start};
 
-	arch() !~ /^sparc/ and $hd->write($_->{start}, $_->{raw}) or die "writing of partition table failed";
+	$hd->write($_->{start}, $_->{raw}) or die "writing of partition table failed";
     }
     $hd->{isDirty} = 0;
 

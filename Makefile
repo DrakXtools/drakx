@@ -1,15 +1,16 @@
 ARCH := $(patsubst i%86,i386,$(shell uname -m))
 ARCH := $(patsubst sparc%,sparc,$(ARCH))
 
-BOOT_IMG = hd.img cdrom.img network.img
 RELEASE_BOOT_IMG = hd.img cdrom.img network.img
 ifeq (i386,$(ARCH))
-BOOT_IMG += pcmcia.img pcmcia_ks.img network_ks.img
+BOOT_IMG = pcmcia_ks.img network_ks.img
 RELEASE_BOOT_IMG += pcmcia.img
 endif
 ifeq (sparc,$(ARCH))
-BOOT_IMG += live.img tftp.img tftprd.img
+BOOT_IMG = live.img tftp.img tftprd.img
 endif
+BOOT_IMG += $(RELEASE_BOOT_IMG)
+
 BOOT_RDZ = $(BOOT_IMG:%.img=%.rdz)
 BINS = install/install install/full-install install/local-install install/installinit/init
 DIRS = tools install install/installinit perl-install
@@ -48,7 +49,7 @@ dirs:
 	for i in $(DIRS); do make -C $$i; done
 
 $(BOOT_RDZ): dirs modules
-	`./tools/specific_arch ./make_boot_img` $@ $(@:%.rdz=%)
+	./make_boot_img $@ $(@:%.rdz=%)
 
 $(BOOT_IMG): %.img: %.rdz
 	`./tools/specific_arch ./make_boot_img` $@ $(@:%.img=%)

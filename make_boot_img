@@ -1,12 +1,16 @@
 #!/usr/bin/perl
 
-@ARGV >= 2 or die "usage: $0 <image> cdrom|hd|network|network_ks|pcmcia\n";
+@ARGV >= 2 or die "usage: $0 <image> cdrom|hd|network|network_ks|pcmcia|live|tftp|tftprd\n";
+
+use Config;
+Config->import;
+my ($arch) = $Config{archname} =~ /(.*)-/;
 
 ($img, $type) = @ARGV;
 
 $instdir = "install";
 $ks = "kickstart=floppy" if $type =~ s/_ks//;
-$mnt = "/mnt/disk";
+$mnt = "/tmp/drakx_mnt";
 $mke2fs = "/sbin/mke2fs -q -m 0 -F -s 1";
 
 if ($>) {
@@ -14,26 +18,31 @@ if ($>) {
     $ENV{PATH} = "/sbin:/usr/sbin:$ENV{PATH}";
 }
 
+sub __ { print @_, "\n"; system(@_); }
+sub _ { __ @_; $? and die; }
+
+_ "$sudo mkdir $mnt" unless -e $mnt;
+_ "$sudo mkdir ${mnt}2" unless -e "${mnt}2";
+
 $install = $ {{
+    live => "full-install",
+    tftp => "full-install",
+    tftprd => "full-install",
     pcmcia => "full-install",
     network => "install",
     cdrom => "local-install",
     hd => "local-install"
 }}{$type} or die;
 
-$img =~ /rdz$/ ? initrd($mnt, $img) : msg_boot_img($mnt, $img);
-#boot_img($mnt, $img);
-
-sub __ { print @_, "\n"; system(@_); }
-sub _ { __ @_; $? and die; }
+$img =~ /rdz$/ ? initrd($mnt, $img) : $::{"boot_img_$arch"}->($mnt, $img);
 
 sub install_s { _ "strip $_[0]"; _ "$sudo install $_[0] $_[1]" }
 
 sub initrd {
     my ($mnt, $img) = @_;
     my $tmp = "$ENV{HOME}/tmp/initrd";
-    my $tar = "$instdir/install1_$type.tar.bz2";
-    -e $tar or $tar = "$instdir/install1.tar.bz2";
+    my $tar = "$instdir/install1_$type.$arch.tar.bz2";
+    -e $tar or $tar = "$instdir/install1.$arch.tar.bz2";
 
     __ "$sudo umount $tmp $mnt 2>/dev/null";
     _ "dd if=/dev/zero of=$tmp bs=1k count=2000";
@@ -46,6 +55,7 @@ sub initrd {
 
     _ "$sudo cp -f install_${type}_modules/* $mnt/modules/" if -d "install_${type}_modules";
     _ "$sudo cp -f modules/${type}_modules.cgz $mnt/modules/modules.cgz";
+    _ "ln -s modules.cgz $mnt/modules/modules64.cgz" if $arch =~ /sparc/;
     _ "$sudo cp -f modules/modules.dep $mnt/modules/";
     _ "$sudo umount $mnt";
 
@@ -57,28 +67,7 @@ sub initrd {
 #    _ "rm -f $tmp";
 }
 
-sub boot_img {
-    my ($mnt, $img) = @_;
-
-    __ "$sudo umount $mnt 2>/dev/null";
-    _ "bunzip2 -c $instdir/installinit/emptyboot.img.bz2 > $img";
-    _ "$sudo mount -t msdos -o umask=0 $img $mnt -o loop";
-    _ "cat vmlinuz > $mnt/vmlinuz";
-    -f "$type.rdz" ? _ "cp -f $type.rdz $mnt" : initrd("${mnt}2", "$mnt/$type.rdz");
-    
-    output("$mnt/syslinux.cfg", "
-default linux
-prompt 0
-label linux
-  kernel vmlinuz
-  append $ks ramdisk=32000 initrd=$type.rdz mdkinst $type
-");
-    _ "cp -f $instdir/installinit/ks.cfg $mnt 2>/dev/null" if $ks;
-    _ "sync";
-    _ "df $mnt";
-}
-
-sub msg_boot_img {
+sub boot_img_i386 {
     my ($mnt, $img) = @_;
 
     __ "$sudo umount $mnt 2>/dev/null";
@@ -118,7 +107,132 @@ label rescue
     _ "df $mnt";
 }
 
+sub boot_img_alpha {
+    my ($mnt, $img) = @_;
+    my $sizek = int ((-s "vmlinux.gz") / 1024 + 130);
 
+    __ "$sudo umount $mnt 2>/dev/null";
+    _ "dd if=/dev/zero of=$img bs=1k count=$sizek";
+    _ "$mke2fs $img";
+    _ "/sbin/e2writeboot $img /boot/bootlx";
+    _ "$sudo mount -t ext2 $img $mnt -o loop";
+    _ "cp -f vmlinux.gz $mnt";
+    -f "$type.rdz" or initrd("${mnt}2", "$type.rdz");
+
+    mkdir "$mnt/etc", 0777;
+    output("$mnt/etc/aboot.conf", 
+"0:vmlinux.gz load_ramdisk=1 prompt_ramdisk=0 ramdisk_start=$sizek root=/dev/fd0 mdkinst rw ramdisk=32000
+");
+    _ "sync";
+    _ "df $mnt";
+    __ "$sudo umount $mnt 2>/dev/null";
+    _ "cat $type.rdz >> $img";
+}
+
+sub boot_img_sparc {
+    my ($mnt, $img) = @_;
+    if ($type eq 'live') {
+	#- hack to produce directly into /export the needed file for cdrom boot.
+	my $dir = "/export";
+	my $boot = "boot"; #- non-absolute pathname only!
+
+	_ "mkdir -p $dir/$boot";
+	_ "cp -f /boot/cd.b /boot/second.b $dir/$boot";
+	_ "cp -f vmlinuz $dir/$boot/vmlinux.gz";
+	-f "live.rdz" ? _ "cp -f live.rdz $dir/$boot" : initrd("${mnt}2", "$dir/$boot/live.rdz");
+
+	output("$dir/$boot/silo.conf", "
+partition=1
+default=linux
+timeout=100
+read-write
+message=/$boot/boot.msg
+image=\"cat /$boot/boot.msg\"
+  label=1
+  single-key
+image=\"cat /$boot/general.msg\"
+  label=2
+  single-key
+image=\"cat /$boot/expert.msg\"
+  label=3
+  single-key
+image=\"cat /$boot/rescue.msg\"
+  label=4
+  single-key
+image=\"cat /$boot/kickit.msg\"
+  label=5
+  single-key
+image=\"cat /$boot/param.msg\"
+  label=6
+  single-key
+image=/$boot/vmlinux.gz
+  label=linux
+  alias=install
+  initrd=/$boot/live.rdz
+  append=mdkinst ramdisk=32000
+image=/$boot/vmlinux.gz
+  label=text
+  initrd=/$boot/live.rdz
+  append=mdkinst ramdisk=32000 text
+image=/$boot/vmlinux.gz
+  label=expert
+  initrd=/$boot/live.rdz
+  append=mdkinst ramdisk=32000 expert
+image=/$boot/vmlinux.gz
+  label=ks
+  initrd=/$boot/live.rdz
+  append=mdkinst ramdisk=32000 ks
+");
+
+	output("$dir/$boot/README", "
+To Build a Bootable CD-ROM, try:
+  mkisofs -R -o t.iso -S $boot/cd.b -B $boot/second.b -s /$boot/silo.conf /export
+");
+    } elsif ($type eq 'tftp') {
+	my $dir = "/export";
+	my $boot = "images";
+
+	_ "mkdir -p $dir/$boot";
+	_ "elftoaout kernel/src/vmlinux -o $dir/$boot/tftp.img";
+    } elsif ($type eq 'tftprd') {
+	my $dir = "/export";
+	my $boot = "images";
+	my $arch = `uname -m`; chomp $arch;
+
+	_ "mkdir -p $dir/$boot";
+	-f "$type.rdz" ? _ "cp -f $type.rdz kernel/src/initrd.gz" : initrd("${mnt}2", "kernel/src/initrd.gz");
+	_ "make -C kernel/src tftpboot.img";
+	_ "cp -f kernel/src/arch/$arch/boot/tftpboot.img $dir/$boot/tftprd.img";
+    } else {
+	my $dir = "floppy";
+
+	__ "$sudo umount $mnt 2>/dev/null";
+	_ "rm -rf $dir";
+	_ "mkdir -p $dir";
+	_ "cp -f /boot/fd.b /boot/second.b $dir";
+	_ "cp -f vmlinuz $dir/vmlinux.gz";
+	-f "$type.rdz" ? _ "cp -f $type.rdz $dir" : initrd("${mnt}2", "$dir/$type.rdz");
+
+	output("$dir/silo.conf", "
+partition=1
+default=linux
+timeout=100
+read-write
+image=/vmlinux.gz
+  label=linux
+  initrd=/$type.rdz
+  append=mdkinst ramdisk=32000 $type
+");
+	_ "genromfs -d $dir -f /dev/ram -A 2048,/.. -a 512 -V \'DrakX boot disk\'";
+	_ "$sudo mount -t romfs /dev/ram $mnt";
+	_ "silo -r $mnt -F -i /fd.b -b /second.b -C /silo.conf";
+	_ "$sudo umount $mnt";
+	_ "dd if=/dev/ram of=$type.img bs=1440k count=1";
+	_ "sync";
+	_ "$sudo mount -t romfs /dev/ram $mnt";
+	_ "df $mnt";
+    }
+}
 
 sub output {
     my $f = shift;

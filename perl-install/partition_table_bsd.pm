@@ -47,6 +47,8 @@ my ($main_format, $main_fields) = list2kv(
   S   => 'npartitions',
   I   => 'bbsize',
   I   => 'sbsize',
+  a128=> 'partitions',
+  a236=> 'blank',
 );
 $main_format = join '', @$main_format;
 
@@ -66,20 +68,18 @@ sub read($$) {
     sysread F, $tmp, psizeof($main_format) or die "error while reading partition table in sector $sector";
     my %info; @info{@$main_fields} = unpack $main_format, $tmp;
 
-    $info{npartitions} <= $nb_primary or die "too many partitions ($info{npartitions} > $nb_primary) for a bsd disklabel";
+    #- TODO verify checksum
+
+    my $size = psizeof($format);
+    my @pt = map {
+	my %h; @h{@fields} = unpack $format, $_;
+	$h{type} = $typeToDos{$h{type}} || $h{type};
+	\%h;
+    } $info{partitions} =~ /(.{$size})/g;
 
     #- check magic number
     $info{magic}  == $magic or die "bad magic number";
     $info{magic2} == $magic or die "bad magic number";
-
-    #- TODO verify checksum
-
-    my @pt = map {
-	sysread F, $tmp, psizeof($format) or die "error while reading partition table in sector $sector";
-	my %h; @h{@fields} = unpack $format, $tmp;
-	$h{type} = $typeToDos{$h{type}} || $h{type};
-	\%h;
-    } (1..$info{npartitions});
 
     [ @pt ], \%info;
 }
@@ -103,13 +103,13 @@ sub write($$$;$) {
 
     $info->{npartitions} = $nb_primary; #- is it ok?
 
-    syswrite F, pack($main_format, @$info{@$main_fields}), psizeof($main_format) or return 0;
-
     @$pt == $nb_primary or die "partition table does not have $nb_primary entries";
-    foreach (@$pt) {
+    $info->{partitions} = join '', map {
 	local $_->{type} = $typeFromDos{$_->{type}} || $_->{type};
-	syswrite F, pack($format, @$_{@fields}), psizeof($format) or return 0;
-    }
+	pack $format, @$_{@fields};
+    } @$pt;
+
+    syswrite F, pack($main_format, @$info{@$main_fields}), psizeof($main_format) or return 0;
     1;
 }
 

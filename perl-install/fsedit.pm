@@ -20,7 +20,9 @@ use log;
 #- Globals
 #-#####################################################################################
 my @suggestions = (
+arch() =~ /^i386/ ? (
   { mntpoint => "/boot",    size =>  16 << 11, type => 0x83, maxsize =>  30 << 11 },
+) : (),
   { mntpoint => "/",        size =>  50 << 11, type => 0x83, ratio => 1, maxsize => 300 << 11 },
   { mntpoint => "swap",     size =>  30 << 11, type => 0x82, ratio => 1, maxsize => 250 << 11 },
   { mntpoint => "/usr",     size => 200 << 11, type => 0x83, ratio => 6, maxsize =>1500 << 11 },
@@ -171,9 +173,11 @@ sub suggest_part($$$;$) {
       grep { !$part->{type} || $part->{type} == $_->{type} }
 	@$suggestions or return;
 
-    $best = $second if
-      $best->{mntpoint} eq '/boot' &&
-      $part->{start} + $best->{size} > 1024 * $hd->cylinder_size(); #- if the empty slot is beyond the 1024th cylinder, no use having /boot
+    if (arch() =~ /^i386/) {
+	$best = $second if
+	  $best->{mntpoint} eq '/boot' &&
+	  $part->{start} + $best->{size} > 1024 * $hd->cylinder_size(); #- if the empty slot is beyond the 1024th cylinder, no use having /boot
+    }
 
     defined $best or return; #- sorry no suggestion :(
 
@@ -227,7 +231,7 @@ sub check_mntpoint {
 
     has_mntpoint($mntpoint, $hds) and die _("There is already a partition with mount point %s", $mntpoint);
 
-    if ($part->{start} + $part->{size} > 1024 * $hd->cylinder_size()) {
+    if ($part->{start} + $part->{size} > 1024 * $hd->cylinder_size() && arch() =~ /i386/) {
 	die "/boot ending on cylinder > 1024" if $mntpoint eq "/boot";
 	die     "/ ending on cylinder > 1024" if $mntpoint eq "/" && !has_mntpoint("/boot", $hds);
     }

@@ -58,7 +58,9 @@ my (%installSteps, @orderedInstallSteps);
   configurePrinter   => [ __("Configure printer"), 1, 0, '', "doInstallStep" ],
   setRootPassword    => [ __("Set root password"), 1, 1, '', "formatPartitions" ],
   addUser            => [ __("Add a user"), 1, 1, '', "doInstallStep" ],
+arch() =~ /alpha/ ? : (
   createBootdisk     => [ __("Create a bootdisk"), 1, 0, '', "doInstallStep" ],
+) : (),
   setupBootloader    => [ __("Install bootloader"), 1, 1, '', "doInstallStep" ],
   configureX         => [ __("Configure X"), 1, 0, '', ["formatPartitions", "setupBootloader"] ],
   exitInstall        => [ __("Exit install"), 0, 0, 'beginner' ],
@@ -123,24 +125,6 @@ $o = $::o = {
 #-    packages   => [ qw() ],
     partitioning => { clearall => 0, eraseBadPartitions => 0, auto_allocate => 0, autoformat => 0 }, #-, readonly => 0 },
 #-    security => 2,
-  partitions => [
-    { mntpoint => "/boot", size =>  10 << 11, type => 0x83, maxsize => 30 << 11 },
-    { mntpoint => "/",     size => 300 << 11, type => 0x83, ratio => 5, maxsize => 1500 << 11 },
-    { mntpoint => "swap",  size =>  64 << 11, type => 0x82, ratio => 1, maxsize => 250 << 11 },
-    { mntpoint => "/home", size => 300 << 11, type => 0x83, ratio => 5 },
-  ],
-#-    partitions => [
-#-		      { mntpoint => "/boot", size =>  16 << 11, type => 0x83 },
-#-		      { mntpoint => "/",     size => 256 << 11, type => 0x83 },
-#-		      { mntpoint => "/usr",  size => 512 << 11, type => 0x83, growable => 1 },
-#-		      { mntpoint => "/var",  size => 256 << 11, type => 0x83 },
-#-		      { mntpoint => "/home", size => 512 << 11, type => 0x83, growable => 1 },
-#-		      { mntpoint => "swap",  size =>  64 << 11, type => 0x82 }
-#-		    { mntpoint => "/boot", size =>  16 << 11, type => 0x83 },
-#-		    { mntpoint => "/",     size => 300 << 11, type => 0x83 },
-#-		    { mntpoint => "swap",  size =>  64 << 11, type => 0x82 },
-#-		   { mntpoint => "/usr",  size => 400 << 11, type => 0x83, growable => 1 },
-#-	     ],
     shells => [ map { "/bin/$_" } qw(bash tcsh zsh ash ksh) ],
     authentication => { md5 => 1, shadow => 1 },
     lang         => 'en',
@@ -259,8 +243,9 @@ sub selectPath {
 #------------------------------------------------------------------------------
 sub selectInstallClass {
     $o->selectInstallClass(@install_classes);
-
-    $o->{partitions} ||= $suggestedPartitions{$o->{installClass}};
+   
+    $o->{partitions} ||= 
+      [ grep { arch() =~ /i386/ && $_->{mntpoint} ne "/boot" } @{$suggestedPartitions{$o->{installClass}}} ];
 
     if ($o->{steps}{choosePackages}{entered} >= 1 && !$o->{steps}{doInstallStep}{done}) {
         $o->setPackages(\@install_classes);
@@ -610,6 +595,8 @@ sub main {
     modules::read_stage1_conf("/tmp/conf.modules");
     modules::read_already_loaded();
 
+    eval { modules::load("ide-disk") };
+    eval { modules::load("sd_mod") };
     install_any::lnx4win_preinstall() if $o->{lnx4win};
 
     #-the main cycle
