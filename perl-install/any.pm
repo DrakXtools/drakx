@@ -457,23 +457,43 @@ sub pack_passwd {
 
 sub get_autologin {
     my ($_o) = @_;
-    my %l = getVarsFromSh("$::prefix/etc/sysconfig/autologin");
     my %desktop = getVarsFromSh("$::prefix/etc/sysconfig/desktop");
-    { autologin => text2bool($l{AUTOLOGIN}) && $l{USER}, desktop => $desktop{DESKTOP} };
+    my $dm = $desktop{DISPLAYMANAGER};
+    my $desktop = $desktop{DESKTOP} || 'KDE';
+    if ($desktop{DISPLAYMANAGER} eq 'GNOME') {
+        my %l = getVarsFromSh("$::prefix/etc/X11/gdm/gdm.conf");
+        return { autologin => text2bool($l{AutomaticLoginEnable}) && $l{AutomaticLogin}, desktop => $desktop };
+    } else { # KDM / MdkKDM
+        my %l = getVarsFromSh("$::prefix/usr/share/config/kdm/kdmrc");
+        return { autologin => text2bool($l{AutoLoginEnable}) && $l{AutoLoginUser}, desktop => $desktop };
+    }
 }
 
 sub set_autologin {
   my ($user, $desktop) = @_;
-
+  print "\n\nconfig => ($user, $desktop)\n";
+  my $autologin = bool2text($user);
+  my $found;
+  # Configure KDM / MDKKDM
+  substInFile {
+      s/^(AutoLoginEnable=).*/$1$autologin/;
+      $found ||= s/^(AutoLoginUser=).*/$1$user/;
+  } "$::prefix/usr/share/config/kdm/kdmrc";
+  substInFile {
+      s/^(AutoLoginEnable=.*)$/$1\nAutoLoginUser=$user/;
+  } "$::prefix/usr/share/config/kdm/kdmrc" if !$found;
+  # Configure GDM
+  substInFile {
+      s/^(AutomaticLoginEnable=).*/$1$autologin/;
+      s/^(AutomaticLogin=).*/$1$user/;
+  } "$::prefix/etc/X11/gdm/gdm.conf";
+  
   if ($user) {
       my %l = getVarsFromSh("$::prefix/etc/sysconfig/desktop");
       $l{DESKTOP} = $desktop;
       setVarsInSh("$::prefix/etc/sysconfig/desktop", \%l);
       log::l("cat $::prefix/etc/sysconfig/desktop ($desktop):\n", cat_("$::prefix/etc/sysconfig/desktop"));
   }
-  setVarsInShMode("$::prefix/etc/sysconfig/autologin", 0644,
-		  { USER => $user, AUTOLOGIN => bool2yesno($user), EXEC => "/usr/X11R6/bin/startx.autologin" });
-  log::l("cat $::prefix/etc/sysconfig/autologin ($user):\n", cat_("$::prefix/etc/sysconfig/autologin"));
 }
 
 sub rotate_log {
