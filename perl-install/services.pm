@@ -9,6 +9,8 @@ use strict;
 use common qw(:common :functional :system :file);
 use commands;
 use run_program;
+use my_gtk qw(:helpers :wrappers);
+use Data::Dumper;
 
 sub description {
     my %services = (
@@ -95,7 +97,7 @@ sub services {
 sub ask {
     my ($in, $prefix) = @_;
     my ($l, $on_services) = services($prefix);
-    $in->ask_many_from_list("drakxservices",
+    ref($in) !~ /gtk/ and return $in->ask_many_from_list("drakxservices",
 			    _("Choose which services should be automatically started at boot time"),
 			    {
 			     list => $l,
@@ -103,12 +105,51 @@ sub ask {
 			     values => $on_services,
 			     sort => 1,
 			    });
+    my $W = my_gtk->new(_("Resolution"));
+    my ($x, $y, $w_popup);
+    gtkadd($W->{window}, gtkadd(my $b = new Gtk::EventBox(), gtkpack_($W->create_box_with_title(_("Services and deamons")),
+	1, gtkset_usize(createScrolledWindow(create_packtable({ col_spacings => 10, row_spacings => 3 },
+	    map {
+        	my $infos_old = description($_, $prefix);
+		my $infos;
+		while ($infos_old =~ s/(.{40})//) {
+                    $1 =~ /(.*) ([^ ]*)/;
+		    $infos .= "$1\n$2";
+                }
+                $infos .= $infos_old;
+                $infos ||= "No additionnal information\n about this service, sorry.";
+        	my $stopped = `service $_ status` =~ /stop/;
+		my $started = `service $_ status` =~ /running/;
+		my $state; $started && -e "/var/lock/subsys/$_" and $state="running";
+		$stopped and $state="running";
+		$state ||= "unknown";
+		my $w;
+		[ gtkpack__(new Gtk::HBox(0,0), $_),
+		  gtkpack__(new Gtk::HBox(0,0), $state),
+		  gtkpack__(new Gtk::HBox(0,0), gtksignal_connect(new Gtk::Button("Infos"), clicked => sub {
+                          $w_popup and $w_popup->destroy;
+			  gtkmove(gtkshow(gtkadd($w_popup=new Gtk::Window (-popup),
+        				       gtksignal_connect(gtkadd(new Gtk::EventBox(),
+        				           gtkadd(gtkset_shadow_type(new Gtk::Frame, 'etched_out'),
+        					   gtkset_justify(new Gtk::Label($infos), 0))),
+        					   button_press_event => sub { $w_popup->destroy; }
+		      ))), $x, $y);}))
+		]
+	    }
+            @$l)), 450, 400)))
+	  );
+    $b->set_events(["pointer_motion_mask"]);
+    $b->signal_connect( motion_notify_event => sub { my ($w, $e) = @_;
+                                                               my ($ox, $oy) = $w->window->get_deskrelative_origin;
+                                                               $x = $e->{'x'}+$ox; $y = $e->{'y'}+$oy; });
+    $b->signal_connect( button_press_event => sub { $w_popup and $w_popup->destroy;});
+    $W->main or return;
 }
 
 sub doit {
     my ($in, $on_services, $prefix) = @_;
     my ($l, $was_on_services) = services($prefix);
-    
+
     foreach (@$l) {
 	my $before = member($_, @$was_on_services);
 	my $after = member($_, @$on_services);
