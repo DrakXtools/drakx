@@ -540,7 +540,7 @@ sub make_nbi {
    		$model && $iter or return;
     	my $value = $model->get($iter, 0);
 		my $path = $model->get_path_str($iter);
-		if ( $path !~ /:/ ) {
+		if ($path !~ /:/) {
 			$kernel = $value;
 		} else {
 			my @elements = split(/:/, $path);
@@ -767,7 +767,7 @@ sub maintain_clients {
     	$model && $iter or return;
     	my $value = $model->get($iter, 0);
 		my $path = $model->get_path_str($iter);
-		if ( $path !~ /:/ ) {
+		if ($path !~ /:/) {
 			$client = $value;
 			$citer = $iter;
 		} else {
