@@ -47,7 +47,7 @@ mkdir /mnt; mount -t ext2 $hd$root /mnt
 echo "Copying installation on hard drive"
 mkdir /hd/Mandrake
 cp -a /boot /cdrom/boot /hd
-cp -a /cdrom/Mandrake/mdkinst /hd/Mandrake
+cp -a /cdrom/Mandrake /hd/Mandrake
 
 echo "Installing packages"
 export DURING_INSTALL=1
@@ -57,7 +57,7 @@ for i in /var/lib/rpm /proc ; do mkdir -p /mnt$i; done
 mount -t proc proc /mnt/proc
 rpm --root /mnt --initdb
 for i in `perl -pe 's/ .*//' /cdrom/Mandrake/base/depslist.ordered`; do
-    rpm --root /mnt -ivh /cdrom/Mandrake/RPMS/$i.*.rpm --nodeps --force
+    [ -e $i.*.rpm ] && rpm --root /mnt -ivh /cdrom/RPMS/$i.*.rpm --nodeps --force
 done
 
 echo
