@@ -80,3 +80,8 @@ substInFile {
     #- /lib is ro, for the moment we don't save, we'll see later if we may want to save (using /var/dev-state for example)
     s|.*lib/dev-state.*||;
 } "$::prefix/etc/devfsd.conf";
+
+substInFile {
+    #- don't use shadow passwords since pwconv overwrites /etc/shadow hence contents will be lost for usb key
+    s|\s*shadow||;
+} "$::prefix/etc/pam.d/system-auth";

@@ -116,6 +116,9 @@ drakx_stuff:
     $o->{orderedSteps} = [ qw(selectLanguage handleI18NClp acceptLicense verifyKey selectMouse selectKeyboard startMove) ];
     $o->{steps}{first} = $o->{orderedSteps}[0];
 
+    #- don't use shadow passwords since pwconv overwrites /etc/shadow hence contents will be lost for usb key
+    delete $o->{authentication}{shadow};
+
     member($_, @ALLOWED_LANGS) or delete $lang::langs{$_} foreach keys %lang::langs;
 }
 
