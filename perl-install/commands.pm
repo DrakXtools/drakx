@@ -10,7 +10,7 @@ package commands; # $Id$
 
 use diagnostics;
 use strict;
-use vars qw($printable_chars *ROUTE);
+use vars qw($printable_chars *ROUTE *DF *PS);
 
 #-######################################################################################
 #- misc imports
@@ -237,8 +237,7 @@ sub ps {
     require c;
     my $page = c::getpagesize() / 1024;
 
-    local *PS;
-    open PS, ">&STDOUT";
+    open PS, ">&STDOUT"; #- PS must be not be localised otherwise the "format PS" fails
     format PS_TOP =
   PID   RSS %CPU CMD
 .
@@ -451,8 +450,7 @@ $l{Destination}, $l{Gateway}, $l{Mask}, $l{Iface}
 sub df {
     my ($h) = getopts(\@_, qw(h));
     my ($dev, $size, $free, $used, $use, $mntpoint);
-    local *DF;
-    open DF, ">&STDOUT";
+    open DF, ">&STDOUT"; #- DF must be not be localised otherwise the "format DF" fails
     format DF_TOP =
 Filesystem          Size      Used    Avail     Use  Mounted on
 .
