@@ -582,6 +582,7 @@ sub installPackages {
     gtkset_mousecursor_normal($cancel->window);
 
     my $advertize = sub {
+	@install_any::advertising_images or return;
 	$show_advertising ? $_->hide : $_->show foreach $msg, $progress, $text;
 	gtkdestroy($advertising) if $advertising;
 	if ($show_advertising && $_[0]) {
