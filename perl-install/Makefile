@@ -288,5 +288,5 @@ dont_run_directly_stage2:
 	ln -sf runinstall2.sh $(DEST)/usr/bin/runinstall2
 
 trace_stage2:
-	eval `perl -V:vendorlib`; install -m 644 -D $$vendorlib/Devel/Trace.pm $(DEST)$$vendorlib/Devel/Trace.pm
-	perl -pi -e 's|(#!/usr/bin/perl).*|$$1 -d:Trace|' $(DEST)/usr/bin/runinstall2	
+	f=`perldoc -l Devel::Trace`; install -m 644 -D $$f $(DEST)$$f
+	perl -pi -e 's|(#!/usr/bin/perl).*|$$1 -d:Trace|' $(DEST)/usr/bin/runinstall2
