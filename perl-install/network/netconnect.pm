@@ -141,13 +141,9 @@ sub real_main {
           modules::interactive::load_category($in, 'network/main|gigabit|pcmcia|usb|wireless', !$::expert, 0);
           @all_cards = network::ethernet::get_eth_cards();
           %eth_intf = network::ethernet::get_eth_cards_names(@all_cards);
-          if ($is_wireless) {
-              require list_modules;
-              my @wmodules = list_modules::category2modules('network/wireless');
-              %eth_intf = map { $_->[0] => join(': ', $_->[0], $_->[2]) } grep { member($_->[1], @wmodules) } @all_cards;
-          } else {
-              %eth_intf = map { $_->[0] => join(': ', $_->[0], $_->[2]) } @all_cards;
-          }
+          require list_modules;
+          my @wmodules = list_modules::category2modules('network/wireless');
+          %eth_intf = map { $_->[0] => join(': ', $_->[0], $_->[2]) } grep { !$is_wireless ^ member($_->[1], @wmodules) } @all_cards;
       };
 
       my $find_lan_module = sub { 
