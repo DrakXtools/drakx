@@ -24,6 +24,8 @@
 #include <stdio.h>
 #include <stdarg.h>
 #include <fcntl.h>
+#include <sys/ioctl.h>
+#include <termios.h>
 #include "stage1.h"
 #include "log.h"
 #include "newt.h"
@@ -44,6 +46,7 @@ void finish_frontend(void)
 static void get_any_response(void)
 {
 	unsigned char t;
+	printf("> Press <enter> to proceed.");
 	fflush(stdout);
 	read(0, &t, 1);
 	fcntl(0, F_SETFL, O_NONBLOCK);
@@ -67,17 +70,60 @@ static int get_int_response(void)
 	return j;
 }
 
-static char * get_string_response(void)
+static char * get_string_response(char * initial_string)
 {
-	/* I won't use a scanf/%s since I also want the null string to be accepted */
+	/* I won't use a scanf/%s since I also want the null string to be accepted -- also, I want the initial_string */
 	char s[50];
 	int i = 0;
+	struct termios t;
+	
+	if (initial_string) {
+		printf(initial_string);
+		strcpy(s, initial_string);
+		i = strlen(s);
+	}
+	
+	/* from ncurses/tinfo/lib_raw.c:(cbreak) */
+	tcgetattr(0, &t);
+	t.c_lflag &= ~ICANON;
+	t.c_lflag |= ISIG;
+	t.c_lflag &= ~ECHO;
+	t.c_iflag &= ~ICRNL;
+	t.c_cc[VMIN] = 1;
+	t.c_cc[VTIME] = 0;
+	tcsetattr(0, TCSADRAIN, &t);
+
 	fflush(stdout);
-	read(0, &(s[i++]), 1);
+
 	fcntl(0, F_SETFL, O_NONBLOCK);
-	while (read(0, &(s[i++]), 1) > 0 && i < sizeof(s));
+
+	while (1) {
+		if (read(0, &(s[i]), 1) > 0) {
+			if (s[i] == 13)
+				break;
+			if (s[i] == 127) {
+				if (i > 0) {
+					printf("\033[D");
+					printf(" ");
+					printf("\033[D");
+					i--;
+				}
+			} else {
+				printf("%c", s[i]);
+				i++;
+			}
+		}
+	}
+
+	t.c_lflag |= ICANON;
+	t.c_lflag |= ECHO;
+	t.c_iflag |= ICRNL; 
+	tcsetattr(0, TCSADRAIN, &t);
+
 	fcntl(0, F_SETFL, 0);
-	s[i-2] = '\0';
+
+	printf("\n");
+	s[i] = '\0';
 	return strdup(s);
 }
 
@@ -86,7 +132,6 @@ static void blocking_msg(char *type, char *fmt, va_list args)
 	printf(type);
 	vprintf(fmt, args);
 	get_any_response();
-//	printf("\n");
 }
 
 void error_message(char *msg, ...)
@@ -245,6 +290,7 @@ enum return_type ask_yes_no(char *msg)
 enum return_type ask_from_entries(char *msg, char ** questions, char *** answers, int entry_size)
 {
 	int j, i = 0;
+	char ** already_answers = NULL;
 
 	printf("> %s\n", msg);
 
@@ -254,13 +300,21 @@ enum return_type ask_from_entries(char *msg, char ** questions, char *** answers
 		questions++;
 	}
 
-	*answers = (char **) malloc(sizeof(char *) * i);
+	if (*answers == NULL)
+		*answers = (char **) malloc(sizeof(char *) * i);
+	else
+		already_answers = *answers;
 
 	while (1) {
 		int r;
 		for (j = 0 ; j < i ; j++) {
 			printf("(%c) ? ", j + 'a');
-			(*answers)[j] = get_string_response();
+			if (already_answers && *already_answers) {
+				(*answers)[j] = get_string_response(*already_answers);
+				already_answers++;
+			} else
+				(*answers)[j] = get_string_response(NULL);
+
 		}
 		printf("(0) Cancel (1) Accept (2) Re-enter answers\n? ");
 		r = get_int_response();

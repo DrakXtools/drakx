@@ -242,6 +242,7 @@ enum return_type ask_from_entries(char *msg, char ** questions, char *** answers
 	struct newtWinEntry entries[50];
 	int j, i = 0;
 	int rc;
+	char ** already_answers = NULL;
 
 	while (questions && *questions) {
 		entries[i].text = *questions;
@@ -252,11 +253,18 @@ enum return_type ask_from_entries(char *msg, char ** questions, char *** answers
 	entries[i].text = NULL;
 	entries[i].value = NULL;
 
-	*answers = (char **) malloc(sizeof(char *) * i);
+	if (*answers == NULL)
+		*answers = (char **) malloc(sizeof(char *) * i);
+	else
+		already_answers = *answers;
 
 	for (j = 0 ; j < i ; j++) {
 		entries[j].value = &((*answers)[j]);
-		*(entries[j].value) = NULL;
+		if (already_answers && *already_answers) {
+			*(entries[j].value) = *already_answers;
+			already_answers++;
+		} else
+			*(entries[j].value) = NULL;
 	}
 
 	rc = newtWinEntries("Please fill entries...", msg, 52, 5, 5, entry_size, entries, "Ok", "Cancel", NULL); 

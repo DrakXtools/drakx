@@ -126,7 +126,7 @@ static void expert_third_party_modules(void)
 	char * choice;
 	int rc;
 	char * questions[] = { "Options", NULL };
-	char ** answers;
+	static char ** answers = NULL;
 
 	results = ask_yes_no("If you want to insert third-party kernel modules, insert "
 			     "a Linux (ext2fs) formatted floppy containing the modules and confirm. Otherwise, select \"no\".");;

@@ -282,7 +282,7 @@ int my_insmod(const char * mod_name, enum driver_type type, char * options)
 static enum return_type insmod_with_options(char * mod, enum driver_type type)
 {
 	char * questions[] = { "Options", NULL };
-	char ** answers;
+	static char ** answers = NULL;
 	enum return_type results;
 	char options[500] = "options ";
 

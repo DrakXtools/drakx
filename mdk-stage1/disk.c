@@ -54,7 +54,7 @@ static char * disk_extract_list_directory(char * direct)
 static enum return_type try_with_device(char *dev_name)
 {
 	char * questions_location[] = { "Directory or ISO image", NULL };
-	char ** answers_location;
+	static char ** answers_location = NULL;
 	char device_fullname[50];
 	char location_full[500];
 

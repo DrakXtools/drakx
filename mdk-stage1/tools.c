@@ -347,7 +347,7 @@ void add_to_env(char * name, char * value)
 
 char ** list_directory(char * direct)
 {
-	char * tmp[500];
+	char * tmp[50000]; /* in /dev there can be many many files.. */
 	int i = 0;
 	struct dirent *ep;
 	DIR *dp = opendir(direct);

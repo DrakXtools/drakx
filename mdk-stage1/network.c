@@ -336,9 +336,9 @@ static enum return_type setup_network_interface(struct interface_info * intf)
 		return results;
 
 	if (!strcmp(choice, "Static")) {
-		char * questions[] = { "IP of this machine", "IP of Domain Name Server", "IP of default gateway", "Netmask", NULL };
+		char * questions[] = { "IP of this machine", "IP of DNS", "IP of default gateway", "Netmask", NULL };
 		char * questions_auto[] = { "ip", "dns", "gateway", "netmask" };
-		char ** answers;
+		static char ** answers = NULL;
 		struct in_addr addr;
 
 		results = ask_from_entries_auto("Please enter the network information. (leave netmask void for Internet standard)",
@@ -399,46 +399,64 @@ static enum return_type setup_network_interface(struct interface_info * intf)
 	return add_default_route();
 }
 
-/*
+
 static enum return_type configure_network(struct interface_info * intf)
 {
 	char ips[50];
 	char * name;
 
-	wait_message("Trying to guess hostname and domain...");
+	wait_message("Trying to resolve hostname...");
 	strcpy(ips, inet_ntoa(intf->ip));
 	name = mygethostbyaddr(ips);
 	remove_wait_message();
 
-	if (!name) {
+	if (name) {
+		hostname = strdup(name);
+		domain = strchr(strdup(name), '.') + 1;
+		log_message("got hostname and domain from dns entry, %s and %s", hostname, domain);
+		return RETURN_OK;
+	}
+
+	log_message("reverse name lookup on self failed");
+
+	if (domain != NULL)
+		return RETURN_OK;
+
+	if (dns_server.s_addr != 0) {
+		wait_message("Trying to resolve dns...");
+		strcpy(ips, inet_ntoa(dns_server));
+		name = mygethostbyaddr(ips);
+		remove_wait_message();
+	}
+
+	if (name) {
+		domain = strchr(strdup(name), '.') + 1;
+		log_message("got domain from DNS fullname, %s", domain);
+	} else {
 		enum return_type results;
 		char * questions[] = { "Host name", "Domain name", NULL };
 		char * questions_auto[] = { "hostname", "domain" };
-		char ** answers;
+		static char ** answers = NULL;
 		char * boulet;
-
-		log_message("reverse name lookup on self failed");
-
+		
+		log_message("reverse name lookup on DNS failed");
+		
 		results = ask_from_entries_auto("I could not guess hostname and domain name; please fill in this information. "
-						"Valid answers are for example: `mybox' for hostname and `mynetwork.com' for domain name, "
-						"for a machine called `mybox.mynetwork.com' on the Internet.",
+						"Valid answers are for example: `mybox' for hostname and `mynetwork.com' for "
+						"domain name, for a machine called `mybox.mynetwork.com' on the Internet.",
 						questions, &answers, 32, questions_auto);
 		if (results != RETURN_OK)
 			return results;
-
+		
 		hostname = answers[0];
 		if ((boulet = strchr(hostname, '.')) != NULL)
 			boulet[0] = '\0';
 		domain = answers[1];
 	}
-	else {
-		hostname = strdup(name);
-		domain = strchr(strdup(name), '.') + 1;
-	}
 
 	return RETURN_OK;
 }
-*/
+
 
 static enum return_type bringup_networking(struct interface_info * intf)
 {
@@ -450,15 +468,15 @@ static enum return_type bringup_networking(struct interface_info * intf)
 //	if (intf->is_up == 1)
 //		log_message("interface already up (with IP %s)", inet_ntoa(intf->ip));
 
-//	while (results != RETURN_OK) {
+	while (results != RETURN_OK) {
 		results = setup_network_interface(intf);
 		if (results != RETURN_OK)
 			return results;
 		write_resolvconf();
-//		results = configure_network(intf);
-//	}
+		results = configure_network(intf);
+	}
 
-//	write_resolvconf(); /* maybe we have now domain to write also */
+	write_resolvconf(); /* maybe we have now domain to write also */
 
 	if (loopback.is_up == 0) {
 		int rc;
@@ -554,7 +572,7 @@ enum return_type nfs_prepare(void)
 {
 	char * questions[] = { "NFS server name", DISTRIB_NAME " directory", NULL };
 	char * questions_auto[] = { "server", "directory", NULL };
-	char ** answers;
+	static char ** answers = NULL;
 	char * nfsmount_location;
 	enum return_type results = intf_select_and_up();
 
@@ -608,7 +626,7 @@ enum return_type ftp_prepare(void)
 {
 	char * questions[] = { "FTP server", DISTRIB_NAME " directory", "Login", "Password", NULL };
 	char * questions_auto[] = { "server", "directory", "user", "pass", NULL };
-	char ** answers;
+	static char ** answers = NULL;
 	enum return_type results;
 
 	if (!ramdisk_possible()) {
@@ -692,7 +710,7 @@ enum return_type http_prepare(void)
 {
 	char * questions[] = { "HTTP server", DISTRIB_NAME " directory", NULL };
 	char * questions_auto[] = { "server", "directory", NULL };
-	char ** answers;
+	static char ** answers = NULL;
 	enum return_type results;
 
 	if (!ramdisk_possible()) {

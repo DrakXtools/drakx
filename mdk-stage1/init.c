@@ -431,7 +431,7 @@ int main(int argc, char **argv)
 		printf("exiting stage1-initializer -- giving hand to rescue\n");
 		return 0;
         } else
-		printf("back to stage1-initializer control -- install exited normally\n");
+		printf("back to stage1-initializer control (install succeeded)\n");
 
 	if (testing)
 		return 0;
