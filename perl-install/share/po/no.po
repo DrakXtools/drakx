@@ -10,8 +10,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX-no\n"
-"POT-Creation-Date: 2003-03-12 14:29+0100\n"
-"PO-Revision-Date: 2003-03-09 16:20-0500\n"
+"POT-Creation-Date: 2003-03-12 17:27+0100\n"
+"PO-Revision-Date: 2003-03-13 06:52+0100\n"
 "Last-Translator: Per Øyvind Karlsen <peroyvind@sintrax.net>\n"
 "Language-Team: Norwegian Bokmål <cooker-i18n@linux-mandrake.com>\n"
 "MIME-Version: 1.0\n"
@@ -11447,14 +11447,15 @@ msgid "Printing/Scanning/Photo Cards on \"%s\""
 msgstr "Skriver ut/Skanner/Fotokort på \"%s\""
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "To know about the options available for the current printer read either the "
 "list shown below or click on the \"Print option list\" button.%s%s%s\n"
 "\n"
 msgstr ""
-"Får å få en liste over tilgjengelige valg for nåværende skriver se enten "
-"listen nedenfor eller klikk på  \"Print option list\" knappen.%s%s\n"
+"Får å få en liste over tilgjengelige valg for den gjeldende skriveren se "
+"enten listen nedenfor eller klikk på  \"Utskrifts opsjonsliste\" knappen.%s%s"
+"%s\n"
 "\n"
 
 #: ../../printer/printerdrake.pm:1
@@ -11705,7 +11706,7 @@ msgstr ""
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Firmware-Upload for HP LaserJet 1000"
-msgstr ""
+msgstr "Firmwareopplasting for HP LaserJet 1000"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -12792,7 +12793,7 @@ msgstr "Tjener-IP mangler!"
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "If no port is given, 631 will be taken as default."
-msgstr ""
+msgstr "Hvis ingen port blir gitt, så vil 631 bli valgt som standard"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -12937,11 +12938,18 @@ msgid ""
 "print japanese text on a printer set up on a remote machine, you have to "
 "activate this function on that remote machine."
 msgstr ""
+"Ved å aktivere dette så kan man skrive ut filer på japanesisk. Bare bruk "
+"denne funksjonen hvis du virkelig vil skrive ut på japanesisk, hvis det er "
+"aktivert så kan du ikke skrive ut latinske spesialtegn lenger og du vil ikke "
+"ha muligheten til å justere marginer, skriftstørrelse, etc. Dette oppsettet "
+"gjelder bare skriverer definert på denne maskinen. Hvis du vil skrive ut "
+"japanesisk tekst på en skriver på en ekstern maskin, så må du aktivere denne "
+"funksjonen på den eksterne maskinen."
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Japanese text printing mode"
-msgstr "Endrer utskriftssystemet"
+msgstr "Japansk tekstutskriftsmodus"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -13019,9 +13027,9 @@ msgstr ""
 "tilgang. "
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "CUPS printer configuration"
-msgstr "Cups skriverdeling-konfigurasjon"
+msgstr "Cups skriverkonfigurasjon"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -13061,6 +13069,13 @@ msgid ""
 "printer' directory. There it will be found by the automatic uploader script "
 "and uploaded whenever the printer is connected and turned on.\n"
 msgstr ""
+"HP LaserJet 1000 trenger at dens firmware blir lastet opp etter at den er "
+"blitt skrudd på. Last ned Windows driverpakken i fra HP's nettsted "
+"(firmwaren på printer-cdene fungerer ikke) og hent ut firmwarefilen fra den "
+"ved å pakke ut den selvutpakkende '.exe'-filen med 'unzip'-verktøyet og søk "
+"for 'sihp1000.img'-fila. Kopier denne filen inn i '/etc/printer'-katalogen. "
+"Der vil den bli funnet av det automatiske opplastningsskriptet og lastet opp "
+"når skriveren måtte bli koblet til og skrudd på.\n"
 
 #: ../../security/help.pm:1
 #, c-format
@@ -19807,41 +19822,33 @@ msgid "NFS server, SMB server, Proxy server, ssh server"
 msgstr "NFS-tjener, SMB-tjener, Proxy-tjener, SSH-tjener"
 
 #: ../../share/compssUsers:999
-#, fuzzy
 msgid "Audio station"
-msgstr "Multimediastasjon"
+msgstr "Lydstasjon"
 
 #: ../../share/compssUsers:999
-#, fuzzy
 msgid "Sound playing/editing programs"
-msgstr "Lyd og bilde avspilling/redigeringsprogrammer"
+msgstr "Lyd avspilling/redigeringsprogrammer"
 
 #: ../../share/compssUsers:999
-#, fuzzy
 msgid "Video station"
-msgstr "Spillstasjon"
+msgstr "Videostasjon"
 
 #: ../../share/compssUsers:999
-#, fuzzy
 msgid "Video playing programs"
-msgstr "Lyd og bilde avspilling/redigeringsprogrammer"
+msgstr "Video avspillingsprogrammer"
 
 #: ../../share/compssUsers:999
-#, fuzzy
 msgid "Graphic station"
-msgstr "Spillstasjon"
+msgstr "Grafikkstasjon"
 
 #: ../../share/compssUsers:999
-#, fuzzy
 msgid "Graphics programs"
-msgstr "Grafiske programmer så som Gimp"
+msgstr "Grafikkprogrammer"
 
 #: ../../share/compssUsers:999
-#, fuzzy
 msgid "Set of tools to read and send mail and news and to browse the Web"
 msgstr ""
-"Sett med verktøy for å lese og sende e-post og nyheter (mutt, tin...) og for "
-"se på webben"
+"Sett med verktøy for å lese og sende e-post og nyheter for åsurfe på nett"
 
 #~ msgid "Printer sharing"
 #~ msgstr "Skriverdeling"
