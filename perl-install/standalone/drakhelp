@@ -19,9 +19,9 @@ my $path_to_help = "/usr/share/doc/mandrake/" . $lang . "/";
 
 if ((my $wm = any::running_window_manager()) eq 'kwin') {
     system("mdklaunchhelp " . $path_to_help . $ARGV[0] . "&");
-}elsif ($wm eq 'gnome-session') {
+} elsif ($wm eq 'gnome-session') {
     system("yelp ghelp://" . $path_to_help . $ARGV[0] . "&")
-}  else {
+} else {
     on_request_help($path_to_help . $ARGV[0])
 }
 
