@@ -119,7 +119,7 @@ upload:
 	$(MAKE) upload_only
 
 upload_only:
-	function upload() { rsync -qSavz --verbose --exclude '*~' -e ssh --delete $(ROOTDEST)/$$1/$$2 mandrake@kenobi:/c/cooker/$$1; } ;\
+	function upload() { rsync -qSavz --verbose --exclude '*~' -e ssh --delete $(ROOTDEST)/$$1/$$2 mandrake@ken:/c/cooker/$$1; } ;\
 	upload Mandrake/mdkinst '' ;\
 	upload Mandrake/base compssUsers ;\
 	upload Mandrake/base rpmsrate ;\
