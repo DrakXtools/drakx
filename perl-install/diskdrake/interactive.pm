@@ -654,6 +654,14 @@ sub Resize {
 	    } else {
 		delete $nice_resize{ext2};
 	    }
+	} elsif (isThisFs('ntfs', $part)) {
+	    write_partitions($in, $hd) or return;
+	    my $dev = devices::make($part->{device});
+	    my $r = run_program::get_stdout('ntfsresize', '-i', $dev);
+	    if ($r =~ /minimal size: (\d+) KiB/) {
+		$min = $r * 2;
+		$nice_resize{ntfs} = $dev;
+	    }
 	} elsif (isThisFs("reiserfs", $part)) {
 	    write_partitions($in, $hd) or return;
 	    if (defined(my $free = fs::df($part))) {
@@ -707,6 +715,9 @@ sub Resize {
 	my $s = int($part->{size} / ($block_size / 512));
 	log::l("resize2fs $nice_resize{ext2} to size $s in block of $block_size bytes");
 	run_program::run("resize2fs", "-pf", $nice_resize{ext2}, $s);
+    } elsif ($nice_resize{ntfs}) {
+	log::l("ntfs resize to $part->{size} sectors");
+	run_program::run_or_die('ntfsresize', '-f', '-s' . $part->{size}/2 . "Ki", devices::make($part->{device}));
     } elsif ($nice_resize{reiserfs}) {
 	log::l("reiser resize to $part->{size} sectors");
 	run_program::run("resize_reiserfs", "-f", "-q", "-s" . $part->{size}/2 . "K", devices::make($part->{device}));
