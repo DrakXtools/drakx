@@ -28,7 +28,6 @@ use interactive;
 use any;
 use c;
 
-
 $::isEmbedded = ($::XID, $::CCPID) = "@ARGV" =~ /--embedded (\w+) (\w+)/;
 
 local $_ = join '', @ARGV;
@@ -58,7 +57,13 @@ begin:
     my $rc = do {	
 	if ($configure_this eq 'everything') {
 	    check_XFree($in);
-	    Xconfig::main::configure_everything($in, Xconfig::default::configure(), $in->do_pkgs, $auto, { allowNVIDIA_rpms => allowNVIDIA_rpms() });
+	    my $raw_X = Xconfig::xfree->read;
+
+	    if (@{$raw_X->{xfree3}} || @{$raw_X->{xfree4}}) {
+		Xconfig::main::configure_chooser($in, $raw_X, $in->do_pkgs, { allowNVIDIA_rpms => allowNVIDIA_rpms() });
+	    } else {
+		Xconfig::main::configure_everything($in, Xconfig::default::configure(), $in->do_pkgs, $auto, { allowNVIDIA_rpms => allowNVIDIA_rpms() });
+	    }
 	} elsif ($configure_this eq 'auto_install') {
 	    Xconfig::main::configure_everything_auto_install(Xconfig::default::configure(), $in->do_pkgs, {}, { allowNVIDIA_rpms => allowNVIDIA_rpms() });
 	} elsif ($configure_this eq 'monitor') {
