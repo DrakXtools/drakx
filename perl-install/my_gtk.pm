@@ -382,9 +382,8 @@ sub _create_window($$) {
 	    require install_gtk;
 	    install_gtk::create_big_help($::o);
 	} elsif (chr($_[1]{keyval}) eq 'e' && $_[1]{state} & 8) {
-	    log::l("Switching to " . ($::beginner ? "expert" : "beginner"));
-	    $::expert = $::beginner;
-	    $::beginner = !$::expert;
+	    log::l("Switching to " . ($::expert ? "beginner" : "expert"));
+	    $::expert = !$::expert;
 	} elsif ($d) {
 	    #- previous field is created here :(
 	    my $s; foreach (reverse @{$::o->{orderedSteps}}) {

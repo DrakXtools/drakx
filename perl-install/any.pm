@@ -89,7 +89,9 @@ sub setupBootloader {
 
     $more++ if $b->{bootUnsafe};
 
-    if ($::beginner && $more >= 1) {
+    if (!$::expert && $more < 1) {
+	#- automatic
+    } elsif (!$::expert) {
 	my @l = (__("First sector of drive (MBR)"), __("First sector of boot partition"));
 
 	$in->set_help('setupBootloaderBeginner') unless $::isStandalone;
@@ -105,7 +107,7 @@ sub setupBootloader {
 							\@l, $l[!$onmbr]) eq $l[0] 
 				    ? $boot : fsedit::get_root($fstab, 'boot')->{device});
 	}
-    } elsif ($more || !$::beginner) {
+    } else {
 	$in->set_help(arch() =~ /sparc/ ? "setupSILOGeneral" : "setupBootloaderGeneral") unless $::isStandalone; #- TO MERGE ?
 
 	if ($::expert) {
@@ -129,7 +131,7 @@ arch() =~ /sparc/ ? (
 { label => _("Boot device"), val => \$b->{boot}, list => [ map { "/dev/$_" } (map { $_->{device} } (@$hds, grep { !isFat($_) } @$fstab)), detect_devices::floppies() ], not_edit => !$::expert },
 { label => _("LBA (doesn't work on old BIOSes)"), val => \$b->{lba32}, type => "bool", text => "lba" },
 { label => _("Compact"), val => \$b->{compact}, type => "bool", text => _("compact") },
-{ label => _("Video mode"), val => \$b->{vga}, list => [ keys %bootloader::vga_modes ], not_edit => $::beginner },
+{ label => _("Video mode"), val => \$b->{vga}, list => [ keys %bootloader::vga_modes ], not_edit => !$::expert },
 ),
 { label => _("Delay before booting default image"), val => \$b->{timeout} },
 $security < 4 ? () : (
@@ -153,7 +155,7 @@ $security < 4 ? () : (
 	$b->{vga} = $bootloader::vga_modes{$b->{vga}} || $b->{vga};
     }
 
-    until ($::beginner && $more <= 1) {
+    while ($::expert || $more > 1) {
 	$in->set_help(arch() =~ /sparc/ ? 'setupSILOAddEntry' : 'setupBootloaderAddEntry') unless $::isStandalone;
 	my $c = $in->ask_from_listf([''], 
 _("Here are the different entries.
@@ -563,7 +565,7 @@ sub wait_load_module {
 #-PO: the second is the vendor+model name
     $in->wait_message('',
 		     [ _("Installing driver for %s card %s", $type, $text),
-		       $::beginner ? () : _("(module %s)", $module)
+		       if_($::expert, _("(module %s)", $module))
 		     ]);
 }
 

@@ -43,7 +43,7 @@ For this, create a partition (or click on an existing one).
 Then choose action ``Mount point'' and set it to `/'"), 1) or return;
 	}
 	if (!grep { isSwap($_) } @fstab) {
-	    $o->ask_warn('', _("You must have a swap partition")), $ok=0 if $::beginner;
+	    $o->ask_warn('', _("You must have a swap partition")), $ok=0 if !$::expert;
 	    $ok &&= $::expert || $o->ask_okcancel('', _("You don't have a swap partition\n\nContinue anyway?"));
 	}
     } until $ok;
@@ -162,7 +162,7 @@ When sure, press Ok.")) or return;
     }
 
     if (!$readonly && ref($o) =~ /gtk/) { #- diskdrake only available in gtk for now
-	$solutions{diskdrake} = [ 0, ($::beginner ? _("Expert mode") : _("Use diskdrake")), sub { partition_with_diskdrake($o, $hds, 'nowizard') } ];
+	$solutions{diskdrake} = [ 0, _("Custom disk partitioning"), sub { partition_with_diskdrake($o, $hds, 'nowizard') } ];
     }
 
     $solutions{fdisk} =
@@ -201,7 +201,7 @@ sub partitionWizard {
 
     my @solutions = sort { $b->[0] <=> $a->[0] } values %solutions;
 
-    my $level = $::beginner ? 0 : $::expert ? -9999 : -10;
+    my $level = $::expert ? -9999 : 0;
     my @sol = grep { $_->[0] >= $level } @solutions;
 
     log::l("solutions found: " . join('', map {$_->[1]} @sol) . " (all solutions found: " . join('', map {$_->[1]} @solutions) . ")");

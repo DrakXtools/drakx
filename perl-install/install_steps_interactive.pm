@@ -189,27 +189,17 @@ sub selectInstallClass {
 	_("Recommended") => "beginner",
       ),
       if_($o->{meta_class} ne 'desktop',
-	_("Customized")  => "specific",
+	_("Expert")	 => "expert",
       ),
     );
     %c = @c = (_("Expert") => "expert") if $::expert && !$clicked;
 
     $o->set_help('selectInstallClassCorpo') if $::corporate;
 
-    my $verifInstallClass = sub {
-	$::beginner = $c{$_[0]} eq "beginner";
-	$::expert   = $c{$_[0]} eq "expert" &&
-	  $o->ask_from_list_('',
-_("Are you sure you are an expert? 
-You will be allowed to make powerful but dangerous things here.
-
-You will be asked questions such as: ``Use shadow file for passwords?'',
-are you ready to answer that kind of questions?"), 
-			 [ _("Customized"), _("Expert") ]) ne "Customized";
-    };
+    my $verifInstallClass = sub { $::expert = $c{$_[0]} eq "expert" };
 
     $o->{isUpgrade} = $o->selectInstallClass1($verifInstallClass,
-					      first(list2kv(@c)), ${{reverse %c}}{$::beginner ? "beginner" : $::expert ? "expert" : "specific"},
+					      first(list2kv(@c)), ${{reverse %c}}{$::expert ? "expert" : "beginner"},
 					      [ __("Install"), __("Update") ], $o->{isUpgrade} ? "Update" : "Install") eq "Update";
 
     if ($::corporate || !$::expert) {
@@ -356,12 +346,12 @@ sub choosePartitionsToFormat {
 
     $o->SUPER::choosePartitionsToFormat($fstab);
 
-    my @l = grep { !$_->{isMounted} && !$_->{isFormatted} && $_->{mntpoint} && !($::beginner && isSwap($_)) &&
+    my @l = grep { !$_->{isMounted} && !$_->{isFormatted} && $_->{mntpoint} && !(isSwap($_) && !$::expert) &&
 		    (!isOtherAvailableFS($_) || $::expert || $_->{toFormat})
 	       } @$fstab;
-    $_->{toFormat} = 1 foreach grep {  $::beginner && isSwap($_) } @$fstab;
+    $_->{toFormat} = 1 foreach grep { isSwap($_) && !$::expert } @$fstab;
 
-    return if @l == 0 || $::beginner && 0 == grep { ! $_->{toFormat} } @l;
+    return if @l == 0 || !$::expert && 0 == grep { ! $_->{toFormat} } @l;
 
     my $name2label = sub { 
         sprintf("%s   %s", isSwap($_) ? type2name($_->{type}) : $_->{mntpoint},
@@ -432,7 +422,7 @@ sub choosePackages {
     my $min_size = pkgs::selectedSize($packages);
     $min_size < $availableC or die _("Your system has not enough space left for installation or upgrade (%d > %d)", $min_size, $availableC);
 
-    my $min_mark = $::beginner ? 2 : 1;
+    my $min_mark = $::expert ? 1 : 2;
     my $def_mark = 4; #-TODO: was 59, 59 is for packages that need gl hw acceleration.
 
     my $b = pkgs::saveSelected($packages);
@@ -442,12 +432,12 @@ sub choosePackages {
     my $max_size = pkgs::selectedSize($packages) + 1; #- avoid division by zero.
     pkgs::restoreSelected($b);
 
-    $o->chooseGroups($packages, $compssUsers, $min_mark, \$individual, $max_size) unless $::beginner || $::corporate;
+    $o->chooseGroups($packages, $compssUsers, $min_mark, \$individual, $max_size) if $::expert && !$::corporate;
 
     my $size2install = min($availableC, do {
 	my $max = round_up(min($max_size, $availableC) / sqr(1024), 100);
 	
-	if ($::beginner) {
+	if (!$::expert) {
 	    if ($o->{isUpgrade}) {
 		min($def_size, $max);
 	    } else {
@@ -546,7 +536,7 @@ sub chooseCD {
 
     #- if no other medium available or a poor beginner, we are choosing for him!
     #- note first CD is always selected and should not be unselected!
-    return if scalar(@mediums) == 0 || $::beginner;
+    return if @mediums == () || !$::expert;
 
     #- build mediumDescr according to mediums, this avoid asking multiple times
     #- all the medium grouped together on only one CD.
@@ -706,7 +696,7 @@ sub configurePrinter {
     require printer;
     require printerdrake;
 
-    if ($::beginner && !$clicked) {
+    if (!$::expert && !$clicked) {
         printerdrake::auto_detect($o) or return;
     }
 
@@ -748,7 +738,7 @@ sub setRootPassword {
 
     $o->set_help("setRootPassword", 
 		 if_($o->{installClass} =~ "server" || $::expert, "setRootPasswordMd5"),
-		 if_(!$::beginner, "setRootPasswordNIS"));
+		 if_($::expert, "setRootPasswordNIS"));
 
     $o->ask_from_entries_refH_powered(
         {
@@ -764,7 +754,7 @@ sub setRootPassword {
         } } }, [
 { label => _("Password"), val => \$sup->{password},  hidden => 1 },
 { label => _("Password (again)"), val => \$sup->{password2}, hidden => 1 },
-  if_(!$::beginner,
+  if_($::expert,
 { label => _("Use NIS"), val => \$nis, type => 'bool', text => _("yellow pages") },
   ),
 			 ]) or return;
@@ -803,7 +793,7 @@ sub addUser {
 sub createBootdisk {
     my ($o, $first_time) = @_;
 
-    return if $first_time && $::beginner;
+    return if $first_time && !$::expert;
 
     if (arch() =~ /sparc/) {
 	#- as probing floppies is a bit more different on sparc, assume always /dev/fd0.
@@ -912,7 +902,7 @@ sub miscellaneous {
     add2hash_ $o, { useSupermount => $s < 4 && arch() !~ /^sparc/ };
     $s = $l{$s} || $s;
 
-    !$::beginner || $clicked and $o->ask_from_entries_refH('',
+    $::expert || $clicked and $o->ask_from_entries_refH('',
 	_("Miscellaneous questions"), [
 { label => _("Use hard drive optimisations?"), val => \$u->{HDPARM}, type => 'bool', text => _("(may cause data corruption)") },
 { label => _("Choose security level"), val => \$s, list => [ map { $l{$_} } ikeys %l ] },
@@ -957,7 +947,7 @@ sub configureX {
 
     require Xconfigurator;
     { local $::testing = 0; #- unset testing
-      local $::auto = $::beginner && !$clicked;
+      local $::auto = !$::expert && !$clicked;
 
       Xconfigurator::main($o->{prefix}, $o->{X}, $o, $o->{allowFB}, bool($o->{pcmcia}), sub {
 	  $o->pkg_install(@_);

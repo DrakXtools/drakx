@@ -237,7 +237,7 @@ sub cardConfiguration(;$$$) {
 _("Your card can have 3D hardware acceleration support but only with XFree %s.
 Your card is supported by XFree %s which may have a better support in 2D.", $xf3_ver, $xf4_ver) :
 _("Your card can have 3D hardware acceleration support with XFree %s.", $xf3_ver)) . "\n\n\n" . $msg;
-	$::beginner and @choices = (); #- keep it by default here as it is the only choice available.
+	$::expert or @choices = (); #- keep it by default here as it is the only choice available.
 	unshift @choices, { text => _("XFree %s with 3D hardware acceleration", $xf3_ver),
 			    code => sub { $card->{use_xf4} = '';
 					  log::l("Using XFree $xf3_ver with 3D hardware acceleration") } };

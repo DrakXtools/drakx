@@ -196,7 +196,7 @@ my %fs2type = reverse %type2fs;
 
 sub important_types { 
     my @l = $::expert ? sort values %types :
-      (@important_types, $::beginner ? () : @important_types2);
+      (@important_types, if_($::expert, @important_types2));
     difference2(\@l, \@bad_types);
 }
 

@@ -254,7 +254,7 @@ sub configureNetwork {
     any::setup_thiskind($in, 'net', !$::expert, 1);
     my @l = detect_devices::getNet() or die _("no network card found");
 
-    my $last; foreach ($::beginner ? $l[0] : @l) {
+    my $last; foreach ($::expert ? @l : $l[0]) {
 	my $intf2 = findIntf($intf ||= {}, $_);
 	add2hash($intf2, $last);
 	add2hash($intf2, { NETMASK => '255.255.255.0' });
@@ -359,7 +359,7 @@ sub miscellaneousNetwork {
     my ($in, $clicked) = @_;
     my $u = $::o->{miscellaneous} ||= {};
     $::isInstall and $in->set_help('configureNetworkProxy');
-    !$::beginner || $clicked and $in->ask_from_entries_refH('',
+    $::expert || $clicked and $in->ask_from_entries_refH('',
        _("Proxies configuration"),
        [ { label => _("HTTP proxy"), val => \$u->{http_proxy} },
          { label => _("FTP proxy"),  val => \$u->{ftp_proxy} },

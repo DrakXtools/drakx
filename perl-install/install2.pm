@@ -43,10 +43,10 @@ my (%installSteps, @orderedInstallSteps);
   setupSCSI          => [ __("Hard drive detection"), 1, 0, '' ],
   selectMouse        => [ __("Configure mouse"), 1, 1, '', "selectInstallClass" ],
   selectKeyboard     => [ __("Choose your keyboard"), 1, 1, '', "selectInstallClass" ],
-  miscellaneous      => [ __("Miscellaneous"), 1, 1, '$::beginner' ],
+  miscellaneous      => [ __("Miscellaneous"), 1, 1, '!$::expert' ],
   doPartitionDisks   => [ __("Setup filesystems"), 1, 0, '', "selectInstallClass" ],
   formatPartitions   => [ __("Format partitions"), 1, -1, '', "doPartitionDisks" ],
-  choosePackages     => [ __("Choose packages to install"), 1, -2, '$::beginner', "formatPartitions" ],
+  choosePackages     => [ __("Choose packages to install"), 1, -2, '!$::expert', "formatPartitions" ],
   installPackages    => [ __("Install system"), 1, -1, '', ["formatPartitions", "selectInstallClass"] ],
   configureNetwork   => [ __("Configure networking"), 1, 1, '', "formatPartitions" ],
 #-  installCrypto      => [ __("Cryptographic"), 1, 1, '!$::expert', "configureNetwork" ],
@@ -63,7 +63,7 @@ arch() !~ /alpha/ ? (
 arch() !~ /alpha/ ? (
   generateAutoInstFloppy => [ __("Auto install floppy"), 1, 1, '!$::expert || $o->{lnx4win}', "installPackages" ],
 ) : (),
-  exitInstall        => [ __("Exit install"), 0, 0, '$::beginner && !$::live' ],
+  exitInstall        => [ __("Exit install"), 0, 0, '!$::expert && !$::live' ],
 );
     for (my $i = 0; $i < @installSteps; $i += 2) {
 	my %h; @h{@installStepsFields} = @{ $installSteps[$i + 1] };
@@ -225,7 +225,7 @@ sub selectMouse {
 #------------------------------------------------------------------------------
 sub setupSCSI {
     my ($clicked) = @_;
-    $o->{autoSCSI} ||= $::beginner;
+    $o->{autoSCSI} ||= !$::expert;
 
     $o->setupSCSI($o->{autoSCSI} && !$clicked, $clicked);
 }
@@ -238,7 +238,7 @@ sub selectKeyboard {
 	my $keyboard = keyboard::read($o->{prefix});
 	$keyboard and $o->{keyboard} = $keyboard;
     }
-    return if $::beginner && !$clicked;
+    return if !$::expert && !$clicked;
 
     $o->selectKeyboard;
 
@@ -344,7 +344,7 @@ sub miscellaneous {
     addToBeDone {
 	setVarsInSh("$o->{prefix}/etc/sysconfig/system", { 
             CLEAN_TMP => $o->{miscellaneous}{CLEAN_TMP},
-            CLASS => $::expert && "expert" || $::beginner && "beginner" || "medium",
+            CLASS => $::expert && 'expert' || 'beginner',
             TYPE => $o->{installClass},
             SECURITY => $o->{security},
 	    META_CLASS => $o->{meta_class} || 'PowerPack',
@@ -384,7 +384,7 @@ sub configureTimezone {
 	add2hash($o->{timezone}, { timezone::read($f) });
     }
     $o->{timezone}{timezone} ||= timezone::bestTimezone(lang::lang2text($o->{lang}));
-    $o->{timezone}{UTC} = !$::beginner && !grep { isFat($_) || isNT($_) } @{$o->{fstab}} unless exists $o->{timezone}{UTC};
+    $o->{timezone}{UTC} = $::expert && !grep { isFat($_) || isNT($_) } @{$o->{fstab}} unless exists $o->{timezone}{UTC};
     $o->configureTimezone($f, $clicked);
 }
 #------------------------------------------------------------------------------
@@ -456,7 +456,7 @@ sub main {
     $ENV{PERL_BADLANG} = 1;
 
     $::isInstall = 1;
-    $::beginner = $::expert = $::g_auto_install = 0;
+    $::expert = $::g_auto_install = 0;
 
 #-    c::unlimit_core() unless $::testing;
 
@@ -476,8 +476,6 @@ sub main {
 	}
     } $cmdline{$opt} = 1 if $opt;
     
-    $::beginner = 1;
-
     map_each {
 	my ($n, $v) = @_;
 	my $f = ${{
@@ -489,8 +487,7 @@ sub main {
 	    vga16     => sub { $o->{vga16} = $v },
 	    vga       => sub { $o->{vga} = $v },
 	    step      => sub { $o->{steps}{first} = $v },
-	    expert    => sub { $::expert = 1; $::beginner = 0 },
-	    beginner  => sub { $::beginner = $v },
+	    expert    => sub { $::expert = $v },
 	    class     => sub { $o->{installClass} = $v },
 	    fclass    => sub { $o->{installClass} = $v; push @auto, 'selectInstallClass' },
 	    desktop   => sub { $o->{meta_class} = 'desktop' },
@@ -546,10 +543,7 @@ sub main {
 
     $o->{prefix} = $::testing ? "/tmp/test-perl-install" : $::live ? "" : "/mnt";
     $o->{root}   = $::testing ? "/tmp/root-perl-install" : "/";
-    if ($::live) {
-	$o->{isUpgrade} = 1;
-	#$::beginner = 0; #- use custom by default.
-    }
+    $o->{isUpgrade} = 1 if $::live;
     mkdir $o->{prefix}, 0755;
     mkdir $o->{root}, 0755;
     devices::make("/dev/zero"); #- needed by ddcxinfos

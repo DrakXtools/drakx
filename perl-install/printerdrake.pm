@@ -338,7 +338,7 @@ sub main($$$;$) {
     my ($queue, $continue) = ('', 1);
 
     while ($continue) {
-	if ($::beginner || !(scalar keys %{$printer->{configured} || {}})) {
+	if (!$::expert || !(scalar keys %{$printer->{configured} || {}})) {
 	    $queue = $printer->{want} || $in->ask_yesorno(_("Printer"),
 							  _("Would you like to configure a printer?"), 0) ? 'lp' : 'Done';
 	} else {
@@ -439,7 +439,7 @@ and optionally the port number."), [
 		$in->set_help('configurePrinterLocal') if $::isInstall;
 		$in->ask_from_entries_refH_powered(
                     { title => _("Select Printer Connection"),
-		      cancel => $::beginner || !$printer->{configured}{$printer->{QUEUE}} ? '' : _("Remove queue"),
+		      cancel => !$::expert || !$printer->{configured}{$printer->{QUEUE}} ? '' : _("Remove queue"),
 		      messages =>
 _("Every printer need a name (for example lp).
 Other parameters such as the description of the printer or its location
@@ -450,7 +450,7 @@ how is the printer connected?") }, [
 { label => _("Location"), val => \$printer->{Location} },
 				  ]) or printer::remove_queue($printer), $continue = 1, last;
 	    } else {
-		if ($::beginner) {
+		if (!$::expert) {
 		    $printer->{str_type} = $in->ask_from_list_(_("Select Printer Connection"),
 							       _("How is the printer connected?"),
 							       [ printer::printer_type($printer) ],
@@ -460,7 +460,7 @@ how is the printer connected?") }, [
 		    $in->set_help('configurePrinterLPR') if $::isInstall;
 		    $in->ask_from_entries_refH_powered(
 		        { title => _("Select Printer Connection"), 
-			  cancel => $::beginner ? '' : _("Remove queue"),
+			  cancel => $::expert ? _("Remove queue") : '',
 			  messages =>
 _("Every print queue (which print jobs are directed to) needs a
 name (often lp) and a spool directory associated with it. What
@@ -493,7 +493,7 @@ name and directory should be used for this queue and how is the printer connecte
 	if (!$continue && setup_gsdriver($printer, $in, $install, $printer->{TYPE} !~ /LOCAL/ && $upNetwork)) {
 	    delete $printer->{OLD_QUEUE}
 		if $printer->{QUEUE} ne $printer->{OLD_QUEUE} && $printer->{configured}{$printer->{QUEUE}};
-	    $continue = !$::beginner;
+	    $continue = $::expert;
 	} else {
 	    $continue = 1;
 	}
