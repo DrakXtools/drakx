@@ -140,6 +140,7 @@ foreach my $hw_class (@harddrake::data::tree) {
         $modules_conf->write;
         next;
     } elsif (member($Ident, qw(AGP ATA_STORAGE SATA_STORAGE SCSI_CONTROLLER TV))) {
+        $modules_conf->remove_module(difference2([ uniq(map { $_->{driver} } values %$oldconfig) ], [ uniq(map { $_->{driver} } values %ID) ]));
         # add agpgart and the like modules to modprobe.preload if needed:
         $modules_conf->write;
         next;
