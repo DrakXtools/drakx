@@ -78,7 +78,7 @@ sub set {
 	set_pam_authentication('ldap');
 	set_ldap_conf($domain, $val, 1);
     } elsif ($kind eq 'NIS') {
-	$in->do_pkgs->install('ypbind');
+	$in->do_pkgs->install(qw(ypbind autofs));
 	my $domain = $netc->{NISDOMAIN};
 	$domain || $val ne "broadcast" or die N("Can't use broadcast with no NIS domain");
 	my $t = $domain ? "domain $domain" . ($val ne "broadcast" && " server") : "ypserver";
