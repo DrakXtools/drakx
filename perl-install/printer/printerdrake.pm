@@ -1961,8 +1961,7 @@ sub setup_common {
 		my $matched = 1;
 		my ($mfg, $mdl, $des);
 		if ($mfg = $printer::main::thedb{$entry}{devidmake}) {
-		    $mfg =~ s/Hewlett[-\s_]Packard/HP/;
-		    $mfg =~ s/HEWLETT[-\s_]PACKARD/HP/;    
+		    $mfg =~ s/Hewlett[-\s_]Packard/HP/i;
 		    if (uc($mfg) ne uc($automake)) {
 			$matched = 0;
 		    }
@@ -3709,7 +3708,7 @@ sub main {
 	    #- Do all the configuration steps for a new queue
 	  step_0:
 	    #if ((!$::expert) && (!$::isEmbedded) && (!$::isInstall) &&
-	    if (!$::isEmbedded && !$::isInstall &&
+	    if (0 && !$::isEmbedded && !$::isInstall &&
 	    #if ((!$::isInstall) &&
 		$in->isa('interactive::gtk')) {
 		# Enter wizard mode
@@ -3724,8 +3723,8 @@ sub main {
 		    next;
 		};
 		undef $::Wizard_no_previous;
-		#eval {
-		do {
+		eval {
+		#do {
 		    # eval to catch wizard cancel. The wizard stuff should 
 		    # be in a separate function with steps. see dragw.
 		    # (dams)

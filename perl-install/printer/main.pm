@@ -504,13 +504,11 @@ sub read_printer_db(;$) {
     close DBPATH;
 
     # Add raw queue
-    if ($spooler ne "pdq") {
-	$entry->{ENTRY} = N("Raw printer (No driver)");
-	$entry->{driver} = "raw";
-	$entry->{make} = "";
-	$entry->{model} = N("Unknown model");
-	map { $thedb{$entry->{ENTRY}}{$_} = $entry->{$_} } keys %$entry;
-    }
+    $entry->{ENTRY} = N("Raw printer (No driver)");
+    $entry->{driver} = "raw";
+    $entry->{make} = "";
+    $entry->{model} = N("Unknown model");
+    map { $thedb{$entry->{ENTRY}}{$_} = $entry->{$_} } keys %$entry;
 
     #- Load CUPS driver database if CUPS is used as spooler
     if ($spooler && $spooler eq "cups") {
@@ -1378,7 +1376,7 @@ sub clean_manufacturer_name {
     $make =~ s/\s+Ltd\.//i;
     $make =~ s/\s+International//i;
     $make =~ s/\s+Int\.//i;
-    return $make;
+    return uc($make);
 }    
 
 sub ppd_entry_str {
@@ -1388,12 +1386,12 @@ sub ppd_entry_str {
 	# Apply the beautifying rules of poll_ppd_base
 	if ($descr =~ /Foomatic \+ Postscript/) {
 	    $descr =~ s/Foomatic \+ Postscript/PostScript/;
-	} elsif ($descr =~ /Foomatic/) {
-	    $descr =~ s/Foomatic/GhostScript/;
-	} elsif ($descr =~ /CUPS\+GIMP-print/) {
-	    $descr =~ s/CUPS\+GIMP-print/CUPS \+ GIMP-Print/;
-	} elsif ($descr =~ /Series CUPS/) {
-	    $descr =~ s/Series CUPS/Series, CUPS/;
+	} elsif ($descr =~ /Foomatic/i) {
+	    $descr =~ s/Foomatic/GhostScript/i;
+	} elsif ($descr =~ /CUPS\+GIMP-print/i) {
+	    $descr =~ s/CUPS\+GIMP-print/CUPS \+ GIMP-Print/i;
+	} elsif ($descr =~ /Series CUPS/i) {
+	    $descr =~ s/Series CUPS/Series, CUPS/i;
 	} elsif ($descr !~ /(PostScript|GhostScript|CUPS|Foomatic)/i) {
 	    $descr .= ", PostScript";
 	}
@@ -1407,11 +1405,11 @@ sub ppd_entry_str {
 	    ($descr =~ /^([^,]+[^,\s])\s*,?\s*(Foomatic.*)$/i) ||
 	    ($descr =~ /^([^,]+[^,\s])\s*,?\s*(GhostScript.*)$/i) ||
 	    ($descr =~ /^([^,]+[^,\s])\s*,?\s*(CUPS.*)$/i) ||
+	    ($descr =~ /^([^,]+[^,\s])\s*,?\s+(PS.*)$/i) ||
 	    ($descr =~
-	     /^([^,]+[^,\s])\s*,?\s*(\(v?\d\d\d\d\.\d\d\d\).*)$/i) ||
+	     /^([^,]+[^,\s])\s*,?\s*(\(v?\.?\s*\d\d\d\d\.\d\d\d\).*)$/i) ||
 	    ($descr =~ /^([^,]+[^,\s])\s*,?\s*(v\d+\.\d+.*)$/i) ||
 	    ($descr =~ /^([^,]+[^,\s])\s*,?\s*(PostScript.*)$/i) ||
-	    ($descr =~ /^([^,]+[^,\s])\s*,?\s+(PS.*)$/i) ||
 	    ($descr =~ /^([^,]+)\s*,?\s*(.+)$/)) {
 	    $model = $1;
 	    $driver = $2;
@@ -1419,7 +1417,7 @@ sub ppd_entry_str {
 	    $driver =~ s/\b(PS|PostScript\b)/PostScript/gi;
 	    $driver =~ s/(PostScript)(.*)(PostScript)/$1$2/i;
 	    $driver =~ 
-	      s/^\s*(\(v?\d\d\d\d\.\d\d\d\)|v\d+\.\d+)([,\s]*)(.*)/$3$2$1/i;
+	      s/^\s*(\(?v?\.?\s*\d\d\d\d\.\d\d\d\)?|v\d+\.\d+)([,\s]*)(.*?)\s*$/$3$2$1/i;
 	    $driver =~ s/,\s*\(/ \(/g;
 	    $driver =~ s/[\-\s,]+$//;
 	    $driver =~ s/^[\-\s,]+//;
