@@ -239,7 +239,7 @@ sub create_okcancel {
     $spread ||= $::isWizard ? "edge" : "spread";
     $ok ||= $::isWizard ? _("Next ->") : _("Ok");
 
-    my $b1 = gtksignal_connect($w->{ok} = new Gtk::Button($ok), "clicked" => $w->{ok_clicked} || sub { Gtk->main_quit });
+    my $b1 = gtksignal_connect($w->{ok} = new Gtk::Button($ok), "clicked" => $w->{ok_clicked} || sub { $w->{retval} = 1; Gtk->main_quit });
     my $b2 = !$one && gtksignal_connect(new Gtk::Button($cancel || _("Cancel")), "clicked" => $w->{cancel_clicked} || sub { $w->{retval} = 0; Gtk->main_quit });
     my @l = grep { $_ } $::isStandalone ? ($b2, $b1) : ($b1, $b2);
 

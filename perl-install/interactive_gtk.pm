@@ -64,7 +64,7 @@ sub ask_from_list_with_helpW {
 						      $b;
 						  } @$l, )),
 			 0, new Gtk::HSeparator,
-			 0, $w->create_okcancel(),
+			 $::isWizard ? (0, $w->create_okcancel()) : (),
 			),
 	      );
 #          {
