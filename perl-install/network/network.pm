@@ -394,7 +394,7 @@ sub miscellaneousNetwork {
 	   $u->{ftp_proxy} =~ m,^($|ftp://), or $in->ask_warn('', _("Proxy should be ftp://...")), return 1,1;
 	   0;
        }
-    ) || return;
+    ) or 1;
 }
 
 sub read_all_conf {
