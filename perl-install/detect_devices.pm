@@ -168,7 +168,7 @@ sub pci_probe {
 	$l{$_} = hex $l{$_} foreach qw(vendor id subvendor subid);
 	$l{bus} = 'PCI';
 	\%l
-    } c::pci_probe($probe_type);    
+    } c::pci_probe($probe_type || 0);
 }
 
 sub usb_probe {
