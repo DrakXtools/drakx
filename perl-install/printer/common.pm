@@ -48,7 +48,6 @@ sub removeentry {
 	next if $done;
 	if (!$sectionfound) {
 	    $sectionfound = 1 if /^\s*\[\s*$section\s*\]\s*$/;
-	    }
 	} else {
 	    if (/^\s*\[.*\]\s*$/) { # Next section
 		$done = 1;
