@@ -239,55 +239,57 @@ sub set_synaptics {
 	my $synaptics_mouse = $_;
         my $identifier = "SynapticsMouse" . ($::i + 1);
         my $pointer_type = $synaptics_mouse->{Primary} ? "CorePointer" : "AlwaysCore";
-        my $opt = sub {
-            my ($name, $value) = @_;
-            ($name => { val => $value, Option => 1 });
+        my $h = {
+            Identifier => { val => $identifier },
+            Driver => { val => "synaptics" },
         };
-        my $h = { Identifier => { val => $identifier },
-                  Driver => { val => "synaptics" },
-                  #- from /usr/share/doc/synaptics-0.14.0/INSTALL
-                  $opt->("Device", $synaptics_mouse->{Device}),
-                  $opt->("Protocol", $synaptics_mouse->{Protocol}),
-                  $synaptics_mouse->{ALPS} ? (
-                      #- from /usr/share/doc/synaptics-0.14.0/README.alps
-                      #- and http://qa.mandrakesoft.com/show_bug.cgi?id=14512
-                      $opt->("LeftEdge", 120),
-                      $opt->("RightEdge", 830),
-                      $opt->("TopEdge", 120),
-                      $opt->("BottomEdge", 650),
-                      $opt->("FingerLow", 14),
-                      $opt->("FingerHigh", 15),
-                      $opt->("MaxTapTime", 180),
-                      $opt->("MaxTapMove", 110),
-                      $opt->("EmulateMidButtonTime", 75),
-                      $opt->("VertScrollDelta", 20),
-                      $opt->("HorizScrollDelta", 20),
-                      $opt->("MinSpeed", '0.8'),
-                      $opt->("MaxSpeed", '1.00'),
-                      $opt->("AccelFactor", '0.015'),
-                      $opt->("EdgeMotionMinSpeed", 200),
-                      $opt->("EdgeMotionMaxSpeed", 200),
-                      $opt->("UpDownScrolling", 1),
-                      $opt->("CircularScrolling", 1),
-                      $opt->("CircScrollDelta", '0.1'),
-                      $opt->("CircScrollTrigger", 2),
-                      $opt->("UpDownScrolling", 0),
-                  ) : (
-                      $opt->("LeftEdge", 1700),
-                      $opt->("RightEdge", 5300),
-                      $opt->("TopEdge", 1700),
-                      $opt->("BottomEdge", 4200),
-                      $opt->("FingerLow", 25),
-                      $opt->("FingerHigh", 30),
-                      $opt->("MaxTapTime", 180),
-                      $opt->("MaxTapMove", 220),
-                      $opt->("VertScrollDelta", 100),
-                      $opt->("MinSpeed", '0.09'),
-                      $opt->("MaxSpeed", '0.18'),
-                      $opt->("AccelFactor", '0.0015'),
-                  ),
-                  $opt->("SHMConfig", "on"),
-                };
+        my %opts = (
+            Device => $synaptics_mouse->{Device},
+            Protocol => $synaptics_mouse->{Protocol},
+            $synaptics_mouse->{ALPS} ? (
+                #- from /usr/share/doc/synaptics-0.14.0/README.alps
+                #- and http://qa.mandrakesoft.com/show_bug.cgi?id=14512
+                LeftEdge => 120,
+                RightEdge => 830,
+                TopEdge => 120,
+                BottomEdge => 650,
+                FingerLow => 14,
+                FingerHigh => 15,
+                MaxTapTime => 180,
+                MaxTapMove => 110,
+                EmulateMidButtonTime => 75,
+                VertScrollDelta => 20,
+                HorizScrollDelta => 20,
+                MinSpeed => '0.8',
+                MaxSpeed => '1.00',
+                AccelFactor => '0.015',
+                EdgeMotionMinSpeed => 200,
+                EdgeMotionMaxSpeed => 200,
+                UpDownScrolling => 1,
+                CircularScrolling => 1,
+                CircScrollDelta => '0.1',
+                CircScrollTrigger => 2,
+                UpDownScrolling => 0,
+            ) : (
+                #- from /usr/share/doc/synaptics-0.14.0/INSTALL
+                LeftEdge => 1700,
+                RightEdge => 5300,
+                TopEdge => 1700,
+                BottomEdge => 4200,
+                FingerLow => 25,
+                FingerHigh => 30,
+                MaxTapTime => 180,
+                MaxTapMove => 220,
+                VertScrollDelta => 100,
+                MinSpeed => '0.09',
+                MaxSpeed => '0.18',
+                AccelFactor => '0.0015',
+            ),
+            SHMConfig => "on",
+        );
+        while (my ($k, $v) = each %opts) {
+            $h->{$k} = { val => $v, Option => 1 };
+        }
         $raw_X->add_Section('InputDevice', $h);
         push @$layout, { val => qq("$identifier" "$pointer_type") };
     } @synaptics;
