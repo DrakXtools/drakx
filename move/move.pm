@@ -329,8 +329,17 @@ sub install2::configMove {
     modules::load_category('multimedia/sound');
     run_program::run('service', 'sound', 'start');
 
+    install_TrueFS_in_home($o);
+
+    $o->{useSupermount} = 1;
+    fs::set_removable_mntpoints($o->{all_hds});    
+    fs::set_all_default_options($o->{all_hds}, %$o, lang::fs_options($o->{locale}));
+
     require install_any;
     install_any::write_fstab($o);
+    $_->{mntpoint} && !$_->{isMounted} and run_program::run('mount', $_->{mntpoint}) foreach fsedit::get_really_all_fstab($o->{all_hds});
+    $o->{fstab} = [ fsedit::get_all_fstab($o->{all_hds}) ];   
+
     modules::write_conf('');
     detect_devices::install_addons('');
 
@@ -364,20 +373,16 @@ sub install_TrueFS_in_home {
     } list_users();
     $home->{loopback} = [ values %loopbacks ];
     fsedit::recompute_loopbacks($o->{all_hds});
-
-    $o->{fstab} = [ fsedit::get_all_fstab($o->{all_hds}) ];
-    install_steps::formatMountPartitions($o);
+    fs::formatMount_all([], $home->{loopback}, $o->{prefix});
 
     foreach my $user (keys %loopbacks) {
 	my $dir = $loopbacks{$user}{mntpoint};
-        run_program::run("/bin/chown", "$user.$user", $dir);
 
 	foreach (qw(.kde .openoffice)) {
 	    if (-d "/home/$user/$_" && ! -d "$dir/$_") {
 		run_program::run('mv', "/home/$user/$_", "$dir/$_");
 	    }
-	    mkdir $_ and run_program::run("/bin/chown", "$user.$user", $_)
-	      foreach "/home/$user/$_", "$dir/$_";
+	    mkdir $_ foreach "/home/$user/$_", "$dir/$_";
 
 	    run_program::run('mount', '-o', 'bind', "$dir/$_", "/home/$user/$_");
 	}
@@ -388,6 +393,7 @@ sub install_TrueFS_in_home {
 	    mkdir_p("/home/$user/" . dirname($_));
 	    symlink "$cache/$_", "/home/$user/$_";
 	}
+        run_program::run('chown', '-R', "$user.$user", $dir);
         run_program::run('chown', '-R', "$user.$user", $cache);
 
 	$ENV{ICEAUTHORITY} = "$dir/.ICEauthority";
@@ -405,7 +411,6 @@ sub install2::startMove {
     $root->draw_pixbuf(Gtk2::Gdk::GC->new($root), $pixbuf, 0, 0, ($::rootwidth - $w) / 2, ($::rootheight - $h)/2, $w, $h, 'none', 0, 0);
     ugtk2::gtkflush();
     
-    install_TrueFS_in_home($o);
     run_program::run('/sbin/service', 'syslog', 'start');
     run_program::run('killall', 'minilogd');  #- get rid of minilogd
     run_program::run('/sbin/service', 'syslog', 'restart');  #- otherwise minilogd will strike back
