@@ -89,6 +89,8 @@ sub selectLanguage {
     lang::set($o->{lang});
     $o->{langs} ||= { $o->{lang} => 1 };
 
+    log::l("selectLanguage: pack_langs ", lang::pack_langs($o->{langs}));
+
     if ($o->{keyboard_unsafe} || !$o->{keyboard}) {
 	$o->{keyboard_unsafe} = 1;
 	$o->{keyboard} = keyboard::lang2keyboard($o->{lang});
@@ -103,20 +105,11 @@ sub selectKeyboard {
 #------------------------------------------------------------------------------
 sub selectPath {}
 #------------------------------------------------------------------------------
-sub selectInstallClass {
-    my ($o) = @_;
-    $o->{installClass} ||= $::corporate ? "corporate" : "normal";
-    $o->{security} ||= ${{
-	normal    => 2,
-	developer => 3,
-	corporate => 3,
-	server    => 4,
-    }}{$o->{installClass}};
-}
+sub selectInstallClass {}
 #------------------------------------------------------------------------------
 sub setupSCSI {
     my ($o) = @_;
-    modules::configure_pcmcia($o->{pcmcia});
+    modules::configure_pcmcia($o->{pcmcia}) if $o->{pcmcia};
     modules::load_ide();
     modules::load_thiskind('scsi|disk');
 }
@@ -759,7 +752,7 @@ sub miscellaneousBefore {
     $o->{security} ||= $s{SECURITY} if exists $s{SECURITY};
 
     $ENV{SECURE_LEVEL} = $o->{security};
-    add2hash_ $o, { useSupermount => $o->{security} < 4 && arch() !~ /sparc/ && $o->{installClass} !~ /corporate|server/ };
+    add2hash_ $o, { useSupermount => $o->{security} < 4 && arch() !~ /sparc/ && !$::corporate };
 
     cat_("/proc/cmdline") =~ /mem=(\S+)/;
     add2hash_($o->{miscellaneous} ||= {}, { numlock => !$o->{pcmcia}, $1 ? (memsize => $1) : () });
