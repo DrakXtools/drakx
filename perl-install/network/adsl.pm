@@ -23,7 +23,9 @@ sub configure {
     my $l =  [N_("use pppoe"),
 	      N_("use pptp"), 
 	      N_("use dhcp"), 
-	      N_("Alcatel speedtouch usb") . if_($netc->{autodetect}{adsl}{speedtouch}, " - detected")];
+	      N_("Alcatel speedtouch usb") . if_($netc->{autodetect}{adsl}{speedtouch}, " - detected"),
+	      N_("Sagem (using pppoe) usb") . if_($netc->{autodetect}{adsl}{sagem}, " - detected"),
+	     ];
     my $type = $in->ask_from_list_(N("Connect to the Internet"),
 				   N("The most common way to connect with adsl is pppoe.
 Some connections use pptp, a few ones use dhcp.
@@ -40,6 +42,15 @@ If you don't know, choose 'use pppoe'"), $l) or return;
 #  			     N("I'm about to restart the network device %s. Do you agree?", $netc->{NET_DEVICE}), 1)
 #  	      and system("$prefix/sbin/ifdown $netc->{NET_DEVICE}; $prefix/sbin/ifup $netc->{NET_DEVICE}");
 #  	}
+    }
+    #- use pppoe for Sagem modem, but NET_DEVICE is now ADIModem instead of ethx.
+    if ($type =~ /Sagem/) {
+	$in->do_pkgs->install(qw(rp-pppoe adiusbadsl));
+	$netcnx->{type} = "adsl_pppoe";
+	$netcnx->{"adsl_pppoe"} = {};
+	modules::add_alias('ADIModem', 'adiusbadsl');
+	$netc->{$_} = 'ADIModem' foreach qw(NET_DEVICE NET_INTERFACE);
+	adsl_conf($netcnx->{"adsl_pppoe"}, $netc, $intf, $type) or goto conf_adsl_step1;
     }
     if ($type eq 'dhcp') {
 	$in->do_pkgs->install(qw(dhcpcd));
@@ -82,7 +93,8 @@ sub adsl_detect {
     my ($adsl) = @_;
     require detect_devices;
     $adsl->{speedtouch} = detect_devices::getSpeedtouch();
-    return $adsl if $adsl->{speedtouch};
+    $adsl->{sagem} = detect_devices::getSagem();
+    return $adsl if $adsl->{speedtouch} || $adsl->{sagem};
 }
 
 sub adsl_conf {
