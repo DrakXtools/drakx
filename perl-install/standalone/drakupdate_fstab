@@ -29,13 +29,26 @@ use any;
 use fs;
 
 $::testing = $ARGV[0] eq '--test' && shift;
+$::auto = $ARGV[0] eq '--auto' && shift;
 my ($raw_action, $device_name) = @ARGV;
 my ($action) = $raw_action =~ /^--(add|del)/;
 
-@ARGV == 2 && $action or die "usage: drakupdate_fstab [--test] [--add | --del] <device>\n";
+@ARGV == 2 && $action or die "usage: drakupdate_fstab [--test] [--auto] [--add | --del] <device>\n";
 
 main($action, $device_name);
 
+
+sub check_hard_drives {
+    my ($name) = @_;
+
+    #- do not do anything if there are many partitions
+    #- otherwise we may add main extended partitions
+    if ($name =~ s|/part\d+$||) {
+	! grep { /part[5-9]/ } all($name);
+    } else {
+	1;
+    }
+}
 
 sub device_name_to_entry {
     my ($name) = @_;
@@ -85,6 +98,11 @@ sub set_mount_point {
 
 sub main {
     my ($action, $device_name) = @_;
+
+    if ($::auto) {
+	check_hard_drives($device_name) or return;
+    }
+
     my $part = device_name_to_entry($device_name);
     my $fstab_file = '/etc/fstab';
     if (!$part) {
