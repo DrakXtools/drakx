@@ -249,7 +249,7 @@ sub mount_options_unpack {
 		  smbfs => [ qw(username= password=) ],
 		  reiserfs => [ 'notail' ],
 		 );
-    push @{$per_fs{$_}}, 'usrquota', 'grpquota' foreach 'ext2', 'ext3', 'reiserfs', 'xfs';
+    push @{$per_fs{$_}}, 'usrquota', 'grpquota' foreach 'ext2', 'ext3', 'xfs';
 
     while (my ($fs, $l) = each %per_fs) {
 	isThisFs($fs, $part) || $part->{type} eq 'auto' && member($fs, @auto_fs) or next;
