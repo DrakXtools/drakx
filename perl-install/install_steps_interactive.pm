@@ -131,7 +131,7 @@ sub selectMouse {
 	$name = $o->ask_from_list_('', _("What is the type of your mouse?"), [ mouse::names() ], $name);
 	$o->{mouse} = mouse::name2mouse($name);
     }
-    $o->{mouse}{XEMU3} = 'yes'; #- if $o->{mouse}{nbuttons} < 3 && $o->ask_yesorno('', _("Emulate third button?"), 1);
+    $o->{mouse}{XEMU3} = 'yes' if $o->{mouse}{nbuttons} < 3; #- if $o->{mouse}{nbuttons} < 3 && $o->ask_yesorno('', _("Emulate third button?"), 1);
 
     if ($o->{mouse}{device} eq "ttyS") {
 	$o->set_help('selectSerialPort');
