@@ -206,7 +206,7 @@ sub install2::handleMoveKey {
 sub install2::verifyKey {
     my ($o) = $::o;
 
-    while (!any { m|\s/home\s| } cat_('/proc/mounts')) {
+    while (cat_('/proc/mounts') !~ m|\s/home\s|) {
         
         $o->ask_okcancel_({ title => N("Need a key to save your data"), 
                             messages => formatAlaTeX(
@@ -272,7 +272,7 @@ sub install2::startMove {
 
     #- automatic printer, timezone, network configs
     require install_steps_interactive;
-    if (!any { /nfs/ } cat_('/proc/mounts')) {
+    if (cat_('/proc/mounts') =~ /nfs/) {
         install_steps_interactive::configureNetwork($o);
         #- seems that applications have trouble with the loopback interface
         #- after successful network configuration if we don't do that
