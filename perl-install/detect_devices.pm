@@ -82,7 +82,7 @@ sub floppies() {
 	my $info = (!dev_is_devfs() || -e "/dev/$_") && c::floppy_info(devices::make($_));
 	if_($info && $info ne '(null)', { device => $_, media_type => 'fd', info => $info })
     } qw(fd0 fd1);
-    my @ide = ls120s() and modules::load("ide-floppy");
+    my @ide = ls120s() and eval { modules::load("ide-floppy") };
 
     eval { modules::load("usb-storage") } if usbStorage();
     my @scsi = grep { $_->{media_type} eq 'fd' } getSCSI();
