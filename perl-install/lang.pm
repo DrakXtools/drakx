@@ -450,7 +450,11 @@ sub load_po {
 	    } else {
 		$to = qq("$to");
 	    }
-	    $s .= qq("$from" => $to,\n) if $from;
+	    if ($from) {
+		$s .= qq("$from" => $to,\n);
+	    } elsif ($to =~ /charset=([\w-]+)/) {
+		$lang::charset = $1;
+	    }
 	    $from = $to = '';
 	}
 	$to .= (/"(.*)"/)[0] if $state == 1;
