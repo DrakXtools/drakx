@@ -115,8 +115,8 @@ sub touch {
 
 sub map_index(&@) {
     my $f = shift;
-    my $v; local $::i = 0;
-    map { $v = &$f($::i); $::i++; $v } @_;
+    my @v; local $::i = 0;
+    map { @v = &$f($::i); $::i++; @v } @_;
 }
 sub grep_index(&@) {
     my $f = shift;

@@ -138,8 +138,8 @@ sub setPackages($) {
 
 	push @{$o->{base}}, @{delete($o->{"base_" . arch()}) || []};
 
-	my $c; ($o->{compss}, $c) = pkgs::readCompss($o->{packages});
-	$o->{compssListLevels} = pkgs::readCompssList($o->{packages}, $c);
+	$o->{compss} = pkgs::readCompss($o->{packages});
+	$o->{compssListLevels} = pkgs::readCompssList($o->{packages}, $o->{compss});
 	($o->{compssUsers}, $o->{compssUsersSorted}) = pkgs::readCompssUsers($o->{packages}, $o->{compss});
 
 	my @l = ();

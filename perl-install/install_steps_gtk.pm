@@ -345,188 +345,85 @@ installation of each selected groups.") .
 }
 sub choosePackagesTree {
     my ($o, $packages, $compss) = @_;
-    my $availableSpace = int(install_any::getAvailableSpace($o) / sqr(1024));
+
+    my ($curr, $info_widget, $w_size, $go, $idle);
+    my %wtree;
+
     my $w = my_gtk->new('');
-    add2hash_($o->{packages_}, { show_level => 0 }); #- keep show more or less 80 });
-
-    my ($current, $ignore, $showall, $selectall, $w_size, $info_widget, $showall_button, $selectall_button, $go, %items) = 0, 0, 0, 0;
     my $details = new Gtk::VBox(0,0);
-    $compss->{tree} = new Gtk::Tree();
-    $compss->{tree}->set_selection_mode('multiple');
+    my $tree = Gtk::CTree->new(2, 0);
+    $tree->set_selection_mode('browse');
+    $tree->set_column_auto_resize($_, 1) foreach 0..1;
 
-    my $clean; $clean = sub {
-	my ($p) = @_;
-	foreach (values %{$p->{childs}}) {
-	    &$clean($_) if $_->{childs};
-	    delete $_->{itemNB};
-	    delete $_->{tree};
-	    delete $_->{packages_item};
+    my $parent; $parent = sub {
+	if (my $w = $wtree{$_[0]}) { return $w }
+	my $s; foreach (split '/', $_[0]) {
+	    $wtree{"$s/$_"} ||= 
+	      $tree->insert_node($s ? $parent->($s) : undef, undef, [$_], 5, (undef) x 4, 0, 0);
+	    $s = "$s/$_";
 	}
-    }; &$clean($compss);
+	$wtree{$s};
+    };
+    my ($root, $leaf);
+    foreach (@$compss) {
+	($root, $leaf) = m|(.*)/(.+)|o or ($root, $leaf) = ('', $_);
+	my $node = $tree->insert_node($parent->($root), undef, [$leaf], 5, (undef) x 4, 1, 0);
+    }
 
-    my $update = sub {
+    gtkadd($w->{window}, 
+	   gtkpack_(new Gtk::VBox(0,5),
+		    0, _("Choose the packages you want to install"),
+		    1, gtkpack(new Gtk::HBox(0,0),
+			       createScrolledWindow($tree),
+			       gtkadd(gtkset_usize(new Gtk::Frame(_("Info")), 150, 0),
+				      createScrolledWindow($info_widget = new Gtk::Text),
+				     )),
+		    0, gtkpack__(new Gtk::HBox(0,0), $w_size = new Gtk::Label('')),
+		    0, gtkpack(new Gtk::HBox(0,10),
+			       $go = gtksignal_connect(new Gtk::Button(_("Install")), "clicked" => sub { $w->{retval} = 1; Gtk->main_quit }),
+			      )
+    ));
+    $w->{window}->set_usize(map { $_ - 2 * $my_gtk::border - 4 } $::windowwidth, $::windowheight);
+    $go->grab_focus;
+    $w->show;
+
+    my $display_info = sub {
+	my $p = $packages->[0]{$curr} or return gtktext_insert($info_widget, '');
+	pkgs::extractHeaders($o->{prefix}, [$p]);
+	$p->{header} or die;
+
+	my $ind = $o->{compssListLevels}{$o->{install_class}};
+	my $imp = translate($pkgs::compssListDesc{pkgs::packageFlagBase($p) ? 100 : round_down($p->{values}[$ind], 10)});
+
+	gtktext_insert($info_widget, $@ ? _("Bad package") :
+		       _("Version: %s\n", pkgs::packageVersion($p) . '-' . pkgs::packageRelease($p)) .
+		       _("Size: %d KB\n", pkgs::packageSize($p) / 1024) .
+		       ($imp && _("Importance: %s\n", $imp)) .
+		       formatLines(c::headerGetEntry($p->{header}, 'description')));
+	c::headerFree(delete $p->{header});
+	0;
+    };
+
+    $tree->signal_connect(tree_select_row => sub {
+	Gtk->timeout_remove($idle) if $idle;
+
+	$_[1]->row->is_leaf or return;
+	($curr) = $tree->node_get_pixtext($_[1], 0);
+
+	$idle = Gtk->timeout_add(100, $display_info);
+    });
+
+    my $update_size = sub {
 	my $size = 0;
-	$ignore = 1;
-	foreach (grep { $_->[0] } values %items) {
-	    $compss->{tree}->unselect_child($_->[0]);
-	    $compss->{tree}->select_child($_->[0]) if pkgs::packageFlagSelected($_->[1]);
-	}
-	$ignore = 0;
-	
 	foreach (values %{$packages->[0]}) {
 	    $size += pkgs::packageSize($_) - ($_->{installedCumulSize} || 0) if pkgs::packageFlagSelected($_); #- on upgrade, installed packages will be removed.
 	}
+	$w_size->set(_("Total size: %d / %d KB", 
+		       pkgs::correctSize($size / sqr(1024)),
+		       install_any::getAvailableSpace($o) / sqr(1024)));
 
-	$w_size->set(_("Total size: ") . int (pkgs::correctSize($size / sqr(1024))) . " / $availableSpace " . _("KB") );
     };
-    my $new_item = sub {
-	my ($p, $name, $parent) = @_;
-	my $w = create_treeitem($name);
-	$items{++$itemsNB} = [ $w, $p ];
-	undef $parent->{packages_item}{$itemsNB} if $parent;
-	$w->show;
-	$w->set_sensitive(!pkgs::packageFlagBase($p) && !pkgs::packageFlagInstalled($p));
-	$w->signal_connect(focus_in_event => sub {
-	    my $p = eval { pkgs::getHeader ($p) }; #- TODO
-	    gtktext_insert($info_widget, $@ ? _("Bad package") :
-			   _("Version: %s\n", c::headerGetEntry($p, 'version') . '-' . c::headerGetEntry($p, 'release')) .
-			   _("Size: %d KB\n", c::headerGetEntry($p, 'size') / 1024) .
-
-			   formatLines(c::headerGetEntry($p, 'description')));
-	}) unless $p->{childs};
-	$itemsNB;
-    };
-
-    $compss->{tree}->signal_connect(selection_changed => sub {
-	$ignore and return;
-
-	my %s; @s{$_[0]->selection} = ();
-	my @changed;
-	#- needs to find @changed first, _then_ change the selected, otherwise
-	#- we won't be able to find the changed
-	foreach (values %items) {
-	    push @changed, $_->[1] if (pkgs::packageFlagSelected($_->[1]) xor exists $s{$_->[0]});
-	}
-	#- works before @changed is (or must be!) one element
-	foreach (@changed) {
-	    if ($_->{childs}) {
-		my $pkg = $_;
-		pkgs::packageSetFlagSelected($pkg, !pkgs::packageFlagSelected($pkg));
-		my $f; $f = sub {
-		    my ($p) = @_;
-		    $p->{itemNB} or return;
-		    if ($p->{packages}) {
-			foreach (keys %{$p->{packages_item} || {}}) {
-			    my ($a, $b) = @{$items{$_}};
-			    $a and pkgs::setPackageSelection($packages, $b, pkgs::packageFlagSelected($pkg));
-			}
-		    } else {
-			foreach (values %{$p->{childs}}) {
-			    pkgs::packageSetFlagSelected($_, pkgs::packageFlagSelected($pkg));
-			    &$f($_);
-			}
-		    }
-		}; &$f($_);
-#-	      } elsif ($_->{base}) {
-#-		  $o->ask_warn('', _("Sorry, i won't unselect this package. The system needs it"));
-#-	      } elsif ($_->{installed}) {
-#-		  $o->ask_warn('', _("Sorry, i won't select this package. A more recent version is already installed"));
-	    } else {
-		pkgs::togglePackageSelection($packages, $_);
-	    }
-	}
-	&$update();
-    });
-
-#-    my $select_add = sub {
-#-	  my ($ind, $level) = @{$o->{packages_}}{"ind", "select_level"};
-#-	  $level = max(0, min(100, ($level + $_[0])));
-#-	  $o->{packages_}{select_level} = $level;
-#-
-#-	  pkgs::unselect_all($packages);
-#-	  foreach (pkgs::allpackages($packages)) {
-#-	      pkgs::select($packages, $_) if $_->{values}[$ind] >= $level;
-#-	  }
-#-	  &$update;
-#-    };
-
-    my $show_add = sub {
-	my ($ind, $level) = @{$o->{packages_}}{"ind", "show_level"};
-	$level = max(0, min(90, ($level + $_[0])));
-	$o->{packages_}{show_level} = $level;
-
-	my $update_tree = sub {
-	    my $P = shift;
-	    my $i = 0; foreach (@_) {
-		my ($flag, $itemNB, $q) = @$_;
-		my $item = $items{$flag || $itemNB}[0] if $flag || $itemNB;
-		if ($flag) {
-		    $P->{tree}->insert($item, $i) if $flag ne "1";
-		    $item->set_subtree($q->{tree}) if $flag ne "1" && $q->{tree};
-		    $i++;
-		} elsif ($itemNB) {
-		    delete $items{$itemNB};
-		    delete $P->{packages_item}{$itemNB};
-		    $P->{tree}->remove_item($item) if $P->{tree};
-		}
-	    }
-	};
-	my $f; $f = sub {
-	    my ($p) = @_;
-	    if ($p->{packages}) {
-		my %l; $l{$items{$_}[1]} = $_ foreach keys %{$p->{packages_item}};
-		map {
-		    [ $_->{values}[$ind] >= $level ?
-		      ($l{$_} ? 1 : &$new_item($_, pkgs::packageName($_), $p)) : '', $l{$_}, $_ ];
-		} sort { 
-		    pkgs::packageName($a) cmp pkgs::packageName($b) } @{$p->{packages}};
-	    } else {
-		map {
-		    my $P = $p->{childs}{$_};
-		    my @L; @L = &$f($P) if !$P->{values} || $P->{values}[$ind] > ($::expert ? -1 : 0);
-		    if (grep { $_->[0] } @L) {
-			my $r = $P->{tree} ? 1 : do {
-			    my $t = $P->{tree} = new Gtk::Tree(); $t->show;
-			    $P->{itemNB} = &$new_item($P, $_);
-			};
-			&$update_tree($P, @L);
-			[ $r, $P->{itemNB}, $P ];
-		    } else {
-			&$update_tree($P, @L);
-			delete $P->{tree};
-			[ '', delete $P->{itemNB}, $P ];
-		    }
-		} sort keys %{$p->{childs} || {}};
-	    }
-	};
-	$ignore = 1;
-	&$update_tree($compss, &$f($compss));
-	&$update;
-	$ignore = 0;
-    };
-
-    gtkadd($w->{window}, gtkpack_(new Gtk::VBox(0,5),
-				  0, _("Choose the packages you want to install"),
-				  1, gtkpack(new Gtk::HBox(0,0),
-					     createScrolledWindow($compss->{tree}),
-					     gtkadd(gtkset_usize(new Gtk::Frame(_("Info")), 150, 0),
-						    createScrolledWindow($info_widget = new Gtk::Text),
-						   ),
-					     ),
-				 0, gtkpack_(new Gtk::HBox(0,0), 0, $w_size = new Gtk::Label('')),
-				 0, gtkpack(new Gtk::HBox(0,10),
-					    map { $go ||= $_; $_ }
-					    map { gtksignal_connect(new Gtk::Button($_->[0]), "clicked" => $_->[1]) }
-					    [ _("Install") => sub { $w->{retval} = 1; Gtk->main_quit } ],
-					    #- keep show more or less [ _("Show less") => sub { &$show_add(+10) } ],
-					    #- keep show more or less [ _("Show more") => sub { &$show_add(-10) } ],
-					   )
-    ));
-    $w->{window}->set_usize(map { $_ - 2 * $my_gtk::border - 4 } $::windowwidth, $::windowheight);
-    $w->show;
-    &$show_add(0);
-    &$update();
-    $go->grab_focus;
+    &$update_size();
     $w->main;
 }
 

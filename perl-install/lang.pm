@@ -236,8 +236,6 @@ sub set_langs {
     my ($l) = @_;
     $ENV{RPM_INSTALL_LANG} = member('all', @$l) ? 'all' :
       join ':', uniq(map { substr($languages{$_}[2], 0, 2) } @$l);
-
-#    $ENV{RPM_INSTALL_LANG} = join ':', uniq(map { split ':', $languages{$_}[3] } @{$_[0]});
 }
 
 sub write {

@@ -79,7 +79,7 @@ sub selectKeyboard($) {
 	my $langs = $o->ask_many_from_list('', 
 		_("You can choose other languages that will be available after install"),
 		[ lang::list() ]) or goto &selectLanguage if $::expert;
-	lang::set_langs($o->{langs} = grep_index { $langs->[$::i] } lang::list());
+	$o->{langs} = [ $o->{lang}, grep_index { $langs->[$::i] } lang::list() ];
     }
 }
 #------------------------------------------------------------------------------

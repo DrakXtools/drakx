@@ -2,7 +2,7 @@ package pkgs;
 
 use diagnostics;
 use strict;
-use vars qw(*LOG %compssList @skip_list %by_lang @preferred $limitMinTrans $limitMaxTrans $PKGS_SELECTED $PKGS_FORCE $PKGS_INSTALLED $PKGS_BASE $PKGS_SKIP $PKGS_UNSKIP);
+use vars qw(*LOG %compssListDesc @skip_list %by_lang @preferred $limitMinTrans $limitMaxTrans $PKGS_SELECTED $PKGS_FORCE $PKGS_INSTALLED $PKGS_BASE $PKGS_SKIP $PKGS_UNSKIP);
 
 use common qw(:common :file :functional);
 use install_any;
@@ -15,7 +15,8 @@ use lang;
 use c;
 
 #- lower bound on the left ( aka 90 means [90-100[ )
-%compssList = (
+%compssListDesc = (
+ 100 => __("mandatory"), #- do not use it, it's for base packages
   90 => __("must have"), #- every install have these packages (unless hand de-selected in expert, or not enough room)
   80 => __("important"), #- every beginner/custom install have these packages (unless not enough space)
 		         #- has minimum X install (XFree86 + icewm)(normal)
@@ -284,7 +285,6 @@ sub psUsingHdlist($) {
 			flags => 0,        #- flags
 		      };
 	    $packages[0]{packageName($pkg)} = $pkg;
-	    print packageName($pkg), "\n";
 	} else {
 	    die "cannot determine how to handle such file in $newf: $_";
 	}
@@ -341,14 +341,9 @@ sub getProvides($) {
     }
 }
 
-sub category2packages($) {
-    my ($p) = @_;
-    $p->{packages} || [ map { @{ category2packages($_) } } values %{$p->{childs}} ];
-}
-
-sub readCompss($) {
+sub readCompss {
     my ($packages) = @_;
-    my ($compss, $compss_, $ps) = { childs => {} };
+    my ($p, @compss);
 
     my $f = install_any::getFile("compss") or die "can't find compss";
     foreach (<$f>) {
@@ -356,40 +351,26 @@ sub readCompss($) {
 	s/#.*//;
 
 	if (/^(\S+)/) {
-	    my $p = $compss;
-	    my @l = split ':', $1;
-	    foreach (@l) {
-		$p->{childs}{$_} ||= { childs => {} };
-		$p = $p->{childs}{$_};
-	    }
-	    $ps = $p->{packages} ||= [];
-	    $compss_->{$1} = $p;
+	    s|:|/|g;
+	    $p = $1 if /^(\S+)/;
 	} else {
-	    /(\S+)/ or log::l("bad line in compss: $_"), next;
-	    push @$ps, $packages->[0]{$1} || do { log::l("unknown package $1 (in compss)"); next };
+	    /(\S+)/;
+	    $packages->[0]{$1} or log::l("unknown package $1 in compss"), next;
+	    push @compss, "$p/$1";
 	}
     }
-    ($compss, $compss_);
+    \@compss;
 }
 
-sub readCompssList($$$) {
-    my ($packages, $compss_) = @_;
+sub readCompssList {
+    my ($packages) = @_;
     my $f = install_any::getFile("compssList") or die "can't find compssList";
-    local $_ = <$f>;
-    my $level = [ split ];
+    my @levels = split ' ', <$f>;
 
-    my $nb_values = 3;
-    my $e;
     foreach (<$f>) {
 	/^\s*$/ || /^#/ and next;
-
-	/^packages\s*$/ and do { $e = $packages->[0]; next };
-	/^categories\s*$/ and do { $e = $compss_; next };
-
 	my ($name, @values) = split;
-
-	$e or log::l("neither packages nor categories");
-	my $p = $e->{$name} or log::l("unknown entry $name (in compssList)"), next;
+	my $p = $packages->[0]{$name} or log::l("unknown entry $name (in compssList)"), next;
 	$p->{values} = \@values;
     }
 
@@ -399,33 +380,38 @@ sub readCompssList($$$) {
 	foreach ("locales-$_", @{$p->{provides} || []}, @{$by_lang{$_} || []}) {
 	    next if $done{$_}; $done{$_} = 1;
 	    my $p = $packages->[0]{$_} or next;
-	    $p->{values} = [ map { $_ + 90 } @{$p->{values} || [ (0) x $nb_values ]} ];
+	    $p->{values} = [ map { $_ + 90 } @{$p->{values} || [ (0) x @levels ]} ];
 	}
     }
-    $level;
+    return { map_index { $_ => $::i } @levels };
 }
 
 sub readCompssUsers {
     my ($packages, $compss) = @_;
     my (%compssUsers, @sorted, $l);
+    my %compss; m|(.*)/(.*)| && push @{$compss{$1}}, $2 foreach @$compss;
 
+    my $map = sub {
+	$l or return;
+	$_ = $packages->[0]{$_} or log::l("unknown package $1 (in compssUsers)") foreach @$l;
+    };
     my $f = install_any::getFile("compssUsers") or die "can't find compssUsers";
     foreach (<$f>) {
 	/^\s*$/ || /^#/ and next;
 	s/#.*//;
 
 	if (/^(\S.*)/) {
+	    &$map;
 	    push @sorted, $1;
 	    $compssUsers{$1} = $l = [];
 	} elsif (/\s+\+(\S+)/) {
-	    push @$l, $packages->[0]{$1} || do { log::l("unknown package $1 (in compssUsers)"); next };
+	    push @$l, $1;
 	} elsif (/\s+(\S+)/) {
-	    my $p = $compss;
-	    $p &&= $p->{childs}{$_} foreach split ':', $1;
-	    $p or log::l("unknown category $1 (in compssUsers)"), next;
-	    push @$l, @{ category2packages($p) };
+	    s|:|/|g; /\s+(\S+)/;
+	    push @$l, @{$compss{$1} || log::l("unknown category $1 (in compssUsers)") && []};
 	}
     }
+    &$map;
     \%compssUsers, \@sorted;
 }
 
@@ -438,13 +424,10 @@ sub readCompssUsers {
 
 sub setSelectedFromCompssList {
     my ($compssListLevels, $packages, $min_level, $max_size, $install_class) = @_;
-    my ($ind);
+    my $ind = $compssListLevels->{$install_class} or log::l("unknown install class $install_class in compssList"), return;
 
     my @packages = allPackages($packages);
     my @places = do {
-	map_index { $ind = $::i if $_ eq $install_class } @$compssListLevels;
-	defined $ind or log::l("unknown install class $install_class in compssList"), return;
-
 	#- special case for /^k/ aka kde stuff
 	my @values = map { $_->{values}[$ind] + (packageFlagUnskip($_) && packageName($_) !~ /^k/ ? 10 : 0) } @packages;
 	sort { $values[$b] <=> $values[$a] } 0 .. $#packages;

@@ -252,6 +252,7 @@ sub selectKeyboard {
     addToBeDone {
 	lang::write($o->{prefix});
 	keyboard::write($o->{prefix}, $o->{keyboard});
+	lang::set_langs($o->{langs});
     } 'doInstallStep' unless $::g_auto_install;
 }
 
