@@ -685,8 +685,9 @@ For instance, ``io=0x300 irq=7''", $l),
 				);
 	}
     }
-    eval { 
+    eval {
 	my $w = wait_load_module($in, $type, $l, $m);
+	log::l("user asked for loading module $m (type $type, desc $l)");
 	modules::load($m, $type, @options);
     };
     if ($@) {
