@@ -1,5 +1,12 @@
 use strict;
 
+
+BEGIN {
+    #- for testing purpose
+    (my $f = __FILE__) =~ s|/[^/]*$||;
+    push @INC, $f;
+}
+
 use MDK::Common;
 use list_modules;
 
@@ -45,6 +52,7 @@ my %images = (
 my $verbose = "@ARGV" =~ /-v/;
 images() if "@ARGV" =~ /images/;
 check() if "@ARGV" =~ /check/;
+pci_modules4stage1($1) if "@ARGV" =~ /pci_modules4stage1:(.*)/;
 
 sub images {
     load_dependencies('modules.dep');
@@ -66,6 +74,10 @@ sub images {
 	@modules = map { dependencies_closure($_) } @modules;
 	printf qq(%s_modules="%s"\n), $image, join(" ", map { "$_.o" } sort @modules);
     }
+}
+
+sub pci_modules4stage1 {
+    print "$_\n" foreach difference2([ category2modules($_[0]) ], \@skip_modules_on_stage1);
 }
 
 sub check {
