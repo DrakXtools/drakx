@@ -360,30 +360,35 @@ default = install-novideo
 
 image = cd:,\\\\\\\\vmlinux
     label = install-novideo
+    root = /dev/ram3
     initrd = cd:,\\\\\\\\all.gz
     initrd-size = 32000
     append = \" video=ofonly\"
     
 image = cd:,\\\\\\\\vmlinux
     label = install-atyfb
+    root = /dev/ram3
     initrd = cd:,\\\\\\\\all.gz
     initrd-size = 32000
     append = \" video=atyfb:vmode:17\"
     
 image = cd:,\\\\\\\\vmlinux
     label = install-aty128fb
+    root = /dev/ram3
     initrd = cd:,\\\\\\\\all.gz
     initrd-size = 32000
     append = \" video=aty128fb:vmode:17\"
 
 image = cd:,\\\\\\\\vmlinux
     label = install-text
+    root = /dev/ram3
     initrd = cd:,\\\\\\\\all.gz
     initrd-size = 32000
     append = \" text\"
 
 image = cd:,\\\\\\\\vmlinux
     label = rescue
+    root = /dev/ram3
     initrd = cd:,\\\\\\\\all.gz
     initrd-size = 32000
     append = \" rescue\"    
