@@ -123,6 +123,11 @@ sub leavingStep {
 }
 
 
+sub charsetChanged {
+    my ($o) = @_;
+    Gtk->set_locale;
+    install_gtk::install_theme($o);
+}
 
 #-######################################################################################
 #- Steps Functions
@@ -130,9 +135,7 @@ sub leavingStep {
 sub selectLanguage {
     my ($o, $first_time) = @_;
     $o->SUPER::selectLanguage;
-    Gtk->set_locale;
-    install_gtk::install_theme($o);
-    
+  
     $o->ask_warn('',
 _("Your system is low on resource. You may have some problem installing
 Linux-Mandrake. If that occurs, you can try a text install instead. For this,
