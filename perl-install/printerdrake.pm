@@ -34,6 +34,7 @@ Printers on remote CUPS servers you do not have to configure here; these printer
 sub setup_remote_cups_server {
     my ($printer, $in) = @_;
 
+    local $::isWizard = 0;
     # Check whether the network functionality is configured and
     # running
     if (!check_network($printer, $in)) {return 0};
@@ -501,13 +502,13 @@ _(" (Parallel Ports: /dev/lp0, /dev/lp1, ..., equivalent to LPT1:, LPT2:, ..., 1
 	$isHPOJ = $in->ask_yesorno(_("Local Printer"),
 				   _("Is your printer a multi-function device from HP (OfficeJet, PSC, PhotoSmart LaserJet 1100/1200/1220/3200 with scanner)?"), 0);
     }
-    if (($menuchoice =~ /HP OfficeJet/i) ||
-	($menuchoice =~ /HP PSC/i) ||
-	($menuchoice =~ /HP PhotoSmart/i) ||
-	($menuchoice =~ /HP LaserJet 1100/i) ||
-	($menuchoice =~ /HP LaserJet 1200/i) ||
-	($menuchoice =~ /HP LaserJet 1220/i) ||
-	($menuchoice =~ /HP LaserJet 3200/i) ||
+    if (($menuchoice =~ /HP\s+OfficeJet/i) ||
+	($menuchoice =~ /HP\s+PSC/i) ||
+	($menuchoice =~ /HP\s+PhotoSmart/i) ||
+	($menuchoice =~ /HP\s+LaserJet\s+1100/i) ||
+	($menuchoice =~ /HP\s+LaserJet\s+1200/i) ||
+	($menuchoice =~ /HP\s+LaserJet\s+1220/i) ||
+	($menuchoice =~ /HP\s+LaserJet\s+3200/i) ||
 	($isHPOJ)) {
 	# Install HPOJ package
 	if ((!$::testing) &&
@@ -523,8 +524,8 @@ _(" (Parallel Ports: /dev/lp0, /dev/lp1, ..., equivalent to LPT1:, LPT2:, ..., 1
 
 	if ($ptaldevice) {
 	    # Configure scanning on the MF device
-	    if (($menuchoice =~ /HP OfficeJet\s+[KVRGP]/i) ||
-		($menuchoice =~ /HP PSC\s+[579]/i)) {
+	    if (($menuchoice =~ /HP\s+OfficeJet\s+[KVRGP]/i) ||
+		($menuchoice =~ /HP\s+PSC\s+[579]/i)) {
 		# Install SANE
 		if ((!$::testing) &&
 		    (!printer::files_exist((qw(/usr/bin/scanimage
@@ -549,7 +550,7 @@ _(" (Parallel Ports: /dev/lp0, /dev/lp1, ..., equivalent to LPT1:, LPT2:, ..., 1
 			      _("Your HP multi-function device was configured automatically to be able to scan. Now you can scan with \"scanimage\" (\"scanimage -d hp:%s\" to specify the scanner when you have more than one) from the command line or with the graphical interfaces \"xscanimage\" or \"xsane\". If you are using the GIMP, you can also scan by choosing the appropriate point in the \"File\"/\"Acquire\" menu. Call also \"man scanimage\" and \"man sane-hp\" on the command line to get more information.
 Do not use \"scannerdrake\" for this device!",
 				$ptaldevice));
-	    } else {
+	    } elsif ($menuchoice !~ /HP\s+PhotoSmart/i) {
 		# Inform user about how to scan with ptal-hp
 		$in->ask_warn(_("Scanning on your HP multi-function device"),
 			      _("Your HP multi-function device was configured automatically to be able to scan. Now you can scan from the command line with \"ptal-hp %s scan ...\". Scanning via a graphical interface or from the GIMP is not supported yet for your device. More information you will find in the \"/usr/share/doc/hpoj-0.8/ptal-hp-scan.html\" on your system. If you have an HP LaserJet 1100 or 1200 you can only scan when you have the scanner option installed.
@@ -1834,6 +1835,10 @@ sub check_network {
 
     my ($printer, $in) = @_;
 
+    # Any additional dialogs caused by this subroutine should appear as
+    # extra windows and not embedded in the "Add printer" wizard.
+    local $::isWizard = 0;
+
     $in->set_help('checkNetwork') if $::isInstall;
 
     # First check: Does /etc/sysconfig/network-scripts/draknet_conf exist
@@ -1902,6 +1907,11 @@ sub security_check {
     # Check the security mode and when in "high" or "paranoid" mode ask the
     # user whether he really wants to configure printing.
     my ($printer, $in, $spooler) = @_;
+
+    # Any additional dialogs caused by this subroutine should appear as
+    # extra windows and not embedded in the "Add printer" wizard.
+    local $::isWizard = 0;
+
     $in->set_help('securityCheck') if $::isInstall;
 
     # Get security level
@@ -1952,6 +1962,11 @@ sub start_spooler_on_boot {
     # Checks whether the spooler will be started at boot time and if not,
     # ask the user whether he wants to start the spooler at boot time.
     my ($printer, $in, $service) = @_;
+
+    # Any additional dialogs caused by this subroutine should appear as
+    # extra windows and not embedded in the "Add printer" wizard.
+    local $::isWizard = 0;
+
     $in->set_help('startSpoolerOnBoot') if $::isInstall;
     if (!printer::service_starts_on_boot($service)) {
 	if ($in->ask_yesorno(_("Starting the printing system at boot time"),
