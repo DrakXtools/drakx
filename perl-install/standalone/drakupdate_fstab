@@ -29,6 +29,8 @@ use fs;
 
 $::isStandalone = 1; #- not using standalone.pm which generates too many logs for drakupdate_fstab purpose
 
+log::l("drakupdate_fstab called with @ARGV\n");
+
 $::testing = $ARGV[0] eq '--test' && shift @ARGV;
 $::auto = $ARGV[0] eq '--auto' && shift @ARGV;
 my $no_flag = $ARGV[0] eq '--no-flag' && shift @ARGV;
@@ -61,13 +63,13 @@ sub device_name_to_entry {
 
     my ($e, $nb);
     if ((my $devfs_prefix, $nb) = $name =~ m,(.*)/(?:cd|disc|part(\d+))$,) {
-	($e) = grep { $_->{devfs_prefix} eq $devfs_prefix } @l or return;
+	$e = find { $_->{devfs_prefix} eq $devfs_prefix } @l;
     } else {
-	if (($e) = grep { $name eq $_->{device} } @l) {
+	if ($e = find { $name eq $_->{device} } @l) {
 	    $nb = '';
 	} else {
 	    (my $prefix, $nb) = $name =~ m/^(.*?)(\d*)$/;
-	    ($e) = grep { $prefix eq ($_->{prefix} || $_->{device}) } @l or return;
+	    $e = find { $prefix eq ($_->{prefix} || $_->{device}) } @l;
 	}
     }
 
@@ -75,6 +77,8 @@ sub device_name_to_entry {
 	$e->{devfs_device} = $e->{devfs_prefix} . '/part' . $nb;
 	$e->{device} = ($e->{prefix} || $e->{device}) . $nb;
     }
+    $e ||= {};
+    $e->{device} = $name; #- keeping the exact name given (often is the devfs name)
     $e;
 }
 
