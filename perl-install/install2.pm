@@ -340,6 +340,7 @@ sub main {
 	install_steps_auto_install_non_interactive::errorInStep();
     };
     $ENV{PERL_BADLANG} = 1;
+    $ENV{LD_ASSUME_KERNEL} = '2.4.1';
     umask 022;
 
     $::isInstall = 1;
