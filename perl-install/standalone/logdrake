@@ -191,12 +191,12 @@ gtkadd($my_win->{window},
 										clicked => sub { 
                                                       eval { alert_config() };
                                                       my $err = $@;
-                                                      if ($err =~ /wizcancel/) {
-                                                          $::Wizard_no_previous = 1;
-                                                          $::Wizard_no_cancel = 1;
-                                                          $::WizardWindow->destroy if defined $::WizardWindow;
-                                                          undef $::WizardWindow;
-                                                      } elsif ($err) { print qq(CRITICAL: "$err" =>\n) }
+                                                      $::WizardWindow->destroy if defined $::WizardWindow;
+                                                      undef $::WizardWindow;
+                                                      if ($err && $err !~ /wizcancel/) {
+                                                          err_dialog(N("Error"), N("The alert wizard had unexpectly failled:")
+                                                                     . "\n\n" . $err);
+                                                      }
                                                   })),
 					      gtksignal_connect(Gtk2::Button->new(N("Save")), clicked => \&save),
 					      gtksignal_connect(Gtk2::Button->new($::isEmbedded ? N("Cancel") : N("Quit")), clicked => \&quit)
