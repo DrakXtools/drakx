@@ -56,7 +56,14 @@ sub add_callback {
 
 sub edit_callback {
     my (undef, $iter) = $permList->get_selection->get_selected;
-    row_setting_data($iter);
+    return unless $iter;
+    %CURENT = ('data' => [
+                          $treeModel->_get($iter, 0),
+                          $treeModel->_get($iter, 1),
+                          $treeModel->_get($iter, 2),
+                          $treeModel->_get($iter, 3),
+                         ]
+              );
     row_setting_dialog($iter);
 }
 
@@ -187,17 +194,6 @@ sub save_perm {
     }
     close F;
     $modified = 0;
-}
-
-sub row_setting_data {
-    my ($iter) = @_;
-    %CURENT = ('data' => [
-			  $treeModel->_get($iter, 0),
- 			  $treeModel->_get($iter, 1),
- 			  $treeModel->_get($iter, 2),
- 			  $treeModel->_get($iter, 3),
- 			 ]
-	      );
 }
 
 sub row_setting_dialog {
