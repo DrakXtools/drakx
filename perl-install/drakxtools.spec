@@ -340,6 +340,8 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
     not get confused
 - drakupdate_fstab: fix supermount handling (pixel)
 - fix hidden or cutted buttons (#1919, #2364, #2705, #3667, ...)
+- fix expert mode resulting in advanced setting being displayed by
+  default but label still being "advanced" instead of "basic" (#4353)
 - harddrake service: switch to verbose mode when using bootsplash
   (warly)
 - localedrake: fix chinese input (#4408)
