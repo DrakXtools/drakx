@@ -48,7 +48,7 @@ echo "Copying installation on hard drive"
 cp -a /boot /cdrom/boot /hd
 mkdir -p /hd/Mandrake /hd/Mandrake/RPMS
 cp -a /cdrom/Mandrake/base /cdrom/Mandrake/mdkinst /hd/Mandrake
-for i in `closurepkgs /hd/Mandrake/base/depslist.ordered /hd/Mandrake/base/compssList | grep C: | cut -d: -f2`; do
+for i in `/etc/closurepkgs /hd/Mandrake/base/depslist.ordered /hd/Mandrake/base/compssList | grep C: | cut -d: -f2`; do
     [ -e /cdrom/Mandrake/RPMS/$i.*.rpm ] && cp -a /cdrom/Mandrake/RPMS/$i.*.rpm /hd/Mandrake/RPMS
 done
 
@@ -61,7 +61,7 @@ for i in /etc /var/lib/rpm /proc ; do mkdir -p /mnt$i; done
 mount -t proc proc /mnt/proc
 rpm --root /mnt --initdb
 touch /mnt/etc/fstab
-for i in `closurepkgs /hd/Mandrake/base/depslist.ordered /hd/Mandrake/base/compssList | grep I: | cut -d: -f2`; do
+for i in `/etc/closurepkgs /hd/Mandrake/base/depslist.ordered /hd/Mandrake/base/compssList | grep I: | cut -d: -f2`; do
     [ -e /cdrom/Mandrake/RPMS/$i.*.rpm ] && rpm --root /mnt -ivh /cdrom/Mandrake/RPMS/$i.*.rpm --nodeps --force
 done
 umount /mnt/proc
