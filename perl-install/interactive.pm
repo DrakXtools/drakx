@@ -142,7 +142,7 @@ sub ask_from_listf_no_check {
 		if_($l->[1], cancel => may_apply($f, $l->[1]), focus_cancel => $def eq $l->[1]) }, []
             ) ? $l->[0] : $l->[1];
 	};
-	$@ && $@ =~ /^wizcancel/ or die;
+	die if $@ && $@ !~ /^wizcancel/;
 	$@ ? undef : $ret;
     } else {
 	ask_from_entries_refH($o, $title, $message, [ { val => \$def, type => 'list', list => $l, help => $help, format => $f } ]) && $def;
