@@ -1144,7 +1144,7 @@ sub setRootPassword {
 { label => N("Password"), val => \$sup->{password},  hidden => 1 },
 { label => N("Password (again)"), val => \$sup->{password2}, hidden => 1 },
 { label => N("Authentication"), val => \$authentication_kind, list => [ any::authentication_kinds() ], format => \&any::authentication_kind2description, advanced => 1 },
-			 ]) or return;
+        ]) or delete $sup->{password};
 
 	any::ask_authentification_parameters($o, $o->{netc}, $o->{authentication}, $authentication_kind) or goto &setRootPassword;
     }
