@@ -176,7 +176,7 @@ $w->{window}->add(gtkpack_(0, Gtk2::VBox->new(0, 0),
                                                                                                   }
                                                                                               })
                                                      ),
-                                            ( 'resize1' => 0, shrink1 => 1, resize2 => 0, shrink2 => 0)
+                                            ( 'resize1' => 0, shrink1 => 1, resize2 => 0, shrink2 => 1)
                                             ),
                            0, $statusbar = Gtk2::Statusbar->new,
                            if_($::isEmbedded, 0, gtkpack(create_hbox(),
@@ -313,6 +313,10 @@ $textcolumn->set_min_width(350);
 #$textcolumn->set_minmax_width(400);
 $textcolumn->set_sizing('GTK_TREE_VIEW_COLUMN_AUTOSIZE');#GROW_ONLY
 #$tree->columns_autosize();
+my $path = Gtk2::TreePath->new_first;
+$path->down unless $::isEmbedded;
+$tree->get_selection->select_path($path);
+$path->free;
 $w->{rwindow}->show_all;
 undef $wait;
 gtkset_mousecursor_normal();
