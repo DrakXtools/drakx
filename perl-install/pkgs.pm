@@ -7,7 +7,6 @@ use vars qw($fd);
 use common qw(:common :file :functional);
 use install_any;
 use log;
-use smp;
 use pkgs;
 use fs;
 use lang;

@@ -1,12 +1,8 @@
 ddcprobe for pnp monitors
 
-smp::detect
-
 kickstart like
 
 upgrade
-
-have a better time estimation of the remaining time in install packages
 
 update the list of modules (in update_kernel)
 
@@ -26,6 +22,8 @@ in package choosing, the group (on the left) is no more `selected' (gtk focus) w
 verify the free space is big enough.
 
 loadFont sucks
+
+have a better time estimation of the remaining time in install packages
 
 trash on the screen when X first starts
 
@@ -78,3 +76,4 @@ strange: no scsi of type 'fd', only 'tape'
 try detect_devices::floppies (and how are scsi floppies handled?)
 maybe: do a iotcl FDGETPRM to detect fd1, fd0.
 
+test smp (is it enough to scan /proc/cpuinfo for multiple /^processor/ lines?)

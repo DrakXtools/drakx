@@ -12,8 +12,8 @@ use vars qw(@ISA %EXPORT_TAGS @EXPORT_OK);
 
 use common qw(:common :system);
 use run_program;
+use detect_devices;
 use pkgs;
-use smp;
 use log;
 
 1;
@@ -108,7 +108,7 @@ sub setPackages($$) {
 	$o->{compss}     = pkgs::readCompss    ($o->{packages});
 	$o->{compssListLevels} = pkgs::readCompssList($o->{packages});
 	$o->{compssListLevels} ||= $install_classes;
-	push @{$o->{base}}, "kernel-smp" if smp::detect();
+	push @{$o->{base}}, "kernel-smp" if detect_devices::hasSMP();
 
 	do {
 	    my $p = $o->{packages}{$_} or log::l(), next;

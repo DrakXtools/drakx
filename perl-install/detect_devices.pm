@@ -166,3 +166,8 @@ sub syslog {
     -r "/tmp/syslog" and return map { /<\d+>(.*)/ } cat_("/tmp/syslog");
     `dmesg`
 }
+
+sub hasSMP {
+    my $nb = grep { /^processor/ } cat_("/proc/cpuinfo");
+    $nb > 1;
+}

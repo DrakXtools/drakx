@@ -21,7 +21,6 @@ use pkgs;
 use printer;
 use modules;
 use detect_devices;
-use smp;
 use modparm;
 use run_program;
 use install_steps_graphical;
