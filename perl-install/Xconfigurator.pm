@@ -176,7 +176,7 @@ sub cardConfiguration(;$$$) {
     add2hash($card, cardName2card($card->{type})) if $card->{type};
     add2hash($card, { vendor => "Unknown", board => "Unknown" });
 
-    $::xf4 = $card->{identifier} =~ /Rage 128/ if !$::expert;
+    $::xf4 = $card->{driver} && !$card->{flags}{unsupported};
     $card->{prog} = "/usr/X11R6/bin/" . ($::xf4 && $card->{driver} ? 'XFree86' : $card->{server} =~ /Sun (.*)/x ?
 					 "Xsun$1" : "XF86_$card->{server}");
 
@@ -200,9 +200,23 @@ sub cardConfiguration(;$$$) {
 					 [ sort { $videomemory{$a} <=> $videomemory{$b} }
 					   keys %videomemory])};
 
+    #- 3D acceleration configuration for X version 3 using Utah-GLX.
+    $card->{Utah_glx} = (-x "$prefix/usr/X11R6/lib/modules/glx-3.so" &&
+			 ($card->{identifier} =~ /MGA G[24]00/ ||
+			  $card->{type} =~ /ATI Mach64/ ||
+			  $card->{type} =~ /RIVA TNT/ ||
+			  $card->{type} =~ /SiS / ||
+			  $card->{type} =~ /S3 ViRGE/ ||
+			  $card->{type} =~ /Intel 810/));
+
+    #- 3D acceleration configuration for X version 4 using DRI, this is enabled by default
+    #- but for some there is a need to specify VideoRam (else it won't run).
+    ($card->{flags}{needVideoRam}, $card->{memory}) = ('fakeVideoRam', 32768) if $card->{identifier} =~ /MGA G[24]00/;
+    ($card->{flags}{needVideoRam}, $card->{memory}) = ('fakeVideoRam', 10000) if $card->{type} =~ /Intel 810/;
+
     if (!$::isStandalone && $card->{driver} eq "i810") {
 	require modules;
-	modules::load("agpgart");
+	modules::load("agpgart"); eval { modules::load("i810"); };
     }
     $card;
 }
@@ -681,11 +695,19 @@ sub write_XF86Config {
     print F "EndSection\n\n\n";
     print G "EndSection\n\n\n";
 
+    #- write module section for version 3.
     print F qq(
 Section "Module"
-   Load "xf86Wacom.so"
+) if $o->{wacom} || $o->{Utah_glx};
+    print F qq(    Load "xf86Wacom.so"\n) if $o->{wacom};
+    print F qq(    Load "glx-3.so"\n) if $o->{Utah_glx}; #- glx.so may clash with server version 4.
+    print F qq(
 EndSection
-     
+
+) if $o->{wacom} || $o->{Utah_glx};
+
+    #- write wacom device support.
+    print F qq(
 Section "XInput"
     SubSection "WacomStylus"
         Port "/dev/$o->{wacom}"
@@ -724,6 +746,7 @@ Section "InputDevice"
 EndSection
 ) if $o->{wacom};
 
+    #- write modules section for version 4.
     print G qq(
 Section "Module"
 
@@ -731,6 +754,7 @@ Section "Module"
 
     Load	"dbe"
     Load	"glx"
+    Load	"dri"
 
 # This loads the miscellaneous extensions module, and disables
 # initialisation of the XFree86-DGA extension within that module.
@@ -743,6 +767,10 @@ Section "Module"
 
     Load	"type1"
     Load	"freetype"
+EndSection
+
+Section "DRI"
+    Mode	0666
 EndSection
 );
 
