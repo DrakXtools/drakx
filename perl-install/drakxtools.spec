@@ -156,8 +156,7 @@ hardware classes.
 %setup -q
 
 %build
-%make CFLAGS="$RPM_OPT_FLAGS" rpcinfo-flushed ddcprobe serial_probe
-%make
+%make CFLAGS="$RPM_OPT_FLAGS"
 
 %install
 rm -rf $RPM_BUILD_ROOT
