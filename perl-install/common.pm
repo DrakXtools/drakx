@@ -368,6 +368,9 @@ sub list_skels {
 
 sub translate {
     my ($s) = @_;
+    if (ref($s) eq 'ARRAY') {
+	$s = $s->[0] == 1 ? "singular\0$s->[1]" : "plural\0$s->[2]";
+    }
     my ($lang) = $ENV{LANGUAGE} || $ENV{LC_MESSAGES} || $ENV{LC_ALL} || $ENV{LANG} || 'en';
 
     require lang;
