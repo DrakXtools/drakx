@@ -29,8 +29,9 @@ sub new {
     interactive::newt->new;
 
     banner('');
-#-PO This string must fit in a 80-char wide text screen
-    Newt::PushHelpLine(N("  <Tab>/<Alt-Tab> between elements  | <Space> selects | <F12> next screen "));
+    Newt::PushHelpLine(
+                       #-PO: This string must fit in a 80-char wide text screen
+                       N("  <Tab>/<Alt-Tab> between elements  | <Space> selects | <F12> next screen "));
 
     (bless {}, ref($type) || $type)->SUPER::new($o);
 }
