@@ -79,7 +79,9 @@ print "Making live in $::prefix directory.\n";
     run_program::rooted($::prefix, 'fc-cache');  #- generate cache in all directories mentioned in config file
     run_program::rooted($::prefix, 'kbuildsycoca', '--global');
     eval { rm_rf("$::prefix/lib/i686") }; # de-complexify, use the default on any arch
-    
+
+    #- remove the dirty hack done by NVIDIA_kernel-xxx proprietary package
+    #- we do it by hand when needed
     substInFile { $_ = '' if /^nvidia$/ } "$::prefix/etc/modules";
 
     unlink "$::prefix/usr/share/autostart/$_.desktop" foreach 'klipper', 'korgac', 'kalarmd.autostart';
