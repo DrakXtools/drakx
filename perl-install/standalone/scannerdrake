@@ -19,9 +19,11 @@
 # Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 
 use lib qw(/usr/lib/libDrakX);
+
+use standalone;     #- warning, standalone must be loaded very first, for 'explanations'
+
 use interactive;
 use common;
-use standalone;
 use scanner;
 
 $::isEmbedded = ($::XID, $::CCPID) = "@ARGV" =~ /--embedded (\w+) (\w+)/;
@@ -48,7 +50,7 @@ sub auto {
 	if (member($_->{val}{DESCRIPTION}), keys %$scanner::scannerDB) {
 	    my $name = $_->{val}{DESCRIPTION};
 	    $name =~ s/\s$//; #some HP entry have a trailing space, i will correct usbtable asap
-	    $in->ask_yesorno('scannerdrake',_("%s found on %s, configuring it ?",$name,$_->{port}),1) or manual();
+	    $in->ask_yesorno('scannerdrake',_("%s found on %s, configure it ?",$name,$_->{port}),1) or manual();
 	    tryConfScanner($name, $_->{port});
 	}
     }
@@ -92,6 +94,10 @@ sub quit {
 
 #-----------------------------------------------
 # $Log$
+# Revision 1.5  2002/01/18 20:16:48  gc
+# - move 'use standalone' up to comply to 'explanations'
+# - fix a small english problem
+#
 # Revision 1.4  2001/11/19 17:39:03  pablo
 # Corrected English errors
 #
