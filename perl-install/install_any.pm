@@ -46,13 +46,13 @@ sub relGetFile($) {
     /\.img$/ and return "images/$_";
     my $dir = m|/| ? "mdkinst" : /^(?:compss|compssList|compssUsers|depslist.*|hdlist.*)$/ ? "base/": "RPMS$asked_medium/";
     $_ = "Mandrake/$dir$_";
-    s/i386/i586/;
+    #- s/i386/i586/; avoid using such thing as package have to be correctly rebuild
     $_;
 }
-sub errorOpeningFile($) {
-    my ($file) = @_;
+sub errorOpeningFile($;$) {
+    my ($file, $absent) = @_;
     $file eq 'XXX' and return; #- special case to force closing file after rpmlib transaction.
-    $current_medium eq $asked_medium and return; #- nothing to do in such case.
+    $current_medium eq $asked_medium && !$absent and return; #- nothing to do in such case.
     $refused_media{$asked_medium} and return; #- refused forever...
 
     my $max = 32; #- always refuse after $max tries.
@@ -92,7 +92,11 @@ sub getFile {
 	*install_any::getFile = sub { http::getFile($_[0]) or errorOpeningFile($_[0]) };
     } else {
 	*install_any::getFile = sub {
-	    open getFile, "/tmp/rhimage/" . relGetFile($_[0]) or return errorOpeningFile($_[0]);
+	    #- try to open the file, but examine if it is present in the repository, this allow
+	    #- handling changing a media when some of the file on the first CD has been copied
+	    #- to other to avoid media change...
+	    open getFile, "/tmp/rhimage/" . relGetFile($_[0]) or
+	      return errorOpeningFile($_[0], !(-e "/tmp/rhimage/" . relGetFile($_[0])));
 	    *getFile;
 	};
     }
