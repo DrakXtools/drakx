@@ -861,6 +861,17 @@ UNREGISTER	^$devfs_if\$	EXECUTE /etc/dynamic/scripts/rawdevice.script del /dev/$
 ");
 }
 
+sub fix_broken_alternatives() {
+    #- fix bad update-alternatives that may occurs after upgrade (and sometimes for install too).
+    -d "$::prefix/etc/alternatives" or return;
+
+    foreach (all("$::prefix/etc/alternatives")) {
+	next if run_program::rooted($::prefix, 'test', '-e', "/etc/alternatives/$_");
+	log::l("fixing broken alternative $_");
+	run_program::rooted($::prefix, 'update-alternatives', '--auto', $_);
+    }
+}
+
 
 sub fileshare_config {
     my ($in, $type) = @_; #- $type is 'nfs', 'smb' or ''
