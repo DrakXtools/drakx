@@ -228,7 +228,7 @@ sub cardConfiguration(;$$$) {
     #- try to figure if 3D acceleration is supported
     #- by XFree 3.3 but not XFree 4.0 then ask user to keep XFree 3.3 ?
     if ($card->{Utah_glx}) {
-	$msg = ($card->{use_xf4} && !$card->{DRI_glx} ?
+	$msg = ($card->{use_xf4} && !$card->{DRI_glx} && !$card->{prefer_xf3} ?
 _("Your card can have 3D hardware acceleration support but only with XFree %s.
 Your card is supported by XFree %s which may have a better support in 2D.", $xf3_ver, $xf4_ver) :
 _("Your card can have 3D hardware acceleration support with XFree %s.", $xf3_ver)) . "\n\n\n" . $msg;
@@ -241,7 +241,7 @@ _("Your card can have 3D hardware acceleration support with XFree %s.", $xf3_ver
     #- an expert user may want to try to use an EXPERIMENTAL 3D acceleration, currenlty
     #- this is with Utah GLX and so, it can provide a way of testing.
     if ($::expert && $card->{Utah_glx_EXPERIMENTAL}) {
-	$msg = ($card->{use_xf4} && !$card->{DRI_glx} ?
+	$msg = ($card->{use_xf4} && !$card->{DRI_glx} && !$card->{prefer_xf3} ?
 _("Your card can have 3D hardware acceleration support but only with XFree %s,
 NOTE THIS IS EXPERIMENTAL SUPPORT AND MAY FREEZE YOUR COMPUTER.
 Your card is supported by XFree %s which may have a better support in 2D.", $xf3_ver, $xf4_ver) :
