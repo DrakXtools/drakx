@@ -319,7 +319,7 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 - net_monitor (oblin):
   o always display a speed label for transmitted graph
   o allow the user to use different scales for received and
-    transmitted
+    transmitted (#10177)
   o always draw an arrow next to transmitted amount
 
 * Tue Jun 29 2004 Pixel <pixel@mandrakesoft.com> 10-49mdk
