@@ -1129,10 +1129,8 @@ It is not necessary on most networks."),
                         my ($res) = @_;
                         $netc->{at_boot} = $res;
                         $res = bool2yesno($res);
-                        substInFile { s/^ONBOOT.*\n//; $_ .= qq(ONBOOT=$res\n) if eof  } 
-                          $netc->{internet_cnx_choice} eq 'adsl' ? 
-                            "$::prefix/etc/sysconfig/network-scripts/ifcfg-ppp0" :
-                            "$::prefix/etc/sysconfig/network-scripts/ifcfg-ippp0";
+                        my $ifcfg_file = "$::prefix/etc/sysconfig/network-scripts/ifcfg-$netc->{NET_INTERFACE}";
+                        -f $ifcfg_file and substInFile { s/^ONBOOT.*\n//; $_ .= qq(ONBOOT=$res\n) if eof } $ifcfg_file;
                         return $after_start_on_boot_step->();
                     },
                    },
