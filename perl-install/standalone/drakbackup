@@ -2189,11 +2189,11 @@ sub advanced_when() {
 		$entry_crontab->set_text("$time_string $exec_string")
 	}
 	
-	$combo_minute_when->entry->signal_connect('changed', sub { combo_to_cron_string($combo_minute_when->get_history - 1, 0) });
-	$combo_hour_when->entry->signal_connect('changed', sub { combo_to_cron_string($combo_hour_when->get_history - 1, 1) });
-	$combo_day_when->entry->signal_connect('changed', sub {	combo_to_cron_string($combo_day_when->get_history, 2) });	
-	$combo_month_when->entry->signal_connect('changed', sub { combo_to_cron_string($combo_month_when->get_history, 3) });
-	$combo_weekday_when->entry->signal_connect('changed', sub {	combo_to_cron_string($combo_weekday_when->get_history - 1, 4) });
+	$combo_minute_when->entry->signal_connect('changed', sub { combo_to_cron_string($combo_minute_when->get_text - 1, 0) });
+	$combo_hour_when->entry->signal_connect('changed', sub { combo_to_cron_string($combo_hour_when->get_text - 1, 1) });
+	$combo_day_when->entry->signal_connect('changed', sub {	combo_to_cron_string($combo_day_when->get_text, 2) });	
+	$combo_month_when->entry->signal_connect('changed', sub { combo_to_cron_string($combo_month_when->get_text, 3) });
+	$combo_weekday_when->entry->signal_connect('changed', sub {	combo_to_cron_string($combo_weekday_when->get_text - 1, 4) });
 	
 	$entry_media_type->entry->signal_connect('changed', sub { $conf{DAEMON_MEDIA} = $entry_media_type->entry->get_text });
     fonction_env(\$box_when, \&advanced_when, \&advanced_box);
