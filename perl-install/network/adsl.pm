@@ -333,6 +333,7 @@ METRIC=$metric
 
     unless ($::isStandalone) {
         my @modules = (@{$modems{$adsl_device}{modules}}, map { $_->[1] } @{$modems{$adsl_device}{aliases}});
+        @modules or @modules = qw(ppp_synctty ppp_async ppp_generic n_hdlc); #- required for pppoe/pptp connections
         @modules && eval { modules::load(@modules) }
           or log::l("failed to load " . join(',', @modules), " modules: $@");
         $modems{$adsl_device}{start} and run_program::rooted($::prefix, $modems{$adsl_device}{start});
