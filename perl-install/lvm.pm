@@ -22,14 +22,27 @@ sub cylinder_size {
     $hd->{PE_size};
 }
 
+init();
 
-eval { modules::load('lvm-mod') };
-run_program::run('vgscan') if !-e '/etc/lvmtab';
-run_program::run('vgchange', '-a', 'y');
+sub init {
+    eval { modules::load('lvm-mod') };
+    run_program::run('vgscan') if !-e '/etc/lvmtab';
+    run_program::run('vgchange', '-a', 'y');
+}
+
+sub check {
+    my ($in) = @_;
+
+    my $f = '/sbin/pvcreate';
+    -e $f or $in->do_pkgs->install('lvm');
+    -e $f or $in->ask_warn('', "Mandatory package lvm is missing"), return;
+    init();
+    1;
+}
 
 sub get_vg {
     my ($part) = @_;
-    my $dev = devices::make($part->{device});
+    my $dev = expand_symlinks(devices::make($part->{device}));
     (split(':', `pvdisplay -c $dev`))[1];
 }
 
@@ -58,7 +71,7 @@ sub vg_add {
 	run_program::run('vgchange', '-a', 'n', $old_name);
 	run_program::run('vgremove', $old_name);	
     }
-    my $dev = devices::make($part->{device});
+    my $dev = expand_symlinks(devices::make($part->{device}));
     run_program::run_or_die('pvcreate', $dev);
     my $prog = run_program::run('vgdisplay', $part->{lvm}) ? 'vgextend' : 'vgcreate';
     run_program::run_or_die($prog, $part->{lvm}, $dev);

@@ -47,6 +47,7 @@ my @suggestions_mntpoints = (
 );
 
 my @partitions_signatures = (
+    [ 0x8e, 0, "HM\1\0" ],
     [ 0x83, 0x438, "\x53\xEF" ],
     [ 0x183, 0x10034, "ReIsErFs" ],
     [ 0x183, 0x10034, "ReIsEr2Fs" ],
@@ -89,6 +90,7 @@ sub raids {
     my @parts = get_fstab(@$hds);
     (grep { isRawRAID($_) } @parts) && detect_devices::raidAutoStart() or return [];
 
+    fs::get_major_minor(@parts);
     my %devname2part = map { $_->{dev} => { %$_, device => $_->{dev} } } read_partitions();
 
     my @raids;
@@ -157,15 +159,18 @@ sub hds {
 	}
 	push @hds, $hd;
     }
+    #- detect raids before LVM allowing LVM on raid
+    my $raids = raids(\@hds);
+    my $all_hds = { %{ empty_all_hds() }, hds => \@hds, lvms => [], raids => $raids };
 
     my @lvms;
-    if (my @pvs = grep { isRawLVM($_) } map { partition_table::get_normal_parts($_) } @hds) {
+    if (my @pvs = grep { isRawLVM($_) } get_all_fstab($all_hds)) {
 	#- otherwise vgscan won't find them
 	devices::make($_->{device}) foreach @pvs; 
 	require lvm;
 	foreach (@pvs) {
 	    my $name = lvm::get_vg($_) or next;
-	    my ($lvm) = grep { $_->{LVMname} eq $name } (@hds, @lvms);
+	    my ($lvm) = grep { $_->{LVMname} eq $name } @lvms;
 	    if (!$lvm) {
 		$lvm = bless { disks => [], LVMname => $name }, 'lvm';
 		lvm::update_size($lvm);
@@ -176,11 +181,7 @@ sub hds {
 	    push @{$lvm->{disks}}, $_;
 	}
     }
-
-    my $all_hds = { %{ empty_all_hds() }, hds => \@hds, lvms => \@lvms, raids => [] };
-    fs::get_major_minor(get_all_fstab($all_hds));
-
-    $all_hds->{raids} = raids(\@hds);
+    $all_hds->{lvms} = \@lvms;
 
     $all_hds;
 }
