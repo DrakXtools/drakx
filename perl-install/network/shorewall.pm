@@ -10,7 +10,8 @@ use common;
 use log;
 
 my @drakgw_ports = qw(domain bootps http https 631 imap pop3 smtp nntp ntp);
-my @internal_ports = qw(631 5015 137 138 139);
+# Ports for CUPS (631), LPD/LPRng (515), SMB (137, 138, 139)
+my @internal_ports = qw(631 515 137 138 139);
 
 sub check_iptables {
     my ($in) = @_;
