@@ -78,22 +78,22 @@ foreach (@harddrake::data::tree) {
     }
 
     next unless -x first(split /\s+/, $configurator_pool[0]);
-    foreach my $configurator (@configurator_pool) {
-        my ($pid, $no);
-        $SIG{ALRM} = sub { $no = 1; kill 15, $pid };
-        unless ($pid = fork()) {
-            exec("/usr/share/harddrake/confirm 'Hardware changes in $Ident class ($timeout seconds to answer)' '" . $msg . "Do you want to run the appropriate config tool ?'");
-        }
-        alarm($timeout);
-        wait();
-        my $res = $?;
-        alarm(0);
-        if ($no) {
-            require interactive;
-            undef $wait;
-            $in ||= interactive->vnew;
-            $wait = $in->wait_message(N("Please wait"), N("Hardware probing in progress"));
-        } elsif ($res) {
+    my ($pid, $no);
+    $SIG{ALRM} = sub { $no = 1; kill 15, $pid };
+    unless ($pid = fork()) {
+        exec("/usr/share/harddrake/confirm 'Hardware changes in $Ident class ($timeout seconds to answer)' '" . $msg . "Do you want to run the appropriate config tool ?'");
+    }
+    alarm($timeout);
+    wait();
+    my $res = $?;
+    alarm(0);
+    if ($no) {
+        require interactive;
+        undef $wait;
+        $in ||= interactive->vnew;
+        $wait = $in->wait_message(N("Please wait"), N("Hardware probing in progress"));
+    } elsif ($res) {
+        foreach my $configurator (@configurator_pool) {
             if (fork()) {
                 wait();
             } else { exec("$configurator 2>/dev/null") or die "$configurator missing\n" }
