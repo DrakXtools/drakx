@@ -422,7 +422,16 @@ sub add_kernel {
 	      type => 'image',
 	      label => kernel_str2label($kernel_str),
 	     });
-    $v->{append} = normalize_append("$bootloader->{perImageAppend} $v->{append}");
+
+    #- normalize append and handle special options
+    {
+	my ($simple, $dict) = unpack_append("$bootloader->{perImageAppend} $v->{append}");
+	if (-e "$::prefix/sbin/udev" && $kernel_str->{version} =~ /^2\.(\d+\.\d+)/ && $1 >= 6.8) {
+	    log::l("it is a recent kernel, so we remove any existing devfs= kernel option to enable udev");
+	    @$dict = grep { $_->[0] ne 'devfs' } @$dict;
+	}
+	$v->{append} = pack_append($simple, $dict);
+    }
 
     #- new versions of yaboot don't handle symlinks
     $b_nolink ||= arch() =~ /ppc/;
