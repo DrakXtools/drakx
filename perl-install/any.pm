@@ -89,10 +89,15 @@ sub setupBootloader {
 
     require bootloader;
   general:
-    setupBootloader__general($in, $b, $all_hds, $fstab, $security) or return 0;
+    {
+	local $::Wizard_no_previous = 1 if $::isStandalone;
+	setupBootloader__general($in, $b, $all_hds, $fstab, $security) or return 0;
+    }
     setupBootloader__boot_bios_drive($in, $b, $hds) or goto general;
-
-    setupBootloader__entries($in, $b, $all_hds, $fstab) or goto general;
+    {
+	local $::Wizard_finished = 1 if $::isStandalone;
+	setupBootloader__entries($in, $b, $all_hds, $fstab) or goto general;
+    }
 
     #- somewhere should bootloader really installed ?
     $::isStandalone and my $_w = $in->wait_message(N("Please wait"), N("Bootloader installation in progress"));

@@ -42,6 +42,7 @@ my $splash_working = any { /^--splash$/ } @ARGV;
 my $in = 'interactive'->vnew('su');
 
 if (!$in->isa('interactive::gtk') || any { /^--boot$/ } @ARGV) {
+    $::isWizard = 1;
     lilo_choice();
     $in->exit(0);
 }
