@@ -17,8 +17,7 @@ sub new {
 
     # Handle legacy options
     $o->{interactive} ||= 'gtk' if $graphical || !is_empty_array_ref($o->{interactiveSteps});
-    $o->{interactiveSteps} ||= [ @graphical_steps ];
-    push @{$o->{interactiveSteps}}, qw(installPackages exitInstall);
+    push @{$o->{interactiveSteps}}, qw(installPackages exitInstall), @graphical_steps;
 
     if ($o->{interactive}) {
         my $interactiveClass = "install_steps_$o->{interactive}";
