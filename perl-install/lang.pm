@@ -300,9 +300,7 @@ sub write {
     my $h = { RPM_INSTALL_LANG => $ENV{RPM_INSTALL_LANG} };
     $h->{$_} = $lang foreach qw(LC_COLLATE LC_CTYPE LC_MESSAGES LC_NUMERIC LC_MONETARY LC_TIME);
     if (my $l = $languages{$lang}) {
-#-KDE_LANG on KDE2 seems to have a different behaviour than in KDE1; now
-#-it seems to accept only one language value :-(
-	add2hash $h, { LANG => $l->[2], LANGUAGE => $l->[3], KDE_LANG => $l->[2], RPM_INSTALL_LANG => $l->[3] };
+	add2hash $h, { LANG => $l->[2], LANGUAGE => $l->[3], RPM_INSTALL_LANG => $l->[3] };
 
 	my $c = $charsets{$l->[1] || ''};
 	if ($c) {
