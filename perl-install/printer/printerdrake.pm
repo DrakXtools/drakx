@@ -3646,7 +3646,10 @@ sub main {
 			      },
 			  val => ($::expert ? N("CUPS configuration") :
 				  N("Printer sharing")) }) : ()),
-		      ($::expert ?
+		      ($::expert && 
+		       (files_exist(qw(/usr/bin/pdq)) ||
+			files_exist(qw(/usr/lib/filters/lpf 
+				       /usr/sbin/lpd))) ?
 		       { clicked_may_quit =>
 			     sub {
 				 # Save the cursor position

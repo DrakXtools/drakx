@@ -54,7 +54,13 @@ sub spooler {
 
     # LPRng is not officially supported any more since Mandrake 9.0, so
     # show it only in the spooler menu when it was manually installed.
-    return map { $spoolers{$_}{long_name} } qw(cups pdq), if_(files_exist(qw(/usr/lib/filters/lpf /usr/sbin/lpd)), 'lprng');
+
+    # PDQ is not officially supported any more since Mandrake 9.1, so
+    # show it only in the spooler menu when it was manually installed.
+
+    return map { $spoolers{$_}{long_name} } qw(cups), 
+    if_(files_exist(qw(/usr/bin/pdq)), 'pdq'),
+    if_(files_exist(qw(/usr/lib/filters/lpf /usr/sbin/lpd)), 'lprng');
 }
 
 sub printer_type($) {
