@@ -62,6 +62,7 @@ sub check_mounted($) {
 sub get_mntpoints_from_fstab {
     my ($fstab, $prefix, $uniq) = @_;
 
+    log::l("reading fstab");
     foreach (read_fstab("$prefix/etc/fstab")) {
 	next if $uniq && fsedit::mntpoint2part($_->{mntpoint}, $fstab);
 

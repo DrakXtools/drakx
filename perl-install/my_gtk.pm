@@ -76,10 +76,6 @@ sub sync($) {
 sub flush {
     Gtk->main_iteration while Gtk->events_pending;
 }
-sub bigsize($) {
-    $_[0]{rwindow}->set_usize(600,400);
-}
-
 
 sub gtkshow($)         { $_[0]->show; $_[0] }
 sub gtkdestroy($)      { $_[0] and $_[0]->destroy }

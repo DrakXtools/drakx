@@ -120,7 +120,7 @@ sub readMonitorsDB {
 	$monitors{"$l{vendor}|$l{type}"} = \%l;
     }
     while (my ($k, $v) = each %standard_monitors) {
-	$monitors{_("Generic") . "|" . translate($k)} =
+	$monitors{"Generic|" . translate($k)} =
 	    { hsyncrange => $v->[1], vsyncrange => $v->[2] };
     }
 }

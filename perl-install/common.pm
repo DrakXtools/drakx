@@ -586,6 +586,11 @@ sub removeXiBSuffix($) {
     $_;
 }
 
+sub truncate_list {
+    my $nb = shift;
+    @_ <= $nb ? @_ : (@_[0..$nb-1], '...');
+}
+
 sub formatTime {
     my ($s, $m, $h) = gmtime($_[0]);
     if ($h) {

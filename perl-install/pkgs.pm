@@ -663,7 +663,7 @@ sub readCompssList {
 
 sub readCompssUsers {
     my ($packages, $compss) = @_;
-    my (%compssUsers, @sorted, $l);
+    my (%compssUsers, %compssUsersIcons, @sorted, $l);
     my (%compss); 
     foreach (@$compss) {
 	local ($_, $a) = m|(.*)/(.*)|;
@@ -672,7 +672,7 @@ sub readCompssUsers {
 
     my $map = sub {
 	$l or return;
-	$_ = $packages->[0]{$_} or log::l("unknown package $1 (in compssUsers)") foreach @$l;
+	$_ = $packages->[0]{$_} or log::l("unknown package $_ (in compssUsers)") foreach @$l;
     };
     my $f = install_any::getFile('Mandrake/base/compssUsers') or die "can't find compssUsers";
     foreach (<$f>) {
@@ -681,8 +681,9 @@ sub readCompssUsers {
 
 	if (/^(\S.*)/) {
 	    &$map;
-	    push @sorted, $1;
-	    $compssUsers{$1} = $l = [];
+	    /^(.*?)\s*\[icon=(.*?)\]/ and $_ = $1, $compssUsersIcons{$_} = $2;
+	    push @sorted, $_;
+	    $compssUsers{$_} = $l = [];
 	} elsif (/\s+\+(\S+)/) {
 	    push @$l, $1;
 	} elsif (/^\s+(.*?)\s*$/) {
@@ -690,7 +691,7 @@ sub readCompssUsers {
 	}
     }
     &$map;
-    \%compssUsers, \@sorted;
+    \%compssUsers, \@sorted, \%compssUsersIcons;
 }
 
 sub setSelectedFromCompssList {

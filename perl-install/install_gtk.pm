@@ -366,7 +366,7 @@ sub test_mouse {
     my ($mouse) = @_;
 
     my $w = my_gtk->new;
-    my ($width, $height, $offset) = (210, 300, 25);
+    my ($width, $height, $offset) = (210, round_up($::windowheight - 150, 6), 25);
     my ($bw, $bh) = ($width / 3, $height / 3);
 
     gtkadd($w->{window}, 

@@ -188,7 +188,7 @@ sub ask_many_from_list {
 	$h->{labels} ||= [ map { $h->{label} ? $h->{label}->($_) : $_ } @{$h->{list}} ];
 
 	if ($h->{sort}) {
-	    my @places = sort { $h->{labels}[$b] <=> $h->{labels}[$a] } 0 .. $#{$h->{labels}};
+	    my @places = sort { $h->{labels}[$a] cmp $h->{labels}[$b] } 0 .. $#{$h->{labels}};
 	    $h->{labels} = [ map { $h->{labels}[$_] } @places ];
 	    $h->{list}   = [ map { $h->{list}[$_] } @places ];
 	}

@@ -206,13 +206,12 @@ sub ask_mntpoint_s {
     die _("no available partitions") if @fstab == 0;
 
 
+    install_any::suggest_mount_points($o->{hds}, $o->{prefix}, 'uniq');
+    log::l("default mntpoint $_->{mntpoint} $_->{device}") foreach @fstab;
+
     if (@fstab == 1) {
 	$fstab[0]{mntpoint} = '/';
     } else {
-	install_any::suggest_mount_points($o->{hds}, $o->{prefix}, 'uniq');
-
-	log::l("default mntpoint $_->{mntpoint} $_->{device}") foreach @fstab;
-
 	$o->ask_from_entries_refH('', 
 				  _("Choose the mount points"),
 				  [ map { partition_table_raw::description($_) => 
@@ -335,7 +334,7 @@ sub selectPackagesToUpgrade {
 }
 #------------------------------------------------------------------------------
 sub choosePackages {
-    my ($o, $packages, $compss, $compssUsers, $compssUsersSorted, $first_time) = @_;
+    my ($o, $packages, $compss, $compssUsers, $first_time) = @_;
 
     #- this is done at the very beginning to take into account
     #- selection of CD by user if using a cdrom.
@@ -349,7 +348,7 @@ sub choosePackages {
     my $min_size = pkgs::selectedSize($packages);
     $min_size < $availableC or die _("Your system has not enough space left for installation or upgrade (%d > %d)", $min_size, $availableC);
 
-    $o->chooseGroups($packages, $compssUsers, $compssUsersSorted, \$individual) unless $::beginner || $::corporate;
+    $o->chooseGroups($packages, $compssUsers, \$individual) unless $::beginner || $::corporate;
 
     #- avoid reselection of package if individual selection is requested and this is not the first time.
     if (1 || $first_time || !$individual) {
@@ -384,7 +383,7 @@ sub choosePackages {
 	    }
 	});
 	if (!$size2install) { #- special case for desktop
-	    $o->chooseGroups($packages, $compssUsers, $compssUsersSorted);
+	    $o->chooseGroups($packages, $compssUsers);
 	}
 	($o->{packages_}{ind}) =
 	  pkgs::setSelectedFromCompssList($o->{compssListLevels}, $packages, $min_mark, $size2install, $o->{installClass});
@@ -400,38 +399,39 @@ sub chooseSizeToInstall {
 sub choosePackagesTree {}
 
 sub chooseGroups {
-    my ($o, $packages, $compssUsers, $compssUsersSorted, $individual) = @_;
+    my ($o, $packages, $compssUsers, $individual) = @_;
 
     my %size;
     my $base = pkgs::selectedSize($packages);
-    foreach (@$compssUsersSorted) {
+    foreach (@{$o->{compssUsersSorted}}) {
 	my $b = pkgs::saveSelected($packages);
 	pkgs::selectPackage($packages, $_) foreach @{$compssUsers->{$_}};
 	$size{$_} = pkgs::selectedSize($packages) - $base;
 	pkgs::restoreSelected($b);
     }
-    my @groups = (@$compssUsersSorted, $o->{meta_class} eq 'desktop' ? () : __("Miscellaneous"));
+    my @groups = (@{$o->{compssUsersSorted}}, $o->{meta_class} eq 'desktop' ? () : __("Miscellaneous"));
     my $all;
     $o->ask_many_from_list('', _("Package Group Selection"),
 			   { list => \@groups, 
 			     ref => sub { \$o->{compssUsersChoice}{$_} },
-			     label => sub { $size{$_} ? sprintf "$_  (%d%s)", round_down($size{$_} / sqr(1024), 10), _("MB") : translate($_) }, 
+			     icon2f => sub { "/usr/share/icons/" . ($o->{compssUsersIcons}{$_} || 'default') . "_section.xpm" },
+			     label => sub { $size{$_} ? sprintf "$_ (%d%s)", round_down($size{$_} / sqr(1024), 10), _("MB") : translate($_) }, 
 			   },
 			   $o->{meta_class} eq 'desktop' ? { list => [ _("All") ], ref => sub { \$all }, shadow => 0 } : (),
 			   $individual ? { list => [ _("Individual package selection") ], ref => sub { $individual } } : (),
 			  ) or goto &chooseGroups;
     if ($all) {
-	$o->{compssUsersChoice}{$_} = 1 foreach @$compssUsersSorted, "Miscellaneous";
+	$o->{compssUsersChoice}{$_} = 1 foreach @{$o->{compssUsersSorted}}, "Miscellaneous";
     }
     unless ($o->{compssUsersChoice}{Miscellaneous}) {
 	my %l;
-	$l{@{$compssUsers->{$_}}} = () foreach @$compssUsersSorted;
+	$l{@{$compssUsers->{$_}}} = () foreach @{$o->{compssUsersSorted}};
 	exists $l{$_} or pkgs::packageSetFlagSkip($_, 1) foreach values %{$packages->[0]};
     }
-    foreach (@$compssUsersSorted) {
+    foreach (@{$o->{compssUsersSorted}}) {
 	$o->{compssUsersChoice}{$_} or pkgs::skipSetWithProvides($packages, @{$compssUsers->{$_}});
     }
-    foreach (@$compssUsersSorted) {
+    foreach (@{$o->{compssUsersSorted}}) {
 	$o->{compssUsersChoice}{$_} or next;
 	foreach (@{$compssUsers->{$_}}) {
 	    pkgs::packageSetFlagUnskip($_, 1);

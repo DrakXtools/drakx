@@ -245,9 +245,9 @@ sub getAvailableSpace {
     #- 50mb may be a good choice to avoid almost all problem of insuficient space left...
     my $minAvailableSize = 50 * sqr(1024);
 
-    int ((!$::testing && 
-	  getAvailableSpace_mounted($o->{prefix}) || 
-	  getAvailableSpace_raw($o->{fstab}) * 512 / 1.07) - $minAvailableSize);
+    my $n = !$::testing && getAvailableSpace_mounted($o->{prefix}) || 
+            getAvailableSpace_raw($o->{fstab}) * 512 / 1.07;
+    $n - max(0.1 * $n, $minAvailableSize);
 }
 
 sub getAvailableSpace_mounted {
@@ -301,7 +301,8 @@ sub setPackages($) {
 	$o->{compss} = pkgs::readCompss($o->{prefix}, $o->{packages});
 	#- must be done after getProvides
 	$o->{compssListLevels} = pkgs::readCompssList($o->{packages}, lang::get_langs());
-	($o->{compssUsers}, $o->{compssUsersSorted}) = pkgs::readCompssUsers($o->{packages}, $o->{compss});
+	($o->{compssUsers}, $o->{compssUsersSorted}, $o->{compssUsersIcons}) = 
+	  pkgs::readCompssUsers($o->{packages}, $o->{compss});
 
 	my @l = ();
 	push @l, "kapm", "kcmlaptop", "DrakProfile", "DrakSync" if $o->{pcmcia};
@@ -618,7 +619,7 @@ sub suggest_mount_points {
 	$part->{mntpoint} = $mnt; delete $part->{unsafeMntpoint};
 
 	#- try to find other mount points via fstab
-	fs::get_mntpoints_from_fstab([ fsedit::get_fstab(@$hds) ], $d, $uniq) if $mnt eq '/' && $uniq;
+	fs::get_mntpoints_from_fstab([ fsedit::get_fstab(@$hds) ], $d, $uniq) if $mnt eq '/';
     }
 #-    $_->{mntpoint} || fsedit::suggest_part($_, $hds) foreach @parts;
 

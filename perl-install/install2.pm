@@ -209,6 +209,7 @@ sub selectLanguage {
 
 #------------------------------------------------------------------------------
 sub selectMouse {
+    require pkgs;
     my ($first_time) = $_[1] == 1;
 
     add2hash($o->{mouse} ||= {}, mouse::read($o->{prefix})) if $o->{isUpgrade} && $first_time;
@@ -278,7 +279,7 @@ sub formatPartitions {
     mkdir "$o->{prefix}/$_", 0755 foreach 
       qw(dev etc etc/profile.d etc/sysconfig etc/sysconfig/console etc/sysconfig/network-scripts
 	home mnt tmp var var/tmp var/lib var/lib/rpm var/lib/urpmi);
-    mkdir "$o->{prefix}/$_", 0700 foreach qw(root);
+    mkdir "$o->{prefix}/$_", 0700 foreach qw(root root/tmp);
 
     require raid;
     raid::prepare_prefixed($o->{raid}, $o->{prefix});
@@ -314,8 +315,7 @@ sub choosePackages {
 	# $o->{compssUsersChoice}{KDE} = 0 if $o->{lang} =~ /ja|el|ko|th|vi|zh/; #- gnome handles much this fonts much better
     }
 
-    $o->choosePackages($o->{packages}, $o->{compss}, 
-		       $o->{compssUsers}, $o->{compssUsersSorted}, $_[1] == 1);
+    $o->choosePackages($o->{packages}, $o->{compss}, $o->{compssUsers}, $_[1] == 1);
     my $pkg = pkgs::packageByName($o->{packages}, 'kdesu');
     pkgs::unselectPackage($o->{packages}, $pkg) if $pkg && $o->{security} > 3;
 
@@ -629,6 +629,8 @@ sub main {
 	$o->{compssListLevel} = 50;
 	push @auto, 'selectInstallClass', 'selectMouse', 'doPartitionDisks', 'choosePackages', 'configureTimezone', 'exitInstall';
     }
+
+
     foreach (@auto) {
 	eval "undef *" . (!/::/ && "install_steps_interactive::") . $_;
 	my $s = $o->{steps}{/::(.*)/ ? $1 : $_} or next;

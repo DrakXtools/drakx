@@ -383,7 +383,7 @@ sub choosePackagesTree {
 	    @l > @_ && !$auto_deps and $o->ask_okcancel('', [ $isSelection ? 
 							      _("The following packages are going to be installed") :
 							      _("The following packages are going to be removed"),
-							      join(", ", sort @l) ], 1) || return;
+							      join(", ", common::truncate_list(20, sort @l)) ], 1) || return;
 	    $isSelection ? pkgs::selectPackage($packages, $_) : pkgs::unselectPackage($packages, $_) foreach @_;
 	    foreach (@l) {
 		my $p = $packages->[0]{$_};
