@@ -6,28 +6,13 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2001-04-11 20:46+0200\n"
+"POT-Creation-Date: 2001-04-12 11:54+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: ENCODING\n"
-
-#: ../../A.pm_.c:1 ../../install_any.pm_.c:379
-#, c-format
-msgid ""
-"You have selected the following server(s): %s\n"
-"\n"
-"\n"
-"These servers are activated by default. They don't have any known security\n"
-"issues, but some new could be found. In that case, you must make sure to "
-"upgrade\n"
-"as soon as possible.\n"
-"\n"
-"\n"
-"Do you really want to install these servers?\n"
-msgstr ""
 
 #: ../../Xconfigurator.pm_.c:231
 msgid "Configure all heads independantly"
@@ -222,8 +207,8 @@ msgstr ""
 msgid "XFree86 server: %s"
 msgstr ""
 
-#: ../../Xconfigurator.pm_.c:718 ../../standalone/draknet_.c:255
-#: ../../standalone/draknet_.c:258
+#: ../../Xconfigurator.pm_.c:718 ../../standalone/draknet_.c:266
+#: ../../standalone/draknet_.c:269
 msgid "Expert Mode"
 msgstr ""
 
@@ -327,7 +312,7 @@ msgstr ""
 msgid "Test again"
 msgstr ""
 
-#: ../../Xconfigurator.pm_.c:1345 ../../bootlook.pm_.c:219
+#: ../../Xconfigurator.pm_.c:1345 ../../bootlook.pm_.c:228
 msgid "Quit"
 msgstr ""
 
@@ -536,14 +521,14 @@ msgid "Delay before booting default image"
 msgstr ""
 
 #: ../../any.pm_.c:160 ../../any.pm_.c:736
-#: ../../install_steps_interactive.pm_.c:896 ../../netconnect.pm_.c:619
+#: ../../install_steps_interactive.pm_.c:902 ../../netconnect.pm_.c:626
 #: ../../printerdrake.pm_.c:98 ../../printerdrake.pm_.c:132
-#: ../../standalone/draknet_.c:503
+#: ../../standalone/draknet_.c:514
 msgid "Password"
 msgstr ""
 
 #: ../../any.pm_.c:161 ../../any.pm_.c:737
-#: ../../install_steps_interactive.pm_.c:897
+#: ../../install_steps_interactive.pm_.c:903
 msgid "Password (again)"
 msgstr ""
 
@@ -578,12 +563,12 @@ msgid ""
 msgstr ""
 
 #: ../../any.pm_.c:174 ../../any.pm_.c:713
-#: ../../install_steps_interactive.pm_.c:891
+#: ../../install_steps_interactive.pm_.c:897
 msgid "Please try again"
 msgstr ""
 
 #: ../../any.pm_.c:174 ../../any.pm_.c:713
-#: ../../install_steps_interactive.pm_.c:891
+#: ../../install_steps_interactive.pm_.c:897
 msgid "The passwords do not match"
 msgstr ""
 
@@ -918,148 +903,157 @@ msgstr ""
 msgid "Start Menu"
 msgstr ""
 
-#: ../../bootlook.pm_.c:52
+#: ../../bootlook.pm_.c:54
 msgid "no help implemented yet.\n"
 msgstr ""
 
-#: ../../bootlook.pm_.c:66
+#: ../../bootlook.pm_.c:70
 msgid "Boot Style Configuration"
 msgstr ""
 
-#: ../../bootlook.pm_.c:83
+#: ../../bootlook.pm_.c:87
 msgid "/_File"
 msgstr ""
 
-#: ../../bootlook.pm_.c:85
+#: ../../bootlook.pm_.c:89
 msgid "/File/_New"
 msgstr ""
 
-#: ../../bootlook.pm_.c:86
+#: ../../bootlook.pm_.c:90
 msgid "<control>N"
 msgstr ""
 
-#: ../../bootlook.pm_.c:88
+#: ../../bootlook.pm_.c:92
 msgid "/File/_Open"
 msgstr ""
 
-#: ../../bootlook.pm_.c:89
+#: ../../bootlook.pm_.c:93
 msgid "<control>O"
 msgstr ""
 
-#: ../../bootlook.pm_.c:91
+#: ../../bootlook.pm_.c:95
 msgid "/File/_Save"
 msgstr ""
 
-#: ../../bootlook.pm_.c:92
+#: ../../bootlook.pm_.c:96
 msgid "<control>S"
 msgstr ""
 
-#: ../../bootlook.pm_.c:94
+#: ../../bootlook.pm_.c:98
 msgid "/File/Save _As"
 msgstr ""
 
-#: ../../bootlook.pm_.c:95
+#: ../../bootlook.pm_.c:99
 msgid "/File/-"
 msgstr ""
 
-#: ../../bootlook.pm_.c:97
+#: ../../bootlook.pm_.c:101
 msgid "/File/_Quit"
 msgstr ""
 
-#: ../../bootlook.pm_.c:98
+#: ../../bootlook.pm_.c:102
 msgid "<control>Q"
 msgstr ""
 
-#: ../../bootlook.pm_.c:100
+#: ../../bootlook.pm_.c:104
 msgid "/_Options"
 msgstr ""
 
-#: ../../bootlook.pm_.c:102
+#: ../../bootlook.pm_.c:106
 msgid "/Options/Test"
 msgstr ""
 
-#: ../../bootlook.pm_.c:103
+#: ../../bootlook.pm_.c:107
 msgid "/_Help"
 msgstr ""
 
-#: ../../bootlook.pm_.c:105
+#: ../../bootlook.pm_.c:109
 msgid "/Help/_About..."
 msgstr ""
 
-#: ../../bootlook.pm_.c:116
-msgid "Lilo/Grub configuration"
+#: ../../bootlook.pm_.c:119 ../../standalone/drakgw_.c:619
+#: ../../standalone/tinyfirewall_.c:57
+msgid "Configure"
 msgstr ""
 
-#: ../../bootlook.pm_.c:120
+#: ../../bootlook.pm_.c:122
+#, c-format
+msgid ""
+"You are currently using %s as Boot Manager.\n"
+"Click on Configure to launch the setup wizard."
+msgstr ""
+
+#: ../../bootlook.pm_.c:129
 msgid "Lilo/grub mode"
 msgstr ""
 
-#: ../../bootlook.pm_.c:130
+#: ../../bootlook.pm_.c:139
 msgid "NewStyle Categorizing Monitor"
 msgstr ""
 
-#: ../../bootlook.pm_.c:133
+#: ../../bootlook.pm_.c:142
 msgid "NewStyle Monitor"
 msgstr ""
 
-#: ../../bootlook.pm_.c:136
+#: ../../bootlook.pm_.c:145
 msgid "Traditional Monitor"
 msgstr ""
 
-#: ../../bootlook.pm_.c:139
+#: ../../bootlook.pm_.c:148
 msgid "Traditional Gtk+ Monitor"
 msgstr ""
 
-#: ../../bootlook.pm_.c:143
+#: ../../bootlook.pm_.c:152
 msgid "Launch Aurora at boot time"
 msgstr ""
 
-#: ../../bootlook.pm_.c:168
+#: ../../bootlook.pm_.c:177
 msgid "Boot mode"
 msgstr ""
 
-#: ../../bootlook.pm_.c:178
+#: ../../bootlook.pm_.c:187
 msgid "Launch the X-Window system at start"
 msgstr ""
 
-#: ../../bootlook.pm_.c:186
+#: ../../bootlook.pm_.c:195
 msgid "No, I don't want autologin"
 msgstr ""
 
-#: ../../bootlook.pm_.c:192
+#: ../../bootlook.pm_.c:201
 msgid "Yes, I want autologin with this (user, desktop)"
 msgstr ""
 
-#: ../../bootlook.pm_.c:209
+#: ../../bootlook.pm_.c:218
 msgid "System mode"
 msgstr ""
 
-#: ../../bootlook.pm_.c:217 ../../standalone/draknet_.c:87
-#: ../../standalone/draknet_.c:118 ../../standalone/draknet_.c:270
-#: ../../standalone/draknet_.c:428 ../../standalone/draknet_.c:545
+#: ../../bootlook.pm_.c:226 ../../standalone/draknet_.c:87
+#: ../../standalone/draknet_.c:118 ../../standalone/draknet_.c:180
+#: ../../standalone/draknet_.c:281 ../../standalone/draknet_.c:439
+#: ../../standalone/draknet_.c:556
 msgid "OK"
 msgstr ""
 
-#: ../../bootlook.pm_.c:219 ../../install_steps_gtk.pm_.c:564
+#: ../../bootlook.pm_.c:228 ../../install_steps_gtk.pm_.c:573
 #: ../../interactive.pm_.c:110 ../../interactive.pm_.c:253
 #: ../../interactive_stdio.pm_.c:27 ../../my_gtk.pm_.c:355
 #: ../../my_gtk.pm_.c:358 ../../my_gtk.pm_.c:614
 #: ../../standalone/drakgw_.c:624 ../../standalone/draknet_.c:94
-#: ../../standalone/draknet_.c:125 ../../standalone/draknet_.c:292
-#: ../../standalone/draknet_.c:440 ../../standalone/draknet_.c:559
+#: ../../standalone/draknet_.c:125 ../../standalone/draknet_.c:303
+#: ../../standalone/draknet_.c:451 ../../standalone/draknet_.c:570
 #: ../../standalone/tinyfirewall_.c:63
 msgid "Cancel"
 msgstr ""
 
-#: ../../bootlook.pm_.c:296
+#: ../../bootlook.pm_.c:305
 msgid "can not open /etc/inittab for reading: $!"
 msgstr ""
 
-#: ../../bootlook.pm_.c:350
+#: ../../bootlook.pm_.c:359
 msgid "can not open /etc/sysconfig/autologin for reading: $!"
 msgstr ""
 
-#: ../../bootlook.pm_.c:415 ../../standalone/drakboot_.c:47
+#: ../../bootlook.pm_.c:424 ../../standalone/drakboot_.c:47
 msgid "Installation of LILO failed. The following error occured:"
 msgstr ""
 
@@ -1074,7 +1068,6 @@ msgstr ""
 #: ../../common.pm_.c:631 ../../diskdrake.pm_.c:660
 #: ../../install_steps_graphical.pm_.c:287
 #: ../../install_steps_graphical.pm_.c:334
-#: ../../install_steps_interactive.pm_.c:577
 msgid "MB"
 msgstr ""
 
@@ -1223,7 +1216,7 @@ msgstr ""
 msgid "Empty"
 msgstr ""
 
-#: ../../diskdrake.pm_.c:117 ../../install_steps_gtk.pm_.c:397
+#: ../../diskdrake.pm_.c:117 ../../install_steps_gtk.pm_.c:404
 #: ../../mouse.pm_.c:144
 msgid "Other"
 msgstr ""
@@ -1232,7 +1225,7 @@ msgstr ""
 msgid "Filesystem types:"
 msgstr ""
 
-#: ../../diskdrake.pm_.c:132
+#: ../../diskdrake.pm_.c:132 ../../install_steps_gtk.pm_.c:574
 msgid "Details"
 msgstr ""
 
@@ -2945,8 +2938,8 @@ msgstr ""
 msgid "Install system"
 msgstr ""
 
-#: ../../install2.pm_.c:49 ../../install_steps_interactive.pm_.c:886
-#: ../../install_steps_interactive.pm_.c:887
+#: ../../install2.pm_.c:49 ../../install_steps_interactive.pm_.c:892
+#: ../../install_steps_interactive.pm_.c:893
 msgid "Set root password"
 msgstr ""
 
@@ -2958,7 +2951,7 @@ msgstr ""
 msgid "Configure networking"
 msgstr ""
 
-#: ../../install2.pm_.c:53 ../../install_steps_interactive.pm_.c:811
+#: ../../install2.pm_.c:53 ../../install_steps_interactive.pm_.c:817
 msgid "Summary"
 msgstr ""
 
@@ -2980,6 +2973,21 @@ msgstr ""
 
 #: ../../install2.pm_.c:60
 msgid "Exit install"
+msgstr ""
+
+#: ../../install_any.pm_.c:379
+#, c-format
+msgid ""
+"You have selected the following server(s): %s\n"
+"\n"
+"\n"
+"These servers are activated by default. They don't have any known security\n"
+"issues, but some new could be found. In that case, you must make sure to "
+"upgrade\n"
+"as soon as possible.\n"
+"\n"
+"\n"
+"Do you really want to install these servers?\n"
 msgstr ""
 
 #: ../../install_any.pm_.c:410
@@ -3005,7 +3013,7 @@ msgstr ""
 msgid "Error reading file $f"
 msgstr ""
 
-#: ../../install_gtk.pm_.c:84 ../../install_steps_gtk.pm_.c:294
+#: ../../install_gtk.pm_.c:84 ../../install_steps_gtk.pm_.c:307
 #: ../../interactive.pm_.c:95 ../../interactive.pm_.c:110
 #: ../../interactive.pm_.c:253 ../../interactive_newt.pm_.c:166
 #: ../../interactive_stdio.pm_.c:27 ../../my_gtk.pm_.c:354
@@ -3239,32 +3247,32 @@ msgstr ""
 msgid "Total size: "
 msgstr ""
 
-#: ../../install_steps_graphical.pm_.c:346 ../../install_steps_gtk.pm_.c:427
+#: ../../install_steps_graphical.pm_.c:346 ../../install_steps_gtk.pm_.c:434
 #, c-format
 msgid "Version: %s\n"
 msgstr ""
 
-#: ../../install_steps_graphical.pm_.c:347 ../../install_steps_gtk.pm_.c:428
+#: ../../install_steps_graphical.pm_.c:347 ../../install_steps_gtk.pm_.c:435
 #, c-format
 msgid "Size: %d KB\n"
 msgstr ""
 
-#: ../../install_steps_graphical.pm_.c:462 ../../install_steps_gtk.pm_.c:327
+#: ../../install_steps_graphical.pm_.c:462 ../../install_steps_gtk.pm_.c:334
 #: ../../install_steps_interactive.pm_.c:520
 msgid "Choose the packages you want to install"
 msgstr ""
 
-#: ../../install_steps_graphical.pm_.c:465 ../../install_steps_gtk.pm_.c:330
+#: ../../install_steps_graphical.pm_.c:465 ../../install_steps_gtk.pm_.c:337
 msgid "Info"
 msgstr ""
 
-#: ../../install_steps_graphical.pm_.c:473 ../../install_steps_gtk.pm_.c:335
+#: ../../install_steps_graphical.pm_.c:473 ../../install_steps_gtk.pm_.c:342
 #: ../../install_steps_interactive.pm_.c:226
 msgid "Install"
 msgstr ""
 
-#: ../../install_steps_graphical.pm_.c:492 ../../install_steps_gtk.pm_.c:548
-#: ../../install_steps_interactive.pm_.c:669
+#: ../../install_steps_graphical.pm_.c:492 ../../install_steps_gtk.pm_.c:555
+#: ../../install_steps_interactive.pm_.c:675
 msgid "Installing"
 msgstr ""
 
@@ -3272,7 +3280,7 @@ msgstr ""
 msgid "Please wait, "
 msgstr ""
 
-#: ../../install_steps_graphical.pm_.c:501 ../../install_steps_gtk.pm_.c:558
+#: ../../install_steps_graphical.pm_.c:501 ../../install_steps_gtk.pm_.c:567
 msgid "Time remaining "
 msgstr ""
 
@@ -3281,21 +3289,21 @@ msgid "Total time "
 msgstr ""
 
 #: ../../install_steps_graphical.pm_.c:507
-#: ../../install_steps_interactive.pm_.c:669
+#: ../../install_steps_interactive.pm_.c:675
 msgid "Preparing installation"
 msgstr ""
 
-#: ../../install_steps_graphical.pm_.c:528 ../../install_steps_gtk.pm_.c:591
+#: ../../install_steps_graphical.pm_.c:528 ../../install_steps_gtk.pm_.c:613
 #, c-format
 msgid "Installing package %s"
 msgstr ""
 
-#: ../../install_steps_graphical.pm_.c:553 ../../install_steps_gtk.pm_.c:674
-#: ../../install_steps_gtk.pm_.c:678
+#: ../../install_steps_graphical.pm_.c:553 ../../install_steps_gtk.pm_.c:689
+#: ../../install_steps_gtk.pm_.c:693
 msgid "Go on anyway?"
 msgstr ""
 
-#: ../../install_steps_graphical.pm_.c:553 ../../install_steps_gtk.pm_.c:674
+#: ../../install_steps_graphical.pm_.c:553 ../../install_steps_gtk.pm_.c:689
 msgid "There was an error ordering packages:"
 msgstr ""
 
@@ -3303,7 +3311,7 @@ msgstr ""
 msgid "Use existing configuration for X11?"
 msgstr ""
 
-#: ../../install_steps_gtk.pm_.c:143
+#: ../../install_steps_gtk.pm_.c:142
 msgid ""
 "Your system is low on resource. You may have some problem installing\n"
 "Linux-Mandrake. If that occurs, you can try a text install instead. For "
@@ -3311,17 +3319,17 @@ msgid ""
 "press `F1' when booting on CDROM, then enter `text'."
 msgstr ""
 
-#: ../../install_steps_gtk.pm_.c:157
+#: ../../install_steps_gtk.pm_.c:156
 msgid "Please, choose one of the following classes of installation:"
 msgstr ""
 
-#: ../../install_steps_gtk.pm_.c:223
+#: ../../install_steps_gtk.pm_.c:222
 #, c-format
 msgid ""
 "The total size for the groups you have selected is approximately %d MB.\n"
 msgstr ""
 
-#: ../../install_steps_gtk.pm_.c:225
+#: ../../install_steps_gtk.pm_.c:224
 msgid ""
 "If you wish to install less than this size,\n"
 "select the percentage of packages that you want to install.\n"
@@ -3330,7 +3338,7 @@ msgid ""
 "a percentage of 100%% will install all selected packages."
 msgstr ""
 
-#: ../../install_steps_gtk.pm_.c:230
+#: ../../install_steps_gtk.pm_.c:229
 msgid ""
 "You have space on your disk for only %d%% of these packages.\n"
 "\n"
@@ -3340,106 +3348,106 @@ msgid ""
 "a percentage of %d%% will install as many packages as possible."
 msgstr ""
 
-#: ../../install_steps_gtk.pm_.c:236
+#: ../../install_steps_gtk.pm_.c:235
 msgid "You will be able to choose them more specifically in the next step."
 msgstr ""
 
-#: ../../install_steps_gtk.pm_.c:238
+#: ../../install_steps_gtk.pm_.c:237
 msgid "Percentage of packages to install"
 msgstr ""
 
-#: ../../install_steps_gtk.pm_.c:262 ../../install_steps_interactive.pm_.c:593
+#: ../../install_steps_gtk.pm_.c:285 ../../install_steps_interactive.pm_.c:599
 msgid "Package Group Selection"
 msgstr ""
 
-#: ../../install_steps_gtk.pm_.c:296 ../../install_steps_interactive.pm_.c:608
+#: ../../install_steps_gtk.pm_.c:302 ../../install_steps_interactive.pm_.c:614
 msgid "Individual package selection"
 msgstr ""
 
-#: ../../install_steps_gtk.pm_.c:339
+#: ../../install_steps_gtk.pm_.c:346
 msgid "Show automatically selected packages"
 msgstr ""
 
-#: ../../install_steps_gtk.pm_.c:406
+#: ../../install_steps_gtk.pm_.c:413
 msgid "Expand Tree"
 msgstr ""
 
-#: ../../install_steps_gtk.pm_.c:407
+#: ../../install_steps_gtk.pm_.c:414
 msgid "Collapse Tree"
 msgstr ""
 
-#: ../../install_steps_gtk.pm_.c:408
+#: ../../install_steps_gtk.pm_.c:415
 msgid "Toggle between flat and group sorted"
 msgstr ""
 
-#: ../../install_steps_gtk.pm_.c:425
+#: ../../install_steps_gtk.pm_.c:432
 msgid "Bad package"
 msgstr ""
 
-#: ../../install_steps_gtk.pm_.c:426
+#: ../../install_steps_gtk.pm_.c:433
 #, c-format
 msgid "Name: %s\n"
 msgstr ""
 
-#: ../../install_steps_gtk.pm_.c:429
+#: ../../install_steps_gtk.pm_.c:436
 #, c-format
 msgid "Importance: %s\n"
 msgstr ""
 
-#: ../../install_steps_gtk.pm_.c:438
+#: ../../install_steps_gtk.pm_.c:445 ../../install_steps_interactive.pm_.c:578
 #, c-format
 msgid "Total size: %d / %d MB"
 msgstr ""
 
-#: ../../install_steps_gtk.pm_.c:457
+#: ../../install_steps_gtk.pm_.c:464
 msgid ""
 "You can't select this package as there is not enough space left to install it"
 msgstr ""
 
-#: ../../install_steps_gtk.pm_.c:461
+#: ../../install_steps_gtk.pm_.c:468
 msgid "The following packages are going to be installed"
 msgstr ""
 
-#: ../../install_steps_gtk.pm_.c:462
+#: ../../install_steps_gtk.pm_.c:469
 msgid "The following packages are going to be removed"
 msgstr ""
 
-#: ../../install_steps_gtk.pm_.c:472
+#: ../../install_steps_gtk.pm_.c:479
 msgid "You can't select/unselect this package"
 msgstr ""
 
-#: ../../install_steps_gtk.pm_.c:491
+#: ../../install_steps_gtk.pm_.c:498
 msgid "This is a mandatory package, it can't be unselected"
 msgstr ""
 
-#: ../../install_steps_gtk.pm_.c:493
+#: ../../install_steps_gtk.pm_.c:500
 msgid "You can't unselect this package. It is already installed"
 msgstr ""
 
-#: ../../install_steps_gtk.pm_.c:497
+#: ../../install_steps_gtk.pm_.c:504
 msgid ""
 "This package must be upgraded\n"
 "Are you sure you want to deselect it?"
 msgstr ""
 
-#: ../../install_steps_gtk.pm_.c:500
+#: ../../install_steps_gtk.pm_.c:507
 msgid "You can't unselect this package. It must be upgraded"
 msgstr ""
 
-#: ../../install_steps_gtk.pm_.c:552
+#: ../../install_steps_gtk.pm_.c:560
 msgid "Estimating"
 msgstr ""
 
-#: ../../install_steps_gtk.pm_.c:567
+#: ../../install_steps_gtk.pm_.c:578
 msgid "Please wait, preparing installation"
 msgstr ""
 
-#: ../../install_steps_gtk.pm_.c:586
+#: ../../install_steps_gtk.pm_.c:608
 #, c-format
 msgid "%d packages"
 msgstr ""
 
-#: ../../install_steps_gtk.pm_.c:632
+#: ../../install_steps_gtk.pm_.c:647
 msgid ""
 "\n"
 "Warning\n"
@@ -3471,15 +3479,15 @@ msgid ""
 "copyright laws applicable to software programs.\n"
 msgstr ""
 
-#: ../../install_steps_gtk.pm_.c:660 ../../install_steps_interactive.pm_.c:163
+#: ../../install_steps_gtk.pm_.c:675 ../../install_steps_interactive.pm_.c:163
 msgid "Accept"
 msgstr ""
 
-#: ../../install_steps_gtk.pm_.c:660 ../../install_steps_interactive.pm_.c:163
+#: ../../install_steps_gtk.pm_.c:675 ../../install_steps_interactive.pm_.c:163
 msgid "Refuse"
 msgstr ""
 
-#: ../../install_steps_gtk.pm_.c:661
+#: ../../install_steps_gtk.pm_.c:676
 #, c-format
 msgid ""
 "Change your Cd-Rom!\n"
@@ -3489,7 +3497,7 @@ msgid ""
 "If you don't have it, press Cancel to avoid installation from this Cd-Rom."
 msgstr ""
 
-#: ../../install_steps_gtk.pm_.c:678
+#: ../../install_steps_gtk.pm_.c:693
 msgid "There was an error installing packages:"
 msgstr ""
 
@@ -3506,7 +3514,7 @@ msgid "You can choose other languages that will be available after install"
 msgstr ""
 
 #: ../../install_steps_interactive.pm_.c:68
-#: ../../install_steps_interactive.pm_.c:607
+#: ../../install_steps_interactive.pm_.c:613
 msgid "All"
 msgstr ""
 
@@ -3636,7 +3644,7 @@ msgid ""
 msgstr ""
 
 #: ../../install_steps_interactive.pm_.c:182
-#: ../../install_steps_interactive.pm_.c:814
+#: ../../install_steps_interactive.pm_.c:820
 #: ../../standalone/keyboarddrake_.c:28
 msgid "Keyboard"
 msgstr ""
@@ -3814,34 +3822,33 @@ msgstr ""
 msgid "Custom"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:577
-#, c-format
-msgid "Selected size %d%s"
+#: ../../install_steps_interactive.pm_.c:585
+msgid "Selected size is larger than available space"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:644
+#: ../../install_steps_interactive.pm_.c:650
 msgid ""
 "If you have all the CDs in the list below, click Ok.\n"
 "If you have none of those CDs, click Cancel.\n"
 "If only some CDs are missing, unselect them, then click Ok."
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:649
+#: ../../install_steps_interactive.pm_.c:655
 #, c-format
 msgid "Cd-Rom labeled \"%s\""
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:678
+#: ../../install_steps_interactive.pm_.c:684
 msgid ""
 "Installing package %s\n"
 "%d%%"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:687
+#: ../../install_steps_interactive.pm_.c:693
 msgid "Post-install configuration"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:712
+#: ../../install_steps_interactive.pm_.c:718
 msgid ""
 "You have now the possibility to download software aimed for encryption.\n"
 "\n"
@@ -3880,93 +3887,93 @@ msgid ""
 "USA"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:744
+#: ../../install_steps_interactive.pm_.c:750
 msgid "Choose a mirror from which to get the packages"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:755
+#: ../../install_steps_interactive.pm_.c:761
 msgid "Contacting the mirror to get the list of available packages"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:758
+#: ../../install_steps_interactive.pm_.c:764
 msgid "Please choose the packages you want to install."
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:770
+#: ../../install_steps_interactive.pm_.c:776
 msgid "Which is your timezone?"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:772
+#: ../../install_steps_interactive.pm_.c:778
 msgid "Is your hardware clock set to GMT?"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:800 ../../printer.pm_.c:21
+#: ../../install_steps_interactive.pm_.c:806 ../../printer.pm_.c:21
 #: ../../printerdrake.pm_.c:411
 msgid "Remote CUPS server"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:801
+#: ../../install_steps_interactive.pm_.c:807
 msgid "No printer"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:813
+#: ../../install_steps_interactive.pm_.c:819
 msgid "Mouse"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:815
+#: ../../install_steps_interactive.pm_.c:821
 msgid "Timezone"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:816 ../../printerdrake.pm_.c:344
+#: ../../install_steps_interactive.pm_.c:822 ../../printerdrake.pm_.c:344
 msgid "Printer"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:818
+#: ../../install_steps_interactive.pm_.c:824
 msgid "ISDN card"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:821
+#: ../../install_steps_interactive.pm_.c:827
 msgid "Sound card"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:824
+#: ../../install_steps_interactive.pm_.c:830
 msgid "TV card"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:858
+#: ../../install_steps_interactive.pm_.c:864
 msgid "Which printing system do you want to use?"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:888
+#: ../../install_steps_interactive.pm_.c:894
 msgid "No password"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:893
+#: ../../install_steps_interactive.pm_.c:899
 #, c-format
 msgid "This password is too simple (must be at least %d characters long)"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:899
+#: ../../install_steps_interactive.pm_.c:905
 msgid "Use NIS"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:899
+#: ../../install_steps_interactive.pm_.c:905
 msgid "yellow pages"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:904
+#: ../../install_steps_interactive.pm_.c:910
 msgid "Authentification NIS"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:905
+#: ../../install_steps_interactive.pm_.c:911
 msgid "NIS Domain"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:906
+#: ../../install_steps_interactive.pm_.c:912
 msgid "NIS Server"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:943
+#: ../../install_steps_interactive.pm_.c:949
 msgid ""
 "A custom bootdisk provides a way of booting into your Linux system without\n"
 "depending on the normal bootloader. This is useful if you don't want to "
@@ -3984,19 +3991,19 @@ msgid ""
 "drive and press \"Ok\"."
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:959
+#: ../../install_steps_interactive.pm_.c:965
 msgid "First floppy drive"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:960
+#: ../../install_steps_interactive.pm_.c:966
 msgid "Second floppy drive"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:961
+#: ../../install_steps_interactive.pm_.c:967
 msgid "Skip"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:966
+#: ../../install_steps_interactive.pm_.c:972
 msgid ""
 "A custom bootdisk provides a way of booting into your Linux system without\n"
 "depending on the normal bootloader. This is useful if you don't want to "
@@ -4010,42 +4017,42 @@ msgid ""
 "failures. Would you like to create a bootdisk for your system?"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:975
+#: ../../install_steps_interactive.pm_.c:981
 msgid "Sorry, no floppy drive available"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:979
+#: ../../install_steps_interactive.pm_.c:985
 msgid "Choose the floppy drive you want to use to make the bootdisk"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:983
+#: ../../install_steps_interactive.pm_.c:989
 #, c-format
 msgid "Insert a floppy in drive %s"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:986
+#: ../../install_steps_interactive.pm_.c:992
 msgid "Creating bootdisk"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:993
+#: ../../install_steps_interactive.pm_.c:999
 msgid "Preparing bootloader"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:1002
+#: ../../install_steps_interactive.pm_.c:1008
 msgid "Do you want to use aboot?"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:1005
+#: ../../install_steps_interactive.pm_.c:1011
 msgid ""
 "Error installing aboot, \n"
 "try to force installation even if that destroys the first partition?"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:1014
+#: ../../install_steps_interactive.pm_.c:1020
 msgid "Installation of bootloader failed. The following error occured:"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:1022
+#: ../../install_steps_interactive.pm_.c:1028
 msgid ""
 "You may need to change your Open Firmware boot-device to\n"
 " enable the bootloader.  If you don't see the bootloader prompt at\n"
@@ -4055,44 +4062,44 @@ msgid ""
 "At your next boot you should see the bootloader prompt."
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:1030 ../../standalone/draksec_.c:23
+#: ../../install_steps_interactive.pm_.c:1036 ../../standalone/draksec_.c:23
 msgid "Low"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:1031 ../../standalone/draksec_.c:24
+#: ../../install_steps_interactive.pm_.c:1037 ../../standalone/draksec_.c:24
 msgid "Medium"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:1032 ../../standalone/draksec_.c:25
+#: ../../install_steps_interactive.pm_.c:1038 ../../standalone/draksec_.c:25
 msgid "High"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:1036 ../../standalone/draksec_.c:49
+#: ../../install_steps_interactive.pm_.c:1042 ../../standalone/draksec_.c:49
 msgid "Choose security level"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:1070
+#: ../../install_steps_interactive.pm_.c:1076
 msgid "Do you want to generate an auto install floppy for linux replication?"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:1072
+#: ../../install_steps_interactive.pm_.c:1078
 #, c-format
 msgid "Insert a blank floppy in drive %s"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:1086
-#: ../../install_steps_interactive.pm_.c:1118
+#: ../../install_steps_interactive.pm_.c:1092
+#: ../../install_steps_interactive.pm_.c:1124
 msgid "Creating auto install floppy"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:1146
+#: ../../install_steps_interactive.pm_.c:1152
 msgid ""
 "Some steps are not completed.\n"
 "\n"
 "Do you really want to quit now?"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:1157
+#: ../../install_steps_interactive.pm_.c:1163
 msgid ""
 "Congratulations, installation is complete.\n"
 "Remove the boot media and press return to reboot.\n"
@@ -4105,11 +4112,11 @@ msgid ""
 "install chapter of the Official Linux-Mandrake User's Guide."
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:1169
+#: ../../install_steps_interactive.pm_.c:1175
 msgid "Generate auto install floppy"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:1171
+#: ../../install_steps_interactive.pm_.c:1177
 msgid ""
 "The auto install can be fully automated if wanted,\n"
 "in that case it will take over the hard drive!!\n"
@@ -4118,15 +4125,15 @@ msgid ""
 "You may prefer to replay the installation.\n"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:1176
+#: ../../install_steps_interactive.pm_.c:1182
 msgid "Automated"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:1176
+#: ../../install_steps_interactive.pm_.c:1182
 msgid "Replay"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:1179
+#: ../../install_steps_interactive.pm_.c:1185
 msgid "Save packages selection"
 msgstr ""
 
@@ -4577,7 +4584,7 @@ msgstr ""
 msgid "Testing your connection..."
 msgstr ""
 
-#: ../../netconnect.pm_.c:151 ../../standalone/draknet_.c:182
+#: ../../netconnect.pm_.c:151 ../../standalone/draknet_.c:192
 msgid "The system is now connected to Internet."
 msgstr ""
 
@@ -4585,14 +4592,14 @@ msgstr ""
 msgid "For Security reason, it will be disconnected now."
 msgstr ""
 
-#: ../../netconnect.pm_.c:153 ../../standalone/draknet_.c:182
+#: ../../netconnect.pm_.c:153 ../../standalone/draknet_.c:192
 msgid ""
 "The system doesn't seem to be connected to internet.\n"
 "Try to reconfigure your connection."
 msgstr ""
 
-#: ../../netconnect.pm_.c:158 ../../netconnect.pm_.c:887
-#: ../../netconnect.pm_.c:915 ../../netconnect.pm_.c:978
+#: ../../netconnect.pm_.c:158 ../../netconnect.pm_.c:894
+#: ../../netconnect.pm_.c:922 ../../netconnect.pm_.c:985
 msgid "Network Configuration"
 msgstr ""
 
@@ -4616,35 +4623,35 @@ msgstr ""
 msgid "Please fill or check the field below"
 msgstr ""
 
-#: ../../netconnect.pm_.c:236 ../../standalone/draknet_.c:486
+#: ../../netconnect.pm_.c:236 ../../standalone/draknet_.c:497
 msgid "Card IRQ"
 msgstr ""
 
-#: ../../netconnect.pm_.c:237 ../../standalone/draknet_.c:487
+#: ../../netconnect.pm_.c:237 ../../standalone/draknet_.c:498
 msgid "Card mem (DMA)"
 msgstr ""
 
-#: ../../netconnect.pm_.c:238 ../../standalone/draknet_.c:488
+#: ../../netconnect.pm_.c:238 ../../standalone/draknet_.c:499
 msgid "Card IO"
 msgstr ""
 
-#: ../../netconnect.pm_.c:239 ../../standalone/draknet_.c:489
+#: ../../netconnect.pm_.c:239 ../../standalone/draknet_.c:500
 msgid "Card IO_0"
 msgstr ""
 
-#: ../../netconnect.pm_.c:240 ../../standalone/draknet_.c:490
+#: ../../netconnect.pm_.c:240 ../../standalone/draknet_.c:501
 msgid "Card IO_1"
 msgstr ""
 
-#: ../../netconnect.pm_.c:241 ../../standalone/draknet_.c:491
+#: ../../netconnect.pm_.c:241 ../../standalone/draknet_.c:502
 msgid "Your personal phone number"
 msgstr ""
 
-#: ../../netconnect.pm_.c:242 ../../standalone/draknet_.c:492
+#: ../../netconnect.pm_.c:242 ../../standalone/draknet_.c:503
 msgid "Provider name (ex provider.net)"
 msgstr ""
 
-#: ../../netconnect.pm_.c:243 ../../standalone/draknet_.c:493
+#: ../../netconnect.pm_.c:243 ../../standalone/draknet_.c:504
 msgid "Provider phone number"
 msgstr ""
 
@@ -4656,15 +4663,15 @@ msgstr ""
 msgid "Provider dns 2"
 msgstr ""
 
-#: ../../netconnect.pm_.c:246 ../../standalone/draknet_.c:498
+#: ../../netconnect.pm_.c:246 ../../standalone/draknet_.c:509
 msgid "Dialing mode"
 msgstr ""
 
-#: ../../netconnect.pm_.c:247 ../../standalone/draknet_.c:496
+#: ../../netconnect.pm_.c:247 ../../standalone/draknet_.c:507
 msgid "Account Login (user name)"
 msgstr ""
 
-#: ../../netconnect.pm_.c:248 ../../standalone/draknet_.c:497
+#: ../../netconnect.pm_.c:248 ../../standalone/draknet_.c:508
 msgid "Account Password"
 msgstr ""
 
@@ -4749,8 +4756,8 @@ msgid ""
 "Please choose which network adapter you want to use to connect to Internet"
 msgstr ""
 
-#: ../../netconnect.pm_.c:382 ../../netconnect.pm_.c:684
-#: ../../netconnect.pm_.c:828 ../../standalone/drakgw_.c:223
+#: ../../netconnect.pm_.c:382 ../../netconnect.pm_.c:691
+#: ../../netconnect.pm_.c:835 ../../standalone/drakgw_.c:223
 msgid "Network interface"
 msgstr ""
 
@@ -4764,169 +4771,169 @@ msgstr ""
 msgid "I'm about to restart the network device:\n"
 msgstr ""
 
-#: ../../netconnect.pm_.c:473
+#: ../../netconnect.pm_.c:481
 msgid "ADSL configuration"
 msgstr ""
 
-#: ../../netconnect.pm_.c:474
+#: ../../netconnect.pm_.c:482
 msgid "Do you want to start your connection at boot?"
 msgstr ""
 
-#: ../../netconnect.pm_.c:610
+#: ../../netconnect.pm_.c:617
 msgid "Please choose which serial port your modem is connected to."
 msgstr ""
 
-#: ../../netconnect.pm_.c:615
+#: ../../netconnect.pm_.c:622
 msgid "Dialup options"
 msgstr ""
 
-#: ../../netconnect.pm_.c:616 ../../standalone/draknet_.c:500
+#: ../../netconnect.pm_.c:623 ../../standalone/draknet_.c:511
 msgid "Connection name"
 msgstr ""
 
-#: ../../netconnect.pm_.c:617 ../../standalone/draknet_.c:501
+#: ../../netconnect.pm_.c:624 ../../standalone/draknet_.c:512
 msgid "Phone number"
 msgstr ""
 
-#: ../../netconnect.pm_.c:618 ../../standalone/draknet_.c:502
+#: ../../netconnect.pm_.c:625 ../../standalone/draknet_.c:513
 msgid "Login ID"
 msgstr ""
 
-#: ../../netconnect.pm_.c:620 ../../standalone/draknet_.c:504
+#: ../../netconnect.pm_.c:627 ../../standalone/draknet_.c:515
 msgid "Authentication"
 msgstr ""
 
-#: ../../netconnect.pm_.c:620 ../../standalone/draknet_.c:504
+#: ../../netconnect.pm_.c:627 ../../standalone/draknet_.c:515
 msgid "PAP"
 msgstr ""
 
-#: ../../netconnect.pm_.c:620 ../../standalone/draknet_.c:504
+#: ../../netconnect.pm_.c:627 ../../standalone/draknet_.c:515
 msgid "Script-based"
 msgstr ""
 
-#: ../../netconnect.pm_.c:620 ../../standalone/draknet_.c:504
+#: ../../netconnect.pm_.c:627 ../../standalone/draknet_.c:515
 msgid "Terminal-based"
 msgstr ""
 
-#: ../../netconnect.pm_.c:621 ../../standalone/draknet_.c:505
+#: ../../netconnect.pm_.c:628 ../../standalone/draknet_.c:516
 msgid "Domain name"
 msgstr ""
 
-#: ../../netconnect.pm_.c:622 ../../standalone/draknet_.c:506
+#: ../../netconnect.pm_.c:629 ../../standalone/draknet_.c:517
 msgid "First DNS Server (optional)"
 msgstr ""
 
-#: ../../netconnect.pm_.c:623 ../../standalone/draknet_.c:507
+#: ../../netconnect.pm_.c:630 ../../standalone/draknet_.c:518
 msgid "Second DNS Server (optional)"
 msgstr ""
 
-#: ../../netconnect.pm_.c:685
+#: ../../netconnect.pm_.c:692
 msgid ""
 "I'm about to restart the network device $netc->{NET_DEVICE}. Do you agree?"
 msgstr ""
 
-#: ../../netconnect.pm_.c:728
+#: ../../netconnect.pm_.c:735
 msgid ""
 "\n"
 "You can disconnect or reconfigure your connection."
 msgstr ""
 
-#: ../../netconnect.pm_.c:728 ../../netconnect.pm_.c:731
+#: ../../netconnect.pm_.c:735 ../../netconnect.pm_.c:738
 msgid ""
 "\n"
 "You can reconfigure your connection."
 msgstr ""
 
-#: ../../netconnect.pm_.c:728
+#: ../../netconnect.pm_.c:735
 msgid "You are currently connected to internet."
 msgstr ""
 
-#: ../../netconnect.pm_.c:731
+#: ../../netconnect.pm_.c:738
 msgid ""
 "\n"
 "You can connect to Internet or reconfigure your connection."
 msgstr ""
 
-#: ../../netconnect.pm_.c:731
+#: ../../netconnect.pm_.c:738
 msgid "You are not currently connected to Internet."
 msgstr ""
 
-#: ../../netconnect.pm_.c:735 ../../standalone/net_monitor_.c:81
+#: ../../netconnect.pm_.c:742 ../../standalone/net_monitor_.c:81
 msgid "Connect to Internet"
 msgstr ""
 
-#: ../../netconnect.pm_.c:737
+#: ../../netconnect.pm_.c:744
 msgid "Disconnect from Internet"
 msgstr ""
 
-#: ../../netconnect.pm_.c:739
+#: ../../netconnect.pm_.c:746
 msgid "Configure network connection (LAN or Internet)"
 msgstr ""
 
-#: ../../netconnect.pm_.c:742
+#: ../../netconnect.pm_.c:749
 msgid "Internet connection & configuration"
 msgstr ""
 
-#: ../../netconnect.pm_.c:794 ../../netconnect.pm_.c:927
-#: ../../netconnect.pm_.c:937 ../../netconnect.pm_.c:952
+#: ../../netconnect.pm_.c:801 ../../netconnect.pm_.c:934
+#: ../../netconnect.pm_.c:944 ../../netconnect.pm_.c:959
 msgid "Network Configuration Wizard"
 msgstr ""
 
-#: ../../netconnect.pm_.c:795
+#: ../../netconnect.pm_.c:802
 msgid "External ISDN modem"
 msgstr ""
 
-#: ../../netconnect.pm_.c:795
+#: ../../netconnect.pm_.c:802
 msgid "Internal ISDN card"
 msgstr ""
 
-#: ../../netconnect.pm_.c:795
+#: ../../netconnect.pm_.c:802
 msgid "What kind is your ISDN connection?"
 msgstr ""
 
-#: ../../netconnect.pm_.c:816 ../../netconnect.pm_.c:865
+#: ../../netconnect.pm_.c:823 ../../netconnect.pm_.c:872
 msgid "Connect to the Internet"
 msgstr ""
 
-#: ../../netconnect.pm_.c:817
+#: ../../netconnect.pm_.c:824
 msgid ""
 "The most common way to connect with adsl is pppoe.\n"
 "Some connections use pptp, a few ones use dhcp.\n"
 "If you don't know, choose 'use pppoe'"
 msgstr ""
 
-#: ../../netconnect.pm_.c:819
+#: ../../netconnect.pm_.c:826
 msgid "use dhcp"
 msgstr ""
 
-#: ../../netconnect.pm_.c:819
+#: ../../netconnect.pm_.c:826
 msgid "use pppoe"
 msgstr ""
 
-#: ../../netconnect.pm_.c:819
+#: ../../netconnect.pm_.c:826
 msgid "use pptp"
 msgstr ""
 
-#: ../../netconnect.pm_.c:829
+#: ../../netconnect.pm_.c:836
 #, c-format
 msgid "I'm about to restart the network device %s. Do you agree?"
 msgstr ""
 
-#: ../../netconnect.pm_.c:866
+#: ../../netconnect.pm_.c:873
 msgid ""
 "Which dhcp client do you want to use?\n"
 "Default is dhcpd"
 msgstr ""
 
-#: ../../netconnect.pm_.c:883
+#: ../../netconnect.pm_.c:890
 msgid "Network configuration"
 msgstr ""
 
-#: ../../netconnect.pm_.c:884
+#: ../../netconnect.pm_.c:891
 msgid "Do you want to restart the network"
 msgstr ""
 
-#: ../../netconnect.pm_.c:887
+#: ../../netconnect.pm_.c:894
 #, c-format
 msgid ""
 "A problem occured while restarting the network: \n"
@@ -4934,7 +4941,7 @@ msgid ""
 "%s"
 msgstr ""
 
-#: ../../netconnect.pm_.c:916
+#: ../../netconnect.pm_.c:923
 msgid ""
 "Because you are doing a network installation, your network is already "
 "configured.\n"
@@ -4942,7 +4949,7 @@ msgid ""
 "Internet & Network connection.\n"
 msgstr ""
 
-#: ../../netconnect.pm_.c:928
+#: ../../netconnect.pm_.c:935
 msgid ""
 "Welcome to The Network Configuration Wizard\n"
 "\n"
@@ -4950,83 +4957,83 @@ msgid ""
 "If you don't want to use the auto detection, deselect the checkbox.\n"
 msgstr ""
 
-#: ../../netconnect.pm_.c:930
+#: ../../netconnect.pm_.c:937
 msgid "Choose the profile to configure"
 msgstr ""
 
-#: ../../netconnect.pm_.c:931
+#: ../../netconnect.pm_.c:938
 msgid "Use auto detection"
 msgstr ""
 
-#: ../../netconnect.pm_.c:937 ../../printerdrake.pm_.c:19
+#: ../../netconnect.pm_.c:944 ../../printerdrake.pm_.c:19
 msgid "Detecting devices..."
 msgstr ""
 
-#: ../../netconnect.pm_.c:944
+#: ../../netconnect.pm_.c:951
 msgid "Normal modem connection"
 msgstr ""
 
-#: ../../netconnect.pm_.c:944
+#: ../../netconnect.pm_.c:951
 #, c-format
 msgid "detected on port %s"
 msgstr ""
 
-#: ../../netconnect.pm_.c:945
+#: ../../netconnect.pm_.c:952
 msgid "ISDN connection"
 msgstr ""
 
-#: ../../netconnect.pm_.c:945
+#: ../../netconnect.pm_.c:952
 #, c-format
 msgid "detected %s"
 msgstr ""
 
-#: ../../netconnect.pm_.c:946
+#: ../../netconnect.pm_.c:953
 msgid "DSL (or ADSL) connection"
 msgstr ""
 
-#: ../../netconnect.pm_.c:946
+#: ../../netconnect.pm_.c:953
 #, c-format
 msgid "detected on interface %s"
 msgstr ""
 
-#: ../../netconnect.pm_.c:947
+#: ../../netconnect.pm_.c:954
 msgid "Cable connection"
 msgstr ""
 
-#: ../../netconnect.pm_.c:948
+#: ../../netconnect.pm_.c:955
 msgid "LAN connection"
 msgstr ""
 
-#: ../../netconnect.pm_.c:948
+#: ../../netconnect.pm_.c:955
 msgid "ethernet card(s) detected"
 msgstr ""
 
-#: ../../netconnect.pm_.c:953
+#: ../../netconnect.pm_.c:960
 msgid "How do you want to connect to the Internet?"
 msgstr ""
 
-#: ../../netconnect.pm_.c:970
+#: ../../netconnect.pm_.c:977
 msgid ""
 "Congratulation, The network and internet configuration is finished.\n"
 "\n"
 "The configuration will now be applied to your system."
 msgstr ""
 
-#: ../../netconnect.pm_.c:973
+#: ../../netconnect.pm_.c:980
 msgid ""
 "After that is done, we recommend you to restart your X\n"
 "environnement to avoid hostname changing problem."
 msgstr ""
 
-#: ../../network.pm_.c:252
+#: ../../network.pm_.c:253
 msgid "no network card found"
 msgstr ""
 
-#: ../../network.pm_.c:276 ../../network.pm_.c:371
+#: ../../network.pm_.c:277 ../../network.pm_.c:372
 msgid "Configuring network"
 msgstr ""
 
-#: ../../network.pm_.c:277
+#: ../../network.pm_.c:278
 msgid ""
 "Please enter your host name if you know it.\n"
 "Some DHCP servers require the hostname to work.\n"
@@ -5034,11 +5041,11 @@ msgid ""
 "such as ``mybox.mylab.myco.com''."
 msgstr ""
 
-#: ../../network.pm_.c:281 ../../network.pm_.c:376
+#: ../../network.pm_.c:282 ../../network.pm_.c:377
 msgid "Host name"
 msgstr ""
 
-#: ../../network.pm_.c:303
+#: ../../network.pm_.c:304
 msgid ""
 "WARNING: This device has been previously configured to connect to the "
 "Internet.\n"
@@ -5046,45 +5053,45 @@ msgid ""
 "Modifying the fields below will override this configuration."
 msgstr ""
 
-#: ../../network.pm_.c:308
+#: ../../network.pm_.c:309
 msgid ""
 "Please enter the IP configuration for this machine.\n"
 "Each item should be entered as an IP address in dotted-decimal\n"
 "notation (for example, 1.2.3.4)."
 msgstr ""
 
-#: ../../network.pm_.c:317 ../../network.pm_.c:318
+#: ../../network.pm_.c:318 ../../network.pm_.c:319
 #, c-format
 msgid "Configuring network device %s"
 msgstr ""
 
-#: ../../network.pm_.c:318
+#: ../../network.pm_.c:319
 msgid " (driver $module)"
 msgstr ""
 
-#: ../../network.pm_.c:320 ../../standalone/draknet_.c:213
-#: ../../standalone/draknet_.c:382
+#: ../../network.pm_.c:321 ../../standalone/draknet_.c:224
+#: ../../standalone/draknet_.c:393
 msgid "IP address"
 msgstr ""
 
-#: ../../network.pm_.c:321 ../../standalone/draknet_.c:383
+#: ../../network.pm_.c:322 ../../standalone/draknet_.c:394
 msgid "Netmask"
 msgstr ""
 
-#: ../../network.pm_.c:322
+#: ../../network.pm_.c:323
 msgid "(bootp/dhcp)"
 msgstr ""
 
-#: ../../network.pm_.c:322
+#: ../../network.pm_.c:323
 msgid "Automatic IP"
 msgstr ""
 
-#: ../../network.pm_.c:343 ../../printerdrake.pm_.c:102
+#: ../../network.pm_.c:344 ../../printerdrake.pm_.c:102
 #: ../../printerdrake.pm_.c:421
 msgid "IP address should be in format 1.2.3.4"
 msgstr ""
 
-#: ../../network.pm_.c:372
+#: ../../network.pm_.c:373
 msgid ""
 "Please enter your host name.\n"
 "Your host name should be a fully-qualified host name,\n"
@@ -5092,35 +5099,35 @@ msgid ""
 "You may also enter the IP address of the gateway if you have one"
 msgstr ""
 
-#: ../../network.pm_.c:377
+#: ../../network.pm_.c:378
 msgid "DNS server"
 msgstr ""
 
-#: ../../network.pm_.c:378 ../../standalone/draknet_.c:499
+#: ../../network.pm_.c:379 ../../standalone/draknet_.c:510
 msgid "Gateway"
 msgstr ""
 
-#: ../../network.pm_.c:380
+#: ../../network.pm_.c:381
 msgid "Gateway device"
 msgstr ""
 
-#: ../../network.pm_.c:391
+#: ../../network.pm_.c:392
 msgid "Proxies configuration"
 msgstr ""
 
-#: ../../network.pm_.c:392
+#: ../../network.pm_.c:393
 msgid "HTTP proxy"
 msgstr ""
 
-#: ../../network.pm_.c:393
+#: ../../network.pm_.c:394
 msgid "FTP proxy"
 msgstr ""
 
-#: ../../network.pm_.c:396
+#: ../../network.pm_.c:397
 msgid "Proxy should be http://..."
 msgstr ""
 
-#: ../../network.pm_.c:397
+#: ../../network.pm_.c:398
 msgid "Proxy should be ftp://..."
 msgstr ""
 
@@ -5978,16 +5985,12 @@ msgid ""
 "Click on Configure to launch the setup wizard."
 msgstr ""
 
-#: ../../standalone/drakgw_.c:619 ../../standalone/tinyfirewall_.c:57
-msgid "Configure"
-msgstr ""
-
 #: ../../standalone/draknet_.c:59
 #, c-format
 msgid "Network configuration (%d adapters)"
 msgstr ""
 
-#: ../../standalone/draknet_.c:66 ../../standalone/draknet_.c:473
+#: ../../standalone/draknet_.c:66 ../../standalone/draknet_.c:484
 msgid "Profile: "
 msgstr ""
 
@@ -6019,11 +6022,11 @@ msgstr ""
 msgid "Type:"
 msgstr ""
 
-#: ../../standalone/draknet_.c:161 ../../standalone/draknet_.c:333
+#: ../../standalone/draknet_.c:161 ../../standalone/draknet_.c:344
 msgid "Gateway:"
 msgstr ""
 
-#: ../../standalone/draknet_.c:161 ../../standalone/draknet_.c:333
+#: ../../standalone/draknet_.c:161 ../../standalone/draknet_.c:344
 msgid "Interface:"
 msgstr ""
 
@@ -6031,145 +6034,145 @@ msgstr ""
 msgid "Status:"
 msgstr ""
 
-#: ../../standalone/draknet_.c:168 ../../standalone/draknet_.c:336
+#: ../../standalone/draknet_.c:168 ../../standalone/draknet_.c:347
 #: ../../standalone/net_monitor_.c:122 ../../standalone/net_monitor_.c:228
 msgid "Connected"
 msgstr ""
 
-#: ../../standalone/draknet_.c:168 ../../standalone/draknet_.c:336
+#: ../../standalone/draknet_.c:168 ../../standalone/draknet_.c:347
 #: ../../standalone/net_monitor_.c:83 ../../standalone/net_monitor_.c:122
 #: ../../standalone/net_monitor_.c:228
 msgid "Not connected"
 msgstr ""
 
-#: ../../standalone/draknet_.c:171 ../../standalone/draknet_.c:337
+#: ../../standalone/draknet_.c:171 ../../standalone/draknet_.c:348
 msgid "Connect..."
 msgstr ""
 
-#: ../../standalone/draknet_.c:171 ../../standalone/draknet_.c:337
+#: ../../standalone/draknet_.c:171 ../../standalone/draknet_.c:348
 msgid "Disconnect..."
 msgstr ""
 
-#: ../../standalone/draknet_.c:177
-msgid "Opening your connection..."
+#: ../../standalone/draknet_.c:187
+msgid "Starting your connection..."
 msgstr ""
 
-#: ../../standalone/draknet_.c:187
+#: ../../standalone/draknet_.c:195
 msgid "Closing your connection..."
 msgstr ""
 
-#: ../../standalone/draknet_.c:192
+#: ../../standalone/draknet_.c:200
 msgid ""
 "The connection is not closed. Try to do it manually by running "
 "/etc/sysconfig/network-scripts/net_cnx_down in root."
 msgstr ""
 
-#: ../../standalone/draknet_.c:192
+#: ../../standalone/draknet_.c:200
 msgid "The system is now disconnected."
 msgstr ""
 
-#: ../../standalone/draknet_.c:201
+#: ../../standalone/draknet_.c:212
 msgid "Configure Internet Access..."
 msgstr ""
 
-#: ../../standalone/draknet_.c:208 ../../standalone/draknet_.c:366
+#: ../../standalone/draknet_.c:219 ../../standalone/draknet_.c:377
 msgid "LAN configuration"
 msgstr ""
 
-#: ../../standalone/draknet_.c:213
+#: ../../standalone/draknet_.c:224
 msgid "Adapter"
 msgstr ""
 
-#: ../../standalone/draknet_.c:213
+#: ../../standalone/draknet_.c:224
 msgid "Driver"
 msgstr ""
 
-#: ../../standalone/draknet_.c:213
+#: ../../standalone/draknet_.c:224
 msgid "Interface"
 msgstr ""
 
-#: ../../standalone/draknet_.c:213
+#: ../../standalone/draknet_.c:224
 msgid "Protocol"
 msgstr ""
 
-#: ../../standalone/draknet_.c:232
+#: ../../standalone/draknet_.c:243
 msgid "Configure Local Area Network..."
 msgstr ""
 
-#: ../../standalone/draknet_.c:244
+#: ../../standalone/draknet_.c:255
 msgid "Configure..."
 msgstr ""
 
-#: ../../standalone/draknet_.c:258
+#: ../../standalone/draknet_.c:269
 msgid "Normal Mode"
 msgstr ""
 
-#: ../../standalone/draknet_.c:275
+#: ../../standalone/draknet_.c:286
 msgid "Please Wait... Applying the configuration"
 msgstr ""
 
-#: ../../standalone/draknet_.c:286
+#: ../../standalone/draknet_.c:297
 msgid "Apply"
 msgstr ""
 
-#: ../../standalone/draknet_.c:370
+#: ../../standalone/draknet_.c:381
 msgid "LAN Configuration"
 msgstr ""
 
-#: ../../standalone/draknet_.c:378
+#: ../../standalone/draknet_.c:389
 #, c-format
 msgid "Adapter %s: %s"
 msgstr ""
 
-#: ../../standalone/draknet_.c:384
+#: ../../standalone/draknet_.c:395
 msgid "Boot Protocol"
 msgstr ""
 
-#: ../../standalone/draknet_.c:385
+#: ../../standalone/draknet_.c:396
 msgid "Started on boot"
 msgstr ""
 
-#: ../../standalone/draknet_.c:386
+#: ../../standalone/draknet_.c:397
 msgid "DHCP client"
 msgstr ""
 
-#: ../../standalone/draknet_.c:421 ../../standalone/draknet_.c:425
+#: ../../standalone/draknet_.c:432 ../../standalone/draknet_.c:436
 msgid "Disable"
 msgstr ""
 
-#: ../../standalone/draknet_.c:421 ../../standalone/draknet_.c:425
+#: ../../standalone/draknet_.c:432 ../../standalone/draknet_.c:436
 msgid "Enable"
 msgstr ""
 
-#: ../../standalone/draknet_.c:462
+#: ../../standalone/draknet_.c:473
 msgid "Internet connection configuration"
 msgstr ""
 
-#: ../../standalone/draknet_.c:466
+#: ../../standalone/draknet_.c:477
 msgid "Internet Connection Configuration"
 msgstr ""
 
-#: ../../standalone/draknet_.c:475
+#: ../../standalone/draknet_.c:486
 msgid "Connection type: "
 msgstr ""
 
-#: ../../standalone/draknet_.c:481
+#: ../../standalone/draknet_.c:492
 msgid "Parameters"
 msgstr ""
 
-#: ../../standalone/draknet_.c:494
+#: ../../standalone/draknet_.c:505
 msgid "Provider dns 1 (optional)"
 msgstr ""
 
-#: ../../standalone/draknet_.c:495
+#: ../../standalone/draknet_.c:506
 msgid "Provider dns 2 (optional)"
 msgstr ""
 
-#: ../../standalone/draknet_.c:508
+#: ../../standalone/draknet_.c:519
 msgid "Ethernet Card"
 msgstr ""
 
-#: ../../standalone/draknet_.c:509
+#: ../../standalone/draknet_.c:520
 msgid "DHCP Client"
 msgstr ""
 
@@ -6564,10 +6567,6 @@ msgid "Amusement programs: arcade, boards, strategy, etc"
 msgstr ""
 
 #: ../../share/compssUsers:999
-msgid "Standard tools"
-msgstr ""
-
-#: ../../share/compssUsers:999
 msgid "Video players and editors"
 msgstr ""
 
@@ -6588,11 +6587,11 @@ msgid "NFS server, SMB server, Proxy server"
 msgstr ""
 
 #: ../../share/compssUsers:999
-msgid "Books and Howto's on Linux and Free Software"
+msgid "Editors, shells, file tools, terminals"
 msgstr ""
 
 #: ../../share/compssUsers:999
-msgid "Editors, shells, file tools, terminals"
+msgid "Books and Howto's on Linux and Free Software"
 msgstr ""
 
 #: ../../share/compssUsers:999
