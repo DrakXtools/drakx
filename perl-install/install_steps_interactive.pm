@@ -47,7 +47,7 @@ sub kill_action {
 #- Steps Functions
 #-######################################################################################
 #------------------------------------------------------------------------------
-sub selectLanguage($) {
+sub selectLanguage {
     my ($o) = @_;
 
     $o->ask_from_entries_refH_powered(
@@ -57,7 +57,7 @@ sub selectLanguage($) {
 	      focus_out => sub { $o->{langs}{$o->{lang}} = 1 },
 	  },
 	},
-	[ { val => \$o->{lang}, type => 'list', 
+	[ { val => \$o->{lang}, separator => '|', 
 	    format => \&lang::lang2text, list => [ lang::list() ] },
 	  (map {;
 	       { val => \$o->{langs}{$_->[0]}, type => 'bool', disabled => sub { $o->{langs}{all} },
@@ -238,9 +238,8 @@ sub selectMouse {
 
     my $prev = $o->{mouse}{type} . '|' . $o->{mouse}{name};
     $o->{mouse} = mouse::fullname2mouse(
-	$o->ask_from_treelistf('', _("Please, choose the type of your mouse."), '|',
-			       sub { join '|', map { translate($_) } split '\|', $_[0] },
-			       [ mouse::fullnames ], $prev)) if $force;
+	$o->ask_from_treelist_('', _("Please, choose the type of your mouse."), 
+			       '|', [ mouse::fullnames ], $prev)) if $force;
 
     if ($force && $o->{mouse}{type} eq 'serial') {
 	$o->set_help('selectSerialPort');
