@@ -1037,6 +1037,7 @@ sub choose_security_options {
     my @shown_options = ();
     my $key = "";
     my $i=0;
+    my $title;
 		        
     my $expert_section = cat_($expert_file);
 
@@ -1064,6 +1065,8 @@ sub choose_security_options {
 sub choose_security_level {
     my ($in, $security, $libsafe) = @_;
     my $expert_file = "/etc/security/msec/expert_mode";
+
+    my $email;
 
     my %l = (
       0 => _("Welcome To Crackers"),
