@@ -29,15 +29,15 @@ use scanner;
 for (@ARGV) {
     /^--version$/ and die 'version: $Id$ '."\n";
     /^--help$/ and die 'logdrake [--version] [--help] [--manual] [--device=dev] [--update-sane=sane_desc_dir] [--update-usbtable] [--dynamic=dev]';
-    /^--update-usbtable$/ and do {scanner::updateScannerDBfromUsbtable(); exit;};
-    /^--update-sane=(.*)$/ and do {scanner::updateScannerDBfromSane($1); exit;};
+    /^--update-usbtable$/ and do { scanner::updateScannerDBfromUsbtable(); exit };
+    /^--update-sane=(.*)$/ and do { scanner::updateScannerDBfromSane($1); exit };
     /^--manual$/ and $::Manual=1;
-    /^--dynamic=(.*)$/ and do { dynamic($1); exit;};
+    /^--dynamic=(.*)$/ and do { dynamic($1); exit };
 }
 
 $in = 'interactive'->vnew('su', 'default');
 $in->do_pkgs->install('sane-backends', 'xsane', if_($in->do_pkgs->is_installed('gimp'),'xsane-gimp'));
-if ($::Manual) {manual(); quit();}
+if ($::Manual) { manual(); quit() }
 my $wait = $in->wait_message(_("Test ports"), _("Detecting devices ..."));
 @f = scanner::findScannerUsbport();
 $wait=undef;
@@ -56,7 +56,7 @@ sub auto {
 }
 
 sub manual {
-    my $s = $in->ask_from_treelist('scannerdrake', _("Select a scanner"), '|', [' None', keys %$scanner::scannerDB], '' ) or return;
+    my $s = $in->ask_from_treelist('scannerdrake', _("Select a scanner"), '|', [' None', keys %$scanner::scannerDB], '') or return;
     return if $s eq ' None';
     tryConfScanner($s);
 }
@@ -67,7 +67,7 @@ sub dynamic {
 	if (member($_->{val}{DESCRIPTION}), keys %$scanner::scannerDB) {
 	    my $name = $_->{val}{DESCRIPTION};
 	    $name =~ s/\s$//; #some HP entry have a trailing space, i will correct usbtable asap
-	    scanner::confScanner($name, $_->{port}) unless($scanner::scannerDB->{$model}{flags}{unsupported});
+	    scanner::confScanner($name, $_->{port}) unless ($scanner::scannerDB->{$model}{flags}{unsupported});
 	}
     }
 }
@@ -88,11 +88,11 @@ sub tryConfScanner {
      	#return;
     }
     if ($scanner::scannerDB->{$model}{ask} =~ /DEVICE/) {
-	$port='/dev/sg0';
+	$port = '/dev/sg0';
 	$in->ask_from('scannerdrake',
 		      _("Scannerdrake was not able to detect your %s scanner.\nPlease select the device where your scanner is plugged", $model),
 		      [
-		       { label => _("choose device"), val => \$port, list => ['/dev/sg0', '/dev/sg1', '/dev/sg2', '/dev/sg3', '/dev/sg4' ], not_edit => 0, sort => 1},
+		       { label => _("choose device"), val => \$port, list => ['/dev/sg0', '/dev/sg1', '/dev/sg2', '/dev/sg3', '/dev/sg4' ], not_edit => 0, sort => 1 },
 		      ],
 		     ) or manual();
     }
@@ -113,6 +113,9 @@ sub quit {
 
 #-----------------------------------------------
 # $Log$
+# Revision 1.13  2002/08/01 16:56:59  tvignaud
+# perl_checker fixes
+#
 # Revision 1.12  2002/07/31 23:10:55  prigaux
 # Handle parsing --embedded command line in standalone.pm
 # => allows to remove the somewhat mythical

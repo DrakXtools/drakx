@@ -1,7 +1,7 @@
 #!/usr/bin/perl
 
 # Drak Bug Report 
-# Copyright (C) 2002 MandrakeSoft (daouda@mandrakesoft.com)
+# C$opyright (C) 2002 MandrakeSoft (daouda@mandrakesoft.com)
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -33,7 +33,7 @@ my $in = 'interactive'->vnew;
 
 $::bugzilla_url = "https://qa.mandrakesoft.com";
 my $version = "0.9.0";
-my $prog = undef;
+my $prog;
 
 sub usage {
     print STDERR _("drakbug version %s
@@ -51,16 +51,16 @@ OPTIONS:
 
 while (defined($_ = shift @ARGV)) {
     /^--help$/ and do { usage; next };
-    /^--report$/ and do { $prog = shift @ARGV;};
+    /^--report$/ and do { $prog = shift @ARGV };
 }
 
 my $window_g = new Gtk::Window -toplevel;
 $window_g->set_policy($false,$false,$true);
-$window_g->set_position( 1 );
-$window_g->border_width( 5 );
+$window_g->set_position(1);
+$window_g->border_width(5);
 $window_g->set_title(_("Mandrake Bug Report Tool"));
 #$window_g->set_usize(540, 350);
-$window_g->signal_connect( "delete_event", \&quit_global);
+$window_g->signal_connect("delete_event", \&quit_global);
 
 my $mdk_app = { 
 	       _("Mandrake Control Center") => 'drakconf',
@@ -106,7 +106,7 @@ $mdk_rel->set_text("$mdk_release");
 
 gtkpack2__(
 	   gtkpack2__(my $vbx = new Gtk::VBox(0,5),
-		      gtkadd($table ),
+		      gtkadd($table),
 		      gtkpack(new Gtk::HBox(0,0),
 			      gtkpack(gtkset_justify(new Gtk::Label(_("\n\nTo submit a bug report, click on the button report.\nThis will open  a web browser window  on https://www.bugzilla.com\n where you'll find a form to fill in.The information displayed above will be \ntransferred to that server\n\n")),"left")),
 			     ),
@@ -119,14 +119,14 @@ if (defined $prog && member($prog, @all_drakxtools)) {
     update_app($prog); 
 };
 
-$comb_app->entry->signal_connect('changed', sub { update_app($comb_app->entry->get_text())} );
+$comb_app->entry->signal_connect('changed', sub { update_app($comb_app->entry->get_text()) });
 my $kernel = $kernel_rel->get_chars(0,-1);
 my $hbx = new Gtk::HBox(0,0);
 my $Close_Button = new Gtk::Button(_("Close"));
-$Close_Button->signal_connect(clicked => sub { Gtk->exit(0)});
+$Close_Button->signal_connect(clicked => sub { Gtk->exit(0) });
 $hbx->pack_start($Close_Button,0,0,0);
 my $Report_Button = new Gtk::Button(_("Report"));
-$Report_Button->signal_connect(clicked => sub { connect_bugzilla("$::bugzilla_url/wizard/");});
+$Report_Button->signal_connect(clicked => sub { connect_bugzilla("$::bugzilla_url/wizard/") });
 $hbx->pack_end($Report_Button,0,0,0);
 $vbx->pack_start($hbx,0,0,0);
 $window_g->add($vbx);
@@ -143,7 +143,7 @@ sub update_app {
 	if (member($text,@all_drakxtools)) {
 	    chomp($app_choice = `rpm -q drakxtools`) 
 	} else {	
-	    exists $mdk_app->{$text}[1] ? $which_app =chomp_(`which '$mdk_app->{$text}[1]'`) : $which_app = chomp_(`which '$mdk_app->{$text}'`);
+	    exists $mdk_app->{$text}[1] ? $which_app =chomp_(`which '$mdk_app->{$text}[1]'`) : { $which_app = chomp_(`which '$mdk_app->{$text}'`) };
 	    $app_choice = chomp_(`rpm -qf '$which_app'`); 
 	}
 	$app_choice !~ m/ / ? $package->set_text("$app_choice") : $package->set_text(_("Not installed"));
@@ -155,9 +155,9 @@ sub connect_bugzilla {
     my $w = $in->wait_message('',_("connecting to Bugzilla wizard ...")); 
     sleep(2);
     exec $ENV{BROWSER},$url if exists $ENV{BROWSER} ;
-    my @browser = qw (mozilla konqueror galeon );
+    my @browser = qw (mozilla konqueror galeon);
     foreach (@browser) {
-	if (-e "/usr/bin/$_") { print "execing $_ : $url\n "; exec $_,$url} 
+	if (-e "/usr/bin/$_") { print "execing $_ : $url\n "; exec $_,$url } 
     }
     $in->ask_warn('', _("No browser available! Please install one"));
 }

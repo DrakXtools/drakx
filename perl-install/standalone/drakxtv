@@ -81,7 +81,7 @@ You can install it by typing \"urpmi xawtv\" as root, in a console.")));
 
 	   # default to pal since most people use that
 	   $norm = "PAL";
-	   if("@ARGV" !~ /--help|-h/) {
+	   if ("@ARGV" !~ /--help|-h/) {
 		  my %countries =
 			 (
 			  "ar" => [ "argentina" ],
@@ -111,7 +111,7 @@ You can install it by typing \"urpmi xawtv\" as root, in a console.")));
 
 	   if ($in->ask_from("TVdrake", _("Please,\ntype in your tv norm and country"),
 					 [
-					  { label => _("TV norm :"), val => \$norm, list => ["NTSC", "NTSC-JP","PAL", "PAL-M", "PAL-N", "PAL-NC", "SECAM"], type => 'combo'},
+					  { label => _("TV norm :"), val => \$norm, list => ["NTSC", "NTSC-JP","PAL", "PAL-M", "PAL-N", "PAL-NC", "SECAM"], type => 'combo' },
 					  { label => _("Area :"), val => \$ftable_id, list => [keys %freqtables], format => sub { $freqtables{$_[0]} }, sort => 1},
 					  ]
 					 ))
@@ -121,14 +121,14 @@ You can install it by typing \"urpmi xawtv\" as root, in a console.")));
 #       will be ignored since "All" is selected (because of -a)
 		  $ftable_id = "france -a " if ($ftable_id eq -1);
 		  # Note that this'll be broken if/when we implement interactive::qt
-		  my $use_X =$in->isa('interactive::gtk') && -x "/usr/X11R6/bin/xvt";
+		  my $use_X = $in->isa('interactive::gtk') && -x "/usr/X11R6/bin/xvt";
 		  my $home = $ENV{HOME};
-		  my $i=system ( (($use_X ) ?
+		  my $i = system ( (($use_X) ?
 					   "xvt -T '"._("Scanning for TV channels")." ...' -e ":"")
-					  . "scantv -n $norm -f $ftable_id -o $home/.xawtv".(($use_X )?"":" &>$home/tmp/scantv.log;"));
+					  . "scantv -n $norm -f $ftable_id -o $home/.xawtv".(($use_X)?"":" &>$home/tmp/scantv.log;"));
 		  if ($i) {
 			 $in->ask_warn(_("There was an error while scanning for TV channels"),
-						_("XawTV isn't installed!")); }
+						_("XawTV isn't installed!")) }
 		  else {
 			 standalone::explanations("created file $home/.xawtv");
 			   $in->ask_warn(_("Have a nice day!"),
@@ -142,7 +142,7 @@ You can install it by typing \"urpmi xawtv\" as root, in a console.")));
 my @devices = detect_devices::probeall(1);
 if (grep { $_->{media_type} eq 'MULTIMEDIA_VIDEO' } @devices) {
     if (($< == 0) && (grep { $_->{driver} eq 'bttv' } @devices)) {
-	   use harddrake::bttv;
+	   require harddrake::bttv;
 	   modules::read_conf;
 	   harddrake::bttv::config($in);
 	   modules::write_conf;
