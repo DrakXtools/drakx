@@ -945,7 +945,7 @@ sub write_eb_image {
 		system("mkisofs -b eb.img -o /tmp/$nic.iso /tmp/eb");
 		rm_rf("/tmp/eb");
 		if ( -e "/tmp/eb.iso" ) {
-			$in->ask_warn('',_("Etherboot ISO image is /tmp/$nic.iso"))
+			$in->ask_warn('',_("Etherboot ISO image is %s", "/tmp/$nic.iso"))
 		} else { 
 			$in->ask_warn('',_("Something went wrong!"))
 		}		
