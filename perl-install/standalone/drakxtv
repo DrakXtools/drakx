@@ -20,7 +20,7 @@
 
 use lib qw(/usr/lib/libDrakX);
 
-use standalone;     #- warning, standalone must be loaded very first, for 'explanations'
+use standalone; #- warning, standalone must be loaded very first, for 'explanations'
 
 use interactive;
 use strict;
@@ -32,16 +32,16 @@ use common;
 my $in = 'interactive'->vnew();
 
 sub scan4channels {
-#    xawtv has been installed by DrakX when/if it's detected a
-#    tv card.
-#    In the future, we might try to install xawtv if it'sn't there
-#    as we're just a, xawtv wraper
-#    -x "/usr/bin/scantv" or $in->do_pkgs->install('xawtv');
-#    -x "/usr/bin/scantv" or { 
-#{	   exec {'consolehelper'} $0, ("urpmi", "xawtv") or die N("consolehelper missing");
-#    };
+    # xawtv has been installed by DrakX when/if it's detected a tv
+    # card.
+
+    # In the future, we might try to install xawtv if it'sn't there as
+    # we're just a, xawtv wraper
+
+    # -x "/usr/bin/scantv" or $in->do_pkgs->install('xawtv');
+    # -x "/usr/bin/scantv" or { exec {'consolehelper'} $0, ("urpmi", "xawtv") or die N("consolehelper missing") };
     if (!$::testing && ! -x "/usr/bin/scantv") {
-#	log::explanations("package xawtv isn't installed");
+        #	log::explanations("package xawtv isn't installed");
 	   $in->ask_warn("XawTV isn't installed!", 
 				  formatAlaTeX(N("XawTV isn't installed!
 
@@ -56,77 +56,75 @@ You can install it by typing \"urpmi xawtv\" as root, in a console.")));
 	   
     } else {
 	   my ($ftable_id, $norm);
-
-#   my %freqtables = map {$i=$_;$i =~ s/ (.*)/-\1/;_($_) => $i} (...)
-#   this table must be checked on each xawtv release:
+        #   this table must be checked on each xawtv release:
 	   my %freqtables = 
-		  ("us-bcast" => N("USA (broadcast)"), "us-cable" => N("USA (cable)"), "us-cable-hrc" => N("USA (cable-hrc)"), "canada-cable" => N("Canada (cable)"),
-		   "japan-bcast" => N("Japan (broadcast)"), "japan-cable" => N("Japan (cable)"), "china-bcast" => N("China (broadcast)"),
-		   "europe-west" => N("West Europe"), "europe-east" => N("East Europe"), "italy" => N("Italy"), "ireland" => N("Ireland"), "france" => N("France [SECAM]"),
-		   "newzealand" => N("Newzealand"), "australia" => N("Australia"),
-		   "southafrica" => N("South Africa"),
-		   "argentina" => N("Argentina"),
-		   "australia-optus" => N("Australian Optus cable TV"),
-		   -1 => N("All")
-		   );
-#   Info: HRC means "Harmonically Related Carrier"
+          ("us-bcast" => N("USA (broadcast)"), "us-cable" => N("USA (cable)"), "us-cable-hrc" => N("USA (cable-hrc)"), "canada-cable" => N("Canada (cable)"),
+           "japan-bcast" => N("Japan (broadcast)"), "japan-cable" => N("Japan (cable)"), "china-bcast" => N("China (broadcast)"),
+           "europe-west" => N("West Europe"), "europe-east" => N("East Europe"), "italy" => N("Italy"), "ireland" => N("Ireland"), "france" => N("France [SECAM]"),
+           "newzealand" => N("Newzealand"), "australia" => N("Australia"),
+           "southafrica" => N("South Africa"),
+           "argentina" => N("Argentina"),
+           "australia-optus" => N("Australian Optus cable TV"),
+           -1 => N("All")
+          );
+        #   Info: HRC means "Harmonically Related Carrier"
 
-		  my %countries =
-			 (
-			  "AR" => [ "argentina" ],
-			  "AU" => [ "australia" ],
-			  "FR" => [ "france", "SECAM"],
-			  "CA" => [ "canada-cable" ],
-			  "IE" => [ "ireland" ],
-			  "IT" => [ "italy" ],
-			  "JP" => [ "japan-bcast", "NTSC-JP" ],
-			  "NZ" => [ "newzealand" ],
-			  "AT|BE|CH|DE|ES|GB|SE" => [ "europe-west" ],
-			  "US" => [ "us-bcast", "NTSC" ],
-			  "ZA" => [ "southafrica" ],
-			  "CN|TW" => [ "china-bcast" ]
-			  );
+        my %countries =
+          (
+           "AR" => [ "argentina" ],
+           "AU" => [ "australia" ],
+           "FR" => [ "france", "SECAM" ],
+           "CA" => [ "canada-cable" ],
+           "IE" => [ "ireland" ],
+           "IT" => [ "italy" ],
+           "JP" => [ "japan-bcast", "NTSC-JP" ],
+           "NZ" => [ "newzealand" ],
+           "AT|BE|CH|DE|ES|GB|SE" => [ "europe-west" ],
+           "US" => [ "us-bcast", "NTSC" ],
+           "ZA" => [ "southafrica" ],
+           "CN|TW" => [ "china-bcast" ]
+          );
 
-	          my $tbl;
-		  my $locale = lang::read('', $>);
-	          $locale->{country} =~ /$_/ and $tbl = $countries{$_} foreach keys %countries;
-	          if ($tbl) {
-		      $ftable_id = $tbl->[0];
-		      $norm = $tbl->[1] if $tbl->[1];
-		  }
-	          # default to pal since most people use that
-	          $norm ||= "PAL";
-		  log::l("[drakxtv] guess country=>$locale->{country}, norm=>$norm, area=>$ftable_id");
+        my $tbl;
+        my $locale = lang::read('', $>);
+        $locale->{country} =~ /$_/ and $tbl = $countries{$_} foreach keys %countries;
+        if ($tbl) {
+            $ftable_id = $tbl->[0];
+            $norm = $tbl->[1] if $tbl->[1];
+        }
+        # default to pal since most people use that
+        $norm ||= "PAL";
+        log::l("[drakxtv] guess country=>$locale->{country}, norm=>$norm, area=>$ftable_id");
 
 	   if ($in->ask_from("TVdrake", N("Please,\ntype in your tv norm and country"),
                           [
                            { label => N("TV norm:"), val => \$norm, list => [ "NTSC", "NTSC-JP", "PAL", "PAL-M", "PAL-N", "PAL-NC", "SECAM" ], type => 'combo' },
 					  { label => N("Area:"), val => \$ftable_id, list => [keys %freqtables], format => sub { $freqtables{$_[0]} }, sort => 1 },
 					  ]
-					 ))
-	   {   my $wait = $in->wait_message(N("Please wait"),
+					 )) {
+            my $_wait = $in->wait_message(N("Please wait"),
 								 N("Scanning for TV channels in progress ..."));
-#       we provide scantv a bogus table (france) which will
-#       will be ignored since "All" is selected (because of -a)
+            # we provide scantv a bogus table (france) which will
+            # will be ignored since "All" is selected (because of -a)
 		  $ftable_id = "france -a " if $ftable_id eq -1;
 		  # Note that this'll be broken if/when we implement interactive::qt
 		  my $use_X = $in->isa('interactive::gtk') && -x "/usr/X11R6/bin/xvt";
 		  my $home = $ENV{HOME};
 		  my $is_bttv_loaded = cat_("/proc/modules");
+            # workaround non loaded bttv
 		  run_program::run('/sbin/modprobe', 'bttv') if $< == 0 && $is_bttv_loaded !~ /bttv/;
 		  my $i = system(($use_X ? "xvt -T '" . N("Scanning for TV channels") . " ...' -e " : "") . 
-				 "scantv -n $norm -f $ftable_id -o $home/.xawtv" .
-				 ($use_X ? "" : " &>$home/tmp/scantv.log;"));
+                           "scantv -n $norm -f $ftable_id -o $home/.xawtv" .
+                           ($use_X ? "" : " &>$home/tmp/scantv.log;"));
 		  if ($i) {
 			 $in->ask_warn(N("There was an error while scanning for TV channels"),
-				       N("XawTV isn't installed!")) }
+                              N("XawTV isn't installed!")) }
 		  else {
 			 log::explanations("created file $home/.xawtv");
-			   $in->ask_warn(N("Have a nice day!"),
-					 N("Now, you can run xawtv (under X Window!) !\n")) unless $use_X;
-		    };
-		  
-	   };
+                $in->ask_warn(N("Have a nice day!"),
+                              N("Now, you can run xawtv (under X Window!) !\n")) unless $use_X;
+            }
+	   }
     }
 }
 
@@ -144,7 +142,7 @@ if (@devices) {
 		  modules::write_conf;
 	   }
 	   scan4channels();
-	}
+    }
 } else {
     $in->ask_warn(N("No TV Card detected!"), formatAlaTeX(
 											   N("No TV Card has been detected on your machine. Please verify that a Linux-supported Video/TV Card is correctly plugged in.
