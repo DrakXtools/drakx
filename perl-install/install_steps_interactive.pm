@@ -164,16 +164,34 @@ For any question on this document, please contact MandrakeSoft S.A.
     }
 }
 #------------------------------------------------------------------------------
-sub selectKeyboard($) {
+sub selectKeyboard {
     my ($o, $clicked) = @_;
 
-    $o->ask_from_entries_refH(_("Keyboard"),
-			      _("Please, choose your keyboard layout."),
-			      [ { val => \$o->{keyboard}, type => 'list',
-				  format => sub { translate(keyboard::keyboard2text($_[0])) },
-				  list => [ keyboard::xmodmaps() ] } ]);
+    my $l = keyboard::lang2keyboards($o->{lang});
+
+    #- good guess, don't ask
+    return if !$clicked && $l->[0][1] > 90;
+
+    my @best = map { $_->[0] } @$l;
+    push @best, 'us_intl' if !member('us_intl', @best);
+
+    my $format = sub { translate(keyboard::keyboard2text($_[0])) };
+    my $other;
+    my $ext_keyboard = $o->{keyboard};
+    $o->ask_from_entries_refH_powered(
+	{ title => _("Keyboard"), 
+	  messages => _("Please, choose your keyboard layout."),
+	  advanced_messages => _("Here is the full list of keyboards available"),
+	  callbacks => { changed => sub { $other = $_[0]==1 } },
+	},
+	  [ if_(@best > 1, { val => \$o->{keyboard}, type => 'list', format => $format,
+	      list => [ @best ] }),
+	    { val => \$ext_keyboard, type => 'list', format => $format,
+	      list => [ keyboard::keyboards ], advanced => @best > 1 }
+	  ]);
     delete $o->{keyboard_unsafe};
 
+    $o->{keyboard} = $ext_keyboard if $other;
     install_steps::selectKeyboard($o);
 }
 #------------------------------------------------------------------------------
@@ -691,11 +709,28 @@ sub configureServices {
     install_steps::configureServices($o);
 }
 
+sub summary {
+    my ($o, $first_time) = @_;
+
+    if ($first_time) {
+	#- auto-detection
+	$o->configurePrinter(0) if !$::expert;
+	install_any::preConfigureTimezone($o);
+    }
+
+    $o->ask_from_entries_refH('', _("Summary"),
+    [
+{ label => _("Mouse"), val => \$o->{mouse}{name}, clicked => sub { $o->selectMouse(1) } },
+{ label => _("Keyboard"), val => \$o->{keyboard}, clicked => sub { $o->selectKeyboard(1) }, format => sub { translate(keyboard::keyboard2text($_[0])) } },
+{ label => _("Timezone"), val => \$o->{timezone}{timezone}, clicked => sub { $o->configureTimezone(1) } },
+{ label => _("Printer"), val => \$o->{printer}{mode}, clicked => sub { $o->configurePrinter(1) }, format => sub { $_[0] || _("None") } },
+]);
+}
+
 #------------------------------------------------------------------------------
 sub configurePrinter {
     my ($o, $clicked) = @_;
-
-    $::corporate and return;
+    $::corporate && !$clicked and return;
 
     require printer;
     require printerdrake;
@@ -704,31 +739,33 @@ sub configurePrinter {
         printerdrake::auto_detect($o) or return;
     }
 
+    my $printer = $o->{printer} ||= {};
+
     #- bring interface up for installing ethernet packages but avoid ppp by default,
     #- else the guy know what he is doing...
     #install_interactive::upNetwork($o, 'pppAvoided');
 
     #- take default configuration, this include choosing the right system
     #- currently used by the system.
-    eval { add2hash($o->{printer} ||= {}, printer::getinfo($o->{prefix})) };
+    eval { add2hash($printer, printer::getinfo($o->{prefix})) };
 
     #- figure out what printing system to use, currently are suported cups and lpr,
     #- in case this has not be detected above.
-    $::expert or $o->{printer}{mode} ||= 'CUPS';
-    if ($::expert || !$o->{printer}{mode}) {
+    $::expert or $printer->{mode} ||= 'CUPS';
+    if ($::expert || !$printer->{mode}) {
 	$o->set_help('configurePrinterSystem');
-	$o->{printer}{mode} = $o->ask_from_list_([''], _("Which printing system do you want to use?"),
+	$printer->{mode} = $o->ask_from_list_([''], _("Which printing system do you want to use?"),
 						 [ 'CUPS', 'lpr', __("None") ],
 						);
-	$o->{printer}{want} = $o->{printer}{mode} ne 'None';
-	$o->{printer}{want} or $o->{printer}{mode} = undef, return;
+	$printer->{want} = $printer->{mode} ne 'None';
+	$printer->{want} or $printer->{mode} = undef, return;
 	$o->set_help('configurePrinter');
     }
 
-    $o->{printer}{PAPERSIZE} = $o->{lang} eq 'en' ? 'letter' : 'a4';
-    printerdrake::main($o->{printer}, $o, sub { $o->pkg_install(@_) }, sub { install_interactive::upNetwork($o, 'pppAvoided') });
+    $printer->{PAPERSIZE} = $o->{lang} eq 'en' ? 'letter' : 'a4';
+    printerdrake::main($printer, $o, sub { $o->pkg_install(@_) }, sub { install_interactive::upNetwork($o, 'pppAvoided') });
 
-    $o->pkg_install_if_requires_satisfied('xpp', 'kups');
+    $o->pkg_install_if_requires_satisfied('xpp', 'kups') if %{$printer->{configured} || {}} == ();
 }
 
 #------------------------------------------------------------------------------
