@@ -1126,14 +1126,15 @@ Would you like X to start when you reboot?"), 1);
 
 sub autologin {
     my ($prefix, $o, $in, $install) = @_;
+    my $cmd = $prefix ? "chroot $prefix" : "";
+    my @wm = (split (' ', `$cmd /usr/sbin/chksession -l`));
     my @etc_pass_fields = qw(name pw uid gid realname home shell);
     my @users = mapgrep {
 	my %l; @l{@etc_pass_fields} = split ':';
 	$l{uid} > 500, $l{name};
     } cat_("$prefix/etc/passwd");
-    unless (($::auto && $o->{skiptest}) || !@users || $o->{authentication}{NIS} || $ENV{SECURE_LEVEL} > 3) {
-	my $cmd = $prefix ? "chroot $prefix" : "";
-	my @wm = (split (' ', `$cmd /usr/sbin/chksession -l`));
+    if (!($::isStandalone && $0 =~ /Xdrakres/) && !($::auto && $o->{skiptest}) &&
+	@wm && @users && !$o->{authentication}{NIS} && $ENV{SECURE_LEVEL} <= 3) {
 	my %l = getVarsFromSh("$prefix/etc/sysconfig/autologin");
 	$o->{autologin} ||= $l{USER};
 	$in->ask_from_entries_refH(_("Autologin"),
