@@ -439,7 +439,7 @@ sub addToBeDone(&$) {
 
 sub setAuthentication {
     my ($o) = @_;
-    my ($shadow, $md5, $ldap, $nis, $winbind) = @{$o->{authentication} || {}}{qw(shadow md5 LDAP NIS winbind)};
+    my ($shadow, $md5, $ldap, $nis, $winbind, $winpass) = @{$o->{authentication} || {}}{qw(shadow md5 LDAP NIS winbind winpass)};
     my $p = $o->{prefix};
     #- obsoleted always enabled (in /etc/pam.d/system-auth furthermore) #any::enableMD5Shadow($p, $shadow, $md5);
     any::enableShadow($p) if $shadow;
@@ -477,6 +477,11 @@ sub setAuthentication {
         mkdir "$o->{prefix}/var/run/samba", 0755;
 
 	#- defer running smbpassword - no network yet
+	$winbind = $winbind . "%" . $winpass;
+	addToBeDone {
+	    install_steps::upNetwork($o, 'pppAvoided');
+	    run_program::rooted($o->{prefix}, "/usr/bin/smbpasswd", "-j", $domain, "-U", $winbind);
+	} 'configureNetwork';
     }
 }
 
