@@ -161,7 +161,7 @@ The terms and conditions of this License are governed by the Laws of France.
 All disputes on the terms of this license will preferably be settled out of court. As a last 
 resort, the dispute will be referred to the appropriate Courts of Law of Paris - France.
 For any question on this document, please contact MandrakeSoft S.A.  
-")), [ __("Accept"), __("Refuse") ], "Accept") eq "Accept" or $o->exit;
+")), [ __("Accept"), __("Refuse") ], "Refuse") eq "Accept" or $o->exit;
     }
 }
 #------------------------------------------------------------------------------
