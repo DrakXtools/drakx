@@ -430,7 +430,7 @@ sub install2::configMove {
 	my $user = $o->{users}[0]{name};
 	my $confdir = "/home/$user/.kde/share/config";
 	mkdir_p($confdir);
-	cp_af("/usr/share/config/kdeglobals", $confdir);
+	output("$confdir/kdeglobals", cat_("/usr/share/config/kdeglobals"));
 	lang::configure_kdeglobals($o->{locale}, $confdir);
 
         run_program::run('chown', '-R', "$user.$user", "/home/$user/.kde");
