@@ -41,7 +41,7 @@ my (%installSteps, @orderedInstallSteps);
   selectKeyboard     => [ __("Choose your keyboard"), 1, 1, '', "selectInstallClass", 'keyboard' ],
   miscellaneous      => [ __("Security"), 1, 1, '!$::expert', '', 'security' ],
   doPartitionDisks   => [ __("Setup filesystems"), 1, 0, '', "selectInstallClass", 'default' ],
-  formatPartitions   => [ __("Format partitions"), 1, -1, '', "doPartitionDisks", 'default' ],
+  formatPartitions   => [ __("Format partitions"), 1, -1, '$o->{isUpgrade}', "doPartitionDisks", 'default' ],
   choosePackages     => [ __("Choose packages to install"), 1, -2, '!$::expert', "formatPartitions", 'default' ],
   installPackages    => [ __("Install system"), 1, -1, '', ["formatPartitions", "selectInstallClass"], '' ],
   setRootPassword    => [ __("Set root password"), 1, 1, '', "installPackages", 'rootpasswd' ],
