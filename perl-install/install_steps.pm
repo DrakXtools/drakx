@@ -183,8 +183,8 @@ sub doPartitionDisksAfter {
     }
 
     cat_("/proc/mounts") =~ m|(\S+)\s+/tmp/image nfs| &&
-      !grep { $_->{mntpoint} eq "/mnt/nfs" } @{$o->{manualFstab} || []} and
-	push @{$o->{manualFstab}}, { type => "nfs", mntpoint => "/mnt/nfs", device => $1, options => "noauto,ro,nosuid,rsize=8192,wsize=8192" };
+      !grep { $_->{mntpoint} eq "/mnt/nfs" } @{$o->{all_hds}{nfss}} and
+	push @{$o->{all_hds}{nfss}}, { type => 'nfs', mntpoint => "/mnt/nfs", device => $1, options => "noauto,ro,nosuid,rsize=8192,wsize=8192" };
 }
 
 #------------------------------------------------------------------------------

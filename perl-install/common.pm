@@ -8,7 +8,7 @@ use vars qw(@ISA @EXPORT $SECTORSIZE);
 
 @ISA = qw(Exporter);
 # no need to export ``_''
-@EXPORT = qw($SECTORSIZE __ translate untranslate formatXiB removeXiBSuffix formatTime setVirtual makedev unmakedev salt isCdNotEjectable);
+@EXPORT = qw($SECTORSIZE __ translate untranslate formatXiB removeXiBSuffix formatTime setVirtual makedev unmakedev salt);
 
 # perl_checker: RE-EXPORT-ALL
 push @EXPORT, @MDK::Common::EXPORT;
@@ -114,7 +114,7 @@ sub formatTime {
     }
 }
 
-sub isCdNotEjectable { scalar(grep { /ram3/ } cat_("/proc/mounts")) == 0 }
+sub usingRamdisk { scalar(grep { /ram3/ } cat_("/proc/mounts")) }
 
 sub sync { &MDK::Common::System::sync }
 

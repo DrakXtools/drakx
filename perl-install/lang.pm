@@ -487,7 +487,7 @@ sub get_x_fontset {
     my $c = $charsets{$l->[1]} or return;
     if (my $f = $bigfonts{$l->[1]}) {
 	my $dir = "/usr/X11R6/lib/X11/fonts";
-	if (! -e "$dir/$f" && $::isInstall) {
+	if (! -e "$dir/$f" && $::isInstall && common::usingRamdisk()) {
 	    unlink "$dir/$_" foreach values %bigfonts;
 	    install_any::remove_bigseldom_used ();
 	    install_any::getAndSaveFile ("$dir/$f");

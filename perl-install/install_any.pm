@@ -1007,6 +1007,8 @@ sub check_prog {
 	$f;
     return if grep { -x $_ } @l;
 
+    common::usingRamdisk() or log::l("ERROR: check_prog can't find the program $f and we're not using ramdisk"), return;
+
     my ($f_) = map { m|^/| ? $_ : "/usr/bin/$_" } $f;
     remove_bigseldom_used();
     foreach (@bigseldom_used_groups) {

@@ -423,7 +423,7 @@ sub psUsingHdlist {
 
     #- avoid using more than one medium if Cd is not ejectable.
     #- but keep all medium here so that urpmi has the whole set.
-    $method eq 'cdrom' && $medium > 1 && isCdNotEjectable() and return;
+    $method eq 'cdrom' && $medium > 1 && !common::usingRamdisk() and return;
 
     #- extract filename from archive, this take advantage of verifying
     #- the archive too.

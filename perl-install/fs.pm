@@ -62,8 +62,8 @@ sub merge_fstabs {
 	
 	$p->{mntpoint} = $p2->{mntpoint} if delete $p->{unsafeMntpoint};
 
-	$p->{type} = $p2->{type} if $p->{type} eq 'defaults';
-	$p->{options} = $p2->{options};
+	$p->{type} ||= $p2->{type};
+	$p->{options} = $p2->{options} if $p->{type} eq 'defaults';
 	add2hash($p, $p2);
     }
     @l;

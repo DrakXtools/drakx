@@ -537,7 +537,7 @@ sub main {
 	    add2hash($o->{netc}, network::read_resolv_conf($file));
 	}
     }
-    install_any::remove_unused();
+    install_any::remove_unused() if common::usingRamdisk();
 
     #-the main cycle
     my $clicked = 0;
