@@ -349,7 +349,7 @@ sub use_floppy {
 
 sub is_wireless_intf {
     my ($module) = @_;
-    member($module, qw(airo aironet_cs aironet4500_cs airo_cs airport hermes orinoco_cs netwave_cs orinoco ray_cs wavelan_cs wvlan_cs))
+    member($module, qw(airo aironet_cs aironet4500_cs airo_cs airport at76c503 hermes netwave_cs orinoco_cs prism2_usb orinoco ray_cs wavelan_cs wvlan_cs))
 }
 
 1;
