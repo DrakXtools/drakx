@@ -31,6 +31,7 @@ use network::netconnect;
 use network::ethernet;
 use network::tools;
 use network::modem;
+use network::network;
 use network;
 use c;
 use modules;
@@ -172,7 +173,7 @@ update_list();
 
 my ($bbox0, $label_host, $int_state, $button_expert);
 
-my ($lan_button, $wiz_button, $int_button);
+my ($lan_button, $wiz_button, $int_button, $host_button, $button_apply);
 
 $window1->{window}->add(
                         gtkpack_(Gtk2::VBox->new(0,10),
@@ -184,14 +185,28 @@ $window1->{window}->add(
                                                  0, $button_new,
                                                 ),
                                     ),
-                                 0, gtkpack_(Gtk2::HBox->new(1,0),
-                                             0, gtkpack_(Gtk2::HBox->new(0,0),
-                                                         0, Gtk2::Label->new(N("Hostname: ")),
-                                                         0, $label_host = Gtk2::Label->new($hostname),
-                                                        ),
-                                             0, gtksignal_connect(Gtk2::Button->new(N("Configure hostname...")),
-                                                                  clicked => \&configure_hostname),
-                                            ),
+                                 0, gtkpack(Gtk2::HBox->new,
+                                            Gtk2::Label->new(N("Hostname: ")),
+                                            $label_host = Gtk2::Label->new($hostname),
+                                            $host_button = gtksignal_connect(Gtk2::Button->new(N("Configure hostname...")),
+                                                                             clicked => sub {
+                                                                                 sensitive_buttons(0);
+                                                                                 local ($::isWizard, $::Wizard_finished) = (1, 1);
+                                                                                 eval { # For wizcancel
+                                                                                     use Data::Dumper; print Dumper([ $intf, $netc ]);
+                                                                                     configureNetworkNet($in, $netc, $intf, @all_cards);
+                                                                                     use Data::Dumper; print Dumper([ $intf, $netc ]);
+                                                                                     network::sethostname($intf);
+                                                                                     $button_apply->set_sensitive(1);
+                                                                                     update();
+                                                                                 };
+                                                                                 if ($@ =~ /wizcancel/) { } 
+                                                                                 $::WizardWindow->destroy;
+                                                                                 undef $::WizardWindow;
+                                                                                 sensitive_buttons(1);
+                                                                             }
+                                                                            ),
+                                           ),
                                  0, gtkadd(Gtk2::Frame->new(N("Internet access")),
                                            gtkpack_(gtkset_border_width(Gtk2::VBox->new(0,0), 5),
                                                     1, gtkset_border_width(create_packtable({ col_spacings => 5, row_spacings => 5 },
@@ -236,7 +251,7 @@ $window1->{window}->add(
                                  0, $bbox0 = gtkpack(Gtk2::HButtonBox->new,
                                                      gtksignal_connect(Gtk2::Button->new(N("Help")), clicked => sub { 
                                                                            exec("drakhelp Drakxtools-Guide.html/internet-connection.html") unless fork() }),
-                                                     my $button_apply = gtksignal_connect(gtkset_sensitive(Gtk2::Button->new(N("Apply")), 0),
+                                                     $button_apply = gtksignal_connect(gtkset_sensitive(Gtk2::Button->new(N("Apply")), 0),
                                                                                           clicked => \&apply),
                                                      gtksignal_connect(Gtk2::Button->new(N("Cancel")), clicked => \&quit_global),
                                                      gtksignal_connect(Gtk2::Button->new(N("Ok")), clicked => sub {
@@ -268,7 +283,7 @@ $combo1->signal_connect(realize => sub {
 
 sub sensitive_buttons {
     my ($state) = @_;
-    $_->set_sensitive($state) foreach $lan_button, $wiz_button, $int_button;
+    $_->set_sensitive($state) foreach $host_button, $lan_button, $wiz_button, $int_button;
 }
 
 
@@ -396,33 +411,6 @@ sub update2() {
 
 sub quit_global() {
     ugtk2->exit(0);
-}
-
-sub configure_hostname() {
-    my $window = _create_dialog(N("Hostname configuration"), { small => 1 });
-    
-    $window->set_border_width(10);
-    gtkpack($window->vbox,
-            Gtk2::Label->new(N("Hostname configuration")),
-            gtkpack(gtkset_border_width(Gtk2::HBox->new(0, 0), 10),
-                    Gtk2::Label->new(N("Hostname")),
-                    my $entry = Gtk2::Entry->new_with_text($netc->{HOSTNAME}),
-                   ),
-            );
-    gtkpack($window->action_area,
-            gtksignal_connect(Gtk2::Button->new(N("Cancel")),
-                              clicked => sub { $window->destroy; Gtk2->main_quit }),
-            gtksignal_connect(Gtk2::Button->new(N("Ok")),
-                              clicked => sub {
-                                  $netc->{HOSTNAME} = $entry->get_text || "localhost";
-                                  network::sethostname($netc);
-                                  update();
-                                  $window->destroy; Gtk2->main_quit
-                              }),
-           );
-    $window->show_all;
-    $window->run;
-    return;
 }
 
 sub get_intf_status {
