@@ -174,8 +174,8 @@ sub update_app {
 sub get_package {
     my ($executable) = @_;
     my ($rpm_package, $which_app);
-    $which_app = chomp_(`which '$executable'`);
-    $rpm_package = chomp_(`rpm -qf '$which_app' 2>1&`);
+    $which_app = chomp_(`which '$executable' 2> /dev/null`);
+    $rpm_package = chomp_(`rpm -qf '$which_app' 2>&1`);
     $rpm_package;
 }
 
