@@ -683,18 +683,20 @@ sub wait_load_module {
 sub load_module__ask_options {
     my ($in, $module_descr, $parameters) = @_;
 
-    if (@$parameters) {
+    my @parameters = map { [ @$_[0, 1, 2] ] } @$parameters;
+
+    if (@parameters) {
 	$in->ask_from('', 
 		      _("You may now provide its options to module %s.\nNote that any address should be entered with the prefix 0x like '0x123'", $module_descr), 
-		      [ map { { label => $_->[0], help => $_->[1], val => \$_->[2] } } @$parameters ],
+		      [ map { { label => $_->[0] . ($_->[1] ? " ($_->[1])" : ''), help => $_->[2], val => \$_->[3] } } @parameters ],
 		     ) or return;
-	map { if_($_->[2], "$_->[0]=$_->[2]") } @$parameters;
+	[ map { if_($_->[3], "$_->[0]=$_->[3]") } @parameters ];
     } else {
-	split ' ', $in->ask_from_entry('',
+	my $s = $in->ask_from_entry('',
 _("You may now provide options to module %s.
 Options are in format ``name=value name2=value2 ...''.
-For instance, ``io=0x300 irq=7''", $module_descr), _("Module options:"),
-				);
+For instance, ``io=0x300 irq=7''", $module_descr), _("Module options:")) or return;
+	[ split ' ', $s ];
     }
 }
 
@@ -710,7 +712,7 @@ sub load_category__prompt {
 			       [ keys %available_modules ]) or return;
     my $module_descr = $available_modules{$module};
 
-    my @options;
+    my $options;
     require modparm;
     my @parameters = modparm::parameters($module);
     if (@parameters && $in->ask_from_list_('',
@@ -719,13 +721,13 @@ properly, although it normally works fine without. Would you like to specify
 extra options for it or allow the driver to probe your machine for the
 information it needs? Occasionally, probing will hang a computer, but it should
 not cause any damage.", $module_descr), [ __("Autoprobe"), __("Specify options") ], 'Autoprobe') ne 'Autoprobe') {
-	@options = load_module__ask_options($in, $module_descr, \@parameters);
+	$options = load_module__ask_options($in, $module_descr, \@parameters) or return;
     }
     while (1) {
 	eval {
 	    my $w = wait_load_module($in, $category, $module_descr, $module);
 	    log::l("user asked for loading module $module (type $category, desc $module_descr)");
-	    modules::load([ $module, @options ]);
+	    modules::load([ $module, @$options ]);
 	};
 	return $module_descr if !$@;
 
@@ -733,7 +735,7 @@ not cause any damage.", $module_descr), [ __("Autoprobe"), __("Specify options")
 _("Loading module %s failed.
 Do you want to try again with other parameters?", $module_descr), 1) or return;
 
-	@options = load_module__ask_options($in, $module_descr, \@parameters);
+	$options = load_module__ask_options($in, $module_descr, \@parameters) or return;
     }
 }
 
