@@ -9,7 +9,7 @@ for i in LC_ADDRESS LC_COLLATE LC_IDENTIFICATION LC_MEASUREMENT LC_MONETARY LC_N
 done
 
 # lc_ctype for common encoding
-for i in CP1251 ISO-8859-13 ISO-8859-14 ISO-8859-15 ISO-8859-2 ISO-8859-3 ISO-8859-5 ISO-8859-7 ISO-8859-9 ISO-8859-9E KOI8-U KOI8-R ; do
+for i in CP1251 ISO-8859-13 ISO-8859-14 ISO-8859-15 ISO-8859-2 ISO-8859-3 ISO-8859-7 ISO-8859-9 ISO-8859-9E ; do
     f=usr/share/locale/$i/LC_CTYPE
     [ -e /$f ] || { echo missing /$f ; exit 1 ; }
     cp -f /$f $f

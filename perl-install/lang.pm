@@ -233,8 +233,7 @@ my %charsets = (
   "iso-8859-4" => [ "lat4u-16",		undef,		"iso04",
 	"iso8859-4", "775", std_("iso8859-4") ],
   "iso-8859-5" => [ "iso05.f16",	"iso05",	"trivial.trans",
-  	"iso8859-5", "855", 
-	std2("iso8859-5", 10), std2("iso8859-5",  8) ],
+  	"iso8859-5", "855", sub { std("microsoft-cp1251", @_) } ],
 #-#- arabic needs special console driver for text mode [acon]
 #-#- (and gtk support isn't done yet)
   "iso-8859-6" => [ "iso06.f16",	"iso06",	"trivial.trans",
@@ -311,16 +310,16 @@ my %bigfonts = (
 #-######################################################################################
 
 sub list { keys %languages }
-sub lang2text     { $languages{$_[0]} && $languages{$_[0]}[0] }
-sub lang2charset  { $languages{$_[0]} && $languages{$_[0]}[1] }
-sub lang2LANG     { $languages{$_[0]} && $languages{$_[0]}[2] }
-sub lang2LANGUAGE { $languages{$_[0]} && $languages{$_[0]}[3] }
+sub lang2text     { exists $languages{$_[0]} && $languages{$_[0]}[0] }
+sub lang2charset  { exists $languages{$_[0]} && $languages{$_[0]}[1] }
+sub lang2LANG     { exists $languages{$_[0]} && $languages{$_[0]}[2] }
+sub lang2LANGUAGE { exists $languages{$_[0]} && $languages{$_[0]}[3] }
 sub getxim { $xim{$_[0]} }
 
 sub set { 
     my ($lang) = @_;
 
-    if ($lang && $languages{$lang}) {
+    if ($lang && exists $languages{$lang}) {
 	#- use "packdrake -x" that follow symlinks and expand directory.
 	#- it is necessary as there is a lot of symlinks inside locale.cz2,
 	#- using a compressed cpio archive is nighmare to extract all files.
@@ -333,10 +332,7 @@ sub set {
 	    eval {
 		require packdrake;
 		my $packer = new packdrake("$ENV{SHARE_PATH}/locale.cz2", quiet => 1);
-		# "UTF-8" locale directory is always needed
-		$packer->extract_archive("$ENV{SHARE_PATH}/locale", "UTF-8");
-		$packer->extract_archive("$ENV{SHARE_PATH}/locale", $languages{$lang}[2]);
-		$packer->extract_archive("$ENV{SHARE_PATH}/locale", split(":", $languages{$lang}[3]));
+		$packer->extract_archive("$ENV{SHARE_PATH}/locale", lang2LANG($lang));
 	    };
 	}
 
@@ -353,10 +349,10 @@ sub set {
 	$ENV{LC_MEASUREMENT}	= "C";
 	$ENV{LC_IDENTIFICATION}	= "C";
 
-	$ENV{LC_CTYPE}  = $languages{$lang}[2];
-	$ENV{LC_MESSAGES} = $languages{$lang}[2];
-	$ENV{LANG}      = $languages{$lang}[2];
-	$ENV{LANGUAGE}  = $languages{$lang}[3];
+	$ENV{LC_CTYPE}  = lang2LANG($lang);
+	$ENV{LC_MESSAGES} = lang2LANG($lang);
+	$ENV{LANG}      = lang2LANG($lang);
+	$ENV{LANGUAGE}  = lang2LANGUAGE($lang);
 
 	load_mo();
     } else {
@@ -376,19 +372,19 @@ sub langs {
 sub langsLANGUAGE {
     my ($l) = @_;
     my @l = $l->{all} ? list() : langs($l);
-    uniq(map { split ':', $languages{$_}[3] } @l);
+    uniq(map { split ':', lang2LANGUAGE($_) } @l);
 }
 
 sub pack_langs { 
     my ($l) = @_; 
-    my $s = $l->{all} ? 'all' : join ':', uniq(map { $languages{$_}[3] } langs($l));
+    my $s = $l->{all} ? 'all' : join ':', uniq(map { lang2LANGUAGE($_) } langs($l));
     $ENV{RPM_INSTALL_LANG} = $s;
     $s;
 }
 
 sub unpack_langs {
     my ($s) = @_;
-    my @l = uniq(map { split ':', $languages{$_}[3] } split(':', $s));
+    my @l = uniq(map { split ':', lang2LANGUAGE($_) } split(':', $s));
     my @l2 = intersection(\@l, [ keys %languages ]);
     +{ map { $_ => 1 } @l2 };
 }
@@ -416,10 +412,10 @@ sub write {
 
     my $h = {};
     $h->{$_} = $lang foreach qw(LC_COLLATE LC_CTYPE LC_MESSAGES LC_NUMERIC LC_MONETARY LC_TIME);
-    if (my $l = $languages{$lang}) {
-	add2hash $h, { LANG => $l->[2], LANGUAGE => $l->[3] };
+    if ($lang && exists $languages{$lang}) {
+	add2hash $h, { LANG => lang2LANG($lang), LANGUAGE => lang2LANGUAGE($lang) };
 
-	my $c = $charsets{$l->[1] || ''};
+	my $c = $charsets{lang2charset($lang) || ''};
 	if ($c) {
 	    my $p = "$prefix/usr/lib/kbd";
 	    if ($c->[0]) {
@@ -487,14 +483,12 @@ sub console_font_files {
 
 sub load_console_font {
     my ($lang) = @_;
-    my ($charset) = $languages{$lang} && $languages{$lang}[1] ;
-    my ($f, $u, $m) = @{$charsets{$charset} || []};
+    my ($f, $u, $m) = @{$charsets{lang2charset($lang)} || []};
 
     require run_program;
-    run_program::run(if_($ENV{LD_LOADER}, $ENV{LD_LOADER}), 'consolechars', '-v',
-		          ('-f', $f || 'lat0-sun16'),
-		     $u ? ('-u', $u) : (),
-		     $m ? ('-m', $m) : ());
+    run_program::run(if_($ENV{LD_LOADER}, $ENV{LD_LOADER}), 
+		     'consolechars', '-v', '-f', $f || 'lat0-sun16',
+		     if_($u, '-u', $u), if_($m, '-m', $m));
 }
 
 #-sub load_font {
@@ -516,9 +510,9 @@ sub load_console_font {
 sub get_x_fontset {
     my ($lang, $size) = @_;
 
-    my $l = $languages{$lang}  or return;
-    my $c = $charsets{$l->[1]} or return;
-    if (my $f = $bigfonts{$l->[1]}) {
+    my $charset = lang2charset($lang) or return;
+    my $c = $charsets{$charset} or return;
+    if (my $f = $bigfonts{$charset}) {
 	my $dir = "/usr/X11R6/lib/X11/fonts";
 	if (! -e "$dir/$f" && $::isInstall && common::usingRamdisk()) {
 	    unlink "$dir/$_" foreach values %bigfonts;
@@ -533,15 +527,15 @@ sub get_x_fontset {
 
 sub fs_options {
     my ($lang) = @_;
-    my $l = $languages{$lang}  or return;
-    my $c = $charsets{$l->[1]} or return;
+    my $charset = lang2charset($lang) or return;
+    my $c = $charsets{$charset} or return;
     my ($iocharset, $codepage) = @$c[3..4];
     $iocharset, $codepage;
 }
 
 sub charset {
     my ($lang, $prefix) = @_;
-    my $l = $languages{$lang} && $languages{$lang}[2];
+    my $l = lang2LANG($lang);
     foreach (cat_("$prefix/usr/X11R6/lib/X11/locale/locale.alias")) {
 	/$l:\s+.*\.(\S+)/ and return $1;
     }
