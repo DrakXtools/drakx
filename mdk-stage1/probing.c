@@ -121,14 +121,29 @@ char * get_net_intf_description(char * intf_name)
 }
 #endif
 
+static struct pci_module_map_full orphan_devices[50]; /* might be overkill, we only need the driver for now */
+static int orphan_devices_len = 0;
+
+int exists_orphan_device(char *driver) {
+	int i;
+	for (i = 0; i < orphan_devices_len ; i++) {
+		if (!strcmp(orphan_devices[i].module, driver)) {
+			log_message("probing: found orphan device for module %s", driver);
+			return 1;
+		}
+	}
+        log_message("probing: no orphan device for module %s", driver);
+        return 0;
+}
+
 void discovered_device(enum driver_type type,
 		       unsigned short vendor, unsigned short device, unsigned short subvendor, unsigned short subdevice,
 		       const char * description, const char * driver)
 {
+	enum insmod_return failed = INSMOD_FAILED;
 	log_message("PCI: device %04x %04x %04x %04x is \"%s\", driver is %s", vendor, device, subvendor, subdevice, description, driver);
 #ifndef DISABLE_MEDIAS
 	if (type == SCSI_ADAPTERS) {
-		enum insmod_return failed;
 		wait_message("Loading driver for SCSI adapter:\n \n%s", description);
 		failed = my_insmod(driver, SCSI_ADAPTERS, NULL, 1);
 		remove_wait_message();
@@ -139,7 +154,8 @@ void discovered_device(enum driver_type type,
 	if (type == NETWORK_DEVICES) {
 		wait_message("Loading driver for network device:\n \n%s", description);
 		prepare_intf_descr(description);
-		warning_insmod_failed(my_insmod(driver, NETWORK_DEVICES, NULL, 1));
+		failed = my_insmod(driver, NETWORK_DEVICES, NULL, 1);
+		warning_insmod_failed(failed);
 		remove_wait_message();
 		if (intf_descr_for_discover) /* for modules providing more than one net intf */
 			net_discovered_interface(NULL);
@@ -148,8 +164,19 @@ void discovered_device(enum driver_type type,
 #ifdef ENABLE_USB
 	if (type == USB_CONTROLLERS)
                 /* we can't allow additional modules floppy since we need usbkbd for keystrokes of usb keyboards */
-		my_insmod(driver, USB_CONTROLLERS, NULL, 0);
+		failed = my_insmod(driver, USB_CONTROLLERS, NULL, 0);
 #endif
+
+	if (failed != INSMOD_OK) {
+		struct pci_module_map_full *dev = &orphan_devices[orphan_devices_len++];
+		log_message("adding orphan device (%x, %x, %s)", vendor, device, driver);
+		dev->vendor = vendor;
+		dev->device = device;
+		dev->subvendor = subvendor;
+		dev->subdevice = subdevice;
+		dev->name = description;
+		dev->module = driver;
+	}
 }
 
 #ifdef ENABLE_USB
