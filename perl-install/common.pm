@@ -41,14 +41,6 @@ sub N {
 }
 sub N_ { $_[0] }
 
-# translation with context, kde-like 
-sub NC {
-    $::one_message_has_been_translated ||= join(':', (caller(0))[1,2]); #- see ugtk2.pm
-    my $s = shift @_; my $t = translate($s);
-    $t =~ s/_:.*\n//;
-    sprintf_fixutf8 $t, @_;
-}
-
 
 sub salt {
     my ($nb) = @_;
@@ -76,6 +68,9 @@ sub translate_real {
 sub translate {
     my $s = translate_real(@_);
     $::need_utf8_i18n and c::set_tagged_utf8($s);
+
+    #- translation with context, kde-like 
+    $s =~ s/^_:.*\n//;
     $s;
 }
 
