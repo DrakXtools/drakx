@@ -225,7 +225,7 @@ sub lomount_clp {
     log::l("lomount_clp: lomounting $name");
 
     mkdir_p($dir);
-    my $dev = devices::find_free_chloop();
+    my $dev = devices::find_free_loop();
     run_program::run('losetup', '-r', '-e', 'gz', $dev, $clp);
     run_program::run('mount', '-r', $dev, $dir);
 }
@@ -652,8 +652,8 @@ sub install2::startMove {
 	sleep 1;
         log::l("DrakX waves bye-bye");
 
-        open STDOUT, ">/dev/tty10";  #- don't display startkde shit on first console
-        open STDERR, ">/dev/tty10";
+        open STDOUT, ">>/tmp/.kde-errors";  #- don't display startkde shit on first console
+        open STDERR, ">>/tmp/.kde-errors";
         
 	my (undef, undef, $uid, $gid, undef, undef, undef, $home, $shell) = getpwnam($username);
 	$( = $) = "$gid $gid";
