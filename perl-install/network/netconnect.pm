@@ -140,33 +140,7 @@ sub get_subwizard {
          defaultimage => "wiz_drakconnect.png",
          name => N("Network & Internet Configuration"),
          pages => {
-                   install => 
-                   {
-                    if_($::isInstall, no_back => 1),
-                    name => N("Welcome to The Network Configuration Wizard.
-
-We are about to configure your internet/network connection.
-If you don't want to use the auto detection, deselect the checkbox.
-"),
-                    interactive_help_id => 'configureNetwork',
-                    data => [
-                             { text => N("Use auto detection"), val => \$netc->{autodetection}, type => 'bool' },
-                             { text => N("Expert Mode"), val => \$::expert, type => 'bool' },
-                            ],
-                    post => sub {
-                        if ($netc->{autodetection}) {
-                            my $_w = $in->wait_message(N("Network Configuration Wizard"), N("Detecting devices..."));
-                            detect($netc->{autodetect});
-                        }
-                        
-                        $conf{$_} = values %{$netc->{autodetect}{$_}} ? 1 : 0 foreach 'lan';
-                        $conf{$_} = $netc->{autodetect}{$_} ? 1 : 0 foreach qw(adsl cable modem winmodem);
-                        $conf{isdn} = any { $_->{driver} } values %{$netc->{autodetect}{isdn}};
-                        return "connection";
-                    },
-                   },
-
-                   connection => 
+                   welcome => 
                    {
                     pre => sub {
                         if (!$::isInstall) {
