@@ -1,3 +1,128 @@
+2001/08/07  dam's  <damien@mandrakesoft.com>
+
+	* standalone/draknet: corrected label
+
+	* network/netconnect.pm: removed debugging message
+
+	* standalone/net_monitor: nex features
+	added color choice
+	lot of improvments
+
+	* network/isdn.pm: corrected pkgs use -> require
+
+	* my_gtk.pm: added gtkset_relief
+
+	* pixmaps/network.png, pixmaps/draknet_step.png: added
+
+2001/08/07  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* mdk-stage1/tools.c: say that it's a data read error, when we can't load
+	the ramdisk
+
+	* mdk-stage1/Makefile.common, mdk-stage1/bzlib/bzlib.h: don't use system
+	wide bzlib.h but our own provided one
+
+2001/08/07  Pixel  <pixel@mandrakesoft.com>
+
+	* rescue/tree/etc/issue: fix distrib number
+
+	* interactive.pm: adding http feature, mainly for standalone tools
+
+	* standalone/miniserv.pem, standalone/miniserv.pl: Initial revision
+	import
+
+	* standalone/interactive_http/miniserv.pl: add interactive_http
+	Initial revision
+
+	* resize_fat/main.pm: fix
+
+	* partition_table.pm: nicer names for journalised fs
+
+	* Makefile.drakxtools, standalone/interactive_http/miniserv.init,
+	standalone/interactive_http/index.html,
+	standalone/interactive_http/interactive_http.cgi,
+	standalone/interactive_http/miniserv.conf,
+	standalone/interactive_http/miniserv.pam,
+	standalone/interactive_http/miniserv.users, Makefile,
+	standalone/interactive_http/Makefile: add interactive_http
+
+	* interactive_http.pm, standalone/interactive_http.cgi: add
+	interactive_http
+	adding http feature, mainly for standalone tools
+
+	* share/diskdrake.rc: have every journalised in darkred
+
+	* c/stuff.xs.pm: add S_IFIFO
+
+	* standalone/interactive_http/miniserv.pem: Initial revision
+
+2001/08/06  dam's  <damien@mandrakesoft.com>
+
+	* my_gtk.pm: debugging, profile coding, isdn 128 debugging
+	corrected gtkradio : shift instead of pop
+
+	* interactive_gtk.pm, install_steps_gtk.pm: corrected gtkradio : shift
+	instead of pop
+
+	* network/netconnect.pm, network/ethernet.pm, network/isdn.pm: debugging,
+	profile coding, isdn 128 debugging
+
+2001/08/06  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* tools/i386/busybox: try a busybox with better globbing under the SHELL
+
+2001/08/06  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/de.po: Updates to German file by Peer Dunker <peer46@gmx.net>
+
+	* share/po/vi.po: updated Vietnamese file
+
+2001/08/06  Pixel  <pixel@mandrakesoft.com>
+
+	* c/stuff.xs.pm: kernel_arch removed
+
+	* fsedit.pm (@suggestions_mntpoints): remove /root (tx2gc)
+
+	* interactive_gtk.pm, interactive_newt.pm: cleanup, functions already
+	defined in interactive
+
+2001/08/06  yduret
+
+	* tinyfirewall.pm: use MDK::Common;
+	use network::netconnect;
+
+	* standalone/drakgw: use MDK::Common;
+	use network::netconnect; and update functions call from netconnect
+
+2001/08/05  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/eo.po: updated Esperanto file
+
+2001/08/05  Pixel  <pixel@mandrakesoft.com>
+
+	* install_steps_auto_install.pm: switch to gtk install when
+	interactiveSteps is defined
+
+2001/08/05  tkamppeter
+
+	* printer.pm, printerdrake.pm: Automatic installation and start of the
+	desired printer spooler
+
+2001/08/04  Pixel  <pixel@mandrakesoft.com>
+
+	* share/list: add tune2fs enabling switching from ext2 to ext3
+
+	* fs.pm, fsedit.pm, partition_table.pm: add ext3 support
+
+	* diskdrake.pm: add ext3 support
+	(Type): handle lossless switch from ext2 to ext3
+
+	* pkgs.pm: make perl_checker happy
+
+	* c/stuff.xs.pm, c/Makefile.PL: add is_ext3
+
+	* common.pm: moved arch() and alike to MDK::Common::System
+
 2001/08/04  Pixel  <pixel@mandrakesoft.com>
 
 	* install_steps.pm (choosePackages): simplify, fix
