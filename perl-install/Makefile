@@ -183,6 +183,10 @@ endif
 
 	$(MAKE) -C share/po install NAME=libDrakX LOCALEDIR=$(DEST)/usr/share/locale_special
 
+#	ar and fa are disabled as arabic font doesn't work on install 
+#	ga and sl are disabled because too few messages are translated
+	rm -rf $(DEST)/usr/share/locale_special/{ar,fa,ga,sl}
+
 #	echo -e '#!/bin/sh\n\nexec "/usr/bin/sh"' > $(DEST)/usr/bin/runinstall2
 #	chmod a+x $(DEST)/usr/bin/runinstall2
 

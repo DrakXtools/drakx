@@ -2,11 +2,7 @@ include ../../Makefile.config
 
 PMSFILES = $(wildcard $(ALLPMS:%=../../%))
 
-# temporarly don't include those po files
-# (too low translation percentage)
-# ar.po and fa.po are disabled as arabic font doesn't work on install 
-POFILES = $(shell ls *.po|grep -v '\(ar.po\|fa.po\|ga.po\|sl.po\)')
-
+POFILES = $(wildcard *.po)
 MOFILES = $(POFILES:%.po=%.mo)
 LANGS = $(POFILES:%.po=%)
 
