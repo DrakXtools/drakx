@@ -1,5 +1,69 @@
 2001/09/13  dam's  <damien@mandrakesoft.com>
 
+	* pixmaps/wiz_default_up.png, pixmaps/wiz_draknet.png: updated
+
+	* my_gtk.pm: updated
+	addde /usr/share/icons in path for pixmaps search
+	shadow reduced to 5 pixels
+
+	* standalone/draknet, network/isdn.pm: isdn timeout works now.
+
+2001/09/13  Frederic Lepied  <flepied@mandrakesoft.com>
+
+	* share/rpmsrate: added mt-st to ARCHIVING
+
+2001/09/13  François Pons  <fpons@mandrakesoft.com>
+
+	* Xconfigurator_consts.pm: removed ugly Modeline 1024x768 which causes
+	trouble to XFree86 4.1.0.
+
+	* Xconfigurator.pm: fix for missing Xinerama for Matrox cards.
+	fix for Matrox G550 support, now add DRI support.
+	disable any question to user about XF3 if he choose a dual head
+	configuration.
+	disable DRI if Xinerama has been chosen.
+	updated Rage Mobility regexp for bad_card, added bad_card for XF4 as
+	Tseng ET6\d00.
+
+	* install_any.pm: updates 3D category according Matrox G550 and Radeon
+	card.
+
+	* install_steps.pm: synced with Xconfigurator bad_card class of video card
+	to avoid using frame
+	buffer, added ET6\d00 style card which seems to have problem.
+
+2001/09/13  odin
+
+	* share/po/fr.po: updated up to 6648
+	updated fr.po
+
+2001/09/13  Pixel  <pixel@mandrakesoft.com>
+
+	* share/rpmsrate: add krozat
+
+	* any.pm (inspect): use a safer dir when standalone
+
+	* install_steps.pm: extend disable KDE GreetString to
+	ja|ko|zh|ru|th|vi|be|bg
+	do not translate kdm GreetString in ja|ko|zh (what about ru?)
+	in kdmrc GreetString, magic string HOSTNAME replaced by %n
+
+	* diskdrake_interactive.pm: new migration feature for creation of
+	partitions on existing mount points
+
+	* diskdrake.pm: 
+	  - add back shortcuts
+	  - red colored buttons in nfs/smb/removable
+
+	* partition_table.pm: BLKPG_ADD_PARTITION support (aka adding partition on
+	the fly without rebooting on a device with some already mounted
+	partitions)
+
+	* install_steps_interactive.pm (selectKeyboard): don't prompt in newbie
+	mode if >=90, not >90
+
+2001/09/13  dam's  <damien@mandrakesoft.com>
+
 	* my_gtk.pm: shadow reduced to 5 pixels
 
 	* standalone/draknet, network/isdn.pm: isdn timeout works now.
