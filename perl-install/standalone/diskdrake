@@ -94,9 +94,8 @@ if ($type eq 'list-hd') {
                                      exec("drakhelp --id diskdrake") unless fork() });
 } elsif ($type eq 'removable') {
     require diskdrake::removable;
-    $para =~ s|^/dev/||;
     my ($raw_hd) = $para ?
-      first(grep { $para eq $_->{device} } @{$all_hds->{raw_hds}}) || die "unknown removable $para\n" :
+      fs::get::device2part($para, $all_hds->{raw_hds}) || die "unknown removable $para\n" :
       $in->ask_from_listf('', '', \&diskdrake::interactive::format_raw_hd_info, $all_hds->{raw_hds}) or $in->exit(0);
 
     if (!$raw_hd->{mntpoint}) {
