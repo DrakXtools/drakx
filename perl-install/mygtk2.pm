@@ -66,7 +66,7 @@ sub gtkadd {
     my %opts = @_;
     $class =~ s/^Gtk2::(Gdk::)?// or internal_error("gtkadd unknown class $class");
     
-    _gtk('gtkadd', $w, $class, \%opts);
+    _gtk($w, $class, 'gtkadd', \%opts);
 }
 
 
@@ -458,7 +458,7 @@ sub _gtk__MagicWindow {
 	if (!$::WizardWindow) {
 
 	    my $banner;
-	    if (!$::isEmbedded && !$::isInstall) {
+	    if (!$::isEmbedded && !$::isInstall && $::Wizard_title) {
 		$banner = Gtk2::Banner->new($opts->{icon_no_error}, $::Wizard_title) or log::l("ERROR: missing wizard banner");
 	    }
 	    $::WizardTable = gtknew('VBox', if_($banner, children_tight => [ $banner ]));
@@ -481,7 +481,7 @@ sub _gtk__MagicWindow {
 	    %$opts = ();
 	}
 
-	gtkset($::WizardTable, children_loose => [ $sub_child ]);
+	gtkadd($::WizardTable, children_loose => [ $sub_child ]);
 	$w = $::WizardWindow;
     }
     $w;
