@@ -9,9 +9,8 @@ use c;
 
 local $_ = join '', @ARGV;
 
-/-h/ and die "usage: livedrake [--auto] [--testing]\n";
+/-h/ and die "usage: livedrake [--testing]\n";
 
-$::auto = /-auto/;
 $::testing = /-testing/;
 $::isStandalone = 1;
 
@@ -29,20 +28,20 @@ If you don't have it, press Cancel to avoid live upgrade."), 1) or $in->exit(0);
 
 if (-x "$cd_mntpoint/Mandrake/mdkinst/usr/bin/perl-install/live_install") {
     chdir "/$cd_mntpoint/Mandrake/mdkinst/usr/bin/perl-install/";
-    exec "./live_install";
+    $::testing or exec "./live_install";
 }
 
 $in->ask_warn('', _("Unable to start live upgrade !!!\n"));
 $in->exit(1);
 
-sub unlockCdrom(;$) {
+sub unlockCdrom {
     my ($cdrom) = @_;
     $cdrom or cat_("/proc/mounts") =~ m|(/dev/\S+)\s+/mnt/cdrom\s| and $cdrom = $1;
     $cdrom or cat_("/etc/fstab") =~ m|(/dev/\S+)\s+/mnt/cdrom\s| and $cdrom = $1;
     eval { $cdrom and ioctl detect_devices::tryOpen($1), c::CDROM_LOCKDOOR(), 0 };
 }
 
-sub ejectCdrom(;$) {
+sub ejectCdrom {
     my ($cdrom) = @_;
     $cdrom or cat_("/proc/mounts") =~ m|(/dev/\S+)\s+/mnt/cdrom\s| and $cdrom = $1;
     my $f = eval { $cdrom && detect_devices::tryOpen($cdrom) } or return;
