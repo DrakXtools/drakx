@@ -1,3 +1,52 @@
+2004/12/03  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/bn.po, share/po/ms.po, share/po/id.po, share/po/sk.po,
+	share/po/ru.po, share/po/gl.po, share/po/pt_BR.po, share/po/br.po,
+	share/po/hr.po, share/po/tr.po, share/po/mt.po, share/po/be.po,
+	share/po/mn.po, share/po/am.po, share/po/ko.po, share/po/sr.po,
+	share/po/lt.po, share/po/he.po, share/po/cy.po, share/po/ca.po,
+	share/po/ar.po, share/po/ltg.po, share/po/ky.po, share/po/mk.po,
+	share/po/ro.po, share/po/is.po, share/po/af.po, share/po/az.po,
+	share/po/zh_TW.po, share/po/vi.po, share/po/sq.po, share/po/sr@Latn.po,
+	share/po/tl.po, share/po/eo.po, share/po/el.po, share/po/cs.po,
+	share/po/bg.po, share/po/lv.po: rescued some strings
+
+2004/12/03  Pixel  <pixel at mandrakesoft.com>
+
+	* install2.pm: disable kmod, otherwise we get a different behaviour in
+	kernel vs kernel-BOOT
+
+	* Makefile: use the cute "perldoc -l" instead of perl -V:vendorlib which
+	doesn't work when the module hasn't been rebuilt
+
+	* unused/migrate-ugtk2-to-mygtk2.pl, unused/migrate-ugtk2-to-mygtk2.el: be
+	more automatic and less .emacs dependent
+
+	* tools/Makefile: use perldoc -l instead of perl -M + %INC
+
+	* install_steps_gtk.pm: more debug log
+
+	* commands: during install, commands should $::isInstall set (otherwise
+	poor modprobe becomes a fork bomb)
+
+2004/12/02  Pixel  <pixel at mandrakesoft.com>
+
+	* ugtk2.pm: use migrate-ugtk2-to-mygtk2.pl (and i verified the diff)
+
+	* unused/migrate-ugtk2-to-mygtk2.pl: replace "policy => [ horizpolicy,
+	vertpolicy ]" with "h_policy => ..., v_policy => ..."
+	(both defaulting to "automatic")
+	dirty script easing the switch from ugtk2 to mygtk2 (beware!)
+
+	* unused/migrate-ugtk2-to-mygtk2.el: dirty script easing the switch from
+	ugtk2 to mygtk2 (beware!)
+
+	* rescue/make_rescue_img: fix typo and perl_checker compliance
+
+	* mygtk2.pm: replace "policy => [ horizpolicy, vertpolicy ]" with
+	"h_policy => ..., v_policy => ..."
+	(both defaulting to "automatic")
+
 2004/12/02  Pablo Saratxaga  <pablo at mandrakesoft.com>
 
 	* share/po/bn.po, share/po/ms.po, share/po/sk.po, share/po/gl.po,
@@ -42372,7 +42421,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.989 2004/11/30 12:03:00 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.990 2004/12/02 21:17:51 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
