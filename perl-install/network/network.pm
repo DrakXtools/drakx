@@ -351,40 +351,45 @@ xml:readonly:$defaults_dir
         my $gconf = Gnome2::GConf::Client->get_source("xml::$p_defaults_dir", 1);
         my $use_alternate_proxy;
 
+        my $gconf_set = sub {
+            my ($key, $type, $value) = @_;
+            $gconf->set($key, { type => $type, value => $value });
+        };
+
         #- http proxy
         if (my ($user, $password, $host, $port) = $u->{http_proxy} =~ m,^http://(?:([^:\@]+)(?::([^:\@]+))?\@)?([^\:]+)(?::(\d+))?$,) {
             $port ||= 80;
-            $gconf->set_bool("/system/http_proxy/use_http_proxy", 1);
-            $gconf->set_string("/system/http_proxy/host", $host);
-            $gconf->set_int("/system/http_proxy/port", $port);
-            $gconf->set_bool("/system/http_proxy/use_authentication", to_bool($user));
-            $user and $gconf->set_string("/system/http_proxy/authentication_user", $user);
-            $password and $gconf->set_string("/system/http_proxy/authentication_password", $password);
+            $gconf_set->("/system/http_proxy/use_http_proxy", "bool", 1);
+            $gconf_set->("/system/http_proxy/host", "string", $host);
+            $gconf_set->("/system/http_proxy/port", "int", $port);
+            $gconf_set->("/system/http_proxy/use_authentication", "bool", to_bool($user));
+            $user and $gconf_set->("/system/http_proxy/authentication_user", "string", $user);
+            $password and $gconf_set->("/system/http_proxy/authentication_password", "string", $password);
 
             #- https proxy (ssl)
-            $gconf->set_string("/system/proxy/secure_host", $host);
-            $gconf->set_int("/system/proxy/secure_port",  $port);
+            $gconf_set->("/system/proxy/secure_host", "string", $host);
+            $gconf_set->("/system/proxy/secure_port", "int", $port);
             $use_alternate_proxy = 1;
         } else {
-            $gconf->set_bool("/system/http_proxy/use_http_proxy", 0);
+            $gconf_set->("/system/http_proxy/use_http_proxy", "bool", 0);
             #- clear the ssl host so that it isn't used if the manual proxy is activated for ftp
-            $gconf->set_string("/system/proxy/secure_host", "");
+            $gconf_set->("/system/proxy/secure_host", "string", "");
         }
 
         #- ftp proxy
         if (my ($host, $port) = $u->{ftp_proxy} =~ m,^(?:http|ftp)://(?:[^:\@]+(?::[^:\@]+)?\@)?([^\:]+)(?::(\d+))?$,) {
             $port ||= 21;
-            $gconf->set_string("/system/proxy/mode", "manual");
-            $gconf->set_string("/system/proxy/ftp_host", $host);
-            $gconf->set_int("/system/proxy/ftp_port",  $port);
+            $gconf_set->("/system/proxy/mode", "string", "manual");
+            $gconf_set->("/system/proxy/ftp_host", "string", $host);
+            $gconf_set->("/system/proxy/ftp_port",  "int", $port);
             $use_alternate_proxy = 1;
         } else {
             #- clear the ftp host so that it isn't used if the manual proxy is activated for ssl
-            $gconf->set_string("/system/proxy/ftp_host", "");
+            $gconf_set->("/system/proxy/ftp_host", "string", "");
         }
 
         #- set proxy mode to manual if either https or ftp is used
-        $gconf->set_string("/system/proxy/mode", $use_alternate_proxy ? "manual" : "none");
+        $gconf_set->("/system/proxy/mode", "string", $use_alternate_proxy ? "manual" : "none");
 
         #- apply settings in local file
         $gconf->suggest_sync;
