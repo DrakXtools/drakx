@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10.1
-Release: 0.1mdk
+Release: 0.2mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -318,6 +318,22 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Fri Jul 30 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.1-0.2mdk
+- drakbackup (stew):
+  o fixes Anthill #1009 and #1010 (DVD recording, disk quota)
+  o direct-to-tape enahancement
+- drakconnect:
+  o do not restart the network service if ethernet modem
+  o only restart network for ADSL if we use an ethernet modem
+  o fix sagem ADLS modem support (olivier)
+- draksec: sync with msec-0.44
+- draksplash:
+  o do not crash when the image format is unknown
+  o fix preview refresh
+- localedrake: enable to choose input method in advanced mode
+- service_harddrake: do not offer to configure mouse if we've already
+  automatically reconfigure it b/c of 2.4.x vs 2.6.x switch
+
 * Thu Jul 29 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.1-0.1mdk
 - diskdrake: fix Compaq Smart Array support (pixel)
 - drakauth: misc (vincent)
