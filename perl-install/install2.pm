@@ -117,7 +117,7 @@ my %suggestedPartitions = (
 #-the variable $default)
 #-#######################################################################################
 $o = $::o = {
-#    bootloader => { linear => 0, message => 1, keytable => 1, timeout => 5, restricted => 0 },
+#    bootloader => { linear => 0, message => 1, timeout => 5, restricted => 0 },
     autoSCSI   => 0,
     mkbootdisk => 1, #- no mkbootdisk if 0 or undef,   find a floppy with 1
 #-    packages   => [ qw() ],
@@ -269,7 +269,7 @@ sub partitionDisks {
     return if ($o->{isUpgrade});
 
     $::o->{steps}{formatPartitions}{done} = 0;
-    fs::umount_all($o->{fstab}, $o->{prefix}) if $o->{fstab};
+    fs::umount_all($o->{fstab}, $o->{prefix}) if $o->{fstab} && !$::testing;
 
     my $ok = is_empty_array_ref($o->{hds}) ? install_any::getHds($o) : 1;
     my $auto = $ok && !$o->{partitioning}{readonly} &&
@@ -421,18 +421,12 @@ sub main {
 	    $o->{partitioning}{auto_allocate} = 1;
 	} elsif (/--pcmcia/) {
 	    $o->{pcmcia} = shift;
+	} elsif (/--readonly/) {
+	    $o->{partitioning}{readonly} = 1;
 	}
     }
 
-    #-  if this fails, it's okay -- it might help with free space though
-    unlink "/sbin/install" unless $::testing;
-    unlink "/sbin/cardmgr" unless $::testing;
     unlink "/sbin/insmod"  unless $::testing;
-    unlink "/sbin/rmmod"  unless $::testing;
-    unlink "/modules/pcmcia_core.o" unless $::testing;
-    unlink "/modules/i82365.o" unless $::testing;
-    unlink "/modules/tcic.o" unless $::testing;
-    unlink "/modules/ds.o" unless $::testing;
 
     print STDERR "in second stage install\n";
     log::openLog(($::testing || $o->{localInstall}) && 'debug.log');

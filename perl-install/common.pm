@@ -359,11 +359,15 @@ sub typeFromMagic($@) {
     local *F; sysopen F, $f, 0 or return;
 
     my $tmp;
-    foreach (@_) {
-	my ($name, $offset, $signature) = @$_;
-	sysseek(F, $offset, 0) or next;
-	sysread(F, $tmp, length $signature);
-	$tmp eq $signature and return $name;
+  M: foreach (@_) {
+	my ($name, @l) = @$_;
+	while (@l) {
+	    my ($offset, $signature) = splice(@l, 0, 2);
+	    sysseek(F, $offset, 0) or next M;
+	    sysread(F, $tmp, length $signature);
+	    $tmp eq $signature or next M;
+	}
+	return $name;
     }
     undef;
 }

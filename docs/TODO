@@ -1,6 +1,8 @@
 kickstart like
 tolook qw(fstab )
 
+c::XSetInputFocus is done only on map_event. so pb with setuprootpassword (eg)
+
 blank alt-f1 screen on exit
 
 keyboard shortcuts for the setstep stuff
@@ -8,6 +10,8 @@ keyboard shortcuts for the setstep stuff
 test after printer config
 
 upgrade
+
+diskdrake should warn if nb_ide_parts > 63, nb_scsi_parts > 15
 
 propose fb in XFdrake
 
@@ -84,6 +88,12 @@ test smp (is it enough to scan /proc/cpuinfo for multiple /^processor/ lines?)
 remove the nasty wrapping arrow (in help) by patching gtk :(
 
 in ask_from_list, the horizontal scroll is buggy
+
+df is bugged (show bad sizes)
+
+wish: ability to select the type of install when booting of cdrom
+
+use the ability of el torito to handle 2.88MB or more 
 
 use ddcprobe monitor's size info for pnp monitors
 use ddcprobe video card memory size info

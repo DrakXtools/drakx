@@ -367,7 +367,7 @@ sub _ask_from_entry($$@) {
 sub _ask_from_list($$$$) {
     my ($o, $messages, $l, $def) = @_;
     my $list = new Gtk::CList(1);
-    my ($first_time, $starting_word) = (1, '');
+    my ($first_time, $starting_word, $start_reg) = (1, '', "^");
     my (@widgets, $timeout, $curr);
 
     my $leave = sub { $o->{retval} = $l->[$curr]; Gtk->main_quit };
@@ -388,7 +388,10 @@ sub _ask_from_list($$$$) {
 
 	Gtk->timeout_remove($timeout) if $timeout; $timeout = '';
 
-	if ($e->{keyval} >= 0x100) {
+	if ($e->{state} & 4) {
+	    #- control pressed
+	    $start_reg = $start_reg ? '' : "^" if $c eq "s";
+	} elsif ($e->{keyval} >= 0x100) {
 	    &$leave if $c eq "\r" || $c eq "\x8d";
 	    $starting_word = '';
 	} else {
@@ -399,7 +402,7 @@ sub _ask_from_list($$$$) {
 
 	    my $word = quotemeta $starting_word;
 	    my $j; for ($j = 0; $j < @$l; $j++) {
-		 $l->[($j + $curr) % @$l] =~ /^$word/i and last;
+		 $l->[($j + $curr) % @$l] =~ /$start_reg$word/i and last;
 	    }
 	    $j == @$l ?
 	      $starting_word = '' :
@@ -466,62 +469,3 @@ sub _ask_file($$) {
 #-    $w
 #-}
 
-#-sub _ask_from_list($$$$) {
-#-    my ($o, $messages, $l, $def) = @_;
-#-    my $list = new Gtk::List();
-#-    my ($first_time, $starting_word) = (1, '');
-#-    my (@widgets, $timeout);
-#-    $list->signal_connect(select_child => sub {
-#-	  $o->{retval} = $l->[$list->child_position($_[1])];
-#-	  Gtk->main_quit;
-#-    });
-#-    map_index {
-#-	  my ($i) = @_;
-#-	  $def = $i if $_ eq $def;
-#-	  my $w = new Gtk::ListItem($_);
-#-	  my $id = $w->signal_connect(key_press_event => sub {
-#-	       my ($w, $e) = @_;
-#-	       my $c = chr $e->{keyval};
-#-
-#-	       Gtk->timeout_remove($timeout) if $timeout; $timeout = '';
-#-
-#-	       if ($e->{keyval} >= 0x100) {
-#-		     if ($c eq "\r" || $c eq "\x8d") {
-#-			 $list->select_item($i);
-#-		     }
-#-		     $starting_word = '';
-#-	       } else {
-#-		     my $curr = $i + bool($starting_word eq '' || $starting_word eq $c);
-#-		     $starting_word .= $c unless $starting_word eq $c;
-#-
-#-		     my $j; for ($j = 0; $j < @$l; $j++) {
-#-			 $l->[($j + $curr) % @$l] =~ /^$starting_word/i and last;
-#-		     }
-#-		     $j == @$l ?
-#-		       $starting_word = '' :
-#-		       $widgets[($j + $curr) % @$l]->grab_focus;
-#-
-#-		     $w->{timeout} = $timeout = Gtk->timeout_add($forgetTime, sub { $timeout = $starting_word = ''; 0 } );
-#-	       }
-#-	       1;
-#-	  });
-#-	  push @widgets, $w;
-#-    } @$l;
-#-    gtkadd($list, @widgets);
-#-    my $scroll_win = do {
-#-	  if (@$l > 15) {
-#-	      my $win = createScrolledWindow($list);
-#-	      gtkset_usize($win, 200, 280);
-#-	      $list->set_focus_vadjustment($win->get_vadjustment);
-#-	      $list->set_focus_hadjustment($win->get_hadjustment);
-#-	      $win;
-#-	  } else {
-#-	      $list;
-#-	  }
-#-    };
-#-    gtkadd($o->{window},
-#-	     gtkpack($o->create_box_with_title(@$messages),
-#-		     $scroll_win));
-#-    $widgets[$def]->grab_focus;
-#-
-#-}

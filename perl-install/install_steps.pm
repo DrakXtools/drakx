@@ -105,6 +105,27 @@ sub doPartitionDisks($$) {
 }
 
 #------------------------------------------------------------------------------
+
+sub ask_mntpoint_s {
+    my ($o, $fstab) = @_;
+
+    #- TODO: set the mntpoints
+
+    #- assure type is at least ext2
+    (fsedit::get_root($fstab) || {})->{type} = 0x83;
+
+    my %m; foreach (@$fstab) {
+	my $m = $_->{mntpoint} or next;
+
+	$m{$m} and die _("Duplicate mount point %s", $m);
+	$m{$m} = 1;
+
+	#- in case the type does not correspond, force it to ext2
+	$_->{type} = 0x83 if $m =~ m|^/| && !isDos($_) && !isWin($_) 
+    }
+}
+
+
 sub rebootNeeded($) {
     my ($o) = @_;
     log::l("Rebooting...");
@@ -114,11 +135,17 @@ sub rebootNeeded($) {
 sub choosePartitionsToFormat($$) {
     my ($o, $fstab) = @_;
 
-    $_->{mntpoint} = "swap" foreach grep { isSwap($_) } @$fstab;
-    $_->{toFormat} = $_->{mntpoint} && 
-      (fsedit::typeOfPart($_->{device}) != $_->{type} ||
-       $_->{notFormatted} || 
-       $o->{partitioning}{autoformat}) foreach @$fstab;
+    foreach (@$fstab) {
+	$_->{mntpoint} = "swap" if isSwap($_);
+	$_->{mntpoint} or next;
+
+	unless ($_->{toFormat} = $_->{notFormatted} || $o->{partitioning}{autoformat}) {
+	    my $t = fsedit::typeOfPart($_->{device});
+	    $_->{toFormatUnsure} = 
+	      #- if detected dos/win, it's not precise enough to just compare the types (too many of them)
+	      isDos({ type => $t }) || isWin({type => $t}) ? !isDos($_) && !isWin($_) : $t != $_->{type};
+	}
+    }
 }
 
 sub formatPartitions {

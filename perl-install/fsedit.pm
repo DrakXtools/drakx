@@ -33,8 +33,10 @@ my @suggestions_mntpoints = qw(/mnt/dos);
 
 
 my @partitions_signatures = (
-    [ 0x83, 0x438, "\xEF\x53" ],
+    [ 0x83, 0x438, "\x53\xEF" ],
     [ 0x82, 4086, "SWAP-SPACE" ],
+    [ 0xc,  0x1FE, "\x55\xAA", 0x52, "FAT32" ],
+    [ 0x6,  0x1FE, "\x55\xAA", 0, "\xEB\x3C",  0x36, "FAT" ],
 );
 
 sub typeOfPart($) { typeFromMagic(devices::make($_[0]), @partitions_signatures) }
@@ -367,8 +369,8 @@ sub verifyHds {
     if ($readonly && !$ok) {
 	log::l("using /proc/partitions as diskdrake failed :(");
 	foreach my $hd (@$hds) {
+	    partition_table_raw::zero_MBR($hd);
 	    $hd->{primary} = { normal => [ grep { $hd->{device} eq $_->{rootDevice} } @parts ] };
-	    delete $hd->{extended};
 	}
     }
     my $fstab = [ get_fstab(@$hds) ];

@@ -125,28 +125,28 @@ sub ask_mntpoint_s {
     @fstab = grep { !isSwap($_) } @$fstab if @fstab == 0;
     @fstab = @$fstab if @fstab == 0;
     die _("no available partitions") if @fstab == 0;
+
+    my $msg = sub { "$_->{device} " . _("(%dMb)", $_->{size} / 1024 / 2) };
     
     if (@fstab == 1) {
 	$fstab[0]->{mntpoint} = '/';
     } elsif ($::beginner) {
-	my %l; $l{"$_->{device} " . _("(%dMb)", $_->{size} / 1024 / 2)} = $_ foreach @fstab;
+	my %l; $l{&$msg} = $_ foreach @fstab;
 	my $e = $o->ask_from_list('', 
 				  _("Which partition do you want to use as your root partition"), 
 				  [ keys %l ]);
 	(fsedit::get_root($fstab) || {})->{mntpoint} = '';
 	$l{$e}{mntpoint} = '/';
     } else {
-	$o->ask_from_entries_ref('', 
-				 _("Choose the mount points"),
-				 [ map { $_->{device} } @fstab ],
-				 [ map { \$_->{mntpoint} } @fstab ]);
+	$o->ask_from_entries_ref
+	  ('', 
+	   _("Choose the mount points"),
+	   [ map { &$msg } @fstab ],
+	   [ map { +{ val => \$_->{mntpoint}, 
+		      list => [ '', fsedit::suggestions_mntpoint([]) ]
+		    } } @fstab ]);
     }
-    #- assure type is at least ext2
-    (fsedit::get_root($fstab) || {})->{type} = 0x83;
-
-    $_->{mntpoint} && $_->{mntpoint} =~ m|^/| 
-      && !isDos($_) && !isWin($_) 
-	and $_->{type} = 0x83 foreach @$fstab;
+    $o->SUPER::ask_mntpoint_s($fstab);
 }
 
 #------------------------------------------------------------------------------
@@ -165,6 +165,8 @@ sub choosePartitionsToFormat($$) {
     $_->{toFormat} = 1 foreach grep {  $::beginner && isSwap($_) } @$fstab;
 
     return if $::beginner && 0 == grep { ! $_->{toFormat} } @l;
+
+    $_->{toFormat} ||= $_->{toFormatUnsure} foreach @l;
 
     $o->ask_many_from_list_ref('', _("Choose the partitions you want to format"),
 			       [ map { isSwap($_) ? type2name($_->{type}) . " ($_->{device})" : $_->{mntpoint} } @l ],
