@@ -175,6 +175,31 @@ setMouseLive(display, type, emulate3buttons)
   }
 ';
 
+if ($ENV{C_DRAKX}) { print '
+SV *
+dgettext(domainname, msgid)
+   char * domainname
+   char * msgid
+
+   CODE:
+   /* always convert to UTF8, because perl will fail to do it correctly
+    * during install (and it needs to be done for gtk2-perl) - presumably
+    * due to incorrect locales */
+   RETVAL = iconv_(dgettext(domainname, msgid), nl_langinfo(CODESET), "UTF-8");
+   SvUTF8_on(RETVAL);
+
+   OUTPUT:
+   RETVAL
+
+' } else { print '
+
+char *
+dgettext(domainname, msgid)
+   char * domainname
+   char * msgid
+
+' }
+
 print '
 
 int
@@ -239,19 +264,6 @@ char *
 bind_textdomain_codeset(domainname, codeset)
    char * domainname
    char * codeset
-
-SV *
-dgettext(domainname, msgid)
-   char * domainname
-   char * msgid
-
-   CODE:
-   /* always convert to UTF8, because perl will fail to do it correctly during install (in gtk2-perl) */
-   RETVAL = iconv_(dgettext(domainname, msgid), nl_langinfo(CODESET), "UTF-8");
-   SvUTF8_on(RETVAL);
-
-   OUTPUT:
-   RETVAL
 
 int
 KTYP(x)
