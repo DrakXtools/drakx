@@ -151,7 +151,7 @@ sub switch {
     my $alternative = get_alternative($driver);
     if ($alternative) {
 	   my $new_driver = $alternative->[0];
-	   if ($driver eq "unknown") {
+	   if ($new_driver eq "unknown") {
 		  $in->ask_warn(_("No alternative driver"),
 							_("There's no known OSS/ALSA alternative driver for your sound card (%s)",
 							  $device->{description}));
@@ -172,7 +172,6 @@ sub switch {
 	   $in->ask_warn(_("No known driver"), 
 						 _("There's no known driver for your sound card (%s)",
 							  $device->{description}));
-    } elsif (is_listed($driver)) {
     } else {
 	   $in->ask_warn(_("Unkown driver"), 
 							 _("The \"%s\" driver for your sound card is unlisted\n
