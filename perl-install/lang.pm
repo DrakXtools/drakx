@@ -895,6 +895,11 @@ sub write {
     }
     add2hash $h, $xim{$locale_lang};
 
+    #- deactivate translations on console for RTL languages
+    if ($locale_lang =~ /ar|fa|he|ur|yi/) {
+	add2hash $h, { CONSOLE_NOT_LOCALIZED => 'yes' }
+    }
+
     setVarsInSh($prefix . ($user_only ? "$ENV{HOME}/.i18n" : '/etc/sysconfig/i18n'), $h);
 
     eval {
