@@ -24,7 +24,7 @@ my $str = '#!/usr/bin/perl -w
 ';
 
 # first run ? if not read old hw config
-my %previous_config = -f $last_boot_config ? retrieve($last_boot_config) : {};
+my %previous_config = (-f $last_boot_config && -s $last_boot_config) ? retrieve($last_boot_config) : {};
 
 my (%config, $in);
 
