@@ -412,9 +412,9 @@ sub create_pix_text {
     } else {
 	$font and $style->font(Gtk::Gdk::Font->fontset_load($font));
     }
-
+    $fake_darea->set_style($style);
     my ($width, $height, $lines, $widths, $heights) = get_text_coord (
-        $text, $style, $max_width, $max_height, $can_be_greater, $can_be_smaller, $centeredx, $centeredy);
+        $text, $fake_darea, $max_width, $max_height, $can_be_greater, $can_be_smaller, $centeredx, $centeredy);
     my $pix = new Gtk::Gdk::Pixmap($w->window, $width, $height);
 
     if ($backpix) {
@@ -439,23 +439,43 @@ sub create_pix_text {
 
 sub get_text_coord {
 
-    my ($text, $style, $max_width, $max_height, $can_be_greater, $can_be_smaller, $centeredx, $centeredy) = @_;
+    my ($text, $widget4style, $max_width, $max_height, $can_be_greater, $can_be_smaller, $centeredx, $centeredy, $wrap_char) = @_;
 
+    my $wrap_char ||= ' ';
     my $idx = 0;
     my $real_width = 0;
     my $real_height = 0;
     my @lines;
     my @widths;
     my @heights;
-    my $height_elem = $style->font->ascent + $style->font->descent;
+    my $height_elem = $widget4style->style->font->ascent + $widget4style->style->font->descent;
     $heights[0] = 0;
     my $max_width2 = $max_width;
     my $height = $heights[0] = $height_elem;
     my $width = 0;
     my $flag = 1;
-    my @t = split(' ', $text);
-    foreach (@t) {
-	my $l = $style->font->string_width($_ . (!$flag ? " " : ""));
+    my @t = split($wrap_char, $text);
+    my @t2;
+    if ($::isInstall && $::o->{lang} =~ /ja|zh/) {
+	@t = map { $_ . $wrap_char } @t;
+	$wrap_char = '';
+	foreach (@t) {
+	    my @c = split('');
+	    my $i = 0;
+	    my $el = '';
+	    while (1) {
+		$i >= @c and last;
+		$el .= $c[$i];
+		if (ord($c[$i]) >= 128) { $el .= $c[$i+1]; $i++; push @t2, $el; $el = ''}
+		$i++;
+	    }
+	    $el ne '' and push @t2, $el;
+	}
+    } else {
+	@t2 = @t;
+    }
+    foreach (@t2) {
+	my $l = $widget4style->style->font->string_width($_ . (!$flag ? $wrap_char : ''));
 	if ($width + $l > $max_width2 && !$flag) {
 	    $flag = 1;
 	    $height += $height_elem + 1;
@@ -464,7 +484,7 @@ sub get_text_coord {
 	    $width = 0;
 	    $idx++;
 	}
-	$lines[$idx] = $flag ? "$_" : $lines[$idx] . " $_";
+	$lines[$idx] = $flag ? "$_" : $lines[$idx] . $wrap_char . "$_";
 	$width += $l;
 	$flag = 0;
 	$l <= $max_width2 or $max_width2 = $l;
