@@ -17,7 +17,23 @@ sub symlinkf_short {
     if (my $l = readlink $dest) {
 	$dest = $l if $l =~ m!^/!;
     }
+    -d $file and log::l("$file already exists and is a directory! writing in directory may be needed, not overwriting"), return;
     symlinkf($dest, $file);
+}
+
+sub handle_etcfiles {
+    my (@allowed_modes) = @_;
+    #- non-trivial files listed from tools/scan-etc.pl
+    foreach (chomp_(cat_('/image/move/etcfiles'))) {
+        my $mode if 0;
+        m|^# (\S+)| and $mode = $1;
+        m|^/| && member($mode, @allowed_modes) and do {
+            $mode eq 'READ' && !-e $_ and symlinkf_short("/image$_", $_);
+            $mode eq 'OVERWRITE' and system("cp /image$_ $_");  #- need copy contents
+            $mode eq 'DIR' and mkdir_p $_;
+        }
+    }
+
 }
 
 #- run very soon at stage2 start, setup things on tmpfs rw / that
@@ -40,6 +56,9 @@ sub init {
 
     mkdir_p("/etc/$_"), system("cp -R /image/etc/$_/* /etc/$_")
       foreach qw(cups profile.d sysconfig/network-scripts devfs/conf.d);
+
+    #- directories we badly need as non-links because files will be written in
+    handle_etcfiles('DIR');
  
     #- for /etc/sysconfig/networking/ifcfg-lo
     mkdir "/etc/sysconfig/networking";
@@ -53,6 +72,9 @@ sub init {
                  ifplugd);
     symlinkf_short("/image/etc/X11/$_", "/etc/X11/$_")
       foreach qw(encodings.dir app-defaults applnk fs lbxproxy proxymngr rstart wmsession.d xinit.d xinit xkb xserver xsm);
+
+    #- non-trivial files/directories that need be readable, files that will be overwritten
+    handle_etcfiles('READ', 'OVERWRITE');
 
     #- create remaining /etc and /var subdirectories if not already copied or symlinked,
     #- because programs most often won't try to create the missing subdir before trying
