@@ -222,10 +222,6 @@ if ($a_mode) {
     $pixmap->set($t_pixmap, $t_mask);
 }
 
-#$a_h_button->hide() if !(-e "/lib/aurora/Monitors/NewStyle-WsLib");
-#$a_v_button->hide() if !(-e "/lib/aurora/Monitors/Traditional-WsLib");
-#$a_g_button->hide() if !(-e "/lib/aurora/Monitors/Traditional-Gtk+");
-
 $inmain=1;
 main Gtk;
 
@@ -299,9 +295,20 @@ sub updateInit
 sub updateAurora
 {
     if ($a_mode) {
-	symlinkf("/lib/aurora/Monitors/NewStyle-WsLib",    "/etc/aurora/Monitor") if $a_h_button->get_active();
-	symlinkf("/lib/aurora/Monitors/Traditional-WsLib", "/etc/aurora/Monitor") if $a_v_button->get_active();
-	symlinkf("/lib/aurora/Monitors/Traditional-Gtk+",  "/etc/aurora/Monitor") if $a_g_button->get_active();
+	if ($a_h_button->get_active()) {
+	    symlinkf("/lib/aurora/Monitors/NewStyle-WsLib",    "/etc/aurora/Monitor");	    
+	    $in->standalone::pkgs_install(qw(Aurora-Monitor-NewStyle-WsLib)) if !(-e "/lib/aurora/Monitors/NewStyle-WsLib");
+	}
+	
+	if ($a_v_button->get_active()) {
+	    symlinkf("/lib/aurora/Monitors/Traditional-WsLib", "/etc/aurora/Monitor");
+	    $in->standalone::pkgs_install(qw(Aurora-Monitor-Traditional-WsLib)) if !(-e "/lib/aurora/Monitors/Traditional-WsLib");
+	}    
+	
+	if ($a_g_button->get_active()) {
+	    symlinkf("/lib/aurora/Monitors/Traditional-Gtk+",  "/etc/aurora/Monitor");
+	    $in->standalone::pkgs_install(qw(Aurora-Monitor-Traditional-Gtk+)) if !(-e "/lib/aurora/Monitors/Traditional-Gtk+");
+	}
     } else {
 	unlink "/etc/aurora/Monitor";
     }
