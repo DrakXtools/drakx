@@ -33,11 +33,12 @@ iso: build install live_tree_boot clps only_iso
 
 
 build: stage1 xwait runlevel_set
-	sudo ./collect-directories-to-create.pl $(DEST_LIVETREE) > data/directories-to-create
-	sudo find $(DEST_LIVETREE)/etc -type f | perl -pe 's|$(DEST_LIVETREE)||' > data/all-etcfiles
 	$(MAKE) -C ../perl-install mo_files
 
 install: un_live_tree_boot
+	sudo ./collect-directories-to-create.pl $(DEST_LIVETREE) > data/directories-to-create
+	sudo find $(DEST_LIVETREE)/etc -type f | perl -pe 's|$(DEST_LIVETREE)||' > data/all-etcfiles
+
 	sudo cp -f $(STAGE1)/init-move $(DEST_LIVETREE)/sbin/init
 
 	$(MAKE) -C ../perl-install/share/po install NAME=libDrakX DATADIR=$(DEST_LIVETREE)/usr/share
