@@ -28,6 +28,7 @@ void process_cmdline(void);
 int get_param(int i);
 void set_param(int i);
 void unset_param(int i);
+void unset_automatic(void);
 int charstar_to_int(const char * s);
 off_t file_size(const char * path);
 int total_memory(void);

@@ -867,7 +867,7 @@ enum return_type nfs_prepare(void)
 						"and the directory containing the " DISTRIB_NAME " Distribution.",
 						questions, &answers, 40, questions_auto, NULL);
 		if (results != RETURN_OK || streq(answers[0], "")) {
-			unset_param(MODE_AUTOMATIC); /* we are in a fallback mode */
+			unset_automatic(); /* we are in a fallback mode */
 			return nfs_prepare();
 		}
 		
@@ -940,7 +940,7 @@ enum return_type ftp_prepare(void)
 						"and the login/pass if necessary (leave login blank for anonymous). ",
 						questions, &answers, 40, questions_auto, NULL);
 		if (results != RETURN_OK || streq(answers[0], "")) {
-			unset_param(MODE_AUTOMATIC); /* we are in a fallback mode */
+			unset_automatic(); /* we are in a fallback mode */
 			return ftp_prepare();
 		}
 
@@ -1026,7 +1026,7 @@ enum return_type ftp_prepare(void)
 		        if (!use_http_proxy)
 			        ftp_end_data_command(ftp_serv_response);
 		} else {
-			unset_param(MODE_AUTOMATIC); /* we are in a fallback mode */
+			unset_automatic(); /* we are in a fallback mode */
 			return results;
 		}
 
@@ -1081,7 +1081,7 @@ enum return_type http_prepare(void)
 						"and the directory containing the " DISTRIB_NAME " Distribution.",
 						questions, &answers, 40, questions_auto, NULL);
 		if (results != RETURN_OK || streq(answers[0], "")) {
-			unset_param(MODE_AUTOMATIC); /* we are in a fallback mode */
+			unset_automatic(); /* we are in a fallback mode */
 			return http_prepare();
 		}
 
@@ -1107,7 +1107,7 @@ enum return_type http_prepare(void)
 		log_message("HTTP: size of download %d bytes", size);
 		
 		if (load_clp_fd(fd, size) != RETURN_OK) {
-			unset_param(MODE_AUTOMATIC); /* we are in a fallback mode */
+			unset_automatic(); /* we are in a fallback mode */
 			return RETURN_ERROR;
                 }
 

@@ -114,7 +114,7 @@ enum return_type ask_from_list_auto(char *msg, char ** elems, char ** choice, ch
 			elems++;
 			elems_auto++;
 		}
-		unset_param(MODE_AUTOMATIC); /* we are in a fallback mode */
+		unset_automatic(); /* we are in a fallback mode */
 		return ask_from_list(msg, sav_elems, choice);
 	}
 }
@@ -135,7 +135,7 @@ enum return_type ask_from_list_comments_auto(char *msg, char ** elems, char ** e
 			elems++;
 			elems_auto++;
 		}
-		unset_param(MODE_AUTOMATIC); /* we are in a fallback mode */
+		unset_automatic(); /* we are in a fallback mode */
 		return ask_from_list_comments(msg, sav_elems, elems_comments, choice);
 	}
 }

@@ -187,6 +187,12 @@ void unset_param(int i)
 	stage1_mode &= ~i;
 }
 
+void unset_automatic(void)
+{
+	log_message("unsetting automatic");
+	unset_param(MODE_AUTOMATIC);
+}
+
 // warning, many things rely on the fact that:
 // - when failing it returns 0
 // - it stops on first non-digit char

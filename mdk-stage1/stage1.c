@@ -84,8 +84,7 @@ void stg1_error_message(char *msg, ...)
 {
 	va_list args;
 	va_start(args, msg);
-	log_message("unsetting automatic");
-	unset_param(MODE_AUTOMATIC);
+	unset_automatic();
 	verror_message(msg, args);
 	va_end(args);
 }
@@ -94,8 +93,7 @@ void stg1_fatal_message(char *msg, ...)
 {
 	va_list args;
 	va_start(args, msg);
-	log_message("unsetting automatic");
-	unset_param(MODE_AUTOMATIC);
+	unset_automatic();
 	verror_message(msg, args);
 	va_end(args);
         exit(1);

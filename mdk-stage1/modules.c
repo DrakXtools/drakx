@@ -103,7 +103,7 @@ static enum return_type ensure_additional_modules_available(void)
                 }
                 
                 if (IS_AUTOMATIC) {
-                        unset_param(MODE_AUTOMATIC);
+                        unset_automatic();
                         automatic = 1;
                 }
           
@@ -502,7 +502,7 @@ enum return_type ask_insmod(enum driver_type type)
 	enum return_type results;
 	char * choice;
 
-	unset_param(MODE_AUTOMATIC); /* we are in a fallback mode */
+	unset_automatic(); /* we are in a fallback mode */
 
 	if (type == SCSI_ADAPTERS)
 		mytype = "SCSI";

@@ -83,7 +83,7 @@ static enum return_type try_with_device(char * dev_name, char * dev_model)
 	if (mount_that_cd_device(dev_name) == -1) {
 		enum return_type results;
 		char msg[500];
-		unset_param(MODE_AUTOMATIC); /* we are in a fallback mode */
+		unset_automatic(); /* we are in a fallback mode */
 		remove_wait_message();
 
 		snprintf(msg, sizeof(msg), "I can't access a " DISTRIB_NAME " Installation disc in your CDROM drive (%s).\nRetry?", dev_model);
@@ -153,7 +153,7 @@ enum return_type cdrom_prepare(void)
 		if ((i = try_automatic(medias, medias_models)) != -1)
 			return do_with_device(medias[i], medias_models[i]);
 
-		unset_param(MODE_AUTOMATIC);
+		unset_automatic();
 	} else
 		my_insmod("sr_mod", ANY_DRIVER_TYPE, NULL, 0);
 
