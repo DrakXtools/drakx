@@ -471,7 +471,7 @@ int mandrake_move_post(void)
 
        
 live_tree_ok:
-        if (scall(!(f = fopen(IMAGE_LOCATION_REAL "/move/symlinks", "rb")), "fopen"))
+        if (scall(!(f = fopen(IMAGE_LOCATION_REAL "/move/symlinks", "rb")), "fopen[" IMAGE_LOCATION_REAL "/move/symlinks]"))
                 return RETURN_ERROR;
         while (fgets(buf, sizeof(buf), f)) {
                 char oldpath[500], newpath[500];
