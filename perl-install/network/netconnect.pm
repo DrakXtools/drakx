@@ -316,19 +316,7 @@ sub real_main {
                         $handle_multiple_cnx->();
                     },
                    },
-                   
-                   
-                   # KILLME?: no longer called and deprecated fonction calls :-(
-                   #go_ethernet => 
-                   #{
-                   # pre => sub {
-                   #     conf_network_card($netc, $intf, $type, $ipadr, $netadr) or return;
-                   #     $netc->{NET_INTERFACE} = $netc->{NET_DEVICE};
-                   #     configureNetwork($netc, $intf, $first_time) or return; 
-                   # },
-                   #},
 
-                   
                    isdn =>
                    {
                     pre=> sub {
@@ -1039,30 +1027,6 @@ See iwpriv(8) man page for further information."),
                         # untranslate parameters
                         $ethntf->{WIRELESS_MODE} = $wireless_mode{$ethntf->{WIRELESS_MODE}};
                         return "static_hostname";
-                    },
-                   },
-                   
-                   conf_network_card => 
-                   {
-                    pre => sub {
-                        #-type =static or dhcp
-                        modules::interactive::load_category($in, $modules_conf, 'network/main|gigabit|usb', !$::expert, 1);
-                        @all_cards = network::ethernet::get_eth_cards($modules_conf) or 
-                          # FIXME: fix this
-                          $in->ask_warn(N("Error"), N("No ethernet network adapter has been detected on your system.
-I cannot set up this connection type.")), return;
-                        
-                                         },
-                    name => N("Choose the network interface") . "\n\n" .
-                    N("Please choose which network adapter you want to use to connect to Internet."),
-                    data => [ { val => \$interface, type => "list", list => \@all_cards, } ],
-                    format => sub { my ($e) = @_; $e->[0] . ($e->[1] ? " (using module $e->[1])" : "") },
-                    
-                    post => sub {
-                        network::ethernet::write_ether_conf();   #- FIXME: perl_checker is right, something's missing here
-                        $modules_conf->write if $::isStandalone; #- FIXME: already done in network::ethernet::write_ether_conf()
-                        my $_device = network::ethernet::conf_network_card_backend($netc, $intf, $type, $interface->[0], $ipadr, $netadr);
-                        return "lan";
                     },
                    },
                    
