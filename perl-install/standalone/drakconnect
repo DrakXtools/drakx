@@ -197,8 +197,9 @@ $window1->{window}->add(
                                                                                                 clicked => sub { $dialog->destroy }),
                                                                               gtksignal_connect(Gtk2::Button->new(N("Ok")), clicked => sub {
                                                                                                     #warn if already existing
-
-                                                                                                    network::netconnect::add_profile($netcnx, $entry_dialog->get_text);
+                                                                                                    my $prof = $entry_dialog->get_text;
+                                                                                                    $prof =~ s/ /_/g;
+                                                                                                    network::netconnect::add_profile($netcnx, $prof);
                                                                                                     update_profiles();
                                                                                                     $dialog->destroy;
                                                                                                 }),
