@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10.2
-Release: 0.4mdk
+Release: 0.5mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -347,6 +347,13 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Fri Nov 26 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.2-0.5mdk
+- diskdrake: handle common geometry XXX/240/63 is quite common thus
+  fixing yet another infamous "XP doesn't boot" (though it should
+  already be fixed via EDD) (pixel)
+- XFdrake: don't write X config when there is none (otherwise we write
+  a partial and broken X config)
+
 * Thu Nov 25 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.2-0.4mdk
 - diskdrake: more intelligent sort of fstab to handle loopback files
   or bind directory (pixel, bug anthil #1198)
