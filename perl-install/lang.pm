@@ -570,50 +570,50 @@ sub get_ims() { keys %gtkqt_im }
            
 #- ENC is used by some versions or rxvt
 my %xim = (
-'ja_JP' => {
-ENC => 'eucj',
-},
-'ja_JP.UTF-8' => {
-ENC => 'utf8',
-},
-'ko_KR' => {
-ENC => 'kr',
-},
-'ko_KR.UTF-8' => {
-ENC => 'utf8',
-},
-'zh_TW' => { 
-ENC => 'big5',
-},
-'zh_TW.UTF-8' => {
-ENC => 'utf8',
-},
-'zh_CN' => {
-ENC => 'gb',
-},
-'zh_CN.UTF-8' => {
-ENC => 'utf8',
-},
-'zh_HK' => {
-ENC => 'big5',
-},
-'zh_HK.UTF-8' => {
-ENC => 'utf8',
-},
-'zh_SG' => {
-ENC => 'gb',
-},
-'zh_SG.UTF-8' => {
-ENC => 'utf8',
-},
-#-XFree86 has an internal XIM for Thai that enables syntax checking etc.
-#-'Passthroug' is no check at all, 'BasicCheck' accepts bad sequences
-#-and convert them to right ones, 'Strict' refuses bad sequences
-'th_TH' => {
-XIM_PROGRAM => '/bin/true', #- it's an internal module
-XMODIFIERS => '"@im=BasicCheck"',
-},
-);
+           'ja_JP' => {
+                       ENC => 'eucj',
+                      },
+           'ja_JP.UTF-8' => {
+                             ENC => 'utf8',
+                            },
+           'ko_KR' => {
+                       ENC => 'kr',
+                      },
+           'ko_KR.UTF-8' => {
+                             ENC => 'utf8',
+                            },
+           'zh_TW' => { 
+                       ENC => 'big5',
+                      },
+           'zh_TW.UTF-8' => {
+                             ENC => 'utf8',
+                            },
+           'zh_CN' => {
+                       ENC => 'gb',
+                      },
+           'zh_CN.UTF-8' => {
+                             ENC => 'utf8',
+                            },
+           'zh_HK' => {
+                       ENC => 'big5',
+                      },
+           'zh_HK.UTF-8' => {
+                             ENC => 'utf8',
+                            },
+           'zh_SG' => {
+                       ENC => 'gb',
+                      },
+           'zh_SG.UTF-8' => {
+                             ENC => 'utf8',
+                            },
+           #-XFree86 has an internal XIM for Thai that enables syntax checking etc.
+           #-'Passthroug' is no check at all, 'BasicCheck' accepts bad sequences
+           #-and convert them to right ones, 'Strict' refuses bad sequences
+           'th_TH' => {
+                       XIM_PROGRAM => '/bin/true', #- it's an internal module
+                       XMODIFIERS => '"@im=BasicCheck"',
+                      },
+          );
 
 my %default_im;
 
@@ -1041,10 +1041,10 @@ sub write {
     }
 
     #- deactivate translations on console for RTL languages
-    if (member($locale->{lang}}, qw(ar bn fa he hi ko ur yi zh_TW zh_CN)) {
+    if (member($locale->{lang}, qw(ar bn fa he hi ko ur yi zh_TW zh_CN))) {
         #- CONSOLE_NOT_LOCALIZED if defined to yes, disables translations on console
         #-	it is needed for languages not supported by the linux console
-        add2hash $h, { CONSOLE_NOT_LOCALIZED => 'yes' }
+        add2hash($h, { CONSOLE_NOT_LOCALIZED => 'yes' });
     }
 
     setVarsInSh($prefix . ($b_user_only ? "$ENV{HOME}/.i18n" : '/etc/sysconfig/i18n'), $h);
