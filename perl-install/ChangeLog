@@ -1,3 +1,197 @@
+2001/09/12  dam's  <damien@mandrakesoft.com>
+
+	* my_gtk.pm: corrected shadow handling
+	no shadow if liveupdate
+	table undef corrected
+	removed shadows if standalone
+
+	* standalone/drakgw, standalone/draknet: corrected wizard mode in newt
+	mode
+
+	* mouse.pm: removed debug code
+
+	* network/netconnect.pm: corrected splash in non X mode
+
+2001/09/12  daouda
+
+	* standalone/drakbug_report: add Mandrake release section
+
+2001/09/12  François Pons  <fpons@mandrakesoft.com>
+
+	* live_install2: fix when switching perl version.
+
+	* live_install: use system perl instead.
+
+2001/09/12  kjx
+
+	* share/po/zh_CN.po: revison
+
+2001/09/12  Pixel  <pixel@mandrakesoft.com>
+
+	* docs/README: explain how to get the boot kernels
+
+	* install_steps_gtk.pm (choosePackagesTree): translate the categories
+
+	* standalone/drakbug_report: cleanup
+
+	* bootloader.pm: allow grub even for more than 800MB
+
+2001/09/11  dam's  <damien@mandrakesoft.com>
+
+	* network/netconnect.pm: removed useless print
+	don't detect ethx if no autodetection.
+	implement smarter checkboxes
+
+	* mouse.pm: test updated
+	mouse test worked
+
+	* network/ethernet.pm: don't detect ethx if no autodetection.
+	implement smarter checkboxes
+
+	* pixmaps/arrow_down.xpm: pixmap corrected
+	new arrows
+
+	* pixmaps/arrow_up.xpm: new arrows
+
+	* share/rpmsrate: added ibod
+	added isdn-light
+
+	* interactive_gtk.pm, my_gtk.pm: fear the shaped windows...
+
+2001/09/11  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* help.pm: small fix
+
+	* share/po/fr.po, share/po/de.po, share/po/DrakX.pot, share/po/hu.po,
+	share/po/it.po: updated Hungarian file;
+	updated pot file
+
+2001/09/11  Pixel  <pixel@mandrakesoft.com>
+
+	* Makefile (tar-drakxtools): remove the building of "help" for drakxtools
+
+	* bootloader.pm: for lilo, do not have table=/dev/xxx if the device is not
+	a primary
+	partition (otherwise lilo dies)
+
+2001/09/10  dam's  <damien@mandrakesoft.com>
+
+	* network/modem.pm, network/ethernet.pm: detect_devices
+
+	* standalone/net_monitor, network/network.pm: removed timeout:1 in
+	resolv.conf, modified timeout scanning in draknet/net_monitor
+
+	* install_gtk.pm, install_steps_gtk.pm: mouse test moved
+
+	* mouse.pm: test_mouse moved
+
+	* my_gtk.pm: added border
+	window decorations
+	no set_events if embedded
+
+	* standalone/draknet: removed timeout:1 in resolv.conf, modified timeout
+	scanning in draknet/net_monitor
+	debug
+
+	* standalone/mousedrake: don't fork the code
+
+	* network/adsl.pm: debug
+	debug
+
+2001/09/10  François Pons  <fpons@mandrakesoft.com>
+
+	* install_any.pm: updated g_auto_install() for newer printerdrake
+	interface.
+
+	* modules.pm, detect_devices.pm: moved modules::get_pcmcia_devices into
+	detect_devices::pcmcia_probe.
+
+	* mdk-stage1/init-data/msgboot-blank.img.bz2: initial release for
+	blank.img floppy image.
+
+	* install_steps_interactive.pm, mouse.pm: added hid type usb mouse
+	support.
+
+	* Xconfigurator_consts.pm: added some more ModeLine (1024x768 @ 97.6 Hz,
+	1024x480 but not automatically used).
+
+2001/09/10  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* share/rpmsrate: plop
+	some adjustements in Games section
+
+2001/09/10  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/DrakX.pot, share/po/de.po: updated German file; added choice of
+	various quotes in help_xml2pm.pl
+	Updated pot file;
+	removed translations that are too low on percentage.
+
+	* share/po/zh_TW.po: updated Chinese file
+
+	* share/po/ko.po: updated Korean file
+	Updated pot file;
+	removed translations that are too low on percentage.
+
+	* share/po/be.po, share/po/sp.po, share/po/zh_CN.po, share/po/pt.po,
+	share/po/es.po, share/po/fr.po, share/po/bg.po, share/po/ga.po,
+	share/po/sr.po, share/po/et.po, share/po/tr.po, share/po/eu.po,
+	share/po/az.po, share/po/ru.po, share/po/pt_BR.po, share/po/hr.po,
+	share/po/cy.po, share/po/nl.po, share/po/ja.po, share/po/wa.po,
+	share/po/sv.po, share/po/is.po, share/po/hu.po, share/po/it.po,
+	share/po/id.po, share/po/pl.po, share/po/no.po, share/po/fi.po,
+	share/po/th.po, share/po/el.po, share/po/sk.po, share/po/lt.po,
+	share/po/ar.po, share/po/sl.po, share/po/vi.po, share/po/br.po,
+	share/po/ca.po, share/po/gl.po, share/po/lv.po, share/po/uk.po,
+	share/po/eo.po, share/po/ro.po, share/po/bs.po, share/po/da.po,
+	share/po/cs.po, share/po/af.po: Updated pot file;
+	removed translations that are too low on percentage.
+
+	* share/po/help_xml2pm.pl: updated German file; added choice of various
+	quotes in help_xml2pm.pl
+
+2001/09/10  Pixel  <pixel@mandrakesoft.com>
+
+	* interactive_gtk.pm, my_gtk.pm: 
+	  - make diskdrake work in embedded mode
+	  - $my_gtk::pop_it used where it should
+
+	* detect_devices.pm: fix ide-scsi appearing 2 times when standalone
+	because both in /proc/ide
+	and /proc/scsi/scsi
+
+	* share/po/help_xml2pm.pl: s/my/our/ for $i18ned_... vars
+	  - skip directories missing drakx-help.xml
+	  - convert to the right charset (taken from $lang.po)
+	  - rename help-*.po by help-*.pot
+	  - fix typo in script removing $lang.po translations to favour
+	help-*.pot
+
+	* diskdrake.pm: 
+	  - make diskdrake work in embedded mode
+	  - $my_gtk::pop_it used where it should
+	fix Umount and Mount when i18ned for nfs/smb
+	don't display Wizard if wizard done before DrakX
+
+	* share/po/Makefile, share/po/.cvsignore: 
+	  - rename help-*.po by help-*.pot
+	  - fix typo in script removing $lang.po translations to favour
+	help-*.pot
+
+2001/09/10  siegel
+
+	* share/po/de.po: updates
+
+2001/09/10  Till Kamppeter <till@mandrakesoft.com>
+
+	* printer.pm: Copying of PPD file when moving a CUPS (non-Foomatic) queue
+	modified to not get
+	interactive when overwriting a file.
+	Comment put into non-Foomatic CUPS PPD files in /etc/cups/ppd/ to be
+	able to
+	  identify which PPD from /usr/share/cups/model was used (for
+	auto-install).
+
 2001/09/10  Pablo Saratxaga <pablo@mandrakesoft.com>
 
 	* share/po/be.po, share/po/sp.po, share/po/zh_CN.po, share/po/pt.po,
