@@ -562,7 +562,7 @@ sub update_userkderc($$$) {
 		if (/^\s*(\w*)=/ && $tosubst{lc($1)}) {
 		    delete $tosubst{lc($1)};
 		} else {
-		    ($i > 1 && /^\s*\[/ && join '', values %tosubst). $_;
+		    ($i > 1 && /^\s*\[/ && join '', map { delete $tosubst{$_} } keys %tosubst). $_;
 		}
 	    } else {
 		$_;
