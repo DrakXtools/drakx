@@ -574,6 +574,43 @@ our %adsl_data = (
                    method => 'dhcp',
                   },
 
+                  N("Norway") . "|Bluecom" =>
+                    {
+                        method => 'dhcp',
+                    },
+
+                  N("Norway") . "|Firstmile" =>
+                    {
+                        method => 'dhcp',
+                    },
+
+                  N("Norway") . "|NextGenTel" =>
+                    {
+                        method => 'dhcp',
+                    },
+
+                  N("Norway") . "|SSC" =>
+                    {
+                        method => 'dhcp',
+                    },
+
+                  N("Norway") . "|Tele2" =>
+                    {
+                        method => 'dhcp',
+                    },
+
+                  N("Norway") . "|Telenor ADSL" =>
+                    {
+                        method => 'PPPoE',
+                    },
+
+                  N("Norway") . "|Tiscali" =>
+                    {
+                        vpi => 8,
+                        vci => 35,
+                        method => 'dhcp',
+                    },
+
                   N("Poland") . "|Telekomunikacja Polska (TPSA/neostrada)" =>
                   {
                    vpi => 0,
