@@ -17,7 +17,7 @@ sub detect {
     my %l = (
              isdn => sub {
                  require network::isdn;
-                 $auto_detect->{isdn} = network::isdn::isdn_detect_backend();
+                 $auto_detect->{isdn} = network::isdn::detect_backend();
              },
              lan => sub { # ethernet
                  modules::load_category('network/main|gigabit|usb');
@@ -304,7 +304,7 @@ sub real_main {
                             ],
                             },
                     post => sub {
-                        network::isdn::isdn_write_config($isdn, $netc); # or return 'isdn_protocol';
+                        network::isdn::write_config($isdn, $netc); # or return 'isdn_protocol';
                         $netc->{$_} = 'ippp0' foreach 'NET_DEVICE', 'NET_INTERFACE';
                         # return "static_hostname";
                         $handle_multiple_cnx->();
@@ -347,7 +347,7 @@ sub real_main {
                             detect($netc->{autodetect}, 'modem');
                             $netc->{isdntype} = 'isdn_external';
                             $netcnx->{isdn_external}{device} = network::modem::first_modem($netc);
-                            network::isdn::isdn_read_config($netcnx->{isdn_external});
+                            network::isdn::read_config($netcnx->{isdn_external});
                             $netcnx->{isdn_external}{special_command} = 'AT&F&O2B40';
                             require network::modem;
                             $modem = $netcnx->{isdn_external};
@@ -363,7 +363,7 @@ sub real_main {
                             $isdn->{description} =~ s/\|/ -- /;
                             
                         }
-                        network::isdn::isdn_read_config($netcnx->{isdn_internal});
+                        network::isdn::read_config($netcnx->{isdn_internal});
                         return "isdn_protocol";
                     },
                    },
@@ -372,7 +372,7 @@ sub real_main {
                    isdn_ask =>
                    {
                     pre => sub {
-                        %isdn_cards = network::isdn::isdn_get_cards();
+                        %isdn_cards = network::isdn::get_cards();
                     },
                     name => N("Select a device !"),
                     data => sub { [ { label => N("Net Device"), val => \$isdn_name, type => 'list', separator => '|', list => [ keys %isdn_cards ], allow_empty_list => 1 } ] },
@@ -406,7 +406,7 @@ If you have a PCMCIA card, you have to know the \"irq\" and \"io\" of your card.
                         $e = $in->ask_from_listf(N("ISDN Configuration"),
                                                  N("Which of the following is your ISDN card?"),
                                                  sub { $_[0]{description} },
-                                                 [ network::isdn::isdn_get_cards_by_type($isdn->{card_type}) ]) or goto($isdn->{card_type} =~ /usb|pci/ ? 'isdn_ask_step_1' : 'isdn_ask_step_1b');
+                                                 [ network::isdn::get_cards_by_type($isdn->{card_type}) ]) or goto($isdn->{card_type} =~ /usb|pci/ ? 'isdn_ask_step_1' : 'isdn_ask_step_1b');
                         $e->{$_} and $isdn->{$_} = $e->{$_} foreach qw(driver type mem io io0 io1 irq firmware);
 
                         },

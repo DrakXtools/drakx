@@ -14,17 +14,16 @@ use MDK::Common::File;
 
 
 @ISA = qw(Exporter);
-@EXPORT = qw(get_info_providers_backend isdn_detect_backend isdn_get_cards isdn_read_config isdn_write_config isdn_write_config_backend read_providers_backend);
 
 
-sub isdn_write_config {
+sub write_config {
     my ($isdn, $netc) = @_;
     $in->do_pkgs->install('isdn4net', if_($isdn->{speed} =~ /128/, 'ibod'), 'isdn4k-utils');
-    isdn_write_config_backend($isdn, $netc);
+    write_config_backend($isdn, $netc);
     1;
 }
 
-sub isdn_write_config_backend {
+sub write_config_backend {
     my ($isdn, $netc, $o_netcnx) = @_;
     defined $o_netcnx and $netc->{isdntype} = $o_netcnx->{type};
 
@@ -77,7 +76,7 @@ modprobe $isdn->{driver}", if_($isdn->{type}, " type=$isdn->{type}"),
     1;
 }
 
-sub isdn_read_config {
+sub read_config {
     my ($isdn) = @_;
     
     my %match = (I4L_USERNAME => 'login',
@@ -124,7 +123,7 @@ sub get_info_providers_backend {
 sub read_providers_backend() { map { /(.*?)=>/ } catMaybeCompressed($file) }
 
 
-sub isdn_detect_backend() {
+sub detect_backend() {
     my @isdn;
     require detect_devices;
      each_index {
@@ -144,7 +143,7 @@ sub isdn_detect_backend() {
     \@isdn;
 }
 
-sub isdn_get_cards_by_type {
+sub get_cards_by_type {
     my ($isdn_type) = @_;
     grep { $_->{card} eq $isdn_type } @isdndata;
 }
