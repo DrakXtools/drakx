@@ -79,7 +79,7 @@ sub test {
 		local $_;
 		while (<$F>) {
 		    /reporting a problem/ and last;
-		    $warn_error->(join(@msg, $_));
+		    $warn_error->(join('', @msg, $_));
 		    return 0;
 		}
 	    }
