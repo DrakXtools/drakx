@@ -242,7 +242,7 @@ sub setAutologin {
   if ($user) {
       local *F;
       open F, ">$prefix/etc/sysconfig/desktop" or die "Can't open $!";
-      print F uc($desktop);
+      print F uc($desktop) . "\n";
       close F;
   }
   setVarsInSh("$prefix/etc/sysconfig/autologin",

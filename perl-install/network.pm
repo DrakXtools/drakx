@@ -265,6 +265,7 @@ sub configureNetwork {
     #-	      my $wait = $o->wait_message(_("Hostname"), _("Determining host name and domain..."));
     #-	      network::guessHostname($o->{prefix}, $o->{netc}, $o->{intf});
     #-	  }
+    $last or return;
     if ($last->{BOOTPROTO} =~ /^(dhcp|bootp)$/) {
 	my $dhcp_hostname = $netc->{HOSTNAME};
 	$::isInstall and $in->set_help('configureNetworkHostDHCP');
