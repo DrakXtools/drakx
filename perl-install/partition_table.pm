@@ -594,6 +594,7 @@ sub remove {
 	    splice(@{$hd->{primary}{normal}}, $i, 1);
 	    %$_ = (); #- blank it
 
+	    $hd->raw_removed($hd->{primary}{raw});
 	    return $hd->{isDirty} = $hd->{needKernelReread} = 1;
 	}
 	$i++;
@@ -624,7 +625,7 @@ sub add_primary {
 	local $hd->{primary}{normal}; #- save it to fake an addition of $part, that way add_primary do not modify $hd if it fails
 	push @{$hd->{primary}{normal}}, $part;
 	adjust_main_extended($hd); #- verify
-	raw_add($hd->{primary}{raw}, $part);
+	$hd->raw_add($hd->{primary}{raw}, $part);
     }
     push @{$hd->{primary}{normal}}, $part; #- really do it
 }
@@ -668,7 +669,7 @@ The only solution is to move your primary partitions to have the hole next to th
 	  (top(@{$hd->{extended}}), $part->{size});
 	my %ext = ( type => $extended_type || 5, start => $part->{start}, size => $ext_size );
 
-	raw_add($ext->{raw}, \%ext);
+	$hd->raw_add($ext->{raw}, \%ext);
 	$ext->{extended} = \%ext;
 	push @{$hd->{extended}}, { %ext, raw => [ $part, {}, {}, {} ], normal => $part };
     }
@@ -723,22 +724,6 @@ sub next_start {
     my ($hd, $part) = @_;
     my $next = &next($hd, $part);
     $next ? $next->{start} : $hd->{totalsectors};
-}
-
-sub can_raw_add {
-    my ($hd) = @_;
-    $_->{size} || $_->{type} or return 1 foreach @{$hd->{primary}{raw}};
-    0;
-}
-sub raw_add {
-    my ($raw, $part) = @_;
-
-    foreach (@$raw) {
-	$_->{size} || $_->{type} and next;
-	$_ = $part;
-	return;
-    }
-    die "raw_add: partition table already full";
 }
 
 sub load {
