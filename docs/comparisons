@@ -105,77 +105,161 @@ dangerous (proposed to everyone, but not proposed especially to people having
 a dangerous combinaison)
 - why still asking about lba32!!
 
+* anaconda 7.3 vs 7.3.92
+  - skipddc option (locks some machines) ??
+    maybe because it's done at the beginning of their install?
+  
+  - LVM
+    - lvm_dialog_gui.py
+    - Physical Extent 1MB 2MB 4MB ... 16GB
+      (vgcreate -s ${PhysicalExtentSize}k)
+    - see lvm_sanity_checks.txt, take them
+    - lvm on / (mkinitrd)
+    - handle upgrade when lvm on /
+    - vgcreate -An (ie --autobackup no) ??
+      (also for lvcreate vgchange lvremove
+    - see clampPVSize in lvm.py
+
+  - RAID
+    - Number of spares ??
+    - mkraid --dangerous-no-resync  ??
+  
+  - progress bar in ext2 formatting
+  
+  - ctrl-alt-suppr during install => reboots
+  
+  - user names: the regexp is [a-zA-Z][^\0-\x20:,\n]*  or  [A-Za-z][A-Za-z0-9]{0,7}   (depending on wether you're in text mode or graphic mode :)
+  - check the user name created is not a system one (see systemUsers)
+  
+  - SMB authentification
+  - cloneDrive ?
+
+  - edd dropped (was to detect lba32 capability, which was dumb)
+
+  - reconfig type of installed removed (was something between install & upgrade)
+
+  - ddcprobe code removed -> moved to kudzu
+    changes: sigprocmask and movl added around lrmi_vm86
+
+  - $ENV{GDK_USE_XFT} = 0
+
+* kudzu 0.99.52 vs 0.99.55
+  - blacklisting modules.pcimap e100 and bcm5700
+
+* hwdata 0.14 vs 0.32
+  - dropped XFree86 3.3.6 support
+
+  - upgradelist: list of (old_module => new_module) for upgrades
+    (a simpler way would be to drop entries in modules.conf that concern
+    obsolete (and not available anymore) modules, relying on auto-detection to
+    add the new one)
+
+  - CardMonitorCombos (for laptops)
+
 redhat 8.0:
 
-(legend: + pros  - cons  / notice)
+  (legend: + pros  - cons  / notice)
+  
+  Install steps difference
+  + firewall wizard
+  + md5sum check when booting install
+  - no upgrade packages installation during install
+  - no services configuration (chkconfig)
+  - no printer configuration
+  - no autologin
+  - no real small installation
+  - no small packages (groff-for-man, perl-base...)
+  / still propose non-MD5 or non-shadow passwords
+  / post install tool (firstconfig)
+  
+  General install behaviour, eye-candiness
+  + package selection a la Windows
+  + in language selection languages displayed in native language
+  + candy timezone selection
+  + help uses bold/italic/big-font
+  - no one CD install
+  / not using fb at install
+  / python + gtk2  vs  perl + gtk
+  / ask many things before doing anything (esp. delayed partitioning, swap not available when selecting packages!(?))
+  - more width-hard-coded dialog boxes (harder for translations)
+  / use a loopback file from the CD then copied on system
+  
+  Partitioning
+  - no diskdruid after install
+  - no partitioning wizard
+  - no devfs
+  - no xfs (but now has reiserfs/jfs)
+  - no loopback crypted fs
+  - no file swap (?)
+  - no supermount
+  + LABELed entries in fstab
+  + progress bar while formatting
+  
+  Bootloader
+  + bootloader configuration less awkward
+  - no automatic handling of bios ordering with many harddrives
+  - propose to manually change bios ordering even with one harddrive
+  - LBA32 checkbox
+  / defaults to grub
+  
+  Network
+  - awkward question apropos hostname when using DHCP
+  - no default choice for netmask/gateway/DNS based on IP
+  
+  XFree
+  - no wacom configuration
+  - no graphic card multi-head configuration
+  - no ATI tvout configuration
+  - no prompt for logout after changing X config
+  - VideoRam prompted for everybody
+  / no XFree3
+  / no Utah GLX
+  / load module "fbdevhw" "record", but not "v4l"
+  / always load module "glx" and "dri"
+  
+  Keyboard
+  - many non useful keyboard entries (eg: latin0)
+  - no way to choose the toggle key to choose between latin/non-latin keyboard 
+  - no loadkeys done during install for console
+  
+  Mouse
+  - no way to test mouse choice
+  - mouse choices include many non-useful choices, badly sorted
+    (Intellimouse must be sought in Microsoft whereas it's used by many others)
+  
+  Multimedia
+  - no bttv configuration (including webcams)
+  - missing audio modules (alsa, audigy...)
 
-Install steps difference
-+ firewall wizard
-+ md5sum check when booting install
-- no upgrade packages installation during install
-- no services configuration (chkconfig)
-- no printer configuration
-- no autologin
-- no real small installation
-- no small packages (groff-for-man, perl-base...)
-/ still propose non-MD5 or non-shadow passwords
-/ post install tool (firstconfig)
+* anaconda 8.0 (rel. 4) vs 8.0.92
+  - use vte instead of gnome.zvt
+  - add alpha (axp) partitioning code
+  - remove label "nofb" and options "devfs=nomount ramdisk_size=9216" from syslinux.cfg
+  - edd (ddc probe) moved to kudzu
+  - add "-Odir_index" option to ext3 tunefs 
+  - screenshoting in directory /root/anaconda-screenshots/ instead of using exported display
+  - assembler code change in cpuid, smp.c
+  - there is some code to read the "raid superblock" (see doGetRaidSuperblock in isys/isys.c)
+  - new code for choosing to upgrade or not
+  - hack to remove /var/lib/rpm/__db.00[123] (with comment "make sure that the rpmdb doesn't have stale locks :/")
 
-General install behaviour, eye-candiness
-+ package selection a la Windows
-+ in language selection languages displayed in native language
-+ candy timezone selection
-+ help uses bold/italic/big-font
-- no one CD install
-/ not using fb at install
-/ python + gtk2  vs  perl + gtk
-/ ask many things before doing anything (esp. delayed partitioning, swap not available when selecting packages!(?))
-- more width-hard-coded dialog boxes (harder for translations)
-/ use a loopback file from the CD then copied on system
+* anaconda 8.0.92 vs 8.0.93 (rel. 0.20030108205243)
+  - drop xmode (bring up text mode in a remote xterm)
+  - code available to check the ability to do a mkbootdisk 
+    (check size of vmlinuz + initrd, check size of floppy)
+  - drop "-Odir_index" option to ext3 tunefs 
+    (with comment "add back -Odir_index when htree is safe")
+  - waitForLink added to loader2/net.c using added ethtool thingy (get_ethtool_link_status, get_link_status)
+  - OS390 fdasd & z/IPL changes
+  - for kickstart, new option "--ignoremissing", (there were --ignoredeps and --resolvedeps)
+  - /usr/kerberos/lib in LD_LIBRARY_PATH
+  - these are symlinks so you cant make them mount points
+    otherexcept = ['/var/mail', '/usr/bin/X11', '/usr/lib/X11', '/usr/tmp']
 
-Partitioning
-- no diskdruid after install
-- no partitioning wizard
-- no devfs
-- no xfs (but now has reiserfs/jfs)
-- no loopback crypted fs
-- no file swap (?)
-- no supermount
-+ LABELed entries in fstab
-+ progress bar while formatting
+	    elif self.mountpoint in otherexcept:
+                return _("The mount point %s cannot be used.  It must "
+			 "be a symbolic link for proper system "
+			 "operation.  Please select a different "
+			 "mount point.") % (self.mountpoint,)
+		
 
-Bootloader
-+ bootloader configuration less awkward
-- no automatic handling of bios ordering with many harddrives
-- propose to manually change bios ordering even with one harddrive
-- LBA32 checkbox
-/ defaults to grub
-
-Network
-- awkward question apropos hostname when using DHCP
-- no default choice for netmask/gateway/DNS based on IP
-
-XFree
-- no wacom configuration
-- no graphic card multi-head configuration
-- no ATI tvout configuration
-- no prompt for logout after changing X config
-- VideoRam prompted for everybody
-/ no XFree3
-/ no Utah GLX
-/ load module "fbdevhw" "record", but not "v4l"
-/ always load module "glx" and "dri"
-
-Keyboard
-- many non useful keyboard entries (eg: latin0)
-- no way to choose the toggle key to choose between latin/non-latin keyboard 
-- no loadkeys done during install for console
-
-Mouse
-- no way to test mouse choice
-- mouse choices include many non-useful choices, badly sorted
-  (Intellimouse must be sought in Microsoft whereas it's used by many others)
-
-Multimedia
-- no bttv configuration (including webcams)
-- missing audio modules (alsa, audigy...)
