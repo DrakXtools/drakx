@@ -14,7 +14,7 @@ use modules;
 #-######################################################################################
 #- misc imports
 #-######################################################################################
-use common qw(:common);
+use common qw(:common :functional);
 use install_steps;
 use log;
 
@@ -68,6 +68,11 @@ sub selectLanguage {
     my ($o) = @_;
     $o->SUPER::selectLanguage;
     lang::load_console_font($o->{lang});
+}
+
+sub installPackages {
+    my ($o, $packages) = @_;
+    catch_cdie { $o->install_steps::installPackages($packages) } sub { print "$@\n"; 1 }
 }
 
 sub exitInstall {

@@ -10,6 +10,7 @@ use c;
 my @MBR_signatures = (
     [ 'empty', 0, "\0\0\0\0" ],
     [ 'grub', 0, "\xEBG", 0x17d, "stage1 \0" ],
+    [ 'grub', 0, "\xEBH", 0x17e, "stage1 \0" ],
     [ 'grub', 0, "\xEBH", 0x18a, "stage1 \0" ],
     [ 'lilo', 0x2,  "LILO" ],
     [ 'lilo', 0x6,  "LILO" ],

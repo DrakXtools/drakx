@@ -312,6 +312,7 @@ wait %d seconds for default boot.
 			   kernel_or_dev => "/dev/$_->{device}",
 			   label => isDos($_) ? "dos"     . ($dos++ ? $dos : '') : "windows" . ($win++ ? $win : '') ,
 			   table => "/dev/$_->{rootDevice}",
+			   unsafe => 1
 			  }) if isFat($_) && isFat({ type => fsedit::typeOfPart($_->{device}) });
 	    }
 	}
@@ -550,6 +551,8 @@ sub install_grub {
 	print F "color black/cyan yellow/cyan";
 	print F "i18n ", $file2grub->("/boot/grub/messages");
 	print F "keytable ", $file2grub->($lilo->{keytable}) if $lilo->{keytable};
+	print F "altconfigfile ", $file2grub->(my $once = "/boot/grub/menu.once");
+	output "$prefix$once", " " x 100;
 
 	map_index {
 	    print F "default $::i" if $_->{label} eq $lilo->{default};

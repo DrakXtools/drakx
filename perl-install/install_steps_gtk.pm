@@ -428,15 +428,15 @@ sub choosePackagesTree {
 		}
 		$select->($p);
 	    }
-	    my @l = $children->($parent);
-	    my $nb = grep { pkgs::packageFlagSelected($_) } @l;
-	    my $pix = $nb==0 ? $pix_unselect : $nb<@l ? $pix_semisele : $pix_selected;
-	    $tree->node_set_pixmap($parent, 1, $pix->[0], $pix->[1]);
+	    if (my @l = $children->($parent)) {
+		my $nb = grep { pkgs::packageFlagSelected($_) } @l;
+		my $pix = $nb==0 ? $pix_unselect : $nb<@l ? $pix_semisele : $pix_selected;
+		$tree->node_set_pixmap($parent, 1, $pix->[0], $pix->[1]);
+	    }
 	}
     };
     my $toggle = sub { &$toggle_; gtkset_mousecursor_normal() };
 
-    $tree->signal_connect(button_press_event => sub { $toggle->(0) if $_[1]{type} =~ /^2/ });
     $tree->signal_connect(key_press_event => sub {
         my ($w, $e) = @_;
 	my $c = chr($e->{keyval} & 0xff);

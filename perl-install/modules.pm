@@ -133,17 +133,12 @@ arch() =~ /^sparc/ ? (
   "sim710" => "sim710",
   "sym53c416" => "sym53c416",
   "tmscsim" => "tmscsim",
-  "scsi_mod" => "scsi_mod",
 ),
   "aic7xxx" => "Adaptec 2740, 2840, 2940",
   "ncr53c8xx" => "NCR 53C8xx PCI",
 #  "pci2000" => "Perceptive Solutions PCI-2000", # TODO
   "qlogicisp" => "Qlogic ISP",
   "sym53c8xx" => "Symbios 53c8xx",
-  "sd_mod" => "sd_mod",
-  "ide-mod" => "ide-mod",
-  "ide-probe" => "ide-probe",
-#-  "ide-probe-mod" => "ide-probe-mod",
 }],
 [ 'disk', {
 arch() =~ /^sparc/ ? (
@@ -162,7 +157,6 @@ arch() =~ /^sparc/ ? (
   "ppa" => "Iomega PPA3 (parallel port Zip)",
   "imm" => "Iomega Zip (new driver)",
 ),
-  "ide-disk" => "IDE disk",
 }],
 [ 'cdrom', {
 arch() !~ /^sparc|alpha/ ? (
@@ -178,10 +172,6 @@ arch() !~ /^sparc|alpha/ ? (
   "cdu31a" => "Sony CDU-31A",
   "sonycd535" => "Sony CDU-5xx",
 ) : (),
-  "isofs" => "iso9660",
-  "ide-cd" => "ide-cd",
-  "sr_mod" => "SCSI CDROM support",
-  "cdrom" => "cdrom",
 }],
 [ 'sound', {
 arch() !~ /^sparc/ ? (
@@ -300,6 +290,17 @@ arch() !~ /^sparc/ ? (
   "ide-floppy" => "ide-floppy",
   "ide-tape" => "ide-tape",
   "nbd" => "nbd",
+
+  "scsi_mod" => "scsi_mod",
+  "sd_mod" => "sd_mod",
+  "ide-mod" => "ide-mod",
+  "ide-probe" => "ide-probe",
+  "ide-disk" => "IDE disk",
+  "isofs" => "iso9660",
+  "ide-cd" => "ide-cd",
+  "sr_mod" => "SCSI CDROM support",
+  "cdrom" => "cdrom",
+#-  "ide-probe-mod" => "ide-probe-mod",
 }],
 );
 

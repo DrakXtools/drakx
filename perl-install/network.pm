@@ -222,14 +222,14 @@ sub dns {
     my ($ip) = @_;
     my $mask = masked_ip($ip);
     my @masked = masked_ip($ip) =~ $ip_regexp;
-    $masked[3]  = 1;
+    $masked[3]  = 2;
     join (".", @masked);
 
 }
 sub gateway {
     my ($ip) = @_;
     my @masked = masked_ip($ip) =~ $ip_regexp;
-    $masked[3]  = 254;
+    $masked[3]  = 1;
     join (".", @masked);
 
 }

@@ -186,6 +186,7 @@ sub gtkset_default_fontset {
 sub gtkctree_children {
     my ($node) = @_;
     my @l;
+    $node or return;
     for (my $p = $node->row->children; $p; $p = $p->row->sibling) {
 	push @l, $p;
     }
