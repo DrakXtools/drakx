@@ -50,7 +50,7 @@ sub leavingStep {
 
     if (-d "$o->{prefix}/root") {
 	eval { commands::cp('-f', "/tmp/ddebug.log", "$o->{prefix}/root") };
-	install_any::g_auto_install();
+	output(install_any::auto_inst_file(), install_any::g_auto_install());
     }
 
     for (my $s = $o->{steps}{first}; $s; $s = $o->{steps}{$s}{next}) {

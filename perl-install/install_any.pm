@@ -566,8 +566,37 @@ sub kdemove_desktop_file {
 #-###############################################################################
 sub auto_inst_file() { ($::g_auto_install ? "/tmp" : "$::o->{prefix}/root") . "/auto_inst.cfg.pl" }
 
+sub report_bug {
+    my ($prefix) = @_;
+
+    sub header { "
+********************************************************************************
+* $_[0]
+********************************************************************************";
+    }
+
+    join '', map { chomp; "$_\n" }
+      header("lspci"), detect_devices::stringlist(),
+      header("pci_devices"), cat_("/proc/bus/pci/devices"),
+      header("fdisk"), arch() =~ /ppc/ ? `$ENV{LD_LOADER} pdisk -l` : `$ENV{LD_LOADER} fdisk -l`,
+      header("scsi"), cat_("/proc/scsi/scsi"),
+      header("lsmod"), cat_("/proc/modules"),
+      header("cmdline"), cat_("/proc/cmdline"),
+      header("pcmcia: stab"), cat_("/var/run/stab"),
+      header("usb"), cat_("/proc/bus/usb/devices"),
+      header("partitions"), cat_("/proc/partitions"),
+      header("cpuinfo"), cat_("/proc/cpuinfo"),
+      header("syslog"), cat_("/tmp/syslog"),
+      header("ddcxinfos"), `$ENV{LD_LOADER} ddcxinfos`,
+      header("ddebug.log"), cat_("/tmp/ddebug.log"),
+      header("install.log"), cat_("$prefix/root/install.log"),
+      header("fstab"), cat_("$prefix/etc/fstab"),
+      header("auto_inst"), g_auto_install(),
+      ;
+}
+
 sub g_auto_install {
-    my ($f, $replay) = @_; $f ||= auto_inst_file;
+    my ($replay) = @_;
     my $o = {};
 
     require pkgs;
@@ -596,7 +625,7 @@ sub g_auto_install {
     $_ = { %{$_ || {}} }, delete @$_{qw(oldu oldg password password2)} foreach $o->{superuser}, @{$o->{users} || []};
     
     require Data::Dumper;
-    output($f, 
+    join('',
 	   "# You should always check the syntax with 'perl -cw auto_inst.cfg.pl' before testing\n",
 	   Data::Dumper->Dump([$o], ['$o']), if_($replay, 
 qq(\npackage install_steps_auto_install;), q(

@@ -1097,7 +1097,7 @@ sub generateAutoInstFloppy {
 ", "7m\n";
 
 	local $o->{partitioning}{clearall} = 1;
-	install_any::g_auto_install("$workdir/auto_inst.cfg");
+	output("$workdir/auto_inst.cfg", install_any::g_auto_install());
 
         run_program::run("genromfs", "-d", $workdir, "-f", "/dev/ram", "-A", "2048,/..", "-a", "512", "-V", "DrakX autoinst");
         fs::mount("/dev/ram", $mountdir, 'romfs', 0);
@@ -1126,7 +1126,7 @@ sub generateAutoInstFloppy {
 ", "07\n" if !$replay;
 
 	local $o->{partitioning}{clearall} = !$replay;
-	install_any::g_auto_install("/floppy/auto_inst.cfg", $replay);
+	output("/floppy/auto_inst.cfg", install_any::g_auto_install($replay));
 
 	fs::umount("/floppy");
     }
