@@ -982,6 +982,7 @@ You can use userdrake to add a user to this group.")
 sub monitor_full_edid() {
     return if $::noauto;
 
+    devices::make('zero');
     my ($vbe, $edid);
     run_program::raw({ timeout => 20 }, 'monitor-edid', '>', \$edid, '2>', \$vbe, '-v', '--perl');
     if ($::isInstall) {
