@@ -71,8 +71,8 @@ sub config_cups {
     $autoconf = printer::main::get_cups_autoconf();
     #- Remember the server/port/autoconf settings to check whether the user
     #- has changed them.
-    my $oldserver = $server;
-    my $oldport = $port;
+    my $oldserver   = $server;
+    my $oldport     = $port;
     my $oldautoconf = $autoconf;
     
     #- then ask user for this combination and rewrite /etc/cups/cupsd.conf
@@ -158,8 +158,7 @@ sub first_time_dialog {
     return 1 if printer::default::get_spooler () or $::isInstall;
 
     # Wait message
-    my $w = $in->wait_message(N("Printerdrake"), 
-			      N("Checking your system..."));
+    my $w = $in->wait_message(N("Printerdrake"), N("Checking your system..."));
 
     # Auto-detect local printers
     my @autodetected = printer::detect::local_detect();
@@ -187,9 +186,7 @@ sub first_time_dialog {
 		push (@printerlist, N("\nand %d unknown printers are ",
 				      $unknown_printers));
 	    } else {
-		push (@printerlist, ($morethanoneprinters ? 
-				     N("\nare ") :
-				     N("\nis ")));
+		push (@printerlist, ($morethanoneprinters ? N("\nare ") : N("\nis ")));
 	    }
 	    push (@printerlist, N("directly connected to your system"));
 	} else {
@@ -1365,8 +1362,7 @@ sub setup_common {
 
     #- Read the printer driver database if necessary
     if ((keys %printer::main::thedb) == 0) {
-	my $w = $in->wait_message(N("Printerdrake"),
-				  N("Reading printer database..."));
+	my $w = $in->wait_message(N("Printerdrake"), N("Reading printer database..."));
         printer::main::read_printer_db($printer->{SPOOLER});
     }
 
@@ -1406,7 +1402,7 @@ sub setup_common {
 	    } else {
 		$dbmakemodel = $entry;
 	    }
-	    next if !$dbmakemodel;
+	    next unless $dbmakemodel;
 	    $dbmakemodel =~ s/\|/\\\|/;
 	    my $searchterm = $descr;
 	    $searchterm =~ s/\|/\\\|/;
@@ -1423,10 +1419,7 @@ sub setup_common {
 		$printer->{DBENTRY} = $entry;
 	    }
 	}
-	if (!$printer->{DBENTRY}) {
-	    $printer->{DBENTRY} =
-		bestMatchSentence ($descr, keys %printer::main::thedb);
-	}
+     $printer->{DBENTRY} ||= bestMatchSentence ($descr, keys %printer::main::thedb);
         # If the manufacturer was not guessed correctly, discard the
         # guess.
         $printer->{DBENTRY} =~ /^([^\|]+)\|/;
@@ -2510,9 +2503,7 @@ sub check_network {
 		    } else {
 			system("/usr/sbin/drakconnect");
 		    }
-		    if (files_exist("/etc/sysconfig/network-scripts/drakconnect_conf")) {
-			$go_on = 1;
-		    }
+		    $go_on = files_exist("/etc/sysconfig/network-scripts/drakconnect_conf");
 		} else {
 		    return 1;
 		}
