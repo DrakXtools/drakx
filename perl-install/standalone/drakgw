@@ -101,11 +101,11 @@ if (-f $drakgw_setup)
     if (grep(/enabled/, @drakgw_setup_content))
     {
 	my $r = $in->ask_from_list(_("Internet Connection Sharing currently enabled"),
-				   _("The setup of Internet connection sharing has already been done.\n".
-				     "It's currently enabled.\n\n".
-				     "What would you like to do?"),
-				   [ "disable", "reconfigure", "dismiss" ]);
-	if ($r eq "disable")
+				   _("The setup of Internet connection sharing has already been done.
+It's currently enabled.\n
+What would you like to do?"),
+				   [ _("disable"), _("reconfigure"), _("dismiss") ]);
+	if ($r eq _("disable"))
 	{
 	    stop_daemons();
 	    -f "$dhcpd_conf.drakgwdisable" and (unlink("$dhcpd_conf.drakgwdisable") or die "Could not unlink $dhcpd_conf.drakgwdisable");
@@ -115,16 +115,16 @@ if (-f $drakgw_setup)
             log::l("[drakgw] Disabled\n");
 	    $in->exit(0);
 	}
-	($r eq "dismiss") and $in->exit(0);
+	($r eq _("dismiss")) and $in->exit(0);
     }
     elsif (grep(/disabled/, @drakgw_setup_content))
     {
 	my $r = $in->ask_from_list(_("Internet Connection Sharing currently disabled"),
-				   _("The setup of Internet connection sharing has already been done.\n".
-				     "It's currently disabled.\n\n".
-				     "What would you like to do?"),
-				   [ "enable", "reconfigure", "dismiss" ]);
-	if ($r eq "enable")
+				   _("The setup of Internet connection sharing has already been done.
+It's currently disabled.\n
+What would you like to do?"),
+				   [ _("enable"), _("reconfigure"), _("dismiss") ]);
+	if ($r eq _("enable"))
 	{
 	    -f $dhcpd_conf and rename($dhcpd_conf, "$dhcpd_conf.old");
 	    rename("$dhcpd_conf.drakgwdisable", $dhcpd_conf) or die "Could not find configuration. Please reconfigure.";
@@ -134,7 +134,7 @@ if (-f $drakgw_setup)
             log::l("[drakgw] Enabled\n");
 	    $in->exit(0);
 	}
-	($r eq "dismiss") and $in->exit(0);
+	($r eq _("dismiss")) and $in->exit(0);
     }
     else
     {
@@ -149,9 +149,9 @@ if (-f $drakgw_setup)
 #- * 1st step: detect/setup
 
 $::direct or $in->ask_okcancel(_("Internet Connection Sharing"),
-			       _("Your computer can be configured to share its Internet connection.\n\n".
-				 "Note: you need a dedicated Network Adapter to set up a Local Area Network (LAN).\n\n".
-				 "Would you like to setup the Internet Connection Sharing?"), 1) or $in->exit(0);
+			       _("Your computer can be configured to share its Internet connection.\n
+Note: you need a dedicated Network Adapter to set up a Local Area Network (LAN).\n
+Would you like to setup the Internet Connection Sharing?"), 1) or $in->exit(0);
 
 #my @pci_ethernet_cards;
 #require pci_probing::main;
@@ -510,9 +510,8 @@ start_daemons();
 undef $wait_configuring;
 
 $in->ask_warn(_("Congratulations!"), 
-	      _("Everything has been configured.\n".
-		"You may now share Internet connection with other computers on your Local Area Network, ".
-		"using automatic network configuration (DHCP)."));
+	      _("Everything has been configured.
+You may now share Internet connection with other computers on your Local Area Network, using automatic network configuration (DHCP)."));
 
 
 log::l("[drakgw] Installation complete, exiting\n");
