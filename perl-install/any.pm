@@ -342,8 +342,11 @@ sub get_autologin {
 sub set_autologin {
   my ($prefix, $user, $desktop) = @_;
 
-  output "$prefix/etc/sysconfig/desktop", uc($desktop), "\n" if $user;
-
+  if ($user) {
+      my %l = getVarsFromSh("$prefix/etc/sysconfig/desktop");
+      $l{DESKTOP} = uc($desktop);
+      setVarsInSh("$prefix/etc/sysconfig/desktop", %l);
+  }
   setVarsInSh("$prefix/etc/sysconfig/autologin",
 	      { USER => $user, AUTOLOGIN => bool2yesno($user), EXEC => "/usr/X11R6/bin/startx" });
   log::l("cat $prefix/etc/sysconfig/autologin: ", cat_("$prefix/etc/sysconfig/autologin"));
