@@ -440,9 +440,8 @@ msgid "Where do you want to install the bootloader?"
 msgstr "Hvor ønsker du installere oppstartslasteren?"
 
 #: ../../any.pm_.c:73
-#, fuzzy
 msgid "Which bootloader(s) do you want to use?"
-msgstr "Hvilken inngangstype vil du legge til"
+msgstr "Hvilken oppstartslaster(e) vil du bruke?"
 
 #: ../../any.pm_.c:79
 msgid "Boot device"
@@ -1263,7 +1262,7 @@ msgstr ""
 "\n"
 "Velg \"Oppdater\" hvis du ønsker å oppdatere en tidligere versjon av\n"
 "Mandrake Linux: 5.1 (Venice), 5.2 (Leeloo), 5.3 (Festen), 6.0 (Venus),\n"
-"6.1 (Helios) eller Gold 2000."
+"6.1 (Helios), Gold 2000 eller 7.0 (Air)."
 
 #: ../../help.pm_.c:22
 msgid ""
@@ -1503,6 +1502,17 @@ msgid ""
 "\"Individual package selection\"; in this case you will have to browse\n"
 "through more than 1000 packages..."
 msgstr ""
+"Du kan nå velge de pakkegruppene du ønsker å\n"
+"installere eller oppgradere.\n"
+"\n"
+"DrakX vil så sjekke om du har nok plass til å installere alle. Hvis ikke,\n"
+"vil du bli advart om dette. Hvis du likevel vil fortsette, vil "
+"installasjonen av\n"
+"alle valgte grupper fortsette, men pakker av mindre interesse vil ikke bli "
+"installert.\n"
+"Nederst på listen kan du velge opsjonen\n"
+"\"Individuelt pakkevalg\"; i så tilfelle må du lete gjennom mer enn 1000\n"
+"pakker..."
 
 #: ../../help.pm_.c:137
 msgid ""
@@ -1510,6 +1520,9 @@ msgid ""
 "If you have none of those CDs, click Cancel.\n"
 "If only some CDs are missing, unselect them, then click Ok."
 msgstr ""
+"Hvis du har alle CDene i listen ovenfor, klikk Ok.\n"
+"Hvis du ikke har noen av disse CDene, klikk Avbryt.\n"
+"Hvis bare noen av CDene mangler, fjern disse, klikk så Ok."
 
 #: ../../help.pm_.c:142
 msgid ""
@@ -1915,9 +1928,18 @@ msgid ""
 "anyone, in which case you can delete the corresponding entries. But\n"
 "in this case, you will need a boot disk in order to boot them!"
 msgstr ""
+"LILO (LInux LOader) og Grub er oppstartslastere: de kan starte opp enten\n"
+"Linux eller et annet operativsystem som du har på datamaskinen din.\n"
+"Normalt blir de andre operativsystemene korrekt oppdaget og installert.\n"
+"Hvis dette ikke er tilfelle, kan du legge til disse for hånd i dette\n"
+"bildet. Vær forsiktig med å velge de korrekte parameterene.\n"
+"\n"
+"\n"
+"Hvis du ikke ønsker å gi tilgang til de andre operativsystemene til\n"
+"andre kan du fjerne linjene for disse. Men i så tilfelle trenger du\n"
+"en oppstartsdiskett for å starte disse!"
 
 #: ../../help.pm_.c:346
-#, fuzzy
 msgid ""
 "LILO and grub main options are:\n"
 "  - Boot device: Sets the name of the device (e.g. a hard disk\n"
@@ -1937,26 +1959,10 @@ msgid ""
 "    * normal: select normal 80x25 text mode.\n"
 "    * <number>:  use the corresponding text mode."
 msgstr ""
-"Hovedopsjoner for LILO er:\n"
+"LILO og grubs hovedopsjoner er:\n"
 "  - Oppstartsenhet: Setter navnet til enheten (f.eks. en harddisk\n"
 "partisjon) som inneholder oppstartssektoren. Hvis du ikke spesifikt\n"
 "vet et annet sted, velg \"/dev/hda\".\n"
-"\n"
-"\n"
-"  - Lineær: Genererer lineære sektoradresser i stedet for\n"
-"sektor/hode/sylinder adresser. Lineære adresser blir oversatt ved kjøring\n"
-"og er ikke avhengig av diskgeometri. Merk at oppstartsdisketter muligens\n"
-"ikke vil fungere hvis \"lineær\" brukes, fordi BIOS sin funksjon for å\n"
-"bestemme diskgeometri ikke er pålitelig for disketter. Ved bruk av\n"
-"\"lineær\" med store disker, vil /sbin/lilo muligens generere referanser\n"
-"til områder på disken som ikke er tilgjengelige, fordi 3D sektor adresser\n"
-"ikke er kjent før oppstart.\n"
-"\n"
-"\n"
-"  - Kompakt: Prøver å samordne leseforespørsler for nærliggende sektorer\n"
-"til en leseforespørsel. Dette reduserer drastisk lastetiden og holder "
-"kartet\n"
-"mindre. Bruk av \"kompakt\" er spesielt anbefalt ved oppstart fra diskett.\n"
 "\n"
 "\n"
 "  - Forsinkelse før oppstart av standard bilde: Spesifiserer tid som\n"
@@ -2415,7 +2421,7 @@ msgstr "Veksel-partisjonsstørrelse i MB: "
 #, c-format
 msgid ""
 "The total size for the groups you have selected is approximately %d MB.\n"
-msgstr ""
+msgstr "Den totale størrelsen for gruppene du har valgt er omtrent %d MB.\n"
 
 #: ../../install_steps_gtk.pm_.c:316
 msgid ""
@@ -2425,6 +2431,11 @@ msgid ""
 "A low percentage will install only the most important packages;\n"
 "a percentage of 100%% will install all selected packages."
 msgstr ""
+"Hvis du ønsker å installere mindre enn denne størrelsen,\n"
+"velg den prosentdelen av pakkene som du ønsker å installere.\n"
+"\n"
+"En lav prosentdel vil installere bare de mest viktige pakkene;\n"
+"en prosentdel på 100%% vil installere alle valgte pakker."
 
 #: ../../install_steps_gtk.pm_.c:321
 msgid ""
@@ -2435,15 +2446,20 @@ msgid ""
 "A low percentage will install only the most important packages;\n"
 "a percentage of %d%% will install as many packages as possible."
 msgstr ""
+"Du har plass på disken din for bare %d%% av disse pakkene.\n"
+"\n"
+"Hvis du ønsker å installere mindre enn dette,\n"
+"velg den prosentdelen av pakkene som du ønsker å installere.\n"
+"En lav prosentdel vil installere bare de mest viktige pakkene;\n"
+"en prosentdel på %d%% vil installere så mange pakker som mulig."
 
 #: ../../install_steps_gtk.pm_.c:327
 msgid "You will be able to choose them more specifically in the next step."
-msgstr "Du vil kunne velge disse mere spesifisert i neste trinn"
+msgstr "Du vil kunne velge disse mere spesifisert i neste trinn."
 
 #: ../../install_steps_gtk.pm_.c:329
-#, fuzzy
 msgid "Percentage of packages to install"
-msgstr "Velg pakker for installering"
+msgstr "Prosentdel av pakker å installere"
 
 #: ../../install_steps_gtk.pm_.c:369
 msgid "Automatic dependencies"
@@ -2481,7 +2497,7 @@ msgstr "Dette er en bestemt pakke, den kan ikke fjernes"
 
 #: ../../install_steps_gtk.pm_.c:469
 msgid "You can't unselect this package. It is already installed"
-msgstr ""
+msgstr "Du kan ikke fjerne denne pakken, den er allerede installert"
 
 #: ../../install_steps_gtk.pm_.c:473
 msgid "The following packages are going to be installed/removed"
@@ -2489,7 +2505,7 @@ msgstr "Følgende pakker vil bli installert/fjernet"
 
 #: ../../install_steps_gtk.pm_.c:482
 msgid "You can't select/unselect this package"
-msgstr ""
+msgstr "Du kan ikke velge/fjerne denne pakken"
 
 #: ../../install_steps_gtk.pm_.c:517
 msgid "Estimating"
@@ -2644,7 +2660,6 @@ msgid "no available partitions"
 msgstr "ingen tilgjengelige partisjoner"
 
 #: ../../install_steps_interactive.pm_.c:178
-#, c-format
 msgid "(%dMB)"
 msgstr "(%dMB)"
 
@@ -2706,6 +2721,9 @@ msgid ""
 "If you have none of those CDs, click Cancel.\n"
 "If only some CDs are missing, unselect them, then click Ok."
 msgstr ""
+"Hvis du har alle CDene i listen nedenfor, klikk Ok.\n"
+"Hvis du ikke har noen av CDene, klikk Avbryt.\n"
+"Hvis bare noen av CDene mangler, fjern disse, klikk så Ok."
 
 #: ../../install_steps_interactive.pm_.c:347
 #, c-format
@@ -3105,7 +3123,6 @@ msgid "Skip"
 msgstr "Dropp"
 
 #: ../../install_steps_interactive.pm_.c:722
-#, fuzzy
 msgid ""
 "A custom bootdisk provides a way of booting into your Linux system without\n"
 "depending on the normal bootloader. This is useful if you don't want to "
@@ -3121,13 +3138,14 @@ msgstr ""
 "En egendefinert oppstartsdiskett er en måte å starte Linux-systemet på uten\n"
 "å være avhengig av den vanlige oppstartslasteren. Dette er nyttig hvis du "
 "ikke ønsker\n"
-"å installere LILO på systemet ditt, eller et annet operativsystem fjerner "
-"LILO, eller at LILO ikke virker med din\n"
-"maskinvarekonfigurasjon. En egendefinert oppstartsdiskett kan også brukes "
-"sammen\n"
-"med Mandrake's redningsbilde, som gjør det mye lettere gjenopprette etter "
-"systemsvikt.\n"
-"Ønsker du å opprette en oppstartsdiskett for systemet ditt?"
+"å installere LILO (eller grub) på systemet ditt, eller et annet "
+"operativsystem fjerner LILO,\n"
+"eller at LILO ikke virker med din maskinvarekonfigurasjon. En egendefinert "
+"oppstartsdiskett\n"
+"kan også brukes sammen med Mandrake's redningsbilde, som gjør det mye "
+"lettere gjenopprette\n"
+"etter systemsvikt. Ønsker du å opprette en oppstartsdiskett for systemet "
+"ditt?"
 
 #: ../../install_steps_interactive.pm_.c:731
 msgid "Sorry, no floppy drive available"
@@ -3277,7 +3295,7 @@ msgstr "Slå på num lock ved oppstart"
 
 #: ../../install_steps_interactive.pm_.c:947
 msgid "Give the ram size in MB"
-msgstr "Oppgi ram-størrelsen i Mb"
+msgstr "Oppgi ram-størrelsen i MB"
 
 #: ../../install_steps_interactive.pm_.c:949
 msgid "Can't use supermount in high security level"
@@ -4557,23 +4575,20 @@ msgstr ""
 "\n"
 
 #: ../../standalone/drakboot_.c:23
-#, fuzzy
 msgid "Configure LILO/GRUB"
-msgstr "Konfigurer X"
+msgstr "Konfigurer LILO/GRUB"
 
 #: ../../standalone/drakboot_.c:24
 msgid "Create a boot floppy"
 msgstr "Opprett en oppstartdiskett"
 
 #: ../../standalone/drakboot_.c:25
-#, fuzzy
 msgid "Format floppy"
-msgstr "Formater alle"
+msgstr "Formater diskett"
 
 #: ../../standalone/drakboot_.c:29
-#, fuzzy
 msgid "Choice"
-msgstr "bra"
+msgstr "Valg"
 
 #: ../../standalone/draksec_.c:28
 msgid ""
