@@ -44,6 +44,9 @@
 #        /scsi/host0/bus0/target4/lun0   #   
 #  tar --use-compress-prog=bzip2 xf foo.tar.bz2   
 
+# todo today;   new gi
+#		ftp 
+
 
 
 use Gtk;
@@ -324,19 +327,13 @@ sub return_path {
 }
 
 sub ftp_client {
-
 use Net::FTP; 
-my $ftp = Net::FTP->new("some.host.name"); 
+my $ftp = Net::FTP->new("$host_name"); 
 $ftp->login("anonymous","mon\@adresse.mail"); 
 $ftp->cwd("/pub"); 
 $ftp->get("/ce/repertoire/ce.fichier"); 
 $ftp->quit; 
-
-
 }
-
-
-
 
 sub build_backup_files {
 
@@ -1506,6 +1503,44 @@ Drakbacup allow to restore the system (etc, var files)
 
 
 
+# _____________________________________________________________ OLD CODE
+
+
+
+# sub build_backup_files {
+#     -d  $save_path or mkdir_p($save_path);
+#     my $path_name;
+#     my @list_other_;
+#     if ($where_hd) {
+# 	print "backup_sys @sys_files\n";
+# 	$backup_sys and system("tar cvfz $save_path/backup_sys.tar.gz @sys_files");
+# 	print "backup_other @list_other\n";
+# 	if (@list_other) {
+# 	    system("tar cvfz $save_path/backup_other.tar.gz @list_other");
+# 	    foreach (@list_other) {
+# 		push @list_other_, $_ . "\n";
+# 	    }
+# 	    output_p( $save_path . '/list_other', @list_other_);    
+# 	}
+# 	if ($backup_user) {
+# 	    foreach (@user_list) {
+# 		$path_name = return_path($_);
+# 		print "path of user: $path_name\n";
+# 		$what_no_browser or system("tar cvfz $save_path/backup_user_$_.tar.gz $path_name");
+# 		$what_no_browser and system("tar cvz --exclude NewCache --exclude Cache --exclude cache -f $save_path/backup_user_$_.tar.gz $path_name | grep cahe");
+# 	    }
+# 	}
+#     }
+#     if ($where_net) {
+	
+#     }
+#     if ($where_cd) {
+	
+#     }
+# }
+
+
+
 
 # _____________________________________________________________ DOCS
 
@@ -1547,39 +1582,3 @@ Drakbacup allow to restore the system (etc, var files)
 # my @lines = $t->cmd("/ma/commande/a/executer");
 # print join(' ',@lines); 
 
-
-# _____________________________________________________________ OLD CODE
-
-
-
-# sub build_backup_files {
-#     -d  $save_path or mkdir_p($save_path);
-#     my $path_name;
-#     my @list_other_;
-#     if ($where_hd) {
-# 	print "backup_sys @sys_files\n";
-# 	$backup_sys and system("tar cvfz $save_path/backup_sys.tar.gz @sys_files");
-# 	print "backup_other @list_other\n";
-# 	if (@list_other) {
-# 	    system("tar cvfz $save_path/backup_other.tar.gz @list_other");
-# 	    foreach (@list_other) {
-# 		push @list_other_, $_ . "\n";
-# 	    }
-# 	    output_p( $save_path . '/list_other', @list_other_);    
-# 	}
-# 	if ($backup_user) {
-# 	    foreach (@user_list) {
-# 		$path_name = return_path($_);
-# 		print "path of user: $path_name\n";
-# 		$what_no_browser or system("tar cvfz $save_path/backup_user_$_.tar.gz $path_name");
-# 		$what_no_browser and system("tar cvz --exclude NewCache --exclude Cache --exclude cache -f $save_path/backup_user_$_.tar.gz $path_name | grep cahe");
-# 	    }
-# 	}
-#     }
-#     if ($where_net) {
-	
-#     }
-#     if ($where_cd) {
-	
-#     }
-# }
