@@ -74,7 +74,6 @@ sub setup_remote_cups_server {
 	#- according to new settings. There are no other point where such
 	#- information is written in this file.
 
-	print "##### @queuelist $default\n";
 	if ($in->ask_from_entries_refH_powered
 	    ({ title => _("Remote CUPS server"),
 	       messages => _("With a remote CUPS server, you do not have to configure any 
@@ -1181,6 +1180,9 @@ sub main {
 	    #- Set OLD_QUEUE field so that the subroutines for the
 	    #- configuration work correctly.
 	    $printer->{OLD_QUEUE} = $printer->{QUEUE} = $queue;
+	    #- When we are back on the main menu the cursor should be
+	    #- on "Add printer"
+	    $queue = _("Add printer");
 	    #- Do all the configuration steps for a new queue
 	    choose_printer_type($printer, $in) or next;
 	    if ($printer->{TYPE} eq 'CUPS') {
@@ -1337,7 +1339,6 @@ What do you want to modify on this printer?",
 	    }
 	    $continue = ($::expert || !$::isInstall);
 	}
-	$queue = $printer->{currentqueue}{queue};
 	if ($continue) {
 	    # Reinitialize $printer data structure
 	    printer::resetinfo($printer);
