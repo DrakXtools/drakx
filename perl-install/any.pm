@@ -99,7 +99,7 @@ sub setupBootloader {
     my $ask_per_entries = $::expert || $more > 1;
     $automatic = 0 if arch() =~ /ppc/; #- no auto for PPC yet
     if ((grep { $_->{device} =~ /^sd/ } @$hds) && (grep { $_->{device} =~ /^hd/ } @$hds) ||
-	(grep { $_->{device} =~ /^hd[fghi]/ } @$hds) && (grep { $_->{device} =~ /^hd[abcd]/ } @$hds) ||
+	(grep { $_->{device} =~ /^hd[fghi]/ } @$hds) && (grep { $_->{device} =~ /^hd[abcd]/ } @$hds)
        ) {
 	$automatic = $semi_auto = 0;
 	#- full expert questions when there is 2 kind of disks
