@@ -355,6 +355,8 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
   o start slmodemd when installing it (thus preventing the average
     user to have to restart his machine in order to get a working
     connection)
+  o try /dev/ttyS14 too for serial modems (ie internal PCI modems that
+    don't need any driver but export a serial port instead)
 
 * Fri Oct  8 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.1-22mdk
 - bootloader-config: on a recent kernel, remove any existing devfs=
