@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2000-04-17 19:34+0200\n"
+"POT-Creation-Date: 2000-04-18 11:18+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -130,7 +130,7 @@ msgid ""
 "You can switch if off if you want, you'll hear a beep when it's over"
 msgstr ""
 
-#: ../../Xconfigurator.pm_.c:443
+#: ../../Xconfigurator.pm_.c:443 ../../printerdrake.pm_.c:157
 msgid "Resolution"
 msgstr ""
 
@@ -499,13 +499,13 @@ msgid ""
 msgstr ""
 
 #: ../../any.pm_.c:105 ../../install_steps_interactive.pm_.c:788
-#: ../../standalone/rpmdrake_.c:302
+#: ../../printerdrake.pm_.c:234 ../../standalone/rpmdrake_.c:302
 msgid "Add"
 msgstr ""
 
 #: ../../any.pm_.c:105 ../../diskdrake.pm_.c:42
 #: ../../install_steps_interactive.pm_.c:655
-#: ../../install_steps_interactive.pm_.c:788
+#: ../../install_steps_interactive.pm_.c:788 ../../printerdrake.pm_.c:234
 #: ../../standalone/adduserdrake_.c:36
 msgid "Done"
 msgstr ""
@@ -565,7 +565,7 @@ msgstr ""
 #: ../../interactive.pm_.c:84 ../../interactive.pm_.c:218
 #: ../../interactive_newt.pm_.c:50 ../../interactive_newt.pm_.c:99
 #: ../../interactive_stdio.pm_.c:27 ../../my_gtk.pm_.c:198
-#: ../../my_gtk.pm_.c:456 ../../my_gtk.pm_.c:632
+#: ../../my_gtk.pm_.c:456 ../../my_gtk.pm_.c:632 ../../printerdrake.pm_.c:261
 msgid "Ok"
 msgstr ""
 
@@ -1034,7 +1034,8 @@ msgstr ""
 msgid "Choose the new size"
 msgstr ""
 
-#: ../../diskdrake.pm_.c:589 ../../install_steps_gtk.pm_.c:316
+#: ../../diskdrake.pm_.c:589 ../../install_steps_graphical.pm_.c:287
+#: ../../install_steps_graphical.pm_.c:334 ../../install_steps_gtk.pm_.c:316
 msgid "MB"
 msgstr ""
 
@@ -1834,12 +1835,12 @@ msgstr ""
 msgid "Duplicate mount point %s"
 msgstr ""
 
-#: ../../install_steps.pm_.c:367
+#: ../../install_steps.pm_.c:368
 #, c-format
 msgid "Welcome to %s"
 msgstr ""
 
-#: ../../install_steps.pm_.c:646
+#: ../../install_steps.pm_.c:647
 msgid "No floppy drive available"
 msgstr ""
 
@@ -1847,6 +1848,91 @@ msgstr ""
 #: ../../install_steps_stdio.pm_.c:26
 #, c-format
 msgid "Entering step `%s'\n"
+msgstr ""
+
+#: ../../install_steps_graphical.pm_.c:259 ../../install_steps_gtk.pm_.c:247
+msgid "You must have a swap partition"
+msgstr ""
+
+#: ../../install_steps_graphical.pm_.c:261 ../../install_steps_gtk.pm_.c:249
+msgid ""
+"You don't have a swap partition\n"
+"\n"
+"Continue anyway?"
+msgstr ""
+
+#: ../../install_steps_graphical.pm_.c:287 ../../install_steps_gtk.pm_.c:316
+msgid "Choose the size you want to install"
+msgstr ""
+
+#: ../../install_steps_graphical.pm_.c:334
+msgid "Total size: "
+msgstr ""
+
+#: ../../install_steps_graphical.pm_.c:346 ../../install_steps_gtk.pm_.c:423
+#: ../../standalone/rpmdrake_.c:136
+#, c-format
+msgid "Version: %s\n"
+msgstr ""
+
+#: ../../install_steps_graphical.pm_.c:347 ../../install_steps_gtk.pm_.c:424
+#: ../../standalone/rpmdrake_.c:137
+#, c-format
+msgid "Size: %d KB\n"
+msgstr ""
+
+#: ../../install_steps_graphical.pm_.c:462 ../../install_steps_gtk.pm_.c:340
+msgid "Choose the packages you want to install"
+msgstr ""
+
+#: ../../install_steps_graphical.pm_.c:465 ../../install_steps_gtk.pm_.c:343
+msgid "Info"
+msgstr ""
+
+#: ../../install_steps_graphical.pm_.c:473 ../../install_steps_gtk.pm_.c:348
+#: ../../install_steps_interactive.pm_.c:124 ../../standalone/rpmdrake_.c:161
+msgid "Install"
+msgstr ""
+
+#: ../../install_steps_graphical.pm_.c:492 ../../install_steps_gtk.pm_.c:489
+#: ../../install_steps_interactive.pm_.c:350
+msgid "Installing"
+msgstr ""
+
+#: ../../install_steps_graphical.pm_.c:499 ../../install_steps_gtk.pm_.c:495
+msgid "Please wait, "
+msgstr ""
+
+#: ../../install_steps_graphical.pm_.c:501 ../../install_steps_gtk.pm_.c:497
+msgid "Time remaining "
+msgstr ""
+
+#: ../../install_steps_graphical.pm_.c:502 ../../install_steps_gtk.pm_.c:498
+msgid "Total time "
+msgstr ""
+
+#: ../../install_steps_graphical.pm_.c:507 ../../install_steps_gtk.pm_.c:507
+#: ../../install_steps_interactive.pm_.c:350
+msgid "Preparing installation"
+msgstr ""
+
+#: ../../install_steps_graphical.pm_.c:528 ../../install_steps_gtk.pm_.c:522
+#, c-format
+msgid "Installing package %s"
+msgstr ""
+
+#: ../../install_steps_graphical.pm_.c:553 ../../install_steps_gtk.pm_.c:560
+#: ../../install_steps_gtk.pm_.c:564
+msgid "Go on anyway?"
+msgstr ""
+
+#: ../../install_steps_graphical.pm_.c:553 ../../install_steps_gtk.pm_.c:560
+msgid "There was an error ordering packages:"
+msgstr ""
+
+#: ../../install_steps_graphical.pm_.c:577
+#: ../../install_steps_interactive.pm_.c:953
+msgid "Use existing configuration for X11?"
 msgstr ""
 
 #: ../../install_steps_gtk.pm_.c:154
@@ -1877,17 +1963,6 @@ msgstr ""
 msgid "Automatic resizing failed"
 msgstr ""
 
-#: ../../install_steps_gtk.pm_.c:247
-msgid "You must have a swap partition"
-msgstr ""
-
-#: ../../install_steps_gtk.pm_.c:249
-msgid ""
-"You don't have a swap partition\n"
-"\n"
-"Continue anyway?"
-msgstr ""
-
 #: ../../install_steps_gtk.pm_.c:259
 msgid "Which partition do you want to use to put Linux4Win?"
 msgstr ""
@@ -1915,23 +1990,6 @@ msgstr ""
 msgid "You will be able to choose them more specificaly in the next step"
 msgstr ""
 
-#: ../../install_steps_gtk.pm_.c:316
-msgid "Choose the size you want to install"
-msgstr ""
-
-#: ../../install_steps_gtk.pm_.c:340
-msgid "Choose the packages you want to install"
-msgstr ""
-
-#: ../../install_steps_gtk.pm_.c:343
-msgid "Info"
-msgstr ""
-
-#: ../../install_steps_gtk.pm_.c:348 ../../install_steps_interactive.pm_.c:124
-#: ../../standalone/rpmdrake_.c:161
-msgid "Install"
-msgstr ""
-
 #: ../../install_steps_gtk.pm_.c:352
 msgid "Automatic dependencies"
 msgstr ""
@@ -1952,16 +2010,6 @@ msgstr ""
 msgid "Bad package"
 msgstr ""
 
-#: ../../install_steps_gtk.pm_.c:423 ../../standalone/rpmdrake_.c:136
-#, c-format
-msgid "Version: %s\n"
-msgstr ""
-
-#: ../../install_steps_gtk.pm_.c:424 ../../standalone/rpmdrake_.c:137
-#, c-format
-msgid "Size: %d KB\n"
-msgstr ""
-
 #: ../../install_steps_gtk.pm_.c:425
 #, c-format
 msgid "Importance: %s\n"
@@ -1980,24 +2028,8 @@ msgstr ""
 msgid "This is a mandatory package, it can't be unselected"
 msgstr ""
 
-#: ../../install_steps_gtk.pm_.c:489 ../../install_steps_interactive.pm_.c:350
-msgid "Installing"
-msgstr ""
-
 #: ../../install_steps_gtk.pm_.c:492
 msgid "Estimating"
-msgstr ""
-
-#: ../../install_steps_gtk.pm_.c:495
-msgid "Please wait, "
-msgstr ""
-
-#: ../../install_steps_gtk.pm_.c:497
-msgid "Time remaining "
-msgstr ""
-
-#: ../../install_steps_gtk.pm_.c:498
-msgid "Total time "
 msgstr ""
 
 #: ../../install_steps_gtk.pm_.c:504 ../../interactive.pm_.c:84
@@ -2005,10 +2037,6 @@ msgstr ""
 #: ../../interactive_newt.pm_.c:99 ../../interactive_stdio.pm_.c:27
 #: ../../my_gtk.pm_.c:199 ../../my_gtk.pm_.c:456
 msgid "Cancel"
-msgstr ""
-
-#: ../../install_steps_gtk.pm_.c:507 ../../install_steps_interactive.pm_.c:350
-msgid "Preparing installation"
 msgstr ""
 
 #: ../../install_steps_gtk.pm_.c:517
@@ -2020,11 +2048,6 @@ msgstr ""
 msgid ", %U MB"
 msgstr ""
 
-#: ../../install_steps_gtk.pm_.c:522
-#, c-format
-msgid "Installing package %s"
-msgstr ""
-
 #: ../../install_steps_gtk.pm_.c:548
 #, c-format
 msgid ""
@@ -2033,14 +2056,6 @@ msgid ""
 "Please insert the Cd-Rom labelled \"%s\" in your drive and press Ok when "
 "done.\n"
 "If you don't have it, press Cancel to avoid installation from this Cd-Rom."
-msgstr ""
-
-#: ../../install_steps_gtk.pm_.c:560 ../../install_steps_gtk.pm_.c:564
-msgid "Go on anyway?"
-msgstr ""
-
-#: ../../install_steps_gtk.pm_.c:560
-msgid "There was an error ordering packages:"
 msgstr ""
 
 #: ../../install_steps_gtk.pm_.c:564
@@ -2741,10 +2756,6 @@ msgstr ""
 
 #: ../../install_steps_interactive.pm_.c:938
 msgid "Can't use supermount in high security level"
-msgstr ""
-
-#: ../../install_steps_interactive.pm_.c:953
-msgid "Use existing configuration for X11?"
 msgstr ""
 
 #: ../../install_steps_interactive.pm_.c:965
@@ -3544,6 +3555,130 @@ msgstr ""
 
 #: ../../printerdrake.pm_.c:125
 msgid "What type of printer do you have?"
+msgstr ""
+
+#: ../../printerdrake.pm_.c:153
+msgid "Printer options"
+msgstr ""
+
+#: ../../printerdrake.pm_.c:154
+msgid "Paper Size"
+msgstr ""
+
+#: ../../printerdrake.pm_.c:155
+msgid "Eject page after job?"
+msgstr ""
+
+#: ../../printerdrake.pm_.c:160
+msgid "Uniprint driver options"
+msgstr ""
+
+#: ../../printerdrake.pm_.c:161
+msgid "Color depth options"
+msgstr ""
+
+#: ../../printerdrake.pm_.c:163
+msgid "Print text as PostScript?"
+msgstr ""
+
+#: ../../printerdrake.pm_.c:164
+msgid "Reverse page order"
+msgstr ""
+
+#: ../../printerdrake.pm_.c:166
+msgid "Fix stair-stepping text?"
+msgstr ""
+
+#: ../../printerdrake.pm_.c:169
+msgid "Number of pages per output pages"
+msgstr ""
+
+#: ../../printerdrake.pm_.c:170
+msgid "Right/Left margins in points (1/72 of inch)"
+msgstr ""
+
+#: ../../printerdrake.pm_.c:171
+msgid "Top/Bottom margins in points (1/72 of inch)"
+msgstr ""
+
+#: ../../printerdrake.pm_.c:174
+msgid "Extra GhostScript options"
+msgstr ""
+
+#: ../../printerdrake.pm_.c:177
+msgid "Extra Text options"
+msgstr ""
+
+#: ../../printerdrake.pm_.c:188
+msgid "Do you want to test printing?"
+msgstr ""
+
+#: ../../printerdrake.pm_.c:200
+msgid "Printing test page(s)..."
+msgstr ""
+
+#: ../../printerdrake.pm_.c:207
+#, c-format
+msgid ""
+"Test page(s) have been sent to the printer daemon.\n"
+"This may take a little time before printer start.\n"
+"Printing status:\n"
+"%s\n"
+"\n"
+"Does it work properly?"
+msgstr ""
+
+#: ../../printerdrake.pm_.c:211
+msgid ""
+"Test page(s) have been sent to the printer daemon.\n"
+"This may take a little time before printer start.\n"
+"Does it work properly?"
+msgstr ""
+
+#: ../../printerdrake.pm_.c:227
+msgid "Printer"
+msgstr ""
+
+#: ../../printerdrake.pm_.c:228
+msgid "Would you like to configure a printer?"
+msgstr ""
+
+#: ../../printerdrake.pm_.c:232
+msgid ""
+"Here are the following print queue.\n"
+"You can add some more or change the existing ones."
+msgstr ""
+
+#: ../../printerdrake.pm_.c:255 ../../printerdrake.pm_.c:261
+msgid "Select Printer Connection"
+msgstr ""
+
+#: ../../printerdrake.pm_.c:256
+msgid "How is the printer connected?"
+msgstr ""
+
+#: ../../printerdrake.pm_.c:261
+msgid "Remove queue"
+msgstr ""
+
+#: ../../printerdrake.pm_.c:262
+msgid ""
+"Every print queue (which print jobs are directed to) needs a\n"
+"name (often lp) and a spool directory associated with it. What\n"
+"name and directory should be used for this queue and how is the printer "
+"connected?"
+msgstr ""
+
+#: ../../printerdrake.pm_.c:265
+msgid "Name of queue"
+msgstr ""
+
+#: ../../printerdrake.pm_.c:266
+msgid "Spool directory"
+msgstr ""
+
+#: ../../printerdrake.pm_.c:267
+msgid "Printer Connection"
 msgstr ""
 
 #: ../../raid.pm_.c:36
