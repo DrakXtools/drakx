@@ -600,6 +600,7 @@ N("There was an error ordering packages:"), $1, N("Go on anyway?") ], 1) and ret
 N("There was an error installing packages:"), $1, N("Go on anyway?") ], 1) and return 1;
 	      ${$_[0]} = "already displayed";
 	  }
+	  $w->destroy;
 	  0;
       };
     if ($pkgs::cancel_install) {
