@@ -1,3 +1,52 @@
+2001/08/20  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* share/compssUsers: Have NETWORKING_DNS in "Internet station" (was
+	nowhere)
+
+2001/08/20  Pixel  <pixel@mandrakesoft.com>
+
+	* Xconfigurator_consts.pm: add weird options for NeoMagic NM2160 (request
+	of Alex Hulse <axh0@aber.ac.uk> on cooker)
+
+	* detect_devices.pm (raidAutoStart): fix for when kmod is there
+
+	* diskdrake.pm: remove test code
+
+	* fs.pm: fix bug 4257
+
+	* fsedit.pm: try a stronger matching technique for parsing /proc/mdstat
+	with devfs
+
+	* install_steps.pm, diskdrake_interactive.pm, install_any.pm: try harder
+	to umount /tmp/hdimage only when needed
+
+	* interactive_gtk.pm (wait_message_nextW): fix previous text == new text
+	causing no
+	expose_event causing dead loop
+
+2001/08/19  Pixel  <pixel@mandrakesoft.com>
+
+	* diskdrake_interactive.pm: save fstab on exit
+
+	* fsedit.pm: various typos fix
+
+	* install_steps.pm: rename isCdNotEjectable in usingRamdisk, ensure no
+	files are removed unless we're in ramdisk
+	make the devfs= mount or nomount choice based on raid-based root work
+
+	* standalone/diskdrake: rename isCdNotEjectable in usingRamdisk, ensure no
+	files are removed unless we're in ramdisk
+	fix diskdrake requiring gtk
+	add some test code
+
+	* fs.pm: rename isCdNotEjectable in usingRamdisk, ensure no files are
+	removed unless we're in ramdisk
+	various typos fix
+
+	* install_steps_interactive.pm, common.pm, install2.pm, install_any.pm,
+	lang.pm, pkgs.pm: rename isCdNotEjectable in usingRamdisk, ensure no
+	files are removed unless we're in ramdisk
+
 2001/08/19  Pixel  <pixel@mandrakesoft.com>
 
 	* diskdrake.pm: major fs.pm rework + adaptation to it
