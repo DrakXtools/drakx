@@ -1,3 +1,36 @@
+2003/02/28  Frederic Lepied  <flepied@mandrakesoft.com>
+
+	* network/netconnect.pm: allow to switch in expert mode during install.
+
+	* network/ethernet.pm: Configure hostname only in expert mode.
+
+	* network/network.pm: corrected HOSTNAME/DHCP_HOSTNAME management.
+
+2003/02/28  Pixel  <pixel@mandrakesoft.com>
+
+	* install_steps_interactive.pm: ensure the $::expert flag in netconnect
+	doesn't propagate to the rest of the
+	install
+
+2003/02/28  Till Kamppeter  <till@mandrakesoft.com>
+
+	* scanner.pm, share/rpmsrate: 
+	  - Fixed confScanner() deleting the config file in some cases.
+	  - Removed PDQ from share/rpmsrate
+
+2003/02/27  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* lang.pm, Makefile: error out when a listed lang doesn't have a png lang
+	file
+	when doing the check of lang.pm, first show the warnings,
+	then the errors
+	at make-install time, remove pang lang files corresponding
+	to disabled langs
+
+2003/02/27  Thierry Vignaud  <tvignaud@mandrakesoft.com>
+
+	* drakxtools.spec: 9.1-10mdk
+
 2003/02/27  alafox
 
 	* share/po/ru.po: spellchecked and updated some translations
@@ -13440,7 +13473,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.796 2003/02/27 14:35:00 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.797 2003/02/27 23:15:18 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
