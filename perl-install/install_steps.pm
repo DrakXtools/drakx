@@ -10,6 +10,7 @@ use common qw(:file :system :common);
 use install_any qw(:all);
 use partition_table qw(:types);
 use detect_devices;
+use timezone;
 use modules;
 use run_program;
 use lilo;
@@ -100,7 +101,7 @@ sub setupSCSI { modules::load_thiskind('scsi') }
 sub doPartitionDisks($$) {
     my ($o, $hds) = @_;
     return if $::testing;
-    partition_table::write($_) foreach $hds;
+    partition_table::write($_) foreach @$hds;
 }
 
 #------------------------------------------------------------------------------
@@ -194,15 +195,7 @@ sub pcmciaConfig($) {
 #------------------------------------------------------------------------------
 sub timeConfig {
     my ($o, $f) = @_;
-    my $t = $o->{timezone};
-
-    eval { commands::cp("-f", "/usr/share/zoneinfo/$t->{timezone}", "/etc/localtime") };
-    $@ and log::l("installing /etc/localtime failed");
-    setVarsInSh($f, {
-	ZONE => $t->{timezone},
-	GMT  => bool2text($t->{GMT}),
-	ARC  => "false",
-    });
+    timezone::write($o->{prefix}, $o->{timezone}, $f);
 }
 
 #------------------------------------------------------------------------------

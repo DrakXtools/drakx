@@ -3,7 +3,9 @@ package timezone;
 use diagnostics;
 use strict;
 
-use common;
+use common qw(:common :system);
+use commands;
+use log;
 
 
 sub getTimeZones {
@@ -13,6 +15,18 @@ sub getTimeZones {
     my @l = sort map { chop; $_ } <F>;
     close F or die "cannot list the available zoneinfos";
     @l;
+}
+
+sub write($$$) {
+    my ($prefix, $t, $f) = @_;
+
+    eval { commands::cp("-f", "$prefix/usr/share/zoneinfo/$t->{timezone}", "$prefix/etc/localtime") };
+    $@ and log::l("installing /etc/localtime failed");
+    setVarsInSh($f, {
+	ZONE => $t->{timezone},
+	GMT  => bool2text($t->{GMT}),
+	ARC  => "false",
+    });
 }
 
 my %l2t = (

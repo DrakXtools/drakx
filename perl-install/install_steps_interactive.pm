@@ -118,13 +118,12 @@ sub rebootNeeded($) {
 sub choosePartitionsToFormat($$) {
     my ($o, $fstab) = @_;
 
-    install_steps::choosePartitionsToFormat($o, $fstab);
+    $o->SUPER::choosePartitionsToFormat($fstab);
 
     my @l = grep { $_->{mntpoint} && isExt2($_) || isSwap($_) && !$::beginner } @$fstab;
-    my @r = $o->ask_many_from_list_ref('', _("Choose the partitions you want to format"),
-				       [ map { $_->{mntpoint} || type2name($_->{type}) . " ($_->{device})" } @l ],
-				       [ map { \$_->{toFormat} } @l ]);
-    defined @r or die "cancel";
+    $o->ask_many_from_list_ref('', _("Choose the partitions you want to format"),
+			       [ map { $_->{mntpoint} || type2name($_->{type}) . " ($_->{device})" } @l ],
+			       [ map { \$_->{toFormat} } @l ]) or die "cancel";
 }
 
 sub formatPartitions {
@@ -543,7 +542,7 @@ sub setupBootloader($) {
 			 $l[!$o->{bootloader}{onmbr}]
 			) eq $l[0] unless $::beginner && $o->{bootloader}{onmbr};
 
-    lilo::proposition($o->{hds}, $o->{fstab}, $o->{bootloader});
+    lilo::suggest($o->{hds}, $o->{fstab}, $o->{bootloader});
 
     unless ($::beginner) {
 	my @entries = grep { $_->{liloLabel} } @{$o->{fstab}};
@@ -647,7 +646,7 @@ sub setup_thiskind {
 	my $opt = [ __("Yes"), __("No") ];
 	push @$opt, __("See hardware info") if $::expert;
 	my $r = "Yes";
-	$r = $o->ask_from_list_('', $msg, $opt) unless $at_least_one && @l == 0;
+	$r = $o->ask_from_list_('', $msg, $opt, "No") unless $at_least_one && @l == 0;
 	if ($r eq "No") { return }
 	elsif ($r eq "Yes") {
 	    my @r = $o->loadModule($type) or return;

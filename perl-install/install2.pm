@@ -62,6 +62,7 @@ for (my $i = 0; $i < @installSteps; $i += 2) {
     my %h; @h{@installStepsFields} = @{ $installSteps[$i + 1] };
     $h{help}    = $help::steps{$installSteps[$i]} || __("Help");
     $h{next}    = $installSteps[$i + 2];
+    $h{entered} = 0;
     $h{onError} = $installSteps[$i + 2 * $h{onError}];
     $installSteps{ $installSteps[$i] } = \%h;
     push @orderedInstallSteps, $installSteps[$i];
@@ -233,6 +234,7 @@ sub selectInstallClass {
     $::expert   = $o->{installClass} eq "expert";
     $::beginner = $o->{installClass} eq "beginner";
     $o->{partitions} ||= $suggestedPartitions{$o->{installClass}};
+    $o->{partitioning}{auto_allocate} = 1;
 
     $o->setPackages(\@install_classes) if $o->{steps}{choosePackages}{entered} >= 1;
 }
@@ -266,7 +268,12 @@ I'll try to go on blanking bad partitions"));
     }
 
     eval { fsedit::auto_allocate($o->{hds}, $o->{partitions}) } if $o->{partitioning}{auto_allocate};
-    $o->doPartitionDisks($o->{hds});
+
+    if ($o->{partitioning}{auto_allocated} = ($::beginner && fsedit::get_root_($o->{hds}) && $_[1] == 1)) {
+	install_steps::doPartitionDisks($o, $o->{hds});	
+    } else {
+	$o->doPartitionDisks($o->{hds});
+    }
 
     unless ($::testing) {
 	$o->rebootNeeded foreach grep { $_->{rebootNeeded} } @{$o->{hds}};
@@ -274,14 +281,16 @@ I'll try to go on blanking bad partitions"));
 
     $o->{fstab} = [ fsedit::get_fstab(@{$o->{hds}}) ];
 
-    my $root_fs; map { $_->{mntpoint} eq '/' and $root_fs = $_ } @{$o->{fstab}};
-    $root_fs or die _("partitioning failed: no root filesystem");
+    fsedit::get_root($o->{fstab}) or die _("partitioning failed: no root filesystem");
 
 }
 
 sub formatPartitions {
-    $o->choosePartitionsToFormat($o->{fstab});
-
+    if ($o->{partitioning}{auto_allocated}) { #- if all was auto_allocated, no need to ask, go on!
+	install_steps::choosePartitionsToFormat($o, $o->{fstab});
+    } else {
+	$o->choosePartitionsToFormat($o->{fstab});
+    }
     unless ($::testing) {
 	$o->formatPartitions(@{$o->{fstab}});
 	fs::mount_all([ grep { isExt2($_) || isSwap($_) } @{$o->{fstab}} ], $o->{prefix});
@@ -474,6 +483,10 @@ sub main {
 
 	last if $o->{step} eq 'exitInstall';
     }
+
+    fs::write($o->{prefix}, $o->{fstab});
+    modules::write_conf("$o->{prefix}/etc/conf.modules", 'append');
+
     killCardServices();
 
     log::l("installation complete, leaving");

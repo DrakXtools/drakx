@@ -67,6 +67,13 @@ sub get_fstab(@) {
     map { partition_table::get_normal_parts($_) } @_;
 }
 
+sub get_root($) {
+    my ($fstab) = @_;
+    $_->{mntpoint} eq "/" and return $_ foreach @$fstab;
+    undef;
+}
+sub get_root_ { get_root([ get_fstab(@{$_[0]}) ]) }
+
 sub suggest_part($$$;$) {
     my ($hd, $part, $hds, $suggestions) = @_;
     $suggestions ||= \@suggestions;
