@@ -11,6 +11,7 @@ ETCDEST = $(PREFIX)/etc/gtk
 BINX11DEST = $(PREFIX)/usr/X11R6/bin
 LIBX11DEST = $(PREFIX)/usr/X11R6/lib/X11
 LIBDEST = $(LIBDIR)/$(NAME)
+NETLIBDEST = $(LIBDIR)/$(NAME)/network
 PIXDIR = $(DATADIR)/$(NAME)/pixmaps
 .PHONY: $(DIRS)
 
@@ -23,13 +24,14 @@ $(DIRS):
 	$(MAKE) -C $@
 
 install:
-	install -d $(BINDEST) $(ETCDEST) $(SBINDEST) $(DATADIR) $(LIBDEST) $(BINX11DEST) $(LIBX11DEST) $(PIXDIR) $(DIRS:%=$(LIBDEST)/%)
+	install -d $(BINDEST) $(ETCDEST) $(SBINDEST) $(DATADIR) $(LIBDEST) $(NETLIBDEST) $(BINX11DEST) $(LIBX11DEST) $(PIXDIR) $(DIRS:%=$(LIBDEST)/%)
 	install -d $(LIBDEST)/sbus_probing
 	install $(STANDALONEPMS) $(SBINDEST)
 	install -s ddcprobe/ddcxinfos serial_probe/serial_probe $(SBINDEST)
 	ln -s ../../$(patsubst $(PREFIX)/usr%,%,$(SBINDEST))/XFdrake $(BINX11DEST)/Xdrakres
 
 	install -m 644 *.pm $(LIBDEST)
+	install -m 644 network/*.pm $(NETLIBDEST)
 	install -m 644 pixmaps/* $(PIXDIR)
 	install -m 644 share/diskdrake.rc $(ETCDEST)
 	install -m 644 share/wizard.rc $(ETCDEST)
