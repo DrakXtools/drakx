@@ -17,7 +17,7 @@ use log;
 
 @important_types = ('Linux native', 'Linux swap', 
 		    if_(arch() =~ /i.86/, 'Journalised FS: ext3', 'Journalised FS: ReiserFS', 'Journalised FS: JFS', 'Journalised FS: XFS', 'DOS FAT16', 'Win98 FAT32'),
-			if_(arch() =~ /ia64/, 'Journalised FS: ext3', 'Journalised FS: ReiserFS'),
+			if_(arch() =~ /ia64/, 'Journalised FS: ext3', 'Journalised FS: ReiserFS', 'Journalised FS: XFS'),
 		    if_(arch() =~ /ppc/, 'Apple HFS Partition', 'Apple Bootstrap'));
 @important_types2 = ('Linux RAID', 'Linux Logical Volume Manager partition');
 
@@ -38,6 +38,7 @@ if_(arch() =~ /^ppc/,
   0x483 => 'Journalised FS: ext3',
 ), if_(arch() =~ /^ia64/,
   0x183 => 'Journalised FS: ReiserFS',
+  0x283 => 'Journalised FS: XFS',
   0x483 => 'Journalised FS: ext3',
 ), if_(arch() =~ /^sparc/,
   0x1 => 'SunOS boot',
