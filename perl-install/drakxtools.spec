@@ -349,7 +349,7 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %changelog
 * Thu Nov 25 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.2-0.4mdk
 - diskdrake: more intelligent sort of fstab to handle loopback files
- or bind directory (pixel, bug anthil #1198)
+  or bind directory (pixel, bug anthil #1198)
 - drakboot: detect on lilo on floppy (pixel, #12213)
 - drakconnect: in "ADSL provider" step, reset the protocol on provider
   switch
