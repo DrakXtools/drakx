@@ -99,8 +99,7 @@ sub whatUsbport() {
 	    # it again
 	    my $itemfound = 0;
 	    # Extract the printer data from the ID string
-	    my ($manufacturer, $model, $serialnumber, $description, 
-		$commandset, $sku) =
+	    my ($manufacturer, $model, $serialnumber, $description, $commandset, $sku) =
 		    ("", "", "", "", "");
 	    if ($idstr =~ /MFG:([^;]+);/ || $idstr =~ /MANUFACTURER:([^;]+);/) {
 		$manufacturer = $1;

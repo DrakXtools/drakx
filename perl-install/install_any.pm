@@ -504,7 +504,7 @@ sub install_urpmi {
     $packages->parse_pubkeys(db => $db);
     foreach my $medium (values %$mediums) {
 	$packages->import_needed_pubkeys($medium->{pubkey}, db => $db, callback => sub {
-					     my (undef, undef, $k, $id, $imported) = @_;
+					     my (undef, undef, $_k, $id, $imported) = @_;
 					     if ($id) {
 						 log::l(($imported ? "imported" : "found")." key=$id for medium $medium->{descr}");
 						 $medium->{key_ids}{$id} = undef;
@@ -586,7 +586,7 @@ sub install_urpmi {
   list: list.$name" : "") . (keys(%{$_->{key_ids}}) ? "
   key-ids: " . join(',', keys(%{$_->{key_ids}})) : "") . ($dir =~ /removable:/ && "
   removable: /dev/cdrom") . ($_->{update} ? "
-  update" : ""). "
+  update" : "") . "
 }
 
 ";

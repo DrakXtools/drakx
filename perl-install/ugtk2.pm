@@ -807,7 +807,7 @@ sub new {
     $o->_create_window($title);
     while (my $e = shift @tempory::objects) { $e->destroy }
 
-    $o->{pop_it} ||= $pop_it || (!$::isWizard && !$::isEmbedded) || $::WizardTable && do {
+    $o->{pop_it} ||= $pop_it || !$::isWizard && !$::isEmbedded || $::WizardTable && do {
 	my @l = $::WizardTable->get_children;
 	pop @l if !$::isInstall && $::isWizard; #- don't take into account the DrawingArea
 	any { $_->visible } @l;

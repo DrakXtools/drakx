@@ -125,7 +125,7 @@ sub to_raw_X {
     $raw_X->{xfree4}->remove_load_module('v4l') if $card->{use_DRI_GLX} && $card->{Driver} eq 'r128';
 }
 
-sub default_ATI_fglrx_config { our $default_ATI_fglrx_config }
+sub default_ATI_fglrx_config() { our $default_ATI_fglrx_config }
 
 sub probe() {
 #-for Pixel tests
