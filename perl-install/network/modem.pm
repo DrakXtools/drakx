@@ -21,8 +21,10 @@ sub ppp_configure {
     my %toreplace = map { $_ => $modem->{$_} } qw(auth AutoName connection dns1 dns2 domain IPAddr login passwd phone SubnetMask);
     $toreplace{kpppauth} = ${{ N('Script-based') => 0, N('PAP') => 1, N('Terminal-based') => 2, N('CHAP') => 3, N('PAP/CHAP') => 4 }}{$modem->{auth}};
     $toreplace{phone} =~ s/[a-zA-Z]//g;
-    $toreplace{dnsserver} = join ',', map { $modem->{$_} } "dns1", "dns2";
-    $toreplace{dnsserver} .= $toreplace{dnsserver} && ',';
+    if ($modem->{auto_dns} ne N("Automatic")) {
+        $toreplace{dnsserver} = join ',', map { $modem->{$_} } "dns1", "dns2";
+        $toreplace{dnsserver} .= $toreplace{dnsserver} && ',';
+    }
 
     #- using peerdns or dns1,dns2 avoid writing a /etc/resolv.conf file.
     $toreplace{peerdns} = "yes";
@@ -33,11 +35,10 @@ sub ppp_configure {
     $toreplace{papname} = ($modem->{auth} eq 'PAP' || $modem->{auth} eq 'CHAP') && $toreplace{login};
 
     # handle static/dynamic settings:
-    if ($modem->{auto_ip}) {
+    if ($modem->{auto_ip} eq N("Automatic")) {
         $toreplace{$_} = '0.0.0.0' foreach qw(IPAddr SubnetMask) ;
     }
-    $toreplace{DNS} if $modem->{auto_dns};
-    $toreplace{Gateway} = '0.0.0.0' if $modem->{auto_gateway};
+    $toreplace{Gateway} = '0.0.0.0' if $modem->{auto_gateway} eq N("Automatic");
 
 
     #- build ifcfg-ppp0.
@@ -68,7 +69,7 @@ PEERDNS="$toreplace{peerdns}"
 END
     output("$::prefix/etc/sysconfig/network-scripts/ifcfg-ppp0", 
 	   $various,
-	   map { qq(DNS$_=$toreplace{"dns$_"}\n) } grep { $toreplace{"dns$_"} } 1..2);
+           if_($modem->{auto_dns} ne N("Automatic"), map { qq(DNS$_=$toreplace{"dns$_"}\n) } grep { $toreplace{"dns$_"} } 1..2));
 
     #- build chat-ppp0.
     my @chat = <<END;
