@@ -164,12 +164,35 @@ my $label5 = new Gtk::Label($netcnx->{type} eq 'lan' ? _("Gateway:") : _("Interf
 $table1->attach($label5, 0, 1, 1, 2, 'fill', 'fill',0,0);
 my $label6 = new Gtk::Label($netcnx->{type} eq 'lan' ? $netc->{GATEWAY} : $netc->{NET_INTERFACE});
 $table1->attach($label6, 1, 2, 1, 2, 'fill', 'fill',0,0);
+my $c=netconnect::connected('',$netc);
 my $label7 = new Gtk::Label(_("Status:"));
 $table1->attach($label7, 0, 1, 2, 3, 'fill', 'fill',0,0);
-my $label8 = new Gtk::Label(_("not connected"));
+my $label8 = new Gtk::Label($c ? _("Connected") : _("Not connected"));
 $table1->attach($label8, 1, 2, 2, 3, 'fill', 'fill',0,0);
 
-my $button2 = new Gtk::Button(_("Connect..."));
+my $button2 = new Gtk::Button($c ? _("Disconnect...") : _("Connect..."));
+$button2->signal_connect (clicked => sub {
+			      if (!netconnect::connected('', $netc)) {
+				  my $up;
+				  {
+				      my $w = $in->wait_message('', _("Openning your connection..."), 1);
+				      netconnect::connect_backend($prefix);
+				      sleep 5;
+				      $up=netconnect::connected($prefix, $netc);
+				  }
+				  $in->ask_warn('', $up ? _("The system is now connected to Internet.") : _("The system doesn't seem to be connected to internet.
+Try to reconfigure your connection.") );
+			      } else {
+				  my $up;
+				      {
+					  my $w = $in->wait_message('', _("Closing your connection..."), 1);
+					  netconnect::disconnect_backend($prefix);
+					  sleep 5;
+					  $up=netconnect::connected($prefix, $netc);
+				      }
+				  $in->ask_warn('', $up ? _("The connection is not closed. Try to do it manually by running /etc/sysconfig/network-scripts/net_cnx_down in root.") : _("The system is now disconnected.") );
+			      }
+			  });
 $table1->attach($button2, 2, 3, 2, 3, 'fill', 'fill',0,0);
 
 #$table1->attach($button1, 2, 3, 1, 2, 'fill', 'fill',0,0);
@@ -303,6 +326,9 @@ sub update {
     $label4->set($netcnx->{type});
     $label5->set($netcnx->{type} eq 'lan' ? _("Gateway:") : _("Interface:"));
     $label6->set($netcnx->{type} eq 'lan' ? $netc->{GATEWAY} : $netc->{NET_INTERFACE});
+    my $c = netconnect::connected('', $netc);
+    $label8->set($c ? _("Connected") : _("Not connected"));
+    $button2->child->set($c ? _("Disconnect...") : _("Connect..."));
     $clist1->freeze();
     $clist1->clear();
     foreach (0..$#all_cards) {
