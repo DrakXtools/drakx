@@ -605,6 +605,9 @@ if (-e "/cdrom/Mandrake/base/oem-message-graphic") {
     }
 }
 
+#- clean all initrd image which may have been built.
+system "rm -f /mnt/boot/initrd*";
+
 system "umount", "/mnt/proc";
 $home and system "umount", "/mnt/home";
 $var and system "umount", "/mnt/var";
