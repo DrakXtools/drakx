@@ -148,9 +148,8 @@ sub keepOnlyLegalModes {
 
 sub cardConfigurationAuto() {
     my $card;
-    if (my ($c) = detect_devices::probeall()) {
+    if (my ($c) = grep { $_->{driver} =~ /(Card|Server):/ } detect_devices::probeall()) {
 	local $_ = $c->{driver};
-	/(Card|Server):/ or next;
 	$card->{type} = $1 if /Card:(.*)/;
 	$card->{server} = $1 if /Server:(.*)/;
 	$card->{flags}{needVideoRam} &&= /86c368/;
