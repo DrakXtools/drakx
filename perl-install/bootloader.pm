@@ -1101,12 +1101,6 @@ sub write_grub_config {
 	print F "keytable ", $file2grub->($bootloader->{keytable}) if $bootloader->{keytable};
 	print F "serial --unit=$1 --speed=$2\nterminal --timeout=" . ($bootloader->{timeout} || 0) . " console serial" if get_append($bootloader, 'console') =~ /ttyS(\d),(\d+)/;
 
-	#- since we use notail in reiserfs, altconfigfile is broken :-(
-	unless ($bootIsReiser) {
-	    print F "altconfigfile ", $file2grub->(my $once = "/boot/grub/menu.once");
-	    output "$::prefix$once", " " x 100;
-	}
-
 	each_index {
 	    print F "default $::i" if $_->{label} eq $bootloader->{default};
 	} @{$bootloader->{entries}};
