@@ -2,7 +2,7 @@ ARCH=$(shell uname -m | sed 's/i[4-9]86/i386/')
 
 OBJDIR=bin-$(ARCH)
 
-all: $(OBJDIR) $(OBJDIR)/start.o $(OBJDIR)/dietlibc.a $(OBJDIR)/liblatin1.a $(OBJDIR)/librpc.a $(OBJDIR)/elftrunc $(OBJDIR)/diet
+all: $(OBJDIR) $(OBJDIR)/start.o $(OBJDIR)/dietlibc.a $(OBJDIR)/liblatin1.a $(OBJDIR)/librpc.a $(OBJDIR)/diet
 
 CFLAGS=-pipe
 CROSS=
@@ -72,9 +72,6 @@ $(OBJDIR)/libdietc.so: $(OBJDIR)/dietlibc.a
 
 $(SYSCALLOBJ): syscalls.h
 
-$(OBJDIR)/elftrunc: contrib/elftrunc.c $(OBJDIR)/start.o $(OBJDIR)/dietlibc.a
-	$(CROSS)$(CC) -Iinclude $(CFLAGS) -nostdlib -o $@ $^ -lgcc
-
 $(OBJDIR)/diet: diet.c $(OBJDIR)/start.o $(OBJDIR)/dietlibc.a
 	$(CROSS)$(CC) -Iinclude $(CFLAGS) -nostdlib -o $@ $^ -DDIETHOME=\"$(PWD)\"
 	$(CROSS)strip -R .comment -R .note $@
@@ -90,9 +87,8 @@ $(OBJDIR)/load:
 	chmod 755 $@
 
 clean:
-	rm -f *.o *.a t t1 compile load elftrunc exports mapfile libdietc.so
+	rm -f *.o *.a t t1 compile load exports mapfile libdietc.so
 	rm -rf bin-*
-	$(MAKE) -C examples clean
 
 tar: clean
 	rm -f armv4l
@@ -109,7 +105,7 @@ t:
 t1:
 	$(CROSS)$(CC) -g -o t1 t.c
 
-install: $(OBJDIR)/start.o $(OBJDIR)/dietlibc.a $(OBJDIR)/liblatin1.a $(OBJDIR)/elftrunc $(OBJDIR)/diet
+install: $(OBJDIR)/start.o $(OBJDIR)/dietlibc.a $(OBJDIR)/liblatin1.a $(OBJDIR)/diet
 	cp $(OBJDIR)/start.o $(INSTALLPREFIX)$(prefix)/lib/dietstart.o
 	cp $(OBJDIR)/dietlibc.a $(INSTALLPREFIX)$(prefix)/lib/libdietc.a
 	cp $(OBJDIR)/liblatin1.a $(INSTALLPREFIX)$(prefix)/lib/libdietlatin1.a
