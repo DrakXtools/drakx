@@ -53,7 +53,11 @@ sub changeMedium($$) {
 }
 sub relGetFile($) {
     local $_ = $_[0];
-    m|\.rpm$| ? "$::o->{packages}{mediums}{$asked_medium}{rpmsdir}/$_" : $_;
+    if (my ($arch) = m|\.([^\.]*)\.rpm$|) {
+	$_ = "$::o->{packages}{mediums}{$asked_medium}{rpmsdir}/$_";
+	s/%{ARCH}/$arch/g;
+    }
+    $_;
 }
 sub askChangeMedium($$) {
     my ($method, $medium) = @_;
