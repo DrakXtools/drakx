@@ -1001,6 +1001,8 @@ sub selectPackagesToUpgrade($$$;$$) {
     @{$toRemove || []} = keys %toRemove;
 }
 
+sub allowedToUpgrade { $_[0] !~ /^(kernel|kernel-secure|kernel-smp|kernel-linus|hackkernel)$/ }
+
 sub installCallback {
     my $msg = shift;
     log::l($msg .": ". join(',', @_));
@@ -1136,7 +1138,7 @@ sub install($$$;$$) {
 		my $trans = c::rpmtransCreateSet($db, $prefix);
 		log::l("opened rpm database for transaction of ". scalar @transToInstall ." new packages, still $nb after that to do");
 
-		c::rpmtransAddPackage($trans, $_->{header}, packageName($_), $isUpgrade && packageName($_) !~ /kernel/) #- TODO: replace `named kernel' by `provides kernel'
+		c::rpmtransAddPackage($trans, $_->{header}, packageName($_), $isUpgrade && allowedToUpgrade(packageName($_)))
 		    foreach @transToInstall;
 
 		c::rpmdepOrder($trans) or
@@ -1205,7 +1207,7 @@ sub remove($$) {
 
     foreach my $p (@$toRemove) {
 	#- stuff remove all packages that matches $p, not a problem since $p has name-version-release format.
-	c::rpmtransRemovePackages($db, $trans, $p) if $p !~ /kernel/;
+	c::rpmtransRemovePackages($db, $trans, $p) if allowedToUpgrade($p);
     }
 
     eval { fs::mount("/proc", "$prefix/proc", "proc", 0) } unless -e "$prefix/proc/cpuinfo";

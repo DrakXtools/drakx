@@ -285,6 +285,7 @@ NOTE THIS IS EXPERIMENTAL SUPPORT AND MAY FREEZE YOUR COMPUTER.", $xf3_ver)) . "
     };
     -x "$prefix$card->{prog}" or die "server $card->{server} is not available (should be in $prefix$card->{prog})";
 
+    $card->{options}{sw_cursor} = 1 if $card->{type} =~ /S3 Trio3D/;
     unless ($card->{type}) {
 	$card->{flags}{noclockprobe} = member($card->{server}, qw(I128 S3 S3V Mach64));
     }
@@ -311,7 +312,7 @@ NOTE THIS IS EXPERIMENTAL SUPPORT AND MAY FREEZE YOUR COMPUTER.", $xf3_ver)) . "
     #- but for some there is a need to specify VideoRam (else it won't run).
     if ($card->{DRI_glx}) {
 	$card->{identifier} =~ /Matrox.* G[24]00/ and $card->{flags}{needVideoRam} = 'fakeVideoRam';
-	$card->{type} =~ /Intel 810/ and ($card->{flags}{needVideoRam}, $card->{memory}) = ('fakeVideoRam', 16384);
+	$card->{identifier} =~ /8281[05].* CGC/ and ($card->{flags}{needVideoRam}, $card->{memory}) = ('fakeVideoRam', 16384);
     }
 
     if (!$::isStandalone && $card->{driver} eq 'i810') {
