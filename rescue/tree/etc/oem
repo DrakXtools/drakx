@@ -44,6 +44,17 @@ eval {
 -e "/dev/$hd" or die "unable to access hard disk";
 print "hd: $hd\ncd: $cd\n";
 
+#- try to free any reference to hard disk which will be used (as in rescue mode it has already loaded
+#- existing partition in /mnt.
+open F, "/proc/mounts";
+while (<F>) {
+    /$hd(\d*)\s+(\S+)/ and $already_mounted{$2} = "$hd$1";
+}
+foreach (sort { $b cmp $a } keys %already_mounted) {
+    print "umounting $already_mounted{$_} from $_\n"; 
+    system "umount", $_;
+}
+    
 #- find a cdrom (like) image, normally a true cdrom but if nfs install is running, use it instead.
 mkdir "/cdrom";
 open F, "/proc/cmdline";
@@ -434,9 +445,12 @@ print F "%_install_langs $flang:$lang\n";
 close F;
 system "rpm", "--root", "/mnt", "--initdb";
 
+#- hack for rpm bug, copy environment of rpm before an throw install from that.
+system "tar cvf - /lib/l* /usr/lib/librpm* /bin/rpm /usr/bin/rpm* /usr/lib/rpm/* | tar xvf - -C /mnt";
+
 #- copy and install from each cd image.
 foreach my $medium (@media) {
-    while (! -d "/cdrom/$medium->{rpmsdir}") {
+    while ($cd && ! -d "/cdrom/$medium->{rpmsdir}") {
 	system "unmount", "/dev/$cd";
 	system "eject", "/dev/$cd";
 	print "Please insert the cdrom labeled \"$medium->{descr}\"\n  and press [enter] when done\n";
@@ -448,24 +462,23 @@ foreach my $medium (@media) {
     system "mkdir", "-p", "/hd/$medium->{rpmsdir}";
     foreach my $pkg (@{$packages->{depslist}}) {
 	$pkg->{closure} && !$pkg->{selected} or next;
-	foreach (qw(i586 i486 i386 noarch)) {
-	    my $file = "/cdrom/$medium->{rpmsdir}/$pkg->{name}.$_.rpm";
-	    -e $file or next;
+	my $file = "/cdrom/$medium->{rpmsdir}/" . rpm_filename($pkg);
+	if (-e $file) {
 	    print "  copying $pkg->{name}.$_.rpm\n";
 	    system "cp", "-a", $file, "/hd/$medium->{rpmsdir}";
 	    delete $pkg->{closure};
-	    last;
 	}
     }
 
     print "Installing packages from medium labeled \"$medium->{descr}\"\n";
     if (my $pkg = pkgs::packageByName($packages, 'glibc')) { #- HACK FOR GLIBC
 	if (delete $pkg->{selected}) {
-	    foreach (qw(i586 i486 i386 noarch)) {
-		my $file = "/cdrom/$medium->{rpmsdir}/$pkg->{name}.$_.rpm";
-		-e $file or next;
-		system "rpm", "--root", "/mnt", "--nodeps", "--force", "--noscripts", "-ivh", $file;
-		last; #- update glibc twice, in case.
+	    my $file = "/cdrom/$medium->{rpmsdir}/" . rpm_filename($pkg);
+	    if (-e $file) {
+		#system "rpm", "--root", "/mnt", "--nodeps", "--force", "--noscripts", "-ivh", $file;
+		system "cp", $file, "/mnt";
+		system "chroot", "/mnt", "rpm", "--nodeps", "--force", "--noscripts", "-ivh", rpm_filename($pkg);
+		system "rm", ("/mnt" . rpm_filename($pkg));
 	    }
 	}
     } else {
@@ -474,12 +487,10 @@ foreach my $medium (@media) {
     my @files;
     foreach my $pkg (@{$packages->{depslist}}) {
 	$pkg->{selected} or next;
-	foreach (qw(i586 i486 i386 noarch)) {
-	    my $file = "/cdrom/$medium->{rpmsdir}/$pkg->{name}.$_.rpm";
-	    -e $file or next;
+	my $file = "/cdrom/$medium->{rpmsdir}/" . rpm_filename($pkg);
+	if (-e $file) {
 	    push @files, $file;
 	    delete $pkg->{selected};
-	    last;
 	}
     }
     system "rpm", "--root", "/mnt", "--nodeps", "--force", "-ivh", @files;
@@ -503,7 +514,7 @@ if (-e "/cdrom/Mandrake/base/oem-message-graphic") {
 
 system "umount", "/mnt/proc";
 system "umount", "-a", "-f", "-t", "noproc";
-system "eject", "/dev/$cd";
+$cd and system "eject", "/dev/$cd";
 
 print "
 Done. OEM hard drive ready!
@@ -518,10 +529,13 @@ sub select_packages {
     my $o = { packages => read_depslist("$dir/Mandrake/base/depslist.ordered") };
 
     #- DO NOT FORGET TO UPDATE HERE ACCORDING TO gi/perl-install/install_any.pm
-    my @pkgs = qw(XFree86 XFree86-glide-module Device3Dfx Glide_V3-DRI Glide_V5 Mesa
-		  dhcpcd pump dhcpxd dhcp-client isdn4net isdn4k-utils dev pptp-adsl-fr rp-pppoe ppp ypbind
-		  rhs-printfilters lpr cups cups-drivers samba ncpfs ghostscript-utils autologin
-		  kernel-pcmcia-cs apmd cdrecord rio500
+    my @pkgs = qw(XFree86 XFree86-server XFree86-glide-module Device3Dfx Glide_V3-DRI Glide_V5 Mesa
+		  dhcpcd pump dhcpxd dhcp-client isdn4net isdn4k-utils dev pptp-adsl rp-pppoe ppp ypbind
+		  autologin
+		  foomatic printer-utils printer-testpages gimpprint rlpr samba-client ncpfs nc
+		  cups xpp qtcups kups cups-drivers lpr LPRng pdq ImageMagick
+
+		  kernel-pcmcia-cs apmd cdrecord rio500 grio500
                  );
     push @pkgs, "XFree86-$_" foreach qw(3DLabs 3dfx 8514 AGX FBDev I128 Mach8 Mach32 Mach64 Mono P9000 Rage128 S3 S3V SVGA VGA16 W32);
     foreach (@pkgs) {
@@ -600,8 +614,11 @@ sub select_packages {
     $o->{packages};
 }
 
-sub chop_version($) {
-    ($_[0] =~ /(.*)-[^-]+-[^-]+/)[0] || $_[0];
+sub chop_version {
+    ($_[0] =~ /^([^:\s]*)-[^:\-\s]+-[^:\-\s]+\.[^:\.\-\s]*(?::\S*)?/)[0] || die "unable to parse $_[0]";
+}
+sub rpm_filename {
+    (($_[0]{name} =~ /^([^:\s]*-[^:\-\s]+-[^:\-\s]+\.[^:\.\-\s]*)(?::\S*)?/)[0] || die "unable to parse $_[0]") . ".rpm";
 }
 
 sub read_depslist {
@@ -622,13 +639,13 @@ sub read_depslist {
 	$packages->{names}{chop_version($_->{name})} = $_;
     }
 
-    print STDERR "read " . scalar(@{$packages->{depslist}}) . " package dependancies\n";
+    print "read " . scalar(@{$packages->{depslist}}) . " package dependancies\n";
     $packages;
 }
 
 #- compability method for the below ones, wrap DrakX code extracted.
 package log;
-sub l {}
+sub l { open LOG, ">>/tmp/ddebug.txt"; print LOG @_; close LOG; }
 
 package detect_devices;
 sub matching_desc { 0 }
@@ -637,8 +654,10 @@ package install_any;
 sub getFile { open FILE, "/cdrom/$_[0]" or return; \*FILE }
 
 package pkgs;
+sub if_ { my $b = shift; $b or return (); wantarray ? @_ : $_[0] }
 sub formatXiB { $_[0] } #- NOP
 sub packageName { ::chop_version($_[0]{name}) }
+sub packageFlagSelected { $_[0]{selected} }
 sub packageSize { $_[0]{size} }
 sub packageDepsId { @{$_[0]{deps}} }
 sub packageRate { $_[0]{values}[0] }
@@ -711,14 +730,15 @@ sub selectPackage {
 sub read_rpmsrate {
     my ($packages, $f) = @_;
     my $line_nb = 0;
+    my $fatal_error;
     my (@l);
     while (<$f>) {
 	$line_nb++;
 	/\t/ and die "tabulations not allowed at line $line_nb\n";
-	s/#.*//; 		 # comments
+	s/#.*//; # comments
 
 	my ($indent, $data) = /(\s*)(.*)/;
-	next if !$data;		# skip empty lines
+	next if !$data; # skip empty lines
 
 	@l = grep { $_->[0] < length $indent } @l;
 
@@ -732,10 +752,9 @@ sub read_rpmsrate {
                    (?: \s*\|\|\s* (?: !\s*)? [0-9A-Z_]+(?:".*?")?)*
                   )
                   (?:\s+|$)
-                 )(.*)/x) {
+                 )(.*)/x) { #@")) {
 	    ($t, $flag, $data) = ($1,$2,$3);
-	    while ($flag =~ s,^\s*(("[^"]*"|[^"\s]*)*)\s+,$1,) {
-	    }
+	    while ($flag =~ s,^\s*(("[^"]*"|[^"\s]*)*)\s+,$1,) {}
 	    my $ok = 0;
 	    $flag = join('||', grep { 
 		if (my ($inv, $p) = /^(!)?HW"(.*)"/) {
@@ -756,8 +775,24 @@ sub read_rpmsrate {
 		if ($packages) {
 		    my $p = packageByName($packages, $_) or next;
 		    
-		    my @m2 = map { packageName(packageById($packages, $_)) =~ /locales-(.*)/ ? qq(LOCALES"$1") : () } packageDepsId($p);
-		    packageSetRateRFlags($p, $rate, (grep { !/^\d$/ } @m), @m2);
+		    my @m2 = 
+		      map { if_($_ && packageName($_) =~ /locales-(.*)/, qq(LOCALES"$1")) }
+		      map { packageById($packages, $_) } packageDepsId($p);
+
+		    my @m3 = ((grep { !/^\d$/ } @m), @m2);
+		    if (packageRate($p)) {
+			next if @m3 == 1 && $m3[0] eq 'INSTALL';
+
+			my ($rate2, @m4) = packageRateRFlags($p);
+			if (@m3 > 1 || @m4 > 1) {
+			    log::l("can't handle complicate flags for packages appearing twice ($_)");
+			    $fatal_error++;
+			}
+			log::l("package $_ appearing twice with different rates ($rate != $rate2)") if $rate != $rate2;
+			packageSetRateRFlags($p, $rate, "$m3[0]||$m4[0]");
+		    } else {
+			packageSetRateRFlags($p, $rate, @m3);
+		    }
 		} else {
 		    print "$_ = ", join(" && ", @m), "\n";
 		}
@@ -767,7 +802,7 @@ sub read_rpmsrate {
 	    push @l, [ $l2[0][0], $l2[$#l2][1] ];
 	}
     }
-    $line_nb > 0 or die "nothing read in rpmsrate";
+    $fatal_error and die "$fatal_error fatal errors in rpmsrate";
 }
 
 sub readCompssUsers {
@@ -798,14 +833,14 @@ sub readCompssUsers {
 }
 
 sub setSelectedFromCompssList {
-    my ($packages, $compssUsersChoice, $min_level, $max_size, $install_class) = @_;
+    my ($packages, $compssUsersChoice, $min_level, $max_size) = @_;
     $compssUsersChoice->{TRUE} = 1; #- ensure TRUE is set
     my $nb = selectedSize($packages);
-#    foreach my $p (sort { substr($a,0,1) <=> substr($b,0,1) } values %{$packages->{names}}) {
-    foreach my $p (sort { $b->{values}[0] <=> $a->{values}[0] } @{$packages->{depslist}}) { #- LOCALLY MODIFIED FOR OEM
-#	my ($rate, @flags) = split "\t", $p->[$VALUES];
+    foreach my $p (sort { packageRate($b) <=> packageRate($a) } values %{$packages->{names}}) {
 	my ($rate, @flags) = packageRateRFlags($p);
-	next if !$rate || $rate < $min_level || grep { !grep { /^!(.*)/ ? !$compssUsersChoice->{$1} : $compssUsersChoice->{$_} } split('\|\|') } @flags;
+	next if 
+	  !$rate || $rate < $min_level || 
+	  grep { !grep { /^!(.*)/ ? !$compssUsersChoice->{$1} : $compssUsersChoice->{$_} } split('\|\|') } @flags;
 
 	#- determine the packages that will be selected when
 	#- selecting $p. the packages are not selected.
@@ -827,5 +862,6 @@ sub setSelectedFromCompssList {
 	selectPackage($packages, $p);
     }
     log::l("setSelectedFromCompssList: reached size ", formatXiB($nb), ", up to indice $min_level (less than ", formatXiB($max_size), ")");
+    log::l("setSelectedFromCompssList: ", join(" ", sort map { packageName($_) } grep { packageFlagSelected($_) } @{$packages->{depslist}}));
     $min_level;
 }
