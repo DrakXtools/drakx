@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10
-Release: 0.15mdk
+Release: 0.16mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -316,6 +316,16 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Sun Feb 15 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10-0.16mdk
+- fix harddrake crash (#7897)
+- printerdrake (till):
+  o handle weird printer ID strings, as the one of the Brother HL-720
+    with empty manufacturer and description fields (#7753).
+  o recognize also "SN:" as serial number field in printer ID string
+    (HP PhotoSmart 7760, bug #6534).
+  o load the "usblp" module instead of the "printer" one on kernel
+    2.6.x
+
 * Sat Feb 14 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10-0.15mdk
 - drakbackup: (stew)
   o FTP restore failure feedback
