@@ -570,7 +570,6 @@ sub main {
 	push @auto, 'selectInstallClass', 'doPartitionDisks', 'choosePackages', 'configureTimezone', 'exitInstall';
     }
     if ($::recovery) {
-	$o->{partitioning}{use_existing_root} = 1;
 	push @auto, 'selectLanguage', 'selectInstallClass', 'doPartitionDisks', 'formatPartitions';
     }
 
