@@ -948,8 +948,11 @@ Please run \"Internet access\" in control center."));
                                                                           foreach my $i (0..$#conf_data) {
                                                                               ${$conf_data[$::i][1]} = $infos[2*$::i+1]->get_text;
                                                                           } @conf_data;
-                                                                          update();
-                                                                          $button_apply->set_sensitive(1);
+                                                                          # called from old GUI?
+                                                                          if ($label_host) {
+                                                                              update();
+                                                                              $button_apply->set_sensitive(1);
+                                                                          }
                                                                           $exit_dialogsub->();
                                                                       }),
                                                 ),
