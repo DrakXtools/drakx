@@ -531,6 +531,7 @@ Take a look at http://www.linmodems.org"),
                     pre => sub {
                         network::modem::ppp_read_conf($netcnx, $netc) if !$modem_conf_read;
                         $modem_conf_read = 1;
+                        $in->do_pkgs->ensure_is_installed('kdenetwork-kppp-provider', $db_path);
                         @isp = map {
                             my $country = $_;
                             map { 
