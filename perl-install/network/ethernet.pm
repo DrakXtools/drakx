@@ -80,13 +80,6 @@ sub get_eth_cards {
 
 sub get_eth_cards_names {
     my ($modules_conf, @all_cards) = @_;
-    
-    foreach my $card (@all_cards) {
-	#- fix modules aliases
-	$modules_conf->remove_alias($card->[1]);
-	$modules_conf->set_alias($card->[0], $card->[1]);
-    }
-
     { map { $_->[0] => join(': ', $_->[0], $_->[2]) } @all_cards };
 }
 
@@ -111,9 +104,9 @@ sub update_iftab() {
 # automatic net aliases configuration
 sub configure_eth_aliases {
     my ($modules_conf) = @_;
-    foreach (detect_devices::getNet()) {
-        my $driver = c::getNetDriver($_) or next;
-        $modules_conf->set_alias($_, $driver);
+    foreach my $card (get_eth_cards()) {
+	$modules_conf->remove_alias($card->[1]);
+	$modules_conf->set_alias($card->[0], $card->[1]);
     }
 }
 
