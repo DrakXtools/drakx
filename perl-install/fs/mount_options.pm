@@ -198,7 +198,7 @@ sub set_default {
     if (member('vfat', split(':', $part->{fs_type})) || $part->{fs_type} eq 'auto') {
 
 	put_in_hash($options, {
-			       user => 1, noexec => 0,
+			       users => 1, noexec => 0,
 			      }) if $part->{is_removable};
 
 	put_in_hash($options, {
@@ -223,13 +223,12 @@ sub set_default {
 
     # rationalize: no need for user
     if ($options->{autofs} || $options->{supermount}) {
-	$options->{user} = 0;
+	$options->{users} = $options->{user} = 0;
     }
 
-    # have noauto when we have user
-    $options->{noauto} = 1 if $options->{user}; 
-
-    if ($options->{user}) {
+    if ($options->{user} || $options->{users}) {
+        # have noauto when we have user
+        $options->{noauto} = 1;
 	# ensure security  (user_implies - noexec as noexec is not a security matter)
 	$options->{$_} = 1 foreach 'nodev', 'nosuid';
     }
