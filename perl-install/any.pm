@@ -106,7 +106,7 @@ sub setupBootloader {
 sub installBootloader {
     my ($in, $b, $all_hds) = @_;
 
-    install_acpi_pkgs($in, $b);
+    install_acpi_pkgs($in->do_pkgs, $b);
 
     my $_w = $in->wait_message(N("Please wait"), N("Bootloader installation in progress"));
 
