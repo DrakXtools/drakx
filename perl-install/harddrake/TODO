@@ -5,14 +5,12 @@
 *** timeout on dialogs in service
 
 ** wishes
+*** more use of my_gtk/ugtk
 *** non needed stuff to run X must be posponed after X11 startup
 **** eg: scanner/audio/printer/floppy/cdrom/tape/tv/webcam/joystick/ ... 
-**** different modes:
-***** expert mode only if dadou agree with this idea
-***** neuneu => automatic config in service (ie for mouse/video card/...)
-***** expert => run config tools
-
-*** mode neuneu/expert => automatic/tools
+*** different modes:
+**** expert mode (only if dadou agree with this idea) => run config tools
+**** neuneu => automatic config in service (ie for mouse/video card/...)
 
 ** validation:
 *** see dadou (GUI)
@@ -24,8 +22,6 @@
 *** config module (module options configuration button) => expert only
 *** embedded mode
 *** add updfstab as in kudzu
-*** make all drakx tools a simple one-liner that call right module so that
-    harddrake2 and mcc can load these tools without more ram eater
 *** enable the user to force a module (isa, isapnp, ...)
 *** detect pcimcia:
   	
@@ -37,7 +33,7 @@
 
 
 * Postponed
-** use fbgtk+2 when booting on fbcon for smoother GUI
+** use fbgtk+2 when booting on fbcon for smoother GUI => interactive::fbgtk
 *** fpons, convert perl-GTK to gtk+2 :-)
 ** move all drakx tools into just a small one-liner that uses real <tool>.pm
     so that harddrake and mcc reduces their memory usage pattern and
@@ -50,6 +46,8 @@
         -> description
 
 
+* ####################################################################
+* ####################################################################
 
 * / no hope / useless :
 ** enable a string to be passed as detector; in that case, do ourself the =~
