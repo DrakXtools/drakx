@@ -1,6 +1,7 @@
 #!/usr/bin/perl 
 
 use lib qw(/usr/lib/libDrakX);
+use standalone;
 use MDK::Common;
 use Gtk;
 use interactive;
@@ -29,9 +30,11 @@ my $window = $::isEmbedded ? new Gtk::Plug ($::XID) : new Gtk::Window ("toplevel
 $window->signal_connect(delete_event => sub { $::isEmbedded ? kill(USR1, $::CCPID) : &CloseAppWindow });
 
 #- verification of package image magik
-$in->ask_warn(_("Error"),_("package ImageMagick is required for correct working")) 
-  and $::isEmbedded ? kill(USR1, $::CCPID) : &CloseAppWindow if system('rpm -q ImageMagick');
-
+if(!$in->do_pkgs->is_installed('ImageMagick')){
+	 $in->ask_okcancel(_("Error"),_("package 'ImageMagick' is required for correct working.\nClick \"Ok\" to install 'ImageMagick' or \"Cancel\" to quit")) 
+		 and $in->do_pkgs->install('ImageMagick')
+		 or $::isEmbedded ? kill(USR1, $::CCPID) : &CloseAppWindow ;
+}
 
 #- application vars
 my $tmp_path = '/tmp/draksplash/';
