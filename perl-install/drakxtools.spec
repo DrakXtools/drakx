@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10.2
-Release: 12mdk
+Release: 13mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -368,6 +368,18 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Thu Mar 24 2005 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.2-13mdk
+- banners: make banner be RTL aware (aka follow language direction and
+  display itself mirrored for RTL languages) (#11910)
+- diskdrake (pixel):
+  o ensure we use/propose a free md when creating a new one
+  o after "mdadm --assemble" there can be some inactivate mds busying
+    devices, stopping them
+- drakconnect (blino):
+  o make Bewan PCI modems work again
+  o add support for modems using pppoatm (e.g. SpeedTouch) and ISP
+    using RFC 1483 Routed VC MUX (e.g. Free Degroupe)
+
 * Wed Mar 23 2005 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.2-12mdk
 - XFdrake: fix probing on neomagic (pixel)
 - harddrake: package rpmsrate so that installing hw packages works
