@@ -214,7 +214,7 @@ sub ask_standalone_gtk {
 	    map {
                 my $service = $_;
         	my $infos = $strip->(description($_, $prefix));
-                $infos ||= _("No additionnal information\nabout this service, sorry.");
+                $infos ||= _("No additional information\nabout this service, sorry.");
 		my $l = new Gtk::Label();
                 my ($started, $action) = $update_service->($service, gtkset_justify($l, 0));
 		[ gtkpack__(new Gtk::HBox(0,0), $_),
