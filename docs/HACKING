@@ -47,11 +47,10 @@ locales-ja locales-ko locales-zh
 
 GI needs to be informed about which kernel(s) is/are to be used.
 Most of the time, no manual install is needed. Just be sure to
-have the BOOT kernel(s) in /RPMS and issue "make" in the
-"kernel/" subdirectory of the "gi" directory. This will install
-the kernel and compile necessary files related to.
+have the BOOT kernel(s) in /RPMS, and typing make later on will
+extract the package(s) and build stuff from it.
 
-For each kernel, directories will be populated as follows:
+FYI, for each kernel, directories will be populated as follows:
 
 gi/kernel/all.kernels/2.6.0
         containing all files from the said kernel RPM package
