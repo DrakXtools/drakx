@@ -588,7 +588,7 @@ sub Resize {
 	    $nice_resize{fat} = resize_fat::main->new($part->{device}, devices::make($part->{device}));
 	    $min = max($min, $nice_resize{fat}->min_size);
 	    $max = min($max, $nice_resize{fat}->max_size);	    
-	} elsif (isExt2($part)) {
+	} elsif (isExt2($part) || isThisFs('ext3', $part)) {
 	    write_partitions($in, $hd) or return;
 	    $nice_resize{ext2} = devices::make($part->{device});
 	    my $r = `dumpe2fs $nice_resize{ext2} 2>/dev/null`;
