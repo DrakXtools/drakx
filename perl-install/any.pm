@@ -318,12 +318,14 @@ if_(arch() !~ /sparc|ppc|ia64/,
 	}
 	$Modify->($e) or return;
 	push @{$b->{entries}}, $e;
+	$e;
     };
 
     my $Remove = sub {
 	my ($e) = @_;
 	delete $b->{default} if $b->{default} eq $e->{label};
 	@{$b->{entries}} = grep { $_ != $e } @{$b->{entries}};
+	1;
     };
 
     $in->ask_from__add_modify_remove('',
