@@ -111,7 +111,7 @@ sub scan4channels() {
 	   }
 }
 
-my @devices = grep { $_->{media_type} eq 'MULTIMEDIA_VIDEO' || member($_->{driver}, qw(bttv saa7134 usbvision)) } detect_devices::probeall();
+my @devices = detect_devices::isTVcard();
 push @devices, { driver => 'bttv', description => 'dummy' } if $::testing && !@devices;
 if (@devices) {
     my $not_canceled = 1;
