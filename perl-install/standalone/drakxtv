@@ -47,16 +47,16 @@ sub scan4channels {
 #    };
     if (! -x "/usr/bin/scantv") {
 	$in->ask_warn("XawTV isn't installed!", 
-		      formatAlaTeX(_("XawTV isn't installed!w
+		      formatAlaTeX(_("XawTV isn't installed!
 
 
-If you do have a TV card but DrakX has neither detect it (no bttv
+If you do have a TV card but DrakX has neither detected it (no bttv
 module in \"/etc/modules\") nor installed xawtv, please send the
-result of \"lspcidrake -v -f \" to \"install at mandrakesoft dot com\"
-with subject \"undetected TV card\"
+results of \"lspcidrake -v -f\" to \"install\@mandrakesoft.com\"
+with subject \"undetected TV card\".
 
 
-You can installed it by typing \"urpmi xawtv\".")));
+You can install it by typing \"urpmi xawtv\" as root, in a console.")));
 	
     } else {
 	my ($ftable_id, $norm);
