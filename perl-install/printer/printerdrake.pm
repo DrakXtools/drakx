@@ -210,14 +210,14 @@ If some of these measures lead to problems for you, turn this option off, but th
 					    N("IP address of host/network:") &&
 					   $ip =~ /^\s*$/) {
 					   
-					   $in->ask_warn('', N("Host/network IP address missing."));
+					   $in->ask_warn(N("Error"), N("Host/network IP address missing."));
 					   return (1,1);
 				       }
 				       if ($hostchoice eq 
 					    N("IP address of host/network:") &&
 					   !printer::main::is_network_ip($ip)) {
 					   
-					   $in->ask_warn('', 
+					   $in->ask_warn(N("Error"), 
 N("The entered host/network IP is not correct.\n") .
 N("Examples for correct IPs:\n") .
   "192.168.100.194\n" .
@@ -242,7 +242,7 @@ N("Examples for correct IPs:\n") .
 				       if ($address ne $oldaddress &&
 					   member($address,
 						  @{$printer->{cupsconfig}{clientnetworks}})) {
-					   $in->ask_warn('', 
+					   $in->ask_warn(N("Error"), 
 							 N("This host/network is already in the list, it cannot be added again.\n"));
 					   if ($hostchoice eq 
 					       N("IP address of host/network:")) {
@@ -390,12 +390,12 @@ N("Examples for correct IPs:\n") .
 			       callbacks => {
 				   complete => sub {
 				       if ($ip =~ /^\s*$/) {
-					   $in->ask_warn('', N("Server IP missing!"));
+					   $in->ask_warn(N("Error"), N("Server IP missing!"));
 					   return (1,0);
 				       }
 				       if ($ip !~ 
 					   /^\s*(\d+\.\d+\.\d+\.\d+)\s*$/) {
-					   $in->ask_warn('', 
+					   $in->ask_warn(N("Error"), 
 N("The entered IP is not correct.\n") .
 N("Examples for correct IPs:\n") .
   "192.168.100.194\n" .
@@ -408,7 +408,7 @@ N("Examples for correct IPs:\n") .
 				       if ($port !~ /\S/) {
 					   $port = '631';
 				       } elsif ($port !~ /^\s*(\d+)\s*$/) {
-					   $in->ask_warn('', N("The port number should be an integer!"));
+					   $in->ask_warn(N("Error"), N("The port number should be an integer!"));
 					   return (1,1);
 				       } else {
 					   $port = $1;
@@ -418,7 +418,7 @@ N("Examples for correct IPs:\n") .
 				       if ($address ne $oldaddress &&
 					   member($address,
 						  @{$printer->{cupsconfig}{BrowsePoll}})) {
-					   $in->ask_warn('', 
+					   $in->ask_warn(N("Error"), 
 							 N("This server is already in the list, it cannot be added again.\n"));
 					   return (1,0);
 				       }
@@ -1045,7 +1045,7 @@ sub setup_local_autoscan {
 		     { 
 			 complete => sub {
 			     if ($menuchoice eq "") {
-				 $in->ask_warn('', N("You must enter a device or file name!"));
+				 $in->ask_warn(N("Error"), N("You must enter a device or file name!"));
 				 return (1,0);
 			     }
 			     return 0;
@@ -1092,7 +1092,7 @@ sub setup_local_autoscan {
 				  callbacks => {
 				      complete => sub {
 					  unless ($menuchoice ne "") {
-					      $in->ask_warn('', N("You must choose/enter a printer/device!"));
+					      $in->ask_warn(N("Error"), N("You must choose/enter a printer/device!"));
 					      return (1,0);
 					  }
 					  return 0;
@@ -1167,11 +1167,11 @@ N("To use a remote lpd printer, you need to supply the hostname of the printer s
 { label => N("Remote printer name"), val => \$remotequeue } ],
 complete => sub {
     if ($remotehost eq "") {
-	$in->ask_warn('', N("Remote host name missing!"));
+	$in->ask_warn(N("Error"), N("Remote host name missing!"));
 	return (1,0);
     }
     if ($remotequeue eq "") {
-	$in->ask_warn('', N("Remote printer name missing!"));
+	$in->ask_warn(N("Error"), N("Remote printer name missing!"));
 	return (1,1);
     }
     return 0;
@@ -1193,7 +1193,7 @@ complete => sub {
     if (defined($modelinfo) &&
 	$modelinfo->{MANUFACTURER} ne "" &&
 	$modelinfo->{MODEL} ne "") {
-        $in->ask_warn('', N("Detected model: %s %s",
+        $in->ask_warn(N("Information"), N("Detected model: %s %s",
                             $modelinfo->{MANUFACTURER}, $modelinfo->{MODEL}));
         $auto_hpoj = 1;
     } else {
@@ -1342,15 +1342,15 @@ sub setup_smb {
 	     allow_empty_list => 1, type => 'combo' }) ],
 	 complete => sub {
 	     if (!is_ip($smbserverip) && $smbserverip ne "") {
-		 $in->ask_warn('', N("IP address should be in format 1.2.3.4"));
+		 $in->ask_warn(N("Error"), N("IP address should be in format 1.2.3.4"));
 		 return (1,1);
 	     }
 	     if ($smbserver eq "" && $smbserverip eq "") {
-		 $in->ask_warn('', N("Either the server name or the server's IP must be given!"));
+		 $in->ask_warn(N("Error"), N("Either the server name or the server's IP must be given!"));
 		 return (1,0);
 	     }
 	     if ($smbshare eq "") {
-		 $in->ask_warn('', N("Samba share name missing!"));
+		 $in->ask_warn(N("Error"), N("Samba share name missing!"));
 		 return (1,2);
 	     }
 	     if ($smbpassword ne "") {
@@ -1450,11 +1450,11 @@ N("To print on a NetWare printer, you need to provide the NetWare print server n
 { label => N("Password"), val => \$ncppassword, hidden => 1 } ],
 complete => sub {
     unless ($ncpserver ne "") {
-	$in->ask_warn('', N("NCP server name missing!"));
+	$in->ask_warn(N("Error"), N("NCP server name missing!"));
 	return (1,0);
     }
     unless ($ncpqueue ne "") {
-	$in->ask_warn('', N("NCP queue name missing!"));
+	$in->ask_warn(N("Error"), N("NCP queue name missing!"));
 	return (1,1);
     }
     return 0;
@@ -1571,11 +1571,11 @@ sub setup_socket {
 		 callbacks => {
 		 complete => sub {
 		     unless ($remotehost ne "") {
-			 $in->ask_warn('', N("Printer host name or IP missing!"));
+			 $in->ask_warn(N("Error"), N("Printer host name or IP missing!"));
 			 return (1,0);
 		     }
 		     unless ($remoteport =~ /^[0-9]+$/) {
-			 $in->ask_warn('', N("The port number should be an integer!"));
+			 $in->ask_warn(N("Error"), N("The port number should be an integer!"));
 			 return (1,1);
 		     }
 		     return 0;
@@ -1661,7 +1661,7 @@ list => [ $printer->{currentqueue}{connect},
 	  ], not_edit => 0 }, ],
 complete => sub {
     unless ($printer->{currentqueue}{connect} =~ /[^:]+:.+/) {
-	$in->ask_warn('', N("A valid URI must be entered!"));
+	$in->ask_warn(N("Error"), N("A valid URI must be entered!"));
 	return (1,0);
     }
     return 0;
@@ -1707,7 +1707,7 @@ complete => sub {
         if (defined($modelinfo) &&
             $modelinfo->{MANUFACTURER} ne "" &&
 	    $modelinfo->{MODEL} ne "") {
-            $in->ask_warn('', N("Detected model: %s %s",
+            $in->ask_warn(N("Information"), N("Detected model: %s %s",
                                 $modelinfo->{MANUFACTURER},
 				$modelinfo->{MODEL}));
             $auto_hpoj = 1;
@@ -1748,7 +1748,7 @@ N("Here you can specify any arbitrary command line into which the job should be 
 val => \$commandline }, ],
 complete => sub {
     unless ($commandline ne "") {
-	$in->ask_warn('', N("A command line must be entered!"));
+	$in->ask_warn(N("Error"), N("A command line must be entered!"));
 	return (1,0);
     }
     return 0;
@@ -2141,13 +2141,13 @@ sub choose_printer_name {
 	   #cancel => !$printer->{configured}{$queue} ? '' : N("Remove queue"),
 	   callbacks => { complete => sub {
 	       unless ($printer->{currentqueue}{queue} =~ /^\w+$/) {
-		   $in->ask_warn('', N("Name of printer should contain only letters, numbers and the underscore"));
+		   $in->ask_warn(N("Error"), N("Name of printer should contain only letters, numbers and the underscore"));
 		   return (1,0);
 	       }
 	       local $::isWizard = 0;
 	       if ($printer->{configured}{$printer->{currentqueue}{queue}}
 		   && $printer->{currentqueue}{queue} ne $default && 
-		   !$in->ask_yesorno('', N("The printer \"%s\" already exists,\ndo you really want to overwrite its configuration?",
+		   !$in->ask_yesorno(N("Warning"), N("The printer \"%s\" already exists,\ndo you really want to overwrite its configuration?",
 					    $printer->{currentqueue}{queue}),
 				      0)) {
 		   return (1,0); # Let the user correct the name
@@ -2407,13 +2407,13 @@ sub installppd {
         $ppdfile = $in->ask_file(N("Select PPD file"), "$dir");
 	last if !$ppdfile;
 	if (! -r $ppdfile) {
-	    $in->ask_warn('Printerdrake',
+	    $in->ask_warn(N("Error"),
 			  N("The PPD file %s does not exist or is unreadable!",
 			    $ppdfile));
 	    next;
 	}
 	if (! printer::main::checkppd($printer, $ppdfile)) {
-	    $in->ask_warn('Printerdrake',
+	    $in->ask_warn(N("Error"),
 			  N("The PPD file %s does not conform with the PPD specifications!",
 			    $ppdfile));
 	    next;
@@ -2830,15 +2830,15 @@ You should make sure that the page size and the ink type/printing mode (if avail
 		     for ($i = 0; $i <= $#{$printer->{ARGS}}; $i++) {
 			 if ($printer->{ARGS}[$i]{type} eq 'int' || $printer->{ARGS}[$i]{type} eq 'float') {
 			     if ($printer->{ARGS}[$i]{type} eq 'int' && $userinputs[$i] !~ /^[\-\+]?[0-9]+$/) {
-				 $in->ask_warn('', N("Option %s must be an integer number!", $printer->{ARGS}[$i]{comment}));
+				 $in->ask_warn(N("Error"), N("Option %s must be an integer number!", $printer->{ARGS}[$i]{comment}));
 				 return (1, $i);
 			     }
 			     if ($printer->{ARGS}[$i]{type} eq 'float' && $userinputs[$i] !~ /^[\-\+]?[0-9\.]+$/) {
-				 $in->ask_warn('', N("Option %s must be a number!", $printer->{ARGS}[$i]{comment}));
+				 $in->ask_warn(N("Error"), N("Option %s must be a number!", $printer->{ARGS}[$i]{comment}));
 				 return (1, $i);
 			     }
 			     if ($userinputs[$i] < $printer->{ARGS}[$i]{min} || $userinputs[$i] > $printer->{ARGS}[$i]{max}) {
-				 $in->ask_warn('', N("Option %s out of range!", $printer->{ARGS}[$i]{comment}));
+				 $in->ask_warn(N("Error"), N("Option %s out of range!", $printer->{ARGS}[$i]{comment}));
 				 return (1, $i);
 			     }
 			 }
@@ -2889,7 +2889,7 @@ sub setasdefault {
 #    $in->set_help('setupAsDefault') if $::isInstall;
     if ($printer->{DEFAULT} eq '' || # We have no default printer,
 	                             # so set the current one as default
-	$in->ask_yesorno('', N("Do you want to set this printer (\"%s\")\nas the default printer?", $printer->{QUEUE}), 0)) { # Ask the user
+	$in->ask_yesorno(N("Printerdrake"), N("Do you want to set this printer (\"%s\")\nas the default printer?", $printer->{QUEUE}), 0)) { # Ask the user
 	$printer->{DEFAULT} = $printer->{QUEUE};
         printer::default::set_printer($printer);
     }
@@ -2988,10 +2988,10 @@ Printing status:\n%s\n\n", @lpq_output);
 It may take some time before the printer starts.\n");
 	}
 	if ($printer->{NEW} == 0) {
-	    $in->ask_warn('',$dialogtext);
+	    $in->ask_warn(N("Printerdrake"),$dialogtext);
 	    return 1;
 	} else {
-	    $in->ask_yesorno('', $dialogtext . N("Did it work properly?"), 1) 
+	    $in->ask_yesorno(N("Printerdrake"), $dialogtext . N("Did it work properly?"), 1) 
 		and return 1;
 	}
     } else {
@@ -3229,12 +3229,12 @@ You can also type a new name or skip this printer.",
                         cancel => N("Skip"),
 		        callbacks => { complete => sub {
 	                    unless ($newqueue =~ /^\w+$/) {
-				$in->ask_warn('', N("Name of printer should contain only letters, numbers and the underscore"));
+				$in->ask_warn(N("Error"), N("Name of printer should contain only letters, numbers and the underscore"));
 				return (1,0);
 			    }
 			    if ($printer->{configured}{$newqueue}
 				&& $newqueue ne $oldqueue && 
-				!$in->ask_yesorno('', N("The printer \"%s\" already exists,\ndo you really want to overwrite its configuration?",
+				!$in->ask_yesorno(N("Warning"), N("The printer \"%s\" already exists,\ndo you really want to overwrite its configuration?",
 							 $newqueue),
 						   0)) {
 				return (1,0); # Let the user correct the name
@@ -4321,7 +4321,7 @@ sub remove_printer {
     # needed.
 
     if ($in->ask_yesorno
-	('', N("Do you really want to remove the printer \"%s\"?", $queue),
+	(N("Warning"), N("Do you really want to remove the printer \"%s\"?", $queue),
 	 1)) {
 	my $_w = $in->wait_message
 	    (N("Printerdrake"),
