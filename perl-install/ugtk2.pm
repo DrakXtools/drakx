@@ -498,7 +498,7 @@ sub create_packtable {
     } @l;
     $w->set_col_spacings($options->{col_spacings} || 0);
     $w->set_row_spacings($options->{row_spacings} || 0);
-    gtkset_border_width($w, 10);
+    gtkset_border_width($w, $::isInstall ? 3 : 10);
 }
 
 sub create_okcancel {
