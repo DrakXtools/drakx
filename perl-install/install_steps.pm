@@ -107,6 +107,7 @@ sub selectLanguage {
     if (!exists $o->{locale}{country}) {
 	my $h = lang::analyse_locale_name(lang::l2locale($o->{locale}{lang}));
 	$o->{locale}{country} = $h->{country} if $h->{country};
+	$o->{locale}{IM} = lang::get_default_im($o->{locale}{lang});
     }
 
     lang::set($o->{locale}, !$o->isa('interactive::gtk'));
