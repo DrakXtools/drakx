@@ -916,7 +916,7 @@ sub ask_window_manager_to_logout {
     
     my %h = (
 	'kwin' => "dcop kdesktop default logout",
-	'gnome-session' => "gnome-session-save -kill",
+	'gnome-session' => "gnome-session-save --kill",
 	'icewm' => "killall -QUIT icewm",
 	'wmaker' => "killall -USR1 wmaker",
     );
