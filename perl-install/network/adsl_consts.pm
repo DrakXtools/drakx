@@ -55,13 +55,13 @@ our %adsl_data = (
                    DOMAINNAME2 => 'free.fr',
                   },
 
-                  N("France") . "|9online 512" =>
+                  N("France") . "|n9uf tel9com 512 & 1024" =>
                   {
                    vpi => 8,
                    vci => 23,
                    Encapsulation => 6,
-                   dnsServer2 => '62.62.156.12',
-                   dnsServer3 => '62.62.156.13',
+                   dnsServer2 => '212.30.93.108',
+                   dnsServer3 => '212.203.124.146',
                    method => 'pppoa',
                   },
 
