@@ -33,6 +33,7 @@ use c;
 local $_ = join '', @ARGV;
 
 my ($configure_this) = grep { !/^-/ } @ARGV;
+$configure_this = 'resolution' if $0 =~ /Xdrakres/;
 $configure_this ||= 'everything';
 
 { 
