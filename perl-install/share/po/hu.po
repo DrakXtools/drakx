@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX\n"
-"POT-Creation-Date: 2003-03-09 13:01+0100\n"
-"PO-Revision-Date: 2003-03-08 00:26+0100\n"
+"POT-Creation-Date: 2003-03-12 17:27+0100\n"
+"PO-Revision-Date: 2003-03-12 21:32+0100\n"
 "Last-Translator: Arpad Biro <biro_arpad@yahoo.com>\n"
 "Language-Team: Hungarian\n"
 "MIME-Version: 1.0\n"
@@ -11043,11 +11043,6 @@ msgstr "Nyomtatási rendszer módosítása"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
-msgid "Printer sharing"
-msgstr "Nyomtatómegosztás"
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
 msgid "CUPS configuration"
 msgstr "CUPS-beállítások"
 
@@ -11481,12 +11476,12 @@ msgstr "Nyomtatás/lapolvasás/fotókártyák ezen: \"%s\""
 #, c-format
 msgid ""
 "To know about the options available for the current printer read either the "
-"list shown below or click on the \"Print option list\" button.%s%s\n"
+"list shown below or click on the \"Print option list\" button.%s%s%s\n"
 "\n"
 msgstr ""
 "Ha szeretne egy listát az aktuális nyomtatóhoz használható opciókról, akkor "
 "olvassa el a lentebbi listát, vagy kattintson a \"Nyomtatási beállítások "
-"listája\" gombra.%s%s\n"
+"listája\" gombra.%s%s%s\n"
 "\n"
 
 #: ../../printer/printerdrake.pm:1
@@ -11735,51 +11730,8 @@ msgstr ""
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
-msgid ""
-"Your printer belongs to the group of GDI laser printers (winprinters) sold "
-"by different manufacturers which uses the Zenographics ZJ-stream raster "
-"format for the data sent to the printer. The driver for these printers is "
-"still in a very early development stage and so it will perhaps not always "
-"work properly. Especially it is possible that the printer only works when "
-"you choose the A4 paper size.\n"
-"\n"
-"Some of these printers, as the HP LaserJet 1000, for which this driver was "
-"originally created, need their firmware to be uploaded to them after they "
-"are turned on. In the case of the HP LaserJet 1000 you have to search the "
-"printer's Windows driver CD or your Windows partition for the file "
-"\"sihp1000.img\" and upload the file to the printer with one of the "
-"following commands:\n"
-"\n"
-"     lpr -o raw sihp1000.img\n"
-"     cat sihp1000.img > /dev/usb/lp0\n"
-"\n"
-"The first command can be given by any normal user, the second must be given "
-"as root. After having done so you can print normally.\n"
-msgstr ""
-"Az Ön nyomtatója a - több cég által is gyártott - GDI lézernyomtatók (más "
-"néven: winprinter eszközök) közé tartozik. Ezek a nyomtatók Zenographics ZJ-"
-"Stream raszterformátumban kapják az adatokat. Az ezen nyomtatókhoz "
-"használható meghajtóprogram a fejlesztés korai fázisában van, ezért nem "
-"mindig mûködik megfelelõen. Elõfordulhat például az, hogy a nyomtató csak A4-"
-"es papírmérettel mûködik.\n"
-"\n"
-"Ezen nyomtatók közül néhányra - mint például a HP LaserJet 1000 (amelyhez ez "
-"a meghajtó eredetileg készült) - bekapcsoláskor fel kell tölteni a \"firmware"
-"\" vezérlõprogramot. A HP LaserJet 1000 esetén meg kell keresni a \"sihp1000."
-"img\" nevû fájlt a nyomtató windowsos CD-jén vagy egy windowsos partíción, "
-"majd fel kell azt tölteni a nyomtatóra a következõ parancsok egyikével:\n"
-"\n"
-"     lpr -o raw sihp1000.img\n"
-"     cat sihp1000.img > /dev/usb/lp0\n"
-"\n"
-"Az elsõ parancsot bármely felhasználó kiadhatja, a másodikat viszont csak "
-"rendszergazdai jogosultságú felhasználók. A parancs végrehajtása után a "
-"megszokott módon lehet nyomtatni.\n"
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "GDI Laser Printer using the Zenographics ZJ-Stream Format"
-msgstr "Zenographics ZJ-Stream formátumot használó GDI lézernyomtató"
+msgid "Firmware-Upload for HP LaserJet 1000"
+msgstr "Firmware-feltöltés a HP LaserJet 1000-hez"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -11967,6 +11919,11 @@ msgstr "A nyomtatási port elérhetõvé tétele a CUPS számára..."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
+msgid "Checking device and configuring HPOJ..."
+msgstr "Az eszköz ellenõrzése és a HPOJ beállítása..."
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
 msgid "Photo memory card access on your HP multi-function device"
 msgstr "Fotókártya-elérés a HP többfunkciós eszközön"
 
@@ -11984,11 +11941,6 @@ msgstr "Az mtools csomagok telepítése..."
 #, c-format
 msgid "Installing SANE packages..."
 msgstr "A SANE csomagok telepítése..."
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "Checking device and configuring HPOJ..."
-msgstr "Az eszköz ellenõrzése és a HPOJ beállítása..."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -12873,6 +12825,11 @@ msgstr "A kiszolgáló IP-címe nincs megadva."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
+msgid "If no port is given, 631 will be taken as default."
+msgstr "Ha nincs megadva port, akkor 631 lesz az alapértelmezett érték."
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
 msgid "Enter IP address and port of the host whose printers you want to use."
 msgstr ""
 "Adja meg azon gép IP-címét és portszámát, amelynek a nyomtatóit használni "
@@ -13007,6 +12964,30 @@ msgstr "A CUPS-beállítások automatikus javítása"
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid ""
+"Turning on this allows to print plain text files in japanese language. Only "
+"use this function if you really want to print text in japanese, if it is "
+"activated you cannot print accentuated characters in latin fonts any more "
+"and you will not be able to adjust the margins, the character size, etc. "
+"This setting only affects printers defined on this machine. If you want to "
+"print japanese text on a printer set up on a remote machine, you have to "
+"activate this function on that remote machine."
+msgstr ""
+"Ezt bekapcsolva lehetõvé válik japán szövegfájlok nyomtatása. Csak akkor "
+"használja, ha valóban szüksége van japán szövegek nyomtatására - ha be van "
+"kapcsolva, akkor nem lehet ékezetes latin betûket nyomtatni, továbbá nem "
+"lesz lehetõség a margók, a karakterméret és egyéb tulajdonságok "
+"beállítására. Ez a beállítás csak ezen számítógép nyomtatóira vonatkozik. Ha "
+"egy távoli gép nyomtatójára szeretne japán szöveget nyomtatni, akkor be kell "
+"kapcsolnia ezt az opciót azon a gépen."
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Japanese text printing mode"
+msgstr "Japán szövegnyomtatási üzemmód"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid ""
 "To get access to printers on remote CUPS servers in your local network you "
 "only need to turn on the \"Automatically find available printers on remote "
 "machines\" option; the CUPS servers inform your machine automatically about "
@@ -13081,8 +13062,8 @@ msgstr ""
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
-msgid "CUPS printer sharing configuration"
-msgstr "A CUPS-nyomtatók megosztásának beállítása"
+msgid "CUPS printer configuration"
+msgstr "CUPS nyomtatóbeállítás"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -13109,6 +13090,25 @@ msgstr "Hogyan van a nyomtató csatlakoztatva?"
 #, c-format
 msgid "Select Printer Connection"
 msgstr "Válassza ki a nyomtató csatlakozásának típusát"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid ""
+"The HP LaserJet 1000 needs its firmware to be uploaded after being turned "
+"on. Download the Windows driver package from the HP web site (the firmware "
+"on the printer's CD does not work) and extract the firmware file from it by "
+"uncompresing the self-extracting '.exe' file with the 'unzip' utility and "
+"searching for the 'sihp1000.img' file. Copy this file into the '/etc/"
+"printer' directory. There it will be found by the automatic uploader script "
+"and uploaded whenever the printer is connected and turned on.\n"
+msgstr ""
+"A HP LaserJet 1000 eszközre bekapcsolás után fel kell tölteni a megfelelõ "
+"firmware-t. Töltse le a windowsos meghajtócsomagot a HP weblapjáról (a "
+"nyomtató CD-jén levõ firmware nem mûködik), ez után bontsa ki a '.exe' fájlt "
+"az 'unzip' programmal, majd keresse meg az így létrejött fájlok között az "
+"'sihp1000.img' fájlt (firmware). Másolja ez utóbbi fájlt a '/etc/printer' "
+"könyvtárba - ott megtalálja majd az automatikus feltöltõprogram, és feltölti "
+"azt a nyomtató minden bekapcsolásakor.\n"
 
 #: ../../security/help.pm:1
 #, c-format
@@ -14896,11 +14896,6 @@ msgid ""
 msgstr ""
 "Beállítási fájl nem található. \n"
 "Használja a varázslót vagy a Speciális opciót."
-
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "%s"
-msgstr "%s"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -19926,72 +19921,131 @@ msgid "NFS server, SMB server, Proxy server, ssh server"
 msgstr "NFS-, SMB-, proxy- és SSH-kiszolgáló"
 
 #: ../../share/compssUsers:999
-msgid "Office"
-msgstr "Iroda"
+msgid "Audio station"
+msgstr "Audio-munkaállomás"
 
 #: ../../share/compssUsers:999
-msgid "Set of tools for mail, news, web, file transfer, and chat"
-msgstr "Email-eszközök, hírkezelés, web-eszközök, fájlátvitel és csevegés"
+msgid "Sound playing/editing programs"
+msgstr "Hanglejátszó és -szerkesztõ programok"
 
 #: ../../share/compssUsers:999
-msgid "Games"
-msgstr "Játékok"
+msgid "Video station"
+msgstr "Video-munkaállomás"
 
 #: ../../share/compssUsers:999
-msgid "Multimedia - Graphics"
-msgstr "Multimédia - grafika"
+msgid "Video playing programs"
+msgstr "Videólejátszó programok"
 
 #: ../../share/compssUsers:999
-msgid "Graphics programs such as The Gimp"
-msgstr "Grafikai programok (például a GIMP)"
+msgid "Graphic station"
+msgstr "Grafikai munkaállomás"
 
 #: ../../share/compssUsers:999
-msgid "Multimedia - Sound"
-msgstr "Multimédia - hang"
+msgid "Graphics programs"
+msgstr "Grafikai programok"
 
 #: ../../share/compssUsers:999
-msgid "Audio-related tools: mp3 or midi players, mixers, etc"
-msgstr "Hangkezelõ eszközök: MP3- és MIDI-lejátszók, hangkeverõk, ..."
+msgid "Set of tools to read and send mail and news and to browse the Web"
+msgstr "Eszközök levelezéshez, hírkezeléshez és a Web böngészéséhez"
 
-#: ../../share/compssUsers:999
-msgid "Multimedia - Video"
-msgstr "Multimédia - videó"
+#~ msgid "Printer sharing"
+#~ msgstr "Nyomtatómegosztás"
 
-#: ../../share/compssUsers:999
-msgid "Video players and editors"
-msgstr "Videólejátszók és -szerkesztõk"
+#~ msgid ""
+#~ "Your printer belongs to the group of GDI laser printers (winprinters) "
+#~ "sold by different manufacturers which uses the Zenographics ZJ-stream "
+#~ "raster format for the data sent to the printer. The driver for these "
+#~ "printers is still in a very early development stage and so it will "
+#~ "perhaps not always work properly. Especially it is possible that the "
+#~ "printer only works when you choose the A4 paper size.\n"
+#~ "\n"
+#~ "Some of these printers, as the HP LaserJet 1000, for which this driver "
+#~ "was originally created, need their firmware to be uploaded to them after "
+#~ "they are turned on. In the case of the HP LaserJet 1000 you have to "
+#~ "search the printer's Windows driver CD or your Windows partition for the "
+#~ "file \"sihp1000.img\" and upload the file to the printer with one of the "
+#~ "following commands:\n"
+#~ "\n"
+#~ "     lpr -o raw sihp1000.img\n"
+#~ "     cat sihp1000.img > /dev/usb/lp0\n"
+#~ "\n"
+#~ "The first command can be given by any normal user, the second must be "
+#~ "given as root. After having done so you can print normally.\n"
+#~ msgstr ""
+#~ "Az Ön nyomtatója a - több cég által is gyártott - GDI lézernyomtatók (más "
+#~ "néven: winprinter eszközök) közé tartozik. Ezek a nyomtatók Zenographics "
+#~ "ZJ-Stream raszterformátumban kapják az adatokat. Az ezen nyomtatókhoz "
+#~ "használható meghajtóprogram a fejlesztés korai fázisában van, ezért nem "
+#~ "mindig mûködik megfelelõen. Elõfordulhat például az, hogy a nyomtató csak "
+#~ "A4-es papírmérettel mûködik.\n"
+#~ "\n"
+#~ "Ezen nyomtatók közül néhányra - mint például a HP LaserJet 1000 (amelyhez "
+#~ "ez a meghajtó eredetileg készült) - bekapcsoláskor fel kell tölteni a "
+#~ "\"firmware\" vezérlõprogramot. A HP LaserJet 1000 esetén meg kell keresni "
+#~ "a \"sihp1000.img\" nevû fájlt a nyomtató windowsos CD-jén vagy egy "
+#~ "windowsos partíción, majd fel kell azt tölteni a nyomtatóra a következõ "
+#~ "parancsok egyikével:\n"
+#~ "\n"
+#~ "     lpr -o raw sihp1000.img\n"
+#~ "     cat sihp1000.img > /dev/usb/lp0\n"
+#~ "\n"
+#~ "Az elsõ parancsot bármely felhasználó kiadhatja, a másodikat viszont csak "
+#~ "rendszergazdai jogosultságú felhasználók. A parancs végrehajtása után a "
+#~ "megszokott módon lehet nyomtatni.\n"
 
-#: ../../share/compssUsers:999
-msgid "Multimedia - CD Burning"
-msgstr "Multimédia - CD-írás"
+#~ msgid "GDI Laser Printer using the Zenographics ZJ-Stream Format"
+#~ msgstr "Zenographics ZJ-Stream formátumot használó GDI lézernyomtató"
 
-#: ../../share/compssUsers:999
-msgid "Tools to create and burn CD's"
-msgstr "Segédprogramok CD-íráshoz"
+#~ msgid "%s"
+#~ msgstr "%s"
 
-#: ../../share/compssUsers:999
-msgid "More Graphical Desktops (Gnome, IceWM)"
-msgstr "További grafikus környezetek (GNOME, IceWM)"
+#~ msgid "Office"
+#~ msgstr "Iroda"
 
-#: ../../share/compssUsers:999
-msgid "Gnome, Icewm, Window Maker, Enlightenment, Fvwm, etc"
-msgstr "GNOME, IceWM, WindowMaker, Enlightenment, Fvwm, ..."
+#~ msgid "Set of tools for mail, news, web, file transfer, and chat"
+#~ msgstr "Email-eszközök, hírkezelés, web-eszközök, fájlátvitel és csevegés"
 
-#: ../../share/compssUsers:999
-msgid "Personal Information Management"
-msgstr "Személyes információkezelés"
+#~ msgid "Games"
+#~ msgstr "Játékok"
 
-#: ../../share/compssUsers:999
-msgid "Tools for your Palm Pilot or your Visor"
-msgstr "Segédprogramok a Palmhoz és a Visorhoz"
+#~ msgid "Multimedia - Graphics"
+#~ msgstr "Multimédia - grafika"
 
-#: ../../share/compssUsers:999
-msgid "Personal Finance"
-msgstr "Személyes pénzügyek"
+#~ msgid "Multimedia - Sound"
+#~ msgstr "Multimédia - hang"
 
-#: ../../share/compssUsers:999
-msgid "Programs to manage your finances, such as gnucash"
-msgstr "Programok a személyes pénzügyek kezeléséhez (például: GnuCash)"
+#~ msgid "Audio-related tools: mp3 or midi players, mixers, etc"
+#~ msgstr "Hangkezelõ eszközök: MP3- és MIDI-lejátszók, hangkeverõk, ..."
+
+#~ msgid "Multimedia - Video"
+#~ msgstr "Multimédia - videó"
+
+#~ msgid "Video players and editors"
+#~ msgstr "Videólejátszók és -szerkesztõk"
+
+#~ msgid "Multimedia - CD Burning"
+#~ msgstr "Multimédia - CD-írás"
+
+#~ msgid "Tools to create and burn CD's"
+#~ msgstr "Segédprogramok CD-íráshoz"
+
+#~ msgid "More Graphical Desktops (Gnome, IceWM)"
+#~ msgstr "További grafikus környezetek (GNOME, IceWM)"
+
+#~ msgid "Gnome, Icewm, Window Maker, Enlightenment, Fvwm, etc"
+#~ msgstr "GNOME, IceWM, WindowMaker, Enlightenment, Fvwm, ..."
+
+#~ msgid "Personal Information Management"
+#~ msgstr "Személyes információkezelés"
+
+#~ msgid "Tools for your Palm Pilot or your Visor"
+#~ msgstr "Segédprogramok a Palmhoz és a Visorhoz"
+
+#~ msgid "Personal Finance"
+#~ msgstr "Személyes pénzügyek"
+
+#~ msgid "Programs to manage your finances, such as gnucash"
+#~ msgstr "Programok a személyes pénzügyek kezeléséhez (például: GnuCash)"
 
 #~ msgid "no network card found"
 #~ msgstr "nem találtam hálózati kártyát"
