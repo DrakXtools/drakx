@@ -101,7 +101,7 @@ of use listed in the documentation or license agreements of the Software Product
 To the extent permitted by law, MandrakeSoft S.A. will in no circumstances be liable for any special, 
 incidental, direct or indirect damages whatsoever (including without limitation damages for loss of 
 business, interruption of business, financial loss, legal fees and penalties resulting from a court 
-judgement, or any other consequential loss) arising out of  the use or inability to use the Software 
+judgment, or any other consequential loss) arising out of  the use or inability to use the Software 
 Products, even if MandrakeSoft S.A. has been advised of the possibility or occurance of such 
 damages.
 
@@ -110,7 +110,7 @@ LIMITED LIABILITY LINKED TO POSSESSING OR USING PROHIBITED SOFTWARE IN SOME COUN
 To the extent permitted by law, MandrakeSoft S.A. or its distributors will, in no circumstances, be 
 liable for any special, incidental, direct or indirect damages whatsoever (including without 
 limitation damages for loss of business, interruption of business, financial loss, legal fees 
-and penalties resulting from a court judgement, or any other consequential loss) arising out 
+and penalties resulting from a court judgment, or any other consequential loss) arising out 
 of the possession and use of software components or arising out of  downloading software components 
 from one of Linux-Mandrake sites  which are prohibited or restricted in some countries by local laws.
 This limited liability applies to, but is not restricted to, the strong cryptography components 
@@ -141,7 +141,7 @@ parts, by all means and for all purposes.
 
 5. Governing Laws 
 
-If any portion of this agreement is held void, illegal or inapplicable by a court judgement, this 
+If any portion of this agreement is held void, illegal or inapplicable by a court judgment, this 
 portion is excluded from this contract. You remain bound by the other applicable sections of the 
 agreement.
 The terms and conditions of this License are governed by the Laws of France.
