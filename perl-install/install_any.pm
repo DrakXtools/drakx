@@ -616,11 +616,8 @@ sub generate_ks_cfg {
     $ks;
 }
 
-sub suggest_mount_points {
-    my ($hds, $prefix, $uniq) = @_;
-    my @parts = grep { isTrueFS($_) } fsedit::get_fstab(@$hds);
-
-    my (%mntpoints, $user);
+sub guess_mount_point {
+    my ($part, $prefix, $user) = @_;
 
     my %l = (
 	     '/'     => 'etc/fstab',
@@ -630,32 +627,42 @@ sub suggest_mount_points {
 	     '/var'  => 'catman',
 	    );
 
-    foreach my $part (@parts) {
+    my $handle = any::inspect($part, $prefix) or return;
+    my $d = $handle->{dir};
+    my ($mnt) = grep { -e "$d/$l{$_}" } keys %l;
+    $mnt ||= (stat("$d/.bashrc"))[4] ? '/root' : '/home/user' . ++$$user if -e "$d/.bashrc";
+    $mnt ||= (grep { -d $_ && (stat($_))[4] >= 500 && -e "$_/.bashrc" } glob_("$d")) ? '/home' : '';
+    ($mnt, $handle);
+}
+
+sub suggest_mount_points {
+    my ($hds, $prefix, $uniq) = @_;
+    my @fstab = fsedit::get_fstab(@$hds);
+
+    my $user;
+    foreach my $part (grep { isTrueFS($_) } @fstab) {
 	$part->{mntpoint} && !$part->{unsafeMntpoint} and next; #- if already found via an fstab
 
-	my $handle = any::inspect($part, $prefix) or return;
-	my $d = $handle->{dir};
-	my ($mnt) = grep { -e "$d/$l{$_}" } keys %l;
-	$mnt ||= (stat("$d/.bashrc"))[4] ? '/root' : '/home/user' . ++$user if -e "$d/.bashrc";
-	$mnt ||= (grep { -d $_ && (stat($_))[4] >= 500 && -e "$_/.bashrc" } glob_("$d")) ? '/home' : ''; 
+	my ($mnt, $handle) = guess_mount_point($part, $prefix, \$user) or next;
 
-	next if $uniq && fsedit::mntpoint2part($mnt, \@parts);
+	next if $uniq && fsedit::mntpoint2part($mnt, \@fstab);
 	$part->{mntpoint} = $mnt; delete $part->{unsafeMntpoint};
 
 	#- try to find other mount points via fstab
-	fs::get_mntpoints_from_fstab([ fsedit::get_fstab(@$hds) ], $d, $uniq) if $mnt eq '/';
+	fs::get_mntpoints_from_fstab([ fsedit::get_fstab(@$hds) ], $handle->{dir}, $uniq) if $mnt eq '/';
     }
-#-    $_->{mntpoint} || fsedit::suggest_part($_, $hds) foreach @parts;
-
-    $_->{mntpoint} and log::l("suggest_mount_points: $_->{device} -> $_->{mntpoint}") foreach fsedit::get_fstab(@$hds);
+    $_->{mntpoint} and log::l("suggest_mount_points: $_->{device} -> $_->{mntpoint}") foreach @fstab;
 }
 
 #- mainly for finding the root partitions for upgrade
 sub find_root_parts {
     my ($hds, $prefix) = @_;
     log::l("find_root_parts");
-    suggest_mount_points($hds, $prefix);
-    grep { delete($_->{mntpoint}) eq '/' } fsedit::get_fstab(@$hds);
+    my $user;
+    grep { 
+	my ($mnt) = guess_mount_point($_, $prefix, \$user);
+	$mnt eq '/';
+    } fsedit::get_fstab(@$hds);
 }
 sub use_root_part {
     my ($fstab, $part, $prefix) = @_;

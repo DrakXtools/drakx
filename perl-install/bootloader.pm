@@ -194,7 +194,7 @@ sub dev2prompath { #- SPARC only
     $dev;
 }
 
-sub suggest($$$$$;$) {
+sub suggest {
     my ($prefix, $lilo, $hds, $fstab, $kernelVersion, $vga_fb) = @_;
     my $root_part = fsedit::get_root($fstab);
     my $root = isLoopback($root_part) ? "loop7" : $root_part->{device};
@@ -233,9 +233,7 @@ sub suggest($$$$$;$) {
 	    my $msg_en =
 __("Welcome to %s the operating system chooser!
 
-To list the possible choices, press <TAB>.
-
-To load one of them, write its name and press <ENTER> or
+Choose an operating system in the list above or
 wait %d seconds for default boot.
 
 ");

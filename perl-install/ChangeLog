@@ -1,3 +1,12 @@
+2000-10-04  Pixel  <pixel@mandrakesoft.com>
+
+	* Xconfigurator.pm (main): kill prefdm instead of autologin
+
+	* install_any.pm (find_root_parts): don't use
+	suggest_mount_points, it couldn't do what we wanted	
+	(guess_mount_point): created, contains the common stuff between
+	suggest_mount_points and find_root_parts
+
 2000-10-04  Guillaume Cottenceau  <gc@mandrakesoft.com>
 
 	* standalone/drakgw: fix some failing/untranslated i18n messages
