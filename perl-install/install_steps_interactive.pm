@@ -746,9 +746,9 @@ sub miscellaneous {
     my $u = $o->{miscellaneous} ||= {};
     exists $u->{LAPTOP} or $u->{LAPTOP} = 1;
     my $s = $o->{security};
-    $s = $l{$s} || $s;
 
     add2hash_ $o, { useSupermount => $s < 4 };
+    $s = $l{$s} || $s;
 
     !$::beginner || $clicked and $o->ask_from_entries_refH('',
 	_("Miscellaneous questions"), [
