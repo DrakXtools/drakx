@@ -479,7 +479,9 @@ sub country2lang {
 sub lang2kde_lang {
     my ($lang, $default) = @_;
 
-    my @valid_kde_langs = qw(C ca cs da de el en es et fi fr he hu is it ja ko nl no no_NY pl pt pt_BR ro ru sk sr sv tr uk zh_CN.GB2312 zh_TW.Big5);
+    #- get it using 
+    #- echo C $(rpm -qp --qf "%{name}\n" /RPMS/kde-i18n-*  | sed 's/kde-i18n-//')
+    my @valid_kde_langs = qw(C af az bg ca cs da de el en_GB eo es et fi fr he hu is it ja ko lt lv mt nl no no_NY pl pt pt_BR ro ru sl sk sr sv ta th tr uk xh zh_CN.GB2312 zh_TW.Big5);
     my %valid_kde_langs; @valid_kde_langs{@valid_kde_langs} = ();
 
     my $valid_lang = sub {
