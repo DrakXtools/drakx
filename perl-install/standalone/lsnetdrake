@@ -1,8 +1,8 @@
 #!/usr/bin/perl
 
 use lib qw(/usr/lib/libDrakX);
-use network::smb;
 use network::nfs;
+use network::smb;
 
 "@ARGV" =~ /-h/ and die "usage: lsnetdrake [-h] [--nfs] [--smb]\n";
 
@@ -12,21 +12,14 @@ my $smb = !@ARGV || "@ARGV" =~ /-(smb)/;
 $| = 1;
 $ENV{PATH} = "/sbin:/usr/sbin:$ENV{PATH}";
 
-if ($nfs) {
-    my @servers = network::nfs::find_servers();
-    foreach my $server (sort_names(@servers)) {
-	my $server_name = $server->{name} || $server->{ip};
-	foreach (sort_names(network::nfs::find_exports($server))) {
-	    print "$server_name:$_->{name}", $_->{comment} && " ($_->{comment})", "\n";
-	}
-    }
-}
-if ($smb) {
-    my @servers = network::smb::find_servers();
-    foreach my $server (sort_names(@servers)) {
-	my $server_name = $server->{name} || $server->{ip};
-	foreach (sort_names(network::smb::find_exports($server))) {
-	    print "//$server_name/$_->{name}", $_->{comment} && " ($_->{comment})", "\n";
+my @l;
+push @l, network::nfs->new if $nfs;
+push @l, network::smb->new if $smb;
+
+foreach my $class (@l) {
+    foreach my $server (sort_names($class->find_servers)) {
+	foreach my $export (sort_names($class->find_exports($server))) {
+	    print $class->to_fullstring($export), "\n";
 	}
     }
 }
