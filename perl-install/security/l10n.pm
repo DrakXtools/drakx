@@ -1,5 +1,8 @@
 package security::l10n;
-# This help was build from stripped python description of msec functions
+# This help was build from stripped from python description of msec functions
+# soft/msec/share/libmsec.py
+#
+# It's used in draksec option labels
 
 use common;
 
