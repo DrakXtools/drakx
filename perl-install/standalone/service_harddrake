@@ -16,9 +16,9 @@ use modules;
 use Storable qw(store retrieve);
 
 
-my $force = any { $_ eq '--force' } @ARGV;
+my $force = member('--force', @ARGV);
 
-my $mode = 'stop' if $ARGV[0] eq 'stop';
+my $mode = $ARGV[0] eq 'stop' && 'stop';
 
 if ($mode eq 'stop') {
     append_to_file('/etc/hotplug/blacklist', "\nsnd-usb-audio\n");

@@ -393,8 +393,9 @@ foreach (@classes) {
         if ($Ident eq "AUDIO") {
             require harddrake::sound;
             my $alter = harddrake::sound::get_alternative($_->{driver});
-            my $alternative_drivers = join(', ', @$alter) if $alter->[0] ne 'unknown';
-            $_->{alternative_drivers} = $alternative_drivers if $alternative_drivers;
+            if (my $alternative_drivers = $alter->[0] ne 'unknown' && join(', ', @$alter)) {
+		$_->{alternative_drivers} = $alternative_drivers;
+	    }
         }
         if ($Ident eq "HARDDISK") {
             my $hd = $_;
