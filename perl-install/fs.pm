@@ -75,27 +75,12 @@ sub read_fstab {
 		 if_(member('keep_freq_passno', @reading_options), freq => $freq, passno => $passno),
 		};
 
-	if ($dev =~ /^LABEL=(.*)/) {
-	    $h->{device_LABEL} = $1;
-	    $h->{prefer_device_LABEL} = 1 if member('keep_device_LABEL', @reading_options);
-        }
-	if ($dev =~ m,^/(tmp|dev)/,) {
-	    ($h->{major}, $h->{minor}) = unmakedev((stat "$prefix$dev")[6]);
+	put_in_hash($h, subpart_from_wild_device_name($dev));
 
-	    my $symlink = readlink("$prefix$dev");
-	    $dev =~ s,^/(tmp|dev)/,,;
-
-	    if ($symlink =~ m|^[^/]+$|) {
-		$h->{device_alias} = $dev;
-		$h->{device} = $symlink;
-	    } else {
-		$h->{device} = $dev;
-	    }
-
-	    if ($h->{device} =~ m!/(disc|part\d+)$!) {
-		$h->{devfs_device} = $h->{device};
-		$h->{prefer_devfs_name} = 1 if member('keep_devfs_name', @reading_options);
-	    }
+	if ($h->{device_LABEL} && member('keep_device_LABEL', @reading_options)) {
+	    $h->{prefer_device_LABEL} = 1;
+        } elsif ($h->{devfs_device} && member('keep_devfs_name', @reading_options)) {
+	    $h->{prefer_devfs_name} = 1;
 	}
 
 	if ($h->{options} =~ /credentials=/ && !member('verbatim_credentials', @reading_options)) {
@@ -137,6 +122,39 @@ sub merge_fstabs {
 		   (type2fs($p) || type2name($p->{type})) . " vs ", (type2fs($p2) || type2name($p2->{type})));
     }
     @l;
+}
+
+sub subpart_from_wild_device_name {
+    my ($dev) = @_;
+
+    if ($dev =~ /^LABEL=(.*)/) {
+	{ device_LABEL => $1 };
+    } elsif ($dev =~ m,^/(tmp|dev)/,) {
+	my %part;
+	($part{major}, $part{minor}) = unmakedev((stat "$::prefix$dev")[6]);
+
+	if (my $symlink = readlink("$::prefix$dev")) {
+	    if ($symlink =~ m|^[^/]+$|) {
+		$part{device_alias} = $dev;
+		$dev = $symlink;
+	    }
+	}
+	$dev =~ s,^/(tmp|dev)/,,;
+
+	my $is_devfs = $dev =~ m!/(disc|part\d+)$!;
+	$part{$is_devfs ? 'devfs_device' : 'device'} = $dev;
+	\%part;
+    } else {
+	if ($dev eq 'none') {
+	} elsif ($dev =~ m!^(\w+):/\w!) {
+	    #- nfs
+	} elsif ($dev =~ m!^//\w!) {
+	    #- smb
+	} else {
+	    log::l("part_from_wild_device_name: unknown device $dev");
+	}
+	{ device => $dev };
+    }
 }
 
 sub add2all_hds {
