@@ -33,16 +33,16 @@ sub kernel_greater_or_equal($$$) {
 }
 
 sub check_blocks {
-    my ($fd, $version, $nbpages, $signature_page) = @_;
+    my ($F, $version, $nbpages, $signature_page) = @_;
     my ($last_read_ok, $badpages) = (0, 0);
     my ($buffer);
     my $badpages_field_v1 = \substr($$signature_page, psizeof($signature_format_v1));
 
     for (my $i = 0; $i < $nbpages; $i++) {
 
-	$last_read_ok || sysseek($fd, $i * $pagesize, 0) or die "seek failed";
+	$last_read_ok || sysseek($F, $i * $pagesize, 0) or die "seek failed";
 
-	unless ($last_read_ok = sysread($fd, $buffer, $pagesize)) {
+	unless ($last_read_ok = sysread($F, $buffer, $pagesize)) {
 	    if ($version == 1) {
 		$badpages == $MAX_BADPAGES and die "too many bad pages";
 		vec($$badpages_field_v1, $badpages, $bitof_int) = $i;
@@ -80,8 +80,7 @@ sub make($;$) {
     my $rdev = (stat $devicename)[6];
     $rdev == 0x300 || $rdev == 0x340 and die "$devicename is not a good device for swap";
 
-    local *F;
-    sysopen F, $devicename, 2 or die "opening $devicename for writing failed: $!";
+    sysopen(my $F, $devicename, 2) or die "opening $devicename for writing failed: $!";
 
     if ($version == 0) { $maxpages = $V0_MAX_PAGES }
     elsif (kernel_greater_or_equal(2,2,1)) { $maxpages = $V1_MAX_PAGES }
@@ -93,7 +92,7 @@ sub make($;$) {
     }
 
     if ($checkBlocks) {
-	$badpages = check_blocks(*F, $version, $nbpages, \$signature_page);
+	$badpages = check_blocks($F, $version, $nbpages, \$signature_page);
     } elsif ($version == 0) {
 	for (my $i = 0; $i < $nbpages; $i++) { vec($signature_page, $i, 1) = 1 }
     }
@@ -111,13 +110,13 @@ sub make($;$) {
     MDK::Common::DataStructure::strcpy($signature_page, $version == 0 ? "SWAP-SPACE" : "SWAPSPACE2", $pagesize - 10);
 
     my $offset = $version == 0 ? 0 : 1024;
-    sysseek(F, $offset, 0) or die "unable to rewind swap-device: $!";
+    sysseek($F, $offset, 0) or die "unable to rewind swap-device: $!";
 
-    syswrite(F, substr($signature_page, $offset)) or die "unable to write signature page: $!";
+    syswrite($F, substr($signature_page, $offset)) or die "unable to write signature page: $!";
 
     #- A subsequent swapon() will fail if the signature is not actually on disk. (This is a kernel bug.)
-    syscall_('fsync', fileno(F)) or die "fsync failed: $!";
-    close F;
+    syscall_('fsync', fileno($F)) or die "fsync failed: $!";
+    close $F;
 }
 
 sub enable($;$) {
