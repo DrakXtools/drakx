@@ -145,14 +145,11 @@ sub check_link_beat() {
 
 sub remove_initscript() {
     $::testing and return;
-    -e "$::prefix/etc/rc.d/init.d/internet" and do {
-        $::isStandalone ? system("/sbin/chkconfig --del internet") : do {
-            rm_rf("$::prefix/etc/rc.d/rc$_") foreach '0.d/K11internet', '1.d/K11internet', '2.d/K11internet', 
-                                                     '3.d/S89internet', '5.d/S89internet', '6.d/K11internet';
-        };
+    if (-e "$::prefix/etc/rc.d/init.d/internet") {
+        run_program::rooted($::prefix, "/sbin/chkconfig", "--del", "internet");
         rm_rf("$::prefix/etc/rc.d/init.d/internet");
         log::explanations("Removed internet service");
-    };
+    }
 }
 
 sub use_windows {
