@@ -91,6 +91,7 @@ upload: clean install
 	upload misc make_mdkinst_stage2 ;\
 	upload misc packdrake ;\
 	upload misc rpm2header ;\
+	upload '' live_update ;\
 	for i in $(RELEASE_BOOT_IMG); do upload images $$i; done ;\
 	echo
 

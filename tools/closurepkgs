@@ -31,7 +31,7 @@ sub main {
     my ($file) = @_;
     my $depslist = read_depslist($file);
 
-    my @pkgs = qw(XFree86 dhcpcd pump ppp ypbind rhs-printfilters samba ncpfs kernel-fb);
+    my @pkgs = qw(XFree86 XFree86-server XFree86-glide-module Device3Dfx Glide_V3-DRI Glide_V5 Mesa dhcpcd pump dhcpxd dhcp-client isdn4net isdn4k-utils dev pptp-adsl-fr rp-pppoe ppp ypbind rhs-printfilters lpr cups cups-drivers samba ncpfs);
     push @pkgs, "XFree86-$_" foreach qw(3DLabs 3dfx 8514 AGX FBDev I128 Mach8 Mach32 Mach64 Mono P9000 Rage128 S3 S3V SVGA VGA16 W32);
 
     my %closure;
@@ -46,7 +46,10 @@ sub main {
 	map { delete $closure{chop_version($_->{name})} } map { ($depslist->{ordered}[$_]) } @{$depslist->{packages}{$_}{deps}};
     }
 
-    map { print $depslist->{packages}{$_}{name}, "\n" } grep { $closure{$_} } keys %closure;
+    my $total = 0;
+    map { $total += $depslist->{packages}{$_}{size};
+	  print $depslist->{packages}{$_}{name}, "\n" } grep { $closure{$_} } keys %closure;
+    print "\n\ntotal=$total\n";
 }
 
 main(@ARGV);
