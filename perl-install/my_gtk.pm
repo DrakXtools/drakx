@@ -153,6 +153,7 @@ sub gtksize($$$)       { $_[0]->size($_[1],$_[2]); $_[0] }
 sub gtkset_justify($$) { $_[0]->set_justify($_[1]); $_[0] }
 sub gtkset_active($$)  { $_[0]->set_active($_[1]); $_[0] }
 sub gtkset_modal       { $_[0]->set_modal($_[1]); $_[0] }
+sub gtkset_sensitive   { $_[0]->set_sensitive($_[1]); $_[0] }
 sub gtkset_border_width{ $_[0]->set_border_width($_[1]); $_[0] }
 sub gtkmove { $_[0]->window->move($_[1], $_[2]); $_[0] }
 
