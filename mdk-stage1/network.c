@@ -279,7 +279,7 @@ static int save_netinfo(struct interface_info * intf) {
 	fprintf(f, "NETWORKING=yes\n");
 	fprintf(f, "FORWARD_IPV4=false\n");
 
-	if (hostname)
+	if (hostname && !intf->boot_proto == BOOTPROTO_DHCP)
 		fprintf(f, "HOSTNAME=%s\n", hostname);
 	if (domain)
 		fprintf(f, "DOMAINNAME=%s\n", domain);
