@@ -43,7 +43,7 @@ sub automatic_xconf {
     log::l('automatic XFree configuration');
 
     require Xconfig::default;
-    $o->{raw_X} = Xconfig::default::configure({ KEYBOARD => 'us' }, $o->{mouse});
+    $o->{raw_X} = Xconfig::default::configure({ KEYBOARD => 'uk' }, $o->{mouse}); #- using uk instead of us for now to have less warnings
 
     require Xconfig::main;
     require class_discard;
