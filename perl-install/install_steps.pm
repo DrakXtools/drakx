@@ -735,12 +735,11 @@ sub setupBootloader($) {
 sub configureXBefore {
     my ($o) = @_;
     my $xkb = $o->{X}{keyboard}{xkb_keymap} || keyboard::keyboard2xkb($o->{keyboard});
-    $xkb = '' if !($xkb && -e "$o->{prefix}/usr/X11R6/lib/X11/xkb/symbols/$xkb");
+    $xkb = '' if !($xkb && $xkb =~ /([^(]*)/ && -e "$o->{prefix}/usr/X11R6/lib/X11/xkb/symbols/$1");
     if (!$xkb && (my $f = keyboard::xmodmap_file($o->{keyboard}))) {
 	require commands;
 	commands::cp("-f", $f, "$o->{prefix}/etc/X11/xinit/Xmodmap");	
 	$xkb = '';
-
     }
     {
 	my $f = "$o->{prefix}/etc/sysconfig/i18n";
