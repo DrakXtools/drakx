@@ -77,7 +77,6 @@
 # directory to install fonts /usr/X11R6/lib/X11/fonts/
 # -->> /usr/X11R6/lib/X11/fonts/drakfont
 
-
 use Gtk;
 use lib qw(/usr/lib/libDrakX);
 use interactive;
@@ -86,10 +85,8 @@ use my_gtk qw(:helpers :wrappers);
 use common;
 use strict;
 
-
 if ("@ARGV" =~ /--help|-h/) {
-    print q(Font Importation and monitoring appli    $check11->signal_connect( 'toggled',  sub { $gs == 0 and $gs = 1 or $gs = 0; print "gs =  $gs\n" });
-cation
+    print q(Font Importation and monitoring application
 --windows_import : import from all available windows partitions.
 --xls_fonts      : show all fonts that already exist from xls
 --strong         : strong verification of font.
@@ -904,3 +901,4 @@ sub progress {
 # remove this directory of the de fontpath if there is only 2 files in directory (fonts.dir & fonts.scale)
 # do type1inst in this path
 # peu etre un petit pb avec "/etc/rc.d/init.d/xfs restart"
+#  ?? :$check11->signal_connect( 'toggled',  sub { $gs == 0 and $gs = 1 or $gs = 0; print "gs =  $gs\n" });
