@@ -254,7 +254,8 @@ sub probeUSB {
     require pci_probing::main;
     require modules;
     defined($usb_interface) and return $usb_interface;
-    if (arch() !~ /sparc|alpha/ && ($usb_interface) = grep { /usb-/ } map { $_->[1] } pci_probing::main::probe('')) {
+    arch() =~ /sparc|alpha/ and return $usb_interface = '';
+    if (($usb_interface) = grep { /usb-/ } map { $_->[1] } pci_probing::main::probe('')) {
 	eval { modules::load($usb_interface, "SERIAL_USB") };
 	if ($@) {
 	    $usb_interface = '';
