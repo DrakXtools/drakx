@@ -114,10 +114,14 @@ enum return_type cdrom_prepare(void)
 			unset_param(MODE_AUTOMATIC);
 		return results;
 	}
-	else
+	else {
 		results = ask_from_list_comments("Please choose the CDROM drive to use for the installation.", medias, medias_models, &choice);
-		
-	results = try_with_device(choice);
+		if (results == RETURN_OK)
+			results = try_with_device(choice);
+		else
+			return results;
+	}
+
 	if (results == RETURN_OK)
 		return RETURN_OK;
 	if (results == RETURN_BACK)
