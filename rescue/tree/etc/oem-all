@@ -117,6 +117,11 @@ unless (-e "/cdrom/VERSION") {
     system "mount", "-r", "-t", "iso9660", "/dev/$cd", "/cdrom";
 }
 
+#- using default options for HP.
+#- $options{free_size} = 500;
+#- $options{free_primary} = 1;
+#- $options{free_fs} = 'fat16';
+
 open F, "/cdrom/VERSION" or die "no installation cdrom found on $cd";
 while (<F>) {
     /\[boot_entries[=:]([^]]*)\]/ and $options{boot_entries} = $1;
@@ -193,7 +198,11 @@ Type \`\`yes'' and [enter] to go on\n"
     } while (($yes = <STDIN>) !~ /^\s*yes\s*$/i);
     system "parted", "/dev/$hd", "mklabel", "msdos";
 }
-my ($min_size, $def_size, $trigger_size, $inst_size, $swap_size) = (4000, 3500, 4000, 1500, 128);
+my $min_size = $options{min_size} || 4000;
+my $def_size = $options{def_size} || 3500;
+my $trigger_size = $options{trigger_size} || 4000;
+my $inst_size = $options{inst_size} || 1500;
+my $swap_size = $options{swap_size} || 128;
 $hd_size > $min_size or die "hard disk is too small to contain oem install (${hd_size}MB found, need $min_size at least)";
 
 my ($fat_pos, $resize_fat_size, $root_size);
@@ -202,16 +211,16 @@ if (@hd_parts == 1 && $hd_parts[$fat_pos = 0]{fstype} eq 'FAT' ||
     @hd_parts == 3 && $hd_parts[0]{type} eq 'primary' && $hd_parts[1]{type} eq 'primary' && $hd_parts[$fat_pos = 2]{fstype} eq 'FAT' ||
     @hd_parts == 2 && $hd_parts[0]{type} eq 'extended' && $hd_parts[$fat_pos = 1]{fstype} eq 'FAT' ||
     @hd_parts == 3 && $hd_parts[0]{type} eq 'extended' && $hd_parts[1]{type} eq 'primary' && $hd_parts[$fat_pos = 5]{fstype} eq 'FAT') {
-    if ($hd_size - $hd_parts[$fat_pos]{end} > $min_size) {
+    if ($hd_size - $hd_parts[$fat_pos]{end} > $min_size + $options{free_size}) {
 	#- check first if there are some available space left on the disk.
 	#- so we are using it, root_size is fixed to match hard disk size.
 	$resize_fat_size = 0;
-	$root_size = $hd_size - $hd_parts[$fat_pos]{end} - $inst_size - $swap_size;
+	$root_size = $hd_size - $hd_parts[$fat_pos]{end} - $options{free_size} - $inst_size - $swap_size;
 	$root_size > $trigger_size and $root_size = $def_size;
-    } elsif ($hd_size > 2*$min_size) {
+    } elsif ($hd_size > 2*$min_size + $options{free_size}) {
 	#- resize this fat partition.
 	$resize_fat_size = 0.5 * $hd_size;
-	$root_size = $hd_size - $resize_fat_size - $inst_size - $swap_size;
+	$root_size = $hd_size - $resize_fat_size - $options{free_size} - $inst_size - $swap_size;
 	$root_size > $trigger_size and $root_size = $def_size;
     }
 }
@@ -219,7 +228,7 @@ unless ($root_size) {
     #- there have not been defined above, so remove everything and start from
     #- a blank partition.
     $resize_fat_size = undef;
-    $root_size = $hd_size - $resize_fat_size - $inst_size - $swap_size;
+    $root_size = $hd_size - $resize_fat_size - $options{free_size} - $inst_size - $swap_size;
     $root_size > $trigger_size and $root_size = $def_size;
 }
 
@@ -265,15 +274,19 @@ Type \`\`yes'' and [enter] to go on\n"
 }
 
 #- at this point, the partition are created.
-my ($instz, $inst, $swap, $root, $var, $home) = ($minor-1, $minor, $minor+1, $minor+2, undef, undef);
+my ($instz, $inst, $swap, $root, $var, $home, $free) = ($minor-1, $minor, $minor+1, $minor+2, undef, undef, undef);
 
 #- all linux partition are stored inside an extended partition, this is easier to manipulate after.
+my $free_point = $point;
 if ($minor == 5) {
-    print F "mkpart extended $point $hd_size\n";
+    printf F "mkpart extended %s %s\n", correct_start_end(\$free_point, $hd_size - ($options{free_primary} && $options{free_size}),
+							  'keepstart');
 } else {
     $hd_parts[0]{type} eq 'extended' or die "first partition assumed to be extended";
     $point = $hd_parts[0]{start};
-    print F "resize $hd_parts[0]{minor} $point $hd_size\n";
+    print F "resize %s %s %s\n", $hd_parts[0]{minor}, correct_start_end(\$free_point,
+									$hd_size - ($options{free_primary} && $options{free_size}),
+									'keepstart');
 }
 printf F "mkpart logical ext2 %s %s\n", correct_start_end(\$point, $point+$inst_size);
 printf F "mkpart logical linux-swap %s %s\n", correct_start_end(\$point, $point+$swap_size);
@@ -285,12 +298,36 @@ if (exists $options{server} && $hd !~ /^rd\//) {
 	printf F "mkpart logical %s %s %s\n", $fs, correct_start_end(\$point, $point+$var_size);
     }
 }
-if ($hd_size - $point > 100 && $hd !~ /^rd\//) {
+if ($hd_size - $point - $options{free_size} > 100 && $hd !~ /^rd\//) {
     $home = ($var || $root) + 1;
-    printf F "mkpart logical %s %s %s\n", $fs, correct_start_end(\$point, $hd_size);
+    printf F "mkpart logical %s %s %s\n", $fs, correct_start_end(\$point, $hd_size-$options{free_size});
+}
+if ($options{free_size} && $options{free_fs}) {
+    if ($options{free_primary}) {
+	$free = scalar(grep { $_->{type} eq 'primary' } @hd_parts) + 2;
+	if ($free > 4) {
+	    $free = ($home || $var || $root) + 1;
+	    delete $options{free_primary};
+	    print "Unable to use primary partition for free partition, using logical partition.\n";
+	}
+    } else {
+	$free = ($home || $var || $root) + 1;
+    }
+    printf F "mkpart %s %s %s %s\n", $options{free_primary} ? 'primary' : 'logical', $options{free_fs} =~ /fat/ ? 'fat' : $options{free_fs}, correct_start_end($options{free_primary} ? \$free_point : \$point, $hd_size);
 }
 print F "quit\n";
 close F or die "unable to partition the disk $hd";
+
+#- try to help user if a free space has been set and no fs defined for it.
+if ($options{free_size} && !$options{free_fs}) {
+    print "
+
+[1;31;40m!!A free space has been configured, now you can use parted
+to defined the partition as you want.[0m
+
+Type \`\`quit'' and [enter] to finish parted\n";
+    system "parted", "-i", "/dev/$hd";
+}
 
 #- we have to build swap and mount it.
 print "Setting swap\n";
@@ -309,6 +346,10 @@ if ($var) {
 if ($home) {
     print "Formatting /dev/$hdp$home partition\n";
     mkfs($fs, "/dev/$hdp$home");
+}
+if ($free) {
+    print "Formatting /dev/$hdp$free partition\n";
+    mkfs($options{free_fs}, "/dev/$hdp$free");
 }
 
 print "Mounting partitions\n";
@@ -348,7 +389,7 @@ if (-e "/cdrom/oem/vmlinuz" && -e "/cdrom/oem/all.rdz") {
 mkdir "/hd/Mandrake";
 mkdir "/hd/Mandrake/RPMS";
 system "cp", "-a", "/cdrom/VERSION", "/hd";
-system "cp", "-a", "/cdrom/Mandrake/base", "/cdrom/Mandrake/mdkinst", "/hd/Mandrake";
+system "cp", "-a", "/cdrom/Mandrake/base", "/cdrom/Mandrake/mdkinst", "/cdrom/Mandrake/share", "/hd/Mandrake";
 
 if (open F, ">/hd/Mandrake/oem_patch.pl") {
     print "Setting OEM specific extension to DrakX\n";
@@ -571,6 +612,10 @@ sub mkfs {
 	/ext3/ and do { system "mkfs.ext2", "-j", $dev;
 			system "tune2fs", "-c0", "-i0", $dev;
 			next };
+	/fat16/ and do { system "mkdosfs", $dev;
+			 next };
+	/fat32/ and do { system "mkdosfs", "-F", "32", $dev;
+			 next };
 	die "unknown fs: $_\n";
     }
 }
