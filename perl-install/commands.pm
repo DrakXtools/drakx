@@ -99,6 +99,7 @@ sub mkdir_ {
 	    $rec or die "mkdir: $root does not exist (try option -p)\n";
 	    &$mkdir($root);
 	}
+	$rec and -d $_[0] and return;
 	mkdir $_[0], 0755 or die "mkdir: error creating directory $_: $!\n";
     };
     &$mkdir($_) foreach @_;

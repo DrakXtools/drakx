@@ -722,7 +722,7 @@ sub install($$$;$$) {
     my ($prefix, $isUpgrade, $toInstall, $depOrder, $media) = @_;
     my %packages;
 
-    return if $::g_auto_install;
+    return if $::g_auto_install || !scalar(@$toInstall);
 
     #- first stage to extract some important informations
     #- about the packages selected. this is used to select

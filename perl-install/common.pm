@@ -367,11 +367,7 @@ sub template2file($$%) {
     local *OUT; local *IN;
 
     open IN, $inputfile  or die "Can't open $inputfile $!";
-    if ($::testing) {
-	*OUT = *STDOUT;
-    } else {
-	open OUT, ">$outputfile" or die "Can't open $outputfile $!";
-    }
+    open OUT, ">$outputfile" or die "Can't open $outputfile $!";
 
     map { s/@@@(.*?)@@@/$toreplace{$1}/g; print OUT; } <IN>;
 }

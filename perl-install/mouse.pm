@@ -155,6 +155,4 @@ sub detect() {
 
     #- defaults to generic ttyS0
     add2hash({ device => "ttyS0", unsafe => 1 }, name2mouse("Generic Mouse (serial)"));
-
-#-    die "mouseconfig failed";
 }

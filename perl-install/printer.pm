@@ -269,6 +269,56 @@ $spooldir       = "/var/spool/lpd";
 #-#####################################################################################
 
 sub set_prefix($) { $prefix = $_[0]; }
+
+sub default_queue($) { (split '\|', $_[0])[0] }
+
+sub copy_printer_params($$) {
+    my ($from, $to) = @_;
+    map { $to->{$_} = $from->{$_} } grep { $_ ne 'configured' } keys %$from; #- avoid cycles.
+}
+
+sub getinfo($) {
+    my ($prefix) = @_;
+    my $printer = {};
+
+    set_prefix($prefix);
+    read_configured_queue($printer);
+
+    add2hash($printer, {
+			want         => 0,
+			complete     => 0,
+			str_type     => $printer::printer_type_default,
+			QUEUE        => "lp",
+			SPOOLDIR     => "/var/spool/lpd/lp",
+			DBENTRY      => "PostScript",
+			PAPERSIZE    => "letter",
+			ASCII_TO_PS  => undef,
+			CRLF         => undef,
+			NUP          => 1,
+			RTLFTMAR     => 18,
+			TOPBOTMAR    => 18,
+			AUTOSENDEOF  => 1,
+
+			DEVICE       => "/dev/lp0",
+
+			REMOTEHOST   => "",
+			REMOTEQUEUE  => "",
+
+			NCPHOST      => "", #-"printerservername",
+			NCPQUEUE     => "", #-"queuename",
+			NCPUSER      => "", #-"user",
+			NCPPASSWD    => "", #-"pass",
+
+			SMBHOST      => "", #-"hostname",
+			SMBHOSTIP    => "", #-"1.2.3.4",
+			SMBSHARE     => "", #-"printername",
+			SMBUSER      => "", #-"user",
+			SMBPASSWD    => "", #-"passowrd",
+			SMBWORKGROUP => "", #-"AS3",
+		       });
+    $printer;
+}
+
 #-*****************************************************************************
 #- read function
 #-*****************************************************************************
@@ -281,7 +331,7 @@ sub read_printer_db(;$) {
     %thedb and return;
 
     my %available_devices; #- keep only available devices in our database.
-    local *AVAIL; open AVAIL, (!$::testing && "chroot ") . "$prefix/usr/bin/gs --help |";
+    local *AVAIL; open AVAIL, ($::testing ? "$prefix" : "chroot $prefix ") . "/usr/bin/gs --help |";
     foreach (<AVAIL>) {
 	if (/^Available devices:/ ... /^\S/) {
 	    @available_devices{split /\s+/, $_} = () if /^\s+/;
@@ -297,10 +347,7 @@ sub read_printer_db(;$) {
 
     while (<DBPATH>) {
 	if (/^StartEntry:\s(\w*)/) {
-	    my $entryname = $1;
-	    my $entry;
-
-	    $entry->{ENTRY} = $entryname;
+	    my $entry = { ENTRY => $1 };
 
 	  WHILE :
 	      while (<DBPATH>) {
@@ -318,23 +365,23 @@ sub read_printer_db(;$) {
 			      }
 			  };
 		      /Resolution:\s*{(.*)}\s*{(.*)}\s*{(.*)}/
-			and do { push @{$entry->{RESOLUTION}}, { XDPI => $1, YDPI => $2, DESCR => $3 }; last SWITCH };
+			and do { push @{$entry->{RESOLUTION} ||= []}, { XDPI => $1, YDPI => $2, DESCR => $3 }; last SWITCH };
 		      /BitsPerPixel:\s*{(.*)}\s*{(.*)}/
-			and do { push @{$entry->{BITSPERPIXEL}}, {DEPTH => $1, DESCR => $2}; last SWITCH };
+			and do { push @{$entry->{BITSPERPIXEL} ||= []}, {DEPTH => $1, DESCR => $2}; last SWITCH };
 
 		      /EndEntry/ and last WHILE;
 		  }
 	      }
 	    if (exists $available_devices{$entry->{GSDRIVER}}) {
-		$thedb{$entryname} = $entry;
+		$thedb{$entry->{ENTRY}} = $entry;
 		$thedb_gsdriver{$entry->{GSDRIVER}} = $entry;
 	    }
 	}
     }
 
     @entries_db_short     = sort keys %printer::thedb;
-    @entry_db_description = map { $printer::thedb{$_}{DESCR} } @entries_db_short;
     %descr_to_db          = map { $printer::thedb{$_}{DESCR}, $_ } @entries_db_short;
+    @entry_db_description = keys %descr_to_db;
     %db_to_descr          = reverse %descr_to_db;
 }
 
@@ -350,15 +397,14 @@ sub create_spool_dir($) {
     my ($queue_path) = @_;
     my $complete_path = "$prefix/$queue_path";
 
-    unless (-d $complete_path) {
-	mkdir "$complete_path", 0755
-	  or die "An error has occurred - can't create $complete_path : $!";
-    }
+    commands::mkdir_("-p", $complete_path);
 
-    #-redhat want that "drwxr-xr-x root lp"
-    my $gid_lp = (getpwnam("lp"))[3];
-    chown 0, $gid_lp, $complete_path
-      or die "An error has occurred - can't chgrp $complete_path to lp $!";
+    unless ($::testing) {
+	#-redhat want that "drwxr-xr-x root lp"
+	my $gid_lp = (getpwnam("lp"))[3];
+	chown 0, $gid_lp, $complete_path
+	  or die "An error has occurred - can't chgrp $complete_path to lp $!";
+    }
 }
 
 #------------------------------------------------------------------------------
@@ -394,9 +440,8 @@ my $intro_printcap_test = "
 # Please don't edit this file directly unless you know what you are doing!
 # Look at the printcap(5) man page for more info.
 # Be warned that the control-panel printtool requires a very strict format!
-# Look at the printcap(5) man page for more info.
 #
-# This file can be edited with the printtool in the control-panel.
+# This file can be edited with printerdrake or printtool.
 #
 
 ";
@@ -446,9 +491,9 @@ sub read_configured_queue($) {
 	local *F; open F, "$prefix$entry->{SPOOLDIR}/general.cfg" or next;
 	foreach (<F>) {
 	    chomp;
-	    if (/^\s*(?:export\s+)PRINTER_TYPE=(.*?)\s*$/) { $entry->{TYPE} = $1 unless defined $entry->{TYPE} }
-	    elsif (/^\s*(?:export\s+)ASCII_TO_PS=(.*?)\s*$/) { $entry->{ASCII_TO_PS} = $1 eq 'YES' unless defined $entry->{ASCII_TO_PS} }
-	    elsif (/^\s*(?:export\s+)PAPER_SIZE=(.*?)\s*$/) { $entry->{PAPERSIZE} = $1 unless defined $entry->{PAPERSIZE} }
+	    if (/^\s*(?:export\s+)?PRINTER_TYPE=(.*?)\s*$/) { $entry->{TYPE} = $1 unless defined $entry->{TYPE} }
+	    elsif (/^\s*(?:export\s+)?ASCII_TO_PS=(.*?)\s*$/) { $entry->{ASCII_TO_PS} = $1 eq 'YES' unless defined $entry->{ASCII_TO_PS} }
+	    elsif (/^\s*(?:export\s+)?PAPER_SIZE=(.*?)\s*$/) { $entry->{PAPERSIZE} = $1 unless defined $entry->{PAPERSIZE} }
 	}
 	close F;
     }
@@ -459,17 +504,17 @@ sub read_configured_queue($) {
 	local *F; open F, "$prefix$entry->{SPOOLDIR}/postscript.cfg" or next;
 	foreach (<F>) {
 	    chomp;
-	    if (/^\s*(?:export\s+)GSDEVICE=(.*?)\s*$/) { $entry->{DBENTRY} = $thedb_gsdriver{$1}{ENTRY} unless defined $entry->{DBENTRY} }
-	    elsif (/^\s*(?:export\s+)RESOLUTION=(.*?)\s*$/) { $entry->{RESOLUTION} = $1 unless defined $entry->{RESOLUTION} }
-	    elsif (/^\s*(?:export\s+)COLOR=-dBitsPerPixel=(.*?)\s*$/) { $entry->{COLOR} = $1 unless defined $entry->{COLOR} }
-	    elsif (/^\s*(?:export\s+)COLOR=(.*?)\s*$/) { $entry->{COLOR} = $1 ? $1 : 'Default' unless defined $entry->{COLOR} }
-	    elsif (/^\s*(?:export\s+)PAPERSIZE=(.*?)\s*$/) { $entry->{PAPERSIZE} = $1 unless defined $entry->{PAPERSIZE} }
-	    elsif (/^\s*(?:export\s+)EXTRA_GS_OPTIONS=(.*?)\s*$/) { $entry->{EXTRA_GS_OPTIONS} = $1 unless defined $entry->{EXTRA_GS_OPTIONS}; $entry->{EXTRA_GS_OPTIONS} =~ s/^\"(.*)\"/$1/ }
-	    elsif (/^\s*(?:export\s+)REVERSE_ORDER=(.*?)\s*$/) { $entry->{REVERSE_ORDER} = $1 unless defined $entry->{REVERSE_ORDER} }
-	    elsif (/^\s*(?:export\s+)PS_SEND_EOF=(.*?)\s*$/) { $entry->{AUTOSENDEOF} = $1 eq 'YES' && $entry->{DBENTRY} eq 'PostScript' unless defined $entry->{AUTOSENDEOF} }
-	    elsif (/^\s*(?:export\s+)NUP=(.*?)\s*$/) { $entry->{NUP} = $1 unless defined $entry->{NUP} }
-	    elsif (/^\s*(?:export\s+)RTLFTMAR=(.*?)\s*$/) { $entry->{RTLFTMAR} = $1 unless defined $entry->{RTLFTMAR} }
-	    elsif (/^\s*(?:export\s+)TOPBOTMAR=(.*?)\s*$/) { $entry->{TOPBOTMAR} = $1 unless defined $entry->{TOPBOTMAR} }
+	    if (/^\s*(?:export\s+)?GSDEVICE=(.*?)\s*$/) { $entry->{GSDRIVER} = $1 unless defined $entry->{GSDRIVER} }
+	    elsif (/^\s*(?:export\s+)?RESOLUTION=(.*?)\s*$/) { $entry->{RESOLUTION} = $1 unless defined $entry->{RESOLUTION} }
+	    elsif (/^\s*(?:export\s+)?COLOR=-dBitsPerPixel=(.*?)\s*$/) { $entry->{COLOR} = $1 unless defined $entry->{COLOR} }
+	    elsif (/^\s*(?:export\s+)?COLOR=(.*?)\s*$/) { $entry->{COLOR} = $1 ? $1 : 'Default' unless defined $entry->{COLOR} }
+	    elsif (/^\s*(?:export\s+)?PAPERSIZE=(.*?)\s*$/) { $entry->{PAPERSIZE} = $1 unless defined $entry->{PAPERSIZE} }
+	    elsif (/^\s*(?:export\s+)?EXTRA_GS_OPTIONS=(.*?)\s*$/) { $entry->{EXTRA_GS_OPTIONS} = $1 unless defined $entry->{EXTRA_GS_OPTIONS}; $entry->{EXTRA_GS_OPTIONS} =~ s/^\"(.*)\"/$1/ }
+	    elsif (/^\s*(?:export\s+)?REVERSE_ORDER=(.*?)\s*$/) { $entry->{REVERSE_ORDER} = $1 unless defined $entry->{REVERSE_ORDER} }
+	    elsif (/^\s*(?:export\s+)?PS_SEND_EOF=(.*?)\s*$/) { $entry->{AUTOSENDEOF} = $1 eq 'YES' && $entry->{DBENTRY} eq 'PostScript' unless defined $entry->{AUTOSENDEOF} }
+	    elsif (/^\s*(?:export\s+)?NUP=(.*?)\s*$/) { $entry->{NUP} = $1 unless defined $entry->{NUP} }
+	    elsif (/^\s*(?:export\s+)?RTLFTMAR=(.*?)\s*$/) { $entry->{RTLFTMAR} = $1 unless defined $entry->{RTLFTMAR} }
+	    elsif (/^\s*(?:export\s+)?TOPBOTMAR=(.*?)\s*$/) { $entry->{TOPBOTMAR} = $1 unless defined $entry->{TOPBOTMAR} }
 	}
 	close F;
     }
@@ -480,17 +525,17 @@ sub read_configured_queue($) {
 	local *F; open F, "$prefix$entry->{SPOOLDIR}/textonly.cfg" or next;
 	foreach (<F>) {
 	    chomp;
-	    if (/^\s*(?:export\s+)TEXTONLYOPTIONS=(.*?)\s*$/) { $entry->{TEXTONLYOPTIONS} = $1 unless defined $entry->{TEXTONLYOPTIONS}; $entry->{TEXTONLYOPTIONS} =~ s/^\"(.*)\"/$1/ }
-	    elsif (/^\s*(?:export\s+)CRLFTRANS=(.*?)\s*$/) { $entry->{CRLF} = $1 eq 'YES' unless defined $entry->{CRLF} }
-	    elsif (/^\s*(?:export\s+)TEXT_SEND_EOF=(.*?)\s*$/) { $entry->{AUTOSENDEOF} = $1 eq 'YES' && $entry->{DBENTRY} ne 'PostScript' unless defined $entry->{AUTOSENDEOF} }
+	    if (/^\s*(?:export\s+)?TEXTONLYOPTIONS=(.*?)\s*$/) { $entry->{TEXTONLYOPTIONS} = $1 unless defined $entry->{TEXTONLYOPTIONS}; $entry->{TEXTONLYOPTIONS} =~ s/^\"(.*)\"/$1/ }
+	    elsif (/^\s*(?:export\s+)?CRLFTRANS=(.*?)\s*$/) { $entry->{CRLF} = $1 eq 'YES' unless defined $entry->{CRLF} }
+	    elsif (/^\s*(?:export\s+)?TEXT_SEND_EOF=(.*?)\s*$/) { $entry->{AUTOSENDEOF} = $1 eq 'YES' && $entry->{DBENTRY} ne 'PostScript' unless defined $entry->{AUTOSENDEOF} }
 	}
 	close F;
     }
 
     #- get extra parameters for SMB or NCP type queue.
     foreach (values %{$printer->{configured}}) {
-	if ($_->{TYPE} eq 'SMB') {
-	    my $entry = $_;
+	my $entry = $_;
+	if ($entry->{TYPE} eq 'SMB') {
 	    my $config_file = "$prefix$entry->{SPOOLDIR}/.config";
 	    local *F; open F, "$config_file" or next; #die "Can't open $config_file $!";
 	    foreach (<F>) {
@@ -509,8 +554,7 @@ sub read_configured_queue($) {
 		}
 	    }
 	    close F;
-	} elsif ($_->{TYPE} eq 'NCP') {
-	    my $entry = $_;
+	} elsif ($entry->{TYPE} eq 'NCP') {
 	    my $config_file = "$prefix$entry->{SPOOLDIR}/.config";
 	    local *F; open F, "$config_file" or next; #die "Can't open $config_file $!";
 	    foreach (<F>) {
@@ -532,12 +576,7 @@ sub read_configured_queue($) {
 
 sub configure_queue($) {
     my ($entry) = @_;
-
-    $entry->{SPOOLDIR} ||= "$spooldir/$entry->{QUEUE}";
-    $entry->{IF}       ||= "$entry->{SPOOLDIR}/filter";
-    $entry->{AF}       ||= "$entry->{SPOOLDIR}/acct";
-
-    my $queue_path      = "$entry->{SPOOLDIR}";
+    my $queue_path = "$entry->{SPOOLDIR}";
     create_spool_dir($queue_path);
 
     my $get_name_file = sub {
@@ -568,7 +607,7 @@ sub configure_queue($) {
     $fieldname{extragsoptions} = "\"$entry->{EXTRA_GS_OPTIONS}\"";
     $fieldname{pssendeof}      = $entry->{AUTOSENDEOF} ? ($dbentry->{GSDRIVER} eq "POSTSCRIPT" ? "YES" : "NO") : "NO";
     $fieldname{nup}            = $entry->{NUP};
-    $fieldname{rtlftmar}       = $entry->{RTFLTMAR};
+    $fieldname{rtlftmar}       = $entry->{RTLFTMAR};
     $fieldname{topbotmar}      = $entry->{TOPBOTMAR};
     create_config_file($filein, $file, %fieldname);
 
@@ -605,15 +644,16 @@ sub configure_queue($) {
 
     #-now the printcap file, note this one contains all the printer (use configured for that).
     local *PRINTCAP;
-    if ($::testing) {
-	*PRINTCAP = *STDOUT;
-    } else {
-	open PRINTCAP, ">$prefix/etc/printcap" or die "Can't open printcap file $!";
-    }
+    open PRINTCAP, ">$prefix/etc/printcap" or die "Can't open printcap file $!";
 
     print PRINTCAP $intro_printcap_test;
     foreach (values %{$entry->{configured}}) {
-	my $db_ = $thedb{($_->{DBENTRY})} or die "no dbentry";
+	$_->{DBENTRY} = $thedb_gsdriver{$_->{GSDRIVER}}{ENTRY} unless defined $_->{DBENTRY};
+	my $db_ = $thedb{$_->{DBENTRY}} or next; #die "no dbentry";
+
+	$_->{SPOOLDIR} ||= "$spooldir/" . default_queue($_->{QUEUE});
+	$_->{IF}       ||= "$_->{SPOOLDIR}/filter";
+	$_->{AF}       ||= "$_->{SPOOLDIR}/acct";
 
 	printf PRINTCAP "##PRINTTOOL3##  %s %s %s %s %s %s %s%s\n",
 	  $_->{TYPE} || '{}',

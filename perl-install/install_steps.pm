@@ -465,13 +465,19 @@ sub servicesConfig {}
 #------------------------------------------------------------------------------
 sub printerConfig {
     my($o) = @_;
-    if ($o->{printer}{complete}) {
-	require printer;
+    if ($o->{printer}{configured}) {
 	require pkgs;
 	pkgs::selectPackage($o->{packages}, pkgs::packageByName($o->{packages}, 'rhs-printfilters'));
 	$o->installPackages($o->{packages});
 
-	printer::configure_queue($o->{printer});
+	require printer;
+	foreach (keys %{$o->{printer}{configured} || {}}) {
+	    log::l("configuring printer queue $_->{queue}");
+	    printer::copy_printer_params($_, $o->{printer});
+	    #- setup all configured queues, which is not the case interactively where
+	    #- only the working queue is setup on configuration.
+	    printer::configure_queue($o->{printer});
+	}
     }
 }
 

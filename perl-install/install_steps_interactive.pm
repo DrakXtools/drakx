@@ -560,8 +560,9 @@ sub servicesConfig {
 sub printerConfig($) {
     my ($o) = @_;
 
+    require printer;
+    eval { add2hash($o->{printer} ||= {}, printer::getinfo($o->{prefix})) };
     require printerdrake;
-    eval { add2hash($o->{printer}, printerdrake::getinfo($o->{prefix})) };
     printerdrake::main($o->{printer}, $o, sub { install_any::pkg_install($o, $_[0]) });
 }
 

@@ -21,6 +21,7 @@
 use lib qw(/usr/lib/libDrakX);
 
 use interactive;
+use printer;
 use printerdrake;
 use c;
 
@@ -42,6 +43,6 @@ my $f = "/usr/lib/rhs/rhs-printfilters";
 
 my $in = vnew interactive('su');
 
-printerdrake::main('', printerdrake::getinfo(''), $in, sub { `urpmi --auto $_[0]` });
+printerdrake::main(eval { printer::getinfo('') } || {}, $in, sub { `urpmi --auto $_[0]` });
 
 $in->exit(0);
