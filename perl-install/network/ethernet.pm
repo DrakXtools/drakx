@@ -78,16 +78,17 @@ sub get_eth_cards_names {
 }
 
 
-#- conf_network_card_backend : configure the network cards and return the list of them, or configure one specified interface : WARNING, you have to setup the ethernet cards, by calling load_category($in, 'network/main|gigabit|usb', !$::expert, 1) or load_category_backend before calling this function. Basically, you call this function in 2 times.
+#- conf_network_card_backend : configure the specified network interface
+# WARNING: you have to setup the ethernet cards, by calling load_category($in, 'network/main|gigabit|usb', !$::expert, 1)
+#          or load_category_backend before calling this function.
 #- input
-#-  $prefix
 #-  $netc
 #-  $intf
 #-  $type : type of interface, must be given if $interface is : string : "static" or "dhcp"
-#-  $interface : facultative, if given, set this interface and return it in a proper form. If not, return @all_cards
+#-  $interface : set this interface and return it in a proper form.
 #-  $ipadr : facultative, ip address of the interface : string
 #-  $netadr : facultative, netaddress of the interface : string
-#- when $interface is given, informations are written in $intf and $netc. If not, @all_cards is returned.
+#- when $interface is given, informations are written in $intf and $netc.
 #- $intf output: $device is the result of
 #-  $intf->{$device}->{DEVICE} : which device is concerned : $device is the result of $interface =~ /(eth[0-9]+)/; my $device = $1;;
 #-  $intf->{$device}->{BOOTPROTO} : $type
@@ -97,7 +98,7 @@ sub get_eth_cards_names {
 #- $netc output:
 #-  $netc->{NET_DEVICE} : this is used to indicate that this eth card is used to connect to internet : $device
 #- output:
-#-  $device : only returned in case $interface was given it's $interface, but filtered by /eth[0-9+]/ : string : /eth[0-9+]/
+#-  $device : returned passed interface name
 sub conf_network_card_backend {
     my ($netc, $intf, $type, $interface, $o_ipadr, $o_netadr) = @_;
     #-type =static or dhcp
