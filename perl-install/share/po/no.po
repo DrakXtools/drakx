@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX VERSION\n"
-"POT-Creation-Date: 2000-12-26 13:19+0100\n"
+"POT-Creation-Date: 2001-01-04 08:14+0100\n"
 "PO-Revision-Date: 1999-08-25 11:07+0200\n"
 "Last-Translator: Terje Bjerkelia <terje@bjerkelia.com>\n"
 "Language-Team: norwegian\n"
@@ -522,7 +522,7 @@ msgid "Delay before booting default image"
 msgstr "Forsinkelse før oppstart av standard bilde"
 
 #: ../../any.pm_.c:134 ../../install_steps_interactive.pm_.c:757
-#: ../../install_steps_interactive.pm_.c:808 ../../netconnect.pm_.c:706
+#: ../../install_steps_interactive.pm_.c:808 ../../netconnect.pm_.c:651
 #: ../../printerdrake.pm_.c:94 ../../printerdrake.pm_.c:128
 #: ../../standalone/adduserdrake_.c:42
 msgid "Password"
@@ -578,7 +578,7 @@ msgid "Add"
 msgstr "Legg til"
 
 #: ../../any.pm_.c:165 ../../diskdrake.pm_.c:46
-#: ../../install_steps_interactive.pm_.c:802 ../../netconnect.pm_.c:971
+#: ../../install_steps_interactive.pm_.c:802 ../../netconnect.pm_.c:906
 #: ../../printerdrake.pm_.c:352 ../../standalone/adduserdrake_.c:36
 msgid "Done"
 msgstr "Ferdig"
@@ -672,13 +672,13 @@ msgid "Do you have any %s interfaces?"
 msgstr "Har du noen %s grensesnitt?"
 
 #: ../../any.pm_.c:509 ../../interactive.pm_.c:81 ../../my_gtk.pm_.c:485
-#: ../../netconnect.pm_.c:148 ../../netconnect.pm_.c:529
+#: ../../netconnect.pm_.c:148 ../../netconnect.pm_.c:488
 #: ../../printerdrake.pm_.c:233
 msgid "No"
 msgstr "Nei"
 
 #: ../../any.pm_.c:509 ../../interactive.pm_.c:81 ../../my_gtk.pm_.c:485
-#: ../../netconnect.pm_.c:146 ../../netconnect.pm_.c:527
+#: ../../netconnect.pm_.c:146 ../../netconnect.pm_.c:486
 msgid "Yes"
 msgstr "Ja"
 
@@ -885,16 +885,16 @@ msgstr "Slett"
 msgid "Format"
 msgstr "Formater"
 
-#: ../../diskdrake.pm_.c:23 ../../diskdrake.pm_.c:610
+#: ../../diskdrake.pm_.c:23 ../../diskdrake.pm_.c:611
 msgid "Resize"
 msgstr "Endre størrelse"
 
 #: ../../diskdrake.pm_.c:23 ../../diskdrake.pm_.c:427
-#: ../../diskdrake.pm_.c:480
+#: ../../diskdrake.pm_.c:481
 msgid "Type"
 msgstr "Type"
 
-#: ../../diskdrake.pm_.c:24 ../../diskdrake.pm_.c:500
+#: ../../diskdrake.pm_.c:24 ../../diskdrake.pm_.c:501
 msgid "Mount point"
 msgstr "Monteringspunkt"
 
@@ -1031,8 +1031,8 @@ msgid "Please make a backup of your data first"
 msgstr "Vennligst ta sikkerhetskopi av din data først"
 
 #: ../../diskdrake.pm_.c:149 ../../diskdrake.pm_.c:166
-#: ../../diskdrake.pm_.c:175 ../../diskdrake.pm_.c:532
-#: ../../diskdrake.pm_.c:554
+#: ../../diskdrake.pm_.c:175 ../../diskdrake.pm_.c:533
+#: ../../diskdrake.pm_.c:555
 msgid "Read carefully!"
 msgstr "Les nøye!"
 
@@ -1058,7 +1058,7 @@ msgstr "Vær forsiktig: denne operasjonen er farlig."
 msgid "Error"
 msgstr "Feil"
 
-#: ../../diskdrake.pm_.c:227 ../../diskdrake.pm_.c:708
+#: ../../diskdrake.pm_.c:227 ../../diskdrake.pm_.c:709
 msgid "Mount point: "
 msgstr "Monteringspunkt: "
 
@@ -1237,11 +1237,11 @@ msgstr ""
 msgid "Use ``%s'' instead"
 msgstr "Bruk ``%s'' istedet"
 
-#: ../../diskdrake.pm_.c:432
+#: ../../diskdrake.pm_.c:433
 msgid "Use ``Unmount'' first"
 msgstr "Bruk ``Demonter'' først"
 
-#: ../../diskdrake.pm_.c:433 ../../diskdrake.pm_.c:475
+#: ../../diskdrake.pm_.c:434 ../../diskdrake.pm_.c:476
 #, c-format
 msgid ""
 "After changing type of partition %s, all data on this partition will be lost"
@@ -1249,41 +1249,41 @@ msgstr ""
 "Etter endring av type på partisjon %s, vil alle data på denne partisjonen gå "
 "tapt"
 
-#: ../../diskdrake.pm_.c:445
+#: ../../diskdrake.pm_.c:446
 msgid "Continue anyway?"
 msgstr "Fortsette likevel?"
 
-#: ../../diskdrake.pm_.c:450
+#: ../../diskdrake.pm_.c:451
 msgid "Quit without saving"
 msgstr "Avslutt uten å lagre"
 
-#: ../../diskdrake.pm_.c:450
+#: ../../diskdrake.pm_.c:451
 msgid "Quit without writing the partition table?"
 msgstr "Avslutt uten å skrive partisjonstabellen?"
 
-#: ../../diskdrake.pm_.c:478
+#: ../../diskdrake.pm_.c:479
 msgid "Change partition type"
 msgstr "Endre partisjonstype"
 
-#: ../../diskdrake.pm_.c:479
+#: ../../diskdrake.pm_.c:480
 msgid "Which filesystem do you want?"
 msgstr "Hvilket filsystem ønsker du?"
 
-#: ../../diskdrake.pm_.c:482 ../../diskdrake.pm_.c:740
+#: ../../diskdrake.pm_.c:483 ../../diskdrake.pm_.c:741
 msgid "You can't use ReiserFS for partitions smaller than 32MB"
 msgstr "Du kan ikke bruke ReiserFS for partisjoner mindre enn 32MB"
 
-#: ../../diskdrake.pm_.c:498
+#: ../../diskdrake.pm_.c:499
 #, c-format
 msgid "Where do you want to mount loopback file %s?"
 msgstr "Hvor vil du montere loopback-filen %s?"
 
-#: ../../diskdrake.pm_.c:499
+#: ../../diskdrake.pm_.c:500
 #, c-format
 msgid "Where do you want to mount device %s?"
 msgstr "Hvor vil du montere %s enheten?"
 
-#: ../../diskdrake.pm_.c:504
+#: ../../diskdrake.pm_.c:505
 msgid ""
 "Can't unset mount point as this partition is used for loop back.\n"
 "Remove the loopback first"
@@ -1291,148 +1291,148 @@ msgstr ""
 "Kan ikke fjerne monteringspunkt da denne partisjonen blir brukt til\n"
 "loopback. Fjern loopback først"
 
-#: ../../diskdrake.pm_.c:523
+#: ../../diskdrake.pm_.c:524
 #, c-format
 msgid "After formatting partition %s, all data on this partition will be lost"
 msgstr ""
 "Etter formatering av partisjon %s vil alle data på denne partisjonen\n"
 "gå tapt"
 
-#: ../../diskdrake.pm_.c:525
+#: ../../diskdrake.pm_.c:526
 msgid "Formatting"
 msgstr "Formatering"
 
-#: ../../diskdrake.pm_.c:526
+#: ../../diskdrake.pm_.c:527
 #, c-format
 msgid "Formatting loopback file %s"
 msgstr "Formaterer loopback-fil %s"
 
-#: ../../diskdrake.pm_.c:527 ../../install_steps_interactive.pm_.c:404
+#: ../../diskdrake.pm_.c:528 ../../install_steps_interactive.pm_.c:404
 #, c-format
 msgid "Formatting partition %s"
 msgstr "Formaterer partisjon %s"
 
-#: ../../diskdrake.pm_.c:532
+#: ../../diskdrake.pm_.c:533
 msgid "After formatting all partitions,"
 msgstr "Etter formatering av alle partisjonene,"
 
-#: ../../diskdrake.pm_.c:532
+#: ../../diskdrake.pm_.c:533
 msgid "all data on these partitions will be lost"
 msgstr "alle data på disse partisjonene vil gå tapt"
 
-#: ../../diskdrake.pm_.c:538
+#: ../../diskdrake.pm_.c:539
 msgid "Move"
 msgstr "Flytt"
 
-#: ../../diskdrake.pm_.c:539
+#: ../../diskdrake.pm_.c:540
 msgid "Which disk do you want to move it to?"
 msgstr "Hvilken disk vil du flytte til?"
 
-#: ../../diskdrake.pm_.c:540
+#: ../../diskdrake.pm_.c:541
 msgid "Sector"
 msgstr "Sektor"
 
-#: ../../diskdrake.pm_.c:541
+#: ../../diskdrake.pm_.c:542
 msgid "Which sector do you want to move it to?"
 msgstr "Hvilken sektor vil du flytte til?"
 
-#: ../../diskdrake.pm_.c:544
+#: ../../diskdrake.pm_.c:545
 msgid "Moving"
 msgstr "Flytter"
 
-#: ../../diskdrake.pm_.c:544
+#: ../../diskdrake.pm_.c:545
 msgid "Moving partition..."
 msgstr "Flytter partisjon..."
 
-#: ../../diskdrake.pm_.c:554
+#: ../../diskdrake.pm_.c:555
 #, c-format
 msgid "Partition table of drive %s is going to be written to disk!"
 msgstr "Partisjonstabellen på disk %s blir nå skrevet til disk!"
 
-#: ../../diskdrake.pm_.c:556
+#: ../../diskdrake.pm_.c:557
 msgid "You'll need to reboot before the modification can take place"
 msgstr "Du må starte maskinen på nytt for at modifiseringene skal tre i kraft"
 
-#: ../../diskdrake.pm_.c:577
+#: ../../diskdrake.pm_.c:578
 msgid "Computing FAT filesystem bounds"
 msgstr "Beregner fat filsystemgrense"
 
-#: ../../diskdrake.pm_.c:577 ../../diskdrake.pm_.c:637
+#: ../../diskdrake.pm_.c:578 ../../diskdrake.pm_.c:638
 #: ../../install_interactive.pm_.c:107
 msgid "Resizing"
 msgstr "Endrer størrelse"
 
-#: ../../diskdrake.pm_.c:600
+#: ../../diskdrake.pm_.c:601
 msgid "This partition is not resizeable"
 msgstr "Denne partisjonen kan ikke størrelsen forandres på"
 
-#: ../../diskdrake.pm_.c:605
+#: ../../diskdrake.pm_.c:606
 msgid "All data on this partition should be backed-up"
 msgstr "Alle data på denne partisjonen burde sikkerhetskopieres"
 
-#: ../../diskdrake.pm_.c:607
+#: ../../diskdrake.pm_.c:608
 #, c-format
 msgid "After resizing partition %s, all data on this partition will be lost"
 msgstr ""
 "Etter endring av størrelse for partisjon %s, vil alle data på denne\n"
 "partisjonen vil gå tapt"
 
-#: ../../diskdrake.pm_.c:617
+#: ../../diskdrake.pm_.c:618
 msgid "Choose the new size"
 msgstr "Velg den nye størrelsen"
 
-#: ../../diskdrake.pm_.c:617 ../../install_steps_graphical.pm_.c:287
+#: ../../diskdrake.pm_.c:618 ../../install_steps_graphical.pm_.c:287
 #: ../../install_steps_graphical.pm_.c:334
 #: ../../install_steps_interactive.pm_.c:522
 #: ../../partition_table_raw.pm_.c:101
 msgid "MB"
 msgstr "MB"
 
-#: ../../diskdrake.pm_.c:674
+#: ../../diskdrake.pm_.c:675
 msgid "Create a new partition"
 msgstr "Opprette en ny partisjon"
 
-#: ../../diskdrake.pm_.c:700
+#: ../../diskdrake.pm_.c:701
 msgid "Start sector: "
 msgstr "Start sektor: "
 
-#: ../../diskdrake.pm_.c:704 ../../diskdrake.pm_.c:779
+#: ../../diskdrake.pm_.c:705 ../../diskdrake.pm_.c:780
 msgid "Size in MB: "
 msgstr "Størrelse i MB: "
 
-#: ../../diskdrake.pm_.c:707 ../../diskdrake.pm_.c:782
+#: ../../diskdrake.pm_.c:708 ../../diskdrake.pm_.c:783
 msgid "Filesystem type: "
 msgstr "Filsystemtype: "
 
-#: ../../diskdrake.pm_.c:710
+#: ../../diskdrake.pm_.c:711
 msgid "Preference: "
 msgstr "Valg: "
 
-#: ../../diskdrake.pm_.c:758
+#: ../../diskdrake.pm_.c:759
 msgid "This partition can't be used for loopback"
 msgstr "Denne partisjonen kan ikke brukes for loopback"
 
-#: ../../diskdrake.pm_.c:768
+#: ../../diskdrake.pm_.c:769
 msgid "Loopback"
 msgstr "Loopback"
 
-#: ../../diskdrake.pm_.c:778
+#: ../../diskdrake.pm_.c:779
 msgid "Loopback file name: "
 msgstr "Loopback filnavn: "
 
-#: ../../diskdrake.pm_.c:804
+#: ../../diskdrake.pm_.c:805
 msgid "File already used by another loopback, choose another one"
 msgstr "Filen blir allerede brukt av en annen loopback, velg en annen"
 
-#: ../../diskdrake.pm_.c:805
+#: ../../diskdrake.pm_.c:806
 msgid "File already exists. Use it?"
 msgstr "Filen eksisterer allerede. Bruke denne?"
 
-#: ../../diskdrake.pm_.c:827 ../../diskdrake.pm_.c:843
+#: ../../diskdrake.pm_.c:828 ../../diskdrake.pm_.c:844
 msgid "Select file"
 msgstr "Velg fil"
 
-#: ../../diskdrake.pm_.c:836
+#: ../../diskdrake.pm_.c:837
 msgid ""
 "The backup partition table has not the same size\n"
 "Still continue?"
@@ -1440,11 +1440,11 @@ msgstr ""
 "Kopien av partisjonstabellen har ikke samme størrelse\n"
 "Fortsette for det?"
 
-#: ../../diskdrake.pm_.c:844
+#: ../../diskdrake.pm_.c:845
 msgid "Warning"
 msgstr "Advarsel"
 
-#: ../../diskdrake.pm_.c:845
+#: ../../diskdrake.pm_.c:846
 msgid ""
 "Insert a floppy in drive\n"
 "All data on this floppy will be lost"
@@ -1452,27 +1452,27 @@ msgstr ""
 "Sett inn en diskett i stasjonen\n"
 "Alle data på denne disketten vil gå tapt"
 
-#: ../../diskdrake.pm_.c:856
+#: ../../diskdrake.pm_.c:857
 msgid "Trying to rescue partition table"
 msgstr "Prøver å redde partisjonstabell"
 
-#: ../../diskdrake.pm_.c:867
+#: ../../diskdrake.pm_.c:868
 msgid "device"
 msgstr "enhet"
 
-#: ../../diskdrake.pm_.c:868
+#: ../../diskdrake.pm_.c:869
 msgid "level"
 msgstr "nivå"
 
-#: ../../diskdrake.pm_.c:869
+#: ../../diskdrake.pm_.c:870
 msgid "chunk size"
 msgstr "skivestørrelse"
 
-#: ../../diskdrake.pm_.c:881
+#: ../../diskdrake.pm_.c:882
 msgid "Choose an existing RAID to add to"
 msgstr "Velg en eksisterende RAID for å legge til"
 
-#: ../../diskdrake.pm_.c:882
+#: ../../diskdrake.pm_.c:883
 msgid "new"
 msgstr "ny"
 
@@ -3622,7 +3622,7 @@ msgstr ""
 msgid "Duplicate mount point %s"
 msgstr "Dupliser monteringspunkt %s"
 
-#: ../../install_steps.pm_.c:374
+#: ../../install_steps.pm_.c:378
 msgid ""
 "Some important packages didn't get installed properly.\n"
 "Either your cdrom drive or your cdrom is defective.\n"
@@ -3634,12 +3634,12 @@ msgstr ""
 "Sjekk cd-platen på en installert maskin med \"rpm -qpl "
 "Mandrake/RPMS/*.rpm\"\n"
 
-#: ../../install_steps.pm_.c:442
+#: ../../install_steps.pm_.c:451
 #, c-format
 msgid "Welcome to %s"
 msgstr "Velkommen til %s"
 
-#: ../../install_steps.pm_.c:631
+#: ../../install_steps.pm_.c:640
 msgid "No floppy drive available"
 msgstr "Ingen diskettstasjon tilgjengelig"
 
@@ -5350,13 +5350,13 @@ msgstr ""
 "Det ser ikke ut til at systemet er koblet til Internett.\n"
 "Prøv å rekonfigurere tilkoblingen din."
 
-#: ../../netconnect.pm_.c:227 ../../netconnect.pm_.c:301
-#: ../../netconnect.pm_.c:320 ../../netconnect.pm_.c:332
-#: ../../netconnect.pm_.c:344
+#: ../../netconnect.pm_.c:224 ../../netconnect.pm_.c:294
+#: ../../netconnect.pm_.c:303 ../../netconnect.pm_.c:310
+#: ../../netconnect.pm_.c:319
 msgid "ISDN Configuration"
 msgstr "ISDN-konfigurasjon"
 
-#: ../../netconnect.pm_.c:227
+#: ../../netconnect.pm_.c:224
 msgid ""
 "Select your provider.\n"
 " If it's not in the list, choose Unlisted"
@@ -5364,115 +5364,107 @@ msgstr ""
 "Velg din tilbyder.\n"
 " Hvis denne ikke er i listen, velg ikke i listen"
 
-#: ../../netconnect.pm_.c:246
+#: ../../netconnect.pm_.c:239
 msgid "Connection Configuration"
 msgstr "Konfigurasjon tilknytning."
 
-#: ../../netconnect.pm_.c:247
+#: ../../netconnect.pm_.c:240
 msgid "Please fill or check the field below"
 msgstr "Vennnligst fyll eller merk feltet under"
 
-#: ../../netconnect.pm_.c:249
+#: ../../netconnect.pm_.c:242
 msgid "Card IRQ"
 msgstr "Kort IRQ"
 
-#: ../../netconnect.pm_.c:250
+#: ../../netconnect.pm_.c:243
 msgid "Card mem (DMA)"
 msgstr "Kort mem (DMA)"
 
-#: ../../netconnect.pm_.c:251
+#: ../../netconnect.pm_.c:244
 msgid "Card IO"
 msgstr "Kort IO"
 
-#: ../../netconnect.pm_.c:252
+#: ../../netconnect.pm_.c:245
 msgid "Card IO_0"
 msgstr "Kort IO_0"
 
-#: ../../netconnect.pm_.c:253
+#: ../../netconnect.pm_.c:246
 msgid "Card IO_1"
 msgstr "Kort IO_1"
 
-#: ../../netconnect.pm_.c:254
+#: ../../netconnect.pm_.c:247
 msgid "Your personal phone number"
 msgstr "Ditt telefonnummer"
 
-#: ../../netconnect.pm_.c:256
+#: ../../netconnect.pm_.c:249
 msgid "Provider name (ex provider.net)"
 msgstr "Navn tilbyder (f.eks. tilbyder.net)"
 
-#: ../../netconnect.pm_.c:257
+#: ../../netconnect.pm_.c:250
 msgid "Provider phone number"
 msgstr "Telefonnummer tilbyder"
 
-#: ../../netconnect.pm_.c:258
+#: ../../netconnect.pm_.c:251
 msgid "Provider dns 1"
 msgstr "Tilbyder dns 1"
 
-#: ../../netconnect.pm_.c:259
+#: ../../netconnect.pm_.c:252
 msgid "Provider dns 2"
 msgstr "Tilbyder dns 2"
 
-#: ../../netconnect.pm_.c:260
+#: ../../netconnect.pm_.c:253
 msgid "Dialing mode"
 msgstr "Oppringningsmodus"
 
-#: ../../netconnect.pm_.c:262
+#: ../../netconnect.pm_.c:255
 msgid "Account Login (user name)"
 msgstr "Logg inn (brukernavn)"
 
-#: ../../netconnect.pm_.c:263
+#: ../../netconnect.pm_.c:256
 msgid "Account Password"
 msgstr "Passord"
 
-#: ../../netconnect.pm_.c:264
+#: ../../netconnect.pm_.c:257
 msgid "Confirm Password"
 msgstr "Bekreft passord"
 
-#: ../../netconnect.pm_.c:296
+#: ../../netconnect.pm_.c:289
 msgid "Europe"
 msgstr "Europa"
 
-#: ../../netconnect.pm_.c:296
+#: ../../netconnect.pm_.c:289
 msgid "Europe (EDSS1)"
 msgstr "Europa (EDSS1)"
 
-#: ../../netconnect.pm_.c:298
+#: ../../netconnect.pm_.c:291
 msgid "Rest of the world"
 msgstr "Resten av verden"
 
-#: ../../netconnect.pm_.c:298
+#: ../../netconnect.pm_.c:291
 msgid "Rest of the world - no D-Channel (leased lines)"
 msgstr "Resten av verden - ingen D-kanal (leid linje)"
 
-#: ../../netconnect.pm_.c:302
+#: ../../netconnect.pm_.c:295
 msgid "Which protocol do you want to use ?"
 msgstr "Hvilken protokoll ønsker du å bruke?"
 
-#: ../../netconnect.pm_.c:312
-msgid "ISA / PCMCIA"
-msgstr "ISA / PCMCIA"
-
-#: ../../netconnect.pm_.c:314
-msgid "PCI"
-msgstr "PCI"
-
-#: ../../netconnect.pm_.c:316
-msgid "I don't know"
-msgstr "Jeg vet ikke"
-
-#: ../../netconnect.pm_.c:321
+#: ../../netconnect.pm_.c:304
 msgid "What kind of card do you have?"
 msgstr "Hva slags kort har du?"
 
-#: ../../netconnect.pm_.c:327
-msgid "Continue"
-msgstr "Fortsett"
+#: ../../netconnect.pm_.c:305
+msgid "I don't know"
+msgstr "Jeg vet ikke"
 
-#: ../../netconnect.pm_.c:329
-msgid "Abort"
-msgstr "Avbryt"
+#: ../../netconnect.pm_.c:305
+msgid "ISA / PCMCIA"
+msgstr "ISA / PCMCIA"
 
-#: ../../netconnect.pm_.c:333
+#: ../../netconnect.pm_.c:305
+msgid "PCI"
+msgstr "PCI"
+
+#: ../../netconnect.pm_.c:311
 msgid ""
 "\n"
 "If you have an ISA card, the values on the next screen should be right.\n"
@@ -5484,11 +5476,19 @@ msgstr ""
 "\n"
 "Hvis du har et PCMCIA kort må du vite irq og io for kortet.\n"
 
-#: ../../netconnect.pm_.c:345
+#: ../../netconnect.pm_.c:315
+msgid "Abort"
+msgstr "Avbryt"
+
+#: ../../netconnect.pm_.c:315
+msgid "Continue"
+msgstr "Fortsett"
+
+#: ../../netconnect.pm_.c:320
 msgid "Which is your ISDN card ?"
 msgstr "Hvilket er ditt ISDN-kort?"
 
-#: ../../netconnect.pm_.c:368
+#: ../../netconnect.pm_.c:340
 msgid ""
 "I have detected an ISDN PCI Card, but I don't know the type. Please select "
 "one PCI card on the next screen."
@@ -5496,11 +5496,11 @@ msgstr ""
 "Jeg har oppdaget et ISDN PCI-kort, men jeg vet ikke hviklet type. Vennligst "
 "velg et PCI-kort i neste skjermbilde."
 
-#: ../../netconnect.pm_.c:380
+#: ../../netconnect.pm_.c:348
 msgid "No ISDN PCI card found. Please select one on the next screen."
 msgstr "Ingen ISDN PCI-kort funnet. Vennligst velg et i neste skjermbilde."
 
-#: ../../netconnect.pm_.c:431
+#: ../../netconnect.pm_.c:398
 msgid ""
 "No ethernet network adapter has been detected on your system.\n"
 "I cannot set up this connection type."
@@ -5508,23 +5508,23 @@ msgstr ""
 "Ikke noe ethernet nettverksadapter har blitt oppdaget i systemet ditt.\n"
 "Jeg kan ikke sette opp denne tilkoblingstypen."
 
-#: ../../netconnect.pm_.c:435 ../../standalone/drakgw_.c:235
+#: ../../netconnect.pm_.c:402 ../../standalone/drakgw_.c:235
 msgid "Choose the network interface"
 msgstr "Velg nettverksgrensesnitt"
 
-#: ../../netconnect.pm_.c:436
+#: ../../netconnect.pm_.c:403
 msgid ""
 "Please choose which network adapter you want to use to connect to Internet"
 msgstr ""
 "Vennligst velg hvilket nettverksadapter du ønsker å bruke til å koble opp\n"
 "mot Internett"
 
-#: ../../netconnect.pm_.c:445 ../../netconnect.pm_.c:797
-#: ../../netconnect.pm_.c:890 ../../standalone/drakgw_.c:230
+#: ../../netconnect.pm_.c:412 ../../netconnect.pm_.c:742
+#: ../../netconnect.pm_.c:825 ../../standalone/drakgw_.c:230
 msgid "Network interface"
 msgstr "Nettverksgrensesnitt"
 
-#: ../../netconnect.pm_.c:446
+#: ../../netconnect.pm_.c:413
 msgid ""
 "\n"
 "Do you agree?"
@@ -5532,71 +5532,71 @@ msgstr ""
 "\n"
 "Er du enig?"
 
-#: ../../netconnect.pm_.c:446
+#: ../../netconnect.pm_.c:413
 msgid "I'm about to restart the network device:\n"
 msgstr "Jeg er i ferd med å starte denne nettverksenheten på nytt:\n"
 
-#: ../../netconnect.pm_.c:532
+#: ../../netconnect.pm_.c:491
 msgid "ADSL configuration"
 msgstr "ADSL-konfigurasjon"
 
-#: ../../netconnect.pm_.c:533
+#: ../../netconnect.pm_.c:492
 msgid "Do you want to start your connection at boot?"
 msgstr "Ønsker du å starte tilkoblingen din ved oppstart?"
 
-#: ../../netconnect.pm_.c:692
+#: ../../netconnect.pm_.c:637
 msgid "Try to find a modem?"
 msgstr "Prøve å finne et modem?"
 
-#: ../../netconnect.pm_.c:697
+#: ../../netconnect.pm_.c:642
 msgid "Please choose which serial port your modem is connected to."
 msgstr "Vennligst velg hvilken serieport modemet ditt koblet til."
 
-#: ../../netconnect.pm_.c:702
+#: ../../netconnect.pm_.c:647
 msgid "Dialup options"
 msgstr "Opsjoner oppringt"
 
-#: ../../netconnect.pm_.c:703
+#: ../../netconnect.pm_.c:648
 msgid "Connection name"
 msgstr "Navn tilknytning"
 
-#: ../../netconnect.pm_.c:704
+#: ../../netconnect.pm_.c:649
 msgid "Phone number"
 msgstr "Telefonnummer"
 
-#: ../../netconnect.pm_.c:705
+#: ../../netconnect.pm_.c:650
 msgid "Login ID"
 msgstr "Login ID"
 
-#: ../../netconnect.pm_.c:707
+#: ../../netconnect.pm_.c:652
 msgid "Authentication"
 msgstr "Autentifikasjon"
 
-#: ../../netconnect.pm_.c:707
+#: ../../netconnect.pm_.c:652
 msgid "PAP"
 msgstr "PAP"
 
-#: ../../netconnect.pm_.c:707
+#: ../../netconnect.pm_.c:652
 msgid "Script-based"
 msgstr "Scriptbasert"
 
-#: ../../netconnect.pm_.c:707
+#: ../../netconnect.pm_.c:652
 msgid "Terminal-based"
 msgstr "Terminalbasert"
 
-#: ../../netconnect.pm_.c:708
+#: ../../netconnect.pm_.c:653
 msgid "Domain name"
 msgstr "Domenenavn"
 
-#: ../../netconnect.pm_.c:710
+#: ../../netconnect.pm_.c:655
 msgid "First DNS Server"
 msgstr "Første DNS-tjener"
 
-#: ../../netconnect.pm_.c:711
+#: ../../netconnect.pm_.c:656
 msgid "Second DNS Server"
 msgstr "Andre DNS-tjener"
 
-#: ../../netconnect.pm_.c:756
+#: ../../netconnect.pm_.c:701
 msgid ""
 "\n"
 "You can connect to Internet or reconfigure your connection."
@@ -5604,7 +5604,7 @@ msgstr ""
 "\n"
 "Du kan koble opp mot Internett eller rekonfigurere tilkoblingen din."
 
-#: ../../netconnect.pm_.c:756 ../../netconnect.pm_.c:760
+#: ../../netconnect.pm_.c:701 ../../netconnect.pm_.c:705
 msgid ""
 "\n"
 "You can reconfigure your connection."
@@ -5612,11 +5612,11 @@ msgstr ""
 "\n"
 "Du kan rekonfigurere tilkoblingen din."
 
-#: ../../netconnect.pm_.c:756
+#: ../../netconnect.pm_.c:701
 msgid "You are not currently connected to Internet."
 msgstr "Du er for øyeblikket ikke koblet opp mot Internett."
 
-#: ../../netconnect.pm_.c:760
+#: ../../netconnect.pm_.c:705
 msgid ""
 "\n"
 "You can disconnect or reconfigure your connection."
@@ -5624,77 +5624,77 @@ msgstr ""
 "\n"
 "Du kan koble ned eller rekonfigurere tilkoblingen din."
 
-#: ../../netconnect.pm_.c:760
+#: ../../netconnect.pm_.c:705
 msgid "You are currently connected to internet."
 msgstr "Du er for øyeblikket koblet opp mot Internett"
 
-#: ../../netconnect.pm_.c:764
+#: ../../netconnect.pm_.c:709
 msgid "Connect to Internet"
 msgstr "Koble opp mot Internett"
 
-#: ../../netconnect.pm_.c:766
+#: ../../netconnect.pm_.c:711
 msgid "Disconnect from Internet"
 msgstr "Koble ned fra Internett"
 
-#: ../../netconnect.pm_.c:768
+#: ../../netconnect.pm_.c:713
 msgid "Configure network connection (LAN or Internet)"
 msgstr "Konfigurer nettverk-tilkobling (LAN eller Internett)"
 
-#: ../../netconnect.pm_.c:771
+#: ../../netconnect.pm_.c:716
 msgid "Internet connection & configuration"
 msgstr "Internett tilkobling & konfigurasjon"
 
-#: ../../netconnect.pm_.c:798 ../../netconnect.pm_.c:891
+#: ../../netconnect.pm_.c:743
 msgid ""
 "I'm about to restart the network device $netc->{NET_DEVICE}. Do you agree?"
 msgstr ""
 "Jeg er i ferd med å starte nettverksenhet $netc->{NET_DEVICE} på nytt. Er du "
 "enig?"
 
-#: ../../netconnect.pm_.c:815
+#: ../../netconnect.pm_.c:760
 msgid "Configure a normal modem connection"
 msgstr "Konfigurer en normal modem-tilkobling"
 
-#: ../../netconnect.pm_.c:835
+#: ../../netconnect.pm_.c:780
 msgid "Configure an ISDN connection"
 msgstr "Konfigurer en ISDN-tilkobling"
 
-#: ../../netconnect.pm_.c:840
+#: ../../netconnect.pm_.c:785
 msgid "Internal ISDN card"
 msgstr "Internt ISDN-kort"
 
-#: ../../netconnect.pm_.c:842
+#: ../../netconnect.pm_.c:787
 msgid "External ISDN modem"
 msgstr "Eksternt ISDN modem"
 
-#: ../../netconnect.pm_.c:845 ../../netconnect.pm_.c:877
-#: ../../netconnect.pm_.c:927
+#: ../../netconnect.pm_.c:790 ../../netconnect.pm_.c:814
+#: ../../netconnect.pm_.c:863
 msgid "Connect to the Internet"
 msgstr "Koble opp mot Internett"
 
-#: ../../netconnect.pm_.c:846
+#: ../../netconnect.pm_.c:791
 msgid "What kind is your ISDN connection?"
 msgstr "Hva slags type er ISDN-tilknytningen din?"
 
-#: ../../netconnect.pm_.c:865
+#: ../../netconnect.pm_.c:810
 msgid "Configure a DSL (or ADSL) connection"
 msgstr "Konfigurer en DSL- (eller ADSL) tilkobling"
 
-#: ../../netconnect.pm_.c:870
-msgid "use pppoe"
-msgstr "bruk pppoe"
-
-#: ../../netconnect.pm_.c:872
-#, fuzzy
-msgid "use pptp"
-msgstr "bruk pppoe"
-
-#: ../../netconnect.pm_.c:874
+#: ../../netconnect.pm_.c:813
 #, fuzzy
 msgid "use dhcp"
 msgstr "dhcpd"
 
-#: ../../netconnect.pm_.c:878
+#: ../../netconnect.pm_.c:813
+msgid "use pppoe"
+msgstr "bruk pppoe"
+
+#: ../../netconnect.pm_.c:813
+#, fuzzy
+msgid "use pptp"
+msgstr "bruk pppoe"
+
+#: ../../netconnect.pm_.c:815
 #, fuzzy
 msgid ""
 "The most common way to connect with adsl is dhcp + pppoe.\n"
@@ -5705,11 +5705,16 @@ msgstr ""
 "Men, det eksisterer noen tilkoblinger som bare bruker dhcp.\n"
 "Hvis du ikke vet, velg 'bruk pppoe'"
 
-#: ../../netconnect.pm_.c:906
+#: ../../netconnect.pm_.c:826
+#, c-format
+msgid "I'm about to restart the network device %s. Do you agree?"
+msgstr "Jeg er i ferd med å starte nettverksenhet %s på nytt. Er du enig?"
+
+#: ../../netconnect.pm_.c:842
 msgid "Configure a cable connection"
 msgstr "Konfigurer en kabel-tilkobling"
 
-#: ../../netconnect.pm_.c:928
+#: ../../netconnect.pm_.c:864
 msgid ""
 "Which dhcp client do you want to use?\n"
 "Default is dhcpd"
@@ -5717,31 +5722,31 @@ msgstr ""
 "Hvilken dhcp klient ønsker du å bruke?\n"
 "Standard er dhcpd"
 
-#: ../../netconnect.pm_.c:941
+#: ../../netconnect.pm_.c:877
 msgid "Disable Internet Connection"
 msgstr "Slå av Internett-tilkobling"
 
-#: ../../netconnect.pm_.c:952
+#: ../../netconnect.pm_.c:888
 msgid "Configure local network"
 msgstr "Konfigurer lokalt nettverk"
 
-#: ../../netconnect.pm_.c:956
+#: ../../netconnect.pm_.c:892
 msgid "Network configuration"
 msgstr "Nettverkskonfigurasjon"
 
-#: ../../netconnect.pm_.c:957
+#: ../../netconnect.pm_.c:893
 msgid "Do you want to restart the network"
 msgstr "Vil du starte nettverket på nytt"
 
-#: ../../netconnect.pm_.c:965
+#: ../../netconnect.pm_.c:900
 msgid "Disable networking"
 msgstr "slå av nettverk"
 
-#: ../../netconnect.pm_.c:975
+#: ../../netconnect.pm_.c:910
 msgid "Configure the Internet connection / Configure local Network"
 msgstr "Konfigurer Internett-tilkoblingen / Konfigurer lokalt nettverk"
 
-#: ../../netconnect.pm_.c:976
+#: ../../netconnect.pm_.c:911
 msgid ""
 "Local networking has already been configured.\n"
 "Do you want to:"
@@ -5749,15 +5754,15 @@ msgstr ""
 "Lokalt nettverk har allerede blitt konfigurert.\n"
 "Vil du:"
 
-#: ../../netconnect.pm_.c:977
+#: ../../netconnect.pm_.c:912
 msgid "How do you want to connect to the Internet?"
 msgstr "Hvordan vil du koble opp mot Internett?"
 
-#: ../../netconnect.pm_.c:999
+#: ../../netconnect.pm_.c:933
 msgid "Network Configuration"
 msgstr "Nettverkskonfigurasjon"
 
-#: ../../netconnect.pm_.c:1000
+#: ../../netconnect.pm_.c:934
 msgid ""
 "Now that your Internet connection is configured,\n"
 "your computer can be configured to share its Internet connection.\n"
@@ -5889,11 +5894,11 @@ msgstr "Proxy burde være http://..."
 msgid "Proxy should be ftp://..."
 msgstr "Proxy burde være ftp://..."
 
-#: ../../partition_table.pm_.c:542
+#: ../../partition_table.pm_.c:552
 msgid "Extended partition not supported on this platform"
 msgstr "Utvidet partisjon ikke støttet på denne plattformen"
 
-#: ../../partition_table.pm_.c:560
+#: ../../partition_table.pm_.c:570
 msgid ""
 "You have a hole in your partition table but I can't use it.\n"
 "The only solution is to move your primary partitions to have the hole next "
@@ -5903,21 +5908,21 @@ msgstr ""
 "Den eneste løsningen er å flytte primærpartisjonene dine for å ha hullet ved "
 "siden av de utvidede partisjonene"
 
-#: ../../partition_table.pm_.c:653
+#: ../../partition_table.pm_.c:663
 #, c-format
 msgid "Error reading file %s"
 msgstr "Feil ved lesing av fil %s"
 
-#: ../../partition_table.pm_.c:660
+#: ../../partition_table.pm_.c:670
 #, c-format
 msgid "Restoring from file %s failed: %s"
 msgstr "Gjenoppretting fra fil %s mislykket: %s"
 
-#: ../../partition_table.pm_.c:662
+#: ../../partition_table.pm_.c:672
 msgid "Bad backup file"
 msgstr "Dårlig sikkerhetskopi-fil"
 
-#: ../../partition_table.pm_.c:683
+#: ../../partition_table.pm_.c:693
 #, c-format
 msgid "Error writing to file %s"
 msgstr "Feil ved skriving til fil %s"
