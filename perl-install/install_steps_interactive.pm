@@ -857,13 +857,7 @@ sub summary {
 	      clicked => sub { $o->selectMouse(1); mouse::write($o, $o->{mouse}) },
 	     };
 
-    my $timezone_manually_set;
-    push @l, { 
-	      label => N("Timezone"),
-	      val => sub { $o->{timezone}{timezone} },
-	      clicked => sub { $timezone_manually_set ||= $o->configureTimezone(1) },
-	     };
-    
+    my $timezone_manually_set;  
     push @l, { 
 	      label => N("Country"),
 	      val => sub { lang::c2name($o->{locale}{country}) },
@@ -875,6 +869,11 @@ sub summary {
 		      install_any::preConfigureTimezone($o); #- now we can precise the timezone thanks to the country
 		  }
 	      },
+	     };
+    push @l, { 
+	      label => N("Timezone"),
+	      val => sub { $o->{timezone}{timezone} },
+	      clicked => sub { $timezone_manually_set = $o->configureTimezone(1) || $timezone_manually_set },
 	     };
 
     push @l, {
