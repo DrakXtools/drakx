@@ -41,6 +41,8 @@ $::isInstall and die "Not supported during install.\n";
 local $_ = join '', @ARGV;
 
 $::Wizard_pix_up = "drakvpn.png";
+$ugtk2::wm_icon = "drakvpn";
+
 my $direct = /-direct/;
 
 my ($kernel_version) = c::kernel_version() =~ /(...)/;
