@@ -51,10 +51,12 @@ sub install_theme {
 style "default-font" 
 {
    fontset = "$font,*"
+   font_name = "Helvetica 12"
 }
 style "small-font"
 {
    fontset = "$font2,*"
+   font_name = "Helvetica 10"
 }
 widget "*" style "default-font"
 widget "*Steps*" style "small-font"
