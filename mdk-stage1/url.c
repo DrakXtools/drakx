@@ -171,7 +171,6 @@ int ftp_open_connection(char * host, char * name, char * password, char * proxy)
 	int sock;
 	struct in_addr serverAddress;
 	struct sockaddr_in destPort;
-	char * buf;
 	int rc;
 	int port = 21;
 
@@ -181,9 +180,7 @@ int ftp_open_connection(char * host, char * name, char * password, char * proxy)
 	}
 
 	if (strcmp(proxy, "")) {
-		buf = alloca(strlen(name) + strlen(host) + 5);
-		sprintf(buf, "%s@%s", name, host);
-		name = buf;
+		name = asprintf_("%s@%s", name, host);
 		host = proxy;
 	}
 
@@ -437,13 +434,8 @@ int http_download_file(char * hostname, char * remotename, int * size, char * pr
 		return FTPERR_FAILED_CONNECT;
 	}
 
-	if (proxyprotocol) {
-		buf = alloca(4 + strlen(proxyprotocol) + 3 + strlen(hostname) + strlen(remotename) + 11 + 6 + strlen(hostname) + 4 + 1);
-		sprintf(buf, "GET %s://%s%s HTTP/0.9\r\nHost: %s\r\n\r\n", proxyprotocol, hostname, remotename, hostname);
-	} else {
-		buf = alloca(4 + strlen(remotename) + 11 + 6 + strlen(hostname) + 4 + 1);
-		sprintf(buf, "GET %s HTTP/0.9\r\nHost: %s\r\n\r\n", remotename, hostname);
-	}
+        buf = proxyprotocol ? asprintf_("GET %s://%s%s HTTP/0.9\r\nHost: %s\r\n\r\n", proxyprotocol, hostname, remotename, hostname)
+                            : asprintf_("GET %s HTTP/0.9\r\nHost: %s\r\n\r\n", remotename, hostname);
 
 	write(sock, buf, strlen(buf));
 

@@ -476,6 +476,23 @@ int kernel_version(void)
         return charstar_to_int(val.release + 2);
 }
 
+char * asprintf_(const char *msg, ...)
+{
+        int n;
+        char * s;
+        va_list arg_ptr;
+        va_start(arg_ptr, msg);
+        n = vsnprintf(0, 1000000, msg, arg_ptr);
+        va_start(arg_ptr, msg);
+        if ((s = malloc(n + 1))) {
+                vsnprintf(s, n + 1, msg, arg_ptr);
+                va_end(arg_ptr);
+                return s;
+        }
+        va_end(arg_ptr);
+        return strdup("");
+}
+
 int scall_(int retval, char * msg, char * file, int line)
 {
 	char tmp[5000];
