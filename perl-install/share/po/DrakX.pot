@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 1999-11-22 02:57+0100\n"
+"POT-Creation-Date: 1999-11-22 17:01+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -701,8 +701,9 @@ msgstr ""
 msgid "Choose the new size"
 msgstr ""
 
-#: ../diskdrake.pm_.c:491 ../install_steps_gtk.pm_.c:287
-#: ../install_steps_gtk.pm_.c:334 ../unused/install_steps_graphical.pm_.c:314
+#: ../diskdrake.pm_.c:491 ../install_steps_graphical.pm_.c:287
+#: ../install_steps_graphical.pm_.c:334 ../install_steps_gtk.pm_.c:287
+#: ../install_steps_gtk.pm_.c:334
 msgid "MB"
 msgstr ""
 
@@ -1440,68 +1441,85 @@ msgstr ""
 msgid "Entering step `%s'\n"
 msgstr ""
 
-#: ../install_steps_gtk.pm_.c:259 ../unused/install_steps_graphical.pm_.c:255
+#: ../install_steps_graphical.pm_.c:259 ../install_steps_gtk.pm_.c:259
 msgid "You must have a swap partition"
 msgstr ""
 
-#: ../install_steps_gtk.pm_.c:261 ../unused/install_steps_graphical.pm_.c:258
+#: ../install_steps_graphical.pm_.c:261 ../install_steps_gtk.pm_.c:261
 msgid ""
 "You don't have a swap partition\n"
 "\n"
 "Continue anyway?"
 msgstr ""
 
-#: ../install_steps_gtk.pm_.c:287
+#: ../install_steps_graphical.pm_.c:287 ../install_steps_gtk.pm_.c:287
 msgid "Choose the size you want to install"
 msgstr ""
 
-#: ../install_steps_gtk.pm_.c:334 ../unused/install_steps_graphical.pm_.c:314
+#: ../install_steps_graphical.pm_.c:334 ../install_steps_gtk.pm_.c:334
 msgid "Total size: "
 msgstr ""
 
-#: ../install_steps_gtk.pm_.c:346 ../unused/install_steps_graphical.pm_.c:284
+#: ../install_steps_graphical.pm_.c:346 ../install_steps_gtk.pm_.c:346
 #, c-format
 msgid "Version: %s\n"
 msgstr ""
 
-#: ../install_steps_gtk.pm_.c:347 ../unused/install_steps_graphical.pm_.c:285
+#: ../install_steps_graphical.pm_.c:347 ../install_steps_gtk.pm_.c:347
 #, c-format
 msgid "Size: %d KB\n"
 msgstr ""
 
-#: ../install_steps_gtk.pm_.c:462 ../unused/install_steps_graphical.pm_.c:421
+#: ../install_steps_graphical.pm_.c:462 ../install_steps_gtk.pm_.c:462
 msgid "Choose the packages you want to install"
 msgstr ""
 
-#: ../install_steps_gtk.pm_.c:465 ../unused/install_steps_graphical.pm_.c:424
+#: ../install_steps_graphical.pm_.c:465 ../install_steps_gtk.pm_.c:465
 msgid "Info"
 msgstr ""
 
-#: ../install_steps_gtk.pm_.c:473 ../install_steps_interactive.pm_.c:87
-#: ../unused/install_steps_graphical.pm_.c:432
+#: ../install_steps_graphical.pm_.c:473 ../install_steps_gtk.pm_.c:473
+#: ../install_steps_interactive.pm_.c:87
 msgid "Install"
 msgstr ""
 
-#: ../install_steps_gtk.pm_.c:492 ../install_steps_interactive.pm_.c:252
-#: ../unused/install_steps_graphical.pm_.c:451
+#: ../install_steps_graphical.pm_.c:492 ../install_steps_gtk.pm_.c:492
+#: ../install_steps_interactive.pm_.c:252
 msgid "Installing"
 msgstr ""
 
-#: ../install_steps_gtk.pm_.c:499 ../unused/install_steps_graphical.pm_.c:457
+#: ../install_steps_graphical.pm_.c:499 ../install_steps_gtk.pm_.c:499
 msgid "Please wait, "
 msgstr ""
 
-#: ../install_steps_gtk.pm_.c:501 ../unused/install_steps_graphical.pm_.c:459
+#: ../install_steps_graphical.pm_.c:501 ../install_steps_gtk.pm_.c:501
 msgid "Time remaining "
 msgstr ""
 
-#: ../install_steps_gtk.pm_.c:502 ../unused/install_steps_graphical.pm_.c:460
+#: ../install_steps_graphical.pm_.c:502 ../install_steps_gtk.pm_.c:502
 msgid "Total time "
 msgstr ""
 
-#: ../install_steps_gtk.pm_.c:507 ../install_steps_interactive.pm_.c:252
-#: ../unused/install_steps_graphical.pm_.c:465
+#: ../install_steps_graphical.pm_.c:507 ../install_steps_gtk.pm_.c:507
+#: ../install_steps_interactive.pm_.c:252
 msgid "Preparing installation"
+msgstr ""
+
+#: ../install_steps_graphical.pm_.c:528 ../install_steps_gtk.pm_.c:522
+#, c-format
+msgid "Installing package %s"
+msgstr ""
+
+#: ../install_steps_graphical.pm_.c:553 ../install_steps_gtk.pm_.c:547
+msgid "Go on anyway?"
+msgstr ""
+
+#: ../install_steps_graphical.pm_.c:553 ../install_steps_gtk.pm_.c:547
+msgid "There was an error ordering packages:"
+msgstr ""
+
+#: ../install_steps_graphical.pm_.c:577 ../install_steps_interactive.pm_.c:934
+msgid "Use existing configuration for X11?"
 msgstr ""
 
 #: ../install_steps_gtk.pm_.c:517
@@ -1511,19 +1529,6 @@ msgstr ""
 
 #: ../install_steps_gtk.pm_.c:517
 msgid ", %U bytes"
-msgstr ""
-
-#: ../install_steps_gtk.pm_.c:522 ../unused/install_steps_graphical.pm_.c:486
-#, c-format
-msgid "Installing package %s"
-msgstr ""
-
-#: ../install_steps_gtk.pm_.c:547 ../unused/install_steps_graphical.pm_.c:511
-msgid "Go on anyway?"
-msgstr ""
-
-#: ../install_steps_gtk.pm_.c:547 ../unused/install_steps_graphical.pm_.c:511
-msgid "There was an error ordering packages:"
 msgstr ""
 
 #: ../install_steps_interactive.pm_.c:43
@@ -2038,7 +2043,7 @@ msgstr ""
 #: ../interactive.pm_.c:68 ../interactive.pm_.c:147
 #: ../interactive_newt.pm_.c:46 ../interactive_newt.pm_.c:90
 #: ../interactive_stdio.pm_.c:27 ../my_gtk.pm_.c:200 ../my_gtk.pm_.c:438
-#: ../my_gtk.pm_.c:537 ../unused/install_steps_graphical.pm_.c:608
+#: ../my_gtk.pm_.c:537
 msgid "Ok"
 msgstr ""
 
@@ -2400,11 +2405,6 @@ msgstr ""
 msgid "Give the ram size in Mb"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:934
-#: ../unused/install_steps_graphical.pm_.c:535
-msgid "Use existing configuration for X11?"
-msgstr ""
-
 #: ../install_steps_interactive.pm_.c:959
 msgid ""
 "Some steps are not completed.\n"
@@ -2568,28 +2568,48 @@ msgstr ""
 msgid "Your choice? (default %s  enter `none' for none) "
 msgstr ""
 
-#: ../keyboard.pm_.c:32
+#: ../keyboard.pm_.c:30
+msgid "Armenian"
+msgstr ""
+
+#: ../keyboard.pm_.c:31
 msgid "Belgian"
 msgstr ""
 
-#: ../keyboard.pm_.c:33
+#: ../keyboard.pm_.c:32
 msgid "Bulgarian"
 msgstr ""
 
+#: ../keyboard.pm_.c:33
+msgid "Brazilian"
+msgstr ""
+
+#: ../keyboard.pm_.c:34
+msgid "Swiss (French layout)"
+msgstr ""
+
 #: ../keyboard.pm_.c:35
-msgid "Czech"
+msgid "Swiss (German layout)"
 msgstr ""
 
 #: ../keyboard.pm_.c:36
-msgid "German"
+msgid "Czech"
 msgstr ""
 
 #: ../keyboard.pm_.c:37
-msgid "Danish"
+msgid "German"
 msgstr ""
 
 #: ../keyboard.pm_.c:38
+msgid "Danish"
+msgstr ""
+
+#: ../keyboard.pm_.c:39
 msgid "Dvorak"
+msgstr ""
+
+#: ../keyboard.pm_.c:40
+msgid "Estonian"
 msgstr ""
 
 #: ../keyboard.pm_.c:41
@@ -2608,72 +2628,104 @@ msgstr ""
 msgid "Greek"
 msgstr ""
 
-#: ../keyboard.pm_.c:50
+#: ../keyboard.pm_.c:49
 msgid "Hungarian"
 msgstr ""
 
-#: ../keyboard.pm_.c:52
+#: ../keyboard.pm_.c:50
 msgid "Israeli"
 msgstr ""
 
-#: ../keyboard.pm_.c:53
+#: ../keyboard.pm_.c:51
+msgid "Israeli (Phonetic)"
+msgstr ""
+
+#: ../keyboard.pm_.c:52
 msgid "Icelandic"
 msgstr ""
 
-#: ../keyboard.pm_.c:55
+#: ../keyboard.pm_.c:53
 msgid "Italian"
 msgstr ""
 
-#: ../keyboard.pm_.c:56
+#: ../keyboard.pm_.c:54
 msgid "Latin American"
 msgstr ""
 
-#: ../keyboard.pm_.c:58
+#: ../keyboard.pm_.c:55
 msgid "Dutch"
 msgstr ""
 
-#: ../keyboard.pm_.c:62
+#: ../keyboard.pm_.c:56
+msgid "Lithuanian AZERTY"
+msgstr ""
+
+#: ../keyboard.pm_.c:57
+msgid "Lithuanian \"number row\" QWERTY"
+msgstr ""
+
+#: ../keyboard.pm_.c:58
+msgid "Lithuanian \"phonetic\" QWERTY"
+msgstr ""
+
+#: ../keyboard.pm_.c:59
 msgid "Norwegian"
 msgstr ""
 
-#: ../keyboard.pm_.c:64
+#: ../keyboard.pm_.c:60
 msgid "Polish"
 msgstr ""
 
-#: ../keyboard.pm_.c:65
+#: ../keyboard.pm_.c:61
 msgid "Portuguese"
 msgstr ""
 
-#: ../keyboard.pm_.c:68
+#: ../keyboard.pm_.c:62
+msgid "Canadian (Quebec)"
+msgstr ""
+
+#: ../keyboard.pm_.c:63
 msgid "Russian"
 msgstr ""
 
-#: ../keyboard.pm_.c:69
+#: ../keyboard.pm_.c:64
 msgid "Swedish"
 msgstr ""
 
-#: ../keyboard.pm_.c:71
-msgid "Swiss (French layout)"
+#: ../keyboard.pm_.c:65
+msgid "Slovenian"
 msgstr ""
 
-#: ../keyboard.pm_.c:72
-msgid "Swiss (German layout)"
+#: ../keyboard.pm_.c:66
+msgid "Slovakian"
 msgstr ""
 
-#: ../keyboard.pm_.c:77
+#: ../keyboard.pm_.c:67
+msgid "Thai keyboard"
+msgstr ""
+
+#: ../keyboard.pm_.c:68
 msgid "Turkish (traditional \"F\" model)"
 msgstr ""
 
-#: ../keyboard.pm_.c:78
+#: ../keyboard.pm_.c:69
 msgid "Turkish (modern \"Q\" model)"
 msgstr ""
 
-#: ../keyboard.pm_.c:80
+#: ../keyboard.pm_.c:70
+msgid "Ukrainian"
+msgstr ""
+
+#: ../keyboard.pm_.c:71
 msgid "UK keyboard"
 msgstr ""
 
-#: ../keyboard.pm_.c:82
+#: ../keyboard.pm_.c:72
 msgid "US keyboard"
+msgstr ""
+
+#: ../keyboard.pm_.c:73
+msgid "Yugoslavian (latin layout)"
 msgstr ""
 
 #: ../lilo.pm_.c:139
@@ -2866,12 +2918,4 @@ msgstr ""
 #: ../raid.pm_.c:145
 #, c-format
 msgid "Not enough partitions for RAID level %d\n"
-msgstr ""
-
-#: ../unused/install_steps_graphical.pm_.c:433
-msgid "Show less"
-msgstr ""
-
-#: ../unused/install_steps_graphical.pm_.c:434
-msgid "Show more"
 msgstr ""
