@@ -400,7 +400,7 @@ Take a look at http://www.linmodems.org"),
                     name => N("Please choose which serial port your modem is connected to."),
                     interactive_help_id => 'selectSerialPort',
                     data => sub {
-                        [ { varl=> \$modem->{device}, format => \&mouse::serial_port2text, type => "list",
+                        [ { val => \$modem->{device}, format => \&mouse::serial_port2text, type => "list",
                             list => [ grep { $_ ne $o_mouse->{device} } (if_(-e '/dev/modem', '/dev/modem'), mouse::serial_ports()) ] } ],
                         },
                     post => sub {
