@@ -2,6 +2,57 @@
 
 	* network/netconnect.pm, network/ethernet.pm: bug fix
 
+	* modules.pm: corrected isdn firmware
+
+	* network/isdn.pm, network/adsl.pm: type assignation bug fix
+	corrected type assignation
+
+	* standalone/draknet: corrected type assignation
+
+	* install_any.pm, rescue/tree/etc/oem: added isdn-light to be copied on hd
+	during install
+
+2001/09/24  François Pons  <fpons@mandrakesoft.com>
+
+	* Xconfigurator.pm: deactivated Riva128 3D hw acceleration and too many
+	problems reported with it.
+
+	* share/rpmsrate: allow rpm build for non expert who choose development.
+
+	* install_steps.pm: disable wins in /etc/nsswitch.conf (after installed
+	packages).
+
+2001/09/24  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/ko.po, share/po/tr.po, share/po/es.po: updated Spanish, Korean
+	and Turkish files
+
+2001/09/24  Pixel  <pixel@mandrakesoft.com>
+
+	* fs.pm: fix small error merging existing fstab
+	add "iocharset=" for cdrom
+
+	* install_steps.pm: 
+	  - disable supermount by default
+	  - cleanup nsswitch.conf wins removing
+
+	* diskdrake.pm: do not propose to mount/umount removable medias (disabled
+	for now)
+
+	* diskdrake_interactive.pm: hide the supermount checkbox in standalone
+
+2001/09/24  siegel
+
+	* share/po/de.po: new german version
+
+2001/09/24  warly
+
+	* share/rpmsrate: lower arkeia
+
+2001/09/24  dam's  <damien@mandrakesoft.com>
+
+	* network/netconnect.pm, network/ethernet.pm: bug fix
+
 2001/09/24  François Pons  <fpons@mandrakesoft.com>
 
 	* Xconfigurator.pm: deactivated Riva128 3D hw acceleration and too many
