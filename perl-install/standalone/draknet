@@ -30,7 +30,7 @@ $::isEmbedded = ($::XID, $::CCPID) = "@ARGV" =~ /--embedded (\w+) (\w+)/;
 $::isWizard = "@ARGV" =~ /--wizard/;
 $::isEmbedded or $::isWizard=1;
 $::Wizard_pix_up = "wiz_draknet.png";
-
+$::Wizard_title = "Network & Internet Configuration";
 local $_ = join '', @ARGV;
 
 #/-h/ and die "usage: draknet[--xf3] [--beginner] [--expert] [--auto] [--noauto] [--skiptest] [--testing]\n";

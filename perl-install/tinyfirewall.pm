@@ -133,7 +133,7 @@ my $popimap = sub {
     my $quit = sub {
 	$_[0] or $in->exit(0);
 	SaveConfig();
-	$in->standalone::pkgs_install(Kernel22() ? "ipchains" : "iptables");
+	$in->standalone::pkgs_install(Kernel22() ? "ipchains" : "iptables", "Bastille");
 	system($_) foreach ("/bin/cp /usr/share/Bastille/bastille-ipchains /usr/share/Bastille/bastille-netfilter /sbin",
 			    "/bin/cp /usr/share/Bastille/bastille-firewall /etc/rc.d/init.d/",
 			    "/bin/chmod 0700 /etc/rc.d/init.d/bastille-firewall", "/bin/chmod 0700 /sbin/bastille-ipchains",

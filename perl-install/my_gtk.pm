@@ -63,12 +63,20 @@ sub new {
 	    my ($y1, $x1) = $im_up->get_size;
 #	    my ($im_left, $mask_left) = gtkcreate_png($::Wizard_pix_left || "wiz_default_left.png");
 #	    my ($y2, $x2) = $im_left->get_size;
+	    my $style= new Gtk::Style;
+	    $style->font(Gtk::Gdk::Font->fontset_load("-adobe-times-bold-r-normal-*-24-*-75-75-p-*-iso8859-*"));
+	    my $w = $style->font->string_width($::Wizard_title);
 	    $draw1->signal_connect(expose_event => sub {
 				       my $i;
 				       for ($i=0;$i<(540/$y1);$i++) {
 					   $draw1->window->draw_pixmap ($draw1->style->bg_gc('normal'),
 									$im_up, 0, 0, 0, $y1*$i,
 									$x1 , $y1 );
+					   $draw1->window->draw_string(
+								       $style->font,
+								       $draw1->style->white_gc,
+								       140+(380-$w)/2, 62,
+								       ($::Wizard_title) );
 				       }
 				   });
 #	    $draw2->signal_connect(expose_event => sub {
