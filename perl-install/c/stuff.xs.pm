@@ -345,6 +345,31 @@ rpmtransAddPackage(rpmdep, header, key, update)
   RETVAL
 
 int
+rpmtransRemovePackages(db, rpmdep, p)
+  void *db
+  void *rpmdep
+  char *p
+  CODE:
+  rpmdb d = db;
+  rpmTransactionSet r = rpmdep;
+  dbiIndexSet matches;
+  int i;
+  int count = 0;
+  if (!rpmdbFindByLabel(d, p, &matches)) {
+    for (i = 0; i < dbiIndexSetCount(matches); ++i) {
+      unsigned int recOffset = dbiIndexRecordOffset(matches, i);
+      if (recOffset) {
+        rpmtransRemovePackage(rpmdep, recOffset);
+        ++count;
+      }
+    }
+    RETVAL=count;
+  } else
+    RETVAL=0;
+  OUTPUT:
+  RETVAL
+
+int
 rpmdepOrder(order)
   void *order
   CODE:

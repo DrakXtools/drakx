@@ -148,7 +148,7 @@ sub read($) {
     my ($prefix) = @_;
 
     my %keyf = getVarsFromSh("$prefix/etc/sysconfig/keyboard");
-    map { keyboard2kmap($_) eq $keyf{KEYTABLE} ? $_ : (); } keys %keyboards;
+    map { keyboard2kmap($_) eq $keyf{KEYTABLE} || $_ eq $keyf{KEYTABLE} ? $_ : (); } keys %keyboards;
 }
 
 #-######################################################################################

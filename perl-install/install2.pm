@@ -139,6 +139,7 @@ $o = $::o = {
     authentication => { md5 => 1, shadow => 1 },
     lang         => 'en',
     isUpgrade    => 0,
+    toRemove     => [],
 #-    simple_themes => 1,
 #-    installClass => "normal",
 
@@ -350,6 +351,7 @@ sub doInstallStep {
     $o->afterInstallPackages;
 
     #- make icons for KDE.
+    log::l("updating kde icons according to available devices");
     install_any::kdeicons_postinstall($o->{prefix});
 }
 #------------------------------------------------------------------------------

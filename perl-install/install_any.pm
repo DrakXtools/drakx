@@ -153,7 +153,7 @@ sub selectPackagesToUpgrade($) {
     my ($o) = @_;
 
     require pkgs;
-    pkgs::selectPackagesToUpgrade($o->{packages}, $o->{prefix}, $o->{base});
+    pkgs::selectPackagesToUpgrade($o->{packages}, $o->{prefix}, $o->{base}, $o->{toRemove});
 }
 
 sub addToBeDone(&$) {
@@ -507,16 +507,24 @@ sub install_urpmi {
     }
 }
 
-sub list_home($) {
-    my ($prefix) = @_;
-    local *F; open F, "$prefix/etc/passwd";
-    map { $_->[5] } grep { $_->[2] > 501 } map { [ split ':' ] } <F>;
+sub list_passwd() {
+    my ($e, @l);
+
+    setpwent();
+    while (@{$e = [ getpwent() ]}) { push @l, $e }
+    endpwent();
+
+    @l;
+}
+
+sub list_home() {
+    map { $_->[7] } grep { $_->[2] >= 501 } list_passwd();
 }
 
 sub template2userfile($$$$%) {
     my ($prefix, $inputfile, $outputrelfile, $force, %toreplace) = @_;
 
-    foreach ("/etc/skel", "/root", list_home($prefix)) {
+    foreach ("/etc/skel", "/root", list_home()) {
 	my $outputfile = "$prefix/$_/$outputrelfile";
 	if (-d dirname($outputfile) && ($force || ! -e $outputfile)) {
 	    log::l("generating $outputfile from template $inputfile");
@@ -528,7 +536,7 @@ sub template2userfile($$$$%) {
 sub kderc_largedisplay($) {
     my ($prefix) = @_;
 
-    foreach ("/etc/skel", "/root", list_home($prefix)) {
+    foreach ("/etc/skel", "/root", list_home()) {
 	my ($inputfile, $outputfile) = ("$prefix$_/.kderc", "$prefix$_/.kderc.new");
 	my %subst = ( contrast => "Contrast=7\n",
 		      kfmiconstyle => "kfmIconStyle=Large\n",
@@ -561,20 +569,19 @@ sub kdeicons_postinstall($) {
     my ($prefix) = @_;
 
     #- parse etc/fstab file to search for dos/win, zip, cdroms icons.
-    #- avoid rewriting existing file.
     local *F;
     open F, "$prefix/etc/fstab" or log::l("failed to read $prefix/etc/fstab"), return;
 
     foreach (<F>) {
 	if (/^\/dev\/(\S+)\s+\/mnt\/cdrom (\d*)\s+/x) {
 	    my %toreplace = ( device => $1, id => $2 );
-	    template2userfile($prefix, "/usr/share/cdrom.kdelnk.in", "Desktop/cdrom$2.kdelnk", 0, %toreplace);
+	    template2userfile($prefix, "/usr/share/cdrom.kdelnk.in", "Desktop/cdrom$2.kdelnk", 1, %toreplace);
 	} elsif (/^\/dev\/(\S+)\s+\/mnt\/zip (\d*)\s+/x) {
 	    my %toreplace = ( device => $1, id => $2 );
-	    template2userfile($prefix, "/usr/share/zip.kdelnk.in", "Desktop/zip$2.kdelnk", 0, %toreplace);
+	    template2userfile($prefix, "/usr/share/zip.kdelnk.in", "Desktop/zip$2.kdelnk", 1, %toreplace);
 	} elsif (/^\/dev\/(\S+)\s+\/mnt\/DOS_ (\S*)\s+/x) {
 	    my %toreplace = ( device => $1, id => $2 );
-	    template2userfile($prefix, "/usr/share/Dos_.kdelnk.in", "Desktop/Dos_$2.kdelnk", 0, %toreplace);
+	    template2userfile($prefix, "/usr/share/Dos_.kdelnk.in", "Desktop/Dos_$2.kdelnk", 1, %toreplace);
 	}
     }
 }

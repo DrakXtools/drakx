@@ -189,8 +189,38 @@ sub beforeInstallPackages {
     pkgs::init_db($o->{prefix}, $o->{isUpgrade});
 }
 
+sub beforeRemoveOtherPackages($) {
+    my ($prefix) = @_;
+
+    #- hack to save some files that may be removed during installation of other packages.
+    do {
+	unlink "$prefix/$_.mdkgisave"; rename "$prefix/$_", "$prefix/$_.mdkgisave";
+    } foreach qw(/etc/passwd);
+}
+
+sub afterRemoveOtherPackages($) {
+    my ($prefix) = @_;
+
+    #- hack to restore what have been saved before removing other packages.
+    do {
+	unlink "$prefix/$_"; rename "$prefix/$_.mdkgisave", "$prefix/$_";
+    } foreach qw(/etc/passwd);
+}
+
 sub installPackages($$) {
     my ($o, $packages) = @_;
+
+    if (@{$o->{toRemove} || []}) {
+	my @mdkgisave = qw( /etc/passwd );
+
+	#- hack to ensure proper upgrade of packages from other distribution,
+	#- as release number are not mandrake based. this causes save of very
+	#- important files (not all) and restore them after.
+	#- it is not enough to dop only that.
+	do { unlink "$o->{prefix}/$_.mdkgisave"; rename "$o->{prefix}/$_", "$o->{prefix}/$_.mdkgisave"; } foreach @mdkgisave;
+	pkgs::remove($o->{prefix}, $o->{toRemove});
+	do { unlink "$o->{prefix}/$_"; rename "$o->{prefix}/$_.mdkgisave", "$o->{prefix}/$_"; } foreach @mdkgisave;
+    }
 
     #- hack to ensure proper ordering for installation of packages.
     my @firstToInstall = qw(setup basesystem sed);
@@ -204,7 +234,7 @@ sub installPackages($$) {
     }
     push @toInstall, grep { $_->{base} && $_->{selected} && !$_->{installed} && !$firstInstalled{$_->{name}} } values %$packages;
     push @toInstall, grep { !$_->{base} && $_->{selected} && !$_->{installed} && !$firstInstalled{$_->{name}} } values %$packages;
-    pkgs::install($o->{prefix}, \@toInstall);
+    pkgs::install($o->{prefix}, $o->{isUpgrade}, \@toInstall);
 }
 
 sub afterInstallPackages($) {
@@ -330,9 +360,7 @@ sub installCrypto {
 	    }
 	}
     }
-    foreach (values %$packages) {
-    }
-    pkgs::install($o->{prefix}, [ values %$packages ]);
+    pkgs::install($o->{prefix}, $o->{isUpgrade}, [ values %$packages ]);
 }
 
 #------------------------------------------------------------------------------

@@ -352,15 +352,32 @@ sub getHeader($) {
     $p->{header};
 }
 
-sub selectPackagesToUpgrade($$$) {
-    my ($packages, $prefix, $base) = @_;
+sub versionCompare($$) {
+    my ($a, $b) = @_;
+    local $_;
+
+    while ($a && $b) {
+	my ($sb, $sa) =  map { $1 if $a =~ /^\W*\d/ ? s/^\W*0*(\d+)// : s/^\W*(\D+)// } ($b, $a);
+	$_ = length($sa) cmp length($sb) || $sa cmp $sb and return $_;
+    }
+}
+
+sub selectPackagesToUpgrade($$$;$) {
+    my ($packages, $prefix, $base, $toRemove) = @_;
 
     log::l("reading /usr/lib/rpm/rpmrc");
     c::rpmReadConfigFiles() or die "can't read rpm config files";
     log::l("\tdone");
 
     my $db = c::rpmdbOpenForTraversal($prefix) or die "unable to open $prefix/var/lib/rpm/packages.rpm";
+    log::l("opened rpm database for examining existing packages");
+
+    local $_; #- else perl complains on the map { ... } grep { ... } @...;
     my %installedFilesForUpgrade; #- help searching package to upgrade in regard to already installed files.
+
+    #- help removing package which may have different release numbering
+    my %toRemove;
+    map { $toRemove{$_} = 1 } @{$toRemove || []};
 
     #- mark all files which are not in /etc/rc.d/ for packages which are already installed but which
     #- are not in the packages list to upgrade.
@@ -368,12 +385,24 @@ sub selectPackagesToUpgrade($$$) {
     c::rpmdbTraverse($db, sub {
 			 my ($header) = @_;
 			 my $p = $packages->{c::headerGetEntry($header, 'name')};
+			 my $otherPackage = (c::headerGetEntry($header, 'release') !~ /mdk\w*$/ &&
+					     (c::headerGetEntry($header, 'name'). '-' .
+					      c::headerGetEntry($header, 'version'). '-' .
+					      c::headerGetEntry($header, 'release')));
 			 if ($p) {
-			     eval { getHeader($p) }; $@ && log::l("cannot get the header for package $p->{name}"); #- not having a header will cause using a bad test for version, should change but a header should always be available.
-			     $p->{installed} = 1 if $p->{header} ? c::rpmVersionCompare($header, $p->{header}) >= 0 : c::headerGetEntry($header, 'version') ge $p->{version};
+			     if ($otherPackage && versionCompare(c::headerGetEntry($header, 'version'), $p->{version}) <= 0) {
+				 $toRemove{$otherPackage} = 1;
+			     } else {
+				 eval { getHeader($p) }; $@ && log::l("cannot get the header for package $p->{name}");
+				 $p->{installed} = 1 if $p->{header} ?
+				   c::rpmVersionCompare($header, $p->{header}) >= 0 :
+				       (versionCompare(c::headerGetEntry($header, 'version'), $p->{version}) > 0 ||
+					versionCompare(c::headerGetEntry($header, 'version'), $p->{version}) == 0 &&
+					versionCompare(c::headerGetEntry($header, 'release'), $p->{release} >= 0));
+			     }
 			 } else {
-			     my @installedFiles = c::headerGetEntry($header, 'filenames');
-			     @installedFilesForUpgrade{grep { $_ !~ m@^/etc/rc.d/@ } @installedFiles} = ();
+			     my @files = c::headerGetEntry($header, 'filenames');
+			     map { $installedFilesForUpgrade{$_} = $otherPackage } grep { $_ !~ m@^/etc/rc.d/@ } @files;
 			 }
 		     });
 
@@ -400,13 +429,18 @@ sub selectPackagesToUpgrade($$$) {
 	    #- all file for package marked for upgrade.
 	    c::rpmdbNameTraverse($db, $p->{name}, sub {
 				     my ($header) = @_;
+				     my $otherPackage = (c::headerGetEntry($header, 'release') !~ /mdk\w*$/ &&
+							 (c::headerGetEntry($header, 'name'). '-' .
+							  c::headerGetEntry($header, 'version'). '-' .
+							  c::headerGetEntry($header, 'release')));
 				     $cumulSize += c::headerGetEntry($header, 'size'); #- all these will be deleted on upgrade.
-				     my @installedFiles = c::headerGetEntry($header, 'filenames');
-				     @installedFilesForUpgrade{ grep { $_ !~ m@^/etc/rc.d/@ } @installedFiles} = ();
+				     $toRemove{$otherPackage} = 1;
+				     my @files = c::headerGetEntry($header, 'filenames');
+				     map { $installedFilesForUpgrade{$_} = $otherPackage } grep { $_ !~ m@^/etc/rc.d/@ } @files;
 				 });
 	    eval { getHeader($p) };
 	    my @availFiles = $p->{header} ? c::headerGetEntry($p->{header}, 'filenames') : ();
-	    map { delete $installedFilesForUpgrade{$_} } grep { $_ !~ m@^/etc/rc.d/@ } @availFiles;
+	    map { $toRemove{delete $installedFilesForUpgrade{$_}} = 1 } grep { $_ !~ m@^/etc/rc.d/@ } @availFiles;
 
 	    #- keep in mind the cumul size of installed package since they will be deleted
 	    #- on upgrade.
@@ -422,7 +456,7 @@ sub selectPackagesToUpgrade($$$) {
 	if ($p->{selected}) {
 	    eval { getHeader($p) };
 	    my @availFiles = $p->{header} ? c::headerGetEntry($p->{header}, 'filenames') : ();
-	    map { delete $installedFilesForUpgrade{$_} } grep { $_ !~ m@^/etc/rc.d/@ } @availFiles;
+	    map { $toRemove{delete $installedFilesForUpgrade{$_}} = 1 } grep { $_ !~ m@^/etc/rc.d/@ } @availFiles;
 	}
     }
 
@@ -435,7 +469,8 @@ sub selectPackagesToUpgrade($$$) {
 	    my @availFiles = $p->{header} ? c::headerGetEntry($p->{header}, 'filenames') : ();
 	    my $toSelect = 0;
 	    map { if (exists $installedFilesForUpgrade{$_}) {
-		$toSelect = 1; delete $installedFilesForUpgrade{$_} } } grep { $_ !~ m@^/etc/rc.d/@ } @availFiles;
+		$toSelect = $toRemove{delete $installedFilesForUpgrade{$_}} = 1; }
+	      } grep { $_ !~ m@^/etc/rc.d/@ } @availFiles;
 	    pkgs::select($packages, $p) if ($toSelect);
 	}
     }
@@ -457,9 +492,15 @@ sub selectPackagesToUpgrade($$$) {
 	pkgs::select($packages, $p, 1) unless $p->{selected}; #- if installed it cannot be selected.
     }
 
+    #- clean false value on toRemove.
+    delete $toRemove{''};
+
     #- close db, job finished !
     c::rpmdbClose($db);
     log::l("done selecting packages to upgrade");
+
+    #- update external copy with local one.
+    @{$toRemove || []} = keys %toRemove;
 }
 
 sub installCallback {
@@ -468,16 +509,18 @@ sub installCallback {
     log::l($msg .": ". join(',', @_));
 }
 
-sub install($$) {
-    my ($prefix, $toInstall) = @_;
+sub install($$$) {
+    my ($prefix, $isUpgrade, $toInstall) = @_;
     my %packages;
 
     return if $::g_auto_install;
 
+    log::l("reading /usr/lib/rpm/rpmrc");
     c::rpmReadConfigFiles() or die "can't read rpm config files";
+    log::l("\tdone");
 
     my $db = c::rpmdbOpen($prefix) or die "error opening RPM database: ", c::rpmErrorString();
-    log::l("opened rpm database");
+    log::l("opened rpm database for installing new packages");
 
     my $trans = c::rpmtransCreateSet($db, $prefix);
 
@@ -489,7 +532,7 @@ sub install($$) {
 	                       $p->{name}, $p->{version}, $p->{release},
 			       c::headerGetEntry(getHeader($p), 'arch');
 	$packages{$p->{name}} = $p;
-	c::rpmtransAddPackage($trans, getHeader($p), $p->{name}, $p->{name} !~ /kernel/); #- TODO: replace `named kernel' by `provides kernel'
+	c::rpmtransAddPackage($trans, getHeader($p), $p->{name}, $isUpgrade && $p->{name} !~ /kernel/); #- TODO: replace `named kernel' by `provides kernel'
 	$nb++;
 	$total += $p->{size};
     }
@@ -512,8 +555,6 @@ sub install($$) {
     };
     my $callbackClose = sub { $packages{$_[0]}{installed} = 1; };
     my $callbackMessage = \&pkgs::installCallback;
-#-    my $callbackStart = sub { log::ld("starting installing package ", $_[0]) };
-#-    my $callbackProgress = sub { log::ld("progressing installation ", $_[0], "/", $_[1]) };
 
     #- do not modify/translate the message used with installCallback since
     #- these are keys during progressing installation, or change in other
@@ -532,6 +573,50 @@ sub install($$) {
     c::rpmtransFree($trans);
     c::rpmdbClose($db);
     log::l("rpm database closed");
+}
+
+sub remove($$) {
+    my ($prefix, $toRemove) = @_;
+
+    return if $::g_auto_install || !@{$toRemove || []};
+
+    log::l("reading /usr/lib/rpm/rpmrc");
+    c::rpmReadConfigFiles() or die "can't read rpm config files";
+    log::l("\tdone");
+
+    my $db = c::rpmdbOpen($prefix) or die "error opening RPM database: ", c::rpmErrorString();
+    log::l("opened rpm database for removing old packages");
+
+    my $trans = c::rpmtransCreateSet($db, $prefix);
+
+    foreach my $p (@$toRemove) {
+	#- stuff remove all packages that matches $p, not a problem since $p has name-version-release format.
+	c::rpmtransRemovePackages($db, $trans, $p) if $p !~ /kernel/;
+    }
+
+    eval { fs::mount("/proc", "$prefix/proc", "proc", 0) };
+
+    my $callbackOpen = sub { log::l("trying to open file from $_[0] which should not happen"); };
+    my $callbackClose = sub { log::l("trying to close file from $_[0] which should not happen"); };
+    my $callbackMessage = \&pkgs::installCallback;
+
+    #- we are not checking depends since it should come when
+    #- upgrading a system. although we may remove some functionalities ?
+
+    #- do not modify/translate the message used with installCallback since
+    #- these are keys during progressing installation, or change in other
+    #- place (install_steps_gtk.pm,...).
+    &$callbackMessage("Starting removing other packages", scalar @$toRemove);
+
+    if (my @probs = c::rpmRunTransactions($trans, $callbackOpen, $callbackClose, $callbackMessage, 0)) {
+	die "removing of old rpms failed:\n  ", join("\n  ", @probs);
+    }
+    c::rpmtransFree($trans);
+    c::rpmdbClose($db);
+    log::l("rpm database closed");
+
+    #- keep in mind removing of these packages by cleaning $toRemove.
+    @{$toRemove || []} = ();
 }
 
 1;
