@@ -86,9 +86,6 @@ widget "*" style "default-font"
 
 ));
     gtkset_background(@background) unless $::live; #- || testing;
-
-    create_logo_window($o);
-#    create_help_window($o);
 }
 
 #------------------------------------------------------------------------------
@@ -119,7 +116,7 @@ sub create_steps_window {
     my $w = bless {}, 'ugtk2';
     $w->{rwindow} = $w->{window} = Gtk2::Window->new('toplevel');
     $w->{rwindow}->set_uposition(8, 160);
-    $w->{rwindow}->set_size_request($::stepswidth, $::stepsheight);
+    $w->{rwindow}->set_size_request($::stepswidth, -1);
     $w->{rwindow}->set_name('Steps');
     $w->{rwindow}->set_title('skip');
 
@@ -197,7 +194,7 @@ sub init_sizes() {
     ($::rootwidth,  $::rootheight)    = (Gtk2::Gdk->screen_width, Gtk2::Gdk->screen_height);
     $::live and $::rootheight -= 80;
     #- ($::rootheight,  $::rootwidth)    = (min(768, $::rootheight), min(1024, $::rootwidth));
-    ($::stepswidth,  $::stepsheight)  = $::rootwidth <= 640 ? (0, 0) : (160, $::rootheight);
+    $::stepswidth = $::rootwidth <= 640 ? 0 : 160;
     ($::logowidth,   $::logoheight)   = $::rootwidth <= 640 ? (0, 0) : (500, 40);
     ($::helpwidth,   $::helpheight)   = ($::rootwidth - $::stepswidth, 0);
     ($::windowwidth, $::windowheight) = ($::rootwidth - $::stepswidth, $::rootheight - $::helpheight - $::logoheight);
