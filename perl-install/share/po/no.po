@@ -93,9 +93,9 @@ msgid "Use Xinerama extension"
 msgstr "Bruk Xinerama utvidelse"
 
 #: ../../Xconfig/card.pm_.c:387
-#, fuzzy, c-format
+#, c-format
 msgid "Configure only card \"%s\"%s"
-msgstr "Konfigurer bare kort \"%s\" (%s)"
+msgstr "Konfigurer bare kort \"%s\"%s"
 
 #: ../../Xconfig/card.pm_.c:399 ../../Xconfig/card.pm_.c:400
 #: ../../Xconfig/various.pm_.c:23
@@ -160,7 +160,6 @@ msgid "Custom"
 msgstr "Skreddersydd"
 
 #: ../../Xconfig/main.pm_.c:102
-#, fuzzy
 msgid "Graphic Card"
 msgstr "Grafikk-kort"
 
@@ -174,7 +173,7 @@ msgstr "Oppløsning"
 
 #: ../../Xconfig/main.pm_.c:113
 msgid "Test"
-msgstr ""
+msgstr "Test"
 
 #: ../../Xconfig/main.pm_.c:118 ../../diskdrake/dav.pm_.c:67
 #: ../../diskdrake/interactive.pm_.c:381 ../../diskdrake/removable.pm_.c:25
@@ -220,20 +219,19 @@ msgstr "Velg en monitor"
 
 #: ../../Xconfig/monitor.pm_.c:97
 msgid "Plug'n Play"
-msgstr ""
+msgstr "Plug'n Play"
 
 #: ../../Xconfig/monitor.pm_.c:98 ../../mouse.pm_.c:46
 msgid "Generic"
 msgstr "Generisk"
 
 #: ../../Xconfig/monitor.pm_.c:99 ../../harddrake/ui.pm_.c:37
-#, fuzzy
 msgid "Vendor"
-msgstr "Angre"
+msgstr "Selger"
 
 #: ../../Xconfig/monitor.pm_.c:109
 msgid "Plug'n Play probing failed. Please choose a precise monitor"
-msgstr ""
+msgstr "Plug'n Play søking mislykket. Vennligst velg en monitor"
 
 #: ../../Xconfig/monitor.pm_.c:114
 msgid ""
@@ -331,7 +329,6 @@ msgid "Do you want to test the configuration?"
 msgstr "Vil du teste konfigurasjonen?"
 
 #: ../../Xconfig/test.pm_.c:31
-#, fuzzy
 msgid "Warning: testing this graphic card may freeze your computer"
 msgstr "Advarsel: testing av dette grafikk-kortet kan `fryse' maskinen din"
 
@@ -419,11 +416,18 @@ msgid ""
 "\n"
 "Do you have this feature?"
 msgstr ""
+"Det ser ut til at grafikk-kortet ditt har en TV-UT kontakt.\n"
+"Det kan settes opp til å fungere ved hjelp av frame-buffer.\n"
+"\n"
+"For at dette skal virke må kortet være plugget til TV'en din før oppstart av "
+"maskinen din.\n"
+"Velg så \"TVout\" inngangen i oppstartslasteren\n"
+"\n"
+"Har du dette?"
 
 #: ../../Xconfig/various.pm_.c:85
-#, fuzzy
 msgid "What norm is your TV using?"
-msgstr "Hva slags type er ISDN-tilknytningen din?"
+msgstr "Hva slags norm bruker TV'en din?"
 
 #: ../../any.pm_.c:108 ../../any.pm_.c:133
 msgid "First sector of boot partition"
@@ -832,9 +836,8 @@ msgid "access to network tools"
 msgstr "tilgang til rpmverktøy"
 
 #: ../../any.pm_.c:756
-#, fuzzy
 msgid "access to compilation tools"
-msgstr "tilgang til rpmverktøy"
+msgstr "tilgang til kompileringsverktøy"
 
 #: ../../any.pm_.c:761
 #, c-format
@@ -855,9 +858,8 @@ msgid ""
 msgstr "Brukernavnet kan kun inneholde små bokstaver, tall, `-' og `_'"
 
 #: ../../any.pm_.c:769
-#, fuzzy
 msgid "The user name is too long"
-msgstr "Denne brukeren er allerede lagt til"
+msgstr "Dette brukernavnet er for langt"
 
 #: ../../any.pm_.c:770
 msgid "This user name is already added"
@@ -1059,14 +1061,12 @@ msgstr ""
 "Sikkerhetsfunksjonene er nå på maksimum."
 
 #: ../../any.pm_.c:1095
-#, fuzzy
 msgid "DrakSec Basic Options"
-msgstr "Valg"
+msgstr "Draksec standardvalg"
 
 #: ../../any.pm_.c:1096
-#, fuzzy
 msgid "Please choose the desired security level"
-msgstr "Velg sikkerhetsnivå"
+msgstr "Vennligst velg ønsket sikkerhetsnivå"
 
 #: ../../any.pm_.c:1099
 msgid "Security level"
@@ -1084,7 +1084,7 @@ msgstr ""
 
 #: ../../any.pm_.c:1103
 msgid "Security Administrator (login or email)"
-msgstr ""
+msgstr "Sikkerhetsadministrator (login eller email)"
 
 #: ../../any.pm_.c:1192
 msgid ""
@@ -1215,25 +1215,25 @@ msgid "Yaboot mode"
 msgstr "Yaboot modus"
 
 #: ../../bootlook.pm_.c:146
-#, fuzzy
 msgid "Install themes"
-msgstr "Installer systemet"
+msgstr "Installer temaer"
 
 #: ../../bootlook.pm_.c:147
 msgid ""
 "Display theme\n"
 "under console"
 msgstr ""
+"Vis tema\n"
+"under konsoll"
 
 #: ../../bootlook.pm_.c:148
-#, fuzzy
 msgid "Create new theme"
-msgstr "Opprette en ny partisjon"
+msgstr "Opprett nytt tema"
 
 #: ../../bootlook.pm_.c:193
 #, c-format
 msgid "Backup %s to %s.old"
-msgstr ""
+msgstr "Backup %s til %s.old"
 
 #: ../../bootlook.pm_.c:194 ../../bootlook.pm_.c:197 ../../bootlook.pm_.c:200
 #: ../../bootlook.pm_.c:230 ../../bootlook.pm_.c:232 ../../bootlook.pm_.c:242
@@ -1250,70 +1250,73 @@ msgstr "Feil"
 
 #: ../../bootlook.pm_.c:194
 msgid "unable to backup lilo message"
-msgstr ""
+msgstr "kan ikke ta backup av lilo beskjed"
 
 #: ../../bootlook.pm_.c:196
-#, fuzzy, c-format
+#, c-format
 msgid "Copy %s to %s"
-msgstr "Kopierer %s"
+msgstr "Kopier %s til %s"
 
 #: ../../bootlook.pm_.c:197
 msgid "can't change lilo message"
-msgstr ""
+msgstr "kan ikke endre lilo beskjed"
 
 #: ../../bootlook.pm_.c:200
 msgid "Lilo message not found"
-msgstr ""
+msgstr "Lilo beskjed ikke funnet"
 
 #: ../../bootlook.pm_.c:230
 msgid "Can't write /etc/sysconfig/bootsplash."
-msgstr ""
+msgstr "Kan ikke skrive /etc/sysconfig/bootsplash."
 
 #: ../../bootlook.pm_.c:230
-#, fuzzy, c-format
+#, c-format
 msgid "Write %s"
-msgstr "XFree %s"
+msgstr "Skriv %s"
 
 #: ../../bootlook.pm_.c:232
 msgid ""
 "Can't write /etc/sysconfig/bootsplash\n"
 "File not found."
 msgstr ""
+"Kan ikke skrive /etc/sysconfig/bootsplash\n"
+"Fil ikke funnet."
 
 #: ../../bootlook.pm_.c:243
 #, c-format
 msgid "Can't launch mkinitrd -f /boot/initrd-%s.img %s."
-msgstr ""
+msgstr "Kan ikke starte mkinitrd -f /boot/initrd-%s.img %s."
 
 #: ../../bootlook.pm_.c:246
 #, c-format
 msgid "Make initrd 'mkinitrd -f /boot/initrd-%s.img %s'."
-msgstr ""
+msgstr "Lag initrd 'mkinitrd -f /boot/initrd-%s.img %s'."
 
 #: ../../bootlook.pm_.c:252
 msgid ""
 "Can't relaunch LiLo!\n"
 "Launch \"lilo\" as root in command line to complete LiLo theme installation."
 msgstr ""
+"Kan ikke starte LiLo på nytt!\n"
+"Start \"lilo\" som root i kommandolinjen for å fullføre LiLo tema "
+"installasjon."
 
 #: ../../bootlook.pm_.c:256
 msgid "Relaunch 'lilo'"
-msgstr ""
+msgstr "Start 'lilo' på nytt"
 
 #: ../../bootlook.pm_.c:258 ../../standalone/draksplash_.c:165
 #: ../../standalone/draksplash_.c:329 ../../standalone/draksplash_.c:456
-#, fuzzy
 msgid "Notice"
-msgstr "Ingen video"
+msgstr "Notis"
 
 #: ../../bootlook.pm_.c:259
 msgid "LiLo and Bootsplash themes installation successfull"
-msgstr ""
+msgstr "LiLo og Bootsplash temaer installert suksessfullt"
 
 #: ../../bootlook.pm_.c:259
-#, fuzzy
 msgid "Theme installation failed!"
-msgstr "Velg installasjonsklasse"
+msgstr "Tema installasjon mislykket!"
 
 #: ../../bootlook.pm_.c:267
 #, c-format
@@ -1331,13 +1334,12 @@ msgid "Configure"
 msgstr "Konfigurer"
 
 #: ../../bootlook.pm_.c:276
-#, fuzzy
 msgid "Splash selection"
-msgstr "Lagre pakkevalg"
+msgstr "Splash valg"
 
 #: ../../bootlook.pm_.c:279
 msgid "Themes"
-msgstr ""
+msgstr "Teamer"
 
 #: ../../bootlook.pm_.c:281
 msgid ""
@@ -1347,14 +1349,19 @@ msgid ""
 "you can choose\n"
 "them separatly"
 msgstr ""
+"\n"
+"Velg tema for\n"
+"lilo og bootsplash,\n"
+"du kan velge\n"
+"de separat"
 
 #: ../../bootlook.pm_.c:284
 msgid "Lilo screen"
-msgstr ""
+msgstr "Lilo skjerm"
 
 #: ../../bootlook.pm_.c:289
 msgid "Bootsplash"
-msgstr ""
+msgstr "Bootsplash"
 
 #: ../../bootlook.pm_.c:324
 msgid "System mode"
@@ -1491,9 +1498,8 @@ msgid ""
 msgstr ""
 
 #: ../../diskdrake/dav.pm_.c:27
-#, fuzzy
 msgid "New"
-msgstr "ny"
+msgstr "Ny"
 
 #: ../../diskdrake/dav.pm_.c:63 ../../diskdrake/interactive.pm_.c:388
 #: ../../diskdrake/smbnfs_gtk.pm_.c:81
@@ -1517,18 +1523,16 @@ msgid "Mount point"
 msgstr "Monteringspunkt"
 
 #: ../../diskdrake/dav.pm_.c:85
-#, fuzzy
 msgid "Please enter the WebDAV server URL"
-msgstr "Vennligst test musen."
+msgstr "Vennligst entre WebDAV tjener URL'en."
 
 #: ../../diskdrake/dav.pm_.c:88
 msgid "The URL must begin with http:// or https://"
-msgstr ""
+msgstr "URL'en må begynne med http:// eller https://"
 
 #: ../../diskdrake/dav.pm_.c:109
-#, fuzzy
 msgid "Server: "
-msgstr "Tjener"
+msgstr "Tjener: "
 
 #: ../../diskdrake/dav.pm_.c:110 ../../diskdrake/interactive.pm_.c:440
 #: ../../diskdrake/interactive.pm_.c:1089
@@ -1591,9 +1595,8 @@ msgid "Details"
 msgstr "Detaljer"
 
 #: ../../diskdrake/hd_gtk.pm_.c:252
-#, fuzzy
 msgid "No hard drives found"
-msgstr "Ingen lokal skriver funnet!\n"
+msgstr "Ingen harddisker funnet"
 
 #: ../../diskdrake/hd_gtk.pm_.c:323
 msgid "Ext2"
@@ -1887,9 +1890,9 @@ msgstr ""
 "loopback. Fjern loopback først"
 
 #: ../../diskdrake/interactive.pm_.c:594
-#, fuzzy, c-format
+#, c-format
 msgid "Where do you want to mount %s?"
-msgstr "Hvor vil du montere %s enheten?"
+msgstr "Hvor vil du montere %s?"
 
 #: ../../diskdrake/interactive.pm_.c:618
 msgid "Computing FAT filesystem bounds"
@@ -2012,9 +2015,9 @@ msgid "What type of partitioning?"
 msgstr "Hva slags type partisjonering?"
 
 #: ../../diskdrake/interactive.pm_.c:965
-#, fuzzy, c-format
+#, c-format
 msgid "The package %s is needed. Install it?"
-msgstr "Pakken %s må installeres. Vil du installere den?"
+msgstr "Pakken %s trengs. Installere den?"
 
 #: ../../diskdrake/interactive.pm_.c:979
 msgid ""
@@ -2266,9 +2269,9 @@ msgid "Partition table type: %s\n"
 msgstr "Type partisjonstabell: %s\n"
 
 #: ../../diskdrake/interactive.pm_.c:1156
-#, fuzzy, c-format
+#, c-format
 msgid "on channel %d id %d\n"
-msgstr "på buss %d id %d\n"
+msgstr "på kanal %d id %d\n"
 
 #: ../../diskdrake/interactive.pm_.c:1186
 msgid "Filesystem encryption key"
@@ -2309,34 +2312,31 @@ msgid "Can't login using username %s (bad password?)"
 msgstr ""
 
 #: ../../diskdrake/smbnfs_gtk.pm_.c:166 ../../diskdrake/smbnfs_gtk.pm_.c:175
-#, fuzzy
 msgid "Domain Authentication Required"
-msgstr "Autentifikasjon"
+msgstr "Domene autentifisering nødvendig"
 
 #: ../../diskdrake/smbnfs_gtk.pm_.c:167
-#, fuzzy
 msgid "Another one"
-msgstr "Internett"
+msgstr "Enda ett"
 
 #: ../../diskdrake/smbnfs_gtk.pm_.c:167
-#, fuzzy
 msgid "Which username"
-msgstr "Brukernavn"
+msgstr "Hvilket brukernavn"
 
 #: ../../diskdrake/smbnfs_gtk.pm_.c:176
 msgid ""
 "Please enter your username, password and domain name to access this host."
 msgstr ""
+"Vennligst entre brukernavnet ditt, passordet og domenenavnet for å få "
+"tilgang til denne verten."
 
 #: ../../diskdrake/smbnfs_gtk.pm_.c:178 ../../standalone/drakbackup_.c:3529
-#, fuzzy
 msgid "Username"
 msgstr "Brukernavn"
 
 #: ../../diskdrake/smbnfs_gtk.pm_.c:180
-#, fuzzy
 msgid "Domain"
-msgstr "NIS-domene"
+msgstr "Domene"
 
 #: ../../diskdrake/smbnfs_gtk.pm_.c:200
 msgid "Search servers"
@@ -2419,12 +2419,11 @@ msgid "This directory should remain within the root filesystem"
 msgstr "Denne katalogen bør forbli i root filsystemet"
 
 #: ../../fsedit.pm_.c:530
-#, fuzzy
 msgid ""
 "You need a true filesystem (ext2/ext3, reiserfs, xfs, or jfs) for this mount "
 "point\n"
 msgstr ""
-"Du trenger et virkelig filsystem (ext2, reiserfs) for dette "
+"Du trenger et virkelig filsystem (ext2, reiserfs, xfs eller jfs) for dette "
 "monteringspunktet\n"
 
 #: ../../fsedit.pm_.c:532
@@ -2438,7 +2437,7 @@ msgstr "Ikke nok plass for auto-allokering"
 
 #: ../../fsedit.pm_.c:601
 msgid "Nothing to do"
-msgstr "Ikkenoe å gjøre"
+msgstr "Ingenting å gjøre"
 
 #: ../../fsedit.pm_.c:694
 #, c-format
@@ -2447,7 +2446,7 @@ msgstr "Feil ved åpning av %s for skriving: %s"
 
 #: ../../harddrake/sound.pm_.c:168
 msgid "No alternative driver"
-msgstr ""
+msgstr "Ingen alternativ driver"
 
 #: ../../harddrake/sound.pm_.c:169
 #, c-format
@@ -2455,11 +2454,12 @@ msgid ""
 "There's no known OSS/ALSA alternative driver for your sound card (%s) which "
 "currently uses \"%s\""
 msgstr ""
+"Det er ingen OSS/ALSA alternative drivere for lydkortet ditt (%s) som nå "
+"bruker \"%s\""
 
 #: ../../harddrake/sound.pm_.c:171
-#, fuzzy
 msgid "Sound configuration"
-msgstr "CUPS konfigurasjon"
+msgstr "Lydkonfigurasjon"
 
 #: ../../harddrake/sound.pm_.c:172
 #, c-format
@@ -2467,6 +2467,8 @@ msgid ""
 "Here you can select an alternative driver (either OSS or ALSA) for your "
 "sound card (%s)."
 msgstr ""
+"Her kan du velge en alternativ driver (enten OSS eller ALSA) for lydkortet "
+"ditt (%s)."
 
 #: ../../harddrake/sound.pm_.c:174
 #, c-format
@@ -2476,11 +2478,14 @@ msgid ""
 "Your card currently use the %s\"%s\" driver (default driver for your card is "
 "\"%s\")"
 msgstr ""
+"\n"
+"\n"
+"Kortet ditt bruker nå %s\"%s\" driveren (standard driver for kortet ditt er "
+"\"%s\")"
 
 #: ../../harddrake/sound.pm_.c:176
-#, fuzzy
 msgid "Driver:"
-msgstr "Driver"
+msgstr "Driver:"
 
 #: ../../harddrake/sound.pm_.c:181 ../../standalone/drakTermServ_.c:246
 #: ../../standalone/drakbackup_.c:3932 ../../standalone/drakbackup_.c:3965
@@ -2494,7 +2499,7 @@ msgstr "Hjelp"
 
 #: ../../harddrake/sound.pm_.c:183
 msgid "Switching between ALSA and OSS help"
-msgstr ""
+msgstr "Endrer mellom ALSA og OSS hjelp"
 
 #: ../../harddrake/sound.pm_.c:184
 msgid ""
@@ -2524,6 +2529,11 @@ msgid ""
 "\n"
 "The new \"%s\" driver'll only be used on next bootstrap."
 msgstr ""
+"Den gamle \"%s\" driveren er svartelistet.\n"
+"\n"
+"Den har blitt rapportert at den oopser kjernen når den slåes av.\n"
+"\n"
+"Den nye \"%s\" driveren vil bare bli brukt på neste bootstrap."
 
 #: ../../harddrake/sound.pm_.c:203 ../../standalone/drakconnect_.c:301
 msgid "Please Wait... Applying the configuration"
@@ -2535,19 +2545,17 @@ msgid "Please wait"
 msgstr "Vennligst vent"
 
 #: ../../harddrake/sound.pm_.c:208
-#, fuzzy
 msgid "No known driver"
-msgstr "X driver"
+msgstr "Ingen kjent driver"
 
 #: ../../harddrake/sound.pm_.c:209
 #, c-format
 msgid "There's no known driver for your sound card (%s)"
-msgstr ""
+msgstr "Det er ingen kjent driver for lydkortet ditt (%s)"
 
 #: ../../harddrake/sound.pm_.c:212
-#, fuzzy
 msgid "Unkown driver"
-msgstr "Ukjent modell"
+msgstr "Ukjent driver"
 
 #: ../../harddrake/sound.pm_.c:213
 #, c-format
@@ -2558,51 +2566,53 @@ msgid ""
 "<install at mandrakesoft dot com>\n"
 "with subject: unlisted sound driver \"%s\""
 msgstr ""
+"\"%s\" driveren for lydkortet ditt er ikke listet\n"
+"\n"
+"Vennligst send utskrift av \"lspcidrake -v\" kommandoen til\n"
+"<install at mandrakesoft dot com>\n"
+"med subject: unlisted sound driver \"%s\""
 
 #: ../../harddrake/ui.pm_.c:16
-#, fuzzy
 msgid "Model"
-msgstr "Mus"
+msgstr "Modell"
 
 #: ../../harddrake/ui.pm_.c:16
-#, fuzzy
 msgid "hard disk model"
-msgstr "Kort mem (DMA)"
+msgstr "harddisk modell"
 
 #: ../../harddrake/ui.pm_.c:17
-#, fuzzy
 msgid "Channel"
-msgstr "Avbryt"
+msgstr "Kanal"
 
 #: ../../harddrake/ui.pm_.c:17
 msgid "EIDE/SCSI channel"
-msgstr ""
+msgstr "EIDE/SCSI kanal"
 
 #: ../../harddrake/ui.pm_.c:19
 msgid "Bus"
-msgstr ""
+msgstr "Buss"
 
 #: ../../harddrake/ui.pm_.c:20
 msgid ""
 "this is the physical bus on which the device is plugged (eg: PCI, USB, ...)"
 msgstr ""
+"dette er den fysiske bussen som enheten er plugget til (f.eks. PCI, USB, ...)"
 
 #: ../../harddrake/ui.pm_.c:21
-#, fuzzy
 msgid "Module"
-msgstr "Mus"
+msgstr "Modul"
 
 #: ../../harddrake/ui.pm_.c:21
 msgid "the module of the GNU/Linux kernel that handle that device"
-msgstr ""
+msgstr "modulen til GNU/Linux kjernen som håndterer den enheten"
 
 #: ../../harddrake/ui.pm_.c:22
 msgid "Media class"
-msgstr ""
+msgstr "Mediaklasse"
 
 #: ../../harddrake/ui.pm_.c:22
 msgid "class of hardware device"
-msgstr ""
+msgstr "klasse av maskinvareenhet"
 
 #: ../../harddrake/ui.pm_.c:23 ../../printerdrake.pm_.c:1562
 msgid "Description"
@@ -2610,22 +2620,23 @@ msgstr "Beskrivelse"
 
 #: ../../harddrake/ui.pm_.c:23
 msgid "this field describe the device"
-msgstr ""
+msgstr "dette feltet beskriver enheten"
 
 #: ../../harddrake/ui.pm_.c:25
-#, fuzzy
 msgid "Bus identification"
-msgstr "Autentifikasjon"
+msgstr "Buss identifikasjon"
 
 #: ../../harddrake/ui.pm_.c:26
 msgid ""
 "- PCI and USB devices: this list the vendor, device, subvendor and subdevice "
 "PCI/USB ids"
 msgstr ""
+"- PCI og USB enheter: dette oppgir leverandør, enhet, underleverandør og "
+"underenhet PCI/USB ids"
 
 #: ../../harddrake/ui.pm_.c:28
 msgid "Location on the bus"
-msgstr ""
+msgstr "Lokasjon på bussen"
 
 #: ../../harddrake/ui.pm_.c:29
 msgid ""
@@ -2633,47 +2644,45 @@ msgid ""
 "- eide devices: the device is either a slave or a master device\n"
 "- scsi devices: the scsi bus and the scsi device ids"
 msgstr ""
+"- pci enheter: dette gir PCI spor, enhet og funksjon til dette kortet\n"
+"- eide enheter: enheten er enten en slave eller en master enhet\n"
+"- scsi enheter: scsi buss og scsi enhet ids"
 
 #: ../../harddrake/ui.pm_.c:32
-#, fuzzy
 msgid "Old device file"
-msgstr "Velg fil"
+msgstr "Gammel enhetfil"
 
 #: ../../harddrake/ui.pm_.c:33
 msgid "old static device name used in dev package"
-msgstr ""
+msgstr "gammelt statisk enhetsnavn brukt i dev pakke"
 
 #: ../../harddrake/ui.pm_.c:34
-#, fuzzy
 msgid "New devfs device"
-msgstr "Gateway-enhet"
+msgstr "Ny devfs enhet"
 
 #: ../../harddrake/ui.pm_.c:35
 msgid "new dinamic device name generated by incore kernel devfs"
-msgstr ""
+msgstr "nytt dynamisk enhetsnavn generert av incore kjerne devfs"
 
 #: ../../harddrake/ui.pm_.c:36
-#, fuzzy
 msgid "Number of buttons"
-msgstr "2 knapper"
+msgstr "Antall knapper"
 
 #: ../../harddrake/ui.pm_.c:37
 msgid "the vendor name of the device"
-msgstr ""
+msgstr "leverandørnavnet til enheten"
 
 #: ../../harddrake/ui.pm_.c:38
-#, fuzzy
 msgid "Alternative drivers"
-msgstr "Alternativ testside (A4)"
+msgstr "Alternative drivere"
 
 #: ../../harddrake/ui.pm_.c:39
 msgid "the list of alternative drivers for this sound card"
-msgstr ""
+msgstr "listen over alternative drivere for dette lydkortet"
 
 #: ../../harddrake/ui.pm_.c:63
-#, fuzzy
 msgid "/_Quit"
-msgstr "Avslutt"
+msgstr "/_Avslutt"
 
 #: ../../harddrake/ui.pm_.c:64 ../../harddrake/ui.pm_.c:65
 #: ../../harddrake/ui.pm_.c:71 ../../harddrake/ui.pm_.c:73
@@ -2682,113 +2691,106 @@ msgid "/_Help"
 msgstr "/_Hjelp"
 
 #: ../../harddrake/ui.pm_.c:65
-#, fuzzy
 msgid "/_Help..."
-msgstr "/_Hjelp"
+msgstr "/_Hjelp..."
 
 #: ../../harddrake/ui.pm_.c:66
 msgid "Harddrake help"
-msgstr ""
+msgstr "Harddrake hjelp"
 
 #: ../../harddrake/ui.pm_.c:67
 msgid ""
 "Description of the fields:\n"
 "\n"
 msgstr ""
+"Beskrivelse av feltene:\n"
+"\n"
 
 #: ../../harddrake/ui.pm_.c:71
 msgid "/_Report Bug"
 msgstr "/_Rapporter feil"
 
 #: ../../harddrake/ui.pm_.c:73
-#, fuzzy
 msgid "/_About..."
-msgstr "/Hjelp/_Om..."
+msgstr "/_Om..."
 
 #: ../../harddrake/ui.pm_.c:74
 msgid "About Harddrake"
-msgstr ""
+msgstr "Om Harddrake"
 
 #: ../../harddrake/ui.pm_.c:75
 msgid ""
 "This is HardDrake, a Mandrake hardware configuration tool.\n"
 "Version:"
 msgstr ""
+"Dette er HardDrake, et Mandrake maskinvare konfigureringsverktøy.\n"
+"Versjon:"
 
 #: ../../harddrake/ui.pm_.c:76
-#, fuzzy
 msgid "Author:"
-msgstr "Automatisk sondering"
+msgstr "Utgiver:"
 
 #: ../../harddrake/ui.pm_.c:86
-#, fuzzy
 msgid "Harddrake2 version "
-msgstr "Oppdaging av harddisk"
+msgstr "Harddrake2 versjon "
 
 #: ../../harddrake/ui.pm_.c:101
-#, fuzzy
 msgid "Detected hardware"
-msgstr "Se maskinvareinfo"
+msgstr "Oppdaget maskinvare"
 
 #: ../../harddrake/ui.pm_.c:103
-#, fuzzy
 msgid "Information"
-msgstr "Vis informasjon"
+msgstr "Informasjon"
 
 #: ../../harddrake/ui.pm_.c:106
-#, fuzzy
 msgid "Configure module"
-msgstr "Konfigurer mus"
+msgstr "Konfigurer modul"
 
 #: ../../harddrake/ui.pm_.c:107
 msgid "Run config tool"
-msgstr ""
+msgstr "Kjør konfig verktøy"
 
 #: ../../harddrake/ui.pm_.c:111
-#, fuzzy
 msgid "Detection in progress"
-msgstr "oppdaget på port %s"
+msgstr "oppdagelse pågår"
 
 #: ../../harddrake/ui.pm_.c:148
 msgid "You can configure each parameter of the module here."
-msgstr ""
+msgstr "Du kan konfigurere hvert parameter av modulen her."
 
 #: ../../harddrake/ui.pm_.c:166
-#, fuzzy, c-format
+#, c-format
 msgid "Running \"%s\" ..."
-msgstr "Fjerner skriver \"%s\" ..."
+msgstr "Kjører \"%s\" ..."
 
 #: ../../harddrake/ui.pm_.c:180
 #, c-format
 msgid "Probing %s class\n"
-msgstr ""
+msgstr "Søker %s klasse\n"
 
 #: ../../harddrake/ui.pm_.c:201
 msgid "primary"
-msgstr ""
+msgstr "primær"
 
 #: ../../harddrake/ui.pm_.c:201
-#, fuzzy
 msgid "secondary"
-msgstr "%d sekunder"
+msgstr "sekundær"
 
 #: ../../harddrake/v4l.pm_.c:15 ../../harddrake/v4l.pm_.c:65
-#, fuzzy
 msgid "Auto-detect"
-msgstr "Utfør automatisk detektering"
+msgstr "Automatisk detektering"
 
 #: ../../harddrake/v4l.pm_.c:66 ../../harddrake/v4l.pm_.c:186
-#, fuzzy
 msgid "Unknown|Generic"
-msgstr "Generisk"
+msgstr "Ukjent|Generisk"
 
 #: ../../harddrake/v4l.pm_.c:98
 msgid "Unknown|CPH05X (bt878) [many vendors]"
-msgstr ""
+msgstr "Ukjent|CPH05X (bt878) [mange leverandører]"
 
 #: ../../harddrake/v4l.pm_.c:99
 msgid "Unknown|CPH06X (bt878) [many vendors]"
-msgstr ""
+msgstr "Ukjent|CPH06X (bt878) [mange leverandører]"
 
 #: ../../harddrake/v4l.pm_.c:210
 msgid ""
