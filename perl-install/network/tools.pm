@@ -118,13 +118,11 @@ my $kid_pipe;
 sub connected_bg {
     my ($ref) = @_;
     if (defined $kid_pipe) {
-	print "GGGGGGGGG\n";
 	local *F;
 	*F = *$kid_pipe;
 	fcntl(F, F_SETFL, O_NONBLOCK) or die "can't fcntl F_SETFL: $!";
 	my $a;
   	if ($a = <F> ) {
-	    print "gooood\n";
   	    chomp $a;
 	    close($kid_pipe) || warn "kid exited $?";
 	    undef $kid_pipe;
@@ -132,7 +130,6 @@ sub connected_bg {
 	    $a eq '0' and $$ref = 0;
   	}
     } else {
-	print "BBBBBBBBB\n";
   	$kid_pipe = connected2();
     }
     1;
@@ -145,7 +142,6 @@ sub connected2 {
            } else {      # child
                ($EUID, $EGID) = ($UID, $GID); # suid only
 	       my $a = gethostbyname("mandrakesoft.com") ? 1 : 0;
-	       print "$a\n";
 	       c::_exit(0);
            }
 }
