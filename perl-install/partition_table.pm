@@ -344,12 +344,17 @@ sub will_tell_kernel {
 	will_tell_kernel($hd, del => $o_part);
 	will_tell_kernel($hd, add => $o_part);
     } else {
-	my $part_number = sub { $o_part->{device} =~ /(\d+)$/ ? $1 : internal_error("bad device " . description($o_part)) };
+	my $part_number;
+	if ($o_part) {
+	    ($part_number) = $o_part->{device} =~ /(\d+)$/ or
+	      #- don't die, it occurs when we zero_MBR_and_dirty a raw_lvm_PV
+	      log::l("ERROR: will_tell_kernel bad device " . description($o_part)), return;
+	}
 
 	my @para =
 	  $action eq 'force_reboot' ? () :
-	  $action eq 'add' ? ($part_number->(), $o_part->{start}, $o_part->{size}) :
-	  $action eq 'del' ? $part_number->() :
+	  $action eq 'add' ? ($part_number, $o_part->{start}, $o_part->{size}) :
+	  $action eq 'del' ? $part_number :
 	  internal_error("unknown action $action");
 
 	push @{$hd->{'will_tell_kernel' . ($o_delay || '')} ||= []}, [ $action, @para ];
