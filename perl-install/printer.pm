@@ -386,7 +386,7 @@ sub copy_master_filter($) {
     my $complete_path = "$prefix/$queue_path/filter";
     my $master_filter = "$prefix/$PRINTER_FILTER_DIR/master-filter";
 
-    eval { commands::cp($master_filter, $complete_path) };
+    eval { commands::cp('-f', $master_filter, $complete_path) }; #- -f for update.
     $@ and die "Can't copy $master_filter to $complete_path $!";
 }
 

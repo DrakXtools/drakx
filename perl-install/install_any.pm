@@ -98,8 +98,8 @@ sub shells($) {
 sub getAvailableSpace {
     my ($o) = @_;
 
-    do { $_->{mntpoint} eq '/usr' and return int($_->{size} * 512 / 1.03) } foreach @{$o->{fstab}};
-    do { $_->{mntpoint} eq '/'    and return int($_->{size} * 512 / 1.03) } foreach @{$o->{fstab}};
+    do { $_->{mntpoint} eq '/usr' and return int($_->{size} * 512 / 1.07) } foreach @{$o->{fstab}};
+    do { $_->{mntpoint} eq '/'    and return int($_->{size} * 512 / 1.07) } foreach @{$o->{fstab}};
 
     if ($::testing) {
 	log::l("taking 200MB for testing");

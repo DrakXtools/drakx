@@ -2,7 +2,7 @@ package pkgs;
 
 use diagnostics;
 use strict;
-use vars qw(*LOG $size_correction_ratio);
+use vars qw(*LOG);
 
 use common qw(:common :file :functional);
 use install_any;
@@ -12,8 +12,6 @@ use fs;
 use lang;
 use c;
 
-$size_correction_ratio = 1.04;
-
 my @skip_list = qw(
 XFree86-8514 XFree86-AGX XFree86-Mach32 XFree86-Mach64 XFree86-Mach8 XFree86-Mono
 XFree86-P9000 XFree86-S3 XFree86-S3V XFree86-SVGA XFree86-W32 XFree86-I128
@@ -22,6 +20,8 @@ MySQL MySQL_GPL mod_php3 midgard postfix metroess metrotmpl
 hackkernel hackkernel-BOOT hackkernel-fb hackkernel-headers
 hackkernel-pcmcia-cs hackkernel-smp hackkernel-smp-fb
 );#)
+
+sub correctSize { (20471 - $_[0])*$_[0]/16258 } #- size correction in MB.
 
 sub Package {
     my ($packages, $name) = @_;

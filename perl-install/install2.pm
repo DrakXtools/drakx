@@ -266,7 +266,7 @@ sub setupSCSI {
 
 #------------------------------------------------------------------------------
 sub partitionDisks {
-    return if ($o->{isUpgrade});
+    return if $o->{lnx4win} || $o->{isUpgrade};
 
     $::o->{steps}{formatPartitions}{done} = 0;
     eval { fs::umount_all($o->{fstab}, $o->{prefix}) } if $o->{fstab} && !$::testing;
@@ -293,7 +293,7 @@ sub partitionDisks {
 }
 
 sub formatPartitions {
-    return if ($o->{isUpgrade});
+    return if $o->{lnx4win} || $o->{isUpgrade};
 
     $o->choosePartitionsToFormat($o->{fstab});
 
@@ -359,18 +359,22 @@ sub configureTimezone {
     $o->timeConfig($f);
 }
 #------------------------------------------------------------------------------
-sub configureServices { $o->servicesConfig  }
+sub configureServices {
+    return if $o->{lnx4win};
+
+    $o->servicesConfig;
+}
 #------------------------------------------------------------------------------
 sub configurePrinter  { $o->printerConfig   }
 #------------------------------------------------------------------------------
 sub setRootPassword {
-    return if ($o->{isUpgrade});
+    return if $o->{isUpgrade};
 
     $o->setRootPassword;
 }
 #------------------------------------------------------------------------------
 sub addUser {
-    return if ($o->{isUpgrade});
+    return if $o->{isUpgrade};
 
     $o->addUser;
 
@@ -383,11 +387,15 @@ sub addUser {
 #-PADTODO
 sub createBootdisk {
     modules::write_conf("$o->{prefix}/etc/conf.modules", 'append');
+
+    return if $o->{lnx4win};
     $o->createBootdisk($_[1] == 1);
 }
 
 #------------------------------------------------------------------------------
 sub setupBootloader {
+    return if $o->{lnx4win};
+
     $o->setupBootloaderBefore if $_[1] == 1;
     $o->setupBootloader($_[1] - 1);
 }
@@ -426,6 +434,8 @@ sub main {
 	    $o->{pcmcia} = shift;
 	} elsif (/--readonly/) {
 	    $o->{partitioning}{readonly} = 1;
+	} elsif (/--lnx4win/) {
+	    $o->{lnx4win} = 1;
 	}
     }
 
@@ -526,6 +536,8 @@ sub main {
 
     fs::write($o->{prefix}, $o->{fstab});
     modules::write_conf("$o->{prefix}/etc/conf.modules", 'append');
+
+    run_program::run("/usr/bin/postinstall2") if $o->{lnx4win};
 
     killCardServices();
 
