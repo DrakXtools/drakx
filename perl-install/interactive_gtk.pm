@@ -79,43 +79,53 @@ sub ask_from_entries_refW {
     my $num_fields = @{$l};
     my $ignore = 0; #-to handle recursivity
 
-    my $w       = my_gtk->new($title, %$o);
+    my $w = my_gtk->new($title, %$o);
     #-the widgets
-    my @entries = map {
+    my @widgets = map {
 	if ($_->{type} eq "list") {
-	    my $depth_combo = new Gtk::Combo;
-	    $depth_combo->set_use_arrows_always(1);
-	    $depth_combo->entry->set_editable(!$_->{not_edit});
-	    $depth_combo->set_popdown_strings(@{$_->{list}});
-	    $depth_combo->disable_activate;
+	    my $w = new Gtk::Combo;
+	    $w->set_use_arrows_always(1);
+	    $w->entry->set_editable(!$_->{not_edit});
+	    $w->set_popdown_strings(@{$_->{list}});
+	    $w->disable_activate;
 	    $_->{val} ||= $_->{list}[0];
-	    $depth_combo;
+	    $w;
+	} elsif ($_->{type} eq "bool") {
+	    my $w = Gtk::CheckButton->new($_->{text});
+	    $w->set_active(${$_->{val}});
+	    my $i = $_; $w->signal_connect(clicked => sub { $ignore or ${$i->{val}} = !${$i->{val}} });
+	    $w;
 	} else {
 	    new Gtk::Entry;
 	}
     } @{$val};
     my $ok      = $w->create_okcancel;
 
-    sub comb_entry {
-	my ($entry, $ref) = @_;
-	($ref->{type} eq "list" && @{$ref->{list}}) ? $entry->entry : $entry
+    sub widget {
+	my ($w, $ref) = @_;
+	($ref->{type} eq "list" && @{$ref->{list}}) ? $w->entry : $w
     }
-
     my @updates = mapn {
-	my ($entry, $ref) = @_;
-	sub { ${$ref->{val}} = comb_entry($entry, $ref)->get_text };
-    } \@entries, $val;
+	my ($w, $ref) = @_;
+	sub {
+	    $ref->{type} eq "bool" and return;
+	    ${$ref->{val}} = widget($w, $ref)->get_text;
+	};
+    } \@widgets, $val;
 
     my @updates_inv = mapn {
-	my ($entry, $ref) = @_;
-	sub { comb_entry($entry, $ref)->set_text(${$ref->{val}})
+	my ($w, $ref) = @_;
+	sub { 
+	    $ref->{type} eq "bool" ? 
+	      $w->set_active(${$ref->{val}}) :
+	      widget($w, $ref)->set_text(${$ref->{val}})
 	};
-    } \@entries, $val;
+    } \@widgets, $val;
 
 
     for (my $i = 0; $i < $num_fields; $i++) {
 	my $ind = $i; #-cos lexical bindings pb !!
-	my $entry = comb_entry($entries[$i], $val->[$i]);
+	my $widget = widget($widgets[$i], $val->[$i]);
 	my $changed_callback = sub {
 	    return if $ignore; #-handle recursive deadlock
 	    &{$updates[$ind]};
@@ -133,38 +143,34 @@ sub ask_from_entries_refW {
 		&{$hcallback{focus_out}}($ind);
 		#update all the value
 		$ignore = 1;
-		foreach (@updates_inv) { &{$_};}
+		&$_ foreach @updates_inv;
 		$ignore = 0;
 	    };
-	    $entry->signal_connect(focus_out_event => $focusout_callback);
+	    $widget->signal_connect(focus_out_event => $focusout_callback);
 	}
-	$entry->signal_connect(changed => $changed_callback);
-	my $go_to_next = sub {
-	    if ($ind == ($num_fields -1)) {
-		$w->{ok}->grab_focus();
-	    } else {
-		comb_entry($entries[$ind+1],$val->[$ind+1])->grab_focus();
-	    }
-	};
-	$entry->signal_connect(activate => $go_to_next);
-	$entry->signal_connect(key_press_event => sub {
-	   my ($w, $e) = @_;
-	   my $c = chr $e->{keyval};
-	   if ($c eq "\x8d")
-	     {
-		 #-don't know why it works, i believe that
-		 #-i must say before &$go_to_next, but with it doen't work HACK!
-		 $w->signal_emit_stop("key_press_event");
-	     }
-	    ;
+	if (ref $widget eq "Gtk::Entry") {
+	    $widget->signal_connect(changed => $changed_callback);
+	    my $go_to_next = sub {
+		if ($ind == ($num_fields -1)) {
+		    $w->{ok}->grab_focus();
+		} else {
+		    widget($widgets[$ind+1],$val->[$ind+1])->grab_focus();
+		}
+	    };
+	    $widget->signal_connect(activate => $go_to_next);
+	    $widget->signal_connect(key_press_event => sub {
+		my ($w, $e) = @_;
+		#-don't know why it works, i believe that
+		#-i must say before &$go_to_next, but with it doen't work HACK!
+		$w->signal_emit_stop("key_press_event") if chr($e->{keyval}) eq "\x8d";
 	    });
-
-	$entry->set_text(${$val->[$i]{val}})  if ${$val->[$i]{val}};
-	$entry->set_visibility(0) if $val->[$i]{hidden};
+	    $widget->set_text(${$val->[$i]{val}})  if ${$val->[$i]{val}};
+	    $widget->set_visibility(0) if $val->[$i]{hidden};
+	}
 	&{$updates[$i]};
     }
 
-    my @entry_list = mapn { [($_[0], $_[1])]} $l, \@entries;
+    my @entry_list = mapn { [($_[0], $_[1])]} $l, \@widgets;
 
     gtkadd($w->{window},
 	   gtkpack(
@@ -172,7 +178,7 @@ sub ask_from_entries_refW {
 		   create_packtable({}, @entry_list),
 		   $ok
 		   ));
-    comb_entry($entries[0],$val->[0])->grab_focus();
+    widget($widgets[0],$val->[0])->grab_focus();
     if ($hcallback{complete}) {
 	my $callback = sub {
 	    my ($error, $focus) = &{$hcallback{complete}};
@@ -182,7 +188,7 @@ sub ask_from_entries_refW {
 	    $ignore = 0;
 	    if ($error) {
 		$focus ||= 0;
-		comb_entry($entries[$focus], $val->[$focus])->grab_focus();
+		widget($widgets[$focus], $val->[$focus])->grab_focus();
 	    } else {
 		return 1;
 	    }

@@ -276,7 +276,7 @@ sub createBootdisk($) {
 
     return if $::testing;
 
-    lilo::mkbootdisk($o->{prefix}, versionString(), $dev);
+    lilo::mkbootdisk($o->{prefix}, install_any::kernelVersion(), $dev);
     $o->{mkbootdisk} = $dev;
 }
 
@@ -284,9 +284,8 @@ sub createBootdisk($) {
 sub setupBootloader($) {
     my ($o) = @_;
     return if $::g_auto_install;
-    my $versionString = versionString();
     $o->{bootloader}{keytable} = keyboard::kmap($o->{keyboard}) if $o->{bootloader}{keytable} eq "1";
-    lilo::install($o->{prefix}, $o->{hds}, $o->{fstab}, $versionString, $o->{bootloader});
+    lilo::install($o->{prefix}, $o->{bootloader});
 }
 
 #------------------------------------------------------------------------------

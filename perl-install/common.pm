@@ -6,8 +6,8 @@ use vars qw(@ISA %EXPORT_TAGS @EXPORT_OK $printable_chars $sizeof_int $bitof_int
 
 @ISA = qw(Exporter);
 %EXPORT_TAGS = (
-    common     => [ qw(__ min max sqr sum sign product bool listlength bool2text to_int to_float ikeys member divide is_empty_array_ref is_empty_hash_ref add2hash add2hash_ set_new set_add round round_up round_down first second top uniq translate untranslate warp_text formatAlaTeX) ],
-    functional => [ qw(fold_left compose map_index map_tab_hash mapn mapn_ difference2 before_leaving catch_cdie cdie) ],
+    common     => [ qw(__ even odd min max sqr sum sign product bool listlength bool2text to_int to_float ikeys member divide is_empty_array_ref is_empty_hash_ref add2hash add2hash_ set_new set_add round round_up round_down first second top uniq translate untranslate warp_text formatAlaTeX) ],
+    functional => [ qw(fold_left compose map_index grep_index map_tab_hash mapn mapn_ difference2 before_leaving catch_cdie cdie) ],
     file       => [ qw(dirname basename touch all glob_ cat_ chop_ mode) ],
     system     => [ qw(sync makedev unmakedev psizeof strcpy gettimeofday syscall_ crypt_ getVarsFromSh setVarsInSh) ],
     constant   => [ qw($printable_chars $sizeof_int $bitof_int $SECTORSIZE) ],
@@ -37,6 +37,8 @@ sub fold_left(&@) {
 sub _ { my $s = shift @_; sprintf translate($s), @_ }
 #-delete $main::{'_'};
 sub __ { $_[0] }
+sub even($) { $_[0] % 2 == 0 }
+sub odd($)  { $_[0] % 2 == 1 }
 sub min { fold_left { $a < $b ? $a : $b } @_ }
 sub max { fold_left { $a > $b ? $a : $b } @_ }
 sub sum { fold_left { $a + $b } @_ }
@@ -92,10 +94,13 @@ sub touch {
 
 sub map_index(&@) {
     my $f = shift;
-    my @l;
-    local $::i = 0;
-    foreach (@_) { push @l, &$f($::i); $::i++; }
-    @l;
+    my $v; local $::i = 0;
+    map { $v = &$f($::i); $::i++; $v } @_;
+}
+sub grep_index(&@) {
+    my $f = shift;
+    my $v; local $::i = 0;
+    grep { $v = &$f($::i); $::i++; $v } @_;
 }
 
 #- pseudo-array-hash :)

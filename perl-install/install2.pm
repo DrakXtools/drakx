@@ -16,6 +16,7 @@ use help;
 use network;
 use lang;
 use keyboard;
+use lilo;
 use mouse;
 use fs;
 use fsedit;
@@ -30,7 +31,7 @@ use install_steps_graphical;
 use run_program;
 
 #-######################################################################################
-#- Steps  table
+#- Steps table
 #-######################################################################################
 my @installStepsFields = qw(text redoable onError needs entered reachable toBeDone help next done);
 my @installSteps = (
@@ -51,9 +52,9 @@ my @installSteps = (
   setRootPassword    => [ __("Set root password"), 1, 1, "formatPartitions" ],
   addUser            => [ __("Add a user"), 1, 1, "doInstallStep" ],
   createBootdisk     => [ __("Create bootdisk"), 1, 0, "doInstallStep" ],
-  setupBootloader    => [ __("Install bootloader"), 1, 1, "doInstallStep" ],
+  setupBootloader    => [ __("Install bootloader"), 1, 1],#, "doInstallStep" ],
   configureX         => [ __("Configure X"), 1, 0, "formatPartitions" ],
-  exitInstall        => [ __("Exit install"), 0, 0, "alldone" ],
+  exitInstall        => [ __("Exit install"), 0, 0 ],
 );
 
 my (%installSteps, %upgradeSteps, @orderedInstallSteps, @orderedUpgradeSteps);
@@ -113,7 +114,7 @@ my %suggestedPartitions = (
 #-the variable $default)
 #-#######################################################################################
 $o = $::o = {
-    bootloader => { onmbr => 1, linear => 0, message => 1, keytable => 1, timeout => 50 },
+#    bootloader => { linear => 0, message => 1, keytable => 1, timeout => 5, restricted => 0 },
     autoSCSI   => 0,
     mkbootdisk => 1, #- no mkbootdisk if 0 or undef,   find a floppy with 1
 #-    packages   => [ qw() ],
@@ -353,7 +354,9 @@ sub createBootdisk {
 
 #------------------------------------------------------------------------------
 sub setupBootloader {
-    $o->setupBootloader;
+    add2hash($o->{bootloader} ||= {}, lilo::read("$o->{prefix}/etc/lilo.conf"));
+    lilo::suggest($o->{prefix}, $o->{bootloader}, $o->{hds}, $o->{fstab}, install_any::kernelVersion());
+    $o->setupBootloader($_[1] > 1);
 }
 #------------------------------------------------------------------------------
 sub configureX {
@@ -361,7 +364,7 @@ sub configureX {
     $o->setupXfree if $o->{packages}{XFree86}{installed} || $clicked;
 }
 #------------------------------------------------------------------------------
-sub exitInstall { $o->exitInstall }
+sub exitInstall { $o->exitInstall(getNextStep() eq "exitInstall") }
 
 
 #-######################################################################################
@@ -471,6 +474,7 @@ sub main {
 	$clicked = 0;
 	while ($@) {
 	    local $_ = $@;
+	    $o->kill_action;
 	    /^setstep (.*)/ and $o->{step} = $1, $clicked = 1, redo MAIN;
 	    /^theme_changed$/ and redo MAIN;
 	    eval { $o->errorInStep($_) };

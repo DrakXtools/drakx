@@ -6,7 +6,7 @@ use vars qw(@ISA %EXPORT_TAGS @EXPORT_OK);
 
 @ISA = qw(Exporter);
 %EXPORT_TAGS = (
-    all => [ qw(versionString getNextStep spawnSync spawnShell addToBeDone) ],
+    all => [ qw(getNextStep spawnSync spawnShell addToBeDone) ],
 );
 @EXPORT_OK = map { @$_ } values %EXPORT_TAGS;
 
@@ -46,8 +46,8 @@ sub getFile($) {
     goto &getFile;
 }
 
-sub versionString {
-    local $_ = readlink("$::o->{prefix}/boot/vmlinuz") or die "I couldn't find the kernel package!";
+sub kernelVersion {
+    local $_ = readlink("$::o->{prefix}/boot/vmlinuz") or $::testing && "2.2.testversion" or die "I couldn't find the kernel package!";
     first(/vmlinuz-(.*)/);
 }
 
@@ -96,8 +96,8 @@ sub shells($) {
 sub getAvailableSpace {
     my ($o) = @_;
 
-    do { $_->{mntpoint} eq '/usr' and return $_->{size} << 9 } foreach @{$o->{fstab}};
-    do { $_->{mntpoint} eq '/'    and return $_->{size} << 9 } foreach @{$o->{fstab}};
+    do { $_->{mntpoint} eq '/usr' and return $_->{size} * 512 } foreach @{$o->{fstab}};
+    do { $_->{mntpoint} eq '/'    and return $_->{size} * 512 } foreach @{$o->{fstab}};
 
     if ($::testing) {
 	log::l("taking 200MB for testing");

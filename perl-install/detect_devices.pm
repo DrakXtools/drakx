@@ -95,7 +95,7 @@ sub getIDE() {
     my @idi;
 
     #- Great. 2.2 kernel, things are much easier and less error prone.
-    foreach my $d (glob_('/proc/ide/hd*')) {
+    foreach my $d (sort @{[glob_('/proc/ide/hd*')]}) {
 	my ($t) = chop_(cat_("$d/media"));
 	my $type = $ {{disk => 'hd', cdrom => 'cdrom', tape => 'tape', floppy => 'fd'}}{$t} or next;
 	my ($info) = chop_(cat_("$d/model")); $info ||= "(none)";

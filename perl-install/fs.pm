@@ -24,10 +24,9 @@ sub read_fstab($) {
     open F, $file or return;
 
     map {
-	my ($dev, $mntpoint, @l) = split;
+	my ($dev, @l) = split;
 	$dev =~ s,/(tmp|dev)/,,;
-	while (@l > 4) { $mntpoint .= " " . shift @l; }
-	{ device => $dev, mntpoint => $mntpoint, type => $l[0], options => $l[1] }
+	{ device => $dev, mntpoint => $l[0], type => $l[1], options => $l[2] }
     } <F>;
 }
 

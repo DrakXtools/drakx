@@ -10,7 +10,7 @@ use vars qw(@ISA);
 #-######################################################################################
 #- misc imports
 #-######################################################################################
-use common qw(:common);
+use common qw(:common :functional);
 use partition_table qw(:types);
 use install_steps;
 use pci_probing::main;
@@ -529,31 +529,55 @@ failures. Would you like to create a bootdisk for your system?"), !$o->{mkbootdi
 }
 
 #------------------------------------------------------------------------------
-sub setupBootloader($) {
-    my ($o) = @_;
-    my @l = (__("First sector of drive"), __("First sector of boot partition"));
+sub setupBootloader {
+    my ($o, $more) = @_;
+    my $b = $o->{bootloader} ||= {};
 
-    add2hash_($o->{bootloader}, { onmbr => lilo::suggest_onmbr($o->{hds}) });
+    if ($::beginner && !$more) {
+	my @l = (__("First sector of drive"), __("First sector of boot partition"));
 
-    $o->{bootloader}{onmbr} =
-      $o->ask_from_list_(_("Lilo Installation"),
-			 _("Where do you want to install the bootloader?"),
-			 \@l,
-			 $l[!$o->{bootloader}{onmbr}]
-			) eq $l[0] unless $::beginner && $o->{bootloader}{onmbr};
+	$b->{onmbr} =
+	  $o->ask_from_list_(_("Lilo Installation"),
+			     _("Where do you want to install the bootloader?"),
+			     \@l,
+			     $l[!lilo::suggest_onmbr($o->{hds})]
+			    ) eq $l[0] unless $::beginner && $b->{onmbr};
+	
 
-    lilo::suggest($o->{hds}, $o->{fstab}, $o->{bootloader});
+    } else {
+	$::expert and $o->ask_yesorno('', _("Do you want to use lilo?")) || return;
+    
+	my @l = (
+_("Boot device") => { val => \$b->{boot}, list => [ map{ $_->{device} } @{$o->{hds}}, @{$o->{fstab}} ], not_edit => !$::expert },
+_("Linear (needed for some SCSI drives)") => { val => \$b->{linear}, type => "bool", text => _("linear") },
+_("Delay before choosing default choice") => \$b->{timeout},
+_("Video mode") => { val => \$b->{vga}, list => [ keys %lilo::vga_modes ], not_edit => $::beginner },
+_("Password") => { val => \$b->{password}, hidden => 1 },
+_("Restrict command line options") => { val => \$b->{restricted}, type => "bool", text => _("restrict") },
+	);
+	@l = @l[0..3] if $::beginner;
 
-    unless ($::beginner) {
-	my @entries = grep { $_->{liloLabel} } @{$o->{fstab}};
+	$b->{vga} ||= 'Normal';
+	$o->ask_from_entries_ref('',
+				 _("Lilo main options"), 
+				 [ grep_index { even($::i) } @l ],
+				 [ grep_index {  odd($::i) } @l ],
+				 complete => sub {
+				     $b->{restricted} && !$b->{password} and $o->ask_warn('', _("Option ``Restrict command line options'' is of no use without a password")), return 1;
+				     0;
+				 }
+				) or return;
+	$b->{vga} = $lilo::vga_modes{$b->{vga}} || $b->{vga};
+    }
 
+    unless ($::beginner && !$more) {
 	$o->ask_from_entries_ref('',
 _("The boot manager Mandrake uses can boot other
 operating systems as well. You need to tell me
 what partitions you would like to be able to boot
 and what label you want to use for each of them."),
-				 [map {"$_->{device}" . type2name($_->{type})} @entries],
-				 [map {\$_->{liloLabel}} @entries],
+				 [ keys %{$b->{entries}} ],
+				 [ map { \$_->{label} } values %{$b->{entries}} ],
 				);
     }
     my $w = $o->wait_message('', _("Installing bootloader"));
@@ -562,9 +586,14 @@ and what label you want to use for each of them."),
 
 #------------------------------------------------------------------------------
 sub exitInstall {
-    my ($o) = @_;
+    my ($o, $alldone) = @_;
+
+    return $o->{step} = '' unless $alldone || $o->ask_yesorno('', 
+_("Some steps are not completed
+Do you really want to quit now?"), 0);
+
     $o->ask_warn('',
-		 _("Congratulations, installation is complete.
+_("Congratulations, installation is complete.
 Remove the boot media and press return to reboot.
 For information on fixes which are available for this release of Linux Mandrake,
 consult the Errata available from http://www.linux-mandrake.com/.
