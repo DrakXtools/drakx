@@ -1,3 +1,376 @@
+2004/12/31  Pixel  <pixel at mandrakesoft.com>
+
+	* install_steps_gtk.pm: simplify (thanks to perl_checker)
+	remove code using getAndSaveFile to get the X server
+	(we don't have live directory anymore, and anyway we only use one X
+	server)
+
+	* interactive/gtk.pm: better layout:
+	  - ensure buttons are at bottom using pack_end instead of packing a
+	growing empty vbox for ask_warn-like dialogs
+	  - drop old code
+	  - always allow box to grow (this may be wrong)
+
+2004/12/30  Pixel  <pixel at mandrakesoft.com>
+
+	* ugtk2.pm: more spacing around the separator and the buttons (as
+	requested by ergonomy team)
+
+	* install_steps.pm: finish backporting HEAD changes for finish-install
+	(any::write_passwd_user() doesn't exist anymore)
+
+2004/12/29  Pixel  <pixel at mandrakesoft.com>
+
+	* lvm.pm, devices.pm: move device mapper initialisation out of lvm.pm into
+	devices.pm (since it will be useful for other things)
+
+	* install_steps_interactive.pm: when computing group size, select
+	CAT_SYSTEM packages
+
+	* pkgs.pm: simplify and speed up computeGroupSize()
+	in computeGroupSize()
+	  - fix old ugly bug (CAT_FOO && CAT_BAR || CAT_FOO  was reduced to
+	CAT_FOO && CAT_BAR)
+	  - log the time spent
+	  - ignore already selected packages
+	  - group by same rpmsrate flags (nice speedup :)
+
+2004/12/28  Pixel  <pixel at mandrakesoft.com>
+
+	* install_gtk.pm: fix overlap
+	re-organize steps display as requested by ergonomic team
+
+	* install_steps_gtk.pm: fix displaying package tree (was empty since
+	moving from XXX to CAT_XXX)
+
+	* mygtk2.pm: 
+	  - add can_default
+	  - remove known_opts (alike the rest of the code)
+
+	* pkgs.pm, install_any.pm, install_steps_interactive.pm: 
+	  - create set_rpmsrate_category_flags(),
+	set_rpmsrate_default_category_flags(), default_packages(),
+	rpmsrate_always_flags() replacing setDefaultPackages()
+	  - create select_default_packages()
+	  - apply "always" rpmsrate flags ASAP and skip packages with flag
+	"FALSE" in computeGroupSize()
+	=> 30% speed-up
+
+2004/12/24  Pixel  <pixel at mandrakesoft.com>
+
+	* share/rpmsrate, install_any.pm, install_steps_interactive.pm:
+	differentiate compssUsers flags from non-user modifiable flags (eg:
+	hardware flags)
+
+	* network/drakfirewall.pm: "Samba server" is better named "Windows Files
+	Sharing (SMB)" (bugzilla #10585)
+
+2004/12/23  Pixel  <pixel at mandrakesoft.com>
+
+	* standalone/XFdrake: fix Xconfig::default::configure() use
+	"XFdrake --auto" is now fully auto using auto_install configuration
+	instead of "as much auto as can be"
+	  - don't ask X to restart in auto mode
+	  - set exit status to 1 when configuration failed (esp. auto mode)
+
+2004/12/23  Rafael Garcia-Suarez <rgarciasuarez at mandrakesoft.com>
+
+	* tools/checkusedmodules: Add a new check script in tools. It compares the
+	perl modules used by the .pm
+	files in perl-install against the ones listed in share/list, to detect
+	potential missing modules (and potential run-time problems during the
+	stage 2)
+
+2004/12/23  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* drakxtools.spec: bump require on perl in order to prevent beakage on
+	update due to
+	binary incompatibility (#12719 and the like)
+	fix typo in 10.2-0.7mdk's changelog
+	10.2-0.7mdk
+
+2004/12/22  Pixel  <pixel at mandrakesoft.com>
+
+	* pkgs.pm: simplify
+	fix previous commit
+	create read_rpmsrate_raw() out of read_rpmsrate(), this new function can
+	be easily used outside install
+
+	* install_steps_interactive.pm: no need to use max_size, no need to
+	compute it
+
+	* install2.pm, fsedit.pm: add option no_bad_drives (to workaround bugzilla
+	#12766)
+
+2004/12/22  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* harddrake/sound.pm: "snd-audigyls" ALSA driver was renamed "snd-ca0106"
+	in ALSA CVS;
+	let's have our tools be aware of that once our kernel got synced
+	handle new snd-pcxhr driver from alsa CVS
+
+	* share/rpmsrate: install proper tools for Digigram PCXHR sound card
+
+2004/12/21  Pixel  <pixel at mandrakesoft.com>
+
+	* install2.pm: /proc/sys/kernel/modprobe wants something non empty,
+	otherwise it doesn't change anything
+
+	* install_any.pm: don't pass prefix, use $::prefix
+	don't pass prefix to network::netconnect::main() (it doesn't use it)
+	don't pass prefix, use $::prefix
+
+	* fs.pm: 
+	  - fs::mount() wants a real device or a faked one, but doesn't accept
+	things like fd0 anymore (give it /dev/fd0)
+	  - a little more robust analyze_wild_device_name() during install
+	  - handle bad things in subpart_from_wild_device_name()
+
+	* install_steps_interactive.pm: don't pass prefix, use $::prefix
+	don't pass prefix to network::netconnect::main() (it doesn't use it)
+
+	* mdk-stage1/doc/UPDATEMODULES: much simpler code to handle post-install
+	update modules
+	  - it handles new modules
+	  - it calls depmod
+
+	* install_steps_gtk.pm, commands, standalone/drakbug_report, pkgs.pm,
+	crypto.pm, commands.pm: don't pass prefix, use $::prefix
+
+	* standalone/drakconnect, network/netconnect.pm, printer/printerdrake.pm:
+	don't pass prefix to network::netconnect::main() (it doesn't use it)
+
+	* any.pm: 
+	  - fs::mount() wants a real device or a faked one, but doesn't accept
+	things like fd0 anymore (give it /dev/fd0)
+	  - a little more robust analyze_wild_device_name() during install
+	  - handle bad things in subpart_from_wild_device_name()
+	don't pass prefix, use $::prefix
+
+	* install_steps.pm: 
+	  - fs::mount() wants a real device or a faked one, but doesn't accept
+	things like fd0 anymore (give it /dev/fd0)
+	  - a little more robust analyze_wild_device_name() during install
+	  - handle bad things in subpart_from_wild_device_name()
+	don't pass prefix, use $::prefix
+	don't pass prefix, use $::prefix
+	much simpler code to handle post-install update modules
+	  - it handles new modules
+	  - it calls depmod
+
+	* detect_devices.pm: fix floppies detection (through dmidecode)
+
+2004/12/20  Pixel  <pixel at mandrakesoft.com>
+
+	* install2.pm: don't die when /proc/sys/kernel/modprobe doesn't exist (for
+	BOOT kernels)
+
+	* mdk-stage1/tools.c, mdk-stage1/tools.h, mdk-stage1/automatic.c: minimal
+	bootsplash stage1 support
+	create unset_automatic()
+
+	* mdk-stage1/modules.c, mdk-stage1/cdrom.c, mdk-stage1/stage1.c,
+	mdk-stage1/network.c: create unset_automatic()
+
+	* mdk-stage1/Makefile, mdk-stage1/bootsplash.h, mdk-stage1/bootsplash.c,
+	mdk-stage1/frontend.h, mdk-stage1/stdio-frontend.c,
+	mdk-stage1/newt-frontend.c: minimal bootsplash stage1 support
+
+2004/12/20  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* network/modem.pm (get_user_home) do not horribly die if USER environment
+	variable list
+	a non existing user
+
+2004/12/19  Funda Wang <fundawang at linux.net.cn>
+
+	* lang.pm: jp console should not be localized
+	jp console should not be localized
+
+2004/12/18  rstandtke
+
+	* share/po/de.po: added some translations
+
+2004/12/17  Pixel  <pixel at mandrakesoft.com>
+
+	* install_gtk.pm: don't parse the theme rc file to set the root window
+	background color during install,
+	instead use the gc of a fake window named "background"
+	switch to mygtk2
+
+	* ugtk2.pm: add some more functions in mygtk2
+
+	* Xconfig/test.pm: remove unused code
+
+	* modules.pm: packdrake changed a little, ensuring that if we ask no
+	modules it doesn't cause havoc
+
+	* mygtk2.pm: don't parse the theme rc file to set the root window
+	background color during install,
+	instead use the gc of a fake window named "background"
+	oops, set_background *is* needed
+	remove unneeded ->set_background
+	add some more functions in mygtk2
+
+	* bootloader.pm: ia64 uses the lilo method (even if it has some important
+	differences)
+	on ia64, use method lilo
+
+2004/12/17  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* network/netconnect.pm: fix NETMASK autofilling
+
+2004/12/16  Gwenole Beauchesne  <gbeauchesne at mandrakesoft.com>
+
+	* c/smp.c: merge smp detection from fedora/ydl
+
+2004/12/16  Pixel  <pixel at mandrakesoft.com>
+
+	* install2.pm: help testing
+
+	* mygtk2.pm: 
+	  - add DrawingArea
+	  - add text_ref & format for buttons
+	remove debug code
+	we must allow more than one callback per ref & widget
+	add option allow_unknown_options for easy compatibility
+
+	* detect_devices.pm, pkgs.pm, install_any.pm: create function
+	detect_devices::BIGMEM() which calls c::dmiDetectMemory(), but only
+	if we are root (this helps testings install without dying)
+
+	* install_steps_gtk.pm: migrate to mygtk2
+
+	* ugtk2.pm: fix typo (mygtk2 wants active_ref, not val)
+	add option allow_unknown_options for easy compatibility
+
+	* Xconfig/resolution_and_depth.pm: much simpler code using mygtk2
+
+2004/12/15  Gwenole Beauchesne  <gbeauchesne at mandrakesoft.com>
+
+	* mdk-stage1/insmod-modutils/include/util.h,
+	mdk-stage1/insmod-modutils/util/logger.c: rename log to do_log in order
+	to avoid clashes with builtins
+
+	* mdk-stage1/dietlibc/ia64/start.S, mdk-stage1/dietlibc/ia64/fork.S,
+	mdk-stage1/dietlibc/ia64/pipe.S: ia64 fixes: fork, pipe, syscall weak
+	symnames
+
+	* mdk-stage1/insmod-modutils/include/elf_ppc64.h,
+	mdk-stage1/insmod-modutils/obj/obj_ppc64.c: merge ppc64 support from
+	modutils 2.4.26
+
+	* mdk-stage1/insmod-modutils/obj/obj_gpl_license.c: add missing file from
+	older merge from modutils 2.4.26
+
+	* mdk-stage1/dietlibc/ia64/syscalls.h: add ia64 setjmp/longjmp from glibc
+	ia64 fixes: fork, pipe, syscall weak symnames
+
+	* tools/ddcprobe/Makefile: ppc & ppc64 fixes
+	ppc64 support
+
+	* mdk-stage1/insmod-modutils/obj/obj_kallsyms.c: fix build to expose
+	assignments better
+
+	* mdk-stage1/insmod-modutils/obj/obj_ia64.c: add support for
+	R_IA64_PCREL60B reloc
+	build fix
+
+	* tools/ddcprobe/ddcxinfos.c: ppc & ppc64 fixes
+	sounds like the (empty) line is expected
+
+	* mdk-stage1/insmod-modutils/util/sys_oim.c,
+	mdk-stage1/insmod-modutils/insmod.c,
+	mdk-stage1/insmod-modutils/util/Makefile,
+	mdk-stage1/insmod-modutils/util/modstat.c: drop support for kernel 2.0
+
+	* tools/ddcprobe/vbe.h: ppc & ppc64 fixes
+	fix on big endian platforms (ppc, ppc64)
+
+	* mdk-stage1/dietlibc/ia64/__longjmp.S, mdk-stage1/dietlibc/ia64/setjmp.S:
+	add ia64 setjmp/longjmp from glibc
+
+	* mdk-stage1/rescue-gui.c, mdk-stage1/init.c: lib64 fixes on ppc64
+
+	* mdk-stage1/dietlibc/include/elf.h: ia64 elf definitions
+
+	* tools/ddcprobe/of.c: ppc & ppc64 fixes
+	On PowerPC platforms, byteswap product_code so that ids match MonitorsDB
+	contents
+
+2004/12/15  Pixel  <pixel at mandrakesoft.com>
+
+	* mdk-stage1/network.c: fix http directory not starting with a "/" (it was
+	handled for stage1, but not for URLPREFIX given to stage2)
+
+2004/12/15  Stew Benedict  <sbenedict at mandrakesoft.com>
+
+	* standalone/drakTermServ: perl_checker, suggestions from Pixel, rework
+	buttons in main GUI
+
+2004/12/15  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* share/po/fr.po: update (stef, neoclust)
+
+	* drakxtools.spec: 10.2-0.6mdk
+
+2004/12/15  Warly  <warly at mandrakesoft.com>
+
+	* share/rpmsrate.corpo-server, share/rpmsrate.corpo-desktop: remove
+	mdkonline-backend
+
+2004/12/14  Gwenole Beauchesne  <gbeauchesne at mandrakesoft.com>
+
+	* mdk-stage1/dietlibc/include/termios.h, mdk-stage1/dietlibc/diet.c,
+	mdk-stage1/dietlibc/syscalls.h, mdk-stage1/dietlibc/include/sys/stat.h,
+	mdk-stage1/dietlibc/include/sys/ucontext.h,
+	mdk-stage1/dietlibc/include/sys/shm.h,
+	mdk-stage1/dietlibc/include/fcntl.h,
+	mdk-stage1/dietlibc/include/sys/mman.h,
+	mdk-stage1/dietlibc/include/asm/sigcontext.h,
+	mdk-stage1/dietlibc/include/elf.h,
+	mdk-stage1/dietlibc/include/sys/ioctl.h,
+	mdk-stage1/dietlibc/include/sys/types.h, mdk-stage1/dietlibc/Makefile,
+	mdk-stage1/dietlibc/include/endian.h,
+	mdk-stage1/dietlibc/include/sys/ptrace.h,
+	mdk-stage1/dietlibc/include/signal.h: ppc64 port
+
+	* mdk-stage1/dietlibc/include/setjmp.h: fix setjmp.h (JB_SIZE) on ppc64
+	ppc64 port
+
+2004/12/14  Pixel  <pixel at mandrakesoft.com>
+
+	* drakxtools.spec: fix release (keep 101mdk for 10.1 packages)
+
+	* network/netconnect.pm: for drakx-finish-install, we want drakconnect to
+	restart network
+	for drakx-finish-install, we want drakconnect to restart network
+
+	* mygtk2.pm: export gtkval_register() and gtkval_modify()
+
+	* mdk-stage1/pcmcia_/merge_from_pcitable: cleanup
+
+2004/12/13  Keld Jørn Simonsen  <keld at dkuug.dk>
+
+	* share/po/da.po: updates
+	soft/drakpxelinux/po/da.po soft/rpmdrake/po/da.po
+	soft/urpmi/po/da.po gi/perl-install/share/po/da.po
+
+2004/12/13  Pixel  <pixel at mandrakesoft.com>
+
+	* detect_devices.pm: fix
+
+	* drakxtools.spec: introduce in CVS 27.2.101mdk which was using a patch on
+	drakbug
+
+	* standalone/drakbug: commit vdanen patch which makes drakbug send
+	everything to bugzilla (instead of anthill)
+
+2004/12/13  Rafael Garcia-Suarez <rgarciasuarez at mandrakesoft.com>
+
+	* share/list: Add a gazillion modules required by the new packdrake for
+	now
+
 2004/12/13  Pixel  <pixel at mandrakesoft.com>
 
 	* detect_devices.pm: fix
@@ -42599,7 +42972,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.993 2004/12/13 14:24:31 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.994 2004/12/13 17:47:19 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
