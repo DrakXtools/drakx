@@ -1,5 +1,53 @@
 2001/04/13  dam's  <damien@mandrakesoft.com>
 
+	* Xconfigurator.pm: updated
+	updated message
+
+	* standalone/draknet: message corrected
+	updated
+
+	* netconnect.pm: net_cnx_up/down xritten in neuneu
+
+	* bootlook.pm: embedded = 0 -> local
+
+2001/04/13  fabman
+
+	* share/po/es.po: synchro with EN
+
+2001/04/13  François Pons  <fpons@mandrakesoft.com>
+
+	* install_steps_gtk.pm: avoid illegal modulus zero if no advertizing is
+	available.
+	fixed very old typo not encountered before;
+
+2001/04/13  Pixel  <pixel@mandrakesoft.com>
+
+	* common.pm (backtrace): created
+
+	* install_steps_interactive.pm (addUser): remove the setting of
+	$o->{autologin}, now done in any::autologin
+
+	* install2.pm (miscellaneous): add setting KEYBOARD=yes in
+	/etc/sysconfig/usb as asked by Lord Chmou
+
+	* install_steps_gtk.pm (installPackages): do not show button "Details"
+	when no advertising
+
+	* interactive.pm (ask_from_entries_refH_powered_normalize): log the empty
+	list instead of dying (for 8.0 only, should be switched back to die)
+	(ask_from_listf): display the backtrace when empty list
+
+	* any.pm (ask_users): add the empty icon
+	(autologin): fix
+
+2001/04/13  warly
+
+	* share/compssUsers: add ssh server in Network Computer Server
+	add DATABASES to Database
+	add icons for server
+
+2001/04/13  dam's  <damien@mandrakesoft.com>
+
 	* network.pm: updated wireless configuration
 
 	* netconnect.pm: corrected loop in isdn + other things
