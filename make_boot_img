@@ -146,7 +146,8 @@ prompt 1
 timeout $timeout
 display boot.msg
 F1 help.msg
-F2 boot.msg
+F2 advanced.msg
+F3 boot.msg
 label linux
   kernel vmlinuz
   append ramdisk_size=32000 initrd=$type.rdz $automatic root=/dev/ram3 vga=788
