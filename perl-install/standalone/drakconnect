@@ -272,22 +272,7 @@ sub build_tree {
     }
     elsif ($interface eq 'modem') {
 	$intf->{pages} = { 'TCP/IP' => 1, 'Account' => 1, 'Modem' => 1, 'Options' => 1 };
-	# FIXME: code duplication, should be in network::modem::read_config
-	$intf->{device} = $netc->{autodetect}{modem};
-	my %l = getVarsFromSh("/usr/share/config/kppprc");
-
-	$intf->{kppprc} = "/root/.kde/share/config/kppprc";
-	my %m = getVarsFromSh($intf->{kppprc});
-	$l{$_} = $m{$_} foreach keys %m;
-
-        ($intf->{dns1}, $intf->{dns2}) = split(',', $l{DNS});
-	$intf->{$_->[0]} = $l{$_->[1]} foreach  [ 'connection' , 'Name' ], [ 'domain', 'Domain' ], [ 'login', 'Username' ],
-                                                [ 'Timeout', 'Timeout' ], [ 'UseLockFile', 'UseLockFile' ], [ 'Enter', 'Enter' ],
-                                                [ 'BusyWait', 'BusyWait' ], [ 'FlowControl', 'FlowControl' ], [ 'Speed', 'Speed' ],
-                                                [ 'DialTone', 'DialTone' ], [ 'Volume', 'Volume' ];
-	/.*ATDT(\d*)/ and $intf->{phone} = $1 foreach cat_("/etc/sysconfig/network-scripts/chat-ppp0");
-	/NAME=(['"]?)(.*)\1/ and $intf->{login} ||= $2 foreach cat_("/etc/sysconfig/network-scripts/ifcfg-ppp0");
-	$_->{login} eq $intf->{login} and $intf->{passwd} = $_->{passwd} foreach @{network::tools::read_secret_backend()};
+	put_in_hash($intf, network::modem::ppp_read_conf({}, $netc));
 	$intf->{save} = sub { network::modem::ppp_configure($in, $intf) };
     }
     elsif ($interface eq 'isdn') {
