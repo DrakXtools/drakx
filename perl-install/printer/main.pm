@@ -2186,6 +2186,17 @@ sub configure_hpoj {
 	# Check if the device is really an HP multi-function device
 	#my $libusb = 0;
 	foreach my $libusb (0, 1) {
+	    # Preliminary workaround to make the user-mode USB devices
+	    # (LIDIL devices) installable as verification of the HPOJ
+	    # settings of these devices does not work yet. The workaround
+	    # will probably removed after Mandrake 9.2.
+	    # Note: This workaround leaves out the checking for a photo
+	    # memory card reader, but to my knowledge there are no LIDIL
+	    # devices with card reader yet.
+	    if ($libusb) {
+		$device_ok = 1;
+		next;
+	    }
 	    # Do access via libusb/user mode only if we have a USB device
 	    next if ($libusb && ($bus ne "usb"));
 	    my $printermoduleunloaded = 0;
