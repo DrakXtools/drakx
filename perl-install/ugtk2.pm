@@ -748,7 +748,7 @@ sub new {
     $o->{pop_it} ||= $pop_it || $::WizardTable && do {
 	my @l = $::WizardTable->get_children;
 	pop @l if !$::isInstall; #- don't take into account the DrawingArea
-	@l && $l[-1]->visible;
+	any { $_->visible } @l;
     };
 
     if ($::isWizard && !$o->{pop_it}) {
