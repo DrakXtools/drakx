@@ -506,7 +506,7 @@ killall pppd
                     post => sub {
                         network::modem::ppp_configure($in, $netc, $modem);
                         $netc->{$_} = 'ppp0' foreach 'NET_DEVICE', 'NET_INTERFACE';
-                        &$next_cnx_step->();
+                        $next_cnx_step->();
                     },
                    },
          
