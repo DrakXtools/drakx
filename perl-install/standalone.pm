@@ -3,6 +3,13 @@ package standalone; # $Id$
 use c;
 use Config;
 
+#- for sanity (if a use standalone is made during install, MANY problems will happen)
+if ($::isInstall) {
+    require 'log.pm';
+    log::l('ERROR: use standalone made during install :-(');
+    require common;
+    log::l('backtrace: ' . common::backtrace());
+}
 $::isStandalone = 1;
 
 $ENV{SHARE_PATH} ||= "/usr/share";
