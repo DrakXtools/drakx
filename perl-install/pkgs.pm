@@ -1705,7 +1705,6 @@ ypserv
     my @new_82 = qw(
 LPRng
 bind
-fam
 httpd-naat
 ibod
 inn
