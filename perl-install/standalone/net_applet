@@ -73,7 +73,7 @@ Gtk2->main;
 ugtk2::exit(0);
 
 sub is_running {
-    my @pid = grep { $_ ne $$ } `ps -u $ENV{USER}` =~ /\Q$_[0]/;
+    my @pid = (grep { $_ !~ /^\s*$$\b/ } `ps -u $ENV{USER}`) =~ /\Q$_[0]/;
     @pid
 }
 sub shouldStart() {
