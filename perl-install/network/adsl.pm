@@ -101,6 +101,8 @@ sub sagem_set_parameters {
             s/VCI=.*\n/VCI=$l{vci}\n/;
             s/VPI=.*\n/VPI=$l{vpi}\n/;
             s/Encapsulation=.*\n/Encapsulation=$l{Encapsulation}\n/;
+            s/STATIC_IP=.*\n//;
+            s!</eaglectrl>!STATIC_IP=$netc->{static_ip}\n</eaglectrl>"! if $netc->{static_ip};
         } "$::prefix$cfg_file";
     }
 }
@@ -355,7 +357,10 @@ METRIC=$metric
     unlink("$::prefix/etc/sysconfig/network-scripts/ifcfg-sagem");
 
     #- set vpi, vci and encapsulation parameters for sagem
-    sagem_set_parameters($netc) if $adsl_device eq 'sagem';
+    if ($adsl_device eq 'sagem') {
+	$netc->{static_ip} = $intf->{sagem}{IPADDR} if $adsl_type eq 'manual';
+	sagem_set_parameters($netc);
+    }
 
     #- set aliases
     if (exists $modems{$adsl_device}{aliases}) {
