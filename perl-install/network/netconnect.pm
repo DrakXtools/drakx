@@ -194,8 +194,8 @@ sub real_main {
           } else {
               undef $netc->{NET_DEVICE};
           }
-          if ($netcnx->{type} eq 'adsl' && member($adsl_type, qw(manual dhcp)) && member($ntf_name, qw(sagem))) {
-            #- we need to write sagem specific parameters and load corresponding modules/programs
+          if ($netcnx->{type} eq 'adsl' && member($adsl_type, qw(manual dhcp)) && member($ntf_name, qw(sagem speedtouch))) {
+            #- we may need to write sagem specific parameters and load corresponding modules/programs (sagem/speedtouch)
             network::adsl::adsl_conf_backend($in, $modules_conf, $netcnx, $netc, $intf, $ntf_name, $adsl_type, $netcnx);
           }
           network::network::configureNetwork2($in, $modules_conf, $::prefix, $netc, $intf);
@@ -867,6 +867,7 @@ If you do not know, choose 'use PPPoE'"),
                               },
                              ],
                     post => sub {
+                        my $real_interface = $ntf_name;
                         $netcnx->{type} = 'adsl';
                         # blacklist bogus driver, enable ifplugd support else:
                         $find_lan_module->();
@@ -878,10 +879,18 @@ If you do not know, choose 'use PPPoE'"),
                             $ethntf->{DEVICE} = "`/usr/sbin/fctStartAdsl -i`";
                             $ethntf->{MII_NOT_SUPPORTED} = "yes";
                         }
+                        if ($ntf_name eq "speedtouch"  && member($adsl_type, qw(manual dhcp))) {
+                            #- use ATMARP with the atm0 interface
+                            $real_interface = "atm0";
+                            $ethntf = $intf->{$real_interface} ||= {};
+                            $ethntf->{DEVICE} = $real_interface;
+                            $ethntf->{ATM_ADDR} = join('.', hex($netc->{vpi}), hex($netc->{vci}));
+                            $ethntf->{MII_NOT_SUPPORTED} = "yes";
+                        }
                         #- delete gateway settings if gateway device is invalid or if reconfiguring the gateway interface
-                        exists $intf->{$ntf_name} and $delete_gateway_settings->($ntf_name);
+                        exists $intf->{$real_interface} and $delete_gateway_settings->($real_interface);
                         # process static/dhcp ethernet devices:
-                        if (exists($intf->{$ntf_name}) && member($adsl_type, qw(manual dhcp))) {
+                        if (exists($intf->{$real_interface}) && member($adsl_type, qw(manual dhcp))) {
                             $ethntf->{TYPE} = "ADSL";
                             $auto_ip = $adsl_type eq 'dhcp';
                             return 'lan_intf';
