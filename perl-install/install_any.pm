@@ -1268,15 +1268,15 @@ sub getAndSaveAutoInstallFloppies {
 sub g_default_packages {
     my ($o) = @_;
 
-    my ($_h, $fh) = media_browser($o, 'save', 'package_list.pl') or return;
+    my ($_h, $file) = media_browser($o, 'save', 'package_list.pl') or return;
 
     require Data::Dumper;
     my $str = Data::Dumper->Dump([ { default_packages => pkgs::selected_leaves($o->{packages}) } ], ['$o']);
     $str =~ s/ {8}/\t/g;
-    print $fh
+    output($file,
 	   "# You should always check the syntax with 'perl -cw auto_inst.cfg.pl'\n" .
 	   "# before testing.  To use it, boot with ``linux defcfg=floppy''\n" .
-	   $str . "\0";
+	   $str . "\0");
 }
 
 sub loadO {
