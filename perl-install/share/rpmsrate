@@ -423,45 +423,28 @@ CONFIG
 
 BOOKS
   4 mandrake_doc-de mandrake_doc-en mandrake_doc-es mandrake_doc-fr mandrake_doc-it
- 
-SYSTEM
+
+X
+  5 XFree86 rxvt XFree86-75dpi-fonts 
   5 !GNOME !KDE icewm-light
 
-  5 XFree86 MAKEDEV 
-    at anacron eject kudzu ldetect
-    linux_logo locales man-pages iputils 
-    urpmi rxvt XFree86-75dpi-fonts cpio
   4 gurpmi rpmdrake DrakConf fonts-ttf-decoratives harddrake fonts-ttf-west_european
-    menudrake sndconfig ftp gpm
-    hexedit strace drakfloppy drakfont mandrake_desk
+    menudrake drakfloppy drakfont mandrake_desk
     Aurora-Monitor-NewStyle-Categorizing-WsLib
   4 LOCALES"ja" || LOCALES"ko" || LOCALES"zh" rxvt-CJK
-  3 XFree86-100dpi-fonts bc
-  2 kernel-utils sane acpid tksysv imlib-cfgeditor adns audiofile awesfx fbset sudo
+
+  3 XFree86-100dpi-fonts
+  2 tksysv imlib-cfgeditor
     Aurora-Monitor-NewStyle-WsLib Aurora-Monitor-Traditional-Gtk+
     Aurora-Monitor-Traditional-WsLib
-  1 DrakeLogo drakprofile Mesa xtoolwait fdutils genromfs mailcap usbview pinfo X11R6-contrib 
+  1 DrakeLogo drakprofile Mesa xtoolwait usbview X11R6-contrib 
+
   GNOME
     3 gnome-print gnorpm
-
-  BOOKS 
-    5 man-pages-cs man-pages-de man-pages-es man-pages-fr man-pages-hu man-pages-id man-pages-ja man-pages-ko man-pages-pl man-pages-ru man-pages-zh
-    4 grub-doc lilo-doc
-      howto-html-de howto-html-el howto-html-en howto-html-es howto-html-fr howto-html-hr howto-html-hu howto-html-id howto-html-it howto-html-ja howto-html-ko howto-html-pl howto-html-ro howto-html-sl howto-html-sv howto-html-zh
-
 
   5 xcin xa+cv xvnkb FreeWnn ami
   5 GNOME ami-gnome
   2 app-defaults-be app-defaults-cs app-defaults-ga app-defaults-ru app-defaults-th app-defaults-uk
-
-  4 NIS yp-tools
-
-  3 PCMCIA irda-utils
-  4 HW"Voodoo 5" Glide_V5
-    HW"Voodoo (3|Banshee)" Glide_V3-DRI
-    HW"Voodoo" XFree86-glide-module
-
-  4 LOCALES"ar" || LOCALES"fa" || LOCALES"he" || LOCALES"yi" acon
 
   4 LOCALES"lt" || LOCALES"lv" || LOCALES"mi" fonts-type1-baltic
     LOCALES"ru" || LOCALES"uk" XFree86-cyrillic-fonts
@@ -472,6 +455,31 @@ SYSTEM
     LOCALES"th" fonts-ttf-thai
     LOCALES"zh_CN" || LOCALES"zh" fonts-ttf-gb2312
     LOCALES"zh_TW" || LOCALES"zh" taipeifonts fonts-ttf-big5
+
+  4 HW"Voodoo 5" Glide_V5
+    HW"Voodoo (3|Banshee)" Glide_V3-DRI
+    HW"Voodoo" XFree86-glide-module
+
+SYSTEM
+  5 at MAKEDEV anacron eject kudzu ldetect
+    linux_logo locales man-pages iputils 
+    urpmi cpio
+
+  4 sndconfig ftp gpm hexedit strace
+
+  3 bc
+  2 kernel-utils sane acpid adns audiofile awesfx fbset sudo
+  1 fdutils genromfs mailcap pinfo
+
+  BOOKS 
+    5 man-pages-cs man-pages-de man-pages-es man-pages-fr man-pages-hu man-pages-id man-pages-ja man-pages-ko man-pages-pl man-pages-ru man-pages-zh
+    4 grub-doc lilo-doc
+      howto-html-de howto-html-el howto-html-en howto-html-es howto-html-fr howto-html-hr howto-html-hu howto-html-id howto-html-it howto-html-ja howto-html-ko howto-html-pl howto-html-ro howto-html-sl howto-html-sv howto-html-zh
+
+  4 NIS yp-tools
+  3 PCMCIA irda-utils
+
+  4 LOCALES"ar" || LOCALES"fa" || LOCALES"he" || LOCALES"yi" acon
 
 EMULATORS
   3 wine
