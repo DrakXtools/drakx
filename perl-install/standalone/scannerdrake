@@ -755,7 +755,11 @@ sub sharewindow {
 			# running
 			if (!files_exist('/usr/sbin/xinetd',
 					 '/usr/sbin/saned')) {
-			    $in->do_pkgs->install('xinetd', 'saned');
+			    if (!$in->do_pkgs->install('xinetd', 'saned')) {
+				$in->ask_warn(N("Scannerdrake"),
+					      N("Could not install the packages needed to share your scanner(s).") . " " .
+					      N("Your scanner(s) will not be available on the network."));
+			    }
 			}
 			# Start saned and make sure that it gets started on
 			# every boot
