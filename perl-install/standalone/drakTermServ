@@ -400,9 +400,9 @@ N("			While you can use a pool of IP addresses, rather than setup a specific ent
 			Note: The \"#hdw_config\" entry is also only used by drakTermServ.  Clients can either 
 			be 'true' or 'false'.  'true' enables root login at the client machine and allows local 
 			hardware configuration of sound, mouse, and X, using the 'drak' tools. This is enabled 
-			by creating seperate config files associated with the client's IP address and creating 
+			by creating separate config files associated with the client's IP address and creating 
 			read/write mount points to allow the client to alter the file. Once you are satisfied 
-			with the configuration, you can remove root login priviledges from the client.
+			with the configuration, you can remove root login privileges from the client.
 			
 			Note: You must stop/start the server after adding or changing clients.") . "\n\n" .
 N("        - Maintain /etc/exports:
@@ -422,12 +422,12 @@ N("        - Maintain /etc/shadow\$\$CLIENT\$\$:
         		/etc/shadow needs to be duplicated in /etc/shadow\$\$CLIENTS\$\$. drakTermServ helps
         		in this respect by adding or removing system users from this file.") . "\n\n" .
 N("        - Per client /etc/X11/XF86Config-4\$\$IP-ADDRESS\$\$:
-        		Through clusternfs, each diskless client can have it's own unique configuration files
+        		Through clusternfs, each diskless client can have its own unique configuration files
         		on the root filesystem of the server. By allowing local client hardware configuration, 
         		drakTermServ will help create these files.") .
 "\n\n" .
 N("        - Per client system configuration files:
-        		Through clusternfs, each diskless client can have it's own unique configuration files
+        		Through clusternfs, each diskless client can have its own unique configuration files
         		on the root filesystem of the server. By allowing local client hardware configuration, 
 				clients can customize files such as /etc/modules.conf, /etc/sysconfig/mouse, 
         		/etc/sysconfig/keyboard on a per-client basis.
@@ -443,7 +443,7 @@ N("        - /etc/xinetd.d/tftp:
         		A typical tftp configuration file looks like:
         		
         		service tftp
-        		(
+			{
                         disable         = no
                         socket_type  = dgram
                         protocol        = udp
@@ -455,7 +455,7 @@ N("        - /etc/xinetd.d/tftp:
         		
         		The changes here from the default installation are changing the disable flag to
         		'no' and changing the directory path to /var/lib/tftpboot, where mkinitrd-net
-        		puts it's images.") . "\n\n" .
+        		puts its images.") . "\n\n" .
 N("        - Create etherboot floppies/CDs:
         		The diskless client machines need either ROM images on the NIC, or a boot floppy
         		or CD to initate the boot sequence.  drakTermServ will help generate these images,
