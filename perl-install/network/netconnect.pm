@@ -1,5 +1,4 @@
-
-package netconnect;
+package network::netconnect;
 
 use diagnostics;
 use strict;
