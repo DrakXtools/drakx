@@ -885,16 +885,87 @@ sub generate_queuename {
     $queue =~ s/series//gi;
     $queue =~ s/[\s\(\)\-,]//g;
     my $make = $printer->{currentqueue}{make};
+    my $model = $printer->{currentqueue}{model};
     $queue =~ s/$make$make/$make/gi;
+    # Do not use a queue name longer than 12 characters, as otherwise
+    # Windows clients will not be able to access the printer
+    my $ml = 12;
+    if (length($queue) > $ml) {
+	my %parts;
+	$parts{'make'} = $make;
+	$parts{'model'} = $model;
+	# Go through the two components, begin with model name, then
+	# make and then driver
+	for my $part (qw/model make/) {
+	    $parts{$part} =~ s/[^a-zA-Z0-9_]/ /g; 
+
+	    # Split the component into words, cutting always at the
+	    # right edge of the word. Cut also at a capital in the
+	    # middle of the word (ex: "S" in "PostScript").
+	    my @words =
+		split(/(?<=[a-zA-Z])(?![a-zA-Z])|(?<=[a-z])(?=[A-Z])/,
+		      $parts{$part});
+	    # Go through all words
+	    for (@words) {
+		# Do not abbreviate words of less than 3 letters
+		next if ($_ !~ /[a-zA-Z]{3,}$/);
+	        while (1) {
+		    # Remove the last letter
+		    chop;
+		    # Build the shortened component ...
+		    $parts{$part} = join('', @words);
+		    # ... and the queue name
+		    $queue = "$parts{'make'} $parts{'model'}";
+		    $queue =~ s/\s+//g;
+		    # Stop if the queue name has 12 characters or
+		    # less, if there is only one letter left, or if
+		    # the manufacturer name is reduced to three
+		    # characters.
+		    last if ((length($queue) <= $ml) ||
+			     ($_ !~ /[a-zA-Z]{2,}$/) ||
+			     (length($parts{'make'}) <= 3));
+		}
+		$parts{$part} = join('', @words);
+		$queue = "$parts{'make'} $parts{'model'}";
+		$queue =~ s/\s+//g;
+		last if (length($queue) <= $ml);
+	    }
+	    last if (length($queue) <= $ml);
+	}
+	while ((length($queue) > $ml) &&
+	       (length($parts{'model'}) > 3)) {
+	    # Queue name too long? Remove last words from model name.
+	    $parts{'model'} =~
+		s/(?<=[a-zA-Z0-9])[^a-zA-Z0-9]+[a-zA-Z0-9]*$//;
+	    $queue = "$parts{'make'} $parts{'model'}";
+	    $queue =~ s/\s+//g;
+	}
+	if (length($queue) > $ml) {
+	    # If nothing else helps ...
+	    $queue = substr($queue, 0, $ml);
+	}
+    }
+
     # Append a number if the queue name already exists
     if ($printer->{configured}{$queue}) {
-	$queue =~ s/(\d)$/$1_/;
+	my $origname = $queue;
 	my $i = 1;
-	while ($printer->{configured}{"$queue$i"}) {
-	    $i++;
+	while (1) {
+	    my $ol = length($origname);
+	    my $nl = length($i);
+	    my $us = ($origname =~ m/\d$/ ? 1 : 0);
+	    if ($ol + $nl + $us <= $ml) {
+		$queue = $origname . ($us ? '_' : '') . $i;
+	    } else {
+		$queue = substr($queue, 0, $ml - $nl);
+		$queue =~ s/\d$/_/;
+		$queue .= $i;
+	    }
+	    last if (!$printer->{configured}{$queue});
+	    $i ++;
 	}
-	$queue .= $i;
     }
+
     $printer->{currentqueue}{queue} = $queue;
     $printer->{OLD_QUEUE} = $printer->{QUEUE} = $queue;
     return $queue;
@@ -2411,9 +2482,16 @@ sub choose_printer_name {
 	       local $::isWizard = 0;
 	       if ($printer->{configured}{$printer->{currentqueue}{queue}}
 		   && $printer->{currentqueue}{queue} ne $default && 
-		   !$in->ask_yesorno(N("Warning"), N("The printer \"%s\" already exists,\ndo you really want to overwrite its configuration?",
-					    $printer->{currentqueue}{queue}),
-				      0)) {
+		   !$in->ask_yesorno(N("Warning"), N("The printer \"%s\" already exists, do you really want to overwrite its configuration?",
+						     $printer->{currentqueue}{queue}),
+				     0)) {
+		   return 1, 0; # Let the user correct the name
+	       }
+	       my $ml = 12;
+	       if ((length($printer->{currentqueue}{queue}) > $ml) && 
+		   !$in->ask_yesorno(N("Warning"), N("The printer name \"%s\" has more than 12 characters which can make the printer unaccessible from Windows clients. Do you really want to use this name?",
+						     $printer->{currentqueue}{queue}),
+				     0)) {
 		   return 1, 0; # Let the user correct the name
 	       }
 	       return 0;
