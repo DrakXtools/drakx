@@ -448,7 +448,7 @@ sub psUsingHdlist {
 
     #- avoid using more than one medium if Cd is not ejectable.
     #- but keep all medium here so that urpmi has the whole set.
-    $m->{ignored} ||= $method eq 'cdrom' && $medium > 1 && !common::usingRamdisk();
+    $m->{ignored} ||= $method =~ /(^cdrom|-iso)$/ && $medium > 1 && !common::usingRamdisk();
 
     #- parse synthesis (if available) of directly hdlist (with packing).
     if ($m->{ignored}) {
@@ -922,7 +922,7 @@ sub installTransactionClosure {
 
     #- it is sure at least one package will be installed according to medium chosen.
     install_any::useMedium($medium->{medium});
-    if ($medium->{method} eq 'cdrom') {
+    if ($medium->{method} =~ /(^cdrom|-iso)$/) {
 	my $pkg = $packages->{depslist}[$l[0]];
 
 	#- force changeCD callback to be called from main process.

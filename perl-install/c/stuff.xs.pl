@@ -33,6 +33,7 @@ print '
 #include <linux/cdrom.h>
 #include <linux/loop.h>
 #include <linux/blkpg.h>
+#include <linux/iso_fs.h>
 #include <net/if.h>
 #include <net/route.h>
 #include <netinet/in.h>
@@ -144,6 +145,12 @@ SV * iconv_(char* s, char* from_charset, char* to_charset) {
       iconv_close(cd);
   }
   return newSVpv(retval, 0);
+}
+
+int length_of_space_padded(char *str, int len) {
+  while (len >= 0 && str[len-1] == \' \')
+    --len;
+  return len;
 }
 
 MODULE = c::stuff		PACKAGE = c::stuff
@@ -696,6 +703,27 @@ standard_charset()
   RETVAL = nl_langinfo(CODESET);
   OUTPUT:
   RETVAL
+
+void
+get_loopback_name(int fd)
+  INIT:
+  struct loop_info loopinfo;
+  PPCODE:
+  if (!ioctl(fd, LOOP_GET_STATUS, &loopinfo))
+    XPUSHs(sv_2mortal(newSVpv(loopinfo.lo_name, 0)));
+
+void
+get_iso_volume_ids(int fd)
+  INIT:
+  struct iso_primary_descriptor voldesc;
+  PPCODE:
+  lseek(fd, 16 * ISOFS_BLOCK_SIZE, SEEK_SET);
+  if (read(fd, &voldesc, sizeof(struct iso_primary_descriptor)) == sizeof(struct iso_primary_descriptor)) {
+    if (voldesc.type[0] == ISO_VD_PRIMARY && !strncmp(voldesc.id, ISO_STANDARD_ID, sizeof(voldesc.id))) {
+      XPUSHs(sv_2mortal(newSVpv(voldesc.volume_id, length_of_space_padded(voldesc.volume_id, sizeof(voldesc.volume_id)))));
+      XPUSHs(sv_2mortal(newSVpv(voldesc.application_id, length_of_space_padded(voldesc.application_id, sizeof(voldesc.application_id)))));
+    }
+  }
 
 ';
 

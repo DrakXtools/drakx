@@ -38,10 +38,11 @@ $asked_medium = $boot_medium;
 #-######################################################################################
 my $postinstall_rpms = '';
 my $cdrom;
+my %iso_images;
 sub useMedium($) {
     #- before ejecting the first CD, there are some files to copy!
     #- does nothing if the function has already been called.
-    $_[0] > 1 and $::o->{method} eq 'cdrom' and setup_postinstall_rpms($::prefix, $::o->{packages});
+    $_[0] > 1 and $::o->{method} =~ /(^cdrom|-iso)$/ and setup_postinstall_rpms($::prefix, $::o->{packages});
 
     $asked_medium eq $_[0] or log::l("selecting new medium '$_[0]'");
     $asked_medium = $_[0];
@@ -68,6 +69,58 @@ sub askChangeMedium($$) {
     log::l($allow ? "accepting medium $medium" : "refusing medium $medium");
     $allow;
 }
+
+sub look_for_ISOs() {
+    $iso_images{media} = [];
+
+    ($iso_images{loopdev}, $iso_images{mountpoint}) = cat_("/proc/mounts") =~ m|(/dev/loop\d+)\s+(/tmp/image) iso9660| or return;
+
+    my $get_iso_ids = sub {
+	my ($F) = @_;
+	my ($vol_id, $app_id) = c::get_iso_volume_ids(fileno $F);
+	my ($cd_set) = $vol_id =~ /^(.*)-[0-9]+$/;
+	$cd_set && { cd_set => $cd_set, app_id => $app_id };
+    };
+
+    sysopen(my $F, $iso_images{loopdev}, 0) or return;
+    put_in_hash(\%iso_images, $get_iso_ids->($F));
+
+    #- may not work if it the orginal iso image path was longer than 64 chars
+    my ($loopfile) = c::get_loopback_name(fileno($F)) or return;
+    $loopfile =~ s!^/sysroot!!;
+    my $iso_dir = dirname($loopfile);
+
+    foreach my $iso_file (glob("$iso_dir/*.iso")) {
+	my $iso_dev = devices::set_loop($iso_file) or return;
+	if (sysopen($F, $iso_dev, 0)) {
+	    my $iso_ids = $get_iso_ids->($F);
+	    push @{$iso_images{media}}, { file => $iso_file, %$iso_ids } if $iso_ids;
+	    close($F); #- needed to delete loop device
+	}
+	devices::del_loop($iso_dev);
+    }
+    1;
+}
+
+sub changeIso($) {
+    my ($iso_label) = @_;  
+
+    %iso_images or look_for_ISOs() or return;
+
+    my $iso_info = find { $_->{app_id} eq $iso_label && $_->{cd_set} eq $iso_images{cd_set} } @{$iso_images{media}} or return;
+
+    eval { fs::umount($iso_images{mountpoint}) };
+    $@ and warnAboutFilesStillOpen();
+    devices::del_loop($iso_images{loopdev});
+
+    $iso_images{loopdev} = devices::set_loop($iso_info->{file});
+    eval { 
+	fs::mount($iso_images{loopdev}, $iso_images{mountpoint}, "iso9660", 'readonly');
+	log::l("using ISO image '$iso_label'");
+	1;
+    }
+}
+
 sub errorOpeningFile($) {
     my ($file) = @_;
     $file eq 'XXX' and return; #- special case to force closing file after rpmlib transaction.
@@ -471,13 +524,17 @@ sub ejectCdrom(;$) {
 	#- umount BEFORE opening the cdrom device otherwise the umount will
 	#- D state if the cdrom is already removed
 	eval { fs::umount("/tmp/image") };
-	if ($@) { log::l("files still open: ", readlink($_)) foreach map { glob_("$_/fd/*") } glob_("/proc/*") }
+	$@ and warnAboutFilesStillOpen();
 	eval { 
 	    my $dev = detect_devices::tryOpen($cdrom);	    
 	    ioctl($dev, c::CDROMEJECT(), 1) if ioctl($dev, c::CDROM_DRIVE_STATUS(), 0) == c::CDS_DISC_OK();
 	};
     }
 }
+
+sub warnAboutFilesStillOpen() {
+    log::l("files still open: ", readlink($_)) foreach map { glob_("$_/fd/*") } glob_("/proc/*");
+  }
 
 sub setupFB {
     my ($o, $vga) = @_;
@@ -709,7 +766,7 @@ sub getAndSaveInstallFloppies {
     } else {
 	my $image = cat_("/proc/cmdline") =~ /pcmcia/ ? "pcmcia" :
 	  arch() =~ /ia64|ppc/ ? "all"  : #- we only use all.img there
-	  ${{ disk => 'hd_grub', cdrom => 'cdrom', ftp => 'network', nfs => 'network', http => 'network' }}{$o->{method}};
+	  ${{ disk => 'hd_grub', 'disk-iso' => 'hd_grub', cdrom => 'cdrom', ftp => 'network', nfs => 'network', http => 'network' }}{$o->{method}};
 	my $have_drivers = $image eq 'network';
 	$image .= arch() =~ /sparc64/ && "64"; #- for sparc64 there are a specific set of image.
 
