@@ -79,7 +79,7 @@ sub get_subwizard {
       my $mouse = $o_mouse ||= {};
       my $intf  = $o_intf  ||= {};
       my $first_time = $o_first_time || 0;
-      my ($network_configured, $direct_net_install, $cnx_type, $type, $interface, @all_cards, @devices, %eth_intf);
+      my ($network_configured, $direct_net_install, $cnx_type, $type, $interface, @all_cards, %eth_intf);
       my (%connections, @connection_list, $is_wireless);
       my ($modem, $modem_name, $modem_conf_read, $modem_dyn_dns, $modem_dyn_ip);
       my ($adsl_type, $adsl_protocol, @adsl_devices, $adsl_failed, $adsl_answer, %adsl_data, $adsl_data, $adsl_provider, $adsl_old_provider);
@@ -980,8 +980,9 @@ You may also enter the IP address of the gateway if you have one."),
                           { label => N("Search domain"), val => \$netc->{DOMAINNAME}, 
                             help => N("By default search domain will be set from the fully-qualified host name") },
                           if_(!$auto_ip, { label => N("Gateway (e.g. %s)", $gateway_ex), val => \$netc->{GATEWAY} },
-                              if_(@devices > 1,
-                                  { label => N("Gateway device"), val => \$netc->{GATEWAYDEV}, list => \@devices },
+                              if_(@all_cards > 1,
+                                  { label => N("Gateway device"), val => \$netc->{GATEWAYDEV}, list => [ sort keys %eth_intf ], 
+                                    format => sub { $eth_intf{$_[0]} } },
                                  ),
                              ),
                         ],
