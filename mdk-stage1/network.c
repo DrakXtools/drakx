@@ -313,7 +313,7 @@ char * guess_netmask(char * ip_addr)
 
 	log_message("guessing netmask");
 
-	if (!inet_aton(ip_addr, &addr))
+	if (streq(ip_addr, "") || !inet_aton(ip_addr, &addr))
 		return "";
 
 	tmp = ntohl(addr.s_addr);
