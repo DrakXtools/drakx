@@ -417,33 +417,33 @@ sub get_autologin() {
 }
 
 sub set_autologin {
-    my ($user, $wm) = @_;
-    log::l("set_autologin $user $wm");
-    my $autologin = bool2text($user);
+    my ($o_user, $o_wm) = @_;
+    log::l("set_autologin $o_user $o_wm");
+    my $autologin = bool2text($o_user);
 
     #- Configure KDM / MDKKDM
     eval { update_gnomekderc("$::prefix/usr/share/config/kdm/kdmrc", 'X-:0-Core' => (
 	AutoLoginEnable => $autologin,
-	AutoLoginUser => $user,
+	AutoLoginUser => $o_user,
     )) };
 
     #- Configure GDM
     eval { update_gnomekderc("$::prefix/etc/X11/gdm/gdm.conf", daemon => (
 	AutomaticLoginEnable => $autologin,
-	AutomaticLogin => $user,
+	AutomaticLogin => $o_user,
     )) };
   
     my $xdm_autologin_cfg = "$::prefix/etc/sysconfig/autologin";
-    if (member($wm, 'KDE', 'GNOME')) {
+    if (member($o_wm, 'KDE', 'GNOME')) {
 	unlink $xdm_autologin_cfg;
     } else {
 	setVarsInShMode($xdm_autologin_cfg, 0644,
-			{ USER => $user, AUTOLOGIN => bool2yesno($user), EXEC => '/usr/X11R6/bin/startx.autologin' });
+			{ USER => $o_user, AUTOLOGIN => bool2yesno($o_user), EXEC => '/usr/X11R6/bin/startx.autologin' });
     }
 
-    if ($user) {
-	my $home = (getpwnam($user))[7];
-	set_window_manager($home, $wm);
+    if ($o_user) {
+	my $home = (getpwnam($o_user))[7];
+	set_window_manager($home, $o_wm);
     }
 }
 sub set_window_manager {
