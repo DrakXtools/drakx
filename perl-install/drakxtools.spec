@@ -291,6 +291,7 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 * Fri Nov 15 2002 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.1-0.1mdk
 - bump version
 - add missing printer/ directory
+- typo fix in drakxtv
 
 * Thu Nov 14 2002 Thierry Vignaud <tvignaud@mandrakesoft.com> 1.1.12-1mdk
 - printerdrake cleanups
