@@ -998,13 +998,14 @@ sub install($$$;$$) {
 		    $trans->set_script_fd(fileno LOG);
 
 		    log::l("rpm transactions start");
+		    my $fd; #- since we return the "fileno", perl doesn't know we're still using it, and so closes it, and :-(
 		    my @probs = $trans->run($packages, force => 1, nosize => 1, callback_open => sub {
 						my ($data, $type, $id) = @_;
 						my $pkg = defined $id && $data->{depslist}[$id];
 						my $medium = packageMedium($packages, $pkg);
 						my $f = $pkg && $pkg->filename;
 						print LOG "$f\n";
-						my $fd = install_any::getFile($f, $medium->{descr});
+						$fd = install_any::getFile($f, $medium->{descr});
 						$fd ? fileno $fd : -1;
 					    }, callback_close => sub {
 						my ($data, $type, $id) = @_;
