@@ -163,7 +163,7 @@ endif
 	gzip -9f $(DEST)/usr/share/ldetect-lst/*
 
 	cd share ; cp -a consolefonts $(DEST)/usr/share
-	-cd share ; cp -f *.png *.xpm $(DEST)/usr/share
+	-cd share ; cp -f *.png $(DEST)/usr/share
 	-cd pixmaps ; cp -af *.png *.xpm langs $(DEST)/usr/share ; rm -f $(DEST)/usr/share/wiz_*
 	cd share ; cp compssUsers compssUsers.* rpmsrate $(ROOTDEST)/Mandrake/base
 
