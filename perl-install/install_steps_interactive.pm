@@ -1029,7 +1029,10 @@ sub summary {
     push @l, {
 	group => N("Boot"),
 	label => N("Bootloader"),
-	val => sub { N("%s on %s", $o->{bootloader}{method}, $o->{bootloader}{boot}) },
+	val => sub { 
+	    #-PO: example: lilo-graphic on /dev/hda1
+	    N("%s on %s", $o->{bootloader}{method}, $o->{bootloader}{boot})
+	},
 	clicked => sub { any::setupBootloader($o, $o->{bootloader}, $o->{all_hds}, $o->{fstab}, $o->{security}) },
     };
 
