@@ -77,19 +77,6 @@ sub remove_light_tree {
     if (-e $light_prefix) {
 	print "still there:\n";
 	system('find', $light_prefix);
-
-	foreach my $dest (chomp_(`find $prefix -type l`)) {
-	    my $orig = readlink($dest) or next;
-	    $orig =~ s!/image_$live_name/!$light_prefix/! or next;
-
-	    unlink $dest or die "removing $dest failed: $!\n";
-	    rename $orig, $dest or die "moving $orig to $dest failed: $!\n";	    
-	}
-	rmdir($_) foreach reverse(chomp_(`find $light_prefix -type d`));
-    }
-    if (-e $light_prefix) {
-	print "still there:\n";
-	system('find', $light_prefix);
     }
 }
 
