@@ -94,6 +94,7 @@ sub gtkset_size_request       { $_[0]->set_size_request($_[1], $_[2]); $_[0] }
 sub gtkshow                   { $_[0]->show; $_[0] }
 sub gtksize                   { $_[0]->size($_[1], $_[2]); $_[0] }
 sub gtkset_markup             { $_[0]->set_markup($_[1]); $_[0] }
+sub gtkset_line_wrap          { $_[0]->set_line_wrap($_[1]); $_[0] }
 
 sub gtkadd {
     my $w = shift;
@@ -302,7 +303,7 @@ sub create_box_with_title {
 	return $box;
     }
     $o->{box_size} = n_line_size($nbline, 'text', $box);
-    if (@_ <= 2 && ($nbline > 4 || ($nbline > 1 && ref($::o) && $::o->{locale}{lang} =~ /^ja|^zh/))) {
+    if (@_ <= 2 && ($nbline > 4)) {
 	$o->{icon} && !$::isWizard and 
 	  eval { gtkpack__($box, gtkset_border_width(gtkpack_(Gtk2::HBox->new(0,0), 1, gtkcreate_img($o->{icon})),5)) };
 	my $wanted = $o->{box_size};
@@ -320,6 +321,11 @@ sub create_box_with_title {
     } else {
 	my $a = !$::no_separator;
 	undef $::no_separator;
+     my $new_label = sub {
+         my ($txt) = @_;
+         my $w = ref($txt) ? $txt : gtkset_line_wrap(Gtk2::Label->new($txt), 1);
+         gtkset_name($w, "Title");
+     };
 	if ($o->{icon} && (!$::isWizard || $::isInstall)) {
 	    gtkpack__($box,
 		      gtkpack_(Gtk2::HBox->new(0,0),
@@ -329,9 +335,9 @@ sub create_box_with_title {
 			       1, gtkpack_($o->{box_title} = Gtk2::VBox->new(0,0),
 					   1, Gtk2::HBox->new(0,0),
 					   (map {
-					       my $w = ref($_) ? $_ : Gtk2::Label->new($_);
+					       my $w = $new_label->($_);
 					       $::isWizard and $w->set_justify("left");
-					       (0, gtkset_name($w, "Title"));
+					       (0, $w);
 					   } map { ref($_) ? $_ : warp_text($_) } @_),
 					   1, Gtk2::HBox->new(0,0),
 					  )
@@ -342,8 +348,7 @@ sub create_box_with_title {
 	    gtkpack__($box,
 		      if_($::isWizard, gtkset_size_request(Gtk2::Label->new, 0, 10)),
 		      (map {
-			  my $w = ref($_) ? $_ : Gtk2::Label->new($_);
-			  gtkset_name($w, "Title");
+			  my $w = $new_label->($_);
 			  $::isWizard ? gtkpack__(Gtk2::HBox->new(0,0), gtkset_size_request(Gtk2::Label->new, 20, 0), $w)
 			              : $w
 		      } map { ref($_) ? $_ : warp_text($_) } @_),
