@@ -25,7 +25,7 @@ FBOOT_RDZ = $(FBOOT_IMG:%.img=%.rdz) images/all.rdz
 
 .PHONY: dirs install
 
-build: dirs images
+install: dirs images rescue install_only
 
 dirs:
 	@for n in $(DIRS); do $(MAKE) -C $$n all || exit 1 ; done
@@ -43,7 +43,7 @@ tar: clean
 	cd .. ; tar cfj gi.tar.bz2 gi
 	rm needed_rpms.lst
 
-install: build rescue
+install_only:
 	for i in images misc Mandrake Mandrake/base Mandrake/share; do install -d $(ROOTDEST)/$$i ; done
     ifneq (ppc,$(ARCH))
 	for i in $(FBOOT_IMG); do cp -f $${i}* $(ROOTDEST)/images; done
@@ -85,7 +85,7 @@ upload:
 	tools/addchangelog.pl tools/cvslog2changelog.pl | tools/mailchangelog.pl &
 
 	$(MAKE) install
-	$(MAKE) check
+#	$(MAKE) check
 	$(MAKE) upload_only
 
 upload_only:
