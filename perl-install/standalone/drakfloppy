@@ -119,17 +119,11 @@ my $expert_pane = new Gtk::HPaned();
 $expert_pane->set_handle_size(10);
 $expert_pane->set_gutter_size(8);
 
-my $expert_button = new Gtk::Button(N("Expert Mode"));
+my $expert_button = new Gtk::Button("");
 $expert_button->signal_connect(clicked => sub {
-				  if ($expert_mode) {
-				    $expert_mod_frame->hide();
-				    $expert_button_frame->hide()
-				  } else {
-				    $expert_mod_frame->show();
-				    $expert_button_frame->show();
-				  }
-				    $expert_mode = !$expert_mode;
-				});
+    $expert_mode = !$expert_mode;
+    toggle_expert_button();
+});
 
 my $expert_button_vbox = new Gtk::VBox(0, 5);
 my $expert_button_hbox = new Gtk::HBox(0, 5);
@@ -221,14 +215,24 @@ $global_vbox->pack_start($fin_hbox, 0, 0, 0);
 $window->{window}->add($global_vbox);
 
 $window->{rwindow}->show_all();
-if (!$expert_mode) {
-    $expert_mod_frame->hide();
-    $expert_button_frame->hide();
-}
+toggle_expert_button();
+
 
 $window->main;
 my_gtk->exit(0);
 
+
+sub toggle_expert_button {
+    if ($expert_mode) {
+        $expert_mod_frame->show();
+        $expert_button_frame->show();
+        $expert_button->child->set(N("Normal Mode"));
+    } else {
+        $expert_mod_frame->hide();
+        $expert_button_frame->hide();
+        $expert_button->child->set(N("Expert Mode"));
+    }
+}
 
 #-------------------------------------------------------------
 # tree functions
