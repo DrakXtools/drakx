@@ -580,10 +580,6 @@ foreach my $medium (@media) {
     }
 }
 
-#- install mandrake-release package.
-system "rpm", "--root", "/mnt", "--initdb";
-system "rpm", "-ivh", "--root", "/mnt", "--nodeps", "--force", @files;
-sy
 #- try to figure out if a oem-message-graphic already exists.
 #- if this is the case, rename it to /mnt/boot/message-graphic
 if (-e "/cdrom/Mandrake/base/oem-message-graphic") {
