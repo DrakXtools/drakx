@@ -455,8 +455,31 @@ sub main {
     modules::read_stage1_conf($_) foreach "/tmp/conf.modules", "/etc/modules.conf";
     modules::read_already_loaded();
 
+    #- done before auto_install is called to allow the -IP feature on auto_install file name
+    if (-e '/tmp/network') {
+	require network;
+	#- get stage1 network configuration if any.
+	log::l('found /tmp/network');
+	$o->{netc} ||= {};
+	add2hash($o->{netc}, network::read_conf('/tmp/network'));
+	if (my ($file) = glob_('/tmp/ifcfg-*')) {
+	    log::l("found network config file $file");
+	    my $l = network::read_interface_conf($file);
+	    $o->{intf} ||= { $l->{DEVICE} => $l };
+	}
+	if (-e '/etc/resolv.conf') {
+	    my $file ='/etc/resolv.conf';
+	    log::l("found network config file $file");
+	    add2hash($o->{netc}, network::read_resolv_conf($file));
+	}
+    }
+
     #- done after module dependencies are loaded for "vfat depends on fat"
     if ($::auto_install) {
+	if ($::auto_install =~ /-IP(\.pl)?/) {
+	    my $ip = join('', map { sprintf "%02X", $_ } split '\.', $o->{intf}{IPADDR});
+	    $::auto_install =~ s/-IP(\.pl)?/-$ip$1/;
+	}
 	require install_steps_auto_install;
 	eval { $o = $::o = install_any::loadO($o, $::auto_install) };
 	if ($@) {
@@ -534,23 +557,6 @@ sub main {
     }
     $::o = $o = $o_;
 
-    if (-e '/tmp/network') {
-	require network;
-	#- get stage1 network configuration if any.
-	log::l('found /tmp/network');
-	$o->{netc} ||= {};
-	add2hash($o->{netc}, network::read_conf('/tmp/network'));
-	if (my ($file) = glob_('/tmp/ifcfg-*')) {
-	    log::l("found network config file $file");
-	    my $l = network::read_interface_conf($file);
-	    $o->{intf} ||= { $l->{DEVICE} => $l };
-	}
-	if (-e '/etc/resolv.conf') {
-	    my $file ='/etc/resolv.conf';
-	    log::l("found network config file $file");
-	    add2hash($o->{netc}, network::read_resolv_conf($file));
-	}
-    }
     install_any::remove_unused() if common::usingRamdisk();
 
     #-the main cycle
