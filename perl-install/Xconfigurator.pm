@@ -2,7 +2,7 @@ package Xconfigurator; # $Id$
 
 use diagnostics;
 use strict;
-use vars qw($in $install @window_managers @depths @monitorSize2resolution @hsyncranges %min_hsync4wres @vsyncranges %depths @resolutions %serversdriver @svgaservers @accelservers @allbutfbservers @allservers %vgamodes %videomemory @ramdac_name @ramdac_id @clockchip_name @clockchip_id %keymap_translate %standard_monitors $XF86firstchunk_text $keyboardsection_start $keyboardsection_start_v4 $keyboardsection_part2 $keyboardsection_part3 $keyboardsection_part3_v4 $keyboardsection_end $pointersection_text $monitorsection_text1 $monitorsection_text2 $monitorsection_text3 $monitorsection_text4 $modelines_text_Trident_TG_96xx $modelines_text $devicesection_text $devicesection_text_v4 $screensection_text1 %lines @options %xkb_options $good_default_monitor $low_default_monitor $layoutsection_v4 $modelines_text_apple);
+use vars qw($in $install @window_managers @depths @monitorSize2resolution @hsyncranges %min_hsync4wres @vsyncranges %depths @resolutions @resolutions_laptop %serversdriver @svgaservers @accelservers @allbutfbservers @allservers %vgamodes %videomemory @ramdac_name @ramdac_id @clockchip_name @clockchip_id %keymap_translate %standard_monitors $XF86firstchunk_text $keyboardsection_start $keyboardsection_start_v4 $keyboardsection_part2 $keyboardsection_part3 $keyboardsection_part3_v4 $keyboardsection_end $pointersection_text $monitorsection_text1 $monitorsection_text2 $monitorsection_text3 $monitorsection_text4 $modelines_text_Trident_TG_96xx $modelines_text_ext $modelines_text $devicesection_text $devicesection_text_v4 $screensection_text1 %lines @options %xkb_options $good_default_monitor $low_default_monitor $layoutsection_v4 $modelines_text_apple);
 
 use common qw(:common :file :functional :system);
 use log;
@@ -670,7 +670,7 @@ sub autoDefaultDepth($$) {
 }
 
 sub autoDefaultResolution {
-    return "1024x768" if detect_devices::hasPCMCIA;
+    #    return "1024x768" if detect_devices::hasPCMCIA;
 
     if (arch() =~ /ppc/) {
 	return "1024x768" if detect_devices::get_mac_model =~ /^PowerBook|^iMac/;
@@ -820,7 +820,7 @@ sub resolutionsConfiguration {
 	return 1; #- aka we cannot test, assumed as good (should be).
     }
     if (is_empty_hash_ref($card->{depth})) {
-	$card->{depth}{$_} = [ map { [ split "x" ] } @resolutions ]
+	$card->{depth}{$_} = [ map { [ split "x" ] } (detect_devices::isLaptop() ? @resolutions : @resolutions_laptop) ]
 	  foreach @depths;
     }
     #- sort resolutions in each depth
@@ -1126,7 +1126,9 @@ EndSection
     print F qq(    VertRefresh $O->{vsyncrange}\n\n);
     print G qq(    VertRefresh $O->{vsyncrange}\n\n);
     print F $monitorsection_text4;
-    print F ($O->{modelines} || '') . ($o->{card}{type} eq "TG 96" ? $modelines_text_Trident_TG_96xx : $modelines_text);
+    print F ($O->{modelines} || '') . ($o->{card}{type} eq "TG 96" ?
+				       $modelines_text_Trident_TG_96xx : "$modelines_text$modelines_text_ext");
+    print G $modelines_text_ext;
     print F "\nEndSection\n\n\n";
     print G "\nEndSection\n\n\n";
     print G $modelines_text_apple if arch() =~ /ppc/;
