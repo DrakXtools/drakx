@@ -86,7 +86,7 @@ sub ask_okcancel($$$;$) {
 
 sub ask_from_list_ {
     my ($o, $title, $message, $l, $def) = @_;
-    ask_from_listf($o, $title, $message, sub { translate($_[0]) }, @$l, $def);
+    ask_from_listf($o, $title, $message, sub { translate($_[0]) }, $l, $def);
 }
 
 sub ask_from_listf_ {
@@ -95,10 +95,12 @@ sub ask_from_listf_ {
 }
 sub ask_from_listf {
     my ($o, $title, $message, $f, $l, $def) = @_;
-    my %l; my $i = 0; foreach (@$l) {
-	$l{$f->($_, $i++)} = $_;
+    my (@l,%l); my $i = 0; foreach (@$l) {
+	my $v = $f->($_, $i++);
+	push @l, $v;
+	$l{$v} = $_;
     }
-    my $r = ask_from_list($o, $title, $message, [ keys %l ], $f->($def)) or return;
+    my $r = ask_from_list($o, $title, $message, \@l, defined $def ? $f->($def) : $def) or return;
     $l{$r};
 }
 

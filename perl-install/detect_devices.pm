@@ -277,7 +277,7 @@ sub whatPrinter() {
 }
 
 sub whatPrinterPort() {
-    grep { tryWrite($_)} qw(/dev/lp0 /dev/lp1 /dev/lp2 /dev/usb/usblp0);
+    grep { tryWrite($_)} qw(/dev/lp0 /dev/lp1 /dev/lp2 /dev/usb/lp0);
 }
 
 sub probeUSB {

@@ -882,6 +882,7 @@ sub partitionWizard {
 	push @solutions, [ _("Use existing partition"), sub { $o->ask_mntpoint_s($o->{fstab}) } ];
     } elsif (@l = grep { isFat($_) } @$fstab) {
     }
+    require diskdrake;
     push @solutions, 
       [ _("Take over the hard drive (beware!)"), 
 	sub {
@@ -891,7 +892,8 @@ sub partitionWizard {
 	    partition_table_raw::zero_MBR($hd);
 	    fsedit::auto_allocate($hds, $o->{partitions});
 	    1;
-	} ];
+	} ],
+      [ _("Use diskdrake"), sub { diskdrake::main($hds, $o->{raid}, interactive_gtk->new, $o->{partitions}); 1 } ],
 }
 
 1;

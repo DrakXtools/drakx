@@ -568,7 +568,7 @@ sub installPackages {
 	    $nb = $_[0];
 	    $total_size = $_[1]; $current_total_size = 0;
 	    $start_time = time();
-	    $msg->set(_("%d packages", $nb) . _(", %U MB", $total_size / sqr(1024)));
+	    $msg->set(_("%d packages", $nb));
 	    $w->flush;
 	} elsif ($m =~ /^Starting installing package/) {
 	    $progress->update(0);

@@ -248,7 +248,7 @@ sub mediumDescr {
 }
 
 #- selection, unselection of package.
-sub selectPackage($$;$$$) {
+sub selectPackage { #($$;$$$)
     my ($packages, $pkg, $base, $otherOnly, $check_recursion) = @_;
 
     #- check if the same or better version is installed,

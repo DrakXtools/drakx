@@ -23,8 +23,8 @@ sub new {
 
     if ($graphical) {
 	require install_steps_gtk;
-	undef *enteringStep; *enteringStep = *install_steps_gtk::enteringStep;
-	undef *installPackages; *installPackages = *install_steps_gtk::installPackages;
+	undef *enteringStep; *enteringStep = \&install_steps_gtk::enteringStep;
+	undef *installPackages; *installPackages = \&install_steps_gtk::installPackages;
 	goto &install_steps_gtk::new;
     } else {
 	(bless {}, ref $type || $type)->SUPER::new($o);

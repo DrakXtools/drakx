@@ -178,12 +178,9 @@ sub detect() {
 	    modules::load("mousedev");
 	   };
 	sleep(2);
-	if (!$@) {
-	    my $dev;
-	    $dev ||= "usbmouse" if detect_devices::tryOpen("usbmouse");
-	    $dev ||= "usbmice"  if detect_devices::tryOpen("usbmice");
+	if (!$@ && detect_devices::tryOpen("usbmouse")) {
 	    $wacom or modules::unload("serial"); 
-	    return add2hash({ device => $dev }, name2mouse("USB Mouse")), $wacom;
+	    return name2mouse("USB Mouse"), $wacom;
 	}
 	modules::unload("mousedev");
 	modules::unload("usbmouse");
