@@ -123,7 +123,6 @@ ifeq (i386,$(ARCH))
 endif
 	ln -sf ash $(DEST)/usr/bin/sh
 
-	cd share ; ./gen_locales.sh
 	for i in fonts keyboards locales keymaps; do tar xfj `../tools/specific_arch share/$$i.tar.bz2` -C $(DEST); done
 
 	grep ChangeLog CVS/Entries > $(DEST)/usr/share/VERSION

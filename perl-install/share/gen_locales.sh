@@ -1,14 +1,5 @@
 #!/bin/sh
 
-locales=`rpm -q locales`
-file="$locales-drakx.tar.bz2"
-
-# already build?
-[ -e $file ] && exit 0
-
-# remove previous ones
-rm -f locales-*-drakx.tar.bz2
-
 rm -rf .tmp ; mkdir .tmp ; cd .tmp
 tar xfj ../locales-skeleton.tar.bz2
 
@@ -18,7 +9,7 @@ for i in LC_ADDRESS LC_COLLATE LC_CTYPE LC_IDENTIFICATION LC_MEASUREMENT LC_MONE
 done
 
 # lc_ctype for common encoding
-for i in CP1251 CP1255 CP1256 ISO-8859-13 ISO-8859-14 ISO-8859-15 ISO-8859-2 ISO-8859-3 ISO-8859-5 ISO-8859-7 ISO-8859-9 ISO-8859-9E ; do
+for i in CP1251 CP1255 CP1256 ISO-8859-13 ISO-8859-14 ISO-8859-15 ISO-8859-2 ISO-8859-3 ISO-8859-5 ISO-8859-7 ISO-8859-9 ISO-8859-9E KOI8-U ; do
     f=usr/share/locale/$i/LC_CTYPE
     [ -e /$f ] || { echo missing /$f ; exit 1 ; }
     cp -f /$f $f
@@ -35,8 +26,6 @@ for i in hy ja ko ta th vi zh_CN.GB2312 zh_TW.Big5 ; do
 done
 cd .. ; rm -rf .tmp2
 
-tar cfj ../$file usr
+tar cfj ../locales.tar.bz2 usr
 
 cd .. ; rm -rf .tmp
-
-ln -sf $file locales.tar.bz2
