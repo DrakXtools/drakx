@@ -561,6 +561,8 @@ sub  install_cpio($$;@) {
 sub bug {
     my ($h) = getopts(\@_, "h");
     $h and die "usage: bug\nput file report.bug on fat formatted floppy\n";
+
+    require detect_devices;
     mount devices::make(first(detect_devices::floppies())), "/fd0";
 
     sub header { "
@@ -568,7 +570,6 @@ sub bug {
 * $_[0]
 ********************************************************************************";
     }
-    require detect_devices;
 
     local $\ = "\n";
     output "/fd0/report.bug", map { chomp; $_ }

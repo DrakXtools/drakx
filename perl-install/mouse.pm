@@ -20,7 +20,7 @@ my @mouses_fields = qw(nbuttons MOUSETYPE XMOUSETYPE name);
 my %mice = 
  arch() =~ /^sparc/ ? 
 (
- __('SunMouse') =>
+ 'sunmouse' =>
  [ [ 'sunmouse' ],
    [ [ 3, 'sun', 'sun', __("Sun - Mouse") ]
    ]]
@@ -44,7 +44,7 @@ my %mice =
      [ 5, 'ps/2', 'IMPS/2', __("Wheel") ],
    ]],
 
- __("Serial") =>
+ __("serial") =>
  [ [ map { "ttyS$_" } 0..3 ],
    [ [ 2, 'Microsoft', 'Microsoft', __("Generic 2 Button Mouse") ],
      [ 3, 'Microsoft', 'Microsoft', __("Generic 3 Button Mouse") ],
@@ -61,13 +61,13 @@ my %mice =
      [ 3, 'Microsoft', 'ThinkingMouse', __("Kensington Thinking Mouse") ],
    ]],
 
- __('BusMouse') =>
+ __("busmouse") =>
  [ [ arch() eq 'ppc' ? 'adbmouse' : ('atibm', 'inportbm', 'logibm') ],
    [ [ 2, 'Busmouse', 'BusMouse', __("2 buttons") ],
      [ 3, 'Busmouse', 'BusMouse', __("3 buttons") ],
    ]],
 
- '[' . _('No bus') . ']' =>
+ __("none") =>
  [ [ 'none' ],
    [ [ 0, 'none', 'Microsoft', __("No mouse") ],
    ]],

@@ -429,11 +429,7 @@ sub getVarsFromSh($) {
 
 sub setVarsInSh {
     my ($file, $l, @fields) = @_;
-    @fields = keys %$l unless @fields;
-
-    local *F;
-    open F, "> $_[0]" or die "cannot create config file $file";
-    $l->{$_} and print F "$_=$l->{$_}\n" foreach @fields;
+    setVarsInShMode($file, 0777 ^ umask(), $l, @fields);
 }
 
 sub setVarsInShMode {
@@ -441,7 +437,7 @@ sub setVarsInShMode {
     @fields = keys %$l unless @fields;
 
     local *F;
-    open F, "> $_[0]" or die "cannot create config file $file";
+    open F, "> $file" or die "cannot create config file $file";
     chmod $mod, $file;
     $l->{$_} and print F "$_=$l->{$_}\n" foreach @fields;
 }

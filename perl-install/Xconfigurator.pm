@@ -1097,6 +1097,7 @@ Current configuration is:
 			system("kwmcom logout") if /kwm/;
 			system("dcop kdesktop default logout") if /kwin/;
 			system("save-session --kill") if /gnome-session/;
+			system("killall -QUIT icewm") if /icewm/;
 
 			open STDIN, "</dev/zero";
 			open STDOUT, ">/dev/null";

@@ -1,9 +1,19 @@
+2000-10-02  Pixel  <pixel@mandrakesoft.com>
+
+	* mouse.pm (fullnames): fix i18n fix
+
+	* install_steps.pm (miscellaneous): don't add ide2=0x... for
+	ultra66 (otherwise chmouel is not happy, so is hdc being hde)
+	
+	* Xconfigurator.pm (main): add handling of icewm logout
+
+	* c/stuff.xs.pm: changed the stepping of "Progressing installing package"
+
 2000-10-02  dam's  <damien@mandrakesoft.com>
 
 	* netconnect.pm (main): infos are written only when needed.
 	* netconnect.pm (intro): connection checking now works.
 	
-
 2000-10-02  Chmouel Boudjnah  <chmouel@mandrakesoft.com>
 
 	* pci_probing/pcitable: s|snd-card-via686a|via82cxxx_audio|; like
@@ -884,7 +894,6 @@
 	experimental support for expert users.
 	* install_steps_interactive.pm: removed question to keep XF3.
 
->>>>>>> 1.280
 2000-09-05  François Pons  <fpons@mandrakesoft.com>
 
 	* printerdrake.pm: removed all previous URI specific mode and
