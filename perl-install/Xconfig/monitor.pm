@@ -180,8 +180,15 @@ sub getinfoFromDDC() {
     $monitor->{ModeLine} = Xconfig::xfree::default_ModeLine();
     my $detailed_timings = $monitor->{detailed_timings} || [];
     foreach (grep { !$_->{bad_ratio} } @$detailed_timings) {
-	unshift @{$monitor->{ModeLine}},
-	  { val => $_->{ModeLine}, pre_comment => $_->{ModeLine_comment} . "\n" };
+	my $res = join('x', $_->{horizontal_active}, $_->{horizontal_active});
+	my $ratio = $_->{horizontal_active} / $_->{vertical_active};
+
+	if (abs($ratio - 4 / 3) < 0.01) {
+	    #- we don't want the 4/3 modelines otherwise they conflict with the Xorg builtin vesamodes
+	} else {
+	    unshift @{$monitor->{ModeLine}},
+	      { val => $_->{ModeLine}, pre_comment => $_->{ModeLine_comment} . "\n" };
+	}
 
 	if (@$detailed_timings == 1) {
 	    #- should we care about {has_preferred_timing} ?
