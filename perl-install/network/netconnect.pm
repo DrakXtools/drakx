@@ -404,7 +404,7 @@ Take a look at http://www.linmodems.org"),
                                 s/%([0-9]{3})/chr(int($1))/eg;
                                 $countries{$country} ||= translate($country);
                                 join('', $countries{$country}, $_);
-                            } glob_("$db_path/$country/*")
+                            } grep { !/.directory$/ } glob_("$db_path/$country/*")
                         } map { s!$db_path/!!o; s!_! !g; $_ } glob_("$db_path/*");
                         $old_provider = $provider;
                     },
