@@ -18,6 +18,8 @@ modules::mergein_conf('/etc/modules.conf') if -r '/etc/modules.conf';
 undef $::Plug;
 begin:
 my $mouse = mouse::read();
+my %old = %$mouse;
+
 if (!$::noauto) {
     my $probed_mouse = mouse::detect();
     $mouse = $probed_mouse if !$mouse->{XMOUSETYPE} || !$probed_mouse->{unsafe};
@@ -26,18 +28,6 @@ if (!$::noauto) {
 if (!$mouse || !$::auto) {
     $mouse ||= mouse::fullname2mouse("serial|Generic 2 Button Mouse");
     my $test_hbox;
-    if ($::isEmbedded && $in->isa('interactive::gtk')) {
-	#- HACK: waiting for the ask_from_treelistf to attach itself
-	#- and adding the nice test mouse to it
-	Glib::Timeout->add(100, sub {
-			     defined $::Plug && defined $::Plug->child or return 1;
-			     $test_hbox = Gtk2::HBox->new(0, 0);
-			     $::WizardTable->attach($test_hbox, 2, 3, 1, 2, ['fill', 'expand'], ['fill', 'expand'], 0, 0);
-			     $test_hbox->show_all;
-			     mouse::test_mouse_standalone($mouse, $test_hbox);
-			     0;
-			 });
-    }
     my $name = $in->ask_from_treelistf('mousedrake', N("Please choose your mouse type."), '|',
 				       sub { join '|', map { translate($_) } split '\|', $_[0] },
 				       [ mouse::fullnames ], 
@@ -64,7 +54,8 @@ if (!$mouse || !$::auto) {
 
 mouse::write_conf($in, $mouse, 1);
 
-if (!$::isEmbedded && $in->isa('interactive::gtk')) {
+if ($in->isa('interactive::gtk') && mouse::change_mouse_live($mouse, \%old)) {
+
     require ugtk2;
     ugtk2->import(qw(:wrappers :create));
     my $w = ugtk2->new(N("Mouse test"));
