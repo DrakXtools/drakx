@@ -251,3 +251,8 @@ unlink "$::prefix/usr/bin/localedrake";
 
 #- drakxtools contains a broken unneeded file
 unlink "$::prefix/usr/lib/libDrakX/modem.pm";
+
+#- fix openoffice autopilote feature
+foreach (glob("$::prefix/usr/lib/openoffice/share/template/*")) {
+    symlink '../../english/wizard/bitmap', "$_/wizard/bitmap";
+}
