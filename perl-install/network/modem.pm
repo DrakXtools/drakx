@@ -51,7 +51,7 @@ sub ppp_configure {
     $in->do_pkgs->install('ppp') if !$::testing;
     $in->do_pkgs->install('kdenetwork-kppp') if !$::testing && $in->do_pkgs->is_installed('kdebase');
 
-    any::devfssymlinkf($modem->{device}, 'modem') if $modem->{device} ne "/dev/modem";
+    any::devfssymlinkf($modem, 'modem') if $modem->{device} ne "/dev/modem";
 
     my %toreplace = map { $_ => $modem->{$_} } qw(Authentication AutoName connection dns1 dns2 domain IPAddr login passwd phone SubnetMask);
     $toreplace{phone} =~ s/[a-zA-Z]//g;
