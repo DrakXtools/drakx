@@ -433,14 +433,13 @@ sub installPackages {
     my $show_advertising if 0;
     $show_advertising = to_bool(@install_any::advertising_images) if !defined $show_advertising;
     my $detail_or_not = sub { $show_advertising ? N("Details") : N("No details") };
-    my ($msg, $msg_time_remaining, $msg_time_total) = map { Gtk2::Label->new($_) } '', (N("Estimating")) x 2;
+    my ($msg, $msg_time_remaining) = map { Gtk2::Label->new($_) } '', N("Estimating");
     my ($progress, $progress_total) = map { Gtk2::ProgressBar->new } (1..2);
     gtkadd($w->{window}, my $box = Gtk2::VBox->new(0,10));
     $box->pack_end(gtkshow(gtkpack(Gtk2::VBox->new(0,5),
 			   $msg, $progress,
 			   create_packtable({},
 					    [N("Time remaining "), $msg_time_remaining],
-#					    [N("Total time "), $msg_time_total],
 					   ),
 			   $text,
 			   $progress_total,
@@ -535,8 +534,6 @@ sub installPackages {
 
 	    $progress_total->set_fraction($ratio);
 	    if ($dtime != $last_dtime && $current_total_size > 80_000_000) {
-		$msg_time_total->set_label(formatTime(10 * round($total_time / 10) + 10));
-#-		$msg_time_total->set_label(formatTimeRaw($total_time) . "  " . formatTimeRaw($dtime / $ratio2));
 		$msg_time_remaining->set_label(formatTime(10 * round(max($total_time - $dtime, 0) / 10) + 10));
 		$last_dtime = $dtime;
 	    }
