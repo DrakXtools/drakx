@@ -504,7 +504,7 @@ static char * interface_select(void)
 	if (count == 1)
 		return *interfaces;
 
-	results = ask_from_list("Please choose the NET device to use for the installation.", interfaces, &choice);
+	results = ask_from_list_auto("Please choose the NET device to use for the installation.", interfaces, &choice, "interface", interfaces);
 
 	if (results != RETURN_OK)
 		return NULL;
