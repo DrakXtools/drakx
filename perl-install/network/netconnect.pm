@@ -608,6 +608,7 @@ notation (for example, 1.2.3.4).")),
                         $ethntf->{NEEDHOSTNAME} = bool2yesno($needhostname);
                         $ethntf->{MII_NOT_SUPPORTED} = bool2yesno(!$hotplug);
                         $ethntf->{HWADDR} = $track_network_id or delete $ethntf->{HWADDR};
+                        $in->do_pkgs->install($netcnx->{dhcp_client}) if $auto_ip;
 
                         #FIXME "wireless" if $ethntf->{wireless_eth};
                         # FIXME: only ask for zeroconf if no dynamic host *AND* no adsl/isdn/modem (aka type being lan|wireless)
