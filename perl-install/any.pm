@@ -1125,7 +1125,7 @@ sub ask_window_manager_to_logout {
     
     my %h = (
 	'kwin' => "su $ENV{USER} -c 'dcop kdesktop default logout'",
-	'gnome-session' => "save-session --kill",
+	'gnome-session' => "gnome-session-save -kill",
 	'icewm' => "killall -QUIT icewm",
 	'wmaker' => "killall -USR1 wmaker",
     );
