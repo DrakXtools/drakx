@@ -30,6 +30,9 @@ help:
 %.mo: %.po
 	msgfmt -o $@ $<
 
+merge:
+	for i in $(POFILES); do msgmerge -N -C $$i $$i DrakX.pot > $${i}t; mv $${i}t $$i;done
+
 $(POFILES): DrakX.pot
 	perl -ne 'print unless /^# DO NOT BOTHER TO MODIFY HERE, SEE:|^#.*\Qdrakx-help.xml/ .. /^$$/' $@ > $@t
 	if [ -e help-$@t ]; then perl -pe 's|^#~ ||' -i $@t ; msgmerge -C $@t help-$@t $< > $@; else msgmerge $@t $< > $@; fi

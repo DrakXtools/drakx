@@ -1161,9 +1161,9 @@ msgid "Real name"
 msgstr "Pravo ime"
 
 #: any.pm:632 standalone/drakbackup:1648
-#, fuzzy, c-format
+#, c-format
 msgid "Login name"
-msgstr "Ime domena"
+msgstr "Ime za prijavljivanje"
 
 #: any.pm:635
 #, c-format
@@ -1366,9 +1366,9 @@ msgid "Active Directory with Winbind"
 msgstr "Obnovi sve backup-ove"
 
 #: authentication.pm:51
-#, fuzzy, c-format
+#, c-format
 msgid "Local file:"
-msgstr "Lokalne datoteke:"
+msgstr "Lokalni fajl :"
 
 #: authentication.pm:51
 #, c-format
@@ -4665,7 +4665,7 @@ msgstr ""
 "Ukoliko ne znate da izaberete, zadržite default postavku."
 
 #: help.pm:458
-#, fuzzy, c-format
+#, c-format
 msgid "Security Administrator"
 msgstr "Administrator za sigurnost:"
 
@@ -10337,9 +10337,9 @@ msgstr ""
 
 #: network/netconnect.pm:489 network/netconnect.pm:601
 #: network/netconnect.pm:757
-#, fuzzy, c-format
+#, c-format
 msgid "Provider:"
-msgstr "Profil: "
+msgstr "Provajder:"
 
 #: network/netconnect.pm:504
 #, c-format
@@ -11534,7 +11534,7 @@ msgstr ", koristim komandu %s"
 #: printer/main.pm:478
 #, c-format
 msgid "URI: %s"
-msgstr ""
+msgstr "URI: %s"
 
 #: printer/main.pm:626 printer/printerdrake.pm:849
 #: printer/printerdrake.pm:2861
@@ -16054,9 +16054,9 @@ msgid ""
 msgstr ""
 
 #: share/advertising/15.pl:13
-#, fuzzy, c-format
+#, c-format
 msgid "<b>Kontact</b>"
-msgstr "<b>Mandrakeclub</b>"
+msgstr "<b>Kontact</b>"
 
 #: share/advertising/15.pl:15
 #, c-format
@@ -16672,9 +16672,9 @@ msgid "Apache"
 msgstr "Apache"
 
 #: share/compssUsers.pl:88
-#, fuzzy, c-format
+#, c-format
 msgid "Groupware"
-msgstr "grupa"
+msgstr "Groupware"
 
 #: share/compssUsers.pl:89
 #, c-format
@@ -16857,6 +16857,11 @@ msgstr "Mandrakelinux Kontrolni Centar"
 #, fuzzy, c-format
 msgid "Wizards to configure server"
 msgstr "Neuspelo podešavanje štampača \"%s\"!"
+
+#: share/compssUsers.pl.~1.8.~:196
+#, fuzzy, c-format
+msgid "MandrakeSoft Wizards"
+msgstr "Mandrakelinux Kontrolni Centar"
 
 #: standalone.pm:21
 #, c-format
@@ -17276,9 +17281,9 @@ msgid "This will take a few minutes."
 msgstr "Ovo će potrajati nekoliko minuta."
 
 #: standalone/drakTermServ:449 standalone/drakTermServ:468
-#, fuzzy, c-format
+#, c-format
 msgid "Done!"
-msgstr "Urađeno"
+msgstr "Gotovo !"
 
 #: standalone/drakTermServ:454
 #, c-format
@@ -18131,9 +18136,9 @@ msgstr ""
 
 #: standalone/drakbackup:556 standalone/drakbackup:627
 #: standalone/drakbackup:683
-#, fuzzy, c-format
+#, c-format
 msgid "Total progress"
-msgstr "Ukupan napredak"
+msgstr "Ukupni napredak:"
 
 #: standalone/drakbackup:609
 #, fuzzy, c-format
@@ -19990,9 +19995,9 @@ msgid "Modem timeout"
 msgstr "Pauza pri startanju kernela"
 
 #: standalone/drakconnect:509
-#, fuzzy, c-format
+#, c-format
 msgid "Use lock file"
-msgstr "Izaberite datoteku"
+msgstr "Koristi fajl za zaključavanje"
 
 #: standalone/drakconnect:511
 #, c-format
@@ -21441,6 +21446,91 @@ msgstr ""
 msgid "Location of auto_install.cfg file"
 msgstr "Lokacija auto_install.cfg fajla"
 
+#: standalone/drakroam:167
+#, c-format
+msgid "Status"
+msgstr "Status"
+
+#: standalone/drakroam:174
+#, c-format
+msgid "Disconnect"
+msgstr "Prekini vezu"
+
+#: standalone/drakroam:179
+#, c-format
+msgid "Roaming"
+msgstr ""
+
+#: standalone/drakroam:182 standalone/drakroam:256
+#, c-format
+msgid "Roaming: %s"
+msgstr ""
+
+#: standalone/drakroam:189
+#, c-format
+msgid "Scan interval (sec): "
+msgstr ""
+
+#: standalone/drakroam:192
+#, c-format
+msgid "Set"
+msgstr ""
+
+#: standalone/drakroam:197
+#, c-format
+msgid "Known Networks (Drag up/down or edit)"
+msgstr ""
+
+#: standalone/drakroam:205
+#, c-format
+msgid "Connect"
+msgstr "Poveži se"
+
+#: standalone/drakroam:213
+#, c-format
+msgid "Available Networks"
+msgstr ""
+
+#: standalone/drakroam:224
+#, c-format
+msgid "Rescan"
+msgstr "Pretraži ponovo"
+
+#: standalone/drakroam:231
+#, c-format
+msgid "Save and close"
+msgstr ""
+
+#: standalone/drakroam:281
+#, c-format
+msgid "Network: %s"
+msgstr "Mreža: %s"
+
+#: standalone/drakroam:282
+#, c-format
+msgid "Mode: %s"
+msgstr "Režim rada: %s"
+
+#: standalone/drakroam:283
+#, c-format
+msgid "IP: %s"
+msgstr "IP: %s"
+
+#: standalone/drakroam:284
+#, c-format
+msgid "Encryption: %s"
+msgstr "Šifrovanje: %s"
+
+#: standalone/drakroam:285
+#, c-format
+msgid "Gateway: %s"
+msgstr "Mrežni izlaz: %s"
+
+#: standalone/drakroam:286
+#, c-format
+msgid "Signal: %s"
+msgstr "Signal: %s"
+
 #: standalone/draksec:49
 #, c-format
 msgid "ALL"
@@ -22075,9 +22165,9 @@ msgid "IKE daemon racoon"
 msgstr ""
 
 #: standalone/drakvpn:295 standalone/drakvpn:306
-#, fuzzy, c-format
+#, c-format
 msgid "Configuration file"
-msgstr "Konfiguracija"
+msgstr "Fajl sa zapisom podešavanja:"
 
 #: standalone/drakvpn:296
 #, c-format
@@ -23478,7 +23568,7 @@ msgstr "Uređaj: "
 #: standalone/harddrake2:60
 #, c-format
 msgid ".."
-msgstr ""
+msgstr ".."
 
 #: standalone/harddrake2:64
 #, c-format
@@ -24457,9 +24547,9 @@ msgid "Attack time: %s"
 msgstr "Akcija: %s"
 
 #: standalone/net_applet:273
-#, fuzzy, c-format
+#, c-format
 msgid "Network interface: %s"
-msgstr "Mrežni interfejsi"
+msgstr "Mrežni interfejs: %s"
 
 #: standalone/net_applet:274
 #, fuzzy, c-format
@@ -24467,9 +24557,9 @@ msgid "Attack type: %s"
 msgstr "Vrsta pristupa: %s\n"
 
 #: standalone/net_applet:275
-#, fuzzy, c-format
+#, c-format
 msgid "Protocol: %s"
-msgstr "Protokoli"
+msgstr "Protokol: %s"
 
 #: standalone/net_applet:276
 #, fuzzy, c-format
@@ -24705,9 +24795,9 @@ msgstr "Ime servera"
 
 #. -PO: "Add Printer" is a button text and the translation has to be AS SHORT AS POSSIBLE
 #: standalone/printerdrake:226
-#, fuzzy, c-format
+#, c-format
 msgid "Add Printer"
-msgstr "Štampač"
+msgstr "Dodaj štampač..."
 
 #: standalone/printerdrake:226
 #, fuzzy, c-format
@@ -24992,9 +25082,9 @@ msgid "Setting up kernel modules..."
 msgstr "Postavlja podatke korisnika..."
 
 #: standalone/scannerdrake:390 standalone/scannerdrake:397
-#, fuzzy, c-format
+#, c-format
 msgid "Attention!"
-msgstr "Privlačenje"
+msgstr "Pažnja !"
 
 #: standalone/scannerdrake:391
 #, c-format
@@ -25380,9 +25470,9 @@ msgid "No such directory"
 msgstr "Nije direktorijum"
 
 #: ugtk2.pm:966
-#, fuzzy, c-format
+#, c-format
 msgid "No such file"
-msgstr "Nema takve datoteke „%s“\n"
+msgstr "Nema takvog fajla"
 
 #: ugtk2.pm:1045
 #, c-format
@@ -25410,10 +25500,6 @@ msgstr ""
 #, c-format
 msgid "Installation failed"
 msgstr "Instalacija nije uspela"
-
-#, fuzzy
-#~ msgid "MandrakeSoft Wizards"
-#~ msgstr "Mandrakelinux Kontrolni Centar"
 
 #~ msgid "No browser available! Please install one"
 #~ msgstr "Nema dostupnog pretraživača! Molim Vas da instalirate barem jednog"
