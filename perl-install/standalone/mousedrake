@@ -8,7 +8,6 @@ use standalone;
 use detect_devices;
 use mouse;
 use c;
-require 'dumpvar.pl';
 
 $::isEmbedded = ($::XID, $::CCPID) = "@ARGV" =~ /--embedded (\w+) (\w+)/;
 local $_ = join '', @ARGV;
@@ -45,7 +44,6 @@ $o->{mouse}{device} =
 		     \&mouse::serial_port2text,
 		     [ mouse::serial_ports ]) || goto begin if $mouse->{type} eq 'serial';
 
-dumpValue(\$mouse);
 mouse::write_conf($mouse);
 
 $::isEmbedded ? kill(USR1, $::CCPID) : $in->exit(0);
