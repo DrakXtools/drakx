@@ -94,6 +94,7 @@ static enum return_type ensure_additional_modules_available(void)
                 char floppy_mount_location[] = "/tmp/floppy";
                 char floppy_modules_mar[] = "/tmp/floppy/modules.mar";
                 int ret;
+                int automatic = 0;
 
                 if (stat("/tmp/tmpfs", &statbuf)) {
                         if (scall(mkdir("/tmp/tmpfs", 0755), "mkdir"))
@@ -101,7 +102,12 @@ static enum return_type ensure_additional_modules_available(void)
                         if (scall(mount("none", "/tmp/tmpfs", "tmpfs", MS_MGC_VAL, NULL), "mount tmpfs"))
                                 return RETURN_ERROR;
                 }
-                                
+                
+                if (IS_AUTOMATIC) {
+                        unset_param(MODE_AUTOMATIC);
+                        automatic = 1;
+                }
+          
         retry:
                 stg1_info_message("Please insert the Additional Drivers floppy.");;
 
@@ -113,6 +119,8 @@ static enum return_type ensure_additional_modules_available(void)
                                                               : "Can't find a linux ext2 floppy in first floppy drive.\nRetry?");
                         if (results != RETURN_OK) {
                                 allow_additional_modules_floppy = 0;
+                                if (automatic)
+                                        set_param(MODE_AUTOMATIC);
                                 return results;
                         }
                 }
@@ -127,6 +135,8 @@ static enum return_type ensure_additional_modules_available(void)
                 ret = copy_file(floppy_modules_mar, additional_archive_name, update_progression);
                 end_progression();
                 umount(floppy_mount_location);
+                if (automatic)
+                        set_param(MODE_AUTOMATIC);
                 return ret;
         } else
                 return RETURN_OK;
@@ -172,7 +182,7 @@ static enum insmod_return insmod_archived_file(const char * mod_name, char * opt
 	i = mar_extract_file(archive_name, module_name, "/tmp/");
 	if (i == 1) {
                 static int recurse = 0;
-                if (allow_additional_modules_floppy && allow_modules_floppy && !recurse && !IS_AUTOMATIC) {
+                if (allow_additional_modules_floppy && allow_modules_floppy && !recurse) {
                         recurse = 1;
                         if (ensure_additional_modules_available() == RETURN_OK)
                                 i = mar_extract_file(additional_archive_name, module_name, "/tmp/");
