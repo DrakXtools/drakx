@@ -4,7 +4,7 @@ package printerdrake;
 use diagnostics;
 use strict;
 
-use common qw(:common :file :functional :system);
+use common;
 use detect_devices;
 use commands;
 use modules;
@@ -84,7 +84,7 @@ complete => sub {
     foreach (@parport) {
 	$device eq $_->{port} or next;
         $printer->{DBENTRY} =
-            common::bestMatchSentence2($_->{val}{DESCRIPTION}, 
+            bestMatchSentence($_->{val}{DESCRIPTION}, 
             keys %printer::thedb);
     }
     1;

@@ -6,7 +6,7 @@ use strict;
 
 use vars qw(%thedb %spooler %spooler_inv %printer_type %printer_type_inv @entries_db_short @entry_db_description %descr_to_help %descr_to_db %db_to_descr %descr_to_ppd);
 
-use common qw(:common :system :file);
+use common;
 use commands;
 use run_program;
 
@@ -114,7 +114,7 @@ sub read_configured_queues($) {
     my ($printer) = @_;
     my @QUEUES;
     # Get the default spooler choice from the config file
-    if (!($printer->{SPOOLER} ||= printer::get_default_spooler())) {
+    if (!($printer->{SPOOLER} ||= get_default_spooler())) {
 	#- Find the first spooler where there are queues
 	my $spooler;
 	for $spooler (qw(cups pdq lprng lpd)) {
