@@ -264,6 +264,9 @@ system "mkdir", "-p", "/var/www/html/$dir";
 rmdir "/var/www/html/$dir";
 symlink $dir, "/var/www/html/$dir";
 
+stop_daemons;
+start_daemons;
+
 #- sub for reading/writing dhcpd.conf and pxelinux.cfg/default...
 sub parse_dhcpd_conf {
     my ($file, $netcnx, $netc, $intf) = @_;
