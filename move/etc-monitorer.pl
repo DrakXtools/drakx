@@ -5,11 +5,8 @@ use MDK::Common;
 sub outpend { my $f = shift; local *F; open F, ">>$f" or die "outpend in file $f failed: $!\n"; print F foreach @_ }
 sub logit { outpend "/var/log/etc-monitorer.log", sprintf("[%s] @_\n", chomp_(`date`)) }
 
-my $machine_ident = cat_('/var/lib/machine_ident');
-my $sysconf = "/home/.sysconf/$machine_ident";
-
 foreach my $dir (@ARGV) {
-    my $destdir = "/home/.sysconf/$machine_ident";
+    my $destdir = '/home/.sysconf/' . cat_('/var/lib/machine_ident');
     my @etcfiles = glob_("$dir/*");
     foreach (@etcfiles) {
         if ($_ eq '/etc/sudoers'           #- /etc/sudoers can't be a link
