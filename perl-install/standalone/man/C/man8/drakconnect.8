@@ -9,26 +9,27 @@ drakconnect \- configure network interfaces
 .B Drakconnect
 is used to configure the network interfaces.
 
-Drakconnect handle ISDN, modems, xDSL, LAN as well as wirelles
+Drakconnect handle ISDN, modems, xDSL, LAN as well as wirelless
 connexions.
 
 There's two main modes: the wizard mode and the "embedded in mcc" view
-(the manage interface=.  In the wizard mode, drakconnect detect all
+(the manage interface).  In the wizard mode, drakconnect detect all
 network interfaces and offer to configure them.
 
 .SH OPTIONS
 .TP
 .B "\-\-del"
 Delete a network interface and all related files
+.TP
 .B "\-\-expert"
-Expert mode; give access to more options (advanced options are show by
+Expert mode; give access to more options (advanced options are shown by
 default and some extra steps occured in the wizard)
 .TP
 .B "\-\-help"
 Display short description of drakconnect options
 .TP
 .B "\-\-skip-wizard"
-Enable or disable the use of the ARP protocol on this interface.
+Manage interface.
 .TP
 .B "\-\-testing"
 Do not do anything (for debugging purpose)
@@ -48,7 +49,7 @@ domain, primary & secondary DNS
 network interfaces and their stats
 .br
 .I /proc/net/if_inet6
-the same for ipv6
+the same for IPv6
 .br
 .I /sys/class/net/*/
 per network interface sysfs interface
@@ -64,7 +65,7 @@ kernel driver, ... (see
 for further information)
 .br
 .I /etc/sysconfig/network-scripts/ifcfg-*
-per interface configuration (ip/network, ip discovery
+per interface configuration (IP/network, IP discovery
 protocol, link notification support, ...) (see
 .BR ifcfg (8)
 for further information)
