@@ -973,7 +973,7 @@ sub write {
 	    update_gnomekderc("$ENV{HOME}/.qt/qtrc", General => (XIMInputStyle => $qt_xim));
 	}
 
-	if (!$b_user_only && $locale->{lang} !~ /^(zh_TW|th|vi|be|bg)/) { #- skip since we don't have the right font (it badly fails at least for zh_TW)
+	if (!$b_user_only) {
 	    my $kde_charset = charset2kde_charset(l2charset($locale->{lang}));
 	    my $welcome = c::to_utf8(N("Welcome to %s", '%n'));
 	    substInFile { 
@@ -981,9 +981,13 @@ sub write {
 		s/^(Language)=.*/$1=$locale->{lang}/;
 		if (!member($kde_charset, 'iso8859-1', 'iso8859-15')) { 
 		    #- don't keep the default for those
-		    s/^(StdFont)=.*/$1=*,12,5,$kde_charset,50,0/;
-		    s/^(FailFont)=.*/$1=*,12,5,$kde_charset,75,0/;
-		    s/^(GreetFont)=.*/$1=*,24,5,$kde_charset,50,0/;
+    		    my $font_list = $charset2kde_font{$charset} || $charset2kde_font{default};
+		    my $font_small = $font_list->[0];
+		    my $font_huge = $font_small;
+		    $font_huge =~ s/(.*),../$1,24/;
+		    s/^(StdFont)=.*/$1=$font_small,5,$kde_charset,50,0/;
+		    s/^(FailFont)=.*/$1=$font_small,5,$kde_charset,75,0/;
+		    s/^(GreetFont)=.*/$1=$font_huge,5,$kde_charset,50,0/;
 		}
 	    } "$::prefix/usr/share/config/kdm/kdmrc";
 	}
