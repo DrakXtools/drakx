@@ -1022,15 +1022,15 @@ sub create_treeitem($) {
 
 	if ($e->{keyval} > 0x100) {
 	    my $n;
-	    $n = &$left($w)  if /[Q´\x96]/;
-	    $n = &$right($w) if /[S¶\x98]/;
-	    $n = &$up($w)    if /[R¸\x97]/;
-	    $n = &$down($w)  if /[T²\x99]/;
+	    $n = &$left($w)  if /[Q\xb4\x96]/;
+	    $n = &$right($w) if /[S\xb6\x98]/;
+	    $n = &$up($w)    if /[R\xb8\x97]/;
+	    $n = &$down($w)  if /[T\xb2\x99]/;
 	    if ($n) {
 		$n->focus('up');
 		$w->signal_emit_stop("key_press_event"); 
 	    }
-	    $w->expand if /[+«]/;
+	    $w->expand if /[+\xab]/;
 	    $w->collapse if /[-\xad]/;
 	    do { 
 		$w->expanded ? $w->collapse : $w->expand; 
