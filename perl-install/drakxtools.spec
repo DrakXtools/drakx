@@ -332,6 +332,7 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %defattr(-,root,root)
 /usr/X11R6/bin/*
 %_sysconfdir/X11/xinit.d/net_applet
+%_menudir/net_applet
 
 %files -n harddrake
 %defattr(-,root,root)
