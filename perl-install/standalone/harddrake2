@@ -284,16 +284,14 @@ $tree->get_selection->signal_connect('changed' => sub {
                 member($field, map { @$_ } map { values %$_ } @groups{$current_class, 'generic'});
             } keys %device_fields;
             my @formated;
-            foreach my $class ($current_class, 'generic') {
-                my $class_groups = $groups{$class};
-                foreach my $group (keys %$class_groups) {
-                    my @fields = @{$class_groups->{$group}};
-                    # have we at least a member in that group?
-                    next unless any { member($_, @fields) } @$grouped;
-                    
-                    push @formated, titleFormat($group);
-                    push @formated, map { if_(ref $_, @$_) } $device_fields{$_} foreach @fields;
-                };
+            my %groups = map { if_(ref $groups{$_}, %{$groups{$_}}) } $current_class, 'generic';
+            foreach my $group (sort { $a eq N("Connection") } keys %groups) {
+                my @fields = @{$groups{$group}};
+                # have we at least a member in that group?
+                next unless any { member($_, @fields) } @$grouped;
+                
+                push @formated, titleFormat($group);
+                push @formated, map { if_(ref $_, @$_) } $device_fields{$_} foreach @fields;
             };
             push @formated, if_(@formated && @$ungrouped, titleFormat(N("Misc"))), map { @{$device_fields{$_}} } @$ungrouped;
             gtktext_insert($text, \@formated);
