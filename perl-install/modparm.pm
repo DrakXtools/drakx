@@ -22,7 +22,7 @@ sub get_options_result($@) {
 sub get_options_name($) {
   my ($module) = @_;
 
-  my @line = `modinfo -p $module`;
+  my @line = `/sbin/modinfo -p $module`;
   foreach (@line) {
       chomp;
       s/int/i/;
