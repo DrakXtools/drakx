@@ -304,7 +304,7 @@ sub ask_from_normalize {
 	if ($_->{list} && $_->{not_edit} && !$_->{allow_empty_list}) {
 	    if (@{$_->{list}} == ()) {
 		eval {
-		    require log;
+		    require 'log.pm';
 		    log::l("ask_from_normalize: empty list for $_->{label}\n" . common::backtrace());
 		};
 	    }
