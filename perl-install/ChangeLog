@@ -1,3 +1,143 @@
+2002/09/06  David Baudens  <baudens@mandrakesoft.com>
+
+	* standalone/icons/ic82-tape-40.png, standalone/icons/ic-drakfont-48.png,
+	standalone/icons/mdk_logo.png, standalone/icons/ic82-when-40.png,
+	standalone/icons/ic82-moreoption-40.png,
+	standalone/icons/ic82-system-40.png,
+	standalone/icons/ic82-dossier-32.png, standalone/icons/ic82-CD-40.png,
+	standalone/icons/ic82-back-up-32.png,
+	standalone/icons/ic82-where-40.png,
+	standalone/icons/ic82-back-up-16.png,
+	standalone/icons/ic82-network-40.png,
+	standalone/icons/ic82-back-up-48.png,
+	standalone/icons/ic82-discdurwhat-40.png,
+	standalone/icons/ic82-systemeplus-40.png,
+	standalone/icons/ic82-users-40.png, standalone/icons/ic82-others-40.png:
+	Update
+
+	* drakxtools.spec: Update
+	Update
+
+	* standalone/icons/gmon.png, standalone/icons/hori.png,
+	standalone/icons/categ.png, standalone/icons/verti.png: Update icons &
+	remove old Aurora stuff
+
+2002/09/06  François Pons  <fpons@mandrakesoft.com>
+
+	* install_any.pm: fixed to allow changing boot medium.
+
+	* install_steps.pm: changed how pkgs::remove is called.
+
+	* pkgs.pm: fixed excesive reduction of size.
+	fixed stupid typo.
+	allow obsoleted packages to be taken into account.
+	allow cleaning ask_remove according to removed package.
+
+2002/09/06  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* ugtk.pm, my_gtk.pm: add gtkset_visibility
+
+	* drakxtools.spec: fix and change a few things in the description
+
+2002/09/06  Pablo Saratxaga  <pablo@mandrakesoft.com>
+
+	* share/po/pl.po: updated Polish file
+
+	* share/po/pt.po, share/po/sk.po: updated Portuguese and Slovak files
+
+2002/09/06  Pixel  <pixel@mandrakesoft.com>
+
+	* Xconfig/various.pm, Xconfig/main.pm: ensure Xconfig::various::various is
+	called at install
+
+	* bootloader.pm (read): cleanup duplicate labels (in case file is
+	corrupted)
+	(get_label): compare labels using 15 first characters (to be compliant
+	with lilo)
+	(add_entry): fix removing duplicate entries
+	(read): fix
+
+2002/09/06  Thierry Vignaud  <tvignaud@mandrakesoft.com>
+
+	* share/po/fr.po: update french translation
+	s/si vous être nouveau/si vous êtes nouveau/
+	s/des actions additionnelle/des actions additionnelles/
+	s/sur le disk/sur le disque/
+	s/vous pouves atteindre les toutes options/vous pouvez modifier toutes
+	les options/
+	Ctrl - C (.... => manque )
+	s/Si vous installer/Si vous installez/
+	s/qui sera utilisé/qui sera utilisée/ (partition)
+	s/accessible en cas de/des images « ramdisk » accessibles/
+	s/Cette installation prends/Cette installation prend/
+	s/Assurez vous/Assurez-vous/
+	fix po
+
+	* ugtk.pm: export compose_pixbufs for mcc
+	  - ugtk::gtkicons_labels_widget() :
+	o pass icon name in $tag to $exec_func so that the later can display
+	    big icon
+	  o $label_exec is a duplicate of $label
+	  o simplify notebook redrawing:
+	    * remove dam'sugly hacks
+	    * $redraw_function->() : resize Gtk::Fixed on first run if more
+	      than 4 icons
+	    * redraw in only one place
+	    * don't redraw on realize event
+	    (now we both don't flick and have proper icon alignment without
+	     old hacks)
+	  - mcc:
+	  o print big icon while launching a tool (anim in next commit)
+	  o move todo list in TODO
+	  o stricter check:
+	    * default to use strict
+	    * disable strict mode when building rpm
+	    * fixes for 'use strict'
+	  o kill :
+	    * a debugging print
+	    * a superflous 'no warnings'
+	    * a title->show since we never hide it
+	    * $rootheight since gtk packer do the job for us
+	    * unused $nb_pages
+	  o begin to un-hardcode some values (window and notebook size, ...)
+	  o cosmetics:
+	    * comment some code
+	    * add myself to authors list (deush, you should add yourself too
+	      since you're the localedrake/mcc interaction guru)
+	    * s/darea1/summary_darea/
+	  o don't display logs when back in main summary
+	  o destroy pixbuf after
+
+	* harddrake/ui.pm: fix translated string
+
+	* standalone/drakbackup: handle delete_event in all cases
+	use my_gtk for window creation, thus:
+	  - window creation and embedding mode're handled automatically
+	  - when one close drackbackup, my_gtk close it properly and return to
+	mcc
+
+	* drakxtools.spec: 36mdk
+
+	* standalone/drakperm: use my_gtk for embedded mode.
+	code must be cleaned up through my_gtk usage though.
+
+2002/09/06  Warly  <warly@mandrakesoft.com>
+
+	* share/rpmsrate: remove contrib packages
+	add !CDCOM for OpenOffice.org
+	move mod_php to 5
+
+2002/09/05  Pablo Saratxaga  <pablo@mandrakesoft.com>
+
+	* share/po/tr.po: updated Turkish file
+
+	* share/po/zh_TW.po, share/po/sk.po: updated po Slovak and Chinese files
+
+2002/09/05  Pixel  <pixel@mandrakesoft.com>
+
+	* interactive/newt.pm: special case to handle many buttons in newt:
+	replacing with something alike ask_from_list (useful for XFdrake)
+
 2002/09/05  David Baudens  <baudens@mandrakesoft.com>
 
 	* standalone/icons/drakfont.620x57.png: Update
@@ -2316,7 +2456,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.738 2002/09/05 17:51:36 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.739 2002/09/06 00:02:30 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
