@@ -1043,6 +1043,7 @@ sub spawn_progress {
 	$log_buff .= "\n" . $descr . ":\n";
 	$log_buff .= $command . "\n\n";
 	
+	standalone::explanations("Running $command");
 	local *TMP;
 	open TMP, "$command 2>&1 |";
 	while ($value = <TMP>) {
@@ -3553,18 +3554,24 @@ sub find_files_to_restore() {
 	local $_;
 	my $file_restore;
 	my $start_restore;
+	my $files_selected = 0;
 	my @possible_sources;
-	my $file_to_restore;
+	my %catalog_entries;
+	my @files_to_restore;
 	my $cat_entry;
 	my @catalog = cat_("$cfg_dir/drakbackup_catalog");
 	
 	#- file info in tree view
-	my $model = Gtk2::TreeStore->new("Glib::String");
+	my $model = Gtk2::TreeStore->new("Glib::String", "Gtk2::Gdk::Pixbuf", "Glib::Int");
     my $file_list = Gtk2::TreeView->new_with_model($model);
 	$file_list->append_column(Gtk2::TreeViewColumn->new_with_attributes(undef, Gtk2::CellRendererText->new, 'text' => 0));
+	$file_list->append_column(Gtk2::TreeViewColumn->new_with_attributes(undef, Gtk2::CellRendererPixbuf->new, 'pixbuf' => 1));
+	$file_list->append_column(my $valcolumn = Gtk2::TreeViewColumn->new_with_attributes(undef, Gtk2::CellRendererText->new, 'text' => 2));
 	$file_list->set_headers_visible(0);
-	$file_list->get_selection->set_mode('single');
-
+	$file_list->get_selection->set_mode('browse');
+	$valcolumn->set_visible(0);
+	my $unselected = gtkcreate_pixbuf('unselected');
+	my $selected = gtkcreate_pixbuf('selected');
 	my $file_wildcard_entry = new Gtk2::Entry();
 	
     gtkpack($advanced_box,
@@ -3583,10 +3590,10 @@ sub find_files_to_restore() {
 						my @listing = cat_($list);
 						my @matches = grep { /$wildcard/ } @listing;
 						if (@matches) {
-							my $list_entry = $model->append_set(undef, [ 0 => $list ]);
+							my $list_entry = $model->append_set(undef, [ 0 => $list, 2 => '' ]);
 							foreach (@matches) {
 								chop;
-								$model->append_set($list_entry, [ 0 => $_ ]);
+								$model->append_set($list_entry, [ 0 => $_, 1 => $unselected, 2 => 0 ]);
 							}
 							$match = 1
 						}
@@ -3596,11 +3603,27 @@ sub find_files_to_restore() {
 			),
 			1, create_scrolled_window($file_list),
 			0, gtkset_sensitive(gtksignal_connect($start_restore = new Gtk2::Button(N("Restore Selected")), clicked => sub {
-				my $media_check = restore_catalog_entry($cat_entry, $file_to_restore);
-				if (! $media_check) {
-					destroy_widget();
-					find_files_to_restore();
-				} 
+				@files_to_restore = ();
+				my $last_entry = '';
+				my $catalog_entry;
+				my $restore_file;
+				foreach (sort keys %catalog_entries) {
+					if ($catalog_entries{$_} == 1) {
+						($catalog_entry, $restore_file) = split("###", $_);
+						$last_entry = $catalog_entry if $last_entry eq '';
+						if ($catalog_entry ne $last_entry) {
+							restore_catalog_entry($cat_entry, @files_to_restore);
+							@files_to_restore = ();
+							push @files_to_restore, $restore_file;
+						} else {	
+							push @files_to_restore, $restore_file; 
+						}
+						$last_entry = $catalog_entry;
+					}
+				}
+				restore_catalog_entry($cat_entry, @files_to_restore);
+				destroy_widget();
+				find_files_to_restore();
 			}), 0),
 		),
 	);
@@ -3608,21 +3631,20 @@ sub find_files_to_restore() {
 	$file_list->get_selection->signal_connect(changed => sub {
 		my ($lmodel, $iter) = $_[0]->get_selected;
 		$lmodel && $iter or return;
- 		my $s = $lmodel->get($iter, 0);
-print "$s\n";
+ 		my ($s, $val) = $lmodel->get($iter, 0, 2);
 		if (! any { /$s/ } @possible_sources) {
-			$file_to_restore = $s;
 			my $parent_iter = Gtk2::TreeModel::iter_parent($lmodel, $iter);
 			my $parent_name = $lmodel->get($parent_iter, 0);
 			$cat_entry = substr($parent_name, -19, 15);
 			my @full_cat_entry = grep { /^$cat_entry/ } @catalog;
+			chop @full_cat_entry;
 			$cat_entry = $full_cat_entry[0];
-			gtkset_sensitive($start_restore, 1);			
-		} else {
-			gtkset_sensitive($start_restore, 0);
+			$val ? $lmodel->set($iter, 1, $unselected, 2, 0) : $lmodel->set($iter, 1, $selected, 2, 1);
+			$val ? $files_selected-- : $files_selected++;
+			$catalog_entries{$cat_entry . "###" . $s} = 1 - $val;
+			$files_selected ? gtkset_sensitive($start_restore, 1) : gtkset_sensitive($start_restore, 0);
 		}
 	});
-
 	$central_widget = \$file_restore;
 }
 
@@ -3990,8 +4012,13 @@ sub restore_ftp {
 		#- full catalog specified
 		foreach (wildcard_to_tarfile($wild_card)) {
 			$ftp->get($_, "$cfg_dir/restores/$_");
-			$command = "tar -C $restore_path -xzf $cfg_dir/restores/$_";
-			spawn_progress($command, "Untarring \n$_ \nto $restore_path.");
+			if (-e "$cfg_dir/restores/$_") {
+				$command = "tar -C $restore_path -xzf $cfg_dir/restores/$_";
+				spawn_progress($command, "Untarring \n$_ \nto $restore_path.");
+			} else {
+				show_warning("f", N("%s not retrieved...", $_));
+				return 1;	
+			}
 		}
 	} else {
 		#- individual files - pull from appropriate catalog
@@ -4001,8 +4028,13 @@ sub restore_ftp {
 			if (!-e "$cfg_dir/restores/$tarfile") {
 				$ftp->get($tarfile, "$cfg_dir/restores/$tarfile");
 			}
-			$command = "tar -C $restore_path -xzf $cfg_dir/restores/$tarfile $_";
-			spawn_progress($command, "Untarring \n$_ from \n$tarfile \nto $restore_path.");
+			if (-e "$cfg_dir/restores/$tarfile") {
+				$command = "tar -C $restore_path -xzf $cfg_dir/restores/$tarfile $_";
+				spawn_progress($command, "Untarring \n$_ from \n$tarfile \nto $restore_path.");
+			} else {
+				show_warning("f", N("%s not retrieved...", $tarfile));
+				return 1;
+			}
 		}
 	}
     $ftp->quit; 
