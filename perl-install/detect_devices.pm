@@ -579,9 +579,9 @@ sub getNet() {
 #}
 
 sub getUPS() {
-    # MGE serial PnP devices:
     my @usb_devices = map { ($_->{name} = $_->{description}) =~ s/.*\|//; $_ } usb_probe();
 
+    # MGE serial PnP devices:
     (map {
         $_->{port} = $_->{DEVICE};
         $_->{bus} = "Serial";
