@@ -2,6 +2,7 @@
 #include "perl.h"
 #include "XSUB.h"
 #include <newt.h>
+#include <slang/slang.h>
 
 static void suspend() {
   newtSuspend();
@@ -31,6 +32,9 @@ DESTROY()
 
 int
 newtInit()
+  CODE:
+  SLsmg_Setlocale = 0;
+  newtInit();
 
 int
 newtFinished()
