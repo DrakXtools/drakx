@@ -39,7 +39,7 @@ Some connections use pptp, a few use dhcp.
 If you don't know, choose 'use pppoe'"),
                        data =>  [
                                  {
-                                  label => N("ADSL connection type :"), val_ref => \$wiz->{var}{adsl}{type}, list => [ sort values %l ] },
+                                  label => N("ADSL connection type :"), val => \$wiz->{var}{adsl}{type}, list => [ sort values %l ] },
                                 ],
                        pre => sub {
                            $wiz->{var}{adsl}{type} = $l{sagem}; # debug
