@@ -17,11 +17,14 @@ my ($all_hds, $in, $current_entry);
 sub main {
     ($in, $all_hds, my $type) = @_;
     my ($check, $create) = $type eq 'smb' ? (\&network::smb::check, \&smb_create) : (\&network::nfs::check, \&nfs_create);
-    $check->($in) or return;
+    {
+	local $my_gtk::pop_it = 1;
+	$check->($in) or return;
+    }
 
     my $w = my_gtk->new('DiskDrake');
     $create->($w->{window});
-    $w->{rwindow}->set_default_size(400, 300);
+    $w->{rwindow}->set_default_size(400, 300) if $w->{rwindow}->can('set_default_size');
     $w->{window}->show_all;
     $w->main;
 }
