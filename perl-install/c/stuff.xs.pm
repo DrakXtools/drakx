@@ -78,6 +78,9 @@ void initIMPS2() {
   tcflush (fd, TCIFLUSH);
   tcdrain(fd);
 }
+
+void log_message(const char * s, ...) {}
+
 ';
 
 print '
@@ -104,6 +107,9 @@ Xtest(display)
 ';
 
 $ENV{C_DRAKX} and print '
+char *
+pcmcia_probe()
+
 void
 setMouseLive(display, type, emulate3buttons)
   char *display

@@ -473,6 +473,8 @@ sub main {
     eval { $o = $::o = install_any::loadO($o, "patch") } if $patch;
     eval { $o = $::o = install_any::loadO($o, $cfg) } if $cfg;
 
+    $o->{pcmcia} ||= c::pcmcia_probe();
+
     eval { modules::load("af_packet") };
 
     map_index {
