@@ -1,3 +1,95 @@
+2004/02/02  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* share/rpmsrate: only install uim and anthil on cjk boxes
+
+	* network/ethernet.pm (get_eth_cards) handle not loaded drivers
+
+	* drakxtools.spec: 9.3-28mdk
+
+2004/02/01  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* lang.pm: changed font names to match real font name capitalization
+
+	* share/po/de.po: updated German file
+
+2004/02/01  yrahal
+
+	* share/po/ar.po: Committing Arabeyes.org's Arabic translation.
+
+2004/01/31  keld
+
+	* share/po/da.po: updates
+	soft/ftw/po/da.po soft/initscripts/po/da.po
+	soft/menudrake/po/da.po soft/urpmi/po/da.po
+	soft/wizard_perl/po/da.po gi/perl-install/share/po/da.po
+
+2004/01/31  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* network/adsl_consts.pm: add sources url
+
+	* network/netconnect.pm: enable to set hostname even when using DHCP
+	(#7230)
+
+2004/01/30  David Baudens  <baudens at mandrakesoft.com>
+
+	* share/advertising/ppp-07.pl, share/advertising/dis-06.pl,
+	share/advertising/dwd-08.pl, share/advertising/dwd-02.pl,
+	share/advertising/dwd-04.pl, share/advertising/ppp-09.pl,
+	share/advertising/ppp-03.pl, share/advertising/dwd-01.pl,
+	share/advertising/dwd-05.pl, share/advertising/ppp-06.pl,
+	share/advertising/dwd-03.pl, share/advertising/dis-10.pl,
+	share/advertising/ppp-05.pl, share/advertising/ppp-11.pl,
+	share/advertising/ppp-01.pl, share/advertising/ppp-08.pl,
+	share/advertising/ppp-10.pl, share/advertising/dwd-06.pl,
+	share/advertising/ppp-04.pl, share/advertising/ppp-02.pl,
+	share/advertising/dwd-07.pl: Update
+
+	* share/advertising/dwd-09.pl: Fix typo
+	Update
+
+2004/01/30  Damien Chaumette  <dchaumette at mandrakesoft.com>
+
+	* standalone/drakconnect: 
+	  - remove not needed $security
+	  - clean dumb foreach repetition (one foreach to rule them all)
+
+2004/01/30  Guillaume Cottenceau  <gc at mandrakesoft.com>
+
+	* ugtk2.pm: hack :( if ' ' is at the beginning of a text section, don't
+	forget it, substitute
+	with an unbreakable space because gtk allocates too much space otherwise
+
+	* install_messages.pm: bump up to 100errata
+
+2004/01/30  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/nb.po: updated Norwegian file
+
+2004/01/30  Pixel  <pixel at mandrakesoft.com>
+
+	* ugtk2.pm: add help method ->iter_each_children for Gtk2::TreeModel
+
+2004/01/30  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* network/netconnect.pm: do not offer to select dhcp client when
+	configuring static interfaces
+	fix crash on module lookup when ifcfg-<intf> file is missing on disk
+	(not yet configured interface case)
+
+	* share/po/fr.po: update
+
+	* share/advertising/dwd-07.pl: share string with dis-10.pl ppp-10.pl and
+	pwp-09.pl
+
+	* drakxtools.spec: log one more change in -27mdk
+	9.3-27mdk
+
+	* share/rpmsrate: add anthy/uim better cjk input methods
+
+2004/01/30  Warly  <warly at mandrakesoft.com>
+
+	* share/rpmsrate: add magicdev in SYSTEM for KDE or GNOME
+
 2004/01/30  Damien Chaumette  <dchaumette at mandrakesoft.com>
 
 	* standalone/drakconnect: 
@@ -24678,7 +24770,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.861 2004/01/30 14:57:24 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.862 2004/01/30 15:45:26 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
