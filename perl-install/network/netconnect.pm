@@ -197,6 +197,7 @@ ifdown eth0
 [_("Cable connection") . if_($netc->{autodetect}{cable}, " - " . _("cable connection detected")), \$conf{cable}],
 [_("LAN connection") . if_($netc->{autodetect}{lan}, " - " . _("ethernet card(s) detected")), \$conf{lan}]
 );
+    $::isInstall and $in->set_help('configureNetwork');
     my $e = $in->ask_from(_("Network Configuration Wizard"), _("Choose the connection you want to configure"),
 			  [ map { { label => $_->[0], val => $_->[1], type => 'bool' } } @l ],
 			  changed => sub {
