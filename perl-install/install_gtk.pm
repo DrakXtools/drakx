@@ -64,6 +64,7 @@ widget "*Steps*" style "small-font"
 
 ));
     }
+
     gtkset_background(@background1) unless $::live; #- || testing;
 
     create_logo_window($o);
