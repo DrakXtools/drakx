@@ -210,7 +210,7 @@ sub getinfoFromDDC {
     $O->{hsyncrange} ||= $h =~ /^(\S*)/;
     $O->{vsyncrange} ||= $v =~ /^(\S*)/;
     $O->{size} ||= to_float($size);
-    $O->{EISA_ID} = $1 if $size =~ /EISA ID: (\S*)/;
+    $O->{EISA_ID} = lc($1) if $size =~ /EISA ID: (\S*)/;
     $O->{modelines} ||= join '', @m;
     $o;
 }

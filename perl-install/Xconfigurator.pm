@@ -493,7 +493,7 @@ sub monitorConfiguration(;$$) {
     readMonitorsDB("$ENV{SHARE_PATH}/ldetect-lst/MonitorsDB");
 
     if ($monitor->{EISA_ID}) {
-	if (my ($mon) = grep { $_->{eisa} eq $monitor->{EISA_ID} } values %monitors) {
+	if (my ($mon) = grep { lc($_->{eisa}) eq $monitor->{EISA_ID} } values %monitors) {
 	    add2hash($monitor, $mon);
 	    return $monitor;
 	}
