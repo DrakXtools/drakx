@@ -536,10 +536,11 @@ wait %d seconds for default boot.
 			   type => 'other',
 			   kernel_or_dev => "/dev/$_->{device}",
 			   label => $label . ($nbs{$label}++ ? $nbs{$label} : ''),
-			     if_($_->{device} =~ /[1-4]$/, 
+			     $_->{device} =~ /[1-4]$/ ? (
 			   table => "/dev/$_->{rootDevice}"
-				),
+			     ) : (
 			   unsafe => 1
+                             ),
 			  })
 	    }
 	}
