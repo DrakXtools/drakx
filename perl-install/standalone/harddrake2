@@ -229,6 +229,7 @@ $tree->get_selection->signal_connect('changed' => sub {
         }
     }
     $text->get_buffer->set_text(N("Click on a device in the left tree in order to display its information here."));
+    undef $current_device;
     $config_button->hide;
     $module_cfg_button->hide;
 });
