@@ -329,7 +329,7 @@ currticks (void)
 
 #define BACKOFF_LIMIT 7
 #define	TICKS_PER_SEC 18
-#define MAX_ARP_RETRIES	5
+#define MAX_ARP_RETRIES	4
 
 void
 rfc951_sleep (int exp)
