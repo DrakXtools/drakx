@@ -455,7 +455,7 @@ sub pack_passwd {
     join(':', @$l{@etc_pass_fields}) . "\n";
 }
 
-sub get_autologin {
+sub get_autologin() {
     my %desktop = getVarsFromSh("$::prefix/etc/sysconfig/desktop");
     my $desktop = $desktop{DESKTOP} || 'KDE';
     my $autologin = do {
