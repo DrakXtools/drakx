@@ -87,7 +87,9 @@ use standalone;     #- warning, standalone must be loaded very first, for 'expla
 use interactive;
 use my_gtk qw(:helpers :wrappers);
 use common;
-use strict;
+#use strict;
+#use Config;
+#use POSIX;
 
 $::isEmbedded = ($::XID, $::CCPID) = "@ARGV" =~ /--embedded (\S*) (\S*)/;
 
