@@ -499,7 +499,7 @@ sub main {
 	$o->{partitioning}{use_existing_root} = 1;
 	$o->{partitioning}{auto_allocate} = 1;
 	$o->{compssListLevel} = 50;
-	push @auto, 'selectInstallClass', 'selectMouse', 'doPartitionDisks', 'choosePackages', 'configureTimezone', 'exitInstall';
+	push @auto, 'selectInstallClass', 'doPartitionDisks', 'choosePackages', 'configureTimezone', 'exitInstall';
     }
 
     foreach (@auto) {
