@@ -148,6 +148,8 @@ sub installPackages() {
                               prefix => $::prefix, 
                               meta_class => 'desktop', 
                               default_packages => [
+				 #- for screenshots:
+				 qw(fb2png),
 				 qw(XFree86-server XFree86-xfs XFree86-FBDev),
 				 qw(openssh-server), #- fred wants it
 				 qw(alsa-utils cdialog newt),
