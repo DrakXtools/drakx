@@ -25,7 +25,7 @@ sub adjustEnd {}
 sub write {}
 sub cylinder_size { 
     my ($hd) = @_;
-    $hd->{PE_size};
+    $hd->{extent_size};
 }
 
 init();
@@ -64,31 +64,33 @@ sub check {
 sub get_vg {
     my ($part) = @_;
     my $dev = expand_symlinks(devices::make($part->{device}));
-    chomp_(run_program::get_stdout('lvm2', 'pvs', '--noheadings', '-o', 'vg_name', $dev));
+    run_program::get_stdout('lvm2', 'pvs', '--noheadings', '-o', 'vg_name', $dev) =~ /(\S+)/ && $1;
 }
 
 sub update_size {
     my ($lvm) = @_;
-    $lvm->{totalsectors} = chomp_(run_program::get_stdout('lvm2', 'vgs', '--noheadings', '--nosuffix', '--units', 's', '-o', 'vg_size', $lvm->{VG_name}));
+    $lvm->{extent_size} = to_int(run_program::get_stdout('lvm2', 'vgs', '--noheadings', '--nosuffix', '--units', 's', '-o', 'vg_extent_size', $lvm->{VG_name}));
+    $lvm->{totalsectors} = to_int(run_program::get_stdout('lvm2', 'vgs', '--noheadings', '--nosuffix', '--units', 's', '-o', 'vg_size', $lvm->{VG_name}));
 }
 
 sub get_lv_size {
     my ($lvm_device) = @_;
-    chomp_(run_program::get_stdout('lvm2', 'lvs', '--noheadings', '--nosuffix', '--units', 's', '-o', 'lv_size', "/dev/$lvm_device"));
+    to_int(run_program::get_stdout('lvm2', 'lvs', '--noheadings', '--nosuffix', '--units', 's', '-o', 'lv_size', "/dev/$lvm_device"));
 }
 
 sub get_lvs {
     my ($lvm) = @_;
-    my @l = run_program::get_stdout('lvm2', 'vgdisplay', '-v', '-D', $lvm->{VG_name});
+    my @l = run_program::get_stdout('lvm2', 'lvs', '--noheadings', '--nosuffix', '--units', 's', '-o', 'lv_name', $lvm->{VG_name}) =~ /(\S+)/g;
     $lvm->{primary}{normal} = 
       [
        map {
-	   my $type = -e "/dev/$_" && fsedit::typeOfPart("/dev/$_");
+	   my $device = "$lvm->{VG_name}/$_";
+	   my $type = -e "/dev/$device" && fsedit::typeOfPart($device);
 
-	   { device => $_, 
+	   { device => $device, 
 	     type => $type || 0x83,
-	     size => get_lv_size($_) }
-       } map { if_(m|^LV Name\s+/dev/(\S+)|, $1) } @l
+	     size => get_lv_size($device) }
+       } @l
       ];
 }
 
