@@ -194,7 +194,7 @@ my $selection = gtksignal_connect($tree->get_selection(), 'changed' => sub {
                 # this ensures proper displaying of names like /dev/fd0 (otherwise it gets 'dev/fd0/').
                 # it must come *after* the space, as the space must follow the colon following the direction of writting.
                 if_($fields{$_}[0], [ $fields{$_}[0] . ": \x{200e}", { 'foreground' => 'royalblue3', 'weight' => Gtk2::Pango->WEIGHT_BOLD } ],
-                    [ ($_ && $current_device->{$_} =~ /^(unknown)/ ? N("unknown") : $_ && $current_device->{$_} =~ /^(Unknown)/ ? N("Unknown") : $current_device->{$_}) . "\n\n", { 'foreground' => ($_ eq 'driver' && $current_device->{$_} =~ /^(unknown|Bad:)/ ? 'indian red' : 'black') } ])
+                    [ ($_ && $current_device->{$_} =~ /^(unknown)/ ? N("unknown") : $_ && $current_device->{$_} =~ /^(Unknown)/ ? N("Unknown") : $current_device->{$_}) . "\n\n", { 'foreground' => ($_ eq 'driver' && $current_device->{$_} =~ /^(unknown|Bad:|Removable:)/ ? 'indian red' : 'black') } ])
                 } sort keys %$current_device ]);
 
             foreach (keys %$current_device) {
@@ -259,7 +259,11 @@ foreach (@harddrake::data::tree) {
             my $alter = harddrake::sound::get_alternative($_->{driver});
             $_->{alternative_drivers} = join(':', @$alter) if $alter->[0] ne 'unknown';
         }
-        foreach my $i (qw(vendor id subvendor subid pci_bus pci_device pci_function MOUSETYPE XMOUSETYPE unsafe val devfs_prefix wacom auxmouse)) { delete $_->{$i} };
+        rename_field($_, 'usb_description', 'description');
+        rename_field($_, 'vendor_name', 'Vendor');
+        rename_field($_, 'usb_driver', 'driver');
+        rename_field($_, 'usb_media_type', 'media_type');
+        foreach my $i (qw(MOUSETYPE XMOUSETYPE auxmouse devfs_prefix id pci_bus pci_device pci_function subid subvendor unsafe usb_bus usb_pci_bus usb_pci_device usb_vendor val vendor wacom)) { delete $_->{$i} };
 
         my $custom_id = harddrake::data::custom_id($_, $title);
         $custom_id .= ' ' while $data{$custom_id}; # get a unique id for eg bt8xx audio/video funtions
@@ -312,4 +316,16 @@ sub show_hide {
 
 sub strip_first_underscore {
     join '', map { s/([^_]*)_(.*)/$1$2/; $_ } @_;
+}
+
+sub rename_field {
+    my ($dev, $field, $new_field) = @_;
+    if ($_->{$field}) {
+        if ($_->{$new_field}) {
+            $_->{$new_field} .= " ($_->{$field})";
+        } else {
+            $_->{$new_field} = $_->{$field};
+        }
+        delete $_->{$field};
+    }
 }
