@@ -203,19 +203,21 @@ sub cardConfiguration(;$$$) {
 			$card->{type} =~ /ATI Rage 128/); #- 16 and 32 bits, prefer 16bit as no DMA.
 
     #- check to use XFree 4.0 or XFree 3.3.
-    $card->{use_xf4} = $card->{driver} && !$card->{flags}{unsupported} &&
-      !($card->{type} =~ /RIVA TNT/ ||
-	$card->{type} =~ /RIVA128/ ||
-	$card->{type} =~ /GeForce/);
+    $card->{use_xf4} = $card->{driver} && !$card->{flags}{unsupported};
+    $card->{prefer_xf3} = ($card->{type} =~ /RIVA TNT/ ||
+			   $card->{type} =~ /RIVA128/ ||
+			   $card->{type} =~ /GeForce/);
 
     #- basic installation, use of XFree 4.0 or XFree 3.3.
     my ($xf4_ver, $xf3_ver) = ("4.0.1", "3.3.6");
     my $xf3_tc = { text => _("XFree %s", $xf3_ver),
 		   code => sub { $card->{Utah_glx} = $card->{DRI_glx} = ''; $card->{use_xf4} = '' } };
     my $msg = _("Which configuration of XFree do you want to have?");
-    my @choices = $card->{use_xf4} ? ({ text => _("XFree %s", $xf4_ver),
-					code => sub { $card->{Utah_glx} = $card->{DRI_glx} = '' } },
-					  ($::expert ? ($xf3_tc) : ())) : ($xf3_tc);
+    my @choices = $card->{use_xf4} ? (($card->{prefer_xf3} ? ($xf3_tc) : ()),
+				      (!$card->{prefer_xf3} || $::expert ?
+				       ({ text => _("XFree %s", $xf4_ver),
+					  code => sub { $card->{Utah_glx} = $card->{DRI_glx} = '' } }) : (),),
+				      ($::expert && !$card->{prefer_xf3} ? ($xf3_tc) : ())) : ($xf3_tc);
 
     #- try to figure if 3D acceleration is supported
     #- by XFree 3.3 but not XFree 4.0 then ask user to keep XFree 3.3 ?
