@@ -1,0 +1,17 @@
+#!/usr/bin/perl
+
+use lib qw(/usr/lib/libDrakX);
+
+use interactive;
+use lang;
+use any;
+
+my $in = 'interactive'->vnew('su');
+
+my ($lang, $langs) = lang::read();
+if ($lang = any::selectLanguage($in, $lang, $langs)) {
+    lang::write('', $lang);
+    lang::write_langs('', $langs);
+}
+
+$in->exit(0);

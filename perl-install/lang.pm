@@ -369,6 +369,22 @@ sub pack_langs {
     $s;
 }
 
+sub unpack_langs {
+    my ($s) = @_;
+    my @l = uniq(map { split ':', $languages{$_}[3] } split(':', $s));
+    my @l2 = intersection(\@l, [ keys %languages ]);
+    +{ map { $_ => 1 } @l2 };
+}
+
+sub read {
+    my ($prefix) = @_;    
+    my $h = getVarsFromSh("$prefix/etc/sysconfig/i18n");
+    my $lang = $h ? $h->{LC_MESSAGES} : 'en_US';
+    my $langs = 
+      cat_("$prefix/etc/rpm/macros") =~ /%_install_langs (.*)/ ? unpack_langs($1) : { $lang => 1 };
+    $lang, $langs;
+}
+
 sub write_langs {
     my ($prefix, $langs) = @_;
     my $s = pack_langs($langs);

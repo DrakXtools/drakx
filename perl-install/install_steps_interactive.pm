@@ -51,23 +51,7 @@ sub charsetChanged {}
 sub selectLanguage {
     my ($o) = @_;
 
-    $o->ask_from_(
-	{ messages => _("Please, choose a language to use."),
-	  advanced_messages => _("You can choose other languages that will be available after install"),
-	  callbacks => {
-	      focus_out => sub { $o->{langs}{$o->{lang}} = 1 },
-	  },
-	},
-	[ { val => \$o->{lang}, separator => '|', 
-	    format => \&lang::lang2text, list => [ lang::list() ] },
-	  (map {;
-	       { val => \$o->{langs}{$_->[0]}, type => 'bool', disabled => sub { $o->{langs}{all} },
-		 text => $_->[1], advanced => 1,
-	       } 
-	   } sort { $a->[1] cmp $b->[1] } map { [ $_, lang::lang2text($_) ] } lang::list()),
-	  { val => \$o->{langs}{all}, type => 'bool', text => _("All"), advanced => 1 }
-	]);
-
+    any::selectLanguage($o, $o->{lang}, $o->{langs} ||= {});
     install_steps::selectLanguage($o);
 
     $o->charsetChanged;
