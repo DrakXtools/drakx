@@ -1043,7 +1043,7 @@ sub copy_advertising {
 
 sub remove_advertising {
     my ($o) = @_;
-    rm_rf("$o->{prefix}/tmp/drakx-images");
+    eval { rm_rf("$o->{prefix}/tmp/drakx-images") };
     @advertising_images = ();
 }
 
