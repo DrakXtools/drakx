@@ -532,7 +532,7 @@ sub getDeps {
 	$arch eq packageArch($pkg) or
 	  log::l("ignoring $name-$version-$release.$arch in depslist mismatch arch in hdlist"), next;
 
-	$epoch > 0 and $pkg->[$EPOCH] = $epoch; #- only 5% of the distribution use epoch (serial).
+	$epoch && $epoch > 0 and $pkg->[$EPOCH] = $epoch; #- only 5% of the distribution use epoch (serial).
 	$pkg->[$SIZE_DEPS] = $sizeDeps;
 
 	#- check position of package in depslist according to precomputed
@@ -1493,17 +1493,23 @@ sub remove($$) {
 
 sub selected_leaves {
     my ($packages) = @_;
-    my %l;
+    my (%l, %m);
     $l{$_->[$FILE]} = 1 foreach grep { packageFlagSelected($_) && !packageFlagBase($_) } @{$packages->{depslist}};
 
-    my %m = %l;
-    foreach (@{$packages->{depslist}}) {
-	delete $m{$_->[$FILE]} or next;
 
-	foreach (map { split '\|' } grep { !/^NOTFOUND_/ } packageDepsId($_)) {
-	    delete $l{$packages->{depslist}[$_][$FILE]};
+    do {
+	%m = %l;
+
+      N: foreach my $p (@{$packages->{depslist}}) {
+	    foreach (packageProvides($p)) {
+		if ($l{$_->[$FILE]}) {
+		    delete $l{$p->[$FILE]};
+		    next N;
+		}
+	    }
 	}
-    }
+    } until (%m = %l);
+
     [ map {
 	my @l; $l[$FILE] = $_;
 	packageName(\@l);
