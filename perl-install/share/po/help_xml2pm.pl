@@ -140,7 +140,7 @@ sub rewrite2_ {
     };
 
     if (0) {
-    } elsif (member($tree->{tag}, 'para', 'itemizedlist', 'orderedlist')) {
+    } elsif (member($tree->{tag}, 'formalpara', 'para', 'itemizedlist', 'orderedlist')) {
 	$text =~ s/^\s(?!\s)//;
 	$text =~ s/^( ?\n)+//;
 	$text =~ s/\s+$//;
