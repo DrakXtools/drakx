@@ -39,8 +39,9 @@ sub zips() { grep { $_->{type} eq 'hd' && isZipDrive($_) } get(); }
 sub cdroms() { 
     my @l = grep { $_->{type} eq 'cdrom' } get(); 
     my $nb = $modules::scsi; #- this is gross!
-    foreach (getIDEBurners()) {
-	my ($e) = grep { $_->{device} eq $_ } @l or next;
+    foreach my $b (getIDEBurners()) {
+	log::l("getIDEBurners: $b");
+	my ($e) = grep { $_->{device} eq $b } @l or next;
 	$e->{device} = "scd" . $nb++;
     }
     @l;

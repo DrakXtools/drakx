@@ -196,7 +196,7 @@ $o = $::o = {
     base_i386 => [ "lilo", "mkbootdisk", "isapnptools" ],
     base_alpha => [ "aboot", "isapnptools" ],
     base_sparc => [ "silo", "mkbootdisk" ],
-	base_ppc => [ "kernel-pmac", "pdisk", "hfsutils" ],
+    base_ppc => [ "kernel-pmac", "pdisk", "hfsutils" ],
 
 #- for the list of fields available for user and superuser, see @etc_pass_fields in install_steps.pm
 #-    intf => [ { DEVICE => "eth0", IPADDR => '1.2.3.4', NETMASK => '255.255.255.128' } ],

@@ -113,7 +113,7 @@ sub read($$) {
     c::lseek_sector(fileno(F), $sector, 512) or die "reading of partition in sector $sector failed";
 
     my @pt;
-    for($i=0;$i<$partmapsize;$i++) {
+    for ($i=0;$i<$partmapsize;$i++) {
     	my $part;
         sysread F, $part, psizeof($p_format) or die "error while reading partition info in sector $sector";
 
@@ -165,12 +165,12 @@ sub write($$$;$) {
 
     # Now go thru the partitions, sort and fill gaps.
     my $last;
-    while($part) {
+    while ($part) {
         $last = $part;
         $part = &partition_table::next($hd, $part);
         $part or last;
 
-        if($last->{start} + $last->{size} < $part->{start}) {
+        if ($last->{start} + $last->{size} < $part->{start}) {
             #There is a gap between partitions.  Fill it and move on.
             push @partstowrite, {
                 type => 0x0,
@@ -182,7 +182,7 @@ sub write($$$;$) {
     };
 
     # now, fill a gap at the end if there is one.
-    if($last->{start} + $last->{size} < $hd->{totalsectors}) {
+    if ($last->{start} + $last->{size} < $hd->{totalsectors}) {
         push @partstowrite, {
             type => 0x0,
             start => $last->{start} + $last->{size},
@@ -196,7 +196,7 @@ sub write($$$;$) {
     foreach $i ( 0 .. $info->{bzDrvrCnt} - 1) {
         my $ddBlock = $_->{ddBlock};
         my $dd = $_;
-        foreach(@partstowrite) {
+        foreach (@partstowrite) {
             $ddBlock == $_->{pPBlockStart} and push @ddstowrite, $dd;
         }
     }
@@ -234,7 +234,7 @@ sub write($$$;$) {
             $_->{pBootArgs} = "\0";
             $_->{pReserved} = "\0";
 
-            if($_->{type} == 0x402) {
+            if ($_->{type} == 0x402) {
                 $_->{pType} = "Apple_HFS";
                 $_->{pName} = "MacOS";
                 $_->{pFlags} = 0x4000037F;

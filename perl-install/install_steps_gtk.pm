@@ -194,7 +194,7 @@ sub new($$) {
 		#-@servers = qw(SVGA 3DLabs TGA) 
 	    }
 	    @servers = qw(Mach64) if arch() =~ /^sparc/;
-		@servers = qw(PPCDummy) if arch() eq "ppc";
+	    @servers = qw(PPCDummy) if arch() eq "ppc";
 
 	    foreach (@servers) {
 		log::l("Trying with server $_");

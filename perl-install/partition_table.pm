@@ -28,6 +28,10 @@ use log;
 
 my %types = (
   0x0 => 'Empty',
+arch() =~ /^ppc/ ? (
+  0x401	=> 'Apple Partition',
+  0x402	=> 'Apple HFS Partition',
+) : (),
 arch() =~ /^sparc/ ? (
   0x1 => 'SunOS boot',
   0x2 => 'SunOS root',
@@ -153,15 +157,6 @@ arch() =~ /^sparc/ ? (
   0xff => 'Xenix Bad Block Table',
 );
 
-if (arch() eq "ppc") {
-%types = (
-  0x82 => 'Linux swap',
-  0x83 => 'Linux native',
-  0x401	=> 'Apple Partition',
-  0x402	=> 'Apple HFS Partition',
-);
-}
-
 my %type2fs = (
 arch() !~ /^sparc/ ? (
   0x01 => 'vfat',
@@ -209,7 +204,7 @@ sub isFat($) { isDos($_[0]) || isWin($_[0]) }
 sub isNfs($) { $_[0]{type} eq 'nfs' } #- small hack
 sub isSupermount($) { $_[0]{type} eq 'supermount' }
 sub isHFS($) { $type2fs{$_[0]{type}} eq 'hfs' }
-sub isApplePartMap { defined $_[0]->{isMap} }
+sub isApplePartMap { defined $_[0]{isMap} }
 
 sub isPrimary($$) {
     my ($part, $hd) = @_;
@@ -382,11 +377,6 @@ sub read($;$) {
     assign_device_numbers($hd);
     remove_empty_extended($hd);
     1;
-}
-
-sub read_and_clear($) {
-    my ($hd) = @_;
-    partition_table::read($hd, 1);
 }
 
 sub read_extended {
