@@ -21,6 +21,9 @@ sub configure {
 	     'dhcp'  =>  N_("use dhcp"), 
 	     'speedtouch' => N_("Alcatel speedtouch usb") . if_($netc->{autodetect}{adsl}{speedtouch}, " - detected"),
 	     'sagem' =>  N_("Sagem (using pppoa) usb") . if_($netc->{autodetect}{adsl}{sagem}, " - detected"),
+	     if_($::expert, #- avoid clash with strings not translated but still add functionnalities...
+		 'sagem_dhcp' =>  N_("Sagem (using dhcp) usb") . if_($netc->{autodetect}{adsl}{sagem}, " - detected"),
+		),
 	    );
     
     my $type = $in->ask_from_list_(N("Connect to the Internet"),
@@ -47,8 +50,8 @@ If you don't know, choose 'use pppoe'"),
 	adsl_conf($netcnx->{"adsl_$type"}, $netc, $intf, $type) or goto conf_adsl_step1;
     }
     if ($type =~ /Sagem/) {
-	$type = 'sagem';
-	$in->do_pkgs->install(qw(adiusbadsl));
+	$type = 'sagem' . ($type =~ /dhcp/ ? "_dhcp" : "");
+	$in->do_pkgs->install(qw(adiusbadsl), if_($type =~ /dhcp/, qw(dhcpcd)));
 	$netcnx->{type} = "adsl_$type";
 	$netcnx->{"adsl_$type"} = {};
 	adsl_conf($netcnx->{"adsl_$type"}, $netc, $intf, $type) or goto conf_adsl_step1;
@@ -163,6 +166,10 @@ defaultroute
     }
 
     if ($adsl_type eq 'sagem') {
+	substInFile {
+	    s/VCI=.*\n/VCI=00000023\n/;
+	    s/Encapsulation=.*\n/Encapsulation=00000006\n/;
+	} "$prefix/etc/analog/adiusbadsl";
 	output("$prefix/etc/ppp/peers/adsl",
 qq(noauth
 noipdefault
@@ -184,6 +191,13 @@ usepeerdns
 defaultroute
 user "$adsl->{login}"
 ));
+    }
+
+    if ($adsl_type eq 'sagem_dhcp') {
+	substInFile {
+	    s/VCI=.*\n/VCI=00000024\n/;
+	    s/Encapsulation=.*\n/Encapsulation=00000004\n/;
+	} "$prefix/etc/analog/adiusbadsl";
     }
 
     if ($adsl_type eq 'speedtouch') {
@@ -291,6 +305,15 @@ INTERFACE=`/usr/sbin/adictrl -i`
 /usr/sbin/pppd file /etc/ppp/peers/adsl
 ',
 '/usr/sbin/stopadsl
+', $netc->{adsltype}) } elsif ($adsl_type eq 'sagem_dhcp') {
+    write_cnx_script($netc, 'adsl',
+'/sbin/route del default
+/usr/sbin/adictrl -s
+INTERFACE=`/usr/sbin/adictrl -i`
+/sbin/dhcpcd $INTERFACE
+',
+'INTERFACE=`/usr/sbin/adictrl -i`
+/sbin/ifdown $INTERFACE
 ', $netc->{adsltype}) } elsif ($adsl_type eq 'eci') {
     write_cnx_script($netc, 'adsl',
 '/sbin/route del default
