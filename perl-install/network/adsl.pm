@@ -263,62 +263,29 @@ user "$adsl->{login}"
             } "$::prefix/etc/ppp/pppoe.conf";
         }
 
-        my %ppp_options = 
-          (
-           pptp => {
-                    connect => "/usr/bin/pptp 10.0.0.138 name $adsl->{login}",
-                    disconnect => "/usr/bin/killall pptp pppd\n",
-                   },
+#            pptp => {
+#                     connect => "/usr/bin/pptp 10.0.0.138 name $adsl->{login}",
+#                     disconnect => "/usr/bin/killall pptp pppd\n",
+#                    },
+#            pppoe => {
+#                      # we do not call directly pppd, rp-pppoe take care of "plugin rp-pppoe.so" peers option and the like
+#                      connect => "LC_ALL=C LANG=C LANGUAGE=C LC_MESSAGES=C /usr/sbin/adsl-start",
+#                      disconnect => qq(/usr/sbin/adsl-stop
+# /usr/bin/killall pppoe pppd\n),
+#                     },
 
-           pppoe => {
-                     # we do not call directly pppd, rp-pppoe take care of "plugin rp-pppoe.so" peers option and the like
-                     connect => "LC_ALL=C LANG=C LANGUAGE=C LC_MESSAGES=C /usr/sbin/adsl-start",
-                     disconnect => qq(/usr/sbin/adsl-stop
-/usr/bin/killall pppoe pppd\n),
-                    },
-
-           pppoa => {
-                     disconnect => qq(/usr/bin/killall pppd\n),
-                    },
-          );
-        set_cnx_script($netc, "adsl", join("\n",
-                                             "/sbin/route del default",
-                                             $modems{$adsl_device}{start},
-					     "/usr/sbin/pppd file /etc/ppp/peers/adsl $modems{$adsl_device}{pppd_options}",
-                                             $ppp_options{$adsl_type}{connect}
-                                            ),
-                         $ppp_options{$adsl_type}{disconnect},
-                         $netc->{adsltype}
-                        );
-
-    } elsif ($adsl_type eq 'dhcp') {
-        set_cnx_script($netc, 'adsl',
-                         qq(
-/sbin/route del default
-#$modems{$adsl_device}{start}
-INTERFACE=`$modems{$adsl_device}{get_intf}`
-/sbin/dhcpcd \$INTERFACE
-#/sbin/ifconfig \$INTERFACE 192.168.60.30 netmask 255.255.255.0 up
-/usr/sbin/pppd file /etc/ppp/peers/adsl\n),
-                         qq(
-INTERFACE=`$modems{$adsl_device}{get_intf}`
-/sbin/ifdown \$INTERFACE\n"),
-                         $netc->{adsltype});
-    } elsif ($adsl_type eq 'static') {
-        # TODO: handle manually configured (new feature)
-        set_cnx_script($netc, 'adsl',
-                         qq(
-/sbin/route del default
-#$modems{$adsl_device}{start}
-INTERFACE=`$modems{$adsl_device}{get_intf}`
-/sbin/ifconfig \$INTERFACE 192.168.60.30 netmask 255.255.255.0 up
-/usr/sbin/pppd file /etc/ppp/peers/adsl\n),
-                         qq(
-INTERFACE=`$modems{$adsl_device}{get_intf}`
-/sbin/ifdown \$INTERFACE\n"),
-                         $netc->{adsltype});
     }
-
+   
+    #- FIXME I'm lame: 
+    #-   -ONBOOT hardcoded
+    #-   -pptp has to be done within pppd (no more use of /usr/bin/pptp)
+    #-   -adsl-start will be called by ifup-ppp, good for pppoe, bad for the others. Most of the time a single `pppd call adsl` is enough.
+    #-   -still have to check hotplug firmware upload for usb modems
+    #- Mostly broken for now :(
+    output_with_perm("$::prefix/etc/sysconfig/network-scripts/ifcfg-ppp0", 0705, qq(DEVICE=ppp0
+ONBOOT=no
+TYPE=xDSL
+));    
 
     # sagem specific stuff
     if ($adsl_device eq 'sagem') {
@@ -331,23 +298,8 @@ INTERFACE=`$modems{$adsl_device}{get_intf}`
                 s/Encapsulation=.*\n/Encapsulation=$l{Encapsulation}\n/;
             } "$::prefix$cfg_file";
         }
-    } elsif ($adsl_device eq 'speedtouch') {
-        # speedtouch really is used only with pppoa, let its own script handle firmware upload and the like:
-        set_cnx_script($netc, 'adsl', 
-                         qq(/sbin/route del default 2>/dev/null
-/usr/sbin/modem_run -k -n 2 -f /usr/share/speedtouch/mgmt.o
-pppd call adsl
-
-for i in 0 1 2 3 4; do
-    /sbin/ifconfig | grep -q 'ppp' && exit
-    sleep 3
-done
-exit 1\n),
-                         "/usr/bin/killall pppd\n",
-                         $netc->{adsltype});
     }
-
-
+    
     # set aliases:
     if (exists $modems{$adsl_device}{aliases}) {
         modules::add_alias($_->[0], $_->[1]) foreach @{$modems{$adsl_device}{aliases}};
