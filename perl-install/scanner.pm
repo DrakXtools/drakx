@@ -126,7 +126,7 @@ sub detect {
 	    if ($vendorid and $productid) {
 		# We have vendor and product ID, look up the scanner in
 		# the usbtable
-		foreach $entry (cat_("$_scannerDBdir/usbtable")) {
+		foreach my $entry (cat_("$_scannerDBdir/usbtable")) {
 		    if ($entry =~ 
 			/^\s*$vendorid\s+$productid\s+.*\"([^\"]+)\"\s*$/) {
 			$description = $1;
