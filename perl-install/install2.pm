@@ -626,6 +626,10 @@ sub main {
     modules::write_conf($o->{prefix});
     detect_devices::install_addons($o->{prefix});
 
+    #- save recovery file if needed (ie disk style install).
+    $o->{method} eq 'disk' and
+      output($o->{prefix}.any::hdInstallPath()."/Mandrake/base/recovery.cfg", install_any::g_auto_install(1));
+
     #- mainly for auto_install's
     #- do not use run_program::xxx because it doesn't leave stdin/stdout unchanged
     system("bash", "-c", $o->{postInstallNonRooted}) if $o->{postInstallNonRooted};
