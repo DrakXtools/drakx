@@ -197,7 +197,7 @@ localrpm: localdist buildrpm
 
 localsrpm: spec_test localdist buildsrpm
 
-fastsrpm: spec_test cvstag localsrpm
+srpm: spec_test cvstag localsrpm
 
 localdist: cleandist localcopy tar
 
@@ -227,7 +227,7 @@ buildsrpm:
 
 rpm: cvstag dist buildrpm
 
-srpm: spec_test cvstag dist buildsrpm
+slowsrpm: spec_test cvstag dist buildsrpm
 
 dist: cleandist export tar
 
