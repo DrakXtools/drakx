@@ -114,9 +114,13 @@ Type \`\`yes'' and [enter] to go on\n"
     #- keep the current partition table, and try to resize the fat partition
     #- if the size is not 0.
     #- KEEP IN MIND there is only one partition defined.
-    $point = $hd_parts[$fat_pos]{start} + $resize_fat_size;
     open F, "| parted -s /dev/$hd";
-    printf F "resize %d %s %s\n", $hd_parts[$fat_pos]{minor}, $hd_parts[$fat_pos]{start}, $point;
+    if ($resize_fat_size) {
+	$point = $hd_parts[$fat_pos]{start} + $resize_fat_size;
+	printf F "resize %d %s %s\n", $hd_parts[$fat_pos]{minor}, $hd_parts[$fat_pos]{start}, $point;
+    } else {
+	$point = $hd_parts[$fat_pos]{end};
+    }
 } else {
     unless (defined $yes) {
 	do {
@@ -263,7 +267,7 @@ foreach my $medium (@media) {
     system "mkdir", "-p", "/hd/$medium->{rpmsdir}";
     foreach my $pkg (@{$packages->{depslist}}) {
 	$pkg->{closure} && !$pkg->{selected} or next;
-	foreach (qw(i586 noarch)) {
+	foreach (qw(i586 i486 i386 noarch)) {
 	    my $file = "/cdrom/$medium->{rpmsdir}/$pkg->{name}.$_.rpm";
 	    -e $file or next;
 	    print "  copying $pkg->{name}.$_.rpm\n";
@@ -276,7 +280,7 @@ foreach my $medium (@media) {
     print "Installing packages from medium labeled \"$medium->{descr}\"\n";
     if (my $pkg = pkgs::packageByName($packages, 'glibc')) { #- HACK FOR GLIBC
 	if (delete $pkg->{selected}) {
-	    foreach (qw(i586 noarch)) {
+	    foreach (qw(i586 i486 i386 noarch)) {
 		my $file = "/cdrom/$medium->{rpmsdir}/$pkg->{name}.$_.rpm";
 		-e $file or next;
 		system "rpm", "--root", "/mnt", "--nodeps", "--force", "--noscripts", "-ivh", $file;
@@ -289,7 +293,7 @@ foreach my $medium (@media) {
     my @files;
     foreach my $pkg (@{$packages->{depslist}}) {
 	$pkg->{selected} or next;
-	foreach (qw(i586 noarch)) {
+	foreach (qw(i586 i486 i386 noarch)) {
 	    my $file = "/cdrom/$medium->{rpmsdir}/$pkg->{name}.$_.rpm";
 	    -e $file or next;
 	    push @files, $file;
@@ -329,6 +333,9 @@ sub select_packages {
     foreach (@pkgs) {
 	my $pkg = pkgs::packageByName($o->{packages}, $_);
 	$pkg and pkgs::selectPackage($o->{packages}, $pkg);
+    }
+    foreach my $pkg (@{$o->{packages}{depslist}}) {
+	$pkg->{name} =~ /NVIDIA/ and pkgs::selectPackage($o->{packages}, $pkg);
     }
     foreach my $pkg (@{$o->{packages}{depslist}}) {
 	delete $pkg->{selected} and $pkg->{closure} = 1;
@@ -371,7 +378,7 @@ sub select_packages {
     #- special packages that are to be move to closure always ...
     foreach (qw(kernel-smp kernel-linus kernel-secure hackkernel-smp hackkernel-linus hackkernel-secure
 		Aurora xawtv kwintv xscreensaver-gl xmms-mesa bzflag csmash gltron spacecup chromium tuxracer
-		kernel22-secure alsa imwheel nfs-utils-clients lvm usbd reiserfsprogs
+		kernel22-smp kernel22-secure alsa imwheel nfs-utils-clients lvm usbd reiserfsprogs
 		)) {
 	my $pkg = pkgs::packageByName($o->{packages}, $_);
 	$pkg and $pkg->{closure} = 1, delete $pkg->{selected};
