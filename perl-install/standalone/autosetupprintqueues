@@ -1,0 +1,51 @@
+#!/usr/bin/perl
+#
+# Copyright (C) 2003-2004 Mandrakesoft
+#
+# Till Kamppeter <till@mandrakesoft.com>
+#
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License Version 2 as
+# published by the Free Software Foundation.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+#
+
+use strict;
+use lib qw(/usr/lib/libDrakX);
+use standalone;
+use printer::printerdrake;
+use printer::main;
+
+# Data structure for printer data
+my $printer;
+
+# Dummy variable needed to call the subroutines of the printerdrak.pm module
+# The real data structure is not needed for non-interactive mode
+my $in;
+
+# Run the subroutines of printerdrake.pm in non-interactive non-X mode
+$::noX = 1;
+
+# Do not let printerdrake ask for the spooler
+$printer->{SPOOLER} ||= 'cups';
+
+# Were we in expert mode last time?
+$printer->{expert} = printer::main::get_usermode();
+
+# Do not auto-install queues in expert mode
+exit 0 if $printer->{expert};
+
+# Get info about already installed print queues
+eval { $printer = printer::main::getinfo('') };
+
+# Run the automatic, non-interactive print queue setup of printerdrake
+printer::printerdrake::init($printer, $in);
+

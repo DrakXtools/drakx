@@ -620,8 +620,9 @@ sub configure_new_printers {
     return 1 if $printer->{expert};
     
     # Wait message
-    my $w = $in->wait_message(N("Printerdrake"),
-			       N("Searching for new printers..."));
+    my $w = $::noX || 
+	$in->wait_message(N("Printerdrake"),
+			  N("Searching for new printers..."));
 
     # When HPOJ is running, it blocks the printer ports on which it is
     # configured, so we stop it here. If it is not installed or not 
@@ -674,9 +675,10 @@ sub configure_new_printers {
 					 spooler  => $printer->{SPOOLER},
 				       };
 	    undef $w;
-	    $w = $in->wait_message(N("Printerdrake"),
-				    N("Found printer on %s...",
-				      $p->{port}));
+	    $w = $::noX || 
+		$in->wait_message(N("Printerdrake"),
+				  N("Found printer on %s...",
+				    $p->{port}));
 	    # Do configuration of multi-function devices and look up
 	    # model name in the printer database
 	    setup_common($printer, $in, $p->{val}{DESCRIPTION}, $p->{port},
@@ -686,6 +688,15 @@ sub configure_new_printers {
 	    # Let the user choose the model manually if it could not be
 	    # auto-detected.
 	    if (!$printer->{DBENTRY}) {
+		# Skip this printer if we install print queues in a
+		# background without X access.
+		if ($::noX) {
+		    # Delete some variables
+		    foreach (qw(OLD_QUEUE QUEUE TYPE str_type DBENTRY ARGS OLD_CHOICE currentqueue NEW)) {
+			$printer->{$_} = "";
+		    }
+		    next;
+		}
 		# Set the OLD_CHOICE to a non-existing value
 		$printer->{OLD_CHOICE} = "XXX";
 		# Set model selection cursor onto the "Raw Printer" entry.
@@ -706,18 +717,20 @@ Printerdrake could not determine which model your printer %s is. Please choose t
 					   N("If your printer is not listed, choose a compatible (see printer manual) or a similar one."), '|',
 					   [ keys %printer::main::thedb ], $printer->{DBENTRY}) or next;
 		# Restore wait message
-		$w = $in->wait_message(N("Printerdrake"),
-				       N("Configuring printer on %s...",
-					 $p->{port}));
+		$w = $::noX ||
+		    $in->wait_message(N("Printerdrake"),
+				      N("Configuring printer on %s...",
+					$p->{port}));
 	    }
 	    get_printer_info($printer, $in) or next;
 	    setup_options($printer, $in) or next;
 	    my $queue = generate_queuename($printer);
 	    # Change wait message
 	    undef $w;
-	    $w = $in->wait_message(N("Printerdrake"),
-				   N("Configuring printer \"%s\"...",
-				     $printer->{currentqueue}{queue}));
+	    $w = $::noX || 
+		$in->wait_message(N("Printerdrake"),
+				  N("Configuring printer \"%s\"...",
+				    $printer->{currentqueue}{queue}));
 	    # Create the queue
 	    configure_queue($printer, $in) or next;
 	    # If there is no default printer set, let this one get the
@@ -1868,18 +1881,22 @@ sub setup_common {
 				/usr/sbin/ptal-init
 				/usr/bin/xojpanel
 				/usr/sbin/lsusb))) {
-		$w = $in->wait_message(N("Printerdrake"),
+		if ($::noX) {
+		    $hpojinstallfailed = 1;
+		} else {
+		    $w = $in->wait_message(N("Printerdrake"),
 					   N("Installing HPOJ package..."))
-		    if !$printer->{noninteractive};
-		$in->do_pkgs->install('hpoj', 'xojpanel', 'usbutils')
-		    or do {
-			$in->ask_warn(N("Warning"),
-				      N("Could not install the %s packages!",
-					"HPOJ") . " " .
-				      N("Only printing will be possible on the %s.",
-					$makemodel));
-			$hpojinstallfailed = 1;
-		    };
+			if !$printer->{noninteractive};
+		    $in->do_pkgs->install('hpoj', 'xojpanel', 'usbutils')
+			or do {
+			    $in->ask_warn(N("Warning"),
+					  N("Could not install the %s packages!",
+					    "HPOJ") . " " .
+					  N("Only printing will be possible on the %s.",
+					    $makemodel));
+			    $hpojinstallfailed = 1;
+			};
+		}
 	    }
 	    # Configure and start HPOJ
 	    undef $w;
@@ -1888,12 +1905,12 @@ sub setup_common {
 		 N("Checking device and configuring HPOJ..."))
 		if !$printer->{noninteractive};
 	    
-	    eval { $ptaldevice = printer::main::configure_hpoj(
-		      $device, @autodetected) if !$hpojinstallfailed };
+	    eval { $ptaldevice = printer::main::configure_hpoj
+		       ($device, @autodetected) if !$hpojinstallfailed };
 
 	    if (my $err = $@) {
-		warn qq(HPOJ conf faillure: "$err");
-		log::l(qq(HPOJ conf faillure: "$err"));
+		warn qq(HPOJ conf failure: "$err");
+		log::l(qq(HPOJ conf failure: "$err"));
 	    }
 
 	    if ($ptaldevice) {
@@ -1930,10 +1947,11 @@ sub setup_common {
 			     N("Printerdrake"),
 			     N("Installing SANE packages..."))
 			    if !$printer->{noninteractive};
-			$in->do_pkgs->install('sane-backends',
-					      'sane-frontends',
-					      'scanner-gui', 
-					      'libsane-hpoj1')
+			$::noX
+			    or $in->do_pkgs->install('sane-backends',
+						     'sane-frontends',
+						     'scanner-gui', 
+						     'libsane-hpoj1')
 			    or do {
 				$in->ask_warn(N("Warning"),
 					      N("Could not install the %s packages!",
@@ -1967,7 +1985,8 @@ sub setup_common {
 			     N("Printerdrake"),
 			     N("Installing mtools packages..."))
 			    if !$printer->{noninteractive};
-			$in->do_pkgs->install('mtools', 'mtoolsfm')
+			$::noX
+			    or $in->do_pkgs->install('mtools', 'mtoolsfm')
 			    or do {
 				$in->ask_warn(N("Warning"),
 					      N("Could not install the %s packages!",
@@ -2711,7 +2730,7 @@ sub get_printer_info {
 		if ($drivertype eq 'Z23') { $drivertype = 'Z33' }
 		$drivertype = lc($drivertype);
 		if (!files_exist("/usr/local/lexmark/$drivertype/$drivertype")) {
-		    eval { $in->do_pkgs->install("lexmark-drivers-$drivertype") };
+		    eval { $::noX or $in->do_pkgs->install("lexmark-drivers-$drivertype") };
 		}
 		if (!files_exist("/usr/local/lexmark/$drivertype/$drivertype")) {
 		    # Driver installation failed, probably we do not have
@@ -3709,8 +3728,9 @@ sub assure_default_printer_is_set {
     my ($printer, $in) = @_;
     if (defined($printer->{SPOOLER}) && $printer->{SPOOLER} &&
 	(!defined($printer->{DEFAULT}) || !$printer->{DEFAULT})) {
-	my $_w = $in->wait_message(N("Printerdrake"),
-				   N("Setting Default Printer..."));
+	my $_w = $::noX || 
+	    $in->wait_message(N("Printerdrake"),
+			      N("Setting Default Printer..."));
 	$printer->{DEFAULT} = printer::default::get_printer($printer);
 	if ($printer->{DEFAULT}) {
 	    # If a CUPS system has only remote printers and no default
@@ -3857,6 +3877,23 @@ sub init {
 
     # Initialization of Printerdrake and queue auto-installation
 
+    # This subroutine is called on every start of printerdrake
+    # directly, from mcc, during installation, or for automatic print
+    # queue setup in the background, triggered when
+    # hotplug/udev/dynamic (script /etc/dynamic/script/lp.script)
+    # discovers a new printer being connected and turned on.
+
+    # In the latter case (background queue installation) only this
+    # subroutine is called as only the automatic, non-interactive
+    # print queue creation is needed. This must be totally
+    # non-interactive and cannot open any window on the X desktop,
+    # also packages cannot be installed, as the background process
+    # cannot ask the user to insert CDs. To reach this state of
+    # absolute silence, there is the global variable $::noX. If it is
+    # set, all interactivity or wait message is suppressed. If
+    # interactivity is required, the operation requiring interactivity
+    # will be skipped.
+
     # Save the user mode, so that the same one is used on the next start
     # of Printerdrake
     printer::main::set_usermode($printer->{expert});
@@ -3864,11 +3901,11 @@ sub init {
     # printerdrake does not work without foomatic, and for more
     # convenience we install some more stuff
     {
-	my $_w = $in->wait_message(N("Printerdrake"),
-				   N("Checking installed software..."));
+	my $_w = $::noX || 
+	    $in->wait_message(N("Printerdrake"),
+			      N("Checking installed software..."));
 	if (!$::testing &&
 	    !files_exist(qw(/usr/bin/foomatic-configure
-			    /usr/lib/perl5/vendor_perl/5.8.0/Foomatic/DB.pm
 			    /usr/bin/foomatic-rip
 			    /usr/share/foomatic/db/source/driver/ljet4.xml
 			    /usr/bin/escputil
@@ -3876,6 +3913,9 @@ sub init {
 			    /usr/bin/nmap
 			    /usr/bin/scli
 			    ))) {
+	    # Do not try to install packages when installing print queues
+	    # in the background, simply do not install queues
+	    exit 0 if $::noX;
 	    $in->do_pkgs->install('foomatic-db-engine', 'foomatic-filters',
 				  'foomatic-db', 'printer-utils',
 				  'printer-testpages', 'nmap', 'scli')
@@ -3887,15 +3927,20 @@ sub init {
 		};
 	}
 	
-	# only experts should be asked for the spooler
-	$printer->{SPOOLER} ||= 'cups' if !$printer->{expert};
+	# only experts should be asked for the spooler also for background
+	# installation of print it should not be asked for the spooler,
+	# as this feature is only supported for CUPS.
+	$printer->{SPOOLER} ||= 'cups'
+	    if !$printer->{expert} || $::noX;
 	
     }
     
     # If we have chosen a spooler, install it and mark it as default 
-    # spooler
+    # spooler. Spooler installation is ommitted on background queue
+    # installation, because this only works when CUPS is already running
     if ($printer->{SPOOLER}) {
-	return 0 unless install_spooler($printer, $in, $upNetwork);
+	return 0 unless ($::noX || 
+			 install_spooler($printer, $in, $upNetwork));
 	printer::default::set_spooler($printer);
     }
     

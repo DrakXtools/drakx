@@ -2561,6 +2561,7 @@ sub config_sane() {
     # Add HPOJ backend to /etc/sane.d/dll.conf if needed (no individual
     # config file /etc/sane.d/hpoj.conf necessary, the HPOJ driver finds the
     # scanner automatically)
+    return if (! -f "$::prefix/etc/sane.d/dll.conf");
     return if member("hpoj", chomp_(cat_("$::prefix/etc/sane.d/dll.conf")));
     eval { append_to_file("$::prefix/etc/sane.d/dll.conf", "hpoj\n") } or
 	   die "can't write SANE config in /etc/sane.d/dll.conf: $!";
