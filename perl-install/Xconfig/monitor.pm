@@ -90,7 +90,7 @@ sub choose {
 	return $ok;
     }
 
-    my %h_monitors = map {; "$_->{VendorName}|$_->{ModelName}" => $_ } @$monitors_db;
+    my %h_monitors = map { ("$_->{VendorName}|$_->{ModelName}" => $_) } @$monitors_db;
 
   ask_monitor:
     my $merged_name = do {
