@@ -329,7 +329,7 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
   o detection defaults on automatic choices
   o fix mouse detection on kernel 2.4
 - printerdrake: fix problem that not used parallel ports were detected
-  as printers
+  as printers (till)
 
 * Tue Feb 17 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10-0.17mdk
 - drakboot: remove bad entries after reading existing conf file (pixel)
