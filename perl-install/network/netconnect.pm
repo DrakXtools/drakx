@@ -89,7 +89,7 @@ sub get_subwizard {
       my ($network_configured, $direct_net_install, $cnx_type, $type, $interface, @cards, @all_cards, @devices);
       my (%connections, %rconnections, @connection_list);
       my ($modem, $modem_name, $modem_conf_read, $modem_dyn_dns, $modem_dyn_ip);
-      my ($adsl_type, $adsl_device, @adsl_devices, $adsl_failed, $adsl_answer);
+      my ($adsl_type, $adsl_protocol, $adsl_device, @adsl_devices, $adsl_failed, $adsl_answer);
       my ($ntf_name, $ipadr, $netadr, $gateway_ex, $up, $isdn, $isdn_type, $need_restart_network);
       my ($module, $text, $auto_ip, $onboot, $needhostname, $hotplug, $track_network_id, @fields); # lan config
       my $success = 1;
@@ -152,6 +152,14 @@ sub get_subwizard {
                           bewan_pci => N("Bewan PCI modem"),
                           eci       => N("ECI Hi-Focus modem"), # this one needs eci agreement
                          );
+
+      my %adsl_types = (
+                        dhcp   => N("Dynamic Host Configuration Protocol (DHCP)"),
+                        manual => N("Manual TCP/IP configuration"),
+                        ppptp  => N("Point to Point Tuneling Protocol (PPPTP)"),
+                        pppoe  => N("PPP over Ethernet (PPPoE)"),
+                        pppoa  => N("PPP over ATM (PPPoA)"),
+                       );
 
     
       # main wizard:
@@ -610,14 +618,8 @@ and copy the mgmt.o in /usr/share/speedtouch", 'http://prdownloads.sourceforge.n
 Some connections use pptp, a few use dhcp.
 If you don't know, choose 'use pppoe'"),
                     data =>  [
-                              { text => N("ADSL connection type :"), val => \$adsl_type, type => "list",
-                                list => [
-                                         N("Dynamic Host Configuration Protocol (DHCP)"),
-                                         N("Manual TCP/IP configuration"),
-                                         N("Point to Point Tuneling Protocol (PPPTP)"),
-                                         N("PPP over Ethernet (PPPoE)"),
-                                         N("PPP over ATM (PPPoA)"),
-                                        ],
+                              { text => N("ADSL connection type :"), val => \$adsl_protocol, type => "list",
+                                list => [ values %adsl_types ],
                               },
                              ],
                    },
