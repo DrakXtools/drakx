@@ -597,6 +597,7 @@ killall pppd
                             $netc->{$_} = $adsl_data->{$_} foreach qw(dnsServer2 dnsServer3 DOMAINNAME2 vpi vci);
                               $adsl_protocol = $adsl_types{$adsl_data->{method}};
                         }
+                        $adsl_protocol = $adsl_types{pppoa} if $adsl_device eq 'speedtouch';
                         return 'adsl_protocol';
                     },
                    },
