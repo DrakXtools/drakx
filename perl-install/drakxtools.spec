@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 9.2
-Release: 7mdk
+Release: 6mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -317,15 +317,19 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
-* Mon Sep  1 2003 Gwenole Beauchesne <gbeauchesne@mandrakesoft.com> 9.2-7mdk
-- Fix lsnetdrake on AMD64
-
-* Sun Aug 31 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.2-6mdk
+* Thu Sep  4 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.2-6mdk
+- diskdrake: fix #5204 (pixel)
+- drakbackup: fix untranslatable strings, ... (stew)
 - drakboot: default parameters are those of the default target (pixel)
+- drakconnect:
+  o fix #5242: loop on winmodem connection if no windomem but winmodem
+    is selected
+  o offer to select modem device
 - drakedm: in non expert mode, only display the list of *installed* display
   managers
 - drakfloppy, drakconnect: fix more dialogs height
 - fix requires
+- lsnetdrake: fix it on AMD64 (gwenole)
 
 * Thu Aug 28 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.2-5mdk
 - drakhelp: add support for contextual help (daouda)
