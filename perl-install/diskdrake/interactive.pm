@@ -656,7 +656,7 @@ sub Resize {
 	} elsif (isThisFs('ntfs', $part)) {
 	    write_partitions($in, $hd) or return;
 	    require diskdrake::resize_ntfs;
-	    $nice_resize{ntfs} = resize_fat::main->new($part->{device}, devices::make($part->{device}));
+	    $nice_resize{ntfs} = diskdrake::resize_ntfs->new($part->{device}, devices::make($part->{device}));
 	    $min = $nice_resize{ntfs}->min_size or delete $nice_resize{ntfs};
 	} elsif (isThisFs("reiserfs", $part)) {
 	    write_partitions($in, $hd) or return;
