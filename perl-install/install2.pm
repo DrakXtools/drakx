@@ -531,7 +531,7 @@ sub main {
 	    chmod 0755, "/usr/bin/brltty";
 	}
 	eval { modules::load("serial") };
-	devices::make($o->{brltty}{device});
+	devices::make($_) foreach $o->{brltty}{device} ? $o->{brltty}{device} : qw(ttyS0 ttyS1);
 	devices::make("vcsa");
 	run_program::run("brltty");
     }
