@@ -152,8 +152,8 @@ and you will have to choose a driver from the list that will appear then.
 
 As for SCSI adapters, you can let the driver probe for the adapter
 in the first time, otherwise you will have to specify the options
-to the driver that you will have fetched from Windows' control
-panel.
+to the driver that you will have fetched from documentation of your
+hardware.
 
 
 If you install a Linux-Mandrake system on a machine which is part
