@@ -772,10 +772,10 @@ sub report_bug {
 }
 
 sub devfssymlinkf {
-    my ($o_if, $of) = @_;
-    my $if = $o_if->{device};
+    my ($if_struct, $of) = @_;
+    my $if = $if_struct->{device};
 
-    my $devfs_if = $o_if->{devfs_device};
+    my $devfs_if = $if_struct->{devfs_device};
     $devfs_if ||= devices::to_devfs($if);
     $devfs_if ||= $if;
 
@@ -796,11 +796,11 @@ UNREGISTER	^$devfs_if\$	CFUNCTION GLOBAL unlink $if
     symlinkf($if, "$::prefix/dev/$of");
 }
 sub devfs_rawdevice {
-    my ($o_if, $of) = @_;
+    my ($if_struct, $of) = @_;
 
-    my $devfs_if = $o_if->{devfs_device};
-    $devfs_if ||= devices::to_devfs($o_if->{device});
-    $devfs_if ||= $o_if->{device};
+    my $devfs_if = $if_struct->{devfs_device};
+    $devfs_if ||= devices::to_devfs($if_struct->{device});
+    $devfs_if ||= $if_struct->{device};
 
     output_p("$::prefix/etc/devfs/conf.d/$of.conf", 
 "REGISTER	^$devfs_if\$	EXECUTE /etc/dynamic/scripts/rawdevice.script add /dev/$devfs_if /dev/$of
