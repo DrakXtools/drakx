@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10
-Release: 25mdk
+Release: 24mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -321,8 +321,22 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
-* Thu Mar 18 2004 David Baudens <baudens@mandrakesoft.com> 10-25mdk
-- Add missing icons for localedrake menu entry
+* Fri Mar 19 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10-24mdk
+- add missing icons for localedrake menu entry (dadou)
+- diskdrake: fix compaq smart array support (#9029) (pixel)
+- drakboot: reread current bootsplash config (olivier blin)
+- drakconnect:
+  o always offer to restart adsl connections
+  o fix bewan adsl modem support by providing an ad-how
+    /etc/ppp/options
+  o only warn about the fact we need 2.4.x kernel
+    * when we're under 2.6.x
+    * for bewan modem (not for other adsl modems) and pci rtc modems
+  o only kill pppoa for sagem modem (fix bewan modem shutdown)
+  o always offer to restart adsl connections
+  o on adsl link shutdown, only kill pppoa for sagem modem
+- draksound: install alsa-utils if needed (#6288)
+- include drakups again
 
 * Wed Mar 17 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10-24mdk
 - set window icon
