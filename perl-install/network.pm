@@ -88,12 +88,11 @@ sub write_resolv_conf {
 
     my (%search, %dns, @unknown);
     local *F; open F, $file;
-    my $dns_auto;
     foreach (<F>) {
 	/^[#\s]*search\s+(.*?)\s*$/ and $search{$1} = $., next;
 	/^[#\s]*nameserver\s+(.*?)\s*$/ and $dns{$1} = $., next;
+	/^.*# ppp temp entry\s*$/ and next;
 	/^[#\s]*(\S.*?)\s*$/ and push @unknown, $1;
-	/^# ppp temp entry$/ and $dns_auto=1;
     }
 
     close F; open F, ">$file" or die "cannot write $file: $!";
@@ -101,9 +100,10 @@ sub write_resolv_conf {
     print F "search $netc->{DOMAINNAME} $netc->{DOMAINNAME2}\n\n" if ($netc->{DOMAINNAME} || $netc->{DOMAINNAME2});
     print F "# nameserver $_\n" foreach grep { ! exists $used_dns{$_} } sort { $dns{$a} <=> $dns{$b} } keys %dns;
     print F "nameserver $_\n" foreach  sort { $used_dns{$a} <=> $used_dns{$b} } grep { $_ } keys %used_dns;
-    $dns_auto or print F "# ppp temp entry\n";
     print F "\n";
     print F "# $_\n" foreach @unknown;
+    print F "\n";
+    print F "# ppp temp entry\n";
 
     #-res_init();		# reinit the resolver so DNS changes take affect
     1;
