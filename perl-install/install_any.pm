@@ -728,35 +728,34 @@ sub loadO {
 
 sub generate_automatic_stage1_params {
     my ($o) = @_;
+    my @ks = ();
 
-    my $ks = "automatic=";
-    
     if ($o->{method} =~ /hd/) {
-	$ks .= "method:disk,";
+	push @ks, "method:disk";
     } else {
-	$ks .= "method:" . $o->{method} . ",";
+	push @ks, "method:" . $o->{method};
     }
 
     if ($o->{method} =~ /http/) {
 	"$ENV{URLPREFIX}" =~ m|http://(.*)/(.*)| or die;
-	$ks .= "server:$1,directory:$2,";
+	push @ks, "server:$1", "directory:$2";
     } elsif ($o->{method} =~ /ftp/) {
-	$ks .= "server:$ENV{HOST},directory:$ENV{PREFIX},user:$ENV{LOGIN},pass:$ENV{PASSWORD},";
+	push @ks,  "server:$ENV{HOST}", "directory:$ENV{PREFIX}", "user:$ENV{LOGIN}", "pass:$ENV{PASSWORD}";
     } elsif ($o->{method} =~ /nfs/) {
 	cat_("/proc/mounts") =~ m|(\S+):(\S+)\s+/tmp/image nfs| or die;
-	$ks .= "server:$1,directory:$2,";
+	push @ks, "server:$1", "directory:$2";
     }
 
     my ($intf) = values %{$o->{intf}};
     if ($intf->{BOOTPROTO} =~ /dhcp/) {
-	$ks .= "network:dhcp,";
+	push @ks, "network:dhcp";
     } else {
 	require network;
-	$ks .= "network:static,ip:$intf->{IPADDR},netmask:$intf->{NETMASK},gateway:$o->{netc}{GATEWAY},";
+	push @ks, "network:static", "ip:$intf->{IPADDR}", "netmask:$intf->{NETMASK}", "gateway:$o->{netc}{GATEWAY}";
 	my @dnss = network::dnsServers($o->{netc});
-	$ks .= "dns:$dnss[0]," if @dnss;
+	push @ks, "dns:$dnss[0]" if @dnss;
     }
-    $ks;
+    "automatic=".join(',', @ks);
 }
 
 sub guess_mount_point {
