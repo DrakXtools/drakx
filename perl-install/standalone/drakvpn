@@ -194,7 +194,7 @@ Please read AT LEAST the ipsec-howto docs
 before going any further.",$ipsec_package)) or goto begin;
 
 $direct or $in->ask_okcancel(N("Kernel module."),
-N("The kernel need to have ipsec support.
+N("The kernel needs to have ipsec support.
 
 You're running a %s kernel version.
 
@@ -589,7 +589,7 @@ if ($choice =~ /^version|block|private|clear|packet/) {
 
 $in->ask_okcancel(N("Can't edit!"), 
 N("You cannot edit this section.\n
-This section is mandatory for Freswan 2.X.
+This section is mandatory for Freeswan 2.X.
 One has to specify version 2.0 on the top
 of the %s file, and eventually, disable or
 enable the opportunistic encryption.\n",$ipsec_conf));
@@ -643,7 +643,7 @@ Choose continue when you are done to write the data.\n", $ipsec_conf),
 
 	ask_info3('',
 N("Edit a Security Policy.\n
-You can now add a Security Policy.\n
+You can now edit a Security Policy.\n
 Choose continue when you are done to write the data.\n"), $ipsec->{$number})  or goto step_configure_ipsec_conf;
 	
 goto step_configure_ipsec_conf;
@@ -991,12 +991,12 @@ sainfo address 203.178.141.209 any address 203.178.141.218 any
 	help => N("define the group of Diffie-Hellman exponentiations.
 If you do not require PFS then you can omit this directive.
 Any proposal will be accepted if you do not specify one.
-group is one of following: modp768, modp1024, modp1536.
+group is one of the following: modp768, modp1024, modp1536.
 Or you can define 1, 2, or 5 as the DH group number.") },
 		{ label => N("Lifetime number"), val => \$data->{3}[2], type => 'entry',
 	help => N("define a lifetime of a certain time which will be pro-
 posed in the phase 1 negotiations.  Any proposal will be
-accepted, and the attribute(s) will be not proposed to
+accepted, and the attribute(s) will not be proposed to
 the peer if you do not specify it(them).  They can be
 individually specified in each proposal.
 
@@ -1014,7 +1014,7 @@ So, here, the lifetime numbers are 1, 1, 30, 30, 60 and 12.
 	list => [ qw(sec min hour) ],
 	help => N("define a lifetime of a certain time which will be pro-
 posed in the phase 1 negotiations.  Any proposal will be
-accepted, and the attribute(s) will be not proposed to
+accepted, and the attribute(s) will not be proposed to
 the peer if you do not specify it(them).  They can be
 individually specified in each proposal.
 
@@ -1116,7 +1116,7 @@ my_identifier user_fqdn \"myemail\@mydomain.com\"") },
                      { label => N("Encryption algorithm"), val => \$proposal_remote_section->{2}[1], list => [ qw(des 3des blowfish cast128) ],
 	help => N("specify the encryption algorithm used for the
 phase 1 negotiation. This directive must be defined. 
-algorithm is one of following: 
+algorithm is one of the following: 
 
 DES, 3DES, blowfish, cast128 for oakley.
 
