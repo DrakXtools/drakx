@@ -136,7 +136,7 @@ sub add_entry($$) {
     my ($entries, $v) = @_;
     my (%usedold, $freeold);
 
-    do { $usedold{$1 || 0} = 1 if $_->{label} =~ /^old ([^_]*)_/x } foreach @$entries;
+    do { $usedold{$1 || 0} = 1 if $_->{label} =~ /^old([^_]*)_/ } foreach @$entries;
     foreach (0..scalar keys %usedold) { exists $usedold{$_} or $freeold = $_ || '', last }
 
     foreach (@$entries) {

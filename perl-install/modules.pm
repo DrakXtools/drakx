@@ -625,7 +625,7 @@ sub read_conf($;$) {
     foreach (cat_($file)) {
 	do {
 	    $c{$2}{$1} = $3;
-	    $$scsi = max($$scsi, $1 || 0) if /^\s*alias\s+scsi_hostadapter (\d*)/x && $scsi; #- space added to make perl2fcalls happy!
+	    $$scsi = max($$scsi, $1 || 0) if /^\s*alias\s+scsi_hostadapter(\d*)/ && $scsi; #- space added to make perl2fcalls happy!
 	} if /^\s*(\S+)\s+(\S+)\s+(.*?)\s*$/;
     }
     #- cheating here: not handling aliases of aliases

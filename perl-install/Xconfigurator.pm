@@ -374,7 +374,7 @@ NOTE THIS IS EXPERIMENTAL SUPPORT AND MAY FREEZE YOUR COMPUTER.", $xf3_ver)) . "
     $tc->{code} and $tc->{code}();
     
 	
-    $card->{prog} = "/usr/X11R6/bin/" . ($card->{use_xf4} ? 'XFree86' : $card->{server} =~ /Sun (.*)/x ?
+    $card->{prog} = "/usr/X11R6/bin/" . ($card->{use_xf4} ? 'XFree86' : $card->{server} =~ /Sun(.*)/ ?
 					 "Xsun$1" : "XF86_$card->{server}");
 
     #- additional packages to install according available card.

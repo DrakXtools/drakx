@@ -40,7 +40,7 @@ sub cdroms() {
     if (my @l2 = IDEburners()) {
 	require modules;
 	modules::add_alias('scsi_hostadapter', 'ide-scsi');
-	my $nb = 1 + max(-1, map { $_->{device} =~ /scd (\d+)/x } @l);
+	my $nb = 1 + max(-1, map { $_->{device} =~ /scd(\d+)/ } @l);
 	foreach my $i (@l2) {	    
 	    log::l("IDEBurner: $i->{device}");
 	    my ($e) = grep { $_->{device} eq $i->{device} } @l;
@@ -72,7 +72,7 @@ sub floppy { first(floppies()) }
 
 sub isBurner { 
     my $dev = $_[0]{device};
-    if (my($nb) = $dev =~ /scd (.*)/x) {
+    if (my($nb) = $dev =~ /scd(.*)/) {
 	grep { /^(scd|sr)$nb:.*writer/ } syslog();
     } else {
 	my $f = tryOpen($dev); #- SCSI burner are not detected this way.
