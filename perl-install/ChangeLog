@@ -1,3 +1,209 @@
+2005/03/17  Alice Lafox  <alice at lafox.com.ua>
+
+	* share/po/ru.po: updated
+
+2005/03/17  Gwenole Beauchesne  <gbeauchesne at mandrakesoft.com>
+
+	* install_steps_interactive.pm: bring back generic release-notes.txt to
+	life
+	MERGE: make it possible to read arch-specific release notes in addition
+	to
+	global (default) ones
+
+	* mdk-stage1/usb-resource/update-usb-ids.pl: fix usb devices id generation
+
+	* mdk-stage1/Makefile: pcmcia also works on x86-64 (old 10.1-branch)
+
+	* rescue/list: MERGE: fix ldso name
+
+	* install_steps_gtk.pm: MERGE: stop using dedicated X drivers on x86-64,
+	default to vesafb
+
+	* mdk-stage1/pcmcia_/cs.h, mdk-stage1/pcmcia_/cardmgr.c,
+	mdk-stage1/pcmcia_/ds.h, mdk-stage1/pcmcia_/yacc_config.h,
+	mdk-stage1/pcmcia_/cs_types.h, mdk-stage1/pcmcia_/vg468.h,
+	mdk-stage1/pcmcia_/yacc_config.c, mdk-stage1/pcmcia_/i82365.h,
+	mdk-stage1/pcmcia_/driver_ops.h, mdk-stage1/pcmcia_/cirrus.h: merge with
+	recent enough kernel and remove osbolete (unused) stuff, also do
+	some 64-bit fixing there (forward port from cs3 and 10.1 branches)
+
+	* share/list, share/list.x86_64, share/list.i386: mdadm for everyone, fix
+	ldso linker name for other arches
+
+	* devices.pm: MERGE: don't be so i586 centric
+
+2005/03/17  Olivier Blin <oblin at mandrakesoft.com>
+
+	* mdk-stage1/thirdparty.c: probe in automatic mode to create devices (and
+	really check for mount return code)
+	fix return code check
+	message fix again
+	more message fixes
+	fix/enhance messages
+	look for modules in /install/thirdparty first
+
+	* network/adsl.pm: vpi is given as hex too (though it doesn't matter much
+	since it's
+	merely always less than or equal to 9)
+
+	* mdk-stage1/pci-resource/update-pci-ids.pl: use sata modules too
+
+	* standalone/drakconnect: fill at least the DEVICE field for
+	non-configured devices
+	allow to modify non configured devices in manage interface
+
+2005/03/17  Pixel  <pixel at mandrakesoft.com>
+
+	* Xconfig/monitor.pm, Xconfig/main.pm, Xconfig/xfree.pm: use
+	monitor-probe-using-X
+
+	* mygtk2.pm: ensure the val registrations are kept ordered
+
+	* common.pm: ensure this bloody stupid code doesn't break things when it
+	is unused
+
+	* install_steps_interactive.pm: simplify
+
+	* mdk-stage1/doc/UPDATEMODULES, install_steps.pm: give ability to tell in
+	which list_modules category is a module
+
+	* Xconfig/resolution_and_depth.pm: 
+	  - simplify GUI: don't have a "ratio" combo. have the resolutions from
+	current ratio by default and allow "Other" to see all others
+	  - by default 1280x1024 is now in 4/3, not 5/4 (stupid bloody
+	resolution!)
+	have 1280x1024 in both 4/3 and 5/4 ratios
+
+	* share/rpmsrate: we may need monitor-probe-using-X installed to configure
+	X during install
+	(XFdrake already require monitor-edid)
+
+2005/03/17  Till Kamppeter  <till at mandrakesoft.com>
+
+	* printer/printerdrake.pm: 
+	  - Fixed queue name auto-generation, it sometimes hanged in an endless
+	loop
+	(bugs #14426, #14525, #14563).
+
+2005/03/17  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* network/netconnect.pm: temporary move collate sorting into net wizard in
+	order to minimize possible side effects
+
+	* drakxtools.spec: add an item to 10.2-6mdk's log
+
+	* interactive.pm: temporary move collate sorting into net wizard in order
+	to minimize possible side effects
+	(ask_from_normalize) use newly introduced set_l10n_sort() in order to
+	have proper localized sorting (#14634)
+
+	* common.pm (set_l10n_sort) import comments from rpmdrake
+	(set_l10n_sort) do not bother touch LC_ALL
+	(set_l10n_sort) stole it from rpmdrake
+
+2005/03/17  willysr
+
+	* share/po/id.po: Updated
+	Updated
+
+2005/03/16  Daouda Lo  <daouda at mandrakesoft.com>
+
+	* bootloader.pm: 
+	  - cluster without capturing
+
+2005/03/16  Olivier Blin <oblin at mandrakesoft.com>
+
+	* mdk-stage1/tools.h: cdrom support in third-party module
+
+	* mdk-stage1/tools.c: 
+	  - merge update_modules stuff in third-party module
+	  - add "thirdparty" as an alias for the "updatemodules" option
+	  - allow to specify thirdparty device using automatic "thirdparty"
+	option
+	  - try to mount as iso9660 too in try_mount
+	cdrom support in third-party module
+
+	* mdk-stage1/thirdparty.c: 
+	  - merge update_modules stuff in third-party module
+	  - add "thirdparty" as an alias for the "updatemodules" option
+	  - allow to specify thirdparty device using automatic "thirdparty"
+	option
+	  - try to mount as iso9660 too in try_mount
+	fail if device doesn't match anything
+	cdrom support in third-party module
+
+	* mdk-stage1/Makefile: allow to clean local directory only
+	partition.c is used only in disk installs for now
+
+	* mdk-stage1/stage1.c, mdk-stage1/modules.c, mdk-stage1/stage1.h,
+	mdk-stage1/modules.h: 
+	  - merge update_modules stuff in third-party module
+	  - add "thirdparty" as an alias for the "updatemodules" option
+	  - allow to specify thirdparty device using automatic "thirdparty"
+	option
+	  - try to mount as iso9660 too in try_mount
+
+2005/03/16  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/eu.po, share/po/sv.po, share/po/fr.po: updated French, Basque
+	and Swedish files
+
+2005/03/16  Pixel  <pixel at mandrakesoft.com>
+
+	* bootloader.pm: fix dropping line macos in yaboot.conf (bugzilla #14642)
+
+2005/03/16  Rafael Garcia-Suarez <rgarciasuarez at mandrakesoft.com>
+
+	* pkgs.pm, install2.pm: Allow to specify "suppl" and "askmedia" in the
+	kernel command-line as well as in the hdlists file
+
+	* share/po/fr.po: Fix typo
+
+	* share/po/id.po: Fix po syntax
+
+2005/03/16  shivahuang
+
+	* share/po/zh_TW.po: updated po files
+
+2005/03/16  Till Kamppeter  <till at mandrakesoft.com>
+
+	* printer/default.pm: 
+	  - Fixed setting of default printer on daemon-less CUPS client (bug
+	#13940).
+
+2005/03/16  Tibor Pittich  <Tibor.Pittich at phuture.sk>
+
+	* share/po/sk.po: finalized slovak translation for 10.2
+
+2005/03/16  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* standalone/localedrake: enable to enable/disable utf-8
+	ensure there's never a "previous" button on first step
+
+	* any.pm: enable to enable/disable utf-8
+
+	* drakxtools.spec: 10.2-6mdk
+
+	* interactive/gtk.pm (ask_fromW) remove dead code
+	(ask_fromW) remove unecessary sync (which was needed to workaround
+	CList bug but now make TreeViews breaking CheckBoxes)
+
+2005/03/16  willysr
+
+	* share/po/id.po: Updated
+	Updated
+	Updated
+
+2005/03/15  Olivier Blin <oblin at mandrakesoft.com>
+
+	* network/netconnect.pm, network/adsl.pm: allow drakconnect to display
+	multiple instances of the same adsl device
+
+2005/03/15  Stew Benedict  <sbenedict at mandrakesoft.com>
+
+	* any.pm, pkgs.pm, install_any.pm: Install kernel-xbox on XBOX, bypass
+	bootloader setup and eject call
+
 2005/03/15  mareklaane
 
 	* share/po/et.po: Fixed translation.
@@ -46779,7 +46985,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.1015 2005/03/10 10:51:42 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.1016 2005/03/15 19:40:21 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
