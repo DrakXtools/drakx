@@ -844,7 +844,7 @@ my %charset2pango_font = (
   #- Nimbus Sans L is missing some chars used by some cyrillic languages,
   #- but tose have not yet DrakX translations; it also misses vietnamese
   #- latin chars; all other latin and cyrillic are covered.
-  'default' =>     "Nimbus Sans L 12"
+  'default' =>     "Sans 12"
 );
 
 sub charset2pango_font {
