@@ -131,7 +131,7 @@ sub ask_info2 {
 		   if__($cnx->{speed}, { label => N("Connection speed"), val => \$cnx->{speed}, list => ["64 Kb/s", "128 Kb/s"] }),
 		   if__($cnx->{huptimeout}, { label => N("Connection timeout (in sec)"), val => \$cnx->{huptimeout} }),
 		   { label => N("Account Login (user name)"), val => \$cnx->{login} },
-		   if__($cnx->{passwd}, { label => N("Account Password"),  val => \$cnx->{passwd}, hidden => 1 }),
+		   { label => N("Account Password"),  val => \$cnx->{passwd}, hidden => 1 },
 		  ]
 		 ) or return;
     if ($netc->{vpivci}) {
