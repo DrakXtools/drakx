@@ -418,7 +418,7 @@ sub getSNMPModel {
     # SNMP request to auto-detect model
     local *F;
     open F, ($::testing ? $::prefix : "chroot $::prefix/ ") .
-	"/bin/sh -c \"scli -1 -c 'show printer info' $host\" |" or
+	"/bin/sh -c \"scli -v 1 -c 'show printer info' $host\" |" or
 	return { CLASS => 'PRINTER',
 		 MODEL => N("Unknown Model"),
 		 MANUFACTURER => "",
