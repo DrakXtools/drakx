@@ -204,7 +204,8 @@ sub cardConfiguration(;$$$) {
     #- 3D acceleration configuration for XFree 4.0 using DRI.
     $card->{DRI_glx} = ($card->{identifier} =~ /Voodoo [35]/ || $card->{identifier} =~ /Voodoo Banshee/ || #- 16bit only
 			$card->{identifier} =~ /Matrox.* G[24]00/ || #- prefer 16bit (24bit not well tested according to DRI)
-			$card->{identifier} =~ /8281[05].* CGC/ || #- 16bit (Intel 810 & 815).
+			$card->{identifier} =~ /8281[05].* CGC/ || #- 16bits (Intel 810 & 815).
+			$card->{identifier} =~ /Radeon / || #- 16bits preferable ?
 			$card->{identifier} =~ /Rage 128/); #- 16 and 32 bits, prefer 16bit as no DMA.
 
     #- check to use XFree 4.0 or XFree 3.3.
