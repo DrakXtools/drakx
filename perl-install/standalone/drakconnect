@@ -281,18 +281,31 @@ $::isWizard = 1;
 network::netconnect::main('', $netcnx, $in);
 $in->exit(0);
 
+sub get_int_ip {
+    my ($interface) = @_;
+    my ($ip, $state, $mask);
+    if (-x "/sbin/ifconfig") {
+	local $_ = `LC_ALL=C LANG=C LANGUAGE=C LC_MESSAGES=C /sbin/ifconfig $interface`;
+	$ip = /inet addr:(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})/mso ? $1 : N("Bad Ip");
+	$mask = /Mask:(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})/mso ? $1 : N("Bad Mask");
+	$_ = `LC_ALL=C LANG=C LANGUAGE=C LC_MESSAGES=C /sbin/ifconfig`;
+	$state = /$interface/ ? "up" : "down";
+    } else {
+	$ip = $intf->{$interface}{IPADDR};
+	$state = "n/a";
+    }
+    ($ip, $state, $mask);
+}
+
+sub get_eth_ip {
+    my ($interface_num) = @_;
+    get_int_ip("eth$interface_num");
+}
+
 sub build_list() {
     foreach my $i (0..$#all_cards) {
-	my ($ip, $state);
-	if (-x "/sbin/ifconfig") {
-	    local $_ = `LC_ALL=C LANG=C LANGUAGE=C LC_MESSAGES=C /sbin/ifconfig "eth$i"`;
-	    $ip = /inet addr:(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})/o ? $1 : N("Bad Ip");
-	    $_ = `LC_ALL=C LANG=C LANGUAGE=C LC_MESSAGES=C /sbin/ifconfig`;
-	    $state = /eth$i/ ? "up" : "down";
-	} else {
-            $ip = $intf->{"eth$i"}{IPADDR};
-            $state = "n/a";
-        }
+	my ($ip, $state) = get_eth_ip($i);
+
         $tree_model->append_set(undef, [ map_index { $::i => $_ } (gtkcreate_pixbuf("eth_card_mini2.png"), "eth$i", $ip , $intf->{"eth$i"}{BOOTPROTO}, $all_cards[$i][1], $state) ]);
     }
 }
@@ -402,8 +415,10 @@ Configure them first by clicking on 'Configure'")),1,1,0);
 	#	Eth${_}Hostname = $netc->{HOSTNAME}
 	#       Eth${_}HostAlias = " . do { $netc->{HOSTNAME} =~ /([^\.]*)\./; $1 } . "
 	#	Eth${_}Driver = $all_cards[$_]->[1]
-        @conf_data = ([N("IP address"), \$intf->{"eth$_"}{IPADDR}],
-			 [N("Netmask"), \$intf->{"eth$_"}{NETMASK}],
+	my ($ip, undef, $mask) = get_eth_ip($_);
+	$mask ||= $intf->{"eth$_"}{NETMASK};
+        @conf_data = ([N("IP address"), \$ip ],
+			 [N("Netmask"), \$mask],
 			 [N("Boot Protocol"), \$intf->{"eth$_"}{BOOTPROTO}, ["static", "dhcp", "bootp"]],
 			 [N("Started on boot"), \$intf->{"eth$_"}{ONBOOT} , ["yes", "no"]],
 			 [N("DHCP client"), \$netcnx->{dhcp_client}]
