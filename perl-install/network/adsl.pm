@@ -32,7 +32,7 @@ sub get_wizard {
                         };
     add2hash($wiz->{pages},
              {
-              adsl => {
+              adsl_old => {
                        name => N("Connect to the Internet") . "\n\n" .
                        N("The most common way to connect with adsl is pppoe.
 Some connections use pptp, a few use dhcp.
