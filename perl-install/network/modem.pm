@@ -13,6 +13,15 @@ sub first_modem {
     first(grep { $_->{device} =~ m!^/dev! } values %{$netc->{autodetect}{modem}});
 }
 
+sub get_user_home() {
+    my $home;
+    if ($ENV{USER} ne "root") {
+        #- kdesu case
+        $home = (find { $_->[0] eq $ENV{USER} } list_passwd())->[7];
+    }
+    $home ||= $ENV{HOME}; #- consolehelper case
+    $home;
+}
 
 sub ppp_read_conf {
     my ($netcnx, $netc) = @_;
@@ -21,7 +30,8 @@ sub ppp_read_conf {
         $modem->{device} ||= $detected_modem->{device};
     }
     $modem->{device} ||= '/dev/modem';
-    my %l = getVarsFromSh("$::prefix/usr/share/config/kppprc");
+    my %l = getVarsFromSh(get_user_home() . "/.kde/share/config/kppprc");
+    add2hash(\%l, getVarsFromSh("$::prefix/usr/share/config/kppprc"));
     $l{Authentication} = 4 if !exists $l{Authentication};
     $modem->{$_} ||= $l{$_} foreach qw(Authentication Gateway IPAddr SubnetMask);
     $modem->{connection} ||= $l{Name};
