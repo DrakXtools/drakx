@@ -501,14 +501,20 @@ wait %d seconds for default boot.
     if (my $hd_install_path = any::hdInstallPath()) {
 	if (-e "/tmp/image/boot/vmlinuz" && -e "/tmp/image/boot/all.rdz" and
 	    my ($cmdline) = cat_("/tmp/image/boot/grub/menu.lst") =~ /kernel \S+\/boot\/vmlinuz (.*)$/m) {
-	    log::l("adding a restore bootloader entry on $hd_install_path");
-	    add_entry($bootloader, {
-				    type => 'image',
-				    label => 'restore',
-				    kernel_or_dev => "$hd_install_path/boot/vmlinuz",
-				    initrd => "$hd_install_path/boot/all.rdz",
-				    append => $cmdline,
-				   });
+	    log::l("copying kernel and stage1 install to $::prefix/boot/restore");
+	    eval { mkdir "$::prefix/boot/restore";
+		   cp_af("/tmp/image/boot/vmlinuz", "$::prefix/boot/restore/vmlinuz");
+		   cp_af("/tmp/image/boot/all.rdz", "$::prefix/boot/restore/all.rdz") };
+	    unless ($@) {
+		log::l("adding a restore bootloader entry on $hd_install_path (remapped to $::prefix/boot/restore)");
+		add_entry($bootloader, {
+					type => 'image',
+					label => 'restore',
+					kernel_or_dev => "/boot/restore/vmlinuz",
+					initrd => "/boot/restore/all.rdz",
+					append => $cmdline,
+				       });
+	    }
 	} else {
 	    log::l("no restore bootloader need to be used on $hd_install_path");
 	}
