@@ -131,6 +131,7 @@ sub process {
         local $::Wizard_no_previous = $page->{no_back};
         local $::Wizard_no_cancel = $page->{no_cancel} || $page->{end};
         local $::Wizard_finished = $page->{end};
+        print qq(STEPPING "$next"\n);
         defined $page->{pre} and $page->{pre}($page);
         die qq(inexistant "$next" wizard step) if is_empty_hash_ref($page);
         
@@ -152,16 +153,20 @@ sub process {
             }
         }
         my $name = ref($page->{name}) ? $page->{name}->() : $page->{name};
+        #use Data::Dumper; print Dumper([ $name, $data2 ]);
         my $a = $in->ask_from_({ title => $o->{name}, 
                                  messages => $name, 
                                  callbacks => { map { $_ => $page->{$_} || $default_callback{$_} } qw(focus_out complete) },
                                  if_($page->{interactive_help_id}, interactive_help_id => $page->{interactive_help_id}),
                                }, $data2);
+        print "WIZGOT ($a)\n";
         if ($a) {
+            print "FORWARD($a)\n";
             # step forward:
             push @steps, $next if !$page->{ignore} && $steps[-1] ne $next;
             my $current = $next;
             $next = defined $page->{post} ? $page->{post}($a) : 0;
+            # or add a field end => 1
             return if $current eq "end";
             if (!$next) {
                 if (!defined $o->{pages}{$next}) {
@@ -171,7 +176,9 @@ sub process {
                 }
             }
             die qq(Step "$current": inexistant "$next" page) if !exists $o->{pages}{$next};
+            print qq(GOING from "$current" to "$next"\n);
         } else {
+            print "BACKWARD\n";
             # step back:
             $next = pop @steps
         }
@@ -187,7 +194,7 @@ sub safe_process {
     if ($err =~ /wizcancel/) {
         $in->exit(0);
     } else { 
-        die $err;
+        die $err if $err;
     }
 }
 
