@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10
-Release: 13mdk
+Release: 14mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -317,6 +317,13 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Fri Feb 27 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10-14mdk
+- drakautoinst: support two-floppies boot style for replay_install
+  disk as well (gc)
+- drakbackup: fix tape backup/restore (#8284) (stew)
+- drakconnect: fix crash on manually choosing modem again
+- printerdrake: better layout for about dialog box (dadou)
+
 * Thu Feb 26 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10-13mdk
 - drakconnect wizard:
   o never delete up/down scripts
