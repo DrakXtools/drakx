@@ -421,12 +421,7 @@ sub load_raw {
 }
 
 sub get_parameters {
-    my %conf;
-    foreach (split(' ', get_options($_[0]))) {
-	   /(.*)=(.*)/;
-	   $conf{$1} = $2;
-    };
-    %conf;
+    map { if_(/(.*)=(.*)/, $1 => $2) } split(' ', get_options($_[0]));
 }
 
 
