@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX VERSION\n"
-"POT-Creation-Date: 2000-10-09 15:58+0200\n"
+"POT-Creation-Date: 2000-10-16 13:34+0200\n"
 "PO-Revision-Date: 2000-07-04 14:40+0700\n"
 "Last-Translator: Mohammad DAMT <mdamt@cdl2000.com>\n"
 "Language-Team: Indonesian <i18n@i18n.linux.or.id>\n"
@@ -508,7 +508,7 @@ msgid "Delay before booting default image"
 msgstr "Delay sebelum boot ke image default"
 
 #: ../../any.pm_.c:134 ../../install_steps_interactive.pm_.c:760
-#: ../../install_steps_interactive.pm_.c:811 ../../netconnect.pm_.c:548
+#: ../../install_steps_interactive.pm_.c:811 ../../netconnect.pm_.c:555
 #: ../../printerdrake.pm_.c:94 ../../printerdrake.pm_.c:128
 #: ../../standalone/adduserdrake_.c:42
 msgid "Password"
@@ -564,7 +564,7 @@ msgid "Add"
 msgstr "Tambah"
 
 #: ../../any.pm_.c:165 ../../diskdrake.pm_.c:46
-#: ../../install_steps_interactive.pm_.c:805 ../../netconnect.pm_.c:830
+#: ../../install_steps_interactive.pm_.c:805 ../../netconnect.pm_.c:837
 #: ../../printerdrake.pm_.c:352 ../../standalone/adduserdrake_.c:36
 msgid "Done"
 msgstr "Selesai"
@@ -1329,7 +1329,9 @@ msgstr "Sehabis meresize partisi %s, semua data pada partisi ini akan hilang"
 msgid "Choose the new size"
 msgstr "Pilih ukuran baru"
 
-#: ../../diskdrake.pm_.c:609 ../../install_steps_interactive.pm_.c:518
+#: ../../diskdrake.pm_.c:609 ../../install_steps_graphical.pm_.c:287
+#: ../../install_steps_graphical.pm_.c:334
+#: ../../install_steps_interactive.pm_.c:518
 #: ../../partition_table_raw.pm_.c:101
 msgid "MB"
 msgstr "MB"
@@ -2865,7 +2867,7 @@ msgstr "Disket auto install"
 msgid "Exit install"
 msgstr "Keluar dari proses instal"
 
-#: ../../install_any.pm_.c:584
+#: ../../install_any.pm_.c:575
 msgid "Error reading file $f"
 msgstr "Error saat membaca file $f"
 
@@ -2900,11 +2902,11 @@ msgstr ""
 "Caranya, buatlah partisi (atau pilih di yang sudah ada).\n"
 "Lalu pilih ``Mount point'' dan set ke `/'"
 
-#: ../../install_interactive.pm_.c:46
+#: ../../install_interactive.pm_.c:46 ../../install_steps_graphical.pm_.c:259
 msgid "You must have a swap partition"
 msgstr "Anda harus buat partisi swap"
 
-#: ../../install_interactive.pm_.c:47
+#: ../../install_interactive.pm_.c:47 ../../install_steps_graphical.pm_.c:261
 msgid ""
 "You don't have a swap partition\n"
 "\n"
@@ -3125,6 +3127,80 @@ msgstr "Wah maaf nih, nggak ada floppy drive yah ?"
 msgid "Entering step `%s'\n"
 msgstr "Memulai langkah `%s'\n"
 
+#: ../../install_steps_graphical.pm_.c:287
+msgid "Choose the size you want to install"
+msgstr "Pilih ukuran yang akan diinstal"
+
+#: ../../install_steps_graphical.pm_.c:334
+msgid "Total size: "
+msgstr "Ukuran total: "
+
+#: ../../install_steps_graphical.pm_.c:346 ../../install_steps_gtk.pm_.c:353
+#: ../../standalone/rpmdrake_.c:136
+#, c-format
+msgid "Version: %s\n"
+msgstr "Versi: %s\n"
+
+#: ../../install_steps_graphical.pm_.c:347 ../../install_steps_gtk.pm_.c:354
+#: ../../standalone/rpmdrake_.c:137
+#, c-format
+msgid "Size: %d KB\n"
+msgstr "Ukuran: %d KB\n"
+
+#: ../../install_steps_graphical.pm_.c:462 ../../install_steps_gtk.pm_.c:260
+msgid "Choose the packages you want to install"
+msgstr "Pilih paket yang akan diinstal"
+
+#: ../../install_steps_graphical.pm_.c:465 ../../install_steps_gtk.pm_.c:263
+msgid "Info"
+msgstr "Info"
+
+#: ../../install_steps_graphical.pm_.c:473 ../../install_steps_gtk.pm_.c:268
+#: ../../install_steps_interactive.pm_.c:216 ../../standalone/rpmdrake_.c:161
+msgid "Install"
+msgstr "Instal"
+
+#: ../../install_steps_graphical.pm_.c:492 ../../install_steps_gtk.pm_.c:466
+#: ../../install_steps_interactive.pm_.c:594
+msgid "Installing"
+msgstr "Sedang melakukan instal"
+
+#: ../../install_steps_graphical.pm_.c:499 ../../install_steps_gtk.pm_.c:472
+msgid "Please wait, "
+msgstr "Silahkan tunggu, "
+
+#: ../../install_steps_graphical.pm_.c:501 ../../install_steps_gtk.pm_.c:474
+msgid "Time remaining "
+msgstr "Sisa waktu "
+
+#: ../../install_steps_graphical.pm_.c:502 ../../install_steps_gtk.pm_.c:475
+msgid "Total time "
+msgstr "Total waktu"
+
+#: ../../install_steps_graphical.pm_.c:507 ../../install_steps_gtk.pm_.c:484
+#: ../../install_steps_interactive.pm_.c:594
+msgid "Preparing installation"
+msgstr "Sedang menyiapkan instalasi"
+
+#: ../../install_steps_graphical.pm_.c:528 ../../install_steps_gtk.pm_.c:500
+#, c-format
+msgid "Installing package %s"
+msgstr "Sedang instal paket %s"
+
+#: ../../install_steps_graphical.pm_.c:553 ../../install_steps_gtk.pm_.c:569
+#: ../../install_steps_gtk.pm_.c:573
+msgid "Go on anyway?"
+msgstr "Cuek aja?"
+
+#: ../../install_steps_graphical.pm_.c:553 ../../install_steps_gtk.pm_.c:569
+msgid "There was an error ordering packages:"
+msgstr "Ada error mengurutkan paket"
+
+#: ../../install_steps_graphical.pm_.c:577
+#: ../../install_steps_interactive.pm_.c:999
+msgid "Use existing configuration for X11?"
+msgstr "Gunakan konfigurasi X11 yang ada?"
+
 #: ../../install_steps_gtk.pm_.c:136
 msgid ""
 "Your system is low on resource. You may have some problem installing\n"
@@ -3183,19 +3259,6 @@ msgstr "Anda akan bisa memilih dengan lebih lengkap nanti"
 msgid "Percentage of packages to install"
 msgstr "Persentase paket yang akan diinstall"
 
-#: ../../install_steps_gtk.pm_.c:260
-msgid "Choose the packages you want to install"
-msgstr "Pilih paket yang akan diinstal"
-
-#: ../../install_steps_gtk.pm_.c:263
-msgid "Info"
-msgstr "Info"
-
-#: ../../install_steps_gtk.pm_.c:268 ../../install_steps_interactive.pm_.c:216
-#: ../../standalone/rpmdrake_.c:161
-msgid "Install"
-msgstr "Instal"
-
 #: ../../install_steps_gtk.pm_.c:272
 msgid "Automatic dependencies"
 msgstr "Dependensi otomatis"
@@ -3220,16 +3283,6 @@ msgstr "Paket Error"
 #, c-format
 msgid "Name: %s\n"
 msgstr "Nama: %s\n"
-
-#: ../../install_steps_gtk.pm_.c:353 ../../standalone/rpmdrake_.c:136
-#, c-format
-msgid "Version: %s\n"
-msgstr "Versi: %s\n"
-
-#: ../../install_steps_gtk.pm_.c:354 ../../standalone/rpmdrake_.c:137
-#, c-format
-msgid "Size: %d KB\n"
-msgstr "Ukuran: %d KB\n"
 
 #: ../../install_steps_gtk.pm_.c:355
 #, c-format
@@ -3282,25 +3335,9 @@ msgstr ""
 msgid "You can't unselect this package. It must be upgraded"
 msgstr "Kamu nggak bisa buang paket ini. dia mesti diupgrade"
 
-#: ../../install_steps_gtk.pm_.c:466 ../../install_steps_interactive.pm_.c:594
-msgid "Installing"
-msgstr "Sedang melakukan instal"
-
 #: ../../install_steps_gtk.pm_.c:469
 msgid "Estimating"
 msgstr "Perkiraan"
-
-#: ../../install_steps_gtk.pm_.c:472
-msgid "Please wait, "
-msgstr "Silahkan tunggu, "
-
-#: ../../install_steps_gtk.pm_.c:474
-msgid "Time remaining "
-msgstr "Sisa waktu "
-
-#: ../../install_steps_gtk.pm_.c:475
-msgid "Total time "
-msgstr "Total waktu"
 
 #: ../../install_steps_gtk.pm_.c:481 ../../interactive.pm_.c:86
 #: ../../interactive.pm_.c:249 ../../interactive_newt.pm_.c:51
@@ -3309,19 +3346,10 @@ msgstr "Total waktu"
 msgid "Cancel"
 msgstr "Batalkan"
 
-#: ../../install_steps_gtk.pm_.c:484 ../../install_steps_interactive.pm_.c:594
-msgid "Preparing installation"
-msgstr "Sedang menyiapkan instalasi"
-
 #: ../../install_steps_gtk.pm_.c:495
 #, c-format
 msgid "%d packages"
 msgstr "%d paket"
-
-#: ../../install_steps_gtk.pm_.c:500
-#, c-format
-msgid "Installing package %s"
-msgstr "Sedang instal paket %s"
 
 #: ../../install_steps_gtk.pm_.c:531
 msgid ""
@@ -3379,14 +3407,6 @@ msgstr ""
 #, fuzzy
 msgid "Refuse"
 msgstr "Ubah ukuran"
-
-#: ../../install_steps_gtk.pm_.c:569 ../../install_steps_gtk.pm_.c:573
-msgid "Go on anyway?"
-msgstr "Cuek aja?"
-
-#: ../../install_steps_gtk.pm_.c:569
-msgid "There was an error ordering packages:"
-msgstr "Ada error mengurutkan paket"
 
 #: ../../install_steps_gtk.pm_.c:573
 msgid "There was an error installing packages:"
@@ -4174,10 +4194,6 @@ msgid ""
 "give digits instead of normal letters (eg: pressing `p' gives `6')"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:999
-msgid "Use existing configuration for X11?"
-msgstr "Gunakan konfigurasi X11 yang ada?"
-
 #: ../../install_steps_interactive.pm_.c:1028
 msgid "Do you want to generate an auto install floppy for linux replication?"
 msgstr "Mau buat disket auto install untuk replikasi linux?"
@@ -4261,243 +4277,243 @@ msgstr "Pilihan anda? (default %s) "
 msgid "Your choice? (default %s  enter `none' for none) "
 msgstr "Pilihan anda? (default %s  pilih 'none' untuk tidak ada) "
 
-#: ../../keyboard.pm_.c:104 ../../keyboard.pm_.c:134
+#: ../../keyboard.pm_.c:105 ../../keyboard.pm_.c:135
 msgid "Czech"
 msgstr "Ceko"
 
-#: ../../keyboard.pm_.c:105 ../../keyboard.pm_.c:118 ../../keyboard.pm_.c:135
+#: ../../keyboard.pm_.c:106 ../../keyboard.pm_.c:119 ../../keyboard.pm_.c:136
 msgid "German"
 msgstr "Jerman"
 
-#: ../../keyboard.pm_.c:106
+#: ../../keyboard.pm_.c:107
 msgid "Dvorak"
 msgstr "Dvorak"
 
-#: ../../keyboard.pm_.c:107 ../../keyboard.pm_.c:141
+#: ../../keyboard.pm_.c:108 ../../keyboard.pm_.c:142
 msgid "Spanish"
 msgstr "Spanyol"
 
-#: ../../keyboard.pm_.c:108 ../../keyboard.pm_.c:142
+#: ../../keyboard.pm_.c:109 ../../keyboard.pm_.c:143
 msgid "Finnish"
 msgstr "Finland"
 
-#: ../../keyboard.pm_.c:109 ../../keyboard.pm_.c:119 ../../keyboard.pm_.c:143
+#: ../../keyboard.pm_.c:110 ../../keyboard.pm_.c:120 ../../keyboard.pm_.c:144
 msgid "French"
 msgstr "Perancis"
 
-#: ../../keyboard.pm_.c:110 ../../keyboard.pm_.c:162
+#: ../../keyboard.pm_.c:111 ../../keyboard.pm_.c:164
 msgid "Norwegian"
 msgstr "Norwegia"
 
-#: ../../keyboard.pm_.c:111
+#: ../../keyboard.pm_.c:112
 msgid "Polish"
 msgstr "Polandia"
 
-#: ../../keyboard.pm_.c:112 ../../keyboard.pm_.c:167
+#: ../../keyboard.pm_.c:113 ../../keyboard.pm_.c:169
 msgid "Russian"
 msgstr "Rusia"
 
-#: ../../keyboard.pm_.c:113 ../../keyboard.pm_.c:176
+#: ../../keyboard.pm_.c:114 ../../keyboard.pm_.c:178
 msgid "UK keyboard"
 msgstr "Keyboard UK"
 
-#: ../../keyboard.pm_.c:114 ../../keyboard.pm_.c:117 ../../keyboard.pm_.c:177
+#: ../../keyboard.pm_.c:115 ../../keyboard.pm_.c:118 ../../keyboard.pm_.c:179
 msgid "US keyboard"
 msgstr "Keyboard US"
 
-#: ../../keyboard.pm_.c:121
+#: ../../keyboard.pm_.c:122
 msgid "Armenian (old)"
 msgstr "Armenia (lama)"
 
-#: ../../keyboard.pm_.c:122
+#: ../../keyboard.pm_.c:123
 msgid "Armenian (typewriter)"
 msgstr "Armenia (mesintik)"
 
-#: ../../keyboard.pm_.c:123
+#: ../../keyboard.pm_.c:124
 msgid "Armenian (phonetic)"
 msgstr "Armenia (phonetic)"
 
-#: ../../keyboard.pm_.c:126
+#: ../../keyboard.pm_.c:127
 msgid "Azerbaidjani (latin)"
 msgstr ""
 
-#: ../../keyboard.pm_.c:127
+#: ../../keyboard.pm_.c:128
 msgid "Azerbaidjani (cyrillic)"
 msgstr ""
 
-#: ../../keyboard.pm_.c:128
+#: ../../keyboard.pm_.c:129
 msgid "Belgian"
 msgstr "Belgia"
 
-#: ../../keyboard.pm_.c:129
+#: ../../keyboard.pm_.c:130
 msgid "Bulgarian"
 msgstr "Bulgaria"
 
-#: ../../keyboard.pm_.c:130
+#: ../../keyboard.pm_.c:131
 msgid "Brazilian (ABNT-2)"
 msgstr "Brazilia"
 
-#: ../../keyboard.pm_.c:131
+#: ../../keyboard.pm_.c:132
 msgid "Belarusian"
 msgstr "Belarusia"
 
-#: ../../keyboard.pm_.c:132
+#: ../../keyboard.pm_.c:133
 msgid "Swiss (German layout)"
 msgstr "Swiss (layout Jerman)"
 
-#: ../../keyboard.pm_.c:133
+#: ../../keyboard.pm_.c:134
 msgid "Swiss (French layout)"
 msgstr "Swiss (layout Perancis)"
 
-#: ../../keyboard.pm_.c:136
+#: ../../keyboard.pm_.c:137
 msgid "German (no dead keys)"
 msgstr "Jerman (tanpa dead key)"
 
-#: ../../keyboard.pm_.c:137
+#: ../../keyboard.pm_.c:138
 msgid "Danish"
 msgstr "Denmark"
 
-#: ../../keyboard.pm_.c:138
+#: ../../keyboard.pm_.c:139
 #, fuzzy
 msgid "Dvorak (US)"
 msgstr "Dvorak"
 
-#: ../../keyboard.pm_.c:139
+#: ../../keyboard.pm_.c:140
 #, fuzzy
 msgid "Dvorak (Norwegian)"
 msgstr "Norwegia"
 
-#: ../../keyboard.pm_.c:140
+#: ../../keyboard.pm_.c:141
 msgid "Estonian"
 msgstr "Estonia"
 
-#: ../../keyboard.pm_.c:144
+#: ../../keyboard.pm_.c:145
 msgid "Georgian (\"Russian\" layout)"
 msgstr "Georgia (layout \"Rusia\")"
 
-#: ../../keyboard.pm_.c:145
+#: ../../keyboard.pm_.c:146
 msgid "Georgian (\"Latin\" layout)"
 msgstr "Georgia (layout \"Latin\")"
 
-#: ../../keyboard.pm_.c:146
+#: ../../keyboard.pm_.c:147
 msgid "Greek"
 msgstr "Yunani"
 
-#: ../../keyboard.pm_.c:147
+#: ../../keyboard.pm_.c:148
 msgid "Hungarian"
 msgstr "Hungaria"
 
-#: ../../keyboard.pm_.c:148
+#: ../../keyboard.pm_.c:149
 msgid "Croatian"
 msgstr "Kroasia"
 
-#: ../../keyboard.pm_.c:149
+#: ../../keyboard.pm_.c:150
 msgid "Israeli"
 msgstr "Ibrani"
 
-#: ../../keyboard.pm_.c:150
+#: ../../keyboard.pm_.c:151
 msgid "Israeli (Phonetic)"
 msgstr "Ibrani (Phonetic)"
 
-#: ../../keyboard.pm_.c:151
+#: ../../keyboard.pm_.c:152
 #, fuzzy
 msgid "Iranian"
 msgstr "Ukrania"
 
-#: ../../keyboard.pm_.c:152
+#: ../../keyboard.pm_.c:153
 msgid "Icelandic"
 msgstr "Islandia"
 
-#: ../../keyboard.pm_.c:153
+#: ../../keyboard.pm_.c:154
 msgid "Italian"
 msgstr "Itali"
 
-#: ../../keyboard.pm_.c:154
+#: ../../keyboard.pm_.c:155
 msgid "Japanese 106 keys"
 msgstr ""
 
-#: ../../keyboard.pm_.c:155
+#: ../../keyboard.pm_.c:156
 msgid "Latin American"
 msgstr "Amerika Latin"
 
-#: ../../keyboard.pm_.c:156
+#: ../../keyboard.pm_.c:158
 msgid "Dutch"
 msgstr "Belanda"
 
-#: ../../keyboard.pm_.c:157
+#: ../../keyboard.pm_.c:159
 msgid "Lithuanian AZERTY (old)"
 msgstr "Lithuania AZERTY (lama)"
 
-#: ../../keyboard.pm_.c:159
+#: ../../keyboard.pm_.c:161
 msgid "Lithuanian AZERTY (new)"
 msgstr "Lithuania AZERTY (baru)"
 
-#: ../../keyboard.pm_.c:160
+#: ../../keyboard.pm_.c:162
 msgid "Lithuanian \"number row\" QWERTY"
 msgstr "Lithuania \"number row\" QWERTY"
 
-#: ../../keyboard.pm_.c:161
+#: ../../keyboard.pm_.c:163
 msgid "Lithuanian \"phonetic\" QWERTY"
 msgstr "Lithuania \"phonetic\" QWERTY"
 
-#: ../../keyboard.pm_.c:163
+#: ../../keyboard.pm_.c:165
 msgid "Polish (qwerty layout)"
 msgstr "Polandia (layout qwerty)"
 
-#: ../../keyboard.pm_.c:164
+#: ../../keyboard.pm_.c:166
 msgid "Polish (qwertz layout)"
 msgstr "Polandia (layout qwertz)"
 
-#: ../../keyboard.pm_.c:165
+#: ../../keyboard.pm_.c:167
 msgid "Portuguese"
 msgstr "Portugis"
 
-#: ../../keyboard.pm_.c:166
+#: ../../keyboard.pm_.c:168
 msgid "Canadian (Quebec)"
 msgstr "Kanada (Quebec)"
 
-#: ../../keyboard.pm_.c:168
+#: ../../keyboard.pm_.c:170
 msgid "Russian (Yawerty)"
 msgstr "Rusia (Yawerty)"
 
-#: ../../keyboard.pm_.c:169
+#: ../../keyboard.pm_.c:171
 msgid "Swedish"
 msgstr "Swedia"
 
-#: ../../keyboard.pm_.c:170
+#: ../../keyboard.pm_.c:172
 msgid "Slovenian"
 msgstr "Slovenia"
 
-#: ../../keyboard.pm_.c:171
+#: ../../keyboard.pm_.c:173
 msgid "Slovakian"
 msgstr "Slovakia"
 
-#: ../../keyboard.pm_.c:172
+#: ../../keyboard.pm_.c:174
 msgid "Thai keyboard"
 msgstr "Keyboard Thailand"
 
-#: ../../keyboard.pm_.c:173
+#: ../../keyboard.pm_.c:175
 msgid "Turkish (traditional \"F\" model)"
 msgstr "Turki (model \"F\" tradisional)"
 
-#: ../../keyboard.pm_.c:174
+#: ../../keyboard.pm_.c:176
 msgid "Turkish (modern \"Q\" model)"
 msgstr "Turki (model \"Q\" modern)"
 
-#: ../../keyboard.pm_.c:175
+#: ../../keyboard.pm_.c:177
 msgid "Ukrainian"
 msgstr "Ukrania"
 
-#: ../../keyboard.pm_.c:178
+#: ../../keyboard.pm_.c:180
 msgid "US keyboard (international)"
 msgstr "Keyboard US (internasional)"
 
-#: ../../keyboard.pm_.c:179
+#: ../../keyboard.pm_.c:181
 #, fuzzy
 msgid "Vietnamese \"numeric row\" QWERTY"
 msgstr "Lithuania \"number row\" QWERTY"
 
-#: ../../keyboard.pm_.c:180
+#: ../../keyboard.pm_.c:182
 msgid "Yugoslavian (latin layout)"
 msgstr "Yugoslavia (layout latin)"
 
@@ -4815,8 +4831,8 @@ msgid ""
 "Please choose which network adapter you want to use to connect to Internet"
 msgstr "Di serial port mana mouse Anda dicolokkan ?"
 
-#: ../../netconnect.pm_.c:351 ../../netconnect.pm_.c:623
-#: ../../netconnect.pm_.c:754 ../../standalone/drakgw_.c:217
+#: ../../netconnect.pm_.c:351 ../../netconnect.pm_.c:630
+#: ../../netconnect.pm_.c:761 ../../standalone/drakgw_.c:217
 msgid "Network interface"
 msgstr ""
 
@@ -4841,250 +4857,250 @@ msgstr "konfigurasi"
 msgid "Do you want to start your connection at boot?"
 msgstr "Mau pakai aboot saja?"
 
-#: ../../netconnect.pm_.c:529
+#: ../../netconnect.pm_.c:536
 msgid "Try to find a modem?"
 msgstr "Cari Modem?"
 
-#: ../../netconnect.pm_.c:539
+#: ../../netconnect.pm_.c:546
 msgid "Please choose which serial port your modem is connected to."
 msgstr "Di serial port mana modem Anda disambungkan?"
 
-#: ../../netconnect.pm_.c:544
+#: ../../netconnect.pm_.c:551
 msgid "Dialup options"
 msgstr "Parameter Dialup"
 
-#: ../../netconnect.pm_.c:545
+#: ../../netconnect.pm_.c:552
 msgid "Connection name"
 msgstr "Nama koneksi"
 
-#: ../../netconnect.pm_.c:546
+#: ../../netconnect.pm_.c:553
 #, fuzzy
 msgid "Phone number"
 msgstr "Nomor telepon"
 
-#: ../../netconnect.pm_.c:547
+#: ../../netconnect.pm_.c:554
 msgid "Login ID"
 msgstr "Login ID"
 
-#: ../../netconnect.pm_.c:549
+#: ../../netconnect.pm_.c:556
 msgid "Authentication"
 msgstr "Autentikasi"
 
-#: ../../netconnect.pm_.c:549
+#: ../../netconnect.pm_.c:556
 msgid "PAP"
 msgstr "PAP"
 
-#: ../../netconnect.pm_.c:549
+#: ../../netconnect.pm_.c:556
 msgid "Script-based"
 msgstr "Script-based"
 
-#: ../../netconnect.pm_.c:549
+#: ../../netconnect.pm_.c:556
 msgid "Terminal-based"
 msgstr "Terminal-based"
 
-#: ../../netconnect.pm_.c:550
+#: ../../netconnect.pm_.c:557
 msgid "Domain name"
 msgstr "Nama domain"
 
-#: ../../netconnect.pm_.c:552
+#: ../../netconnect.pm_.c:559
 msgid "First DNS Server"
 msgstr "Server DNS Primary"
 
-#: ../../netconnect.pm_.c:553
+#: ../../netconnect.pm_.c:560
 msgid "Second DNS Server"
 msgstr "Server DNS Sekondari"
 
-#: ../../netconnect.pm_.c:582
+#: ../../netconnect.pm_.c:589
 #, fuzzy
 msgid ""
 "\n"
 "You can connect to Internet or reconfigure your connection."
 msgstr "Nama koneksi"
 
-#: ../../netconnect.pm_.c:582 ../../netconnect.pm_.c:586
+#: ../../netconnect.pm_.c:589 ../../netconnect.pm_.c:593
 #, fuzzy
 msgid ""
 "\n"
 "You can reconfigure your connection."
 msgstr "Konfigureasi jaringan"
 
-#: ../../netconnect.pm_.c:582
+#: ../../netconnect.pm_.c:589
 #, fuzzy
 msgid "You are not currently connected to Internet."
 msgstr "Jangan Konfigurasi jaringan"
 
-#: ../../netconnect.pm_.c:586
+#: ../../netconnect.pm_.c:593
 msgid ""
 "\n"
 "You can disconnect or reconfigure your connection."
 msgstr ""
 
-#: ../../netconnect.pm_.c:586
+#: ../../netconnect.pm_.c:593
 #, fuzzy
 msgid "You are currently connected to internet."
 msgstr "Jangan Konfigurasi jaringan"
 
-#: ../../netconnect.pm_.c:590
+#: ../../netconnect.pm_.c:597
 #, fuzzy
 msgid "Connect to Internet"
 msgstr "Nama koneksi"
 
-#: ../../netconnect.pm_.c:592
+#: ../../netconnect.pm_.c:599
 #, fuzzy
 msgid "Disconnect from Internet"
 msgstr "Nama koneksi"
 
-#: ../../netconnect.pm_.c:594
+#: ../../netconnect.pm_.c:601
 #, fuzzy
 msgid "Configure network connection (LAN or Internet)"
 msgstr "Konfigureasi jaringan"
 
-#: ../../netconnect.pm_.c:597
+#: ../../netconnect.pm_.c:604
 #, fuzzy
 msgid "Internet connection & configuration"
 msgstr "Koneksi Printer"
 
-#: ../../netconnect.pm_.c:624 ../../netconnect.pm_.c:755
+#: ../../netconnect.pm_.c:631 ../../netconnect.pm_.c:762
 msgid ""
 "I'm about to restart the network device $netc->{NET_DEVICE}. Do you agree?"
 msgstr ""
 
-#: ../../netconnect.pm_.c:641
+#: ../../netconnect.pm_.c:648
 #, fuzzy
 msgid "Configure a normal modem connection"
 msgstr "Konfigureasi jaringan"
 
-#: ../../netconnect.pm_.c:661
+#: ../../netconnect.pm_.c:668
 #, fuzzy
 msgid "Configure an ISDN connection"
 msgstr "Konfigureasi jaringan"
 
-#: ../../netconnect.pm_.c:666
+#: ../../netconnect.pm_.c:673
 msgid "Internal ISDN card"
 msgstr ""
 
-#: ../../netconnect.pm_.c:668
+#: ../../netconnect.pm_.c:675
 #, fuzzy
 msgid "External ISDN modem"
 msgstr "Ahli"
 
-#: ../../netconnect.pm_.c:671 ../../netconnect.pm_.c:705
-#: ../../netconnect.pm_.c:717 ../../netconnect.pm_.c:741
-#: ../../netconnect.pm_.c:786
+#: ../../netconnect.pm_.c:678 ../../netconnect.pm_.c:712
+#: ../../netconnect.pm_.c:724 ../../netconnect.pm_.c:748
+#: ../../netconnect.pm_.c:793
 #, fuzzy
 msgid "Connect to the Internet"
 msgstr "Nama koneksi"
 
-#: ../../netconnect.pm_.c:672
+#: ../../netconnect.pm_.c:679
 #, fuzzy
 msgid "What kind is your ISDN connection?"
 msgstr "Di serial port mana mouse Anda dicolokkan ?"
 
-#: ../../netconnect.pm_.c:691
+#: ../../netconnect.pm_.c:698
 #, fuzzy
 msgid "Configure a DSL (or ADSL) connection"
 msgstr "Konfigureasi jaringan"
 
-#: ../../netconnect.pm_.c:700
+#: ../../netconnect.pm_.c:707
 #, fuzzy
 msgid "France"
 msgstr "Batalkan"
 
-#: ../../netconnect.pm_.c:702
+#: ../../netconnect.pm_.c:709
 msgid "Other countries"
 msgstr ""
 
-#: ../../netconnect.pm_.c:706
+#: ../../netconnect.pm_.c:713
 msgid "In which country are you located ?"
 msgstr ""
 
-#: ../../netconnect.pm_.c:712
+#: ../../netconnect.pm_.c:719
 msgid "Alcatel modem"
 msgstr ""
 
-#: ../../netconnect.pm_.c:714
+#: ../../netconnect.pm_.c:721
 #, fuzzy
 msgid "ECI modem"
 msgstr "Ahli"
 
-#: ../../netconnect.pm_.c:718
+#: ../../netconnect.pm_.c:725
 msgid "If your adsl modem is an Alcatel one, choose Alcatel. Otherwise, ECI."
 msgstr ""
 
-#: ../../netconnect.pm_.c:736
+#: ../../netconnect.pm_.c:743
 msgid "use pppoe"
 msgstr ""
 
-#: ../../netconnect.pm_.c:738
+#: ../../netconnect.pm_.c:745
 msgid "don't use pppoe"
 msgstr ""
 
-#: ../../netconnect.pm_.c:742
+#: ../../netconnect.pm_.c:749
 msgid ""
 "The most common way to connect with adsl is dhcp + pppoe.\n"
 "However, some connections only use dhcp.\n"
 "If you don't know, choose 'use pppoe'"
 msgstr ""
 
-#: ../../netconnect.pm_.c:765
+#: ../../netconnect.pm_.c:772
 #, fuzzy
 msgid "Configure a cable connection"
 msgstr "Konfigureasi jaringan"
 
-#: ../../netconnect.pm_.c:787
+#: ../../netconnect.pm_.c:794
 #, fuzzy
 msgid ""
 "Which dhcp client do you want to use?\n"
 "Default is dhcpd"
 msgstr "Tipe partisi yang anda diinginkan?"
 
-#: ../../netconnect.pm_.c:800
+#: ../../netconnect.pm_.c:807
 #, fuzzy
 msgid "Disable Internet Connection"
 msgstr "Konfigureasi jaringan"
 
-#: ../../netconnect.pm_.c:811
+#: ../../netconnect.pm_.c:818
 #, fuzzy
 msgid "Configure local network"
 msgstr "Konfigureasi jaringan"
 
-#: ../../netconnect.pm_.c:815
+#: ../../netconnect.pm_.c:822
 #, fuzzy
 msgid "Network configuration"
 msgstr "Konfigurasi Jaringan"
 
-#: ../../netconnect.pm_.c:816
+#: ../../netconnect.pm_.c:823
 #, fuzzy
 msgid "Do you want to restart the network"
 msgstr "Anda ingin test konfigurasi ini?"
 
-#: ../../netconnect.pm_.c:824
+#: ../../netconnect.pm_.c:831
 #, fuzzy
 msgid "Disable networking"
 msgstr "Konfigureasi jaringan"
 
-#: ../../netconnect.pm_.c:834
+#: ../../netconnect.pm_.c:841
 #, fuzzy
 msgid "Configure the Internet connection / Configure local Network"
 msgstr "Nama koneksi"
 
-#: ../../netconnect.pm_.c:835
+#: ../../netconnect.pm_.c:842
 #, fuzzy
 msgid ""
 "Local networking has already been configured.\n"
 "Do you want to:"
 msgstr "Jaringan LAN telah dikonfigurasikan sebelumnya. Sekarang Anda ingin:"
 
-#: ../../netconnect.pm_.c:836
+#: ../../netconnect.pm_.c:843
 #, fuzzy
 msgid "How do you want to connect to the Internet?"
 msgstr "Disk mana yang hendak dipindah?"
 
-#: ../../netconnect.pm_.c:858
+#: ../../netconnect.pm_.c:865
 msgid "Network Configuration"
 msgstr "Konfigurasi Jaringan"
 
-#: ../../netconnect.pm_.c:859
+#: ../../netconnect.pm_.c:866
 msgid ""
 "Now that your Internet connection is configured,\n"
 "your computer can be configured to share its Internet connection.\n"
@@ -6062,31 +6078,15 @@ msgstr ""
 msgid "Configuring..."
 msgstr "konfigurasi IDE"
 
-#: ../../standalone/drakgw_.c:306
-msgid "Could not install ipchains RPM with urpmi."
+#: ../../standalone/drakgw_.c:313
+msgid "Problems installing package $bin2rpm{$_}"
 msgstr ""
 
-#: ../../standalone/drakgw_.c:456
-msgid "Could not install dhcp RPM with urpmi."
-msgstr ""
-
-#: ../../standalone/drakgw_.c:480
-msgid "Could not install linuxconf RPM with urpmi."
-msgstr ""
-
-#: ../../standalone/drakgw_.c:496
-msgid "Could not install bind RPM with urpmi."
-msgstr ""
-
-#: ../../standalone/drakgw_.c:500
-msgid "Could not install caching-nameserver RPM with urpmi."
-msgstr ""
-
-#: ../../standalone/drakgw_.c:512
+#: ../../standalone/drakgw_.c:504
 msgid "Congratulations!"
 msgstr "Wah Selamat nih!"
 
-#: ../../standalone/drakgw_.c:513
+#: ../../standalone/drakgw_.c:505
 msgid ""
 "Everything has been configured.\n"
 "You may now share Internet connection with other computers on your Local "
@@ -6154,6 +6154,14 @@ msgstr "Pilih Tingkat Security"
 #: ../../standalone/drakxconf_.c:21
 msgid "Choose the tool you want to use"
 msgstr "Pilih tool yang hendak digunakan"
+
+#: ../../standalone/keyboarddrake_.c:14
+msgid "usage: keyboarddrake [--expert]\n"
+msgstr ""
+
+#: ../../standalone/keyboarddrake_.c:27
+msgid "Do you want the BackSpace to return Delete in console?"
+msgstr ""
 
 #: ../../standalone/livedrake_.c:23
 #, fuzzy
@@ -6398,41 +6406,51 @@ msgid "Finding leaves takes some time"
 msgstr "Sebentar yah. agak lama nih untuk mencari di daun2nya"
 
 # ../../share/compssUsers
-msgid "More Graphical Desktops (Gnome, IceWM)"
+msgid "Graphics Manipulation"
 msgstr ""
 
 # ../../share/compssUsers
-msgid ""
-"The K Desktop Environment, the basic graphical environment with a collection "
-"of accompanying tools"
+msgid "KDE, QT, Gnome, GTK+"
 msgstr ""
-
-# ../../share/compssUsers
-msgid "Personnal Information Management"
-msgstr ""
-
-# ../../share/compssUsers
-msgid "Tools to create and burn CD's"
-msgstr ""
-
-#, fuzzy
-msgid "Internet Tools"
-msgstr "Konfigurasi Proxy"
-
-#, fuzzy
-msgid "Internet"
-msgstr "menarik"
 
 # ../../share/compssUsers
 msgid "Personnal Finance"
 msgstr ""
 
 # ../../share/compssUsers
-msgid "Gnome, Icewm, Window Maker, Enlightenment, Fvwm, etc"
+msgid "Python, Perl, libraries, tools"
 msgstr ""
 
 # ../../share/compssUsers
-msgid "Graphics programs such as The Gimp"
+msgid "Scientific applications"
+msgstr ""
+
+# ../../share/compssUsers
+msgid "Databases"
+msgstr ""
+
+#, fuzzy
+msgid "Internet"
+msgstr "menarik"
+
+# ../../share/compssUsers
+msgid "Multimedia - Graphics"
+msgstr ""
+
+# ../../share/compssUsers
+msgid "editors, shells, file tools, terminals"
+msgstr ""
+
+#, fuzzy
+msgid "Development applications"
+msgstr "Development"
+
+# ../../share/compssUsers
+msgid "Audio-related tools: mp3 or midi players, mixers, etc"
+msgstr ""
+
+# ../../share/compssUsers
+msgid "Multimedia"
 msgstr ""
 
 #, fuzzy
@@ -6440,39 +6458,7 @@ msgid "Office"
 msgstr "bagus"
 
 # ../../share/compssUsers
-msgid "Databases clients and servers (mysql and postgresql)"
-msgstr ""
-
-# ../../share/compssUsers
-msgid "Tools for your Palm Pilot or your Visor"
-msgstr ""
-
-# ../../share/compssUsers
-msgid "Multimedia - Graphics"
-msgstr ""
-
-# ../../share/compssUsers
-msgid "Video players and editors"
-msgstr ""
-
-# ../../share/compssUsers
-msgid "Amusement programs: arcade, boards, strategy, etc"
-msgstr ""
-
-# ../../share/compssUsers
-msgid ""
-"Office programs: wordprocessors (kword, abiword), spreadsheets (kspread, "
-"gnumeric), pdf viewers, etc"
-msgstr ""
-
-# ../../share/compssUsers
-msgid ""
-"Set of tools to read and send mail and news (pine, mutt, tin..) and to "
-"browse the Web"
-msgstr ""
-
-# ../../share/compssUsers
-msgid "Audio-related tools: mp3 or midi players, mixers, etc"
+msgid "Sciences"
 msgstr ""
 
 # ../../share/compssUsers
@@ -6482,11 +6468,81 @@ msgid ""
 msgstr ""
 
 # ../../share/compssUsers
-msgid "Books and Howto's on Linux and Free Software"
+msgid ""
+"Set of tools to read and send mail and news (pine, mutt, tin..) and to "
+"browse the Web"
 msgstr ""
 
 # ../../share/compssUsers
+msgid "C and C++ development libraries, programs and include files"
+msgstr ""
+
+# ../../share/compssUsers
+msgid "Communication facilities"
+msgstr ""
+
+#, fuzzy
+msgid "KDE"
+msgstr "IDE"
+
+# ../../share/compssUsers
+msgid "Personnal Information Management"
+msgstr ""
+
+# ../../share/compssUsers
+msgid "Programs to manage your finance, such as gnucash"
+msgstr ""
+
+#, fuzzy
+msgid "Gnome"
+msgstr "tidak ada"
+
+#, fuzzy
+msgid "Internet Tools"
+msgstr "Konfigurasi Proxy"
+
+#, fuzzy
+msgid "Documentation"
+msgstr "Autentikasi"
+
+# ../../share/compssUsers
 msgid "Icewm, Window Maker, Enlightenment, Fvwm, etc"
+msgstr ""
+
+# ../../share/compssUsers
+msgid "Utilities"
+msgstr ""
+
+# ../../share/compssUsers
+msgid "Multimedia - Sound"
+msgstr ""
+
+# ../../share/compssUsers
+msgid "Amusement programs: arcade, boards, strategy, etc"
+msgstr ""
+
+# ../../share/compssUsers
+msgid "Video players and editors"
+msgstr ""
+
+# ../../share/compssUsers
+msgid "Console Tools"
+msgstr ""
+
+#, fuzzy
+msgid "Development other"
+msgstr "Development"
+
+# ../../share/compssUsers
+msgid "Databases clients and servers (mysql and postgresql)"
+msgstr ""
+
+# ../../share/compssUsers
+msgid "Sound and video playing/editing programs"
+msgstr ""
+
+# ../../share/compssUsers
+msgid "Books and Howto's on Linux and Free Software"
 msgstr ""
 
 # ../../share/compssUsers
@@ -6496,51 +6552,33 @@ msgid ""
 msgstr ""
 
 # ../../share/compssUsers
-msgid "Set of tools for mail, news, web, file transfer, and chat"
+msgid "Games"
 msgstr ""
+
+#, fuzzy
+msgid "Development C/C++"
+msgstr "Development"
 
 # ../../share/compssUsers
 msgid "Multimedia - Video"
 msgstr ""
 
-#, fuzzy
-msgid "KDE"
-msgstr "IDE"
-
 # ../../share/compssUsers
-msgid "Sound and video playing/editing programs"
+msgid "Graphics programs such as The Gimp"
 msgstr ""
 
 # ../../share/compssUsers
-msgid "Multimedia"
+msgid ""
+"The K Desktop Environment, the basic graphical environment with a collection "
+"of accompanying tools"
 msgstr ""
 
 # ../../share/compssUsers
-msgid "Other Graphical Desktops"
+msgid "Tools to create and burn CD's"
 msgstr ""
 
 # ../../share/compssUsers
-msgid "Multimedia - Sound"
-msgstr ""
-
-#, fuzzy
-msgid "Gnome"
-msgstr "tidak ada"
-
-#, fuzzy
-msgid "Documentation"
-msgstr "Autentikasi"
-
-# ../../share/compssUsers
-msgid "Programs to manage your finance, such as gnucash"
-msgstr ""
-
-# ../../share/compssUsers
-msgid "Graphics Manipulation"
-msgstr ""
-
-# ../../share/compssUsers
-msgid "Games"
+msgid "More Graphical Desktops (Gnome, IceWM)"
 msgstr ""
 
 # ../../share/compssUsers
@@ -6548,18 +6586,30 @@ msgid "Multimedia - CD Burning"
 msgstr ""
 
 # ../../share/compssUsers
-msgid "Communication facilities"
+msgid "Archiving, emulators, monitoring"
 msgstr ""
 
 # ../../share/compssUsers
-msgid "Databases"
+msgid ""
+"Office programs: wordprocessors (kword, abiword), spreadsheets (kspread, "
+"gnumeric), pdf viewers, etc"
 msgstr ""
 
-#~ msgid "Choose the size you want to install"
-#~ msgstr "Pilih ukuran yang akan diinstal"
+# ../../share/compssUsers
+msgid "Other Graphical Desktops"
+msgstr ""
 
-#~ msgid "Total size: "
-#~ msgstr "Ukuran total: "
+# ../../share/compssUsers
+msgid "Tools for your Palm Pilot or your Visor"
+msgstr ""
+
+# ../../share/compssUsers
+msgid "Gnome, Icewm, Window Maker, Enlightenment, Fvwm, etc"
+msgstr ""
+
+# ../../share/compssUsers
+msgid "Set of tools for mail, news, web, file transfer, and chat"
+msgstr ""
 
 #, fuzzy
 #~ msgid "Reconfigure local network"

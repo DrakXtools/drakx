@@ -9,7 +9,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX VERSION\n"
-"POT-Creation-Date: 2000-10-09 15:58+0200\n"
+"POT-Creation-Date: 2000-10-16 13:34+0200\n"
 "PO-Revision-Date: 2000-09-01 12:56+0200\n"
 "Last-Translator: KOVACS Emese Alexandra <emese@itp.hu>\n"
 "Language-Team: hungarian\n"
@@ -519,7 +519,7 @@ msgid "Delay before booting default image"
 msgstr "Késleltetés az alapértelmezett image betöltése elõtt"
 
 #: ../../any.pm_.c:134 ../../install_steps_interactive.pm_.c:760
-#: ../../install_steps_interactive.pm_.c:811 ../../netconnect.pm_.c:548
+#: ../../install_steps_interactive.pm_.c:811 ../../netconnect.pm_.c:555
 #: ../../printerdrake.pm_.c:94 ../../printerdrake.pm_.c:128
 #: ../../standalone/adduserdrake_.c:42
 msgid "Password"
@@ -577,7 +577,7 @@ msgid "Add"
 msgstr "Hozzáad"
 
 #: ../../any.pm_.c:165 ../../diskdrake.pm_.c:46
-#: ../../install_steps_interactive.pm_.c:805 ../../netconnect.pm_.c:830
+#: ../../install_steps_interactive.pm_.c:805 ../../netconnect.pm_.c:837
 #: ../../printerdrake.pm_.c:352 ../../standalone/adduserdrake_.c:36
 msgid "Done"
 msgstr "Kész"
@@ -1378,7 +1378,9 @@ msgstr "A(z) %s partíció átméretezése után a partíción minden adat elvész"
 msgid "Choose the new size"
 msgstr "Add meg az új méretet"
 
-#: ../../diskdrake.pm_.c:609 ../../install_steps_interactive.pm_.c:518
+#: ../../diskdrake.pm_.c:609 ../../install_steps_graphical.pm_.c:287
+#: ../../install_steps_graphical.pm_.c:334
+#: ../../install_steps_interactive.pm_.c:518
 #: ../../partition_table_raw.pm_.c:101
 msgid "MB"
 msgstr "MB"
@@ -2921,7 +2923,7 @@ msgstr "Automatikus telepítõlemez"
 msgid "Exit install"
 msgstr "Kilépés a telepítõbõl"
 
-#: ../../install_any.pm_.c:584
+#: ../../install_any.pm_.c:575
 msgid "Error reading file $f"
 msgstr "Olvasási hiba a $f fájlnál"
 
@@ -2957,11 +2959,11 @@ msgstr ""
 "Hozz létre egy partíciót (vagy kattints egy meglévõre).\n"
 "Utána add meg mount-olási pontnak a `/'-t."
 
-#: ../../install_interactive.pm_.c:46
+#: ../../install_interactive.pm_.c:46 ../../install_steps_graphical.pm_.c:259
 msgid "You must have a swap partition"
 msgstr "Kell egy swap partíció a mûködéshez"
 
-#: ../../install_interactive.pm_.c:47
+#: ../../install_interactive.pm_.c:47 ../../install_steps_graphical.pm_.c:261
 msgid ""
 "You don't have a swap partition\n"
 "\n"
@@ -3181,6 +3183,81 @@ msgstr "Nincs elérhetõ floppy-meghajtó"
 msgid "Entering step `%s'\n"
 msgstr "A következõ lépés: `%s'\n"
 
+#: ../../install_steps_graphical.pm_.c:287
+#, fuzzy
+msgid "Choose the size you want to install"
+msgstr "Válaszd ki a telepítendõ csomagokat"
+
+#: ../../install_steps_graphical.pm_.c:334
+msgid "Total size: "
+msgstr "Összméret: "
+
+#: ../../install_steps_graphical.pm_.c:346 ../../install_steps_gtk.pm_.c:353
+#: ../../standalone/rpmdrake_.c:136
+#, c-format
+msgid "Version: %s\n"
+msgstr "Verzió: %s\n"
+
+#: ../../install_steps_graphical.pm_.c:347 ../../install_steps_gtk.pm_.c:354
+#: ../../standalone/rpmdrake_.c:137
+#, c-format
+msgid "Size: %d KB\n"
+msgstr "Méret: %d kB\n"
+
+#: ../../install_steps_graphical.pm_.c:462 ../../install_steps_gtk.pm_.c:260
+msgid "Choose the packages you want to install"
+msgstr "Válaszd ki a telepítendõ csomagokat"
+
+#: ../../install_steps_graphical.pm_.c:465 ../../install_steps_gtk.pm_.c:263
+msgid "Info"
+msgstr "Info"
+
+#: ../../install_steps_graphical.pm_.c:473 ../../install_steps_gtk.pm_.c:268
+#: ../../install_steps_interactive.pm_.c:216 ../../standalone/rpmdrake_.c:161
+msgid "Install"
+msgstr "Telepítés"
+
+#: ../../install_steps_graphical.pm_.c:492 ../../install_steps_gtk.pm_.c:466
+#: ../../install_steps_interactive.pm_.c:594
+msgid "Installing"
+msgstr "Telepítés"
+
+#: ../../install_steps_graphical.pm_.c:499 ../../install_steps_gtk.pm_.c:472
+msgid "Please wait, "
+msgstr "Kérem várjon, "
+
+#: ../../install_steps_graphical.pm_.c:501 ../../install_steps_gtk.pm_.c:474
+msgid "Time remaining "
+msgstr "Hátralévõ idõ "
+
+#: ../../install_steps_graphical.pm_.c:502 ../../install_steps_gtk.pm_.c:475
+msgid "Total time "
+msgstr "Összidõ "
+
+#: ../../install_steps_graphical.pm_.c:507 ../../install_steps_gtk.pm_.c:484
+#: ../../install_steps_interactive.pm_.c:594
+msgid "Preparing installation"
+msgstr "Telepítés elõkészítése"
+
+#: ../../install_steps_graphical.pm_.c:528 ../../install_steps_gtk.pm_.c:500
+#, c-format
+msgid "Installing package %s"
+msgstr "A %s csomag telepítése"
+
+#: ../../install_steps_graphical.pm_.c:553 ../../install_steps_gtk.pm_.c:569
+#: ../../install_steps_gtk.pm_.c:573
+msgid "Go on anyway?"
+msgstr "Ettõl függetlenül folytassam?"
+
+#: ../../install_steps_graphical.pm_.c:553 ../../install_steps_gtk.pm_.c:569
+msgid "There was an error ordering packages:"
+msgstr "Hiba történt a csomagok rendezésekor:"
+
+#: ../../install_steps_graphical.pm_.c:577
+#: ../../install_steps_interactive.pm_.c:999
+msgid "Use existing configuration for X11?"
+msgstr "Használjam a már meglévõ X11 beállításokat?"
+
 #: ../../install_steps_gtk.pm_.c:136
 msgid ""
 "Your system is low on resource. You may have some problem installing\n"
@@ -3242,19 +3319,6 @@ msgstr "Részletesebben válogathatsz a következõ lépés részeként."
 msgid "Percentage of packages to install"
 msgstr "Telepítendõ csomagok százaléka"
 
-#: ../../install_steps_gtk.pm_.c:260
-msgid "Choose the packages you want to install"
-msgstr "Válaszd ki a telepítendõ csomagokat"
-
-#: ../../install_steps_gtk.pm_.c:263
-msgid "Info"
-msgstr "Info"
-
-#: ../../install_steps_gtk.pm_.c:268 ../../install_steps_interactive.pm_.c:216
-#: ../../standalone/rpmdrake_.c:161
-msgid "Install"
-msgstr "Telepítés"
-
 #: ../../install_steps_gtk.pm_.c:272
 msgid "Automatic dependencies"
 msgstr "Automatikus függõségek"
@@ -3279,16 +3343,6 @@ msgstr "Rossz csomag"
 #, c-format
 msgid "Name: %s\n"
 msgstr "Név: %s\n"
-
-#: ../../install_steps_gtk.pm_.c:353 ../../standalone/rpmdrake_.c:136
-#, c-format
-msgid "Version: %s\n"
-msgstr "Verzió: %s\n"
-
-#: ../../install_steps_gtk.pm_.c:354 ../../standalone/rpmdrake_.c:137
-#, c-format
-msgid "Size: %d KB\n"
-msgstr "Méret: %d kB\n"
 
 #: ../../install_steps_gtk.pm_.c:355
 #, c-format
@@ -3340,25 +3394,9 @@ msgid "You can't unselect this package. It must be upgraded"
 msgstr ""
 "Nem törölheted ennek a csomagnak a kijelölését. Ez a csomag frissítendõ!"
 
-#: ../../install_steps_gtk.pm_.c:466 ../../install_steps_interactive.pm_.c:594
-msgid "Installing"
-msgstr "Telepítés"
-
 #: ../../install_steps_gtk.pm_.c:469
 msgid "Estimating"
 msgstr "Megsaccolom..."
-
-#: ../../install_steps_gtk.pm_.c:472
-msgid "Please wait, "
-msgstr "Kérem várjon, "
-
-#: ../../install_steps_gtk.pm_.c:474
-msgid "Time remaining "
-msgstr "Hátralévõ idõ "
-
-#: ../../install_steps_gtk.pm_.c:475
-msgid "Total time "
-msgstr "Összidõ "
 
 #: ../../install_steps_gtk.pm_.c:481 ../../interactive.pm_.c:86
 #: ../../interactive.pm_.c:249 ../../interactive_newt.pm_.c:51
@@ -3367,19 +3405,10 @@ msgstr "Összidõ "
 msgid "Cancel"
 msgstr "Mégsem"
 
-#: ../../install_steps_gtk.pm_.c:484 ../../install_steps_interactive.pm_.c:594
-msgid "Preparing installation"
-msgstr "Telepítés elõkészítése"
-
 #: ../../install_steps_gtk.pm_.c:495
 #, c-format
 msgid "%d packages"
 msgstr "%d csomag"
-
-#: ../../install_steps_gtk.pm_.c:500
-#, c-format
-msgid "Installing package %s"
-msgstr "A %s csomag telepítése"
 
 #: ../../install_steps_gtk.pm_.c:531
 msgid ""
@@ -3435,14 +3464,6 @@ msgstr ""
 #: ../../install_steps_gtk.pm_.c:559 ../../install_steps_interactive.pm_.c:147
 msgid "Refuse"
 msgstr "Elutasít"
-
-#: ../../install_steps_gtk.pm_.c:569 ../../install_steps_gtk.pm_.c:573
-msgid "Go on anyway?"
-msgstr "Ettõl függetlenül folytassam?"
-
-#: ../../install_steps_gtk.pm_.c:569
-msgid "There was an error ordering packages:"
-msgstr "Hiba történt a csomagok rendezésekor:"
 
 #: ../../install_steps_gtk.pm_.c:573
 msgid "There was an error installing packages:"
@@ -4252,10 +4273,6 @@ msgid ""
 "give digits instead of normal letters (eg: pressing `p' gives `6')"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:999
-msgid "Use existing configuration for X11?"
-msgstr "Használjam a már meglévõ X11 beállításokat?"
-
 #: ../../install_steps_interactive.pm_.c:1028
 msgid "Do you want to generate an auto install floppy for linux replication?"
 msgstr "Szeretnél automatikus telepítéshez telepítõlemezt készíteni?"
@@ -4341,239 +4358,239 @@ msgstr "Mit választasz? (alapértelmezés: %s) "
 msgid "Your choice? (default %s  enter `none' for none) "
 msgstr "Mit választasz? (alapértelmezés: %s, írd `none' a semmihez) "
 
-#: ../../keyboard.pm_.c:104 ../../keyboard.pm_.c:134
+#: ../../keyboard.pm_.c:105 ../../keyboard.pm_.c:135
 msgid "Czech"
 msgstr "Cseh"
 
-#: ../../keyboard.pm_.c:105 ../../keyboard.pm_.c:118 ../../keyboard.pm_.c:135
+#: ../../keyboard.pm_.c:106 ../../keyboard.pm_.c:119 ../../keyboard.pm_.c:136
 msgid "German"
 msgstr "Német"
 
-#: ../../keyboard.pm_.c:106
+#: ../../keyboard.pm_.c:107
 msgid "Dvorak"
 msgstr "Dvorak"
 
-#: ../../keyboard.pm_.c:107 ../../keyboard.pm_.c:141
+#: ../../keyboard.pm_.c:108 ../../keyboard.pm_.c:142
 msgid "Spanish"
 msgstr "Spanyol"
 
-#: ../../keyboard.pm_.c:108 ../../keyboard.pm_.c:142
+#: ../../keyboard.pm_.c:109 ../../keyboard.pm_.c:143
 msgid "Finnish"
 msgstr "Finn"
 
-#: ../../keyboard.pm_.c:109 ../../keyboard.pm_.c:119 ../../keyboard.pm_.c:143
+#: ../../keyboard.pm_.c:110 ../../keyboard.pm_.c:120 ../../keyboard.pm_.c:144
 msgid "French"
 msgstr "Francia"
 
-#: ../../keyboard.pm_.c:110 ../../keyboard.pm_.c:162
+#: ../../keyboard.pm_.c:111 ../../keyboard.pm_.c:164
 msgid "Norwegian"
 msgstr "Norvég"
 
-#: ../../keyboard.pm_.c:111
+#: ../../keyboard.pm_.c:112
 msgid "Polish"
 msgstr "Lengyel"
 
-#: ../../keyboard.pm_.c:112 ../../keyboard.pm_.c:167
+#: ../../keyboard.pm_.c:113 ../../keyboard.pm_.c:169
 msgid "Russian"
 msgstr "Orosz"
 
-#: ../../keyboard.pm_.c:113 ../../keyboard.pm_.c:176
+#: ../../keyboard.pm_.c:114 ../../keyboard.pm_.c:178
 msgid "UK keyboard"
 msgstr "Angol (UK) billentyûzet"
 
-#: ../../keyboard.pm_.c:114 ../../keyboard.pm_.c:117 ../../keyboard.pm_.c:177
+#: ../../keyboard.pm_.c:115 ../../keyboard.pm_.c:118 ../../keyboard.pm_.c:179
 msgid "US keyboard"
 msgstr "USA-billentyûzet"
 
-#: ../../keyboard.pm_.c:121
+#: ../../keyboard.pm_.c:122
 msgid "Armenian (old)"
 msgstr "Örmény (régi)"
 
-#: ../../keyboard.pm_.c:122
+#: ../../keyboard.pm_.c:123
 msgid "Armenian (typewriter)"
 msgstr "Örmény (írógép)"
 
-#: ../../keyboard.pm_.c:123
+#: ../../keyboard.pm_.c:124
 msgid "Armenian (phonetic)"
 msgstr "Örmény (fonetikus)"
 
-#: ../../keyboard.pm_.c:126
+#: ../../keyboard.pm_.c:127
 msgid "Azerbaidjani (latin)"
 msgstr "Azerbajdzsán (latin)"
 
-#: ../../keyboard.pm_.c:127
+#: ../../keyboard.pm_.c:128
 msgid "Azerbaidjani (cyrillic)"
 msgstr "Azerbajdzsán (cirill)"
 
-#: ../../keyboard.pm_.c:128
+#: ../../keyboard.pm_.c:129
 msgid "Belgian"
 msgstr "Belga"
 
-#: ../../keyboard.pm_.c:129
+#: ../../keyboard.pm_.c:130
 msgid "Bulgarian"
 msgstr "Bolgár"
 
-#: ../../keyboard.pm_.c:130
+#: ../../keyboard.pm_.c:131
 msgid "Brazilian (ABNT-2)"
 msgstr "Brazil (ABNT-2)"
 
-#: ../../keyboard.pm_.c:131
+#: ../../keyboard.pm_.c:132
 msgid "Belarusian"
 msgstr "Fehérorosz"
 
-#: ../../keyboard.pm_.c:132
+#: ../../keyboard.pm_.c:133
 msgid "Swiss (German layout)"
 msgstr "Svájci (német kiosztás)"
 
-#: ../../keyboard.pm_.c:133
+#: ../../keyboard.pm_.c:134
 msgid "Swiss (French layout)"
 msgstr "Svájci (francia kiosztás)"
 
-#: ../../keyboard.pm_.c:136
+#: ../../keyboard.pm_.c:137
 msgid "German (no dead keys)"
 msgstr "Német (\"dead key\" nélkül)"
 
-#: ../../keyboard.pm_.c:137
+#: ../../keyboard.pm_.c:138
 msgid "Danish"
 msgstr "Dán"
 
-#: ../../keyboard.pm_.c:138
+#: ../../keyboard.pm_.c:139
 msgid "Dvorak (US)"
 msgstr "Dvorak (Amerikai)"
 
-#: ../../keyboard.pm_.c:139
+#: ../../keyboard.pm_.c:140
 msgid "Dvorak (Norwegian)"
 msgstr "Dvorak (Norvég)"
 
-#: ../../keyboard.pm_.c:140
+#: ../../keyboard.pm_.c:141
 msgid "Estonian"
 msgstr "Észt"
 
-#: ../../keyboard.pm_.c:144
+#: ../../keyboard.pm_.c:145
 msgid "Georgian (\"Russian\" layout)"
 msgstr "Grúz (\"Orosz\" kiosztás)"
 
-#: ../../keyboard.pm_.c:145
+#: ../../keyboard.pm_.c:146
 msgid "Georgian (\"Latin\" layout)"
 msgstr "Grúz (\"Latin\" kiosztás)"
 
-#: ../../keyboard.pm_.c:146
+#: ../../keyboard.pm_.c:147
 msgid "Greek"
 msgstr "Görög"
 
-#: ../../keyboard.pm_.c:147
+#: ../../keyboard.pm_.c:148
 msgid "Hungarian"
 msgstr "Magyar"
 
-#: ../../keyboard.pm_.c:148
+#: ../../keyboard.pm_.c:149
 msgid "Croatian"
 msgstr "Horvát"
 
-#: ../../keyboard.pm_.c:149
+#: ../../keyboard.pm_.c:150
 msgid "Israeli"
 msgstr "Izraeli"
 
-#: ../../keyboard.pm_.c:150
+#: ../../keyboard.pm_.c:151
 msgid "Israeli (Phonetic)"
 msgstr "Izraeli (Fonetikus)"
 
-#: ../../keyboard.pm_.c:151
+#: ../../keyboard.pm_.c:152
 msgid "Iranian"
 msgstr "Iráni"
 
-#: ../../keyboard.pm_.c:152
+#: ../../keyboard.pm_.c:153
 msgid "Icelandic"
 msgstr "Izlandi"
 
-#: ../../keyboard.pm_.c:153
+#: ../../keyboard.pm_.c:154
 msgid "Italian"
 msgstr "Olasz"
 
-#: ../../keyboard.pm_.c:154
+#: ../../keyboard.pm_.c:155
 msgid "Japanese 106 keys"
 msgstr "Japán 106 billentyûs"
 
-#: ../../keyboard.pm_.c:155
+#: ../../keyboard.pm_.c:156
 msgid "Latin American"
 msgstr "Latin-amerikai"
 
-#: ../../keyboard.pm_.c:156
+#: ../../keyboard.pm_.c:158
 msgid "Dutch"
 msgstr "Holland"
 
-#: ../../keyboard.pm_.c:157
+#: ../../keyboard.pm_.c:159
 msgid "Lithuanian AZERTY (old)"
 msgstr "Litván AZERTY (régi)"
 
-#: ../../keyboard.pm_.c:159
+#: ../../keyboard.pm_.c:161
 msgid "Lithuanian AZERTY (new)"
 msgstr "Litván AZERTY (új)"
 
-#: ../../keyboard.pm_.c:160
+#: ../../keyboard.pm_.c:162
 msgid "Lithuanian \"number row\" QWERTY"
 msgstr "Litván \"számsor\" QWERTY"
 
-#: ../../keyboard.pm_.c:161
+#: ../../keyboard.pm_.c:163
 msgid "Lithuanian \"phonetic\" QWERTY"
 msgstr "Litván \"fonetikus\" QWERTY"
 
-#: ../../keyboard.pm_.c:163
+#: ../../keyboard.pm_.c:165
 msgid "Polish (qwerty layout)"
 msgstr "Lengyel (qwerty kiosztás)"
 
-#: ../../keyboard.pm_.c:164
+#: ../../keyboard.pm_.c:166
 msgid "Polish (qwertz layout)"
 msgstr "Lengyel (qwertz kiosztás)"
 
-#: ../../keyboard.pm_.c:165
+#: ../../keyboard.pm_.c:167
 msgid "Portuguese"
 msgstr "Portugál"
 
-#: ../../keyboard.pm_.c:166
+#: ../../keyboard.pm_.c:168
 msgid "Canadian (Quebec)"
 msgstr "Kanadai (Quebec)"
 
-#: ../../keyboard.pm_.c:168
+#: ../../keyboard.pm_.c:170
 msgid "Russian (Yawerty)"
 msgstr "Orosz (Yawerty)"
 
-#: ../../keyboard.pm_.c:169
+#: ../../keyboard.pm_.c:171
 msgid "Swedish"
 msgstr "Svéd"
 
-#: ../../keyboard.pm_.c:170
+#: ../../keyboard.pm_.c:172
 msgid "Slovenian"
 msgstr "Szlovén"
 
-#: ../../keyboard.pm_.c:171
+#: ../../keyboard.pm_.c:173
 msgid "Slovakian"
 msgstr "Szlovák"
 
-#: ../../keyboard.pm_.c:172
+#: ../../keyboard.pm_.c:174
 msgid "Thai keyboard"
 msgstr "Thai billentyûzet"
 
-#: ../../keyboard.pm_.c:173
+#: ../../keyboard.pm_.c:175
 msgid "Turkish (traditional \"F\" model)"
 msgstr "Török (hagyományos \"F\" modell)"
 
-#: ../../keyboard.pm_.c:174
+#: ../../keyboard.pm_.c:176
 msgid "Turkish (modern \"Q\" model)"
 msgstr "Török (modern \"Q\" modell)"
 
-#: ../../keyboard.pm_.c:175
+#: ../../keyboard.pm_.c:177
 msgid "Ukrainian"
 msgstr "Ukrán"
 
-#: ../../keyboard.pm_.c:178
+#: ../../keyboard.pm_.c:180
 msgid "US keyboard (international)"
 msgstr "USA-billentyûzet (nemzetközi)"
 
-#: ../../keyboard.pm_.c:179
+#: ../../keyboard.pm_.c:181
 msgid "Vietnamese \"numeric row\" QWERTY"
 msgstr "Vietnámi \"számsor\" QWERTY"
 
-#: ../../keyboard.pm_.c:180
+#: ../../keyboard.pm_.c:182
 msgid "Yugoslavian (latin layout)"
 msgstr "Jugoszláv (latin kiosztás)"
 
@@ -4886,8 +4903,8 @@ msgid ""
 "Please choose which network adapter you want to use to connect to Internet"
 msgstr "Válaszd ki, hogy melyik interfészt használod az Internet kapcsolathoz"
 
-#: ../../netconnect.pm_.c:351 ../../netconnect.pm_.c:623
-#: ../../netconnect.pm_.c:754 ../../standalone/drakgw_.c:217
+#: ../../netconnect.pm_.c:351 ../../netconnect.pm_.c:630
+#: ../../netconnect.pm_.c:761 ../../standalone/drakgw_.c:217
 msgid "Network interface"
 msgstr "Hálózati interfész"
 
@@ -4911,233 +4928,233 @@ msgstr "ADSL beállítások"
 msgid "Do you want to start your connection at boot?"
 msgstr "Az Internet kapcsolat elinduljon a rendszer indulásakor?"
 
-#: ../../netconnect.pm_.c:529
+#: ../../netconnect.pm_.c:536
 msgid "Try to find a modem?"
 msgstr "Megkeressem a modemet?"
 
-#: ../../netconnect.pm_.c:539
+#: ../../netconnect.pm_.c:546
 msgid "Please choose which serial port your modem is connected to."
 msgstr "Válaszd ki, hogy melyik soros portra csatlakozik a modemed."
 
-#: ../../netconnect.pm_.c:544
+#: ../../netconnect.pm_.c:551
 msgid "Dialup options"
 msgstr "Modemes csatlakozás beállításai"
 
-#: ../../netconnect.pm_.c:545
+#: ../../netconnect.pm_.c:552
 msgid "Connection name"
 msgstr "Csatlakozás neve"
 
-#: ../../netconnect.pm_.c:546
+#: ../../netconnect.pm_.c:553
 msgid "Phone number"
 msgstr "Telefonszám"
 
-#: ../../netconnect.pm_.c:547
+#: ../../netconnect.pm_.c:554
 msgid "Login ID"
 msgstr "Felhasználói név"
 
-#: ../../netconnect.pm_.c:549
+#: ../../netconnect.pm_.c:556
 msgid "Authentication"
 msgstr "Autentikáció"
 
-#: ../../netconnect.pm_.c:549
+#: ../../netconnect.pm_.c:556
 msgid "PAP"
 msgstr "PAP"
 
-#: ../../netconnect.pm_.c:549
+#: ../../netconnect.pm_.c:556
 msgid "Script-based"
 msgstr "Szkript alapú"
 
-#: ../../netconnect.pm_.c:549
+#: ../../netconnect.pm_.c:556
 msgid "Terminal-based"
 msgstr "Terminálon keresztüli"
 
-#: ../../netconnect.pm_.c:550
+#: ../../netconnect.pm_.c:557
 msgid "Domain name"
 msgstr "Tartománynév"
 
-#: ../../netconnect.pm_.c:552
+#: ../../netconnect.pm_.c:559
 msgid "First DNS Server"
 msgstr "Elsõdleges névkiszolgáló"
 
-#: ../../netconnect.pm_.c:553
+#: ../../netconnect.pm_.c:560
 msgid "Second DNS Server"
 msgstr "Másodlagos névkiszolgáló"
 
-#: ../../netconnect.pm_.c:582
+#: ../../netconnect.pm_.c:589
 #, fuzzy
 msgid ""
 "\n"
 "You can connect to Internet or reconfigure your connection."
 msgstr "Internet kapcsolat / Helyi hálózat beállítása"
 
-#: ../../netconnect.pm_.c:582 ../../netconnect.pm_.c:586
+#: ../../netconnect.pm_.c:589 ../../netconnect.pm_.c:593
 #, fuzzy
 msgid ""
 "\n"
 "You can reconfigure your connection."
 msgstr "Internet kapcsolat beállítása"
 
-#: ../../netconnect.pm_.c:582
+#: ../../netconnect.pm_.c:589
 #, fuzzy
 msgid "You are not currently connected to Internet."
 msgstr "Ne állítsd be a hálózatot"
 
-#: ../../netconnect.pm_.c:586
+#: ../../netconnect.pm_.c:593
 msgid ""
 "\n"
 "You can disconnect or reconfigure your connection."
 msgstr ""
 
-#: ../../netconnect.pm_.c:586
+#: ../../netconnect.pm_.c:593
 #, fuzzy
 msgid "You are currently connected to internet."
 msgstr "Ne állítsd be a hálózatot"
 
-#: ../../netconnect.pm_.c:590
+#: ../../netconnect.pm_.c:597
 #, fuzzy
 msgid "Connect to Internet"
 msgstr "Csatlakozás az Internethez"
 
-#: ../../netconnect.pm_.c:592
+#: ../../netconnect.pm_.c:599
 #, fuzzy
 msgid "Disconnect from Internet"
 msgstr "Internet kapcsolat megszakítása"
 
-#: ../../netconnect.pm_.c:594
+#: ../../netconnect.pm_.c:601
 #, fuzzy
 msgid "Configure network connection (LAN or Internet)"
 msgstr "Internet kapcsolat beállítása"
 
-#: ../../netconnect.pm_.c:597
+#: ../../netconnect.pm_.c:604
 #, fuzzy
 msgid "Internet connection & configuration"
 msgstr "Internet kapcsolat & beállítás"
 
-#: ../../netconnect.pm_.c:624 ../../netconnect.pm_.c:755
+#: ../../netconnect.pm_.c:631 ../../netconnect.pm_.c:762
 #, fuzzy
 msgid ""
 "I'm about to restart the network device $netc->{NET_DEVICE}. Do you agree?"
 msgstr "Újra kell indítani a hálózati interfészt. Mehet?"
 
-#: ../../netconnect.pm_.c:641
+#: ../../netconnect.pm_.c:648
 #, fuzzy
 msgid "Configure a normal modem connection"
 msgstr "Internet kapcsolat beállítása"
 
-#: ../../netconnect.pm_.c:661
+#: ../../netconnect.pm_.c:668
 #, fuzzy
 msgid "Configure an ISDN connection"
 msgstr "Internet kapcsolat beállítása"
 
-#: ../../netconnect.pm_.c:666
+#: ../../netconnect.pm_.c:673
 msgid "Internal ISDN card"
 msgstr "Belsõ ISDN kártya"
 
-#: ../../netconnect.pm_.c:668
+#: ../../netconnect.pm_.c:675
 #, fuzzy
 msgid "External ISDN modem"
 msgstr "Külsõ modem"
 
-#: ../../netconnect.pm_.c:671 ../../netconnect.pm_.c:705
-#: ../../netconnect.pm_.c:717 ../../netconnect.pm_.c:741
-#: ../../netconnect.pm_.c:786
+#: ../../netconnect.pm_.c:678 ../../netconnect.pm_.c:712
+#: ../../netconnect.pm_.c:724 ../../netconnect.pm_.c:748
+#: ../../netconnect.pm_.c:793
 msgid "Connect to the Internet"
 msgstr "Kapcsolat az Internethez"
 
-#: ../../netconnect.pm_.c:672
+#: ../../netconnect.pm_.c:679
 #, fuzzy
 msgid "What kind is your ISDN connection?"
 msgstr "Milyen fajta az ISDN kapcsolatod?"
 
-#: ../../netconnect.pm_.c:691
+#: ../../netconnect.pm_.c:698
 #, fuzzy
 msgid "Configure a DSL (or ADSL) connection"
 msgstr "Internet kapcsolat beállítása"
 
-#: ../../netconnect.pm_.c:700
+#: ../../netconnect.pm_.c:707
 #, fuzzy
 msgid "France"
 msgstr "Francia"
 
-#: ../../netconnect.pm_.c:702
+#: ../../netconnect.pm_.c:709
 msgid "Other countries"
 msgstr "Egyéb nemzetek"
 
-#: ../../netconnect.pm_.c:706
+#: ../../netconnect.pm_.c:713
 msgid "In which country are you located ?"
 msgstr "Melyik országban élsz?"
 
-#: ../../netconnect.pm_.c:712
+#: ../../netconnect.pm_.c:719
 msgid "Alcatel modem"
 msgstr "Alcatel modem"
 
-#: ../../netconnect.pm_.c:714
+#: ../../netconnect.pm_.c:721
 msgid "ECI modem"
 msgstr "ECI modem"
 
-#: ../../netconnect.pm_.c:718
+#: ../../netconnect.pm_.c:725
 msgid "If your adsl modem is an Alcatel one, choose Alcatel. Otherwise, ECI."
 msgstr ""
 "Ha az DSL modemed Alcatel one, válaszd az Alcatel-t. Egyébként az ECI-t."
 
-#: ../../netconnect.pm_.c:736
+#: ../../netconnect.pm_.c:743
 msgid "use pppoe"
 msgstr "pppoe használata"
 
-#: ../../netconnect.pm_.c:738
+#: ../../netconnect.pm_.c:745
 msgid "don't use pppoe"
 msgstr "ne használja a pppoe-t"
 
-#: ../../netconnect.pm_.c:742
+#: ../../netconnect.pm_.c:749
 msgid ""
 "The most common way to connect with adsl is dhcp + pppoe.\n"
 "However, some connections only use dhcp.\n"
 "If you don't know, choose 'use pppoe'"
 msgstr ""
 
-#: ../../netconnect.pm_.c:765
+#: ../../netconnect.pm_.c:772
 #, fuzzy
 msgid "Configure a cable connection"
 msgstr "Internet kapcsolat beállítása"
 
-#: ../../netconnect.pm_.c:787
+#: ../../netconnect.pm_.c:794
 #, fuzzy
 msgid ""
 "Which dhcp client do you want to use?\n"
 "Default is dhcpd"
 msgstr "Milyen protokoll-t szeretnél használni?"
 
-#: ../../netconnect.pm_.c:800
+#: ../../netconnect.pm_.c:807
 #, fuzzy
 msgid "Disable Internet Connection"
 msgstr "Internet kapcsolat beállítása"
 
-#: ../../netconnect.pm_.c:811
+#: ../../netconnect.pm_.c:818
 #, fuzzy
 msgid "Configure local network"
 msgstr "Helyi hálózat beállítása"
 
-#: ../../netconnect.pm_.c:815
+#: ../../netconnect.pm_.c:822
 #, fuzzy
 msgid "Network configuration"
 msgstr "Hálózati beállítás"
 
-#: ../../netconnect.pm_.c:816
+#: ../../netconnect.pm_.c:823
 #, fuzzy
 msgid "Do you want to restart the network"
 msgstr "Leteszteled a beállításokat?"
 
-#: ../../netconnect.pm_.c:824
+#: ../../netconnect.pm_.c:831
 #, fuzzy
 msgid "Disable networking"
 msgstr "Hálózat kikapcsolása"
 
-#: ../../netconnect.pm_.c:834
+#: ../../netconnect.pm_.c:841
 #, fuzzy
 msgid "Configure the Internet connection / Configure local Network"
 msgstr "Internet kapcsolat / Helyi hálózat beállítása"
 
-#: ../../netconnect.pm_.c:835
+#: ../../netconnect.pm_.c:842
 #, fuzzy
 msgid ""
 "Local networking has already been configured.\n"
@@ -5146,16 +5163,16 @@ msgstr ""
 "A lokális hálózat már be van állítva.\n"
 "Szeretnéd:"
 
-#: ../../netconnect.pm_.c:836
+#: ../../netconnect.pm_.c:843
 #, fuzzy
 msgid "How do you want to connect to the Internet?"
 msgstr "Hogyan akarsz kapcsolódni az Internet-re?"
 
-#: ../../netconnect.pm_.c:858
+#: ../../netconnect.pm_.c:865
 msgid "Network Configuration"
 msgstr "Hálózati beállítás"
 
-#: ../../netconnect.pm_.c:859
+#: ../../netconnect.pm_.c:866
 msgid ""
 "Now that your Internet connection is configured,\n"
 "your computer can be configured to share its Internet connection.\n"
@@ -6150,31 +6167,15 @@ msgstr "Beállító szkriptek, szoftver telepítés, szerverek indítása..."
 msgid "Configuring..."
 msgstr "IDE beállítások"
 
-#: ../../standalone/drakgw_.c:306
-msgid "Could not install ipchains RPM with urpmi."
-msgstr "Nem tudom telepíteni az ipcahains RPM-et az urpmi-vel."
+#: ../../standalone/drakgw_.c:313
+msgid "Problems installing package $bin2rpm{$_}"
+msgstr ""
 
-#: ../../standalone/drakgw_.c:456
-msgid "Could not install dhcp RPM with urpmi."
-msgstr "Nem tudom telepíteni a dhcp RPM-et az urpmi.vel."
-
-#: ../../standalone/drakgw_.c:480
-msgid "Could not install linuxconf RPM with urpmi."
-msgstr "Nem tudom telepíteni a linuxconf RPM-et az urpmi-vel."
-
-#: ../../standalone/drakgw_.c:496
-msgid "Could not install bind RPM with urpmi."
-msgstr "Nem tudom telepíteni a bind RPM-et az urpmi-vel."
-
-#: ../../standalone/drakgw_.c:500
-msgid "Could not install caching-nameserver RPM with urpmi."
-msgstr "Nem tudom telepíteni a caching-nameserver RPM-et az urpmi-vel."
-
-#: ../../standalone/drakgw_.c:512
+#: ../../standalone/drakgw_.c:504
 msgid "Congratulations!"
 msgstr "Gratulálok!"
 
-#: ../../standalone/drakgw_.c:513
+#: ../../standalone/drakgw_.c:505
 msgid ""
 "Everything has been configured.\n"
 "You may now share Internet connection with other computers on your Local "
@@ -6243,6 +6244,14 @@ msgstr "Biztonsági szint beállítása"
 #: ../../standalone/drakxconf_.c:21
 msgid "Choose the tool you want to use"
 msgstr "Válaszd ki az eszközt, amit használni szeretnél"
+
+#: ../../standalone/keyboarddrake_.c:14
+msgid "usage: keyboarddrake [--expert]\n"
+msgstr ""
+
+#: ../../standalone/keyboarddrake_.c:27
+msgid "Do you want the BackSpace to return Delete in console?"
+msgstr ""
 
 #: ../../standalone/livedrake_.c:23
 #, fuzzy
@@ -6487,79 +6496,56 @@ msgid "Finding leaves takes some time"
 msgstr "A levelek(?) keresése egy kis idõbe telik"
 
 # ../../share/compssUsers
-msgid "More Graphical Desktops (Gnome, IceWM)"
+msgid "Graphics Manipulation"
 msgstr ""
 
 # ../../share/compssUsers
-msgid ""
-"The K Desktop Environment, the basic graphical environment with a collection "
-"of accompanying tools"
+msgid "KDE, QT, Gnome, GTK+"
 msgstr ""
-
-# ../../share/compssUsers
-msgid "Personnal Information Management"
-msgstr ""
-
-# ../../share/compssUsers
-msgid "Tools to create and burn CD's"
-msgstr ""
-
-#, fuzzy
-msgid "Internet Tools"
-msgstr "Internet"
-
-msgid "Internet"
-msgstr "Internet"
 
 # ../../share/compssUsers
 msgid "Personnal Finance"
 msgstr ""
 
 # ../../share/compssUsers
-msgid "Gnome, Icewm, Window Maker, Enlightenment, Fvwm, etc"
+msgid "Python, Perl, libraries, tools"
 msgstr ""
 
 # ../../share/compssUsers
-msgid "Graphics programs such as The Gimp"
-msgstr ""
-
-msgid "Office"
-msgstr "Iroda"
-
-# ../../share/compssUsers
-msgid "Databases clients and servers (mysql and postgresql)"
+msgid "Scientific applications"
 msgstr ""
 
 # ../../share/compssUsers
-msgid "Tools for your Palm Pilot or your Visor"
+msgid "Databases"
 msgstr ""
+
+msgid "Internet"
+msgstr "Internet"
 
 #, fuzzy
 msgid "Multimedia - Graphics"
 msgstr "Multimédia"
 
 # ../../share/compssUsers
-msgid "Video players and editors"
+msgid "editors, shells, file tools, terminals"
 msgstr ""
 
-# ../../share/compssUsers
-msgid "Amusement programs: arcade, boards, strategy, etc"
-msgstr ""
-
-# ../../share/compssUsers
-msgid ""
-"Office programs: wordprocessors (kword, abiword), spreadsheets (kspread, "
-"gnumeric), pdf viewers, etc"
-msgstr ""
-
-# ../../share/compssUsers
-msgid ""
-"Set of tools to read and send mail and news (pine, mutt, tin..) and to "
-"browse the Web"
-msgstr ""
+#, fuzzy
+msgid "Development applications"
+msgstr "Fejlesztõ"
 
 # ../../share/compssUsers
 msgid "Audio-related tools: mp3 or midi players, mixers, etc"
+msgstr ""
+
+msgid "Multimedia"
+msgstr "Multimédia"
+
+msgid "Office"
+msgstr "Iroda"
+
+# ../../share/compssUsers
+msgid "Sciences"
 msgstr ""
 
 # ../../share/compssUsers
@@ -6569,11 +6555,79 @@ msgid ""
 msgstr ""
 
 # ../../share/compssUsers
-msgid "Books and Howto's on Linux and Free Software"
+msgid ""
+"Set of tools to read and send mail and news (pine, mutt, tin..) and to "
+"browse the Web"
 msgstr ""
 
 # ../../share/compssUsers
+msgid "C and C++ development libraries, programs and include files"
+msgstr ""
+
+# ../../share/compssUsers
+msgid "Communication facilities"
+msgstr ""
+
+#, fuzzy
+msgid "KDE"
+msgstr "IDE"
+
+# ../../share/compssUsers
+msgid "Personnal Information Management"
+msgstr ""
+
+# ../../share/compssUsers
+msgid "Programs to manage your finance, such as gnucash"
+msgstr ""
+
+msgid "Gnome"
+msgstr "Gnome"
+
+#, fuzzy
+msgid "Internet Tools"
+msgstr "Internet"
+
+msgid "Documentation"
+msgstr "Dokumentáció"
+
+# ../../share/compssUsers
 msgid "Icewm, Window Maker, Enlightenment, Fvwm, etc"
+msgstr ""
+
+# ../../share/compssUsers
+msgid "Utilities"
+msgstr ""
+
+#, fuzzy
+msgid "Multimedia - Sound"
+msgstr "Multimédia"
+
+# ../../share/compssUsers
+msgid "Amusement programs: arcade, boards, strategy, etc"
+msgstr ""
+
+# ../../share/compssUsers
+msgid "Video players and editors"
+msgstr ""
+
+# ../../share/compssUsers
+msgid "Console Tools"
+msgstr ""
+
+#, fuzzy
+msgid "Development other"
+msgstr "Fejlesztõ"
+
+# ../../share/compssUsers
+msgid "Databases clients and servers (mysql and postgresql)"
+msgstr ""
+
+# ../../share/compssUsers
+msgid "Sound and video playing/editing programs"
+msgstr ""
+
+# ../../share/compssUsers
+msgid "Books and Howto's on Linux and Free Software"
 msgstr ""
 
 # ../../share/compssUsers
@@ -6582,69 +6636,80 @@ msgid ""
 "tools"
 msgstr ""
 
-# ../../share/compssUsers
-msgid "Set of tools for mail, news, web, file transfer, and chat"
-msgstr ""
+#, fuzzy
+msgid "Games"
+msgstr "Gnome"
+
+#, fuzzy
+msgid "Development C/C++"
+msgstr "Fejlesztõ"
 
 #, fuzzy
 msgid "Multimedia - Video"
 msgstr "Multimédia"
 
-#, fuzzy
-msgid "KDE"
-msgstr "IDE"
-
 # ../../share/compssUsers
-msgid "Sound and video playing/editing programs"
-msgstr ""
-
-msgid "Multimedia"
-msgstr "Multimédia"
-
-# ../../share/compssUsers
-msgid "Other Graphical Desktops"
-msgstr ""
-
-#, fuzzy
-msgid "Multimedia - Sound"
-msgstr "Multimédia"
-
-msgid "Gnome"
-msgstr "Gnome"
-
-msgid "Documentation"
-msgstr "Dokumentáció"
-
-# ../../share/compssUsers
-msgid "Programs to manage your finance, such as gnucash"
+msgid "Graphics programs such as The Gimp"
 msgstr ""
 
 # ../../share/compssUsers
-msgid "Graphics Manipulation"
+msgid ""
+"The K Desktop Environment, the basic graphical environment with a collection "
+"of accompanying tools"
 msgstr ""
 
-#, fuzzy
-msgid "Games"
-msgstr "Gnome"
+# ../../share/compssUsers
+msgid "Tools to create and burn CD's"
+msgstr ""
+
+# ../../share/compssUsers
+msgid "More Graphical Desktops (Gnome, IceWM)"
+msgstr ""
 
 #, fuzzy
 msgid "Multimedia - CD Burning"
 msgstr "Multimédia"
 
 # ../../share/compssUsers
-msgid "Communication facilities"
+msgid "Archiving, emulators, monitoring"
 msgstr ""
 
 # ../../share/compssUsers
-msgid "Databases"
+msgid ""
+"Office programs: wordprocessors (kword, abiword), spreadsheets (kspread, "
+"gnumeric), pdf viewers, etc"
 msgstr ""
 
-#, fuzzy
-#~ msgid "Choose the size you want to install"
-#~ msgstr "Válaszd ki a telepítendõ csomagokat"
+# ../../share/compssUsers
+msgid "Other Graphical Desktops"
+msgstr ""
 
-#~ msgid "Total size: "
-#~ msgstr "Összméret: "
+# ../../share/compssUsers
+msgid "Tools for your Palm Pilot or your Visor"
+msgstr ""
+
+# ../../share/compssUsers
+msgid "Gnome, Icewm, Window Maker, Enlightenment, Fvwm, etc"
+msgstr ""
+
+# ../../share/compssUsers
+msgid "Set of tools for mail, news, web, file transfer, and chat"
+msgstr ""
+
+#~ msgid "Could not install ipchains RPM with urpmi."
+#~ msgstr "Nem tudom telepíteni az ipcahains RPM-et az urpmi-vel."
+
+#~ msgid "Could not install dhcp RPM with urpmi."
+#~ msgstr "Nem tudom telepíteni a dhcp RPM-et az urpmi.vel."
+
+#~ msgid "Could not install linuxconf RPM with urpmi."
+#~ msgstr "Nem tudom telepíteni a linuxconf RPM-et az urpmi-vel."
+
+#~ msgid "Could not install bind RPM with urpmi."
+#~ msgstr "Nem tudom telepíteni a bind RPM-et az urpmi-vel."
+
+#~ msgid "Could not install caching-nameserver RPM with urpmi."
+#~ msgstr "Nem tudom telepíteni a caching-nameserver RPM-et az urpmi-vel."
 
 #, fuzzy
 #~ msgid "Reconfigure local network"

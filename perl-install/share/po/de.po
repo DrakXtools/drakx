@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX\n"
-"POT-Creation-Date: 2000-10-09 15:58+0200\n"
+"POT-Creation-Date: 2000-10-16 13:34+0200\n"
 "PO-Revision-Date: 2000-09-20 00:57 +0200\n"
 "Last-Translator: Stefan Siegel <siegel@linux-mandrake.com>\n"
 "Language-Team: German <de@li.org>\n"
@@ -519,7 +519,7 @@ msgid "Delay before booting default image"
 msgstr "Wartezeit vorm Starten des Standard Betriebssystems"
 
 #: ../../any.pm_.c:134 ../../install_steps_interactive.pm_.c:760
-#: ../../install_steps_interactive.pm_.c:811 ../../netconnect.pm_.c:548
+#: ../../install_steps_interactive.pm_.c:811 ../../netconnect.pm_.c:555
 #: ../../printerdrake.pm_.c:94 ../../printerdrake.pm_.c:128
 #: ../../standalone/adduserdrake_.c:42
 msgid "Password"
@@ -576,7 +576,7 @@ msgid "Add"
 msgstr "Hinzufügen"
 
 #: ../../any.pm_.c:165 ../../diskdrake.pm_.c:46
-#: ../../install_steps_interactive.pm_.c:805 ../../netconnect.pm_.c:830
+#: ../../install_steps_interactive.pm_.c:805 ../../netconnect.pm_.c:837
 #: ../../printerdrake.pm_.c:352 ../../standalone/adduserdrake_.c:36
 msgid "Done"
 msgstr "Fertig"
@@ -763,7 +763,7 @@ msgstr ""
 # leave it in English, as it is the best for your language)
 # 
 #: ../../bootloader.pm_.c:234
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Welcome to %s the operating system chooser!\n"
 "\n"
@@ -771,13 +771,10 @@ msgid ""
 "wait %d seconds for default boot.\n"
 "\n"
 msgstr ""
-"Willkommen bei %s, dem Betriebssystem-Starter\n"
+"Willkommen zum Betriebssystem-Starter %s\n"
 "\n"
-"Mit <TAB> erhalten Sie eine Liste aller Alternativen.\n"
-"\n"
-"Um eine davon zu starten, schreiben Sie deren Namen, und druecken \n"
-"Sie die <ENTER>-Taste. Wenn Sie %d Sekunden warten, starte ich Ihr "
-"Standard-System.\n"
+"Markieren Sie in obiger Liste ein Betriebssystem\n"
+"oder warten Sie %d Sekunden, dann starte ich Ihr Standard-System.\n"
 "\n"
 
 # NOTE: this message will be displayed by grub at boot time; that is
@@ -1333,9 +1330,8 @@ msgid "Resizing"
 msgstr "Neuberechnen der Größe"
 
 #: ../../diskdrake.pm_.c:592
-#, fuzzy
 msgid "This partition is not resizeable"
-msgstr "Bei welcher Partition wollen Sie die Größe ändern?"
+msgstr "Die Größe dieser Partition kann ich nicht ändern"
 
 #: ../../diskdrake.pm_.c:597
 msgid "All data on this partition should be backed-up"
@@ -1352,7 +1348,9 @@ msgstr ""
 msgid "Choose the new size"
 msgstr "Wählen Sie die neue Größe"
 
-#: ../../diskdrake.pm_.c:609 ../../install_steps_interactive.pm_.c:518
+#: ../../diskdrake.pm_.c:609 ../../install_steps_graphical.pm_.c:287
+#: ../../install_steps_graphical.pm_.c:334
+#: ../../install_steps_interactive.pm_.c:518
 #: ../../partition_table_raw.pm_.c:101
 msgid "MB"
 msgstr "MB"
@@ -1594,6 +1592,42 @@ msgid ""
 "knowledge in GNU/Linux. So, don't choose\n"
 "\t  this installation class unless you know what you are doing."
 msgstr ""
+"Bitte wählen Sie ,,Installation`` falls keine alte Version von \n"
+"Linux-Mandrake auf Ihrem Rechner installiert ist oder Sie diese \n"
+"Version parallel zu anderen Linux-Mandrake Installationen verwenden \n"
+"wollen.\n"
+"\n"
+"\n"
+"Bitte wählen Sie ,,Aktualisierung`` falls Sie eine bereits installierte \n"
+"Version von Linux Mandrake aktualisieren wollen.\n"
+"\n"
+"\n"
+"Abhängig von Ihren GNU/Linux kenntnissen, können Sie eine der folgenden \n"
+"Installationsklassen wählen:\n"
+"\n"
+" * Empfehlenswert: Falls Sie noch nie ein GNU/Linux Betriebssystem \n"
+"installiert haben. Die Installation wird sehr einfach sein und es werden \n"
+"Ihnen nur sehr wenige Fragen gestellt werden.\n"
+"\n"
+"\n"
+"\t* Benutzerdefiniert: Falls Sie bereits mit GNU/Linux gearbeitet haben, \n"
+"könne Sie sie diese Installationsklasse wählen. Sie haben die Wahl \n"
+"zwischen ,,Arbeitsplatzrechner``, ,,Entwicklungsplattform`` und \n"
+",,Server``. Sie müssen mehr Fragen als bei einer empfehlenswerten \n"
+"Installation beantworten, dafür haben Sie jedoch auch mehr Einfluss \n"
+"auf die Installation.\n"
+"\n"
+"\n"
+"\t* Experte: Wenn Sie den Umgang mit GNU/Linux ,,im Schlaf`` beherrschen \n"
+"und hochgranulare Wahlmöglichkeiten wünschen, ist dies ihre \n"
+"Installationsmethode. Wie bei der beutzerdefinierten Installation \n"
+"können Sie die hauptsächliche Verwendung festlegen: \n"
+",,Arbeitsplatzrechner``, ,,Entwicklungsplattform`` oder ,,Server``.\n"
+"Seien Sie sehr vorsichtig, wenn Sie sich für diese Installationsklasse \n"
+"entscheiden. Die Antworten auf einige Fragen kann sehr schwierig sein \n"
+"und Auswirkungen auf Sicherheit und Stabilität Ihrer Distribution haben. \n"
+"Wählen Sie diese Installatioonsklasse also wirklich nur wenn Sie wissen, \n"
+"was Sie tun!"
 
 #: ../../help.pm_.c:56
 msgid ""
@@ -1869,6 +1903,79 @@ msgid ""
 "\n"
 "           * Ctrl-m to set the mount point"
 msgstr ""
+"Sie müssen nun entscheiden auf welche Partition(en) Ihr neues \n"
+"Linux-Mandrake System installiert werden soll. Falls bereits Partitionen \n"
+"existieren (etwa von einer früheren Installation von GNU/Linux oder \n"
+"durch das Erzeugen mit einem anderen Partitionierungs-Werkzeug), \n"
+"können Sie diese verwenden. Anderenfalls müssen Sie Partitionen \n"
+"definieren.\n"
+"\n"
+"\n"
+"Um Partitionen zu erzeugen müssen Sie erst eine Festplatte wählen.\n"
+"Sie können die Platte wählen in dem Sie ,,hda`` für die erste IDE-Platte \n"
+"anwählen, ,,sda`` für die erstre SCSI-Platte, usw.\n"
+"\n"
+"\n"
+"Um die gewählte Platte zu partitionieren stehen folgende Möglichkeiten \n"
+"zur Verfügug:\n"
+"\n"
+"\n"
+"   * Alles löschen: Diese Schaltfläche löscht alle Partitionen auf der "
+"gewählten Festplatte.\n"
+"\n"
+"\n"
+"   * Automatisches Erstellen: Diese Schaltfläche erstellt automatisch \n"
+"Ext2- und Swap-Partitionen im ungenutzten Bereich Ihrer Festplatte.\n"
+"\n"
+"\n"
+"   * Partitionstabelle retten: Falls Ihre Partitionstabelle defekt ist, \n"
+"können Sie durch drücken dieser Schaltfläche versuchen zie wieder \n"
+"herzustelen. Seien Sie vorsichtig und denken Sie immer daran, \n"
+"dass dieser Versuch mislingen kann.\n"
+"\n"
+"\n"
+"   * Rückgängig: Mit dieser Schaltfläche können Sie alle Einstellungen \n"
+"rückgängig machen.\n"
+"\n"
+"\n"
+"   * Neu laden: Sie können durch betätigen dieser Schaltfläche alle \n"
+"Einstellungen rückgängig machen und die (noch bestehende) \n"
+"Partitionstabelle neu laden.\n"
+"\n"
+"\n"
+"   * Wizard: Falls Sie keine Ahnung haben wie Sie die Festplatte \n"
+"partitionieren sollen, wählen Sie diese Schaltfläche. Sie überlassen \n"
+"damit die gesammte Arbeit unserem ,,Wizard``, einem kleinen Zauberer, \n"
+"der mittels ,,Abra Kadabra``(TM) Ihre Platte partitioniert.\n"
+"\n"
+"\n"
+"   * Von Diskette wiederherstellen: Falls Sie Ihre Partitionstabelle \n"
+"vor Beginn auf eine Diskette gespeichert haben, können Sie sie mittels \n"
+"dieser Schaltfläche wieder zurückschreiben.\n"
+"\n"
+"\n"
+"   * Auf Diskette speichern: Falls Sie Ihre aktuelle Partitionstabelle \n"
+"auf Diskette speichern wollen, falls Sie sie später wiederherstellen \n"
+"wollen, können Sie das mit Hilfe dieser Schaltfläche tun.\n"
+"\n"
+"\n"
+"   * Fertig: Nachdem Sie das Partitioneren Ihrer Festplatte beendet \n"
+"haben, aktivieren Sie diese Schaltfläche, um Ihre Änderungen zu \n"
+"speichern.\n"
+"\n"
+"\n"
+"Information: Sie können alle Einstellungen per Tastatur vornehmen.\n"
+"Sie können sich mittels [Tab] und den Pfeiltasten bewegen.\n"
+"\n"
+"\n"
+"Wenn eine Partition ausgewählt ist, können Sie mittels:\n"
+"\n"
+"           * Stzrg-C  eine neue Partition erstellen (wenn Sie auf \n"
+"einer leerte Partition sind)\n"
+"\n"
+"           * Strg-D   die Partition löschen\n"
+"\n"
+"           * Strg-M   dem Mount-Punkt fetlegen"
 
 #: ../../help.pm_.c:218
 msgid ""
@@ -1921,6 +2028,9 @@ msgid ""
 "lost\n"
 "and will not be recoverable."
 msgstr ""
+"Wählen Sie die Festplatte, die sie löschen wollen, um Ihre neue \n"
+"Linux-Mandrake Distribution darauf zu installieren. Achtung: Alle darauf \n"
+"befindlichen Daten gehen bei diesem Schritt unwiederbringlich verloren!"
 
 #: ../../help.pm_.c:257
 msgid ""
@@ -1935,6 +2045,14 @@ msgid ""
 "Click on \"Cancel\" to cancel this operation without losing any data and\n"
 "partitions present on this hard drive."
 msgstr ""
+"Wählen Sie ,,OK``, wenn Sie alle Partitionen (damit auch alle Daten) \n"
+"dieser Festplatte löschen wollen. Achtung: durch betätigen dieser \n"
+"Schaltfläche werden alle Daten auf der Festplatte unwiederbringlich \n"
+"gelöscht (auch alle evtl. vorhandenen Windows-Daten)!\n"
+"\n"
+"\n"
+"Wählen Sie ,,Abbruch``, um die vorhandenen Daten unangetastet zu \n"
+"lassen und die Operation abzubrechen."
 
 #: ../../help.pm_.c:267
 msgid ""
@@ -2172,6 +2290,16 @@ msgid ""
 "have\n"
 "finished to configure your network connection, choose \"Done\"."
 msgstr ""
+"Falls Sie Ihren Rechner mit einem loken Netz oder dem Internet in \n"
+"Verbindung bringen wollen, wählen Sie die entsprechenden Alternativen.\n"
+"Bitte stellen Sie sicher, dass das entsprechende Gerät eingeschaltet \n"
+"und korrekt mit dem Rechner verbunden ist, damit DrakX es automatisch \n"
+"erkennen kann.\n"
+"\n"
+"\n"
+"Falls Sie Ihre Netzwerkeinstellungen nach der Installation vornehmen \n"
+"wollen oder falls Sie Ihre Einstellungen beendet haben, wählen Sie \n"
+",,Fertig``."
 
 #: ../../help.pm_.c:393
 msgid ""
@@ -2226,6 +2354,11 @@ msgid ""
 "obtained\n"
 "from your Internet Service Provider at connection time."
 msgstr ""
+"Falls Sie nicht sicher sind, ob obige Informationen korrekt sind, \n"
+"oder falls Sie nicht wissen, was Sie eintragen müssen, wenden Sie sich \n"
+"bitte an Ihren Internet-Dienst-Anbieter. Falls Sie keinen Domain Name \n"
+"Server (DNS) angeben, werden die Informationen Ihres Internetanbieters \n"
+"bei Aufbau der Verbindung erwartet."
 
 #: ../../help.pm_.c:420
 msgid ""
@@ -2402,6 +2535,20 @@ msgid ""
 "\n"
 "If you don't have printer, click on \"None\"."
 msgstr ""
+"Falls Sie mit Ihrem neuen System auch drucken wollen, wählen Sie nun \n"
+"ein Drucksystem: CUPS oder LPR.\n"
+"\n"
+"\n"
+"CUPS ist ein neues, mächtigesund flexibles UNIX Drucksystem (CUPS\n"
+"steht für  ,,Common Unix Printing System``, eingl. für ,,Allgemeines \n"
+"UNIX Drucksystem``). Es ist das Standard-Drucksystem Iheres Linux-Mandrake.\n"
+"\n"
+"\n"
+"LPR ist das leicht antiquierte UNIX Ducksytem aus den 1970ern. Es wurde \n"
+"in früheren Linux-Mandrake Versionen verwendet.\n"
+"\n"
+"\n"
+"Falls Sie keinen Drucker besitzen/verwenden wollen, wählen Sie ,,Keinen``."
 
 #: ../../help.pm_.c:505
 msgid ""
@@ -2421,9 +2568,23 @@ msgid ""
 "machine\n"
 "(or on Unix machine using SMB protocol), select \"SMB/Windows 95/98/NT\"."
 msgstr ""
+"GNU/Linux kann mit einer Reihe verschiedenster Drucker arbeiten. \n"
+"Jede Klasse benötigt jedoch ein eigenes Konfigurationsverfahren.\n"
+"\n"
+"\n"
+"Falls Ihr Drucker direkt mit Ihrem Rechner verbunden ist, wählen Sie \n"
+",,Lokaler Drucker``.\n"
+"\n"
+"\n"
+"Hängt der Drucker hingegen an einem anderen UNIX Rechner, wählen Sie\n"
+",,Entfernter Drucker``.\n"
+"\n"
+"\n"
+"Sollten Sie hingegen einen Drucker an einem Microsoft Windows Rechner \n"
+"ansprechen wollen (bzw. einem UNIX Rechner der mit SMB arbeitet), \n"
+"wählen Sie ,,SMB/Windows 95/98/NT``."
 
 #: ../../help.pm_.c:521
-#, fuzzy
 msgid ""
 "Please turn on your printer before continuing to let DrakX detect it.\n"
 "\n"
@@ -2448,33 +2609,27 @@ msgid ""
 "     printer location, put it here (you are free to write what\n"
 "     you want, for example \"2nd floor\").\n"
 msgstr ""
+"Bitte schalten Sie Ihren Drucker an, bevor Sie DrakX ihn von DrakX \n"
+"suchen lassen.\n"
+"\n"
 "Sie müssen hier einige Informationen eingeben.\n"
 "\n"
 "\n"
-"* Name der Warteschlange: Der Drucker-Spooler verwendet ,,lp`` als \n"
-"Standarddrucker. Sie benötigen daher einen Drucker Namens ,,lp``.\n"
+"* Druckername: Der Drucker-Spooler verwendet ,,lp`` als Standarddrucker.\n"
+"Sie benötigen daher einen Drucker Namens ,,lp``.\n"
 "Auch wenn Sie nur einen Drucker haben, können Sie ihm mehrere Namen \n"
 "geben. Sie müssen die Namen nur duch einen senkrechten Strich (also \n"
 ",,|``) trennen. Falls Sie einen aussagekräftigeren Namen haben wollen,\n"
 "schreiben Sie diesen vor ,,lp``: ,,Mein Drucker|lp``.\n"
 "\n"
 "\n"
-"* Spool-Verzeichnis: In diesem Verzeichnis werden die Druckprozesse \n"
-"zwischengespeichert. Falls Sie unsicher sind, was Sie eintragen sollen,\n"
-"sollten Sie die Vorgabe beibehalten.\n"
+"* Beschreibung: Sie müssen hier keinen Text angeben, es kann jedoch \n"
+"hilfreich sein, wenn Sie mehrere Drucker besitzen, die Sie \n"
+"unterscheiden wollen.\n"
 "\n"
 "\n"
-"* Drucker-Anbindung: Falls Ihr Drucker direkt an Ihrem Rechner hängt,\n"
-"wählen Sie ,,Lokaler Drucker``. Wollen Sie einen Drucker an einem anderen\n"
-"UNIX/Linux Rechner ansprechen, wählen Sie ,,lpd-Server auf der Gegenseite``\n"
-"\n"
-"\n"
-"Falls Sie einen Drucker an einem Windows Rechner (oder einem UNIX Rechenr\n"
-"mittels SMB-Protokoll) ansprechen wollen, wählen Sie \n"
-",,SMB/Windows 95/98/NT``.\n"
-"\n"
-"\n"
-"Einen Netware Drucker erreichen Sie mittels ,,NetWare``.\n"
+"* Standort: Sie können hier (falls Sie wollen) Informationen zum \n"
+"Standort Ihres Druckers angeben (etwa ,,Abstellkammer im 2. Stock``)\n"
 
 #: ../../help.pm_.c:542
 msgid ""
@@ -3065,7 +3220,7 @@ msgstr "Auto-Installations-Diskette"
 msgid "Exit install"
 msgstr "Installation beenden"
 
-#: ../../install_any.pm_.c:584
+#: ../../install_any.pm_.c:575
 msgid "Error reading file $f"
 msgstr "Fehler beim Lesen der Datei $f"
 
@@ -3100,11 +3255,11 @@ msgstr ""
 "Erzeugen Sie eine Partition (oder klicken Sie auf eine existierende).\n"
 "Wählen Sie ,,Mount-Punkt`` und setzen Sie ihn auf ,,/``"
 
-#: ../../install_interactive.pm_.c:46
+#: ../../install_interactive.pm_.c:46 ../../install_steps_graphical.pm_.c:259
 msgid "You must have a swap partition"
 msgstr "Sie benötigen eine Auslagerungs-Partition"
 
-#: ../../install_interactive.pm_.c:47
+#: ../../install_interactive.pm_.c:47 ../../install_steps_graphical.pm_.c:261
 msgid ""
 "You don't have a swap partition\n"
 "\n"
@@ -3265,9 +3420,8 @@ msgstr ""
 "sobald Sie fertig sind."
 
 #: ../../install_interactive.pm_.c:195
-#, fuzzy
 msgid "You don't have enough free space on your Windows partition"
-msgstr "Den freien Platz der Windows Partition verwenden."
+msgstr "Sie haben nicht genug freien Platz auf Ihrer Windows Partition."
 
 #: ../../install_interactive.pm_.c:210
 msgid "I can't find any room for installing"
@@ -3330,6 +3484,80 @@ msgstr "Kein Disketten-Laufwerk verfügbar"
 msgid "Entering step `%s'\n"
 msgstr "Beginn von Schritt ,,%s``\n"
 
+#: ../../install_steps_graphical.pm_.c:287
+msgid "Choose the size you want to install"
+msgstr "Wählen Sie die Menge die Sie installieren wollen"
+
+#: ../../install_steps_graphical.pm_.c:334
+msgid "Total size: "
+msgstr "Gesamtgröße: "
+
+#: ../../install_steps_graphical.pm_.c:346 ../../install_steps_gtk.pm_.c:353
+#: ../../standalone/rpmdrake_.c:136
+#, c-format
+msgid "Version: %s\n"
+msgstr "Version: %s\n"
+
+#: ../../install_steps_graphical.pm_.c:347 ../../install_steps_gtk.pm_.c:354
+#: ../../standalone/rpmdrake_.c:137
+#, c-format
+msgid "Size: %d KB\n"
+msgstr "Größe: %d KB\n"
+
+#: ../../install_steps_graphical.pm_.c:462 ../../install_steps_gtk.pm_.c:260
+msgid "Choose the packages you want to install"
+msgstr "Zu installierende Pakete auswählen"
+
+#: ../../install_steps_graphical.pm_.c:465 ../../install_steps_gtk.pm_.c:263
+msgid "Info"
+msgstr "Info"
+
+#: ../../install_steps_graphical.pm_.c:473 ../../install_steps_gtk.pm_.c:268
+#: ../../install_steps_interactive.pm_.c:216 ../../standalone/rpmdrake_.c:161
+msgid "Install"
+msgstr "Installation"
+
+#: ../../install_steps_graphical.pm_.c:492 ../../install_steps_gtk.pm_.c:466
+#: ../../install_steps_interactive.pm_.c:594
+msgid "Installing"
+msgstr "Installation wird durchgeführt"
+
+#: ../../install_steps_graphical.pm_.c:499 ../../install_steps_gtk.pm_.c:472
+msgid "Please wait, "
+msgstr "Bitte warten, "
+
+#: ../../install_steps_graphical.pm_.c:501 ../../install_steps_gtk.pm_.c:474
+msgid "Time remaining "
+msgstr "Verbleibende Zeit "
+
+#: ../../install_steps_graphical.pm_.c:502 ../../install_steps_gtk.pm_.c:475
+msgid "Total time "
+msgstr "Gesamtzeit "
+
+#: ../../install_steps_graphical.pm_.c:507 ../../install_steps_gtk.pm_.c:484
+#: ../../install_steps_interactive.pm_.c:594
+msgid "Preparing installation"
+msgstr "Installation vorbereiten"
+
+#: ../../install_steps_graphical.pm_.c:528 ../../install_steps_gtk.pm_.c:500
+#, c-format
+msgid "Installing package %s"
+msgstr "Installation des Pakets %s"
+
+#: ../../install_steps_graphical.pm_.c:553 ../../install_steps_gtk.pm_.c:569
+#: ../../install_steps_gtk.pm_.c:573
+msgid "Go on anyway?"
+msgstr "Wollen Sie trotzdem fortfahren?"
+
+#: ../../install_steps_graphical.pm_.c:553 ../../install_steps_gtk.pm_.c:569
+msgid "There was an error ordering packages:"
+msgstr "Bei der Anforderung folgender Pakete trat ein Fehler auf:"
+
+#: ../../install_steps_graphical.pm_.c:577
+#: ../../install_steps_interactive.pm_.c:999
+msgid "Use existing configuration for X11?"
+msgstr "Wollen Sie die existierende X11 Konfiguration verwenden?"
+
 #: ../../install_steps_gtk.pm_.c:136
 msgid ""
 "Your system is low on resource. You may have some problem installing\n"
@@ -3391,19 +3619,6 @@ msgstr "Im nächsten Schritt können Sie genauer auswählen"
 msgid "Percentage of packages to install"
 msgstr "Prozent der zu installierenden Pakete"
 
-#: ../../install_steps_gtk.pm_.c:260
-msgid "Choose the packages you want to install"
-msgstr "Zu installierende Pakete auswählen"
-
-#: ../../install_steps_gtk.pm_.c:263
-msgid "Info"
-msgstr "Info"
-
-#: ../../install_steps_gtk.pm_.c:268 ../../install_steps_interactive.pm_.c:216
-#: ../../standalone/rpmdrake_.c:161
-msgid "Install"
-msgstr "Installation"
-
 #: ../../install_steps_gtk.pm_.c:272
 msgid "Automatic dependencies"
 msgstr "Automatische Abhängigkeiten"
@@ -3428,16 +3643,6 @@ msgstr "Ungültiges Paket"
 #, c-format
 msgid "Name: %s\n"
 msgstr "Name: %s\n"
-
-#: ../../install_steps_gtk.pm_.c:353 ../../standalone/rpmdrake_.c:136
-#, c-format
-msgid "Version: %s\n"
-msgstr "Version: %s\n"
-
-#: ../../install_steps_gtk.pm_.c:354 ../../standalone/rpmdrake_.c:137
-#, c-format
-msgid "Size: %d KB\n"
-msgstr "Größe: %d KB\n"
 
 #: ../../install_steps_gtk.pm_.c:355
 #, c-format
@@ -3492,25 +3697,9 @@ msgstr ""
 "Sie können dieses Paket nicht aus der Auswahl entfernen. \n"
 "Es muss aktualisiert werden!"
 
-#: ../../install_steps_gtk.pm_.c:466 ../../install_steps_interactive.pm_.c:594
-msgid "Installing"
-msgstr "Installation wird durchgeführt"
-
 #: ../../install_steps_gtk.pm_.c:469
 msgid "Estimating"
 msgstr "Schätzung"
-
-#: ../../install_steps_gtk.pm_.c:472
-msgid "Please wait, "
-msgstr "Bitte warten, "
-
-#: ../../install_steps_gtk.pm_.c:474
-msgid "Time remaining "
-msgstr "Verbleibende Zeit "
-
-#: ../../install_steps_gtk.pm_.c:475
-msgid "Total time "
-msgstr "Gesamtzeit "
 
 #: ../../install_steps_gtk.pm_.c:481 ../../interactive.pm_.c:86
 #: ../../interactive.pm_.c:249 ../../interactive_newt.pm_.c:51
@@ -3519,19 +3708,10 @@ msgstr "Gesamtzeit "
 msgid "Cancel"
 msgstr "Abbruch"
 
-#: ../../install_steps_gtk.pm_.c:484 ../../install_steps_interactive.pm_.c:594
-msgid "Preparing installation"
-msgstr "Installation vorbereiten"
-
 #: ../../install_steps_gtk.pm_.c:495
 #, c-format
 msgid "%d packages"
 msgstr "%d Pakete"
-
-#: ../../install_steps_gtk.pm_.c:500
-#, c-format
-msgid "Installing package %s"
-msgstr "Installation des Pakets %s"
 
 #: ../../install_steps_gtk.pm_.c:531
 msgid ""
@@ -3618,14 +3798,6 @@ msgstr ""
 #: ../../install_steps_gtk.pm_.c:559 ../../install_steps_interactive.pm_.c:147
 msgid "Refuse"
 msgstr "Zurückweisen"
-
-#: ../../install_steps_gtk.pm_.c:569 ../../install_steps_gtk.pm_.c:573
-msgid "Go on anyway?"
-msgstr "Wollen Sie trotzdem fortfahren?"
-
-#: ../../install_steps_gtk.pm_.c:569
-msgid "There was an error ordering packages:"
-msgstr "Bei der Anforderung folgender Pakete trat ein Fehler auf:"
 
 #: ../../install_steps_gtk.pm_.c:573
 msgid "There was an error installing packages:"
@@ -4557,10 +4729,6 @@ msgid ""
 "give digits instead of normal letters (eg: pressing `p' gives `6')"
 msgstr "Vorsicht, ist Num-Lock aktiv können etliche Tasten zu ziffern werden"
 
-#: ../../install_steps_interactive.pm_.c:999
-msgid "Use existing configuration for X11?"
-msgstr "Wollen Sie die existierende X11 Konfiguration verwenden?"
-
 #: ../../install_steps_interactive.pm_.c:1028
 msgid "Do you want to generate an auto install floppy for linux replication?"
 msgstr ""
@@ -4596,6 +4764,16 @@ msgid ""
 "Information on configuring your system is available in the post\n"
 "install chapter of the Official Linux-Mandrake User's Guide."
 msgstr ""
+"Herzlichen Glückwunsch, die Installation ist abgeschlossen.\n"
+"Entfernen Sie die Startmedien (CD-ROMs / Disketten) und drücken Sie \n"
+"Return zum Neustart Ihres Rechners.\n"
+"\n"
+"Für Informationen zu Sicherheitsaktualisierungen dieser Version von \n"
+"Linux-Mandrake informieren Sie sich bitte unter \n"
+"http://www.linux-mandrake.com/.\n"
+"\n"
+"Wie Sie Ihr System warten können, erfahren Sie im Kapitel ,,Nach der \n"
+"Installation`` im offiziellen Benutzerhandbuch von Linux-Mandrake."
 
 #: ../../install_steps_newt.pm_.c:22
 #, c-format
@@ -4637,239 +4815,239 @@ msgstr "Ihre Wahl? (Standard %s) "
 msgid "Your choice? (default %s  enter `none' for none) "
 msgstr "Ihre Wahl? (Standard %s, geben Sie ,,none`` für keine(r/s) ein) "
 
-#: ../../keyboard.pm_.c:104 ../../keyboard.pm_.c:134
+#: ../../keyboard.pm_.c:105 ../../keyboard.pm_.c:135
 msgid "Czech"
 msgstr "Tschechien"
 
-#: ../../keyboard.pm_.c:105 ../../keyboard.pm_.c:118 ../../keyboard.pm_.c:135
+#: ../../keyboard.pm_.c:106 ../../keyboard.pm_.c:119 ../../keyboard.pm_.c:136
 msgid "German"
 msgstr "Deutschland"
 
-#: ../../keyboard.pm_.c:106
+#: ../../keyboard.pm_.c:107
 msgid "Dvorak"
 msgstr "Dvorak"
 
-#: ../../keyboard.pm_.c:107 ../../keyboard.pm_.c:141
+#: ../../keyboard.pm_.c:108 ../../keyboard.pm_.c:142
 msgid "Spanish"
 msgstr "Spanien"
 
-#: ../../keyboard.pm_.c:108 ../../keyboard.pm_.c:142
+#: ../../keyboard.pm_.c:109 ../../keyboard.pm_.c:143
 msgid "Finnish"
 msgstr "Finnland"
 
-#: ../../keyboard.pm_.c:109 ../../keyboard.pm_.c:119 ../../keyboard.pm_.c:143
+#: ../../keyboard.pm_.c:110 ../../keyboard.pm_.c:120 ../../keyboard.pm_.c:144
 msgid "French"
 msgstr "Frankreich"
 
-#: ../../keyboard.pm_.c:110 ../../keyboard.pm_.c:162
+#: ../../keyboard.pm_.c:111 ../../keyboard.pm_.c:164
 msgid "Norwegian"
 msgstr "Norwegen"
 
-#: ../../keyboard.pm_.c:111
+#: ../../keyboard.pm_.c:112
 msgid "Polish"
 msgstr "Polen"
 
-#: ../../keyboard.pm_.c:112 ../../keyboard.pm_.c:167
+#: ../../keyboard.pm_.c:113 ../../keyboard.pm_.c:169
 msgid "Russian"
 msgstr "Russland"
 
-#: ../../keyboard.pm_.c:113 ../../keyboard.pm_.c:176
+#: ../../keyboard.pm_.c:114 ../../keyboard.pm_.c:178
 msgid "UK keyboard"
 msgstr "Vereinigtes Königreich"
 
-#: ../../keyboard.pm_.c:114 ../../keyboard.pm_.c:117 ../../keyboard.pm_.c:177
+#: ../../keyboard.pm_.c:115 ../../keyboard.pm_.c:118 ../../keyboard.pm_.c:179
 msgid "US keyboard"
 msgstr "Vereinigte Staaten"
 
-#: ../../keyboard.pm_.c:121
+#: ../../keyboard.pm_.c:122
 msgid "Armenian (old)"
 msgstr "Armenien (alt)"
 
-#: ../../keyboard.pm_.c:122
+#: ../../keyboard.pm_.c:123
 msgid "Armenian (typewriter)"
 msgstr "Armenien (Schreibmaschine)"
 
-#: ../../keyboard.pm_.c:123
+#: ../../keyboard.pm_.c:124
 msgid "Armenian (phonetic)"
 msgstr "Armenien (Phonetisch)"
 
-#: ../../keyboard.pm_.c:126
+#: ../../keyboard.pm_.c:127
 msgid "Azerbaidjani (latin)"
 msgstr "Aserbeidschan (Lateinisches Layout)"
 
-#: ../../keyboard.pm_.c:127
+#: ../../keyboard.pm_.c:128
 msgid "Azerbaidjani (cyrillic)"
 msgstr "Aserbeidschan (Kyrillisches Layout)"
 
-#: ../../keyboard.pm_.c:128
+#: ../../keyboard.pm_.c:129
 msgid "Belgian"
 msgstr "Belgien"
 
-#: ../../keyboard.pm_.c:129
+#: ../../keyboard.pm_.c:130
 msgid "Bulgarian"
 msgstr "Bulgarien"
 
-#: ../../keyboard.pm_.c:130
+#: ../../keyboard.pm_.c:131
 msgid "Brazilian (ABNT-2)"
 msgstr "Brasilien (ABNT-2)"
 
-#: ../../keyboard.pm_.c:131
+#: ../../keyboard.pm_.c:132
 msgid "Belarusian"
 msgstr "Weißrussland"
 
-#: ../../keyboard.pm_.c:132
+#: ../../keyboard.pm_.c:133
 msgid "Swiss (German layout)"
 msgstr "Schweiz (deutsches Layout)"
 
-#: ../../keyboard.pm_.c:133
+#: ../../keyboard.pm_.c:134
 msgid "Swiss (French layout)"
 msgstr "Schweiz (französisches Layout)"
 
-#: ../../keyboard.pm_.c:136
+#: ../../keyboard.pm_.c:137
 msgid "German (no dead keys)"
 msgstr "Deutschland (ohne Tod-Tasten)"
 
-#: ../../keyboard.pm_.c:137
+#: ../../keyboard.pm_.c:138
 msgid "Danish"
 msgstr "Dänemark"
 
-#: ../../keyboard.pm_.c:138
+#: ../../keyboard.pm_.c:139
 msgid "Dvorak (US)"
 msgstr "Dvorak (USA)"
 
-#: ../../keyboard.pm_.c:139
+#: ../../keyboard.pm_.c:140
 msgid "Dvorak (Norwegian)"
 msgstr "Dvorak (Norwegen)"
 
-#: ../../keyboard.pm_.c:140
+#: ../../keyboard.pm_.c:141
 msgid "Estonian"
 msgstr "Estland"
 
-#: ../../keyboard.pm_.c:144
+#: ../../keyboard.pm_.c:145
 msgid "Georgian (\"Russian\" layout)"
 msgstr "Georgien (,,Russisches`` Layout)"
 
-#: ../../keyboard.pm_.c:145
+#: ../../keyboard.pm_.c:146
 msgid "Georgian (\"Latin\" layout)"
 msgstr "Georgien (,,Lateinisches`` Layout)"
 
-#: ../../keyboard.pm_.c:146
+#: ../../keyboard.pm_.c:147
 msgid "Greek"
 msgstr "Griechenland"
 
-#: ../../keyboard.pm_.c:147
+#: ../../keyboard.pm_.c:148
 msgid "Hungarian"
 msgstr "Ungarn"
 
-#: ../../keyboard.pm_.c:148
+#: ../../keyboard.pm_.c:149
 msgid "Croatian"
 msgstr "Kroatien"
 
-#: ../../keyboard.pm_.c:149
+#: ../../keyboard.pm_.c:150
 msgid "Israeli"
 msgstr "Israel"
 
-#: ../../keyboard.pm_.c:150
+#: ../../keyboard.pm_.c:151
 msgid "Israeli (Phonetic)"
 msgstr "Israel (Phonetisch)"
 
-#: ../../keyboard.pm_.c:151
+#: ../../keyboard.pm_.c:152
 msgid "Iranian"
 msgstr "Iran"
 
-#: ../../keyboard.pm_.c:152
+#: ../../keyboard.pm_.c:153
 msgid "Icelandic"
 msgstr "Island"
 
-#: ../../keyboard.pm_.c:153
+#: ../../keyboard.pm_.c:154
 msgid "Italian"
 msgstr "Italien"
 
-#: ../../keyboard.pm_.c:154
+#: ../../keyboard.pm_.c:155
 msgid "Japanese 106 keys"
 msgstr "Japan 106 Tasten"
 
-#: ../../keyboard.pm_.c:155
+#: ../../keyboard.pm_.c:156
 msgid "Latin American"
 msgstr "Latein Amerika"
 
-#: ../../keyboard.pm_.c:156
+#: ../../keyboard.pm_.c:158
 msgid "Dutch"
 msgstr "Niederlande"
 
-#: ../../keyboard.pm_.c:157
+#: ../../keyboard.pm_.c:159
 msgid "Lithuanian AZERTY (old)"
 msgstr "Litauen AZERTY (alt)"
 
-#: ../../keyboard.pm_.c:159
+#: ../../keyboard.pm_.c:161
 msgid "Lithuanian AZERTY (new)"
 msgstr "Litauen AZERTY (neu)"
 
-#: ../../keyboard.pm_.c:160
+#: ../../keyboard.pm_.c:162
 msgid "Lithuanian \"number row\" QWERTY"
 msgstr "Litauen ,,number row`` QWERTY"
 
-#: ../../keyboard.pm_.c:161
+#: ../../keyboard.pm_.c:163
 msgid "Lithuanian \"phonetic\" QWERTY"
 msgstr "Litauen ,,phonetic`` QWERTY"
 
-#: ../../keyboard.pm_.c:163
+#: ../../keyboard.pm_.c:165
 msgid "Polish (qwerty layout)"
 msgstr "Polen (QWERTY Layout)"
 
-#: ../../keyboard.pm_.c:164
+#: ../../keyboard.pm_.c:166
 msgid "Polish (qwertz layout)"
 msgstr "Polen (QWERTZ Layout)"
 
-#: ../../keyboard.pm_.c:165
+#: ../../keyboard.pm_.c:167
 msgid "Portuguese"
 msgstr "Portugal"
 
-#: ../../keyboard.pm_.c:166
+#: ../../keyboard.pm_.c:168
 msgid "Canadian (Quebec)"
 msgstr "Kanada (Quebec)"
 
-#: ../../keyboard.pm_.c:168
+#: ../../keyboard.pm_.c:170
 msgid "Russian (Yawerty)"
 msgstr "Russland (Yawerty)"
 
-#: ../../keyboard.pm_.c:169
+#: ../../keyboard.pm_.c:171
 msgid "Swedish"
 msgstr "Schweden"
 
-#: ../../keyboard.pm_.c:170
+#: ../../keyboard.pm_.c:172
 msgid "Slovenian"
 msgstr "Slovenien"
 
-#: ../../keyboard.pm_.c:171
+#: ../../keyboard.pm_.c:173
 msgid "Slovakian"
 msgstr "Slowakei"
 
-#: ../../keyboard.pm_.c:172
+#: ../../keyboard.pm_.c:174
 msgid "Thai keyboard"
 msgstr "Thailändische Tastatur"
 
-#: ../../keyboard.pm_.c:173
+#: ../../keyboard.pm_.c:175
 msgid "Turkish (traditional \"F\" model)"
 msgstr "Türkei (traditionelles ,,F`` Modell)"
 
-#: ../../keyboard.pm_.c:174
+#: ../../keyboard.pm_.c:176
 msgid "Turkish (modern \"Q\" model)"
 msgstr "Türkei (modernes ,,Q`` Modell)"
 
-#: ../../keyboard.pm_.c:175
+#: ../../keyboard.pm_.c:177
 msgid "Ukrainian"
 msgstr "Ukraine"
 
-#: ../../keyboard.pm_.c:178
+#: ../../keyboard.pm_.c:180
 msgid "US keyboard (international)"
 msgstr "Vereinigte Staaten (international)"
 
-#: ../../keyboard.pm_.c:179
+#: ../../keyboard.pm_.c:181
 msgid "Vietnamese \"numeric row\" QWERTY"
 msgstr "Vietnam ,,numeric row`` QWERTY"
 
-#: ../../keyboard.pm_.c:180
+#: ../../keyboard.pm_.c:182
 msgid "Yugoslavian (latin layout)"
 msgstr "Jugoslawien (lateinisches Layout)"
 
@@ -5183,8 +5361,8 @@ msgstr ""
 "Bitte wählen Sie, über welches Netzwerkgerät Sie die \n"
 "Internetverbindung herstellen wollen."
 
-#: ../../netconnect.pm_.c:351 ../../netconnect.pm_.c:623
-#: ../../netconnect.pm_.c:754 ../../standalone/drakgw_.c:217
+#: ../../netconnect.pm_.c:351 ../../netconnect.pm_.c:630
+#: ../../netconnect.pm_.c:761 ../../standalone/drakgw_.c:217
 msgid "Network interface"
 msgstr "Netzwerkkarte"
 
@@ -5193,6 +5371,8 @@ msgid ""
 "\n"
 "Do you agree?"
 msgstr ""
+"\n"
+"Sind Sie einverstanden?"
 
 #: ../../netconnect.pm_.c:352
 msgid "I'm about to restart the network device:\n"
@@ -5206,59 +5386,59 @@ msgstr "ADSL Konfiguration"
 msgid "Do you want to start your connection at boot?"
 msgstr "Möchten Sie die Verbindung bei Betriebssystemstart hertellen?"
 
-#: ../../netconnect.pm_.c:529
+#: ../../netconnect.pm_.c:536
 msgid "Try to find a modem?"
 msgstr "Soll ich ein Modem suchen?"
 
-#: ../../netconnect.pm_.c:539
+#: ../../netconnect.pm_.c:546
 msgid "Please choose which serial port your modem is connected to."
 msgstr "Bitte wählen Sie den seriellen Anschluss, an dem Ihr Modem hängt."
 
-#: ../../netconnect.pm_.c:544
+#: ../../netconnect.pm_.c:551
 msgid "Dialup options"
 msgstr "Einwahl Parameter"
 
-#: ../../netconnect.pm_.c:545
+#: ../../netconnect.pm_.c:552
 msgid "Connection name"
 msgstr "Name der Verbindung"
 
-#: ../../netconnect.pm_.c:546
+#: ../../netconnect.pm_.c:553
 msgid "Phone number"
 msgstr "Telefonnummer"
 
-#: ../../netconnect.pm_.c:547
+#: ../../netconnect.pm_.c:554
 msgid "Login ID"
 msgstr "Login ID"
 
-#: ../../netconnect.pm_.c:549
+#: ../../netconnect.pm_.c:556
 msgid "Authentication"
 msgstr "Authentisierung"
 
-#: ../../netconnect.pm_.c:549
+#: ../../netconnect.pm_.c:556
 msgid "PAP"
 msgstr "PAP"
 
-#: ../../netconnect.pm_.c:549
+#: ../../netconnect.pm_.c:556
 msgid "Script-based"
 msgstr "Skript-basiert"
 
-#: ../../netconnect.pm_.c:549
+#: ../../netconnect.pm_.c:556
 msgid "Terminal-based"
 msgstr "Terminal-basiert"
 
-#: ../../netconnect.pm_.c:550
+#: ../../netconnect.pm_.c:557
 msgid "Domain name"
 msgstr "Name der Domäne"
 
-#: ../../netconnect.pm_.c:552
+#: ../../netconnect.pm_.c:559
 msgid "First DNS Server"
 msgstr "Erster DNS Server"
 
-#: ../../netconnect.pm_.c:553
+#: ../../netconnect.pm_.c:560
 msgid "Second DNS Server"
 msgstr "Zweiter DNS Server"
 
-#: ../../netconnect.pm_.c:582
+#: ../../netconnect.pm_.c:589
 msgid ""
 "\n"
 "You can connect to Internet or reconfigure your connection."
@@ -5267,7 +5447,7 @@ msgstr ""
 "Sie können eine Internetverbindung aufbauen oder die Verbindung neu "
 "konfigurieren"
 
-#: ../../netconnect.pm_.c:582 ../../netconnect.pm_.c:586
+#: ../../netconnect.pm_.c:589 ../../netconnect.pm_.c:593
 msgid ""
 "\n"
 "You can reconfigure your connection."
@@ -5275,11 +5455,11 @@ msgstr ""
 "\n"
 "Sie können Ihre Internetverbindung neu konfigurieren"
 
-#: ../../netconnect.pm_.c:582
+#: ../../netconnect.pm_.c:589
 msgid "You are not currently connected to Internet."
 msgstr "Sie sind momentan nicht mit dem Internet verbunden."
 
-#: ../../netconnect.pm_.c:586
+#: ../../netconnect.pm_.c:593
 msgid ""
 "\n"
 "You can disconnect or reconfigure your connection."
@@ -5287,98 +5467,98 @@ msgstr ""
 "\n"
 "Sie können die Verbindung trennen oder sie neu konfigurieren."
 
-#: ../../netconnect.pm_.c:586
+#: ../../netconnect.pm_.c:593
 msgid "You are currently connected to internet."
 msgstr "Sie sind momentan mit dem Internet verbunden."
 
-#: ../../netconnect.pm_.c:590
+#: ../../netconnect.pm_.c:597
 msgid "Connect to Internet"
 msgstr "Internetverbindung herstellen"
 
-#: ../../netconnect.pm_.c:592
+#: ../../netconnect.pm_.c:599
 msgid "Disconnect from Internet"
 msgstr "Internetverbindung trennen"
 
-#: ../../netconnect.pm_.c:594
+#: ../../netconnect.pm_.c:601
 msgid "Configure network connection (LAN or Internet)"
 msgstr "Internetverbindung konfigurieren (LAN oder Internet)"
 
-#: ../../netconnect.pm_.c:597
+#: ../../netconnect.pm_.c:604
 msgid "Internet connection & configuration"
 msgstr "Internetverbindung und -einrichtung"
 
-#: ../../netconnect.pm_.c:624 ../../netconnect.pm_.c:755
+#: ../../netconnect.pm_.c:631 ../../netconnect.pm_.c:762
 msgid ""
 "I'm about to restart the network device $netc->{NET_DEVICE}. Do you agree?"
 msgstr ""
 "Ich werde nun die Netzwerkkarte ,,$netc->{NET_DEVICE}`` neu starten. Sind "
 "Sie einverstanden?"
 
-#: ../../netconnect.pm_.c:641
+#: ../../netconnect.pm_.c:648
 msgid "Configure a normal modem connection"
 msgstr "Normales modem konfigurieren"
 
-#: ../../netconnect.pm_.c:661
+#: ../../netconnect.pm_.c:668
 msgid "Configure an ISDN connection"
 msgstr "ISDN Internetverbindung konfigurieren"
 
-#: ../../netconnect.pm_.c:666
+#: ../../netconnect.pm_.c:673
 msgid "Internal ISDN card"
 msgstr "Interne ISDN Karte"
 
-#: ../../netconnect.pm_.c:668
+#: ../../netconnect.pm_.c:675
 msgid "External ISDN modem"
 msgstr "Externes ISDN Modem"
 
-#: ../../netconnect.pm_.c:671 ../../netconnect.pm_.c:705
-#: ../../netconnect.pm_.c:717 ../../netconnect.pm_.c:741
-#: ../../netconnect.pm_.c:786
+#: ../../netconnect.pm_.c:678 ../../netconnect.pm_.c:712
+#: ../../netconnect.pm_.c:724 ../../netconnect.pm_.c:748
+#: ../../netconnect.pm_.c:793
 msgid "Connect to the Internet"
 msgstr "Internetverbindung"
 
-#: ../../netconnect.pm_.c:672
+#: ../../netconnect.pm_.c:679
 msgid "What kind is your ISDN connection?"
 msgstr "Um welchen Typ ISDN-Verbindung handelt es sich?"
 
-#: ../../netconnect.pm_.c:691
+#: ../../netconnect.pm_.c:698
 msgid "Configure a DSL (or ADSL) connection"
 msgstr "DSL (oder ADSL) Internetverbindung konfigurieren"
 
-#: ../../netconnect.pm_.c:700
+#: ../../netconnect.pm_.c:707
 msgid "France"
 msgstr "Frankreich"
 
-#: ../../netconnect.pm_.c:702
+#: ../../netconnect.pm_.c:709
 msgid "Other countries"
 msgstr "Anderes Land"
 
-#: ../../netconnect.pm_.c:706
+#: ../../netconnect.pm_.c:713
 msgid "In which country are you located ?"
 msgstr "In welchem Land befinden Sie sich?"
 
-#: ../../netconnect.pm_.c:712
+#: ../../netconnect.pm_.c:719
 msgid "Alcatel modem"
 msgstr "Alcatel Modem"
 
-#: ../../netconnect.pm_.c:714
+#: ../../netconnect.pm_.c:721
 msgid "ECI modem"
 msgstr "ECI Modem"
 
-#: ../../netconnect.pm_.c:718
+#: ../../netconnect.pm_.c:725
 msgid "If your adsl modem is an Alcatel one, choose Alcatel. Otherwise, ECI."
 msgstr ""
 "Falls Sie ein Alcatel ADSL-Modem besitzten wählen Sie ,,Alcatel Modem``, "
 "sonst ,,ECI Modem``."
 
-#: ../../netconnect.pm_.c:736
+#: ../../netconnect.pm_.c:743
 msgid "use pppoe"
 msgstr "pppoe verwenden"
 
-#: ../../netconnect.pm_.c:738
+#: ../../netconnect.pm_.c:745
 msgid "don't use pppoe"
 msgstr "pppoe nicht verwenden"
 
-#: ../../netconnect.pm_.c:742
+#: ../../netconnect.pm_.c:749
 msgid ""
 "The most common way to connect with adsl is dhcp + pppoe.\n"
 "However, some connections only use dhcp.\n"
@@ -5389,11 +5569,11 @@ msgstr ""
 "nur ,,dhcp`` verwenden. Falls Sie nicht wissen, was bei Ihnen \n"
 "zutrifft, wählen Sie ,,pppoe verwenden``."
 
-#: ../../netconnect.pm_.c:765
+#: ../../netconnect.pm_.c:772
 msgid "Configure a cable connection"
 msgstr "Kabel Internetverbindung konfigurieren"
 
-#: ../../netconnect.pm_.c:787
+#: ../../netconnect.pm_.c:794
 msgid ""
 "Which dhcp client do you want to use?\n"
 "Default is dhcpd"
@@ -5401,32 +5581,31 @@ msgstr ""
 "Welchen dhcp Klienten wollen Sie verwenden?\n"
 "Voreingestellt ist ,,dhcpd``"
 
-#: ../../netconnect.pm_.c:800
+#: ../../netconnect.pm_.c:807
 msgid "Disable Internet Connection"
 msgstr "Internetverbindung deaktivieren"
 
-#: ../../netconnect.pm_.c:811
+#: ../../netconnect.pm_.c:818
 msgid "Configure local network"
 msgstr "Netzwerk konfigurieren"
 
-#: ../../netconnect.pm_.c:815
+#: ../../netconnect.pm_.c:822
 msgid "Network configuration"
 msgstr "Netzwerk konfiguration"
 
-#: ../../netconnect.pm_.c:816
-#, fuzzy
+#: ../../netconnect.pm_.c:823
 msgid "Do you want to restart the network"
-msgstr "Möchten Sie die vorgenommenen Einstellungen prüfen?"
+msgstr "Möchten Sie das Netzwerk neu starten?"
 
-#: ../../netconnect.pm_.c:824
+#: ../../netconnect.pm_.c:831
 msgid "Disable networking"
 msgstr "Netzwerk abschalten"
 
-#: ../../netconnect.pm_.c:834
+#: ../../netconnect.pm_.c:841
 msgid "Configure the Internet connection / Configure local Network"
 msgstr "Internetverbindung / Lokales Netz konfigurieren"
 
-#: ../../netconnect.pm_.c:835
+#: ../../netconnect.pm_.c:842
 msgid ""
 "Local networking has already been configured.\n"
 "Do you want to:"
@@ -5434,15 +5613,15 @@ msgstr ""
 "Es wurde bereits ein LAN-Netzwerk konfiguriert.\n"
 "Was wollen Sie einstellen:"
 
-#: ../../netconnect.pm_.c:836
+#: ../../netconnect.pm_.c:843
 msgid "How do you want to connect to the Internet?"
 msgstr "Wie wollen Sie sich ins Internet einklinken?"
 
-#: ../../netconnect.pm_.c:858
+#: ../../netconnect.pm_.c:865
 msgid "Network Configuration"
 msgstr "Netzwerk konfigurieren"
 
-#: ../../netconnect.pm_.c:859
+#: ../../netconnect.pm_.c:866
 msgid ""
 "Now that your Internet connection is configured,\n"
 "your computer can be configured to share its Internet connection.\n"
@@ -6332,46 +6511,49 @@ msgid "Internet Connection Sharing currently enabled"
 msgstr "Teilen der Internetverbindung momentan eingeschaltet."
 
 #: ../../standalone/drakgw_.c:104
-#, fuzzy
 msgid ""
 "The setup of Internet connection sharing has already been done.\n"
 "It's currently enabled.\n"
 "\n"
 "What would you like to do?"
-msgstr "Es wurde bereits eine geteilte Internet-Verbindung aufgesetzt.\n"
+msgstr ""
+"Es wurde bereits eine geteilte Internet-Verbindung aufgesetzt.\n"
+"Momentan ist sie aktiviert.\n"
+"\n"
+"Was wollen Sie tun?"
 
 #: ../../standalone/drakgw_.c:107 ../../standalone/drakgw_.c:108
-#, fuzzy
 msgid "disable"
-msgstr "Tabelle"
+msgstr "deaktivieren"
 
 #: ../../standalone/drakgw_.c:107 ../../standalone/drakgw_.c:118
 #: ../../standalone/drakgw_.c:126 ../../standalone/drakgw_.c:137
 msgid "dismiss"
-msgstr ""
+msgstr "Menü verlassen"
 
 #: ../../standalone/drakgw_.c:107 ../../standalone/drakgw_.c:126
-#, fuzzy
 msgid "reconfigure"
-msgstr "X konfigurieren"
+msgstr "neu konfigurieren"
 
 #: ../../standalone/drakgw_.c:122
 msgid "Internet Connection Sharing currently disabled"
 msgstr "Teilen der Internet-Verbindung momentan abgeschaltet."
 
 #: ../../standalone/drakgw_.c:123
-#, fuzzy
 msgid ""
 "The setup of Internet connection sharing has already been done.\n"
 "It's currently disabled.\n"
 "\n"
 "What would you like to do?"
-msgstr "Es wurde bereits eine geteilte Internet-Verbindung aufgesetzt.\n"
+msgstr ""
+"Es wurde bereits eine geteilte Internet-Verbindung aufgesetzt.\n"
+"Momentan ist sie deaktiviert.\n"
+"\n"
+"Was wollen Sie tun?"
 
 #: ../../standalone/drakgw_.c:126 ../../standalone/drakgw_.c:127
-#, fuzzy
 msgid "enable"
-msgstr "Tabelle"
+msgstr "aktivieren"
 
 #: ../../standalone/drakgw_.c:141
 msgid "Config file content could not be interpreted."
@@ -6382,7 +6564,6 @@ msgid "Internet Connection Sharing"
 msgstr "Teilen der Internet-Verbindung"
 
 #: ../../standalone/drakgw_.c:152
-#, fuzzy
 msgid ""
 "Your computer can be configured to share its Internet connection.\n"
 "\n"
@@ -6391,17 +6572,16 @@ msgid ""
 "\n"
 "Would you like to setup the Internet Connection Sharing?"
 msgstr ""
-"Da Sie nun Ihre Internetverbindung eingerichtet haben,\n"
-"haben Sie die Möglichkeit diese in einem lokalem Netzwerk zu teilen.\n"
+"Sie können Ihren Rechner konfigurieren, dass er die eingerichtete \n"
+"Internetverbindung mit einem lokalem Netzwerk teilt.\n"
 "Anmerkung: Sie benötigen eine Netzwerkkarte, mit deren Hilfe Sie ein \n"
 "lokales Netz (LAN) aufsetzen können.\n"
 "\n"
-"Wollen Sie Ihre Internetverbindung teilen?\n"
+"Wollen Sie Ihre Internetverbindung teilen?"
 
 #: ../../standalone/drakgw_.c:177
-#, fuzzy
 msgid "using module"
-msgstr "Wahlmodus"
+msgstr "Modul verwenden"
 
 #: ../../standalone/drakgw_.c:210
 msgid "No network adapter on your system!"
@@ -6469,44 +6649,27 @@ msgid "Configuring scripts, installing software, starting servers..."
 msgstr "Skripe konfigurieren, Software einspielen, Dienste starten ..."
 
 #: ../../standalone/drakgw_.c:282
-#, fuzzy
 msgid "Configuring..."
-msgstr "IDE konfigurieren"
+msgstr "Konfigurieren ..."
 
-#: ../../standalone/drakgw_.c:306
-msgid "Could not install ipchains RPM with urpmi."
+#: ../../standalone/drakgw_.c:313
+msgid "Problems installing package $bin2rpm{$_}"
 msgstr ""
-"Ich konnte das RPM-Paket ,,ipchains`` nicht mittels urpmi installieren."
 
-#: ../../standalone/drakgw_.c:456
-msgid "Could not install dhcp RPM with urpmi."
-msgstr "Ich konnte das RPM-Paket ,,dhcp`` nicht mittels urpmi installieren."
-
-#: ../../standalone/drakgw_.c:480
-msgid "Could not install linuxconf RPM with urpmi."
-msgstr ""
-"Ich konnte das RPM-Paket ,,linuxconf`` nicht mittels urpmi installieren."
-
-#: ../../standalone/drakgw_.c:496
-msgid "Could not install bind RPM with urpmi."
-msgstr "Ich konnte das RPM-Paket ,,bind`` nicht mittels urpmi installieren."
-
-#: ../../standalone/drakgw_.c:500
-msgid "Could not install caching-nameserver RPM with urpmi."
-msgstr ""
-"Ich konnte das RPM-Paket ,,caching-nameserver`` nicht mittels urpmi "
-"installieren."
-
-#: ../../standalone/drakgw_.c:512
+#: ../../standalone/drakgw_.c:504
 msgid "Congratulations!"
 msgstr "Gratuliere!"
 
-#: ../../standalone/drakgw_.c:513
+#: ../../standalone/drakgw_.c:505
 msgid ""
 "Everything has been configured.\n"
 "You may now share Internet connection with other computers on your Local "
 "Area Network, using automatic network configuration (DHCP)."
 msgstr ""
+"Es wurde alles eingerichtet.\n"
+"Sie können Ihre Internetverbindung nun anderen Rechnern in Ihrem \n"
+"lokalen Netz mittels automatischer Netzwerk-Konfiguration (DHCP) \n"
+"teilen."
 
 #: ../../standalone/draksec_.c:28
 msgid ""
@@ -6571,6 +6734,14 @@ msgstr "Sicherheits-Ebene einstellen"
 #: ../../standalone/drakxconf_.c:21
 msgid "Choose the tool you want to use"
 msgstr "Wählen Sie das Werkzeug, das Sie verwenden wollen"
+
+#: ../../standalone/keyboarddrake_.c:14
+msgid "usage: keyboarddrake [--expert]\n"
+msgstr ""
+
+#: ../../standalone/keyboarddrake_.c:27
+msgid "Do you want the BackSpace to return Delete in console?"
+msgstr ""
 
 #: ../../standalone/livedrake_.c:23
 msgid "Change Cd-Rom"
@@ -6811,80 +6982,60 @@ msgid "Finding leaves takes some time"
 msgstr "Die Blatt-Suche wird einige Zeit dauern"
 
 # ../../share/compssUsers
-msgid "More Graphical Desktops (Gnome, IceWM)"
-msgstr ""
+msgid "Graphics Manipulation"
+msgstr "Bildverarbeitung"
 
 # ../../share/compssUsers
-msgid ""
-"The K Desktop Environment, the basic graphical environment with a collection "
-"of accompanying tools"
-msgstr ""
+msgid "KDE, QT, Gnome, GTK+"
+msgstr "KDE, QT, GNOME, GTK+"
 
 # ../../share/compssUsers
-msgid "Personnal Information Management"
-msgstr ""
+msgid "Personnal Finance"
+msgstr "Finanzverwaltung"
 
 # ../../share/compssUsers
-msgid "Tools to create and burn CD's"
-msgstr ""
+msgid "Python, Perl, libraries, tools"
+msgstr "Python, Perl, Bibliotheken und Werkzeuge"
 
-#, fuzzy
-msgid "Internet Tools"
-msgstr "Internet"
+# ../../share/compssUsers
+msgid "Scientific applications"
+msgstr "Wissenschftsprogramme"
 
+# ../../share/compssUsers
+msgid "Databases"
+msgstr "Datenbanken"
+
+# ../../share/compssUsers
 msgid "Internet"
 msgstr "Internet"
 
 # ../../share/compssUsers
-msgid "Personnal Finance"
-msgstr ""
+msgid "Multimedia - Graphics"
+msgstr "Multimedia / Grafik"
 
 # ../../share/compssUsers
-msgid "Gnome, Icewm, Window Maker, Enlightenment, Fvwm, etc"
-msgstr ""
+msgid "editors, shells, file tools, terminals"
+msgstr "Editoren, Shells, Dateiwerkzeuge, Konsolen"
 
 # ../../share/compssUsers
-msgid "Graphics programs such as The Gimp"
-msgstr ""
+msgid "Development applications"
+msgstr "Entwicklungswekzeuge"
 
+# ../../share/compssUsers
+msgid "Audio-related tools: mp3 or midi players, mixers, etc"
+msgstr "Audio Programme: MP3- und Midi-Abspieler, Mixer, usw."
+
+# ../../share/compssUsers
+msgid "Multimedia"
+msgstr "Multimedia"
+
+# ../../share/compssUsers
 msgid "Office"
 msgstr "Office"
 
 # ../../share/compssUsers
-msgid "Databases clients and servers (mysql and postgresql)"
-msgstr ""
-
-# ../../share/compssUsers
-msgid "Tools for your Palm Pilot or your Visor"
-msgstr ""
-
-#, fuzzy
-msgid "Multimedia - Graphics"
-msgstr "Multimedia"
-
-# ../../share/compssUsers
-msgid "Video players and editors"
-msgstr ""
-
-# ../../share/compssUsers
-msgid "Amusement programs: arcade, boards, strategy, etc"
-msgstr ""
-
-# ../../share/compssUsers
-msgid ""
-"Office programs: wordprocessors (kword, abiword), spreadsheets (kspread, "
-"gnumeric), pdf viewers, etc"
-msgstr ""
-
-# ../../share/compssUsers
-msgid ""
-"Set of tools to read and send mail and news (pine, mutt, tin..) and to "
-"browse the Web"
-msgstr ""
-
-# ../../share/compssUsers
-msgid "Audio-related tools: mp3 or midi players, mixers, etc"
-msgstr ""
+msgid "Sciences"
+msgstr "Wissenschaft"
 
 # ../../share/compssUsers
 msgid ""
@@ -6893,80 +7044,174 @@ msgid ""
 msgstr ""
 
 # ../../share/compssUsers
-msgid "Books and Howto's on Linux and Free Software"
+msgid ""
+"Set of tools to read and send mail and news (pine, mutt, tin..) and to "
+"browse the Web"
 msgstr ""
+"Programme zum E-Mail bzw. News lesen und senden (pine, mutt, tin, ...)sowie "
+"zum durchstöbern des WWW"
+
+# ../../share/compssUsers
+msgid "C and C++ development libraries, programs and include files"
+msgstr "C und C++ Entwicklung: Bibliotheken, Programme und Include-Dateien"
+
+# ../../share/compssUsers
+msgid "Communication facilities"
+msgstr "Kommunikationsprogramme"
+
+# ../../share/compssUsers
+msgid "KDE"
+msgstr "KDE"
+
+# ../../share/compssUsers
+msgid "Personnal Information Management"
+msgstr "Persönliches Informationsmanagement"
+
+# ../../share/compssUsers
+msgid "Programs to manage your finance, such as gnucash"
+msgstr "Finanzverwaltungsprogramme, etwa Gnucash"
+
+# ../../share/compssUsers
+msgid "Gnome"
+msgstr "GNOME"
+
+# ../../share/compssUsers
+msgid "Internet Tools"
+msgstr "Internet Werkzeuge"
+
+# ../../share/compssUsers
+msgid "Documentation"
+msgstr "Dokumentation"
 
 # ../../share/compssUsers
 msgid "Icewm, Window Maker, Enlightenment, Fvwm, etc"
-msgstr ""
+msgstr "Icewm, Window Maker, Enlightenment, Fvwm, usw."
+
+# ../../share/compssUsers
+msgid "Utilities"
+msgstr "Werkzeuge"
+
+# ../../share/compssUsers
+msgid "Multimedia - Sound"
+msgstr "Multimedia / Sound"
+
+# ../../share/compssUsers
+msgid "Amusement programs: arcade, boards, strategy, etc"
+msgstr "Spiele: Arcade-, Brett-, Strategiespiele, usw."
+
+# ../../share/compssUsers
+msgid "Video players and editors"
+msgstr "Videoabspieler und Editoren"
+
+# ../../share/compssUsers
+msgid "Console Tools"
+msgstr "Konsolen-Werkzeuge"
+
+# ../../share/compssUsers
+msgid "Development other"
+msgstr "Andere Entwicklungswerkzeuge"
+
+# ../../share/compssUsers
+msgid "Databases clients and servers (mysql and postgresql)"
+msgstr "Datenbank-Klienten und -Server (mysql, postgresql, usw.)"
+
+# ../../share/compssUsers
+msgid "Sound and video playing/editing programs"
+msgstr "Sound- und Video-Abspieler/Editoren"
+
+# ../../share/compssUsers
+msgid "Books and Howto's on Linux and Free Software"
+msgstr "Bücher und HOWTOs zu GNU/Linux und Freier Software"
 
 # ../../share/compssUsers
 msgid ""
 "A graphical environment with user-friendly set of applications and desktop "
 "tools"
 msgstr ""
+"Eine grafische Oberfläche mit anwenderfreundlichen Anwendungen und Werkzeugen"
 
 # ../../share/compssUsers
-msgid "Set of tools for mail, news, web, file transfer, and chat"
-msgstr ""
+msgid "Games"
+msgstr "Spiele"
 
-#, fuzzy
+# ../../share/compssUsers
+msgid "Development C/C++"
+msgstr "Entwicklung c/C++"
+
+# ../../share/compssUsers
 msgid "Multimedia - Video"
-msgstr "Multimedia"
-
-msgid "KDE"
-msgstr "KDE"
+msgstr "Multimedia / Video"
 
 # ../../share/compssUsers
-msgid "Sound and video playing/editing programs"
-msgstr ""
+msgid "Graphics programs such as The Gimp"
+msgstr "Bildverarbeitungsprogramme wie der GIMP"
 
-msgid "Multimedia"
-msgstr "Multimedia"
+# ../../share/compssUsers
+msgid ""
+"The K Desktop Environment, the basic graphical environment with a collection "
+"of accompanying tools"
+msgstr ""
+"Das K Desktop Environment, die Standard-Arbeitsoberfläche mit einer Sammlung "
+"zughöriger Programme"
+
+# ../../share/compssUsers
+msgid "Tools to create and burn CD's"
+msgstr "Werkzeuge zur Erstellung und zum Brennen von CDs"
+
+# ../../share/compssUsers
+msgid "More Graphical Desktops (Gnome, IceWM)"
+msgstr "Weitere Arbeitsoberflächen (GNOME, IceWM)"
+
+# ../../share/compssUsers
+msgid "Multimedia - CD Burning"
+msgstr "Multimedia / CD-Brenner"
+
+# ../../share/compssUsers
+msgid "Archiving, emulators, monitoring"
+msgstr "Archivierung, Emulation, Überwachung"
+
+# ../../share/compssUsers
+msgid ""
+"Office programs: wordprocessors (kword, abiword), spreadsheets (kspread, "
+"gnumeric), pdf viewers, etc"
+msgstr ""
+"Office-Programme: Textverarbeitung (KWord, Abiword), Tabellenkalkulation "
+"(KSpread, Gnumeric), PDF-Betrachter, usw."
 
 # ../../share/compssUsers
 msgid "Other Graphical Desktops"
-msgstr ""
-
-#, fuzzy
-msgid "Multimedia - Sound"
-msgstr "Multimedia"
-
-msgid "Gnome"
-msgstr "GNOME"
-
-msgid "Documentation"
-msgstr "Dokumentation"
+msgstr "Andere grafische Arbeitsoberflächen"
 
 # ../../share/compssUsers
-msgid "Programs to manage your finance, such as gnucash"
-msgstr ""
+msgid "Tools for your Palm Pilot or your Visor"
+msgstr "Werkzeuge für Ihren Palm Pilot oder Ihren Visor"
 
 # ../../share/compssUsers
-msgid "Graphics Manipulation"
-msgstr ""
-
-#, fuzzy
-msgid "Games"
-msgstr "GNOME"
-
-#, fuzzy
-msgid "Multimedia - CD Burning"
-msgstr "Multimedia"
+msgid "Gnome, Icewm, Window Maker, Enlightenment, Fvwm, etc"
+msgstr "GNOME, IceWM, Window Maker, Enlightenment, Fvwm, usw."
 
 # ../../share/compssUsers
-msgid "Communication facilities"
-msgstr ""
+msgid "Set of tools for mail, news, web, file transfer, and chat"
+msgstr "Programme für Mail, News, WWW, FTP und Chat"
 
-# ../../share/compssUsers
-msgid "Databases"
-msgstr ""
+#~ msgid "Could not install ipchains RPM with urpmi."
+#~ msgstr ""
+#~ "Ich konnte das RPM-Paket ,,ipchains`` nicht mittels urpmi installieren."
 
-#~ msgid "Choose the size you want to install"
-#~ msgstr "Wählen Sie die Menge die Sie installieren wollen"
+#~ msgid "Could not install dhcp RPM with urpmi."
+#~ msgstr "Ich konnte das RPM-Paket ,,dhcp`` nicht mittels urpmi installieren."
 
-#~ msgid "Total size: "
-#~ msgstr "Gesamtgröße: "
+#~ msgid "Could not install linuxconf RPM with urpmi."
+#~ msgstr ""
+#~ "Ich konnte das RPM-Paket ,,linuxconf`` nicht mittels urpmi installieren."
+
+#~ msgid "Could not install bind RPM with urpmi."
+#~ msgstr "Ich konnte das RPM-Paket ,,bind`` nicht mittels urpmi installieren."
+
+#~ msgid "Could not install caching-nameserver RPM with urpmi."
+#~ msgstr ""
+#~ "Ich konnte das RPM-Paket ,,caching-nameserver`` nicht mittels urpmi "
+#~ "installieren."
 
 #~ msgid "Reconfigure local network"
 #~ msgstr "Netzwerk jetzt neu konfigurieren"

@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX VERSION\n"
-"POT-Creation-Date: 2000-10-09 15:58+0200\n"
+"POT-Creation-Date: 2000-10-16 13:34+0200\n"
 "PO-Revision-Date: 2000-09-07 17:26+09:00\n"
 "Last-Translator: Dmytro Koval'ov <kov@tokyo.email.ne.jp>\n"
 "Language-Team: Ukrainian\n"
@@ -518,7 +518,7 @@ msgid "Delay before booting default image"
 msgstr "Пауза перед завантаженням основно╖ системи"
 
 #: ../../any.pm_.c:134 ../../install_steps_interactive.pm_.c:760
-#: ../../install_steps_interactive.pm_.c:811 ../../netconnect.pm_.c:548
+#: ../../install_steps_interactive.pm_.c:811 ../../netconnect.pm_.c:555
 #: ../../printerdrake.pm_.c:94 ../../printerdrake.pm_.c:128
 #: ../../standalone/adduserdrake_.c:42
 msgid "Password"
@@ -573,7 +573,7 @@ msgid "Add"
 msgstr "Додати"
 
 #: ../../any.pm_.c:165 ../../diskdrake.pm_.c:46
-#: ../../install_steps_interactive.pm_.c:805 ../../netconnect.pm_.c:830
+#: ../../install_steps_interactive.pm_.c:805 ../../netconnect.pm_.c:837
 #: ../../printerdrake.pm_.c:352 ../../standalone/adduserdrake_.c:36
 msgid "Done"
 msgstr "Зак╕нчено"
@@ -1347,7 +1347,9 @@ msgstr ""
 msgid "Choose the new size"
 msgstr "Вибер╕ть новий розм╕р"
 
-#: ../../diskdrake.pm_.c:609 ../../install_steps_interactive.pm_.c:518
+#: ../../diskdrake.pm_.c:609 ../../install_steps_graphical.pm_.c:287
+#: ../../install_steps_graphical.pm_.c:334
+#: ../../install_steps_interactive.pm_.c:518
 #: ../../partition_table_raw.pm_.c:101
 msgid "MB"
 msgstr "Мб"
@@ -2890,7 +2892,7 @@ msgstr "Авто установочна дискета"
 msgid "Exit install"
 msgstr "Вийти з установки"
 
-#: ../../install_any.pm_.c:584
+#: ../../install_any.pm_.c:575
 msgid "Error reading file $f"
 msgstr "Помилка при читанн╕ файла $f"
 
@@ -2926,11 +2928,11 @@ msgstr ""
 "╕снуючому). П╕сля цього вибер╕ть ``Точка монтування'' ╕ встанов╕ть ╖╖\n"
 "в `/'"
 
-#: ../../install_interactive.pm_.c:46
+#: ../../install_interactive.pm_.c:46 ../../install_steps_graphical.pm_.c:259
 msgid "You must have a swap partition"
 msgstr "Ви повинн╕ мати п╕дрозд╕л для своп "
 
-#: ../../install_interactive.pm_.c:47
+#: ../../install_interactive.pm_.c:47 ../../install_steps_graphical.pm_.c:261
 msgid ""
 "You don't have a swap partition\n"
 "\n"
@@ -3151,6 +3153,80 @@ msgstr "Нема╓ привода дискети"
 msgid "Entering step `%s'\n"
 msgstr "Почина╓ться крок `%s'\n"
 
+#: ../../install_steps_graphical.pm_.c:287
+msgid "Choose the size you want to install"
+msgstr "Вибер╕ть розм╕р, як╕ Ви хочете встановити"
+
+#: ../../install_steps_graphical.pm_.c:334
+msgid "Total size: "
+msgstr "Загальний розм╕р: "
+
+#: ../../install_steps_graphical.pm_.c:346 ../../install_steps_gtk.pm_.c:353
+#: ../../standalone/rpmdrake_.c:136
+#, c-format
+msgid "Version: %s\n"
+msgstr "Верс╕я: %s\n"
+
+#: ../../install_steps_graphical.pm_.c:347 ../../install_steps_gtk.pm_.c:354
+#: ../../standalone/rpmdrake_.c:137
+#, c-format
+msgid "Size: %d KB\n"
+msgstr "Розм╕р: %d КБ\n"
+
+#: ../../install_steps_graphical.pm_.c:462 ../../install_steps_gtk.pm_.c:260
+msgid "Choose the packages you want to install"
+msgstr "Вибер╕ть пакети, як╕ Ви хочете встановити"
+
+#: ../../install_steps_graphical.pm_.c:465 ../../install_steps_gtk.pm_.c:263
+msgid "Info"
+msgstr "╤нформац╕я"
+
+#: ../../install_steps_graphical.pm_.c:473 ../../install_steps_gtk.pm_.c:268
+#: ../../install_steps_interactive.pm_.c:216 ../../standalone/rpmdrake_.c:161
+msgid "Install"
+msgstr "Установка"
+
+#: ../../install_steps_graphical.pm_.c:492 ../../install_steps_gtk.pm_.c:466
+#: ../../install_steps_interactive.pm_.c:594
+msgid "Installing"
+msgstr "Встановлюю"
+
+#: ../../install_steps_graphical.pm_.c:499 ../../install_steps_gtk.pm_.c:472
+msgid "Please wait, "
+msgstr "Зачекайте, будь-ласка, "
+
+#: ../../install_steps_graphical.pm_.c:501 ../../install_steps_gtk.pm_.c:474
+msgid "Time remaining "
+msgstr "Залишок часу "
+
+#: ../../install_steps_graphical.pm_.c:502 ../../install_steps_gtk.pm_.c:475
+msgid "Total time "
+msgstr "Загальний час "
+
+#: ../../install_steps_graphical.pm_.c:507 ../../install_steps_gtk.pm_.c:484
+#: ../../install_steps_interactive.pm_.c:594
+msgid "Preparing installation"
+msgstr "П╕дготовка установки"
+
+#: ../../install_steps_graphical.pm_.c:528 ../../install_steps_gtk.pm_.c:500
+#, c-format
+msgid "Installing package %s"
+msgstr "Установка пакету %s"
+
+#: ../../install_steps_graphical.pm_.c:553 ../../install_steps_gtk.pm_.c:569
+#: ../../install_steps_gtk.pm_.c:573
+msgid "Go on anyway?"
+msgstr "Все-таки продовжувати?"
+
+#: ../../install_steps_graphical.pm_.c:553 ../../install_steps_gtk.pm_.c:569
+msgid "There was an error ordering packages:"
+msgstr "Сталася помилка п╕д час сортування пакет╕в: "
+
+#: ../../install_steps_graphical.pm_.c:577
+#: ../../install_steps_interactive.pm_.c:999
+msgid "Use existing configuration for X11?"
+msgstr "Використовувати вже ╕снуючу конф╕гурац╕ю для X?"
+
 #: ../../install_steps_gtk.pm_.c:136
 msgid ""
 "Your system is low on resource. You may have some problem installing\n"
@@ -3211,19 +3287,6 @@ msgstr "Б╕льш точно можна буде вибрати на наступному кроц╕"
 msgid "Percentage of packages to install"
 msgstr "Процентн╕ в╕дношення пакет╕в для установки"
 
-#: ../../install_steps_gtk.pm_.c:260
-msgid "Choose the packages you want to install"
-msgstr "Вибер╕ть пакети, як╕ Ви хочете встановити"
-
-#: ../../install_steps_gtk.pm_.c:263
-msgid "Info"
-msgstr "╤нформац╕я"
-
-#: ../../install_steps_gtk.pm_.c:268 ../../install_steps_interactive.pm_.c:216
-#: ../../standalone/rpmdrake_.c:161
-msgid "Install"
-msgstr "Установка"
-
 #: ../../install_steps_gtk.pm_.c:272
 msgid "Automatic dependencies"
 msgstr "Автоматичн╕ залежност╕"
@@ -3248,16 +3311,6 @@ msgstr "Пакети неробоч╕"
 #, c-format
 msgid "Name: %s\n"
 msgstr "Назва: %s\n"
-
-#: ../../install_steps_gtk.pm_.c:353 ../../standalone/rpmdrake_.c:136
-#, c-format
-msgid "Version: %s\n"
-msgstr "Верс╕я: %s\n"
-
-#: ../../install_steps_gtk.pm_.c:354 ../../standalone/rpmdrake_.c:137
-#, c-format
-msgid "Size: %d KB\n"
-msgstr "Розм╕р: %d КБ\n"
 
 #: ../../install_steps_gtk.pm_.c:355
 #, c-format
@@ -3308,25 +3361,9 @@ msgstr ""
 msgid "You can't unselect this package. It must be upgraded"
 msgstr "Виб╕р цього пакету неможливо в╕дм╕нити. В╕н повинен бути поновлений."
 
-#: ../../install_steps_gtk.pm_.c:466 ../../install_steps_interactive.pm_.c:594
-msgid "Installing"
-msgstr "Встановлюю"
-
 #: ../../install_steps_gtk.pm_.c:469
 msgid "Estimating"
 msgstr "Наближене обчислення"
-
-#: ../../install_steps_gtk.pm_.c:472
-msgid "Please wait, "
-msgstr "Зачекайте, будь-ласка, "
-
-#: ../../install_steps_gtk.pm_.c:474
-msgid "Time remaining "
-msgstr "Залишок часу "
-
-#: ../../install_steps_gtk.pm_.c:475
-msgid "Total time "
-msgstr "Загальний час "
 
 #: ../../install_steps_gtk.pm_.c:481 ../../interactive.pm_.c:86
 #: ../../interactive.pm_.c:249 ../../interactive_newt.pm_.c:51
@@ -3335,19 +3372,10 @@ msgstr "Загальний час "
 msgid "Cancel"
 msgstr "В╕дм╕нити"
 
-#: ../../install_steps_gtk.pm_.c:484 ../../install_steps_interactive.pm_.c:594
-msgid "Preparing installation"
-msgstr "П╕дготовка установки"
-
 #: ../../install_steps_gtk.pm_.c:495
 #, c-format
 msgid "%d packages"
 msgstr "%d пакети"
-
-#: ../../install_steps_gtk.pm_.c:500
-#, c-format
-msgid "Installing package %s"
-msgstr "Установка пакету %s"
 
 #: ../../install_steps_gtk.pm_.c:531
 msgid ""
@@ -3407,14 +3435,6 @@ msgstr ""
 #, fuzzy
 msgid "Refuse"
 msgstr "Зм╕нити розм╕р"
-
-#: ../../install_steps_gtk.pm_.c:569 ../../install_steps_gtk.pm_.c:573
-msgid "Go on anyway?"
-msgstr "Все-таки продовжувати?"
-
-#: ../../install_steps_gtk.pm_.c:569
-msgid "There was an error ordering packages:"
-msgstr "Сталася помилка п╕д час сортування пакет╕в: "
 
 #: ../../install_steps_gtk.pm_.c:573
 msgid "There was an error installing packages:"
@@ -4226,10 +4246,6 @@ msgstr ""
 "того, що багато як╕ клав╕ш╕ будуть друкувати цифри зам╕сть\n"
 "л╕тер. (так, наприклад, при натисканн╕ `p' Ви отрима╓те `6')"
 
-#: ../../install_steps_interactive.pm_.c:999
-msgid "Use existing configuration for X11?"
-msgstr "Використовувати вже ╕снуючу конф╕гурац╕ю для X?"
-
 #: ../../install_steps_interactive.pm_.c:1028
 msgid "Do you want to generate an auto install floppy for linux replication?"
 msgstr ""
@@ -4318,239 +4334,239 @@ msgstr "Ваш виб╕р? (рекомендований %s) "
 msgid "Your choice? (default %s  enter `none' for none) "
 msgstr "Ваш виб╕р? (рекомендований %s, введ╕ть `none' для н╕якого) "
 
-#: ../../keyboard.pm_.c:104 ../../keyboard.pm_.c:134
+#: ../../keyboard.pm_.c:105 ../../keyboard.pm_.c:135
 msgid "Czech"
 msgstr "Чеська"
 
-#: ../../keyboard.pm_.c:105 ../../keyboard.pm_.c:118 ../../keyboard.pm_.c:135
+#: ../../keyboard.pm_.c:106 ../../keyboard.pm_.c:119 ../../keyboard.pm_.c:136
 msgid "German"
 msgstr "Н╕мецька"
 
-#: ../../keyboard.pm_.c:106
+#: ../../keyboard.pm_.c:107
 msgid "Dvorak"
 msgstr "Дворака"
 
-#: ../../keyboard.pm_.c:107 ../../keyboard.pm_.c:141
+#: ../../keyboard.pm_.c:108 ../../keyboard.pm_.c:142
 msgid "Spanish"
 msgstr "╤спанська"
 
-#: ../../keyboard.pm_.c:108 ../../keyboard.pm_.c:142
+#: ../../keyboard.pm_.c:109 ../../keyboard.pm_.c:143
 msgid "Finnish"
 msgstr "Ф╕нська"
 
-#: ../../keyboard.pm_.c:109 ../../keyboard.pm_.c:119 ../../keyboard.pm_.c:143
+#: ../../keyboard.pm_.c:110 ../../keyboard.pm_.c:120 ../../keyboard.pm_.c:144
 msgid "French"
 msgstr "Французька"
 
-#: ../../keyboard.pm_.c:110 ../../keyboard.pm_.c:162
+#: ../../keyboard.pm_.c:111 ../../keyboard.pm_.c:164
 msgid "Norwegian"
 msgstr "Норвезька"
 
-#: ../../keyboard.pm_.c:111
+#: ../../keyboard.pm_.c:112
 msgid "Polish"
 msgstr "Польська"
 
-#: ../../keyboard.pm_.c:112 ../../keyboard.pm_.c:167
+#: ../../keyboard.pm_.c:113 ../../keyboard.pm_.c:169
 msgid "Russian"
 msgstr "Рос╕йська"
 
-#: ../../keyboard.pm_.c:113 ../../keyboard.pm_.c:176
+#: ../../keyboard.pm_.c:114 ../../keyboard.pm_.c:178
 msgid "UK keyboard"
 msgstr "Британська клав╕атура"
 
-#: ../../keyboard.pm_.c:114 ../../keyboard.pm_.c:117 ../../keyboard.pm_.c:177
+#: ../../keyboard.pm_.c:115 ../../keyboard.pm_.c:118 ../../keyboard.pm_.c:179
 msgid "US keyboard"
 msgstr "Клав╕атура США"
 
-#: ../../keyboard.pm_.c:121
+#: ../../keyboard.pm_.c:122
 msgid "Armenian (old)"
 msgstr "В╕рменська (стара)"
 
-#: ../../keyboard.pm_.c:122
+#: ../../keyboard.pm_.c:123
 msgid "Armenian (typewriter)"
 msgstr "В╕рменська (друкарська машинка)"
 
-#: ../../keyboard.pm_.c:123
+#: ../../keyboard.pm_.c:124
 msgid "Armenian (phonetic)"
 msgstr "В╕рменська (фонетична)"
 
-#: ../../keyboard.pm_.c:126
+#: ../../keyboard.pm_.c:127
 msgid "Azerbaidjani (latin)"
 msgstr "Азербайджанська (латина)"
 
-#: ../../keyboard.pm_.c:127
+#: ../../keyboard.pm_.c:128
 msgid "Azerbaidjani (cyrillic)"
 msgstr "Азербайджанська (кирилиця)"
 
-#: ../../keyboard.pm_.c:128
+#: ../../keyboard.pm_.c:129
 msgid "Belgian"
 msgstr "Бельг╕йська"
 
-#: ../../keyboard.pm_.c:129
+#: ../../keyboard.pm_.c:130
 msgid "Bulgarian"
 msgstr "Болгарська"
 
-#: ../../keyboard.pm_.c:130
+#: ../../keyboard.pm_.c:131
 msgid "Brazilian (ABNT-2)"
 msgstr "Браз╕л╕йська (ABNT-2)"
 
-#: ../../keyboard.pm_.c:131
+#: ../../keyboard.pm_.c:132
 msgid "Belarusian"
 msgstr "Б╕лоруська"
 
-#: ../../keyboard.pm_.c:132
+#: ../../keyboard.pm_.c:133
 msgid "Swiss (German layout)"
 msgstr "Швейцарська (н╕мецька розкладка)"
 
-#: ../../keyboard.pm_.c:133
+#: ../../keyboard.pm_.c:134
 msgid "Swiss (French layout)"
 msgstr "Швейцарська (французька розкладка)"
 
-#: ../../keyboard.pm_.c:136
+#: ../../keyboard.pm_.c:137
 msgid "German (no dead keys)"
 msgstr "Н╕мецька (без мертвих клав╕ш)"
 
-#: ../../keyboard.pm_.c:137
+#: ../../keyboard.pm_.c:138
 msgid "Danish"
 msgstr "Датська"
 
-#: ../../keyboard.pm_.c:138
+#: ../../keyboard.pm_.c:139
 msgid "Dvorak (US)"
 msgstr "Дворака (США)"
 
-#: ../../keyboard.pm_.c:139
+#: ../../keyboard.pm_.c:140
 msgid "Dvorak (Norwegian)"
 msgstr "Дворака (Норвезька)"
 
-#: ../../keyboard.pm_.c:140
+#: ../../keyboard.pm_.c:141
 msgid "Estonian"
 msgstr "Естонська"
 
-#: ../../keyboard.pm_.c:144
+#: ../../keyboard.pm_.c:145
 msgid "Georgian (\"Russian\" layout)"
 msgstr "Грузинська (рос╕йська розкладка)"
 
-#: ../../keyboard.pm_.c:145
+#: ../../keyboard.pm_.c:146
 msgid "Georgian (\"Latin\" layout)"
 msgstr "Грузинська (латинська розкладка)"
 
-#: ../../keyboard.pm_.c:146
+#: ../../keyboard.pm_.c:147
 msgid "Greek"
 msgstr "Грецька"
 
-#: ../../keyboard.pm_.c:147
+#: ../../keyboard.pm_.c:148
 msgid "Hungarian"
 msgstr "Угорська"
 
-#: ../../keyboard.pm_.c:148
+#: ../../keyboard.pm_.c:149
 msgid "Croatian"
 msgstr "Хорватська"
 
-#: ../../keyboard.pm_.c:149
+#: ../../keyboard.pm_.c:150
 msgid "Israeli"
 msgstr "╤зра╖льська"
 
-#: ../../keyboard.pm_.c:150
+#: ../../keyboard.pm_.c:151
 msgid "Israeli (Phonetic)"
 msgstr "╤зра╖льська (фонетична)"
 
-#: ../../keyboard.pm_.c:151
+#: ../../keyboard.pm_.c:152
 msgid "Iranian"
 msgstr "╤ранська"
 
-#: ../../keyboard.pm_.c:152
+#: ../../keyboard.pm_.c:153
 msgid "Icelandic"
 msgstr "╤сландська"
 
-#: ../../keyboard.pm_.c:153
+#: ../../keyboard.pm_.c:154
 msgid "Italian"
 msgstr "╤тал╕йська"
 
-#: ../../keyboard.pm_.c:154
+#: ../../keyboard.pm_.c:155
 msgid "Japanese 106 keys"
 msgstr "Японська 106 клав╕ш"
 
-#: ../../keyboard.pm_.c:155
+#: ../../keyboard.pm_.c:156
 msgid "Latin American"
 msgstr "Латино-американська"
 
-#: ../../keyboard.pm_.c:156
+#: ../../keyboard.pm_.c:158
 msgid "Dutch"
 msgstr "Датська"
 
-#: ../../keyboard.pm_.c:157
+#: ../../keyboard.pm_.c:159
 msgid "Lithuanian AZERTY (old)"
 msgstr "Литовська AZERTY (стара)"
 
-#: ../../keyboard.pm_.c:159
+#: ../../keyboard.pm_.c:161
 msgid "Lithuanian AZERTY (new)"
 msgstr "Литовська AZERTY (нова)"
 
-#: ../../keyboard.pm_.c:160
+#: ../../keyboard.pm_.c:162
 msgid "Lithuanian \"number row\" QWERTY"
 msgstr "Литовська \"цифровий ряд\" QWERTY"
 
-#: ../../keyboard.pm_.c:161
+#: ../../keyboard.pm_.c:163
 msgid "Lithuanian \"phonetic\" QWERTY"
 msgstr "Литовська \"фонетична\" QWERTY"
 
-#: ../../keyboard.pm_.c:163
+#: ../../keyboard.pm_.c:165
 msgid "Polish (qwerty layout)"
 msgstr "Польська (розкладка qwerty)"
 
-#: ../../keyboard.pm_.c:164
+#: ../../keyboard.pm_.c:166
 msgid "Polish (qwertz layout)"
 msgstr "Польська (розкладка qwertz)"
 
-#: ../../keyboard.pm_.c:165
+#: ../../keyboard.pm_.c:167
 msgid "Portuguese"
 msgstr "Португальська"
 
-#: ../../keyboard.pm_.c:166
+#: ../../keyboard.pm_.c:168
 msgid "Canadian (Quebec)"
 msgstr "Канадська (Квебек)"
 
-#: ../../keyboard.pm_.c:168
+#: ../../keyboard.pm_.c:170
 msgid "Russian (Yawerty)"
 msgstr "Рос╕йська (ЯВЕРТИ)"
 
-#: ../../keyboard.pm_.c:169
+#: ../../keyboard.pm_.c:171
 msgid "Swedish"
 msgstr "Шведська"
 
-#: ../../keyboard.pm_.c:170
+#: ../../keyboard.pm_.c:172
 msgid "Slovenian"
 msgstr "Словенська"
 
-#: ../../keyboard.pm_.c:171
+#: ../../keyboard.pm_.c:173
 msgid "Slovakian"
 msgstr "Словацька"
 
-#: ../../keyboard.pm_.c:172
+#: ../../keyboard.pm_.c:174
 msgid "Thai keyboard"
 msgstr "Тайська клав╕атура"
 
-#: ../../keyboard.pm_.c:173
+#: ../../keyboard.pm_.c:175
 msgid "Turkish (traditional \"F\" model)"
 msgstr "Турецька (традиц╕йна \"F\" модель)"
 
-#: ../../keyboard.pm_.c:174
+#: ../../keyboard.pm_.c:176
 msgid "Turkish (modern \"Q\" model)"
 msgstr "Турецька (традиц╕йна \"Q\" модель)"
 
-#: ../../keyboard.pm_.c:175
+#: ../../keyboard.pm_.c:177
 msgid "Ukrainian"
 msgstr "Укра╖нська"
 
-#: ../../keyboard.pm_.c:178
+#: ../../keyboard.pm_.c:180
 msgid "US keyboard (international)"
 msgstr "Клав╕атура США (м╕жнародна)"
 
-#: ../../keyboard.pm_.c:179
+#: ../../keyboard.pm_.c:181
 msgid "Vietnamese \"numeric row\" QWERTY"
 msgstr "В'╓тнамська \"цифровий ряд\" QWERTY"
 
-#: ../../keyboard.pm_.c:180
+#: ../../keyboard.pm_.c:182
 msgid "Yugoslavian (latin layout)"
 msgstr "Югославська (латинська розкладка)"
 
@@ -4866,8 +4882,8 @@ msgid ""
 "Please choose which network adapter you want to use to connect to Internet"
 msgstr "Вибер╕ть до якого посл╕довного порту при╓днано мишу?"
 
-#: ../../netconnect.pm_.c:351 ../../netconnect.pm_.c:623
-#: ../../netconnect.pm_.c:754 ../../standalone/drakgw_.c:217
+#: ../../netconnect.pm_.c:351 ../../netconnect.pm_.c:630
+#: ../../netconnect.pm_.c:761 ../../standalone/drakgw_.c:217
 msgid "Network interface"
 msgstr "╤нтерфейс мереж╕"
 
@@ -4890,248 +4906,248 @@ msgstr "Конф╕╜урац╕я ADSL"
 msgid "Do you want to start your connection at boot?"
 msgstr "Чи Ви хочете в╕дкривати з'╓днання при завантаженн╕ системи?"
 
-#: ../../netconnect.pm_.c:529
+#: ../../netconnect.pm_.c:536
 msgid "Try to find a modem?"
 msgstr "Спробувати в╕дшукати модем?"
 
-#: ../../netconnect.pm_.c:539
+#: ../../netconnect.pm_.c:546
 msgid "Please choose which serial port your modem is connected to."
 msgstr "Вибер╕ть до якого посл╕довного порта п╕дключений Ваш модем?"
 
-#: ../../netconnect.pm_.c:544
+#: ../../netconnect.pm_.c:551
 msgid "Dialup options"
 msgstr "Параметри зв'язку по модему"
 
-#: ../../netconnect.pm_.c:545
+#: ../../netconnect.pm_.c:552
 msgid "Connection name"
 msgstr "Назва зв'язку"
 
-#: ../../netconnect.pm_.c:546
+#: ../../netconnect.pm_.c:553
 msgid "Phone number"
 msgstr "Номер телефону"
 
-#: ../../netconnect.pm_.c:547
+#: ../../netconnect.pm_.c:554
 msgid "Login ID"
 msgstr "ID користувача"
 
-#: ../../netconnect.pm_.c:549
+#: ../../netconnect.pm_.c:556
 msgid "Authentication"
 msgstr "Автентикац╕я"
 
-#: ../../netconnect.pm_.c:549
+#: ../../netconnect.pm_.c:556
 msgid "PAP"
 msgstr "PAP"
 
-#: ../../netconnect.pm_.c:549
+#: ../../netconnect.pm_.c:556
 msgid "Script-based"
 msgstr "За допомогою скрипта"
 
-#: ../../netconnect.pm_.c:549
+#: ../../netconnect.pm_.c:556
 msgid "Terminal-based"
 msgstr "Через терм╕нал"
 
-#: ../../netconnect.pm_.c:550
+#: ../../netconnect.pm_.c:557
 msgid "Domain name"
 msgstr "Назва домену"
 
-#: ../../netconnect.pm_.c:552
+#: ../../netconnect.pm_.c:559
 msgid "First DNS Server"
 msgstr "Перший сервер DNS"
 
-#: ../../netconnect.pm_.c:553
+#: ../../netconnect.pm_.c:560
 msgid "Second DNS Server"
 msgstr "Другий сервер DNS"
 
-#: ../../netconnect.pm_.c:582
+#: ../../netconnect.pm_.c:589
 #, fuzzy
 msgid ""
 "\n"
 "You can connect to Internet or reconfigure your connection."
 msgstr "З'╓днатися з ╕нтернетом"
 
-#: ../../netconnect.pm_.c:582 ../../netconnect.pm_.c:586
+#: ../../netconnect.pm_.c:589 ../../netconnect.pm_.c:593
 #, fuzzy
 msgid ""
 "\n"
 "You can reconfigure your connection."
 msgstr "Настро╖ти з'╓днання з ╕нтернетом"
 
-#: ../../netconnect.pm_.c:582
+#: ../../netconnect.pm_.c:589
 #, fuzzy
 msgid "You are not currently connected to Internet."
 msgstr "Не  встановлювати з'╓днання з ╕нтернетом"
 
-#: ../../netconnect.pm_.c:586
+#: ../../netconnect.pm_.c:593
 msgid ""
 "\n"
 "You can disconnect or reconfigure your connection."
 msgstr ""
 
-#: ../../netconnect.pm_.c:586
+#: ../../netconnect.pm_.c:593
 #, fuzzy
 msgid "You are currently connected to internet."
 msgstr "Не  встановлювати з'╓днання з ╕нтернетом"
 
-#: ../../netconnect.pm_.c:590
+#: ../../netconnect.pm_.c:597
 #, fuzzy
 msgid "Connect to Internet"
 msgstr "Зв'язатися з ╕нтернетом"
 
-#: ../../netconnect.pm_.c:592
+#: ../../netconnect.pm_.c:599
 #, fuzzy
 msgid "Disconnect from Internet"
 msgstr "В╕д'╓днатися в╕д ╕нтернету"
 
-#: ../../netconnect.pm_.c:594
+#: ../../netconnect.pm_.c:601
 #, fuzzy
 msgid "Configure network connection (LAN or Internet)"
 msgstr "Настро╖ти з'╓днання з ╕нтернетом"
 
-#: ../../netconnect.pm_.c:597
+#: ../../netconnect.pm_.c:604
 msgid "Internet connection & configuration"
 msgstr "З'╓днання з ╕нтернетом ╕ конф╕гурац╕я"
 
-#: ../../netconnect.pm_.c:624 ../../netconnect.pm_.c:755
+#: ../../netconnect.pm_.c:631 ../../netconnect.pm_.c:762
 msgid ""
 "I'm about to restart the network device $netc->{NET_DEVICE}. Do you agree?"
 msgstr ""
 
-#: ../../netconnect.pm_.c:641
+#: ../../netconnect.pm_.c:648
 #, fuzzy
 msgid "Configure a normal modem connection"
 msgstr "Настро╖ти з'╓днання з ╕нтернетом"
 
-#: ../../netconnect.pm_.c:661
+#: ../../netconnect.pm_.c:668
 #, fuzzy
 msgid "Configure an ISDN connection"
 msgstr "Настро╖ти з'╓днання з ╕нтернетом"
 
-#: ../../netconnect.pm_.c:666
+#: ../../netconnect.pm_.c:673
 msgid "Internal ISDN card"
 msgstr "Внутр╕шня плата ISDN"
 
-#: ../../netconnect.pm_.c:668
+#: ../../netconnect.pm_.c:675
 #, fuzzy
 msgid "External ISDN modem"
 msgstr "Зовн╕шн╕й модем"
 
-#: ../../netconnect.pm_.c:671 ../../netconnect.pm_.c:705
-#: ../../netconnect.pm_.c:717 ../../netconnect.pm_.c:741
-#: ../../netconnect.pm_.c:786
+#: ../../netconnect.pm_.c:678 ../../netconnect.pm_.c:712
+#: ../../netconnect.pm_.c:724 ../../netconnect.pm_.c:748
+#: ../../netconnect.pm_.c:793
 msgid "Connect to the Internet"
 msgstr "З'╓днатися з ╕нтернетом"
 
-#: ../../netconnect.pm_.c:672
+#: ../../netconnect.pm_.c:679
 msgid "What kind is your ISDN connection?"
 msgstr "Який тип з'╓днання ISDN Ви ма╓те?"
 
-#: ../../netconnect.pm_.c:691
+#: ../../netconnect.pm_.c:698
 #, fuzzy
 msgid "Configure a DSL (or ADSL) connection"
 msgstr "Настро╖ти з'╓днання з ╕нтернетом"
 
-#: ../../netconnect.pm_.c:700
+#: ../../netconnect.pm_.c:707
 msgid "France"
 msgstr "Франц╕я"
 
-#: ../../netconnect.pm_.c:702
+#: ../../netconnect.pm_.c:709
 msgid "Other countries"
 msgstr "╤нш╕ кра╖ни"
 
-#: ../../netconnect.pm_.c:706
+#: ../../netconnect.pm_.c:713
 #, fuzzy
 msgid "In which country are you located ?"
 msgstr "В як╕й кра╖н╕ Ви знаходитесь?"
 
-#: ../../netconnect.pm_.c:712
+#: ../../netconnect.pm_.c:719
 #, fuzzy
 msgid "Alcatel modem"
 msgstr "Зовн╕шн╕й модем"
 
-#: ../../netconnect.pm_.c:714
+#: ../../netconnect.pm_.c:721
 #, fuzzy
 msgid "ECI modem"
 msgstr "Зовн╕шн╕й модем"
 
-#: ../../netconnect.pm_.c:718
+#: ../../netconnect.pm_.c:725
 #, fuzzy
 msgid "If your adsl modem is an Alcatel one, choose Alcatel. Otherwise, ECI."
 msgstr ""
 "Якщо Ваш модем adls типу alctel, вибер╕ть pptp alcatel. Якщо н╕ - pppoe."
 
-#: ../../netconnect.pm_.c:736
+#: ../../netconnect.pm_.c:743
 msgid "use pppoe"
 msgstr ""
 
-#: ../../netconnect.pm_.c:738
+#: ../../netconnect.pm_.c:745
 msgid "don't use pppoe"
 msgstr ""
 
-#: ../../netconnect.pm_.c:742
+#: ../../netconnect.pm_.c:749
 msgid ""
 "The most common way to connect with adsl is dhcp + pppoe.\n"
 "However, some connections only use dhcp.\n"
 "If you don't know, choose 'use pppoe'"
 msgstr ""
 
-#: ../../netconnect.pm_.c:765
+#: ../../netconnect.pm_.c:772
 #, fuzzy
 msgid "Configure a cable connection"
 msgstr "Настро╖ти з'╓днання з ╕нтернетом"
 
-#: ../../netconnect.pm_.c:787
+#: ../../netconnect.pm_.c:794
 #, fuzzy
 msgid ""
 "Which dhcp client do you want to use?\n"
 "Default is dhcpd"
 msgstr "Який протокол Ви хочете використовувати?"
 
-#: ../../netconnect.pm_.c:800
+#: ../../netconnect.pm_.c:807
 #, fuzzy
 msgid "Disable Internet Connection"
 msgstr "Настро╖ти з'╓днання з ╕нтернетом"
 
-#: ../../netconnect.pm_.c:811
+#: ../../netconnect.pm_.c:818
 #, fuzzy
 msgid "Configure local network"
 msgstr "Настро╖ти мережу"
 
-#: ../../netconnect.pm_.c:815
+#: ../../netconnect.pm_.c:822
 #, fuzzy
 msgid "Network configuration"
 msgstr "Конф╕гурац╕я мереж╕"
 
-#: ../../netconnect.pm_.c:816
+#: ../../netconnect.pm_.c:823
 #, fuzzy
 msgid "Do you want to restart the network"
 msgstr "Чи Ви хочете випробувати нову конф╕╜урац╕ю?"
 
-#: ../../netconnect.pm_.c:824
+#: ../../netconnect.pm_.c:831
 #, fuzzy
 msgid "Disable networking"
 msgstr "Настро╖ти мережу"
 
-#: ../../netconnect.pm_.c:834
+#: ../../netconnect.pm_.c:841
 #, fuzzy
 msgid "Configure the Internet connection / Configure local Network"
 msgstr "З'╓днатися з ╕нтернетом"
 
-#: ../../netconnect.pm_.c:835
+#: ../../netconnect.pm_.c:842
 #, fuzzy
 msgid ""
 "Local networking has already been configured.\n"
 "Do you want to:"
 msgstr "Локальна мережа вже встановлена. Чи Ви хочете:"
 
-#: ../../netconnect.pm_.c:836
+#: ../../netconnect.pm_.c:843
 msgid "How do you want to connect to the Internet?"
 msgstr "Як Ви хочете з'╓днатися з ╕нтернетом?"
 
-#: ../../netconnect.pm_.c:858
+#: ../../netconnect.pm_.c:865
 msgid "Network Configuration"
 msgstr "Конф╕гурац╕я мереж╕"
 
-#: ../../netconnect.pm_.c:859
+#: ../../netconnect.pm_.c:866
 msgid ""
 "Now that your Internet connection is configured,\n"
 "your computer can be configured to share its Internet connection.\n"
@@ -6139,31 +6155,15 @@ msgstr "Конф╕╜урац╕я скрипт╕в, установка програм, стартування сервер╕в..."
 msgid "Configuring..."
 msgstr "Конф╕гурац╕я IDE"
 
-#: ../../standalone/drakgw_.c:306
-msgid "Could not install ipchains RPM with urpmi."
-msgstr "Не можу встановити RPM для ipchains за допомогою urpmi."
+#: ../../standalone/drakgw_.c:313
+msgid "Problems installing package $bin2rpm{$_}"
+msgstr ""
 
-#: ../../standalone/drakgw_.c:456
-msgid "Could not install dhcp RPM with urpmi."
-msgstr "Не можу встановити RPM для dhcp за допомогою urpmi."
-
-#: ../../standalone/drakgw_.c:480
-msgid "Could not install linuxconf RPM with urpmi."
-msgstr "Не можу встановити RPM для linuxconf за допомогою urpmi."
-
-#: ../../standalone/drakgw_.c:496
-msgid "Could not install bind RPM with urpmi."
-msgstr "Не можу встановити RPM для bind за допомогою urpmi."
-
-#: ../../standalone/drakgw_.c:500
-msgid "Could not install caching-nameserver RPM with urpmi."
-msgstr "Не можу встановити RPM для cahing-nameserver за допомогою urpmi."
-
-#: ../../standalone/drakgw_.c:512
+#: ../../standalone/drakgw_.c:504
 msgid "Congratulations!"
 msgstr "В╕тання!"
 
-#: ../../standalone/drakgw_.c:513
+#: ../../standalone/drakgw_.c:505
 msgid ""
 "Everything has been configured.\n"
 "You may now share Internet connection with other computers on your Local "
@@ -6235,6 +6235,14 @@ msgstr "Встановлення р╕вня безпеки"
 #: ../../standalone/drakxconf_.c:21
 msgid "Choose the tool you want to use"
 msgstr "Вибер╕ть засоби, якими Ви хочете користуватися"
+
+#: ../../standalone/keyboarddrake_.c:14
+msgid "usage: keyboarddrake [--expert]\n"
+msgstr ""
+
+#: ../../standalone/keyboarddrake_.c:27
+msgid "Do you want the BackSpace to return Delete in console?"
+msgstr ""
 
 #: ../../standalone/livedrake_.c:23
 #, fuzzy
@@ -6481,80 +6489,57 @@ msgid "Finding leaves takes some time"
 msgstr "Знаходження стертих може зайняти деякий час"
 
 # ../../share/compssUsers
-msgid "More Graphical Desktops (Gnome, IceWM)"
+msgid "Graphics Manipulation"
 msgstr ""
 
 # ../../share/compssUsers
-msgid ""
-"The K Desktop Environment, the basic graphical environment with a collection "
-"of accompanying tools"
+msgid "KDE, QT, Gnome, GTK+"
 msgstr ""
-
-# ../../share/compssUsers
-msgid "Personnal Information Management"
-msgstr ""
-
-# ../../share/compssUsers
-msgid "Tools to create and burn CD's"
-msgstr ""
-
-#, fuzzy
-msgid "Internet Tools"
-msgstr "╤нтернет"
-
-msgid "Internet"
-msgstr "╤нтернет"
 
 # ../../share/compssUsers
 msgid "Personnal Finance"
 msgstr ""
 
 # ../../share/compssUsers
-msgid "Gnome, Icewm, Window Maker, Enlightenment, Fvwm, etc"
+msgid "Python, Perl, libraries, tools"
 msgstr ""
 
 # ../../share/compssUsers
-msgid "Graphics programs such as The Gimp"
-msgstr ""
-
-#, fuzzy
-msgid "Office"
-msgstr "гарно"
-
-# ../../share/compssUsers
-msgid "Databases clients and servers (mysql and postgresql)"
+msgid "Scientific applications"
 msgstr ""
 
 # ../../share/compssUsers
-msgid "Tools for your Palm Pilot or your Visor"
+msgid "Databases"
 msgstr ""
+
+msgid "Internet"
+msgstr "╤нтернет"
 
 #, fuzzy
 msgid "Multimedia - Graphics"
 msgstr "Мультимед╕а"
 
 # ../../share/compssUsers
-msgid "Video players and editors"
+msgid "editors, shells, file tools, terminals"
 msgstr ""
 
-# ../../share/compssUsers
-msgid "Amusement programs: arcade, boards, strategy, etc"
-msgstr ""
-
-# ../../share/compssUsers
-msgid ""
-"Office programs: wordprocessors (kword, abiword), spreadsheets (kspread, "
-"gnumeric), pdf viewers, etc"
-msgstr ""
-
-# ../../share/compssUsers
-msgid ""
-"Set of tools to read and send mail and news (pine, mutt, tin..) and to "
-"browse the Web"
-msgstr ""
+#, fuzzy
+msgid "Development applications"
+msgstr "Розробник"
 
 # ../../share/compssUsers
 msgid "Audio-related tools: mp3 or midi players, mixers, etc"
+msgstr ""
+
+msgid "Multimedia"
+msgstr "Мультимед╕а"
+
+#, fuzzy
+msgid "Office"
+msgstr "гарно"
+
+# ../../share/compssUsers
+msgid "Sciences"
 msgstr ""
 
 # ../../share/compssUsers
@@ -6564,11 +6549,81 @@ msgid ""
 msgstr ""
 
 # ../../share/compssUsers
-msgid "Books and Howto's on Linux and Free Software"
+msgid ""
+"Set of tools to read and send mail and news (pine, mutt, tin..) and to "
+"browse the Web"
 msgstr ""
 
 # ../../share/compssUsers
+msgid "C and C++ development libraries, programs and include files"
+msgstr ""
+
+# ../../share/compssUsers
+msgid "Communication facilities"
+msgstr ""
+
+#, fuzzy
+msgid "KDE"
+msgstr "IDE"
+
+# ../../share/compssUsers
+msgid "Personnal Information Management"
+msgstr ""
+
+# ../../share/compssUsers
+msgid "Programs to manage your finance, such as gnucash"
+msgstr ""
+
+#, fuzzy
+msgid "Gnome"
+msgstr "н╕чого"
+
+#, fuzzy
+msgid "Internet Tools"
+msgstr "╤нтернет"
+
+#, fuzzy
+msgid "Documentation"
+msgstr "Автентикац╕я"
+
+# ../../share/compssUsers
 msgid "Icewm, Window Maker, Enlightenment, Fvwm, etc"
+msgstr ""
+
+# ../../share/compssUsers
+msgid "Utilities"
+msgstr ""
+
+#, fuzzy
+msgid "Multimedia - Sound"
+msgstr "Мультимед╕а"
+
+# ../../share/compssUsers
+msgid "Amusement programs: arcade, boards, strategy, etc"
+msgstr ""
+
+# ../../share/compssUsers
+msgid "Video players and editors"
+msgstr ""
+
+# ../../share/compssUsers
+msgid "Console Tools"
+msgstr ""
+
+#, fuzzy
+msgid "Development other"
+msgstr "Розробник"
+
+# ../../share/compssUsers
+msgid "Databases clients and servers (mysql and postgresql)"
+msgstr ""
+
+# ../../share/compssUsers
+msgid "Sound and video playing/editing programs"
+msgstr ""
+
+# ../../share/compssUsers
+msgid "Books and Howto's on Linux and Free Software"
 msgstr ""
 
 # ../../share/compssUsers
@@ -6578,50 +6633,33 @@ msgid ""
 msgstr ""
 
 # ../../share/compssUsers
-msgid "Set of tools for mail, news, web, file transfer, and chat"
+msgid "Games"
 msgstr ""
+
+#, fuzzy
+msgid "Development C/C++"
+msgstr "Розробник"
 
 #, fuzzy
 msgid "Multimedia - Video"
 msgstr "Мультимед╕а"
 
-#, fuzzy
-msgid "KDE"
-msgstr "IDE"
-
 # ../../share/compssUsers
-msgid "Sound and video playing/editing programs"
-msgstr ""
-
-msgid "Multimedia"
-msgstr "Мультимед╕а"
-
-# ../../share/compssUsers
-msgid "Other Graphical Desktops"
-msgstr ""
-
-#, fuzzy
-msgid "Multimedia - Sound"
-msgstr "Мультимед╕а"
-
-#, fuzzy
-msgid "Gnome"
-msgstr "н╕чого"
-
-#, fuzzy
-msgid "Documentation"
-msgstr "Автентикац╕я"
-
-# ../../share/compssUsers
-msgid "Programs to manage your finance, such as gnucash"
+msgid "Graphics programs such as The Gimp"
 msgstr ""
 
 # ../../share/compssUsers
-msgid "Graphics Manipulation"
+msgid ""
+"The K Desktop Environment, the basic graphical environment with a collection "
+"of accompanying tools"
 msgstr ""
 
 # ../../share/compssUsers
-msgid "Games"
+msgid "Tools to create and burn CD's"
+msgstr ""
+
+# ../../share/compssUsers
+msgid "More Graphical Desktops (Gnome, IceWM)"
 msgstr ""
 
 #, fuzzy
@@ -6629,18 +6667,45 @@ msgid "Multimedia - CD Burning"
 msgstr "Мультимед╕а"
 
 # ../../share/compssUsers
-msgid "Communication facilities"
+msgid "Archiving, emulators, monitoring"
 msgstr ""
 
 # ../../share/compssUsers
-msgid "Databases"
+msgid ""
+"Office programs: wordprocessors (kword, abiword), spreadsheets (kspread, "
+"gnumeric), pdf viewers, etc"
 msgstr ""
 
-#~ msgid "Choose the size you want to install"
-#~ msgstr "Вибер╕ть розм╕р, як╕ Ви хочете встановити"
+# ../../share/compssUsers
+msgid "Other Graphical Desktops"
+msgstr ""
 
-#~ msgid "Total size: "
-#~ msgstr "Загальний розм╕р: "
+# ../../share/compssUsers
+msgid "Tools for your Palm Pilot or your Visor"
+msgstr ""
+
+# ../../share/compssUsers
+msgid "Gnome, Icewm, Window Maker, Enlightenment, Fvwm, etc"
+msgstr ""
+
+# ../../share/compssUsers
+msgid "Set of tools for mail, news, web, file transfer, and chat"
+msgstr ""
+
+#~ msgid "Could not install ipchains RPM with urpmi."
+#~ msgstr "Не можу встановити RPM для ipchains за допомогою urpmi."
+
+#~ msgid "Could not install dhcp RPM with urpmi."
+#~ msgstr "Не можу встановити RPM для dhcp за допомогою urpmi."
+
+#~ msgid "Could not install linuxconf RPM with urpmi."
+#~ msgstr "Не можу встановити RPM для linuxconf за допомогою urpmi."
+
+#~ msgid "Could not install bind RPM with urpmi."
+#~ msgstr "Не можу встановити RPM для bind за допомогою urpmi."
+
+#~ msgid "Could not install caching-nameserver RPM with urpmi."
+#~ msgstr "Не можу встановити RPM для cahing-nameserver за допомогою urpmi."
 
 #, fuzzy
 #~ msgid "Reconfigure local network"

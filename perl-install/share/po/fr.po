@@ -30,7 +30,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX for MDK 7.0\n"
-"POT-Creation-Date: 2000-10-09 15:58+0200\n"
+"POT-Creation-Date: 2000-10-16 13:34+0200\n"
 "PO-Revision-Date: 2000-09-28 12:34+0200\n"
 "Last-Translator: David BAUDENS <baudens@mandrakesoft.com>\n"
 "Language-Team: french\n"
@@ -556,7 +556,7 @@ msgid "Delay before booting default image"
 msgstr "Délai avant l'activation du choix par défaut"
 
 #: ../../any.pm_.c:134 ../../install_steps_interactive.pm_.c:760
-#: ../../install_steps_interactive.pm_.c:811 ../../netconnect.pm_.c:548
+#: ../../install_steps_interactive.pm_.c:811 ../../netconnect.pm_.c:555
 #: ../../printerdrake.pm_.c:94 ../../printerdrake.pm_.c:128
 #: ../../standalone/adduserdrake_.c:42
 msgid "Password"
@@ -613,7 +613,7 @@ msgid "Add"
 msgstr "Ajouter"
 
 #: ../../any.pm_.c:165 ../../diskdrake.pm_.c:46
-#: ../../install_steps_interactive.pm_.c:805 ../../netconnect.pm_.c:830
+#: ../../install_steps_interactive.pm_.c:805 ../../netconnect.pm_.c:837
 #: ../../printerdrake.pm_.c:352 ../../standalone/adduserdrake_.c:36
 msgid "Done"
 msgstr "Terminer"
@@ -1387,7 +1387,9 @@ msgstr ""
 msgid "Choose the new size"
 msgstr "Choisissez la nouvelle taille"
 
-#: ../../diskdrake.pm_.c:609 ../../install_steps_interactive.pm_.c:518
+#: ../../diskdrake.pm_.c:609 ../../install_steps_graphical.pm_.c:287
+#: ../../install_steps_graphical.pm_.c:334
+#: ../../install_steps_interactive.pm_.c:518
 #: ../../partition_table_raw.pm_.c:101
 msgid "MB"
 msgstr "Mo"
@@ -3509,7 +3511,7 @@ msgstr "Disquette auto-installation"
 msgid "Exit install"
 msgstr "Fin de l'installation"
 
-#: ../../install_any.pm_.c:584
+#: ../../install_any.pm_.c:575
 msgid "Error reading file $f"
 msgstr "Erreur lors de la lecture du fichier $f"
 
@@ -3546,11 +3548,11 @@ msgstr ""
 "existante) puis, dans la rubrique « Choisissez une action », cliquez\n"
 "sur « Point de montage » et choisissez « / »."
 
-#: ../../install_interactive.pm_.c:46
+#: ../../install_interactive.pm_.c:46 ../../install_steps_graphical.pm_.c:259
 msgid "You must have a swap partition"
 msgstr "Vous devez créer une partition de swap"
 
-#: ../../install_interactive.pm_.c:47
+#: ../../install_interactive.pm_.c:47 ../../install_steps_graphical.pm_.c:261
 msgid ""
 "You don't have a swap partition\n"
 "\n"
@@ -3782,6 +3784,80 @@ msgstr "Aucun lecteur de disquettes disponible"
 msgid "Entering step `%s'\n"
 msgstr "Démarrage de l'étape `%s'\n"
 
+#: ../../install_steps_graphical.pm_.c:287
+msgid "Choose the size you want to install"
+msgstr "Choisissez l'espace que vous voulez utiliser"
+
+#: ../../install_steps_graphical.pm_.c:334
+msgid "Total size: "
+msgstr "Taille totale : "
+
+#: ../../install_steps_graphical.pm_.c:346 ../../install_steps_gtk.pm_.c:353
+#: ../../standalone/rpmdrake_.c:136
+#, c-format
+msgid "Version: %s\n"
+msgstr "Version : %s\n"
+
+#: ../../install_steps_graphical.pm_.c:347 ../../install_steps_gtk.pm_.c:354
+#: ../../standalone/rpmdrake_.c:137
+#, c-format
+msgid "Size: %d KB\n"
+msgstr "Taille : %d Ko\n"
+
+#: ../../install_steps_graphical.pm_.c:462 ../../install_steps_gtk.pm_.c:260
+msgid "Choose the packages you want to install"
+msgstr "Choisissez les paquetages que vous souhaitez installer"
+
+#: ../../install_steps_graphical.pm_.c:465 ../../install_steps_gtk.pm_.c:263
+msgid "Info"
+msgstr "Information"
+
+#: ../../install_steps_graphical.pm_.c:473 ../../install_steps_gtk.pm_.c:268
+#: ../../install_steps_interactive.pm_.c:216 ../../standalone/rpmdrake_.c:161
+msgid "Install"
+msgstr "Installation"
+
+#: ../../install_steps_graphical.pm_.c:492 ../../install_steps_gtk.pm_.c:466
+#: ../../install_steps_interactive.pm_.c:594
+msgid "Installing"
+msgstr "Installation"
+
+#: ../../install_steps_graphical.pm_.c:499 ../../install_steps_gtk.pm_.c:472
+msgid "Please wait, "
+msgstr "Veuillez patienter, "
+
+#: ../../install_steps_graphical.pm_.c:501 ../../install_steps_gtk.pm_.c:474
+msgid "Time remaining "
+msgstr "Temps restant "
+
+#: ../../install_steps_graphical.pm_.c:502 ../../install_steps_gtk.pm_.c:475
+msgid "Total time "
+msgstr "Temps total "
+
+#: ../../install_steps_graphical.pm_.c:507 ../../install_steps_gtk.pm_.c:484
+#: ../../install_steps_interactive.pm_.c:594
+msgid "Preparing installation"
+msgstr "Préparation de l'installation"
+
+#: ../../install_steps_graphical.pm_.c:528 ../../install_steps_gtk.pm_.c:500
+#, c-format
+msgid "Installing package %s"
+msgstr "Installation du paquetage %s"
+
+#: ../../install_steps_graphical.pm_.c:553 ../../install_steps_gtk.pm_.c:569
+#: ../../install_steps_gtk.pm_.c:573
+msgid "Go on anyway?"
+msgstr "Souhaitez-vous tout de même continuer ?"
+
+#: ../../install_steps_graphical.pm_.c:553 ../../install_steps_gtk.pm_.c:569
+msgid "There was an error ordering packages:"
+msgstr "Une erreur est survenue lors du tri des paquetages :"
+
+#: ../../install_steps_graphical.pm_.c:577
+#: ../../install_steps_interactive.pm_.c:999
+msgid "Use existing configuration for X11?"
+msgstr "Utiliser la configuration de X existante ?"
+
 #: ../../install_steps_gtk.pm_.c:136
 msgid ""
 "Your system is low on resource. You may have some problem installing\n"
@@ -3851,19 +3927,6 @@ msgstr ""
 msgid "Percentage of packages to install"
 msgstr "Pourcentage des paquetages à installer"
 
-#: ../../install_steps_gtk.pm_.c:260
-msgid "Choose the packages you want to install"
-msgstr "Choisissez les paquetages que vous souhaitez installer"
-
-#: ../../install_steps_gtk.pm_.c:263
-msgid "Info"
-msgstr "Information"
-
-#: ../../install_steps_gtk.pm_.c:268 ../../install_steps_interactive.pm_.c:216
-#: ../../standalone/rpmdrake_.c:161
-msgid "Install"
-msgstr "Installation"
-
 #: ../../install_steps_gtk.pm_.c:272
 msgid "Automatic dependencies"
 msgstr "Gestion automatique des dépendances"
@@ -3888,16 +3951,6 @@ msgstr "Mauvais paquetage"
 #, c-format
 msgid "Name: %s\n"
 msgstr "Nom : %s\n"
-
-#: ../../install_steps_gtk.pm_.c:353 ../../standalone/rpmdrake_.c:136
-#, c-format
-msgid "Version: %s\n"
-msgstr "Version : %s\n"
-
-#: ../../install_steps_gtk.pm_.c:354 ../../standalone/rpmdrake_.c:137
-#, c-format
-msgid "Size: %d KB\n"
-msgstr "Taille : %d Ko\n"
 
 #: ../../install_steps_gtk.pm_.c:355
 #, c-format
@@ -3949,25 +4002,9 @@ msgid "You can't unselect this package. It must be upgraded"
 msgstr ""
 "Vous ne pouvez pas désélectionner ce paquetage, il doit être mis à jour."
 
-#: ../../install_steps_gtk.pm_.c:466 ../../install_steps_interactive.pm_.c:594
-msgid "Installing"
-msgstr "Installation"
-
 #: ../../install_steps_gtk.pm_.c:469
 msgid "Estimating"
 msgstr "Estimation en cours"
-
-#: ../../install_steps_gtk.pm_.c:472
-msgid "Please wait, "
-msgstr "Veuillez patienter, "
-
-#: ../../install_steps_gtk.pm_.c:474
-msgid "Time remaining "
-msgstr "Temps restant "
-
-#: ../../install_steps_gtk.pm_.c:475
-msgid "Total time "
-msgstr "Temps total "
 
 #: ../../install_steps_gtk.pm_.c:481 ../../interactive.pm_.c:86
 #: ../../interactive.pm_.c:249 ../../interactive_newt.pm_.c:51
@@ -3976,19 +4013,10 @@ msgstr "Temps total "
 msgid "Cancel"
 msgstr "Annuler"
 
-#: ../../install_steps_gtk.pm_.c:484 ../../install_steps_interactive.pm_.c:594
-msgid "Preparing installation"
-msgstr "Préparation de l'installation"
-
 #: ../../install_steps_gtk.pm_.c:495
 #, c-format
 msgid "%d packages"
 msgstr "%d paquetages"
-
-#: ../../install_steps_gtk.pm_.c:500
-#, c-format
-msgid "Installing package %s"
-msgstr "Installation du paquetage %s"
 
 #: ../../install_steps_gtk.pm_.c:531
 msgid ""
@@ -4077,14 +4105,6 @@ msgstr ""
 #: ../../install_steps_gtk.pm_.c:559 ../../install_steps_interactive.pm_.c:147
 msgid "Refuse"
 msgstr "Refuser"
-
-#: ../../install_steps_gtk.pm_.c:569 ../../install_steps_gtk.pm_.c:573
-msgid "Go on anyway?"
-msgstr "Souhaitez-vous tout de même continuer ?"
-
-#: ../../install_steps_gtk.pm_.c:569
-msgid "There was an error ordering packages:"
-msgstr "Une erreur est survenue lors du tri des paquetages :"
 
 #: ../../install_steps_gtk.pm_.c:573
 msgid "There was an error installing packages:"
@@ -5016,10 +5036,6 @@ msgstr ""
 "normales\n"
 "(appuyer sur la touche « p » peut provoquer l'affichage d'un « 6 »."
 
-#: ../../install_steps_interactive.pm_.c:999
-msgid "Use existing configuration for X11?"
-msgstr "Utiliser la configuration de X existante ?"
-
 #: ../../install_steps_interactive.pm_.c:1028
 msgid "Do you want to generate an auto install floppy for linux replication?"
 msgstr ""
@@ -5110,239 +5126,239 @@ msgstr "Que choisissez-vous ? (%s par défaut) "
 msgid "Your choice? (default %s  enter `none' for none) "
 msgstr "Que choisissez-vous ? (%s par défaut, entrez « none » si rien) "
 
-#: ../../keyboard.pm_.c:104 ../../keyboard.pm_.c:134
+#: ../../keyboard.pm_.c:105 ../../keyboard.pm_.c:135
 msgid "Czech"
 msgstr "Tchèque"
 
-#: ../../keyboard.pm_.c:105 ../../keyboard.pm_.c:118 ../../keyboard.pm_.c:135
+#: ../../keyboard.pm_.c:106 ../../keyboard.pm_.c:119 ../../keyboard.pm_.c:136
 msgid "German"
 msgstr "Allemand"
 
-#: ../../keyboard.pm_.c:106
+#: ../../keyboard.pm_.c:107
 msgid "Dvorak"
 msgstr "Dvorak"
 
-#: ../../keyboard.pm_.c:107 ../../keyboard.pm_.c:141
+#: ../../keyboard.pm_.c:108 ../../keyboard.pm_.c:142
 msgid "Spanish"
 msgstr "Espagnol"
 
-#: ../../keyboard.pm_.c:108 ../../keyboard.pm_.c:142
+#: ../../keyboard.pm_.c:109 ../../keyboard.pm_.c:143
 msgid "Finnish"
 msgstr "Finlandais"
 
-#: ../../keyboard.pm_.c:109 ../../keyboard.pm_.c:119 ../../keyboard.pm_.c:143
+#: ../../keyboard.pm_.c:110 ../../keyboard.pm_.c:120 ../../keyboard.pm_.c:144
 msgid "French"
 msgstr "Français"
 
-#: ../../keyboard.pm_.c:110 ../../keyboard.pm_.c:162
+#: ../../keyboard.pm_.c:111 ../../keyboard.pm_.c:164
 msgid "Norwegian"
 msgstr "Norvégien"
 
-#: ../../keyboard.pm_.c:111
+#: ../../keyboard.pm_.c:112
 msgid "Polish"
 msgstr "Polonais"
 
-#: ../../keyboard.pm_.c:112 ../../keyboard.pm_.c:167
+#: ../../keyboard.pm_.c:113 ../../keyboard.pm_.c:169
 msgid "Russian"
 msgstr "Russe"
 
-#: ../../keyboard.pm_.c:113 ../../keyboard.pm_.c:176
+#: ../../keyboard.pm_.c:114 ../../keyboard.pm_.c:178
 msgid "UK keyboard"
 msgstr "Anglais"
 
-#: ../../keyboard.pm_.c:114 ../../keyboard.pm_.c:117 ../../keyboard.pm_.c:177
+#: ../../keyboard.pm_.c:115 ../../keyboard.pm_.c:118 ../../keyboard.pm_.c:179
 msgid "US keyboard"
 msgstr "Américain (États-Unis)"
 
-#: ../../keyboard.pm_.c:121
+#: ../../keyboard.pm_.c:122
 msgid "Armenian (old)"
 msgstr "Arménien (ancien)"
 
-#: ../../keyboard.pm_.c:122
+#: ../../keyboard.pm_.c:123
 msgid "Armenian (typewriter)"
 msgstr "Arménien (machine à écrire)"
 
-#: ../../keyboard.pm_.c:123
+#: ../../keyboard.pm_.c:124
 msgid "Armenian (phonetic)"
 msgstr "Arménien (phonétique)"
 
-#: ../../keyboard.pm_.c:126
+#: ../../keyboard.pm_.c:127
 msgid "Azerbaidjani (latin)"
 msgstr "Azerbaidjan (latin)"
 
-#: ../../keyboard.pm_.c:127
+#: ../../keyboard.pm_.c:128
 msgid "Azerbaidjani (cyrillic)"
 msgstr "Azerbaidjan (cyrillique)"
 
-#: ../../keyboard.pm_.c:128
+#: ../../keyboard.pm_.c:129
 msgid "Belgian"
 msgstr "Belge"
 
-#: ../../keyboard.pm_.c:129
+#: ../../keyboard.pm_.c:130
 msgid "Bulgarian"
 msgstr "Bulgare"
 
-#: ../../keyboard.pm_.c:130
+#: ../../keyboard.pm_.c:131
 msgid "Brazilian (ABNT-2)"
 msgstr "Brésilien"
 
-#: ../../keyboard.pm_.c:131
+#: ../../keyboard.pm_.c:132
 msgid "Belarusian"
 msgstr "Bielorusse"
 
-#: ../../keyboard.pm_.c:132
+#: ../../keyboard.pm_.c:133
 msgid "Swiss (German layout)"
 msgstr "Suisse (allemand)"
 
-#: ../../keyboard.pm_.c:133
+#: ../../keyboard.pm_.c:134
 msgid "Swiss (French layout)"
 msgstr "Suisse (français)"
 
-#: ../../keyboard.pm_.c:136
+#: ../../keyboard.pm_.c:137
 msgid "German (no dead keys)"
 msgstr "Allemand (sans touches mortes)"
 
-#: ../../keyboard.pm_.c:137
+#: ../../keyboard.pm_.c:138
 msgid "Danish"
 msgstr "Danois"
 
-#: ../../keyboard.pm_.c:138
+#: ../../keyboard.pm_.c:139
 msgid "Dvorak (US)"
 msgstr "Dvorak (US)"
 
-#: ../../keyboard.pm_.c:139
+#: ../../keyboard.pm_.c:140
 msgid "Dvorak (Norwegian)"
 msgstr "Dvorak (Norvégien)"
 
-#: ../../keyboard.pm_.c:140
+#: ../../keyboard.pm_.c:141
 msgid "Estonian"
 msgstr "Estonien"
 
-#: ../../keyboard.pm_.c:144
+#: ../../keyboard.pm_.c:145
 msgid "Georgian (\"Russian\" layout)"
 msgstr "Géorgien (disposition « russe »)"
 
-#: ../../keyboard.pm_.c:145
+#: ../../keyboard.pm_.c:146
 msgid "Georgian (\"Latin\" layout)"
 msgstr "Géorgien (disposition « latine »)"
 
-#: ../../keyboard.pm_.c:146
+#: ../../keyboard.pm_.c:147
 msgid "Greek"
 msgstr "Grec"
 
-#: ../../keyboard.pm_.c:147
+#: ../../keyboard.pm_.c:148
 msgid "Hungarian"
 msgstr "Hongrois"
 
-#: ../../keyboard.pm_.c:148
+#: ../../keyboard.pm_.c:149
 msgid "Croatian"
 msgstr "Croate"
 
-#: ../../keyboard.pm_.c:149
+#: ../../keyboard.pm_.c:150
 msgid "Israeli"
 msgstr "Israélien"
 
-#: ../../keyboard.pm_.c:150
+#: ../../keyboard.pm_.c:151
 msgid "Israeli (Phonetic)"
 msgstr "Israélien (phonétique)"
 
-#: ../../keyboard.pm_.c:151
+#: ../../keyboard.pm_.c:152
 msgid "Iranian"
 msgstr "Iranien"
 
-#: ../../keyboard.pm_.c:152
+#: ../../keyboard.pm_.c:153
 msgid "Icelandic"
 msgstr "Islandais"
 
-#: ../../keyboard.pm_.c:153
+#: ../../keyboard.pm_.c:154
 msgid "Italian"
 msgstr "Italien"
 
-#: ../../keyboard.pm_.c:154
+#: ../../keyboard.pm_.c:155
 msgid "Japanese 106 keys"
 msgstr "Japonais 106 touches"
 
-#: ../../keyboard.pm_.c:155
+#: ../../keyboard.pm_.c:156
 msgid "Latin American"
 msgstr "Amérique latine"
 
-#: ../../keyboard.pm_.c:156
+#: ../../keyboard.pm_.c:158
 msgid "Dutch"
 msgstr "Hollandais"
 
-#: ../../keyboard.pm_.c:157
+#: ../../keyboard.pm_.c:159
 msgid "Lithuanian AZERTY (old)"
 msgstr "Lithuanien (AZERTY, ancien modèle)"
 
-#: ../../keyboard.pm_.c:159
+#: ../../keyboard.pm_.c:161
 msgid "Lithuanian AZERTY (new)"
 msgstr "Lithuanien (AZERTY, nouveau modèle)"
 
-#: ../../keyboard.pm_.c:160
+#: ../../keyboard.pm_.c:162
 msgid "Lithuanian \"number row\" QWERTY"
 msgstr "Lithuanien « Ligne de nombres » QWERTY"
 
-#: ../../keyboard.pm_.c:161
+#: ../../keyboard.pm_.c:163
 msgid "Lithuanian \"phonetic\" QWERTY"
 msgstr "Lithuanien « phonétique » QWERTY"
 
-#: ../../keyboard.pm_.c:163
+#: ../../keyboard.pm_.c:165
 msgid "Polish (qwerty layout)"
 msgstr "Polonais (QWERTY)"
 
-#: ../../keyboard.pm_.c:164
+#: ../../keyboard.pm_.c:166
 msgid "Polish (qwertz layout)"
 msgstr "Polonais (QWERTZ)"
 
-#: ../../keyboard.pm_.c:165
+#: ../../keyboard.pm_.c:167
 msgid "Portuguese"
 msgstr "Portugais"
 
-#: ../../keyboard.pm_.c:166
+#: ../../keyboard.pm_.c:168
 msgid "Canadian (Quebec)"
 msgstr "Canadien (Québec)"
 
-#: ../../keyboard.pm_.c:168
+#: ../../keyboard.pm_.c:170
 msgid "Russian (Yawerty)"
 msgstr "Russe (Yawerty)"
 
-#: ../../keyboard.pm_.c:169
+#: ../../keyboard.pm_.c:171
 msgid "Swedish"
 msgstr "Suédois"
 
-#: ../../keyboard.pm_.c:170
+#: ../../keyboard.pm_.c:172
 msgid "Slovenian"
 msgstr "Slovénien"
 
-#: ../../keyboard.pm_.c:171
+#: ../../keyboard.pm_.c:173
 msgid "Slovakian"
 msgstr "Slovaque"
 
-#: ../../keyboard.pm_.c:172
+#: ../../keyboard.pm_.c:174
 msgid "Thai keyboard"
 msgstr "Thaï"
 
-#: ../../keyboard.pm_.c:173
+#: ../../keyboard.pm_.c:175
 msgid "Turkish (traditional \"F\" model)"
 msgstr "Turque (modèle traditionnel « F »)"
 
-#: ../../keyboard.pm_.c:174
+#: ../../keyboard.pm_.c:176
 msgid "Turkish (modern \"Q\" model)"
 msgstr "Turque (modèle moderne « Q »)"
 
-#: ../../keyboard.pm_.c:175
+#: ../../keyboard.pm_.c:177
 msgid "Ukrainian"
 msgstr "Ukrainien"
 
-#: ../../keyboard.pm_.c:178
+#: ../../keyboard.pm_.c:180
 msgid "US keyboard (international)"
 msgstr "Américain (international)"
 
-#: ../../keyboard.pm_.c:179
+#: ../../keyboard.pm_.c:181
 msgid "Vietnamese \"numeric row\" QWERTY"
 msgstr "Vietnamien « colone numérique » QWERTY"
 
-#: ../../keyboard.pm_.c:180
+#: ../../keyboard.pm_.c:182
 msgid "Yugoslavian (latin layout)"
 msgstr "Yougoslave (latin)"
 
@@ -5655,8 +5671,8 @@ msgstr ""
 "Veuillez choisir la carte réseau que vous désirez utiliser pour vous "
 "connecter à Internet"
 
-#: ../../netconnect.pm_.c:351 ../../netconnect.pm_.c:623
-#: ../../netconnect.pm_.c:754 ../../standalone/drakgw_.c:217
+#: ../../netconnect.pm_.c:351 ../../netconnect.pm_.c:630
+#: ../../netconnect.pm_.c:761 ../../standalone/drakgw_.c:217
 msgid "Network interface"
 msgstr "Carte réseau"
 
@@ -5680,59 +5696,59 @@ msgstr "Configuration ADSL"
 msgid "Do you want to start your connection at boot?"
 msgstr "Désirez-vous activer la connexion lors du démarrage ?"
 
-#: ../../netconnect.pm_.c:529
+#: ../../netconnect.pm_.c:536
 msgid "Try to find a modem?"
 msgstr "Essayer d'identifier un modem ?"
 
-#: ../../netconnect.pm_.c:539
+#: ../../netconnect.pm_.c:546
 msgid "Please choose which serial port your modem is connected to."
 msgstr "Veuillez choisir le port série sur lequel votre modem est connecté."
 
-#: ../../netconnect.pm_.c:544
+#: ../../netconnect.pm_.c:551
 msgid "Dialup options"
 msgstr "Options d'appel"
 
-#: ../../netconnect.pm_.c:545
+#: ../../netconnect.pm_.c:552
 msgid "Connection name"
 msgstr "Nom de la connexion"
 
-#: ../../netconnect.pm_.c:546
+#: ../../netconnect.pm_.c:553
 msgid "Phone number"
 msgstr "Numéro de téléphone"
 
-#: ../../netconnect.pm_.c:547
+#: ../../netconnect.pm_.c:554
 msgid "Login ID"
 msgstr "Identifiant de connexion"
 
-#: ../../netconnect.pm_.c:549
+#: ../../netconnect.pm_.c:556
 msgid "Authentication"
 msgstr "Authentification"
 
-#: ../../netconnect.pm_.c:549
+#: ../../netconnect.pm_.c:556
 msgid "PAP"
 msgstr "PAP"
 
-#: ../../netconnect.pm_.c:549
+#: ../../netconnect.pm_.c:556
 msgid "Script-based"
 msgstr "Basée sur un script"
 
-#: ../../netconnect.pm_.c:549
+#: ../../netconnect.pm_.c:556
 msgid "Terminal-based"
 msgstr "Basée sur un terminal"
 
-#: ../../netconnect.pm_.c:550
+#: ../../netconnect.pm_.c:557
 msgid "Domain name"
 msgstr "Nom de domaine"
 
-#: ../../netconnect.pm_.c:552
+#: ../../netconnect.pm_.c:559
 msgid "First DNS Server"
 msgstr "Premier serveur de noms (DNS)"
 
-#: ../../netconnect.pm_.c:553
+#: ../../netconnect.pm_.c:560
 msgid "Second DNS Server"
 msgstr "Deuxième serveur de noms (DNS)"
 
-#: ../../netconnect.pm_.c:582
+#: ../../netconnect.pm_.c:589
 msgid ""
 "\n"
 "You can connect to Internet or reconfigure your connection."
@@ -5740,7 +5756,7 @@ msgstr ""
 "\n"
 "Vous pouvez vous connecter à Internet ou reconfigurer votre connexion."
 
-#: ../../netconnect.pm_.c:582 ../../netconnect.pm_.c:586
+#: ../../netconnect.pm_.c:589 ../../netconnect.pm_.c:593
 msgid ""
 "\n"
 "You can reconfigure your connection."
@@ -5748,11 +5764,11 @@ msgstr ""
 "\n"
 "Vous pouvez reconfigurer votre connexion."
 
-#: ../../netconnect.pm_.c:582
+#: ../../netconnect.pm_.c:589
 msgid "You are not currently connected to Internet."
 msgstr "Vous n'êtes pas actuellement connecté à Internet."
 
-#: ../../netconnect.pm_.c:586
+#: ../../netconnect.pm_.c:593
 msgid ""
 "\n"
 "You can disconnect or reconfigure your connection."
@@ -5760,98 +5776,98 @@ msgstr ""
 "\n"
 "Vous pouvez vous déconnecter ou reconfigurer votre connexion."
 
-#: ../../netconnect.pm_.c:586
+#: ../../netconnect.pm_.c:593
 msgid "You are currently connected to internet."
 msgstr "Vous êtes actuellement connecté à Internet."
 
-#: ../../netconnect.pm_.c:590
+#: ../../netconnect.pm_.c:597
 msgid "Connect to Internet"
 msgstr "Connexion à Internet"
 
-#: ../../netconnect.pm_.c:592
+#: ../../netconnect.pm_.c:599
 msgid "Disconnect from Internet"
 msgstr "Déconnexion d'Internet"
 
-#: ../../netconnect.pm_.c:594
+#: ../../netconnect.pm_.c:601
 msgid "Configure network connection (LAN or Internet)"
 msgstr "Configurer la connexion réseaux (Réseau local ou Internet)"
 
-#: ../../netconnect.pm_.c:597
+#: ../../netconnect.pm_.c:604
 msgid "Internet connection & configuration"
 msgstr "Connexion à Internet et configuration"
 
-#: ../../netconnect.pm_.c:624 ../../netconnect.pm_.c:755
+#: ../../netconnect.pm_.c:631 ../../netconnect.pm_.c:762
 msgid ""
 "I'm about to restart the network device $netc->{NET_DEVICE}. Do you agree?"
 msgstr ""
 "Le périphérique réseau $netc->{NET_DEVICE} doit être redémarré. Êtes-vous "
 "d'accord ?"
 
-#: ../../netconnect.pm_.c:641
+#: ../../netconnect.pm_.c:648
 msgid "Configure a normal modem connection"
 msgstr "Configurer une connexion par modem"
 
-#: ../../netconnect.pm_.c:661
+#: ../../netconnect.pm_.c:668
 msgid "Configure an ISDN connection"
 msgstr "Configurer une connexion par ISDN"
 
-#: ../../netconnect.pm_.c:666
+#: ../../netconnect.pm_.c:673
 msgid "Internal ISDN card"
 msgstr "Carte ISDN/RNIS interne"
 
-#: ../../netconnect.pm_.c:668
+#: ../../netconnect.pm_.c:675
 msgid "External ISDN modem"
 msgstr "Modem ISDN/RNIS externe"
 
-#: ../../netconnect.pm_.c:671 ../../netconnect.pm_.c:705
-#: ../../netconnect.pm_.c:717 ../../netconnect.pm_.c:741
-#: ../../netconnect.pm_.c:786
+#: ../../netconnect.pm_.c:678 ../../netconnect.pm_.c:712
+#: ../../netconnect.pm_.c:724 ../../netconnect.pm_.c:748
+#: ../../netconnect.pm_.c:793
 msgid "Connect to the Internet"
 msgstr "Connexion à Internet"
 
-#: ../../netconnect.pm_.c:672
+#: ../../netconnect.pm_.c:679
 msgid "What kind is your ISDN connection?"
 msgstr "Quel est le type do votre connexion ISDN/RNIS ?"
 
-#: ../../netconnect.pm_.c:691
+#: ../../netconnect.pm_.c:698
 msgid "Configure a DSL (or ADSL) connection"
 msgstr "Configurer une connexion par ADSL"
 
-#: ../../netconnect.pm_.c:700
+#: ../../netconnect.pm_.c:707
 msgid "France"
 msgstr "France"
 
-#: ../../netconnect.pm_.c:702
+#: ../../netconnect.pm_.c:709
 msgid "Other countries"
 msgstr "Autres pays"
 
-#: ../../netconnect.pm_.c:706
+#: ../../netconnect.pm_.c:713
 msgid "In which country are you located ?"
 msgstr "Dans quel pays résidez-vous ?"
 
-#: ../../netconnect.pm_.c:712
+#: ../../netconnect.pm_.c:719
 msgid "Alcatel modem"
 msgstr "Modem Alcatel"
 
-#: ../../netconnect.pm_.c:714
+#: ../../netconnect.pm_.c:721
 msgid "ECI modem"
 msgstr "Modem ECI"
 
-#: ../../netconnect.pm_.c:718
+#: ../../netconnect.pm_.c:725
 msgid "If your adsl modem is an Alcatel one, choose Alcatel. Otherwise, ECI."
 msgstr ""
 "Si votre modem est un modem Alcatel, choisissez Alcatel. Dans le cas "
 "contraire, choisissez ECI."
 
-#: ../../netconnect.pm_.c:736
+#: ../../netconnect.pm_.c:743
 msgid "use pppoe"
 msgstr "utiliser pppoe"
 
-#: ../../netconnect.pm_.c:738
+#: ../../netconnect.pm_.c:745
 msgid "don't use pppoe"
 msgstr "ne pas utiliser pppoe"
 
-#: ../../netconnect.pm_.c:742
+#: ../../netconnect.pm_.c:749
 msgid ""
 "The most common way to connect with adsl is dhcp + pppoe.\n"
 "However, some connections only use dhcp.\n"
@@ -5865,11 +5881,11 @@ msgstr ""
 "\n"
 "Si vous ne savez pas quoi choisir, utilisez pppoe."
 
-#: ../../netconnect.pm_.c:765
+#: ../../netconnect.pm_.c:772
 msgid "Configure a cable connection"
 msgstr "Configurer une connexion par cable"
 
-#: ../../netconnect.pm_.c:787
+#: ../../netconnect.pm_.c:794
 msgid ""
 "Which dhcp client do you want to use?\n"
 "Default is dhcpd"
@@ -5878,31 +5894,31 @@ msgstr ""
 "\n"
 "Le client par défaut est dhcpd"
 
-#: ../../netconnect.pm_.c:800
+#: ../../netconnect.pm_.c:807
 msgid "Disable Internet Connection"
 msgstr "Désactiver la connexion à Internet"
 
-#: ../../netconnect.pm_.c:811
+#: ../../netconnect.pm_.c:818
 msgid "Configure local network"
 msgstr "Configurer le réseau local"
 
-#: ../../netconnect.pm_.c:815
+#: ../../netconnect.pm_.c:822
 msgid "Network configuration"
 msgstr "Configuration du réseau"
 
-#: ../../netconnect.pm_.c:816
+#: ../../netconnect.pm_.c:823
 msgid "Do you want to restart the network"
 msgstr "Désirez-vous relancer la configuration du réseaux ?"
 
-#: ../../netconnect.pm_.c:824
+#: ../../netconnect.pm_.c:831
 msgid "Disable networking"
 msgstr "Désactiver le réseau"
 
-#: ../../netconnect.pm_.c:834
+#: ../../netconnect.pm_.c:841
 msgid "Configure the Internet connection / Configure local Network"
 msgstr "Configurer la connexion à Internet / Configurer le réseau local"
 
-#: ../../netconnect.pm_.c:835
+#: ../../netconnect.pm_.c:842
 msgid ""
 "Local networking has already been configured.\n"
 "Do you want to:"
@@ -5911,15 +5927,15 @@ msgstr ""
 "\n"
 "Désirez-vous :"
 
-#: ../../netconnect.pm_.c:836
+#: ../../netconnect.pm_.c:843
 msgid "How do you want to connect to the Internet?"
 msgstr "Comment désirez-vous vous connecter à Internet ?"
 
-#: ../../netconnect.pm_.c:858
+#: ../../netconnect.pm_.c:865
 msgid "Network Configuration"
 msgstr "Configuration du réseau"
 
-#: ../../netconnect.pm_.c:859
+#: ../../netconnect.pm_.c:866
 msgid ""
 "Now that your Internet connection is configured,\n"
 "your computer can be configured to share its Internet connection.\n"
@@ -6955,32 +6971,15 @@ msgstr ""
 msgid "Configuring..."
 msgstr "Configuration en cours..."
 
-#: ../../standalone/drakgw_.c:306
-msgid "Could not install ipchains RPM with urpmi."
-msgstr "Impossible d'installe le RPM d'ipchains en utilisant urpmi"
+#: ../../standalone/drakgw_.c:313
+msgid "Problems installing package $bin2rpm{$_}"
+msgstr "Des problèmes sotn apparus en installant le paquetage $bin2rpm{$_}"
 
-#: ../../standalone/drakgw_.c:456
-msgid "Could not install dhcp RPM with urpmi."
-msgstr "Impossible d'installer le RPM de dhcp en utilisant urpmi"
-
-#: ../../standalone/drakgw_.c:480
-msgid "Could not install linuxconf RPM with urpmi."
-msgstr "Impossible d'installer le RPM de linuxconf en utilisant urpmi"
-
-#: ../../standalone/drakgw_.c:496
-msgid "Could not install bind RPM with urpmi."
-msgstr "Impossible d'installer le RPM de bind en utilitsant urpmi"
-
-#: ../../standalone/drakgw_.c:500
-msgid "Could not install caching-nameserver RPM with urpmi."
-msgstr ""
-"Impossible d'installer le RPM de caching-namerserver en utilisant urpmi"
-
-#: ../../standalone/drakgw_.c:512
+#: ../../standalone/drakgw_.c:504
 msgid "Congratulations!"
 msgstr "Félicitations !"
 
-#: ../../standalone/drakgw_.c:513
+#: ../../standalone/drakgw_.c:505
 msgid ""
 "Everything has been configured.\n"
 "You may now share Internet connection with other computers on your Local "
@@ -7054,6 +7053,14 @@ msgstr "Mise en place du niveau de sécurité"
 #: ../../standalone/drakxconf_.c:21
 msgid "Choose the tool you want to use"
 msgstr "Choisissez l'outil que vous voulez utiliser"
+
+#: ../../standalone/keyboarddrake_.c:14
+msgid "usage: keyboarddrake [--expert]\n"
+msgstr ""
+
+#: ../../standalone/keyboarddrake_.c:27
+msgid "Do you want the BackSpace to return Delete in console?"
+msgstr "Voulez-vous que la touche BackSpace retourne Delete en console ?"
 
 #: ../../standalone/livedrake_.c:23
 msgid "Change Cd-Rom"
@@ -7300,86 +7307,57 @@ msgstr ""
 "La recherche des dépendances non satisfaites peut prendre un certain temps"
 
 # ../../share/compssUsers
-msgid "More Graphical Desktops (Gnome, IceWM)"
-msgstr "Plus d'Environnements de Bureau (Gnome, IceWM)"
+msgid "Graphics Manipulation"
+msgstr "Graphisme"
 
 # ../../share/compssUsers
-msgid ""
-"The K Desktop Environment, the basic graphical environment with a collection "
-"of accompanying tools"
-msgstr ""
-"Le K Desktop Environement, l'environnement de bureau de base avec sa "
-"collection d'outils"
-
-# ../../share/compssUsers
-msgid "Personnal Information Management"
-msgstr "Gestionnaire d'Information Personnellle"
-
-# ../../share/compssUsers
-msgid "Tools to create and burn CD's"
-msgstr "Outils pour créer et graver des CD's"
-
-msgid "Internet Tools"
-msgstr "Outils pour utiliser Internet"
-
-msgid "Internet"
-msgstr "Internet"
+msgid "KDE, QT, Gnome, GTK+"
+msgstr "KDE, QT, Gnome, GTK+"
 
 # ../../share/compssUsers
 msgid "Personnal Finance"
 msgstr "Gestion Financière"
 
 # ../../share/compssUsers
-msgid "Gnome, Icewm, Window Maker, Enlightenment, Fvwm, etc"
-msgstr "Gnome, Icewm, Window Maker, Enlightenment, Fvwm, etc"
+msgid "Python, Perl, libraries, tools"
+msgstr "Python, Perl, bibliothèques, outils"
 
 # ../../share/compssUsers
-msgid "Graphics programs such as The Gimp"
-msgstr "Programmes de graphisme comme The gimp"
-
-msgid "Office"
-msgstr "Bureautique"
+msgid "Scientific applications"
+msgstr "Applications scientifiques"
 
 # ../../share/compssUsers
-msgid "Databases clients and servers (mysql and postgresql)"
-msgstr "Clients et serveurs de bases de données"
+msgid "Databases"
+msgstr "Bases de Données"
 
-# ../../share/compssUsers
-msgid "Tools for your Palm Pilot or your Visor"
-msgstr "Outils pour votre Palm Pilot ou votre Visor"
+msgid "Internet"
+msgstr "Internet"
 
 # ../../share/compssUsers
 msgid "Multimedia - Graphics"
 msgstr "Multimédia - Graphisme"
 
 # ../../share/compssUsers
-msgid "Video players and editors"
-msgstr "Lecteurs et éditeurs vidéo"
+msgid "editors, shells, file tools, terminals"
+msgstr "éditeurs, intérpreteurs, utilitaires fichiers, terminaux"
 
-# ../../share/compssUsers
-msgid "Amusement programs: arcade, boards, strategy, etc"
-msgstr ""
-"Programmes de divertissement : jeux d'arcade, de plateaux, de stratégie, etc"
-
-# ../../share/compssUsers
-msgid ""
-"Office programs: wordprocessors (kword, abiword), spreadsheets (kspread, "
-"gnumeric), pdf viewers, etc"
-msgstr ""
-"Programmes bureautiques: traitements de texte (kword, abiword), tableurs "
-"(kspread, gnumeric), visualiseur pdf, etc"
-
-# ../../share/compssUsers
-msgid ""
-"Set of tools to read and send mail and news (pine, mutt, tin..) and to "
-"browse the Web"
-msgstr ""
-"Ensemble d'outils pour lire ou envoyer des courriers électronique (pine, "
-"mutt), des news (tin), et pour naviguer sur le Web"
+msgid "Development applications"
+msgstr "Programmes de développement"
 
 # ../../share/compssUsers
 msgid "Audio-related tools: mp3 or midi players, mixers, etc"
 msgstr "Outils audio: lecteurs mp3 ou midi, mixeurs, etc"
+
+# ../../share/compssUsers
+msgid "Multimedia"
+msgstr "Multimédia"
+
+msgid "Office"
+msgstr "Bureautique"
+
+# ../../share/compssUsers
+msgid "Sciences"
+msgstr "Sciences"
 
 # ../../share/compssUsers
 msgid ""
@@ -7390,12 +7368,80 @@ msgstr ""
 "xchat, licq, gaim, et outils de transfert de fichiers"
 
 # ../../share/compssUsers
-msgid "Books and Howto's on Linux and Free Software"
-msgstr "Livres et Howto's sur Linux et le Logiciel Libre"
+msgid ""
+"Set of tools to read and send mail and news (pine, mutt, tin..) and to "
+"browse the Web"
+msgstr ""
+"Ensemble d'outils pour lire ou envoyer des courriers électronique (pine, "
+"mutt), des news (tin), et pour naviguer sur le Web"
+
+# ../../share/compssUsers
+msgid "C and C++ development libraries, programs and include files"
+msgstr "Bibliothèques de développement C et CC+, programes et fichiers d'entête"
+
+# ../../share/compssUsers
+msgid "Communication facilities"
+msgstr "Outils de Communication"
+
+msgid "KDE"
+msgstr "KDE"
+
+# ../../share/compssUsers
+msgid "Personnal Information Management"
+msgstr "Gestionnaire d'Information Personnellle"
+
+# ../../share/compssUsers
+msgid "Programs to manage your finance, such as gnucash"
+msgstr "Programmes pour gérer votre finance, comme gnucash"
+
+msgid "Gnome"
+msgstr "Gnome"
+
+msgid "Internet Tools"
+msgstr "Outils pour utiliser Internet"
+
+msgid "Documentation"
+msgstr "Documentation"
 
 # ../../share/compssUsers
 msgid "Icewm, Window Maker, Enlightenment, Fvwm, etc"
 msgstr "Icewm, Window Maker, Enlightenment, Fvwm, etc"
+
+# ../../share/compssUsers
+msgid "Utilities"
+msgstr "Utilitaires"
+
+# ../../share/compssUsers
+msgid "Multimedia - Sound"
+msgstr "Multimédia - Son"
+
+# ../../share/compssUsers
+msgid "Amusement programs: arcade, boards, strategy, etc"
+msgstr ""
+"Programmes de divertissement : jeux d'arcade, de plateaux, de stratégie, etc"
+
+# ../../share/compssUsers
+msgid "Video players and editors"
+msgstr "Lecteurs et éditeurs vidéo"
+
+# ../../share/compssUsers
+msgid "Console Tools"
+msgstr "Utilitaires console"
+
+msgid "Development other"
+msgstr "Développement - autres"
+
+# ../../share/compssUsers
+msgid "Databases clients and servers (mysql and postgresql)"
+msgstr "Clients et serveurs de bases de données"
+
+# ../../share/compssUsers
+msgid "Sound and video playing/editing programs"
+msgstr "Programmes pour jouer/éditer du son et de la vidéo"
+
+# ../../share/compssUsers
+msgid "Books and Howto's on Linux and Free Software"
+msgstr "Livres et Howto's sur Linux et le Logiciel Libre"
 
 # ../../share/compssUsers
 msgid ""
@@ -7406,69 +7452,85 @@ msgstr ""
 "intuitifs"
 
 # ../../share/compssUsers
-msgid "Set of tools for mail, news, web, file transfer, and chat"
-msgstr ""
-"Utilitaires pour le courrier électronique, les news, le web, le transfert de "
-"fichiers, les discussions en ligne"
+msgid "Games"
+msgstr "Jeux"
+
+msgid "Development C/C++"
+msgstr "Développement - C/C++"
 
 # ../../share/compssUsers
 msgid "Multimedia - Video"
 msgstr "Multimédia - Vidéo"
 
-msgid "KDE"
-msgstr "KDE"
+# ../../share/compssUsers
+msgid "Graphics programs such as The Gimp"
+msgstr "Programmes de graphisme comme The gimp"
 
 # ../../share/compssUsers
-msgid "Sound and video playing/editing programs"
-msgstr "Programmes pour jouer/éditer du son et de la vidéo"
+msgid ""
+"The K Desktop Environment, the basic graphical environment with a collection "
+"of accompanying tools"
+msgstr ""
+"Le K Desktop Environement, l'environnement de bureau de base avec sa "
+"collection d'outils"
 
 # ../../share/compssUsers
-msgid "Multimedia"
-msgstr "Multimédia"
+msgid "Tools to create and burn CD's"
+msgstr "Outils pour créer et graver des CD's"
 
 # ../../share/compssUsers
-msgid "Other Graphical Desktops"
-msgstr "Autres Environnements de Bureau"
-
-# ../../share/compssUsers
-msgid "Multimedia - Sound"
-msgstr "Multimédia - Son"
-
-msgid "Gnome"
-msgstr "Gnome"
-
-msgid "Documentation"
-msgstr "Documentation"
-
-# ../../share/compssUsers
-msgid "Programs to manage your finance, such as gnucash"
-msgstr "Programmes pour gérer votre finance, comme gnucash"
-
-# ../../share/compssUsers
-msgid "Graphics Manipulation"
-msgstr "Graphisme"
-
-# ../../share/compssUsers
-msgid "Games"
-msgstr "Jeux"
+msgid "More Graphical Desktops (Gnome, IceWM)"
+msgstr "Plus d'Environnements de Bureau (Gnome, IceWM)"
 
 # ../../share/compssUsers
 msgid "Multimedia - CD Burning"
 msgstr "Multimédia - Gravage de CD"
 
 # ../../share/compssUsers
-msgid "Communication facilities"
-msgstr "Outils de Communication"
+msgid "Archiving, emulators, monitoring"
+msgstr "Archivage, émulateurs, surveillance"
 
 # ../../share/compssUsers
-msgid "Databases"
-msgstr "Bases de Données"
+msgid ""
+"Office programs: wordprocessors (kword, abiword), spreadsheets (kspread, "
+"gnumeric), pdf viewers, etc"
+msgstr ""
+"Programmes bureautiques: traitements de texte (kword, abiword), tableurs "
+"(kspread, gnumeric), visualiseur pdf, etc"
 
-#~ msgid "Choose the size you want to install"
-#~ msgstr "Choisissez l'espace que vous voulez utiliser"
+# ../../share/compssUsers
+msgid "Other Graphical Desktops"
+msgstr "Autres Environnements de Bureau"
 
-#~ msgid "Total size: "
-#~ msgstr "Taille totale : "
+# ../../share/compssUsers
+msgid "Tools for your Palm Pilot or your Visor"
+msgstr "Outils pour votre Palm Pilot ou votre Visor"
+
+# ../../share/compssUsers
+msgid "Gnome, Icewm, Window Maker, Enlightenment, Fvwm, etc"
+msgstr "Gnome, Icewm, Window Maker, Enlightenment, Fvwm, etc"
+
+# ../../share/compssUsers
+msgid "Set of tools for mail, news, web, file transfer, and chat"
+msgstr ""
+"Utilitaires pour le courrier électronique, les news, le web, le transfert de "
+"fichiers, les discussions en ligne"
+
+#~ msgid "Could not install ipchains RPM with urpmi."
+#~ msgstr "Impossible d'installe le RPM d'ipchains en utilisant urpmi"
+
+#~ msgid "Could not install dhcp RPM with urpmi."
+#~ msgstr "Impossible d'installer le RPM de dhcp en utilisant urpmi"
+
+#~ msgid "Could not install linuxconf RPM with urpmi."
+#~ msgstr "Impossible d'installer le RPM de linuxconf en utilisant urpmi"
+
+#~ msgid "Could not install bind RPM with urpmi."
+#~ msgstr "Impossible d'installer le RPM de bind en utilitsant urpmi"
+
+#~ msgid "Could not install caching-nameserver RPM with urpmi."
+#~ msgstr ""
+#~ "Impossible d'installer le RPM de caching-namerserver en utilisant urpmi"
 
 #~ msgid "Reconfigure local network"
 #~ msgstr "Reconfigurer le réseau local"

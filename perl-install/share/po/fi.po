@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX VERSION\n"
-"POT-Creation-Date: 2000-10-09 15:58+0200\n"
+"POT-Creation-Date: 2000-10-16 13:34+0200\n"
 "PO-Revision-Date: 2000-05-06 12:42GMT+0200\n"
 "Last-Translator: Kim Enkovaara <kim.enkovaara@iki.fi>\n"
 "Language-Team: Finnish <fi@li.org>\n"
@@ -509,7 +509,7 @@ msgid "Delay before booting default image"
 msgstr "Odota ennen oletuskäynnistystä"
 
 #: ../../any.pm_.c:134 ../../install_steps_interactive.pm_.c:760
-#: ../../install_steps_interactive.pm_.c:811 ../../netconnect.pm_.c:548
+#: ../../install_steps_interactive.pm_.c:811 ../../netconnect.pm_.c:555
 #: ../../printerdrake.pm_.c:94 ../../printerdrake.pm_.c:128
 #: ../../standalone/adduserdrake_.c:42
 msgid "Password"
@@ -565,7 +565,7 @@ msgid "Add"
 msgstr "Lisää"
 
 #: ../../any.pm_.c:165 ../../diskdrake.pm_.c:46
-#: ../../install_steps_interactive.pm_.c:805 ../../netconnect.pm_.c:830
+#: ../../install_steps_interactive.pm_.c:805 ../../netconnect.pm_.c:837
 #: ../../printerdrake.pm_.c:352 ../../standalone/adduserdrake_.c:36
 msgid "Done"
 msgstr "Valmis"
@@ -1370,7 +1370,9 @@ msgstr "Osion %s koon muutoksen jälkeen kaikki osion tiedot tuhoutuvat"
 msgid "Choose the new size"
 msgstr "Valitse uusi koko"
 
-#: ../../diskdrake.pm_.c:609 ../../install_steps_interactive.pm_.c:518
+#: ../../diskdrake.pm_.c:609 ../../install_steps_graphical.pm_.c:287
+#: ../../install_steps_graphical.pm_.c:334
+#: ../../install_steps_interactive.pm_.c:518
 #: ../../partition_table_raw.pm_.c:101
 msgid "MB"
 msgstr "Mt"
@@ -2871,7 +2873,7 @@ msgstr "Automaattiasennuslevyke"
 msgid "Exit install"
 msgstr "Lopeta asennus"
 
-#: ../../install_any.pm_.c:584
+#: ../../install_any.pm_.c:575
 msgid "Error reading file $f"
 msgstr "virhe luettaessa tiedostoa $f"
 
@@ -2906,11 +2908,11 @@ msgstr ""
 "Tätä varten luo osio (tai klikkaa olemassaolevaa).\n"
 "Valitse sitten toiminto ``Liitospiste'' ja aseta se arvoon `/'"
 
-#: ../../install_interactive.pm_.c:46
+#: ../../install_interactive.pm_.c:46 ../../install_steps_graphical.pm_.c:259
 msgid "You must have a swap partition"
 msgstr "Sinulla tulee olla heittovaihtotiedosto"
 
-#: ../../install_interactive.pm_.c:47
+#: ../../install_interactive.pm_.c:47 ../../install_steps_graphical.pm_.c:261
 msgid ""
 "You don't have a swap partition\n"
 "\n"
@@ -3132,6 +3134,80 @@ msgstr "Ei levykeasemaa käytettävissä"
 msgid "Entering step `%s'\n"
 msgstr "Siirryn vaiheeseen `%s'\n"
 
+#: ../../install_steps_graphical.pm_.c:287
+msgid "Choose the size you want to install"
+msgstr "Valitse asennuksen koko"
+
+#: ../../install_steps_graphical.pm_.c:334
+msgid "Total size: "
+msgstr "Kokonaiskoko: "
+
+#: ../../install_steps_graphical.pm_.c:346 ../../install_steps_gtk.pm_.c:353
+#: ../../standalone/rpmdrake_.c:136
+#, c-format
+msgid "Version: %s\n"
+msgstr "Versio: %s\n"
+
+#: ../../install_steps_graphical.pm_.c:347 ../../install_steps_gtk.pm_.c:354
+#: ../../standalone/rpmdrake_.c:137
+#, c-format
+msgid "Size: %d KB\n"
+msgstr "Koko: %d Kt\n"
+
+#: ../../install_steps_graphical.pm_.c:462 ../../install_steps_gtk.pm_.c:260
+msgid "Choose the packages you want to install"
+msgstr "Valitse asennettavat paketit"
+
+#: ../../install_steps_graphical.pm_.c:465 ../../install_steps_gtk.pm_.c:263
+msgid "Info"
+msgstr "Tietoja"
+
+#: ../../install_steps_graphical.pm_.c:473 ../../install_steps_gtk.pm_.c:268
+#: ../../install_steps_interactive.pm_.c:216 ../../standalone/rpmdrake_.c:161
+msgid "Install"
+msgstr "Asenna"
+
+#: ../../install_steps_graphical.pm_.c:492 ../../install_steps_gtk.pm_.c:466
+#: ../../install_steps_interactive.pm_.c:594
+msgid "Installing"
+msgstr "Asennan"
+
+#: ../../install_steps_graphical.pm_.c:499 ../../install_steps_gtk.pm_.c:472
+msgid "Please wait, "
+msgstr "Odota hetki, "
+
+#: ../../install_steps_graphical.pm_.c:501 ../../install_steps_gtk.pm_.c:474
+msgid "Time remaining "
+msgstr "Jäljellä "
+
+#: ../../install_steps_graphical.pm_.c:502 ../../install_steps_gtk.pm_.c:475
+msgid "Total time "
+msgstr "Kokonaisaika "
+
+#: ../../install_steps_graphical.pm_.c:507 ../../install_steps_gtk.pm_.c:484
+#: ../../install_steps_interactive.pm_.c:594
+msgid "Preparing installation"
+msgstr "Valmistelen asennusta"
+
+#: ../../install_steps_graphical.pm_.c:528 ../../install_steps_gtk.pm_.c:500
+#, c-format
+msgid "Installing package %s"
+msgstr "Asennan pakettia %s"
+
+#: ../../install_steps_graphical.pm_.c:553 ../../install_steps_gtk.pm_.c:569
+#: ../../install_steps_gtk.pm_.c:573
+msgid "Go on anyway?"
+msgstr "Jatka kuitenkin?"
+
+#: ../../install_steps_graphical.pm_.c:553 ../../install_steps_gtk.pm_.c:569
+msgid "There was an error ordering packages:"
+msgstr "Tapahtu virhe järjestettäessä paketteja:"
+
+#: ../../install_steps_graphical.pm_.c:577
+#: ../../install_steps_interactive.pm_.c:999
+msgid "Use existing configuration for X11?"
+msgstr "Käytä olemassaolevia asetuksia X11:ta?"
+
 #: ../../install_steps_gtk.pm_.c:136
 msgid ""
 "Your system is low on resource. You may have some problem installing\n"
@@ -3187,19 +3263,6 @@ msgstr "Voit valita paketit tarkemmin seuraavassa vaiheessa"
 msgid "Percentage of packages to install"
 msgstr "Prosenttiosuus asennettavista paketeista"
 
-#: ../../install_steps_gtk.pm_.c:260
-msgid "Choose the packages you want to install"
-msgstr "Valitse asennettavat paketit"
-
-#: ../../install_steps_gtk.pm_.c:263
-msgid "Info"
-msgstr "Tietoja"
-
-#: ../../install_steps_gtk.pm_.c:268 ../../install_steps_interactive.pm_.c:216
-#: ../../standalone/rpmdrake_.c:161
-msgid "Install"
-msgstr "Asenna"
-
 #: ../../install_steps_gtk.pm_.c:272
 msgid "Automatic dependencies"
 msgstr "Automaattiset riippuvuudet"
@@ -3224,16 +3287,6 @@ msgstr "Viallinen paketti"
 #, c-format
 msgid "Name: %s\n"
 msgstr "Nimi: %s\n"
-
-#: ../../install_steps_gtk.pm_.c:353 ../../standalone/rpmdrake_.c:136
-#, c-format
-msgid "Version: %s\n"
-msgstr "Versio: %s\n"
-
-#: ../../install_steps_gtk.pm_.c:354 ../../standalone/rpmdrake_.c:137
-#, c-format
-msgid "Size: %d KB\n"
-msgstr "Koko: %d Kt\n"
 
 #: ../../install_steps_gtk.pm_.c:355
 #, c-format
@@ -3286,25 +3339,9 @@ msgstr ""
 msgid "You can't unselect this package. It must be upgraded"
 msgstr "Et voi poistaa tämän paketin valintaa. Paketti pitää päivittää."
 
-#: ../../install_steps_gtk.pm_.c:466 ../../install_steps_interactive.pm_.c:594
-msgid "Installing"
-msgstr "Asennan"
-
 #: ../../install_steps_gtk.pm_.c:469
 msgid "Estimating"
 msgstr "Arvioin"
-
-#: ../../install_steps_gtk.pm_.c:472
-msgid "Please wait, "
-msgstr "Odota hetki, "
-
-#: ../../install_steps_gtk.pm_.c:474
-msgid "Time remaining "
-msgstr "Jäljellä "
-
-#: ../../install_steps_gtk.pm_.c:475
-msgid "Total time "
-msgstr "Kokonaisaika "
 
 #: ../../install_steps_gtk.pm_.c:481 ../../interactive.pm_.c:86
 #: ../../interactive.pm_.c:249 ../../interactive_newt.pm_.c:51
@@ -3313,19 +3350,10 @@ msgstr "Kokonaisaika "
 msgid "Cancel"
 msgstr "Peruuta"
 
-#: ../../install_steps_gtk.pm_.c:484 ../../install_steps_interactive.pm_.c:594
-msgid "Preparing installation"
-msgstr "Valmistelen asennusta"
-
 #: ../../install_steps_gtk.pm_.c:495
 #, c-format
 msgid "%d packages"
 msgstr "%d pakettia"
-
-#: ../../install_steps_gtk.pm_.c:500
-#, c-format
-msgid "Installing package %s"
-msgstr "Asennan pakettia %s"
 
 #: ../../install_steps_gtk.pm_.c:531
 msgid ""
@@ -3383,14 +3411,6 @@ msgstr ""
 #, fuzzy
 msgid "Refuse"
 msgstr "Uusi koko"
-
-#: ../../install_steps_gtk.pm_.c:569 ../../install_steps_gtk.pm_.c:573
-msgid "Go on anyway?"
-msgstr "Jatka kuitenkin?"
-
-#: ../../install_steps_gtk.pm_.c:569
-msgid "There was an error ordering packages:"
-msgstr "Tapahtu virhe järjestettäessä paketteja:"
 
 #: ../../install_steps_gtk.pm_.c:573
 msgid "There was an error installing packages:"
@@ -4148,10 +4168,6 @@ msgid ""
 "give digits instead of normal letters (eg: pressing `p' gives `6')"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:999
-msgid "Use existing configuration for X11?"
-msgstr "Käytä olemassaolevia asetuksia X11:ta?"
-
 #: ../../install_steps_interactive.pm_.c:1028
 msgid "Do you want to generate an auto install floppy for linux replication?"
 msgstr ""
@@ -4238,246 +4254,246 @@ msgstr "Valintasi? (oletus %s) "
 msgid "Your choice? (default %s  enter `none' for none) "
 msgstr "Valintasi? (oletus %s anna `ei mikään' jos et halua mitään) "
 
-#: ../../keyboard.pm_.c:104 ../../keyboard.pm_.c:134
+#: ../../keyboard.pm_.c:105 ../../keyboard.pm_.c:135
 msgid "Czech"
 msgstr "Tshekki"
 
-#: ../../keyboard.pm_.c:105 ../../keyboard.pm_.c:118 ../../keyboard.pm_.c:135
+#: ../../keyboard.pm_.c:106 ../../keyboard.pm_.c:119 ../../keyboard.pm_.c:136
 msgid "German"
 msgstr "Saksa"
 
-#: ../../keyboard.pm_.c:106
+#: ../../keyboard.pm_.c:107
 msgid "Dvorak"
 msgstr "Dvorak"
 
-#: ../../keyboard.pm_.c:107 ../../keyboard.pm_.c:141
+#: ../../keyboard.pm_.c:108 ../../keyboard.pm_.c:142
 msgid "Spanish"
 msgstr "Espanja"
 
-#: ../../keyboard.pm_.c:108 ../../keyboard.pm_.c:142
+#: ../../keyboard.pm_.c:109 ../../keyboard.pm_.c:143
 msgid "Finnish"
 msgstr "Suomi"
 
-#: ../../keyboard.pm_.c:109 ../../keyboard.pm_.c:119 ../../keyboard.pm_.c:143
+#: ../../keyboard.pm_.c:110 ../../keyboard.pm_.c:120 ../../keyboard.pm_.c:144
 msgid "French"
 msgstr "Ranska"
 
-#: ../../keyboard.pm_.c:110 ../../keyboard.pm_.c:162
+#: ../../keyboard.pm_.c:111 ../../keyboard.pm_.c:164
 msgid "Norwegian"
 msgstr "Norja"
 
-#: ../../keyboard.pm_.c:111
+#: ../../keyboard.pm_.c:112
 msgid "Polish"
 msgstr "Puola"
 
-#: ../../keyboard.pm_.c:112 ../../keyboard.pm_.c:167
+#: ../../keyboard.pm_.c:113 ../../keyboard.pm_.c:169
 msgid "Russian"
 msgstr "Venäjä"
 
-#: ../../keyboard.pm_.c:113 ../../keyboard.pm_.c:176
+#: ../../keyboard.pm_.c:114 ../../keyboard.pm_.c:178
 msgid "UK keyboard"
 msgstr "UK näppäimistö"
 
-#: ../../keyboard.pm_.c:114 ../../keyboard.pm_.c:117 ../../keyboard.pm_.c:177
+#: ../../keyboard.pm_.c:115 ../../keyboard.pm_.c:118 ../../keyboard.pm_.c:179
 msgid "US keyboard"
 msgstr "US näppäimistö"
 
-#: ../../keyboard.pm_.c:121
+#: ../../keyboard.pm_.c:122
 msgid "Armenian (old)"
 msgstr "Armeenia (vanha)"
 
-#: ../../keyboard.pm_.c:122
+#: ../../keyboard.pm_.c:123
 msgid "Armenian (typewriter)"
 msgstr "Armeenia (kirjoituskone)"
 
-#: ../../keyboard.pm_.c:123
+#: ../../keyboard.pm_.c:124
 msgid "Armenian (phonetic)"
 msgstr "Armeenia (foneettinen)"
 
-#: ../../keyboard.pm_.c:126
+#: ../../keyboard.pm_.c:127
 msgid "Azerbaidjani (latin)"
 msgstr ""
 
-#: ../../keyboard.pm_.c:127
+#: ../../keyboard.pm_.c:128
 msgid "Azerbaidjani (cyrillic)"
 msgstr ""
 
-#: ../../keyboard.pm_.c:128
+#: ../../keyboard.pm_.c:129
 msgid "Belgian"
 msgstr "Belgia"
 
-#: ../../keyboard.pm_.c:129
+#: ../../keyboard.pm_.c:130
 msgid "Bulgarian"
 msgstr "Bulgaria"
 
-#: ../../keyboard.pm_.c:130
+#: ../../keyboard.pm_.c:131
 msgid "Brazilian (ABNT-2)"
 msgstr "Brasilia"
 
-#: ../../keyboard.pm_.c:131
+#: ../../keyboard.pm_.c:132
 #, fuzzy
 msgid "Belarusian"
 msgstr "Bulgaria"
 
-#: ../../keyboard.pm_.c:132
+#: ../../keyboard.pm_.c:133
 msgid "Swiss (German layout)"
 msgstr "Sveitsi (Saksalainen järjestys)"
 
-#: ../../keyboard.pm_.c:133
+#: ../../keyboard.pm_.c:134
 msgid "Swiss (French layout)"
 msgstr "Sveitsi (Ranskalainen järjestys)"
 
-#: ../../keyboard.pm_.c:136
+#: ../../keyboard.pm_.c:137
 msgid "German (no dead keys)"
 msgstr "Saksa (ei kuolleita näppäimiä)"
 
-#: ../../keyboard.pm_.c:137
+#: ../../keyboard.pm_.c:138
 msgid "Danish"
 msgstr "Tanska"
 
-#: ../../keyboard.pm_.c:138
+#: ../../keyboard.pm_.c:139
 #, fuzzy
 msgid "Dvorak (US)"
 msgstr "Dvorak"
 
-#: ../../keyboard.pm_.c:139
+#: ../../keyboard.pm_.c:140
 #, fuzzy
 msgid "Dvorak (Norwegian)"
 msgstr "Norja"
 
-#: ../../keyboard.pm_.c:140
+#: ../../keyboard.pm_.c:141
 msgid "Estonian"
 msgstr "Eesti"
 
-#: ../../keyboard.pm_.c:144
+#: ../../keyboard.pm_.c:145
 msgid "Georgian (\"Russian\" layout)"
 msgstr "Georgia (\"Venäläinen\"-järjestys)"
 
-#: ../../keyboard.pm_.c:145
+#: ../../keyboard.pm_.c:146
 msgid "Georgian (\"Latin\" layout)"
 msgstr "Georgia (\"Latin\"-järjestys)"
 
-#: ../../keyboard.pm_.c:146
+#: ../../keyboard.pm_.c:147
 msgid "Greek"
 msgstr "Kreikka"
 
-#: ../../keyboard.pm_.c:147
+#: ../../keyboard.pm_.c:148
 msgid "Hungarian"
 msgstr "Unkari"
 
-#: ../../keyboard.pm_.c:148
+#: ../../keyboard.pm_.c:149
 msgid "Croatian"
 msgstr "Kroatia"
 
-#: ../../keyboard.pm_.c:149
+#: ../../keyboard.pm_.c:150
 msgid "Israeli"
 msgstr "Israeli"
 
-#: ../../keyboard.pm_.c:150
+#: ../../keyboard.pm_.c:151
 msgid "Israeli (Phonetic)"
 msgstr "Israeli (Foneettinen)"
 
-#: ../../keyboard.pm_.c:151
+#: ../../keyboard.pm_.c:152
 #, fuzzy
 msgid "Iranian"
 msgstr "Ukraina"
 
-#: ../../keyboard.pm_.c:152
+#: ../../keyboard.pm_.c:153
 msgid "Icelandic"
 msgstr "Islanti"
 
-#: ../../keyboard.pm_.c:153
+#: ../../keyboard.pm_.c:154
 msgid "Italian"
 msgstr "Italia"
 
-#: ../../keyboard.pm_.c:154
+#: ../../keyboard.pm_.c:155
 msgid "Japanese 106 keys"
 msgstr ""
 
-#: ../../keyboard.pm_.c:155
+#: ../../keyboard.pm_.c:156
 msgid "Latin American"
 msgstr "Latinalainen amerikka"
 
-#: ../../keyboard.pm_.c:156
+#: ../../keyboard.pm_.c:158
 msgid "Dutch"
 msgstr "Hollanti"
 
-#: ../../keyboard.pm_.c:157
+#: ../../keyboard.pm_.c:159
 #, fuzzy
 msgid "Lithuanian AZERTY (old)"
 msgstr "Liettua AZERTY"
 
-#: ../../keyboard.pm_.c:159
+#: ../../keyboard.pm_.c:161
 #, fuzzy
 msgid "Lithuanian AZERTY (new)"
 msgstr "Liettua AZERTY"
 
-#: ../../keyboard.pm_.c:160
+#: ../../keyboard.pm_.c:162
 msgid "Lithuanian \"number row\" QWERTY"
 msgstr "Liettua \"numerorivi\" QWERTY"
 
-#: ../../keyboard.pm_.c:161
+#: ../../keyboard.pm_.c:163
 msgid "Lithuanian \"phonetic\" QWERTY"
 msgstr "Liettua \"foneettinen\" QWERTY"
 
-#: ../../keyboard.pm_.c:163
+#: ../../keyboard.pm_.c:165
 msgid "Polish (qwerty layout)"
 msgstr "Puola (qwerty järjestys)"
 
-#: ../../keyboard.pm_.c:164
+#: ../../keyboard.pm_.c:166
 msgid "Polish (qwertz layout)"
 msgstr "Puola (qwertz järjestys)"
 
-#: ../../keyboard.pm_.c:165
+#: ../../keyboard.pm_.c:167
 msgid "Portuguese"
 msgstr "Portugal"
 
-#: ../../keyboard.pm_.c:166
+#: ../../keyboard.pm_.c:168
 msgid "Canadian (Quebec)"
 msgstr "Kanada (Quebec)"
 
-#: ../../keyboard.pm_.c:168
+#: ../../keyboard.pm_.c:170
 msgid "Russian (Yawerty)"
 msgstr "Venäjä (Yawerty)"
 
-#: ../../keyboard.pm_.c:169
+#: ../../keyboard.pm_.c:171
 msgid "Swedish"
 msgstr "Ruotsi"
 
-#: ../../keyboard.pm_.c:170
+#: ../../keyboard.pm_.c:172
 msgid "Slovenian"
 msgstr "Slovenia"
 
-#: ../../keyboard.pm_.c:171
+#: ../../keyboard.pm_.c:173
 msgid "Slovakian"
 msgstr "Slovakia"
 
-#: ../../keyboard.pm_.c:172
+#: ../../keyboard.pm_.c:174
 msgid "Thai keyboard"
 msgstr "Thai-näppäimistö"
 
-#: ../../keyboard.pm_.c:173
+#: ../../keyboard.pm_.c:175
 msgid "Turkish (traditional \"F\" model)"
 msgstr "Turkki (perinteinen \"F\"-malli)"
 
-#: ../../keyboard.pm_.c:174
+#: ../../keyboard.pm_.c:176
 msgid "Turkish (modern \"Q\" model)"
 msgstr "Turkki (perinteinen \"Q\"-malli)"
 
-#: ../../keyboard.pm_.c:175
+#: ../../keyboard.pm_.c:177
 msgid "Ukrainian"
 msgstr "Ukraina"
 
-#: ../../keyboard.pm_.c:178
+#: ../../keyboard.pm_.c:180
 msgid "US keyboard (international)"
 msgstr "US näppäimistö (kansainvälinen)"
 
-#: ../../keyboard.pm_.c:179
+#: ../../keyboard.pm_.c:181
 #, fuzzy
 msgid "Vietnamese \"numeric row\" QWERTY"
 msgstr "Liettua \"numerorivi\" QWERTY"
 
-#: ../../keyboard.pm_.c:180
+#: ../../keyboard.pm_.c:182
 msgid "Yugoslavian (latin layout)"
 msgstr "Jugoslavia (latin-järjestys)"
 
@@ -4795,8 +4811,8 @@ msgid ""
 "Please choose which network adapter you want to use to connect to Internet"
 msgstr "Mihin sarjaporttiin hiiresi on liitetty."
 
-#: ../../netconnect.pm_.c:351 ../../netconnect.pm_.c:623
-#: ../../netconnect.pm_.c:754 ../../standalone/drakgw_.c:217
+#: ../../netconnect.pm_.c:351 ../../netconnect.pm_.c:630
+#: ../../netconnect.pm_.c:761 ../../standalone/drakgw_.c:217
 msgid "Network interface"
 msgstr ""
 
@@ -4821,251 +4837,251 @@ msgstr "Asetukset"
 msgid "Do you want to start your connection at boot?"
 msgstr "Haluatko käyttää aboot:a?"
 
-#: ../../netconnect.pm_.c:529
+#: ../../netconnect.pm_.c:536
 msgid "Try to find a modem?"
 msgstr "Yritä etsiä modeemia?"
 
-#: ../../netconnect.pm_.c:539
+#: ../../netconnect.pm_.c:546
 msgid "Please choose which serial port your modem is connected to."
 msgstr "Mihin sarjaporttiin modeemisi on kytketty."
 
-#: ../../netconnect.pm_.c:544
+#: ../../netconnect.pm_.c:551
 msgid "Dialup options"
 msgstr "Soittoasetukset"
 
-#: ../../netconnect.pm_.c:545
+#: ../../netconnect.pm_.c:552
 msgid "Connection name"
 msgstr "Yhteyden nimi"
 
-#: ../../netconnect.pm_.c:546
+#: ../../netconnect.pm_.c:553
 #, fuzzy
 msgid "Phone number"
 msgstr "Puhelinnumero"
 
-#: ../../netconnect.pm_.c:547
+#: ../../netconnect.pm_.c:554
 msgid "Login ID"
 msgstr "Käyttäjä ID"
 
-#: ../../netconnect.pm_.c:549
+#: ../../netconnect.pm_.c:556
 msgid "Authentication"
 msgstr "Tunnistustapa"
 
-#: ../../netconnect.pm_.c:549
+#: ../../netconnect.pm_.c:556
 msgid "PAP"
 msgstr "PAP"
 
-#: ../../netconnect.pm_.c:549
+#: ../../netconnect.pm_.c:556
 msgid "Script-based"
 msgstr "Script-pohjainen"
 
-#: ../../netconnect.pm_.c:549
+#: ../../netconnect.pm_.c:556
 msgid "Terminal-based"
 msgstr "Terminaalipohjainen"
 
-#: ../../netconnect.pm_.c:550
+#: ../../netconnect.pm_.c:557
 #, fuzzy
 msgid "Domain name"
 msgstr "Yhteyden nimi"
 
-#: ../../netconnect.pm_.c:552
+#: ../../netconnect.pm_.c:559
 msgid "First DNS Server"
 msgstr "Ensimmäinen nimipalvelin"
 
-#: ../../netconnect.pm_.c:553
+#: ../../netconnect.pm_.c:560
 msgid "Second DNS Server"
 msgstr "Toinen nimipalvelin"
 
-#: ../../netconnect.pm_.c:582
+#: ../../netconnect.pm_.c:589
 #, fuzzy
 msgid ""
 "\n"
 "You can connect to Internet or reconfigure your connection."
 msgstr "Yhteyden nimi"
 
-#: ../../netconnect.pm_.c:582 ../../netconnect.pm_.c:586
+#: ../../netconnect.pm_.c:589 ../../netconnect.pm_.c:593
 #, fuzzy
 msgid ""
 "\n"
 "You can reconfigure your connection."
 msgstr "Aseta verkko"
 
-#: ../../netconnect.pm_.c:582
+#: ../../netconnect.pm_.c:589
 #, fuzzy
 msgid "You are not currently connected to Internet."
 msgstr "Älä aseta verkkoa"
 
-#: ../../netconnect.pm_.c:586
+#: ../../netconnect.pm_.c:593
 msgid ""
 "\n"
 "You can disconnect or reconfigure your connection."
 msgstr ""
 
-#: ../../netconnect.pm_.c:586
+#: ../../netconnect.pm_.c:593
 #, fuzzy
 msgid "You are currently connected to internet."
 msgstr "Älä aseta verkkoa"
 
-#: ../../netconnect.pm_.c:590
+#: ../../netconnect.pm_.c:597
 #, fuzzy
 msgid "Connect to Internet"
 msgstr "Yhteyden nimi"
 
-#: ../../netconnect.pm_.c:592
+#: ../../netconnect.pm_.c:599
 #, fuzzy
 msgid "Disconnect from Internet"
 msgstr "Yhteyden nimi"
 
-#: ../../netconnect.pm_.c:594
+#: ../../netconnect.pm_.c:601
 #, fuzzy
 msgid "Configure network connection (LAN or Internet)"
 msgstr "Aseta verkko"
 
-#: ../../netconnect.pm_.c:597
+#: ../../netconnect.pm_.c:604
 #, fuzzy
 msgid "Internet connection & configuration"
 msgstr "Kirjoitinyhteys"
 
-#: ../../netconnect.pm_.c:624 ../../netconnect.pm_.c:755
+#: ../../netconnect.pm_.c:631 ../../netconnect.pm_.c:762
 msgid ""
 "I'm about to restart the network device $netc->{NET_DEVICE}. Do you agree?"
 msgstr ""
 
-#: ../../netconnect.pm_.c:641
+#: ../../netconnect.pm_.c:648
 #, fuzzy
 msgid "Configure a normal modem connection"
 msgstr "Aseta verkko"
 
-#: ../../netconnect.pm_.c:661
+#: ../../netconnect.pm_.c:668
 #, fuzzy
 msgid "Configure an ISDN connection"
 msgstr "Aseta verkko"
 
-#: ../../netconnect.pm_.c:666
+#: ../../netconnect.pm_.c:673
 msgid "Internal ISDN card"
 msgstr ""
 
-#: ../../netconnect.pm_.c:668
+#: ../../netconnect.pm_.c:675
 #, fuzzy
 msgid "External ISDN modem"
 msgstr "Ekspertti"
 
-#: ../../netconnect.pm_.c:671 ../../netconnect.pm_.c:705
-#: ../../netconnect.pm_.c:717 ../../netconnect.pm_.c:741
-#: ../../netconnect.pm_.c:786
+#: ../../netconnect.pm_.c:678 ../../netconnect.pm_.c:712
+#: ../../netconnect.pm_.c:724 ../../netconnect.pm_.c:748
+#: ../../netconnect.pm_.c:793
 #, fuzzy
 msgid "Connect to the Internet"
 msgstr "Yhteyden nimi"
 
-#: ../../netconnect.pm_.c:672
+#: ../../netconnect.pm_.c:679
 #, fuzzy
 msgid "What kind is your ISDN connection?"
 msgstr "Mihin sarjaporttiin hiiresi on liitetty?"
 
-#: ../../netconnect.pm_.c:691
+#: ../../netconnect.pm_.c:698
 #, fuzzy
 msgid "Configure a DSL (or ADSL) connection"
 msgstr "Aseta verkko"
 
-#: ../../netconnect.pm_.c:700
+#: ../../netconnect.pm_.c:707
 #, fuzzy
 msgid "France"
 msgstr "Peruuta"
 
-#: ../../netconnect.pm_.c:702
+#: ../../netconnect.pm_.c:709
 msgid "Other countries"
 msgstr ""
 
-#: ../../netconnect.pm_.c:706
+#: ../../netconnect.pm_.c:713
 msgid "In which country are you located ?"
 msgstr ""
 
-#: ../../netconnect.pm_.c:712
+#: ../../netconnect.pm_.c:719
 msgid "Alcatel modem"
 msgstr ""
 
-#: ../../netconnect.pm_.c:714
+#: ../../netconnect.pm_.c:721
 #, fuzzy
 msgid "ECI modem"
 msgstr "Ekspertti"
 
-#: ../../netconnect.pm_.c:718
+#: ../../netconnect.pm_.c:725
 msgid "If your adsl modem is an Alcatel one, choose Alcatel. Otherwise, ECI."
 msgstr ""
 
-#: ../../netconnect.pm_.c:736
+#: ../../netconnect.pm_.c:743
 msgid "use pppoe"
 msgstr ""
 
-#: ../../netconnect.pm_.c:738
+#: ../../netconnect.pm_.c:745
 msgid "don't use pppoe"
 msgstr ""
 
-#: ../../netconnect.pm_.c:742
+#: ../../netconnect.pm_.c:749
 msgid ""
 "The most common way to connect with adsl is dhcp + pppoe.\n"
 "However, some connections only use dhcp.\n"
 "If you don't know, choose 'use pppoe'"
 msgstr ""
 
-#: ../../netconnect.pm_.c:765
+#: ../../netconnect.pm_.c:772
 #, fuzzy
 msgid "Configure a cable connection"
 msgstr "Aseta verkko"
 
-#: ../../netconnect.pm_.c:787
+#: ../../netconnect.pm_.c:794
 #, fuzzy
 msgid ""
 "Which dhcp client do you want to use?\n"
 "Default is dhcpd"
 msgstr "Minkä osiotyypin haluat?"
 
-#: ../../netconnect.pm_.c:800
+#: ../../netconnect.pm_.c:807
 #, fuzzy
 msgid "Disable Internet Connection"
 msgstr "Aseta verkko"
 
-#: ../../netconnect.pm_.c:811
+#: ../../netconnect.pm_.c:818
 #, fuzzy
 msgid "Configure local network"
 msgstr "Aseta verkko"
 
-#: ../../netconnect.pm_.c:815
+#: ../../netconnect.pm_.c:822
 #, fuzzy
 msgid "Network configuration"
 msgstr "Verkon asetukset"
 
-#: ../../netconnect.pm_.c:816
+#: ../../netconnect.pm_.c:823
 #, fuzzy
 msgid "Do you want to restart the network"
 msgstr "Haluatko kokeilla asetuksia?"
 
-#: ../../netconnect.pm_.c:824
+#: ../../netconnect.pm_.c:831
 #, fuzzy
 msgid "Disable networking"
 msgstr "Aseta verkko"
 
-#: ../../netconnect.pm_.c:834
+#: ../../netconnect.pm_.c:841
 #, fuzzy
 msgid "Configure the Internet connection / Configure local Network"
 msgstr "Yhteyden nimi"
 
-#: ../../netconnect.pm_.c:835
+#: ../../netconnect.pm_.c:842
 #, fuzzy
 msgid ""
 "Local networking has already been configured.\n"
 "Do you want to:"
 msgstr "Lähiverkko on jo asetettu. Haluatko:"
 
-#: ../../netconnect.pm_.c:836
+#: ../../netconnect.pm_.c:843
 #, fuzzy
 msgid "How do you want to connect to the Internet?"
 msgstr "Mille levylle haluat siirtää?"
 
-#: ../../netconnect.pm_.c:858
+#: ../../netconnect.pm_.c:865
 msgid "Network Configuration"
 msgstr "Verkon asetukset"
 
-#: ../../netconnect.pm_.c:859
+#: ../../netconnect.pm_.c:866
 msgid ""
 "Now that your Internet connection is configured,\n"
 "your computer can be configured to share its Internet connection.\n"
@@ -6037,31 +6053,15 @@ msgstr ""
 msgid "Configuring..."
 msgstr "Asetan IDE-levyä"
 
-#: ../../standalone/drakgw_.c:306
-msgid "Could not install ipchains RPM with urpmi."
+#: ../../standalone/drakgw_.c:313
+msgid "Problems installing package $bin2rpm{$_}"
 msgstr ""
 
-#: ../../standalone/drakgw_.c:456
-msgid "Could not install dhcp RPM with urpmi."
-msgstr ""
-
-#: ../../standalone/drakgw_.c:480
-msgid "Could not install linuxconf RPM with urpmi."
-msgstr ""
-
-#: ../../standalone/drakgw_.c:496
-msgid "Could not install bind RPM with urpmi."
-msgstr ""
-
-#: ../../standalone/drakgw_.c:500
-msgid "Could not install caching-nameserver RPM with urpmi."
-msgstr ""
-
-#: ../../standalone/drakgw_.c:512
+#: ../../standalone/drakgw_.c:504
 msgid "Congratulations!"
 msgstr "Onnittelut!"
 
-#: ../../standalone/drakgw_.c:513
+#: ../../standalone/drakgw_.c:505
 msgid ""
 "Everything has been configured.\n"
 "You may now share Internet connection with other computers on your Local "
@@ -6130,6 +6130,14 @@ msgstr "Asetan turvatasoa"
 #: ../../standalone/drakxconf_.c:21
 msgid "Choose the tool you want to use"
 msgstr "Valitse haluamasi työkalu"
+
+#: ../../standalone/keyboarddrake_.c:14
+msgid "usage: keyboarddrake [--expert]\n"
+msgstr ""
+
+#: ../../standalone/keyboarddrake_.c:27
+msgid "Do you want the BackSpace to return Delete in console?"
+msgstr ""
 
 #: ../../standalone/livedrake_.c:23
 #, fuzzy
@@ -6376,80 +6384,57 @@ msgid "Finding leaves takes some time"
 msgstr "Lehtien haku kestää jonkin aikaa"
 
 # ../../share/compssUsers
-msgid "More Graphical Desktops (Gnome, IceWM)"
+msgid "Graphics Manipulation"
 msgstr ""
 
 # ../../share/compssUsers
-msgid ""
-"The K Desktop Environment, the basic graphical environment with a collection "
-"of accompanying tools"
+msgid "KDE, QT, Gnome, GTK+"
 msgstr ""
-
-# ../../share/compssUsers
-msgid "Personnal Information Management"
-msgstr ""
-
-# ../../share/compssUsers
-msgid "Tools to create and burn CD's"
-msgstr ""
-
-#, fuzzy
-msgid "Internet Tools"
-msgstr "Välityspalvelimien asetus"
-
-#, fuzzy
-msgid "Internet"
-msgstr "kiinnostava"
 
 # ../../share/compssUsers
 msgid "Personnal Finance"
 msgstr ""
 
 # ../../share/compssUsers
-msgid "Gnome, Icewm, Window Maker, Enlightenment, Fvwm, etc"
+msgid "Python, Perl, libraries, tools"
 msgstr ""
 
 # ../../share/compssUsers
-msgid "Graphics programs such as The Gimp"
-msgstr ""
-
-msgid "Office"
-msgstr "Toimistosovellukset"
-
-# ../../share/compssUsers
-msgid "Databases clients and servers (mysql and postgresql)"
+msgid "Scientific applications"
 msgstr ""
 
 # ../../share/compssUsers
-msgid "Tools for your Palm Pilot or your Visor"
+msgid "Databases"
 msgstr ""
+
+#, fuzzy
+msgid "Internet"
+msgstr "kiinnostava"
 
 #, fuzzy
 msgid "Multimedia - Graphics"
 msgstr "Multimedia"
 
 # ../../share/compssUsers
-msgid "Video players and editors"
+msgid "editors, shells, file tools, terminals"
 msgstr ""
 
-# ../../share/compssUsers
-msgid "Amusement programs: arcade, boards, strategy, etc"
-msgstr ""
-
-# ../../share/compssUsers
-msgid ""
-"Office programs: wordprocessors (kword, abiword), spreadsheets (kspread, "
-"gnumeric), pdf viewers, etc"
-msgstr ""
-
-# ../../share/compssUsers
-msgid ""
-"Set of tools to read and send mail and news (pine, mutt, tin..) and to "
-"browse the Web"
-msgstr ""
+#, fuzzy
+msgid "Development applications"
+msgstr "Kehitys"
 
 # ../../share/compssUsers
 msgid "Audio-related tools: mp3 or midi players, mixers, etc"
+msgstr ""
+
+msgid "Multimedia"
+msgstr "Multimedia"
+
+msgid "Office"
+msgstr "Toimistosovellukset"
+
+# ../../share/compssUsers
+msgid "Sciences"
 msgstr ""
 
 # ../../share/compssUsers
@@ -6459,11 +6444,79 @@ msgid ""
 msgstr ""
 
 # ../../share/compssUsers
-msgid "Books and Howto's on Linux and Free Software"
+msgid ""
+"Set of tools to read and send mail and news (pine, mutt, tin..) and to "
+"browse the Web"
 msgstr ""
 
 # ../../share/compssUsers
+msgid "C and C++ development libraries, programs and include files"
+msgstr ""
+
+# ../../share/compssUsers
+msgid "Communication facilities"
+msgstr ""
+
+#, fuzzy
+msgid "KDE"
+msgstr "IDE"
+
+# ../../share/compssUsers
+msgid "Personnal Information Management"
+msgstr ""
+
+# ../../share/compssUsers
+msgid "Programs to manage your finance, such as gnucash"
+msgstr ""
+
+msgid "Gnome"
+msgstr "Gnome"
+
+#, fuzzy
+msgid "Internet Tools"
+msgstr "Välityspalvelimien asetus"
+
+msgid "Documentation"
+msgstr "Dokumentaatio"
+
+# ../../share/compssUsers
 msgid "Icewm, Window Maker, Enlightenment, Fvwm, etc"
+msgstr ""
+
+# ../../share/compssUsers
+msgid "Utilities"
+msgstr ""
+
+#, fuzzy
+msgid "Multimedia - Sound"
+msgstr "Multimedia"
+
+# ../../share/compssUsers
+msgid "Amusement programs: arcade, boards, strategy, etc"
+msgstr ""
+
+# ../../share/compssUsers
+msgid "Video players and editors"
+msgstr ""
+
+# ../../share/compssUsers
+msgid "Console Tools"
+msgstr ""
+
+#, fuzzy
+msgid "Development other"
+msgstr "Kehitys"
+
+# ../../share/compssUsers
+msgid "Databases clients and servers (mysql and postgresql)"
+msgstr ""
+
+# ../../share/compssUsers
+msgid "Sound and video playing/editing programs"
+msgstr ""
+
+# ../../share/compssUsers
+msgid "Books and Howto's on Linux and Free Software"
 msgstr ""
 
 # ../../share/compssUsers
@@ -6472,68 +6525,65 @@ msgid ""
 "tools"
 msgstr ""
 
-# ../../share/compssUsers
-msgid "Set of tools for mail, news, web, file transfer, and chat"
-msgstr ""
+#, fuzzy
+msgid "Games"
+msgstr "Gnome"
+
+#, fuzzy
+msgid "Development C/C++"
+msgstr "Kehitys"
 
 #, fuzzy
 msgid "Multimedia - Video"
 msgstr "Multimedia"
 
-#, fuzzy
-msgid "KDE"
-msgstr "IDE"
-
 # ../../share/compssUsers
-msgid "Sound and video playing/editing programs"
-msgstr ""
-
-msgid "Multimedia"
-msgstr "Multimedia"
-
-# ../../share/compssUsers
-msgid "Other Graphical Desktops"
-msgstr ""
-
-#, fuzzy
-msgid "Multimedia - Sound"
-msgstr "Multimedia"
-
-msgid "Gnome"
-msgstr "Gnome"
-
-msgid "Documentation"
-msgstr "Dokumentaatio"
-
-# ../../share/compssUsers
-msgid "Programs to manage your finance, such as gnucash"
+msgid "Graphics programs such as The Gimp"
 msgstr ""
 
 # ../../share/compssUsers
-msgid "Graphics Manipulation"
+msgid ""
+"The K Desktop Environment, the basic graphical environment with a collection "
+"of accompanying tools"
 msgstr ""
 
-#, fuzzy
-msgid "Games"
-msgstr "Gnome"
+# ../../share/compssUsers
+msgid "Tools to create and burn CD's"
+msgstr ""
+
+# ../../share/compssUsers
+msgid "More Graphical Desktops (Gnome, IceWM)"
+msgstr ""
 
 #, fuzzy
 msgid "Multimedia - CD Burning"
 msgstr "Multimedia"
 
 # ../../share/compssUsers
-msgid "Communication facilities"
+msgid "Archiving, emulators, monitoring"
 msgstr ""
 
 # ../../share/compssUsers
-msgid "Databases"
+msgid ""
+"Office programs: wordprocessors (kword, abiword), spreadsheets (kspread, "
+"gnumeric), pdf viewers, etc"
 msgstr ""
 
-#~ msgid "Choose the size you want to install"
-#~ msgstr "Valitse asennuksen koko"
+# ../../share/compssUsers
+msgid "Other Graphical Desktops"
+msgstr ""
 
-#~ msgid "Total size: "
-#~ msgstr "Kokonaiskoko: "
+# ../../share/compssUsers
+msgid "Tools for your Palm Pilot or your Visor"
+msgstr ""
+
+# ../../share/compssUsers
+msgid "Gnome, Icewm, Window Maker, Enlightenment, Fvwm, etc"
+msgstr ""
+
+# ../../share/compssUsers
+msgid "Set of tools for mail, news, web, file transfer, and chat"
+msgstr ""
 
 #, fuzzy
 #~ msgid "Reconfigure local network"

@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX VERSION\n"
-"POT-Creation-Date: 2000-10-09 15:58+0200\n"
+"POT-Creation-Date: 2000-10-16 13:34+0200\n"
 "PO-Revision-Date: 1999-08-25 11:07+0200\n"
 "Last-Translator: Pablo Saratxaga <pablo@mandrakesoft.com>\n"
 "Language-Team: walon <linux-wa@chanae.alphanet.ch>\n"
@@ -512,7 +512,7 @@ msgid "Delay before booting default image"
 msgstr "Tins divant d' enonder li prémetuwe imådje"
 
 #: ../../any.pm_.c:134 ../../install_steps_interactive.pm_.c:760
-#: ../../install_steps_interactive.pm_.c:811 ../../netconnect.pm_.c:548
+#: ../../install_steps_interactive.pm_.c:811 ../../netconnect.pm_.c:555
 #: ../../printerdrake.pm_.c:94 ../../printerdrake.pm_.c:128
 #: ../../standalone/adduserdrake_.c:42
 msgid "Password"
@@ -569,7 +569,7 @@ msgid "Add"
 msgstr "Radjouter"
 
 #: ../../any.pm_.c:165 ../../diskdrake.pm_.c:46
-#: ../../install_steps_interactive.pm_.c:805 ../../netconnect.pm_.c:830
+#: ../../install_steps_interactive.pm_.c:805 ../../netconnect.pm_.c:837
 #: ../../printerdrake.pm_.c:352 ../../standalone/adduserdrake_.c:36
 msgid "Done"
 msgstr "Fwait"
@@ -1324,7 +1324,9 @@ msgstr ""
 msgid "Choose the new size"
 msgstr "Tchwezixhoz li novele grandeu"
 
-#: ../../diskdrake.pm_.c:609 ../../install_steps_interactive.pm_.c:518
+#: ../../diskdrake.pm_.c:609 ../../install_steps_graphical.pm_.c:287
+#: ../../install_steps_graphical.pm_.c:334
+#: ../../install_steps_interactive.pm_.c:518
 #: ../../partition_table_raw.pm_.c:101
 msgid "MB"
 msgstr "Mo"
@@ -1495,6 +1497,16 @@ msgid ""
 "end without modifying your current\n"
 "configuration."
 msgstr ""
+"Vos dvoz accepter les condicions del licence chal pa dzeu po continuwer l' "
+"astalåcion.\n"
+"\n"
+"\n"
+"Clitchôz so «Accepter» si vos estoz d' acoird avou les condicions.\n"
+"\n"
+"\n"
+"Clitchoz so «Nén accepter» si vos n' estoz nén d' acoird avou les "
+"condicions.\n"
+"L' astalåcion va s' arester sin candjî l' apontiaedje k' i gn a."
 
 #: ../../help.pm_.c:22
 msgid "Choose the layout corresponding to your keyboard from the list above"
@@ -1549,6 +1561,43 @@ msgid ""
 "knowledge in GNU/Linux. So, don't choose\n"
 "\t  this installation class unless you know what you are doing."
 msgstr ""
+"Tchwezixhoz «Astaler» si vos n' avoz nole modeye di Linux-Mandrake di ddja\n"
+"astaleye, ou si vos voloz astaler pus d' on sistinme d' operance sol "
+"copiutrece.\n"
+"\n"
+"\n"
+"Tchwezixhoz «Mete a djoû» si vos voloz mete a djoû ene modeye didja astaley\n"
+"di Linux-Mandrake.\n"
+"\n"
+"\n"
+"Sorlon voss livea di cnoxhance do sistinme GNU/Linux, vos ploz tchwezi onk "
+"des liveas shûvants\n"
+"po astaler ou mete a djoû voss sistinme d' operance Linux-Mandrake:\n"
+"\n"
+"\t* Ricomandé: si vos n' avoz co måy astalé GNU/Linux.\n"
+"\tL' astalaedje srè foirt åjhey èt vos n' årèz ki sacwantès kesses a "
+"risponde.\n"
+"\n"
+"\n"
+"\t* A vosse môde: si vos cnoxhoz bén GNU/Linux, vos porèz tchwezi li sôrte\n"
+"\td' astalåcion ki vos vloz (eter posse éndjolrece, programeu ou sierveu).\n"
+"\tTchwezixhoz «Posse éndjolrece» po ene astalåcion djeneråle so vosse "
+"copiutrece.\n"
+"\tVos poloz tchwezi «Programeu» si vos alez pår eployî voste éndjole po "
+"disveloper des programes,\n"
+"\toudobén tchwezi «Sierveu» si vos vloz astaler on sierveu djenerå (sierveu\n"
+"\td' emilaedje, di caweyes di scrîrece,...).\n"
+"\n"
+"\n"
+"\t* Sipepieu: si vos estoz èn espert di GNU/Linux eyèt ki vos voloz èn\n"
+"\tastalaedje tot etir a vosse môde, cisse tchûze chal est por vos!\n"
+"\tVos porèz tchwezi li sôrte d' astalaedje sorlon çu ki vos vloz fé avou\n"
+"\tvosse éndjole del minme manîre k' avou «A vosse môde».\n"
+"\tÇoula pout esse målåjhey di rsponde a des kesses k' i gn a si vos n' avoz "
+"nén\n"
+"\tene grande conoxhance di GNU/Linux. Adon ni tchwezixhoz cisse classe d' "
+"astalaedje chal\n"
+"\tsi vos n' savoz nén çu ki vos fjhoz."
 
 #: ../../help.pm_.c:56
 msgid ""
@@ -1579,7 +1628,8 @@ msgstr ""
 "  - Sipepieu: si vos estoz èn espert di GNU/Linux eyèt ki vos voloz èn\n"
 "astalaedje tot etir a vosse môde, cisse tchûze chal est por vos!\n"
 "Vos porèz tchwezi li sôrte d' astalaedje sorlon çu ki vos vloz fé avou\n"
-"vosse éndjole del minme manîre k' avou «A vosse môde»."
+"vosse éndjole del minme manîre k' avou «A vosse môde».Mins, s' i vos plait, "
+"NI TCHWEZIXHOZ ÇOULA KI SI VOS SAVOZ ÇU KI VOS FJHOZ."
 
 #: ../../help.pm_.c:68
 msgid ""
@@ -2893,7 +2943,7 @@ msgstr "Plakete d' åtoatalaedje"
 msgid "Exit install"
 msgstr "Moussî foû"
 
-#: ../../install_any.pm_.c:584
+#: ../../install_any.pm_.c:575
 msgid "Error reading file $f"
 msgstr "Yåk n' a nén stî come dji sayîve di lere li fitchî $f"
 
@@ -2928,11 +2978,11 @@ msgstr ""
 "Po çoula, fijhoz ene pårticion (ou clitchoz so ene ki egzisteye ddja).\n"
 "Èt pôy tchwezixhoz «Pont di montaedje» èt metoz-lu come «/»"
 
-#: ../../install_interactive.pm_.c:46
+#: ../../install_interactive.pm_.c:46 ../../install_steps_graphical.pm_.c:259
 msgid "You must have a swap partition"
 msgstr "Vos dvez aveur ene pårticion di swap"
 
-#: ../../install_interactive.pm_.c:47
+#: ../../install_interactive.pm_.c:47 ../../install_steps_graphical.pm_.c:261
 msgid ""
 "You don't have a swap partition\n"
 "\n"
@@ -3150,6 +3200,80 @@ msgstr "Nou lijheu di plaketes disponibe"
 msgid "Entering step `%s'\n"
 msgstr "Intrant è l' étape '%s'\n"
 
+#: ../../install_steps_graphical.pm_.c:287
+msgid "Choose the size you want to install"
+msgstr "Tchwezixhoz li grandeu di çu k' voloz astaler"
+
+#: ../../install_steps_graphical.pm_.c:334
+msgid "Total size: "
+msgstr "Grandeu å totå: "
+
+#: ../../install_steps_graphical.pm_.c:346 ../../install_steps_gtk.pm_.c:353
+#: ../../standalone/rpmdrake_.c:136
+#, c-format
+msgid "Version: %s\n"
+msgstr "Modeye: %s\n"
+
+#: ../../install_steps_graphical.pm_.c:347 ../../install_steps_gtk.pm_.c:354
+#: ../../standalone/rpmdrake_.c:137
+#, c-format
+msgid "Size: %d KB\n"
+msgstr "Grandeu: %d Ko\n"
+
+#: ../../install_steps_graphical.pm_.c:462 ../../install_steps_gtk.pm_.c:260
+msgid "Choose the packages you want to install"
+msgstr "Tchwezixhoz les pacaedjes k' vos voloz astaler"
+
+#: ../../install_steps_graphical.pm_.c:465 ../../install_steps_gtk.pm_.c:263
+msgid "Info"
+msgstr "Informåcion"
+
+#: ../../install_steps_graphical.pm_.c:473 ../../install_steps_gtk.pm_.c:268
+#: ../../install_steps_interactive.pm_.c:216 ../../standalone/rpmdrake_.c:161
+msgid "Install"
+msgstr "Astaler"
+
+#: ../../install_steps_graphical.pm_.c:492 ../../install_steps_gtk.pm_.c:466
+#: ../../install_steps_interactive.pm_.c:594
+msgid "Installing"
+msgstr "Astalant"
+
+#: ../../install_steps_graphical.pm_.c:499 ../../install_steps_gtk.pm_.c:472
+msgid "Please wait, "
+msgstr "Tårdjîz on pô, s' i v' plait"
+
+#: ../../install_steps_graphical.pm_.c:501 ../../install_steps_gtk.pm_.c:474
+msgid "Time remaining "
+msgstr "Tins ki resse "
+
+#: ../../install_steps_graphical.pm_.c:502 ../../install_steps_gtk.pm_.c:475
+msgid "Total time "
+msgstr "Tins totå "
+
+#: ../../install_steps_graphical.pm_.c:507 ../../install_steps_gtk.pm_.c:484
+#: ../../install_steps_interactive.pm_.c:594
+msgid "Preparing installation"
+msgstr "Dj' apresteye l' astalaedje"
+
+#: ../../install_steps_graphical.pm_.c:528 ../../install_steps_gtk.pm_.c:500
+#, c-format
+msgid "Installing package %s"
+msgstr "Astalant li pacaedje %s"
+
+#: ../../install_steps_graphical.pm_.c:553 ../../install_steps_gtk.pm_.c:569
+#: ../../install_steps_gtk.pm_.c:573
+msgid "Go on anyway?"
+msgstr "Dji continowe tot l' minme?"
+
+#: ../../install_steps_graphical.pm_.c:553 ../../install_steps_gtk.pm_.c:569
+msgid "There was an error ordering packages:"
+msgstr "Yåk n' a nén stî come dj' arindjîve les pacaedjes:"
+
+#: ../../install_steps_graphical.pm_.c:577
+#: ../../install_steps_interactive.pm_.c:999
+msgid "Use existing configuration for X11?"
+msgstr "Eployî l' apontiaedje di X11 ki egzisteye ddja?"
+
 #: ../../install_steps_gtk.pm_.c:136
 msgid ""
 "Your system is low on resource. You may have some problem installing\n"
@@ -3211,19 +3335,6 @@ msgstr "Vos åroz l' ocåzion di tchwezi pus spepieuzmint djusse après."
 msgid "Percentage of packages to install"
 msgstr "Åcintaedje des pacaedjes a astaler"
 
-#: ../../install_steps_gtk.pm_.c:260
-msgid "Choose the packages you want to install"
-msgstr "Tchwezixhoz les pacaedjes k' vos voloz astaler"
-
-#: ../../install_steps_gtk.pm_.c:263
-msgid "Info"
-msgstr "Informåcion"
-
-#: ../../install_steps_gtk.pm_.c:268 ../../install_steps_interactive.pm_.c:216
-#: ../../standalone/rpmdrake_.c:161
-msgid "Install"
-msgstr "Astaler"
-
 #: ../../install_steps_gtk.pm_.c:272
 msgid "Automatic dependencies"
 msgstr "Aloyances åtomatikes"
@@ -3248,16 +3359,6 @@ msgstr "Måva pacaedje"
 #, c-format
 msgid "Name: %s\n"
 msgstr "No: %s\n"
-
-#: ../../install_steps_gtk.pm_.c:353 ../../standalone/rpmdrake_.c:136
-#, c-format
-msgid "Version: %s\n"
-msgstr "Modeye: %s\n"
-
-#: ../../install_steps_gtk.pm_.c:354 ../../standalone/rpmdrake_.c:137
-#, c-format
-msgid "Size: %d KB\n"
-msgstr "Grandeu: %d Ko\n"
 
 #: ../../install_steps_gtk.pm_.c:355
 #, c-format
@@ -3308,25 +3409,9 @@ msgstr ""
 msgid "You can't unselect this package. It must be upgraded"
 msgstr "Vos n' poloz nén distchwezi ci pacaedje chal. I l' fåt mete a djoû"
 
-#: ../../install_steps_gtk.pm_.c:466 ../../install_steps_interactive.pm_.c:594
-msgid "Installing"
-msgstr "Astalant"
-
 #: ../../install_steps_gtk.pm_.c:469
 msgid "Estimating"
 msgstr "Dj' asteme"
-
-#: ../../install_steps_gtk.pm_.c:472
-msgid "Please wait, "
-msgstr "Tårdjîz on pô, s' i v' plait"
-
-#: ../../install_steps_gtk.pm_.c:474
-msgid "Time remaining "
-msgstr "Tins ki resse "
-
-#: ../../install_steps_gtk.pm_.c:475
-msgid "Total time "
-msgstr "Tins totå "
 
 #: ../../install_steps_gtk.pm_.c:481 ../../interactive.pm_.c:86
 #: ../../interactive.pm_.c:249 ../../interactive_newt.pm_.c:51
@@ -3335,19 +3420,10 @@ msgstr "Tins totå "
 msgid "Cancel"
 msgstr "Rinoncî"
 
-#: ../../install_steps_gtk.pm_.c:484 ../../install_steps_interactive.pm_.c:594
-msgid "Preparing installation"
-msgstr "Dj' apresteye l' astalaedje"
-
 #: ../../install_steps_gtk.pm_.c:495
 #, c-format
 msgid "%d packages"
 msgstr "%d pacaedjes"
-
-#: ../../install_steps_gtk.pm_.c:500
-#, c-format
-msgid "Installing package %s"
-msgstr "Astalant li pacaedje %s"
 
 #: ../../install_steps_gtk.pm_.c:531
 msgid ""
@@ -3404,14 +3480,6 @@ msgstr ""
 #: ../../install_steps_gtk.pm_.c:559 ../../install_steps_interactive.pm_.c:147
 msgid "Refuse"
 msgstr "Nén accepter"
-
-#: ../../install_steps_gtk.pm_.c:569 ../../install_steps_gtk.pm_.c:573
-msgid "Go on anyway?"
-msgstr "Dji continowe tot l' minme?"
-
-#: ../../install_steps_gtk.pm_.c:569
-msgid "There was an error ordering packages:"
-msgstr "Yåk n' a nén stî come dj' arindjîve les pacaedjes:"
 
 #: ../../install_steps_gtk.pm_.c:573
 msgid "There was an error installing packages:"
@@ -4210,10 +4278,6 @@ msgstr ""
 "po taper, sacwantès tapes evoyront des limerôs èl plaece des letes\n"
 "(eg: tchoûkî so «p» donrè «6»)"
 
-#: ../../install_steps_interactive.pm_.c:999
-msgid "Use existing configuration for X11?"
-msgstr "Eployî l' apontiaedje di X11 ki egzisteye ddja?"
-
 #: ../../install_steps_interactive.pm_.c:1028
 msgid "Do you want to generate an auto install floppy for linux replication?"
 msgstr ""
@@ -4290,239 +4354,239 @@ msgstr "Vosse tchûze? (prémetuwe %s)"
 msgid "Your choice? (default %s  enter `none' for none) "
 msgstr "Vosse tchûze? (prémetuwe %s tapez 'none' po nole) "
 
-#: ../../keyboard.pm_.c:104 ../../keyboard.pm_.c:134
+#: ../../keyboard.pm_.c:105 ../../keyboard.pm_.c:135
 msgid "Czech"
 msgstr "Tcheke"
 
-#: ../../keyboard.pm_.c:105 ../../keyboard.pm_.c:118 ../../keyboard.pm_.c:135
+#: ../../keyboard.pm_.c:106 ../../keyboard.pm_.c:119 ../../keyboard.pm_.c:136
 msgid "German"
 msgstr "Almande"
 
-#: ../../keyboard.pm_.c:106
+#: ../../keyboard.pm_.c:107
 msgid "Dvorak"
 msgstr "Taprece dvorak"
 
-#: ../../keyboard.pm_.c:107 ../../keyboard.pm_.c:141
+#: ../../keyboard.pm_.c:108 ../../keyboard.pm_.c:142
 msgid "Spanish"
 msgstr "Espagnole"
 
-#: ../../keyboard.pm_.c:108 ../../keyboard.pm_.c:142
+#: ../../keyboard.pm_.c:109 ../../keyboard.pm_.c:143
 msgid "Finnish"
 msgstr "Finwèsse"
 
-#: ../../keyboard.pm_.c:109 ../../keyboard.pm_.c:119 ../../keyboard.pm_.c:143
+#: ../../keyboard.pm_.c:110 ../../keyboard.pm_.c:120 ../../keyboard.pm_.c:144
 msgid "French"
 msgstr "Francèsse"
 
-#: ../../keyboard.pm_.c:110 ../../keyboard.pm_.c:162
+#: ../../keyboard.pm_.c:111 ../../keyboard.pm_.c:164
 msgid "Norwegian"
 msgstr "Norvejyinne"
 
-#: ../../keyboard.pm_.c:111
+#: ../../keyboard.pm_.c:112
 msgid "Polish"
 msgstr "Polonèsse"
 
-#: ../../keyboard.pm_.c:112 ../../keyboard.pm_.c:167
+#: ../../keyboard.pm_.c:113 ../../keyboard.pm_.c:169
 msgid "Russian"
 msgstr "Russe"
 
-#: ../../keyboard.pm_.c:113 ../../keyboard.pm_.c:176
+#: ../../keyboard.pm_.c:114 ../../keyboard.pm_.c:178
 msgid "UK keyboard"
 msgstr "Taprece do Rweyåme Uni"
 
-#: ../../keyboard.pm_.c:114 ../../keyboard.pm_.c:117 ../../keyboard.pm_.c:177
+#: ../../keyboard.pm_.c:115 ../../keyboard.pm_.c:118 ../../keyboard.pm_.c:179
 msgid "US keyboard"
 msgstr "Taprece des Etats Unis"
 
-#: ../../keyboard.pm_.c:121
+#: ../../keyboard.pm_.c:122
 msgid "Armenian (old)"
 msgstr "Armenyinne (vîle modeye)"
 
-#: ../../keyboard.pm_.c:122
+#: ../../keyboard.pm_.c:123
 msgid "Armenian (typewriter)"
 msgstr "Armenyinne (novele modeye)"
 
-#: ../../keyboard.pm_.c:123
+#: ../../keyboard.pm_.c:124
 msgid "Armenian (phonetic)"
 msgstr "Armenyinne (fonetike)"
 
-#: ../../keyboard.pm_.c:126
+#: ../../keyboard.pm_.c:127
 msgid "Azerbaidjani (latin)"
 msgstr "Azerbaidjanèsse (laténne)"
 
-#: ../../keyboard.pm_.c:127
+#: ../../keyboard.pm_.c:128
 msgid "Azerbaidjani (cyrillic)"
 msgstr "Azerbaidjanèsse (cirilike)"
 
-#: ../../keyboard.pm_.c:128
+#: ../../keyboard.pm_.c:129
 msgid "Belgian"
 msgstr "Belje"
 
-#: ../../keyboard.pm_.c:129
+#: ../../keyboard.pm_.c:130
 msgid "Bulgarian"
 msgstr "Bulgåre"
 
-#: ../../keyboard.pm_.c:130
+#: ../../keyboard.pm_.c:131
 msgid "Brazilian (ABNT-2)"
 msgstr "Braezilyinne (ABNT-2)"
 
-#: ../../keyboard.pm_.c:131
+#: ../../keyboard.pm_.c:132
 msgid "Belarusian"
 msgstr "Bielorusse"
 
-#: ../../keyboard.pm_.c:132
+#: ../../keyboard.pm_.c:133
 msgid "Swiss (German layout)"
 msgstr "Swisse (cogne tîxhonne)"
 
-#: ../../keyboard.pm_.c:133
+#: ../../keyboard.pm_.c:134
 msgid "Swiss (French layout)"
 msgstr "Swisse (cogne romande)"
 
-#: ../../keyboard.pm_.c:136
+#: ../../keyboard.pm_.c:137
 msgid "German (no dead keys)"
 msgstr "Almande (sin moitès tapes"
 
-#: ../../keyboard.pm_.c:137
+#: ../../keyboard.pm_.c:138
 msgid "Danish"
 msgstr "Danwèsse"
 
-#: ../../keyboard.pm_.c:138
+#: ../../keyboard.pm_.c:139
 msgid "Dvorak (US)"
 msgstr "Taprece dvorak (US)"
 
-#: ../../keyboard.pm_.c:139
+#: ../../keyboard.pm_.c:140
 msgid "Dvorak (Norwegian)"
 msgstr "Taprece Dvorak norvejyinne"
 
-#: ../../keyboard.pm_.c:140
+#: ../../keyboard.pm_.c:141
 msgid "Estonian"
 msgstr "Estonyinne"
 
-#: ../../keyboard.pm_.c:144
+#: ../../keyboard.pm_.c:145
 msgid "Georgian (\"Russian\" layout)"
 msgstr "Djeordjyinne (cogne russe)"
 
-#: ../../keyboard.pm_.c:145
+#: ../../keyboard.pm_.c:146
 msgid "Georgian (\"Latin\" layout)"
 msgstr "Djeordjyinne (cogne latene)"
 
-#: ../../keyboard.pm_.c:146
+#: ../../keyboard.pm_.c:147
 msgid "Greek"
 msgstr "Greke"
 
-#: ../../keyboard.pm_.c:147
+#: ../../keyboard.pm_.c:148
 msgid "Hungarian"
 msgstr "Hongrwèsse"
 
-#: ../../keyboard.pm_.c:148
+#: ../../keyboard.pm_.c:149
 msgid "Croatian"
 msgstr "Croate"
 
-#: ../../keyboard.pm_.c:149
+#: ../../keyboard.pm_.c:150
 msgid "Israeli"
 msgstr "Israelyinne"
 
-#: ../../keyboard.pm_.c:150
+#: ../../keyboard.pm_.c:151
 msgid "Israeli (Phonetic)"
 msgstr "Israelyinne (fonetike)"
 
-#: ../../keyboard.pm_.c:151
+#: ../../keyboard.pm_.c:152
 msgid "Iranian"
 msgstr "Iranyinne"
 
-#: ../../keyboard.pm_.c:152
+#: ../../keyboard.pm_.c:153
 msgid "Icelandic"
 msgstr "Izlandèsse"
 
-#: ../../keyboard.pm_.c:153
+#: ../../keyboard.pm_.c:154
 msgid "Italian"
 msgstr "Itålyinne"
 
-#: ../../keyboard.pm_.c:154
+#: ../../keyboard.pm_.c:155
 msgid "Japanese 106 keys"
 msgstr "Djaponèsse di 106 tapes"
 
-#: ../../keyboard.pm_.c:155
+#: ../../keyboard.pm_.c:156
 msgid "Latin American"
 msgstr "Taprece del Amerike nonnrece"
 
-#: ../../keyboard.pm_.c:156
+#: ../../keyboard.pm_.c:158
 msgid "Dutch"
 msgstr "Neerlandèsse"
 
-#: ../../keyboard.pm_.c:157
+#: ../../keyboard.pm_.c:159
 msgid "Lithuanian AZERTY (old)"
 msgstr "Lituanyinne AZERTY (vîle modeye)"
 
-#: ../../keyboard.pm_.c:159
+#: ../../keyboard.pm_.c:161
 msgid "Lithuanian AZERTY (new)"
 msgstr "Lituanyinne AZERTY (novele modeye)"
 
-#: ../../keyboard.pm_.c:160
+#: ../../keyboard.pm_.c:162
 msgid "Lithuanian \"number row\" QWERTY"
 msgstr "Lituanyinne QWERTY (roye des limerôs)"
 
-#: ../../keyboard.pm_.c:161
+#: ../../keyboard.pm_.c:163
 msgid "Lithuanian \"phonetic\" QWERTY"
 msgstr "Lituanyinne QWERTY (fonetike)"
 
-#: ../../keyboard.pm_.c:163
+#: ../../keyboard.pm_.c:165
 msgid "Polish (qwerty layout)"
 msgstr "Polonèsse (cogne QWERTY)"
 
-#: ../../keyboard.pm_.c:164
+#: ../../keyboard.pm_.c:166
 msgid "Polish (qwertz layout)"
 msgstr "Polonèsse (cogne QWERTZ)"
 
-#: ../../keyboard.pm_.c:165
+#: ../../keyboard.pm_.c:167
 msgid "Portuguese"
 msgstr "Portuguèsse"
 
-#: ../../keyboard.pm_.c:166
+#: ../../keyboard.pm_.c:168
 msgid "Canadian (Quebec)"
 msgstr "Canadyinne (Québec)"
 
-#: ../../keyboard.pm_.c:168
+#: ../../keyboard.pm_.c:170
 msgid "Russian (Yawerty)"
 msgstr "Russe (yaverty)"
 
-#: ../../keyboard.pm_.c:169
+#: ../../keyboard.pm_.c:171
 msgid "Swedish"
 msgstr "Suwedwèsse"
 
-#: ../../keyboard.pm_.c:170
+#: ../../keyboard.pm_.c:172
 msgid "Slovenian"
 msgstr "Slovenyinne"
 
-#: ../../keyboard.pm_.c:171
+#: ../../keyboard.pm_.c:173
 msgid "Slovakian"
 msgstr "Slovake"
 
-#: ../../keyboard.pm_.c:172
+#: ../../keyboard.pm_.c:174
 msgid "Thai keyboard"
 msgstr "Tailandèsse"
 
-#: ../../keyboard.pm_.c:173
+#: ../../keyboard.pm_.c:175
 msgid "Turkish (traditional \"F\" model)"
 msgstr "Turke (cogne wårdiveuse \"F\")"
 
-#: ../../keyboard.pm_.c:174
+#: ../../keyboard.pm_.c:176
 msgid "Turkish (modern \"Q\" model)"
 msgstr "Turke (cogne moderne \"Q\")"
 
-#: ../../keyboard.pm_.c:175
+#: ../../keyboard.pm_.c:177
 msgid "Ukrainian"
 msgstr "Ucrainyinne"
 
-#: ../../keyboard.pm_.c:178
+#: ../../keyboard.pm_.c:180
 msgid "US keyboard (international)"
 msgstr "Taprece des Etats Unis (moirtès tapes)"
 
-#: ../../keyboard.pm_.c:179
+#: ../../keyboard.pm_.c:181
 msgid "Vietnamese \"numeric row\" QWERTY"
 msgstr "Vietnamyinne QWERTY (roye des limerôs)"
 
-#: ../../keyboard.pm_.c:180
+#: ../../keyboard.pm_.c:182
 msgid "Yugoslavian (latin layout)"
 msgstr "Yugoslave (cogne latene)"
 
@@ -4644,16 +4708,12 @@ msgid "Do you want to try to connect to the Internet now?"
 msgstr "Voloz-ve sayî di vos raloyî al rantoele daegnrece asteure?"
 
 #: ../../netconnect.pm_.c:101
-#, fuzzy
 msgid "Testing your connection..."
-msgstr ""
-"\n"
-"Vos ploz rifé l' apontiaedje do raloyaedje."
+msgstr "Dji saye vosse raloyaedje..."
 
 #: ../../netconnect.pm_.c:106
-#, fuzzy
 msgid "The system is now connected to Internet."
-msgstr "Vos n' estoz nén raloyî al rantoele daegnrece pol moumint."
+msgstr "Li sisteme est raloyî al rantoele daegnrece."
 
 #: ../../netconnect.pm_.c:107
 msgid ""
@@ -4838,8 +4898,8 @@ msgstr ""
 "Tchwezixhoz kéné cåte rantoele vos vloz eployî po vos raloyî al rantoele "
 "daegnrece"
 
-#: ../../netconnect.pm_.c:351 ../../netconnect.pm_.c:623
-#: ../../netconnect.pm_.c:754 ../../standalone/drakgw_.c:217
+#: ../../netconnect.pm_.c:351 ../../netconnect.pm_.c:630
+#: ../../netconnect.pm_.c:761 ../../standalone/drakgw_.c:217
 msgid "Network interface"
 msgstr "Eterface rantoele"
 
@@ -4861,59 +4921,59 @@ msgstr "Apontiaedje ADSL"
 msgid "Do you want to start your connection at boot?"
 msgstr "Voloz-ve vos raloyî a tchaeke côp ki l' éndjole est enondeye?"
 
-#: ../../netconnect.pm_.c:529
+#: ../../netconnect.pm_.c:536
 msgid "Try to find a modem?"
 msgstr "Sayî di trover on modem?"
 
-#: ../../netconnect.pm_.c:539
+#: ../../netconnect.pm_.c:546
 msgid "Please choose which serial port your modem is connected to."
 msgstr "Tchwezixhoz li port séreye ki vosse modem est raloyî dzo"
 
-#: ../../netconnect.pm_.c:544
+#: ../../netconnect.pm_.c:551
 msgid "Dialup options"
 msgstr "Tchûzes di hûkaedje pa modem"
 
-#: ../../netconnect.pm_.c:545
+#: ../../netconnect.pm_.c:552
 msgid "Connection name"
 msgstr "No di raloyaedje"
 
-#: ../../netconnect.pm_.c:546
+#: ../../netconnect.pm_.c:553
 msgid "Phone number"
 msgstr "Limerô di telefone"
 
-#: ../../netconnect.pm_.c:547
+#: ../../netconnect.pm_.c:554
 msgid "Login ID"
 msgstr "Login ID"
 
-#: ../../netconnect.pm_.c:549
+#: ../../netconnect.pm_.c:556
 msgid "Authentication"
 msgstr "Verifiaedje"
 
-#: ../../netconnect.pm_.c:549
+#: ../../netconnect.pm_.c:556
 msgid "PAP"
 msgstr "PAP"
 
-#: ../../netconnect.pm_.c:549
+#: ../../netconnect.pm_.c:556
 msgid "Script-based"
 msgstr "Pa script"
 
-#: ../../netconnect.pm_.c:549
+#: ../../netconnect.pm_.c:556
 msgid "Terminal-based"
 msgstr "Pa terminå"
 
-#: ../../netconnect.pm_.c:550
+#: ../../netconnect.pm_.c:557
 msgid "Domain name"
 msgstr "No di domaine"
 
-#: ../../netconnect.pm_.c:552
+#: ../../netconnect.pm_.c:559
 msgid "First DNS Server"
 msgstr "Prumî sierveu DNS"
 
-#: ../../netconnect.pm_.c:553
+#: ../../netconnect.pm_.c:560
 msgid "Second DNS Server"
 msgstr "Deuzinme sierveu DNS"
 
-#: ../../netconnect.pm_.c:582
+#: ../../netconnect.pm_.c:589
 msgid ""
 "\n"
 "You can connect to Internet or reconfigure your connection."
@@ -4922,7 +4982,7 @@ msgstr ""
 "Vos ploz vos raloyî al rantoele daegnrece oudobén rifé l' apontiaedje do "
 "raloyaedje."
 
-#: ../../netconnect.pm_.c:582 ../../netconnect.pm_.c:586
+#: ../../netconnect.pm_.c:589 ../../netconnect.pm_.c:593
 msgid ""
 "\n"
 "You can reconfigure your connection."
@@ -4930,11 +4990,11 @@ msgstr ""
 "\n"
 "Vos ploz rifé l' apontiaedje do raloyaedje."
 
-#: ../../netconnect.pm_.c:582
+#: ../../netconnect.pm_.c:589
 msgid "You are not currently connected to Internet."
 msgstr "Vos n' estoz nén raloyî al rantoele daegnrece pol moumint."
 
-#: ../../netconnect.pm_.c:586
+#: ../../netconnect.pm_.c:593
 msgid ""
 "\n"
 "You can disconnect or reconfigure your connection."
@@ -4942,97 +5002,97 @@ msgstr ""
 "\n"
 "Vos ploz vos disraloyî oudobén rifé l' apontiaedje do raloyaedje."
 
-#: ../../netconnect.pm_.c:586
+#: ../../netconnect.pm_.c:593
 msgid "You are currently connected to internet."
 msgstr "Vos estoz raloyî al rantoele daegnrece pol moumint."
 
-#: ../../netconnect.pm_.c:590
+#: ../../netconnect.pm_.c:597
 msgid "Connect to Internet"
 msgstr "Si raloyî al rantoele daegnrece"
 
-#: ../../netconnect.pm_.c:592
+#: ../../netconnect.pm_.c:599
 msgid "Disconnect from Internet"
 msgstr "Si disraloyî del rantoele daegnrece"
 
-#: ../../netconnect.pm_.c:594
+#: ../../netconnect.pm_.c:601
 msgid "Configure network connection (LAN or Internet)"
 msgstr "Apontyî li raloyaedje del rantoele (locåle ou daegnrece)"
 
-#: ../../netconnect.pm_.c:597
+#: ../../netconnect.pm_.c:604
 msgid "Internet connection & configuration"
 msgstr "Apontiaedje & raloyaedje al rantoele daegnrece"
 
-#: ../../netconnect.pm_.c:624 ../../netconnect.pm_.c:755
+#: ../../netconnect.pm_.c:631 ../../netconnect.pm_.c:762
 msgid ""
 "I'm about to restart the network device $netc->{NET_DEVICE}. Do you agree?"
 msgstr ""
 "Dji va rinonder l' eterface rantoele $netc->{NET_DEVICE}. Estoz-ve d' acoird?"
 
-#: ../../netconnect.pm_.c:641
+#: ../../netconnect.pm_.c:648
 msgid "Configure a normal modem connection"
 msgstr "Apontyî on raloyaedje viè modem normå"
 
-#: ../../netconnect.pm_.c:661
+#: ../../netconnect.pm_.c:668
 msgid "Configure an ISDN connection"
 msgstr "Apontyî on raloyaedje viè ISDN"
 
-#: ../../netconnect.pm_.c:666
+#: ../../netconnect.pm_.c:673
 msgid "Internal ISDN card"
 msgstr "Cåte RDIS divintrinne"
 
-#: ../../netconnect.pm_.c:668
+#: ../../netconnect.pm_.c:675
 msgid "External ISDN modem"
 msgstr "Cåte RDIS difoûtrinne"
 
-#: ../../netconnect.pm_.c:671 ../../netconnect.pm_.c:705
-#: ../../netconnect.pm_.c:717 ../../netconnect.pm_.c:741
-#: ../../netconnect.pm_.c:786
+#: ../../netconnect.pm_.c:678 ../../netconnect.pm_.c:712
+#: ../../netconnect.pm_.c:724 ../../netconnect.pm_.c:748
+#: ../../netconnect.pm_.c:793
 msgid "Connect to the Internet"
 msgstr "Si raloyî al rantoele daegnrece"
 
-#: ../../netconnect.pm_.c:672
+#: ../../netconnect.pm_.c:679
 msgid "What kind is your ISDN connection?"
 msgstr "Kéne sôrte di raloyaedje RDIS avoz-ve?"
 
-#: ../../netconnect.pm_.c:691
+#: ../../netconnect.pm_.c:698
 msgid "Configure a DSL (or ADSL) connection"
 msgstr "Apontyî on raloyaedje viè DSL (ou ADSL)"
 
-#: ../../netconnect.pm_.c:700
+#: ../../netconnect.pm_.c:707
 msgid "France"
 msgstr "France"
 
-#: ../../netconnect.pm_.c:702
+#: ../../netconnect.pm_.c:709
 msgid "Other countries"
 msgstr "Ôtes payis"
 
-#: ../../netconnect.pm_.c:706
+#: ../../netconnect.pm_.c:713
 msgid "In which country are you located ?"
 msgstr "Dins ké payis estoz-ve?"
 
-#: ../../netconnect.pm_.c:712
+#: ../../netconnect.pm_.c:719
 msgid "Alcatel modem"
 msgstr "modem Alcatel"
 
-#: ../../netconnect.pm_.c:714
+#: ../../netconnect.pm_.c:721
 msgid "ECI modem"
 msgstr "modem ECI"
 
-#: ../../netconnect.pm_.c:718
+#: ../../netconnect.pm_.c:725
 msgid "If your adsl modem is an Alcatel one, choose Alcatel. Otherwise, ECI."
 msgstr ""
 "Si vosse modem ADSL est on Alcatel, tchwezixhoz «modem Alcatel».\n"
 "Otrumint tchwezixhoz «modem ECI»."
 
-#: ../../netconnect.pm_.c:736
+#: ../../netconnect.pm_.c:743
 msgid "use pppoe"
 msgstr "eployî pppoe"
 
-#: ../../netconnect.pm_.c:738
+#: ../../netconnect.pm_.c:745
 msgid "don't use pppoe"
 msgstr "nén eployî pppoe"
 
-#: ../../netconnect.pm_.c:742
+#: ../../netconnect.pm_.c:749
 msgid ""
 "The most common way to connect with adsl is dhcp + pppoe.\n"
 "However, some connections only use dhcp.\n"
@@ -5042,11 +5102,11 @@ msgstr ""
 "Min nerén, gn a des ôtes raloyaedjes ki s' shiervèt fok di dhcp.\n"
 "Si vos n' è savoz rén, tchwezixhoz «aployî pppoe»."
 
-#: ../../netconnect.pm_.c:765
+#: ../../netconnect.pm_.c:772
 msgid "Configure a cable connection"
 msgstr "Apontyî on raloyaedje viè cåbe TV"
 
-#: ../../netconnect.pm_.c:787
+#: ../../netconnect.pm_.c:794
 msgid ""
 "Which dhcp client do you want to use?\n"
 "Default is dhcpd"
@@ -5054,31 +5114,31 @@ msgstr ""
 "Ké client dhcp voloz-ve eployî?\n"
 "Li prémetu est «dhcpd»"
 
-#: ../../netconnect.pm_.c:800
+#: ../../netconnect.pm_.c:807
 msgid "Disable Internet Connection"
 msgstr "Dismete li raloyaedje al rantoele daegnrece"
 
-#: ../../netconnect.pm_.c:811
+#: ../../netconnect.pm_.c:818
 msgid "Configure local network"
 msgstr "Apontyî li rantoele locåle"
 
-#: ../../netconnect.pm_.c:815
+#: ../../netconnect.pm_.c:822
 msgid "Network configuration"
 msgstr "Apontiaedje del rantoele"
 
-#: ../../netconnect.pm_.c:816
+#: ../../netconnect.pm_.c:823
 msgid "Do you want to restart the network"
 msgstr "Voloz-ve rinonder li rantoele?"
 
-#: ../../netconnect.pm_.c:824
+#: ../../netconnect.pm_.c:831
 msgid "Disable networking"
 msgstr "Disactiver li rantoele"
 
-#: ../../netconnect.pm_.c:834
+#: ../../netconnect.pm_.c:841
 msgid "Configure the Internet connection / Configure local Network"
 msgstr "Apontyî li raloyaedje al rantoele daegnrece / al rantoele locåle"
 
-#: ../../netconnect.pm_.c:835
+#: ../../netconnect.pm_.c:842
 msgid ""
 "Local networking has already been configured.\n"
 "Do you want to:"
@@ -5086,15 +5146,15 @@ msgstr ""
 "Li rantoele locåle a ddja sti apontieye.\n"
 "Voloz-ve:"
 
-#: ../../netconnect.pm_.c:836
+#: ../../netconnect.pm_.c:843
 msgid "How do you want to connect to the Internet?"
 msgstr "Kimint voloz-ve vos raloyî al rantoele daegnrece?"
 
-#: ../../netconnect.pm_.c:858
+#: ../../netconnect.pm_.c:865
 msgid "Network Configuration"
 msgstr "Apontiaedje del Rantoele"
 
-#: ../../netconnect.pm_.c:859
+#: ../../netconnect.pm_.c:866
 msgid ""
 "Now that your Internet connection is configured,\n"
 "your computer can be configured to share its Internet connection.\n"
@@ -6113,31 +6173,15 @@ msgstr ""
 msgid "Configuring..."
 msgstr "Apontiant..."
 
-#: ../../standalone/drakgw_.c:306
-msgid "Could not install ipchains RPM with urpmi."
-msgstr "Dji n' a nén savu astaler li RPM di «ipchains» avou urpmi."
+#: ../../standalone/drakgw_.c:313
+msgid "Problems installing package $bin2rpm{$_}"
+msgstr "Yåk n' a nén stî cwand dj' astaleve li pacaedje $bin2rpm{$_}"
 
-#: ../../standalone/drakgw_.c:456
-msgid "Could not install dhcp RPM with urpmi."
-msgstr "Dji n' a nén savu astaler li RPM di «dhcp» avou urpmi."
-
-#: ../../standalone/drakgw_.c:480
-msgid "Could not install linuxconf RPM with urpmi."
-msgstr "Dji n' a nén savu astaler li RPM di «linuxconf» avou urpmi."
-
-#: ../../standalone/drakgw_.c:496
-msgid "Could not install bind RPM with urpmi."
-msgstr "Dji n' a nén savu astaler li RPM di «bind» avou urpmi."
-
-#: ../../standalone/drakgw_.c:500
-msgid "Could not install caching-nameserver RPM with urpmi."
-msgstr "Dji n' a nén savu astaler li RPM di «caching-nameserver» avou urpmi."
-
-#: ../../standalone/drakgw_.c:512
+#: ../../standalone/drakgw_.c:504
 msgid "Congratulations!"
 msgstr "Complimints!"
 
-#: ../../standalone/drakgw_.c:513
+#: ../../standalone/drakgw_.c:505
 msgid ""
 "Everything has been configured.\n"
 "You may now share Internet connection with other computers on your Local "
@@ -6207,6 +6251,14 @@ msgstr "Dji mete li livea di såvrité"
 #: ../../standalone/drakxconf_.c:21
 msgid "Choose the tool you want to use"
 msgstr "Tchwezixhoz l' usteye ki vos voloz eployî"
+
+#: ../../standalone/keyboarddrake_.c:14
+msgid "usage: keyboarddrake [--expert]\n"
+msgstr "Po s' è siervi: keyboarddrake [--expert]\n"
+
+#: ../../standalone/keyboarddrake_.c:27
+msgid "Do you want the BackSpace to return Delete in console?"
+msgstr "Volez-ve kel tape «BackSpace» evoye on «Delete» èl conzôle?"
 
 #: ../../standalone/livedrake_.c:23
 msgid "Change Cd-Rom"
@@ -6448,68 +6500,60 @@ msgid "Finding leaves takes some time"
 msgstr "Cwerî les foyes pout prinde do tins"
 
 # ../../share/compssUsers
-msgid "More Graphical Desktops (Gnome, IceWM)"
+msgid "Graphics Manipulation"
 msgstr ""
 
 # ../../share/compssUsers
-msgid ""
-"The K Desktop Environment, the basic graphical environment with a collection "
-"of accompanying tools"
-msgstr ""
-
-# ../../share/compssUsers
-msgid "Personnal Information Management"
-msgstr ""
-
-# ../../share/compssUsers
-msgid "Tools to create and burn CD's"
-msgstr "Usteyes po fé èt graver des plakes lazer"
-
-msgid "Internet Tools"
-msgstr "Usteyes pol rantoele"
-
-msgid "Internet"
-msgstr "Rantoele"
+msgid "KDE, QT, Gnome, GTK+"
+msgstr "KDE, QT, Gnome, GTK+"
 
 # ../../share/compssUsers
 msgid "Personnal Finance"
 msgstr ""
 
 # ../../share/compssUsers
-msgid "Gnome, Icewm, Window Maker, Enlightenment, Fvwm, etc"
-msgstr "Gnome, Icewm, Window Maker, Enlightenment, Fvwm, etc"
+msgid "Python, Perl, libraries, tools"
+msgstr "Python, Perl, lîvreyes, usteyes"
 
 # ../../share/compssUsers
-msgid "Graphics programs such as The Gimp"
-msgstr ""
-
-#, fuzzy
-msgid "Office"
-msgstr "plaijhi a-z avu"
+msgid "Scientific applications"
+msgstr "Programes siyintifikes"
 
 # ../../share/compssUsers
-msgid "Databases clients and servers (mysql and postgresql)"
-msgstr ""
+msgid "Databases"
+msgstr "Båzes di doneyes"
 
-# ../../share/compssUsers
-msgid "Tools for your Palm Pilot or your Visor"
-msgstr ""
+msgid "Internet"
+msgstr "Rantoele"
 
 msgid "Multimedia - Graphics"
 msgstr "Multimedia - Grafikes"
 
 # ../../share/compssUsers
-msgid "Video players and editors"
-msgstr ""
+msgid "editors, shells, file tools, terminals"
+msgstr "aspougneus, shells, usteyes po fitchîs, terminås"
+
+msgid "Development applications"
+msgstr "Programaedje"
 
 # ../../share/compssUsers
-msgid "Amusement programs: arcade, boards, strategy, etc"
-msgstr ""
+msgid "Audio-related tools: mp3 or midi players, mixers, etc"
+msgstr "Usteyes ki ont a vey avou l' son: djouweus mp3 ou MIDI, maxheus,..."
+
+msgid "Multimedia"
+msgstr "Multimedia"
+
+msgid "Office"
+msgstr "Buro"
+
+# ../../share/compssUsers
+msgid "Sciences"
+msgstr "Siyinces"
 
 # ../../share/compssUsers
 msgid ""
-"Office programs: wordprocessors (kword, abiword), spreadsheets (kspread, "
-"gnumeric), pdf viewers, etc"
+"Chat (IRC or instant messaging) programs such as xchat, licq, gaim, and file "
+"transfer tools"
 msgstr ""
 
 # ../../share/compssUsers
@@ -6519,86 +6563,154 @@ msgid ""
 msgstr ""
 
 # ../../share/compssUsers
-msgid "Audio-related tools: mp3 or midi players, mixers, etc"
+msgid "C and C++ development libraries, programs and include files"
+msgstr "Lîvreyes di programaedje C èt C++, programes èt fitchîs *.h"
+
+# ../../share/compssUsers
+msgid "Communication facilities"
+msgstr ""
+
+msgid "KDE"
+msgstr "KDE"
+
+# ../../share/compssUsers
+msgid "Personnal Information Management"
 msgstr ""
 
 # ../../share/compssUsers
-msgid ""
-"Chat (IRC or instant messaging) programs such as xchat, licq, gaim, and file "
-"transfer tools"
+msgid "Programs to manage your finance, such as gnucash"
 msgstr ""
 
-# ../../share/compssUsers
-msgid "Books and Howto's on Linux and Free Software"
-msgstr ""
+msgid "Gnome"
+msgstr "Gnome"
+
+msgid "Internet Tools"
+msgstr "Usteyes pol rantoele"
+
+msgid "Documentation"
+msgstr "Documintåcion"
 
 # ../../share/compssUsers
 msgid "Icewm, Window Maker, Enlightenment, Fvwm, etc"
 msgstr "Icewm, Window Maker, Enlightenment, Fvwm, etc"
 
 # ../../share/compssUsers
-msgid ""
-"A graphical environment with user-friendly set of applications and desktop "
-"tools"
+msgid "Utilities"
+msgstr "Usteyes"
+
+msgid "Multimedia - Sound"
+msgstr "Multimedia - Son"
+
+# ../../share/compssUsers
+msgid "Amusement programs: arcade, boards, strategy, etc"
 msgstr ""
 
 # ../../share/compssUsers
-msgid "Set of tools for mail, news, web, file transfer, and chat"
+msgid "Video players and editors"
 msgstr ""
 
-msgid "Multimedia - Video"
-msgstr "Multimedia - Vidéyo"
+# ../../share/compssUsers
+msgid "Console Tools"
+msgstr "Usteyes pol conzôle"
 
-msgid "KDE"
-msgstr "KDE"
+msgid "Development other"
+msgstr "Ôtes sacwès pol programaedje"
+
+# ../../share/compssUsers
+msgid "Databases clients and servers (mysql and postgresql)"
+msgstr "Clients èt sierveus di båzes di doneyes (mysql èt postgresql)"
 
 # ../../share/compssUsers
 msgid "Sound and video playing/editing programs"
 msgstr ""
 
-msgid "Multimedia"
-msgstr "Multimedia"
+# ../../share/compssUsers
+msgid "Books and Howto's on Linux and Free Software"
+msgstr "Lîves èt Howtos so GNU/Linux èt les libes programes"
 
 # ../../share/compssUsers
-msgid "Other Graphical Desktops"
+msgid ""
+"A graphical environment with user-friendly set of applications and desktop "
+"tools"
 msgstr ""
-
-msgid "Multimedia - Sound"
-msgstr "Multimedia - Son"
-
-msgid "Gnome"
-msgstr "Gnome"
-
-msgid "Documentation"
-msgstr "Documintåcion"
-
-# ../../share/compssUsers
-msgid "Programs to manage your finance, such as gnucash"
-msgstr ""
-
-# ../../share/compssUsers
-msgid "Graphics Manipulation"
-msgstr ""
+"On environmint grafike avou on amiståve ensembe di programes èt d' usteyes "
+"pol scribanne"
 
 msgid "Games"
 msgstr "Djeus"
+
+msgid "Development C/C++"
+msgstr "Programaedje avou C/C++"
+
+msgid "Multimedia - Video"
+msgstr "Multimedia - Vidéyo"
+
+# ../../share/compssUsers
+msgid "Graphics programs such as The Gimp"
+msgstr "Programes grafikes come li Gimp"
+
+# ../../share/compssUsers
+msgid ""
+"The K Desktop Environment, the basic graphical environment with a collection "
+"of accompanying tools"
+msgstr ""
+"L' environmint di scribanne KDE, l' environmint grafike di båze, avou ene "
+"coleccion d' usteyes ki vnèt avou"
+
+# ../../share/compssUsers
+msgid "Tools to create and burn CD's"
+msgstr "Usteyes po fé èt graver des plakes lazer"
+
+# ../../share/compssUsers
+msgid "More Graphical Desktops (Gnome, IceWM)"
+msgstr "Des ôtes scribannes grafikes (Gnome, IceWM)"
 
 msgid "Multimedia - CD Burning"
 msgstr "Multimedia - Gravaedje di plakes lazer"
 
 # ../../share/compssUsers
-msgid "Communication facilities"
+msgid "Archiving, emulators, monitoring"
 msgstr ""
 
 # ../../share/compssUsers
-msgid "Databases"
-msgstr "Båzes di doneyes"
+msgid ""
+"Office programs: wordprocessors (kword, abiword), spreadsheets (kspread, "
+"gnumeric), pdf viewers, etc"
+msgstr ""
 
-#~ msgid "Choose the size you want to install"
-#~ msgstr "Tchwezixhoz li grandeu di çu k' voloz astaler"
+# ../../share/compssUsers
+msgid "Other Graphical Desktops"
+msgstr "Ôtes sicribannes grafikes"
 
-#~ msgid "Total size: "
-#~ msgstr "Grandeu å totå: "
+# ../../share/compssUsers
+msgid "Tools for your Palm Pilot or your Visor"
+msgstr "Usteyes po vosse Palm Pilot ou vosse Visor"
+
+# ../../share/compssUsers
+msgid "Gnome, Icewm, Window Maker, Enlightenment, Fvwm, etc"
+msgstr "Gnome, Icewm, Window Maker, Enlightenment, Fvwm, etc"
+
+# ../../share/compssUsers
+msgid "Set of tools for mail, news, web, file transfer, and chat"
+msgstr ""
+"Usteyes pol emilaedje, les copinreyes, naiviaedje waibe, transfer di "
+"fitchîs, eyèt li chat"
+
+#~ msgid "Could not install ipchains RPM with urpmi."
+#~ msgstr "Dji n' a nén savu astaler li RPM di «ipchains» avou urpmi."
+
+#~ msgid "Could not install dhcp RPM with urpmi."
+#~ msgstr "Dji n' a nén savu astaler li RPM di «dhcp» avou urpmi."
+
+#~ msgid "Could not install linuxconf RPM with urpmi."
+#~ msgstr "Dji n' a nén savu astaler li RPM di «linuxconf» avou urpmi."
+
+#~ msgid "Could not install bind RPM with urpmi."
+#~ msgstr "Dji n' a nén savu astaler li RPM di «bind» avou urpmi."
+
+#~ msgid "Could not install caching-nameserver RPM with urpmi."
+#~ msgstr ""
+#~ "Dji n' a nén savu astaler li RPM di «caching-nameserver» avou urpmi."
 
 #~ msgid "Reconfigure local network"
 #~ msgstr "Rapontyî li rantoele locåle"
