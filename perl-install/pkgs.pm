@@ -729,7 +729,7 @@ sub setSelectedFromCompssList {
     my @packages = allPackages($packages);
     my @places = do {
 	#- special case for /^k/ aka kde stuff
-	my @values = map { (unpack "s*", $_->[$VALUES])[$ind] } @packages;
+	my @values = map { my @v = unpack "s*", $_->[$VALUES]; $v[$ind] } @packages;
 	sort { $values[$b] <=> $values[$a] } 0 .. $#packages;
     };
     foreach (@places) {
