@@ -3183,6 +3183,12 @@ msgstr ""
 msgid "Yugoslavian (latin layout)"
 msgstr "Српски (латинична модел)"
 
+# NOTE: this message will be displayed by lilo at boot time; that is
+# using the BIOS font; that means cp437 charset on 99.99% of PC computers
+# out there. It is then suggested that for non latin languages an ascii
+# transliteration be used; or maybe the english text be used; as it is best
+# When possible cp437 accentuated letters can be used too.
+#
 #: ../lilo.pm_.c:145
 #, c-format
 msgid ""
@@ -3933,11 +3939,11 @@ msgstr ""
 msgid "Finding leaves takes some time"
 msgstr ""
 
-#~ msgid "Going to install %d MB. You can choose to install more programs"
-#~ msgstr "Инсталираћу %d MB. Можете изабрати да инсталирате још програма"
-
 #, fuzzy
 #~ msgid "Enter a floppy (all data will be lost)"
 #~ msgstr ""
 #~ "Убаците дискету у уређај\n"
 #~ "Сви подаци на дискети ће бити избрисани !"
+
+#~ msgid "Going to install %d MB. You can choose to install more programs"
+#~ msgstr "Инсталираћу %d MB. Можете изабрати да инсталирате још програма"

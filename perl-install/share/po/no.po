@@ -2350,6 +2350,7 @@ msgid "Bringing up the network"
 msgstr "Henter opp nettverket"
 
 #: ../install_steps_interactive.pm_.c:487
+#, fuzzy
 msgid ""
 "You have now the possibility to download software aimed for encryption.\n"
 "\n"
@@ -2411,10 +2412,9 @@ msgstr ""
 "sluttbruker til slutt kan ha tilgang til etter å ha sagt seg enig i og\n"
 "undertegnet fremviste avtale.\n"
 "\n"
-"\n"
 "For spørsmål angående denne avtalen, vennligst kontakt\n"
 "Mandrakesoft, Inc.\n"
-"2400 N. Lincoln Avenue Suite 243,\n"
+"2400 N. Lincoln Avenue Suite 243\n"
 "Altadena California 91001\n"
 "USA"
 
@@ -3269,6 +3269,14 @@ msgstr "US-tastatur (internasjonal)"
 msgid "Yugoslavian (latin layout)"
 msgstr "Jugoslavisk (latinsk oppsett)"
 
+# NOTE: this message will be displayed by lilo at boot time; that is
+# using the BIOS font; that means cp437 charset on 99.99% of PC computers
+# out there. It is then suggested that for non latin languages an ascii
+# transliteration be used; or maybe the english text be used; as it is best
+# When possible cp437 accentuated letters can be used too.
+#
+# '\206' is 'å' (aring) in cp437 encoding
+#
 #: ../lilo.pm_.c:145
 #, c-format
 msgid ""
@@ -3282,10 +3290,10 @@ msgid ""
 msgstr ""
 "Velkommen til LILO, operativsystem-velgeren!\n"
 "\n"
-"For å se mulige valg, trykk <TAB>\n"
+"For † se mulige valg, trykk <TAB>\n"
 "\n"
-"For å laste en av disse, skriv inn navnet og trykk <ENTER> eller vent %d "
-"sekunder for standard oppstart.\n"
+"For † laste en av disse, skriv inn navnet og trykk <ENTER>\n"
+"eller vent %d sekunder for standard oppstart.\n"
 "\n"
 
 #: ../mouse.pm_.c:20
@@ -3995,9 +4003,9 @@ msgstr "Finner tillatelser"
 msgid "Finding leaves takes some time"
 msgstr "Finne tillatelser vil ta litt tid"
 
+#~ msgid "Too many packages chosen: %dMB doesn't fit in %dMB"
+#~ msgstr "For mange pakker er valgt: %dMB passer ikke i %dMB"
+
 #~ msgid "Going to install %d MB. You can choose to install more programs"
 #~ msgstr ""
 #~ "%d MB vil bli installert. Du kan velge å installere flere programmer"
-
-#~ msgid "Too many packages chosen: %dMB doesn't fit in %dMB"
-#~ msgstr "For mange pakker er valgt: %dMB passer ikke i %dMB"
