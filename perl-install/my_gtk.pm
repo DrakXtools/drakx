@@ -385,7 +385,7 @@ sub _ask_from_list($$$$) {
 	   gtkpack($o->create_box_with_title(@$messages), 
 		   @$l > 15 ? gtkset_usize(createScrolledWindow($list), 200, 280) : $list));
 
-    $o->flush; # otherwise the moveto is not done
+    $o->sync; # otherwise the moveto is not done
     map_index {
 	$list->append($_);
 	&$select($::i) if $def && $_ eq $def; 
