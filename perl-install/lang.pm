@@ -26,6 +26,7 @@ our %langs = (
 'as' =>    [ 'Assamese',            'ZZ Assamese',       'as_IN', ' 2   ', 'utf_bn' ],
 'az' =>    [ 'Azeri (Latin)',       'Azerbaycanca',      'az_AZ', ' 2   ', 'utf_az' ],
 'be' =>    [ 'Belarussian',         'Belaruskaya',       'be_BY', '1    ', 'cp1251' ],
+#-'ber' => [ 'Berber',              'ZZ Tamazight',      'ber_MA','  3  ', 'unicode' ],
 'bg' =>    [ 'Bulgarian',           'Blgarski',          'bg_BG', '1    ', 'cp1251' ],
 'bn' =>    [ 'Bengali',             'ZZ Bengali',        'bn_BD', ' 2   ', 'utf_bn' ],
 'br' =>    [ 'Britton',             'Brezhoneg',         'br_FR', '1    ', 'iso-8859-15', 'br:fr_FR:fr' ],
