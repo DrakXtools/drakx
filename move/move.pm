@@ -143,7 +143,10 @@ sub install2::handleMoveKey {
     }
 
     my @parts = fsedit::get_fstab(@keys);
-    each_index { $_->{mntpoint} = '/mnt/key' . ($::i || '') } @parts;
+    each_index { 
+	$_->{mntpoint} = $::i ? "/mnt/key$::i" : '/home';
+	$_->{options} = 'umask=077,uid=501,gid=501';
+    } @parts;
 
     fs::mount_part($_) foreach @parts;
 }
