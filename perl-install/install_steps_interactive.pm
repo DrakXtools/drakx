@@ -240,10 +240,9 @@ sub printerConfig($) {
 
 	$o->ask_from_entries_ref(_("NetWare Printer Options"),
 				 _("To print to a NetWare printer, you need to provide the 
-	                           NetWare print server name (this is not always the same as the machines 
-	                           TCP/IP hostname) 
-	                           as well as the print queue name for the printer you wish to access and any 
-	                           applicable user name and password."),
+NetWare print server name (this is not always the same as the machines 
+TCP/IP hostname) as well as the print queue name for the printer you 
+wish to access and any applicable user name and password."),
 				 [_("Printer Server:"), _("Print Queue Name:"), 
 				  _("User name:"), _("Password:")],
 				 [\$o->{printer}{NCPHOST}, \$o->{printer}{NCPQUEUE},
