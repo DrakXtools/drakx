@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10.2
-Release: 4mdk
+Release: 5mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -368,6 +368,22 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Tue Mar 15 2005 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.2-5mdk
+- diskdrake: add support for XBox (stew, pixel)
+- drakboot: don't die when we have no entries in grub menu.lst (pixel)
+- drakconnect (blino):
+  o allow not to set gateway device (#14633)
+  o fix and force CMVs symlink creation for eagle-usb
+- drakfirewall: allow connections from local net to firewall (blino,
+  #14586)
+- XFdrake (pixel):
+  o for 1400x1050, put the resolutions (60 and 75Hz are already in
+    extramodes, but they are GTF modelines, we can overrule them) 
+  o don't add modelines for 1280x1024, they are already in standard
+    vesamodes (builtin Xorg)
+  o when adding gtf modelines, sort them with high frequencies first
+    (since Xorg prefer the first matching modeline (!))
+
 * Thu Mar 10 2005 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.2-4mdk
 - harddrake2: enable to upload the hardware list
 - XFdrake:
