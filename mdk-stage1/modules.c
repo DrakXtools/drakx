@@ -49,7 +49,7 @@ static int ensure_archive_opened(void)
 /* unarchive and insmod given module
  * WARNING: module must not contain the trailing ".o"
  */
-static int insmod_archived_file(const char * mod_name)
+static int insmod_archived_file(const char * mod_name, char * params)
 {
 	char module_name[50];
 	char final_name[50] = "/tmp/";
@@ -59,7 +59,7 @@ static int insmod_archived_file(const char * mod_name)
 		return -1;
 
 	strncpy(module_name, mod_name, sizeof(module_name));
-	strncat(module_name, ".o", sizeof(module_name));
+	strcat(module_name, ".o");
 	i = mar_extract_file(&s, module_name, "/tmp/");
 	if (i == 1) {
 		log_message("file-not-found-in-archive %s", module_name);
@@ -68,10 +68,10 @@ static int insmod_archived_file(const char * mod_name)
 	if (i != 0)
 		return -1;
 
-	strncat(final_name, mod_name, sizeof(final_name));
-	strncat(final_name, ".o", sizeof(final_name));
+	strcat(final_name, mod_name);
+	strcat(final_name, ".o");
 
-	rc = insmod_call(final_name);
+	rc = insmod_call(final_name, params);
 	if (rc)
 		log_message("\tfailed.");
 	unlink(final_name); /* sucking no space left on device */
@@ -186,7 +186,7 @@ static int insmod_with_deps(const char * mod_name)
 	}
 
 	log_message("needs %s", mod_name);
-	return insmod_archived_file(mod_name);
+	return insmod_archived_file(mod_name, NULL);
 }
 
 
@@ -205,6 +205,23 @@ int my_insmod(const char * mod_name)
 
 }
 
+enum return_type insmod_with_params(char * mod)
+{
+	char * questions[] = { "Options", NULL };
+	char ** answers;
+	enum return_type results;
+
+	results = ask_from_entries("Please enter the parameters to give to the kernel:", questions, &answers, 24);
+	if (results != RETURN_OK)
+		return results;
+
+	if (insmod_archived_file(mod, answers[0])) {
+		error_message("Insmod failed.");
+		return RETURN_ERROR;
+	}
+
+	return RETURN_OK;
+}
 
 enum return_type ask_insmod(enum driver_type type)
 {
@@ -230,11 +247,14 @@ enum return_type ask_insmod(enum driver_type type)
 	results = ask_from_list(msg, mar_list_contents(&s), &choice);
 
 	if (results == RETURN_OK) {
-		int rc;
 		choice[strlen(choice)-2] = '\0'; /* remove trailing .o */
-		rc = my_insmod(choice);
-		if (rc) {
-			error_message("Insmod failed.");
+		if (my_insmod(choice)) {
+			enum return_type results;
+			unset_param(MODE_AUTOMATIC); /* we are in a fallback mode */
+
+			results = ask_yes_no("Insmod failed.\nTry with parameters?");
+			if (results == RETURN_OK)
+				return insmod_with_params(choice);
 			return RETURN_ERROR;
 		} else
 			return RETURN_OK;

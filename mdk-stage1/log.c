@@ -33,15 +33,11 @@
 
 static FILE * logfile = NULL;
 
-void vlog_message_nobs(const char * s, va_list args)
-{
-	fprintf(logfile, "* ");
-	vfprintf(logfile, s, args);
-}
 
 void vlog_message(const char * s, va_list args)
 {
-	vlog_message_nobs(s, args);
+	fprintf(logfile, "* ");
+	vfprintf(logfile, s, args);
 	fprintf(logfile, "\n");
 	fflush(logfile);
 }
