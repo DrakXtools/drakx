@@ -221,6 +221,11 @@ sub is_ip {
     return if grep { $_ < 0 || $_ > 255 } @fields;
     @fields;
 }
+sub is_domain_name {
+    my ($name) = @_;
+    my @fields = split /\./, $name;
+    $name !~ /\.$/ && @fields > 0 && @fields == grep { /^[[:alnum:]](?:[\-[:alnum:]]{0,61}[[:alnum:]])?$/ } @fields;
+}
 
 sub netmask {
     my ($ip) = @_;
