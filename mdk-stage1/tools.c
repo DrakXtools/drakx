@@ -50,11 +50,11 @@ void process_cmdline(void)
 	
 	log_message("opening /proc/cmdline... ");
 	
-	if ((fd = open("/proc/cmdline", O_RDONLY, 0)) == -1)
+	if ((fd = open("/proc/cmdline", O_RDONLY)) == -1)
 		fatal_error("could not open /proc/cmdline");
 	
 	size = read(fd, buf, sizeof(buf));
-	buf[size-1] = 0;
+	buf[size-1] = '\0'; // -1 to eat the \n
 	close(fd);
 
 	log_message("\t%s", buf);

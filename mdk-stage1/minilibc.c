@@ -203,32 +203,6 @@ char * strstr(char *haystack, char *needle)
 	return NULL;
 }
 
-void print_int(int fd, int i)
-{
-	char buf[10];
-	char * chptr = buf + 9;
-	int j = 0;
-	
-	if (i < 0)
-	{
-		write(1, "-", 1);
-		i = -1 * i;
-	}
-	
-	while (i)
-	{
-		*chptr-- = '0' + (i % 10);
-		j++;
-		i = i / 10;
-	}
-	
-	write(fd, chptr + 1, j);
-}
-
-void print_str(int fd, char * string)
-{
-	write(fd, string, strlen(string));
-}
 
 /* Minimum printf which handles only characters, %d's and %s's */
 void printf(char * fmt, ...)
@@ -274,3 +248,4 @@ void printf(char * fmt, ...)
 		}
 	}
 }
+

@@ -37,7 +37,13 @@ COMPILE = $(CC) $(DEFS) $(CFLAGS)
 
 
  #- stage1 "loader"
+ifeq (i386, $(ARCH))
 INITSRC = minilibc.c init.c
+INIT_DEFS = -DINIT_HEADERS=\"minilibc.h\"
+else
+INITSRC = init.c
+INIT_DEFS = -DINIT_HEADERS=\"init-libc-headers.h\"
+endif
 
 INITOBJS = $(subst .c,.o,$(INITSRC))
 
@@ -103,13 +109,9 @@ NETWORK_DEFS = -DDISABLE_CDROM -DDISABLE_DISK
 
 
 ifeq (i386, $(ARCH))
-MINILIC=minilibc.o
 LDFLAGS_INIT = -static -nostdlib /usr/lib/crt1.o
-endif
-ifeq (sparc, $(ARCH))
-MINILIBC=minilibc.o /usr/lib/libc.a
-LDFLAGS_INIT = -static -nostdlib /usr/lib/crt1.o
-LDFLAGS_STAGE1 = -static
+else
+LDFLAGS_INIT = $(GLIBC_LDFLAGS_STAGE1)
 endif
 
 
@@ -164,6 +166,9 @@ $(STAGE1OBJS-DISK): %-DISK.o: %.c .depend
 
 $(STAGE1OBJS-NETWORK): %-NETWORK.o: %.c .depend
 	$(COMPILE) $(GLIBC_INCLUDES) $(NETWORK_DEFS) -c $< -o $@
+
+$(INITOBJS): %.o: %.c
+	$(COMPILE) $(INIT_DEFS) $(GLIBC_INCLUDES) -c $<
 
 .c.o: .depend
 	$(COMPILE) $(GLIBC_INCLUDES) $(PCMCIA_DEFS) -c $<

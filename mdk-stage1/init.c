@@ -19,19 +19,14 @@
  *
  */
 
-#include "minilibc.h"
+#ifndef INIT_HEADERS
+#include "init-libc-headers.h"
+#else
+#include INIT_HEADERS
+#endif
+
 #include "config-stage1.h"
 
-#define KICK_FLOPPY     1
-#define KICK_BOOTP	2
-
-#define MS_REMOUNT      32
-
-#define ENV_PATH 		0
-#define ENV_LD_LIBRARY_PATH 	1
-#define ENV_HOME		2
-#define ENV_TERM		3
-#define ENV_DEBUG		4
 
 char * env[] = {
 	"PATH=/usr/bin:/bin:/sbin:/usr/sbin:/mnt/sbin:/mnt/usr/sbin:/mnt/bin:/mnt/usr/bin",
@@ -71,6 +66,33 @@ void print_error(char *msg)
 void print_warning(char *msg)
 {
 	printf("W: %s\n", msg);
+}
+
+void print_int(int fd, int i)
+{
+	char buf[10];
+	char * chptr = buf + 9;
+	int j = 0;
+	
+	if (i < 0)
+	{
+		write(1, "-", 1);
+		i = -1 * i;
+	}
+	
+	while (i)
+	{
+		*chptr-- = '0' + (i % 10);
+		j++;
+		i = i / 10;
+	}
+	
+	write(fd, chptr + 1, j);
+}
+
+void print_str(int fd, char * string)
+{
+	write(fd, string, strlen(string));
 }
 
 
@@ -202,6 +224,8 @@ void doklog()
 	}
 }
 
+
+#define LOOP_CLR_FD	0x4C01
 
 void del_loop(char *device) 
 {
@@ -426,7 +450,7 @@ int main(int argc, char **argv)
 	if (!abnormal_termination) {
 		printf("rebooting system\n");
 		sleep(2);
-		reboot(0xfee1dead, 672274793, 0x1234567);
+		reboot(LINUX_REBOOT_CMD_RESTART);
 	} else {
 		printf("you may safely reboot your system\n");
 		while (1);

@@ -109,6 +109,8 @@ static inline _syscall0(int,fork)
 #endif
 static inline _syscall0(pid_t,setsid)
 static inline _syscall3(int,syslog,int, type, char *, buf, int, len);
+#define     LINUX_REBOOT_CMD_RESTART        0x01234567
+#define reboot(x) reboot(0xfee1dead, 672274793, x)
 #else
 static inline _syscall5(int,_newselect,int,n,fd_set *,rd,fd_set *,wr,fd_set *,ex,struct timeval *,timeval);
 static inline _syscall3(int,write,int,fd,const char *,buf,unsigned long,count)
@@ -141,3 +143,4 @@ void print_str(int fd, char * string);
 void print_int(int fd, int i);
 /* Minimum printf which handles only characters, %d's and %s's */
 void printf(char * fmt, ...);
+
