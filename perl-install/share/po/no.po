@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX VERSION\n"
-"POT-Creation-Date: 1999-11-16 12:04+0100\n"
+"POT-Creation-Date: 1999-11-17 17:21+0100\n"
 "PO-Revision-Date: 1999-08-25 11:07+0200\n"
 "Last-Translator: Terje Bjerkelia <terje@bjerkelia.com>\n"
 "Language-Team: norwegian\n"
@@ -25,11 +25,16 @@ msgstr "Velg en X-tjener"
 msgid "Select the memory size of your graphic card"
 msgstr "Velg minnestørrelsen til grafikk-kortet ditt"
 
-#: ../Xconfigurator.pm_.c:199
+#: ../Xconfigurator.pm_.c:200
+#, fuzzy
+msgid "Choose options for server"
+msgstr "Velg en X-tjener"
+
+#: ../Xconfigurator.pm_.c:218
 msgid "Choose a monitor"
 msgstr "Velg en monitor"
 
-#: ../Xconfigurator.pm_.c:202
+#: ../Xconfigurator.pm_.c:221
 msgid ""
 "The two critical parameters are the vertical refresh rate, which is the "
 "rate\n"
@@ -53,39 +58,39 @@ msgstr ""
 "skjermen din.\n"
 "Hvis du er usikker, velg en konservativ innstilling."
 
-#: ../Xconfigurator.pm_.c:209
+#: ../Xconfigurator.pm_.c:228
 msgid "Horizontal refresh rate"
 msgstr "Horisontal oppfrisknings-rate"
 
-#: ../Xconfigurator.pm_.c:209
+#: ../Xconfigurator.pm_.c:228
 msgid "Vertical refresh rate"
 msgstr "Vertikal oppfrisknings-rate"
 
-#: ../Xconfigurator.pm_.c:250
+#: ../Xconfigurator.pm_.c:269
 msgid "Monitor not configured"
 msgstr "Monitor er ikke konfigurert"
 
-#: ../Xconfigurator.pm_.c:253
+#: ../Xconfigurator.pm_.c:272
 msgid "Graphic card not configured yet"
 msgstr "Grafikk-kort er ikke konfigurert ennå"
 
-#: ../Xconfigurator.pm_.c:256
+#: ../Xconfigurator.pm_.c:275
 msgid "Resolutions not chosen yet"
 msgstr "Oppløsninger er ikke valgt ennå"
 
-#: ../Xconfigurator.pm_.c:265
+#: ../Xconfigurator.pm_.c:284
 msgid "Do you want to test the configuration?"
 msgstr "Vil du teste konfigurasjonen?"
 
-#: ../Xconfigurator.pm_.c:265
+#: ../Xconfigurator.pm_.c:284
 msgid "Test configuration"
 msgstr "Test konfigurasjon"
 
-#: ../Xconfigurator.pm_.c:297
+#: ../Xconfigurator.pm_.c:316
 msgid "An error occurred:"
 msgstr "En feil oppsto:"
 
-#: ../Xconfigurator.pm_.c:299
+#: ../Xconfigurator.pm_.c:318
 msgid ""
 "\n"
 "try changing some parameters"
@@ -93,25 +98,25 @@ msgstr ""
 "\n"
 "prøv å endre noen parametere"
 
-#: ../Xconfigurator.pm_.c:320
+#: ../Xconfigurator.pm_.c:339
 #, c-format
 msgid "(leaving in %d seconds)"
 msgstr "(slutter om %d sekunder)"
 
-#: ../Xconfigurator.pm_.c:324 ../install_steps_interactive.pm_.c:599
+#: ../Xconfigurator.pm_.c:343 ../install_steps_interactive.pm_.c:599
 #: ../my_gtk.pm_.c:438
 msgid "Is this correct?"
 msgstr "Er dette riktig?"
 
-#: ../Xconfigurator.pm_.c:332
+#: ../Xconfigurator.pm_.c:351
 msgid "An error occurred, try changing some parameters"
 msgstr "En feil oppsto, prøv å endre noen parametere"
 
-#: ../Xconfigurator.pm_.c:340 ../Xconfigurator.pm_.c:505
+#: ../Xconfigurator.pm_.c:359 ../Xconfigurator.pm_.c:524
 msgid "Automatic resolutions"
 msgstr "Automatiske oppløsninger"
 
-#: ../Xconfigurator.pm_.c:341
+#: ../Xconfigurator.pm_.c:360
 msgid ""
 "To find the available resolutions I will try different ones.\n"
 "Your screen will blink...\n"
@@ -121,19 +126,19 @@ msgstr ""
 "Skjermen din vil blinke...\n"
 "Du kan slå av hvis du vil, du vil høre et bipp når det er ferdig"
 
-#: ../Xconfigurator.pm_.c:392 ../install_steps_interactive.pm_.c:564
+#: ../Xconfigurator.pm_.c:411 ../install_steps_interactive.pm_.c:564
 msgid "Resolution"
 msgstr "Oppløsning"
 
-#: ../Xconfigurator.pm_.c:427
+#: ../Xconfigurator.pm_.c:446
 msgid "Choose resolution and color depth"
 msgstr "Velg oppløsning og fargedybde"
 
-#: ../Xconfigurator.pm_.c:435
+#: ../Xconfigurator.pm_.c:454
 msgid "Show all"
 msgstr "Vis alle"
 
-#: ../Xconfigurator.pm_.c:506
+#: ../Xconfigurator.pm_.c:525
 msgid ""
 "I can try to find the available resolutions (eg: 800x600).\n"
 "Sometimes, though, it may hang the machine.\n"
@@ -143,7 +148,7 @@ msgstr ""
 "Noen ganger kan dette forårsake at maskinen stopper opp.\n"
 "Ønsker du å prøve?"
 
-#: ../Xconfigurator.pm_.c:511
+#: ../Xconfigurator.pm_.c:530
 msgid ""
 "No valid modes found\n"
 "Try with another video card or monitor"
@@ -151,93 +156,98 @@ msgstr ""
 "Ingen gyldige modus funnet\n"
 "Prøv med et annet skjermkort eller monitor"
 
-#: ../Xconfigurator.pm_.c:699
+#: ../Xconfigurator.pm_.c:721
 #, c-format
 msgid "Keyboard layout: %s\n"
 msgstr "Tastatur-oppsett: %s\n"
 
-#: ../Xconfigurator.pm_.c:700
+#: ../Xconfigurator.pm_.c:722
 #, c-format
 msgid "Mouse type: %s\n"
 msgstr "Type mus: %s\n"
 
-#: ../Xconfigurator.pm_.c:701
+#: ../Xconfigurator.pm_.c:723
 #, c-format
 msgid "Mouse device: %s\n"
 msgstr "Enhet mus: %s\n"
 
-#: ../Xconfigurator.pm_.c:702
+#: ../Xconfigurator.pm_.c:724
 #, c-format
 msgid "Monitor: %s\n"
 msgstr "Monitor: %s\n"
 
-#: ../Xconfigurator.pm_.c:703
+#: ../Xconfigurator.pm_.c:725
 #, c-format
 msgid "Monitor HorizSync: %s\n"
 msgstr "Monitor HorizSync: %s\n"
 
-#: ../Xconfigurator.pm_.c:704
+#: ../Xconfigurator.pm_.c:726
 #, c-format
 msgid "Monitor VertRefresh: %s\n"
 msgstr "Monitor VertRefresh: %s\n"
 
-#: ../Xconfigurator.pm_.c:705
+#: ../Xconfigurator.pm_.c:727
 #, c-format
 msgid "Graphic card: %s\n"
 msgstr "Grafikk-kort: %s\n"
 
-#: ../Xconfigurator.pm_.c:706
+#: ../Xconfigurator.pm_.c:728
 #, c-format
 msgid "Graphic memory: %s kB\n"
 msgstr "Minne grafikk: %s kB\n"
 
-#: ../Xconfigurator.pm_.c:707
+#: ../Xconfigurator.pm_.c:729
 #, c-format
 msgid "XFree86 server: %s\n"
 msgstr "XFree86-tjener: %s\n"
 
-#: ../Xconfigurator.pm_.c:721
+#: ../Xconfigurator.pm_.c:743
 #, fuzzy
 msgid "Preparing X-Window configuration"
 msgstr "Forbereder installasjon"
 
-#: ../Xconfigurator.pm_.c:735
+#: ../Xconfigurator.pm_.c:757
 msgid "Change Monitor"
 msgstr "Endre monitor"
 
-#: ../Xconfigurator.pm_.c:736
+#: ../Xconfigurator.pm_.c:758
 msgid "Change Graphic card"
 msgstr "Endre grafikk-kort"
 
-#: ../Xconfigurator.pm_.c:737
+#: ../Xconfigurator.pm_.c:759
+#, fuzzy
+msgid "Change Server options"
+msgstr "Endre oppløsning"
+
+#: ../Xconfigurator.pm_.c:760
 msgid "Change Resolution"
 msgstr "Endre oppløsning"
 
-#: ../Xconfigurator.pm_.c:738
+#: ../Xconfigurator.pm_.c:761
 msgid "Automatical resolutions search"
 msgstr "Automatisk oppløsningssøk"
 
-#: ../Xconfigurator.pm_.c:742
+#: ../Xconfigurator.pm_.c:765
 msgid "Show information"
 msgstr "Vis informasjon"
 
-#: ../Xconfigurator.pm_.c:743
+#: ../Xconfigurator.pm_.c:766
 msgid "Test again"
 msgstr "Test igjen"
 
-#: ../Xconfigurator.pm_.c:744
+#: ../Xconfigurator.pm_.c:767
 msgid "Quit"
 msgstr "Avslutt"
 
-#: ../Xconfigurator.pm_.c:747
+#: ../Xconfigurator.pm_.c:770
 msgid "What do you want to do?"
 msgstr "Hva vil du gjøre?"
 
-#: ../Xconfigurator.pm_.c:754
+#: ../Xconfigurator.pm_.c:777
 msgid "X at startup"
 msgstr "X ved oppstart"
 
-#: ../Xconfigurator.pm_.c:755
+#: ../Xconfigurator.pm_.c:778
 msgid ""
 "I can set up your computer to automatically start X upon booting.\n"
 "Would you like X to start when you reboot?"
@@ -1720,7 +1730,7 @@ msgstr "tjener"
 msgid "Partitioning failed: no root filesystem"
 msgstr "Partisjonering feilet: intet root-filsystem"
 
-#: ../install2.pm_.c:320
+#: ../install2.pm_.c:324
 msgid "Not enough swap to fulfill installation, please add some"
 msgstr ""
 "Ikke nok vekslingsplass til å fullføre installasjonen, du må legge til mer"
@@ -1741,28 +1751,33 @@ msgstr ""
 "DiskDrake klarte ikke å lese partisjonstabellen korrekt.\n"
 "Fortsett på egen risiko!"
 
-#: ../install_any.pm_.c:229
+#: ../install_any.pm_.c:200
+#, fuzzy
+msgid "Searching root partition."
+msgstr "Søker etter den tapte partisjonstabellen din"
+
+#: ../install_any.pm_.c:231
 msgid "Information"
 msgstr "Informasjon"
 
-#: ../install_any.pm_.c:230
+#: ../install_any.pm_.c:232
 #, c-format
 msgid "%s: This is not a root partition, please select another one."
 msgstr "%s: Dette er ikke en root-partisjon, vennligst velg en annen."
 
-#: ../install_any.pm_.c:232
+#: ../install_any.pm_.c:234
 msgid "No root partition found"
 msgstr "Ingen root-partisjon funnet"
 
-#: ../install_any.pm_.c:268
+#: ../install_any.pm_.c:270
 msgid "Can't use broadcast with no NIS domain"
 msgstr "Kan ikke bruke broadcast uten NIS domene"
 
-#: ../install_any.pm_.c:417
+#: ../install_any.pm_.c:422
 msgid "Error reading file $f"
 msgstr "Feil ved lesing av fil $f"
 
-#: ../install_any.pm_.c:423
+#: ../install_any.pm_.c:428
 #, c-format
 msgid "Bad kickstart file %s (failed %s)"
 msgstr "Dårlig kickstart-fil %s (mislykket %s)"
@@ -1781,7 +1796,7 @@ msgstr ""
 msgid "Duplicate mount point %s"
 msgstr "Dupliser monteringspunkt %s"
 
-#: ../install_steps.pm_.c:425
+#: ../install_steps.pm_.c:430
 msgid "No floppy drive available"
 msgstr "Ingen diskettstasjon tilgjengelig"
 
@@ -3486,9 +3501,6 @@ msgstr ""
 
 #~ msgid "Choose on the list of keyboards, the one corresponding to yours"
 #~ msgstr "Velg på listen over tastatur det som stemmer overens med ditt"
-
-#~ msgid "Searching for your lost partition table"
-#~ msgstr "Søker etter den tapte partisjonstabellen din"
 
 #~ msgid "8 mb"
 #~ msgstr "8 mb"
