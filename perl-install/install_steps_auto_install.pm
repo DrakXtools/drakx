@@ -7,7 +7,7 @@ use vars qw(@ISA $graphical @graphical_steps);
 
 @ISA = qw(install_steps);
 
-@graphical_steps = qw(enteringStep installPackages);
+@graphical_steps = qw(enteringStep beforeInstallPackages installPackages);
 
 use modules;
 
