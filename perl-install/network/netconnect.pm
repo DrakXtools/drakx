@@ -177,15 +177,14 @@ ifdown eth0
 
     if (keys %{$netc->{internet_cnx}} > 1) {
 	$in->ask_from_entries_refH(_("Network Configuration Wizard"),
-				   _("You have configured multiple ways to connect to the Internet.\nChoose the one you want to use.\n\n" . if_(!$::isStandalone, "You may want to configure some profiles after the installation, in the Mandrake Control Center")),
-			       [
-				{ label => _("Internet connection"), val => [$netc->{internet_cnx_choice}], list => [ keys %{$netc->{internet_cnx}}]},
-			       ]
-			      ) or goto step_2;
+  				   _("You have configured multiple ways to connect to the Internet.\nChoose the one you want to use.\n\n" . if_(!$::isStandalone, "You may want to configure some profiles after the installation, in the Mandrake Control Center")),
+  				   [
+  				    { label => _("Internet connection"), val => \$netc->{internet_cnx_choice}, list => [ keys %{$netc->{internet_cnx}} ]}
+  				   ]
+  				  ) or goto step_2;
     } elsif (keys %{$netc->{internet_cnx}} == 1) {
 	$netc->{internet_cnx_choice} = $netc->{internet_cnx}[1];
     }
-    print " - --------- -- - -------\n" . $netc->{internet_cnx_choice} . "------------\n";
     $netc->{internet_cnx_choice} and write_cnx_script($netc);
 
   step_3:
