@@ -1,5 +1,4 @@
-#!/usr/bin/perl
-
+package scanner;
 # scanner.pm $Id$
 # Yves Duret <yduret at mandrakesoft.com>
 # Copyright (C) 2001 MandrakeSoft
@@ -25,8 +24,6 @@
 # - lp: see printerdrake
 # - install: prefix --> done
 
-package scanner;
-use lib qw(/usr/lib/libDrakX);
 use standalone;
 use common;
 use detect_devices;
@@ -211,6 +208,9 @@ sub updateScannerDBfromSane {
 
 #-----------------------------------------------
 # $Log$
+# Revision 1.7  2002/07/08 08:34:51  tvignaud
+# this doesn't need either "#!/usr/bin/perl" nor "use lib qw(/usr/lib/libDrakX);"
+#
 # Revision 1.6  2002/03/10 15:26:00  yduret
 # added ASK support for more interactiveness during configuration
 #
