@@ -253,6 +253,9 @@ sub afterInstallPackages($) {
 
     $o->pcmciaConfig();
 
+    #- remove the nasty acon...
+    run_program::rooted($o->{prefix}, "chkconfig", "--del", "acon") unless $ENV{LANGUAGE} =~ /ar/;
+
     #- miscellaneous
     addToBeDone {
 	setVarsInSh("$o->{prefix}/etc/sysconfig/system", { 
@@ -262,6 +265,12 @@ sub afterInstallPackages($) {
         });
 	install_any::fsck_option();
     } 'doInstallStep';
+
+    if ($o->{pcmcia}) {
+	substInFile { s/.*(TaskBarShowAPMStatus).*/$1=1/ } "$o->{prefix}/usr/lib/X11/icewm/preferences";
+	eval { commands::cp("$o->{prefix}/usr/share/applnk/System/kapm.kdelnk", 
+			    "$o->{prefix}/etc/skel/Desktop/Autostart/kapm.kdelnk") };
+    }
 
     my $p = $o->{packages}{urpmi};
     install_any::install_urpmi($o->{prefix}, $o->{method}) if $p && $p->{selected};

@@ -227,12 +227,12 @@ sub selectPackagesToUpgrade {
 }
 #------------------------------------------------------------------------------
 sub choosePackages {
-    my ($o, $packages, $compss, $compssUsers) = @_;
+    my ($o, $packages, $compss, $compssUsers, $compssUsersSorted) = @_;
 
     require pkgs;
     $o->ask_many_from_list_ref('',
 			       _("Package Group Selection"),
-			       [ keys %$compssUsers ],
+			       [ @$compssUsersSorted ],
 			       [ map { \$o->{compssUsersChoice}{$_} } keys %$compssUsers ]
 			       );
     while (my ($k, $v) = each %{$o->{compssUsersChoice}}) {

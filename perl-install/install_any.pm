@@ -122,13 +122,18 @@ sub setPackages($) {
 	push @{$o->{default_packages}}, "kernel-secure" if $o->{security} > 3;
 	push @{$o->{default_packages}}, "kernel-smp" if $o->{security} <= 3 && detect_devices::hasSMP(); #- no need for kernel-smp if we have kernel-secure which is smp
 	push @{$o->{default_packages}}, "kernel-pcmcia-cs" if $o->{pcmcia};
+	push @{$o->{default_packages}}, "apmd" if $o->{pcmcia};
 	push @{$o->{default_packages}}, "raidtools" if !is_empty_hash_ref($o->{raid});
 
 	pkgs::getDeps($o->{packages});
 
 	my $c; ($o->{compss}, $c) = pkgs::readCompss($o->{packages});
 	$o->{compssListLevels} = pkgs::readCompssList($o->{packages}, $c);
-	$o->{compssUsers} = pkgs::readCompssUsers($o->{packages}, $o->{compss});
+	($o->{compssUsers}, $o->{compssUsersSorted}) = pkgs::readCompssUsers($o->{packages}, $o->{compss});
+
+	my @l = ();
+	push @l, "kapm" if $o->{pcmcia};
+	$_->{values} = [ map { $_ + 50 } @{$_->{values}} ] foreach grep {$_} map { $o->{packages}{$_} } @l;
 
 	grep { !$o->{packages}{$_} && log::l("missing base package $_") } @{$o->{base}} and die "missing some base packages";
     } else {

@@ -772,7 +772,8 @@ sub main {
 				 _("What do you want to do?"),
 				 [ grep { !ref } @c ]);
 	eval { &{$c{$f}} };
-	!$@ || $@ =~ /^ask_from_list cancel/ or die;
+	!$@ || $@ =~ /ask_from_list cancel/ or die;
+	$in->kill;
     }
 
     if ($ok) {

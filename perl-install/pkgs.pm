@@ -30,6 +30,7 @@ my %by_lang = (
   'zh_TW.Big5' => [ 'rxvt-CLE' ],
 );
 
+my @prefered = qw(perl-GTK);
 
 my $A = 20471;
 my $B = 16258;
@@ -49,6 +50,7 @@ sub allpackages {
 
 sub select($$;$) {
     my ($packages, $p, $base) = @_;
+    my %prefered; @prefered{@prefered} = ();
     my ($n, $v);
     unless ($p->{installed}) { #- if the same or better version is installed, do not select.
 	$p->{base} ||= $base;
@@ -59,8 +61,10 @@ sub select($$;$) {
 	    my $i = $packages->{$n};
 	    if (!$i && $n =~ /\|/) {
 		foreach (split '\|', $n) {
-		    $i = Package($packages, $_);
-		    last if $i && $i->{selected};
+		    my $p = Package($packages, $_);
+		    $i ||= $p;
+		    $p && $p->{selected} and $i = $p, last;
+		    $p && exists $prefered{$_} and $i = $p;
 		}
 	    }
 	    $i->{base} ||= $base;
@@ -251,7 +255,7 @@ sub readCompssList($$$) {
 
 sub readCompssUsers {
     my ($packages, $compss) = @_;
-    my (%compssUsers, $l);
+    my (%compssUsers, @sorted, $l);
 
     my $f = install_any::getFile("compssUsers") or die "can't find compssUsers";
     foreach (<$f>) {
@@ -259,6 +263,7 @@ sub readCompssUsers {
 	s/#.*//;
 
 	if (/^(\S.*)/) {
+	    push @sorted, $1;
 	    $compssUsers{$1} = $l = [];
 	} elsif (/\s+\+(.*)/) {
 	    push @$l, $packages->{$1} || do { log::l("unknown package $1 (in compssUsers)"); next };
@@ -269,7 +274,7 @@ sub readCompssUsers {
 	    push @$l, @{ category2packages($p) };
 	}
     }
-    \%compssUsers;
+    \%compssUsers, \@sorted;
 }
 
 #- sub isLangSensitive($$) {

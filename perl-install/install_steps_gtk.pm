@@ -294,7 +294,7 @@ _("TODO"))) {
 
 #------------------------------------------------------------------------------
 sub choosePackages {
-    my ($o, $packages, $compss, $compssUsers, $first_time) = @_;
+    my ($o, $packages, $compss, $compssUsers, $compssUsersSorted, $first_time) = @_;
 
     if ($::beginner) {
 	require pkgs;
@@ -335,7 +335,7 @@ sub chooseSizeToInstall {
 				       $o->{installClass}, $o->{isUpgrade});
 }
 sub choosePackagesTree {
-    my ($o, $packages, $compss, $compssUsers) = @_;
+    my ($o, $packages, $compss) = @_;
     my $availableSpace = int(install_any::getAvailableSpace($o) / sqr(1024));
     my $w = my_gtk->new('');
     add2hash_($o->{packages_}, { show_level => 0 }); #- keep show more or less 80 });

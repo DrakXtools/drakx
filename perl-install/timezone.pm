@@ -37,6 +37,7 @@ sub write($$$) {
 }
 
 my %l2t = (
+'Brezhoneg (Brittany)' => 'Europe/Paris',
 'Danish (Denmark)' => 'Europe/Copenhagen',
 'English (USA)' => 'America/New_York',
 'English (UK)' => 'Europe/London',

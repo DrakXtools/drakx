@@ -1,3 +1,7 @@
+in draksec, (and maybe others) have --expert as default if /etc/sysconfig/system has TYPE=expert
+
+bug in users: mandrake user is added twice in strange installs
+
 bug in upgrade: install from hda1:/usr/local/blah with hda1:/
 
 in XFdrake, testing should not overwrite /etc/X11/XF86Config
@@ -169,3 +173,10 @@ suggested partition tables must be better foreach installClass
 (done,dindinx)app for choosing drakxtools (drakxconf)
 (done,pix)verify being root
 (done,pix)log::l -> initlog
+
+(done,pix)install apmd for laptops (maybe not start apmd though)
+(done,pix)icewm apm (sh icewm_apm)
+(done,pix)kde apm (put Kapm.kdelnk in ~/Desktop/Autostart)
+
+(done,pix)bug in adduserdrake: missing pwconv in md5
+(done,pix)correct the default value of draksec (cp draksec)

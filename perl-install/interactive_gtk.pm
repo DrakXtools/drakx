@@ -47,6 +47,7 @@ sub ask_from_listW {
 		       ),
 	       );
 	$defW->grab_focus if $defW;
+	$w->{rwindow}->set_position('center');
 	$w->main;
     } else {
 	$w->_ask_from_list($title, $messages, $l, $def);
@@ -212,6 +213,7 @@ sub wait_messageW($$$) {
 	   gtkpack(new Gtk::VBox(0,0),
 		   @$messages,
 		   $w->{wait_messageW} = new Gtk::Label($W)));
+    $w->{rwindow}->set_position('center');
     $w->{wait_messageW}->signal_connect(expose_event => sub { $w->{displayed} = 1 });
     $w->sync until $w->{displayed};
     $w;
