@@ -313,7 +313,8 @@ sub read_configured_queues($) {
 		}
 		# Mark that we have a CUPS queue but do not know the name
 		# the PPD file in /usr/share/cups/model
-		if (!$printer->{configured}{$QUEUES[$i]{queuedata}{queue}}{queuedata}{ppd}) {
+		if ((!$printer->{configured}{$QUEUES[$i]{queuedata}{queue}}{queuedata}{ppd}) &&
+		    (! -r $printer->{configured}{$QUEUES[$i]{queuedata}{queue}}{queuedata}{ppd})) {
 		    $printer->{configured}{$QUEUES[$i]{queuedata}{queue}}{queuedata}{ppd} = '1';
 		}
 		$printer->{configured}{$QUEUES[$i]{queuedata}{queue}}{queuedata}{driver} = 'PPD';
@@ -666,7 +667,11 @@ sub read_ppd_options ($) {
     my $COMBODATA;
     open(my $F, ($::testing ? $::prefix : "chroot $::prefix/ ") . 
 	"foomatic-configure -P -q" .
-	" --ppd /usr/share/cups/model/$printer->{currentqueue}{ppd}" .
+	 if_($printer->{currentqueue}{ppd} &&
+	     ($printer->{currentqueue}{ppd} ne '1'),
+	     " --ppd " . ($printer->{currentqueue}{ppd} !~ m!^/! ?
+			    "/usr/share/cups/model/" : "") .
+			   $printer->{currentqueue}{ppd}) .
 	($printer->{OLD_QUEUE} ?
 	 " -s $printer->{SPOOLER} -n $printer->{OLD_QUEUE}" : "") .
 	 ($printer->{SPECIAL_OPTIONS} ?
@@ -1911,16 +1916,18 @@ sub configure_queue($) {
 			 ("-p", $printer->{currentqueue}{printer},
 			  "-d", $printer->{currentqueue}{driver}) :
 			 ($printer->{currentqueue}{ppd} ?
-			  ("--ppd",
-			   ($printer->{currentqueue}{ppd} !~ m!^/! ?
-			    "/usr/share/cups/model/" : "") .
-			   $printer->{currentqueue}{ppd}) :
+			  ($printer->{currentqueue}{ppd} ne '1' ?
+			   ("--ppd",
+			    ($printer->{currentqueue}{ppd} !~ m!^/! ?
+			     "/usr/share/cups/model/" : "") .
+			    $printer->{currentqueue}{ppd}) : "") :
 			  ("-d", "raw"))),
 			"-N", $printer->{currentqueue}{desc},
 			"-L", $printer->{currentqueue}{loc},
 			@{$printer->{currentqueue}{options}}
 			) or return 0;;
-    if ($printer->{currentqueue}{ppd}) {
+    if ($printer->{currentqueue}{ppd} &&
+	($printer->{currentqueue}{ppd} ne '1')) {
 	# Add a comment line containing the path of the used PPD file to the
 	# end of the PPD file
 	if ($printer->{currentqueue}{ppd} ne '1') {
