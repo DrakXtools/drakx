@@ -98,7 +98,7 @@ sub get_eth_cards {
             $description = $cards[0]{description} if @cards == 1;
         }
         $a and $saved_driver = $a; # handle multiple cards managed by the same driver
-        [ $interface, $saved_driver, if_($description, $description) ]
+        [ $interface, $saved_driver, if_($description, $description) ];
     } @all_cards;
 }
 
@@ -120,7 +120,7 @@ sub update_iftab() {
         my $descriptor = ${{ ether => 'mac', ieee1394 => 'mac_ieee1394' }}{$link_type} or next;
         substInFile {
             s/^$intf\s+.*\n//;
-            $_ .= qq($intf\t$descriptor $mac_address\n) if eof
+            $_ .= qq($intf\t$descriptor $mac_address\n) if eof;
         } "$::prefix/etc/iftab";
     }
 }

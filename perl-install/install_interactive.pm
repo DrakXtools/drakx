@@ -92,7 +92,7 @@ sub partitionWizardSolutions {
     my @hds_rw = grep { !$_->{readonly} } @$hds;
     my @hds_can_add = grep { $_->can_raw_add } @hds_rw;
     if (fs::get::hds_free_space(@hds_can_add) > $min_linux) {
-	$solutions{free_space} = [ 20, N("Use free space"), sub { fsedit::auto_allocate($all_hds, $o->{partitions}); 1 } ]
+	$solutions{free_space} = [ 20, N("Use free space"), sub { fsedit::auto_allocate($all_hds, $o->{partitions}); 1 } ];
     } else { 
 	push @wizlog, N("Not enough free space to allocate new partitions") . ": " .
 	  (@hds_can_add ? 
@@ -102,7 +102,7 @@ sub partitionWizardSolutions {
 
     if (my @truefs = grep { isTrueLocalFS($_) } @$fstab) {
 	#- value twice the ext2 partitions
-	$solutions{existing_part} = [ 6 + @truefs + @$fstab, N("Use existing partitions"), sub { $o->ask_mntpoint_s($fstab) } ]
+	$solutions{existing_part} = [ 6 + @truefs + @$fstab, N("Use existing partitions"), sub { $o->ask_mntpoint_s($fstab) } ];
     } else {
 	push @wizlog, N("There is no existing partition to use");
     }

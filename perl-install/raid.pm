@@ -251,7 +251,7 @@ sub parse_mdadm_conf {
 	    push @{$conf{ARRAY}}, \%md_conf;
 	}
     }
-    \%conf
+    \%conf;
 }
 
 1;

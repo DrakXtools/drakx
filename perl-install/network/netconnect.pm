@@ -56,7 +56,7 @@ sub detect_timezone() {
     foreach (keys %tmz2country) {
 	if ($_ eq $tm_parse{ZONE}) {
 	    unshift @country, $tmz2country{$_};
-	} else { push @country, $tmz2country{$_} };
+	} else { push @country, $tmz2country{$_} }
     }
     \@country;
 }
@@ -328,7 +328,7 @@ sub real_main {
                     name => N("Select the network interface to configure:"),
                     data =>  sub {
                         [ { label => N("Net Device"), type => "list", val => \$isdn_name, allow_empty_list => 1, 
-                            list => [ $my_isdn, N("External ISDN modem"), keys %isdn_cards ] } ]
+                            list => [ $my_isdn, N("External ISDN modem"), keys %isdn_cards ] } ];
                     },
                     post => sub {
                         # !intern_pci:
@@ -443,7 +443,7 @@ If you have a PCMCIA card, you have to know the \"irq\" and \"io\" of your card.
                             ],
                     post => sub { 
                         $isdn->{protocol} = $isdn_type; 
-                        return "isdn_db",
+                        return "isdn_db";
                     }
                    },
 
@@ -485,7 +485,7 @@ Take a look at http://www.linmodems.org"),
                             list => [ keys %{$netc->{autodetect}{modem}}, N("Manual choice") ], } ],
                     },
                     post => sub {
-                        $modem ||= $netcnx->{modem} ||= {};;
+                        $modem ||= $netcnx->{modem} ||= {};
                         return 'choose_serial_port' if $modem_name eq N("Manual choice");
                         $ntf_name = $netc->{autodetect}{modem}{$modem_name}{device} || $netc->{autodetect}{modem}{$modem_name}{description};
 
@@ -558,14 +558,14 @@ Take a look at http://www.linmodems.org"),
                                 s/%([0-9]{3})/chr(int($1))/eg;
                                 $countries{$country} ||= translate($country);
                                 join('', $countries{$country}, $_);
-                            } grep { !/.directory$/ } glob_("$p_db_path/$country/*")
+                            } grep { !/.directory$/ } glob_("$p_db_path/$country/*");
                         } map { s!$p_db_path/!!o; s!_! !g; $_ } glob_("$p_db_path/*");
                         $old_provider = $provider;
                     },
                     name => N("Select your provider:"),
                     data => sub {
                         [ { label => N("Provider:"), type => "list", val => \$provider, separator => '/',
-                            list => [ N("Unlisted - edit manually"), @isp ] } ]
+                            list => [ N("Unlisted - edit manually"), @isp ] } ];
                     },
                     post => sub {
                         if ($provider ne N("Unlisted - edit manually")) {
@@ -932,7 +932,7 @@ Do you really want to reconfigure this device?"),
                     name => sub { 
                         my $_msg = N("Zeroconf hostname resolution");
                         N("Configuring network device %s (driver %s)", $ethntf->{DEVICE}, $module) . "\n\n" .
-                          N("The following protocols can be used to configure an ethernet connection. Please choose the one you want to use")
+                          N("The following protocols can be used to configure an ethernet connection. Please choose the one you want to use");
                     },
                     data => sub {
                         [ { val => \$protocol, type => "list", list => [ sort values %l10n_lan_protocols ] } ];
@@ -1010,7 +1010,7 @@ notation (for example, 1.2.3.4).")),
                         }
                     },
                     focus_out => sub {
-                        $ethntf->{NETMASK} ||= netmask($ethntf->{IPADDR}) unless $_[0]
+                        $ethntf->{NETMASK} ||= netmask($ethntf->{IPADDR}) unless $_[0];
                     },
                     post => sub {
                         $ethntf->{ONBOOT} = bool2yesno($onboot);
@@ -1101,7 +1101,7 @@ those interface specific commands and their effect.
 
 See iwpriv(8) man page for further information."),
                              }
-                         ]
+                         ];
                     },
                     post => sub {
                         # untranslate parameters
@@ -1267,14 +1267,14 @@ It is not necessary on most networks."),
                                                ONBOOT => 1, DIAL_ON_IFUP => 0 });
                         my $method =  find {
                             $_->{ONBOOT} eq text2bool($intf->{ippp0}{ONBOOT}) &&
-                              $_->{DIAL_ON_IFUP} eq text2bool($intf->{ippp0}{DIAL_ON_IFUP})
+                              $_->{DIAL_ON_IFUP} eq text2bool($intf->{ippp0}{DIAL_ON_IFUP});
                         } @isdn_dial_methods;
                         #- use net_applet by default
                         $isdn->{dial_method} = $method->{name} || $isdn_dial_methods[1]{name};
                     },
                     name => N("How do you want to dial this connection?"),
                     data => sub {
-                        [ { type => "list", val => \$isdn->{dial_method}, list => [ map { $_->{name} } @isdn_dial_methods ] } ]
+                        [ { type => "list", val => \$isdn->{dial_method}, list => [ map { $_->{name} } @isdn_dial_methods ] } ];
                     },
                     post => sub {
                         my $method = find { $_->{name} eq $isdn->{dial_method} } @isdn_dial_methods;
@@ -1367,7 +1367,7 @@ Click on Ok to keep your configuration, or cancel to reconfigure your Internet &
                     $use_wizard = 0;
                 };
         }
-      };
+      }
       
       if ($use_wizard) {
           require wizards;
@@ -1432,14 +1432,14 @@ sub get_net_device() {
     my $connect_file = $network::tools::connect_file;
     my $network_file = "$::prefix/etc/sysconfig/network";
 		if (cat_("$::prefix$connect_file") =~ /ifup/) {
-  		if_(cat_($connect_file) =~ /^\s*ifup\s+(.*)/m, split(' ', $1))
+		    if_(cat_($connect_file) =~ /^\s*ifup\s+(.*)/m, split(' ', $1));
 		} elsif (cat_("$::prefix$connect_file") =~ /network/) {
 			${{ getVarsFromSh("$::prefix$network_file") }}{GATEWAYDEV};
     } elsif (cat_("$::prefix$connect_file") =~ /isdn/) {
 			"ippp+"; 
     } else {
 			"ppp+";
-    };
+    }
 }
 
 sub read_net_conf {
@@ -1450,7 +1450,7 @@ sub read_net_conf {
     network::network::read_all_conf($::prefix, $netc, $intf, $netcnx);
 
     foreach ('NET_DEVICE', 'NET_INTERFACE') {
-        $netc->{$_} = $netcnx->{$_} if $netcnx->{$_}
+        $netc->{$_} = $netcnx->{$_} if $netcnx->{$_};
     }
     $netcnx->{$netcnx->{type}} ||= {} if $netcnx->{type};
 }

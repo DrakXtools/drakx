@@ -245,7 +245,7 @@ sub merge_info_from_fstab {
 sub get_info_from_fstab {
     my ($all_hds) = @_;
     my @l = read_fstab($::prefix, '/etc/fstab', 'keep_default');
-    add2all_hds($all_hds, @l)
+    add2all_hds($all_hds, @l);
 }
 
 sub prepare_write_fstab {
@@ -309,7 +309,7 @@ sub prepare_write_fstab {
 
 	    [ $mntpoint, $_->{comment} . join(' ', $dev, $mntpoint, $fs_type, $options || 'defaults', $freq, $passno) . "\n" ];
 	} else {
-	    ()
+	    ();
 	}
     } grep { $_->{device} && ($_->{mntpoint} || $_->{real_mntpoint}) && $_->{fs_type} && ($_->{isFormatted} || !$_->{notFormatted}) } @$fstab;
 
@@ -617,7 +617,7 @@ sub df {
 
     if (!$part->{isMounted}) {
 	umount($dir);
-	unlink($dir)
+	unlink($dir);
     }
 
     $part->{free} = 2 * $free if defined $free;

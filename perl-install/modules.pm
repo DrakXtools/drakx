@@ -209,7 +209,7 @@ sub loaded_modules() {
 }
 sub remove_loaded_modules {
     my (@l) = @_;
-    difference2([ uniq(@l) ], [ map { my $s = $_; $s =~ s/_/-/g; $s, $_ } loaded_modules() ])
+    difference2([ uniq(@l) ], [ map { my $s = $_; $s =~ s/_/-/g; $s, $_ } loaded_modules() ]);
 }
 
 sub read_already_loaded { 
@@ -249,7 +249,7 @@ sub when_load_category {
             #- ensure keyboard is working, the kernel must do the job the BIOS was doing
             sleep 4;
             load("usbkbd", "keybdev") if detect_devices::usbKeyboards();
-        }
+        };
     } elsif ($category eq 'bus/firewire') {
 	$conf->set_alias('ieee1394-controller', $name);
     } elsif ($category =~ /sound/) {

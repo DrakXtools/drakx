@@ -180,7 +180,7 @@ sub get {
     my ($mirror, $dir, @files) = @_;
     foreach (@files) {
 	log::l("crypto: downloading $_");
-	ftp($mirror)->get($_, "$dir/$_") 
+	ftp($mirror)->get($_, "$dir/$_"); 
     }
     int @files;
 }

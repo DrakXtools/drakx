@@ -19,7 +19,7 @@ sub readln() {
 
 sub check_it {
     my ($i, $n) = @_;
-    $i =~ /^\s*\d+\s*$/ && 1 <= $i && $i <= $n
+    $i =~ /^\s*\d+\s*$/ && 1 <= $i && $i <= $n;
 }
 
 sub good_choice {

@@ -139,7 +139,7 @@ sub changeIso($) {
 	fs::mount($iso_images{loopdev}, $iso_images{mountpoint}, "iso9660", 'readonly');
 	log::l("using ISO image '$iso_label'");
 	1;
-    }
+    };
 }
 
 sub errorOpeningFile($) {
@@ -213,7 +213,7 @@ sub getFile {
 	    $o_altroot ||= '/tmp/image';
 	    $f2 = "$o_altroot/$rel" if $rel !~ m,^/, && (!$postinstall_rpms || !-e $f2);
 	    #- $f2 = "/$rel" if !$::o->{packages}{mediums}{$asked_medium}{rpmsdir} && !-e $f2; #- not a relative path, should not be necessary with new media layout
-	    my $F; open($F, $f2) ? $F : do { $f2 !~ /XXX/ and log::l("Can't open $f2: $!"); undef }
+	    my $F; open($F, $f2) ? $F : do { $f2 !~ /XXX/ and log::l("Can't open $f2: $!"); undef };
 	}
     } || errorOpeningFile($f);
 }
@@ -276,7 +276,7 @@ sub clean_postinstall_rpms() {
 #-######################################################################################
 sub getNextStep {
     my ($o) = @_;
-    find { !$o->{steps}{$_}{done} && $o->{steps}{$_}{reachable} } @{$o->{orderedSteps}}
+    find { !$o->{steps}{$_}{done} && $o->{steps}{$_}{reachable} } @{$o->{orderedSteps}};
 }
 
 sub spawnShell() {
@@ -967,7 +967,7 @@ sub kdemove_desktop_file {
     #- move appropriate file there after an upgrade.
     foreach my $dir (grep { -d $_ } list_skels($prefix, 'Desktop')) {
 	renamef("$dir/$_", "$dir/Trash/$_") 
-	  foreach grep { -e "$dir/$_" } @toMove, grep { /\.rpmorig$/ } all($dir)
+	  foreach grep { -e "$dir/$_" } @toMove, grep { /\.rpmorig$/ } all($dir);
     }
 }
 
@@ -1089,7 +1089,7 @@ sub getAndSaveAutoInstallFloppies {
 
 		substInFile { 
 		    s/timeout.*/$replay ? 'timeout 1' : ''/e;
-		    s/^(\s*append)/$1 $param/ 
+		    s/^(\s*append)/$1 $param/; 
 		} "$mountdir/syslinux.cfg";
 
 		output "$mountdir/boot.msg", $replay ? '' : "\n0c" .
@@ -1312,7 +1312,7 @@ sub migrate_device_names {
 	} else {
 	    #- hopefully this doesn't need anything special
 	}
-    };
+    }
     my @from_fstab_per_hds = values %h or return;
 
 

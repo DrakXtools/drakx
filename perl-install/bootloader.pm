@@ -1018,7 +1018,7 @@ sub write_lilo {
 	      } @$fstab;
 	    $hds{$part->{device}} . ":" . $file;
 	} else {
-	    $file
+	    $file;
 	}
     };
 

@@ -242,7 +242,7 @@ sub ask_standalone_gtk {
 			      $display->($_);
 			  })) if !$is_xinetd_service;
 		  } (N_("Start"), N_("Stop"))
-		]
+		];
 	    }
             @$l), [ $::isEmbedded ? 'automatic' : 'never', 'automatic' ]), -1, $::isEmbedded ? -1 : 400),
             0, gtkpack(gtkset_border_width(Gtk2::HBox->new(0,0),5), $W->create_okcancel)

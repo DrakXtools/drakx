@@ -168,7 +168,7 @@ sub fullnames() {
 		$type .= "|[" . N("Other") . "]";
 		'';
 	    }
-	} @{$::b->[1]}
+	} @{$::b->[1]};
     } %mice;
 }
 
@@ -239,7 +239,7 @@ sub probe_wacom_devices {
     log::l("found usb wacom $_->{driver} $_->{description} ($_->{type})") foreach @l;
     my @wacom = eval { 
 	modules::load("wacom", "evdev");
-	grep { detect_devices::tryOpen($_) } map_index { "input/event$::i" } @l
+	grep { detect_devices::tryOpen($_) } map_index { "input/event$::i" } @l;
     };
     @wacom or eval { modules::unload("evdev", "wacom") };
     @wacom;
@@ -444,7 +444,7 @@ sub write_conf {
 	my $xfree_conf = Xconfig::xfree->read;
 	set_xfree_conf($mouse, $xfree_conf, $b_keep_auxmouse_unchanged);
 	$xfree_conf->write;
-    }
+    };
 }
 
 sub change_mouse_live {

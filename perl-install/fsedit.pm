@@ -170,7 +170,7 @@ sub get_hds {
 		    } else {
 			!$o_in || $o_in->ask_okcancel('', formatError($err));
 		    }
-		}
+		};
 	    };
 	    if (my $err = $@) {
 		if ($handled) {

@@ -95,7 +95,7 @@ sub ask_fromW {
 	    my @choices = map {
 		my $s = simplify_string(may_apply($_->{format}, ${$_->{val}}));
 		$s = "$_->{label}: $s" if $_->{label};
-		{ label => $s, clicked_may_quit => $_->{clicked_may_quit} }
+		{ label => $s, clicked_may_quit => $_->{clicked_may_quit} };
 	    } @$l;
 	    #- replace many buttons with a list
 	    my $new_l = [ { val => \$r, type => 'list', list => \@choices, format => sub { $_[0]{label} }, sort => 0 } ];

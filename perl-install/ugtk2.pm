@@ -100,7 +100,7 @@ sub gtkadd {
 	ref $l or $l = Gtk2::WrappedLabel->new($l);
 	$w->add(gtkshow($l));
     }
-    $w
+    $w;
 }
 
 sub gtkadd_widget {
@@ -119,14 +119,14 @@ sub gtkappend {
 	ref $l or $l = Gtk2::WrappedLabel->new($l);
 	$w->append(gtkshow($l));
     }
-    $w
+    $w;
 }
 
 sub gtkappenditems {
     my $w = shift;
     $_->show foreach @_;
     $w->append_items(@_);
-    $w
+    $w;
 }
 
 # append page to a notebook
@@ -278,7 +278,7 @@ sub create_scrolled_window {
     my $w = Gtk2::ScrolledWindow->new(undef, undef);
     $w->set_policy($o_policy ? @$o_policy : ('automatic', 'automatic'));
     if (member(ref($W), qw(Gtk2::Layout Gtk2::Text Gtk2::TextView Gtk2::TreeView))) {
-	$w->add($W)
+	$w->add($W);
     } else {
 	$w->add_with_viewport($W);
     }
@@ -287,9 +287,9 @@ sub create_scrolled_window {
     $W->set_left_margin(6) if ref($W) =~ /Gtk2::TextView/;
     $W->show;
     if (ref($W) =~ /Gtk2::TextView|Gtk2::TreeView/) {
-    	gtkadd(gtkset_shadow_type(Gtk2::Frame->new, 'in'), $w)
+    	gtkadd(gtkset_shadow_type(Gtk2::Frame->new, 'in'), $w);
     } else {
-	$w
+	$w;
     }
 }
 
@@ -358,18 +358,18 @@ sub create_box_with_title {
 					  )
 			      ),
 		      if_($a, Gtk2::HSeparator->new)
-		     )
+		     );
 	} else {
 	    gtkpack__($box,
 		      if_($::isWizard, gtkset_size_request(Gtk2::Label->new, 0, 10)),
 		      (map {
 			  my $w = $new_label->($_);
 			  $::isWizard ? gtkpack__(Gtk2::HBox->new(0,0), gtkset_size_request(Gtk2::Label->new, 20, 0), $w)
-			              : $w
+			              : $w;
 		      } @l),
 		      if_($::isWizard, gtkset_size_request(Gtk2::Label->new, 0, 15)),
 		      if_($a, Gtk2::HSeparator->new)
-		     )
+		     );
 	}
     }
 }
@@ -417,7 +417,7 @@ sub create_dialog {
     $dialog->action_area->pack_start($button, 1, 1, 0);
     $button->grab_default;
 
-    $dialog->set_has_separator(0);;
+    $dialog->set_has_separator(0);
     $dialog->show_all;
     Gtk2->main;
     $ret;
@@ -462,7 +462,7 @@ sub create_menu {
     my $title = shift;
     my $w = Gtk2::MenuItem->new($title);
     $w->set_submenu(gtkshow(gtkappend(Gtk2::Menu->new, @_)));
-    $w
+    $w;
 }
 
 sub create_notebook {
@@ -471,7 +471,7 @@ sub create_notebook {
 	my ($page, $title) = splice(@_, 0, 2);
 	gtkappend_page($book, $page, $title);
     }
-    $book
+    $book;
 }
 
 sub create_packtable {
@@ -546,7 +546,7 @@ sub create_okcancel {
                                     $_->can_default($::isWizard);
                                     $_;
                                 } grep { $_ } @{$_->[0]})
-                               )
+                               );
                     } ([ \@left, 'start' ],
                        [ \@right,  'end' ],
                       )
@@ -1015,7 +1015,7 @@ sub main {
 	Gtk2->main;
     } while (!$o->{destroyed} && ($o->{retval} ? $o_completed && !$o_completed->() : $o_canceled && !$o_canceled->()));
     $o->destroy;
-    $o->{retval}
+    $o->{retval};
 }
 sub show($) {
     my ($o) = @_;
@@ -1042,7 +1042,7 @@ sub shrink_topwindow {
 sub exit {
     gtkset_mousecursor_normal(); #- for restoring a normal in any case
     flush();
-    c::_exit($_[1]) #- workaround 
+    c::_exit($_[1]); #- workaround 
 }
 
 #- in case "exit" above was not called by the program
@@ -1230,7 +1230,7 @@ sub ask_browse_tree_info {
     @buttons = reverse @buttons if !$::isInstall;    
 
     gtkpack__($box2, gtksignal_connect(Gtk2::Button->new(N("Help")), clicked => sub {
-					   ask_warn(N("Help"), $common->{interactive_help}->())
+					   ask_warn(N("Help"), $common->{interactive_help}->());
 				       })) if $common->{interactive_help};
 
     if ($common->{auto_deps}) {
@@ -1612,7 +1612,7 @@ sub set_popdown_strings {
     #$w->set_menu((ugtk2::create_factory_menu($window, [ "File", (undef) x 3, '<Branch>' ], map { [ "File/" . $_, (undef) x 3, '<Item>' ] } @strs))[0]);
     $menu->append(ugtk2::gtkshow(Gtk2::MenuItem->new_with_label($_))) foreach @strs;
     $w->set_menu($menu);
-    $w
+    $w;
 }
 
 sub new_with_strings {
@@ -1655,7 +1655,7 @@ sub set_popdown_strings {
     # keep string list around for ->set_text compatibilty helper
     $w->{strings} = \@strs;
     $w->append_text($_) foreach @strs;
-    $w
+    $w;
 }
 
 sub new_with_strings {

@@ -207,7 +207,7 @@ sub adjust_local_extended {
 sub get_normal_parts {
     my ($hd) = @_;
 
-    @{$hd->{primary}{normal} || []}, map { $_->{normal} } @{$hd->{extended} || []}
+    @{$hd->{primary}{normal} || []}, map { $_->{normal} } @{$hd->{extended} || []};
 }
 
 sub get_normal_parts_and_holes {

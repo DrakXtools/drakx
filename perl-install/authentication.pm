@@ -25,7 +25,7 @@ sub kind2name {
 sub kind2description() {
     join('', 
          map {
-             qq($_->[0]\n$_->[1]\n\n)
+             qq($_->[0]\n$_->[1]\n\n);
          }
          (
           [ N("Local file:"), N("Use local for all authentication and information user tell in local file"), ],
@@ -187,7 +187,7 @@ sub set {
 
 	if ($ssl eq 'on') {
 		$port = '636';
-	};
+	}
 	
 	
 	

@@ -62,7 +62,7 @@ If you don't know, choose 'use PPPoE'"),
                        },
                       },
              });
-};
+}
 
 sub adsl_probe_info {
     my ($adsl, $netc, $adsl_type, $o_adsl_modem) = @_;

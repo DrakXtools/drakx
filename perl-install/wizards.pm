@@ -119,7 +119,7 @@ sub process {
         my ($res, $msg) = &{$o->{init}};
         if (!$res) {
             $in->ask_okcancel(N("Error"), $msg);
-            die "wizard failled" if !$::testing
+            die "wizard failled" if !$::testing;
         }
     }
     
@@ -146,10 +146,10 @@ sub process {
                 my $i;
                 foreach (@{$d->{boolean_list}}) { 
                     push @$data2, { text => $_, type => 'bool', val => \${$d->{val}}->[$i], disabled => $d->{disabled} };
-                    $i++
+                    $i++;
                 }
             } else {
-                push @$data2, $d
+                push @$data2, $d;
             }
         }
         my $name = ref($page->{name}) ? $page->{name}->() : $page->{name};
@@ -185,9 +185,9 @@ sub process {
             die qq(Step "$current": inexistant "$next" page) if !exists $o->{pages}{$next};
         } else {
             # step back:
-            $next = pop @steps
+            $next = pop @steps;
         }
-        $page = $o->{pages}{$next}
+        $page = $o->{pages}{$next};
     }
 }
 

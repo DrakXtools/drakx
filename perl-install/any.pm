@@ -84,7 +84,7 @@ sub install_acpi_pkgs {
 
     my $acpi = bootloader::get_append_with_key($b, 'acpi') or return;
     if (!member($acpi, 'off', 'ht')) {
-	$do_pkgs->install('acpi', 'acpid') if !(-x "$::prefix/usr/bin/acpi" && -x "$::prefix/usr/sbin/acpid")
+	$do_pkgs->install('acpi', 'acpid') if !(-x "$::prefix/usr/bin/acpi" && -x "$::prefix/usr/sbin/acpid");
     }
 }
 
@@ -555,7 +555,7 @@ sub inspect {
     my $h = before_leaving {
 	if (!$part->{isMounted} && $dir) {
 	    fs::umount($dir);
-	    unlink($dir)
+	    unlink($dir);
 	}
     };
     $h->{dir} = $dir;
@@ -617,7 +617,7 @@ sub ask_user_one {
 	    ),
 	    if_($security > 3,
                 map {
-                    { label => $_, val => \$groups{$_}, text => $high_security_groups{$_}, type => 'bool' }
+                    { label => $_, val => \$groups{$_}, text => $high_security_groups{$_}, type => 'bool' };
                 } keys %high_security_groups,
                ),
                ],
@@ -727,7 +727,7 @@ when your installation is complete and you restart your system.")),
 		  { val => \$langs->{$_->[0]}, type => 'bool', disabled => sub { $langs->{all} },
 		    text => $_->[1], advanced => 1,
 		    image => "langs/lang-$_->[0]",
-		  } 
+		  }; 
 	      } sort { $a->[1] cmp $b->[1] } map { [ $_, $sort_func->($_) ] } lang::list_langs())
 	]) or return;
 	$langs->{$listval2val->($lang)} = 1;

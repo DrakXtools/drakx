@@ -30,7 +30,7 @@ our $SECTORSIZE  = 512;
 sub sprintf_fixutf8 {
     my $need_upgrade;
     $need_upgrade |= to_bool(c::is_tagged_utf8($_)) + 1 foreach @_;
-    if ($need_upgrade == 3) { c::upgrade_utf8($_) foreach @_ };
+    if ($need_upgrade == 3) { c::upgrade_utf8($_) foreach @_ }
     sprintf shift, @_;
 }
 
@@ -156,12 +156,12 @@ sub expand_symlinks_but_simple {
 	# put back the last simple symlink
 	$f2 =~ s|\Q$link\E$|basename($f)|e;
     }
-    $f2
+    $f2;
 }
 
 sub sync { &MDK::Common::System::sync }
 
-BEGIN { undef *formatError };
+BEGIN { undef *formatError }
 sub formatError {
     my ($err) = @_;
     ref($err) eq 'SCALAR' and $err = $$err;
@@ -174,7 +174,7 @@ sub group_n_lm {
     my $n = shift;
     my @l;
     push @l, [ splice(@_, 0, $n) ] while @_;
-    @l
+    @l;
 }
 
 sub screenshot_dir__and_move() {
@@ -259,7 +259,7 @@ sub set_permissions {
 }
 
 sub mandrake_release() {
-    chomp_(cat_("/etc/mandrakelinux-release"))
+    chomp_(cat_("/etc/mandrakelinux-release"));
 }
 
 sub require_root_capability() {

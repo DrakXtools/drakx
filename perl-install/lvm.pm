@@ -99,7 +99,7 @@ sub get_lvs {
 
 	   { device => $device, 
 	     fs_type => $fs_type || 'ext2',
-	     size => get_lv_size($device) }
+	     size => get_lv_size($device) };
        } @l
       ];
 }

@@ -328,7 +328,7 @@ sub more {
 	    $v =~ /^q/ and exit 0;
 	    $n = 0;
 	}
-	print
+	print;
     }
 }
 

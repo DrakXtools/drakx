@@ -19,7 +19,7 @@ sub configure {
 
     my @sections = mapn {
 	my ($device, $monitor) = @_;
-	{ Device => $device->{Identifier}, Monitor => $monitor->{Identifier} }
+	{ Device => $device->{Identifier}, Monitor => $monitor->{Identifier} };
     } \@devices, \@monitors;
 
     $raw_X->set_screens(@sections);

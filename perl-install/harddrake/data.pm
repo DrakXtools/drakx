@@ -16,7 +16,7 @@ sub unknown() {
 	       && !member($_->{driver}, qw(cpia_usb cyber2000fb forcedeth ibmcam megaraid mod_quickcam nvnet ohci1394 ov511 ov518_decomp scanner ultracam usbvideo usbvision))
 	       && $_->{driver} !~ /^ISDN|Mouse:USB|Removable:zip|class\|Mouse|sata|www.linmodems.org/
 	       && $_->{type} ne 'network'
-	       && $_->{description} !~ /Alcatel|ADSL Modem/
+	       && $_->{description} !~ /Alcatel|ADSL Modem/;
 	   } @devices;
 }
 
@@ -169,8 +169,8 @@ our @tree =
       detector => sub { 
           f(grep {
               $_->{media_type} =~ /MULTIMEDIA_VIDEO/ && $_->{bus} ne 'PCI'
-                || member($_->{driver}, qw(cpia_usb cyber2000fb ibmcam mod_quickcam ov511 ov518_decomp pwc ultracam usbvideo))
-            } @devices)
+                || member($_->{driver}, qw(cpia_usb cyber2000fb ibmcam mod_quickcam ov511 ov518_decomp pwc ultracam usbvideo));
+            } @devices);
       },
       # managed by hotplug:
       checked_on_boot => 0,

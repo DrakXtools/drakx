@@ -699,7 +699,7 @@ sub ask_fromW {
 		}
 	    }
 	    !$error;
-	}
+	};
     };
 
     $_->{set}->($_->{e}{saved_default_val} || next) foreach @widgets_always, @widgets_advanced;

@@ -133,7 +133,7 @@ sub create_help_window {
 	$w->{rwindow}->set_uposition($::rootwidth - $::helpwidth, $::rootheight - $::helpheight);
 	$w->{rwindow}->set_size_request($::helpwidth, $::helpheight);
 	$w->{rwindow}->set_title('skip');
-    };
+    }
     gtkadd($w->{window}, create_scrolled_window($o->{help_window_text} = Gtk2::TextView->new));
     $w->show;
 }

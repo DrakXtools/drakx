@@ -211,8 +211,8 @@ sub to_devfs {
 sub read_proc_partitions_raw() {
     my (undef, undef, @all) = cat_("/proc/partitions");
     grep {
-	$_->{size} != 1 &&	 # skip main extended partition
-	$_->{size} != 0x3fffffff # skip cdroms (otherwise stops cd-audios)
+	$_->{size} != 1 &&	  # skip main extended partition
+	$_->{size} != 0x3fffffff; # skip cdroms (otherwise stops cd-audios)
     } map { 
 	my %l; 
 	@l{qw(major minor size dev)} = split; 

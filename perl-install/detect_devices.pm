@@ -55,7 +55,7 @@ sub floppies() {
     eval { modules::load("floppy") } if $::isInstall;
     my @fds = $@ ? () : map {
 	my $info = (!dev_is_devfs() || -e "/dev/fd$_") && c::floppy_info(devices::make("fd$_"));
-	if_($info && $info ne '(null)', { device => "fd$_", devfs_device => "floppy/$_", media_type => 'fd', info => $info })
+	if_($info && $info ne '(null)', { device => "fd$_", devfs_device => "floppy/$_", media_type => 'fd', info => $info });
     } qw(0 1);
 
     my @ide = ls120s() and eval { modules::load("ide-floppy") };
@@ -121,7 +121,7 @@ sub get_usb_storage_info_24 {
 	if (@choices > 1) {
 	    @choices = grep { $_->{info} =~ /^\Q$usbs{$host}{vendor_name}/ } @choices;
 	    @choices or log::l("weird, can't find the good entry host$host from /proc/scsi/usb-storage-*/* in /proc/scsi/scsi"), next;
-	    @choices == 1 or log::l("argh, can't determine the good entry host$host from /proc/scsi/usb-storage-*/* in /proc/scsi/scsi"), next
+	    @choices == 1 or log::l("argh, can't determine the good entry host$host from /proc/scsi/usb-storage-*/* in /proc/scsi/scsi"), next;
 	}
 	add2hash($choices[0], $usbs{$host});
     }
@@ -637,7 +637,7 @@ sub pci_probe() {
 	@l{qw(vendor id subvendor subid pci_bus pci_device pci_function media_type driver description)} = split "\t";
 	$l{$_} = hex $l{$_} foreach qw(vendor id subvendor subid);
 	$l{bus} = 'PCI';
-	\%l
+	\%l;
     } c::pci_probe());
 }
 
@@ -650,7 +650,7 @@ sub usb_probe() {
 	$l{media_type} = join('|', grep { $_ ne '(null)' } split('\|', $l{media_type}));
 	$l{$_} = hex $l{$_} foreach qw(vendor id);
 	$l{bus} = 'USB';
-	\%l
+	\%l;
     } c::usb_probe());
 }
 
@@ -664,7 +664,7 @@ sub firewire_probe() {
             specifier_id => hex($get->("$dir/specifier_id")),
             specifier_version => hex($get->("$dir/version")),
             bus => 'Firewire',
-        }
+        };
     } grep { -f "$dev_dir/$_/specifier_id" } all($dev_dir);
 
     my $e;
@@ -736,7 +736,7 @@ sub stringlist() {
 		$_->{description} eq '(null)' ? sprintf("Vendor=0x%04x Device=0x%04x", $_->{vendor}, $_->{id}) : $_->{description},
 		$_->{media_type} ? sprintf(" [%s]", $_->{media_type}) : '',
 		$_->{subid} && $_->{subid} != 0xffff ? sprintf(" SubVendor=0x%04x SubDevice=0x%04x", $_->{subvendor}, $_->{subid}) : '',
-	       )
+	       );
     } probeall(); 
 }
 

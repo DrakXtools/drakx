@@ -419,7 +419,7 @@ sub pkg_install {
 	log::l("installing packages");
 	$o->installPackages;
     } else {
-	log::l("all packages selected are already installed, nothing to do")
+	log::l("all packages selected are already installed, nothing to do");
     }
 }
 
@@ -494,7 +494,7 @@ Consoles 1,3,4,7 may also contain interesting information";
 
     my $have_devfsd = do {
 	my $p = pkgs::packageByName($o->{packages}, 'devfsd');
-	$p && $p->flag_installed
+	$p && $p->flag_installed;
     };
     require bootloader;
     bootloader::may_append_with_key($o->{bootloader}, devfs => $have_devfsd ? 'mount' : 'nomount');
@@ -522,7 +522,7 @@ Consoles 1,3,4,7 may also contain interesting information";
 
     if ($o->{mouse}{device} =~ /ttyS/) {
 	log::l("disabling gpm for serial mice (doesn't get along nicely with X)");
-	run_program::rooted($o->{prefix}, "chkconfig", "--del", "gpm") 
+	run_program::rooted($o->{prefix}, "chkconfig", "--del", "gpm"); 
     }
 
     #- install urpmi before as rpmdb will be opened, this will cause problem with update-menus.
@@ -563,7 +563,7 @@ EOF
 GridWidth=85
 GridHeight=70
 " if eof && !$found;
-	} $_ 
+	} $_; 
     }
 
     #- move some file after an upgrade that may be seriously annoying.

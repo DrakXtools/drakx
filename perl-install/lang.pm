@@ -162,7 +162,7 @@ sub text_direction_rtl() {
 #-PO: the string "default:LTR" can be translated *ONLY* as "default:LTR"
 #-PO: or as "default:RTL", depending if your language is written from
 #-PO: left to right, or from right to left; any other string is wrong.
-       	N("default:LTR") eq "default:RTL"
+       	N("default:LTR") eq "default:RTL";
 }
 
 

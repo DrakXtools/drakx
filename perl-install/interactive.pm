@@ -483,7 +483,7 @@ sub interactive_help_has_id {
 sub interactive_help_get_id {
     my ($_o, @l) = @_;
     @l = map { 
-	join("\n\n", map { s/\n/ /mg; $_ } split("\n\n", translate($help::{$_}->())))
+	join("\n\n", map { s/\n/ /mg; $_ } split("\n\n", translate($help::{$_}->())));
     } grep { exists $help::{$_} } @l;
     join("\n\n\n", @l);
 }

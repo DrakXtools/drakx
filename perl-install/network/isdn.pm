@@ -186,7 +186,7 @@ sub get_capi_card {
     my ($isdn) = @_;
 
     my $capi_card = find { 
-        hex($isdn->{vendor}) == $_->{vendor} && hex($isdn->{id}) == $_->{id}
+        hex($isdn->{vendor}) == $_->{vendor} && hex($isdn->{id}) == $_->{id};
     } @isdn_capi or return;
 
     #- check if the capi driver is available
