@@ -149,33 +149,37 @@ sub isFloppyOrHD {
 }
 
 sub getSCSI() {
-    my @drives;
-    my ($driveNum, $cdromNum, $tapeNum) = qw(0 0 0);
-    my $err = sub { chop; die "unexpected line in /proc/scsi/scsi: $_"; };
-    local $_;
+    my $err = sub { log::l("ERROR: unexpected line in /proc/scsi/scsi: $_[0]"); };
 
-    local *F;
-    open F, "/proc/scsi/scsi" or return;
-    local $_ = <F>; /^Attached devices:/ or return &$err();
-    while ($_ = <F>) {
-	my ($id) = /^Host:.*?Id: (\d+)/ or return &$err();
-	$_ = <F>; my ($vendor, $model) = /^\s*Vendor:\s*(.*?)\s+Model:\s*(.*?)\s+Rev:/ or return &$err();
-	$_ = <F>; my ($type) = /^\s*Type:\s*(.*)/ or &$err();
-	my $dev = { info => "$vendor $model", id => $id, bus => 0 };
-	if ($type =~ /Direct-Access/) {
-	    $dev->{device} = "sd" . chr($driveNum++ + ord('a'));
-	    $dev->{media_type} = isZipDrive($dev) ? 'hd' : isFloppyOrHD($dev->{device});
-	} elsif ($type =~ /Sequential-Access/) {
-	    $dev->{device} = "st" . $tapeNum++;
-	    $dev->{media_type} = 'tape';
-	} elsif ($type =~ /(CD-ROM|WORM)/) {
-	    $dev->{device} = "scd" . $cdromNum++;
-	    $dev->{media_type} = 'cdrom';
-	}
-	push @drives, $dev if $dev->{device};
-    }
-    get_sys_cdrom_info(@drives);
-    @drives;
+    my ($first, @l) = common::join_lines(cat_("/proc/scsi/scsi"));
+    $first =~ /^Attached devices:/ or $err->($first);
+
+    @l = map_index {
+	my ($id) = /^Host:.*?Id: (\d+)/ or $err->($_);
+	my ($vendor, $model) = /^\s*Vendor:\s*(.*?)\s+Model:\s*(.*?)\s+Rev:/m or $err->($_);
+	my ($type) = /^\s*Type:\s*(.*)/m or $err->($_);
+	{ info => "$vendor $model", id => $id, bus => 0, device => "sg$::i", raw_type => $type };
+    } @l;
+
+    each_index {
+	my $dev = "sd" . chr($::i + ord('a'));
+	put_in_hash $_, { device => $dev, media_type => isZipDrive($_) ? 'hd' : isFloppyOrHD($dev) };
+    } grep { $_->{raw_type} =~ /Direct-Access/ } @l;
+
+    each_index {
+	put_in_hash $_, { device => "st$::i", media_type => 'tape' };
+    } grep { $_->{raw_type} =~ /Sequential-Access/ } @l;
+
+    each_index {
+	put_in_hash $_, { device => "scd$::i", media_type => 'cdrom' };
+    } grep { $_->{raw_type} =~ /CD-ROM|WORM/ } @l;
+
+    each_index {
+	put_in_hash $_, { media_type => 'scanner' };
+    } grep { $_->{raw_type} =~ /Scanner/ } @l;
+
+    get_sys_cdrom_info(@l);
+    @l;
 }
 
 sub getIDE() {
