@@ -524,16 +524,16 @@ int main(int argc, char **argv)
 
         if (in_reboot()) {
                 // any exitcode is valid if we're in_reboot
-        } else if (!WIFEXITED(wait_status) || (WEXITSTATUS(wait_status) != 0 && WEXITSTATUS(wait_status) != exit_value_proceed)) {
-		printf("exited abnormally :-( ");
-		if (WIFSIGNALED(wait_status))
-			printf("-- received signal %d", WTERMSIG(wait_status));
-		printf("\n");
 		abnormal_termination = 1;
 	} else if (WIFEXITED(wait_status) && WEXITSTATUS(wait_status) == exit_value_proceed) {
 		kill(klog_pid, 9);
 		printf("proceeding, please wait...\n");
 		return 0;
+        } else if (!WIFEXITED(wait_status) || WEXITSTATUS(wait_status) != 0) {
+		printf("exited abnormally :-( ");
+		if (WIFSIGNALED(wait_status))
+			printf("-- received signal %d", WTERMSIG(wait_status));
+		printf("\n");
         }
 
         if (!abnormal_termination) {
