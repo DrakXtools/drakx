@@ -993,7 +993,7 @@ sub write_lilo {
     push @conf, "# WARNING: do not forget to run lilo after modifying this file\n";
     push @conf, "default=" . make_label_lilo_compatible($bootloader->{default}) if $bootloader->{default};
     push @conf, map { "$_=$bootloader->{$_}" } grep { $bootloader->{$_} } qw(boot map install vga keytable);
-    push @conf, grep { $bootloader->{$_} } qw(linear geometric compact prompt nowarn restricted);
+    push @conf, grep { $bootloader->{$_} } qw(linear geometric compact prompt nowarn restricted static-bios-codes);
     push @conf, qq(append="$bootloader->{append}") if $bootloader->{append};
     push @conf, "password=" . $bootloader->{password} if $bootloader->{password}; #- also done by msec
     push @conf, "timeout=" . round(10 * $bootloader->{timeout}) if $bootloader->{timeout};
@@ -1065,7 +1065,8 @@ sub when_config_changed_lilo {
     if (!$::testing && arch() !~ /ia64/ && $bootloader->{method} =~ /lilo/) {
 	log::l("Installing boot loader on $bootloader->{boot}...");
 	my $error;
-	run_program::rooted($::prefix, "lilo", "2>", \$error) or die "lilo failed: $error";
+	my $answer = $bootloader->{force_lilo_answer} || '';
+	my $ok = run_program::rooted($::prefix, "echo $answer | lilo", '2>', \$error) or die "lilo failed: $error";
     }
 }
 
