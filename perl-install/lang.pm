@@ -512,6 +512,8 @@ my %gtkqt_im =
    chinput => {
                GTK_IM_MODULE => 'xim',
                XIM => 'chinput',
+               # bogus entry overwriten by %im_xim_program, just for read()
+               XIM_PROGRAM => 'chinput',
                XMODIFIERS => '@im=Chinput',
                },
    fctix => {
@@ -954,6 +956,7 @@ sub read {
     
     if ($h{XIM_PROGRAM}) {
 	$locale->{IM} = find { $gtkqt_im{$_}{XIM_PROGRAM} eq $h{XIM_PROGRAM} } keys %gtkqt_im;
+	$locale->{IM} ||= find { member($h{XIM_PROGRAM}, values %{$im_xim_program{$_}}) } keys %im_xim_program;
     }
     $locale;
 }
