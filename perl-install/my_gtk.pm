@@ -19,7 +19,7 @@ $EXPORT_TAGS{all} = [ map { @$_ } values %EXPORT_TAGS ];
 use Gtk;
 use c;
 use log;
-use common qw(:common :functional);
+use common qw(:common :functional :file);
 
 my $forgetTime = 1000; #- in milli-seconds
 $border = 5;
@@ -63,7 +63,7 @@ sub new {
 	    $::WizardTable->attach($draw2, 0, 1, 1, 2, 'fill', 'fill', 0, 0);
 	    $::WizardTable->attach($draw3, 1, 2, 0, 1, 'fill', 'fill', 0, 0);
 	    $::WizardWindow->show_all;
-	    my_gtk::flush();
+	    flush();
 	}
 	$::WizardTable->attach($o->{window}, 1, 2, 1, 2, {'fill', 'expand'}, {'fill', 'expand'}, 0, 0);
     }
@@ -73,7 +73,7 @@ sub new {
     $o->{rwindow} = $o->{window};
     defined($::Plug) or $::Plug = new Gtk::Plug ($::XID);
     $::Plug->show;
-    my_gtk::flush();
+    flush();
     $::Plug->add($o->{window});
     $o;
 }
@@ -262,7 +262,10 @@ sub gtkctree_children {
     @l;
 }
 
-sub gtkcreate_xpm { my $w = shift; Gtk::Gdk::Pixmap->create_from_xpm($w->window, $w->style->bg('normal'), @_) }
+sub gtkcreate_xpm { 
+    my ($w, $f) = @_; 
+    Gtk::Gdk::Pixmap->create_from_xpm($w->window, $w->style->bg('normal'), $f) or die "gtkcreate_xpm: missing pixmap file $f";
+}
 sub xpm_d { my $w = shift; Gtk::Gdk::Pixmap->create_from_xpm_d($w->window, undef, @_) }
 sub gtkxpm { new Gtk::Pixmap(gtkcreate_xpm(@_)) }
 
