@@ -74,21 +74,6 @@ widget "*" style "default-font"
 }
 
 #------------------------------------------------------------------------------
-sub create_big_help {
-    my ($o) = @_;
-    my $w = ugtk2->new('', grab => 1, force_position => [ $::stepswidth, $::logoheight ]);
-    $w->{rwindow}->set_size_request($::logowidth, $::rootheight - $::logoheight);
-    gtkadd($w->{window},
-	   gtkpack_(Gtk2::VBox->new(0,0),
-		    1, create_scrolled_window(gtktext_insert(Gtk2::TextView->new, $o->{current_help})),
-		    0, gtksignal_connect(my $ok = Gtk2::Button->new(N("Ok")), "clicked" => sub { Gtk2->main_quit }),
-		   ));
-    $ok->grab_focus;
-    $w->main;
-    gtkset_mousecursor_normal();
-}
-
-#------------------------------------------------------------------------------
 sub create_help_window {
     my ($o) = @_;
 
