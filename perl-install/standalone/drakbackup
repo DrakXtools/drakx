@@ -267,7 +267,7 @@ my $media_problem = 0;
 my $vol_name = 'Drakbackup';
 my $good_restore_path = 1;
 my $max_space = 1000.0;
-my @no_devices = translate("No devices found");
+my @no_devices = translate(N_("No devices found"));
 my %help;
 my $time_string = "* * * * *";
 my $exec_string = "export USER=$ENV{USER}; /usr/sbin/drakbackup --daemon > /dev/null 2>&1";
@@ -5075,17 +5075,33 @@ sub interactive_mode() {
     $in = 'interactive'->vnew;
 
     my $box;
-	my $winht = 400;
+	my $winht = 440;
 	$winht = 320 if $::isEmbedded;
 	my $winwidth = 540;
 	$winwidth = 500 if $::isEmbedded;
+	my $darea;
 	
     $my_win = ugtk2->new('drakbackup');
     $window1 = $my_win->{window};
     unless ($::isEmbedded) {
-	   $my_win->{rwindow}->set_position('center');
-	   $my_win->{rwindow}->set_title(N("Drakbackup"));
-	   $window1->set_size_request(600, 500);
+		$my_win->{rwindow}->set_position('center');
+		$my_win->{rwindow}->set_title(N("Drakbackup"));
+		$window1->set_size_request($winwidth, $winht);
+		my $pixbuf_icon = gtkcreate_pixbuf("ic82-back-up-48");
+		$darea = Gtk2::DrawingArea->new;
+		$darea->set_size_request($winwidth, 60);
+		$darea->modify_font(Gtk2::Pango::FontDescription->from_string('Sans Italic 24'));
+		my $layout = $darea->create_pango_layout(N("Drakbackup"));
+    	$darea->signal_connect(realize => sub { 
+			set_back_pixbuf($darea, gtkcreate_pixbuf('title-tile')) 
+		});
+    	$darea->signal_connect(expose_event => sub {
+			my (undef, undef, $dx, $dy) = $darea->allocation->values;
+			$darea->window->draw_pixbuf($darea->style->white_gc, $pixbuf_icon, 0, 0, $dx - $pixbuf_icon->get_width, $dy - $pixbuf_icon->get_height, -1, -1, 'none', 0, 0);
+			my ($lx, $ly) = $layout->get_pixel_size;
+			$darea->window->draw_layout($darea->style->white_gc, ($dx-$lx)/2, ($dy-$ly)/2, $layout);
+			0;
+		});
     }
     $my_win->{rwindow}->signal_connect(delete_event => sub { ugtk2->exit(0) });
     read_conf_file();     
@@ -5094,7 +5110,7 @@ sub interactive_mode() {
 		gtkpack(new Gtk2::VBox(0,0),
 			gtkpack(gtkset_size_request($up_box = new Gtk2::VBox(0, 5), $winwidth, $winht),
 				$box = gtkpack_(new Gtk2::VBox(0, 3),
-					if_(!$::isEmbedded, 0, gtkcreate_img("drakbackup.540x57")),
+					if_(!$::isEmbedded, 0, $darea),
 					1, gtkpack_(new Gtk2::HBox(0, 3),
 				  		1, gtkpack_(new Gtk2::HBox(0, 15),	
 							0, new Gtk2::HBox(0, 5),	
