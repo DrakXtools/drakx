@@ -401,7 +401,7 @@ int main(int argc, char **argv)
 	   2) we receive a SIGHUP 
 	*/
 
-	printf("Traktopel says: drink an egg white each morning builds a man! (c) Warly\n");
+	printf("Traktopel says: drinking an egg white each morning builds a man! (c) Warly\n");
 	printf("Running install...\n"); 
 	
 	if (!(installpid = fork())) {
