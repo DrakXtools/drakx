@@ -340,8 +340,8 @@ sub removeopenofficeprinterentry {
 
 sub find_config_file {
     my ($suite) = @_;
-    my @configfilenames = $suites{$suite}{files};
-    foreach my $configfilename (@configfilenames) {
+    my $configfilenames = $suites{$suite}{files};
+    foreach my $configfilename (@$configfilenames) {
 	local *F;
 	if (open F, "ls -r $::prefix$configfilename 2> /dev/null |") {
 	    my $filename = <F>;
