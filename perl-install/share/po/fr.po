@@ -54,7 +54,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX for MDK 8.1\n"
 "POT-Creation-Date: 2002-09-02 20:14+0200\n"
-"PO-Revision-Date: 2002-09-02 14:58+0200\n"
+"PO-Revision-Date: 2002-09-04 16:51+0200\n"
 "Last-Translator: Christophe Combelles <ccomb@club-internet.fr>\n"
 "Language-Team: french <cooker-i18n@linux-mandrake.com>\n"
 "MIME-Version: 1.0\n"
@@ -1592,9 +1592,8 @@ msgid "Mount point"
 msgstr "Point de montage"
 
 #: ../../diskdrake/dav.pm_.c:81
-#, fuzzy
 msgid "Please enter the WebDAV server URL"
-msgstr "Veuillez taper la vitesse de gravure :"
+msgstr "Veuillez préciser l'URL du server WebDAV"
 
 #: ../../diskdrake/dav.pm_.c:84
 msgid "The URL must begin with http:// or https://"
@@ -2455,7 +2454,6 @@ msgid "server"
 msgstr "serveur"
 
 #: ../../fsedit.pm_.c:240
-#, fuzzy, c-format
 msgid ""
 "I can't read the partition table of device %s, it's too corrupted for me :(\n"
 "I can try to go on, erasing over bad partitions (ALL DATA will be lost!).\n"
@@ -2467,7 +2465,7 @@ msgstr ""
 "La table des partitions ne peut être lue car elle est trop endommagée.\n"
 "Il est possible de réinitialiser les partitions endommagées (TOUTES LES\n"
 "DONNÉES seront perdues). Une autre solution consiste à ne pas autoriser\n"
-"le logiciel DrakX à modifier la table des partitions (l'erreur est %s)\n"
+"ce logiciel à modifier la table des partitions (l'erreur est %s)\n"
 "\n"
 "Êtes-vous d'accord pour perdre toutes vos partitions ?\n"
 
@@ -2678,14 +2676,12 @@ msgid "the vendor name of the device"
 msgstr "le nom du vendeur de ce périphérique"
 
 #: ../../harddrake/ui.pm_.c:38
-#, fuzzy
 msgid "Alternative drivers"
-msgstr "Pas de pilote alternatif"
+msgstr "Pilotes alternatifs"
 
 #: ../../harddrake/ui.pm_.c:39
-#, fuzzy
 msgid "the list of alternative drivers for this sound card"
-msgstr "Il n'y a aucun pilote OSS ou ALSA connu pour votre carte son(%s)"
+msgstr "la liste des pilotes alternatifs pour cette carte son"
 
 #: ../../harddrake/ui.pm_.c:63
 msgid "/_Quit"
@@ -3814,9 +3810,9 @@ msgid ""
 "emergency boot situations."
 msgstr ""
 "À cette étape, vous devez sélectionner quelle partition sera utilisé pour\n"
-"votre système Mandrake Linux. Si vous disque est déjà partitionné, soit par\n"
+"votre système Mandrake Linux. Si votre disque est déjà partitionné, soit par\n"
 "une autre installation GNU/Linux ou par un autre outil de partitionnement,\n"
-"vous pourrez les utiliser. Si non,, Les partitions devront être créés.\n"
+"vous pourrez les utiliser. Sinon, les partitions devront être créées.\n"
 "\n"
 "Pour créer une partition, vous devez d'abord sélectionner le disque à\n"
 "utiliser. Vous pouvez le sélectionner en cliquant sur « hda » pour le\n"
@@ -3832,12 +3828,12 @@ msgstr ""
 " * «  Attribution Automatique »: cette option permet de créer un système de\n"
 "ficher « Ext2 » and « Swap » dans l'espace libre sur votre disque;\n"
 "\n"
-" * « Plus d'options »: permet d'accéder à des fonctionnalité additionnelle\n"
+" * « Plus d'options »: permet d'accéder à des fonctionnalités additionnelles\n"
 ":\n"
 "\n"
-"    * « Sauvegarder la table de partition »: sauves la table de partition\n"
-"sur un disque amovibles. Cette option s'avère particulièrement pratique\n"
-"pour récurer des partition endommagées. Il est fortement recommandé de\n"
+"    * « Sauvegarder la table de partition »: sauve la table de partition\n"
+"sur un disque amovible. Cette option s'avère particulièrement pratique\n"
+"pour récupérer des partition endommagées. Il est fortement recommandé de\n"
 "procéder ainsi;\n"
 "\n"
 "    * « Restaurer la table de partition »: permet de restaurer une table de\n"
@@ -7127,16 +7123,14 @@ msgid "Mail Server"
 msgstr "Serveur de courrier"
 
 #: ../../network/drakfirewall.pm_.c:37
-#, fuzzy
 msgid "POP and IMAP Server"
-msgstr "Serveur LDAP"
+msgstr "Serveur POP et IMAP"
 
 #: ../../network/drakfirewall.pm_.c:111
 msgid "No network card"
 msgstr "Aucune carte réseau"
 
 #: ../../network/drakfirewall.pm_.c:129
-#, fuzzy
 msgid ""
 "drakfirewall configurator\n"
 "\n"
@@ -7144,12 +7138,11 @@ msgid ""
 "For a powerful dedicated firewall solution, please look to the\n"
 "specialized MandrakeSecurity Firewall distribution."
 msgstr ""
-"Configuration d'un mini-Pare-Feu (firewall)\n"
+"Configuration d'un pare-feu (firewall)\n"
 "\n"
-"Ceci configure un Pare-Feu (firewall) personnel pour votre machine Mandrake "
-"Linux.\n"
-"Si vous souhaitez un Pare-Feu dédié plus puissant, tournez-vous plutôt vers\n"
-"la distribution spécialisée « MandrakeSecurity »."
+"Ceci configure un pare-feu  pour votre machine Mandrake Linux.\n"
+"Si vous souhaitez utiliser un pare-feu dédié plus puissant, il est plus\n"
+"judicieux d'utiliser la distribution spécialisée « MandrakeSecurity »."
 
 #: ../../network/drakfirewall.pm_.c:147
 msgid "Which services would you like to allow the Internet to connect to?"
@@ -8219,14 +8212,14 @@ msgid "Printerdrake"
 msgstr "Printerdrake"
 
 #: ../../printerdrake.pm_.c:178
-#, fuzzy
 msgid "Checking your system..."
-msgstr "Redémarrage du système d'impression..."
+msgstr "Vérification de votre système..."
 
 #: ../../printerdrake.pm_.c:186
 msgid ""
 "There are no printers found which are directly connected to your machine"
 msgstr ""
+"Aucune imprimante connectée à votre machine n'a été trouvée"
 
 #: ../../printerdrake.pm_.c:198
 msgid ""
@@ -8237,7 +8230,6 @@ msgstr ""
 "\n"
 
 #: ../../printerdrake.pm_.c:199
-#, fuzzy
 msgid ""
 "The following printer\n"
 "\n"
@@ -8273,9 +8265,8 @@ msgid ""
 msgstr ""
 
 #: ../../printerdrake.pm_.c:210
-#, fuzzy
 msgid "directly connected to your system"
-msgstr "Copier les polices sur votre système"
+msgstr "directement connectée à votre système"
 
 #: ../../printerdrake.pm_.c:213
 msgid ""
@@ -8291,9 +8282,8 @@ msgid ""
 msgstr ""
 
 #: ../../printerdrake.pm_.c:221
-#, fuzzy
 msgid " (Make sure that all your printers are connected and turned on).\n"
-msgstr "Veuillez choisir le port sur lequel votre imprimante est connectée."
+msgstr "(veuillez vous assurer que toutes les imprimantes sont connectées et allumées).\n"
 
 #: ../../printerdrake.pm_.c:235
 msgid ""
@@ -8302,20 +8292,16 @@ msgid ""
 msgstr ""
 
 #: ../../printerdrake.pm_.c:236
-#, fuzzy
 msgid "Do you want to enable printing on printers in the local network?\n"
-msgstr ""
-"Désirez-vous que l'imprimante « %s » soit l'imprimante\n"
-"par défaut ?"
+msgstr "Désirez-vous activer l'impression sur des imprimantes situées sur le réseau local| ?\n"
 
 #: ../../printerdrake.pm_.c:238
-#, fuzzy
 msgid "Do you want to enable printing on the printers mentioned above?\n"
-msgstr "Désirez-vous activer la connexion lors du démarrage ?"
+msgstr "Désirez-vous activer l'impression sur les imprimantes mentionnées ci-dessus| ?\n"
 
 #: ../../printerdrake.pm_.c:239
 msgid "Are you sure that you want to set up printing on this machine?\n"
-msgstr ""
+msgstr "Êtes-vous sûr de vouloir configurer l'impression sur cette machine| ?\n"
 
 #: ../../printerdrake.pm_.c:240
 #, c-format
