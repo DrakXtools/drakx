@@ -89,7 +89,7 @@ sub kernel_str2label {
     my $base = $kernel->{basename} eq 'vmlinuz' ? 'linux' : $kernel->{basename};
     $o_use_long_name || $kernel->{use_long_name} ?
       sanitize_ver("$base-$kernel->{version}") : 
-        $kernel->{ext} ? "$base$kernel->{ext}" : $base;
+        $kernel->{ext} ? "$base-$kernel->{ext}" : $base;
 }
 
 sub get {
