@@ -11,6 +11,7 @@ use Socket;
 use common qw(:common :file :system :functional);
 use detect_devices;
 use run_program;
+use any;
 use log;
 
 #-######################################################################################
@@ -232,6 +233,150 @@ sub gateway {
     join (".", @masked);
 
 }
+
+sub configureNetwork {
+    my ($prefix, $netc, $in, $pcmcia, $intf, $first_time) = @_;
+    local $_;
+    if (@{$intf} > 0 && $first_time) {
+	my @l = (
+		 __("Keep the current IP configuration"),
+		 __("Reconfigure network now"),
+		 __("Do not set up networking"),
+		);
+	$_ = $::beginner ? "Keep" : 
+	  $in->ask_from_list_([ _("Network Configuration") ],
+			       _("Local networking has already been configured. Do you want to:"),
+			     [ @l ]) || "Do not";
+    } else {
+	$_ = (!$::beginner || any::setup_thiskind($in, 'net', 1, 0, $pcmcia)) &&
+	  $in->ask_yesorno([ _("Network Configuration") ],
+			   _("Do you want to configure a local network for your system?"), 0) ? "Local LAN" : "Do not";
+    }
+    if (/^Do not/) {
+	$netc->{NETWORKING} = "false";
+    } elsif (!/^Keep/) {
+	any::setup_thiskind($in, 'net', !$::expert, 1, $pcmcia);
+	my @l = detect_devices::getNet() or die _("no network card found");
+
+	my $last; foreach ($::beginner ? $l[0] : @l) {
+	    my $intf2 = findIntf($intf ||= [], $_);
+	    add2hash($intf2, $last);
+	    add2hash($intf2, { NETMASK => '255.255.255.0' });
+	    configureNetworkIntf($in, $intf2) or last;
+
+	    $netc ||= {};
+	    delete $netc->{dnsServer};
+	    delete $netc->{GATEWAY};
+	    $last = $intf2;
+	}
+	#-	  {
+	#-	      my $wait = $o->wait_message(_("Hostname"), _("Determining host name and domain..."));
+	#-	      network::guessHostname($o->{prefix}, $o->{netc}, $o->{intf});
+	#-	  }
+	if ($last->{BOOTPROTO} =~ /^(dhcp|bootp)$/) {
+	    $in->ask_from_entries_ref(_("Configuring network"),
+_("Please enter your host name if you know it.
+Some DHCP servers require the hostname to work.
+Your host name should be a fully-qualified host name,
+such as ``mybox.mylab.myco.com''."),
+			     [_("Host name:")], [ \$netc->{HOSTNAME} ]);
+	} else {
+	    configureNetworkNet($in, $netc, $last ||= {}, @l);
+	}
+	miscellaneousNetwork($in);
+    }
+    configureNetwork2($in, $prefix, $netc, $intf);
+}
+
+sub miscellaneousNetwork {
+    my ($in, $clicked) = @_;
+    my $u = $::o->{miscellaneous} ||= {};
+    $::isStandalone or $in->set_help('configureNetworkProxy');
+    !$::beginner || $clicked and $in->ask_from_entries_ref('',
+       _("Proxies configuration"),
+       [ _("HTTP proxy"),
+         _("FTP proxy"),
+       ],
+       [ \$u->{http_proxy},
+         \$u->{ftp_proxy},
+       ],
+       complete => sub {
+	   $u->{http_proxy} =~ m,^($|http://), or $in->ask_warn('', _("Proxy should be http://...")), return 1,3;
+	   $u->{ftp_proxy} =~ m,^($|ftp://), or $in->ask_warn('', _("Proxy should be ftp://...")), return 1,4;
+	   0;
+       }
+    ) || return;
+}
+
+sub configureNetworkNet {
+    my ($in, $netc, $intf, @devices) = @_;
+
+    $netc->{dnsServer} ||= dns($intf->{IPADDR});
+    $netc->{GATEWAY}   ||= gateway($intf->{IPADDR});
+
+    $in->ask_from_entries_ref(_("Configuring network"),
+_("Please enter your host name.
+Your host name should be a fully-qualified host name,
+such as ``mybox.mylab.myco.com''.
+You may also enter the IP address of the gateway if you have one"),
+			     [_("Host name:"), _("DNS server:"), _("Gateway:"), $::expert ? _("Gateway device:") : ()],
+			     [(map { \$netc->{$_} } qw(HOSTNAME dnsServer GATEWAY)),
+			      {val => \$netc->{GATEWAYDEV}, list => \@devices}]
+			    );
+}
+
+
+sub configureNetwork2 {
+    my ($in, $prefix, $netc, $intf) = @_;
+    my $etc = "$prefix/etc";
+
+    write_conf("$etc/sysconfig/network", $netc);
+    write_resolv_conf("$etc/resolv.conf", $netc);
+    write_interface_conf("$etc/sysconfig/network-scripts/ifcfg-$_->{DEVICE}", $_) foreach @{$intf};
+    add2hosts("$etc/hosts", $netc->{HOSTNAME}, map { $_->{IPADDR} } @{$intf});
+    sethostname($netc) unless $::testing;
+    addDefaultRoute($netc) unless $::testing;
+
+    $in->pkg_install("dhcpcd") if grep { $_->{BOOTPROTO} =~ /^(dhcp)$/ } @{$intf};
+    # Handle also pump (this is still in initscripts no?)
+    $in->pkg_install("pump") if grep { $_->{BOOTPROTO} =~ /^(pump|bootp)$/ } @{$intf};
+    #-res_init();		#- reinit the resolver so DNS changes take affect
+
+    any::miscellaneousNetwork($in, $prefix);
+}
+
+
+sub configureNetworkIntf {
+    my ($in, $intf) = @_;
+    my $pump = $intf->{BOOTPROTO} =~ /^(dhcp|bootp)$/;
+    delete $intf->{NETWORK};
+    delete $intf->{BROADCAST};
+    my @fields = qw(IPADDR NETMASK);
+    $in->set_help('configureNetworkIP');
+    $in->ask_from_entries_ref(_("Configuring network device %s", $intf->{DEVICE}),
+($::isStandalone ? '' : _("Configuring network device %s", $intf->{DEVICE}) . "\n\n") .
+_("Please enter the IP configuration for this machine.
+Each item should be entered as an IP address in dotted-decimal
+notation (for example, 1.2.3.4)."),
+			     [ _("IP address:"), _("Netmask:"), _("Automatic IP") ],
+			     [ \$intf->{IPADDR}, \$intf->{NETMASK}, { val => \$pump, type => "bool", text => _("(bootp/dhcp)") } ],
+			     complete => sub {
+				 $intf->{BOOTPROTO} = $pump ? "dhcp" : "static";
+				 return 0 if $pump;
+				 for (my $i = 0; $i < @fields; $i++) {
+				     unless (is_ip($intf->{$fields[$i]})) {
+					 $in->ask_warn('', _("IP address should be in format 1.2.3.4"));
+					 return (1,$i);
+				     }
+				     return 0;
+				 }
+			     },
+			     focus_out => sub {
+				 $intf->{NETMASK} ||= netmask($intf->{IPADDR}) unless $_[0]
+			     }
+			    );
+}
+
 
 #-######################################################################################
 #- Wonderful perl :(

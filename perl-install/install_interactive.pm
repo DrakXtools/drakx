@@ -188,111 +188,14 @@ sub partitionWizard {
 }
 
 #--------------------------------------------------------------------------------
-sub wait_load_module {
-    my ($o, $type, $text, $module) = @_;
-#-PO: the first %s is the card type (scsi, network, sound,...)
-#-PO: the second is the vendor+model name
-    $o->wait_message('',
-		     [ _("Installing driver for %s card %s", $type, $text),
-		       $::beginner ? () : _("(module %s)", $module)
-		     ]);
-}
-
-
-sub load_module {
-    my ($o, $type) = @_;
-    my @options;
-
-    my $m = $o->ask_from_listf('',
-#-PO: the %s is the driver type (scsi, network, sound,...)
-			       _("Which %s driver should I try?", $type),
-			       \&modules::module2text,
-			       [ modules::module_of_type($type) ]) or return;
-    my $l = modules::module2text($m);
-    require modparm;
-    my @names = modparm::get_options_name($m);
-
-    if ((@names != 0) && $o->ask_from_list_('',
-_("In some cases, the %s driver needs to have extra information to work
-properly, although it normally works fine without. Would you like to specify
-extra options for it or allow the driver to probe your machine for the
-information it needs? Occasionally, probing will hang a computer, but it should
-not cause any damage.", $l),
-			      [ __("Autoprobe"), __("Specify options") ], "Autoprobe") ne "Autoprobe") {
-      ASK:
-	if (@names >= 0) {
-	    my @l = $o->ask_from_entries('',
-_("You may now provide its options to module %s.", $l),
-					 \@names) or return;
-	    @options = modparm::get_options_result($m, @l);
-	} else {
-	    @options = split ' ',
-	      $o->ask_from_entry('',
-_("You may now provide its options to module %s.
-Options are in format ``name=value name2=value2 ...''.
-For instance, ``io=0x300 irq=7''", $l),
-				 _("Module options:"),
-				);
-	}
-    }
-    eval { 
-	my $w = wait_load_module($o, $type, $l, $m);
-	modules::load($m, $type, @options);
-    };
-    if ($@) {
-	$o->ask_yesorno('',
-_("Loading module %s failed.
-Do you want to try again with other parameters?", $l), 1) or return;
-	goto ASK;
-    }
-    $l;
-}
-
+#- wait_load_module moved to any.pm
+#- load_module moved to any.pm
 #------------------------------------------------------------------------------
-sub load_thiskind {
-    my ($o, $type) = @_;
-    my $pcmcia = $o->{pcmcia} if modules::pcmcia_need_config($o->{pcmcia}) && !$::noauto;
-    my $w; $w = $o->wait_message(_("PCMCIA"), _("Configuring PCMCIA cards...")) if $pcmcia;
-    modules::load_thiskind($type, $pcmcia, sub { $w = wait_load_module($o, $type, @_) });
-}
-
-
+#-load_thiskind moved to any.pm
 #------------------------------------------------------------------------------
-sub setup_thiskind {
-    my ($o, $type, $auto, $at_least_one) = @_;
-
-    return if arch() eq "ppc";
-
-    my @l;
-    if (!$::noauto) {
-	@l = load_thiskind($o, $type);
-	if (my @err = grep { $_ } map { $_->{error} } @l) {
-	    $o->ask_warn('', join("\n", @err));
-	}
-	return @l if $auto && (@l || !$at_least_one);
-    }
-    @l = map { $_->{description} } @l;
-    while (1) {
-	(my $msg_type = $type) =~ s/\|.*//;
-	my $msg = @l ?
-	  [ _("Found %s %s interfaces", join(", ", @l), $msg_type),
-	    _("Do you have another one?") ] :
-	  _("Do you have any %s interfaces?", $msg_type);
-
-	my $opt = [ __("Yes"), __("No") ];
-	push @$opt, __("See hardware info") if $::expert;
-	my $r = "Yes";
-	$r = $o->ask_from_list_('', $msg, $opt, "No") unless $at_least_one && @l == 0;
-	if ($r eq "No") { return @l }
-	if ($r eq "Yes") {
-	    push @l, load_module($o, $type) || next;
-	} else {
-	    $o->ask_warn('', [ detect_devices::stringlist() ]);
-	}
-    }
-}
-
+#-setup_thiskind moved to any.pm
 #------------------------------------------------------------------------------
+
 sub upNetwork {
     my ($o, $pppAvoided) = @_;
     my $w = $o->wait_message('', _("Bringing up the network"));

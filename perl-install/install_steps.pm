@@ -477,25 +477,7 @@ sub selectMouse($) {
 }
 
 #------------------------------------------------------------------------------
-sub configureNetwork($) {
-    my ($o) = @_;
-    my $etc = "$o->{prefix}/etc";
-
-    network::write_conf("$etc/sysconfig/network", $o->{netc});
-    network::write_resolv_conf("$etc/resolv.conf", $o->{netc});
-    network::write_interface_conf("$etc/sysconfig/network-scripts/ifcfg-$_->{DEVICE}", $_) foreach @{$o->{intf}};
-    network::add2hosts("$etc/hosts", $o->{netc}{HOSTNAME}, map { $_->{IPADDR} } @{$o->{intf}});
-    network::sethostname($o->{netc}) unless $::testing;
-    network::addDefaultRoute($o->{netc}) unless $::testing;
-
-    $o->pkg_install("dhcpcd") if grep { $_->{BOOTPROTO} =~ /^(dhcp)$/ } @{$o->{intf}};
-    # Handle also pump (this is still in initscripts no?)
-    $o->pkg_install("pump") if grep { $_->{BOOTPROTO} =~ /^(pump|bootp)$/ } @{$o->{intf}};
-    #-res_init();		#- reinit the resolver so DNS changes take affect
-
-    any::miscellaneousNetwork($o);
-}
-
+#- configureNetwork moved to network and is renamed.
 #------------------------------------------------------------------------------
 
 #------------------------------------------------------------------------------

@@ -14,6 +14,7 @@ use partition_table qw(:types);
 use fsedit;
 use fs;
 use run_program;
+use modules;
 use log;
 
 #-PO: names (tie, curly...) have corresponding icons for kdm
@@ -288,17 +289,17 @@ sub inspect {
 
 #-----modem conf
 sub pppConfig {
-    my ($o) = @_;
-    $o->{modem} or return;
+    my ($in, $modem, $prefix) = @_;
+    $modem or return;
 
-    symlinkf($o->{modem}{device}, "$o->{prefix}/dev/modem") or log::l("creation of $o->{prefix}/dev/modem failed");
-    $::isStandalone ? `urpmi --auto ppp` : $o->pkg_install("ppp") unless $::testing;
+    symlinkf($modem->{device}, "$prefix/dev/modem") or log::l("creation of $prefix/dev/modem failed");
+    $::isStandalone ? `urpmi --auto ppp` : $in->pkg_install("ppp") unless $::testing;
 
     my %toreplace;
-    $toreplace{$_} = $o->{modem}{$_} foreach qw(connection phone login passwd auth domain dns1 dns2);
-    $toreplace{kpppauth} = ${{ 'Script-based' => 0, 'PAP' => 1, 'Terminal-based' => 2, 'CHAP' => 3, }}{$o->{modem}{auth}};
+    $toreplace{$_} = $modem->{$_} foreach qw(connection phone login passwd auth domain dns1 dns2);
+    $toreplace{kpppauth} = ${{ 'Script-based' => 0, 'PAP' => 1, 'Terminal-based' => 2, 'CHAP' => 3, }}{$modem->{auth}};
     $toreplace{phone} =~ s/\D//g;
-    $toreplace{dnsserver} = join ',', map { $o->{modem}{$_} } "dns1", "dns2";
+    $toreplace{dnsserver} = join ',', map { $modem->{$_} } "dns1", "dns2";
     $toreplace{dnsserver} .= $toreplace{dnsserver} && ',';
 
     #- using peerdns or dns1,dns2 avoid writing a /etc/resolv.conf file.
@@ -307,10 +308,10 @@ sub pppConfig {
     $toreplace{connection} ||= 'DialupConnection';
     $toreplace{domain} ||= 'localdomain';
     $toreplace{intf} ||= 'ppp0';
-    $toreplace{papname} = $o->{modem}{auth} eq 'PAP' && $toreplace{login};
+    $toreplace{papname} = $modem->{auth} eq 'PAP' && $toreplace{login};
 
     #- build ifcfg-ppp0.
-    my $ifcfg = "$o->{prefix}/etc/sysconfig/network-scripts/ifcfg-ppp0";
+    my $ifcfg = "$prefix/etc/sysconfig/network-scripts/ifcfg-ppp0";
     local *IFCFG; open IFCFG, ">$ifcfg" or die "Can't open $ifcfg";
     print IFCFG <<END;
 DEVICE="$toreplace{intf}"
@@ -347,7 +348,7 @@ END
     close IFCFG;
 
     #- build chat-ppp0.
-    my $chat = "$o->{prefix}/etc/sysconfig/network-scripts/chat-ppp0";
+    my $chat = "$prefix/etc/sysconfig/network-scripts/chat-ppp0";
     local *CHAT; open CHAT, ">$chat" or die "Can't open $chat";
     print CHAT <<END;
 'ABORT' 'BUSY'
@@ -358,11 +359,11 @@ END
 'ABORT' 'Login incorrect'
 '' 'ATZ'
 'OK'
-'ATDT$o->{netcnx}{special_command}'
+'ATDT$modem->{special_command}'
 'ATDT$toreplace{phone}'
 'CONNECT' ''
 END
-    if ($o->{modem}{auth} eq 'Terminal-based' || $o->{modem}{auth} eq 'Script-based') {
+    if ($modem->{auth} eq 'Terminal-based' || $modem->{auth} eq 'Script-based') {
 	print CHAT <<END;
 'ogin:' '$toreplace{login}'
 'ord:' '$toreplace{passwd}'
@@ -374,9 +375,9 @@ END
 END
     close CHAT;
 
-    if ($o->{modem}{auth} eq 'PAP') {
+    if ($modem->{auth} eq 'PAP') {
 	#- need to create a secrets file for the connection.
-	my $secrets = "$o->{prefix}/etc/ppp/" . lc($o->{modem}{auth}) . "-secrets";
+	my $secrets = "$prefix/etc/ppp/" . lc($modem->{auth}) . "-secrets";
 	my @l = cat_($secrets);
 	my $replaced = 0;
 	do { $replaced ||= 1
@@ -395,16 +396,116 @@ END
     } #- CHAP is not supported by initscripts, need patching before doing more on that here!
 
     #-install_any::template2userfile($o->{prefix}, "$ENV{SHARE_PATH}/kppprc.in", ".kde/share/config/kppprc", 1, %toreplace);
-    commands::mkdir_("-p", "$o->{prefix}/usr/share/config");
-    template2file("$ENV{SHARE_PATH}/kppprc.in", "$o->{prefix}/usr/share/config/kppprc", %toreplace);
+    commands::mkdir_("-p", "$prefix/usr/share/config");
+    template2file("$ENV{SHARE_PATH}/kppprc.in", "$prefix/usr/share/config/kppprc", %toreplace);
 
-    miscellaneousNetwork($o);
+    miscellaneousNetwork($in, $prefix);
 }
 
 sub miscellaneousNetwork {
-    my ($o) = @_;
-    setVarsInSh ("$o->{prefix}/etc/profile.d/proxy.sh",  $o->{miscellaneous}, qw(http_proxy ftp_proxy));
-    setVarsInCsh("$o->{prefix}/etc/profile.d/proxy.csh", $o->{miscellaneous}, qw(http_proxy ftp_proxy));
+    my ($in, $prefix) = @_;
+    setVarsInSh ("$prefix/etc/profile.d/proxy.sh",  $::o->{miscellaneous}, qw(http_proxy ftp_proxy));
+    setVarsInCsh("$prefix/etc/profile.d/proxy.csh", $::o->{miscellaneous}, qw(http_proxy ftp_proxy));
+}
+
+sub load_thiskind {
+    my ($in, $type, $pcmcia) = @_;
+    my $pcmcia2 = $pcmcia if modules::pcmcia_need_config($pcmcia) && !$::noauto;
+    my $w; $w = $in->wait_message(_("PCMCIA"), _("Configuring PCMCIA cards...")) if $pcmcia2;
+    modules::load_thiskind($type, $pcmcia2, sub { $w = wait_load_module($in, $type, @_) });
+}
+
+sub setup_thiskind {
+    my ($in, $type, $auto, $at_least_one, $pcmcia) = @_;
+
+    return if arch() eq "ppc";
+
+    my @l;
+    if (!$::noauto) {
+	@l = load_thiskind($in, $type, $pcmcia);
+	if (my @err = grep { $_ } map { $_->{error} } @l) {
+	    $in->ask_warn('', join("\n", @err));
+	}
+	return @l if $auto && (@l || !$at_least_one);
+    }
+    @l = map { $_->{description} } @l;
+    while (1) {
+	my ($msg_type) = $type =~ s/\|.*//;
+	my $msg = @l ?
+	  [ _("Found %s %s interfaces", join(", ", @l), $msg_type),
+	    _("Do you have another one?") ] :
+	  _("Do you have any %s interfaces?", $msg_type);
+
+	my $opt = [ __("Yes"), __("No") ];
+	push @$opt, __("See hardware info") if $::expert;
+	my $r = "Yes";
+	$r = $in->ask_from_list_('', $msg, $opt, "No") unless $at_least_one && @l == 0;
+	if ($r eq "No") { return @l }
+	if ($r eq "Yes") {
+	    push @l, load_module($in, $type) || next;
+	} else {
+	    $in->ask_warn('', [ detect_devices::stringlist() ]);
+	}
+    }
+}
+
+sub wait_load_module {
+    my ($in, $type, $text, $module) = @_;
+#-PO: the first %s is the card type (scsi, network, sound,...)
+#-PO: the second is the vendor+model name
+    $in->wait_message('',
+		     [ _("Installing driver for %s card %s", $type, $text),
+		       $::beginner ? () : _("(module %s)", $module)
+		     ]);
+}
+
+sub load_module {
+    my ($in, $type) = @_;
+    my @options;
+
+    my $m = $in->ask_from_listf('',
+#-PO: the %s is the driver type (scsi, network, sound,...)
+			       _("Which %s driver should I try?", $type),
+			       \&modules::module2text,
+			       [ modules::module_of_type($type) ]) or return;
+    my $l = modules::module2text($m);
+    require modparm;
+    my @names = modparm::get_options_name($m);
+
+    if ((@names != 0) && $in->ask_from_list_('',
+_("In some cases, the %s driver needs to have extra information to work
+properly, although it normally works fine without. Would you like to specify
+extra options for it or allow the driver to probe your machine for the
+information it needs? Occasionally, probing will hang a computer, but it should
+not cause any damage.", $l),
+			      [ __("Autoprobe"), __("Specify options") ], "Autoprobe") ne "Autoprobe") {
+      ASK:
+	if (@names >= 0) {
+	    my @l = $in->ask_from_entries('',
+_("You may now provide its options to module %s.", $l),
+					 \@names) or return;
+	    @options = modparm::get_options_result($m, @l);
+	} else {
+	    @options = split ' ',
+	      $in->ask_from_entry('',
+_("You may now provide its options to module %s.
+Options are in format ``name=value name2=value2 ...''.
+For instance, ``io=0x300 irq=7''", $l),
+				 _("Module options:"),
+				);
+	}
+    }
+    eval { 
+	my $w = wait_load_module($in, $type, $l, $m);
+	modules::load($m, $type, @options);
+    };
+    if ($@) {
+	$in->ask_yesorno('',
+_("Loading module %s failed.
+Do you want to try again with other parameters?", $l), 1) or return;
+	goto ASK;
+    }
+    $l;
 }
 
 
