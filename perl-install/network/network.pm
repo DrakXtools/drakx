@@ -431,8 +431,6 @@ sub configureNetwork2 {
         } else { run_program::rooted($::prefix, "chkconfig", "--del", $_) foreach qw(tmdns zcip) }  # disable zeroconf
         any { $_->{BOOTPROTO} =~ /^(pump|bootp)$/ } values %$intf and $in->do_pkgs->install('pump');
     }
-
-    proxy_configure($::o->{miscellaneous});
 }
 
 1;
