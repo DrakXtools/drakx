@@ -198,7 +198,7 @@ sub display_error {
 	    $error_box = gtkpack_(Gtk2::VBox->new(0,0),
 			1, Gtk2::Label->new($message),
 			0, gtkadd(gtkset_layout(Gtk2::HButtonBox->new, 'spread'),
-				gtksignal_connect(Gtk2::Button->new(N("OK")), clicked => sub {
+				gtksignal_connect(Gtk2::Button->new(N("Ok")), clicked => sub {
 					destroy_widget();
 				}),
 			),
@@ -471,7 +471,7 @@ sub text_view {
 				),
 			),
 			0, gtkpack(gtkset_layout(Gtk2::HButtonBox->new, 'spread'),
-				gtksignal_connect(my $ok_button = Gtk2::Button->new(N("OK")), clicked => sub { 
+				gtksignal_connect(my $ok_button = Gtk2::Button->new(N("Ok")), clicked => sub { 
 					destroy_widget() if $option eq "close";
 					do_wizard() if $option eq "wizard"; 
 				}),

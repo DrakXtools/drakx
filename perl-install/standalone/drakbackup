@@ -2516,8 +2516,7 @@ sub system_state() {
 		}
 		
 		#- tape and CDRW share some features
-		my $erase_media = N("NO");
-		$erase_media = N("YES") if $conf{MEDIA_ERASE} && ($conf{USE_CD} || $conf{USE_TAPE}); 
+		my $erase_media = $conf{MEDIA_ERASE} && ($conf{USE_CD} || $conf{USE_TAPE}) ? N("Yes") : N("No");
 		$conf{USE_CD} and $system_state .= N("\n- Burn to CD");
 		$conf{USE_CD} and $conf{CDRW} and $system_state .= N("RW");
 		$conf{USE_CD} and $system_state .= N(" on device: %s", $conf{CD_DEVICE});
