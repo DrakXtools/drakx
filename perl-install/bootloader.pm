@@ -249,7 +249,7 @@ sub suggest {
 	 lba32 => 1,
 	 entries => [],
 	 timeout => $onmbr && 5,
-	   if_(arch() =~ /ia64/,
+	   if_(arch() !~ /ia64/,
 	 boot => "/dev/" . ($onmbr ? $hds->[0]{device} : fsedit::get_root($fstab, 'boot')->{device}),
 	 map => "/boot/map",
 	 install => "/boot/boot.b",
