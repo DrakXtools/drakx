@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10.1
-Release: 0.24mdk
+Release: 0.25mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -327,6 +327,25 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Thu Sep  9 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.1-0.25mdk
+- bootloader-config (pixel):
+  o fix regexp to work with "linux-2.6.8.1-10mdk"
+  o handle lilo "static-bios-codes" option
+  o prevent LILO from reading from tty
+  o only expand symlinks when renaming "linux" into the kernel version
+    based label (eg: "2681-10")
+- drakboot:
+  o ensure ~/.dmrc is owned by user else GDM complains about
+  o handles the lilo case where it wants to assign a new Volume ID (pixel)
+- drakconnect: 
+  o ignore rpm's backups (#10816)
+  o always update iftab when config is written (blino)
+  o detect slamr, slusb and ltmodem modules for modems (fredl)
+- drakupdate_fstab: handle options in any order (fix harddrake service
+  regarding amove media as well as regarding cdroms, burners and dvds)
+- harddrake service:
+  o service_harddrake: log which tools are runned
+
 * Wed Sep  8 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.1-0.24mdk
 - drakboot (blino, #11282):
   o update splash when removed too
