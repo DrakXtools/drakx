@@ -49,7 +49,6 @@ enum return_type try_with_directory(char *directory, char *method_live, char *me
 	char location_full[500];
         char * loopdev = NULL;
 	struct stat statbuf;
-	enum return_type results;
 
 	unlink(IMAGE_LOCATION);
 	strcpy(location_full, directory);
@@ -99,6 +98,7 @@ enum return_type try_with_directory(char *directory, char *method_live, char *me
 		stage2_isos[stage2_iso_number] = NULL;
 
 		if (stage2_iso_number > 2) {
+			enum return_type results;
 			do {
 				results = ask_from_list("Please choose the ISO image to be used to install the "
 							DISTRIB_NAME " Distribution.",
