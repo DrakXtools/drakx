@@ -13,7 +13,7 @@ my @devices = detect_devices::probeall();
 # Update me each time you handle one more devices class (aka configurator)
 sub unknown() {
     grep { $_->{media_type} !~ /BRIDGE|class\|Mouse|DISPLAY|Hub|MEMORY_RAM|MULTIMEDIA_(VIDEO|AUDIO|OTHER)|NETWORK|Printer|SERIAL_(USB|SMBUS)|STORAGE_(IDE|OTHER|SCSI)|tape/
-	       && $_->{driver} !~ /^(ohci1394|scanner|usbvision|mod_quickcam)$|Mouse:USB|class\|Mouse|Removable:zip|www.linmodems.org|nvnet/
+	       && $_->{driver} !~ /^(ISDN|mod_quickcam|ohci1394|scanner|usbvision)$|Mouse:USB|class\|Mouse|Removable:zip|www.linmodems.org|nvnet/
 	       && $_->{type} ne 'network'
 	       && $_->{description} !~ /Alcatel|ADSL Modem/
 	   } @devices;
@@ -66,6 +66,8 @@ our @tree =
      [ "MODEM", , N("Modem"), "modem.png", "", sub { detect_devices::getModem() }, 0 ],
      [ "ADSL", , N("ADSL adapters"), "modem.png", "", sub { 
            require network::adsl; my $a = network::adsl::adsl_detect(); $a ? values %$a : () }, 0 ],
+     [ "ISDN", , N("ISDN adapters"), "modem.png", "", sub { require network::isdn; my $isdn = network::isdn::isdn_detect_backend(); 
+                                                            if_(!is_empty_hash_ref($isdn), $isdn) }, 0 ],
      [ "BRIDGE", , N("Bridges and system controllers"), "memory.png", "", sub { grep { $_->{media_type} =~ /BRIDGE|MEMORY_RAM/ && $_->{driver} ne 'nvnet' } @devices }, 0 ],
      [ "UNKNOWN", , N("Unknown/Others"), "unknown.png", "", \&unknown, 0 ],
 
