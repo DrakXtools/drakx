@@ -1,3 +1,90 @@
+2003/01/24  alus
+
+	* share/po/pl.po: done
+
+2003/01/24  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* common.pm, c/stuff.xs.pl, interactive.pm, lang.pm: fix non latin1
+	post-install perl-gtk2 apps, seems like perl upgrading strings to utf8
+	is somewhat broken (dunno why), so now we bind the codeset or our
+	textdomains to utf8 and tag the translated strings to utf8, when using
+	gtk
+
+	* mouse.pm: remove blinks in mouse test
+
+2003/01/24  Pablo Saratxaga  <pablo@mandrakesoft.com>
+
+	* share/po/id.po, share/po/sk.po, share/po/ru.po, share/po/gl.po,
+	share/po/pt_BR.po, share/po/br.po, share/po/th.po, share/po/sl.po,
+	share/po/no.po, share/po/ja.po, share/po/hr.po, share/po/tr.po,
+	share/po/mt.po, share/po/ga.po, share/po/be.po, share/po/uk.po,
+	share/po/ko.po, share/po/DrakX.pot, share/po/sv.po, share/po/sr.po,
+	share/po/pl.po, share/po/fi.po, share/po/lt.po, share/po/he.po,
+	share/po/sp.po, share/po/cy.po, share/po/ca.po, share/po/da.po,
+	share/po/ar.po, share/po/bs.po, share/po/ro.po, share/po/wa.po,
+	share/po/is.po, share/po/af.po, share/po/az.po, share/po/zh_TW.po,
+	share/po/zh_CN.po, share/po/pt.po, share/po/vi.po, share/po/ta.po,
+	share/po/fr.po, share/po/sq.po, share/po/it.po, share/po/nl.po,
+	share/po/eu.po, share/po/es.po, share/po/de.po, share/po/eo.po,
+	share/po/el.po, share/po/cs.po, share/po/bg.po, share/po/lv.po,
+	share/po/hu.po: updated pot file (English proofreading)
+
+	* standalone/draksplash, standalone/logdrake, standalone/draksec,
+	share/compssUsers.desktop, standalone/harddrake2,
+	standalone/net_monitor, standalone/mousedrake, standalone/drakperm,
+	standalone/scannerdrake: English proofreading
+
+	* share/po/et.po: updated Estonian file
+	updated pot file (English proofreading)
+
+2003/01/24  Pixel  <pixel@mandrakesoft.com>
+
+	* mouse.pm: 
+	  - don't setMouseLive when the protocol hasn't changed
+	  - don't say "MOVE YOUR WHEEL" when there is no wheel and the protocol
+	hasn't changed
+	(nb: no wheel + IMPS/2 can now happen for usb mice)
+	  - switch "<= 3 buttons usb mice" from X protocol PS/2 to IMPS/2 (it
+	works
+	nicely, and redhat do so)
+	  - default usb mice to USB|Wheel instead of USB|Generic, since most
+	(all?) usb
+	mice have a wheel
+	(i tested on 1 button mac mouse, it works nicely with ZAxisMapping and
+	IMPS/2)
+
+	* interactive.pm (ask_from_list, ask_from_list_, ...): option nocancel
+	added
+	(ask_yesorno): no "Cancel" or "Previous" button
+
+	* install_any.pm, install_steps_interactive.pm: fix "Previous" button in
+	warnAboutNaughtyServers, so there is 3 choices
+	(Previous, unselect servers, accept :)
+
+	* install_steps_gtk.pm: 
+	  - don't setMouseLive when the protocol hasn't changed
+	  - don't say "MOVE YOUR WHEEL" when there is no wheel and the protocol
+	hasn't changed
+	(nb: no wheel + IMPS/2 can now happen for usb mice)
+
+2003/01/23  Pablo Saratxaga  <pablo@mandrakesoft.com>
+
+	* lang.pm: fixed some (locally used) charset names
+
+	* share/po/et.po: updated Estonian file
+
+2003/01/23  Pixel  <pixel@mandrakesoft.com>
+
+	* Xconfig/main.pm (configure_chooser_raw): no special case for "Next"
+	button
+
+	* install_steps_interactive.pm (formatMountPartitions): help perl
+	(otherwise wait_message stays forever in newt)
+
+	* interactive/newt.pm: fix special case "for license agreement": only use
+	it for long messages, and fix {format} use
+	add a button to "summary"-like dialog boxes
+
 2003/01/23  alus
 
 	* share/po/pl.po: updated
@@ -8792,7 +8879,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.770 2003/01/22 00:23:02 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.771 2003/01/23 21:23:51 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
