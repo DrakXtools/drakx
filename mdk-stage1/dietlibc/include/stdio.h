@@ -29,12 +29,14 @@ int vscanf( const char *format, va_list ap);
 int vsscanf( const char *str, const char *format, va_list ap);
 int vfscanf( FILE *stream, const char *format, va_list ap);
 
+int ferror(FILE *stream);
+int feof(FILE *stream);
+
 int fgetc(FILE *stream);
 char *fgets(char *s, int size, FILE *stream);
 int getc(FILE *stream);
 int getchar(void);
 char *gets(char *s);
-int ungetc(int c, FILE *stream);
 
 int fputc(int c, FILE *stream);
 int fputs(const char *s, FILE *stream);
