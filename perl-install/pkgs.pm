@@ -423,7 +423,7 @@ sub psUsingHdlist {
 
     #- avoid using more than one medium if Cd is not ejectable.
     #- but keep all medium here so that urpmi has the whole set.
-    $method eq 'cdrom' && $medium > 1 && !common::usingRamdisk() and return;
+    $m->{ignored} ||= $method eq 'cdrom' && $medium > 1 && !common::usingRamdisk();
 
     #- parse synthesis (if available) of directly hdlist (with packing).
     if ($m->{ignored}) {
@@ -720,7 +720,7 @@ sub computeGroupSize {
 	    my $s = $group{$p->name} || do {
 		join("\t", or_ify($p->rflags));
 	    };
-	    next if length($s) > 80; # HACK, truncated too complicated expressions, too costly
+	    next if length($s) > 120; # HACK, truncated too complicated expressions, too costly
 	    my $m = "$flags\t$s";
 	    $group{$p->name} = ($memo{$m} ||= or_clean(@flags, split("\t", $s)));
 	}
