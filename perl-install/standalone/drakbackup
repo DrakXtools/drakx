@@ -111,7 +111,15 @@ my $net_proto;
 my $host_path;
 my $login_user;
 my $passwd_user;
-
+my $net_daemon = 0;
+my $hd_daemon = 0;
+my $cd_daemon = 0;
+my $hd_quota = 0;
+my $where_net= 0;
+my $where_hd = 1;
+my $where_cd =0;
+my $cd_time = 650;
+my $when_space;
 
 foreach (@ARGV) {
     /--default/ and $default = 1, $mode=-1;
@@ -151,10 +159,20 @@ sub save_conf_file {
 		     "OTHER_FILES=@list_other\n",
 		     "PATH_TO_SAVE=$save_path\n",
 		     "HOST_PATH=$host_path\n",
-		     "NET_PROTO=$net_proto\n"
+		     "NET_PROTO=$net_proto\n",
+		     "CD_TIME=$cd_time\n",
+		     "DAEMON_TIME_SPACE=$when_space\n"
 		     );
     $remember_pass and push @cfg_list, "LOGIN=$login_user\n" ;
-    $cdrw and push @cfg_list, "PASSWD=$passwd_user\n" ;
+    $remember_pass and push @cfg_list, "PASSWD=$passwd_user\n" ;
+    $net_daemon and push @cfg_list, "NET_DAEMON\n" ;
+    $hd_daemon and push @cfg_list, "HD_DAEMON\n" ;
+    $cd_daemon and push @cfg_list, "CD_DAEMON\n" ;
+    $hd_quota and  push @cfg_list, "HD_QUOTA\n" ;
+    $where_hd and  push @cfg_list, "USE_HD\n" ;
+    $where_cd and  push @cfg_list, "USE_CD\n" ;
+    $where_net and  push @cfg_list, "USE_NET\n" ;
+    $cdrw and push @cfg_list, "CDRW\n"; 
     $remember_pass and push @cfg_list, "REMEMBER_PASS\n" ;
     $what_no_browser or push @cfg_list, "BROWSER_CACHE\n" ;
     $backup_sys_cvs or push @cfg_list, "NO_SYS_CVS\n" ;
@@ -180,7 +198,7 @@ sub read_conf_file {
 	    if (/^OPTION_REPLACE/) { $option_replace = 1; }
 	    if (/^NO_SYS_FILES/)   { $backup_sys = 0;}
 	    if (/^OPTION_COMP/)    { s/^OPTION_COMP=//gi; /TAR.GZ/ and  $comp_mode = 0; /TAR.BZ2/ and $comp_mode = 1; }
-	    if (/^NO_SYS_CVS/)	   { $backup_sys_cvs = 0; }
+	    if (/^NO_SYS_CVS/)	   { $backup_sys_cvs = 0;  }
 	    if (/^BROWSER_CACHE/)  { $what_no_browser = 0; }
 	    if (/^CDRW/)           { $cdrw = 1; }
 	    if (/^REMEMBER_PASS/)  { $remember_pass = 1; }
@@ -188,6 +206,15 @@ sub read_conf_file {
 	    if (/^HOST_PATH/)      { s/^HOST_PATH=//gi; $host_path = $_; } 
 	    if (/^LOGIN/)          { s/^LOGIN=//gi;  $login_user  = $_; $remember_pass = 1; }
 	    if (/^PASSWD/)         { s/^PASSWD=//gi; $passwd_user = $_; $remember_pass = 1; }
+	    if (/^NET_DAEMON/)	   { $net_daemon = 1; }
+	    if (/^HD_DAEMON/)	   { $hd_daemon = 1; }
+	    if (/^CD_DAEMON/)	   { $cd_daemon = 1; }
+	    if (/^HD_QUOTA/)       { $hd_quota = 1;  }
+	    if (/^USE_HD/)         { $where_hd = 1;  }
+	    if (/^USE_CD/)         { $where_cd = 1;  }
+	    if (/^USE_NET/)        { $where_net = 1; }
+	    if (/^CD_TIME/)        { s/^CD_TIME=//gi; $cd_time = $_; }
+	    if (/^DAEMON_TIME_SPACE/) { s/^DAEMON_TIME_SPACE=//gi; $when_space = $_; }
 	}
 	$cfg_file_exist = 1;
     } 
@@ -372,7 +399,6 @@ sub advanced {
     my $book_closed_mask;
     my $box_tmp;    
     my $choice_what_sys;
-    my $adj = new Gtk::Adjustment 1.0, 1.0, 10000.0, 1.0, 5.0, 0.0;
     read_conf_file();
     
     my ($pix_net_map, $pix_net_mask) = gtkcreate_png("../pixmaps/backup_net.png");
@@ -491,7 +517,7 @@ sub advanced {
     my $box_where_net =  gtkpack_(new Gtk::VBox(0,1),
 				  0, new Gtk::HSeparator,
 				  0, my $check_where_net = new Gtk::CheckButton( _(" Use Network to backup") ),
-				  0, my $check_where_net_daemon = new Gtk::CheckButton( _(" Use Network with daemon") ),
+#				  0, my $check_where_net_daemon = new Gtk::CheckButton( _(" Use Network with daemon") ),
 				  0, new Gtk::HSeparator,
 				  0, gtkpack_(new Gtk::HBox(0,10),
 					      1, _("please choose your protocol"),
@@ -517,7 +543,7 @@ sub advanced {
 					      ),
 				  0, my $check_remember_pass = new Gtk::CheckButton( _(" remember this password") ),
 				  );
-
+    $combo_where_net_proto->entry->set_text($net_proto);
     $combo_where_net_proto->entry->signal_connect( 'changed', sub { $net_proto = $combo_where_net_proto->entry->get_text()});
     $passwd_user_entry->set_visibility(0);
     $host_path_entry->set_text( $host_path );
@@ -527,10 +553,11 @@ sub advanced {
     $login_user_entry->signal_connect( 'changed', sub { $login_user = $login_user_entry->get_text()});
     $passwd_user_entry->signal_connect( 'changed', sub { $passwd_user = $passwd_user_entry->get_text()});
 
+    my $adj = new Gtk::Adjustment 500.0, 1.0, 10000.0, 1.0, 5.0, 0.0;
     my $box_where_hd =  gtkpack_(new Gtk::VBox(0,1),
 				 0, new Gtk::HSeparator,
 				 0, my $check_where_hd = new Gtk::CheckButton( _(" Use Hard Disk to backup") ),
-				 0, my $check_where_hd_daemon = new Gtk::CheckButton( _(" Use Hard Disk with daemon") ),
+#				 0, my $check_where_hd_daemon = new Gtk::CheckButton( _(" Use Hard Disk with daemon") ),
 				 0, new Gtk::HSeparator,
 				 0, gtkpack_(new Gtk::HBox(0,10),
 					     0, _(" "),
@@ -552,7 +579,7 @@ sub advanced {
 					     ),
 				 );
 
-
+    $save_path_entry->set_text( $save_path );
     $save_path_entry->signal_connect( 'changed', sub { $save_path = $save_path_entry->get_text()});
 
     my $combo_where_cd_time = new Gtk::Combo();
@@ -560,7 +587,7 @@ sub advanced {
     my $box_where_cd =  gtkpack_(new Gtk::VBox(0,1),
 				 0, new Gtk::HSeparator,
 				 0, my $check_where_cd = new Gtk::CheckButton( _(" Use CD/DVDROM to backup") ),
-				 0, my $check_where_cd_daemon = new Gtk::CheckButton( _(" Use CD/DVDROM with daemon") ),
+#				 0, my $check_where_cd_daemon = new Gtk::CheckButton( _(" Use CD/DVDROM with daemon") ),
 				 0, new Gtk::HSeparator,
 				 0, gtkpack_(new Gtk::HBox(0,10),
 					     1, _("please choose your CD space"),
@@ -579,7 +606,9 @@ sub advanced {
 					     0, _(""),
 					     ),
 				 );
-	       
+    $combo_where_cd_time->entry->set_text($cd_time);
+    $combo_where_cd_time->entry->signal_connect( 'changed', sub { $cd_time = $combo_where_cd_time->entry->get_text()});	       
+
     my $box_what = gtkpack(new Gtk::VBox(0,1),
 			   $notebook_what = new Gtk::Notebook,
 			   $notebook_what->insert_page( $box_what_sys, $label_what_sys, 0),
@@ -609,14 +638,16 @@ sub advanced {
 			     0, gtkpack_(new Gtk::HBox(0,10),
 					 1, _("Please choose media to backup. "),
 					 0, gtkpack_(new Gtk::VBox(0,10),
-						     0, $check_where_cd_daemon  = new Gtk::CheckButton( _(" Use CD/DVDROM with daemon")  ),
-						     0, $check_where_hd_daemon  = new Gtk::CheckButton( _(" Use Hard Drive with daemon") ),
-						     0, $check_where_net_daemon = new Gtk::CheckButton( _(" Use Network with daemon")    ),
+						     0, my $check_where_cd_daemon  = new Gtk::CheckButton( _(" Use CD/DVDROM with daemon")  ),
+						     0, my $check_where_hd_daemon  = new Gtk::CheckButton( _(" Use Hard Drive with daemon") ),
+						     0, my $check_where_net_daemon = new Gtk::CheckButton( _(" Use Network with daemon")    ),
 						     ),
 					 ),
 			     
 			     0, new Gtk::HSeparator,
 			     );
+    $combo_when_space->entry->set_text( $when_space );
+    $combo_when_space->entry->signal_connect( 'changed', sub { $when_space = $combo_when_space->entry->get_text()});
 
     my $box_options = gtkpack(new Gtk::VBox(0,1),
 			      $notebook_options = new Gtk::Notebook,
@@ -658,7 +689,7 @@ sub advanced {
 
 
 
-    foreach ([$check_what_sys, \$backup_sys], [$check_what_cvs, \$backup_sys_cvs], [$check_what_browser, \$what_no_browser], [$check_remember_pass, \$remember_pass], [$check_cdrw, \$cdrw]) {
+    foreach ([$check_what_sys, \$backup_sys], [$check_what_cvs, \$backup_sys_cvs], [$check_what_browser, \$what_no_browser], [$check_remember_pass, \$remember_pass], [$check_cdrw, \$cdrw], [$check_where_net_daemon, \$net_daemon], [$check_where_hd_daemon, \$hd_daemon], [$check_where_cd_daemon, \$cd_daemon], [$check_where_hd_quota,  \$hd_quota], [$check_where_hd, \$where_hd], [$check_where_cd, \$where_cd], [$check_where_net, \$where_net]) {
 	my $ref = $_->[1];
 	gtksignal_connect(gtkset_active($_->[0], ${$ref}), toggled => sub { ${$ref} = ${$ref} ? 0 : 1; })
 	}
