@@ -18,8 +18,9 @@ use common qw(:common :functional);
 #-     bool (with text)
 #-     range (with min, max)
 #-     combo (with list, not_edit)
-#-     list (with list, icon2f (aka icon), separator (aka tree), help can be a hash or a function)
-
+#-     list (with list, icon2f (aka icon), separator (aka tree), format (aka pre_format function),
+#            help can be a hash or a function)
+#
 #- heritate from this class and you'll get all made interactivity for same steps.
 #- for this you need to provide
 #- - ask_from_listW(o, title, messages, arrayref, default) returns one string of arrayref
@@ -84,7 +85,7 @@ sub exit { exit($_[0]) }
 #-######################################################################################
 sub ask_warn {
     my ($o, $title, $message) = @_;
-    ask_from_list_no_check($o, $title, $message, [ _("Ok") ]);
+    ask_from_listf_no_check($o, $title, $message, undef, [ _("Ok") ]);
 }
 
 sub ask_yesorno {
@@ -95,6 +96,11 @@ sub ask_yesorno {
 sub ask_okcancel {
     my ($o, $title, $message, $def, $help) = @_;
     ask_from_list_($o, $title, $message, [ __("Ok"), __("Cancel") ], $def ? "Ok" : "Cancel", $help) eq "Ok";
+}
+
+sub ask_from_list {
+    my ($o, $title, $message, $l, $def, $help) = @_;
+    ask_from_listf($o, $title, $message, undef, $l, $def, $help);
 }
 
 sub ask_from_list_ {
@@ -108,34 +114,19 @@ sub ask_from_listf_ {
 }
 sub ask_from_listf {
     my ($o, $title, $message, $f, $l, $def, $help) = @_;
-    my $def2;
-    my (@l,%l); my $i = 0; foreach (@$l) {
-	my $v = $f->($_, $i++);
-	push @l, $v;
-	$l{$v} = $_;
-	$def2 = $v if $def && $_ eq $def;
-    }
-    $def2 ||= $f->($def) if $def;
-    my $r = ask_from_list($o, $title, $message, \@l, $def2, $help) or return;
-    $l{$r};
-}
-
-sub ask_from_list {
-    my ($o, $title, $message, $l, $def, $help) = @_;
     @$l == 0 and die 'ask_from_list: empty list';
     @$l == 1 and return $l->[0];
-    goto &ask_from_list_no_check;
+    goto &ask_from_listf_no_check;
 }
 
-sub ask_from_list_no_check {
-    my ($o, $title, $message, $l, $def, $help) = @_;
+sub ask_from_listf_no_check {
+    my ($o, $title, $message, $f, $l, $def, $help) = @_;
 
     if (@$l <= 2) {
-	ask_from_entries_refH_powered($o, { title => $title, messages => [ deref($message) ], ok => $l->[0], cancel => $l->[1] }, []) 
+	ask_from_entries_refH_powered($o, { title => $title, messages => [ deref($message) ], ok => may_apply($f, $l->[0]), cancel => may_apply($f, $l->[1]) }, []) 
 	  ? $l->[0] : $l->[1];
     } else {
-	@$l > 10 and $l = [ sort @$l ];
-	ask_from_entries_refH($o, $title, $message, [ { val => \$def, type => 'list', list => $l, help => $help } ]);
+	ask_from_entries_refH($o, $title, $message, [ { val => \$def, type => 'list', list => $l, help => $help, format => $f } ]);
 	$def;
     }
 }
@@ -155,11 +146,6 @@ sub ask_from_treelist {
     my ($o, $title, $message, $separator, $l, $def) = @_;
     $o->ask_from_treelistW($title, [ deref($message) ], $separator, [ sort @$l ], $def || $l->[0]);
 }
-#- defaults to simple ask_from_list
-sub ask_from_treelistW {
-    my ($o, $title, $message, $separator, $l, $def) = @_;
-    $o->ask_from_listW($title, [ deref($message) ], $l, $def);
-}
 
 
 sub ask_many_from_list {
@@ -167,7 +153,7 @@ sub ask_many_from_list {
     @l = grep { @{$_->{list}} } @l or return '';
     foreach my $h (@l) {
 	$h->{e}{$_} = {
-	    text => $h->{label} ? $h->{label}->($_) : $_,
+	    text => may_apply($h->{label}, $_),
 	    val => $h->{val} ? $h->{val}->($_) : do {
 		my $i =
 		  $h->{value} ? $h->{value}->($_) : 
@@ -175,8 +161,8 @@ sub ask_many_from_list {
 		\$i;
 	    },
 	    type => 'bool',
-	    help => $h->{help} ? $h->{help}->($_) : '',
-	    icon => $h->{icon2f} ? $h->{icon2f}->($_) : '',
+	    help => may_apply($h->{help}, $_, ''),
+	    icon => may_apply($h->{icon2f}, $_, ''),
 	} foreach @{$h->{list}};
 	if ($h->{sort}) {
 	    $h->{list} = [ sort { $h->{e}{$a}{label} cmp $h->{e}{$b}{label} } @{$h->{list}} ];
@@ -219,15 +205,20 @@ sub ask_from_entries_refH_powered {
     my ($o, $common, $l) = @_;
 
     #- normalize
-    foreach (@$l) {
-	if (@{$_->{list} || []} > 1) {
-	    $_->{type} = 'iconlist' if $_->{icon2f};
-	    $_->{type} = 'treelist' if $_->{separator};
-	    add2hash_($_, { not_edit => 1, type => 'combo' });
-	    ${$_->{val}} = $_->{list}[0] if ($_->{type} ne 'combo' || $_->{not_edit}) && !member(${$_->{val}}, @{$_->{list}});
-	} elsif ($_->{type} eq 'range') {
-	    $_->{min} <= $_->{max} or die "bad range min $_->{min} > max $_->{max} (called from " . join(':', caller()) . ")";
-	    ${$_->{val}} = max($_->{min}, min(${$_->{val}}, $_->{max}));
+    foreach my $e (@$l) {
+	if (my $l = $e->{list}) {
+	    if ($e->{sort} || @$l > 10 && !$e->{sort}) {
+		my @l2 = map { may_apply($e->{format}, $_) } @$l;
+		my @places = sort { $l2[$a] cmp $l2[$b] } 0 .. $#l2;
+		$e->{list} = $l = [ map { $l->[$_] } @places ];
+	    }
+	    $e->{type} = 'iconlist' if $e->{icon2f};
+	    $e->{type} = 'treelist' if $e->{separator};
+	    add2hash_($e, { not_edit => 1, type => 'combo' });
+	    ${$e->{val}} = $l->[0] if ($e->{type} ne 'combo' || $e->{not_edit}) && !member(${$e->{val}}, @$l);
+	} elsif ($e->{type} eq 'range') {
+	    $e->{min} <= $e->{max} or die "bad range min $e->{min} > max $e->{max} (called from " . join(':', caller()) . ")";
+	    ${$e->{val}} = max($e->{min}, min(${$e->{val}}, $e->{max}));
 	}
     }
     add2hash_($common->{callbacks} ||= {}, { changed => sub {}, focus_out => sub {}, complete => sub { 0 } });
