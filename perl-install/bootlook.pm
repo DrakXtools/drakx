@@ -49,8 +49,6 @@ parse_etc_passwd();
 my $no_bootsplash;
 my $x_mode = any::runlevel() == 5;
 my $a_mode = -e "/etc/aurora/Monitor" ? 1 : 0;
-my $l_mode = isAutologin();
-my %auto_mode = get_autologin("");
 my $inmain = 0;
 my $lilogrub = chomp_(`detectloader -q`);
 
@@ -81,10 +79,10 @@ my $menubar = ugtk::create_factory_menu($window, @menu_items);
 
 my $user_combo = new Gtk::Combo;
 $user_combo->set_popdown_strings(@usernames);
-$user_combo->entry->set_text($auto_mode{autologin}) if $auto_mode{autologin};
+$user_combo->entry->set_text($auto_mode->{autologin}) if $auto_mode->{autologin};
 my $desktop_combo = new Gtk::Combo;
 $desktop_combo->set_popdown_strings(get_wm());
-$desktop_combo->entry->set_text($auto_mode{desktop}) if $auto_mode{desktop};
+$desktop_combo->entry->set_text($auto_mode->{desktop}) if $auto_mode->{desktop};
 my $a_c_button = new Gtk::RadioButton(N("NewStyle Categorizing Monitor"));
 my $a_h_button = new Gtk::RadioButton(N("NewStyle Monitor"), $a_c_button);
 my $a_v_button = new Gtk::RadioButton(N("Traditional Monitor"), $a_c_button);
@@ -325,9 +323,9 @@ Click on Configure to launch the setup wizard.", $lilogrub),
 							   $x_mode = !$x_mode;
 						       }),
 				     gtkpack__(gtkset_sensitive($x_box, $x_mode),
-						gtkset_active(my $x_no_button  = new Gtk::RadioButton(N("No, I don't want autologin")), !$l_mode),
+						gtkset_active(my $x_no_button  = new Gtk::RadioButton(N("No, I don't want autologin")), !$auto_mode->{autologin}),
 						gtkpack__(new Gtk::HBox(0, 10),
-							   gtkset_active(my $x_yes_button = new Gtk::RadioButton((N("Yes, I want autologin with this (user, desktop)")), $x_no_button), $l_mode),
+							   gtkset_active(my $x_yes_button = new Gtk::RadioButton((N("Yes, I want autologin with this (user, desktop)")), $x_no_button), $auto_mode->{autologin}),
 							   gtkpack__(new Gtk::VBox(0, 10),
 								     $user_combo,
 								     $desktop_combo
@@ -423,47 +421,12 @@ sub updateAurora {
 # launch autologin functions
 #-------------------------------------------------------------
 
-sub isAutologin {
-    my $line;
-    local *AUTOLOGIN;
-    open AUTOLOGIN, "/etc/sysconfig/autologin";
-    while (<AUTOLOGIN>) {
-	if (/AUTOLOGIN=(yes|no)/) { $line = $_; last }
-    }
-    $line =~ s/AUTOLOGIN=(yes|no)/$1/;
-    chomp($line);
-    $line = $line eq "yes";
-    my %au = get_autologin('');
-    return $line && defined $au{autologin};
-}
-
-sub get_autologin {
-    my ($prefix) = @_;
-    my %o;
-    my %l = getVarsFromSh("$prefix/etc/sysconfig/autologin");
-
-    $o{autologin} = $l{USER};
-    %l = getVarsFromSh("$prefix/etc/sysconfig/desktop");
-    $o{desktop} = $l{DESKTOP};
-    %o;
-}
-
 sub updateAutologin {
     my ($usern, $deskt) = ($user_combo->entry->get_text(), $desktop_combo->entry->get_text());
     if ($x_yes_button->get_active()) {
 	$in->do_pkgs->install('autologin') if $x_mode;
-	set_autologin('',$usern,$deskt);
+	any::set_autologin($usern, $deskt);
     } else {
-	set_autologin('',undef) if $x_no_button->get_active();
+	any::set_autologin(undef) if $x_no_button->get_active();
     }
 }
- 
-sub set_autologin {
-  my ($prefix, $user, $desktop) = @_;
-  output "$prefix/etc/sysconfig/desktop", uc($desktop), "\n" if $user;
-  setVarsInSh("$prefix/etc/sysconfig/autologin",
-	      { USER => $user, AUTOLOGIN => bool2yesno($user), EXEC => "/usr/X11R6/bin/startx" });
-  chmod 0600, "$prefix/etc/sysconfig/autologin";
-#  log::l("cat $prefix/etc/sysconfig/autologin: ", cat_("$prefix/etc/sysconfig/autologin"));
-}
-
