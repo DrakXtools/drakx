@@ -8,9 +8,6 @@ our @ISA = qw(partition_table::raw);
 use partition_table::raw;
 use c;
 
-my $magic = "HM\1\0";
-my $offset = 0;
-
 
 #- Allows people having PVs on unpartitioned disks to install
 #- (but no way to create such beasts)
@@ -23,11 +20,9 @@ my $offset = 0;
 sub read {
     my ($hd, $sector) = @_;
 
-    my $F = partition_table::raw::openit($hd) or die "failed to open device";
-    c::lseek_sector(fileno($F), $sector, $offset) or die "reading of partition in sector $sector failed";
+    my $t = fs::type::type_subpart_from_magic($hd);
 
-    sysread $F, my $tmp, length $magic or die "error reading magic number on disk $hd->{file}";
-    $tmp eq $magic or die "bad magic number on disk $hd->{file}";
+    $t && $t->{pt_type} eq 0x8e or die "bad magic number on disk $hd->{device}";
 
     [];
 }
