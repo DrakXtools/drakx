@@ -23,6 +23,14 @@ my %perm = ( 'level 1' => $perm_path.'perm.1',
              'level 5' => $perm_path.'perm.5',
              'editable' => $local_path.'perm.local',
            );
+my %perm_l10n = ('level 1' => N("Level 1"),
+                 'level 2' => N("Level 2"),
+                 'level 3' => N("Level 3"),
+                 'level 4' => N("Level 4"),
+                 'level 5' => N("Level 5"),
+                 'editable' => N("Custom settings"),
+                );
+my %rev_perm_l10n = reverse %perm_l10n;
 my $editable = 0;
 my $modified = 0;
 my $prec_txt = $default_perm_level;
@@ -46,7 +54,7 @@ each_index {
 
 #- widgets settings
 my $combo_perm = new Gtk2::OptionMenu;
-$combo_perm->set_popdown_strings(sort(keys %perm));
+$combo_perm->set_popdown_strings(sort(values %perm_l10n));
 
 sub add_callback() {
     row_setting_dialog();
@@ -94,7 +102,7 @@ sub up_callback() {
     $permList->queue_draw;
 }
 
-my $combo_sig = $combo_perm->entry->signal_connect(changed => sub { display_perm($combo_perm->entry->get_text , @_) });
+my $combo_sig = $combo_perm->entry->signal_connect(changed => sub { display_perm($rev_perm_l10n{$combo_perm->entry->get_text} , @_) });
 $permList->signal_connect(button_press_event => sub { 
                      return unless $editable;
                      my (undef, $event) = @_;
@@ -138,7 +146,7 @@ $W->show_all;
 $w->{rwindow}->set_position('center') unless $::isEmbedded;
 
 display_perm($default_perm_level);
-$combo_perm->entry->set_text($default_perm_level);
+$combo_perm->entry->set_text($perm_l10n{$default_perm_level});
 
 $permList->get_selection->signal_connect('changed' => sub {
                                                my ($select) = @_;
