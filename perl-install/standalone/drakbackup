@@ -77,12 +77,13 @@ my $box;
 my $backup_choice = 0;
 my $cfg_file_exist = 0;
 my @user_and_path_list;
+my @user_list;
 my $mdk_cc = 0;
-my $DEBUG = 1;
+my $DEBUG = 0;
 
 # config. FILES ->  PATH  & Global variables.
 my @sys_files = ("/etc");
-my @home_files = ("/home/seb") ;
+my @home_files;
 my @other_files = ("/var/www") ;
 my $cfg_file = "/etc/drakxtools/drakbackup/drakbackup.conf";
 my $save_path = "/var/drakbackup";
@@ -115,13 +116,14 @@ sub debug {
 read_conf_file();
 
 sub read_passwd {
-    push  @user_and_path_list, (split(':', $_))[0] . "," . (split(':', $_))[5]  foreach (grep /[5-9][0-9][0-9]/, cat_('/etc/passwd'));
-    $DEBUG and print "$_\n" foreach @user_and_path_list;
-    # fixme!
-    $cfg_file_exist or push @home_files, (split(',', $_))[0] foreach (@user_and_path_list);
-    $DEBUG and print "$_\n" foreach @home_files;
+    @user_and_path_list = map { (split(':', $_))[0] . ":" . (split(':', $_))[5] } grep {( split(':', $_))[2] > 500} split ('\n', cat_('/etc/passwd'));  
+    $DEBUG and print "user_and_path_list: ".$_."\n" foreach (@user_and_path_list);
+    @home_files = ();
+    @user_list = ();
+    push @home_files, (split(':', $_))[1] foreach (@user_and_path_list);
+    push @user_list, (split(':', $_))[0] foreach (@user_and_path_list);
+    $DEBUG and print "home_files: ".$_."\n" foreach (@home_files);
 }
-
 
 sub save_conf_file {
     my @cfg_list = ( "SYS_FILES=@sys_files\n",
@@ -138,9 +140,8 @@ sub save_conf_file {
     output_p( $cfg_file, @cfg_list);
 }
 
-
-
 sub read_conf_file {
+    read_passwd();
     if (-e $cfg_file) {
 	while (cat_ ('$cfg_file')) {
 	    next unless /\S/;
@@ -156,10 +157,8 @@ sub read_conf_file {
 	$cfg_file_exist = 1;
     } else {
 	$cfg_file_exist = 0;
-	read_passwd();
     }    
-    $DEBUG and debug; 
-    $DEBUG and read_passwd();
+#    $DEBUG and debug; 
 }
 
 if ($mdk_cc) { $build_floppy || $build_cd || $default || @list_arg || $conf_file ? backend_mod() : interactive_mode();
@@ -347,21 +346,10 @@ configuration file:
 
 
 sub wizard {
-    my $intf;
     my $user = 1;
     my $user2;
-    my $module;
+#    map { my (user.$_)} (@user_list);
     my $text;
-    my @toto = ("dgh","fhj","vbmn","rtyu","rtyu"),
-    my $toto;
-    my @tota;
-    my $name = "adf";
-
-     foreach (@toto) {
-	 my $toto =  { label => _($_), val => \$user2, type => 'bool'} ;
-	 push @tota, $toto.",";
-     }
-#    $toto = { label => _($name), val => \$toto, type => 'bool'};
 
   begin: 
     $::isWizard=1;
@@ -372,25 +360,42 @@ sub wizard {
   	          (_("Please choose that you want to backup") . "\n\n") .
 	          $text,
 		  [ 
-		    #{ label => _("Netmask"),     val => \$intf->{NETMASK}, disabled => sub { $pump } },
 		    { label => _("System Files"), val => \$user, type => "bool", text => _("  all files on your /etc directory.") },
-		    { label => _("user: seb"), val => \$user2, type => "bool", text => _("") },
-#		    @tota
+		    map { { label => _("$_"), val => \$user, type => "bool", text => _("all data contains on $_ directory") } } @user_list,
 		    ],
 		  );
     
 
-#    my $r = $in->ask_from_list_(_("Backup Configuration wizard"),
-# 				_("Please choose what you need to backup from your system"),
+   my $r = $in->ask_from_list_(_("Backup Configuration wizard"),
+				_("Please choose what you need to backup from your system"),
+				[ __("Hard Drive or NFS file system"), __("Mandrake Online"), __("on CDROM") ]) 
+	or quit_global($in, 0);
+     
+
+    $in->ask_from(_("Backup Configuration wizard"),
+  	          (_("Please choose when you want to backup") . "\n\n") .
+	          $text,
+		  [ 
+		    { label => _("Daemon"), val => \$user, type => "bool", text => _(" Select it if you want that backup run as daemon") },
+		    ],
+		  );
+
+    $in->ask_from(_("Backup Configuration wizard"),
+  	          (_("Please choose that you want to do") . "\n\n") .
+	          $text,
+		  [ 
+		    { label => _("Build Auto-Boot CDROM"), val => \$user, type => "bool", text => _("this option work only if you have a CDR-W CDROM drive\n This options allow you to restore all\n your system (data and your system variables)") },
+		    ],
+		  );
+
+
+
+#   step_where_backup:
+#     undef $::Wizard_no_previous;
+#     my $r2 = $in->ask_from_no_check(_("Backup Configuration wizard"),
+# 				_("Please choose how to backup your system"),
 # 				[ __("Hard Drive"), __("accross the Network"), __("Burn auto boot Restore CDROM") ]) 
 # 	or quit_global($in, 0);
-     
-  step_where_backup:
-    undef $::Wizard_no_previous;
-    my $r2 = $in->ask_from_no_check(_("Backup Configuration wizard"),
-				_("Please choose how to backup your system"),
-				[ __("Hard Drive"), __("accross the Network"), __("Burn auto boot Restore CDROM") ]) 
-	or quit_global($in, 0);
 
 
 }
@@ -501,15 +506,14 @@ sub advanced {
 
     my $box_what_sys =  gtkpack(new Gtk::VBox(0,1),
 				_("\nPlease check all options that you need.\n"),
-				new Gtk::CheckButton( _("need to restore any versions (CVS)") ),
-				new Gtk::CheckButton( "Check me please!" ),
-				new Gtk::CheckButton( "Check me please!" ),
-			_("When backup.")
+				new Gtk::CheckButton( _(" Need to restore any versions (CVS)") ),
 			);
 
     my $box_what_user =  gtkpack(new Gtk::VBox(0,1),
-			new Gtk::Pixmap($pix_time_map, $pix_time_mask),
-			_("When backup.")
+				 map {new Gtk::CheckButton("$_") } (@user_list), 
+				     
+#				 new Gtk::Pixmap($pix_time_map, $pix_time_mask),
+#				 _("When backup.")
 			);
 
     my $box_what_other =  gtkpack(new Gtk::VBox(0,1),
