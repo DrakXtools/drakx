@@ -92,12 +92,12 @@ sub boot_img_i386 {
 
     if ($type eq "hd") {
 	_ "bunzip2 -c $instdir/init-data/msgboot.img.bz2 > $img";
-	$automatic = "automatic=type:disk";
+	$automatic = "automatic=method:disk";
     } elsif ($type eq "all") {
 	_ "bunzip2 -c $instdir/init-data/msgboot-graphicallogo-2880.img.bz2 > $img";
     } else {
 	_ "bunzip2 -c $instdir/init-data/msgboot-graphicallogo.img.bz2 > $img";
-	$automatic = "automatic=type:cdrom" if ($type eq "cdrom");
+	$automatic = "automatic=method:cdrom" if ($type eq "cdrom");
     }
     _ "$sudo mount -t msdos -o umask=0 $img $mnt -o loop";
     _ "cat vmlinuz > $mnt/vmlinuz" if $type !~ /blank/;
