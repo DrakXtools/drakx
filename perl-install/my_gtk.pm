@@ -143,10 +143,7 @@ sub gtkroot {
 sub gtkcolor($$$) {
     my ($r, $g, $b) = @_;
 
-    my $color = bless {}, 'Gtk::Gdk::Color';
-    $color->red  ($r);
-    $color->green($g);
-    $color->blue ($b);
+    my $color = bless { red => $r, green => $g, blue => $b }, 'Gtk::Gdk::Color';
     gtkroot()->get_colormap->color_alloc($color);
 }
 

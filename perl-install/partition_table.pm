@@ -12,7 +12,8 @@ use vars qw(@ISA %EXPORT_TAGS @EXPORT_OK @important_types @fields2save);
 
 
 use common qw(:common :system :functional);
-use partition_table_raw;
+use partition_table_dos;
+use partition_table_bsd;
 use Data::Dumper;
 
 
@@ -326,7 +327,15 @@ sub get_holes($) {
 sub read_one($$) {
     my ($hd, $sector) = @_;
 
-    my $pt = partition_table_raw::read($hd, $sector) or return;
+    my ($pt, $info);
+    foreach ('dos', 'bsd') {
+	eval {
+	    bless $hd, "partition_table_$_";
+	    ($pt, $info) = $hd->read($sector);
+	};
+	print ">>> $@\n";
+	$@ or last;
+    }
 
     my @extended = grep { isExtended($_) } @$pt;
     my @normal = grep { $_->{size} && $_->{type} && !isExtended($_) } @$pt;
@@ -334,13 +343,13 @@ sub read_one($$) {
     @extended > 1 and die "more than one extended partition";
 
     $_->{rootDevice} = $hd->{device} foreach @normal, @extended;
-    { raw => $pt, extended => $extended[0], normal => \@normal };
+    { raw => $pt, extended => $extended[0], normal => \@normal, info => $info };
 }
 
 sub read($;$) {
     my ($hd, $clearall) = @_;
     my $pt = $clearall ?
-      partition_table_raw::clear_raw() :
+      $hd->clear_raw :
       read_one($hd, 0) || return 0;
 
     $hd->{primary} = $pt;
@@ -394,21 +403,21 @@ sub write($) {
     for ($hd->{primary}{raw}) {
 	(grep { $_->{local_start} = $_->{start}; $_->{active} ||= 0 } @$_) or $_->[0]{active} = 0x80;
     }
-    partition_table_raw::write($hd, 0, $hd->{primary}{raw}) or die "writing of partition table failed";
+    $hd->write(0, $hd->{primary}{raw}, $hd->{primary}{info}) or die "writing of partition table failed";
 
     foreach (@{$hd->{extended}}) {
 	# in case of extended partitions, the start sector must be local to the partition
 	$_->{normal}{local_start} = $_->{normal}{start} - $_->{start};
 	$_->{extended} and $_->{extended}{local_start} = $_->{extended}{start} - $hd->{primary}{extended}{start};
 
-	partition_table_raw::write($hd, $_->{start}, $_->{raw}) or die "writing of partition table failed";
+	$hd->write($_->{start}, $_->{raw}) or die "writing of partition table failed";
     }
     $hd->{isDirty} = 0;
 
     #- now sync disk and re-read the partition table
     if ($hd->{needKernelReread}) {
 	sync();
-	partition_table_raw::kernel_read($hd);
+	$hd->kernel_read;
 	$hd->{needKernelReread} = 0;
     }
 }
@@ -530,8 +539,8 @@ sub add($$;$$) {
 	eval { add_primary($hd, $part) };
 	return unless $@;
     }
-    eval { add_extended($hd, $part) }; #- try adding extended
-    if (my $err = $@) {
+    eval { add_extended($hd, $part) } if $hd->hasExtended; #- try adding extended
+    if ($@ || !$hd->hasExtended) {
 	eval { add_primary($hd, $part) };
 	die $@ if $@; #- send the add extended error which should be better
     }

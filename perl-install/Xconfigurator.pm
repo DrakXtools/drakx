@@ -82,6 +82,7 @@ sub readCardsDB {
 
     #- this entry is broken in X11R6 cards db
     $cards{I128}{flags}{noclockprobe} = 1;
+    \%cards;
 }
 
 sub readMonitorsDB {
@@ -174,6 +175,7 @@ sub cardConfiguration(;$$$) {
     unless ($card->{type}) {
 	$card->{flags}{noclockprobe} = member($card->{server}, qw(I128 S3 S3V Mach64));
     }
+    $card->{options}{power_saver} = 1;
 
     $card->{flags}{needVideoRam} and
       $card->{memory} ||=

@@ -145,9 +145,8 @@ sub ask_from_entries($$$$;$%) {
 sub ask_from_entries_refH($$$;$%) {
     my ($o, $title, $message, $h, %callback) = @_;
 
-    ask_from_entries_ref($o, $title, $message, 
-			 [ grep_index { even($::i) } @$h ],
-			 [ grep_index {  odd($::i) } @$h ], 
+    ask_from_entries_ref($o, $title, $message,
+			 list2kv(@$h),
 			 %callback);    
 }
 

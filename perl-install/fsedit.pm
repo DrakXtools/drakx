@@ -110,8 +110,8 @@ sub is_one_big_fat {
     my ($hds) = @_;
     @$hds == 1 or return;
 
-    my @l = fsedit::get_fstab(@$hds);
-    @l == 1 && isFat($l[0]) && fsedit::free_space(@$hds) < 10 << 11;
+    my @l = get_fstab(@$hds);
+    @l == 1 && isFat($l[0]) && free_space(@$hds) < 10 << 11;
 }
 
 
