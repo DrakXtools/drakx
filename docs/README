@@ -7,7 +7,7 @@ to the standard newt install.
 Like all good free software, DrakX is in CVS :)
 
 You can access it using:
-% export CVSROOT=:pserver:anoncvs@cvs.mandrakesoft.com:/home/cvs/cooker
+% export CVSROOT=:pserver:anoncvs@mandrakesoft.com:/home/cvs/cooker
 % cvs login
 % Passwd: cvs
 % cvs checkout gi
@@ -22,28 +22,43 @@ sometimes wonder what the whole make does :-%
 Instead, changing some .pm files is quite easy (nice interpreted language)
 
 ********************************************************************************
-* Making your custom install cdrom *********************************************
+* Making your custom install ***************************************************
 ********************************************************************************
 If you have your own rpms you want to add, or make your own updated cdrom, you
-just have to update:
-- Mandrake/base/hdlist.cz2: use ``misc/genhdlists --distrib .''
-- Mandrake/base/depslist: use ``misc/gendepslist2 -o Mandrake/base/depslist Mandrake/base/hdlist.cz2''
+just have to issue:
 
-Optionnally, you can modify Mandrake/base/compssList and compssUsers.
+% gendistrib --noclean --distrib <DIRS>
+
+Where <DIRS> is the root of all the media that the install will see:
+
+(1) network or 1-cdrom installs
+	DIRS == the root directory of the Distribution
+
+(2) multi-cdrom install
+	DIRS == the root directories of all the media that the install will see
+
+``gendistrib'' will scan, from the DIRS you provide, for some
+Mandrake/RPMS* directories containing some RPM packages. For multi-cd,
+please use Mandrake/RPMS, Mandrake/RPMS2, etc. For one CD or a network/hd
+volume, please use Mandrake/RPMS.
+
+Optionnally, you can modify ``Mandrake/base/rpmsrate''; this file manages
+the relative importance of the files, and thus their installation or not.
+
 Also, mdkinst_stage2.gz must be remade if you modify files in Mandrake/mdkinst.
 See below for information about these files.
 
 ********************************************************************************
 * FILES ************************************************************************
 ********************************************************************************
-First he are the different things needed :
+First here are the different things needed :
 
-Mandrake/base/hdlist
-	obsolete in 7.1
+Mandrake/base/hdlists
+	description of the available install media
 
-Mandrake/base/hdlist.cz2
-	table of rpm's headers. 
-	! Need to be remade when Mandrake/RPMS changes (with ``misc/genhdlists --distrib .'') !
+Mandrake/base/hdlist*.cz
+	table of rpm's headers, referred by ``hdlists''
+	! Need to be remade when Mandrake/RPMS changes (with ``gendistrib'') !
 
 Mandrake/base/depslist
 	for each packages, tell which package it depends on. Also contains the
@@ -57,14 +72,9 @@ Mandrake/base/depslist.ordered
 Mandrake/base/compss
 	obsolete in 7.1
 
-Mandrake/base/compssUsers
-	obsoletes comps. It contains the different user classes like ``Graphics
-	Manipulation'' and ``Games''
-
-Mandrake/base/compssList
-	for each packages, it gives the appreciation for each type of user.
-	used to choose packages
-	(see beginning of perl-install/pkgs.pm for more)
+Mandrake/base/rpmsrate
+	ranks and classify packages, so that the installer will know which
+        ones to install (see beginning of perl-install/pkgs.pm for more)
 
 Mandrake/mdkinst
 	live system used on certain installs. See ``Ramdisk or not'' below for
@@ -77,10 +87,10 @@ Mandrake/base/mdkinst_stage2.gz
 
 images/*.img
 	boot images to use with DrakX. Use:
-	- all for everything, but need 2.88MB media (like el torito cdrom boot)
-	- hd for hard-disk install
 	- cdrom for cdrom install
 	- network for ftp/nfs install (non-pcmcia devices)
+	- hd for hard-disk install
+	- hdreiser for hard-disk install on a reiserfs partition
 	- pcmcia for pcmcia install (see ``PCMCIA install'' below for more)
 
   the following modules have been removed from:
@@ -109,7 +119,7 @@ rebooting. ``rpm -qa'' works for example.
 - alt-F3: a lot of interesting things. Be carefull, some ``ERROR'' messages are
 not interesting.
 - alt-F4: kernel's place. aka the output of dmesg.
-- alt-F7: the graphical install lives there (may switch to console 7 one day :)
+- alt-F7: the graphical install lives there
 
 - command "bug" puts on floppy lots of interesting stuff.
 - /tmp/ddebug.log: same (or nearly the same) as alt-F3
@@ -138,11 +148,7 @@ not'' to know if you have to regenerate the mdkinst_stage2.gz)
 ********************************************************************************
 * PCMCIA install ***************************************************************
 ********************************************************************************
-If the media you use to install is a pcmcia device, you have two choices:
-- use the pcmcia boot disk
-- use another boot disk and it will ask you a supplementary disk. Give it the
-pcmcia disk.
-
+If the media you use to install is a pcmcia device, use the pcmcia boot disk.
 
 ********************************************************************************
 * Ramdisk or not ***************************************************************
@@ -150,6 +156,7 @@ pcmcia disk.
 The DrakX install is much bigger than the newt one. So the ramdisk which was
 used is getting big, and costs a lot in memory 
 (eg: the mdkinst_stage2 is 14MB - 23/09/99)
+(update! now size is 22MB - 24/01/01)
 
 |       | newt    | DrakX
 |-------+---------+----------------------------------------------------------
@@ -160,7 +167,12 @@ used is getting big, and costs a lot in memory
 |       |         |   ramdisk otherwise
 | cdrom | ramdisk | live if memory < 52MB, ramdisk otherwise
 
-When i say live, it means that the install1 stage will *mount* the
+Where ramdisk is needed, if detected memory is below the limit allowed for
+ramdisk (maintained in file gi/mdk-stage1/config-stage1.h; currently 52 Mb),
+a failure dialog will be printed explaining that there is not enough memory
+to perform the installation.
+
+When i say live, it means that the stage1 will *mount* the
 Mandrake/mdkinst and use it that way.
 
 The ramdisk is used in place of the live in some cases. This ramdisk is filled
@@ -176,12 +188,15 @@ For pcmcia, it depends on the type of install.
 * modules **********************************************************************
 ********************************************************************************
 Modules can be found in at least 2 places:
-- in /modules/modules.cgz
+- in /modules/modules.mar
 - in /lib/modules.cz2
 
-/modules/modules.cgz is used in stage1. It contains only modules interesting for
-one kind of install. For example in an hd install, it contains scsi modules.
-For an network install, it contains network card modules.
+/modules/modules.mar is used in mdk-stage1. It contains only modules
+interesting for one kind of install. For example in an hd install, it
+contains scsi modules. For a network install, it contains network card
+modules. (To create, extract or view files in a ``mar'' archive, please
+use gi/mdk-stage1/mar/mar; this is basically an archive format meant to
+be minimalistic)
 
 /lib/modules.cz2 contains every module, it is used in stage2.
 
@@ -245,11 +260,13 @@ sub selectAlawindows  {}
 * Miscellaneous ****************************************************************
 ********************************************************************************
 >  o Media access methods: nfs, ftp, http, hd, cdrom
->  o Stages: install1, stage1, stage2
+>  o Stages: init, stage1, stage2
 >    - What exactly each stage does
 
-the stage1 takes care of loading the stage2 :)
-the stage2 is too big to fit on a floppy, that's why stage1 exists.
+init loads stage1
+stage1 loads stage2, on various medium type
+
+stage2 is too big to fit on a floppy, that's why stage1 exists
 
 >    - How each stage relates to the various media access methods
 
@@ -260,8 +277,8 @@ doesn't contain scsi modules nor ide.
 >    - How one stage terminates and another begins. i.e., How does
 >      stage1 find, mount, and launch stage2?
 
-/sbin/init just starts /sbin/install
-/sbin/install takes care of mounting stage2 (in ramdisk if necessary)
+/sbin/init just starts /sbin/stage1
+/sbin/stage1 takes care of mounting stage2 (in ramdisk if necessary)
   then it runs /usr/bin/runinstall2
 
 >  o Text and Graphic mode installers
