@@ -343,7 +343,7 @@ our @tree =
       string => N("SCSI controllers"),
       icon => "scsi.png",
       configurator => "",
-      detector => sub { f(grep { $_->{media_type} =~ /STORAGE_SCSI/ || $_->{driver} eq 'megaraid' } @devices) },
+      detector => sub { f(grep { $_->{media_type} =~ /STORAGE_SCSI/ } @devices) },
       checked_on_boot => 1,
      },
 
