@@ -89,7 +89,7 @@ void initIMPS2() {
   unsigned char imps2_s1[] = { 243, 200, 243, 100, 243, 80, };
   unsigned char imps2_s2[] = { 246, 230, 244, 243, 100, 232, 3, };
 
-  int fd = open("/dev/cdrom", O_WRONLY);
+  int fd = open("/dev/mouse", O_WRONLY);
   if (fd < 0) return;
 
   write (fd, imps2_s1, sizeof (imps2_s1));
