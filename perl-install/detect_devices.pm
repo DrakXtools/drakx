@@ -200,7 +200,7 @@ sub isRemovableUsb { index($_[0]{usb_media_type}, 'Mass Storage|') == 0 && usb2r
 sub isFloppyUsb { $_[0]{usb_driver} eq 'Removable:floppy' }
 sub isRemovableDrive { 
     my ($e) = @_;
-    isZipDrive($e) || isLS120Drive($e) || $e->{media_type} eq 'fd' || isRemovableUsb($e);
+    isZipDrive($e) || isLS120Drive($e) || $e->{media_type} eq 'fd' || isRemovableUsb($e) || index($e->{usb_media_type}, 'Mass Storage|Floppy (UFI)') == 0;
 }
 
 sub getSCSI() {
