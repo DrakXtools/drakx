@@ -301,8 +301,6 @@ sub boot_img_i386 {
     _ "sync";
     _ "df $tmp_mnt";
     _ "$sudo umount $tmp_mnt";
-
-    remove_ending_zero($img);
 }
 
 # alias to x86 variant, slightly bigger with images though
@@ -846,6 +844,4 @@ sub drivers {
     _ "df $tmp_mnt";
 
     _ "$sudo umount $tmp_mnt";
-
-    remove_ending_zero($img);
 }
