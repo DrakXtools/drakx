@@ -749,8 +749,14 @@ sub computeGroupSize {
 	}
 	@l;
     }
+    my %or_ify_cache;
+    my $or_ify_cached = sub {
+	$or_ify_cache{$_[0]} ||= join("\t", or_ify(split("\t", $_[0])));
+    };
     sub or_clean {
-	my (@l) = map { [ sort split('&&') ] } @_ or return '';
+	my ($flags) = @_;
+	my @l = split("\t", $flags);
+	@l = map { [ sort split('&&') ] } @l;
 	my @r;
 	B: while (@l) {
 	    my $e = shift @l;
@@ -769,19 +775,15 @@ sub computeGroupSize {
     my %pkgs_with_same_rflags;
     foreach (@{$packages->{depslist}}) {
 	next if !$_->rate || $_->rate < $min_level || $_->flag_available;
-	my $flags = join(' ', $_->rflags);
+	my $flags = join("\t", $_->rflags);
 	next if $flags eq 'FALSE';
 	push @{$pkgs_with_same_rflags{$flags}}, $_;
     }
 
     foreach my $raw_flags (keys %pkgs_with_same_rflags) {
-	my $flags = join("\t", my @flags = or_ify(split(' ', $raw_flags)));
-	my $flag_group = $memo{$flags} ||= or_clean(@flags);
-
+	my $flags = $or_ify_cached->($raw_flags);
 	my @pkgs = @{$pkgs_with_same_rflags{$raw_flags}};
-
-	$group{$_->name} = $flag_group foreach @pkgs;
-
+  
 	#- determine the packages that will be selected when selecting $p.
 	#- make a fast selection (but potentially erroneous).
 	#- installed and upgrade flags must have been computed (see compute_installed_flags).
@@ -824,11 +826,9 @@ sub computeGroupSize {
 	foreach (keys %newSelection) {
 	    my $p = $packages->{depslist}[$_] or next;
 	    next if $p->flag_selected; #- always installed (accounted in system_size)
-	    my $s = $group{$p->name} || do {
-		join("\t", or_ify($p->rflags));
-	    };
+	    my $s = $group{$p->name} || $or_ify_cached->(join("\t", $p->rflags));
 	    my $m = "$flags\t$s";
-	    $group{$p->name} = ($memo{$m} ||= or_clean(@flags, split("\t", $s)));
+	    $group{$p->name} = ($memo{$m} ||= or_clean($m));
 	}
     }
     my (%sizes, %pkgs);
