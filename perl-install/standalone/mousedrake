@@ -160,6 +160,8 @@ sub test_mouse2 {
 
     my ($m3_image, $m3_mask) = my_gtk::gtkcreate_xpm($darea, 'mouse_3b.xpm');
     my ($m3_imagep, $m3_maskp) = my_gtk::gtkcreate_xpm($darea, 'mouse_3b+.xpm');
+    my ($m3_left, $m3_left_mask) = my_gtk::gtkcreate_xpm($darea, 'mouse_left.xpm');
+    my ($m3_right, $m3_right_mask) = my_gtk::gtkcreate_xpm($darea, 'mouse_right.xpm');
     my ($m3_middle, $m3_middle_mask) = my_gtk::gtkcreate_xpm($darea, 'mouse_middle.xpm');
     $image = $m3_image;
     $mouse->{nbuttons} > 3 and $image = $m3_imagep;
@@ -191,19 +193,37 @@ sub test_mouse2 {
 	  my ($nb, $pressed) = @_;
 	  my $x = 60 + $nb*33;
 	  $drawarea->();
-	  if ($mouse->{nbuttons} <= 3) {
-	      $darea->window->draw_arc ( $darea->style->black_gc,
-					 1, ($darea->allocation->[2]-$width)/2 + $x, ($darea->allocation->[3]-$height)/2 + 90, 20, 25,
-					 0, 360*64);
-	  } elsif ($nb == 3) {
+	  if ($nb == 0) {
+	      $darea->window->draw_pixmap ($darea->style->bg_gc('normal'),
+					   $m3_left, 0, 0,
+					   ($darea->allocation->[2]-$width)/2+31, ($darea->allocation->[3]-$height)/2 + 52,
+					   59, 91);
+	  } elsif ($nb == 2) {
+	      $darea->window->draw_pixmap ($darea->style->bg_gc('normal'),
+					   $m3_right, 0, 0,
+					   ($darea->allocation->[2]-$width)/2+117, ($darea->allocation->[3]-$height)/2 + 52,
+					   61, 91);
+	  } elsif ($nb == 1) {
+	      if($mouse->{nbuttons} > 3) {
+		  $darea->window->draw_pixmap ($darea->style->bg_gc('normal'),
+					       $m3_middle, 0, 0,
+					       ($darea->allocation->[2]-$width)/2+98, ($darea->allocation->[3]-$height)/2 + 67,
+					       13, 62);
+	      } else {
+		  $darea->window->draw_arc ( $darea->style->black_gc,
+					     1, ($darea->allocation->[2]-$width)/2 + $x, ($darea->allocation->[3]-$height)/2 + 90, 20, 25,
+					     0, 360*64);
+	      }
+	  } elsif ($nb == 4) {
 	      $darea->window->draw_pixmap ($darea->style->bg_gc('normal'),
 					   $m3_middle, 0, 0,
-					   ($darea->allocation->[2]-$width)/2+81, ($darea->allocation->[3]-$height)/2 + 49,
-					   45, 96);
-	  } elsif ($nb == 4) {
-	      print "button 4\n";
+					   ($darea->allocation->[2]-$width)/2+98, ($darea->allocation->[3]-$height)/2 + 67,
+					   13, 62)
 	  } elsif ($nb == 5) {
-	      print "button 5\n";
+	      $darea->window->draw_pixmap ($darea->style->bg_gc('normal'),
+					   $m3_middle, 0, 0,
+					   ($darea->allocation->[2]-$width)/2+98, ($darea->allocation->[3]-$height)/2 + 67,
+					   13, 62)
 	  }
       };
 #      my $draw_text = sub {
