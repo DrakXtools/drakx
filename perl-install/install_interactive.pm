@@ -129,7 +129,7 @@ sub partitionWizardSolutions {
 	    } ];
     } else {
 	push @wizlog, N("There is no FAT partition to use as loopback (or not enough space left)") .
-	  @fats ? "\nFAT partitions:" . join('', map { "\n  $_->{device} $_->{free} (" . ($min_linux + $min_swap + $min_freewin) . ")" } @fats) : '';
+	  (@fats ? "\nFAT partitions:" . join('', map { "\n  $_->{device} $_->{free} (" . ($min_linux + $min_swap + $min_freewin) . ")" } @fats) : '');
     }
 
     
@@ -178,7 +178,7 @@ When sure, press Ok.")) or return;
 		$hd->adjustEnd($part);
 
 		eval { 
-		    my $w = $o->wait_message(N("Resizing"), N("Resizing Windows partition"));
+		    my $_w = $o->wait_message(N("Resizing"), N("Resizing Windows partition"));
 		    $resize_fat->resize($part->{size});
 		};
 		if (my $err = $@) {
@@ -195,8 +195,7 @@ When sure, press Ok.")) or return;
 		1;
 	    } ];
     } else {
-	push @wizlog, N("There is no FAT partition to resize (or not enough space left)") .
-	  @ok_for_resize_fat ? "\nFAT partitions:" . join('', map { "\n  $_->{device} $_->{free} (" . ($min_linux + $min_swap + $min_freewin) . ")" } @ok_for_resize_fat) : '';
+	push @wizlog, N("There is no FAT partition to resize (or not enough space left)");
     }
 
     if (@$fstab && @hds_rw) {
