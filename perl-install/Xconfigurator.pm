@@ -2,7 +2,7 @@ package Xconfigurator;
 
 use diagnostics;
 use strict;
-use vars qw($in $install $resolution_wanted @depths %depths @resolutions @accelservers @allservers %videomemory @ramdac_name @ramdac_id @clockchip_name @clockchip_id %keymap_translate @vsync_range %standard_monitors $intro_text $finalcomment_text $s3_comment $cirrus_comment $probeonlywarning_text $monitorintro_text $hsyncintro_text $vsyncintro_text $XF86firstchunk_text $keyboardsection_start $keyboardsection_part2 $keyboardsection_end $pointersection_text1 $pointersection_text2 $monitorsection_text1 $monitorsection_text2 $monitorsection_text3 $monitorsection_text4 $modelines_text_Trident_TG_96xx $modelines_text $devicesection_text $screensection_text1);
+use vars qw($in $install $resolution_wanted @depths %depths @resolutions @svgaservers @accelservers @allservers %videomemory @ramdac_name @ramdac_id @clockchip_name @clockchip_id %keymap_translate @vsync_range %standard_monitors $intro_text $finalcomment_text $s3_comment $cirrus_comment $probeonlywarning_text $monitorintro_text $hsyncintro_text $vsyncintro_text $XF86firstchunk_text $keyboardsection_start $keyboardsection_part2 $keyboardsection_end $pointersection_text1 $pointersection_text2 $monitorsection_text1 $monitorsection_text2 $monitorsection_text3 $monitorsection_text4 $modelines_text_Trident_TG_96xx $modelines_text $devicesection_text $screensection_text1);
 
 use pci_probing::main;
 use common qw(:common :file);
@@ -574,7 +574,7 @@ Section "Screen"
 # The Colour SVGA server
 );
 
-    if ($O->{server} eq 'SVGA') {
+    if (member($O->{server}, @svgaservers)) {
 	&$screen("svga", $O->{default_depth}, $O->{type}, $O->{depth});
     } else {
 	&$screen("svga", '', "Generic VGA", { 8 => [[ 320, 200 ]] });

@@ -12,8 +12,9 @@ use common qw(:common);
 $resolution_wanted = "1024x768";
 @resolutions = qw(640x480 800x600 1024x768 1152x864 1280x1024 1600x1200);
 
-@accelservers = qw(S3 Mach32 Mach8 8514 P9000 AGX W32 Mach64 Rage128 I128 S3V 3DLabs);
-@allservers = (qw(Mono VGA16 SVGA), @accelservers);
+@svgaservers = qw(SVGA Rage128);
+@accelservers = qw(S3 Mach32 Mach8 8514 P9000 AGX W32 Mach64 I128 S3V 3DLabs);
+@allservers = (qw(Mono VGA16), @svgaservers, @accelservers);
 
 %videomemory = (
     __("256 kb") => 256, 
@@ -544,7 +545,7 @@ Section "Device"
 
 EndSection
 
-# Device configured by Xconfigurator:
+# Device auto configured:
 ';
 
 $screensection_text1 = '
