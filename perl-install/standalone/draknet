@@ -472,14 +472,15 @@ Configure them first by clicking on 'Configure'")),1,1,0);
 	    $infos[2*$i+1]->set_text(${$_->[1]});
 	    $i++;
 	}
-#	$vbox_local->pack_start(gtksignal_connect(my $b = new Gtk::Button(ethisup($_) ? _("stop it") : _("start it")), clicked => 
-#	  sub {system("/sbin/if".(ethisup($_)?"up":"down")."eth$_");$_->[0]->set(ethisup($_)?_("stop it"):_("start it"));}),0,0,0);
+	my $c = $_;
+	$vbox_local->pack_start(gtksignal_connect(my $b = new Gtk::Button(ethisup($c) ? _("stop it") : _("start it")), clicked => 
+	  sub {system("/sbin/if".(ethisup($c)?"down":"up")." eth$c");gtkbuttonset($_[0], ethisup($c)?_("desactivate"):_("activate"));}),0,0,0);
 	#	$clist1->append($_+1, "eth$_", $intf->{"eth$_"}{IPADDR}, $intf->{"eth$_"}{BOOTPROTO}, $all_cards[$_]->[1]);
 	#	$clist1->set_selectable($_, 0);
 #	require Data::Dumper;
 #	print "------------\n" . Data::Dumper->Dump([$b],['b']) . "\n";
 	my $hbox_local = new Gtk::HBox(0,0);
-	my $pix = my_gtk::gtkpng("/usr/share/libDrakX/pixmaps/eth_card_mini.png");
+	my $pix = gtkpng("/usr/share/libDrakX/pixmaps/eth_card_mini.png");
 	$hbox_local->pack_start($pix,0,0,0);
 	$hbox_local->pack_start(new Gtk::Label("eth$_"),0,0,0);
 	$hbox_local->show_all;
