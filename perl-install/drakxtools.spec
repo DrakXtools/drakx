@@ -321,7 +321,7 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
-* Tue Mar 23 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10-26mdk
+* Wed Mar 24 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10-26mdk
 - diskdrake: tag removable medias as noauto in fstab (pixel)
   file (#9076)
 - drakboot: add nolapic support option (planel)
@@ -336,6 +336,7 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
     since they works now with 2.6.x kernels
   o do write drakconnect config file when there's only one configured
     interface (#8998)
+  o fix speedtouch support: use kernel mode on 2.6.x kernels
 - drakgw: fix drakgw removing MII_NOT_SUPPORTED parameter from ifcfg
 - drakTermServ: fix button layout
 - drakxtv:
