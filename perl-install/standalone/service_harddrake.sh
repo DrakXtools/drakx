@@ -36,8 +36,8 @@ case "$1" in
 	;;
  status)
 	   if [ -f $SUBSYS ]; then
-		   gprintf "Harddrake service was runned at boot time"
-	   else gprintf "Harddrake service was not runned at boot time"
+		   gprintf "Harddrake service was run at boot time"
+	   else gprintf "Harddrake service was not run at boot time"
 	   fi
 	;;
  reload)
