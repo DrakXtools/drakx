@@ -18,16 +18,16 @@ our %l = (
       if_(arch() =~ /^sparc/, qw(sunbmac sunhme sunqe)),
       if_(arch() !~ /alpha|sparc/,
         qw(3c501 3c503 3c505 3c507 3c509 3c515 3c990 3c990fx),
-        qw(82596 abyss ac3200 acenic aironet4500_card amd8111e at1700 atp),
+        qw(82596 ac3200 acenic aironet4500_card amd8111e at1700 atp),
         qw(b44 bcm4400 com20020-pci cs89x0 de2104x de600 de620),
         qw(defxx), # most unused
         qw(depca dgrs dmfe e100 e2100 eepro eepro100 eexpress epic100 eth16i),
-        qw(ewrk3 farsync fealnx hamachi hp hp-plus hp100 ibmtr),
+        qw(ewrk3 farsync fealnx hamachi hp hp-plus hp100),
         qw(iph5526), #- fibre channel
-        qw(lance lanstreamer natsemi ne ne2k-pci ni5010 ni52 ni65 nvnet),
-        qw(olympic pcnet32 plip prism2_plx rcpci),
+        qw(lance natsemi ne ne2k-pci ni5010 ni52 ni65 nvnet),
+        qw(pcnet32 plip prism2_plx rcpci),
         qw(sb1000 sdladrv sis900 skfp smc-ultra smc9194 starfire),
-        qw(tc35815 tlan tmspci tulip typhoon via-rhine),
+        qw(tc35815 tlan tulip typhoon via-rhine),
         qw(wd winbond-840 forcedeth),
       ),
       qw(3c59x 8139too 8139cp sundance), #rtl8139
@@ -65,6 +65,7 @@ our %l = (
     slmodem => [
       qw(slamr slusb snd-atiixp-modem snd-intel8x0m snd-via82xx-modem),
     ],
+    tokenring => [ qw(3c359 abyss ibmtr lanstreamer olympic proteon skisa smctr tms380tr tmspci) ],
   },
 
   ################################################################################
@@ -194,7 +195,7 @@ our %l = (
       qw(wacom evdev), qw(usblp printer), 'floppy',
 
       #- these need checking
-      qw(tmspci rrunner meye),
+      qw(rrunner meye),
     ],
     agpgart => [
       if_(arch() =~ /alpha/, qw(alpha-agp)),
