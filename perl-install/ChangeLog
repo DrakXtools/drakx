@@ -1,3 +1,361 @@
+2005/01/12  Pixel  <pixel at mandrakesoft.com>
+
+	* ugtk2.pm: return the child when MagicWindow is using the $::WizardWindow
+	(otherwise the user of the MagicWindow can destroy the WizardWindow)
+
+	* mygtk2.pm: return the child when MagicWindow is using the
+	$::WizardWindow
+	(otherwise the user of the MagicWindow can destroy the WizardWindow)
+	  - fix gtkadd()
+	  - fix displaying banner
+	  - no banner if no ::Wizard_title (as used to be)
+
+	* interactive/gtk.pm: rewrite wait_messageW using mygtk2
+
+	* bootloader.pm: write in lilo.conf the global root= (bugzilla #12312)
+
+	* mdk-stage1/init.c: fix buggy blino commit which caused install failures
+	to cause reboot without prompting
+
+	* install_any.pm: we don't need the clp read-write (if it is read-only it
+	allows remounting /mnt ro)
+
+	* fs/format.pm: remove debug code
+
+	* any.pm: add user specific shell support in create_user (Nicolas Planel)
+
+	* mdk-stage1/stage1.c, Makefile: use /etc/init instead of /sbin/init to
+	allow umounting clp in init
+
+2005/01/12  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* drakxtools.spec: 10.2-0.11mdk
+	one more change in 10.2-0.10mdk
+	10.2-0.10mdk
+
+	* standalone/harddrake2: display the menubar and the banner when embedded
+
+	* standalone/printerdrake: show banner when embedded
+
+2005/01/11  Nicolas Planel  <nplanel at mandrakesoft.com>
+
+	* any.pm: add user specific shell support in create_user
+
+2005/01/11  Pixel  <pixel at mandrakesoft.com>
+
+	* any.pm: do not log the encrypted password
+	show advanced languages by default
+
+	* install_steps_gtk.pm: we always have force_focus when we have
+	!$::isStandalone,
+	so do it that way and get rid of $ugtk2::force_focus
+	remove $ugtk2::force_center_at_pos, inline it instead
+	revert bad commit
+	install_gtk::create_help_window is unused, removing it
+
+	* ugtk2.pm: create "MagicWindow" in mygtk2 out of ugtk2::new()
+	simplify away thing already done in %window_options
+	move ugtk2::create_window() to mygtk2::_create_Window()
+	change set_main_window_size() prototype
+	  - create mygtk2::main()
+	  - get rid of setting {destroyed}, use a local variable instead
+	simplify (no need to protect against double destroy anymore)
+	{window}->show is already done in ->new
+	better comment
+	the ugly gtkset_mousecursor_wait() done on destroy is not called often
+	nowadays, and not very useful either since the wait cursor is only on
+	the root window, and since install use isWizard, the root window is not
+	often seen. We should at least also set the wait cursor on the
+	$::WizardTable
+	fix typo
+	fix typo
+	  - $current_window can be local to ugtk2, so do it that way
+	  - create force_keyboard_focus()
+	better comments
+	we always have force_focus when we have !$::isStandalone,
+	so do it that way and get rid of $ugtk2::force_focus
+	remove $ugtk2::force_center_at_pos, inline it instead
+	no need to set widget name to Title (what was it used for?)
+	more consistent naming
+	help initial positioning of window during install (since position_policy
+	center-on-parent only works with a window manager, we can't get rid of
+	force_center_at_pos)
+	add comments
+
+	* mygtk2.pm: create "MagicWindow" in mygtk2 out of ugtk2::new()
+	mygtk2::_gtk() takes an hash ref to allow checking the resulting hash
+	move ugtk2::create_window() to mygtk2::_create_Window()
+	  - create mygtk2::main()
+	  - get rid of setting {destroyed}, use a local variable instead
+
+	* install_gtk.pm: cleanup
+	help size doesn't need anything special anymore
+	don't fake a ugtk2, use pure mygtk2 instead
+	don't fake a ugtk2, use pure mygtk2 instead
+	no need to set title to 'skip' (it was used by aewm-drakx)
+	install_gtk::create_help_window is unused, removing it
+
+	* interactive/gtk.pm: create "MagicWindow" in mygtk2 out of ugtk2::new()
+	change set_main_window_size() prototype
+
+	* Xconfig/test.pm: we always have force_focus when we have
+	!$::isStandalone,
+	so do it that way and get rid of $ugtk2::force_focus
+
+	* run_program.pm: do not log the encrypted password
+
+2005/01/11  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* detect_devices.pm (dmidecode) do not rerun dmidecode on machines that do
+	not support it
+
+	* share/po/br.po: typo fix
+
+	* share/rpmsrate: do not install ivtv packages since it's already in the
+	kernel (it
+	wasn't in our pcitable due to the lack of MODULE_DEVICE_TABLE)
+	ivtv & zaptel dkms packages were renamed
+
+2005/01/10  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/gl.po: updated Galician file
+
+2005/01/10  Pixel  <pixel at mandrakesoft.com>
+
+	* ugtk2.pm: move some now common things in _create_window()
+	more installing special install shortcuts in _create_window()
+	(there is no reason for not having the shortcuts when the window has
+	pop_it)
+	  - XFdrake test is not standalone, it is the non install nor standalone
+	state
+	(used when there is no window manager)
+	  - get rid of now unused $ugtk2::force_center
+	use {icon_no_error} instead of {icon}
+	rewrite
+	rewrite
+	the test is not useful, we can't get to this code when $::isEmbedded is
+	set
+	emove unused feature
+	$ugtk2::pop_it is unused
+
+	* Makefile: dont_run_directly_stage2 and trace_stage2 needs the live, not
+	the clp
+	  - add vera fonts (normal and bold)
+	  - generate fonts.dir and fonts.cache-1
+	  - take cursor.pcf.gz from system
+
+	* share/list: add /etc/fonts/fonts.conf
+
+	* share/fonts.tar.bz2: 
+	  - remove cursor.pcf.gz (now taken from system)
+	  - generate fonts.dir and fonts.cache-1
+
+	* lang.pm: 
+	  - add vera fonts (normal and bold)
+	  - generate fonts.dir and fonts.cache-1
+	  - take cursor.pcf.gz from system
+
+	* rescue/dirs: at least be able to mount /dev/pts if needed
+
+	* interactive/gtk.pm: simplify using {pop_it}
+
+	* rescue/list: rsync is useful too
+	add what Lord Packdrakeng.pm request
+	minimal ssh tools (alas it doesn't on console 1 because /dev/tty is
+	allocated properly, it needs fixing)
+
+	* Xconfig/test.pm: 
+	  - XFdrake test is not standalone, it is the non install nor standalone
+	state
+	(used when there is no window manager)
+	  - get rid of now unused $ugtk2::force_center
+
+	* share/rpmsrate: simplify
+
+	* rescue/tree/etc/inittab: use "mingetty --autologin" instead of calling
+	directly "bash --login", that
+	way the shell has a valid controlling terminal (CTTY, accessed via
+	/dev/tty).
+	This is needed for ssh to work
+
+	* rescue/tree/etc/rc.sysinit: have /dev rw (eg: for /dev/initctl)
+
+	* mygtk2.pm: create {icon_no_error}
+
+2005/01/10  Rafael Garcia-Suarez <rgarciasuarez at mandrakesoft.com>
+
+	* do_pkgs.pm: Add --expect-install to the options passed to urpmi to
+	install packages, so
+	do_pkgs::install() can return 0 or true depending on whether some
+	packages were
+	actually installed.
+
+	* standalone/drakbackup: Don't use deprecated urpmi --X option
+
+	* standalone/drakTermServ: Silent install of terminal-server if needed
+	(--X is deprecated)
+
+	* drakxtools.spec: Require urpmi 4.6.11 (for --expect-install)
+
+2005/01/10  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* share/rpmsrate: install zaptel packages if needed
+	install ivtv packages if needed
+
+2005/01/09  José JORGE <jjorge at free.fr>
+
+	* share/po/pt.po: melo
+
+2005/01/09  Tibor Pittich  <Tibor.Pittich at phuture.sk>
+
+	* share/po/sk.po: updated slovak translation
+
+2005/01/08  Funda Wang <fundawang at linux.net.cn>
+
+	* share/po/zh_CN.po: Updated Simplified Chinese translation
+
+	* lang.pm: install scim-chewing if zh is selected by localedrake. Fix font
+	setting for zh_CN.
+
+2005/01/08  huftis
+
+	* share/po/nn.po: Updated translation.
+
+2005/01/07  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/ja.po: updated po file
+
+	* share/rpmsrate: new fonts-ttf-chinese package
+
+	* lang.pm: changed chinese font names
+
+2005/01/07  Pixel  <pixel at mandrakesoft.com>
+
+	* standalone/drakclock: simplify
+
+	* interactive/gtk.pm: $w->{isEmbedded} is unused
+	$w->{isWizard} is unused
+
+	* ugtk2.pm: $w->{isEmbedded} is unused
+	$w->{isWizard} is unused
+	$o->{force_center} is unused
+	no icon during install
+	simplify using mygtk2
+
+	* mygtk2.pm: add "Plug"
+
+2005/01/07  Rafael Garcia-Suarez <rgarciasuarez at mandrakesoft.com>
+
+	* keyboard.pm: Make %lang2keyboard a global variable, so it can be
+	overriden in a
+	patch file
+
+2005/01/06  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/cy.po, share/po/et.po: updated Welsh and Estonian files
+
+2005/01/06  Pixel  <pixel at mandrakesoft.com>
+
+	* network/shorewall.pm: cleanup unused variables
+
+	* mdk-stage1/doc/UPDATEMODULES: fix
+
+	* standalone/draksec, harddrake/sound.pm: remove unused variable
+
+	* interactive/gtk.pm: on a label, we must use ->get_text, not ->get
+
+	* install_gtk.pm: fix typo (thanks to perl_checker)
+	  - move some install specific code out of ugtk2.pm into install_gtk.pm
+	  - move some install specific code out of common.pm into install_any.pm
+
+	* ugtk2.pm: simplify
+	  - move some install specific code out of ugtk2.pm into install_gtk.pm
+	  - move some install specific code out of common.pm into install_any.pm
+	  - change _create_window() prototype to be more "mygtk2" like
+	  - use more mygtk2 properties
+	  - create and use wm_icon() (until all this crap is cleaned)
+	(drop $o->{wm_icon} which is unused)
+
+	* install2.pm, common.pm, install_any.pm: 
+	  - move some install specific code out of ugtk2.pm into install_gtk.pm
+	  - move some install specific code out of common.pm into install_any.pm
+
+	* mygtk2.pm: add {icon} for Window
+	merge Window and Dialog creation
+	allow setting padding for pack_start, but only globally (it works like
+	spacing, but also include spacing at beginning, and at end)
+	add {position_policy} for Window
+
+	* network/tools.pm: remove unused variables
+
+	* fs.pm, install_steps.pm: fs::formatMount_all() parameter wait_message is
+	no more optional (though you can give undef)
+
+	* loopback.pm, diskdrake/interactive.pm, install_steps_interactive.pm,
+	raid.pm, fs/format.pm: 
+	  - fs::format::part_raw() now takes $wait_message to allow displaying
+	the progress of format
+	  - create fs::format::wait_message() which creates a $wait_message
+	valid to give to fs::format::part
+	  - fs::format::mke2fs() format while parsing the output to display the
+	progress
+
+2005/01/06  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* share/po/br.po: update
+	update
+
+	* lang.pm: update UIM config for uim-0.4.5 (UTUMI Hirosi)
+
+	* drakxtools.spec: 10.2-0.9mdk
+
+2005/01/05  Keld Jørn Simonsen  <keld at dkuug.dk>
+
+	* share/po/da.po: updates
+	soft/urpmi/po/da.po soft/wizard_perl/po/da.po
+	gi/perl-install/share/po/da.po
+
+2005/01/05  Pixel  <pixel at mandrakesoft.com>
+
+	* install_steps_interactive.pm: fix selecting "other" keyboard when @best
+	<= 1
+	fix selecting "other" keyboard when @best <= 1
+	fix selecting "other" keyboard when @best <= 1
+
+	* fs.pm: part2wild_device_name('', $part) is better than
+	devices::make($part->{device}) (esp. for nfs "devices")
+	handle spaces in username
+
+	* fs/mount_options.pm: don't set fs_type to ext2:vfat for ext3 or reiserfs
+	/home coming from usb key (bugzilla #9827)
+
+	* network/smb.pm: handle spaces in username
+
+2005/01/05  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* install_any.pm (migrate_device_names) fix message
+
+	* share/rpmsrate: install echomixer if needed
+	switch default IM to scim-chewing for zh_TW
+
+	* harddrake/sound.pm: add a couple of new ALSA drivers (from CVS)
+
+	* drakxtools.spec: 10.2-0.8mdk
+
+2005/01/04  Funda Wang <fundawang at linux.net.cn>
+
+	* lang.pm: backport s/jp/ja/ fix from HEAD
+
+2005/01/04  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/hr.po: updated Croatian file
+
+	* share/po/cy.po: updated Welsh file
+
+2005/01/04  Pixel  <pixel at mandrakesoft.com>
+
+	* rescue/list: ld-linux.so.2 is also needed on the rescue :)
+
 2005/01/04  Pablo Saratxaga  <pablo at mandrakesoft.com>
 
 	* share/po/et.po: updated Estonian file
@@ -43145,7 +43503,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.997 2005/01/03 15:36:30 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.998 2005/01/04 20:48:58 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
