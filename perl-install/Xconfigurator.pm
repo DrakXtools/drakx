@@ -1154,8 +1154,10 @@ EndSection
 Section "Module"
 
 # This loads the DBE extension module.
-
     Load	"dbe"
+
+# This loads the Video for Linux module.
+    Load        "v4l"
 );
     if ($o->{card}{DRI_glx}) {
 	print G qq(
