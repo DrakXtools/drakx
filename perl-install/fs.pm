@@ -167,7 +167,7 @@ sub subpart_from_wild_device_name {
 	    }
 	    return \%part;
 	} elsif ($dev =~ m!^/! && -f "$::prefix$dev") {
-	    #- loopback file
+	    #- loopback file or directory to bind
 	} else {
 	    log::l("part_from_wild_device_name: unknown device $dev");
 	}
@@ -307,13 +307,32 @@ sub prepare_write_fstab {
 		$fs_type = 'auto' if $fs_type =~ /:/;
 	    }
 
-	    [ $mntpoint, $_->{comment} . join(' ', $dev, $mntpoint, $fs_type, $options || 'defaults', $freq, $passno) . "\n" ];
+	    my $file_dep = $options =~ /\b(loop|bind)\b/ ? $dev : '';
+
+	    [ $file_dep, $mntpoint, $_->{comment} . join(' ', $dev, $mntpoint, $fs_type, $options || 'defaults', $freq, $passno) . "\n" ];
 	} else {
 	    ();
 	}
     } grep { $_->{device} && ($_->{mntpoint} || $_->{real_mntpoint}) && $_->{fs_type} && ($_->{isFormatted} || !$_->{notFormatted}) } @$fstab;
 
-    join('', map { $_->[1] } sort { $a->[0] cmp $b->[0] } @l), \@smb_credentials;
+    sub sort_it {
+	my (@l) = @_;
+
+	if (my $file_based = find { $_->[0] } @l) {
+	    my ($before, $other) = partition { $file_based->[0] =~ /^\Q$_->[1]/ } @l;
+	    $file_based->[0] = ''; #- all dependencies are now in before
+	    if (@$other && @$before) {
+		sort_it(@$before), sort_it(@$other);
+	    } else {
+		sort_it(@l);
+	    }
+	} else {
+	    sort { $a->[1] cmp $b->[1] } @l;
+	}	
+    }
+    @l = sort_it(@l);
+
+    join('', map { $_->[2] } @l), \@smb_credentials;
 }
 
 sub fstab_to_string {
