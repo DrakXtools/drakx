@@ -47,7 +47,7 @@ $install = $ {{
 mkdir "images";
 chomp($main = `cat all.kernels/.main`);
 
-if ($img =~ /blank|other|pcmcia/) {
+if ($img =~ /blank|other/) {
     @kernels = $main;
 } else {
     @kernels = map { m|all.kernels/(.*)| } glob('all.kernels/*');
