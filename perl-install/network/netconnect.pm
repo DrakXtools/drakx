@@ -903,8 +903,9 @@ ap, channel, commit, enc, power, retry, sens, txpower (nick is already set as th
 
 See iwpconfig(8) man page for further information."),
                              },
-                         #-PO: split the "xyz command extra argument" translated string into two lines if it's bigger than the english one
-                             { label => N("Iwspy command extra arguments"), val => \$ethntf->{WIRELESS_IWSPY}, advanced => 1,
+                             { label =>
+                               #-PO: split the "xyz command extra argument" translated string into two lines if it's bigger than the english one
+                               N("Iwspy command extra arguments"), val => \$ethntf->{WIRELESS_IWSPY}, advanced => 1,
                                help => N("Iwspy is used to set a list of addresses in a wireless network
 interface and to read back quality of link information for each of those.
 
