@@ -6,7 +6,7 @@ package partition_table; # $Id$
 
 @ISA = qw(Exporter);
 %EXPORT_TAGS = (
-    types => [ qw(type2name type2fs name2type fs2type isExtended isExt2 isReiserfs isXfs isJfs isTrueFS isSwap isDos isWin isFat isSunOS isOtherAvailableFS isPrimary isNfs isSupermount isLVM isRAID isMDRAID isLVMBased isHFS isNT isMountableRW isNonMountable isApplePartMap isLoopback isApple isAppleBootstrap) ],
+    types => [ qw(type2name type2fs name2type fs2type isExtended isExt2 isFs isTrueFS isSwap isDos isWin isFat isSunOS isOtherAvailableFS isPrimary isNfs isSupermount isLVM isRAID isMDRAID isLVMBased isNT isMountableRW isNonMountable isApplePartMap isLoopback isApple isAppleBootstrap) ],
 );
 @EXPORT_OK = map { @$_ } values %EXPORT_TAGS;
 
@@ -223,24 +223,21 @@ sub isMDRAID { $_[0]{device} =~ /^md/ }
 sub isLVMBased { $_[0]{LVMname} }
 sub isSwap($) { $type2fs{$_[0]{type}} eq 'swap' }
 sub isExt2($) { $type2fs{$_[0]{type}} eq 'ext2' }
-sub isReiserfs($) { $type2fs{$_[0]{type}} eq 'reiserfs' }
-sub isXfs($) { $type2fs{$_[0]{type}} eq 'xfs' }
-sub isJfs($) { $type2fs{$_[0]{type}} eq 'jfs' }
 sub isDos($) { arch() !~ /^sparc/ && $ {{ 1=>1, 4=>1, 6=>1 }}{$_[0]{type}} }
 sub isWin($) { $ {{ 0xb=>1, 0xc=>1, 0xe=>1, 0x1b=>1, 0x1c=>1, 0x1e=>1 }}{$_[0]{type}} }
 sub isFat($) { isDos($_[0]) || isWin($_[0]) }
 sub isSunOS($) { arch() =~ /sparc/ && $ {{ 0x1=>1, 0x2=>1, 0x4=>1, 0x6=>1, 0x7=>1, 0x8=>1 }}{$_[0]{type}} }
 sub isSolaris($) { 0; } #- hack to search for getting the difference ? TODO
-sub isOtherAvailableFS($) { isFat($_[0]) || isSunOS($_[0]) || isHFS($_[0]) } #- other OS that linux can access its filesystem
+sub isOtherAvailableFS($) { isFat($_[0]) || isSunOS($_[0]) || isThisFs('hfs', $_[0]) } #- other OS that linux can access its filesystem
 sub isNfs($) { $_[0]{type} eq 'nfs' } #- small hack
 sub isNT($) { arch() !~ /^sparc/ && $_[0]{type} == 0x7 }
 sub isSupermount($) { $_[0]{type} eq 'supermount' }
-sub isHFS($) { $type2fs{$_[0]{type}} eq 'hfs' }
 sub isApple($) { $type2fs{$_[0]{type}} eq 'apple' && defined $_[0]{isDriver} }
 sub isAppleBootstrap($) { $type2fs{$_[0]{type}} eq 'apple' && defined $_[0]{isBoot} }
 sub isHiddenMacPart { defined $_[0]{isMap} }
 sub isLoopback { defined $_[0]{loopback_file} }
-sub isTrueFS { isExt2($_[0]) || isReiserfs($_[0]) || isXfs($_[0]) || isJfs($_[0]) }
+sub isThisFs { $type2fs{$_[1]{type}} eq $_[0] }
+sub isTrueFS { isExt2($_[0]) || isThisFs("reiserfs", $_[0]) || isThisFs("xfs", $_[0]) || isThisFs("jfs", $_[0]) }
 sub isMountableRW { isTrueFS($_[0]) || isOtherAvailableFS($_[0]) }
 sub isNonMountable { isRAID($_[0]) || isLVM($_[0]) }
 

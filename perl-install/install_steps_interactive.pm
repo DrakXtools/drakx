@@ -410,7 +410,7 @@ sub choosePartitionsToFormat {
 	    ({
 	      text => $name2label->($e), type => 'bool',
 	      val => \$e->{toFormatTmp}
-	     }, if_(!isLoopback($_) && !isReiserfs($_), {
+	     }, if_(!isLoopback($_) && !isThisFs("reiserfs", $_), {
 	      text => $name2label->($e), type => 'bool', advanced => 1, 
 	      disabled => sub { !$e->{toFormatTmp} },
 	      val => \$e->{toFormatCheck}

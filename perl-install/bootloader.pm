@@ -767,7 +767,7 @@ sub install_grub {
 	output "$prefix/boot/grub/device.map", 
 	  join '', map { "($_) /dev/$bios2dev{$_}\n" } sort keys %bios2dev;
     }
-    my $bootIsReiser = isReiserfs(fsedit::get_root($fstab, 'boot'));
+    my $bootIsReiser = isThisFs("reiserfs", fsedit::get_root($fstab, 'boot'));
     my $file2grub = sub {
 	my ($part, $file) = fsedit::file2part($prefix, $fstab, $_[0]);
 	dev2grub($part->{device}, \%dev2bios) . $file;

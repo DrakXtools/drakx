@@ -333,9 +333,9 @@ sub setPackages {
 	push @{$o->{default_packages}}, "raidtools" if $o->{raid} && !is_empty_array_ref($o->{raid}{raid});
 	push @{$o->{default_packages}}, "lvm" if -e '/etc/lvmtab';
 	push @{$o->{default_packages}}, "usbd" if modules::get_alias("usb-interface");
-	push @{$o->{default_packages}}, "reiserfsprogs" if grep { isReiserfs($_) } @{$o->{fstab}};
-	push @{$o->{default_packages}}, "xfsprogs" if grep { isXfs($_) } @{$o->{fstab}};
-	push @{$o->{default_packages}}, "jfsprogs" if grep { isJfs($_) } @{$o->{fstab}};
+	push @{$o->{default_packages}}, "reiserfsprogs" if grep { isThisFs("reiserfs", $_) } @{$o->{fstab}};
+	push @{$o->{default_packages}}, "xfsprogs" if grep { isThisFs("xfs", $_) } @{$o->{fstab}};
+	push @{$o->{default_packages}}, "jfsprogs" if grep { isThisFs("jfs", $_) } @{$o->{fstab}};
 	push @{$o->{default_packages}}, "alsa", "alsa-utils" if modules::get_alias("sound-slot-0") =~ /^snd-card-/;
 	push @{$o->{default_packages}}, "imwheel" if $o->{mouse}{nbuttons} > 3;
 

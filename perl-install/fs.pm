@@ -131,17 +131,17 @@ sub real_format_part {
     if (isExt2($part)) {
 	push @options, "-F" if isLoopback($part);
 	format_ext2($part->{device}, @options);
-    } elsif (isReiserfs($part)) {
+    } elsif (isThisFs("reiserfs", $part)) {
         format_reiserfs($part->{device}, @options, if_(c::kernel_version() =~ /^\Q2.2/, "-v", "1"));
-    } elsif (isXfs($part)) {
+    } elsif (isThisFs("xfs", $part)) {
         format_xfs($part->{device}, @options);
-    } elsif (isJfs($part)) {
+    } elsif (isThisFs("jfs", $part)) {
         format_jfs($part->{device}, @options);
     } elsif (isDos($part)) {
         format_dos($part->{device}, @options);
     } elsif (isWin($part)) {
         format_dos($part->{device}, @options, '-F', 32);
-    } elsif (isHFS($part)) {
+    } elsif (isThisFs('hfs', $part)) {
         format_hfs($part->{device}, @options, '-l', "Untitled");
     } elsif (isAppleBootstrap($part)) {
         format_hfs($part->{device}, @options, '-l', "bootstrap");
@@ -418,7 +418,7 @@ sub write_fstab($;$$@) {
 	isNfs($_) and $dir = '', $options = $_->{options} || $format_options->('ro,nosuid,rsize=8192,wsize=8192', 'iocharset');
 	isFat($_) and $options = $_->{options} || $format_options->("user,exec,umask=0", 'codepage', 'iocharset');
 	
-	#isReiserfs($_) && $_ == fsedit::get_root($fstab, 'boot') and add_options($options, "notail");
+	#isThisFs("reiserfs", $_) && $_ == fsedit::get_root($fstab, 'boot') and add_options($options, "notail");
 	
 	my $dev = isLoopback($_) ?
 	  ($_->{mntpoint} eq '/' ? "/initrd/loopfs$_->{loopback_file}" : loopback::file($_)) :
