@@ -19,7 +19,7 @@ sub new() {
     Newt::Cls;
     Newt::SetSuspendCallback;
     ($width, $height) = Newt::GetScreenSize;
-    open STDERR,">/dev/null" if $::isStandalone;
+    open STDERR,">/dev/null" if $::isStandalone && !$::testing;
     bless {}, $_[0];
 }
 
