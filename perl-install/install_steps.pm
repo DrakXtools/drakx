@@ -251,6 +251,7 @@ sub afterInstallPackages($) {
 
     my $msec = "$o->{prefix}/etc/security/msec";
     substInFile { s/^audio\n//; $_ .= "audio\n" if eof } "$msec/group.conf" if -d $msec;
+    substInFile { s/^xgrp\n//; $_ .= "xgrp\n" if eof } "$msec/group.conf" if -d $msec;
 
     my $p = $o->{packages}{urpmi};
     if ($p && $p->{selected}) {

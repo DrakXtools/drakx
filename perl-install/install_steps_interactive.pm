@@ -733,14 +733,14 @@ sub miscellaneousNetwork {
 sub miscellaneous {
     my ($o, $clicked) = @_;
     my %l = (
-	0 => _("Windows(TM)"),
+	#- 0 => _("Windows(TM)"), #- sorry :-)
 	1 => _("Poor"),
 	2 => _("Low"),
 	3 => _("Medium"),
 	4 => _("High"),
 	5 => _("Paranoid"),
     );
-    delete @l{0,1,5} unless $::expert;
+    delete @l{1,5} unless $::expert;
 
     install_steps::miscellaneous($o);
     my $u = $o->{miscellaneous} ||= {};

@@ -310,7 +310,7 @@ sub partitionDisks {
 
     cat_("/proc/mounts") =~ m|(\S+)\s+/tmp/rhimage nfs| &&
       !grep { $_->{mntpoint} eq "/mnt/nfs" } @{$o->{manualFstab} || []} and
-	push @{$o->{manualFstab}}, { type => "nfs", mntpoint => "/mnt/nfs", device => $1, options => "noauto,ro,rsize=8192,wsize=8192" };
+	push @{$o->{manualFstab}}, { type => "nfs", mntpoint => "/mnt/nfs", device => $1, options => "noauto,ro,nosuid,rsize=8192,wsize=8192" };
 }
 
 sub formatPartitions {
@@ -336,10 +336,12 @@ sub formatPartitions {
 
 #------------------------------------------------------------------------------
 sub choosePackages {
+    my ($clicked) = $_[0];
+
     require pkgs;
     $o->setPackages if $_[1] == 1;
     $o->selectPackagesToUpgrade($o) if $o->{isUpgrade} && $_[1] == 1;
-    unless ($o->{isUpgrade}) {
+    if ($clicked || !$o->{isUpgrade}) {
 	$o->choosePackages($o->{packages}, $o->{compss}, 
 			   $o->{compssUsers}, $o->{compssUsersSorted}, $_[1] == 1);
 	pkgs::unselect($o->{packages}, $o->{packages}{kdesu}) if $o->{packages}{kdesu} && $o->{security} > 3;

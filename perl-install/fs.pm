@@ -235,7 +235,7 @@ sub write_fstab($;$$) {
 	  $options = $_->{options} || $options;
 
 	  isExt2($_) and ($freq, $passno) = (1, ($_->{mntpoint} eq '/') ? 1 : 2);
-	  isNfs($_) and $dir = '', $options ||= 'ro,rsize=8192,wsize=8192';
+	  isNfs($_) and $dir = '', $options ||= 'ro,nosuid,rsize=8192,wsize=8192';
 
 	  #- keep in mind the new line for fstab.
 	  @new{($_->{mntpoint}, "$dir$_->{device}")} = undef;
