@@ -584,7 +584,6 @@ sub save {
 
     foreach (keys %$p) {
 	save_notebook($netc, $p->{$_}{intf}, $p->{$_}{gui}) or return;
-     print "will run apply()? ", $p->{$_}{intf}{save}, "\n";
 	$p->{$_}{intf}{save} ? $p->{$_}{intf}{save}->() : apply($netc, $p->{$_}{intf});
     }
 
@@ -704,7 +703,6 @@ sub update_list() {
 
 sub apply {
     my ($netc, $intf) = @_;
-    print "GOTCHA\n";
     my $dyn = $intf->{BOOTPROTO} ne 'static';
     my $lintf = $intf;
     $dyn and $lintf->{$_} = undef foreach qw(NETMASK NETWORK IPADDR);
