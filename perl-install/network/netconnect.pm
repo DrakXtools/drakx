@@ -1203,7 +1203,7 @@ It is not necessary on most networks."),
                         my ($res) = @_;
                         $netc->{at_boot} = $res;
                         $res = bool2yesno($res);
-                        $ethntf->{ONBOOT} = $res if ($netcnx->{type} eq 'adsl' && member($adsl_type, qw(manual dhcp)));
+                        $ethntf->{ONBOOT} = $res if $netcnx->{type} eq 'adsl' && member($adsl_type, qw(manual dhcp));
                         my $ifcfg_file = "$::prefix/etc/sysconfig/network-scripts/ifcfg-$netc->{NET_INTERFACE}";
                         -f $ifcfg_file and substInFile { s/^ONBOOT.*\n//; $_ .= qq(ONBOOT=$res\n) if eof } $ifcfg_file;
                         return $after_start_on_boot_step->();
