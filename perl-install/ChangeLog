@@ -1,3 +1,90 @@
+2005/01/04  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/et.po: updated Estonian file
+	updated pot file
+
+	* share/po/bn.po, share/po/ms.po, share/po/sk.po, share/po/gl.po,
+	share/po/pt_BR.po, share/po/th.po, share/po/ja.po, share/po/hr.po,
+	share/po/be.po, share/po/ko.po, share/po/DrakX.pot, share/po/sv.po,
+	share/po/sr.po, share/po/pl.po, share/po/fi.po, share/po/he.po,
+	share/po/ca.po, share/po/da.po, share/po/ar.po, share/po/ltg.po,
+	share/po/nb.po, share/po/ky.po, share/po/uz.po, share/po/ro.po,
+	share/po/zh_TW.po, share/po/zh_CN.po, share/po/sr@Latn.po,
+	share/po/sq.po, share/po/it.po, share/po/eu.po, share/po/es.po,
+	share/po/lv.po, share/po/hu.po, share/po/fa.po, share/po/id.po,
+	share/po/ru.po, share/po/br.po, share/po/sl.po, share/po/nn.po,
+	share/po/tr.po, share/po/mt.po, share/po/ga.po, share/po/mn.po,
+	share/po/uk.po, share/po/am.po, share/po/lt.po, share/po/cy.po,
+	share/po/tg.po, share/po/bs.po, share/po/fur.po, share/po/mk.po,
+	share/po/wa.po, share/po/is.po, share/po/hi.po, share/po/af.po,
+	share/po/az.po, share/po/pt.po, share/po/fr.po, share/po/ta.po,
+	share/po/vi.po, share/po/nl.po, share/po/de.po, share/po/tl.po,
+	share/po/eo.po, share/po/bg.po, share/po/cs.po, share/po/el.po,
+	share/po/uz@Latn.po: updated pot file
+
+2005/01/04  Pixel  <pixel at mandrakesoft.com>
+
+	* rescue/list: ld-linux.so.2 is also needed on the rescue :)
+
+	* mdk-stage1/init.c: ensure /tmp/syslog in stage2 contains the full log
+
+	* mdk-stage1/stage1.c: ensure /tmp/syslog in stage2 contains the full log
+	(currently stage2 init was writing in a file shadowed by stage2 copying
+	the /stage1/tmp/syslog over its file)
+
+2005/01/04  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* network/adsl_consts.pm: update ADSL ISPs list
+
+	* share/rpmsrate: install hotkeys in order to have working special keys on
+	internet/multimedia laptop keyboards
+
+2005/01/03  Pixel  <pixel at mandrakesoft.com>
+
+	* authentication.pm, steps.pm: "Administrator (root)" is more
+	user-friendly than "root"
+
+	* fs/mount_options.pm: remove codepage= option for fs types which don't
+	handle it (eg: ntfs)
+
+	* fs/type.pm: create can_be_one_of_those_fs_types()
+
+	* network/netconnect.pm, network/network.pm, network/ethernet.pm,
+	install_steps_interactive.pm, harddrake/data.pm: move and rename
+	network::ethernet::get_eth_categories() into
+	list_modules::ethernet_categories()
+	(it's closer to the definition of the categories)
+
+	* modules/interactive.pm: a somewhat nicer message when loading a module
+
+	* install_steps.pm: default security level is now 3
+
+2005/01/03  Rafael Garcia-Suarez <rgarciasuarez at mandrakesoft.com>
+
+	* do_pkgs.pm: '--best-output' is no longer an urpmi option (and it's not
+	necessary
+	anyway since --auto is specified)
+
+	* install_steps.pm: Make do_pkgs::install() return the number of packages
+	actually installed
+	(used by printerdrake, apparently)
+
+2005/01/03  Stew Benedict  <sbenedict at mandrakesoft.com>
+
+	* standalone/drakbackup: Bugzilla 12861 - Directories with spaces
+	Mandrakeclub - Perms on tarballs too relaxed
+	perl_checker compliance
+	Bugzilla 12861 - Directories with spaces
+	Mandrakeclub - Perms too relaxed on tarballs
+	perl_checker compliance
+	Bugzilla 12861 - Directories with spaces
+	Mandrakeclub - Perms too relaxed on tarballs
+	perl_checker compliance
+
+2005/01/03  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* install_any.pm (migrate_device_names) try to be smarter with translators
+
 2005/01/03  Pablo Saratxaga  <pablo at mandrakesoft.com>
 
 	* share/po/bn.po, share/po/ms.po, share/po/sk.po, share/po/gl.po,
@@ -43058,7 +43145,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.996 2005/01/03 10:21:11 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.997 2005/01/03 15:36:30 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
