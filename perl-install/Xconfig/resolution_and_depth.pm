@@ -302,7 +302,7 @@ sub choose_gtk {
 	    $set_chosen_Depth->(max(@{$x_res2depth{$chosen_x_res}}));
 	}
     });
-    $set_chosen_x_res->($chosen_x_res);
+    $set_chosen_x_res->($chosen_x_res, $chosen_y_res);
     $set_chosen_Depth->($chosen_Depth);
     $W->{ok}->grab_focus;
 
