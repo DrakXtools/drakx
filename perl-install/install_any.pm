@@ -838,7 +838,7 @@ sub generate_automatic_stage1_params {
     my @ks = "method:$o->{method}";
 
     if ($o->{method} =~ /http/) {
-	"$ENV{URLPREFIX}" =~ m|http://(.*)/(.*)| or die;
+	"$ENV{URLPREFIX}" =~ m|http://([^/:]+)/(.*)| or die;
 	push @ks, "server:$1", "directory:$2";
     } elsif ($o->{method} =~ /ftp/) {
 	push @ks,  "server:$ENV{HOST}", "directory:$ENV{PREFIX}", "user:$ENV{LOGIN}", "pass:$ENV{PASSWORD}";
