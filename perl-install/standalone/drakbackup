@@ -444,8 +444,10 @@ sub advanced {
 				  0, _("Please check all user that you want to include inb your backup."),
 				  0, new Gtk::HSeparator,
 				  1, createScrolledWindow( gtkpack(new Gtk::VBox(0,0),
-								   map { my $b = new Gtk::CheckButton("$_"); 
-									 $check_what_user{$_} = $b;
+								   map { my $name = $_;
+									 my $b = new Gtk::CheckButton($name); 
+									 $check_what_user{$_} = [ $b, 0 ];
+									 $b->signal_connect(toggled => sub { invbool \$check_what_user{$name}[1] });
 									 $b } (@all_user_list) 
 								   ),
 							   ),
@@ -614,10 +616,10 @@ sub advanced {
 #    print $check_what_user{'seb'}->active."\n";
 
    foreach (@all_user_list) {
-	gtksignal_connect(gtkset_active($check_what_user{$_},$check_what_user{$_}), toggled => sub { $check_what_user{$_} = $check_what_user{$_} ? 0 : 1; });
-#	$check_what_user{$_}->active and push @user_list, $_;
-#	print $_ . "\n";# foreach @checked_user_list;
+       $check_what_user{$_}[1] = 1;
+       $check_what_user{$_}[0]->set_active(1);
    }
+
 
     $combo_where_net_proto->entry->signal_connect( 'changed', sub { $net_proto = $combo_where_net_proto->entry->get_text()});
 
