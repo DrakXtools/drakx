@@ -420,7 +420,7 @@ sub Create {
          { label => _("Start sector: "), val => \$part->{start}, min => $def_start, max => ($max - min_partition_size($hd)), type => 'range' },
            ),
          { label => _("Size in MB: "), val => \$mb_size, min => min_partition_size($hd) >> 11, max => $def_size >> 11, type => 'range' },
-         { label => _("Filesystem type: "), val => \$type, list => [ partition_table::important_types() ], not_edit => !$::expert, sort => 0 },
+         { label => _("Filesystem type: "), val => \$type, list => [ partition_table::important_types() ], sort => 0 },
          { label => _("Mount point: "), val => \$part->{mntpoint}, list => [ fsedit::suggestions_mntpoint($all_hds), '' ],
            disabled => sub { my $p = { type => name2type($type) }; isSwap($p) || isNonMountable($p) }, type => 'combo', not_edit => 0,
          },
