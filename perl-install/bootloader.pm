@@ -59,11 +59,13 @@ sub mkinitrd($$$) {
     my $loop_boot = loopback::prepare_boot($prefix);
 
     modules::load('loop');
-    run_program::rooted($prefix, "mkinitrd", "-v", "-f", $initrdImage, "--ifneeded", $kernelVersion) or unlink("$prefix/$initrdImage");
-
+    if (!run_program::rooted($prefix, "mkinitrd", "-v", "-f", $initrdImage, "--ifneeded", $kernelVersion)) {
+	unlink("$prefix/$initrdImage");
+	die "mkinitrd failed";
+    }
     loopback::save_boot($loop_boot);
 
-    -e "$prefix/$initrdImage" or die "mkinitrd failed";
+    -e "$prefix/$initrdImage";
 }
 
 sub mkbootdisk($$$;$) {
@@ -168,11 +170,14 @@ sub add_kernel {
     -e "$prefix/boot/vmlinuz-$version" or log::l("unable to find kernel image $prefix/boot/vmlinuz-$version"), return;
     my $image = "/boot/vmlinuz" . ($ext ne "-$version" &&
 				   symlinkf("vmlinuz-$version", "$prefix/boot/vmlinuz$ext") ? $ext : "-$version");
-    my $initrd = do { 
-	mkinitrd($prefix, $version, "/boot/initrd-$version.img");
-	"/boot/initrd" . ($ext ne "-$version" &&
-			  symlinkf("initrd-$version.img", "$prefix/boot/initrd$ext.img") ? $ext : "-$version") . ".img";
-    };
+
+    my $initrd = "/boot/initrd-$version.img";
+    mkinitrd($prefix, $version, $initrd) or undef $initrd;
+    if ($initrd && $ext ne "-$version") {
+	$initrd = "/boot/initrd$ext.img";
+	symlinkf("initrd-$version.img", "$prefix$initrd");
+    }
+
     my $label = $ext =~ /-(default)/ ? $1 : "linux$ext";
 
     #- more yaboot concessions - PPC
@@ -241,7 +246,7 @@ sub configure_entry($$) {
 
 	if ($specific_version) {
 	    $entry->{initrd} or $entry->{initrd} = "/boot/initrd-$specific_version.img";
-	    mkinitrd($prefix, $specific_version, $entry->{initrd});
+	    mkinitrd($prefix, $specific_version, $entry->{initrd}) or undef $entry->{initrd};
 	}
     }
     $entry;
@@ -686,7 +691,7 @@ sub write_lilo_conf {
 	    (my $part, $file) = fsedit::file2part($prefix, $fstab, $file);
 	    my %hds = map_index { $_ => "hd$::i" } map { $_->{device} } 
 	      sort { isFat($b) <=> isFat($a) || $a->{device} cmp $b->{device} } fsedit::get_fstab(@$hds);
-	    %hds->{$part->{device}} . ":" . $file;
+	    $hds->{$part->{device}} . ":" . $file;
 	} else {
 	    $file
 	}
