@@ -126,7 +126,7 @@ sub detect_timezone() {
 killall pppd
 ), $netcnx->{type});
           my $need_to_ask = $modem->{device} || !$netc->{autodetect}{winmodem};
-          return $need_to_ask ? "ppp_choose" : "ppp_choose2";
+          return $need_to_ask ? "choose_serial_port" : "ppp_choose";
       };
 
       my $handle_multiple_cnx = sub {
@@ -470,7 +470,7 @@ Take a look at http://www.linmodems.org"),
                    },
 
                    # FIXME: only if $need_to_ask
-                   ppp_choose =>
+                   choose_serial_port =>
                    {
                     pre => sub {
                         $mouse ||= {};
@@ -487,10 +487,10 @@ killall pppd
                     data => [ { var => \$modem->{device}, format => \&mouse::serial_port2text, type => "list",
                                 list => [ grep { $_ ne $o_mouse->{device} } (if_(-e '/dev/modem', '/dev/modem'), mouse::serial_ports()) ] } ],
                         
-                    next => "ppp_choose2",
+                    next => "ppp_choose",
                    },
 
-                   ppp_choose2 =>
+                   ppp_choose =>
                    {
                     pre => sub {
                         #my $secret = network::tools::read_secret_backend();
