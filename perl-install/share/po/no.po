@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: panoramix VERSION\n"
-"POT-Creation-Date: 1999-10-07 14:21+0200\n"
+"POT-Creation-Date: 1999-10-11 11:21+0200\n"
 "PO-Revision-Date: 1999-08-25 11:07+0200\n"
 "Last-Translator: Terje Bjerkelia <terje@bjerkelia.com>\n"
 "Language-Team: norwegian\n"
@@ -14,7 +14,6 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #: ../Xconfigurator.pm_.c:164
-#, fuzzy
 msgid "Select a graphic card"
 msgstr "Velg et grafikk-kort"
 
@@ -22,16 +21,15 @@ msgstr "Velg et grafikk-kort"
 msgid "Choose a X server"
 msgstr "Velg en X-tjener"
 
-#: ../Xconfigurator.pm_.c:187
+#: ../Xconfigurator.pm_.c:184
 msgid "Select the memory size of your graphic card"
 msgstr "Velg minnestørrelsen til grafikk-kortet ditt"
 
-#: ../Xconfigurator.pm_.c:200
+#: ../Xconfigurator.pm_.c:197
 msgid "Choose a monitor"
 msgstr "Velg en monitor"
 
-#: ../Xconfigurator.pm_.c:203
-#, fuzzy
+#: ../Xconfigurator.pm_.c:200
 msgid ""
 "The two critical parameters are the vertical refresh rate, which is the "
 "rate\n"
@@ -51,43 +49,43 @@ msgstr ""
 "\n"
 "Det et VELDIG VIKTIG at du ikke spesifiserer en monitor-type med et sync- "
 "område\n"
-"som er utenfor det monitoren din er i stand til å klare. Hvis du er "
-"usikker,\n"
-"velg en konservativ innstilling."
+"som er utenfor det monitoren din er i stand til å klare: Du kan skade "
+"skjermen din.\n"
+"Hvis du er usikker, velg en konservativ innstilling."
 
-#: ../Xconfigurator.pm_.c:210
+#: ../Xconfigurator.pm_.c:207
 msgid "Horizontal refresh rate"
 msgstr "Horisontal oppfrisknings-rate"
 
-#: ../Xconfigurator.pm_.c:210
+#: ../Xconfigurator.pm_.c:207
 msgid "Vertical refresh rate"
 msgstr "Vertikal oppfrisknings-rate"
 
-#: ../Xconfigurator.pm_.c:249
+#: ../Xconfigurator.pm_.c:246
 msgid "Monitor not configured"
 msgstr "Monitor er ikke konfigurert"
 
-#: ../Xconfigurator.pm_.c:252
+#: ../Xconfigurator.pm_.c:249
 msgid "Graphic card not configured yet"
 msgstr "Grafikk-kort er ikke konfigurert ennå"
 
-#: ../Xconfigurator.pm_.c:255
+#: ../Xconfigurator.pm_.c:252
 msgid "Resolutions not chosen yet"
 msgstr "Oppløsninger er ikke valgt ennå"
 
-#: ../Xconfigurator.pm_.c:262
+#: ../Xconfigurator.pm_.c:259
 msgid "Do you want to test the configuration?"
 msgstr "Vil du teste konfigurasjonen?"
 
-#: ../Xconfigurator.pm_.c:262
+#: ../Xconfigurator.pm_.c:259
 msgid "Test configuration"
 msgstr "Test konfigurasjon"
 
-#: ../Xconfigurator.pm_.c:293
+#: ../Xconfigurator.pm_.c:289
 msgid "An error occurred:"
 msgstr "En feil oppsto:"
 
-#: ../Xconfigurator.pm_.c:295
+#: ../Xconfigurator.pm_.c:291
 msgid ""
 "\n"
 "try changing some parameters"
@@ -95,26 +93,24 @@ msgstr ""
 "\n"
 "prøv å endre noen parametere"
 
-#: ../Xconfigurator.pm_.c:316
+#: ../Xconfigurator.pm_.c:312
 #, c-format
 msgid "(leaving in %d seconds)"
 msgstr "(slutter om %d sekunder)"
 
-#: ../Xconfigurator.pm_.c:320 ../my_gtk.pm_.c:346
-#, fuzzy
+#: ../Xconfigurator.pm_.c:316 ../my_gtk.pm_.c:347
 msgid "Is this correct?"
-msgstr "Er dette ok?"
+msgstr "Er dette riktig?"
 
-#: ../Xconfigurator.pm_.c:328
+#: ../Xconfigurator.pm_.c:324
 msgid "An error occurred, try changing some parameters"
 msgstr "En feil oppsto, prøv å endre noen parametere"
 
-#: ../Xconfigurator.pm_.c:336 ../Xconfigurator.pm_.c:485
+#: ../Xconfigurator.pm_.c:332 ../Xconfigurator.pm_.c:481
 msgid "Automatic resolutions"
 msgstr "Automatiske oppløsninger"
 
-#: ../Xconfigurator.pm_.c:337
-#, fuzzy
+#: ../Xconfigurator.pm_.c:333
 msgid ""
 "To find the available resolutions I will try different ones.\n"
 "Your screen will blink...\n"
@@ -124,27 +120,31 @@ msgstr ""
 "Skjermen din vil blinke...\n"
 "Du kan slå det av hvis du vil, du vil høre et bipp når det er ferdig"
 
-#: ../Xconfigurator.pm_.c:384 ../install_steps_interactive.pm_.c:409
-#: ../install_steps_interactive.pm_.c:410
+#: ../Xconfigurator.pm_.c:380 ../install_steps_interactive.pm_.c:445
+#: ../install_steps_interactive.pm_.c:446
 msgid "Resolution"
 msgstr "Oppløsning"
 
-#: ../Xconfigurator.pm_.c:418
+#: ../Xconfigurator.pm_.c:414
 msgid "Choose resolution and color depth"
 msgstr "Velg oppløsning og fargedybde"
 
-#: ../Xconfigurator.pm_.c:486
+#: ../Xconfigurator.pm_.c:422
 #, fuzzy
+msgid "Show all"
+msgstr "Vis færre"
+
+#: ../Xconfigurator.pm_.c:482
 msgid ""
 "I can try to find the available resolutions (eg: 800x600).\n"
 "Sometimes, though, it may hang the machine.\n"
 "Do you want to try?"
 msgstr ""
 "Jeg kan forsøke å finne tilgjengelige oppløsninger (f.eks: 800x600).\n"
-"Det kan stoppe opp noen ganger\n"
+"Noen ganger kan dette forårsake at maskinen stopper opp.\n"
 "Ønsker du å prøve?"
 
-#: ../Xconfigurator.pm_.c:491
+#: ../Xconfigurator.pm_.c:487
 msgid ""
 "No valid modes found\n"
 "Try with another video card or monitor"
@@ -152,88 +152,88 @@ msgstr ""
 "Ingen gyldige modus funnet\n"
 "Prøv med et annet skjermkort eller monitor"
 
-#: ../Xconfigurator.pm_.c:676
+#: ../Xconfigurator.pm_.c:672
 #, c-format
 msgid "Keyboard layout: %s\n"
 msgstr "Tastatur-oppsett: %s\n"
 
-#: ../Xconfigurator.pm_.c:677
+#: ../Xconfigurator.pm_.c:673
 #, c-format
 msgid "Mouse type: %s\n"
 msgstr "Type mus: %s\n"
 
-#: ../Xconfigurator.pm_.c:678
+#: ../Xconfigurator.pm_.c:674
 #, c-format
 msgid "Mouse device: %s\n"
 msgstr "Enhet mus: %s\n"
 
-#: ../Xconfigurator.pm_.c:679
+#: ../Xconfigurator.pm_.c:675
 #, c-format
 msgid "Monitor: %s\n"
 msgstr "Monitor: %s\n"
 
-#: ../Xconfigurator.pm_.c:680
+#: ../Xconfigurator.pm_.c:676
 #, c-format
 msgid "Monitor HorizSync: %s\n"
 msgstr "Monitor HorizSync: %s\n"
 
-#: ../Xconfigurator.pm_.c:681
+#: ../Xconfigurator.pm_.c:677
 #, c-format
 msgid "Monitor VertRefresh: %s\n"
 msgstr "Monitor VertRefresh: %s\n"
 
-#: ../Xconfigurator.pm_.c:682
+#: ../Xconfigurator.pm_.c:678
 #, c-format
 msgid "Graphic card: %s\n"
 msgstr "Grafikk-kort: %s\n"
 
-#: ../Xconfigurator.pm_.c:683
-#, fuzzy, c-format
+#: ../Xconfigurator.pm_.c:679
+#, c-format
 msgid "Graphic memory: %s kB\n"
-msgstr "Minne grafikk: %s KB\n"
+msgstr "Minne grafikk: %s kB\n"
 
-#: ../Xconfigurator.pm_.c:684
+#: ../Xconfigurator.pm_.c:680
 #, c-format
 msgid "XFree86 server: %s\n"
 msgstr "XFree86-tjener: %s\n"
 
-#: ../Xconfigurator.pm_.c:709
+#: ../Xconfigurator.pm_.c:705
 msgid "Change Monitor"
 msgstr "Endre monitor"
 
-#: ../Xconfigurator.pm_.c:710
+#: ../Xconfigurator.pm_.c:706
 msgid "Change Graphic card"
 msgstr "Endre grafikk-kort"
 
-#: ../Xconfigurator.pm_.c:711
+#: ../Xconfigurator.pm_.c:707
 msgid "Change Resolution"
 msgstr "Endre oppløsning"
 
-#: ../Xconfigurator.pm_.c:712
+#: ../Xconfigurator.pm_.c:708
 msgid "Automatical resolutions search"
 msgstr "Automatisk oppløsningssøk"
 
-#: ../Xconfigurator.pm_.c:716
+#: ../Xconfigurator.pm_.c:712
 msgid "Show information"
 msgstr "Vis informasjon"
 
-#: ../Xconfigurator.pm_.c:717
+#: ../Xconfigurator.pm_.c:713
 msgid "Test again"
 msgstr "Test igjen"
 
-#: ../Xconfigurator.pm_.c:718
+#: ../Xconfigurator.pm_.c:714
 msgid "Quit"
 msgstr "Slutt"
 
-#: ../Xconfigurator.pm_.c:721
+#: ../Xconfigurator.pm_.c:717
 msgid "What do you want to do?"
 msgstr "Hva vil du gjøre?"
 
-#: ../Xconfigurator.pm_.c:726
+#: ../Xconfigurator.pm_.c:722
 msgid "X at startup"
 msgstr "X ved oppstart"
 
-#: ../Xconfigurator.pm_.c:727
+#: ../Xconfigurator.pm_.c:723
 msgid ""
 "I can set up your computer to automatically start X upon booting.\n"
 "Would you like X to start when you reboot?"
@@ -241,12 +241,11 @@ msgstr ""
 "Jeg kan sette opp maskinen din til å automatisk starte X ved oppstart.\n"
 "Vil du at X skal starte når du starter maskinen på nytt?"
 
-#: ../Xconfigurator.pm_.c:732
+#: ../Xconfigurator.pm_.c:728
 msgid "X successfully configured"
 msgstr "Konfigurasjon av X vellykket"
 
-#: ../Xconfigurator.pm_.c:733
-#, fuzzy
+#: ../Xconfigurator.pm_.c:729
 msgid ""
 "Configuration file has been written. Take a look at it before running "
 "'startx'.\n"
@@ -258,8 +257,9 @@ msgid ""
 msgstr ""
 "Konfigurasjonsfil har blitt skrevet. Ta en kikk på den før du kjører "
 "'startx'.\n"
-"Inne i tjeneren trykk ctrl, alt og '+' samtidig for å endre oppløsning.\n"
-"Ved å trykke ctrl, alt og backspace samtidig vil tjeneren avslutte "
+"Inne i tjeneren trykk Ctrl, Alt og '+' samtidig for å gå igjennom. "
+"forskjellige oppløsninger.\n"
+"Ved å trykke Ctrl, Alt og Backspace samtidig vil tjeneren avslutte "
 "umiddelbart\n"
 "For ytterligere konfigurasjon, se /usr/X11R6/lib/X11/doc/README.Config."
 
@@ -284,39 +284,32 @@ msgid "4 billion colors"
 msgstr "4 milliarder farger"
 
 #: ../Xconfigurator_consts.pm_.c:57
-#, fuzzy
 msgid "256 kB"
-msgstr "256 kb"
+msgstr "256 kB"
 
 #: ../Xconfigurator_consts.pm_.c:58
-#, fuzzy
 msgid "512 kB"
-msgstr "512 kb"
+msgstr "512 kB"
 
 #: ../Xconfigurator_consts.pm_.c:59
-#, fuzzy
 msgid "1 MB"
-msgstr "MB"
+msgstr "1 MB"
 
 #: ../Xconfigurator_consts.pm_.c:60
-#, fuzzy
 msgid "2 MB"
-msgstr "MB"
+msgstr "2 MB"
 
 #: ../Xconfigurator_consts.pm_.c:61
-#, fuzzy
 msgid "4 MB"
-msgstr "MB"
+msgstr "4 MB"
 
 #: ../Xconfigurator_consts.pm_.c:62
-#, fuzzy
 msgid "8 MB"
-msgstr "MB"
+msgstr "8 MB"
 
 #: ../Xconfigurator_consts.pm_.c:63
-#, fuzzy
 msgid "16 MB or more"
-msgstr "16 mb eller mer"
+msgstr "16 MB eller mer"
 
 #: ../Xconfigurator_consts.pm_.c:67 ../Xconfigurator_consts.pm_.c:68
 msgid "Standard VGA, 640x480 at 60 Hz"
@@ -382,11 +375,11 @@ msgstr "Slett"
 msgid "Format"
 msgstr "Formater"
 
-#: ../diskdrake.pm_.c:17 ../diskdrake.pm_.c:374
+#: ../diskdrake.pm_.c:17 ../diskdrake.pm_.c:376
 msgid "Move"
 msgstr "Flytt"
 
-#: ../diskdrake.pm_.c:17 ../diskdrake.pm_.c:429
+#: ../diskdrake.pm_.c:17 ../diskdrake.pm_.c:434
 msgid "Resize"
 msgstr "Endre størrelse"
 
@@ -426,7 +419,7 @@ msgstr "Gjenopprett fra diskett"
 msgid "Save on floppy"
 msgstr "Lagre på diskett"
 
-#: ../diskdrake.pm_.c:39 ../install_steps_interactive.pm_.c:600
+#: ../diskdrake.pm_.c:39 ../install_steps_interactive.pm_.c:636
 msgid "Done"
 msgstr "Ferdig"
 
@@ -470,77 +463,101 @@ msgstr "Angre"
 msgid "Write partition table"
 msgstr "Skriv partisjonstabell"
 
-#: ../diskdrake.pm_.c:96
+#: ../diskdrake.pm_.c:94
 msgid "Details"
 msgstr "Detaljer"
 
-#: ../diskdrake.pm_.c:118
+#: ../diskdrake.pm_.c:98
+msgid "Legend"
+msgstr ""
+
+#: ../diskdrake.pm_.c:100
+msgid "Empty"
+msgstr ""
+
+#: ../diskdrake.pm_.c:100
+msgid "Ext2"
+msgstr ""
+
+#: ../diskdrake.pm_.c:100
+msgid "FAT"
+msgstr ""
+
+#: ../diskdrake.pm_.c:100
+msgid "Other"
+msgstr ""
+
+#: ../diskdrake.pm_.c:100
+msgid "Swap"
+msgstr ""
+
+#: ../diskdrake.pm_.c:120
 #, c-format
 msgid "After %s partition %s,"
 msgstr "Etter %s partisjon %s,"
 
-#: ../diskdrake.pm_.c:118 ../diskdrake.pm_.c:365 ../diskdrake.pm_.c:392
+#: ../diskdrake.pm_.c:120 ../diskdrake.pm_.c:367 ../diskdrake.pm_.c:394
 msgid "Read carefully!"
 msgstr "Les nøye!"
 
-#: ../diskdrake.pm_.c:118
+#: ../diskdrake.pm_.c:120
 msgid "all data on this partition will be lost"
 msgstr "alle data på denne partisjonen vil gå tapt"
 
-#: ../diskdrake.pm_.c:136 ../install2.pm_.c:318 ../install2.pm_.c:354
-#: ../install_steps.pm_.c:66 ../install_steps_interactive.pm_.c:36
+#: ../diskdrake.pm_.c:138 ../install_any.pm_.c:178 ../install_steps.pm_.c:68
+#: ../install_steps_interactive.pm_.c:37
 msgid "Error"
 msgstr "Feil"
 
-#: ../diskdrake.pm_.c:157 ../diskdrake.pm_.c:506
+#: ../diskdrake.pm_.c:159 ../diskdrake.pm_.c:511
 msgid "Mount point: "
 msgstr "Monteringspunkt: "
 
-#: ../diskdrake.pm_.c:158 ../diskdrake.pm_.c:180
+#: ../diskdrake.pm_.c:160 ../diskdrake.pm_.c:182
 msgid "Device: "
 msgstr "Enhet: "
 
-#: ../diskdrake.pm_.c:159
+#: ../diskdrake.pm_.c:161
 #, c-format
 msgid "DOS drive letter: %s (just a guess)\n"
 msgstr "DOS diskbokstav: %s (bare en gjetning)\n"
 
-#: ../diskdrake.pm_.c:160 ../diskdrake.pm_.c:183
+#: ../diskdrake.pm_.c:162 ../diskdrake.pm_.c:185
 msgid "Type: "
 msgstr "Type: "
 
-#: ../diskdrake.pm_.c:161
+#: ../diskdrake.pm_.c:163
 #, c-format
 msgid "Start: sector /*%s\n"
 msgstr "Start: sektor /*%s\n"
 
-#: ../diskdrake.pm_.c:162
+#: ../diskdrake.pm_.c:164
 msgid "Size: %s MB (%s%%)"
 msgstr "Størrelse: %s MB (%s%%)"
 
-#: ../diskdrake.pm_.c:163
+#: ../diskdrake.pm_.c:165
 #, c-format
 msgid ", %s sectors"
 msgstr ", %s sektorer"
 
-#: ../diskdrake.pm_.c:165
+#: ../diskdrake.pm_.c:167
 #, c-format
 msgid "Cylinder %d to cylinder %d\n"
 msgstr "Sylinder %d til sylinder %d\n"
 
-#: ../diskdrake.pm_.c:166
+#: ../diskdrake.pm_.c:168
 msgid "Formatted\n"
 msgstr "Formatert\n"
 
-#: ../diskdrake.pm_.c:167
+#: ../diskdrake.pm_.c:169
 msgid "Not formatted\n"
 msgstr "Ikke formatert\n"
 
-#: ../diskdrake.pm_.c:168
+#: ../diskdrake.pm_.c:170
 msgid "Mounted\n"
 msgstr "Montert\n"
 
-#: ../diskdrake.pm_.c:169
+#: ../diskdrake.pm_.c:171
 msgid ""
 "Partition booted by default\n"
 "    (for MS-DOS boot, not for lilo)\n"
@@ -548,31 +565,30 @@ msgstr ""
 "Partisjon startet opp som standard\n"
 "    (for MS-DOS oppstart, ikke for lilo)\n"
 
-#: ../diskdrake.pm_.c:181
+#: ../diskdrake.pm_.c:183
 #, c-format
 msgid "Size: %d MB\n"
 msgstr "Størrelse: %d MB\n"
 
-#: ../diskdrake.pm_.c:182
+#: ../diskdrake.pm_.c:184
 #, c-format
 msgid "Geometry: %s cylinders, %s heads, %s sectors\n"
 msgstr "Geometri: %s sylindere, %s hoder, %s sektorer\n"
 
-#: ../diskdrake.pm_.c:184
+#: ../diskdrake.pm_.c:186
 #, c-format
 msgid "on bus %d id %d\n"
 msgstr "på buss %d id %d\n"
 
-#: ../diskdrake.pm_.c:196
+#: ../diskdrake.pm_.c:198
 msgid "Mount"
 msgstr "Monter"
 
-#: ../diskdrake.pm_.c:198
+#: ../diskdrake.pm_.c:200
 msgid "Active"
 msgstr "Aktiv"
 
-#: ../diskdrake.pm_.c:287
-#, fuzzy
+#: ../diskdrake.pm_.c:289
 msgid ""
 "Sorry I won't accept to create /boot so far onto the drive (on a cylinder > "
 "1024).\n"
@@ -581,11 +597,10 @@ msgid ""
 msgstr ""
 "Beklager, jeg vil ikke tillate oppretting av /boot så lange inne på disken "
 "(på en sylinder > 1024).\n"
-"Enten bruker du lilo og denne ikke virker, eller du bruker ikke lilo og du "
+"Enten bruker du LILO og denne ikke virker, eller du bruker ikke LILO og du "
 "trenger ikke /boot"
 
-#: ../diskdrake.pm_.c:291
-#, fuzzy
+#: ../diskdrake.pm_.c:293
 msgid ""
 "The partition you've selected to add as root (/) is physically located "
 "beyond\n"
@@ -595,126 +610,124 @@ msgstr ""
 "Partisjonen du valgte å legge til som root (/) er lokalisert fysisk "
 "bortenfor\n"
 "den 1024'de sylinderen til hard-disken, og du har ingen /boot partisjon.\n"
-"Hvis du skal bruke oppstartshåndtereren lilo, vær nøye med å legge til en\n"
+"Hvis du skal bruke oppstartshåndtereren LILO, vær nøye med å legge til en\n"
 "/boot partisjon"
 
-#: ../diskdrake.pm_.c:305
-#, fuzzy
+#: ../diskdrake.pm_.c:307
 msgid "Quit without saving"
 msgstr "Avslutt uten å lagre"
 
-#: ../diskdrake.pm_.c:305
-#, fuzzy
+#: ../diskdrake.pm_.c:307
 msgid "Quit without writing the partition table?"
-msgstr "Avslutte programmet uten å skrive partisjonstabellen?"
+msgstr "Avslutt uten å skrive partisjonstabellen?"
 
-#: ../diskdrake.pm_.c:320
+#: ../diskdrake.pm_.c:322
 msgid "changing type of"
 msgstr "endrer type av"
 
-#: ../diskdrake.pm_.c:322
+#: ../diskdrake.pm_.c:324
 msgid "Change partition type"
 msgstr "Endre partisjonstype"
 
-#: ../diskdrake.pm_.c:323
+#: ../diskdrake.pm_.c:325
 msgid "Which partition type do you want?"
 msgstr "Hvilken partisjonstype ønsker du?"
 
-#: ../diskdrake.pm_.c:337
+#: ../diskdrake.pm_.c:339
 #, c-format
 msgid "Where do you want to mount device %s?"
 msgstr "Hvor vil du montere %s enheten?"
 
-#: ../diskdrake.pm_.c:338
+#: ../diskdrake.pm_.c:340
 msgid "Mount point"
 msgstr "Monteringspunkt"
 
-#: ../diskdrake.pm_.c:359
+#: ../diskdrake.pm_.c:361
 msgid "formatting"
 msgstr "formatering"
 
-#: ../diskdrake.pm_.c:365
+#: ../diskdrake.pm_.c:367
 msgid "After formatting all partitions,"
 msgstr "Etter formatering av alle partisjonene,"
 
-#: ../diskdrake.pm_.c:365
+#: ../diskdrake.pm_.c:367
 msgid "all data on these partitions will be lost"
 msgstr "alle data på disse partisjonene vil gå tapt"
 
-#: ../diskdrake.pm_.c:375
+#: ../diskdrake.pm_.c:377
 msgid "Which disk do you want to move to?"
 msgstr "Hvilken disk vil du flytte til?"
 
-#: ../diskdrake.pm_.c:379
+#: ../diskdrake.pm_.c:381
 msgid "Sector"
 msgstr "Sektor"
 
-#: ../diskdrake.pm_.c:380
+#: ../diskdrake.pm_.c:382
 msgid "Which sector do you want to move to?"
 msgstr "Hvilken sektor vil du flytte til?"
 
-#: ../diskdrake.pm_.c:383
+#: ../diskdrake.pm_.c:385
 msgid "Moving"
 msgstr "Flytter"
 
-#: ../diskdrake.pm_.c:383
+#: ../diskdrake.pm_.c:385
 msgid "Moving partition..."
 msgstr "Flytter partisjon..."
 
-#: ../diskdrake.pm_.c:392
+#: ../diskdrake.pm_.c:394
 #, c-format
 msgid "Partition table of drive %s is going to be written to disk!"
 msgstr "Partisjonstabellen på disk %s blir nå skrevet til disk!"
 
-#: ../diskdrake.pm_.c:394
+#: ../diskdrake.pm_.c:396
 msgid "You'll need to reboot before the modification can take place"
 msgstr "Du må starte maskinen på nytt for at modifiseringene skal tre i kraft"
 
-#: ../diskdrake.pm_.c:413
+#: ../diskdrake.pm_.c:417
 msgid "Computing fat filesystem bounds"
 msgstr "Beregner fat filsystemgrense"
 
-#: ../diskdrake.pm_.c:413 ../diskdrake.pm_.c:457
+#: ../diskdrake.pm_.c:417 ../diskdrake.pm_.c:462
 msgid "Resizing"
 msgstr "Endrer størrelse"
 
-#: ../diskdrake.pm_.c:426
+#: ../diskdrake.pm_.c:431
 msgid "resizing"
 msgstr "endrer størrelse"
 
-#: ../diskdrake.pm_.c:436
+#: ../diskdrake.pm_.c:441
 msgid "Choose the new size"
 msgstr "Velg den nye størrelsen"
 
-#: ../diskdrake.pm_.c:436 ../install_steps_graphical.pm_.c:283
+#: ../diskdrake.pm_.c:441 ../install_steps_graphical.pm_.c:285
 msgid "MB"
 msgstr "MB"
 
-#: ../diskdrake.pm_.c:483
+#: ../diskdrake.pm_.c:488
 msgid "Create a new partition"
 msgstr "Opprette en ny partisjon"
 
-#: ../diskdrake.pm_.c:499
+#: ../diskdrake.pm_.c:504
 msgid "Start sector: "
 msgstr "Start sektor: "
 
-#: ../diskdrake.pm_.c:502
+#: ../diskdrake.pm_.c:507
 msgid "Size in MB: "
 msgstr "Størrelse i MB: "
 
-#: ../diskdrake.pm_.c:505
+#: ../diskdrake.pm_.c:510
 msgid "Filesystem type: "
 msgstr "Filsystemtype: "
 
-#: ../diskdrake.pm_.c:507
+#: ../diskdrake.pm_.c:512
 msgid "Preference: "
 msgstr "Valg: "
 
-#: ../diskdrake.pm_.c:549 ../diskdrake.pm_.c:565
+#: ../diskdrake.pm_.c:554 ../diskdrake.pm_.c:570
 msgid "Select file"
 msgstr "Velg fil"
 
-#: ../diskdrake.pm_.c:558
+#: ../diskdrake.pm_.c:563
 msgid ""
 "The backup partition table has not the same size\n"
 "Still continue?"
@@ -722,11 +735,11 @@ msgstr ""
 "Sikkerhetskopi-partisjonstabellen har ikke samme størrelse\n"
 "Fortsette for det?"
 
-#: ../diskdrake.pm_.c:566
+#: ../diskdrake.pm_.c:571
 msgid "Warning"
 msgstr "Advarsel"
 
-#: ../diskdrake.pm_.c:567
+#: ../diskdrake.pm_.c:572
 msgid ""
 "Insert a floppy in drive\n"
 "All data on this floppy will be lost"
@@ -734,62 +747,69 @@ msgstr ""
 "Sett inn en diskett i stasjonen\n"
 "Alle data på denne disketten vil gå tapt"
 
-#: ../diskdrake.pm_.c:581
-#, fuzzy
+#: ../diskdrake.pm_.c:586
 msgid "Trying to rescue partition table"
-msgstr "Redde partisjonstabell"
+msgstr "Prøver å redde partisjonstabell"
 
-#: ../fs.pm_.c:68 ../fs.pm_.c:74
+#: ../fs.pm_.c:67 ../fs.pm_.c:73
 #, c-format
 msgid "%s formatting of %s failed"
 msgstr "%s formatering av %s mislykket"
 
-#: ../fs.pm_.c:93
+#: ../fs.pm_.c:92
 #, c-format
 msgid "don't know how to format %s in type %s"
-msgstr "Vet ikke hvordan formatere %s i type %s"
+msgstr "vet ikke hvordan formatere %s i type %s"
 
-#: ../fs.pm_.c:106
+#: ../fs.pm_.c:105
 msgid "nfs mount failed"
 msgstr "nfs montering mislykket"
 
-#: ../fs.pm_.c:123
+#: ../fs.pm_.c:122
 msgid "mount failed: "
 msgstr "montering mislykket: "
 
-#: ../fs.pm_.c:134
+#: ../fs.pm_.c:133
 #, c-format
 msgid "error unmounting %s: %s"
 msgstr "feil ved demontering av %s: %s"
 
-#: ../fsedit.pm_.c:49
-#, c-format
-msgid "An error occurred while getting the geometry of block device %s: %s"
-msgstr "En feil oppsto ved henting av geometrien til blokkenhet %s: %s"
-
-#: ../fsedit.pm_.c:135
+#: ../fsedit.pm_.c:162
 msgid "Mount points must begin with a leading /"
 msgstr "Monteringspunkter må begynne med /"
 
-#: ../fsedit.pm_.c:138
+#: ../fsedit.pm_.c:165
 #, c-format
 msgid "There is already a partition with mount point %s"
 msgstr "Det finnes allerede en partisjon med monteringspunkt %s"
 
-#: ../fsedit.pm_.c:267
+#: ../fsedit.pm_.c:294
 #, c-format
 msgid "Error opening %s for writing: %s"
 msgstr "Feil ved åpning av %s for skriving: %s"
 
-#: ../help.pm_.c:7 ../help.pm_.c:239
+#: ../fsedit.pm_.c:363
+msgid ""
+"An error has occurred - no valid devices were found on which to create new "
+"filesystems. Please check your hardware for the cause of this problem"
+msgstr ""
+"En feil har oppstått - ingen gyldige enheter ble funnet for å opprette nye "
+"filsystemer. Vennligst sjekk maskinvaren din for årsaken til dette problemet"
+
+#: ../fsedit.pm_.c:378
+#, fuzzy
+msgid "You don't have any partitions!"
+msgstr "Du må ha en swap-partisjon"
+
+#: ../help.pm_.c:7 ../help.pm_.c:238
 msgid "Choose preferred language for install and system usage."
 msgstr "Velg ønsket språk for installering og systembruk."
 
-#: ../help.pm_.c:10 ../help.pm_.c:242
+#: ../help.pm_.c:10 ../help.pm_.c:241
 msgid "Choose the layout corresponding to your keyboard from the list above"
-msgstr ""
+msgstr "Velg oppsettet som stemmer med tastaturet ditt fra listen ovenfor"
 
-#: ../help.pm_.c:13 ../help.pm_.c:245
+#: ../help.pm_.c:13 ../help.pm_.c:244
 msgid ""
 "Choose \"Installation\" if there are no previous versions of Linux\n"
 "installed, or if you wish use to multiple distributions or versions.\n"
@@ -807,8 +827,7 @@ msgstr ""
 "Mandrake\n"
 "Linux: 5.1 (Venice), 5.2 (Leeloo), 5.3 (Festen) eller 6.0 (Venus)."
 
-#: ../help.pm_.c:21 ../help.pm_.c:253
-#, fuzzy
+#: ../help.pm_.c:21 ../help.pm_.c:252
 msgid ""
 "Select:\n"
 "\n"
@@ -828,6 +847,7 @@ msgid ""
 "a highly customized installation, this Install Class is for you."
 msgstr ""
 "Velg:\n"
+"\n"
 "  - Nybegynner: Hvis du ikke har installert Linux før, eller ønsker å\n"
 "installere distribusjonen valgt til \"Product of the year\" for 1999,\n"
 "klikk her.\n"
@@ -841,7 +861,7 @@ msgstr ""
 "  - Ekspert: Hvis du allerede kjenner GNU/Linux og ønsker å gjøre en\n"
 "egendefinert installasjon, så er dette installasjonsvalget for deg."
 
-#: ../help.pm_.c:39 ../help.pm_.c:271
+#: ../help.pm_.c:39 ../help.pm_.c:270
 msgid ""
 "Panoramix will attempt at first to look for one or more PCI\n"
 "SCSI adapter(s). If it finds it (or them)  and knows which driver(s)\n"
@@ -863,9 +883,28 @@ msgid ""
 "suggested by the installation guide. These are the options\n"
 "you will need to provide to the driver."
 msgstr ""
+"Panoramix vil først forsøke å se etter et eller flere PCI-\n"
+"SCSI-adapter(ere). Hvis den finner det (eller dem) og vet hvilken\n"
+"driver(ere) som skal brukes, vil denne (disse) bli lagt inn automatisk.\n"
+"\n"
+"Hvis SCSI-adapteret ditt er ISA eller PCI men Panoramix ikke vet\n"
+"hvilken driver som skal brukes for dette kortet, eller hvis du ikke\n"
+"har noen SCSI-adapterere i det hele tatt, vil du bli spurt om du\n"
+"har noen eller ikke.\n"
+"Hvis du ikke har noen, svar \"Nei\". Hvis du har et eller fler, svar\n"
+"\"Ja\". En liste over drivere vil så komme opp, som du må velge en\n"
+"driver fra.\n"
+"\n"
+"Etter at du har valgt driveren vil Panoramix spørre deg om du ønsker\n"
+"å spesifisere opsjonene for denne. Først, prøv å la driveren søke\n"
+"etter maskinvare: Dette fungerer vanligvis fint.\n"
+"\n"
+"Hvis ikke, glem ikke informasjonen om maskinvaren din som du\n"
+"kan få fra Windows (hvis du har denne på systemet ditt), som\n"
+"foreslått i installasjonsguiden. Dette er opsjonene\n"
+"du vil trenge å gi til driveren."
 
-#: ../help.pm_.c:60 ../help.pm_.c:292
-#, fuzzy
+#: ../help.pm_.c:60 ../help.pm_.c:291
 msgid ""
 "At this point, hard drive partitions must be defined. (Unless you\n"
 "are overwriting a previous install of Linux and have already defined\n"
@@ -889,16 +928,20 @@ msgstr ""
 "overskriver en tidligere installasjon av Linux og allerede har definert\n"
 "hard-disk partisjonene dine som ønsket.) Denne operasjonen innebærer å\n"
 "logisk dele maskinens hard-disk kapasitet i separate områder for bruk.\n"
-"To vanlige partisjoner er: \"root\" som er punktet hvor filsystemets\n"
-"katalogstruktur starter, og \"boot\", som inneholder de filer som er\n"
-"nødvendige for å starte operativsystemet når datamaskinen blir slått\n"
-"på. Fordi effekten av denne prosessen vanligvis er ugjenkallelig kan\n"
+"\n"
+"\n"
+"To vanlige partisjoner er: root-partisjonen (/) som er punktet hvor\n"
+"filsystemets katalogstruktur starter, og /boot, som inneholder alle\n"
+"filene som er nødvendige for å starte operativsystemet når datamaskinen\n"
+"blir slått på.\n"
+"\n"
+"\n"
+"Fordi effekten av denne prosessen vanligvis er ugjenkallelig kan\n"
 "partisjonering være både stressende og skremmende for uerfarne brukere.\n"
 "DiskDrake forenkler prosessen så den ikke trenger å være det. Les\n"
 "dokumentasjonen og ta deg god tid før du begynner."
 
-#: ../help.pm_.c:79 ../help.pm_.c:311
-#, fuzzy
+#: ../help.pm_.c:79 ../help.pm_.c:310
 msgid ""
 "Any partitions that have been newly defined must be formatted for\n"
 "use (formatting meaning creating a filesystem). At this time, you may\n"
@@ -907,14 +950,14 @@ msgid ""
 "partitions, particularly if they contain files or data you wish to keep.\n"
 "Typically retained are /home and /usr/local."
 msgstr ""
-"Alle partisjonene som nylig har blitt definert må formateres for bruk.På\n"
-"dette punktet ønsker du kanskje å formatere noen eksisterende partisjoner "
-"for å slette de data disse inneholder. Merk: det er ikke nødvendig å\n"
-"formatere eksisterende partisjoner, især hvis de inneholder filer eller\n"
-"data som du ønsker å beholde. Typiske å beholde: /home og /usr/local."
+"Alle partisjonene som nylig har blitt definert må formateres for bruk\n"
+"(med formatering menes å opprette et filsystem). På dette punktet ønsker\n"
+"du kanskje å re-formatere noen allerede eksisterende partisjoner for å\n"
+"slette de data disse inneholder. Merk: det er ikke nødvendig å re-formatere\n"
+"eksisterende partisjoner, især hvis de inneholder filer eller data som du\n"
+"ønsker å beholde. Typiske å beholde er: /home og /usr/local."
 
-#: ../help.pm_.c:87 ../help.pm_.c:319
-#, fuzzy
+#: ../help.pm_.c:87 ../help.pm_.c:318
 msgid ""
 "You may now select the packages you wish to install.\n"
 "\n"
@@ -935,15 +978,16 @@ msgstr ""
 "\n"
 "Vennligst merk at noen pakker er avhengige av installasjon av andre pakker.\n"
 "Disse blir referert til som pakkeavhengigheter. Pakkene du velger, og\n"
-"pakkene disse trenger vil automatisk bli lagt til i installasjons-\n"
-"konfigurasjonen. Det er umulig å installere en pakke uten å installere\n"
-"alle dens avhengigheter.\n"
+"pakkene disse trenger vil automatisk bli valgt for installering.\n"
+"Det er ikke mulig å installere en pakke uten å installere alle dens\n"
+"avhengigheter.\n"
 "\n"
 "\n"
 "Informasjon om hver kategori og spesifikke pakker er tilgjengelig i området\n"
-"kalt \"Info\" over knappene: [bekreftelse] [valg] [fjern valg]."
+"kalt \"Info\", som du finner mellom listen over pakker og de fem knappene\n"
+"\"Start\", \"Velg flere/færre\" og \"Vis flere/færre\"."
 
-#: ../help.pm_.c:102 ../help.pm_.c:334
+#: ../help.pm_.c:102 ../help.pm_.c:333
 msgid ""
 "The packages selected are now being installed. This operation\n"
 "should only take a few minutes."
@@ -951,7 +995,7 @@ msgstr ""
 "Pakkene som er valgt blir nå installert. Denne operasjonen burde bare ta\n"
 "noen få minutter."
 
-#: ../help.pm_.c:106 ../help.pm_.c:338
+#: ../help.pm_.c:106 ../help.pm_.c:337
 msgid ""
 "If Panoramix failed to find your mouse, or if you want to\n"
 "check what it has done, you will be presented the list of mice\n"
@@ -966,8 +1010,19 @@ msgid ""
 "In case of a serial mouse, you will also have to tell Panoramix\n"
 "which serial port it is connected to."
 msgstr ""
+"Hvis Panoramix ikke klarte å finne musen din, eller hvis du ønsker\n"
+"å sjekke hva den har gjort, vil du bli presentert for listen over mus\n"
+"ovenfor.\n"
+"\n"
+"\n"
+"Hvis du godkjenner Panoramix' innstillinger, bare fortsett til den\n"
+"seksjonen du ønsker ved å klikke på den i menyen til venstre. Ellers,\n"
+"velg en musetype i menyen som du tror er nærmest den musen du har.\n"
+"\n"
+"Hvis du har en seriell mus, må du også fortelle Panoramix hvilken\n"
+"serie-port den er koblet til."
 
-#: ../help.pm_.c:120 ../help.pm_.c:352
+#: ../help.pm_.c:120 ../help.pm_.c:351
 msgid ""
 "This section is dedicated to configuring a local area network,\n"
 "or LAN. If you answer \"Yes\" here, Panoramix will try to find an\n"
@@ -990,9 +1045,27 @@ msgid ""
 "up a private network at home for example, you should choose\n"
 "addresses "
 msgstr ""
+"Denne seksjonen er dedikert til konfigurering av lokalt nettverk,\n"
+"eller LAN. Hvis du svarer \"Ja\" her, vil Panoramix forsøke å finne\n"
+"et Ethernet-adapter i maskinen din. PCI-adaptere burde bli funnet og\n"
+"initialisert automatisk. Men, hvis det er et ISA, vil ikke automatisk\n"
+"oppdaging virke, og du må velge en driver fra listen som så vil vises.\n"
+"\n"
+"\n"
+"For SCSI-adaptere kan du la driveren søke etter adapteret første\n"
+"gangen, ellers må du spesifisere opsjonene for driveren som du\n"
+"har innhentet fra Windows sitt kontrollpanel.\n"
+"\n"
+"\n"
+"Hvis du installerer et Linux-Mandrake system på en maskin som er en del\n"
+"av et allerede eksisterende nettverk, vil nettverks-administratoren\n"
+"ha gitt deg all nødvendig informasjon (IP-adresse, nettverks-\n"
+"submask eller netmask, og vertsnavn). Hvis du f.eks. setter\n"
+"opp et privat nettverk hjemme, burde du velge\n"
+"adresser "
 
-#: ../help.pm_.c:142 ../help.pm_.c:145 ../help.pm_.c:233 ../help.pm_.c:374
-#: ../help.pm_.c:377 ../help.pm_.c:465 ../install2.pm_.c:65
+#: ../help.pm_.c:142 ../help.pm_.c:145 ../help.pm_.c:232 ../help.pm_.c:373
+#: ../help.pm_.c:376 ../help.pm_.c:463 ../install2.pm_.c:65
 msgid "Help"
 msgstr "Hjelp"
 
@@ -1020,9 +1093,31 @@ msgid ""
 "access the printer, and of course the name of the printer. The same goes\n"
 "for a NetWare printer, except that you need no workgroup information."
 msgstr ""
+"Linux kan håndtere mange skriver-typer. Hver av disse\n"
+"trenger forskjellig oppsett.\n"
+"\n"
+"\n"
+"Hvis skriveren din er direkte koblet til maskinen din, velg\n"
+"\"Lokal skriver\". Du må så fortelle hvilken port skriveren\n"
+"din er koblet til, og velge passende filter.\n"
+"\n"
+"\n"
+"Hvis du ønsker tilgang til en skriver lokalisert på en fjern Unix-maskin,\n"
+"må du velge \"Fjern-lpd-kø\". For at dette\n"
+"skal virke trengs ikke brukernavn eller passord, men du må\n"
+"vite navnet på skriverkøen på denne tjeneren.\n"
+"\n"
+"\n"
+"Hvis du ønsker tilgang en SMB-skriver (som betyr, en skriver lokalisert\n"
+"på en fjern Windows 9x/NT maskin), må du spesifisere dens\n"
+"SMB-navn (som ikke er dens TCP/IP-navn), og muligens dens IP-adresse,\n"
+"pluss brukernavn, arbeidsgruppe og passord som behøves for å få\n"
+"tilgang til skriveren, og selvfølgelig navnet på skriveren. Det samme "
+"gjelder\n"
+"for en NetWare-skriver, med unntak av at du ikke trenger "
+"arbeidsgruppe-informasjon."
 
-#: ../help.pm_.c:171 ../help.pm_.c:403
-#, fuzzy
+#: ../help.pm_.c:171 ../help.pm_.c:402
 msgid ""
 "You must now enter the root password for your Linux-Mandrake\n"
 "system. The password must be entered twice to verify that both\n"
@@ -1039,25 +1134,22 @@ msgid ""
 "complicated, though: you must be able to remember without too much\n"
 "effort."
 msgstr ""
-"Et administrator-passord for Linux-systemet ditt må nå tildeles.\n"
-"Passordet må skrives to ganger for å verifisere at begge passord-\n"
+"Du må nå entre root-passordet for Linux-Mandrake systemet ditt.\n"
+"Passordet må entres to ganger for å verifisere at begge passord-\n"
 "inntastingene er identiske.\n"
 "\n"
 "\n"
-"Velg dette passordet med forsiktighet. Bare personer med tilgang til\n"
-"en administrator-konto kan vedlikeholde og administrere systemet.\n"
-"Alternativt, ikke-autorisert bruk av en administrator-konto kan være\n"
-"ekstremt farlig for integriteten til systemet, dataene det inneholder,\n"
-"og andre system som grenser til dette. Passordet bør være en miks av\n"
-"alfanumeriske tegn og være minst åtte tegn langt. Passordet bør heller\n"
-"ikke bli skrevet ned. Ikke lag passordet for langt eller for komplisert\n"
-"da vil bli vanskelig å huske.\n"
-"\n"
-"\n"
-"Når du logger inn som administrator, ved \"login\" skriv \"root\" og ved\n"
-"\"password\", skriv passordet som ble opprettet her."
+"Root er administratoren av systemet, og er den eneste brukeren som\n"
+"har adgang til å modifisere systemkonfigurasjonen. Velg derfor dette\n"
+"passordet med forsiktighet! Ikke-autorisert bruk av root-kontoen kan\n"
+"være ekstremt farlig for integriteten til systemet, dataene det inneholder,\n"
+"og andre systemer tilkoblet dette. Passordet bør være en miks av\n"
+"alfanumeriske tegn og være minst åtte tegn langt. Passordet bør *aldri*\n"
+"bli skrevet ned. Ikke lag passordet for langt eller for komplisert:\n"
+"du må kunne klare å huske det."
 
-#: ../help.pm_.c:187 ../help.pm_.c:419
+#: ../help.pm_.c:187 ../help.pm_.c:418
+#, fuzzy
 msgid ""
 "You may now create one or more \"regular\" user account(s), as\n"
 "opposed to the \"priviledged\" user account, root. You can create\n"
@@ -1068,27 +1160,51 @@ msgid ""
 "stored.\n"
 "\n"
 "\n"
-"First of all, create an account for yourself! Even if you will be\n"
-"the only user of the machine, you may NOT connect as root for daily\n"
-"use of the system: it's a very high security risk. Making the\n"
-"system unusable is very often a typo away.\n"
+"First of all, create an account for yourself! Even if you will be the only "
+"user\n"
+"of the machine, you may NOT connect as root for daily use of the system: "
+"it's a\n"
+"very high security risk. Making the system unusable is very often a typo "
+"away.\n"
 "\n"
 "\n"
 "Therefore, you should connect to the system using the user account\n"
 "you will have created here, and login as root only for administration\n"
 "and maintenance purposes."
 msgstr ""
+"Du kan nå opprette en eller flere \"vanlige\" brukerkontoer, som\n"
+"motsetning til den \"priviligerte\" brukerkontoen root. Du kan opprette\n"
+"en eller flere kontoer for hver person du vil skal ha tilgang\n"
+"til maskinen. Merk at hver brukerkonto vil ha sine egne\n"
+"valg (grafisk miljø, program-innstillinger, etc.)\n"
+"og sin egen \"hjemmekatalog\", hvor disse valgene er lagret\n"
+"\n"
+"\n"
+"Først av alt, opprett en konto for deg selv! Selv om du vil være\n"
+"den eneste brukeren av maskinen, burde du IKKE logge inn som root for "
+"daglig\n"
+"bruk av systemet: det er en veldig stor sikkerhetsrisiko. Å gjøre systemet\n"
+"ubrukelig er veldig ofte bare en skrivefeil unna.\n"
+"\n"
+"\n"
+"Derfor burde du bare logge deg inn på systemet med brukerkontoen\n"
+"du vil ha opprettet her, og innlogging som root bare for administrasjon-\n"
+"og vedlikeholdsformål."
 
-#: ../help.pm_.c:207 ../help.pm_.c:439
+#: ../help.pm_.c:206 ../help.pm_.c:437
 msgid ""
 "Please, please, answer \"Yes\" here! Just for example, when you\n"
 "reinstall Windows, it will overwrite the boot sector. Unless you have\n"
 "made the bootdisk as suggested, you won't be able to boot into Linux\n"
 "any more!"
 msgstr ""
+"Vær så snill, bare svar \"Ja\" her! Bare som et eksempel, når du\n"
+"re-installerer Windows, vil denne overskrive oppstartsektoren. Hvis du ikke "
+"har\n"
+"opprettet oppstartsdisketten som foreslått, vil du ikke kunne starte Linux\n"
+"mer!"
 
-#: ../help.pm_.c:213 ../help.pm_.c:445
-#, fuzzy
+#: ../help.pm_.c:212 ../help.pm_.c:443
 msgid ""
 "You need to indicate where you wish\n"
 "to place the information required to boot to Linux.\n"
@@ -1102,9 +1218,9 @@ msgstr ""
 "\n"
 "\n"
 "Med mindre du vet akkurat hva du gjør, velg \"Første sektor av\n"
-"disken\"."
+"disken (MBR)\"."
 
-#: ../help.pm_.c:221 ../help.pm_.c:453
+#: ../help.pm_.c:220 ../help.pm_.c:451
 msgid ""
 "Now it's time to configure the X Window System, which is the\n"
 "core of the Linux GUI (Graphical User Interface). For this purpose,\n"
@@ -1117,8 +1233,18 @@ msgid ""
 "settings suit you. If they don't, you can come back and\n"
 "change them, as many times as necessary."
 msgstr ""
+"Det er nå tid for å konfigurere X-vindusystemet, som er kjernen\n"
+"til Linux GUI (Graphical User Interface). For dette formålet,\n"
+"må du konfigurere skjermkortet og monitoren din. De fleste av disse\n"
+"stegene skjer automatisk, så det du muligens trenger å gjøre\n"
+"er å verifisere hva som har blitt gjort og godkjenne innstillingene :)\n"
+"\n"
+"Når konfigureringen er over, vil X bli startet (hvis du ikke ber\n"
+"Panoramix om å la det være) så du kan sjekke og se om innstillingene\n"
+"passer deg. Hvis de ikke gjør det, kan du komme tilbake og endre\n"
+"disse så mange ganger som det måtte behøves."
 
-#: ../help.pm_.c:380
+#: ../help.pm_.c:379
 msgid ""
 "Linux can deal with many types of printer. Each of these\n"
 "types require a different setup.\n"
@@ -1142,6 +1268,29 @@ msgid ""
 "access the printer, and of course the name of the printer.The same goes\n"
 "for a NetWare printer, except that you need no workgroup information."
 msgstr ""
+"Linux kan håndtere mange skriver-typer. Hver av disse\n"
+"trenger forskjellig oppsett.\n"
+"\n"
+"\n"
+"Hvis skriveren din er direkte koblet til maskinen din, velg\n"
+"\"Lokal skriver\". Du må så fortelle hvilken port skriveren\n"
+"din er koblet til, og velge passende filter.\n"
+"\n"
+"\n"
+"Hvis du ønsker tilgang til en skriver lokalisert på en fjern Unix-maskin,\n"
+"må du velge \"Fjern-lpd-kø\". For at dette\n"
+"skal virke trengs ikke brukernavn eller passord, men du må\n"
+"vite navnet på skriverkøen på denne tjeneren.\n"
+"\n"
+"\n"
+"Hvis du ønsker tilgang en SMB-skriver (som betyr, en skriver lokalisert\n"
+"på en fjern Windows 9x/NT maskin), må du spesifisere dens\n"
+"SMB-navn (som ikke er dens TCP/IP-navn), og muligens dens IP-adresse,\n"
+"pluss brukernavn, arbeidsgruppe og passord som behøves for å få\n"
+"tilgang til skriveren, og selvfølgelig navnet på skriveren. Det samme "
+"gjelder\n"
+"for en NetWare-skriver, med unntak av at du ikke trenger "
+"arbeidsgruppe-informasjon."
 
 #: ../install2.pm_.c:39
 msgid "Choose your language"
@@ -1195,8 +1344,8 @@ msgstr "Konfigurer tidssone"
 msgid "Configure printer"
 msgstr "Konfigurer skriver"
 
-#: ../install2.pm_.c:53 ../install_steps_interactive.pm_.c:467
-#: ../install_steps_interactive.pm_.c:468
+#: ../install2.pm_.c:53 ../install_steps_interactive.pm_.c:503
+#: ../install_steps_interactive.pm_.c:504
 msgid "Set root password"
 msgstr "Sett root-passord"
 
@@ -1205,9 +1354,8 @@ msgid "Add a user"
 msgstr "Legg til en bruker"
 
 #: ../install2.pm_.c:55
-#, fuzzy
 msgid "Create a bootdisk"
-msgstr "Opprett oppstartdiskett"
+msgstr "Opprett en oppstartdisk"
 
 #: ../install2.pm_.c:56
 msgid "Install bootloader"
@@ -1237,24 +1385,20 @@ msgstr "ekspert"
 msgid "server"
 msgstr "tjener"
 
-#: ../install2.pm_.c:271
-#, fuzzy
-msgid " : This is not a root partition, please select another one."
-msgstr " : Dette er ikke en root-partisjon, prøv igjen."
+#: ../install2.pm_.c:292
+msgid "Partitioning failed: no root filesystem"
+msgstr "Partisjonering feilet: intet root-filsystem"
 
-#: ../install2.pm_.c:271 ../install2.pm_.c:297
-msgid "Information"
-msgstr "Informasjon"
+#: ../install2.pm_.c:457
+msgid "Error reading file $f"
+msgstr "Feil ved lesing av fil $f"
 
-#: ../install2.pm_.c:297
-msgid "Found root partition : "
-msgstr "Fant root-partisjon : "
+#: ../install2.pm_.c:462
+#, c-format
+msgid "Bad kickstart file %s (failed %s)"
+msgstr "Dårlig kickstart-fil %s (mislykket %s)"
 
-#: ../install2.pm_.c:318
-msgid "No root partition found"
-msgstr "Ingen root-partisjon funnet"
-
-#: ../install2.pm_.c:355
+#: ../install_any.pm_.c:179
 msgid ""
 "I can't read your partition table, it's too corrupted for me :(\n"
 "I'll try to go on blanking bad partitions"
@@ -1262,30 +1406,26 @@ msgstr ""
 "Jeg kan ikke lese partisjonstabellen din, den er for ødelagt for meg :(\n"
 "Jeg vil førsøke å blanke ut dårlige partisjoner"
 
-#: ../install2.pm_.c:366
+#: ../install_any.pm_.c:194
 msgid ""
-"An error has occurred - no valid devices were found on which to create new "
-"filesystems. Please check your hardware for the cause of this problem"
+"DiskDrake failed to read correctly the partition table.\n"
+"Continue at your own risk!"
 msgstr ""
-"En feil har oppstått - ingen gyldige enheter ble funnet for å opprette nye "
-"filsystemer. Vennligst sjekk maskinvaren din for årsaken til dette problemet"
 
-#: ../install2.pm_.c:387
-#, fuzzy
-msgid "Partitioning failed: no root filesystem"
-msgstr "partisjonering feilet: intet root-filsystem"
+#: ../install_any.pm_.c:233
+msgid "Information"
+msgstr "Informasjon"
 
-#: ../install2.pm_.c:558
-msgid "Error reading file $f"
-msgstr "Feil ved lesing av fil $f"
+#: ../install_any.pm_.c:234
+#, fuzzy, c-format
+msgid "%s: This is not a root partition, please select another one."
+msgstr " : Dette er ikke en root-partisjon, vennligst velg en annen."
 
-#: ../install2.pm_.c:563
-#, c-format
-msgid "Bad kickstart file %s (failed %s)"
-msgstr "Dårlig kickstart-fil %s (mislykket %s)"
+#: ../install_any.pm_.c:236
+msgid "No root partition found"
+msgstr "Ingen root-partisjon funnet"
 
-#: ../install_steps.pm_.c:67
-#, fuzzy
+#: ../install_steps.pm_.c:69
 msgid ""
 "An error occurred, but I don't know how to handle it nicely,\n"
 "so continue at your own risk :("
@@ -1294,294 +1434,316 @@ msgstr ""
 "måte,\n"
 "så fortsett på eget ansvar :("
 
-#: ../install_steps.pm_.c:278
-#, fuzzy
+#: ../install_steps.pm_.c:122
+#, c-format
+msgid "Duplicate mount point %s"
+msgstr ""
+
+#: ../install_steps.pm_.c:309
 msgid "No floppy drive available"
-msgstr "Beklager, ingen diskettstasjon tilgjengelig"
+msgstr "Ingen diskettstasjon tilgjengelig"
 
-#: ../install_steps_graphical.pm_.c:254
-#, fuzzy
+#: ../install_steps_graphical.pm_.c:256
 msgid "You must have a swap partition"
-msgstr "Opprette en ny partisjon"
+msgstr "Du må ha en swap-partisjon"
 
-#: ../install_steps_graphical.pm_.c:257
+#: ../install_steps_graphical.pm_.c:259
 msgid ""
 "You don't have a swap partition\n"
 "Continue anyway?"
 msgstr ""
+"Du har ingen swap-partisjon\n"
+"Fortsette uansett?"
 
-#: ../install_steps_graphical.pm_.c:283
+#: ../install_steps_graphical.pm_.c:285
 msgid "Total size: "
 msgstr "Total størrelse: "
 
-#: ../install_steps_graphical.pm_.c:381
+#: ../install_steps_graphical.pm_.c:383
 msgid "Choose the packages you want to install"
 msgstr "Velg pakkene du ønsker å installere"
 
-#: ../install_steps_graphical.pm_.c:393
+#: ../install_steps_graphical.pm_.c:395
 msgid "Info"
 msgstr "Info"
 
-#: ../install_steps_graphical.pm_.c:399
+#: ../install_steps_graphical.pm_.c:401
 msgid "Go"
 msgstr "Start"
 
-#: ../install_steps_graphical.pm_.c:400
+#: ../install_steps_graphical.pm_.c:402
 msgid "Select less"
 msgstr "Velg færre"
 
-#: ../install_steps_graphical.pm_.c:401
+#: ../install_steps_graphical.pm_.c:403
 msgid "Select more"
 msgstr "Velg flere"
 
-#: ../install_steps_graphical.pm_.c:402
+#: ../install_steps_graphical.pm_.c:404
 msgid "Show less"
 msgstr "Vis færre"
 
-#: ../install_steps_graphical.pm_.c:403
+#: ../install_steps_graphical.pm_.c:405
 msgid "Show more"
 msgstr "Vis flere"
 
-#: ../install_steps_graphical.pm_.c:421
+#: ../install_steps_graphical.pm_.c:423
 msgid "Installing"
 msgstr "Installerer"
 
-#: ../install_steps_graphical.pm_.c:427
+#: ../install_steps_graphical.pm_.c:429
 msgid "Please wait, "
 msgstr "Vennligst vent, "
 
-#: ../install_steps_graphical.pm_.c:429
+#: ../install_steps_graphical.pm_.c:431
 msgid "Time remaining "
 msgstr "Tid som gjenstår "
 
-#: ../install_steps_graphical.pm_.c:430
+#: ../install_steps_graphical.pm_.c:432
 msgid "Total time "
 msgstr "Total tid "
 
-#: ../install_steps_graphical.pm_.c:435
-#, fuzzy
+#: ../install_steps_graphical.pm_.c:437
 msgid "Preparing installation"
-msgstr "forbereder installasjon"
+msgstr "Forbereder installasjon"
 
-#: ../install_steps_graphical.pm_.c:456
-#, fuzzy, c-format
+#: ../install_steps_graphical.pm_.c:458
+#, c-format
 msgid "Installing package %s"
-msgstr "installerer pakke %s"
+msgstr "Installerer pakke %s"
 
-#: ../install_steps_graphical.pm_.c:481
+#: ../install_steps_graphical.pm_.c:483
 msgid "Go on anyway?"
-msgstr "Fortsett uansett?"
+msgstr "Fortsette likevel?"
 
-#: ../install_steps_graphical.pm_.c:481
+#: ../install_steps_graphical.pm_.c:483
 msgid "There was an error ordering packages:"
-msgstr "Det var en feil ved bestilling av pakker:"
+msgstr "Det var en feil ved bestilling av pakkene:"
 
-#: ../install_steps_graphical.pm_.c:578 ../interactive.pm_.c:47
-#: ../interactive.pm_.c:57 ../my_gtk.pm_.c:192 ../my_gtk.pm_.c:346
-#: ../my_gtk.pm_.c:430
+#: ../install_steps_graphical.pm_.c:507
+#, fuzzy
+msgid "Use existing configuration for X11?"
+msgstr "Test konfigurasjon"
+
+#: ../install_steps_graphical.pm_.c:580 ../interactive.pm_.c:47
+#: ../interactive.pm_.c:57 ../my_gtk.pm_.c:193 ../my_gtk.pm_.c:347
+#: ../my_gtk.pm_.c:434
 msgid "Ok"
 msgstr "Ok"
 
-#: ../install_steps_interactive.pm_.c:36
+#: ../install_steps_interactive.pm_.c:37
 msgid "An error occurred"
 msgstr "En feil oppsto"
 
-#: ../install_steps_interactive.pm_.c:52
+#: ../install_steps_interactive.pm_.c:53
 msgid "Which language do you want?"
 msgstr "Hvilket språk ønsker du?"
 
-#: ../install_steps_interactive.pm_.c:63
-#, fuzzy
+#: ../install_steps_interactive.pm_.c:64
 msgid "What is your keyboard layout?"
-msgstr "Velg tastatur"
+msgstr "Hva er tastatur-oppsettet ditt?"
 
-#: ../install_steps_interactive.pm_.c:73
+#: ../install_steps_interactive.pm_.c:74
 msgid "Install/Upgrade"
 msgstr "Installer/Oppgrader"
 
-#: ../install_steps_interactive.pm_.c:74
+#: ../install_steps_interactive.pm_.c:75
 msgid "Is this an install or an upgrade?"
 msgstr "Er dette en installasjon eller en oppgradering?"
 
-#: ../install_steps_interactive.pm_.c:75
+#: ../install_steps_interactive.pm_.c:76
 msgid "Install"
 msgstr "Installer"
 
-#: ../install_steps_interactive.pm_.c:75
+#: ../install_steps_interactive.pm_.c:76
 msgid "Upgrade"
 msgstr "Oppgrader"
 
-#: ../install_steps_interactive.pm_.c:83
+#: ../install_steps_interactive.pm_.c:84
 msgid "Root Partition"
 msgstr "Root-partisjon"
 
-#: ../install_steps_interactive.pm_.c:84
-#, fuzzy
+#: ../install_steps_interactive.pm_.c:85
 msgid "What is the root partition (/) of your system?"
-msgstr "Hva er root-partisjonen på systemet ditt?"
+msgstr "Hva er root-partisjonen (/) på systemet ditt?"
 
-#: ../install_steps_interactive.pm_.c:93
+#: ../install_steps_interactive.pm_.c:94
 msgid "Install Class"
 msgstr "Installeringsklasse"
 
-#: ../install_steps_interactive.pm_.c:94
-#, fuzzy
+#: ../install_steps_interactive.pm_.c:95
 msgid "What installation class do you want?"
-msgstr "Hvilken partisjonstype ønsker du?"
+msgstr "Hvilken installasjonsklasse ønsker du?"
 
-#: ../install_steps_interactive.pm_.c:105
-#, fuzzy
+#: ../install_steps_interactive.pm_.c:107
 msgid "What is the type of your mouse?"
-msgstr "Hva er root-partisjonen på systemet ditt?"
+msgstr "Hva slags type er musen din?"
 
-#: ../install_steps_interactive.pm_.c:109
-#, fuzzy
+#: ../install_steps_interactive.pm_.c:111
 msgid "Emulate third button?"
-msgstr "Emulere tredje knapp"
+msgstr "Emulere tredje knapp?"
 
-#: ../install_steps_interactive.pm_.c:112
+#: ../install_steps_interactive.pm_.c:114
 msgid "Mouse Port"
 msgstr "Museport"
 
-#: ../install_steps_interactive.pm_.c:113
+#: ../install_steps_interactive.pm_.c:115
 msgid "Which serial port is your mouse connected to?"
 msgstr "Hvilken serieport er musen din koblet til?"
 
-#: ../install_steps_interactive.pm_.c:123
+#: ../install_steps_interactive.pm_.c:128
+#, fuzzy
+msgid "no available partitions"
+msgstr "Formater partisjoner"
+
+#: ../install_steps_interactive.pm_.c:130
+#, c-format
+msgid "(%dMb)"
+msgstr ""
+
+#: ../install_steps_interactive.pm_.c:137
+#, fuzzy
+msgid "Which partition do you want to use as your root partition"
+msgstr "Hvilken sektor vil du flytte til?"
+
+#: ../install_steps_interactive.pm_.c:144
+#, fuzzy
+msgid "Choose the mount points"
+msgstr "Velg en monitor"
+
+#: ../install_steps_interactive.pm_.c:156
 msgid "You need to reboot for the partition table modifications to take place"
 msgstr ""
 "Du må starte maskinen på nytt for at modifiseringene av partisjons- tabellen "
 "skal tre i kraft"
 
-#: ../install_steps_interactive.pm_.c:136
+#: ../install_steps_interactive.pm_.c:172
 msgid "Choose the partitions you want to format"
 msgstr "Velg de partisjonene du ønsker å formatere"
 
-#: ../install_steps_interactive.pm_.c:146
+#: ../install_steps_interactive.pm_.c:182
 #, c-format
 msgid "Formatting partition %s"
 msgstr "Formaterer partisjon %s"
 
-#: ../install_steps_interactive.pm_.c:154
-#, fuzzy
+#: ../install_steps_interactive.pm_.c:190
 msgid "Looking for available packages"
-msgstr "Søker etter tilgjengelige pakker"
+msgstr "Ser etter tilgjengelige pakker"
 
-#: ../install_steps_interactive.pm_.c:160
+#: ../install_steps_interactive.pm_.c:196
 msgid "Finding packages to upgrade"
-msgstr ""
+msgstr "Finner pakker å oppgradere"
 
-#: ../install_steps_interactive.pm_.c:170
+#: ../install_steps_interactive.pm_.c:206
 msgid "Keep the current IP configuration"
 msgstr "Behold nåværende IP-konfigurasjon"
 
-#: ../install_steps_interactive.pm_.c:171
+#: ../install_steps_interactive.pm_.c:207
 msgid "Reconfigure network now"
 msgstr "Rekonfigurer nettverket nå"
 
-#: ../install_steps_interactive.pm_.c:172
-#, fuzzy
+#: ../install_steps_interactive.pm_.c:208
 msgid "Do not set up networking"
 msgstr "Ikke sett opp nettverk"
 
-#: ../install_steps_interactive.pm_.c:174
-#: ../install_steps_interactive.pm_.c:180
+#: ../install_steps_interactive.pm_.c:210
+#: ../install_steps_interactive.pm_.c:216
 msgid "Network Configuration"
 msgstr "Nettverks-konfigurasjon"
 
-#: ../install_steps_interactive.pm_.c:175
-#, fuzzy
+#: ../install_steps_interactive.pm_.c:211
 msgid "Local networking has already been configured. Do you want to:"
-msgstr "LAN-nettverket har allerede blitt konfigurert. Vil du:"
+msgstr "Lokalt nettverk har allerede blitt konfigurert. Vil du:"
 
-#: ../install_steps_interactive.pm_.c:181
-#, fuzzy
+#: ../install_steps_interactive.pm_.c:217
 msgid "Do you want to configure LAN (not dialup) networking for your system?"
-msgstr ""
-"Vil du konfigurere LAN (ikke oppringt) nettverk for ditt installerte system?"
+msgstr "Vil du konfigurere LAN (ikke oppringt) nettverk for systemet ditt?"
 
-#: ../install_steps_interactive.pm_.c:188
+#: ../install_steps_interactive.pm_.c:224
 msgid "no network card found"
-msgstr ""
+msgstr "nettverkskort ikke funnet"
 
-#: ../install_steps_interactive.pm_.c:215
+#: ../install_steps_interactive.pm_.c:251
 #, c-format
 msgid "Configuring network device %s"
 msgstr "Konfigurerer nettverks-enhet %s"
 
-#: ../install_steps_interactive.pm_.c:216
+#: ../install_steps_interactive.pm_.c:252
 msgid ""
 "Please enter the IP configuration for this machine.\n"
 "Each item should be entered as an IP address in dotted-decimal\n"
 "notation (for example, 1.2.3.4)."
 msgstr ""
+"Vennligst entre IP-konfigurasjonen for denne maskinen.\n"
+"Hvert element bør entres som en IP-adresse i punkt-desimal\n"
+"notasjon (f.eks, 1.2.3.4)."
 
-#: ../install_steps_interactive.pm_.c:219
+#: ../install_steps_interactive.pm_.c:255
 msgid "IP address:"
 msgstr "IP-adresse:"
 
-#: ../install_steps_interactive.pm_.c:219
+#: ../install_steps_interactive.pm_.c:255
 msgid "Netmask:"
 msgstr "Nettmaske:"
 
-#: ../install_steps_interactive.pm_.c:224
-#: ../install_steps_interactive.pm_.c:363
+#: ../install_steps_interactive.pm_.c:260
+#: ../install_steps_interactive.pm_.c:399
 msgid "IP address should be in format 1.2.3.4"
 msgstr "IP-adresse bør være i format 1.2.3.4"
 
-#: ../install_steps_interactive.pm_.c:242
+#: ../install_steps_interactive.pm_.c:278
 msgid "Configuring network"
 msgstr "Konfigurerer nettverk"
 
-#: ../install_steps_interactive.pm_.c:243
+#: ../install_steps_interactive.pm_.c:279
 msgid ""
 "Please enter your host name.\n"
 "Your host name should be a fully-qualified host name,\n"
 "such as ``mybox.mylab.myco.com''.\n"
 "You may also enter the IP address of the gateway if you have one"
 msgstr ""
+"Vennligst entre vertsnavnet ditt.\n"
+"Ditt vertsnavn bør være et full-kvalifisert vertsnavn,\n"
+"så som ``minboks.mittlab.mittfirma.no''.\n"
+"Du kan også entre IP-adressen til gateway'en hvis du har en"
 
-#: ../install_steps_interactive.pm_.c:247
+#: ../install_steps_interactive.pm_.c:283
 msgid "DNS server:"
 msgstr "DNS-tjener:"
 
-#: ../install_steps_interactive.pm_.c:247
-#, fuzzy
+#: ../install_steps_interactive.pm_.c:283
 msgid "Gateway device:"
-msgstr "Oppstartsenhet"
+msgstr "Gateway-enhet:"
 
-#: ../install_steps_interactive.pm_.c:247
+#: ../install_steps_interactive.pm_.c:283
 msgid "Gateway:"
-msgstr ""
+msgstr "Gateway:"
 
-#: ../install_steps_interactive.pm_.c:247
+#: ../install_steps_interactive.pm_.c:283
 msgid "Host name:"
 msgstr "Vertsnavn:"
 
-#: ../install_steps_interactive.pm_.c:257
+#: ../install_steps_interactive.pm_.c:293
 msgid "Is your hardware clock set to GMT?"
-msgstr ""
+msgstr "Er maskinvareklokken din satt til GMT?"
 
-#: ../install_steps_interactive.pm_.c:259
-#, fuzzy
+#: ../install_steps_interactive.pm_.c:295
 msgid "Which is your timezone?"
-msgstr "Hvilken disk vil du flytte til?"
+msgstr "Hvilken er tidsonen din?"
 
-#: ../install_steps_interactive.pm_.c:269
-#, fuzzy
+#: ../install_steps_interactive.pm_.c:305
 msgid "Printer"
-msgstr "Skriverenhet:"
+msgstr "Skriver"
 
-#: ../install_steps_interactive.pm_.c:270
+#: ../install_steps_interactive.pm_.c:306
 msgid "Would you like to configure a printer?"
-msgstr ""
+msgstr "Ønsker du å konfigurere en skriver?"
 
-#: ../install_steps_interactive.pm_.c:286
-#, fuzzy
+#: ../install_steps_interactive.pm_.c:322
 msgid "Local Printer Options"
-msgstr "NetWare skriveropsjoner"
+msgstr "Lokale skriveropsjoner"
 
-#: ../install_steps_interactive.pm_.c:287
+#: ../install_steps_interactive.pm_.c:323
 msgid ""
 "Every print queue (which print jobs are directed to) needs a\n"
 "name (often lp) and a spool directory associated with it. What\n"
@@ -1591,40 +1753,40 @@ msgstr ""
 "(ofte lp) og en spolingskatalog assosiert til denne. Hvilket\n"
 "navn og katalog skal brukes for denne køen?"
 
-#: ../install_steps_interactive.pm_.c:290
+#: ../install_steps_interactive.pm_.c:326
 msgid "Name of queue:"
 msgstr "Køens navn:"
 
-#: ../install_steps_interactive.pm_.c:290
+#: ../install_steps_interactive.pm_.c:326
 msgid "Spool directory:"
 msgstr "Spolingskatalog:"
 
-#: ../install_steps_interactive.pm_.c:301
+#: ../install_steps_interactive.pm_.c:337
 msgid "Select Printer Connection"
 msgstr "Velg skrivertilkobling"
 
-#: ../install_steps_interactive.pm_.c:302
+#: ../install_steps_interactive.pm_.c:338
 msgid "How is the printer connected?"
 msgstr "Hvordan er skriveren tilkoblet?"
 
-#: ../install_steps_interactive.pm_.c:310
+#: ../install_steps_interactive.pm_.c:346
 msgid "Detecting devices..."
 msgstr "Finner enheter..."
 
-#: ../install_steps_interactive.pm_.c:310
+#: ../install_steps_interactive.pm_.c:346
 msgid "Test ports"
 msgstr "Test porter"
 
-#: ../install_steps_interactive.pm_.c:323
+#: ../install_steps_interactive.pm_.c:359
 #, c-format
 msgid "A printer, model \"%s\", has been detected on "
-msgstr ""
+msgstr "En skriver, modell \"%s\", ble funnet på "
 
-#: ../install_steps_interactive.pm_.c:330
+#: ../install_steps_interactive.pm_.c:366
 msgid "Local Printer Device"
 msgstr "Lokal skriverenhet"
 
-#: ../install_steps_interactive.pm_.c:331
+#: ../install_steps_interactive.pm_.c:367
 msgid ""
 "What device is your printer connected to  \n"
 "(note that /dev/lp0 is equivalent to LPT1:)?\n"
@@ -1632,15 +1794,15 @@ msgstr ""
 "Hvilken enhet er skriveren din koblet til  \n"
 "(merk at /dev/lp0 er det samme som LPT1:)?\n"
 
-#: ../install_steps_interactive.pm_.c:332
+#: ../install_steps_interactive.pm_.c:368
 msgid "Printer Device:"
 msgstr "Skriverenhet:"
 
-#: ../install_steps_interactive.pm_.c:338
+#: ../install_steps_interactive.pm_.c:374
 msgid "Remote lpd Printer Options"
 msgstr "Fjern-lpd skriveropsjoner"
 
-#: ../install_steps_interactive.pm_.c:339
+#: ../install_steps_interactive.pm_.c:375
 msgid ""
 "To use a remote lpd print queue, you need to supply\n"
 "the hostname of the printer server and the queue name\n"
@@ -1650,21 +1812,19 @@ msgstr ""
 "til skrivertjeneren og kønavnet til den tjeneren\n"
 "som jobbene skal plasseres i."
 
-#: ../install_steps_interactive.pm_.c:342
+#: ../install_steps_interactive.pm_.c:378
 msgid "Remote hostname:"
 msgstr "Fjern-brukernavn:"
 
-#: ../install_steps_interactive.pm_.c:342
+#: ../install_steps_interactive.pm_.c:378
 msgid "Remote queue:"
 msgstr "Fjern-kø:"
 
-#: ../install_steps_interactive.pm_.c:348
-#, fuzzy
+#: ../install_steps_interactive.pm_.c:384
 msgid "SMB (Windows 9x/NT) Printer Options"
-msgstr "SMB/Windows 95/NT skriveropsjoner"
+msgstr "SMB (Windows 9x/NT) skriveropsjoner"
 
-#: ../install_steps_interactive.pm_.c:349
-#, fuzzy
+#: ../install_steps_interactive.pm_.c:385
 msgid ""
 "To print to a SMB printer, you need to provide the\n"
 "SMB host name (Note! It may be different from its\n"
@@ -1673,44 +1833,43 @@ msgid ""
 "applicable user name, password, and workgroup information."
 msgstr ""
 "For å skrive til en SMB-skriver, må du oppgi SMB-vertsnavnet\n"
-"(dette er ikke alltid det samme som maskinens TCP/IP-vertsnavn)\n"
+"(Merk! Dette kan være forskjellig fra dens TCP/IP-vertsnavn!)\n"
 "og muligens IP-adressen til skrivertjeneren, så vel som det delte\n"
 "navnet til skriveren du ønsker tilgang til og anvendelige brukernavn,\n"
-"passord, og arbeidsgruppeinformasjon."
+"passord og arbeidsgruppeinformasjon."
 
-#: ../install_steps_interactive.pm_.c:354
+#: ../install_steps_interactive.pm_.c:390
 msgid "SMB server IP:"
 msgstr "SMB-tjener IP:"
 
-#: ../install_steps_interactive.pm_.c:354
+#: ../install_steps_interactive.pm_.c:390
 msgid "SMB server host:"
 msgstr "SMB-tjener vert:"
 
-#: ../install_steps_interactive.pm_.c:355
-#: ../install_steps_interactive.pm_.c:377
-#: ../install_steps_interactive.pm_.c:469
+#: ../install_steps_interactive.pm_.c:391
+#: ../install_steps_interactive.pm_.c:413
+#: ../install_steps_interactive.pm_.c:505
 msgid "Password:"
 msgstr "Passord:"
 
-#: ../install_steps_interactive.pm_.c:355
+#: ../install_steps_interactive.pm_.c:391
 msgid "Share name:"
 msgstr "Delt navn:"
 
-#: ../install_steps_interactive.pm_.c:355
-#: ../install_steps_interactive.pm_.c:377
+#: ../install_steps_interactive.pm_.c:391
+#: ../install_steps_interactive.pm_.c:413
 msgid "User name:"
 msgstr "Brukernavn:"
 
-#: ../install_steps_interactive.pm_.c:356
+#: ../install_steps_interactive.pm_.c:392
 msgid "Workgroup:"
 msgstr "Arbeidsgruppe:"
 
-#: ../install_steps_interactive.pm_.c:371
+#: ../install_steps_interactive.pm_.c:407
 msgid "NetWare Printer Options"
 msgstr "NetWare skriveropsjoner"
 
-#: ../install_steps_interactive.pm_.c:372
-#, fuzzy
+#: ../install_steps_interactive.pm_.c:408
 msgid ""
 "To print to a NetWare printer, you need to provide the\n"
 "NetWare print server name (Note! it may be different from its\n"
@@ -1718,117 +1877,112 @@ msgid ""
 "wish to access and any applicable user name and password."
 msgstr ""
 "For å skrive til en NetWare-skriver, må du oppgi navnet til NetWare-\n"
-"skrivertjeneren (dette er ikke alltid det samme som maskinens TCP/IP-\n"
-"vertsnavn) så vel som navnet på skriverkøen til skriveren du ønsker\n"
+"skrivertjeneren (Mer! Dette kan være forskjellig fra dens TCP/IP-\n"
+"vertsnavn!) så vel som navnet på skriverkøen til skriveren du ønsker\n"
 "adgang til og anvendelige brukernavn og passord."
 
-#: ../install_steps_interactive.pm_.c:376
+#: ../install_steps_interactive.pm_.c:412
 msgid "Print Queue Name:"
-msgstr "Skriverkø navn:"
+msgstr "Skriverkø-navn:"
 
-#: ../install_steps_interactive.pm_.c:376
+#: ../install_steps_interactive.pm_.c:412
 msgid "Printer Server:"
 msgstr "Skrivertjener:"
 
-#: ../install_steps_interactive.pm_.c:387
+#: ../install_steps_interactive.pm_.c:423
 msgid "Configure Printer"
 msgstr "Konfigurer skriver"
 
-#: ../install_steps_interactive.pm_.c:388
+#: ../install_steps_interactive.pm_.c:424
 msgid "What type of printer do you have?"
 msgstr "Hva slags type skriver har du?"
 
-#: ../install_steps_interactive.pm_.c:399
-#: ../install_steps_interactive.pm_.c:400
+#: ../install_steps_interactive.pm_.c:435
+#: ../install_steps_interactive.pm_.c:436
 msgid "Paper Size"
 msgstr "Papirstørrelse"
 
-#: ../install_steps_interactive.pm_.c:419
+#: ../install_steps_interactive.pm_.c:455
 msgid "CRLF"
 msgstr "CRLF"
 
-#: ../install_steps_interactive.pm_.c:420
-#, fuzzy
+#: ../install_steps_interactive.pm_.c:456
 msgid "Fix stair-stepping text?"
-msgstr "Fikse trappesteging av tekst?"
+msgstr "Fikse trappestegs-tekst?"
 
-#: ../install_steps_interactive.pm_.c:436
+#: ../install_steps_interactive.pm_.c:472
 msgid "Configure Uniprint Driver"
 msgstr "Konfigurer Uniprint-driver"
 
-#: ../install_steps_interactive.pm_.c:437
-#, fuzzy
+#: ../install_steps_interactive.pm_.c:473
 msgid "You may now set the Uniprint driver options for this printer."
-msgstr "Du kan nå konfigurere uniprint-opsjonene for denne skriveren."
+msgstr "Du kan nå sette opp Uniprint-driver-opsjonene for denne skriveren."
 
-#: ../install_steps_interactive.pm_.c:445
+#: ../install_steps_interactive.pm_.c:481
 msgid "Configure Color Depth"
 msgstr "Konfigurer fargedybde"
 
-#: ../install_steps_interactive.pm_.c:446
+#: ../install_steps_interactive.pm_.c:482
 msgid "You may now configure the color options for this printer."
 msgstr "Du kan nå konfigurere fargeopsjonene for denne skriveren."
 
-#: ../install_steps_interactive.pm_.c:469
-#, fuzzy
-msgid "Password (again):"
-msgstr "Passord (igjen)"
-
-#: ../install_steps_interactive.pm_.c:473
 #: ../install_steps_interactive.pm_.c:505
+msgid "Password (again):"
+msgstr "Passord (igjen):"
+
+#: ../install_steps_interactive.pm_.c:509
+#: ../install_steps_interactive.pm_.c:541
 msgid "Please try again"
 msgstr "Vennligst prøv igjen"
 
-#: ../install_steps_interactive.pm_.c:473
-#: ../install_steps_interactive.pm_.c:505
-#, fuzzy
+#: ../install_steps_interactive.pm_.c:509
+#: ../install_steps_interactive.pm_.c:541
 msgid "The passwords do not match"
-msgstr "Dette passordet er for enkelt"
+msgstr "Passordet stemmer ikke"
 
-#: ../install_steps_interactive.pm_.c:474
+#: ../install_steps_interactive.pm_.c:510
 msgid "This password is too simple"
 msgstr "Dette passordet er for enkelt"
 
-#: ../install_steps_interactive.pm_.c:492
+#: ../install_steps_interactive.pm_.c:528
 msgid "Add user"
 msgstr "Legg til bruker"
 
-#: ../install_steps_interactive.pm_.c:493
+#: ../install_steps_interactive.pm_.c:529
 msgid "Enter a user"
 msgstr "Entre en bruker"
 
-#: ../install_steps_interactive.pm_.c:494
-#: ../install_steps_interactive.pm_.c:578
+#: ../install_steps_interactive.pm_.c:530
+#: ../install_steps_interactive.pm_.c:614
 msgid "Password"
 msgstr "Passord"
 
-#: ../install_steps_interactive.pm_.c:494
+#: ../install_steps_interactive.pm_.c:530
 msgid "Password (again)"
 msgstr "Passord (igjen)"
 
-#: ../install_steps_interactive.pm_.c:494
+#: ../install_steps_interactive.pm_.c:530
 msgid "Real name"
 msgstr "Virkelig navn"
 
-#: ../install_steps_interactive.pm_.c:494
+#: ../install_steps_interactive.pm_.c:530
 msgid "Shell"
 msgstr "Skall"
 
-#: ../install_steps_interactive.pm_.c:494
+#: ../install_steps_interactive.pm_.c:530
 msgid "User name"
 msgstr "Brukernavn"
 
-#: ../install_steps_interactive.pm_.c:507
+#: ../install_steps_interactive.pm_.c:543
 msgid "Please give a user name"
 msgstr "Vennligst oppgi et brukernavn"
 
-#: ../install_steps_interactive.pm_.c:508
+#: ../install_steps_interactive.pm_.c:544
 msgid ""
 "The user name must contain only lower cased letters, numbers, `-' and `_'"
 msgstr "Brukernavnet kan kun inneholde små bokstaver, tall, `-' og `_'"
 
-#: ../install_steps_interactive.pm_.c:527
-#, fuzzy
+#: ../install_steps_interactive.pm_.c:563
 msgid ""
 "A custom bootdisk provides a way of booting into your Linux system without\n"
 "depending on the normal bootloader. This is useful if you don't want to "
@@ -1844,172 +1998,163 @@ msgstr ""
 "En egendefinert oppstartsdiskett er en måte å starte Linux-systemet på uten\n"
 "å være avhengig av den vanlige oppstartslasteren. Dette er nyttig hvis du "
 "ikke ønsker\n"
-"å installere lilo på systemet ditt, eller et annet operativsystem fjerner "
-"lilo, eller at lilo ikke virker med din\n"
+"å installere LILO på systemet ditt, eller et annet operativsystem fjerner "
+"LILO, eller at LILO ikke virker med din\n"
 "maskinvarekonfigurasjon. En egendefinert oppstartsdiskett kan også brukes "
 "sammen\n"
 "med Mandrake's redningsbilde, som gjør det mye lettere gjenopprette etter "
 "systemsvikt.\n"
 "Ønsker du å opprette en oppstartsdiskett for systemet ditt?"
 
-#: ../install_steps_interactive.pm_.c:535
+#: ../install_steps_interactive.pm_.c:571
 msgid "Sorry, no floppy drive available"
 msgstr "Beklager, ingen diskettstasjon tilgjengelig"
 
-#: ../install_steps_interactive.pm_.c:538
+#: ../install_steps_interactive.pm_.c:574
 msgid "Choose the floppy drive you want to use to make the bootdisk"
 msgstr "Velg diskettstasjonen du ønsker å bruke for å lage oppstartsdisketten"
 
-#: ../install_steps_interactive.pm_.c:543
+#: ../install_steps_interactive.pm_.c:579
 #, c-format
 msgid "Insert a floppy in drive %s"
 msgstr "Sett inn en diskett i stasjon %s"
 
-#: ../install_steps_interactive.pm_.c:544
+#: ../install_steps_interactive.pm_.c:580
 msgid "Creating bootdisk"
 msgstr "Oppretter oppstartdiskett"
 
-#: ../install_steps_interactive.pm_.c:551
+#: ../install_steps_interactive.pm_.c:587
 msgid "Preparing bootloader"
 msgstr "Klargjør oppstartslaster"
 
-#: ../install_steps_interactive.pm_.c:561
+#: ../install_steps_interactive.pm_.c:597
 msgid "First sector of boot partition"
 msgstr "Første sektor av oppstartspartisjon"
 
-#: ../install_steps_interactive.pm_.c:561
-#, fuzzy
+#: ../install_steps_interactive.pm_.c:597
 msgid "First sector of drive (MBR)"
-msgstr "Første sektor av disk"
+msgstr "Første sektor av disk (MBR)"
 
-#: ../install_steps_interactive.pm_.c:566
-#, fuzzy
+#: ../install_steps_interactive.pm_.c:602
 msgid "LILO Installation"
-msgstr "Lilo-installasjon"
+msgstr "LILO-installasjon"
 
-#: ../install_steps_interactive.pm_.c:567
+#: ../install_steps_interactive.pm_.c:603
 msgid "Where do you want to install the bootloader?"
 msgstr "Hvor vil du installere oppstartslasteren?"
 
-#: ../install_steps_interactive.pm_.c:570
-#, fuzzy
+#: ../install_steps_interactive.pm_.c:606
 msgid "Do you want to use LILO?"
-msgstr "Ønsker du å bruke lilo?"
+msgstr "Ønsker du å bruke LILO?"
 
-#: ../install_steps_interactive.pm_.c:573
+#: ../install_steps_interactive.pm_.c:609
 msgid "Boot device"
 msgstr "Oppstartsenhet"
 
-#: ../install_steps_interactive.pm_.c:574
+#: ../install_steps_interactive.pm_.c:610
 msgid "Linear (needed for some SCSI drives)"
 msgstr "Lineær (behøves av noen SCSI-disker)"
 
-#: ../install_steps_interactive.pm_.c:574
+#: ../install_steps_interactive.pm_.c:610
 msgid "linear"
 msgstr "lineær"
 
-#: ../install_steps_interactive.pm_.c:575
+#: ../install_steps_interactive.pm_.c:611
 msgid "Compact"
 msgstr "Kompakt"
 
-#: ../install_steps_interactive.pm_.c:575
+#: ../install_steps_interactive.pm_.c:611
 msgid "compact"
 msgstr "kompakt"
 
-#: ../install_steps_interactive.pm_.c:576
-#, fuzzy
+#: ../install_steps_interactive.pm_.c:612
 msgid "Delay before booting default image"
-msgstr "Forsinkelse for valg av standardvalg"
+msgstr "Forsinkelse før oppstart av standard bilde"
 
-#: ../install_steps_interactive.pm_.c:577
+#: ../install_steps_interactive.pm_.c:613
 msgid "Video mode"
 msgstr "Skjerm-modus"
 
-#: ../install_steps_interactive.pm_.c:579
+#: ../install_steps_interactive.pm_.c:615
 msgid "Restrict command line options"
 msgstr "Begrense kommandolinje-opsjoner"
 
-#: ../install_steps_interactive.pm_.c:579
+#: ../install_steps_interactive.pm_.c:615
 msgid "restrict"
 msgstr "begrense"
 
-#: ../install_steps_interactive.pm_.c:585
-#, fuzzy
+#: ../install_steps_interactive.pm_.c:621
 msgid "LILO main options"
-msgstr "Lilo hovedopsjoner"
+msgstr "LILO hovedopsjoner"
 
-#: ../install_steps_interactive.pm_.c:589
+#: ../install_steps_interactive.pm_.c:625
 msgid ""
 "Option ``Restrict command line options'' is of no use without a password"
 msgstr ""
 "Opsjon ``Begrense kommandolinje-opsjoner'' kan ikke brukes uten et passord"
 
-#: ../install_steps_interactive.pm_.c:598
-#, fuzzy
+#: ../install_steps_interactive.pm_.c:634
 msgid ""
 "Here are the following entries in LILO.\n"
 "You can add some more or change the existent ones."
 msgstr ""
-"Her er følgende oppføringer i lilo\n"
+"Her er følgende oppføringer i LILO\n"
 "Du kan legge til noen flere eller endre de eksisterende."
 
-#: ../install_steps_interactive.pm_.c:600
+#: ../install_steps_interactive.pm_.c:636
 msgid "Add"
 msgstr "Legg til"
 
-#: ../install_steps_interactive.pm_.c:618
+#: ../install_steps_interactive.pm_.c:654
 msgid "Image"
 msgstr "Bilde"
 
-#: ../install_steps_interactive.pm_.c:619
-#: ../install_steps_interactive.pm_.c:627
+#: ../install_steps_interactive.pm_.c:655
+#: ../install_steps_interactive.pm_.c:663
 msgid "Root"
 msgstr "Root"
 
-#: ../install_steps_interactive.pm_.c:620
+#: ../install_steps_interactive.pm_.c:656
 msgid "Append"
 msgstr "Tilføye"
 
-#: ../install_steps_interactive.pm_.c:621
+#: ../install_steps_interactive.pm_.c:657
 msgid "Initrd"
 msgstr "Initrd"
 
-#: ../install_steps_interactive.pm_.c:622
+#: ../install_steps_interactive.pm_.c:658
 msgid "Read-write"
 msgstr "Les-skriv"
 
-#: ../install_steps_interactive.pm_.c:628
+#: ../install_steps_interactive.pm_.c:664
 msgid "Table"
 msgstr "Tabell"
 
-#: ../install_steps_interactive.pm_.c:629
+#: ../install_steps_interactive.pm_.c:665
 msgid "Unsafe"
 msgstr "Usikker"
 
-#: ../install_steps_interactive.pm_.c:634
+#: ../install_steps_interactive.pm_.c:670
 msgid "Label"
 msgstr "Etikett"
 
-#: ../install_steps_interactive.pm_.c:636
+#: ../install_steps_interactive.pm_.c:672
 msgid "Default"
 msgstr "Standard"
 
-#: ../install_steps_interactive.pm_.c:655
-#, fuzzy
+#: ../install_steps_interactive.pm_.c:691
 msgid "Installation of LILO failed. The following error occured:"
-msgstr "Lilo feilet. Følgende feil oppsto:"
+msgstr "Installasjon av LILO feilet. Følgende feil oppsto:"
 
-#: ../install_steps_interactive.pm_.c:666
-#, fuzzy
+#: ../install_steps_interactive.pm_.c:702
 msgid ""
 "Some steps are not completed.\n"
 "Do you really want to quit now?"
 msgstr ""
-"Noen steg er ikke ferdige\n"
+"Noen steg er ikke ferdige.\n"
 "Ønsker du virkelig å slutte nå?"
 
-#: ../install_steps_interactive.pm_.c:670
-#, fuzzy
+#: ../install_steps_interactive.pm_.c:706
 msgid ""
 "Congratulations, installation is complete.\n"
 "Remove the boot media and press return to reboot.\n"
@@ -2021,18 +2166,28 @@ msgid ""
 msgstr ""
 "Gratulerer, installasjonen er fullført.\n"
 "Fjern oppstartsmediet og trykk return for å starte på nytt.\n"
-"For informasjon om fikser som er tilgjengelige for denne utgaven av Linux "
-"Mandrake,\n"
+"For informasjon om endringer som er tilgjengelige for denne utgaven av "
+"Linux- Mandrake,\n"
 "sjekk Errataen tilgjengelig fra http://www.linux-mandrake.com/.\n"
 "Informasjon om konfigurering av systemet ditt finnes i post\n"
 "install-kapittelet i Official Linux Mandrake User's Guide."
 
-#: ../install_steps_interactive.pm_.c:687
-#, fuzzy, c-format
+#: ../install_steps_interactive.pm_.c:723
+#, c-format
+msgid "Installing driver for %s card %s"
+msgstr "Installerer driver for %s kort %s"
+
+#: ../install_steps_interactive.pm_.c:724
+#, c-format
+msgid "(module %s)"
+msgstr "(modul %s)"
+
+#: ../install_steps_interactive.pm_.c:734
+#, c-format
 msgid "What %s card do you have?"
 msgstr "Hvilket %s kort har du?"
 
-#: ../install_steps_interactive.pm_.c:694
+#: ../install_steps_interactive.pm_.c:741
 #, c-format
 msgid ""
 "In some cases, the %s driver needs to have extra information to work\n"
@@ -2050,96 +2205,86 @@ msgstr ""
 "burde\n"
 "ikke forårsake noen skade."
 
-#: ../install_steps_interactive.pm_.c:699
+#: ../install_steps_interactive.pm_.c:746
 msgid "Autoprobe"
 msgstr "Automatisk sondering"
 
-#: ../install_steps_interactive.pm_.c:699
+#: ../install_steps_interactive.pm_.c:746
 msgid "Specify options"
 msgstr "Spesifiser opsjoner"
 
-#: ../install_steps_interactive.pm_.c:703
+#: ../install_steps_interactive.pm_.c:750
 #, c-format
 msgid "You may now provide its options to module %s."
-msgstr ""
+msgstr "Du kan nå gi dens opsjoner til modul %s."
 
-#: ../install_steps_interactive.pm_.c:709
-#, fuzzy, c-format
+#: ../install_steps_interactive.pm_.c:756
+#, c-format
 msgid ""
 "You may now provide its options to module %s.\n"
 "Options are in format ``name=value name2=value2 ...''.\n"
 "For instance, ``io=0x300 irq=7''"
 msgstr ""
-"Her må forskjellige opsjoner oppgis for modulen %s.\n"
+"Du kan nå oppgi dens opsjoner for modul %s.\n"
 "Opsjonene er i format ``name=value name2=value2 ...''.\n"
-"F.eks. kan du ha ``io=0x300 irq=7''"
+"F.eks., ``io=0x300 irq=7''"
 
-#: ../install_steps_interactive.pm_.c:712
+#: ../install_steps_interactive.pm_.c:759
 msgid "Module options:"
 msgstr "Modulopsjoner:"
 
-#: ../install_steps_interactive.pm_.c:719
-#, fuzzy, c-format
+#: ../install_steps_interactive.pm_.c:769
+#, c-format
 msgid ""
 "Loading module %s failed.\n"
 "Do you want to try again with other parameters?"
 msgstr ""
-"Lasting av modul %s feilet\n"
+"Lasting av modul %s feilet.\n"
 "Ønsker du å prøve igjen med andre parametere?"
 
-#: ../install_steps_interactive.pm_.c:729
+#: ../install_steps_interactive.pm_.c:782
 msgid "Skip PCMCIA probing"
-msgstr ""
+msgstr "Dropp PCMCIA-søk"
 
-#: ../install_steps_interactive.pm_.c:732
+#: ../install_steps_interactive.pm_.c:789
 #, c-format
-msgid "Installing driver for %s card %s"
-msgstr "Installerer driver for %s kort %s"
-
-#: ../install_steps_interactive.pm_.c:733
-#, c-format
-msgid "(module %s)"
-msgstr "(modul %s)"
-
-#: ../install_steps_interactive.pm_.c:741
-#, fuzzy, c-format
 msgid "Skip %s PCI probing"
-msgstr "Dropp %s pci-søk"
+msgstr "Dropp %s PCI-søk"
 
-#: ../install_steps_interactive.pm_.c:745
+#: ../install_steps_interactive.pm_.c:793
 #, c-format
 msgid "Found %s %s interfaces"
 msgstr "Fant %s %s grensesnitt"
 
-#: ../install_steps_interactive.pm_.c:746
+#: ../install_steps_interactive.pm_.c:794
 msgid "Do you have another one?"
 msgstr "Har du enda ett?"
 
-#: ../install_steps_interactive.pm_.c:747
+#: ../install_steps_interactive.pm_.c:795
 #, c-format
 msgid "Do you have an %s interface?"
 msgstr "Har du et %s grensesnitt?"
 
-#: ../install_steps_interactive.pm_.c:749 ../interactive.pm_.c:52
-#: ../my_gtk.pm_.c:345
+#: ../install_steps_interactive.pm_.c:797 ../interactive.pm_.c:52
+#: ../my_gtk.pm_.c:346
 msgid "No"
 msgstr "Nei"
 
-#: ../install_steps_interactive.pm_.c:749 ../interactive.pm_.c:52
-#: ../my_gtk.pm_.c:345
+#: ../install_steps_interactive.pm_.c:797 ../interactive.pm_.c:52
+#: ../my_gtk.pm_.c:346
 msgid "Yes"
 msgstr "Ja"
 
-#: ../install_steps_interactive.pm_.c:750
+#: ../install_steps_interactive.pm_.c:798
 msgid "See hardware info"
 msgstr "Se maskinvareinfo"
 
 #: ../install_steps_stdio.pm_.c:21
-#, fuzzy, c-format
+#, c-format
 msgid "Entering step `%s'\n"
-msgstr "Starter steg `%s'\n"
+msgstr "Entrer steg `%s'\n"
 
-#: ../interactive.pm_.c:57 ../my_gtk.pm_.c:193 ../my_gtk.pm_.c:346
+#: ../interactive.pm_.c:57 ../my_gtk.pm_.c:194 ../my_gtk.pm_.c:347
 msgid "Cancel"
 msgstr "Avbryt"
 
@@ -2221,7 +2366,6 @@ msgid "Hungarian"
 msgstr "Ungarsk"
 
 #: ../keyboard.pm_.c:47
-#, fuzzy
 msgid "Israeli"
 msgstr "Israelsk"
 
@@ -2250,7 +2394,6 @@ msgid "Lithuanian \"number row\" QWERTY"
 msgstr "Litauisk \"nummer-rekke\" QWERTY"
 
 #: ../keyboard.pm_.c:54
-#, fuzzy
 msgid "Lithuanian \"phonetic\" QWERTY"
 msgstr "Litauisk \"phonétic\" QWERTY"
 
@@ -2279,12 +2422,10 @@ msgid "Swedish"
 msgstr "Svensk"
 
 #: ../keyboard.pm_.c:61
-#, fuzzy
 msgid "Swiss (French layout)"
 msgstr "Sveisisk (fransk oppsett)"
 
 #: ../keyboard.pm_.c:62
-#, fuzzy
 msgid "Swiss (German layout)"
 msgstr "Sveisisk (tysk oppsett)"
 
@@ -2317,12 +2458,11 @@ msgid "Yugoslavian (latin layout)"
 msgstr "Jugoslavisk (latinsk oppsett)"
 
 #: ../lilo.pm_.c:111
-#, fuzzy
 msgid ""
 "Welcome to LILO the operating system chooser!\n"
 "To list the possible choices, press <TAB>\n"
 msgstr ""
-"Velkommen til lilo, operativsystem-velgeren!\n"
+"Velkommen til LILO, operativsystem-velgeren!\n"
 "For å se de forskjellige valgene, trykk <TAB>\n"
 
 #: ../mouse.pm_.c:15
@@ -2441,7 +2581,7 @@ msgstr "Microsoft Bus Mouse"
 msgid "Logitech Bus Mouse"
 msgstr "Logitech Bus Mouse"
 
-#: ../partition_table.pm_.c:372
+#: ../partition_table.pm_.c:373
 msgid ""
 "You have a hole in your partition table but I can't use it.\n"
 "The only solution is to move your primary partitions to have the hole next "
@@ -2451,27 +2591,45 @@ msgstr ""
 "Den eneste løsningen er å flytte primærpartisjonen din for å ha hullet ved "
 "siden av de utvidede partisjonene"
 
-#: ../partition_table.pm_.c:458
+#: ../partition_table.pm_.c:459
 #, c-format
 msgid "Error reading file %s"
 msgstr "Feil ved lesing av fil %s"
 
-#: ../partition_table.pm_.c:465
+#: ../partition_table.pm_.c:466
 #, c-format
 msgid "Restoring from file %s failed: %s"
 msgstr "Gjenoppretting fra fil %s mislykket: %s"
 
-#: ../partition_table.pm_.c:467
+#: ../partition_table.pm_.c:468
 msgid "Bad backup file"
 msgstr "Dårlig sikkerhetskopi-fil"
 
-#: ../partition_table.pm_.c:487
+#: ../partition_table.pm_.c:488
 #, c-format
 msgid "Error writing to file %s"
 msgstr "Feil ved skriving til fil %s"
 
+#: ../printer.pm_.c:244
+#, fuzzy
+msgid "Local printer"
+msgstr "Lokal skriverenhet"
+
+#: ../printer.pm_.c:245
+#, fuzzy
+msgid "Remote lpd"
+msgstr "Fjern-kø:"
+
+#: ../printer.pm_.c:246
+msgid "SMB/Windows 95/NT"
+msgstr ""
+
+#: ../printer.pm_.c:247
+msgid "NetWare"
+msgstr ""
+
 #~ msgid " Mb"
-#~ msgstr "Mb"
+#~ msgstr " Mb"
 
 #~ msgid "Package ordering failed"
 #~ msgstr "Pakkelevering mislykket"
@@ -2806,3 +2964,9 @@ msgstr "Feil ved skriving til fil %s"
 
 #~ msgid "Is it ok?"
 #~ msgstr "Er det ok?"
+
+#~ msgid "An error occurred while getting the geometry of block device %s: %s"
+#~ msgstr "En feil oppsto ved henting av geometrien til blokkenhet %s: %s"
+
+#~ msgid "Found root partition : "
+#~ msgstr "Fant root-partisjon : "
