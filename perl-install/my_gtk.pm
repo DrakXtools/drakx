@@ -380,7 +380,7 @@ my ($next_child, $left, $right, $up, $down);
     };
 }
 
-sub create_treeitem($$) {
+sub create_treeitem($) {
     my ($name) = @_;
     
     my $w = new Gtk::TreeItem($name);

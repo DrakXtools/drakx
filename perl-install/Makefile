@@ -76,8 +76,8 @@ install_pms: $(DIRS)
 		dest=$(DESTREP4PMS)/`dirname $$i`; \
 		install -d $$dest; \
 		perl -ne 'print' $$i > $(DESTREP4PMS)/$$i; \
+		perl -ne 's/#-.*//; print unless (/^=head/ .. /^=cut/) || /use (diagnostics|vars|strict)/' $$i > $(DESTREP4PMS)/$$i; \
 	done
-#		perl -ne 's/\s*#-.*//; print unless (/^=head/ .. /^=cut/) || /use (diagnostics|vars|strict)/' $$i > $(DESTREP4PMS)/$$i; \
 
 	cp *.rc $(DESTREP4PMS)
 	install -d $(DESTREP4PMS)/po

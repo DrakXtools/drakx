@@ -380,7 +380,7 @@ name and directory should be used for this queue?"),
 					    _("To use a remote lpd print queue, you need to supply
 the hostname of the printer server and the queue name
 on that server which jobs should be placed in."),
-					    [_("Remote hostname:"), _("Remote queue:")],
+					    [_("Remote hostname:"), _("Remote queue")],
 					    [\$o->{printer}{REMOTEHOST}, \$o->{printer}{REMOTEQUEUE}],
 					   );
 
@@ -706,6 +706,7 @@ sub exitInstall {
 
     return $o->{step} = '' unless $alldone || $o->ask_yesorno('', 
 _("Some steps are not completed.
+
 Do you really want to quit now?"), 0);
 
     $o->ask_warn('',
