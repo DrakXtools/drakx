@@ -364,4 +364,71 @@ END
 #-   ModeLine "640x480"     28     640  672  768  800   480  490  492  525
 
 
+sub test_mouse {
+    my ($mouse) = @_;
+
+    my $w = my_gtk->new('');
+    my ($width, $height, $offset) = (210, 300, 25);
+    my ($bw, $bh) = ($width / 3, $height * 2 / 5);
+
+    gtkadd($w->{window}, 
+	   gtkpack(new Gtk::VBox(0,0),
+		   my $darea = gtkset_usize(new Gtk::DrawingArea, $width+1, $height+1),
+		   create_okcancel($w, '', '', "edge"),
+		  ),
+	  );
+
+    my $draw_rect; $draw_rect = sub {
+	my ($black, $fill, $rect) = @_;
+	$draw_rect->(0, 1, $rect) if !$fill; #- blank it first
+	$darea->window->draw_rectangle($black ? $darea->style->fg_gc('normal') : $darea->style->bg_gc('normal'), $fill, @$rect);
+	$darea->draw($rect);
+    };
+    my $paintWheel = sub {
+	my ($x, $y, $w, $h) = ($width / 2 - $bw / 6, $bh / 4, $bw / 3, $bh / 2);
+	
+	my $offset = 0 if 0;
+	$offset += $_[0] if $_[0];
+
+	$draw_rect->(1, 0, [ $x, $y, $w, $h ]);
+
+	my $step = 10;
+	for (my $i = $offset % $step; $i < $h; $i += $step) {
+	    $draw_rect->(1, 1, [ $x, $y + $i, $w, min(2, $h - $i) ]);
+	}
+    };
+    my $paintButton = sub {
+	my ($nb, $pressed) = @_;
+	my $rect = [ $bw * $nb, 0, $bw, $bh ];
+	$draw_rect->(1, $pressed, $rect);
+	$paintWheel->(0) if $nb == 1 && $mouse->{nbuttons} > 3;
+    };
+    my $draw_text = sub {
+	my ($t, $y) = @_;
+	my $font = $darea->style->font;
+	my $w = $font->string_width($t);
+	$darea->window->draw_string($font, $darea->style->black_gc, ($width - $w) / 2, $y, $t);
+    };
+    $darea->signal_connect(button_press_event => sub {
+			       my $b = $_[1]{button};
+			       $b >= 4 ?
+				 $paintWheel->($b == 4 ? -1 : 1) :
+				 $paintButton->($b - 1, 1);
+			   });
+    $darea->signal_connect(button_release_event => sub { 
+			       my $b = $_[1]{button};
+			       $paintButton->($b - 1, 0) if $b < 4;
+			   });
+    $darea->size($width, $height);
+    $darea->set_events([ 'button_press_mask', 'button_release_mask' ]);
+
+    $w->sync; # HACK
+    $draw_rect->(0, 1, [ 0, 0, $width, $height]);
+    $draw_text->(_("Please test the mouse"), 2 * $bh - 20);
+    $draw_text->(_("Move your wheel"), 2 * $bh);# if 1 && $mouse->{XMOUSETYPE} eq 'IMPS/2';
+    $paintButton->($_, 0) foreach 0..2;
+    $w->main;
+}
+
+
 1;
