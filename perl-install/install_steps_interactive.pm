@@ -220,7 +220,7 @@ sub setupSCSI {
 	if ($o->{pcmcia} ||= !$::testing && c::pcmcia_probe()) {
 	    my $w = $o->wait_message(N("PCMCIA"), N("Configuring PCMCIA cards..."));
 	    my $results = modules::configure_pcmcia($o->{pcmcia});
-	    $w = undef;
+	    undef $w;
 	    $results and $o->ask_warn('', $results);
 	}
     }
@@ -394,7 +394,7 @@ sub choosePackages {
 
     my $min_size = pkgs::selectedSize($packages);
     unless ($min_size < $availableC) {
-	$w = undef;
+	undef $w;
 	$o->ask_warn('', N("Your system does not have enough space left for installation or upgrade (%d > %d)",
 			   $min_size, $availableC));
 	install_steps::rebootNeeded($o);
@@ -407,7 +407,7 @@ sub choosePackages {
     my $max_size = pkgs::selectedSize($packages) + 1; #- avoid division by zero.
     log::l("max size (level $min_mark) is : " . formatXiB($max_size));
     pkgs::restoreSelected($b);
-    $w = undef;
+    undef $w;
 
   chooseGroups:
     $o->chooseGroups($packages, $compssUsers, $min_mark, \$individual, $max_size) if !$o->{isUpgrade} && !$::corporate && $o->{meta_class} ne 'desktop';
@@ -446,7 +446,7 @@ The format is the same as auto_install generated floppies."),
 	    log::l("load package selection from floppy");
 	    my $O = eval { install_any::loadO(undef, 'floppy') };
 	    if ($@) {
-		$w = undef;	#- close wait message.
+		undef $w;	#- close wait message.
 		$o->ask_okcancel('', N("Insert a floppy containing package selection"))
 		  or return;
 	    } else {
