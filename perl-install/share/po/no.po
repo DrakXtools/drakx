@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: panoramix VERSION\n"
-"POT-Creation-Date: 1999-09-03 22:21+0200\n"
+"POT-Creation-Date: 1999-09-03 23:57+0200\n"
 "PO-Revision-Date: 1999-08-25 11:07+0200\n"
 "Last-Translator: Terje Bjerkelia <terje@bjerkelia.com>\n"
 "Language-Team: norwegian\n"
@@ -64,8 +64,8 @@ msgstr "En feil oppsto, prøv å endre noen parametere"
 msgid "Automatic resolutions"
 msgstr "Automatiske oppløsninger"
 
-#: ../Xconfigurator.pm_.c:333 ../install_steps_interactive.pm_.c:290
-#: ../install_steps_interactive.pm_.c:291
+#: ../Xconfigurator.pm_.c:333 ../install_steps_interactive.pm_.c:289
+#: ../install_steps_interactive.pm_.c:290
 msgid "Resolution"
 msgstr "Oppløsning"
 
@@ -1140,7 +1140,7 @@ msgid "Netmask:"
 msgstr "Nettmaske:"
 
 #: ../install_steps_graphical.pm_.c:399
-msgid "IP address should but in format 1.2.3.4"
+msgid "IP address should be in format 1.2.3.4"
 msgstr ""
 
 #: ../install_steps_graphical.pm_.c:412
@@ -1299,8 +1299,8 @@ msgstr ""
 #: ../install_steps_interactive.pm_.c:159
 msgid ""
 "Every print queue (which print jobs are directed to) needs a \n"
-"\t\t\t   name (often lp) and a spool directory associated with it. What \n"
-"\t\t\t   name and directory should be used for this queue?"
+"name (often lp) and a spool directory associated with it. What \n"
+"name and directory should be used for this queue?"
 msgstr ""
 
 #: ../install_steps_interactive.pm_.c:162
@@ -1322,7 +1322,7 @@ msgstr ""
 #: ../install_steps_interactive.pm_.c:183
 msgid ""
 "What device is your printer connected to \n"
-"\t\t\t    (note that /dev/lp0 is equivalent to LPT1:)?\n"
+"(note that /dev/lp0 is equivalent to LPT1:)?\n"
 msgstr ""
 
 #: ../install_steps_interactive.pm_.c:185
@@ -1345,8 +1345,8 @@ msgstr ""
 #: ../install_steps_interactive.pm_.c:201
 msgid ""
 "To use a remote lpd print queue, you need to supply \n"
-"\t\t\t\t   the hostname of the printer server and the queue name \n"
-"\t\t\t\t   on that server which jobs should be placed in."
+"the hostname of the printer server and the queue name \n"
+"on that server which jobs should be placed in."
 msgstr ""
 
 #: ../install_steps_interactive.pm_.c:204
@@ -1365,10 +1365,10 @@ msgstr ""
 #: ../install_steps_interactive.pm_.c:218
 msgid ""
 "To print to a SMB printer, you need to provide the \n"
-"\tSMB host name (this is not always the same as the machines \n"
-"\tTCP/IP hostname) and possibly the IP address of the print server, as \n"
-"\twell as the share name for the printer you wish to access and any \n"
-"\tapplicable user name, password, and workgroup information."
+"SMB host name (this is not always the same as the machines \n"
+"TCP/IP hostname) and possibly the IP address of the print server, as \n"
+"well as the share name for the printer you wish to access and any \n"
+"applicable user name, password, and workgroup information."
 msgstr ""
 
 #: ../install_steps_interactive.pm_.c:223
@@ -1382,7 +1382,7 @@ msgid "SMB server host:"
 msgstr "tjener"
 
 #: ../install_steps_interactive.pm_.c:224
-#: ../install_steps_interactive.pm_.c:248
+#: ../install_steps_interactive.pm_.c:247
 #, fuzzy
 msgid "Password:"
 msgstr "Passord"
@@ -1393,7 +1393,7 @@ msgid "Share name:"
 msgstr "Brukernavn"
 
 #: ../install_steps_interactive.pm_.c:224
-#: ../install_steps_interactive.pm_.c:248
+#: ../install_steps_interactive.pm_.c:247
 #, fuzzy
 msgid "User name:"
 msgstr "Brukernavn"
@@ -1409,64 +1409,61 @@ msgstr ""
 #: ../install_steps_interactive.pm_.c:242
 msgid ""
 "To print to a NetWare printer, you need to provide the \n"
-"\t                           NetWare print server name (this is not always "
-"the same as the machines \n"
-"\t                           TCP/IP hostname) \n"
-"\t                           as well as the print queue name for the printer "
-"you wish to access and any \n"
-"\t                           applicable user name and password."
+"NetWare print server name (this is not always the same as the machines \n"
+"TCP/IP hostname) as well as the print queue name for the printer you \n"
+"wish to access and any applicable user name and password."
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:247
+#: ../install_steps_interactive.pm_.c:246
 msgid "Print Queue Name:"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:247
+#: ../install_steps_interactive.pm_.c:246
 msgid "Printer Server:"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:265
+#: ../install_steps_interactive.pm_.c:264
 #, fuzzy
 msgid "Configure Printer"
 msgstr "Konfigurer X"
 
-#: ../install_steps_interactive.pm_.c:266
+#: ../install_steps_interactive.pm_.c:265
 #, fuzzy
 msgid "What type of printer do you have?"
 msgstr "Hva slags brukertype vil du ha?"
 
+#: ../install_steps_interactive.pm_.c:277
 #: ../install_steps_interactive.pm_.c:278
-#: ../install_steps_interactive.pm_.c:279
 msgid "Paper Size"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:306
+#: ../install_steps_interactive.pm_.c:305
 msgid "CRLF"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:307
+#: ../install_steps_interactive.pm_.c:306
 msgid "Fix stair-stepping of text?"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:322
+#: ../install_steps_interactive.pm_.c:321
 #, fuzzy
 msgid "Configure Uniprint Driver"
 msgstr "Konfigurer X"
 
-#: ../install_steps_interactive.pm_.c:323
+#: ../install_steps_interactive.pm_.c:322
 msgid "You may now configure the uniprint options for this printer."
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:331
+#: ../install_steps_interactive.pm_.c:330
 #, fuzzy
 msgid "Configure Color Depth"
 msgstr "Konfigurer X"
 
-#: ../install_steps_interactive.pm_.c:332
+#: ../install_steps_interactive.pm_.c:331
 msgid "You may now configure the color options for this printer."
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:359
+#: ../install_steps_interactive.pm_.c:358
 msgid ""
 "A custom bootdisk provides a way of booting into your Linux system without\n"
 "depending on the normal bootloader. This is useful if you don't want to "
@@ -1480,75 +1477,75 @@ msgid ""
 "failures. Would you like to create a bootdisk for your system?"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:368
+#: ../install_steps_interactive.pm_.c:367
 msgid "Sorry, no floppy drive available"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:375
+#: ../install_steps_interactive.pm_.c:374
 #, c-format
 msgid "Insert a floppy in drive %s"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:376
+#: ../install_steps_interactive.pm_.c:375
 #, fuzzy
 msgid "Creating bootdisk"
 msgstr "Opprett oppstartdiskett"
 
-#: ../install_steps_interactive.pm_.c:382
+#: ../install_steps_interactive.pm_.c:381
 msgid "First sector of boot partition"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:382
+#: ../install_steps_interactive.pm_.c:381
 msgid "First sector of drive"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:385
+#: ../install_steps_interactive.pm_.c:384
 #, fuzzy
 msgid "Lilo Installation"
 msgstr "Installerer"
 
-#: ../install_steps_interactive.pm_.c:386
+#: ../install_steps_interactive.pm_.c:385
 #, fuzzy
 msgid "Where do you want to install the bootloader?"
 msgstr "Hvor vil du montere %s enheten?"
 
-#: ../install_steps_interactive.pm_.c:409
+#: ../install_steps_interactive.pm_.c:408
 #, fuzzy, c-format
 msgid "What %s card have you?"
 msgstr "Hva slags scsi-kort har du?"
 
-#: ../install_steps_interactive.pm_.c:418
+#: ../install_steps_interactive.pm_.c:417
 msgid "Autoprobe"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:418
+#: ../install_steps_interactive.pm_.c:417
 msgid "Specify options"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:424
+#: ../install_steps_interactive.pm_.c:423
 msgid "Module options:"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:436
+#: ../install_steps_interactive.pm_.c:435
 #, fuzzy, c-format
 msgid "Installing driver for %s card %s"
 msgstr "Installerer driver for scsi-kort %s"
 
-#: ../install_steps_interactive.pm_.c:437
+#: ../install_steps_interactive.pm_.c:436
 #, c-format
 msgid "(module %s)"
 msgstr "(modul %s)"
 
-#: ../install_steps_interactive.pm_.c:450
+#: ../install_steps_interactive.pm_.c:449
 #, fuzzy, c-format
 msgid "Found %s %s interfaces"
 msgstr " scsi grensesnitt"
 
-#: ../install_steps_interactive.pm_.c:451
+#: ../install_steps_interactive.pm_.c:450
 msgid "Do you have another one?"
 msgstr "Har du enda ett?"
 
-#: ../install_steps_interactive.pm_.c:452
+#: ../install_steps_interactive.pm_.c:451
 #, fuzzy, c-format
 msgid "Do you have an %s interface?"
 msgstr "Har du et scsi grensesnitt"
