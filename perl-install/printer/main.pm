@@ -2357,6 +2357,9 @@ sub read_hplip_db {
 			    and $entry->{deviddesc} = $2;
 			$idstr =~ m!(CMD|COMMAND\s*SET):([^;]+);!i
 			    and $entry->{devidcmdset} = $2;
+		    } elsif (m!^\s*<tech type="(\d+)"/>\s*$!) {
+			# Printing technology
+			$entry->{tech} = $1;
 		    } elsif (m!^\s*<align type="(\d+)"/>\s*$!) {
 			# Head alignment type
 			$entry->{align} = $1;
