@@ -40,6 +40,7 @@ extern char * stage2_kickstart;
 #define MODE_RAMDISK        (1 << 9)
 #define MODE_CHANGEDISK     (1 << 10)
 #define MODE_UPDATEMODULES  (1 << 11)
+#define MODE_NOAUTO         (1 << 12)
 
 #define IS_TESTING     (get_param(MODE_TESTING))
 #define IS_EXPERT      (get_param(MODE_EXPERT))
@@ -49,6 +50,7 @@ extern char * stage2_kickstart;
 #define IS_RAMDISK     (get_param(MODE_RAMDISK))
 #define IS_CHANGEDISK  (get_param(MODE_CHANGEDISK))
 #define IS_UPDATEMODULES (get_param(MODE_UPDATEMODULES))
+#define IS_NOAUTO      (get_param(MODE_NOAUTO))
 
 void fatal_error(char *msg) __attribute__ ((noreturn));
 

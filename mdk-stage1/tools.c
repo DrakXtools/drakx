@@ -90,6 +90,7 @@ void process_cmdline(void)
 		if (!strcmp(name, "changedisk")) set_param(MODE_CHANGEDISK);
 		if (!strcmp(name, "updatemodules")) set_param(MODE_UPDATEMODULES);
 		if (!strcmp(name, "rescue")) set_param(MODE_RESCUE);
+		if (!strcmp(name, "noauto")) set_param(MODE_NOAUTO);
 		if (!strcmp(name, "special_stage2")) set_param(MODE_SPECIAL_STAGE2);
 		if (!strcmp(name, "automatic")) {
 			set_param(MODE_AUTOMATIC);

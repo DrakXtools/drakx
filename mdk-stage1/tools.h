@@ -48,6 +48,6 @@ struct param_elem
 };
 
 #define ptr_begins_static_str(pointer,static_str) (!strncmp(pointer,static_str,sizeof(static_str)-1))
-#define streq !strcmp
+#define streq(a,b) (!strcmp(a,b))
 
 #endif

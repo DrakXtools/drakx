@@ -33,6 +33,8 @@
 #include <sys/time.h>
 #include "newt/newt.h"
 
+#include <probing.h>
+
 #include "frontend.h"
 
 void init_frontend(char * welcome_msg)
@@ -175,6 +177,8 @@ enum return_type ask_from_list_comments(char *msg, char ** elems, char ** elems_
 	char ** sav_elems = elems;
 	int i;
 
+	probe_that_type(USB_CONTROLLERS, BUS_USB); // we'd need the keyboard for interactions so...
+
 	i = 0;
 	while (elems && *elems) {
 		int j = (*elems_comments) ? strlen(*elems_comments) : 0;
@@ -206,6 +210,8 @@ enum return_type ask_from_list(char *msg, char ** elems, char ** choice)
 {
 	int answer = 0, rc;
 
+	probe_that_type(USB_CONTROLLERS, BUS_USB); // we'd need the keyboard for interactions so...
+
 	rc = newtWinMenu("Please choose...", msg, 52, 5, 5, 7, elems, &answer, "Ok", "Cancel", NULL);
 
 	if (rc == 2)
@@ -220,6 +226,8 @@ enum return_type ask_from_list(char *msg, char ** elems, char ** choice)
 enum return_type ask_yes_no(char *msg)
 {
 	int rc;
+
+	probe_that_type(USB_CONTROLLERS, BUS_USB); // we'd need the keyboard for interactions so...
 
 	rc = newtWinTernary("Please answer...", "Yes", "No", "Back", msg);
 
@@ -357,6 +365,8 @@ enum return_type ask_from_entries(char *msg, char ** questions, char *** answers
 	int j, i = 0;
 	int rc;
 	char ** already_answers = NULL;
+
+	probe_that_type(USB_CONTROLLERS, BUS_USB); // we'd need the keyboard for interactions so...
 
 	while (questions && *questions) {
 		entries[i].text = *questions;

@@ -97,6 +97,39 @@ static enum return_type try_with_device(char * dev_name, char * dev_model)
 	return do_with_device(dev_name, dev_model);
 }
 
+int try_automatic(char ** medias, char ** medias_models)
+{
+	static char * already_tried[50] = { NULL };
+	char ** model = medias_models;
+	char ** ptr = medias;
+	int i = 0;
+	while (ptr && *ptr) {
+		char ** p;
+		for (p = already_tried; p && *p; p++)
+			if (streq(*p, *ptr)) 
+				goto try_automatic_already_tried;
+		*p = strdup(*ptr);
+		*(p+1) = NULL;
+
+		wait_message("Trying to access " DISTRIB_NAME " CDROM disc (drive %s)", *model);
+		if (mount_that_cd_device(*ptr) != -1) {
+			if (!test_that_cd()) {
+				remove_wait_message();
+				return i;
+			}
+			else
+				umount(IMAGE_LOCATION);
+		}
+		remove_wait_message();
+
+	try_automatic_already_tried:
+		ptr++;
+		model++;
+		i++;
+	}
+	return 0;
+}
+
 enum return_type cdrom_prepare(void)
 {
 	char ** medias, ** ptr, ** medias_models;
@@ -105,15 +138,32 @@ enum return_type cdrom_prepare(void)
 	enum return_type results;
 
 	my_insmod("ide-cd", ANY_DRIVER_TYPE, NULL);
-	my_insmod("sr_mod", ANY_DRIVER_TYPE, NULL);
-	
-	get_medias(CDROM, &medias, &medias_models);
 
-	ptr = medias;
-	while (ptr && *ptr) {
-		count++;
-		ptr++;
-	}
+	if (IS_AUTOMATIC) {
+		get_medias(CDROM, &medias, &medias_models, BUS_IDE);
+		if ((i = try_automatic(medias, medias_models)))
+			return do_with_device(medias[i], medias_models[i]);
+		
+		my_insmod("sr_mod", ANY_DRIVER_TYPE, NULL);
+		get_medias(CDROM, &medias, &medias_models, BUS_SCSI);
+		if ((i = try_automatic(medias, medias_models)))
+			return do_with_device(medias[i], medias_models[i]);
+		
+		get_medias(CDROM, &medias, &medias_models, BUS_USB);
+		if ((i = try_automatic(medias, medias_models)))
+			return do_with_device(medias[i], medias_models[i]);
+
+		unset_param(MODE_AUTOMATIC);
+	} else
+		my_insmod("sr_mod", ANY_DRIVER_TYPE, NULL);
+
+
+	get_medias(CDROM, &medias, &medias_models, BUS_ANY);
+        ptr = medias;
+        while (ptr && *ptr) {
+                count++;
+                ptr++;
+        }
 
 	if (count == 0) {
 		stg1_error_message("No CDROM device found.");
@@ -133,41 +183,19 @@ enum return_type cdrom_prepare(void)
 		return cdrom_prepare();
 	}
 
-	if (IS_AUTOMATIC) {
+	results = ask_from_list_comments("Please choose the CDROM drive to use for the installation.", medias, medias_models, &choice);
+	if (results == RETURN_OK) {
 		char ** model = medias_models;
 		ptr = medias;
-		while (ptr && *ptr) {
-			wait_message("Trying to access " DISTRIB_NAME " CDROM disc (drive %s)", *model);
-			if (mount_that_cd_device(*ptr) != -1) {
-				if (!test_that_cd()) {
-					remove_wait_message();
-					return do_with_device(*ptr, *model);
-				}
-				else
-					umount(IMAGE_LOCATION);
-			}
-			remove_wait_message();
+		while (ptr && *ptr && model && *model) {
+			if (!strcmp(*ptr, choice))
+				break;
 			ptr++;
 			model++;
 		}
-		unset_param(MODE_AUTOMATIC);
-		return cdrom_prepare();
-	}
-	else {
-		results = ask_from_list_comments("Please choose the CDROM drive to use for the installation.", medias, medias_models, &choice);
-		if (results == RETURN_OK) {
-			char ** model = medias_models;
-			ptr = medias;
-			while (ptr && *ptr && model && *model) {
-				if (!strcmp(*ptr, choice))
-					break;
-				ptr++;
-				model++;
-			}
 			results = try_with_device(choice, *model);
-		} else
-			return results;
-	}
+	} else
+		return results;
 
 	if (results == RETURN_OK)
 		return RETURN_OK;

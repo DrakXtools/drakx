@@ -300,7 +300,7 @@ enum return_type disk_prepare(void)
 
 	my_insmod("sd_mod", ANY_DRIVER_TYPE, NULL);
 	
-	get_medias(DISK, &medias, &medias_models);
+	get_medias(DISK, &medias, &medias_models, BUS_ANY);
 
 	ptr = medias;
 	while (ptr && *ptr) {

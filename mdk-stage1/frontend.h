@@ -48,5 +48,4 @@ void verror_message(char *msg, va_list ap);
 void vinfo_message(char *msg, va_list ap);
 void vwait_message(char *msg, va_list ap);
 
-
 #endif

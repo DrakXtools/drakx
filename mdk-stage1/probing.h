@@ -26,11 +26,13 @@ enum media_type { CDROM, DISK, FLOPPY, TAPE, UNKNOWN_MEDIA };
 
 enum driver_type { SCSI_ADAPTERS, NETWORK_DEVICES, USB_CONTROLLERS, ANY_DRIVER_TYPE };
 
-void get_medias(enum media_type media, char *** names, char *** models);
+enum media_bus { BUS_IDE, BUS_SCSI, BUS_USB, BUS_ANY };
+
+void get_medias(enum media_type media, char *** names, char *** models, enum media_bus bus);
 char ** get_net_devices(void);
 void net_discovered_interface(char * intf_name);
 char * get_net_intf_description(char * intf_name);
 void prepare_intf_descr(const char * intf_descr);
-
+void probe_that_type(enum driver_type type, enum media_bus bus);
 
 #endif

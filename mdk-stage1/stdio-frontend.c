@@ -27,6 +27,8 @@
 #include <sys/ioctl.h>
 #include <termios.h>
 
+#include <probing.h>
+
 #include "frontend.h"
 
 
@@ -249,6 +251,8 @@ enum return_type ask_from_list_comments(char *msg, char ** elems, char ** elems_
 	int i = 1;
 	int j = 0;
 
+	probe_that_type(USB_CONTROLLERS, BUS_USB); // we'd need the keyboard for interactions so...
+
 	while (elems && *elems) {
 		elems++;
 		i++;
@@ -303,6 +307,7 @@ enum return_type ask_from_list_comments(char *msg, char ** elems, char ** elems_
 
 enum return_type ask_from_list(char *msg, char ** elems, char ** choice)
 {
+	probe_that_type(USB_CONTROLLERS, BUS_USB); // we'd need the keyboard for interactions so...
 	return ask_from_list_comments(msg, elems, NULL, choice);
 }
 
@@ -310,6 +315,8 @@ enum return_type ask_from_list(char *msg, char ** elems, char ** choice)
 enum return_type ask_yes_no(char *msg)
 {
 	int j;
+
+	probe_that_type(USB_CONTROLLERS, BUS_USB); // we'd need the keyboard for interactions so...
 
 	printf("> %s\n[0] Yes  [1] No  [2] Back\n? ", msg);
 
@@ -327,6 +334,8 @@ enum return_type ask_from_entries(char *msg, char ** questions, char *** answers
 {
 	int j, i = 0;
 	char ** already_answers = NULL;
+
+	probe_that_type(USB_CONTROLLERS, BUS_USB); // we'd need the keyboard for interactions so...
 
 	printf("> %s\n", msg);
 

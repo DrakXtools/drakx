@@ -120,14 +120,12 @@ char * get_net_intf_description(char * intf_name)
 }
 #endif
 
-void probe_that_type(enum driver_type type)
+#ifdef ENABLE_USB
+void probe_that_type(enum driver_type type, enum media_bus bus)
+#else
+void probe_that_type(enum driver_type type, enum media_bus bus __attribute__ ((unused)))
+#endif
 {
-	if (IS_EXPERT) {
-		ask_insmod(type);
-		return;
-	}
-
-
 	/* ---- PCI probe ---------------------------------------------- */
 	{
 		FILE * f;
@@ -138,7 +136,11 @@ void probe_that_type(enum driver_type type)
 		switch (type) {
 #ifndef DISABLE_PCIADAPTERS
 #ifndef DISABLE_MEDIAS
+			static int already_probed_scsi_adapters = 0;
 		case SCSI_ADAPTERS:
+			if (already_probed_scsi_adapters)
+				goto end_pci_probe;
+			already_probed_scsi_adapters = 1;
 			pcidb = medias_pci_ids;
 			len   = medias_num_ids;
 			break;
@@ -151,13 +153,22 @@ void probe_that_type(enum driver_type type)
 #endif
 #endif
 #ifdef ENABLE_USB
+			static int already_probed_usb_controllers = 0;
 		case USB_CONTROLLERS:
+			if (already_probed_usb_controllers || IS_NOAUTO)
+				goto end_pci_probe;
+			already_probed_usb_controllers = 1;
 			pcidb = usb_pci_ids;
 			len   = usb_num_ids;
 			break;
 #endif
 		default:
 			goto end_pci_probe;
+		}
+
+		if (IS_EXPERT && type != USB_CONTROLLERS) {
+			ask_insmod(type);
+			return;
 		}
 
 		if (!(f = fopen("/proc/bus/pci/devices", "rb"))) {
@@ -216,7 +227,7 @@ void probe_that_type(enum driver_type type)
 
 #ifdef ENABLE_USB
 	/* ---- USB probe ---------------------------------------------- */
-	{
+	if ((bus == BUS_USB || bus == BUS_ANY) && !(IS_NOAUTO)) {
 		static int already_probed_usb_controllers = 0;
 		static int already_mounted_usbdev = 0;
 
@@ -227,7 +238,7 @@ void probe_that_type(enum driver_type type)
 
 		if (!already_probed_usb_controllers) {
 			already_probed_usb_controllers = 1;
-			probe_that_type(USB_CONTROLLERS);
+			probe_that_type(USB_CONTROLLERS, BUS_ANY);
 		}
 
 		if (!already_mounted_usbdev) {
@@ -239,6 +250,8 @@ void probe_that_type(enum driver_type type)
 			}
 			wait_message("Detecting USB devices.");
 			sleep(4); /* sucking background work */
+			my_insmod("usbkbd", ANY_DRIVER_TYPE, NULL);
+			my_insmod("keybdev", ANY_DRIVER_TYPE, NULL);
 			remove_wait_message();
 		}
 
@@ -260,11 +273,6 @@ void probe_that_type(enum driver_type type)
 			int i, vendor, id;
 
 			if (!fgets(buf, sizeof(buf), f)) break;
-
-			if (strstr(buf, "Keyboard")) {
-				my_insmod("usbkbd", ANY_DRIVER_TYPE, NULL);
-				my_insmod("keybdev", ANY_DRIVER_TYPE, NULL);
-			}
 
 			if (sscanf(buf, "P:  Vendor=%x ProdID=%x", &vendor, &id) != 2)
 				continue;
@@ -295,23 +303,25 @@ void probe_that_type(enum driver_type type)
 #ifndef DISABLE_MEDIAS
 static struct media_info * medias = NULL;
 
-static void find_media(void)
+static void find_media(enum media_bus bus)
 {
     	char b[50];
 	char buf[5000];
 	struct media_info tmp[50];
-	int count;
+	int count = 0;
         int fd;
 
-	if (!medias)
-		probe_that_type(SCSI_ADAPTERS);
-	else
+	if (medias)
 		free(medias); /* that does not free the strings, by the way */
 
+	if (bus == BUS_SCSI || bus == BUS_USB || bus == BUS_ANY)
+		probe_that_type(SCSI_ADAPTERS, bus);
+
 	/* ----------------------------------------------- */
+	if (bus != BUS_IDE && bus != BUS_ANY)
+		goto find_media_after_ide;
 	log_message("looking for ide media");
 
-    	count = 0;
     	strcpy(b, "/proc/ide/hd");
     	for (b[12] = 'a'; b[12] <= 'h'; b[12]++) {
 		int i;
@@ -378,8 +388,10 @@ static void find_media(void)
 		count++;
     	}
 
-
+ find_media_after_ide:
 	/* ----------------------------------------------- */
+	if (bus != BUS_SCSI && bus != BUS_USB && bus != BUS_ANY)
+		goto find_media_after_scsi;
 	log_message("looking for scsi media");
 
 	fd = open("/proc/scsi/scsi", O_RDONLY);
@@ -563,6 +575,7 @@ static void find_media(void)
 			fclose(f);
 		}
 	}
+ find_media_after_scsi:
 
 	/* ----------------------------------------------- */
 	tmp[count].name = NULL;
@@ -573,14 +586,14 @@ static void find_media(void)
 
 
 /* Finds by media */
-void get_medias(enum media_type media, char *** names, char *** models)
+void get_medias(enum media_type media, char *** names, char *** models, enum media_bus bus)
 {
 	struct media_info * m;
 	char * tmp_names[50];
 	char * tmp_models[50];
 	int count;
 
-	find_media();
+	find_media(bus);
 
 	m = medias;
 
@@ -641,7 +654,7 @@ char ** get_net_devices(void)
 
 	if (!already_probed) {
 		already_probed = 1; /* cut off loop brought by: probe_that_type => my_insmod => get_net_devices */
-		probe_that_type(NETWORK_DEVICES);
+		probe_that_type(NETWORK_DEVICES, BUS_ANY);
 	}
 
 	while (ptr && *ptr) {
