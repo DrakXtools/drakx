@@ -33,26 +33,27 @@ If you don't know, choose 'use pppoe'"),
 				  ) or return;
     $type = find { $l{$_} eq $type } keys %l;
     if ($type eq 'pppoe') {
-	$in->do_pkgs->install("rp-$type") if !$::testing;
+	$in->do_pkgs->install("rp-$type");
 	$netcnx->{type} = "adsl_$type";
 	adsl_conf($netcnx->{"adsl_$type"}, $netc, $intf, $type) or goto conf_adsl_step1;
     } elsif ($type eq 'dhcp') {
-	$in->do_pkgs->install(qw(dhcpcd)) if !$::testing;
+	$in->do_pkgs->ensure_is_installed('dhcpcd', '/sbin/dhcpcd', 'auto');
 	go_ethernet($netc, $intf, 'dhcp', '', '', $first_time) or goto conf_adsl_step1;
     } elsif ($type eq 'pptp') {
-	$in->do_pkgs->install(qw(pptp-adsl)) if !$::testing;
+	$in->do_pkgs->ensure_is_installed('pptp-adsl', '/usr/bin/pptp', 'auto');
 	$netcnx->{type} = "adsl_$type";
 	$netcnx->{"adsl_$type"} = {};
 	adsl_conf($netcnx->{"adsl_$type"}, $netc, $intf, $type) or goto conf_adsl_step1;
     } elsif ($type =~ /sagem/) {
 	$type = 'sagem' . ($type =~ /dhcp/ ? "_dhcp" : "");
-	$in->do_pkgs->install(qw(adiusbadsl), if_($type =~ /dhcp/, qw(dhcpcd))) if !$::testing;
+	$in->do_pkgs->ensure_is_installed('adiusbadsl', '/usr/sbin/adictrl', 'auto');
+	$in->do_pkgs->ensure_is_installed('dhcpcd', '/sbin/dhcpcd', 'auto') if $type =~ /dhcp/;
 	$netcnx->{type} = "adsl_$type";
 	$netcnx->{"adsl_$type"} = {};
 	adsl_conf($netcnx->{"adsl_$type"}, $netc, $intf, $type) or goto conf_adsl_step1;
     } elsif ($type =~ /speedtouch/) {
 	$type = 'speedtouch';
-	$in->do_pkgs->install(qw(speedtouch)) if !$::testing;
+	$in->do_pkgs->ensure_is_installed('speedtouch', '/usr/sbin/pppoa3', 'auto');
 	$netcnx->{type} = "adsl_$type";
 	$netcnx->{"adsl_$type"} = {};
 	$netcnx->{"adsl_$type"}{vpivci} = '';
@@ -204,7 +205,7 @@ user "$adsl->{login}"
 						      ['ppp-compress-24', 'ppp_deflate'],
 						      ['ppp-compress-26', 'ppp_deflate'];
 	$::isStandalone and modules::write_conf($prefix);
-	$in->do_pkgs->what_provides("speedtouch_mgmt") and $in->do_pkgs->install('speedtouch_mgmt');
+	$in->do_pkgs->what_provides("speedtouch_mgmt") and $in->do_pkgs->ensure_is_installed('speedtouch_mgmt', '/usr/share/speedtouch/mgmt.o', 'auto');
 	-e "$prefix/usr/share/speedtouch/mgmt.o" and goto end_firmware;
 	
       firmware:

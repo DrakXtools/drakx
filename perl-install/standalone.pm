@@ -164,6 +164,11 @@ sub install {
 
     return 1 if is_installed($o, @l);
 
+    if ($::testing) {
+	log::l("i would install packages " . join(' ', @l));
+	return 1;
+    }
+
     my $wait;
     if ($o->{in}->isa('interactive::newt')) {
 	$o->{in}->suspend;

@@ -1123,7 +1123,12 @@ sub install_steps::do_pkgs {
 
 sub install {
     my ($do, @l) = @_;
-    $do->{o}->pkg_install(@l);
+    if ($::testing) {
+	log::l("i would install packages " . join(' ', @l));
+	return 1;
+    } else {
+	$do->{o}->pkg_install(@l);
+    }
 }
 
 sub ensure_is_installed {
