@@ -797,17 +797,10 @@ sub default_packages {
     push @l, "mdadm" if !is_empty_array_ref($o->{all_hds}{raids});
     push @l, "lvm2" if !is_empty_array_ref($o->{all_hds}{lvms});
     push @l, "alsa", "alsa-utils" if any { $o->{modules_conf}->get_alias("sound-slot-$_") =~ /^snd-/ } 0 .. 4;
-    my $dmi_System = detect_devices::dmidecode_category('System');
+    push @l, map { if_($_->{driver} =~ /^Pkg:(.*)/, $1) } detect_devices::probeall();
+
     my $dmi_BIOS = detect_devices::dmidecode_category('BIOS');
     my $dmi_Base_Board = detect_devices::dmidecode_category('Base Board');
-    if ($dmi_System->{Manufacturer} =~ /Dell Computer/ && $dmi_System->{'Product Name'} =~ /Inspiron|Latitude/) {
-        modules::append_to_modules_loaded_at_startup_for_all_kernels('i8k');
-        push @l, "i8kutils";
-    }
-    if ($dmi_System->{Manufacturer} =~ /TOSHIBA/ && $dmi_BIOS->{Vendor} =~ /TOSHIBA/) {
-        modules::append_to_modules_loaded_at_startup_for_all_kernels('toshiba');
-        push @l, "toshutils";
-    }
     if ($dmi_BIOS->{Vendor} eq 'COMPAL' && $dmi_BIOS->{Characteristics} =~ /Function key-initiated network boot is supported/
           || $dmi_Base_Board->{Manufacturer} =~ /^ACER/ && $dmi_Base_Board->{'Product Name'} =~ /TravelMate 610/) {
         modules::append_to_modules_loaded_at_startup_for_all_kernels('acerhk');

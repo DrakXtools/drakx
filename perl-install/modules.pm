@@ -180,6 +180,7 @@ sub write_preload_conf {
     push @l, 'scsi_hostadapter' if $conf->get_probeall('scsi_hostadapter');
     push @l, intersection([ list_modules::category2modules('multimedia/dvb'), list_modules::category2modules('multimedia/tv') ],
 			  [ map { $_->{driver} } detect_devices::probeall() ]);
+    push @l, map { if_($_->{driver} =~ /^Module:(.*)/, $1) } detect_devices::probeall();
     push @l, 'nvram' if cat_('/proc/bus/input/devices') =~ m!^N: Name="SynPS/2 Synaptics TouchPad"$!m;
     push @l, map { $_->{driver} } probe_category('various/laptop');
     push @l, map { $_->{driver} } probe_category('multimedia/joystick');

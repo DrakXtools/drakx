@@ -729,13 +729,21 @@ sub pcmcia_probe() {
     @devs;
 }
 
+my $dmi_probe;
+sub dmi_probe() {
+    $dmi_probe ||= [ map {
+	/(.*?)\t(.*)/ && { bus => 'DMI', driver => $1, description => $2 };
+    } c::dmi_probe() ];
+    @$dmi_probe;
+}
+
 # pcmcia_probe provides field "device", used in network.pm
 # => probeall with $probe_type is unsafe
 sub probeall() {
     return if $::noauto;
 
     require sbus_probing::main;
-    pci_probe(), usb_probe(), firewire_probe(), pcmcia_probe(), sbus_probing::main::probe();
+    pci_probe(), usb_probe(), firewire_probe(), pcmcia_probe(), sbus_probing::main::probe(), dmi_probe();
 }
 sub matching_desc__regexp {
     my ($regexp) = @_;

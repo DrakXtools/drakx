@@ -403,6 +403,25 @@ usb_probe()
     }
     pciusb_free(&entries);
 
+void
+dmi_probe()
+  PPCODE:
+    //dmidecode_file = "/usr/share/ldetect-lst/dmidecode.Laptop.Dell-Latitude-C810";
+    //dmidecode_file = "../../soft/ldetect-lst/test/dmidecode.Laptop.Sony-Vaio-GRX316MP";
+
+    struct dmi_entries entries = dmi_probe();
+    char buf[2048];
+    int i;
+
+    EXTEND(SP, entries.nb);
+    for (i = 0; i < entries.nb; i++) {
+      snprintf(buf, sizeof(buf), "%s\t%s", 
+               entries.entries[i].module, entries.entries[i].constraints);
+      PUSHs(sv_2mortal(newSVpv(buf, 0)));
+    }
+    dmi_entries_free(entries);
+
+
 unsigned int
 getpagesize()
 
