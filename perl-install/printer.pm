@@ -1464,14 +1464,16 @@ sub configure_hpoj {
 	# Check if the device is really an HP multi-function device
 	stop_service("hpoj");
 	my $bus;
+	my $address_arg = "";
 	if ($device =~ /usb/) {
 	    $bus = "usb";
 	} else {
 	    $bus = "par";
+	    $address_arg = parport_addr($device);
 	}
 	run_program::rooted($prefix, 
 			    "ptal-mlcd", "$bus:probe", "-device", 
-			    "$device");
+			    "$device", split(' ',$address_arg));
 	$device_ok = 0;
 	local *F; 
 	if (open F, ($::testing ? "$prefix" : "chroot $prefix/ ") . "/usr/bin/ptal-devid mlc:$bus:probe |") {
@@ -1564,16 +1566,7 @@ sub configure_hpoj {
 	# auto-detect the parallel port addresses
 	$device =~ m!^/dev/lp(\d+)$!;
 	my $portnumber = $1;
-	my $parport_addresses = 
-	    `cat /proc/sys/dev/parport/parport$portnumber/base-addr`;
-	my $address_arg;
-	if ($parport_addresses =~ /^\s*(\d+)\s+(\d+)\s*$/) {
-	    $address_arg = sprintf(" -base 0x%x -basehigh 0x%x", $1, $2);
-	} elsif ($parport_addresses =~ /^\s*(\d+)\s*$/) {
-	    $address_arg = sprintf(" -base 0x%x", $1);
-	} else {
-	    $address_arg = "";
-	}
+	my $address_arg = parport_addr($device);
 	$entry = "\nptal-mlcd par:$portnumber -device $device$address_arg \$PTAL_MLCD_CMDLINE_APPEND\nptal-printd mlc:par:$portnumber \$PTAL_PRINTD_CMDLINE_APPEND\n";
 	$ptaldevice = "mlc:par:$portnumber";
     }
@@ -1587,6 +1580,24 @@ sub configure_hpoj {
     restart_service("hpoj");
     # Return HPOJ device name to form the URI
     return $ptaldevice;
+}
+
+sub parport_addr{
+    # auto-detect the parallel port addresses
+    my ($device) = @_;
+    $device =~ m!^/dev/lp(\d+)$!;
+    my $portnumber = $1;
+    my $parport_addresses = 
+	`cat /proc/sys/dev/parport/parport$portnumber/base-addr`;
+    my $address_arg;
+    if ($parport_addresses =~ /^\s*(\d+)\s+(\d+)\s*$/) {
+	$address_arg = sprintf(" -base 0x%x -basehigh 0x%x", $1, $2);
+    } elsif ($parport_addresses =~ /^\s*(\d+)\s*$/) {
+	$address_arg = sprintf(" -base 0x%x", $1);
+    } else {
+	$address_arg = "";
+    }
+    return $address_arg;
 }
 
 sub config_sane {

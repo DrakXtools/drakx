@@ -464,14 +464,16 @@ _(" (Parallel Ports: /dev/lp0, /dev/lp1, ..., equivalent to LPT1:, LPT2:, ..., 1
     if (!$do_auto_detect) {
 	local $::isWizard = 0;
 	$isHPOJ = $in->ask_yesorno(_("Local Printer"),
-				   _("Is your printer a multi-function device from HP (OfficeJet, PSC, PhotoSmart, LaserJet 1100/1200/1220/3200/3300 with scanner)?"), 0);
+				   _("Is your printer a multi-function device from HP (OfficeJet, PSC, LaserJet 1100/1200/1220/3200/3300 with scanner), an HP PhotoSmart P100 or 1315 or an HP LaserJet 2200?"), 0);
     }
     if (($menuchoice =~ /HP\s+OfficeJet/i) ||
 	($menuchoice =~ /HP\s+PSC/i) ||
-	($menuchoice =~ /HP\s+PhotoSmart/i) ||
+	($menuchoice =~ /HP\s+PhotoSmart\s+P?\s*100\D/i) ||
+	($menuchoice =~ /HP\s+PhotoSmart\s+P?\s*1315/i) ||
 	($menuchoice =~ /HP\s+LaserJet\s+1100/i) ||
 	($menuchoice =~ /HP\s+LaserJet\s+1200/i) ||
 	($menuchoice =~ /HP\s+LaserJet\s+1220/i) ||
+	($menuchoice =~ /HP\s+LaserJet\s+2200/i) ||
 	($menuchoice =~ /HP\s+LaserJet\s+3200/i) ||
 	($menuchoice =~ /HP\s+LaserJet\s+33.0/i) ||
 	($isHPOJ)) {
@@ -1760,14 +1762,15 @@ sub scanner_help {
     my ($makemodel, $deviceuri) = @_;
     if ($deviceuri =~ m!^ptal:/(.*)$!) {
 	my $ptaldevice = $1;
-	if (($makemodel =~ /HP\s+OfficeJet\s+[KVRGP]/i) ||
+	if (($makemodel =~ /HP\s+OfficeJet\s+[KVRGPD]/i) ||
 	    ($makemodel =~ /HP\s+PSC\s+[579]/i)) {
 	    # SANE-driven models
 	    return _("Your HP multi-function device was configured automatically to be able to scan. Now you can scan with \"scanimage\" (\"scanimage -d hp:%s\" to specify the scanner when you have more than one) from the command line or with the graphical interfaces \"xscanimage\" or \"xsane\". If you are using the GIMP, you can also scan by choosing the appropriate point in the \"File\"/\"Acquire\" menu. Call also \"man scanimage\" and \"man sane-hp\" on the command line to get more information.
 
 Do not use \"scannerdrake\" for this device!",
 		     $ptaldevice);
-	} elsif ($makemodel !~ /HP\s+PhotoSmart/i) {
+	} elsif (($makemodel !~ /HP\s+PhotoSmart/i) &&
+		 ($makemodel !~ /HP\s+LaserJet\s+2200/i)) {
 	    # "ptal-hp"-driven models
 	    return _("Your HP multi-function device was configured automatically to be able to scan. Now you can scan from the command line with \"ptal-hp %s scan ...\". Scanning via a graphical interface or from the GIMP is not supported yet for your device. More information you will find in the \"/usr/share/doc/hpoj-0.8/ptal-hp-scan.html\" file on your system. If you have an HP LaserJet 1100 or 1200 you can only scan when you have the scanner option installed.
 
