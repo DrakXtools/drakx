@@ -779,6 +779,9 @@ sub get_printer_info {
 	 (($oldchoice ne $printer->{DBENTRY}) ||
 	  ($printer->{currentqueue}{'driver'} ne 
 	   $printer::thedb{$printer->{DBENTRY}}{'driver'})))) {
+	delete($printer->{currentqueue}{printer});
+	delete($printer->{currentqueue}{ppd});
+	$printer->{currentqueue}{foomatic} = 0;
 	# Read info from printer database
 	foreach (qw(printer ppd driver make model)) { #- copy some parameter, shorter that way...
 	    $printer->{currentqueue}{$_} = $printer::thedb{$printer->{DBENTRY}}{$_};
@@ -1543,12 +1546,13 @@ sub main {
 	# only experts should be asked for the spooler
 	!$::expert and $printer->{SPOOLER} ||= 'cups';
 
-	# If we have chosen a spooler, install it.
-	if (($printer->{SPOOLER}) && ($printer->{SPOOLER} ne '')) {
-	    if (!install_spooler($printer, $in)) {return;}
-	}
-
     }
+
+    # If we have chosen a spooler, install it.
+    if (($printer->{SPOOLER}) && ($printer->{SPOOLER} ne '')) {
+	if (!install_spooler($printer, $in)) {return;}
+    }
+
     # Control variables for the main loop
     my ($queue, $continue, $newqueue, $editqueue, $expertswitch) = ('', 1, 0, 0, 0);
     # Cursor position in queue modification window
