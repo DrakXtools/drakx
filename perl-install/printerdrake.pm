@@ -121,7 +121,7 @@ these fields blank."),
 		$default = $1;
 	    }
 	    if ($default ne "None") {
-	        printer::set_cups_default_printer($default);
+	        printer::set_default_printer($default);
 	    }
 	    # Set BrowsePoll line
 	    if (($server ne $oldserver) || ($port ne $oldport)) {
@@ -1155,7 +1155,7 @@ sub main {
     {
 	my $w = $in->wait_message('', _("Checking installed software..."));
 	if ((!$::testing) &&
-	    (!printer::files_exist((qw(/usr/sbin/foomatic-configure
+	    (!printer::files_exist((qw(/usr/bin/foomatic-configure
 				       /usr/lib/perl5/site_perl/5.6.1/Foomatic/DB.pm
 				       /usr/bin/escputil
 				       /usr/share/printer-testpages/testprint.ps
@@ -1210,6 +1210,9 @@ sub main {
 	    } else {
 		# Ask for a spooler when none is defined
 		$printer->{SPOOLER} ||=  setup_default_spooler ($printer, $in) || return;
+		# This entry and the check for this entry have to use
+		# the same translation to work properly
+		my $spoolerentry = _("Spooler: ");
 		# Show a queue list window when there is at least one queue
 		# or when we are in expert mode
 		unless ((%{$printer->{configured} || {}} == ()) && 
@@ -1233,7 +1236,7 @@ sub main {
 			_("Add printer"),
 		        # In expert mode we can change the spooler
 		        ($::expert ?
-		         ( _("Spooler: ") .
+		         ( $spoolerentry .
 		           $printer::spooler_inv{$printer->{SPOOLER}} ) : ()),
 		        # Bored by configuring your printers, get out of here!
 		        _("Done") ] } ]
@@ -1251,7 +1254,7 @@ sub main {
 		    my $i = ''; while ($i < 100) { last unless exists $queues{"lp$i"}; ++$i; }
 		    $queue = "lp$i";
 		}
-		if ($queue =~ /^Spooler: /) {
+		if ($queue =~ /^$spoolerentry/) {
 		    $printer->{SPOOLER} = setup_default_spooler ($printer, $in) || $printer->{SPOOLER};
 		    next;
 		}

@@ -482,10 +482,10 @@ sub get_cups_default_printer {
     return undef;
 }
 
-sub set_cups_default_printer {
+sub set_default_printer {
     my $default = $_[0];
-    run_program::rooted($prefix, "lpoptions",
-			"-d", $default) || return;
+    run_program::rooted($prefix, "foomatic-configure",
+			"-D", "-n", $default) || return;
 }
 
 sub read_cupsd_conf {
@@ -718,7 +718,7 @@ sub configure_queue($) {
 sub remove_queue($$) {
     my ($printer) = $_[0];
     my ($queue) = $_[1];
-    run_program::rooted($prefix, "foomatic-configure", "-D",
+    run_program::rooted($prefix, "foomatic-configure", "-R",
 			"-s", $printer->{SPOOLER},
 			"-n", $queue);
     delete $printer->{configured}{$queue};
