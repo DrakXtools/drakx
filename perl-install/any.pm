@@ -1045,9 +1045,10 @@ sub choose_security_options {
     elsif ($expert_section == 2) { $title = _("DrakSec - Server Advanced Options"); }
 
     for $key (keys %$options) {
-       $shown_options[$i]->{label} = "$key - $options->{$key}{label}";
+       $shown_options[$i]->{label} = "$options->{$key}{label}";
        $shown_options[$i]->{val} = $options->{$key}{val};
        $shown_options[$i]->{list} = $options->{$key}{list};
+       $shown_options[$i]->{type} = $options->{$key}{type};
        $i++;
     }
 
