@@ -757,15 +757,23 @@ sub write {
     };
 }
 
-sub load_mo {
-    my ($lang) = @_;
-    my ($localedir, $suffix) = ("$ENV{SHARE_PATH}/locale", 'LC_MESSAGES/libDrakX.mo');
+sub bindtextdomain() {
+    my $localedir = "$ENV{SHARE_PATH}/locale";
     $localedir .= "_special" if $::isInstall;
-
-    $lang ||= $ENV{LANGUAGE} || $ENV{LC_ALL} || $ENV{LC_MESSAGES} || $ENV{LANG};
 
     c::setlocale();
     c::bindtextdomain('libDrakX', $localedir);
+
+    $localedir;
+}
+
+sub load_mo {
+    my ($lang) = @_;
+
+    my $localedir = bindtextdomain();
+    my $suffix = 'LC_MESSAGES/libDrakX.mo';
+
+    $lang ||= $ENV{LANGUAGE} || $ENV{LC_ALL} || $ENV{LC_MESSAGES} || $ENV{LANG};
 
     foreach (split ':', $lang) {
 	my $f = "$localedir/$_/$suffix";
