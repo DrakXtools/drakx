@@ -468,7 +468,7 @@ sub test_mouse {
     my ($aru, $aru_mask) = gtkcreate_xpm($darea, 'arrow_up.xpm');
     my ($ard, $ard_mask) = gtkcreate_xpm($darea, 'arrow_down.xpm');
     my $image = $m3_image;
-    $mouse->{nbuttons} > 3 || 1 and $image = $m3_imagep;
+    $mouse->{nbuttons} > 3 and $image = $m3_imagep;
     my $draw_text = sub {
   	my ($t, $y) = @_;
   	my $font = $darea->style->font;
