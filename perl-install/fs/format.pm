@@ -60,7 +60,7 @@ sub part_raw {
 
     my $cmd = $cmds{$fs_type} or die N("I don't know how to format %s in type %s", $part->{device}, part2name($part));
 
-    run_program::raw({ timeout => 60 * 60 }, $cmd, @options, devices::make($dev)) or die N("%s formatting of %s failed", $fs_type, $dev);
+    run_program::raw({ timeout => 60 * 60 }, split(' ', $cmd), @options, devices::make($dev)) or die N("%s formatting of %s failed", $fs_type, $dev);
 
     if ($fs_type eq 'ext3') {
 	disable_forced_fsck($dev);
