@@ -50,6 +50,14 @@ my %fields =
       "primary_partitions" => [ N("Primary partitions"), N("the number of the primary partitions") ],
       "type" => [ N("Type"), N("the type of bus on which the mouse is connected") ],
       "Vendor" => [ N("Vendor"), N("the vendor name of the device") ],
+      "pci_bus" => [ N("Bus PCI #"), N("") ],
+      "pci_device" => [ N("PCI device #"), N("") ],
+      "pci_function" => [ N("PCI function #"), N("") ],
+      "vendor" => [ N("Vendor ID"), N("") ],
+      "id" => [ N(""), N("Device ID") ],
+      "subvendor" => [ N("Sub vendor ID"), N("") ],
+      "subid" => [ N("Sub device ID"), N("") ],
+      "usb_pci_device" =>, [ N("Device USB ID"), N("") ],
      },
      CPU =>
      {
@@ -90,6 +98,29 @@ my %fields =
       name => [ N("Name"), N("the name of the mouse") ],
      }
     );
+
+my %groups = (
+              generic =>
+              {
+               N("Identification") => [ qw(Vendor vendor model description info media_type) ],
+               N("Connection") => [ qw(pci_bus pci_device pci_function bus vendor id subvendor subid) ],
+              },
+              CPU =>
+              {
+               N("Identification") => [ qw(processor vendor_id), "model name", "cpu family", qw(model level stepping) ],
+               N("Performances") => [ "cpu MHz", "cache size", "bogomips" ],
+               N("Bugs") => [ qw(fdiv_bug coma_bug f00f_bug hlt_bug) ],
+               N("FPU")  => [ qw(fpu fpu_exception) ],
+              },
+              HARDDISK =>
+              {
+               N("Identification") => [ qw(Vendor Model description info) ],
+               N("Device") => [ qw(device devfs_device) ],
+               N("Partitions") => [ qw(primary_partitions extended_partitions) ],
+              },
+             );
+
+$groups{$_} = $groups{HARDDISK} foreach qw(BURNER CDROM DVDROM);
 
 
 my ($in, $pid, $w);
@@ -233,18 +264,39 @@ $tree->get_selection->signal_connect('changed' => sub {
         
         if ($idx ne -1) {
             use Gtk2::Pango;
-            gtktext_insert($text, [ map  {
+            my %device_fields = map {
                 # The U+200E character is to force LTR display, as what what follows the colon is always in LTR (device names, paths, etc),
                 # this ensures proper displaying of names like /dev/fd0 (otherwise it gets 'dev/fd0/').
                 # it must come *after* the space, as the space must follow the colon following the direction of writting.
                 my $field = lookup_field($_);
-                if_($_ && $field->[0], [ $field->[0] . ": \x{200e}", { 'foreground' => 'royalblue3', 'weight' => Gtk2::Pango->PANGO_WEIGHT_BOLD } ],
+                if_($_ && $field->[0], $_ =>
+                   [
+                    [ $field->[0] . ": \x{200e}", { 'foreground' => 'royalblue3', 'weight' => Gtk2::Pango->PANGO_WEIGHT_BOLD } ],
                     [ ($current_device->{$_} =~ /^(unknown)/ ? N("unknown") :
                        $current_device->{$_} =~ /^(Unknown)/ ? N("Unknown") : 
                        $current_device->{$_} eq 'yes' ? N("Yes") : 
                        $current_device->{$_} eq 'no'  ? N("No") : 
-                       $current_device->{$_}) . "\n\n", if_($_ eq 'driver' && $current_device->{$_} =~ /^unknown|^Bad:/, { foreground => 'indian red' }) ])
-                } sort keys %$current_device ]);
+                       $current_device->{$_}) . "\n\n", if_($_ eq 'driver' && $current_device->{$_} =~ /^unknown|^Bad:/, { foreground => 'indian red' }) ]
+                   ])
+            } sort keys %$current_device;
+            my ($grouped, $ungrouped) = partition {
+                my $field = $_;
+                member($field, map { @$_ } map { values %$_ } @groups{$current_class, 'generic'});
+            } keys %device_fields;
+            my @formated;
+            foreach my $class ($current_class, 'generic') {
+                my $class_groups = $groups{$class};
+                foreach my $group (keys %$class_groups) {
+                    my @fields = @{$class_groups->{$group}};
+                    # have we at least a member in that group?
+                    next unless any { member($_, @fields) } @$grouped;
+                    
+                    push @formated, titleFormat($group);
+                    push @formated, map { if_(ref $_, @$_) } $device_fields{$_} foreach @fields;
+                };
+            };
+            push @formated, if_(@formated && @$ungrouped, titleFormat(N("Misc"))), map { @{$device_fields{$_}} } @$ungrouped;
+            gtktext_insert($text, \@formated);
 
             foreach (keys %$current_device) {
                 print qq(Warning: skip "$_" field => "$current_device->{$_}"\n\n) unless (lookup_field($_))[0];
@@ -297,9 +349,6 @@ foreach (@classes) {
     foreach (@devices) {
         # we really should test for $title there:
         if ($_->{bus} && $_->{bus} eq "PCI") {
-            my $i = $_;
-            $_->{bus_id} = join ':', map { if_($i->{$_} ne "65535",  sprintf("%lx", $i->{$_})) } qw(vendor id subvendor subid);
-            $_->{bus_location} = join ':', map { sprintf("%lx", $i->{$_}) } qw(pci_bus pci_device pci_function);
             # do not display unknown driver for system bridges that're managed by kernel core:
             delete $_->{driver} if $_->{driver} eq "unknown" && ($Ident =~ /^ATA_STORAGE|BRIDGE|SMB_CONTROLLER$/ || $_->{description} =~ /3Com.*5610/);
         }
@@ -339,11 +388,16 @@ foreach (@classes) {
             $hd->{extended_partitions} = @{$info->{extended}};
             delete $hd->{extended_partitions} if $hd->{extended_partitions} eq '0';
         }
+        rename_field($_, 'usb_bus', 'bus');
         rename_field($_, 'usb_description', 'description');
-        rename_field($_, 'vendor_name', 'Vendor');
         rename_field($_, 'usb_driver', 'driver');
+        rename_field($_, 'usb_id', 'id');
         rename_field($_, 'usb_media_type', 'media_type');
-        foreach my $i (qw(EMULATEWHEEL MOUSETYPE XMOUSETYPE auxmouse devfs_prefix id pci_bus pci_device pci_function subid subvendor unsafe usb_bus usb_pci_bus usb_pci_device usb_vendor usb_id val vendor wacom)) { delete $_->{$i} };
+        rename_field($_, 'usb_pci_bus', 'bus');
+        rename_field($_, 'usb_vendor', 'vendor');
+        rename_field($_, 'vendor_name', 'Vendor');
+
+        foreach my $i (qw(EMULATEWHEEL MOUSETYPE XMOUSETYPE auxmouse devfs_prefix unsafe val vendor wacom)) { delete $_->{$i} };
 
         my $custom_id = harddrake::data::custom_id($_, $title);
         foreach my $field (qw(devfs_device device)) {
@@ -405,6 +459,11 @@ sub lookup_field {
     my ($field) = @_;
     my $class = find { defined $fields{$_} && defined $fields{$_}{$field} } ($current_class, 'generic');
     $fields{$class}{$field};
+}
+
+sub titleFormat {
+    my ($title) = @_;
+    [ $title . "\n", { 'weight' => Gtk2::Pango->PANGO_WEIGHT_BOLD, size => 14 * Gtk2::Pango->PANGO_SCALE } ];
 }
 
 sub rename_field {
