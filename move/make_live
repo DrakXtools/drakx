@@ -132,6 +132,7 @@ run_program::rooted($::prefix, 'ldconfig');
 any::fix_broken_alternatives();
 run_program::rooted($::prefix, 'fc-cache');  #- generate cache in all directories mentioned in config file
 
+run_program::rooted_or_die($::prefix, '/usr/lib/mozilla-1.6/mozilla-rebuild-databases.pl');
 
     #- system
 
