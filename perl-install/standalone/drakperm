@@ -221,6 +221,7 @@ sub row_setting_dialog {
     
     #- dlg widgets declaration
     my $dlg		= new Gtk2::Dialog();
+    $dlg->set_transient_for($w->{rwindow}) unless $::isEmbedded;
     my $ok 		= new Gtk2::Button('ok');
     my $cancel 	= new Gtk2::Button('cancel');
     my $browse	= new Gtk2::Button(N("browse"));
