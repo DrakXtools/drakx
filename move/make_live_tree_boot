@@ -2,18 +2,34 @@
 
 use MDK::Common;
 
-my $prefix = '/tmp/live_tree';
-my $boot_prefix = '/tmp/live_tree_boot';
-my $file_list = 'data/boot.list';
+sub create_light_tree {
+    my ($live_name, $prefix, $light_prefix, $list) = @_;
 
-my @list = chomp_(cat_($file_list));
+    -e $light_prefix and die "you can't make_live_tree_boot since one already exists
+Maybe you should remove it first with 'make_live_tree_boot -u'\n";
 
-if (@ARGV && $ARGV[0] eq '-u') {
-    -d $boot_prefix or die "$boot_prefix doesn't exist";
+    foreach my $orig (@$list) {
+	my $dest = $orig;
+	$dest =~ s|^$prefix|$light_prefix|;
 
-    foreach my $dest (@list) {
+	my $link = $orig;
+	$link =~ s|^$prefix|/image_$live_name|;
+
+	mkdir_p(dirname($dest));
+	rename $orig, $dest or die "moving $orig to $dest failed: $!\n";
+
+	symlink $link, $orig or die "symlinking from $dest to $orig failed: $!\n";
+    }
+}
+
+sub remove_light_tree {
+    my ($live_name, $prefix, $light_prefix, $list) = @_;
+
+    -d $light_prefix or return;
+
+    foreach my $dest (@$list) {
 	my $orig = $dest;
-	$orig =~ s|^$prefix|$boot_prefix|;
+	$orig =~ s|^$prefix|$light_prefix|;
 
 	next if !-e $orig;
 
@@ -24,40 +40,38 @@ if (@ARGV && $ARGV[0] eq '-u') {
 	    rename $orig, $dest or die "moving $orig to $dest failed: $!\n";
 	}
     }
-    rmdir($_) foreach reverse(chomp_(`find $boot_prefix -type d`));
+    rmdir($_) foreach reverse(chomp_(`find $light_prefix -type d`));
 
-    if (-e $boot_prefix) {
+    if (-e $light_prefix) {
 	print "still there:\n";
-	system('find', $boot_prefix);
+	system('find', $light_prefix);
 
 	foreach my $dest (chomp_(`find $prefix -type l`)) {
 	    my $orig = readlink($dest) or next;
-	    $orig =~ s!/image_boot/!$boot_prefix/! or next;
+	    $orig =~ s!/image_$live_name/!$light_prefix/! or next;
 
 	    unlink $dest or die "removing $dest failed: $!\n";
 	    rename $orig, $dest or die "moving $orig to $dest failed: $!\n";	    
 	}
-	rmdir($_) foreach reverse(chomp_(`find $boot_prefix -type d`));
+	rmdir($_) foreach reverse(chomp_(`find $light_prefix -type d`));
     }
-    if (-e $boot_prefix) {
+    if (-e $light_prefix) {
 	print "still there:\n";
-	system('find', $boot_prefix);
+	system('find', $light_prefix);
     }
+}
 
-} else {
-    -e $boot_prefix and die "you can't make_live_tree_boot since one already exists
-Maybe you should remove it first with 'make_live_tree_boot -u'\n";
+my $prefix = '/tmp/live_tree';
+my ($boot_prefix, $always_prefix) = ('/tmp/live_tree_boot', '/tmp/live_tree_always');
+my @boot_list = chomp_(cat_('data/boot.list'));
+my @always_list = chomp_(cat_('data/always.list'));
 
-    foreach my $orig (@list) {
-	my $dest = $orig;
-	$dest =~ s|^$prefix|$boot_prefix|;
+@boot_list = difference2(\@boot_list, \@always_list);
 
-	my $link = $orig;
-	$link =~ s|^$prefix|/image_boot|;
+remove_light_tree('boot', $prefix, $boot_prefix, \@boot_list);
+remove_light_tree('always', $prefix, $always_prefix, \@always_list);
 
-	mkdir_p(dirname($dest));
-	rename $orig, $dest or die "moving $orig to $dest failed: $!\n";
-
-	symlink $link, $orig or die "symlinking from $dest to $orig failed: $!\n";
-    }
+if (!@ARGV) {
+    create_light_tree('boot', $prefix, $boot_prefix, \@boot_list);    
+    create_light_tree('always', $prefix, $always_prefix, \@always_list);    
 }
