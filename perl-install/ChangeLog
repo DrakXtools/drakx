@@ -1,3 +1,68 @@
+2001/02/23  dam's  <damien@mandrakesoft.com>
+
+	* network.pm, standalone/draknet, netconnect.pm, my_gtk.pm: new wizard
+	layout, no use gtk in draknet, minor bugfixes
+
+2001/02/23  François Pons  <fpons@mandrakesoft.com>
+
+	* pkgs.pm: added accessor the rpmsrate data of packages.
+	avoid rebuilding the database for oem, rpm db is assumed to be fine.
+
+	* rescue/make_rescue_img: removed kernel_reread program.
+
+	* rescue/tree/etc/oem: removed server from selection.
+	added mutli CD support to OEM (NFS/DVD transparent)
+	fixed selection of package now select much more than before.
+	fixed root partition size set to the minimum.
+
+2001/02/23  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* share/rpmsrate: move xterm to SYSTEM
+
+2001/02/23  Pixel  <pixel@mandrakesoft.com>
+
+	* Xconfigurator.pm: move the 'use my_gtk' in 'require my_gtk' and only if
+	needed
+
+	* install_steps_auto_install.pm (@graphical_steps): specify which step
+	should be interactive
+
+	* c/stuff.xs.pm: hack for macroporcessing in term.h
+	use C_DRAKX
+
+	* install_steps.pm (afterInstallPackages): no kdm UserView in NIS
+	(configurePrinter): if_'ization
+
+	* share/rpmsrate: add packages installed on demand by DrakX. they are
+	specifically flagged
+	or flagged 'INSTALL'
+
+	* perl2fcalls: handling of ``package''->import(``what to import'')
+
+	* interactive.pm (vnew): use /usr/X11R6/bin/xtest instead of c::Xtest
+
+	* Makefile (tar-drakxtools): C_RPM and C_DRAKX set to 0
+
+	* install_any.pm (g_auto_install): handle $replay flag. It means a 'not
+	fully automated install'.
+
+	* interactive_gtk.pm (ask_from_entries_refW): double clicking on list
+	means 'Ok'
+
+	* c/Makefile.PL: use C_DRAKX
+
+	* pkgs.pm (setSelectedFromCompssList): fix the fix
+	(setSelectedFromCompssList): fix sillyness
+
+	* c/Makefile (stuff.xs): exporting C_RPM and C_DRAKX is needed
+	add setting C_DRAKX to 1 by default
+
+	* install_steps_interactive.pm (exitInstall): ask wether Replay or
+	Automated
+	(generateAutoInstFloppy): handle $replay flag. It means a 'not fully
+	automated install'.
+	(summary): nicer mouse name
+
 2001/02/23  Pixel  <pixel@mandrakesoft.com>
 
 	* interactive_gtk.pm (ask_from_entries_refW): double clicking on list
