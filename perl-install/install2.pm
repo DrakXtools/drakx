@@ -43,7 +43,7 @@ my (%installSteps, @orderedInstallSteps);
   setupSCSI          => [ __("Hard drive detection"), 1, 0, '' ],
   selectMouse        => [ __("Configure mouse"), 1, 1, '', "selectInstallClass" ],
   selectKeyboard     => [ __("Choose your keyboard"), 1, 1, '', "selectInstallClass" ],
-  miscellaneous      => [ __("Miscellaneous"), 1, 1, '!$::expert' ],
+#-  miscellaneous      => [ __("Miscellaneous"), 1, 1, '!$::expert' ],
   doPartitionDisks   => [ __("Setup filesystems"), 1, 0, '', "selectInstallClass" ],
   formatPartitions   => [ __("Format partitions"), 1, -1, '', "doPartitionDisks" ],
   choosePackages     => [ __("Choose packages to install"), 1, -2, '!$::expert', "formatPartitions" ],
@@ -524,15 +524,7 @@ sub main {
     }
     unless ($::testing || $::live) {
 	symlink "image", "/tmp/rhimage"; #- for compatibility with new mdk-stage1
-
-	unlink $_ foreach ( $o->{pcmcia} ? () : ("/sbin/install"), #- #- install include cardmgr!
-			   "/modules/modules.cgz",
-			   "/sbin/insmod", "/sbin/rmmod",
-			   "/modules/pcmcia_core.o", #- always use module from archive.
-			   "/modules/i82365.o",
-			   "/modules/tcic.o",
-			   "/modules/ds.o",
-			   );
+	unlink $_ foreach "/modules/modules.mar", "/sbin/stage1";
     }
 
     print STDERR "in second stage install\n";
