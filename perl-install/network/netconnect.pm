@@ -339,6 +339,9 @@ sub real_main {
                             $netcnx->{type} = $netc->{isdntype} = 'isdn_external';
                             $netcnx->{isdn_external}{device} = network::modem::first_modem($netc);
                             network::isdn::read_config($netcnx->{isdn_external});
+                            #- FIXME: seems to be specific to ZyXEL Adapter Omni.net/TA 128/Elite 2846i
+                            #- it doesn't even work with TA 128 modems
+                            #- http://bugs.mandrakelinux.com/query.php?bug=1033
                             $netcnx->{isdn_external}{special_command} = 'AT&F&O2B40';
                             require network::modem;
                             $modem = $netcnx->{isdn_external};
