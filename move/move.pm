@@ -103,7 +103,7 @@ sub init {
 
     mkdir "/etc/$_" foreach qw(X11);
     touch '/etc/modules.conf';
-    symlinkf "/proc/mounts", "/etc/mtab";
+    touch '/etc/mtab';
 
     #- these files need be writable but we need a sensible first contents
     system("cp /image/etc/$_ /etc") foreach qw(passwd passwd- group sudoers fstab);
@@ -129,7 +129,7 @@ sub init {
       foreach qw(encodings.dir app-defaults applnk fs lbxproxy proxymngr rstart wmsession.d xinit.d xinit xkb xserver xsm);
     symlinkf_short("/image/root/$_", "/root/$_") foreach qw(.bashrc);
 
-    mkdir_p(dirname("/var/$_")), symlinkf_short("/image/var/$_", "/var/$_") foreach qw(lib/samba);
+    mkdir_p(dirname("/var/$_")), symlinkf_short("/image/var/$_", "/var/$_") foreach qw(lib/samba cache/gstreamer-0.6);
 
     #- non-trivial files/directories that need be readable, files that will be overwritten
     handle_etcfiles('READ', 'OVERWRITE');
@@ -571,6 +571,9 @@ sub install2::startMove {
     $::WizardWindow->destroy if $::WizardWindow;
     require ugtk2;
     ugtk2::flush();
+
+    #- have a nice mtab (esp. for /cdrom)
+    system('mount', '-a', '-f');
 
     #- get info from existing fstab. This won't do anything if we already wrote fstab in configMove
     fs::get_info_from_fstab($o->{all_hds}, '');
