@@ -621,6 +621,20 @@ If you don't know, choose 'use pppoe'"),
                                 list => [ values %adsl_types ],
                               },
                              ],
+                    post => sub {
+                        my $adsl_type = find { $adsl_types{$_} eq $adsl_protocol } keys %adsl_devices;
+                        find 
+                        if ($adsl_type eq 'dhcp') {
+                            $auto_ip = 1;
+                            return 'lan_intf';
+                        } elsif ($adsl_type eq 'manual') {
+                            $auto_ip = 0;
+                            return 'lan_intf';
+                        } elsif ($adsl_type eq 'pppoe') {
+                            $netc->{NET_DEVICE} = $ntf_name;
+                        }
+                        return 'hw_account';
+                    },
                    },
                     
                     adsl_unsupported_eci => 
