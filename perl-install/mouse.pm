@@ -485,7 +485,7 @@ sub test_mouse {
 			  my $bad_mouse = member($mouse->{XMOUSETYPE}, 'IMPS/2', 'ExplorerPS/2');
 			  $draw_text->(_("Please test the mouse"), $height - 120);
 			  $draw_text->(_("To activate the mouse,"), $height - 105) if $bad_mouse;
-			  $draw_text->(_("MOVE YOUR WHEEL!"), $height - 90) if $bad_mouse
+			  $draw_text->(_("MOVE YOUR WHEEL!"), $height - 90) if $bad_mouse;
 			  $darea->window->draw_rectangle($darea->style->bg_gc('normal'), 1, 0, $height-65, $width, $height);
 		      }
 		  };
