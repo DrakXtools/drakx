@@ -157,6 +157,6 @@ sub ask_for_X_restart {
 	my ($wm, $pid) = @ARGV;
 	my $nb;
 	for ($nb = 30; $nb && -e "/proc/$pid"; $nb--) { sleep 1 }
-	system("killall X ; killall -15 xdm gdm kdm prefdm") if $nb;
+	system("killall X") if $nb;
     }, $wm, $pid;
 }
