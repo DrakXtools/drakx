@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 9.3
-Release: 24mdk
+Release: 25mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -316,6 +316,25 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Thu Jan 29 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.3-25mdk
+- drakconnect:
+  o wizard:
+    * fix ethernet network card list
+    * fix interface config file writing
+    * fix DHCP client installation
+    * fix static/dhcp step branching
+  o manage interface: (poulpy)
+	* fix modem login fetching
+	* use somewhat nice interfaces name (eg: ethernet0 rather than
+	  eth0)
+     * fix adsl loading and saving
+- draksec:
+  o add help for newly introduced MAIL_EMPTY_CONTENT item
+  o notify that shell timeout is in seconds
+  o fix parsing of default values for multi argument msec functions
+- net_monitor: do not force switch to last page on network interface
+  reload
+
 * Thu Jan 29 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.3-24mdk
 - drakconnect wizard: fix ethernet network card list
 
