@@ -17,6 +17,9 @@ my @ALLOWED_LANGS = qw(en_US fr es it de);
 #- by stage1 of course)
 sub init {
     my ($o) = @_;
+
+    $::testing and goto drakx_stuff;
+
     #- rw things
     mkdir "/$_" foreach qw(home mnt root etc var);
     mkdir_p "/var/$_" foreach qw(log run/console spool lib/xkb lock/subsys);
@@ -46,6 +49,7 @@ sub init {
 
     modules::load_category('multimedia/sound');
 
+drakx_stuff:
     $o->{steps}{startMove} = { reachable => 1, text => "Start Move" };
     $o->{orderedSteps_orig} = $o->{orderedSteps};
     $o->{orderedSteps} = [ qw(selectLanguage acceptLicense selectMouse selectKeyboard startMove) ];

@@ -41,7 +41,7 @@ sub new($$) {
 	}
 	my $launchX = sub {
 	    my ($server, $Driver) = @_;
-            $::move and goto launch_X;
+            $::move and goto configured_X;
 
 	    my $xpmac_opts = cat_('/proc/cmdline');
 	    install_gtk::createXconf($f, @{$o->{mouse}}{"XMOUSETYPE", "device"}, $o->{mouse}{wacom}[0], $Driver);
@@ -51,14 +51,16 @@ sub new($$) {
 	    my @options = (
 	      if_(arch() !~ /^sparc/ && arch() ne 'ppc' && $server ne 'Xnest', 
 		  '-kb', '-allowMouseOpenFail', '-xf86config', $f),
-	      ($wanted_DISPLAY, 'tty7', '-dpms', '-s', '240'),
+	      ('tty7', '-dpms', '-s', '240'),
 	    );
 
 	    push @options, $xpmac_opts !~ /ofonly/ ? ('-mode', '17', '-depth', '32') : '-mach64' if $server =~ /Xpmac/;
 	    push @options, '-fp', '/usr/X11R6/lib/X11/fonts:unscaled' if $server =~ /Xsun|Xpmac/;
-	    push @options, '-ac', '-geometry', $o->{vga16} ? '640x480' : '800x600' if $server eq 'Xnest';
 
-          launch_X:
+          configured_X:
+	    push @options, '-ac', '-geometry', $o->{vga16} ? '640x480' : '800x600' if $server eq 'Xnest';
+            push @options, $wanted_DISPLAY;
+
 	    if (!fork()) {
 		c::setsid();
 		exec $server, @options or c::_exit(1);
@@ -103,7 +105,7 @@ sub new($$) {
 	    @servers = qw(Xpmac);
         }
 
-        if ($::move) {
+        if ($::move && !$::testing) {
             require move;
             require run_program;
             move::automatic_xconf($o);
