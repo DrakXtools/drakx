@@ -124,18 +124,17 @@ sub assure_device_is_available_for_cups {
     }
     my $maxattempts = 3;
     for ($i = 0; $i < $maxattempts; $i++) {
-	local *F; 
-	open F, ($::testing ? $::prefix : "chroot $::prefix/ ") . 
-	    '/bin/sh -c "export LC_ALL=C; /usr/sbin/lpinfo -v" |' or
+	open(my $F, ($::testing ? $::prefix : "chroot $::prefix/ ") .
+	    '/bin/sh -c "export LC_ALL=C; /usr/sbin/lpinfo -v" |') or
 	    die 'Could not run "lpinfo"!';
-	while (my $line = <F>) {
+	while (my $line = <$F>) {
 	    if ($line =~ /$sdevice/) { # Found a line containing the device
 		                       # name, so CUPS knows it.
-		close F;
+		close $F;
 		return 1;
 	    }
 	}
-	close F;
+	close $F;
 	$result = printer::services::restart("cups");
     }
     return $result;
@@ -149,15 +148,14 @@ sub spooler_in_security_level {
     $sp = $spooler eq "lpr" || $spooler eq "lprng" ? "lpd" : $spooler;
     my $file = "$::prefix/etc/security/msec/server.$level";
     if (-f $file) {
-	local *F; 
-	open F, "< $file" or return 0;
-	while (my $line = <F>) {
+	open(my $F, "< $file") or return 0;
+	while (my $line = <$F>) {
 	    if ($line =~ /^\s*$sp\s*$/) {
-		close F;
+		close $F;
 		return 1;
 	    }
 	}
-	close F;
+	close $F;
     }
     return 0;
 }
@@ -233,12 +231,11 @@ sub read_configured_queues($) {
 		$printer->{SPOOLER} = $spooler;
 	    }
 	    #- poll queue info 
-	    local *F; 
-	    open F, ($::testing ? $::prefix : "chroot $::prefix/ ") . 
-		"foomatic-configure -P -q -s $spooler |" or
+	    open(my $F, ($::testing ? $::prefix : "chroot $::prefix/ ") .
+		"foomatic-configure -P -q -s $spooler |") or
 		    die "Could not run foomatic-configure";
-	    eval join('', <F>); 
-	    close F;
+	    eval join('', <$F>);
+	    close $F;
 	    if ($service eq "pdq") {
 		#- Have we found queues? PDQ has no damon, so we consider
 		#- it in use when there are defined printer queues
@@ -254,12 +251,11 @@ sub read_configured_queues($) {
 	}
     } else {
 	#- Poll the queues of the current default spooler
-	local *F; 
-	open F, ($::testing ? $::prefix : "chroot $::prefix/ ") . 
-	    "foomatic-configure -P -q -s $printer->{SPOOLER} -r |" or
+	open(my $F, ($::testing ? $::prefix : "chroot $::prefix/ ") .
+	    "foomatic-configure -P -q -s $printer->{SPOOLER} -r |") or
 		die "Could not run foomatic-configure";
-	eval join('', <F>); 
-	close F;
+	eval join('', <$F>);
+	close $F;
     }
     $printer->{configured} = {};
     my $i;
@@ -284,14 +280,13 @@ sub read_configured_queues($) {
 	        }
 		# Read out which PPD file was originally used to set up this
 		# queue
-		local *F;
-		if (open F, "< $::prefix/etc/cups/ppd/$QUEUES[$i]{queuedata}{queue}.ppd") {
-		    while (my $line = <F>) {
+		if (open(my $F, "< $::prefix/etc/cups/ppd/$QUEUES[$i]{queuedata}{queue}.ppd")) {
+		    while (my $line = <$F>) {
 			if ($line =~ /^\*%MDKMODELCHOICE:(.+)$/) {
 			    $printer->{configured}{$QUEUES[$i]{queuedata}{queue}}{queuedata}{ppd} = $1;
 			}
 		    }
-		    close F;
+		    close $F;
 		}
 		# Mark that we have a CUPS queue but do not know the name
 		# the PPD file in /usr/share/cups/model
@@ -432,11 +427,11 @@ sub read_printer_db {
 
     my ($printer, $spooler) = @_;
 
-    local *DBPATH; #- don't have to do close ... and don't modify globals at least
+    my $DBPATH; #- don't have to do close ... and don't modify globals at least
     # Generate the Foomatic printer/driver overview, read it from the
     # appropriate file when it is already generated
-    open DBPATH, ($::testing ? $::prefix : "chroot $::prefix/ ") . #-#
-	"foomatic-configure -O -q |" or
+    open($DBPATH, ($::testing ? $::prefix : "chroot $::prefix/ ") . #-#
+	"foomatic-configure -O -q |") or
 	die "Could not run foomatic-configure";
 
     my $entry = {};
@@ -445,7 +440,7 @@ sub read_printer_db {
     my $inautodetect = 0;
     my $autodetecttype = "";
     local $_;
-    while (<DBPATH>) {
+    while (<$DBPATH>) {
 	chomp;
 	if ($inentry) {
 	    # We are inside a printer entry
@@ -565,7 +560,7 @@ sub read_printer_db {
 	    }
 	}
     }
-    close DBPATH;
+    close $DBPATH;
 
     # Add raw queue
     $entry->{ENTRY} = N("Raw printer (No driver)");
@@ -591,18 +586,17 @@ sub read_foomatic_options ($) {
     my ($printer) = @_;
     # Generate the option data for the chosen printer/driver combo
     my $COMBODATA;
-    local *F;
-    open F, ($::testing ? $::prefix : "chroot $::prefix/ ") . 
+    open(my $F, ($::testing ? $::prefix : "chroot $::prefix/ ") . 
 	"foomatic-configure -P -q -p $printer->{currentqueue}{printer}" .
 	" -d $printer->{currentqueue}{driver}" . 
 	($printer->{OLD_QUEUE} ?
 	 " -s $printer->{SPOOLER} -n $printer->{OLD_QUEUE}" : "") .
 	 ($printer->{SPECIAL_OPTIONS} ?
 	  " $printer->{SPECIAL_OPTIONS}" : "") 
-	 . " |" or
+	 . " |") or
 	 die "Could not run foomatic-configure";
-    eval join('', (<F>)); 
-    close F;
+    eval join('', (<$F>)); 
+    close $F;
     # Return the arguments field
     return $COMBODATA->{args};
 }
@@ -611,18 +605,17 @@ sub read_ppd_options ($) {
     my ($printer) = @_;
     # Generate the option data for a given PPD file
     my $COMBODATA;
-    local *F;
-    open F, ($::testing ? $::prefix : "chroot $::prefix/ ") . 
+    open(my $F, ($::testing ? $::prefix : "chroot $::prefix/ ") . 
 	"foomatic-configure -P -q" .
 	" --ppd /usr/share/cups/model/$printer->{currentqueue}{ppd}" .
 	($printer->{OLD_QUEUE} ?
 	 " -s $printer->{SPOOLER} -n $printer->{OLD_QUEUE}" : "") .
 	 ($printer->{SPECIAL_OPTIONS} ?
 	  " $printer->{SPECIAL_OPTIONS}" : "") 
-		    . " |" or
+		    . " |") or
 	    die "Could not run foomatic-configure";
-    eval join('', (<F>)); 
-    close F;
+    eval join('', (<$F>));
+    close $F;
     # Return the arguments field
     return $COMBODATA->{args};
 }
@@ -630,7 +623,7 @@ sub read_ppd_options ($) {
 my %sysconfig = getVarsFromSh("$::prefix/etc/sysconfig/printing");
 
 sub set_cups_special_options {
-    my ($queue) = $_[0];
+    my ($queue) = @_;
     # Set some special CUPS options
     my @lpoptions = chomp_(cat_("$::prefix/etc/cups/lpoptions"));
     # If nothing is already configured, set text file borders of half an inch
@@ -718,7 +711,7 @@ sub read_location {
 	my $location_end = -1;
 	# Go through all the lines, bail out when start and end line found
 	for (my $i = 0; 
-	     $i <= $#{$cupsd_conf_ptr} and $location_end == -1;
+	     $i <= $#{$cupsd_conf_ptr} && $location_end == -1;
 	     $i++) {
 	    if ($cupsd_conf_ptr->[$i] =~ m!^\s*<\s*Location\s+$path\s*>!) {
 		# Start line of block
@@ -739,7 +732,7 @@ sub read_location {
 	# "undef"
 	@result = undef;
     }
-    return (@result);
+    return @result;
 }
 
 sub rip_location {
@@ -761,7 +754,7 @@ sub rip_location {
     if (any { m!^\s*<Location\s+$path\s*>! } @$cupsd_conf_ptr) {
 	# Go through all the lines, bail out when start and end line found
 	for (my $i = 0; 
-	     $i <= $#{$cupsd_conf_ptr} and $location_end == -1;
+	     $i <= $#{$cupsd_conf_ptr} && $location_end == -1;
 	     $i++) {
 	    if ($cupsd_conf_ptr->[$i] =~ m!^\s*<\s*Location\s+$path\s*>!) {
 		# Start line of block
@@ -784,7 +777,7 @@ sub rip_location {
 	@location = ("<Location $path>\n", "</Location>\n");
     }
 
-    return ($location_start, @location);
+    return $location_start, @location;
 }
 
 sub insert_location {
@@ -1068,7 +1061,7 @@ sub clientnetworks {
 			     $haveallowedhostwithoutbrowseallow ||
 			     $havebrowseallowwithoutallowedhost);
 
-    return ($configunsupported, @sharehosts);
+    return $configunsupported, @sharehosts;
 }
 
 sub makesharehostlist {
@@ -1369,9 +1362,9 @@ sub read_printers_conf {
     #-    Location  > Location Text
     #-    State     > Idle|Stopped
     #-    Accepting > Yes|No
-    local *PRINTERS; open PRINTERS, "$::prefix/etc/cups/printers.conf" or return;
+    open(my $PRINTERS, "$::prefix/etc/cups/printers.conf") or return;
     local $_;
-    while (<PRINTERS>) {
+    while (<$PRINTERS>) {
 	chomp;
 	/^\s*#/ and next;
 	if (/^\s*<(?:DefaultPrinter|Printer)\s+([^>]*)>/) { $current = { mode => 'cups', QUEUE => $1, } }
@@ -1379,7 +1372,7 @@ sub read_printers_conf {
 				   add2hash($printer->{configured}{$current->{QUEUE}} ||= {}, $current); $current = undef }
 	elsif (/\s*(\S*)\s+(.*)/) { $current->{$1} = $2 }
     }
-    close PRINTERS;
+    close $PRINTERS;
 
     #- assume this printing system.
     $printer->{SPOOLER} ||= 'cups';
@@ -1388,12 +1381,12 @@ sub read_printers_conf {
 sub get_direct_uri() {
     #- get the local printer to access via a Device URI.
     my @direct_uri;
-    local *F; open F, ($::testing ? $::prefix : "chroot $::prefix/ ") . "/usr/sbin/lpinfo -v |";
+    open(my $F, ($::testing ? $::prefix : "chroot $::prefix/ ") . "/usr/sbin/lpinfo -v |");
     local $_;
-    while (<F>) {
+    while (<$F>) {
 	/^(direct|usb|serial)\s+(\S*)/ and push @direct_uri, $2;
     }
-    close F;
+    close $F;
     @direct_uri;
 }
 
@@ -1413,7 +1406,7 @@ sub installppd {
     mkdir_p("$::prefix/usr/share/cups/model/printerdrake");
     # "cp_f()" is broken, it hangs infinitely
     # cp_f($ppdfile, "$::prefix/usr/share/cups/model/printerdrake");
-    run_program::rooted($::prefix, "cp", "-f", "$ppdfile",
+    run_program::rooted($::prefix, "cp", "-f", $ppdfile,
 			"$::prefix/usr/share/cups/model/printerdrake");
     $ppdfile =~ s!^(.*)(/[^/]+)$!/usr/share/cups/model/printerdrake$2!;
     chmod 0644, "$::prefix$ppdfile";
@@ -1557,9 +1550,9 @@ sub get_descr_from_ppdfile {
 	local $_;
 	foreach (catMaybeCompressed("$::prefix$ppdfile")) {
 	    # "OTHERS|Generic PostScript printer|PostScript (en)";
-	    /^\*([^\s:]*)\s*:\s*\"([^\"]*)\"/ and
+	    /^\*([^\s:]*)\s*:\s*"([^"]*)"/ and
 		do { $ppd{$1} = $2; next };
-	    /^\*([^\s:]*)\s*:\s*([^\s\"]*)/   and
+	    /^\*([^\s:]*)\s*:\s*([^\s"]*)/   and
 		do { $ppd{$1} = $2; next };
 	}
     };
@@ -1579,16 +1572,16 @@ sub ppd_devid_data {
     $ppd = "$::prefix/usr/share/cups/model/$ppd";
     my @content;
     if ($ppd =~ /\.gz$/i) {
-	@content = cat_("$::prefix/bin/zcat $ppd |") or return ("", "");
+	@content = cat_("$::prefix/bin/zcat $ppd |") or return "", "";
     } else {
-	@content = cat_($ppd) or return ("", "");
+	@content = cat_($ppd) or return "", "";
     }
     my ($devidmake, $devidmodel);
-    /^\*Manufacturer:\s*\"(.*)\"\s*$/ and $devidmake = $1
+    /^\*Manufacturer:\s*"(.*)"\s*$/ and $devidmake = $1
 	foreach @content;
-    /^\*Product:\s*\"\(?(.*?)\)?\"\s*$/ and $devidmodel = $1 
+    /^\*Product:\s*"\(?(.*?)\)?"\s*$/ and $devidmodel = $1 
 	foreach @content;
-    return ($devidmake, $devidmodel);
+    return $devidmake, $devidmodel;
 }
 
 sub poll_ppd_base() {
@@ -1602,11 +1595,11 @@ sub poll_ppd_base() {
     printer::services::start_not_running_service("cups");
     my $driversthere = scalar(keys %thedb);
     foreach (1..60) {
-	local *PPDS; open PPDS, ($::testing ? $::prefix :
-				 "chroot $::prefix/ ") . 
-				 "/usr/bin/poll_ppd_base -a |";
+	open(my $PPDS, ($::testing ? $::prefix :
+				 "chroot $::prefix/ ") .
+				 "/usr/bin/poll_ppd_base -a |");
 	local $_;
-	while (<PPDS>) {
+	while (<$PPDS>) {
 	    chomp;
 	    my ($ppd, $mf, $descr, $lang) = split /\|/;
 	    if ($ppd eq "raw") { next }
@@ -1632,7 +1625,7 @@ sub poll_ppd_base() {
 		# Native CUPS?
 		my $isnativecups = $driver =~ /CUPS/i;
 		# Native PostScript
-		my $isnativeps = (!$isfoomatic and !$isnativecups);
+		my $isnativeps = !$isfoomatic && !$isnativecups;
 		# Key without language tag (key as it was produced for the
 		# entries from the Foomatic XML database)
 		my $keynolang = $key;
@@ -1663,13 +1656,15 @@ sub poll_ppd_base() {
 		    if (defined($thedb{$key})) {
 			next if lc($thedb{$key}{driver}) eq
 				     lc($driver);
-			next unless $isnativeps &&
-				      $thedb{$key}{driver} =~ /^PostScript$/i ||
-                          $thedb{$key}{driver} ne "PPD" && $isrecommended ||
-                          $thedb{$key}{driver} eq "PPD" && $isrecommended && $driver ne "PostScript";
-				      
-			# Remove the old entry
-			delete $thedb{$key};
+			if ($isnativeps &&
+                            $thedb{$key}{driver} =~ /^PostScript$/i ||
+                            $thedb{$key}{driver} ne "PPD" && $isrecommended ||
+                            $thedb{$key}{driver} eq "PPD" && $isrecommended && $driver ne "PostScript") {
+                            # Remove the old entry
+                            delete $thedb{$key};
+                        } else {
+                            next;
+                        }
 		    }
 		} elsif ((defined 
 			   $thedb{"$mf|$model|$fullfoomaticdriver"} ||
@@ -1747,7 +1742,7 @@ sub poll_ppd_base() {
 		#$thedb{$key}{devidmodel} = $devidmodel;
 	    }
 	}
-	close PPDS;
+	close $PPDS;
 	scalar(keys %thedb) - $driversthere > 5 and last;
 	#- we have to try again running the program, wait here a little 
 	#- before.
@@ -1860,8 +1855,7 @@ sub configure_queue($) {
 }
 
 sub remove_queue($$) {
-    my ($printer) = $_[0];
-    my ($queue) = $_[1];
+    my ($printer, $queue) = @_;
     run_program::rooted($::prefix, "foomatic-configure", "-R", "-q",
 			"-s", $printer->{SPOOLER},
 			"-n", $queue);
@@ -1934,11 +1928,10 @@ sub print_pages($@) {
     }
     sleep 5; #- allow lpr to send pages.
     # Check whether the job is queued
-    local *F; 
-    open F, ($::testing ? $::prefix : "chroot $::prefix/ ") . "$lpq -s $printer->{SPOOLER} -P $queue |";
+    open(my $F, ($::testing ? $::prefix : "chroot $::prefix/ ") . "$lpq -s $printer->{SPOOLER} -P $queue |");
     my @lpq_output =
-	grep { !/^no entries/ && !(/^Rank\s+Owner/ .. /^\s*$/) } <F>;
-    close F;
+	grep { !/^no entries/ && !(/^Rank\s+Owner/ .. /^\s*$/) } <$F>;
+    close $F;
     @lpq_output;
 }
 
@@ -1946,10 +1939,9 @@ sub help_output {
     my ($printer, $spooler) = @_;
     my $queue = $printer->{QUEUE};
 
-    local *F; 
-    open F, ($::testing ? $::prefix : "chroot $::prefix/ ") . sprintf($spoolers{$spooler}{help}, $queue);
-    my $helptext = join("", <F>);
-    close F;
+    open(my $F, ($::testing ? $::prefix : "chroot $::prefix/ ") . sprintf($spoolers{$spooler}{help}, $queue));
+    my $helptext = join("", <$F>);
+    close $F;
     $helptext ||= "Option list not available!\n";
     return $helptext;
 }
@@ -1983,15 +1975,14 @@ sub get_copiable_queues {
 
     my @queuelist;      #- here we will list all Foomatic-generated queues
     # Get queue list with foomatic-configure
-    local *QUEUEOUTPUT;
-    open QUEUEOUTPUT, ($::testing ? $::prefix : "chroot $::prefix/ ") . 
-	    "foomatic-configure -Q -q -s $oldspooler |" or
+    open(my $QUEUEOUTPUT, ($::testing ? $::prefix : "chroot $::prefix/ ") .
+	    "foomatic-configure -Q -q -s $oldspooler |") or
 		die "Could not run foomatic-configure";
 
     my $entry = {};
     my $inentry = 0;
     local $_;
-    while (<QUEUEOUTPUT>) {
+    while (<$QUEUEOUTPUT>) {
 	chomp;
 	if ($inentry) {
 	    # We are inside a queue entry
@@ -2016,7 +2007,7 @@ sub get_copiable_queues {
 		    $entry->{connect} = $1;
 	    }
 	} else {
-	    if (m!^\s*<queue\s+foomatic\s*=\s*\"?(\d+)\"?\s*spooler\s*=\s*\"?(\w+)\"?\s*>\s*$!) {
+	    if (m!^\s*<queue\s+foomatic\s*=\s*"?(\d+)"?\s*spooler\s*=\s*"?(\w+)"?\s*>\s*$!) {
 		# new entry
 		$inentry = 1;
 		$entry->{foomatic} = $1;
@@ -2024,8 +2015,8 @@ sub get_copiable_queues {
 	    }
 	}
     }
-    close QUEUEOUTPUT;
-    
+    close $QUEUEOUTPUT;
+
     return @queuelist;
 }
 
@@ -2129,16 +2120,15 @@ sub configure_hpoj {
     # It's only necessary to read it at the first call of this subroutine,
     # the subroutine definitions stay valid after leaving this subroutine.
     if (!$ptalinitread) {
-	local *PTALINIT;
-	open PTALINIT, "$::prefix/usr/sbin/ptal-init" or do {
+	open(my $PTALINIT, "$::prefix/usr/sbin/ptal-init") or do {
 	    die "unable to open $::prefix/usr/sbin/ptal-init";
 	};
 	my @ptalinitfunctions; # subroutine definitions in /usr/sbin/ptal-init
 	local $_;
-	while (<PTALINIT>) {
+	while (<$PTALINIT>) {
 	    if (m!sub main!) {
 		last;
-	    } elsif ((m!^[^\#]!) && !(m!^\s*exec\b!)){
+	    } elsif (m!^[^#]! && !(m!^\s*exec\b!)) {
 		# Comment lines and the "exec" line (probably obsolete
 		# Red Hat workaround) are skipped.
 
@@ -2162,7 +2152,7 @@ sub configure_hpoj {
 		push @ptalinitfunctions, $_;
 	    }
 	}
-	close PTALINIT;
+	close $PTALINIT;
 
 	eval "package printer::hpoj;
         @ptalinitfunctions
@@ -2242,12 +2232,12 @@ sub configure_hpoj {
 	    $model = $_->{val}{MODEL};
 	}
 	$serialnumber = $_->{val}{SERIALNUMBER};
-	services::stop("hpoj") if ($bus ne "hpjd");
+	services::stop("hpoj") if $bus ne "hpjd";
 	# Check if the device is really an HP multi-function device
 	#my $libusb = 0;
 	foreach my $libusb (0, 1) {
 	    # Do access via libusb/user mode only if we have a USB device
-	    next if ($libusb && ($bus ne "usb"));
+	    next if $libusb && $bus ne "usb";
 	    # Preliminary workaround to make the user-mode USB devices
 	    # (LIDIL devices) installable as verification of the HPOJ
 	    # settings of these devices does not work yet. The workaround
@@ -2292,16 +2282,14 @@ sub configure_hpoj {
 	    }
 	    $device_ok = 0;
 	    my $ptalprobedevice = $bus eq "hpjd" ? "hpjd:$hostname" : "mlc:$bus:probe";
-	    local *F;
-	    if (open F, ($::testing ? $::prefix : "chroot $::prefix/ ") . "/usr/bin/ptal-devid $ptalprobedevice |") {
-		my $devid = join("", <F>);
-		close F;
+	    if (open(my $F, ($::testing ? $::prefix : "chroot $::prefix/ ") . "/usr/bin/ptal-devid $ptalprobedevice |")) {
+		my $devid = join("", <$F>);
+		close $F;
 		if ($devid) {
 		    $device_ok = 1;
-		    local *F;
-		    if (open F, ($::testing ? $::prefix : "chroot $::prefix/ ") . "/usr/bin/ptal-devid $ptalprobedevice -long -mdl 2>/dev/null |") {
-			$model_long = join("", <F>);
-			close F;
+		    if (open(my $F, ($::testing ? $::prefix : "chroot $::prefix/ ") . "/usr/bin/ptal-devid $ptalprobedevice -long -mdl 2>/dev/null |")) {
+			$model_long = join("", <$F>);
+			close $F;
 			chomp $model_long;
 			# If SNMP or local port auto-detection failed but 
 			# HPOJ auto-detection succeeded, fill in model name 
@@ -2316,9 +2304,9 @@ sub configure_hpoj {
 			    }
 			}
 		    }
-		    if (open F, ($::testing ? $::prefix : "chroot $::prefix/ ") . "/usr/bin/ptal-devid $ptalprobedevice -long -sern 2>/dev/null |") { #-#
-			$serialnumber_long = join("", <F>);
-			close F;
+		    if (open(my $F, ($::testing ? $::prefix : "chroot $::prefix/ ") . "/usr/bin/ptal-devid $ptalprobedevice -long -sern 2>/dev/null |")) { #-#
+			$serialnumber_long = join("", <$F>);
+			close $F;
 			chomp $serialnumber_long;
 		    }
 		    $cardreader = 1 if printer::hpoj::cardReaderDetected($ptalprobedevice);
@@ -2326,21 +2314,20 @@ sub configure_hpoj {
 	    }
 	    if ($bus ne "hpjd") {
 		# Stop ptal-mlcd daemon for locally connected devices
-		local *F;
-		if (open F, ($::testing ? $::prefix : "chroot $::prefix/ ") . qq(ps auxwww | grep "ptal-mlcd $bus:probe" | grep -v grep | )) {
-		    my $line = <F>;
+		if (open(my $F, ($::testing ? $::prefix : "chroot $::prefix/ ") . qq(ps auxwww | grep "ptal-mlcd $bus:probe" | grep -v grep | ))) {
+		    my $line = <$F>;
 		    if ($line =~ /^\s*\S+\s+(\d+)\s+/) {
 			my $pid = $1;
 			kill 15, $pid;
 		    }
-		    close F;
+		    close $F;
 		}
 		$printermoduleunloaded &&
 		    eval(modules::load($usbprintermodule));
 	    }
 	    last if $device_ok;
 	}
-	printer::services::start("hpoj") if ($bus ne "hpjd");
+	printer::services::start("hpoj") if $bus ne "hpjd";
 	last;
     }
     # No, it is not an HP multi-function device.
@@ -2382,13 +2369,12 @@ sub configure_hpoj {
     # Configure the device
 
     # Open configuration file
-    local *CONFIG;
-    open(CONFIG, "> $::prefix/etc/ptal/$ptaldevice") or
+    open(my $CONFIG, "> $::prefix/etc/ptal/$ptaldevice") or
 	die "Could not open /etc/ptal/$ptaldevice for writing!\n";
 
     # Write file header.
     my $date = chomp_(`date`);
-    print CONFIG
+    print $CONFIG
 qq(
 # Added $date by "printerdrake"
 
@@ -2410,56 +2396,56 @@ init.version=2
 
     # Write model string.
     if ($model_long !~ /\S/) {
-	print CONFIG
+	print $CONFIG
 	    "\n" .
 	    qq(# "printerdrake" couldn't read the model but added this device anyway:\n) .
 	    "# ";
     } else {
-	print CONFIG
+	print $CONFIG
 	    "\n" .
 	    "# The device model that was originally detected on this port:\n" .
 	    qq(#   If this ever changes, then you should re-run "printerdrake"\n) .
 	    "#   to delete and re-configure this device.\n";
 	if ($bus eq "par") {
-	    print CONFIG
+	    print $CONFIG
 		"#   Comment out if you don't care what model is really connected to this\n" .
 		"#   parallel port.\n";
 	}
     }
-    print CONFIG
+    print $CONFIG
 	qq(init.mlcd.append+=-devidmatch "$model_long"\n);
 
     # Write serial-number string.
     if ($serialnumber_long !~ /\S/) {
-	print CONFIG
+	print $CONFIG
 	    "\n" .
 	    "# The device's serial number is unknown.\n" .
 	    "# ";
     } else {
-	print CONFIG
+	print $CONFIG
 	    "\n" .
 	    "# The serial number of the device that was originally detected on this port:\n";
 	if ($bus =~ /^[pu]/) {
-	    print CONFIG
+	    print $CONFIG
 		"#   Comment out if you want to disable serial-number matching.\n";
 	}
     }
-    print CONFIG
+    print $CONFIG
 	qq(init.mlcd.append+=-devidmatch "$serialnumber_long"\n);
 
     if ($bus =~ /^[pu]/) {
-	print CONFIG
+	print $CONFIG
 	    "\n" .
 	    "# Standard options passed to ptal-mlcd:\n" .
 	    "init.mlcd.append+=";
 	if ($bus eq "usb") {
 	    # Important: don't put more quotes around /dev/usb/lp[0-9]*,
 	    # because ptal-mlcd currently does no globbing:
-	    print CONFIG "-device /dev/usb/lp0 /dev/usb/lp1 /dev/usb/lp2 /dev/usb/lp3 /dev/usb/lp4 /dev/usb/lp5 /dev/usb/lp6 /dev/usb/lp7 /dev/usb/lp8 /dev/usb/lp9 /dev/usb/lp10 /dev/usb/lp11 /dev/usb/lp12 /dev/usb/lp13 /dev/usb/lp14 /dev/usb/lp15";
+	    print $CONFIG "-device /dev/usb/lp0 /dev/usb/lp1 /dev/usb/lp2 /dev/usb/lp3 /dev/usb/lp4 /dev/usb/lp5 /dev/usb/lp6 /dev/usb/lp7 /dev/usb/lp8 /dev/usb/lp9 /dev/usb/lp10 /dev/usb/lp11 /dev/usb/lp12 /dev/usb/lp13 /dev/usb/lp14 /dev/usb/lp15";
 	} elsif ($bus eq "par") {
-	    print CONFIG "$address_arg -device $device";
+	    print $CONFIG "$address_arg -device $device";
 	}
-	print CONFIG "\n" .
+	print $CONFIG "\n" .
 	    "\n" .
 	    "# ptal-mlcd's remote console can be useful for debugging, but may be a\n" .
 	    "# security/DoS risk otherwise.  In any case, it's accessible with the\n" .
@@ -2477,7 +2463,7 @@ init.version=2
 	    "# following line to disable ptal-printd for this device:\n" .
 	    "# init.printd.start=0\n";
     } else {
-	print CONFIG
+	print $CONFIG
 	    "\n" .
 	    "# By default ptal-printd isn't started for hpjd: devices.\n" .
 	    "# If for some reason you want to start it for this device, then\n" .
@@ -2485,13 +2471,13 @@ init.version=2
 	    "init.printd.start=1\n";
     }
 
-    print CONFIG
+    print $CONFIG
 	"\n" .
 	"# If you need to pass any additional command-line options to ptal-printd,\n" .
 	"# then add them to the following line and uncomment the line:\n" .
 	"# init.printd.append+=\n";
     if ($cardreader) {
-	print CONFIG
+	print $CONFIG
 	    "\n" .
 	    "# Uncomment the following line to enable ptal-photod for this device:\n" .
 	    "init.photod.start=1\n" .
@@ -2501,7 +2487,7 @@ init.version=2
 	    qq(# then change the line below to use the "-portoffset <n>" option.\n) .
 	    "init.photod.append+=-maxaltports 26\n";
     }
-    close(CONFIG);
+    close($CONFIG);
     printer::hpoj::readOneDevice($ptaldevice);
 
     # Restart HPOJ
@@ -2515,10 +2501,10 @@ sub devicefound {
     my ($usbid, $model, $serial) = @_;
     # Compare the output of "lsusb -vv" with the elements of the device 
     # ID string
-    if ($serial && ($usbid->{'SERIALNUMBER'} eq $serial)) {
+    if ($serial && $usbid->{SERIALNUMBER} eq $serial) {
 	# Match of serial number has absolute priority
 	return 1;
-    } elsif ($model && ($usbid->{'MODEL'} eq $model)) {
+    } elsif ($model && $usbid->{MODEL} eq $model) {
 	# Try to match the model name otherwise
 	return 1;
     }
@@ -2529,13 +2515,12 @@ sub usbdevice() {
     my ($usbid) = @_;
     # Run "lsusb -vv¨ and search the given device to get its USB bus and
     # device numbers
-    local *F;
-    open F, ($::testing ? "" : "chroot $::prefix/ ") .
-	'/bin/sh -c "export LC_ALL=C; lsusb -vv 2> /dev/null" |'
+    open(my $F, ($::testing ? "" : "chroot $::prefix/ ") .
+	'/bin/sh -c "export LC_ALL=C; lsusb -vv 2> /dev/null" |')
 	or return undef;
     my ($bus, $device, $model, $serial) = ("", "", "", "");
     my $found = 0;
-    while (my $line = <F>) {
+    while (my $line = <$F>) {
 	chomp $line;
 	if ($line =~ m/^\s*Bus\s+(\d+)\s+Device\s+(\d+)\s*:/i) {
 	    # head line of a new device
@@ -2553,7 +2538,7 @@ sub usbdevice() {
 	    $serial = $1;
 	}
     }
-    close F;
+    close $F;
     # Check last entry
     $found = devicefound($usbid, $model, $serial);
 
@@ -2592,7 +2577,7 @@ EOF
     my $mtoolsfmconf;
     if (-f "$::prefix/etc/mtoolsfm.conf") {
 	$mtoolsfmconf = cat_("$::prefix/etc/mtoolsfm.conf") or die "can't read MToolsFM config in $::prefix/etc/mtoolsfm.conf: $!";
-	my $alloweddrives = lc($1) if $mtoolsfmconf =~ m/^\s*DRIVES\s*=\s*\"([A-Za-z ]*)\"/m;
+	my $alloweddrives = lc($1) if $mtoolsfmconf =~ m/^\s*DRIVES\s*=\s*"([A-Za-z ]*)"/m;
 	foreach my $letter ("p", "q", "r", "s") {
          $alloweddrives .= $letter if $alloweddrives !~ /$letter/;
 	}
