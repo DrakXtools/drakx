@@ -364,6 +364,7 @@ sub selectInstallClass {
     $o->selectInstallClass(@install_classes);
 
     $::expert = $o->{installClass} eq "expert";
+    
 }
 
 #------------------------------------------------------------------------------

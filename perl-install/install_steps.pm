@@ -266,7 +266,7 @@ sub addUser($) {
 
 #------------------------------------------------------------------------------
 sub createBootdisk($) {
-    my $dev = $o->default("mkbootdisk") or return;
+    my $dev = $o->{mkbootdisk} or return;
 
     my @l = detect_devices::floppies();
 

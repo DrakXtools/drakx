@@ -194,7 +194,7 @@ sub printerConfig($) {
       $o->ask_from_list_(_("Select Printer Connection"),
 			 _("How is the printer connected?"),
 			 [keys %printer::printer_type],
-			 ${$o->default("printer")}{str_type},
+			 ${$o->{printer}}{str_type},
 			);
     $o->{printer}{TYPE} = $printer::printer_type{$o->{printer}{str_type}};
 
