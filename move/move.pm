@@ -422,7 +422,7 @@ sub install2::startMove {
 
     if (cat_('/proc/mounts') =~ m|\s/home\s|) {
         output '/var/lib/machine_ident', machine_ident();
-        run_program::run('/usr/bin/etc-monitorer.pl', $_) foreach uniq map { dirname($_) } chomp_(`find /etc -type f`);
+        run_program::run('/usr/bin/etc-monitorer.pl', uniq map { dirname($_) } chomp_(`find /etc -type f`));
         run_program::raw({ detach => 1 }, '/usr/bin/dnotify', '-MCR', '/etc', '-r', '-e', '/usr/bin/etc-monitorer.pl', '{}') or die "dnotify not found!";
     }
 
