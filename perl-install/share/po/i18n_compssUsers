@@ -11,16 +11,14 @@ sub get {
     open F, "../compssUsers$meta_class" or return; #die "can't open file ../compssUsers$meta_class";
     foreach (<F>) {
 	/^\s*$/ || /^#/ and next;
-	# i18n the Group names:
-	s/#.*!{--- }//;
-	s/[ ]*# --- //;
 
 	if (/^(\S.*)/) {
-	    my ($icon, $descr);
+	    my ($icon, $path, $descr);
 	    /^(.*?)\s*\[icon=(.*?)\](.*)/  and $_ = "$1$3", $icon  = $2;
+	    /^(.*?)\s*\[path=(.*?)\](.*)/  and $_ = "$1$3", $path  = $2;
 	    /^(.*?)\s*\[descr=(.*?)\](.*)/ and $_ = "$1$3", $descr = $2;
-	    /^(.*?)\s*\[path=(.*?)\](.*)/ and $_ = "$1$3";
 	    $compssUsersDescr{$_} = $descr; 
+	    $compssUsersDescr{$descr} = $path; 
 	}
     }
     close F;
