@@ -23,7 +23,7 @@ LIBS	= libint10.a libx86emu.a
 DEFS	+= -DHAVE_VBE
 endif
 ifeq (ppc,$(ARCH))
-#OBJS	= ddcxinfos.o of.o minifind.o vbe.o vesamode.o
+OBJS	= ddcxinfos.o of.o minifind.o vbe.o vesamode.o
 endif
 ifeq (ppc64,$(ARCH))
 OBJS	= ddcxinfos.o of.o minifind.o vbe.o vesamode.o
