@@ -46,6 +46,9 @@ my %modules_only_for_all_img = (
     'aic7xxx_old', 'qlogicisp',
     'dtc',
   ],
+  'disk/sata' => [
+    qw(ahci ata_piix sata_nv sata_promise sata_sil sata_sis sata_svw sata_sx4 sata_uli sata_via sata_vsc sx8),
+  ],
 
   'disk/hardware_raid' => [
     if_(arch() =~ /x86_64/, qw(ataraid)), #- old
