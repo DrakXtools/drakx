@@ -45,33 +45,45 @@ You will need to create a top level /RPMS directory.  This directory needs
 to be populated with the following RPMS:
 locales-ja locales-ko locales-zh
 
-gi needs to be informed about which kernel(s) is/are to be used.  A 
-directory with the following structure and files is needed for each kernel 
-you want to use:  (2.6.0 is the example kernel)
+GI needs to be informed about which kernel(s) is/are to be used.
+Most of the time, no manual install is needed. Just be sure to
+have the BOOT kernel(s) in /RPMS and issue "make" in the
+"kernel/" subdirectory of the "gi" directory. This will install
+the kernel and compile necessary files related to.
+
+For each kernel, directories will be populated as follows:
 
 gi/kernel/all.kernels/2.6.0
-                           /boot
-                                System.map-2.6.0
-                                vmlinuz-2.6.0
-                           /lib/modules/2.6.0
-                                (the module dir for the current kernel)
+        containing all files from the said kernel RPM package
 
-Note:  the modules must not be in compressed form (*.gz *.bz2 etc)
+gi/kernel/all.modules/2.6.0
+        containing all modules, and special files containing
+        modules for stage1 (*.mar)
+
+gi/kernel/all.modules/
+        containing a special file containing modules for stage1
+        (*.cz*)
+
+Note: the modules must not be in compressed form (*.gz *.bz2 etc)
 
 
 (3) required rpm packages
 
-You need quite a number of rpm packages to build gi properly. Roughly:
-emacs gcc make glibc-devel glibc-static-devel perl-devel XFree86 
-XFree86-FBDev XFree86-VGA16 XFree86-devel libglib-devel libgtk+-devel 
-perl-GTK ldetect ldetect-devel ldetect-lst ldetect-lst-devel libslang-devel 
-libnewt-devel e2fsprogs libext2fs2-devel dosfstools rpm-devel rpmtools 
-libbzip2_1 libbzip2_1-devel libncurses5 libncurses5-devel setserial telnet 
-parted raidtools pciutils mt-st gpart reiserfsprogs jfsprogs xfsprogs 
-extipl pcmcia-cs gettext perl-Gtk2 perl-Glib ash imlib fb2png ntfsprogs 
-lm_sensors galaxy-gnome perl-PerlIO-gzip brltty lvm2 mkcd
+You need quite a number of rpm packages installed on your system
+to build gi properly. Roughly:
 
-You may need a few others I forgot to mention. if the compilation fails, try 
+emacs gcc make glibc-devel glibc-static-devel perl-devel XFree86
+XFree86-FBDev XFree86-VGA16 XFree86-devel libglib-devel
+libgtk+-devel perl-GTK ldetect ldetect-devel ldetect-lst
+ldetect-lst-devel libslang-devel libnewt-devel e2fsprogs
+libext2fs2-devel dosfstools rpm-devel rpmtools libbzip2_1
+libbzip2_1-devel libncurses5 libncurses5-devel setserial telnet
+parted raidtools pciutils mt-st gpart reiserfsprogs jfsprogs
+xfsprogs extipl pcmcia-cs gettext perl-Gtk2 perl-Glib ash imlib
+fb2png ntfsprogs lm_sensors galaxy-gnome perl-PerlIO-gzip brltty
+lvm2 mkcd perl-URPM glibc-i18ndata
+
+You may need a few others I forgot to mention. If the compilation fails, try 
 to understand the message and install any necessary remaining package.
 
 
@@ -82,6 +94,7 @@ permissions in /etc/sudoers:
 
 user ALL=(root)
 NOPASSWD:/usr/bin/patch,NOPASSWD:/bin/rpm,NOPASSWD:/bin/mount,NOPASSWD:/bin/cp,NOPASSWD:/bin/umount,NOPASSWD:/usr/bin/install,NOPASSWD:/bin/rm,NOPASSWD:/bin/mv,NOPASSWD:/bin/tar,NOPASSWD:/bin/cpio,NOPASSWD:/bin/chown,NOPASSWD:/bin/mkdir,NOPASSWD:/usr/bin/strip,NOPASSWD:/bin/mknod
+
 
 (5)
 
