@@ -461,7 +461,11 @@ sub ask_browse_tree_info_given_widgets {
 	    $set_node_state->($node, $state);
 	    push @{$ptree{$leaf}}, $node;
 	} else {
-	    $add_parent->($root, $state);
+	    #- hackery for partial displaying of trees, used in rpmdrake:
+	    #- if leaf is void, we do create the parent and one child (to have the [+] in front of the parent in the ctree)
+	    #- though we use '' as the label of the child; then rpmdrake will connect on tree_expand, and whenever
+	    #- the first child has '' as the label, it will remove the child and add all the "right" children
+	    $w->{tree}->insert_node($add_parent->($root, $state), undef, ['', '', ''], 5, (undef) x 4, 1, 0);
 	}
     };
     $common->{delete_all} = sub {
