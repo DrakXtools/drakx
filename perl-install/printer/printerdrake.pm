@@ -3700,14 +3700,12 @@ sub hplip_help {
 	$text .= N("Run Scannerdrake (Hardware/Scanner in Mandrakelinux Control Center) to share your scanner on the network.\n\n");
     }
 
-    if ($hplipentry->{card} == 1) {
-	$text .= N("The memory card readers in your printer can be accessed using HP's Printer Toolbox (Menu: System/Monitoring/HP Printer Toolbox) clicking the \"Access Photo Cards...\" button on the \"Functions\" tab. ");
-	$text .= N("Note that this is very slow, reading the pictures from the camera or a USB card reader is usually faster.\n\n");
-    }
-
-    if ($hplipentry->{card} == 2) {
+    if (($hplipentry->{card} == 2) && ($deviceuri =~ m!/usb/!i)) {
 	$text .= N("The memory card readers in your printer can be accessed like a usual USB mass storage device. ");
 	$text .= N("After inserting a card a hard disk icon to access the card should appear on your desktop.\n\n");
+    } elsif ($hplipentry->{card} > 0) {
+	$text .= N("The memory card readers in your printer can be accessed using HP's Printer Toolbox (Menu: System/Monitoring/HP Printer Toolbox) clicking the \"Access Photo Cards...\" button on the \"Functions\" tab. ");
+	$text .= N("Note that this is very slow, reading the pictures from the camera or a USB card reader is usually faster.\n\n");
     }
 
     $text .= N("HP's Printer Toolbox (Menu: System/Monitoring/HP Printer Toolbox) offers a lot of status monitoring and maintenance functions for your %s:\n\n", $makemodel);
