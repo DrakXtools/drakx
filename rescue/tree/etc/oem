@@ -166,6 +166,10 @@ mkdir "/hd/Mandrake/RPMS";
 system "cp", "-a", "/cdrom/Mandrake/base", "/cdrom/Mandrake/mdkinst", "/hd/Mandrake";
 
 print "Setting bootloader\n";
+mkdir "/hd/boot/grub";
+foreach (1..2) {
+    -e "/hd/boot/grub/stage$_" or system "cp", "-a", "/boot/grub/stage$_", "/hd/boot/grub";
+}
 open F, ">/hd/boot/grub/menu.lst";
 if (defined $resize_fat_size) {
     print F "timeout 5\n";
