@@ -1,3 +1,14 @@
+2004/12/13  Rafael Garcia-Suarez <rgarciasuarez at mandrakesoft.com>
+
+	* share/list: Add new packdrake module
+
+2004/12/12  Pixel  <pixel at mandrakesoft.com>
+
+	* .perl_checker: ignore packdrake for now
+
+	* install_gtk.pm, share/list.i386: keyboard_drv.o is needed by Xorg, and
+	driver must "keyboard", not "Keyboard"
+
 2004/12/12  Pixel  <pixel at mandrakesoft.com>
 
 	* .perl_checker: ignore packdrake for now
@@ -42500,7 +42511,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.991 2004/12/03 11:20:39 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.992 2004/12/12 20:07:44 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
