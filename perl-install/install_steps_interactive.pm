@@ -1127,7 +1127,7 @@ sub setRootPassword {
         my $authentication_kind = any::authentication2authentication_kind($o->{authentication} ||= {});
 
 	$o->ask_from_({
-	 title => N("Set root password"), 
+	 title => N("Set root password and network authentication methods"), 
 	 messages => N("Set root password"),
 	 interactive_help_id => "setRootPassword",
 	 cancel => ($o->{security} <= 2 && !$::corporate ? 
