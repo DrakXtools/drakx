@@ -609,8 +609,6 @@ sub loadO {
 
 sub generate_automatic_stage1_params {
     my ($o) = @_;
-    
-    return if $o->{method} =~ /hd|cdrom/;
 
     my $ks = "automatic=";
     
@@ -635,7 +633,7 @@ sub generate_automatic_stage1_params {
 	$ks .= "network:dhcp,";
     } else {
 	require network;
-	$ks .= "ip:$intf->{IPADDR},netmask:$intf->{NETMASK},gateway:$o->{netc}{GATEWAY},";
+	$ks .= "network:static,ip:$intf->{IPADDR},netmask:$intf->{NETMASK},gateway:$o->{netc}{GATEWAY},";
 	my @dnss = network::dnsServers($o->{netc});
 	$ks .= "dns:$dnss[0]," if @dnss;
     }
