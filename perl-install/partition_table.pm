@@ -25,7 +25,7 @@ use log;
 @important_types = ('Linux native', 'Linux swap', 'Win98 FAT32');
 @important_types2 = (arch() =~ /i.86/ ? 'ReiserFS' : (), 'Linux RAID');
 
-@fields2save = qw(primary extended totalsectors);
+@fields2save = qw(primary extended totalsectors isDirty needKernelReread);
 
 
 my %types = (
@@ -473,6 +473,7 @@ sub write($) {
 	}
     }
     $hd->{isDirty} = 0;
+    $hd->{hasBeenDirty} = 1; #- used in undo (to know if undo should believe isDirty or not)
 
     #- now sync disk and re-read the partition table
     if ($hd->{needKernelReread}) {

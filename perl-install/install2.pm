@@ -28,14 +28,13 @@ use detect_devices;
 use run_program;
 
 use install_steps;
-#use install_steps_interactive;
+
+$::VERSION = "7.1";
+#-$::corporate=1;
 
 #-######################################################################################
 #- Steps table
 #-######################################################################################
-$::VERSION = "7.1";
-#-$::corporate=1;
-
 my (%installSteps, @orderedInstallSteps);
 {    
     my @installStepsFields = qw(text redoable onError hidden needs); 
@@ -47,24 +46,24 @@ my (%installSteps, @orderedInstallSteps);
   selectMouse        => [ __("Configure mouse"), 1, 1, '$::beginner', "selectInstallClass" ],
   selectKeyboard     => [ __("Choose your keyboard"), 1, 1, '', "selectInstallClass" ],
   miscellaneous      => [ __("Miscellaneous"), 1, 1, '$::beginner' ],
-  partitionDisks     => [ __("Setup filesystems"), 1, 0, '$o->{lnx4win}', "selectInstallClass" ],
-  formatPartitions   => [ __("Format partitions"), 1, -1, '', "partitionDisks" ],
+  doPartitionDisks   => [ __("Setup filesystems"), 1, 0, '$o->{lnx4win}', "selectInstallClass" ],
+  formatPartitions   => [ __("Format partitions"), 1, -1, '', "doPartitionDisks" ],
   choosePackages     => [ __("Choose packages to install"), 1, -2, '$::beginner', "formatPartitions" ],
-  doInstallStep      => [ __("Install system"), 1, -1, '', ["formatPartitions", "selectInstallClass"] ],
+  installPackages    => [ __("Install system"), 1, -1, '', ["formatPartitions", "selectInstallClass"] ],
   configureNetwork   => [ __("Configure networking"), 1, 1, '$::beginner && !$::corporate', "formatPartitions" ],
   installCrypto      => [ __("Cryptographic"), 1, 1, '!$::expert', "configureNetwork" ],
-  configureTimezone  => [ __("Configure timezone"), 1, 1, '', "doInstallStep" ],
-  configureServices  => [ __("Configure services"), 1, 1, '!$::expert', "doInstallStep" ],
-  configurePrinter   => [ __("Configure printer"), 1, 0, '', "doInstallStep" ],
+  configureTimezone  => [ __("Configure timezone"), 1, 1, '', "installPackages" ],
+  configureServices  => [ __("Configure services"), 1, 1, '!$::expert', "installPackages" ],
+  configurePrinter   => [ __("Configure printer"), 1, 0, '', "installPackages" ],
   setRootPassword    => [ __("Set root password"), 1, 1, '', "formatPartitions" ],
   addUser            => [ __("Add a user"), 1, 1, '' ],
 arch() !~ /alpha/ ? (
-  createBootdisk     => [ __("Create a bootdisk"), 1, 0, '$::o->{lnx4win} && !$::expert', "doInstallStep" ],
+  createBootdisk     => [ __("Create a bootdisk"), 1, 0, '$::o->{lnx4win} && !$::expert', "installPackages" ],
 ) : (),
-  setupBootloader    => [ __("Install bootloader"), 1, 1, '$::o->{lnx4win} && !$::expert', "doInstallStep" ],
+  setupBootloader    => [ __("Install bootloader"), 1, 1, '$::o->{lnx4win} && !$::expert', "installPackages" ],
   configureX         => [ __("Configure X"), 1, 1, '', ["formatPartitions", "setupBootloader"] ],
 arch() !~ /alpha/ ? (
-  generateAutoInstFloppy => [ __("Auto install floppy"), 1, 1, '!$::expert || $o->{lnx4win}', "doInstallStep" ],
+  generateAutoInstFloppy => [ __("Auto install floppy"), 1, 1, '!$::expert || $o->{lnx4win}', "installPackages" ],
 ) : (),
   exitInstall        => [ __("Exit install"), 0, 0, '$::beginner' ],
 );
@@ -237,7 +236,7 @@ sub selectLanguage {
     addToBeDone {
 	lang::write($o->{prefix});
 	keyboard::write($o->{prefix}, lang::lang2charset($o->{lang}), $o->{keyboard});
-    } 'doInstallStep' unless $::g_auto_install;
+    } 'installPackages' unless $::g_auto_install;
 }
 
 #------------------------------------------------------------------------------
@@ -247,7 +246,7 @@ sub selectMouse {
     add2hash($o->{mouse} ||= {}, { mouse::read($o->{prefix}) }) if $o->{isUpgrade} && !$clicked;
 
     $o->selectMouse($clicked);
-    addToBeDone { mouse::write($o->{prefix}, $o->{mouse}) } 'doInstallStep';
+    addToBeDone { mouse::write($o->{prefix}, $o->{mouse}) } 'installPackages';
 }
 
 #------------------------------------------------------------------------------
@@ -271,7 +270,7 @@ sub selectKeyboard {
     addToBeDone {
 	lang::write($o->{prefix});
 	keyboard::write($o->{prefix}, lang::lang2charset($o->{lang}), $o->{keyboard});
-    } 'doInstallStep' unless $::g_auto_install;
+    } 'installPackages' unless $::g_auto_install;
 }
 
 #------------------------------------------------------------------------------
@@ -280,13 +279,13 @@ sub selectInstallClass {
    
     $o->{partitions} ||= $suggestedPartitions{$o->{installClass}};
 
-    if ($o->{steps}{choosePackages}{entered} >= 1 && !$o->{steps}{doInstallStep}{done}) {
+    if ($o->{steps}{choosePackages}{entered} >= 1 && !$o->{steps}{installPackages}{done}) {
         $o->setPackages(\@install_classes);
         $o->selectPackagesToUpgrade() if $o->{isUpgrade};
     }
     if ($o->{isUpgrade}) {
-	@{$o->{orderedSteps}} = map { /setupSCSI/ ? ($_, "partitionDisks") : $_ } 
-	                        grep { !/partitionDisks/ } @{$o->{orderedSteps}};
+	@{$o->{orderedSteps}} = map { /setupSCSI/ ? ($_, "doPartitionDisks") : $_ } 
+	                        grep { !/doPartitionDisks/ } @{$o->{orderedSteps}};
 	my $s; foreach (@{$o->{orderedSteps}}) {
 	    $s->{next} = $_ if $s;
 	    $s = $o->{steps}{$_};
@@ -295,7 +294,7 @@ sub selectInstallClass {
 }
 
 #------------------------------------------------------------------------------
-sub partitionDisks {
+sub doPartitionDisks {
     return install_any::searchAndMount4Upgrade($o) if $o->{isUpgrade};
 
     my $stage1_hd;
@@ -389,11 +388,11 @@ sub choosePackages {
     pkgs::packageFlagSelected(pkgs::packageByName($o->{packages}, 'basesystem')) or die "basesystem package not selected";
 
     #- check if there are package that need installation.
-    $o->{steps}{doInstallStep}{done} = 0 if $o->{steps}{doInstallStep}{done} && pkgs::packagesToInstall($o->{packages}) > 0;
+    $o->{steps}{installPackages}{done} = 0 if $o->{steps}{installPackages}{done} && pkgs::packagesToInstall($o->{packages}) > 0;
 }
 
 #------------------------------------------------------------------------------
-sub doInstallStep {
+sub installPackages {
     $o->readBootloaderConfigBeforeInstall if $_[1] == 1;
 
     $o->beforeInstallPackages;
@@ -421,7 +420,7 @@ sub miscellaneous {
 	setVarsInSh($f, \%usb);
 
 	install_any::fsck_option();
-    } 'doInstallStep';
+    } 'installPackages';
 }
 
 #------------------------------------------------------------------------------
@@ -458,18 +457,18 @@ sub configureTimezone {
     }
     $o->{timezone}{timezone} ||= timezone::bestTimezone(lang::lang2text($o->{lang}));
     $o->{timezone}{UTC} = !$::beginner && !grep { isFat($_) || isNT($_) } @{$o->{fstab}} unless exists $o->{timezone}{UTC};
-    $o->timeConfig($f, $clicked);
+    $o->configureTimezone($f, $clicked);
 }
 #------------------------------------------------------------------------------
-sub configureServices { $::expert and $o->servicesConfig }
+sub configureServices { $::expert and $o->configureServices }
 #------------------------------------------------------------------------------
-sub configurePrinter  { $o->printerConfig($_[0]) }
+sub configurePrinter  { $o->configurePrinter($_[0]) }
 #------------------------------------------------------------------------------
 sub setRootPassword {
     return if $o->{isUpgrade};
 
     $o->setRootPassword($_[0]);
-    addToBeDone { install_any::setAuthentication($o) } 'doInstallStep';
+    addToBeDone { install_any::setAuthentication($o) } 'installPackages';
 }
 #------------------------------------------------------------------------------
 sub addUser {
@@ -507,7 +506,7 @@ sub configureX {
     fs::write($o->{prefix}, $o->{fstab}, $o->{manualFstab}, $o->{useSupermount});
     modules::write_conf($o->{prefix});
 
-    $o->setupXfree if pkgs::packageFlagInstalled(pkgs::packageByName($o->{packages}, 'XFree86')) || $clicked;
+    $o->configureX if pkgs::packageFlagInstalled(pkgs::packageByName($o->{packages}, 'XFree86')) || $clicked;
 }
 #------------------------------------------------------------------------------
 sub generateAutoInstFloppy { 
@@ -536,7 +535,7 @@ sub main {
 
 #-    c::unlimit_core() unless $::testing;
 
-    my ($cfg, $patch, @auto);
+    my ($cfg, $patch, $oem, @auto);
     my %cmdline; map { 
 	my ($n, $v) = split '=';
 	$cmdline{$n} = $v || 1;
@@ -557,7 +556,7 @@ sub main {
     map_each {
 	my ($n, $v) = @_;
 	my $f = ${{
-	    oem       => sub { $o->{oem} = $v },
+	    oem       => sub { $oem = $v },
 	    lang      => sub { $o->{lang} = $v },
 	    flang     => sub { $o->{lang} = $v ; push @auto, 'selectLanguage' },
 	    method    => sub { $o->{method} = $v },
@@ -595,10 +594,6 @@ sub main {
 	$o->{method} ||= "cdrom";
 	$o->{mkbootdisk} = 0;
     }
-    if ($o->{oem}) {
-	push @auto, 'exitInstall', 'selectMouse', 'timeConfig';
-    }
-
     unless ($::testing) {
 	unlink $_ foreach ( $o->{pcmcia} ? () : ("/sbin/install"), #- #- install include cardmgr!
 			   "/modules/modules.cgz",
@@ -674,6 +669,9 @@ sub main {
 
 	$o->{interactive} = "newt";
 	require install_steps_newt;
+    }
+    if ($oem) {
+	push @auto, 'selectInstallClass', 'selectMouse', 'configureTimezone', 'exitInstall';
     }
     foreach (@auto) {
 	eval "undef *" . (!/::/ && "install_steps_interactive::") . $_;

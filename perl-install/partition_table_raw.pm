@@ -9,9 +9,10 @@ use c;
 
 my @MBR_signatures = (
     [ 'empty', 0, "\0\0\0\0" ],
+    [ 'grub', 0, "\xEBG", 0x17d, "stage1 \0" ],
+    [ 'grub', 0, "\xEBH", 0x18a, "stage1 \0" ],
     [ 'lilo', 0x2,  "LILO" ],
     [ 'lilo', 0x6,  "LILO" ],
-    [ 'grub', 0x17d, "stage1 \0" ],
     [ 'osbs', 0x2,  "OSBS" ], #- http://www.prz.tu-berlin.de/~wolf/os-bs.html
     [ 'pqmagic', 0xef, "PQV" ],
     [ 'BootStar', 0x130, "BootStar:" ],
@@ -86,6 +87,18 @@ sub get_geometry($) {
     }
 
     { geom => \%geom, totalsectors => $geom{heads} * $geom{sectors} * $geom{cylinders} };
+}
+
+#- works for both hard drives and partitions ;p
+sub description {
+    my ($hd) = @_;
+    my $win = $hd->{device_windobe};
+
+    sprintf "%s%s (%d%s%s)", 
+      $hd->{device}, 
+      $win && " [$win:]", 
+      ($hd->{totalsectors} || $hd->{size}) >> 11, _("MB"), 
+      $hd->{info} && ", $hd->{info}";
 }
 
 sub openit($$;$) { sysopen $_[1], $_[0]{file}, $_[2] || 0; }

@@ -209,7 +209,7 @@ my %charsets = (
 #- Functions
 #-######################################################################################
 
-sub list { sort { $a cmp $b } map { $_->[0] } values %languages }
+sub list { sort { $a cmp $b } keys %languages }
 sub lang2text { $languages{$_[0]} && $languages{$_[0]}[0] }
 sub text2lang { 
     my ($t) = @_;

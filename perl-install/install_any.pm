@@ -383,7 +383,7 @@ sub searchAndMount4Upgrade {
     my ($o) = @_;
     my ($root, $found);
 
-    my $w = $::beginner && $o->wait_message('', _("Searching root partition."));
+    my $w = !$::expert && $o->wait_message('', _("Searching root partition."));
 
     #- try to find the partition where the system is installed if beginner
     #- else ask the user the right partition, and test it after.
@@ -869,6 +869,29 @@ sub generate_ks_cfg {
 	$ks .= "\n";
     }
     $ks;
+}
+
+sub partitionWizard {
+    my ($o, $hds, $fstab, $readonly) = @_;
+    my @solutions;
+
+    # each solutions is a [ text, function ], where the function retunrs true if succeeded
+    if (fsedit::free_space(@$hds) > 500 << 11 && !$readonly) {
+	push @solutions, [ _("Use free space"), sub { fsedit::auto_allocate($hds, $o->{partitions}); 1 } ];
+    } elsif (my @l = grep { isTrueFS($_) } @$fstab) {
+	push @solutions, [ _("Use existing partition"), sub { $o->ask_mntpoint_s($o->{fstab}) } ];
+    } elsif (@l = grep { isFat($_) } @$fstab) {
+    }
+    push @solutions, 
+      [ _("Take over the hard drive (beware!)"), 
+	sub {
+	    my $hd = $o->ask_from_listf('', _("You have more than one hard drive, which one do you install linux on?"),
+					\&partition_table_raw::description, @$hds) or return;
+	    $o->ask_okcancel('', _("All existing partitions and their data will be lost on drive %s", $hd->{device})) or return;
+	    partition_table_raw::zero_MBR($hd);
+	    fsedit::auto_allocate($hds, $o->{partitions});
+	    1;
+	} ];
 }
 
 1;

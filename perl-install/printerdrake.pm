@@ -195,8 +195,7 @@ _("Extra Text options") => \$printer->{TEXTONLYOPTIONS},
 	printer::configure_queue($printer);
 	$printer->{complete} = 0;
 	
-	$action = ${{reverse %action}}{$in->ask_from_list('', _("Do you want to test printing?"),
-							  [ map { $action{$_} } @action ], $action{'done'})};
+	$action = $in->ask_from_list('', _("Do you want to test printing?"), sub { $action{$_[0]} }, \@action, 'done');
 
 	my @testpages;
 	push @testpages, "/usr/lib/rhs/rhs-printfilters/testpage.asc"

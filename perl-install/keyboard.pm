@@ -182,18 +182,10 @@ arch() eq "ppc" ? (
 #-######################################################################################
 #- Functions
 #-######################################################################################
-sub list { map { $_->[0] } values %keyboards }
 sub xmodmaps { keys %keyboards }
 sub keyboard2text { $keyboards{$_[0]} && $keyboards{$_[0]}[0] }
 sub keyboard2kmap { $keyboards{$_[0]} && $keyboards{$_[0]}[1] }
 sub keyboard2xkb  { $keyboards{$_[0]} && $keyboards{$_[0]}[2] }
-sub text2keyboard {
-    my ($t) = @_;
-    foreach (keys %keyboards) {
-	lc($keyboards{$_}[0]) eq lc($t) and return $_;
-    }
-    die "unknown keyboard $t";
-}
 
 sub loadkeys_files {
     my $archkbd = arch() =~ /^sparc/ ? "sun" : arch() =~ /^i\d/ ? "i386" : arch();

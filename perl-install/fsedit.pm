@@ -316,18 +316,13 @@ sub undo_prepare($) {
 	push @{$_->{undo}}, Data::Dumper->Dump([\@h], ['$h']);
     }
 }
-sub undo_forget($) {
-    my ($hds) = @_;
-    pop @{$_->{undo}} foreach @$hds;
-}
-
 sub undo($) {
     my ($hds) = @_;
     foreach (@$hds) {
 	my $h; eval pop @{$_->{undo}} || next;
 	@{$_}{@partition_table::fields2save} = @$h;
 
-	$_->{isDirty} = $_->{needKernelReread} = 1;
+	$_->{isDirty} = $_->{needKernelReread} = 1 if $_->{hasBeenDirty};
     }
 }
 

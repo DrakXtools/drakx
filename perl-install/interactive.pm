@@ -76,19 +76,30 @@ sub ask_warn($$$) {
 
 sub ask_yesorno($$$;$) {
     my ($o, $title, $message, $def) = @_;
-    ask_from_list2_($o, $title, $message, [ __("Yes"), __("No") ], $def ? "Yes" : "No") eq "Yes";
+    ask_from_list_($o, $title, $message, [ __("Yes"), __("No") ], $def ? "Yes" : "No") eq "Yes";
 }
 
 sub ask_okcancel($$$;$) {
     my ($o, $title, $message, $def) = @_;
-    ask_from_list2_($o, $title, $message, [ __("Ok"), __("Cancel") ], $def ? "Ok" : "Cancel") eq "Ok";
+    ask_from_list_($o, $title, $message, [ __("Ok"), __("Cancel") ], $def ? "Ok" : "Cancel") eq "Ok";
 }
 
 sub ask_from_list_ {
     my ($o, $title, $message, $l, $def) = @_;
-    @$l == 0 and die '';
-    @$l == 1 and return $l->[0];
-    goto &ask_from_list2_;
+    ask_from_listf($o, $title, $message, sub { translate($_[0]) }, @$l, $def);
+}
+
+sub ask_from_listf_ {
+    my ($o, $title, $message, $f, $l, $def) = @_;
+    ask_from_listf($o, $title, $message, sub { translate($f->(@_)) }, $l, $def);
+}
+sub ask_from_listf {
+    my ($o, $title, $message, $f, $l, $def) = @_;
+    my %l; my $i = 0; foreach (@$l) {
+	$l{$f->($_, $i++)} = $_;
+    }
+    my $r = ask_from_list($o, $title, $message, [ keys %l ], $f->($def)) or return;
+    $l{$r};
 }
 
 sub ask_from_list {
@@ -96,13 +107,6 @@ sub ask_from_list {
     @$l == 0 and die 'ask_from_list: empty list';
     @$l == 1 and return $l->[0];
     goto &ask_from_list2;
-}
-
-sub ask_from_list2_($$$$;$) {
-    my ($o, $title, $message, $l, $def) = @_;
-    untranslate(
-       ask_from_list($o, $title, $message, [ map { translate($_) } @$l ], translate($def)),
-       @$l);
 }
 
 sub ask_from_list2($$$$;$) {
@@ -160,6 +164,10 @@ sub ask_from_treelistW($$$$;$) {
 
 
 
+sub ask_many_from_list_refH {
+    my ($o, $title, $message, @l) = @_;
+    $o->ask_many_from_list_ref($title, $message, map { [ keys %$_ ], [ values %$_ ] } @l);
+}
 sub ask_many_from_list_ref {
     my ($o, $title, $message, @l) = @_;
     $o->ask_many_from_list_with_help_ref($title, [ deref($message) ], map { ($_->[0], [], $_->[1]) } combine(2, @l));

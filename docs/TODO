@@ -10,13 +10,8 @@ warning on diskdrake startup, made them as warning ?).
 -features-------------------------------------------------------------------------------
 add rpmdrake in menu
 
-(NEED 7.1) auto-install for corporate, very important (need consolidation).
-
 (7.1 or later) clean SCSI CDROM autoboot.
 stage1 & cdrom: add ability in expert to choose the scsi cdrom drive to use
-
-(7.1)install in 800x600
-- need handling of both 640x480 (mostly for VGA16) and 800x600
 
 (7.1)better help for partitioning in newbie
 
@@ -513,3 +508,8 @@ already hda1 with /boot/vmlinuz
 - create a stage2 with many tools (fdisk, bash...)
 the rescue could be on another cd (if multi-cd)
 ! care must be taken about modules (if ide is in module...)
+
+(done,7.1)install in 800x600
+- need handling of both 640x480 (mostly for VGA16) and 800x600
+
+(done,NEED 7.1) auto-install for corporate, very important (need consolidation).

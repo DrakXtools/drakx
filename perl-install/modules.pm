@@ -322,26 +322,17 @@ while (my ($k, $v) = each %drivers) {
 
 1;
 
-sub module_of_type($) {
+sub module_of_type__4update_kernel {
     my ($type) = @_;
     my %skip; @skip{@skip_modules_on_stage1} = ();
-    grep { !exists $skip{$_} } grep { $drivers{$_}{type} =~ /^($type)$/ } keys %drivers;
+    grep { !exists $skip{$_} } grep { $drivers{$_}{type} =~ /^$type$/ } keys %drivers;
 }
-
-sub text_of_type($) {
+sub module_of_type {
     my ($type) = @_;
     my $alias = $type_aliases{$type};
-
-    map { $_->{text} } grep { $_->{type} eq $type || $_->{type} eq $alias } values %drivers;
+    grep { $drivers{$_}{type} =~ /^$type|$alias$/ } keys %drivers;
 }
-
-sub text2driver($) {
-    my ($text) = @_;
-    foreach (keys %drivers) {
-	$drivers{$_}{text} eq $text and return $_;
-    }
-    die "$text is not a valid module description";
-}
+sub module2text { $drivers{$_[0]}{text} }
 
 sub get_alias {
     my ($alias) = @_;

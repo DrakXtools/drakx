@@ -12,6 +12,7 @@ use vars qw(@ISA);
 #-######################################################################################
 use common qw(:common :file :functional :system);
 use partition_table qw(:types);
+use partition_table_raw;
 use install_steps;
 use install_any;
 use detect_devices;
@@ -51,12 +52,11 @@ sub kill_action {
 sub selectLanguage($) {
     my ($o) = @_;
 
-    $o->{lang} =
-      lang::text2lang($o->ask_from_list("Language",
-					_("Please, choose a language to use."),
-					# the translation may be used for the help
-					[ lang::list() ],
-					lang::lang2text($o->{lang})));
+    $o->{lang} = $o->ask_from_listf("Language",
+				    _("Please, choose a language to use."),
+				    \&lang::lang2text,
+				    [ lang::list() ],
+				    $o->{lang});
     install_steps::selectLanguage($o);
 
 #-    $o->{useless_thing_accepted} = $o->ask_from_list_('', 
@@ -67,18 +67,18 @@ sub selectLanguage($) {
 sub selectKeyboard($) {
     my ($o, $clicked) = @_;
     if (!$::beginner || $clicked) {
-	$o->{keyboard} =
-	  keyboard::text2keyboard($o->ask_from_list_(_("Keyboard"),
-						     _("Please, choose your keyboard layout."),
-						     [ keyboard::list() ],
-						     keyboard::keyboard2text($o->{keyboard})));
+	$o->{keyboard} = $o->ask_from_listf_(_("Keyboard"),
+					     _("Please, choose your keyboard layout."),
+					     \&keyboard::keyboard2text,
+					     [ keyboard::xmodmaps() ],
+					     $o->{keyboard});
 	delete $o->{keyboard_unsafe};
     }
     if ($::expert) {
 	my %langs; $langs{$_} = 1 foreach @{$o->{langs}};
 	$o->ask_many_from_list_ref('', 
 		_("You can choose other languages that will be available after install"),
-		[ lang::list(), 'All' ], [ map { \$langs{$_} } (map { lang::text2lang($_) } lang::list()), 'all' ] ) or goto &selectKeyboard;
+		[ (map { lang::lang2text($_) } lang::list()), 'All' ], [ map { \$langs{$_} } lang::list(), 'all' ] ) or goto &selectKeyboard;
 	$o->{langs} = $langs{all} ? [ 'all' ] : [ grep { $langs{$_} } keys %langs ];
     }
     install_steps::selectKeyboard($o);
@@ -107,7 +107,7 @@ sub selectInstallClass($@) {
 
     my %c = my @c = (
       $::corporate ? () : (
-	_("Automated") => "beginner",
+	_("Recommended") => "beginner",
       ),
 	_("Customized")  => "specific",
 	_("Expert")	 => "expert",
@@ -137,9 +137,11 @@ You will be allowed to make powerful but dangerous things here."),
 		 server    => _("Server"),
 		);
 	$o->set_help('selectInstallClass2');
-	$o->{installClass} = ${{reverse %c}}{$o->ask_from_list(_("Install Class"),
-							       _("Which usage is your system used for ?"),
-							       [ values %c ], $c{$o->{installClass}})};
+	$o->{installClass} = $o->ask_from_listf(_("Install Class"),
+						_("Which usage is your system used for ?"),
+						sub { $c{$_[0]} },
+						[ keys %c ],
+						$o->{installClass});
     }
     install_steps::selectInstallClass($o);
 }
@@ -149,18 +151,18 @@ sub selectMouse {
     my ($o, $force) = @_;
 
     $force ||= $o->{mouse}{unsafe} || $::expert;
-    if ($force) {
-	my $name = $o->ask_from_list_('', _("Please, choose the type of your mouse."), [ mouse::names() ], $o->{mouse}{FULLNAME});
-	$o->{mouse} = mouse::name2mouse($name);
-    }
+    
+    $o->{mouse} = $o->ask_from_listf_('', _("Please, choose the type of your mouse."), 
+				      sub { $_[0]{FULLNAME} }, [ mouse::list ], $o->{mouse}) if $force;
     $o->{mouse}{XEMU3} = 'yes' if $o->{mouse}{nbuttons} < 3;
 
     if ($force && $o->{mouse}{device} eq "ttyS") {
 	$o->set_help('selectSerialPort');
-	$o->{mouse}{device} = mouse::serial_ports_names2dev(
-	  $o->ask_from_list(_("Mouse Port"),
+	$o->{mouse}{device} = 
+	  $o->ask_from_listf(_("Mouse Port"),
 			    _("Please choose on which serial port your mouse is connected to."),
-			    [ mouse::serial_ports_names() ]));
+			    \&mouse::serial_port2text,
+			    [ mouse::serial_ports ]);
     }
 
     $o->setup_thiskind('SERIAL_USB', !$::expert, 0) if $o->{mouse}{device} eq "usbmouse";
@@ -184,28 +186,24 @@ sub ask_mntpoint_s {
     my ($o, $fstab) = @_;
     my @fstab = grep { isTrueFS($_) } @$fstab;
     @fstab = grep { isSwap($_) } @$fstab if @fstab == 0;
-#    @fstab = @$fstab if @fstab == 0;
+    @fstab = @$fstab if @fstab == 0;
     die _("no available partitions") if @fstab == 0;
 
-    my $msg = sub { "$_->{device} " . _("(%dMB)", $_->{size} / 1024 / 2) };
-    
     if (@fstab == 1) {
-	$fstab[0]->{mntpoint} = '/';
+	$fstab[0]{mntpoint} = '/';
     } elsif ($::beginner) {
-	my %l; $l{&$msg} = $_ foreach @fstab;
-	my $e = $o->ask_from_list('', 
-				  _("Please choose a partition to use as your root partition."), 
-				  [ sort keys %l ]);
+	my $e = $o->ask_from_listf('', 
+				   _("Please choose a partition to use as your root partition."), 
+				   \&partition_table_raw::description,
+				   \@fstab) or return;
 	(fsedit::get_root($fstab) || {})->{mntpoint} = '';
-	$l{$e}{mntpoint} = '/';
+	$e->{mntpoint} = '/';
     } else {
-	$o->ask_from_entries_ref
-	  ('', 
-	   _("Choose the mount points"),
-	   [ map { &$msg } @fstab ],
-	   [ map { +{ val => \$_->{mntpoint}, 
-		      list => [ '', fsedit::suggestions_mntpoint([]) ]
-		    } } @fstab ]);
+	$o->ask_from_entries_refH('', 
+				  _("Choose the mount points"),
+				  { map { partition_table_raw::description($_) => 
+				            { val => \$_->{mntpoint}, list => [ '', fsedit::suggestions_mntpoint([]) ] }
+					} @fstab }) or return;
     }
     $o->SUPER::ask_mntpoint_s($fstab);
 }
@@ -299,14 +297,11 @@ sub choosePackages {
 	
 	my $size2install = do {
 	    if ($::beginner) {
-		#- TODO: check the max_size > 700, otherwise remove Full entry, and even maybe Medium
-		#- in any case, ensure the result < $max_size
-		my @sizes = (300, 700, round_up(min($max_size, $availableC) / 1024 / 1024, 100));
-		my @l = mapn { _ ($_[0], $_[1]) } [ __("Small(%dMB)"), __("Normal (%dMB)"), __("Full (%dMB)") ], \@sizes;
-		$sizes[2] > $sizes[1] + 200 or splice(@l, 1, 1), splice(@sizes, 1, 1); #- not worth proposing too alike stuff
-		$sizes[1] > $sizes[0] + 100 or splice(@l, 1, 1), splice(@sizes, 1, 1);
-		my $choice = $o->ask_from_list('', 'TODOMESSAGE', \@l);
-		$sizes[find_index { $_ eq $choice } @l] * 1024 * 1024;
+		my @l = (300, 700, round_up(min($max_size, $availableC) / sqr(1024), 100));
+		$l[2] > $l[1] + 200 or splice(@l, 1, 1); #- not worth proposing too alike stuff
+		$l[1] > $l[0] + 100 or splice(@l, 0, 1);
+		my @text = (__("Small(%dMB)"), __("Normal (%dMB)"), __("Full (%dMB)"));
+		$o->ask_from_listf('', 'TODOMESSAGE', sub { _ ($text[$_[1]], $_[0]) }, \@l) * sqr(1024);
 	    } else {
 		$o->chooseSizeToInstall($packages, $min_size, $max_size, $availableC, $individual) || goto &choosePackages;
 	    }
@@ -545,10 +540,9 @@ sub pppConfig {
     }
 
     $m->{device} ||= $o->set_help('selectSerialPort') && 
-                     mouse::serial_ports_names2dev(
-	$o->ask_from_list('', _("Please choose which serial port your modem is connected to."),
-			  [ grep { my $avoidDevice = mouse::serial_ports_names2dev($_);
-				   $o->{mouse}{device} !~ /$avoidDevice/ } mouse::serial_ports_names ]));
+	$o->ask_from_listf('', _("Please choose which serial port your modem is connected to."),
+			   \&mouse::serial_port2text,
+			   [ grep { $_ ne $o->{mouse}{device} } mouse::serial_ports ]);
 
     $o->set_help('configureNetworkISP');
     install_steps::pppConfig($o) if $o->ask_from_entries_refH('',
@@ -605,7 +599,7 @@ USA")) || return;
 
     require crypto;
     eval {
-      $u->{mirror} = crypto::text2mirror($o->ask_from_list('', _("Choose a mirror from which to get the packages"), [ crypto::mirrorstext() ], crypto::mirror2text($u->{mirror})));
+      $u->{mirror} = $o->ask_from_listf('', _("Choose a mirror from which to get the packages"), \&crypto::mirror2text, [ crypto::mirrors() ], $u->{mirror});
     };
     return if $@;
 
@@ -627,25 +621,25 @@ USA")) || return;
 }
 
 #------------------------------------------------------------------------------
-sub timeConfig {
+sub configureTimezone {
     my ($o, $f, $clicked) = @_;
 
     require timezone;
-    $o->{timezone}{timezone} = $o->ask_from_treelist('', _("Which is your timezone?"), '/', [ timezone::getTimeZones($::g_auto_install ? '' : $o->{prefix}) ], $o->{timezone}{timezone}) if $clicked;
+    $o->{timezone}{timezone} = $o->ask_from_treelist('', _("Which is your timezone?"), '/', [ timezone::getTimeZones($::g_auto_install ? '' : $o->{prefix}) ], $o->{timezone}{timezone});
     $o->{timezone}{UTC} = $o->ask_yesorno('', _("Is your hardware clock set to GMT?"), $o->{timezone}{UTC}) if $::expert || $clicked;
-    install_steps::timeConfig($o, $f);
+    install_steps::configureTimezone($o, $f);
 }
 
 #------------------------------------------------------------------------------
-sub servicesConfig { 
+sub configureServices { 
     my ($o) = @_;
     require services;
     $o->{services} = services::ask($o, $o->{prefix});
-    install_steps::servicesConfig($o);
+    install_steps::configureServices($o);
 }
 
 #------------------------------------------------------------------------------
-sub printerConfig {
+sub configurePrinter {
     my ($o, $clicked) = @_;
 
     return if $::corporate;
@@ -791,11 +785,10 @@ drive and press \"Ok\"."),
     } else {
 	my @l = detect_devices::floppies();
 	my %l = (
-		 'fd0'  => __("First floppy drive"),
-		 'fd1'  => __("Second floppy drive"),
-		 'Skip' => __("Skip"),
+		 'fd0'  => _("First floppy drive"),
+		 'fd1'  => _("Second floppy drive"),
+		 'Skip' => _("Skip"),
 		 );
-	$l{$_} ||= $_ foreach @l;
 
 	if ($first_time || @l == 1) {
 	    $o->ask_yesorno('',
@@ -810,12 +803,14 @@ failures. Would you like to create a bootdisk for your system?"),
 	} else {
 	    @l or die _("Sorry, no floppy drive available");
 
-	    $o->{mkbootdisk} = ${{reverse %l}}{$o->ask_from_list_('',
-								  _("Choose the floppy drive you want to use to make the bootdisk"),
-								  [ @l{@l, "Skip"} ], $o->{mkbootdisk})};
+	    $o->{mkbootdisk} = $o->ask_from_listf('',
+						  _("Choose the floppy drive you want to use to make the bootdisk"),
+						  sub { $l{$_[0]} || $_[0] },
+						  [ @l, "Skip" ], 
+						  $o->{mkbootdisk});
 	    return $o->{mkbootdisk} = '' if $o->{mkbootdisk} eq 'Skip';
         }
-        $o->ask_warn('', _("Insert a floppy in drive %s", $l{$o->{mkbootdisk}}));
+        $o->ask_warn('', _("Insert a floppy in drive %s", $l{$o->{mkbootdisk}} || $o->{mkbootdisk}));
     }
 
     my $w = $o->wait_message('', _("Creating bootdisk"));
@@ -928,9 +923,9 @@ give digits instead of normal letters (eg: pressing `p' gives `6')")) || return;
 }
 
 #------------------------------------------------------------------------------
-sub setupXfree {
+sub configureX {
     my ($o) = @_;
-    $o->setupXfreeBefore;
+    $o->configureXBefore;
 
     require Xconfig;
     require Xconfigurator;
@@ -962,7 +957,7 @@ Do you want to keep XFree 3.3?"), 0) if $::expert;
 	  $o->pkg_install("XFree86-$server", @l);
       });
     }
-    $o->setupXfreeAfter;
+    $o->configureXAfter;
 }
 
 #------------------------------------------------------------------------------
@@ -1081,11 +1076,11 @@ sub load_module {
     my ($o, $type) = @_;
     my @options;
 
-    my $l = $o->ask_from_list('',
+    my $m = $o->ask_from_list('',
 			      _("Which %s driver should I try?", $type),
-			      [ modules::text_of_type($type) ]) or return;
-    my $m = modules::text2driver($l);
-
+			      \&modules::module2text,
+			      [ modules::module_of_type($type) ]) or return;
+    my $l = modules::module2text($m);
     require modparm;
     my @names = modparm::get_options_name($m);
 
@@ -1162,7 +1157,7 @@ sub setup_thiskind {
 	my $r = "Yes";
 	$r = $o->ask_from_list_('', $msg, $opt, "No") unless $at_least_one && @l == 0;
 	if ($r eq "No") { return }
-	elsif ($r eq "Yes") {
+	if ($r eq "Yes") {
 	    push @l, $o->load_module($type) || next;
 	} else {
 	    #-eval { commands::modprobe("isapnp") };

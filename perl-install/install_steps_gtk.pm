@@ -19,6 +19,8 @@ use fsedit;
 use commands;
 use modules;
 use pkgs;
+use partition_table qw(:types);
+use partition_table_raw;
 use install_steps;
 use install_steps_interactive;
 use interactive_gtk;
@@ -769,7 +771,7 @@ sub create_steps_window {
 			my $darea = new Gtk::DrawingArea;
 			my $draw_pix = sub {
 			    my $pixmap = Gtk::Gdk::Pixmap->create_from_xpm($darea->window,
-									   $darea->style->bg('normal')
+									   $darea->style->bg('normal'),
 									   $_[1]) or die;
 			    $darea->window->draw_pixmap ($darea->style->bg_gc('normal'),
 							 $pixmap, 0, 0,

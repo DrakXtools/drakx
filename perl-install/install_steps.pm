@@ -129,7 +129,7 @@ sub doPartitionDisks {
     if ($o->{lnx4win}) {
 	my @l = sort { $a->{device_windobe} cmp $b->{device_windobe} } 
 	        grep { isFat($_) } fsedit::get_fstab(@{$o->{hds}}) or die "wow, lnx4win with no fat partitions! hard times :(";
-	my $real_part = @l > 1 && $o->doPartitionDisksLnx4winDev(\@l) || $l[0];
+	my $real_part = $o->doPartitionDisksLnx4winDev(\@l) || $l[0];
 
 	my $handle = loopback::inspect($real_part, '', 'rw') or die _("This partition can't be used for loopback");
 	my $size = loopback::getFree($handle->{dir}, $real_part); 
@@ -631,20 +631,20 @@ sub pcmciaConfig($) {
 }
 
 #------------------------------------------------------------------------------
-sub timeConfig {
+sub configureTimezone {
     my ($o, $f) = @_;
     require timezone;
     timezone::write($o->{prefix}, $o->{timezone}, $f);
 }
 
 #------------------------------------------------------------------------------
-sub servicesConfig {
+sub configureServices {
     my ($o) = @_;
     require services;
     services::doit($o, $o->{services}, $o->{prefix}) if $o->{services};
 }
 #------------------------------------------------------------------------------
-sub printerConfig {
+sub configurePrinter {
     my($o) = @_;
     if ($o->{printer}{configured}) {
 	require pkgs;
@@ -834,7 +834,7 @@ sub setupBootloader($) {
 }
 
 #------------------------------------------------------------------------------
-sub setupXfreeBefore {
+sub configureXBefore {
     my ($o) = @_;
     my $xkb = $o->{X}{keyboard}{xkb_keymap} || keyboard::keyboard2xkb($o->{keyboard});
     if (!-e "$o->{prefix}/usr/X11R6/lib/X11/xkb/symbols/$xkb" && (my $f = keyboard::xmodmap_file($o->{keyboard}))) {
@@ -851,9 +851,9 @@ sub setupXfreeBefore {
     #- keep this here if the package has to be updated.
     $o->pkg_install("XFree86");
 }
-sub setupXfree {
+sub configureX {
     my ($o) = @_;
-    $o->setupXfreeBefore;
+    $o->configureXBefore;
 
     require Xconfigurator;
     require class_discard;
@@ -864,9 +864,9 @@ sub setupXfree {
          $o->pkg_install("XFree86-$_[0]");
       });
     }
-    $o->setupXfreeAfter;
+    $o->configureXAfter;
 }
-sub setupXfreeAfter {
+sub configureXAfter {
     my ($o) = @_;
     if ($o->{X}{card}{server} eq 'FBDev') {
 	unless (install_any::setupFB($o, Xconfigurator::getVGAMode($o->{X}))) {

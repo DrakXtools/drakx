@@ -122,11 +122,17 @@ _("Restrict command line options") => { val => \$b->{restricted}, type => "bool"
 
     until ($::beginner && $more <= 1) {
 	$in->set_help(arch() =~ /sparc/ ? 'setupSILOAddEntry' : 'setupBootloaderAddEntry') unless $::isStandalone;
-	my $c = $in->ask_from_list_([''], 
+	my $c = $in->ask_from_listf([''], 
 _("Here are the different entries.
 You can add some more or change the existing ones."),
-		[ (sort @{[map { "$_->{label} ($_->{kernel_or_dev})" . ($b->{default} eq $_->{label} && "  *") } @{$b->{entries}}]}), __("Add"), __("Done") ],
-	);
+		sub {
+		    my ($e) = @_;
+		    ref $e ? 
+		      "$e->{label} ($e->{kernel_or_dev})" . ($b->{default} eq $e->{label} && "  *") : 
+		      translate($e);
+		},
+		[ @{$b->{entries}}, __("Add"), __("Done") ]);
+
 	$c eq "Done" and last;
 
 	my ($e);
@@ -147,9 +153,8 @@ You can add some more or change the existing ones."),
 	    }
 	    $e->{label} = $prefix;
 	    for (my $nb = 0; member($e->{label}, @labels); $nb++) { $e->{label} = "$prefix-$nb" }
-	} else {
-	    $c =~ /(.*) \(/;
-	    ($e) = grep { $_->{label} eq $1 } @{$b->{entries}};
+	} else { 
+	    $e = $c;
 	}
 	my %old_e = %$e;
 	my $default = my $old_default = $e->{label} eq $b->{default};

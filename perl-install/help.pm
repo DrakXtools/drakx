@@ -20,9 +20,7 @@ or 7.0 (Air).
 
 Select:
 
-  - Automated (recommended): If you have never installed GNU/Linux before, choose this. NOTE:
-    networking will not be configured during installation, use \"LinuxConf\"
-    to configure it after the install completes.
+  - Recommended: If you have never installed GNU/Linux before, choose this.
 
   - Customized: If you are familiar enough with GNU/Linux, you may then choose
     the primary usage for your machine. See below for details.
@@ -88,7 +86,7 @@ information from Windows (if you have it on your system),
 from hardware documentation, or from the manufacturer's
 website (if you have Internet access)."),
 
-partitionDisks =>
+doPartitionDisks =>
  __("At this point, you may choose what partition(s) to use to install
 your Linux-Mandrake system if they have been already defined (from a
 previous install of GNU/Linux or from another partitioning tool). In other
@@ -149,7 +147,7 @@ chooseCD =>
 If you have none of those CDs, click Cancel.
 If only some CDs are missing, unselect them, then click Ok."),
 
-doInstallStep =>
+installPackages =>
  __("The packages selected are now being installed. This operation
 should take a few minutes unless you have chosen to upgrade an
 existing system, in that case it can take more time even before

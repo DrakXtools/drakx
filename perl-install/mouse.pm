@@ -96,6 +96,7 @@ my @xmousetypes = (
 sub xmouse2xId { my ($id) = @_; my $i; map_index { $_ eq $id and $i = $::i } @xmousetypes; $i }
 
 sub names { map { $_->{FULLNAME} } @mouses }
+sub list { @mouses }
 
 sub name2mouse {
     my ($name) = @_;
@@ -109,12 +110,10 @@ sub X2nbuttons {
     first(map { $_->{nbuttons} } grep { $_->{XMOUSETYPE} eq $_[0] } @mouses);
 }
 
-sub serial_ports_names() {
-    map { "ttyS" . ($_ - 1) . " / COM$_" } 1..4;
-}
-sub serial_ports_names2dev {
-    local ($_) = @_;
-    first(/(\w+)/);
+sub serial_ports() { map { "ttyS$_" } 0..3 }
+sub serial_port2text {
+    $_[0] =~ /ttyS (\d+)/x;
+    "$_[0] / COM" . ($1 + 1);
 }
 
 sub read($) {
@@ -179,9 +178,12 @@ sub detect() {
 	    modules::load("mousedev");
 	   };
 	sleep(2);
-	if (!$@ && detect_devices::tryOpen("usbmouse")) {
+	if (!$@) {
+	    my $dev;
+	    $dev ||= "usbmouse" if detect_devices::tryOpen("usbmouse");
+	    $dev ||= "usbmice"  if detect_devices::tryOpen("usbmice");
 	    $wacom or modules::unload("serial"); 
-	    return name2mouse("USB Mouse"), $wacom;
+	    return add2hash({ device => $dev }, name2mouse("USB Mouse")), $wacom;
 	}
 	modules::unload("mousedev");
 	modules::unload("usbmouse");
