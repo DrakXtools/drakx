@@ -11,17 +11,22 @@ use log;
 use ftp;
 
 %url2land = (
-	     fr => N("France"),
-	     cr => N("Costa Rica"),
+	     at => N("Austria"),
 	     be => N("Belgium"),
+	     ch => N("Switzerland"),
+	     cr => N("Costa Rica"),
 	     cz => N("Czech Republic"),
 	     de => N("Germany"),
+	     fr => N("France"),
 	     gr => N("Greece"),
-	     no => N("Norway"),
-	     se => N("Sweden"),
-	     nl => N("Netherlands"),
+	     hu => N("Hungary"),
 	     it => N("Italy"),
-	     at => N("Austria"),
+	     nl => N("Netherlands"),
+	     no => N("Norway"),
+	     pl => N("Poland"),
+	     se => N("Sweden"),
+	     sk => N("Slovakia"),
+	     tw => N("Taiwan"),
 	    );
 
 %land2tzs = (
