@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10
-Release: 52mdk
+Release: 53mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -324,6 +324,18 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Tue Jul  6 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10-53mdk
+- bootloader-config (pixel):
+  o nicer "usage: ..." 
+  o add actions "add-entry" and "remove-entry"
+  o add option --label
+  o add option --chainload
+  o rename --vmlinuz to --image
+  o remove unneeded spaces in append=" foo"
+  o handles "optional" in LILO
+- drakboot: update bootsplash even if framebuffer was disabled (oblin)
+- fix build with new glibc
+
 * Mon Jul  5 2004 Pixel <pixel@mandrakesoft.com> 10-53mdk
 - drakxtools-backend needs ldetect-lst (for complete_usb_storage_info())
 
