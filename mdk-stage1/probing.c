@@ -128,7 +128,6 @@ void discovered_device(enum driver_type type,
 	log_message("PCI: device %04x %04x %04x %04x is \"%s\", driver is %s", vendor, device, subvendor, subdevice, description, driver);
 #ifndef DISABLE_MEDIAS
 	if (type == SCSI_ADAPTERS) {
-		int wait_msg = 0;
 		enum insmod_return failed;
 		wait_message("Loading driver for SCSI adapter:\n \n%s", description);
 		failed = my_insmod(driver, SCSI_ADAPTERS, NULL, 1);
