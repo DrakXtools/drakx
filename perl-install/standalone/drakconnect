@@ -573,7 +573,7 @@ Create one first by clicking on 'Configure'")));
     $dialog->signal_connect(delete_event => $exit_dialogsub);
     $dialog->set_border_width(10);
 
-    my $vbox2 = Gtk2::VBox->new(0,0);
+    my $param_vbox = Gtk2::VBox->new(0,0);
     my $i = 0;
     my @mask;
 @mask = (0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0) if $netcnx->{type} eq 'lan';
@@ -623,7 +623,7 @@ Create one first by clicking on 'Configure'")));
         }
         $infos[2*$i] = Gtk2::HBox->new(0,0);
         gtkpack($infos[2*$i], gtkset_justify(Gtk2::Label->new($_->[0]), 'left'));
-        gtkpack($vbox2, $infos[2*$i]);
+        gtkpack($param_vbox, $infos[2*$i]);
         if (defined $_->[2]) {
             my $c = Gtk2::Combo->new;
             $c->set_popdown_strings(@{$_->[2]});
@@ -651,7 +651,7 @@ Create one first by clicking on 'Configure'")));
                                Gtk2::Label->new(translate($netcnx->{type})) ],
                             ),
             Gtk2::HSeparator->new,
-            gtkadd(Gtk2::Frame->new(N("Parameters")), $vbox2),
+            gtkadd(Gtk2::Frame->new(N("Parameters")), $param_vbox),
            );
     gtkpack($dialog->action_area,
             gtksignal_connect(Gtk2::Button->new(N("Cancel")), clicked => $exit_dialogsub),
