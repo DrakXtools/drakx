@@ -47,7 +47,6 @@ delete @help{0,1,5} unless $::expert;
 begin:
 $::isEmbedded and kill USR2, $::CCPID;
 
-$secure_level = ${{ getVarsFromSh("/etc/profile") }}{SECURE_LEVEL} || $ENV{SECURE_LEVEL} || 2;
 
 #$in->ask_from('',
 #	      _("Choose security level")  . "\n\n" . join('', map { "$l{$_}: $help{$_}\n\n" } keys %l),
@@ -55,14 +54,23 @@ $secure_level = ${{ getVarsFromSh("/etc/profile") }}{SECURE_LEVEL} || $ENV{SECUR
 #	      { label => _($st->{$f}{text}), val => \$def_choice, list => [ 'replay', 'manual' ] }
 #	     )
 
-my ($level, $libsafe);
+my $libsafe);
+my $secure_level;
+if (-e "$prefix/etc/profile.d/msec.sh") {
+    local $_ = cat_("$prefix/etc/profile.d/msec.sh");
+    /export SECURE_LEVEL=(\d+)/ and $secure_level = $1;
+}
+$secure_level ||= $ENV{SECURE_LEVEL};
+$secure_level ||= 2;
+$secure_level = $l{$secure_level};
+
 my %h = getVarsFromSh("$prefix/etc/sysconfig/system");
 $libsafe = $h{LIBSAFE} =~ /yes/i;
 
 if ($in->ask_from('', _("Choose security level") . "\n\n" .
 		       join('', map { "$l{$_}: $help{$_}\n\n" } keys %l),
 		       [
-			{ label => _("Security level"), val => \$level, list => [ (values %l) ] },
+			{ label => _("Security level"), val => \$secure_level, list => [ (values %l) ] },
 		        if_(pkgs_interactive::is_installed('libsafe') && arch() =~ /^i.86/,
 			    { label => _("Use libsafe for servers"), val => \$libsafe, type => 'bool', text =>
 			      _("A library which defends against buffer overflow and format string attacks.") }
@@ -73,7 +81,7 @@ if ($in->ask_from('', _("Choose security level") . "\n\n" .
     $in->suspend;
 
     $ENV{LILO_PASSWORD} = ''; # make it non interactive
-    system "/usr/sbin/msec", $m{$level};
+    system "/usr/sbin/msec", $m{$secure_level};
     my %t = getVarsFromSh("$prefix/etc/sysconfig/system");
 
     $t{LIBSAFE} = bool2yesno($libsafe);
