@@ -225,7 +225,7 @@ user "$adsl->{login}"
                                              $modems{$adsl_device}{server}{$adsl_type} || "/usr/sbin/pppd file /etc/ppp/peers/adsl",
                                              $ppp_options{$adsl_type}{connect}
                                             ),
-                         $ppp_options{disconnect},
+                         $ppp_options{$adsl_type}{disconnect},
                          $netc->{adsltype}
                         );
 
