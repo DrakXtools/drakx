@@ -67,10 +67,10 @@ sub write_conf {
     add2hash($netc, {
 		     NETWORKING => "yes",
 		     FORWARD_IPV4 => "false",
-		     HOSTNAME => "localhost.$netc->{DOMAINNAME}",
+		     if_(!$netc->{DHCP}, HOSTNAME => "localhost.$netc->{DOMAINNAME}"),
 		    });
 
-    setVarsInSh($file, $netc, qw(NETWORKING FORWARD_IPV4 DHCP_HOSTNAME HOSTNAME DOMAINNAME GATEWAY GATEWAYDEV NISDOMAIN));
+    setVarsInSh($file, $netc, if_(!$netc->{DHCP}, HOSTNAME), qw(NETWORKING FORWARD_IPV4 DOMAINNAME GATEWAY GATEWAYDEV NISDOMAIN));
 }
 
 sub write_resolv_conf {
@@ -119,7 +119,7 @@ sub write_resolv_conf {
 }
 
 sub write_interface_conf {
-    my ($file, $intf, $prefix) = @_;
+    my ($file, $intf, $dhcp_hostname, $prefix) = @_;
 
     if ($::o->{miscellaneous}{track_network_id} && -e "$prefix/sbin/ip") {
 	$intf->{HWADDR} = undef;
@@ -131,12 +131,20 @@ sub write_interface_conf {
     }
     my @ip = split '\.', $intf->{IPADDR};
     my @mask = split '\.', $intf->{NETMASK};
+
+    if ($dhcp_hostname) {
+	$intf->{DHCP_HOSTNAME} = $dhcp_hostname;
+    } else {
+	add2hash($intf, { NEEDHOSTNAME => "yes" });
+    }
+
     add2hash($intf, {
 		     BROADCAST => join('.', mapn { int($_[0]) | ((~int($_[1])) & 255) } \@ip, \@mask),
 		     NETWORK   => join('.', mapn { int($_[0]) &        $_[1]          } \@ip, \@mask),
 		     ONBOOT => bool2yesno(!member($intf->{DEVICE}, map { $_->{device} } detect_devices::probeall())),
 		    });
-    setVarsInSh($file, $intf, qw(DEVICE BOOTPROTO IPADDR NETMASK NETWORK BROADCAST ONBOOT HWADDR), if_($intf->{wireless_eth}, qw(WIRELESS_MODE WIRELESS_ESSID WIRELESS_NWID WIRELESS_FREQ WIRELESS_SENS WIRELESS_RATE WIRELESS_ENC_KEY WIRELESS_RTS WIRELESS_FRAG WIRELESS_IWCONFIG WIRELESS_IWSPY WIRELESS_IWPRIV)));
+    
+    setVarsInSh($file, $intf, qw(DEVICE BOOTPROTO IPADDR NETMASK NETWORK BROADCAST ONBOOT HWADDR), if_($intf->{wireless_eth}, qw(WIRELESS_MODE WIRELESS_ESSID WIRELESS_NWID WIRELESS_FREQ WIRELESS_SENS WIRELESS_RATE WIRELESS_ENC_KEY WIRELESS_RTS WIRELESS_FRAG WIRELESS_IWCONFIG WIRELESS_IWSPY WIRELESS_IWPRIV)), if_($dhcp_hostname, DHCP_HOSTNAME), if_(!$dhcp_hostname, NEEDHOSTNAME));
 }
 
 sub add2hosts {
@@ -472,7 +480,7 @@ sub configureNetwork2 {
     $netc->{wireless_eth} and $in->do_pkgs->install(qw(wireless-tools));
     write_conf("$etc/sysconfig/network", $netc);
     write_resolv_conf("$etc/resolv.conf", $netc);
-    write_interface_conf("$etc/sysconfig/network-scripts/ifcfg-$_->{DEVICE}", $_, $prefix) foreach grep { $_->{DEVICE} } values %$intf;
+    write_interface_conf("$etc/sysconfig/network-scripts/ifcfg-$_->{DEVICE}", $_, $intf->{DHCP_HOSTNAME}, $prefix) foreach grep { $_->{DEVICE} } values %$intf;
     add2hosts("$etc/hosts", "localhost", "127.0.0.1");
     add2hosts("$etc/hosts", $netc->{HOSTNAME}, map { $_->{IPADDR} } values %$intf);
 

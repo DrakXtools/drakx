@@ -195,6 +195,7 @@ sub configureNetwork {
     $last or return;
     if ($last->{BOOTPROTO} =~ /^(dhcp|bootp)$/) {
 	$netc->{minus_one} = 1;
+	$netc->{DHCP} = 1;
 	my $dhcp_hostname = $netc->{HOSTNAME};
 	$::isInstall and $in->set_help('configureNetworkHostDHCP');
 	$in->ask_from(N("Configuring network"),
@@ -203,7 +204,8 @@ Some DHCP servers require the hostname to work.
 Your host name should be a fully-qualified host name,
 such as ``mybox.mylab.myco.com''."),
 		      [ { label => N("Host name"), val => \$netc->{HOSTNAME} } ]) or goto configureNetwork_step_1;
-	$netc->{HOSTNAME} ne $dhcp_hostname and $netc->{DHCP_HOSTNAME} = $netc->{HOSTNAME};
+	#$netc->{HOSTNAME} ne $dhcp_hostname and $netc->{DHCP_HOSTNAME} = $netc->{HOSTNAME};
+	$intf->{DHCP_HOSTNAME} = $netc->{HOSTNAME};
     } else {
 	configureNetworkNet($in, $netc, $last ||= {}, @l) or goto configureNetwork_step_1;
     }
