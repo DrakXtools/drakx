@@ -53,8 +53,8 @@ install_pms: $(DIRS)
 		perl -pe 's/#[-+].*//; $$_ = "\n" if (/^=head/ .. /^=cut/) || /use (diagnostics|vars|strict)/' $$i > $(DESTREP4PMS)/$$i; \
 	done
 	if [ "x$(PERL_INSTALL_DEBUG)" == "x" ]; then \
-		perl -pe 's/#[-+].*//; $$_ = "\n" if (/^=head/ .. /^=cut/) || /use (diagnostics|vars|strict)/;\
-			  s|#!/usr/bin/perl -d.*\n|#!/usr/bin/perl\n|' install2 > $(DESTREP4PMS)/install2; \
+#		diagnostics and sctrict are already removed by last 7 lines.
+		perl -pe 's|#!/usr/bin/perl -d.*\n|#!/usr/bin/perl\n|' $(DESTREP4PMS)/install2 > $(DESTREP4PMS)/install2; \
 	else \
 		perl -pe 's|#!/usr/bin/perl.*\n|#!/usr/bin/perl -d \n|' install2 > $(DESTREP4PMS)/install2; \
 	fi \
