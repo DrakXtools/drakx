@@ -18,12 +18,12 @@ sub keymap_translate {
 
 sub getinfo {
     my $o = {};
-#    getinfoFromXF86Config($o);
+    getinfoFromXF86Config($o);
     getinfoFromSysconfig($o);
+    $o->{mouse}{emulate3buttons} = 1;
 
     unless ($o->{mouse}{xtype}) {
 	my ($type, $dev) = split("\n", `mouseconfig --nointeractive 2>/dev/null`) or die "mouseconfig failed";
-	$o->{mouse}{emulate3buttons} = 1;
 	$o->{mouse}{xtype} ||= $type;
 	$o->{mouse}{device} ||= "/dev/$dev";
     }

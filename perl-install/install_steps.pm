@@ -118,12 +118,6 @@ sub choosePackages($$$) {
     my ($o, $packages, $compss) = @_;
 }
 
-sub beforeInstallPackages($) {
-    mkdir "$o->{prefix}/$_", 0755 foreach qw(dev etc home mnt tmp var var/tmp var/lib var/lib/rpm);
-    network::add2hosts("$o->{prefix}/etc/hosts", "127.0.0.1", "localhost.localdomain");
-    pkgs::init_db($o->{prefix}, $o->{isUpgrade});
-}
-
 sub installPackages($$) {
     my ($o, $packages) = @_;
     my $toInstall = [ grep { $_->{selected} && !$_->{installed} } values %$packages ];
@@ -143,7 +137,7 @@ sub mouseConfig($) {
     #TODO
 }
 
-sub finishNetworking($) {
+sub configureNetwork($) {
     my ($o) = @_;
     my $etc = "$o->{prefix}/etc";
 #
@@ -162,7 +156,7 @@ sub servicesConfig {}
 
 sub setRootPassword($) {
     my ($o) = @_;
-    my %u = %{$o->default("superuser")};
+    my %u = %{$o->{superuser}};
     my $p = $o->{prefix};
 
     $u{password} = crypt_($u{password}) if $u{password};
@@ -185,7 +179,7 @@ sub setRootPassword($) {
 
 sub addUser($) {
     my ($o) = @_;
-    my %u = %{$o->default("user")};
+    my %u = %{$o->{user}};
     my $p = $o->{prefix};
     my @passwd = cat_("$p/etc/passwd");;
 

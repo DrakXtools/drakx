@@ -6,7 +6,7 @@ use vars qw(@ISA %EXPORT_TAGS @EXPORT_OK);
 
 @ISA = qw(Exporter);
 %EXPORT_TAGS = (
-    all => [ qw(versionString getNextStep doSuspend spawnSync spawnShell addToBeDone) ],
+    all => [ qw(versionString getNextStep spawnSync spawnShell addToBeDone) ],
 );
 @EXPORT_OK = map { @$_ } values %EXPORT_TAGS;
 
@@ -40,20 +40,6 @@ sub getNextStep {
     $s;
 }
 
-sub doSuspend {
-    exit 1 if $::o->{localInstall} || $::testing;
-
-    if (my $pid = fork) {
-	waitpid $pid, 0;
-    } else {
-	print "\n\nType <exit> to return to the install program.\n\n";
-	exec {"/bin/sh"} "-/bin/sh";
-	warn "error execing /bin/sh";
-	sleep 5;
-	exit 1;
-    }
-}
-
 sub spawnSync {
     return if $::o->{localInstall} || $::testing;
 
@@ -84,8 +70,9 @@ sub spawnShell {
 }
 
 sub mouse_detect() {
-    my ($type, $dev) = split("\n", `mouseconfig --nointeractive 2>/dev/null`) or die "mouseconfig failed";
-    $type, $dev;
+    my %l;
+    @l{qw(type xtype device)} = split("\n", `mouseconfig --nointeractive 2>/dev/null`) or die "mouseconfig failed";
+    \%l;
 }
 
 sub shells($) {

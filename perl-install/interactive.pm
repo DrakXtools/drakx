@@ -5,6 +5,26 @@ use strict;
 
 use common qw(:common :functional);
 
+# heritate from this class and you'll get all made interactivity for same steps.
+# for this you need to provide 
+# - ask_from_listW(o, title, messages, arrayref, default) returns one string of arrayref
+# - ask_many_from_listW(o, title, messages, arrayref, arrayref2) returns one string of arrayref
+#
+# where
+# - o is the object
+# - title is a string
+# - messages is an refarray of strings
+# - default is an optional string (default is in arrayref)
+# - arrayref is an arrayref of strings
+# - arrayref2 contains booleans telling the default state, 
+#
+# ask_from_list and ask_from_list_ are wrappers around ask_from_biglist and ask_from_smalllist
+#
+# ask_from_list_ just translate arrayref before calling ask_from_list and untranslate the result
+#
+# ask_from_listW should handle differently small lists and big ones.
+
+
 1;
 
 sub new($$) {
@@ -41,12 +61,20 @@ sub ask_from_list($$$$;$) {
 
     $o->ask_from_listW($title, $message, $l, $def || $l->[0]);
 }
-sub ask_many_from_list($$$$;$) {
-    my ($o, $title, $message, $l, $def) = @_;
+sub ask_many_from_list_ref($$$$;$) {
+    my ($o, $title, $message, $l, $val) = @_;
 
     $message = ref $message ? $message : [ $message ];
 
-    $o->ask_many_from_listW($title, $message, $l, $def);
+    $o->ask_many_from_list_refW($title, $message, $l, $val);
+}
+sub ask_many_from_list($$$$;$) {
+    my ($o, $title, $message, $l, $def) = @_;
+
+    my $val = [ map { my $i = $_; \$i } @$def ];
+
+    $o->ask_many_from_list_ref($title, $message, $l, $val) ?
+      [ map { $$_ } @$val ] : undef;
 }
 
 sub ask_from_entry($$$;$) {

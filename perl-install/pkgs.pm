@@ -11,19 +11,12 @@ use smp;
 use fs;
 use lang;
 
-my @skipThesesPackages = qw(XFree86-8514 XFree86-AGX XFree86-FBDev XFree86-Mach32 XFree86-Mach64 
-	XFree86-Mach8 XFree86-Mono XFree86-P9000 XFree86-S3 XFree86-S3V
-	XFree86-SVGA XFree86-VGA16 XFree86-W32 XFree86-I128 XFree86-Sun 
-	XFree86-SunMono XFree86-Xnest postfix
-	XFree86-Sun24 XFree86-3DLabs kernel-boot metroess metrotmpl);
-
 1;
 
-sub skipThisPackage { member($_[0], @skipThesesPackages) }
 
 sub Package {
     my ($packages, $name) = @_;
-    $packages->{$name} ;# or die "unknown package $name"; hack hack :(
+    $packages->{$name} or log::l("unknown package $name") && undef;
 }
 
 sub select($$;$) {
@@ -140,10 +133,8 @@ sub readCompss($) {
 	my ($options, $name) = /^(\S*)\s+(.*?)\s*$/ or die "bad line in compss: $_";
 
 	if ($name =~ /(.*):$/) {
-	    if ($category) {
-		push @compss, $category;
-		$ps = [];
-	    }
+	    push @compss, $category if $category;
+	    $ps = [];
 	    $category = { options => $options, name => $1, packages => $ps };
 	} else {
 	    my $p = $packages->{$name} or log::l("unknown package $name (in compss)"), next;

@@ -55,14 +55,14 @@ sub ask_from_listW {
     }
 }
 
-sub ask_many_from_listW {
-    my ($o, $title, $messages, $list, $default) = @_;
+sub ask_many_from_list_refW {
+    my ($o, $title, $messages, $list, $val) = @_;
     my @defaults;
     print map { "$_\n" } @$messages;
     my $n = 0; foreach (@$list) { 
 	$n++; 
 	print "$n: $_\n"; 
-	push @defaults, $n if $default->[$n - 1];
+	push @defaults, $n if ${$val->[$n - 1]};
     }
     my $i;
     TRY_AGAIN:
@@ -70,11 +70,15 @@ sub ask_many_from_listW {
     print _("Your choice? (default %s  enter `none' for none) ", join(',', @defaults));
     $i = readln();
     my @t = split ',', $i;
-    foreach (@t) { check_it($_, $n) or goto TRY_AGAIN }
+    if ($i =~ /^none$/i) {
+	@t = ();
+    } else {
+	foreach (@t) { check_it($_, $n) or goto TRY_AGAIN }
+    }
 
-    my @rr = (0) x @$list;
-    $rr[$_ - 1] = 1 foreach @t;
-    @rr;
+    $$_ = 0 foreach @$val;
+    ${$val->[$_ - 1]} = 1 foreach @t;
+    $val;
 }
 
 

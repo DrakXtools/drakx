@@ -52,9 +52,8 @@ sub ask_from_listW {
     }
 }
 
-sub ask_many_from_listW {
-    my ($o, $title, $messages, $list, $default) = @_;
-    my @rr = @$default;
+sub ask_many_from_list_refW {
+    my ($o, $title, $messages, $list, $val) = @_;
     my $n = 0;
     my $w = my_gtk->new('', %$o);
     gtkadd($w->{window}, 
@@ -63,16 +62,15 @@ sub ask_many_from_listW {
 			   map { 
 			       my $nn = $n++; 
 			       my $o = Gtk::CheckButton->new($_);
-			       $o->set_active($rr[$nn]);
-			       $o->signal_connect(clicked => sub { $rr[$nn] = !$rr[$nn] });
+			       $o->set_active(${$val->[$nn]});
+			       $o->signal_connect(clicked => sub { ${$val->[$nn]} = !${$val->[$nn]} });
 			       $o;
 			   } @$list),
 		   $w->create_okcancel,
 		  )
 	  );
     $w->{ok}->grab_focus;
-    $w->main or return;
-    @rr;
+    $w->main && $val;
 }
 
 sub wait_messageW($$$) {

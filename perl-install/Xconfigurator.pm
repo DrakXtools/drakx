@@ -604,6 +604,22 @@ sub XF86check_link {
     }
 }
 
+sub show_info {
+    my ($o) = @_;
+    my $info;
+
+    $info .= _("Keyboard language: %s\n", $o->{keyboard}{xkb_keymap});
+    $info .= _("Mouse type: %s\n", $o->{mouse}{xtype});
+    $info .= _("Mouse device: %s\n", $o->{mouse}{device}) if $::expert;
+    $info .= _("Monitor: %s\n", $o->{monitor}{type});
+    $info .= _("Monitor HorizSync: %s\n", $o->{monitor}{hsyncrange}) if $::expert;
+    $info .= _("Monitor VertRefresh: %s\n", $o->{monitor}{vsyncrange}) if $::expert;
+    $info .= _("Graphic card: %s\n", $o->{card}{type});
+    $info .= _("Graphic memory: %s KB\n", $o->{card}{memory}) if $o->{card}{memory};
+    $info .= _("XFree86 server: %s\n", $o->{card}{server});
+
+    $in->ask_warn('', $info);
+}
 
 # * Program entry point. 
 sub main {
@@ -632,6 +648,7 @@ sub main {
 	       delete $o->{card}{depth};
 	       resolutionsConfiguration($o, 'nowarning');
 	   },
+	   __("Show information") => sub { show_info($o) },
 	   __("Test again") => sub { $ok = testFinalConfig($o, 1) },
 	   __("Quit") => sub { $quit = 1 },
         );

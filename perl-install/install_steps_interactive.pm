@@ -1,24 +1,5 @@
 package install_steps_interactive;
 
-# heritate from this class and you'll get all made interactivity for same steps.
-# for this you need to provide 
-# - ask_from_listW(o, title, messages, arrayref, default) returns one string of arrayref
-# - ask_many_from_listW(o, title, messages, arrayref, arrayref2) returns one string of arrayref
-#
-# where
-# - o is the object
-# - title is a string
-# - messages is an refarray of strings
-# - default is an optional string (default is in arrayref)
-# - arrayref is an arrayref of strings
-# - arrayref2 contains booleans telling the default state, 
-#
-# ask_from_list and ask_from_list_ are wrappers around ask_from_biglist and ask_from_smalllist
-#
-# ask_from_list_ just translate arrayref before calling ask_from_list and untranslate the result
-#
-# ask_from_listW should handle differently small lists and big ones.
-
 
 use diagnostics;
 use strict;
@@ -99,13 +80,13 @@ sub rebootNeeded($) {
 sub choosePartitionsToFormat($$) {
     my ($o, $fstab) = @_;
 
+    $o->SUPER::choosePartitionsToFormat($fstab) if $o->{steps}{$o->{step}}{entered} == 1;
+
     my @l = grep { $_->{mntpoint} && isExt2($_) || isSwap($_) } @$fstab;
-    my @r = $o->ask_many_from_list('', _("Choose the partitions you want to format"), 
-				   [ map { $_->{mntpoint} || type2name($_->{type}) . " ($_->{device})" } @l ],
-				   [ map { $_->{notFormatted} } @l ]);
+    my @r = $o->ask_many_from_list_ref('', _("Choose the partitions you want to format"), 
+				       [ map { $_->{mntpoint} || type2name($_->{type}) . " ($_->{device})" } @l ],
+				       [ map { \$_->{toFormat} } @l ]);
     defined @r or die "cancel";
-    my $i = 0;
-    $_->{toFormat} = $r[$i++] foreach @l;
 }
 
 sub formatPartitions {
@@ -118,6 +99,35 @@ sub formatPartitions {
 	}
     }
 }
+
+sub configureNetwork($) {
+    my ($o, $first_time) = @_;
+    my $r = '';
+
+    if ($o->{intf}) {
+	if ($first_time) {
+	    my @l = (
+		     __("Keep the current IP configuration"),
+		     __("Reconfigure network now"),
+		     __("Don't set up networking"),
+		    );
+	    $r = $o->ask_from_list_(_("Network Configuration"), 
+				    _("LAN networking has already been configured. Do you want to:"),
+				    [ @l ]);
+	    !$r || $r =~ /^Don't/ and return;
+	}
+    } else {
+	$o->ask_yesorno(_("Network Configuration"),
+			_("Do you want to configure LAN (not dialup) networking for your installed system?")) or return;
+    }
+    
+    if ($r !~ /^Keep/) {
+	$o->configureNetworkAsk or return;
+    }
+    $o->SUPER::configureNetwork;
+}
+	
+
 
 sub createBootdisk($) {
     my ($o) = @_;

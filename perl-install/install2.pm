@@ -109,7 +109,7 @@ my @installSteps = (
   choosePackages => [ __("Choose packages to install"), 1, 1, "selectInstallClass" ],
   doInstallStep => [ __("Install system"), 1, -1, ["formatPartitions", "selectPath"] ],
 #  configureMouse => [ __("Configure mouse"), 0, 0 ],
-  finishNetworking => [ __("Configure networking"), 1, 1, "formatPartitions" ],
+  configureNetwork => [ __("Configure networking"), 1, 1, "formatPartitions" ],
 #  configureTimezone => [ __("Configure timezone"), 0, 0 ],
 #  configureServices => [ __("Configure services"), 0, 0 ],
 #  configurePrinter => [ __("Configure printer"), 0, 0 ],
@@ -145,19 +145,14 @@ my @serverPartitioning = (
 );
 
 my $default = {
+    lang => 'us',
+    isUpgrade => 0,
+    installClass => 'beginner',
 #    display => "192.168.1.9:0",
 
-    # for the list of fields available for user and superuser, see @etc_pass_fields in install_steps.pm
-#    user => { name => 'foo', password => 'bar', home => '/home/foo', shell => '/bin/bash', realname => 'really, it is foo' },
-#    superuser => { password => 'a', shell => '/bin/bash', realname => 'God' },
-
-#    lang => 'fr',
-#    isUpgrade => 0,
-#    installClass => 'beginner',
     bootloader => { onmbr => 1, linear => 0 },
     autoSCSI => 0,
     mkbootdisk => 0,
-    base => [ qw(basesystem initscripts console-tools mkbootdisk linuxconf anacron linux_logo rhs-hwdiag utempter ldconfig chkconfig ntsysv mktemp setup setuptool filesystem MAKEDEV SysVinit ash at authconfig bash bdflush binutils console-tools crontabs dev e2fsprogs ed etcskel file fileutils findutils getty_ps gpm grep groff gzip hdparm info initscripts isapnptools kbdconfig kernel less ldconfig lilo logrotate losetup man mkinitrd mingetty modutils mount net-tools passwd procmail procps psmisc mandrake-release rootfiles rpm sash sed setconsole setserial shadow-utils sh-utils slocate stat sysklogd tar termcap textutils time timeconfig tmpwatch util-linux vim-minimal vixie-cron which) ],
     packages => [ qw() ],
     partitionning => { clearall => $::testing, eraseBadPartitions => 1, auto_allocate => 0, autoformat => 1 },
     partitions => [
@@ -168,7 +163,21 @@ my $default = {
 	     ],
     shells => [ map { "/bin/$_" } qw(bash tcsh zsh ash) ],
 };
-$o = $::o = { default => $default, steps => \%installSteps, orderedSteps => \@orderedInstallSteps };
+$o = $::o = { 
+#    lang => 'fr',
+#    isUpgrade => 0,
+#    installClass => 'beginner',
+
+    default => $default, 
+    steps => \%installSteps, 
+    orderedSteps => \@orderedInstallSteps,
+
+    # for the list of fields available for user and superuser, see @etc_pass_fields in install_steps.pm
+#    user => { name => 'foo', password => 'bar', home => '/home/foo', shell => '/bin/bash', realname => 'really, it is foo' },
+#    superuser => { password => 'a', shell => '/bin/bash', realname => 'God' },
+
+    base => [ qw(basesystem initscripts console-tools mkbootdisk linuxconf anacron linux_logo rhs-hwdiag utempter ldconfig chkconfig ntsysv mktemp setup setuptool filesystem MAKEDEV SysVinit ash at authconfig bash bdflush binutils console-tools crontabs dev e2fsprogs ed etcskel file fileutils findutils getty_ps gpm grep groff gzip hdparm info initscripts isapnptools kbdconfig kernel less ldconfig lilo logrotate losetup man mkinitrd mingetty modutils mount net-tools passwd procmail procps psmisc mandrake-release rootfiles rpm sash sed setconsole setserial shadow-utils sh-utils slocate stat sysklogd tar termcap textutils time timeconfig tmpwatch util-linux vim-minimal vixie-cron which) ],
+};
 
 
 sub selectLanguage {
@@ -192,11 +201,11 @@ sub selectPath {
 sub selectInstallClass {
     $o->{installClass} = $o->selectInstallClass(@install_classes);
     $::expert = $o->{installClass} eq "expert";
-    $o->{autoSCSI} = $o->default("autoSCSI") || $o->{installClass} eq "beginner";
 }
 
-sub setupSCSI { 
-    $o->setupSCSI($o->default("autoSCSI") && $_[0]);
+sub setupSCSI {
+    $o->{autoSCSI} ||= $o->{installClass} eq "beginner";
+    $o->setupSCSI($o->{autoSCSI} && !$_[0]);
 }
 
 sub partitionDisks {
@@ -239,34 +248,35 @@ sub formatPartitions {
     $o->formatPartitions(@{$o->{fstab}});
 
     fs::mount_all([ grep { isExt2($_) || isSwap($_) } @{$o->{fstab}} ], $o->{prefix});
+
+    mkdir "$o->{prefix}/$_", 0755 foreach qw(dev etc home mnt tmp var var/tmp var/lib var/lib/rpm);
+    network::add2hosts("$o->{prefix}/etc/hosts", "127.0.0.1", "localhost.localdomain");
+    pkgs::init_db($o->{prefix}, $o->{isUpgrade});
 }
 
 sub choosePackages {
-    my @p = @{$o->{default}{base}};
-
-    unless ($o->{packages}) {
+    if ($o->{steps}{$o->{step}}{entered} == 1) {
 	$o->{packages} = pkgs::psUsingDirectory();
 	pkgs::getDeps($o->{packages});
 
 	$o->{compss} = pkgs::readCompss($o->{packages});
-	push @p, "kernel-smp" if smp::detect();
+	push @{$o->{base}}, "kernel-smp" if smp::detect();
 
-	foreach (@p) { $o->{packages}{$_}{base} = 1 }
+	foreach (@{$o->{base}}) { $o->{packages}{$_}{base} = 1 }
 
 	pkgs::setCompssSelected($o->{compss}, $o->{packages}, $o->{installClass});
     }
     $o->choosePackages($o->{packages}, $o->{compss}); 
-    foreach (@p) { $o->{packages}{$_}{selected} = 1 }
+    foreach (@{$o->{base}}) { $o->{packages}{$_}{selected} = 1 }
 }
 
 sub doInstallStep {
-    $o->beforeInstallPackages;
     $o->installPackages($o->{packages});
     $o->afterInstallPackages;
 }
 
 sub configureMouse { $o->mouseConfig }
-sub finishNetworking { $o->finishNetworking }
+sub configureNetwork { $o->configureNetwork }
 sub configureTimezone { $o->timeConfig }
 sub configureServices { $o->servicesConfig }
 sub setRootPassword { $o->setRootPassword }
@@ -316,7 +326,7 @@ sub main {
     eval { spawnShell() };
 
     # needed very early for install_steps_graphical
-    @{$o->{mouse}}{"xtype", "device"} = install_any::mouse_detect() unless $::testing;
+    $o->{mouse} = install_any::mouse_detect() unless $::testing;
 
     $o = install_steps_graphical->new($o);
 
@@ -332,7 +342,7 @@ sub main {
     my $clicked = 0;
     for ($o->{step} = $o->{steps}{first};; $o->{step} = getNextStep()) {
 	$o->enteringStep($o->{step});
-	$o->{steps}{$o->{step}}{entered} = 1;
+	$o->{steps}{$o->{step}}{entered}++;
 	eval { 
 	    &{$install2::{$o->{step}}}($clicked);
 	};
