@@ -17,6 +17,12 @@ use common;
 our %adsl_data = (
                   # country|provider => { VPI, VCI_hexa, ... }
                   # dns are provided for when !usepeerdns in peers config file
+                  N("Australia") . "|Any" =>
+                  {
+                   vpi => 8,
+                   vci => 30,
+                  },
+
                   N("Belgium") . "|Tiscali BE" =>
                   {
                    vpi => 8,
