@@ -398,14 +398,15 @@ sub multi_head_choices {
     @choices;
 }
 
+#- XFree version available, it would be better to parse available package and get version from it.
+sub xfree4_version { '4.2.99' }
+sub xfree3_version { '3.3.6' }
+
 sub xfree_and_glx_choices {
     my ($card) = @_;
 
-    #- XFree version available, better to parse available package and get version from it.
-    my ($xf4_ver, $xf3_ver) = ('4.2.1', '3.3.6');
-
-    my $xf3 = if_($card->{server}, { text => N("XFree %s", $xf3_ver), code => sub { $card->{prefer_xf3} = 1 } });
-    my $xf4 = if_($card->{Driver}, { text => N("XFree %s", $xf4_ver), code => sub { $card->{prefer_xf3} = 0 } });
+    my $xf3 = if_($card->{server}, { text => N("XFree %s", xfree3_version()), code => sub { $card->{prefer_xf3} = 1 } });
+    my $xf4 = if_($card->{Driver}, { text => N("XFree %s", xfree4_version()), code => sub { $card->{prefer_xf3} = 0 } });
 
     #- no XFree3 with multi-head
     my @choices = grep { $_ } ($card->{cards} ? $xf4 : $card->{prefer_xf3} ? ($xf3, $xf4) : ($xf4, $xf3));
@@ -416,12 +417,12 @@ sub xfree_and_glx_choices {
     #- try to figure if 3D acceleration is supported
     #- by XFree 3.3 but not XFree 4 then ask user to keep XFree 3.3 ?
     if ($card->{UTAH_GLX}) {
-	my $e = { text => N("XFree %s with 3D hardware acceleration", $xf3_ver),
+	my $e = { text => N("XFree %s with 3D hardware acceleration", xfree3_version()),
 			    code => sub { $card->{prefer_xf3} = 1; $card->{use_UTAH_GLX} = 1 },
 			    more_messages => ($card->{Driver} && !$card->{DRI_GLX} ?
 N("Your card can have 3D hardware acceleration support but only with XFree %s.
-Your card is supported by XFree %s which may have a better support in 2D.", $xf3_ver, $xf4_ver) :
-N("Your card can have 3D hardware acceleration support with XFree %s.", $xf3_ver)),
+Your card is supported by XFree %s which may have a better support in 2D.", xfree3_version(), xfree4_version()) :
+N("Your card can have 3D hardware acceleration support with XFree %s.", xfree3_version())),
 			  };
 	$card->{prefer_xf3} ? unshift(@choices, $e) : push(@choices, $e);
     }
@@ -429,31 +430,31 @@ N("Your card can have 3D hardware acceleration support with XFree %s.", $xf3_ver
     #- an expert user may want to try to use an EXPERIMENTAL 3D acceleration, currenlty
     #- this is with Utah GLX and so, it can provide a way of testing.
     if ($card->{UTAH_GLX_EXPERIMENTAL} && $::expert) {
-	push @choices, { text => N("XFree %s with EXPERIMENTAL 3D hardware acceleration", $xf3_ver),
+	push @choices, { text => N("XFree %s with EXPERIMENTAL 3D hardware acceleration", xfree3_version()),
 			 code => sub { $card->{prefer_xf3} = 1; $card->{use_UTAH_GLX} = 1 },
 			 more_messages => (using_xf4($card) && !$card->{DRI_GLX} ?
 N("Your card can have 3D hardware acceleration support but only with XFree %s,
 NOTE THIS IS EXPERIMENTAL SUPPORT AND MAY FREEZE YOUR COMPUTER.
-Your card is supported by XFree %s which may have a better support in 2D.", $xf3_ver, $xf4_ver) :
+Your card is supported by XFree %s which may have a better support in 2D.", xfree3_version(), xfree4_version()) :
 N("Your card can have 3D hardware acceleration support with XFree %s,
-NOTE THIS IS EXPERIMENTAL SUPPORT AND MAY FREEZE YOUR COMPUTER.", $xf3_ver)),
+NOTE THIS IS EXPERIMENTAL SUPPORT AND MAY FREEZE YOUR COMPUTER.", xfree3_version())),
 		       };
     }
 
     #- ask the expert or any user on second pass user to enable or not hardware acceleration support.
     if ($card->{DRI_GLX}) {
-	unshift @choices, { text => N("XFree %s with 3D hardware acceleration", $xf4_ver),
+	unshift @choices, { text => N("XFree %s with 3D hardware acceleration", xfree4_version()),
 			    code => sub { $card->{prefer_xf3} = 0; $card->{use_DRI_GLX} = 1 },
-			    more_messages => N("Your card can have 3D hardware acceleration support with XFree %s.", $xf4_ver),
+			    more_messages => N("Your card can have 3D hardware acceleration support with XFree %s.", xfree4_version()),
 			  };
     }
 
     #- an expert user may want to try to use an EXPERIMENTAL 3D acceleration.
     if ($card->{DRI_GLX_EXPERIMENTAL} && $::expert) {
-	push @choices, { text => N("XFree %s with EXPERIMENTAL 3D hardware acceleration", $xf4_ver),
+	push @choices, { text => N("XFree %s with EXPERIMENTAL 3D hardware acceleration", xfree4_version()),
 			 code => sub { $card->{prefer_xf3} = 0; $card->{use_DRI_GLX} = 1 },
 			 more_messages => N("Your card can have 3D hardware acceleration support with XFree %s,
-NOTE THIS IS EXPERIMENTAL SUPPORT AND MAY FREEZE YOUR COMPUTER.", $xf4_ver),
+NOTE THIS IS EXPERIMENTAL SUPPORT AND MAY FREEZE YOUR COMPUTER.", xfree4_version()),
 		       };
     }
 

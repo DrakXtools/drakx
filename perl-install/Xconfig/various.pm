@@ -12,7 +12,7 @@ use common;
 sub info {
     my ($raw_X, $card) = @_;
     my $info;
-    my $xf_ver = Xconfig::card::using_xf4($card) ? "4.2.1" : "3.3.6";
+    my $xf_ver = Xconfig::card::using_xf4($card) ? Xconfig::card::xfree4_version() : Xconfig::card::xfree3_version();
     my $title = $card->{use_DRI_GLX} || $card->{use_UTAH_GLX} ?
 		 N("XFree %s with 3D hardware acceleration", $xf_ver) : N("XFree %s", $xf_ver);
     my $keyboard = eval { $raw_X->get_keyboard } || {};
