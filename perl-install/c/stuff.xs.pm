@@ -177,6 +177,7 @@ void
 setlocale()
    CODE:
    setlocale(LC_ALL, "");
+   setlocale(LC_NUMERIC, "C"); /* otherwise eval "1.5" returns 1 in fr_FR for example */
 
 char *
 bindtextdomain(domainname, dirname)
