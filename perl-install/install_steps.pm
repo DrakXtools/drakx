@@ -589,7 +589,7 @@ sub addUser {
 	my $g = $_->{gid} || ($_->{oldg} = (stat("$p$_->{home}"))[5]);
 	#- search for available uid above 501 else initscripts may fail to change language for KDE.
 	if (!$u || getpwuid($u)) { for ($u = 501; getpwuid($u) || $uids{$u}; $u++) {} }
-	if (!$g || getgrgid($g)) { for ($g = 501; getgrgid($g) || $gids{$g}; $g++) {} }
+	if (!$g                ) { for ($g = 501; getgrgid($g) || $gids{$g}; $g++) {} }
 	
 	$_->{uid} = $u; $uids{$u} = 1;
 	$_->{gid} = $g; $gids{$g} = 1;
@@ -598,7 +598,7 @@ sub addUser {
     any::write_passwd_user($p, $_, $o->{authentication}{md5}) foreach @$users;
 
     open F, ">> $p/etc/group" or die "can't append to group file: $!";
-    print F "$_->{name}:x:$_->{gid}:\n" foreach @$users;
+    print F "$_->{name}:x:$_->{gid}:\n" foreach grep { ! getgrgid($_->{gid}) } @$users;
 
     foreach my $u (@$users) {
 	if (! -d "$p$u->{home}") {
