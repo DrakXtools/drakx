@@ -35,6 +35,8 @@
 #include <ctype.h>
 #include <stdarg.h>
 #include <signal.h>
+#include <linux/unistd.h>
+_syscall2(int,pivot_root,const char *,new_root,const char *,put_old)
 
 #include "stage1.h"
 
@@ -105,11 +107,13 @@ void stg1_info_message(char *msg, ...)
 }
 
 
+#ifdef SPAWN_SHELL
+static pid_t shell_pid = 0;
+
 /************************************************************
  * spawns a shell on console #2 */
 static void spawn_shell(void)
 {
-#ifdef SPAWN_SHELL
 	int fd;
 	char * shell_name[] = { "/tmp/sh", NULL };
 
@@ -126,7 +130,7 @@ static void spawn_shell(void)
 			return;
 		}
 		
-		if (!fork()) {
+		if (!(shell_pid = fork())) {
 			dup2(fd, 0);
 			dup2(fd, 1);
 			dup2(fd, 2);
@@ -143,8 +147,8 @@ static void spawn_shell(void)
 		
 		close(fd);
 	}
-#endif
 }
+#endif
 
 
 char * interactive_fifo = "/tmp/stage1-fifo";
@@ -306,7 +310,7 @@ static void handle_pcmcia(char ** pcmcia_adapter)
 /************************************************************
  */
 
-static enum return_type method_select_and_prepare(void)
+static void method_select_and_prepare(void)
 {
 	enum return_type results;
 	char * choice;
@@ -344,8 +348,6 @@ static enum return_type method_select_and_prepare(void)
 	if (results != RETURN_OK)
 		return method_select_and_prepare();
 
-	results = RETURN_ERROR;
-
 #ifndef DISABLE_CDROM
 	if (!strcmp(choice, cdrom_install))
 		results = cdrom_prepare();
@@ -369,14 +371,65 @@ static enum return_type method_select_and_prepare(void)
 
 	if (results != RETURN_OK)
 		return method_select_and_prepare();
-
-	return RETURN_OK;
 }
+
+#ifdef MANDRAKE_MOVE
+int mandrake_move_pre(void)
+{
+	log_message("move: creating %s directory and mounting as tmpfs", SLASH_LOCATION);
+
+        if (scall(mkdir(SLASH_LOCATION, 0755), "mkdir"))
+                return RETURN_ERROR;
+
+	if (scall(mount("none", SLASH_LOCATION, "tmpfs", MS_MGC_VAL, NULL), "mount tmpfs"))
+                return RETURN_ERROR;
+
+        return RETURN_OK;
+}
+
+int mandrake_move_post(void)
+{
+        FILE *f;
+        char buf[5000];
+        int fd;
+        char rootdev[] = "0x0100"; 
+
+        if (scall(!(f = fopen(IMAGE_LOCATION LIVE_LOCATION "symlinks", "rb")), "fopen"))
+                return RETURN_ERROR;
+        while (fgets(buf, sizeof(buf), f)) {
+                char oldpath[500], newpath[500];
+                buf[strlen(buf)-1] = '\0';  // trim \n
+                sprintf(oldpath, "%s%s", LIVE_LOCATION_REL, buf);
+                sprintf(newpath, "%s%s", SLASH_LOCATION, buf);
+                log_message("move: creating symlink %s -> %s", oldpath, newpath);
+                if (scall(symlink(oldpath, newpath), "symlink"))
+                        return RETURN_ERROR;
+        }
+        fclose(f);
+
+        log_message("move: pivot_rooting");
+        // trick so that kernel won't try to mount the root device when initrd exits
+        if (scall((fd = open("/proc/sys/kernel/real-root-dev", O_WRONLY)) < 0, "open"))
+                return RETURN_ERROR;
+        if (scall(write(fd, rootdev, strlen(rootdev)) != (signed)strlen(rootdev), "write")) {
+                close(fd);
+                return RETURN_ERROR;
+        }
+        close(fd);
+
+        if (scall(mkdir(SLASH_LOCATION "/stage1", 0755), "mkdir"))
+                return RETURN_ERROR;
+
+        if (scall(pivot_root(SLASH_LOCATION, SLASH_LOCATION "/stage1"), "pivot_root"))
+                return RETURN_ERROR;
+
+        return RETURN_OK;
+}
+#endif
 
 
 int main(int argc __attribute__ ((unused)), char **argv __attribute__ ((unused)), char **env)
 {
-	enum return_type ret;
 	char ** argptr;
 	char * stage2_args[30];
 #ifdef ENABLE_PCMCIA
@@ -392,7 +445,9 @@ int main(int argc __attribute__ ((unused)), char **argv __attribute__ ((unused))
 	log_message("welcome to the " DISTRIB_NAME " install (mdk-stage1, version " VERSION " built " __DATE__ " " __TIME__")");
 	process_cmdline();
 	handle_env(env);
+#ifdef SPAWN_SHELL
 	spawn_shell();
+#endif
 	init_modules_insmoding();
 	init_frontend("Welcome to " DISTRIB_NAME " (" VERSION ") " __DATE__ " " __TIME__);
 
@@ -418,30 +473,37 @@ int main(int argc __attribute__ ((unused)), char **argv __attribute__ ((unused))
 				   "your own risk. Alternatively, you may reboot your system now.");
 	}
 
-#ifndef DISABLE_DISK
-        if (IS_RECOVERY && streq(get_auto_value("method"), "cdrom") && process_recovery())
-                ret = RETURN_OK;
-        else 
+#ifdef MANDRAKE_MOVE
+        if (mandrake_move_pre() != RETURN_OK)
+                stg1_error_message("Fatal error when preparing Mandrake Move.");
 #endif
-                ret = method_select_and_prepare();
 
-	finish_frontend();
-	close_log();
+#ifndef DISABLE_DISK
+        if (IS_RECOVERY && streq(get_auto_value("method"), "cdrom") && !process_recovery())
+#endif
+                        method_select_and_prepare();
 
-	if (ret != RETURN_OK)
-		fatal_error("could not select an installation method");
-
-	if (!IS_RAMDISK) {
-		if (symlink(IMAGE_LOCATION LIVE_LOCATION, STAGE2_LOCATION) != 0) {
-			printf("symlink from " IMAGE_LOCATION LIVE_LOCATION " to " STAGE2_LOCATION " failed");
-			fatal_error(strerror(errno));
-		}
-	}
+	if (!IS_RAMDISK)
+		if (symlink(IMAGE_LOCATION LIVE_LOCATION, STAGE2_LOCATION) != 0)
+			log_perror("symlink from " IMAGE_LOCATION LIVE_LOCATION " to " STAGE2_LOCATION " failed");
 
 	if (interactive_pid != 0)
 		kill(interactive_pid, 9);
 
+#ifdef MANDRAKE_MOVE
+        if (mandrake_move_post() != RETURN_OK)
+                stg1_error_message("Fatal error when launching Mandrake Move.");
+#endif
+
+	if (shell_pid != 0)
+		kill(shell_pid, 9);
+
+	finish_frontend();
+	close_log();
+
+#ifndef MANDRAKE_MOVE
 	if (IS_RESCUE)
+#endif
 		return 66;
 	if (IS_TESTING)
 		return 0;

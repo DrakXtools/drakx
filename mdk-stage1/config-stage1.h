@@ -30,8 +30,16 @@
 
 #define LIVE_LOCATION    "/Mandrake/mdkinst/"
 #define RAMDISK_LOCATION "/Mandrake/base/"
-#define IMAGE_LOCATION   "/tmp/image"
 #define STAGE2_LOCATION  "/tmp/stage2"
+
+#ifdef MANDRAKE_MOVE
+#define IMAGE_LOCATION   "/sysroot/image"
+#define SLASH_LOCATION   "/sysroot"
+#define LIVE_LOCATION_REL "/image/Mandrake/mdkinst"
+#else
+#define IMAGE_LOCATION   "/tmp/image"
+#endif
+
 
 /* user-definable (in Makefile): DISABLE_NETWORK, DISABLE_DISK, DISABLE_CDROM, DISABLE_PCMCIA */
 

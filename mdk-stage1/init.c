@@ -333,7 +333,7 @@ void unmount_filesystems(void)
 	}
 }
 
-int exit_value_rescue = 66;
+int exit_value_proceed = 66;
 
 int main(int argc __attribute__ ((unused)), char **argv __attribute__ ((unused)))
 {
@@ -428,15 +428,15 @@ int main(int argc __attribute__ ((unused)), char **argv __attribute__ ((unused))
 			end_stage2 = 1;
 	}
 
-	if (!WIFEXITED(wait_status) || (WEXITSTATUS(wait_status) != 0 && WEXITSTATUS(wait_status) != exit_value_rescue)) {
+	if (!WIFEXITED(wait_status) || (WEXITSTATUS(wait_status) != 0 && WEXITSTATUS(wait_status) != exit_value_proceed)) {
 		printf("install exited abnormally :-( ");
 		if (WIFSIGNALED(wait_status))
 			printf("-- received signal %d", WTERMSIG(wait_status));
 		printf("\n");
 		abnormal_termination = 1;
-	} else if (WIFEXITED(wait_status) && WEXITSTATUS(wait_status) == exit_value_rescue) {
+	} else if (WIFEXITED(wait_status) && WEXITSTATUS(wait_status) == exit_value_proceed) {
 		kill(klog_pid, 9);
-		printf("exiting init -- giving hand to rescue\n");
+		printf("exiting init -- proceeding\n");
 		return 0;
         } else
 		printf("install succeeded\n");

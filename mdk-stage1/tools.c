@@ -435,3 +435,12 @@ int string_array_length(char ** a)
 	}
 	return i;
 }
+
+int scall_(int retval, char * msg, char * file, int line)
+{
+	char tmp[5000];
+        sprintf(tmp, "%s(%s:%d) failed", msg, file, line);
+        if (retval)
+                log_perror(tmp);
+        return retval;
+}
