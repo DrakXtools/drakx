@@ -111,7 +111,7 @@ sub scan4channels() {
 	   }
 }
 
-my @devices = detect_devices::isTVcard();
+my @devices = detect_devices::getTVcards();
 push @devices, { driver => 'bttv', description => 'dummy' } if $::testing && !@devices;
 if (@devices) {
     my $not_canceled = 1;
