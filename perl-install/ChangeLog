@@ -1,3 +1,36 @@
+2003/01/24  Damien Chaumette  <dchaumette@mandrakesoft.com>
+
+	* detect_devices.pm: get back serial modem detection
+
+	* drakxtools.spec: new version
+
+	* network/network.pm: fix typo
+
+2003/01/24  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* interactive/gtk.pm: remove unused variable
+	fix Return key on a radio button grabbing focus on next functional group
+	of widgets AND doing an action on it (toggling checkbuttons etc) (needs
+	perl-GTK2 >= 0.0.cvs.2003.01.24.1)
+
+	* mouse.pm: remove blinks in mouse test
+
+2003/01/24  Pixel  <pixel@mandrakesoft.com>
+
+	* interactive.pm (ask_from_list, ask_from_list_, ...): option nocancel
+	added
+	(ask_yesorno): no "Cancel" or "Previous" button
+
+	* install_any.pm, install_steps_interactive.pm: fix "Previous" button in
+	warnAboutNaughtyServers, so there is 3 choices
+	(Previous, unselect servers, accept :)
+
+	* install_steps_gtk.pm, mouse.pm: 
+	  - don't setMouseLive when the protocol hasn't changed
+	  - don't say "MOVE YOUR WHEEL" when there is no wheel and the protocol
+	hasn't changed
+	(nb: no wheel + IMPS/2 can now happen for usb mice)
+
 2003/01/24  alus
 
 	* share/po/pl.po: done
@@ -8879,7 +8912,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.771 2003/01/23 21:23:51 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.772 2003/01/24 14:29:48 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
