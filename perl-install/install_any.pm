@@ -521,7 +521,7 @@ sub install_urpmi {
 	close LIST;
 
 	#- build synthesis file if there are still not existing (ie not copied from mirror).
-	if (-s "$prefix/var/lib/urpmi/synthesis.$name.cz" <= 32) {
+	if (-s "$prefix/var/lib/urpmi/synthesis.hdlist.$name.cz" <= 32) {
 	    run_program::rooted($prefix, "parsehdlist", ">", "/var/lib/urpmi/synthesis.hdlist.$name",
 				"--synthesis", "/var/lib/urpmi/hdlist.$name.cz");
 	    run_program::rooted($prefix, "gzip", "-S", ".cz", "/var/lib/urpmi/synthesis.hdlist.$name");
