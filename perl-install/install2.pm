@@ -470,7 +470,7 @@ sub main {
     $::noauto or modules::load_thiskind("usb"); 
     eval { ($o->{mouse}, @{$o->{wacom} = []}) = mouse::detect() } unless $o->{nomouseprobe} || $o->{mouse};
 
-    lang::set($o->{lang}); #- mainly for defcfg
+    $o->{lang} = lang::set($o->{lang}); #- mainly for defcfg
 
     $o->{allowFB} = listlength(cat_("/proc/fb"));
 

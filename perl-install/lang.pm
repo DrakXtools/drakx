@@ -319,6 +319,14 @@ sub getxim { $xim{$_[0]} }
 sub set { 
     my ($lang) = @_;
 
+    if ($lang && !exists $languages{$lang}) {
+	#- try to find the best lang
+	my ($lang2) = grep { /^\Q$lang/ } list(); #- $lang is not precise enough, choose the first complete
+	my ($lang3) = grep { $lang =~ /^\Q$_/ } list(); #- $lang is too precise, choose the first substring matching
+	log::l("lang::set: fixing $lang with ", $lang2 || $lang3);
+	$lang = $lang2 || $lang3;
+    }
+
     if ($lang && exists $languages{$lang}) {
 	#- use "packdrake -x" that follow symlinks and expand directory.
 	#- it is necessary as there is a lot of symlinks inside locale.cz2,
@@ -362,6 +370,7 @@ sub set {
 	delete $ENV{LANGUAGE};
 	delete $ENV{LINGUAS};
     }
+    $lang;
 }
 
 sub langs {
