@@ -86,7 +86,7 @@ our %langs = (
 'ms' =>    [ 'Malay',               'Bahasa Melayu',     'ms_MY', ' 2   ', 'iso-8859-1' ],
 'mt' =>    [ 'Maltese',             'Maltin',            'mt_MT', '1 3  ', 'unicode' ],
 'nb' =>    [ 'Norwegian Bokmaal',   'Norsk, Bokmal',     'no_NO', '1    ', 'iso-8859-1',  'nb:no' ],
-'nds' =>   [ 'Low Saxon',           'Platduutsch',      'nds_DE', '1    ', 'iso-8859-1' ],
+#'nds' =>   [ 'Low Saxon',           'Platduutsch',      'nds_DE', '1    ', 'iso-8859-1' ],
 # locale?
 'ne' =>    [ 'Nepali',              'ZZ Nepali',         'ne_IN', ' 2   ', 'unicode' ],
 'nl' =>    [ 'Dutch',               'Nederlands',        'nl_NL', '1    ', 'iso-8859-15' ],
@@ -123,7 +123,7 @@ our %langs = (
 'vi' =>    [ 'Vietnamese',          'Tieng Viet',        'vi_VN', ' 2   ', 'utf_vi' ],
 'wa' =>    [ 'Walon',               'Walon',             'wa_BE', '1    ', 'iso-8859-15', 'wa:fr_BE:fr' ],
 #- locale not done yet
-'wen' =>   [ 'Sorbian',             'XX Sorbian',       'wen_XX', '1    ', 'iso-8859-1' ],
+#'wen' =>   [ 'Sorbian',             'XX Sorbian',       'wen_XX', '1    ', 'iso-8859-1' ],
 'xh' =>    [ 'Xhosa',               'IsiXhosa',          'xh_ZA', '  3  ', 'iso-8859-1', 'xh:en_ZA' ],
 'yi' =>    [ 'Yiddish',             'AA Yidish',         'yi_US', '1   5', 'utf_he' ],
 'zh_CN' => [ 'Chinese Simplified',  'ZZ ZhongWen',       'zh_CN', ' 2   ', 'gb2312',      'zh_CN.GB2312:zh_CN:zh' ],
