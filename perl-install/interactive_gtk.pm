@@ -41,7 +41,7 @@ sub test_embedded {
 }
 
 sub create_clist {
-    my ($e, $may_go_to_next) = @_;
+    my ($e, $may_go_to_next, $changed) = @_;
     my ($first_time, $starting_word, $start_reg) = (1, '', "^");
     my (@widgets, $timeout, $curr);
     my @l = map { may_apply($e->{format}, $_) } @{$e->{list}};
@@ -100,6 +100,7 @@ sub create_clist {
     $list->signal_connect(select_row => sub {
 	my ($w, $row) = @_;
 	${$e->{val}} = $e->{list}[$curr = $row];
+	&$changed;
     });
 
     $list, sub {
@@ -111,7 +112,7 @@ sub create_clist {
 }
 
 sub create_ctree {
-    my ($e, $may_go_to_next) = @_;
+    my ($e, $may_go_to_next, $changed) = @_;
     my @l = map { may_apply($e->{format}, $_) } @{$e->{list}};
 
     my $sep = quotemeta $e->{separator};
@@ -144,6 +145,7 @@ sub create_ctree {
 	    unshift @l, first $tree->node_get_pixtext($c, 0);
 	}
 	${$e->{val}} = join $e->{separator}, @l;
+	&$changed;
     });
 #    $tree->signal_connect(button_press_event => sub { &$leave if $_[1]{type} =~ /^2/ });
     $tree->signal_connect(key_press_event => sub {
@@ -177,7 +179,7 @@ sub create_ctree {
 }
 
 sub create_list {
-    my ($e, $may_go_to_next) = @_;
+    my ($e, $may_go_to_next, $changed) = @_;
     my $l = $e->{list};
     my $list = new Gtk::List();
     $list->set_selection_mode('browse');
@@ -210,6 +212,7 @@ sub create_list {
     $list->signal_connect(select_child => sub {
 	my ($w, $row) = @_;
 	${$e->{val}} = $l->[$list->child_position($row)];
+	&$changed;
     });
     $list, sub { 
 	my ($v) = @_;
@@ -228,7 +231,7 @@ sub ask_from_entries_refW {
     $mainw->sync; # for XPM's creation
 
     #-the widgets
-    my (@widgets, @widgets_always, @widgets_advanced, $advanced, $advanced_pack);
+    my (@widgets, @widgets_always, @widgets_advanced, $advanced, $advanced_pack, $has_scroll, $total_size);
     my $tooltips = new Gtk::Tooltips;
 
     my $set_all = sub {
@@ -261,7 +264,7 @@ sub ask_from_entries_refW {
 	    $set_all->();
 	};
 
-	my ($w, $real_w, $set, $get);
+	my ($w, $real_w, $set, $get, $expand, $size);
 	if ($e->{type} eq 'iconlist') {
 	    $w = new Gtk::Button;
 	    $set = sub {
@@ -294,13 +297,18 @@ sub ask_from_entries_refW {
 	} elsif ($e->{type} =~ /list/) {
 	    if ($e->{help}) {
 		#- used only when needed, as key bindings are dropped by List (CList does not seems to accepts Tooltips).
-		($w, $set) = create_list($e, $may_go_to_next);
-	     } elsif ($e->{type} eq 'treelist') {
-		($w, $set) = create_ctree($e, $may_go_to_next);
-	     } else {
-		($w, $set) = create_clist($e, $may_go_to_next);
-	     }
-	    $real_w = may_createScrolledWindow(@{$e->{list}} > 15, $w, 200, min(250, $::windowheight - 60)); 
+		($w, $set) = create_list($e, $may_go_to_next, $changed);
+	    } elsif ($e->{type} eq 'treelist') {
+		($w, $set) = create_ctree($e, $may_go_to_next, $changed);
+	    } else {
+		($w, $set) = create_clist($e, $may_go_to_next, $changed);
+	    }
+	    if (@{$e->{list}} > 4) {
+		$has_scroll = 1;
+		$expand = 1;
+		$real_w = createScrolledWindow($w);
+		$size += @{$e->{list}};
+	    }
 	} else {
 	    if ($e->{type} eq "combo") {
 		$w = new Gtk::Combo;
@@ -325,8 +333,10 @@ sub ask_from_entries_refW {
 	    $set_all->();
 	});
 	$tooltips->set_tip($w, $e->{help}) if $e->{help} && !ref($e->{help});
+
+	$total_size += $size || 1;
     
-	{ e => $e, w => $w, real_w => $real_w || $w, 
+	{ e => $e, w => $w, real_w => $real_w || $w, expand => $expand,
 	  get => $get || sub { ${$e->{val}} }, set => $set || sub {},
 	  icon_w => -e $e->{icon} ? new Gtk::Pixmap(gtkcreate_xpm($mainw->{window}, $e->{icon})) : '' };
     };
@@ -340,18 +350,27 @@ sub ask_from_entries_refW {
     };
     my $advanced_button = [ _("Advanced"), sub { $set_advanced->(!$advanced) } ];
 
-    my $pack = gtkpack(create_box_with_title($mainw, @{$common->{messages}}),
-		   may_createScrolledWindow(@widgets_always > 8, create_packtable({ no_expand => 1 }, map { [($_->{icon_w}, $_->{e}{label}, $_->{real_w})]} @widgets_always), 200, min(350, $::windowheight - 60)),
-		   $mainw->create_okcancel($common->{ok}, $common->{cancel}, '', @$l2 ? $advanced_button : ()));
+    my $create_widgets = sub {
+	my $w = create_packtable({}, map { [($_->{icon_w}, $_->{e}{label}, $_->{real_w})]} @_);
+	#- use a scrolled window if there is a lot of checkboxes (aka ask_many_from_list)
+	my $has = (grep { $_->{e}{type} eq 'bool' } @_) > 4;
+	$has_scroll ||= $has;
+	$has ? createScrolledWindow($w) : $w;
+    };
+
+    my $pack = gtkpack_(create_box_with_title($mainw, @{$common->{messages}}),
+		   1, $create_widgets->(@widgets_always),
+		   0, $mainw->create_okcancel($common->{ok}, $common->{cancel}, '', @$l2 ? $advanced_button : ()));
     $advanced_pack = 
       gtkpack_(new Gtk::VBox(0,0),
 	       0, '',
 	       (map {; 0, new Gtk::Label($_) } map { warp_text($_) } @{$common->{advanced_messages}}),
 	       0, new Gtk::HSeparator,
-	       1, create_packtable({ no_expand => 1 }, map { [($_->{icon_w}, $_->{e}{label}, $_->{real_w})]} @widgets_advanced));
+	       1, $create_widgets->(@widgets_advanced));
 
-    $pack->pack_start($advanced_pack, 1, 0, 1);
+    $pack->pack_start($advanced_pack, 1, 1, 0);
     gtkadd($mainw->{window}, $pack);
+    $mainw->{window}->set_usize(0, min($total_size > 10 ? 350 : 200, $::windowheight - 60)) if $has_scroll;
     $mainw->sync; #- for $set_all below (mainly for the set of clist)
     $set_all->();
     $set_advanced->(0);
