@@ -1,7 +1,7 @@
 #!/usr/bin/perl
 
 # Drak Bug Report 
-# C$opyright (C) 2002 MandrakeSoft (daouda@mandrakesoft.com)
+# Copyright (C) 2002 MandrakeSoft (daouda@mandrakesoft.com)
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -171,11 +171,18 @@ sub update_app {
     $app_choice ne '' ? $package->set_text("$app_choice") : $package->set_text(_("Not installed"));
 }
 
+my %packages;
+
 sub get_package {
     my ($executable) = @_;
     my ($rpm_package, $which_app);
-    $which_app = chomp_(`which '$executable' 2> /dev/null`);
-    $rpm_package = chomp_(`rpm -qf '$which_app' 2>&1`);
+    $rpm_package = $packages{$executable};
+    if (!defined $rpm_package) {
+        $which_app = chomp_(`which '$executable' 2> /dev/null`);
+        # deush, rpm can takes some time aka it'll sleeps if something has opened rpm db !
+        $rpm_package = $which_app eq "" ? _("Package not installed") : chomp_(`rpm -qf '$which_app' 2>&1`);
+        $packages{$executable} = $rpm_package;
+    }
     $rpm_package;
 }
 
