@@ -225,6 +225,15 @@ sub raw_add {
     push @$raw, $part;
 }
 
+sub first_usable_sector {
+    my ($hd) = @_;
+    $hd->{primary}{info}{firstUsableLBA};
+}
+sub last_usable_sector { 
+    my ($hd) = @_;
+    $hd->{primary}{info}{lastUsableLBA} + 1;
+}
+
 sub info {
     my ($hd) = @_;
     my $nb_sect = 32;

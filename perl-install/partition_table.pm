@@ -420,7 +420,7 @@ sub get_normal_parts {
 
 sub get_normal_parts_and_holes {
     my ($hd) = @_;
-    my $start = arch() eq "alpha" ? 2048 : 1;
+    my ($start, $last) = ($hd->first_usable_sector, $hd->last_usable_sector);
 
     ref($hd) or print("get_normal_parts_and_holes: bad hd" . backtrace(), "\n");
 
@@ -431,7 +431,7 @@ sub get_normal_parts_and_holes {
 	$hole, $_;
     } sort { $a->{start} <=> $b->{start} } grep { !isWholedisk($_) } get_normal_parts($hd);
 
-    push @l, { start => $start, size => $hd->{totalsectors} - $start, type => 0, rootDevice => $hd->{device} };
+    push @l, { start => $start, size => $last - $start, type => 0, rootDevice => $hd->{device} };
     grep { $_->{type} || $_->{size} >= $hd->cylinder_size } @l;
 }
 

@@ -47,6 +47,11 @@ sub cylinder_size($) {
     my ($hd) = @_;
     $hd->{geom}{sectors} * $hd->{geom}{heads};
 }
+sub first_usable_sector { 1 }
+sub last_usable_sector { 
+    my ($hd) = @_;
+    $hd->{totalsectors};
+}
 
 #- default method for starting a partition, only head size or twice
 #- is allowed for starting a partition after a cylinder boundarie.

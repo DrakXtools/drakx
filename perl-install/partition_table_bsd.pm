@@ -142,4 +142,6 @@ sub clear_raw {
     { raw => [ ({}) x $nb_primary ], info => info($hd) };
 }
 
+sub first_usable_sector { 2048 }
+
 1;
