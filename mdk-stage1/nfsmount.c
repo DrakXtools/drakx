@@ -1,3 +1,21 @@
+ /*
+ * Guillaume Cottenceau (gc@mandrakesoft.com)
+ *
+ * Copyright 2003 MandrakeSoft
+ *
+ * This software may be freely redistributed under the terms of the GNU
+ * public license.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ *
+ * basing on nfsmount.c from util-linux-2.11z:
+ * - use our logging facilities
+ * - use our host resolving stuff
+ * - remove unneeded code
+ */
+
 /*
  * nfsmount.c -- Linux NFS mount
  * Copyright (C) 1993 Rick Sladkey <jrs@world.std.com>
@@ -204,7 +222,7 @@ find_kernel_nfs_mount_version(void) {
 	}
 	if (nfs_mount_version > NFS_MOUNT_VERSION)
 	     nfs_mount_version = NFS_MOUNT_VERSION;
-        log_message("nfsmount: kernel_nfs_mount_version : %d", nfs_mount_version);
+        log_message("nfsmount: kernel_nfs_mount_version: %d", nfs_mount_version);
 	return nfs_mount_version;
 }
 
@@ -252,20 +270,6 @@ get_mountport(struct sockaddr_in *server_addr,
 		p.pm_vers = MOUNTVERS;
 	if (!p.pm_prot)
 		p.pm_prot = IPPROTO_TCP;
-#if 0
-	if (!p.pm_port) {
-		p.pm_port = pmap_getport(server_addr, p.pm_prog, p.pm_vers,
-					 p.pm_prot);
-	}
-#endif
-#if 0
-#define MOUNTPORT 635
-	/* HJLu wants to remove all traces of the old default port.
-	   Are there still people running a mount RPC service on this
-	   port without having a portmapper? */
-	if (!p.pm_port)
-		p.pm_port = MOUNTPORT;
-#endif
 	return &p;
 }
 
@@ -273,15 +277,12 @@ get_mountport(struct sockaddr_in *server_addr,
 
 int nfsmount_prepare(const char *spec, char **mount_opts)
 {
-        int running_bg = 0;
 	char hostdir[1024];
 	CLIENT *mclient;
-	char *hostname, *dirname, *old_opts, *mounthost = NULL;
-	char new_opts[1024];
+	char *hostname, *dirname, *mounthost = NULL;
 	struct timeval total_timeout;
 	enum clnt_stat clnt_stat;
 	static struct nfs_mount_data data;
-	char *opt, *opteq;
 	int nfs_mount_version;
 	int val;
 	struct sockaddr_in server_addr;
@@ -294,7 +295,7 @@ int nfsmount_prepare(const char *spec, char **mount_opts)
 		struct mountres3 nfsv3;
 	} status;
 	char *s;
-	int port, mountport, proto, bg, soft, intr;
+	int port, mountport, proto, soft, intr;
 	int posix, nocto, noac, broken_suid, nolock;
 	int retry, tcp;
 	int mountprog, mountvers, nfsprog, nfsvers;
@@ -335,16 +336,7 @@ int nfsmount_prepare(const char *spec, char **mount_opts)
 
 	memcpy (&mount_server_addr, &server_addr, sizeof (mount_server_addr));
 
-	/* add IP address to mtab options for use when unmounting */
 
-	s = inet_ntoa(server_addr.sin_addr);
-        old_opts = "";
-	if (strlen(old_opts) + strlen(s) + 10 >= sizeof(new_opts)) {
-		log_message("nfsmount: excessively long option argument");
-		goto fail;
-	}
-	sprintf(new_opts, "%s%saddr=%s",
-		old_opts, *old_opts ? "," : "", s);
 
 	/* Set default options.
 	 * rsize/wsize (and bsize, for ver >= 3) are left 0 in order to
@@ -360,7 +352,6 @@ int nfsmount_prepare(const char *spec, char **mount_opts)
 	data.namlen	= NAME_MAX;
 #endif
 
-	bg = 0;
 	soft = 1;
 	intr = 0;
 	posix = 0;
@@ -378,108 +369,7 @@ int nfsmount_prepare(const char *spec, char **mount_opts)
 	nfsprog = NFS_PROGRAM;
 	nfsvers = 0;
 
-	/* parse options */
 
-	for (opt = strtok(old_opts, ","); opt; opt = strtok(NULL, ",")) {
-		if ((opteq = strchr(opt, '='))) {
-			val = atoi(opteq + 1);	
-			*opteq = '\0';
-			if (!strcmp(opt, "rsize"))
-				data.rsize = val;
-			else if (!strcmp(opt, "wsize"))
-				data.wsize = val;
-			else if (!strcmp(opt, "timeo"))
-				data.timeo = val;
-			else if (!strcmp(opt, "retrans"))
-				data.retrans = val;
-			else if (!strcmp(opt, "acregmin"))
-				data.acregmin = val;
-			else if (!strcmp(opt, "acregmax"))
-				data.acregmax = val;
-			else if (!strcmp(opt, "acdirmin"))
-				data.acdirmin = val;
-			else if (!strcmp(opt, "acdirmax"))
-				data.acdirmax = val;
-			else if (!strcmp(opt, "actimeo")) {
-				data.acregmin = val;
-				data.acregmax = val;
-				data.acdirmin = val;
-				data.acdirmax = val;
-			}
-			else if (!strcmp(opt, "retry"))
-				retry = val;
-			else if (!strcmp(opt, "port"))
-				port = val;
-			else if (!strcmp(opt, "mountport"))
-			        mountport = val;
-			else if (!strcmp(opt, "mountprog"))
-				mountprog = val;
-			else if (!strcmp(opt, "mountvers"))
-				mountvers = val;
-			else if (!strcmp(opt, "nfsprog"))
-				nfsprog = val;
-			else if (!strcmp(opt, "nfsvers") ||
-				 !strcmp(opt, "vers"))
-				nfsvers = val;
-			else if (!strcmp(opt, "proto")) {
-				if (!strncmp(opteq+1, "tcp", 3))
-					tcp = 1;
-				else if (!strncmp(opteq+1, "udp", 3))
-					tcp = 0;
-				else
-					log_message("Warning: Unrecognized proto= option.");
-			} else if (!strcmp(opt, "namlen")) {
-#if NFS_MOUNT_VERSION >= 2
-				if (nfs_mount_version >= 2)
-					data.namlen = val;
-				else
-#endif
-					log_message("Warning: Option namlen is not supported.");
-			} else if (!strcmp(opt, "addr")) {
-				/* ignore */;
-			} else {
-				log_message("unknown nfs mount parameter: %s=%d", opt, val);
-				goto fail;
-			}
-		} else {
-			val = 1;
-			if (!strncmp(opt, "no", 2)) {
-				val = 0;
-				opt += 2;
-			}
-			if (!strcmp(opt, "bg")) 
-				bg = val;
-			else if (!strcmp(opt, "fg")) 
-				bg = !val;
-			else if (!strcmp(opt, "soft"))
-				soft = val;
-			else if (!strcmp(opt, "hard"))
-				soft = !val;
-			else if (!strcmp(opt, "intr"))
-				intr = val;
-			else if (!strcmp(opt, "posix"))
-				posix = val;
-			else if (!strcmp(opt, "cto"))
-				nocto = !val;
-			else if (!strcmp(opt, "ac"))
-				noac = !val;
-			else if (!strcmp(opt, "tcp"))
-				tcp = val;
-			else if (!strcmp(opt, "udp"))
-				tcp = !val;
-			else if (!strcmp(opt, "lock")) {
-				if (nfs_mount_version >= 3)
-					nolock = !val;
-				else
-					log_message("Warning: option nolock is not supported.");
-			} else if (!strcmp(opt, "broken_suid")) {
-				broken_suid = val;
-			} else {
-                                log_message("unknown nfs mount option: %s%s", val ? "" : "no", opt);
-                                goto fail;
-			}
-		}
-	}
 
 retry_mount:
 	proto = (tcp) ? IPPROTO_TCP : IPPROTO_UDP;
@@ -523,8 +413,8 @@ retry_mount:
 	       data.rsize, data.wsize, data.timeo, data.retrans);
 	log_message("acreg (min, max) = (%d, %d), acdir (min, max) = (%d, %d)",
 	       data.acregmin, data.acregmax, data.acdirmin, data.acdirmax);
-	log_message("port = %d, bg = %d, retry = %d, flags = %.8x",
-	       port, bg, retry, data.flags);
+	log_message("port = %d, retry = %d, flags = %.8x",
+	       port, retry, data.flags);
 	log_message("mountprog = %d, mountvers = %d, nfsprog = %d, nfsvers = %d",
 	       mountprog, mountvers, nfsprog, nfsvers);
 	log_message("soft = %d, intr = %d, posix = %d, nocto = %d, noac = %d",
@@ -629,7 +519,7 @@ retry_mount:
 				 */
 				memset(&status, 0, sizeof(status));
 
-				log_message("nfsmount: doing client call in nfs v%ld", pm_mnt->pm_vers);
+				log_message("nfsmount: doing client call in nfs version: %ld", pm_mnt->pm_vers);
 				if (pm_mnt->pm_vers == 3)
 					clnt_stat = clnt_call(mclient,
 						     MOUNTPROC3_MNT,
@@ -650,14 +540,14 @@ retry_mount:
 				if (clnt_stat == RPC_SUCCESS)
                                         goto succeeded;
 
-                                if (!running_bg && prevt == 0)
+                                if (prevt == 0)
                                         clnt_perror(mclient, "mount");
                                 auth_destroy(mclient->cl_auth);
                                 clnt_destroy(mclient);
                                 mclient = 0;
                                 close(msock);
 			} else {
-				if (!running_bg && prevt == 0)
+				if (prevt == 0)
 					clnt_pcreateerror("mount");
 			}
 			prevt = t;
