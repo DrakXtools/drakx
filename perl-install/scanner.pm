@@ -147,6 +147,9 @@ sub detect {
 	    # Comment line in output of "sane-find-scanner"
 	    next;
 	}
+	# The Alcatel Speed Touch internet scanner is not supported by
+	# SANE
+	next if $description =~ /Alcatel.*Speed.*Touch/i;
 	# Extract port
         $line =~ /\s+(\S+)\s*$/;
 	$port = $1;
@@ -190,7 +193,7 @@ sub detect {
 	    my $searchport2 = handle_configs::searchstr($d->{port2});
 	    foreach my $c (@configured) {
 		if ($c->{port} =~ /$searchport1$/ ||
-		    $c->{port} =~ /$searchport2$/) {
+		    ($searchport2 && $c->{port} =~ /$searchport2$/)) {
 		    $d->{configured} = 1;
 		    last;
 		}
@@ -375,12 +378,8 @@ sub updateScannerDBfromSane {
 		       s/\s+$//;
 		       /^\;/ and next;
 		       ($cmd, $val) = /:(\S+)\s*\"([^\;]*)\"/ or next; #log::l("bad line $lineno ($_)"), next;
-		       if ($f =~ /microtek/) {
-			   #print "##### |$cmd|$val|\n";
-		       }
 		       my $f = $fs->{$cmd};
 		       $f ? $f->() : log::l("unknown line $lineno ($_)");
-		       #$f ? $f->() : print "##### unknown line $lineno ($_)\n";
 		   }
 	$fs->{model}(); # the last one
     }
