@@ -35,8 +35,9 @@ my $version = "0.9.0";
 my $prog;
 my $incident = 0;
 
-while (defined($_ = shift @ARGV)) {
-    /^--report$/ and do { $prog = shift @ARGV };
+foreach (@ARGV) {
+    next unless defined $_;
+    /^--report$/ and $prog = shift @ARGV;
     /^--incident$/ and do { $incident = 1; $prog = shift @ARGV };
 }
 
