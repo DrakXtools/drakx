@@ -181,9 +181,8 @@ my $ttf2pt1 = '/usr/sbin/ttf2pt1';
 my $pfm2afm = '/usr/sbin/pfm2afm';
 my $type1inst = '/usr/sbin/type1inst';
 my $chkfontpath = '/usr/sbin/chkfontpath';
-my $mkttfdir = '/usr/X11R6/bin/mkttfdir';
+my $ttmkfdir = '/usr/sbin/ttmkfdir';
 my $ghostscript;
-#my $ttmkfdir = '/usr/sbin/ttmkfdir';
 
 # Global lists, just to manipulate it easily.
 # my @font_list                    => list of fonts to install.
@@ -352,15 +351,13 @@ sub put_font_dir {
 	}
 	$interactive and progress($pbar1, 0.01, _("done"));
 	$interactive and progress($pbar2, 0.10, _("True Type fonts installation"));
-	glob ("$drakfont_dir/tmp/tmp/*.TTF") and 
-	system ('cd '.$drakfont_dir.'/tmp/tmp ; for foo in *.TTF; do mv $foo `basename $foo .TTF`.ttf; done');
+  
+	system ('cd '.$drakfont_dir.'/tmp/tmp ; for i in *.TTF; do mv -f $i `basename $i .TTF`.ttf; done');
 	system ('cd '.$drakfont_dir.'/tmp/tmp  && cp *.ttf ../../ttf');
 	$interactive and progress($pbar2, 0.20, _("please wait during ttmkfdir..."));
-#	system ('cd '.$drakfont_dir.'/ttf && $ttmkfdir > fonts.dir' );
-	my $ttfdir = $drakfont_dir . "/ttf";
-	`$mkttfdir $ttfdir`;
+	system ('cd '.$drakfont_dir.'/ttf && $ttmkfdir > fonts.dir' );
 	$interactive and progress($pbar2, 0.10, _("True Type install done"));
-	my $update_chkfontpath = "$chkfontpath -a $drakfont_dir/ttf";
+	my $restart_xfs = "$chkfontpath -a $drakfont_dir/ttf";
 	
 	if ($so && $gs)  {
 	    my @glob_drak = glob ("$drakfont_dir/tmp/tmp/*.ttf");
@@ -376,7 +373,7 @@ sub put_font_dir {
 	    system ("cd $drakfont_dir/tmp/Type1 && mv *.pfm *.gsf *.afm *.pfb ../../Type1 ");
 	    system ("cd $drakfont_dir/Type1 && $type1inst");
 	    $interactive and progress($pbar2, 0.05, _("Ghostscript referencing"));
-	    $update_chkfontpath .= "; $chkfontpath -a $drakfont_dir/Type1";
+	    $restart_xfs .= "; $chkfontpath -a $drakfont_dir/Type1";
 	}
 	
 	if (!$so && $gs)  {
@@ -391,7 +388,7 @@ sub put_font_dir {
 	    system ("cd $drakfont_dir/tmp/Type1 && mv *.pfm *.afm *.gsf *.pfb ../../Type1 ");
 	    system ("cd $drakfont_dir/Type1 && $type1inst");
 	    $interactive and progress($pbar2, 0.05, _("Ghostscript referencing"));
-	    $update_chkfontpath .= "; $chkfontpath -a $drakfont_dir/Type1";
+	    $restart_xfs .= "; $chkfontpath -a $drakfont_dir/Type1";
 	}
 	
 	if ($so && !$gs)  {
@@ -407,7 +404,7 @@ sub put_font_dir {
 	    system ("cd $drakfont_dir/tmp/Type1 && mv *.afm ../../Type1 ");
 	    system ("cd $drakfont_dir/Type1 && $type1inst");
 	    $interactive and progress($pbar2, 0.14, _("type1inst building"));
-	    $update_chkfontpath .= "; $chkfontpath -a $drakfont_dir/Type1";
+	    $restart_xfs .= "; $chkfontpath -a $drakfont_dir/Type1";
 	}
 	
 	$interactive and  progress($pbar2, 0.01, _("done"));
@@ -415,10 +412,8 @@ sub put_font_dir {
 	rm_rf("$drakfont_dir/tmp/");
 	print "\n\nretarting xfs......\n";
 	$interactive and  progress($pbar3, 0.5 , _("Restart XFS"));
-	system ($update_chkfontpath);
-#	system ($restart_xfs);
-#	system('kill -USR1 `/sbin/pidof xfs` 2&1>/dev/null');
-	system ('/etc/rc.d/init.d/xfs restart');
+	system ($restart_xfs);
+	system('kill -USR1 `/sbin/pidof xfs` 2&1>/dev/null');
 	$interactive and  progress($pbar3, 0.30, _("done"));
     }
 }
