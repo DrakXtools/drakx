@@ -19,7 +19,7 @@ clean:
 	rm -f *.o insmod insmod-DIET libinsmod.a libinsmod-DIET.a
 
 
-FLAGS = -c -Wall -Os -fomit-frame-pointer -D_GNU_SOURCE -DBB_VER='"0.47"' -DBB_BT='"2000.12.06-14:02+0000"'
+FLAGS = -c -Wall -Os -fomit-frame-pointer -D_GNU_SOURCE -DBB_VER='"0.60.5"' -DBB_BT='"2003.04.16-15:25+0000"'
 
 
 insmod: insmod-frontend.o insmod.o utility-standalone.o

@@ -464,4 +464,14 @@ extern int sysinfo (struct sysinfo* info);
 #define isclr(a,i)      (((a)[(i)/NBBY] & (1<<((i)%NBBY))) == 0)
 #endif
 
+/* Merge from busybox 0.65.0 */
+#define error_msg				errorMsg
+#define perror_msg(FORMAT,...)	error_msg(FORMAT ": %s", ## __VA_ARGS__, strerror(errno))
+#define recursive_action		recursiveAction
+
+#define safe_strncpy(DST, SRC, SIZE) do {		\
+  (DST)[SIZE-1] = '\0';							\
+  return strncpy((DST), (SRC),(SIZE)-1);		\
+} while (0)
+
 #endif /* _BB_INTERNAL_H_ */

@@ -49,10 +49,11 @@
 //#define BB_FEATURE_FBSET_READMODE
 //
 // You must enable one or both of these features
-// Support installing modules from pre 2.1 kernels
-//#define BB_FEATURE_INSMOD_OLD_KERNEL
-// Support installing modules from kernel versions after 2.1.18
-#define BB_FEATURE_INSMOD_NEW_KERNEL
+// Support insmod/lsmod/rmmod for post 2.1 kernels
+#define BB_FEATURE_NEW_MODULE_INTERFACE
+//
+// Support insmod/lsmod/rmmod for pre 2.1 kernels
+//#define BB_FEATURE_OLD_MODULE_INTERFACE
 //
 // Support module version checking
 //#define BB_FEATURE_INSMOD_VERSION_CHECKING
