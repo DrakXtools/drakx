@@ -1029,10 +1029,13 @@ sub summary {
      } @sound_cards),
     if_($isa_sound_card, { label => _("Sound card"), clicked => $isa_sound_card }), 
     (map {
-{ label => _("TV card"), val => $_->{description}, clicked => sub { 
-      require harddrake::v4l; 
-      harddrake::v4l::config($o, $_->{driver});
-} } } grep { $_->{driver} =~ '(bttv|saa7134)' } detect_devices::probeall()),
+	my $driver = $_->{driver};
+	{ label => _("TV card"), val => $_->{description}, clicked => sub { 
+	      require harddrake::v4l; 
+	      harddrake::v4l::config($o, $driver);
+	  }
+        }
+    } grep { $_->{driver} =~ '(bttv|saa7134)' } detect_devices::probeall()),
 ]);
     install_steps::configureTimezone($o);  #- do not forget it.
 }
