@@ -804,7 +804,9 @@ Modifying the fields below will override this configuration."),
                                                                                                       map { $_->{device} } detect_devices::pcmcia_probe()));
                         $needhostname = $ethntf->{NEEDHOSTNAME} !~ /no/; 
                         # blacklist bogus driver, enable ifplugd support else:
-                        $ethntf->{MII_NOT_SUPPORTED} ||= bool2yesno($is_wireless || member($module, qw(forcedeth)));
+                        my @devs = detect_devices::pcmcia_probe();
+                        $ethntf->{MII_NOT_SUPPORTED} ||= bool2yesno($is_wireless || member($module, qw(forcedeth))
+                                                                    || find { $_->{device} eq $ntf_name } @devs);
                         $hotplug = !text2bool($ethntf->{MII_NOT_SUPPORTED});
                         $track_network_id = $::isStandalone && $ethntf->{HWADDR} || detect_devices::isLaptop();
                         delete $ethntf->{NETWORK};
