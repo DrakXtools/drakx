@@ -24,8 +24,8 @@
 
 void init_frontend(void);
 void finish_frontend(void);
-void error_message(char *msg);
-void wait_message(char *msg, ...);
+void error_message(char *msg); /* blocking */
+void wait_message(char *msg, ...); /* non-blocking */
 void remove_wait_message(void);
 
 enum return_type ask_yes_no(char *msg);

@@ -27,7 +27,7 @@ ARCH := $(patsubst sparc%,sparc,$(ARCH))
 
 
  #- We can leave "-g" forever since stripping will remove everything
-CFLAGS = -Os -g -Wall -Werror # -fomit-frame-pointer
+CFLAGS = -Os -Wall -Werror -fomit-frame-pointer
 INCLUDES = -I.
 DEFS = -D_GNU_SOURCE=1 -DVERSION=\"$(VERSION)\"
 
@@ -40,10 +40,23 @@ INITSRC = minilibc.c init.c
 INITOBJS = $(subst .c,.o,$(INITSRC))
 
 
- #- stage1 itself (minus stage1.c)
-STAGE1SRC = log.c tools.c modules.c probing.c newt-frontend.c cdrom.c disk.c network.c mount.c
+ #- frontend
+NEWT_FRONTEND_SRC = newt-frontend.c
+NEWT_FRONTEND_LIBS = /usr/lib/libnewt.a /usr/lib/libslang.a
 
-STAGE1OBJS = $(subst .c,.o,$(STAGE1SRC)) insmod-busybox/libinsmod.a mar/libmar.a /usr/lib/libnewt.a /usr/lib/libslang.a /usr/lib/libz.a
+STDIO_FRONTEND_SRC = stdio-frontend.c
+STDIO_FRONTEND_LIBS =
+
+FRONTEND_OBJS = $(subst .c,.o,$(STDIO_FRONTEND_SRC))
+FRONTEND_LIBS = $(STDIO_FRONTEND_LIBS)
+
+
+ #- stage1 itself (minus stage1.c)
+STAGE1SRC = log.c tools.c modules.c probing.c cdrom.c disk.c network.c mount.c
+
+STAGE1OBJS = $(subst .c,.o,$(STAGE1SRC)) $(FRONTEND_OBJS) insmod-busybox/libinsmod.a mar/libmar.a $(FRONTEND_LIBS) /usr/lib/libz.a
+
+
 
 
 ALLSRC = $(INITSRC) $(STAGE1SRC) stage1.c
@@ -118,7 +131,7 @@ clean:
 	@for n in $(DIRS); do \
 		(cd $$n; make clean) \
 	done
-	rm -f *.o .depend *.rdz *.img $(BINS)
+	rm -f *.o .depend *.rdz *.img $(BINS) st1
 
 deps:
 	$(CPP) $(CFLAGS) -DHAVE_CONFIG_H -M $(ALLSRC) > .depend

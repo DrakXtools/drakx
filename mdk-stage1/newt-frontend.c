@@ -152,7 +152,7 @@ enum return_type ask_yes_no(char *msg)
 {
 	int rc;
 
-	rc = newtWinTernary("Please answer..", "Yes", "No", "Back", msg);
+	rc = newtWinTernary("Please answer...", "Yes", "No", "Back", msg);
 
 	if (rc == 1)
 		return RETURN_OK;
