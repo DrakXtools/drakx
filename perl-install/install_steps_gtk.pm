@@ -34,7 +34,7 @@ sub new($$) {
     $ENV{DISPLAY} ||= $o->{display} || ":0";
     my $wanted_DISPLAY = $::testing && -x '/usr/X11R6/bin/Xnest' ? ':1' : $ENV{DISPLAY};
 
-    if ($ENV{DISPLAY} =~ /^:\d/ || $ENV{DISPLAY} ne $wanted_DISPLAY) { #- is the display local or distant?
+    if ($ENV{DISPLAY} =~ /^:\d/ && !$::testing || $ENV{DISPLAY} ne $wanted_DISPLAY) { #- is the display local or distant?
 	my $f = "/tmp/Xconf";
 	if (!$::testing) {
 	    install_gtk::createXconf($f, @{$o->{mouse}}{"XMOUSETYPE", "device"}, $o->{mouse}{wacom}[0]);
