@@ -165,7 +165,7 @@ sub search_installed_fonts_full_path {
 }
 
 sub search_windows_font {
-    foreach my $fstab_line (grep { /ext2/ } cat_('/etc/mtab') ) {
+    foreach my $fstab_line (grep { /vfat/ } cat_('/etc/mtab') ) {
 	my $win_dir = (split('\s', $fstab_line))[1];
 	my @list_fonts_win = all("$win_dir/windows/fonts");
 	my @list_fonts_winnt = all("$win_dir/winnt/fonts");
@@ -186,7 +186,7 @@ sub search_windows_font {
 
 sub is_a_font {
     local $_ = $_[0];
-    /.ttf$/i || /.pfa$/i || /.pfb$/i || /.pcf$/i || /.pcf.gz$/i || /.pfm$/i ;
+    /.ttf$/i || /.pfa$/i || /.pfb$/i || /.pcf$/i || /.pcf.gz$/i || /.pfm$/i || /.gsf$/;
 }
 
 sub search_dir_font {
@@ -214,6 +214,8 @@ sub search_dir_font {
 	}
 	print "Fonts in directory ".$dir." : ".$_."\n" foreach (@font_list_tmp);
     }
+    print ".........................................\n\n";
+    print "Font to install : ".$_."\n" foreach (@font_list);
 }
 
 sub search_dir_font_uninstall {
@@ -262,20 +264,20 @@ sub put_font_dir {
       foreach my $fontname ( glob ("$drakfont_dir/tmp/tmp/*.ttf") ) { 
 	system ("cd $drakfont_dir/tmp/tmp && $ttf2pt1 -b $fontname");
       }
-      system ("cd  $drakfont_dir/tmp/tmp && mv *.pfb *.pfm *.afm ../Type1");
+      system ("cd  $drakfont_dir/tmp/tmp && mv *.gsf *.pfb *.pfm *.afm ../Type1");
       system ("cd $drakfont_dir/tmp/Type1 && $type1inst" );
       system ("cd $drakfont_dir/tmp/Type1 && cat Fontmap >> `rpm -ql ghostscript | grep Fontmap.GS` " );
-      system ("cd $drakfont_dir/tmp/Type1 && mv *.pfm *.afm *.pfb ../../Type1 ");
+      system ("cd $drakfont_dir/tmp/Type1 && mv *.pfm *.gsf *.afm *.pfb ../../Type1 ");
       system ("cd $drakfont_dir/Type1 && $type1inst &&  $chkfontpath -a $drakfont_dir/Type1");
     }
     if (!$so && $gs)  {
       foreach my $fontname ( glob ("$/drakfont_dir/tmp/tmp/*.ttf") ) { 
 	system ("cd $/drakfont_dir/tmp/tmp && $ttf2pt1 -b $fontname");
       }
-      system ("cd $drakfont_dir/tmp/tmp && mv *.pfb *.pfm ../Type1");
+      system ("cd $drakfont_dir/tmp/tmp && mv *.gsf *.pfb *.pfm ../Type1");
       system ("cd $drakfont_dir/tmp/Type1 && $type1inst" );
       system ("cd $drakfont_dir/tmp/Type1 && cat Fontmap >> `rpm -ql ghostscript | grep Fontmap.GS` " );
-      system ("cd $drakfont_dir/tmp/Type1 && mv *.pfm *.afm *.pfb ../../Type1 ");
+      system ("cd $drakfont_dir/tmp/Type1 && mv *.pfm *.afm *.gsf *.pfb ../../Type1 ");
       system ("cd $drakfont_dir/Type1 && $type1inst &&  $chkfontpath -a $drakfont_dir/Type1");
     }
     if ($so && !$gs)  {
@@ -322,7 +324,7 @@ sub remove_fonts {
     -e $drakfont_dir . "/remove"  || mkdir_p($drakfont_dir."/remove");
     foreach my $i (@font_list) {
 	$_ = $i;
-	if ( /.pfb$/ || /.pfm$/ || /.pfa$/ ) {
+	if ( /.pfb$/ || /.gsf$/ || /.pfm$/ || /.pfa$/ ) {
 	    system ("cp $_ $drakfont_dir/remove ");
 	} else {
 	    rm_rf($i);
