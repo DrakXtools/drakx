@@ -570,6 +570,7 @@ sub getNet() {
 
 sub getUPS() {
     # MGE serial PnP devices:
+    my @usb_devices = usb_probe();
     (map {
         $_->{port} = $_->{DEVICE};
         $_->{bus} = "Serial";
@@ -580,12 +581,13 @@ sub getUPS() {
         $_;
     } grep { $_->{DESCRIPTION} =~ /MGE UPS/ } values %serialprobe),
       # USB UPSs;
+      (grep { $->{description} =~ /American Power Conversion\|Back-UPS/ } @usb_devices),
       (map {
           ($_->{name} = $_->{description}) =~ s/.*\|//;
           $_->{port} = "/dev/"; # FIXME
           $_->{media_type} = 'UPS';
           $_;
-      } grep { $_->{driver} =~ /ups$/ } usb_probe());
+      } grep { $_->{driver} =~ /ups$/ } @usb_devices);
 }
 
 $pcitable_addons = <<'EOF';
