@@ -125,17 +125,7 @@ sub read {
     my (undef, $o_file) = @_;
 
     my $conf = modules::any_conf::vnew();
-    my $raw_conf = modules::any_conf::read_raw($o_file || $::prefix . $conf->file);
-
-    foreach my $module (keys %$raw_conf) {
-	my $raw = $raw_conf->{$module};
-	my $keep = $conf->{$module} = {};
-	foreach ($conf->handled_fields) {
-	    $keep->{$_} = $raw->{$_} if $raw->{$_};
-	}
-    }
-
-    $conf;
+    $conf->read($o_file);
 }
 
 sub write {
@@ -178,6 +168,22 @@ sub write {
 
 
 ################################################################################
+sub read_handled {
+    my ($conf, $o_file) = @_;
+    my $file = $o_file || $::prefix . $conf->file;
+    my $raw_conf = modules::any_conf::read_raw($file);
+
+    foreach my $module (keys %$raw_conf) {
+	my $raw = $raw_conf->{$module};
+	my $keep = $conf->{$module} = {};
+	foreach ($conf->handled_fields) {
+	    $keep->{$_} = $raw->{$_} if $raw->{$_};
+	}
+    }
+
+    $conf;
+}
+
 sub read_raw {
     my ($file) = @_;
     my %c;

@@ -54,7 +54,7 @@ sub read {
 	$f;
     };
 
-    my $conf = modules::any_conf::read($type, $file);
+    my $conf = modules::any_conf::read_handled($type, $file);
 
     extract_probeall_field($conf);
 

@@ -36,7 +36,7 @@ sub set_above {
 sub read {
     my ($type, $o_file) = @_;
 
-    my $conf = modules::any_conf::read($type, $o_file);
+    my $conf = modules::any_conf::read_handled($type, $o_file);
 
     #- convert old aliases to new probeall
     foreach my $name ('scsi_hostadapter', 'usb-interface') {
