@@ -60,7 +60,7 @@ $button_conf->signal_connect ( clicked => sub {
 				 update();
 			     });
 $bbox1->add($button_conf);
-my $button_ok = new Gtk::Button _("OK");
+my $button_ok = new Gtk::Button _("Cancel");
 $button_ok->signal_connect ( clicked => sub {
 				 quit_global();
 			     });
