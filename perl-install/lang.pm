@@ -513,6 +513,13 @@ my %gtkqt_im =
                XIM_PROGRAM => 'kinput2',
                XMODIFIERS => '@im=kinput2',
               },
+   nabi => {
+            GTK_IM_MODULE => 'xim',
+            XIM => 'nabi',
+            XIM_PROGRAM => 'nabi',
+            XMODIFIERS => '@im=nabi',
+           },
+
    scim => {
             GTK_IM_MODULE => 'scim',
             XIM_PROGRAM => 'scim -d',
