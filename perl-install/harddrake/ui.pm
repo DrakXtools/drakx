@@ -2,8 +2,7 @@ package harddrake::ui;
 
 use strict;
 
-use harddrake::data;
-use harddrake::sound;
+require harddrake::data;
 use common;
 use my_gtk qw(:helpers :wrappers :various);
 use interactive;
@@ -126,6 +125,7 @@ sub detect {
 		$_->{bus_location} = join ':', map { sprintf("%lx", $i->{$_} ) } qw(bus id);
 	    }
 	    if ($Ident eq "AUDIO") {
+		require harddrake::sound;
 		my $alter = harddrake::sound::get_alternative($_->{driver});
 		$_->{alternative_drivers} = join(':', @$alter) if $alter->[0] ne 'unknown';
 	    }

@@ -218,7 +218,7 @@ If your card is misdetected, you can force the right tuner and card types here. 
 				   ]
 				  ))
     {
-	   $conf{card}=$cards_lst->{$driver}{$conf{card}};
+	   $conf{card} = $cards_lst->{$driver}{$conf{card}};
 
 	   my $options = 
 	     'radio=' . ($conf{radio} ? 1 : 0) . ' '.

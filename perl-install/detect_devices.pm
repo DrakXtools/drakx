@@ -346,46 +346,22 @@ sub getATARAID {
     values %l;
 }
 
-<<<<<<< detect_devices.pm
-#-AT&F&O2B40
-#- DialString=ATDT0231389595((
-
-#- modem_detect_backend : detects modem on serial ports and fills the infos in $modem : detects only one card
-#- input
-#-  $modem
-#-  $mouse : facultative, hash containing device to exclude not to test mouse port : ( device => /ttyS[0-9]/ )
-#- output:
-#-  $modem->{device} : device where the modem were detected
-sub getSerialModem {
-    my ($modem, $mouse) = @_;
-    $mouse ||= {};
-    $mouse->{device} = readlink "/dev/mouse";
-    my $serdev = arch() =~ /ppc/ ? "macserial" : "serial";
-    eval { modules::load($serdev) };
-
-    detect_devices::probeSerialDevices();
-    foreach ('modem', map { "ttyS$_" } (0..7)) {
-	next if $mouse->{device} =~ /$_/;
-	next unless -e "/dev/$_";
-	detect_devices::hasModem("/dev/$_") and $modem->{device} = $_, last;
+sub getCPUs { 
+    my (@cpus, $cpu);
+    foreach (cat_("/proc/cpuinfo")) {
+	   if (/^processor/) {
+		  next unless $cpu;
+		  push @cpus, $cpu;
+		  $cpu = {};
+	   } else {
+		  /(\S*)\s*:\s*(\S*)/;
+		  $cpu->{$1} = $2 if $1;
+	   }
     }
-
-    #- add an alias for macserial on PPC
-    modules::add_alias('serial', $serdev) if (arch() =~ /ppc/ && $modem->{device});
-    my @devs = detect_devices::pcmcia_probe();
-    foreach (@devs) {
-	$_->{type} =~ /serial/ and $modem->{device} = $_->{device};
-    }
+    push @cpus, $cpu;
+    @cpus;
 }
 
-sub getModem() {
-    my @modems = grep { $_->{media_type} eq 'COMMUNICATION_MODEM' || $_->{media_type}  =~ /modem/ } probeall(0);
-    my $serial_modem = {};
-    getSerialModem($serial_modem);
-    @modems, $serial_modem;
-}
-
-=======
 #-AT&F&O2B40
 #- DialString=ATDT0231389595((
 
@@ -428,7 +404,6 @@ sub getSpeedtouch {
     grep { $_->{description} eq 'Alcatel|USB ADSL Modem (Speed Touch)' } probeall(0);
 }
 
->>>>>>> 1.217
 sub getNet() {
     grep { !(($::isStandalone || $::live) && /plip/) && c::hasNetDevice($_) } @netdevices;
 }

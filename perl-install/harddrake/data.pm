@@ -38,6 +38,9 @@ our @tree =
 	["AUDIO","Soundcard", "sound.png", "$sbindir/draksound", 
 	 sub { grep { $_->{media_type} =~ 'MULTIMEDIA_AUDIO' } @devices}, 0 ],
 	["WEBCAM","Webcam", "webcam.png", "", sub { grep { $_->{media_type} =~ 'MULTIMEDIA_VIDEO' && $_->{bus} ne 'PCI'} @devices }, 0 ],
+	["CPU","Processors", "cpu.png", "", sub { 
+	    detect_devices::getCPUs();
+	    }, 0 ],
 	["ETHERNET","Ethernetcard", "hw_network.png", "$sbindir/drakconnect", sub {
 	    #- generic NIC detection for USB seems broken (class, subclass, 
 	    #- protocol report are not accurate) so I'll need to verify against
