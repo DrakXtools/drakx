@@ -19,4 +19,4 @@ $border = 10;  #- for leftish text
 	N("	- Special discounts for products and services at MandrakeStore"),
 	N("	- Plus much more"),
 	' ',
-	N("For more information, please visit www.mandrakeclub.com")); 
+	N("For more information, please visit <b>www.mandrakeclub.com</b>")); 
