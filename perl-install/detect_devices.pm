@@ -346,10 +346,20 @@ sub getATARAID {
     values %l;
 }
 
+
+# cpu_name : arch() =~ /^alpha/ ? "cpu	" :
+# arch() =~ /^ppc/ ? "processor" : "vendor_id"
+
+# cpu_model : arch() =~ /^alpha/ ? "cpu model" :
+# arch() =~ /^ppc/ ? "cpu  " : "model name"
+
+# cpu_freq = arch() =~ /^alpha/ ? "cycle frequency [Hz]" :
+# arch() =~ /^ppc/ ? "clock" : "cpu MHz"
+
 sub getCPUs { 
     my (@cpus, $cpu);
     foreach (cat_("/proc/cpuinfo")) {
-	   if (/^processor/) {
+	   if (/^processor/) { # ix86 specific
 		  push @cpus, $cpu if $cpu;
 		  $cpu = {};
 	   }
