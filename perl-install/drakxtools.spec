@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 9.1
-Release: 33mdk
+Release: 34mdk
 Url: http://www.mandrakelinux.com/en/drakx.php2
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -308,6 +308,11 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Tue Apr 29 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.1-34mdk
+- drakedm: fix #3701 (return back to the display managers menu if one
+  cancel the installation of the required packages)
+- drakfont: empty the font queue when step back (poulpy)
+
 * Thu Apr 24 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.1-33mdk
 - fix provides
 
