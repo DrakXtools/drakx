@@ -5,11 +5,16 @@ use any;
 
 
 sub kinds() { 
-    ('local', 'LDAP', 'NIS', 'winbind', 'AD');
+    ('local', 'LDAP', 'NIS', 'winbind', 'AD', 'ADWIN');
 }
 sub kind2description {
     my ($kind) = @_;
-    ${{ local => N("Local file"), LDAP => N("LDAP"), NIS => N("NIS"), winbind => N("Windows Domain"), AD => N("Active Directory") }}{$kind};
+    ${{ local => N("Local file\nUse local for all authentication and information user tell in local file\n"), 
+    LDAP => N("LDAP\nTells your computer to use LDAP for some or all authentication.\nLDAP consolidates certain types of information within your organization.\n"), 
+    NIS => N("NIS\nAllows you to run a group of computers in the same Network\nInformation Service domain with a common password and group file.\n"), 
+    winbind => N("Windows Domain\nWinbind allows a system to retrieve information about\nusers and to authenticate users by using in an Windows domain.\n "), 
+    AD => N("Active Directory with SFU\nKerberos is a secure system for providing network authentication services.\n"),
+    ADWIN => N("Active Directory with Winbind\nKerberos is a secure system for providing network authentication services.\n") }}{$kind};
 }
 sub to_kind {
     my ($authentication) = @_;
@@ -45,6 +50,7 @@ sub ask_parameters {
 	$authentication->{AD_domain} ||= $netc->{DOMAINNAME};
 	$authentication->{AD_server} ||= 'kerberos.' . $authentication->{AD_domain};
 	$authentication->{AD_users_db} ||= 'cn=users,' . domain_to_ldap_domain($authentication->{AD_domain});
+	$authentication->{AD_users_idmap} ||= 'ou=idmap,' . domain_to_ldap_domain($authentication->{AD_domain});
 
 	my %sub_kinds = my @sub_kinds = (
 	    simple => N("simple"), 
@@ -86,6 +92,7 @@ sub ask_parameters {
 	  if $kind eq 'winbind';
 
 	$authentication->{AD_domain} ||= $netc->{DOMAINNAME} if $kind eq 'AD';
+	 $authentication->{AD_users_idmap} ||= 'ou=idmap,' . domain_to_ldap_domain($authentication->{AD_domain}) if $kind eq 'AD';
 	$netc->{WINDOMAIN} ||= $netc->{DOMAINNAME};
 	$in->ask_from('',
 		      $kind eq 'AD' ? N("Authentication Active Directory") : N("Authentication Windows Domain"),
@@ -95,6 +102,8 @@ sub ask_parameters {
 			  { label => N("Windows Domain"), val => \$netc->{WINDOMAIN} },
 			  { label => N("Domain Admin User Name"), val => \$authentication->{winuser} },
 			  { label => N("Domain Admin Password"), val => \$authentication->{winpass}, hidden => 1 },
+			  { label => N("Use Idmap for store UID/SID "), val => \$anonymous, type => 'bool' },
+			  { label => N("Default Idmap "), val => \$authentication->{AD_users_idmap}, disabled => sub { $anonymous } },
 			]) or return;
     }
     $authentication->{$kind} ||= 1;
@@ -194,7 +203,12 @@ sub set {
 	    run_program::rooted($::prefix, 'nisdomainname', $domain);
 	    run_program::rooted($::prefix, 'service', 'ypbind', 'restart');
 	}) if !$::isInstall; #- TODO: also do it during install since nis can be useful to resolve domain names. Not done because 9.2-RC
+#    } elsif ($kind eq 'winbind' || $kind eq 'AD' && $authentication->{subkind} eq 'winbind') {
+
+#	}) if !$::isInstall; 
+#- TODO: also do it during install since nis can be useful to resolve domain names. Not done because 9.2-RC
     } elsif ($kind eq 'winbind') {
+
 	my $domain = uc $netc->{WINDOMAIN};
 	
 	$in->do_pkgs->install('samba-winbind');
@@ -219,11 +233,9 @@ sub set {
 	my $realm = $authentication->{AD_domain};
 
 	configure_krb5_for_AD($authentication);
-	$in->do_pkgs->install('samba-winbind', 'pam_krb5', 'samba-server');
+	$in->do_pkgs->install('samba-winbind', 'pam_krb5');
 	set_nsswitch_priority('winbind');
 	set_pam_authentication('winbind');
-	run_program::rooted($::prefix, 'service', 'smb', 'restart');
-        run_program::rooted($::prefix, 'service', 'winbind', 'restart');
 
     
 	require network::smb;
