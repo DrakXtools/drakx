@@ -1,3 +1,53 @@
+2002/02/17  Pixel  <pixel@mandrakesoft.com>
+
+	* share/rpmsrate: have icewm-light in any case (to be used as a failsafe
+	window manager)
+	add hotplug, usbutils and usbview with the new flag USB
+
+	* install_any.pm: hotplug now handled via rpmsrate and the USB flag
+	add some log to know why umounting /tmp/image fail
+
+	* diskdrake/interactive.pm: warn_if_renumbered now also done at install
+	force scalar context for warp_text
+
+	* share/po/id.xsl, share/po/help_xml2pm.pl: use xsltproc as a filter to
+	remove entities
+
+	* share/po/Makefile (clean): remove .memdump
+
+	* any.pm (autologin): do not allow empty user name since no autologin can
+	already be achieved by choosing "No"
+
+	* install2.pm: do not use run_program::xxx, use directly "system" so that
+	stdout is kept unchanged during "postInstall" execution
+
+	* network/smb.pm: fix typo (s/nfs/smbfs/)
+
+2002/02/17  siegel
+
+	* help.pm: new version for 8.2
+
+	* share/po/de.po: new german version
+
+	* share/po/help_xml2pm.pl: added check for missing xsltproc
+	fix perl warnings after adding -w
+
+	* share/po/.cvsignore: added .memdump
+
+	* share/po/Makefile: allow me to work with a symlink to doc in this
+	directory
+
+2002/02/16  Pixel  <pixel@mandrakesoft.com>
+
+	* lvm.pm: 
+	  - LVs "device" field were containing "/dev/vg/number" whereas it must
+	be "vg/name"
+	  - added lv_resize
+
+	* diskdrake/interactive.pm: add Resize'ing mounted XFS on LVM
+
+	* crypto.pm (mirrors): add a timeout via "alarm" (needs testing)
+
 2002/02/16  Pixel  <pixel@mandrakesoft.com>
 
 	* Xconfig.pm: 
