@@ -341,8 +341,7 @@ sub chooseCD {
 
     $o->set_help('chooseCD');
     $o->ask_many_from_list_ref('',
-			       _(
-"If you have all the CDs in the list below, click Ok.
+			       _("If you have all the CDs in the list below, click Ok.
 If you have none of those CDs, click Cancel.
 If only some CDs are missing, unselect them, then click Ok."),
 			       [ map { _("Cd-Rom labeled \"%s\"", pkgs::mediumDescr($packages, $_)) } @mediums ],
