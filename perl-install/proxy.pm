@@ -11,7 +11,7 @@ use c;
 sub main {
     my ($prefix, $in, $install) = @_;
     my $proxy_cfg = {};
-    my $config_file; = "$prefix/usr/lib/wgetrc";
+    my $config_file = "$prefix/usr/lib/wgetrc";
 
     # grab current config
     foreach (cat_($config_file)) {
@@ -31,6 +31,7 @@ sub main {
     # http proxy
   step_http_proxy:
     undef $::Wizard_no_previous;
+    $proxy_cfg->{http_url} ||= "http:";
     $in->ask_from_entries_refH(_("Proxy configuration"),
                                _("Please fill in the http proxy informations"),
 			       [ { label => _("URL"), val => \$proxy_cfg->{http_url} },
