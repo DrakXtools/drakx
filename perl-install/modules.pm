@@ -36,7 +36,7 @@ my %mappings_24_26 = (
     "dc395x_trm" => "dc395x",
 );
 my %mappings_26_24 = reverse %mappings_24_26;
-$mappings_26_24{'uhci-hdc'} = 'usb-uhci';
+$mappings_26_24{'uhci-hcd'} = 'usb-uhci';
 
 sub mapping_24_26 {
     my ($modname) = @_;
