@@ -303,7 +303,7 @@ sub updateAutologin
     my ($usern,$deskt)=($user_combo->entry->get_text(), $desktop_combo->entry->get_text());
 
     if ($x_yes_button->get_active()) {
-	$in->standalone::pkgs_install(q(autologin)) if $x_mode;
+	$in->do_pkgs->install('autologin') if $x_mode;
 	set_autologin('',$usern,$deskt);
     } else {
 	set_autologin('',undef) if ($x_no_button->get_active());
