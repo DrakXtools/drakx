@@ -115,8 +115,10 @@ sub psUsingHdlist() {
 	my $name = c::headerGetEntry($header, 'name');
 
 	$packages{$name} = {
-             name => $name, version => c::headerGetEntry($header, 'version'), release => c::headerGetEntry($header, 'release'),
-	     header => $header, selected => 0, deps => [],
+             name => $name, header => $header, selected => 0, deps => [],
+	     version => c::headerGetEntry($header, 'version'), 
+	     release => c::headerGetEntry($header, 'release'),
+	     size    => c::headerGetEntry($header, 'size'),
         };
     }
     log::l("psUsingHdlist read " . scalar keys(%packages) . " headers");

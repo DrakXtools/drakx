@@ -105,11 +105,12 @@ sub getCompaqSmartArray() {
     my $f;
 
     for (my $i = 0; -r ($f = "/proc/array/ida$i"); $i++) {
-	local *F;
-	open F, $f or die;
-	local $_ = <F>;
-	my ($name) = m|ida/(.*?):| or next;
-	push @idi, { device => $name, info => "Compaq RAID logical disk", type => 'hd' };
+	foreach (cat_($f)) {
+	    if (m|^(ida/.*?):|) {
+		push @idi, { device => $1, info => "Compaq RAID logical disk", type => 'hd' };
+		last;
+	    }	      
+	}
     }
     @idi;
 }

@@ -171,7 +171,7 @@ my @installSteps = (
   formatPartitions => [ __("Format partitions"), 1, -1, "partitionDisks" ],
   choosePackages => [ __("Choose packages to install"), 1, 1, "selectInstallClass" ],
   doInstallStep => [ __("Install system"), 1, -1, ["formatPartitions", "selectPath"] ],
-#  configureMouse => [ __("Configure mouse"), 1, 1, "formatPartitions" ],
+  configureMouse => [ __("Configure mouse"), 1, 1, "formatPartitions" ],
   configureNetwork => [ __("Configure networking"), 1, 1, "formatPartitions" ],
   configureTimezone => [ __("Configure timezone"), 1, 1, "doInstallStep" ],
 #  configureServices => [ __("Configure services"), 0, 0 ],
@@ -334,7 +334,7 @@ sub configureMouse { $o->mouseConfig }
 sub configureNetwork { $o->configureNetwork($_[1] == 1 && !$_[0]) }
 sub configureTimezone { 
     my $f = "$o->{prefix}/etc/sysconfig/clock";
-    return if -e $f && $_[1] == 1 && !$_[0];
+    return if ((-s $f) || 0) > 0 && $_[1] == 1 && !$_[0];
     $o->timeConfig($f);
 }
 sub configureServices { $o->servicesConfig }
