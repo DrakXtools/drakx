@@ -871,7 +871,7 @@ sub write_grub_config {
 	print F "color black/cyan yellow/cyan";
 	print F "i18n ", $file2grub->("/boot/grub/messages");
 	print F "keytable ", $file2grub->($lilo->{keytable}) if $lilo->{keytable};
-	print F "serial --unit=$1 --speed=$2\nterminal serial console --timeout=" . ($lilo->{timeout} || 0) if get_append($lilo, 'console') =~ /ttyS(\d),(\d+)/;
+	print F "serial --unit=$1 --speed=$2\nterminal --timeout=" . ($lilo->{timeout} || 0) . " console serial" if get_append($lilo, 'console') =~ /ttyS(\d),(\d+)/;
 
 	#- since we use notail in reiserfs, altconfigfile is broken :-(
 	unless ($bootIsReiser) {
