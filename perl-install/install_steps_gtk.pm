@@ -395,6 +395,7 @@ sub choosePackagesTree {
 	} else {
 	    foreach my $root (@{$o->{compssUsersSorted}}) {
 		my (%fl, @firstchoice, @others);
+		#$fl{$_} = $o->{compssUsersChoice}{$_} foreach @{$o->{compssUsers}{$root}{flags}}; #- FEATURE:improve choce of packages...
 		$fl{$_} = 1 foreach @{$o->{compssUsers}{$root}{flags}};
 		foreach my $p (values %{$packages->{names}}) {
 		    my ($rate, @flags) = pkgs::packageRateRFlags($p);
