@@ -36,7 +36,7 @@ _ "$sudo rm -rf $tmp" if -e $tmp;
 _ "mkdir $tmp";
 _ 'find . -name "*~" | xargs rm -f';
 _ "cp -a tree/* $tmp";
-_ "mkdir -p lib tmp modules proc";
+_ "cd $tmp; mkdir -p lib tmp modules proc";
 
 
 foreach (keyboard::loadkeys_files) {

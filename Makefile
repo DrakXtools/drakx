@@ -13,7 +13,7 @@ BOOT_IMG += $(RELEASE_BOOT_IMG)
 
 BOOT_RDZ = $(BOOT_IMG:%.img=%.rdz)
 BINS = install/install install/full-install install/local-install install/installinit/init
-DIRS = tools install install/installinit perl-install rescue
+DIRS = tools install install/installinit perl-install
 ifeq (i386,$(ARCH))
 #DIRS += lnx4win
 endif
@@ -26,7 +26,7 @@ UPLOAD_DEST_CONTRIB = $(UPLOAD_DEST_)/contrib
 AUTOBOOT = $(ROOTDEST)/dosutils/autoboot/mdkinst
 
 
-.PHONY: dirs $(FLOPPY_IMG) install network_ks.rdz pcmcia_ks.rdz
+.PHONY: dirs rescue $(FLOPPY_IMG) install network_ks.rdz pcmcia_ks.rdz
 
 install: build autoboot
 	for i in images misc Mandrake Mandrake/base; do install -d $(ROOTDEST)/$$i ; done
@@ -59,6 +59,9 @@ endif
 dirs:
 	for i in $(DIRS); do make -C $$i; done
 
+rescue: modules
+	make -C $@
+
 network_ks.rdz pcmcia_ks.rdz: %_ks.rdz: %.rdz
 
 network.rdz pcmcia.rdz hd.rdz cdrom.rdz: dirs modules
@@ -85,12 +88,12 @@ clean:
 	for i in $(DIRS); do make -C $$i clean; done
 	find . -name "*~" -o -name ".#*" | xargs rm -f
 
-upload: tar install
-	touch /tmp/mdkinst_done
-	cd $(ROOTDEST)/Mandrake ; tar cfz mdkinst.tgz mdkinst
-
-	lftp -c "open -u devel mandrakesoft.com; cd $(UPLOAD_DEST)/images ; mput $(ROOTDEST)/images/*.img"
-	lftp -c "open -u devel mandrakesoft.com; cd ~/tmp ; put $(ROOTDEST)/Mandrake/mdkinst.tgz ; put /tmp/mdkinst_done ; cd $(UPLOAD_DEST)/Mandrake/base ; lcd $(ROOTDEST)/Mandrake/base ; put mdkinst_stage2.gz rescue_stage2.gz compss compssList compssUsers hdlists ; cd $(UPLOAD_DEST)/misc ; lcd ~/gi/tools/ ; put make_mdkinst_stage2" #,gendepslist,rpm2header"
+upload: #tar install
+#	 touch /tmp/mdkinst_done
+#	 cd $(ROOTDEST)/Mandrake ; tar cfz mdkinst.tgz mdkinst
+#
+#	 lftp -c "open -u devel mandrakesoft.com; cd $(UPLOAD_DEST)/images ; mput $(ROOTDEST)/images/*.img"
+#	 lftp -c "open -u devel mandrakesoft.com; cd ~/tmp ; put $(ROOTDEST)/Mandrake/mdkinst.tgz ; put /tmp/mdkinst_done ; cd $(UPLOAD_DEST)/Mandrake/base ; lcd $(ROOTDEST)/Mandrake/base ; put mdkinst_stage2.gz rescue_stage2.gz compss compssList compssUsers hdlists ; cd $(UPLOAD_DEST)/misc ; lcd ~/gi/tools/ ; put make_mdkinst_stage2" #,gendepslist,rpm2header"
 	lftp -c "open -u devel mandrakesoft.com; cd $(UPLOAD_DEST)/dosutils/autoboot/mdkinst ; put $(ROOTDEST)/dosutils/autoboot/mdkinst/vmlinuz ; mput $(ROOTDEST)/dosutils/autoboot/mdkinst/initrd.*"
 	lftp -c "open -u devel mandrakesoft.com; cd $(UPLOAD_DEST)/lnx4win ; lcd $(ROOTDEST)/lnx4win ; put initrd.gz vmlinuz"
 	lftp -c "open -u devel mandrakesoft.com; cd $(UPLOAD_DEST_CONTRIB)/others/src ; put ../gi.tar.bz2"
