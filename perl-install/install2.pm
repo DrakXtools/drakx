@@ -548,9 +548,10 @@ sub main {
 
     my $VERSION = cat__(install_any::getFile("VERSION")) or do { print "VERSION file missing\n"; sleep 5 };
     $::corporate = 1 if $VERSION =~ /corporate/i;
-    $o->{meta_class} = 'desktop' if $VERSION =~ /desktop/i;
+    $o->{meta_class} = 'desktop' if $VERSION =~ /desktop|discovery/i;
+    $o->{meta_class} = 'download' if $VERSION =~ /download/i;
     $o->{meta_class} = 'firewall' if $VERSION =~ /firewall/i;
-    $o->{meta_class} = 'server' if $VERSION =~ /server/i;
+    $o->{meta_class} = 'server' if $VERSION =~ /server|prosuite/i;
     if ($::oem) {
 	$o->{partitioning}{use_existing_root} = 1;
 	$o->{compssListLevel} = 4;
