@@ -781,6 +781,7 @@ sub hasPCMCIA() { $::o->{pcmcia} } #- because /proc/pcmcia seems not to be prese
 
 my @dmis;
 
+# we return a list b/c several DMIs have the same name:
 sub dmidecode() {
 	return @dmis if @dmis;
 
