@@ -302,7 +302,7 @@ $tree->get_selection->signal_connect('changed' => sub {
                 member($field, map { @$_ } values %groups);
             } keys %device_fields;
             my @formated;
-            foreach my $group (sort { $a eq N("Connection") } keys %groups) {
+            foreach my $group (N("Identification"), grep { $_ ne N("Identification") } keys %groups) {
                 my @fields = @{$groups{$group}};
                 # have we at least a member in that group?
                 next unless any { member($_, @fields) } @$grouped;
