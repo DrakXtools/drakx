@@ -131,7 +131,9 @@ endif
 #	echo -e '#!/bin/sh\n\nexec "/usr/bin/sh"' > $(DEST)/usr/bin/runinstall2
 #	chmod a+x $(DEST)/usr/bin/runinstall2
 
+ifeq (i386,$(ARCH))
 	tar xyC $(DEST) -f ../install/install1_pcmcia.$(ARCH).tar.bz2 ./etc/pcmcia
+endif
 
 	find $(DEST) -name CVS | xargs rm -rf
 

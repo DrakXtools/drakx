@@ -199,7 +199,7 @@ sub new($$) {
 		my $dir = "/usr/X11R6/bin";
 		unless (-x "$dir/XF86_$_") {
 		    unlink $_ foreach glob_("$dir/XF86_*");
-		    local *F; open F, ">$dir/XF86_$_" or die '';
+		    local *F; open F, ">$dir/XF86_$_" or die "failed to write server: $!";
 		    local $/ = \ (16 * 1024);
 		    my $f = install_any::getFile("$dir/XF86_$_") or next;
 		    syswrite F, $_ foreach <$f>;

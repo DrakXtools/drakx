@@ -233,7 +233,7 @@ sub check_mntpoint {
 
     if ($part->{start} + $part->{size} > 1024 * $hd->cylinder_size() && arch() =~ /i386/) {
 	die "/boot ending on cylinder > 1024" if $mntpoint eq "/boot";
-	die     "/ ending on cylinder > 1024" if $mntpoint eq "/" && !has_mntpoint("/boot", $hds);
+#	die     "/ ending on cylinder > 1024" if $mntpoint eq "/" && !has_mntpoint("/boot", $hds);
     }
 }
 
