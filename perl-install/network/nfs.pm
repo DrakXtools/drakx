@@ -29,8 +29,9 @@ sub to_dev_raw {
 
 sub check {
     my ($_class, $in) = @_;
-    $in->do_pkgs->ensure_is_installed('nfs-utils-clients', '/usr/sbin/showmount');
+    $in->do_pkgs->ensure_is_installed('nfs-utils-clients', '/usr/sbin/showmount') or return;
     system('/etc/init.d/portmap start') if system('/etc/init.d/portmap status') != 0;
+    1;
 }
 
 sub find_servers {
