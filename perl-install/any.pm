@@ -710,7 +710,7 @@ sub selectCountry {
 		    messages => N("Please choose your country."),
 		    interactive_help_id => 'selectCountry',
 		    advanced_messages => N("Here is the full list of available countries"),
-		    advanced_label => N("More"),
+		    advanced_label => N("Other Countries"),
 		    advanced_state => $ext_country && scalar(@best),
 		    callbacks => { changed => sub { $other = $_[0] == 1 } },
 		  },
