@@ -456,7 +456,7 @@ int main(int argc __attribute__ ((unused)), char **argv __attribute__ ((unused))
 	sync(); sync();
 
 	if (!abnormal_termination) {
-		printf("rebooting system in 10 seconds\n");
+		printf("automatic reboot in 10 seconds\n");
                 sleep(10);
 		reboot(0xfee1dead, 672274793, 0x01234567);
 	} else {
