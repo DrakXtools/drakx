@@ -19,7 +19,7 @@ XFree86-Sun XFree86-SunMono XFree86-Sun24 XFree86-3DLabs kernel-BOOT
 MySQL MySQL_GPL mod_php3 midgard postfix metroess metrotmpl
 hackkernel hackkernel-BOOT hackkernel-fb hackkernel-headers
 hackkernel-pcmcia-cs hackkernel-smp hackkernel-smp-fb 
-autoirpm autoirpm-icons numlock
+autoirpm autoirpm-icons numlock kernel-linus
 );
 
 my %by_lang = (

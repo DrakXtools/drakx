@@ -253,7 +253,7 @@ _("Color depth options") => { val => \$printer->{BITSPERPIXEL}, type => 'list', 
 	    if (@lpq_output) {
 		$action = $in->ask_yesorno('', _("Test page(s) have been sent to the printer daemon.
 This may take a little time before printer start.
-Does it work properly? Printing status:\n%s", "@lpq_output"), 1) ? 'done' : 'change';
+Printing status:\n%s\n\nDoes it work properly?", "@lpq_output"), 1) ? 'done' : 'change';
 	    } else {
 		$action = $in->ask_yesorno('', _("Test page(s) have been sent to the printer daemon.
 This may take a little time before printer start.

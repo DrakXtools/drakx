@@ -146,6 +146,7 @@ $resolution_wanted = "1024x768";
 
 %lines = (
 #-    'Cirrus Logic|GD 5446' => [ '	Option "no_bitblt"' ],
+      'Silicon Integrated Systems [SiS]|86C326' => [ '	Option "noaccel"' ],
 );
 
 #- most usefull server options have to be accessible at the beginning, since

@@ -411,9 +411,10 @@ sub autoDefaultDepth($$) {
     $best || $depth or die "no valid modes";
 }
 
-sub autoDefaultResolution(;$) {
-    my $size = round(shift || 14); #- assume a small monitor (size is in inch)
-    $monitorSize2resolution[$size] ||
+sub autoDefaultResolution {
+    my ($size, $isLaptop) = @_;
+    !$size && $isLaptop and return "1024x768";
+    $monitorSize2resolution[round($size || 14)] || #- assume a small monitor (size is in inch)
       $monitorSize2resolution[-1]; #- no corresponding resolution for this size. It means a big monitor, take biggest we have
 }
 
@@ -554,7 +555,7 @@ Try with another video card or monitor")), return;
     #- remove unusable resolutions (based on the video memory size and the monitor hsync rate)
     keepOnlyLegalModes($card, $o->{monitor});
 
-    my $res = $o->{resolution_wanted} || autoDefaultResolution($o->{monitor}{size});
+    my $res = $o->{resolution_wanted} || autoDefaultResolution($o->{monitor}{size}, );
     my $wres = first(split 'x', $res);
     my $depth = eval { $card->{default_depth} || autoDefaultDepth($card, $wres) };
 
@@ -746,7 +747,7 @@ sub show_info {
 #- Program entry point.
 sub main {
     my ($o, $allowFB);
-    ($prefix, $o, $in, $allowFB, $install) = @_;
+    ($prefix, $o, $in, $allowFB, $isLaptop, $install) = @_;
     $o ||= {};
     
     XF86check_link();
@@ -758,7 +759,7 @@ sub main {
 
 	$o->{monitor} = monitorConfiguration($o->{monitor}, $o->{card}{server} eq 'FBDev');
     }
-    my $ok = resolutionsConfiguration($o, auto => $::auto, noauto => $::noauto);
+    my $ok = resolutionsConfiguration($o, auto => $::auto, noauto => $::noauto, isLaptop => $isLaptop);
 
     $ok &&= testFinalConfig($o, $::auto, $::skiptest);
 

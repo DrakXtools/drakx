@@ -182,7 +182,7 @@ sub new($$) {
 		unless (fork) {
 		    exec $_[0], "-kb", "-dpms","-s" ,"240", "-allowMouseOpenFail", "-xf86config", $f or exit 1;
 		}
-		foreach (1..10) {
+		foreach (1..15) {
 		    sleep 1;
 		    return 0 if !$ok;
 		    return 1 if c::Xtest($ENV{DISPLAY});

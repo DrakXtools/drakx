@@ -489,6 +489,7 @@ sub addUser($) {
 	    if $u->{uid} != $u->{oldu} || $u->{gid} != $u->{oldg};
 
     }
+    require any;
     any::addUsers($o->{prefix}, map { $_->{name} } @l);
 }
 
@@ -575,7 +576,7 @@ sub setupXfree {
     { local $::testing = 0; #- unset testing
       local $::auto = 1;
       local $::skiptest = 1;
-      Xconfigurator::main($o->{prefix}, $o->{X}, class_discard->new, $o->{allowFB}, sub {
+      Xconfigurator::main($o->{prefix}, $o->{X}, class_discard->new, $o->{allowFB}, bool($o->{pcmcia}), sub {
          install_any::pkg_install($o, "XFree86-$_[0]");
       });
     }

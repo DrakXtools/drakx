@@ -427,9 +427,36 @@ sub installCrypto {
     }
     
     is_empty_hash_ref($u) and $o->ask_yesorno('', 
-"Do you want to download cryptographic packages?
-(! !)
-  ") || return;
+_("You have now the possibility to download software aimed for encryption.
+
+WARNING:
+
+Due to different general requirements applicable to these software and imposed
+by various jurisdictions, customer and/or end user of theses software should
+ensure that the laws of his/their jurisdiction allow him/them to download, stock
+and/or use these software.
+
+In addition customer and/or end user shall particularly be aware to not infringe
+the laws of his/their jurisdiction. Should customer and/or end user do not
+respect the provision of these applicable laws, he/they will incur serious
+sanctions.
+
+In no event shall Mandrakesoft nor its manufacturers and/or suppliers be liable
+for special, indirect or incidental damages whatsoever (including, but not
+limited to loss of profits, business interruption, loss of commercial data and
+other pecuniary losses, and eventual liabilities and indemnification to be paid
+pursuant to a court decision) arising out of use, possession, or the sole
+downloading of these software, to which customer and/or end user could
+eventually have access after having sign up the present agreement.
+
+The present agreement shall be governed and construed pursuant to the laws of
+France except to the extent that the application of local laws is required by
+mandatory laws of public order. However this agreement expressly excludes any
+conflict of laws, principles, choice of law or rule to the contrary. Therefore
+French laws shall prevail on any other local laws.
+
+For any queries relating to these agreement, please contact Mandrakesoft 43, rue
+d'Aboukir, 75002 Paris FRANCE")) || return;
 
     require crypto;
     eval {
@@ -812,7 +839,7 @@ sub setupXfree {
       local $::noauto = $::expert && !$o->ask_yesorno('', _("Try to find PCI devices?"), 1);
       $::noauto = $::noauto; #- no warning
 
-      Xconfigurator::main($o->{prefix}, $o->{X}, $o, $o->{allowFB}, sub {
+      Xconfigurator::main($o->{prefix}, $o->{X}, $o, $o->{allowFB}, bool($o->{pcmcia}), sub {
 	  install_any::pkg_install($o, "XFree86-$_[0]");
       });
     }

@@ -6,7 +6,9 @@ use strict;
 #-######################################################################################
 #- misc imports
 #-######################################################################################
-use common qw(:file :system :common :functional);
+use common qw(:system :file);
+use commands;
+use run_program;
 
 sub addKdmUsers {
     my ($prefix, @users) = @_;
@@ -14,13 +16,13 @@ sub addKdmUsers {
     my @u1 = my @users_male = qw(tie default curly);
     my @u2 = my @users_female = qw(brunette girl woman-blond);
     foreach (@users) {
-	my $l = rand() < timezone::sexProb($_->{name}) ? \@u2 : \@u1;
+	my $l = rand() < timezone::sexProb($_) ? \@u2 : \@u1;
 	my $u = splice(@$l, rand(@$l), 1); #- known biased (see cookbook for better)
-	symlink "../../../../icons/user-$u-mdk.xpm", "$prefix/usr/share/apps/kdm/pics/users/$_.xpm";
+	eval { commands::cp "$prefix/usr/share/icons/user-$u-mdk.xpm", "$prefix/usr/share/apps/kdm/pics/users/$_.xpm" };
 	@u1 = @users_male   unless @u1;
 	@u2 = @users_female unless @u2;
     }
-    symlinkf "../../../../icons/user-hat-mdk.xpm", "$prefix/usr/share/apps/kdm/pics/users/root.xpm" unless $::isStandalone;
+    eval { commands::cp "-f", "$prefix/usr/share/icons/user-hat-mdk.xpm", "$prefix/usr/share/apps/kdm/pics/users/root.xpm" } unless $::isStandalone;
 }
 
 sub addUsers {

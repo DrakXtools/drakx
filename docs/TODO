@@ -1,20 +1,26 @@
-pcmcia.img does not handle hd/cdrom
+test ramdisk stage2 and romanian
 
-cyrillic font buggy in DrakX
+bug with 2 cdrom drives (.kdelnk to there for 1st drive)
 
-remove xfs user from kdm
-
-bug in users: mandrake user is added twice in strange installs
-(mixed of security 0 + ???)
+mkinitrd and deps
 
 mandrake_doc-xx, the symlink is no good in /usr/doc/mandrake as 
 
-in ftp install, bug with X server install with wu-ftpd 2.6 (see http://www.wu-ftpd.org/broken-clients.html)
+(done,pix)crypto message
 
 --------------------------------------------------------------------------------
+bug in users: mandrake user is added twice in strange installs
+(mixed of security 0 + ???)
+
+bug when selecting compssUsers, do not deselect after (if u deselect)
+
+in ftp install, bug with X server install with wu-ftpd 2.6 (see http://www.wu-ftpd.org/broken-clients.html)
+
 bug rpmdrake: just after installing a package, switch to `Installed', the package has wrong name
 
 urpmi: pb if XXX-devel requires XXX = 1.2.3 and we updgrade XXX-1.2.3
+
+auto ppp-configure with free provider
 
 standalone applications for configuration (netdrake, authentificationconf, soundcard)
 
@@ -227,4 +233,10 @@ suggested partition tables must be better foreach installClass
 (done,pix)rpmdrake: Installed packages not in hdlist should be there
 
 (done)in ftp install, locale not installed properly
+
+(done,pix)pcmcia.img does not handle hd/cdrom
+
+(done,pix)cyrillic font buggy in DrakX
+
+(done,fred)remove xfs user from kdm
 
