@@ -140,7 +140,9 @@ sub may_apply { $_[0] ? $_[0]->($_[1]) : (@_ > 2 ? $_[2] : $_[1]) }
 
 sub if_($@) {
     my $b = shift;
-    $b ? @_ : ();
+    $b or return ();
+    wantarray || @_ <= 1 or die "if_ called in scalar context with more than one argument";
+    wantarray ? @_ : $_[0];
 }
 
 sub arch() {
