@@ -487,23 +487,23 @@ default linux
 display help.msg
 label linux
   kernel alt0/vmlinuz
-  append ramdisk_size=32000 initrd=alt0/all.rdz root=/dev/ram3 vga=788
+  append ramdisk_size=32000 initrd=alt0/all.rdz root=/dev/ram3 vga=788 changedisk
 label vgalo
   kernel alt0/vmlinuz
-  append ramdisk_size=32000 initrd=alt0/all.rdz root=/dev/ram3 vga=785
+  append ramdisk_size=32000 initrd=alt0/all.rdz root=/dev/ram3 vga=785 changedisk
 label vgahi
   kernel alt0/vmlinuz
-  append ramdisk_size=32000 initrd=alt0/all.rdz root=/dev/ram3 vga=791
+  append ramdisk_size=32000 initrd=alt0/all.rdz root=/dev/ram3 vga=791 changedisk
 label vga16
   kernel alt0/vmlinuz
-  append ramdisk_size=32000 initrd=alt0/all.rdz root=/dev/ram3 vga16
+  append ramdisk_size=32000 initrd=alt0/all.rdz root=/dev/ram3 vga16 changedisk
 label text
   kernel alt0/vmlinuz
-  append ramdisk_size=32000 initrd=alt0/all.rdz root=/dev/ram3 text
+  append ramdisk_size=32000 initrd=alt0/all.rdz root=/dev/ram3 text changedisk
 " . join('', map_index { 
 "label alt$::i
   kernel alt$::i/vmlinuz
-  append ramdisk_size=32000 initrd=alt$::i/all.rdz root=/dev/ram3 vga=788
+  append ramdisk_size=32000 initrd=alt$::i/all.rdz root=/dev/ram3 vga=788 changedisk
 " } @kernels);
 
     output "isolinux/help.msg", 
