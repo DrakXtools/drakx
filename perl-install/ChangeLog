@@ -1,3 +1,105 @@
+2001/08/30  dam's  <damien@mandrakesoft.com>
+
+	* interactive.pm: corrected icon display
+
+	* my_gtk.pm: new wizard
+
+	* interactive_gtk.pm: corrected wizard mode display height/width
+
+	* standalone/draknet: added draknet client installation
+
+	* network/network.pm: track_network_id only if laptop
+	dhcp package installation
+
+	* pixmaps/wiz_default_left.png: new logo
+
+2001/08/30  François Pons  <fpons@mandrakesoft.com>
+
+	* mouse.pm: make sure to update all symlink according to any mouse (max 2)
+	probed.
+	fix previous fixes on mouse::write_conf
+
+	* standalone/mousedrake: fix previous fix (typo).
+	keep mouse specific paramater if user does not change its mouse.
+	make sure --auto is not interactive on some part.
+	use default value for port device if a serial mouse.
+
+	* printer.pm: fixed foomatic failed (no lo up since ifup lo don't run)
+
+	* Makefile: ugly to make sure standalone/pixmaps is not here when building
+	tar-drakxtools.
+
+	* Xconfig.pm: when reading existing configuration for mouse, update
+	type|name for second mouse too.
+	make sure default to set 3 for nbuttons for getinfoFromXF86Config for
+	second
+	mouse if this mouse has 3 buttons.
+
+	* Xconfigurator.pm: for single heads mode, no screen id should be set in
+	file (or XFree is going
+	mad, but he is right, no ?)
+
+	* install_any.pm: if a medium is refused, get rid of it definitively until
+	it is accepted again.
+
+2001/08/30  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* install_steps_interactive.pm: have a wait_message during installation of
+	bootloader
+
+	* mdk-stage1/pcmcia/pcmcia_probe.c: import new PCI ID's for more PCMCIA
+	Controllers, from probe.c-1.54 of pcmcia-cs-3.1.28
+
+2001/08/30  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/ja.po, share/po/vi.po, share/po/es.po: updated Japanese,
+	Spanish and Vietnamese files
+
+2001/08/30  Pixel  <pixel@mandrakesoft.com>
+
+	* diskdrake_interactive.pm: allow LVM on RAID
+
+	* help.pm: fixed (was utf8)
+
+	* any.pm: cleanup
+
+	* pkgs.pm (naughtyServers): update for 8.1
+
+	* lang.pm (read): it works now
+
+	* fs.pm (set_default_options): "ro" for cdroms, "user" for vfat only if
+	removable
+	media
+
+	* share/po/Makefile: fix utf8 translation of xml file
+
+	* interactive_gtk.pm: fix&cleanup window size
+
+	* tools/Makefile: cleanup unneeded stuff
+
+2001/08/30  siegel
+
+	* share/po/de.po: new german version
+
+2001/08/30  warly
+
+	* share/rpmsrate: add koffice-i18n diald vlan-utils
+
+2001/08/29  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* standalone/drakgw, standalone/drakautoinst: quit_global
+
+	* share/po/fr.po: minor fix
+
+2001/08/29  Pixel  <pixel@mandrakesoft.com>
+
+	* install_steps_interactive.pm: fix language selection
+
+	* c.pm: better error message when function c::foo() is missing
+
+	* rescue/dirs, rescue/make_rescue_img: make it work (do not have the dev
+	in /)
+
 2001/08/29  François Pons  <fpons@mandrakesoft.com>
 
 	* pkgs.pm: fixed if undef encountered in depslist when installing package
