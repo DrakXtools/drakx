@@ -62,6 +62,9 @@ our %l = (
       qw(cdc-acm b1pci c4 hisax hisax_fcpcipnp hysdn t1pci tpam divas),
       qw(fcpci fcdsl fcdsl fcdsl2 fcdslsl fcdslslusb fcdslusb fcdslusba fcusb fcusb2 fxusb fxusb_CZ)
     ],
+    slmodem => [
+      qw(slamr slusb snd-atiixp-modem snd-intel8x0m snd-via82xx-modem),
+    ],
   },
 
   ################################################################################
