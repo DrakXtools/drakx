@@ -370,13 +370,17 @@ if ($reconf_dhcp_server_intf && !$::testing) {
     my $network_scripts = "/etc/sysconfig/network-scripts";
     my $ifcfg = "$network_scripts/ifcfg-$device";
     renamef($ifcfg, "$network_scripts/old.ifcfg-$device");
-    output($ifcfg, qq(DEVICE=$device
+    output($ifcfg,
+           join('', qq(DEVICE=$device
 BOOTPROTO=static
 IPADDR=$server_ip
 NETMASK=$netmask
 NETWORK=$lan_address.0
 BROADCAST=$lan_address.255
 ONBOOT=yes
+),
+                if_($conf && $conf->{MII_NOT_SUPPORTED},
+                    "MII_NOT_SUPPORTED=$conf->{MII_NOT_SUPPORTED}")
 ));
 }
 
