@@ -67,7 +67,7 @@ my %fields =
      "type" => [ N("Type"), N("the type of bus on which the mouse is connected") ],
      "Vendor" => [ N("Vendor"), N("the vendor name of the device") ],
      "vendor_id" => [ N("Vendor"), N("the vendor name of the processor") ],
-     "wp" => [ N("Write protection"), N("the WP flag in the CR0 register enforce write proctection at the memory page level, thus enabling the processor to prevent kernel accesses)") ],
+     "wp" => [ N("Write protection"), N("the WP flag in the CR0 register of the cpu enforce write proctection at the memory page level, thus enabling the processor to prevent unchecked kernel accesses to user memory (aka this is a bug guard)") ],
      );
 
 
