@@ -79,8 +79,10 @@ set_loop (const char *device, const char *file, int gz)
 	strncpy(loopinfo.lo_name, file, LO_NAME_SIZE);
 	loopinfo.lo_name[LO_NAME_SIZE - 1] = 0;
 	loopinfo.lo_offset = 0;
-        if (gz)
+        if (gz) {
+                my_insmod("gzloop", ANY_DRIVER_TYPE, NULL);
                 loopinfo.lo_encrypt_type = 13; /* LO_CRYPT_GZ */
+        }
 
 #ifdef MCL_FUTURE  
 	/*
