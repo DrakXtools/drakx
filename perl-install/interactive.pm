@@ -315,7 +315,7 @@ sub ask_from_normalize {
     $common->{advanced_label} ||= _("Advanced");
     $common->{advanced_label_close} ||= _("Basic");
     $common->{$_} = [ deref($common->{$_}) ] foreach qw(messages advanced_messages);
-    add2hash_($common, { ok => _("Ok"), cancel => _("Cancel") }) if !exists $common->{ok} && !$::isWizard;
+    add2hash_($common, { ok => _("Ok"), cancel => _("Cancel") }) if !exists $common->{ok}; # && !$::isWizard;
     add2hash_($common->{callbacks} ||= {}, { changed => sub {}, focus_out => sub {}, complete => sub { 0 }, canceled => sub { 0 } });
 }
 
