@@ -280,6 +280,15 @@ sub read_printer_db(;$) {
 
     %thedb and return;
 
+    my %available_devices; #- keep only available devices in our database.
+    local *AVAIL; open AVAIL, "$prefix/usr/bin/gs --help |";
+    foreach (<AVAIL>) {
+	if (/^Available devices:/ ... /^\S/) {
+	    @available_devices{split /\s+/, $_} = () if /^\s+/;
+	}
+    }
+    delete $available_devices{''};
+
     local $_; #- use of while (<...
     local *DBPATH; #- don't have to do close ... and don't modify globals at least
     open DBPATH, $dbpath or die "An error has occurred on $dbpath : $!";
@@ -314,8 +323,10 @@ sub read_printer_db(;$) {
 		      /EndEntry/ and last WHILE;
 		  }
 	      }
-	    $thedb{$entryname} = $entry;
-	    $thedb_gsdriver{$entry->{GSDRIVER}} = $entry;
+	    if (exists $available_devices{$entry->{GSDRIVER}}) {
+		$thedb{$entryname} = $entry;
+		$thedb_gsdriver{$entry->{GSDRIVER}} = $entry;
+	    }
 	}
     }
 
@@ -413,10 +424,8 @@ sub read_configured_queue($) {
 			BITSPERPIXEL => $13 || $14,
 			CRLF => $15 || $16,
 		       };
-	    print STDERR "found printer $current->{QUEUE} of type $current->{TYPE} in $prefix/etc/printcap\n";
 	} elsif (/^([^:]*):\\/) {
 	    $current->{QUEUE} = $1;
-	    print STDERR "found printer $current->{QUEUE} of type $current->{TYPE} in $prefix/etc/printcap\n";
 	} elsif (/^\s+:sd=([^:]*):\\/) {
 	    $current->{SPOOLDIR} = $1;
 	} elsif (/^\s+:lp=([^:]*):\\/) {
