@@ -362,10 +362,12 @@ Take a look at http://www.linmodems.org"),
                     },
                     name => N("Select the modem to configure:"),
                     data => sub {
-                        [ { label => N("Modem"), type => "list", val => \$modem_name, list => [ keys %{$netc->{autodetect}{modem}} ], allow_empty_list => 1 } ],
+                        [ { label => N("Modem"), type => "list", val => \$modem_name, allow_empty_list => 1,
+                            list => [ keys %{$netc->{autodetect}{modem}}, N("Manual choice") ], } ],
                     },
                     post => sub {
                         $modem ||= $netcnx->{modem} ||= {};;
+                        return 'choose_serial_port' if $modem_name eq N("Manual choice");
                         $ntf_name = $netc->{autodetect}{modem}{$modem_name}{device} || $netc->{autodetect}{modem}{$modem_name}{description};
 
                         return "ppp_provider" if $ntf_name =~ m!^/dev/!;
@@ -401,7 +403,10 @@ Take a look at http://www.linmodems.org"),
                         [ { varl=> \$modem->{device}, format => \&mouse::serial_port2text, type => "list",
                             list => [ grep { $_ ne $o_mouse->{device} } (if_(-e '/dev/modem', '/dev/modem'), mouse::serial_ports()) ] } ],
                         },
-                    next => "ppp_provider",
+                    post => sub {
+                        $ntf_name = $modem->{device};
+                        return 'ppp_provider';
+                    },
                    },
 
 
