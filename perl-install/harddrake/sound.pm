@@ -117,6 +117,15 @@ my %oss2alsa =
 	"ymfpci"  => [ "snd-ymfpci" ]
 	);
 
+my @blacklist = (qw(cs46xx cs4281));
+my $blacklisted = 0;
+
+sub rooted { run_program::rooted($::prefix, @_) }
+
+sub unload { modules::unload(@_) if $::isStandalone || $blacklisted }
+
+sub load { modules::load(@_) if $::isStandalone || $blacklisted }
+
 sub get_alternative {
     my ($driver) = @_;
     if ($alsa2oss{$driver}) {
@@ -126,29 +135,32 @@ sub get_alternative {
     } else { undef }
 }
 
+
 sub do_switch {
     my ($old_driver, $new_driver) = @_;
     standalone::explanations("removing old $old_driver\n");
-    run_program::run("service sound stop");
-    run_program::run("service alsa stop") if $old_driver =~ /^snd-/;
-    modules::unload($old_driver); #    run_program("/sbin/modprobe -r $driver"); # just in case ...
+    rooted("service sound stop") unless $blacklisted;
+    rooted("service alsa stop") if $old_driver =~ /^snd-/ && !$blacklisted;
+    unload($old_driver); #    run_program("/sbin/modprobe -r $driver"); # just in case ...
     modules::remove_module($old_driver); # completed by the next add_alias()
     modules::add_alias("sound-slot-$::i", $new_driver);
     modules::write_conf;
     if ($new_driver =~ /^snd-/) {
-	   run_program::run("service alsa start");
-	   run_program::run("/sbin/chkconfig --add alsa");
-	   modules::load($new_driver); # service alsa is buggy
+	   rooted("service alsa start") unless $blacklisted;
+	   rooted("/sbin/chkconfig --add alsa");
+	   load($new_driver); # service alsa is buggy
     } else { run_program::run("/sbin/chkconfig --del alsa") }
     standalone::explanations("loading new $new_driver\n");
-    run_program::run("/sbin/chkconfig --add sound"); # just in case ...
-    run_program::run("service sound start");
+    rooted("/sbin/chkconfig --add sound"); # just in case ...
+    rooted("service sound start") unless $blacklisted;
 }
 
 sub switch {
     my ($in, $device) = @_;
     my $driver = $device->{driver};
     $driver = modules::get_alias($driver) if $driver =~ /sound-card/; # alsaconf ...
+    foreach (@blacklist) { print " $blacklisted\n$driver, $_,"; $blacklisted = 1 if $driver eq $_ }
+    print "the current $driver is ", $blacklisted ? '' : 'not ', "blacklisted ($blacklisted)\n\n";
     my $alternative = get_alternative($driver);
     if ($alternative) {
 	   my $new_driver = $alternative->[0];
@@ -185,6 +197,9 @@ To use alsa, one can either use:
 	   {
 		  return if ($new_driver eq $driver);
 		  standalone::explanations("switching audio driver from '$driver' to '$new_driver'\n");
+		  $in->ask_warn(_("Warning"), _("The old \"%s\" driver is blacklisted.\n
+It has been reported to oopses the kernel on unloading.\n
+The new \"%s\" driver'll only be used on next bootstrap.", $driver, $new_driver)) if $blacklisted;
 		  do_switch($driver, $new_driver);
 	   }
     } elsif ($driver eq "unknown") {
@@ -205,3 +220,5 @@ sub config {
     my ($in, $device) = @_;
     switch($in, $device);
 }
+
+1;
