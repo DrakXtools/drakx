@@ -338,8 +338,8 @@ notation (for example, 1.2.3.4).");
     my $auto_ip = $intf->{BOOTPROTO} !~ /static/;
     my $onboot = $intf->{ONBOOT} ? $intf->{ONBOOT} =~ /yes/ : bool2yesno(!member($intf->{DEVICE}, map { $_->{device} } detect_devices::pcmcia_probe()));
     my $needhostname = $intf->{NEEDHOSTNAME} !~ /no/; 
-    my $hotplug = $::isStandalone && !$intf->{MII_NOT_SUPPORTED} or 1;
-    my $track_network_id = $::isStandalone && $intf->{HWADDR} or detect_devices::isLaptop();
+    my $hotplug = $::isStandalone && !$intf->{MII_NOT_SUPPORTED} || 1;
+    my $track_network_id = $::isStandalone && $intf->{HWADDR} || detect_devices::isLaptop();
     delete $intf->{NETWORK};
     delete $intf->{BROADCAST};
     my @fields = qw(IPADDR NETMASK);
@@ -550,7 +550,7 @@ sub easy_dhcp {
 sub configureNetwork2 {
     my ($in, $prefix, $netc, $intf) = @_;
     my $etc = "$prefix/etc";
-    
+
     $netc->{wireless_eth} and $in->do_pkgs->install(qw(wireless-tools));
     write_conf("$etc/sysconfig/network", $netc);
     write_resolv_conf("$etc/resolv.conf", $netc) if ! $netc->{DHCP};
