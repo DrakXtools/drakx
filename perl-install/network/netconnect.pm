@@ -166,7 +166,7 @@ If you don't want to use the auto detection, deselect the checkbox.
 	$netc->{internet_cnx_choice} = (keys %{$netc->{internet_cnx}})[0];
     }
     
-    eval { $in->ask_yesorno(N("Network configuration"), N("Configuration is complete, do you want to apply settings ?"), 1) or goto step_2_2 };
+    eval { $in->ask_yesorno(N("Network configuration"), N("Configuration is complete, do you want to apply settings ?"), 1) or goto step_2_2 } if !$::isInstall;
     $in->exit(0) if $@ =~ /wizcancel/;
     
     member($netc->{internet_cnx_choice}, ('adsl', 'isdn')) and $netc->{at_boot} = $in->ask_yesorno(N("Network Configuration Wizard"), N("Do you want to start the connection at boot?"));
