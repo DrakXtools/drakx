@@ -228,7 +228,7 @@ sub add_kernel {
 	symlinkf("initrd-$version.img", "$::prefix$initrd") or cp_af("$::prefix/boot/initrd-$version.img", "$::prefix$initrd");
     }
 
-    my $label = $ext =~ /-(default)/ ? $1 : ($ext =~ /\d\./ ? sanitize_ver("linux$ext") : "linux$ext");
+    my $label = $ext =~ /-(default)/ ? $1 : ($ext =~ /\d\./ ? sanitize_ver("linux-$version") : "linux$ext");
 
     #- more yaboot concessions - PPC
     if (arch() =~ /ppc/) {
