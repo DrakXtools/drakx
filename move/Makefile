@@ -43,7 +43,7 @@ install: build
 	sudo cp -f $(addprefix $(INSTALL)/, $(shell cd $(DEST_LIVETREE)/usr/lib/libDrakX ; ls *.pm)) $(DEST_LIVETREE)/usr/lib/libDrakX || :
 
 	 #- overwrite stuff.so of drakxtools because it doesn't contain C_DRAKX stuff
-	sudo cp -f ../perl-install/c/blib/arch/auto/stuff/stuff.so `find $(DEST_LIVETREE)/usr/lib* | grep stuff/stuff.so`
+	sudo cp -f ../perl-install/c/blib/arch/auto/stuff/stuff.so $(DEST_LIVETREE)/usr/lib/libDrakX/auto/c/stuff
 
 	 #- duplicated :(
 	sudo perl -pi -e 's/#[-+].*//; $$_ = "\n" if (/^=(head|begin)/ .. /^=cut/) || /use (diagnostics|vars|strict)/' $(DEST_STAGE2)/*.pm $(DEST_LIVETREE)/usr/lib/libDrakX/*.pm
