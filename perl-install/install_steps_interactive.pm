@@ -567,17 +567,23 @@ sub chooseGroups {
     } @groups;
 
 #    @groups = grep { $size{$_} = round_down($size{$_} / sqr(1024), 10) } @groups; #- don't display the empty or small one (eg: because all packages are below $min_level)
-    my ($all, $old_size);
+    my ($all, $size);
+    my $available_size = install_any::getAvailableSpace($o) / sqr(1024);
     my $size_to_display = sub { 
-	my $size = $system_size + $compute_size->(map { @{$compssUsers->{$_}{flags}} } grep { $val{$_} } @groups);
+	my $lsize = $system_size + $compute_size->(map { @{$compssUsers->{$_}{flags}} } grep { $val{$_} } @groups);
 
 	#- if a profile is deselected, deselect everything (easier than deselecting the profile packages)
-	$old_size > $size and install_any::unselectMostPackages($o);
-	$old_size = $size;
-	_("Selected size %d%s", pkgs::correctSize($size / sqr(1024)), _("MB"));
+	$size > $lsize and install_any::unselectMostPackages($o);
+	$size = $lsize;
+	_("Total size: %d / %d MB", pkgs::correctSize($size / sqr(1024)), $available_size);
     };
 
-    $o->reallyChooseGroups($size_to_display, $individual, \%val) or return;
+    while (1) {
+	$o->reallyChooseGroups($size_to_display, $individual, \%val) or return;
+	last if pkgs::correctSize($size / sqr(1024)) < $available_size;
+       
+	$o->ask_warn('', _("Selected size is larger than available space"));	
+    }
 
     $o->{compssUsersChoice}{$_} = 0 foreach map { @{$compssUsers->{$_}{flags}} } grep { !$val{$_} } keys %val;
     $o->{compssUsersChoice}{$_} = 1 foreach map { @{$compssUsers->{$_}{flags}} } grep {  $val{$_} } keys %val;
