@@ -199,7 +199,7 @@ sub detect {
 		}
 	    }
 	}
-	@res = map { $_->{configured} ? () : $_; } @res;
+	@res = grep { ! $_->{configured} } @res;
     }
     return @res;
 }
