@@ -70,8 +70,7 @@ sub mirrors {
 	my $sub_dir = $distro_type =~ /cooker|community/ ? '' : '/' . version() . '/main_updates';
 	foreach (<$f>) {
 	    my ($arch, $url, $dir) = m|$distro_type([^:]*):ftp://([^/]*)(/\S*)| or next;
-	    MDK::Common::System::compat_arch($arch) or
-		log::l("ignoring updates from $url because of incompatible arch: $arch"), next;
+	    MDK::Common::System::compat_arch($arch) or next;
 	    my $land = N("United States");
 	    foreach (keys %url2land) {
 		my $qu = quotemeta $_;
