@@ -140,7 +140,7 @@ our @tree =
       icon => "tv.png",
       configurator => "/usr/bin/XawTV",
       detector => sub { f(grep { $_->{media_type} =~ /MULTIMEDIA_VIDEO/ && $_->{bus} eq 'PCI' || $_->{driver} eq 'usbvision' } @devices) },
-      checked_on_boot => 0,
+      checked_on_boot => 1,
      },
      
      {
