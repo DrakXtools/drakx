@@ -1919,11 +1919,11 @@ sub check_network {
 
     $in->set_help('checkNetwork') if $::isInstall;
 
-    # First check: Does /etc/sysconfig/network-scripts/draknet_conf exist
-    # (otherwise the network is not configured yet and draknet has to be
+    # First check: Does /etc/sysconfig/network-scripts/drakconnet_conf exist
+    # (otherwise the network is not configured yet and drakconnet has to be
     # started)
 
-    if (!printer::files_exist("/etc/sysconfig/network-scripts/draknet_conf")) {
+    if (!printer::files_exist("/etc/sysconfig/network-scripts/drakconnet_conf")) {
 	my $go_on = 0;
 	while (!$go_on) {
 	    my $choice = _("Configure the network now");
@@ -1942,9 +1942,9 @@ sub check_network {
 			     $in->{lang} eq "fr_FR" && 
 			     $in->{keyboard} eq "fr", 0);
 		    } else {
-			system("/usr/sbin/draknet");
+			system("/usr/sbin/drakconnet");
 		    }
-		    if (printer::files_exist("/etc/sysconfig/network-scripts/draknet_conf")) {
+		    if (printer::files_exist("/etc/sysconfig/network-scripts/drakconnet_conf")) {
 			$go_on = 1;
 		    }
 		} else {
@@ -2556,8 +2556,7 @@ sub main {
 		$::isWizard = 1;
 		# Wizard welcome screen
 		$::Wizard_no_previous = 1;
-		undef $::Wizard_no_cancel;
-		undef $::Wizard_finished;
+		undef ($::Wizard_no_cancel, $::Wizard_finished);
 		wizard_welcome($printer, $in) or do {
 		    wizard_close($in, 0);
 		    next;
