@@ -739,9 +739,9 @@ sub setupBootloaderBefore {
 				    !detect_devices::matching_desc('S3 Inc') &&
 				    !detect_devices::matching_desc('Matrox') &&
 				    !detect_devices::matching_desc('Rage Mobility')
-				   ) && $o->{vga};
+				   );
 	my $force_vga = $o->{allowFB} && (detect_devices::matching_desc('SiS.*630') #- SiS 630 need frame buffer.
-					 ) && $o->{vga};
+					 );
 
 	require bootloader;
 	#- propose the default fb mode for kernel fb, if aurora is installed too.
@@ -750,7 +750,7 @@ sub setupBootloaderBefore {
 	    $p && pkgs::packageFlagInstalled($p);
 	};
         bootloader::suggest($o->{prefix}, $o->{bootloader}, $o->{all_hds}{hds}, $o->{fstab}, install_any::kernelVersion($o),
-			    $force_vga || $vga && $has_aurora);
+			    ($force_vga || $vga && $has_aurora) && $o->{vga});
 	bootloader::suggest_floppy($o->{bootloader}) if $o->{security} <= 3 && arch() !~ /ppc/;
 
 	$o->{bootloader}{keytable} ||= keyboard::keyboard2kmap($o->{keyboard});
