@@ -14,7 +14,6 @@ use lang;
 sub new($$) {
     my ($type, $o) = @_;
 
-    $o->{partitioning}{readonly} = 1; #- needed til diskdrake is graphic only...
     (bless {}, ref $type || $type)->SUPER::new($o);
 }
 
