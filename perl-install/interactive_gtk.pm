@@ -482,7 +482,7 @@ sub ask_from_entries_refW {
 
     $pack->pack_start($advanced_pack, 1, 1, 0);
     gtkadd($mainw->{window}, $pack);
-    $mainw->{rwindow}->set_default_size(0, min(max(200, $always_total_size * 20), $::windowheight * 0.7)) if $has_scroll && !$::isEmbedded &&!$::isWizard;
+    $mainw->{rwindow}->set_default_size(250, min(max(200, $always_total_size * 20), $::windowheight * 0.7)) if $has_scroll && !$::isEmbedded &&!$::isWizard;
     $set_advanced->(0);
     (@widgets ? $widgets[0]{w} : $common->{focus_cancel} ? $mainw->{cancel} : $mainw->{ok})->grab_focus();
 
