@@ -4,8 +4,9 @@ use common;
 use any;
 
 sub kinds { 
+    my $no_para = @_ == 0;
     my ($meta_class) = @_;
-    my $allow_AD = $meta_class =~ /corporate/;
+    my $allow_AD = $no_para || $meta_class =~ /corporate/;
     ('local', 'LDAP', 'NIS', 'winbind', if_($allow_AD, 'AD', 'SMBKRB'));
 }
 
