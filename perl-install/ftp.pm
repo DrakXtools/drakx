@@ -30,13 +30,14 @@ sub new {
 	}
 
 	my $ftp;
-	while (1) {
+	foreach (1..10) {
 	    $ftp = Net::FTP->new(network::resolv($host), %options) or die;
 	    $ftp && $ftp->login($login, $password) and last;
 
-	    log::l("login failed, sleeping before trying again");
-	    sleep 10;
+	    log::l("ftp login failed, sleeping before trying again");
+	    sleep 5 * $_;
 	}
+	$ftp or die "unable to open ftp connection to $host";
 	$ftp->binary;
 	$ftp->cwd($prefix);
 
@@ -49,11 +50,14 @@ sub new {
 
 sub getFile {
     my ($f, @para) = @_;
-    foreach (1..2) {
+    foreach (1..3) {
 	my ($ftp, $retr) = new(@para ? @para : fromEnv);
 	$$retr->close if $$retr;
+	$f eq 'XXX' and return; #- special case to force closing connection on CD, really necessary here!
 	$$retr = $ftp->retr($f) and return $$retr;
 	rewindGetFile();
+	log::l("ftp get failed, sleeping before trying again");
+	sleep 2;
     }
 }
 
@@ -69,7 +73,8 @@ sub getFile {
 sub rewindGetFile() {
     #- close any existing connection.
     foreach (values %hosts) {
-	my ($ftp) = @{$_ || []};
+	my ($ftp, $retr) = @{$_ || []};
+	$$retr->close if $$retr;
 	$ftp->close() if $ftp;
     }
 
