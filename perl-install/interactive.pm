@@ -1,10 +1,11 @@
-
-
 package interactive;
 
 use diagnostics;
 use strict;
 
+#-######################################################################################
+#- misc imports
+#-######################################################################################
 use common qw(:common :functional);
 
 # heritate from this class and you'll get all made interactivity for same steps.
@@ -27,9 +28,10 @@ use common qw(:common :functional);
 # ask_from_listW should handle differently small lists and big ones.
 
 
-1;
 
-
+#-######################################################################################
+#- OO Stuff
+#-######################################################################################
 sub new($) {
     my ($type) = @_;
 
@@ -37,6 +39,9 @@ sub new($) {
 }
 
 
+#-######################################################################################
+#- Interactive functions
+#-######################################################################################
 sub ask_warn($$$) {
     my ($o, $title, $message) = @_;
     ask_from_list($o, $title, $message, [ _("Ok") ]);
@@ -100,7 +105,9 @@ sub ask_from_entries($$$$;$%) {
       [ map { $$_ } @$val ] : undef;
 
 }
-
+# can get a hash of callback: focus_out changed and complete
+# moreove if you pass a hash with a field list -> combo
+# if you pass a hash with a field hidden -> emulate stty -echo
 sub ask_from_entries_ref($$$$;$%) {
     my ($o, $title, $message, $l, $val, %callback) = @_;
     
@@ -109,8 +116,8 @@ sub ask_from_entries_ref($$$$;$%) {
 		     { if ((ref $_) eq "SCALAR") {
 			 { val => $_ }
 		     } else {
-			 @{$_->{list}} ?
-			   { (%{$_}, type => "list")} : {(%{$_})}
+			 ($_->{list} && @{$_->{list}}) ?
+			   { %{$_}, type => "list"} : $_
 		       }
 		   } @{$val} ];
 
@@ -138,3 +145,8 @@ sub kill {
     }
     $o->{before_killing} = @interactive::objects;
 }
+
+#-######################################################################################
+#- Wonderful perl :(
+#-######################################################################################
+1; # 

@@ -41,7 +41,7 @@ sub selectLanguage($) {
     my ($o) = @_;
     $o->{lang} =
       lang::text2lang($o->ask_from_list("Language",
-					__("Which language do you want?"), 
+					_("Which language do you want?"), 
 					# the translation may be used for the help
 					[ lang::list() ], 
 					lang::lang2text($o->{lang})));
@@ -147,13 +147,17 @@ sub configureNetwork($) {
 	    add2hash($intf, $last);
 	    add2hash($intf, { NETMASK => '255.255.255.0' });
 	    $o->configureNetworkIntf($intf);
+
+	    $o->{netc} ||= {};
+	    delete $o->{netc}{dnsServer};
+	    delete $o->{netc}{GATEWAY};
 	    $last = $intf;
 	}
 	#	 { 
 	#	     my $wait = $o->wait_message(_("Hostname"), _("Determining host name and domain..."));
 	#	     network::guessHostname($o->{prefix}, $o->{netc}, $o->{intf});
 	#	 }
-	$o->configureNetworkNet($o->{netc} ||= {}, @l);
+	$o->configureNetworkNet($o->{netc}, $last ||= {}, @l);
     }
     install_steps::configureNetwork($o);
 }
@@ -177,13 +181,19 @@ notation (for example, 1.2.3.4)."),
 				     }
 				     return 0;
 				 }
+			     },
+			     focus_out => sub {
+				 $intf->{NETMASK} = network::netmask($intf->{IPADDR}) unless $_[0]
 			     }
+
 			    );
 }
 
 sub configureNetworkNet {
-    my ($o, $netc, @devices) = @_;
-
+    my ($o, $netc, $intf, @devices) = @_;
+    $netc->{dnsServer} ||= network::dns($intf->{IPADDR});
+    $netc->{GATEWAY}   ||= network::gateway($intf->{IPADDR});
+    
     $o->ask_from_entries_ref(_("Configuring network"),
 _("Please enter your host name.
 Your host name should be a fully-qualified host name,
@@ -225,7 +235,7 @@ name (often lp) and a spool directory associated with it. What
 name and directory should be used for this queue?"),
 				 [_("Name of queue:"), _("Spool directory:")],
 				 [\$o->{printer}{QUEUE}, \$o->{printer}{SPOOLDIR}],
-				 focus_out => sub 
+				 changed => sub 
 				 { 
 				     $o->{printer}{SPOOLDIR} 
 				       = "$printer::spooldir/$o->{printer}{QUEUE}" unless $_[0];
@@ -274,30 +284,39 @@ on that server which jobs should be placed in."),
 					   );
 	
     } elsif ($o->{printer}{TYPE} eq "SMB") {
-	return if !$o->ask_from_entries_ref(_("SMB/Windows 95/NT Printer Options"),
-					    _("To print to a SMB printer, you need to provide the 
+	return if !$o->ask_from_entries_ref(
+	    _("SMB/Windows 95/NT Printer Options"),
+	    _("To print to a SMB printer, you need to provide the 
 SMB host name (this is not always the same as the machines 
 TCP/IP hostname) and possibly the IP address of the print server, as 
 well as the share name for the printer you wish to access and any 
 applicable user name, password, and workgroup information."),
-					    [_("SMB server host:"), _("SMB server IP:"),
-					     _("Share name:"), _("User name:"), _("Password:"),
-					     _("Workgroup:")],
-					    [\$o->{printer}{SMBHOST}, \$o->{printer}{SMBHOSTIP},
-					     \$o->{printer}{SMBSHARE}, \$o->{printer}{SMBUSER},
-					     \$o->{printer}{SMBPASSWD}, \$o->{printer}{SMBWORKGROUP}
-					    ]
+	    [_("SMB server host:"), _("SMB server IP:"),
+	     _("Share name:"), _("User name:"), _("Password:"),
+	     _("Workgroup:")],
+	    [\$o->{printer}{SMBHOST}, \$o->{printer}{SMBHOSTIP},
+	     \$o->{printer}{SMBSHARE}, \$o->{printer}{SMBUSER},
+	     {val => \$o->{printer}{SMBPASSWD}, hidden => 1}, \$o->{printer}{SMBWORKGROUP}
+	    ],
+	     complete => sub {
+		 unless (network::is_ip($o->{printer}{SMBHOSTIP})) {
+		     $o->ask_warn('', _("IP address should be in format 1.2.3.4"));
+		     return (1,1);
+		 }
+		 return 0;
+	     },
+					    
 					   );
     } else {#($o->{printer}{TYPE} eq "NCP") {
 	return if !$o->ask_from_entries_ref(_("NetWare Printer Options"),
-					    _("To print to a NetWare printer, you need to provide the 
+	    _("To print to a NetWare printer, you need to provide the 
 NetWare print server name (this is not always the same as the machines 
 TCP/IP hostname) as well as the print queue name for the printer you 
 wish to access and any applicable user name and password."),
-					    [_("Printer Server:"), _("Print Queue Name:"), 
-					     _("User name:"), _("Password:")],
-					    [\$o->{printer}{NCPHOST}, \$o->{printer}{NCPQUEUE},
-					     \$o->{printer}{NCPUSER}, \$o->{printer}{NCPPASSWD}],
+	    [_("Printer Server:"), _("Print Queue Name:"), 
+	     _("User name:"), _("Password:")],
+	    [\$o->{printer}{NCPHOST}, \$o->{printer}{NCPQUEUE},
+	     \$o->{printer}{NCPUSER}, {val => \$o->{printer}{NCPPASSWD}, hidden => 1}],
 					   );
     }
     
@@ -394,15 +413,16 @@ wish to access and any applicable user name and password."),
 sub setRootPassword($) {
     my ($o) = @_;
     $o->{superuser}{password2} ||= $o->{user}{password} ||= "";
-    my %sup = %{$o->{superuser}};
+    my $sup = $o->{superuser};
 
     $o->ask_from_entries_ref(_("Set root password"),
 			 _("Set root password"),
 			 [_("Password"), _("Password (again)")],
-			 [\$sup{password}, \$sup{password2}],
+			 [{ val => \$sup->{password},  hidden => 1}, 
+			  { val => \$sup->{password2}, hidden => 1}],
 			 complete => sub {
-			     $sup{password} eq $sup{password2} or $o->ask_warn('', [ _("You must enter the same password"), _("Please try again") ]), return (1,1);
-			     (length $sup{password} < 6) and $o->ask_warn('', _("This password is too simple")), return (1,0);
+			     $sup->{password} eq $sup->{password2} or $o->ask_warn('', [ _("You must enter the same password"), _("Please try again") ]), return (1,1);
+			     (length $sup->{password} < 6) and $o->ask_warn('', _("This password is too simple")), return (1,0);
 			     return 0
 			 }
 			);
@@ -415,7 +435,7 @@ sub setRootPassword($) {
 sub addUser($) {
     my ($o) = @_;
     $o->{user}{password2} ||= $o->{user}{password} ||= "";
-    my %u = %{$o->{user}};
+    my $u = $o->{user};
     my @fields = qw(realname name password password2);
     my @shells = install_any::shells($o);
 
@@ -423,20 +443,21 @@ sub addUser($) {
         _("Add user"),
         _("Enter a user"),
         [ _("Real name"), _("User name"), _("Password"), _("Password (again)"), _("Shell") ],
-        [ (map { \$u{$_}} @fields), 
-	  {val => \$u{shell}, list => \@shells, not_edit => !$::expert},
+        [ \$u->{realname}, \$u->{name}, 
+	  {val => \$u->{password}, hidden => 1}, {val => \$u->{password2}, hidden => 1},
+	  {val => \$u->{shell}, list => \@shells, not_edit => !$::expert},
         ],
         focus_out => sub {
 	    $u{name} = lc first($u{realname} =~ /(\w+)/) if $_[0] eq 0;
 	},
         complete => sub {
-	    $u{password} eq $u{password2} or $o->ask_warn('', [ _("You must enter the same password"), _("Please try again") ]), return (1,2);
-	    (length $u{password} < 6) and $o->ask_warn('', _("This password is too simple")), return (1,1);
-	    $u{name} or $o->ask_warn('', _("Please give a user name")), return (1,0);
-	    $u{name} =~ /^[a-z0-9_-]+$/ or $o->ask_warn('', _("The user name must contain only lower cased letters, numbers, `-' and `_'")), return (1,0);
+	    $u->{password} eq $u->{password2} or $o->ask_warn('', [ _("You must enter the same password"), _("Please try again") ]), return (1,3);
+	    (length $u->{password} < 6) and $o->ask_warn('', _("This password is too simple")), return (1,2);
+	    $u->{name} or $o->ask_warn('', _("Please give a user name")), return (1,0);
+	    $u->{name} =~ /^[a-z0-9_-]+$/ or $o->ask_warn('', _("The user name must contain only lower cased letters, numbers, `-' and `_'")), return (1,0);
 	    return 0;
 	},
-    );
+    ) or return;
     install_steps::addUser($o);
     $o->{user} = {};
     goto &addUser if $::expert;
@@ -553,7 +574,6 @@ sub load_thiskind {
 sub setup_thiskind {
     my ($o, $type, $auto, $at_least_one) = @_;
     my @l = $o->load_thiskind($type);
-
     return if $auto && (@l || !$at_least_one);
     while (1) {
 	@l ?
@@ -561,11 +581,12 @@ sub setup_thiskind {
 			  [ _("Found %s %s interfaces", join(", ", map { $_->[0] } @l), $type),
 			    _("Do you have another one?") ], "No") :
 			      $o->ask_yesorno('', _("Do you have an %s interface?", $type), "No") or return;
-
+	    
 	my @r = $o->loadModule($type) or return;
 	push @l, \@r;
-    }
+	}
 }
+
 
 #-######################################################################################
 #- Wonderful perl :(

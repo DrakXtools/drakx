@@ -353,19 +353,22 @@ sub get_stage1_conf {
 
 sub load_thiskind($;&) {
     my ($type, $f) = @_;
-
-    my @devs = pci_probing::main::probe($type);
-    log::l("pci probe found " . scalar @devs . " $type devices");
-
-    my %devs; foreach (@devs) {
-	my ($text, $mod) = @$_;
-	$devs{$mod}++ and log::l("multiple $mod devices found"), next;
-	$drivers{$mod} or log::l("module $mod not in install table"), next;
-	log::l("found driver for $mod");
-	&$f($text, $mod) if $f; 
-	load($mod, $type);
+    unless ($::testing) {
+	my @devs = pci_probing::main::probe($type);
+	log::l("pci probe found " . scalar @devs . " $type devices");
+	
+	my %devs; foreach (@devs) {
+	    my ($text, $mod) = @$_;
+	    $devs{$mod}++ and log::l("multiple $mod devices found"), next;
+	    $drivers{$mod} or log::l("module $mod not in install table"), next;
+	    log::l("found driver for $mod");
+	    &$f($text, $mod) if $f; 
+	    load($mod, $type);
+	}
+	@devs;
+    } else {
+	();
     }
-    @devs;
 }
 
 # This assumes only one of each driver type is loaded

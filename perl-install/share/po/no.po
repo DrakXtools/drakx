@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: panoramix VERSION\n"
-"POT-Creation-Date: 1999-09-05 23:27+0200\n"
+"POT-Creation-Date: 1999-09-06 20:58+0200\n"
 "PO-Revision-Date: 1999-08-25 11:07+0200\n"
 "Last-Translator: Terje Bjerkelia <terje@bjerkelia.com>\n"
 "Language-Team: norwegian\n"
@@ -64,8 +64,8 @@ msgstr "En feil oppsto, prøv å endre noen parametere"
 msgid "Automatic resolutions"
 msgstr "Automatiske oppløsninger"
 
-#: ../Xconfigurator.pm_.c:333 ../install_steps_interactive.pm_.c:341
-#: ../install_steps_interactive.pm_.c:342
+#: ../Xconfigurator.pm_.c:333 ../install_steps_interactive.pm_.c:360
+#: ../install_steps_interactive.pm_.c:361
 msgid "Resolution"
 msgstr "Oppløsning"
 
@@ -515,8 +515,8 @@ msgstr "Les nøye!"
 msgid "all data on this partition will be lost"
 msgstr "alle data på denne partisjonen vil gå tapt"
 
-#: ../diskdrake.pm_.c:136 ../install2.pm_.c:405 ../install_steps.pm_.c:69
-#: ../install_steps_interactive.pm_.c:33
+#: ../diskdrake.pm_.c:136 ../install2.pm_.c:407 ../install_steps.pm_.c:69
+#: ../install_steps_interactive.pm_.c:32
 msgid "Error"
 msgstr "Feil"
 
@@ -670,7 +670,7 @@ msgstr "Du må starte maskinen på nytt for at modifiseringene skal tre i kraft"
 msgid "Computing fat filesystem bounds"
 msgstr "Beregner fat filsystemgrense"
 
-#: ../diskdrake.pm_.c:425 ../diskdrake.pm_.c:461 ../interactive_gtk.pm_.c:173
+#: ../diskdrake.pm_.c:425 ../diskdrake.pm_.c:461 ../interactive_gtk.pm_.c:193
 msgid "Resizing"
 msgstr "Endrer størrelse"
 
@@ -1013,8 +1013,8 @@ msgstr "Konfigurer X"
 msgid "Configure printer"
 msgstr "Konfigurer X"
 
-#: ../install2.pm_.c:187 ../install_steps_interactive.pm_.c:400
-#: ../install_steps_interactive.pm_.c:401
+#: ../install2.pm_.c:187 ../install_steps_interactive.pm_.c:418
+#: ../install_steps_interactive.pm_.c:419
 msgid "Set root password"
 msgstr "Sett root passord"
 
@@ -1054,7 +1054,7 @@ msgstr "ekspert"
 msgid "server"
 msgstr "tjener"
 
-#: ../install2.pm_.c:415
+#: ../install2.pm_.c:417
 msgid ""
 "An error has occurred - no valid devices were found on which to create new "
 "filesystems. Please check your hardware for the cause of this problem"
@@ -1062,11 +1062,11 @@ msgstr ""
 "En feil har oppstått - ingen gyldige enheter ble funnet for å opprette nye "
 "filsystemer. Vennligst sjekk maskinvaren din for årsaken til dette problemet"
 
-#: ../install2.pm_.c:430
+#: ../install2.pm_.c:432
 msgid "partitioning failed: no root filesystem"
 msgstr "partisjonering feilet: intet root filsystem"
 
-#: ../install_steps.pm_.c:269
+#: ../install_steps.pm_.c:267
 msgid "no floppy available"
 msgstr ""
 
@@ -1127,15 +1127,15 @@ msgstr "forbereder installasjon"
 msgid "installing package %s"
 msgstr "installerer pakke %s"
 
-#: ../install_steps_interactive.pm_.c:33
+#: ../install_steps_interactive.pm_.c:32
 msgid "An error occurred"
 msgstr "En feil oppsto"
 
-#: ../install_steps_interactive.pm_.c:45
+#: ../install_steps_interactive.pm_.c:44
 msgid "Which language do you want?"
 msgstr "Hvilket språk ønsker du?"
 
-#: ../install_steps_interactive.pm_.c:56
+#: ../install_steps_interactive.pm_.c:55
 #, fuzzy
 msgid "Which keyboard do you have?"
 msgstr "Hvilken sektor vil du flytte til?"
@@ -1207,81 +1207,81 @@ msgid ""
 "system?"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:222
+#: ../install_steps_interactive.pm_.c:232
 msgid "Standard Printer Options"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:223
+#: ../install_steps_interactive.pm_.c:233
 msgid ""
 "Every print queue (which print jobs are directed to) needs a \n"
 "name (often lp) and a spool directory associated with it. What \n"
 "name and directory should be used for this queue?"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:226
+#: ../install_steps_interactive.pm_.c:236
 msgid "Name of queue:"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:226
+#: ../install_steps_interactive.pm_.c:236
 msgid "Spool directory:"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:237
+#: ../install_steps_interactive.pm_.c:247
 msgid "Select Printer Connection"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:238
+#: ../install_steps_interactive.pm_.c:248
 msgid "How is the printer connected?"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:246
+#: ../install_steps_interactive.pm_.c:256
 msgid "Detecting devices..."
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:246
+#: ../install_steps_interactive.pm_.c:256
 msgid "Test ports"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:260
+#: ../install_steps_interactive.pm_.c:270
 msgid "Local Printer Device"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:261
+#: ../install_steps_interactive.pm_.c:271
 msgid ""
 "What device is your printer connected to  \n"
 "(note that /dev/lp0 is equivalent to LPT1:)?\n"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:262
+#: ../install_steps_interactive.pm_.c:272
 #, fuzzy
 msgid "Printer Device:"
 msgstr "Enhet: "
 
-#: ../install_steps_interactive.pm_.c:268
+#: ../install_steps_interactive.pm_.c:278
 msgid "Remote lpd Printer Options"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:269
+#: ../install_steps_interactive.pm_.c:279
 msgid ""
 "To use a remote lpd print queue, you need to supply \n"
 "the hostname of the printer server and the queue name \n"
 "on that server which jobs should be placed in."
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:272
+#: ../install_steps_interactive.pm_.c:282
 #, fuzzy
 msgid "Remote hostname:"
 msgstr "Brukernavn"
 
-#: ../install_steps_interactive.pm_.c:272
+#: ../install_steps_interactive.pm_.c:282
 msgid "Remote queue:"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:277
+#: ../install_steps_interactive.pm_.c:288
 msgid "SMB/Windows 95/NT Printer Options"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:278
+#: ../install_steps_interactive.pm_.c:289
 msgid ""
 "To print to a SMB printer, you need to provide the \n"
 "SMB host name (this is not always the same as the machines \n"
@@ -1290,42 +1290,46 @@ msgid ""
 "applicable user name, password, and workgroup information."
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:283
+#: ../install_steps_interactive.pm_.c:294
 #, fuzzy
 msgid "SMB server IP:"
 msgstr "tjener"
 
-#: ../install_steps_interactive.pm_.c:283
+#: ../install_steps_interactive.pm_.c:294
 #, fuzzy
 msgid "SMB server host:"
 msgstr "tjener"
 
-#: ../install_steps_interactive.pm_.c:284
-#: ../install_steps_interactive.pm_.c:298
+#: ../install_steps_interactive.pm_.c:295
+#: ../install_steps_interactive.pm_.c:317
 #, fuzzy
 msgid "Password:"
 msgstr "Passord"
 
-#: ../install_steps_interactive.pm_.c:284
+#: ../install_steps_interactive.pm_.c:295
 #, fuzzy
 msgid "Share name:"
 msgstr "Brukernavn"
 
-#: ../install_steps_interactive.pm_.c:284
-#: ../install_steps_interactive.pm_.c:298
+#: ../install_steps_interactive.pm_.c:295
+#: ../install_steps_interactive.pm_.c:317
 #, fuzzy
 msgid "User name:"
 msgstr "Brukernavn"
 
-#: ../install_steps_interactive.pm_.c:285
+#: ../install_steps_interactive.pm_.c:296
 msgid "Workgroup:"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:292
+#: ../install_steps_interactive.pm_.c:303
+msgid "IP address should be in format 1.2.3.4"
+msgstr ""
+
+#: ../install_steps_interactive.pm_.c:311
 msgid "NetWare Printer Options"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:293
+#: ../install_steps_interactive.pm_.c:312
 msgid ""
 "To print to a NetWare printer, you need to provide the \n"
 "NetWare print server name (this is not always the same as the machines \n"
@@ -1333,112 +1337,112 @@ msgid ""
 "wish to access and any applicable user name and password."
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:297
+#: ../install_steps_interactive.pm_.c:316
 msgid "Print Queue Name:"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:297
+#: ../install_steps_interactive.pm_.c:316
 msgid "Printer Server:"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:319
+#: ../install_steps_interactive.pm_.c:338
 #, fuzzy
 msgid "Configure Printer"
 msgstr "Konfigurer X"
 
-#: ../install_steps_interactive.pm_.c:320
+#: ../install_steps_interactive.pm_.c:339
 #, fuzzy
 msgid "What type of printer do you have?"
 msgstr "Hva slags brukertype vil du ha?"
 
-#: ../install_steps_interactive.pm_.c:331
-#: ../install_steps_interactive.pm_.c:332
+#: ../install_steps_interactive.pm_.c:350
+#: ../install_steps_interactive.pm_.c:351
 msgid "Paper Size"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:351
+#: ../install_steps_interactive.pm_.c:370
 msgid "CRLF"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:352
+#: ../install_steps_interactive.pm_.c:371
 msgid "Fix stair-stepping of text?"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:368
+#: ../install_steps_interactive.pm_.c:387
 #, fuzzy
 msgid "Configure Uniprint Driver"
 msgstr "Konfigurer X"
 
-#: ../install_steps_interactive.pm_.c:369
+#: ../install_steps_interactive.pm_.c:388
 msgid "You may now configure the uniprint options for this printer."
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:377
+#: ../install_steps_interactive.pm_.c:396
 #, fuzzy
 msgid "Configure Color Depth"
 msgstr "Konfigurer X"
 
-#: ../install_steps_interactive.pm_.c:378
+#: ../install_steps_interactive.pm_.c:397
 msgid "You may now configure the color options for this printer."
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:402
-#: ../install_steps_interactive.pm_.c:427
+#: ../install_steps_interactive.pm_.c:420
+#: ../install_steps_interactive.pm_.c:445
 msgid "Password"
 msgstr "Passord"
 
-#: ../install_steps_interactive.pm_.c:402
-#: ../install_steps_interactive.pm_.c:427
+#: ../install_steps_interactive.pm_.c:420
+#: ../install_steps_interactive.pm_.c:445
 msgid "Password (again)"
 msgstr "Passord (igjen)"
 
-#: ../install_steps_interactive.pm_.c:405
-#: ../install_steps_interactive.pm_.c:432
+#: ../install_steps_interactive.pm_.c:424
+#: ../install_steps_interactive.pm_.c:454
 msgid "Please try again"
 msgstr "Vennligst prøv igjen"
 
-#: ../install_steps_interactive.pm_.c:405
-#: ../install_steps_interactive.pm_.c:432
+#: ../install_steps_interactive.pm_.c:424
+#: ../install_steps_interactive.pm_.c:454
 msgid "You must enter the same password"
 msgstr "Du må skrive inn det samme passordet"
 
-#: ../install_steps_interactive.pm_.c:406
-#: ../install_steps_interactive.pm_.c:433
+#: ../install_steps_interactive.pm_.c:425
+#: ../install_steps_interactive.pm_.c:455
 msgid "This password is too simple"
 msgstr "Dette passordet er for enkelt"
 
-#: ../install_steps_interactive.pm_.c:425
+#: ../install_steps_interactive.pm_.c:443
 msgid "Add user"
 msgstr "Legg til bruker"
 
-#: ../install_steps_interactive.pm_.c:426
+#: ../install_steps_interactive.pm_.c:444
 #, fuzzy
 msgid "Enter a user"
 msgstr "Legg til en bruker"
 
-#: ../install_steps_interactive.pm_.c:427
+#: ../install_steps_interactive.pm_.c:445
 msgid "Real name"
 msgstr "Virkelig navn"
 
-#: ../install_steps_interactive.pm_.c:427
+#: ../install_steps_interactive.pm_.c:445
 msgid "Shell"
 msgstr "Skall"
 
-#: ../install_steps_interactive.pm_.c:427
+#: ../install_steps_interactive.pm_.c:445
 msgid "User name"
 msgstr "Brukernavn"
 
-#: ../install_steps_interactive.pm_.c:434
+#: ../install_steps_interactive.pm_.c:456
 msgid "Please give a user name"
 msgstr "Vennligst oppgi et brukernavn"
 
-#: ../install_steps_interactive.pm_.c:435
+#: ../install_steps_interactive.pm_.c:457
 #, fuzzy
 msgid ""
 "The user name must contain only lower cased letters, numbers, `-' and `_'"
 msgstr "Brukernavnet kan kun inneholde bokstaver, tall, `-' og `_'"
 
-#: ../install_steps_interactive.pm_.c:455
+#: ../install_steps_interactive.pm_.c:476
 msgid ""
 "A custom bootdisk provides a way of booting into your Linux system without\n"
 "depending on the normal bootloader. This is useful if you don't want to "
@@ -1452,44 +1456,44 @@ msgid ""
 "failures. Would you like to create a bootdisk for your system?"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:463
+#: ../install_steps_interactive.pm_.c:484
 msgid "Sorry, no floppy drive available"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:466
+#: ../install_steps_interactive.pm_.c:487
 #, fuzzy
 msgid "Choose the floppy drive you want to use to make the bootdisk"
 msgstr "Velg de partisjonene du ønsker å formatere"
 
-#: ../install_steps_interactive.pm_.c:470
+#: ../install_steps_interactive.pm_.c:491
 #, c-format
 msgid "Insert a floppy in drive %s"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:471
+#: ../install_steps_interactive.pm_.c:492
 #, fuzzy
 msgid "Creating bootdisk"
 msgstr "Opprett oppstartdiskett"
 
-#: ../install_steps_interactive.pm_.c:478
+#: ../install_steps_interactive.pm_.c:499
 msgid "First sector of boot partition"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:478
+#: ../install_steps_interactive.pm_.c:499
 msgid "First sector of drive"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:481
+#: ../install_steps_interactive.pm_.c:502
 #, fuzzy
 msgid "Lilo Installation"
 msgstr "Installerer"
 
-#: ../install_steps_interactive.pm_.c:482
+#: ../install_steps_interactive.pm_.c:503
 #, fuzzy
 msgid "Where do you want to install the bootloader?"
 msgstr "Hvor vil du montere %s enheten?"
 
-#: ../install_steps_interactive.pm_.c:493
+#: ../install_steps_interactive.pm_.c:514
 msgid ""
 "Congratulations, installation is complete.\n"
 "Remove the boot media and press return to reboot.\n"
@@ -1500,43 +1504,43 @@ msgid ""
 "install chapter of the Official Linux Mandrake User's Guide."
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:510
+#: ../install_steps_interactive.pm_.c:531
 #, fuzzy, c-format
 msgid "What %s card have you?"
 msgstr "Hva slags scsi-kort har du?"
 
-#: ../install_steps_interactive.pm_.c:520
+#: ../install_steps_interactive.pm_.c:541
 msgid "Autoprobe"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:520
+#: ../install_steps_interactive.pm_.c:541
 msgid "Specify options"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:527
+#: ../install_steps_interactive.pm_.c:548
 msgid "Module options:"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:546
+#: ../install_steps_interactive.pm_.c:567
 #, fuzzy, c-format
 msgid "Installing driver for %s card %s"
 msgstr "Installerer driver for scsi-kort %s"
 
-#: ../install_steps_interactive.pm_.c:547
+#: ../install_steps_interactive.pm_.c:568
 #, c-format
 msgid "(module %s)"
 msgstr "(modul %s)"
 
-#: ../install_steps_interactive.pm_.c:561
+#: ../install_steps_interactive.pm_.c:581
 #, fuzzy, c-format
 msgid "Found %s %s interfaces"
 msgstr " scsi grensesnitt"
 
-#: ../install_steps_interactive.pm_.c:562
+#: ../install_steps_interactive.pm_.c:582
 msgid "Do you have another one?"
 msgstr "Har du enda ett?"
 
-#: ../install_steps_interactive.pm_.c:563
+#: ../install_steps_interactive.pm_.c:583
 #, fuzzy, c-format
 msgid "Do you have an %s interface?"
 msgstr "Har du et scsi grensesnitt"
@@ -1546,24 +1550,24 @@ msgstr "Har du et scsi grensesnitt"
 msgid "Starting step `%s'\n"
 msgstr "Starter steg `%s'\n"
 
-#: ../interactive.pm_.c:42 ../interactive.pm_.c:52 ../my_gtk.pm_.c:174
-#: ../my_gtk.pm_.c:316 ../my_gtk.pm_.c:412
+#: ../interactive.pm_.c:47 ../interactive.pm_.c:57 ../my_gtk.pm_.c:174
+#: ../my_gtk.pm_.c:316 ../my_gtk.pm_.c:413
 msgid "Ok"
 msgstr "Ok"
 
-#: ../interactive.pm_.c:47 ../my_gtk.pm_.c:315
+#: ../interactive.pm_.c:52 ../my_gtk.pm_.c:315
 msgid "No"
 msgstr "Nei"
 
-#: ../interactive.pm_.c:47 ../my_gtk.pm_.c:315
+#: ../interactive.pm_.c:52 ../my_gtk.pm_.c:315
 msgid "Yes"
 msgstr "Ja"
 
-#: ../interactive.pm_.c:52 ../my_gtk.pm_.c:175 ../my_gtk.pm_.c:316
+#: ../interactive.pm_.c:57 ../my_gtk.pm_.c:175 ../my_gtk.pm_.c:316
 msgid "Cancel"
 msgstr "Avbryt"
 
-#: ../interactive.pm_.c:125
+#: ../interactive.pm_.c:132
 msgid "Please wait"
 msgstr "Vennligst vent"
 
@@ -1592,125 +1596,125 @@ msgstr "Ditt valg? (standard %s) "
 msgid "Your choice? (default %s  enter `none' for none) "
 msgstr "Ditt valg? (standard %s  trykk `none' for ingen) "
 
-#: ../keyboard.pm_.c:26
+#: ../keyboard.pm_.c:30
 msgid "Belgian"
 msgstr ""
 
-#: ../keyboard.pm_.c:27
+#: ../keyboard.pm_.c:31
 msgid "Bulgarian"
 msgstr ""
 
-#: ../keyboard.pm_.c:28
+#: ../keyboard.pm_.c:32
 msgid "Czech"
 msgstr ""
 
-#: ../keyboard.pm_.c:29
+#: ../keyboard.pm_.c:33
 msgid "German"
 msgstr ""
 
-#: ../keyboard.pm_.c:30
+#: ../keyboard.pm_.c:34
 msgid "Danish"
 msgstr ""
 
-#: ../keyboard.pm_.c:31
+#: ../keyboard.pm_.c:35
 msgid "Dvorak"
 msgstr ""
 
-#: ../keyboard.pm_.c:32
+#: ../keyboard.pm_.c:36
 msgid "Finnish"
 msgstr ""
 
-#: ../keyboard.pm_.c:33
+#: ../keyboard.pm_.c:37
 msgid "French"
 msgstr ""
 
-#: ../keyboard.pm_.c:37
+#: ../keyboard.pm_.c:41
 msgid "Greek"
 msgstr ""
 
-#: ../keyboard.pm_.c:38
+#: ../keyboard.pm_.c:42
 msgid "Hungarian"
 msgstr ""
 
-#: ../keyboard.pm_.c:39
+#: ../keyboard.pm_.c:43
 #, fuzzy
 msgid "Israelian"
 msgstr "Installerer"
 
-#: ../keyboard.pm_.c:40
+#: ../keyboard.pm_.c:44
 msgid "Icelandic"
 msgstr ""
 
-#: ../keyboard.pm_.c:41
+#: ../keyboard.pm_.c:45
 #, fuzzy
 msgid "Italian"
 msgstr "Installerer"
 
-#: ../keyboard.pm_.c:42
+#: ../keyboard.pm_.c:46
 msgid "Latin American"
 msgstr ""
 
-#: ../keyboard.pm_.c:43
+#: ../keyboard.pm_.c:47
 msgid "Dutch"
 msgstr ""
 
-#: ../keyboard.pm_.c:44
+#: ../keyboard.pm_.c:48
 msgid "Norwegian"
 msgstr ""
 
-#: ../keyboard.pm_.c:45
+#: ../keyboard.pm_.c:49
 msgid "Polish"
 msgstr ""
 
-#: ../keyboard.pm_.c:46
+#: ../keyboard.pm_.c:50
 msgid "Portuguese"
 msgstr ""
 
-#: ../keyboard.pm_.c:47
+#: ../keyboard.pm_.c:51
 msgid "Canadian (Quebec)"
 msgstr ""
 
-#: ../keyboard.pm_.c:48
+#: ../keyboard.pm_.c:52
 msgid "Russian"
 msgstr ""
 
-#: ../keyboard.pm_.c:49
+#: ../keyboard.pm_.c:53
 msgid "Swedish"
 msgstr ""
 
-#: ../keyboard.pm_.c:50
+#: ../keyboard.pm_.c:54
 msgid "Swiss (french layout)"
 msgstr ""
 
-#: ../keyboard.pm_.c:51
+#: ../keyboard.pm_.c:55
 msgid "Swiss (german layout)"
 msgstr ""
 
-#: ../keyboard.pm_.c:52
+#: ../keyboard.pm_.c:56
 msgid "Slovenian"
 msgstr ""
 
-#: ../keyboard.pm_.c:53
+#: ../keyboard.pm_.c:57
 msgid "Slovakian"
 msgstr ""
 
-#: ../keyboard.pm_.c:56
+#: ../keyboard.pm_.c:60
 msgid "Turkish (traditional \"F\" model)"
 msgstr ""
 
-#: ../keyboard.pm_.c:57
+#: ../keyboard.pm_.c:61
 msgid "Turkish (modern \"Q\" model)"
 msgstr ""
 
-#: ../keyboard.pm_.c:58
+#: ../keyboard.pm_.c:62
 msgid "UK keyboard"
 msgstr ""
 
-#: ../keyboard.pm_.c:59
+#: ../keyboard.pm_.c:63
 msgid "US keyboard"
 msgstr ""
 
-#: ../keyboard.pm_.c:60
+#: ../keyboard.pm_.c:64
 msgid "Yugoslavian (latin layout)"
 msgstr ""
 

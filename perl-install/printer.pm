@@ -460,17 +460,17 @@ sub configure_queue($) {
 
     if ($entry->{TYPE} eq "SMB") {
 	#- simple config file required if SMB printer
-	my $config_file = "$prefix$queue_path.config";
+	my $config_file = "$prefix$queue_path/.config";
 	local *F;
 	open F, ">$config_file" or die "Can't create $config_file $!";
 	print F "share='\\\\$entry->{SMBHOST}\\$entry->{SMBSHARE}'\n";
-	print F "hostip='$entry->{SMBHOSTIP}'\n";
+	print F "hostip=$entry->{SMBHOSTIP}\n";
 	print F "user='$entry->{SMBUSER}'\n";
 	print F "password='$entry->{SMBPASSWD}'\n";
 	print F "workgroup='$entry->{SMBWORKGROUP}'\n";
     } elsif ($entry->{TYPE} eq "NCP") {
 	#- same for NCP printer
-	my $config_file = "$prefix$queue_path.config";
+	my $config_file = "$prefix$queue_path/.config";
 	local *F;
 	open F, ">$config_file" or die "Can't create $config_file $!";
 	print F "server=$entry->{NCPHOST}\n";

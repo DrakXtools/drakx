@@ -81,8 +81,12 @@ sub errorInStep($$) {}
 #------------------------------------------------------------------------------
 sub selectLanguage {
     my ($o) = @_;
-    $o->{keyboard} ||= keyboard::lang2keyboard($o->{lang});
-    selectKeyboard($o);
+    lang::set($o->{lang});
+
+    unless ($o->{keyboard_force}) {
+	$o->{keyboard} = keyboard::lang2keyboard($o->{lang});
+	selectKeyboard($o);
+    }
 }
 #------------------------------------------------------------------------------
 sub selectKeyboard { 

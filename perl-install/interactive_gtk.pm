@@ -94,6 +94,7 @@ sub ask_from_entries_refW {
 	}
     } @{$val};
     my $ok      = $w->create_okcancel;
+
     sub comb_entry {
 	my ($entry, $ref) = @_;
 	($ref->{type} eq "list" && @{$ref->{list}}) ? $entry->entry : $entry
@@ -113,9 +114,8 @@ sub ask_from_entries_refW {
 
     for (my $i = 0; $i < $num_fields; $i++) {
 	my $ind = $i; #cos lexical bindings pb !!
-	my $entry = $entries[$i];
-	#changed callback
-	my $callback = sub {
+	my $entry = comb_entry($entries[$i], $val->[$i]);
+	my $changed_callback = sub {
 	    return if $ignore; #handle recursive deadlock
 	    &{$updates[$ind]};
 	    if ($hcallback{changed}) {
@@ -127,7 +127,7 @@ sub ask_from_entries_refW {
 	    };
 	};
 	if ($hcallback{focus_out}) {
-	    my $callfocusout = sub {
+	    my $focusout_callback = sub {
 		return if $ignore;
 		&{$hcallback{focus_out}}($ind);
 		#update all the value
@@ -135,16 +135,26 @@ sub ask_from_entries_refW {
 		foreach (@updates_inv) { &{$_};}
 		$ignore = 0;
 	    };
-	    comb_entry($entry,$val->[$i])->signal_connect(focus_out_event => $callfocusout);
+	    $entry->signal_connect(focus_out_event => $focusout_callback);
 	}
-	comb_entry($entry,$val->[$i])->signal_connect(changed => $callback);
-	comb_entry($entry,$val->[$i])->signal_connect(activate => sub {
-				   ($ind == ($num_fields -1)) ?
-				     ($w->{ok}->grab_focus(), ) : (comb_entry($entries[$ind+1],$val->[$ind+1])->grab_focus(),$_[0]->signal_emit_stop("activate")) ;
-			       });
-	comb_entry($entry,$val->[$i])->set_text(${$val->[$i]{val}})  if ${$val->[$i]{val}};
-	comb_entry($entry,$val->[$i])->set_visibility(0) if $l->[$i] =~ /password/i;
-#	&{$updates[$i]};
+	$entry->signal_connect(changed => $changed_callback);
+	my $go_to_next = sub {
+	    if ($ind == ($num_fields -1)) {
+		$w->{ok}->grab_focus();
+	    } else {
+		comb_entry($entries[$ind+1],$val->[$ind+1])->grab_focus();
+	    }
+	};
+	$entry->signal_connect(activate => $go_to_next);
+	$entry->signal_connect(key_press_event => sub {
+	   my ($w, $e) = @_;
+	   my $c = chr $e->{keyval};
+	   &$go_to_next if $c eq "\x8d";
+	   });
+	
+	$entry->set_text(${$val->[$i]{val}})  if ${$val->[$i]{val}};
+	$entry->set_visibility(0) if $val->[$i]{hidden};
+	&{$updates[$i]};
     }
 
     my @entry_list = mapn { [($_[0], $_[1])]} $l, \@entries;
@@ -155,7 +165,6 @@ sub ask_from_entries_refW {
 		   create_packtable({}, @entry_list),
 		   $ok
 		   ));
-
     comb_entry($entries[0],$val->[0])->grab_focus();
     if ($hcallback{complete}) {
 	my $callback = sub {
@@ -175,8 +184,6 @@ sub ask_from_entries_refW {
     } else {
 	$w->main();
     }
-
-
 }
 
 

@@ -12,16 +12,16 @@ use common qw(:common :file :system :functional);
 use install_any qw(:all);
 use log;
 use network;
+use lang;
 use keyboard;
 use fs;
 use fsedit;
-use modules;
 use partition_table qw(:types);
-use detect_devices;
 use pkgs;
-use smp;
-use lang;
 use printer;
+use modules;
+use detect_devices;
+use smp;
 use run_program;
 use install_steps_graphical;
 
@@ -203,7 +203,7 @@ for (my $i = 0; $i < @installSteps; $i += 2) {
     push @orderedInstallSteps, $installSteps[$i];
 }
 
-#TOSEE bug avec
+#TOSEE bug with
 #%installSteps = 
 #      map_tab_hash {
 #	   my ($i, $h)   = @_; 
@@ -298,8 +298,8 @@ $o = $::o = {
 
                  DEVICE    => "/dev/dev1",
 
-                 REMOTEHOST => "padhost",
-                 REMOTEQUEUE => "padqueue",
+                 REMOTEHOST => "",
+                 REMOTEQUEUE => "",
 
                  NCPHOST   => "printerservername",
                  NCPQUEUE  => "queuename",
@@ -321,7 +321,7 @@ $o = $::o = {
     steps        => \%installSteps,        
     orderedSteps => \@orderedInstallSteps, 
 
-    installClass => "beginner",
+    installClass => "expert",
 
     base => [ qw(basesystem initscripts console-tools mkbootdisk anacron rhs-hwdiag utempter ldconfig chkconfig ntsysv mktemp setup filesystem SysVinit bdflush crontabs dev e2fsprogs etcskel fileutils findutils getty_ps grep groff gzip hdparm info initscripts isapnptools kbdconfig kernel less ldconfig lilo logrotate losetup man mkinitrd mingetty modutils mount net-tools passwd procmail procps psmisc mandrake-release rootfiles rpm sash sed setconsole setserial shadow-utils sh-utils slocate stat sysklogd tar termcap textutils time timeconfig tmpwatch util-linux vim-minimal vixie-cron which cpio) ],
 # for the list of fields available for user and superuser, see @etc_pass_fields in install_steps.pm
@@ -606,3 +606,8 @@ sub killCardServices {
     my $pid = chop_(cat_("/tmp/cardmgr.pid"));
     $pid and kill(15, $pid); # send SIGTERM
 }
+
+#-######################################################################################
+#- Wonderful perl :(
+#-######################################################################################
+1; # 
