@@ -39,7 +39,6 @@ $::isInstall and die "Not supported during install.\n";
 local $_ = join '', @ARGV;
 
 $::Wizard_pix_up = "wiz_drakgw.png";
-$::Wizard_title = N("Internet Connection Sharing");
 $::direct = /-direct/;
 
 
@@ -55,6 +54,7 @@ my $cups_conf = "/etc/cups/cupsd.conf";
 my $shorewall = network::shorewall::read();
 
 my $in = 'interactive'->vnew('su', 'default');
+$::Wizard_title = N("Internet Connection Sharing");
 
 !$::isEmbedded && $in->isa('interactive::gtk') and $::isWizard = 1;
 
