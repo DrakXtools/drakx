@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2004-09-30 10:15+0200\n"
+"POT-Creation-Date: 2004-09-30 11:59+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -764,7 +764,7 @@ msgstr ""
 msgid "Force No Local APIC"
 msgstr ""
 
-#: any.pm:264 any.pm:613 authentication.pm:76 diskdrake/smbnfs_gtk.pm:180 install_steps_interactive.pm:1213 network/netconnect.pm:591 printer/printerdrake.pm:1489 printer/printerdrake.pm:1609 standalone/drakbackup:1647 standalone/drakbackup:3490 standalone/drakups:285
+#: any.pm:264 any.pm:613 diskdrake/smbnfs_gtk.pm:180 install_steps_interactive.pm:1213 network/netconnect.pm:591 printer/printerdrake.pm:1489 printer/printerdrake.pm:1609 standalone/drakbackup:1647 standalone/drakbackup:3490 standalone/drakups:285
 #, c-format
 msgid "Password"
 msgstr ""
@@ -1178,7 +1178,7 @@ msgstr ""
 msgid "NIS"
 msgstr ""
 
-#: authentication.pm:16 authentication.pm:141
+#: authentication.pm:16 authentication.pm:125
 #, c-format
 msgid "Windows Domain"
 msgstr ""
@@ -1248,127 +1248,97 @@ msgstr ""
 msgid "Active Directory with Winbind:"
 msgstr ""
 
-#: authentication.pm:66
+#: authentication.pm:58
 #, c-format
 msgid "Authentication LDAP"
 msgstr ""
 
-#: authentication.pm:67
+#: authentication.pm:59
 #, c-format
-msgid "Server Information:"
+msgid "LDAP Base dn"
 msgstr ""
 
-#: authentication.pm:68
+#: authentication.pm:60
 #, c-format
 msgid "LDAP Server"
 msgstr ""
 
-#: authentication.pm:69
-#, c-format
-msgid "Use SSL connection"
-msgstr ""
-
-#: authentication.pm:70
-#, c-format
-msgid "User Base:"
-msgstr ""
-
-#: authentication.pm:71
-#, c-format
-msgid "Base:"
-msgstr ""
-
-#: authentication.pm:72
-#, c-format
-msgid "Scope:"
-msgstr ""
-
-#: authentication.pm:73
-#, c-format
-msgid "Bind Server:"
-msgstr ""
-
-#: authentication.pm:74 authentication.pm:104
-#, c-format
-msgid "Use Anonymous Bind"
-msgstr ""
-
-#: authentication.pm:75
-#, c-format
-msgid "Distinguished Name"
-msgstr ""
-
-#: authentication.pm:89 fsedit.pm:21
+#: authentication.pm:73 fsedit.pm:21
 #, c-format
 msgid "simple"
 msgstr ""
 
-#: authentication.pm:90
+#: authentication.pm:74
 #, c-format
 msgid "TLS"
 msgstr ""
 
-#: authentication.pm:91
+#: authentication.pm:75
 #, c-format
 msgid "SSL"
 msgstr ""
 
-#: authentication.pm:92
+#: authentication.pm:76
 #, c-format
 msgid "security layout (SASL/Kerberos)"
 msgstr ""
 
-#: authentication.pm:99 authentication.pm:137
+#: authentication.pm:83 authentication.pm:121
 #, c-format
 msgid "Authentication Active Directory"
 msgstr ""
 
-#: authentication.pm:100 authentication.pm:139 diskdrake/smbnfs_gtk.pm:181
+#: authentication.pm:84 authentication.pm:123 diskdrake/smbnfs_gtk.pm:181
 #, c-format
 msgid "Domain"
 msgstr ""
 
-#: authentication.pm:102 diskdrake/dav.pm:63 help.pm:146 printer/printerdrake.pm:135 share/compssUsers.pl:8
+#: authentication.pm:86 diskdrake/dav.pm:63 help.pm:146 printer/printerdrake.pm:135 share/compssUsers.pl:8
 #, c-format
 msgid "Server"
 msgstr ""
 
-#: authentication.pm:103
+#: authentication.pm:87
 #, c-format
-msgid "Users database"
+msgid "LDAP users database"
 msgstr ""
 
-#: authentication.pm:105
+#: authentication.pm:88
 #, c-format
-msgid "User allowed to browse the Active Directory"
+msgid "Use Anonymous BIND "
 msgstr ""
 
-#: authentication.pm:106
+#: authentication.pm:89
+#, c-format
+msgid "LDAP user allowed to browse the Active Directory"
+msgstr ""
+
+#: authentication.pm:90
 #, c-format
 msgid "Password for user"
 msgstr ""
 
-#: authentication.pm:107
+#: authentication.pm:91
 #, c-format
 msgid "Encryption"
 msgstr ""
 
-#: authentication.pm:118
+#: authentication.pm:102
 #, c-format
 msgid "Authentication NIS"
 msgstr ""
 
-#: authentication.pm:119
+#: authentication.pm:103
 #, c-format
 msgid "NIS Domain"
 msgstr ""
 
-#: authentication.pm:120
+#: authentication.pm:104
 #, c-format
 msgid "NIS Server"
 msgstr ""
 
-#: authentication.pm:125
+#: authentication.pm:109
 #, c-format
 msgid ""
 "For this to work for a W2K PDC, you will probably need to have the admin run: C:\\>net localgroup \"Pre-Windows 2000 Compatible Access\" everyone /add and reboot the server.\n"
@@ -1378,32 +1348,32 @@ msgid ""
 "The command 'wbinfo -t' will test whether your authentication secrets are good."
 msgstr ""
 
-#: authentication.pm:137
+#: authentication.pm:121
 #, c-format
 msgid "Authentication Windows Domain"
 msgstr ""
 
-#: authentication.pm:142
+#: authentication.pm:126
 #, c-format
 msgid "Domain Admin User Name"
 msgstr ""
 
-#: authentication.pm:143
+#: authentication.pm:127
 #, c-format
 msgid "Domain Admin Password"
 msgstr ""
 
-#: authentication.pm:144
+#: authentication.pm:128
 #, c-format
 msgid "Use Idmap for store UID/SID "
 msgstr ""
 
-#: authentication.pm:145
+#: authentication.pm:129
 #, c-format
 msgid "Default Idmap "
 msgstr ""
 
-#: authentication.pm:259
+#: authentication.pm:231
 #, c-format
 msgid "Can't use broadcast with no NIS domain"
 msgstr ""
