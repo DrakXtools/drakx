@@ -3719,7 +3719,8 @@ sub install_spooler {
     # If the user refuses to install the spooler in high or paranoid
     # security level, exit.
     return 0 unless security_check($printer, $in, $spooler);
-    return 1 if $spooler !~ /^(cups|lpd|lprng|pqd)$/; # should not happen
+    # should not happen
+    return 1 if $spooler !~ /^(rcups|cups|lpd|lprng|pqd)$/;
     my $w = $in->wait_message(N("Printerdrake"), N("Checking installed software..."));
 
     # "lpr" conflicts with "LPRng", remove either "LPRng" or remove "lpr"
@@ -3736,8 +3737,17 @@ sub install_spooler {
 	    };
     }
 
+    # Install all packages needed to run printerdrake and the chosen spooler
     $packages = $spoolers{$spooler}{packages2add};
-    if ($packages && !files_exist(@{$packages->[1]})) {
+    push (@{$packages->[0]}, @{$commonpackages->[0]});
+    push (@{$packages->[0]}, @{$localqueuepackages->[0]}) if
+	$spoolers{$spooler}{local_queues};
+    push (@{$packages->[1]}, @{$commonpackages->[1]});
+    push (@{$packages->[1]}, @{$localqueuepackages->[1]}) if
+	$spoolers{$spooler}{local_queues};
+    #use Data::Dumper;
+    #print Dumper($packages);
+    if (@{$packages->[0]} && !files_exist(@{$packages->[1]})) {
 	undef $w;
         $w = $in->wait_message(N("Printerdrake"), N("Installing %s..."), $spoolers{$spooler}{short_name});
         $in->do_pkgs->install(@{$packages->[0]})
@@ -3827,7 +3837,8 @@ sub setup_default_spooler {
 	$printer->{SPOOLER} = $oldspooler;
 	return;
     }
-    if ($printer->{SPOOLER} ne $oldspooler) {
+    if (($printer->{SPOOLER} ne $oldspooler) &&
+	($printer->{SPOOLER} ne 'rcups')) {
 	# Get the queues of this spooler
 	{
 	    my $_w = $in->wait_message(N("Printerdrake"),
@@ -3961,42 +3972,11 @@ sub init {
     # of Printerdrake
     printer::main::set_usermode($printer->{expert});
     
-    # printerdrake does not work without foomatic, and for more
-    # convenience we install some more stuff
-    {
-	my $_w = $::noX || 
-	    $in->wait_message(N("Printerdrake"),
-			      N("Checking installed software..."));
-	if (!$::testing &&
-	    !files_exist(qw(/usr/bin/foomatic-configure
-			    /usr/bin/foomatic-rip
-			    /usr/share/foomatic/db/source/driver/ljet4.xml
-			    /usr/bin/escputil
-			    /usr/share/printer-testpages/testprint.ps
-			    /usr/bin/nmap
-			    /usr/bin/scli
-			    ))) {
-	    # Do not try to install packages when installing print queues
-	    # in the background, simply do not install queues
-	    exit 0 if $::noX;
-	    $in->do_pkgs->install('foomatic-db-engine', 'foomatic-filters',
-				  'foomatic-db', 'printer-utils',
-				  'printer-testpages', 'nmap', 'scli')
-		or do {
-		    $in->ask_warn(N("Error"),
-				  N("Could not install necessary packages, %s cannot be started!",
-				    "printerdrake"));
-		    exit 1;
-		};
-	}
-	
-	# only experts should be asked for the spooler also for background
-	# installation of print it should not be asked for the spooler,
-	# as this feature is only supported for CUPS.
-	$printer->{SPOOLER} ||= 'cups'
-	    if !$printer->{expert} || $::noX;
-	
-    }
+    # only experts should be asked for the spooler also for background
+    # installation of print it should not be asked for the spooler,
+    # as this feature is only supported for CUPS.
+    $printer->{SPOOLER} ||= 'cups'
+	if !$printer->{expert} || $::noX;
     
     # If we have chosen a spooler, install it and mark it as default 
     # spooler. Spooler installation is ommitted on background queue
