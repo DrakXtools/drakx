@@ -83,7 +83,10 @@ sub setupBootloader {
     setupBootloader__general($in, $b, $all_hds, $fstab, $security) or return 0;
     setupBootloader__boot_bios_drive($in, $b, $hds) or goto general;
 
-    setupBootloader__entries($in, $b, $all_hds, $fstab);
+    setupBootloader__entries($in, $b, $all_hds, $fstab); #- need to add a goto general here ? or Add, Modify, Remove is different ?
+
+    #- somewhere should bootloader really installed ?
+    bootloader::install($b, $fstab, $hds);
 }
 
 
