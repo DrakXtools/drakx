@@ -210,7 +210,7 @@ sub choosePartitionsToFormat($$) {
     @l = grep { $_->{toFormat} } @l;
     $o->ask_many_from_list_ref('', _("Check bad blocks?"),
 			       [ map { $label{$_} } @l ],
-			       [ map { \$_->{toFormatCheck} } @l ]) or die "cancel" if $::expert;
+			       [ map { \$_->{toFormatCheck} } @l ]) or goto &choosePartitionsToFormat if $::expert;
 }
 
 sub formatPartitions {
@@ -254,7 +254,7 @@ sub choosePackages {
 	pkgs::setSelectedFromCompssList($o->{compssListLevels}, $packages, $::expert ? 90 : 80, $available, $o->{installClass});
 	my $min_size = pkgs::size_selected($packages);
 
-	$o->chooseGroups($packages, $compssUsers, $compssUsersSorted) unless $::beginner;
+	$o->chooseGroups($packages, $compssUsers, $compssUsersSorted);
 
 	my %save_selected; $save_selected{$_->{name}} = $_->{selected} foreach values %$packages;
 	pkgs::setSelectedFromCompssList($o->{compssListLevels}, $packages, 1, 0, $o->{installClass});
@@ -267,7 +267,7 @@ _("You need %dMB for a full install of the groups you selected.
 You can go on anyway, but be warned that you won't get all packages", $max_size / sqr(1024)), 1) or goto &choosePackages
 	}
 
-	my $size2install = $::beginner ? $available * 0.7 : $o->chooseSizeToInstall($packages, $min_size, $max_size) or goto &choosePackages;
+	my $size2install = $::beginner ? $available * 0.7 : $o->chooseSizeToInstall($packages, $min_size, min($max_size, $available)) or goto &choosePackages;
 
 	($o->{packages_}{ind}) = 
 	  pkgs::setSelectedFromCompssList($o->{compssListLevels}, $packages, 1, $size2install, $o->{installClass});
@@ -290,7 +290,7 @@ sub chooseGroups {
 			       _("Package Group Selection"),
 			       [ @$compssUsersSorted, "Miscellaneous" ],
 			       [ map { \$o->{compssUsersChoice}{$_} } @$compssUsersSorted, "Miscellaneous" ]
-			       ) or goto &chooseGroups;
+			       ) or goto &chooseGroups unless $::beginner;
 
     unless ($o->{compssUsersChoice}{Miscellaneous}) {
 	my %l;
@@ -905,12 +905,9 @@ sub setupXfree {
       local $::noauto = $::expert && !$o->ask_yesorno('', _("Try to find PCI devices?"), 1);
       $::noauto = $::noauto; #- no warning
 
-      symlink "$o->{prefix}/etc/gtk", "/etc/gtk";
-
       Xconfigurator::main($o->{prefix}, $o->{X}, $o, $o->{allowFB}, bool($o->{pcmcia}), sub {
 	  install_any::pkg_install($o, "XFree86-$_[0]");
       });
-      unlink "/etc/gtk";
     }
     $o->setupXfreeAfter;
 }

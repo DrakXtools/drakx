@@ -1,6 +1,7 @@
+include Makefile.config
+
 DIRS = ddcprobe pnp_serial po Newt c pci_probing resize_fat
 PREFIX = 
-STANDALONEPMS= diskdrake XFdrake mousedrake lspcidrake printerdrake keyboarddrake netdrake drakxconf drakxservices draksec adduserdrake
 SBINDEST = $(PREFIX)/usr/sbin
 ETCDEST = $(PREFIX)/etc/gtk
 BINDEST = $(PREFIX)/usr/bin
@@ -15,6 +16,7 @@ all: $(DIRS)
 $(DIRS):
 	install -d auto
 	rm standalone ; ln -s . standalone
+	rm -f po/DrakX.pot # force rebuild of po's
 	$(MAKE) -C $@
 
 install:

@@ -341,7 +341,7 @@ sub formatPartitions {
     #-	 Do  not  update  inode  access times on this
     #-	 file system (e.g, for faster access  on  the
     #-	 news spool to speed up news servers).
-    $_->{options} = "noatime" foreach grep { isExt2($_) } @{$o->{fstab}};
+    $o->{pcmcia} and $_->{options} = "noatime" foreach grep { isExt2($_) } @{$o->{fstab}};
 }
 
 #------------------------------------------------------------------------------
@@ -350,7 +350,11 @@ sub choosePackages {
     $o->setPackages if $_[1] == 1;
     $o->selectPackagesToUpgrade($o) if $o->{isUpgrade} && $_[1] == 1;
     if ($_[1] > 1 || !$o->{isUpgrade} || $::expert) {
-	do { $o->{compssUsersChoice}{$_} = 1 foreach @{$o->{compssUsersSorted}}, 'Miscellaneous' } if $_[1] == 1;
+	if ($_[1] == 1) { 
+	    $o->{compssUsersChoice}{$_} = 1 foreach @{$o->{compssUsersSorted}}, 'Miscellaneous';
+	    $o->{compssUsersChoice}{KDE} = 0 if $o->{lang} =~ /ja|ko|th|vi|zh/; #- gnome handles much this fonts much better
+
+	}
 	$o->choosePackages($o->{packages}, $o->{compss}, 
 			   $o->{compssUsers}, $o->{compssUsersSorted}, $_[1] == 1);
 	pkgs::unselect($o->{packages}, $o->{packages}{kdesu}) if $o->{packages}{kdesu} && $o->{security} > 3;

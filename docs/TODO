@@ -1,11 +1,8 @@
+(done,pix)bug: DrakConf don't follow the charset -> add setlocale(LC_ALL, "")
+(done,pix)for ko|ja|zh, gnome-terminal should point to rxvt (-CLE)
 (done,pix)group cdrom in /etc/group (gid=22)
-
-drakxtools should require urpmi
-
-checkboxes in groups based on compssList (and availableSpace?)
-
-bug: gdm unset LANG
-
+(done,pix)drakxtools should require urpmi
+(done,pix)bug: gdm unset LANG
 (done,pix) zip with automount -> ppa not autoloaded
 (done,pix)when you set the kde icons to Large, maybe it'd be good to chown the .kderc
 (done,pix)lilo in russian/japaneese is horrible
@@ -19,9 +16,11 @@ just before release:
 - update kudzu's pcitable
 - update pcitable for 86C368 if 3.3.6 (and other S3 3D's)
 
+--------------------------------------------------------------------------------
 remount ro before X test.
 
---------------------------------------------------------------------------------
+checkboxes in groups based on compssList (and availableSpace?)
+
 rpmdrake and same name packages
 
 (workaround)with 2MB of video ram, chooses 8bpp instead of 16bpp

@@ -273,9 +273,18 @@ sub afterInstallPackages($) {
     log::l("updating kde icons according to available devices");
     install_any::kdeicons_postinstall($o->{prefix});
 
-    substInFile { s/^(GreetString)=.*/$1=Welcome to [HOSTNAME]/ } "$o->{prefix}/usr/share/config/kdmrc";
+    my $welcome = _("Welcome to %s", "[HOSTNAME]");
+    substInFile { s/^(GreetString)=.*/$1=$welcome/ } "$o->{prefix}/usr/share/config/kdmrc";
     substInFile { s/^(UserView)=false/$1=true/ } "$o->{prefix}/usr/share/config/kdmrc" if $o->{security} < 3;
     run_program::rooted($o->{prefix}, "kdeDesktopCleanup");
+
+    #- konsole and gnome-terminal are lamers in exotic languages, link them to something better
+    if ($o->{lang} =~ /ja|ko|zh/) {
+	foreach ("konsole", "gnome-terminal") {
+	    my $f = "$o->{prefix}/usr/bin/$_";
+	    symlinkf("X11/rxvt.sh", $f) if -e $f;
+	}
+    }
 
     foreach (install_any::list_skels()) {
 	my $found;
