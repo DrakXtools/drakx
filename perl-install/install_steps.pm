@@ -276,13 +276,13 @@ sub pppConfig {
 	my @l = cat_("$o->{prefix}/etc/ppp/pap-secrets");
 	my $replaced = 0;
 	do { $replaced ||= 1
-	       if s/^\s*$toreplace{connection}\s+ppp0\s+(\S+)/$toreplace{connection}  ppp0  $toreplace{passwd}/; } foreach @l;
+	       if s/^\s*$toreplace{login}\s+ppp0\s+(\S+)/$toreplace{login}  ppp0  $toreplace{passwd}/; } foreach @l;
 	if ($replaced) {
 	    open F, ">$o->{prefix}/etc/ppp/pap-secrets" or die "Can't open $o->{prefix}/etc/ppp/pap-secrets $!";
 	    print F @l;
 	} else {
 	    open F, ">>$o->{prefix}/etc/ppp/pap-secrets" or die "Can't open $o->{prefix}/etc/ppp/pap-secrets $!";
-	    print F "$toreplace{connection}  ppp0  $toreplace{passwd}\n";
+	    print F "$toreplace{login}  ppp0  $toreplace{passwd}\n";
 	}
     } elsif ($o->{modem}{auth} eq 'Terminal-based' || $o->{modem}{auth} eq 'Script-based') {
 	template2file("/usr/share/ifcfg-ppp.script.in", "$o->{prefix}/etc/sysconfig/network-scripts/ifcfg-ppp0", %toreplace);
