@@ -463,14 +463,6 @@ sub configure_entry {
     }
 }
 
-sub dev2prompath { #- SPARC only
-    my ($dev) = @_;
-    my ($wd, $num) = $dev =~ /^(.*\D)(\d*)$/;
-    require c;
-    $dev = c::disk2PromPath($wd) and $dev = $dev =~ /^sd\(/ ? "$dev$num" : "$dev;$num";
-    $dev;
-}
-
 sub get_kernels_and_labels {
     my ($b_prefer_24) = @_;
 
