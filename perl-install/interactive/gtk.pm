@@ -154,11 +154,25 @@ sub create_treeview_tree {
     $tree_expanded = to_bool($tree_expanded); #- to reduce "Use of uninitialized value", especially when debugging
 
     my $sep = quotemeta $e->{separator};
-    my $tree_model = Gtk2::TreeStore->new(Gtk2::GType->STRING);
+    my $tree_model = Gtk2::TreeStore->new(Gtk2::GType->STRING, Gtk2::GType->OBJECT, Gtk2::GType->STRING);
     my $tree = Gtk2::TreeView->new_with_model($tree_model);
     $tree->get_selection->set_mode('browse');
     $tree->append_column(Gtk2::TreeViewColumn->new_with_attributes(undef, Gtk2::CellRendererText->new, 'text' => 0));
+    $tree->append_column(Gtk2::TreeViewColumn->new_with_attributes(undef, Gtk2::CellRendererPixbuf->new, 'pixbuf' => 1));
+    $tree->append_column(Gtk2::TreeViewColumn->new_with_attributes(undef, Gtk2::CellRendererText->new, 'text' => 2));
     $tree->set_headers_visible(0);
+
+    my @to_unref;
+    $tree->signal_connect(destroy => sub { $_->unref foreach @to_unref });
+    my $build_value = sub {
+	if (exists $e->{image2f}) {
+	    my ($text, $image) = $e->{image2f}->($_[0]);
+	    [ $text  ? (0 => $text) : (),
+	      $image ? (1 => do { push @to_unref, my $img = gtkcreate_pixbuf($image); $img }) : () ];
+	} else {
+	    [ 0 => $_[0] ];
+	}
+    };
 
     my (%wtree, %wleaves, $size, $selected_via_click);
     my $parent; $parent = sub {
@@ -166,7 +180,7 @@ sub create_treeview_tree {
 	my $s = '';
 	foreach (split $sep, $_[0]) {
 	    $wtree{"$s$_$e->{separator}"} ||= 
-	      $tree_model->append_set($s ? $parent->($s) : undef, [ 0 => $_ ]);
+	      $tree_model->append_set($s ? $parent->($s) : undef, $build_value->($_));
 	    $size++ if !$s;
 	    $s .= "$_$e->{separator}";
 	}
@@ -177,7 +191,7 @@ sub create_treeview_tree {
     my (%precomp, @ordered_keys);
     mapn {
 	my ($root, $leaf) = $_[0] =~ /(.*)$sep(.+)/ ? ($1, $2) : ('', $_[0]);
-	my $iter = $tree_model->append_set($parent->($root), [ 0 => $leaf ]);
+	my $iter = $tree_model->append_set($parent->($root), $build_value->($leaf));
 	my $pathstr = $tree_model->get_path_str($iter);
 	$iter->free;
 	$precomp{$pathstr} = { value => $leaf, fullvalue => $_[0], listvalue => $_[1] };
@@ -394,7 +408,11 @@ sub ask_fromW {
 	    });
 	    $real_w = gtkpack_(Gtk2::HBox->new(0,10), 1, Gtk2::HBox->new(0,0), 0, $w, 1, Gtk2::HBox->new(0,0));
 	} elsif ($e->{type} eq 'bool') {
-	    $w = Gtk2::CheckButton->new($e->{text});
+	    if ($e->{image}) {
+		$w = gtkadd(Gtk2::CheckButton->new, gtkshow(gtkcreate_img($e->{image})));
+	    } else {
+		$w = Gtk2::CheckButton->new($e->{text});
+	    }
 	    $w->signal_connect(clicked => $changed);
 	    $set = sub { $w->set_active($_[0]) };
 	    $get = sub { $w->get_active };

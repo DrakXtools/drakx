@@ -42,14 +42,15 @@ use common;
 #-               (type defaults to button if clicked or clicked_may_quit is there)
 #-               (val need not be a reference) (if clicked_may_quit return true, it's as if "Ok" was pressed)
 #-     label => (val need not be a reference) (type defaults to label if val is not a reference) 
-#-     bool (with text)
+#-     bool (with "text" or "image" (which overrides text) giving an image filename)
 #-     range (with min, max)
 #-     combo (with list, not_edit, format)
 #-     list (with list, icon2f (aka icon), separator (aka tree), format (aka pre_format function),
 #-           help can be a hash or a function,
 #-           tree_expanded boolean telling wether the tree should be wide open by default
 #-           quit_if_double_click boolean
-#-           allow_empty_list disables the special cases for 0 and 1 element lists)
+#-           allow_empty_list disables the special cases for 0 and 1 element lists
+#-           image2f is a subroutine which takes a value of the list as parameter, and returns an array (text, image_file_name))
 #-     entry (the default) (with hidden)
 #
 #- heritate from this class and you'll get all made interactivity for same steps.
