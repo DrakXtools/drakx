@@ -102,6 +102,10 @@ void initIMPS2() {
 
 void log_message(const char * s, ...) {}
 
+';
+
+print '
+
 SV * iconv_(char* s, char* from_charset, char* to_charset) {
   iconv_t cd = iconv_open(to_charset, from_charset);
   char* retval = s;
@@ -120,10 +124,6 @@ SV * iconv_(char* s, char* from_charset, char* to_charset) {
   }
   return newSVpv(retval, 0);
 }
-
-';
-
-print '
 
 MODULE = c::stuff		PACKAGE = c::stuff
 
