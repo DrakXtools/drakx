@@ -8,7 +8,6 @@ use strict;
 #-######################################################################################
 use common;
 use run_program;
-use my_gtk qw(:helpers :wrappers);
 
 sub description {
     my %services = (
@@ -183,6 +182,10 @@ sub ask_install {
 sub ask_standalone_gtk {
     my ($in, $prefix) = @_;
     my ($l, $on_services) = services($prefix);
+
+    require my_gtk;
+    my_gtk->import(qw(:helpers :wrappers));
+
     my $W = my_gtk->new(_("Services"));
     my ($x, $y, $w_popup);
     my $nopop = sub { $w_popup and $w_popup->destroy };
@@ -283,16 +286,6 @@ sub services {
     my $cmd = $prefix && !$::testing ? "chroot $prefix" : "";
     my @l = map { [ /([^\s:]+)/, /\bon\b/ ] } grep { !/:$/ } sort `LANGUAGE=C $cmd /sbin/chkconfig --list`;
     [ map { $_->[0] } @l ], [ map { $_->[0] } grep { $_->[1] } @l ];
-}
-
-sub mapgrep(&@) {
-    my $f = shift;
-    my @l;
-    foreach (@_) {
-	my ($b, $v) = $f->($_);
-	push @l, $v if $b;
-    }
-    @l;
 }
 
 1;
