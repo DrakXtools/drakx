@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 9.1
-Release: 37mdk
+Release: 38mdk
 Url: http://www.mandrakelinux.com/en/drakx.php2
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -10,7 +10,7 @@ Group: System/Configuration/Other
 Requires: perl-GTK >= 0.7008-29mdk, perl-GTK-GdkImlib, perl-GTK-GdkPixbuf
 Requires: %{name}-newt = %version-%release, perl-GTK2 >= 0.0.cvs.2003.04.04.1, XFree86-100dpi-fonts, XFree86-75dpi-fonts, /usr/X11R6/bin/xtest, font-tools, usermode >= 1.63-5mdk, perl-MDK-Common >= 1.1.2-2mdk
 Conflicts: drakconf < 9.1-14mdk
-BuildRequires: gettext, libgtk+-x11-2.0-devel, ldetect-devel >= 0.4.9, ncurses-devel, newt-devel, perl-devel >= 1:5.8.0-20mdk, libext2fs-devel, perl-MDK-Common-devel >= 1.1.2-2mdk
+BuildRequires: gettext, libgtk+-x11-2.0-devel, ldetect-devel >= 0.4.9, ncurses-devel, newt-devel, perl-devel >= 1:5.8.0-20mdk, libext2fs-devel, perl-MDK-Common-devel >= 1.1.3-1mdk
 BuildRoot: %_tmppath/%name-buildroot
 Provides: draksec
 Obsoletes: draksec
@@ -311,6 +311,9 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Fri May 16 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.1-38mdk
+- drakconnect: fix #852 (poulpy)
+
 * Thu May 15 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.1-37mdk
 - drakfont: fix #1352 (do not add font directory with dummy messages)
 - harddrake2: fix #3487 (invalid charset in help windows)
