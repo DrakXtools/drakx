@@ -577,7 +577,10 @@ sub About() {
     $list->get_selection->set_mode('none');
     gtkpack_($window_about->vbox,
              -r "$pixdir/about-printerdrake.png" ?
-             (0, Gtk2::Image->new_from_file("$pixdir/about-printerdrake.png")) : (1, gtkmodify_font(Gtk2::Label->new(N("Printer Management \n") . $us->{VERSION}), 'Bold 18'),),
+             (0, Gtk2::Image->new_from_file("$pixdir/about-printerdrake.png")) :
+               (1, gtkset_markup(Gtk2::Label->new, 
+                                 qq(<span weight="bold" size="x-large">) . N("Printer Management \n") . $us->{VERSION} . "</span>"),
+            ),
 	     1, $list,
 	    );
     $window_about->show_all;
