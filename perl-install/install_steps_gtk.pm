@@ -660,10 +660,7 @@ sub summary_prompt {
 		    0, $w->create_okcancel(undef, '', '', if_($help_sub, [ N("Help"), $help_sub, 1 ]))
 		  ));
 
-    while (1) {
-	$w->main;
-	last if $check_complete->();
-    }
+    $w->main($check_complete);
 }
 
 1;
