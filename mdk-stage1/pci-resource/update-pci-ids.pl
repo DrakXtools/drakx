@@ -47,7 +47,7 @@ struct pci_module_map ${type}_pci_ids[] = {
 	($absent{$v->[0]} = 1) if (!grep(/^$v->[0]\.o\s/, @{$modulez{$type}}));
     }
 
-    if (%absent) { print STDERR "missing for $type: "; foreach (keys %absent) { print STDERR "$_ " } print STDERR "\n"; };
+    if (%absent) { print STDERR "\tmissing for $type: "; foreach (keys %absent) { print STDERR "$_ " } print STDERR "\n"; };
 
 print "
 };
