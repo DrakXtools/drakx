@@ -954,6 +954,7 @@ I cannot set up this connection type.")), return;
                    static_hostname => 
                    {
                     pre => sub {
+                        network::ethernet::write_ether_conf($in, $netcnx, $netc, $intf) if $netcnx->{type} = 'lan';
                         if ($ethntf->{IPADDR}) {
                             $netc->{dnsServer} ||= dns($ethntf->{IPADDR});
                             $gateway_ex = gateway($ethntf->{IPADDR});
