@@ -550,7 +550,7 @@ sub installPackages {
 				  $gc_text->set_foreground(gtkcolor(255, 255, 255));
 				  foreach (@data) {
 				      my ($width, $height, $lines, $widths, $heights, $ascents, $descents) = get_text_coord (
-					    $_->[0], $style, $_->[3], $_->[4], 0, 1, 0);
+					    $_->[0], $style, $_->[3], $_->[4], 1, 0, 1, 1);
 				      my $i = 0;
 				      foreach (@{$lines}) {
 					$dbl_area->draw_string($style->font, $gc_text, ${$widths}[$i], ${$ascents}[$i] + ${$heights}[$i], $_);
