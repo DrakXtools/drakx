@@ -501,14 +501,15 @@ sub gtkicons_labels_widget {
     my $i = 0;
     my $cursor_hand = new Gtk::Gdk::Cursor 60;
     my $cursor_normal = new Gtk::Gdk::Cursor 68;
-    foreach (@$args) {
-	my $label = $_->[0];
+	my @args = @$args;
+    foreach (@args) {
+	my ($label, $tag) = ($_->[0], $_->[1]);
 	die "$label 's icon is missing" unless $exec_hash->{$label};
 	my ($dbl_area, $pix, $width, $height); # initialized in call back
 	my $darea = new Gtk::DrawingArea;
-	my ($icon, undef) = gtkcreate_png($_->[1]);
-	my $pixbuf = compose_with_back($_->[1], $back_pixbuf);
-	my $pixbuf_h = compose_with_back($_->[1], $back_pixbuf, 170);
+	my ($icon, undef) = gtkcreate_png($tag);
+	my $pixbuf = compose_with_back($tag, $back_pixbuf);
+	my $pixbuf_h = compose_with_back($tag, $back_pixbuf, 170);
 
 	my $draw = sub {
 	    my ($widget, $event) = @_;
@@ -550,11 +551,10 @@ sub gtkicons_labels_widget {
 					&$draw(@_);
 				    }
 				});
-	my $label_exec = $_->[0];
 	$darea->signal_connect(button_release_event => sub {
 				    $darea->{state} = 0;
 				    $darea->draw(undef);
-				    $exec_func->($exec_hash->{$label_exec});
+				    $exec_func->($tag, $exec_hash->{$label});
 				});
 	$darea->signal_connect(realize => sub { $darea->window->set_cursor($cursor_hand) });
 	$tab[$i] = $darea;
@@ -562,22 +562,29 @@ sub gtkicons_labels_widget {
     }
     my $fixed = new Gtk::Fixed;
     foreach (@tab) { $fixed->put($_, 75, 65) }
-    my $redraw_function = sub { 
-	$fixed->move(@$_) foreach compute_icons($fixed->allocation->[2], $fixed->allocation->[3], 40, 15, 20, @tab);
+	my $is_resized = 0;
+    my $w_ret = createScrolledWindow($fixed, ['automatic', 'automatic']);
+    my $redraw_function;
+    $redraw_function = sub { 
+	if ($is_resized == 0) {
+		if (3 < $#args) {
+			#- Ugly hacks, don't touch! ########
+			my $timeout1 = Gtk->timeout_add(100, sub {
+					$fixed->set_usize($w_ret->allocation->[2] - 22, 0);
+					&$redraw_function;
+					0
+			});
+		}
+		$is_resized = 1;
+	}
+	$fixed->move(@$_) foreach compute_icons($fixed->allocation->[2]-22, $fixed->allocation->[3], 40, 15, 20, @tab);
     };
     $fixed->signal_connect(expose_event => $redraw_function);
-    $fixed->signal_connect(realize => sub {
-			       $fixed->window->set_back_pixmap($background, 0);
-			       $redraw_function->();
-			   });
+    $fixed->signal_connect(realize => sub { $fixed->window->set_back_pixmap($background, 0) });
     $fixed->{redraw_function} = $redraw_function;
-    $fixed->show_all();
-    my $w_ret = createScrolledWindow($fixed, ['automatic', 'automatic']);
 
-    #- Ugly hacks, don't touch! ########
-    my $timeout2 = Gtk->timeout_add(100, sub { $fixed->set_usize($w_ret->allocation->[2] - 22, 0); 0 });
     $w_ret->vscrollbar->set_usize(19, undef);
-    gtkset_border_width($w_ret, -2); #- ok, this is very very ugly...
+    gtkhide(gtkset_border_width($w_ret, -2)); #- ok, this is very very ugly...
 }
 
 sub n_line_size {
