@@ -1062,7 +1062,7 @@ sub makesharehostlist {
 	    $sharehosthash{$host} = N("Local network(s)");
 	} elsif ($host =~ /\@IF\((.*)\)/i) {
 	    $sharehosthash{$host} = N("Interface \"%s\"", $1);
-	} elsif ($host =~ /(\/|^\*|\*$|^\.)/i) {
+	} elsif ($host =~ /(\/|^\*|\*$|^\.)/) {
 	    $sharehosthash{$host} = N("Network %s", $host);
 	} else {
 	    $sharehosthash{$host} = N("Host %s", $host);
@@ -1074,6 +1074,34 @@ sub makesharehostlist {
     return { list => \@sharehostlist, 
 	     hash => \%sharehosthash, 
 	     invhash => \%sharehosthash_inv };
+}
+
+sub makebrowsepolllist {
+
+    # Human-readable strings for hosts from which the print queues are
+    # polled
+
+    my ($printer) = @_;
+
+    my @browsepolllist; 
+    my %browsepollhash;
+    for my $host (@{$printer->{cupsconfig}{BrowsePoll}}) {
+	my ($ip, $port);
+	if ($host =~ /^([^:]+):([^:]+)$/) {
+	    $ip = $1;
+	    $port = $2;
+	} else {
+	    $ip = $host;
+	    $port = '631';
+	}
+	$browsepollhash{$host} = N("%s (Port %s)", $ip, $port);
+	push(@browsepolllist, $browsepollhash{$host});
+    }
+    my %browsepollhash_inv = reverse %browsepollhash;
+
+    return { list => \@browsepolllist, 
+	     hash => \%browsepollhash, 
+	     invhash => \%browsepollhash_inv };
 }
 
 sub is_network_ip {
@@ -1128,6 +1156,11 @@ sub read_cups_config {
     $printer->{cupsconfig}{keys}{BrowseOrder} =
 	handle_configs::read_unique_directive($printer->{cupsconfig}{cupsd_conf},
 					      'BrowseOrder', 'deny,allow');
+
+    # Keyword "BrowsePoll" 
+    @{$printer->{cupsconfig}{BrowsePoll}} =
+	handle_configs::read_directives($printer->{cupsconfig}{cupsd_conf},
+					'BrowsePoll');
 
     # Root location
     @{$printer->{cupsconfig}{rootlocation}} =
@@ -1254,6 +1287,17 @@ sub write_cups_config {
 	    handle_configs::comment_directive($printer->{cupsconfig}{cupsd_conf},
 					      'BrowseAllow');
 	}
+    }
+
+    # Set "BrowsePoll" lines
+    if ($#{$printer->{cupsconfig}{BrowsePoll}} >= 0) {
+	handle_configs::set_directive($printer->{cupsconfig}{cupsd_conf},
+				      'BrowsePoll ' .
+				      join ("\nBrowsePoll ", 
+					    @{$printer->{cupsconfig}{BrowsePoll}}));
+    } else {
+	handle_configs::comment_directive($printer->{cupsconfig}{cupsd_conf},
+					  'BrowsePoll');
     }
 
 }

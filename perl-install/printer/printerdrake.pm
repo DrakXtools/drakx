@@ -71,6 +71,7 @@ sub config_cups {
     my $maindone;
     while (!$maindone) {
 	my $sharehosts = printer::main::makesharehostlist($printer);
+	my $browsepoll = printer::main::makebrowsepolllist($printer);
 	my $buttonclicked;
 	#- Show dialog
 	if ($in->ask_from_
@@ -101,6 +102,18 @@ sub config_cups {
 		disabled => sub {
 		    (!$printer->{cupsconfig}{localprintersshared} &&
 		     !$printer->{cupsconfig}{remotebroadcastsaccepted});
+		} },
+	      { val => N("Additional CUPS servers: ") .
+		     ($#{$browsepoll->{list}} >= 0 ?
+		      ($#{$browsepoll->{list}} > 1 ?
+		       join(", ", @{$browsepoll->{list}}[0,1]) . " ..." :
+		       join(", ", @{$browsepoll->{list}})) :
+		      N("None")), 
+		type => 'button',
+		help => N("To get access to printers on remote CUPS servers in your local network you only need to turn on the \"Automatically find available printers on remote machines\" option; the CUPS servers inform your machine automatically about their printers. All printers currently known to your machine are listed in the \"Remote printers\" section in the main window of Printerdrake. If your CUPS server(s) is/are not in your local network, you have to enter the IP address(es) and optionally the port number(s) here to get the printer information from the server(s)."),
+		clicked_may_quit => sub {
+		    $buttonclicked = "browsepoll";
+		    1;
 		} },
 	      if_($::expert,
 		  { text => N("Automatic correction of CUPS configuration"),
@@ -209,6 +222,13 @@ If some of these measures lead to problems for you, turn this option off, but th
 				   complete => sub {
 				       if (($hostchoice eq 
 					    N("IP address of host/network:")) &&
+					   $ip =~ /^\s*$/) {
+					   
+					   $in->ask_warn('', N("Host/network IP address missing."));
+					   return (1,1);
+				       }
+				       if (($hostchoice eq 
+					    N("IP address of host/network:")) &&
 					   !printer::main::is_network_ip($ip)) {
 					   
 					   $in->ask_warn('', 
@@ -220,7 +240,7 @@ N("10.1.*\n") .
 N("192.168.100.0/24\n") .
 N("192.168.100.0/255.255.255.0\n")
 );
-					   return (1,0);
+					   return (1,1);
 				       }
 				       if ($hostchoice eq $menu[0]) {
 					   $address = "\@LOCAL";
@@ -238,7 +258,12 @@ N("192.168.100.0/255.255.255.0\n")
 						  @{$printer->{cupsconfig}{clientnetworks}})) {
 					   $in->ask_warn('', 
 							 N("This host/network is already in the list, it cannot be added again.\n"));
-					   return (1,1);
+					   if ($hostchoice eq 
+					       N("IP address of host/network:")) {
+					       return (1,1);
+					   } else {
+					       return (1,0);
+					   }
 				       }
 				       return 0;
 				   },
@@ -292,6 +317,159 @@ N("192.168.100.0/255.255.255.0\n")
 		if ($#{$printer->{cupsconfig}{clientnetworks}} < 0) {
 		    $printer->{cupsconfig}{localprintersshared} = 0;
 		    $printer->{cupsconfig}{remotebroadcastsaccepted} = 0;
+		}
+	    } elsif ($buttonclicked eq "browsepoll") {
+		# Show dialog to add hosts to "BrowsePoll" from
+		my $subdone = 0;
+		my $choice;
+		while (!$subdone) {
+		    # Entry should be edited when double-clicked
+		    $buttonclicked = "edit";
+		    $in->ask_from_
+			(
+			 { title => N("Accessing printers on remote CUPS servers"),
+			   messages => N("Add here the CUPS servers whose printers you want to use. You only need to do this if the servers do not broadcast their printer information into the local network."),
+			   ok => "",
+			   cancel => "",
+		         },
+			 # List the hosts
+			 [ { val => \$choice, format => \&translate,
+			     sort => 0, separator => "####",
+			     tree_expanded => 1,
+			     quit_if_double_click => 1,
+			     allow_empty_list => 1,
+			     list => $browsepoll->{list} },
+			   { val => N("Add server"), 
+			     type => 'button',
+			     clicked_may_quit => sub {
+				 $buttonclicked = "add";
+				 1; 
+			     } },
+			   { val => N("Edit selected server"), 
+			     type => 'button',
+			     clicked_may_quit => sub {
+				 $buttonclicked = "edit";
+				 1; 
+			     },
+			     disabled => sub {
+				 return ($#{$browsepoll->{list}} < 0);
+			     } },
+			   { val => N("Remove selected server"), 
+			     type => 'button',
+			     clicked_may_quit => sub {
+				 $buttonclicked = "remove";
+				 1; 
+			     },
+			     disabled => sub {
+				 return ($#{$browsepoll->{list}} < 0);
+			     } },
+			   { val => N("Done"), 
+			     type => 'button',
+			     clicked_may_quit => sub {
+				 $buttonclicked = "";
+				 $subdone = 1;
+				 1; 
+			     } },
+			   ]
+			 );
+		    if ($buttonclicked eq "add" ||
+			$buttonclicked eq "edit") {
+			my ($ip, $port);
+			if ($buttonclicked eq "add") {
+			    # Use default port
+			    $port = '631';
+			} else {
+			    if ($browsepoll->{invhash}{$choice} =~
+				/^([^:]+):([^:]+)$/) {
+				# Entry to edit has IP and port
+				$ip = $1;
+				$port = $2;
+			    } else {
+				# Entry is only an IP, no port, so take
+				# the default port 631
+				$ip = $browsepoll->{invhash}{$choice};
+				$port = '631';
+			    }
+			}
+			# Show the dialog
+			my $address;
+			my $oldaddress = 
+			    ($buttonclicked eq "edit" ?
+			     $browsepoll->{invhash}{$choice} : "");
+			if ($in->ask_from_
+			    (
+			     { title => N("Accessing printers on remote CUPS servers"),
+			       messages => N("Enter IP address and port of the host whose printers you want to use."),
+			       callbacks => {
+				   complete => sub {
+				       if ($ip =~ /^\s*$/) {
+					   $in->ask_warn('', N("Server IP missing!"));
+					   return (1,0);
+				       }
+				       if ($ip !~ 
+					   /^\s*(\d+\.\d+\.\d+\.\d+)\s*$/) {
+					   $in->ask_warn('', 
+N("The entered IP is not correct.\n") .
+N("Examples for correct IPs:\n") .
+N("192.168.100.194\n") .
+N("10.0.0.2\n")
+);
+					   return (1,0);
+				       } else {
+					   $ip = $1;
+				       }
+				       if ($port !~ /^\s*(\d+)\s*$/) {
+					   $in->ask_warn('', N("The port number should be an integer!"));
+					   return (1,1);
+				       } else {
+					   $port = $1;
+				       }
+				       $address = "$ip:$port";
+				       # Check whether item is duplicate
+				       if ($address ne $oldaddress &&
+					   member($address,
+						  @{$printer->{cupsconfig}{BrowsePoll}})) {
+					   $in->ask_warn('', 
+							 N("This server is already in the list, it cannot be added again.\n"));
+					   return (1,0);
+				       }
+				       return 0;
+				   },
+			       },
+			   },
+			     # List the host types
+			     [ { val => \$ip, 
+				 label => N("IP address") },
+			       { val => \$port, 
+				 label => N("Port") },
+			       ],
+			     )) {
+			    # OK was clicked, insert new item into the list
+			    if ($buttonclicked eq "add") {
+				push(@{$printer->{cupsconfig}{BrowsePoll}},
+				     $address);
+			    } else {
+				@{$printer->{cupsconfig}{BrowsePoll}} =
+				    map {($_ eq
+					  $browsepoll->{invhash}{$choice} ?
+					  $address : $_)}
+				        @{$printer->{cupsconfig}{BrowsePoll}};
+			    }
+			    # Refresh list of hosts
+			    $browsepoll = 
+			    printer::main::makebrowsepolllist($printer);
+			    # Position the list cursor on the new/modified
+			    # item
+			    $choice = $browsepoll->{hash}{$address};
+			}
+		    } elsif ($buttonclicked eq "remove") {
+			@{$printer->{cupsconfig}{BrowsePoll}} =
+			    grep {$_ ne $browsepoll->{invhash}{$choice}}
+			    @{$printer->{cupsconfig}{BrowsePoll}};
+			# Refresh list of hosts
+			$browsepoll = 
+			    printer::main::makebrowsepolllist($printer);
+		    }
 		}
 	    } else {
 		# We have clicked "OK"
