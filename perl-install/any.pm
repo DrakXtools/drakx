@@ -759,8 +759,8 @@ sub autologin {
 
 	$in->ask_from_(
 		       { title => _("Autologin"),
-			 messages => _('I can set up your computer to automatically log on one user.
-Do you want to use this feature?'),
+			 messages => _("I can set up your computer to automatically log on one user.
+Do you want to use this feature?"),
 			 ok => _("Yes"),
 			 cancel => _("No") },
 		       [ { label => _("Choose the default user:"), val => \$o->{autologin}, list => [ '', @users ] },
