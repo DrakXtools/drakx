@@ -37,6 +37,7 @@ if [ -x "/tmp/drakx/mdkinst/usr/bin/perl-install/live_install2" ]; then
     fi
 
     # start DrakX, do not keep shell script in background else the CD is locked by it!!!
+    cd /tmp/drakx/mdkinst/usr/bin/perl-install
     exec ../../../lib/ld-linux.so.2 ../perl ./live_install2
 fi
 

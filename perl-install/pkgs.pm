@@ -753,15 +753,23 @@ sub rebuild_db_open_for_traversal {
 	    my $rebuilddb_dir = "$prefix/var/lib/rpmrebuilddb.$$";
 	    -d $rebuilddb_dir and log::l("removing stale directory $rebuilddb_dir"), commands::rm("-rf", $rebuilddb_dir);
 
+	    my $failed;
 	    c::rpmdbRebuild($prefix) or log::l("rebuilding of rpm database failed: ". c::rpmErrorString()), c::_exit(2);
 
-	    #-rebuilding has been successfull, so remove old rpm database if any.
-	    log::l("rebuilding rpm database completed successfully");
-	    foreach (qw(conflictsindex.rpm fileindex.rpm groupindex.rpm nameindex.rpm packages.rpm
+	    foreach (qw(Basenames Conflictname Group Name Packages Providename Requirename Triggername)) {
+		-s "$prefix/var/lib/rpm/$_" or $failed = 'failed';
+	    }
+	    #- rebuilding has been successfull, so remove old rpm database if any.
+	    #- once we have checked the rpm4 db file are present and not null, in case
+	    #- of doubt, avoid removing them...
+	    unless ($failed) {
+		log::l("rebuilding rpm database completed successfully");
+		foreach (qw(conflictsindex.rpm fileindex.rpm groupindex.rpm nameindex.rpm packages.rpm
                         providesindex.rpm requiredby.rpm triggerindex.rpm)) {
-		-e "$prefix/var/lib/rpm/$_" or next;
-		log::l("removing old rpm file $_");
-		commands::rm("-f", "$prefix/var/lib/rpm/$_");
+		    -e "$prefix/var/lib/rpm/$_" or next;
+		    log::l("removing old rpm file $_");
+		    commands::rm("-f", "$prefix/var/lib/rpm/$_");
+		}
 	    }
 	    c::_exit(0);
 	}

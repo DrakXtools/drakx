@@ -8,7 +8,9 @@ $ENV{PERL5LIB} = join ":", map { "$dir/$_" } @INC;
 $ENV{LD_LIBRARY_PATH} = "$dir/lib:$dir/usr/lib:$dir/usr/lib/perl5/5.6.0/i386-linux/CORE";
 $ENV{PATH} = join(":", map { "$dir/$_" } split ":", "/usr/bin:/bin:/sbin:/usr/sbin:/usr/X11R6/bin") . ":$ENV{PATH}";
 $ENV{SHARE_PATH} = "$dir/usr/share";
+$ENV{RPMRC_FILE} = "$dir/usr/lib/rpm/rpmrc";
 
+system "../../../lib/ld-linux.so.2", "../perl", "-i", "-pe", "s,(macrofiles:\\s*)(.*),$1$dir/usr/lib/rpm/macros:$2,", $ENV{RPMRC_FILE};
 system "../../../lib/ld-linux.so.2", "../perl", "./install2", "--live", @ARGV;
 
 $ENV{DISPLAY} and system "xset", "-fp", "/tmp/drakx/mdkinst/usr/X11R6/lib/X11/fonts/";

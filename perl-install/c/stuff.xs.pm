@@ -7,6 +7,7 @@ print '
 #define dev_t dev_t
 
 #include <ctype.h>
+#include <stdlib.h>
 #include <unistd.h>
 #include <syslog.h>
 #include <fcntl.h>
@@ -454,7 +455,9 @@ $ENV{C_RPM} and print '
 int
 rpmReadConfigFiles()
   CODE:
-  RETVAL = rpmReadConfigFiles(NULL, NULL) == 0;
+  char *rpmrc = getenv("RPMRC_FILE");
+  if (rpmrc != NULL && !*rpmrc) rpmrc = NULL;
+  RETVAL = rpmReadConfigFiles(rpmrc, NULL) == 0;
   OUTPUT:
   RETVAL
 
