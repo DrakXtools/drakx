@@ -4,8 +4,8 @@ use common qw(:common);
       8 => __("256 colors"),
 #     15 => __("32 thousand colors"),
      16 => __("65 thousand colors"),
-     24 => __("16 millions of colors"),
-     32 => __("4 billions of colors"),
+     24 => __("16 million colors"),
+     32 => __("4 billion colors"),
 );
 @depths = ikeys(%depths);
 
@@ -27,18 +27,18 @@ $resolution_wanted = "1024x768";
 );
 
 %standard_monitors = (
-  __("Standard VGA, 640x480 in 60 Hz")                             => [ '640x480@60',      "31.5"            , "60" ],
-  __("Super VGA, 800x600 in 56 Hz") 				   => [ '800x600@56',      "31.5-35.1"       , "55-60" ],
-  __("8514 Compatible, 1024x768 in 87 Hz interlaced (no 800x600)") => [ '8514 compatible', "31.5,35.5"       , "60,70,87" ],
-  __("Super VGA, 1024x768 in 87 Hz interlaced, 800x600 in 56 Hz")  => [ '1024x768@87i',    "31.5,35.15,35.5" , "55-90" ],
-  __("Extended Super VGA, 800x600 in 60 Hz, 640x480 in 72 Hz")     => [ '800x600@60',      "31.5-37.9"       , "55-90" ],
-  __("Non-Interlaced SVGA, 1024x768 in 60 Hz, 800x600 in 72 Hz")   => [ '1024x768@60',     "31.5-48.5"       , "55-90" ],
-  __("High Frequency SVGA, 1024x768 in 70 Hz") 		           => [ '1024x768@70',     "31.5-57.0"       , "50-90" ],
-  __("Multi-frequency that can do 1280x1024 in 60 Hz") 	           => [ '1280x1024@60',    "31.5-64.3"       , "50-90" ],
-  __("Multi-frequency that can do 1280x1024 in 74 Hz") 	           => [ '1280x1024@74',    "31.5-79.0"       , "50-100" ],
-  __("Multi-frequency that can do 1280x1024 in 76 Hz") 	           => [ '1280x1024@76',    "31.5-82.0"       , "40-100" ],
-  __("Monitor that can do 1600x1200 in 70 Hz")                     => [ '1600x1200@70',    "31.5-88.0"       , "50-120" ],
-  __("Monitor that can do 1600x1200 in 76 Hz")		           => [ '1600x1200@76',    "31.5-94.0"       , "50-160" ],
+  __("Standard VGA, 640x480 at 60 Hz")                             => [ '640x480@60',      "31.5"            , "60" ],
+  __("Super VGA, 800x600 at 56 Hz") 				   => [ '800x600@56',      "31.5-35.1"       , "55-60" ],
+  __("8514 Compatible, 1024x768 at 87 Hz interlaced (no 800x600)") => [ '8514 compatible', "31.5,35.5"       , "60,70,87" ],
+  __("Super VGA, 1024x768 at 87 Hz interlaced, 800x600 at 56 Hz")  => [ '1024x768@87i',    "31.5,35.15,35.5" , "55-90" ],
+  __("Extended Super VGA, 800x600 at 60 Hz, 640x480 at 72 Hz")     => [ '800x600@60',      "31.5-37.9"       , "55-90" ],
+  __("Non-Interlaced SVGA, 1024x768 at 60 Hz, 800x600 at 72 Hz")   => [ '1024x768@60',     "31.5-48.5"       , "55-90" ],
+  __("High Frequency SVGA, 1024x768 at 70 Hz") 		           => [ '1024x768@70',     "31.5-57.0"       , "50-90" ],
+  __("Multi-frequency that can do 1280x1024 at 60 Hz") 	           => [ '1280x1024@60',    "31.5-64.3"       , "50-90" ],
+  __("Multi-frequency that can do 1280x1024 at 74 Hz") 	           => [ '1280x1024@74',    "31.5-79.0"       , "50-100" ],
+  __("Multi-frequency that can do 1280x1024 at 76 Hz") 	           => [ '1280x1024@76',    "31.5-82.0"       , "40-100" ],
+  __("Monitor that can do 1600x1200 at 70 Hz")                     => [ '1600x1200@70',    "31.5-88.0"       , "50-120" ],
+  __("Monitor that can do 1600x1200 at 76 Hz")		           => [ '1600x1200@76',    "31.5-94.0"       , "50-160" ],
 );
 
 # * Screen/video card configuration. 
