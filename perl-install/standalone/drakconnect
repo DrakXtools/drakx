@@ -276,7 +276,6 @@ $combo1->entry->signal_connect('changed', sub {
 				    network::netconnect::set_profile($netcnx, $combo1->entry->get_text());
 				    network::netconnect::load_conf($netcnx, $netc, $intf);
 				    $netcnx->{$_} = $netc->{$_} foreach qw(NET_DEVICE NET_INTERFACE);
-				    network::netconnect::set_net_conf($netcnx, $netc);
 				    update();
 				    $button_apply->set_sensitive(1);
 				});
@@ -312,7 +311,7 @@ sub build_list() {
 
 sub apply() {
     $old_profile = $netcnx->{PROFILE} || "default";
-    network::netconnect::save_conf($netcnx, $netc, $intf);
+    network::netconnect::save_conf($netcnx);
 
     $netcnx->{type} eq 'modem' and network::modem::ppp_configure($in, $netcnx->{$netcnx->{type}});
     $netcnx->{type} eq 'isdn_internal' and network::isdn::isdn_write_config_backend($netcnx->{$netcnx->{type}}, $netc, $netcnx); #$light
