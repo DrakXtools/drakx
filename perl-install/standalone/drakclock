@@ -178,14 +178,17 @@ $drawing_area->signal_connect(motion_notify_event  => \&motion_event);
 $spinner_h->set_wrap(1);
 $spinner_h->signal_connect(activate => \&spinned);
 $spinner_h->signal_connect(button_release_event => \&spinned);
+$spinner_h->signal_connect(scroll_event => \&spinned);
 $spinner_h->signal_connect(changed => \&changed);
 
 $spinner_m->set_wrap(1);
 $spinner_m->signal_connect(activate => \&spinned);
+$spinner_m->signal_connect(scroll_event => \&spinned);
 $spinner_m->signal_connect(button_release_event => \&spinned);
 
 $spinner_s->set_wrap(1);
 $spinner_s->signal_connect(activate => \&spinned);
+$spinner_s->signal_connect(scroll_event => \&spinned);
 $spinner_s->signal_connect(button_release_event => \&spinned);
 
 $my_win->{window}->show_all;
