@@ -458,7 +458,7 @@ sub suggest_part {
 
     my $has_swap = grep { isSwap($_) } get_all_fstab($all_hds);
 
-    my ($best, $second) =
+    my ($best) =
       grep { !$_->{maxsize} || $part->{size} <= $_->{maxsize} }
       grep { $_->{size} <= ($part->{maxsize} || $part->{size}) }
       grep { !has_mntpoint($_->{mntpoint}, $all_hds) || isSwap($_) && !$has_swap }
@@ -497,7 +497,7 @@ sub get_root { &get_root_ || {} }
 
 #- do this before modifying $part->{type}
 sub check_type {
-    my ($type, $hd, $part) = @_;
+    my ($type, $_hd, $part) = @_;
     isThisFs("jfs", { type => $type }) && $part->{size} < 16 << 11 and die N("You can't use JFS for partitions smaller than 16MB");
     isThisFs("reiserfs", { type => $type }) && $part->{size} < 32 << 11 and die N("You can't use ReiserFS for partitions smaller than 32MB");
 }
@@ -595,7 +595,7 @@ sub auto_allocate {
 
     if ($before == listlength(fsedit::get_all_fstab($all_hds))) {
 	# find out why auto_allocate failed
-	if (my @l = grep { !has_mntpoint($_->{mntpoint}, $all_hds) } @$suggestions_) {
+	if (grep { !has_mntpoint($_->{mntpoint}, $all_hds) } @$suggestions_) {
 	    die N("Not enough free space for auto-allocating");
 	} else {
 	    die N("Nothing to do");

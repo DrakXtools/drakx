@@ -61,7 +61,6 @@ sub check_blocks {
 
 sub make($;$) {
     my ($devicename, $checkBlocks) = @_;
-    my $tmpdev = 0;
     my $badpages = 0;
     my ($version, $maxpages);
 

@@ -61,7 +61,7 @@ sub is_special_entry($) {
 #- return true if entry has been modified
 #- curr_dir_name is added to contains current directory name, "" for root.
 sub remap {
-    my ($curr_dir_name, $entry) = @_;
+    my ($_curr_dir_name, $entry) = @_;
 
     is_special_entry($entry) and return;
 

@@ -53,7 +53,7 @@ sub exit() { end(); exit($_[1]) }
 END { end() }
 
 sub ask_fromW {
-    my ($o, $common, $l, $l2) = @_;
+    my ($o, $common, $l, $_l2) = @_;
 
   redisplay:
     my $uid = new_uid();
@@ -138,18 +138,18 @@ sub p {
 }
 
 sub wait_messageW {
-    my ($o, $title, $messages) = @_;
+    my ($_o, $_title, $messages) = @_;
     cont_stdout();
     print "\n" . CGI::p();
     p(@$messages);
 }
 
 sub wait_message_nextW {
-    my ($o, $messages, $w) = @_;
+    my ($_o, $messages, $_w) = @_;
     p(@$messages);
 }
 sub wait_message_endW {
-    my ($o, $w) = @_;
+    my ($_o, $_w) = @_;
     p(N("Done"));
     print "\n" . CGI::p();
 }

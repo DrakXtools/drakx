@@ -93,7 +93,7 @@ sub adjustStart($$) {
 }
 
 sub adjustEnd($$) {
-    my ($hd, $part) = @_;
+    my ($_hd, $_part) = @_;
 }
 
 sub read($$) {
@@ -106,7 +106,7 @@ sub read($$) {
     sysread $F, $tmp, psizeof($bz_format) or die "error while reading bz \(Block Zero\) in sector $sector";
     my %info; @info{@$bz_fields} = unpack $bz_format, $tmp;
 
-    foreach my $i (0 .. $info{bzDrvrCnt}-1) {
+    foreach (1 .. $info{bzDrvrCnt}) {
         sysread $F, $tmp, psizeof($dd_format) or die "error while reading driver data in sector $sector";
         my %dd; @dd{@$dd_fields} = unpack $dd_format, $tmp;
         push @{$info{ddMap}}, \%dd;

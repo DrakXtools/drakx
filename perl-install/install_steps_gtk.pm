@@ -439,7 +439,7 @@ sub beforeInstallPackages {
 sub installPackages {
     my ($o, $packages) = @_;
 
-    my ($current_total_size, $last_size, $nb, $total_size, $start_time, $last_dtime, $trans_progress_total);
+    my ($current_total_size, $last_size, $nb, $total_size, $start_time, $last_dtime, $_trans_progress_total);
 
     my $w = ugtk2->new(N("Installing"));
     $w->sync;
@@ -498,8 +498,8 @@ sub installPackages {
 				   my $decy = 0;
 				   my $first = 1;
 				   foreach (@data) {
-				       my ($text, $x, $y, $area_width, $area_height, $bold) = @$_;
-				       my ($width, $height, $lines, $widths, $heights, $ascents, $descents) =
+				       my ($text, $x, $y, $area_width, $area_height, $_bold) = @$_;
+				       my ($width, $_height, $lines, $widths, $heights, $_ascents, $_descents) =
 					 get_text_coord($text, $darea, $area_width, $area_height, 1, 0, 1, 1);
 				       if ($first && $icon) {
 					   my $iconx = ($dx-$width)/2 + $x + ${$widths}[0] - $icon_dx;

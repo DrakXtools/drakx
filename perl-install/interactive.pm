@@ -70,7 +70,7 @@ sub new($) {
 }
 
 sub vnew {
-    my ($type, $su, $icon) = @_;
+    my ($_type, $su, $icon) = @_;
     $su = $su eq "su";
     if ($ENV{INTERACTIVE_HTTP}) {
 	require interactive::http;
@@ -148,7 +148,7 @@ sub ask_file {
     $o->ask_fileW($title, $dir);
 }
 sub ask_fileW {
-    my ($o, $title, $dir) = @_;
+    my ($o, $title, $_dir) = @_;
     $o->ask_from_entry($title, N("Choose a file"));
 }
 
@@ -167,7 +167,7 @@ sub ask_from_listf_ {
     ask_from_listf($o, $title, $message, sub { translate($f->(@_)) }, $l, $def, $help);
 }
 sub ask_from_listf {
-    my ($o, $title, $message, $f, $l, $def, $help) = @_;
+    my ($_o, $_title, $_message, $_f, $l, $_def, $_help) = @_;
     @$l == 0 and die "ask_from_list: empty list\n" . backtrace();
     @$l == 1 and return $l->[0];
     goto &ask_from_listf_no_check;
@@ -260,7 +260,7 @@ sub ask_from {
 
 
 sub ask_from_normalize {
-    my ($o, $common, $l) = @_;
+    my ($_o, $common, $l) = @_;
 
     foreach my $e (@$l) {
 	if (my $li = $e->{list}) {
@@ -287,10 +287,10 @@ sub ask_from_normalize {
 	} elsif ($e->{type} eq 'button' || $e->{clicked} || $e->{clicked_may_quit}) {
 	    $e->{type} = 'button';
 	    $e->{clicked_may_quit} ||= $e->{clicked} ? sub { $e->{clicked}(); 0 } : sub {};	    
-	    $e->{val} = \ (my $v = $e->{val}) if !ref($e->{val});
+	    $e->{val} = \ (my $_v = $e->{val}) if !ref($e->{val});
 	} elsif ($e->{type} eq 'label' || !ref($e->{val})) {
 	    $e->{type} = 'label';
-	    $e->{val} = \ (my $v = $e->{val}) if !ref($e->{val});
+	    $e->{val} = \ (my $_v = $e->{val}) if !ref($e->{val});
 	} else {
 	    $e->{type} ||= 'entry';
 	}

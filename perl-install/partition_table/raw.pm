@@ -125,7 +125,7 @@ sub kernel_read($) {
 }
 
 sub raw_removed {
-    my ($hd, $raw) = @_;
+    my ($_hd, $_raw) = @_;
 }
 sub can_raw_add {
     my ($hd) = @_;
@@ -133,7 +133,7 @@ sub can_raw_add {
     0;
 }
 sub raw_add {
-    my ($hd, $raw, $part) = @_;
+    my ($_hd, $raw, $part) = @_;
 
     foreach (@$raw) {
 	$_->{size} || $_->{type} and next;

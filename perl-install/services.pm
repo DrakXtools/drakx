@@ -182,7 +182,7 @@ sub ask_install {
 }
 
 sub ask_standalone_gtk {
-    my ($in, $prefix) = @_;
+    my ($_in, $prefix) = @_;
     my ($l, $on_services) = services($prefix);
 
     require ugtk2;
@@ -255,12 +255,12 @@ sub ask_standalone_gtk {
 }
 
 sub ask {    
-    my ($in, $prefix) = @_;
+    my ($in, $_prefix) = @_;
     !$::isInstall && $in->isa('interactive::gtk') ? &ask_standalone_gtk : &ask_install;
 }
 
 sub doit {
-    my ($in, $on_services, $prefix) = @_;
+    my ($_in, $on_services, $prefix) = @_;
     my ($l, $was_on_services) = services($prefix);
 
     foreach (@$l) {

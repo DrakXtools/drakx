@@ -236,7 +236,6 @@ sub masked_ip {
 
 sub dns {
     my ($ip) = @_;
-    my $mask = masked_ip($ip);
     my @masked = masked_ip($ip) =~ $ip_regexp;
     $masked[3]  = 2;
     join(".", @masked);

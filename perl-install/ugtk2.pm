@@ -373,10 +373,10 @@ sub create_dialog {
 
 # drakfloppy / logdrake
 sub destroy_window {
-	my ($widget, $windowref, $w2) = @_;
-	$$windowref = undef;
-	$w2 = undef if defined $w2;
-	0;
+    my ($_widget, $windowref, $w2) = @_;
+    $$windowref = undef;
+    $w2 = undef if defined $w2;
+    0;
 }
 
 sub create_hbox { gtkset_layout(gtkset_border_width(Gtk2::HButtonBox->new, 3), 'spread') }
@@ -522,7 +522,7 @@ sub gtktext_insert {
 sub gtkfontinfo {
     my ($widget) = @_;
     my $context = $widget->get_pango_context;
-    my $lan = $context->get_language;
+    my $_lan = $context->get_language;
     my $metrics = $context->get_metrics($widget->style->get_font_desc, $context->get_language);
     my %fontinfo;
     foreach (qw(ascent descent approximate_char_width approximate_digit_width)) {
@@ -754,7 +754,7 @@ sub main {
     gtkset_mousecursor_normal();
     $::CCPID and kill 'USR2', $::CCPID;
     my $timeout = Gtk2->timeout_add(1000, sub { gtkset_mousecursor_normal(); 1 });
-    my $b = MDK::Common::Func::before_leaving { Gtk2->timeout_remove($timeout) };
+    my $_b = MDK::Common::Func::before_leaving { Gtk2->timeout_remove($timeout) };
     $o->show;
 
     do {
@@ -797,7 +797,7 @@ sub _create_window($$) {
     my ($o, $title) = @_;
     my $w = Gtk2::Window->new('toplevel');
     !$::isStandalone && !$::live && !$::g_auto_install and $shape_width = 3;
-    my $inner = gtkadd(my $f_ = gtkset_shadow_type(Gtk2::Frame->new(undef), 'out'),
+    my $inner = gtkadd(gtkset_shadow_type(Gtk2::Frame->new(undef), 'out'),
 		       my $f = gtkset_border_width(gtkset_shadow_type(Gtk2::Frame->new(undef), 'none'), 3)
 		      );
     my $table;
@@ -1040,7 +1040,7 @@ sub ask_browse_tree_info {
     foreach my $ic (@{$common->{icons} || []}) {
 	push @toolbar, ($ic->{icon} => [ $ic->{help}, sub {
 					     if ($ic->{code}) {
-						 my $w = $ic->{wait_message} && $common->{wait_message}->('', $ic->{wait_message});
+						 my $_w = $ic->{wait_message} && $common->{wait_message}->('', $ic->{wait_message});
 						 $ic->{code}();
 						 $common->{rebuild_tree}->();
 					     }
@@ -1058,7 +1058,7 @@ sub ask_browse_tree_info {
 
 sub ask_browse_tree_info_given_widgets {
     my ($common, $w) = @_;
-    my ($curr, $parent, $prev_label, $idle, $mouse_toggle_pending);
+    my ($curr, $prev_label, $idle, $mouse_toggle_pending);
     my (%wtree, %ptree, %pix, %node_state, %state_stats);
     my $update_size = sub {
 	my $new_label = $common->{get_status}();
@@ -1196,7 +1196,7 @@ sub ask_browse_tree_info_given_widgets {
 	    $path->free;
 	} else {
 	    if (ref $curr) {
-		my @a = $children->($curr);
+		my @_a = $children->($curr);
 		my @l = $common->{grep_allowed_to_toggle}($children->($curr)) or return;
 		my @unsel = $common->{grep_unselected}(@l);
 		my @p = @unsel ?
@@ -1237,7 +1237,7 @@ sub ask_browse_tree_info_given_widgets {
     });
     $common->{rebuild_tree}->();
     &$update_size;
-    my $b = before_leaving { $clear_all_caches->() };
+    my $_b = before_leaving { $clear_all_caches->() };
     $w->{w}->main;
 }
 

@@ -81,7 +81,7 @@ sub ask_fromW {
 }
 
 sub ask_fromW_real {
-    my ($o, $common, $l, $l2) = @_;
+    my ($_o, $common, $l, $_l2) = @_;
     my $ignore; #-to handle recursivity
     my $old_focus = -2;
 
@@ -207,7 +207,7 @@ sub ask_fromW_real {
 	my ($f) = @_;
 
 	$get_all->();
-	my ($error, $focus) = $f->();
+	my ($error, $_focus) = $f->();
 	
 	if ($error) {
 	    $set_all->();
@@ -215,7 +215,7 @@ sub ask_fromW_real {
 	!$error;
     };
 
-    my ($destroyed, $canceled);
+    my ($canceled);
     do {
 	my $r = do {
 	    local $::setstep = 1;
@@ -256,7 +256,7 @@ sub waitbox {
 
 
 sub wait_messageW {
-    my ($o, $title, $messages) = @_;
+    my ($_o, $title, $messages) = @_;
     { form => waitbox($title, $messages), title => $title };
 }
 
@@ -266,8 +266,8 @@ sub wait_message_nextW {
     $o->wait_messageW($w->{title}, $messages);
 }
 sub wait_message_endW {
-    my ($o, $w) = @_;
-    my $wait = pop @wait_messages;
+    my ($_o, $_w) = @_;
+    my $_wait = pop @wait_messages;
 #    log::l("interactive_newt does not handle none stacked wait-messages") if $w->{form} != $wait;
     Newt::PopWindow();
 }

@@ -123,7 +123,7 @@ sub new_screen_sections {
 }
 
 sub set_Option {
-    my ($raw_X, $category, $node, @names) = @_;
+    my ($_raw_X, $category, $node, @names) = @_;
     
     if (member($category, 'keyboard', 'mouse')) {
 	#- everything we export is an Option

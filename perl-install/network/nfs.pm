@@ -15,20 +15,20 @@ sub to_fstab_entry {
     $class->to_fstab_entry_raw($e, 'nfs');
 }
 sub comment_to_string {
-    my ($class, $comment) = @_;
+    my ($_class, $comment) = @_;
     member($comment, qw(* 0.0.0.0/0.0.0.0 (everyone))) ? '' : $comment;
 }
 sub from_dev { 
-    my ($class, $dev) = @_;
+    my ($_class, $dev) = @_;
     $dev =~ m|(.*?):(.*)|;
 }
 sub to_dev_raw {
-    my ($class, $server, $name) = @_;
+    my ($_class, $server, $name) = @_;
     $server . ':' . $name;
 }
 
 sub check {
-    my ($class, $in) = @_;
+    my ($_class, $in) = @_;
     $in->do_pkgs->ensure_is_installed('nfs-utils-clients', '/usr/sbin/showmount');
 }
 
@@ -51,7 +51,7 @@ sub find_servers {
 }
 
 sub find_exports {
-    my ($class, $server) = @_;
+    my ($_class, $server) = @_;
 
     my @l;
     run_program::raw({ timeout => 1 }, "showmount", '>', \@l, "-e", $server->{ip} || $server->{name});

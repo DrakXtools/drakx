@@ -139,7 +139,6 @@ sub read_partitionEntries {
 
 sub read {
     my ($hd, $sector) = @_;
-    my $tmp;
 
     my $l = partition_table::dos::read($hd, $sector);
     my @l = grep { $_->{size} && $_->{type} && !partition_table::isExtended($_) } @$l;
@@ -210,7 +209,7 @@ sub write {
 }
 
 sub raw_removed {
-    my ($hd, $raw) = @_;
+    my ($_hd, $raw) = @_;
     @$raw = grep { $_->{size} && $_->{type} } @$raw;
 }
 sub can_raw_add {

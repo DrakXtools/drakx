@@ -29,7 +29,6 @@ sub addentry {
 
 sub addsection {
     my ($section, $filecontent) = @_;
-    my $entryinserted = 0;
     my @lines = split("\n", $filecontent);
     foreach (@lines) {
      # section already there, nothing to be done

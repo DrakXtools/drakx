@@ -83,7 +83,7 @@ If you don't know, choose 'use pppoe'"), $l) or return;
 }
 
 sub adsl_ask_info {
-    my ($adsl, $netc, $intf, $adsl_type) = @_;
+    my ($adsl, $netc, $_intf, $adsl_type) = @_;
     my $pppoe_file = "/etc/ppp/pppoe.conf";
     my $pppoe_conf = { getVarsFromSh($pppoe_file) } if $adsl_type =~ /pppoe/ && -f $pppoe_file;
     add2hash($netc, { dnsServer2 => '', dnsServer3 => '', DOMAINNAME2 => '' });

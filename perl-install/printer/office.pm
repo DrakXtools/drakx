@@ -311,7 +311,7 @@ sub makeopenofficeprinterentry {
 }
 
 sub removestarofficeprinterentry {
-    my ($printer, $queue, $configprefix, $configfile) = @_;
+    my ($_printer, $queue, $configprefix, $configfile) = @_;
     # Remove default printer entry
     $configfile = removeentry("windows", "device=$queue,", $configfile);
     # Remove entry in the "[devices]" section
@@ -328,7 +328,7 @@ sub removestarofficeprinterentry {
 }
 
 sub removeopenofficeprinterentry {
-    my ($printer, $queue, $configprefix, $configfile) = @_;
+    my ($_printer, $queue, $configprefix, $configfile) = @_;
     # Remove printer's section
     $configfile = removesection($queue, $configfile);
     # Remove Link of PPD file

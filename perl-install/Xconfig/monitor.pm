@@ -161,7 +161,7 @@ sub getinfoFromDDC {
 	push @Modes, [ $x, $y, $depth ];
     }
 
-    my ($h, $v, $size, @m) = @l;
+    my ($h, $v, $size, @_modes) = @l;
     { 
         VideoRam_probed => to_int($VideoRam),
         HorizSync => first($h =~ /^(\S*)/), 

@@ -17,7 +17,7 @@ sub read($$$) {
     $buf;
 }
 sub write($$$$) {
-    my ($fs, $pos, $size, $buf) = @_;
+    my ($fs, $pos, $_size, $buf) = @_;
     sysseek $fs->{fd}, $pos, 0 or die "seeking to byte #$pos failed on device $fs->{fs_name}";
     syswrite $fs->{fd}, $buf or die "writing at byte #$pos failed on device $fs->{fs_name}";
 }

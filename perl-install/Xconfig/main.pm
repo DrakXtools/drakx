@@ -54,7 +54,7 @@ sub configure_everything {
     $options->{VideoRam_probed} = $X->{monitor}{VideoRam_probed};
     $ok &&= $X->{card} = Xconfig::card::configure($in, $raw_X, $do_pkgs, $auto, $options);
     $ok &&= Xconfig::screen::configure($raw_X, $X->{card});
-    $ok &&= $X->{resolution} = Xconfig::resolution_and_depth::configure($in, $raw_X, $X->{card}, $X->{monitor}, $auto);
+    $ok &&= $X->{resolution} = Xconfig::resolution_and_depth::configure($in, $raw_X, $X->{card}, $X->{monitor});
     $ok &&= Xconfig::test::test($in, $raw_X, $X->{card}, $auto, 'skip_badcard');
 
     if (!$ok) {

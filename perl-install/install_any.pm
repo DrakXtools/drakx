@@ -457,7 +457,7 @@ sub addToBeDone(&$) {
 
 sub setAuthentication {
     my ($o) = @_;
-    my ($shadow, $md5, $ldap, $nis, $winbind, $winpass) = @{$o->{authentication} || {}}{qw(shadow md5 LDAP NIS winbind winpass)};
+    my ($shadow, $ldap, $nis, $winbind, $winpass) = @{$o->{authentication} || {}}{qw(shadow LDAP NIS winbind winpass)};
     my $p = $o->{prefix};
     any::enableShadow($p) if $shadow;
     if ($ldap) {
@@ -737,7 +737,7 @@ sub g_auto_install {
     
     exists $::o->{$_} and $o->{$_} = $::o->{$_} foreach qw(lang authentication mouse netc timezone superuser intf keyboard users partitioning isUpgrade manualFstab nomouseprobe crypto security security_user libsafe netcnx useSupermount autoExitInstall mkbootdisk X services); #- TODO modules bootloader 
 
-    if (my $printer = $::o->{printer}) {
+    if ($::o->{printer}) {
 	$o->{printer}{$_} = $::o->{printer}{$_} foreach qw(SPOOLER DEFAULT BROWSEPOLLADDR BROWSEPOLLPORT MANUALCUPSCONFIG);
 	$o->{printer}{configured} = {};
 	foreach my $queue (keys %{$::o->{printer}{configured}}) {
@@ -906,7 +906,7 @@ sub loadO {
 	}
 	-e $f or $f .= '.pl';
 
-	my $b = before_leaving {
+	my $_b = before_leaving {
 	    fs::umount("/mnt") unless $::testing;
 	    modules::unload(qw(vfat fat));
 	};

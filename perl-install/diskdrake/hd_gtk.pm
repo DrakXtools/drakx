@@ -66,7 +66,7 @@ sub main {
 
     gtkadd($w->{window},
 	   gtkpack_(Gtk2::VBox->new(0,7),
-		    0, (my $filesystems_button_box = filesystems_button_box()),
+		    0, filesystems_button_box(),
 		    1, (my $notebook_widget = Gtk2::Notebook->new),
 		    0, (my $per_kind_action_box = Gtk2::HBox->new(0,0)),
 		    0, (my $general_action_box  = Gtk2::HBox->new(0,0)),
@@ -209,7 +209,7 @@ sub per_entry_info_box {
 }
 
 sub current_kind_changed {
-    my ($in, $kind) = @_;
+    my ($_in, $kind) = @_;
 
     $_->widget->destroy foreach $kind->{display_box}->children;
 
@@ -233,7 +233,6 @@ sub current_entry_changed {
 
 sub create_automatic_notebooks {
     my ($notebook_widget) = @_;
-    my @l = fsedit::all_hds($all_hds);
 
     $_->{marked} = 0 foreach @notebook;
     my $may_add = sub {

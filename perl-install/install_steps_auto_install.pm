@@ -66,7 +66,7 @@ use common;
 use log;
 
 sub configureNetwork {
-    my ($o) = @_;
+    my ($_o) = @_;
     modules::load_category('network/main|usb');
     goto &install_steps::configureNetwork;
 }
@@ -80,7 +80,7 @@ sub enteringStep {
 }
 
 sub rebootNeeded {
-    my ($o) = @_;
+    my ($_o) = @_;
     print "\nWhile partitioning, the partition table re-read failed, needing a reboot\n";
     print "This is plain wrong for an auto_install\n";
     errorInStep();

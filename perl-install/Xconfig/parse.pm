@@ -35,7 +35,6 @@ sub raw_from_file { #- internal
 
     $lines ||= [ cat_($file) ];
     my $line;
-    my $weird = sub { warn "$file:$line: strange $_[0]" };
 
     my ($comment, $obj, @objs);
 
@@ -81,7 +80,7 @@ sub raw_from_file { #- internal
 	} elsif (/^EndSubsection/i) {
 	    die "$file:$line: not in Subsection\n"     if !@objs || $objs[0]{kind} ne 'Subsection';
 	    $attach_comment->('post');
-	    my $e = shift @objs; $obj = '';
+	    shift @objs; $obj = '';
 	} else {
 	    die "$file:$line: not in Section\n" if !@objs;
 

@@ -29,7 +29,7 @@ sub actions {
 }
 
 sub done {
-    my ($in, $raw_hd, $all_hds) = @_;
+    my ($in, $_raw_hd, $all_hds) = @_;
     diskdrake::interactive::Done($in, $all_hds);
 }
 sub options {

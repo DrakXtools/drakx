@@ -193,7 +193,7 @@ sub read_conf {
 	$c{$alias}{$type} = $val;
     }
     #- cheating here: not handling aliases of aliases
-    while (my ($k, $v) = each %c) {
+    while (my ($_k, $v) = each %c) {
 	if (my $a = $v->{alias}) {
 	    local $c{$a}{alias};
 	    delete $v->{probeall};

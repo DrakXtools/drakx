@@ -57,13 +57,12 @@ sub new {
 	    $draw1->set_usize(540,100);
 	    my $draw2 = new Gtk::DrawingArea;
 	    $draw2->set_usize(100,300);
-	    my ($im_up, $mask_up) = gtkcreate_png($::Wizard_pix_up || "wiz_default_up.png");
+	    my ($im_up, $_mask_up) = gtkcreate_png($::Wizard_pix_up || "wiz_default_up.png");
 	    my ($y1, $x1) = $im_up->get_size;
-	    my ($im_left, $mask_left) = gtkcreate_png($::Wizard_pix_left || "wiz_default_left.png");
+	    my ($im_left, $_mask_left) = gtkcreate_png($::Wizard_pix_left || "wiz_default_left.png");
 	    my ($y2, $x2) = $im_left->get_size;
 	    my $style = $draw1->style->copy();
 	    $style->font(Gtk::Gdk::Font->fontset_load(N("-adobe-utopia-regular-r-*-*-25-*-*-*-p-*-iso8859-*,*-r-*")));
-	    my $w = $style->font->string_width($::Wizard_title);
 	    $draw1->signal_connect(expose_event => sub {
 				       for (my $i = 0; $i < 540/$y1; $i++) {
 					   $draw1->window->draw_pixmap($draw1->style->bg_gc('normal'),
@@ -108,7 +107,7 @@ sub main {
     gtkset_mousecursor_normal();
     $::CCPID and kill 'USR2', $::CCPID;
     my $timeout = Gtk->timeout_add(1000, sub { gtkset_mousecursor_normal(); 1 });
-    my $b = MDK::Common::Func::before_leaving { Gtk->timeout_remove($timeout) };
+    my $_b = MDK::Common::Func::before_leaving { Gtk->timeout_remove($timeout) };
     $o->show;
 
     do {
@@ -177,7 +176,7 @@ sub _create_window($$) {
 #-  $gc->set_foreground(gtkcolor(8448, 17664, 40191)); #- in hex : 33, 69, 157
     $gc->set_foreground(gtkcolor(5120, 10752, 22784)); #- in hex : 20, 42, 89
 #-    $gc->set_foreground(gtkcolor(16896, 16896, 16896)); #- in hex : 66, 66, 66
-    my $inner = gtkadd(my $f_ = gtkset_shadow_type(new Gtk::Frame(undef), 'out'),
+    my $inner = gtkadd(gtkset_shadow_type(new Gtk::Frame(undef), 'out'),
 		       my $f = gtkset_border_width(gtkset_shadow_type(new Gtk::Frame(undef), 'none'), 3)
 		      );
     my $table;
@@ -384,7 +383,7 @@ sub ask_browse_tree_info {
     foreach my $ic (@{$common->{icons} || []}) {
 	push @toolbar, ($ic->{icon} => [ $ic->{help}, sub {
 					     if ($ic->{code}) {
-						 my $w = $ic->{wait_message} && $common->{wait_message}->('', $ic->{wait_message});
+						 my $_w = $ic->{wait_message} && $common->{wait_message}->('', $ic->{wait_message});
 						 $ic->{code}();
 						 $common->{rebuild_tree}->();
 					     }
@@ -547,7 +546,7 @@ sub ask_browse_tree_info_given_widgets {
     };
 
     $w->{tree}->signal_connect(key_press_event => sub {
-        my ($w, $e) = @_;
+        my ($_w, $e) = @_;
 	my $c = chr($e->{keyval} & 0xff);
 	$toggle->(0) if $e->{keyval} >= 0x100 ? $c eq "\r" || $c eq "\x8d" : $c eq ' ';
 	1;
@@ -566,7 +565,7 @@ sub ask_browse_tree_info_given_widgets {
     });
     $common->{rebuild_tree}->();
     &$update_size;
-    my $b = before_leaving { #- ensure cleaning here.
+    my $_b = before_leaving { #- ensure cleaning here.
 	foreach (values %ptree) {
 	    delete $_->{state} foreach @$_;
 	}

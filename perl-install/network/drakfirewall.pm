@@ -100,7 +100,7 @@ sub default_from_pkgs {
 }
 
 sub get_ports {
-    my ($ports) = @_;
+    my ($_ports) = @_;
     my $shorewall = network::shorewall::read() or return;
     \$shorewall->{ports};
 }

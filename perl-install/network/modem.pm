@@ -49,7 +49,7 @@ killall pppd
 }
 
 sub pppConfig {
-    my ($modem, $mouse, $netc, $intf) = @_;
+    my ($modem, $mouse, $netc, $_intf) = @_;
     $mouse ||= {};
 
     $mouse->{device} ||= readlink "$prefix/dev/mouse";

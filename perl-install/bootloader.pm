@@ -79,7 +79,7 @@ sub mkbootdisk {
 sub read() {
     my $file = sprintf("/etc/%s.conf", arch() =~ /sparc/ ? 'silo' : arch() =~ /ppc/ ? 'yaboot' : 'lilo');
     my $global = 1;
-    my ($e, $v, $f);
+    my ($e, $v);
     my %b;
     foreach (cat_("$::prefix$file")) {
 	next if /^\s*#/ || /^\s*$/;
@@ -601,7 +601,7 @@ sub get_of_dev {
 }
 
 sub install_yaboot {
-    my ($lilo, $fstab, $hds) = @_;
+    my ($lilo, $_fstab, $_hds) = @_;
     $lilo->{prompt} = $lilo->{timeout};
 
     if ($lilo->{message}) {
@@ -678,7 +678,7 @@ sub install_yaboot {
 sub install_silo {
     my ($silo, $fstab) = @_;
     my $boot = fsedit::get_root($fstab, 'boot')->{device};
-    my ($wd, $num) = $boot =~ /^(.*\D)(\d*)$/;
+    my ($wd, $_num) = $boot =~ /^(.*\D)(\d*)$/;
 
     #- setup boot promvars for.
     require c;
@@ -764,7 +764,7 @@ sub write_lilo_conf {
 	    (my $part, $file) = fsedit::file2part($fstab, $file);
 	    my %hds = map_index { $_ => "hd$::i" } map { $_->{device} } 
 	      sort { isFat($b) <=> isFat($a) || $a->{device} cmp $b->{device} } fsedit::get_fstab(@$hds);
-	    $hds->{$part->{device}} . ":" . $file;
+	    $hds{$part->{device}} . ":" . $file;
 	} else {
 	    $file
 	}
@@ -967,8 +967,6 @@ sub write_grub_config {
 	    }
 	}
     }
-    my $hd = fsedit::get_root($fstab, 'boot')->{rootDevice};
-
     my $dev = dev2grub($lilo->{first_hd_device} || $lilo->{boot}, \%dev2bios);
     my ($s1, $s2, $m) = map { $file2grub->("/boot/grub/$_") } qw(stage1 stage2 menu.lst);
     my $f = "/boot/grub/install.sh";
@@ -1048,7 +1046,7 @@ sub install_loadlin {
     my $windrive = $winhandle->{dir};
     log::l("windrive is $windrive");
 
-    my ($label, $cmd) = loadlin_cmd($lilo);
+    my ($_label, $cmd) = loadlin_cmd($lilo);
 
     #install_loadlin_config_sys($lilo, $windrive, $label, $cmd);
     #install_loadlin_desktop($lilo, $windrive);

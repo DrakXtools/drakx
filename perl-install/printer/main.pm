@@ -181,7 +181,6 @@ sub copy_printer_params($$) {
 sub getinfo($) {
     my ($prefix) = @_;
     my $printer = {};
-    my @QUEUES;
 
     $::prefix = $prefix;
 
@@ -492,7 +491,7 @@ sub read_printer_db(;$) {
         poll_ppd_base();
     }
 
-    my @entries_db_short     = sort keys %printer::thedb;
+    #my @entries_db_short     = sort keys %printer::thedb;
     #%descr_to_db          = map { $printer::thedb{$_}{DESCR}, $_ } @entries_db_short;
     #%descr_to_help        = map { $printer::thedb{$_}{DESCR}, $printer::thedb{$_}{ABOUT} } @entries_db_short;
     #@entry_db_description = keys %descr_to_db;

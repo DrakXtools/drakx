@@ -85,7 +85,7 @@ sub installStepsCall {
 
 #------------------------------------------------------------------------------
 sub selectLanguage {
-    my ($clicked, $ent_number, $auto) = @_;
+    my ($_clicked, $ent_number, $auto) = @_;
 
     installStepsCall($o, $auto, 'selectLanguage', $ent_number == 1);
     installStepsCall($o, $auto, 'acceptLicence');
@@ -105,7 +105,7 @@ sub selectMouse {
 
 #------------------------------------------------------------------------------
 sub setupSCSI {
-    my ($clicked, $ent_number, $auto) = @_;
+    my ($clicked, $_ent_number, $auto) = @_;
 
     if (!$::live && !$::g_auto_install && !$o->{blank} && !$::testing && !$::uml_install) {
 	-s modules::cz_file() or die N("Can't access kernel modules corresponding to your kernel (file %s is missing), this generally means your boot floppy in not in sync with the Installation medium (please create a newer boot floppy)", modules::cz_file());
@@ -116,7 +116,7 @@ sub setupSCSI {
 
 #------------------------------------------------------------------------------
 sub selectKeyboard {
-    my ($clicked, $first_time, $auto) = ($_[0], $_[1] == 1, $_[2]);
+    my ($clicked, $_ent_number, $auto) = @_;
 
     installStepsCall($o, $auto, 'selectKeyboard', $clicked);
 
@@ -131,7 +131,7 @@ sub selectKeyboard {
 
 #------------------------------------------------------------------------------
 sub selectInstallClass {
-    my ($clicked, $ent_number, $auto) = @_;
+    my ($clicked, $_ent_number, $auto) = @_;
 
     installStepsCall($o, $auto, 'selectInstallClass', $clicked);
 
@@ -148,7 +148,7 @@ sub selectInstallClass {
 
 #------------------------------------------------------------------------------
 sub doPartitionDisks {
-    my ($clicked, $ent_number, $auto) = @_;
+    my ($_clicked, $_ent_number, $auto) = @_;
     $o->{steps}{formatPartitions}{done} = 0;
     installStepsCall($o, $auto, 'doPartitionDisksBefore');
     installStepsCall($o, $auto, 'doPartitionDisks');
@@ -156,7 +156,7 @@ sub doPartitionDisks {
 }
 
 sub formatPartitions {
-    my ($clicked, $ent_number, $auto) = @_;
+    my ($_clicked, $_ent_number, $auto) = @_;
 
     $o->{steps}{choosePackages}{done} = 0;
     installStepsCall($o, $auto, 'choosePartitionsToFormat', $o->{fstab}) if !$o->{isUpgrade};
@@ -195,7 +195,7 @@ sub formatPartitions {
 
 #------------------------------------------------------------------------------
 sub choosePackages {
-    my ($clicked, $ent_number, $auto) = @_;
+    my ($_clicked, $ent_number, $auto) = @_;
     require pkgs;
 
     #- always setPackages as it may have to copy hdlist files and synthesis files.
@@ -212,7 +212,7 @@ sub choosePackages {
 
 #------------------------------------------------------------------------------
 sub installPackages {
-    my ($clicked, $ent_number, $auto) = @_;
+    my ($_clicked, $ent_number, $auto) = @_;
 
     installStepsCall($o, $auto, 'readBootloaderConfigBeforeInstall') if $ent_number == 1;
 
@@ -222,7 +222,7 @@ sub installPackages {
 }
 #------------------------------------------------------------------------------
 sub miscellaneous {
-    my ($clicked, $ent_number, $auto) = @_;
+    my ($clicked, $_ent_number, $auto) = @_;
 
     installStepsCall($o, $auto, 'miscellaneousBefore', $clicked);
     installStepsCall($o, $auto, 'miscellaneous', $clicked);
@@ -231,7 +231,7 @@ sub miscellaneous {
 
 #------------------------------------------------------------------------------
 sub summary {
-    my ($clicked, $ent_number, $auto) = @_;
+    my ($_clicked, $ent_number, $auto) = @_;
     installStepsCall($o, $auto, 'summary', $ent_number == 1);
 }
 #------------------------------------------------------------------------------
@@ -244,22 +244,22 @@ sub configureNetwork {
 }
 #------------------------------------------------------------------------------
 sub installCrypto {
-    my ($clicked, $ent_number, $auto) = @_;
+    my ($_clicked, $_ent_number, $auto) = @_;
     installStepsCall($o, $auto, 'installCrypto');
 }
 #------------------------------------------------------------------------------
 sub installUpdates {
-    my ($clicked, $ent_number, $auto) = @_;
+    my ($_clicked, $_ent_number, $auto) = @_;
     installStepsCall($o, $auto, 'installUpdates');
 }
 #------------------------------------------------------------------------------
 sub configureServices {
-    my ($clicked, $ent_number, $auto) = @_;
+    my ($clicked, $_ent_number, $auto) = @_;
     installStepsCall($o, $auto, 'configureServices', $clicked);
 }
 #------------------------------------------------------------------------------
 sub setRootPassword {
-    my ($clicked, $ent_number, $auto) = @_;
+    my ($clicked, $_ent_number, $auto) = @_;
     return if $o->{isUpgrade};
 
     installStepsCall($o, $auto, 'setRootPassword', $clicked);
@@ -267,7 +267,7 @@ sub setRootPassword {
 }
 #------------------------------------------------------------------------------
 sub addUser {
-    my ($clicked, $ent_number, $auto) = @_;
+    my ($clicked, $_ent_number, $auto) = @_;
     return if $o->{isUpgrade} && !$clicked;
 
     installStepsCall($o, $auto, 'addUser', $clicked);
@@ -298,7 +298,7 @@ sub setupBootloader {
 }
 #------------------------------------------------------------------------------
 sub configureX {
-    my ($clicked, $ent_number, $auto) = @_;
+    my ($clicked, $_ent_number, $auto) = @_;
 
     #- done here and also at the end of install2.pm, just in case...
     install_any::write_fstab($o);
@@ -309,7 +309,7 @@ sub configureX {
 }
 #------------------------------------------------------------------------------
 sub exitInstall {
-    my ($clicked, $ent_number, $auto) = @_;
+    my ($_clicked, $_xent_number, $auto) = @_;
     installStepsCall($o, $auto, 'exitInstall', getNextStep() eq 'exitInstall');
 }
 

@@ -86,7 +86,6 @@ sub isdn_write_config_backend {
 	    chmod 0600, $f;
 	}
 	foreach my $f ('isdn1B.conf', 'isdn2B.conf') {
-	    my $a = 1;
 	    substInFile {
 		s/EAZ =.*/EAZ = $isdn->{phone_in}/;
 		s/PHONE_OUT =.*/PHONE_OUT = $isdn->{phone_out}/;
@@ -148,7 +147,7 @@ defaultroute
 }
 
 sub get_info_providers_backend {
-    my ($isdn, $netc, $name, $file) = @_;
+    my ($isdn, $_netc, $name, $file) = @_;
     $name eq 'Unlisted - edit manually' and return;
     foreach (catMaybeCompressed($file)) {
 	chop;

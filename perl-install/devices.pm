@@ -12,7 +12,7 @@ sub size {
     my ($dev) = @_;
     sysopen(my $F, $dev, 0) or log::l("open $dev: $!"), return 0;
 
-    my $valid_offset = sub { sysseek($F, $_[0], 0) && sysread($F, my $a, 1) };
+    my $valid_offset = sub { sysseek($F, $_[0], 0) && sysread($F, my $_a, 1) };
 
     #- first try getting the size nicely
     if (my $size = c::total_sectors(fileno $F)) {
@@ -41,7 +41,7 @@ sub find_free_loop {
     foreach (0..7) {
 	my $dev = make("loop$_");
 	sysopen(my $F, $dev, 2) or next;
-	!ioctl($F, c::LOOP_GET_STATUS(), my $tmp) && $! == 6 or next; #- 6 == ENXIO
+	!ioctl($F, c::LOOP_GET_STATUS(), my $_tmp) && $! == 6 or next; #- 6 == ENXIO
 	return $dev;
     }
     die "no free loop found";

@@ -230,7 +230,7 @@ sub general_possible_actions {
 
 
 sub Undo {
-    my ($in, $all_hds) = @_;
+    my ($_in, $all_hds) = @_;
     fsedit::undo($all_hds);
 }
 
@@ -266,7 +266,7 @@ sub Done {
 # per-hd actions
 ################################################################################
 sub hd_possible_actions {
-    my ($in, $hd, $all_hds) = @_;
+    my ($_in, $hd, $_all_hds) = @_;
     ( 
      if_(!$hd->{readonly} || $hd->{getting_rid_of_readonly_allowed}, N_("Clear all")), 
      if_(!$hd->{readonly} && $::isInstall, N_("Auto allocate")),
@@ -274,7 +274,7 @@ sub hd_possible_actions {
     );
 }
 sub hd_possible_actions_interactive {
-    my ($in, $hd, $all_hds) = @_;
+    my ($_in, $_hd, $_all_hds) = @_;
     &hd_possible_actions, N_("Hard drive information");
 }
 
@@ -370,7 +370,7 @@ All data on this floppy will be lost"), 1) && devices::make(detect_devices::flop
 
 sub Rescuept {
     my ($in, $hd) = @_;
-    my $w = $in->wait_message('', N("Trying to rescue partition table"));
+    my $_w = $in->wait_message('', N("Trying to rescue partition table"));
     fsedit::rescuept($hd);
 }
 
@@ -384,7 +384,7 @@ sub Hd_info {
 ################################################################################
 
 sub part_possible_actions {
-    my ($in, $hd, $part, $all_hds) = @_;
+    my ($_in, $hd, $part, $_all_hds) = @_;
     $part or return;
 
     my %actions = my @l = (
@@ -442,7 +442,7 @@ sub Create {
     my $mb_size = $part->{size} >> 11;
     my $has_startsector = ($::expert || arch() !~ /i.86/) && !isLVM($hd);
 
-    my $w = $in->ask_from(N("Create a new partition"), '',
+    $in->ask_from(N("Create a new partition"), '',
         [
            if_($has_startsector,
          { label => N("Start sector: "), val => \$part->{start}, min => $def_start, max => ($max - min_partition_size($hd)), type => 'range' },
@@ -545,7 +545,7 @@ sub Type {
     my $type = $type_name && name2type($type_name);
 
     if (isExt2($part) && isThisFs('ext3', { type => $type })) {
-	my $w = $in->wait_message('', N("Switching from ext2 to ext3"));
+	my $_w = $in->wait_message('', N("Switching from ext2 to ext3"));
 	if (run_program::run("tune2fs", "-j", devices::make($part->{device}))) {
 	    $part->{type} = $type;
 	    $part->{isFormatted} = 1; #- assume that if tune2fs works, partition is formatted
@@ -627,7 +627,7 @@ sub Resize {
 	if (isFat($part)) {
 	    write_partitions($in, $hd) or return;
 	    #- try to resize without losing data
-	    my $w = $in->wait_message(N("Resizing"), N("Computing FAT filesystem bounds"));
+	    my $_w = $in->wait_message(N("Resizing"), N("Computing FAT filesystem bounds"));
 
 	    $nice_resize{fat} = resize_fat::main->new($part->{device}, devices::make($part->{device}));
 	    $min = max($min, $nice_resize{fat}->min_size);
@@ -685,7 +685,7 @@ sub Resize {
     $hd->adjustEnd($part);
 
     undef $@;
-    my $b = before_leaving { $@ and $part->{size} = $oldsize };
+    my $_b = before_leaving { $@ and $part->{size} = $oldsize };
     my $w = $in->wait_message(N("Resizing"), '');
 
     if (isLVM($hd)) {
@@ -730,7 +730,7 @@ sub Move {
 				     N("Which sector do you want to move it to?"));
     defined $start2 or return;
 
-    my $w = $in->wait_message(N("Moving"), N("Moving partition..."));
+    my $_w = $in->wait_message(N("Moving"), N("Moving partition..."));
     fsedit::move($hd, $part, $hd2, $start2);
 }
 sub Format {
@@ -743,7 +743,7 @@ sub Mount {
     fs::mount_part($part);
 }
 sub Add2RAID {
-    my ($in, $hd, $part, $all_hds) = @_;
+    my ($in, $_hd, $part, $all_hds) = @_;
     my $raids = $all_hds->{raids};
 
     local $_ = @$raids == () ? "new" :
@@ -785,15 +785,15 @@ sub Add2LVM {
     lvm::update_size($lvm);
 }
 sub Unmount {
-    my ($in, $hd, $part) = @_;
+    my ($_in, $_hd, $part) = @_;
     fs::umount_part($part);
 }
 sub RemoveFromRAID { 
-    my ($in, $hd, $part, $all_hds) = @_;
+    my ($_in, $_hd, $part, $all_hds) = @_;
     raid::removeDisk($all_hds->{raids}, $part);
 }
 sub RemoveFromLVM {
-    my ($in, $hd, $part, $all_hds) = @_;
+    my ($_in, $_hd, $part, $all_hds) = @_;
     my $lvms = $all_hds->{lvms};
     isPartOfLVM($part) or die;
     my ($lvm) = grep { $_->{VG_name} eq $part->{lvm} } @$lvms;
@@ -801,7 +801,7 @@ sub RemoveFromLVM {
     @$lvms = grep { $_ != $lvm } @$lvms;
 }
 sub ModifyRAID { 
-    my ($in, $hd, $part, $all_hds) = @_;
+    my ($in, $_hd, $part, $all_hds) = @_;
     modifyRAID($in, $all_hds->{raids}, $part->{raid});
 }
 sub Loopback {
@@ -1028,7 +1028,7 @@ sub write_partitions {
 }
 
 sub unmount {
-    my ($hd, $part) = @_;
+    my ($_hd, $part) = @_;
     fs::umount_part($part);
 }
 sub format_ {
@@ -1036,7 +1036,7 @@ sub format_ {
     write_partitions($in, $_) or return foreach isRAID($part) ? @{$all_hds->{hds}} : $hd;
     ask_alldatawillbelost($in, $part, N_("After formatting partition %s, all data on this partition will be lost")) or return;
     $part->{isFormatted} = 0; #- force format;
-    my $w = $in->wait_message(N("Formatting"), 
+    my $_w = $in->wait_message(N("Formatting"), 
 			      isLoopback($part) ? N("Formatting loopback file %s", $part->{loopback_file}) :
 			                          N("Formatting partition %s", $part->{device}));
     fs::format_part($all_hds->{raids}, $part);
@@ -1059,7 +1059,7 @@ sub need_migration {
 }
 
 sub migrate_files {
-    my ($in, $hd, $part, $all_hds) = @_;
+    my ($in, $_hd, $part, $_all_hds) = @_;
 
     my $wait = $in->wait_message('', N("Moving files to the new partition"));
     my $handle = any::inspect($part, '', 'rw');

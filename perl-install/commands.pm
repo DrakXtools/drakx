@@ -93,7 +93,7 @@ sub umount {
 }
 
 sub mkdir_ {
-    my ($rec) = getopts(\@_, qw(p));
+    my ($_rec) = getopts(\@_, qw(p));
     mkdir_p($_) foreach @_;
 }
 
@@ -105,7 +105,7 @@ sub mknod {
     } elsif (@_ == 4) {
 	require c;
 	my $mode = ${{ "b" => c::S_IFBLK(), "c" => c::S_IFCHR() }}{$_[1]} or die "unknown node type $_[1]\n";
-	syscall_('mknod', my $a = $_[0], $mode | 0600, makedev($_[2], $_[3])) or die "mknod failed: $!\n";
+	syscall_('mknod', my $_a = $_[0], $mode | 0600, makedev($_[2], $_[3])) or die "mknod failed: $!\n";
     } else { die "usage: mknod <path> [b|c] <major> <minor> or mknod <path>\n" }
 }
 

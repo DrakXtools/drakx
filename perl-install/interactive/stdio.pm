@@ -34,7 +34,7 @@ sub good_choice {
 }
 
 sub ask_fromW {
-    my ($o, $common, $l, $l2) = @_;
+    my ($_o, $common, $l, $_l2) = @_;
 
     add2hash_($common, { ok => N("Ok"), cancel => N("Cancel") }) if !exists $common->{ok};
 
@@ -160,7 +160,7 @@ Your choice? ");
 }
 
 sub wait_messageW {
-    my ($o, $title, $message) = @_;
+    my ($_o, $_title, $message) = @_;
     print join "\n", @$message;
 }
 sub wait_message_nextW { 

@@ -60,7 +60,7 @@ sub raw_hd_mount_point {
 }
 
 sub per_entry_info_box {
-    my ($box, $kind, $entry) = @_;
+    my ($box, $_kind, $entry) = @_;
     $_->isa('Gtk2::Button') or $_->destroy foreach map { $_->widget } $box->children;
     my $info;
     if ($entry) {

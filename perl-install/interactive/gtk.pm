@@ -27,7 +27,7 @@ sub ask_warn {
 }
 
 sub ask_fileW {
-    my ($o, $title, $dir) = @_;
+    my ($_o, $title, $dir) = @_;
     my $w = ugtk2->new($title);
     $dir .= '/' if $dir !~ m|/$|;
     ugtk2::_ask_file($w, $title, $dir); 
@@ -82,10 +82,10 @@ sub create_treeview_list {
     
     my $select = sub { $list_tv->set_cursor($_[0], $textcolumn, 0) };
 
-    my ($first_time, $starting_word, $start_reg) = (1, '', '^');
+    my ($starting_word, $start_reg) = ('', '^');
     my $timeout;
     $list_tv->signal_connect(key_press_event => sub {
-        my ($w, $event) = @_;
+        my ($_w, $event) = @_;
 	my $c = chr($event->keyval & 0xff);
 
 	Gtk2->timeout_remove($timeout) if $timeout; $timeout = '';
@@ -226,7 +226,7 @@ sub create_treeview_tree {
 	}
 	$path->free;
     });
-    my ($first_time, $starting_word, $start_reg) = (1, '', "^");
+    my ($starting_word, $start_reg) = ('', "^");
     my $timeout;
 
     my $toggle = sub {
@@ -240,7 +240,7 @@ sub create_treeview_tree {
     };
 
     $tree->signal_connect(key_press_event => sub {
-        my ($w, $event) = @_;
+        my ($_w, $event) = @_;
 	$selected_via_click = 0;
 	my $c = chr($event->keyval & 0xff);
 	$curr or return;
@@ -310,11 +310,10 @@ sub create_list {
     };
 
     my $tips = Gtk2::Tooltips->new;
-    my $toselect;
     each_index {
 	my $item = Gtk2::ListItem->new(may_apply($e->{format}, $_));
 	$item->signal_connect(key_press_event => sub {
-    	    my ($w, $event) = @_;
+    	    my ($_w, $event) = @_;
     	    my $c = chr($event->keyval & 0xff);
 	    $may_go_to_next->($event) if $event->keyval < 0x100 ? $c eq ' ' : $c eq "\r" || $c eq "\x8d";
     	    1;
@@ -331,7 +330,7 @@ sub create_list {
 
     #- signal_connect'ed after append_items otherwise it is called and destroys the default value
     $list->signal_connect(select_child => sub {
-	my ($w, $row) = @_;
+	my ($_w, $row) = @_;
 	${$e->{val}} = $l->[$list->child_position($row)];
 	&$changed;
     });
@@ -646,7 +645,7 @@ sub wait_messageW($$$) {
     $w;
 }
 sub wait_message_nextW {
-    my ($o, $messages, $w) = @_;
+    my ($_o, $messages, $w) = @_;
     my $msg = warp_text(join "\n", @$messages);
     return if $msg eq $w->{wait_messageW}->get; #- needed otherwise no expose_event :(
     $w->{displayed} = 0;
@@ -654,7 +653,7 @@ sub wait_message_nextW {
     $w->flush until $w->{displayed};
 }
 sub wait_message_endW {
-    my ($o, $w) = @_;
+    my ($_o, $w) = @_;
     $w->destroy;
 }
 

@@ -79,7 +79,7 @@ sub try {
 }
 
 sub ask_server {
-    my ($in, $dav, $all_hds) = @_;
+    my ($in, $dav, $_all_hds) = @_;
 
     my $server = $dav->{device};
     $in->ask_from('', N("Please enter the WebDAV server URL"),

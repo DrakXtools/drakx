@@ -53,7 +53,7 @@ Security Administrator:
 }
 
 sub basic_seclevel_option {
-	my ($seclevel_entry, $msec) = @_;
+	my ($seclevel_entry, $_msec) = @_;
 	my @sec_levels = security::level::get_common_list();
 	my $current_level = security::level::get_string();
 
@@ -106,7 +106,7 @@ sub draksec_main {
 	######################## BASIC OPTIONS PAGE ################################
 	my $seclevel_entry = new Gtk2::Combo();
 
-	$notebook->append_page(gtkpack(my $basic_page = new Gtk2::VBox(0, 0),
+	$notebook->append_page(gtkpack(new Gtk2::VBox(0, 0),
 							   basic_seclevel_explanations($msec),
 							   create_packtable($common_opts,
 											 [ basic_seclevel_option(\$seclevel_entry, $msec) ],

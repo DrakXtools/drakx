@@ -74,7 +74,7 @@ sub partitionWizardSolutions {
     my $hds = $all_hds->{hds};
     my $fstab = [ fsedit::get_all_fstab($all_hds) ];
     my @wizlog;
-    my (@solutions, %solutions);
+    my (%solutions);
 
     my $min_linux = 400 << 11;
     my $max_linux = 3000 << 11;
@@ -257,12 +257,12 @@ sub partitionWizard {
 
 sub upNetwork {
     my ($o, $pppAvoided) = @_;
-    my $w = $o->wait_message('', N("Bringing up the network"));
+    my $_w = $o->wait_message('', N("Bringing up the network"));
     install_steps::upNetwork($o, $pppAvoided);
 }
 sub downNetwork {
     my ($o, $pppOnly) = @_;
-    my $w = $o->wait_message('', N("Bringing down the network"));
+    my $_w = $o->wait_message('', N("Bringing down the network"));
     install_steps::downNetwork($o, $pppOnly);
 }
 

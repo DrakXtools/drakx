@@ -58,14 +58,13 @@ sub ask_connect_now {
 			 N("Do you want to try to connect to the Internet now?")
 			)) {
 	{
-	    my $w = $in->wait_message('', N("Testing your connection..."), 1);
+	    my $_w = $in->wait_message('', N("Testing your connection..."), 1);
 	    connect_backend();
 	    my $s = 30;
 	    $type =~ /modem/ and $s = 50;
 	    $type =~ /adsl/ and $s = 35;
 	    $type =~ /isdn/ and $s = 20;
 	    sleep $s;
-	    my $netc = {};
 	    $up = connected();
 	}
 	my $m = $up ? N("The system is now connected to Internet.") .

@@ -74,6 +74,6 @@ sub traverse_all($$) {
 #- function used by construct_dir_tree to translate the `cluster' fields in each
 #- directory entry
 sub remap($$) {
-    my ($fs, $directory) = @_;
+    my ($_fs, $directory) = @_;
     traverse($directory, "", \&resize_fat::dir_entry::remap);
 }

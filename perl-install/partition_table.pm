@@ -723,7 +723,6 @@ sub add {
     $part->{start} ||= 1 if arch() !~ /^sparc/; #- starting at sector 0 is not allowed
     adjustStartAndEnd($hd, $part) unless $forceNoAdjust;
 
-    my $e = $hd->{primary}{extended};
     my $nb_primaries = $hd->{device} =~ /^rd/ ? 3 : 1;
 
     if (arch() =~ /^sparc|ppc/ ||

@@ -56,7 +56,6 @@ sub allocUsers {
 
 sub addUsers {
     my ($prefix, $users) = @_;
-    my $msec = "$prefix/etc/security/msec";
 
     allocUsers($prefix, $users);
     foreach my $u (@$users) {
@@ -278,7 +277,6 @@ You can add some more or change the existing ones."),
 	    $e->{label} = $prefix;
 	    for (my $nb = 0; member($e->{label}, @labels); $nb++) { $e->{label} = "$prefix-$nb" }
 	}
-	my %old_e = %$e;
 	my $default = my $old_default = $e->{label} eq $b->{default};
 
 	my @l;
@@ -358,7 +356,7 @@ sub pack_passwd {
 }
 
 sub get_autologin {
-    my ($o) = @_;
+    my ($_o) = @_;
     my %l = getVarsFromSh("$::prefix/etc/sysconfig/autologin");
     my %desktop = getVarsFromSh("$::prefix/etc/sysconfig/desktop");
     { autologin => text2bool($l{AUTOLOGIN}) && $l{USER}, desktop => $desktop{DESKTOP} };
@@ -711,7 +709,7 @@ not cause any damage.", $module_descr)), [ N_("Autoprobe"), N_("Specify options"
     }
     while (1) {
 	eval {
-	    my $w = wait_load_module($in, $category, $module_descr, $module);
+	    my $_w = wait_load_module($in, $category, $module_descr, $module);
 	    log::l("user asked for loading module $module (type $category, desc $module_descr)");
 	    modules::load([ $module, @$options ]);
 	};
@@ -730,7 +728,6 @@ sub ask_users {
 
     my $u if 0; $u ||= {};
 
-    my @shells = map { chomp; $_ } cat_("$prefix/etc/shells");
     my @icons = facesnames($prefix);
 
     my %high_security_groups = (
@@ -973,7 +970,6 @@ sub fileshare_config {
 	    if (@wanted == 1) {
 		$in->ask_okcancel('', N("The package %s needs to be installed. Do you want to install it?", $type2file{$wanted[0]}[1]), 1) or return;
 	    } else {
-		my %choices;
 		my $wanted = $in->ask_many_from_list('', N("You can export using NFS or Samba. Please select which you'd like to use."),
 						  { list => \@wanted }) or return;
 		@wanted = @$wanted or return;
@@ -1052,7 +1048,6 @@ sub config_security_user {
 
 sub choose_security_level {
     my ($in, $security, $libsafe, $email) = @_;
-    my $expert_file = "/etc/security/msec/expert_mode";
 
     my %l = (
       0 => N("Welcome To Crackers"),

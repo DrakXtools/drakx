@@ -220,7 +220,7 @@ sub packageRequest {
 }
 
 sub packageCallbackChoices {
-    my ($urpm, $db, $state, $choices) = @_;
+    my ($urpm, $_db, $_state, $choices) = @_;
     my $prefer;
     foreach my $pkg (@$choices) {
 	#- examine first an explicitely prefered package.
@@ -318,7 +318,7 @@ sub unselectAllPackages($) {
 }
 
 sub psUpdateHdlistsDeps {
-    my ($prefix, $method, $packages) = @_;
+    my ($prefix, $_method, $packages) = @_;
     my $need_copy = 0;
 
     #- check if current configuration is still up-to-date and do not need to be updated.
@@ -375,7 +375,6 @@ sub psUsingHdlists {
 sub psUsingHdlist {
     my ($prefix, $method, $packages, $hdlist, $medium, $rpmsdir, $descr, $selected, $fhdlist) = @_;
     my $fakemedium = "$descr ($method$medium)";
-    my ($relocated, $ignored) = (0, 0);
     log::l("trying to read $hdlist for medium $medium");
 
     #- if the medium already exist, use it.
@@ -783,14 +782,14 @@ sub cleanOldRpmDb {
 }
 
 sub selectPackagesAlreadyInstalled {
-    my ($packages, $prefix) = @_;
+    my ($packages, $_prefix) = @_;
 
     log::l("computing installed flags and size of installed packages");
     $packages->{sizes} = $packages->compute_installed_flags($packages->{rpmdb});
 }
 
 sub selectPackagesToUpgrade {
-    my ($packages, $prefix, $medium) = @_;
+    my ($packages, $_prefix, $medium) = @_;
 
     #- check before that if medium is given, it should be valid.
     $medium && (! defined $medium->{start} || ! defined $medium->{end}) and return;
@@ -973,7 +972,6 @@ sub install($$$;$$) {
 		#- child process will run each transaction.
 		$SIG{SEGV} = sub { log::l("segmentation fault on transactions"); c::_exit(0) };
 		my @prev_pids = grep { /^\d+$/ } all("/proc");
-		my $db;
 		close INPUT;
 		select((select(OUTPUT), $| = 1)[0]);
 		if ($::testing) {
@@ -1002,7 +1000,7 @@ sub install($$$;$$) {
 		    log::l("rpm transactions start");
 		    my $fd; #- since we return the "fileno", perl doesn't know we're still using it, and so closes it, and :-(
 		    my @probs = $trans->run($packages, force => 1, nosize => 1, callback_open => sub {
-						my ($data, $type, $id) = @_;
+						my ($data, $_type, $id) = @_;
 						my $pkg = defined $id && $data->{depslist}[$id];
 						my $medium = packageMedium($packages, $pkg);
 						my $f = $pkg && $pkg->filename;
@@ -1010,7 +1008,7 @@ sub install($$$;$$) {
 						$fd = install_any::getFile($f, $medium->{descr});
 						$fd ? fileno $fd : -1;
 					    }, callback_close => sub {
-						my ($data, $type, $id) = @_;
+						my ($data, $_type, $id) = @_;
 						my $pkg = defined $id && $data->{depslist}[$id] or return;
 						my $check_installed;
 						$db->traverse_tag('name', [ $pkg->name ], sub {
@@ -1019,7 +1017,7 @@ sub install($$$;$$) {
 								  });
 						$check_installed and print OUTPUT "close:$id\n";
 					    }, callback_inst => sub {
-						my ($data, $type, $id, $subtype, $amount, $total) = @_;
+						my ($_data, $type, $id, $subtype, $amount, $total) = @_;
 						print OUTPUT "$type:$id:$subtype:$amount:$total\n";
 					    });
 		    log::l("transactions done, now trying to close still opened fd");
@@ -1122,9 +1120,6 @@ sub remove {
 
     eval { fs::mount("/proc", "$prefix/proc", "proc", 0) } unless -e "$prefix/proc/cpuinfo";
 
-    my $callbackOpen = sub { log::l("trying to open file from $_[0] which should not happen") };
-    my $callbackClose = sub { log::l("trying to close file from $_[0] which should not happen") };
-
     #- we are not checking depends since it should come when
     #- upgrading a system. although we may remove some functionalities ?
 
@@ -1162,10 +1157,10 @@ sub selected_leaves {
 sub naughtyServers {
     my ($packages) = @_;
 
-    my @old_81 = qw(
+    my @_old_81 = qw(
 freeswan
 );
-    my @old_82 = qw(
+    my @_old_82 = qw(
 vnc-server
 postgresql-server
 mon

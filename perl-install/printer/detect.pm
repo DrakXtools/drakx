@@ -9,7 +9,7 @@ sub local_detect {
     modules::get_probeall("usb-interface") and eval { modules::load("printer") };
     eval { modules::unload(qw(lp parport_pc parport_probe parport)) }; #- on kernel 2.4 parport has to be unloaded to probe again
     eval { modules::load(qw(parport_pc lp parport_probe)) }; #- take care as not available on 2.4 kernel (silent error).
-    my $b = before_leaving { eval { modules::unload("parport_probe") } };
+    my $_b = before_leaving { eval { modules::unload("parport_probe") } };
     detect_devices::whatPrinter();
 }
 
@@ -24,7 +24,7 @@ sub detect {
 sub whatNetPrinter {
     my ($network, $smb) = @_;
 
-    my ($i, @res);
+    my (@res);
 
     # Which ports should be scanned?
     my @portstoscan;

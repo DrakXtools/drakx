@@ -44,7 +44,7 @@ sub new($$) {
 #- In/Out Steps Functions
 #-######################################################################################
 sub enteringStep {
-    my ($o, $step) = @_;
+    my ($_o, $step) = @_;
     log::l("starting step `$step'");
 }
 sub leavingStep {
@@ -199,7 +199,7 @@ sub doPartitionDisks {
 #------------------------------------------------------------------------------
 
 sub ask_mntpoint_s {
-    my ($o, $fstab) = @_;
+    my ($_o, $fstab) = @_;
 
     #- TODO: set the mntpoints
 
@@ -219,13 +219,13 @@ sub ask_mntpoint_s {
 
 
 sub rebootNeeded($) {
-    my ($o) = @_;
+    my ($_o) = @_;
     log::l("Rebooting...");
     c::_exit(0);
 }
 
 sub choosePartitionsToFormat($$) {
-    my ($o, $fstab) = @_;
+    my ($_o, $fstab) = @_;
 
     foreach (@$fstab) {
 	$_->{mntpoint} = "swap" if isSwap($_);
@@ -258,7 +258,7 @@ sub setPackages {
 }
 
 sub choosePackages {
-    my ($o, $packages, $compssUsers, $first_time) = @_;
+    my ($o, $packages, $_compssUsers, $first_time) = @_;
 
     #- now for upgrade, package that must be upgraded are
     #- selected first, after is used the same scheme as install.
@@ -446,8 +446,6 @@ Consoles 1,3,4,7 may also contain interesting information";
     if ($o->{lang} =~ /^(zh_TW|th|vi|be|bg)/) {
 	#- skip since we don't have the right font (it badly fails at least for zh_TW)
     } elsif (my $LANG = lang::lang2LANG($o->{lang})) {
-	my $kdmrc = "$o->{prefix}/usr/share/config/kdm/kdmrc";
-
 	my $kde_charset = lang::charset2kde_charset(lang::lang2charset($o->{lang}));
 	my $welcome = c::to_utf8(N("Welcome to %s", '%n'));
 	substInFile { 
@@ -618,7 +616,7 @@ sub updateModulesFromFloppy {
 
 #------------------------------------------------------------------------------
 sub selectMouse($) {
-    my ($o) = @_;
+    my ($_o) = @_;
 }
 
 #------------------------------------------------------------------------------
@@ -643,7 +641,7 @@ sub installCrypto {
 
     upNetwork($o);
     require crypto;
-    my @crypto_packages = crypto::getPackages($o->{prefix}, $o->{packages}, $u->{mirror});
+    my @_crypto_packages = crypto::getPackages($o->{prefix}, $o->{packages}, $u->{mirror});
     $o->pkg_install(@{$u->{packages}});
 }
 
@@ -713,8 +711,7 @@ sub configurePrinter {
 #------------------------------------------------------------------------------
 sub setRootPassword {
     my ($o) = @_;
-    my $p = $o->{prefix};
-    my $u = $o->{superuser} ||= {};
+    $o->{superuser} ||= {};
     $o->{superuser}{name} = 'root';
     any::write_passwd_user($o->{prefix}, $o->{superuser}, $o->{authentication}{md5});
     delete $o->{superuser}{name};
@@ -792,7 +789,6 @@ sub createBootdisk($) {
 #------------------------------------------------------------------------------
 sub readBootloaderConfigBeforeInstall {
     my ($o) = @_;
-    my ($image, $v);
 
     require bootloader;
     add2hash($o->{bootloader} ||= {}, bootloader::read());
@@ -955,7 +951,7 @@ sub miscellaneousBefore {
     add2hash_($o->{miscellaneous} ||= {}, { numlock => !detect_devices::isLaptop() });
 }
 sub miscellaneous {
-    my ($o) = @_;
+    my ($_o) = @_;
     #- keep some given parameters
     #-TODO
 }

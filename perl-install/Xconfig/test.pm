@@ -26,7 +26,6 @@ sub test {
     return 1 if $skip_badcard && $bad_card;
 
     if ($bad_card || !$auto) {
-	my $msg = 
 	$in->ask_yesorno(N("Test of the configuration"), 
 			 N("Do you want to test the configuration?") . ($bad_card ? "\n" . N("Warning: testing this graphic card may freeze your computer") : ''),
 			 !$bad_card) or return 1;
@@ -64,7 +63,7 @@ sub test {
 
     do { sleep 1 } until xtest(":9") || waitpid($pid, c::WNOHANG());
 
-    my $b = before_leaving { unlink $f_err };
+    my $_b = before_leaving { unlink $f_err };
 
     if (!xtest(":9")) {
 	open(my $F, $f_err);

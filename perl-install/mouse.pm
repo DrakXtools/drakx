@@ -425,13 +425,13 @@ sub test_mouse_install {
     require ugtk2;
     ugtk2->import(qw(:wrappers :create));
     my $w = ugtk2->new('', disallow_big_help => 1);
-    my ($width, $height, $offset) = (210, round_up(min(350, $::windowheight - 150), 6), 25);
+    my ($width, $height, $_offset) = (210, round_up(min(350, $::windowheight - 150), 6), 25);
     my $darea = Gtk2::DrawingArea->new;
     $darea->set_events([ 'button_press_mask', 'button_release_mask' ]);  #$darea must be unrealized.
     gtkadd($w->{window},
   	   gtkpack(my $vbox_grab = Gtk2::VBox->new(0, 0),
 		   gtkset_size_request($darea, $width+1, $height+1),
-		   my $okcancel = gtkset_sensitive(create_okcancel($w, undef, undef, 'edge'), 1)
+		   gtkset_sensitive(create_okcancel($w, undef, undef, 'edge'), 1)
 		  ),
 	  );
     test_mouse($mouse, $w, $darea, $width, $height);
@@ -444,7 +444,7 @@ sub test_mouse_standalone {
     my ($mouse, $hbox) = @_;
     require ugtk2;
     ugtk2->import(qw(:wrappers));
-    my ($width, $height, $offset) = (210, round_up(min(350, $::windowheight - 150), 6), 25);
+    my ($width, $height, $_offset) = (210, round_up(min(350, $::windowheight - 150), 6), 25);
     my $darea = Gtk2::DrawingArea->new;
     $darea->set_events([ 'button_press_mask', 'button_release_mask' ]);  #$darea must be unrealized.
     gtkpack($hbox,
@@ -454,7 +454,7 @@ sub test_mouse_standalone {
 }
 
 sub test_mouse {
-    my ($mouse, $w, $darea, $width, $height) = @_;
+    my ($mouse, $_w, $darea, $width, $height) = @_;
 
 #    $darea->realize;  IS IT REALLY NEEDED? generates a Gtk-CRITICAL when run..
     require ugtk2;
@@ -494,7 +494,7 @@ sub test_mouse {
     };
 
     my $paintButton = sub {
-	my ($nb, $pressed) = @_;
+	my ($nb, $_pressed) = @_;
 	my $x = 60 + $nb*33;
 	$drawarea->();
 	if ($nb == 0) {

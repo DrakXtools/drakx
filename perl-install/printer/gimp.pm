@@ -12,7 +12,7 @@ use printer::cups;
 # ------------------------------------------------------------------
 
 sub configure {
-    my ($printer, $queue) = @_;
+    my ($printer) = @_;
     # Do we have files to treat?
     my @configfilenames = findconfigfiles();
     return 1 if $#configfilenames < 0;
@@ -127,7 +127,7 @@ sub addcupsremoteto {
 }
 
 sub removeprinterfrom {
-    my ($printer, $queue) = @_;
+    my ($_printer, $queue) = @_;
     # Do we have files to treat?
     my @configfilenames = findconfigfiles();
     return 1 if $#configfilenames < 0;
@@ -287,7 +287,6 @@ sub addentry {
 
 sub addprinter {
     my ($section, $filecontent) = @_;
-    my $entryinserted = 0;
     my @lines = split("\n", $filecontent);
     foreach (@lines) {
      # section already there, nothing to be done

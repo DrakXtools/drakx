@@ -12,11 +12,11 @@ sub new {
 }
 
 sub server_to_string {
-    my ($class, $server) = @_;
+    my ($_class, $server) = @_;
     $server->{name} || $server->{ip};
 }
 sub comment_to_string {
-    my ($class, $comment) = @_;
+    my ($_class, $comment) = @_;
     $comment;
 }
 sub to_dev {

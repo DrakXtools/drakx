@@ -358,7 +358,7 @@ sub mount_options_unpack {
 }
 
 sub mount_options_pack_ {
-    my ($part, $options, $unknown) = @_;
+    my ($_part, $options, $unknown) = @_;
 
     my ($non_defaults, $user_implies) = mount_options();
     my @l;
@@ -665,7 +665,7 @@ sub formatMount_all {
     #- that way, when install exits via ctrl-c, it gives hand to partition
     eval {
 	local $SIG{__DIE__} = 'ignore';
-	my ($type, $major, $minor) = devices::entry(fsedit::get_root($fstab)->{device});
+	my ($_type, $major, $minor) = devices::entry(fsedit::get_root($fstab)->{device});
 	output "/proc/sys/kernel/real-root-dev", makedev($major, $minor);
     };
 }

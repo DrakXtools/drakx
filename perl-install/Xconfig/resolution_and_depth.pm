@@ -138,7 +138,7 @@ sub choose {
 
 
 sub choices {
-    my ($raw_X, $resolution_wanted, $card, $monitor) = @_;
+    my ($_raw_X, $resolution_wanted, $card, $monitor) = @_;
     $resolution_wanted ||= {};
 
     my ($prefered_depth, @resolutions) = allowed($card);
@@ -169,7 +169,7 @@ sub choices {
 }
 
 sub configure {
-    my ($in, $raw_X, $card, $monitor, $auto) = @_;
+    my ($in, $raw_X, $card, $monitor) = @_;
 
     my ($default_resolution, @resolutions) = choices($raw_X, $raw_X->get_resolution, $card, $monitor);
 

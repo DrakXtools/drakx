@@ -305,7 +305,7 @@ sub create_dialog {
 
 # drakfloppy / logdrake
 sub destroy_window {
-	my ($widget, $windowref, $w2) = @_;
+	my ($_widget, $windowref, $w2) = @_;
 	$$windowref = undef;
 	$w2 = undef if defined $w2;
 	0;
@@ -536,7 +536,7 @@ sub get_text_coord {
 }
 
 sub gtkicons_labels_widget {
-    my ($args, $w, $widget_for_font, $background,  $back_pixbuf, $x_back, $y_back, $x_round,
+    my ($args, $_w, $widget_for_font, $background,  $back_pixbuf, $_xback, $_yback, $x_round,
 	$y_round, $x_back2, $y_back2, $icon_width, $icon_height, $exec_func, $exec_hash) = @_;
 
     my @tab;
@@ -553,7 +553,7 @@ sub gtkicons_labels_widget {
 	my $pixbuf_h = compose_with_back($tag, $back_pixbuf, 170);
 
 	my $draw = sub {
-	    my ($widget, $event) = @_;
+	    my ($_widget, $event) = @_;
 	    my ($dx, $dy) = ($darea->allocation->[2], $darea->allocation->[3]);
 	    my $state = $darea->{state};
 	    if (!defined($dbl_area)) {
@@ -658,7 +658,6 @@ sub write_on_pixmap {
 sub create_pix_text {
     #ref widget, txt, color_txt, [font], [width], [height], flag1, flag2, [ (background background_highlighted background_selecteded) backsize x y], centeredx, centeredy
     my ($w, $text, $font, $max_width, $max_height, $can_be_greater, $can_be_smaller, $backgrounds,  $x_back, $y_back, $centeredx, $centeredy) = @_;
-    my $color_background;
     my $fake_darea = new Gtk::DrawingArea;
     my $style = $fake_darea->style->copy();
     if (ref($font) eq 'Gtk::Gdk::Font') {
@@ -848,7 +847,7 @@ sub fill_tiled {
 }
 
 sub compute_icons {
-    my ($fx, $fy, $decx, $decy, $interstice, @tab) = @_;
+    my ($fx, $_fy, $decx, $decy, $interstice, @tab) = @_;
     my $nb = $#tab;
     my $nb_sav = $nb;
     my $index = 0;

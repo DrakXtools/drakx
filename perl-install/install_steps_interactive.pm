@@ -325,7 +325,7 @@ sub setupSCSI {
 	}
     }
     { 
-	my $w = $o->wait_message(N("IDE"), N("Configuring IDE"));
+	my $_w = $o->wait_message(N("IDE"), N("Configuring IDE"));
 	modules::load(modules::category2modules('disk/cdrom'));
     }
     any::load_category($o, 'bus/firewire', 1);
@@ -345,7 +345,7 @@ sub ask_mntpoint_s {
     die N("No partition available") if @fstab == 0;
 
     {
-	my $w = $o->wait_message('', N("Scanning partitions to find mount points"));
+	my $_w = $o->wait_message('', N("Scanning partitions to find mount points"));
 	install_any::suggest_mount_points($fstab, $o->{prefix}, 'uniq');
 	log::l("default mntpoint $_->{mntpoint} $_->{device}") foreach @fstab;
     }
@@ -455,7 +455,7 @@ sub choosePartitionsToFormat {
 
 
 sub formatMountPartitions {
-    my ($o, $fstab) = @_;
+    my ($o, $_fstab) = @_;
     my $w;
     catch_cdie {
         fs::formatMount_all($o->{all_hds}{raids}, $o->{fstab}, $o->{prefix}, sub {
@@ -490,7 +490,7 @@ sub setPackages {
 }
 #------------------------------------------------------------------------------
 sub choosePackages {
-    my ($o, $packages, $compssUsers, $first_time) = @_;
+    my ($o, $packages, $compssUsers, $_first_time) = @_;
 
     #- this is done at the very beginning to take into account
     #- selection of CD by user if using a cdrom.
@@ -507,7 +507,7 @@ sub choosePackages {
     my $min_mark = $::expert ? 3 : 4;
 
     my $b = pkgs::saveSelected($packages);
-    my $level = pkgs::setSelectedFromCompssList($packages, { map { $_ => 1 } map { @{$compssUsers->{$_}{flags}} } @{$o->{compssUsersSorted}} }, $min_mark, 0);
+    my $_level = pkgs::setSelectedFromCompssList($packages, { map { $_ => 1 } map { @{$compssUsers->{$_}{flags}} } @{$o->{compssUsersSorted}} }, $min_mark, 0);
     my $max_size = pkgs::selectedSize($packages) + 1; #- avoid division by zero.
     log::l("max size (level $min_mark) is : " . formatXiB($max_size));
     pkgs::restoreSelected($b);
@@ -610,7 +610,7 @@ sub chooseGroups {
     } @groups;
 
 #    @groups = grep { $size{$_} = round_down($size{$_} / sqr(1024), 10) } @groups; #- don't display the empty or small one (eg: because all packages are below $min_level)
-    my ($all, $size, $unselect_all);
+    my ($size, $unselect_all);
     my $available_size = install_any::getAvailableSpace($o) / sqr(1024);
     my $size_to_display = sub { 
 	my $lsize = $system_size + $compute_size->(map { @{$compssUsers->{$_}{flags}} } grep { $val{$_} } @groups);
@@ -819,7 +819,7 @@ N("There was an error installing packages:"), $1, N("Go on anyway?") ], 1) and r
 
 sub afterInstallPackages($) {
     my ($o) = @_;
-    my $w = $o->wait_message('', N("Post-install configuration"));
+    my $_w = $o->wait_message('', N("Post-install configuration"));
     $o->SUPER::afterInstallPackages($o);
 }
 
@@ -904,7 +904,7 @@ Do you want to install the updates ?"))) || return;
 
     require crypto;
     eval {
-	my @mirrors = do { my $w = $o->wait_message('',
+	my @mirrors = do { my $_w = $o->wait_message('',
 						    N("Contacting Mandrake Linux web site to get the list of available mirrors..."));
 			   crypto::mirrors() };
 	#- if no mirror have been found, use current time zone and propose among available.
@@ -919,7 +919,7 @@ Do you want to install the updates ?"))) || return;
     return if $@ || !$u->{mirror};
 
     my $update_medium = do {
-	my $w = $o->wait_message('', N("Contacting the mirror to get the list of available packages..."));
+	my $_w = $o->wait_message('', N("Contacting the mirror to get the list of available packages..."));
 	crypto::getPackages($o->{prefix}, $o->{packages}, $u->{mirror});
     };
 
@@ -997,7 +997,6 @@ sub summary {
 	    pkgs::packageByName($o->{packages}, 'cups')->flag_installed and return N("Remote CUPS server");
 	    return N("No printer");
 	}
-	my $entry;
 	foreach ($printer->{currentqueue},
 		 map { $_->{queuedata} } ($printer->{configured}{$printer->{DEFAULT}}, values %{$printer->{configured}})) {
 	    $_ && ($_->{make} || $_->{model}) and return "$_->{make} $_->{model}";
@@ -1222,14 +1221,14 @@ because XFS needs a very large driver).") : '')),
         $o->ask_warn('', N("Insert a floppy in %s", $l{$o->{mkbootdisk}} || $o->{mkbootdisk}));
     }
 
-    my $w = $o->wait_message('', N("Creating bootdisk..."));
+    my $_w = $o->wait_message('', N("Creating bootdisk..."));
     install_steps::createBootdisk($o);
 }
 
 #------------------------------------------------------------------------------
 sub setupBootloaderBefore {
     my ($o) = @_;
-    my $w = $o->wait_message('', N("Preparing bootloader..."));
+    my $_w = $o->wait_message('', N("Preparing bootloader..."));
     $o->set_help('empty');
     $o->SUPER::setupBootloaderBefore($o);
 }
@@ -1256,7 +1255,7 @@ try to force installation even if that destroys the first partition?"));
 	any::setupBootloader($o, $o->{bootloader}, $o->{all_hds}, $o->{fstab}, $o->{security}, $o->{prefix}, $more) or return;
 
 	{
-	    my $w = $o->wait_message('', N("Installing bootloader"));
+	    my $_w = $o->wait_message('', N("Installing bootloader"));
 	    eval { $o->SUPER::setupBootloader };
 	}
 	if (my $err = $@) {
@@ -1276,7 +1275,7 @@ try to force installation even if that destroys the first partition?"));
 }
 
 sub miscellaneous {
-    my ($o, $clicked) = @_;
+    my ($o, $_clicked) = @_;
 
     if ($::expert) {
 	any::choose_security_level($o, \$o->{security}, \$o->{libsafe}, \$o->{security_user}) or return;
@@ -1308,7 +1307,7 @@ sub generateAutoInstFloppy {
 
     my $dev = devices::make($floppy);
     {
-	my $w = $o->wait_message('', N("Creating auto install floppy..."));
+	my $_w = $o->wait_message('', N("Creating auto install floppy..."));
 	install_any::getAndSaveAutoInstallFloppy($o, $replay, $dev) or return;
     }
     common::sync();         #- if you shall remove the floppy right after the LED switches off
@@ -1348,7 +1347,7 @@ N("http://www.mandrakelinux.com/en/90errata.php3"))),
 	},      
 	[
 	 if_($::expert,
-	     { val => \ (my $t1 = N("Generate auto install floppy")), clicked => sub {
+	     { val => \ (my $_t1 = N("Generate auto install floppy")), clicked => sub {
 		   my $t = $o->ask_from_list_('', 
 N("The auto install can be fully automated if wanted,
 in that case it will take over the hard drive!!
@@ -1358,7 +1357,7 @@ You may prefer to replay the installation.
 "), [ N_("Replay"), N_("Automated") ]);
 		   $t and $o->generateAutoInstFloppy($t eq 'Replay');
 	       }, advanced => 1 },
-	     { val => \ (my $t2 = N("Save packages selection")), clicked => sub { install_any::g_default_packages($o) }, advanced => 1 },
+	     { val => \ (my $_t2 = N("Save packages selection")), clicked => sub { install_any::g_default_packages($o) }, advanced => 1 },
 	 ),
 	]
 	) if $alldone && !$::g_auto_install;

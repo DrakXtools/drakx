@@ -116,7 +116,7 @@ sub init_globals {
 }
 
 sub main {
-    my ($prefix, $netcnx, $netc, $mouse, $in, $intf, $first_time, $direct_fr, $noauto) = @_;
+    my ($prefix, $netcnx, $netc, $mouse, $in, $intf, $first_time, $_direct_fr, $noauto) = @_;
     init_globals($in, $prefix);
     $netc->{minus_one} = 0; #When one configure an eth in dhcp without gateway
     $::isInstall and $in->set_help('configureNetwork');
@@ -168,17 +168,17 @@ If you don't want to use the auto detection, deselect the checkbox.
     undef $::Wizard_no_previous;
     set_profile($netcnx);
     if ($netc->{autodetection}) {
-	my $w = $in->wait_message(N("Network Configuration Wizard"), N("Detecting devices..."));
+	my $_w = $in->wait_message(N("Network Configuration Wizard"), N("Detecting devices..."));
 	detect($netc->{autodetect}, $::isInstall && ($in->{method} eq "ftp" || $in->{method} eq "http" || $in->{method} eq "nfs"));
     }
 
   step_2:
 
-    my $set_default;
+#    my $set_default;
     my %conf;
     $conf{$_} = $netc->{autodetect}{$_} ? 1 : 0 foreach 'modem', 'winmodem', 'adsl', 'cable', 'lan';
     $conf{isdn} = $netc->{autodetect}{isdn}{description} ? 1 : 0;
-    my %l;
+#    my %l;
 #     my @l = (
 # 	     [N("Normal modem connection"), $netc->{autodetect}{modem}, N_("detected on port %s"), \$conf{modem}],
 # 	     [N("ISDN connection"), $netc->{autodetect}{isdn}{description}, N_("detected %s"), \$conf{isdn}],
@@ -186,7 +186,7 @@ If you don't want to use the auto detection, deselect the checkbox.
 # 	     [N("Cable connection"), $netc->{autodetect}{cable}, N_("cable connection detected"), \$conf{cable}],
 # 	     [N("LAN connection"), $netc->{autodetect}{lan}, N_("ethernet card(s) detected"), \$conf{lan}]
 # 	);
-    my $i = 0;
+#    my $i = 0;
 #    map { defined $set_default or do { $_->[1] and $set_default = $i }; $i++ } @l;
 #     my %l = (
 # 	       1 => [N("Normal modem connection") . if_($netc->{autodetect}{modem}, " - " . N("detected on port %s", $netc->{autodetect}{modem})), "modem"],
@@ -198,7 +198,6 @@ If you don't want to use the auto detection, deselect the checkbox.
 	       
 # 	      );
     $::isInstall and $in->set_help('configureNetwork');
-    my $tata;
 #     my $e = $in->ask_from(N("Network Configuration Wizard"), N("Choose the connection you want to configure"),
 #          [{ val => \$cnx_type, list => [sort keys %l], format => sub { $l{$_}[0] },
 # 			  changed => sub {
@@ -220,7 +219,7 @@ If you don't want to use the auto detection, deselect the checkbox.
 	  [N("LAN connection") . if_($netc->{autodetect}{lan}, " - " . N("ethernet card(s) detected")), \$conf{lan}]
 	 );
     $::isInstall and $in->set_help('configureNetwork');
-    my $e = $in->ask_from(N("Network Configuration Wizard"), N("Choose the connection you want to configure"),
+    $in->ask_from(N("Network Configuration Wizard"), N("Choose the connection you want to configure"),
 			  [ map { { label => $_->[0], val => $_->[1], type => 'bool' } } @l ],
 			  changed => sub {
 			      return if !$netc->{autodetection};
@@ -363,7 +362,7 @@ sub save_conf {
     modules::load_category('network/main|usb');
     require network::ethernet;
     network::ethernet->import;
-    my @all_cards = conf_network_card_backend($netc, $intf, undef, undef, undef, undef);
+    my @_all_cards = conf_network_card_backend($netc, $intf, undef, undef, undef, undef);
 
     $intf = { %$intf };
     output_with_perm("$prefix/etc/sysconfig/network-scripts/drakconnect_conf", 0600,
@@ -488,7 +487,7 @@ sub set_profile {
 }
 
 sub del_profile {
-    my ($netcnx, $profile) = @_;
+    my ($_netcnx, $profile) = @_;
     $profile or return;
     $profile eq "default" and return;
     rm_rf("$prefix/etc/sysconfig/network-scripts/drakconnect_conf." . $profile);
@@ -516,8 +515,6 @@ sub load_conf {
     my $modem = {};
     my $isdn_external = {};
     my $isdn = {};
-    my $system_name;
-    my $domain_name;
 
     if (-e "$prefix/etc/sysconfig/network-scripts/drakconnect_conf") {
 	foreach (cat_("$prefix/etc/sysconfig/network-scripts/drakconnect_conf")) {
@@ -607,7 +604,7 @@ sub get_net_device {
 }
 
 sub read_net_conf {
-    my ($prefix, $netcnx, $netc) = @_;
+    my ($_prefix, $netcnx, $netc) = @_;
     add2hash($netcnx, { read_raw_net_conf('_conf') });
     $netc->{$_} = $netcnx->{$_} foreach 'NET_DEVICE', 'NET_INTERFACE';
     $netcnx->{$netcnx->{type}} ||= {};
