@@ -291,6 +291,7 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+
 * Tue Mar  4 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.1-14mdk
 - drakperm:
   o fix #1776
@@ -302,6 +303,11 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
   o scroll down the log buffer on filling
 - localedrake: don't categorize langs, for better looking (since
   most people will have very few of them) (gc)
+- fixed wizard mode not taken into account for drakconnect in
+  drakconf. (francois)
+- fixed expert mode in drakconnect for dhcp for cleaning
+  variables. (francois)
+- fixed not to use invalid ethX. (francois)
 
 * Mon Mar  3 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.1-13mdk
 - drakboot: fix #2091, #2480
