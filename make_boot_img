@@ -143,7 +143,7 @@ label auto
   append ramdisk_size=32000 initrd=$type.rdz $ftype auto_install=Mandrake/base/auto_inst.cfg.pl
 label all
   kernel vmlinuz
-  append ramdisk_size=32000 initrd=$type.rdz vga=788
+  append ramdisk_size=32000 initrd=$type.rdz pcmcia vga=788
 ");
     _ "sync";
     _ "df $mnt";
