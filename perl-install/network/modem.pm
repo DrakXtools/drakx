@@ -246,6 +246,8 @@ sub winmodemConfigure {
     my %relocations = (ltmodem => $in->do_pkgs->check_kernel_module_packages('ltmodem'));
     my $type;
     
+    $netc->{autodetect}{winmodem} or ($in->ask_warn(N("Warning"), N("You don't have any winmodem")) ? return 0 : $in->exit(0));
+
     foreach (keys %{$netc->{autodetect}{winmodem}}) {
 	/Hcf/ and $type = "hcfpcimodem";
 	/Hsf/ and $type = "hsflinmodem";
