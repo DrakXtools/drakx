@@ -22,7 +22,8 @@ $install = $ {{
 
 $0 =~ /initrd/ ?
     initrd($mnt, $img) :
-    boot_img($mnt, $img);
+    msg_boot_img($mnt, $img);
+    #boot_img($mnt, $img);
 
 sub __ { print @_, "\n"; system(@_); }
 sub _ { __ @_; $? and die; }
@@ -66,6 +67,43 @@ label linux
   append $ks ramdisk=32000 initrd=$type.rdz mdkinst $type
 ");
     _ "cp -f $instdir/installinit/ks.cfg $mnt 2>/dev/null" if $ks;
+    _ "sync";
+}
+
+sub msg_boot_img {
+    my ($mnt, $img) = @_;
+
+    __ "$sudo umount $mnt 2>/dev/null";
+    _ "bunzip2 -c $instdir/installinit/msgboot.img.bz2 > $img";
+    _ "$sudo mount -t msdos -o umask=0 $img $mnt -o loop";
+    _ "cat vmlinuz > $mnt/vmlinuz";
+    initrd("${mnt}2", "$mnt/$type.rdz");
+    
+    output("$mnt/syslinux.cfg", "
+default linux
+prompt 1
+timeout 600
+display boot.msg
+F1 boot.msg
+F2 general.msg
+F3 expert.msg
+F4 rescue.msg
+F5 kickit.msg
+F6 param.msg
+label linux
+  kernel vmlinuz
+  append $ks ramdisk=32000 initrd=$type.rdz mdkinst $type
+label expert
+  kernel vmlinuz
+  append $ks expert ramdisk=32000 initrd=$type.rdz mdkinst $type
+label ks
+  kernel vmlinuz
+  append ks ramdisk=32000 initrd=$type.rdz mdkinst $type
+label rescue
+  kernel vmlinuz
+  append rescue root=/dev/fd0 load_ramdisk=1 prompt_ramdisk=1
+");
+    _ "cp -f $instdir/installinit/ks.cfg $mnt 2>/dev/null";
     _ "sync";
 }
 
