@@ -1498,7 +1498,7 @@ sub naughtyServers {
     my ($packages) = @_;
 
     my @naughtyServers = qw(FreeWnn MySQL am-utils boa cfengine cups
-finger-server freeswan imap jabber leafnode lpr mon ntp
+finger-server freeswan imap jabber leafnode lpr mon ntp apache
 openssh-server pidentd postfix postgresql-server proftpd rwall rwho
 telnet-server webmin wu-ftpd ypbind); # portmap nfs-utils-clients
 
