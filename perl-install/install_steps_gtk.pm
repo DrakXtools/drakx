@@ -281,7 +281,7 @@ sub reallyChooseGroups {
 			     print "Size is now ", &$size_to_display, "\n";
 			     $w_size->set(&$size_to_display);
 			 });
-			 $tips->set_tip($check, $help);
+			 gtkset_tip($tips, $check, $help);
 
 			 my $old = $path;
 			 $path = $o->{compssUsers}{$e}{path};
