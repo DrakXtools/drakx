@@ -863,10 +863,12 @@ sub new {
 	$::WizardTable ||= gtknew('VBox');
 
 	if (!$::Plug && $o->{isEmbedded}) {
-	    $::Plug = $::WizardWindow = gtkshow(Gtk2::Plug->new($::XID));
-	    may_set_icon($::Plug, wm_icon());
-	    flush();
-	    gtkadd($::Plug, $::WizardTable);
+	    $::Plug = $::WizardWindow = gtknew('Plug',
+					       socket_id => $::XID,
+					       icon => wm_icon(),
+					       child => $::WizardTable,
+					       title => $title || '',
+					   );
 	} elsif (!$::WizardWindow) {
 	    $::WizardWindow = _create_window(title => $title);
 	    gtkadd($::WizardWindow, gtknew('Frame', shadow_type => 'out', child => $::WizardTable));
@@ -878,11 +880,11 @@ sub new {
 		$::WizardWindow->set_position('center_always') if !$::isStandalone;
 		eval { gtkpack__($::WizardTable, Gtk2::Banner->new(wm_icon(), $::Wizard_title)) };
 		$@ and log::l("ERROR: missing wizard banner");
-	may_set_icon($::WizardWindow, wm_icon());
+		may_set_icon($::WizardWindow, wm_icon());
 	    }
-	    $::WizardWindow->show;
 	}
-	$::WizardWindow->set_title($title || '');
+	$::WizardWindow->show;
+	flush();
 	gtkpack($::WizardTable, $o->{window});
     }
     $o->{rwindow}->signal_connect(destroy => sub { $o->{destroyed} = 1 });
