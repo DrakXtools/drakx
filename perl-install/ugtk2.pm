@@ -1422,6 +1422,53 @@ sub gtk_set_treelist {
     $list->append_set([ 0 => $_ ]) foreach @$l;
 }
 
+
+sub gtk_TextView_get_log {
+    my ($log_w, $log_scroll, $command, $filter_output, $when_command_is_over) = @_;
+
+    my $pid = open(my $F, "$command |") or return sub { 1 };
+    fcntl($F, c::F_SETFL(), c::O_NONBLOCK()) or die "can't fcntl F_SETFL: $!";
+
+    my $gtk_buffer = $log_w->get_buffer;
+    $log_w->signal_connect(destroy => sub { 
+	kill 9, $pid if $pid; #- we do not continue in background
+	$pid = $gtk_buffer = ''; #- ensure $gtk_buffer is valid when its value is non-null
+    });
+
+    my ($prev_scroll, $want_scroll_down) = (0, 1);
+    Glib::Timeout->add(100, sub {
+        if ($gtk_buffer) {
+	    my $end = $gtk_buffer->get_end_iter;
+	    while (defined (my $s = <$F>)) {
+		$gtk_buffer->insert($end, $filter_output->($s));
+	    }
+	    my $new_scroll = $log_scroll->get_vadjustment->get_value;
+	    $want_scroll_down &&= $new_scroll >= $prev_scroll;
+	    $prev_scroll = $new_scroll;
+	    $log_w->scroll_to_iter($end, 0, 0, 0, 0) if $want_scroll_down;
+	}
+	if (waitpid($pid, c::WNOHANG()) > 0) {
+	    #- we do not call $when_command_is_over if $gtk_buffer doesn't exist anymore
+	    #- since it is not a normal case
+	    $when_command_is_over->($gtk_buffer) if $when_command_is_over && $gtk_buffer;
+	    $pid = '';
+	    0;
+	} else {
+	    to_bool($gtk_buffer);
+	}
+    });
+    $pid; #- $pid becomes invalid after $when_command_is_over is called
+}
+
+sub gtk_new_TextView_get_log {
+    my ($command, $filter_output, $when_command_is_over) = @_;
+
+    my $log_w = gtkset_editable(Gtk2::TextView->new, 0);
+    my $log_scroll = create_scrolled_window($log_w);  #- $log_scroll is a frame, not a ScrolledWindow, so giving $log_scroll->child
+    my $pid = gtk_TextView_get_log($log_w, $log_scroll->child, $command, $filter_output, $when_command_is_over);
+    $log_scroll, $pid;
+}
+
 # misc helpers:
 
 package Gtk2::TreeStore;
@@ -1503,6 +1550,14 @@ sub set_popdown_strings {
     $menu->append(ugtk2::gtkshow(Gtk2::MenuItem->new_with_label($_))) foreach @strs;
     $w->set_menu($menu);
     $w
+}
+
+sub new_with_strings {
+    my ($class, $strs, $o_val) = @_;
+    my $w = $class->new;
+    $w->set_popdown_strings(@$strs);
+    $w->set_text($o_val) if $o_val;
+    $w;
 }
 
 sub entry {
