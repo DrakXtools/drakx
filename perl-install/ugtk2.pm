@@ -16,7 +16,7 @@ use vars qw(@ISA %EXPORT_TAGS @EXPORT_OK @icon_paths $force_center $force_focus 
                      gtktext_insert ) ],
 
     helpers => [ qw(add2notebook add_icon_path fill_tiled fill_tiled_coords get_text_coord gtkcolor gtkcreate_img
-                    gtkcreate_pixbuf gtkfontinfo gtkset_background n_line_size prepare_gtk2 set_back_pixbuf string_size) ],
+                    gtkcreate_pixbuf gtkfontinfo gtkset_background n_line_size set_back_pixbuf string_size) ],
 
     create => [ qw(create_adjustment create_box_with_title create_dialog create_factory_menu create_hbox create_hpaned
                    create_menu create_notebook create_okcancel create_packtable create_scrolled_window create_vbox
@@ -38,6 +38,8 @@ use Gtk2;
 unless ($::no_ugtk_init) {
     !check_for_xserver() and die "Cannot be run in console mode.\n";
     Gtk2->init(\@ARGV);
+    c::bind_textdomain_codeset($_, 'UTF8') foreach 'libDrakX', @::textdomains;
+    $::need_utf8_i18n = 1;
 }
 
 
@@ -1249,12 +1251,6 @@ sub ask_browse_tree_info_given_widgets {
     &$update_size;
     my $_b = before_leaving { $clear_all_caches->() };
     $w->{w}->main;
-}
-
-
-sub prepare_gtk2 {
-    c::bind_textdomain_codeset($_, 'UTF8') foreach 'libDrakX', @::textdomains;
-    $::need_utf8_i18n = 1;
 }
 
 1;

@@ -727,5 +727,4 @@ sub kill {
     $o->{before_killing} = @interactive::objects;
 }
 
-prepare_gtk2();
 1;

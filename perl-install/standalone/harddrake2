@@ -8,11 +8,7 @@ use common;
 
 use ugtk2 qw(:create :helpers :wrappers);
 use interactive;
-#- needed for proper execution for non-8bits locales
-ugtk2::prepare_gtk2();
-#- this must come *after* gtk2 and gettext initialization, as it uses some
-#- translatable strings
-require harddrake::data;
+use harddrake::data;  #- needs to stay after use-ugtk2 as long as this module defines globals containing some N()
 
 
 # { field => [ short_translation, full_description] }
