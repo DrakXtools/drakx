@@ -106,6 +106,7 @@ sub allowNVIDIA_rpms {
     my (%list, %select);
 
     eval {
+	local *_;
 	require urpm;
 	my $urpm = new urpm;
 	$urpm->read_config(nocheck_access => 1);
