@@ -8,7 +8,7 @@ use common;
 
 use ugtk2 qw(:create :helpers :wrappers);
 use interactive;
-use harddrake::data qw(tree);  #- needs to stay after use-ugtk2 as long as this module defines globals containing some N()
+use harddrake::data;  #- needs to stay after use-ugtk2 as long as this module defines globals containing some N()
 
 
 # { field => [ short_translation, full_description] }
@@ -197,7 +197,7 @@ my $selection = gtksignal_connect($tree->get_selection(), 'changed' => sub {
 		# it must come *after* the space, as the space must follow
 		# the colon following the direction of writting.
                 if_($fields{$_}[0], [ $fields{$_}[0] . ": \x{200e}", { 'foreground' => 'royalblue3', 'weight' => Gtk2::Pango->WEIGHT_BOLD } ],
-                    [ ($_ && $current_device->{$_} =~ /^(unknown)/ ? N("unknown") : $_ && $current_device->{$_} =~ /^(Unknown)/ ? N("Unknown") : "$current_device->{$_}") . "\n\n", { 'foreground' => ($_ eq 'driver' && $current_device->{$_} =~ /^(unknown|Bad:)/ ? 'indian red' : 'black') } ])
+                    [ ($_ && $current_device->{$_} =~ /^(unknown)/ ? N("unknown") : $_ && $current_device->{$_} =~ /^(Unknown)/ ? N("Unknown") : $current_device->{$_}) . "\n\n", { 'foreground' => ($_ eq 'driver' && $current_device->{$_} =~ /^(unknown|Bad:)/ ? 'indian red' : 'black') } ])
                 } sort keys %$current_device ]);
 
             foreach (keys %$current_device) {
