@@ -447,6 +447,27 @@ sub getTVcards() {
     grep { isTVcard($_) } detect_devices::probeall();
 }
 
+sub getInputDevices() {
+    my (@devices, $device);
+    foreach (cat_('/proc/bus/input/devices')) {
+        if (/^I:/) {
+            push @devices, $device if $device;
+            $device = {};
+            $device->{vendor} = $1 if /Vendor=([0-9a-f]+)/;
+            $device->{id} = $1 if /Product=([0-9a-f]+)/;
+        }
+        $device->{description} = "|$1" if /N: Name="(.*)"/;
+        $device->{driver} = $1 if /H: Handlers=(\w+)/;
+        if (/P: Phys=(.*)/) {
+            $device->{location} = $1;
+            $device->{bus} = 'isa' if $device->{location} =~ /^isa/;
+            $device->{bus} = 'usb' if $device->{location} =~ /^usb/i;
+        }
+    }
+    push @devices, $device if $device;
+    @devices;
+}
+
 sub getSerialModem {
     my ($modules_conf, $o_mouse) = @_;
     my $mouse = $o_mouse || {};
