@@ -3,6 +3,7 @@ package move; # $Id$ $
 use diagnostics;
 use strict;
 
+use modules;
 use common;
 use fs;
 use run_program;
@@ -38,6 +39,8 @@ sub init {
     #- devfsd needed for devices accessed by old names
     fs::mount("none", "/dev", "devfs", 0);
     run_program::run('/sbin/devfsd', '/dev');
+
+    modules::load_category->('multimedia/sound');
 }
 
 
