@@ -107,7 +107,7 @@ sub selectedSize {
 	}
     }
     #- but remove size of package being obsoleted or removed.
-    foreach ((map { /(.*)\.[^\.]*$/ } keys %{$packages->{state}{obsoleted}}), keys %{$packages->{state}{ask_remove}}) {
+    foreach (keys %{$packages->{state}{rejected}}) {
 	my ($name) = /(.*)-[^\-]*-[^\-]*$/ or next;
 	exists $skip{$name} and next; $skip{$name} = undef;
 	$size -= $packages->{sizes}{$name};
@@ -954,10 +954,10 @@ sub install($$$;$$) {
 			    $pkg->set_flag_installed(1);
 			    $pkg->set_flag_upgrade(0);
 			    #- update obsoleted entry.
-			    foreach (keys %{$packages->{state}{obsoleted}}) {
-				if (exists $packages->{state}{obsoleted}{$_}{$pkg->id}) {
-				    delete $packages->{state}{obsoleted}{$_}{$pkg->id};
-				    %{$packages->{state}{obsoleted}{$_}} or delete $packages->{state}{obsoleted}{$_};
+			    foreach (keys %{$packages->{state}{rejected}}) {
+				if (exists $packages->{state}{rejected}{$_}{closure}{$pkg->fullname}) {
+				    delete $packages->{state}{rejected}{$_}{closure}{$pkg->fullname};
+				    %{$packages->{state}{rejected}{$_}{closure}} or delete $packages->{state}{rejected}{$_};
 				}
 			    }
 			} else {
