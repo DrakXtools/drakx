@@ -174,7 +174,7 @@ sub packages2kernels {
     map { 
 	my $pkg = $packages->{depslist}[$_];
 	if (my ($ext, $version) = analyse_kernel_name($pkg->name)) {
-	    [ $pkg, $ext, $version ];
+	    { pkg => $pkg, ext => $ext, version => $version };
 	} else {
 	    log::l("ERROR: unknown package " . $pkg->name . " providing kernel");
 	    ();
@@ -187,16 +187,16 @@ sub bestKernelPackage {
 
     my @kernels = packages2kernels($packages) or internal_error('no kernel available');
     my ($version_BOOT) = c::kernel_version() =~ /^(\d+\.\d+)/;
-    if (my @l = grep { $_->[2] =~ /\Q$version_BOOT/ } @kernels) {
+    if (my @l = grep { $_->{version} =~ /\Q$version_BOOT/ } @kernels) {
 	#- favour versions corresponding to current BOOT version
 	@kernels = @l;
     }
-    if (my @l = grep { $_->[1] eq '' } @kernels) {
+    if (my @l = grep { $_->{ext} eq '' } @kernels) {
 	@kernels = @l;
     }
     
-    log::l("bestKernelPackage: " . join(' ', map { $_->[0]->name } @kernels) . (@kernels > 1 ? ' (choosing the first)' : ''));
-    $kernels[0][0];
+    log::l("bestKernelPackage: " . join(' ', map { $_->{pkg}->name } @kernels) . (@kernels > 1 ? ' (choosing the first)' : ''));
+    $kernels[0]{pkg};
 }
 
 sub packagesOfMedium {

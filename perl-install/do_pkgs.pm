@@ -63,9 +63,8 @@ sub check_kernel_module_packages {
 
     if (!$o_ext_name || pkgs::packageByName($do->{o}{packages}, $o_ext_name)) {
 	my @rpms = map {
-	    my ($p, $ext, $version) = @$_;	    
-	    my $name = "$base_name$ext-$version";
-	    if ($p->flag_available && pkgs::packageByName($do->{o}{packages}, $name)) {
+	    my $name = $base_name . $_->{ext} . '-' . $_->{version};
+	    if ($_->{pkg}->flag_available && pkgs::packageByName($do->{o}{packages}, $name)) {
 		log::l("found kernel module packages $name");
 		$name;
 	    } else {
