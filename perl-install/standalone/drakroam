@@ -195,6 +195,7 @@ sub UpdateAvailable() {
 	while (<$LIST>) {
 		if (/([^ ]+)([ \t]+)Scan completed :/) { $device = $1 }
 		elsif (/([^ ]+)([ \t]+)No scan results/) { $device = $1 }
+          my $essid;
 		if (/ESSID:"(\S*)"/) {
 			$essid = $1;
 			print("Found $essid.\n");
