@@ -15,7 +15,11 @@ sub main {
     
     my $quit;
     do {
-	$in->ask_from_({ ok => '' },
+	$in->ask_from_({ ok => '', messages => formatAlaTeX(
+_("WebDAV is a protocol that allows you to mount a web server's directory
+locally, and treat it like a local filesystem (provided the web server is
+configured as a WebDAV server). If you would like to add WebDAV mount
+points, select \"New\".")) },
 		       [ 
 			(map { 
 			    my $dav = $_;
