@@ -895,18 +895,9 @@ sub _create_window($$) {
     $w->set_name("Title");
     $w->set_title($title);
 
-    print STDERR "TODO: XSetInputFocus if force_focus\n";
-#    $w->signal_connect(expose_event => sub { eval { $interactive::objects[-1]{rwindow} == $w and $w->window->XSetInputFocus } }) if $force_focus || $o->{force_focus};
+    $w->signal_connect(expose_event => sub { eval { $interactive::objects[-1]{rwindow} == $w and $w->window->XSetInputFocus } }) if $force_focus || $o->{force_focus};
     $w->signal_connect(delete_event => sub { if ($::isWizard) { $w->destroy; die 'wizcancel' } else { Gtk2->main_quit } });
     $w->set_uposition(@{$force_position || $o->{force_position}}) if $force_position || $o->{force_position};
-
-    print STDERR "TODO: ensure focus stuff\n";
-#    my $focusing;
-#    $w->signal_connect(focus => sub { 
-#        return 1 if $focusing;
-#	$focusing = 1;
-#	Gtk2->idle_add(sub { $w->ensure_focus($_[0]); $focusing = 0; 0 }, $_[1]);
-#    }) if $w->can('ensure_focus');
 
     if ($::o->{mouse}{unsafe}) {
 	$w->add_events('pointer-motion-mask');
