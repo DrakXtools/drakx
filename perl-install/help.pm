@@ -331,13 +331,16 @@ setupBootloader =>
  (primary master IDE disk) or \"/dev/sda\" (first SCSI disk)."),
 
 setupBootloaderAddEntry =>
- __("LILO (the LInux LOader) or grub can boot Linux and other operating systems.
-Normally they are correctly detected during installation. If you don't
-see yours detected, you can add one or more now.
+ __("LILO (the LInux LOader) and Grub are bootloaders: they are able to boot
+either Linux or any other operating system present on your computer.
+Normally, these other operating systems are correctly detected and
+installed. If this is not the case, you can add an entry by hand in this
+screen. Be careful as to choose the correct parameters.
 
 
-If you don't want that everybody could access at one of them, you can remove
-it now (a boot disk will be needed to boot it)."),
+You may also want not to give access to these other operating systems to
+anyone, in which case you can delete the corresponding entries. But
+in this case, you will need a boot disk in order to boot them!"),
 
 setupBootloaderGeneral =>
  __("LILO and grub main options are:
