@@ -980,12 +980,11 @@ sub find_root_parts {
 }
 sub use_root_part {
     my ($all_hds, $part, $prefix) = @_;
-    my $fstab = [ fsedit::get_really_all_fstab($all_hds) ];
     {
 	my $handle = any::inspect($part, $prefix) or die;
-	fs::merge_info_from_fstab($fstab, $handle->{dir}, 'uniq');
+	fs::get_info_from_fstab($all_hds, $handle->{dir}, 'uniq');
     }
-    map { $_->{mntpoint} = 'swap' } grep { isSwap($_) } @$fstab; #- use all available swap.
+    map { $_->{mntpoint} = 'swap' } grep { isSwap($_) } fsedit::get_really_all_fstab($all_hds); #- use all available swap.
 }
 
 sub getHds {

@@ -142,8 +142,9 @@ sub add2all_hds {
 	    isThisFs('nfs', $_) ? 'nfss' :
 	    isThisFs('smbfs', $_) ? 'smbs' :
 	    isThisFs('davfs', $_) ? 'davs' :
+	    isTrueFS($_) || isSwap($_) || isOtherAvailableFS($_) ? '' :
 	    'special';
-	push @{$all_hds->{$s}}, $_;
+	push @{$all_hds->{$s}}, $_ if $s;
     }
 }
 
@@ -192,6 +193,13 @@ sub merge_info_from_fstab {
     } read_fstab($prefix, "/etc/fstab", 'keep_freq_passno');
 
     merge_fstabs($loose, $fstab, @l);
+}
+
+# - when using "$loose", it does not merge in type&options from the fstab
+sub get_info_from_fstab {
+    my ($all_hds, $prefix) = @_;
+    my @l = read_fstab($prefix, "/etc/fstab", 'keep_freq_passno');
+    add2all_hds($all_hds, @l)
 }
 
 sub prepare_write_fstab {
