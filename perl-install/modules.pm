@@ -1,6 +1,7 @@
 package modules; # $Id$
 
 use strict;
+use vars qw(%conf);
 
 use common;
 use detect_devices;
@@ -8,7 +9,7 @@ use run_program;
 use log;
 use list_modules;
 
-my %conf;
+%conf = ();
 
 sub category2modules_and_description {
     my ($categories) = @_;
