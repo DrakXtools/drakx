@@ -192,6 +192,10 @@ sub real_main {
           } else {
               undef $netc->{NET_DEVICE};
           }
+          if ($netcnx->{type} eq 'adsl' && member($adsl_type, qw(manual dhcp)) && member($ntf_name, qw(sagem))) {
+            #- we need to write sagem specific parameters and load corresponding modules/programs
+            network::adsl::adsl_conf_backend($in, $modules_conf, $netcnx, $netc, $intf, $ntf_name, $adsl_type, $netcnx);
+          }
           network::network::configureNetwork2($in, $modules_conf, $::prefix, $netc, $intf);
           $network_configured = 1;
           return "restart" if $need_restart_network && $::isStandalone && !$::expert;
@@ -810,8 +814,9 @@ If you don't know, choose 'use PPPoE'"),
                         if ($ntf_name eq "sagem"  && member($adsl_type, qw(manual dhcp))) {
                             #- "fctStartAdsl -i" builds ifcfg-ethX from ifcfg-sagem and echoes ethX
                             #- it auto-detects dhcp/static modes thanks to encapsulation setting
-                            $ethntf = $intf->{sagem} = { DEVICE => "`/usr/sbin/fctStartAdsl -i`", MII_NOT_SUPPORTED => "yes" };
-                            network::adsl::sagem_set_parameters($netc); #- FIXME: should be delayed
+                            $ethntf = $intf->{sagem} ||= {};
+                            $ethntf->{DEVICE} = "`/usr/sbin/fctStartAdsl -i`";
+                            $ethntf->{MII_NOT_SUPPORTED} = "yes";
                         }
                         # process static/dhcp ethernet devices:
                         if (exists($intf->{$ntf_name}) && member($adsl_type, qw(manual dhcp))) {
@@ -994,7 +999,7 @@ notation (for example, 1.2.3.4).")),
                           return 1;
                         }
                         #- test if IP address is already used (do not test for sagem DSL devices since it may use many ifcfg files)
-                        if ($ethntf->{DEVICE} !~ /eagle/ && find { $_->{DEVICE} ne $ethntf->{DEVICE} && $_->{IPADDR} eq $ethntf->{IPADDR} } values %$intf) {
+                        if ($ntf_name ne "sagem" && find { $_->{DEVICE} ne $ethntf->{DEVICE} && $_->{IPADDR} eq $ethntf->{IPADDR} } values %$intf) {
                           $in->ask_warn(N("Error"), N("%s already in use\n", $ethntf->{IPADDR}));
                           return 1;
                         }
@@ -1107,6 +1112,11 @@ See iwpriv(8) man page for further information."),
                             $netc->{dnsServer} ||= dns($ethntf->{IPADDR});
                             $gateway_ex = gateway($ethntf->{IPADDR});
                             # $netc->{GATEWAY} ||= gateway($ethntf->{IPADDR});
+                            if ($ntf_name eq "sagem") {
+                              my @sagem_ip = split(/\./, $ethntf->{IPADDR});
+                              @sagem_ip[3] = 254;
+                              $netc->{GATEWAY} = join(".", @sagem_ip);
+                            }
                         }
                     },
                     name => N("Please enter your host name.
