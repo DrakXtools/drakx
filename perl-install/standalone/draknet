@@ -191,7 +191,7 @@ $button2->signal_connect (clicked => sub {
 				  $l->set(_("Starting your connection..."));
 				  Gtk->main_iteration while Gtk->events_pending;
 				  netconnect::connect_backend($prefix);
-				  sleep 5;
+				  foreach (1..10) { Gtk->main_iteration while Gtk->events_pending; sleep 1; }
 				  my $up=netconnect::connected($prefix, $netc);
 				  $l->set($up ? _("The system is now connected to Internet.") : _("The system doesn't seem to be connected to internet.
 Try to reconfigure your connection."));
@@ -199,7 +199,7 @@ Try to reconfigure your connection."));
 				  $l->set(_("Closing your connection..."));
 				  Gtk->main_iteration while Gtk->events_pending;
 				  netconnect::disconnect_backend($prefix);
-				  sleep 5;
+				  foreach (1..10) { Gtk->main_iteration while Gtk->events_pending; sleep 1; }
 				  my $up=netconnect::connected($prefix, $netc);
 				  $l->set($up ? _("The connection is not closed.
 Try to do it manually by running

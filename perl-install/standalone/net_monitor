@@ -107,7 +107,7 @@ sub connection {
 				   1;
 			       });
     my $netc = {};
-    my $tag2 = Gtk->timeout_add(7000, sub {
+    my $tag2 = Gtk->timeout_add(10000, sub {
 				    Gtk->timeout_remove($tag);
 				    $statusbar->pop(1);
 				    $statusbar->push(1, $isconnected2 ? ( netconnect::connected('', $netc) ?
