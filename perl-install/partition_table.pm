@@ -224,8 +224,8 @@ sub verifyParts_ {
 	foreach (@_) {
 	    next if !$i || !$_ || $i == $_ || isWholedisk($i); #- avoid testing twice on whole disk for simplicity :-)
 	    isWholedisk($_) ?
-		verifyInside($i, $_) || cdie sprintf "partitions sector #$i->{start} (%dMB) is not inside whole disk (%dMB)!", $i->{size} >> 11, $_->{size} >> 11:
-		verifyNotOverlap($i, $_) || cdie sprintf "partitions sector #$i->{start} (%dMB) and sector #$_->{start} (%dMB) are overlapping!", $i->{size} >> 11, $_->{size} >> 11;
+		verifyInside($i, $_) || cdie sprintf("partitions sector #$i->{start} (%dMB) is not inside whole disk (%dMB)!", $i->{size} >> 11, $_->{size} >> 11) :
+		verifyNotOverlap($i, $_) || cdie sprintf("partitions sector #$i->{start} (%dMB) and sector #$_->{start} (%dMB) are overlapping!", $i->{size} >> 11, $_->{size} >> 11);
 	}
     }
 }
@@ -408,6 +408,11 @@ sub write($) {
     for ($hd->{primary}{raw}) {
 	(grep { $_->{local_start} = $_->{start}; $_->{active} ||= 0 } @$_) or $_->[0]{active} = 0x80;
     }
+
+    #- last chance for verification, this make sure if an error is detected,
+    #- it will never be writed back on partition table.
+    verifyParts($hd);
+
     $hd->write(0, $hd->{primary}{raw}, $hd->{primary}{info}) or die "writing of partition table failed";
 
     #- should be fixed but a extended exist with no real extended partition, that blanks mbr!
