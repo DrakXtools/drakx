@@ -250,7 +250,7 @@ sub ppp_choose {
 #- TODO: add choice between hcf/hsf/lt ?
 sub winmodemConfigure {
     my ($in, $netc) = @_;
-    my %relocations = ( ltmodem => $in->do_pkgs->check_kernel_module_packages('ltmodem_') );
+    my %relocations = ( ltmodem => $in->do_pkgs->check_kernel_module_packages('ltmodem') );
     my $type;
     
     foreach (keys %{$netc->{autodetect}{winmodem}}) {
