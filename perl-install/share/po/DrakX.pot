@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 1999-10-21 15:09+0200\n"
+"POT-Creation-Date: 1999-10-22 13:03+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -87,7 +87,7 @@ msgstr ""
 msgid "(leaving in %d seconds)"
 msgstr ""
 
-#: ../Xconfigurator.pm_.c:316 ../my_gtk.pm_.c:423
+#: ../Xconfigurator.pm_.c:316 ../my_gtk.pm_.c:431
 msgid "Is this correct?"
 msgstr ""
 
@@ -227,11 +227,15 @@ msgstr ""
 msgid ""
 "Configuration file has been written. Take a look at it before running "
 "'startx'.\n"
+"\n"
 "Within the server, press Ctrl, Alt and '+' simultaneously to cycle through "
 "video resolutions.\n"
+"\n"
 "Pressing Ctrl, Alt and Backspace simultaneously immediately exits the "
 "server\n"
-"For further configuration, refer to /usr/X11R6/lib/X11/doc/README.Config."
+"\n"
+"For further configuration, refer to /usr/X11R6/lib/X11/doc/README.Config.\n"
+"\n"
 msgstr ""
 
 #: ../Xconfigurator_consts.pm_.c:4
@@ -391,7 +395,7 @@ msgid "Save on floppy"
 msgstr ""
 
 #: ../diskdrake.pm_.c:39 ../install_steps_interactive.pm_.c:533
-#: ../install_steps_interactive.pm_.c:642
+#: ../install_steps_interactive.pm_.c:643
 msgid "Done"
 msgstr ""
 
@@ -438,7 +442,7 @@ msgid "Details"
 msgstr ""
 
 #: ../diskdrake.pm_.c:98
-msgid "Legend"
+msgid "Legend:"
 msgstr ""
 
 #: ../diskdrake.pm_.c:102
@@ -498,7 +502,7 @@ msgstr ""
 
 #: ../diskdrake.pm_.c:165
 #, c-format
-msgid "Start: sector /*%s\n"
+msgid "Start: sector %s\n"
 msgstr ""
 
 #: ../diskdrake.pm_.c:166
@@ -753,15 +757,15 @@ msgstr ""
 msgid "You don't have any partitions!"
 msgstr ""
 
-#: ../help.pm_.c:7 ../help.pm_.c:235
+#: ../help.pm_.c:7 ../help.pm_.c:245
 msgid "Choose preferred language for install and system usage."
 msgstr ""
 
-#: ../help.pm_.c:10 ../help.pm_.c:238
+#: ../help.pm_.c:10 ../help.pm_.c:248
 msgid "Choose the layout corresponding to your keyboard from the list above"
 msgstr ""
 
-#: ../help.pm_.c:13 ../help.pm_.c:241
+#: ../help.pm_.c:13 ../help.pm_.c:251
 msgid ""
 "Choose \"Installation\" if there are no previous versions of Linux\n"
 "installed, or if you wish use to multiple distributions or versions.\n"
@@ -775,35 +779,41 @@ msgstr ""
 msgid ""
 "Select:\n"
 "\n"
-"  - Beginner: If you have never installed Linux before, click here.\n"
+"  - Beginner: If you have never installed Linux before.\n"
+"\n"
 "\n"
 "  - Developer: If you are familiar with Linux and will be using the\n"
 "computer primarily for software development, you will find happiness\n"
 "here.\n"
 "\n"
+"\n"
 "  - Server: If you wish to install a general purpose server (for mail,\n"
 "printing...), select this.\n"
+"\n"
 "\n"
 "  - Expert: If you are fluent with GNU/Linux and want to perform\n"
 "a highly customized installation, this Install Class is for you."
 msgstr ""
 
-#: ../help.pm_.c:36
+#: ../help.pm_.c:39
 msgid ""
 "DrakX will attempt at first to look for one or more PCI\n"
 "SCSI adapter(s). If it finds it (or them)  and knows which driver(s)\n"
 "to use, it will insert it (them)  automatically.\n"
 "\n"
-"If your SCSI adapter is ISA, or is PCI but DrakX doesn't know\n"
-"which driver to use for this card, or if you have no SCSI adapters\n"
-"at all, you will then be prompted on whether you have one or not.\n"
-"If you have none, answer \"No\". If you have one or more, answer\n"
-"\"Yes\". A list of drivers will then pop up, from which you will\n"
-"have to select one.\n"
+"\n"
+"If your SCSI adapter is an ISA board, or is a PCI board but DrakX\n"
+"doesn't know which driver to use for this card, or if you have no\n"
+"SCSI adapters at all, you will then be prompted on whether you have\n"
+"one or not. If you have none, answer \"No\". If you have one or more,\n"
+"answer \"Yes\". A list of drivers will then pop up, from which you\n"
+"will have to select one.\n"
+"\n"
 "\n"
 "After you have selected the driver, DrakX will ask if you\n"
 "want to specify options for it. First, try and let the driver\n"
 "probe for the hardware: it usually works fine.\n"
+"\n"
 "\n"
 "If not, do not forget the information on your hardware that you\n"
 "could get from your documentation or from Windows (if you have it\n"
@@ -811,28 +821,13 @@ msgid ""
 "are the options you will need to provide to the driver."
 msgstr ""
 
-#: ../help.pm_.c:57 ../help.pm_.c:288
+#: ../help.pm_.c:63 ../help.pm_.c:298
 msgid ""
-"At this point, hard drive partitions must be defined. (Unless you\n"
-"are overwriting a previous install of Linux and have already defined\n"
-"your hard drive partitions as desired.) This operation consists of\n"
-"logically dividing the computer's hard drive capacity into separate\n"
-"areas for use.\n"
-"\n"
-"\n"
-"Two common partition are: the root partition (/), which is the starting\n"
-"point of the filesystem's directory hierarchy, and /boot, which contains\n"
-"all files necessary to start the operating system when the\n"
-"computer is first turned on.\n"
-"\n"
-"\n"
-"Because the effects of this process are usually irreversible, partitioning\n"
-"can be intimidating and stressful to the unexperienced. DiskDrake\n"
-"simplifies the process so that it need not be. Consult the documentation\n"
-"and take your time before proceeding."
+"In this stage, you may choose what partition(s) use to install your\n"
+"Linux-Mandrake system."
 msgstr ""
 
-#: ../help.pm_.c:76 ../help.pm_.c:307
+#: ../help.pm_.c:85 ../help.pm_.c:320
 msgid ""
 "Any partitions that have been newly defined must be formatted for\n"
 "use (formatting meaning creating a filesystem). At this time, you may\n"
@@ -842,7 +837,7 @@ msgid ""
 "Typically retained are /home and /usr/local."
 msgstr ""
 
-#: ../help.pm_.c:84 ../help.pm_.c:315
+#: ../help.pm_.c:93 ../help.pm_.c:328
 msgid ""
 "You may now select the packages you wish to install.\n"
 "\n"
@@ -856,16 +851,16 @@ msgid ""
 "\n"
 "Information on each category and specific package is available in the\n"
 "area titled \"Info\",  located between list of packages and the five\n"
-"buttons \"Go\", \"Select more/less\" and \"Show more/less\"."
+"buttons \"Install\", \"Select more/less\" and \"Show more/less\"."
 msgstr ""
 
-#: ../help.pm_.c:99 ../help.pm_.c:330
+#: ../help.pm_.c:108 ../help.pm_.c:343
 msgid ""
 "The packages selected are now being installed. This operation\n"
 "should only take a few minutes."
 msgstr ""
 
-#: ../help.pm_.c:103 ../help.pm_.c:334
+#: ../help.pm_.c:112 ../help.pm_.c:347
 msgid ""
 "If DrakX failed to find your mouse, or if you want to\n"
 "check what it has done, you will be presented the list of mice\n"
@@ -881,7 +876,7 @@ msgid ""
 "which serial port it is connected to."
 msgstr ""
 
-#: ../help.pm_.c:117 ../help.pm_.c:348
+#: ../help.pm_.c:126 ../help.pm_.c:361
 msgid ""
 "This section is dedicated to configuring a local area network,\n"
 "or LAN. If you answer \"Yes\" here, DrakX will try to find an\n"
@@ -905,12 +900,12 @@ msgid ""
 "addresses "
 msgstr ""
 
-#: ../help.pm_.c:139 ../help.pm_.c:142 ../help.pm_.c:229 ../help.pm_.c:370
-#: ../help.pm_.c:373 ../help.pm_.c:460 ../install2.pm_.c:65
+#: ../help.pm_.c:148 ../help.pm_.c:151 ../help.pm_.c:239 ../help.pm_.c:383
+#: ../help.pm_.c:386 ../help.pm_.c:474 ../install2.pm_.c:65
 msgid "Help"
 msgstr ""
 
-#: ../help.pm_.c:145
+#: ../help.pm_.c:154
 msgid ""
 "Linux can deal with many types of printer. Each of these\n"
 "types require a different setup.\n"
@@ -935,7 +930,7 @@ msgid ""
 "for a NetWare printer, except that you need no workgroup information."
 msgstr ""
 
-#: ../help.pm_.c:168 ../help.pm_.c:399
+#: ../help.pm_.c:177 ../help.pm_.c:412
 msgid ""
 "You must now enter the root password for your Linux-Mandrake\n"
 "system. The password must be entered twice to verify that both\n"
@@ -953,7 +948,7 @@ msgid ""
 "effort."
 msgstr ""
 
-#: ../help.pm_.c:184 ../help.pm_.c:415
+#: ../help.pm_.c:193 ../help.pm_.c:428
 msgid ""
 "You may now create one or more \"regular\" user account(s), as\n"
 "opposed to the \"priviledged\" user account, root. You can create\n"
@@ -977,7 +972,7 @@ msgid ""
 "and maintenance purposes."
 msgstr ""
 
-#: ../help.pm_.c:203 ../help.pm_.c:434
+#: ../help.pm_.c:212 ../help.pm_.c:447
 msgid ""
 "Please, please, answer \"Yes\" here! Just for example, when you\n"
 "reinstall Windows, it will overwrite the boot sector. Unless you have\n"
@@ -985,7 +980,7 @@ msgid ""
 "any more!"
 msgstr ""
 
-#: ../help.pm_.c:209 ../help.pm_.c:440
+#: ../help.pm_.c:218 ../help.pm_.c:453
 msgid ""
 "You need to indicate where you wish\n"
 "to place the information required to boot to Linux.\n"
@@ -995,7 +990,7 @@ msgid ""
 "drive (MBR)\"."
 msgstr ""
 
-#: ../help.pm_.c:217 ../help.pm_.c:448
+#: ../help.pm_.c:226 ../help.pm_.c:461
 msgid ""
 "Now it's time to configure the X Window System, which is the\n"
 "core of the Linux GUI (Graphical User Interface). For this purpose,\n"
@@ -1003,13 +998,14 @@ msgid ""
 "steps are automated, though, therefore your work may only consist\n"
 "of verifying what has been done and accept the settings :)\n"
 "\n"
+"\n"
 "When the configuration is over, X will be started (unless you\n"
 "ask DrakX not to) so that you can check and see if the\n"
 "settings suit you. If they don't, you can come back and\n"
 "change them, as many times as necessary."
 msgstr ""
 
-#: ../help.pm_.c:249
+#: ../help.pm_.c:259
 msgid ""
 "Select:\n"
 "\n"
@@ -1029,7 +1025,7 @@ msgid ""
 "a highly customized installation, this Install Class is for you."
 msgstr ""
 
-#: ../help.pm_.c:267
+#: ../help.pm_.c:277
 msgid ""
 "DrakX will attempt at first to look for one or more PCI\n"
 "SCSI adapter(s). If it finds it (or them)  and knows which driver(s)\n"
@@ -1052,7 +1048,7 @@ msgid ""
 "These are the options you will need to provide to the driver."
 msgstr ""
 
-#: ../help.pm_.c:376
+#: ../help.pm_.c:389
 msgid ""
 "Linux can deal with many types of printer. Each of these\n"
 "types require a different setup.\n"
@@ -1154,31 +1150,31 @@ msgstr ""
 msgid "Exit install"
 msgstr ""
 
-#: ../install2.pm_.c:80
+#: ../install2.pm_.c:81
 msgid "beginner"
 msgstr ""
 
-#: ../install2.pm_.c:80
+#: ../install2.pm_.c:81
 msgid "developer"
 msgstr ""
 
-#: ../install2.pm_.c:80
+#: ../install2.pm_.c:81
 msgid "expert"
 msgstr ""
 
-#: ../install2.pm_.c:80
+#: ../install2.pm_.c:81
 msgid "server"
 msgstr ""
 
-#: ../install2.pm_.c:292
+#: ../install2.pm_.c:293
 msgid "Partitioning failed: no root filesystem"
 msgstr ""
 
-#: ../install2.pm_.c:474
+#: ../install2.pm_.c:476
 msgid "Error reading file $f"
 msgstr ""
 
-#: ../install2.pm_.c:479
+#: ../install2.pm_.c:481
 #, c-format
 msgid "Bad kickstart file %s (failed %s)"
 msgstr ""
@@ -1210,8 +1206,8 @@ msgstr ""
 
 #: ../install_steps.pm_.c:68
 msgid ""
-"An error occurred, but I don't know how to handle it nicely,\n"
-"so continue at your own risk :("
+"An error occurred, but I don't know how to handle it nicely.\n"
+"Continue at your own risk."
 msgstr ""
 
 #: ../install_steps.pm_.c:123
@@ -1255,74 +1251,74 @@ msgid ""
 "\n"
 msgstr ""
 
-#: ../install_steps_graphical.pm_.c:426
+#: ../install_steps_graphical.pm_.c:427
 msgid "Choose the packages you want to install"
 msgstr ""
 
-#: ../install_steps_graphical.pm_.c:429
+#: ../install_steps_graphical.pm_.c:430
 msgid "Info"
 msgstr ""
 
-#: ../install_steps_graphical.pm_.c:437 ../install_steps_interactive.pm_.c:81
+#: ../install_steps_graphical.pm_.c:438 ../install_steps_interactive.pm_.c:81
 msgid "Install"
 msgstr ""
 
-#: ../install_steps_graphical.pm_.c:438
+#: ../install_steps_graphical.pm_.c:439
 msgid "Select less"
 msgstr ""
 
-#: ../install_steps_graphical.pm_.c:439
+#: ../install_steps_graphical.pm_.c:440
 msgid "Select more"
 msgstr ""
 
-#: ../install_steps_graphical.pm_.c:440
+#: ../install_steps_graphical.pm_.c:441
 msgid "Show less"
 msgstr ""
 
-#: ../install_steps_graphical.pm_.c:441
+#: ../install_steps_graphical.pm_.c:442
 msgid "Show more"
 msgstr ""
 
-#: ../install_steps_graphical.pm_.c:458
+#: ../install_steps_graphical.pm_.c:459
 msgid "Installing"
 msgstr ""
 
-#: ../install_steps_graphical.pm_.c:464
+#: ../install_steps_graphical.pm_.c:465
 msgid "Please wait, "
 msgstr ""
 
-#: ../install_steps_graphical.pm_.c:466
+#: ../install_steps_graphical.pm_.c:467
 msgid "Time remaining "
 msgstr ""
 
-#: ../install_steps_graphical.pm_.c:467
+#: ../install_steps_graphical.pm_.c:468
 msgid "Total time "
 msgstr ""
 
-#: ../install_steps_graphical.pm_.c:472
+#: ../install_steps_graphical.pm_.c:473
 msgid "Preparing installation"
 msgstr ""
 
-#: ../install_steps_graphical.pm_.c:493
+#: ../install_steps_graphical.pm_.c:494
 #, c-format
 msgid "Installing package %s"
 msgstr ""
 
-#: ../install_steps_graphical.pm_.c:518
+#: ../install_steps_graphical.pm_.c:519
 msgid "Go on anyway?"
 msgstr ""
 
-#: ../install_steps_graphical.pm_.c:518
+#: ../install_steps_graphical.pm_.c:519
 msgid "There was an error ordering packages:"
 msgstr ""
 
-#: ../install_steps_graphical.pm_.c:542
+#: ../install_steps_graphical.pm_.c:543
 msgid "Use existing configuration for X11?"
 msgstr ""
 
-#: ../install_steps_graphical.pm_.c:616 ../install_steps_interactive.pm_.c:508
+#: ../install_steps_graphical.pm_.c:617 ../install_steps_interactive.pm_.c:508
 #: ../interactive.pm_.c:47 ../interactive.pm_.c:57 ../my_gtk.pm_.c:194
-#: ../my_gtk.pm_.c:423 ../my_gtk.pm_.c:513
+#: ../my_gtk.pm_.c:431 ../my_gtk.pm_.c:521
 msgid "Ok"
 msgstr ""
 
@@ -1727,7 +1723,7 @@ msgid ""
 msgstr ""
 
 #: ../install_steps_interactive.pm_.c:535
-#: ../install_steps_interactive.pm_.c:620
+#: ../install_steps_interactive.pm_.c:621
 msgid "Password"
 msgstr ""
 
@@ -1791,156 +1787,158 @@ msgstr ""
 msgid "Preparing bootloader"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:603
+#: ../install_steps_interactive.pm_.c:605
 msgid "First sector of boot partition"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:603
+#: ../install_steps_interactive.pm_.c:605
 msgid "First sector of drive (MBR)"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:608
+#: ../install_steps_interactive.pm_.c:609
 msgid "LILO Installation"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:609
+#: ../install_steps_interactive.pm_.c:610
 msgid "Where do you want to install the bootloader?"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:612
+#: ../install_steps_interactive.pm_.c:613
 msgid "Do you want to use LILO?"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:615
+#: ../install_steps_interactive.pm_.c:616
 msgid "Boot device"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:616
+#: ../install_steps_interactive.pm_.c:617
 msgid "Linear (needed for some SCSI drives)"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:616
+#: ../install_steps_interactive.pm_.c:617
 msgid "linear"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:617
+#: ../install_steps_interactive.pm_.c:618
 msgid "Compact"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:617
+#: ../install_steps_interactive.pm_.c:618
 msgid "compact"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:618
+#: ../install_steps_interactive.pm_.c:619
 msgid "Delay before booting default image"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:619
+#: ../install_steps_interactive.pm_.c:620
 msgid "Video mode"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:621
+#: ../install_steps_interactive.pm_.c:622
 msgid "Restrict command line options"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:621
+#: ../install_steps_interactive.pm_.c:622
 msgid "restrict"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:627
+#: ../install_steps_interactive.pm_.c:628
 msgid "LILO main options"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:631
+#: ../install_steps_interactive.pm_.c:632
 msgid ""
 "Option ``Restrict command line options'' is of no use without a password"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:640
+#: ../install_steps_interactive.pm_.c:641
 msgid ""
 "Here are the following entries in LILO.\n"
 "You can add some more or change the existent ones."
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:642
+#: ../install_steps_interactive.pm_.c:643
 msgid "Add"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:660
+#: ../install_steps_interactive.pm_.c:661
 msgid "Image"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:661
-#: ../install_steps_interactive.pm_.c:669
+#: ../install_steps_interactive.pm_.c:662
+#: ../install_steps_interactive.pm_.c:670
 msgid "Root"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:662
+#: ../install_steps_interactive.pm_.c:663
 msgid "Append"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:663
+#: ../install_steps_interactive.pm_.c:664
 msgid "Initrd"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:664
+#: ../install_steps_interactive.pm_.c:665
 msgid "Read-write"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:670
+#: ../install_steps_interactive.pm_.c:671
 msgid "Table"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:671
+#: ../install_steps_interactive.pm_.c:672
 msgid "Unsafe"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:676
+#: ../install_steps_interactive.pm_.c:677
 msgid "Label"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:678
+#: ../install_steps_interactive.pm_.c:679
 msgid "Default"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:697
+#: ../install_steps_interactive.pm_.c:698
 msgid "Installation of LILO failed. The following error occured:"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:708
+#: ../install_steps_interactive.pm_.c:709
 msgid ""
 "Some steps are not completed.\n"
 "\n"
 "Do you really want to quit now?"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:713
+#: ../install_steps_interactive.pm_.c:714
 msgid ""
 "Congratulations, installation is complete.\n"
 "Remove the boot media and press return to reboot.\n"
+"\n"
 "For information on fixes which are available for this release of "
 "Linux-Mandrake,\n"
 "consult the Errata available from http://www.linux-mandrake.com/.\n"
+"\n"
 "Information on configuring your system is available in the post\n"
 "install chapter of the Official Linux-Mandrake User's Guide."
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:730
+#: ../install_steps_interactive.pm_.c:733
 #, c-format
 msgid "Installing driver for %s card %s"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:731
+#: ../install_steps_interactive.pm_.c:734
 #, c-format
 msgid "(module %s)"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:741
+#: ../install_steps_interactive.pm_.c:744
 #, c-format
 msgid "What %s card do you have?"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:748
+#: ../install_steps_interactive.pm_.c:751
 #, c-format
 msgid ""
 "In some cases, the %s driver needs to have extra information to work\n"
@@ -1952,20 +1950,20 @@ msgid ""
 "not cause any damage."
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:753
+#: ../install_steps_interactive.pm_.c:756
 msgid "Autoprobe"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:753
+#: ../install_steps_interactive.pm_.c:756
 msgid "Specify options"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:757
+#: ../install_steps_interactive.pm_.c:760
 #, c-format
 msgid "You may now provide its options to module %s."
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:763
+#: ../install_steps_interactive.pm_.c:766
 #, c-format
 msgid ""
 "You may now provide its options to module %s.\n"
@@ -1973,60 +1971,60 @@ msgid ""
 "For instance, ``io=0x300 irq=7''"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:766
+#: ../install_steps_interactive.pm_.c:769
 msgid "Module options:"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:776
+#: ../install_steps_interactive.pm_.c:779
 #, c-format
 msgid ""
 "Loading module %s failed.\n"
 "Do you want to try again with other parameters?"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:789
+#: ../install_steps_interactive.pm_.c:792
 #, c-format
 msgid "Skip %s PCMCIA probing"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:790
+#: ../install_steps_interactive.pm_.c:793
 msgid "Configuring PCMCIA cards..."
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:790
+#: ../install_steps_interactive.pm_.c:793
 msgid "PCMCIA"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:797
+#: ../install_steps_interactive.pm_.c:800
 #, c-format
 msgid "Skip %s PCI probing"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:801
+#: ../install_steps_interactive.pm_.c:804
 #, c-format
 msgid "Found %s %s interfaces"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:802
+#: ../install_steps_interactive.pm_.c:805
 msgid "Do you have another one?"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:803
+#: ../install_steps_interactive.pm_.c:806
 #, c-format
 msgid "Do you have an %s interface?"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:805 ../interactive.pm_.c:52
-#: ../my_gtk.pm_.c:422
+#: ../install_steps_interactive.pm_.c:808 ../interactive.pm_.c:52
+#: ../my_gtk.pm_.c:430
 msgid "No"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:805 ../interactive.pm_.c:52
-#: ../my_gtk.pm_.c:422
+#: ../install_steps_interactive.pm_.c:808 ../interactive.pm_.c:52
+#: ../my_gtk.pm_.c:430
 msgid "Yes"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:806
+#: ../install_steps_interactive.pm_.c:809
 msgid "See hardware info"
 msgstr ""
 
@@ -2035,7 +2033,7 @@ msgstr ""
 msgid "Entering step `%s'\n"
 msgstr ""
 
-#: ../interactive.pm_.c:57 ../my_gtk.pm_.c:195 ../my_gtk.pm_.c:423
+#: ../interactive.pm_.c:57 ../my_gtk.pm_.c:195 ../my_gtk.pm_.c:431
 msgid "Cancel"
 msgstr ""
 
@@ -2178,11 +2176,13 @@ msgstr ""
 
 #: ../lilo.pm_.c:113
 msgid ""
-"Welcome to LILO the famous operating system chooser!\n"
+"Welcome to LILO the operating system chooser!\n"
 "\n"
 "To list the possible choices, press <TAB>.\n"
 "\n"
-"To load one of them, write its name and press <ENTER>.\n"
+"To load one of them, write its name and press <ENTER> or wait 5 seconds for "
+"default boot.\n"
+"\n"
 msgstr ""
 
 #: ../mouse.pm_.c:15
@@ -2336,7 +2336,7 @@ msgid "Remote lpd"
 msgstr ""
 
 #: ../printer.pm_.c:246
-msgid "SMB/Windows 95/NT"
+msgid "SMB/Windows 95/98/NT"
 msgstr ""
 
 #: ../printer.pm_.c:247
