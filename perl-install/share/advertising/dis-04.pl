@@ -10,7 +10,7 @@ $border = 10;  #- for leftish text
 
 # @text = ([ N("text to display"), center => 1 ],
 
-@text = ([ N("<b>OpenOffice.org:</b> The complete Linux office suite."), center => 1 ],
+@text = ([ N("<b>OpenOffice.org</b>: The complete Linux office suite."), center => 1 ],
         ' ',
 	N("WRITER is a powerful word processor for creating all types of text documents. Documents may include images, diagrams and tables."),
 	N("CALC is a feature-packed spreadsheet which enables you to compute, analyze and manage all of your data."),
