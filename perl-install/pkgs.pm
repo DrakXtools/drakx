@@ -277,6 +277,12 @@ sub unselectPackage($$;$) {
 
     my $state = $packages->{state} ||= {};
     my @l = $packages->disable_selected($packages->{rpmdb}, $state, $pkg);
+    if ($o_otherOnly) {
+	foreach (@l) {
+	    $o_otherOnly->{$_->id} = undef;
+	}
+	$packages->resolve_requested($packages->{rpmdb}, $state, $o_otherOnly, callback_choices => \&packageCallbackChoices);
+    }
     1;
 }
 sub togglePackageSelection($$;$) {
