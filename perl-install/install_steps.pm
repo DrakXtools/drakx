@@ -414,6 +414,11 @@ Consoles 1,3,4,7 may also contain interesting information";
     #- for mandrake_firstime
     touch "$o->{prefix}/var/lock/TMP_1ST";
 
+    #- create /dev/dvd symlink
+    each_index {
+	any::devfssymlinkf($_->{device}, 'dvd' . ($::i ? $::i + 1 : ''), $o->{prefix});
+    } grep { detect_devices::isDvdDrive($_) } detect_devices::cdroms__faking_ide_scsi();
+
     any::writeandclean_ldsoconf($o->{prefix});
 
     #- make sure wins is disabled in /etc/nsswitch.conf
