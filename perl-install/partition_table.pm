@@ -453,10 +453,10 @@ sub read_one($$) {
     if (!$sector) {
 	my @parttype = (
 	  if_(arch() =~ /^ia64/, 'gpt'),
-	  arch() =~ /^sparc/ ? ('sun', 'bsd', 'unknown') : ('dos', 'bsd', 'sun', 'mac', 'unknown'),
+	  arch() =~ /^sparc/ ? ('sun', 'bsd') : ('dos', 'bsd', 'sun', 'mac'),
 	);
-	foreach ('empty', @parttype) {
-	    /unknown/ and die "unknown partition table format";
+	foreach ('empty', @parttype, 'unknown') {
+	    /unknown/ and die "unknown partition table format on disk " . $hd->{file};
 	    eval {
 		require("partition_table_$_.pm");
 		bless $hd, "partition_table_$_";
