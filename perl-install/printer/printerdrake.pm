@@ -14,9 +14,9 @@ use printer::detect;
 use printer::default;
 use printer::data;
 
-my $companyname = "MandrakeSoft";
+my $companyname = "Mandrakesoft";
 my $distroname = "Mandrakelinux";
-my $shortdistroname = "Mandrake";
+my $shortdistroname = "Mandrakelinux";
 my $domainname = "mandrakesoft.com";
 
 my $hp1000fwtext = N("The HP LaserJet 1000 needs its firmware to be uploaded after being turned on. Download the Windows driver package from the HP web site (the firmware on the printer's CD does not work) and extract the firmware file from it by uncompresing the self-extracting '.exe' file with the 'unzip' utility and searching for the 'sihp1000.img' file. Copy this file into the '/etc/printer' directory. There it will be found by the automatic uploader script and uploaded whenever the printer is connected and turned on.
@@ -1933,13 +1933,13 @@ sub setup_common {
 		    $makemodel !~ /HP\s+(DeskJet|dj)\s*450/i) {
 		    # Install SANE
 		    if (!$::testing &&
-			!files_exist(qw(/usr/bin/scanimage
-						   /usr/bin/xscanimage
-						   /usr/bin/xsane
-						   /etc/sane.d/dll.conf
-						   /usr/lib/libsane-hpoj.so.1),
-						if_(files_exist('/usr/bin/gimp'), 
-						    '/usr/bin/xsane-gimp'))) {
+			(!files_exist(qw(/usr/bin/scanimage
+					/usr/bin/xscanimage
+					/etc/sane.d/dll.conf
+					/usr/lib/libsane-hpoj.so.1)) ||
+			 (!files_exist(qw(/usr/bin/xsane)) &&
+			  !files_exist(qw(/usr/bin/kooka)) &&
+			  !$in->do_pkgs->is_installed('scanner-gui')))) {
 			undef $w;
 			$w = $in->wait_message
 			    (N("Printerdrake"),
@@ -1947,8 +1947,8 @@ sub setup_common {
 			    if !$printer->{noninteractive};
 			$in->do_pkgs->install('sane-backends',
 					      'sane-frontends',
-					      'xsane', 'libsane-hpoj1',
-					      if_($in->do_pkgs->is_installed('gimp'), 'xsane-gimp'))
+					      'scanner-gui', 
+					      'libsane-hpoj1')
 			    or do {
 				$in->ask_warn(N("Warning"),
 					      N("Could not install the %s packages!",
