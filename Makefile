@@ -1,6 +1,6 @@
 ROOTDEST = /export
 
-DIRS = tools kernel mdk-stage1 perl-install
+DIRS = tools kernel mdk-stage1 perl-install rescue
 
 
 ARCH := $(patsubst i%86,i386,$(shell uname -m))
@@ -67,10 +67,11 @@ install_only:
 	install live_update $(ROOTDEST)/live_update
 	make -C perl-install full_stage2
 	make -C perl-install/share/advertising install
+	make -C rescue install
 
 clean:
 	rm -rf images all.modules all.modules64
-	for i in $(DIRS) rescue; do make -C $$i clean; done
+	for i in $(DIRS); do make -C $$i clean; done
 	find . -name "*~" -o -name ".#*" | xargs rm -f
 
 check:

@@ -4,6 +4,8 @@ ARCH := $(patsubst sparc%,sparc,$(ARCH))
 
 ROOTDEST = /export
 
+all: rescue_stage2.bz2
+
 install: rescue_stage2.bz2
 	cp -f $< $(ROOTDEST)/Mandrake/base
 
