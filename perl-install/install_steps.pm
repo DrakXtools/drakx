@@ -222,7 +222,7 @@ sub doPartitionDisks {
     my ($o) = @_;
 
     if ($o->{partitioning}{auto_allocate}) {
-	fsedit::auto_allocate($o->{all_hds}, $o->{partitions});
+	catch_cdie { fsedit::auto_allocate($o->{all_hds}, $o->{partitions}) } sub { 1 };
     }
 }
 
