@@ -276,8 +276,14 @@ sub doit {
 #--- the listref of "on" services
 sub services {
     local $ENV{LANGUAGE} = 'C';
-    my @raw_l = run_program::rooted_get_stdout($::prefix, '/sbin/chkconfig', '--list');
-    my @l = sort { $a->[0] cmp $b->[0] } map { [ /([^\s:]+)/, /\bon\b/ ] } grep { !/:$/ } @raw_l;
+    my @raw_l = map { chomp; $_ } run_program::rooted_get_stdout($::prefix, '/sbin/chkconfig', '--list');
+    my @l;
+    if ($::isInstall) {
+        @l = sort { $a->[0] cmp $b->[0] } map { [ /([^\s:]+)/, /\bon\b/ ] } grep { !/:$/ } @raw_l;
+    } else {
+        my $runlevel = my $runlevel = (split " ", `/sbin/runlevel`)[1];
+        @l = sort { $a->[0] cmp $b->[0] } map { [ /([^\s:]+)/, /^\t/ ? /\bon\b/ : /\b$runlevel:on\b/ ] } grep { !/:$/ } @raw_l;
+    }
     [ map { $_->[0] } @l ], [ map { $_->[0] } grep { $_->[1] } @l ];
 }
 
