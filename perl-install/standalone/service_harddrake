@@ -25,7 +25,7 @@ my $previous_config = -f $last_boot_config && -s $last_boot_config ? Storable::r
 $previous_config = $$previous_config if ref($previous_config) !~ /HASH/;
 my (%config, $wait);
 my $in;
-
+my $splash = -f '/proc/splash';
 # For each hw, class, detect device, compare and offer to reconfigure if needed
 foreach (@harddrake::data::tree) {
     my ($Ident, $item, undef, $configurator, $detector, $do_it) = @$_;
@@ -54,6 +54,7 @@ foreach (@harddrake::data::tree) {
     $msg .= "- " . harddrake::data::custom_id($ID{$_}, $item) . " was added\n" foreach @added;
     modules::load('ohci1394') if $Ident eq 'FIREWIRE_CONTROLLER' && any { $_->{driver} eq 'ohci1394' } @added;
     @added || @was_removed or next;
+    $splash and system('echo verbose > /proc/splash') and $splash = 0;
     my @configurator_pool;
     if (harddrake::data::is_removable($Ident)) {
         foreach my $device (@ID{@added}) {
