@@ -47,7 +47,6 @@ use install_steps;
 use install_interactive;
 use install_any;
 use detect_devices;
-use harddrake::bttv;
 use run_program;
 use devices;
 use fsedit;
@@ -1030,7 +1029,7 @@ sub summary {
      } @sound_cards),
     if_($isa_sound_card, { label => _("Sound card"), clicked => $isa_sound_card }), 
     (map {
-{ label => _("TV card"), val => $_->{description}, clicked => \&bttv::config()} 
+{ label => _("TV card"), val => $_->{description}, clicked => sub { use harddrake::bttv; bttv::config($o) }} 
      } grep { $_->{driver} eq 'bttv' } detect_devices::probeall()),
 ]);
     install_steps::configureTimezone($o);  #- do not forget it.
