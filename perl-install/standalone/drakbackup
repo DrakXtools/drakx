@@ -1553,12 +1553,12 @@ sub filedialog_generic {
 sub filedialog {
     my $file_dialog;
 
-    $file_dialog = gtksignal_connect(new Gtk::FileSelection(_("File Selection")), destroy => sub { $file_dialog->destroy() } );
+    $file_dialog = gtksignal_connect(new Gtk::FileSelection(_("Select the files or directories and click on 'Add'")), destroy => sub { $file_dialog->destroy() } );
     $file_dialog->ok_button->signal_connect(clicked => \&file_ok_sel, $file_dialog);
     $file_dialog->ok_button->child->set(_("Add"));
     $file_dialog->cancel_button->signal_connect(clicked => sub { $file_dialog->destroy() });
     $file_dialog->cancel_button->child->set(_("Close"));
-    $file_dialog->set_filename(_("Select the files or directories and click on 'Add'"));
+#    $file_dialog->set_filename(_("Select the files or directories and click on 'Add'"));
     $file_dialog->show();
 }
 
