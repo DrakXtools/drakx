@@ -202,6 +202,8 @@ sub searchAndMount4Upgrade {
     my ($o) = @_;
     my ($root, $found);
 
+    $o->{partitioning}{readonly} ||= $::
+
     #- try to find the partition where the system is installed if beginner
     #- else ask the user the right partition, and test it after.
     getHds($o);
@@ -235,10 +237,11 @@ sub searchAndMount4Upgrade {
     is_empty_array_ref($found) and die _("No root partition found");
 	
     log::l("Found root partition : $root->{device}");
-    $o->{prefix} = $root->{mntpoint};
 
     #- test if the partition has to be fschecked and remounted rw.
-    unless ($root->{realMntpoint}) {
+    if ($root->{realMntpoint}) {
+	($o->{prefix}, $root->{mntpoint}) = ($root->{mntpoint}, '/');
+    } else {
 	delete $root->{mntpoint};
 	($Parts{$_->{device}} || {})->{mntpoint} = $_->{mntpoint} foreach @$found;
 
