@@ -646,7 +646,7 @@ sub charset2kde_font {
 # on the "charset" defined by language array. This allows to selecting
 # an appropriate font for each language.
 my %charset2pango_font = (
-  'tis620' =>      "Norasi 14",
+  'tis620' =>      "Norasi 17",
   'utf_ar' =>      "KacstBook 14",
   'utf_cyr2' =>    "URW Bookman L 14",
   'utf_he' =>      "ClearlyU 12",
@@ -673,7 +673,7 @@ sub l2pango_font {
 
     my $charset = l2charset($lang) or log::l("no charset found for lang $lang!"), return;
     my $font = charset2pango_font($charset);
-    log::l("charset:$charset font:$font sfm:$charsets{$charset}[0]");
+    log::l("lang:$lang charset:$charset font:$font sfm:$charsets{$charset}[0]");
 
     if (common::usingRamdisk()) {
 	if ($charsets{$charset}[0] !~ /lat|koi|UniCyr/) {
