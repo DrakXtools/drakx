@@ -784,6 +784,7 @@ sub setRootPassword {
     $o->{superuser}{name} = 'root';
     any::write_passwd_user($o->{prefix}, $o->{superuser}, $o->{authentication}{md5});
     delete $o->{superuser}{name};
+    install_any::set_authentication($o);
 }
 
 #------------------------------------------------------------------------------
@@ -832,8 +833,6 @@ sub addUser {
 
     $o->pkg_install("autologin") if $o->{autologin};
     any::set_autologin($o->{autologin}, $o->{desktop});
-
-    install_any::setAuthentication($o);
 
     install_any::disable_user_view($p) if @$users == ();
 }

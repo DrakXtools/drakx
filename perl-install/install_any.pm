@@ -427,79 +427,19 @@ sub addToBeDone(&$) {
     push @{$::o->{steps}{$step}{toBeDone}}, $f;
 }
 
-sub setAuthentication {
+sub set_authentication {
     my ($o) = @_;
-    my ($shadow, $ldap, $nis, $winbind, $winpass) = @{$o->{authentication} || {}}{qw(shadow LDAP NIS winbind winpass)};
-    any::enableShadow() if $shadow;
-    if ($ldap) {
-	$o->pkg_install(qw(chkauth openldap-clients nss_ldap pam_ldap));
-	run_program::rooted($o->{prefix}, "/usr/sbin/chkauth", "ldap", "-D", $o->{netc}{LDAPDOMAIN}, "-s", $ldap);
-    } elsif ($nis) {
-	#$o->pkg_install(qw(chkauth ypbind yp-tools net-tools));
-	#run_program::rooted($o->{prefix}, "/usr/sbin/chkauth", "yp", $domain, "-s", $nis);
-	$o->pkg_install("ypbind");
-	my $domain = $o->{netc}{NISDOMAIN};
-	$domain || $nis ne "broadcast" or die \N("Can't use broadcast with no NIS domain");
-	my $t = $domain ? "domain $domain" . ($nis ne "broadcast" && " server") : "ypserver";
-	substInFile {
-	    $_ = "#~$_" unless /^#/;
-	    $_ .= "$t $nis\n" if eof;
-	} "$::prefix/etc/yp.conf";
-	require network;
-	network::write_conf("$::prefix/etc/sysconfig/network", $o->{netc});
-    } elsif ($winbind) {
-	my $domain = $o->{netc}{WINDOMAIN};
-	$domain =~ tr/a-z/A-Z/;
 
-	$o->pkg_install(qw(samba-winbind samba-common));
-	{   #- setup pam
-	    my $f = "$o->{prefix}/etc/pam.d/system-auth";
-	    cp_af($f, "$f.orig");
-	    cp_af("$f-winbind", $f);
-	}
-	write_smb_conf($domain);
-	run_program::rooted($o->{prefix}, "chkconfig", "--level", "35", "winbind", "on");
-	mkdir_p("$o->{prefix}/home/$domain");
-	
-	#- defer running smbpassword - no network yet
-	$winbind = $winbind . "%" . $winpass;
+    my $when_network_is_up = sub {
+	my ($f) = @_;
+	#- defer running xxx - no network yet
 	addToBeDone {
 	    require install_steps;
 	    install_steps::upNetwork($o, 'pppAvoided');
-	    run_program::rooted($o->{prefix}, "/usr/bin/smbpasswd", "-j", $domain, "-U", $winbind);
+	    $f->();
 	} 'configureNetwork';
-    }
-}
-
-sub write_smb_conf {
-    my ($domain) = @_;
-
-    #- was going to just have a canned config in samba-winbind
-    #- and replace the domain, but sylvestre/buchan didn't bless it yet
-
-    my $f = "$::prefix/etc/samba/smb.conf";
-    rename $f, "$f.orig";
-    output($f, "
-[global]
-	workgroup = $domain  
-	server string = Samba Server %v
-	security = domain  
-	encrypt passwords = Yes
-	password server = *
-	log file = /var/log/samba/log.%m
-	max log size = 50
-	socket options = TCP_NODELAY SO_RCVBUF=8192 SO_SNDBUF=8192
-	character set = ISO8859-15
-	os level = 18
-	local master = No
-	dns proxy = No
-	winbind uid = 10000-20000
-	winbind gid = 10000-20000
-	winbind separator = +
-	template homedir = /home/%D/%U
-	template shell = /bin/bash
-	winbind use default domain = yes
-");
+    };
+    any::set_authentication($o, $o->{netc}, $o->{authentication} ||= {}, $when_network_is_up);
 }
 
 sub killCardServices() {

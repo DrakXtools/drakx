@@ -263,7 +263,6 @@ sub setRootPassword {
     return if $o->{isUpgrade};
 
     installStepsCall($o, $auto, 'setRootPassword', $clicked);
-    addToBeDone { install_any::setAuthentication($o) } 'installPackages';
 }
 #------------------------------------------------------------------------------
 sub addUser {

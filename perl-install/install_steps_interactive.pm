@@ -1121,16 +1121,12 @@ sub cleanupPrinter {
 sub setRootPassword {
     my ($o, $clicked) = @_;
     my $sup = $o->{superuser} ||= {};
-    my $auth = ($o->{authentication}{LDAP} && N_("LDAP") ||
-		$o->{authentication}{NIS} && N_("NIS") ||
-		$o->{authentication}{winbind} && N_("Windows Domain") ||
-		N_("Local files"));
     $sup->{password2} ||= $sup->{password} ||= "";
 
-    return if $o->{security} < 1 && !$clicked;
+    if ($o->{security} >= 1 || $clicked) {
+        my $authentication_kind = any::authentication2authentication_kind($o->{authentication} ||= {});
 
-    $o->ask_from_(
-        {
+	$o->ask_from_({
 	 title => N("Set root password"), 
 	 messages => N("Set root password"),
 	 interactive_help_id => "setRootPassword",
@@ -1147,37 +1143,11 @@ sub setRootPassword {
         } } }, [
 { label => N("Password"), val => \$sup->{password},  hidden => 1 },
 { label => N("Password (again)"), val => \$sup->{password2}, hidden => 1 },
-{ label => N("Authentication"), val => \$auth, list => [ N_("Local files"), N_("LDAP"), N_("NIS"), N_("Windows Domain") ], format => \&translate, advanced => 1 },
+{ label => N("Authentication"), val => \$authentication_kind, list => [ any::authentication_kinds() ], format => \&any::authentication_kind2description, advanced => 1 },
 			 ]) or return;
 
-    if ($auth eq N_("LDAP")) {
-	$o->{authentication}{LDAP} ||= 'ldap.' . $o->{netc}{DOMAINNAME};
-	$o->{netc}{LDAPDOMAIN} ||= join(',', map { "dc=$_" } split /\./, $o->{netc}{DOMAINNAME});
-	$o->ask_from('',
-		     N("Authentication LDAP"),
-		     [ { label => N("LDAP Base dn"), val => \$o->{netc}{LDAPDOMAIN} },
-		       { label => N("LDAP Server"), val => \$o->{authentication}{LDAP} },
-		     ]) or goto &setRootPassword;
-    } else { $o->{authentication}{LDAP} = '' }
-    if ($auth eq N_("NIS")) { 
-	$o->{authentication}{NIS} ||= 'broadcast';
-	$o->ask_from('',
-		     N("Authentication NIS"),
-		     [ { label => N("NIS Domain"), val => \ ($o->{netc}{NISDOMAIN} ||= $o->{netc}{DOMAINNAME}) },
-		       { label => N("NIS Server"), val => \$o->{authentication}{NIS}, list => ["broadcast"], not_edit => 0 },
-		     ]) or goto &setRootPassword;
-    } else { $o->{authentication}{NIS} = '' }
-    if ($auth eq N_("Windows Domain")) {
-	#- maybe we should browse the network like diskdrake --smb and get the 'doze server names in a list 
-	#- but networking isn't setup yet necessarily
-	$o->ask_warn('', N("For this to work for a W2K PDC, you will probably need to have the admin run: C:\\>net localgroup \"Pre-Windows 2000 Compatible Access\" everyone /add and reboot the server.\nYou will also need the username/password of a Domain Admin to join the machine to the Windows(TM) domain.\nIf networking is not yet enabled, Drakx will attempt to join the domain after the network setup step.\nShould this setup fail for some reason and domain authentication is not working, run 'smbpasswd -j DOMAIN -U USER%%PASSWORD' using your Windows(tm) Domain, and Admin Username/Password, after system boot.\nThe command 'wbinfo -t' will test whether your authentication secrets are good."));
-	$o->ask_from('',
-			N("Authentication Windows Domain"),
-			[ { label => N("Windows Domain"), val => \ ($o->{netc}{WINDOMAIN} ||= $o->{netc}{DOMAINNAME}) },
-			  { label => N("Domain Admin User Name"), val => \$o->{authentication}{winbind} },
-			  { label => N("Domain Admin Password"), val => \$o->{authentication}{winpass}, hidden => 1  },
-			]) or goto &setRootPassword;
-    } else { $o->{authentication}{winbind} = '' }
+	any::ask_authentification_parameters($o, $o->{netc}, $o->{authentication}, $authentication_kind) or goto &setRootPassword;
+    }
     install_steps::setRootPassword($o);
 }
 
