@@ -688,9 +688,11 @@ sub update_list() {
 
 sub apply {
     my ($netc, $intf) = @_;
-    my %intfs = ($intf->{DEVICE} => $intf);
-    network::network::sethostname($netc) if is_dynamic_ip(\%intfs);   
-    network::network::configureNetwork2($in, '', $netc, \%intfs);
+    my $dyn = $intf->{BOOTPROTO} ne 'static';
+    my $lintf = $intf;
+    $dyn and $lintf->{$_} = undef foreach qw(NETMASK NETWORK IPADDR);
+    network::network::sethostname($netc) if $dyn;
+    network::network::configureNetwork2($in, '', $netc, { $lintf->{DEVICE} => $lintf });
 }
 
 sub ethisup { `LC_ALL=C LANGUAGE=C /sbin/ifconfig $_[0]` =~ /inet/ }
