@@ -20,7 +20,7 @@ sub configure {
     my $type = $in->ask_from_list_(_("Connect to the Internet"),
 				   _("The most common way to connect with adsl is pppoe.
 Some connections use pptp, a few ones use dhcp.
-If you don't know, choose 'use pppoe'"), [__("use pppoe"), __("use pptp"), __("use dhcp"), __("speedtouch usb")]) or return;
+If you don't know, choose 'use pppoe'"), [__("use pppoe"), __("use pptp"), __("use dhcp"), __("Alcatet Speedtouch usb")]) or return;
     $type =~ s/use //;
     if ($type eq 'pppoe') {
 	$in->do_pkgs->install("rp-$type");
@@ -83,7 +83,7 @@ sub adsl_conf {
   adsl_conf_step_1:
     adsl_ask_info ($adsl, $netc, $intf) or return;
   adsl_conf_step_2:
-    $adsl_type eq 'speedtouch' or conf_network_card($in, $netc, $intf, 'static' , '10.0.0.10' ) or goto adsl_conf_step_1;
+    $adsl_type eq 'speedtouch' or conf_network_card($netc, $intf, 'static' , '10.0.0.10' ) or goto adsl_conf_step_1;
     adsl_conf_backend($adsl, $netc, $adsl_type);
     1;
 }
