@@ -181,7 +181,7 @@ ifdown eth0
 			    1, write_on_pixmap(gtkpng ("draknet_step"),
 					       20,60,
 					       _("We are now going to configure the %s connection.",_($_[0])),
-					       _("Press next to begin."),
+					       _("Press next to continue."),
 					      ),
 			    0, $W->create_okcancel
 			   )
