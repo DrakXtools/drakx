@@ -1,0 +1,59 @@
+#!/usr/bin/perl
+
+sub output { my $f = shift; local *F; open F, ">$f" or die "output in file $f failed: $!\n"; print F foreach @_; }
+
+output('/tmp/rescue-doc-contents', q(
+     Information regarding problems not directly addressed
+                     by this rescue.
+
+
+Are you sure you need to use the rescue mode for solving your
+problem?
+
+The rescue system aims to stay as small as possible. That's why
+you won't find a usable graphical environment, for example. Same
+applies for the Mandrake detection/configuration libraries: they
+don't fit here.
+
+
+Most of the problems with a linux system are much easier to solve
+on a running system, than by booting in "rescue" mode. In fact,
+there is hardly any problem which wouldn't be easier to solve in
+a comfortable environment of a fully installed Mandrake Linux
+system, than in a spartanic "rescue system" shell. Such problems
+include for instance:
+
+- bad or missing X configuration
+- adding/removing/reconfiguring hardware
+- cleaning up a mess caused by installing third-party software
+  with --force and --nodeps options
+
+Rule of thumb says: "if you can boot without using rescue mode or
+this CD, there is no reason for using the rescue CD".
+
+
+If you can't boot your system anymore, then the Rescue system is
+for you.
+
+- if you can fully solve the problem in Rescue mode, let it go.
+  For example, you changed some parameters in your /etc/fstab and
+  it won't let the system boot anymore. Change back the
+  offending line.
+
+- if you can't fully solve the problem (you need to reconfigure
+  the whole X system, for example), just modify what's necessary
+  to boot again, boot in your system, and fully fix from there.
+
+
+In case you have found a new class of problems which must be
+handled by "rescue mode", but isn't yet, please report it to
+<gc@mandrakesoft.com>.
+
+For more information on problems with Mandrake Linux, please see
+our manuals, documentation on mandrakelinux.com,
+mandrakeuser.org, troubleshooting articles on mandrakeforum.com,
+or consult our support.
+));
+
+exec 'less /tmp/rescue-doc-contents';
+

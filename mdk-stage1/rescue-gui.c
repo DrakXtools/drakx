@@ -144,8 +144,10 @@ int main(int argc, char **argv)
 	char mount_parts[] = "Mount your partitions under /mnt";
 	char go_to_console[] = "Go to console";
 	char reboot_[] = "Reboot";
+	char doc[] = "Doc: what's addressed by this Rescue?";
 
-	char * actions[] = { install_bootloader, mount_parts, go_to_console, reboot_, NULL };
+
+	char * actions[] = { install_bootloader, mount_parts, go_to_console, reboot_, doc, NULL };
 	char * choice;
 
 	init_frontend("Welcome to " DISTRIB_NAME " Rescue (" VERSION ") " __DATE__ " " __TIME__);
@@ -169,6 +171,9 @@ int main(int argc, char **argv)
 			printf("rebooting system\n");
 			sleep(2);
 			reboot(0xfee1dead, 672274793, 0x01234567);
+		}
+		if (ptr_begins_static_str(choice, doc)) {
+			binary = "/usr/bin/rescue-doc";
 		}
 
 		if (binary) {
