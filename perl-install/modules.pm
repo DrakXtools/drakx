@@ -189,6 +189,10 @@ sub write_preload_conf {
     append_to_modules_loaded_at_startup("$::prefix/etc/modprobe.preload", @l_26);
 }
 
+sub append_to_modules_loaded_at_startup_for_all_kernels {
+    append_to_modules_loaded_at_startup($_, @_) foreach "$::prefix/etc/modules", "$::prefix/etc/modprobe.preload";
+}
+
 sub append_to_modules_loaded_at_startup {
     my ($file, @l) = @_;
     my $l = join '|', map { '^\s*' . $_ . '\s*$' } @l;
