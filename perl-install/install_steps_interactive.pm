@@ -67,7 +67,7 @@ translated etc. that varies from language to language).") if $o->{lang} !~ /^en/
     
     unless ($o->{useless_thing_accepted}) {
 	$o->set_help('license');
-	$o->{useless_thing_accepted} = $o->ask_from_list_('', 
+	$o->{useless_thing_accepted} = $o->ask_from_list_('', formatAlaTeX(
 "Introduction
 
 \"Linux-Mandrake\" designates the operating system and the different
@@ -78,7 +78,9 @@ is not restricted to, the set of programs, methods, rules, documentation,
 related to the operating system and the different components of the
 Linux-Mandrake distribution.
 
+
 1.License Agreement
+
 
 Please read carefully this document. This document is a license agreement
 between you and MandrakeSoft S.A., 42, rue d'Aboukir 75002 Paris - France,
@@ -98,7 +100,9 @@ is void and will terminate your rights under the present License. Upon
 termination of the License, you must immediately destroy all copies of the
 Software Product.
 
+
 2. The GPL license and related licenses
+
 
 The Software product constists of components created by different persons
 or entities.
@@ -129,7 +133,7 @@ system, or use it on a network. In doubt, please contact directly the
 distributor or editor of the component. Transfer to third parties or
 copying of such components including the documentation is strictly
 forbidden.
-", [ __("Accept"), __("Refuse") ], "Accept") eq "Accept" or $o->exit;
+"), [ __("Accept"), __("Refuse") ], "Accept") eq "Accept" or $o->exit;
     }
 }
 #------------------------------------------------------------------------------
