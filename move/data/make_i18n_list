@@ -14,11 +14,24 @@ foreach my $list (glob("*.list")) {
 
 my @pkg_langs = map { /locales-(.*)/ } `$rpm -qa --qf "%{name}\n" locales-*`;
 
+my %extra_pkgs = (
+    hy => 'fonts-ttf-armenian',
+    ja => 'fonts-ttf-japanese',
+    kn => 'fonts-ttf-kannada',
+    ko => 'fonts-ttf-korean',
+    ta => 'fonts-ttf-tamil fonts-ttf-tscii fonts-bitmap-tscii',
+    th => 'fonts-ttf-thai',
+    zh => 'fonts-ttf-gb2312 taipeifonts fonts-ttf-big5',
+    el => 'fonts-type1-greek',
+    en => 'mandrake_doc-move-en',
+);
+
 foreach my $i18n (@pkg_langs) {
     #- $i18n_re is different from $i18n because of things like locales-no giving nb|nn|no
     my $i18n_re = join('|', uniq($i18n, map { if_(/locales-(\S+)/, $1) } `$rpm -q --provides locales-$i18n`));
 
     my @pkgs = uniq("locales-$i18n", chomp_(`$rpm -q --qf "%{name}\n" --whatrequires locales-$i18n`));
+    push @pkgs, split(' ', $extra_pkgs{$i18n} || '');
     my ($dirs, $files) = partition { -d "$prefix$_" } uniq(chomp_(`$rpm -ql @pkgs`));
 
     my @i18n_dirs = uniq(grep { m!/($i18n_re) (_[^/]*)? (\.[^/]*)? (\@[^/]*)?$!x } @$dirs);
