@@ -223,7 +223,7 @@ sub monitorConfiguration(;$$) {
     if ($useFB) {
 	#- use smallest values for monitor configuration since FB is used,
 	#- BIOS initialize graphics, current X server will not refuse that.
-	$monitor->{hsyncrange} ||= $hsyncranges[0];
+	$monitor->{hsyncrange} ||= $hsyncranges[1];
 	$monitor->{vsyncrange} ||= $vsyncranges[0];
 	add2hash($monitor, { type => "Unknown", vendor => "Unknown", model => "Unknown" });
     } else {

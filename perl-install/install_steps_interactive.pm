@@ -666,12 +666,13 @@ _("Use NIS") => { val => \$nis, type => 'bool', text => _("yellow pages") },
 			 }
     ) or return;
 
+    $o->{authentication}{NIS} &&= $nis;
     $o->ask_from_entries_ref('',
 			     _("Authentification NIS"),
 			     [ _("NIS Domain"), _("NIS Server") ],
 			     [ \ ($o->{netc}{NISDOMAIN} ||= $o->{netc}{DOMAINNAME}),
 			       { val => \$o->{authentication}{NIS}, list => ["broadcast"] },
-			     ]) if $nis;    
+			     ]) if $nis;
     install_steps::setRootPassword($o);
 }
 

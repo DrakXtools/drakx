@@ -436,7 +436,7 @@ sub configureTimezone {
 #------------------------------------------------------------------------------
 sub configureServices { $::expert and $o->servicesConfig }
 #------------------------------------------------------------------------------
-sub configurePrinter  { $o->printerConfig }
+sub configurePrinter  { $o->printerConfig($_[0]) }
 #------------------------------------------------------------------------------
 sub setRootPassword {
     return if $o->{isUpgrade};

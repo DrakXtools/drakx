@@ -2,7 +2,7 @@ package install_steps;
 
 use diagnostics;
 use strict;
-use vars qw($minAvailableSize @filesToSaveForUpgrade);
+use vars qw(@filesToSaveForUpgrade);
 
 #-######################################################################################
 #- misc imports
@@ -24,11 +24,6 @@ use network;
 use any;
 use fs;
 
-#- make sure of this place to be available for installation, this could help a lot.
-#- currently doing a very small install use 36Mb of postinstall-rpm, but installing
-#- these packages may eat up to 90Mb (of course not all the server may be installed!).
-#- 50mb may be a good choice to avoid almost all problem of insuficient space left...
-$minAvailableSize = 50 * sqr(1024);
 @filesToSaveForUpgrade = qw(
 /etc/ld.so.conf /etc/fstab /etc/hosts /etc/conf.modules
 );
@@ -231,7 +226,7 @@ sub choosePackages {
 
     #- make sure we kept some space left for available else the system may
     #- not be able to start (xfs at least).
-    my $available = install_any::getAvailableSpace($o) - $minAvailableSize;
+    my $available = install_any::getAvailableSpace($o);
     my $availableCorrected = pkgs::invCorrectSize($available / sqr(1024)) * sqr(1024);
     $available < $availableCorrected or $available = $availableCorrected;
 

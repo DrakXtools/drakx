@@ -120,6 +120,7 @@ sub getinfoFromDDC {
     $? == 0 or return $o;
 
     $o->{card}{memory} ||= to_int($m);
+    local $_;
     while (($_ = shift @l) ne "\n") {
 	my ($depth, $x, $y) = split;
 	$depth = int(log($depth) / log(2));

@@ -169,10 +169,11 @@ sub extractHeaders($$$) {
 }
 
 #- size and correction size functions for packages.
-my $A = 20471;
-my $B = 16258;
-sub correctSize { ($A - $_[0]) * $_[0] / $B } #- size correction in MB.
-sub invCorrectSize { $A / 2 - sqrt(max(0, sqr($A) - 4 * $B * $_[0])) / 2 }
+my $A = -1.922e-05;
+my $B = 1.18411;
+my $C = 33.2;
+sub correctSize { ($A * $_[0] + $B) * $_[0] + $C } #- size correction in MB.
+sub invCorrectSize { (sqrt(sqr($B) + 4 * $A * ($_[0] - $C)) - $B) / 2 / $A }
 
 sub selectedSize {
     my ($packages) = @_;
@@ -432,7 +433,7 @@ sub getOtherDeps($$) {
 
 	$pkg or log::l("ignoring package $name-$version-$release in depslist is not in hdlist"), next;
 	$version eq packageVersion($pkg) and $release eq packageRelease($pkg)
-	  or log::l("warning package $name-$version-$release in depslist mismatch version or release in hdlist"), next;
+	  or log::l("warning package $name-$version-$release in depslist mismatch version or release in hdlist ($version ne ", packageVersion($pkg), " or $release ne ", packageRelease($pkg), ")"), next;
 
 	my $index = scalar @{$packages->[1]};
 	$index >= $pkg->{medium}{min} && $index <= $pkg->{medium}{max}
@@ -479,7 +480,7 @@ sub getDeps($) {
 	$pkg or
 	  log::l("ignoring $name-$version-$release in depslist is not in hdlist"), $mismatch = 1, next;
 	$version eq packageVersion($pkg) and $release eq packageRelease($pkg) or
-	  log::l("ignoring $name-$version-$release in depslist mismatch version or release in hdlist"), $mismatch = 1, next;
+	  log::l("ignoring $name-$version-$release in depslist mismatch version or release in hdlist ($version ne ", packageVersion($pkg), " or $release ne ", packageRelease($pkg), ")"), $mismatch = 1, next;
 
 	$pkg->{sizeDeps} = $sizeDeps;
 
