@@ -17,7 +17,10 @@ sub first_modem {
 sub ppp_read_conf {
     my ($netcnx, $netc) = @_;
     my $modem = $netcnx->{$netcnx->{type}} ||= {};
-    $modem->{device} ||= first_modem($netc)->{device};
+    if (my $detected_modem = first_modem($netc)) {
+        $modem->{device} ||= $detected_modem->{device};
+    }
+    $modem->{device} ||= '/dev/modem';
     my %l = getVarsFromSh("$::prefix/usr/share/config/kppprc");
     $l{Authentication} = 4 if !exists $l{Authentication};
     $modem->{$_} ||= $l{$_} foreach qw(Authentication Gateway IPAddr SubnetMask);
