@@ -16,18 +16,6 @@ our %depth2text = (
 );
 our @depths_available = ikeys(%depth2text);
 
-my %min_hsync4x_res = (
-     640 => 31.5,
-     800 => 35.1,
-    1024 => 35.5,
-    1152 => 44.0,
-    1280 => 51.0,
-    1400 => 65.5,
-    1600 => 75.0,
-    1920 => 90.0,
-    2048 => 136.5,
-);
-
 my @bios_vga_modes = (
     { bios => 769, X =>  640, Y =>  480, Depth =>  8 },
     { bios => 771, X =>  800, Y =>  600, Depth =>  8 },
@@ -120,10 +108,16 @@ sub filter_using_VideoRam {
     grep { $_->{X} * $_->{Y} * $_->{Depth}/8 <= $mem } @resolutions;
     
 }
-sub filter_using_HorizSync {
-    my ($HorizSync, @resolutions) = @_;
-    my $hsync = max(split(/[,-]/, $HorizSync));
-    grep { ($min_hsync4x_res{$_->{X}} || 0) <= $hsync } @resolutions;
+sub filter_using_HorizSync_VertRefresh {
+    my ($HorizSync, $VertRefresh, @resolutions) = @_;
+    my $max_hsync = 1000 * max(split(/[,-]/, $HorizSync));
+    my ($min_vsync, $max_vsync) = (min(split(/[,-]/, $VertRefresh)), max(split(/[,-]/, $VertRefresh)));
+
+    #- enforce at least 60Hz, if max_vsync > 100 (ie don't do it on LCDs which are ok with low vsync)
+    $min_vsync = max(60, $min_vsync) if $max_vsync > 100;
+
+    #- computing with {Y} which is active sync instead of total sync, but that's ok
+    grep { $max_hsync / $_->{Y} > $min_vsync } @resolutions;
 }
 
 sub choose {
@@ -146,7 +140,7 @@ sub choices {
 
     my ($prefered_depth, @resolutions) = allowed($card);
 
-    @resolutions = filter_using_HorizSync($monitors->[0]{HorizSync}, @resolutions) if $monitors->[0]{HorizSync};
+    @resolutions = filter_using_HorizSync_VertRefresh($monitors->[0]{HorizSync}, $monitors->[0]{VertRefresh}, @resolutions) if $monitors->[0]{HorizSync};
     @resolutions = filter_using_VideoRam($card->{VideoRam}, @resolutions) if $card->{VideoRam};
 
     my $x_res = do {
