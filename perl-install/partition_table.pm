@@ -485,12 +485,8 @@ sub read_one($$) {
     { raw => $pt, extended => $extended[0], normal => \@normal, info => $info };
 }
 
-sub read($;$) {
-    my ($hd, $clearall) = @_;
-    if ($clearall) {
-	partition_table::raw::zero_MBR_and_dirty($hd);
-	return 1;
-    }
+sub read {
+    my ($hd) = @_;
     my $pt = read_one($hd, 0) or return 0;
     $hd->{primary} = $pt;
     undef $hd->{extended};
@@ -554,6 +550,7 @@ sub read_extended {
 sub write {
     my ($hd) = @_;
     $hd->{isDirty} or return;
+    $hd->{readonly} and die "a read-only partition table should not be dirty!";
 
     #- set first primary partition active if no primary partitions are marked as active.
     if (my @l = @{$hd->{primary}{raw}}) {
