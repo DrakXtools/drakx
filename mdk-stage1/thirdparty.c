@@ -160,7 +160,7 @@ static enum return_type third_party_choose_device(char ** device)
 
 static enum return_type thirdparty_mount_device(char * device)
 {
-        log_message("third party : trying to mount device %s", device);
+        log_message("third party: trying to mount device %s", device);
 	if (try_mount(device, THIRDPARTY_MOUNT_LOCATION) == -1) {
 		stg1_error_message("I can't mount the selected device (%s).", device);
 		return RETURN_ERROR;
@@ -256,7 +256,7 @@ void thirdparty_load_modules(void)
 	device = NULL;
 	if (IS_AUTOMATIC) {
 		device = get_auto_value("thirdparty");
-		log_message("third party : trying automatic device %s", device);
+		log_message("third party: trying automatic device %s", device);
 		if (thirdparty_mount_device(device) != RETURN_OK)
 			device = NULL;
 	}
@@ -269,7 +269,7 @@ void thirdparty_load_modules(void)
 			device = NULL;
 	}
 
-	log_message("third party : using device %s", device);
+	log_message("third party: using device %s", device);
 
 	/* look first in the specific third-party directory */
 	modules_location = THIRDPARTY_MOUNT_LOCATION THIRDPARTY_DIRECTORY;
@@ -283,7 +283,8 @@ void thirdparty_load_modules(void)
 	log_message("third party: using modules location %s", modules_location);
 
 	if (!modules_list || !*modules_list) {
-		stg1_error_message("No modules found on disk.");
+		log_message("third party: no modules found");
+		stg1_error_message("No modules found on selected device.");
 		umount(THIRDPARTY_MOUNT_LOCATION);
 		return thirdparty_load_modules();
 	}
