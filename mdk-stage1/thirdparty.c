@@ -225,7 +225,7 @@ static enum return_type thirdparty_autoload_modules(const char *modules_location
 				sprintf(final_name, "%s/%s", modules_location, *entry);
 				if (insmod_local_file(final_name, options)) {
 					log_message("\t%s (third party media): failed", *entry);
-					stg1_error_message("Insmod %s (floppy) failed.", *entry);
+					stg1_error_message("Insmod %s (third party media) failed.", *entry);
 				}
 				break;
 			}
