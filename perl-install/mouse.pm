@@ -143,8 +143,7 @@ sub fullname2mouse {
 
 sub serial_ports() { map { "ttyS$_" } 0..7 }
 sub serial_port2text {
-    $_[0] =~ /ttyS (\d+)/x;
-    "$_[0] / COM" . ($1 + 1);
+    $_[0] =~ /ttyS (\d+)/x ? "$_[0] / COM" . ($1 + 1) : $_[0];
 }
 
 sub read {
