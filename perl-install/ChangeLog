@@ -1,3 +1,82 @@
+2003/09/15  Damien Chaumette  <dchaumette at mandrakesoft.com>
+
+	* network/adsl.pm: fix #5056 (mostly workaround as kernel is frozen)
+
+2003/09/15  Fabian Mandelbaum  <fabman at 2vias.com.ar>
+
+	* share/po/es.po: Updated Spanish translations
+
+2003/09/15  François Pons  <fpons at mandrakesoft.com>
+
+	* c/Makefile: fixed possible typo...
+
+	* standalone.pm: improved speed by invoking once `rpm -qa` instead of 4.
+
+2003/09/15  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* help.pm: reverted to previous version, to avoid huge strings break at
+	this stage
+
+	* share/po/pt.po, share/po/it.po, share/po/af.po, share/po/hu.po,
+	share/po/mt.po: updated Afrikaans, Hungarian, Italian, Maltese and
+	Portuguese files
+
+2003/09/15  Pixel  <pixel at mandrakesoft.com>
+
+	* lang.pm: use locale_special when $::prefix is set (so that X test is
+	i18n)
+
+	* Xconfig/main.pm: configure_resolution() must return 'config_changed'
+	when a new resolution is chosen
+
+	* run_program.pm: better logging of killed runaway processes
+
+	* diskdrake/interactive.pm: fix growing ext2/ext3 partitions
+
+	* standalone/drakupdate_fstab: fix typo (pixel sux)
+
+	* any.pm: set ICEAUTHORITY for "gnome-session-save --kill"
+	(it would be better to set it in usermode, but it works :)
+	when "Back" is pressed, restore the list of entries in bootloader (bug
+	#5680)
+
+	* standalone/XFdrake: 
+	  - call any::ask_window_manager_to_logout() after forking so that exit
+	doesn't happen before it is done
+	(otherwise it can loose Xauth access)
+	  - fix checking config_changed (it can be string 'config_changed' or
+	the new $raw_X)
+
+	* partition_table.pm: associate partition table 0xeb (BeOS) with
+	filesystem befs (part of bug #5523)
+
+2003/09/15  Stew Benedict  <sbenedict at mandrakesoft.com>
+
+	* standalone/drakbackup, standalone/drakTermServ: drakTermServ -
+	translation issues (Arpad Biro), fix help text format
+	drakbackup - translation issues (Arpad Biro)
+	fix user, cron misbehavior (Keld Jørn Simonsen)
+
+2003/09/15  Till Kamppeter  <till at mandrakesoft.com>
+
+	* printer/printerdrake.pm: Added support for user-mode-only HPOJ devices
+	(HP PSC 1xxx and
+	OfficeJet 4xxx). Fixes bug #5641.
+
+	* printer/main.pm: perl_checker fix.
+	Added support for user-mode-only HPOJ devices (HP PSC 1xxx and
+	OfficeJet 4xxx). Fixes bug #5641.
+
+2003/09/14  Pixel  <pixel at mandrakesoft.com>
+
+	* fsedit.pm: add a warning for / on LVM: "You may not be able to install
+	lilo (since lilo doesn't handle a LV on multiple PVs)"
+
+2003/09/14  Warly  <warly at mandrakesoft.com>
+
+	* standalone/service_harddrake: stop bootsplash silent mode if something
+	is detected
+
 2003/09/14  Alice Lafox  <alice at lafox.com.ua>
 
 	* share/po/ru.po: last updates, fixed some typos
@@ -21645,7 +21724,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.835 2003/09/12 13:48:48 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.836 2003/09/14 18:46:14 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
