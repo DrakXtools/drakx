@@ -384,7 +384,7 @@ sub Dialog {
     my ($FilePointer) = @_;
     my $content = join('', cat_($FilePointer));
     # dump into a dialog
-    my $AboutWindow = Gtk2::Dialog->new("Drakroam Info", $w->{window},
+    my $AboutWindow = Gtk2::Dialog->new("Drakroam Info", $w->{real_window},
                                         'destroy-with-parent',
                                         N("Ok") => 'none');
     $AboutWindow->vbox->add(create_scrolled_window(Gtk2::Label->new($content)));
