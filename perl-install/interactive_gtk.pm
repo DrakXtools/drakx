@@ -33,11 +33,23 @@ sub ask_from_listW {
     ask_from_list_with_helpW($o, $title, $messages, $l, undef, $def);
 }
 
+sub test_embedded {
+    my ($w) = @_;
+    $::isEmbedded or return;
+    $w->{window} = new Gtk::VBox(0,0);
+    $w->{rwindow} = $w->{window};
+    defined($::Plug) ? $::Plug->child->destroy() : ($::Plug = new Gtk::Plug ($::XID));
+    $::Plug->show;
+    my_gtk::flush();
+    $::Plug->add($w->{window});
+    $w->{window}->add($w->{rwindow});
+}
 sub ask_from_list_with_helpW {
     my ($o, $title, $messages, $l, $help, $def) = @_;
     my $r;
 
     my $w = my_gtk->new(first(deref($title)), %$o);
+    test_embedded($w);
 #gtkset_usize(createScrolledWindow($tree), 300, min(350, $::windowheight - 60)),
     $w->{retval} = $def || $l->[0]; #- nearly especially for the X test case (see timeout in Xconfigurator.pm)
     $w->{rwindow}->set_policy(0, 0, 1)  if $::isWizard;
@@ -88,6 +100,7 @@ sub ask_from_treelistW {
     my ($o, $title, $messages, $separator, $l, $def) = @_;
     my $sep = quotemeta $separator;
     my $w = my_gtk->new($title);
+    test_embedded($w);
     my $tree = Gtk::CTree->new(1, 0);
 
     my %wtree;
@@ -166,6 +179,7 @@ sub ask_from_treelistW {
 sub ask_many_from_listW {
     my ($o, $title, $messages, @l) = @_;
     my $w = my_gtk->new('', %$o);
+    test_embedded($w);
     $w->sync; # for XPM's creation
 
     my $tips = new Gtk::Tooltips;
@@ -204,6 +218,7 @@ sub ask_from_entries_refW {
     my $ignore = 0; #-to handle recursivity
 
     my $w = my_gtk->new($title_, %$o);
+    test_embedded($w);
     $w->sync; # for XPM's creation
 
     my $set_icon = sub {
@@ -361,6 +376,7 @@ sub wait_messageW($$$) {
     my ($o, $title, $messages) = @_;
 
     my $w = my_gtk->new($title, %$o, grab => 1);
+    test_embedded($w);
     gtkadd($w->{window}, my $hbox = new Gtk::HBox(0,0));
     $hbox->pack_start(my $box = new Gtk::VBox(0,0), 1, 1, 10);  
     $box->pack_start($_, 1, 1, 4) foreach my @l = map { new Gtk::Label($_) } @$messages;
