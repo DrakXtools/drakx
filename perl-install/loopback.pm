@@ -106,11 +106,10 @@ sub verifFile {
 }
 
 sub prepare_boot {
-    my ($prefix) = @_;
-    my $r = readlink "$prefix/boot"; 
-    unlink "$prefix/boot"; 
-    mkdir "$prefix/boot", 0755;
-    [$r, $prefix];
+    my $r = readlink "$::prefix/boot"; 
+    unlink "$::prefix/boot"; 
+    mkdir "$::prefix/boot", 0755;
+    [$r, $::prefix];
 }
 
 sub save_boot {
