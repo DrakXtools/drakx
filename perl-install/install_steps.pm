@@ -144,7 +144,8 @@ sub doPartitionDisksAfter {
     }
 
     fs::set_removable_mntpoints($o->{all_hds});
-    fs::set_default_options($o->{all_hds}, $o->{useSupermount}, $o->{security}, lang::fs_options($o->{lang}));
+    fs::set_default_options($o->{all_hds}, $o->{useSupermount}, $o->{security}, lang::fs_options($o->{lang}))
+	if !$o->{isUpgrade};
 
     $o->{fstab} = [ fsedit::get_all_fstab($o->{all_hds}) ];
     fsedit::get_root_($o->{fstab}) or die "Oops, no root partition";
