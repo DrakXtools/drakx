@@ -644,6 +644,7 @@ when your installation is complete and you restart your system.")),
 		    { val => \$in->{locale}{utf8}, type => 'bool', text => N("Use Unicode by default"), advanced => 1 }))
 	]) or return;
     $langs->{$listval2val->($lang)} = 1;
+    $langs->{$_} or delete $langs->{$_} foreach keys %$langs;  #- clean hash
 
     #- convert to the default locale for asked language
     $listval2val->($lang);
