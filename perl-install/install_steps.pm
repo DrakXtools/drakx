@@ -780,7 +780,7 @@ sub setupBootloaderBefore {
 	    my $p = pkgs::packageByName($o->{packages}, 'Aurora');
 	    $p && pkgs::packageFlagInstalled($p);
 	};
-        bootloader::suggest($o->{prefix}, $o->{bootloader}, $o->{all_hds}{hds}, $o->{fstab}, install_any::kernelVersion($o),
+        bootloader::suggest($o->{prefix}, $o->{bootloader}, $o->{all_hds}{hds}, $o->{fstab},
 			    ($force_vga || $vga && $has_aurora) && $o->{vga});
 	bootloader::suggest_floppy($o->{bootloader}) if $o->{security} <= 3 && arch() !~ /ppc/;
 
