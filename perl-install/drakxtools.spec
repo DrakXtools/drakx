@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 1.1.9
-Release: 27mdk
+Release: 28mdk
 Url: http://www.linux-mandrake.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -51,7 +51,7 @@ Contains adduserdrake, ddcxinfos, diskdrake, drakautoinst, drakbackup,
 drakboot, drakbug, drakbug_report, drakconnect, drakfloppy, drakfont,
 drakgw, drakproxy, draksplash, drakTermServ, drakxservices,
 drakxtv, lsnetdrake, lspcidrake, keyboarddrake, livedrake,
-localedrake, mousedrake, printerdrake, scannerdrake, tinyfirewall and
+localedrake, mousedrake, printerdrake, scannerdrake, drakfirewall and
 XFdrake :
 
 adduserdrake: help you adding a user
@@ -111,7 +111,7 @@ printerdrake: detects and configures your printer
 
 scannerdrake: scanner configurator
 
-tinyfirewall: simple firewall configurator
+drakfirewall: simple firewall configurator
 
 XFdrake: menu-driven program which walks you through setting up your X
 server. It works on console and under X :)
@@ -266,6 +266,9 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_sbindir/convert-
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog 
+* Mon Sep  2 2002 Daouda LO <daouda@mandrakesoft.com> 1.1.9-28mdk
+- s/tinyfirewall/drakfirewall/
+
 * Fri Aug 30 2002 Thierry Vignaud <tvignaud@mandrakesoft.com> 1.1.9-27mdk
 - ugtk: add alpha blendering support for mcc's icons through pixbufs
   o readd gdkpixbuf support
