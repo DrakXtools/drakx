@@ -281,7 +281,7 @@ sub mergein_conf_raw {
 	push @{$conf{$key}{probeall} ||= []}, deref($value->{probeall});
     }
 }
-sub mergein_conf {
+sub mergein_conf() {
     my $file = "$::prefix/etc/modules.conf";
     mergein_conf_raw($file) if -r $file;
 }
