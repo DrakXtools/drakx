@@ -53,6 +53,15 @@ sub init {
 
 sub install2::startMove {
     my ($_o) = @_;
+
+    $::WizardWindow->destroy;
+    require ugtk2;
+    my $root = ugtk2::gtkroot();
+    my $pixbuf = Gtk2::Gdk::Pixbuf->new_from_file('/usr/share/mdk/screensaver/3.png');
+    my ($w, $h) = ($pixbuf->get_width, $pixbuf->get_height);
+    $root->draw_pixbuf(Gtk2::Gdk::GC->new($root), $pixbuf, 0, 0, ($::rootwidth - $w) / 2, ($::rootheight - $h)/2, $w, $h, 'none', 0, 0);
+    ugtk2::gtkflush();
+
     run_program::run('adduser', 'mdk');
 
     output('/var/run/console.lock', 'mdk');
