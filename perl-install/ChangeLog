@@ -1,3 +1,121 @@
+2002/03/01  François Pons  <fpons@mandrakesoft.com>
+
+	* share/rpmsrate: updated INSTALL category with NOCOPY new flag added.
+
+	* share/rpmsrate.server: synced with rpmsrate INSTALL category.
+
+	* install_any.pm: removed staling debug code.
+	fixed bad copied package (if one is not found).
+
+	* pkgs.pm: added pixel comments for handling INSTALL category and NOCOPY
+	handling.
+	only copy package in INSTALL category with a rate of at least 2.
+
+2002/03/01  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* mdk-stage1/dhcp.c: add hostname/domain in dhcp negociation,
+	thx to david@eastcott.net
+
+	* share/po/fr.po: please translators, keep two newlines when
+	there are two newlines in original string,
+	it's on purpose
+
+2002/03/01  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/nl.po, share/po/zh_TW.po, share/po/hu.po: updated po files
+
+2002/03/01  Pixel  <pixel@mandrakesoft.com>
+
+	* Xconfigurator.pm: handle leaving X for both Xdrakres and XFdrake (=>
+	Xdrakres completly obsolete)
+
+	* detect_devices.pm: add is_a_recent_computer()
+
+	* any.pm: call dcop as user
+
+	* lang.pm: add 'C' in %charset2kde_font (so that english has normal fonts)
+	switch en_GB, *_CH, da, es@tradicional and wa to iso-8859-15
+
+	* bootloader.pm: read "disk=/dev/xxx bios=0x8x" and save it
+
+	* mouse.pm: special case for non detected usb interface on a box with no
+	mouse.
+	we *must* find out if there really is no usb, otherwise the box may
+	not be accessible via the keyboard (if the keyboard is USB)
+	the only way to know this is to make a full pci probe
+
+2002/02/28  dam's  <damien@mandrakesoft.com>
+
+	* standalone/drakbackup: bugfixs
+	corrected translation for crontab
+
+	* modparm.pm: corrected modinfo path for isa modules during install
+
+2002/02/28  François Pons  <fpons@mandrakesoft.com>
+
+	* Xconfigurator.pm: try to fix if no chosen width has been found.
+	removed Radeon 8500 from DRI capable cards.
+
+	* rescue/tree/etc/oem: added curl as a bonus for oem install (it will be
+	used by urpmi)
+	added a2ps as a bonus (it fetch tetex where oem limited disk usage do
+	not agree
+	a lot).
+	fixed bad copy of install packages.
+
+	* tools/oem-prepare: added curl as a bonus for oem install (it will be
+	used by urpmi)
+	added a2ps as a bonus (it fetch tetex where oem limited disk usage do
+	not agree
+	a lot).
+	fixed bad copy of INSTALL packages.
+
+2002/02/28  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* install2.pm: more precise msg when can't access kernel modules because
+	we still have many dumb people on cooker asking what's going on
+
+	* install_steps_interactive.pm: small english fix
+
+2002/02/28  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/de.po, share/po/no.po: updated po files
+	updated pot file
+
+	* share/po/be.po, share/po/sp.po, share/po/zh_CN.po, share/po/pt.po,
+	share/po/DrakX.pot, share/po/es.po, share/po/fr.po, share/po/bg.po,
+	share/po/ga.po, share/po/sr.po, share/po/et.po, share/po/tr.po,
+	share/po/eu.po, share/po/az.po, share/po/ru.po, share/po/pt_BR.po,
+	share/po/hr.po, share/po/ko.po, share/po/cy.po, share/po/nl.po,
+	share/po/ja.po, share/po/wa.po, share/po/is.po, share/po/hu.po,
+	share/po/it.po, share/po/id.po, share/po/pl.po, share/po/fi.po,
+	share/po/th.po, share/po/el.po, share/po/sk.po, share/po/lt.po,
+	share/po/ar.po, share/po/sl.po, share/po/vi.po, share/po/br.po,
+	share/po/ca.po, share/po/gl.po, share/po/lv.po, share/po/uk.po,
+	share/po/eo.po, share/po/ro.po, share/po/bs.po, share/po/da.po,
+	share/po/zh_TW.po, share/po/cs.po, share/po/af.po: updated pot file
+
+	* share/po/sv.po: updated Swedish file
+	updated pot file
+
+2002/02/28  Pixel  <pixel@mandrakesoft.com>
+
+	* rescue/make_rescue_img: resolve conflicts for short keytable names (eg:
+	"no" could be either "no-dvorak" or "no-latin1")
+
+	* keyboard.pm (loadkeys_files): ensure each file appear only once
+
+2002/02/28  siegel
+
+	* share/po/de.po: and another part of updates
+	updates
+
+2002/02/28  Thierry Vignaud  <tvignaud@mandrakesoft.com
+
+	* share/po/fr.po: last translation but not least.
+	further updates
+	update french translation
+
 2002/02/28  dam's  <damien@mandrakesoft.com>
 
 	* share/themes-marble3d.rc: rechanged bg for camille
