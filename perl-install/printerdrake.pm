@@ -523,7 +523,7 @@ _(" (Parallel Ports: /dev/lp0, /dev/lp1, ..., equivalent to LPT1:, LPT2:, ..., 1
 	$ptaldevice = printer::configure_hpoj($device, @parport);
 
 	if ($ptaldevice) {
-	    # Configure scanning on the MF device
+	    # Configure scanning with SANE on the MF device
 	    if (($menuchoice =~ /HP\s+OfficeJet\s+[KVRGP]/i) ||
 		($menuchoice =~ /HP\s+PSC\s+[579]/i)) {
 		# Install SANE
@@ -545,19 +545,13 @@ _(" (Parallel Ports: /dev/lp0, /dev/lp1, ..., equivalent to LPT1:, LPT2:, ..., 1
 		}
 		# Configure the HP SANE backend
 		printer::config_sane($ptaldevice);
-		# Inform user about how to scan with SANE
-		$in->ask_warn(_("Scanning on your HP multi-function device"),
-			      _("Your HP multi-function device was configured automatically to be able to scan. Now you can scan with \"scanimage\" (\"scanimage -d hp:%s\" to specify the scanner when you have more than one) from the command line or with the graphical interfaces \"xscanimage\" or \"xsane\". If you are using the GIMP, you can also scan by choosing the appropriate point in the \"File\"/\"Acquire\" menu. Call also \"man scanimage\" and \"man sane-hp\" on the command line to get more information.
-Do not use \"scannerdrake\" for this device!",
-				$ptaldevice));
-	    } elsif ($menuchoice !~ /HP\s+PhotoSmart/i) {
-		# Inform user about how to scan with ptal-hp
-		$in->ask_warn(_("Scanning on your HP multi-function device"),
-			      _("Your HP multi-function device was configured automatically to be able to scan. Now you can scan from the command line with \"ptal-hp %s scan ...\". Scanning via a graphical interface or from the GIMP is not supported yet for your device. More information you will find in the \"/usr/share/doc/hpoj-0.8/ptal-hp-scan.html\" on your system. If you have an HP LaserJet 1100 or 1200 you can only scan when you have the scanner option installed.
-Do not use \"scannerdrake\" for this device!",
-				$ptaldevice));
 	    }
-
+	    # Inform user about how to scan with his MF device
+	    my $text = scanner_help($menuchoice, "ptal:/$ptaldevice");
+	    if ($text) {
+		$in->ask_warn(_("Scanning on your HP multi-function device"),
+			      $text);
+	    }
 	    # make the DeviceURI from $ptaldevice.
 	    $printer->{currentqueue}{'connect'} = "ptal:/" . $ptaldevice;
 	} else {
@@ -1631,6 +1625,16 @@ sub printer_help {
     }
     #my $foomatic = $printer->{configured}{$queue}{queuedata}{foomatic};
     #my $ppd = $printer->{configured}{$queue}{queuedata}{ppd};
+
+    # Information about scanning with HP's multi-function devices
+    my $scanning = scanner_help
+	($printer->{configured}{$queue}{'queuedata'}{'make'} . " " .
+	 $printer->{configured}{$queue}{'queuedata'}{'model'}, 
+	 $printer->{configured}{$queue}{'queuedata'}{'connect'});
+    if ($scanning) {
+	$scanning = "\n\n$scanning\n\n";
+    }
+
     my $dialogtext;
     if ($spooler eq "cups") {
 	$dialogtext =
@@ -1642,12 +1646,12 @@ _("These commands you can also use in the \"Printing command\" field of the prin
 _("
 The \"%s\" command also allows to modify the option settings for a particular printing job. Simply add the desired settings to the command line, e. g. \"%s <file>\". ", "lpr", ($queue ne $default ? "lpr -P $queue -o option=setting -o switch" : "lpr -o option=setting -o switch")) .
 (!$cupsremote ?
- _("To get a list of the options available for the current printer read either the list shown below or click on the \"Print option list\" button.
+ _("To know about the options available for the current printer read either the list shown below or click on the \"Print option list\" button.%s
 
-") . printer::lphelp_output($printer) :
- _("Here is a list of the available options for the current printer:
+", $scanning) . printer::lphelp_output($printer) : $scanning .
+ _("Here is a list of the available printing options for the current printer:
 
-") . printer::lphelp_output($printer)) : "");
+") . printer::lphelp_output($printer)) : $scanning);
     } elsif ($spooler eq "lprng") {
 	$dialogtext =
 _("To print a file from the command line (terminal window) use the command \"%s <file>\".
@@ -1657,9 +1661,7 @@ _("This command you can also use in the \"Printing command\" field of the printi
 (!$raw ?
 _("
 The \"%s\" command also allows to modify the option settings for a particular printing job. Simply add the desired settings to the command line, e. g. \"%s <file>\". ", "lpr", ($queue ne $default ? "lpr -P $queue -Z option=setting -Z switch" : "lpr -Z option=setting -Z switch")) .
-_("To get a list of the options available for the current printer click on the \"Print option list\" button.
-
-") : "");
+_("To get a list of the options available for the current printer click on the \"Print option list\" button." . $scanning) : $scanning);
     } elsif ($spooler eq "lpd") {
 	$dialogtext =
 _("To print a file from the command line (terminal window) use the command \"%s <file>\".
@@ -1669,9 +1671,7 @@ _("This command you can also use in the \"Printing command\" field of the printi
 (!$raw ?
 _("
 The \"%s\" command also allows to modify the option settings for a particular printing job. Simply add the desired settings to the command line, e. g. \"%s <file>\". ", "lpr", ($queue ne $default ? "lpr -P $queue -o option=setting -o switch" : "lpr -o option=setting -o switch")) .
-_("To get a list of the options available for the current printer click on the \"Print option list\" button.
-
-") : "");
+_("To get a list of the options available for the current printer click on the \"Print option list\" button." . $scanning) : $scanning);
     } elsif ($spooler eq "pdq") {
 	$dialogtext =
 _("To print a file from the command line (terminal window) use the command \"%s <file>\" or \"%s <file>\".
@@ -1685,15 +1685,17 @@ If you are using KDE as desktop environment you have a \"panic button\", an icon
 _("
 The \"%s\" and \"%s\" commands also allow to modify the option settings for a particular printing job. Simply add the desired settings to the command line, e. g. \"%s <file>\".
 ", "pdq", "lpr", ($queue ne $default ? "pdq -P $queue -aoption=setting -oswitch" : "pdq -aoption=setting -oswitch")) .
-_("To get a list of the options available for the current printer read either the list shown below or click on the \"Print option list\" button.
+_("To know about the options available for the current printer read either the list shown below or click on the \"Print option list\" button.%s
 
-") . printer::pdqhelp_output($printer) : "");
+", $scanning) . printer::pdqhelp_output($printer) : $scanning);
     }
     if (!$raw && !$cupsremote) {
         my $choice;
         while ($choice ne _("Close")) {
 	    $choice = $in->ask_from_list_
-	        (_("Printing on the printer \"%s\"", $queue),
+	        (($scanning ?
+		  _("Printing/Scanning on \"%s\"", $queue) :
+		  _("Printing on the printer \"%s\"", $queue)),
 		 $dialogtext,
 		 [ _("Print option list"), _("Close") ],
 		 _("Close"));
@@ -1703,8 +1705,33 @@ _("To get a list of the options available for the current printer read either th
 	    }
 	}
     } else {
-	$in->ask_warn(_("Printing on the printer \"%s\"", $queue), 
+	$in->ask_warn(($scanning ?
+		       _("Printing/Scanning on \"%s\"", $queue) :
+		       _("Printing on the printer \"%s\"", $queue)), 
 		      $dialogtext);
+    }
+}
+
+sub scanner_help {
+    my ($makemodel, $deviceuri) = @_;
+    if ($deviceuri =~ m!^ptal:/(.*)$!) {
+	my $ptaldevice = $1;
+	if (($makemodel =~ /HP\s+OfficeJet\s+[KVRGP]/i) ||
+	    ($makemodel =~ /HP\s+PSC\s+[579]/i)) {
+	    # SANE-driven models
+	    return _("Your HP multi-function device was configured automatically to be able to scan. Now you can scan with \"scanimage\" (\"scanimage -d hp:%s\" to specify the scanner when you have more than one) from the command line or with the graphical interfaces \"xscanimage\" or \"xsane\". If you are using the GIMP, you can also scan by choosing the appropriate point in the \"File\"/\"Acquire\" menu. Call also \"man scanimage\" and \"man sane-hp\" on the command line to get more information.
+
+Do not use \"scannerdrake\" for this device!",
+		     $ptaldevice);
+	} elsif ($makemodel !~ /HP\s+PhotoSmart/i) {
+	    # "ptal-hp"-driven models
+	    return _("Your HP multi-function device was configured automatically to be able to scan. Now you can scan from the command line with \"ptal-hp %s scan ...\". Scanning via a graphical interface or from the GIMP is not supported yet for your device. More information you will find in the \"/usr/share/doc/hpoj-0.8/ptal-hp-scan.html\" file on your system. If you have an HP LaserJet 1100 or 1200 you can only scan when you have the scanner option installed.
+
+Do not use \"scannerdrake\" for this device!",
+		     $ptaldevice);
+	} else {
+	    return "";
+	}
     }
 }
 
@@ -2575,7 +2602,7 @@ What do you want to modify on this printer?",
 				   (($queue ne $printer->{DEFAULT}) ?
 				    _("Set this printer as the default") : ()),
 				   _("Print test pages"),
-				   _("Know how to print with this printer"),
+				   _("Know how to use this printer"),
 				   ($printer->{configured}{$queue} ?
 				    _("Remove printer") : ()) ] } ] ) ) {
 		# Stay in the queue edit window until the user clicks "Close"
@@ -2649,7 +2676,7 @@ What do you want to modify on this printer?",
 				  _("The printer \"%s\" is set as the default printer now.", $queue));
 		} elsif ($modify eq _("Print test pages")) {
 		    print_testpages($printer, $in, $upNetwork);
-		} elsif ($modify eq _("Know how to print with this printer")) {
+		} elsif ($modify eq _("Know how to use this printer")) {
 		    printer_help($printer, $in);
 		} elsif ($modify eq _("Remove printer")) {
 		    if ($in->ask_yesorno('',
