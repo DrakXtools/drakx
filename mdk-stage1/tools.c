@@ -277,7 +277,7 @@ enum return_type save_fd(int from_fd, char * to, void (*callback_func)(int overa
  cleanup:
         fclose(f_to);
  close_from:
-        fclose(from_fd);
+        close(from_fd);
 
         return ret;
 }
