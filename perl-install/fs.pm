@@ -199,7 +199,7 @@ sub write($$) {
        map_index {
 	   my $i = $::i ? $::i + 1 : '';
 	   mkdir "$prefix/mnt/cdrom$i", 0755 or log::l("failed to mkdir $prefix/mnt/cdrom$i: $!");
-	   symlink $_->{device}, "$prefix/dev/cdrom$i" or log::l("failed to symlink $prefix/dev/cdrom$i: $!");
+	   symlinkf $_->{device}, "$prefix/dev/cdrom$i" or log::l("failed to symlink $prefix/dev/cdrom$i: $!");
 	   [ "/dev/cdrom$i", "/mnt/cdrom$i", "auto", "user,noauto,nosuid,exec,nodev,ro", 0, 0 ];
        } detect_devices::cdroms());
     write_fstab($fstab, $prefix, @to_add);

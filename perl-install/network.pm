@@ -107,6 +107,7 @@ sub add2hosts {
     log::l("writing host information to $file");
     open F, ">$file" or die "cannot write $file: $!";
     while (my ($ip, $v) = each %l) {
+	$ip or next;
 	print F "$ip";
 	if ($v =~ /^\s/) {
 	    print F $v;

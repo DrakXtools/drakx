@@ -524,6 +524,7 @@ sub main {
     killCardServices();
 
     log::l("installation complete, leaving");
+    print "\n" x 30;
 
     if ($::g_auto_install) {
 	my $h = $o; $o = {};

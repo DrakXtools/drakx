@@ -103,6 +103,7 @@ sub selectMouse {
 
     my $name = $o->{mouse}{FULLNAME};
     if (!$name || $::expert || $force) {
+	$name ||= "Generic Mouse (serial)";
 	$name = $o->ask_from_list_('', _("What is the type of your mouse?"), [ mouse::names() ], $name);
 	$o->{mouse} = mouse::name2mouse($name);
     }

@@ -58,7 +58,7 @@ sub hds($$) {
     foreach (@$drives) {
 	my $file = devices::make($_->{device});
 
-	my $hd = partition_table_raw::get_geometry($file) or die _("An error occurred while getting the geometry of block device %s: %s", $file, "$!");
+	my $hd = partition_table_raw::get_geometry($file) or log::l("An error occurred while getting the geometry of block device $file: $!"), next;
 	$hd = { (%$_, %$hd) };
 	$hd->{file} = $file;
 	$hd->{prefix} = $hd->{device};

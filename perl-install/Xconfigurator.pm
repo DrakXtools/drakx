@@ -172,10 +172,7 @@ sub cardConfiguration(;$$) {
     -x "$prefix$card->{prog}" or !defined $install or &$install($card->{server});
     -x "$prefix$card->{prog}" or die "server $card->{server} is not available (should be in $prefix$card->{prog})";
 
-    unless ($::testing) {
-	unlink("$prefix/etc/X11/X");
-	symlink("../..$card->{prog}", "$prefix/etc/X11/X");
-    }
+    symlinkf "../..$card->{prog}", "$prefix/etc/X11/X" unless $::testing;
 
     unless ($card->{type}) {
 	$card->{flags}{noclockprobe} = member($card->{server}, qw(I128 S3 S3V Mach64));
@@ -266,8 +263,7 @@ sub testFinalConfig($;$) {
 
     #- create a link from the non-prefixed /tmp/.X11-unix/X9 to the prefixed one
     #- that way, you can talk to :9 without doing a chroot
-    unlink "/tmp/.X11-unix/X9" if $prefix;
-    symlink "$prefix/tmp/.X11-unix/X9", "/tmp/.X11-unix/X9" if $prefix;
+    symlinkf "$prefix/tmp/.X11-unix/X9", "/tmp/.X11-unix/X9" if $prefix;
 
     my $f_err = "$prefix/tmp/Xoutput";
     my $pid;
@@ -665,7 +661,7 @@ sub XF86check_link {
 
     if (-e $l && (stat($f))[1] != (stat($l))[1]) { #- compare the inode, must be the sames
 	-e $l and unlink($l) || die "can't remove bad $l";
-	symlink "../../../../etc/X11/XF86Config", $l;
+	symlinkf "../../../../etc/X11/XF86Config", $l;
     }
 }
 

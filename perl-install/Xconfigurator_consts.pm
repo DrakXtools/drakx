@@ -107,7 +107,7 @@ $resolution_wanted = "1024x768";
 
 
 %lines = (
-    'Cirrus Logic|GD 5446' => [ '	Option "noblt"' ],
+    'Cirrus Logic|GD 5446' => [ '	Option "no_bitblt"' ],
 );
 
 %xkb_options = (

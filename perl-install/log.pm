@@ -15,6 +15,7 @@ my $logDebugMessages = 0;
 #- Functions
 #-######################################################################################
 sub fd() { fileno LOG }
+sub F() { *LOG }
 
 sub l {
     $logOpen or openLog();

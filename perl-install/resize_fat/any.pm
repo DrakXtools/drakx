@@ -8,6 +8,7 @@ use common qw(:common :constant);
 use resize_fat::fat;
 use resize_fat::directory;
 use resize_fat::dir_entry;
+use resize_fat::c_rewritten;
 
 
 $FREE      = 0;

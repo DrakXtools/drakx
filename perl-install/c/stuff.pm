@@ -14,7 +14,7 @@ bootstrap c::stuff $VERSION;
 
 sub headerGetEntry {
     my ($h, $q) = @_;
-
+    $h or log::l("empty header in headerGetEntry"), return;
     $q eq 'name' and return headerGetEntry_string($h, RPMTAG_NAME());
     $q eq 'group' and return headerGetEntry_string($h, RPMTAG_GROUP());
     $q eq 'version' and return headerGetEntry_string($h, RPMTAG_VERSION());

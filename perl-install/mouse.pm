@@ -6,7 +6,7 @@ use strict;
 #-######################################################################################
 #- misc imports
 #-######################################################################################
-use common qw(:common :system :functional);
+use common qw(:common :system :functional :file);
 use modules;
 use log;
 
@@ -62,7 +62,7 @@ sub serial_ports_names {
 }
 sub serial_ports_names2dev {
     local ($_) = @_;
-    /(\w+)/;
+    first(/(\w+)/);
 }
 
 sub read($) {
@@ -76,7 +76,7 @@ sub write($;$) {
     my ($prefix, $mouse) = @_;
     local $mouse->{FULLNAME} = qq("$mouse->{FULLNAME}");
     setVarsInSh("$prefix/etc/sysconfig/mouse", $mouse, qw(MOUSETYPE XMOUSETYPE FULLNAME XEMU3));
-    symlink $mouse->{device}, "$prefix/dev/mouse" or log::l("creating $prefix/dev/mouse symlink failed");
+    symlinkf $mouse->{device}, "$prefix/dev/mouse" or log::l("creating $prefix/dev/mouse symlink failed");
 }
 
 sub detect() {

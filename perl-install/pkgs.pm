@@ -2,7 +2,7 @@ package pkgs;
 
 use diagnostics;
 use strict;
-use vars qw($fd $size_correction_ratio);
+use vars qw(*LOG $size_correction_ratio);
 
 use common qw(:common :file :functional);
 use install_any;
@@ -270,10 +270,11 @@ sub init_db {
     my ($prefix, $isUpgrade) = @_;
 
     my $f = "$prefix/root/install.log";
-    open(F, "> $f") ? log::l("opened $f") : log::l("Failed to open $f. No install log will be kept.");
-    $fd = fileno(F) || log::fd() || 2;
-    c::rpmErrorSetCallback($fd);
-#    c::rpmSetVeryVerbose();
+    open(LOG, "> $f") ? log::l("opened $f") : log::l("Failed to open $f. No install log will be kept.");
+    *LOG or *LOG = log::F() or *LOG = *STDERR;
+    CORE::select((CORE::select(LOG), $| = 1)[0]);
+    c::rpmErrorSetCallback(fileno LOG);
+#-    c::rpmSetVeryVerbose();
 
     log::l("reading /usr/lib/rpm/rpmrc");
     c::rpmReadConfigFiles() or die "can't read rpm config files";
@@ -287,7 +288,7 @@ sub getHeader($) {
 
     unless ($p->{header}) {
 	my $f = install_any::getFile($p->{file}) or die "error opening package $p->{name} (file $p->{file})";
-	$p->{header} = c::rpmReadPackageHeader(fileno $f);
+	$p->{header} = c::rpmReadPackageHeader(fileno $f) or die "bad package $p->{name}";
     }
     $p->{header};
 }
@@ -432,7 +433,7 @@ sub install($$) {
 	      c::rpmdbClose($db);
 	      c::rpmtransFree($trans);
 	  };
-    c::rpmtransSetScriptFd($trans, $fd);
+    c::rpmtransSetScriptFd($trans, fileno LOG);
 
     eval { fs::mount("/proc", "$prefix/proc", "proc", 0) };
 
@@ -440,6 +441,7 @@ sub install($$) {
 
     #- !! do not translate these messages, they are used when catched (cf install_steps_graphical)
     my $callbackOpen = sub {
+	print LOG "$_[0]\n";
 	my $fd = install_any::getFile($_[0]) or log::l("bad file $_[0]");
 	$fd ? fileno $fd : -1;
     };
