@@ -596,7 +596,6 @@ killall pppd
                     data => sub { 
                         [ { label => N("Provider:"), type => "list", val => \$adsl_provider, separator => '|', list => [ keys %adsl_data ] } ];
                     },
-                    next => 'adsl_protocol',
                     post => sub {
                         $adsl_data = $adsl_data{$adsl_provider};
                         $adsl_type = 'pppoa' if $ntf_name eq 'speedtouch';
