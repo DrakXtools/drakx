@@ -12,7 +12,8 @@ sub config_window {
     my @l;
     foreach (modules::parameters::parameters($data->{driver})) {
 	   my ($name, $format, $description) = @$_;
-	   push @l, { label => $name, help => "$description\n[$format]", val => \$conf{$name}, allow_empty_list => 1 };
+	   push @l, { label => $name, help => join("\n", $description, if_(c::kernel_version() !~ /^\Q2.6/, "[$format]")),
+                                                val => \$conf{$name}, allow_empty_list => 1 };
     }
     # BUG: once we've released mdk9.2 and unfreeze cooker, morph this
     #      into a proper error dialog with a nice error message (but
