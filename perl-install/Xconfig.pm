@@ -179,7 +179,6 @@ sub getinfoFromDDC {
     my $o = shift || {};
     my $O = $o->{monitor} ||= {};
     #- return $o if $O->{hsyncrange} && $O->{vsyncrange} && $O->{modelines};
-    devices::make("/dev/zero"); #- needed by ddcxinfos
     my ($m, @l) = `ddcxinfos`;
     $? == 0 or return $o;
 
