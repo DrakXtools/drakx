@@ -603,7 +603,6 @@ sub get_raw_hds {
 
     push @{$all_hds->{raw_hds}}, detect_devices::removables();
     $_->{is_removable} = 1 foreach @{$all_hds->{raw_hds}};
-    $_->{is_removable} = 1 foreach map { partition_table::get_normal_parts($_) } grep { $_->{usb_media_type} } @{$all_hds->{hds}};
 
     get_major_minor(@{$all_hds->{raw_hds}});
 

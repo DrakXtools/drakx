@@ -239,6 +239,10 @@ sub hds {
 	    $_->{device_LABEL} = $label if $label;
 	}
 
+	if ($hd->{usb_media_type}) {
+	    $_->{is_removable} = 1 foreach partition_table::get_normal_parts($hd);
+	}
+
 	push @hds, $hd;
     }
 
