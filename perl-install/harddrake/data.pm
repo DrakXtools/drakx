@@ -65,7 +65,7 @@ our @tree =
          grep { $_->{media_type} && $_->{media_type} =~ /^NETWORK/ || member($_->{driver}, @usbnet) || $_->{type} && $_->{type} eq 'network' } @devices }, 1 ],
      [ "MODEM", , N("Modem"), "modem.png", "$sbindir/drakconnect", sub { detect_devices::getModem() }, 0 ],
      [ "ADSL", , N("ADSL adapters"), "modem.png", "$sbindir/drakconnect", sub { 
-           require network::adsl; my $a = network::adsl::adsl_detect(); $a ? values %$a : () }, 0 ],
+           require network::adsl; my $a = network::adsl::adsl_detect(); use Data::Dumper; print Data::Dumper->Dump([ $a ], [ 'adsl' ]); $a ? grep { $_ } values %$a : () }, 0 ],
      [ "ISDN", , N("ISDN adapters"), "modem.png", "$sbindir/drakconnect", sub { require network::isdn; my $isdn = network::isdn::isdn_detect_backend(); 
                                                             if_(!is_empty_hash_ref($isdn), $isdn) }, 0 ],
      [ "BRIDGE", , N("Bridges and system controllers"), "memory.png", "", sub { grep { $_->{media_type} =~ /BRIDGE|MEMORY_RAM/ && $_->{driver} ne 'nvnet' } @devices }, 0 ],
