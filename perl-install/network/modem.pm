@@ -57,4 +57,23 @@ sub pppConfig {
     1;
 }
 
+#- TODO: add choice between hcf/hsf
+sub winmodemConfigure {
+    my ($netc) = @_;
+    my $type;
+    
+    foreach (keys %{$netc->{autodetect}{winmodem}}) {
+    	my $temp;
+    	/Hcf/ and $temp = "hcf";
+    	/Hsf/ and $temp = "hsf";
+    	$temp and $in->do_pkgs->what_provides("${temp}linmodem") and $type="${temp}linmodem";
+    }
+    
+    $type || $in->ask_warn(_("Warning"), _("Your modem isn't supported by the system.
+Take a look at http://www.linmodems.org")) && return 1;
+    my $e = $in->ask_from_list(_("Title"), _("\"%s\" based winmodem detected, do you want to install needed software ?", $type), [_("Install rpm"), _("Do nothing")]) or return 0;
+    $e =~ /rpm/ ? $in->do_pkgs->install($type) : return 1;
+    1;
+}
+
 1;
