@@ -58,9 +58,8 @@ sub load_category__prompt_for_more {
 	    N("Do you have another one?") ] :
 	  N("Do you have any %s interfaces?", $msg_type);
 
-	my $opt = [ N_("Yes"), N_("No") ];
-	push @$opt, N_("See hardware info") if $::expert;
-	my $r = $in->ask_from_list_('', $msg, $opt, "No") or return;
+	my $r = 'No';
+	$in->ask_from('', $msg, [ { list => [ N_("Yes"), N_("No"), N_("See hardware info") ], val => \$r, type => 'list' } ]);
 	if ($r eq "No") { return @l }
 	if ($r eq "Yes") {
 	    push @l, load_category__prompt($in, $category) || next;
