@@ -200,16 +200,18 @@ sub bestKernelPackage {
 	#- favour versions corresponding to current BOOT version
 	@kernels = @l;
     }
-    my $prefered_ext = 
-      detect_devices::is_i586() ? 'i586-up-1GB' :
-      c::dmiDetectMemory() > 4 * 1024 ? 'enterprise' : 
-      detect_devices::hasSMP() ? 'smp' : 
+    my @prefered_exts = 
+      detect_devices::is_i586() ? '-i586-up-1GB' :
+      c::dmiDetectMemory() > 4 * 1024 ? ('-enterprise', '-smp') : 
+      detect_devices::hasSMP() ? '-smp' : 
       '';
-    if (my @l = grep { $_->{ext} eq $prefered_ext } @kernels) {
-	@kernels = @l;
+    foreach my $prefered_ext (@prefered_exts, '') {
+	if (my @l = grep { $_->{ext} eq $prefered_ext } @kernels) {
+	    @kernels = @l;
+	}
     }
     
-    log::l("bestKernelPackage: " . join(' ', map { $_->{pkg}->name } @kernels) . (@kernels > 1 ? ' (choosing the first)' : ''));
+    log::l("bestKernelPackage (" . join(':', @prefered_exts) . "): " . join(' ', map { $_->{pkg}->name } @kernels) . (@kernels > 1 ? ' (choosing the first)' : ''));
     $preferred{'kernel-source-' . $kernels[0]{version}} = undef;
     $kernels[0]{pkg};
 }
