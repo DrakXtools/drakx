@@ -808,7 +808,7 @@ sub setupBootloaderBefore {
 	    my $year = detect_devices::computer_info()->{BIOS_Year};
 	    if (detect_devices::isLaptop() && $year >= 2002) {
 		log::l("forcing ACPI on a laptop with recent bios ($year)");
-		$acpi = 'on';
+		$acpi = '';
 	    }
 	}
 	bootloader::set_append_with_key($o->{bootloader}, acpi => $acpi);
