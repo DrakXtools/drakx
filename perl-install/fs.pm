@@ -518,7 +518,7 @@ sub mount {
 
     if (member($fs, 'smb', 'nfs') && $::isStandalone) {
 	system('mount', $dev, $where) == 0 or die _("mount failed");
-    } elsif (member($fs, 'ext2', 'proc', 'usbdevfs', @fs_modules)) {
+    } elsif (member($fs, 'ext2', 'proc', 'usbdevfs', 'iso9660', @fs_modules)) {
 	$dev = devices::make($dev) if $fs ne 'proc' && $fs ne 'usbdevfs';
 
 	my $flag = c::MS_MGC_VAL();
@@ -539,6 +539,8 @@ sub mount {
 	}
 	if (member($fs, @fs_modules)) {
 	    eval { modules::load($fs) };
+	} elsif ($fs eq 'iso9660') {
+	    eval { modules::load('isofs') };
 	}
 
 	$where =~ s|/$||;
