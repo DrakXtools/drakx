@@ -15,7 +15,7 @@ use list_modules;
 
 
 sub write_config {
-    my ($isdn, $netc) = @_;
+    my ($isdn) = @_;
     $in->do_pkgs->install('isdn4net', if_($isdn->{speed} =~ /128/, 'ibod'), 'isdn4k-utils');
 
     output_with_perm("$::prefix/etc/isdn/profile/link/myisp", 0600,
