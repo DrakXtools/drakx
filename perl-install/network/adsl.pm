@@ -83,7 +83,7 @@ sub adsl_probe_info {
     my %pppoe_conf; %pppoe_conf = getVarsFromSh($pppoe_file) if (! defined $adsl_type || $adsl_type =~ /pppoe/) && -f $pppoe_file;
     my $login = $pppoe_conf{USER};
     foreach (qw(/etc/ppp/peers/adsl /etc/ppp/options /etc/ppp/options.adsl)) {
-	($login) = map { if_(/^user\s+\"([^\"]+)\"/, $1) } cat_("$prefix/$_") if !$login && -r "$prefix/$_";
+	($login) = map { if_(/^user\s+"([^"]+)"/, $1) } cat_("$prefix/$_") if !$login && -r "$prefix/$_";
     }
     ($login) = map { if_(/\sname\s+([^ \n]+)/, $1) } cat_($pptp_file) if (! defined $adsl_type || $adsl_type =~ /pptp/) && -r $pptp_file;
     my $passwd = passwd_by_login($login);

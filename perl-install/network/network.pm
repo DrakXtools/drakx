@@ -56,7 +56,7 @@ sub read_dhcpd_conf {
     $file ||= "$::prefix/etc/dhcpd.conf";
     { option_routers => [ cat_($file) =~ /^\s*option routers\s+(\S+);/mg ],
       subnet_mask => [ if_(cat_($file) =~ /^\s*option subnet-mask\s+(.*);/mg, split(' ', $1)) ],
-      domain_name => [ if_(cat_($file) =~ /^\s*option domain-name\s+\"(.*)\";/mg, split(' ', $1)) ],
+      domain_name => [ if_(cat_($file) =~ /^\s*option domain-name\s+"(.*)";/mg, split(' ', $1)) ],
       domain_name_servers => [ if_(cat_($file) =~ /^\s*option domain-name-servers\s+(.*);/m, split(' ', $1)) ],
       dynamic_bootp => [ if_(cat_($file) =~ /^\s*range dynamic-bootp\s+\S+\.(\d+)\s+\S+\.(\d+)\s*;/m, split(' ', $1)) ],
       default_lease_time => [ if_(cat_($file) =~ /^\s*default-lease-time\s+(.*);/m, split(' ', $1)) ],
