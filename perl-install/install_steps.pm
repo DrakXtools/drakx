@@ -715,9 +715,16 @@ sub configureServices {
 #------------------------------------------------------------------------------
 sub configurePrinter {
     my ($o) = @_;
-    $o->do_pkgs->install('foomatic-filters', 'foomatic-db-engine', 'foomatic-db', 'printer-utils', 'printer-testpages',
-			 if_($o->do_pkgs->is_installed('gimp'), 'gimpprint'));
-    
+    eval {
+	$o->do_pkgs->install('foomatic-filters', 'foomatic-db-engine', 'foomatic-db', 'printer-utils', 'printer-testpages',
+			     if_($o->do_pkgs->is_installed('gimp'), 'gimpprint'));
+    };
+    if ($@ =~ /rpm not found/) {
+	$o->cleanupPrinter;
+	log::l($@);
+	return;
+    }
+
     require printer::main;
     eval { add2hash($o->{printer} ||= {}, printer::main::getinfo($o->{prefix})) }; #- get existing configuration.
 
