@@ -1,14 +1,12 @@
-#!/bin/sh -x
+#!/usr/bin/perl
 
-# kill 15, fuzzy_pidofs(qr/\bkded\b/);
-# kdesud
+system('mdk_move_loop', 'to_memory', 'always', 'totem');
 
-# done ASAP since it needs to be done and will speed up totem launch
-mdk_move_loop to_memory always totem 
+my $totem_pid = $$;
 
-cp -a /image_raw/{totem,mdk_behind_totem} /tmp
-
-sudo /tmp/mdk_behind_totem --totem-pid $$ &
-export MDKMOVE=$!
-
-exec /tmp/totem "$@"
+if (my $pid = fork()) {
+    $ENV{MDKMOVE} = $pid;
+    exec 'totem';
+} else {
+    exec 'sudo', 'mdk_behind_totem', '--totem-pid', $totem_pid;
+}

@@ -33,7 +33,7 @@ if [ -z "$totem_pid" -o -z "$ok" ]; then
     exit 1
 fi
 
-exec 2> /tmp/mdk_behind_totem.log
+exec &> /tmp/mdk_behind_totem.log
 
 trap 'umount_cd' USR1
 
@@ -52,10 +52,10 @@ umount_cd() {
 
 mount_cd() {
     echo mount_cd
-    /image_always/sbin/losetup -r -e gz /image_raw/live_tree.clp /dev/$main_loop
+    /image_always/sbin/losetup -r -e gz /dev/$main_loop /image_raw/live_tree.clp 
     /image_always/bin/mount /dev/$main_loop /image
 
-    losetup -r -e gz /image_raw/live_tree_boot.clp /dev/$boot_loop
+    losetup -r -e gz /dev/$boot_loop /image_raw/live_tree_boot.clp 
     mount /dev/$boot_loop /image_boot
 
     ln -sf /image/lib /
@@ -65,7 +65,7 @@ mount_cd() {
 
 while [ -e "/proc/$totem_pid" ]; do
     echo "waiting..."
-    sleep 1
+    /image_totem/bin/sleep 1
 done
 
 mount_cd
