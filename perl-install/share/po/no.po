@@ -645,9 +645,8 @@ msgid "Done"
 msgstr "Ferdig"
 
 #: ../../any.pm_.c:219
-#, fuzzy
 msgid "Modify"
-msgstr "Modifiser RAID"
+msgstr "Modifiser"
 
 #: ../../any.pm_.c:227
 msgid "Which type of entry do you want to add?"
@@ -1087,30 +1086,27 @@ msgstr ""
 "\n"
 "%s\n"
 "\n"
-"Klikk på ``Ok'' hvis du ønsker å starte oppsett-hjelperen."
+"Klikk på Konfigurer for å starte oppsett-hjelperen."
 
 #: ../../bootlook.pm_.c:121
-#, fuzzy
 msgid "Lilo/grub mode"
-msgstr "Oppringningsmodus"
+msgstr "Lilo/grub modus"
 
 #: ../../bootlook.pm_.c:131
 msgid "NewStyle Categorizing Monitor"
-msgstr ""
+msgstr "NewStyle Categorizing Monitor"
 
 #: ../../bootlook.pm_.c:134
-#, fuzzy
 msgid "NewStyle Monitor"
-msgstr "Monitor"
+msgstr "NewStyle Monitor"
 
 #: ../../bootlook.pm_.c:137
-#, fuzzy
 msgid "Traditional Monitor"
-msgstr "Endre monitor"
+msgstr "Tradisjonell monitor"
 
 #: ../../bootlook.pm_.c:140
 msgid "Traditional Gtk+ Monitor"
-msgstr ""
+msgstr "Tradisjonell Gtk+ monitor"
 
 #: ../../bootlook.pm_.c:144
 msgid "Launch Aurora at boot time"
@@ -1847,7 +1843,7 @@ msgstr "LVM navn?"
 
 #: ../../diskdrake.pm_.c:976
 msgid "Removable media automounting"
-msgstr ""
+msgstr "Fjernbart media automontering"
 
 #: ../../diskdrake.pm_.c:977
 msgid "Rescue partition table"
@@ -3491,7 +3487,6 @@ msgstr ""
 "en oppstartsdiskett for å starte disse!"
 
 #: ../../help.pm_.c:665
-#, fuzzy
 msgid ""
 "LILO and grub main options are:\n"
 "  - Boot device: Sets the name of the device (e.g. a hard disk\n"
@@ -3528,7 +3523,7 @@ msgid ""
 "or 4\n"
 "MB between detected memory and memory present in your system is normal."
 msgstr ""
-"LILO og grubs hovedopsjoner er:\n"
+"LILO og grubs hovedvalg er:\n"
 "  - Oppstartsenhet: Setter navnet til enheten (f.eks. en harddisk\n"
 "partisjon) som inneholder oppstartssektoren. Hvis du ikke spesifikt\n"
 "vet et annet sted, velg \"/dev/hda\".\n"
@@ -3546,7 +3541,22 @@ msgstr ""
 "\n"
 "    * normal: velg normal 80x25 tekstmodus.\n"
 "\n"
-"    * <nummer>:  bruk tilsvarende tekstmodus."
+"    * <number>:  bruk tilsvarende tekstmodus.\n"
+"\n"
+"\n"
+"  - Tøm \"/tmp\" ved hver oppstart: hvis du ønsker å slette alle filer og "
+"kataloger\n"
+"lagret i \"/tmp\" når du starter opp systemet ditt, velg dette valget.\n"
+"\n"
+"\n"
+"  - Presiser RAM ved behov: dessverre, det er ingen standardmetode for å "
+"spørre BIOS\n"
+"om mengden av RAM i maskinen din. Som en konsekvens av dette kan Linux "
+"mislykkes\n"
+"med å finne riktig mengde RAM. Hvis dette er tilfelle kan du\n"
+"spesifisere den riktige mengden med RAM her. Vennligst merk at en differanse "
+"på 2 eller 4\n"
+"MB mellom oppdaget minne og minne tilgjengelig i systemet ditt er normalt."
 
 #: ../../help.pm_.c:697
 msgid ""
@@ -3879,6 +3889,10 @@ msgid ""
 "  information. Basically, if you don't know what to choose, keep the default "
 "option.\n"
 msgstr ""
+"Du kan velge et sikkerhetsnivå for systemet ditt. Vennligst se i manualen "
+"for full\n"
+"  informasjon. Hovedsaklig, hvis du ikke vet hva du skal velge, behold "
+"standard valg.\n"
 
 #: ../../help.pm_.c:844
 msgid ""
@@ -3985,6 +3999,15 @@ msgid ""
 "\n"
 "Do you really want to install these servers?\n"
 msgstr ""
+"D har valgt følgende tjener(e): %s\n"
+"\n"
+"\n"
+"Disse tjenerene er aktivert som standard. De har ingen kjente sikkerhets-\n"
+"problemer, men noen nye kan bli funnet. I så tilfelle må du oppgradere\n"
+"så snart som mulig.\n"
+"\n"
+"\n"
+"Ønsker du virkelig å installere disse tjenerene?\n"
 
 #: ../../install_any.pm_.c:404
 msgid "Can't use broadcast with no NIS domain"
@@ -4410,7 +4433,7 @@ msgstr "Individuelt pakkevalg"
 
 #: ../../install_steps_gtk.pm_.c:349
 msgid "Show automatically selected packages"
-msgstr ""
+msgstr "Vis automatisk valgte pakker"
 
 #: ../../install_steps_gtk.pm_.c:416
 msgid "Expand Tree"
@@ -4899,15 +4922,15 @@ msgstr "Vennligst velg hvilken serieport musen din koblet til."
 
 #: ../../install_steps_interactive.pm_.c:253
 msgid "Buttons emulation"
-msgstr ""
+msgstr "Emulering knapper"
 
 #: ../../install_steps_interactive.pm_.c:255
 msgid "Button 2 Emulation"
-msgstr ""
+msgstr "Emulering 2 knapper"
 
 #: ../../install_steps_interactive.pm_.c:256
 msgid "Button 3 Emulation"
-msgstr ""
+msgstr "Emulering 3 knapper"
 
 #: ../../install_steps_interactive.pm_.c:275
 msgid "Configuring PCMCIA cards..."
@@ -5329,7 +5352,6 @@ msgid "Installation of bootloader failed. The following error occured:"
 msgstr "Installasjon av oppstartslaster mislykket. Følgende feil oppsto:"
 
 #: ../../install_steps_interactive.pm_.c:1027
-#, fuzzy
 msgid ""
 "You may need to change your Open Firmware boot-device to\n"
 " enable the bootloader.  If you don't see the bootloader prompt at\n"
@@ -5338,9 +5360,9 @@ msgid ""
 " Then type: shut-down\n"
 "At your next boot you should see the bootloader prompt."
 msgstr ""
-"Du vil trenge å endre din Open Firmware oppstartsenhet for\n"
-" å slå på oppstartslasteren. Hold ned Command-Option-O-F\n"
-" ved omstart og entre:\n"
+"Du vil muligens trenge å endre din Open Firmware oppstartsenhet for\n"
+" å slå på oppstartslasteren. Hvis du ikke ser oppstartslasteren ved\n"
+" oppstart, hold ned Command-Option-O-F ved omstart og entre:\n"
 " setenv boot-device $of_boot,\\\\tbxi\n"
 " Skriv så: shut-down\n"
 "Ved neste oppstart burde du se oppstartlasteren."
@@ -6269,12 +6291,15 @@ msgid "Do you want to restart the network"
 msgstr "Vil du starte nettverket på nytt"
 
 #: ../../netconnect.pm_.c:901
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "A problem occured while restarting the network: \n"
 "\n"
 "%s"
-msgstr "Vil du starte nettverket på nytt"
+msgstr ""
+"Et problem oppsto ved omstart av nettverket: \n"
+"\n"
+"%s"
 
 #: ../../netconnect.pm_.c:930
 msgid ""
@@ -6895,7 +6920,7 @@ msgstr "Fjern kø"
 #: ../../printerdrake.pm_.c:454
 msgid ""
 "Name of printer should contains only letters, numbers and the underscore"
-msgstr ""
+msgstr "Skrivernavn bør inneholde kun bokstaver, tall og understrek"
 
 #: ../../printerdrake.pm_.c:461
 msgid ""
@@ -6968,7 +6993,7 @@ msgstr "Ikke nok partisjoner for RAID nivå %d\n"
 
 #: ../../services.pm_.c:16
 msgid "Launch the ALSA (Advanced Linux Sound Architecture) sound system"
-msgstr ""
+msgstr "Start ALSA (Advanced Linux Sound Architecture) lydsystem"
 
 #: ../../services.pm_.c:17
 msgid "Anacron a periodic command scheduler."
@@ -7020,6 +7045,8 @@ msgid ""
 "HardDrake runs a hardware probe, and optionally configures\n"
 "new/changed hardware."
 msgstr ""
+"HardDrake kjører et maskinvaresøk, og kan konfigurere ny/endret\n"
+"maskinvare."
 
 #: ../../services.pm_.c:30
 msgid ""
@@ -7050,6 +7077,8 @@ msgid ""
 "Launch packet filtering for Linux kernel 2.2 series, to set\n"
 "up a firewall to protect your machine from network attacks."
 msgstr ""
+"Start pakkefiltrering for Linux kjerne 2.2 serien for å sette\n"
+"opp en brannmur for å beskytte maskinen din fra nettverksangrep."
 
 #: ../../services.pm_.c:38
 msgid ""
@@ -7067,16 +7096,20 @@ msgid ""
 "Automatic regeneration of kernel header in /boot for\n"
 "/usr/include/linux/{autoconf,version}.h"
 msgstr ""
+"Automatisk regenerering av kjernehode i /boot for\n"
+"/usr/include/linux/{autoconf,version}.h"
 
 #: ../../services.pm_.c:43
 msgid "Automatic detection and configuration of hardware at boot."
-msgstr ""
+msgstr "automatisk oppdagelse og konfigurering av maskinvare ved oppstart."
 
 #: ../../services.pm_.c:44
 msgid ""
 "Linuxconf will sometimes arrange to perform various tasks\n"
 "at boot-time to maintain the system configuration."
 msgstr ""
+"Linuxconf vil noen ganger arrangere utførelse av forskjellige\n"
+"oppgaver ved oppstart for å vedlikeholde systemkonfigurasjon."
 
 #: ../../services.pm_.c:46
 msgid ""
@@ -7091,6 +7124,8 @@ msgid ""
 "Linux Virtual Server, used to build a high-performance and highly\n"
 "available server."
 msgstr ""
+"Linux Virtual Server, brukt for å bygge en tjener med høy ytelse og\n"
+"tilgjengelighet."
 
 #: ../../services.pm_.c:50
 msgid ""
@@ -7139,10 +7174,12 @@ msgid ""
 "Automatically switch on numlock key locker under console\n"
 "and XFree at boot."
 msgstr ""
+"Slår automatisk på numlock-tast i konsoll og XFree ved\n"
+"oppstart."
 
 #: ../../services.pm_.c:63
 msgid "Support the OKI 4w and compatible winprinters."
-msgstr ""
+msgstr "Støtter OKI 4w og kompatible winskrivere."
 
 #: ../../services.pm_.c:64
 msgid ""
@@ -7188,6 +7225,8 @@ msgid ""
 "Assign raw devices to block devices (such as hard drive\n"
 "partitions), for the use of applications such as Oracle"
 msgstr ""
+"Tilordne rå enheter til blokkenheter (som harddisk-\n"
+"partisjoner) for bruk av applikasjoner som Oracle"
 
 #: ../../services.pm_.c:76
 msgid ""
@@ -7225,9 +7264,8 @@ msgstr ""
 "som er logget på en maskin som kjører rwho-daemonen (lik finger)."
 
 #: ../../services.pm_.c:85
-#, fuzzy
 msgid "Launch the sound system on your machine"
-msgstr "Start W-Windowsystemet ved oppstart"
+msgstr "Start lydsystemet på maskinen din"
 
 #: ../../services.pm_.c:86
 msgid ""
@@ -7239,13 +7277,12 @@ msgstr ""
 
 #: ../../services.pm_.c:88
 msgid "Load the drivers for your usb devices."
-msgstr ""
+msgstr "Last driverene for dine usb enheter."
 
 #: ../../services.pm_.c:89
-#, fuzzy
 msgid "Starts the X Font Server (this is mandatory for XFree to run)."
 msgstr ""
-"Starter og stopper X-font tjeneren ved oppstart og stenging av maskinen."
+"Starter X-font tjeneren (dette er obligatorisk for at XFree skal kjøre)."
 
 #: ../../services.pm_.c:118
 msgid "Choose which services should be automatically started at boot time"
@@ -7360,7 +7397,6 @@ msgid "Unrecognized config file"
 msgstr "Ukjent konfigurasjonsfil"
 
 #: ../../standalone/drakgw_.c:181
-#, fuzzy
 msgid ""
 "You are about to configure your computer to share its Internet connection.\n"
 "With that feature, other computers on your local network will be able to use "
@@ -7371,6 +7407,8 @@ msgid ""
 msgstr ""
 "Du er i ferd med å konfigurere maskinen din til å dele "
 "Internett-tilkobling.\n"
+"Andre maskiner i nettverket ditt vil da kunne bruke denne maskinens "
+"Internett tilkobling.\n"
 "\n"
 "Merk: du trenger et dedikert nettverksadapter for å sette opp et lokalt "
 "nettverk (LAN)."
@@ -7482,12 +7520,11 @@ msgid "No Internet Connection Sharing has ever been configured."
 msgstr "Deling av Internett tilkobling har aldri blitt konfigurert."
 
 #: ../../standalone/drakgw_.c:615
-#, fuzzy
 msgid "Internet connection sharing configuration"
-msgstr "Internett tilkobling & konfigurasjon"
+msgstr "Internett deling av tilkobling konfigurasjon"
 
 #: ../../standalone/drakgw_.c:622
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Welcome to the Internet Connection Sharing utility!\n"
 "\n"
@@ -7499,7 +7536,7 @@ msgstr ""
 "\n"
 "%s\n"
 "\n"
-"Klikk på ``Ok'' hvis du ønsker å starte oppsett-hjelperen."
+"Klikk på Konfigurer for å starte oppsett-hjelperen."
 
 #: ../../standalone/draknet_.c:59
 #, c-format
@@ -7570,9 +7607,8 @@ msgid "Disconnect..."
 msgstr "Koble fra..."
 
 #: ../../standalone/draknet_.c:191
-#, fuzzy
 msgid "Starting your connection..."
-msgstr "Tester tilkoblingen din..."
+msgstr "Starter tilkoblingen din..."
 
 #: ../../standalone/draknet_.c:199
 msgid "Closing your connection..."
@@ -7615,7 +7651,6 @@ msgid "Interface"
 msgstr "rensesnitt"
 
 #: ../../standalone/draknet_.c:231
-#, fuzzy
 msgid "Protocol"
 msgstr "Protokoll"
 
@@ -7633,7 +7668,7 @@ msgstr "Vennligst vent . . . Setter konfigurasjonen på plass"
 
 #: ../../standalone/draknet_.c:305
 msgid "Apply"
-msgstr ""
+msgstr "Bruk"
 
 #: ../../standalone/draknet_.c:389
 msgid "LAN Configuration"
@@ -7806,79 +7841,72 @@ msgid "Emulate third button?"
 msgstr "Emulere tredje knapp?"
 
 #: ../../standalone/net_monitor_.c:40 ../../standalone/net_monitor_.c:52
-#, fuzzy
 msgid "Network Monitoring"
-msgstr "Nettverkskonfigurasjon"
+msgstr "Nettverksovervåking"
 
 #: ../../standalone/net_monitor_.c:56
 msgid "Statistics"
-msgstr ""
+msgstr "Statistikk"
 
 #: ../../standalone/net_monitor_.c:59
 msgid "Sending Speed: "
-msgstr ""
+msgstr "Sendehastighet: "
 
 #: ../../standalone/net_monitor_.c:61
 msgid "Receiving Speed: "
-msgstr ""
+msgstr "Mottakshastighet: "
 
 #: ../../standalone/net_monitor_.c:66
-#, fuzzy
 msgid "Close"
-msgstr "Mus"
+msgstr "Lukk"
 
 #: ../../standalone/net_monitor_.c:100 ../../standalone/net_monitor_.c:104
-#, fuzzy
 msgid "Connecting to Internet "
-msgstr "Koble opp mot Internett"
+msgstr "Kobler opp mot Internett "
 
 #: ../../standalone/net_monitor_.c:100 ../../standalone/net_monitor_.c:104
-#, fuzzy
 msgid "Disconnecting from Internet "
-msgstr "Koble ned fra Internett"
+msgstr "Kobler ned fra Internett "
 
 #: ../../standalone/net_monitor_.c:114
-#, fuzzy
 msgid "Disconnection from Internet failed."
-msgstr "Koble ned fra Internett"
+msgstr "Nedkobling fra Internett mislykket."
 
 #: ../../standalone/net_monitor_.c:115
-#, fuzzy
 msgid "Disconnection from Internet complete."
-msgstr "Koble ned fra Internett"
+msgstr "Nedkobling fra Internett ferdig."
 
 #: ../../standalone/net_monitor_.c:117
-#, fuzzy
 msgid "Connection complete."
-msgstr "Navn tilknytning"
+msgstr "Tilkobling ferdig."
 
 #: ../../standalone/net_monitor_.c:118
 msgid ""
 "Connection failed.\n"
 "Verify your configuration in the Mandrake Control Center."
 msgstr ""
+"Tilkoblinhg mislykket.\n"
+"Verifiser konfigurasjonen din i Mandrake kontrollsenter."
 
 #: ../../standalone/net_monitor_.c:132
 msgid "cannot fork: "
-msgstr ""
+msgstr "kan ikke dele: "
 
 #: ../../standalone/net_monitor_.c:192
 msgid "sent: "
-msgstr ""
+msgstr "sendt: "
 
 #: ../../standalone/net_monitor_.c:195
 msgid "received: "
-msgstr ""
+msgstr "mottatt: "
 
 #: ../../standalone/net_monitor_.c:226
-#, fuzzy
 msgid "Connect"
-msgstr "Tilkoblet"
+msgstr "Tilkoble"
 
 #: ../../standalone/net_monitor_.c:226
-#, fuzzy
 msgid "Disconnect"
-msgstr "Koble fra..."
+msgstr "Koble fra"
 
 #: ../../standalone/tinyfirewall_.c:29
 msgid "Firewalling Configuration"
@@ -8067,28 +8095,26 @@ msgstr ""
 "\n"
 
 #: ../../tinyfirewall.pm_.c:83
-#, fuzzy, c-format
+#, c-format
 msgid "Can't open %s: %s\n"
-msgstr "Adapter %s: %s"
+msgstr "Kan ikke åpne %s: %s\n"
 
 #: ../../tinyfirewall.pm_.c:85
-#, fuzzy, c-format
+#, c-format
 msgid "Can't open %s for writing: %s\n"
-msgstr "Feil ved åpning av %s for skriving: %s"
+msgstr "Kan ikke åpne %s for skriving: %s\n"
 
 #: ../../share/compssUsers:999
 msgid "Clients for different protocols including ssh"
 msgstr "Klienter for forskjellige protokoller inkludert ssh"
 
 #: ../../share/compssUsers:999
-#, fuzzy
 msgid "Development"
-msgstr "Utvikling, Web"
+msgstr "Utvikling"
 
 #: ../../share/compssUsers:999
-#, fuzzy
 msgid "Workstation"
-msgstr "KDE arbeidstasjon"
+msgstr "Arbeidstasjon"
 
 #: ../../share/compssUsers:999
 msgid "Firewall/Router"
@@ -8140,7 +8166,7 @@ msgstr "C og C++ utviklingsbibliotek, programmer og include filer"
 
 #: ../../share/compssUsers:999
 msgid "Domain Name and Network Information Server"
-msgstr ""
+msgstr "Tjener for domenenavn og nettverksinformasjon"
 
 #: ../../share/compssUsers:999
 msgid "Programs to manage your finance, such as gnucash"
@@ -8148,7 +8174,7 @@ msgstr "Programmer for å håndtere dine finanser, så som gnucash"
 
 #: ../../share/compssUsers:999
 msgid "PostgreSQL or MySQL database server"
-msgstr ""
+msgstr "PostgreSQL eller MySQL database tjener"
 
 #: ../../share/compssUsers:999
 msgid "NFS server, SMB server, Proxy server, ssh server"
@@ -8172,7 +8198,7 @@ msgstr "DNS/NIS"
 
 #: ../../share/compssUsers:999
 msgid "Graphical Environment"
-msgstr ""
+msgstr "Grafisk miljø"
 
 #: ../../share/compssUsers:999
 msgid "Multimedia - Sound"
@@ -8216,7 +8242,7 @@ msgstr ""
 
 #: ../../share/compssUsers:999
 msgid "Postfix mail server, Inn news server"
-msgstr ""
+msgstr "Postfix posttjener, Inn nyhetstjener"
 
 #: ../../share/compssUsers:999
 msgid "Games"
@@ -8227,9 +8253,8 @@ msgid "Multimedia - Video"
 msgstr "Multimedia - Video"
 
 #: ../../share/compssUsers:999
-#, fuzzy
 msgid "Network Computer server"
-msgstr "Nettverk filtjener"
+msgstr "Nettverk datamaskintjener"
 
 #: ../../share/compssUsers:999
 msgid "Graphics programs such as The Gimp"
@@ -8264,7 +8289,7 @@ msgstr "Arkivering, emulatorer, overvåkning"
 
 #: ../../share/compssUsers:999
 msgid "Database"
-msgstr "Server, Database"
+msgstr "Database"
 
 #: ../../share/compssUsers:999
 msgid ""
@@ -8276,12 +8301,11 @@ msgstr ""
 
 #: ../../share/compssUsers:999
 msgid "Web/FTP"
-msgstr "Server, Web/FTP"
+msgstr "Web/FTP"
 
 #: ../../share/compssUsers:999
-#, fuzzy
 msgid "Server"
-msgstr "server"
+msgstr "Tjener"
 
 #: ../../share/compssUsers:999
 msgid "Personal Finance"
@@ -8312,9 +8336,8 @@ msgid "Gnome Workstation"
 msgstr "Gnome arbeidstasjon"
 
 #: ../../share/compssUsers:999
-#, fuzzy
 msgid "Internet gateway"
-msgstr "Internett-tilgang"
+msgstr "Internett-gateway"
 
 #: ../../share/compssUsers:999
 msgid "Tools for your Palm Pilot or your Visor"
@@ -8336,9 +8359,8 @@ msgstr "Verktøy for å forenkle konfigurasjonen på maskinen din"
 msgid "Set of tools for mail, news, web, file transfer, and chat"
 msgstr "Sett med verktøy for e-post, nyheter, web, filoverføring og chat"
 
-#, fuzzy
 #~ msgid "Lilo/Grub configuration"
-#~ msgstr "LAN-konfigurasjon"
+#~ msgstr "Lilo/Grub konfigurasjon"
 
 #~ msgid "Selected size %d%s"
 #~ msgstr "Valgt størrelse %d%s"
@@ -8352,9 +8374,8 @@ msgstr "Sett med verktøy for e-post, nyheter, web, filoverføring og chat"
 #~ msgid "Standard tools"
 #~ msgstr "Standard verktøy"
 
-#, fuzzy
 #~ msgid "Configuration de Lilo/Grub"
-#~ msgstr "Konfigurasjon"
+#~ msgstr "Konfigurasjon Lilo/Grub"
 
 #~ msgid "This startup script try to load your modules for your usb mouse."
 #~ msgstr "Dette oppstartsscriptet prøver å laste modulene for usb-musen din."
@@ -8377,9 +8398,8 @@ msgstr "Sett med verktøy for e-post, nyheter, web, filoverføring og chat"
 #~ "\n"
 #~ "Ønsker du å sette opp deling av Internett-tilknytning?\n"
 
-#, fuzzy
 #~ msgid "Welcome to the Internet Connection Sharing utility!"
-#~ msgstr "Deling av Internett tilkobling"
+#~ msgstr "Velkommen til verktøyet for deling av Internett tilkobling!"
 
 #~ msgid "Automatic dependencies"
 #~ msgstr "Avhengigheter automatisk"
