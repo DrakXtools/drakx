@@ -192,7 +192,7 @@ sub removeFromList($$$) {
 	    $end > $list->[$i + 1] and die $err;
 	    if ($end == $list->[$i + 1]) {
 		#- the free block is just the same size, removing it
-		splice(@$list, 0, 2);
+		splice(@$list, $i, 2);
 	    } else {
 		#- the free block now start just after this block
 		$list->[$i] = $end;

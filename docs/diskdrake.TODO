@@ -5,7 +5,6 @@
 - the information put in save/restore partitions must be cleaned
 (remove mounted/formatted/..., also remove the Data::Dumper dependency)
 - test, test, test
-- integrate ext2resize
 - do not allow swap partitions above 2Gigs
 - wanting the first partition to be extended is not used
 - maybe warn if a mounted partition change of dev number
@@ -13,7 +12,6 @@
 - better error handling (what to do if we find a bad partition table?)
 - display the information about the correspondance color2type
 - handle the partition labels (missing information here)
-- have ``undo''
 - add comments in the code
 - add documentation
 - handle the `luke' case (main extended partition must be extended)

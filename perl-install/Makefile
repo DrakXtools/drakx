@@ -38,8 +38,8 @@ floppy:
 tar-diskdrake: clean pci_probing
 	cd .. ; rm -rf diskdrake ; cp -af perl-install diskdrake
 
-	l=`./perl2fcalls -uses -excludec diskdrake | sort | uniq | sed -e 's/::/\//' -e 's/^/diskdrake\//' -e 's/$$/.pm/'` ; \
-	cd .. ; tar cfz diskdrake.tgz --exclude CVS $(patsubst %,diskdrake/%,c po diskdrake*) $$l
+	l=`./perl2fcalls -uses -excludec -excluderesize_fat::c_rewritten diskdrake | sort | uniq | grep -v "^resize_fat::" | sed -e 's/::/\//' -e 's/^/diskdrake\//' -e 's/$$/.pm/'` ; \
+	cd .. ; tar cfz diskdrake.tgz --exclude CVS $(patsubst %,diskdrake/%,c c.pm resize_fat po diskdrake*) $$l
 
 tar-XFdrake: clean
 	cd .. ; rm -rf XFdrake ; cp -af perl-install XFdrake
@@ -52,7 +52,7 @@ $(DIRS):
 	$(MAKE) -C $@
 
 test_pms: verify_c
-	./perl2fcalls -excludec install2
+	./perl2fcalls -excludec -excluderesize_fat::c_rewritten install2
 	perl -cw -I. -Ic -Ic/blib/arch install2
 	perl -cw -I. -Ic -Ic/blib/arch install_steps_graphical.pm
 
@@ -78,7 +78,6 @@ install_pms: $(DIRS)
 		perl -ne 'print' $$i > $(DESTREP4PMS)/$$i; \
 	done
 #		perl -ne 's/\s*#-.*//; print unless (/^=head/ .. /^=cut/) || /use (diagnostics|vars|strict)/' $$i > $(DESTREP4PMS)/$$i; \
-# /
 
 	cp *.rc $(DESTREP4PMS)
 	install -d $(DESTREP4PMS)/po
