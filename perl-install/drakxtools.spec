@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 9.2
-Release: 0.18mdk
+Release: 0.19mdk
 Url: http://www.mandrakelinux.com/en/drakx.php2
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -310,6 +310,26 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Mon Jul 21 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.2-0.19mdk
+- diskdrake, drakconnect: add an help button in standalone mode
+- draksec
+  o describe all security levels
+  o make it clean than security admin is not a security level
+  o colorize security levels names
+  o do not offer to set syadmin when reports are disabled
+  o fix infamous "when embedded draksec can be enlarged but never shrink back"
+  o make 1st tab title somewhat clearer
+- harddrake2: workaround buggy gtk+-2.x that do not enable wrapping textviews when
+  realized
+- renew drakconnect wizard gui (2/x):
+  o make previous button always be availlable when configuring lan
+  o keep user changes when going back to main connection types menu
+  o do not loop if one refuse to save changes, just skip the save step
+  o fix final success message
+  o really translate type connection to be translated
+  o try to get more space on screen
+  o dhcp host name cannot be set if one want to get it from dhcp server
+
 * Sat Jul 19 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.2-0.18mdk
 - draksec:
   o sort functions & checks when writing configuration
@@ -323,7 +343,7 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 * Thu Jul 17 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.2-0.16mdk
 - do not exit the whole application when one destroy a dialog
 - drop gtk+1 requires
-- renew drakconnect gui:
+- renew drakconnect gui (1/x):
   o embedded mode:
     * remove ugly icon
     * fix internet gateway buttons layout
