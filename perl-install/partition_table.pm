@@ -16,11 +16,12 @@ use partition_table::raw;
 use detect_devices;
 use log;
 
-@important_types = ('Linux native', 'Linux swap', 
-		    if_(arch() =~ /i.86/, 'Journalised FS: ext3', 'Journalised FS: ReiserFS', 'Journalised FS: JFS', 'Journalised FS: XFS', 'DOS FAT16', 'FAT32'),
-			if_(arch() =~ /ia64/, 'Journalised FS: ext3', 'Journalised FS: ReiserFS', 'Journalised FS: XFS', 'FAT32'),
-			if_(arch() =~ /x86_64/, 'Journalised FS: ext3', 'Journalised FS: ReiserFS', 'FAT32'),
-		    if_(arch() =~ /ppc/, 'Journalised FS: ext3', 'Journalised FS: ReiserFS', 'Journalised FS: JFS', 'Journalised FS: XFS', 'Apple HFS Partition', 'Apple Bootstrap'));
+@important_types = ('Linux native', 'Linux swap', 'Journalised FS: ext3', 'Journalised FS: ReiserFS',
+		    if_(arch() =~ /ppc/, 'Journalised FS: JFS', 'Journalised FS: XFS', 'Apple HFS Partition', 'Apple Bootstrap'),
+		    if_(arch() =~ /i.86/, 'Journalised FS: JFS', 'Journalised FS: XFS', 'DOS FAT16', 'FAT32'),
+		    if_(arch() =~ /ia64/, 'Journalised FS: XFS', 'FAT32'),
+		    if_(arch() =~ /x86_64/, 'FAT32'),
+		   );
 @important_types2 = ('Linux RAID', 'Linux Logical Volume Manager partition');
 
 @fields2save = qw(primary extended totalsectors isDirty will_tell_kernel);
