@@ -52,9 +52,9 @@ $button_time->signal_connect(clicked => sub {
 
 my $drawing_area;
 
-my $adj_h = Gtk2::Adjustment->new(0.0, 0.0, 23.0, 1.0, 5.0, 0.0);
-my $adj_m = Gtk2::Adjustment->new(0.0, 0.0, 59.0, 1.0, 5.0, 0.0);
-my $adj_s = Gtk2::Adjustment->new(0.0, 0.0, 59.0, 1.0, 5.0, 0.0);
+my $adjh = Gtk2::Adjustment->new(0.0, 0.0, 23.0, 1.0, 5.0, 0.0);
+my $adjm = Gtk2::Adjustment->new(0.0, 0.0, 59.0, 1.0, 5.0, 0.0);
+my $adjs = Gtk2::Adjustment->new(0.0, 0.0, 59.0, 1.0, 5.0, 0.0);
 
 my ($button_reset, $check_ntp, $hb_ntp, $combo_ntpserver, $fullntp, $ntp);
 my $mode = 0;
@@ -89,9 +89,9 @@ $my_win->{window}->add(gtkpack_(Gtk2::VBox->new(0,0),
                                                                     ),
                                                         0, gtkpack_(Gtk2::HBox->new(1,0),
                                                                     0, Gtk2::HBox->new(1,0),
-                                                                    0, my $spinner_h = Gtk2::SpinButton->new($adj_h, 0, 0),
-                                                                    0, my $spinner_m = Gtk2::SpinButton->new($adj_m, 0, 0),
-                                                                    0, my $spinner_s = Gtk2::SpinButton->new($adj_s, 0, 0),
+                                                                    0, my $spinner_h = Gtk2::SpinButton->new($adjh, 0, 0),
+                                                                    0, my $spinner_m = Gtk2::SpinButton->new($adjm, 0, 0),
+                                                                    0, my $spinner_s = Gtk2::SpinButton->new($adjs, 0, 0),
                                                                     ),
                                                         ),
                                             ),
@@ -113,7 +113,7 @@ $my_win->{window}->add(gtkpack_(Gtk2::VBox->new(0,0),
 									   }
 									   my ($year, $month, $day) = $calendar->get_date;
 									   $month++;
-									   my ($hour, $min, $sec) = ($adj_h->get_value, $adj_m->get_value, $adj_s->get_value);
+									   my ($hour, $min, $sec) = ($adjh->get_value, $adjm->get_value, $adjs->get_value);
 									   system("date " .
 										  join('', map { print_it0($_) } ($month, $day, $hour, $min, $year)) . '.' . print_it0($sec));
 									   -e '/sbin/hwclock' and system('/sbin/hwclock --systohc');
@@ -220,7 +220,7 @@ sub cal_changed() {
 }
 
 sub changed() {
-  my $val   = $adj_h->get_value;
+  my $val   = $adjh->get_value;
   my $limit = ($is24 ? 18 : 6);
   if (($limit > $val  &&  $h_old > $limit  &&  $h_old < ($is24 ? 24 : 12)) ||
       ($limit < $val  &&  $h_old < $limit  &&  $val-$h_old != 12)) {
@@ -234,7 +234,7 @@ sub spinned() {
     $button_reset->set_sensitive(1);
 
     my (undef, undef, undef, @values) = localtime(time());
-    time_to_rad($adj_s->get_value, $adj_m->get_value, $adj_h->get_value, @values);
+    time_to_rad($adjs->get_value, $adjm->get_value, $adjh->get_value, @values);
     Repaint($drawing_area);
     0;
 }
@@ -276,9 +276,9 @@ sub expose_event {
 }
 
 sub rad_to_time() {
-    $adj_h->set_value(POSIX::floor($dRadians_hour * 6 / $PI) + ($is24 ? 12 : 0));
-    $adj_m->set_value(POSIX::floor($dRadians_min*30/$PI));
-    $adj_s->set_value(POSIX::floor($dRadians_sec*30/$PI));
+    $adjh->set_value(POSIX::floor($dRadians_hour * 6 / $PI) + ($is24 ? 12 : 0));
+    $adjm->set_value(POSIX::floor($dRadians_min*30/$PI));
+    $adjs->set_value(POSIX::floor($dRadians_sec*30/$PI));
 }
 
 sub time_to_rad {
@@ -286,9 +286,9 @@ sub time_to_rad {
     $dRadians_hour = $hour % 12 * $PI / 6;
     $dRadians_min = $min * $PI / 30;
     $dRadians_sec = $sec * $PI / 30;
-    $adj_h->set_value($hour);
-    $adj_m->set_value($min);
-    $adj_s->set_value($sec);
+    $adjh->set_value($hour);
+    $adjm->set_value($min);
+    $adjs->set_value($sec);
 }
 
 sub Repaint {
