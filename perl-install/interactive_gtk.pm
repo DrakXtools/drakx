@@ -141,10 +141,13 @@ sub create_ctree {
     $tree->signal_connect(tree_select_row => sub { 
 	$curr = $_[1]; 
 	$curr->row->is_leaf or return;
-	my @l; for (my $c = $curr; $c; $c = $c->row->parent) { 
-	    unshift @l, first $tree->node_get_pixtext($c, 0);
+	my @ll; for (my $c = $curr; $c; $c = $c->row->parent) { 
+	    unshift @ll, first $tree->node_get_pixtext($c, 0);
 	}
-	${$e->{val}} = join $e->{separator}, @l;
+	my $val = join $e->{separator}, @ll;
+	mapn {
+	    ${$e->{val}} = $_[1] if $val eq $_[0]
+	} \@l, $e->{list};
 	&$changed;
     });
 #    $tree->signal_connect(button_press_event => sub { &$leave if $_[1]{type} =~ /^2/ });
