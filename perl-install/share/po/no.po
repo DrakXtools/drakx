@@ -759,7 +759,7 @@ msgstr ""
 # leave it in English, as it is the best for your language)
 # 
 #: ../../bootloader.pm_.c:234
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Welcome to %s the operating system chooser!\n"
 "\n"
@@ -769,10 +769,8 @@ msgid ""
 msgstr ""
 "Velkommen til %s, operativsystem-velgeren!\n"
 "\n"
-"For aa se mulige valg, trykk <TAB>\n"
-"\n"
-"For aa laste en av disse, skriv inn navnet og trykk <ENTER>\n"
-"eller vent %d sekunder for standard oppstart.\n"
+"Velg et operativsystem fra listen over eller\n"
+"vent %d sekunder for standard oppstart.\n"
 "\n"
 
 # NOTE: this message will be displayed by grub at boot time; that is
@@ -3579,9 +3577,8 @@ msgstr ""
 "Når du er ferdig ikke glem å lagre med `w'"
 
 #: ../../install_interactive.pm_.c:195
-#, fuzzy
 msgid "You don't have enough free space on your Windows partition"
-msgstr "Bruk den ledige plassen på Windows partisjonen"
+msgstr "Du har ikke nok ledig plass på Windows partisjonen din"
 
 #: ../../install_interactive.pm_.c:210
 msgid "I can't find any room for installing"
@@ -3589,7 +3586,7 @@ msgstr "Jeg kan ikke finne noe rom for installering"
 
 #: ../../install_interactive.pm_.c:213
 msgid "The DrakX Partitioning wizard found the following solutions:"
-msgstr "DrakX partisjonsveiviseren fant disse løsningene:"
+msgstr "DrakX partisjonsveiviseren fant følgende løsninger:"
 
 #: ../../install_interactive.pm_.c:218
 #, c-format
@@ -3900,6 +3897,34 @@ msgid ""
 "respective authors and are protected by intellectual property and \n"
 "copyright laws applicable to software programs.\n"
 msgstr ""
+"\n"
+"Warning\n"
+"\n"
+"Please read carefully the terms below. If you disagree with any\n"
+"portion, you are not allowed to install the next CD media. Press 'Refuse' \n"
+"to continue the installation without using these media.\n"
+"\n"
+"\n"
+"Some components contained in the next CD media are not governed\n"
+"by the GPL License or similar agreements. Each such component is then\n"
+"governed by the terms and conditions of its own specific license. \n"
+"Please read carefully and comply with such specific licenses before \n"
+"you use or redistribute the said components. \n"
+"Such licenses will in general prevent the transfer,  duplication \n"
+"(except for backup purposes), redistribution, reverse engineering, \n"
+"de-assembly, de-compilation or modification of the component. \n"
+"Any breach of agreement will immediately terminate your rights under \n"
+"the specific license. Unless the specific license terms grant you such\n"
+"rights, you usually cannot install the programs on more than one\n"
+"system, or adapt it to be used on a network. In doubt, please contact \n"
+"directly the distributor or editor of the component. \n"
+"Transfer to third parties or copying of such components including the \n"
+"documentation is usually forbidden.\n"
+"\n"
+"\n"
+"All rights to the components of the next CD media belong to their \n"
+"respective authors and are protected by intellectual property and \n"
+"copyright laws applicable to software programs.\n"
 
 #: ../../install_steps_gtk.pm_.c:559 ../../install_steps_interactive.pm_.c:147
 msgid "Accept"
@@ -4060,6 +4085,123 @@ msgid ""
 "Paris - France.\n"
 "For any question on this document, please contact MandrakeSoft S.A.  \n"
 msgstr ""
+"Introduction\n"
+"\n"
+"The operating system and the different components available in the "
+"Linux-Mandrake distribution \n"
+"shall be called the \"Software Products\" hereafter. The Software Products "
+"include, but are not \n"
+"restricted to, the set of programs, methods, rules and documentation related "
+"to the operating \n"
+"system and the different components of the Linux-Mandrake distribution.\n"
+"\n"
+"\n"
+"1. License Agreement\n"
+"\n"
+"Please read carefully this document. This document is a license agreement "
+"between you and  \n"
+"MandrakeSoft S.A. which applies to the Software Products.\n"
+"By installing, duplicating or using the Software Products in any manner, you "
+"explicitly \n"
+"accept and fully agree to conform to the terms and conditions of this "
+"License. \n"
+"If you disagree with any portion of the License, you are not allowed to "
+"install, duplicate or use \n"
+"the Software Products. \n"
+"Any attempt to install, duplicate or use the Software Products in a manner "
+"which does not comply \n"
+"with the terms and conditions of this License is void and will terminate "
+"your rights under this \n"
+"License. Upon termination of the License,  you must immediately destroy all "
+"copies of the \n"
+"Software Products.\n"
+"\n"
+"\n"
+"2. Limited Warranty\n"
+"\n"
+"The Software Products and attached documentation are provided \"as is\", "
+"with no warranty, to the \n"
+"extent permitted by law.\n"
+"MandrakeSoft S.A. will, in no circumstances and to the extent permitted by "
+"law, be liable for any special,\n"
+"incidental, direct or indirect damages whatsoever (including without "
+"limitation damages for loss of \n"
+"business, interruption of business, financial loss, legal fees and penalties "
+"resulting from a court \n"
+"judgment, or any other consequential loss) arising out of  the use or "
+"inability to use the Software \n"
+"Products, even if MandrakeSoft S.A. has been advised of the possibility or "
+"occurance of such \n"
+"damages.\n"
+"\n"
+"LIMITED LIABILITY LINKED TO POSSESSING OR USING PROHIBITED SOFTWARE IN SOME "
+"COUNTRIES\n"
+"\n"
+"To the extent permitted by law, MandrakeSoft S.A. or its distributors will, "
+"in no circumstances, be \n"
+"liable for any special, incidental, direct or indirect damages whatsoever "
+"(including without \n"
+"limitation damages for loss of business, interruption of business, financial "
+"loss, legal fees \n"
+"and penalties resulting from a court judgment, or any other consequential "
+"loss) arising out \n"
+"of the possession and use of software components or arising out of  "
+"downloading software components \n"
+"from one of Linux-Mandrake sites  which are prohibited or restricted in some "
+"countries by local laws.\n"
+"This limited liability applies to, but is not restricted to, the strong "
+"cryptography components \n"
+"included in the Software Products.\n"
+"\n"
+"\n"
+"3. The GPL License and Related Licenses\n"
+"\n"
+"The Software Products consist of components created by different persons or "
+"entities.  Most \n"
+"of these components are governed under the terms and conditions of the GNU "
+"General Public \n"
+"Licence, hereafter called \"GPL\", or of similar licenses. Most of these "
+"licenses allow you to use, \n"
+"duplicate, adapt or redistribute the components which they cover. Please "
+"read carefully the terms \n"
+"and conditions of the license agreement for each component before using any "
+"component. Any question \n"
+"on a component license should be addressed to the component author and not "
+"to MandrakeSoft.\n"
+"The programs developed by MandrakeSoft S.A. are governed by the GPL License. "
+"Documentation written \n"
+"by MandrakeSoft S.A. is governed by a specific license. Please refer to the "
+"documentation for \n"
+"further details.\n"
+"\n"
+"\n"
+"4. Intellectual Property Rights\n"
+"\n"
+"All rights to the components of the Software Products belong to their "
+"respective authors and are \n"
+"protected by intellectual property and copyright laws applicable to software "
+"programs.\n"
+"MandrakeSoft S.A. reserves its rights to modify or adapt the Software "
+"Products, as a whole or in \n"
+"parts, by all means and for all purposes.\n"
+"\"Mandrake\", \"Linux-Mandrake\" and associated logos are trademarks of "
+"MandrakeSoft S.A.  \n"
+"\n"
+"\n"
+"5. Governing Laws \n"
+"\n"
+"If any portion of this agreement is held void, illegal or inapplicable by a "
+"court judgment, this \n"
+"portion is excluded from this contract. You remain bound by the other "
+"applicable sections of the \n"
+"agreement.\n"
+"The terms and conditions of this License are governed by the Laws of "
+"France.\n"
+"All disputes on the terms of this license will preferably be settled out of "
+"court. As a last \n"
+"resort, the dispute will be referred to the appropriate Courts of Law of "
+"Paris - France.\n"
+"For any question on this document, please contact MandrakeSoft S.A.  \n"
 
 #: ../../install_steps_interactive.pm_.c:154
 #: ../../standalone/keyboarddrake_.c:21
@@ -5166,26 +5308,24 @@ msgid "Do you want to try to connect to the Internet now?"
 msgstr "Vil du prøve å koble opp mot Internett nå?"
 
 #: ../../netconnect.pm_.c:101
-#, fuzzy
 msgid "Testing your connection..."
-msgstr ""
-"\n"
-"Du kan rekonfigurere tilkoblingen din."
+msgstr "Tester tilkoblingen din..."
 
 #: ../../netconnect.pm_.c:106
 msgid ""
 "The system is now connected to Internet! Congratulation.\n"
 "Feel free to launch draknet at any time to setup your connection.\n"
 msgstr ""
+"Systemet er nå koblet til Internett! Gratulerer.\n"
+"Bruk draknet når du vil for å sette opp tilkoblingen din.\n"
 
 #: ../../netconnect.pm_.c:108
-#, fuzzy
 msgid ""
 "The system doesn't seem to be connected to internet.\n"
 "Try to reconfigure your connection."
 msgstr ""
-"\n"
-"Du kan koble opp mot Internett eller rekonfigurere tilkoblingen din."
+"Det ser ikke ut til at systemet er koblet til Internett.\n"
+"Prøv å rekonfigurere tilkoblingen din."
 
 #: ../../netconnect.pm_.c:142 ../../netconnect.pm_.c:214
 #: ../../netconnect.pm_.c:233 ../../netconnect.pm_.c:245
@@ -5199,7 +5339,7 @@ msgid ""
 " If it's not in the list, choose Unlisted"
 msgstr ""
 "Velg din tilbyder.\n"
-" Hvis den ikke er i listen, velg ikke i listen"
+" Hvis denne ikke er i listen, velg ikke i listen"
 
 #: ../../netconnect.pm_.c:159
 msgid "Connection Configuration"
@@ -5347,7 +5487,7 @@ msgid ""
 "I cannot set up this connection type."
 msgstr ""
 "Ikke noe ethernet nettverksadapter har blitt oppdaget i systemet ditt.\n"
-"Jeg kann ikke sette opp denne tilkoblingstypen."
+"Jeg kan ikke sette opp denne tilkoblingstypen."
 
 #: ../../netconnect.pm_.c:336 ../../standalone/drakgw_.c:222
 msgid "Choose the network interface"
@@ -5370,11 +5510,12 @@ msgid ""
 "\n"
 "Do you agree?"
 msgstr ""
+"\n"
+"Er du enig?"
 
 #: ../../netconnect.pm_.c:353
-#, fuzzy
 msgid "I'm about to restart the network device:\n"
-msgstr "Jeg er i ferd med å starte nettverksenhet $device på nytt. Er du enig?"
+msgstr "Jeg er i ferd med å starte denne nettverksenheten på nytt:\n"
 
 #: ../../netconnect.pm_.c:469
 msgid "ADSL configuration"
@@ -5477,9 +5618,8 @@ msgid "Disconnect from Internet"
 msgstr "Koble ned fra Internett"
 
 #: ../../netconnect.pm_.c:596
-#, fuzzy
 msgid "Configure network connection (LAN or Internet)"
-msgstr "Konfigurer Internett-tilkobling"
+msgstr "Konfigurer nettverk-tilkobling (LAN eller Internett)"
 
 #: ../../netconnect.pm_.c:599
 msgid "Internet connection & configuration"
@@ -5493,14 +5633,12 @@ msgstr ""
 "enig?"
 
 #: ../../netconnect.pm_.c:643
-#, fuzzy
 msgid "Configure a normal modem connection"
-msgstr "Konfigurer Internett-tilkobling"
+msgstr "Konfigurer en normal modem-tilkobling"
 
 #: ../../netconnect.pm_.c:662
-#, fuzzy
 msgid "Configure an ISDN connection"
-msgstr "Konfigurer Internett-tilkobling"
+msgstr "Konfigurer en ISDN-tilkobling"
 
 #: ../../netconnect.pm_.c:667
 msgid "Internal ISDN card"
@@ -5521,9 +5659,8 @@ msgid "What kind is your ISDN connection?"
 msgstr "Hva slags type er ISDN-tilknytningen din?"
 
 #: ../../netconnect.pm_.c:692
-#, fuzzy
 msgid "Configure a DSL (or ADSL) connection"
-msgstr "Konfigurer Internett-tilkobling"
+msgstr "Konfigurer en DSL- (eller ADSL) tilkobling"
 
 #: ../../netconnect.pm_.c:701
 msgid "France"
@@ -5568,9 +5705,8 @@ msgstr ""
 "Hvis du ikke vet, velg 'bruk pppoe'"
 
 #: ../../netconnect.pm_.c:766
-#, fuzzy
 msgid "Configure a cable connection"
-msgstr "Konfigurer Internett-tilkobling"
+msgstr "Konfigurer en kabel-tilkobling"
 
 #: ../../netconnect.pm_.c:788
 msgid ""
@@ -5589,23 +5725,20 @@ msgid "Configure local network"
 msgstr "Konfigurer lokalt nettverk"
 
 #: ../../netconnect.pm_.c:816
-#, fuzzy
 msgid "Network configuration"
 msgstr "Nettverkskonfigurasjon"
 
 #: ../../netconnect.pm_.c:817
-#, fuzzy
 msgid "Do you want to restart the network"
-msgstr "Vil du teste konfigurasjonen?"
+msgstr "Vil du starte nettverket på nytt"
 
 #: ../../netconnect.pm_.c:825
 msgid "Disable networking"
 msgstr "slå av nettverk"
 
 #: ../../netconnect.pm_.c:835
-#, fuzzy
 msgid "Configure the Internet connection / Configure local Network"
-msgstr "Koble opp mot Internett / Konfigurer lokalt nettverk"
+msgstr "Konfigurer Internett-tilkoblingen / Konfigurer lokalt nettverk"
 
 #: ../../netconnect.pm_.c:836
 msgid ""
@@ -6479,48 +6612,49 @@ msgid "Internet Connection Sharing currently enabled"
 msgstr "Deling av Internett tilkobling er slått på"
 
 #: ../../standalone/drakgw_.c:104
-#, fuzzy
 msgid ""
 "The setup of Internet connection sharing has already been done.\n"
 "It's currently enabled.\n"
 "\n"
 "What would you like to do?"
 msgstr ""
-"Innstilling av deling av Internett tilkobling har allerede blitt gjort.\n"
+"Oppsett av deling av Internett tilkobling har allerede blitt gjort.\n"
+"Dette er for øyeblikket slått på.\n"
+"\n"
+"Hva vil du gjøre?"
 
 #: ../../standalone/drakgw_.c:107 ../../standalone/drakgw_.c:108
-#, fuzzy
 msgid "disable"
-msgstr "Tabell"
+msgstr "slå av"
 
 #: ../../standalone/drakgw_.c:107 ../../standalone/drakgw_.c:118
 #: ../../standalone/drakgw_.c:126 ../../standalone/drakgw_.c:137
 msgid "dismiss"
-msgstr ""
+msgstr "avvis"
 
 #: ../../standalone/drakgw_.c:107 ../../standalone/drakgw_.c:126
-#, fuzzy
 msgid "reconfigure"
-msgstr "Konfigurer X"
+msgstr "Konfigurer på nytt"
 
 #: ../../standalone/drakgw_.c:122
 msgid "Internet Connection Sharing currently disabled"
 msgstr "Deling av Internett tilkobling er slått av"
 
 #: ../../standalone/drakgw_.c:123
-#, fuzzy
 msgid ""
 "The setup of Internet connection sharing has already been done.\n"
 "It's currently disabled.\n"
 "\n"
 "What would you like to do?"
 msgstr ""
-"Innstilling av deling av Internett tilkobling har allerede blitt gjort.\n"
+"Oppsett av deling av Internett tilkobling har allerede blitt gjort.\n"
+"Dette er for øyeblikket slått av.\n"
+"\n"
+"Hva vil du gjøre?"
 
 #: ../../standalone/drakgw_.c:126 ../../standalone/drakgw_.c:127
-#, fuzzy
 msgid "enable"
-msgstr "Tabell"
+msgstr "slå på"
 
 #: ../../standalone/drakgw_.c:141
 msgid "Config file content could not be interpreted."
@@ -6531,7 +6665,6 @@ msgid "Internet Connection Sharing"
 msgstr "Deling av Internett tilkobling"
 
 #: ../../standalone/drakgw_.c:152
-#, fuzzy
 msgid ""
 "Your computer can be configured to share its Internet connection.\n"
 "\n"
@@ -6540,17 +6673,16 @@ msgid ""
 "\n"
 "Would you like to setup the Internet Connection Sharing?"
 msgstr ""
-"Nå når Internett-tilknytningen er konfigurert, kan\n"
-"maskinen din konfigureres til å dele Internett-tilknytningen.\n"
+"Maskinen din kan konfigureres til å dele Internett-tilknytningen.\n"
+"\n"
 "Merk: du trenger et dedikert nettverksadapter for å sette opp et lokalt "
 "nettverk (LAN).\n"
 "\n"
-"Ønsker du å sette opp deling av Internett-tilknytning?\n"
+"Ønsker du å sette opp deling av Internett-tilknytning?"
 
 #: ../../standalone/drakgw_.c:177
-#, fuzzy
 msgid "using module"
-msgstr "Oppringningsmodus"
+msgstr "bruker modul"
 
 #: ../../standalone/drakgw_.c:210
 msgid "No network adapter on your system!"
@@ -6615,9 +6747,8 @@ msgid "Configuring scripts, installing software, starting servers..."
 msgstr "Konfigurerer script, installerer programvare, starter tjenere..."
 
 #: ../../standalone/drakgw_.c:282
-#, fuzzy
 msgid "Configuring..."
-msgstr "Konfigurerer IDE"
+msgstr "Konfigurerer..."
 
 #: ../../standalone/drakgw_.c:306
 msgid "Could not install ipchains RPM with urpmi."
@@ -6649,6 +6780,9 @@ msgid ""
 "You may now share Internet connection with other computers on your Local "
 "Area Network, using automatic network configuration (DHCP)."
 msgstr ""
+"Alt har blitt konfigurert.\n"
+"Du kan nå dele Internett-tilkobling med andre maskiner på ditt lokale "
+"nettverk ved å bruke automatisk nettverkskonfigurasjon (DHCP)."
 
 #: ../../standalone/draksec_.c:28
 msgid ""
@@ -6950,26 +7084,25 @@ msgstr "Finne tillatelser vil ta litt tid"
 
 # ../../share/compssUsers
 msgid "Graphics Manipulation"
-msgstr ""
+msgstr "Grafisk manipulasjon"
 
 # ../../share/compssUsers
 msgid "Personnal Finance"
-msgstr ""
+msgstr "Personlig finans"
 
 # ../../share/compssUsers
 msgid "Databases"
-msgstr ""
+msgstr "Databaser"
 
 msgid "Internet"
 msgstr "Internett"
 
-#, fuzzy
 msgid "Multimedia - Graphics"
-msgstr "Multimedia"
+msgstr "Multimedia - Grafikk"
 
 # ../../share/compssUsers
 msgid "Audio-related tools: mp3 or midi players, mixers, etc"
-msgstr ""
+msgstr "Lydrelaterte verktøy: mp3 eller midi-spillere, miksere etc."
 
 msgid "Multimedia"
 msgstr "Multimedia"
@@ -6982,27 +7115,31 @@ msgid ""
 "Chat (IRC or instant messaging) programs such as xchat, licq, gaim, and file "
 "transfer tools"
 msgstr ""
+"Chat (IRC eller øyeblikkelig beskjed) programmer så som xchat, licq, gaim, "
+"og fil- overføringsverktøy"
 
 # ../../share/compssUsers
 msgid ""
 "Set of tools to read and send mail and news (pine, mutt, tin..) and to "
 "browse the Web"
 msgstr ""
+"Sett med verktøy for å lese og sende e-post og nyheter (pine, mutt, tin...) "
+"og for se på webben"
 
 # ../../share/compssUsers
 msgid "Communication facilities"
-msgstr ""
+msgstr "Kommunikasjonsfasaliteter"
 
 msgid "KDE"
 msgstr "KDE"
 
 # ../../share/compssUsers
 msgid "Personnal Information Management"
-msgstr ""
+msgstr "Personling informasjonshåndtering"
 
 # ../../share/compssUsers
 msgid "Programs to manage your finance, such as gnucash"
-msgstr ""
+msgstr "Programmer for å håndtere dine finanser, så som gnucash"
 
 msgid "Gnome"
 msgstr "Gnome"
@@ -7010,95 +7147,95 @@ msgstr "Gnome"
 msgid "Documentation"
 msgstr "Dokumentasjon"
 
-#, fuzzy
 msgid "Internet Tools"
-msgstr "Internett"
+msgstr "Internett verktøy"
 
 # ../../share/compssUsers
 msgid "Icewm, Window Maker, Enlightenment, Fvwm, etc"
-msgstr ""
+msgstr "Icewm, Window Maker, Enlightenment, Fvwm etc"
 
-#, fuzzy
 msgid "Multimedia - Sound"
-msgstr "Multimedia"
+msgstr "Multimedia - Lyd"
 
 # ../../share/compssUsers
 msgid "Amusement programs: arcade, boards, strategy, etc"
-msgstr ""
+msgstr "Underholdningsprogrammer: arkade, bordspill, strategi etc"
 
 # ../../share/compssUsers
 msgid "Video players and editors"
-msgstr ""
+msgstr "Videospillere og redigerere"
 
 # ../../share/compssUsers
 msgid "Databases clients and servers (mysql and postgresql)"
-msgstr ""
+msgstr "Databaseklienter og tjenere (mysql og postgresql)"
 
 # ../../share/compssUsers
 msgid "Sound and video playing/editing programs"
-msgstr ""
+msgstr "Lyd og bilde avspilling/redigeringsprogrammer"
 
 # ../../share/compssUsers
 msgid "Books and Howto's on Linux and Free Software"
-msgstr ""
+msgstr "Bøker og howto's om Linux og fri programvare"
 
 # ../../share/compssUsers
 msgid ""
 "A graphical environment with user-friendly set of applications and desktop "
 "tools"
 msgstr ""
+"Et grafisk miljø med et brukervennlig sett med applikasjoner og skrivebords- "
+"verktøy"
 
-#, fuzzy
 msgid "Games"
-msgstr "Gnome"
+msgstr "Spill"
 
-#, fuzzy
 msgid "Multimedia - Video"
-msgstr "Multimedia"
+msgstr "Multimedia - Video"
 
 # ../../share/compssUsers
 msgid "Graphics programs such as The Gimp"
-msgstr ""
+msgstr "Grafiske programmer så som Gimp"
 
 # ../../share/compssUsers
 msgid ""
 "The K Desktop Environment, the basic graphical environment with a collection "
 "of accompanying tools"
 msgstr ""
+"K Desktop Environment, basis grafikkmiljø med en samling av passende verktøy"
 
 # ../../share/compssUsers
 msgid "More Graphical Desktops (Gnome, IceWM)"
-msgstr ""
+msgstr "Mere grafiske skrivebord (Gnome, IceWM)"
 
 # ../../share/compssUsers
 msgid "Tools to create and burn CD's"
-msgstr ""
+msgstr "Verktøy for å opprette og brenne CD'er"
 
-#, fuzzy
 msgid "Multimedia - CD Burning"
-msgstr "Multimedia"
+msgstr "Multimedia - CD-brenning"
 
 # ../../share/compssUsers
 msgid ""
 "Office programs: wordprocessors (kword, abiword), spreadsheets (kspread, "
 "gnumeric), pdf viewers, etc"
 msgstr ""
+"Kontorprogrammer: tekstbehandlere (kword, abiword), regneark (kspread, "
+"gnumeric), pdf fremvisere etc"
 
 # ../../share/compssUsers
 msgid "Other Graphical Desktops"
-msgstr ""
+msgstr "Andre grafiske skrivebord"
 
 # ../../share/compssUsers
 msgid "Tools for your Palm Pilot or your Visor"
-msgstr ""
+msgstr "Verktøy for din Palm Pilot eller din Visor"
 
 # ../../share/compssUsers
 msgid "Gnome, Icewm, Window Maker, Enlightenment, Fvwm, etc"
-msgstr ""
+msgstr "Gnome, Icewm, Window Maker, Enlightenment, Fvwm etc"
 
 # ../../share/compssUsers
 msgid "Set of tools for mail, news, web, file transfer, and chat"
-msgstr ""
+msgstr "Sett med verktøy for e-post, nyheter, web, filoverføring og chat"
 
 #~ msgid "Reconfigure local network"
 #~ msgstr "Rekonfigurer lokalt nettverk"
