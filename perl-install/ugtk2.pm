@@ -403,12 +403,14 @@ sub create_dialog {
 
 sub warn_dialog {
     my ($title, $label, $o_options) = @_;
+    $o_options ||= { };
     add2hash_($o_options, { small => 1, stock => 'gtk-dialog-warning', cancel => 1 });
     create_dialog($title, $label, $o_options);
 }
 
 sub err_dialog {
     my ($title, $label, $o_options) = @_;
+    $o_options ||= { };
     add2hash_($o_options, { small => 1, stock => 'gtk-dialog-error' });
     create_dialog($title, $label, $o_options);
 }
