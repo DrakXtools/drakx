@@ -1,0 +1,17 @@
+#!/usr/bin/perl
+
+use lib "..";
+use keyboard;
+
+system("rm -rf keymaps ; mkdir keymaps");
+
+foreach (keyboard::xmodmaps()) {
+    my $kmap = keyboard::keyboard2kmap($_);
+    if (system("./kmap2bkmap $kmap > keymaps/$kmap.bkmap 2>/dev/null") != 0) {
+	warn "unknown kmap $kmap\n";
+	unlink "keymaps/$kmap.bkmap";
+    }
+}
+
+system("tar cfI keymaps.tar.bz2 keymaps") == 0 or die;
+system("rm -rf keymaps");
