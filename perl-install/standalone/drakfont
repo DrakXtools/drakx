@@ -548,7 +548,7 @@ sub interactive_mode {
 
     gtkadd($window1,
 	   gtkpack_(gtkset_usize(new Gtk::VBox(0,2),,620, 390),
-		    0,  new Gtk::Pixmap($pix_u_map, $pix_u_mask),
+		    if_(!$::isEmbedded, 0,  new Gtk::Pixmap($pix_u_map, $pix_u_mask)),
 		    1, gtkpack_(new Gtk::HBox(0,2),
 			     1, gtkpack_(new Gtk::VBox(0,2),
 					 1, gtkpack($font_box = new Gtk::VBox(0,5),
