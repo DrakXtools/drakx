@@ -242,12 +242,12 @@ sub read_conf {
     foreach (cat_($file)) {
 	next if /^\s*#/;
 	s/#.*$//;
-	my ($type, $alias, $val) = split(/\s+/, chomp_($_), 3) or next;
+	my ($type, $module, $val) = split(/\s+/, chomp_($_), 3) or next;
 	$val =~ s/\s+$//;
 
 	$val = [ split ' ', $val ] if $type eq 'probeall';
 
-	$c{$alias}{$type} = $val;
+	$c{$module}{$type} = $val;
     }
     #- cheating here: not handling aliases of aliases
     while (my ($_k, $v) = each %c) {
@@ -296,11 +296,11 @@ sub write_conf() {
 
     #- Substitute new aliases in modules.conf (if config has changed)
     substInFile {
-	my ($type, $alias, $module) = split(/\s+/, chomp_($_), 3);
-	if ($type eq 'post-install' && $alias eq 'supermount') {	    
+	my ($type, $module, $module) = split(/\s+/, chomp_($_), 3);
+	if ($type eq 'post-install' && $module eq 'supermount') {	    
 	    #- remove the post-install supermount stuff.
 	    $_ = '';
-	} elsif ($type eq 'alias' && $alias =~ /scsi_hostadapter|usb-interface/) {
+	} elsif ($type eq 'alias' && $module =~ /scsi_hostadapter|usb-interface/) {
 	    #- remove old aliases which are replaced by probeall
 	    $_ = '';
 	} elsif ($type eq 'above') {
@@ -308,11 +308,11 @@ sub write_conf() {
 	    # Ensure correct upgrade for snd-via683 and snd-via8233 drivers
 	    s/snd-card/snd/g;
 	    s/snd-via686|snd-via8233/snd-via82xx/g;
-	    defined $conf{$alias}{above} or $_ = '';
-	} elsif ($conf{$alias}{$type} && $conf{$alias}{$type} ne $module) {
-	    my $v = join(' ', uniq(deref($conf{$alias}{$type})));
-	    $_ = "$type $alias $v\n";
-	} elsif ($type eq 'alias' && !defined $conf{$alias}{alias}) { 
+	    defined $conf{$module}{above} or $_ = '';
+	} elsif ($conf{$module}{$type} && $conf{$module}{$type} ne $module) {
+	    my $v = join(' ', uniq(deref($conf{$module}{$type})));
+	    $_ = "$type $module $v\n";
+	} elsif ($type eq 'alias' && !defined $conf{$module}{alias}) { 
 	    $_ = '';
 	}
     } $file;
@@ -388,8 +388,6 @@ sub when_load {
         }
     }
 
-    load('snd-pcm-oss') if $name =~ /^snd-/;
-
     $conf{$name}{options} = join " ", @options if @options;
 
     if (my $category = module2category($name)) {
@@ -411,6 +409,11 @@ sub when_load {
             set_sound_slot($sound_alias, $name);
         }
     }
+
+    if (my $above = $conf{$name}{above}) {
+	load($above); #- eg: for snd-pcm-oss set by set_sound_slot()
+    }
+
 }
 
 sub cz_file() { 
