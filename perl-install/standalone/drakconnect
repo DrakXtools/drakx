@@ -335,8 +335,12 @@ sub build_notebook {
 				    ),
 			   ),
 		);
-	if ($is_ethernet) { $gui->{intf}{BOOTPROTO}->set_popdown_strings(N_("static"), N_("dhcp")) } 
-	else {
+	if ($is_ethernet) {
+         my $proto = $gui->{intf}{BOOTPROTO};
+         $proto->{protocols} = { static => N("static"), dhcp => N_("DHCP") };
+         $proto->set_popdown_strings(values %{$proto->{protocols}});
+         $proto->set_text($proto->{protocols}->{$intf->{BOOTPROTO}});
+	} else {
 	    $_->set_sensitive(0) foreach $gui->{intf}{IPADDR}, $gui->{intf}{NETMASK};
 	    delete $gui->{intf}{BOOTPROTO};
 	}
@@ -567,6 +571,9 @@ sub save_notebook {
     $gui->{intf_bool}{MII_NOT_SUPPORTED} and $intf->{MII_NOT_SUPPORTED} = bool2yesno(!$gui->{intf_bool}{MII_NOT_SUPPORTED}->get_active);
     $gui->{intf_bool}{HWADDR} and (bool2yesno($gui->{intf_bool}{HWADDR}->get_active) eq 'yes' ? ($intf->{HWADDR} = 'yes') : delete $intf->{HWADDR});
 
+    if (my $proto = $gui->{intf}{BOOTPROTO}) {
+        $intf->{BOOTPROTO} = { reverse %{$proto->{protocols}} }->{$proto->get_text};
+    }
     if ($intf->{BOOTPROTO} eq 'static') { 
         check_field($intf, 'IPADDR', 'NETMASK') or $in->ask_warn(N("Error"), N("IP address should be in format 1.2.3.4")) and return 0;
     }
