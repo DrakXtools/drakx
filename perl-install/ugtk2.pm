@@ -831,9 +831,7 @@ sub new {
     my $o = bless { %opts }, $type;
     while (my $e = shift @tempory::objects) { $e->destroy }
 
-    $o->{isEmbedded} ||= $::isEmbedded;
-
-    $o->{pop_it} ||= $pop_it || !$::isWizard && !$o->{isEmbedded} || $::WizardTable && do {
+    $o->{pop_it} ||= $pop_it || !$::isWizard && !$::isEmbedded || $::WizardTable && do {
 	#- do not take into account the DrawingArea
 	any { !$_->isa('Gtk2::DrawingArea') && $_->visible } $::WizardTable->get_children;
     };
@@ -861,7 +859,7 @@ sub new {
 
 	$::WizardTable ||= gtknew('VBox');
 
-	if (!$::Plug && $o->{isEmbedded}) {
+	if (!$::Plug && $::isEmbedded) {
 	    $::Plug = $::WizardWindow = gtknew('Plug',
 					       socket_id => $::XID,
 					       icon => wm_icon(),
@@ -877,7 +875,7 @@ sub new {
 	    if ($::isInstall) {
 		require install_gtk; #- for perl_checker
 		$::WizardWindow->signal_connect(key_press_event => \&install_gtk::special_shortcuts);
-	    } elsif (!$o->{isEmbedded}) {
+	    } elsif (!$::isEmbedded) {
 		$::WizardWindow->set_position('center_always') if !$::isStandalone;
 		eval { gtkpack__($::WizardTable, Gtk2::Banner->new(wm_icon(), $::Wizard_title)) };
 		$@ and log::l("ERROR: missing wizard banner");
