@@ -218,7 +218,7 @@ sub read {
 sub write {
     my ($hd, $sector, $pt) = @_;
 
-    log::l("partition::dos::write $hd->{device}" . backtrace());
+    log::l("partition::dos::write $hd->{device}");
 
     #- handle testing for writing partition table on file only!
     my $F;
