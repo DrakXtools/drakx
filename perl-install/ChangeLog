@@ -1,3 +1,46 @@
+2002/03/04  dam's  <damien@mandrakesoft.com>
+
+	* modparm.pm: corected weirdness, I suck
+
+2002/03/04  François Pons  <fpons@mandrakesoft.com>
+
+	* pkgs.pm: fix scroll total to match reality.
+	fixed interpretation of size of package when doing an install (this can
+	be
+	severe, need testing).
+
+2002/03/03  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/cy.po, share/po/id.po: updated po file
+
+2002/03/03  Pixel  <pixel@mandrakesoft.com>
+
+	* my_gtk.pm (gtkicons_labels_widget): since style is not set either, use
+	the widget and ask it the style->font. This *works*
+	(gtkicons_labels_widget): pass the style instead of directly passing the
+	font
+
+2002/03/03  Till Kamppeter <till@mandrakesoft.com>
+
+	* printer.pm: Let Star Office/OpenOffice.org configuration corrcet a bug
+	in the PostScript produced by these programs so that the Euro symbol is
+	printed correctly.
+
+2002/03/02  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/tr.po: updated po file
+
+2002/03/02  Pixel  <pixel@mandrakesoft.com>
+
+	* partition_table.pm: better name for windobe new 0x42 special id (their
+	own LVM marker)
+
+	* detect_devices.pm: better jaz detection (thanks to Randy Welch)
+
+2002/03/02  Till Kamppeter <till@mandrakesoft.com>
+
+	* printer.pm, printerdrake.pm: Replaced "Open Office" by "OpenOffice.org".
+
 2002/03/02  Pablo Saratxaga <pablo@mandrakesoft.com>
 
 	* share/po/sv.po, share/po/da.po, share/po/vi.po, share/po/hu.po: updated
