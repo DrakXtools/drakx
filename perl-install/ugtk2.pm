@@ -746,7 +746,6 @@ sub new {
     $o->{rwindow}->set_position('center-always') if $::isStandalone;
     $o->{rwindow}->set_modal(1) if ($grab || $o->{grab} || $o->{modal}) && !$::isInstall;
     $o->{rwindow}->set_transient_for($o->{transient}) if $o->{transient};
-    $o->{rwindow}->signal_connect(destroy => sub { $o->{destroyed} = 1 });
 
     $o->{pop_it} ||= $pop_it || $::WizardTable && do {
 	my @l = $::WizardTable->get_children;
@@ -818,6 +817,8 @@ sub new {
 	}
 	$::WizardTable->attach($o->{window}, 0, 2, 1, 2, ['fill', 'expand'], ['fill', 'expand'], 0, 0);
     }
+
+    $o->{rwindow}->signal_connect(destroy => sub { $o->{destroyed} = 1 });
 
     if ($::isEmbedded && !$o->{pop_it} && !eval { $::Plug && $::Plug->child }) {
 	$o->{isEmbedded} = 1;
