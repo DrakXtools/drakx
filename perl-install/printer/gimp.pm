@@ -109,9 +109,7 @@ sub addcupsremoteto {
 		return 0;
 	    }
 	}
-    } else {
-	return 1;
-    }
+    } else { return 1 }
     # There is no system-wide config file, treat every user's config file
     foreach my $configfilename (@configfilenames) {
 	# Load GIMP's printer config file
@@ -119,12 +117,9 @@ sub addcupsremoteto {
 	# Add the printer entry
 	if (!isprinterconfigured ($queue, $configfilecontent)) {
 	    # Remove the old printer entry
-	    $configfilecontent = 
-		removeprinter($queue, $configfilecontent);
+	    $configfilecontent = removeprinter($queue, $configfilecontent);
 	    # Add the new printer entry
-	    $configfilecontent = 
-		makeprinterentry($printer, $queue,
-				     $configfilecontent);
+	    $configfilecontent = makeprinterentry($printer, $queue, $configfilecontent);
 	}
 	# Write back GIMP's printer configuration file
 	writeconfigfile($configfilename, $configfilecontent);
@@ -142,8 +137,7 @@ sub removeprinterfrom {
 	# Load GIMP's printer config file
 	my $configfilecontent = readconfigfile($configfilename);
 	# Remove the printer entry
-	$configfilecontent = 
-	    removeprinter($queue, $configfilecontent);
+	$configfilecontent = removeprinter($queue, $configfilecontent);
 	# Write back GIMP's printer configuration file
 	writeconfigfile($configfilename, $configfilecontent);
     }
@@ -161,8 +155,7 @@ sub removelocalprintersfrom {
 	my $configfilecontent = readconfigfile($configfilename);
 	# Remove the printer entries
 	foreach my $queue (keys(%{$printer->{configured}})) {
-	    $configfilecontent = 
-		removeprinter($queue, $configfilecontent);
+	    $configfilecontent = removeprinter($queue, $configfilecontent);
 	}
 	# Write back GIMP's printer configuration file
 	writeconfigfile($configfilename, $configfilecontent);
@@ -200,29 +193,19 @@ sub makeprinterentry {
 	    $configfile = addentry($queue, 
 				       "Media-Size: $papersize", $configfile);
 	}
-	$configfile = removeentry($queue,
-				      "PPD-File:", $configfile);
-	$configfile = addentry($queue, 
-				   "PPD-File:", $configfile);
-	$configfile = removeentry($queue,
-				      "Driver:", $configfile);
-	$configfile = addentry($queue, 
-				   "Driver: $gimpprintdriver", $configfile);
-	$configfile = removeentry($queue,
-				      "Destination:", $configfile);
+	$configfile = removeentry($queue, "PPD-File:", $configfile);
+	$configfile = addentry($queue, "PPD-File:", $configfile);
+	$configfile = removeentry($queue, "Driver:", $configfile);
+	$configfile = addentry($queue, "Driver: $gimpprintdriver", $configfile);
+	$configfile = removeentry($queue, "Destination:", $configfile);
 	$configfile = addentry($queue, 
 				   "Destination: /usr/bin/$printer::data::lprcommand{$printer->{SPOOLER}{print_command}} -P $queue -o raw", $configfile);
     } else {
-	$configfile = removeentry($queue,
-				      "PPD-File:", $configfile);
-	$configfile = addentry($queue, 
-				   "PPD-File: /etc/foomatic/$queue.ppd", $configfile);
-	$configfile = removeentry($queue,
-				      "Driver:", $configfile);
-	$configfile = addentry($queue, 
-				   "Driver: ps2", $configfile);
-	$configfile = removeentry($queue,
-				      "Destination:", $configfile);
+	$configfile = removeentry($queue, "PPD-File:", $configfile);
+	$configfile = addentry($queue, "PPD-File: /etc/foomatic/$queue.ppd", $configfile);
+	$configfile = removeentry($queue, "Driver:", $configfile);
+	$configfile = addentry($queue, "Driver: ps2", $configfile);
+	$configfile = removeentry($queue, "Destination:", $configfile);
 	$configfile = addentry($queue, 
 				   "Destination: /usr/bin/$printer::data::lprcommand{$printer->{SPOOLER}{print_command}} -P $queue", $configfile);
     }
@@ -247,22 +230,15 @@ sub findconfigfiles {
 		    $dir =~ s,/[^/]*$,,;
 		    next if (-f $dir) && (! -d $dir);
 		    if (! -d "$::prefix$dir") {
-			run_program::rooted($::prefix, 
-					    "/bin/mkdir", $dir)
-			    or next;
-			run_program::rooted($::prefix, 
-					      "/bin/chown", "$uid.$gid", $dir)
-			    or next;
+                  mkdir_p("$::prefix$dir") or next;
+                  set_permissions("$::prefix$dir", "$uid.$gid") or next;
 		    }
 		    if (! -f "$::prefix$homedir/$file") {
 			local *F;
 			open F, "> $::prefix$homedir/$file" or next;
 			print F "#PRINTRCv1 written by GIMP-PRINT 4.2.2 - 13 Sep 2002\n";
 			close F;
-			run_program::rooted($::prefix, 
-					    "/bin/chown", "$uid.$gid",
-					    "$homedir/$file")
-			    or next;
+               set_permissions("$::prefix$homedir/$file", "$uid.$gid") or next;
 		    }
 		    push (@filestotreat, "$homedir/$file");
 		}
@@ -297,9 +273,7 @@ sub addentry {
     my @lines = split("\n", $filecontent);
     foreach (@lines) {
 	if (!$sectionfound) {
-	    if (/^\s*Printer\s*:\s*($section)\s*$/) {
-		$sectionfound = 1;
-	    }
+	    $sectionfound = 1 if /^\s*Printer\s*:\s*($section)\s*$/;
 	} else {
 	    if (!/^\s*$/ && !/^\s*;/) { #-#
 		$_ = "$entry\n$_";
@@ -308,9 +282,7 @@ sub addentry {
 	    }
 	}
     }
-    if ($sectionfound && !$entryinserted) {
-	push(@lines, $entry);
-    }
+    push(@lines, $entry) if $sectionfound && !$entryinserted;
     return join ("\n", @lines);
 }
 
@@ -319,10 +291,8 @@ sub addprinter {
     my $entryinserted = 0;
     my @lines = split("\n", $filecontent);
     foreach (@lines) {
-	if (/^\s*Printer\s*:\s*($section)\s*$/) {
-	    # section already there, nothing to be done
-	    return $filecontent;
-	}
+     # section already there, nothing to be done
+     return $filecontent if /^\s*Printer\s*:\s*($section)\s*$/;
     }
     return $filecontent . "\nPrinter: $section";
 }
