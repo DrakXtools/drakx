@@ -364,8 +364,7 @@ sub setup_local_autoscan {
     $in->set_help('setupLocal') if $::isInstall;
     if ($do_auto_detect) {
 	if (!$::testing &&
-	    !$expert_or_modify && $printer->{AUTODETECTSMB} &&
-	    !files_exist((qw(/usr/bin/smbclient)))) {
+	    !$expert_or_modify && $printer->{AUTODETECTSMB} && !files_exist('/usr/bin/smbclient')) {
 	    $in->do_pkgs->install('samba-client');
 	}
 	my $w = $in->wait_message(N("Printer auto-detection"), N("Detecting devices..."));
@@ -603,8 +602,7 @@ sub setup_local_autoscan {
 
     #- LPD and LPRng need netcat ('nc') to access to socket printers
     if (($printer->{SPOOLER} eq 'lpd' || $printer->{SPOOLER} eq 'lprng') &&
-        !$::testing && $device =~ /^socket:/ &&
-        !files_exist((qw(/usr/bin/nc)))) {
+        !$::testing && $device =~ /^socket:/ && !files_exist('/usr/bin/nc')) {
         $in->do_pkgs->install('nc');
     }
 
@@ -658,8 +656,7 @@ complete => sub {
 
     #- LPD does not support filtered queues to a remote LPD server by itself
     #- It needs an additional program as "rlpr"
-    if ($printer->{SPOOLER} eq 'lpd' && !$::testing &&
-        !files_exist((qw(/usr/bin/rlpr)))) {
+    if ($printer->{SPOOLER} eq 'lpd' && !$::testing && !files_exist('/usr/bin/rlpr')) {
         $in->do_pkgs->install('rlpr');
     }
 
@@ -744,8 +741,7 @@ sub setup_smb {
     my $oldmenuchoice = "";
     if ($printer->{AUTODETECT}) {
 	$autodetect = 1;
-	if (!$::testing &&
-	    !files_exist((qw(/usr/bin/smbclient)))) {
+	if (!$::testing && !files_exist('/usr/bin/smbclient')) {
 	    $in->do_pkgs->install('samba-client');
 	}
 	my $w = $in->wait_message(N("Printer auto-detection"), N("Scanning network..."));
@@ -873,8 +869,7 @@ Do you really want to continue setting up this printer as you are doing now?"), 
     ($smbpassword && ":$smbpassword") . "@")), ($workgroup && "$workgroup/"),
     ($smbserver || $smbserverip), "/$smbshare");
 
-    if (!$::testing &&
-        !files_exist((qw(/usr/bin/smbclient)))) {
+    if (!$::testing && !files_exist('/usr/bin/smbclient')) {
 	$in->do_pkgs->install('samba-client');
     }
     $printer->{SPOOLER} eq 'cups' and printer::main::restart_queue($printer);
@@ -943,10 +938,7 @@ complete => sub {
     ($ncppassword && ":$ncppassword") . "@")),
     "$ncpserver/$ncpqueue");
 
-    if (!$::testing &&
-        !files_exist((qw(/usr/bin/nprint)))) {
-	$in->do_pkgs->install('ncpfs');
-    }
+	$in->do_pkgs->install('ncpfs') if !$::testing && !files_exist('/usr/bin/nprint');
 
     1;
 }
@@ -1087,8 +1079,7 @@ sub setup_socket {
 
     #- LPD and LPRng need netcat ('nc') to access to socket printers
     if (($printer->{SPOOLER} eq 'lpd' || $printer->{SPOOLER} eq 'lprng') && 
-        !$::testing &&
-        !files_exist((qw(/usr/bin/nc)))) {
+        !$::testing && !files_exist('/usr/bin/nc')) {
         $in->do_pkgs->install('nc');
     }
 
@@ -1152,25 +1143,21 @@ complete => sub {
     # LPD does not support filtered queues to a remote LPD server by itself
     # It needs an additional program as "rlpr"
     if ($printer->{currentqueue}{connect} =~ /^lpd:/ &&
-	$printer->{SPOOLER} eq 'lpd' && !$::testing &&
-        !files_exist(qw(/usr/bin/rlpr))) {
+	$printer->{SPOOLER} eq 'lpd' && !$::testing && !files_exist('/usr/bin/rlpr')) {
         $in->do_pkgs->install('rlpr');
     }
     if ($printer->{currentqueue}{connect} =~ /^smb:/ &&
-        !$::testing &&
-        !files_exist((qw(/usr/bin/smbclient)))) {
+        !$::testing && !files_exist('/usr/bin/smbclient')) {
 	$in->do_pkgs->install('samba-client');
     }
     if ($printer->{currentqueue}{connect} =~ /^ncp:/ &&
-	!$::testing &&
-        !files_exist((qw(/usr/bin/nprint)))) {
+	!$::testing && !files_exist('/usr/bin/nprint')) {
 	$in->do_pkgs->install('ncpfs');
     }
     #- LPD and LPRng need netcat ('nc') to access to socket printers
     if ($printer->{currentqueue}{connect} =~ /^socket:/ &&
 	($printer->{SPOOLER} eq 'lpd' || $printer->{SPOOLER} eq 'lprng') &&
-        !$::testing &&
-        !files_exist((qw(/usr/bin/nc)))) {
+        !$::testing && !files_exist('/usr/bin/nc')) {
         $in->do_pkgs->install('nc');
     }
 
@@ -1268,9 +1255,9 @@ sub setup_common {
 	    $isHPOJ) {
 	    # Install HPOJ package
 	    if (!$::testing &&
-		!files_exist((qw(/usr/sbin/ptal-mlcd
+		!files_exist(qw(/usr/sbin/ptal-mlcd
 					   /usr/sbin/ptal-init
-					   /usr/bin/xojpanel)))) {
+					   /usr/bin/xojpanel))) {
 		my $w = $in->wait_message(N("Printerdrake"),
 					  N("Installing HPOJ package..."));
 		$in->do_pkgs->install('hpoj', 'xojpanel');
@@ -1287,14 +1274,14 @@ sub setup_common {
 		    $makemodel !~ /HP\s+LaserJet\s+2200/i) {
 		    # Install SANE
 		    if (!$::testing &&
-			!files_exist((qw(/usr/bin/scanimage
+			!files_exist(qw(/usr/bin/scanimage
 						   /usr/bin/xscanimage
 						   /usr/bin/xsane
 						   /etc/sane.d/dll.conf
 						   /usr/lib/libsane-hpoj.so.1),
 						(files_exist('/usr/bin/gimp') ? 
 						 '/usr/bin/xsane-gimp' : 
-						 ())))) {
+						 ()))) {
 			my $w = $in->wait_message(
 			     N("Printerdrake"),
 			     N("Installing SANE packages..."));
@@ -2182,7 +2169,7 @@ Note: the photo test page can take a rather long time to get printed and on lase
 	    my @testpages;
 	    # Install the filter to convert the photo test page to PS
 	    if ($printer->{SPOOLER} ne "cups" && $photo && !$::testing &&
-		!files_exist((qw(/usr/bin/convert)))) {
+		!files_exist('/usr/bin/convert')) {
 		$in->do_pkgs->install('ImageMagick');
 	    }
 	    # set up list of pages to print
@@ -2770,9 +2757,8 @@ sub configure_queue {
 sub install_foomatic {
     my ($in) = @_;
     if (!$::testing &&
-	!files_exist((qw(/usr/bin/foomatic-configure
-				       /usr/lib/perl5/vendor_perl/5.8.0/Foomatic/DB.pm)
-				    ))) {
+	!files_exist(qw(/usr/bin/foomatic-configure
+				       /usr/lib/perl5/vendor_perl/5.8.0/Foomatic/DB.pm))) {
 	my $w = $in->wait_message(N("Printerdrake"),
 				  N("Installing Foomatic..."));
 	$in->do_pkgs->install('foomatic');
@@ -2810,7 +2796,7 @@ sub main {
 	my $w = $in->wait_message(N("Printerdrake"),
 				  N("Checking installed software..."));
 	if (!$::testing &&
-	    !files_exist((qw(/usr/bin/foomatic-configure
+	    !files_exist(qw(/usr/bin/foomatic-configure
 				       /usr/lib/perl5/vendor_perl/5.8.0/Foomatic/DB.pm
 				       /usr/bin/escputil
 				       /usr/share/printer-testpages/testprint.ps
@@ -2819,7 +2805,7 @@ sub main {
 				       ),
 				    (files_exist("/usr/bin/gimp") ?
 				     "/usr/lib/gimp/1.2/plug-ins/print" : ())
-				    ))) {
+				    )) {
 	    $in->do_pkgs->install('foomatic', 'printer-utils', 'printer-testpages', 'nmap', 'scli',
 				  if_($in->do_pkgs->is_installed('gimp'), 'gimpprint'));
 	}
