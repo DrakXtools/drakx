@@ -588,7 +588,7 @@ sub setRootPassword($) {
 
     return if $o->{security} < 1 && !$clicked;
 
-    $o->ask_from_entries_ref([_("Set root password"), _("Ok"), _("No password")],
+    $o->ask_from_entries_ref([_("Set root password"), _("Ok"), $o->{security} > 3 ? () : _("No password")],
 			 _("Set root password"),
 			 [_("Password:"), _("Password (again):"), $o->{installClass} eq "server" || $::expert ? (_("Use shadow file"), _("Use MD5 passwords")) : (), $::beginner ? () : _("Use NIS") ],
 			 [{ val => \$sup->{password},  hidden => 1 },
@@ -623,6 +623,7 @@ sub addUser($) {
     my ($o, $clicked) = @_;
     my $u = $o->{user} ||= $o->{security} < 1 ? { name => "mandrake", realname => "default" } : {};
     $u->{password2} ||= $u->{password} ||= "";
+    $u->{shell} ||= "/bin/bash";
     my @fields = qw(realname name password password2);
     my @shells = install_any::shells($o);
 

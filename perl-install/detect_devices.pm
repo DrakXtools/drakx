@@ -219,9 +219,13 @@ sub hasModem($) {
 }
 
 sub hasMousePS2() {
-    my $f = detect_devices::tryOpen("psaux");
-    my $t; sysread($f, $t, 256) or return;
-    $t eq "\xFE";
+    my $t; sysread(tryOpen("psaux"), $t, 1) != 1 || $t ne "\xFE";
+}
+
+sub hasMouseUSB(;$) {
+    my @modules = map { "usb-$_" } qw(uhci ohci ohci-hcd);
+    my ($first) = @_;
+#    modprobe(
 }
 
 #-######################################################################################
