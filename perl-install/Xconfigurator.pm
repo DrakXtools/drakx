@@ -1099,7 +1099,7 @@ Current configuration is:
 		        exec qw(perl -e), q{
                           my $wm = shift;
   		          for (my $nb = 30; $nb && `pidof "$wm"` > 0; $nb--) { sleep 1 }
-  		          system("killall X") unless `pidof "$wm"` > 0;
+  		          system("killall X ; killall -15 xdm gdm kdm autologin") unless `pidof "$wm"` > 0;
   		        }, $_;
 		    }
 		    $found = 1; last;
