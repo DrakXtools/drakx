@@ -151,14 +151,14 @@ msgid "Choose resolution and color depth"
 msgstr "Изаберите резолуцију и број боя при призаку"
 
 #: ../../Xconfigurator.pm_.c:492
-#, fuzzy, c-format
+#, c-format
 msgid "Graphic card: %s"
-msgstr "Графичка картица: %s\n"
+msgstr "Графичка картица: %s"
 
 #: ../../Xconfigurator.pm_.c:493
-#, fuzzy, c-format
+#, c-format
 msgid "XFree86 server: %s"
-msgstr "XFree86 сервер: %s\n"
+msgstr "XFree86 сервер: %s"
 
 #: ../../Xconfigurator.pm_.c:502
 msgid "Show all"
@@ -4411,105 +4411,14 @@ msgstr ""
 msgid "Finding leaves takes some time"
 msgstr ""
 
-#~ msgid "User name:"
-#~ msgstr "Корисничко имe:"
-
-#~ msgid "Password:"
-#~ msgstr "Лозинка:"
-
-#~ msgid "Going to install %d MB. You can choose to install more programs"
-#~ msgstr "Инсталираћу %d MB. Можете изабрати да инсталирате још програма"
-
-#~ msgid "Bad kickstart file %s (failed %s)"
-#~ msgstr "Погрешан kickstart фајл %s (није успео %s)"
-
-#~ msgid "Size: %s MB"
-#~ msgstr "Величина: %s MB"
-
-#~ msgid "resizing"
-#~ msgstr "промена величине"
-
-#~ msgid "formatting"
-#~ msgstr "форматирање"
-
-#~ msgid "changing type of"
-#~ msgstr "мењање типа"
-
-#~ msgid "After %s partition %s,"
-#~ msgstr "После %s партиция %s,"
-
-#~ msgid "linear"
-#~ msgstr "линеар"
-
-#~ msgid "Linear (needed for some SCSI drives)"
-#~ msgstr "Користи линеарни мод (потребан неким SCSI драјвовима)"
-
-#~ msgid "beginner"
-#~ msgstr "почетник"
-
-#~ msgid "developer"
-#~ msgstr "девелопер"
-
-#~ msgid "expert"
-#~ msgstr "експерт"
-
-#~ msgid "server"
-#~ msgstr "сервер"
-
-#~ msgid "Printer"
-#~ msgstr "Штампач"
-
-#~ msgid "Would you like to configure a printer?"
-#~ msgstr "Да ли бисте да подесите штампач?"
-
-#~ msgid "Local Printer Options"
-#~ msgstr "Опције локалног штампача"
-
 #~ msgid ""
-#~ "Every print queue (which print jobs are directed to) needs a\n"
-#~ "name (often lp) and a spool directory associated with it. What\n"
-#~ "name and directory should be used for this queue?"
+#~ "Test page(s) have been sent to the printer daemon.\n"
+#~ "This may take a little time before printer start.\n"
+#~ "Does it work properly?"
 #~ msgstr ""
-#~ "Сваки ред за штампу (у који се слажу послови за штампање) захтева\n"
-#~ "име (обично lp) и 'spool' директоријум који уз то иде. Које име и "
-#~ "директоријум\n"
-#~ "да користим за овај ред за штампу?"
-
-#~ msgid "Name of queue:"
-#~ msgstr "Име реда за штампу:"
-
-#~ msgid "Spool directory:"
-#~ msgstr "'Spool' директоријум:"
-
-#~ msgid "Select Printer Connection"
-#~ msgstr "Избор повезаности штампача"
-
-#~ msgid "How is the printer connected?"
-#~ msgstr "Како је штампач повезан?"
-
-#~ msgid "Printer options"
-#~ msgstr "Опције штампача"
-
-#~ msgid "Paper Size"
-#~ msgstr "Величина папира"
-
-#~ msgid "Eject page after job?"
-#~ msgstr "Избаци папир након штампе ?"
-
-#~ msgid "Fix stair-stepping text?"
-#~ msgstr "Поправка 'ефекта степеница' у тексту?"
-
-#~ msgid "Uniprint driver options"
-#~ msgstr "Унипринт драјвер опције"
-
-#~ msgid "Color depth options"
-#~ msgstr "Број боя опције"
-
-#~ msgid "Do you want to test printing?"
-#~ msgstr "Да ли желите да тестирате штампач?"
-
-#~ msgid "Printing test page(s)..."
-#~ msgstr "Штампам тест стран(ице)у..."
+#~ "Тест стран(ице)а је послана штампач демону.\n"
+#~ "То може довести до малог одлагања старта штампача.\n"
+#~ "Да ли ради OK ?"
 
 #~ msgid ""
 #~ "Test page(s) have been sent to the printer daemon.\n"
@@ -4526,11 +4435,102 @@ msgstr ""
 #~ "\n"
 #~ "Да ли ради OK ?"
 
+#~ msgid "Printing test page(s)..."
+#~ msgstr "Штампам тест стран(ице)у..."
+
+#~ msgid "Do you want to test printing?"
+#~ msgstr "Да ли желите да тестирате штампач?"
+
+#~ msgid "Color depth options"
+#~ msgstr "Број боя опције"
+
+#~ msgid "Uniprint driver options"
+#~ msgstr "Унипринт драјвер опције"
+
+#~ msgid "Fix stair-stepping text?"
+#~ msgstr "Поправка 'ефекта степеница' у тексту?"
+
+#~ msgid "Eject page after job?"
+#~ msgstr "Избаци папир након штампе ?"
+
+#~ msgid "Paper Size"
+#~ msgstr "Величина папира"
+
+#~ msgid "Printer options"
+#~ msgstr "Опције штампача"
+
+#~ msgid "How is the printer connected?"
+#~ msgstr "Како је штампач повезан?"
+
+#~ msgid "Select Printer Connection"
+#~ msgstr "Избор повезаности штампача"
+
+#~ msgid "Spool directory:"
+#~ msgstr "'Spool' директоријум:"
+
+#~ msgid "Name of queue:"
+#~ msgstr "Име реда за штампу:"
+
 #~ msgid ""
-#~ "Test page(s) have been sent to the printer daemon.\n"
-#~ "This may take a little time before printer start.\n"
-#~ "Does it work properly?"
+#~ "Every print queue (which print jobs are directed to) needs a\n"
+#~ "name (often lp) and a spool directory associated with it. What\n"
+#~ "name and directory should be used for this queue?"
 #~ msgstr ""
-#~ "Тест стран(ице)а је послана штампач демону.\n"
-#~ "То може довести до малог одлагања старта штампача.\n"
-#~ "Да ли ради OK ?"
+#~ "Сваки ред за штампу (у који се слажу послови за штампање) захтева\n"
+#~ "име (обично lp) и 'spool' директоријум који уз то иде. Које име и "
+#~ "директоријум\n"
+#~ "да користим за овај ред за штампу?"
+
+#~ msgid "Local Printer Options"
+#~ msgstr "Опције локалног штампача"
+
+#~ msgid "Would you like to configure a printer?"
+#~ msgstr "Да ли бисте да подесите штампач?"
+
+#~ msgid "Printer"
+#~ msgstr "Штампач"
+
+#~ msgid "server"
+#~ msgstr "сервер"
+
+#~ msgid "expert"
+#~ msgstr "експерт"
+
+#~ msgid "developer"
+#~ msgstr "девелопер"
+
+#~ msgid "beginner"
+#~ msgstr "почетник"
+
+#~ msgid "Linear (needed for some SCSI drives)"
+#~ msgstr "Користи линеарни мод (потребан неким SCSI драјвовима)"
+
+#~ msgid "linear"
+#~ msgstr "линеар"
+
+#~ msgid "After %s partition %s,"
+#~ msgstr "После %s партиция %s,"
+
+#~ msgid "changing type of"
+#~ msgstr "мењање типа"
+
+#~ msgid "formatting"
+#~ msgstr "форматирање"
+
+#~ msgid "resizing"
+#~ msgstr "промена величине"
+
+#~ msgid "Size: %s MB"
+#~ msgstr "Величина: %s MB"
+
+#~ msgid "Bad kickstart file %s (failed %s)"
+#~ msgstr "Погрешан kickstart фајл %s (није успео %s)"
+
+#~ msgid "Going to install %d MB. You can choose to install more programs"
+#~ msgstr "Инсталираћу %d MB. Можете изабрати да инсталирате још програма"
+
+#~ msgid "Password:"
+#~ msgstr "Лозинка:"
+
+#~ msgid "User name:"
+#~ msgstr "Корисничко имe:"

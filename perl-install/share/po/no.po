@@ -935,7 +935,6 @@ msgid "Preference: "
 msgstr "Valg: "
 
 #: ../../diskdrake.pm_.c:719
-#, fuzzy
 msgid "This partition can't be used for loopback"
 msgstr "Denne partisjonen kan ikke brukes for loopback"
 
@@ -3915,9 +3914,8 @@ msgstr ""
 "jobbene skal plasseres i."
 
 #: ../../printerdrake.pm_.c:60
-#, fuzzy
 msgid "Remote hostname"
-msgstr "Fjern-vertnavn:"
+msgstr "Fjern-vertnavn"
 
 #: ../../printerdrake.pm_.c:61
 msgid "Remote queue"
@@ -3942,24 +3940,20 @@ msgstr ""
 "passord og arbeidsgruppeinformasjon."
 
 #: ../../printerdrake.pm_.c:75
-#, fuzzy
 msgid "SMB server host"
-msgstr "SMB-tjener vert:"
+msgstr "SMB-tjener vert"
 
 #: ../../printerdrake.pm_.c:76
-#, fuzzy
 msgid "SMB server IP"
-msgstr "SMB-tjener IP:"
+msgstr "SMB-tjener IP"
 
 #: ../../printerdrake.pm_.c:77
-#, fuzzy
 msgid "Share name"
-msgstr "Navn deling:"
+msgstr "Navn deling"
 
 #: ../../printerdrake.pm_.c:80
-#, fuzzy
 msgid "Workgroup"
-msgstr "Arbeidsgruppe:"
+msgstr "Arbeidsgruppe"
 
 #: ../../printerdrake.pm_.c:96
 msgid "NetWare Printer Options"
@@ -3978,14 +3972,12 @@ msgstr ""
 "adgang til og anvendelige brukernavn og passord."
 
 #: ../../printerdrake.pm_.c:101
-#, fuzzy
 msgid "Printer Server"
-msgstr "Skrivertjener:"
+msgstr "Skrivertjener"
 
 #: ../../printerdrake.pm_.c:102
-#, fuzzy
 msgid "Print Queue Name"
-msgstr "Skriverkø-navn:"
+msgstr "Skriverkø-navn"
 
 #: ../../printerdrake.pm_.c:115
 msgid "Yes, print ASCII test page"
@@ -4562,20 +4554,87 @@ msgstr "Finner tillatelser"
 msgid "Finding leaves takes some time"
 msgstr "Finne tillatelser vil ta litt tid"
 
-#~ msgid "User name:"
-#~ msgstr "Brukernavn:"
+#~ msgid "Too many packages chosen: %dMB doesn't fit in %dMB"
+#~ msgstr "For mange pakker er valgt: %dMB passer ikke i %dMB"
 
-#~ msgid "Password:"
-#~ msgstr "Passord:"
+#~ msgid "Going to install %d MB. You can choose to install more programs"
+#~ msgstr ""
+#~ "%d MB vil bli installert. Du kan velge å installere flere programmer"
+
+#~ msgid "Bad kickstart file %s (failed %s)"
+#~ msgstr "Dårlig kickstart-fil %s (mislykket %s)"
+
+#~ msgid "resizing"
+#~ msgstr "endrer størrelse"
+
+#~ msgid "formatting"
+#~ msgstr "formatering"
+
+#~ msgid "changing type of"
+#~ msgstr "endrer type av"
+
+#~ msgid "After %s partition %s,"
+#~ msgstr "Etter %s partisjon %s,"
+
+#~ msgid "linear"
+#~ msgstr "lineær"
+
+#~ msgid "Linear (needed for some SCSI drives)"
+#~ msgstr "Lineær (behøves av noen SCSI-disker)"
+
+#~ msgid "Printer"
+#~ msgstr "Skriver"
+
+#~ msgid "Would you like to configure a printer?"
+#~ msgstr "Ønsker du å konfigurere en skriver?"
+
+#~ msgid "Local Printer Options"
+#~ msgstr "Opsjoner for lokal skriver"
 
 #~ msgid ""
-#~ "Test page(s) have been sent to the printer daemon.\n"
-#~ "This may take a little time before printer start.\n"
-#~ "Does it work properly?"
+#~ "Every print queue (which print jobs are directed to) needs a\n"
+#~ "name (often lp) and a spool directory associated with it. What\n"
+#~ "name and directory should be used for this queue?"
 #~ msgstr ""
-#~ "Testsiden(e) har blitt sendt til skriver-daemonen.\n"
-#~ "Det kan ta litt tid før skriveren starter.\n"
-#~ "Virker det ordentlig?"
+#~ "Hver skriverkø (som skrivejobber sendes til) trenger et navn\n"
+#~ "(ofte lp) og en spolingskatalog assosiert til denne. Hvilket\n"
+#~ "navn og katalog skal brukes for denne køen?"
+
+#~ msgid "Name of queue:"
+#~ msgstr "Køens navn:"
+
+#~ msgid "Spool directory:"
+#~ msgstr "Spolingskatalog:"
+
+#~ msgid "Select Printer Connection"
+#~ msgstr "Velg skrivertilkobling"
+
+#~ msgid "How is the printer connected?"
+#~ msgstr "Hvordan er skriveren tilkoblet?"
+
+#~ msgid "Printer options"
+#~ msgstr "Opsjoner for skriver"
+
+#~ msgid "Paper Size"
+#~ msgstr "Papirstørrelse"
+
+#~ msgid "Eject page after job?"
+#~ msgstr "Kjør ut side etter jobb?"
+
+#~ msgid "Fix stair-stepping text?"
+#~ msgstr "Fikse trappestegs-tekst?"
+
+#~ msgid "Uniprint driver options"
+#~ msgstr "Opsjoner uniprint-driver"
+
+#~ msgid "Color depth options"
+#~ msgstr "Opsjoner fargedybde"
+
+#~ msgid "Do you want to test printing?"
+#~ msgstr "Vil du teste utskrift?"
+
+#~ msgid "Printing test page(s)..."
+#~ msgstr "Skriver ut testside(r)..."
 
 #~ msgid ""
 #~ "Test page(s) have been sent to the printer daemon.\n"
@@ -4592,84 +4651,17 @@ msgstr "Finne tillatelser vil ta litt tid"
 #~ "\n"
 #~ "Virker det ordentlig?"
 
-#~ msgid "Printing test page(s)..."
-#~ msgstr "Skriver ut testside(r)..."
-
-#~ msgid "Do you want to test printing?"
-#~ msgstr "Vil du teste utskrift?"
-
-#~ msgid "Color depth options"
-#~ msgstr "Opsjoner fargedybde"
-
-#~ msgid "Uniprint driver options"
-#~ msgstr "Opsjoner uniprint-driver"
-
-#~ msgid "Fix stair-stepping text?"
-#~ msgstr "Fikse trappestegs-tekst?"
-
-#~ msgid "Eject page after job?"
-#~ msgstr "Kjør ut side etter jobb?"
-
-#~ msgid "Paper Size"
-#~ msgstr "Papirstørrelse"
-
-#~ msgid "Printer options"
-#~ msgstr "Opsjoner for skriver"
-
-#~ msgid "How is the printer connected?"
-#~ msgstr "Hvordan er skriveren tilkoblet?"
-
-#~ msgid "Select Printer Connection"
-#~ msgstr "Velg skrivertilkobling"
-
-#~ msgid "Spool directory:"
-#~ msgstr "Spolingskatalog:"
-
-#~ msgid "Name of queue:"
-#~ msgstr "Køens navn:"
-
 #~ msgid ""
-#~ "Every print queue (which print jobs are directed to) needs a\n"
-#~ "name (often lp) and a spool directory associated with it. What\n"
-#~ "name and directory should be used for this queue?"
+#~ "Test page(s) have been sent to the printer daemon.\n"
+#~ "This may take a little time before printer start.\n"
+#~ "Does it work properly?"
 #~ msgstr ""
-#~ "Hver skriverkø (som skrivejobber sendes til) trenger et navn\n"
-#~ "(ofte lp) og en spolingskatalog assosiert til denne. Hvilket\n"
-#~ "navn og katalog skal brukes for denne køen?"
+#~ "Testsiden(e) har blitt sendt til skriver-daemonen.\n"
+#~ "Det kan ta litt tid før skriveren starter.\n"
+#~ "Virker det ordentlig?"
 
-#~ msgid "Local Printer Options"
-#~ msgstr "Opsjoner for lokal skriver"
+#~ msgid "Password:"
+#~ msgstr "Passord:"
 
-#~ msgid "Would you like to configure a printer?"
-#~ msgstr "Ønsker du å konfigurere en skriver?"
-
-#~ msgid "Printer"
-#~ msgstr "Skriver"
-
-#~ msgid "Linear (needed for some SCSI drives)"
-#~ msgstr "Lineær (behøves av noen SCSI-disker)"
-
-#~ msgid "linear"
-#~ msgstr "lineær"
-
-#~ msgid "After %s partition %s,"
-#~ msgstr "Etter %s partisjon %s,"
-
-#~ msgid "changing type of"
-#~ msgstr "endrer type av"
-
-#~ msgid "formatting"
-#~ msgstr "formatering"
-
-#~ msgid "resizing"
-#~ msgstr "endrer størrelse"
-
-#~ msgid "Bad kickstart file %s (failed %s)"
-#~ msgstr "Dårlig kickstart-fil %s (mislykket %s)"
-
-#~ msgid "Going to install %d MB. You can choose to install more programs"
-#~ msgstr ""
-#~ "%d MB vil bli installert. Du kan velge å installere flere programmer"
-
-#~ msgid "Too many packages chosen: %dMB doesn't fit in %dMB"
-#~ msgstr "For mange pakker er valgt: %dMB passer ikke i %dMB"
+#~ msgid "User name:"
+#~ msgstr "Brukernavn:"
