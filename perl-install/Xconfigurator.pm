@@ -293,7 +293,7 @@ What do you want to do?"), sub { translate($_[0]{text}) }, \@choices) or return;
 							       $card->{identifier} =~ /[nN]Vidia.*Quadro/);
     #- check to use XFree 4 or XFree 3.3.
     $card->{use_xf4} = $card->{driver} && !$card->{flags}{unsupported};
-    $card->{force_xf4} ||= arch() =~ /ppc/; #- try to figure out ugly hack for PPC (recommend XF4 always so...)
+    $card->{force_xf4} ||= arch() =~ /ppc|ia64/; #- try to figure out ugly hack for PPC (recommend XF4 always so...)
     $card->{prefer_xf3} = !$card->{force_xf4} && ($card->{type} =~ /NeoMagic /);
     #- take into account current environment in standalone to keep
     #- the XFree86 version.
