@@ -682,6 +682,7 @@ failures. Would you like to create a bootdisk for your system?"),
 	$o->{mkbootdisk} = $l[0] if !$o->{mkbootdisk} || $o->{mkbootdisk} eq "1";
     } else {
 	@l or die _("Sorry, no floppy drive available");
+	$l{$_} ||= $_ foreach @l;
 
 	$o->{mkbootdisk} = ${{reverse %l}}{$o->ask_from_list_('',
 							      _("Choose the floppy drive you want to use to make the bootdisk"),
