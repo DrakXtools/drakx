@@ -1566,7 +1566,7 @@ sub toggle_expansion {
 
 package Gtk2::OptionMenu;
 
-sub new { print "toto! !!!\n\n"; Gtk2::ComboBox->new_text }
+sub new { Gtk2::ComboBox->new_text }
 
 
 
