@@ -3,7 +3,7 @@ LSB
 
 GRAPHICAL_DESKTOP
   4 WindowMaker icewm
-  3 Epplets blackbox enlightenment ethemes icepref xfce
+  3 epplets blackbox enlightenment ethemes icepref xfce
   2 wmnet
   1 lesstif-mwm
 
@@ -11,13 +11,13 @@ GNOME
   5 gnome-panel nautilus gnome-control-center metacity 
   4 gnome-applets gtk-themes file-roller
     gnome-utils gucharmap xlockmore gtk-engines2 
-    gnome-vfs-extras gconf-editor
+    gconf-editor
   5 !KDE gdm
   3 gnome-pilot
   2 bug-buddy
 
 KDE
-  5 kdebase-progs kdebase-nsplugins mdkkdm galaxy-kde galaxy-kde-kwin mandrake-galaxy krozat kdeartwork-kde-classic kdeartwork
+  5 kdebase-progs kdebase-nsplugins mdkkdm galaxy-kde galaxy-kde-kwin mandrakegalaxy krozat kdeartwork-kde-classic kdeartwork
   5 kde-i18n-af kde-i18n-ar
   5 kdebase-servicemenu zip
   5 kdeutils kdeutils-kcharselect
@@ -31,14 +31,13 @@ VIDEO
   5 totem
   4 RealPlayer
   4 KDE kdenlive
-  3 xine-ui xine-oss xine-xv
+  3 xine-ui
   3 powerdvd
-  3 nist xanim xmms-smpeg mplayer-gui
-  2 mtv mtv-fullscreen-extension
+  3 xmms-smpeg mplayer-gui
   2 xmovie
 TV
   5 tvtime
-  3 zapping gatos
+  3 zapping ati.2
 
 OFFICE
   5 OpenOffice.org
@@ -105,7 +104,7 @@ AUDIO
   3 xmms-skins
   3 3D xmms-mesa
   3 HW"Rio 500" rio500
-  2 mokmod mp3info mpg123 playmidi playmidi-X11 xmms-mikmod
+  2 mp3info mpg123 playmidi playmidi-X11 xmms-mikmod
 
 
 ACCESSIBILITY
@@ -113,10 +112,10 @@ ACCESSIBILITY
 
 PUBLISHING
   5 enscript ghostscript-module-X
-  4 ghostscript-utils psutils texinfo
+  4 psutils texinfo
   2 latex2html jadetex tetex-afm tetex-dvips tetex-latex tetex-xdvi tetex-latex-arab tetex-latex-heb docbook-dtd31-sgml
-  2 BOOKS tetex-doc tetex-latex-arab-doc
-  1 docbook-style-dsssl openjade sgml-tools ghostscript-module-SVGALIB cttex
+  2 BOOKS tetex-doc
+  1 docbook-style-dsssl openjade cttex
   1 BOOKS docbook-style-dsssl-doc
 
 SHELLS
@@ -206,8 +205,8 @@ NETWORKING_INSTANT_MESSAGING
   5 KDE kdenetwork-kopete
   5 !KDE gaim
   3 licq
-  3 everybuddy licq-console licq-rms
-  3 KDE kdenetwork-kit
+  3 ayttm
+  3 licq-console licq-rms
   GNOME
     3 gnomeicu gabber
     3 gtk+licq
@@ -222,7 +221,7 @@ NETWORKING_IRC
 
 NETWORKING_FIREWALLING_SERVER
   5 iproute2 routed iptables
-  3 prelude
+  3 prelude-manager
 
 NETWORKING_GROUPWARE_SERVER
   5 kolab-server
@@ -230,12 +229,12 @@ NETWORKING_GROUPWARE_SERVER
 
 NETWORKING_MAIL
   5 mailx metamail
-  5 KDE kdenetwork-kmail
+  5 KDE kdepim-kmail
   5 GNOME evolution
   3 faces mozilla-mail
   3 fetchmail urlview mutt spamassassin
   3 !GNOME !KDE xmailbox
-  3 KDE kdenetwork-korn
+  3 KDE kdepim-korn
   2 FaxMail faces-xface
   1 fetchmail-daemon fetchmailconf
 
@@ -245,7 +244,7 @@ NETWORKING_MAIL_SERVER
   3 imap
 
 NETWORKING_NEWS
-  5 KDE kdenetwork-knode
+  5 KDE kdepim-knode
   5 GNOME pan
   2 slrn
   1 slrn-pull
@@ -265,7 +264,7 @@ NETWORKING_OTHER_SERVER
     rdate bootparamd 
     cleanfeed ucd-snmp leafnode
     cvsweb nut-server
-    XFree86-Xvfb XFree86-Xnest
+    xorg-x11-Xvfb xorg-x11-Xnest
   2 diald finger-server mars-nwe
 
 NIS
@@ -286,7 +285,7 @@ NETWORKING_REMOTE_ACCESS_SERVER
   4 rfbdrake
   2 tightvnc-server
   1 telnet-server-krb5 rsh-server
-  3 BOOKS tight-vnc-doc
+  3 BOOKS tightvnc-doc
 
 NETWORKING_DNS
   4 bind-utils 
@@ -332,30 +331,31 @@ NETWORKING_WWW_SERVER
   5 apache2 apache2-mod_perl apache2-mod_ssl apache2-mod_php 
   4 apache2-mod_suexec 
   4 BOOKS apache2-manual
-  3 php-gd php-imap php-ldap php-manual php-mysql
-    php-pgsql php-readline php mod_sxnet HTML-Embperl
-  2 ApacheJServ
+  3 php-gd php-imap php-ldap php-mysql
+    php-pgsql php-readline php_cgi mod_sxnet HTML-Embperl
+  3 BOOKS php-manual-en php-manual-fr
 
 GRAPHICS
   5 qiv
-  4 gimp gqview
+  4 gimp2_0 gqview
   4 KDE kdegraphics-ksnapshot
   4 KDE kimdaba
   4 KDE kdegraphics-common
   4 ImageMagick giftrans gphoto2
   3 gimp-data-extras
-  3 flphoto gtkam gimp-plugin
+  3 BOOKS gimp-help
+  3 flphoto gtkam
   3 KDE kdeaddons-konqimagegallery
   3 KDE kdegraphics-kpaint
   3 KDE kdegraphics-kruler
   3 KDE kdegraphics-kuickshow
   3 KDE kdegraphics-kview
   3 KDE kdegraphics-mrmlsearch
-  3 sketch
+  3 skencil
   3 xwpick
   3 xli
-  2 gif2png gimp-perl xpcd xfig xpcd-gimp gd-utils cameleo
-  1 libgr-progs libungif-progs qcad transfig xpaint xmorph
+  2 gif2png gimp-perl xpcd xfig xpcd-gimp gd-utils
+  1 netpbm libungif-progs qcad transfig xpaint xmorph
   1 3D Mesa-demos
   GNOME
     3 gnome-iconedit
@@ -364,7 +364,7 @@ GRAPHICS
 ARCHIVING
   5 unzip zip dump sharutils
   5 KDE kdeutils-ark
-  2 unarj unstuff mt-st
+  2 mt-st
   2 taper
   1 lha
   GNOME
@@ -383,8 +383,8 @@ BURNER
     3 cdrecord-devel
 
 SCANNER
-  4 sane-frontends
-  4 scanner-gui
+  4 sane-frontends xsane
+  4 KDE kdegraphics-kooka
 
 PHOTO
   4 gphoto gphoto2
@@ -395,12 +395,11 @@ DATABASES
   DATABASES_SERVER
     4 postgresql-server
     3 MySQL
-    3 postgresql-python
     2 postgresql-jdbc postgresql-tcl postgresql-test
   DEVELOPMENT 
     4 perl-Mysql
     3 postgresql-devel
-    1 MySQL-bench MySQL-devel
+    1 MySQL-bench libmysql-devel
 
 GAMES
   5 frozen-bubble
@@ -408,13 +407,11 @@ GAMES
   5 crack-attack crack-attack-music crack-attack-sounds
   3 clanbomber freeciv-client toppler
   3 cxhextris rocksndiamonds powermanga mures methane
-  2 Maelstrom pingus ltris penguin-command pysol xtrojka bunnies xpilot trophy xboard xgammon xkobo xpat2 xpuzzles xsoldier xfishtank
-  1 7colors xrally fortune-mod nil
+  2 Maelstrom pingus ltris penguin-command pysol xpilot trophy xboard skobo xpat2 xsoldier xfishtank
+  1 fortune-mod nil
   GNOME
     3 gnome-games
     3 gnome-chess
-    2 3D gtulpas
-    1 gtkgo
   KDE
     3 kdegames
     3 kdeaddons-atlantik
@@ -427,7 +424,7 @@ GAMES
         bzflag
 
 DEVELOPMENT
-  5 autoconf automake m4 make 
+  5 autoconf2.1 automake1.4 m4 make 
   3 autoconf2.5
   1 tmake pmake
 
@@ -467,8 +464,8 @@ DEVELOPMENT
   2 gcc-g77 nasm dev86 
   1 gcc-objc
 
-  2 gprolog ocaml umb-scheme mawk guile clispp2c 
-    hugs98 mercury swi-prolog ruby 
+  2 gprolog ocaml umb-scheme mawk guile clisp
+    hugs98 swi-prolog ruby 
 
   4 gettext-devel libncurses5-devel ncurses-devel
 
@@ -505,7 +502,7 @@ DEVELOPMENT
     2 libMagick-devel libMesaGLU1-devel Xaw3d-devel
       gd-devel p2c-devel gmp-devel guile-devel libgr-devel libjpeg-devel libpng-devel
       libtermcap-devel libtiff-devel libungif-devel libxml-devel
-      slang-devel sox-devel zlib-devel libxfree86-devel dev86-devel
+      slang-devel sox-devel zlib-devel libxorg-x11-devel dev86-devel
       gdk-pixbuf-devel gimp-devel gpm-devel libghttp-devel libgtop-devel
       libmikmod-devel librep-devel libunicode-devel popt-devel pwdb-devel t1lib-devel
       libsnmp-devel mpeg_lib-devel WindowMaker-devel libaa-devel adns-devel
@@ -513,7 +510,7 @@ DEVELOPMENT
       g-wrap-devel gkrellm-devel libPropList-devel licq-devel openldap-devel
       parted-devel pciutils-devel pilot-link-devel svgalib-devel
       recode-devel aspell-devel cracklib-devel faces-devel fnlib-devel
-      freetype-devel gtk+mdk-devel gtkglarea-devel libxfree86-static-devel imap-devel
+      freetype-devel gtk+mdk-devel gtkglarea-devel libxorg-x11-static-devel imap-devel
       php-devel pth-devel sane-devel swig-devel xdelta-devel isapnptools-devel
       pango-devel readline-devel
 
@@ -527,7 +524,8 @@ MONITORING
   3 KDE kdeutils-ksim
   3 KDE kdeutils-ktimer
   3 iplog arpwatch lslk xcpustate xsysinfo
-  2 cfengine gkrellm gps rusers mon 3D xtraceroute
+  2 cfengine gkrellm gps rusers mon 
+  2 3D xtraceroute
   1 logcheck
   GNOME
     4 gnome-system-monitor
@@ -556,7 +554,7 @@ BOOKS
   4 !LOCALES"fr" !LOCALES"it" !LOCALES"es" mandrake-doc-en
 
 X
-  5 XFree86 rxvt XFree86-75dpi-fonts urw-fonts fonts-ttf-vera
+  5 xorg-x11 rxvt xorg-x11-75dpi-fonts urw-fonts fonts-ttf-vera
   5 icewm-light
   5 HIGH_SECURITY mountloop
   5 LOCALES"ja" im-ja
@@ -569,21 +567,17 @@ X
     galaxy-gnome
   4 LOCALES"ja" || LOCALES"ko" || LOCALES"zh" rxvt-CJK 
 
-  3 XFree86-100dpi-fonts draksync
+  3 xorg-x11-100dpi-fonts draksync
   3 USB usbview
   2 LOCALES"ja" || LOCALES"ko" || LOCALES"zh" jmcce 
   2 imlib-cfgeditor
   1 Mesa xtoolwait X11R6-contrib 
 
-  GNOME
-    3 gnorpm
-
   5 xcin xvnkb uim ami miniChinput
 
   2 app-defaults-be app-defaults-cs
 
-  5 LOCALES"mi" || LOCALES"lt" || LOCALES"lv" fonts-type1-baltic
-    LOCALES"ru" || LOCALES"uk" XFree86-cyrillic-fonts
+  5 LOCALES"ru" || LOCALES"uk" xorg-x11-cyrillic-fonts
     LOCALES"am" fonts-ttf-ethiopic
     LOCALES"ar" || LOCALES"fa" || LOCALES"ur" fonts-ttf-arabic
     LOCALES"as" || LOCALES"bn" fonts-ttf-bengali
@@ -602,7 +596,7 @@ DOCS
   5 man info man-pages
 
 SYSTEM
-  5 at MAKEDEV eject ldetect devfsd harddrake
+  5 at eject ldetect devfsd harddrake
     locales iputils urpmi cpio msec tmpwatch gnupg
 
   5 lshw OpenIPMI dmidecode
@@ -613,12 +607,6 @@ SYSTEM
   5 BIGMEM SMP kernel-p3-smp-64GB
   5 PCMCIA pcmcia-cs
   5 USB hotplug
-
-  5 HW"nForce.*(?:Audio|Network)" 
-     NVIDIA_nforce
-     SMP NVIDIA_nforce-smp
-     HIGH_SECURITY NVIDIA_nforce-secure
-     BIGMEM NVIDIA_nforce-enterprise
 
   5 HW"iKey 3000 Token" rnboifd
   5 HW"OmniKey Cardman"
@@ -676,10 +664,10 @@ INSTALL
     5 kernel kernel-smp kernel-i686-up-4GB
       raidtools lvm2 reiserfsprogs jfsprogs xfsprogs 
       alsa-utils
-    4 XFree86 brltty
+    4 xorg-x11 brltty
 
   5 pptp-adsl dhcpcd dhcpxd dhcp-client rp-pppoe pump
-    ppp nfs-utils-clients libiw26 wireless-tools ppp-pppoe ppp-pppoatm
+    ppp nfs-utils-clients libiw27 wireless-tools ppp-pppoe ppp-pppoatm
     autologin ntp samba-server ncpfs ucd-snmp libptal0
     shorewall iptables samba-client
     ipchains nc sndconfig curl
@@ -690,10 +678,5 @@ INSTALL
     eagle-usb
     speedtouch speedtouch_mgmt
 
-  5 cups cups-drivers hpoj libhpojip 
-  4 XFree86-SVGA XFree86-server XFree86-Mach64 XFree86-FBDev
-    XFree86-glide-module Glide_V3-DRI Glide_V5 Mesa
-  3 XFree86-S3 XFree86-S3V XFree86-VGA16
-  2 XFree86-8514 XFree86-AGX XFree86-I128 XFree86-Mach32 XFree86-Mach8 XFree86-Mono XFree86-P9000 XFree86-W32
-  1 XFree86-3DLabs
-    
+  5 cups cups-drivers hpoj libhpojip0
+  4 xorg-x11-server xorg-x11-glide-module Glide_V3-DRI Glide_V5 Mesa
