@@ -32,7 +32,9 @@ use fs;
 XFree86-8514 XFree86-AGX XFree86-Mach32 XFree86-Mach64 XFree86-Mach8 XFree86-Mono
 XFree86-P9000 XFree86-S3 XFree86-S3V XFree86-SVGA XFree86-W32 XFree86-I128
 XFree86-Sun XFree86-SunMono XFree86-Sun24 XFree86-3DLabs XFree86-FBDev XFree86-server
-XFree86 dhcpcd pump ppp ypbind rhs-printfilters pnm2ppa samba ncpfs kernel-fb
+XFree86 XFree86-glide-module Device3DFX Glide_V3-DRI Glide_V5 Mesa
+dhcpcd pump dhcpxd dhcp-client isdn4net isdn4k-utils dev pptp-adsl-fr rp-pppoe ppp ypbind
+rhs-printfilters lpr cups cups-drivers pnm2ppa Lexmark-1100-printer-driver__lm1100 samba ncpfs kernel-fb
 );
 
 #-######################################################################################

@@ -309,15 +309,15 @@ sub inspect {
 
 #-----modem conf
 sub pppConfig {
-    my ($in, $modem, $prefix) = @_;
+    my ($in, $modem, $prefix, $install) = @_;
     $modem or return;
 
     symlinkf($modem->{device}, "$prefix/dev/modem") or log::l("creation of $prefix/dev/modem failed");
-    $::isStandalone ? `urpmi --auto ppp` : $in->pkg_install("ppp") unless $::testing;
+    $install->(qw(ppp)) unless $::testing;
 
     my %toreplace;
     $toreplace{$_} = $modem->{$_} foreach qw(connection phone login passwd auth domain dns1 dns2);
-    $toreplace{kpppauth} = ${{ 'Script-based' => 0, 'PAP' => 1, 'Terminal-based' => 2, 'CHAP' => 3, }}{$modem->{auth}};
+    $toreplace{kpppauth} = ${{ 'Script-based' => 0, 'PAP' => 1, 'Terminal-based' => 2, }}{$modem->{auth}};
     $toreplace{phone} =~ s/\D//g;
     $toreplace{dnsserver} = join ',', map { $modem->{$_} } "dns1", "dns2";
     $toreplace{dnsserver} .= $toreplace{dnsserver} && ',';
@@ -379,7 +379,14 @@ END
 'ABORT' 'Login incorrect'
 '' 'ATZ'
 'OK'
-'ATDT$modem->{special_command}'
+END
+    if ($modem->{special_command}) {
+	print CHAT <<END;
+'$modem->{special_command}'
+'OK'
+END
+    }
+    print CHAT <<END
 'ATDT$toreplace{phone}'
 'CONNECT' ''
 END
@@ -413,7 +420,7 @@ END
 	}
 	#- restore access right to secrets file, just in case.
 	chmod 0600, $secrets;
-    } #- CHAP is not supported by initscripts, need patching before doing more on that here!
+    }
 
     #-install_any::template2userfile($o->{prefix}, "$ENV{SHARE_PATH}/kppprc.in", ".kde/share/config/kppprc", 1, %toreplace);
     commands::mkdir_("-p", "$prefix/usr/share/config");
