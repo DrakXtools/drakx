@@ -342,9 +342,11 @@ static enum return_type try_with_device(char *dev_name)
 			umount(disk_own_mount);
 			return try_with_device(dev_name);
 		}
-	} else
+		add_to_env("METHOD", "disk-iso");
+	} else {
 		symlink(location_full, IMAGE_LOCATION);
-
+		add_to_env("METHOD", "disk");
+	}
 #ifndef MANDRAKE_MOVE
 	if (IS_SPECIAL_STAGE2 || ramdisk_possible()) {
 		/* RAMDISK install */
@@ -398,7 +400,6 @@ static enum return_type try_with_device(char *dev_name)
                 del_loop(loopdev);
 	}
 
-        add_to_env("METHOD", "disk");
 	return RETURN_OK;
 }
 
