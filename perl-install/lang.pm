@@ -152,7 +152,7 @@ my %xim = (
 
 sub std2 { "-*-*-medium-r-normal-*-$_[1]-*-*-*-*-*-$_[0]" }
 sub std_ { std2($_[0], 10), std2($_[0], 10) }
-sub std  { std2($_[0], 10), std2($_[0],  8) }
+sub std  { std2($_[0], 12), std2($_[0],  8) }
 
 #- [0]: console font name; [1]: unicode map for console font
 #- [2]: acm file for console font; [3]: X11 fontset
@@ -177,7 +177,7 @@ my %charsets = (
   "iso-8859-4" => [ "lat4u-16",		undef,		"iso04",
 	std_("iso8859-4") ],
   "iso-8859-5" => [ "iso05.f16",	"iso05",	"trivial.trans",
-	std("iso8859-5") ],
+	std2("iso8859-5", 10), std2("iso8859-5",  8) ],
 #- arabic needs special console driver for text mode [acon]
 #- (and gtk support isn't done yet)
   "iso-8859-6" => [ "iso06.f16",	"iso06",	"trivial.trans",

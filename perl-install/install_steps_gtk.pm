@@ -576,7 +576,7 @@ sub create_big_help {
     gtkadd($w->{window},
 	   gtkpack_(new Gtk::VBox(0,0),
 		    1, createScrolledWindow(gtktext_insert(new Gtk::Text, 
-							   formatAlaTeX(translate($help::steps{$::o->{step}})))),
+							   formatAlaTeX(_ deref($help::steps{$::o->{step}})))),
 		    0, gtksignal_connect(new Gtk::Button(_("Ok")), "clicked" => sub { Gtk->main_quit }),
 		   ));
     $w->main;
@@ -599,38 +599,14 @@ sub create_help_window {
 	$w->{rwindow}->set_usize($::helpwidth, $::helpheight);
 	$w->sync;
     }
-
-#-    my $b = new Gtk::Button;
-#-    $b->signal_connect(clicked => sub {
-#-	  my $w = my_gtk->new('', grab => 1, force_position => [ $stepswidth, $logoheight ]);
-#-	  $w->{rwindow}->set_usize($logowidth, $height - $logoheight);
-#-	  gtkadd($w->{window},
-#-		 gtkpack_(new Gtk::VBox(0,0),
-#-			  1, createScrolledWindow(gtktext_insert(new Gtk::Text, 
-#-								 formatAlaTeX(translate($help::steps_long{$o->{step}})))),
-#-			  0, gtksignal_connect(new Gtk::Button(_("Ok")), "clicked" => sub { Gtk->main_quit }),
-#-			  ));
-#-	  $w->main;
-#-    });
-#-    my @l = (@questionmark_head,
-#-	       join('', "X c #", map { sprintf "%02X", $_ / 256 } @background1),
-#-	       join('', "O c #", map { sprintf "%02X", $_ / 256 } @background2),
-#-	       @questionmark_body);
-#-    my @pixmap = Gtk::Gdk::Pixmap->create_from_xpm_d($w->{window}->window, undef, @l);
-#-    gtkadd($b, new Gtk::Pixmap(@pixmap));
-
-#    Gtk::XmHTML->init;
     my $pixmap = new Gtk::Pixmap( gtkcreate_xpm($w->{window}, "$ENV{SHARE_PATH}/help.xpm"));
     gtkadd($w->{window},
 	   gtkpack_(new Gtk::HBox(0,-2),
-#-		    0, $b,
-#-		    1, createScrolledWindow($w_help = new Gtk::XmHTML)));
 		    0, $pixmap,
 		    1, createScrolledWindow($w_help = new Gtk::Text)
 		   ));
 
-#-    $w_help->source($o->{step} ? translate($o->{steps}{$o->{step}}{help}) : '');
-    gtktext_insert($w_help, $o->{step} ? formatAlaTeX(translate($help::steps{$o->{step}})) : '');
+    gtktext_insert($w_help, $o->{step} ? formatAlaTeX(_ deref($help::steps{$o->{step}})) : '');
 
     $w->show;
     $o->{help_window} = $w;
@@ -641,7 +617,7 @@ sub set_help {
     shift;
     gtktext_insert($w_help, 
 		   formatAlaTeX(join "\n", 
-				map { translate($help::steps{$_}) } @_));
+				map { _ deref($help::steps{$_}) } @_));
     1;
 }
 

@@ -399,7 +399,6 @@ sub miscellaneous {
 sub configureNetwork {
     $::live and return;
     #- get current configuration of network device.
-    log::l("debugging: $o->{netc}{HOSTNAME}");
     eval {
 	$o->{netc} ||= {}; $o->{intf} ||= [];
 	add2hash($o->{netc}, network::read_conf("$o->{prefix}/etc/sysconfig/network")) if -r "$o->{prefix}/etc/sysconfig/network";

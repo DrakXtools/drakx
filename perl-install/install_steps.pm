@@ -150,8 +150,8 @@ sub doPartitionDisksAfter {
     if (my $s = delete $o->{stage1_hd}) {
 	my ($part) = grep { $_->{device} eq $s->{device} } @{$o->{fstab}};
 	$part->{isMounted} ?
-	  symlinkf("$o->{prefix}$part->{mntpoint}", "/tmp/hdimage") :
-	  eval { fs::mount($s->{dev}, "/tmp/hdimage", $s->{fs}) };
+	  do { rmdir "/tmp/hdimage" ; symlinkf("$o->{prefix}$part->{mntpoint}", "/tmp/hdimage") } :
+	  eval { fs::mount($s->{device}, "/tmp/hdimage", $s->{type}) };
     }
 
     cat_("/proc/mounts") =~ m|(\S+)\s+/tmp/rhimage nfs| &&
@@ -381,8 +381,10 @@ Consoles 1,3,4,7 may also contain interesting information";
     #- create /etc/sysconfig/desktop file according to user choice and presence of /usr/bin/kdm or /usr/bin/gdm.
     my $f = "$o->{prefix}/etc/sysconfig/desktop";
     if ($o->{compssUsersChoice}{KDE} && -x "$o->{prefix}/usr/bin/kdm") {
+	log::l("setting desktop to KDE");
 	output($f, "KDE\n");
     } elsif ($o->{compssUsersChoice}{Gnome} && -x "$o->{prefix}/usr/bin/gdm") {
+	log::l("setting desktop to GNOME");
 	output($f, "GNOME\n");
     }
 

@@ -61,7 +61,13 @@ sub selectLanguage($) {
 				    $o->{lang});
     install_steps::selectLanguage($o);
 
-    $o->ask_warn('', "No translation is available yet during installation in this language") if $o->{lang} !~ /^en/ && translate("_I18N_");
+    $o->ask_warn('', 
+"If you see this message it is because you choose a language for which
+DrakX does not include a translation yet; however the fact that it is
+listed means there is some support for it anyway. That is, once GNU/Linux
+will be installed, you will be able to at least read and write in that
+language; and possibly more (various fonts, spell checkers, various programs
+translated etc. that varies from language to language).") if $o->{lang} !~ /^en/ && translate("_I18N_");
 
 #-    $o->{useless_thing_accepted} = $o->ask_from_list_('', 
 #-"Warning no warranty", 
@@ -92,7 +98,7 @@ sub selectInstallClass1 {
     my ($o, $verif, $l, $def, $l2, $def2) = @_;
     $verif->($o->ask_from_list(_("Install Class"), _("Which installation class do you want?"), $l, $def));
 
-    $o->ask_from_list_(_("Install/Upgrade"), _("Is this an install or an upgrade?"), $l2, $def2);
+    $o->ask_from_list_(_("Install/Rescue"), _("Is this an install or a rescue?"), $l2, $def2);
 }
 
 #------------------------------------------------------------------------------
@@ -326,7 +332,7 @@ sub choosePackages {
     require pkgs;
 
     my $min_size = pkgs::selectedSize($packages);
-    $min_size < $availableC or die _("Your system has not enough space left for installation or upgrade");
+    $min_size < $availableC or die _("Your system has not enough space left for installation or upgrade (%d > %d)", $min_size, $availableC);
 
     $o->chooseGroups($packages, $compssUsers, $compssUsersSorted, \$individual) unless $::beginner || $::corporate;
 
@@ -336,7 +342,7 @@ sub choosePackages {
 	my ($size, $level) = pkgs::fakeSetSelectedFromCompssList($o->{compssListLevels}, $packages, $min_mark, 0, $o->{installClass});
 	my $max_size = 1 + $size; #- avoid division by zero.
 	
-	my $size2install = do {
+	my $size2install = min($availableC, do {
 	    if ($::beginner) {
 		my @l = (300, 700, round_up(min($max_size, $availableC) / sqr(1024), 100));
 		$l[2] > $l[1] + 200 or splice(@l, 1, 1); #- not worth proposing too alike stuff
@@ -346,7 +352,7 @@ sub choosePackages {
 	    } else {
 		$o->chooseSizeToInstall($packages, $min_size, $max_size, $availableC, $individual) || goto &choosePackages;
 	    }
-	};
+	});
 	($o->{packages_}{ind}) =
 	  pkgs::setSelectedFromCompssList($o->{compssListLevels}, $packages, $min_mark, $size2install, $o->{installClass});
     }

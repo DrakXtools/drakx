@@ -66,10 +66,10 @@ sub get_mntpoints_from_fstab {
     foreach (read_fstab("$prefix/etc/fstab")) {
 	foreach my $p (@$fstab) {
 	    $p->{device} eq $_->{device} or next;
+	    $_->{type} ne 'auto' && $_->{type} ne type2fs($p->{type}) and
+		log::l("err, fstab and partition table do not agree for $_->{device} type: " . (type2fs($p->{type}) || type2name($p->{type})) . " vs $_->{type}"), next;
 	    $p->{mntpoint} ||= $_->{mntpoint};
 	    $p->{options} ||= $_->{options};
-	    $_->{type} ne 'auto' && $_->{type} ne type2fs($p->{type}) and
-		log::l("err, fstab and partition table do not agree for $_->{device} type: " . (type2fs($p->{type}) || type2name($p->{type})) . " vs $_->{type}");
 	}
     }
 }
