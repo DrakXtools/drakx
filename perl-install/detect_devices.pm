@@ -463,7 +463,8 @@ sub getSerialModem {
 
 sub getModem {
     my ($modules_conf) = @_;
-    getSerialModem($modules_conf, {}), matching_driver('www\.linmodems\.org');
+    getSerialModem($modules_conf, {}), matching_driver('www\.linmodems\.org'),
+      grep { member($_->{driver}, qw(snd-atiixp-modem snd-intel8x0m)) } probeall();
 }
 
 sub getSpeedtouch() {
