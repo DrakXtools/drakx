@@ -329,7 +329,6 @@ sub create_packtable($@) {
 		$j != $#$l ?
 		  $w->attach($_, $j, $j + 1, $i, $i + 1, 'fill', 'fill', 5, 0) :
 		  $w->attach_raw($_, $j, $j + 1, $i, $i + 1, 1|5, ref($_) eq 'Gtk::ScrolledWindow' ? 1|5 : 0, 0, 0);
-#		  $w->attach_defaults($_, $j, $j + 1, $i, $i + 1);
 		$_->show;
 	    }
 	} @$l;
