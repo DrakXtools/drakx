@@ -509,6 +509,7 @@ sub gtkicons_labels_widget {
 	my $dbl_area;
 	my $darea = new Gtk::DrawingArea;
         my ($icon, undef) = gtkcreate_png($_->[1]);
+	my ($icon_h, undef) = gtkcreate_png("$_->[1]_highlight");
 	$darea->{state} = 0;
 	$darea->signal_connect(expose_event => sub {
                   my ($dx, $dy) = ($darea->allocation->[2], $darea->allocation->[3]);
@@ -522,7 +523,7 @@ sub gtkicons_labels_widget {
 		      $dbl_area->{state} = $darea->{state};
                       fill_tiled($darea, $dbl_area, $background, $x_back2, $y_back2, $dx, $dy);
                       $dbl_area->draw_pixmap($darea->style->bg_gc('normal'),
-                                             $icon, 0, 0, ($dx - $icon_width)/2, 0, $icon_width, $icon_height);
+                                             $darea->{state} ? $icon_h : $icon, 0, 0, ($dx - $icon_width)/2, 0, $icon_width, $icon_height);
                       $dbl_area->draw_pixmap($darea->style->bg_gc('normal'),
                                              $pix, 0, 0, ($dx - $width)/2, $y_round, $width, $height);
 #                      $dbl_area->draw_rectangle($darea->style->black_gc, 0,
@@ -549,6 +550,8 @@ sub gtkicons_labels_widget {
 				});
 	my $label_exec = $_->[0];
 	$darea->signal_connect( button_release_event => sub {
+				    $darea->{state} = 0;
+				    $darea->draw(undef);
 				    $exec_func->($exec_hash->{$label_exec});
 #				    $exec_hash->{$label_exec}{function}->($exec_hash->{$label_exec}{arg});
 				});
