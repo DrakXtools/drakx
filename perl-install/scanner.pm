@@ -23,7 +23,7 @@
 # - devfs use dev_is_devfs()
 # - with 2 scanners same manufacturer -> will overwrite previous conf -> only 1 conf !!
 # - lp: see printerdrake
-# - install: prefix ??
+# - install: prefix --> done
 
 package scanner;
 use lib qw(/usr/lib/libDrakX);
@@ -32,13 +32,13 @@ use common;
 use detect_devices;
 
 
-my $_sanedir = "/etc/sane.d";
-my $_scannerDBdir = "$ENV{SHARE_PATH}/ldetect-lst";
+my $_sanedir = "$prefix/etc/sane.d";
+my $_scannerDBdir = "$prefix$ENV{SHARE_PATH}/ldetect-lst";
 $scannerDB = readScannerDB("$_scannerDBdir/ScannerDB");
 
 sub confScanner {
     my ($model, $port) = @_;
-    $port = detect_devices::dev_is_devfs() ? "/dev/usb/scanner0" : "/dev/scanner" if (!$port);
+    $port = detect_devices::dev_is_devfs() ? "$prefix/dev/usb/scanner0" : "$prefix/dev/scanner" if (!$port);
     my $a = $scannerDB->{$model}{server};
     output("$_sanedir/$a.conf", (join "\n",@{$scannerDB->{$model}{lines}}));
     substInFile {s/\$DEVICE/$port/} "$_sanedir/$a.conf";
@@ -113,18 +113,89 @@ sub updateScannerDBfromUsbtable {
     substInFile {s/END//} "ScannerDB";
     local *F;
     open F, ">>ScannerDB" or die "can't write ScannerDB config in ScannerDB: $!";
+    print F "# generated from usbtable by scannerdrake\n";
     foreach (cat_("$ENV{SHARE_PATH}/ldetect-lst/usbtable")) {
-	my (undef, undef, $mod, $name) = chomp_(split /\s/,$_,4);
+	my ($vendor_id, $product_id, $mod, $name) = chomp_(split /\s/,$_,4);
 	next unless ($mod eq "\"scanner\"");
 	$name =~ s/\"(.*)\"$/$1/;
 	if (member($name, keys %$scanner::scannerDB)) {
 	    print "$name already in ScannerDB\n";
 	    next;
 	}
-	print F "NAME $name\nDRIVER usb\nUNSUPPORTED\n\n";
+	print F "NAME $name\nDRIVER usb\nCOMMENT usb $vendor_id $product_id\nUNSUPPORTED\n\n";
     }
-     print F "END\n";
+    print F "END\n";
     close F;
+}
+
+sub updateScannerDBfromSane {
+    my ($_sanesrcdir) = @_;
+    substInFile {s/END//} "ScannerDB";
+
+    local *Y;
+    open Y, ">>ScannerDB" or die "can't write ScannerDB config in ScannerDB: $!";
+    print Y "# generated from Sane by scannerdrake\n";
+    # for compat with our usbtable
+    my $sane2DB = { 
+		   "Acer" => "Acer Peripherals Inc.",
+		   "AGFA" => "AGFA-Gevaert NV",
+		   "Agfa" => "AGFA-Gevaert NV",
+		   "Epson" => "Seiko Epson Corp.",
+		   "Fujitsu Computer Products of America" => "Fujitsu",
+		   "HP" => sub {$_[0] =~ s/HP\s/Hewlett-Packard|/; $_[0] =~ s/HP4200/Hewlett-Packard|ScanJet 4200C/; $_[0];},
+		   "Hewlett-Packard" => sub {$_[0] =~ s/HP 3200 C/Hewlett-Packard|ScanJet 3200C/; $_[0];},
+		   "Kodak" => "Kodak Co.",
+		   "Mustek" => "Mustek Systems Inc.",
+		   "NEC" => "NEC Systems",
+		   "Nikon" => "Nikon Corp.",
+		   "Plustek" => "Plustek, Inc.",
+		   "Primax" => "Primax Electronics",
+		   "Siemens" => "Siemens Information and Communication Products",
+		   "Trust" => "Trust Technologies",
+		   "UMAX" => "Umax",
+		   "Vobis/Highscreen" => "Vobis",
+		  };
+    
+    opendir YREP, $_sanesrcdir or die "can't open $_sanesrcdir: $!";
+    @files = grep /.*desc$/, readdir YREP;
+    closedir YREP;
+    foreach $i (@files) {
+	my $F = common::openFileMaybeCompressed("$_sanesrcdir/$i");
+	print Y "\n# from $i";
+	my ($lineno, $cmd, $val) = 0;
+	my ($name, $intf, $comment,$mfg);
+	my $fs = {
+		  backend => sub {$backend = $val;},
+		  mfg => sub {$mfg = $val; $name=undef;},#bug when a new mfg comes. should called $fs->{$name}(); but ??
+		  model => sub {
+		      unless ($name) {$name = $val; next;}
+		      $name = (member($mfg, keys %$sane2DB))
+			? (ref $sane2DB->{$mfg}) ? $sane2DB->{$mfg}($name) : "$sane2DB->{$mfg}|$name" : "$mfg|$name";
+		      if (member($name, keys %$scanner::scannerDB)) {
+			  print "#![$name] already in ScannerDB !\n";
+		      } else {
+			  print Y "\nNAME $name\nSERVER $backend\nDRIVER $intf\n";
+			  print Y "COMMENT $comment\n" if ($comment);
+			  $comment = undef; 
+		      }
+		      #print "#-----------------------------------------------------------------------------\n";
+		      $name = $val;
+		  },
+		  interface => sub {$intf = $val;},
+		  comment => sub {$comment = $val;},
+		 };
+	local $_;
+	while (<$F>) { $lineno++;
+		       s/\s+$//;
+		       /^\;/ and next;
+		       ($cmd, $val) = /:(\S+)\s*\"([^\;]*)\"/ or next; #log::l("bad line $lineno ($_)"), next;
+		       my $f = $fs->{$cmd};
+		       $f ? $f->() : log::l("unknown line $lineno ($_)");
+		   }
+	$fs->{model}(); # the last one
+    }
+    print Y "\nEND\n";
+    close Y;
 }
 
 #-######################################################################################
@@ -134,9 +205,6 @@ sub updateScannerDBfromUsbtable {
 
 #-----------------------------------------------
 # $Log$
-# Revision 1.2  2001/10/15 14:48:54  yduret
-# wonderful perl forgotten
-#
-# Revision 1.1  2001/10/10 12:44:59  yduret
-# *** empty log message ***
+# Revision 1.3  2001/11/12 15:18:02  yduret
+# update, sync with cvs
 #
