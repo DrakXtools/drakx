@@ -963,7 +963,7 @@ sub install_urpmi {
                   log::l("unable to find ISO image file name ($iso_info->{file}), not adding urpmi media"), next;
                 my $dest = "/mnt/inst_iso";
                 $dir = "removable:/$dest/$_->{rpmsdir}";
-                -d "$::prefix/$dest" or mkdir_p($dest);
+                -d "$::prefix/$dest" or mkdir_p("$::prefix/$dest");
                 $removable_device = "$p->{mntpoint}/$iso_path";
             } elsif ($curmethod eq 'cdrom') {
                 $removable_device = '/dev/cdrom';
