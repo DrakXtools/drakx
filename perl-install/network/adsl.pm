@@ -47,7 +47,7 @@ If you don't know, choose 'use pppoe'"),
 	$netcnx->{"adsl_$type"} = {};
 	adsl_conf($netcnx->{"adsl_$type"}, $netc, $intf, $type) or goto conf_adsl_step1;
     }
-    if ($type =~ /Sagem/) {
+    if ($type =~ /sagem/) {
 	$type = 'sagem' . ($type =~ /dhcp/ ? "_dhcp" : "");
 	$in->do_pkgs->install(qw(adiusbadsl), if_($type =~ /dhcp/, qw(dhcpcd))) if !$::testing;
 	$netcnx->{type} = "adsl_$type";
