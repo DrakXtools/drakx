@@ -601,7 +601,12 @@ sub addUser {
 	eval { commands::chown_("-r", "$u->{uid}.$u->{gid}", "$p$u->{home}") }
 	    if $u->{uid} != $u->{oldu} || $u->{gid} != $u->{oldg};
     }
-    any::addUsers($o->{prefix}, $users);
+    any::addUsers($p, $users);
+
+    $o->pkg_install("autologin") if $o->{autologin};
+    any::set_autologin($p, $o->{autologin}, $o->{desktop});
+
+    install_any::setAuthentication($o);
 }
 
 #------------------------------------------------------------------------------
