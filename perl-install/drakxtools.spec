@@ -33,7 +33,7 @@ Provides: perl(network::isdn_consts)
 %package backend
 Summary: Drakxtools libraries and background tools 
 Group: System/Configuration/Other
-Requires: ldetect-lst >= 0.1.23-1mdk
+Requires: ldetect-lst >= 0.1.24-1mdk
 Conflicts: drakxtools-newt < 10-51mdk
 
 %package http
