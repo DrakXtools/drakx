@@ -507,38 +507,8 @@ sub choosePackages {
 
     $o->chooseGroups($packages, $compssUsers, $min_mark, \$individual, $max_size) if !$::corporate;
 
-    my $size2install = min($availableC, do {
-	my $max = round_up(min($max_size, $availableC) / sqr(1024), 100);
-	
-	if (1) {
-		my (@l);
-		my @text = (__("Minimum (%dMB)"), __("Recommended (%dMB)"), __("Complete (%dMB)"));
-		if ($o->{meta_class} eq 'desktop') {
-		    @l = (300, 500, 800, 0);
-		    $max > $l[2] or splice(@l, 2, 1);
-		    $max > $l[1] or splice(@l, 1, 1);
-		    $max > $l[0] or @l = $max;
-		    $text[$#l] = __("Custom");
-		} else {
-		    @l = (300, 700, $max);
-		    $l[2] > $l[1] + 200 or splice(@l, 1, 1); #- not worth proposing too alike stuff
-		    $l[1] > $l[0] + 100 or splice(@l, 0, 1);
-		}
-		$o->set_help('empty');
-#		$o->ask_from_listf('', _("Select the size you want to install"),
-#				   sub { _ ($text[$_[0]], $_[0]) }, \@l, $l[1]) * sqr(1024);
-		$max * sqr(1024);
-	} else {
-	    $o->chooseSizeToInstall($packages, $min_size, $def_size, $max_size, $availableC, $individual) || goto &choosePackages;
-	}
-    });
-    if (!$size2install) { #- special case for desktop
-	$o->chooseGroups($packages, $compssUsers, $min_mark) or goto &choosePackages;
-	$size2install = $availableC;
-    }
-
     ($o->{packages_}{ind}) =
-      pkgs::setSelectedFromCompssList($packages, $o->{compssUsersChoice}, $min_mark, $size2install);
+      pkgs::setSelectedFromCompssList($packages, $o->{compssUsersChoice}, $min_mark, $availableC);
 
     $o->choosePackagesTree($packages) if $individual;
 
