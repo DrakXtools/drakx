@@ -438,30 +438,7 @@ sub selectSupplMedia {
 		useMedium($medium_name);
 		#- probe for an hdlists file and then look for all hdlists listed herein
 		eval { pkgs::psUsingHdlists($o, $suppl_method, "/mnt/cdrom/media/media_info/hdlists", $o->{packages}, '1s') };
-		if ($@) {
-		    log::l("psUsingHdlists failed: $@");
-		    #- no hdlists found on the suppl. CD
-		    #- Look directly for a file media/main/hdlist1s.cz
-		    my $supplmedium = pkgs::psUsingHdlist(
-			$o->{prefix}, # /mnt
-			$suppl_method,
-			$o->{packages},
-			"hdlist$medium_name.cz",
-			$medium_name,
-			'media/main',
-			"Supplementary CD $medium_name",
-			1, # selected
-			"/mnt/cdrom/media/main/media_info/hdlist$medium_name.cz",
-		    );
-		    if ($supplmedium) {
-			log::l("read suppl hdlist on cdrom");
-			$supplmedium->{prefix} = "removable://mnt/cdrom"; #- for install_urpmi
-			$supplmedium->{selected} = 1;
-			$supplmedium->{method} = 'cdrom';
-		    } else {
-			log::l("no suppl hdlist");
-		    }
-		}
+		log::l("psUsingHdlists failed: $@");
 	    }
 	} else {
 	    my $url = $o->ask_from_entry('', N("URL of the mirror?")) or return '';
