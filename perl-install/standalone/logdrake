@@ -283,7 +283,7 @@ sub parse_file {
                                        seek F, 0, 1;
                                    });
   }     
-  log_output__real();
+  insert_text_n_scroll();
 }
 
 
@@ -336,7 +336,7 @@ sub logcolorize {
 	log_output("$rec[$therest] ", undef, $col);
     }
     log_output("\n",  undef, 'black');
-    log_output__real() if $isExplain;
+    insert_text_n_scroll() if $isExplain;
 }
 
 
@@ -348,7 +348,7 @@ sub log_output {
     $log_buf->{tags}{$tag} ||= { if_($font, font => $font), foreground => $col };
 }
 
-sub log_output__real() {
+sub insert_text_n_scroll() {
     ugtk2::gtktext_insert($log_text, \@logs, { append => !($isExplain || $isTail) });
     $log_text->scroll_to_iter($log_buf->get_end_iter, 0, 1, 0.5, 0.5);
     undef @logs;
