@@ -538,13 +538,9 @@ sub make_nbi() {
     $tree_kernels->get_selection->set_mode('single');
 
 	foreach (@kernels) {
-		my $t_kernel = Gtk2::TreeIter->new;
-    	$model->append($t_kernel, undef);
-    	$model->set($t_kernel, [ 0 => $_ ]);
-		my $k_detail = Gtk2::TreeIter->new;
+    	my $t_kernel = $model->append_set(undef, [ 0 => $_ ]);
 		foreach (@nics) {
-    		$model->append($k_detail, $t_kernel);
-    		$model->set($k_detail, [ 0 => $_ ]);
+    		$model->append_set($t_kernel, [ 0 => $_ ]);
 		}
 	}	
 
@@ -571,12 +567,11 @@ sub make_nbi() {
 	$list_nbis->set_headers_visible(0);	
 	my @nbis = grep { /\.nbi/ } all("/var/lib/tftpboot");
 	my $nbi;
-	my $iter = Gtk2::TreeIter->new;
 	my $nbi_iter;
+	my $iter;
 		
 	foreach (@nbis) {
-    	$list_model->append($iter);
-    	$list_model->set($iter, [ 0 => $_ ]);		
+		$list_model->append_set(undef, $_);		
 	}
 	
 	$list_nbis->get_selection->signal_connect(changed => sub {
@@ -599,8 +594,7 @@ sub make_nbi() {
 								$list_model->clear;
 								@nbis = grep { /\.nbi/ } all("/var/lib/tftpboot");
 								foreach (@nbis) {
-								   	$list_model->append($iter);
-    								$list_model->set($iter, [ 0 => $_ ]);		
+    								$list_model->append_set($iter, $_);		
 								}
 								cursor_norm(); 
 							} else {
@@ -613,8 +607,7 @@ sub make_nbi() {
 								$list_model->clear;
 								@nbis = grep { /\.nbi/ } all("/var/lib/tftpboot");
 								foreach (@nbis) {
-								   	$list_model->append($iter);
-    								$list_model->set($iter, [ 0 => $_ ]);	
+    								$list_model->append_set($iter, $_);	
 								} 
 							} else {
 								$in->ask_warn('', N("No NIC selected!"));
@@ -627,8 +620,7 @@ sub make_nbi() {
 							$list_model->clear;
 							@nbis = grep { /\.nbi/ } all("/var/lib/tftpboot");
 							foreach (@nbis) {
-								$list_model->append($iter);
-    							$list_model->set($iter, [ 0 => $_ ]);	
+    							$list_model->append_set($iter, $_);	
 							}
 							cursor_norm(); 
 						}),
@@ -664,7 +656,6 @@ sub maintain_users() {
 	my $user_box;
 	my @sys_users = cat_("/etc/shadow");
 	my @ts_users = cat_("/etc/shadow\$\$CLIENT\$\$");
-	my $tmodel;
 	my $titer;
 	
 	#- use /homes to filter system daemons
@@ -675,14 +666,12 @@ sub maintain_users() {
 	$list_sys_users->append_column(Gtk2::TreeViewColumn->new_with_attributes(undef, Gtk2::CellRendererText->new, 'text' => 0));
 	$list_sys_users->set_headers_visible(0);
 	
-	my $iter = Gtk2::TreeIter->new;
 	my $sys_user;
 	
 	foreach (@sys_users) {
 		my ($s_label) = split(/:/, $_, 2);
 		if (any { /$s_label/ } @homes) {
-    		$list_model->append($iter);
-    		$list_model->set($iter, [ 0 => $s_label ]);
+    		$list_model->append_set(undef, $s_label);
 		}
 	}
 
@@ -697,22 +686,21 @@ sub maintain_users() {
 	$list_ts_users->append_column(Gtk2::TreeViewColumn->new_with_attributes(undef, Gtk2::CellRendererText->new, 'text' => 0));
 	$list_ts_users->set_headers_visible(0);
 	
-	$iter = Gtk2::TreeIter->new;
 	my $ts_user;
 	
 	foreach (@ts_users) {
 		my ($t_label) = split(/:/, $_, 2);
 		my @system_entry = grep { /$t_label/ } @sys_users; 
 		$t_label = $t_label . " !!!" if $_ ne $system_entry[0];
-		$list_model->append($iter);
-		$list_model->set($iter, [ 0 => $t_label ]);
+		$list_model->append_set(undef, $t_label);
 	}
 	
 	$list_ts_users->get_selection->signal_connect(changed => sub {
-		($tmodel, $titer) = $_[0]->get_selected;
-		$tmodel && $titer or return;
-		$ts_user = $tmodel->get($titer, 0);
+		my ($model, $iter) = $_[0]->get_selected;
+		$model && $iter or return;
+		$ts_user = $model->get($iter, 0);
 		$ts_user =~ s| !!!||;
+		$titer = $iter;
 	});
 		
 	gtkpack($status_box,
@@ -725,8 +713,7 @@ sub maintain_users() {
 					gtksignal_connect(new Gtk2::Button(N("Add User -->")), clicked => 
 						sub { my $result = adduser(0, $sys_user);
 							if ($result == 0) {
-							 	$list_model->append($iter);
-    							$list_model->set($iter, [ 0 => $sys_user ]);
+    							$list_model->append_set(undef, $sys_user);
 							}
 						}),
 					gtksignal_connect(new Gtk2::Button(N("<-- Del User")), clicked => 
@@ -762,28 +749,14 @@ sub maintain_clients() {
     $tree_clients->get_selection->set_mode('browse');
 	
 	foreach my $key (keys(%clients)) {		
-		my $t_client = Gtk2::TreeIter->new;
-    	$model->append($t_client, undef);
-    	$model->set($t_client, [ 0 => $key ]);
-		
-		my $c_detail = Gtk2::TreeIter->new;
-
-		$model->append($c_detail, $t_client);
-    	$model->set($c_detail, [ 0 => $clients{$key}{hardware} ]);
-
-		$model->append($c_detail, $t_client);
-    	$model->set($c_detail, [ 0 => $clients{$key}{address} ]);
-				
-		$model->append($c_detail, $t_client);
-    	$model->set($c_detail, [ 0 => N("type: %s", $clients{$key}{type}) ]);
-				
+    	my $t_client = $model->append_set(undef, [ 0 => $key ]);
+    	$model->append_set($t_client, [ 0 => $clients{$key}{hardware} ]);
+    	$model->append_set($t_client, [ 0 => $clients{$key}{address} ]);
+    	$model->append_set($t_client, [ 0 => N("type: %s", $clients{$key}{type}) ]);
 		if ($clients{$key}{filename}) {
-			$model->append($c_detail, $t_client);
-    		$model->set($c_detail, [ 0 => $clients{$key}{filename} ]);
+    		$model->append_set($t_client, [ 0 => $clients{$key}{filename} ]);
 		}
-		
-		$model->append($c_detail, $t_client);
-    	$model->set($c_detail, [ 0 => N("local config: %s", $clients{$key}{hdw_config}) ]);
+    	$model->append_set($t_client, [ 0 => N("local config: %s", $clients{$key}{hdw_config}) ]);
 				
 	}
 	
@@ -855,38 +828,21 @@ sub maintain_clients() {
 								my $result = addclient(0, $hostname, $mac, $ip, $nbi, $is_thin, $local_config);
 								
 								if ($result == 0) {
-									my $t_client = Gtk2::TreeIter->new;
-
-		    						$model->append($t_client, undef);
-    								$model->set($t_client, [ 0 => $hostname ]);
-		
-									my $c_det_hw = Gtk2::TreeIter->new;
-									$model->append($c_det_hw, $t_client);
-    								$model->set($c_det_hw, [ 0 => $mac ]);
-		
-									my $c_det_ip = Gtk2::TreeIter->new;
-									$model->append($c_det_ip, $t_client);
-    								$model->set($c_det_ip, [ 0 => $ip ]);
+    								my $t_client = $model->append_set(undef, [ 0 => $hostname ]);
+    								$model->append_set($t_client, [ 0 => $mac ]);
+    								$model->append_set($t_client, [ 0 => $ip ]);
 																		
 									my $client_type = N("type: fat");
 									$client_type = N("type: thin") if $is_thin == 1;
-									my $c_det_type = Gtk2::TreeIter->new;
-									$model->append($c_det_type, $t_client);
-    								$model->set($c_det_type, [ 0 => $client_type ]);
+    								$model->append_set($t_client, [ 0 => $client_type ]);
 					
-									if ($nbi) {											
-										my $c_det_nbi = Gtk2::TreeIter->new;
-										$model->append($c_det_nbi, $t_client);
-    									$model->set($c_det_nbi, [ 0 => $nbi ]);
-									}									
+    								$model->append_set($t_client, [ 0 => $nbi ]) if $nbi;
 									$check_thin->set_active(0);
 									$is_thin = 0;
 									
 									my $hdw_config = N("local config: false");
 									$hdw_config = N("local config: true") if $local_config == 1;
-									my $c_hdw_config = Gtk2::TreeIter->new;
-									$model->append($c_hdw_config, $t_client);
-    								$model->set($c_hdw_config, [ 0 => $hdw_config ]);
+									$model->append_set($t_client, [ 0 => $hdw_config ]);
 									$check_hdw_config->set_active(0);
 									$local_config = 0;
 									%clients = read_dhcpd_conf();
@@ -989,21 +945,21 @@ sub dhcpd_config() {
 	my $box_subnet = new Gtk2::HBox(0,0);
 	my $label_subnet = new Gtk2::Label(N("Subnet:"));
 	$label_subnet->set_justify('right');
-	my $entry_subnet = new Gtk2::Entry(20);	
+	my $entry_subnet = new Gtk2::Entry();	
 	$box_subnet->pack_end($entry_subnet, 0, 0, 10);
 	$box_subnet->pack_end($label_subnet, 0, 0, 10);
 	
 	my $box_netmask = new Gtk2::HBox(0,0);
 	my $label_netmask = new Gtk2::Label(N("Netmask:"));
 	$label_netmask->set_justify('left');
-	my $entry_netmask = new Gtk2::Entry(20);
+	my $entry_netmask = new Gtk2::Entry();
 	$box_netmask->pack_end($entry_netmask, 0, 0, 10);
 	$box_netmask->pack_end($label_netmask, 0, 0, 10);
 	
 	my $box_routers = new Gtk2::HBox(0,0);
 	my $label_routers = new Gtk2::Label(N("Routers:"));
 	$label_routers->set_justify('left');
-	my $entry_routers = new Gtk2::Entry(20);
+	my $entry_routers = new Gtk2::Entry();
 	$box_routers->pack_end($entry_routers, 0, 0, 10);
 	$box_routers->pack_end($label_routers, 0, 0, 10);
 	
@@ -1017,14 +973,14 @@ sub dhcpd_config() {
 	my $box_broadcast = new Gtk2::HBox(0,0);
 	my $label_broadcast = new Gtk2::Label(N("Broadcast Address:"));
 	$label_broadcast->set_justify('left');
-	my $entry_broadcast = new Gtk2::Entry(20);
+	my $entry_broadcast = new Gtk2::Entry();
 	$box_broadcast->pack_end($entry_broadcast, 0, 0, 10);
 	$box_broadcast->pack_end($label_broadcast, 0, 0, 10);
 	
 	my $box_domain = new Gtk2::HBox(0,0);
 	my $label_domain = new Gtk2::Label(N("Domain Name:"));
 	$label_domain->set_justify('left');
-	my $entry_domain = new Gtk2::Entry(20);
+	my $entry_domain = new Gtk2::Entry();
 	$box_domain->pack_end($entry_domain, 0, 0, 10);
 	$box_domain->pack_end($label_domain, 0, 0, 10);
 	
@@ -1214,7 +1170,7 @@ sub write_eb_image {
 	if ($type eq 'floppy') {
 		my $in = interactive->vnew;
 		if (-e "/dev/fd0") {
-			my $result = $in->ask_okcancel(N("Please insert floppy disk:"));
+			my $result = $in->ask_okcancel('', N("Please insert floppy disk:"));
 			return if !($result);
 			$result = system("cat $rom_path/boot1a.bin $rom_path/lzrom/$nic > /dev/fd0") if $result;
 			if ($result) {
