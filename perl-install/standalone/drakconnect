@@ -61,7 +61,7 @@ MDK::Common::Globals::init(
 $::isEmbedded && ref($in) =~ /gtk/ or goto dd;
 
 require ugtk2;
-import ugtk2 qw(:helpers :wrappers :create);
+ugtk2->import(qw(:helpers :wrappers :create));
 my $expert_mode = 0;
 network::netconnect::read_net_conf('', $netcnx, $netc);
 modules::load_category('net');
@@ -450,7 +450,7 @@ Configure them first by clicking on 'Configure'")),1,1,0);
 	    $widget_temp = gtksignal_connect(new Gtk2::Button(ethisup($c) ? N("deactivate now") : N("activate now")),
 					     clicked => sub {
 						 system("/sbin/if" . (ethisup($c) ? "down" : "up") . " eth$c");
-						 gtkbuttonset($_[0], ethisup($c) ? N("deactivate now") : N("activate now"));
+						 ugtk2::gtkbuttonset($_[0], ethisup($c) ? N("deactivate now") : N("activate now"));
 					     });
 	} else {
 	    $widget_temp = N("This interface has not been configured yet.\nLaunch the configuration wizard in the main window");
