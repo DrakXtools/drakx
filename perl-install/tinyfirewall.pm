@@ -1,12 +1,12 @@
 package tinyfirewall;
 use diagnostics;
 use strict;
-use common;
 use commands;
 use run_program;
-use netconnect;
+use network::netconnect;
 use network;
 use POSIX qw(tmpnam);
+use MDK::Common;
 my @messages = (_("tinyfirewall configurator
 
 This configures a personal firewall for this Mandrake Linux machine.
