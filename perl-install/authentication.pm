@@ -258,7 +258,7 @@ sub set {
 	mkdir_p("$::prefix/home/$domain");
 	
 	$when_network_is_up->(sub {
-	    run_program::rooted($::prefix, 'net','ads','join', '-U', $authentication->{winuser} . '%' . $authentication->{winpass});
+	    run_program::rooted($::prefix, 'net', 'ads', 'join', '-U', $authentication->{winuser} . '%' . $authentication->{winpass});
 	});
     }
 }
