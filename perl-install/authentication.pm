@@ -13,13 +13,18 @@ sub kind2description {
 }
 sub to_kind {
     my ($authentication) = @_;
-    (find { defined $authentication->{$_} } kinds()) || 'local';
+    (find { exists $authentication->{$_} } kinds()) || 'local';
 }
 
 sub ask_parameters {
     my ($in, $netc, $authentication, $kind) = @_;
 
-    my $val = $authentication->{$kind};
+    #- keep only this authentication kind
+    foreach (kinds()) {
+	delete $authentication->{$_} if $_ ne $kind;
+    }
+
+    my $val = $authentication->{$kind} ||= '';
 
     if ($kind eq 'LDAP') {
 	$val ||= 'ldap.' . $netc->{DOMAINNAME};
@@ -47,8 +52,6 @@ sub ask_parameters {
 			  { label => N("Domain Admin Password"), val => \$authentication->{winpass}, hidden => 1 },
 			]) or return;
     }
-    #- keep only one authentication
-    delete $authentication->{$_} foreach kinds();
     $authentication->{$kind} = $val;
     1;
 }
