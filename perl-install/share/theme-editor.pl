@@ -23,6 +23,10 @@ use lib qw(/usr/lib/libDrakX);
 use my_gtk qw(:helpers :wrappers);
 use common;
 
+#- languages that can't be displayed with gtk1, so we unset translations
+#- for them until this tool is ported to gtk2
+if ($ENV{LANGUAGE} =~ /\b(ar|he|hi|ta)/) { $ENV{LANGUAGE} = "C" };
+
 init Gtk;
 
 if ("@ARGV" =~ /-h/) {
