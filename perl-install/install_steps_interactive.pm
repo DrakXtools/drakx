@@ -433,7 +433,7 @@ sub choosePackages {
     $min_size < $availableC or die _("Your system has not enough space left for installation or upgrade (%d > %d)", $min_size, $availableC);
 
     my $min_mark = $::beginner ? 25 : $::expert ? 0 : 1;
-    my $def_mark = 49;
+    my $def_mark = 50;
 
     my $b = pkgs::saveSelected($packages);
     pkgs::setSelectedFromCompssList($o->{compssListLevels}, $packages, $def_mark, 0, $o->{installClass});
@@ -447,22 +447,27 @@ sub choosePackages {
     my $size2install = min($availableC, do {
 	my $max = round_up(min($max_size, $availableC) / sqr(1024), 100);
 	
-	if ($::beginner) {		
-	    my (@l);
-	    my @text = (__("Minimum (%dMB)"), __("Recommended (%dMB)"), __("Complete (%dMB)"));
-	    if ($o->{meta_class} eq 'desktop') {
-		@l = (300, 500, 800, 0);
-		$max > $l[2] or splice(@l, 2, 1);
-		$max > $l[1] or splice(@l, 1, 1);
-		$max > $l[0] or @l = $max;
-		$text[$#l] = __("Custom");
+	if ($::beginner) {
+	    if ($o->{isUpgrade}) {
+		$min_size; #- already selected size with at least 80 for compssList level.
 	    } else {
-		@l = (300, 700, $max);
-		$l[2] > $l[1] + 200 or splice(@l, 1, 1); #- not worth proposing too alike stuff
-		$l[1] > $l[0] + 100 or splice(@l, 0, 1);
+		my (@l);
+		my @text = (__("Minimum (%dMB)"), __("Recommended (%dMB)"), __("Complete (%dMB)"));
+		if ($o->{meta_class} eq 'desktop') {
+		    @l = (300, 500, 800, 0);
+		    $max > $l[2] or splice(@l, 2, 1);
+		    $max > $l[1] or splice(@l, 1, 1);
+		    $max > $l[0] or @l = $max;
+		    $text[$#l] = __("Custom");
+		} else {
+		    @l = (300, 700, $max);
+		    $l[2] > $l[1] + 200 or splice(@l, 1, 1); #- not worth proposing too alike stuff
+		    $l[1] > $l[0] + 100 or splice(@l, 0, 1);
+		}
+		$o->set_help('empty');
+		$o->ask_from_listf('', _("Select the size you want to install"),
+				   sub { _ ($text[$_[1]], $_[0]) }, \@l, $l[1]) * sqr(1024);
 	    }
-	    $o->set_help('empty');
-	    $o->ask_from_listf('', _("Select the size you want to install"), sub { _ ($text[$_[1]], $_[0]) }, \@l, $l[1]) * sqr(1024);
 	} else {
 	    $o->chooseSizeToInstall($packages, $min_size, $def_size, $max_size, $availableC, $individual) || goto &choosePackages;
 	}
