@@ -16,7 +16,6 @@ for i in CP1251 ISO-8859-13 ISO-8859-14 ISO-8859-15 ISO-8859-2 ISO-8859-3 ISO-88
     (cd usr/share/locale/$i ; ln -s ../UTF-8/* . 2>/dev/null)
 done
 
-az ka vi
 # for non common encodings, build them locally to ensure they are present
 for i in ISO-8859-9E ARMSCII-8 GEORGIAN-ACADEMY KOI8-K TCVN-5712
 do
@@ -28,9 +27,11 @@ do
     (cd usr/share/locale/$i ; ln -s ../UTF-8/* . 2>/dev/null)
 done
 
+# "ta" should be added to the locale list, but the locales-ta rpm
+# is not ready yet
 # lc_ctype for non common encodings
 rm -rf .tmp2 ; mkdir .tmp2 ; cd .tmp2
-for i in ja ko ta th ; do
+for i in ja ko    th ; do
     ii=locales-`echo $i | sed 's/\(..\).*/\1/'`
     rpm2cpio /RPMS/$ii-*.rpm | cpio -id --quiet
     f=usr/share/locale/$i/LC_CTYPE
