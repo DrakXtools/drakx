@@ -1,3 +1,243 @@
+2004/08/08  hilbert
+
+	* share/po/zh_TW.po: DrakX-zh_TW: 205
+	Local file:
+
+2004/08/08  Pixel  <pixel at mandrakesoft.com>
+
+	* install_steps.pm: don't set toFormat if we don't have a {fs_type} (eg:
+	pt_type 0xfd, ie raw raid)
+
+	* detect_devices.pm: 
+	  - switch to mdadm (instead of raidtools)
+	  - create mdadm.conf instead of raidtab
+	  - internal {raids} is no more indexed by X for mdX, and so don't have
+	holes anymore
+	  - internal {chunk-size} is now a number in KiB
+	  - internal {raid} is the raid device name, not the number
+	  - various cleanup for raid detection
+	only load floppy module explictly during install (otherwise it causes
+	ugly messages in bootloader-config)
+
+	* any.pm: replace "More" with a more descriptive button name
+
+	* share/rpmsrate: many authentication packages where missing (bugzilla
+	#10644)
+	many authentication packages where missing (bugzilla #10644)
+
+	* diskdrake/hd_gtk.pm, share/list.i386, diskdrake/interactive.pm,
+	fs/get.pm, install2.pm, fsedit.pm, raid.pm, bootloader.pm,
+	install_any.pm: 
+	  - switch to mdadm (instead of raidtools)
+	  - create mdadm.conf instead of raidtab
+	  - internal {raids} is no more indexed by X for mdX, and so don't have
+	holes anymore
+	  - internal {chunk-size} is now a number in KiB
+	  - internal {raid} is the raid device name, not the number
+	  - various cleanup for raid detection
+
+2004/08/07  hilbert
+
+	* share/po/zh_TW.po: DrakX-zh_TW: 130
+
+2004/08/07  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/nb.po: updated Norwegian file
+
+	* share/po/wa.po: updated Walloon file
+
+2004/08/07  reinouts
+
+	* share/po/nl.po: Updated Dutch (nl) translation
+	by Reinout van Schouwen <reinout@cs.vu.nl>
+
+2004/08/06  hilbert
+
+	* share/po/zh_TW.po: DrakX-zh_TW: 100
+	What norm is your...
+
+2004/08/06  Olivier Blin <oblin at mandrakesoft.com>
+
+	* network/adsl.pm (network::adsl::adsl_conf_backend) add ppp_async alias
+	for sagem
+	devices (so that they work during install)
+	fix titypo
+	try to load all modules that may be needed to establish connexion
+	try to mount proc fs too, in case it wasn't done earlier
+
+	* network/netconnect.pm: use the new kdenetwork-kppp-provider package
+	(thanks Laurent !) to be
+	able to parse the provider db without requiring kdenetwork-kppp
+
+2004/08/06  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/de.po: updated German file
+	updated pot file
+
+	* share/po/bn.po, share/po/ms.po, share/po/sk.po, share/po/gl.po,
+	share/po/pt_BR.po, share/po/th.po, share/po/et.po, share/po/ja.po,
+	share/po/hr.po, share/po/be.po, share/po/ko.po, share/po/DrakX.pot,
+	share/po/sv.po, share/po/sr.po, share/po/pl.po, share/po/fi.po,
+	share/po/he.po, share/po/ca.po, share/po/da.po, share/po/ar.po,
+	share/po/ltg.po, share/po/nb.po, share/po/ky.po, share/po/uz.po,
+	share/po/ro.po, share/po/zh_TW.po, share/po/zh_CN.po,
+	share/po/sr@Latn.po, share/po/sq.po, share/po/it.po, share/po/eu.po,
+	share/po/es.po, share/po/lv.po, share/po/hu.po, share/po/fa.po,
+	share/po/id.po, share/po/ru.po, share/po/br.po, share/po/sl.po,
+	share/po/nn.po, share/po/tr.po, share/po/mt.po, share/po/ga.po,
+	share/po/mn.po, share/po/uk.po, share/po/am.po, share/po/lt.po,
+	share/po/cy.po, share/po/tg.po, share/po/bs.po, share/po/fur.po,
+	share/po/mk.po, share/po/wa.po, share/po/is.po, share/po/hi.po,
+	share/po/af.po, share/po/az.po, share/po/pt.po, share/po/vi.po,
+	share/po/fr.po, share/po/ta.po, share/po/nl.po, share/po/tl.po,
+	share/po/eo.po, share/po/el.po, share/po/bg.po, share/po/cs.po,
+	share/po/uz@Latn.po: updated pot file
+
+	* fsedit.pm: reverted an unneeded string change
+
+2004/08/06  Pixel  <pixel at mandrakesoft.com>
+
+	* install_steps.pm: fix typo
+	don't try to remove non existing should_be_dirs
+
+2004/08/06  Rafael Garcia-Suarez <rgarciasuarez at mandrakesoft.com>
+
+	* share/rpmsrate: If totem is to be avoided for KDE, avoid it in audio as
+	well as in video.
+
+	* pkgs.pm: Allow multiple complicate flags in rpmsrate, if they're exactly
+	the same.
+
+2004/08/06  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* share/po/fr.po: update
+	push typo fixes in order to reduce pressure on translators
+
+	* drakxtools.spec: 10.1-0.6mdk
+	10.1-0.5mdk
+
+	* any.pm (selectCountry) fix IM sorting
+
+	* share/rpmsrate: 
+	  - install awesfx too if neded
+	  - add a note b/c we cannot install it :-)
+	always install all arabic fonts since farsi oness contains nice arabic
+	glyphs but not urdu (by way of arabayes feedback)
+
+	* network/adsl.pm (adsl_conf_backend) let's have a better looking mesage
+	(adsl_conf_backend) only try to mount /proc if it wasn't (eg if we
+	didn't intall any packages)
+
+	* lang.pm: fix x-unikey support (Larry Nguyen)
+	(write) fix configuring IM
+
+	* share/po/bn.po, share/po/ms.po, share/po/sk.po, share/po/gl.po,
+	share/po/pt_BR.po, share/po/th.po, share/po/et.po, share/po/ja.po,
+	share/po/hr.po, share/po/be.po, share/po/ko.po, share/po/sv.po,
+	share/po/sr.po, share/po/pl.po, share/po/fi.po, share/po/he.po,
+	share/po/da.po, share/po/ca.po, share/po/ar.po, share/po/ltg.po,
+	share/po/nb.po, share/po/ky.po, share/po/uz.po, share/po/ro.po,
+	share/po/zh_TW.po, share/po/zh_CN.po, share/po/sr@Latn.po,
+	share/po/sq.po, share/po/it.po, share/po/eu.po, share/po/es.po,
+	share/po/lv.po, share/po/hu.po, share/po/fa.po, share/po/id.po,
+	share/po/ru.po, share/po/br.po, share/po/sl.po, share/po/nn.po,
+	share/po/tr.po, share/po/mt.po, share/po/ga.po, share/po/uk.po,
+	share/po/mn.po, share/po/am.po, share/po/lt.po, share/po/cy.po,
+	share/po/tg.po, share/po/bs.po, share/po/fur.po, share/po/mk.po,
+	share/po/wa.po, share/po/is.po, share/po/hi.po, share/po/af.po,
+	share/po/az.po, share/po/pt.po, share/po/vi.po, share/po/ta.po,
+	share/po/nl.po, share/po/tl.po, share/po/de.po, share/po/eo.po,
+	share/po/el.po, share/po/bg.po, share/po/cs.po, share/po/uz@Latn.po:
+	push typo fixes in order to reduce pressure on translators
+
+	* ugtk2.pm (Gtk2::ComboBox->set_text) better error message
+	(create_scrolled_window) adding 6px as left margin for TextView in
+	scrolled Window
+
+	* standalone/drakbackup: typo fix
+	cleanups for lord perl_checker
+	(advanced_when) quiet runtime warnings
+	(advanced_when) fix crash when selecting an entry in pull down menus
+
+2004/08/06  yrahal
+
+	* share/po/ar.po: Arabeyes' Arabic translation
+
+2004/08/05  David Baudens  <baudens at mandrakesoft.com>
+
+	* share/rpmsrate: Update
+	Update for discovery
+
+2004/08/05  Olivier Blin <oblin at mandrakesoft.com>
+
+	* standalone/drakclock: if ntp is used, get the new time before updating
+	the hwclock
+	(fix from Emmanuel Blindauer, #10537)
+
+	* mdk-stage1/directory.c: do not go back to the beginning if no
+	distribution is found in the
+	directory (second fix)
+	do not go back to the beginning if no distribution is found in the
+	directory
+
+	* network/adsl.pm: try to mount usbdevfs in $::prefix before attempting to
+	run adsl start
+	programs
+
+	* network/netconnect.pm: set netcnx type when an external isdn modem is
+	selected, or else
+	modem::ppp_read_conf will crash (Anthill #1033)
+	set netcnx type when an external isdn modem is selected, or else
+	modem::ppp_read_conf will crash (Anthill #1033)
+
+2004/08/05  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/uk.po, share/po/et.po: updated Estonian file
+
+2004/08/05  Pixel  <pixel at mandrakesoft.com>
+
+	* Xconfig/various.pm, diskdrake/interactive.pm,
+	standalone/bootloader-config: adapt to bootloader functions now using
+	all_hds instead of hds
+
+	* bootloader.pm: update yaboot code (based on Christiaan Welvaart patch)
+	/usr/sbin/ofpath seems to need /mnt/sys mounted, and the device must
+	exist (Christiaan Welvaart)
+	fix typos (Christiaan Welvaart)
+
+	* install_steps_interactive.pm: basic code for upgrading from a redhat
+	distribution
+
+	* install_steps_gtk.pm: drop Xpmac support
+
+	* detect_devices.pm: isLaptop() special code for ppc
+
+	* any.pm, install_steps.pm: basic code for upgrading from a redhat
+	distribution
+	adapt to bootloader functions now using all_hds instead of hds
+
+	* install_any.pm: basic code for upgrading from a redhat distribution
+	write auto_inst.cfg after making room on the floppy image
+	make room on replay/auto_install floppy image before doing anything
+	when replaying, overwrite boot.msg with an empty message to win some
+	space
+	(it was only done in non-replay mode)
+	adapt to bootloader functions now using all_hds instead of hds
+	make room on replay/auto_install floppy image before doing anything
+
+2004/08/05  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* harddrake/sound.pm: make it clearer by factorizing arch() call
+	fix PPC entries
+
+	* install_messages.pm (install_completed) bump errata page (though it does
+	not yet exists)
+
+	* share/rpmsrate: use new arabic font packages
+	install sg usefull when there's a bluetooth device connected to the
+	system
+	install gimp's help along it
+
 2004/08/05  Olivier Blin <oblin at mandrakesoft.com>
 
 	* standalone/drakclock: if ntp is used, get the new time before updating
@@ -34116,7 +34356,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.941 2004/08/03 02:44:37 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.942 2004/08/05 06:25:07 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
