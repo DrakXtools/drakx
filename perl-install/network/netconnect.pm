@@ -1046,13 +1046,11 @@ N("Last but not least you can also type in your DNS server IP addresses."),
                     post => sub {
                         my ($res) = @_;
                         $netc->{at_boot} = $res;
-                        write_cnx_script($netc);
-                        if ($netc->{internet_cnx_choice}) {
-                            $netcnx->{type} = $netc->{internet_cnx}{$netc->{internet_cnx_choice}}{type};
+                        if ($res) {
+                            write_cnx_script($netc);
+                            $netcnx->{type} = $netc->{internet_cnx}{$netc->{internet_cnx_choice}}{type} if $netc->{internet_cnx_choice};
                             write_initscript();
                         } else {
-                            unlink "$::prefix/etc/sysconfig/network-scripts/net_cnx_up";
-                            unlink "$::prefix/etc/sysconfig/network-scripts/net_cnx_down";
                             undef $netc->{NET_DEVICE};
                         }
                         
