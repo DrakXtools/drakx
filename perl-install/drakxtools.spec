@@ -11,14 +11,14 @@ Conflicts: drakconf < 0.96-10mdk
 BuildRequires: gettext, gtk+-devel, ldetect-devel, ncurses-devel, newt-devel, perl-devel
 BuildRoot: %_tmppath/%name-buildroot
 Provides: draksec
-Obsoletes: draksec , drakfloppy
+Obsoletes: draksec
 
 %package newt
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Group: System/Configuration/Other
 Requires: perl-base >= 1:5.8.0-10mdk, urpmi, modutils >= 2.3.11, ldetect-lst >= 0.1.4-1mdk, usermode-consoleonly >= 1.44-4mdk
 Obsoletes: diskdrake setuptool
-Obsoletes: mouseconfig kbdconfig printtool
+Obsoletes: mouseconfig kbdconfig printtool drakfloppy
 Provides: diskdrake setuptool mouseconfig kbdconfig printtool
 
 %package http
