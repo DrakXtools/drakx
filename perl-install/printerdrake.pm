@@ -416,7 +416,7 @@ and optionally the port number."), [
 _("CUPS server IP") => \$server,
 _("Port") => \$port ],
 						   complete => sub {
-						       unless (network::is_ip($server)) {
+						       unless (!$server || network::is_ip($server)) {
 							   $in->ask_warn('', _("IP address should be in format 1.2.3.4"));
 							   return (1,0);
 						       }
