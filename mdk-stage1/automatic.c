@@ -135,8 +135,7 @@ enum return_type ask_from_entries_auto(char *msg, char ** questions, char *** an
 		char * tmp_answers[50];
 		int i = 0;
 		while (questions && *questions) {
-			if (streq(tmp_answers[i] = get_auto_value(*questions_auto), ""))
-				return ask_from_entries(msg, questions, answers, entry_size, callback_func);
+			tmp_answers[i] = get_auto_value(*questions_auto);
 			log_message("AUTOMATIC: question %s answers %s because of param %s", *questions, tmp_answers[i], *questions_auto);
 			i++;
 			questions++;
