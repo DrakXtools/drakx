@@ -342,7 +342,7 @@ pci_probe(probe_type)
                pci_class2text(e.class_), e.module ? e.module : "unknown", e.text);
       PUSHs(sv_2mortal(newSVpv(buf, 0)));
     }
-    pciusb_free(entries);
+    pciusb_free(&entries);
 
 void
 usb_probe()
@@ -358,7 +358,7 @@ usb_probe()
                e.vendor, e.device, usb_class2text(e.class_), e.module ? e.module : "unknown", e.text);
       PUSHs(sv_2mortal(newSVpv(buf, 0)));
     }
-    pciusb_free(entries);
+    pciusb_free(&entries);
 
 unsigned int
 getpagesize()
