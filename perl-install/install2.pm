@@ -523,7 +523,7 @@ sub main {
     undef $::auto_install if $cfg;
     if ($::g_auto_install) {
 	(my $root = `/bin/pwd`) =~ s|(/[^/]*){5}$||;
-	symlinkf $root, "/tmp/rhimage" or die "unable to create link /tmp/rhimage";
+	symlinkf $root, "/tmp/image" or die "unable to create link /tmp/image";
 	$o->{method} ||= "cdrom";
 	$o->{mkbootdisk} = 0;
     }
