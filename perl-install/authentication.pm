@@ -164,6 +164,7 @@ sub ask_root_password_and_authentication {
     $in->ask_from_({
 	 title => N("Set administrator (root) password and network authentication methods"), 
 	 messages => N("Set administrator (root) password"),
+	 advanced_label => N("Authentication method"),
 	 advanced_messages => kind2description(),
 	 interactive_help_id => "setRootPassword",
 	 cancel => ($security <= 2 ? 
