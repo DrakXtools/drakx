@@ -378,7 +378,7 @@ sub psUpdateHdlistsDeps {
 }
 
 sub psUsingHdlists {
-    my ($prefix, $method, $o_hdlistsfile, $o_packages) = @_;
+    my ($prefix, $method, $o_hdlistsfile, $o_packages, $o_initialmedium) = @_;
     my $listf = install_any::getFile($o_hdlistsfile || 'media/media_info/hdlists')
 	or die "no hdlists found";
     my $suppl_CDs = 0;
@@ -389,7 +389,7 @@ sub psUsingHdlists {
     }
 
     #- parse hdlists file.
-    my $medium_name = 1;
+    my $medium_name = $o_initialmedium || 1;
     foreach (<$listf>) {
 	chomp;
 	s/\s*#.*$//;
@@ -401,9 +401,13 @@ sub psUsingHdlists {
 
 	#- make sure the first medium is always selected!
 	#- by default select all image.
-	psUsingHdlist($prefix, $method, $o_packages, $2, $medium_name, $3, $4, !$1);
+	psUsingHdlist(
+	    $prefix, $method, $o_packages, $2, $medium_name, $3, $4, !$1,
+	    #- hdlist path, suppl CDs are mounted on /mnt/cdrom :
+	    index($medium_name, 's') >= 0 ? "/mnt/cdrom/media/media_info/$2" : undef,
+        );
 
-	++$medium_name;
+	$medium_name =~ /s$/ ? ($medium_name = ($medium_name + 1) . 's') : ++$medium_name;
     }
 
     log::l("psUsingHdlists read " . int(@{$o_packages->{depslist}}) .
@@ -419,7 +423,7 @@ sub psUsingHdlist {
     log::l("trying to read $hdlist for medium $medium_name");
 
     #- if the medium already exists, use it.
-    $packages->{mediums}{$medium_name} and return $packages->{mediums}{$medium_name};
+    #$packages->{mediums}{$medium_name} and return $packages->{mediums}{$medium_name};
 
     my $m = { hdlist     => $hdlist,
 	      method     => $method,

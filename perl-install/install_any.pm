@@ -208,9 +208,9 @@ sub getFile {
 	    #- first CD have been copied to other to avoid media change...
 	    my $f2 = "$postinstall_rpms/$f";
 	    $o_altroot ||= '/tmp/image';
-	    $f2 = "$o_altroot/$rel" if !$postinstall_rpms || !-e $f2;
+	    $f2 = "$o_altroot/$rel" if $rel !~ m,^/, && (!$postinstall_rpms || !-e $f2);
 	    #- $f2 = "/$rel" if !$::o->{packages}{mediums}{$asked_medium}{rpmsdir} && !-e $f2; #- not a relative path, should not be necessary with new media layout
-	    my $F; open($F, $f2) && $F;
+	    my $F; open($F, $f2) && $F or do { log::l("Can't open $f2: $!"); return undef }
 	}
     } || errorOpeningFile($f);
 }
@@ -410,8 +410,9 @@ sub selectSupplMedia {
 		log::l($@) if $@;
 		useMedium($medium_name);
 		#- probe for an hdlists file and then look for all hdlists listed herein
-		eval { pkgs::psUsingHdlists($o->{prefix}, $suppl_method, "/mnt/cdrom/media/media_info/hdlists", $o->{packages}) };
+		eval { pkgs::psUsingHdlists($o->{prefix}, $suppl_method, "/mnt/cdrom/media/media_info/hdlists", $o->{packages}, '1s') };
 		if ($@) {
+		    log::l("psUsingHdlists failed: $@");
 		    #- no hdlists found on the suppl. CD
 		    #- Look directly for a file media/main/hdlist1s.cz
 		    my $supplmedium = pkgs::psUsingHdlist(
@@ -494,6 +495,7 @@ sub setPackages {
 	my $cdrom;
 	($o->{packages}, my $suppl_method) = pkgs::psUsingHdlists($o->{prefix}, $o->{method});
 
+	1 while
 	$suppl_method = $o->selectSupplMedia($suppl_method);
 
 	#- open rpm db according to right mode needed.
