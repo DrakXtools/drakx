@@ -197,7 +197,7 @@ sub ensure_is_installed {
 }
 
 sub check_kernel_module_packages {
-    my ($do, $base_name, $ext_name) = @_;
+    my ($do, $base_name, $o_ext_name) = @_;
     my ($result, %list, %select);
     my @rpm_qa if 0;
 
@@ -213,16 +213,16 @@ sub check_kernel_module_packages {
 	    $urpm->parse_synthesis("$urpm->{statedir}/synthesis.$_->{hdlist}");
 	}
 	foreach (@{$urpm->{depslist} || []}) {
-	    $_->name eq $ext_name and $list{$_->name} = 1;
+	    $_->name eq $o_ext_name and $list{$_->name} = 1;
 	    $_->name =~ /$base_name/ and $list{$_->name} = 1;
 	}
 	foreach (@rpm_qa) {
 	    my ($name) = /(.*?)-[^-]*-[^-]*$/ or next;
-	    $name eq $ext_name and $list{$name} = 0;
+	    $name eq $o_ext_name and $list{$name} = 0;
 	    $name =~ /$base_name/ and $list{$name} = 0;
 	}
     };
-    if (!$ext_name || exists $list{$ext_name}) {
+    if (!$o_ext_name || exists $list{$o_ext_name}) {
 	eval {
 	    my ($version_release, $ext);
 	    if (c::kernel_version() =~ /([^-]*)-([^-]*mdk)(\S*)/) {
@@ -237,7 +237,7 @@ sub check_kernel_module_packages {
 		($ext, $version_release) = /kernel[^\-]*(-smp|-enterprise|-secure)?(?:-([^\-]+))$/;
 		$list{"$base_name$ext-$version_release"} and $select{"$base_name$ext-$version_release"} = 1;
 	    }
-	    $result = [ keys(%select), if_($ext_name, $ext_name) ];
+	    $result = [ keys(%select), if_($o_ext_name, $o_ext_name) ];
 	}
     }
     return $result;
