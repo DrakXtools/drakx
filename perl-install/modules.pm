@@ -98,7 +98,7 @@ sub load_category {
     );
     grep {
 	$o_wait_message->($_->{description}, $_->{driver}) if $o_wait_message;
-	eval { load([ $_->{driver}, $_->{options} ]) };
+	eval { load([ $_->{driver}, if_($_->{options}, $_->{options}) ]) };
 	$_->{error} = $@;
 
 	$_->{try} = 1 if member($_->{driver}, 'hptraid', 'ohci1394'); #- don't warn when this fails
