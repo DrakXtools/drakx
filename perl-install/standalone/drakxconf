@@ -20,7 +20,7 @@ my $in = vnew interactive('su');
 my $choice = $in->ask_from_list("drakxconf",
 _("Choose the tool you want to use"),
 [ grep { my $prog = $_; int grep { -x "$_/$prog" } split ":", $ENV{PATH} }
-  qw(XFdrake diskdrake keyboarddrake mousedrake netdrake printerdrake ) ]) or c::_exit(0); #- workaround for perl-GTK
+  qw(XFdrake adduserdrake diskdrake drakxservices keyboarddrake mousedrake netdrake printerdrake draksec adduserdrake) ]) or c::_exit(0); #- workaround for perl-GTK
 
 $in->end;
 

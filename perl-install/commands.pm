@@ -199,6 +199,11 @@ sub rights {
     $types[$_[0] >> 12 & 0xf] . $r;
 }
 
+sub displaySize {
+    my $m = $_[0] >> 12;
+    $m == 4 || $m == 8 || $m == 10;
+}
+
 sub ls {
     my ($l , $h) = getopts(\@_, qw(lh));
     $h and die "usage: ls [-l] <files...>\n";
@@ -211,7 +216,7 @@ sub ls {
 	    formline(
 "@<<<<<<<<< @<<<<<<< @<<<<<<< @>>>>>>>> @>>>>>>>>>>>>>>> @*\n",
 		     rights($s[2]), getpwuid $s[4] || $s[4], getgrgid $s[5] || $s[5],
-		     $s[6] ? join ", ", unmakedev($s[6]) : $s[7],
+		     displaySize($s[2]) ? $s[7] : join(", ", unmakedev($s[6])),
 		     scalar localtime $s[9], -l $_ ? "$_ -> " . readlink $_ : $_);
 	    print $^A; $^A = '';
 	} else { print "$_\n"; }

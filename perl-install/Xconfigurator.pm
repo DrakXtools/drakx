@@ -777,11 +777,21 @@ sub main {
     }
 
     if ($ok) {
-	my $run = $o->{xdm} || $::auto || $in->ask_yesorno(_("X at startup"),
+	if ($::isStandalone && !-t STDIN) {
+	    if (`pidof kwm` > 0 && $in->ask_okcancel('', _("Please relog into KDE to activate the changes"), 1)) {
+		system("kwmcom logout");
+		exec qw(nohup perl -e), q{
+		  for (my $nb = 10; $nb && `pidof kwm` > 0; $nb--) { sleep 1 }
+		  system("killall X") unless `pidof kwm` > 0;
+                };
+	    }
+	} else {
+	    my $run = $o->{xdm} || $::auto || $in->ask_yesorno(_("X at startup"),
 _("I can set up your computer to automatically start X upon booting.
 Would you like X to start when you reboot?"), 1);
 
-	rewriteInittab($run ? 5 : 3) unless $::testing;
+	    rewriteInittab($run ? 5 : 3) unless $::testing;
+	}
 	run_program::rooted($prefix, "chkconfig", "--del", "gpm") if $o->{mouse}{device} =~ /ttyS/ && !$::isStandalone;
     }
 }

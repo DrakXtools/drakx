@@ -22,15 +22,19 @@ hackkernel-pcmcia-cs hackkernel-smp hackkernel-smp-fb
 autoirpm autoirpm-icons numlock
 );
 
-my @preferred = qw(
-
+my %by_lang = (
+  ar    => [ 'acon' ],
+  ja    => [ 'rxvt-CLE' ],
+  ko    => [ 'rxvt-CLE' ],
+  zh_CN => [ 'rxvt-CLE' ],
+  'zh_TW.Big5' => [ 'rxvt-CLE' ],
 );
 
 
 my $A = 20471;
 my $B = 16258;
 sub correctSize { ($A - $_[0]) * $_[0] / $B } #- size correction in MB.
-sub invCorrectSize { $A / 2 - sqrt(sqr($A) - 4 * $B * $_[0]) / 2 }
+sub invCorrectSize { $A / 2 - sqrt(max(0, sqr($A) - 4 * $B * $_[0])) / 2 }
 
 sub Package {
     my ($packages, $name) = @_;
@@ -237,7 +241,7 @@ sub readCompssList($$$) {
     foreach (split ':', $ENV{LANGUAGE}) {
 	my $locales = "locales-" . substr($_, 0, 2);
 	my $p = $packages->{$locales} or next;
-	foreach ($locales, @{$p->{provides} || []}) {
+	foreach ($locales, @{$p->{provides} || []}, @{$by_lang{$_} || []}) {
 	    my $p = $packages->{$_} or next;
 	    $p->{values} = [ map { $_ + 70 } @{$p->{values}} ];
 	}
@@ -268,12 +272,12 @@ sub readCompssUsers {
     \%compssUsers;
 }
 
-sub isLangSensitive($$) {
-    my ($name, $lang) = @_;
-    local $SIG{__DIE__} = 'none';
-    $name =~ /-([^-]*)$/ or return;
-    $1 eq $lang || eval { lang::text2lang($1) eq $lang } && !$@;
-}
+#- sub isLangSensitive($$) {
+#-     my ($name, $lang) = @_;
+#-     local $SIG{__DIE__} = 'none';
+#-     $name =~ /-([^-]*)$/ or return;
+#-     $1 eq $lang || eval { lang::text2lang($1) eq $lang } && !$@;
+#- }
 
 sub setSelectedFromCompssList($$$$$$) {
     my ($compssListLevels, $packages, $level, $install_class) = @_;

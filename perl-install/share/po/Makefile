@@ -1,11 +1,13 @@
-PMSFILES = $(shell find .. -name "*.pm" | grep -v "^../po" | grep -v "^../c/")
+include ../Makefile.config
+
+PMSFILES = $(shell find .. -name "*.pm" | grep -v "^../po" | grep -v "^../c/") $(STANDALONEPMS:%=../standalone/%)
 PMSCFILES = $(PMSFILES:%=%_.c)
 POFILES = $(shell ls *.po)
 
 all: $(POFILES)
 
 clean:
-	rm -f empty.po $(POFILES:%=%t) $(PMSCFILES)
+	rm -f empty.po messages $(POFILES:%=%t) $(PMSCFILES)
 
 verif:
 	perl -ne '/^\s*#/ or $$i += my @l = /\b__?\(/g; END { print "$$i\n" }' $(PMSFILES)
@@ -18,7 +20,7 @@ $(POFILES): DrakX.pot
 
 DrakX.pot: $(PMSFILES)
 	$(MAKE) $(PMSCFILES);
-	xgettext -F -n --keyword=_ --keyword=__ -o DrakX.pot $(PMSCFILES)
+	xgettext -F -n --keyword=_ --keyword=__ -o $@ $(PMSCFILES)
 	rm $(PMSCFILES)
 
 $(PMSCFILES): %_.c: %

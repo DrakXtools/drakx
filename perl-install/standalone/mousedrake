@@ -26,6 +26,7 @@ if (!(my $name = $mouse->{FULLNAME}) || !$::auto) {
     $mouse = mouse::name2mouse($name);
 
     if ($mouse->{device} eq "usbmouse") {
+	require pci_probing::main;
 	my ($c) = pci_probing::main::probe("serial_usb") or die _("no serial_usb found\n");
 	eval { modules::load($c->[1], "serial_usb") };
     }

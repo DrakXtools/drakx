@@ -254,12 +254,15 @@ sub doPartitionDisks($$) {
 	my $w = $o->wait_message(_("Resizing"), _("Computing fat filesystem bounds"));
 	my $resize_fat = eval { resize_fat::main->new($part->{device}, devices::make($part->{device})) };
 	my $min_win = $resize_fat->min_size;
-	if (!$@ && $part->{size} > $min_linux + $min_freewin + $min_win && $o->ask_okcancel('', 
+	if (!$@ && $part->{size} > $min_linux + $min_freewin + $min_win && $o->ask_okcancel('',
 _("TODO"))) {
+	    my $hd = $hds->[0];
 	    my $oldsize = $part->{size};
-	    $hds->[0]{isDirty} = $hds->[0]{needKernelReread} = 1;
+	    $hd->{isDirty} = $hd->{needKernelReread} = 1;
 	    $part->{size} -= $min_linux;
-	    partition_table::adjustEnd($hds->[0], $part);
+	    partition_table::adjustEnd($hd, $part);
+	    partition_table::adjust_local_extended($hd, $part);
+	    partition_table::adjust_main_extended($hd);
 
 	    local *log::l = sub { $w->set(join(' ', @_)) };
 	    eval { $resize_fat->resize($part->{size}) };
@@ -270,7 +273,7 @@ _("TODO"))) {
 		$part->{isFormatted} = 1;
 		eval { fsedit::auto_allocate($hds, $o->{partitions}) };
 		if (!$@) {
-		    partition_table::write($hds->[0]) unless $::testing;
+		    partition_table::write($hd) unless $::testing;
 		    return;
 		}
 	    }
@@ -765,7 +768,7 @@ sub createXconf($$$) {
     open F, ">$file" or die "can't create X configuration file $file";
     print F <<END;
 Section "Files"
-   FontPath   "/usr/X11R6/lib/X11/fonts"
+   FontPath   "/usr/X11R6/lib/X11/fonts:unscaled,/usr/X11R6/lib/X11/fonts"
 EndSection
 
 Section "Keyboard"

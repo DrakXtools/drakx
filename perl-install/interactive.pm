@@ -43,11 +43,16 @@ sub vnew {
     $su = $su eq "su";
     require c;
     if (c::Xtest($ENV{DISPLAY} ||= ":0")) {
-	$su && $> && exec "kdesu", "-c", "$0 @ARGV";
+	if ($su && $>) {
+	    $ENV{PATH} = "/sbin:/usr/sbin:$ENV{PATH}";
+	    exec "kdesu", "-c", "$0 @ARGV";	    
+	}
 	require interactive_gtk;
 	interactive_gtk->new;
     } else {
-	$su && $> && die "you must be root to run this program";
+	if ($su && $>) {
+	    die "you must be root to run this program";
+	}
 	require 'log.pm';
 	undef *log::l;
 	*log::l = sub {}; # otherwise, it will bother us :(

@@ -21,7 +21,7 @@ sub read ($) {
     my ($f) = @_;
     my %t = getVarsFromSh($f) or die "cannot open file $f: $!";
 
-    ("timezone", $t{ZONE}, "GMT", text2bool($t{GMT}));
+    ("timezone", $t{ZONE}, "UTC", text2bool($t{UTC}));
 }
 
 sub write($$$) {
@@ -31,7 +31,7 @@ sub write($$$) {
     $@ and log::l("installing /etc/localtime failed");
     setVarsInSh($f, {
 	ZONE => $t->{timezone},
-	GMT  => bool2text($t->{GMT}),
+	UTC  => bool2text($t->{UTC}),
 	ARC  => "false",
     });
 }

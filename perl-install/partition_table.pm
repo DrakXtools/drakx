@@ -293,6 +293,15 @@ sub adjust_main_extended($) {
     verifyParts($hd); #- verify everything is all right
 }
 
+sub adjust_local_extended($$) {
+    my ($hd, $part) = @_;
+    
+    foreach (@{$hd->{extended} || []}) {
+	$_->{normal} == $part or next;
+	$_->{size} = $part->{size} + $part->{start} - $_->{start};
+	last;
+    }
+}
 
 sub get_normal_parts($) {
     my ($hd) = @_;

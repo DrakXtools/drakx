@@ -257,7 +257,10 @@ my @drivers_by_category = (
 }],
 );
 
-my %scsi_raid; @scsi_raid{qw(DAC960 dpt megaraid cpqarray gdth ips ppa eata eata_pio eata_dma st imm)} = ();
+my %type_aliases = (
+  scsi => 'disk',
+);
+
 
 my @drivers_fields = qw(text type);
 %drivers = ();
@@ -282,8 +285,9 @@ sub module_of_type($) {
 
 sub text_of_type($) {
     my ($type) = @_;
+    my $alias = $type_aliases{$type};
 
-    map { $_->{text} } grep { $_->{type} eq $type } values %drivers;
+    map { $_->{text} } grep { $_->{type} eq $type || $_->{type} eq $alias } values %drivers;
 }
 
 sub text2driver($) {

@@ -59,7 +59,7 @@ my (%installSteps, @orderedInstallSteps);
   addUser            => [ __("Add a user"), 1, 1, '', "doInstallStep" ],
   createBootdisk     => [ __("Create a bootdisk"), 1, 0, '', "doInstallStep" ],
   setupBootloader    => [ __("Install bootloader"), 1, 1, '', "doInstallStep" ],
-  configureX         => [ __("Configure X"), 1, 0, '', ["formatPartitions"] ],
+  configureX         => [ __("Configure X"), 1, 0, '', ["formatPartitions", "setupBootloader"] ],
   exitInstall        => [ __("Exit install"), 0, 0, 'beginner' ],
 );
     for (my $i = 0; $i < @installSteps; $i += 2) {
@@ -89,7 +89,7 @@ my @install_classes = (__("beginner"), __("developer"), __("server"), __("expert
 my %suggestedPartitions = (
   normal => [
     { mntpoint => "/boot", size =>  10 << 11, type => 0x83, maxsize => 30 << 11 },
-    { mntpoint => "/",     size => 300 << 11, type => 0x83, ratio => 5, maxsize => 1500 << 11 },
+    { mntpoint => "/",     size => 300 << 11, type => 0x83, ratio => 5, maxsize => 2500 << 11 },
     { mntpoint => "swap",  size =>  64 << 11, type => 0x82, ratio => 1, maxsize => 250 << 11 },
     { mntpoint => "/home", size => 300 << 11, type => 0x83, ratio => 5 },
   ],
@@ -152,7 +152,7 @@ $o = $::o = {
 
     timezone => {
 #-                   timezone => "Europe/Paris",
-#-                   GMT      => 1,
+#-                   UTC      => 1,
                 },
     printer => {
                  want         => 0,
@@ -397,7 +397,7 @@ sub configureTimezone {
 	#- can't be done in install cuz' timeconfig %post creates funny things
 	add2hash($o->{timezone}, { timezone::read($f) });
     }
-    $o->{timezone}{GMT} = !$::beginner && !grep { isFat($_) } @{$o->{fstab}} unless exists $o->{timezone}{GMT};
+    $o->{timezone}{UTC} = !$::beginner && !grep { isFat($_) } @{$o->{fstab}} unless exists $o->{timezone}{UTC};
     $o->timeConfig($f, $clicked);
 }
 #------------------------------------------------------------------------------
@@ -610,7 +610,7 @@ sub main {
 	   "DRAKX_PASSWORD=$o->{lilo}{password}\n",
 	   'DRAKX_USERS="', join(" ", map { $_->{name} } @{$o->{users} || []}), qq("\n));
     run_program::rooted($o->{prefix}, "/etc/security/msec/init.sh", $o->{security});
-#    unlink "$o->{prefix}/tmp/secure.DrakX";
+    unlink "$o->{prefix}/tmp/secure.DrakX";
 
     run_program::rooted($o->{prefix}, "kudzu", "-q"); # -q <=> fermetagueuleconnard
 

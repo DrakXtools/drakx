@@ -495,12 +495,12 @@ sub install_urpmi {
 
 	my $dir = ${{ nfs => "file://mnt/nfs", 
                       hd => "file:/" . hdInstallPath,
-		      ftp => $ENV{URLPREFIX}, 
-		      http => $ENV{URLPREFIX}, 
+		      ftp => $ENV{URLPREFIX},
+		      http => $ENV{URLPREFIX},
 		      cdrom => "removable_cdrom_1://mnt/cdrom" }}{$method};
 	local *FILES; open FILES, "hdlist2files $f|";
 	chop, print LIST "$dir/Mandrake/RPMS/$_\n" foreach <FILES>;
-	close FILES or die "hdlist2files failed";
+	close FILES or log::l("hdlist2files failed"), return;
 
 	$dir .= "/Mandrake/RPMS with ../base/hdlist" if $method =~ /ftp|http/;
 	eval { output "$prefix/etc/urpmi/urpmi.cfg", "$name $dir\n" };

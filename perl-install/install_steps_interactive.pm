@@ -423,7 +423,10 @@ sub installCrypto {
   ") || return;
 
     require crypto;
-    $u->{mirror} = crypto::text2mirror($o->ask_from_list('', _("Choose a mirror from which to get the packages"), [ crypto::mirrorstext() ], crypto::mirror2text($u->{mirror})));
+    eval {
+      $u->{mirror} = crypto::text2mirror($o->ask_from_list('', _("Choose a mirror from which to get the packages"), [ crypto::mirrorstext() ], crypto::mirror2text($u->{mirror})));
+    };
+    return if $@;
     
     my @packages = do {
       my $w = $o->wait_message('', _("Contacting the mirror to get the list of available packages"));
@@ -443,7 +446,7 @@ sub timeConfig {
     require timezone;
     $o->{timezone}{timezone} ||= timezone::bestTimezone(lang::lang2text($o->{lang}));
     $o->{timezone}{timezone} = $o->ask_from_list('', _("Which is your timezone?"), [ timezone::getTimeZones($::g_auto_install ? '' : $o->{prefix}) ], $o->{timezone}{timezone});
-    $o->{timezone}{GMT} = $o->ask_yesorno('', _("Is your hardware clock set to GMT?"), $o->{timezone}{GMT}) if $::expert || $clicked;
+    $o->{timezone}{UTC} = $o->ask_yesorno('', _("Is your hardware clock set to GMT?"), $o->{timezone}{UTC}) if $::expert || $clicked;
     install_steps::timeConfig($o,$f);
 }
 
