@@ -283,7 +283,7 @@ sub configureNetworkIntf {
     my $text;
     if ($net_device eq $intf->{DEVICE}) {
 	$skip and return 1;
-	$text = _("WARNING : This device has been previously configured to connect to the Internet.
+	$text = _("WARNING: This device has been previously configured to connect to the Internet.
 Simply press OK to keep this device configured.
 Modifying the fields below will override this configuration.");
     }
