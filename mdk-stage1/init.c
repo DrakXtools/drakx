@@ -108,7 +108,6 @@ void print_str_init(int fd, char * string)
  */
 void doklog()
 {
-#ifdef DO_KLOG
 	fd_set readset, unixs;
 	int in, out, i;
 	int log;
@@ -125,6 +124,7 @@ void doklog()
 		return;
 	}
 
+        mkdir("/tmp", 0755);
 	if ((log = open("/tmp/syslog", O_WRONLY | O_CREAT, 0644)) < 0) {
 		print_error("error opening /tmp/syslog");
 		sleep(5);
@@ -232,7 +232,6 @@ void doklog()
 				FD_SET(readfd, &unixs);
 		}
 	}
-#endif
 }
 
 
@@ -440,9 +439,7 @@ int main(int argc __attribute__ ((unused)), char **argv __attribute__ ((unused))
 
 	sync(); sync();
 
-#ifndef DO_KLOG
         while (1);
-#endif
 
 	printf("sending termination signals...");
 	kill(-1, 15);
