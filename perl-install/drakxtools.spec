@@ -143,7 +143,7 @@ drakx11: menu-driven program which walks you through setting up
 your X server; it autodetects both monitor and video card if
 possible
 
-drakxservices: SysV service and dameaons configurator
+drakxservices: SysV services and dameaons configurator
 
 drakxtv: auto configure tv card for xawtv grabber
 
