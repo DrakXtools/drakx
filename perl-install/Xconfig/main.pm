@@ -44,7 +44,7 @@ sub configure_everything_auto_install {
     $raw_X->write;
     symlinkf "../..$card->{prog}", "$::prefix/etc/X11/X" if $card->{server} !~ /Xpmac/;
 
-    any::runlevel($::prefix, $old_X->{xdm} ? 5 : 3);
+    any::runlevel($::prefix, exists $old_X->{xdm} && !$old_X->{xdm} ? 3 : 5);
 }
 
 sub configure_everything {
