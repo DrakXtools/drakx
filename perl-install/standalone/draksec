@@ -76,9 +76,10 @@ sub basic_seclevel_explanations() {
     }
       } split("\n",
 
+                             formatAlaTeX(
 #-PO: Do not alter the <span ..> and </span> tags
 #-PO: Translate the security levels (Poor, Standard, High, Higher and Paranoid) in the same way, you translated these individuals words
-                             formatAlaTeX(N("Here, you can setup the security level and administrator of your machine.
+					  N("Here, you can setup the security level and administrator of your machine.
 
 
 The Security Administrator is the one who will receive security alerts if the
