@@ -257,6 +257,7 @@ sub get_default_gateway_interface {
     (find { get_interface_type($intf->{$_}) eq 'adsl' } @intfs) ||
     (find { get_interface_type($intf->{$_}) eq 'isdn' && text2bool($intf->{$_}{DIAL_ON_IFUP}) } @intfs) ||
     (find { get_interface_type($intf->{$_}) eq 'modem' } @intfs) ||
+    (find { get_interface_type($intf->{$_}) eq 'wifi' && $intf->{$_}{BOOTPROTO} eq 'dhcp' } @intfs) ||
     (find { get_interface_type($intf->{$_}) eq 'ethernet' && $intf->{$_}{BOOTPROTO} eq 'dhcp' } @intfs);
 }
 
@@ -277,16 +278,18 @@ sub get_internet_connection {
 
 sub get_interface_type {
     my ($interface) = @_;
+    require detect_devices;
     member($interface->{TYPE}, "xDSL", "ADSL") && "adsl" ||
-    $interface->{DEVICE} =~ /^(eth|ath|wlan)/ && "ethernet" ||
     $interface->{DEVICE} =~ /^ippp/ && "isdn" ||
     $interface->{DEVICE} =~ /^ppp/ && "modem" ||
+    c::isNetDeviceWirelessAware($interface->{DEVICE}) && "wifi" ||
+    detect_devices::is_lan_interface($interface->{DEVICE}) && "ethernet" ||
     "unknown";
 }
 
 sub get_default_metric {
     my ($type) = @_;
-    my @known_types = ("ethernet_gigabit", "ethernet", "adsl", "isdn", "modem", "unknown");
+    my @known_types = ("ethernet_gigabit", "ethernet", "adsl", "wifi", "isdn", "modem", "unknown");
     my $idx;
     eval { $idx = find_index { $type eq $_ } @known_types };
     $idx = @known_types if $@;
