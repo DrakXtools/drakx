@@ -1170,6 +1170,11 @@ sub write_grub {
     my @sorted_hds = sort_hds_according_to_bios($bootloader, $all_hds);
     write_grub_device_map(\@legacy_floppies, \@sorted_hds);
 
+    if (get_append($bootloader, 'console') =~ /ttyS(\d),(\d+)/) {
+	$bootloader->{serial} ||= "--unit=$1 --speed=$2";
+	$bootloader->{terminal} ||= "--timeout=" . ($bootloader->{timeout} || 0) . " console serial";
+    }
+
     my $file2grub = sub {
 	my ($part, $file) = fs::get::file2part($fstab, $_[0], 'keep_simple_symlinks');
 	device2grub($part, \@sorted_hds) . $file;
@@ -1177,9 +1182,8 @@ sub write_grub {
     {
 	my @conf;
 
-	push @conf, map { "$_ $bootloader->{$_}" } grep { $bootloader->{$_} } qw(timeout color);
+	push @conf, map { "$_ $bootloader->{$_}" } grep { $bootloader->{$_} } qw(timeout color serial terminal);
 	push @conf, map { $_ . ' ' . $file2grub->($bootloader->{$_}) } grep { $bootloader->{$_} } qw(splashimage);
-	push @conf, "serial --unit=$1 --speed=$2\nterminal --timeout=" . ($bootloader->{timeout} || 0) . " console serial" if get_append($bootloader, 'console') =~ /ttyS(\d),(\d+)/;
 
 	eval {
 	    push @conf, "default " . (find_index { $_->{label} eq $bootloader->{default} } @{$bootloader->{entries}});
