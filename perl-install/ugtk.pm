@@ -508,20 +508,11 @@ sub gtkicons_labels_widget {
 	my $imlib_counter_add = 1;
 	my $imlib_icon_h_width;
 	my $imlib_icon_h_height;
-	my $imlib_render;
-	my $imlib_timeout;
 
 	if ($use_imlib) {
 	    $imlib_icon_h = gtkcreate_imlib("$_->[1]_highlight");
 	    $imlib_icon_h_width = $imlib_icon_h->rgb_width;
 	    $imlib_icon_h_height = $imlib_icon_h->rgb_height;
-	    $imlib_render = sub {
-		$imlib_icon_h->set_image_modifier({'gamma' => 256 + $imlib_counter * 30, 'contrast' => 256, 'brightness' => 256});
-		$imlib_icon_h->render($imlib_icon_h_width, $imlib_icon_h_height);
-		$imlib_counter += $imlib_counter_add;
-		$imlib_counter == 5 || $imlib_counter == 0 and $imlib_counter_add = -$imlib_counter_add;
-		$imlib_icon_h->move_image;
-	    };
 	}
 
 	$darea->{state} = 0;
@@ -536,7 +527,6 @@ sub gtkicons_labels_widget {
                       $dbl_area = new Gtk::Gdk::Pixmap($darea->window, max($width, $x_round), $y_round + $height);
 		      $dbl_area->{state} = $darea->{state};
                       fill_tiled($darea, $dbl_area, $background, $x_back2, $y_back2, $dx, $dy);
-		      $use_imlib and $icon_h = $imlib_render->();
                       $dbl_area->draw_pixmap($darea->style->bg_gc('normal'),
                                              $darea->{state} ? $icon_h : $icon, 0, 0, ($dx - $icon_width)/2, 0, $icon_width, $icon_height);
                       $dbl_area->draw_pixmap($darea->style->bg_gc('normal'),
@@ -553,14 +543,12 @@ sub gtkicons_labels_widget {
 					$darea->draw(undef);
 					$imlib_counter = 0;
 					$imlib_counter_add = 1;
-					$use_imlib and $imlib_timeout = Gtk->timeout_add(100, sub { $dbl_area = undef; $darea->draw(undef); 1 });
 				    }
 				});
 	$darea->signal_connect(leave_notify_event => sub {
 				    if ($darea->{state} == 1) {
 					$darea->{state} = 0;
 					$darea->draw(undef);
-					$use_imlib and Gtk->timeout_remove($imlib_timeout);
 				    }
 				});
 	my $label_exec = $_->[0];
