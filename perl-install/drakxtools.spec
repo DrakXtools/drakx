@@ -355,8 +355,8 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 
 * Fri Mar 19 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10-25mdk
 - add missing icons for localedrake menu entry (dadou)
-- diskdrake: fix compaq smart array support (#9029) (pixel)
-- drakboot: reread current bootsplash config (olivier blin)
+- diskdrake: fix compaq smart array support (pixel, #9029)
+- drakboot: reread current bootsplash config (olivier blin, #8888)
 - drakconnect:
   o always offer to restart adsl connections
   o fix bewan adsl modem support by providing an ad-how
