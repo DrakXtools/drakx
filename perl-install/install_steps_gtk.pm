@@ -1,4 +1,3 @@
-
 package install_steps_gtk; # $Id$
 
 use diagnostics;
@@ -546,9 +545,11 @@ sub installPackages {
     my $w = my_gtk->new(_("Installing"));
     $w->sync;
     my $text = new Gtk::Label;
-    my $advertising;
+    my ($advertising, $change_time, $i);
+    my $show_advertising = bool(@install_any::advertising_images);
     my ($msg, $msg_time_remaining, $msg_time_total) = map { new Gtk::Label($_) } '', (_("Estimating")) x 2;
     my ($progress, $progress_total) = map { new Gtk::ProgressBar } (1..2);
+    $w->{rwindow}->set_policy(1, 1, 1);
     gtkadd($w->{window}, my $box = new Gtk::VBox(0,10));
     $box->pack_end(gtkshow(gtkpack(gtkset_usize(new Gtk::VBox(0,5), $::windowwidth * 0.8, 0),
 			   $msg, $progress,
@@ -559,20 +560,33 @@ sub installPackages {
 			   $text,
 			   $progress_total,
 			   gtkadd(create_hbox(),
-				  my $cancel = new Gtk::Button(_("Cancel"))),
+				  my $cancel = new Gtk::Button(_("Cancel")),
+				  my $details = new Gtk::Button(_("Details")),
+				  ),
 			  )), 0, 1, 0);
     $w->sync;
     $msg->set(_("Please wait, preparing installation"));
     gtkset_mousecursor_normal($cancel->window);
-    $cancel->signal_connect(clicked => sub { $pkgs::cancel_install = 1 });
 
-    my ($change_time, $i);
-    if (@install_any::advertising_images) {
-	log::l("hiding");
-	$msg->hide;
-	$progress->hide;
-	$text->hide;
-    }
+    my $advertize = sub {
+	$show_advertising ? $_->hide : $_->show foreach $msg, $progress, $text;
+	gtkdestroy($advertising) if $advertising;
+	if ($show_advertising) {
+	    $change_time = time();
+	    my $f = $install_any::advertising_images[$i++ % @install_any::advertising_images];
+	    log::l("advertising $f");
+	    eval { gtkpack($box, $advertising = gtkpng($f)) };
+	} else {
+	    $advertising = undef;
+	}
+    };
+
+    $cancel->signal_connect(clicked => sub { $pkgs::cancel_install = 1 });
+    $details->signal_connect(clicked => sub {
+	invbool \$show_advertising;
+	$advertize->();
+    });
+    $advertize->();
 
     my $oldInstallCallback = \&pkgs::installCallback;
     local *pkgs::installCallback = sub {
@@ -591,14 +605,7 @@ sub installPackages {
 	    my $p = pkgs::packageByName($o->{packages}, $name);
 	    $last_size = c::headerGetEntry(pkgs::packageHeader($p), 'size');
 	    $text->set((split /\n/, c::headerGetEntry(pkgs::packageHeader($p), 'summary'))[0] || '');
-
-	    if (@install_any::advertising_images && $total_size > 20 * sqr(1024) && time() - $change_time > 20) {
-		$change_time = time();
-                my $f = $install_any::advertising_images[$i++ % @install_any::advertising_images];
-		log::l("advertising $f");
-		gtkdestroy($advertising);
-		eval { gtkpack($box, $advertising = gtkpng($f)) };
-	    }
+	    $advertize->() if $show_advertising && $total_size > 20 * sqr(1024) && time() - $change_time > 20;
 	    $w->flush;
 	} elsif ($m =~ /^Progressing installing package/) {
 	    $progress->update($_[2] ? $_[1] / $_[2] : 0);
