@@ -556,7 +556,7 @@ sub main {
 
     modules::unload($_) foreach qw(vfat msdos fat);
     modules::load_deps(($::testing ? ".." : "") . "/modules/modules.dep");
-    modules::read_stage1_conf("/tmp/conf.modules");
+    modules::read_stage1_conf($_) foreach "/tmp/conf.modules", "/etc/modules.conf";
     modules::read_already_loaded();
 
     eval { modules::load("af_packet") };
