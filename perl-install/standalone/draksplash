@@ -30,7 +30,6 @@ my $thm_path = '/usr/share/bootsplash/themes/';
 my $thm_conf_path = '/etc/bootsplash/themes/';
 
 my $prev_window;
-my $pix;
 
 my $boot_conf_path = '/etc/bootsplash/themes/';
 my %font_size = ('h' =>16, 'w' =>8);
@@ -138,7 +137,6 @@ my %boot_conf_frame = ('frame' => new Gtk2::Frame(N("Configure bootsplash pictur
                                   ],
                        );
 #- var action is used to hide/show the correct frame
-my @action_frame = (\%boot_conf_frame , \%first);
 my $VB2 = new Gtk2::VBox(0,5);
 my $first_vbox = new Gtk2::VBox(0,5);
 
