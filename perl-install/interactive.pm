@@ -219,7 +219,7 @@ sub ask_from_entries_refH_powered_normalize {
 	    }
 	    $e->{type} = 'iconlist' if $e->{icon2f};
 	    $e->{type} = 'treelist' if $e->{separator};
-	    $e->{type} = 'list' if $e->{format};
+	    $e->{type} ||= 'list' if $e->{format};
 	    add2hash_($e, { not_edit => 1, type => 'combo' });
 	    ${$e->{val}} = $l->[0] if ($e->{type} ne 'combo' || $e->{not_edit}) && !member(${$e->{val}}, @$l);
 	} elsif ($e->{type} eq 'range') {
