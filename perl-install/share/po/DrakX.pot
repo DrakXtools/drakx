@@ -460,6 +460,11 @@ msgstr ""
 
 #: ../../any.pm:1
 #, c-format
+msgid "Force ACPI"
+msgstr ""
+
+#: ../../any.pm:1
+#, c-format
 msgid "Delay before booting default image"
 msgstr ""
 
@@ -727,7 +732,7 @@ msgstr ""
 msgid "Splash selection"
 msgstr ""
 
-#: ../../bootlook.pm:1 ../../standalone/drakbackup:1 ../../standalone/drakbackup:1 ../../standalone/drakbackup:1 ../../standalone/drakbackup:1 ../../standalone/drakgw:1
+#: ../../bootlook.pm:1 ../../install_steps_gtk.pm:1 ../../standalone/drakbackup:1 ../../standalone/drakbackup:1 ../../standalone/drakbackup:1 ../../standalone/drakbackup:1 ../../standalone/drakgw:1
 #, c-format
 msgid "Configure"
 msgstr ""
@@ -1571,7 +1576,7 @@ msgstr ""
 #: ../../help.pm:1
 #, c-format
 msgid ""
-"This step is activated only if an ols GNU/Linux partition has been found on\n"
+"This step is activated only if an old GNU/Linux partition has been found on\n"
 "your machine.\n"
 "\n"
 "DrakX now needs to know if you want to perform a new install or an upgrade\n"
@@ -2706,6 +2711,16 @@ msgid ""
 ""
 msgstr ""
 
+#: ../../install_steps_gtk.pm:1 ../../install_steps_gtk.pm:1 ../../interactive.pm:1 ../../ugtk2.pm:1 ../../ugtk2.pm:1 ../../Xconfig/resolution_and_depth.pm:1 ../../diskdrake/hd_gtk.pm:1 ../../interactive/gtk.pm:1 ../../interactive/gtk.pm:1 ../../standalone/drakTermServ:1 ../../standalone/drakbackup:1 ../../standalone/drakbackup:1 ../../standalone/drakbackup:1 ../../standalone/drakbackup:1 ../../standalone/drakbackup:1 ../../standalone/drakbackup:1 ../../standalone/drakbackup:1 ../../standalone/drakbackup:1 ../../standalone/drakbackup:1 ../../standalone/drakbackup:1 ../../standalone/drakbackup:1 ../../standalone/drakbug:1
+#, c-format
+msgid "Help"
+msgstr ""
+
+#: ../../install_steps_gtk.pm:1 ../../install_steps_interactive.pm:1
+#, c-format
+msgid "not configured"
+msgstr ""
+
 #: ../../install_steps_gtk.pm:1 ../../install_steps_gtk.pm:1 ../../install_steps_interactive.pm:1 ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Go on anyway?"
@@ -2908,11 +2923,6 @@ msgstr ""
 #: ../../install_steps_gtk.pm:1 ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Individual package selection"
-msgstr ""
-
-#: ../../install_steps_gtk.pm:1 ../../install_steps_gtk.pm:1 ../../ugtk2.pm:1 ../../ugtk2.pm:1 ../../Xconfig/resolution_and_depth.pm:1 ../../Xconfig/resolution_and_depth.pm:1 ../../diskdrake/hd_gtk.pm:1 ../../diskdrake/hd_gtk.pm:1 ../../interactive/gtk.pm:1 ../../interactive/gtk.pm:1 ../../standalone/drakTermServ:1 ../../standalone/drakbackup:1 ../../standalone/drakbackup:1 ../../standalone/drakbackup:1 ../../standalone/drakbackup:1 ../../standalone/drakbackup:1 ../../standalone/drakbackup:1 ../../standalone/drakbackup:1 ../../standalone/drakbackup:1 ../../standalone/drakbackup:1 ../../standalone/drakbackup:1 ../../standalone/drakbackup:1 ../../standalone/drakbug:1
-#, c-format
-msgid "Help"
 msgstr ""
 
 #: ../../install_steps_gtk.pm:1 ../../install_steps_interactive.pm:1
@@ -3177,11 +3187,6 @@ msgstr ""
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Security Level"
-msgstr ""
-
-#: ../../install_steps_interactive.pm:1 ../../install_steps_interactive.pm:1
-#, c-format
-msgid "not configured"
 msgstr ""
 
 #: ../../install_steps_interactive.pm:1 ../../standalone/drakbackup:1
@@ -4108,6 +4113,11 @@ msgstr ""
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Azerbaidjani (latin)"
+msgstr ""
+
+#: ../../keyboard.pm:1
+#, c-format
+msgid "Arabic"
 msgstr ""
 
 #: ../../keyboard.pm:1
@@ -5675,7 +5685,7 @@ msgstr ""
 #, c-format
 msgid ""
 "Assign raw devices to block devices (such as hard drive\n"
-"partitions), for the use of applications such as Oracle"
+"partitions), for the use of applications such as Oracle or DVD players"
 msgstr ""
 
 #: ../../services.pm:1
@@ -5883,7 +5893,7 @@ msgstr ""
 
 #: ../../standalone.pm:1
 #, c-format
-msgid "[--manual] [--device=dev] [--update-sane=sane_desc_dir] [--update-usbtable] [--dynamic=dev]"
+msgid "[--manual] [--device=dev] [--update-sane=sane_source_dir] [--update-usbtable] [--dynamic=dev]"
 msgstr ""
 
 #: ../../standalone.pm:1
@@ -8933,7 +8943,7 @@ msgstr ""
 msgid "PDQ - Print, Don't Queue"
 msgstr ""
 
-#: ../../printer/detect.pm:1 ../../printer/detect.pm:1 ../../printer/detect.pm:1
+#: ../../printer/detect.pm:1 ../../printer/detect.pm:1 ../../printer/detect.pm:1 ../../printer/detect.pm:1 ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Unknown Model"
 msgstr ""
@@ -8963,7 +8973,7 @@ msgstr ""
 msgid "Local network(s)"
 msgstr ""
 
-#: ../../printer/main.pm:1 ../../printer/printerdrake.pm:1
+#: ../../printer/main.pm:1 ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Raw printer (No driver)"
 msgstr ""
@@ -9083,19 +9093,14 @@ msgstr ""
 msgid "Local printer"
 msgstr ""
 
-#: ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1
+#: ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Configuring applications..."
 msgstr ""
 
-#: ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1 ../../standalone/printerdrake:1
+#: ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1 ../../standalone/printerdrake:1
 #, c-format
 msgid "Printerdrake"
-msgstr ""
-
-#: ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1
-#, c-format
-msgid "Do you want to configure another printer?"
 msgstr ""
 
 #: ../../printer/printerdrake.pm:1
@@ -9113,9 +9118,9 @@ msgstr ""
 msgid "Remove printer"
 msgstr ""
 
-#: ../../printer/printerdrake.pm:1
+#: ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1
 #, c-format
-msgid "Know how to use this printer"
+msgid "Learn how to use this printer"
 msgstr ""
 
 #: ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1
@@ -9208,11 +9213,6 @@ msgstr ""
 msgid "Printer connection type"
 msgstr ""
 
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "Learn how to use this printer"
-msgstr ""
-
 #: ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Raw printer"
@@ -9285,16 +9285,6 @@ msgstr ""
 msgid "Printing system: "
 msgstr ""
 
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "Would you like to configure printing?"
-msgstr ""
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "Preparing Printerdrake..."
-msgstr ""
-
 #: ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Checking installed software..."
@@ -9310,7 +9300,7 @@ msgstr ""
 msgid "Failed to configure printer \"%s\"!"
 msgstr ""
 
-#: ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1
+#: ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Configuring printer \"%s\"..."
 msgstr ""
@@ -9328,6 +9318,11 @@ msgstr ""
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Select Printer Spooler"
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Setting Default Printer..."
 msgstr ""
 
 #: ../../printer/printerdrake.pm:1
@@ -9798,7 +9793,7 @@ msgstr ""
 msgid "OKI winprinter configuration"
 msgstr ""
 
-#: ../../printer/printerdrake.pm:1
+#: ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1
 #, c-format
 msgid "If your printer is not listed, choose a compatible (see printer manual) or a similar one."
 msgstr ""
@@ -9811,12 +9806,12 @@ msgid ""
 "Please check whether Printerdrake did the auto-detection of your printer model correctly. Find the correct model in the list when a wrong model or \"Raw printer\" is highlighted."
 msgstr ""
 
-#: ../../printer/printerdrake.pm:1
+#: ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Which printer model do you have?"
 msgstr ""
 
-#: ../../printer/printerdrake.pm:1
+#: ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Printer model selection"
 msgstr ""
@@ -10388,6 +10383,19 @@ msgstr ""
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
+msgid ""
+"\n"
+"\n"
+"Printerdrake could not determine which model your printer is. Please choose the correct model from the list."
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Configuring printer ..."
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
 msgid "Searching for new printers..."
 msgstr ""
 
@@ -10750,7 +10758,7 @@ msgstr ""
 
 #: ../../security/help.pm:1
 #, c-format
-msgid "if set to yes, check for empty password, or a password while it should be in /etc/shadow or other users with id 0."
+msgid "if set to yes, check for empty passwords, for no password in /etc/shadow and for"
 msgstr ""
 
 #: ../../security/help.pm:1
@@ -14987,6 +14995,16 @@ msgstr ""
 
 #: ../../standalone/harddrake2:1
 #, c-format
+msgid "Unknown"
+msgstr ""
+
+#: ../../standalone/harddrake2:1
+#, c-format
+msgid "unknown"
+msgstr ""
+
+#: ../../standalone/harddrake2:1
+#, c-format
 msgid "Running \"%s\" ..."
 msgstr ""
 
@@ -15800,7 +15818,7 @@ msgstr ""
 
 #: ../../standalone/printerdrake:1
 #, c-format
-msgid "Reading printer data ..."
+msgid "Reading data of installed printers..."
 msgstr ""
 
 #: ../../standalone/scannerdrake:1 ../../standalone/scannerdrake:1 ../../standalone/scannerdrake:1 ../../standalone/scannerdrake:1 ../../standalone/scannerdrake:1 ../../standalone/scannerdrake:1 ../../standalone/scannerdrake:1 ../../standalone/scannerdrake:1
@@ -15815,7 +15833,7 @@ msgid ""
 ""
 msgstr ""
 
-#: ../../standalone/scannerdrake:1 ../../standalone/scannerdrake:1 ../../standalone/scannerdrake:1 ../../standalone/scannerdrake:1 ../../standalone/scannerdrake:1 ../../standalone/scannerdrake:1 ../../standalone/scannerdrake:1 ../../standalone/scannerdrake:1 ../../standalone/scannerdrake:1 ../../standalone/scannerdrake:1 ../../standalone/scannerdrake:1 ../../standalone/scannerdrake:1
+#: ../../standalone/scannerdrake:1 ../../standalone/scannerdrake:1 ../../standalone/scannerdrake:1 ../../standalone/scannerdrake:1 ../../standalone/scannerdrake:1 ../../standalone/scannerdrake:1 ../../standalone/scannerdrake:1 ../../standalone/scannerdrake:1 ../../standalone/scannerdrake:1 ../../standalone/scannerdrake:1 ../../standalone/scannerdrake:1 ../../standalone/scannerdrake:1 ../../standalone/scannerdrake:1
 #, c-format
 msgid "Scannerdrake"
 msgstr ""
@@ -15907,45 +15925,6 @@ msgstr ""
 msgid "Here you can choose whether the scanners connected to this machine should be accessable by remote machines and by which remote machines."
 msgstr ""
 
-#: ../../standalone/scannerdrake:1
-#, c-format
-msgid ""
-"Your %s has been configured.\n"
-"You may now scan documents using \"XSane\" from Multimedia/Graphics in the applications menu."
-msgstr ""
-
-#: ../../standalone/scannerdrake:1
-#, c-format
-msgid ""
-"The %s must be configured by printerdrake.\n"
-"You can launch printerdrake from the Mandrake Control Center in Hardware section."
-msgstr ""
-
-#: ../../standalone/scannerdrake:1
-#, c-format
-msgid "choose device"
-msgstr ""
-
-#: ../../standalone/scannerdrake:1
-#, c-format
-msgid "Please select the device where your %s is attached"
-msgstr ""
-
-#: ../../standalone/scannerdrake:1
-#, c-format
-msgid "The %s is unsupported"
-msgstr ""
-
-#: ../../standalone/scannerdrake:1
-#, c-format
-msgid "The %s is not known by this version of Scannerdrake."
-msgstr ""
-
-#: ../../standalone/scannerdrake:1 ../../standalone/scannerdrake:1 ../../standalone/scannerdrake:1
-#, c-format
-msgid "The %s is not supported by this version of Mandrake Linux."
-msgstr ""
-
 #: ../../standalone/scannerdrake:1 ../../standalone/scannerdrake:1
 #, c-format
 msgid "Re-generating list of configured scanners ..."
@@ -16005,7 +15984,86 @@ msgstr ""
 
 #: ../../standalone/scannerdrake:1
 #, c-format
-msgid "Select a scanner"
+msgid ""
+"Your %s has been configured.\n"
+"You may now scan documents using \"XSane\" from Multimedia/Graphics in the applications menu."
+msgstr ""
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid ""
+"The %s must be configured by printerdrake.\n"
+"You can launch printerdrake from the Mandrake Control Center in Hardware section."
+msgstr ""
+
+#: ../../standalone/scannerdrake:1 ../../standalone/scannerdrake:1
+#, c-format
+msgid "choose device"
+msgstr ""
+
+#: ../../standalone/scannerdrake:1 ../../standalone/scannerdrake:1
+#, c-format
+msgid "Please select the device where your %s is attached"
+msgstr ""
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "Searching for scanners ..."
+msgstr ""
+
+#: ../../standalone/scannerdrake:1 ../../standalone/scannerdrake:1 ../../standalone/scannerdrake:1
+#, c-format
+msgid "Auto-detect available ports"
+msgstr ""
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "(Note: Parallel ports cannot be auto-detected)"
+msgstr ""
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "The %s is unsupported"
+msgstr ""
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "The %s is not known by this version of Scannerdrake."
+msgstr ""
+
+#: ../../standalone/scannerdrake:1 ../../standalone/scannerdrake:1 ../../standalone/scannerdrake:1
+#, c-format
+msgid "The %s is not supported by this version of Mandrake Linux."
+msgstr ""
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid ")"
+msgstr ""
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "Port: %s"
+msgstr ""
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid ", "
+msgstr ""
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "Detected model: %s"
+msgstr ""
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid " ("
+msgstr ""
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "Select a scanner model"
 msgstr ""
 
 #: ../../standalone/scannerdrake:1

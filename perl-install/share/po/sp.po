@@ -497,6 +497,11 @@ msgstr "Ограничена командна линика - опције"
 
 #: ../../any.pm:1
 #, c-format
+msgid "Force ACPI"
+msgstr ""
+
+#: ../../any.pm:1
+#, c-format
 msgid "Delay before booting default image"
 msgstr "Пауза пре стартања default image-а"
 
@@ -849,7 +854,8 @@ msgstr "Теме"
 msgid "Splash selection"
 msgstr "Splash селекција"
 
-#: ../../bootlook.pm:1 ../../standalone/drakbackup:1 ../../standalone/drakgw:1
+#: ../../bootlook.pm:1 ../../install_steps_gtk.pm:1
+#: ../../standalone/drakbackup:1 ../../standalone/drakgw:1
 #, c-format
 msgid "Configure"
 msgstr "Подеси"
@@ -4033,6 +4039,19 @@ msgstr ""
 msgid "Entering step `%s'\n"
 msgstr "Покрећем корак `%s'\n"
 
+#: ../../install_steps_gtk.pm:1 ../../interactive.pm:1 ../../ugtk2.pm:1
+#: ../../Xconfig/resolution_and_depth.pm:1 ../../diskdrake/hd_gtk.pm:1
+#: ../../interactive/gtk.pm:1 ../../standalone/drakTermServ:1
+#: ../../standalone/drakbackup:1 ../../standalone/drakbug:1
+#, c-format
+msgid "Help"
+msgstr "Помоћ"
+
+#: ../../install_steps_gtk.pm:1 ../../install_steps_interactive.pm:1
+#, c-format
+msgid "not configured"
+msgstr "није подешено"
+
 #: ../../install_steps_gtk.pm:1 ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Go on anyway?"
@@ -4245,14 +4264,6 @@ msgstr "Следeћи  ->"
 #, c-format
 msgid "Individual package selection"
 msgstr "Поjединaчно бирaње пакетa"
-
-#: ../../install_steps_gtk.pm:1 ../../ugtk2.pm:1
-#: ../../Xconfig/resolution_and_depth.pm:1 ../../diskdrake/hd_gtk.pm:1
-#: ../../interactive/gtk.pm:1 ../../standalone/drakTermServ:1
-#: ../../standalone/drakbackup:1 ../../standalone/drakbug:1
-#, c-format
-msgid "Help"
-msgstr "Помоћ"
 
 #: ../../install_steps_gtk.pm:1 ../../install_steps_interactive.pm:1
 #, c-format
@@ -4562,11 +4573,6 @@ msgstr "Сигурност"
 #, fuzzy, c-format
 msgid "Security Level"
 msgstr "Ниво сигурности:"
-
-#: ../../install_steps_interactive.pm:1
-#, c-format
-msgid "not configured"
-msgstr "није подешено"
 
 #: ../../install_steps_interactive.pm:1 ../../standalone/drakbackup:1
 #, c-format
@@ -5543,6 +5549,11 @@ msgstr "Белгијски"
 #, c-format
 msgid "Azerbaidjani (latin)"
 msgstr "Азербejдзан  (латиница)"
+
+#: ../../keyboard.pm:1
+#, c-format
+msgid "Arabic"
+msgstr ""
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -7118,10 +7129,10 @@ msgstr ""
 " routing протоколи су потребни за комплексне мрeже."
 
 #: ../../services.pm:1
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "Assign raw devices to block devices (such as hard drive\n"
-"partitions), for the use of applications such as Oracle"
+"partitions), for the use of applications such as Oracle or DVD players"
 msgstr ""
 "Додељује raw урећаје за блок урећаје (као што су хард диск\n"
 "партиције), што мође бити корисно за апликације као што је Oracle"
@@ -7403,10 +7414,10 @@ msgstr ""
 "       XFdrake resolution"
 
 #: ../../standalone.pm:1
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"[--manual] [--device=dev] [--update-sane=sane_desc_dir] [--update-usbtable] "
-"[--dynamic=dev]"
+"[--manual] [--device=dev] [--update-sane=sane_source_dir] [--update-"
+"usbtable] [--dynamic=dev]"
 msgstr ""
 "[--manual] [--device=dev] [--update-sane=sane_desc_dir] [--update-usbtable] "
 "[--dynamic=dev]"
@@ -10799,7 +10810,7 @@ msgstr "PDQ"
 msgid "PDQ - Print, Don't Queue"
 msgstr "PDQ - Штампај, немој да памтиш"
 
-#: ../../printer/detect.pm:1
+#: ../../printer/detect.pm:1 ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Unknown Model"
 msgstr "Непознати Модел"
@@ -10961,11 +10972,6 @@ msgstr "Printerdrake"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
-msgid "Do you want to configure another printer?"
-msgstr "Да ли хоћете да подесите још један штампач?"
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
 msgid "Removing printer \"%s\"..."
 msgstr "Уклањам штампач \"%s\" ..."
 
@@ -10980,8 +10986,8 @@ msgid "Remove printer"
 msgstr "Уклони штампaч"
 
 #: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "Know how to use this printer"
+#, fuzzy, c-format
+msgid "Learn how to use this printer"
 msgstr "Да ли знате како да користите овај штампач"
 
 #: ../../printer/printerdrake.pm:1
@@ -11080,11 +11086,6 @@ msgid "Printer connection type"
 msgstr "Тип конекције штампача"
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
-msgid "Learn how to use this printer"
-msgstr "Да ли знате како да користите овај штампач"
-
-#: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Raw printer"
 msgstr "Raw штампач"
@@ -11177,16 +11178,6 @@ msgstr "Систем за штампање: "
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
-msgid "Would you like to configure printing?"
-msgstr "Да ли бисте да подесите штампач?"
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "Preparing Printerdrake..."
-msgstr "Припремам PrinterDrake ..."
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
 msgid "Checking installed software..."
 msgstr "Проверавам инсталирани софтвер..."
 
@@ -11219,6 +11210,11 @@ msgstr "Који систем за штампaње (spooler) желите да користитe ?"
 #, c-format
 msgid "Select Printer Spooler"
 msgstr "Изаберите Spooler за штампач"
+
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid "Setting Default Printer..."
+msgstr "Default штампач"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -12777,6 +12773,20 @@ msgstr ""
 "конекције штампача."
 
 #: ../../printer/printerdrake.pm:1
+#, c-format
+msgid ""
+"\n"
+"\n"
+"Printerdrake could not determine which model your printer is. Please choose "
+"the correct model from the list."
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid "Configuring printer ..."
+msgstr "Подешавам штампач \"%s\" ..."
+
+#: ../../printer/printerdrake.pm:1
 #, fuzzy, c-format
 msgid "Searching for new printers..."
 msgstr "Дељење локалних штампача"
@@ -13175,8 +13185,8 @@ msgstr ""
 #: ../../security/help.pm:1
 #, c-format
 msgid ""
-"if set to yes, check for empty password, or a password while it should be "
-"in /etc/shadow or other users with id 0."
+"if set to yes, check for empty passwords, for no password in /etc/shadow and "
+"for"
 msgstr ""
 
 #: ../../security/help.pm:1
@@ -18071,6 +18081,16 @@ msgid ""
 msgstr "Кликните на уређај у левом стаблу да би овде приказали информације."
 
 #: ../../standalone/harddrake2:1
+#, fuzzy, c-format
+msgid "Unknown"
+msgstr "Непознати модел"
+
+#: ../../standalone/harddrake2:1
+#, fuzzy, c-format
+msgid "unknown"
+msgstr "Непознати модел"
+
+#: ../../standalone/harddrake2:1
 #, c-format
 msgid "Running \"%s\" ..."
 msgstr "Покрећем \"%s\" ..."
@@ -18932,9 +18952,9 @@ msgid "Network Monitoring"
 msgstr "Праћење стања мреже"
 
 #: ../../standalone/printerdrake:1
-#, c-format
-msgid "Reading printer data ..."
-msgstr "Учитавам податке за штампач ..."
+#, fuzzy, c-format
+msgid "Reading data of installed printers..."
+msgstr "Дељење локалних штампача"
 
 #: ../../standalone/scannerdrake:1
 #, fuzzy, c-format
@@ -19052,55 +19072,6 @@ msgstr ""
 "доступни на другим удаљеним машинама и на којим удаљеним машинама."
 
 #: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
-msgid ""
-"Your %s has been configured.\n"
-"You may now scan documents using \"XSane\" from Multimedia/Graphics in the "
-"applications menu."
-msgstr ""
-"Ваш %s скенер је подешен.\n"
-"Сада можете скенирати ваше докунете помоћу ``XSane''програма из Мултимедија/"
-"Графика подменија из менија Апликације."
-
-#: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
-msgid ""
-"The %s must be configured by printerdrake.\n"
-"You can launch printerdrake from the Mandrake Control Center in Hardware "
-"section."
-msgstr ""
-"Овај %s скенер мора бити подешен у printerdrake.\n"
-"Можете покренути printerdrake из Mandrake Контролног Центра из Хардвер "
-"секције."
-
-#: ../../standalone/scannerdrake:1
-#, c-format
-msgid "choose device"
-msgstr "изаберите уређај"
-
-#: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
-msgid "Please select the device where your %s is attached"
-msgstr ""
-"Scannerdrake није могао да детектује ваш %s скенер.\n"
-"Изаберите порт на који је ваш скенер прикључен"
-
-#: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
-msgid "The %s is unsupported"
-msgstr "Овај %s скенер није подржан"
-
-#: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
-msgid "The %s is not known by this version of Scannerdrake."
-msgstr "%s није подржан у овој верзији Mandrake Linux-а."
-
-#: ../../standalone/scannerdrake:1
-#, c-format
-msgid "The %s is not supported by this version of Mandrake Linux."
-msgstr "%s није подржан у овој верзији Mandrake Linux-а."
-
-#: ../../standalone/scannerdrake:1
 #, c-format
 msgid "Re-generating list of configured scanners ..."
 msgstr ""
@@ -19162,8 +19133,97 @@ msgstr ""
 "су директно повезани на ваш систем"
 
 #: ../../standalone/scannerdrake:1
+#, fuzzy, c-format
+msgid ""
+"Your %s has been configured.\n"
+"You may now scan documents using \"XSane\" from Multimedia/Graphics in the "
+"applications menu."
+msgstr ""
+"Ваш %s скенер је подешен.\n"
+"Сада можете скенирати ваше докунете помоћу ``XSane''програма из Мултимедија/"
+"Графика подменија из менија Апликације."
+
+#: ../../standalone/scannerdrake:1
+#, fuzzy, c-format
+msgid ""
+"The %s must be configured by printerdrake.\n"
+"You can launch printerdrake from the Mandrake Control Center in Hardware "
+"section."
+msgstr ""
+"Овај %s скенер мора бити подешен у printerdrake.\n"
+"Можете покренути printerdrake из Mandrake Контролног Центра из Хардвер "
+"секције."
+
+#: ../../standalone/scannerdrake:1
 #, c-format
-msgid "Select a scanner"
+msgid "choose device"
+msgstr "изаберите уређај"
+
+#: ../../standalone/scannerdrake:1
+#, fuzzy, c-format
+msgid "Please select the device where your %s is attached"
+msgstr ""
+"Scannerdrake није могао да детектује ваш %s скенер.\n"
+"Изаберите порт на који је ваш скенер прикључен"
+
+#: ../../standalone/scannerdrake:1
+#, fuzzy, c-format
+msgid "Searching for scanners ..."
+msgstr "Дељење локалних штампача"
+
+#: ../../standalone/scannerdrake:1
+#, fuzzy, c-format
+msgid "Auto-detect available ports"
+msgstr "/Аутодетекција штампача"
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "(Note: Parallel ports cannot be auto-detected)"
+msgstr ""
+
+#: ../../standalone/scannerdrake:1
+#, fuzzy, c-format
+msgid "The %s is unsupported"
+msgstr "Овај %s скенер није подржан"
+
+#: ../../standalone/scannerdrake:1
+#, fuzzy, c-format
+msgid "The %s is not known by this version of Scannerdrake."
+msgstr "%s није подржан у овој верзији Mandrake Linux-а."
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "The %s is not supported by this version of Mandrake Linux."
+msgstr "%s није подржан у овој верзији Mandrake Linux-а."
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid ")"
+msgstr ""
+
+#: ../../standalone/scannerdrake:1
+#, fuzzy, c-format
+msgid "Port: %s"
+msgstr "Порт"
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid ", "
+msgstr ""
+
+#: ../../standalone/scannerdrake:1
+#, fuzzy, c-format
+msgid "Detected model: %s"
+msgstr "Детектовани модели: %s %s"
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid " ("
+msgstr ""
+
+#: ../../standalone/scannerdrake:1
+#, fuzzy, c-format
+msgid "Select a scanner model"
 msgstr "Изаберите скенер"
 
 #: ../../standalone/scannerdrake:1
@@ -19435,6 +19495,21 @@ msgstr "Личне финансиje"
 #: ../../share/compssUsers:999
 msgid "Programs to manage your finances, such as gnucash"
 msgstr "Програми за управљaње вaшим финансиjамa, као што jе gnucash"
+
+#~ msgid "Do you want to configure another printer?"
+#~ msgstr "Да ли хоћете да подесите још један штампач?"
+
+#~ msgid "Know how to use this printer"
+#~ msgstr "Да ли знате како да користите овај штампач"
+
+#~ msgid "Would you like to configure printing?"
+#~ msgstr "Да ли бисте да подесите штампач?"
+
+#~ msgid "Preparing Printerdrake..."
+#~ msgstr "Припремам PrinterDrake ..."
+
+#~ msgid "Reading printer data ..."
+#~ msgstr "Учитавам податке за штампач ..."
 
 #~ msgid ""
 #~ "You must indicate where you wish to place the information required to "

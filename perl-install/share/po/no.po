@@ -495,6 +495,11 @@ msgstr "Begrense kommandolinje-opsjoner"
 
 #: ../../any.pm:1
 #, c-format
+msgid "Force ACPI"
+msgstr ""
+
+#: ../../any.pm:1
+#, c-format
 msgid "Delay before booting default image"
 msgstr "Forsinkelse før oppstart av standard bilde"
 
@@ -817,7 +822,8 @@ msgstr "Teamer"
 msgid "Splash selection"
 msgstr "Splash valg"
 
-#: ../../bootlook.pm:1 ../../standalone/drakbackup:1 ../../standalone/drakgw:1
+#: ../../bootlook.pm:1 ../../install_steps_gtk.pm:1
+#: ../../standalone/drakbackup:1 ../../standalone/drakgw:1
 #, c-format
 msgid "Configure"
 msgstr "Konfigurer"
@@ -3729,6 +3735,19 @@ msgstr ""
 msgid "Entering step `%s'\n"
 msgstr "Entrer trinn `%s'\n"
 
+#: ../../install_steps_gtk.pm:1 ../../interactive.pm:1 ../../ugtk2.pm:1
+#: ../../Xconfig/resolution_and_depth.pm:1 ../../diskdrake/hd_gtk.pm:1
+#: ../../interactive/gtk.pm:1 ../../standalone/drakTermServ:1
+#: ../../standalone/drakbackup:1 ../../standalone/drakbug:1
+#, c-format
+msgid "Help"
+msgstr "Hjelp"
+
+#: ../../install_steps_gtk.pm:1 ../../install_steps_interactive.pm:1
+#, c-format
+msgid "not configured"
+msgstr "ikke konfigurert"
+
 #: ../../install_steps_gtk.pm:1 ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Go on anyway?"
@@ -3943,14 +3962,6 @@ msgstr "Neste ->"
 #, c-format
 msgid "Individual package selection"
 msgstr "Individuelt pakkevalg"
-
-#: ../../install_steps_gtk.pm:1 ../../ugtk2.pm:1
-#: ../../Xconfig/resolution_and_depth.pm:1 ../../diskdrake/hd_gtk.pm:1
-#: ../../interactive/gtk.pm:1 ../../standalone/drakTermServ:1
-#: ../../standalone/drakbackup:1 ../../standalone/drakbug:1
-#, c-format
-msgid "Help"
-msgstr "Hjelp"
 
 #: ../../install_steps_gtk.pm:1 ../../install_steps_interactive.pm:1
 #, c-format
@@ -4248,11 +4259,6 @@ msgstr "Sikkerhet"
 #, fuzzy, c-format
 msgid "Security Level"
 msgstr "Sikkerhetsnivå"
-
-#: ../../install_steps_interactive.pm:1
-#, c-format
-msgid "not configured"
-msgstr "ikke konfigurert"
 
 #: ../../install_steps_interactive.pm:1 ../../standalone/drakbackup:1
 #, c-format
@@ -5228,6 +5234,11 @@ msgstr "Belgisk"
 #, c-format
 msgid "Azerbaidjani (latin)"
 msgstr "Azerbaidjansk (latin)"
+
+#: ../../keyboard.pm:1
+#, c-format
+msgid "Arabic"
+msgstr ""
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -6807,10 +6818,10 @@ msgstr ""
 "rutingprotokoller for komplekse nettverk."
 
 #: ../../services.pm:1
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "Assign raw devices to block devices (such as hard drive\n"
-"partitions), for the use of applications such as Oracle"
+"partitions), for the use of applications such as Oracle or DVD players"
 msgstr ""
 "Tilordne rå enheter til blokkenheter (som harddisk-\n"
 "partisjoner) for bruk av applikasjoner som Oracle"
@@ -7098,10 +7109,10 @@ msgstr ""
 "       XFdrake resolution"
 
 #: ../../standalone.pm:1
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"[--manual] [--device=dev] [--update-sane=sane_desc_dir] [--update-usbtable] "
-"[--dynamic=dev]"
+"[--manual] [--device=dev] [--update-sane=sane_source_dir] [--update-"
+"usbtable] [--dynamic=dev]"
 msgstr ""
 "[--manual] [--device=dev] [--update-sane=sane_desc_dir] [--update-usbtable] "
 "[--dynamic=dev]"
@@ -10363,7 +10374,7 @@ msgstr "PDQ"
 msgid "PDQ - Print, Don't Queue"
 msgstr "PDQ - Print, Don't Queue"
 
-#: ../../printer/detect.pm:1
+#: ../../printer/detect.pm:1 ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Unknown Model"
 msgstr "Ukjent modell"
@@ -10525,11 +10536,6 @@ msgstr "Printerdrake"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
-msgid "Do you want to configure another printer?"
-msgstr "Ønsker du å konfigurere enda en skriver?"
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
 msgid "Removing printer \"%s\"..."
 msgstr "Fjerner skriver \"%s\"..."
 
@@ -10545,8 +10551,8 @@ msgstr "Fjern skriver"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
-msgid "Know how to use this printer"
-msgstr "Vet hvordan man skal bruke denne skriveren"
+msgid "Learn how to use this printer"
+msgstr "Lær hvordan man skal bruke denne skriveren"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -10646,11 +10652,6 @@ msgstr "Skrivertilkoblingstype"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
-msgid "Learn how to use this printer"
-msgstr "Lær hvordan man skal bruke denne skriveren"
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
 msgid "Raw printer"
 msgstr "Rå skriver"
 
@@ -10741,16 +10742,6 @@ msgstr "Utskriftssystem: "
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
-msgid "Would you like to configure printing?"
-msgstr "Ønsker du å konfigurere en skriver?"
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "Preparing Printerdrake..."
-msgstr "Klargjører PrinterDrake..."
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
 msgid "Checking installed software..."
 msgstr "Sjekker installert programvare..."
 
@@ -10783,6 +10774,11 @@ msgstr "Hvilket utskriftsystem (spooler) ønsker du å bruke?"
 #, c-format
 msgid "Select Printer Spooler"
 msgstr "Velg skrivertkøbehandler"
+
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid "Setting Default Printer..."
+msgstr "Standardskriver"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -12157,6 +12153,20 @@ msgstr ""
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
+msgid ""
+"\n"
+"\n"
+"Printerdrake could not determine which model your printer is. Please choose "
+"the correct model from the list."
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid "Configuring printer ..."
+msgstr "Konfigurerer skriver \"%s\"..."
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
 msgid "Searching for new printers..."
 msgstr "Søker etter nye skrivere..."
 
@@ -12527,8 +12537,8 @@ msgstr ""
 #: ../../security/help.pm:1
 #, c-format
 msgid ""
-"if set to yes, check for empty password, or a password while it should be "
-"in /etc/shadow or other users with id 0."
+"if set to yes, check for empty passwords, for no password in /etc/shadow and "
+"for"
 msgstr ""
 
 #: ../../security/help.pm:1
@@ -17056,6 +17066,16 @@ msgid ""
 msgstr ""
 
 #: ../../standalone/harddrake2:1
+#, fuzzy, c-format
+msgid "Unknown"
+msgstr "Ukjent modell"
+
+#: ../../standalone/harddrake2:1
+#, fuzzy, c-format
+msgid "unknown"
+msgstr "Ukjent modell"
+
+#: ../../standalone/harddrake2:1
 #, c-format
 msgid "Running \"%s\" ..."
 msgstr "Kjører \"%s\" ..."
@@ -17918,9 +17938,9 @@ msgid "Network Monitoring"
 msgstr "Nettverksovervåkning"
 
 #: ../../standalone/printerdrake:1
-#, c-format
-msgid "Reading printer data ..."
-msgstr "Leser skriverdata: ..."
+#, fuzzy, c-format
+msgid "Reading data of installed printers..."
+msgstr "Søker etter nye skrivere..."
 
 #: ../../standalone/scannerdrake:1
 #, c-format
@@ -18030,54 +18050,6 @@ msgstr ""
 
 #: ../../standalone/scannerdrake:1
 #, c-format
-msgid ""
-"Your %s has been configured.\n"
-"You may now scan documents using \"XSane\" from Multimedia/Graphics in the "
-"applications menu."
-msgstr ""
-"Din %s har blitt konfigurert.\n"
-"Du vil nå kunne scanne dokumentene dine ved hjelp av \"XSane\" fra "
-"Multimedia/Grafikk i applikasjonsmenyen."
-
-#: ../../standalone/scannerdrake:1
-#, c-format
-msgid ""
-"The %s must be configured by printerdrake.\n"
-"You can launch printerdrake from the Mandrake Control Center in Hardware "
-"section."
-msgstr ""
-"%s må være konfigurert av printerdrake.\n"
-"Du kan kjøre Mandrake Conrol Center fra maskinvareseksjonen."
-
-#: ../../standalone/scannerdrake:1
-#, c-format
-msgid "choose device"
-msgstr "velg enhet"
-
-#: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
-msgid "Please select the device where your %s is attached"
-msgstr ""
-"Scannerdrake var ikke i stand til å oppdage din %s.\n"
-"Vennligst velg enheten hvor scanneren din er tilkoblet"
-
-#: ../../standalone/scannerdrake:1
-#, c-format
-msgid "The %s is unsupported"
-msgstr "%s er ikke støttet"
-
-#: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
-msgid "The %s is not known by this version of Scannerdrake."
-msgstr "%s er ikke kjent av denne versjonen av scannerdrake."
-
-#: ../../standalone/scannerdrake:1
-#, c-format
-msgid "The %s is not supported by this version of Mandrake Linux."
-msgstr "%s er ikke støttet i denne versjonen av Mandrake Linux."
-
-#: ../../standalone/scannerdrake:1
-#, c-format
 msgid "Re-generating list of configured scanners ..."
 msgstr ""
 
@@ -18139,7 +18111,95 @@ msgstr ""
 
 #: ../../standalone/scannerdrake:1
 #, c-format
-msgid "Select a scanner"
+msgid ""
+"Your %s has been configured.\n"
+"You may now scan documents using \"XSane\" from Multimedia/Graphics in the "
+"applications menu."
+msgstr ""
+"Din %s har blitt konfigurert.\n"
+"Du vil nå kunne scanne dokumentene dine ved hjelp av \"XSane\" fra "
+"Multimedia/Grafikk i applikasjonsmenyen."
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid ""
+"The %s must be configured by printerdrake.\n"
+"You can launch printerdrake from the Mandrake Control Center in Hardware "
+"section."
+msgstr ""
+"%s må være konfigurert av printerdrake.\n"
+"Du kan kjøre Mandrake Conrol Center fra maskinvareseksjonen."
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "choose device"
+msgstr "velg enhet"
+
+#: ../../standalone/scannerdrake:1
+#, fuzzy, c-format
+msgid "Please select the device where your %s is attached"
+msgstr ""
+"Scannerdrake var ikke i stand til å oppdage din %s.\n"
+"Vennligst velg enheten hvor scanneren din er tilkoblet"
+
+#: ../../standalone/scannerdrake:1
+#, fuzzy, c-format
+msgid "Searching for scanners ..."
+msgstr "Lokal skriver"
+
+#: ../../standalone/scannerdrake:1
+#, fuzzy, c-format
+msgid "Auto-detect available ports"
+msgstr "Utfør automatisk detektering"
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "(Note: Parallel ports cannot be auto-detected)"
+msgstr ""
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "The %s is unsupported"
+msgstr "%s er ikke støttet"
+
+#: ../../standalone/scannerdrake:1
+#, fuzzy, c-format
+msgid "The %s is not known by this version of Scannerdrake."
+msgstr "%s er ikke kjent av denne versjonen av scannerdrake."
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "The %s is not supported by this version of Mandrake Linux."
+msgstr "%s er ikke støttet i denne versjonen av Mandrake Linux."
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid ")"
+msgstr ""
+
+#: ../../standalone/scannerdrake:1
+#, fuzzy, c-format
+msgid "Port: %s"
+msgstr "Port"
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid ", "
+msgstr ""
+
+#: ../../standalone/scannerdrake:1
+#, fuzzy, c-format
+msgid "Detected model: %s"
+msgstr "Oppdaget modell %s %s"
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid " ("
+msgstr ""
+
+#: ../../standalone/scannerdrake:1
+#, fuzzy, c-format
+msgid "Select a scanner model"
 msgstr "Velg en scanner"
 
 #: ../../standalone/scannerdrake:1
@@ -18409,6 +18469,21 @@ msgstr "Personlig finans"
 #: ../../share/compssUsers:999
 msgid "Programs to manage your finances, such as gnucash"
 msgstr "Programmer for å håndtere dine finanser, så som gnucash"
+
+#~ msgid "Do you want to configure another printer?"
+#~ msgstr "Ønsker du å konfigurere enda en skriver?"
+
+#~ msgid "Know how to use this printer"
+#~ msgstr "Vet hvordan man skal bruke denne skriveren"
+
+#~ msgid "Would you like to configure printing?"
+#~ msgstr "Ønsker du å konfigurere en skriver?"
+
+#~ msgid "Preparing Printerdrake..."
+#~ msgstr "Klargjører PrinterDrake..."
+
+#~ msgid "Reading printer data ..."
+#~ msgstr "Leser skriverdata: ..."
 
 #~ msgid ""
 #~ "Here are presented various parameters concerning your machine. Depending "
