@@ -59,7 +59,7 @@ sub leavingStep($$) {
     my ($o, $step) = @_;
     log::l("step `$step' finished");
 
-    eval { commands::cp('-f', "/tmp/ddebug.log", "$o->{prefix}/root") } if -d "$o->{prefix}/root";
+    eval { commands::cp('-f', "/tmp/ddebug.log", "$o->{prefix}/root") } if -d "$o->{prefix}/root" && !$::testing;
 
     $o->{steps}{$step}{reachable} = $o->{steps}{$step}{redoable};
 

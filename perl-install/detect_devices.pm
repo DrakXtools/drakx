@@ -35,12 +35,18 @@ sub get {
     [ \&hasDAC960, \&getDAC960 ],
     [ \&hasCompaqSmartArray, \&getCompaqSmartArray ];
 }
-sub hds() { grep { $_->{type} eq 'hd' } get(); }
+sub hds() { grep { $_->{type} eq 'hd' && !isRemovableDrive($_) } get(); }
+sub zips() { grep { $_->{type} eq 'hd' && isZipDrive($_) } get(); }
+#-sub jazzs() { grep { $_->{type} eq 'hd' && isJazDrive($_) } get(); }
 sub cdroms() { grep { $_->{type} eq 'cdrom' } get(); }
 sub floppies() {
     (grep { tryOpen($_) } qw(fd0 fd1)),
     (grep { $_->{type} eq 'fd' } get());
 }
+
+sub isZipDrive() { $_[0]->{info} =~ /ZIP\s+\d+/ } #- accept ZIP 100, untested for bigger ZIP drive.
+#-sub isJazzDrive() { $_[0]->{info} =~ /JAZZ?\s+/ } #- untested.
+sub isRemovableDrive() { &isZipDrive } #-or &isJazzDrive }
 
 sub hasSCSI() {
     defined $scsiDeviceAvailable and return $scsiDeviceAvailable;

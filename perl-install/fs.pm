@@ -201,13 +201,25 @@ sub write($$) {
 	   mkdir "$prefix/mnt/cdrom$i", 0755 or log::l("failed to mkdir $prefix/mnt/cdrom$i: $!");
 	   symlinkf $_->{device}, "$prefix/dev/cdrom$i" or log::l("failed to symlink $prefix/dev/cdrom$i: $!");
 	   [ "/dev/cdrom$i", "/mnt/cdrom$i", "auto", "user,noauto,nosuid,exec,nodev,ro", 0, 0 ];
-       } detect_devices::cdroms());
+       } detect_devices::cdroms(),
+       map_index { #- for zip drives, the right partition is the 4th.
+	   my $i = $::i ? $::i + 1 : '';
+	   mkdir "$prefix/mnt/zip$i", 0755 or log::l("failed to mkdir $prefix/mnt/zip$i: $!");
+	   symlinkf "$_->{device}4", "$prefix/dev/zip$i" or log::l("failed to symlink $prefix/dev/zip$i: $!");
+	   [ "/dev/zip$i", "/mnt/zip$i", "auto", "user,noauto,nosuid,exec,nodev", 0, 0 ];
+       } detect_devices::zips());
     write_fstab($fstab, $prefix, @to_add);
 }
 
 sub write_fstab($;$$) {
     my ($fstab, $prefix, @to_add) = @_;
     $prefix ||= '';
+
+    #- get the list of devices and mntpoint to remove existing entries
+    #- and @to_add take precedence over $fstab to handle removable device
+    #- if they are mounted OR NOT during install.
+    my @new = grep { $_ ne 'none' } map { @$_[0,1] } @to_add;
+    my %new; @new{@new} = undef;
 
     unshift @to_add,
       map {
@@ -217,15 +229,15 @@ sub write_fstab($;$$) {
 	  isExt2($_) and ($freq, $passno) = (1, ($_->{mntpoint} eq '/') ? 1 : 2);
 	  isNfs($_) and ($dir, $options) = ('', 'ro');
 
+	  #- keep in mind the new line for fstab.
+	  @new{($_->{mntpoint}, $_->{"$dir$_->{device}"})} = undef;
+
 	  devices::make("$prefix/$dir$_->{device}") if $_->{device} && $dir;
 
 	  [ "$dir$_->{device}", $_->{mntpoint}, type2fs($_->{type}), $options, $freq, $passno ];
 
-      } grep { $_->{mntpoint} && type2fs($_->{type}) } @$fstab;
-
-    #- get the list of devices and mntpoint
-    my @new = grep { $_ ne 'none' } map { @$_[0,1] } @to_add;
-    my %new; @new{@new} = undef;
+      } grep { $_->{mntpoint} && type2fs($_->{type}) &&
+		 ! exists $new{$_->{mntpoint}} && ! exists $new{"/dev/$_->{device}"} } @$fstab;
 
     my @current = cat_("$prefix/etc/fstab");
 

@@ -63,6 +63,7 @@ sub bool2text { $_[0] ? "true" : "false" }
 sub text2bool { my $t = lc($_[0]); $t eq "true" || $t eq "yes" ? 1 : 0 }
 sub strcpy { substr($_[0], $_[2] || 0, length $_[1]) = $_[1] }
 sub cat_ { local *F; open F, $_[0] or $_[1] ? die "cat of file $_[0] failed: $!\n" : return; my @l = <F>; wantarray ? @l : join '', @l }
+sub linkf { unlink $_[1]; link $_[0], $_[1] }
 sub symlinkf { unlink $_[1]; symlink $_[0], $_[1] }
 sub chop_ { map { my $l = $_; chomp $l; $l } @_ }
 sub divide { my $d = int $_[0] / $_[1]; wantarray ? ($d, $_[0] % $_[1]) : $d }
