@@ -309,7 +309,7 @@ my $_msg = N("Welcome to the UPS configuration tools");
 $w->{window}->add(gtkpack_(Gtk2::VBox->new,
                            0, Gtk2::Banner->new('drakups', N("DrakUPS")),
                            1, my $nb = Gtk2::Notebook->new,
-                           0, create_okcancel( my $oc = 
+                           0, create_okcancel(my $oc = 
                                                {
                                                 ok_clicked => sub { 
                                                     #$_->{save}->() foreach @pages;
@@ -348,7 +348,7 @@ foreach my $i (@pages) {
 							       })
                                          } ([ 'add', N("Add"), $i->{callbacks}{add} || \&add_callback ],
                                             [ 'edit', N("Edit"), \&edit_callback ],
-                                            [ 'remove', N("Remove"), \&del_callback],
+                                            [ 'remove', N("Remove"), \&del_callback ],
                                            )
                                          )
                                          #(map {
