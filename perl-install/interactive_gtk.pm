@@ -30,8 +30,7 @@ sub exit {
 
 sub create_clist {
     my ($e, $may_go_to_next, $changed) = @_;
-    my ($first_time, $starting_word, $start_reg) = (1, '', "^");
-    my (@widgets, $timeout, $curr);
+    my (@widgets, $curr);
     my @l = map { may_apply($e->{format}, $_) } @{$e->{list}};
 
     my $list = new Gtk::CList(1);
@@ -48,6 +47,8 @@ sub create_clist {
 #      $list->signal_connect(button_release_event => $leave) :
 #      $list->signal_connect(button_press_event => sub { &$leave if $_[1]{type} =~ /^2/ });
 
+    my ($first_time, $starting_word, $start_reg) = (1, '', "^");
+    my $timeout;
     $list->signal_connect(key_press_event => sub {
         my ($w, $event) = @_;
 	my $c = chr($event->{keyval} & 0xff);
@@ -77,7 +78,7 @@ sub create_clist {
 	      $starting_word = '' :
 	      $select->(($j + $curr) % @l);
 
-	    $w->{timeout} = $timeout = Gtk->timeout_add($forgetTime, sub { $timeout = $starting_word = ''; 0 } );
+	    $timeout = Gtk->timeout_add($forgetTime, sub { $timeout = $starting_word = ''; 0 } );
 	}
 	1;
     });
@@ -123,7 +124,22 @@ sub create_ctree {
     }
     undef %wtree;
 
-    my $curr;
+    my $select = sub {
+	my ($node) = @_;
+	for (my $c = $node; $c; $c = $c->row->parent) { 
+	    $tree->expand($c);
+	}
+	foreach (0 .. $#l) {
+	    if ($tree->node_nth($_) == $node) {
+		$tree->set_focus_row($_);
+		last;
+	    }
+	}
+	$tree->select($node);
+	$tree->node_moveto($node, 0, 0.5, 0) if $tree->node_is_visible($node) ne 'full';
+    };
+
+    my $curr = $tree->node_nth(0); #- default value
     $tree->set_column_auto_resize(0, 1);
     $tree->set_selection_mode('browse');
     $tree->signal_connect(tree_select_row => sub { 
@@ -139,34 +155,68 @@ sub create_ctree {
 	&$changed;
     });
 #    $tree->signal_connect(button_press_event => sub { &$leave if $_[1]{type} =~ /^2/ });
+    my ($first_time, $starting_word, $start_reg) = (1, '', "^");
+    my $timeout;
+
+    my $toggle = sub { 
+	$curr->row->is_leaf ? 
+	  &$may_go_to_next :
+	  $tree->toggle_expansion($curr);
+    };
     $tree->signal_connect(key_press_event => sub {
         my ($w, $event) = @_;
 	my $c = chr($event->{keyval} & 0xff);
 	$curr or return;
-	if ($event->{keyval} >= 0x100 ? $c eq "\r" || $c eq "\x8d" : $c eq ' ') {
-	    if ($curr->row->is_leaf) { &$may_go_to_next }
-	    else { $tree->toggle_expansion($curr) }
+	Gtk->timeout_remove($timeout) if $timeout; $timeout = '';
+
+	if ($event->{keyval} >= 0x100) {
+	    &$toggle if $c eq "\r" || $c eq "\x8d";
+	    $starting_word = '' if $event->{keyval} != 0xffe4; # control
+	} else {
+	    my $next;
+	    if ($event->{state} & 4) {
+		#- control pressed
+		$c eq "s" or return 1;
+		$start_reg and $start_reg = '', return 1;
+		$next = 1;
+	    } else {
+		&$toggle if $c eq ' ';
+
+		$next = 1 if $starting_word eq '' || $starting_word eq $c;
+		$starting_word .= $c unless $starting_word eq $c;
+	    }
+	    my $word = quotemeta $starting_word;
+	    my ($after, $best);
+
+	    $tree->pre_recursive(undef, sub { 
+		my ($tree, $node) = @_;
+		$next &&= !$after;
+		$after ||= $node == $curr;
+		my ($t) = $tree->node_get_pixtext($node, 0);
+
+		if ($t =~ /$start_reg$word/i) {
+		    if ($after && !$next) {
+			($best, $after) = ($node, 0);
+		    } else {
+			$best ||= $node;
+		    }
+		}
+	    });
+	    if (defined $best) {
+		$select->($best);
+	    } else {
+		$starting_word = '';
+	    }
+	    $timeout = Gtk->timeout_add($forgetTime, sub { $timeout = $starting_word = ''; 0 });
 	}
 	1;
     });
+
     $tree->set_row_height($tree->style->font->ascent + $tree->style->font->descent + 1);
 
     $tree, sub {
 	my $v = may_apply($e->{format}, $_[0]);
-	my $node = $wleaves{$v} or return;
-
-	for (my $c = $node; $c; $c = $c->row->parent) { 
-	    $tree->expand($c);
-	}
-	$tree->select($node);
-	$tree->node_moveto($node, 0, 0.5, 0) if $tree->node_is_visible($node) ne 'full';
-
-	foreach (1 .. @l) {
-	    if ($tree->node_nth($_) == $node) {
-		$tree->set_focus_row($_);
-		last;
-	    }
-	}
+	$select->($wleaves{$v} || return);
     };
 }
 
@@ -348,7 +398,7 @@ sub ask_from_entries_refW {
 	$advanced ? $advanced_pack->show : $advanced_pack->hide;
 	@widgets = (@widgets_always, $advanced ? @widgets_advanced : ());
     };
-    my $advanced_button = [ _("Advanced"), sub { $set_advanced->(!$advanced) } ];
+    my $advanced_button = [ $common->{advanced_label}, sub { $set_advanced->(!$advanced) } ];
 
     my $create_widgets = sub {
 	my $w = create_packtable({}, map { [($_->{icon_w}, $_->{e}{label}, $_->{real_w})]} @_);
