@@ -183,7 +183,7 @@ This program is based on the following projects:
  - the docs and man pages coming with the %s package
 
 Please read AT LEAST the ipsec-howto docs
-before going any further."),$ipsec_package) or goto begin;
+before going any further.",$ipsec_package)) or goto begin;
 
 $::direct or $in->ask_okcancel(N("Kernel module."),
 N("The kernel need to have ipsec support.
@@ -281,14 +281,16 @@ step_configuration:
 
 my $c;
 
+my %messages = (ipsec => N("configure %s", $ipsec_conf), racoon => N("configure %s", $racoon_conf));
+
 if ($kernel_version > 2.5) {
-	$c = $in->ask_from_list_(N("Configuration file"),
+	$in->ask_from(N("Configuration file"),
 N("Welcome to the configuration files step !
 
 You can now configure the sections of these files.
 
 Which file would you like to configure ?\n"),
-	[ N("configure %s", $ipsec_conf), N("configure %s", $racoon_conf) ]) or goto step_detectsetup;
+		      [ { val => \$c, type => "list", list => [ keys %messages  ], format => sub { $messages{$_[0]} } } ]) or goto step_detectsetup;
 
 } else {
 $in->ask_okcancel(N("Configuration file"),
@@ -303,7 +305,7 @@ Simply click on Next.\n", $ipsec_conf)) or goto step_detectsetup;
 #---------------------- configure ipsec_conf -----------------------
 #-------------------------------------------------------------------
 
-if ($c eq "configure $ipsec_conf" || $c eq "configure") {
+if ($c eq "ipsec" || $c eq "configure") {
 
 step_configure_ipsec_conf:
 
@@ -685,7 +687,7 @@ and then click on next.\n", $ipsec_conf),
 #---------------------- configure racoon_conf -----------------------
 #-------------------------------------------------------------------
 
-} elsif ($c eq "configure $racoon_conf") {
+} elsif ($c eq "racoon") {
 
 step_configure_racoon_conf:
 
@@ -741,7 +743,7 @@ Here below is the racoon.conf file skeleton :
 \t'path'
 \t'remote'
 \t'sainfo' \n
-Choose the section you would like to add.\n", $racoon_conf),
+Choose the section you would like to add.\n"),
 		[ N_("path"), N_("remote"), N_("sainfo"), N_("dismiss") ]) or goto step_configure_racoon_conf;
 if ($e eq "path") {
 
@@ -753,7 +755,7 @@ if ($e eq "path") {
 N("The 'add path' section step.\n
 The path sections have to be on top of your racoon.conf file.\n
 Put your mouse over the certificate entry to obtain online help."),
-	  [{ 	label => N("path type"),
+	  [ { 	label => N("path type"),
 		val => \$path_section->{1}[1], 
 		list => [ 'certificate', 'pre_shared_key', 'include' ], 
 		help => 
@@ -808,7 +810,7 @@ N("Make sure you already have the path sections
 on the top of your racoon.conf file.
 
 You can now choose the remote settings.
-Choose continue or previous when you are done.\n", $racoon_conf),
+Choose continue or previous when you are done.\n"),
 	[     	{ label => N("remote"), val => \$main_remote_section->{1}[1], type => 'entry' },
 		{ label => N("exchange_mode"), val => \$main_remote_section->{2}[1], type => 'entry' },
 		{ label => N("generate_policy"), val => \$main_remote_section->{3}[1], type => 'entry' },
