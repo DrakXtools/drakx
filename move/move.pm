@@ -143,6 +143,7 @@ sub init {
     }
     if (-s '/etc/sysconfig/i18n') {
         lang::set($o->{locale} = lang::read('', 0));
+	install2::handleI18NClp();
     }
 
 drakx_stuff:
@@ -150,7 +151,7 @@ drakx_stuff:
       foreach qw(displayBackground autoSelectLanguage handleI18NClp verifyKey configMove startMove);
     $o->{orderedSteps_orig} = $o->{orderedSteps};
     $o->{orderedSteps} = [ $using_existing_host_config ?
-                           qw(displayBackground handleI18NClp verifyKey startMove)
+                           qw(displayBackground verifyKey startMove)
                          : $using_existing_user_config ?
                            qw(displayBackground autoSelectLanguage handleI18NClp verifyKey selectMouse selectKeyboard configMove startMove)
                          : qw(displayBackground selectLanguage handleI18NClp acceptLicense verifyKey selectMouse selectKeyboard configMove startMove) ];
