@@ -191,7 +191,11 @@ sub setup_postinstall_rpms($$) {
     #- last arg is default medium '' known as the CD#1.
     pkgs::extractHeaders($prefix, \@toCopy, $packages->{mediums}{1});
     commands::cp((map { "/tmp/image/" . relGetFile(pkgs::packageFile($_)) } @toCopy), $postinstall_rpms);
+
+    log::l("copying Auto Install Floppy");
+    getAndSaveInstallFloppy($::o, "$postinstall_rpms/auto_install.img");
 }
+
 sub clean_postinstall_rpms() {
     require commands;
     $postinstall_rpms and -d $postinstall_rpms and commands::rm('-rf', $postinstall_rpms);
@@ -668,10 +672,16 @@ push @graphical_steps, 'doPartitionDisks', 'formatPartitions';
 
 sub getAndSaveInstallFloppy {
     my ($o, $where) = @_;
-    my $image = cat_("/proc/cmdline") =~ /pcmcia/ ? "pcmcia" :
-      ${{ disk => 'hd', cdrom => 'cdrom', ftp => 'network', nfs => 'network', http => 'network' }}{$o->{method}};
-    $image .= arch() =~ /sparc64/ && "64"; #- for sparc64 there are a specific set of image.
-    getAndSaveFile("images/$image.img", $where) or log::l("failed to write Install Floppy ($image.img) to $where"), return;
+    if ($postinstall_rpms && -d $postinstall_rpms && -r "$postinstall_rpms/auto_install.img") {
+	log::l("getAndSaveInstallFloppy: using file saved as $postinstall_rpms/auto_install.img");
+	require commands;
+	commands::cp("-f", "$postinstall_rpms/auto_install.img", $where) or return;
+    } else {
+	my $image = cat_("/proc/cmdline") =~ /pcmcia/ ? "pcmcia" :
+	  ${{ disk => 'hd', cdrom => 'cdrom', ftp => 'network', nfs => 'network', http => 'network' }}{$o->{method}};
+	$image .= arch() =~ /sparc64/ && "64"; #- for sparc64 there are a specific set of image.
+	getAndSaveFile("images/$image.img", $where) or log::l("failed to write Install Floppy ($image.img) to $where"), return;
+    }
     1;
 }
 
@@ -715,7 +725,7 @@ sub getAndSaveAutoInstallFloppy {
         commands::rm("-rf", $workdir, $mountdir, $imagefile);
     } else {
 	my $imagefile = "$o->{prefix}/tmp/autoinst.img";
-	my $mountdir = "$o->{prefix}/tmp/mount"; -d $mountdir or mkdir $mountdir, 0755;
+	my $mountdir = "$o->{prefix}/tmp/aif-mount"; -d $mountdir or mkdir $mountdir, 0755;
 
 	my $param = 'kickstart=floppy ' . generate_automatic_stage1_params($o);
 
@@ -740,8 +750,10 @@ sub getAndSaveAutoInstallFloppy {
 	output("$mountdir/auto_inst.cfg", g_auto_install($replay));
 
 	fs::umount($mountdir);
+	rmdir $mountdir;
 	c::del_loop($dev);
-        commands::dd("if=$imagefile", "of=$where", "bs=1440", "count=1024");
+	require commands;
+	commands::dd("if=$imagefile", "of=$where", "bs=1440", "count=1024");
     }
     1;
 }
