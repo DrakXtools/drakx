@@ -6,6 +6,9 @@ use lib qw(/usr/lib/libDrakX);
 use standalone;
 use common;
 
+# i18n: IMPORTANT: to get correct namespace (drakconf instead of only libDrakX)
+BEGIN { unshift @::textdomains, 'drakconf' }
+
 use ugtk2 qw(:create :helpers :wrappers);
 use interactive;
 use harddrake::data;  #- needs to stay after use-ugtk2 as long as this module defines globals containing some N()
@@ -234,11 +237,9 @@ gtkflush();
 add_icon_path('/usr/share/pixmaps/harddrake2/');
 $w = ugtk2->new(N("Harddrake2"));
 local $::main_window;   # fake diagnostics pragma
-my ($menubar, $factory, $opt_menu, $help_menu);
+my ($menubar, $factory);
 if ($::isEmbedded) {
-    ($menubar, $factory) = create_factory_popup_menu($::Plug, @menu_items);
-    $opt_menu = $factory->get_widget("<main>" . strip_first_underscore($menus{options}));
-    $help_menu = $factory->get_widget("<main>" . strip_first_underscore($menus{help}));
+    ($menubar, $factory) = create_factory_menu($::Plug, @menu_items);
 } else {
     $::main_window = $w->{rwindow};
     ($menubar, $factory) = create_factory_menu($w->{rwindow}, @menu_items);
@@ -247,7 +248,8 @@ if ($::isEmbedded) {
 
 my $tree_model = Gtk2::TreeStore->new("Gtk2::Gdk::Pixbuf", "Glib::String", "Glib::Int");
 $w->{window}->add(gtkpack_(0, Gtk2::VBox->new(0, 0),
-                           if_(!$::isEmbedded, 0, $menubar),
+                           0, $menubar,
+                           0, Gtk2::Banner->new("/usr/share/mcc/themes/default/harddrake-mdk.png", translate("Hardware")),
                            1, create_hpaned(gtkadd(Gtk2::Frame->new(N("Detected hardware")), 
                                                    create_scrolled_window(gtkset_size_request(my $tree = Gtk2::TreeView->new_with_model($tree_model), $::isEmbedded ? 250 : 350, -1), ['automatic', 'automatic'])),
                                             gtkpack_(0, Gtk2::VBox->new(0, 0),
@@ -271,18 +273,6 @@ $w->{window}->add(gtkpack_(0, Gtk2::VBox->new(0, 0),
                                                                                               })
                                                      ),
                                             ),
-                           if_($::isEmbedded, 
-                               0, 
-                               gtkpack(Gtk2::HBox->new,
-                                       gtkpack(create_hbox('start'),
-                                               gtksignal_connect(Gtk2::Button->new(N("Help")), event => popup_menu($help_menu), $menubar),
-                                               gtksignal_connect(Gtk2::Button->new(N("Options")), event => popup_menu($opt_menu), $menubar),
-                                              ),
-                                       gtkpack(create_hbox('end'),
-                                               gtksignal_connect(Gtk2::Button->new(N("Quit")), clicked => \&quit_global),
-                                              ),
-                                      ),
-                              )
                           )
                  );
 
