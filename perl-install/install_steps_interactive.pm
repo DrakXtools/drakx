@@ -273,11 +273,13 @@ sub selectMouse {
 		]) or return;
     }
     
-    any::setup_thiskind($o, 'usb', !$::expert, 0, $o->{pcmcia}) if $o->{mouse}{device} eq "usbmouse";
-    eval { 
-	devices::make("usbmouse");
-	modules::load($_) foreach qw(hid mousedev usbmouse);
-    } if $o->{mouse}{device} eq "usbmouse";
+    if ($o->{mouse}{device} eq "usbmouse") {
+	any::setup_thiskind($o, 'usb', !$::expert, 1, $o->{pcmcia});
+	eval { 
+	    devices::make("usbmouse");
+	    modules::load($_) foreach qw(hid mousedev usbmouse);
+	};
+    }
 
     $o->SUPER::selectMouse;
     1;
