@@ -1,3 +1,91 @@
+2004/12/13  Pixel  <pixel at mandrakesoft.com>
+
+	* detect_devices.pm: fix
+
+	* drakxtools.spec: introduce in CVS 27.2.101mdk which was using a patch on
+	drakbug
+
+	* standalone/drakbug: commit vdanen patch which makes drakbug send
+	everything to bugzilla (instead of anthill)
+
+2004/12/13  Rafael Garcia-Suarez <rgarciasuarez at mandrakesoft.com>
+
+	* share/list: Add a gazillion modules required by the new packdrake for
+	now
+	Add the subset of POSIX.pm needed by the new packdrake
+
+2004/12/13  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* harddrake/autoconf.pm: 
+	  - rename/move install_any::write_pcmcia() as
+	harddrake::autoconf::pcmcia() so
+	that it became availlable for standalone tools
+	  - reuse it in harddrake service in order to configure PCMCIA cards
+
+	* harddrake/data.pm (pcmcia_controller_probe) move some harddrake code
+	there
+
+	* detect_devices.pm: better english (writing style rather than spoken one)
+	(pcmcia_controller_probe) reuse pcmcia_controller_probe(), thus fixing
+	installer not handling anymore PCMCIA controllers managed by driver
+	other than
+	yenta_socket...
+	this is still not enough for stage1 though (since
+	mdk-stage1/pcmcia_/probe.c::pcmcia_probe() isn't aware of all PCMCIA
+	host
+	controller drivers that're known to list_modules.pm)
+	(pcmcia_controller_probe) move some harddrake code there
+
+	* Xconfig/card.pm, share/po/ms.po, share/po/pt_BR.po, share/po/et.po,
+	share/po/ja.po, install_steps_interactive.pm, standalone/drakvpn,
+	printer/data.pm, standalone/drakboot, standalone.pm,
+	standalone/drakTermServ, share/po/sv.po, share/po/sr.po, share/po/fi.po,
+	fs/type.pm, standalone/drakbackup, share/po/ca.po, share/po/ltg.po,
+	share/po/uz.po, partition_table/mac.pm, diskdrake/interactive.pm,
+	standalone/fileshareset, share/po/ro.po, standalone/drakroam,
+	authentication.pm, share/po/zh_TW.po, share/po/eu.po, share/po/es.po,
+	network/adsl.pm, modules.pm, network/tools.pm,
+	standalone/service_harddrake.sh, standalone/drakupdate_fstab,
+	share/po/lv.po, share/po/id.po, help.pm, share/po/br.po, install_gtk.pm,
+	network/isdn.pm, share/po/mt.po, share/po/ga.po, modules/parameters.pm,
+	share/po/uk.po, install2.pm, share/po/lt.po, resize_fat/boot_sector.pm,
+	commands.pm, network/test.pm, install_interactive.pm, share/po/tg.po,
+	share/advertising/12.pl, loopback.pm, mygtk2.pm, interactive/http.pm,
+	ftp.pm, interactive/stdio.pm, share/po/mk.po, share/po/fur.po,
+	services.pm, harddrake/sound.pm, fs.pm, standalone/drakfont,
+	share/po/af.po, network/ethernet.pm, standalone/net_applet,
+	bootloader.pm, share/po/pt.po, share/po/vi.po, share/po/fr.po,
+	keyboard.pm, standalone/drakperm, share/advertising/05.pl,
+	share/po/tl.po, share/po/de.po, common.pm, share/po/el.po,
+	share/po/bg.po, share/po/uz@Latn.po, network/network.pm, share/po/bn.po,
+	standalone/logdrake, share/po/gl.po, share/po/sk.po, share/po/th.po,
+	Xconfig/parse.pm, interactive.pm, share/po/hr.po, resize_fat/fat.pm,
+	network/netconnect.pm, share/po/be.po, do_pkgs.pm, mouse.pm,
+	network/smb.pm, share/po/DrakX.pot, share/po/ko.po, share/po/pl.po,
+	share/po/he.po, raid.pm, fs/format.pm, diskdrake/smbnfs_gtk.pm,
+	share/po/da.po, share/po/ar.po, partition_table.pm, unused/dns.pm,
+	share/po/ky.po, share/po/nb.po, pkgs.pm, run_program.pm,
+	standalone/drakconnect, share/po/zh_CN.po, share/po/sq.po,
+	share/po/sr@Latn.po, share/po/it.po, printer/printerdrake.pm,
+	share/po/hu.po, http.pm, share/po/fa.po, network/modem.pm,
+	resize_fat/main.pm, network/ipsec.pm, share/po/ru.po, share/po/sl.po,
+	standalone/drakautoinst, c.pm, share/po/nn.po, share/po/tr.po,
+	partition_table/gpt.pm, share/po/mn.po, share/po/am.po, lang.pm,
+	devices.pm, harddrake/v4l.pm, share/po/cy.po, partition_table/raw.pm,
+	ugtk2.pm, any.pm, install_steps_gtk.pm, printer/main.pm, share/po/bs.po,
+	interactive/newt.pm, share/po/wa.po, fs/mount_options.pm,
+	share/po/is.po, share/po/hi.po, share/po/az.po, Xconfig/xfree.pm,
+	share/po/ta.po, standalone/drakgw, share/po/nl.po, fsedit.pm,
+	share/po/eo.po, share/po/cs.po, standalone/bootloader-config: better
+	english (writing style rather than spoken one)
+
+	* install_any.pm, install_steps.pm, standalone/service_harddrake: better
+	english (writing style rather than spoken one)
+	  - rename/move install_any::write_pcmcia() as
+	harddrake::autoconf::pcmcia() so
+	that it became availlable for standalone tools
+	  - reuse it in harddrake service in order to configure PCMCIA cards
+
 2004/12/13  Rafael Garcia-Suarez <rgarciasuarez at mandrakesoft.com>
 
 	* share/list: Add new packdrake module
@@ -42511,7 +42599,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.992 2004/12/12 20:07:44 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.993 2004/12/13 14:24:31 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
