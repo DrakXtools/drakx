@@ -134,17 +134,17 @@ sync
 
                   speedtouch =>
                   {
-                   start => '/usr/sbin/modem_run -v 0 -f /usr/share/speedtouch/mgmt.o',
+                   start => '/usr/sbin/modem_run -k -n 2 -f /usr/share/speedtouch/mgmt.o',
                    overide_script => 1,
                    server => {
-                              pppoa => '"/usr/sbin/pppoa3 -e 1 -c -vpi ' . hex($netc->{vpi}) . " -vci " . hex($netc->{vci}) . '"',
+                              pppoa => '"/usr/sbin/pppoa3 -e 1 -c"
+plugin pppoatm.so
+' . join('.', hex($netc->{vpi}), hex($netc->{vci})),
                              },
                    ppp_options => qq(
 sync
 noaccomp),
                    aliases => [
-                               # disable kernel driver, we use userland stuff but for firmware upload
-                               if_(c::kernel_version() =~ /^\Q2.4/, ['speedtch', 'off']),
                                ['char-major-108', 'ppp_generic'],
                                ['tty-ldisc-3', 'ppp_async'],
                                ['tty-ldisc-13', 'n_hdlc'],
@@ -238,7 +238,6 @@ defaultroute)
 	output("$::prefix/etc/ppp/peers/adsl",
 qq(noauth
 noipdefault
-pty $modems{$adsl_device}{server}{$adsl_type}
 $modems{$adsl_device}{ppp_options}
 kdebug 1
 nopcomp
@@ -249,6 +248,7 @@ maxfail 25
 persist
 usepeerdns
 defaultroute
+pty $modems{$adsl_device}{server}{$adsl_type}
 user "$adsl->{login}"
 ));
 
@@ -284,8 +284,6 @@ user "$adsl->{login}"
         set_cnx_script($netc, "adsl", join("\n",
                                              "/sbin/route del default",
                                              $modems{$adsl_device}{start},
-                                             # /usr/sbin/pppd call adsl
-                                             #$modems{$adsl_device}{server}{$adsl_type} ||
 					     "/usr/sbin/pppd file /etc/ppp/peers/adsl $modems{$adsl_device}{pppd_options}",
                                              $ppp_options{$adsl_type}{connect}
                                             ),
@@ -336,9 +334,16 @@ INTERFACE=`$modems{$adsl_device}{get_intf}`
     } elsif ($adsl_device eq 'speedtouch') {
         # speedtouch really is used only with pppoa, let its own script handle firmware upload and the like:
         set_cnx_script($netc, 'adsl', 
-                         qq(/sbin/route del default
-/usr/share/speedtouch/speedtouch.sh start\n),
-                         "/usr/share/speedtouch/speedtouch.sh stop\n",
+                         qq(/sbin/route del default 2>/dev/null
+/usr/sbin/modem_run -k -n 2 -f /usr/share/speedtouch/mgmt.o
+pppd call adsl
+
+for i in 0 1 2 3 4; do
+    /sbin/ifconfig | grep -q 'ppp' && exit
+    sleep 3
+done
+exit 1\n),
+                         "/usr/bin/killall pppd\n",
                          $netc->{adsltype});
     }
 
