@@ -21,7 +21,7 @@ sub read() {
 }
 
 sub ntp_server {
-    my $setting = @_ > 1;
+    my $setting = @_ >= 1;
     my ($server) = @_;
 
     my $f = "$::prefix/etc/ntp.conf";
