@@ -485,7 +485,6 @@ sub test_mouse {
 	$draw_pixbuf->($images{$name}, $x, $y);
     };
     my $drawarea = sub {
-	my ($height) = @_;
 	$draw_by_name->('mouse');
 	if ($::isInstall || 1) {
 	    $draw_text->(N("Please test the mouse"), 200);
