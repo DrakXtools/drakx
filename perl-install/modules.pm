@@ -178,7 +178,7 @@ sub remove_alias($) {
 sub remove_alias_regexp($) {
     my ($name) = @_;
     foreach (keys %conf) {
-	$conf{$_}{alias} && $_ =~ qr/$name/ or next;
+	$conf{$_}{alias} && $_ =~ /$name/ or next;
 	delete $conf{$_}{alias};
 	return 1;
     }
@@ -267,7 +267,7 @@ sub write_conf {
 	    my $v = join(' ', uniq(deref($conf{$alias}{$type})));
 	    $_ = "$type $alias $v\n";
 	} elsif ($type eq 'alias' && !defined $conf{$alias}{alias}) { 
-         undef $_;
+         $_ = '';
      }
     } $file;
 
