@@ -542,7 +542,7 @@ sub chooseGroups {
 
 sub chooseCD {
     my ($o, $packages) = @_;
-    my @mediums = grep { $_ > 1 } pkgs::allMediums($packages);
+    my @mediums = grep { $_ != $install_any::boot_medium } pkgs::allMediums($packages);
     my @mediumsDescr = ();
     my %mediumsDescr = ();
 
