@@ -50,6 +50,7 @@ sub load {
 	log::l("i would load module $_ (@{$options{$_}})") foreach @l;
     } elsif ($::isStandalone || $::live) {
 	run_program::run('/sbin/modprobe', $_, @{$options{$_}}) 
+	  or !run_program::run('/sbin/modprobe', '-n', $_) #- ignore missing modules
 	  or die "insmod'ing module $_ failed" foreach @l;
     } else {
 	load_raw(map { [ $_ => $options{$_} ] } @l);
