@@ -393,8 +393,8 @@ wish to access and any applicable user name and password."),
 #------------------------------------------------------------------------------
 sub setRootPassword($) {
     my ($o) = @_;
-    $o->{superuser} ||= {};
-    $o->{superuser}{password2} ||= $o->{superuser}{password} ||= "";
+#    $o->{superuser} ||= {};
+#    $o->{superuser}{password2} ||= $o->{superuser}{password} ||= "";
     my $sup = $o->{superuser};
 
     $o->ask_from_entries_ref(_("Set root password"),
