@@ -49,11 +49,9 @@ $::direct = grep { /-direct/ } @ARGV;
 #my $shorewall = network::shorewall::read();
 #
 #- get network configuration.
-my $netcnx = {};
 my $netc = {};
 my $intf = {};
-network::netconnect::read_net_conf('', $netcnx, $netc);
-network::netconnect::load_conf($netcnx, $netc, $intf);
+network::read_all_conf('', $netc, $intf);
 
 my $in = 'interactive'->vnew('su', 'default');
 
@@ -128,7 +126,13 @@ undef $::Wizard_no_previous;
 
 step_check_intf:
 
-my @intf = grep { exists $_->{NETWORK} } values %$intf;
+my @intf = grep { exists $_->{NETWORK} } map {
+    unless ($_->{NETWORK}) {
+	foreach my $s (split "\n", `route`) {
+	    print STDERR "$s\n";
+	    $s =~ /^(\S+)\s+\S+\s+$_->{NETMASK}\s+.*$_->{DEVICE}/ and $_->{NETWORK} = $1;
+	}
+    } $_ } values %$intf;
 if (@intf < 1) {
     #- no interface already configured found, ask user to configure.
     $in->ask_warn(N("No network adapter on your system!"), 
@@ -151,7 +155,7 @@ if (@intf < 1) {
 step_ip_range:
 
 #- read current configuration, or create a default suitable automatically.
-my $dhcpd_conf = parse_dhcpd_conf("/etc/dhcpd.conf", $netcnx, $netc, $intf[0]);
+my $dhcpd_conf = parse_dhcpd_conf("/etc/dhcpd.conf", {}, $netc, $intf[0]);
 
 #- get back default of ip.
 my $pool;
@@ -214,7 +218,7 @@ Leave it blank if you do not want to set up automatic installation mode.
 
 #- now install packages...
 my %rpm2file = ('dhcp-server' => '/usr/sbin/dhcpd',
-		pxe => '/usr/sbin/pxe',
+		'pxe' => '/usr/sbin/pxe',
 		'tftp-server' => '/usr/sbin/in.tftpd',
 		'apache' => '/usr/sbin/httpd');
 
