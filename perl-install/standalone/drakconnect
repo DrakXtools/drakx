@@ -260,7 +260,7 @@ sub build_tree {
     my ($netc, $intf, $interface, $interface_kind, $protocol) = @_;
     
     if ($interface eq 'adsl') {
-	$intf->{pages} = { N("TCP/IP") => 1, N("Account") => 1, N("Options") => 1, N("Information") => 1 };
+	$intf->{pages} = { 'TCP/IP' => 1, 'Account' => 1, 'Options' => 1, 'Information' => 1 };
 	network::adsl::adsl_probe_info($intf, $netc, $protocol, $interface_kind);
 	$intf->{save} = sub { 
             $netc->{internet_cnx_choice} = 'adsl';
@@ -269,7 +269,7 @@ sub build_tree {
           };
     }
     elsif ($interface eq 'modem') {
-	$intf->{pages} = { N("TCP/IP") => 1, N("Account") => 1, N("Modem") => 1, N("Options") => 1 };
+	$intf->{pages} = { 'TCP/IP' => 1, 'Account' => 1, 'Modem' => 1, 'Options' => 1 };
 	# FIXME: code duplication, should be in network::modem::read_config
 	$intf->{device} = $netc->{autodetect}{modem};
 	my %l = getVarsFromSh("$::prefix/usr/share/config/kppprc");
@@ -289,13 +289,13 @@ sub build_tree {
 	$intf->{save} = sub { network::modem::ppp_configure($in, $intf) };
     }
     elsif ($interface eq 'isdn') {
-	$intf->{pages} = { N("TCP/IP") => 1, N("Account") => 1, N("Modem") => 1, N("Options") => 1 };
+	$intf->{pages} = { 'TCP/IP' => 1, 'Account' => 1, 'Modem' => 1, 'Options' => 1 };
 	network::isdn::isdn_read_config($intf);
 	$intf->{save} = sub { network::isdn::isdn_write_config($intf, $netc) };
     } 
     else {
 	#- ethernet is default
-	$intf->{pages} = { N("TCP/IP") => 1, if_($intf->{WIRELESS_MODE}, N("Wireless") => 1), N("Options") => 1, N("Information") => 1 };
+	$intf->{pages} = { 'TCP/IP' => 1, if_($intf->{WIRELESS_MODE}, 'Wireless' => 1), 'Options' => 1, 'Information' => 1 };
     }
 }
 
@@ -305,8 +305,8 @@ sub build_notebook {
     my $apply = sub { $apply_button->set_sensitive(1) };
     my $is_ethernet = $interface =~ /eth|ath|wlan/;
 
-    if ($intf->{pages}{N("TCP/IP")}) {
-	gtkpack_($gui->{sheet}{N("TCP/IP")} = Gtk2::VBox->new(0,0),
+    if ($intf->{pages}{'TCP/IP'}) {
+	gtkpack_($gui->{sheet}{'TCP/IP'} = Gtk2::VBox->new(0,0),
 		 if_($is_ethernet, 
 		      0, $gui->{intf}{BOOTPROTO} = gtksignal_connect(Gtk2::OptionMenu->new,
 								     changed => sub { 
@@ -356,7 +356,7 @@ sub build_notebook {
 		);
 	if ($is_ethernet) {
          my $proto = $gui->{intf}{BOOTPROTO};
-         $proto->{protocols} = { static => N("static"), dhcp => N_("DHCP") };
+         $proto->{protocols} = { static => N("static"), dhcp => 'DHCP' };
          $proto->set_popdown_strings(@{$proto->{protocols}}{qw(dhcp static)});
          $proto->set_text($proto->{protocols}{$intf->{BOOTPROTO}});
          foreach ($gui->{intf}{IPADDR}, $gui->{intf}{NETMASK}, $gui->{netc}{GATEWAY}) {
@@ -370,8 +370,8 @@ sub build_notebook {
 	$gui->{netc}{$_}->set_text($netc->{$_}) foreach keys %{$gui->{netc}};
     }
     
-    if ($intf->{pages}{N("Wireless")}) {
-	gtkpack($gui->{sheet}{N("Wireless")} = Gtk2::HBox->new(0,0),
+    if ($intf->{pages}{Wireless}) {
+	gtkpack($gui->{sheet}{Wireless} = Gtk2::HBox->new(0,0),
 		gtkpack_(Gtk2::VBox->new(0,0),
 			 map { (0, gtkpack_(Gtk2::VBox->new(0,0),
 					    1, Gtk2::Label->new($_->[0]),
@@ -404,8 +404,8 @@ sub build_notebook {
 	       );
     }
     
-    if ($intf->{pages}{N("Options")}) {
-	gtkpack($gui->{sheet}{N("Options")} = Gtk2::VBox->new(0,0),	    
+    if ($intf->{pages}{Options}) {
+	gtkpack($gui->{sheet}{Options} = Gtk2::VBox->new(0,0),	    
 		gtkpack__(Gtk2::VBox->new(0,0),
 			  $gui->{intf_bool}{ONBOOT} = gtksignal_connect(Gtk2::CheckButton->new(N("Start at boot")),
 									toggled => $apply),
@@ -444,11 +444,11 @@ sub build_notebook {
 	$gui->{intf_bool}{HWADDR}->set_active($intf->{HWADDR});
     }
     
-    if ($intf->{pages}{N("Account")}) {
+    if ($intf->{pages}{Account}) {
 	if ($interface_kind =~ /^speedtouch|sagem$/) {
 	    $gui->{description} = $interface_kind eq 'speedtouch' ? 'Alcatel|USB ADSL Modem (Speed Touch)' : 'Analog Devices Inc.|USB ADSL modem';
 	}
-	gtkpack_($gui->{sheet}{N("Account")} = Gtk2::VBox->new(0,0),
+	gtkpack_($gui->{sheet}{Account} = Gtk2::VBox->new(0,0),
 		 if_($interface eq 'modem',
 		     0, gtkpack_(Gtk2::VBox->new(0,0),
 				 1, Gtk2::Label->new(N("Authentication")),
@@ -472,8 +472,8 @@ sub build_notebook {
 	$gui->{intf}{passwd}->set_visibility(0);
     }
     
-    if ($intf->{pages}{N("Modem")}) {
-	gtkpack($gui->{sheet}{N("Modem")} = Gtk2::HBox->new(0,0),
+    if ($intf->{pages}{Modem}) {
+	gtkpack($gui->{sheet}{Modem} = Gtk2::HBox->new(0,0),
 		if_($interface eq 'modem',
 		    gtkpack__(Gtk2::VBox->new(0,0),
 			      (map { (gtkpack_(Gtk2::VBox->new(0,0),
@@ -542,7 +542,7 @@ sub build_notebook {
 	$gui->{intf}{Speed}->set_popdown_strings('2400', '9600', '19200', '38400', '57600', '115200');
     }
     
-    if ($intf->{pages}{N("Information")}) {
+    if ($intf->{pages}{Information}) {
 	my ($info) = $gui->{description} ? 
 	  find { $_->{description} eq $gui->{description} } detect_devices::probeall : network::ethernet::mapIntfToDevice($interface_kind);
 	if (is_empty_hash_ref($info) and my @intfs = grep { $interface_kind eq $_->[0] } @all_cards) {
@@ -552,7 +552,7 @@ sub build_notebook {
          }
 	}
 	
-	gtkpack($gui->{sheet}{N("Information")} = Gtk2::VBox->new(0,0),
+	gtkpack($gui->{sheet}{Information} = Gtk2::VBox->new(0,0),
 		gtktext_insert(Gtk2::TextView->new,
 			       join('',
 				    map { $_->[0] . ": \x{200e}" . $_->[1] . "\n" } (
@@ -576,9 +576,9 @@ sub build_notebook {
 
 sub populate_notebook {
     my ($notebook, $gui) = @_;
-    foreach (N("TCP/IP"), N("Account"), N("Wireless"), N("Modem"), N("Options"), N("Information")) {
+    foreach ('TCP/IP', 'Account', 'Wireless', 'Modem', 'Options', 'Information') {
 	!$gui->{sheet}{$_} and next;
-	$notebook->append_page($gui->{sheet}{$_}, Gtk2::Label->new($_));
+	$notebook->append_page($gui->{sheet}{$_}, Gtk2::Label->new(N($_)));
     }
 }
 
