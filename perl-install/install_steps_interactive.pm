@@ -25,6 +25,7 @@ use fsedit;
 use loopback;
 use mouse;
 use modules;
+use modules::interactive;
 use lang;
 use keyboard;
 use any;
