@@ -1299,8 +1299,8 @@ sub build_backup_files() {
 			push_list("backup_sys");
 			files_to_results("sys");
 	  	}
+		$results .= "\nignored: $ignore_files_list" if $ignore_files_list;
 	  }
-	  $results .= "\nignored: $ignore_files_list" if $ignore_files_list;
 	  $interactive and progress($pbar, $plabel, 0.5, N("Backup system files..."));
 	  $interactive and progress($pbar3, $plabel3, 0.3, N("Hard Disk Backup files..."));
 	
@@ -1363,8 +1363,8 @@ sub build_backup_files() {
 			files_to_results("user_$user");
 		  }
 	    }
+		$results .= "\nignored: $ignore_files_list" if $ignore_files_list;	  
 	  }
-	  $results .= "\nignored: $ignore_files_list" if $ignore_files_list;	  
 	  $interactive and progress($pbar2, $plabel1, 1, N("Backup User files..."));
 	  $interactive and progress($pbar3, $plabel3, 0.4, N("Hard Disk Backup files..."));
 
@@ -1419,8 +1419,8 @@ sub build_backup_files() {
 			push_list("backup_other");
 			files_to_results("other"); 
 	  	}
+		$results .= "\nignored: $ignore_files_list" if $ignore_files_list;	  
 	  }
-	  $results .= "\nignored: $ignore_files_list" if $ignore_files_list;	  
 	  $interactive and progress($pbar1, $plabel2, 1, N("Backup Other files..."));
 	  $interactive and progress($pbar3, $plabel3, 0.3, N("Hard Disk Backup Progress..."));
 	}
@@ -3379,15 +3379,13 @@ sub restore_step_sys() {
     $combo_restore_step_sys->set_popdown_strings(@sys_backuped);
     gtkpack($advanced_box,
 		$restore_step_sys = gtkpack_(new Gtk2::VBox(0,10),
-			1, new Gtk2::VBox(0,10),
+			0, N("Please choose the date to restore:"),
 			0, gtkpack_(new Gtk2::HBox(0,10),
-				1, N("please choose the date to restore"),
+				1, new Gtk2::HBox(0,10),
 				0, $combo_restore_step_sys,
 				0, my $details = Gtk2::Button->new(" Details "),
-				0, new Gtk2::HBox(0,10),
+				1, new Gtk2::HBox(0,10),				
 			),
-			1, new Gtk2::VBox(0,10),
-			
 		),
 	);
     $combo_restore_step_sys->entry->signal_connect('changed', sub {
@@ -3618,7 +3616,8 @@ sub find_files_to_restore() {
 	$central_widget = \$file_restore;
 }
 
-sub catalog_restore() {
+sub catalog_restore {
+	my ($call_method) = @_;
 	my $catalog_box;
 	my $cat_entry;
 	my @restore_files;
@@ -3704,8 +3703,8 @@ sub catalog_restore() {
 		
 	gtkpack($advanced_box,
 		$catalog_box = gtkpack_(new Gtk2::HBox(0,10),
-			0, new Gtk2::VBox(0,10),
 			1, gtkpack_(new Gtk2::VBox(0,5),
+				0, N("Click date/time to see backup files."),
 				1, gtkpack_(new Gtk2::VBox(0, 10),
 					1, create_scrolled_window($tree_catalog),
 					1, create_scrolled_window($tree_files),
@@ -3749,8 +3748,9 @@ sub catalog_restore() {
 	$restore_path_entry->set_text($restore_path);
 	gtksignal_connect($restore_path_entry, changed => sub { $restore_path = $restore_path_entry->get_text });
 	
-	button_box_restore();		
-	fonction_env(\$catalog_box, \&catalog_restore, \&restore_find_media_box, \&catalog_restore);
+	button_box_restore();
+	fonction_env(\$catalog_box, \&catalog_restore, \&restore_find_media_box, \&catalog_restore) if $call_method eq "need media";;
+	fonction_env(\$catalog_box, \&catalog_restore, \&restore_box, \&catalog_restore) if $call_method eq "button";
 	$central_widget = \$catalog_box;	
     $up_box->show_all;
 }
@@ -4133,6 +4133,10 @@ sub restore_box() {
 						button_box_restore(); 
 						restore_step2();
 					}),
+					1, gtksignal_connect(Gtk2::Button->new(N("Restore From Catalog")), clicked => sub {  
+						$retore_box->destroy;
+						catalog_restore("button");
+					}),
 					1, new Gtk2::VBox(0,10),
 					1, new Gtk2::VBox(0,10),
 				),
@@ -4181,7 +4185,7 @@ sub restore_find_media_box() {
 					}), $mount_media),
 					gtksignal_connect(Gtk2::Button->new(N("Restore From Catalog")), clicked => sub {  
 						$box2->destroy;
-						catalog_restore();
+						catalog_restore("need media");
 					}),
 					gtksignal_connect(Gtk2::Button->new(N("Search for files to restore")), clicked => sub { 
 						$box2->destroy;
@@ -4811,7 +4815,7 @@ sub interactive_mode() {
 	
     $my_win = ugtk2->new('drakbackup');
     $window1 = $my_win->{window};
-    unless (0 == 0) {
+    unless ($::isEmbedded) {
 		$my_win->{rwindow}->set_position('center');
 		$my_win->{rwindow}->set_title(N("Drakbackup"));
 		$window1->set_size_request($winwidth, $winht);
@@ -4819,10 +4823,8 @@ sub interactive_mode() {
 		$darea = Gtk2::DrawingArea->new;
 		$darea->set_size_request($winwidth, 60);
 		$darea->modify_font(Gtk2::Pango::FontDescription->from_string('Sans Italic 24'));
+		$darea->modify_bg("normal", gtkcolor(0.13 * 65535, 0.27 * 65535, 0.61 * 65535));
 		my $layout = $darea->create_pango_layout(N("Drakbackup"));
-    	$darea->signal_connect(realize => sub { 
-			set_back_pixbuf($darea, gtkcreate_pixbuf('title-tile')) 
-		});
     	$darea->signal_connect(expose_event => sub {
 			my (undef, undef, $dx, $dy) = $darea->allocation->values;
 			$darea->window->draw_pixbuf($darea->style->white_gc, $pixbuf_icon, 0, 0, $dx - $pixbuf_icon->get_width, $dy - $pixbuf_icon->get_height, -1, -1, 'none', 0, 0);
