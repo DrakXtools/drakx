@@ -171,7 +171,7 @@ sub network_status {
     open F, ($::testing ? "$prefix" : "chroot $prefix/ ") . 
 	"/bin/sh -c \"export LC_ALL=C; /etc/rc.d/init.d/network status\" |" ||
 	    die "Could not run \"/etc/rc.d/init.d/network status\"!";
-    while(<F>) {
+    while (<F>) {
 	if (($_ =~ /Devices.*down/) || # Are there configured devices which
 	                               # are down
 	    ($_ =~ /Devices.*modified/)) { # Configured devices which are not

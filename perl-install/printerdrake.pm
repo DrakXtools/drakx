@@ -811,8 +811,7 @@ sub get_printer_info {
 		    if ($printer->{currentqueue}{'connect'} ne 
 			'file:/dev/lp0') {
 			$in->ask_warn(_("OKI winprinter configuration"),
-				      _("You are configuring an OKI laser winprinter. These printers
-use a very special communication protocol and therefore they
+				      _("You are configuring an OKI laser winprinter. These printers\nuse a very special communication protocol and therefore they
 work only when connected to the first parallel port. When
 your printer is connected to another port or to a print
 server box please connect the printer to the first parallel
