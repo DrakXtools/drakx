@@ -2141,7 +2141,7 @@ sub advanced_where_tape {
 			),
 			0, new Gtk2::VBox(0, 6),
 			0, gtkpack_(new Gtk2::HBox(0,10),
-				0, gtkset_sensitive(new Gtk2::Label(N("Please enter the maximum size\n allowed for Drakbackup")), $where_tape),
+				0, gtkset_sensitive(new Gtk2::Label(N("Please enter the maximum size\n allowed for Drakbackup (Mb)")), $where_tape),
 				1, new Gtk2::VBox(0, 6),
 				0, gtkset_size_request(gtkset_sensitive($spinner = new Gtk2::SpinButton($adj, 0, 0), $where_tape), 200, 20),
 			),
@@ -2215,7 +2215,7 @@ sub advanced_where_hd {
 			),
 			0, new Gtk2::VBox(0, 6),
 			0, gtkpack_(new Gtk2::HBox(0,10),
-				0, gtkset_sensitive(new Gtk2::Label(N("Please enter the maximum size\n allowed for Drakbackup")),  $where_hd),
+				0, gtkset_sensitive(new Gtk2::Label(N("Please enter the maximum size\n allowed for Drakbackup (Mb)")),  $where_hd),
 				1, new Gtk2::VBox(0, 6),
 				0, gtkset_size_request(gtkset_sensitive($spinner = new Gtk2::SpinButton($adj, 0, 0), $where_hd), 200, 20),
 			),
@@ -3178,7 +3178,7 @@ sub restore_other_media_hd {
 			),
 	 		0, new Gtk2::VBox(0, 6),
 	 		0, gtkpack_(new Gtk2::HBox(0,10),
-	    		0, gtkset_sensitive(new Gtk2::Label(N("Please enter the maximum size\n allowed for Drakbackup")),  $where_hd),
+	    		0, gtkset_sensitive(new Gtk2::Label(N("Please enter the maximum size\n allowed for Drakbackup (Mb)")),  $where_hd),
 	    		1, new Gtk2::VBox(0, 6),
 	    		0, gtkset_size_request(gtkset_sensitive($spinner = new Gtk2::SpinButton($adj, 0, 0), $where_hd), 200, 20),
 			),
@@ -4493,7 +4493,8 @@ sub build_backup_ftp_status() {
     gtkflush();
 }
 
-sub build_backup_box_see_conf() {
+sub build_backup_box_see_conf {
+	my ($caller) = @_;
     my $box2;
     my $text = new Gtk2::TextView;
     system_state();
@@ -4512,8 +4513,12 @@ sub build_backup_box_see_conf() {
     $custom_help = "";
     $central_widget = \$box2;
     $current_widget = \&build_backup_box_see_conf;
-    $previous_widget = \&build_backup_box;
-    $up_box->show_all;
+	if ($caller eq "interactive") {
+		$previous_widget = \&interactive_mode_box;
+	} else {
+    	$previous_widget = \&build_backup_box;
+    }
+	$up_box->show_all;
 }
 
 sub build_backup_box_progress() {
@@ -4598,6 +4603,10 @@ sub interactive_mode_box {
 					button_box_adv();
 					destroy_widget();
 					advanced_box(); 
+				}),
+				1, gtksignal_connect(new Gtk2::Button(N("View Configuration")), clicked => sub { 
+					destroy_widget();
+					build_backup_box_see_conf("interactive");
 				}),
 				1, gtksignal_connect(new Gtk2::Button(N("Backup Now")), clicked => sub { 
 					if ($cfg_file_exist) { 
