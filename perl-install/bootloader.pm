@@ -11,7 +11,6 @@ use common;
 use partition_table qw(:types);
 use log;
 use any;
-use pkgs;
 use fsedit;
 use devices;
 use loopback;
@@ -236,6 +235,7 @@ sub get_kernels_and_labels {
     my @prefered = ('', 'secure', 'enterprise', 'smp');
     my %weights = map_index { $_ => $::i } @prefered;
     
+    require pkgs;
     @kernels = 
       sort { pkgs::versionCompare($b->[1], $a->[1]) || $weights{$a->[2]} <=> $weights{$b->[2]} } 
       map {
