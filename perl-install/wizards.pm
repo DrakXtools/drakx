@@ -152,11 +152,15 @@ sub process {
             }
         }
         my $name = ref($page->{name}) ? $page->{name}->() : $page->{name};
+        my %yesno = (yes => N("Yes"), no => N("No"));
+        @data2 = [ { val => \$yes, type => 'list', list => [ values %yesno ] } ] if $page->{type} eq "yesorno";
         my $a = $in->ask_from_({ title => $o->{name}, 
                                  messages => $name, 
                                  callbacks => { map { $_ => $page->{$_} || $default_callback{$_} } qw(focus_out complete) },
                                  if_($page->{interactive_help_id}, interactive_help_id => $page->{interactive_help_id}),
                                }, $data2);
+        # interactive->ask_yesorno does not support stepping forward or backward:
+        $a = $a eq $yesno{yes} if $page->{type} eq "yesorno";
         if ($a) {
             # step forward:
             push @steps, $next if !$page->{ignore} && $steps[-1] ne $next;
