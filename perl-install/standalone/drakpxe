@@ -170,7 +170,7 @@ $in->ask_from('DHCP Server Configuration',
 
 The network address is %s using a netmask of %s.
 
-", @{$intf[0]}{qw(NETWORK NETMASK)}), [ { label => N("The DHCP start ip"), val => \$start_ip, type => 'entry' },
+", $intf[0]{NETWORK}, $intf[0]{NETMASK}), [ { label => N("The DHCP start ip"), val => \$start_ip, type => 'entry' },
 					{ label => N("The DHCP end ip"), val => \$end_ip, type => 'entry' }, ])
   or goto begin;
 

@@ -179,7 +179,7 @@ sub write_smb_conf {
 }
 
 sub write_smb_ads_conf {
-    my ($domain,$realm) = @_;
+    my ($domain, $realm) = @_;
 
     #- was going to just have a canned config in samba-winbind
     #- and replace the domain, but sylvestre/buchan didn't bless it yet
