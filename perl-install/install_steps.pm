@@ -318,7 +318,7 @@ sub pkg_install_if_requires_satisfied {
     foreach (@l) {
 	my %newSelection;
 	my $pkg = pkgs::packageByName($o->{packages}, $_) || die "$_ rpm not found";
-	pkgs::selectPackage($o->{packages}, $pkg, 0, \%newSelection) foreach @l;
+	pkgs::selectPackage($o->{packages}, $pkg, 0, \%newSelection);
 	scalar(keys %newSelection) == 1 and pkgs::selectPackage($o->{packages}, $pkg);
     }
     $o->installPackages;

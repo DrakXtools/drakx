@@ -3,7 +3,7 @@ package install_any; # $Id$
 use diagnostics;
 use strict;
 
-use vars qw(@ISA %EXPORT_TAGS @EXPORT_OK @needToCopy);
+use vars qw(@ISA %EXPORT_TAGS @EXPORT_OK @needToCopy @needToCopyIfRequiresSatisfied);
 
 @ISA = qw(Exporter);
 %EXPORT_TAGS = (
@@ -35,6 +35,10 @@ XFree86-Sun XFree86-SunMono XFree86-Sun24 XFree86-3DLabs XFree86-FBDev XFree86-s
 XFree86 XFree86-glide-module Device3DFX Glide_V3-DRI Glide_V5 Mesa
 dhcpcd pump dhcpxd dhcp-client isdn4net isdn4k-utils dev pptp-adsl-fr rp-pppoe ppp ypbind
 rhs-printfilters lpr cups cups-drivers pnm2ppa Lexmark-1100-printer-driver__lm1100 samba ncpfs
+);
+#- package that have to be copied only if all their requires are satisfied.
+@needToCopyIfRequiresSatisfied = qw(
+xpp kups
 );
 
 #-######################################################################################
@@ -172,8 +176,13 @@ sub setup_postinstall_rpms($$) {
 	my $pkg = pkgs::packageByName($packages, $_);
 	pkgs::selectPackage($packages, $pkg, 0, \%toCopy) if $pkg;
     }
+    foreach (@needToCopyIfRequiresSatisfied) {
+	my $pkg = pkgs::packageByName($packages, $_);
+	my %newSelection; pkgs::selectPackage($packages, $pkg, 0, \%newSelection) if $pkg;
+	scalar(keys %newSelection) == 1 and @toCopy{keys %newSelection} = ();
+    }
 
-    my @toCopy; push @toCopy, map { pkgs::packageByName($packages, $_) } keys %toCopy;
+    my @toCopy = map { pkgs::packageByName($packages, $_) } keys %toCopy;
 
     #- extract headers of package, this is necessary for getting
     #- the complete filename of each package.
