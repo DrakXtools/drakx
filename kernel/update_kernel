@@ -38,11 +38,9 @@ sub rpm2version {
 sub update_kernel_from_repository {
     my ($RPMS, $main_ver, $is_BOOT) = @_;
     my $rpm_wildcard = 'kernel-' . ($is_BOOT ? 'BOOT-' : (arch() =~ /i.86/ ? 'i586-up-1GB-' : '')) . $main_ver . '*.rpm';
-    my ($kernel_rpm) = my @kernels = glob("$RPMS/$rpm_wildcard");
-    @kernels <= 1 or die "more than one kernel match $rpm_wildcard";
-    @kernels >= 1 or return; # die "no kernel match $rpm_wildcard";
-
-    install_kernel($kernel_rpm, 1);
+    my @kernels = glob("$RPMS/$rpm_wildcard");
+    
+    install_kernel($_, 1) foreach @kernels;
 }
 
 sub install_kernel {
@@ -54,11 +52,6 @@ sub install_kernel {
     -d $dir and return if $o_update;
 
     my $is_BOOT = $kern_ver =~ /BOOT/;
-    my ($main_ver) = $kern_ver =~ /^(2\.\d)/;
-    if (my @previous = grep { ($is_BOOT xor !/BOOT/) && /^\Q$main_ver/ } all('all.kernels')) {
-	warn "Removing previous kernels ", join(' ', @previous), "\n";
-        rm_rf("all.kernels/$_") foreach @previous;
-    }
 
     if (!$main || !-d "all.kernels/$main") {
 	$main = $kern_ver;
