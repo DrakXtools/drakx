@@ -655,21 +655,6 @@ sub IM2packages {
     return $packages ? @$packages : $im;
 }
 
-#- CONSOLE_NOT_LOCALIZED if defined to yes, disables translations on console
-#-	it is needed for languages not supported by the linux console
-my %console_support = (
-'ar' => { CONSOLE_NOT_LOCALIZED => 'yes', },
-'bn' => { CONSOLE_NOT_LOCALIZED => 'yes', },
-'fa' => { CONSOLE_NOT_LOCALIZED => 'yes', },
-'he' => { CONSOLE_NOT_LOCALIZED => 'yes', },
-'hi' => { CONSOLE_NOT_LOCALIZED => 'yes', },
-'ko' => { CONSOLE_NOT_LOCALIZED => 'yes', },
-'ur' => { CONSOLE_NOT_LOCALIZED => 'yes', },
-'yi' => { CONSOLE_NOT_LOCALIZED => 'yes', },
-'zh_TW' => { CONSOLE_NOT_LOCALIZED => 'yes', },
-'zh_CN' => { CONSOLE_NOT_LOCALIZED => 'yes', },
-);
-
 #- [0]: console font name
 #- [1]: sfm map for console font (if needed)
 #- [2]: acm file for console font (none if utf8)
@@ -1056,8 +1041,10 @@ sub write {
     }
 
     #- deactivate translations on console for RTL languages
-    if ($console_support{$locale->{lang}}) {
-	add2hash $h, { CONSOLE_NOT_LOCALIZED => $console_support{$locale->{lang}}{CONSOLE_NOT_LOCALIZED} }
+    if (member($locale->{lang}}, qw(ar bn fa he hi ko ur yi zh_TW zh_CN)) {
+        #- CONSOLE_NOT_LOCALIZED if defined to yes, disables translations on console
+        #-	it is needed for languages not supported by the linux console
+        add2hash $h, { CONSOLE_NOT_LOCALIZED => 'yes' }
     }
 
     setVarsInSh($prefix . ($b_user_only ? "$ENV{HOME}/.i18n" : '/etc/sysconfig/i18n'), $h);
