@@ -4,11 +4,9 @@
 ** fixes
 *** non needed stuff to run X must be posponed after X11 startup
 **** eg: scanner/audio/printer/floppy/cdrom/tape/tv/webcam/joystick/ ... 
-*** add updfstab as in kudzu
 *** enable the user to force a module (isa, isapnp, ...)
 *** timeout on dialogs in service
-*** usb mouse in unknown
-*** pci freeze (fseek ?)
+*** pci freeze (fseek ?) [should be fixed]
 *** 2detect/look 4
 **** pcmcia devices
 **** isapnp devices
@@ -17,13 +15,10 @@
 ** drakesoun
 *** add a dialog so that the user choose its wavetable.
 *** package'n patch alsaconf to prevent "alias sound-slot-0 snd-card-0"
-*** blacklist cs4236 and cs46xx
 *** list all availlables drivers, defaulting to first alternative, prepending old one with '*'
 *** add 'ALSA/OSS': tag to modules list
-*** black list cs4281 and cs46xx
 
 ** validation:
-*** see dadou (GUI)
 *** qa team (test cases)
 
 
