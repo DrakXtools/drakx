@@ -655,7 +655,7 @@ sub selectLanguage {
     my ($in, $lang, $o_langs_) = @_;
 
     my $common = { messages => N("Please choose a language to use."),
-		   title => 'language choice',
+		   title => N("Language choice"),
 		   interactive_help_id => 'selectLanguage' };
 
     if ($::isInstall) {
