@@ -1,3 +1,168 @@
+2004/03/12  Frederic Lepied  <flepied at mandrakesoft.com>
+
+	* share/rpmsrate: removed audacity (in contrib)
+
+2004/03/12  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* drakxtools.spec: 10-22mdk
+
+	* network/netconnect.pm: fix writing drakconnect config file at install
+	time (#7478)
+
+2004/03/11  Florin Grad  <florin at mandrakesoft.com>
+
+	* standalone/drakgw: fix the disable, enable functions
+
+	* network/shorewall.pm: add some tests for the REDIRECT squid rules
+
+2004/03/11  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/tl.po: updated Filipino file
+
+2004/03/11  Pixel  <pixel at mandrakesoft.com>
+
+	* install_any.pm: fix installing locales-XX for lang=nb which needs
+	locales-no (one needs to use provides)
+
+	* fsedit.pm: disallow lvm on / with no /boot until lilo handles it
+
+	* install2.pm: tentatively fix lilo with lvm on /
+
+	* bootloader.pm: 
+	  - always generate a precise entry using the precise version
+	  - remove the linux-2.4 or linux-2.6 entries which don't work together
+	with the precise version entry
+	  - still have the "linux" entry
+
+	* install_steps_interactive.pm: nice fix for installing locales-XX
+	corresponding the chosen country (using packagesProviding())
+	workaround code trying to install locales-nb (bugzilla #8287)
+
+	* install_steps.pm: catch cdie's in auto_install
+
+	* do_pkgs.pm: use pkgs::packagesProviding()
+
+	* pkgs.pm: 
+	  - add function packagesProviding()
+	  - use it
+
+2004/03/11  Stew Benedict  <sbenedict at mandrakesoft.com>
+
+	* standalone/drakbackup: Install extra packages when using wizard too.
+	Key transfer in GUI wasn't reporting errors.
+
+2004/03/11  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* standalone/drakvpn: remove debug statement
+	fix previous button on first step (robert.vojta@qcm.cz, anthill #387)
+
+	* ugtk2.pm (gtktext_insert) if we want anonymous tags, just create
+	anonymous tags
+	instead of creating fake tag names that we just discard after (rand is
+	not guarranted to not return the same number twice...)
+
+	* harddrake/data.pm: fix in strict mode
+
+	* detect_devices.pm: workaround anthil bug #369
+
+	* mdk-stage1/probing.c: fix eth[67] detection (gc)
+
+	* standalone/drakgw: fix previous button on first step
+	(robert.vojta@qcm.cz, anthill #386)
+
+	* standalone/logdrake (text_append) fix second run (on next filling, we
+	shall not create
+	tags with name of existing ones)
+	(parse_file) fix search :-)
+	(log_output) take a color and a font as parameters now
+	(log_output__real) splited from log_output(), insert text into
+	textview at once
+	(*) use new framework to speedup (#8412)
+	(text_append) introduce it, forked from gtktext_insert()
+	
+	unlike the later, it create named tags, thus reducing tagtable size
+	from 30000+ tags to 10-20, thus speedup logdrake in quite a big way.
+	
+	it should probably replace gtktext_insert in mdk10.1 since all
+	gtktext_insert users really have quite a few tags (eg: 1 for
+	harddrake2 and rpmdrake)
+	(parse_file) speed up it by 20% (#8412) but logcolorize is the top one
+	in profiles
+
+	* standalone/drakboot: list yes/no for autologin in a more intuitive way,
+	that is yes is
+	grouped with user and wm pull down menus (robert.vojta@qcm.cz, anthill
+	#390)
+
+2004/03/10  fwang
+
+	* share/po/zh_CN.po: update
+
+2004/03/10  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/ms.po, share/po/sk.po, share/po/gl.po, share/po/pt_BR.po,
+	share/po/th.po, share/po/et.po, share/po/ja.po, share/po/hr.po,
+	share/po/be.po, share/po/ko.po, share/po/DrakX.pot, share/po/sv.po,
+	share/po/sr.po, share/po/pl.po, share/po/fi.po, share/po/he.po,
+	share/po/ca.po, share/po/da.po, share/po/ar.po, share/po/ltg.po,
+	share/po/nb.po, share/po/uz.po, share/po/ro.po, share/po/zh_TW.po,
+	share/po/zh_CN.po, share/po/sr@Latn.po, share/po/sq.po, share/po/it.po,
+	share/po/eu.po, share/po/es.po, share/po/lv.po, share/po/hu.po,
+	share/po/fa.po, share/po/id.po, share/po/ru.po, share/po/br.po,
+	share/po/sl.po, share/po/nn.po, share/po/tr.po, share/po/mt.po,
+	share/po/ga.po, share/po/mn.po, share/po/uk.po, share/po/lt.po,
+	share/po/cy.po, share/po/tg.po, share/po/bs.po, share/po/mk.po,
+	share/po/wa.po, share/po/is.po, share/po/hi.po, share/po/af.po,
+	share/po/az.po, share/po/pt.po, share/po/fr.po, share/po/ta.po,
+	share/po/vi.po, share/po/nl.po, share/po/de.po, share/po/eo.po,
+	share/po/bg.po, share/po/cs.po, share/po/el.po, share/po/uz@Latn.po:
+	updated pot file
+
+	* share/po/tl.po: updated pot file
+	Updated Filipino file
+
+	* keyboard.pm: list jp106 keyboard as latin only to avoid the misleading
+	screen about
+	language switching (japanese input doesn't use that method)
+
+2004/03/10  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* share/po/help-zh_CN.pot, share/po/ms.po, share/po/sk.po, share/po/gl.po,
+	share/advertising/dwd-04.pl, share/po/pt_BR.po, share/po/th.po,
+	share/po/et.po, share/po/ja.po, share/po/hr.po,
+	install_steps_interactive.pm, network/netconnect.pm, share/po/be.po,
+	share/advertising/dis-10.pl, share/po/ko.po, share/po/DrakX.pot,
+	share/po/sv.po, share/po/sr.po, share/po/pl.po, share/po/fi.po,
+	share/po/he.po, network/drakfirewall.pm, install_steps_newt.pm,
+	share/po/da.po, share/po/ca.po, share/po/ar.po, share/po/ltg.po,
+	share/po/nb.po, share/po/uz.po, share/po/help-ru.pot,
+	share/advertising/dwd-02.pl, standalone/printerdrake, share/po/ro.po,
+	share/advertising/dwd-01.pl, share/advertising/dis-01.pl,
+	share/po/zh_TW.po, share/po/sr@Latn.po, share/po/sq.po,
+	share/advertising/dwd-05.pl, share/po/it.po, share/po/eu.po,
+	share/po/es.po, share/advertising/ppp-10.pl, share/po/lv.po,
+	share/po/hu.po, printer/printerdrake.pm, share/advertising/pwp-09.pl,
+	share/po/fa.po, share/po/id.po, share/po/ru.po, help.pm, share/po/br.po,
+	share/po/sl.po, share/advertising/ppp-03.pl, share/po/nn.po,
+	share/po/tr.po, share/po/mt.po, share/po/ga.po,
+	share/advertising/dwd-03.pl, share/po/uk.po, share/po/mn.po,
+	share/po/help-de.pot, share/po/lt.po, share/po/cy.po, crypto.pm,
+	share/advertising/ppp-02.pl, share/po/help-it.pot,
+	install_interactive.pm, share/advertising/dwd-07.pl, share/po/tg.po,
+	any.pm, install_steps_gtk.pm, share/po/bs.po, share/po/mk.po,
+	share/po/wa.po, install_messages.pm, share/po/is.po, share/po/af.po,
+	share/po/hi.po, share/po/az.po, bootloader.pm, share/po/pt.po,
+	share/po/vi.po, share/po/ta.po, share/po/fr.po, share/po/nl.po,
+	share/po/help-fr.pot, share/advertising/ppp-01.pl, share/po/tl.po,
+	share/po/de.po, share/advertising/pwp-03.pl,
+	share/advertising/ppp-04.pl, share/advertising/pwp-04.pl,
+	share/advertising/pwp-01.pl, share/po/help-es.pot, share/po/eo.po,
+	share/po/bg.po, share/po/cs.po, share/po/el.po,
+	share/advertising/dwd-09.pl, standalone/scannerdrake,
+	share/po/uz@Latn.po: spell Mandrakelinux in one word
+
+	* standalone/drakperm (row_setting_dialog) sanitize spacing in frames
+
 2004/03/10  Florin Grad  <florin at mandrakesoft.com>
 
 	* standalone/drakgw: fix the 8669 bug
@@ -28782,7 +28947,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.906 2004/03/08 16:02:53 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.907 2004/03/10 16:47:50 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
