@@ -427,7 +427,7 @@ sub load_thiskind {
     modules::load_thiskind($type, sub { 
 			       $w = $o->wait_message('', 
 						     [ _("Installing driver for %s card %s", $type, $_->[0]),
-						       $o->{installClass} ne "beginner" ? _("(module %s)", $_->[1]) : () 
+						       $::beginner ? _("(module %s)", $_->[1]) : () 
 						     ]);
 			   });
 }

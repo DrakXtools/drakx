@@ -226,15 +226,30 @@ my @install_classes = (__("beginner"), __("developer"), __("server"), __("expert
 #-#####################################################################################
 #-Default value
 #-#####################################################################################
-# partition layout for a server
-# NOT YET USED
-my @serverPartitioning = (
-		     { mntpoint => "/boot", size =>  16 << 11, type => 0x83 }, 
-		     { mntpoint => "/",     size => 256 << 11, type => 0x83 }, 
-		     { mntpoint => "/usr",  size => 512 << 11, type => 0x83, growable => 1 }, 
-		     { mntpoint => "/var",  size => 256 << 11, type => 0x83 }, 
-		     { mntpoint => "/home", size => 512 << 11, type => 0x83, growable => 1 }, 
-		     { mntpoint => "swap",  size =>  64 << 11, type => 0x82 }
+# partition layout
+my %suggestedPartitions = (
+  beginner => [
+    { mntpoint => "/boot", size =>  16 << 11, type => 0x83 }, 
+    { mntpoint => "swap",  size => 128 << 11, type => 0x82 },
+    { mntpoint => "/",     size => 700 << 11, type => 0x83 }, 
+    { mntpoint => "/home", size => 300 << 11, type => 0x83 }, 
+  ],
+  developer => [
+    { mntpoint => "/boot", size =>  16 << 11, type => 0x83 }, 
+    { mntpoint => "swap",  size => 128 << 11, type => 0x82 },
+    { mntpoint => "/",     size => 200 << 11, type => 0x83 }, 
+    { mntpoint => "/usr",  size => 600 << 11, type => 0x83 }, 
+    { mntpoint => "/home", size => 500 << 11, type => 0x83 }, 
+  ],
+  server => [
+    { mntpoint => "/boot", size =>  16 << 11, type => 0x83 }, 
+    { mntpoint => "swap",  size => 512 << 11, type => 0x82 },
+    { mntpoint => "/",     size => 200 << 11, type => 0x83 }, 
+    { mntpoint => "/usr",  size => 600 << 11, type => 0x83 }, 
+    { mntpoint => "/var",  size => 600 << 11, type => 0x83 }, 
+    { mntpoint => "/home", size => 500 << 11, type => 0x83 }, 
+  ],
+  expert => [],
 );
 
 #-#######################################################################################
@@ -246,7 +261,7 @@ my @serverPartitioning = (
 $o = $::o = { 
     bootloader => { onmbr => 1, linear => 0 },
     autoSCSI   => 0,
-    mkbootdisk => "fd0", # no mkbootdisk if 0 or undef,   find a floppy with 1
+    mkbootdisk => 1, # no mkbootdisk if 0 or undef,   find a floppy with 1
 #    packages   => [ qw() ],
     partitioning => { clearall => $::testing, eraseBadPartitions => 0, auto_allocate => 0, autoformat => 0 },
 #    partitions => [
@@ -364,8 +379,10 @@ sub selectInstallClass {
     $o->selectInstallClass(@install_classes);
 
     $::expert = $o->{installClass} eq "expert";
+    $o->{partitions} = $suggestedPartitions{$o->{installClass}};
+
     addToBeDone {
-    install_any::setPackages($o); #update package list
+	install_any::setPackages($o); #update package list
     }  'formatPartitions';
 }
 

@@ -241,10 +241,13 @@ sub text2driver($) {
 
 sub load($;$@) {
     my ($name, $type, @options) = @_;
+
+    $conf{'scsi_hostadapter' . ($conf{scsi}++ || '')}{alias} = $name 
+      if $type eq 'scsi';
+
     if ($::testing) {
 	log::l("i try to install $name module");
     } else {
-
 	$conf{$name}{loaded} and return;
 	
 	$type ||= $drivers{$name}{type};
@@ -301,9 +304,13 @@ sub load_deps($) {
 sub read_conf {
     my ($file) = @_;
     my %c;
+    $c{scsi} = 0;
 
     foreach (cat_($file)) {
-	$c{$2}{$1} = $3 if /^\s*(\S+)\s+(\S+)\s+(.*?)\s*$/;
+	do {
+	    $c{$2}{$1} = $3;
+	    $c{scsi} = max($c{scsi}, $1 || 0) if /^\s*alias\s+scsi_hostadapter (\d*)/x;
+	} if /^\s*(\S+)\s+(\S+)\s+(.*?)\s*$/;
     }
     # cheating here: not handling aliases of aliases
     while (my ($k, $v) = each %c) {
@@ -319,20 +326,13 @@ sub read_conf {
 sub write_conf {
     my ($file) = @_;
     my %written = read_conf($file);
-    my $scsi = $written{scsi};
 
     local *F;
     open F, ">> $file" or die("cannot write module config file $file: $!\n");
 
     while (my ($mod, $h) = each %conf) {
 	while (my ($type, $v2) = each %$h) {
-	    unless ($written{$mod}{$type}) {
-		if ($mod eq 'scsi_hostadapter') {
-		    print "#" if $scsi;
-		    $scsi ||= 1;
-		}
-		print F "$type $mod $v2\n" unless $type eq "loaded";
-	    }
+	    print F "$type $mod $v2\n" if $v2 && $type ne "loaded" && !$written{$mod}{$type};
 	}
     }
 }
