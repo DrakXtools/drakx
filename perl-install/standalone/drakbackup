@@ -639,12 +639,8 @@ sub do_expect {
 	eval { require Expect };
 	
 	if ($@) {
-		if ($mode eq 'sendkey') {
-			destroy_widget();
-			check_pkg_needs();
-		} else { 
-			$log_buff .= "perl-Expect not installed!", 
-		}
+		#- should have already been installed during configuration
+		$log_buff .= "perl-Expect not installed!" if check_pkg_needs(); 
 		return 1;
 	}
 	
@@ -658,19 +654,21 @@ sub do_expect {
 	my $no_perm;
 	my $bad_passwd;
 	my $bad_dir;
+	my $had_err;
 	my $timeout  = 20;
 	
 	my $exp_command;
 	my @send_files = "$backup_key.pub";
 	
 	#- just bypass progress for sendkey for now
-	$interactive = 0 if $mode eq "sendkey";
+	my $no_prog = 1;
+	$no_prog = 0 if $mode eq "sendkey";
 	
 	@send_files = @file_list_to_send_by_ftp if $mode eq "backup";
 	
-	$interactive and $pbar->set_fraction(0);
-	$interactive and $pbar3->set_fraction(0);
-	$interactive and progress($pbar, $plabel, 0.5, "File Transfer...");
+	$interactive && $no_prog and $pbar->set_fraction(0);
+	$interactive && $no_prog and $pbar3->set_fraction(0);
+	$interactive && $no_prog and progress($pbar, $plabel, 0.5, "File Transfer...");
 
 	foreach (@send_files) {
 		$exp_command = "scp -P $scp_port $_ $conf{LOGIN}\@$conf{HOST_NAME}:$conf{HOST_PATH}" if $mode eq "backup";
@@ -695,8 +693,8 @@ sub do_expect {
 		
 		my $exp = Expect->spawn($exp_command) or $in->ask_warn(N("Error"), N("Cannot spawn %s.", $exp_command));
 
-		$interactive and progress($pbar3, $plabel3, 1/@send_files, N("Total progress"));
-		$interactive and $stext->set_text($_);
+		$interactive && $no_prog and progress($pbar3, $plabel3, 1/@send_files, N("Total progress"));
+		$interactive && $no_prog and $stext->set_text($_);
 	
 		#- run scp, look for some common errors and try to track successful progress for GUI
 		$exp->expect($timeout,
@@ -714,18 +712,18 @@ sub do_expect {
 					if ($bad_passwd) { show_warning("f", N("Bad password on %s", $conf{HOST_NAME})) }
 					if ($no_perm) { show_warning("f", N("Permission denied transferring %s to %s", $_, $conf{HOST_NAME})) }
 					if ($bad_dir) { show_warning("f", N("Can't find %s on %s", $conf{HOST_PATH}, $conf{HOST_NAME})) }
+					$had_err = !$spawn_ok || $bad_passwd || $no_perm || $bad_dir;
 				} 
 			],
 			[ timeout => sub { show_warning("f", N("%s not responding", $conf{HOST_NAME})) } ],
 		); 
 
 		my $exit_stat = $exp->exitstatus;
-		$in->ask_warn(N("Information"), N("Transfer successful\nYou may want to verify you can login to the server with:\n\nssh -i %s %s\@%s\n\nwithout being prompted for a password.", $backup_key, $conf{LOGIN}, $conf{HOST_NAME})) if $exit_stat == 0 && $mode eq "sendkey";
+		$in->ask_warn(N("Information"), N("Transfer successful\nYou may want to verify you can login to the server with:\n\nssh -i %s %s\@%s\n\nwithout being prompted for a password.", $backup_key, $conf{LOGIN}, $conf{HOST_NAME})) if $exit_stat == 0 && !$had_err && $mode eq "sendkey";
 		$log_buff .= "$_\n" if $exit_stat == 0 && $mode eq "backup";
 		$exp->hard_close;
 	}
-	$interactive and progress($pbar, $plabel, 0.5, "Done...");
-	$interactive = 1 if $mode eq "sendkey";
+	$interactive && $no_prog and progress($pbar, $plabel, 0.5, "Done...");
 }
 
 sub ssh_client() {
@@ -1357,7 +1355,6 @@ sub handle_ignores2 {
 sub require_rpm {
     my $all_rpms_found = 1;
     my $res;
-    @list_of_rpm_to_install = ();
     foreach my $pkg (@_) {
 		$res = system("rpm -q $pkg > /dev/null");
 		if ($res == 256) { 
@@ -1369,21 +1366,19 @@ sub require_rpm {
 }
 
 sub check_pkg_needs() {
-	my $extra_pkg = '';
+	my @extra_pkg;
+	@list_of_rpm_to_install = ();
 	if ($conf{USE_NET}) {
-		$extra_pkg = 'rsync' if $conf{NET_PROTO} eq 'rsync';
-		$extra_pkg = 'sitecopy wget' if $conf{NET_PROTO} eq 'webdav';
-		$extra_pkg = 'perl-Expect' if $conf{NET_PROTO} eq 'ssh' && ($conf{USE_EXPECT} || $conf{DRAK_KEYS});
+		@extra_pkg = "rsync" if $conf{NET_PROTO} eq 'rsync';
+		@extra_pkg = ("sitecopy", "wget") if $conf{NET_PROTO} eq 'webdav';
+		@extra_pkg = "perl-Expect" if $conf{NET_PROTO} eq 'ssh' && ($conf{USE_EXPECT} || $conf{DRAK_KEYS});
 	}
-	$extra_pkg = 'mt-st' if $conf{USE_TAPE};
-	if ($extra_pkg) {
-		if (require_rpm($extra_pkg)) {
+	@extra_pkg = "mt-st" if $conf{USE_TAPE};
+	@extra_pkg = ("mkisofs", "cdrecord") if $conf{USE_CD};
+	if (@extra_pkg) {
+		if (require_rpm(@extra_pkg)) {
 			return 0;
 		} else {
-			#- this isn't entirely good, but it's the only way we get here currently
-			#- was getting strange return behavior before
-			#- still a problem, we can also get here from the cron screen
-			install_rpm(\&advanced_where);
 			return 1;
 		}		
 	}	
@@ -1731,7 +1726,11 @@ sub advanced_where_net_types {
 	$entry_net_type->entry->set_text($conf{NET_PROTO});
 	$button_xfer_keys->signal_connect('clicked', sub { 
 		if ($conf{PASSWD} && $conf{LOGIN} && $conf{HOST_NAME}) {
-			do_expect("sendkey");
+			if (check_pkg_needs()) {
+				install_rpm(\&advanced_where_net_types, $previous_function);
+			} else {
+				do_expect("sendkey");
+			}
 		} else {
 			$in->ask_warn(N("Error"), N("Need hostname, username and password!"));
 		}
@@ -2082,12 +2081,7 @@ sub advanced_where() {
 				}),
 				1, gtksignal_connect(my $button_where_cd = Gtk2::Button->new,  clicked => sub { 
 					destroy_widget(); 
-					if (require_rpm("mkisofs", "cdrecord")) { 
-						advanced_where_cd();
-					} else { 
-						destroy_widget();
-						install_rpm(\&advanced_where);
-					}
+					advanced_where_cd();
 				}),
 				1, gtksignal_connect(my $button_where_hd = Gtk2::Button->new,  clicked => sub { 
 					destroy_widget(); 
@@ -2366,11 +2360,15 @@ sub advanced_box() {
 ################################################  WIZARD  ################################################  
 
 sub wizard_step3() {
+	destroy_widget();
 	my $no_device = 1 if $conf{USE_CD} && $conf{CD_DEVICE} eq '' || $conf{USE_TAPE} && $conf{TAPE_DEVICE} eq '' || $conf{USE_NET} && $conf{NET_PROTO} eq '';
 	if ($no_device) {
 		show_warning("f", N("Backup destination not configured..."));
-		destroy_widget();
-    	wizard_step2();
+		wizard_step2();
+		return;
+	}
+	if (check_pkg_needs()) {
+		install_rpm(\&wizard_step3, undef);
 		return;
 	}
 	my $box2;    
@@ -2422,16 +2420,16 @@ sub wizard_step2() {
  					0, my $check_wizard_cd = new Gtk2::CheckButton(N("On CD-R")),
  					1, new Gtk2::VBox(0, 5),	
  					0, gtkset_sensitive(gtksignal_connect(Gtk2::Button->new(N("Configure")), clicked => sub {
- 						destroy_widget();
- 						advanced_where_cd(\&wizard_step2);
+						destroy_widget();
+						advanced_where_cd(\&wizard_step2);
  					}), $conf{USE_CD}),
  				),
  				0, gtkpack_(new Gtk2::HBox(0, 15),	      
  					0, my $check_wizard_tape = new Gtk2::CheckButton(N("On Tape Device")),
  					1, new Gtk2::VBox(0, 5),
  					0, gtkset_sensitive(gtksignal_connect(Gtk2::Button->new(N("Configure")), clicked => sub {
- 						destroy_widget();
- 						advanced_where_tape(\&wizard_step2);
+						destroy_widget();
+						advanced_where_tape(\&wizard_step2);
  					}), $conf{USE_TAPE}),
  				),
 				1, new Gtk2::VBox(0, 5),
@@ -4016,7 +4014,9 @@ sub button_box_adv() {
 				$previous_widget->();
 			}),
 			0, gtksignal_connect(Gtk2::Button->new(N("Save")), clicked => sub { 
-				unless (check_pkg_needs()) {
+				if (check_pkg_needs()) {
+					install_rpm(\&$current_widget, undef);
+				} else {
 					if (!save_conf_file()) {
 						destroy_widget();
 						$previous_widget->();
@@ -4270,26 +4270,26 @@ sub button_box_main() {
 ################################################  MESSAGES  ################################################  
 
 sub install_rpm {
-    my ($previous_function) = @_;
-	#- catch a crash when calling help
-	#- this GUI control technique is kind of funky
-	if ($previous_function eq '') {
-		$previous_function = \&advanced_where;
-	}
+    my ($calling_widget, $previous) = @_;
 	destroy_widget();
     gtkpack($advanced_box,
-		my $box_what_user = gtkpack_(new Gtk2::VBox(0, 15),
+		my $rpm_box = gtkpack_(new Gtk2::VBox(0, 15),
 			0, N("The following packages need to be installed:\n") . join(' ', @list_of_rpm_to_install),
 			0, new Gtk2::HSeparator,
 			0, gtksignal_connect(Gtk2::Button->new(N("Install")), clicked => sub {  
-				system("/usr/sbin/urpmi --X @list_of_rpm_to_install"); 
-				destroy_widget();
-				$previous_widget->();		  
+				my $installed = system("/usr/sbin/urpmi --X @list_of_rpm_to_install"); 
+				if ($installed == 0) {
+					destroy_widget();
+					$calling_widget->($previous);
+				} else {
+					#- no string for the moment - too late for translators
+					$in->ask_warn(N("Error"), @list_of_rpm_to_install);
+				} 
 			}),
 		),
 	);
-    fonction_env(\$box_what_user, \&install_rpm, \&$previous_function);
-    $up_box->show_all;
+	$central_widget = \$rpm_box;
+	$up_box->show_all;
 }
 
 sub message_norestore_box() {
