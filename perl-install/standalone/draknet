@@ -381,7 +381,7 @@ sub configure_lan {
     my @infos;
     my @conf_data;
 
-    if ($all_cards < 1) {
+    if (@all_cards < 1) {
 	my $dialog = new Gtk::Dialog();
 	$dialog->set_position(1);
 	$dialog->vbox->set_border_width(10);
