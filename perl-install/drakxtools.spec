@@ -365,8 +365,6 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
     * when we're under 2.6.x
     * for bewan modem (not for other adsl modems) and pci rtc modems
   o only kill pppoa for sagem modem (fix bewan modem shutdown)
-  o always offer to restart adsl connections
-  o on adsl link shutdown, only kill pppoa for sagem modem
 - draksound: install alsa-utils if needed (#6288)
 - include drakups again
 
