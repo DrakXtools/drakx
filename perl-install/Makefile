@@ -1,5 +1,8 @@
 include Makefile.config
 
+POFILES = $(shell ls share/po/*.po)
+MOFILES = $(POFILES:%.po=%.mo)
+
 .PHONY: all $(DIRS) install clean stage2 full_stage2 verify_c 
 
 all: TAGS $(DIRS)
@@ -31,6 +34,9 @@ test_pms: verify_c
 verify_c:
 	./verify_c $(PMS)
 
+%.mo: %.po
+	msgfmt -o $@ $<
+
 install_pms: $(DIRS)
 	for i in `perl -ne 's/sub (\w+?)_? {.*/$$1/ and print' commands.pm` sync; do ln -sf commands $(DEST)/usr/bin/$$i; done
 
@@ -50,7 +56,7 @@ install_pms: $(DIRS)
 	chmod a+x $(DESTREP4PMS)/g_auto_install
 	chmod a+x $(DESTREP4PMS)/live_install*
 
-get_needed_files: $(DIRS)
+get_needed_files: $(DIRS) $(MOFILES)
 #	export PERL_INSTALL_TEST=1 ; strace -f -e trace=file -o '| grep -v "(No such file or directory)" | sed -e "s/[^\"]*\"//" -e "s/\".*//" | grep "^/" | grep -v -e "^/tmp" -e "^/home" -e "^/proc" -e "^/var" -e "^/dev" -e "^/etc" -e "^/usr/lib/rpm" > /tmp/list ' $(PERL) -d install2 < /dev/null
 	eval `perl -V:version`; \
 	cat share/list `../tools/specific_arch share/list` | \
@@ -139,7 +145,6 @@ endif
 
 	for i in ../all.modules/modules.cz*; do cp -f $$i $(DEST)/lib/; done
 
-	touch share/po/DrakX.pot share/po/*.po
 	$(MAKE) -C share/po install NAME=libDrakX LOCALEDIR=$(DEST)/usr/share/locale_special
 
 #	echo -e '#!/bin/sh\n\nexec "/usr/bin/sh"' > $(DEST)/usr/bin/runinstall2
