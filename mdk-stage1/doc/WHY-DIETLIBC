@@ -1,0 +1,50 @@
+(the dietlibc is a replacement for the glibc, which aim is to produce
+smaller statically linked binaries)
+
+
+The use for dietlibc in the stage1 was clear because currently used
+install process on x86 is from a 1.44 Mbytes floppy. On this floppy we
+need to fit the kernel, modules (scsi and network access), and the code to
+do the basic things to load the stage2. The only part on which we could
+progress was the code.
+
+As always, figures demonstrate evidences. Here are the size of the
+binaries used for the cdrom, disk, network and full floppy installs, using
+newt as the UI library:
+
+	- with glibc
+
+-rwxr-xr-x    1 gc       gc         569448 May 15 15:29 stage1-cdrom
+-rwxr-xr-x    1 gc       gc         572264 May 15 15:29 stage1-disk
+-rwxr-xr-x    1 gc       gc         624712 May 15 15:30 stage1-network
+-rwxr-xr-x    1 gc       gc         720360 May 15 15:29 stage1-full
+
+	- with dietlibc
+
+-rwxr-xr-x    1 gc       gc         169332 May 15 14:26 stage1-cdrom
+-rwxr-xr-x    1 gc       gc         172180 May 15 14:26 stage1-disk
+-rwxr-xr-x    1 gc       gc         198612 May 15 14:26 stage1-network
+-rwxr-xr-x    1 gc       gc         251764 May 15 14:26 stage1-full
+
+
+The `stage1-full' binary has code for many things, most notably: data
+decrunching (bzlib), archive extraction (in-house format), module loading
+(insmod from busybox), PCI detection, ide and scsi handling,
+cdrom/disk/loopback mounting, DHCP client negociation (redhat+grub), NFS
+mounting (util-linux), FTP and HTTP transmission (redhat), pcmcia
+initializing (pcmcia-cs), UI interaction (slang/newt); with use of the
+dietlibc, the binary is only 250 kbytes!
+
+
+Due to the modular coding, it is also possible to choose to not use
+slang/newt as the UI, but a stdio-only UI. In that case, the binaries get
+even smaller:
+
+-rwxr-xr-x    1 gc       gc         104500 May 15 15:46 stage1-cdrom*
+-rwxr-xr-x    1 gc       gc         107348 May 15 15:46 stage1-disk*
+-rwxr-xr-x    1 gc       gc         133972 May 15 15:47 stage1-network*
+-rwxr-xr-x    1 gc       gc         187348 May 15 15:46 stage1-full*
+
+
+
+gc [Tue May 15 15:58:34 2001]

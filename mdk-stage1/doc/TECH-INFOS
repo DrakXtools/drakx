@@ -1,0 +1,45 @@
+
+| (*) Automatic install
+\----------------------
+
+This feature is used to replace redhat kickstart. I use the kernel
+parameter "automatic" with the following keywords:
+
+from list:
+	method          nfs, ftp, http, cdrom, disk
+	network         static, dhcp
+	interface	eth0, eth1, ..
+
+giving (string) values:
+    (static IP infos)
+	ip
+	dns
+	gateway
+	netmask
+
+    (2nd step network config)
+	hostname
+	domain
+
+    (3rd step nfs, ftp, http installs)
+	server
+	directory
+
+    (3rd step ftp only)
+	user
+	pass
+
+    (2nd step disk install)
+	disk
+
+    (3rd step disk install)
+	partition
+
+    (4th step disk install)
+	directory
+
+
+Keywords must be passed with commas and colons, that is for example:
+
+	automatic=method:nfs,network:static,ip:192.168.1.24,server:192.168.1.7,directory:/stable/i586
+

@@ -1,0 +1,185 @@
+-------------------------------------------------------
+*  Stage1 of the Linux-Mandrake installation program  *
+-------------------------------------------------------
+
+
+[ Author ]
+
+	Guillaume Cottenceau (gc@mandrakesoft.com)
+
+
+[ Copyright ]
+
+	Copyright 2000 MandrakeSoft
+
+	Partially inspired by Redhat stuff (install from 5.x and 7.x) copyright
+	Red Hat Software, and Debian stuff (boot-floppies) copyright by their
+	respective holders.
+
+
+[ Licence ]
+
+	This program is free software; you can redistribute it and/or modify
+	it under the terms of the GNU General Public License as published by
+	the Free Software Foundation; either version 2 of the License, or
+	(at your option) any later version.
+	
+	This program is distributed in the hope that it will be useful,
+	but WITHOUT ANY WARRANTY; without even the implied warranty of
+	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+	GNU General Public License for more details.
+	
+	You should have received a copy of the GNU General Public License
+	along with this program; if not, write to the Free Software
+	Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
+
+
+	*** WARNING! ***
+
+	This General Public License does not permit incorporating any part
+	of this program as a library into proprietary programs.
+
+
+[ Online ]
+
+	http://us.mandrakesoft.com/~gc/html/stage1.html
+
+
+[ Purpose ]
+
+	This code will take the control of the computer after that Linux
+	kernel booted properly, and will try to run the main installer
+	(also known as "stage 2") from a series of different media
+	including harddrive, cdrom, and network.
+
+	Use the source, Luke.
+
+
+
+
+                -=-=-- Okay, now, more details --=-=-
+
+
+	[ Installing Linux-Mandrake ]
+
+Per default, just insert your Linux-Mandrake Installation CD into your
+CDROM tray, be sure your system BIOS is configured to boot on your CDROM,
+and that's all.
+
+If you have multiple CDROM drives and the installer can't autodetect in
+which CDROM drive is the disc, it may ask you to choose the correct drive,
+between your CDROM drives.
+
+Also, if you want to install from an SCSI CDROM, the installer should
+detect your SCSI adapter; if it fails you may have to select the right
+driver and/or supply additional parameters.
+
+
+        [ Position of the problem ]
+
+The need for alternate installation methods come with more specific
+hardware configuration and/or need for frequent updates of the Installer
+software.
+
+All of these methods will require to use a special boot disk. The method
+is to download it and then to copy it "physically" to a floppy with the
+command:
+
+# dd if=<boot-disk> of=/dev/fd0
+
+Our boot disks are called "cdrom.img", "network.img", etc.
+
+
+        [ Installation from CDROM ]
+
+The first situation you may encounter is an old BIOS which does not permit
+you to boot from your CDROM drive.
+
+In that case, you'll need to use the "cdrom.img" image file. The steps are
+the same as with CDROM boot, and everything should be automatic.
+
+
+        [ Installation from DISK ]
+
+If you like trying occasionnally our development version, the Cooker, one
+of the easiest way is to grab a local copy of the Distribution on one of
+your local hard drives, and to install from that location.
+
+At present time, you can install from IDE or SCSI drives, from Linux
+(ext2), Windows (vfat) or Reiserfs partition.
+
+In that case, you'll need to use the "hd.img" image file. The dialogs will
+ask you to choose the DISK drive to use to install from, then the
+partition on which you copied the Distribution, then the location
+(directory) in which you copied the Distribution.
+
+
+        [ Installation from NETWORK ]
+
+For convenience, you can also install from a NFS volume, from a FTP
+server, or from a HTTP server. NFS installs are maybe the fastest
+and most convenient possible, so if you need to do frequent and/or
+multiple installs, you may like this option.
+
+In that case, you'll need to use the "network.img" image file. If you have
+PCI network card(s), you'll probably have to only setup your network
+options. If not, you'll have to choose the appropriate driver(s) and/or
+optional parameters. Supported network configurations include static IP
+allocation and DHCP automatic configuration.
+
+
+        [ Installation from PCMCIA ]
+
+If you want to perform an installation on your laptop that is not based on
+local IDE CDROM or DISK, nor on built-in network card, but on PCMCIA
+extension (probably a network adapter or CDROM drive), you'll need the
+"pcmcia.img" image file.
+
+PCMCIA services should automatically start and be transparent to you.
+Then, you'll follow the instructions according to your preferred
+installation method.
+
+
+	[ Monitoring a stage1 session ]
+
+Linux supports virtual consoles. You can switch between them by issueing
+Ctrl+Alt+Fx key, in which 'x' is the number of the console. Here's console
+occupancy during stage1.
+
+(#1) The user-interface of the stage1 is on the first console. In case of
+newt interaction, it's provided with a neat blue and black color scheme,
+and nice widgets. In case of stdio interaction (cdrom and disk installs),
+it's more basic but still usable :-).
+
+(#2) A shell is provided on second console in some cases (you need to
+compile it with -DSPAWN_SHELL and you need to provide a valid shell in the
+initrd) and of course it's not in, in image files of Linux-Mandrake
+releases because it's too much diskspace.
+
+(#3) The log is printed out on the third console. This is the location
+where you can find most valuable information, prefixed by a '*'. See
+"log.h" for calls that print things out to the log.
+
+(#4) The kernel messages are printed on the fourth console. There is a
+process forked very early in the init (the program before the stage1)
+which monitors /proc/kmsg for new kernel messages. Also, syslog stuff (the
+logs commited by the programs) should appear on the /dev/log Unix socket,
+this is also printed on this console.
+
+(#5) Former place for the stderr of insmod calls. It's not used anymore.
+
+(#6) Place where a trivial interactive communication with the stage1 is
+set up if the parameter -DSPAWN_INTERACTIVE is compiled in. Basically, you
+can set switches such as "expert" and "rescue" on the fly with this
+feature. It's implemented with a fork and a Unix pipe.
+
+
+        [ Rescueing a system ]
+
+Since Linux-Mandrake 7.1, we provide a rescue system through each of the
+previously described methods. You don't need a special "rescue.img" file.
+Just hit "F1" at boot time, type in "rescue", and follow the first steps
+of the installation according to the method you chose (choose
+disks/partitions for disk method, network parameters for network method,
+etc). Then, you'll end up with a workable system, very useful to rescue a
+damaged system, or do other basic actions.

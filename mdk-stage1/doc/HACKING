@@ -1,0 +1,31 @@
+If you have to boot pretty often, you'll appreciate to speed the things up
+a little.
+
+Here's what we use: the GRUB feature to boot from the network using the
+DHCP protocol and the TFTP protocol.
+
+Here's the "menu.lst" to do that:
+
+-=-=--
+
+timeout 0
+
+title linux
+dhcp
+tftpserver 192.168.1.17
+kernel (nd)/tftpboot/gc/vmlinuz ramdisk=32000 vga=788
+initrd (nd)/tftpboot/gc/network.rdz
+
+-=-=--
+
+
+The option "tftpserver" is used to override the tftpserver address given
+as an answer by the DHCP server. That way, you'll not need to bother your
+system administrator to modify his dhcp server configuration.
+
+The directory /tftpboot seems to be the only one defaultly accepted by the
+server, and its subdirs.
+
+
+Of course, your GRUB needs to be compiled with the specific code for your
+network card; use ./configure --help in the GRUB build dir for more infos.
