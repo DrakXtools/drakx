@@ -131,10 +131,13 @@ sub ask_from_listf_no_check {
     my ($o, $title, $message, $f, $l, $def, $help) = @_;
 
     if (@$l <= 2 && !$::isWizard) {
-	ask_from_entries_refH_powered_no_check($o, 
-	  { title => $title, messages => $message, ok => $l->[0] && may_apply($f, $l->[0]), 
-	    if_($l->[1], cancel => may_apply($f, $l->[1]), focus_cancel => $def eq $l->[1]) }, []
-        ) ? $l->[0] : $l->[1];
+	my $ret = eval {
+	    ask_from_entries_refH_powered_no_check($o, 
+	      { title => $title, messages => $message, ok => $l->[0] && may_apply($f, $l->[0]), 
+		if_($l->[1], cancel => may_apply($f, $l->[1]), focus_cancel => $def eq $l->[1]) }, []
+            ) ? $l->[0] : $l->[1];
+	};
+	$@ =~ /^wizcancel/ ? undef : $ret;
     } else {
 	ask_from_entries_refH($o, $title, $message, [ { val => \$def, type => 'list', list => $l, help => $help, format => $f } ]) && $def;
     }
