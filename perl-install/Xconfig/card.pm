@@ -154,7 +154,7 @@ sub probe() {
     foreach (@cards) { 
 	$_->{MULTI_HEAD} && $_->{card_name} =~ /G[24]00/ or next;
 	if ($ENV{MATROX_HAL}) {
-#	    $_->{need_MATROX_HAL} = 1;
+	    $_->{need_MATROX_HAL} = 1;
 	} else {
 	    delete $_->{MULTI_HEAD};
 	}
@@ -273,7 +273,7 @@ sub configure {
 	card_config__not_listed($in, $card, $options) or return;
     }
 
-    xfree_and_glx_choose($in, $card, $auto);
+    xfree_and_glx_choose($in, $card, $auto) or return;
 
     $card->{prog} = install_server($card, $options, $do_pkgs);
     
@@ -345,6 +345,7 @@ sub xfree_and_glx_choose {
     log::l("Using $tc->{text}");
     $tc->{code}();
     set_glx_restrictions($card);
+    1;
 }
 
 sub multi_head_choices {
