@@ -982,7 +982,8 @@ _("Do you want to generate an auto install floppy for linux replication?"), $flo
 	output "$workdir/ks.cfg", install_any::generate_ks_cfg($o);
 	output "$workdir/boot.msg", "\n7m",
 "!! If you press enter, an auto-install is going to start.
-   All data on this computer is going to be lost !!
+    ALL data on this computer is going to be lost,
+    including any Windows partitions !!
 ", "7m\n";
 
 	local $o->{partitioning}{clearall} = 1;

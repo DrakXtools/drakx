@@ -1,6 +1,6 @@
 #!/usr/bin/perl
 
-@ARGV >= 2 or die "usage: $0 <image> cdrom|hd|network|blank|network_ks|pcmcia|live|tftp|tftprd\n";
+@ARGV >= 2 or die "usage: $0 <image> cdrom|hd|network|blank|pcmcia|live|tftp|tftprd\n";
 
 use Config;
 Config->import;

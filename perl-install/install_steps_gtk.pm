@@ -25,6 +25,7 @@ use interactive_gtk;
 use install_any;
 use diskdrake;
 use log;
+use mouse;
 use help;
 use lang;
 
@@ -177,15 +178,15 @@ sub selectInstallClass1 {
 #------------------------------------------------------------------------------
 sub selectMouse {
     my ($o, $force) = @_;
-    my $old_dev = $o->{mouse}{device};
     $o->SUPER::selectMouse($force);
 
-    my $dev = $o->{mouse}{device};
-    if ($old_dev ne $dev && $dev =~ /ttyS/ && !$::testing) {
+    if (!$::testing) {
 	log::l("telling X server to use another mouse");
-	eval { commands::modprobe("serial") };
-	symlinkf($dev, "/dev/mouse");
-	c::setMouseMicrosoft($ENV{DISPLAY});
+	eval { commands::modprobe("serial") } if $o->{mouse}{device} =~ /ttyS/;
+	symlinkf($o->{mouse}{device}, "/dev/mouse");
+	my $id = mouse::xmouse2xId($o->{mouse}{XMOUSETYPE});
+	log::l("XMOUSETYPE: $o->{mouse}{XMOUSETYPE} = $id");
+	c::setMouseLive($ENV{DISPLAY}, $id);
     }
 }
 
@@ -895,8 +896,7 @@ EndSection
 Section "Pointer"
    Protocol    "$mouse_type"
    Device      "/dev/mouse"
-   Emulate3Buttons
-   Emulate3Timeout    50
+   ZAxisMapping 4 5
 EndSection
 
 $wacom

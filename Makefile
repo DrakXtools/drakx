@@ -3,7 +3,6 @@ ARCH := $(patsubst sparc%,sparc,$(ARCH))
 
 RELEASE_BOOT_IMG = hd.img cdrom.img network.img
 ifeq (i386,$(ARCH))
-BOOT_IMG = pcmcia_ks.img network_ks.img
 RELEASE_BOOT_IMG += pcmcia.img
 endif
 ifeq (sparc,$(ARCH))
@@ -22,7 +21,7 @@ UPLOAD_DEST = $(UPLOAD_DEST_)/cooker
 UPLOAD_DEST_CONTRIB = $(UPLOAD_DEST_)/contrib
 UPLOAD_SPARC_DEST = /mnt/BIG/distrib/sparc
 
-.PHONY: dirs $(FLOPPY_IMG) install network_ks.rdz pcmcia_ks.rdz
+.PHONY: dirs $(FLOPPY_IMG) install
 
 install: build autoboot rescue
 	for i in images misc Mandrake Mandrake/base; do install -d $(ROOTDEST)/$$i ; done
@@ -57,7 +56,7 @@ rescue: modules
 
 network_ks.rdz pcmcia_ks.rdz: %_ks.rdz: %.rdz
 
-network.rdz pcmcia.rdz hd.rdz cdrom.rdz live.rdz tftp.rdz tftprd.rdz network64.rdz hd64.rdz cdrom64.rdz live64.rdz tftp64.rdz tftprd64.rdz blank.rdz: dirs modules
+$(BOOT_RDZ): dirs modules
 	./make_boot_img $@ $(@:%.rdz=%)
 
 $(BOOT_IMG): %.img: %.rdz

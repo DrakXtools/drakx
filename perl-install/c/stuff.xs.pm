@@ -27,6 +27,7 @@ print '
 #include <gdk/gdkx.h>
 #include <X11/Xlib.h>
 #include <X11/extensions/xf86misc.h>
+#include <term.h>
 
 #define SECTORSIZE 512
 ';
@@ -55,6 +56,22 @@ FD_t fd2FD_t(int fd) {
   return f;
 }
 
+void initIMPS2() {
+  unsigned char imps2_s1[] = { 243, 200, 243, 100, 243, 80, };
+  unsigned char imps2_s2[] = { 246, 230, 244, 243, 100, 232, 3, };
+
+  int fd = open("/dev/cdrom", O_WRONLY);
+  if (fd < 0) return;
+
+  write (fd, imps2_s1, sizeof (imps2_s1));
+  usleep (30000);
+  write (fd, imps2_s2, sizeof (imps2_s2));
+  usleep (30000);
+  tcflush (fd, TCIFLUSH);
+  tcdrain(fd);
+}
+
+
 ';
 
 print '
@@ -81,18 +98,20 @@ Xtest(display)
   RETVAL
 
 void
-setMouseMicrosoft(display)
+setMouseLive(display, type)
   char *display
+  int type
   CODE:
   {
     XF86MiscMouseSettings mseinfo;
     Display *d = XOpenDisplay(display);
     if (d) {
       if (XF86MiscGetMouseSettings(d, &mseinfo) == True) {
-        mseinfo.type = MTYPE_MICROSOFT;
-        mseinfo.flags = 128;
+        mseinfo.type = type;
+        mseinfo.flags |= 128;
         XF86MiscSetMouseSettings(d, &mseinfo);
         XFlush(d);
+        if (type == MTYPE_IMPS2) initIMPS2();
       }
     }
   }

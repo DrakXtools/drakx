@@ -304,7 +304,7 @@ sub partitionDisks {
     if (cat_("/proc/mounts") =~ m|/\w+/(\S+)\s+/tmp/hdimage\s+(\S+)|) {
 	$stage1_hd = { dev => $1, fs => $2 };
 	install_any::getFile("XXX"); #- close still opened filehandle
-	fs::umount("/tmp/hdimage");
+	eval { fs::umount("/tmp/hdimage") };
     }
     $::o->{steps}{formatPartitions}{done} = 0;
     eval { fs::umount_all($o->{fstab}, $o->{prefix}) } if $o->{fstab} && !$::testing;
@@ -326,7 +326,7 @@ sub partitionDisks {
     unless ($::testing) {
 	$o->rebootNeeded foreach grep { $_->{rebootNeeded} } @{$o->{hds}};
     }
-    fs::mount($stage1_hd->{dev}, "/tmp/hdimage", $stage1_hd->{fs}) if $stage1_hd;
+    eval { fs::mount($stage1_hd->{dev}, "/tmp/hdimage", $stage1_hd->{fs}) } if $stage1_hd;
 
     $o->{fstab} = [ fsedit::get_fstab(@{$o->{hds}}, $o->{raid}) ];
     fsedit::get_root($o->{fstab}) or die 
@@ -459,7 +459,7 @@ sub configureTimezone {
 	add2hash($o->{timezone}, { timezone::read($f) });
     }
     $o->{timezone}{timezone} ||= timezone::bestTimezone(lang::lang2text($o->{lang}));
-    $o->{timezone}{UTC} = !$::beginner && !grep { isFat($_) } @{$o->{fstab}} unless exists $o->{timezone}{UTC};
+    $o->{timezone}{UTC} = !$::beginner && !grep { isFat($_) || isNT($_) } @{$o->{fstab}} unless exists $o->{timezone}{UTC};
     $o->timeConfig($f, $clicked);
 }
 #------------------------------------------------------------------------------
@@ -632,11 +632,7 @@ sub main {
 
     if ($::auto_install) {
 	require install_steps_auto_install;
-	if ($::auto_install eq 'floppy') {
-	    eval { $o = $::o = install_any::loadO($o, "floppy") } if $@;
-	} else {
-	    eval { $o = $::o = install_any::loadO($o, $::auto_install) };
-	}
+	eval { $o = $::o = install_any::loadO($o, $::auto_install) };
 	if ($@) {
 	    log::l("error using auto_install, continuing");
 	    undef $::auto_install;

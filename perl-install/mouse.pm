@@ -66,6 +66,35 @@ map_index {
     $mouses[$::i] = \%l;
 } @mouses;
 
+#- xmousetypes must be sorted as found in /usr/include/X11/extensions/xf86misc.h
+#- so that first mean "0", etc
+my @xmousetypes = (
+		   "Microsoft",
+		   "MouseSystems",
+		   "MMSeries",
+		   "Logitech",
+		   "BusMouse",
+		   "Logitech",
+		   "PS/2",
+		   "MMHittab",
+		   "GlidePoint",
+		   "IntelliMouse",
+		   "ThinkingMouse",
+		   "IMPS/2",
+		   "ThinkingMousePS/2",
+		   "MouseManPlusPS/2",
+		   "GlidePointPS/2",
+		   "NetMousePS/2",
+		   "NetScrollPS/2",
+		   "SysMouse",
+		   "Auto",
+		   "AceCad",
+		   "WSMouse",
+		   "USB",
+#MouseMan,
+);
+sub xmouse2xId { my ($id) = @_; my $i; map_index { $_ eq $id and $i = $::i } @xmousetypes; $i }
+
 sub names { map { $_->{FULLNAME} } @mouses }
 
 sub name2mouse {
