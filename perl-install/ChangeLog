@@ -1,3 +1,21 @@
+2001/02/15  Pixel  <pixel@mandrakesoft.com>
+
+	* install_steps_gtk.pm (installPackages): fix i_images
+	(installPackages): traktolpilization and advertising
+
+	* Makefile (get_needed_files): copy png files instead of xpm's
+
+	* fsedit.pm (suggestions_mntpoint): fix
+
+	* my_gtk.pm (gtkcreate_png): add error message, syntax cleanup
+
+	* share/list: add GdkImlib stuff
+
+	* perl2fcalls: add Gtk::Gdk::ImlibImage
+
+	* install2.pm (main): set SHARE_PATH to /export/Mandrake/mdkinst/usr/share
+	if it exists
+
 2001/02/15  dam's  <damien@mandrakesoft.com>
 
 	* my_gtk.pm, any.pm, install_gtk.pm, install_steps_interactive.pm,
