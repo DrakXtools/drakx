@@ -153,7 +153,7 @@ sub selectPackagesToUpgrade($) {
     my ($o) = @_;
 
     require pkgs;
-    pkgs::selectPackagesToUpgrade($o->{packages}, $o->{prefix}, $o->{base}, $o->{toRemove});
+    pkgs::selectPackagesToUpgrade($o->{packages}, $o->{prefix}, $o->{base}, $o->{toRemove}, $o->{toSave});
 }
 
 sub addToBeDone(&$) {

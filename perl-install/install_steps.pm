@@ -211,15 +211,21 @@ sub installPackages($$) {
     my ($o, $packages) = @_;
 
     if (@{$o->{toRemove} || []}) {
-	my @mdkgisave = qw( /etc/passwd );
-
 	#- hack to ensure proper upgrade of packages from other distribution,
-	#- as release number are not mandrake based. this causes save of very
-	#- important files (not all) and restore them after.
-	#- it is not enough to dop only that.
-	do { unlink "$o->{prefix}/$_.mdkgisave"; rename "$o->{prefix}/$_", "$o->{prefix}/$_.mdkgisave"; } foreach @mdkgisave;
+	#- as release number are not mandrake based. this causes save of
+	#- important files and restore them after.
+	foreach (@{$o->{toSave} || []}) {
+	    if (-e "$o->{prefix}/$_") {
+		unlink "$o->{prefix}/$_.mdkgisave"; rename "$o->{prefix}/$_", "$o->{prefix}/$_.mdkgisave";
+	    }
+	}
 	pkgs::remove($o->{prefix}, $o->{toRemove});
-	do { unlink "$o->{prefix}/$_"; rename "$o->{prefix}/$_.mdkgisave", "$o->{prefix}/$_"; } foreach @mdkgisave;
+	foreach (@{$o->{toSave} || []}) {
+	    if (-e "$o->{prefix}/$_.mdkgisave") {
+		unlink "$o->{prefix}/$_"; rename "$o->{prefix}/$_.mdkgisave", "$o->{prefix}/$_";
+	    }
+	}
+	$o->{toSave} = [];
     }
 
     #- hack to ensure proper ordering for installation of packages.
@@ -574,7 +580,7 @@ sub setupXfreeAfter {
 	    Xconfigurator::rewriteInittab(3) unless $::testing; #- disable automatic start-up of X11 on error.
 	}
     }
-    if ($o->{X}{card}{default_depth} >= 16 || $o->{X}{card}{default_wres} >= 1024) {
+    if ($o->{X}{card}{default_depth} >= 16 && $o->{X}{card}{default_wres} >= 1024) {
 	log::l("setting large icon style for kde");
 	install_any::kderc_largedisplay($o->{prefix});
     }

@@ -363,8 +363,8 @@ sub versionCompare($$) {
     }
 }
 
-sub selectPackagesToUpgrade($$$;$) {
-    my ($packages, $prefix, $base, $toRemove) = @_;
+sub selectPackagesToUpgrade($$$;$$) {
+    my ($packages, $prefix, $base, $toRemove, $toSave) = @_;
 
     log::l("reading /usr/lib/rpm/rpmrc");
     c::rpmReadConfigFiles() or die "can't read rpm config files";
@@ -377,8 +377,7 @@ sub selectPackagesToUpgrade($$$;$) {
     my %installedFilesForUpgrade; #- help searching package to upgrade in regard to already installed files.
 
     #- help removing package which may have different release numbering
-    my %toRemove;
-    map { $toRemove{$_} = 1 } @{$toRemove || []};
+    my %toRemove; map { $toRemove{$_} = 1 } @{$toRemove || []};
 
     #- mark all files which are not in /etc/rc.d/ for packages which are already installed but which
     #- are not in the packages list to upgrade.
@@ -391,14 +390,15 @@ sub selectPackagesToUpgrade($$$;$) {
 					      c::headerGetEntry($header, 'version'). '-' .
 					      c::headerGetEntry($header, 'release')));
 			 if ($p) {
-			     if ($otherPackage && versionCompare(c::headerGetEntry($header, 'version'), $p->{version}) <= 0) {
+			     my $version_cmp = versionCompare(c::headerGetEntry($header, 'version'), $p->{version});
+			     if ($otherPackage && $version_cmp <= 0) {
 				 $toRemove{$otherPackage} = 1;
 			     } else {
 				 eval { getHeader($p) }; $@ && log::l("cannot get the header for package $p->{name}");
 				 $p->{installed} = 1 if $p->{header} ?
 				   c::rpmVersionCompare($header, $p->{header}) >= 0 :
-				       (versionCompare(c::headerGetEntry($header, 'version'), $p->{version}) > 0 ||
-					versionCompare(c::headerGetEntry($header, 'version'), $p->{version}) == 0 &&
+				       ($version_cmp > 0 ||
+					$version_cmp == 0 &&
 					versionCompare(c::headerGetEntry($header, 'release'), $p->{release} >= 0));
 			     }
 			 } else {
@@ -496,6 +496,35 @@ sub selectPackagesToUpgrade($$$;$) {
     #- clean false value on toRemove.
     delete $toRemove{''};
 
+    #- get filenames that should be saved for packages to remove.
+    #- typically config files, but it may broke for packages that
+    #- are very old when compabilty has been broken.
+    #- but new version are saved to .rpmnew so it not so hard !
+    if ($toSave && keys %toRemove) {
+	c::rpmdbTraverse($db, sub {
+			     my ($header) = @_;
+			     print "header=$header\n";
+			     my $otherPackage = (c::headerGetEntry($header, 'name'). '-' .
+						 c::headerGetEntry($header, 'version'). '-' .
+						 c::headerGetEntry($header, 'release'));
+			     print "other=$otherPackage\n";
+			     if ($toRemove{$otherPackage}) {
+				 my @files = c::headerGetEntry($header, 'filenames');
+				 my @flags = c::headerGetEntry($header, 'fileflags');
+				 print "count-1=$#files\n";
+				 for my $i (0..$#flags) {
+				     if ($flags[$i] & c::RPMFILE_CONFIG()) {
+					 print "before adding ... ";
+					 push @$toSave, $files[$i];
+					 print "after adding ... $files[$i]\n";
+				     }
+				 }
+			     }
+			     print "before leaving........\n\n";
+			 });
+    }
+
+    log::l("before closing db");
     #- close db, job finished !
     c::rpmdbClose($db);
     log::l("done selecting packages to upgrade");

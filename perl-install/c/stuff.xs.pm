@@ -251,7 +251,7 @@ rpmdbTraverse(db, ...)
   }
   count = 0;
   num = rpmdbFirstRecNum(db);
-  while (num) {
+  while (num>0) {
     if (callback != &PL_sv_undef && SvROK(callback)) {
       h = rpmdbGetRecord(db, num);
       {
@@ -623,19 +623,37 @@ headerGetEntry_int(h, query)
   RETVAL
 
 void
+headerGetEntry_int_list(h, query)
+  void *h
+  int query
+  PPCODE:
+  int i, type, count = 0;
+  int_32 *intlist = (void **) NULL;
+  if (headerGetEntry((Header) h, query, &type, (void**) &intlist, &count)) {
+    if (count > 0) {
+      EXTEND(SP, count);
+      for (i = 0; i < count; i++) {
+        PUSHs(sv_2mortal(newSViv(intlist[i])));
+      }
+    }
+  }
+
+void
 headerGetEntry_string_list(h, query)
   void *h
   int query
   PPCODE:
   int i, type, count = 0;
   char **strlist = (char **) NULL;
-  if (headerGetEntry((Header) h, query, &type, (void**) &strlist, &count) && count) {
-    EXTEND(SP, count);
-    for (i = 0; i < count; i++) {
-      PUSHs(sv_2mortal(newSVpv(strlist[i], 0)));
+  if (headerGetEntry((Header) h, query, &type, (void**) &strlist, &count)) {
+    if (count > 0) {
+      EXTEND(SP, count);
+      for (i = 0; i < count; i++) {
+        PUSHs(sv_2mortal(newSVpv(strlist[i], 0)));
+      }
     }
+    free(strlist);
   }
-  free(strlist);
 ';
 
 @macros = (
@@ -645,7 +663,7 @@ headerGetEntry_string_list(h, query)
        VT_ACTIVATE VT_WAITACTIVE VT_GETSTATE CDROM_LOCKDOOR CDROMEJECT
        ) ],
 );
-push @macros, [ qw(int RPMTAG_NAME RPMTAG_GROUP RPMTAG_SIZE RPMTAG_VERSION RPMTAG_SUMMARY RPMTAG_DESCRIPTION RPMTAG_RELEASE RPMTAG_ARCH RPMTAG_FILENAMES RPMTAG_OBSOLETES RPMTAG_REQUIRENAME) ]
+push @macros, [ qw(int RPMTAG_NAME RPMTAG_GROUP RPMTAG_SIZE RPMTAG_VERSION RPMTAG_SUMMARY RPMTAG_DESCRIPTION RPMTAG_RELEASE RPMTAG_ARCH RPMTAG_FILENAMES RPMTAG_OBSOLETES RPMTAG_REQUIRENAME RPMTAG_FILEFLAGS     RPMFILE_CONFIG) ]
   if $ENV{C_RPM};
 
 $\= "\n";

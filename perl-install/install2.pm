@@ -140,6 +140,7 @@ $o = $::o = {
     lang         => 'en',
     isUpgrade    => 0,
     toRemove     => [],
+    toSave       => [],
 #-    simple_themes => 1,
 #-    installClass => "normal",
 
