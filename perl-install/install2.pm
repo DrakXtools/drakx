@@ -368,7 +368,6 @@ sub main {
 	    live      => sub { $::live = 1 },
 	    noauto    => sub { $::noauto = 1 },
 	    test      => sub { $::testing = 1 },
-            nopci     => sub { $::nopci = 1 },
 	    patch     => sub { $patch = 1 },
 	    defcfg    => sub { $cfg = $v },
 	    newt      => sub { $o->{interactive} = "newt" },
@@ -466,7 +465,7 @@ sub main {
     } modules::get_that_type('sound');
 
     #- needed very early for install_steps_gtk
-    modules::load_thiskind("usb"); 
+    $::noauto or modules::load_thiskind("usb"); 
     eval { ($o->{mouse}, @{$o->{wacom} = []}) = mouse::detect() } unless $o->{nomouseprobe} || $o->{mouse};
 
     lang::set($o->{lang}); #- mainly for defcfg
