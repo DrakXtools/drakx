@@ -1378,7 +1378,7 @@ sub load_conf {
     my $current = { getVarsFromSh("$::prefix/etc/netprofile/current") };
     
     $netcnx->{PROFILE} = $current->{PROFILE} || 'default';
-    network::network::read_all_conf($::prefix, $netc, $intf);
+    network::network::read_all_conf($::prefix, $netc, $intf, $netcnx);
 }
 
 sub get_net_device() {
