@@ -538,14 +538,14 @@ sub setPackages {
 			    pkgs::packageByName($o->{packages}, 'basesystem') || die("missing basesystem package"), 1);
 
 	#- must be done after getProvides
-	#- if there is a supplementary CD, the rpmsrate/compssUsers are overridable
+	#- if there is a supplementary media, the rpmsrate/compssUsers are overridable
 	pkgs::read_rpmsrate(
 	    $o->{packages},
-	    getFile($suppl_method eq 'cdrom' && -e "/tmp/rpmsrate" ? "/tmp/rpmsrate" : "media/media_info/rpmsrate")
+	    getFile(-e "/tmp/rpmsrate" ? "/tmp/rpmsrate" : "media/media_info/rpmsrate")
 	);
 	($o->{compssUsers}, $o->{gtk_display_compssUsers}) = pkgs::readCompssUsers(
 	    $o->{meta_class},
-	    $suppl_method eq 'cdrom' && -e '/tmp/compssUsers.pl' ? '/tmp/compssUsers.pl' : 'media/media_info/compssUsers.pl'
+	    -e '/tmp/compssUsers.pl' ? '/tmp/compssUsers.pl' : 'media/media_info/compssUsers.pl'
 	);
 
 	#- preselect default_packages and compssUsers selected.
