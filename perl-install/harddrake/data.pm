@@ -57,6 +57,7 @@ our @tree =
       configurator => "",
       detector => \&detect_devices::floppies,
       checked_on_boot => 1,
+      automatic => 1,
      },
 
      {
@@ -66,6 +67,7 @@ our @tree =
       configurator => "",
       detector => \&detect_devices::zips,
       checked_on_boot => 1,
+      automatic => 1,
      },
 
      {
@@ -84,6 +86,7 @@ our @tree =
       configurator => "",
       detector => sub { grep { !(detect_devices::isBurner($_) || detect_devices::isDvdDrive($_)) } &detect_devices::cdroms },
       checked_on_boot => 1,
+      automatic => 1,
      },
 
      {
@@ -93,6 +96,7 @@ our @tree =
       configurator => "",
       detector => \&detect_devices::burners,
       checked_on_boot => 1,
+      automatic => 1,
      },
 
      {
@@ -102,6 +106,7 @@ our @tree =
       configurator => "",
       detector => sub { grep { ! detect_devices::isBurner($_) } detect_devices::dvdroms() },
       checked_on_boot => 1,
+      automatic => 1,
      },
 
      {
