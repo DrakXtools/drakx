@@ -89,7 +89,7 @@ sub get_subwizard {
       my ($network_configured, $direct_net_install, $cnx_type, $type, $interface, @cards, @all_cards, @devices);
       my (%connections, %rconnections, @connection_list);
       my ($modem, $modem_name, $modem_conf_read, $modem_dyn_dns, $modem_dyn_ip);
-      my ($adsl_type, $adsl_protocol, $adsl_device, @adsl_devices, $adsl_failed, $adsl_answer, %adsl_data, $adsl_data, $adsl_provider);
+      my ($adsl_type, $adsl_protocol, $adsl_device, @adsl_devices, $adsl_failed, $adsl_answer, %adsl_data, $adsl_data, $adsl_provider, $adsl_old_provider);
       my ($ntf_name, $ipadr, $netadr, $gateway_ex, $up, $isdn, $isdn_type, $need_restart_network);
       my ($module, $auto_ip, $onboot, $needhostname, $hotplug, $track_network_id, @fields); # lan config
       my $success = 1;
@@ -560,6 +560,7 @@ killall pppd
                     pre => sub {
                         require network::adsl_consts;
                         %adsl_data = %network::adsl_consts::adsl_data;
+                        $adsl_old_provider = $adsl_provider;
                     },
                     name => N("Please choose your ADSL provider"),
                     data => sub { 
@@ -568,7 +569,7 @@ killall pppd
                     next => 'adsl_protocol',
                     post => sub {
                         $adsl_data = $adsl_data{$adsl_provider};
-                        $adsl_protocol = $adsl_data->{method} if $adsl_data->{method};
+                        $adsl_protocol = $adsl_types{$adsl_data->{method}} if $adsl_provider ne $adsl_old_provider && !defined $adsl_protocol && $adsl_data->{method};
                         return 'adsl_protocol';
                     },
                    },
