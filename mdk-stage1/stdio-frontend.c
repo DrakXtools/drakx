@@ -333,7 +333,7 @@ enum return_type ask_yes_no(char *msg)
 }
 
 
-enum return_type ask_from_entries(char *msg, char ** questions, char *** answers, int entry_size USED, void (*callback_func)(char ** strings) USED)
+enum return_type ask_from_entries(char *msg, char ** questions, char *** answers, int entry_size UNUSED, void (*callback_func)(char ** strings) UNUSED)
 {
 	int j, i = 0;
 	char ** already_answers = NULL;
