@@ -153,7 +153,7 @@ sub add2hosts {
     open F, ">$file" or die "cannot write $file: $!";
     while (my ($ip, $v) = each %l) {
 	$ip or next;
-	print F "$ip";
+	print F $ip;
 	if ($v =~ /^\s/) {
 	    print F $v;
 	} else {

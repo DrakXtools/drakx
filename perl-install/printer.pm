@@ -190,7 +190,7 @@ sub stop_service ($) {
 sub service_starts_on_boot ($) {
     my ($service) = @_;
     local *F; 
-    open F, ($::testing ? "$prefix" : "chroot $prefix/ ") . 
+    open F, ($::testing ? $prefix : "chroot $prefix/ ") . 
 	"/bin/sh -c \"export LC_ALL=C; /sbin/chkconfig --list $service 2>&1\" |" ||
 	    return 0;
     while (my $line = <F>) {
@@ -274,7 +274,7 @@ sub assure_device_is_available_for_cups {
     # CUPS knows the device.
     my ($device) = @_;
     local *F; 
-    open F, ($::testing ? "$prefix" : "chroot $prefix/ ") . 
+    open F, ($::testing ? $prefix : "chroot $prefix/ ") . 
 	"/bin/sh -c \"export LC_ALL=C; /usr/sbin/lpinfo -v\" |" ||
 	    die "Could not run \"lpinfo\"!";
     while (my $line = <F>) {
@@ -291,7 +291,7 @@ sub assure_device_is_available_for_cups {
 sub network_running {
     # If the network is not running return 0, otherwise 1.
     local *F; 
-    open F, ($::testing ? "$prefix" : "chroot $prefix/ ") . 
+    open F, ($::testing ? $prefix : "chroot $prefix/ ") . 
 	"/bin/sh -c \"export LC_ALL=C; /sbin/ifconfig\" |" ||
 	    die "Could not run \"ifconfig\"!";
     while (my $line = <F>) {
@@ -374,7 +374,7 @@ sub set_alternative {
     local *F;
     # Read the list of executables for the given command to find the number
     # of the desired executable
-    open F, ($::testing ? "$prefix" : "chroot $prefix/ ") . 
+    open F, ($::testing ? $prefix : "chroot $prefix/ ") . 
 	"/bin/sh -c \"export LC_ALL=C; /bin/echo | update-alternatives --config $command \" |" ||
 	    die "Could not run \"update-alternatives\"!";
     my $choice = 0;
@@ -390,7 +390,7 @@ sub set_alternative {
     close F;
     # If the executable was found, assign the command to it
     if ($choice > 0) {
-	system(($::testing ? "$prefix" : "chroot $prefix/ ") .
+	system(($::testing ? $prefix : "chroot $prefix/ ") .
 	       "/bin/sh -c \"/bin/echo $choice | update-alternatives --config $command > /dev/null 2>&1\"");
     }
     return 1;
@@ -449,7 +449,7 @@ sub read_configured_queues($) {
 	for $spooler (qw(cups pdq lprng lpd)) {
 	    #- poll queue info 
 	    local *F; 
-	    open F, ($::testing ? "$prefix" : "chroot $prefix/ ") . 
+	    open F, ($::testing ? $prefix : "chroot $prefix/ ") . 
 		"foomatic-configure -P -q -s $spooler |" ||
 		    die "Could not run foomatic-configure";
 	    eval (join('',(<F>))); 
@@ -463,7 +463,7 @@ sub read_configured_queues($) {
     } else {
 	#- Poll the queues of the current default spooler
 	local *F; 
-	open F, ($::testing ? "$prefix" : "chroot $prefix/ ") . 
+	open F, ($::testing ? $prefix : "chroot $prefix/ ") . 
 	    "foomatic-configure -P -q -s $printer->{SPOOLER} |" ||
 		die "Could not run foomatic-configure";
 	eval (join('',(<F>))); 
@@ -595,7 +595,7 @@ sub read_printer_db(;$) {
     # Generate the Foomatic printer/driver overview, read it from the
     # appropriate file when it is already generated
     if (!(-f $dbpath)) {
-	open DBPATH, ($::testing ? "$prefix" : "chroot $prefix/ ") . 
+	open DBPATH, ($::testing ? $prefix : "chroot $prefix/ ") . 
 	    "foomatic-configure -O -q |" ||
 		die "Could not run foomatic-configure";
     } else {
@@ -724,7 +724,7 @@ sub read_foomatic_options ($) {
     # Generate the option data for the chosen printer/driver combo
     my $COMBODATA;
     local *F;
-    open F, ($::testing ? "$prefix" : "chroot $prefix/ ") . 
+    open F, ($::testing ? $prefix : "chroot $prefix/ ") . 
 	"foomatic-configure -P -q -p $printer->{currentqueue}{printer}" .
 	    " -d $printer->{currentqueue}{driver}" . 
 		($printer->{OLD_QUEUE} ?
@@ -746,10 +746,10 @@ sub read_cups_options ($) {
     # reuse the dialog
     local *F;
     if ($queue_or_file =~ /.ppd.gz$/) { # compressed PPD file
-	open F, ($::testing ? "$prefix" : "chroot $prefix/ ") . 
+	open F, ($::testing ? $prefix : "chroot $prefix/ ") . 
 	    "gunzip -cd $queue_or_file | lphelp - |" || return 0;
     } else { # PPD file not compressed or queue
-	open F, ($::testing ? "$prefix" : "chroot $prefix/ ") . 
+	open F, ($::testing ? $prefix : "chroot $prefix/ ") . 
 	    "lphelp $queue_or_file |" || return 0;
     }
     my $i;
@@ -831,7 +831,7 @@ sub read_cups_printer_list {
     # This function reads in a list of all printers which the local CUPS
     # daemon currently knows, including remote ones.
     local *F;
-    open F, ($::testing ? "$prefix" : "chroot $prefix/ ") . 
+    open F, ($::testing ? $prefix : "chroot $prefix/ ") . 
 	"lpstat -v |" || return ();
     my @printerlist;
     my $line;
@@ -858,7 +858,7 @@ sub get_cups_remote_queues {
     # CUPS daemon knows due to broadcasting of remote servers or 
     # "BrowsePoll" entries in the local /etc/cups/cupsd.conf/
     local *F;
-    open F, ($::testing ? "$prefix" : "chroot $prefix/ ") . 
+    open F, ($::testing ? $prefix : "chroot $prefix/ ") . 
 	"lpstat -v |" || return ();
     my @printerlist;
     my $line;
@@ -940,7 +940,7 @@ sub set_default_printer {
 sub get_default_printer {
     my $printer = $_[0];
     local *F;
-    open F, ($::testing ? "$prefix" : "chroot $prefix/ ") . 
+    open F, ($::testing ? $prefix : "chroot $prefix/ ") . 
 	"foomatic-configure -Q -q -s $printer->{SPOOLER} |" || return undef;
     my $line;
     while ($line = <F>) {
@@ -1003,7 +1003,7 @@ sub read_printers_conf {
 sub get_direct_uri {
     #- get the local printer to access via a Device URI.
     my @direct_uri;
-    local *F; open F, ($::testing ? "$prefix" : "chroot $prefix/ ") . "/usr/sbin/lpinfo -v |";
+    local *F; open F, ($::testing ? $prefix : "chroot $prefix/ ") . "/usr/sbin/lpinfo -v |";
     local $_;
     while (<F>) {
 	/^(direct|usb|serial)\s+(\S*)/ and push @direct_uri, $2;
@@ -1073,7 +1073,7 @@ sub poll_ppd_base {
     start_not_running_service("cups");
     my $driversthere = scalar(keys %thedb);
     foreach (1..60) {
-	local *PPDS; open PPDS, ($::testing ? "$prefix" : "chroot $prefix/ ") . "/usr/bin/poll_ppd_base -a |";
+	local *PPDS; open PPDS, ($::testing ? $prefix : "chroot $prefix/ ") . "/usr/bin/poll_ppd_base -a |";
 	local $_;
 	while (<PPDS>) {
 	    chomp;
@@ -1298,9 +1298,9 @@ sub print_pages($@) {
 	# Only text and PostScript can be printed directly with all spoolers,
 	# images must be treated seperately
 	if ($page =~ /\.jpg$/) {
-	    system(($::testing ? "$prefix" : "chroot $prefix/ ") .
+	    system(($::testing ? $prefix : "chroot $prefix/ ") .
 		   "/usr/bin/convert $page -page 427x654+100+65 PS:- | " .
-		   ($::testing ? "$prefix" : "chroot $prefix/ ") .
+		   ($::testing ? $prefix : "chroot $prefix/ ") .
 		   "$lpr -s $printer->{SPOOLER} -P $queue");
 	} else {
 	    run_program::rooted($prefix, $lpr, "-s", $printer->{SPOOLER},
@@ -1310,7 +1310,7 @@ sub print_pages($@) {
     sleep 5; #- allow lpr to send pages.
     # Check whether the job is queued
     local *F; 
-    open F, ($::testing ? "$prefix" : "chroot $prefix/ ") . "$lpq -s $printer->{SPOOLER} -P $queue |";
+    open F, ($::testing ? $prefix : "chroot $prefix/ ") . "$lpq -s $printer->{SPOOLER} -P $queue |";
     my @lpq_output =
 	grep { !/^no entries/ && !(/^Rank\s+Owner/ .. /^\s*$/) } <F>;
     close F;
@@ -1323,7 +1323,7 @@ sub lphelp_output {
     my $lphelp = "/usr/bin/lphelp";
 
     local *F; 
-    open F, ($::testing ? "$prefix" : "chroot $prefix/ ") . "$lphelp $queue |";
+    open F, ($::testing ? $prefix : "chroot $prefix/ ") . "$lphelp $queue |";
     $helptext = join("", <F>);
     close F;
     if (!$helptext || ($helptext eq "")) {
@@ -1338,7 +1338,7 @@ sub pdqhelp_output {
     my $pdq = "/usr/bin/pdq";
 
     local *F; 
-    open F, ($::testing ? "$prefix" : "chroot $prefix/ ") . "$pdq -h -P $queue  2>&1 |";
+    open F, ($::testing ? $prefix : "chroot $prefix/ ") . "$pdq -h -P $queue  2>&1 |";
     $helptext = join("", <F>);
     close F;
     return $helptext;
@@ -1355,9 +1355,9 @@ sub print_optionlist {
 			    "-P", $queue, "-o", "docs",
 			    "/etc/bashrc");
     } elsif ($printer->{configured}{$queue}{queuedata}{ppd}) {
-	system(($::testing ? "$prefix" : "chroot $prefix/ ") .
+	system(($::testing ? $prefix : "chroot $prefix/ ") .
 	       "/usr/bin/lphelp $queue | " .
-	       ($::testing ? "$prefix" : "chroot $prefix/ ") .
+	       ($::testing ? $prefix : "chroot $prefix/ ") .
 	       "$lpr -s $printer->{SPOOLER} -P $queue");
     }
 }
@@ -1376,7 +1376,7 @@ sub get_copiable_queues {
                         #- at least
     my @queuelist;      #- here we will list all Foomatic-generated queues
     # Get queue list with foomatic-configure
-    open QUEUEOUTPUT, ($::testing ? "$prefix" : "chroot $prefix/ ") . 
+    open QUEUEOUTPUT, ($::testing ? $prefix : "chroot $prefix/ ") . 
 	    "foomatic-configure -Q -q -s $oldspooler |" ||
 		die "Could not run foomatic-configure";
 
@@ -1518,20 +1518,20 @@ sub configure_hpoj {
 	stop_service("hpoj");
 	run_program::rooted($prefix, 
 			    "ptal-mlcd", "$bus:probe", "-device", 
-			    "$device", split(' ',$address_arg));
+			    $device, split(' ',$address_arg));
 	$device_ok = 0;
 	local *F; 
-	if (open F, ($::testing ? "$prefix" : "chroot $prefix/ ") . "/usr/bin/ptal-devid mlc:$bus:probe |") {
+	if (open F, ($::testing ? $prefix : "chroot $prefix/ ") . "/usr/bin/ptal-devid mlc:$bus:probe |") {
 	    my $devid = join("", <F>);
 	    close F;
 	    if ($devid) {
 		$device_ok = 1;
-		if (open F, ($::testing ? "$prefix" : "chroot $prefix/ ") . "/usr/bin/ptal-devid mlc:$bus:probe -long -mdl 2>/dev/null |") {
+		if (open F, ($::testing ? $prefix : "chroot $prefix/ ") . "/usr/bin/ptal-devid mlc:$bus:probe -long -mdl 2>/dev/null |") {
 		    $model_long = join("", <F>);
 		    close F;
 		    chomp $model_long;
 		}
-		if (open F, ($::testing ? "$prefix" : "chroot $prefix/ ") . "/usr/bin/ptal-devid mlc:$bus:probe -long -sern 2>/dev/null |") {
+		if (open F, ($::testing ? $prefix : "chroot $prefix/ ") . "/usr/bin/ptal-devid mlc:$bus:probe -long -sern 2>/dev/null |") {
 		    $serialnumber_long = join("", <F>);
 		    close F;
 		    chomp $serialnumber_long;
@@ -1541,7 +1541,7 @@ sub configure_hpoj {
 		}
 	    }
 	}
-	if (open F, ($::testing ? "$prefix" : "chroot $prefix/ ") . "ps auxwww | grep \"ptal-mlcd $bus:probe\" | grep -v grep | ") {
+	if (open F, ($::testing ? $prefix : "chroot $prefix/ ") . "ps auxwww | grep \"ptal-mlcd $bus:probe\" | grep -v grep | ") {
 	    my $line = <F>;
 	    if ($line =~ /^\s*\S+\s+(\d+)\s+/) {
 		my $pid = $1;
@@ -2274,7 +2274,7 @@ sub removestarofficeprinterentry {
 sub removeopenofficeprinterentry {
     my ($printer, $queue, $configprefix, $configfile) = @_;
     # Remove printer's section
-    $configfile = removesection("$queue", $configfile);
+    $configfile = removesection($queue, $configfile);
     # Remove Link of PPD file
     run_program::rooted($prefix, 
 			"rm", "-f", 
@@ -2351,7 +2351,7 @@ sub getcupsremotequeues {
     # local CUPS daemon knows due to broadcasting of remote servers or 
     # "BrowsePoll" entries in the local /etc/cups/cupsd.conf
     local *F;
-    open F, ($::testing ? "$prefix" : "chroot $prefix/ ") . 
+    open F, ($::testing ? $prefix : "chroot $prefix/ ") . 
 	"lpstat -v |" || return ();
     my @printerlist;
     my $line;

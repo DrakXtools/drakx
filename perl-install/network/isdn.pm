@@ -59,7 +59,7 @@ We recommand the light configuration.
 	my $p = pkgs::packageByName($in->{packages}, $rmpackage);
 	$p && $p->flag_selected and pkgs::unselectPackage($in->{packages}, $p);
     }
-    run_program::rooted($prefix, "rpm", "-e", "$rmpackage");
+    run_program::rooted($prefix, "rpm", "-e", $rmpackage);
     $in->do_pkgs->install($instpackage, if_($isdn->{speed} =~ /128/, 'ibod'), 'isdn4k-utils');
     my $light = $e =~ /light/ ? 1 : 0;
     isdn_write_config_backend($isdn, $light, $netc);

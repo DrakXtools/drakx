@@ -267,7 +267,7 @@ sub getAvailableSpace {
 
 sub getAvailableSpace_mounted {
     my ($prefix) = @_;
-    my $dir = -d "$prefix/usr" ? "$prefix/usr" : "$prefix";
+    my $dir = -d "$prefix/usr" ? "$prefix/usr" : $prefix;
     my (undef, $free) = MDK::Common::System::df($dir) or return;
     log::l("getAvailableSpace_mounted $free KB");
     $free * 1024 || 1;
@@ -936,7 +936,7 @@ sub guess_mount_point {
     my $d = $handle->{dir};
     my ($mnt) = grep { -e "$d/$l{$_}" } keys %l;
     $mnt ||= (stat("$d/.bashrc"))[4] ? '/root' : '/home/user' . ++$$user if -e "$d/.bashrc";
-    $mnt ||= (grep { -d $_ && (stat($_))[4] >= 500 && -e "$_/.bashrc" } glob_("$d")) ? '/home' : '';
+    $mnt ||= (grep { -d $_ && (stat($_))[4] >= 500 && -e "$_/.bashrc" } glob_($d)) ? '/home' : '';
     ($mnt, $handle);
 }
 

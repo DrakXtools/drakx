@@ -22,7 +22,7 @@ sub write_cnx_script {
 '#!/bin/bash
 ' . if_(!$netc->{at_boot}, 'if [ "x$1" == "x--boot_time" ]; then exit; fi
 ') . $netc->{internet_cnx}{$netc->{internet_cnx_choice}}{$_});
-	chmod 0755, "$prefix" . $_;
+	chmod 0755, "$prefix$_";
 	}
     }
 }

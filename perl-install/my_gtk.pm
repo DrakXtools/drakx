@@ -501,7 +501,7 @@ sub get_text_coord {
 	    $width = 0;
 	    $idx++;
 	}
-	$lines[$idx] = $flag ? "$_" : $lines[$idx] . $wrap_char . "$_";
+	$lines[$idx] = $flag ? $_ : $lines[$idx] . $wrap_char . $_;
 	$width += $l;
 	$flag = 0;
 	$l <= $max_width2 or $max_width2 = $l;

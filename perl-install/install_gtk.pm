@@ -224,7 +224,7 @@ if (arch() =~ /^ia64/) {
      require Xconfig::card;
      my ($card) = Xconfig::card::probe();
      Xconfig::card::add_to_card__using_Cards($card, $card->{type}) if $card && $card->{type};
-     output($file, <<END);
+     output($file, sprintf(<<'END', $mouse_type, $card->{driver}));
 
 Section "Files"
    FontPath   "/usr/X11R6/lib/X11/fonts:unscaled"
@@ -241,7 +241,7 @@ EndSection
 Section "InputDevice"
     Identifier "Mouse"
     Driver "mouse"
-    Option "Protocol" "$mouse_type"
+    Option "Protocol" "%s"
     Option "Device" "/dev/mouse"
 EndSection
 
@@ -253,7 +253,7 @@ EndSection
 
 Section "Device"
     Identifier  "device"
-    Driver      "$card->{driver}"
+    Driver      "%s"
 EndSection
 
 Section "Screen"

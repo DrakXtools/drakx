@@ -70,13 +70,13 @@ sub modem_detect_backend {
     $mouse ||={};
     $mouse->{device} ||= readlink "/dev/mouse";
     my $serdev = arch() =~ /ppc/ ? "macserial" : "serial";
-    eval { modules::load("$serdev") };
+    eval { modules::load($serdev) };
 
     detect_devices::probeSerialDevices();
     foreach ('modem', map { "ttyS$_" } (0..7)) {
 	next if $mouse->{device} =~ /$_/;
 	next unless -e "/dev/$_";
-	detect_devices::hasModem("/dev/$_") and $modem->{device} = "$_", last;
+	detect_devices::hasModem("/dev/$_") and $modem->{device} = $_, last;
     }
 
     #- add an alias for macserial on PPC

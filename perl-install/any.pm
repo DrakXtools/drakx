@@ -887,7 +887,7 @@ sub set_login_serial_console {
     my ($prefix, $port, $speed) = @_;
 
     my $line = "s$port:12345:respawn:/sbin/getty ttyS$port DT$speed ansi\n";
-    substInFile { s/^s$port:.*//; $_ = "$line" if eof } "$prefix/etc/inittab";
+    substInFile { s/^s$port:.*//; $_ = $line if eof } "$prefix/etc/inittab";
 }
 
 
