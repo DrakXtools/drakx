@@ -1,3 +1,101 @@
+2001/08/22  François Pons  <fpons@mandrakesoft.com>
+
+	* printerdrake.pm: fixed int and float checking which should accept
+	negative number (added explicit
+	positive too), cleaned code for some perl idioms.
+
+	* install_steps.pm: updated configurePrinter to use foomatic printer
+	configuration.
+
+2001/08/22  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* mdk-stage1/automatic.c: don't stay automatic for ask_from_entries when
+	entries are not given
+
+	* mdk-stage1/tools.c, mdk-stage1/stage1.c, mdk-stage1/cdrom.c,
+	mdk-stage1/mount.c, mdk-stage1/lomount.c, mdk-stage1/mount.h,
+	mdk-stage1/network.c, mdk-stage1/modules.c, mdk-stage1/disk.c: mount all
+	but ramdisk Read Only
+
+2001/08/22  kjx
+
+	* share/po/zh_CN.GB2312.po: review
+	review
+
+2001/08/22  Pixel  <pixel@mandrakesoft.com>
+
+	* bootlook.pm: fix typo
+
+	* install_steps_auto_install.pm: don't have formatPartitions interactive
+	by default
+
+	* install_steps.pm: do not call configurePrinter if no printer is wanted
+
+2001/08/22  siegel
+
+	* share/po/de.po: new german version
+
+2001/08/21  dam's  <damien@mandrakesoft.com>
+
+	* Makefile: added rpcinfo to the tar
+	corrected bad Makefile : rpcinfo-flushed.c comes from tools.
+
+	* standalone/draknet: ergonomy correction
+
+	* network/tools.pm: corrected qq bug
+	corrected bug
+
+	* standalone/net_monitor: log updatede
+	removed memoty leak
+	time connection label
+
+2001/08/21  François Pons  <fpons@mandrakesoft.com>
+
+	* install_steps_interactive.pm: moved installation code of foomatic (only)
+	if a printer may be chosen.
+
+	* install_any.pm: fixed hd installation for urpmi.
+
+	* printerdrake.pm: slight rewrite of some perl idioms.
+
+2001/08/21  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/wa.po: updated Walloon file
+	updated pot file
+
+	* share/po/be.po, share/po/sp.po, share/po/pt.po, share/po/DrakX.pot,
+	share/po/es.po, share/po/fr.po, share/po/bg.po, share/po/ga.po,
+	share/po/sr.po, share/po/de.po, share/po/et.po, share/po/tr.po,
+	share/po/eu.po, share/po/az.po, share/po/ru.po, share/po/pt_BR.po,
+	share/po/hr.po, share/po/ko.po, share/po/cy.po, share/po/nl.po,
+	share/po/ja.po, share/po/sv.po, share/po/is.po, share/po/hu.po,
+	share/po/zh_TW.Big5.po, share/po/it.po, share/po/id.po, share/po/pl.po,
+	share/po/fi.po, share/po/no.po, share/po/zh_CN.GB2312.po,
+	share/po/th.po, share/po/el.po, share/po/sk.po, share/po/lt.po,
+	share/po/ar.po, share/po/sl.po, share/po/vi.po, share/po/br.po,
+	share/po/ca.po, share/po/gl.po, share/po/lv.po, share/po/uk.po,
+	share/po/eo.po, share/po/ro.po, share/po/da.po, share/po/cs.po,
+	share/po/af.po: updated pot file
+
+2001/08/21  Pixel  <pixel@mandrakesoft.com>
+
+	* share/rpmsrate: add telnet-client-krb5 and ftp-client-krb5
+
+	* install_steps.pm: try to fix umount/remounting /tmp/hdimage in hd
+	install
+
+	* Makefile, share/po/Makefile: check presence of '$' in DrakX.pot
+
+	* fs.pm (read_fstab): don't expand symlink if the link goes in a directory
+
+	* install_any.pm: cleanup
+
+	* install_steps_interactive.pm: fix '$' in i18n message
+
+2001/08/21  siegel
+
+	* share/po/de.po: new german version
+
 2001/08/21  dam's  <damien@mandrakesoft.com>
 
 	* standalone/net_monitor: removed memoty leak
