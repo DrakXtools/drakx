@@ -10,6 +10,7 @@ use Socket;
 use common;
 use detect_devices;
 use run_program;
+use network::tools;
 use any;
 use vars qw(@ISA @EXPORT);
 use log;
@@ -313,12 +314,8 @@ sub gateway {
 sub configureNetworkIntf {
     my ($netc, $in, $intf, $net_device, $skip, $module) = @_;
     my $text;
-    my @wireless_modules = qw(aironet_cs aironet4500_cs hermes airo orinoco_cs orinoco airo_cs netwave_cs ray_cs wavelan_cs wvlan_cs airport);
-    my $flag = 0;
-    foreach (@wireless_modules) {
-	$module =~ /$_/ and $flag = 1;
-    }
-    if ($flag) {
+    my @wireless_modules = qw(aironet_cs aironet4500_cs hermes airo orinoco_cs orinoco airo_cs netwave_cs ray_cs wavelan_cs wvlan_cs airport 3c59x);
+    if (is_wireless_intf($intf, $module)) {
 	$intf->{wireless_eth} = 1;
 	$netc->{wireless_eth} = 1;
 	$intf->{WIRELESS_MODE} = "Managed";

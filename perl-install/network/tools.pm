@@ -9,7 +9,7 @@ use MDK::Common::Globals "network", qw($in $prefix $disconnect_file $connect_pro
 use MDK::Common::System qw(getVarsFromSh);
 
 @ISA = qw(Exporter);
-@EXPORT = qw(write_cnx_script write_secret_backend read_secret_backend passwd_by_login write_initscript ask_connect_now connect_backend disconnect_backend read_providers_backend ask_info2 type2interface connected connected_bg test_connected connected2 disconnected);
+@EXPORT = qw(ask_connect_now ask_info2 connect_backend connected connected2 connected_bg disconnect_backend disconnected is_wireless_intf passwd_by_login read_providers_backend read_secret_backend test_connected type2interface write_cnx_script write_initscript write_secret_backend);
 @EXPORT_OK = qw($in);
 
 sub write_cnx_script {
@@ -344,5 +344,14 @@ sub use_floppy {
     return '/mnt', $failed;
 }
 
+
+sub is_wireless_intf {
+    my ($intf, $module) = @_;
+    my @wireless_modules = qw(aironet_cs aironet4500_cs hermes airo orinoco_cs orinoco airo_cs netwave_cs ray_cs wavelan_cs wvlan_cs airport 3c59x);
+    foreach (@wireless_modules) {
+        return 1 if $module =~ /$_/;
+    }
+    return 0;
+}
 
 1;
