@@ -2120,7 +2120,8 @@ What do you want to modify on this printer?",
 	    } else {
 		$editqueue = 0;
 	    }
-	    $continue = ($::expert || !$::isInstall);
+	    $continue = ($::expert || !$::isInstall ||
+			 $in->ask_yesorno('',_("Do you want to configure another printer?")));
 	}
 	# Delete some variables
 	$printer->{OLD_QUEUE} = "";
