@@ -1,3 +1,170 @@
+2004/07/30  Olivier Blin <oblin at mandrakesoft.com>
+
+	* network/netconnect.pm: offer to connect for pppoe connexions too
+
+	* mdk-stage1/stage1.c: revert previous commit, that won't work after
+	pivot_root (proc has to
+	be mounted, insmod would have to be able to find the modules in the
+	new root)
+	revert previous commit, that won't work after pivot_root (proc has to
+	be mounted, insmod would have to be able to find the modules in the
+	new root), we'll have to use hotplug to load eagle-usb drivers in Move
+	(in next release maybe)
+
+	* network/adsl.pm: sagem: use fctStartAdsl to wait for sync, up the
+	interface and get interface name
+	modprobe eagle-usb for sagem modems (useful if coldplug doesn't work)
+
+2004/07/30  Pixel  <pixel at mandrakesoft.com>
+
+	* standalone/draksplash2: draksplash2 is here until merged in draksplash
+
+	* share/rpmsrate: authentication installs perl-Net-DNS in some cases
+	authentication installs perl-Net-DNS in some cases
+
+	* any.pm, lang.pm: cleanup
+
+2004/07/30  Stew Benedict  <sbenedict at mandrakesoft.com>
+
+	* standalone/drakbackup: Fixes for Anthill #1009, #1010 (DVD recording,
+	disk quota)
+	Direct-to-tape enahancement
+	Fixes for AntHill #1009, #1010.
+
+2004/07/30  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* drakxtools.spec: log more stuff into 10.1-0.2mdk
+	10.1-0.2mdk
+
+	* standalone/service_harddrake: do not offer to configure mouse if we've
+	already automatically reconfigure it
+	b/c of 2.4.x vs 2.6.x switch
+
+	* any.pm (selectCountry) let's have a better looking GUI by preventing
+	uneeded
+	scrollbar on pull down menu
+	(selectCountry) use a combo box rather than a list for listing input
+	methods
+	enable one to choose its input method in advanced mode
+
+	* standalone/drakgw (outpend) clean by reusing MDK::Common
+
+	* lang.pm: support nabi input method too
+	support im-ja input method too
+	enable one to choose its input method in advanced mode
+
+	* security/help.pm, security/msec.pm, security/l10n.pm: sync with
+	msec-0.44
+
+2004/07/30  Vincent Guardiola <vguardiola at mandrakesoft.com>
+
+	* authentication.pm: Clean ldap client configuration
+
+2004/07/30  yrahal
+
+	* share/po/ar.po: Arabeyes.org's Arabic translation
+	Sync with Arabeyes CVS
+
+2004/07/29  Olivier Blin <oblin at mandrakesoft.com>
+
+	* network/adsl.pm: split server and plugin options, in order to support
+	again bewan
+	modems (pppd_options wasn't used anywhere, they couldn't work)
+	add newline at end of net_cnx_up script
+	use connect option or pppd in net_cnx_up, not both
+	(to fix weird pppoe net_cnx_up script)
+
+2004/07/29  Pixel  <pixel at mandrakesoft.com>
+
+	* authentication.pm: cleanup, fix various typos
+	(still, ->target seems broken, but i'm not sure, since i couldn't test)
+
+	* fsedit.pm: merge hds() in get_hds() to correctly handle catching cdie
+	when the device is non partionned
+	merge hds() in get_hds() to correctly handle catching cdie when the
+	device is non partionned
+
+	* mdk-stage1/stage1.c, mdk-stage1/config-stage1.h: s/MandrakeMove/Move/
+
+2004/07/29  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* c/stuff.xs.pl, c/Makefile: always include all funcs (these're needed
+	anyway by Move and GlobeTrotter)
+
+	* drakxtools.spec: 10.1-0.1mdk
+
+	* wizards.pm (check_rpm) backport fix from HEAD
+
+	* standalone/service_harddrake: use new set_removable_auto_configurator
+	merge fix from HEAD: do not automatically configure removable media in
+	harddrake GUI (only in harddrake service)
+
+	* network/netconnect.pm (handle_multiple_cnx) only restart network for
+	ADSL if we use an
+	ethernet modem
+
+	* harddrake/data.pm (set_removable_auto_configurator) copy it out from
+	set_removable_configurator()
+	(set_removable_configurator) restore it as of MDK10.0 time
+	merge fix from HEAD: do not automatically configure removable media in
+	harddrake GUI (only in harddrake service)
+
+	* network/tools.pm (remove_initscript) simplify
+
+	* standalone/draksec, standalone/drakedm, standalone/drakgw: standalone
+	tools are *not* chrooted
+
+	* standalone/draksplash (show_prev)
+	  - kill useless variables
+	  - simplify
+	(show_prev) fix preview refresh while simplying code
+	(write_boot_thm) typo fix
+	more cleanups
+	misc cleanups
+	(show_prev) do not crash when the image format is unknown
+	(make_boot_frame) fix it
+
+2004/07/28  Olivier Blin <oblin at mandrakesoft.com>
+
+	* network/adsl.pm: do not write a blank "pty" option in ppp config file is
+	there is no
+	pty command (should fix some problems with Bewan modems)
+	do not write a blank "pty" option in ppp config file is there is no
+	pty command (should fix some problems with Bewan modems)
+
+	* mdk-stage1/stage1.c: do not probe usb interface too soon, wait for the
+	Move images to be mounted
+	(or else usb drivers won't be automatically loaded at boot with Move)
+	do not probe usb interface too soon, wait for the Move images to be
+	mounted
+	(or else usb drivers won't be automatically loaded at boot with Move)
+
+	* network/netconnect.pm: it's probably better to rely on modem_run since
+	speedtouch.sh may be dropped
+
+2004/07/28  Pixel  <pixel at mandrakesoft.com>
+
+	* fs/type.pm: remove small ugly typo
+
+	* network/smb.pm: 
+	  - use option -g for smbclient -L, this fixes bad parsing of formatted
+	smbclient output
+	  - skip "netlogon" Disk share (lowercase letters)
+
+	* install_steps.pm: explain why we set toFormatUnsure
+
+	* install_any.pm: don't set mount point /mnt/windows for removable devices
+
+	* detect_devices.pm: fix getSCSI_26() not sorting the drives
+	fix getCompaqSmartArray() on 2.6 (since /proc/driver/cciss/cciss0
+	doesn't talk about c0dX anymore)
+	fix getSCSI_26() not sorting the drives
+
+2004/07/28  Stew Benedict  <sbenedict at mandrakesoft.com>
+
+	* standalone/drakbackup, standalone/drakTermServ: Fix crashes on
+	append_set.
+
 2004/07/28  Pixel  <pixel at mandrakesoft.com>
 
 	* fs/type.pm: remove small ugly typo
@@ -33385,7 +33552,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.936 2004/07/28 01:06:37 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.937 2004/07/28 03:14:20 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
