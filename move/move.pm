@@ -141,6 +141,8 @@ sub init {
     #- to write a file, leading to obscure unexpected failures
     -d $_ or mkdir_p $_ foreach chomp_(cat_('/image/move/directories-to-create'));
 
+    chmod 01777, '/tmp', '/var/tmp';  #- /var/tmp -> badly needed for printing from OOo
+
     #- remaining non existent /etc files are symlinked from the RO volume,
     #- better to have them RO than non existent.
     #- PB: problems arise when programs try to open then in O_WRONLY
