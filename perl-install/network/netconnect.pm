@@ -759,7 +759,7 @@ Take a look at http://www.linmodems.org"),
                         if ($adsl_provider ne N("Unlisted - edit manually")) {
                             $adsl_data = $adsl_data{$adsl_provider};
                             if ($adsl_provider ne $adsl_old_provider) {
-                                $netc->{$_} = $adsl_data->{$_} foreach qw(DOMAINNAME2 Encapsulation vpi vci);
+                                $netc->{$_} = $adsl_data->{$_} foreach qw(DOMAINNAME2 Encapsulation vpi vci provider_id);
                                 $adsl_type = $adsl_data->{method};
                             }
                         }
