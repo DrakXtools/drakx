@@ -76,6 +76,7 @@ sub ppp_configure {
     }
     $toreplace{Gateway} = $modem->{auto_gateway} eq N("Automatic") ? '0.0.0.0' : $modem->{Gateway};
 
+    $toreplace{metric} = defined($modem->{metric}) ? $modem->{metric} : network::tools::get_default_metric("modem");
 
     #- build ifcfg-ppp0.
     my $various = <<END;
@@ -102,6 +103,7 @@ DISCONNECTTIMEOUT="5"
 RETRYTIMEOUT="60"
 BOOTPROTO="none"
 PEERDNS="$toreplace{peerdns}"
+METRIC=$toreplace{metric}
 END
     output("$::prefix/etc/sysconfig/network-scripts/ifcfg-ppp0", 
 	   $various,

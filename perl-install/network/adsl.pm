@@ -291,9 +291,11 @@ user "$adsl->{login}"
     #- FIXME: 
     #-   ppp0 and ippp0 are hardcoded
     my $kind = $adsl_type eq 'pppoe' ? 'xDSL' : 'ADSL';
+    my $metric = network::tools::get_default_metric("adsl"); #- FIXME, do not override if already set
     output_with_perm("$::prefix/etc/sysconfig/network-scripts/ifcfg-ppp0", 0705, qq(DEVICE=ppp0
 ONBOOT=no
 TYPE=$kind
+METRIC=$metric
 ));    
 
     # sagem specific stuff

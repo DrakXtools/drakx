@@ -289,7 +289,17 @@ sub get_interface_type {
     my ($interface) = @_;
     $interface->{DEVICE} =~ /^(eth|ath|wlan)/ && "ethernet" ||
     $interface->{DEVICE} =~ /^ippp/ && "isdn" ||
-    $interface->{DEVICE} =~ /^ppp/ && (member($interface->{TYPE}, "xDSL", "ADSL") ? "adsl" : "modem");
+    $interface->{DEVICE} =~ /^ppp/ && (member($interface->{TYPE}, "xDSL", "ADSL") ? "adsl" : "modem") ||
+    "unknown";
+}
+
+sub get_default_metric {
+    my ($type) = @_;
+    my @known_types = ("ethernet_gigabit", "ethernet", "adsl", "isdn", "modem", "unknown");
+    my $idx;
+    eval { $idx = find_index { $type eq $_ } @known_types };
+    $idx = @known_types if $@;
+    $idx * 10;
 }
 
 1;

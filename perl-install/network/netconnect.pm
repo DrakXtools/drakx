@@ -864,6 +864,9 @@ Do you really want to reconfigure this device?"),
                    {
                     pre => sub  {
                         $find_lan_module->();
+                        my $intf_type = member($module, list_modules::category2modules('network/gigabit')) ? "ethernet_gigabit" : "ethernet";
+                        defined($ethntf->{METRIC}) or $ethntf->{METRIC} = network::tools::get_default_metric($intf_type);
+
                         $protocol = $l10n_lan_protocols{defined $auto_ip ? ($auto_ip ? 'dhcp' : 'static') : $ethntf->{BOOTPROTO}} || 0;
                     },
                     name => sub { 
