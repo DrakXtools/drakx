@@ -213,7 +213,13 @@ ifdown eth0
     } elsif ($nb == 1) {
 	$netc->{internet_cnx_choice} = (keys %{$netc->{internet_cnx}})[0];
     }
-    $netc->{internet_cnx_choice} and write_cnx_script($netc);
+    if ($netc->{internet_cnx_choice} ) {
+	write_cnx_script($netc);
+    } else {
+	unlink "$prefix/etc/sysconfig/network-scripts/net_cnx_up";
+	unlink "$prefix/etc/sysconfig/network-scripts/net_cnx_down";
+	undef $netc->{NET_DEVICE};
+    }
 
     $::isStandalone and ask_connect_now();
 

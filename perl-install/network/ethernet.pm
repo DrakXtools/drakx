@@ -49,11 +49,11 @@ Default is dhcpcd"),
     write_cnx_script($netc, "cable",
 qq(
 #!/bin/bash
-ifup $netc->{NET_DEVICE}
+/sbin/ifup $netc->{NET_DEVICE}
 ),
 qq(
 #!/bin/bash
-ifdown $netc->{NET_DEVICE}
+/sbin/ifdown $netc->{NET_DEVICE}
 ));
 }
 
@@ -218,11 +218,6 @@ such as ``mybox.mylab.myco.com''."),
 	$netc->{HOSTNAME} ne $dhcp_hostname and $netc->{DHCP_HOSTNAME} = $netc->{HOSTNAME};
     } else {
 	configureNetworkNet($in, $netc, $last ||= {}, @l) or goto configureNetwork_step_1;
-	if ( $netc->{GATEWAY} ) {
-	    unlink "$prefix/etc/sysconfig/network-scripts/net_cnx_up";
-	    unlink "$prefix/etc/sysconfig/network-scripts/net_cnx_down";
-	    undef $netc->{NET_DEVICE};
-	}
     }
     miscellaneousNetwork($in);
     1;
