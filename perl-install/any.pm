@@ -74,164 +74,169 @@ sub enableShadow {
     run_program::rooted($prefix, "grpconv") or log::l("grpconv failed");
 }
 
-sub grub_installed {
-    my ($in) = @_;
-    my $f = "/usr/sbin/grub";
-    $in->do_pkgs->install('grub') if !-e $f;
-    -e $f;
-}
-
 sub setupBootloader {
-    my ($in, $b, $all_hds, $fstab, $security, $prefix, $more) = @_;
+    my ($in, $b, $all_hds, $fstab, $security) = @_;
     my $hds = $all_hds->{hds};
 
-    $more++ if $b->{bootUnsafe};
-    my $automatic = !$::expert && $more < 1;
-    my $semi_auto = !$::expert && arch() !~ /ia64/;
-    my $ask_per_entries = $::expert || $more > 1;
-    my $prev_boot = $b->{boot};
-    my $mixed_kind_of_disks = 
-      (grep { $_->{device} =~ /^sd/ } @$hds) && (grep { $_->{device} =~ /^hd/ } @$hds) ||
-      (grep { $_->{device} =~ /^hd[e-z]/ } @$hds) && (grep { $_->{device} =~ /^hd[a-d]/ } @$hds);
+  general:
+    setupBootloader__general($in, $b, $all_hds, $fstab, $security) or return 0;
+    setupBootloader__boot_bios_drive($in, $b, $hds) or goto general;
 
-    if ($mixed_kind_of_disks) {
-	$automatic = $semi_auto = 0;
-	#- full expert questions when there is 2 kind of disks
-	#- it would need a semi_auto asking on which drive the bios boots...
+    setupBootloader__entries($in, $b, $all_hds, $fstab);
+}
+
+
+sub setupBootloader_simple {
+    my ($in, $b, $all_hds, $fstab, $security) = @_;
+    my $hds = $all_hds->{hds};
+
+    my $mixed_kind_of_disks = bootloader::mixed_kind_of_disks($hds);
+    #- full expert questions when there is 2 kind of disks
+    #- it would need a semi_auto asking on which drive the bios boots...
+
+    $mixed_kind_of_disks || $b->{bootUnsafe} || arch() =~ /ppc/ or return 1; #- default is good enough
+    
+    if (!$mixed_kind_of_disks && arch() !~ /ia64/) {
+	setupBootloader__mbr_or_not($in, $b, $hds, $fstab);
+    } else {
+      general:
+	setupBootloader__general($in, $b, $all_hds, $fstab, $security) or return 0;
     }
-    $automatic = 0 if arch() =~ /ppc/; #- no auto for PPC yet
-	
-    if ($automatic) {
-	#- automatic
-    } elsif ($semi_auto) {
-	my @l = (N_("First sector of drive (MBR)"), N_("First sector of boot partition"));
+    setupBootloader__boot_bios_drive($in, $b, $hds) or goto general;
+    1;
+}
 
-	$in->set_help('setupBootloaderBeginner') unless $::isStandalone;
-	if (arch() =~ /sparc/) {
-	    $in->ask_from(N("SILO Installation"),
-			  N("Where do you want to install the bootloader?"),
-			  { val => \$b->{use_partition}, list => [ 0, 1 ], format => sub { translate($l[$_[0]]) } }) or return 0;
-	} elsif (arch() =~ /ppc/) {
-		if (defined $partition_table::mac::bootstrap_part) {
-			$b->{boot} = $partition_table::mac::bootstrap_part;
-			log::l("set bootstrap to $b->{boot}"); 
-		} else {
-			die "no bootstrap partition - yaboot.conf creation failed";
-		}
+
+sub setupBootloader__boot_bios_drive {
+    my ($in, $b, $hds) = @_;
+
+    bootloader::mixed_kind_of_disks($hds) && 
+      $b->{boot} =~ /\d$/ && #- on a partition
+	is_empty_hash_ref($b->{bios}) && #- some bios mapping already there
+	  arch() !~ /ppc/ or return 1;
+
+    log::l("mixed_kind_of_disks");
+    my $hd = $in->ask_from_listf('', N("You decided to install the bootloader on a partition.
+This implies you already have a bootloader on the hard drive you boot (eg: System Commander).
+
+On which drive are you booting?"), \&partition_table::description, $hds) or return 0;
+    log::l("mixed_kind_of_disks chosen $hd->{device}");
+    $b->{first_hd_device} = "/dev/$hd->{device}";
+    1;
+}
+
+sub setupBootloader__mbr_or_not {
+    my ($in, $b, $hds, $fstab) = @_;
+
+    my @l = (N_("First sector of drive (MBR)"), N_("First sector of boot partition"));
+
+    $in->set_help('setupBootloaderBeginner') if !$::isStandalone;
+    if (arch() =~ /ppc/) {
+	if (defined $partition_table::mac::bootstrap_part) {
+	    $b->{boot} = $partition_table::mac::bootstrap_part;
+	    log::l("set bootstrap to $b->{boot}"); 
 	} else {
-	    my $boot = $hds->[0]{device};
-	    my $use_partition = "/dev/$boot" ne $b->{boot};
-	    $in->ask_from(N("LILO/grub Installation"),
-			  N("Where do you want to install the bootloader?"),
-			  [ { val => \$use_partition, list => [ 0, 1 ], format => sub { translate($l[$_[0]]) } } ]);
-	    $b->{boot} = "/dev/" . ($use_partition ? fsedit::get_root($fstab, 'boot')->{device} : $boot);
+	    die "no bootstrap partition - yaboot.conf creation failed";
 	}
     } else {
-	$in->set_help(arch() =~ /sparc/ ? "setupSILOGeneral" :  arch() =~ /ppc/ ? 'setupYabootGeneral' : "setupBootloader") unless $::isStandalone; #- TO MERGE ?
+	my $boot = $hds->[0]{device};
+	my $use_partition = arch() =~ /sparc/ ? $b->{use_partition} : "/dev/$boot" ne $b->{boot};
+	$in->ask_from(arch() =~ /sparc/ ? N("SILO Installation") : N("LILO/grub Installation"),
+		      N("Where do you want to install the bootloader?"),
+		      [ { val => \$use_partition, list => [ 0, 1 ], format => sub { translate($l[$_[0]]) } } ]);
+	if (arch() =~ /sparc/) {
+	    $b->{use_partition} = $use_partition;
+	}  else {
+	    my $new_boot = "/dev/" . ($use_partition ? fsedit::get_root($fstab, 'boot')->{device} : $boot);
 
-	my @silo_install_lang = (N("First sector of drive (MBR)"), N("First sector of boot partition"));
+	    #- remove bios mapping if the user changed the boot device
+	    delete $b->{bios} if $new_boot ne $b->{boot};
 
-	my %bootloaders = (if_(exists $b->{methods}{silo},
-			       N_("SILO")                     => sub { $b->{methods}{silo} = 1 }),
-			   if_(exists $b->{methods}{lilo},
-			       N_("LILO with text menu")      => sub { $b->{methods}{lilo} = "lilo-menu" },
-			       N_("LILO with graphical menu") => sub { $b->{methods}{lilo} = "lilo-graphic" }),
-			   if_(exists $b->{methods}{grub},
-			       #- put lilo if grub is chosen, so that /etc/lilo.conf is generated
-			       N_("Grub")                     => sub { $b->{methods}{grub} = 1;
-								       exists $b->{methods}{lilo}
-									 and $b->{methods}{lilo} = "lilo-menu" }),
-			   if_(exists $b->{methods}{yaboot},
-			       N_("Yaboot") => sub { $b->{methods}{yaboot} = 1 }),
-			  );
-	my $bootloader = arch() =~ /sparc/ ? N_("SILO") : arch() =~ /ppc/ ? N_("Yaboot") : N_("LILO with graphical menu");
-	my $profiles = bootloader::has_profiles($b);
-	my $memsize = bootloader::get_append($b, 'mem');
-	my $prev_clean_tmp = my $clean_tmp = grep { $_->{mntpoint} eq '/tmp' } @{$all_hds->{special} ||= []};
+	    $b->{boot} = $new_boot;
+	}
+    }
+}
 
-	$b->{password2} ||= $b->{password} ||= '';
-	$b->{vga} ||= 'normal';
-	if (arch() !~ /ppc/) {
+sub setupBootloader__general {
+    my ($in, $b, $all_hds, $fstab, $security) = @_;
+
+    $in->set_help(arch() =~ /sparc/ ? "setupSILOGeneral" :  arch() =~ /ppc/ ? 'setupYabootGeneral' : "setupBootloader") if !$::isStandalone; #- TO MERGE ?
+
+    my @silo_install_lang = (N("First sector of drive (MBR)"), N("First sector of boot partition"));
+
+    ($b->{method}, my $method_choices) = bootloader::method_choices($fstab);
+    my $profiles = bootloader::has_profiles($b);
+    my $memsize = bootloader::get_append($b, 'mem');
+    my $prev_clean_tmp = my $clean_tmp = grep { $_->{mntpoint} eq '/tmp' } @{$all_hds->{special} ||= []};
+    my $prev_boot = $b->{boot};
+
+    $b->{password2} ||= $b->{password} ||= '';
+    $b->{vga} ||= 'normal';
+    if (arch() !~ /ppc/) {
 	$in->ask_from('', N("Bootloader main options"), [
-{ label => N("Bootloader to use"), val => \$bootloader, list => [ keys(%bootloaders) ], format => \&translate },
-    arch() =~ /sparc/ ? (
-{ label => N("Bootloader installation"), val => \$b->{use_partition}, list => [ 0, 1 ], format => sub { $silo_install_lang[$_[0]] } },
-) : if_(arch() !~ /ia64/,
-{ label => N("Boot device"), val => \$b->{boot}, list => [ map { "/dev/$_" } (map { $_->{device} } (@$hds, grep { !isFat($_) } @$fstab)), detect_devices::floppies_dev() ], not_edit => !$::expert },
-{ label => N("Compact"), val => \$b->{compact}, type => "bool", text => N("compact"), advanced => 1 },
-{ label => N("Video mode"), val => \$b->{vga}, list => [ keys %bootloader::vga_modes ], not_edit => !$::expert, format => sub { $bootloader::vga_modes{$_[0]} }, advanced => 1 },
-),
-{ label => N("Delay before booting default image"), val => \$b->{timeout} },
-    if_($security >= 4 || $b->{password} || $b->{restricted},
-{ label => N("Password"), val => \$b->{password}, hidden => 1 },
-{ label => N("Password (again)"), val => \$b->{password2}, hidden => 1 },
-{ label => N("Restrict command line options"), val => \$b->{restricted}, type => "bool", text => N("restrict") },
-    ),
-{ label => N("Clean /tmp at each boot"), val => \$clean_tmp, type => 'bool', advanced => 1 },
-{ label => N("Precise RAM size if needed (found %d MB)", availableRamMB()), val => \$memsize, advanced => 1 },
-    if_(detect_devices::isLaptop(),
-{ label => N("Enable multi profiles"), val => \$profiles, type => 'bool', advanced => 1 },
-    ),
-],
-				 complete => sub {
-				     !$memsize || $memsize =~ /K$/ || $memsize =~ s/^(\d+)M?$/$1M/i or $in->ask_warn('', N("Give the ram size in MB")), return 1;
-#-				     $security > 4 && length($b->{password}) < 6 and $in->ask_warn('', N("At this level of security, a password (and a good one) in lilo is requested")), return 1;
-				     $b->{restricted} && !$b->{password} and $in->ask_warn('', N("Option ``Restrict command line options'' is of no use without a password")), return 1;
-				     $b->{password} eq $b->{password2} or !$b->{restricted} or $in->ask_warn('', [ N("The passwords do not match"), N("Please try again") ]), return 1;
-				     0;
-				 }
-				) or return 0;
-	} else {
+            { label => N("Bootloader to use"), val => \$b->{method}, list => [ keys %$method_choices ], format => sub { $method_choices->{$_[0]} } },
+                arch() =~ /sparc/ ? (
+            { label => N("Bootloader installation"), val => \$b->{use_partition}, list => [ 0, 1 ], format => sub { $silo_install_lang[$_[0]] } },
+		) : if_(arch() !~ /ia64/,
+            { label => N("Boot device"), val => \$b->{boot}, list => [ map { "/dev/$_" } (map { $_->{device} } (@{$all_hds->{hds}}, grep { !isFat($_) } @$fstab)), detect_devices::floppies_dev() ], not_edit => !$::expert },
+            { label => N("Compact"), val => \$b->{compact}, type => "bool", text => N("compact"), advanced => 1 },
+            { label => N("Video mode"), val => \$b->{vga}, list => [ keys %bootloader::vga_modes ], not_edit => !$::expert, format => sub { $bootloader::vga_modes{$_[0]} }, advanced => 1 },
+		),
+            { label => N("Delay before booting default image"), val => \$b->{timeout} },
+		if_($security >= 4 || $b->{password} || $b->{restricted},
+            { label => N("Password"), val => \$b->{password}, hidden => 1 },
+            { label => N("Password (again)"), val => \$b->{password2}, hidden => 1 },
+            { label => N("Restrict command line options"), val => \$b->{restricted}, type => "bool", text => N("restrict") },
+		),
+            { label => N("Clean /tmp at each boot"), val => \$clean_tmp, type => 'bool', advanced => 1 },
+            { label => N("Precise RAM size if needed (found %d MB)", availableRamMB()), val => \$memsize, advanced => 1 },
+		if_(detect_devices::isLaptop(),
+            { label => N("Enable multi profiles"), val => \$profiles, type => 'bool', advanced => 1 },
+		),
+        ],
+        complete => sub {
+	    !$memsize || $memsize =~ /K$/ || $memsize =~ s/^(\d+)M?$/$1M/i or $in->ask_warn('', N("Give the ram size in MB")), return 1;
+	    #-				     $security > 4 && length($b->{password}) < 6 and $in->ask_warn('', N("At this level of security, a password (and a good one) in lilo is requested")), return 1;
+	    $b->{restricted} && !$b->{password} and $in->ask_warn('', N("Option ``Restrict command line options'' is of no use without a password")), return 1;
+	    $b->{password} eq $b->{password2} or !$b->{restricted} or $in->ask_warn('', [ N("The passwords do not match"), N("Please try again") ]), return 1;
+	    0;
+	}) or return 0;
+    } else {
 	$b->{boot} = $partition_table::mac::bootstrap_part;	
 	$in->ask_from('', N("Bootloader main options"), [
-	{ label => N("Bootloader to use"), val => \$bootloader, list => [ keys(%bootloaders) ], format => \&translate },	
-	{ label => N("Init Message"), val => \$b->{'init-message'} },
-	{ label => N("Boot device"), val => \$b->{boot}, list => [ map { "/dev/$_" } (map { $_->{device} } (grep { isAppleBootstrap($_) } @$fstab)) ], not_edit => !$::expert },
-	{ label => N("Open Firmware Delay"), val => \$b->{delay} },
-	{ label => N("Kernel Boot Timeout"), val => \$b->{timeout} },
-	{ label => N("Enable CD Boot?"), val => \$b->{enablecdboot}, type => "bool" },
-	{ label => N("Enable OF Boot?"), val => \$b->{enableofboot}, type => "bool" },
-	{ label => N("Default OS?"), val => \$b->{defaultos}, list => [ 'linux', 'macos', 'macosx', 'darwin' ] },
-	]) or return 0;				
-	}
-	
-	$b->{methods}{$_} = 0 foreach keys %{$b->{methods}};
-	$bootloaders{$bootloader} and $bootloaders{$bootloader}->();
-
-	grub_installed($in) or return 1 if $b->{methods}{grub};
-
-	#- at least one method
-	grep_each { $::b } %{$b->{methods}} or return 0;
-
-	bootloader::set_profiles($b, $profiles);
-	bootloader::add_append($b, "mem", $memsize);
-
-	if ($prev_clean_tmp != $clean_tmp) {
-	    if ($clean_tmp) {
-		push @{$all_hds->{special}}, { device => 'none', mntpoint => '/tmp', type => 'tmpfs' };
-	    } else {
-		@{$all_hds->{special}} = grep { $_->{mntpoint} eq '/tmp' } @{$all_hds->{special}};
-	    }
-	}
+            { label => N("Bootloader to use"), val => \$b->{method}, list => [ keys %$method_choices ], format => sub { $method_choices->{$_[0]} } },
+            { label => N("Init Message"), val => \$b->{'init-message'} },
+            { label => N("Boot device"), val => \$b->{boot}, list => [ map { "/dev/$_" } (map { $_->{device} } (grep { isAppleBootstrap($_) } @$fstab)) ], not_edit => !$::expert },
+            { label => N("Open Firmware Delay"), val => \$b->{delay} },
+            { label => N("Kernel Boot Timeout"), val => \$b->{timeout} },
+            { label => N("Enable CD Boot?"), val => \$b->{enablecdboot}, type => "bool" },
+            { label => N("Enable OF Boot?"), val => \$b->{enableofboot}, type => "bool" },
+            { label => N("Default OS?"), val => \$b->{defaultos}, list => [ 'linux', 'macos', 'macosx', 'darwin' ] },
+        ]) or return 0;				
     }
 
     #- remove bios mapping if the user changed the boot device
     delete $b->{bios} if $b->{boot} ne $prev_boot;
 
-    if ($mixed_kind_of_disks && 
-	$b->{boot} =~ /\d$/ && #- on a partition
-	is_empty_hash_ref($b->{bios}) && #- some bios mapping already there
-	arch() !~ /ppc/) {
-	log::l("mixed_kind_of_disks");
-	my $hd = $in->ask_from_listf('', N("You decided to install the bootloader on a partition.
-This implies you already have a bootloader on the hard drive you boot (eg: System Commander).
-
-On which drive are you booting?"), \&partition_table::description, $hds) or goto &setupBootloader;
-	log::l("mixed_kind_of_disks chosen $hd->{device}");
-	$b->{first_hd_device} = "/dev/$hd->{device}";
+    if ($b->{method} eq 'grub') {
+	$in->do_pkgs->ensure_is_installed('grub', "/usr/sbin/grub", 1) or return 0;
     }
 
-    $ask_per_entries or return 1;
+    bootloader::set_profiles($b, $profiles);
+    bootloader::add_append($b, "mem", $memsize);
+
+    if ($prev_clean_tmp != $clean_tmp) {
+	if ($clean_tmp) {
+	    push @{$all_hds->{special}}, { device => 'none', mntpoint => '/tmp', type => 'tmpfs' };
+	} else {
+	    @{$all_hds->{special}} = grep { $_->{mntpoint} eq '/tmp' } @{$all_hds->{special}};
+	}
+    }
+    1;
+}
+
+sub setupBootloader__entries {
+    my ($in, $b, $all_hds, $fstab) = @_;
 
     $in->set_help(arch() =~ /sparc/ ? 'setupSILOAddEntry' : arch() =~ /ppc/ ? 'setupYabootAddEntry' : 'setupBootloaderAddEntry') unless $::isStandalone;
 
@@ -242,13 +247,13 @@ On which drive are you booting?"), \&partition_table::description, $hds) or goto
 	my @l;
 	if ($e->{type} eq "image") { 
 	    @l = (
-{ label => N("Image"), val => \$e->{kernel_or_dev}, list => [ map { s/$prefix//; $_ } glob_("$prefix/boot/vmlinuz*") ], not_edit => 0 },
+{ label => N("Image"), val => \$e->{kernel_or_dev}, list => [ map { s/$::prefix//; $_ } glob_("$::prefix/boot/vmlinuz*") ], not_edit => 0 },
 { label => N("Root"), val => \$e->{root}, list => [ map { "/dev/$_->{device}" } @$fstab ], not_edit => !$::expert },
 { label => N("Append"), val => \$e->{append} },
   if_(arch() !~ /ppc|ia64/,
 { label => N("Video mode"), val => \$e->{vga}, list => [ keys %bootloader::vga_modes ], format => sub { $bootloader::vga_modes{$_[0]} }, not_edit => !$::expert },
 ),
-{ label => N("Initrd"), val => \$e->{initrd}, list => [ map { s/$prefix//; $_ } glob_("$prefix/boot/initrd*") ], not_edit => 0 },
+{ label => N("Initrd"), val => \$e->{initrd}, list => [ map { s/$::prefix//; $_ } glob_("$::prefix/boot/initrd*") ], not_edit => 0 },
 { label => N("Read-write"), val => \$e->{'read-write'}, type => 'bool' }
 	    );
 	    @l = @l[0..2] unless $::expert;
@@ -256,7 +261,7 @@ On which drive are you booting?"), \&partition_table::description, $hds) or goto
 	    @l = ( 
 { label => N("Root"), val => \$e->{kernel_or_dev}, list => [ map { "/dev/$_->{device}" } @$fstab ], not_edit => !$::expert },
 if_(arch() !~ /sparc|ppc|ia64/,
-{ label => N("Table"), val => \$e->{table}, list => [ '', map { "/dev/$_->{device}" } @$hds ], not_edit => !$::expert },
+{ label => N("Table"), val => \$e->{table}, list => [ '', map { "/dev/$_->{device}" } @{$all_hds->{hds}} ], not_edit => !$::expert },
 { label => N("Unsafe"), val => \$e->{unsafe}, type => 'bool' }
 ),
 	    );
