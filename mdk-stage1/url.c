@@ -336,12 +336,7 @@ static int ftp_get_filesize(int sock, char * remotename)
 	int i;
 
 	strcpy(buf, remotename);
-	ptr = buf;
-	while (*ptr)
-		ptr++;
-	ptr--;
-	while (*ptr && *ptr != '/')
-		ptr--;
+	ptr = strrchr(buf, '/');
 	if (!*ptr)
 		return -1;
 	*ptr = '\0';
