@@ -218,6 +218,58 @@ CODE:
 OUTPUT:
 	RETVAL
 
+
+Newt::Component
+newtTree(height,want_scroll)
+	int height;
+        int want_scroll;
+	CODE:
+	RETVAL = newtCheckboxTree(-1,-1,height, (want_scroll ? NEWT_FLAG_SCROLL : 0) | NEWT_CHECKBOXTREE_HIDE_BOX);
+	OUTPUT:
+	RETVAL
+
+int
+newtTreeAdd(co,text,data,parents)
+	Newt::Component co;
+	const char * text;
+	SV * data;
+        SV * parents;
+	CODE:
+        {
+	  int l[10];
+	  int i;
+	  AV *av = (AV*) SvRV(parents);
+	  for (i = 0; i <= av_len(av); i++) l[i] = SvIV(*av_fetch(av, i, 0));
+	  l[i++] = NEWT_ARG_APPEND;
+	  l[i] = NEWT_ARG_LAST;
+	  RETVAL = newtCheckboxTreeAddArray(co, text, SvREFCNT_inc(data), 0, l);
+	}
+	OUTPUT:
+	RETVAL
+
+void
+newtTreeSetCurrent(co, data)
+	Newt::Component co;
+	SV * data;
+	CODE:
+	newtCheckboxTreeSetCurrent(co, data);
+
+void
+newtTreeSetWidth(co,width)
+	Newt::Component co;
+	int width;
+	CODE:
+	newtCheckboxTreeSetWidth(co, width);
+
+SV *
+newtTreeGetCurrent(co)
+	Newt::Component co;
+CODE:
+	RETVAL = SvREFCNT_inc(newtCheckboxTreeGetCurrent(co));
+OUTPUT:
+	RETVAL
+
+
 Newt::Component
 newtTextbox(left,top,width,height,want_scroll)
 	int left;

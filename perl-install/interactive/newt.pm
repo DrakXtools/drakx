@@ -110,7 +110,7 @@ sub ask_fromW_real {
     my $create_widget = sub {
 	my ($e, $ind) = @_;
 
-	$e->{type} = 'list' if $e->{type} =~ /(icon|tree)list/;
+	$e->{type} = 'list' if $e->{type} =~ /iconlist/;
 
 	#- combo doesn't exist, fallback to a sensible default
 	$e->{type} = $e->{not_edit} ? 'list' : 'entry' if $e->{type} eq 'combo';
@@ -134,6 +134,52 @@ sub ask_fromW_real {
 	    $get = sub { $w->CheckboxGetValue == ord '*' };
 	} elsif ($e->{type} eq 'button') {
 	    $w = Newt::Component::Button(simplify_string(may_apply($e->{format}, ${$e->{val}})));
+	} elsif ($e->{type} eq 'treelist') {
+	    $e->{formatted_list} = [ map { may_apply($e->{format}, $_) } @{$e->{list}} ];
+	    my $data_tree = interactive::helper_separator_tree_to_tree($e->{separator}, $e->{formatted_list}, $e->{list});
+
+	    my $count; $count = sub {
+		my ($t) = @_;
+		1 + ($t->{_leaves_} ? int @{$t->{_leaves_}} : 0) 
+		  + ($t->{_order_} ? sum(map { $count->($t->{$_}) } @{$t->{_order_}}) : 0);
+	    };
+	    $size = $count->($data_tree);
+	    
+	    my ($h) = @$l == 1 && $height > 30 ? 10 : 5;
+	    my $scroll = $size > $h;
+	    $has_scroll = 1;
+	    $size = min($size, $h);
+
+	    $w = Newt::Component::Tree($size, $scroll);
+
+	    my @lz;
+	    my $wi;
+	    my $add_item = sub {
+		my ($text, $data, $parents) = @_;
+		$text = simplify_string($text, $width - 10);
+		$wi = max($wi, length($text) + 3 * @$parents + 4);
+		$w->TreeAdd($text, $data, $parents);
+	    };
+
+	    my $populate; $populate = sub {
+		my ($node, $parents) = @_;
+		if (my $l = $node->{_order_}) {
+		    each_index {
+			$add_item->($_, '', $parents);
+			$populate->($node->{$_}, [ @$parents, $::i ]);
+		    } @$l;
+		}
+		if (my $l = $node->{_leaves_}) {
+		    $add_item->($_->[0], $_->[1], $parents) foreach @$l;
+		}
+	    };
+	    $populate->($data_tree, []);
+
+	    $w->TreeSetWidth($wi + 1);
+	    $get = sub { $w->TreeGetCurrent };
+	    $set = sub {
+		#$w->TreeSetCurrent($_[0]);
+	    };
 	} elsif ($e->{type} =~ /list/) {
 	    my ($h) = @$l == 1 && $height > 30 ? 10 : 5;
 	    my $scroll = @{$e->{list}} > $h ? 1 << 2 : 0;
