@@ -237,12 +237,18 @@ sub installPackages() {
 
     pkgs::setSelectedFromCompssList($o->{packages}, \%compssUsersChoice, 4, 0);
 
+    my $unselect = sub {
+        my ($pkg) = @_;
+        my $p = pkgs::packageByName($o->{packages}, $pkg);
+        pkgs::unselectPackage($o->{packages}, $p) if $p;
+    };
+
     # unselect some packages whose services fsck up the box and whose services are not enabled by appropriate tools:
     # (shorewall must be deselected before iptables is)
-    foreach (qw(at hpoj shorewall iptables ntp tmdns zcip )) {
-        my $p = pkgs::packageByName($o->{packages}, $_);
-        pkgs::unselectPackage($o->{packages}, $p) if $p;
-    }
+    $unselect->($_) foreach qw(at hpoj shorewall iptables ntp tmdns zcip );
+
+    # unselect uim since uim IM break first time wizard when selecting english:
+    $unselect->($_) foreach qw(uim-applet uim libuim0);
 
     my @toInstall = pkgs::packagesToInstall($o->{packages});
     local $ENV{DURING_INSTALL} = 1;
