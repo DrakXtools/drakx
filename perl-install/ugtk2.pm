@@ -420,7 +420,7 @@ sub create_packtable {
 	    my ($j) = @_;
 	    if ($_) {
 		ref $_ or $_ = Gtk2::Label->new($_);
-		$j != $#$l ?
+		$j != $#$l && !$options->{mcc} ?
 		  $w->attach($_, $j, $j + 1, $i, $i + 1,
 			     'fill', 'fill', 5, 0) :
 		  $w->attach($_, $j, $j + 1, $i, $i + 1,
