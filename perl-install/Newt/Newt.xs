@@ -219,12 +219,16 @@ OUTPUT:
 	RETVAL
 
 Newt::Component
-newtTextbox(left,top,width,height,flags)
+newtTextbox(left,top,width,height,want_scroll)
 	int left;
 	int top;
 	int width;
 	int height;
-	int flags;
+	int want_scroll;
+	CODE: 
+	RETVAL = newtTextbox(left,top,width,height, (want_scroll ? NEWT_FLAG_SCROLL : 0) | NEWT_FLAG_WRAP);
+	OUTPUT:
+	RETVAL
 
 void
 newtTextboxSetText(co,text)

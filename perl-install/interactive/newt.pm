@@ -37,16 +37,16 @@ sub myTextbox {
     my $width = $width - 9;
     my @l = warp_text(join("\n", @messages), $width);
     my $h = min($free_height - 13, int @l);
-    my $flag = 1 << 6; 
+    my $want_scroll;
     if ($h < @l) {
 	if ($allow_scroll) {
-	    $flag |= 1 << 2; #- NEWT_FLAG_SCROLL
+	    $want_scroll = 1;
 	} else {
 	    # remove the text, no other way!
 	    @l = @l[0 .. $h-1];
 	}
     }
-    my $mess = Newt::Component::Textbox(1, 0, my $w = max(map { length } @l) + 1, $h, $flag);
+    my $mess = Newt::Component::Textbox(1, 0, my $w = max(map { length } @l) + 1, $h, $want_scroll);
     $mess->TextboxSetText(join("\n", @l));
     $mess, $w + 1, $h;
 }
