@@ -223,6 +223,12 @@ sub set_alternative {
     return 1;
 }    
 
+sub pdq_panic_button {
+    my $setting = @_[0];
+    run_program::rooted($prefix, "/usr/sbin/pdqpanicbutton", "--$setting")
+	|| die "Could not $setting PDQ panic buttons!";
+}
+
 sub copy_printer_params($$) {
     my ($from, $to) = @_;
     map { $to->{$_} = $from->{$_} } grep { $_ ne 'configured' } keys %$from; 
