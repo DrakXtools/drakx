@@ -1104,12 +1104,10 @@ connections from many clients. Note: if your machine is only a client on the Int
 													 }
 
 sub running_window_manager {
-    my @window_managers = (
-	'kdeinit: kwin', 
-	qw(gnome-session icewm wmaker afterstep fvwm fvwm2 fvwm95 mwm twm enlightenment xfce blackbox sawfish olvwm),
-    );
+    my @window_managers = qw(kwin gnome-session icewm wmaker afterstep fvwm fvwm2 fvwm95 mwm twm enlightenment xfce blackbox sawfish olvwm);
+
     foreach (@window_managers) {
-	return $_ if `/sbin/pidof "$_"` > 0;
+	return $_ if fuzzy_pidofs(qr/\b$_\b/);
     }
     '';
 }
@@ -1118,7 +1116,7 @@ sub ask_window_manager_to_logout {
     my ($wm) = @_;
     
     my %h = (
-	'kdeinit: kwin' => "su $ENV{USER} -c 'dcop kdesktop default logout'",
+	'kwin' => "su $ENV{USER} -c 'dcop kdesktop default logout'",
 	'gnome-session' => "save-session --kill",
 	'icewm' => "killall -QUIT icewm",
 	'wmaker' => "killall -USR1 wmaker",

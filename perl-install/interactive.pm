@@ -83,7 +83,7 @@ sub vnew {
     }
     if ($ENV{DISPLAY} && system('/usr/X11R6/bin/xtest') == 0) {
 	if ($su && $>) {
-	    if (`/sbin/pidof "kdeinit: kwin"` > 0) {
+	    if (fuzzy_pidofs(qr/\bkwin\b/) > 0) {
 		exec("kdesu", "-c", "$0 @ARGV") or die _("kdesu missing");
 	    } else {
 		exec {'consolehelper'} $0, @ARGV or die _("consolehelper missing");
