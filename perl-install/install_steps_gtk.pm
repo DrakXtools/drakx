@@ -526,8 +526,6 @@ sub installPackages {
 									   $y + ${$heights}[$i] + $decy,
 									   $layout);
 					   };
-					   $draw_lay->($darea->style->white_gc, 1, 1);
-					   $bold and $draw_lay->($darea->style->white_gc, 2, 1);
 					   $draw_lay->($darea->style->black_gc, 0, 0);
 					   $bold and $draw_lay->($darea->style->black_gc, 1, 0);
 					   $layout->unref;
