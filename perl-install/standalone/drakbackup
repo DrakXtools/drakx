@@ -139,7 +139,6 @@ my $advanced_box;
 my $box2;
 my $cfg_file_exist = 0;
 my @user_list_all;
-my $list_other;
 my $DEBUG = 0;
 my $restore_sys = 1; 
 my $restore_user = 1; 
@@ -151,7 +150,6 @@ my $sys_backuped = 0;
 my $other_backuped = 0;
 my @user_list_to_restore;
 my @sys_list_to_restore;
-my $cd_device_entry;
 my $button_box;
 my $button_box_tmp;
 my $next_widget;
@@ -171,7 +169,6 @@ my $plabel2;
 my $plabel3;
 my $stext;
 my $list_model;
-my $iter;
 my $the_time;
 my @user_list_to_restore2;
 my @data_backuped;
@@ -198,7 +195,6 @@ my @tape_devices;
 my $tar_ext = "tar.gz";
 
 # config. FILES -> Default PATH  & Global variables.
-my %config;
 my @sys_files = "/etc";
 my @user_list;
 my @list_other;
@@ -211,7 +207,7 @@ my $comp_mode = 0;
 my $backup_sys = 1;
 my $backup_user = 1;
 my $manual_user = 0;
-my $backup_daemon = 1;
+my $backup_daemon = 0;
 my $backup_sys_versions = 0;
 my $backup_user_versions = 0;
 my $backup_other_versions = 0;
@@ -221,6 +217,7 @@ my $other_diff_mode = 0;
 my $what_no_browser = 1;
 my $cdrw = 0;
 my $dvdr = 0;
+my $dvdrw = 0;
 my $dvdram = 0;
 my $net_proto = '';
 my $host_path = '';
@@ -229,10 +226,6 @@ my $daemon = 0;
 my $backend_only = 0;
 my $daemon_media = '';
 my $hd_quota = 0;
-
-#- 7/4/2002 SB - consolidate net methods
-my $where_use_net = 0;
-
 my $where_net = 0;
 my $where_hd = 1;
 my $del_hd_files = 0;
@@ -340,6 +333,7 @@ sub explain_conf() {
 	print "BROWSER_CACHE              Backup web browser cache also.\n";
 	print "CDRW                       Backup media is re-writable CD.\n";
 	print "DVDR                       Backup media is recordable DVD (not fully supported yet).\n";
+	print "DVDRW                      Backup media is recordable DVD+RW.\n";
 	print "DVDRAM                     Backup media is DVDRAM (not fully supported yet).\n";
 	print "NET_PROTO=                 Network protocol to use for remote backups: \n";
 	print "                             ftp, rsync, ssh, or webdav.\n";
@@ -545,7 +539,7 @@ sub get_cd_info() {
           }
 	  chop($line_data[$cd_drives]) if $cd_drives;
           foreach my $key (keys %data) {
-              if ($line_data[0] =~ $key) {
+              if ($line_data[0] eq $key) {
                   for ($i = 1; $i <= $cd_drives; $i++) {
                       $cd_devices{$drive_names[$i]}{$data{$key}} = $line_data[$i];
                   }
@@ -659,6 +653,7 @@ sub save_conf_file() {
     $where_net and  push @cfg_list, "USE_NET\n";
     $cdrw and push @cfg_list, "CDRW\n"; 
     $dvdr and push @cfg_list, "DVDR\n"; 
+    $dvdrw and push @cfg_list, "DVDRW\n"; 
     $dvdram and push @cfg_list, "DVDRAM\n"; 
     $what_no_browser or push @cfg_list, "BROWSER_CACHE\n";
     $backup_sys or push @cfg_list,  "NO_SYS_FILES\n";
@@ -770,7 +765,8 @@ sub read_conf_file() {
 			if (/^OPTION_COMP/)    { s/^OPTION_COMP=//gi; /TAR.GZ/ and  $comp_mode = 0; /TAR.BZ2/ and $comp_mode = 1 }
 			if (/^BROWSER_CACHE/)  { $what_no_browser = 0 }
 			if (/^CDRW/)           { $cdrw = 1 }
-			if (/^DVDR/)           { $dvdr = 1 }
+			if (/^DVDR$/)           { $dvdr = 1 }
+			if (/^DVDRW/)          { $dvdrw = 1 }
 			if (/^DVDRAM/)         { $dvdram = 1 }
 			if (/^NET_PROTO/)      { s/^NET_PROTO=//gi; $net_proto = $_ }
 			if (/^HOST_PATH/)      { s/^HOST_PATH=//gi; $host_path = $_ } 
@@ -1079,7 +1075,7 @@ sub check_for_cd() {
 		show_warning("f", N("No CD-R/DVD-R in drive!"));
 		return 1;
 	}
-	if ($log_buff !~ /ATIP info from disk/) {
+	if ($log_buff !~ /ATIP info from disk|Found DVD media/) {
 		show_warning("f", N("Does not appear to be recordable media!"));
 		return 1;
 	}
@@ -1110,6 +1106,8 @@ sub check_for_cd() {
 	
 sub write_on_cd() {	
 	my $command = "cdrecord -v dev=$cd_device -data ";
+	# DVD+RW use -dao
+	$command .= "-dao " if $dvdrw;
 	#- only blank if it's the first session
 	$command .= "blank=fast " if $media_erase && $session_offset eq '';
 	#- multi-session mode
@@ -2178,7 +2176,7 @@ sub advanced_where_cd {
 	}  
 	
     my $combo_where_cd_time = new Gtk2::OptionMenu();
-    $combo_where_cd_time->set_popdown_strings("650 MB", "700 MB", "750 MB", "800 MB");    
+    $combo_where_cd_time->set_popdown_strings("650 MB", "700 MB", "750 MB", "800 MB", "4.7 GB");    
  
 	my $combo_where_cdrecord_device = new Gtk2::Combo();
 	my @dev_codes;
@@ -2199,7 +2197,7 @@ sub advanced_where_cd {
 				0, gtkset_sensitive($combo_where_cd_device, $where_cd),
 			),
 			0, gtkpack_(new Gtk2::HBox(0,10),
-			0, gtkset_sensitive(new Gtk2::Label(N("Choose your CD/DVD media size (MB)")), $where_cd),
+			0, gtkset_sensitive(new Gtk2::Label(N("Choose your CD/DVD media size")), $where_cd),
 				1, new Gtk2::VBox(0, 5),
 				0, gtkset_sensitive($combo_where_cd_time, $where_cd),
 			),
@@ -2221,7 +2219,9 @@ sub advanced_where_cd {
 			0, new Gtk2::VBox(0, 5),
 			0, gtkpack_(new Gtk2::HBox(0,10),
 				1, new Gtk2::VBox(0, 5),
-				0, gtkset_sensitive(new Gtk2::Label(N("DVD-R device")), $where_cd),
+				0, gtkset_sensitive(new Gtk2::Label(N("DVD+RW media")), $where_cd),
+				0, gtkset_sensitive(my $check_dvdrw = new Gtk2::CheckButton(), $where_cd),
+				0, gtkset_sensitive(new Gtk2::Label(N("DVD-R media")), $where_cd),
 				0, gtkset_sensitive(my $check_dvdr = new Gtk2::CheckButton(), $where_cd),
 				0, gtkset_sensitive(new Gtk2::Label(N("DVDRAM device")), $where_cd),
 				0, gtkset_sensitive(my $check_dvdram = new Gtk2::CheckButton(), $where_cd),
@@ -2237,14 +2237,12 @@ sub advanced_where_cd {
 			0, gtkpack_(new Gtk2::HBox(0,10),
 				0, gtkset_sensitive(new Gtk2::Label(N("Enter your CD Writer device name\n ex: 0,1,0")),  $where_cd),
 				1, new Gtk2::VBox(0, 5),
-#				0, gtkset_size_request(gtkset_sensitive($cd_device_entry = new Gtk2::Entry(), $where_cd), 200, 20),
 				0, gtkset_sensitive(gtkset_size_request($combo_where_cdrecord_device, 200, 20), $where_cd),
 			),
 		),
 	);
 
-#    foreach ([$check_cdrw_erase, \$media_erase], [$check_cd_with_install_boot, \$cd_with_install_boot ]) {
-    foreach ([$check_cdrw_erase, \$media_erase], [$check_dvdr, \$dvdr], [$check_dvdram, \$dvdram], [$check_multisession, \$multi_session]) {
+    foreach ([$check_cdrw_erase, \$media_erase], [$check_dvdrw, \$dvdrw], [$check_dvdr, \$dvdr], [$check_dvdram, \$dvdram], [$check_multisession, \$multi_session]) {
 		my $ref = $_->[1];
 		gtksignal_connect(gtkset_active($_->[0], $$ref), toggled => sub { $$ref = $$ref ? 0 : 1 })
 	}
@@ -2260,6 +2258,7 @@ sub advanced_where_cd {
     });
     gtksignal_connect(gtkset_active($check_cdrw, $cdrw), toggled => sub { 
 		$cdrw = $cdrw ? 0 : 1;
+		$media_erase = $media_erase ? 0 : 1;
 		$check_cdrw_erase->set_sensitive($cdrw);
 		destroy_widget();
 		$current_widget->();
@@ -2286,8 +2285,9 @@ sub advanced_where_cd {
 		$std_device = $combo_where_cd_device->entry->get_text;
 		$combo_where_cdrecord_device->entry->set_text($cd_devices{$std_device}{rec_dev});
 		$check_dvdr->set_active($cd_devices{$std_device}{dvdr});
+		$check_dvdrw->set_active($cd_devices{$std_device}{dvdr});
 		$check_dvdram->set_active($cd_devices{$std_device}{dvdram});
-		#- do this one last or the widget destory mucks up the others
+		#- do this one last or the widget destroy mucks up the others
 		$check_cdrw->set_active($cd_devices{$std_device}{cdrw});			
 	});
 	
