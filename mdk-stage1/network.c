@@ -761,7 +761,7 @@ enum return_type http_prepare(void)
 
 	do {
 		char location_full[500];
-		int fd;
+		int fd, size;
 
 		results = ask_from_entries_auto("Please enter the name or IP address of the HTTP server, "
 						"and the directory containing the " DISTRIB_NAME " Distribution.",
@@ -774,7 +774,7 @@ enum return_type http_prepare(void)
 
 		log_message("HTTP: trying to retrieve %s", location_full);
 		
-		fd = http_download_file(answers[0], location_full);
+		fd = http_download_file(answers[0], location_full, &size);
 		if (fd < 0) {
 			log_message("HTTP: error %d", fd);
 			if (fd == FTPERR_FAILED_CONNECT)
@@ -784,8 +784,10 @@ enum return_type http_prepare(void)
 			results = RETURN_BACK;
 			continue;
 		}
+
+		log_message("HTTP: size of download %d bytes", size);
 		
-		results = load_ramdisk_fd(fd, 0);
+		results = load_ramdisk_fd(fd, size);
 
 		method_name = strdup("http");
 		sprintf(location_full, "http://%s/%s", answers[0], answers[1]);

@@ -408,7 +408,7 @@ int ftp_end_data_command(int sock)
 }
 
   
-int http_download_file(char * hostname, char * remotename)
+int http_download_file(char * hostname, char * remotename, int * size)
 {
 	char * buf;
 	struct timeval timeout;
@@ -420,6 +420,7 @@ int http_download_file(char * hostname, char * remotename)
 	int rc;
 	struct sockaddr_in destPort;
 	fd_set readSet;
+	char * header_content_length = "Content-Length: ";
 
 	if ((rc = get_host_address(hostname, &serverAddress))) return rc;
 
@@ -508,6 +509,11 @@ int http_download_file(char * hostname, char * remotename)
 			*end = ' ';
 		}
 	}
-    
+
+	if ((buf = strstr(headers, header_content_length)))
+		*size = charstar_to_int(buf + strlen(header_content_length));
+	else
+		*size = 0;
+
 	return sock;
 }

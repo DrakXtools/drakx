@@ -26,7 +26,7 @@ int ftp_open_connection(char * host, char * name, char * password, char * proxy)
 int ftp_start_download(int sock, char * remotename, int * size);
 int ftp_end_data_command(int sock);
 
-int http_download_file(char * hostname, char * remotename);
+int http_download_file(char * hostname, char * remotename, int * size);
 
 
 #define FTPERR_BAD_SERVER_RESPONSE   -1
