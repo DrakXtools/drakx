@@ -34,7 +34,7 @@ $::Wizard_title = _("Proxy handling");
 
 my $in = interactive::vnew('su', 'default');
 
-if ($::isEmbedded && ref($in) =~ /gtk/) {
+if ($::isWizard || ($::isEmbedded && ref($in) =~ /gtk/)) {
     proxy::main('', $in, sub { $in->standalone::pkgs_install(@_) });
     $in->exit(0);
 }
@@ -54,7 +54,7 @@ Click on Configure to launch the setup wizard."),
 				  ),
 			1, gtkpack(my $hbox2 = new Gtk::HBox(0,0),),
 			0, gtkadd(gtkset_layout(new Gtk::HButtonBox, -end),
-				  gtksignal_connect(new Gtk::Button(_("Configure")), clicked => sub { system ("/usr/sbin/drakgw --wizard") }),
+				  gtksignal_connect(new Gtk::Button(_("Configure")), clicked => sub { system ("/usr/sbin/drakproxy --wizard") }),
 				  gtksignal_connect(new Gtk::Button(_("Cancel")), clicked => sub { kill(USR1, $::CCPID) }),
 				 )
 		       )
@@ -67,6 +67,9 @@ Gtk->exit(0);
 
 #-------------------------------------------------
 #- $Log$
+#- Revision 1.5  2001/06/12 12:45:57  odin
+#- ui for drakproxy almost done
+#-
 #- Revision 1.4  2001/06/11 16:34:49  damien
 #- corrected CVS: ----------------------------------------------------------------------
 #-
