@@ -55,16 +55,21 @@ print "Found lang $lang\n";
 #- other combination are really dangerous and are not supported, ask
 #- the user that all data on the disk will be erased and go on.
 my ($hd_size, @hd_parts);
-open F, "parted /dev/$hd print |";
-while (<F>) {
-    /^Disk geometry [^:]*:\s*([\d\.]+)-([\d\.]+)/ and do { $hd_size = $2 - $1 };
-    #/^Disk label type:\s*msdos/ and do { $hd_type = 'msdos' };
-    /^(\d+)\s+([\d\.]+)\s+([\d\.]+)\s+(primary|logical|extended)\s*(\S*)/ and do {
-	#- this automatically drops extended partition here!
-	push @hd_parts, { minor => $1, start => $2, end => $3, type => $4, fstype => $5 };
-    };
+for (1..2) {
+    open F, "parted /dev/$hd print |";
+    while (<F>) {
+	/^Disk geometry [^:]*:\s*([\d\.]+)-([\d\.]+)/ and do { $hd_size = $2 - $1 };
+	#/^Disk label type:\s*msdos/ and do { $hd_type = 'msdos' };
+	/^(\d+)\s+([\d\.]+)\s+([\d\.]+)\s+(primary|logical|extended)\s*(\S*)/ and do {
+	    #- this automatically drops extended partition here!
+	    push @hd_parts, { minor => $1, start => $2, end => $3, type => $4, fstype => $5 };
+	};
+    }
+    close F;
+    $hd_size and last;
+    print "Unable to detect partition on disk, trying with new label\n";
+    system "parted", "/dev/$hd", "mklabel", "msdos";
 }
-close F;
 my ($min_size, $def_size, $trigger_size, $inst_size, $swap_size) = (1700, 2700, 4000, 200, 128);
 $hd_size > $min_size or die "hard disk is too small to contain oem install (${hd_size}MB found, need $min_size at least)";
 
