@@ -2,7 +2,7 @@ package standalone; # $Id$
 
 use c;
 use strict;
-use common qw(N if_);
+use common qw(N N_ if_);
 use Config;
 
 #- for sanity (if a use standalone is made during install, MANY problems will happen)
@@ -18,7 +18,7 @@ $ENV{SHARE_PATH} ||= "/usr/share";
 c::setlocale();
 c::bindtextdomain('libDrakX', "/usr/share/locale");
 
-$::license = N("This program is free software; you can redistribute it and/or modify
+$::license = N_("This program is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
 the Free Software Foundation; either version 2, or (at your option)
 any later version.
@@ -37,7 +37,7 @@ my $progname = common::basename($0);
 
 my %usages = (
            'diskdrake' => "[--{" . join(",", qw(hd nfs smb dav removable fileshare)) . "}]",
-           'drakbackup' => N("[--config-info] [--daemon] [--debug] [--default] [--show-conf]
+           'drakbackup' => N_("[--config-info] [--daemon] [--debug] [--default] [--show-conf]
 Backup and Restore application
 
 --default             : save default directories.
@@ -48,13 +48,13 @@ Backup and Restore application
 --help                : show this message.
 --version             : show version number.
 "),
-           'drakbug' => N("[OPTIONS] [PROGRAM_NAME]
+           'drakbug' => N_("[OPTIONS] [PROGRAM_NAME]
 
 OPTIONS:
   --help            - print this help message.
   --report          - program should be one of mandrake tools
   --incident        - program should be one of mandrake tools"),
-           'drakfont' => N("Font Importation and monitoring application                                     
+           'drakfont' => N_("Font Importation and monitoring application                                     
 --windows_import : import from all available windows partitions.
 --xls_fonts      : show all fonts that already exist from xls
 --strong         : strong verification of font.
@@ -67,7 +67,7 @@ OPTIONS:
                  : and gs for ghostscript for only this one."),
            'draksec' => "[--debug]
 --debug: print debugging information",
-           'drakTermServ' => N("[OPTIONS]...
+           'drakTermServ' => N_("[OPTIONS]...
 Mandrake Terminal Server Configurator
 --enable         : enable MTS
 --disable        : disable MTS
@@ -79,9 +79,9 @@ Mandrake Terminal Server Configurator
 --delclient      : delete a client machine from MTS (requires MAC address, IP, nbi image name)"),
 	      'drakxtv' => "[--no-guess]",
 	      'drakupdate_fstab' => " [--add | --del] <device>\n",
-	      'keyboardrake' => N("[keyboard]"),
-           'logdrake' => N("[--file=myfile] [--word=myword] [--explain=regexp] [--alert]"),
-           'net_monitor' => N("[OPTIONS]
+	      'keyboardrake' => N_("[keyboard]"),
+           'logdrake' => N_("[--file=myfile] [--word=myword] [--explain=regexp] [--alert]"),
+           'net_monitor' => N_("[OPTIONS]
 Network & Internet connection and monitoring application
 
 --defaultintf interface : show this interface by default
@@ -90,14 +90,14 @@ Network & Internet connection and monitoring application
 --force : used with (dis)connect : force (dis)connection.
 --status : returns 1 if connected 0 otherwise, then exit.
 --quiet : don't be interactive. To be used with (dis)connect."),
-	      'printerdrake' => N(" [--skiptest] [--cups] [--lprng] [--lpd] [--pdq]"),
-	      'rpmdrake' => N("[OPTION]...
+	      'printerdrake' => N_(" [--skiptest] [--cups] [--lprng] [--lpd] [--pdq]"),
+	      'rpmdrake' => N_("[OPTION]...
   --no-confirmation      don't ask first confirmation question in MandrakeUpdate mode
   --no-verify-rpm        don't verify packages signatures
   --changelog-first      display changelog before filelist in the description window
   --merge-all-rpmnew     propose to merge all .rpmnew/.rpmsave files found"),
-           'scannerdrake' => N("[--manual] [--device=dev] [--update-sane=sane_source_dir] [--update-usbtable] [--dynamic=dev]"),
-	      'XFdrake' => N(" [everything]
+           'scannerdrake' => N_("[--manual] [--device=dev] [--update-sane=sane_source_dir] [--update-usbtable] [--dynamic=dev]"),
+	      'XFdrake' => N_(" [everything]
        XFdrake [--noauto] monitor
        XFdrake resolution"),
 	      );
