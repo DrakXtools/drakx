@@ -63,6 +63,17 @@ sub get_eth_cards() {
             ($description) = (mapIntfToDevice($interface))[0]->{description};
         }
         if (!$description) {
+            my $drv = readlink("/sys/class/net/$interface/driver");
+            if ($drv and $drv =~ s!.*/!!) {
+                $a = $drv;
+                my %l;
+                my %sysfs_fields = (id => "device", subid => "subsystem_device", vendor => "vendor", subvendor => "subsystem_vendor");
+                $l{$_} = hex(chomp_(cat_("/sys/class/net/$interface/device/" . $sysfs_fields{$_}))) foreach keys %sysfs_fields;
+                my @cards = grep { my $dev = $_; every { $dev->{$_} eq $l{$_} } keys %l } detect_devices::probeall();
+                $description = $cards[0]{description} if $#cards == 0;
+            }
+        }
+        if (!$description) {
             my @cards = grep { $_->{driver} eq ($a || $saved_driver) } detect_devices::probeall();
             $description = $cards[0]->{description} if $#cards == 0;
         }
