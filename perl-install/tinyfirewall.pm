@@ -92,14 +92,13 @@ sub ReadConfig
 
 
 		## set the proper value in the hash
-		
 		$settings{$variable} = $value
 			if ($variable);
 	}
 
 	close CONFIGFILE;
 	return;
-    my ($config_file, $default_config_file)=@_;
+#    my ($config_file, $default_config_file)=@_;
     $config_file ||= "/etc/Bastille/bastille-firewall.cfg";
     $default_config_file ||= "/usr/share/Bastille/bastille-firewall.cfg";
     -e $config_file or cp($default_config_file, $config_file);
@@ -131,9 +130,29 @@ my $GetNetworkInfo = sub {
 sub DoInterface {
     my ($in)=@_;
     $::isWizard=1;
-    my $popimapno = sub { $_[0] or return; mapn { $settings{$_->[0]} = $_->[1] } (
+    my $popimap = sub { $_[0] or return; mapn { $settings{$_[0]} = $_[1] }
 [ qw(FORCE_PASV_FTP TCP_BLOCKED_SERVICES UDP_BLOCKED_SERVICES ICMP_ALLOWED_TYPES ENABLE_SRC_ADDR_VERIFY IP_MASQ_NETWORK IP_MASQ_MODULES REJECT_METHOD) ] ,
-[ "N", "6000:6020", "2049", "destination-unreachable echo-reply time-exceeded" , "Y", "", "", "DENY"; ]); }
+[ "N", "6000:6020", "2049", "destination-unreachable echo-reply time-exceeded" , "Y", "", "", "DENY" ]; };
+    my $ntp = sub { $_[0] or return; mapn { $settings{$_[0]} = $_[1] } ['ICMP_OUTBOUND_DISABLED_TYPES}', 'LOG_FAILURES'], [ "", "N"] };
+    my $dhcp = sub { if ($_[0]) {
+	$settings{DHCP_IFACES} and return;
+	open NETSTAT, "/bin/netstat -in |" or die "Can't pipe from /bin/netstat: $!\n"; <NETSTAT>; <NETSTAT>;
+	$settings{DHCP_IFACES} = join(' ', split(' ', $settings{DHCP_IFACES}), map { (split / /)[0]; } (<NETSTAT>)); close NETSTAT;
+    } else { $settings{DHCP_IFACES} = "" }};
+    my $quit = sub {
+	$_[0] or $in->exit(0);
+	cp("-f", $config_file, $config_file . ".orig");
+	my $tmp_file = tmpnam();
+	substInFile {
+	    /^(.+)\s*\=/;
+	    s/\".*\"/\"$settings{$1}\"/
+	} $config_file;
+	map { system($_) } ("/bin/cp /usr/share/Bastille/bastille-ipchains /usr/share/Bastille/bastille-netfilter /sbin",
+			    "/bin/cp /usr/share/Bastille/bastille-firewall /etc/rc.d/init.d/",
+			    "/bin/chmod 0700 /etc/rc.d/init.d/bastille-firewall", "/bin/chmod 0700 /sbin/bastille-ipchains",
+			    "/bin/chmod 0700 /sbin/bastille-netfilter", "/sbin/chkconfig bastille-firewall on",
+			    "/etc/rc.d/init.d/bastille-firewall stop", "/etc/rc.d/init.d/bastille-firewall start");
+    };
     my @struct = (
 		  [$GetNetworkInfo],
 		  [],
@@ -143,10 +162,10 @@ sub DoInterface {
 		  [undef , undef, undef, undef, ["tcp", "23"]],
 		  [undef , undef, undef, undef, ["tcp", "20"],["tcp", "21"]],
 		  [undef , undef, undef, undef, ["tcp", "25"]],
-		  [undef , undef, undef, $popimapno, ["tcp", "109"], ["tcp", "110"], ["tcp", "143"]],
-		  [undef , _("No I don't need DHCP"), _("Yes I need DHCP"), , [$settings{DHCP_IFACES}]],
-		  [undef , _("No I don't need NTP"), _("Yes I need NTP"), , ]
-		  [undef , _("Don't Save"), _("Save & Quit"), , , ]
+		  [undef , undef, undef, $popimap, ["tcp", "109"], ["tcp", "110"], ["tcp", "143"]],
+		  [undef , _("No I don't need DHCP"), _("Yes I need DHCP"), $dhcp],
+		  [undef , _("No I don't need NTP"), _("Yes I need NTP"), $ntp ],
+		  [undef , _("Don't Save"), _("Save & Quit"), $quit ]
 		 );
     !Kernel22() and pop @struct, pop @struct;
     for (my $i=0;$i<@struct;$i++) {
@@ -163,9 +182,9 @@ sub DoInterface {
 	my $yes = $l->[2] ? $l->[2] : _("Yes (allow this through the firewall)");
 	if (my $e = $in->ask_from_list(_("Firewall Configuration Wizard"),
 				       $messages[$i],
-				       [ $yes, $no ], or_( map { if_($_, CheckService($_->[0], $_->[1])) } (@$l[4..6])) ? $yes : $no
+				       [ $yes, $no ], or_( map { $_ and CheckService($_->[0], $_->[1]) } (@$l[4..6])) ? $yes : $no
 				      )) {
-	    map { if_($_, Service ($e=~/Yes/, $_->[0], $_->[1]) } (@$struct[$i][4..6]);
+	    map { $_ and Service ($e=~/Yes/, $_->[0], $_->[1]) } (@{@struct[$i]}[4..6]);
 	    $struct[$i][3] and $struct[$i][3]->($e=~/Yes/);
 	} else {
 	  prev:
@@ -179,105 +198,16 @@ sub Service {
     my ($add, $protocol, $port) = @_;
     if ($add) {
 	map { $_ eq $port and return } (split (' ', $settings{uc($protocol) . "_PUBLIC_SERVICES"}));
-	$settings{uc($protocol) . "_PUBLIC_SERVICES"} .= " " . $port;
+	$settings{uc($protocol) . "_PUBLIC_SERVICES"} = join(' ',split(' ',$settings{uc($protocol) . "_PUBLIC_SERVICES"}, $port));
     } else {
 	$settings{uc($protocol) . "_PUBLIC_SERVICES"} =
-	  join( ' ', map { if_($service ne $port, $service)} (split (' ', $settings{uc($protocol) . "_PUBLIC_SERVICES"})) );
+	  join( ' ', map { if_($_ ne $port, $_)} (split (' ', $settings{uc($protocol) . "_PUBLIC_SERVICES"})) );
     }
-}
-
-sub AddService
-#######################
-## adds a port to [TCP|UDP]_PUBLIC_SERVICES if it's not already there
-{
-
-	my @old_services;
-
-
-	foreach my $service (@old_services)
-	{
-		$port_active = 1 if ($service eq $port);
-	}
-
-	$settings{TCP_PUBLIC_SERVICES} .= " "
-		if ($settings{TCP_PUBLIC_SERVICES} and ($protocol eq "tcp") and (!$port_active));
-
-	$settings{UDP_PUBLIC_SERVICES} .= " "
-		if ($settings{UDP_PUBLIC_SERVICES} and ($protocol eq "udp") and (!$port_active));
-
-	$settings{TCP_PUBLIC_SERVICES} .= $port
-		if (!$port_active and ($protocol eq "tcp"));
-
-	$settings{UDP_PUBLIC_SERVICES} .= $port
-		if (!$port_active and ($protocol eq "udp"));		
-}
-
-sub WidgetHandler {
-    my ($i, $e)=@_;
-
-	if ($data eq "save no")
-	{
-		Gtk->exit (0);
-	}
-	elsif ($data eq "save yes")
-	{
-		CloseWindow();
-	}
-	elsif ($data eq "quit no")
-	{
-		DestroyStep();
-		$curstep = $previous_step;
-		DoInterface();
-		return 0;
-	}
-
-		  [undef , _("No I don't need DHCP"), _("Yes I need DHCP"), "dhcp no", "dhcp yes", [$settings{DHCP_IFACES}]],
-		  [undef , _("No I don't need NTP"), _("Yes I need NTP"), "ntp no", "ntp yes", ]
-		  [undef , _("Don't Save"), _("Save & Quit"), , , ]
-
-		elsif ($data eq "dhcp yes")
-		{
-			return if $settings{DHCP_IFACES};  # variable already has something
-			
-			## Get a list of network interfaces
-
-			open NETSTAT, "/bin/netstat -in |"
-				or die "Can't pipe from /bin/netstat: $!\n";
-
-			<NETSTAT>; <NETSTAT>;   # get rid of first 2 lines
-	
-			my @interfaces;
-		
-			while (<NETSTAT>)
-			{
-				$settings{DHCP_IFACES} .= (split / /)[0] . " ";
-			}	
-
-			close NETSTAT;	
-
-			chop $settings{DHCP_IFACES}
-		}
-		elsif ($data eq "dhcp no")
-		{
-			$settings{DHCP_IFACES} = "";
-		}
-		elsif ($data eq "ntp yes")
-		{
-			$settings{ICMP_OUTBOUND_DISABLED_TYPES} = "";
-			$settings{LOG_FAILURES} = "N";
-		}
-
-
-				
-	}
 }
 
 sub CheckService {
     my ($protocol, $port) = @_;
-    my @services;
-
-    @services = split / /, $settings{uc($protocol) . "_PUBLIC_SERVICES"};
-    map { $_ eq $port and return 1 } @services;
+    map { $_ eq $port and return 1 } split / /, $settings{uc($protocol) . "_PUBLIC_SERVICES"};
 }
 
 sub Kernel22
