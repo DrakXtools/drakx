@@ -556,7 +556,7 @@ sub Mount_point {
 			    _("Where do you want to mount device %s?", $part->{device}),
 	[ { label => _("Mount point"), val => \$mntpoint, 
 	    list => [ if_($mntpoint, $mntpoint), fsedit::suggestions_mntpoint($all_hds), '' ], 
-	    not_edit => !$::expert } ],
+	    not_edit => 0 } ],
 	complete => sub {
 	    !isPartOfLoopback($part) || $mntpoint or $in->ask_warn('', 
 _("Can't unset mount point as this partition is used for loop back.
