@@ -641,7 +641,7 @@ sub deselectFoundMedia {
     my $i = 0;
     my $totalsize = 0;
     foreach (@$hdlists) {
-	(my $cd) = $_->[3] =~ /\bCD ?(\d+)\b/i;
+	(my $cd) = $_->[3] =~ /\b(?:CD|DVD) ?(\d+)\b/i;
 	if (!$cd || !@{$cdlist{$cd} || []}) {
 	    push @hdlist2, $_;
 	    $corresp[$i] = [ $i ];
