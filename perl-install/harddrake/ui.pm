@@ -170,6 +170,7 @@ sub detect {
 sub new {
     my ($sig_id, $wait);
     unless ($::isEmbedded) {
+        # so we don't stop the mcc's animation while detecting hw & building ui
         $in = 'interactive'->vnew('su', 'default');
         $wait = $in->wait_message(N("Please wait"), N("Detection in progress"));
         my_gtk::flush();
