@@ -10,23 +10,20 @@ Beware, don't try this on a production machine with important data.
 --------------------------------------------------------------------------
 Sources installation:
 
-  First grab the gi.tar.bz2 archive and untar it in your home directory,
-for example from DrakX-*.src.rpm on your Mandrake Linux distribution.
+First grab the gi.tar.bz2 archive and untar it in your home directory, for 
+example from DrakX-*.src.rpm on your Mandrake Linux distribution.
 
-cd to gi
-for i in `du -a | grep CVS/Root | cut -f 2`
-do
-  sed -e 's/prigaux/anoncvs/' $i > $i.tmp
-  mv $i.tmp $i
-done
+Fix a few things:
+% find gi -name "*/CVS/root/*" | xargs perl -pi -e 's/prigaux/anoncvs/'
 
 Then, log yourself into the cvs:
 % export CVS_RSH=ssh
 % export CVSROOT=:ext:anoncvs@cvs.mandrakesoft.com:/cooker
 % cvs checkout gi
-	(passwd: 'cvs')
+        (the passwd is: 'cvs')
+
 And update the gi package:
-cvs update -P -d
+% cvs update -P -d
 
 
 --------------------------------------------------------------------------
@@ -34,49 +31,61 @@ Preparing the compilation process:
 
 (1) target directory
 
-create a /export directory and copy a recent Mandrake Linux CD in there.
-(You don't have to put have all the RPMS...) ; you'll need roughly 1.5
-Gbytes for a full install.
-
-[gc@obiwan ~/cvs/gi] su -c "mkdir /export"
-
-
-(2) devel packages
-
-you need quite a few devel packages to run the stuff; roughly: gcc, make,
-glibc-devel, perl-devel, XFree86-devel, libglib-devel, libgtk+-devel,
-perl-GTK, ldetect*, libslang-devel, libnewt-devel, e2fsprogs, dosfstools,
-rpm-devel, popt-devel, rpmtools, libbzip2*, libncurses*.
-
-you may need a few others I forgot to mention. if the compilation
-fails, try to understand the message and install any necessary
-remaining package.
+Create a /export directory and give write permissions to the user/group that 
+will be compiling DrakX.  It is also suggested that you copy a recent 
+Mandrake Linux CD in there. (You don't have to put have all the RPMS...) ; 
+you'll need roughly 1.5 Gbytes for a full install. (It is possible to not 
+have a copy of Mandrake Linux there, if all you desire is to compile gi)
 
 
-(3) sudo
+(2) support directories
 
-never build or run DrakX as root; install package sudo, and set up
-relevant permissions; the following should be enough: (in your
-/etc/sudoers)
+You will need to create an /RPMS directory.  This directory needs to be 
+populated with the following RPMS:
+locales-ja locales-ko locales-zh
 
-gc ALL=(root) NOPASSWD:/usr/bin/patch,NOPASSWD:/bin/rpm,NOPASSWD:/bin/mount,NOPASSWD:/bin/cp,NOPASSWD:/bin/umount,NOPASSWD:/usr/bin/install,NOPASSWD:/bin/rm,NOPASSWD:/bin/mv,NOPASSWD:/bin/tar,NOPASSWD:/bin/cpio,NOPASSWD:/bin/chown,NOPASSWD:/bin/mkdir,NOPASSWD:/usr/bin/strip,NOPASSWD:/bin/mknod
+gi needs to be informed about which kernel(s) is/are to be used.  A 
+directory with the following structure and files is needed for each kernel 
+you want to use:  (2.6.0 is the example kernel)
 
+gi/kernel/all.kernels/2.6.0
+                           /boot
+                                System.map-2.6.0
+                                vmlinuz-2.6.0
+                           /lib/modules/2.6.0
+                                (the module directory for the current 
+kernel)
 
-(4) boot kernel
-
-you need one or more kernels and (all?) their modules. it's
-located in the subdirectory "all.kernels" of the "gi/kernel"
-directory; if you ever grab (or build) another boot kernel,
-replace or add an entry in "all.kernels" as:
-
-[gc@obiwan ~/cvs/gi/kernel/all.kernels] mkdir 2.4.1-BOOTcustom
-[gc@obiwan ~/cvs/gi/kernel/all.kernels] cd 2.4.1-BOOTcustom
-[gc@obiwan ~/cvs/gi/kernel/all.kernels/2.4.1-BOOTcustom] tar jxvf ~/mycustomkernel.tar.bz2
-[gc@obiwan ~/cvs/gi/kernel/all.kernels/2.4.1-BOOTcustom] ls
-boot/  lib/
+Note:  the modules must not be in compressed form (*.gz *.bz2 etc)
 
 
-(5) pray
+(3) required rpm packages
+
+You need quite a number of rpm packages to build gi properly. Roughly:
+emacs gcc make glibc-devel glibc-static-devel perl-devel XFree86 
+XFree86-FBDev XFree86-VGA16 XFree86-devel libglib-devel libgtk+-devel 
+perl-GTK ldetect ldetect-devel ldetect-lst ldetect-lst-devel libslang-devel 
+libnewt-devel e2fsprogs libext2fs2-devel dosfstools rpm-devel rpmtools 
+libbzip2_1 libbzip2_1-devel libncurses5 libncurses5-devel setserial telnet 
+parted raidtools pciutils mt-st gpart reiserfsprogs jfsprogs xfsprogs 
+extipl pcmcia-cs gettext perl-Gtk2 perl-Glib ash imlib fb2png ntfsprogs 
+lm_sensors galaxy-gnome perl-PerlIO-gzip brltty lvm2 mkcd
+
+You may need a few others I forgot to mention. if the compilation fails, try 
+to understand the message and install any necessary remaining package.
+
+
+(4)
+
+NEVER build or run Drakx as root.  Install sudo and setup the following 
+permissions in /etc/sudoers:
+
+user ALL=(root)
+NOPASSWD:/usr/bin/patch,NOPASSWD:/bin/rpm,NOPASSWD:/bin/mount,NOPASSWD:/bin/cp,NOPASSWD:/bin/umount,NOPASSWD:/usr/bin/install,NOPASSWD:/bin/rm,NOPASSWD:/bin/mv,NOPASSWD:/bin/tar,NOPASSWD:/bin/cpio,NOPASSWD:/bin/chown,NOPASSWD:/bin/mkdir,NOPASSWD:/usr/bin/strip,NOPASSWD:/bin/mknod
+
+(5)
+
+pray
 
 [gc@obiwan ~/cvs/gi] make
 
@@ -88,11 +97,11 @@ The comments written with #- are automatically stripped out at install.
 ---------------------------------------------------------------------------
 testing all:
 
-  go to the perl-install directory and execute ./install2 --test
+  go to the perl-install directory and execute ./install2 --test
 
-  NEVER execute DrakX as root! You might need to allow all users
-  to read the block devices of your hard-disks, though (chmod a+w
-  /dev/hda* for example).
+  NEVER execute DrakX as root! You might need to allow all users
+  to read the block devices of your hard-disks, though (chmod a+w
+  /dev/hda* for example).
 
 
 
@@ -118,3 +127,5 @@ Here is how I (dams) made it work on my computer.
 
 
 address all bugreports to dave@null.com
+
+info has been added by sunny@opencurve.org
