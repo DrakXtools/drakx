@@ -1810,8 +1810,19 @@ sub get_printer_info {
 			# Driver installation failed, probably we do not have
 			# the commercial CDs
 			$in->ask_warn(_("Lexmark inkjet configuration"),
-				      _("To be able to print with your Lexmark inkjet and this configuration, you need the inkjet printer drivers provided by Lexmark (http://www.lexmark.com/). Go to the US site and click on the \"Drivers\" button. Then choose your model and afterwards \"Linux\" as operating system. The drivers come as RPM packages or shell scripts with interactive graphical installation. You do not need to do this configuration by the graphical frontends. Cancel directly after the license agreement. Then print printhead alignment pages with \"lexmarkmaintain\" and adjust the head alignment settings with this program."));
+				      _("To be able to print with your Lexmark inkjet and this configuration, you need the inkjet printer drivers provided by Lexmark (http://www.lexmark.com/). Click on the \"Drivers\" link. Then choose your model and afterwards \"Linux\" as operating system. The drivers come as RPM packages or shell scripts with interactive graphical installation. You do not need to do this configuration by the graphical frontends. Cancel directly after the license agreement. Then print printhead alignment pages with \"lexmarkmaintain\" and adjust the head alignment settings with this program."));
 		    }
+		} elsif ($printer->{currentqueue}{driver} eq 'pbmtozjs') {
+		    $in->ask_warn(_("GDI Laser Printer using the Zenographics ZJ-Stream Format"),
+				  _("Your printer belongs to the group of GDI laser printers (winprinters) sold by different manufacturers which uses the Zenographics ZJ-stream raster format for the data sent to the printer. The driver for these printers is still in a very early development stage and so it will perhaps not always work properly. Especially it is possible that the printer only works when you choose the A4 paper size.
+
+Some of these printers, as the HP LaserJet 1000, for which this driver was originally created, need their firmware to be uploaded to them after they are turned on. In the case of the HP LaserJet 1000 you have to search the printer's Windows driver CD or your Windows partition for the file \"sihp1000.img\" and upload the file to the printer with one of the following commands:
+
+     lpr -o raw sihp1000.img
+     cat sihp1000.img > /dev/usb/lp0
+
+The first command can be given by any normal user, the second must be given as root. After having done so you can print normally.
+"));
 		}
 		$printer->{ARGS} = printer::read_foomatic_options($printer);
 		delete($printer->{SPECIAL_OPTIONS});
@@ -3026,6 +3037,14 @@ sub main {
 		# This entry and the check for this entry have to use
 		# the same translation to work properly
 		my $spoolerentry = _("Printing system: ");
+		# If networking is configured, start it, but don't ask the
+		# user to configure networking. We want to know whether we
+		# have a local network, to suppress some buttons in the
+		# recommended mode
+		my $havelocalnetworks_or_expert =
+		    (($::expert) ||
+		     (check_network($printer, $in, $upNetwork, 1) && 
+		      (printer::getIPsInLocalNetworks() != ())));
 		# Show a queue list window when there is at least one queue,
 		# when we are in expert mode, or when we are not in the
 		# installation.
@@ -3096,7 +3115,8 @@ sub main {
 				1; 
 			    },
 			    val => _("Add a new printer") },
-			  ($printer->{SPOOLER} eq "cups" ?
+			  ((($printer->{SPOOLER} eq "cups") &&
+			    ($havelocalnetworks_or_expert)) ?
 			    ({ clicked_may_quit =>
 				   sub { 
 				       # Save the cursor position
