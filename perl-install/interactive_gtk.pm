@@ -691,6 +691,15 @@ sub ask_browse_tree_info_refW {
 	$toggle->(1) if $_[2] == 1;
     });
     &$update_size;
+    my $b = before_leaving { #- ensure cleaning here.
+	foreach (values %ptree) {
+	    delete $_->{state} foreach @$_;
+	}
+	foreach (values %wtree) {
+	    delete $_->{state};
+	    delete $_->{state_stats};
+	}
+    };
     $w->main;
 }
 
