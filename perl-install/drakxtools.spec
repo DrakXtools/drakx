@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10.1
-Release: 20mdk
+Release: 21mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -347,6 +347,9 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Wed Oct  6 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.1-21mdk
+- drakups: fix brown paper bug in USB detection
+
 * Tue Oct  5 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.1-20mdk
 - drakups:
   o fix port for MGE's USB UPSes
