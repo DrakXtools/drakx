@@ -6,7 +6,7 @@ Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
 Group: System/Configuration/Other
-Requires: %{name}-newt = %version-%release, perl-Gtk2 >= 0.95-6mdk, /usr/X11R6/bin/xtest, font-tools, usermode >= 1.63-5mdk, perl-MDK-Common >= 1.1.2-2mdk, gurpmi
+Requires: %{name}-newt = %version-%release, perl-Gtk2 >= 0.95-6mdk, /usr/X11R6/bin/xtest, font-tools, usermode >= 1.63-5mdk, perl-MDK-Common >= 1.1.10, gurpmi
 Requires: foomatic-db-engine, mkbootdisk
 Conflicts: drakconf < 9.3-10mdk
 Conflicts: rpmdrake < 2.1-29mdk
