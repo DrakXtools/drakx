@@ -86,7 +86,7 @@ foreach my $hw_class (@harddrake::data::tree) {
     $msg .= N("Some devices were added: %s\n", $item) if @added;
     $msg .= N("- %s was added\n", harddrake::data::custom_id($ID{$_}, $item)) foreach @added;
     log::explanations("removed $Ident: " . harddrake::data::custom_id($oldconfig->{$_}, $item)) foreach @was_removed;
-    log::explanations("added $Ident: " . harddrake::data::custom_id($oldconfig->{$_}, $item)) foreach @added;
+    log::explanations("added $Ident: " . harddrake::data::custom_id($ID{$_}, $item)) foreach @added;
 
     modules::load('ohci1394') if $Ident eq 'FIREWIRE_CONTROLLER' && any { $_->{driver} eq 'ohci1394' } @added;
     @added || @was_removed or next;
