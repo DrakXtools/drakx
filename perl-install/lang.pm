@@ -84,7 +84,7 @@ my %languages = (
 # 'nb' is the new locale name in glibc 2.2
   'no'  => [ 'Norwegian|Bokmaal',	'iso-8859-1', 'no', 'no:nb:nn:no@nynorsk:no_NY' ],
 # no_NY is used by KDE (but not standard); 'nn' is the new locale in glibc 2.2
-  'nn'	=> [ 'Norwegian|Nynorsk','iso-8859-1', 'no', 'nn:no@nynorsk:no_NY:no:nb' ],
+  'nn'	=> [ 'Norwegian|Nynorsk',	'iso-8859-1', 'no', 'nn:no@nynorsk:no_NY:no:nb' ],
 #-'oc'  => [ 'Occitan',			'iso-8859-1', 'oc', 'oc:fr_FR' ],
 #-'pd'	=> [ 'Plauttdietsch',		'iso-8859-1', 'pd', 'pd' ],
 #-'ph'  => [ 'Pilipino',		'iso-8859-1', 'ph', 'ph:tl' ],
@@ -114,8 +114,8 @@ my %languages = (
 				        'vi_VN.VISCII:vi_VN.viscii:vi' ],
   'wa'  => [ 'Walon',     		'iso-8859-1', 'wa', 'wa:fr_BE:fr' ],
 #-'yi'	=> [ 'Yiddish',			'cp1255',     'yi', 'yi' ],
-'zh_TW.Big5' => [ 'Chinese|Traditional',     'Big5', 'zh_TW.Big5', 'zh_TW.Big5:zh_TW.big5:zh_TW:zh' ],
-'zh_CN.GB2312' => [ 'Chinese|Simplified',	'gb2312', 'zh_CN.GB2312', 'zh_CN.GB2312:zh_CN.gb2312:zh_CN:zh' ],
+'zh_TW.Big5' => [ 'Chinese|Traditional', 'Big5', 'zh_TW.Big5', 'zh_TW.Big5:zh_TW.big5:zh_TW:zh' ],
+'zh_CN.GB2312' => [ 'Chinese|Simplified', 'gb2312', 'zh_CN.GB2312', 'zh_CN.GB2312:zh_CN.gb2312:zh_CN:zh' ],
 );
 
 my %xim = (
