@@ -95,12 +95,12 @@ sub netMonitor() {
     system("/usr/sbin/net_monitor --testing");
     checkNetwork()
 }
-sub checkNetwork {
+sub checkNetwork() {
     my $gatewayconf = '/etc/sysconfig/network';
     my %h = getVarsFromSh($gatewayconf);
     my $new_md5 = md5file($prog_name);
     #    print "NEW($newmd5) = OLD($oldmd5)\n"
-    my $gd, $addrgd;
+    my ($gd, $addrgd);
     if ($h{GATEWAYDEV}) {
         $addrgd = getIP($gd = $h{GATEWAYDEV});
     } else {
@@ -124,7 +124,7 @@ sub getIP {
     my @ip = map { if_(/inet adr:([\d.]+)/, $1) } @lines;
     return wantarray() ? @ip : $ip[0];
 }
-sub cronNetwork {
+sub cronNetwork() {
     $_timeout = Glib::Timeout->add(60*1000, sub {
                                       checkNetwork();
                                       1;
