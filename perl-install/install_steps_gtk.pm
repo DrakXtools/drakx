@@ -590,7 +590,7 @@ sub installPackages {
 	    my $name = pkgs::mediumDescr($o->{packages}, $medium);
 	    local $| = 1; print "\a";
 	    my $time = time();
-	    my $r = $name !~ /commercial/i || ($o->{useless_thing_accepted2} ||= $o->ask_from_list_('', formatAlaTeX($install_steps_interactive::com_license), [ N_("Accept"), N_("Refuse") ], "Accept") eq "Accept");
+	    my $r = $name !~ /commercial/i || ($o->{useless_thing_accepted2} ||= $o->ask_from_list_('', formatAlaTeX(install_messages::com_license()), [ N_("Accept"), N_("Refuse") ], "Accept") eq "Accept");
             $r &&= $o->ask_okcancel('', N("Change your Cd-Rom!
 
 Please insert the Cd-Rom labelled \"%s\" in your drive and press Ok when done.
