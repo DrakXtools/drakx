@@ -366,7 +366,7 @@ static void find_media(enum media_bus bus)
 	log_message("looking for ide media");
 
     	strcpy(b, "/proc/ide/hd");
-    	for (b[12] = 'a'; b[12] <= 'h'; b[12]++) {
+    	for (b[12] = 'a'; b[12] <= 't'; b[12]++) {
 		int i;
 		char ide_disk[] = "disk";
 		char ide_cdrom[] = "cdrom";
