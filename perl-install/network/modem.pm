@@ -116,6 +116,7 @@ END
 
     output("$::prefix/usr/share/config/kppprc", c::to_utf8(<<END));
 # KDE Config File
+
 [Account0]
 ExDNSDisabled=0
 AutoName=0
@@ -141,6 +142,7 @@ Username=$toreplace{login}
 Gateway=0.0.0.0
 StorePassword=1
 DisconnectCommand=
+
 [Modem]
 BusyWait=0
 Enter=CR
@@ -151,12 +153,14 @@ UseCDLine=0
 UseLockFile=1
 Device=/dev/modem
 Speed=115200
+
 [Graph]
 InBytes=0,0,255
 Text=0,0,0
 Background=255,255,255
 Enabled=true
 OutBytes=255,0,0
+
 [General]
 QuitOnDisconnect=0
 ShowLogWindow=0
