@@ -352,6 +352,7 @@ sub get_options {
 
 sub add_alias($$) { 
     my ($alias, $name) = @_;
+    $name =~ /ignore/ and return;
     /\Q$alias/ && $conf{$_}{alias} && $conf{$_}{alias} eq $name and return $_ foreach keys %conf;
     $alias .= $scsi++ || '' if $alias eq 'scsi_hostadapter';
     log::l("adding alias $alias to $name");
@@ -379,8 +380,6 @@ sub load {
 	log::l("i try to install $name module (@options)");
     } else {
 	$conf{$name}{loaded} and return;
-
-#-	$type ||= ($drivers{$name} || { type => 'unknown'})->{type};
 
 	eval { load($_, 'prereq') } foreach @{$deps{$name}};
 	load_raw([ $name, @options ]);
@@ -421,8 +420,7 @@ sub unload($;$) {
 }
 
 sub load_raw {
-    my @l = map { my ($i, @i) = @$_; [ $i, \@i ] } @_;
-
+    my @l = map { my ($i, @i) = @$_; [ $i, \@i ] } grep { $_->[0] !~ /ignore/ } @_;
     my $cz = "/lib/modules" . (arch() eq 'sparc64' && "64") . ".cz"; -e $cz or $cz .= "2";
     run_program::run("extract_archive", $cz, "/tmp", map { "$_->[0].o" } @l);
     my @failed = grep {
@@ -528,17 +526,22 @@ sub read_stage1_conf {
 
 sub load_thiskind($;&$) {
     my ($type, $f, $pcic) = @_;
+    my %loaded_text;
 
     require pci_probing::main;
     my @pcidevs = pci_probing::main::probe($type);
     log::l("pci probe found " . scalar @pcidevs . " $type devices");
 
+    require sbus_probing::main;
+    my @sbusdevs = sbus_probing::main::probe($type);
+    log::l("sbus probe found " . scalar @sbusdevs . " $type devices");
+
     my @pcmciadevs = get_pcmcia_devices($type, $pcic);
     log::l("pcmcia probe found " . scalar @pcmciadevs . " $type devices");
 
-    my @devs = (@pcidevs, @pcmciadevs);
+    my @devs = (@pcidevs, @sbusdevs, @pcmciadevs);
 
-    load("sd_mod") if $type eq 'scsi' && @devs;
+    load("sd_mod") if arch() !~ /sparc/ && $type eq 'scsi' && @devs;
 
     my %devs; foreach (@devs) {
 	my ($text, $mod) = @$_;
@@ -547,6 +550,7 @@ sub load_thiskind($;&$) {
 	log::l("found driver for $mod");
 	&$f($text, $mod) if $f;
 	load($mod, $type);
+	$loaded_text{$mod} = $text;
     }
 
     if ($type eq 'scsi') {
@@ -558,17 +562,17 @@ sub load_thiskind($;&$) {
 	    -d "/proc/scsi/usb" or unload("usb-storage");
 	}
 	#- probe for parport SCSI.
-	if (arch() !~ /sparc|alpha/) {
+	if (arch() !~ /sparc/) {
 	    foreach ("imm", "ppa") {
 		eval { load($_, $type) };
 		last if !$@;
 	    }
 	}
-	if (my ($c) = pci_probing::main::probe('AUDIO')) {
+	if (my ($c) = (pci_probing::main::probe('AUDIO'), sbus_probing::main::probe('AUDIO'))) {
 	    add_alias("sound", $c->[1]) if pci_probing::main::check($c->[1]);
 	}
     }
-    @{$loaded{$type} || []};
+    map { $loaded_text{$_} || $_ } @{$loaded{$type} || []};
 }
 
 sub pcmcia_need_config($) {

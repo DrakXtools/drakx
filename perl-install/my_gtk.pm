@@ -503,7 +503,8 @@ sub _ask_from_list {
 	my $c = chr($e->{keyval} & 0xff);
 
 	Gtk->timeout_remove($timeout) if $timeout; $timeout = '';
-
+	
+	print ord($c), "<<<<<<<<<\n";
 	if ($e->{keyval} >= 0x100) {
 	    &$leave if $c eq "\r" || $c eq "\x8d";
 	    $starting_word = '' if $e->{keyval} != 0xffe4; # control

@@ -138,12 +138,11 @@ sub keepOnlyLegalModes {
 	} @$res;
 	delete $card->{depth}{$depth} if @$res == 0;
     }
-
 }
 
 sub cardConfigurationAuto() {
     my $card;
-    if (my (@c) = pci_probing::main::probe("DISPLAY")) {
+    if (my (@c) = (pci_probing::main::probe("DISPLAY"), sbus_probing::main::probe("DISPLAY"))) {
 	local $_;
 	($card->{identifier}, $_) = @{$c[-1]};
 	$card->{type} = $1 if /Card:(.*)/;
@@ -153,6 +152,7 @@ sub cardConfigurationAuto() {
     }
     #- take a default on sparc if nothing has been found.
     if (arch() =~ /^sparc/ && !$card->{server} && !$card->{type}) {
+        log::l("Using probe with /proc/fb as nothing has been found!");
 	local $_ = cat_("/proc/fb");
 	if (/Mach64/) { $card->{server} = "Mach64" }
 	elsif (/Permedia2/) { $card->{server} = "3DLabs" }

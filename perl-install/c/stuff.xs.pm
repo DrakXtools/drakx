@@ -311,6 +311,51 @@ del_loop(device)
   OUTPUT:
   RETVAL
 
+int
+prom_open()
+
+void
+prom_close()
+
+int
+prom_getsibling(node)
+  int node
+
+int
+prom_getchild(node)
+  int node
+
+void
+prom_getproperty(key)
+  char *key
+  PPCODE:
+  int lenp = 0;
+  char *value = NULL;
+  value = prom_getproperty(key, &lenp);
+  EXTEND(sp, 1);
+  if (value != NULL) {
+    PUSHs(sv_2mortal(newSVpv(value, 0)));
+  } else {
+    PUSHs(&PL_sv_undef);
+  }
+
+int
+prom_getbool(key)
+  char *key
+
+void
+prom_getint(key)
+  char *key
+  PPCODE:
+  int lenp = 0;
+  char *value = NULL;
+  value = prom_getproperty(key, &lenp);
+  EXTEND(sp, 1);
+  if (value != NULL && lenp == sizeof(int)) {
+    PUSHs(sv_2mortal(newSViv(*(int *)value)));
+  } else {
+    PUSHs(&PL_sv_undef);
+  }
 ';
 
 $ENV{C_RPM} and print '

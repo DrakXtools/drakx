@@ -1,4 +1,15 @@
+2000-05-29  François Pons  <fpons@mandrakesoft.com>
+
+	* Xconfigurator.pm: added support for SBUS card autodetection.
+	* commands.pm: added lssbus to list SBUS devices detected.
+	* detect_devices.pm: removed alpha restriction on USB.
+	* install_steps_interactive.pm: added SBUS support.
+	* c/sbus.c: initial revision, core SBUS support (inspired from kudzu).
+	* c/stuff.xs.pm: added wrapper for sbus.c interface.
+	* sbus_probing/main.pm: initial revision (inspired from kudzu).
+
 2000-05-27 Adam Lebsack <adam@mandrakesoft.com>
+
 	* share/list.ppc: various PPC modifications, for HFS
 	* partition_table_mac.pm: bug fixes
 	* partition_table.pm: various HFS fixes, isHiddenMacPart()

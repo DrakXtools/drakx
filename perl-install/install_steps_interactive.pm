@@ -1168,7 +1168,7 @@ sub setup_thiskind {
 	return if arch() eq "ppc";
 
     my @l;
-    my $allow_probe = !$::expert || $o->ask_yesorno('', _("Try to find PCI devices?"), 1);
+    my $allow_probe = !$::expert || $o->ask_yesorno('', _("Try to find %s devices?", "PCI" . (arch() =~ /sparc/ && "/SBUS")), 1);
 
     if ($allow_probe) {
 	eval { @l = grep { !/ide-/ } $o->load_thiskind($type) };
@@ -1191,7 +1191,8 @@ sub setup_thiskind {
 	} else {
 	    #-eval { commands::modprobe("isapnp") };
 	    require pci_probing::main;
-	    $o->ask_warn('', [ pci_probing::main::list() ]); #-, scalar cat_("/proc/isapnp") ]);
+	    require sbus_probing::main;
+	    $o->ask_warn('', [ pci_probing::main::list(), sbus_probing::main::list() ]); #-, scalar cat_("/proc/isapnp") ]);
 	}
     }
 }

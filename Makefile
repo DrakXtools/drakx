@@ -23,6 +23,7 @@ ROOTDEST = /export
 UPLOAD_DEST_ = ~/cooker
 UPLOAD_DEST = $(UPLOAD_DEST_)/cooker
 UPLOAD_DEST_CONTRIB = $(UPLOAD_DEST_)/contrib
+UPLOAD_SPARC_DEST = /mnt/BIG/distrib/sparc
 
 AUTOBOOT = $(ROOTDEST)/dosutils/autoboot/mdkinst
 
@@ -105,6 +106,16 @@ upload: tar install
 	lftp -c "open mandrakesoft.com; cd $(UPLOAD_DEST)/lnx4win ; lcd $(ROOTDEST)/lnx4win ; put initrd.gz vmlinuz"
 	lftp -c "open mandrakesoft.com; cd $(UPLOAD_DEST_CONTRIB)/others/src ; put ../gi.tar.bz2"
 	rm -f $(ROOTDEST)/Mandrake/mdkinst.tgz
+	rm -f /tmp/mdkinst_done
+
+upload_sparc:
+	touch /tmp/mdkinst_done
+	cp -a $(ROOTDEST)/images/* $(UPLOAD_SPARC_DEST)/images ; true
+	cp -a $(ROOTDEST)/boot/* $(UPLOAD_SPARC_DEST)/boot; true
+	cp -a $(ROOTDEST)/misc/* $(UPLOAD_SPARC_DEST)/misc; true
+	rm -rf $(UPLOAD_SPARC_DEST)/Mandrake/mdkinst
+	cp -a $(ROOTDEST)/Mandrake/mdkinst $(UPLOAD_SPARC_DEST)/Mandrake/mdkinst; true
+	( cd $(ROOTDEST)/Mandrake/base; cp mdkinst_stage2.gz rescue_stage2.gz compss compssList compssUsers $(UPLOAD_SPARC_DEST)/Mandrake/base ); true
 	rm -f /tmp/mdkinst_done
 
 # mkisofs -r -J -b images/cdrom.img -c images/boot.cat /tmp/r /mnt/disk/ | cdrecord -v -eject speed=6 dev=1,0 -

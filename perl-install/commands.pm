@@ -3,7 +3,7 @@
 #- true, false, cat, which, dirname, basename, rmdir, lsmod, grep, tr,
 #- mount, umount, mkdir, mknod, ln, rm, chmod, chown, mkswap, swapon,
 #- swapoff, ls, cp, ps, dd, head, tail, strings, hexdump, more, insmod,
-#- modprobe, route, df, kill, lspci, dmesg, sort, du, 
+#- modprobe, route, df, kill, lspci, lssbus, dmesg, sort, du, 
 #-########################################################################
 package commands;
 
@@ -516,6 +516,10 @@ sub kill {
 sub lspci {
     require 'pci_probing/main.pm';
     print join "\n", pci_probing::main::list (), '';
+}
+sub lssbus {
+    require 'sbus_probing/main.pm';
+    print join "\n", sbus_probing::main::list (), '';
 }
 sub dmesg { print cat_("/tmp/syslog"); }
 
