@@ -314,22 +314,24 @@ sub unselectPackage($$;$) {
     foreach my $provided ($pkg, packageProvides($pkg)) {
 	packageFlagBase($provided) and die "a provided package cannot be a base package";
 	if (packageFlagSelected($provided)) {
-	    $otherOnly or packageSetFlagSelected($provided, 0);
-	    $otherOnly and $otherOnly->{packageName($provided)} = 1;
+	    my $unselect_alone = 0;
 	    foreach (packageDepsId($provided)) {
 		if (/\|/) {
 		    #- this package use a choice of other package, so we have to check
 		    #- if our package is not included in the choice, if this is the
 		    #- case, if must be checked one of the other package are selected.
-		    my $unselect_alone = 0;
 		    foreach (split '\|') {
 			my $dep = packageById($packages, $_);
 			$dep == $pkg and $unselect_alone |= 1;
 			packageFlagBase($dep) || packageFlagSelected($dep) and $unselect_alone |= 2;
 		    }
-		    $unselect_alone == 3 and return;
 		}
 	    }
+	    #- provided will not be unselect here if the two conditions are met.
+	    $unselect_alone == 3 and next;
+	    #- on the other hand, provided package have to be unselected.
+	    $otherOnly or packageSetFlagSelected($provided, 0);
+	    $otherOnly and $otherOnly->{packageName($provided)} = 1;
 	}
 	foreach (map { split '\|' } packageDepsId($provided)) {
 	    my $dep = packageById($packages, $_);
