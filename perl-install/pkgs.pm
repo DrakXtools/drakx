@@ -377,21 +377,15 @@ sub psUpdateHdlistsDeps {
 	s/\s*#.*$//;
 	/^\s*$/ and next;
 	m/^\s*(hdlist\S*\.cz2?)\s+(\S+)\s*(.*)$/ or die "invalid hdlist description \"$_\" in hdlists file";
-
 	my ($hdlist, $rpmsdir, $descr) = ($1, $2, $3);
-	my $f = install_any::getFile($hdlist) or die "no $hdlist found";
 
 	#- copy hdlist file directly to $prefix/var/lib/urpmi, this will be used
 	#- for getting header of package during installation or after by urpmi.
 	my $fakemedium = $method . $medium;
 	my $newf = "$prefix/var/lib/urpmi/hdlist.$fakemedium.cz2";
 	-e $newf and do { unlink $newf or die "cannot remove $newf: $!"; };
-	local *F;
-	open F, ">$newf" or die "cannot create $newf: $!";
-	my ($buf, $sz); while (($sz = sysread($f, $buf, 16384))) { syswrite(F, $buf) }
-	close F;
+	install_any::getAndSaveFile($hdlist, $newf) or die "no $hdlist found";
 	symlinkf $newf, "/tmp/$hdlist";
-
 	++$medium;
     }
 
@@ -419,11 +413,10 @@ sub psUsingHdlists {
 
     foreach (@hdlists) {
 	my ($hdlist, $medium, $rpmsdir, $descr) = @$_;
-	my $f = install_any::getFile($hdlist) or die "no $hdlist found";
 
 	#- make sure the first medium is always selected!
 	#- by default select all image.
-	psUsingHdlist($prefix, $method, \@packages, $f, $hdlist, $medium, $rpmsdir, $descr, 1);
+	psUsingHdlist($prefix, $method, \@packages, $hdlist, $medium, $rpmsdir, $descr, 1);
     }
 
     log::l("psUsingHdlists read " . scalar keys(%{$packages[0]}) . " headers on " . scalar keys(%{$packages[2]}) . " hdlists");
@@ -432,7 +425,7 @@ sub psUsingHdlists {
 }
 
 sub psUsingHdlist {
-    my ($prefix, $method, $packages, $f, $hdlist, $medium, $rpmsdir, $descr, $selected) = @_;
+    my ($prefix, $method, $packages, $hdlist, $medium, $rpmsdir, $descr, $selected) = @_;
 
     #- if the medium already exist, use it.
     $packages->[2]{$medium} and return;
@@ -452,10 +445,7 @@ sub psUsingHdlist {
     #- for getting header of package during installation or after by urpmi.
     my $newf = "$prefix/var/lib/urpmi/hdlist.$fakemedium.cz2";
     -e $newf and do { unlink $newf or die "cannot remove $newf: $!"; };
-    local *F;
-    open F, ">$newf" or die "cannot create $newf: $!";
-    my ($buf, $sz); while (($sz = sysread($f, $buf, 16384))) { syswrite(F, $buf) }
-    close F;
+    install_any::getAndSaveFile($hdlist, $newf) or die "no $hdlist found";
     symlinkf $newf, "/tmp/$hdlist";
 
     #- extract filename from archive, this take advantage of verifying

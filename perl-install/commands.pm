@@ -514,13 +514,11 @@ sub kill {
 }
 
 sub lspci {
-    require pci_probing::main;
-    print join "\n", pci_probing::main::list (), '';
+    require detect_devices;
+    print join "\n", detect_devices::stringlist(), '';
 }
-sub lssbus {
-    require sbus_probing::main;
-    print join "\n", sbus_probing::main::list (), '';
-}
+*lssbus = *lspci;
+
 sub dmesg { print cat_("/tmp/syslog"); }
 
 sub sort {
@@ -575,11 +573,11 @@ sub bug {
 * $_[0]
 ********************************************************************************";
     }
-    require pci_probing::main;
+    require detect_devices;
 
     local $\ = "\n";
     output "/fd0/report.bug", map { chomp; $_ }
-      header("lspci"), pci_probing::main::list(),
+      header("lspci"), detect_devices::stringlist(),
       header("pci_devices"), cat_("/proc/bus/pci/devices"),
       header("fdisk"), `fdisk -l`,
       header("scsi"), cat_("/proc/scsi/scsi"),

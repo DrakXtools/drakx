@@ -126,36 +126,12 @@ sub prom_walk($$$$) {
     $nextnode = c::prom_getsibling($node) and prom_walk($sbus_probed, $nextnode, $sbus, $ebus);
 }
 
-sub check {
-    my $ok = $_[0] !~ /unknown/;
-    $ok or log::l("skipping $text, no module available (if you know one, please mail bugs\@linux-mandrake.com)");
-    $ok
-}
-
-sub probe($) {
-    my ($type) = @_;
-
+sub probe {
     eval { modules::load("openprom") };
     my $root_node = c::prom_open();
     my @l;
 
     prom_walk(\@l, $root_node, 0, 0);
     c::prom_close();
-
-    $type eq '.' ? @l : map { [ @$_[1..$#$_] ] } grep { !$type || $_->[0] =~ /$type/i } @l;
+    map { my %l; @l{qw(type description drivers)} = @$_ } @l;
 }
-
-sub matching_desc($;$) {
-    my ($regexp) = @_;
-
-    eval { modules::load("openprom") };
-    my $root_node = c::prom_open();
-    my @l;
-
-    prom_walk(\@l, $root_node, 0, 0);
-    c::prom_close();
-
-    grep { !$type || $_->[1] =~ /$regexp/ } @l;
-}
-
-sub list { map { "$_->[1] ($_->[0] $_->[2])" } probe('.'); }

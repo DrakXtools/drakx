@@ -67,7 +67,7 @@ tar: clean
 	cd .. ; tar cfy gi.tar.bz2 gi
 	rm needed_rpms.lst
 
-modules: kernel/lib/modules
+modules:
 	`./tools/specific_arch ./update_kernel`
 
 $(BOOT_IMG:%=%f): %f: %

@@ -4,12 +4,11 @@ use diagnostics;
 use strict;
 use vars qw($in $install $isLaptop @window_managers @depths @monitorSize2resolution @hsyncranges %min_hsync4wres @vsyncranges %depths @resolutions %serversdriver @svgaservers @accelservers @allbutfbservers @allservers %vgamodes %videomemory @ramdac_name @ramdac_id @clockchip_name @clockchip_id %keymap_translate %standard_monitors $XF86firstchunk_text $keyboardsection_start $keyboardsection_start_v4 $keyboardsection_part2 $keyboardsection_part3 $keyboardsection_part3_v4 $keyboardsection_end $pointersection_text $pointersection_text_v4 $monitorsection_text1 $monitorsection_text2 $monitorsection_text3 $monitorsection_text4 $modelines_text_Trident_TG_96xx $modelines_text $devicesection_text $devicesection_text_v4 $screensection_text1 %lines @options %xkb_options $default_monitor $layoutsection_v4);
 
-use pci_probing::main;
 use common qw(:common :file :functional :system);
 use log;
+use detect_devices;
 use run_program;
 use Xconfigurator_consts;
-use sbus_probing::main;
 use my_gtk qw(:wrappers);
 
 my $tmpconfig = "/tmp/Xconfig";
@@ -143,12 +142,12 @@ sub keepOnlyLegalModes {
 
 sub cardConfigurationAuto() {
     my $card;
-    if (my (@c) = (pci_probing::main::probe("DISPLAY"), sbus_probing::main::probe("DISPLAY"))) {
-	local $_;
-	($card->{identifier}, $_) = @{$c[-1]};
+    if (my ($c) = (detect_devices::matching_type("DISPLAY"))) {
+	local $_ = $c->{driver};
 	$card->{type} = $1 if /Card:(.*)/;
 	$card->{server} = $1 if /Server:(.*)/;
 	$card->{flags}{needVideoRam} &&= /86c368/;
+	$card->{identifier} = $c->{description};
 	push @{$card->{lines}}, @{$lines{$card->{identifier}} || []};
     }
     #- take a default on sparc if nothing has been found.

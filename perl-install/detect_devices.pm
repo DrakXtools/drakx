@@ -189,6 +189,37 @@ sub hasEthernet() { hasNetDevice("eth0"); }
 sub hasTokenRing() { hasNetDevice("tr0"); }
 sub hasNetDevice($) { c::hasNetDevice($_[0]) }
 
+# probe_type true means detect the type of hardware, this is unsafe for pci! (bug in kernel&hardware)
+# get_pcmcia_devices provides field "device", used in network.pm
+sub probeall {
+    my ($probe_type, $pcic) = @_;
+    require pci_probing::main;
+    require sbus_probing::main;
+    pci_probing::main::probe($probe_type), sbus_probing::main::probe(), modules::get_pcmcia_devices($pcic);
+}
+sub matching_type {
+    my ($type, $pcic) = @_;
+    grep { 
+	my $ok = $_->{driver} !~ /(unknown|ignore)/;
+	$ok or log::l("skipping $_->{description}, no module available (if you know one, please mail pixel\@linux-mandrake.com)");
+	$ok
+    } grep { $_->{type} =~ /$type/i } probeall($type, $pcic);
+}
+sub matching_desc {
+    my ($regexp) = @_;
+    grep { $_->{description} =~ /$regexp/i } probeall();
+}
+sub stringlist { 
+    map { " $_->{description} ($_->{class} $_->{driver})" } probeall(1); 
+}
+sub check {
+    my ($l) = @_;
+    my $ok = $l->{driver} !~ /(unknown|ignore)/;
+    $ok or log::l("skipping $l->{description}, no module available (if you know one, please mail bugs\@linux-mandrake.com)");
+    $ok
+}
+
+
 sub tryOpen($) {
     local *F;
     sysopen F, devices::make($_[0]), c::O_NONBLOCK() and *F;
@@ -212,8 +243,7 @@ sub hasUltra66 {
 #    #- disable hasUltra66 (now included in kernel)
 #    return;
 
-    require pci_probing::main;
-    my @l = map { $_->[0] } pci_probing::main::matching_desc('(HPT|Ultra66)') or return;
+    my @l = map { $_->{verbatim} } matching_desc('(HPT|Ultra66)') or return;
     
     my $ide = sprintf "ide2=0x%x,0x%x ide3=0x%x,0x%x",
       @l == 2 ?
@@ -251,11 +281,10 @@ sub whatPrinterPort() {
 }
 
 sub probeUSB {
-    require pci_probing::main;
     require modules;
     defined($usb_interface) and return $usb_interface;
     arch() =~ /sparc/ and return $usb_interface = '';
-    if (($usb_interface) = grep { /usb-/ } map { $_->[1] } pci_probing::main::probe('')) {
+    if (($usb_interface) = grep { /usb-/ } map { $_->{driver} } probeall()) {
 	eval { modules::load($usb_interface, "SERIAL_USB") };
 	if ($@) {
 	    $usb_interface = '';

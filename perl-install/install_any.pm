@@ -76,7 +76,7 @@ sub askChangeMedium($$) {
 sub errorOpeningFile($) {
     my ($file) = @_;
     $file eq 'XXX' and return; #- special case to force closing file after rpmlib transaction.
-    $current_medium eq $asked_medium and return; #- nothing to do in such case.
+    $current_medium eq $asked_medium and log::l("errorOpeningFile $file"), return; #- nothing to do in such case.
     $::o->{packages}[2]{$asked_medium}{selected} or return; #- not selected means no need for worying about.
 
     my $max = 32; #- always refuse after $max tries.
@@ -124,19 +124,22 @@ sub getFile {
 	    #- try to open the file, but examine if it is present in the repository, this allow
 	    #- handling changing a media when some of the file on the first CD has been copied
 	    #- to other to avoid media change...
-	    open getFile, "/tmp/rhimage/" . relGetFile($_[0]) or
-	      $postinstall_rpms and open getFile, "$postinstall_rpms/$_[0]" or return errorOpeningFile($_[0]);
-	    *getFile;
+	    log::l("getFile /tmp/rhimage/" . relGetFile($_[0]));
+	    open GETFILE, "/tmp/rhimage/" . relGetFile($_[0]) or
+	      $postinstall_rpms and open GETFILE, "$postinstall_rpms/$_[0]" or return errorOpeningFile($_[0]);
+	    *GETFILE;
 	};
     }
     goto &getFile;
 }
 sub getAndSaveFile {
     my ($file, $local) = @_;
+    log::l("getAndSaveFile $file $local");
     local *F; open F, ">$local" or return;
     local $/ = \ (16 * 1024);
     my $f = getFile($file) or return;
-    syswrite F, $_ foreach <$f>;
+    local $_;
+    while (<$f>) { syswrite F, $_ }
     1;
 }
 
@@ -289,8 +292,7 @@ sub setPackages($) {
 
 	my @l = ();
 	push @l, "kapm", "kcmlaptop" if $o->{pcmcia};
-	require pci_probing::main;
-	push @l, "Device3Dfx", "Glide_V3", "XFree86-glide-module" if pci_probing::main::matching_desc('Voodoo');
+	push @l, "Device3Dfx", "Glide_V3", "XFree86-glide-module" if detect_devices::matching_desc('Voodoo');
 	require timezone;
 	require lang;
 	push @l, "isdn4k-utils" if ($o->{timezone}{timezone} || timezone::bestTimezone(lang::lang2text($o->{lang}))) =~ /Europe/;

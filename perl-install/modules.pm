@@ -533,22 +533,11 @@ sub load_thiskind($;&$) {
     my ($type, $f, $pcic) = @_;
     my %loaded_text;
 
-    require pci_probing::main;
-    my @pcidevs = pci_probing::main::probe($type);
-    log::l("pci probe found " . scalar @pcidevs . " $type devices");
-
-    require sbus_probing::main;
-    my @sbusdevs = sbus_probing::main::probe($type);
-    log::l("sbus probe found " . scalar @sbusdevs . " $type devices");
-
-    my @pcmciadevs = get_pcmcia_devices($type, $pcic);
-    log::l("pcmcia probe found " . scalar @pcmciadevs . " $type devices");
-
-    my @devs = (@pcidevs, @sbusdevs, @pcmciadevs);
+    my @devs = detect_devices::matching_type($type, $pcic);
+    log::l("probe found " . scalar @devs . " $type devices");
 
     my %devs; foreach (@devs) {
-	my ($text, $mod) = @$_;
-	pci_probing::main::check($mod) or next;
+	my ($text, $mod) = ($_->{description}, $_->{driver});
 	$devs{$mod}++ and log::l("multiple $mod devices found"), next;
 	log::l("found driver for $mod");
 	&$f($text, $mod) if $f;
@@ -571,8 +560,8 @@ sub load_thiskind($;&$) {
 		last if !$@;
 	    }
 	}
-	if (my ($c) = (pci_probing::main::probe('AUDIO'), sbus_probing::main::probe('AUDIO'))) {
-	    add_alias("sound", $c->[1]) if pci_probing::main::check($c->[1]);
+	if (my ($c) = (detect_devices::matching_type('AUDIO'))) {
+	    add_alias("sound", $c->{driver});
 	}
     }
     my @loaded = map { $loaded_text{$_} || $_ } @{$loaded{$type} || []};
@@ -585,8 +574,8 @@ sub pcmcia_need_config($) {
 }
 
 sub get_pcmcia_devices($$) {
-    my ($type, $pcic) = @_;
-    my (@devs, $module, $desc);
+    my ($pcic) = @_;
+    my (@devs, $module, $desc, $type, $device);
 
     #- try to setup pcmcia if cardmgr is not running.
     if (pcmcia_need_config($pcic)) {
@@ -611,9 +600,9 @@ sub get_pcmcia_devices($$) {
 
     foreach (cat_("/var/run/stab")) {
 	$desc = $1 if /^Socket\s+\d+:\s+(.*)/;
-	$module = $1 if /^\d+\s+$type[^\s]*\s+([^\s]+)/;
+	($type, $module, $device) = ($1, $2, $3) if /^\d+\s+(\S+)\s+(\S+)\s+\S+\s+(\S+)/;
 	if ($desc && $module) {
-	    push @devs, [ $desc, $module ];
+	    push @devs, { description => $desc, driver => $module, type => $type, device => $device };
 	    $desc = $module = undef;
 	}
     }

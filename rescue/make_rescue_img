@@ -22,15 +22,14 @@ BEGIN { undef *_; }
 sub __ { print @_, "\n"; system(@_); }
 sub _ { __ @_; $? and die; }
 
-sub install {
+sub install_ {
     return if -e "$tmp$_[0]";
     my $d = dirname($_[0]);
     commands::mkdir_("-p", "$tmp$d") unless -d "$tmp$d";
-    _ "$sudo cp -a $_[0] $tmp$d";
+    _ "$sudo cp $_[1] $_[0] $tmp$d";
 }
-sub install_lib {
-    _ "cp $_[0] $tmp$_[0]" unless -e "$tmp$_[0]";
-}
+sub install { install_($_[0], "-a") }
+sub install_lib { install_($_[0], "") }
 
 _ "$sudo rm -rf $tmp" if -e $tmp;
 _ "mkdir $tmp";

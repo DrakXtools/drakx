@@ -906,6 +906,9 @@ _("beware: IN THIS SECURITY LEVEL, ROOT LOGIN AT CONSOLE IS NOT ALLOWED!
 If you want to be root, you have to login as a user and then use \"su\".
 More generally, do not expect to use your machine for anything but as a server.
 You have been warned.")) || return;
+	    $u->{numlock} && $o->{pcmcia} and $o->ask_okcancel('',
+_("Be carefull, having numlock enabled causes a lot of keystrokes to
+give digits instead of normal letters (eg: pressing `p' gives `6')")) || return;
 	    0; }
     ) || return;
 }
@@ -1151,9 +1154,7 @@ sub setup_thiskind {
 	    push @l, $o->load_module($type) || next;
 	} else {
 	    #-eval { commands::modprobe("isapnp") };
-	    require pci_probing::main;
-	    require sbus_probing::main;
-	    $o->ask_warn('', [ pci_probing::main::list(), sbus_probing::main::list() ]); #-, scalar cat_("/proc/isapnp") ]);
+	    $o->ask_warn('', [ detect_devices::stringlist() ]); #-, scalar cat_("/proc/isapnp") ]);
 	}
     }
 }
