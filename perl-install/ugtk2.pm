@@ -1642,12 +1642,10 @@ sub get_text {
 
 sub set_text {
     my ($w, $val) = @_;
-    find_index {
-        if ($_ eq $val) {
-            $w->set_active($::i);
-            1;
-        }
-    } @{$w->{strings}};
+    eval { 
+	my $val_index = find_index { $_ eq $val } @{$w->{strings}};
+	$w->set_active($val_index);
+    };
 }
 
 
