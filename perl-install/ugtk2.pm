@@ -945,7 +945,7 @@ sub _create_window($$) {
     $w->signal_connect(delete_event => sub { if ($::isWizard) { $w->destroy; die 'wizcancel' } else { Gtk2->main_quit } });
     $w->set_uposition(@{$force_position || $o->{force_position}}) if $force_position || $o->{force_position};
 
-    if ($::o->{mouse}{unsafe}) {
+    if ($::isInstall && $::o->{mouse}{unsafe}) {
 	$w->add_events('pointer-motion-mask');
 	my $signal;  #- don't make this line part of next one, signal_disconnect won't be able to access $signal value
 	$signal = $w->signal_connect(motion_notify_event => sub {
