@@ -42,6 +42,7 @@ sub new {
     $o->{rwindow}->set_modal(1) if $my_gtk::grab || $o->{grab};
     
     if ($::isWizard && !$my_gtk::pop_it) {
+	$o->{isWizard} = 1;
 	$o->{window} = new Gtk::VBox(0,0);
 	$o->{window}->set_border_width($::Wizard_splash ? 0 : 10);
 	$o->{rwindow} = $o->{window};
@@ -91,6 +92,7 @@ sub new {
     }
 
     if ($::isEmbedded && !$my_gtk::pop_it && !eval { $::Plug->child }) {
+	$o->{isEmbedded} = 1;
 	$o->{window} = new Gtk::HBox(0,0);
 	$o->{rwindow} = $o->{window};
 	$::Plug ||= new Gtk::Plug ($::XID);
