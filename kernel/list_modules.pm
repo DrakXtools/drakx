@@ -17,7 +17,7 @@ our %l = (
       if_(arch() =~ /ppc/, qw(mace bmac gmac airport)),
       if_(arch() =~ /^sparc/, qw(sunbmac sunhme sunqe)),
       if_(arch() !~ /alpha/ && arch() !~ /sparc/,
-        qw(3c501 3c503 3c505 3c507 3c509 3c515),
+        qw(3c501 3c503 3c505 3c507 3c509 3c515 3c90x),
 	qw(82596 abyss ac3200 acenic aironet4500_card at1700 atp com20020-pci),
         qw(cs89x0 de600 de620),
         qw(defxx orinoco_plx), # most unused
