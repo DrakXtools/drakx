@@ -80,7 +80,7 @@ our %l = (
         qw(qla1280 qla2x00 qlogicfas qlogicfc),
         qw(seagate wd7000 sim710 sym53c416 t128 tmscsim u14-34f ultrastor),
         qw(eata eata_pio eata_dma mptscsih nsp32),
-        qw(sata_nv ata_piix sata_promise sata_sil sata_sis sata_svw sata_sx4 sata_via sata_vsc sx8),
+        qw(ahci ata_piix sata_nv sata_promise sata_sil sata_sis sata_svw sata_sx4 sata_uli sata_via sata_vsc sx8),
       ),
       qw(aic7xxx aic7xxx_old aic79xx pci2000 qlogicisp sym53c8xx lpfcdd), # ncr53c8xx
     ],
