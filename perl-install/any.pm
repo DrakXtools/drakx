@@ -93,7 +93,7 @@ sub setupBootloader {
     my $prev_boot = $b->{boot};
     my $mixed_kind_of_disks = 
       (grep { $_->{device} =~ /^sd/ } @$hds) && (grep { $_->{device} =~ /^hd/ } @$hds) ||
-      (grep { $_->{device} =~ /^hd[fghi]/ } @$hds) && (grep { $_->{device} =~ /^hd[abcd]/ } @$hds);
+      (grep { $_->{device} =~ /^hd[e-z]/ } @$hds) && (grep { $_->{device} =~ /^hd[a-d]/ } @$hds);
 
     if ($mixed_kind_of_disks) {
 	$automatic = $semi_auto = 0;
@@ -225,14 +225,15 @@ sub setupBootloader {
     delete $b->{bios} if $b->{boot} ne $prev_boot;
 
     if ($mixed_kind_of_disks && 
-#	$b->{boot} !~ /$hds->[0]{device}/ && #- not the first disk
 	$b->{boot} =~ /\d$/ && #- on a partition
 	is_empty_hash_ref($b->{bios}) && #- some bios mapping already there
 	arch() !~ /ppc/) {
+	log::l("mixed_kind_of_disks");
 	my $hd = $in->ask_from_listf('', _("You decided to install the bootloader on a partition.
 This implies you already have a bootloader on the hard drive you boot (eg: System Commander).
 
 On which drive are you booting?"), \&partition_table::description, $hds) or goto &setupBootloader;
+	log::l("mixed_kind_of_disks chosen $hd->{device}");
 	$b->{first_hd_device} = "/dev/$hd->{device}";
     }
 
