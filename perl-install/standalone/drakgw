@@ -215,7 +215,7 @@ if (!@cards)
 {
     $in->ask_warn(_("No network adapter on your system!"), 
 		  _("No ethernet network adapter has been detected on your system. Please run the hardware configuration tool."));
-    quit_global($in);
+    quit_global($in, 0);
 }
 elsif (@cards == 1)
 {
@@ -234,7 +234,7 @@ else
 				     $format,
 				    \@cards,
 				    ) or goto step_ask_confirm;
-    defined $device or quit_global($in);
+    defined $device or quit_global($in, 0);
 }
 log::l("[drakgw] Choosing network card: $device\n");
 
@@ -665,6 +665,9 @@ Click on Configure to launch the setup wizard.", $setup_state));
 
 #-------------------------------------------------
 #- $Log$
+#- Revision 1.51  2001/08/29 21:52:34  gc
+#- quit_global
+#-
 #- Revision 1.50  2001/08/18 00:06:32  siegel
 #- fixed i18n
 #-
