@@ -778,7 +778,7 @@ sub ftp_client {
 		$ftp->put("$_");
 		$interactive and progress($pbar, 0.5, $_);
 		$interactive and $pbar->set_show_text($_);
-		$interactive and progress($pbar3, 1/@file_list_to_send_by_ftp, _("Total progess"));
+		$interactive and progress($pbar3, 1/@file_list_to_send_by_ftp, _("Total progress"));
     }
     $ftp->quit; 
     return(0);
@@ -848,7 +848,7 @@ return(1);
 		
 		my $exp = Expect->spawn("$exp_command") or $in->ask_warn('',_("ERROR: Cannot spawn $exp_command."));
 
-		$interactive and progress($pbar3, 1/@send_files, _("Total progess"));
+		$interactive and progress($pbar3, 1/@send_files, _("Total progress"));
 		$interactive and $stext->set_text($_);
 	
 		#- run scp, look for some common errors and try to track successful progress for GUI
@@ -902,7 +902,7 @@ sub ssh_client {
 		close TMP;
 		$log_buff .= "\n";
 		$interactive and progress($pbar, 0.5, "Done...");
-		$interactive and progress($pbar3, 1/@file_list_to_send_by_ftp, _("Total progess"));
+		$interactive and progress($pbar3, 1/@file_list_to_send_by_ftp, _("Total progress"));
     }
     return(0);
 }
