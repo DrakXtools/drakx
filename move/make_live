@@ -105,7 +105,7 @@ print "Making live in $::prefix directory.\n";
 
     symlinkf("/etc/X11/ksycoca", "$::prefix/usr/share/services/ksycoca");
 
-    config_X_proprietary_drivers();
+    eval { config_X_proprietary_drivers() };
 
     unlink "$::prefix/usr/share/autostart/$_.desktop" foreach 'klipper', 'korgac', 'kalarmd.autostart';
 }
