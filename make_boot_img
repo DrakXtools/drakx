@@ -37,7 +37,7 @@ my @kernels = grep { /^2/ } all('kernel/all.kernels');
 
 
 my @all_images = (
-		  if_($arch =~ /i.86/, 'cdrom.img', 'pcmcia.img', 'isolinux', 'boot.iso', 'hd_grub.img', 'network.img', 'network_drivers.img'),
+		  if_($arch =~ /i.86/, 'cdrom.img', 'cdrom-changedisk.img', 'pcmcia.img', 'isolinux', 'boot.iso', 'hd_grub.img', 'network.img', 'network_drivers.img'),
 		  if_($arch =~ /x86_64/, 'cdrom.img', 'isolinux', 'boot.iso'),
 		  if_($arch =~ /ia64/, 'all.img'),
 		 );
@@ -174,7 +174,8 @@ sub boot_img_i386 {
     _ "cat $kernel > $mnt/vmlinuz";
 
     (my $rdz = $img) =~ s/\.img/.rdz/;
-    initrd($tmp_mnt_initrd, $type, $I, $rdz);
+    (my $initrd_type = $type) =~ s/-changedisk//;
+    initrd($tmp_mnt_initrd, $initrd_type, $I, $rdz);
     my $short_type = substr($type, 0, 8);
     eval { _ "cp -f $rdz $mnt/$short_type.rdz" };
     if ($@) {
