@@ -108,7 +108,6 @@ if ($type eq 'list-hd') {
     }
     diskdrake::removable::main($in, $all_hds, $raw_hd);
 } elsif ($type eq 'dav') {
-    ($::isEmbedded, my $isEmbedded) = (0, $::isEmbedded);
     require diskdrake::dav;
     diskdrake::dav::main($in, $all_hds);
     $::isEmbedded = $isEmbedded;
