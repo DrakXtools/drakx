@@ -105,8 +105,8 @@ sub boot_img_i386 {
 
 #    my $ftype = $type =~ /^(other|all)$/ ? "cdrom" : $type;
     my $timeout = 72;
-    output("$mnt/syslinux.cfg", "
-default linux
+    output("$mnt/syslinux.cfg",
+"default linux
 prompt 1
 timeout $timeout
 display boot.msg
@@ -138,19 +138,25 @@ label rescue
   append ramdisk_size=32000 initrd=$type.rdz $automatic rescue rw
 label lnx4win
   kernel vmlinuz
-  append ramdisk_size=32000 initrd=$type.rdz $automatic lnx4win vga=788
-label preinst
+  append ramdisk_size=32000 initrd=$type.rdz $automatic lnx4win vga=788" .
+
+($type eq 'all' &&
+"label preinst
   kernel vmlinuz
-  append ramdisk_size=32000 initrd=all.rdz automatic=method:cdrom rescue oem rw
+  append ramdisk_size=32000 initrd=$type.rdz automatic=method:cdrom rescue oem rw
 label oem
   kernel vmlinuz
-  append ramdisk_size=32000 initrd=all.rdz automatic=method:cdrom rescue oem rw
-label auto
+  append ramdisk_size=32000 initrd=$type.rdz automatic=method:cdrom rescue oem rw") .
+
+"label auto
   kernel vmlinuz
   append ramdisk_size=32000 initrd=$type.rdz $automatic auto_install=Mandrake/base/auto_inst.cfg.pl
 label all
   kernel vmlinuz
   append ramdisk_size=32000 initrd=$type.rdz pcmcia vga=788
+label ackbar
+  kernel vmlinuz
+  append ramdisk_size=32000 initrd=$type.rdz automatic=method:nfs,network:static,ip:192.168.1.205,dns:192.168.1.11,domain:mandrakesoft.com,server:ackbar,directory:/export vga=788
 ");
     _ "sync";
     _ "df $mnt";
