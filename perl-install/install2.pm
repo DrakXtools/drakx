@@ -356,7 +356,7 @@ sub formatPartitions {
     my $d = "/initrd/loopfs/lnx4win";
     if (-d $d) {
 #-	install_any::useMedium(0);
-	install_any::getAndSaveFile("lnx4win/$_", "$d/$_") foreach qw(loadlin.exe linux.pif lnx4win.exe lnx4win.ico rm.exe uninstall.bat uninstall.pif);
+	install_any::getAndSaveFile("lnx4win/$_", "$d/$_") foreach qw(ctl3d32.dll loadlin.exe linux.pif lnx4win.exe lnx4win.ico rm.exe uninstall.bat uninstall.pif);
     }
 
 #-    chdir "$o->{prefix}"; was for core dumps
