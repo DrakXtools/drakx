@@ -215,6 +215,8 @@ sub spawnShell {
 
     fork and return;
 
+    $ENV{DISPLAY} ||= ":0"; #- why not :pp
+
     local *F;
     sysopen F, "/dev/tty2", 2 or die "cannot open /dev/tty2 -- no shell will be provided";
 
