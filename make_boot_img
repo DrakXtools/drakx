@@ -14,7 +14,7 @@ my ($arch) = $Config{archname} =~ /(.*?)-/;
 rename 'all.kernels', 'kernel/all.kernels';
 rename 'all.modules', 'kernel/all.modules';
 
-$default_append = "ramdisk_size=32000 root=/dev/ram3";
+$default_append = "ramdisk_size=128000 root=/dev/ram3";
 $default_vga = "vga=788";
 
 $instdir = "mdk-stage1";
@@ -305,44 +305,44 @@ image[sun4c,sun4d,sun4m]=/$boot/vmlinux
   label=linux
   alias=install
   initrd=/$boot/live.rdz
-  append=\"ramdisk_size=32000 root=/dev/ram3\"
+  append=\"ramdisk_size=128000 root=/dev/ram3\"
 image[sun4c,sun4d,sun4m]=/$boot/vmlinux
   label=text
   initrd=/$boot/live.rdz
-  append=\"ramdisk_size=32000 text root=/dev/ram3\"
+  append=\"ramdisk_size=128000 text root=/dev/ram3\"
 image[sun4c,sun4d,sun4m]=/$boot/vmlinux
   label=expert
   initrd=/$boot/live.rdz
-  append=\"ramdisk_size=32000 expert root=/dev/ram3\"
+  append=\"ramdisk_size=128000 expert root=/dev/ram3\"
 image[sun4c,sun4d,sun4m]=/$boot/vmlinux
   label=ks
   initrd=/$boot/live.rdz
-  append=\"ramdisk_size=32000 ks root=/dev/ram3\"
+  append=\"ramdisk_size=128000 ks root=/dev/ram3\"
 image[sun4c,sun4d,sun4m]=/$boot/vmlinux
   label=rescue
   initrd=/$boot/live.rdz
-  append=\"ramdisk_size=32000 rescue rw root=/dev/ram3\"
+  append=\"ramdisk_size=128000 rescue rw root=/dev/ram3\"
 image[sun4u]=/$boot/vmlinux64
   label=linux
   alias=install
   initrd=/$boot/live64.rdz
-  append=\"ramdisk_size=32000 root=/dev/ram3\"
+  append=\"ramdisk_size=128000 root=/dev/ram3\"
 image[sun4u]=/$boot/vmlinux64
   label=text
   initrd=/$boot/live64.rdz
-  append=\"ramdisk_size=32000 text root=/dev/ram3\"
+  append=\"ramdisk_size=128000 text root=/dev/ram3\"
 image[sun4u]=/$boot/vmlinux64
   label=expert
   initrd=/$boot/live64.rdz
-  append=\"ramdisk_size=32000 expert root=/dev/ram3\"
+  append=\"ramdisk_size=128000 expert root=/dev/ram3\"
 image[sun4u]=/$boot/vmlinux64
   label=ks
   initrd=/$boot/live64.rdz
-  append=\"ramdisk_size=32000 ks root=/dev/ram3\"
+  append=\"ramdisk_size=128000 ks root=/dev/ram3\"
 image[sun4u]=/$boot/vmlinux64
   label=rescue
   initrd=/$boot/live64.rdz
-  append=\"ramdisk_size=32000 rescue rw root=/dev/ram3\"
+  append=\"ramdisk_size=128000 rescue rw root=/dev/ram3\"
 ");
 
 	output("$dir/$boot/README", "
@@ -390,7 +390,7 @@ message=/boot.msg
 image=/vmlinux$I.gz
   label=linux
   initrd=/$type.rdz
-  append=\"ramdisk_size=32000 $ltype root=/dev/ram3\"
+  append=\"ramdisk_size=128000 $ltype root=/dev/ram3\"
 ");
 	_ "genromfs -d $dir -f /dev/ram -A 2048,/.. -a 512 -V \'DrakX boot disk\'";
 	_ "$sudo mount -t romfs /dev/ram $mnt";
