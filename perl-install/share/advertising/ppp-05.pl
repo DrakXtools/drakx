@@ -5,7 +5,7 @@ $height = 303;
 
 $y_start = 80;
 
-$title = N("");
+$title = "";
 
 @text = (N("Kdevelop: a full featured, easy to use Integrated Development Environment for C++ programming"),
          N("GCC: the GNU Compiler Collection"),

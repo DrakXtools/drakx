@@ -5,7 +5,7 @@ $height = 303;
 
 $y_start = 80;
 
-$title = N("");
+$title = "";
 
 @text = (N("Mandrake Linux is widely known as the most user-friendly and the easiest to install and to use Linux distribution."),
          '',

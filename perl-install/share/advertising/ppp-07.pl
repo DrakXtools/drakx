@@ -5,7 +5,7 @@ $height = 303;
 
 $y_start = 80;
 
-$title = N("");
+$title = "";
 
 @text = (N("Empower your business network with premier server solutions including:"),
          N("   * Samba: File and print services for MS-Windows clients"),

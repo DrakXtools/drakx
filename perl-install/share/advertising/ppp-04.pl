@@ -5,7 +5,7 @@ $height = 303;
 
 $y_start = 80;
 
-$title = N("");
+$title = "";
 
 @text = (N("In the Mandrake Linux menu you will find easy-to-use applications for all tasks:"),
          N("   * Create, edit and share office documents with OpenOffice.org"),

@@ -5,7 +5,7 @@ $height = 303;
 
 $y_start = 80;
 
-$title = N("");
+$title = "";
 
 @text = (N("Find all MandrakeSoft products and services at MandrakeStore -- our full service e-commerce platform."),
          '',
