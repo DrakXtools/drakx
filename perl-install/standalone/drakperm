@@ -5,7 +5,7 @@ use lib qw(/usr/lib/libDrakX);
 use standalone;
 
 use common;
-use my_gtk qw(:wrappers :helpers);
+use ugtk2 qw(:helpers );
 use interactive;
 
 my $in = 'interactive'->vnew('su', 'default');
@@ -27,29 +27,42 @@ my $rows_cnt = 0;
 my $editable = 0;
 my $modified = 0;
 my $prec_txt = $default_perm_level;
-#my $bg = Gtk::Gdk::Color->parse_color('grey');
+#my $bg = Gtk2::Gdk::Color->parse_color('grey');
 #- Widget declaration
-my $w = my_gtk->new('drakperm');
+my $w = ugtk2->new('drakperm');
 my $W = $w->{window};
-$W->signal_connect(delete_event => sub { my_gtk->exit });
-my $scroll 		= new Gtk::ScrolledWindow;
-my $Perm_list = new_with_titles Gtk::CList(N("path"), N("user"), N("group"), N("permissions"));
-my $vb				= new Gtk::VBox(0,5);
-my $select_box = new Gtk::HBox(0,5);
-my $action_box = new Gtk::HBox(0,5);
-my $up_down_box = new Gtk::HBox(0,5);
-my $B_quit		= new Gtk::Button('quit');
-my $B_sav			= new Gtk::Button('save');
-my $B_up			= new Gtk::Button(N("Up"));
-my $B_del			= new Gtk::Button(N("delete"));
-my $B_edit		= new Gtk::Button(N("edit"));
-my $B_down		= new Gtk::Button(N("Down"));
-my $B_add			= new Gtk::Button(N("add a rule"));
-my $label_perm = new Gtk::Label(N("select perm file to see/edit"));
-my $combo_perm = new Gtk::Combo;
-my $tips			= new Gtk::Tooltips;
-my $pres			= new Gtk::Label(N("Drakperm is used to see files to use in order to fix permissions, owners, and groups via msec.\nYou can also edit your own rules which will owerwrite the default rules."));
-my $F					= new Gtk::Frame;
+$W->signal_connect(delete_event => sub { ugtk2->exit });
+my $scroll 		= new Gtk2::ScrolledWindow;
+my $tree_model = Gtk2::TreeStore->new(map { Gtk2::GType->STRING } 1..4);
+my $Perm_list = Gtk2::TreeView->new_with_model($tree_model);
+
+my @column_sizes = (150, 100, 100, 15, -1);
+
+each_index {
+    my $col = Gtk2::TreeViewColumn->new_with_attributes($_, Gtk2::CellRendererText->new, 'text' => $::i);
+    $col->set_min_width($column_sizes[$::i]);
+    $Perm_list->append_column($col);
+} (N("path"), N("user"), N("group"), N("permissions"));
+
+
+#TV $Perm_list->set_shadow_type('out');
+
+my $vb				= new Gtk2::VBox(0,5);
+my $select_box = new Gtk2::HBox(0,5);
+my $action_box = new Gtk2::HBox(0,5);
+my $up_down_box = new Gtk2::HBox(0,5);
+my $B_quit		= new Gtk2::Button('quit');
+my $B_sav			= new Gtk2::Button('save');
+my $B_up			= new Gtk2::Button(N("Up"));
+my $B_del			= new Gtk2::Button(N("delete"));
+my $B_edit		= new Gtk2::Button(N("edit"));
+my $B_down		= new Gtk2::Button(N("Down"));
+my $B_add			= new Gtk2::Button(N("add a rule"));
+my $label_perm = new Gtk2::Label(N("select perm file to see/edit"));
+my $combo_perm = new Gtk2::Combo;
+my $tips			= new Gtk2::Tooltips;
+my $pres			= new Gtk2::Label(N("Drakperm is used to see files to use in order to fix permissions, owners, and groups via msec.\nYou can also edit your own rules which will owerwrite the default rules."));
+my $F					= new Gtk2::Frame;
 #- widgets settings
 $combo_perm->set_popdown_strings(sort(keys %perm));
 
@@ -60,14 +73,17 @@ $tips->set_tip($B_down, N("Down selected rule one level"));
 $tips->set_tip($B_del, N("Delete selected rule"));
 
 #- signal management
-$W->signal_connect(delete_event => sub { my_gtk->exit });
+$W->signal_connect(delete_event => sub { ugtk2->exit });
 $Perm_list->signal_connect( select_row => \&row_setting_data);
 #$Perm_list->signal_connect( unselect_row => sub { undef(%CURENT)});
 $B_sav->signal_connect( clicked => \&save_perm);
-$B_quit->signal_connect( clicked => sub { my_gtk->exit });
+$B_quit->signal_connect( clicked => sub { ugtk2->exit });
 $B_edit->signal_connect( clicked => \&row_setting_dialog);
 $B_add->signal_connect( clicked  => sub {
+                            use Data::Dumper; print Dumper($rows_cnt);
+
 		$Perm_list->insert( $rows_cnt , '');
+          $tree_model->append_set(undef, [ 0 => $1, 1 => $2, 2 => $4, 3 => $5 ]);
 		$Perm_list->select_row($rows_cnt , 0);
 		&row_setting_dialog;
 		$rows_cnt++;
@@ -94,10 +110,8 @@ $B_up->signal_connect( clicked => sub {
 my $combo_sig = $combo_perm->entry->signal_connect( changed => sub { &display_perm($combo_perm->entry->get_text , @_) });
 $Perm_list->signal_connect( button_press_event => sub { 
 		$editable or return 0;
-		my ($clist, $event) = @_;
-		if ($event->{type} eq '2button_press') {
-			&row_setting_dialog;
-		}
+		my (undef, $event) = @_;
+		&row_setting_dialog if $event->type eq '2button_press';
 	});
 
 #Viewing management
@@ -108,17 +122,9 @@ $scroll->add($Perm_list);
 $scroll->set_policy('automatic', 'automatic');
 
 
-$Perm_list->set_shadow_type('out');
-$Perm_list->set_column_width(0, 150);
-$Perm_list->set_column_width(1, 100);
-$Perm_list->set_column_width(2, 100);
-$Perm_list->set_column_width(3, 15);
-
-$up_down_box->add($B_up);
-$up_down_box->add($B_down);
-$up_down_box->add($B_add);
-$up_down_box->add($B_del);
-$up_down_box->add($B_edit);
+foreach ($B_up, $B_down, $B_add, $B_del, $B_edit) {
+    $up_down_box->add($_);
+}
 
 $action_box->add($B_sav);
 $action_box->add($B_quit);
@@ -128,7 +134,7 @@ $vb->pack_start($scroll,1,1,5);
 $vb->pack_start($up_down_box,0,0,5);
 $vb->pack_start($action_box,0,0,5);
 
-my $vb_ = new Gtk::VBox(0,5);
+my $vb_ = new Gtk2::VBox(0,5);
 $F->add($vb);
 $vb_->pack_start($pres,0,0,5);
 $vb_->pack_start($F,1,1,5);
@@ -144,7 +150,7 @@ $combo_perm->entry->set_text($default_perm_level);
 $w->main;
 
 #- Should never get here
-my_gtk->exit;
+ugtk2->exit;
 
 
 #- Built in functions
@@ -171,11 +177,13 @@ sub display_perm {
 
 	$editable = $perm_level =~ /^level \d/ ? 0 : 1;
 	
-	$Perm_list->clear();
+	$tree_model->clear();
+     local *F;
 	open F, $file;
+     local $_;
 	while (<F>) {
-         m/^([^#]\S+)\s+([^.\s]+)(\.(\S+))?\s+(\d+)/ or next;
-         $Perm_list->insert($i++, ($1, $2, $4, $5));
+         next unless m/^([^#]\S+)\s+([^.\s]+)(\.(\S+))?\s+(\d+)/;
+         $tree_model->append_set(undef, [ 0 => $1, 1 => $2, 2 => $4, 3 => $5 ]);
      }
 	close F;
 	$up_down_box->set_sensitive($editable);
@@ -188,6 +196,7 @@ sub display_perm {
 #- Desc => save the perm.local file if modification made
 sub save_perm {
 	$modified or return 0;
+     local *F;
 	open F, '>'.$local_path.'perm.local' or die("F CHIER BORDEL");
 	foreach my $i (0..$rows_cnt) {
 		my $line = $Perm_list->get_text($i, 0) . "\t" . $Perm_list->get_text($i,1) . ($Perm_list->get_text($i,2) ? "." . $Perm_list->get_text($i,2) : "") . "\t" . $Perm_list->get_text($i,3) . "\n";
@@ -198,7 +207,7 @@ sub save_perm {
 }
 #- on list selection we get all data concerning the curent selection
 sub row_setting_data {
-	my ( $widget, $row, $column, $event ) = @_;
+	my (undef, $row, $column, undef ) = @_;
 	%CURENT = ('clicked' => {'row' => $row,
                               'col' => $column
                              },
@@ -218,51 +227,51 @@ sub row_setting_dialog {
 	my $row = ${$CURENT{clicked}}{row};
 	
 	#- dlg widgets declaration
-	my $dlg 		= new Gtk::Dialog();
-	my $ok 			= new Gtk::Button('ok');
-	my $cancel 	= new Gtk::Button('cancel');
-	my $browse	= new Gtk::Button(N("browse"));
-	my $users 	= new Gtk::Combo;
-	my $groups	= new Gtk::Combo;
-	my $file		= new Gtk::Entry;
-	my $file_hbox=new Gtk::HBox(0,5);
-	my $usr_hbox = new Gtk::HBox(0,5);
-	my $usr_vbox = new Gtk::VBox(0,5);
-	my $usr_check=new Gtk::CheckButton(N("Current user"));
+	my $dlg 		= new Gtk2::Dialog();
+	my $ok 		= new Gtk2::Button('ok');
+	my $cancel 	= new Gtk2::Button('cancel');
+	my $browse	= new Gtk2::Button(N("browse"));
+	my $users 	= new Gtk2::Combo;
+	my $groups	= new Gtk2::Combo;
+	my $file		= new Gtk2::Entry;
+	my $file_hbox  = new Gtk2::HBox(0,5);
+	my $usr_hbox   = new Gtk2::HBox(0,5);
+	my $usr_vbox   = new Gtk2::VBox(0,5);
+	my $usr_check  = new Gtk2::CheckButton(N("Current user"));
 	my @rights	= ('user', 'group', 'other');
-	my @check	= ('', 'read', 'write', 'execute');
-	my $hb_rights = new Gtk::HBox(0,15);
-	my $vb_rights = new Gtk::VBox(0,15);
-	my $F_rights	= new Gtk::Frame(N("Permissions"));
-	my $F_path		= new Gtk::Frame(N("Path"));
-	my $F_usr			= new Gtk::Frame(N("Property"));
-	my $vb_specials = new Gtk::VBox(0,5);
-	my $sticky	= new Gtk::CheckButton(N("sticky-bit"));
-	my $suid	= new Gtk::CheckButton(N("Set-UID"));
-	my $gid	= new Gtk::CheckButton(N("Set-GID"));
+	my @check	     = ('', 'read', 'write', 'execute');
+	my $hb_rights  = new Gtk2::HBox(0,15);
+	my $vb_rights  = new Gtk2::VBox(0,15);
+	my $F_rights	= new Gtk2::Frame(N("Permissions"));
+	my $F_path	= new Gtk2::Frame(N("Path"));
+	my $F_usr		= new Gtk2::Frame(N("Property"));
+	my $vb_specials = new Gtk2::VBox(0,5);
+	my $sticky	= new Gtk2::CheckButton(N("sticky-bit"));
+	my $suid	= new Gtk2::CheckButton(N("Set-UID"));
+	my $gid	= new Gtk2::CheckButton(N("Set-GID"));
 	my $rght = ${$CURENT{data}}[3];
 	my $s = length($rght) == 4 ? substr($rght,0,1) : 0;
 	my $user  = $s ? substr($rght,1,1) : substr($rght,0,1);
 	my $group = $s ? substr($rght,2,1) : substr($rght,1,1);
 	my $other = $s ? substr($rght,3,1) : substr($rght,2,1);
 	foreach (@check) {
-		$vb_rights->add(new Gtk::Label($_));
+		$vb_rights->add(new Gtk2::Label($_));
 	}
 	$hb_rights->add($vb_rights);
 	foreach my $r (@rights) {
 		%{$r} = &get_right(${$r});
-		${'_vb'.$r} = new Gtk::VBox(0,5);
-		${'_vb'.$r}->add(new Gtk::Label($r));
+		${'_vb'.$r} = new Gtk2::VBox(0,5);
+		${'_vb'.$r}->add(new Gtk2::Label($r));
 		foreach my $c (@check) {
 			$c eq '' and next;
-               ${ $r . "_$c" } = Gtk::CheckButton->new;
+               ${ $r . "_$c" } = Gtk2::CheckButton->new;
                ${$r}{$c} and ${ $r . "_$c" }->set_active(1);
                ${"_vb$r"}->add(${ $r . "_$c" });
 		}
 		$hb_rights->add(${'_vb'.$r});
 	}
 	
-	$vb_specials->add(new Gtk::Label(' '));
+	$vb_specials->add(new Gtk2::Label(' '));
 	$vb_specials->add($suid);
 	$vb_specials->add($gid);
 	$vb_specials->add($sticky);
@@ -301,7 +310,7 @@ sub row_setting_dialog {
 	#- event management
 	$cancel->signal_connect( clicked => sub { $dlg->destroy });
 	$browse->signal_connect( clicked => sub {
-			my $file_dlg = new Gtk::FileSelection(N("Path selection"));
+			my $file_dlg = new Gtk2::FileSelection(N("Path selection"));
 			$file_dlg->set_modal(1);
 			$file_dlg->show;
 			$file_dlg->set_filename($file->get_text);
@@ -331,13 +340,9 @@ sub row_setting_dialog {
 			$modified++;
 		});
 	$usr_check->signal_connect( clicked => sub {
-			if ($usr_check->get_active) {
-				$groups->set_sensitive(0);
-				$users->set_sensitive(0);
-			} else {
-				$groups->set_sensitive(1);
-				$users->set_sensitive(1);
-			}
+         my $bool = $usr_check->get_active; 
+         $groups->set_sensitive($bool);
+         $users->set_sensitive($bool);
 		});
 	
 	#- dlg widgets placement
@@ -347,9 +352,9 @@ sub row_setting_dialog {
 	$usr_vbox->add($usr_check);
 	$usr_vbox->add($usr_hbox);
 	
-	$usr_hbox->add(new Gtk::Label(N("user :")));
+	$usr_hbox->add(new Gtk2::Label(N("user :")));
 	$usr_hbox->add($users);
-	$usr_hbox->add(new Gtk::Label(N("group :")));
+	$usr_hbox->add(new Gtk2::Label(N("group :")));
 	$usr_hbox->add($groups);
 	
 	$F_path->add($file_hbox);
@@ -376,6 +381,7 @@ sub get_user_or_group {
 		and	open F, '/etc/passwd'
 		or	open F, '/etc/group';
 	
+     local $_;
 	while (<F>) {
 		m/^([^#:]+):[^:]+:[^:]+:/ or next;
 		push @users, $1;
@@ -393,4 +399,3 @@ sub get_right {
 	$right - 1 >= 0 and $rght{execute}=1 and $right = $right-1;
 	return %rght;
 }
-
