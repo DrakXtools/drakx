@@ -45,9 +45,9 @@ our %spoolers = ('ppq' => {
 				'short_name' => _("CUPS")
 			 }
             );
-our %spooler_inv = map {$spooler{$_}{long_name} => $_ } keys %spoolers;
+our %spooler_inv = map { $spooler{$_}{long_name} => $_ } keys %spoolers;
 
-our %shortspooler_inv = map {$spooler{$_}{short_name} => $_ } keys %spoolers;
+our %shortspooler_inv = map { $spooler{$_}{short_name} => $_ } keys %spoolers;
 
 %printer_type = (
     _("Local printer")                              => "LOCAL",
@@ -60,7 +60,7 @@ our %shortspooler_inv = map {$spooler{$_}{short_name} => $_ } keys %spoolers;
     _("Enter a printer device URI")                 => "URI",
     _("Pipe job into a command")                    => "POSTPIPE"
 );
-%printer_type_inv = reverse %printer_type;
+our %printer_type_inv = reverse %printer_type;
 
 #------------------------------------------------------------------------------
 
@@ -1116,7 +1116,7 @@ sub set_cups_special_options {
     # If nothing is already configured, set text file borders of half an inch
     # and decrease the font size a little bit, so nothing of the text gets
     # cut off by unprintable borders.
-    if(!grep {/$queue.*\s(page-(top|bottom|left|right)|lpi|cpi)=/} @lpoptions){
+    if (!grep { /$queue.*\s(page-(top|bottom|left|right)|lpi|cpi)=/ } @lpoptions){
 	run_program::rooted($prefix, "lpoptions",
 			    "-p", $queue,
 			    "-o", "page-top=36", "-o", "page-bottom=36",
@@ -1124,7 +1124,7 @@ sub set_cups_special_options {
 			    "-o", "cpi=12", "-o", "lpi=7", "-o", "wrap");
     }
     # Let images fill the whole page by default
-    if (!grep {/$queue.*\s(scaling|natural-scaling|ppi)=/} @lpoptions) {
+    if (!grep { /$queue.*\s(scaling|natural-scaling|ppi)=/ } @lpoptions) {
 	run_program::rooted($prefix, "lpoptions",
 			    "-p", $queue,
 			    "-o", "scaling=100");
@@ -3180,7 +3180,7 @@ sub findgimpconfigfiles {
     open PASSWD, "< $prefix/etc/passwd" or die "Cannot read /etc/passwd!\n";
     while (<PASSWD>) {
 	chomp;
-	if ($_ =~ /^([^:]+):[^:]*:([^:]+):([^:]+):[^:]*:([^:]+):[^:]*$/) {
+	if (/^([^:]+):[^:]*:([^:]+):([^:]+):[^:]*:([^:]+):[^:]*$/) {
 	    my ($username, $uid, $gid, $homedir) = ($1, $2, $3, $4);
 	    if ((($uid == 0) || ($uid >= 500)) && ($username ne "nobody")) {
 		for my $file (@configfilenames) {

@@ -363,7 +363,7 @@ sub createScrolledWindow {
     my $w = new Gtk::ScrolledWindow(undef, undef);
     $policy ||= [ 'automatic', 'automatic'];
     $w->set_policy(@{$policy});
-    if(member(ref $W, qw(Gtk::CList Gtk::CTree Gtk::Text))) {
+    if (member(ref $W, qw(Gtk::CList Gtk::CTree Gtk::Text))) {
        $w->add($W)
     } else {
        $w->add_with_viewport($W);

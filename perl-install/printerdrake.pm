@@ -194,7 +194,7 @@ sub first_time_dialog {
 	$localprinterspresent = 1;
 	for my $printer (@autodetected) {
 	    my $entry = $printer->{val}{DESCRIPTION};
-	    if ($entry) {push (@printerlist, "  -  $entry\n");}
+	    if ($entry) { push (@printerlist, "  -  $entry\n") }
 	}
 	my $morethanoneprinters = ($#printerlist > 0);
 	my $unknown_printers = $#autodetected - $#printerlist;
@@ -502,8 +502,8 @@ sub setup_local_autoscan {
 	for (my $i = 0; $i <= $#prefixes; $i++) {
 	    my $firstinlist = ($first =~ m!^$prefixes[$i]!);
 	    my $secondinlist = ($second =~ m!^$prefixes[$i]!);
-	    if (($firstinlist) && (!$secondinlist)) {return -1};
-	    if (($secondinlist) && (!$firstinlist)) {return 1};
+	    if (($firstinlist) && (!$secondinlist)) { return -1 };
+	    if (($secondinlist) && (!$firstinlist)) { return 1 };
 	}
 	return $first cmp $second;
     } keys(%{$menuentries});
@@ -1150,7 +1150,7 @@ sub setup_socket {
     }
 
     # Auto-detect printer model
-    my $modelinfo = undef;
+    my $modelinfo;
     if ($printer->{AUTODETECT}) {
 	$modelinfo = printer::getSNMPModel ($remotehost);
     }
@@ -2665,6 +2665,7 @@ sub security_check {
     if ($::isInstall) {
 	$security = $in->{security};
     } else {
+     require any;
 	$security = any::get_secure_level();
     }
 
