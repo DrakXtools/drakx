@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 9.2
-Release: 6mdk
+Release: 7mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -153,7 +153,8 @@ hardware classes.
 %setup -q
 
 %build
-%make rpcinfo-flushed ddcprobe serial_probe 
+%make CFLAGS="$RPM_OPT_FLAGS" rpcinfo-flushed
+%make ddcprobe serial_probe 
 %make
 
 %install
@@ -316,6 +317,9 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Mon Sep  1 2003 Gwenole Beauchesne <gbeauchesne@mandrakesoft.com> 9.2-7mdk
+- Fix lsnetdrake on AMD64
+
 * Sun Aug 31 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.2-6mdk
 - drakboot: default parameters are those of the default target (pixel)
 - drakedm: in non expert mode, only display the list of *installed* display
