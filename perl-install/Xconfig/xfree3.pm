@@ -86,13 +86,12 @@ sub set_wacoms {
 sub depths { 8, 15, 16, 24, 32 }
 sub set_resolution {
     my ($raw_X, $resolution, $Screen) = @_;
-    $Screen ||= $raw_X->get_default_screen or return {};
 
     $resolution = +{ %$resolution };
-
-    #- use framebuffer if Screen is
-    $resolution->{fbdev} = 1 if val($Screen->{Driver}) eq 'fbdev';
-
+    if (my $Screen_ = $Screen || $raw_X->get_default_screen) {
+	#- use framebuffer if Screen is
+	$resolution->{fbdev} = 1 if val($Screen_->{Driver}) eq 'fbdev';
+    }
     $raw_X->SUPER::set_resolution($resolution, $Screen);
 }
 

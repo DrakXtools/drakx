@@ -85,16 +85,16 @@ sub set_wacoms {
 sub depths { 8, 15, 16, 24 }
 sub set_resolution {
     my ($raw_X, $resolution, $Screen) = @_;
-    $Screen ||= $raw_X->get_default_screen or return {};
 
     $resolution = +{ %$resolution };
-
-    #- use framebuffer if corresponding Device has Driver framebuffer
-    my $Device = $raw_X->get_Section_by_Identifier('Device', val($Screen->{Device})) or internal_error("no device named $Screen->{Device}");
-    $resolution->{fbdev} = 1 if val($Device->{Driver}) eq 'fbdev';
-
+    if (my $Screen_ = $Screen || $raw_X->get_default_screen) {
+	#- use framebuffer if corresponding Device has Driver framebuffer
+	my $Device = $raw_X->get_Section_by_Identifier('Device', val($Screen_->{Device})) or internal_error("no device named $Screen_->{Device}");
+	$resolution->{fbdev} = 1 if val($Device->{Driver}) eq 'fbdev';
+    }
     #- XFree4 doesn't like depth 32, silently replacing it with 24
     $resolution->{Depth} = 24 if $resolution->{Depth} eq '32';
+
     $raw_X->SUPER::set_resolution($resolution, $Screen);
 }
 
