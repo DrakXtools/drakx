@@ -1079,7 +1079,7 @@ sub print_optionlist {
     if ($printer->{configured}{$queue}{queuedata}{foomatic}) {
         run_program::rooted($prefix, $lpr, "-s", $printer->{SPOOLER},
 			    "-P", $queue, "-o", "docs",
-			    $FOOMATIC_DEFAULT_SPOOLER);
+			    "/etc/bashrc");
     } elsif ($printer->{configured}{$queue}{queuedata}{ppd}) {
 	system(($::testing ? "$prefix" : "chroot $prefix/ ") .
 	       "/usr/bin/lphelp $queue | " .
