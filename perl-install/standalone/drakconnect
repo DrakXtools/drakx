@@ -265,8 +265,7 @@ sub build_tree {
 	$intf->{$_->[0]} = $l{$_->[1]} foreach [ 'connection' , 'Name' ], [ 'domain', 'Domain' ], [ 'login', 'Username' ];
 	/.*ATDT(\d*)/ and $intf->{phone} = $1 foreach cat_("/etc/sysconfig/network-scripts/chat-ppp0");
 	/NAME=(['"]?)(.*)\1/ and $intf->{login} ||= $2 foreach cat_("/etc/sysconfig/network-scripts/ifcfg-ppp0");
-	my $security = network::tools::read_secret_backend();
-	$_->{login} eq $intf->{login} and $intf->{passwd} = $_->{passwd} foreach @$security;
+	$_->{login} eq $intf->{login} and $intf->{passwd} = $_->{passwd} foreach @{network::tools::read_secret_backend()};
 	$intf->{save} = sub { network::modem::ppp_configure($in, $intf) };
     }
     elsif ($interface eq 'isdn') {
@@ -496,8 +495,10 @@ sub populate_notebook {
 sub save {
     my ($netc, $netcnx, $intf, $gui, $apply_button) = @_;
  
-    save_notebook($netc, $intf->{$_}, $gui->{$_}) foreach keys %$intf;
-    $intf->{$_}{save} and $intf->{$_}{save}->() foreach keys %$intf;
+    foreach (keys %$intf) {
+	save_notebook($netc, $intf->{$_}, $gui->{$_});
+	$intf->{$_}{save} and $intf->{$_}{save}->();
+    }
     apply($netc, $netcnx, $intf, $apply_button);
 }
 
