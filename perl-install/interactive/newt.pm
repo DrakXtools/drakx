@@ -152,7 +152,6 @@ sub ask_fromW_real {
 
 	    $w = Newt::Component::Tree($size, $scroll);
 
-	    my @lz;
 	    my $wi;
 	    my $add_item = sub {
 		my ($text, $data, $parents) = @_;
@@ -178,7 +177,8 @@ sub ask_fromW_real {
 	    $w->TreeSetWidth($wi + 1);
 	    $get = sub { $w->TreeGetCurrent };
 	    $set = sub {
-		#$w->TreeSetCurrent($_[0]);
+#		$w->TreeSetCurrent($_[0]);
+		1;
 	    };
 	} elsif ($e->{type} =~ /list/) {
 	    my ($h) = @$l == 1 && $height > 30 ? 10 : 5;
