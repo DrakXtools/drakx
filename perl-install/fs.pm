@@ -332,7 +332,6 @@ sub set_default_options {
     if (isNfs($part)) {
 	put_in_hash($options, { 
 			       nosuid => 1, 'rsize=8192,wsize=8192' => 1,
-			       'iocharset=' => $iocharset,
 			      });
     }
     if (isFat($part) || $is_auto) {
