@@ -1,3 +1,47 @@
+2001/03/03  Pixel  <pixel@mandrakesoft.com>
+
+	* install_steps.pm: small fixes for LVM
+	(doPartitionDisksAfter): small adaptation for LVMs
+	use run_or_die
+
+	* fsedit.pm: small fixes for LVM
+	(hds): detect LVMs and return them
+	(add): handling of LVMs
+	(@partitions_signatures): add new magic of reiserfs
+
+	* bootloader.pm: use run_or_die
+
+	* run_program.pm (run_or_die, rooted_or_die): created
+
+	* install_steps_interactive.pm: cleanup
+
+	* install_any.pm (getHds): handle LVMs. $o->{lvms} contain them
+	(setPackages): ask for installation of package lvm when needed
+	(suggest_mount_points, find_root_parts): take $fstab as arg instead of
+	$hds
+
+	* install2.pm: small fixes for LVM
+	(formatPartitions): call vgscan if needed when / is mounted
+
+	* devices.pm (make): better caller in error
+
+	* share/list: add progs for LVM handling
+
+	* install_interactive.pm: small fixes for LVM
+
+	* diskdrake.pm: small fixes for LVM
+	  - addition of drive to notebook cleaned
+	  - various clean-up
+	  - handling of LVMs
+
+	* standalone/diskdrake: small fixes for LVM
+	small adaptation
+
+	* lvm.pm: small fixes for LVM
+	creation
+
+	* partition_table.pm: add isLVMBased
+
 2001/03/02  stew   <sbenedict@mandrakesoft.com>
 
 	* commands.pm - fdisk locks up machine on report_bug - replace with pdisk PPC
