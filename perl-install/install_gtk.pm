@@ -440,81 +440,175 @@ sub test_mouse {
 
     my $w = my_gtk->new;
     my ($width, $height, $offset) = (210, round_up(min(350, $::windowheight - 150), 6), 25);
-    my ($bw, $bh) = ($width / 3, $height / 3);
-
-    gtkadd($w->{window}, 
-	   gtkpack(my $vbox_grab = new Gtk::VBox(0,0),
-		   my $darea = gtkset_usize(new Gtk::DrawingArea, $width+1, $height+1),
-#		   '',
+    my $darea = new Gtk::DrawingArea;
+    $darea->set_events([ 'button_press_mask', 'button_release_mask' ]);  #$darea must be unrealized.
+    gtkadd($w->{window},
+  	   gtkpack(my $vbox_grab = new Gtk::VBox(0,0),
+		   gtksize(gtkset_usize($darea, $width+1, $height+1), $width+1, $height+1),
 		   my $okcancel = gtkset_sensitive(create_okcancel($w, '', '', "edge"), 0),
 		  ),
 	  );
+    $okcancel->set_uposition(2, $height-23);
+    Gtk->timeout_add(2000, sub { gtkset_sensitive($okcancel, 1) });
 
-    $okcancel->set_uposition(2, $height-30);
-    Gtk->timeout_add(1500, sub { gtkset_sensitive($okcancel, 1) });
-
-    my $draw_rect; $draw_rect = sub {
-	my ($black, $fill, $rect) = @_;
-	$draw_rect->(0, 1, $rect) if !$fill; #- blank it first
-	$darea->window->draw_rectangle($black ? $darea->style->fg_gc('normal') : $darea->style->bg_gc('normal'), $fill, @$rect);
-	$darea->draw($rect);
+    $darea->realize();
+    my ($m3_image, $m3_mask) = gtkcreate_xpm($darea, 'mouse_3b.xpm');
+    my ($m3_imagep, $m3_maskp) = gtkcreate_xpm($darea, 'mouse_3b+.xpm');
+    my ($m3_left, $m3_left_mask) = gtkcreate_xpm($darea, 'mouse_left.xpm');
+    my ($m3_right, $m3_right_mask) = gtkcreate_xpm($darea, 'mouse_right.xpm');
+    my ($m3_middle, $m3_middle_mask) = gtkcreate_xpm($darea, 'mouse_middle.xpm');
+    my $image = $m3_image;
+    $mouse->{nbuttons} > 3 and $image = $m3_imagep;
+    my $draw_text = sub {
+  	my ($t, $y) = @_;
+  	my $font = $darea->style->font;
+  	my $w = $font->string_width($t);
+  	$darea->window->draw_string($font, $darea->style->black_gc, ($width - $w) / 2, $y, $t);
     };
-    my $paintWheel = sub {
-	my ($x, $y, $w, $h) = ($width / 2 - $bw / 6, $bh / 4, $bw / 3, $bh / 2);
-	$mouse->{nbuttons} = max($mouse->{nbuttons}, 5); #- it means, the mouse has more than 3 buttons...
-	$draw_rect->(1, 0, [ $x, $y, $w, $h ]);
+    my $drawarea; $drawarea = sub { $darea->window->draw_pixmap ($darea->style->bg_gc('normal'),
+								 $image, 0, 0,
+								 ($darea->allocation->[2]-$width)/2, ($darea->allocation->[3]-$height)/2,
+								 210, 350);
+				    $draw_text->(_("Please test the mouse"), $height - 80);
+				    $draw_text->(_("To activate the mouse,"), $height - 65) if $mouse->{XMOUSETYPE} eq 'IMPS/2';
+				    $draw_text->(_("MOVE YOUR WHEEL!"), $height - 50) if $mouse->{XMOUSETYPE} eq 'IMPS/2';
+				};
 
-	my $offset if 0;
-	$offset += $_[0] if $_[0];
-	my $step = 10;
-	for (my $i = $offset % $step; $i < $h; $i += $step) {
-	    $draw_rect->(1, 1, [ $x, $y + $i, $w, min(2, $h - $i) ]);
-	}
-    };
     my $paintButton = sub {
 	my ($nb, $pressed) = @_;
-	my $rect = [ $bw * $nb, 0, $bw, $bh ];
-	$draw_rect->(1, $pressed, $rect);
-	$paintWheel->(0) if $nb == 1 && $mouse->{nbuttons} > 3;
+	my $x = 60 + $nb*33;
+	$drawarea->();
+	if ($nb == 0) {
+	    $darea->window->draw_pixmap ($darea->style->bg_gc('normal'),
+					 $m3_left, 0, 0,
+					 ($darea->allocation->[2]-$width)/2+31, ($darea->allocation->[3]-$height)/2 + 52,
+					 59, 91);
+	} elsif ($nb == 2) {
+	    $darea->window->draw_pixmap ($darea->style->bg_gc('normal'),
+					 $m3_right, 0, 0,
+					 ($darea->allocation->[2]-$width)/2+117, ($darea->allocation->[3]-$height)/2 + 52,
+					 61, 91);
+	} elsif ($nb == 1) {
+	    if ($mouse->{nbuttons} > 3) {
+		$darea->window->draw_pixmap ($darea->style->bg_gc('normal'),
+					     $m3_middle, 0, 0,
+					     ($darea->allocation->[2]-$width)/2+98, ($darea->allocation->[3]-$height)/2 + 67,
+					     13, 62);
+	    } else {
+		$darea->window->draw_arc ( $darea->style->black_gc,
+					   1, ($darea->allocation->[2]-$width)/2 + $x, ($darea->allocation->[3]-$height)/2 + 90, 20, 25,
+					   0, 360*64);
+	    }
+	} elsif ($nb == 4) {
+	    $darea->window->draw_pixmap ($darea->style->bg_gc('normal'),
+					 $m3_middle, 0, 0,
+					 ($darea->allocation->[2]-$width)/2+98, ($darea->allocation->[3]-$height)/2 + 67,
+					 13, 62)
+	} elsif ($nb == 5) {
+	    $darea->window->draw_pixmap ($darea->style->bg_gc('normal'),
+					 $m3_middle, 0, 0,
+					 ($darea->allocation->[2]-$width)/2+98, ($darea->allocation->[3]-$height)/2 + 67,
+					 13, 62)
+	}
     };
-    my $draw_text = sub {
-	my ($t, $y) = @_;
-	my $font = $darea->style->font;
-	my $w = $font->string_width($t);
-	$darea->window->draw_string($font, $darea->style->fg_gc('normal'), ($width - $w) / 2, $y, $t);
-    };
-    my $default_time = 10;
-    my $time = $default_time;
     $darea->signal_connect(button_press_event => sub {
-			       my $b = $_[1]{button};
-			       $time = $default_time;
-			       $b >= 4 ?
-				 $paintWheel->($b == 4 ? -1 : 1) :
-				 $paintButton->($b - 1, 1);
-			   });
+  			       my $b = $_[1]{button};
+			       $paintButton->($b - 1);
+  			   });
     $darea->signal_connect(button_release_event => sub { 
-			       my $b = $_[1]{button};
-			       $paintButton->($b - 1, 0) if $b < 4;
-			   });
+			       $drawarea->()
+  			   });
+    $darea->signal_connect(expose_event => sub { $drawarea->() });
     $darea->size($width, $height);
+    $w->{window}->set_usize($width+1, $height+1);
     $darea->set_events([ 'button_press_mask', 'button_release_mask' ]);
-
     $w->sync; # HACK
-    $draw_rect->(1, 0, [ 0, 0, $width, $height]);
-    $draw_text->(_("Please test the mouse"), 2 * $bh - 20);
-    $draw_text->(_("To activate the mouse,"), 2 * $bh + 10) if $mouse->{XMOUSETYPE} eq 'IMPS/2';
-    $draw_text->(_("MOVE YOUR WHEEL!"),     2 * $bh + 30) if $mouse->{XMOUSETYPE} eq 'IMPS/2';
- 
-    $paintButton->($_, 0) foreach 0..2;
-    $w->{cancel}->grab_focus;
-#    my $timeout = Gtk->timeout_add(1000, sub { if ($time-- == 0) { log::l("timeout test_mouse"); undef $w->{retval}; Gtk->main_quit } 1 });
-#    my $b = before_leaving { log::l("removing timeout"); Gtk->timeout_remove($timeout) };
-    $w->{window}->realize;
     Gtk::Gdk->pointer_grab($darea->window, 1,
-			   [ 'pointer_motion_mask'], 
-			   $darea->window, undef ,0);
+  			   [ 'pointer_motion_mask'], 
+  			   $darea->window, undef ,0);
     $w->main;
 }
+
+#  sub test_mouse {
+#      my ($mouse) = @_;
+
+#      my $w = my_gtk->new;
+#      my ($width, $height, $offset) = (210, round_up(min(350, $::windowheight - 150), 6), 25);
+#      my ($bw, $bh) = ($width / 3, $height / 3);
+
+#      gtkadd($w->{window}, 
+#  	   gtkpack(my $vbox_grab = new Gtk::VBox(0,0),
+#  		   my $darea = gtkset_usize(new Gtk::DrawingArea, $width+1, $height+1),
+#  #		   '',
+#  		   my $okcancel = gtkset_sensitive(create_okcancel($w, '', '', "edge"), 0),
+#  		  ),
+#  	  );
+
+#      $okcancel->set_uposition(2, $height-30);
+#      Gtk->timeout_add(1500, sub { gtkset_sensitive($okcancel, 1) });
+
+#      my $draw_rect; $draw_rect = sub {
+#  	my ($black, $fill, $rect) = @_;
+#  	$draw_rect->(0, 1, $rect) if !$fill; #- blank it first
+#  	$darea->window->draw_rectangle($black ? $darea->style->fg_gc('normal') : $darea->style->bg_gc('normal'), $fill, @$rect);
+#  	$darea->draw($rect);
+#      };
+#      my $paintWheel = sub {
+#  	my ($x, $y, $w, $h) = ($width / 2 - $bw / 6, $bh / 4, $bw / 3, $bh / 2);
+#  	$mouse->{nbuttons} = max($mouse->{nbuttons}, 5); #- it means, the mouse has more than 3 buttons...
+#  	$draw_rect->(1, 0, [ $x, $y, $w, $h ]);
+
+#  	my $offset if 0;
+#  	$offset += $_[0] if $_[0];
+#  	my $step = 10;
+#  	for (my $i = $offset % $step; $i < $h; $i += $step) {
+#  	    $draw_rect->(1, 1, [ $x, $y + $i, $w, min(2, $h - $i) ]);
+#  	}
+#      };
+#      my $paintButton = sub {
+#  	my ($nb, $pressed) = @_;
+#  	my $rect = [ $bw * $nb, 0, $bw, $bh ];
+#  	$draw_rect->(1, $pressed, $rect);
+#  	$paintWheel->(0) if $nb == 1 && $mouse->{nbuttons} > 3;
+#      };
+#      my $draw_text = sub {
+#  	my ($t, $y) = @_;
+#  	my $font = $darea->style->font;
+#  	my $w = $font->string_width($t);
+#  	$darea->window->draw_string($font, $darea->style->fg_gc('normal'), ($width - $w) / 2, $y, $t);
+#      };
+#      my $default_time = 10;
+#      my $time = $default_time;
+#      $darea->signal_connect(button_press_event => sub {
+#  			       my $b = $_[1]{button};
+#  			       $time = $default_time;
+#  			       $b >= 4 ?
+#  				 $paintWheel->($b == 4 ? -1 : 1) :
+#  				 $paintButton->($b - 1, 1);
+#  			   });
+#      $darea->signal_connect(button_release_event => sub { 
+#  			       my $b = $_[1]{button};
+#  			       $paintButton->($b - 1, 0) if $b < 4;
+#  			   });
+#      $darea->size($width, $height);
+#      $darea->set_events([ 'button_press_mask', 'button_release_mask' ]);
+
+#      $w->sync; # HACK
+#      $draw_rect->(1, 0, [ 0, 0, $width, $height]);
+#      $draw_text->(_("Please test the mouse"), 2 * $bh - 20);
+#      $draw_text->(_("To activate the mouse,"), 2 * $bh + 10) if $mouse->{XMOUSETYPE} eq 'IMPS/2';
+#      $draw_text->(_("MOVE YOUR WHEEL!"),     2 * $bh + 30) if $mouse->{XMOUSETYPE} eq 'IMPS/2';
+ 
+#      $paintButton->($_, 0) foreach 0..2;
+#      $w->{cancel}->grab_focus;
+#  #    my $timeout = Gtk->timeout_add(1000, sub { if ($time-- == 0) { log::l("timeout test_mouse"); undef $w->{retval}; Gtk->main_quit } 1 });
+#  #    my $b = before_leaving { log::l("removing timeout"); Gtk->timeout_remove($timeout) };
+#      $w->{window}->realize;
+#      Gtk::Gdk->pointer_grab($darea->window, 1,
+#  			   [ 'pointer_motion_mask'], 
+#  			   $darea->window, undef ,0);
+#      $w->main;
+#  }
 
 
 1;
