@@ -189,8 +189,7 @@ sub serial_port2text {
 }
 
 sub read {
-    my ($prefix) = @_;
-    my %mouse = getVarsFromSh "$prefix/etc/sysconfig/mouse";
+    my %mouse = getVarsFromSh "$::prefix/etc/sysconfig/mouse";
     eval { add2hash_(\%mouse, fullname2mouse($mouse{FULLNAME})) };
     $mouse{nbuttons} = $mouse{XEMU3} eq "yes" ? 2 : $mouse{WHEEL} eq "yes" ? 5 : 3;
     \%mouse;

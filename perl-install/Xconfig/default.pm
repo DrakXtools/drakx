@@ -12,9 +12,9 @@ use mouse;
 sub configure {
     my ($keyboard, $mouse) = @_;
 
-    $keyboard ||= keyboard::read($::prefix);
+    $keyboard ||= keyboard::read();
     $mouse ||= do {
-	my $mouse = mouse::read($::prefix); 
+	my $mouse = mouse::read(); 
 	add2hash($mouse, mouse::detect()) if !$::noauto;
 	$mouse;
     };
