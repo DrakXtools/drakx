@@ -197,7 +197,7 @@ sub selectMouse {
 }
 #------------------------------------------------------------------------------
 sub setupSCSI {
-    my ($o, $clicked) = @_;
+    my ($o) = @_;
 
     if (!$::noauto && arch() =~ /i.86/) {
 	if ($o->{pcmcia} ||= !$::testing && c::pcmcia_probe()) {
