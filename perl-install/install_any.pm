@@ -1138,7 +1138,7 @@ sub check_kernel_module_packages {
     if (!$o_ext_name || pkgs::packageByName($do->{o}{packages}, $o_ext_name)) {
 	my @rpms;
 	foreach my $p (@{$do->{o}{packages}{depslist}}) {
-	    my ($ext, $version_release) = $p->name =~ /kernel[^\-]*(-smp|-enterprise|-secure)?(?:-([^\-]+))?$/
+	    my ($ext, $version_release) = $p->name =~ /kernel[^\-]*(-smp|-enterprise|-secure|-i686-up-4GB)?(?:-([^\-]+))?$/
 	      or next;
 	    $p->flag_available or next;
 	    my $name = "$base_name$ext-$version_release";
