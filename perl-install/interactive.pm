@@ -16,7 +16,8 @@ use common qw(:common :functional);
 #-  advanced => wether it is shown in by default or only in advanced mode
 #-  disabled => function returning wether it should be disabled (grayed)
 #-  type     => 
-#-     button => (with clicked) (type defaults to button if clicked is there)
+#-     button => (with clicked) (type defaults to button if clicked is there) (val need not be a reference)
+#-     label => (val need not be a reference) (type defaults to label if val is not a reference) 
 #-     bool (with text)
 #-     range (with min, max)
 #-     combo (with list, not_edit)
@@ -232,6 +233,10 @@ sub ask_from_entries_refH_powered_normalize {
 	} elsif ($e->{type} eq 'button' || $e->{clicked}) {
 	    $e->{type} = 'button';
 	    $e->{clicked} ||= sub {};
+	    $e->{val} = \ (my $v = $e->{val}) if !ref($e->{val});
+	} elsif ($e->{type} eq 'label' || !ref($e->{val})) {
+	    $e->{type} = 'label';
+	    $e->{val} = \ (my $v = $e->{val}) if !ref($e->{val});
 	}
 	$e->{disabled} ||= sub { 0 };
     }
