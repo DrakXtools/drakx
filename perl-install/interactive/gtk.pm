@@ -696,6 +696,7 @@ sub ask_from__add_modify_removeW {
 
 sub wait_messageW($$$) {
     my ($o, $title, $messages) = @_;
+    local $::isEmbedded = 0; # to prevent sub window embedding
 
     my @l = map { Gtk2::Label->new(scalar warp_text($_)) } @$messages;
     my $w = ugtk2->new($title, %$o, grab => 1, if__($::main_window, transient => $::main_window));

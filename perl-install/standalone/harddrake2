@@ -118,14 +118,11 @@ my @menu_items =
          }
      }
      );
-my ($sig_id, $wait);
+
 $in = 'interactive'->vnew('su', 'default');
 
-{
-    local $::isEmbedded = 0; # to prevent sub window embedding
-    $wait = $in->wait_message(N("Please wait"), N("Detection in progress"));
-    gtkflush();
-}
+my $wait = $in->wait_message(N("Please wait"), N("Detection in progress"));
+gtkflush();
 
 %options = getVarsFromSh($conffile);
 
@@ -141,7 +138,7 @@ unless ($::isEmbedded) {
     ($menubar, $factory) = create_factory_menu($w->{rwindow}, @menu_items);
 }
 my $tree_model = Gtk2::TreeStore->new(Gtk2::GType->OBJECT, Gtk2::GType->STRING);
-my $statusbar;
+my ($statusbar, $sig_id);
 $w->{window}->add(gtkpack_(0, Gtk2::VBox->new(0, 0),
                            if_(!$::isEmbedded, 0, $menubar),
                            1, create_hpaned(gtkadd(new Gtk2::Frame(N("Detected hardware")), 

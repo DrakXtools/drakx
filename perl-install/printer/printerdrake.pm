@@ -520,7 +520,6 @@ sub first_time_dialog {
     my ($printer, $in, $upNetwork) = @_;
     return 1 if printer::default::get_spooler() || $::isInstall;
 
-    # Wait message
     my $w = $in->wait_message(N("Printerdrake"), N("Checking your system..."));
 
     # Auto-detect local printers   
@@ -3291,13 +3290,13 @@ sub install_spooler {
     # "lpr" conflicts with "LPRng", remove either "LPRng" or remove "lpr"
     my $packages = $spoolers{$spooler}{packages2rm};
     if ($packages && files_exist($packages->[1])) {
-        $w->set(N("Printerdrake"), N("Removing %s ..."), $spoolers{$packages->[0]}{short_name});
+        $w = $in->wait_message(N("Printerdrake"), N("Removing %s ..."), $spoolers{$packages->[0]}{short_name});
         $in->do_pkgs->remove_nodeps($packages->[0]);
     }
 
     $packages = $spoolers{$spooler}{packages2add};
     if ($packages && !files_exist(@{$packages->[1]})) {
-        $w->set(N("Printerdrake"), N("Installing %s ..."), $spoolers{$spooler}{short_name});
+        $w = $in->wait_message(N("Printerdrake"), N("Installing %s ..."), $spoolers{$spooler}{short_name});
         $in->do_pkgs->install(@{$packages->[0]});
     }
 
