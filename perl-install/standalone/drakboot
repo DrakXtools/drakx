@@ -258,7 +258,7 @@ sub updateAutologin() {
     if ($auto_buttons[1]->get_active) {
         any::set_autologin($usern, $deskt);
     } else {
-        any::set_autologin(undef, undef);
+        any::set_autologin();
     }
 }
 
