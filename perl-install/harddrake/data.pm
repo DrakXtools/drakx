@@ -4,7 +4,8 @@ use strict;
 use detect_devices;
 use common;
 
-our (@ISA, @EXPORT_OK) = (qw(Exporter), (qw(version tree)));
+our @ISA = qw(Exporter);
+our @EXPORT_OK = qw(version tree);
 our ($version, $sbindir, $bindir) = ("1.1.8", "/usr/sbin", "/usr/bin");
 
 my @devices = detect_devices::probeall(1);
