@@ -18,7 +18,7 @@ use c;
 
 
 
-my @preferred = qw(perl-GTK postfix gcc gcc-cpp gcc-c++ proftpd ghostscript-X vim-minimal kernel db1 db2 ispell-en Bastille-Curses-module nautilus libxpm4 zlib1 libncurses5 hardrake);
+my @preferred = qw(perl-GTK postfix gcc gcc-cpp gcc-c++ proftpd ghostscript-X vim-minimal kernel db1 db2 ispell-en Bastille-Curses-module nautilus libxpm4 zlib1 libncurses5 harddrake);
 @preferred{@preferred} = ();
 
 #- lower bound on the left ( aka 90 means [90-100[ )
