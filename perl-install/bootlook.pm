@@ -54,8 +54,7 @@ my $a_mode = (-e "/etc/aurora/Monitor") ? 1 : 0;
 my $l_mode = isAutologin();
 my %auto_mode = get_autologin("");
 my $inmain = 0;
-my $lilogrub = `detectloader -q`;
-chomp $lilogrub;
+my $lilogrub = chomp_(`detectloader -q`);
 
 my $window = $::isEmbedded ? new Gtk::Plug ($::XID) : new Gtk::Window ("toplevel");
 $window->signal_connect(delete_event => sub { $::isEmbedded ? kill(USR1, $::CCPID) : Gtk->exit(0) });

@@ -138,7 +138,7 @@ $hbox1->pack_start($button_new,0,0,5);
 my $hbox2 = new Gtk::HBox(0,0);
 $vbox1->pack_start($hbox2,1,1,0);
 $hbox2->pack_start(new Gtk::Label(_("Hostname: ")),0,0,0);
-chop (my $hostname = `hostname`);
+my $hostname = chomp_(`hostname`);
 my $label_host = new Gtk::Label($hostname);
 $hbox2->pack_start($label_host,0,0,0);
 
@@ -348,7 +348,7 @@ sub apply {
 }
 
 sub update {
-    chop (my $h = `hostname`);
+    my $h = chomp_(`hostname`);
     $label_host->set ($h);
     $label4->set($netcnx->{type});
     $label5->set($netcnx->{type} eq 'lan' ? _("Gateway:") : _("Interface:"));

@@ -398,10 +398,10 @@ sub unpack_ {
     local *F;
     open F, $_[0] or die "can't open file $_: $!\n";
     while (1) {
-	my ($size) = chop_(scalar <F>);
+	my $size = chomp_(scalar <F>);
 	defined $size or last;
 	$size =~ /^\d+$/ or die "bad format (can't find file size)\n";
-	my ($filename) = chop_(scalar <F>) or die "expecting filename\n";
+	my $filename = chomp_(scalar <F>) or die "expecting filename\n";
 
 	print "$filename\n";
 	my $dir = dirname($filename);

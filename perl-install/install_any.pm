@@ -454,7 +454,7 @@ sub setAuthentication {
 }
 
 sub killCardServices {
-    my $pid = chop_(cat_("/tmp/cardmgr.pid"));
+    my $pid = chomp_(cat_("/tmp/cardmgr.pid"));
     $pid and kill(15, $pid); #- send SIGTERM
 }
 
@@ -521,7 +521,7 @@ sub install_urpmi {
 		      cdrom => "removable_cdrom_$::i://mnt/cdrom" }}{$method} . "/$_->{rpmsdir}";
 
 	local *FILES; open FILES, "$ENV{LD_LOADER} parsehdlist /tmp/$_->{hdlist} |";
-	chop, print LIST "$dir/$_\n" foreach <FILES>;
+	print LIST "$dir/$_\n" foreach chomp_(<FILES>);
 	close FILES or log::l("parsehdlist failed"), return;
 	close LIST;
 

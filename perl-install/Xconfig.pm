@@ -203,9 +203,8 @@ sub getinfoFromDDC {
     }
     my ($h, $v, $size, @m) = @l;
 
-    chop $h; chop $v;
-    $O->{hsyncrange} ||= $h;
-    $O->{vsyncrange} ||= $v;
+    $O->{hsyncrange} ||= chomp_($h);
+    $O->{vsyncrange} ||= chomp_($v);
     $O->{size} ||= to_float($size);
     $O->{modelines} ||= join '', @m;
     $o;

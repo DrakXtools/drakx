@@ -68,7 +68,7 @@ my ($hds, $lvms) =
 I'll try to go on blanking bad partitions"), $err]);
     };
 
-$SIG{__DIE__} = sub { chomp (my $m = $_[0]); log::l("ERROR: $m") };
+$SIG{__DIE__} = sub { my $m = chomp_($_[0]); log::l("ERROR: $m") };
 my $fstab = [ fsedit::get_fstab(@$hds, @$lvms) ];
  
 fs::get_mntpoints_from_fstab($fstab);

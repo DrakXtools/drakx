@@ -60,9 +60,9 @@ sub ideGetDevices {
 
     #- Great. 2.2 kernel, things are much easier and less error prone.
     foreach my $d (glob_('/proc/ide/hd*')) {
-	my ($t) = chop_(cat_("$d/media"));
+	my ($t) = chomp_(cat_("$d/media"));
 	my $type = $ {{disk => 'hd', cdrom => 'cdrom', tape => 'tape', floppy => 'fd'}}{$t} or next;
-	my ($info) = chop_(cat_("$d/model")); $info ||= "(none)";
+	my ($info) = chomp_(cat_("$d/model")); $info ||= "(none)";
 
 	my $num = ord (($d =~ /(.)$/)[0]) - ord 'a';
 	push @idi, { type => $type, device => basename($d), info => $info, bus => $num/2, id => $num%2 };

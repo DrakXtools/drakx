@@ -319,8 +319,7 @@ sub partitions_suggestions {
 my @etc_pass_fields = qw(name pw uid gid realname home shell);
 sub unpack_passwd {
     my ($l) = @_;
-    chomp $l;
-    my %l; @l{@etc_pass_fields} = split ':', $l;
+    my %l; @l{@etc_pass_fields} = split ':', chomp_($l);
     \%l;
 }
 sub pack_passwd {
@@ -373,7 +372,7 @@ sub writeandclean_ldsoconf {
 
 sub shells {
     my ($prefix) = @_;
-    grep { -x "$prefix$_" } map { chomp; $_ } cat_("$prefix/etc/shells");
+    grep { -x "$prefix$_" } chomp_(cat_("$prefix/etc/shells"));
 }
 
 sub inspect {

@@ -13,9 +13,9 @@ sub getTimeZones {
     my ($prefix) = @_;
     local *F;
     open F, "cd $prefix/usr/share/zoneinfo && find [A-Z]* -type f |";
-    my @l = sort map { chop; $_ } <F>;
+    my @l = chomp_(<F>);
     close F or die "cannot list the available zoneinfos";
-    @l;
+    sort @l;
 }
 
 sub read {
