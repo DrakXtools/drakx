@@ -18,8 +18,9 @@ use devices;
 use modules;
 use install_gtk;
 use install_any;
-use log;
 use mouse;
+use help;
+use log;
 
 #-######################################################################################
 #- In/Out Steps Functions
