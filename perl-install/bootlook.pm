@@ -47,7 +47,7 @@ if ($::isEmbedded) {
 #  $path_to_pixmaps = "./pixmaps/";
 }
 
-my $in = vnew interactive('su');
+my $in = interactive->vnew('su');
 local $_ = join '', @ARGV;
 
 /-h/ and die _("no help implemented yet.\n");
@@ -349,7 +349,7 @@ sub updateAutologin
 {
     my ($usern,$deskt)=($user_combo->entry->get_text(), $desktop_combo->entry->get_text());
 
-    if($x_yes_button->get_active() ) {
+    if ($x_yes_button->get_active() ) {
 	set_autologin('',$usern,$deskt);
     } else {
 	set_autologin('',undef) if ($x_no_button->get_active());
