@@ -9,7 +9,7 @@ $libs .= ' -lrpm -lrpmio -lz' if $ENV{C_RPM};
 
 my $pcmcia_dir = $ENV{C_DRAKX} && $Config{archname} =~ /i.86/ ? '../../mdk-stage1/pcmcia' : '';
 
-symlink "$pcmcia_dir/pcmcia_probe.c", "pcmcia_probe.c";
+symlink "$pcmcia_dir/pcmcia_probe.c", "pcmcia_probe.c" if $pcmcia_dir;
 
 WriteMakefile(
     'NAME'	=> 'stuff',
