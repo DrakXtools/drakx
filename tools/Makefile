@@ -7,14 +7,14 @@ CFLAGS      = -Wall
 
 .PHONY: clean install $(DIRS)
 
-all: $(BASE)/depslist $(BASE)/depslist.ordered $(BASE)/hdlist $(BASE)/hdlist.cz2 $(DIRS) xhost+ install
+all: $(BASE)/depslist $(BASE)/hdlist.cz2 $(DIRS) xhost+ install
 
 $(DIRS):
 	make -C $@
 
 install:
-	$(MAKE) gendepslist rpm2header
-	install make_mdkinst_stage2 build_archive gendepslist rpm2header genhdlist $(ROOTDEST)/misc
+	$(MAKE) rpm2header
+	install make_mdkinst_stage2 build_archive gendepslist2 rpm2header genhdlist_cz2 $(ROOTDEST)/misc
 	mkdir -p $(DEST)/usr/bin
 
 xhost+: %: %.c
@@ -29,19 +29,11 @@ rpm2header: %: %.c
 ddcprobe/ddcxinfos:
 	$(MAKE) -C ddcprobe ddcxinfos
 
-$(BASE)/depslist.ordered: $(BASE)/depslist
-	./orderdepslist $<
+$(BASE)/depslist: $(BASE)/hdlist.cz2 gendepslist2
+	./gendepslist2 -o $@ $<
 
-$(BASE)/depslist: $(BASE)/hdlist gendepslist
-	./gendepslist -h $@ $<
-
-$(BASE)/hdlist.cz2: $(BASE)/depslist.ordered $(RPMS)
-	rm -rf tmp
-	./build_hdlist_cz2 $(ROOTDEST) tmp
-
-$(BASE)/hdlist: $(RPMS)
-	$(MAKE) install
-	./genhdlist $(ROOTDEST)
+$(BASE)/hdlist.cz2: $(RPMS)
+	$(ROOTDEST)/misc/genhdlist_cz2 --noclean --distrib $(ROOTDEST)
 
 clean: 
 	for i in $(DIRS); do $(MAKE) -C $$i clean; done

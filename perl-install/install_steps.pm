@@ -406,6 +406,7 @@ sub pppConfig {
 #------------------------------------------------------------------------------
 sub installCrypto {
     my ($o) = @_;
+    return; #TODO broken for now
     my $u = $o->{crypto} or return; $u->{mirror} or return;
     my ($packages, %done);
     my $dir = "$o->{prefix}/tmp";
@@ -421,13 +422,13 @@ sub installCrypto {
     require pkgs;
     while (crypto::get($u->{mirror}, $dir, 
 		       grep { !$done{$_} && ($done{$_} = $u->{packages}{$_}) } %{$u->{packages}})) {
-	$packages = pkgs::psUsingDirectory($dir);
-	foreach (values %$packages) {
-	    foreach (c::headerGetEntry(pkgs::getHeader($_), 'requires')) {
-		my $r = quotemeta crypto::require2package($_);
-		/^$r-\d/ and $u->{packages}{$_} = 1 foreach keys %{$u->{packages}};
-	    }
-	}
+#	 $packages = pkgs::psUsingDirectory($dir);
+#	 foreach (values %$packages) {
+#	     foreach (c::headerGetEntry(pkgs::getHeader($_), 'requires')) {
+#		 my $r = quotemeta crypto::require2package($_);
+#		 /^$r-\d/ and $u->{packages}{$_} = 1 foreach keys %{$u->{packages}};
+#	     }
+#	 }
     }
     pkgs::install($o->{prefix}, $o->{isUpgrade}, [ values %$packages ]);
 }
@@ -642,7 +643,7 @@ sub setupBootloader($) {
     } elsif (arch() =~ /^sparc/) {
         silo::install($o->{prefix}, $o->{bootloader});
     } else {
-        lilo::install($o->{prefix}, $o->{bootloader});
+        lilo::install_grub($o->{prefix}, $o->{bootloader}, $o->{fstab});
     }
 }
 

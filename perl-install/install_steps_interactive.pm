@@ -1154,7 +1154,7 @@ sub load_thiskind {
 	install_any::ultra66($o);
 
 	if (my ($c) = pci_probing::main::probe('AUDIO')) {
-	    modules::add_alias("sound", $c);
+	    modules::add_alias("sound", $c->[1]);
 	}
     }
     modules::load_thiskind($type, sub { $w = wait_load_module($o, $type, @_) }, $pcmcia);

@@ -471,10 +471,10 @@ sub write_conf {
     my %net = detect_devices::net2module();
     while (my ($k, $v) = each %net) { add_alias($k, $v) }
 
-    if (my @scsis = sort grep { $conf{$_}{alias} && /scsi_hostadapter/ } keys %conf) {
-	log::l("has scsis ", join " ; ", map { "modprobe $_" } @scsis);
-	$conf{supermount}{"post-install"} = join " ; ", map { "modprobe $_" } @scsis;
-    }
+    my @l = sort grep { $conf{$_}{alias} && /scsi_hostadapter/ } keys %conf;
+    add_alias('block-major-11', 'scsi_hostadapter');
+    push @l, "ide-floppy" if detect_devices::zips();
+    $conf{supermount}{"post-install"} = join " ; ", map { "modprobe $_" } @l if @l;
 
     local *F;
     open F, ">> $file" or die("cannot write module config file $file: $!\n");

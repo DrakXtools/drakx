@@ -72,7 +72,7 @@ xfs => __("Starts and stops the X Font Server at boot time and shutdown."),
 sub drakxservices {
     my ($in, $prefix) = @_;
     my $cmd = $prefix ? "chroot $prefix" : "";
-    my @services = map { log::l ("services: $_"); [/(\S+)/, /:on/ ] } sort `LANGUAGE=C $cmd chkconfig --list`;
+    my @services = map { [/(\S+)/, /:on/ ] } sort `LANGUAGE=C $cmd chkconfig --list`;
     my @l      = map { $_->[0] } @services;
     my @before = map { $_->[1] } @services;
     my @descr  = map {

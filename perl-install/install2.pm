@@ -192,8 +192,8 @@ $o = $::o = {
 #-    display => "192.168.1.19:1",
     steps        => \%installSteps,
     orderedSteps => \@orderedInstallSteps,
-    base => [ qw(basesystem sed initscripts console-tools utempter ldconfig chkconfig ntsysv setup filesystem SysVinit bdflush crontabs dev e2fsprogs etcskel fileutils findutils getty_ps grep gzip hdparm info initscripts kernel less ldconfig logrotate losetup man mingetty modutils mount net-tools passwd procmail procps psmisc mandrake-release rootfiles rpm sash ash setserial shadow-utils sh-utils stat sysklogd tar termcap textutils time tmpwatch util-linux vim-minimal vixie-cron which perl-base msec) ],
-    base_i386 => [ "lilo", "mkbootdisk", "isapnptools" ],
+    base => [ qw(basesystem sed initscripts console-tools utempter ldconfig chkconfig ntsysv setup filesystem SysVinit bdflush crontabs dev e2fsprogs etcskel fileutils findutils getty_ps grep gzip hdparm info kernel less ldconfig logrotate losetup man mingetty modutils mount net-tools passwd procmail procps psmisc mandrake-release rootfiles rpm sash ash setserial shadow-utils sh-utils stat sysklogd tar termcap textutils time tmpwatch util-linux vim-minimal vixie-cron which perl-base msec) ],
+    base_i386 => [ "lilo", "grub", "mkbootdisk", "isapnptools" ],
     base_alpha => [ "aboot", "isapnptools" ],
     base_sparc => [ "silo", "mkbootdisk" ],
     base_ppc => [ "kernel-pmac", "pdisk", "hfsutils" ],
@@ -424,7 +424,8 @@ sub configureNetwork {
     $o->configureNetwork($_[1] == 1);
 }
 #------------------------------------------------------------------------------
-sub installCrypto { $o->installCrypto }
+sub installCrypto { return; #TODO broken
+		    $o->installCrypto }
 
 #------------------------------------------------------------------------------
 sub configureTimezone {

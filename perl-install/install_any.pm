@@ -123,9 +123,7 @@ sub setPackages($) {
 
     require pkgs;
     if (is_empty_hash_ref($o->{packages})) {
-	my $useHdlist = 1; #$o->{method} !~ /nfs|hd/ || $o->{isUpgrade};
-	eval { $o->{packages} = pkgs::psUsingHdlist($o->{prefix}) } if $useHdlist;
-	$o->{packages} = pkgs::psUsingDirectory() if !$useHdlist || $@;
+	$o->{packages} = pkgs::psUsingHdlist($o->{prefix});
 
 	push @{$o->{default_packages}}, "nfs-utils-clients" if $o->{method} eq "nfs";
 	push @{$o->{default_packages}}, "numlock" if $o->{miscellaneous}{numlock};
@@ -503,18 +501,6 @@ sub install_urpmi {
 
     (my $name = _("installation")) =~ s/\s/_/g; #- in case translators are too good :-/
 
-    my $f = "$prefix/var/lib/urpmi/hdlist.$name";
-    {
-	my $fd = getFile("hdlist") or return;
-	local *OUT;
-	open OUT, ">$f" or log::l("failed to write $f"), return;
-	local $/ = \ (16 * 1024);
-	print OUT foreach <$fd>;
-    }
-    {
-	local *F = getFile("depslist");
-	output("$prefix/var/lib/urpmi/depslist", <F>);
-    }
     {
 	local *LIST;
 	open LIST, ">$prefix/var/lib/urpmi/list.$name" or log::l("failed to write list.$name"), return;
@@ -524,13 +510,9 @@ sub install_urpmi {
 		      ftp => $ENV{URLPREFIX},
 		      http => $ENV{URLPREFIX},
 		      cdrom => "removable_cdrom_1://mnt/cdrom" }}{$method};
-	local *FILES; open FILES, "hdlist2names $f|";
-	chop, print LIST "$dir/Mandrake/RPMS/$_\n" foreach <FILES>;
-	close FILES or log::l("hdlist2names failed"), return;
+	print LIST "$dir/Mandrake/RPMS/", /(\S+)/, "\n" foreach cat_("$prefix/var/lib/urpmi/depslist");
 
-	run_program::run("gzip", "-9", $f);
-
-	$dir .= "/Mandrake/RPMS with ../base/hdlist" if $method =~ /ftp|http/;
+	$dir .= "/Mandrake/RPMS with ../base/hdlist.cz2" if $method =~ /ftp|http/;
 	eval { output "$prefix/etc/urpmi/urpmi.cfg", "$name $dir\n" };
     }
 }

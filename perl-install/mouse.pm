@@ -122,7 +122,7 @@ sub mouseconfig {
 sub detect() {
     return name2mouse("Sun - Mouse") if arch() =~ /^sparc/;
 
-    if (arch() eq"ppc") {
+    if (arch() eq "ppc") {
         return name2mouse("Apple USB Mouse") if detect_devices::hasMouseMacUSB;
         # No need to search for an ADB mouse.  If I did, the PPC kernel would
         # find one whether or not I had one installed!  So..  default to it.

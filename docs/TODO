@@ -25,6 +25,8 @@ add choice clean /tmp or not in expert
 kernel chosen by default must be the one according to supermount/secure
 
 -features-------------------------------------------------------------------------------
+(7.1) rewrite crypto stuff
+
 (NEED 7.1) auto-install for corporate, very important (need consolidation).
 
 (7.1 or later) clean SCSI CDROM autoboot.
@@ -202,6 +204,8 @@ have a better time estimation of the remaining time in install packages
 (?) when some occur, partition must be unset isFormatted
 
 -hardware-------------------------------------------------------------------------------
+with no floppy drive, mkbootdisk step fails badly
+
 need a simple solution to precise mouse type (syslinux option?)
 
 ELSA Gloria has bad ddc info
@@ -481,4 +485,6 @@ peut en sortir. La seule solution est de redémarrer.
 try to figure why?
 
 (done,pix)in chooseResolutions: display the graphic card found
+
+(done,pix)with pcmcia, need ONBOOT=no
 

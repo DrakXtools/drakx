@@ -271,21 +271,25 @@ sub cp {
 
 sub ps {
     @_ and die "usage: ps\n";
-    my ($pid, $cpu, $cmd);
+    my ($pid, $rss, $cpu, $cmd);
     my ($uptime) = split ' ', first(cat_("/proc/uptime"));
     my $hertz = 100;
 
+    require c;
+    my $page = c::getpagesize() / 1024;
+
     open PS, ">&STDOUT";
     format PS_TOP =
-  PID  %CPU CMD
+  PID   RSS %CPU CMD
 .
     format PS =
-@>>>>  @>>> @<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-$pid, $cpu, $cmd
+@>>>> @>>>> @>>> @<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+$pid, $rss, $cpu, $cmd
 .
     foreach $pid (sort {$a <=> $b} grep { /\d+/ } all('/proc')) {
 	 my @l = split(' ', cat_("/proc/$pid/stat"));
 	 $cpu = sprintf "%2.1f", max(0, min(99, ($l[13] + $l[14]) * 100 / $hertz / ($uptime - $l[21] / $hertz)));
+	 $rss = (split ' ', cat_("/proc/$pid/stat"))[23] * $page;
 	 (($cmd) = cat_("/proc/$pid/cmdline")) =~ s/\0/ /g;
 	 $cmd ||= (split ' ', (cat_("/proc/$pid/stat"))[0])[1];
 	 write PS;

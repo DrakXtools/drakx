@@ -24,11 +24,15 @@ print '
 
 #include <gdk/gdkx.h>
 #include <X11/Xlib.h>
+#include <X11/extensions/xf86misc.h>
 
 #define SECTORSIZE 512
 ';
 
 $ENV{C_RPM} and print '
+#undef Fflush
+#undef Mkdir
+#undef Stat
 #include <rpm/rpmlib.h>
 
 void rpmError_callback_empty(void) {}
@@ -42,9 +46,11 @@ void rpmError_callback(void) {
 }
 
 FD_t fd2FD_t(int fd) {
-  static struct _FD f = { -1, NULL, NULL, NULL };
-  f.fd_fd  = fd;
-  return fd == -1 ? NULL : &f;
+  static FD_t f = NULL;
+  if (fd == -1) return NULL;
+  if (f == NULL) f = fdNew("");
+  fdSetFdno(f, fd);
+  return f;
 }
 
 ';
@@ -71,6 +77,24 @@ Xtest(display)
   waitpid(pid, &RETVAL, 0);
   OUTPUT:
   RETVAL
+
+void
+setMouse(display, type)
+  char *display
+  int type
+  CODE:
+  {
+    XF86MiscMouseSettings mseinfo;
+    Display *d = XOpenDisplay(display);
+    if (d) {
+      if (XF86MiscGetMouseSettings(d, &mseinfo) == True) {
+        mseinfo.type = type;
+        mseinfo.flags = 128;
+        XF86MiscSetMouseSettings(d, &mseinfo);
+        XFlush(d);
+      }
+    }
+  }
 
 void
 XSetInputFocus(window)
@@ -655,7 +679,7 @@ headerGetEntry_int_list(h, query)
   int query
   PPCODE:
   int i, type, count = 0;
-  int_32 *intlist = (void **) NULL;
+  int_32 *intlist = (int_32 *) NULL;
   if (headerGetEntry((Header) h, query, &type, (void**) &intlist, &count)) {
     if (count > 0) {
       EXTEND(SP, count);
@@ -681,6 +705,44 @@ headerGetEntry_string_list(h, query)
     }
     free(strlist);
   }
+
+void
+headerGetEntry_filenames(h)
+  void *h
+  PPCODE:
+  int i, type, count = 0;
+  char ** baseNames, ** dirNames;
+  int_32 * dirIndexes;
+  char **strlist = (char **) NULL;
+
+  if (headerGetEntry((Header) h, RPMTAG_OLDFILENAMES, &type, (void**) &strlist, &count)) {
+    if (count > 0) {
+      EXTEND(SP, count);
+      for (i = 0; i < count; i++) {
+        PUSHs(sv_2mortal(newSVpv(strlist[i], 0)));
+      }
+    }
+    free(strlist);
+  } else {
+
+    headerGetEntry(h, RPMTAG_BASENAMES, &type, (void **) &baseNames, &count);
+    headerGetEntry(h, RPMTAG_DIRINDEXES, &type, (void **) &dirIndexes, NULL);
+    headerGetEntry(h, RPMTAG_DIRNAMES, &type, (void **) &dirNames, NULL);
+
+    if (baseNames && dirNames && dirIndexes) {
+      EXTEND(SP, count);
+      for(i = 0; i < count; i++) {
+        char *p = malloc(strlen(dirNames[dirIndexes[i]]) + strlen(baseNames[i]) + 1);
+        if (p == NULL) croak("malloc failed");
+        strcpy(p, dirNames[dirIndexes[i]]);
+        strcat(p, baseNames[i]);
+  	PUSHs(sv_2mortal(newSVpv(p, 0)));
+        free(p);
+      }
+      free(baseNames);
+      free(dirNames);
+    }
+  }
 ';
 
 @macros = (
@@ -690,7 +752,7 @@ headerGetEntry_string_list(h, query)
        VT_ACTIVATE VT_WAITACTIVE VT_GETSTATE CDROM_LOCKDOOR CDROMEJECT
        ) ],
 );
-push @macros, [ qw(int RPMTAG_NAME RPMTAG_GROUP RPMTAG_SIZE RPMTAG_VERSION RPMTAG_SUMMARY RPMTAG_DESCRIPTION RPMTAG_RELEASE RPMTAG_ARCH RPMTAG_FILENAMES RPMTAG_OBSOLETES RPMTAG_REQUIRENAME RPMTAG_FILEFLAGS     RPMFILE_CONFIG) ]
+push @macros, [ qw(int RPMTAG_NAME RPMTAG_GROUP RPMTAG_SIZE RPMTAG_VERSION RPMTAG_SUMMARY RPMTAG_DESCRIPTION RPMTAG_RELEASE RPMTAG_ARCH RPMTAG_OBSOLETES RPMTAG_REQUIRENAME RPMTAG_FILEFLAGS     RPMFILE_CONFIG) ]
   if $ENV{C_RPM};
 
 $\= "\n";

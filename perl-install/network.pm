@@ -98,7 +98,7 @@ sub write_interface_conf {
     add2hash($intf, {
 		     BROADCAST => join('.', mapn { int $_[0] | ~int $_[1] & 255 } \@ip, \@mask),
 		     NETWORK   => join('.', mapn { int $_[0] &      $_[1]       } \@ip, \@mask),
-		     ONBOOT => "yes",
+		     ONBOOT => bool2yesno(!$::o->{pcmcia}),
 		    });
     setVarsInSh($file, $intf, qw(DEVICE BOOTPROTO IPADDR NETMASK NETWORK BROADCAST ONBOOT));
 }
