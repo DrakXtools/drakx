@@ -719,19 +719,19 @@ N("There was an error installing packages:"), $1, N("Go on anyway?") ], 1) and r
 sub afterInstallPackages($) {
     my ($o) = @_;
     my $_w = $o->wait_message('', N("Post-install configuration"));
-    $o->SUPER::afterInstallPackages($o);
+    $o->SUPER::afterInstallPackages;
 }
 
 sub copyKernelFromFloppy {
     my ($o) = @_;
     $o->ask_okcancel('', N("Please insert the Boot floppy used in drive %s", $o->{blank}), 1) or return;
-    $o->SUPER::copyKernelFromFloppy();
+    $o->SUPER::copyKernelFromFloppy;
 }
 
 sub updateModulesFromFloppy {
     my ($o) = @_;
     $o->ask_okcancel('', N("Please insert the Update Modules floppy in drive %s", $o->{updatemodules}), 1) or return;
-    $o->SUPER::updateModulesFromFloppy();
+    $o->SUPER::updateModulesFromFloppy;
 }
 
 #------------------------------------------------------------------------------
@@ -1201,7 +1201,7 @@ sub addUser {
 sub setupBootloaderBefore {
     my ($o) = @_;
     my $_w = $o->wait_message('', N("Preparing bootloader..."));
-    $o->SUPER::setupBootloaderBefore($o);
+    $o->SUPER::setupBootloaderBefore;
 }
 
 #------------------------------------------------------------------------------
