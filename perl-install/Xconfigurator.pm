@@ -846,37 +846,40 @@ sub write_XF86Config {
     #- Write pointer section.
     my $pointer = sub {
 	my ($O, $id) = @_;
-	$id > 1 or print F qq(Section "Pointer"\n);
+	print F $id > 1 ? qq(Section "XInput"\n) : qq(Section "Pointer"\n);
+	$id > 1 and print F qq(    SubSection "Mouse"\n);
 	print G qq(Section "InputDevice"\n\n);
+	$id > 1 and print F qq(        DeviceName "Mouse$id"\n);
 	print G qq(    Identifier  "Mouse$id"\n);
 	print G qq(    Driver      "mouse"\n);
-	$id > 1 or print F qq(    Protocol    "$O->{XMOUSETYPE}"\n);
+	print F ($id > 1 && "    ") . qq(    Protocol    "$O->{XMOUSETYPE}"\n);
 	print G qq(    Option "Protocol"    "$O->{XMOUSETYPE}"\n);
-	$id > 1 or print F qq(    Device      "/dev/$O->{device}"\n);
+	print F ($id > 1 && "    ") . qq(    Device      "/dev/$O->{device}"\n);
 	print G qq(    Option "Device"      "/dev/$O->{device}"\n);
 	#- this will enable the "wheel" or "knob" functionality if the mouse supports it
-	$id > 1 or print F "    ZAxisMapping 4 5\n" if $O->{nbuttons} > 3;
-	$id > 1 or print F "    ZAxisMapping 6 7\n" if $O->{nbuttons} > 5;
+	print F ($id > 1 && "    ") . "    ZAxisMapping 4 5\n" if $O->{nbuttons} > 3;
+	print F ($id > 1 && "    ") . "    ZAxisMapping 6 7\n" if $O->{nbuttons} > 5;
 	print G qq(    Option "ZAxisMapping" "4 5"\n) if $O->{nbuttons} > 3;
 	print G qq(    Option "ZAxisMapping" "6 7"\n) if $O->{nbuttons} > 5;
 
-	$id > 1 or print F "#" unless $O->{nbuttons} < 3;
+	print F "#" unless $O->{nbuttons} < 3;
 	print G "#" unless $O->{nbuttons} < 3;
-	$id > 1 or print F qq(    Emulate3Buttons\n);
+	print F ($id > 1 && "    ") . qq(    Emulate3Buttons\n);
 	print G qq(    Option "Emulate3Buttons"\n);
-	$id > 1 or print F "#" unless $O->{nbuttons} < 3;
+	print F "#" unless $O->{nbuttons} < 3;
 	print G "#" unless $O->{nbuttons} < 3;
-	$id > 1 or print F qq(    Emulate3Timeout    50\n\n);
+	print F ($id > 1 && "    ") . qq(    Emulate3Timeout    50\n\n);
 	print G qq(    Option "Emulate3Timeout"    "50"\n\n);
-	$id > 1 or print F "# ChordMiddle is an option for some 3-button Logitech mice\n\n";
+	print F "# ChordMiddle is an option for some 3-button Logitech mice\n\n";
 	print G "# ChordMiddle is an option for some 3-button Logitech mice\n\n";
-	$id > 1 or print F "#" unless $O->{chordmiddle};
+	print F "#" unless $O->{chordmiddle};
 	print G "#" unless $O->{chordmiddle};
-	$id > 1 or print F qq(    ChordMiddle\n\n);
+	print F ($id > 1 && "    ") . qq(    ChordMiddle\n\n);
 	print G qq(    Option "ChordMiddle"\n\n);
-	$id > 1 or print F "    ClearDTR\n" if $O->{cleardtrrts};
-	$id > 1 or print F "    ClearRTS\n\n"  if $O->{cleardtrrts};
-	$id > 1 or print F "EndSection\n\n\n";
+	print F ($id > 1 && "    ") . "    ClearDTR\n" if $O->{cleardtrrts};
+	print F ($id > 1 && "    ") . "    ClearRTS\n\n"  if $O->{cleardtrrts};
+	$id > 1 and print F qq(    EndSubSection\n);
+	print F "EndSection\n\n\n";
 	print G "EndSection\n\n\n";
     };
     print F $pointersection_text;
