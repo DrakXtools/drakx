@@ -1133,7 +1133,6 @@ sub install_spooler {
     #       start-up scripts?)
     my ($printer, $in) = @_;
     if (!$::testing) {
-	run_program::rooted($prefix, "ifconfig lo 127.0.0.1"); #- else cups will not be happy! and ifup lo don't run ?
 	if ($printer->{SPOOLER} eq "cups") {
 	    if ((!$::testing) &&
 		(!printer::files_exist((qw(/usr/lib/cups/cgi-bin/printers.cgi
