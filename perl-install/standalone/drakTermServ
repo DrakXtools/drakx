@@ -69,20 +69,6 @@ my $cfg_dir = "/etc/drakxtools/draktermserv/";
 my $cfg_file = $cfg_dir . "draktermserv.conf";
 my $server_ip = get_ip_from_sys();
 
-if ("@ARGV" =~ /--help|-h/) {
-    print q(Mandrake Terminal Server Configurator
---enable         : enable MTS
---disable        : disable MTS
---start          : start MTS
---stop           : stop MTS
---adduser        : add an existing system user to MTS (requires username)
---deluser        : delete an existing system user from MTS (requires username)
---addclient      : add a client machine to MTS (requires MAC address, IP, nbi image name)
---delclient      : delete a client machine from MTS (requires MAC address, IP, nbi image name)
-);
-    exit(0);
-}
-
 #- make sure terminal server and friends are installed
 my $ts = system("rpm -qa | grep terminal-server > /dev/null");
 if ($ts == 256) { 

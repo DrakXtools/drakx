@@ -49,8 +49,18 @@ Backup and Restore application
 --help                : show this message.
 --version             : show version name.
 "),
-	      'draksec' => N(" [OPTIONS]...
+	      'draksec' => N("[OPTIONS]...
 	      --debug         print debugging information"),
+           'drakTermServ' => N("[OPTIONS]...
+Mandrake Terminal Server Configurator
+--enable         : enable MTS
+--disable        : disable MTS
+--start          : start MTS
+--stop           : stop MTS
+--adduser        : add an existing system user to MTS (requires username)
+--deluser        : delete an existing system user from MTS (requires username)
+--addclient      : add a client machine to MTS (requires MAC address, IP, nbi image name)
+--delclient      : delete a client machine from MTS (requires MAC address, IP, nbi image name)"),
 	      'drakxtv' => "[--no-guess]",
 	      'drakupdate_fstab' => " [--add | --del] <device>\n",
 	      'keyboardrake' => N("[keyboard]"),
