@@ -118,10 +118,10 @@ done
 
 
 install_kernel() {
- v=2.4.8-5mdk
+ v=2.4.13-9mdk
  vv=${v}BOOT
  rm -rf all.kernels/$(cat all.kernels/.main)
- scp kenobi:~chmou/public_html/kernel-BOOT/kernel-BOOT-$v.i586.rpm /tmp
+ scp kenobi:~chmou/public_html/kernel/BOOT/kernel-BOOT-$v.i586.rpm /tmp
  cd ~/gi/all.kernels ; rm -rf $vv ; mkdir $vv ; cd $vv ; rpm2cpio /tmp/kernel-BOOT-$v.i586.rpm | cpio -id
  cd ~/gi ; ./update_kernel ; rm -f images/network.rdz ; ./make_boot_img images/network.rdz network 
  /bin/cp -f all.kernels/$vv/boot/vmlinu* /var/lib/tftpboot/vmlinuz
