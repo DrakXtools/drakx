@@ -491,7 +491,7 @@ sub Create {
 First remove a primary partition and create an extended partition."));
 		    return 0;
 		} else {
-		    $in->ask_warn(N("Error"), $@);
+		    $in->ask_warn(N("Error"), formatError($err));
 		    return 1;
 		}
 	    }
