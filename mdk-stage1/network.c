@@ -311,10 +311,10 @@ char * guess_netmask(char * ip_addr)
 	struct in_addr addr;
 	unsigned long int tmp;
 
-	log_message("guessing netmask");
-
 	if (streq(ip_addr, "") || !inet_aton(ip_addr, &addr))
 		return "";
+
+	log_message("guessing netmask");
 
 	tmp = ntohl(addr.s_addr);
 	
@@ -372,7 +372,7 @@ static enum return_type setup_network_interface(struct interface_info * intf)
 		if (results != RETURN_OK)
 			return setup_network_interface(intf);
 
-		if (!inet_aton(answers[0], &addr)) {
+		if (streq(answers[0], "") || !inet_aton(answers[0], &addr)) {
 			stg1_error_message("Invalid IP address.");
 			return setup_network_interface(intf);
 		}
@@ -391,6 +391,10 @@ static enum return_type setup_network_interface(struct interface_info * intf)
 		if ((streq(answers[3], "") && inet_aton(guess_netmask(answers[0]), &addr))
 		    || inet_aton(answers[3], &addr))
 			memcpy(&intf->netmask, &addr, sizeof(addr));
+		else {
+			stg1_error_message("Invalid netmask.");
+			return setup_network_interface(intf);
+		}
 
 		*((uint32_t *) &intf->broadcast) = (*((uint32_t *) &intf->ip) &
 						    *((uint32_t *) &intf->netmask)) | ~(*((uint32_t *) &intf->netmask));
