@@ -212,7 +212,13 @@ When a partition is selected, you can use:
 
            * Ctrl-d to delete a partition
 
-           * Ctrl-m to set the mount point"),
+           * Ctrl-m to set the mount point
+           
+
+           
+If you are installing on a PPC Machine, you will want to create a small HFS 'bootstrap' partition of at least 1MB for use
+by the yaboot bootloader. If you opt to make the partition a bit larger, say 50MB, you may find it a useful place to store 
+a spare kernel and ramdisk image for emgergency boot situations."),
 
 ask_mntpoint_s => 
  __("Above are listed the existing Linux partitions detected on
@@ -675,6 +681,102 @@ when booting. The following values are available:
     * normal: select normal 80x25 text mode.
 
     * <number>:  use the corresponding text mode."),
+
+setupYabootGeneral =>
+ __("Yaboot is a bootloader for NewWorld MacIntosh hardware. It is able
+to boot either GNU/Linux, MacOS, or MacOSX, if present on your computer.
+Normally, these other operating systems are correctly detected and
+installed. If this is not the case, you can add an entry by hand in this
+screen. Be careful as to choose the correct parameters.
+
+
+Yaboot main options are:
+
+
+  - Init Message: A simple text message that is displayed before the boot
+prompt.
+
+
+  - Boot Device: Indicate where you want to place the information required to 
+boot to GNU/Linux. Generally, you will have setup a bootstrap partition earlier 
+to hold this information.
+
+
+  - Open Firmware Delay: Unlike LILO, there are two delays available with 
+yaboot.  The first delay is measured in seconds and at this point you can 
+choose between CD, OF boot, MacOS, or Linux.
+
+
+  - Kernel Boot Timeout: This timeout is similar to the LILO boot delay.  After 
+selecting Linux, you will have this delay in 0.1 seconds before your default
+kernel description is selected.
+
+
+  - Enable CD Boot?: Checking this option will allow you to choose 'C' for CD at
+the first boot prompt.
+
+
+  - Enable OF Boot?: Checking this option will allow you to choose 'N' for Open
+Firmware at the first boot prompt.
+
+
+  - Default OS: You can select which OS will boot by default when the Open Firmware 
+Delay expires."),
+ 
+setupYabootAddEntry =>
+__("You can add additional entries for yaboot, either for other operating systems,
+alternate kernels, or for an emergency boot image.
+
+
+For other OS's - the entry consists only of a label and the root partition.
+
+
+For Linux, they are a few possible options: 
+
+
+  - Label: This is simply the name will type at the yaboot prompt to select this 
+boot option.
+
+
+  - Image: This would be the name of the kernel to boot.  Typically vmlinux or
+a variation of vmlinux with an extension.
+
+
+  - Root: The root device or '/' for your Linux installation.
+
+
+  
+  - Append: On Apple hardware, the kernel append option is used quite often to
+assist in initializing video hardware, or to enable keyboard mouse button emulation
+for the often lacking 2nd and 3rd mouse buttons on a stock Apple mouse.  The following 
+are some examples:
+
+
+		 video=aty128fb:vmode:17,cmode:32,mclk:71 adb_buttons=103,111 hda=autotune
+
+		 video=atyfb:vmode:12,cmode:24 adb_buttons=103,111 
+
+
+ 
+  - Initrd: This option can be used either to load initial modules, before the boot 
+device is available, or to load a ramdisk image for an emergency boot situation.
+
+
+  - Initrd-size: The default ramdisk size is generally 4096 bytes.  If you should need
+to allocate a large ramdisk, this option can be used.
+
+
+  - Read-write: Normally the 'root' partition is initially brought up read-only, to allow
+a filesystem check before the system becomes 'live'.  You can override this option here.
+
+
+  - NoVideo: Should the Apple video hardware prove to be exceptionally problematic, you can
+select this option to boot in 'novideo' mode, with native framebuffer support.
+
+
+  - Default: Selects this entry as being the default Linux selection, selectable by just
+pressing ENTER at the yaboot prompt.  This entry will also be highlighted with a '*', if you
+press TAB to see the boot selections."),
 
 setupSILOAddEntry =>
  __("SILO is a bootloader for SPARC: it is able to boot

@@ -340,7 +340,7 @@ sk98lin
 
 
 my @skip_modules_on_stage1 = (
-  arch() =~ /alpha/ ? qw(sb1000) : (),
+  arch() =~ /alpha|ppc/ ? qw(sb1000) : (),
   "apa1480_cb",
   "imm",
   "ppa",
@@ -608,6 +608,8 @@ sub read_stage1_conf {
     if (arch() =~ /sparc/) {
 	$conf{parport_lowlevel}{alias} ||= "parport_ax";
 	$conf{plip}{"pre-install"} ||= "modprobe parport_ax ; echo 7 > /proc/parport/0/irq"; #- TOCHECK
+    } elsif (arch() =~ /ppc/) {
+    $conf{pcmcia_core}{"pre-install"} ||= "CARDMGR_OPTS=-f /etc/rc.d/init.d/pcmcia start";    	
     } else {
 	$conf{parport_lowlevel}{alias} ||= "parport_pc";
 	$conf{pcmcia_core}{"pre-install"} ||= "CARDMGR_OPTS=-f /etc/rc.d/init.d/pcmcia start";

@@ -1,7 +1,7 @@
 package partition_table_mac; # $Id$
 
 use diagnostics;
-use strict;
+#use strict;   - fixed other PPC code to comply, but program bails on empty partition table - sbenedict
 use vars qw(@ISA);
 
 @ISA = qw(partition_table_raw);
@@ -13,6 +13,7 @@ use c;
 
 my %typeToDos = (
   "Apple_partition_map" => 0x401,
+  "Apple_Bootstrap"	=> 0x401,
   "Apple_Driver43"	=> 0x401,
   "Apple_Driver_IOKit"	=> 0x401,
   "Apple_Patches"	=> 0x401,
@@ -136,15 +137,36 @@ sub read($$) {
                 if ($h{pType} =~ /^Apple_UNIX_SVR2/i) {
                     $h{pName} =~ /swap/i ? ($h{type} = 0x82) : ($h{type} = 0x83);
                 } elsif ($h{pType} =~ /^Apple_Free/i) {
+                	#- need to locate a 1MB partition to setup a bootstrap on
+                	if (defined $partition_table_mac'freepart_start && $partition_table_mac'freepart_size >= 1) {
+                		#- already found a suitable partition
+                	} else {
+                		$partition_table_mac'freepart_start = $h{start};
+                		$partition_table_mac'freepart_size = $h{size}/2048;
+                		$partition_table_mac'freepart_device = $hd;
+                		log::l("free apple partition found on drive /dev/$partition_table_mac'freepart_device->{device}, block $partition_table_mac'freepart_start, size $partition_table_mac'freepart_size");
+                	}
                     next;
 					#$h{type} = 0x0;
                 } elsif ($h{pType} =~ /^Apple_HFS/i) {
                  	$h{type} = 0x402;
+                 	if (defined $partition_table_mac'macos_part) {		
+                 		#- swag at identifying MacOS - 1st HFS partition
+                 	} else {	
+                 		$partition_table_mac'macos_part = "/dev/" . $hd->{device} . ($i+1);
+                 		log::l("found MacOS at partition $partition_table_mac'macos_part");
+                 	}
                 } elsif ($h{pType} =~ /^Apple_Partition_Map/i) {
                  	$h{type} = 0x401;
                  	$h{isMap} = 1;
+                } elsif ($h{pType} =~ /^Apple_Bootstrap/i) {
+                 	$h{type} = 0x401;
+                 	$h{isBoot} = 1;
+                 	$partition_table_mac'bootstrap_part = "/dev/" . $hd->{device} . ($i+1);
+                 	log::l("found bootstrap at partition $partition_table_mac'bootstrap_part");
                 } else {
                  	$h{type} = 0x401;
+                     $h{isDriver} = 1;
                 };
 
                 # Let's see if this partition is a driver.
@@ -261,6 +283,11 @@ sub write($$$;$) {
                 $_->{pType} = "Apple_Partition_Map";
                 $_->{pName} = "Apple";
                 $_->{pFlags} = 0x33;
+            } elsif ($_->{type} == 0x401) {
+                $_->{pType} = "Apple_Bootstrap";
+                $_->{pName} = "bootstrap";
+                $_->{pFlags} = 0x33;
+				$_->{isBoot} = 1;
             } elsif ($_->{type} == 0x82) {
                 $_->{pType} = "Apple_UNIX_SVR2";
                 $_->{pName} = "swap";

@@ -126,6 +126,8 @@ sub real_format_part {
         format_dos($part->{device}, @options, '-F', 32);
     } elsif (isHFS($part)) {
         format_hfs($part->{device}, @options, '-l', "Untitled");
+    } elsif (isBootstrap($part)) {
+        format_hfs($part->{device}, @options, '-l', "bootstrap");
     } elsif (isSwap($part)) {
 	my $check_blocks = grep { /^-c$/ } @options;
         swap::make($part->{device}, $check_blocks);

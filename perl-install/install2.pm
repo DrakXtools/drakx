@@ -52,7 +52,7 @@ my (%installSteps, @orderedInstallSteps);
   configureServices  => [ __("Configure services"), 1, 1, '!$::expert', "installPackages" ],
   setRootPassword    => [ __("Set root password"), 1, 1, '', "installPackages" ],
   addUser            => [ __("Add a user"), 1, 1, '', "installPackages" ],
-arch() !~ /alpha/ ? (
+((arch() !~ /alpha/) && (arch() !~ /ppc/)) ? (
   createBootdisk     => [ __("Create a bootdisk"), 1, 0, '', "installPackages" ],
 ) : (),
   setupBootloader    => [ __("Install bootloader"), 1, 1, '', "installPackages" ],

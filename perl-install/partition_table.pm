@@ -6,7 +6,7 @@ package partition_table; # $Id$
 
 @ISA = qw(Exporter);
 %EXPORT_TAGS = (
-    types => [ qw(type2name type2fs name2type fs2type isExtended isExt2 isReiserfs isTrueFS isSwap isDos isWin isFat isSunOS isOtherAvailableFS isPrimary isNfs isSupermount isRAID isMDRAID isHFS isNT isMountableRW isNonMountable isApplePartMap isLoopback) ],
+    types => [ qw(type2name type2fs name2type fs2type isExtended isExt2 isReiserfs isTrueFS isSwap isDos isWin isFat isSunOS isOtherAvailableFS isPrimary isNfs isSupermount isRAID isMDRAID isHFS isNT isMountableRW isNonMountable isApplePartMap isLoopback isApple isBootstrap) ],
 );
 @EXPORT_OK = map { @$_ } values %EXPORT_TAGS;
 
@@ -15,8 +15,11 @@ use common qw(:common :system :functional);
 use partition_table_raw;
 use log;
 
-
-@important_types = ('Linux native', 'Linux swap', if_(arch() =~ /i.86/, 'ReiserFS', 'DOS FAT16', 'Win98 FAT32'));
+if (arch() =~ /ppc/) {
+    @important_types = ('Linux native', 'Linux swap', 'Apple HFS Partition', 'Apple Bootstrap');
+} else {
+	@important_types = ('Linux native', 'Linux swap', if_(arch() =~ /i.86/, 'ReiserFS', 'DOS FAT16', 'Win98 FAT32'));
+}
 @important_types2 = ('Linux RAID', 'Linux Logical Volume Manager partition');
 
 @fields2save = qw(primary extended totalsectors isDirty needKernelReread);
@@ -27,6 +30,7 @@ my %types = (
   0x0 => 'Empty',
 arch() =~ /^ppc/ ? (
   0x401	=> 'Apple Partition',
+  0x401	=> 'Apple Bootstrap',
   0x402	=> 'Apple HFS Partition',
 ) : arch() =~ /^i.86/ ? (
   0x183 => 'ReiserFS',
@@ -183,6 +187,7 @@ arch() !~ /sparc/ ? (
   0x82 => 'swap',
   0x83 => 'ext2',
   0x183=> 'reiserfs',
+  0x401 => 'apple',
   0x402 => 'hfs',
   nfs  => 'nfs', #- hack
 );
@@ -224,6 +229,8 @@ sub isNfs($) { $_[0]{type} eq 'nfs' } #- small hack
 sub isNT($) { arch() !~ /^sparc/ && $_[0]{type} == 0x7 }
 sub isSupermount($) { $_[0]{type} eq 'supermount' }
 sub isHFS($) { $type2fs{$_[0]{type}} eq 'hfs' }
+sub isApple($) { $type2fs{$_[0]{type}} eq 'apple' && defined $_[0]{isDriver} }
+sub isBootstrap($) { $type2fs{$_[0]{type}} eq 'apple' && defined $_[0]{isBoot} }
 sub isHiddenMacPart { defined $_[0]{isMap} }
 sub isLoopback { defined $_[0]{loopback_file} }
 sub isTrueFS { isExt2($_[0]) || isReiserfs($_[0]) }
@@ -611,7 +618,7 @@ sub add($$;$$) {
 
     my $e = $hd->{primary}{extended};
 
-    if (arch() =~ /^sparc/ ||
+    if (arch() =~ /^sparc|ppc/ ||
 	$primaryOrExtended eq 'Primary' ||
 	$primaryOrExtended !~ /Extended/ && is_empty_array_ref($hd->{primary}{normal})) {
 	eval { add_primary($hd, $part) };
