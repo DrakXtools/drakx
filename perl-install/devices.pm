@@ -68,7 +68,7 @@ sub make($) {
 	$major = 1;
 	$minor = $1 eq '' ? 1 : $1;
     } elsif (m|^rd/c(\d+)d(\d+)(p(\d+))?|) {
-	# dac 960 "/rd/cXdXXpX"
+	# dac 960 "rd/cXdXXpX"
         $type = c::S_IFBLK();
 	$major = 48 + $1;
 	$minor = 8 * $2 + $4;

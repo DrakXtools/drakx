@@ -436,8 +436,7 @@ sub write($) {
 	$_->{normal}{local_start} = $_->{normal}{start} - $_->{start};
 	$_->{extended} and $_->{extended}{local_start} = $_->{extended}{start} - $hd->{primary}{extended}{start};
 
-	print "Trying to write an extended partition table, bad !!!\n";
-	#$hd->write($_->{start}, $_->{raw}) or die "writing of partition table failed";
+	arch() !~ /^sparc/ and $hd->write($_->{start}, $_->{raw}) or die "writing of partition table failed";
     }
     $hd->{isDirty} = 0;
 

@@ -608,10 +608,10 @@ $keyboardsection_part3 = '
     XkbKeycodes     "xfree86"
     XkbTypes        "default"
     XkbCompat       "default"
-    XkbSymbols      "us(pc101)"
+    XkbSymbols      "us(pc105)"
     XkbGeometry     "pc"
     XkbRules        "xfree86"
-    XkbModel        "pc101"
+    XkbModel        "pc105"
 ';
 }
 

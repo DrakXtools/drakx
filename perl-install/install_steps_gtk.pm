@@ -257,7 +257,7 @@ sub selectLanguage {
 sub doPartitionDisks($$) {
     my ($o, $hds, $raid) = @_;
 
-    if (!$::isStandalone && fsedit::is_one_big_fat($hds)) {
+    if ($::beginner && fsedit::is_one_big_fat($hds)) {
 	#- wizard
 	my $min_linux = 600 << 11;
 	my $max_linux = 1500 << 11;
@@ -266,6 +266,7 @@ sub doPartitionDisks($$) {
 	my ($part) = fsedit::get_fstab(@{$o->{hds}});
 	my $w = $o->wait_message(_("Resizing"), _("Computing fat filesystem bounds"));
 	my $resize_fat = eval { resize_fat::main->new($part->{device}, devices::make($part->{device})) };
+	$@ and goto diskdrake;
 	my $min_win = $resize_fat->min_size;
 	if (!$@ && $part->{size} > $min_linux + $min_freewin + $min_win && $o->ask_okcancel('',
 _("WARNING!
@@ -299,6 +300,7 @@ When sure, press Ok."))) {
 	}
     }
 
+  diskdrake:
     while (1) {
 	diskdrake::main($hds, $raid, interactive_gtk->new, $o->{partitions});
 	if (!grep { isSwap($_) } fsedit::get_fstab(@{$o->{hds}})) {

@@ -103,6 +103,10 @@ sub readMonitorsDB {
 	@l == @fields or log::l("bad line $lineno ($_)"), next;
 
 	my %l; @l{@fields} = @l;
+	if ($monitors{$l{type}}) {
+	    my $i; for ($i = 0; $monitors{"$l{type} ($i)"}; $i++) {}
+	    $l{type} = "$l{type} ($i)";
+	}
 	$monitors{$l{type}} = \%l;
     }
     while (my ($k, $v) = each %standard_monitors) {

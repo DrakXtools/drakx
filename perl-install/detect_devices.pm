@@ -128,7 +128,7 @@ sub getDAC960() {
     #- We are looking for lines of this format:DAC960#0:
     #- /dev/rd/c0d0: RAID-7, Online, 17928192 blocks, Write Thru0123456790123456789012
     foreach (syslog()) {
-	my ($device, $info) = m|/dev/rd/(.*?): (.*?),| or next;
+	my ($device, $info) = m|/dev/(rd/.*?): (.*?),| or next;
 	push @idi, { info => $info, type => 'hd', device => $device };
 	log::l("DAC960: $device ($info)");
     }

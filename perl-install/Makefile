@@ -136,7 +136,7 @@ endif
 	tar xyC $(DEST) -f ../install/install1_pcmcia.tar.bz2 ./etc/pcmcia
 
 full_stage2:
-	rm -rf $(DEST)
+	$(SUDO) rm -rf $(DEST)
 	mkdir -p $(DEST)
 	$(MAKE) get_needed_files 
 	$(MAKE) stage2
