@@ -536,12 +536,15 @@ sub installPackages {
 	    my $f = $install_any::advertising_images[$i++ % @install_any::advertising_images];
 	    log::l("advertising $f");
 	    my $pl = $f; $pl =~ s/\.png$/\.pl/;
-	    my ($width, $height, @data);
-	    eval(cat_($pl));
+	    my ($draw_text, $width, $height, @data);
+	    -e $pl and $draw_text = 1;
+	    eval(cat_($pl)) if $draw_text;
 	    my ($pix, undef) = gtkcreate_png($f);
 	    my $dbl_area;
 	    my $darea = new Gtk::DrawingArea;
-	    gtkpack($box, $advertising = gtksignal_connect(gtkset_usize($darea, $width, $height), expose_event => sub {
+	    gtkpack($box, $advertising = !$draw_text ?
+		    gtkpng($f) :
+		    gtksignal_connect(gtkset_usize($darea, $width, $height), expose_event => sub {
 			       if (!defined($dbl_area)) {
 				   $dbl_area = new Gtk::Gdk::Pixmap($darea->window, $width, $height);
 				   $dbl_area->draw_pixmap($darea->style->bg_gc('normal'),
@@ -549,14 +552,15 @@ sub installPackages {
 				   my $gc_text = new Gtk::Gdk::GC($darea->window);
 				   $gc_text->set_foreground(gtkcolor(65535, 65535, 65535));
 				   foreach (@data) {
+				       my ($text, $x, $y, $area_width, $area_height) = @$_;
 				       my ($width, $height, $lines, $widths, $heights, $ascents, $descents) =
-					 get_text_coord ($_->[0], $darea->style, $_->[3], $_->[4], 1, 0, 1, 1);
+					 get_text_coord ($text, $darea->style, $area_width, $area_height, 1, 0, 1, 1);
 				       my $i = 0;
 				       foreach (@{$lines}) {
 					   $dbl_area->draw_string($darea->style->font, $gc_text,
-								  ${$widths}[$i], ${$heights}[$i], $_);
+								  $x + ${$widths}[$i], $y + ${$heights}[$i], $_);
 					   $dbl_area->draw_string($darea->style->font, $gc_text,
-								  ${$widths}[$i] + 1, ${$heights}[$i], $_);
+								  $x + ${$widths}[$i] + 1, $y + ${$heights}[$i], $_);
 					   $i++;
 				       }
 				   }
