@@ -720,6 +720,28 @@ complete => sub {
 	$in->ask_warn('', _("Samba share name missing!"));
 	return (1,2);
     }
+    unless ($smbpassword eq "") {
+	local $::isWizard = 0;
+	my $yes = $in->ask_yesorno(_("SECURITY WARNING!"),
+_("You are about to set up printing to a Windows account with password. Due to a fault in the architecture of the Samba client software the password is put in clear text into the command line of the Samba client used to transmit the print job to the Windows server. So it is possible for every user on this machine to display the password on the screen by issuing commands as \"ps -auxwww\".
+
+We recommend to make use of one of the following alternatives (in all cases you have to make sure that only machines from your local network have access to your Windows server, for example by means of a firewall):
+
+Use a password-less account on your Windows server, as the \"GUEST\" account or a special account dedicated for printing. Do not remove the password protection from a personal account or the administrator account.
+
+Set up your Windows server to make the printer available under the LPD protocol. Then set up printing from this machine with the \"%s\" connection type in Printerdrake.
+
+", _("Printer on remote lpd server")) .
+($::expert ? 
+_("Set up your Windows server to make the printer available under the IPP protocol and set up printing from this machine with the \"%s\" connection type in Printerdrake.
+
+", _("Enter a printer device URI")) : "") .
+_("Connect your printer to a Linux server and let your Windows machine(s) connect to it as a client.
+
+Do you really want to continue setting up this printer as you are doing now?"), 0);
+	return 0 if $yes;
+	return (1,2);
+    }
     return 0;
 }
     );
