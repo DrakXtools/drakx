@@ -1898,6 +1898,21 @@ sub setup_common {
 	    }
 
 	    if ($ptaldevice) {
+		# HPOJ has determined the device name, make use of it if we
+		# didn't know it before
+		if (!$do_auto_detect ||
+		    !$makemodel ||
+		    $makemodel eq $searchunknown ||
+		    $makemodel =~ /^\s*$/) {
+		    $makemodel = $ptaldevice;
+		    $makemodel =~ s/^.*:([^:]+)$/$1/;
+		    $makemodel =~ s/_/ /g;
+		    if ($makemodel =~ /^\s*IJP/i) {
+			$makemodel = "Sony $makemodel";
+		    } else {
+			$makemodel = "HP $makemodel";
+		    }
+		}
 		# Configure scanning with SANE on the MF device
 		if ($makemodel !~ /HP\s+PhotoSmart/i &&
 		    $makemodel !~ /HP\s+LaserJet\s+2200/i &&
