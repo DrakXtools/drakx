@@ -61,7 +61,7 @@ sub relGetFile($) {
     local $_ = $_[0];
     m,^(Mandrake|lnx4win)/, and return $_;
     /\.img$/ and return "images/$_";
-    my $dir = m|/| ? "Mandrake/mdkinst" : /^(?:compss|compssList|compssUsers|filelist|depslist.*|hdlist.*|auto_inst.*)$/ ?
+    my $dir = m|/| ? "Mandrake/mdkinst" : /^(?:compss|compssList|compssUsers|provides|filelist|depslist.*|hdlist.*|auto_inst.*)$/ ?
       "Mandrake/base/": "$::o->{packages}[2]{$asked_medium}{rpmsdir}/";
     "$dir$_";
 }
@@ -422,9 +422,9 @@ sub install_urpmi {
 		      http => $ENV{URLPREFIX},
 		      cdrom => "removable_cdrom_$::i://mnt/cdrom" }}{$method} . "/$_->{rpmsdir}";
 
-	local *FILES; open FILES, "bzip2 -dc /tmp/$_->{hdlist} 2>/dev/null | hdlist2names - |";
+	local *FILES; open FILES, "packdrake -c /tmp/$_->{hdlist} | parsehdlist - |";
 	chop, print LIST "$dir/$_\n" foreach <FILES>;
-	close FILES or log::l("hdlist2names failed"), return;
+	close FILES or log::l("parsehdlist failed"), return;
 	close LIST;
 
 	$dir .= " with ../base/$_->{hdlist}" if $method =~ /ftp|http/;

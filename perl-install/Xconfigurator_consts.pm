@@ -160,9 +160,31 @@ $default_monitor = "High Frequency SVGA, 1024x768 at 70 Hz";
 #-      'S3 Inc.|86c368 [Trio 3D/2X]' => [ '	ChipID  0x8a10' ],
 );
 
+#- most usefull XFree86-4.0.1 server options. Default values is the first ones.
+@options_serverflags = (
+			'NoTrapSignals'           => [ "Off", "On" ],
+			'DontZap'                 => [ "Off", "On" ],
+			'DontZoom'                => [ "Off", "On" ],
+			'DisableVidModeExtension' => [ "Off", "On" ],
+			'AllowNonLocalXvidtune'   => [ "Off", "On" ],
+			'DisableModInDev'         => [ "Off", "On" ],
+			'AllowNonLocalModInDev'   => [ "Off", "On" ],
+			'AllowMouseOpenFail'      => [ "False", "True" ],
+			'VTSysReq'                => [ "Off", "On" ],
+			'BlankTime'               => [ "10", "5", "3", "15", "30" ],
+			'StandByTime'             => [ "20", "10", "6", "30", "60" ],
+			'SuspendTime'             => [ "30", "15", "9", "45", "90" ],
+			'OffTime'                 => [ "40", "20", "12", "60", "120" ],
+			'Pixmap'                  => [ "32", "24" ],
+			'PC98'                    => [ "auto-detected", "False", "True" ],
+			'NoPM'                    => [ "False", "True" ],
+);
+
 #- most usefull server options have to be accessible at the beginning, since
 #- no more than a small set of options will be available for the user, maybe ?
 @options = (
+	    [ 'DPMS',              'XFree86',     '.*' ],
+	    [ 'SyncOnGreen',       'XFree86',     '.*' ],
 	    [ 'power_saver',       'Mono',        '.*' ],
 	    [ 'hibit_low',         'VGA16',       'Tseng.*ET4000' ],
 	    [ 'hibit_high',        'VGA16',       'Tseng.*ET4000' ],

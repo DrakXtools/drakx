@@ -239,8 +239,8 @@ Do You want to use XFree 3.3 instead of XFree 4.0?"), 1) and $card->{driver} = '
 
     #- hack for ATI Mach64 card where two options should be used if using Utah-GLX.
     if ($card->{type} =~ /ATI Mach64/) {
-	$card->{options}{no_font_cache} = $card->{Utah_glx};
-	$card->{options}{no_pixmap_cache} = $card->{Utah_glx};
+	$card->{options_xf3}{no_font_cache} = $card->{Utah_glx};
+	$card->{options_xf3}{no_pixmap_cache} = $card->{Utah_glx};
     }
 
     #- 3D acceleration configuration for XFree 4.0 using DRI, this is enabled by default
@@ -264,9 +264,10 @@ sub optionsConfiguration($) {
 
     foreach (@options) {
 	if ($o->{card}{server} eq $_->[1] && $o->{card}{identifier} =~ /$_->[2]/) {
-	    $o->{card}{options}{$_->[0]} ||= 0;
+	    my $options = 'options_' . ($o->{card}{server} eq 'XFree86' ? 'xf4' : 'xf3');
+	    $o->{card}{$options}{$_->[0]} ||= 0;
 	    unless ($l{$_->[0]}) {
-		push @l, $_->[0], { val => \$o->{card}{options}{$_->[0]}, type => 'bool' };
+		push @l, $_->[0], { val => \$o->{card}{$options}{$_->[0]}, type => 'bool' };
 		$l{$_->[0]} = 1;
 	    }
 	}
@@ -886,9 +887,9 @@ EndSection
     # instead of the cursor!                                          
     #    Option      "sw_cursor"
 
-); 
+);
     my $p = sub {
-	my ($l) = @_;
+	my $l = $O->{$_[0]};
 	map { (!$l->{$_} && '#') . qq(    Option      "$_"\n) } keys %{$l || {}};
     };
     print F $p->('options');
