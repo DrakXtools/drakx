@@ -269,7 +269,7 @@ sub select_packages {
 
     #- act as DrakX will do to select packages.
     pkgs::selectPackage($o->{packages}, pkgs::packageByName($o->{packages}, 'basesystem') || die "no basesystem package found");
-    pkgs::read_rpmsrate($o->{packages}, install_any::getFile("Mandrake/base/rpmsrate"));
+    pkgs::read_rpmsrate($o->{packages}, install_any::getFile("Mandrake/base/rpmsrate") || die "unable to read rpmsrate");
     ($o->{compssUsers}, $o->{compssUsersSorted}, $o->{compssUsersIcons}, $o->{compssUsersDescr}) = 
       pkgs::readCompssUsers($o->{packages}, $o->{meta_class});
 
@@ -282,8 +282,8 @@ sub select_packages {
 	$o->{compssUsersChoice}{qq(LOCALES"$_")} = 1;
     }
 
-    pkgs::setSelectedFromCompssList($packages, $o->{compssUsersChoice}, 2, 0);
-    pkgs::setSelectedFromCompssList($packages, { map { $_ => 1 } map { @{$o->{compssUsers}{$_}} } @{$o->{compssUsersSorted}} }, 2, 0);
+    pkgs::setSelectedFromCompssList($o->{packages}, $o->{compssUsersChoice}, 2, 0);
+    pkgs::setSelectedFromCompssList($o->{packages}, { map { $_ => 1 } map { @{$o->{compssUsers}{$_}} } @{$o->{compssUsersSorted}} }, 2, 0);
 
     #- package that have to selected here as a bonus for oem install.
     foreach (qw(cups cups-drivers drakprofile draksync irda-utils numlock raidtools reiserfs-utils
@@ -451,7 +451,7 @@ sub read_rpmsrate {
 		if ($packages) {
 		    my $p = packageByName($packages, $_) or next;
 		    #		    $p->[$VALUES] = join("\t", $rate, grep { !/^\d$/ } @m);
-		    $p->{values} = \@m; #- LOCALLY MODIFIED FOR OEM
+		    $p->{values} = [ $rate, grep { !/^\d$/ } @m] ; #- LOCALLY MODIFIED FOR OEM
 		} else {
 		    print "$_ = ", join(" && ", @m), "\n";
 		}
@@ -461,6 +461,7 @@ sub read_rpmsrate {
 	    push @l, [ $l2[0][0], $l2[$#l2][1] ];
 	}
     }
+    $line_nb > 0 or die "nothing read in rpmsrate";
 }
 
 sub readCompssUsers {
@@ -495,7 +496,7 @@ sub setSelectedFromCompssList {
     $compssUsersChoice->{TRUE} = 1; #- ensure TRUE is set
     my $nb = selectedSize($packages);
 #    foreach my $p (sort { substr($a,0,1) <=> substr($b,0,1) } values %{$packages->{names}}) {
-    foreach my $p (sort { $a->{values}[0] <=> $b->{values}[0] } @{$packages->{depslist}}) { #- LOCALLY MODIFIED FOR OEM
+    foreach my $p (sort { $b->{values}[0] <=> $a->{values}[0] } @{$packages->{depslist}}) { #- LOCALLY MODIFIED FOR OEM
 #	my ($rate, @flags) = split "\t", $p->[$VALUES];
 	my ($rate, @flags) = @{$p->{values}}; #- LOCALLY MODIFIED FOR OEM
 	next if !$rate || $rate < $min_level || grep { !grep { /^!(.*)/ ? !$compssUsersChoice->{$1} : $compssUsersChoice->{$_} } split('\|\|') } @flags;
