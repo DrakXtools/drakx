@@ -45,7 +45,7 @@ my $inmain = 0;
 my $lilogrub = chomp_(`detectloader -q`);
 
 my $window = $::isEmbedded ? new Gtk2::Plug($::XID) : new Gtk2::Window("toplevel");
-$window->signal_connect(delete_event => sub { $::isEmbedded ? kill('USR1', $::CCPID) : Gtk2->exit(0) });
+$window->signal_connect(delete_event => sub { utk2->exit(0) });
 $window->set_title(N("Boot Style Configuration"));
 $window->set_border_width(2);
 #$window->realize;
@@ -64,7 +64,7 @@ $window->set_border_width(2);
 # the menus are not shown
 # but they provides shiny shortcut like C-q
 my @menu_items = ({ path => N("/_File"), type => '<Branch>' },
-		  { path => N("/File/_Quit"), accelerator => N("<control>Q"), callback    => sub { $::isEmbedded ? kill('USR1', $::CCPID) : Gtk2->exit(0) } },
+		  { path => N("/File/_Quit"), accelerator => N("<control>Q"), callback    => sub { ugtk2->exit(0) } },
 		 );
 my $menubar = create_factory_menu($window, @menu_items);
 ######### menus end
@@ -139,7 +139,7 @@ my $keep_logo = 1;
 $logo_thm->set_active(1);
 $logo_thm->signal_connect(clicked => sub { invbool(\$keep_logo) });
 $B_create->signal_connect(clicked => sub {
-    $::isEmbedded ? (kill('USR1', $::CCPID) and system('/usr/sbin/draksplash ')) : system('/usr/sbin/draksplash ');
+    system('/usr/sbin/draksplash ');
     });
 #- ******** action to take on changing combos values
 
@@ -326,8 +326,8 @@ Click on Configure to launch the setup wizard.", $lilogrub),
 				    )
 			 ),
 		 gtkadd(gtkset_layout(new Gtk2::HButtonBox, 'end'),
-			 gtksignal_connect(new Gtk2::Button(N("OK")), clicked => sub { Xconfig::various::runlevel($x_mode ? 5 : 3); updateAutologin(); updateAurora(); $::isEmbedded ? kill('USR1',$::CCPID) : Gtk2->exit(0) }),
-			 gtksignal_connect(new Gtk2::Button(N("Cancel")), clicked => sub { $::isEmbedded ? kill('USR1', $::CCPID) : Gtk2->exit(0) })
+			 gtksignal_connect(new Gtk2::Button(N("OK")), clicked => sub { Xconfig::various::runlevel($x_mode ? 5 : 3); updateAutologin(); updateAurora(); ugtk2->exit(0) }),
+			 gtksignal_connect(new Gtk2::Button(N("Cancel")), clicked => sub { ugtk2->exit(0) })
 			)
 	       )
       );

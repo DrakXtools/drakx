@@ -600,7 +600,6 @@ sub interactive_mode {
 						      gtksignal_connect(new Gtk2::Button(N("About")), clicked => sub { help() }),
 						      gtksignal_connect(new Gtk2::Button(N("Close")),
 									clicked => sub {
-									    $::isEmbedded and kill 'USR1', $::CCPID;
 									    Gtk2->main_quit();
 									}),
 						     ),

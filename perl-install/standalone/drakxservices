@@ -14,6 +14,4 @@ my $in = 'interactive'->vnew('su', 'services');
 begin:
 my $l = services::ask($in);
 services::doit($in, $l) if $l;
-!$::isEmbedded and $in->exit(0);
-kill 'USR1', $::CCPID;
-goto begin;
+$in->exit(0);

@@ -23,9 +23,7 @@ if ($in->isa('interactive::gtk')) {
     lilo_choice();
 }
 
-!$::isEmbedded and $in->exit(0);
-kill('USR1', $::CCPID);
-goto ask;
+$in->exit(0);
 
 sub lilo_choice {
     my $bootloader = bootloader::read(); 

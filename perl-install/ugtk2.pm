@@ -873,7 +873,6 @@ sub flush { gtkflush() }
 sub exit {
     gtkset_mousecursor_normal(); #- for restoring a normal in any case
     flush();
-    $::isEmbedded and kill 'USR1', $::CCPID;
     c::_exit($_[1]) #- workaround 
 }
 

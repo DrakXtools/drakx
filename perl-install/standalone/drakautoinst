@@ -241,8 +241,7 @@ quit_global($in, 0);
 
 sub quit_global {
     my ($in, $exitcode) = @_;
-    $::isEmbedded ? kill 'USR1', $::CCPID : $in->exit($exitcode);
-    goto begin;
+    $in->exit($exitcode);
 }
 
 

@@ -49,10 +49,4 @@ keyboard::write($keyboard);
 system('/etc/init.d/keytable', 'restart');
 
 end:
-if ($::isEmbedded) {
-    kill('USR1', $::CCPID);
-    $keyboard = '';
-    goto begin;
-} else {
     $in->exit(0) if $in;
-}

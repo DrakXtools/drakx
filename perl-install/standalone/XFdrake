@@ -59,10 +59,7 @@ begin:
     };
     $rc && $rc eq 'config_changed' and ask_for_X_restart($in);
 
-    $in->exit(0) if !$::isEmbedded;
-
-    kill 'USR1', $::CCPID;
-    goto begin;
+    $in->exit(0);
 }
 
 sub check_XFree {

@@ -304,7 +304,6 @@ sub interactive_mode {
 								  }),
 								  gtksignal_connect(new Gtk2::Button(N("Close")), clicked => sub {
 								      write_conf_file();
-								      $::isEmbedded and kill 'USR1', $::CCPID;
 								      Gtk2->main_quit();
 								  }),
 								  ),

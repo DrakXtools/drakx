@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 9.1
-Release: 4mdk
+Release: 5mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -9,7 +9,7 @@ Group: System/Configuration/Other
 # Temporary requires for tools that still use gtk+1 (mainly drakfloppy and net_monitor)
 Requires: perl-GTK >= 0.6123, perl-GTK-GdkImlib, perl-GTK-GdkPixbuf
 Requires: %{name}-newt = %version-%release, perl-GTK2 >= 0.0.cvs.2003.01.27.1-2mdk, XFree86-100dpi-fonts, XFree86-75dpi-fonts, /usr/X11R6/bin/xtest, font-tools, usermode >= 1.44-4mdk, perl-MDK-Common >= 1.0.4-14mdk
-Conflicts: drakconf < 9.1-0.4mdk 
+Conflicts: drakconf < 9.1-3mdk 
 BuildRequires: gettext, libgtk+-x11-2.0-devel, ldetect-devel >= 0.4.8, ncurses-devel, newt-devel, perl-devel, libext2fs-devel, perl-MDK-Common-devel
 BuildRoot: %_tmppath/%name-buildroot
 Provides: draksec
@@ -291,6 +291,9 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog 
+* Mon Feb 24 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.1-5mdk
+- clean up exit of tools when embedded in the mcc
+
 * Fri Feb 21 2003 Damien Chaumette <dchaumette@mandrakesoft.com> 9.1-4mdk
 - drakconnect fixes
 

@@ -124,9 +124,7 @@ sub try_ {
     $current_entry = '' if !diskdrake::interactive::is_part_existing($current_entry, $all_hds);
     $update_all->();
 
-    if ($v && member($name, 'Done', 'Wizard')) {
-	$::isEmbedded ? kill('USR1', $::CCPID) : Gtk2->main_quit; 
-    }
+    Gtk2->main_quit if $v && member($name, 'Done', 'Wizard');
 }
 
 ################################################################################
