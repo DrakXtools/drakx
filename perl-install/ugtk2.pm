@@ -774,8 +774,6 @@ add_icon_path(@icon_paths,
 sub new {
     my ($type, $title, %opts) = @_;
 
-    Gtk2->set_locale;
-
     my $o = bless { %opts }, $type;
     $o->_create_window($title);
     while (my $e = shift @tempory::objects) { $e->destroy }
