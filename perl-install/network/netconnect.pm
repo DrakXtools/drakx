@@ -167,6 +167,7 @@ If you don't want to use the auto detection, deselect the checkbox.
     my $nb = keys %{$netc->{internet_cnx}};
 
     if ($nb > 1) {
+     # BUG: remember to remove reference to profiles in mcc if we do not restore this feature
 	eval { $in->ask_from(N("Network Configuration Wizard"),
 			     N("You have configured multiple ways to connect to the Internet.\nChoose the one you want to use.\n\n") . if_(!$::isStandalone, "You may want to configure some profiles after the installation, in the Mandrake Control Center"),
 			     [ { label => N("Internet connection"), val => \$netc->{internet_cnx_choice}, list => [ keys %{$netc->{internet_cnx}} ] } ]
