@@ -21,17 +21,17 @@ install_only:
 	install -d $(MISC_DEST) $(EXTRA_INSTALL_DEST) $(IMAGES_DEST) $(MEDIA_INFO_DEST)
     ifneq (ppc,$(ARCH))
 	cp -f images/* $(IMAGES_DEST)
+	rm -rf $(IMAGES_DEST)/alternatives 
+	if [ `ls $(IMAGES_DEST)/*.img-* 2>/dev/null | wc -l` -gt 0 ]; then	\
+	  cd $(IMAGES_DEST); mkdir alternatives; cd alternatives; mv ../*.img-* .; md5sum *.img-* > MD5SUM; \
+	fi
+	cd $(IMAGES_DEST); md5sum *.{img,iso}* > MD5SUM
     endif
     ifeq (alpha,$(ARCH))
 	cp -f images/* $(ROOTDEST)/boot
 	cp -f vmlinux.gz $(ROOTDEST)/boot/instboot.gz
 	make -C tools/$(ARCH)/cd install ROOTDEST=$(ROOTDEST)
     endif
-	rm -rf $(IMAGES_DEST)/alternatives 
-	if [ `ls $(IMAGES_DEST)/*.img-* 2>/dev/null | wc -l` -gt 0 ]; then	\
-	  cd $(IMAGES_DEST); mkdir alternatives; cd alternatives; mv ../*.img-* .; md5sum *.img-* > MD5SUM; \
-	fi
-	cd $(IMAGES_DEST); md5sum *.{img,iso}* > MD5SUM
 
     ifeq (i386,$(ARCH))
 	rm -rf $(ROOTDEST)/isolinux
