@@ -73,10 +73,16 @@ static int get_int_response(void)
 static char * get_string_response(char * initial_string)
 {
 	/* I won't use a scanf/%s since I also want the null string to be accepted -- also, I want the initial_string */
-	char s[50];
+	char s[500];
 	int i = 0;
+	char buf[10];
+	int b_index = 0;
+	char b;
+
 	struct termios t;
-	
+
+	memset(s, '\0', sizeof(s));
+
 	if (initial_string) {
 		printf(initial_string);
 		strcpy(s, initial_string);
@@ -98,18 +104,52 @@ static char * get_string_response(char * initial_string)
 	fcntl(0, F_SETFL, O_NONBLOCK);
 
 	while (1) {
-		if (read(0, &(s[i]), 1) > 0) {
-			if (s[i] == 13)
+		if (read(0, &b, 1) > 0) {
+			if (b_index == 1) {
+				if (b == 91) {
+					buf[b_index] = b;
+					b_index++;
+					continue;
+				}
+				else
+					b_index = 0;
+			}
+			if (b_index == 2) {
+				if (b == 67) {
+					if (s[i] != '\0') {
+						printf("\033[C");
+						i++;
+					}
+				}
+				if (b == 68) {
+					if (i > 0) {
+						printf("\033[D");
+						i--;
+					}
+				}
+				b_index = 0;
+				continue;
+			}
+				
+			if (b == 13)
 				break;
-			if (s[i] == 127) {
+			if (b == 127) {
 				if (i > 0) {
 					printf("\033[D");
 					printf(" ");
 					printf("\033[D");
+					if (s[i] == '\0')
+						s[i-1] = '\0';
+					else
+						s[i-1] = ' ';
 					i--;
 				}
+			} else if (b == 27) {
+				buf[b_index] = b;
+				b_index++;
 			} else {
-				printf("%c", s[i]);
+				printf("%c", b);
+				s[i] = b;
 				i++;
 			}
 		}
@@ -123,7 +163,6 @@ static char * get_string_response(char * initial_string)
 	fcntl(0, F_SETFL, 0);
 
 	printf("\n");
-	s[i] = '\0';
 	return strdup(s);
 }
 
