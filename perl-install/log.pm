@@ -20,7 +20,7 @@ sub w { &l }
 
 sub openLog(;$) {
     if ($_[0]) { # useLocal
-	open LOG, "> $_[0]" or die "no log possible :(";
+	open LOG, "> $_[0]";# or die "no log possible :(";
     } else {
 	open LOG, "> /dev/tty3" or open LOG, ">> /tmp/install.log";# or die "no log possible :(";
     } 

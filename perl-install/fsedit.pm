@@ -109,8 +109,10 @@ sub has_mntpoint($$) {
     scalar grep { $mntpoint eq $_->{mntpoint} } get_fstab(@$hds);
 }
 
-sub check_mntpoint($$) {
-    my ($mntpoint, $hds) = @_;
+# do this before modifying $part->{mntpoint}
+# $part->{mntpoint} should not be used here, use $mntpoint instead
+sub check_mntpoint {
+    my ($mntpoint, $hd, $part, $hds) = @_;
 
     $mntpoint eq '' and return;
 
@@ -119,18 +121,19 @@ sub check_mntpoint($$) {
 #    m|(.)/$| and die "The mount point $_ is illegal.\nMount points may not end with a /";
 
     has_mntpoint($mntpoint, $hds) and die _("There is already a partition with mount point %s", $mntpoint);
+
+    if ($part->{start} + $part->{size} > 124 * partition_table::cylinder_size($hd)) {
+	die "/boot ending on cylinder > 1024" if $mntpoint eq "/boot";
+	die     "/ ending on cylinder > 1024" if $mntpoint eq "/" && !has_mntpoint("/boot", $hds);
+    }
 }
 
-sub add($$$) {
-    my ($hd, $part, $hds) = @_;
+sub add($$$;$) {
+    my ($hd, $part, $hds, $force) = @_;
 
     isSwap($part) ?
       ($part->{mntpoint} = 'swap') :
-      check_mntpoint($part->{mntpoint}, $hds);
-
-    $part->{mntpoint} eq '/boot' &&
-      $part->{start} + $part->{size} >= 1024 * partition_table::cylinder_size($hd) and
-	die "/boot on cylinder > 1024";
+      $force || check_mntpoint($part->{mntpoint}, $hd, $part, $hds);
 
     partition_table::add($hd, $part);
 }

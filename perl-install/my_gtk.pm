@@ -8,7 +8,7 @@ use vars qw(@ISA %EXPORT_TAGS @EXPORT_OK);
 %EXPORT_TAGS = (
     helpers => [ qw(create_okcancel createScrolledWindow create_menu create_notebook create_packtable create_hbox create_vbox create_adjustment create_box_with_title) ],
     wrappers => [ qw(gtksignal_connect gtkpack gtkpack_ gtkappend gtkadd gtkset_usize gtkset_justify gtkset_active gtkshow gtkdestroy gtkset_mousecursor gtkset_background) ],
-    ask => [ qw(ask_warn ask_okcancel ask_yesorno ask_from_entry ask_from_list ) ],
+    ask => [ qw(ask_warn ask_okcancel ask_yesorno ask_from_entry ask_from_list ask_file) ],
 );
 $EXPORT_TAGS{all} = [ map { @$_ } values %EXPORT_TAGS ];
 @EXPORT_OK = map { @$_ } values %EXPORT_TAGS;
@@ -262,6 +262,7 @@ sub ask_yesorno    { my $w = my_gtk->new(shift @_); $w->_ask_okcancel(@_, _("Yes
 sub ask_okcancel   { my $w = my_gtk->new(shift @_); $w->_ask_okcancel(@_, _("Is it ok?"), _("Ok"), _("Cancel")); main($w); }
 sub ask_from_entry { my $w = my_gtk->new(shift @_); $w->_ask_from_entry(@_); main($w); }
 sub ask_from_list  { my $w = my_gtk->new(shift @_); $w->_ask_from_list(@_); main($w); }
+sub ask_file       { my $w = my_gtk->new(''); $w->_ask_file(@_); main($w); }
 
 sub _ask_from_entry($$@) {
     my ($o, @msgs) = @_;
@@ -350,6 +351,14 @@ sub _ask_okcancel($@) {
     $o->{ok}->grab_focus();
 }
 
+
+sub _ask_file($$) {
+    my ($o, $title) = @_;
+    my $f = $o->{window} = new Gtk::FileSelection $title;
+    $f->ok_button->signal_connect(clicked => sub { $o->{retval} = $f->get_filename ; Gtk->main_quit });
+    $f->cancel_button->signal_connect(clicked => sub { Gtk->main_quit });
+    $f->hide_fileop_buttons;
+}
 
 ################################################################################
 # rubbish

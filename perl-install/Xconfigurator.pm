@@ -13,6 +13,8 @@ use my_gtk qw(:wrappers);
 
 my $tmpconfig = "/tmp/Xconfig";
 
+my (%cards, %monitors);
+
 1;
 
 sub setVirtual($) {
@@ -27,7 +29,9 @@ sub setVirtual($) {
 
 sub readCardsDB {
     my ($file) = @_;
-    my ($card, %cards);
+    my ($card);
+
+    %cards and return;
 
     local *F;
     open F, $file or die "file $file not found";
@@ -71,13 +75,12 @@ sub readCardsDB {
 
     # this entry is broken in X11R6 cards db 
     $cards{I128}->{flags}->{noclockprobe} = 1;
-
-    %cards;
 }
 
 sub readMonitorsDB {
     my ($file) = @_;
-    my %monitors;
+
+    %monitors and return;
 
     local *F;
     open F, $file or die "can't open monitors database ($file): ?!";
@@ -99,7 +102,6 @@ sub readMonitorsDB {
 	  $monitors{$v->[0]} = 
 	    { hsyncrange => $v->[1], vsyncrange => $v->[2] };
     }
-    %monitors;
 }
 
 sub rewriteInittab {
@@ -141,12 +143,14 @@ sub cardConfigurationAuto() {
     $card;
 }
 
-sub cardConfiguration(;$) {
-    my $card = shift || {};
+sub cardConfiguration(;$$) {
+    my ($card, $noauto) = @_;
+    $card ||= {};
+    $noauto = $::expert unless $noauto;
 
-    my %cards = readCardsDB("/usr/X11R6/lib/X11/Cards");
+    readCardsDB("/usr/X11R6/lib/X11/Cards");
 
-    add2hash($card, cardConfigurationAuto()) unless $card->{type} || $card->{server} || $::expert;
+    add2hash($card, cardConfigurationAuto()) unless $card->{type} || $card->{server} || $noauto;
     add2hash($card, { type => $in->ask_from_list('', _("Choose a graphic card"), [keys %cards]) }) unless $card->{type} || $card->{server};
     add2hash($card, $cards{$card->{type}}) if $card->{type};
     add2hash($card, { vendor => "Unknown", board => "Unknown" });
@@ -177,7 +181,7 @@ sub cardConfiguration(;$) {
 sub monitorConfiguration(;$) {
     my $monitor = shift || {};
 
-    my %monitors = readMonitorsDB("MonitorsDB");
+    readMonitorsDB("MonitorsDB");
 
     add2hash($monitor, { type => $in->ask_from_list('', _("Choose a monitor"), [keys %monitors]) }) unless $monitor->{type};
     add2hash($monitor, $monitors{$monitor->{type}});
@@ -208,6 +212,16 @@ sub testConfig($) {
 
 sub testFinalConfig($) {
     my ($o) = @_;
+
+    $o->{monitor}->{hsyncrange} && $o->{monitor}->{vsyncrange} or
+      $in->ask_warn('', _("Monitor not configured yet")), return;
+
+    $o->{card}->{server} or
+      $in->ask_warn('', _("Graphic card not configured yet")), return;
+
+    $o->{card}->{depth} or
+      $in->ask_warn('', _("Resolutions not chosen yet")), return;
+
 
     write_XF86Config($o, $::testing ? $tmpconfig : "/etc/X11/XF86Config");
 
@@ -250,8 +264,13 @@ sub autoResolutions($) {
     my ($o) = @_;
     my $card = $o->{card};
 
-    # For the mono and vga16 server, no further configuration is required.
-    return if member($card->{server}, "Mono", "VGA16");
+    $in->ask_okcancel(_("Automatic resolutions"),
+_("To find the available resolutions i will try different ones.
+Your screen will blink... 
+You can switch if off if you want, you'll hear a beep when it's over")) or return;
+
+    # swith to virtual console 1 (hopefully not X :)
+    my $vt = setVirtual(1);
 
     # Configure the modes order.
     my ($ok, $best);
@@ -266,6 +285,10 @@ sub autoResolutions($) {
 	    $card->{depth}->{$_} = [ sort { $b->[0] <=> $a->[0] } @$resolutions ];
 	}
     }
+
+    # restore the virtual console
+    setVirtual($vt);
+    print "\a"; # beeeep!
 }
 
 sub autoDefaultDepth($$) {
@@ -287,9 +310,14 @@ sub autoDefaultDepth($$) {
 }
 
 
-sub resolutionsConfiguration {
-    my ($o, $manual) = @_;
+sub resolutionsConfiguration($;$) {
+    my ($o, $option) = @_;
     my $card = $o->{card};
+    my $auto = $option eq 'auto';
+    my $noauto = $option || $::expert;
+
+    # For the mono and vga16 server, no further configuration is required.
+    return if member($card->{server}, "Mono", "VGA16");
 
     # some of these guys hate to be poked               
     # if we dont know then its at the user's discretion
@@ -318,15 +346,11 @@ sub resolutionsConfiguration {
     
     findLegalModes($card);
 
-    unless ($manual || $::expert || !$in->ask_okcancel(_("Automatic resolutions"), 
+    if ($auto || (!$noauto && $in->ask_okcancel(_("Automatic resolutions"), 
 _("I can try to find the available resolutions (eg: 800x600).
 Alas it can freeze sometimes
-Do you want to try?"))) {
-	# swith to virtual console 1 (hopefully not X :)
-	my $vt = setVirtual(1);
+Do you want to try?")))) {
 	autoResolutions($o);
-	# restore the virtual console
-	setVirtual($vt);
     }
 
     autoDefaultDepth($card, $o->{resolution_wanted} || $resolution_wanted);
@@ -457,7 +481,7 @@ sub write_XF86Config {
     print F "#" if $O->{memory} && !$O->{flags}->{needVideoRam};
     print F "    VideoRam    $O->{memory}\n" if $O->{memory};
 
-    print F map { "    $_\n" } @{$O->{lines}};
+    print F map { "    $_\n" } @{$O->{lines} || []};
 
     print F qq(    Ramdac      "$O->{ramdac}"\n) if $O->{ramdac};
     print F qq(    Dacspeed    "$O->{dacspeed}"\n) if $O->{dacspeed};
@@ -548,16 +572,17 @@ sub main {
     $o->{monitor} = monitorConfiguration($o->{monitor});
 
     my $ok = resolutionsConfiguration($o);
-
-    $ok &&= testFinalConfig($o);
+    
+    $ok = testFinalConfig($o) if $ok && $in->ask_yesorno(_("Test configuration"), _("Do you want to test configuration?"));
 
     my $quit;
     until ($ok || $quit) {
 
 	my %c = my @c = (
 	   __("Change Monitor") => sub { $o->{monitor} = monitorConfiguration() },
-           __("Change Graphic card") => sub { $o->{card} = cardConfiguration() },
-	   __("Change Resolution") => sub { resolutionsConfiguration($o, 1) },
+           __("Change Graphic card") => sub { $o->{card} = cardConfiguration(0, 1) },
+	   __("Change Resolution") => sub { resolutionsConfiguration($o, 'noauto') },
+	   __("Automaticall resolutions search") => sub { resolutionsConfiguration($o, 'auto') },
 	   __("Test again") => sub { $ok = testFinalConfig($o) },
 	   __("Quit") => sub { $quit = 1 },
         );
@@ -565,7 +590,17 @@ sub main {
 				 _("What do you want to do?"),
 				 [ grep { !ref } @c ])}};
     }
-    
-    # Success 
-#    rewriteInittab($rc ? 3 : 5) unless $::testing;
+
+    if ($ok && !$::expert) {
+	my $run5 = $in->ask_yesorno(_("X at startup"), 
+_("I can set up your computer to automatically start X upon booting.
+Would you like X to start when you reboot?"));
+	rewriteInittab($run5 ? 5 : 3) unless $::testing;
+
+	$in->ask_warn(_("X successfully configured"),
+_("Configuration file has been written. Take a look at it before running 'startx'. 
+Within the server press ctrl, alt and '+' simultaneously to cycle video resolutions. 
+Pressing ctrl, alt and backspace simultaneously immediately exits the server 
+For further configuration, refer to /usr/X11R6/lib/X11/doc/README.Config."));
+    }
 }

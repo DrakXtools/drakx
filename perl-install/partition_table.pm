@@ -13,6 +13,7 @@ use vars qw(@ISA %EXPORT_TAGS @EXPORT_OK @important_types);
 
 use common qw(:common :system);
 use partition_table_raw;
+use Data::Dumper;
 
 
 @important_types = ("Linux native", "Linux swap", "DOS FAT16", "Win98 FAT32");
@@ -74,6 +75,8 @@ my %type2fs = (
 );
 my %types_rev = reverse %types;
 my %fs2type = reverse %type2fs;
+
+my @fields2save = qw(primary extended totalsectors);
 
 
 1;
@@ -355,3 +358,38 @@ sub raw_add($$) {
     die "raw_add: partition table already full";
 }
 
+sub load($$;$) {
+    my ($hd, $file, $force) = @_;
+
+    local *F;
+    open F, $file or die _("Error reading file $file");
+
+    my $h;
+    {
+	no strict 'vars';
+	$h = eval join '', <F>;
+    }
+    $@ and die _("Restoring from file $file failed: $@");
+
+    ref $h eq 'HASH' or die _("Bad backup file");
+
+    $h->{totalsectors} == $hd->{totalsectors} or $force 
+      or die "Bad totalsectors";
+
+    # unsure we don't modify totalsectors
+    $h->{totalsectors} = $hd->{totalsectors} if $force;
+
+    @{$hd}{@fields2save} = @{$h}{@fields2save};
+
+    $hd->{isDirty} = $hd->{needKernelReread} = 1;
+}
+
+
+sub save($$) {
+    my ($hd, $file) = @_;
+    my %h; @h{@fields2save} = @{$hd}{@fields2save};
+    local *F;
+    open F, ">$file"
+      and print F Dumper(\%h) 
+      or die _("Error writing to file $file");
+}

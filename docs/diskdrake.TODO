@@ -1,9 +1,10 @@
+- the information put in save/restore partitions must be cleaned
+(remove mounted/formatted/..., also remove the Data::Dumper dependency)
 - test, test, test
 - integrate ext2resize
 - add the ability to specify primary or extended partitions (in expert mode)
 - text version
 - better error handling (what to do if we find a bad partition table?)
-- save/restore partitions in a file (mainly, just a Data::Dumper of $hds)
 - display the information about the correspondance color2type
 - handle the partition labels (missing information here)
 - have ``undo''
