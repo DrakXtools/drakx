@@ -32,7 +32,7 @@ sub install_l {
 
     @l = uniq(map { chomp_($_) } @l);
     push @l, 
-      `ldd @l 2>/dev/null | grep "=>" | perl -pe 's/.*=> //; s/ .*//; s,^/lib/.*?/,/lib/,'`;
+      `ldd @l 2>/dev/null | grep "=>" | perl -pe 's/.*=> //; s/ .*//; s,^/(lib|lib64)/.*?/,/\\1/,'`;
 
     my ($deref, $raw) = partition { /lib.*\.so/ || readlink("/$_") =~ m|/etc/alternatives| } uniq(map { chomp_($_) } @l);
     install_raw(@$raw);
@@ -100,7 +100,7 @@ _ "cp ../kernel/all.kernels/$main/modules.{cz,dep} $tmp/modules";
 installown("drvinst", "/usr/bin");
 installown("guessmounts", "/usr/bin");
 installown("install_bootloader", "/usr/bin");
-if (arch() =~ /^i.86/) {
+if (arch() =~ /^i.86|x86_64/) {
     installown("restore_ms_boot", "/usr/bin");
 }
 installown("lsparts", "/usr/bin");
