@@ -141,6 +141,7 @@ sub probe_category {
 	if ($category eq 'network/isdn') {
 	    my $b = $_->{driver} =~ /ISDN:([^,]*),?([^,]*)(?:,firmware=(.*))?/;
 	    if ($b) {
+		($_->{type}) = $_->{driver} =~ /type=(\d+)/;
 		$_->{driver} = $1;
 		$_->{options} = $2;
 		$_->{firmware} = $3;
