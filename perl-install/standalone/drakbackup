@@ -408,6 +408,7 @@ sub save_conf_file() {
 	$conf{OTHER_FILES} = list_to_conf(@other_files);
 	$conf{HOME_FILES} = list_to_conf(@user_list);
 	$conf{SYS_FILES} = list_to_conf(@sys_files);
+	mkdir_p($cfg_dir) if !-d $cfg_dir;
 	setVarsInSh($cfg_file, \%conf);
 	$conf{PASSWD} = $host_passwd if $conf{REMEMBER_PASS} != 1;
     chmod(0600, $cfg_file);
