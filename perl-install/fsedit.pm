@@ -115,7 +115,7 @@ sub get_hds {
     foreach my $hd (@drives) {
 	$hd->{readonly} = $flags->{readonly};
 
-	eval { partition_table::raw::test_for_bad_drives($hd) };
+	eval { partition_table::raw::test_for_bad_drives($hd) if !$flags->{no_bad_drives} };
 	if (my $err = $@) {
 	    if ($err =~ /write error:/) { 
 		$hd->{readonly} = 1;
