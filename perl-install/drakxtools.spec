@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10.2
-Release: 0.32mdk
+Release: 0.33mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -367,6 +367,17 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Tue Mar  1 2005 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.2-0.33mdk
+- drakconnect: enhance "wrong network mask format" message (blino, #10712)
+- drakTermServ: sort list of nbis (stew, #13998)
+- keyboardrake: set compose key as "rwin" if not set (pablo)
+- XFdrake:
+  o replaced by use monitor-edid instead of ddcxinfos
+  o add many resolutions
+  o set the "Monitor preferred modeline" from EDID in xorg.conf
+  o handle lower than 640 resolutions
+  o set better resolution
+
 * Mon Feb 28 2005 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.2-0.32mdk
 - drakboot: make sure /boot/grub/install.sh is 755 (pixel)
 - drakconnect (blino):
