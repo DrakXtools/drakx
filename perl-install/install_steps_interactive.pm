@@ -85,7 +85,7 @@ sub acceptLicense {
 
     $o->ask_from_({ title => N("License agreement"), 
 		    cancel => N("Quit"),
-		    messages => formatAlaTeX(install_messages::main_license() . "\n\n\n" . install_messages::warning_about_patents()), 
+		    messages => formatAlaTeX(install_messages::main_license() . "\n\n\n" . install_messages::warning_about_patents()),
 		    interactive_help_id => 'acceptLicense',
 		    callbacks => { ok_disabled => sub { $r eq 'Refuse' } },
 		  },
@@ -420,6 +420,7 @@ sub choosePackages {
       pkgs::setSelectedFromCompssList($packages, $o->{compssUsersChoice}, $min_mark, $availableC);
 
     $o->choosePackagesTree($packages) or goto chooseGroups if $individual;
+    $@ and log::l("<$@>");
 
     install_any::warnAboutRemovedPackages($o, $o->{packages});
     install_any::warnAboutNaughtyServers($o) or goto chooseGroups;
@@ -531,7 +532,7 @@ sub chooseGroups {
 	}
 
 	$o->reallyChooseGroups($size_to_display, $individual, \%val) or return;
-	last if pkgs::correctSize($size / sqr(1024)) < $available_size;
+	last if $::testing || pkgs::correctSize($size / sqr(1024)) < $available_size;
        
 	$o->ask_warn('', N("Selected size is larger than available space"));	
     }
@@ -582,6 +583,7 @@ sub reallyChooseGroups {
     my ($path, $all);
     $o->ask_from_({ messages => N("Package Group Selection"),
 		    interactive_help_id => 'choosePackages',
+		    callbacks => { changed => sub { $size_text = &$size_to_display } },
 		  }, [
         { val => \$size_text, type => 'label' }, {},
 	 (map { 
@@ -598,7 +600,7 @@ sub reallyChooseGroups {
 	   } @{$o->{compssUsersSorted}}),
 	 if_($o->{meta_class} eq 'desktop', { text => N("All"), val => \$all, type => 'bool' }),
 	 if_($individual, { text => N("Individual package selection"), val => $individual, advanced => 1, type => 'bool' }),
-    ], changed => sub { $size_text = &$size_to_display });
+    ]);
 
     if ($all) {
 	$val->{$_} = 1 foreach keys %$val;
