@@ -166,11 +166,7 @@ ifdown eth0
     $conf{isdn} and do { require network::isdn; network::isdn::configure($netcnx, $netc) or goto step_2 };
     $conf{adsl} and do { require network::adsl; network::adsl::configure($netcnx, $netc, $intf, $first_time) or goto step_2 };
     $conf{cable} and do { require network::ethernet; network::ethernet::configure_cable($netcnx, $netc, $intf, $first_time) or goto step_2 };
-    $conf{lan} and do { 
-    print "plop2 ------------ $in ----------- \n";
-require network::ethernet; 
-    print "plop3 ------------ $in ----------- \n";
-network::ethernet::configure_lan($netcnx, $netc, $intf, $first_time) or goto step_2 };
+    $conf{lan} and do { require network::ethernet; network::ethernet::configure_lan($netcnx, $netc, $intf, $first_time) or goto step_2 };
 
   step_3:
 

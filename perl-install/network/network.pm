@@ -250,54 +250,6 @@ sub gateway {
 
 }
 
-sub configureNetwork {
-    my ($prefix, $netc, $in, $intf, $first_time) = @_;
-    local $_;
-    any::setup_thiskind($in, 'net', !$::expert, 1);
-    my @l = detect_devices::getNet() or die _("no network card found");
-    my @all_cards = netconnect::conf_network_card_backend ($prefix, $netc, $intf, undef, undef, undef, undef);
-
-  configureNetwork_step_1:
-    my $n_card=0;
-    $netc ||= {};
-    my $last; foreach (@l) {
-	my $intf2 = findIntf($intf ||= {}, $_);
-	add2hash($intf2, $last);
-	add2hash($intf2, { NETMASK => '255.255.255.0' });
-	configureNetworkIntf($netc, $in, $intf2, $netc->{NET_DEVICE}, 0, $all_cards[$n_card]->[1]) or return;
-
-	$last = $intf2;
-	$n_card++;
-    }
-    #-	  {
-    #-	      my $wait = $o->wait_message(_("Hostname"), _("Determining host name and domain..."));
-    #-	      network::guessHostname($o->{prefix}, $o->{netc}, $o->{intf});
-    #-	  }
-    $last or return;
-    if ($last->{BOOTPROTO} =~ /^(dhcp|bootp)$/) {
-	$netc->{minus_one} = 1;
-	my $dhcp_hostname = $netc->{HOSTNAME};
-	$::isInstall and $in->set_help('configureNetworkHostDHCP');
-	$in->ask_from_entries_refH(_("Configuring network"),
-_("Please enter your host name if you know it.
-Some DHCP servers require the hostname to work.
-Your host name should be a fully-qualified host name,
-such as ``mybox.mylab.myco.com''."),
-				   [ { label => _("Host name"), val => \$netc->{HOSTNAME} }]) or goto configureNetwork_step_1;
-	$netc->{HOSTNAME} ne $dhcp_hostname and $netc->{DHCP_HOSTNAME} = $netc->{HOSTNAME};
-    } else {
-	configureNetworkNet($in, $netc, $last ||= {}, @l) or goto configureNetwork_step_1;
-	if ( $netc->{GATEWAY} ) {
-	    unlink "$prefix/etc/sysconfig/network-scripts/net_cnx_up";
-	    unlink "$prefix/etc/sysconfig/network-scripts/net_cnx_down";
-	    undef $netc->{NET_DEVICE};
-	}
-    }
-    miscellaneousNetwork($in);
-    1;
-}
-
-
 sub configureNetworkIntf {
     my ($netc, $in, $intf, $net_device, $skip, $module) = @_;
     my $text;
