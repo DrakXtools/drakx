@@ -242,7 +242,7 @@ sub reallyChooseGroups {
 			      $check->signal_connect(clicked => sub { $$individual = $check->get_active });
 			      $check;
 			  }),
-			  gtksignal_connect(Gtk2::Button->new(N("Ok")), clicked => sub { Gtk2->main_quit }),
+			  gtksignal_connect(Gtk2::Button->new(N("Next ->")), clicked => sub { Gtk2->main_quit }),
 			 ),
 		  ),
 	  );

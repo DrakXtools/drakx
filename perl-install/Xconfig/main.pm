@@ -120,7 +120,7 @@ sub configure_chooser_raw {
 			  Xconfig::various::various($in, $X->{card}, $options);
 			  $X->{various} = 'done';
 		      } },
-		    { val => $::isInstall ? N("Ok") : N("Quit"), icon => "exit", clicked_may_quit => sub { 1 } },
+		    { val => $::isInstall ? N("Next ->") : N("Quit"), icon => "exit", clicked_may_quit => sub { 1 } },
 		   ]);
     $ok, $modified;
 }
