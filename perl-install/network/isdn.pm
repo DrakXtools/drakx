@@ -70,6 +70,9 @@ sub setup_capi_conf {
 
     $in->do_pkgs->install('isdn4k-utils'); #- capi4linux service
     is_module_installed($capi_card->{driver}) or $in->do_pkgs->install($capi_card->{driver});
+    if ($capi_card->{firmware} && ! -f "$::prefix/usr/lib/isdn/$capi_card->{firmware}") {
+        $in->do_pkgs->install("$capi_card->{driver}-firmware");
+    }
 
     my $capi_conf;
     my $firmware = $capi_card->{firmware} || '-';
