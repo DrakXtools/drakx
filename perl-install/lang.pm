@@ -25,7 +25,7 @@ use log;
 #
 
 my %languages = my @languages = (
-'en_US' => [ 'English|United States',	'iso-8859-1', 'en', 'en_US:en' ],
+'en_US' => [ 'English|United States',	'C', 'en', 'en_US:en' ],
 'en_GB' => [ 'English|United Kingdom',	'iso-8859-1', 'en', 'en_GB:en' ],
 'en_IE' => [ 'English|Ireland',		'iso-8859-15','en', 'en_IE:en_GB:en' ],
 'en_US.UTF-8'=> [ 'English|UTF-8',	'utf_15',     'en', 'en_US:en' ],
@@ -291,10 +291,12 @@ my %charsets = (
 	"utf8", undef, "-*-*-*-*-*-*-*-*-*-*-*-*-gb2312.1980-0" ],
   "utf_ka"      => [ "t_geors",		"geors.uni",	"geors_to_geops.trans",
 	"utf8",  undef, "-*-*-*-*-*-*-*-*-*-*-*-*-georgian-academy" ],
-  "iso-8859-1" => [ "lat0-sun16",	undef,		"iso15",
+  "C" => [ "lat0-sun16",	undef,		"iso15",
 	"iso8859-1", "850", sub { std("iso8859-1", @_) } ],
+  "iso-8859-1" => [ "lat0-sun16",	undef,		"iso15",
+	"iso8859-1", "850", sub { std("iso8859-15", @_) } ],
   "utf_1"      => [ "lat0-sun16",	undef,		"iso15",
-	"utf8", undef, sub { std("iso8859-1", @_) } ],
+	"utf8", undef, sub { std("iso8859-15", @_) } ],
   "iso-8859-2" => [ "lat2-sun16",	undef,		"iso02",
 	"iso8859-2", "852", sub { std("iso8859-2", @_) } ],
   "utf_2"      => [ "lat2-sun16",	undef,		"iso02",
