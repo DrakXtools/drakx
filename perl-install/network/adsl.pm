@@ -12,7 +12,7 @@ use MDK::Common::Globals "network", qw($in $prefix $connect_file $disconnect_fil
 @ISA = qw(Exporter);
 @EXPORT = qw(adsl_ask_info adsl_detect adsl_conf adsl_conf_backend);
 
-sub configure{
+sub configure {
     my ($netcnx, $netc, $intf, $first_time) = @_;
     $::isInstall and $in->set_help('configureNetworkADSL');
   conf_adsl_step1:
@@ -127,14 +127,18 @@ $USERLINE
 defaultroute
 user "$adsl->{login}"
 });
-	modules::add_alias($_->[0], $_->[1]) foreach([char-major-108, ppp_generic],
-						     [tty-ldisc-3, ppp_async],
-						     [tty-ldisc-13, n_hdlc],
-						     [tty-ldisc-14, ppp_synctty],
-						     [ppp-compress-21, bsd_comp],
-						     [ppp-compress-24, ppp_deflate],
-						     [ppp-compress-26, ppp_deflate]);
+	modules::add_alias($_->[0], $_->[1]) foreach (['char-major-108', 'ppp_generic'],
+						      ['tty-ldisc-3', 'ppp_async'],
+						      ['tty-ldisc-13', 'n_hdlc'],
+						      ['tty-ldisc-14', 'ppp_synctty'],
+						      ['ppp-compress-21', 'bsd_comp'],
+						      ['ppp-compress-24', 'ppp_deflate'],
+						      ['ppp-compress-26', 'ppp_deflate']);
 	$::isStandalone and modules::write_conf($prefix);
+	$in->ask_warn('', _('You need the alcatel microcode.
+Downlaod it at
+http://www.alcatel.com/consumer/dsl/dvrreg_lx.htm
+and copy the mgmt.o in /usr/share/speedtouch'))
     }
 
     if ($adsl_type eq 'pptp') {
