@@ -493,8 +493,10 @@ sub real_format_part {
 
     if (isExt2($part)) {
 	push @options, "-F" if isLoopback($part);
+	push @options, "-m", "0" if $part->{mntpoint} =~ m|^/home|;
 	format_ext2($part->{device}, @options);
     } elsif (isThisFs("ext3", $part)) {
+	push @options, "-m", "0" if $part->{mntpoint} =~ m|^/home|;
         format_ext3($part->{device}, @options);
     } elsif (isThisFs("reiserfs", $part)) {
         format_reiserfs($part->{device}, @options, if_(c::kernel_version() =~ /^\Q2.2/, "-v", "1"));
