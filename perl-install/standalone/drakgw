@@ -23,7 +23,7 @@ use c;
 use netconnect;
 use detect_devices;
 
-$::isInstall and fatal_quit(_("Not supported during install."));
+$::isInstall and die "Not supported during install.\n";
 
 
 $::isEmbedded = ($::XID, $::CCPID) = "@ARGV" =~ /--embedded (\w+) (\w+)/;
@@ -52,7 +52,7 @@ log::l("[drakgw] kernel_version $kernel_version");
 $kernel_version eq '2.2' || $kernel_version eq '2.4' or die "Only for 2.2 or 2.4 kernels.\n";
 
 
-my $in = interactive->vnew('su');
+my $in = interactive::vnew('su');
 
 
 sub sys { system(@_) == 0 or die "sys: $_[0]" }
@@ -68,13 +68,12 @@ sub start_daemons()
            sys("/etc/rc.d/init.d/cups stop");
         }
     }
-    grep(/is running/, `/etc/rc.d/init.d/dhcpd status`) and sys("/etc/rc.d/init.d/dhcpd stop");
-    grep(/error: cannot connect/, `/etc/rc.d/init.d/named status 2>&1`) or sys("/etc/rc.d/init.d/named stop");
+    grep(/is running/, `/etc/rc.d/init.d/$_ status 2> /dev/null`) and sys("/etc/rc.d/init.d/$_ stop") foreach 'named', 'dhcpd';
     sys("/etc/rc.d/init.d/network restart");
     sys("sh $rc_firewall_generic");
 
-    sys("/etc/rc.d/init.d/$_ start") foreach 'cups', 'named', 'dhcpd';
-    sys("/sbin/chkconfig --level 345 $_ on") foreach 'named', 'dhcpd';
+    sys("/etc/rc.d/init.d/$_ start"), sys("/sbin/chkconfig --level 345 $_ on") foreach 'named', 'dhcpd';
+    sys("/etc/rc.d/init.d/cups start") if $cups_used;
     output $drakgw_setup, "INET_SHARING=enabled\n";
 }
 
@@ -256,13 +255,14 @@ foreach (grep { $_ ne $device } @configured_devices)
 
 #- test for potential conflict with previous firewall config
 
-if ($kernel_version eq "2.2") {
-    if (-f "/etc/sysconfig/ipchains" || -x "/sbin/ipchains" && listlength(`/sbin/ipchains -nL`) > 3) {
+if ($kernel_version eq '2.2') {
+    if (-f '/etc/sysconfig/ipchains' || -x '/sbin/ipchains' && listlength(`/sbin/ipchains -nL`) > 3) {
 	$in->ask_okcancel(_("Firewalling configuration detected!"),
 			  _("Warning! An existing firewalling configuration has been detected. You may need some manual fix after installation.")) or goto step_detectsetup;
     }
 } else {
-    if (-f "/etc/sysconfig/iptables" || -x "/sbin/iptables" && listlength(`/sbin/iptables -t nat -nL`) > 8) {
+    system('modprobe iptable_nat');
+    if (-f '/etc/sysconfig/iptables' || -x '/sbin/iptables' && listlength(`/sbin/iptables -t nat -nL`) > 8) {
 	$in->ask_okcancel(_("Firewalling configuration detected!"),
 			  _("Warning! An existing firewalling configuration has been detected. You may need some manual fix after installation.")) or goto step_detectsetup;
     }
@@ -294,12 +294,13 @@ ONBOOT=yes
 
 my $rpms_to_install;
 my %rpm2file = ( ipchains => "/sbin/ipchains",
-		dhcp => "/usr/sbin/dhcpd",
-		linuxconf => $conf_linuxconf,
-		bind => "/usr/sbin/named",
-		"caching-nameserver" => "/var/named/named.local");
+		 iptables => "/sbin/iptables",
+		 dhcp => "/usr/sbin/dhcpd",
+		 linuxconf => $conf_linuxconf,
+		 bind => "/usr/sbin/named",
+		 "caching-nameserver" => "/var/named/named.local");
 
-$in->standalone::pkgs_install(grep { -e $rpm2file{$_} } keys %rpm2file);
+$in->standalone::pkgs_install(grep { !-e $rpm2file{$_} } keys %rpm2file);
 -e $rpm2file{$_} or fatal_quit(_("Problems installing package $_")) foreach keys %rpm2file;
 
 
@@ -518,6 +519,10 @@ sub quit_global {
 
 #-------------------------------------------------
 #- $Log$
+#- Revision 1.26  2001/03/13 15:31:05  gc
+#- - fix destructive parts of pixelization
+#- - fix some own bugs
+#-
 #- Revision 1.25  2001/03/13 00:00:11  prigaux
 #- pixelization
 #-
