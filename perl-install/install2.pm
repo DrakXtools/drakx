@@ -172,15 +172,6 @@ sub selectKeyboard {
     return if !$::expert && !$clicked;
 
     $o->selectKeyboard($clicked);
-
-    #- if we go back to the selectKeyboard, you must rewrite
-    addToBeDone {
-	lang::write_langs($o->{prefix}, $o->{langs});
-    } 'formatPartitions' unless $::g_auto_install;
-    addToBeDone {
-	lang::write($o->{prefix}, $o->{lang});
-	keyboard::write($o->{prefix}, $o->{keyboard}, lang::lang2charset($o->{lang}));
-    } 'installPackages' unless $::g_auto_install;
 }
 
 #------------------------------------------------------------------------------
