@@ -677,7 +677,7 @@ sub wait_messageW($$$) {
     $hbox->pack_start(my $box = Gtk2::VBox->new(0,0), 1, 1, 10);  
     $box->pack_start($_, 1, 1, 4) foreach my @l = map { Gtk2::Label->new(scalar warp_text($_)) } @$messages;
 
-    ($w->{wait_messageW} = $l[$#l])->signal_connect(expose_event => sub { $w->{displayed} = 1 });
+    ($w->{wait_messageW} = $l[$#l])->signal_connect(expose_event => sub { $w->{displayed} = 1; 0 });
     $w->{rwindow}->set_position('center') if $::isStandalone && !$w->{isEmbedded} && !$w->{isWizard};
     $w->{window}->show_all;
     $w->sync until $w->{displayed};
