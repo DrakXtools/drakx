@@ -120,17 +120,14 @@ sub write {
 
     set_config_file("zones", 
 		    [ 'net', 'Net', 'Internet zone' ],
-		    if_($conf->{masquerade}, [ 'masq', 'Masquerade', 'Masquerade Local' ]),
-		    if_($conf->{loc_interface}, [ 'loc', 'Local', 'Local' ]),
+		    if_($conf->{loc_interface}[0], [ 'loc', 'Local', 'Local' ]),
 		   );
     set_config_file('interfaces',
 		    [ 'net', $conf->{net_interface}, 'detect' ],
-		    $conf->{masquerade} ? [ 'masq', $conf->{masquerade}{interface}, 'detect' ] : (),
 		    (map { [ 'loc', $_, 'detect' ] } @{$conf->{loc_interface} || []}),
 		   );
     set_config_file('policy',
-		    if_($conf->{masquerade}, [ 'masq', 'net', 'ACCEPT' ]),
-		    if_($conf->{loc_interface}, [ 'loc', 'net', 'ACCEPT' ]),
+		    if_($conf->{loc_interface}[0], [ 'loc', 'net', 'ACCEPT' ]),
 		    [ 'fw', 'net', 'ACCEPT' ],
 		    [ 'net', 'all', 'DROP', 'info' ],
 		    [ 'all', 'all', 'REJECT', 'info' ],
@@ -140,20 +137,19 @@ sub write {
 		    if_(cat_("$::prefix$connect_file") =~ /pptp/, [ 'ACCEPT', 'fw', 'loc:10.0.0.138', 'gre' ]),
 		    (map { 
 			map_each { [ 'ACCEPT', $_, 'fw', $::a, join(',', @$::b), '-' ] } %ports_by_proto 
-		    } ('net', if_($conf->{masquerade}, 'masq'), if_($conf->{loc_interface}, 'loc'))),
-		    if_($conf->{masquerade}, map { [ 'ACCEPT', 'masq', 'fw', $_, join(',', @drakgw_ports), '-' ] } 'tcp', 'udp'),
-	            if_($conf->{masquerade}, map { [ 'ACCEPT', 'fw', 'masq', $_, join(',', @internal_ports), '-' ] } 'tcp', 'udp'),
+		    } ('net', if_($conf->{loc_interface}[0], 'loc'))),
 		   );
     set_config_file('masq', 
 		    $conf->{masquerade} ? [ $conf->{net_interface}, $conf->{masquerade}{subnet} ] : (),
 		   );
-		   system('uniq /etc/shorewall/masq > /etc/shorewall/masq.uniq');
-		   rename("/etc/shorewall/masq.uniq", "/etc/shorewall/masq");
+#		   system('uniq /etc/shorewall/masq > /etc/shorewall/masq.uniq');
+#		   system('uniq /etc/shorewall/interfaces > /etc/shorewall/interfaces.uniq');
+#		   rename("/etc/shorewall/masq.uniq", "/etc/shorewall/masq");
+#		   rename("/etc/shorewall/interfaces.uniq", "/etc/shorewall/interfaces");
 		   
     if ($conf->{disabled}) {
 	run_program::rooted($::prefix, 'chkconfig', '--del', 'shorewall');
 	run_program::run('service', '>', '/dev/null', 'shorewall', 'stop') if $::isStandalone;
-	run_program::run('service', '>', '/dev/null', 'shorewall', 'clear') if $::isStandalone;
     } else {
 	run_program::rooted($::prefix, 'chkconfig', '--add', 'shorewall');
 	run_program::run('service', '>', '/dev/null', 'shorewall', 'restart') if $::isStandalone;

@@ -168,7 +168,7 @@ sub choose {
     $in->ask_from_({
 		    messages => N("Which services would you like to allow the Internet to connect to?"),
 		    advanced_messages => N("You can enter miscellaneous ports. 
-Valid examples are: 139/tcp 139/udp.
+Valid examples are: 139/tcp 139/udp 600:610/tcp 600:610/udp.
 Have a look at /etc/services for information."),
 		    callbacks => {
 			complete => sub {
