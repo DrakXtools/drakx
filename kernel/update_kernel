@@ -106,7 +106,7 @@ if [ -n "$rpm" -a ! -e $ALL_KERNELS/$rpm ]; then
     cd ../..
 
     for dir in /tftpboot /var/lib/tftpboot; do
-	rm -f $dir/{vmlinuz,network.rdz}
+	rm -f $dir/{vmlinuz,network.rdz,all.rdz}
     done
 fi 
 

@@ -93,7 +93,7 @@ if ($arch =~ /i.86/ && $img =~ /all/) {
 
 if (my ($tftpboot) = grep { -e $_ } qw(/tftpboot /var/lib/tftpboot)) {
     system("/bin/cp -f kernel/all.kernels/$main/boot/vmlinu* $tftpboot/vmlinuz 2>/dev/null");
-    system("/bin/cp -f images/network.rdz-$main $tftpboot/network.rdz 2>/dev/null");
+    system("/bin/cp -f images/all.rdz-$main $tftpboot/all.rdz 2>/dev/null");
 }
 
 sub install_stripped { _ "strip $_[0]"; _ "$sudo install $_[0] $_[1]" }
