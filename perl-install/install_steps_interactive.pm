@@ -51,7 +51,7 @@ sub charsetChanged {}
 sub selectLanguage {
     my ($o) = @_;
 
-    any::selectLanguage($o, $o->{lang}, $o->{langs} ||= {});
+    $o->{lang} = any::selectLanguage($o, $o->{lang}, $o->{langs} ||= {});
     install_steps::selectLanguage($o);
 
     $o->charsetChanged;
