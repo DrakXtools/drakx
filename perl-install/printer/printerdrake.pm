@@ -2814,8 +2814,8 @@ sub main {
     }
 
     # If we have chosen a spooler, install it and mark it as default spooler
-    if ($printer->{SPOOLER} && $printer->{SPOOLER} ne '') {
-	if (!install_spooler($printer, $in, $upNetwork)) { return }
+    if ($printer->{SPOOLER}) {
+        return unless install_spooler($printer, $in, $upNetwork);
         printer::default::set_spooler($printer);
     }
 
@@ -2835,8 +2835,8 @@ sub main {
 	# dialog should leave the program
 	$continue = 0;
 	# Get the default printer
-	if (defined($printer->{SPOOLER}) && $printer->{SPOOLER} ne '' &&
-	    (!defined($printer->{DEFAULT}) || $printer->{DEFAULT} eq '')) {
+	if (defined($printer->{SPOOLER}) && $printer->{SPOOLER} &&
+	    (!defined($printer->{DEFAULT}) || $printer->{DEFAULT})) {
 	    my $w = $in->wait_message(N("Printerdrake"),
 				      N("Preparing Printerdrake..."));
 	    $printer->{DEFAULT} = printer::default::get_printer($printer);
@@ -2852,11 +2852,9 @@ sub main {
 	}
 
 	# Configure the current printer queues in applications
-	{
-	    my $w = $in->wait_message(N("Printerdrake"),
-				      N("Configuring applications..."));
-	    printer::main::configureapplications($printer);
-	}
+     my $w = $in->wait_message(N("Printerdrake"), N("Configuring applications..."));
+     printer::main::configureapplications($printer);
+     undef $w;
 
 	if ($editqueue) {
 	    # The user was either in the printer modification dialog and did
@@ -3030,9 +3028,7 @@ sub main {
 		    $menuchoice = "\@addprinter"; 
 		}
 		# Refresh printer list
-		if ($menuchoice eq "\@refresh") {
-		    next;
-		}
+		next if $menuchoice eq "\@refresh";
 		# Configure CUPS
 		if ($menuchoice eq "\@cupsconfig") {
 		    config_cups($printer, $in, $upNetwork);
