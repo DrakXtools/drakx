@@ -514,13 +514,9 @@ rpmdbNameTraverse(db, name, ...)
     callback = ST(2);
   }
   count = 0;
-  fprintf(stderr, "name traverse with %d items on name of length %d and value [%s]\n", items, strlen(name), name);
   mi = rpmdbInitIterator(db, RPMTAG_NAME, name, 0);
-  fprintf(stderr, "-- 1\n");
   oldcb = rpmErrorSetCallback(rpmError_callback_empty);
-  fprintf(stderr, "-- 2\n");
   while (h = rpmdbNextIterator(mi)) {
-  fprintf(stderr, "-- *\n");
     if (callback != &PL_sv_undef && SvROK(callback)) {
       dSP;
       ENTER;
@@ -534,11 +530,8 @@ rpmdbNameTraverse(db, name, ...)
     }
     ++count;
   }
-  fprintf(stderr, "-- 3\n");
   rpmErrorSetCallback(oldcb);
-  fprintf(stderr, "-- 4\n");
   rpmdbFreeIterator(mi);
-  fprintf(stderr, "-- 5\n");
   RETVAL = count;
   OUTPUT:
   RETVAL
@@ -710,7 +703,7 @@ rpmRunTransactions(trans, callbackOpen, callbackClose, callbackMessage, force)
   	i = perl_call_sv(callbackOpen, G_SCALAR);
         SPAGAIN;
         if (i != 1) croak("Big trouble\n");
-        i = POPi; fd = fdDup(i); close(i);
+        i = POPi; fd = fdDup(i);
 	fd = fdLink(fd, "persist DrakX");
   	PUTBACK;
         return fd;
