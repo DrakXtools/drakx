@@ -66,6 +66,13 @@ sub size2default_resolution {
     $monitorSize2resolution{round($size)} || ($size < 13 ? "640x480" : "1600x1200");
 }
 
+sub to_string {
+    my ($resolution) = @_;
+    $resolution or return;
+
+    sprintf("%sx%s %dbpp", @$resolution{'X', 'Y', 'Depth'});
+}
+
 sub allowed {
     my ($card) = @_;
 
@@ -280,7 +287,7 @@ sub choose_gtk {
     $x_res_combo->entry->set_text($chosen_x_res . "x" . $x_res2y_res{$chosen_x_res});
     $W->main or return;
 
-    { X => $chosen_x_res, Depth => $chosen_Depth };
+    first(grep { $_->{X} == $chosen_x_res && $_->{Depth} == $chosen_Depth } @resolutions);
 }
 
 1;
