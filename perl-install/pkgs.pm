@@ -67,11 +67,12 @@ autoirpm autoirpm-icons numlock
   'ko'	=> [ 'rxvt-CLE', 'fonts-ttf-korean' ],
 # 'lt'	=> iso8859-13 fonts
 # 'lv'	=> iso8859-13 fonts
+# 'mi'	=> iso8859-13 fonts
 # 'mk'	=> [ 'fonts-ttf-cyrillic' ],
   'pl'	=> [ 'XFree86-ISO8859-2', 'XFree86-ISO8859-2-75dpi-fonts' ],
   'ro'	=> [ 'XFree86-ISO8859-2', 'XFree86-ISO8859-2-75dpi-fonts' ],
 # 'ru_RU.KOI8-R' => [ 'XFree86-cyrillic-fonts', 'fonts-ttf-cyrillic' ],
-  'ru'	=> [ 'XFree86-cyrillic-fonts' ],
+  'ru_RU.KOI8-R' => [ 'XFree86-cyrillic-fonts' ],
   'sk'	=> [ 'XFree86-ISO8859-2', 'XFree86-ISO8859-2-75dpi-fonts' ],
   'sl'	=> [ 'XFree86-ISO8859-2', 'XFree86-ISO8859-2-75dpi-fonts' ],
 # 'sp'	=> [ 'fonts-ttf-cyrillic' ],
