@@ -29,7 +29,7 @@ sub list { map { $_->[0] } values %languages }
 sub text2lang {
     my ($t) = @_;
     while (my ($k, $v) = each %languages) {
-	$v->[0] eq $t and return $k;
+	lc($v->[0]) eq lc($t) and return $k;
     }
     die "unknown language $t";
 }

@@ -19,7 +19,7 @@ use pkgs;
 use smp;
 use lang;
 
-$::testing = $ENV{PERL_INSTALL_TEST};
+$::testing = 1;#$ENV{PERL_INSTALL_TEST};
 $INSTALL_VERSION = 0;
 
 my @installStepsFields = qw(text help skipOnCancel skipOnLocal prev next);
@@ -79,6 +79,8 @@ for (my $i = 0; $i < @upgradeSteps; $i += 2) {
 $upgradeSteps{first} = $upgradeSteps[0];
 
 
+my @install_classes = (__("newbie"), __("developer"), __("server"), __("expert"));
+
 # partition layout for a server
 my @serverPartitioning = (
 		     { mntpoint => "/boot", size =>  16 << 11, type => 0x83 }, 
@@ -99,13 +101,6 @@ my $default = {
     bootloader => { onmbr => 1, linear => 0 },
     mkbootdisk => 0,
     base => [ qw(basesystem console-tools mkbootdisk linuxconf anacron linux_logo rhs-hwdiag utempter ldconfig chkconfig ntsysv mktemp setup setuptool filesystem MAKEDEV SysVinit ash at authconfig bash bdflush binutils console-tools crontabs dev e2fsprogs ed etcskel file fileutils findutils getty_ps gpm grep groff gzip hdparm info initscripts isapnptools kbdconfig kernel less ldconfig lilo logrotate losetup man mkinitrd mingetty modutils mount net-tools passwd procmail procps psmisc mandrake-release rootfiles rpm sash sed setconsole setserial shadow-utils sh-utils slocate stat sysklogd tar termcap textutils time timeconfig tmpwatch util-linux vim-minimal vixie-cron which) ],
-    comps => [ 
-	      [ 0, __('X Window System') => qw(XFree86 XFree86-xfs XFree86-75dpi-fonts) ],
-	      [ 0, __('KDE') => qw(kdeadmin kdebase kthememgr kdegames kjumpingcube kdegraphics kdelibs kdemultimedia kdenetwork kdesupport kdeutils kBeroFTPD kdesu kdetoys kpilot kcmlaptop kdpms kpppload kmpg) ],
-	      [ 0, __('Console Multimedia') => qw(aumix audiofile esound sndconfig awesfx rhsound cdp mpg123 svgalib playmidi sox mikmod) ],
-	      [ 0, __('CD-R burning and utilities') => qw(mkisofs cdrecord cdrecord-cdda2wav cdparanoia xcdroast) ],
-	      [ 0, __('Games') => qw(xbill xboard xboing xfishtank xgammon xjewel xpat2 xpilot xpuzzles xtrojka xkobo freeciv) ],
-	     ],
     packages => [ qw() ],
     partitionning => { clearall => $::testing, eraseBadPartitions => 1, autoformat => 1 },
     partitions => [
@@ -129,20 +124,10 @@ sub selectPath {
     $o->{isUpgrade} = $o->selectInstallOrUpgrade;
     $o->{steps}        = $o->{isUpgrade} ? \%upgradeSteps : \%installSteps;
     $o->{orderedSteps} = $o->{isUpgrade} ? \@orderedUpgradeSteps : \@orderedInstallSteps;
-
-    $o->{comps} = [ @{$o->{default}->{comps}} ];
-    foreach (@{$o->{comps}}) {
-	my ($selected, $name, @packages) = @$_;
-	$_ = { selected => $selected, name => $name, packages => \@packages };
-    }
 }
 
 sub selectInstallClass {
-    $o->{installClass} = $o->selectInstallClass;
-
-    if ($o->{installClass} eq 'Server') {
-	#TODO
-    }
+    $o->{installClass} = $o->selectInstallClass(@install_classes);
 }
 
 sub setupSCSI {
@@ -199,14 +184,18 @@ sub findInstallFiles {
 
     $o->{packages} = pkgs::psUsingDirectory();
     pkgs::getDeps($o->{packages});
+
+    $o->{compss} = pkgs::readCompss($o->{packages});
 }
  
 sub choosePackages {
-    foreach (@{$o->{default}->{base}}) { pkgs::select($o->{packages}, $_) }
-    $o->choosePackages($o->{packages}, $o->{comps}); 
-
-    my @p = @{$o->{default}->{base}}, grep { $_->{selected} } @{$o->{comps}};
+    my @p = @{$o->{default}->{base}};
     push @p, "kernel-smp" if smp::detect();
+
+    foreach (@p) { $o->{packages}->{$_}->{base} = 1 }
+
+    pkgs::setCompssSelected($o->{compss}, $o->{packages}, $o->{installClass});
+    $o->choosePackages($o->{packages}, $o->{compss}); 
 
     foreach (@p) { $o->{packages}->{$_}->{selected} = 1 }
 }
@@ -249,7 +238,7 @@ install chapter of the Official Linux Mandrake User's Guide.");
 }
 
 sub main {
-    $SIG{__DIE__} = sub { chomp $_[0]; log::l("ERROR: $_[0]") };
+#    $SIG{__DIE__} = sub { chomp $_[0]; log::l("ERROR: $_[0]") };
 
     #  if this fails, it's okay -- it might help with free space though 
     unlink "/sbin/install";

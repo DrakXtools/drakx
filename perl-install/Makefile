@@ -31,11 +31,11 @@ tar-diskdrake: clean
 
 c/c.xs: c/c.xs.pm
 	rm -f $@
-	perl $< > $@
+	export C_RPM=1 ; perl $< > $@
 	chmod a-w $@
 
 $(SO_FILES): c/c.xs
-	test -e c/Makefile || (cd c; perl Makefile.PL)
+	test -e c/Makefile || (cd c; export C_RPM=1 ; perl Makefile.PL)
 	$(MAKE) -C c
 
 install1_hd: install1_hd.c

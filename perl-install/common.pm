@@ -6,7 +6,7 @@ use vars qw(@ISA %EXPORT_TAGS @EXPORT_OK $printable_chars $sizeof_int $bitof_int
 
 @ISA = qw(Exporter);
 %EXPORT_TAGS = (
-    common => [ qw(_ __ min max bool member divide is_empty_array_ref set_new set_add round_up round_down first second top uniq translate) ],
+    common => [ qw(_ __ min max bool member divide is_empty_array_ref set_new set_add round_up round_down first second top uniq translate untranslate) ],
     file => [ qw(dirname basename all glob_ cat_ chop_ mode) ],
     system => [ qw(sync makedev unmakedev psizeof strcpy gettimeofday syscall_ crypt_) ],
     constant => [ qw($printable_chars $sizeof_int $bitof_int $SECTORSIZE) ],
@@ -95,4 +95,10 @@ sub translate {
 	}
     }
     $po::I18N::I18N{$s} || $s;
+}
+
+sub untranslate($@) {
+    my $s = shift;
+    foreach (@_) { translate($_) eq $s and return $_ }
+    die "untranslate failed";
 }

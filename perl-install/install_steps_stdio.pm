@@ -28,8 +28,8 @@ sub leavingStep {
 }
 
 sub chooseLanguage($) {
-    my $lang = lang::text2lang(ask_from_list('Language', 
-					     'Which language do you want?', 
+    my $lang = lang::text2lang(ask_from_list("Language", # no use translating this
+					     "Which language do you want?",
 					     [ lang::list() ]));
     run_program::run('xmodmap', "/usr/bin/$lang.map");
     $lang;
@@ -37,6 +37,14 @@ sub chooseLanguage($) {
 
 sub selectInstallOrUpgrade($) {
     ask_yesorno('Install/Upgrade', 'Do you want to upgrade an already installed Mandrake?');
+}
+
+sub selectInstallClass($@) {
+    my ($o, @classes) = @_;
+    my $c = ask_from_list(_("Install Class"),
+			  _("What type of user will you have?"),
+			  [ map { translate($_) } @classes ]);
+    untranslate($c, @classes);
 }
 
 sub rebootNeeded($) {
@@ -57,14 +65,14 @@ sub choosePartitionsToFormat($$) {
 }
 
 sub choosePackages($$$) {
-    my ($o, $packages, $comps) = @_;
+    my ($o, $packages, $compss) = @_;
     my @r = ask_many_from_list('',
 			       "Choose the packages you want to install",
-			       [ map { $_->{name} } @$comps ], 
-			       [ map { $_->{selected} } @$comps ]);
+			       [ map { $_->{name} } @$compss ], 
+			       [ map { $_->{selected} } @$compss ]);
     
-    for (my $i = 0; $i < @$comps; $i++) {
-	$comps->[$i]->{selected} = $r[$i];
+    for (my $i = 0; $i < @$compss; $i++) {
+	$compss->[$i]->{selected} = $r[$i];
     }
 }
 

@@ -45,8 +45,8 @@ sub chooseLanguage($) {
 sub selectInstallOrUpgrade($) {
     $o->{default}->{isUpgrade} || 0;
 }
-sub selectInstallClass($) {
-    $o->{default}->{installClass} || 'Custom';
+sub selectInstallClass($@) {
+    $o->{default}->{installClass} || $_[1];
 }
 sub setupSCSIInterfaces {
     die "TODO";
@@ -72,7 +72,7 @@ sub choosePartitionsToFormat($$) {
 }
 
 sub choosePackages($$$) {
-    my ($o, $packages, $comps) = @_;
+    my ($o, $packages, $compss) = @_;
 }
 
 sub beforeInstallPackages($) {

@@ -15,7 +15,7 @@ use log;
 
 1;
 
-sub fileInBase { member($_[0], qw(hdlist comps depslist)); }
+sub fileInBase { member($_[0], qw(hdlist compss depslist)); }
 
 sub imageGetFile { 
     fileInBase($_[0]) and return "/tmp/rhimage/Mandrake/base/$_[0]";
@@ -170,5 +170,5 @@ sub upgrChoosePackages {
 #	 psVerifyDependencies(&$::o->{packages}, 1);
 #    }
 #
-#    return psSelectPackages(&$::o->{packages}, &$::o->{comps}, NULL, 0, 1);
+#    return psSelectPackages(&$::o->{packages}, &$::o->{compss}, NULL, 0, 1);
 }

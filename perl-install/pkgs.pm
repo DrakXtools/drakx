@@ -20,33 +20,32 @@ my @skipThesesPackages = qw(XFree86-8514 XFree86-AGX XFree86-FBDev XFree86-Mach3
 
 sub skipThisPackage { member($_[0], @skipThesesPackages) }
 
-
 sub Package {
     my ($packages, $name) = @_;
     $packages->{$name} or die "unknown package $name";
 }
-sub select($$) {
-    my ($packages, $name) = @_;
-    my $p = Package($packages, $name);
+
+sub select($$;$) {
+    my ($packages, $p, $base) = @_;
     $p->{selected} = -1; # selected by user
     my @l = @{$p->{deps}};
     while (@l) {
 	my $n = shift @l;
 	my $i = Package($packages, $n);
+	$i->{base} = $base;
 	push @l, @{$i->{deps}} unless $i->{selected};
 	$i->{selected}++ unless $i->{selected} == -1;
     }
 }
 sub unselect($$) {
-    my ($packages, $name) = @_;
-    my $p = Package($packages, $name);
-    my $set = set_new($name);
+    my ($packages, $p) = @_;
+    my $set = set_new($p->{name});
     my $l = $set->{list};
 
     # get the list of provided packages
     foreach my $q (@$l) {
 	my $i = Package($packages, $q);
-	$i->{selected} or next;
+	$i->{selected} && !$i->{base} or next;
 	$i->{selected} = 1; # that way, its counter will be zero the first time
 	set_add($set, @{$i->{provides} || []});
     }
@@ -78,12 +77,12 @@ sub unselect($$) {
     }
 }
 sub toggle($$) {
-    my ($packages, $name) = @_;
-    Package($packages, $name)->{selected} ? unselect($packages, $name) : &select($packages, $name);
+    my ($packages, $p) = @_;
+    $p->{selected} ? unselect($packages, $p) : &select($packages, $p);
 }
 sub set($$$) {
-    my ($packages, $name, $val) = @_;
-    $val ? &select($packages, $name) : unselect($packages, $name);
+    my ($packages, $p, $val) = @_;
+    $val ? &select($packages, $p) : unselect($packages, $p);
 }
 
 sub addInfosFromHeader($$;$) {
@@ -116,12 +115,64 @@ sub getDeps($) {
     my ($packages) = @_;
 
     local *F;
-    open F, install_any::imageGetFile("depslist"); # or die "can't find dependencies list";
+    open F, install_any::imageGetFile("depslist") or die "can't find dependencies list";
     foreach (<F>) {
 	my ($name, $size, @deps) = split;
 	$packages->{$name}->{size} = $size;
 	$packages->{$name}->{deps} = \@deps;
 	map { push @{$packages->{$_}->{provides}}, $name } @deps;
+    }
+}
+
+sub readCompss($) {
+    my ($packages) = @_;
+    my (@compss, $ps, $category);
+
+    local *F;
+    open F, install_any::imageGetFile("compss") or die "can't find compss";
+    foreach (<F>) {
+	/^\s*$/ || /^#/ and next;
+	s/#.*//;
+	my ($options, $name) = /^(\S*)\s+(.*?)\s*$/ or die "bad line in compss: $_";
+
+	if ($name =~ /(.*):$/) {
+	    if ($category) {
+		push @compss, $category;
+		$ps = [];
+	    }
+	    $category = { options => $options, name => $1, packages => $ps };
+	} else {
+	    my $p = $packages->{$name} or log::l("unknown package $name (in compss)"), next;
+	    $p->{options} = $options;
+	    push @$ps, $p;
+	}
+    }
+    [ @compss, $category ];
+}
+
+sub setCompssSelected($$$) {
+    my ($compss, $packages, $install_class, $select) = @_;
+
+    my $l = substr($install_class, 0, 1);
+    my $L = uc $l;
+
+    my $verif_lang = sub {
+	$_[0] =~ /-([^-]*)$/;
+	$1 eq $ENV{LANG} || eval { lang::text2lang($1) eq $ENV{LANG} } && !$@;
+    };
+
+    foreach my $c (@$compss) {
+	$c->{show} = bool($c->{options} =~ /($l|\*)/);
+	my $nb = 0;
+	foreach my $p (@{$c->{packages}}) {
+	    local $_ = $p->{options};
+	    $p->{show} = ! (/$L/);
+
+	    &select($packages, $p, $p->{base}), $nb++ 
+	      if /$l|\*/ && (!/l/ || &$verif_lang($p->{name})) ||
+		 $p->{base};
+	}
+	$c->{selected} = $nb;
     }
 }
 
