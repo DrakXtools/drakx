@@ -322,7 +322,7 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
   o only offer to connect now for ppp connections
   o fix module retrieving when configuring an adsl connection over
     ethernet
-- authentication:
+- authentication: (pixel)
   o install ldap packages *before* doing ldapsearch
   o pam*.so modules do not have /lib/security/ prefix anymore
 
