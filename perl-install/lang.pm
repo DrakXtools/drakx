@@ -335,10 +335,10 @@ my %charsets = (
 );
 
 my %bigfonts = (
-    Big5     => 'taipei16.pcf.gz',
-    gb2312   => 'gb16fs.pcf.gz',
-    jisx0208 => 'k14.pcf.gz',
-    ksc5601  => 'baekmuk_gulim_h_14.pcf.gz',
+    Big5     => '18x18mdk.pcf',
+    gb2312   => '18x18mdk.pcf',
+    jisx0208 => '12x13mdk.pcf',
+    ksc5601  => '18x18mdk.pcf',
     unicode  => 'cu12.pcf.gz',
 );
 
