@@ -414,7 +414,6 @@ I'll try to go on blanking bad partitions"));
 
 }
 
-#-PADTODO
 sub formatPartitions {
     $o->choosePartitionsToFormat($o->{fstab});
 
@@ -427,15 +426,12 @@ sub formatPartitions {
 }
 
 #------------------------------------------------------------------------------
-#-PADTODO
 sub choosePackages {
-    install_any::setPackages($o, \@install_classes);
-    $o->choosePackages($o->{packages}, $o->{compss}); 
+    $o->choosePackages($o->{packages}, $o->{compss}, \@install_classes); 
     $o->{packages}{$_}{selected} = 1 foreach @{$o->{base}};
 }
 
 #------------------------------------------------------------------------------
-#-PADTODO
 sub doInstallStep {
     $o->beforeInstallPackages;
     $o->installPackages($o->{packages});

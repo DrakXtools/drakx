@@ -38,7 +38,8 @@ sub getFile($) {
 	*install_any::getFile = \&ftp::getFile;
     } else {
 	*install_any::getFile = sub($) {
-	    open getFile, "/tmp/rhimage/" . relGetFile($_[0]) or return;
+	    print ">>>>>> /tmp/rhimage/" . relGetFile($_[0]), "\n";
+	    open getFile, "/tmp/rhimage/" . relGetFile($_[0]) or sleep(1000), return;
 	    \*getFile;
 	};
     }
