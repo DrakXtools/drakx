@@ -557,6 +557,7 @@ sub mount {
 	system('mount', $dev, $where) == 0 or die _("mount failed");
     } elsif (member($fs, 'ext2', 'proc', 'usbdevfs', 'iso9660', @fs_modules)) {
 	$dev = devices::make($dev) if $fs ne 'proc' && $fs ne 'usbdevfs';
+	$where =~ s|/$||;
 
 	my $flag = c::MS_MGC_VAL();
 	$flag |= c::MS_RDONLY() if $rdonly;
@@ -579,8 +580,13 @@ sub mount {
 	} elsif ($fs eq 'iso9660') {
 	    eval { modules::load('isofs') };
 	}
-
-	$where =~ s|/$||;
+	if ($fs eq 'ext3' && $::isInstall) {
+	    # ext3 mount to use the journal
+	    syscall_('mount', $dev, $where, $fs, $flag, $mount_opt) or die _("mount failed: ") . "$!";
+	    syscall_('umount', $where);
+	    # really mount as ext2 during install for speed up
+	    $type = 'ext2';
+	}
 	log::l("calling mount($dev, $where, $fs, $flag, $mount_opt)");
 	syscall_('mount', $dev, $where, $fs, $flag, $mount_opt) or die _("mount failed: ") . "$!";
     } else {
