@@ -39,8 +39,8 @@ $::isStandalone = 1;
 
 my $printer; eval { $printer = printer::getinfo('') };
 /-lpr/ and $printer->{mode} = 'lpr';
-/-cups/ and $printer->{mode} = 'cups';
-$printer->{mode} ||= 'cups'; #- assume this default if nothing found.
+/-cups/ and $printer->{mode} = 'CUPS';
+$printer->{mode} ||= 'CUPS'; #- assume this default if nothing found.
 
 my $in = vnew interactive('su');
 

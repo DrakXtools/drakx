@@ -422,7 +422,7 @@ name (often lp) and a spool directory associated with it. What
 name and directory should be used for this queue and how is the printer connected?"), [
 _("Name of queue") => { val => \$printer->{QUEUE} },
 _("Spool directory") => { val => \$printer->{SPOOLDIR} },
-_("Printer Connection") => { val => \$printer->{str_type}, list => [ printer::printer_type($printer) ] },
+_("Printer Connection") => { val => \$printer->{str_type}, list => [ printer::printer_type($printer) ], not_edit => 1 },
 										      ],
 					       changed => sub {
 						   $printer->{SPOOLDIR} = printer::default_spooldir($printer) unless $_[0];

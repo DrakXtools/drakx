@@ -548,7 +548,7 @@ sub configurePrinter {
     my ($use_cups, $use_lpr) = (0, 0);
     foreach (values %{$o->{printer}{configured} || {}}) {
 	for ($_->{mode}) {
-	    /cups/ and $use_cups++;
+	    /CUPS/ and $use_cups++;
 	    /lpr/  and $use_lpr++;
 	}
     }
