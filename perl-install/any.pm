@@ -689,9 +689,6 @@ sub selectCountry {
 
     my ($other, $ext_country);
     member($country, @best) or ($ext_country, $country) = ($country, $ext_country);
-    my %cfg = getVarsFromSh($< ? "$::prefix$ENV{HOME}/.i18n" : "$::prefix/etc/sysconfig/i18n");
-    my %ims = lang::get_ims();
-    my $im = find { $ims{$_}{XIM_PROGRAM} eq $cfg{XIM_PROGRAM} } keys %ims;
     $in->ask_from_(
 		  { title => N("Country / Region"), 
 		    messages => N("Please choose your country."),
@@ -705,11 +702,10 @@ sub selectCountry {
 				 list => \@best, sort => 1 }),
 		    { val => \$ext_country, type => 'list', format => \&lang::c2name,
 		      list => [ difference2(\@countries, \@best) ], advanced => scalar(@best) },
-		    { val => \$im, type => 'list', label => N("Input method:"), 
-		      list => [ 'None', sort keys %ims ], advanced => 1, format => sub { uc(translate($_[0])) }, },
+		    { val => \$locale->{IM}, type => 'list', label => N("Input method:"), 
+		      list => [ N_("None"), sort(lang::get_ims()) ], advanced => 1, format => sub { uc(translate($_[0])) }, },
 		  ]) or return;
 
-    $locale->{IM} = $im if ($im ne 'None');
     $locale->{country} = $other || !@best ? $ext_country : $country;
 }
 

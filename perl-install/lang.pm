@@ -527,9 +527,7 @@ my %gtkqt_im =
 
 );
 
-sub get_ims() {
-    %gtkqt_im;
-}
+sub get_ims() { keys %gtkqt_im }
            
 
 my %xim = (
@@ -943,7 +941,12 @@ sub read {
     $prefix ||= "";
     my ($f1, $f2) = ("$prefix$ENV{HOME}/.i18n", "$prefix/etc/sysconfig/i18n");
     my %h = getVarsFromSh($user_only && -e $f1 ? $f1 : $f2);
-    system_locales_to_ourlocale($h{LC_MESSAGES} || 'en_US', $h{LC_MONETARY} || 'en_US');
+    my $locale = system_locales_to_ourlocale($h{LC_MESSAGES} || 'en_US', $h{LC_MONETARY} || 'en_US');
+    
+    if ($h{XIM_PROGRAM}) {
+	$locale->{IM} = find { $gtkqt_im{$_}{XIM_PROGRAM} eq $locale->{XIM_PROGRAM} } keys %gtkqt_im;
+    }
+    $locale;
 }
 
 sub write_langs {
@@ -1006,8 +1009,8 @@ sub write {
 	}
 	
     }
-    add2hash $h, $gtkqt_im{$locale->{IM}};
-    add2hash $h, $xim{$h->{LANG}};
+    add2hash($h, $gtkqt_im{$locale->{IM}});
+    add2hash($h, $xim{$h->{LANG}});
 
     #- deactivate translations on console for RTL languages
     if ($h->{LANG} =~ /ar|fa|he|ur|yi/) {
