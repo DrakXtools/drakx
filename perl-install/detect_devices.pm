@@ -267,8 +267,6 @@ my %eide_hds = (
     "ST3" => "Seagate Technology",
     "TEAC" => "Teac",
     "TOSHIBA" => "Toshiba",
-    "TEAC" => "Teac",
-    "TOSHIBA" => "Toshiba",
     "WDC" => "Western Digital Corp.",
 );
 
