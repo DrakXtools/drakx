@@ -89,7 +89,6 @@ my @media_types = (translate(N_("hd")), "cd", translate(N_("tape")));
 my %cd_devices;
 my $std_device;
 my @tape_devices;
-my $tar_ext = "tar.gz";
 my $in;
 
 # config. FILES -> Default PATH  & Global variables.
@@ -120,6 +119,7 @@ my @list_of_rpm_to_install;
 my @other_files;
 my @sys_files = "/etc";
 my $host_passwd;
+my $untar_prefix;
 
 # allow not-root user with own config
 if ($ENV{USER} ne 'root' && $ENV{HOME} ne '/root') {
@@ -187,7 +187,7 @@ sub explain_conf() {
 	print "NO_SYS_FILES               Don't backup system files.\n";
 	print "NO_USER_FILES              Don't backup user files.\n";
 	print "BACKUPIGNORE               Honor .backupignore files in backup directories\n";
-	print "OPTION_COMP                Compression option (tar.gz is default, 1 = tar.bz2).\n";
+	print "OPTION_COMP                Compression option (tar.gz, tar.bz2, tar).\n";
 	print "NO_BROWSER_CACHE           Skip web browser cache.\n";
 	print "CDRW                       Backup media is re-writable CD.\n";
 	print "DVDR                       Backup media is recordable DVD (not fully supported yet).\n";
@@ -501,6 +501,8 @@ sub upgrade_conf_file() {
 		} elsif (/=/ && !/TAR.GZ/) {
 			my $has_arg = split /=/;
 			push @new_conf, "$_\n" if $has_arg > 1;
+		} elsif (/=/ && /TAR.GZ/) {
+			push @new_conf, "OPTION_COMP=tar.gz";
 		}
 	}
 	output_p($cfg_file, @new_conf);
@@ -529,6 +531,7 @@ sub read_conf_file() {
 	$conf{SMTP_SERVER} = "localhost" if !exists($conf{SMTP_SERVER});
 	$conf{MAX_SPACE} = 1000.0 if !exists($conf{MAX_SPACE});
 	$conf{USE_HD} = 1 if !exists($conf{USE_HD});
+	$conf{OPTION_COMP} = "tar.gz" if !exists($conf{OPTION_COMP});
 	# deal with users that may have been deleted from the system
 	check_valid_users() if $cfg_file_exist;
 	$use_hd = !($conf{USE_CD} || $conf{USE_TAPE} || $conf{USE_NET});
@@ -1023,16 +1026,13 @@ sub build_backup_files() {
     the_time();    
     $conf{SEND_MAIL} and complete_results();
     -d  $conf{PATH_TO_SAVE} or mkdir_p($conf{PATH_TO_SAVE});
-		
-    if ($conf{OPTION_COMP}) { 
-		$DEBUG and $tar_cmd = "tar cvpj ";
-		$DEBUG or $tar_cmd = "tar cpj "; 
-		$tar_ext = "tar.bz2";
-    } else { 
-		$DEBUG and $tar_cmd = "tar cvpz "; 
-		$DEBUG or $tar_cmd = "tar cpz "; 
-		$tar_ext = "tar.gz"
-	}
+	
+	$tar_cmd = "tar cp";
+	$tar_cmd .= "v" if $DEBUG;
+	$tar_cmd .= "j" if $conf{OPTION_COMP} eq "tar.bz2";
+	$tar_cmd .= "z" if $conf{OPTION_COMP} eq "tar.gz";
+	$tar_cmd .= " ";
+
 	my $used_space = check_storage_quota($conf{PATH_TO_SAVE});
 	if ($used_space) {
 		my $msg = N("Backup quota exceeded!\n%d MB used vs %d MB allocated.", $used_space, $conf{MAX_SPACE});
@@ -1063,6 +1063,7 @@ sub build_backup_files() {
 	    if ($conf{SYS_INCREMENTAL_BACKUPS}) {
 			$base = $incr = "incr_sys";
 			($base, $incr) = swap_prefix($base, $incr) if $conf{SYS_DIFFERENTIAL_BACKUPS};
+			$base =~ s/incr/base/ if !any { /^list_incr_sys/ } @dir_content;
 			if (any { /^list_base_sys/ }  @dir_content) { 
 				$more_recent = get_more_recent($base, @dir_content);
 				my $list_file = name_list_file($incr);
@@ -1102,6 +1103,7 @@ sub build_backup_files() {
 		  if ($conf{USER_INCREMENTAL_BACKUPS}) {
 			$base = $incr = "incr_user_";
 			($base, $incr) = swap_prefix($base, $incr) if $conf{USER_DIFFERENTIAL_BACKUPS};
+			$base =~ s/incr/base/ if !any { /^list_incr_user_$user/ } @dir_content;
 		    if (any { /^list_base_user_$user/ } @dir_content) { 
 				$more_recent = get_more_recent("$base$user", @dir_content);
 				my $list_file = name_list_file($incr . $user);
@@ -1137,6 +1139,7 @@ sub build_backup_files() {
 		if ($conf{OTHER_INCREMENTAL_BACKUPS}) {
 			$base = $incr = "incr_other";
 			($base, $incr) = swap_prefix($base, $incr) if $conf{OTHER_DIFFERENTIAL_BACKUPS};
+			$base =~ s/incr/base/ if !any { /^list_incr_other/ } @dir_content;
 			if (any { /^list_base_other/ }  @dir_content) { 
 				$more_recent = get_more_recent($base, @dir_content);
 				my $list_file = name_list_file($incr);
@@ -1262,7 +1265,7 @@ sub build_backup_files() {
 	#- clean up HD files if del_hd_files and media isn't hd
 	if ($conf{DEL_HD_FILES} && ($conf{USE_CD} || $conf{USE_TAPE} || $conf{USE_NET}) && $conf{DAEMON_MEDIA} ne 'hd')  {
 		foreach (@file_list_to_send_by_ftp) {
-			unlink($_) if /$tar_ext$/;
+			unlink($_) if /$conf{OPTION_COMP}$/;
 		}
 	}
 		
@@ -1320,7 +1323,7 @@ sub do_find {
 
 sub do_tar {
 	my ($tar_cmd, $dest_file, $list_file, @files) = @_;
-	my $full_dest_file = $conf{PATH_TO_SAVE} . "/" . $dest_file . $the_time . "." . $tar_ext;
+	my $full_dest_file = $conf{PATH_TO_SAVE} . "/" . $dest_file . $the_time . "." . $conf{OPTION_COMP};
 	#- if $list_file is undefined, then use the @files list
 	defined($list_file) ? system("$tar_cmd -f $full_dest_file -T $list_file") : system("$tar_cmd -f $full_dest_file @files");
 	push_list($dest_file);
@@ -1329,14 +1332,14 @@ sub do_tar {
 sub push_list {
 	my ($prefix) =  @_;
 	my $filename = $conf{PATH_TO_SAVE} . "/" . $prefix . $the_time . ".";
-	$filename .= $tar_ext if $prefix =~ /^backup/;
+	$filename .= $conf{OPTION_COMP} if $prefix =~ /^backup/;
 	$filename .= "txt" if $prefix =~ /^list/;
 	push @file_list_to_send_by_ftp, $filename;
 }
 
 sub files_to_results {
 	my ($basename) = @_;
-	$results .= "\nfile: " . $conf{PATH_TO_SAVE} . "/backup_" . $basename . $the_time . "." . $tar_ext . "\n\n";
+	$results .= "\nfile: " . $conf{PATH_TO_SAVE} . "/backup_" . $basename . $the_time . "." . $conf{OPTION_COMP} . "\n\n";
 	$results .= cat_("$conf{PATH_TO_SAVE}/list_" . $basename . $the_time . ".txt");
 	$results .= "\nignored:\n" . $ignore_files_list . "\n" if $ignore_files_list;
 }
@@ -1447,39 +1450,15 @@ sub file_ok_sel {
     }
 }
 
-sub filedialog_where_hd() {
-    my $file_dialog;
-
-    $file_dialog = gtksignal_connect(new Gtk2::FileSelection(N("File Selection")), destroy => sub { $file_dialog->destroy });
-    $file_dialog->ok_button->signal_connect(clicked => sub { 
-	$save_path_entry->set_text($file_dialog->get_filename); 
-	$file_dialog->destroy });
-    $file_dialog->cancel_button->signal_connect(clicked => sub { $file_dialog->destroy });
-    $file_dialog->show;
-}
-
-sub filedialog_restore_find_path() {
-    my $file_dialog;
-
-    $file_dialog = gtksignal_connect(new Gtk2::FileSelection(N("File Selection")), destroy => sub { $file_dialog->destroy });
-    $file_dialog->ok_button->signal_connect(clicked => sub { 
-		$restore_find_path_entry->set_text($file_dialog->get_filename);
-		$file_dialog->destroy;
-	});
-    $file_dialog->cancel_button->signal_connect(clicked => sub { $file_dialog->destroy });
-    $file_dialog->show;
-}
-
 sub filedialog_generic {
 	#- a more generic file dialog
-	#- a title prompt, the widget to get updated and the variable to update
-	my ($prompt, $widget, $set_var) = @_; 
+	#- a title prompt, the widget to get updated
+	my ($prompt, $widget) = @_; 
 	my $file_dialog;
 	
-    $file_dialog = gtksignal_connect(new Gtk2::FileSelection(translate($prompt)), destroy => sub { $file_dialog->destroy });
+    $file_dialog = gtksignal_connect(new Gtk2::FileSelection($prompt), destroy => sub { $file_dialog->destroy });
     $file_dialog->ok_button->signal_connect(clicked => sub { 
-		$$set_var = $file_dialog->get_filename;
-		$$widget->set_text($$set_var); 
+		$$widget->set_text($file_dialog->get_filename);
 		$file_dialog->destroy;
 	});
     $file_dialog->cancel_button->signal_connect(clicked => sub { $file_dialog->destroy });
@@ -2069,7 +2048,7 @@ sub advanced_where_hd {
 				1, new Gtk2::VBox(0, 6),
 				0, gtkset_size_request(gtkset_sensitive($save_path_entry = new Gtk2::Entry(), $conf{USE_HD}), 152, 20),
 				0, gtkset_sensitive($button = gtksignal_connect(Gtk2::Button->new,  clicked => sub {
-					filedialog_where_hd() 
+					filedialog_generic(N("Directory to save to"), \$save_path_entry) 
 				}), $conf{USE_HD}),
 			),
 			0, new Gtk2::VBox(0, 6),
@@ -2316,10 +2295,16 @@ sub combo_to_cron_string {
 
 sub advanced_options() {
     my $box_options;
-
+	my $entry_comp_mode = new Gtk2::OptionMenu();
+    $entry_comp_mode->set_popdown_strings("tar", "tar.gz", "tar.bz2");
+	$entry_comp_mode->entry->set_text($conf{OPTION_COMP});
 	gtkpack($advanced_box,
 		$box_options = gtkpack_(new Gtk2::VBox(0, 15),
-			0, my $check_tar_bz2  = new Gtk2::CheckButton(N("Use tar and bzip2 (rather than tar and gzip)")),
+			0, gtkpack_(new Gtk2::HBox(0,10),
+				0, new Gtk2::Label(N("Please choose the compression type")),
+				1, new Gtk2::HBox(0,10),
+				0, $entry_comp_mode,
+			), 
  			0, my $check_backupignore = new Gtk2::CheckButton(N("Use .backupignore files")),
 			0, gtkpack_(new Gtk2::HBox(0,10),
 				0, my $check_mail = new Gtk2::CheckButton(N("Send mail report after each backup to:")),
@@ -2337,11 +2322,12 @@ sub advanced_options() {
 			),
 		),
 	);
-    check_list([$check_mail, \$conf{SEND_MAIL}], [$check_tar_bz2, \$conf{OPTION_COMP}], [$check_del_hd_files, \$conf{DEL_HD_FILES}], [$check_backupignore, \$conf{BACKUPIGNORE}]);
+    check_list([$check_mail, \$conf{SEND_MAIL}], [$check_del_hd_files, \$conf{DEL_HD_FILES}], [$check_backupignore, \$conf{BACKUPIGNORE}]);
     $mail_entry->set_text($conf{USER_MAIL});
     $mail_entry->signal_connect('changed', sub { $conf{USER_MAIL} = $mail_entry->get_text });
     $smtp_entry->set_text($conf{SMTP_SERVER});
     $smtp_entry->signal_connect('changed', sub { $conf{SMTP_SERVER} = $smtp_entry->get_text });	
+	$entry_comp_mode->entry->signal_connect('changed', sub { $conf{OPTION_COMP} = $entry_comp_mode->entry->get_text });
 	set_help_tip($check_backupignore, 'backupignore');
 	set_help_tip($check_mail, 'send_mail_to');
 	set_help_tip($check_del_hd_files, 'delete_files');
@@ -2593,8 +2579,7 @@ sub file_to_put {
 	chomp;
 	$name = "backup_" . $type . "_"; 
 	s/^$name//gi;
-	s/.tar.gz$//gi;
-	s/.tar.bz2$//gi;
+	s/.tar|.gz|.bz2$//gi;
 	if ($type eq "user") {
 		($nom, $date, $heure) = /^(.*)_([^_]*)_([^_]*)$/;
 	} else {
@@ -2646,11 +2631,9 @@ sub system_state() {
 		$system_state .= N("\n- Options:\n");
 		$conf{NO_SYS_FILES} and $system_state .= N("\tDo not include System Files\n");
 		
-		if ($conf{OPTION_COMP}) { 
-			$system_state .= N("\tBackups use tar and bzip2\n"); 
-		} else { 
-			$system_state .= N("\tBackups use tar and gzip\n");
-		}   
+		$system_state .= N("\tBackups use tar and bzip2\n") if $conf{OPTION_COMP} eq "tar.bz2"; 
+		$system_state .= N("\tBackups use tar and gzip\n") if $conf{OPTION_COMP} eq "tar.gz";
+		$system_state .= N("\tBackups use tar only\n") if $conf{OPTION_COMP} eq "tar";
 
 		$system_state .= N("\tUse .backupignore files\n") if $conf{BACKUPIGNORE};
 		$system_state .= N("\tSend mail to %s\n", $conf{USER_MAIL}) if $conf{SEND_MAIL};
@@ -2719,8 +2702,7 @@ sub select_user_data_to_restore() {
 		$var_eq = 1;
 		my $more_recent = (split(' ', select_most_recent_selected_of($var_tmp)))[0]; 
 		foreach (grep { /^backup_user_$var_tmp/ } sort @list_backup) {
-	    	s/.tar.gz//gi;
-	    	s/.tar.bz2//gi;
+	    	s/.$conf{OPTION_COMP}//gi;
 	    	if ($more_recent) {
 				if (/$more_recent/) {
 		    		push @list_tmp , $_;
@@ -2794,27 +2776,32 @@ sub show_backup_details {
 	my $value;
 	my $command2;
 	my $tarfile;
-	my $extension = ".tar.gz";
 		    
 	if ($mode eq "user") {
 		#- we've only got a partial filename in this case
-		$tarfile = "$path_to_find_restore/backup_*" . $name . $extension;
+		$tarfile = "$path_to_find_restore/backup_*" . $name . ".tar*";
 	}
 	if ($mode eq "sys") {
 		#- funky string here we need to use to reconstruct the filename
 		my @flist = split(/[ \t,]+/, $name);
-		$tarfile = "$path_to_find_restore/backup_*" .  $flist[2] . $extension;
+		$tarfile = "$path_to_find_restore/backup_*" .  $flist[2] . ".tar*";
 	}
+	my @tarfiles = glob($tarfile);
+	if ($tarfiles[0] eq "") {
+		destroy_widget();
+		$function->(); 
+	}
+	$tarfile = $tarfiles[0];
 	my $command1 = "stat " . $tarfile;
-	$command2 = "tar -tzvf " . $tarfile;
-	
+
+	$command2 = "tar -tv";
+	$command2 = set_tar($command2, $tarfile);
+	$command2 .= " $tarfile";
+
+	log::explanations("Running $command1");
+	$archive_file_detail = `$command1 2>&1` . "\n\n";
+	log::explanations("Running $command2");
 	local *TMP;
-	open TMP, "$command1 2>&1 |";
-	while ($value = <TMP>) {
-		$archive_file_detail .= $value;			
-	}
-	close TMP;
-	$archive_file_detail .= "\n\n";
 	open TMP, "$command2 2>&1 |";
 	while ($value = <TMP>) {
 		#- drop the permissions display for the sake of readability	
@@ -2845,9 +2832,10 @@ sub valid_backup_test {
     my (@files_list) = @_;
     @files_corrupted = ();
     my $is_corrupted = 0;
+	my $comp_test;
     foreach (@files_list) {
-		#- let's quiet this down (SB)
-		if (system("gzip -l $path_to_find_restore/$_ > /dev/null 2>&1") > 1) {
+		$comp_test = set_tar("tar t", $_);
+		if (system("$comp_test $path_to_find_restore/$_ > /dev/null 2>&1") > 1) {
 	    	push @files_corrupted, $_;
 	    	$is_corrupted = -1;
 		}
@@ -2860,7 +2848,7 @@ sub restore_aff_backup_problems() {
     my $text = new Gtk2::TextView;
     my $restore_pbs_state = N("List of data corrupted:\n\n");
     $restore_pbs_state .= "\t\t$_\n" foreach @files_corrupted;
-    $restore_pbs_state .= N("Please uncheck or remove it on next time.");
+    $restore_pbs_state .= N("Please uncheck or remove it for the next time.");
     gtktext_insert($text, [ [ $restore_pbs_state ] ]);
     button_box_restore_main();    
 
@@ -2919,18 +2907,12 @@ sub return_path {
 }
 
 sub restore_backend() {
-    my $untar_cmd;
+    my $untar_cmd = "tar x";
     my $exist_problem = 0;
     my $user_dir;
 	my $username;
 	local $_;
 	-d $restore_path or mkdir_p $restore_path;
-	
-    if (any { /tar.gz$/ } all($path_to_find_restore)) { 
-    	$untar_cmd = "tar xzf"; 
-    } else { 
-    	$untar_cmd = "tar xjf"; 
-    }
     
 	if ($restore_user)  {
 		select_user_data_to_restore();
@@ -2948,13 +2930,13 @@ sub restore_backend() {
 				$user_dir = return_path($username);
 				-d $user_dir and rm_rf($user_dir) if $remove_user_before_restore;
 
+				my $user_untar = set_tar($untar_cmd, $_);
 		    	$DEBUG and print "user name to restore: $username, user directory: $user_dir\n";		    
-		    	system("$untar_cmd $path_to_find_restore/$_ -C $restore_path");
+		    	system("$user_untar $path_to_find_restore/$_ -C $restore_path");
 			}
 			#- flush this out for another cycle (SB)
 			@user_list_to_restore2 = ();
 	    }
-		
     }
     
 	if ($restore_sys)   { 
@@ -2963,7 +2945,10 @@ sub restore_backend() {
 			$exist_problem = 1;
 			restore_aff_backup_problems();
 	    } else {
-			system("$untar_cmd $path_to_find_restore/$_ -C $restore_path") foreach @sys_list_to_restore;
+			foreach (@sys_list_to_restore) {
+				my $sys_untar = set_tar($untar_cmd, $_);
+				system("$sys_untar $path_to_find_restore/$_ -C $restore_path"); 
+			}
 		}
     }
 	if ($restore_other)   { 
@@ -2971,10 +2956,21 @@ sub restore_backend() {
 			$exist_problem = 1;
 			restore_aff_backup_problems();
 	    } else {
-			system("$untar_cmd $path_to_find_restore/$_ -C $restore_path") foreach @other_list_to_restore;
+			foreach (@other_list_to_restore) {
+				my $other_untar = set_tar($untar_cmd, $_);
+				system("$other_untar $path_to_find_restore/$_ -C $restore_path"); 
+			}
 		}
     }
     $exist_problem or restore_aff_result();
+}
+
+sub set_tar {
+	my ($untar_cmd, $filename) = @_;
+	$untar_cmd .= "z" if $filename =~ /tar.gz$/;
+	$untar_cmd .= "j" if $filename =~ /tar.bz2$/;
+	$untar_cmd .= "f";
+	return $untar_cmd;
 }
 
 sub restore_do() {
@@ -3060,7 +3056,7 @@ sub restore_step_user() {
 					my @user_list_tmp;
 					my $restore_row = new Gtk2::HBox(0,5);
 					my $b = new Gtk2::CheckButton($name_complet);
-					my $details = Gtk2::Button->new(" Details ");
+					my $details = Gtk2::Button->new(N("Details"));
 					
 					$restore_row->pack_start($b, 1, 1, 0);
 					$restore_row->pack_end(new Gtk2::VBox(1,5), 0, 0, 0);
@@ -3115,13 +3111,14 @@ sub restore_step_sys() {
     my $restore_step_sys;
     my $combo_restore_step_sys = new Gtk2::OptionMenu();
     $combo_restore_step_sys->set_popdown_strings(@sys_backuped);
+    $combo_restore_step_sys->entry->set_text($restore_step_sys_date);
     gtkpack($advanced_box,
 		$restore_step_sys = gtkpack_(new Gtk2::VBox(0,10),
 			0, N("Please choose the date to restore:"),
 			0, gtkpack_(new Gtk2::HBox(0,10),
 				1, new Gtk2::HBox(0,10),
 				0, $combo_restore_step_sys,
-				0, my $details = Gtk2::Button->new(" Details "),
+				0, my $details = Gtk2::Button->new(N("Details")),
 				1, new Gtk2::HBox(0,10),				
 			),
 		),
@@ -3132,11 +3129,10 @@ sub restore_step_sys() {
 	$details->signal_connect('clicked', sub { 
 		#- we're only passing a portion of the filename to
 		#- the subroutine so we need to let it know this
-		my $backup_date = $combo_restore_step_sys->entry->get_text;
+		$restore_step_sys_date = $combo_restore_step_sys->entry->get_text;
 		destroy_widget();
-		show_backup_details(\&restore_step_sys, "sys", $backup_date);
+		show_backup_details(\&restore_step_sys, "sys", $restore_step_sys_date);
 	}); 	
-    $combo_restore_step_sys->entry->set_text($restore_step_sys_date);
     fonction_env(\$restore_step_sys, \&restore_step_sys,  \&restore_step2, "restore");
     if ($restore_user) { 
 		fonction_env(\$restore_step_sys, \&restore_step_sys,  \&restore_step2, \&restore_step_user); 
@@ -3161,7 +3157,7 @@ sub restore_other_media() {
 				1, new Gtk2::VBox(0, 6),
 				0, gtkset_size_request(gtkset_sensitive($restore_find_path_entry = new Gtk2::Entry(), $other_media_hd), 152, 20),
 				0, gtkset_sensitive($button = gtksignal_connect(Gtk2::Button->new,  clicked => sub {
-				     filedialog_restore_find_path(); 
+				     filedialog_generic(N("Directory with backups"), \$restore_find_path_entry); 
 				}), $other_media_hd),
 			),
 			1, new Gtk2::VBox(0, 6),
@@ -3191,7 +3187,7 @@ sub restore_step2() {
 	$restore_info_path = $path_to_find_restore if $conf{USE_HD} || $conf{USE_CD};
 	my $info_prefix = "backup";
 	$info_prefix = "list" if $conf{USE_NET} || $conf{USE_TAPE};
-	
+
     if (any  { /_other_/ } grep { /^$info_prefix/ } all("$restore_info_path/")) { 
 		$other_exist = 1; 
 	} else { 
@@ -3208,6 +3204,7 @@ sub restore_step2() {
 		$user_exist = 0; $restore_user = 0; 
 	}
 
+	my $restore_path_entry = new Gtk2::Entry();
     gtkpack($advanced_box,
 		$retore_step2 = gtkpack_(new Gtk2::VBox(0,10),
 			1, new Gtk2::VBox(0,10),
@@ -3224,9 +3221,12 @@ sub restore_step2() {
 	 		0, gtkset_sensitive(my $check_restore_user = new Gtk2::CheckButton(N("Restore Users")), $user_exist),
 	 		0, gtkset_sensitive(my $check_restore_other = new Gtk2::CheckButton(N("Restore Other")), $other_exist),
 	 		0, gtkpack_(new Gtk2::HBox(0,10),
-		     	0, my $check_restore_other_path = new Gtk2::CheckButton(N("select path to restore (instead of /)")),
+		     	0, my $check_restore_other_path = new Gtk2::CheckButton(N("Select path to restore (instead of /)")),
 		     	1, new Gtk2::HBox(0,10),
-		    	0, gtkset_sensitive(my $restore_path_entry = new Gtk2::Entry(), $restore_other_path),
+		    	0, gtkset_sensitive($restore_path_entry, $restore_other_path),
+				0, gtksignal_connect(my $button = new Gtk2::Button->new, clicked => sub { 							
+					filedialog_generic(N("Path To Restore To"), \$restore_path_entry);
+				}),			
 			),
 	 		0, gtkset_sensitive(my $check_backup_bef_restore = new Gtk2::CheckButton(N("Do new backup before restore (only for incremental backups.)")), 
 				$conf{SYS_INCREMENTAL_BACKUPS} || $conf{USER_INCREMENTAL_BACKUPS}),
@@ -3279,8 +3279,12 @@ sub restore_step2() {
 	} else { 
 		$next_widget = \&restore_do; 
 	}
+    $button->add(gtkpack(new Gtk2::HBox(0,10), gtkcreate_img("ic82-dossier-32")));
     $restore_path_entry->set_text($restore_path); 
-    $restore_path_entry->signal_connect('changed', sub { $restore_path = $restore_path_entry->get_text });
+    $restore_path_entry->signal_connect('changed', sub { 
+		$restore_path = $restore_path_entry->get_text;
+		$untar_prefix = "tar -C $restore_path -x";
+	});
     $up_box->show_all;
 }
 
@@ -3501,8 +3505,8 @@ sub catalog_restore {
 						0, new Gtk2::Label("Restore To Path"),
 		    			0, $restore_path_entry = new Gtk2::Entry(),
 					),
-					1, gtksignal_connect(Gtk2::Button->new(N("Change\nRestore Path")), clicked => sub { 							
-						filedialog_generic("Path To Restore To", \$restore_path_entry, \$restore_path);
+					0, gtksignal_connect(my $button = new Gtk2::Button(), clicked => sub { 							
+						filedialog_generic(N("Path To Restore To"), \$restore_path_entry);
 					}),						
 				),
 				0, new Gtk2::VBox(0,10),
@@ -3512,8 +3516,11 @@ sub catalog_restore {
 	);		
 	
 	$restore_path_entry->set_text($restore_path);
-	gtksignal_connect($restore_path_entry, changed => sub { $restore_path = $restore_path_entry->get_text });
-	
+	gtksignal_connect($restore_path_entry, changed => sub { 
+		$restore_path = $restore_path_entry->get_text; 
+		$untar_prefix = "tar -C $restore_path -x";
+	});
+	$button->add(gtkpack(new Gtk2::HBox(0,10), gtkcreate_img("ic82-dossier-32")));
 	button_box_restore();
 	fonction_env(\$catalog_box, \&catalog_restore, \&restore_find_media_box, \&catalog_restore) if $call_method eq "need media";;
 	fonction_env(\$catalog_box, \&catalog_restore, \&restore_box, \&catalog_restore) if $call_method eq "button";
@@ -3556,7 +3563,7 @@ sub restore_catalog_entry {
 	if ($media eq 'HD') {
 		#- shouldn't really happen, should have just browsed 
 		#- to the $conf{PATH_TO_SAVE} in the previous step - deal with it anyway
-		my @restore_tar_files = glob("$dev_path/*$backup_time*$tar_ext");
+		my @restore_tar_files = glob("$dev_path/*$backup_time*$conf{OPTION_COMP}");
 		my $matches = @restore_tar_files;
 		if ($matches == 0) {
 			show_warning("f", N("Backup files not found at %s.", $dev_path));
@@ -3646,21 +3653,23 @@ sub restore_hd_or_cd {
 	my ($cat_entry, $tarfile_dir, @restore_files) = @_;
 	my $indv_files = @restore_files;
 	my $command;
-		
+
 	my $wild_card = catalog_to_wildcard($cat_entry);
 		
 	if ($indv_files == 0) {
 		#- full catalog specified
 		foreach (wildcard_to_tarfile($wild_card)) {
-			$command = "tar -C $restore_path -xzf $tarfile_dir/$_";
+			my $untar_cmd = set_tar($untar_prefix, $_);			
+			$command = "$untar_cmd $tarfile_dir/$_";
 			spawn_progress($command, "Untarring from \n$_ \nto $restore_path.");
 		}
 	} else {
 		#- individual files - pull from appropriate catalog
 		foreach (@restore_files) {
 			my $tarfile = file_to_tarfile($_, $wild_card);
+			my $untar_cmd = set_tar($untar_prefix, $tarfile); 
 			$_ = substr($_, 1);
-			$command = "tar -C $restore_path -xzf $tarfile_dir/$tarfile $_";
+			$command = "$untar_cmd $tarfile_dir/$tarfile $_";
 			spawn_progress($command, "Untarring \n$_ from \n$tarfile \nto $restore_path.");
 		}
 	}
@@ -3686,7 +3695,8 @@ sub restore_tape {
 			$command = "tar -C $cfg_dir/restores -xf $dev_path";
 			spawn_progress($command, "Untarring from $dev_path to work directory.");
 			if (-e "$cfg_dir/restores/$conf{PATH_TO_SAVE}/$_") {
-				$command = "tar -C $restore_path -xzf $cfg_dir/restores/$conf{PATH_TO_SAVE}/$_";
+				my $untar_cmd = set_tar($untar_prefix, $_);
+				$command = "$untar_cmd $cfg_dir/restores/$conf{PATH_TO_SAVE}/$_";
 				spawn_progress($command, "Untarring \n$_ \nto $restore_path.");
 			} else {
 				return 1;
@@ -3707,7 +3717,8 @@ sub restore_tape {
 				spawn_progress($command, "Untarring from $dev_path to work directory.");
 			}
 			if (-e "$cfg_dir/restores/$tarfile") {
-				$command = "tar -C $restore_path -xzf $cfg_dir/restores/$tarfile $_";
+				my $untar_cmd = set_tar($untar_prefix, $_);
+				$command = "$untar_cmd $cfg_dir/restores/$tarfile $_";
 				spawn_progress($command, "Untarring \n$_ from \n$tarfile \nto $restore_path.");
 			} else {
 				return 1;
@@ -3738,7 +3749,8 @@ sub restore_ftp {
 		foreach (wildcard_to_tarfile($wild_card)) {
 			$ftp->get($_, "$cfg_dir/restores/$_");
 			if (-e "$cfg_dir/restores/$_") {
-				$command = "tar -C $restore_path -xzf $cfg_dir/restores/$_";
+				my $untar_cmd = set_tar($untar_prefix, $_);
+				$command = "$untar_cmd $cfg_dir/restores/$_";
 				spawn_progress($command, "Untarring \n$_ \nto $restore_path.");
 			} else {
 				show_warning("f", N("%s not retrieved...", $_));
@@ -3754,7 +3766,8 @@ sub restore_ftp {
 				$ftp->get($tarfile, "$cfg_dir/restores/$tarfile");
 			}
 			if (-e "$cfg_dir/restores/$tarfile") {
-				$command = "tar -C $restore_path -xzf $cfg_dir/restores/$tarfile $_";
+				my $untar_cmd = set_tar($untar_prefix, $tarfile);
+				$command = "$untar_cmd $cfg_dir/restores/$tarfile $_";
 				spawn_progress($command, "Untarring \n$_ from \n$tarfile \nto $restore_path.");
 			} else {
 				show_warning("f", N("%s not retrieved...", $tarfile));
@@ -3783,7 +3796,8 @@ sub restore_rsync_ssh_webdav {
 			}
 			spawn_progress($command, "Retrieving backup file \n$_ \nvia $mode.");
 			if (-e "$cfg_dir/restores/$_") {
-				$command = "tar -C $restore_path -xzf $cfg_dir/restores/$_";
+				my $untar_cmd = set_tar($untar_prefix, $_);
+				$command = "$untar_cmd $cfg_dir/restores/$_";
 				spawn_progress($command, "Untarring \n$_ \nto $restore_path.");
 			} else {
 				return 1;
@@ -3805,7 +3819,8 @@ sub restore_rsync_ssh_webdav {
 				spawn_progress($command, "Retrieving backup file \n$tarfile \nvia $mode.");
 			}
 			if (-e "$cfg_dir/restores/$tarfile") {
-				$command = "tar -C $restore_path -xzf $cfg_dir/restores/$tarfile $_";
+				my $untar_cmd = set_tar($untar_prefix, $tarfile);
+				$command = "$untar_cmd $cfg_dir/restores/$tarfile $_";
 				spawn_progress($command, "Untarring \n$_ from \n$tarfile \nto $restore_path.");
 			} else {
 				return 1;
@@ -3827,7 +3842,7 @@ sub wildcard_to_tarfile {
 	my (@tarfile) = glob("$conf{PATH_TO_SAVE}/*$wildcard.txt");
 	foreach (@tarfile) {
 		$_ = basename($_);
-		s/txt/$tar_ext/;
+		s/txt/$conf{OPTION_COMP}/;
 		s/list/backup/;
 	}
 	@tarfile;
@@ -3838,7 +3853,7 @@ sub file_to_tarfile {
 	my $tarfile = `grep -l $restore_file $conf{PATH_TO_SAVE}/*$wildcard.txt`;
 	chop $tarfile;
 	$tarfile = basename($tarfile);
-	$tarfile =~ s/txt/$tar_ext/;
+	$tarfile =~ s/txt/$conf{OPTION_COMP}/;
 	$tarfile =~ s/list/backup/;
 	$tarfile;
 }
@@ -3948,7 +3963,7 @@ sub restore_find_media_box() {
 					}), $mount_media),
 					$new_path_entry = gtkset_sensitive(new Gtk2::Entry(), $mount_media),
 					gtkset_sensitive(gtksignal_connect(Gtk2::Button->new(N("Browse to new restore repository.")), clicked => sub {  
-						filedialog_generic("Directory To Restore From", \$new_path_entry, \$path_to_find_restore);
+						filedialog_generic(N("Directory To Restore From"), \$new_path_entry);
 					}), $mount_media),
 					gtksignal_connect(Gtk2::Button->new(N("Restore From Catalog")), clicked => sub {  
 						$box2->destroy;
@@ -3966,6 +3981,9 @@ sub restore_find_media_box() {
 		),
 	);
 	$new_path_entry->set_text($path_to_find_restore);
+	$new_path_entry->signal_connect('changed', sub { 
+		$path_to_find_restore = $new_path_entry->get_text;
+	});
 	$central_widget = \$box2;
 	
 	button_box_find_media($mount_media);  
