@@ -18,7 +18,9 @@ use common;
 #-  disabled => function returning wether it should be disabled (grayed)
 #-  gtk      => gtk preferences
 #-  type     => 
-#-     button => (with clicked) (type defaults to button if clicked is there) (val need not be a reference)
+#-     button => (with clicked or clicked_may_quit)
+#-               (type defaults to button if clicked or clicked_may_quit is there)
+#-               (val need not be a reference) (if clicked_may_quit return true, it's as if "Ok" was pressed)
 #-     label => (val need not be a reference) (type defaults to label if val is not a reference) 
 #-     bool (with text)
 #-     range (with min, max)
@@ -253,9 +255,9 @@ sub ask_from_normalize {
 	} elsif ($e->{type} eq 'range') {
 	    $e->{min} <= $e->{max} or die "bad range min $e->{min} > max $e->{max} (called from " . join(':', caller()) . ")";
 	    ${$e->{val}} = max($e->{min}, min(${$e->{val}}, $e->{max}));
-	} elsif ($e->{type} eq 'button' || $e->{clicked}) {
+	} elsif ($e->{type} eq 'button' || $e->{clicked} || $e->{clicked_may_quit}) {
 	    $e->{type} = 'button';
-	    $e->{clicked} ||= sub {};
+	    $e->{clicked_may_quit} ||= $e->{clicked} ? sub { $e->{clicked}(); 0 } : sub {};	    
 	    $e->{val} = \ (my $v = $e->{val}) if !ref($e->{val});
 	} elsif ($e->{type} eq 'label' || !ref($e->{val})) {
 	    $e->{type} = 'label';

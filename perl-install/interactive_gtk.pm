@@ -407,7 +407,10 @@ sub ask_fromW {
 	    $w->signal_connect(clicked => sub {
 		$get_all->();
 		$mainw->{rwindow}->hide;
-		$e->{clicked}();
+		if (my $v = $e->{clicked_may_quit}()) {
+		    $o->{retval} = $v;
+		    Gtk->main_quit;
+		}
 		$mainw->{rwindow}->show;
 		$set_all->();
 	    });

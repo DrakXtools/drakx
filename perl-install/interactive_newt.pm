@@ -186,23 +186,26 @@ sub ask_fromW {
 	!$error;
     };
 
-    my $canceled;
+    my ($destroyed, $canceled);
     do {
 	my $r = $form->RunForm;
 	foreach (@widgets) {
 	    if ($$r == ${$_->{w}}) {
+		$destroyed = 1;
 		$form->FormDestroy;
 		Newt::PopWindow;
-		$_->{e}{clicked}();
-		return ask_fromW($o, $common, $l, $l2);
+		my $v = $_->{e}{clicked_may_quit}();
+		$v or return ask_fromW($o, $common, $l, $l2);
 	    }
 	}
 	$canceled = $cancel && $$r == $$cancel;
 
     } until ($check->($common->{callbacks}{$canceled ? 'canceled' : 'complete'}));
 
-    $form->FormDestroy;
-    Newt::PopWindow;
+    if (!$destroyed) {
+	$form->FormDestroy;
+	Newt::PopWindow;
+    }
     !$canceled;
 }
 
