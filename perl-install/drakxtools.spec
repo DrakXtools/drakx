@@ -12,7 +12,7 @@ Conflicts: drakconf < 10.1-0.6mdk
 Conflicts: rpmdrake < 2.1-29mdk
 Conflicts: mandrake_doc-drakxtools-en < 9.2, mandrake_doc-drakxtools-es < 9.2, mandrake_doc-drakxtools-fr < 9.2
 Conflicts: bootloader-utils < 1.8-4mdk, bootsplash < 2.1.7-1mdk
-BuildRequires: gettext, gtk+2-devel, ldetect-devel >= 0.5.2-1mdk, ncurses-devel, newt-devel, perl-devel >= 1:5.8.0-20mdk, libext2fs-devel, perl-MDK-Common-devel >= 1.1.8-3mdk
+BuildRequires: gettext, gtk+2-devel, ldetect-devel >= 0.5.3-1mdk, ncurses-devel, newt-devel, perl-devel >= 1:5.8.0-20mdk, libext2fs-devel, perl-MDK-Common-devel >= 1.1.8-3mdk
 BuildRequires: rpm-devel
 BuildRoot: %_tmppath/%name-buildroot
 Provides: draksec
@@ -33,7 +33,7 @@ Provides: perl(network::isdn_consts)
 %package backend
 Summary: Drakxtools libraries and background tools 
 Group: System/Configuration/Other
-Requires: ldetect-lst >= 0.1.7-3mdk
+Requires: ldetect-lst >= 0.1.23-1mdk
 Conflicts: drakxtools-newt < 10-51mdk
 
 %package http
