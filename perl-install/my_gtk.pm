@@ -418,7 +418,7 @@ sub _create_window($$) {
     $w->set_title($title);
 
     $w->signal_connect(expose_event => sub { eval { $w->window->XSetInputFocus } }) if $my_gtk::force_focus || $o->{force_focus};
-    $w->signal_connect(delete_event => sub { undef $o->{retval}; Gtk->main_quit });
+    $w->signal_connect(delete_event => sub { $w->destroy; die 'wizcancel' });
     $w->set_uposition(@{$my_gtk::force_position || $o->{force_position}}) if $my_gtk::force_position || $o->{force_position};
 
     $w->signal_connect(focus => sub { Gtk->idle_add(sub { $w->ensure_focus($_[0]); 0 }, $_[1]) }) if $w->can('ensure_focus');
