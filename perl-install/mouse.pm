@@ -36,6 +36,7 @@ my %mice =
      [ 5, 'ps/2', 'ThinkingMousePS/2', __("Kensington Thinking Mouse") ],
      [ 5, 'netmouse', 'NetMousePS/2', __("Genius NetMouse") ],
      [ 5, 'netmouse', 'NetScrollPS/2', __("Genius NetScroll") ],
+     [ 7, 'ps/2', 'ExplorerPS/2', __("Microsoft Explorer") ],
    ]],
      
  'USB' =>
@@ -102,11 +103,12 @@ sub xmouse2xId {
 		   "SysMouse",
 		   "Auto",
 		   "AceCad",
-		   "WSMouse",
+		   "ExplorerPS/2",
 		   "USB",
     );
     my ($id) = @_;
     $id = 'BusMouse' if $id eq 'MouseMan';
+    $id = 'IMPS/2' if $id eq 'ExplorerPS/2' && $::isInstall;
     my $i; map_index { $_ eq $id and $i = $::i } @xmousetypes; $i;
 }
 
