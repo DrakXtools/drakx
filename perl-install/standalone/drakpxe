@@ -32,12 +32,9 @@ use network::netconnect;
 
 $::isInstall and die "Not supported during install.\n";
 
-
-local $_ = join '', @ARGV;
-
 $::Wizard_pix_up = "wiz_drakgw.png"; #- to change ? keep existing one, nobody will see (too late) ;-)
 $::Wizard_title = N("PXE Server Configuration");
-$::direct = /-direct/;
+$::direct = grep { /-direct/ } @ARGV;
 
 
 #
@@ -62,7 +59,7 @@ my $in = 'interactive'->vnew('su', 'default');
 
 !$::isEmbedded && $in->isa('interactive::gtk') and $::isWizard = 1;
 
-pur_gtk_mode() if $::isEmbedded && $in->isa('interactive::gtk');
+#pur_gtk_mode() if $::isEmbedded && $in->isa('interactive::gtk');
 
 sub sys { system(@_) == 0 or log::l("[drakpxe] Warning, sys failed for $_[0]") }
 
@@ -72,7 +69,6 @@ sub outpend {
 }
 
 sub start_daemons () {
-    my $cups_used = 0;
     log::explanations("Starting daemons");
 
     system("/etc/rc.d/init.d/dhcpd status >/dev/null") == 0 and sys("/etc/rc.d/init.d/dhcpd stop");
@@ -89,6 +85,12 @@ sub stop_daemons () {
 }
 
 my $wait_configuring;
+
+sub quit_global {
+    my ($in, $exitcode) = @_;
+    $in->exit($exitcode);
+    goto begin
+}
 
 sub fatal_quit ($) {
     log::l("[drakpxe] FATAL: $_[0]");
@@ -264,12 +266,12 @@ system "mkdir", "-p", "/var/www/html/$dir";
 rmdir "/var/www/html/$dir";
 symlink $dir, "/var/www/html/$dir";
 
-stop_daemons;
-start_daemons;
+stop_daemons();
+start_daemons();
 
 #- sub for reading/writing dhcpd.conf and pxelinux.cfg/default...
 sub parse_dhcpd_conf {
-    my ($file, $netcnx, $netc, $intf) = @_;
+    my ($file, undef, $netc, $intf) = @_;
     my (%dhcpd_conf, $pool);
     local (*F, $_);
 
@@ -299,7 +301,7 @@ sub build_dhcpd_conf {
     my $server = $dhcpd_conf->{network}{IPADDR} || $dhcpd_conf->{network}{HOSTNAME};
     open F, ">$file" or return;
     log::explanations("Modified file $file");
-    print F qq[# for explanation in french go to : http://www.delafond.org/traducmanfr/man/man5/dhcpd.conf.5.html
+    print F qq(# for explanation in french go to : http://www.delafond.org/traducmanfr/man/man5/dhcpd.conf.5.html
 ddns-update-style none;
 allow booting;
 allow bootp;
@@ -428,7 +430,7 @@ shared-network "mynetwork" {
 # Used by clusterautosetup-client to find its server
   next-server $server;
 
-];
+);
     foreach (@{$dhcpd_conf->{network}{pool}}) {
 	print F "    pool {
        range $_->{start_ip} $_->{end_ip};
@@ -437,7 +439,7 @@ shared-network "mynetwork" {
 	print F "       deny members of \"$_\";\n" foreach keys %{$_->{deny}};
 	print F "    }\n";
     }
-print F qq[
+print F qq(
 
 #   pool {
 #     range 192.168.200.200 192.168.200.254;
@@ -448,7 +450,7 @@ print F qq[
 #        }
   }
 }
-];
+);
     close F;
 }
 
@@ -469,7 +471,7 @@ sub parse_pxelinux_cfg {
 	    } elsif (/^\s*(LOCALBOOT|KERNEL|APPEND)\s+(.*)/i) {
 		$entry->{$1} = $2;
 	    } else {
-		log::l("ignoring line $. in file $file due to parsing error");
+		log::l("ignoring line (titi_sucks) in file $file due to parsing error");
 	    }
 	}
 	$entry and push @{$pxelinux_cfg{entry}}, $entry;
