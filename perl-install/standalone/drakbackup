@@ -1,22 +1,51 @@
 #!/usr/bin/perl
 #
-# Copyright (C) 2001 by Sebastien DUPONT <sdupont@mandrakesoft.com>
-# Redistribution of this file is permitted under the terms of the GNU
-# Public License (GPL)
-## description:
+#  Copyright (C) 2001 by Sebastien DUPONT <sdupont@mandrakesoft.com>
+#  Redistribution of this file is permitted under the terms of the GNU
+#  Public License (GPL)
 #
-#  Drakbacup is use to backup system files and user files
-#  Drakbacup allow to restore the system (etc, var files)
-#  from starup or on drakconf utility.
+#  This program is free software; you can redistribute it and/or modify
+#  it under the terms of the GNU General Public License as published by
+#  the Free Software Foundation; either version 2, or (at your option)
+#  any later version.
 #
-#backup name format: all the time from the /
-#                    backup_sys_date.tar.gz                    -> default system backup
-#		     backup_user_james_date.tar.gz             -> default user backup
-#		     backup_user_seb_date.tar.gz   
-#                    backup_other_date.tar.gz                  -> other directories
+#  This program is distributed in the hope that it will be useful,
+#  but WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#  GNU General Public License for more details.
 #
+#  You should have received a copy of the GNU General Public License
+#  along with this program; if not, write to the Free Software
+#  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 #
-# configuration file on /etc/drakconf/drakbackup/drakbakup.conf
+#________________________________________________________________
+#
+#  Description:
+#
+#   Drakbacup is use to backup your system.
+#   During the configuration you can select 
+# 	- System files, 
+# 	- Users files, 
+# 	- Other files.
+# 	or All your system ...  and Other (like windows Partitions)
+#
+#   Drakbacup allow you to backup your system on:
+# 	- Harddrive.
+# 	- NFS.
+# 	- CDROM (CDRW), DVDROM (with autoboot, rescue and autoinstall.).
+# 	- FTP.
+# 	- Rsync.
+# 	- Webdav.
+# 	- Tape.
+#
+#   Drakbacup allow you to Restore your system on
+#   choosen directory.
+#
+#   Per default all backup will be stored on your
+#   /var/drakbackup directory
+#
+#   configuration file:
+# 	/etc/drakconf/drakbackup/drakbakup.conf
 #
 #________________________________________________________________
 # 
@@ -39,7 +68,7 @@
 #		- send mail with results.
 #		- use quota.
 #		- placer README dans $save_path -> prevenir des danger de supprimer la premier version
-#               - ssh & rsync
+#               - ssh & rsync -> expect or .identity.pub/authorized_keys 
 #	        - calcul disk space.
 #	        - backend : --resore_all, --restore_sys, --restore_users
 #			  --build_cd_autoinst 	
