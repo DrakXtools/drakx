@@ -100,11 +100,7 @@ my $int_connect = Gtk2::Button->new(N("Wait please"));
 $int_connect->set_sensitive(0);
 $int_connect->signal_connect(clicked => sub {
     if (!$isconnected) {
-        if (cat_($network::tools::connect_prog) =~ m|/usr/bin/kppp| && -e '/usr/bin/kppp') {
-            run_program::run("/usr/bin/kppp &");
-          } else {
-              connect_backend($netc);
-          }
+        connect_backend($netc);
     } else {
         disconnect_backend($netc);
     }
