@@ -136,6 +136,7 @@ sub main {
 						      _("Because you are doing a network installation, your network is already configured.
 Click on Ok to keep your configuration, or cancel to reconfigure your Internet & Network connection.
 "), 1)) and do {
+    $netcnx->{type}='lan';
     output "$prefix$connect_file",
       qq(
 ifup eth0

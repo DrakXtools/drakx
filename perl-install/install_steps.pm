@@ -584,6 +584,7 @@ sub configureNetwork {
     my ($o) = @_;
     require network;
     network::configureNetwork2($o, $o->{prefix}, $o->{netc}, $o->{intf});
+    $o->{netcnx} ||= 'lan';
 }
 
 #------------------------------------------------------------------------------
@@ -939,7 +940,7 @@ sub exitInstall {
 #------------------------------------------------------------------------------
 sub hasNetwork {
     my ($o) = @_;
-    $o->{netcnx}{internet_cnx_choice} && $o->{netc}{NETWORKING} ne 'no'
+    $o->{netcnx}{type} && $o->{netc}{NETWORKING} ne 'no'
 }
 
 #------------------------------------------------------------------------------
@@ -950,7 +951,7 @@ sub upNetwork {
 
     modules::write_conf($o->{prefix});
     if (hasNetwork($o)) {
-	if ($o->{netc}{internet_cnx_choice} =~ /adsl|network|cable/) {
+	if ($o->{netcnx}{type} =~ /adsl|lan|cable/) {
 	    require network::netconnect;
 	    network::netconnect::start_internet($o);
 	    return 1;
@@ -971,7 +972,7 @@ sub downNetwork {
 
     modules::write_conf($o->{prefix});
     if (hasNetwork($o)) {
-	if (!$pppOnly && $o->{netc}{internet_cnx_choice} =~ /adsl|network|cable/) {
+	if (!$pppOnly && $o->{netc}{type} =~ /adsl|lan|cable/) {
 	    require network::netconnect;
 	    network::netconnect::stop_internet($o);
 	    return 1;
