@@ -54,7 +54,7 @@ sub config_cups {
     # running
     if (!check_network($printer, $in, $upNetwork, 0)) { return 0 };
 
-#    $in->set_help('configureRemoteCUPSServer') if $::isInstall;
+    #$in->set_help('configureRemoteCUPSServer') if $::isInstall;
     #- hack to handle cups remote server printing,
     #- first read /etc/cups/cupsd.conf for variable BrowsePoll address:port
     # Return value: 0 when nothing was changed ("Apply" never pressed), 1
@@ -3597,7 +3597,6 @@ sub main {
     # clicked on the "Configure" button in the "Summary" step. We do not
     # call it during the preparation of the "Summary" screen.
     if (!$::isInstall || $install_step == 1) {
-
 	# Ask for a spooler when none is defined yet
 	$printer->{SPOOLER} ||= 
 	    setup_default_spooler($printer, $in, $upNetwork) || return;
@@ -3737,7 +3736,7 @@ sub main {
 		      ]);
 		# Toggle expert mode and standard mode
 		if ($menuchoice eq "\@usermode") {
-		    printer::main::set_usermode(!$::expert);
+		    $::expert = printer::main::set_usermode(!$::expert);
 		    # Read printer database for the new user mode
 		    %printer::main::thedb = ();
 		    # Modify menu entries to switch the tree

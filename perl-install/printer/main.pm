@@ -377,6 +377,52 @@ sub make_menuentry {
 	"$localremote$sep$queue: $make $model$connection";
 }
 
+sub connectionstr {
+    my ($connect) = @_;
+    my $connection;
+    if ($connect =~ m!^(file|parallel):/dev/lp(\d+)$!) {
+	my $number = $2;
+	$connection = N("Parallel port #%s", $number);
+    } elsif ($connect =~ m!^(file|usb):/dev/usb/lp(\d+)$!) {
+	my $number = $2;
+	$connection = N("USB printer #%s", $number);
+    } elsif ($connect =~ m!^usb://!) {
+	$connection = N("USB printer");
+    } elsif ($connect =~ m!^ptal://?(.+?)$!) {
+	my $ptaldevice = $1;
+	if ($ptaldevice =~ /^mlc:par:(\d+)$/) {
+	    my $number = $1;
+	    $connection = N("Multi-function device on parallel port #%s",
+			    $number);
+	} elsif ($ptaldevice =~ /^mlc:usb:/) {
+	    $connection = N("Multi-function device on USB");
+	} elsif ($ptaldevice =~ /^hpjd:/) {
+	    $connection = N("Multi-function device on HP JetDirect");
+	} else {
+	    $connection = N("Multi-function device");
+	}
+    } elsif ($connect =~ m!^file:(.+)$!) {
+	$connection = N("Prints into %s", $1);
+    } elsif ($connect =~ m!^lpd://([^/]+)/([^/]+)/?$!) {
+	$connection = N("LPD server \"%s\", printer \"%s\"", $2, $1);
+    } elsif ($connect =~ m!^socket://([^/:]+):([^/:]+)/?$!) {
+	$connection = N("TCP/IP host \"%s\", port %s", $1, $2);
+    } elsif ($connect =~ m!^smb://([^/\@]+)/([^/\@]+)/?$! ||
+	     $connect =~ m!^smb://.*/([^/\@]+)/([^/\@]+)/?$! ||
+	     $connect =~ m!^smb://.*\@([^/\@]+)/([^/\@]+)/?$!) {
+	$connection = N("SMB/Windows server \"%s\", share \"%s\"", $1, $2);
+    } elsif ($connect =~ m!^ncp://([^/\@]+)/([^/\@]+)/?$! ||
+	     $connect =~ m!^ncp://.*/([^/\@]+)/([^/\@]+)/?$! ||
+	     $connect =~ m!^ncp://.*\@([^/\@]+)/([^/\@]+)/?$!) {
+	$connection = N("Novell server \"%s\", printer \"%s\"", $1, $2);
+    } elsif ($connect =~ m!^postpipe:(.+)$!) {
+	$connection = N("Uses command %s", $1);
+    } else {
+	$connection = N("URI: %s", $connect);
+    }
+    return $connection;
+}
+
 sub read_printer_db(;$) {
 
     my $spooler = $_[0];
@@ -616,7 +662,7 @@ sub set_usermode {
     my ($usermode) = @_;
     $sysconfig{USER_MODE} = $usermode ? "expert" : "recommended";
     setVarsInSh("$::prefix/etc/sysconfig/printing", \%sysconfig);
-    return 1;
+    return $usermode;
 }
 
 sub get_usermode() { $::expert = $sysconfig{USER_MODE} eq 'expert' ? 1 : 0 }
@@ -1104,7 +1150,7 @@ sub read_cups_config {
 	handle_configs::read_unique_directive($printer->{cupsconfig}{cupsd_conf},
 					      'Browsing', 'On');
 
-    # Keyword "BrowseInterval" 
+    # Keyword "BrowseInterval"
     $printer->{cupsconfig}{keys}{BrowseInterval} =
 	handle_configs::read_unique_directive($printer->{cupsconfig}{cupsd_conf},
 					      'BrowseInterval', '30');
@@ -1542,7 +1588,7 @@ sub poll_ppd_base() {
 		# Native CUPS?
 		my $isnativecups = $driver =~ /CUPS/i;
 		# Native PostScript
-		my $isnativeps = !$isfoomatic and !$isnativecups;
+		my $isnativeps = (!$isfoomatic and !$isnativecups);
 		# Key without language tag (key as it was produced for the
 		# entries from the Foomatic XML database)
 		my $keynolang = $key;
