@@ -927,6 +927,8 @@ sub selectPackagesToUpgrade {
 
 sub allowedToUpgrade { $_[0] !~ /^(kernel|kernel22|kernel2.2|kernel-secure|kernel-smp|kernel-linus|kernel-linus2.2|hackkernel|kernel-enterprise)$/ }
 
+sub supplCDMountPoint { $::o->{mainmethod} eq 'cdrom' ? "/tmp/image" : "/mnt/cdrom" }
+
 sub installTransactionClosure {
     my ($packages, $id2pkg) = @_;
     my ($id, %closure, @l, $medium, $min_id, $max_id);
@@ -964,6 +966,7 @@ sub installTransactionClosure {
 
     #- Supplementary CD : switch temporarily to "cdrom" method
     my $suppl_CD = isSupplCDMedium($medium);
+    $::o->{mainmethod} = $::o->{method};
     local $::o->{method} = do {
 	my $cdrom;
 	cat_("/proc/mounts") =~ m,(/(?:dev|tmp)/\S+)\s+(?:/mnt/cdrom|/tmp/image), and $cdrom = $1;
@@ -973,7 +976,7 @@ sub installTransactionClosure {
 	    log::l("cdrom redetected at $cdrom");
 	    devices::make($cdrom);
 	    install_any::ejectCdrom($cdrom) if $::o->{method} eq 'cdrom';
-	    install_any::mountCdrom("/mnt/cdrom", $cdrom);
+	    install_any::mountCdrom(supplCDMountPoint(), $cdrom);
 	} else { log::l("cdrom already found at $cdrom") }
 	'cdrom';
     } if $suppl_CD;
@@ -983,7 +986,7 @@ sub installTransactionClosure {
 	my $pkg = $packages->{depslist}[$l[0]];
 
 	#- force changeCD callback to be called from main process.
-	install_any::getFile($pkg->filename, $medium->{descr}, $suppl_CD ? '/mnt/cdrom' : undef);
+	install_any::getFile($pkg->filename, $medium->{descr}, $suppl_CD ? supplCDMountPoint() : undef);
 	#- close opened handle above.
 	install_any::getFile('XXX');
     }
@@ -1140,8 +1143,7 @@ sub install($$$;$$) {
 						my $f = $pkg && $pkg->filename;
 						print $LOG "$f\n";
 						if (isSupplCDMedium($medium)) {
-						    #- supplementary CD already mounted in /mnt/cdrom
-						    $fd = install_any::getFile($f, $medium->{descr}, '/mnt/cdrom');
+						    $fd = install_any::getFile($f, $medium->{descr}, supplCDMountPoint());
 						} else {
 						    $fd = install_any::getFile($f, $medium->{descr}, $medium->{prefix});
 						}
