@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10
-Release: 47mdk
+Release: 48mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -314,6 +314,24 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Wed Jun 23 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10-48mdk
+- drakboot (oblin):
+  o ask for bootloader choice when framebuffer isn't configured (#9925)
+  o do not update bootsplash in autologin wizard
+- drakclock: be mouse wheel aware (oblin, #9926)
+- drakconnect (olivier blin):
+  o blacklists the sis900 driver (#9233) for network hotplugging
+  o properly handle ascii WEP keys (#9884)
+  o rephrase zeroconf dialog (cybercfo)
+- drakxtv: fix tv driver not loaded on boot (oblin, #9112)
+- localedrake: new default IM for CKJ
+  o set up SCIM for chinese
+  o set uo SCIM+UIM for japanese
+- mousedrake: load usbhid instead of hid is now named (pixel, svetljo)
+- XFdrake (pixel):
+  o better auto monitor config
+  o sync with bootsplash's detect-resolution
+
 * Tue Jun 22 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10-47mdk
 - add net_applet (daouda)
 - drakconnect: update ADSL ISP database (baud <baud123@tuxfamily.org>):
