@@ -1025,8 +1025,8 @@ sub wizard_welcome {
 	    undef $printer->{AUTODETECTSMB};
 	}
 	$autodetectlocal = 1 if $printer->{AUTODETECTLOCAL};
-	$autodetectnetwork = 0 if $printer->{AUTODETECTNETWORK};
-	$autodetectsmb = 0 if $printer->{AUTODETECTSMB};
+	$autodetectnetwork = 1 if $printer->{AUTODETECTNETWORK};
+	$autodetectsmb = 1 if $printer->{AUTODETECTSMB};
     }
     if ($in) {
 	eval {
@@ -4572,11 +4572,11 @@ sub init {
 	}
     }
 
-    # Turn on printer autodetection by default
+    # Turn on local printer autodetection by default
     $printer->{AUTODETECT} = 1;
     $printer->{AUTODETECTLOCAL} = 1;
-    $printer->{AUTODETECTNETWORK} = 1;
-    $printer->{AUTODETECTSMB} = 1;
+    $printer->{AUTODETECTNETWORK} = 0;
+    $printer->{AUTODETECTSMB} = 0;
     
     # Mark this part as done, it should not be done a second time.
     if ($::isInstall) {
