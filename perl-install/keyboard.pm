@@ -68,7 +68,8 @@ my %keyboards = (
  "tr_q" => [ __("Turkish (modern \"Q\" model)"), "tr_q-latin5", "tr_q" ],
  "ua" => [ __("Ukrainian"),      "ua",           "ua" ],
  "uk" => [ __("UK keyboard"),    "uk-latin1",    "gb" ],
- "us" => [ __("US keyboard"),    "us-latin1",    "us_intl" ],
+ "us" => [ __("US keyboard"),    "us",           "us" ],
+ "us_intl" => [ __("US keyboard (international)"), "us-latin1", "us_intl" ],
  "yu" => [ __("Yugoslavian (latin layout)"), "sr", "yu" ],
 );
 
