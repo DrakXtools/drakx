@@ -356,7 +356,8 @@ sub choosePackagesTree {
 				my ($add_node, $flat) = @_;
 				if ($flat) {
 				    foreach (sort keys %{$packages->{names}}) {
-					!$limit_to_medium || pkgs::packageMedium($packages, $_) == $limit_to_medium or next;
+					!$limit_to_medium ||
+					  pkgs::packageMedium($packages, $packages->{names}{$_}) == $limit_to_medium or next;
 					$add_node->($_, undef);
 				    }
 				} else {
