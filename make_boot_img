@@ -478,7 +478,6 @@ cd /tools/ppc
 sub isolinux {
     my ($main, @kernels) = @_;
     @kernels = ($main, grep { $_ ne $main } @kernels);
-    my $debug = 1 ? '-debug' : '';
     _ "rm -rf isolinux"; mkdir "isolinux", 0777;
     my $i = 0;
     foreach (@kernels) {
@@ -492,7 +491,7 @@ sub isolinux {
 	#- change here for newer picture isolinux-graphic.bmp and newer parameters.
 	_ "lilo-bmp2mdk mode:0x103 progress:425,173,16,8,64+2 clear:600,800,64+2 pos:0,0 <isolinux-graphic.bmp >isolinux/boot.msg";
     }
-    _ "cp /usr/lib/syslinux/isolinux$debug.bin isolinux/isolinux.bin";
+    _ "cp /usr/lib/syslinux/isolinux.bin isolinux/isolinux.bin";
     output "isolinux/isolinux.cfg", "
 default linux
 prompt 1
