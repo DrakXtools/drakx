@@ -1033,6 +1033,7 @@ sub install($$$;$$) {
     }
 
     log::l("pkgs::install $prefix");
+    log::l("pkgs::install the following: ", join(" ", keys %packages));
     eval { fs::mount("/proc", "$prefix/proc", "proc", 0) } unless -e "$prefix/proc/cpuinfo";
 
     log::l("reading /usr/lib/rpm/rpmrc");

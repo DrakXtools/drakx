@@ -22,6 +22,7 @@ use devices;
 use fsedit;
 use modules;
 use detect_devices;
+use lang;
 use any;
 use log;
 use fs;
