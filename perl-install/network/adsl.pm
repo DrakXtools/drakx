@@ -246,6 +246,7 @@ protocol adslpppoe)
                         pppoa => [ qw(ppp-pppoatm) ],
                         pppoe => [ qw(ppp-pppoe rp-pppoe) ],
                         pptp  => [ qw(pptp-linux) ],
+                        capi => [ qw(isdn4k-utils) ], #- capi4linux service
                        );
         $in->do_pkgs->install(@{$packages{$adsl_type}}) if !$>;
         output("$::prefix/etc/ppp/options",
