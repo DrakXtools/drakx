@@ -104,7 +104,14 @@ sub bestMirror {
     $possible[rand @possible];
 }
 
-sub dir { $mirrors{$_[0]}[1] . '/' . $::VERSION }
+#- hack to retrieve Mandrake Linux version...
+sub version {
+    require pkgs;
+    my $pkg = pkgs::packageByName($::o->{packages}, 'mandrake-release');
+    $pkg && pkgs::packageVersion($pkg) || '8.2'; #- safe but dangerous ;-)
+}
+
+sub dir { $mirrors{$_[0]}[1] . '/' . version() }
 sub ftp($) { ftp::new($_[0], dir($_[0])) }
 
 sub getFile {
@@ -131,7 +138,7 @@ sub getPackages {
     #- extract hdlist of crypto, then depslist.
     require pkgs;
     my $update_medium = pkgs::psUsingHdlist($prefix, 'ftp', $packages, "hdlist-updates.cz", "1u", "RPMS",
-					    "Updates for Mandrake Linux $::VERSION", 1, getFile("base/hdlist.cz", $mirror)) and
+					    "Updates for Mandrake Linux " . version(), 1, getFile("base/hdlist.cz", $mirror)) and
 					      log::l("read updates hdlist");
     #- keep in mind where is the URL prefix used according to mirror (for install_any::install_urpmi).
     $update_medium->{prefix} = "ftp://$mirror" . dir($mirror);
