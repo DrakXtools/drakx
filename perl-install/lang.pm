@@ -448,7 +448,7 @@ sub load_po {
 		$to = qq("$to");
 	    }
 	    if ($from) {
-		$s .= qq("$from" => $to,\n);
+		$s .= qq("$from" => ) . c::iconv($to, $lang::charset, c::standard_charset()) . ",\n";
 	    } elsif ($to =~ /charset=([\w-]+)/) {
 		$lang::charset = $1;
 	    }

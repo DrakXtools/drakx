@@ -10,6 +10,8 @@ $VERSION = '0.01';
 
 bootstrap c::stuff $VERSION;
 
+sub from_utf8 { iconv($_[0], "utf-8", standard_charset()) }
+
 sub headerGetEntry {
     my ($h, $q) = @_;
     $h or log::l("empty header in headerGetEntry"), return;

@@ -452,18 +452,19 @@ setPromVars(linuxAlias, bootDevice)
 
 $ENV{C_RPM} and print '
 char *
-from_utf8(s)
+iconv(s, from_charset, to_charset)
   char *s
+  char *from_charset
+  char *to_charset
   CODE:
-  char *charset = nl_langinfo(CODESET);
-  iconv_t cd = iconv_open(charset, "utf-8");
+  iconv_t cd = iconv_open(to_charset, from_charset);
   RETVAL = s;
   if (cd != (iconv_t) (-1)) {
       int s_len = strlen(RETVAL);
-      char *buf = alloca(s_len + 10); /* 10 for safety, it should not be needed, utf8 is *always* bigger than a special encoding */
+      char *buf = alloca(3 * s_len + 10); /* 10 for safety, it should not be needed */
       {
 	  char *ptr = buf;
-	  int ptr_len = s_len + 10;
+	  int ptr_len = 3 * s_len + 10;
 	  if ((iconv(cd, &s, &s_len, &ptr, &ptr_len)) != (size_t) (-1)) {
 	      *ptr = 0;
 	      RETVAL = buf;
@@ -475,25 +476,9 @@ from_utf8(s)
   RETVAL
 
 char *
-to_utf8(charset, s)
-  char *charset
-  char *s
+standard_charset()
   CODE:
-  iconv_t cd = iconv_open("utf-8", charset);
-  RETVAL = s;
-  if (cd != (iconv_t) (-1)) {
-      int s_len = strlen(RETVAL);
-      char *buf = alloca(2 * s_len + 10); /* 10 for safety, it should not be needed */
-      {
-	  char *ptr = buf;
-	  int ptr_len = 2 * s_len + 10;
-	  if ((iconv(cd, &s, &s_len, &ptr, &ptr_len)) != (size_t) (-1)) {
-	      *ptr = 0;
-	      RETVAL = buf;
-	  }
-      }
-      iconv_close(cd);
-  }
+  RETVAL = nl_langinfo(CODESET);
   OUTPUT:
   RETVAL
 

@@ -801,6 +801,6 @@ sub runlevel {
     }
 }
 
-sub to_utf8 { c::to_utf8($lang::charset || 'ISO-8859-1', $_[0]) }
+sub to_utf8 { c::iconv($_[0], $lang::charset || 'ISO-8859-1', "utf-8") }
 
 1;
