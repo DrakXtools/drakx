@@ -3,16 +3,16 @@ LSB
 
 GRAPHICAL_DESKTOP
   4 WindowMaker icewm
-  3 Epplets WMRack blackbox enlightenment ethemes icepref
-    wmakerconf xlockmore xfce
+  3 Epplets blackbox enlightenment ethemes icepref
+    xlockmore xfce
   2 wmnet
-  1 lesstif-mwm xbanner
+  1 lesstif-mwm
 
 GNOME
   5 gnome-panel nautilus gnome-control-center metacity gnome-terminal 
     nautilus-gtkhtml
   4 gdm gnome-applets gtk-themes file-roller
-    gnome-utils gcalculator gucharmap xlockmore gtk-engines2 
+    gnome-utils gucharmap xlockmore gtk-engines2 
     gnome-vfs-extras gconf-editor
   3 gnome-pilot
   2 bug-buddy
@@ -20,16 +20,15 @@ GNOME
 KDE
   5 kdebase kdebase-nsplugins mdkkdm galaxy-kde mandrake-galaxy
   5 kde-i18n-de kde-i18n-fr 
-  4 kdeaddutils kdeadmin kdegraphics kdemultimedia kdenetwork krozat
+  4 kdeadmin kdegraphics kdemultimedia kdenetwork krozat
     kdepim kdetoys kdeutils quanta kdeartwork-kde-classic
   3 kdeartwork
-  2 kdesdk kdoc
+  2 kdesdk
 
 VIDEO
-  4 xine-ui xine-oss xine-xv powerdvd RealPlayer
-  3 nist xanim xmms-smpeg xmovie mplayer-gui
-  2 mtv mtv-fullscreen-extension
-  1 bcast mpeg2_movie
+  4 xine-ui xine-xv RealPlayer
+  3 xmms-smpeg xmovie mplayer-gui
+  2 mtv-fullscreen-extension
 TV
   4 zapping xawtv gatos
   4 KDE kwintv
@@ -39,17 +38,16 @@ OFFICE
     acroread acroread-nppdf
   4 OpenOffice.org
   4 OpenOffice.org-help-en OpenOffice.org-help-fr
-  4 cbb gaddr xpdf moneydance
-  3 wv ical pyDict
+  4 gaddr xpdf
+  3 wv ical
   2 units lyx
   GNOME
-    4 gnome-pim gnome-pim-conduits gnumeric mrproject gnucash
+    4 gnome-pim gnumeric mrproject gnucash
     3 dia gnome-pilot-conduits Guppi
     2 ggv 
   KDE
     5 koffice
     5 koffice-i18n-fr koffice-i18n-de
-    2 klyx
 
 SPELLCHECK
   4 myspell-en_US myspell-fr_FR
@@ -65,22 +63,22 @@ AUDIO
   4 GNOME gnome-audio gnome-media
   4 KDE kdelibs-sound
   4 3D xmms-mesa
-  3 cdp cdparanoia cdrecord-cdda2wav space_sounds timidity-instruments xmms-esd
+  3 cdp cdparanoia cdrecord-cdda2wav timidity-instruments xmms-esd
     xmms-kjofol-skins xmms-more-vis-plugins
   3 GNOME gnome-audio-extra 
-  2 mokmod mp3info mpg123 playmidi playmidi-X11 xmms-mikmod
+  2 mp3info mpg123 playmidi playmidi-X11 xmms-mikmod
 
-  4 HW"Rio 500" rio500 grio500
+  4 HW"Rio 500" rio500
 
 ACCESSIBILITY
   2 gtkeyboard
 
 PUBLISHING
   5 enscript ghostscript-module-X
-  4 ghostscript-utils gv psutils texinfo nlpr
+  4 ghostscript-utils gv psutils texinfo
   2 latex2html jadetex tetex-afm tetex-dvips tetex-latex tetex-xdvi tetex-latex-arab tetex-latex-heb docbook-dtd31-sgml
   2 BOOKS tetex-doc tetex-latex-arab-doc
-  1 docbook-style-dsssl openjade sgml-tools ghostscript-module-SVGALIB cttex
+  1 docbook-style-dsssl openjade ghostscript-module-SVGALIB cttex
   1 BOOKS docbook-style-dsssl-doc
 
   5 CUPS 
@@ -91,21 +89,19 @@ PUBLISHING
 SHELLS
   3 zsh
   3 BOOKS bash-doc zsh-doc
-  2 eshell pdksh tcsh
+  2 pdksh tcsh
   1 bash1
 
 SCIENCES
-  5 3D openuniverse
-  4 gnuplot gtkgraphh
-  3 xlispstat HDF
+  4 gnuplot
+  3 HDF
   2 mathplot octave
-  1 xoscope
 
 EDITORS
   4 emacs-X11
   3 GXedit vim-X11 yudit
   2 nedit cooledit emacs-tramp joe emacs-leim jed-xjed xemacs xemacs-extras xemacs-info
-  1 auctex emacs-el jed xemacs-el emacs-nox xwpe xwpe-X11
+  1 emacs-el jed xemacs-el emacs-nox
   GNOME
     4 gedit
 
@@ -124,7 +120,7 @@ COMMUNICATIONS
   3 jpilot pilot-link
   2 hylafax-server hylafax-client dip
   2 lrzsz mgetty mgetty-contrib mgetty-sendfax mgetty-viewfax mgetty-voice minicom
-  1 jpilot-Mail jpilot-syncmal statserial tkbabel
+  1 jpilot-Mail jpilot-syncmal statserial
 
 TERMINALS
   5 open xterm
@@ -146,7 +142,6 @@ NETWORKING_FILE_TRANSFER
   5 lftp mirrordir rsync
   4 gftp rdist
   3 fmirror ncftp tftp
-  3 GNOME dpsftp
   2 uucp
   
 NETWORKING_FILE_TRANSFER_SERVER
@@ -158,7 +153,7 @@ NETWORKING_LDAP_SERVER
 
 NETWORKING_INSTANT_MESSAGING
   4 licq
-  3 everybuddy licq-console licq-rms
+  3 licq-console licq-rms
   GNOME
     4 gnomeicu gabber gaim
     3 gtk+licq
@@ -172,7 +167,6 @@ NETWORKING_IRC
 NETWORKING_FIREWALLING_SERVER
   5 iproute2 routed iptables
   3 prelude
-  1 portsentry 
 
 NETWORKING_GROUPWARE_SERVER
   4 phpgroupware bwbserver_linux
@@ -182,8 +176,8 @@ NETWORKING_MAIL
   4 faces mozilla-mail evolution
   3 fetchmail urlview mutt spamassassin
   3 !GNOME !KDE xmailbox
-  2 FaxMail comsat elm faces-xface
-  1 exmh sylpheed fetchmail-daemon fetchmailconf
+  2 FaxMail faces-xface
+  1 fetchmail-daemon fetchmailconf
 NETWORKING_MAIL_SERVER
   5 postfix 
   4 mailman
@@ -191,23 +185,23 @@ NETWORKING_MAIL_SERVER
 
 NETWORKING_NEWS
   5 GNOME pan
-  2 slrn tin trn 
-  1 slrn-pull xrn
+  2 slrn
+  1 slrn-pull
 NETWORKING_NEWS_SERVER
   4 inn 
   3 inews 
 
 NETWORKING_OTHER
-  2 finger fwhois ucd-snmp-utils htdig macutils
+  2 finger ucd-snmp-utils htdig macutils
 NETWORKING_OTHER_SERVER
-  3 dhcp-server gated timed ntp
+  3 dhcp-server gated ntp
 
-  3 intimed mcserv nscd pidentd
+  3 intimed nscd pidentd
     rdate bootparamd 
     cleanfeed ucd-snmp leafnode
     cvsweb nut-server
     XFree86-Xvfb XFree86-Xnest
-  2 heartbeat diald finger-server mars-nwe cvsweb
+  2 diald finger-server mars-nwe cvsweb
 
 NIS
   5 ypbind
@@ -215,18 +209,17 @@ NIS_SERVER
   5 ypserv
 
 NETWORKING_REMOTE_ACCESS
-  5 openssh-clients telnet telnet-client-krb5
+  5 openssh-clients telnet-client-krb5
     KDE lisa
   4 traceroute rfbdrake
-  3 vnc
+  3 tightvnc
   2 rsh
-  2 BOOKS vnc-doc
 NETWORKING_REMOTE_ACCESS_SERVER
   5 openssh-server
   4 rfbdrake
-  2 vnc-server
+  2 tightvnc-server
   1 telnet-server-krb5 rsh-server
-
+  3 BOOKS tight-vnc-doc
 NETWORKING_DNS
   4 bind-utils 
 NETWORKING_DNS_SERVER
@@ -240,7 +233,6 @@ NETWORKING_FILE
   2 arkeia-gui arkeia-client arkeia-arkc
   2 GNOME gnomba gtm
   2 autofs
-  1 am-utils
 NETWORKING_FILE_SERVER 
   5 nfs-utils
   4 samba-server bwbserver_linux
@@ -255,22 +247,21 @@ NETWORKING_WWW
   4 GNOME 
       screem 
       galeon 
-  3 plugger opera bluefish
+  3 mozplugger opera bluefish
 NETWORKING_WWW_SERVER
   5 apache2 apache2-mod_perl apache2-mod_ssl apache2-mod_php 
   4 apache2-mod_suexec 
     bwbserver_linux
   4 BOOKS apache2-manual
-  3 php-dba_gdbm_db2 php-gd php-imap php-ldap php-manual php-mysql php-oracle
-    php-pgsql php-readline php mod_sxnet auth_ldap HTML-Embperl
+  3 php-gd php-imap php-ldap php-manual php-mysql
+    php-pgsql php-readline php mod_sxnet HTML-Embperl
   2 ApacheJServ
-  1 Zope Zope-core Zope-pcgi Zope-zserver
 
 GRAPHICS
-  4 ImageMagick giftrans gimp gphoto gphoto2 flphoto qiv ac3d
+  4 ImageMagick giftrans gimp gphoto gphoto2 flphoto qiv
   3 gimp-data-extras gqview sketch xwpick xli
-  2 gif2png gimp-perl xpcd xfig xpcd-gimp gd-utils cameleo
-  1 libgr-progs libungif-progs qcad transfig xpaint xmorph
+  2 gif2png gimp-perl xpcd xfig xpcd-gimp gd-utils
+  1 libungif-progs qcad transfig
   1 3D Mesa-demos
   GNOME
     4 gnome-iconedit
@@ -278,10 +269,9 @@ GRAPHICS
 
 ARCHIVING
   5 dump sharutils unzip
-  4 gtkzip zip
-  3 unarj unstuff mt-st
+  4 zip
+  3 mt-st
   2 taper
-  1 lha
   GNOME
     4 gnozip
     3 gtktalog
@@ -306,31 +296,26 @@ PHOTO
 
 DATABASES
   5 postgresql
-  3 MySQL-client MySQL-shared
+  3 MySQL-client
   DATABASES_SERVER
     4 postgresql-server
     3 MySQL
-    3 postgresql-perl postgresql-python
-    2 postgresql-jdbc postgresql-tk postgresql-odbc postgresql-tcl postgresql-test
+    3 postgresql-python
+    2 postgresql-jdbc postgresql-tcl postgresql-test
   DEVELOPMENT 
     4 perl-Mysql
     3 postgresql-devel
     1 MySQL-bench MySQL-devel
 
 GAMES
-  4 sin-demo
   4 clanbomber freeciv-client lbreakout2 toppler frozen-bubble
-  3 shogo-demo 
   3 cxhextris rocksndiamonds powermanga mures methane
-  2 Maelstrom pingus ltris penguin-command pysol xtrojka bunnies xpilot trophy xboard xgammon xkobo xpat2 xpuzzles xsoldier xfishtank
-  1 7colors xrally fortune-mod nil
+  2 Maelstrom pysol trophy xboard xgammon xpat2 xfishtank
+  1 fortune-mod
   GNOME
     4 gnome-games
     3 gnome-chess
     2 3D gtulpas
-    1 gtkgo
-    DEVELOPMENT
-      2 gnomes-games-devel
   KDE
     4 kdegames
     DEVELOPMENT
@@ -345,15 +330,14 @@ GAMES
 DEVELOPMENT
   5 autoconf automake m4 make 
   3 autoconf2.5
-  1 tmake pmake pmake-customs
+  1 tmake pmake
 
   5 libtool binutils ltrace gdb gcc
-  2 gperf cdecl cproto indent ElectricFence
-  1 egcs glibc-profile xxgdb
+  2 gperf indent
+  1 glibc-profile xxgdb
 
   4 gcc-c++ libstdc++-devel
   2 libsigc++-examples
-  1 egcs-c++ 
 
   4 bison flex
   2 byacc
@@ -368,13 +352,13 @@ DEVELOPMENT
 
   3 swig
 
-  4 python veepee tkinter
+  4 python tkinter
   3 python-devel python-imaging pygtk-glarea pygtk pygtk-libglade rpm-python
 
-  4 perl perl-Term-Readline-Gnu perl-libnet perl-libwww-perl perl-devel
-  3 perl-DBI perl-Digest-MD5 perl-IO-stringy perl-PDL perl-Parse-RecDescent 
-    perl-GTK-GLArea perl-Tk perlftlib eperl perl-URI perl-DB_File
-    perl-Data-ShowTable perl-HTML-Parser perl-HTML-SimpleParse perl-MIME-Base64
+  4 perl perl-Term-Readline-Gnu perl-libwww-perl perl-devel
+  3 perl-DBI perl-IO-stringy perl-PDL perl-Parse-RecDescent 
+    perl-GTK-GLArea perl-Tk perlftlib perl-URI perl-DB_File
+    perl-Data-ShowTable perl-HTML-Parser perl-HTML-SimpleParse
     perl-MIME-tools perl-MP3-Info perl-MailTools perl-Msgcat
 
   4 rpm-build
@@ -384,9 +368,8 @@ DEVELOPMENT
   2 gcc-g77 nasm dev86 
   1 gcc-objc
 
-  2 teyjus gprolog ocaml umb-scheme mawk guile clisp SmallEiffel p2c 
-    ghc ghc-prof happy haskell-GTK haskell-GTK-devel hugs98 mercury swi-prolog 
-    ruby-extensions ruby-gtk ruby 
+  2 gprolog ocaml umb-scheme mawk guile clispp2c 
+    hugs98 mercury swi-prolog ruby 
 
   4 gettext-devel ncurses-devel
 
@@ -395,31 +378,36 @@ DEVELOPMENT
 
   KDE
     4 kdevelop
-    4 kdebase-devel kdegraphics-devel kdelibs-devel kdelibs-sound-devel
-      kdemultimedia-devel kdenetwork-devel
+    4 libkdebase-devel libkdebase-kate-devel libkdebase-nsplugins-devel libkdecore-devel 
+      libkdeedu-devel libkdegames-devel libkdegraphics-common-devel
+      libkdegraphics-kooka-devel libkdemultimedia-common-devel libkdenetwork-common-devel
+      libkdepim-common-devel libkdepim-devel libkdesdk-devel libkdetoys-devel
+      libkdeutils-common-devel libkdeutils-devel libkdeutils-ksim-devel
+      libkdevelop-devel
+
     1 kdesupport-devel kdeaddutils-devel koffice-devel
 
   GNOME
     4 perl-GTK-Glade perl-GTK-Gnome 
-    3 memprof glade gnome-guile pygnome libgnomeui2_0-devel gnome-guile-devel
-      gnome-pim-devel gob 
-    2 pygnome-applet pygnome-capplet pygnome-libglade rep-gtk-gnome
+    3 glade pygnome libgnomeui2_0-devel gnome-guile-devel
+      gob 
+    2 pygnome-capplet pygnome-libglade
       gnomemm-devel gnome-pilot-devel glademm 
-    1 gnucash-devel rep-gtk-libglade
+    1 gnucash-devel
 
   DEVELOPMENT_OTHER
-    2 ImageMagick-devel Mesa-common-devel Xaw3d-devel detect-devel
+    2 libMagick-devel libMesaGLU1-devel Xaw3d-devel
       gd-devel p2c-devel gmp-devel guile-devel libgr-devel libjpeg-devel libpng-devel
       libtermcap-devel libtiff-devel libungif-devel libxml-devel libxml2-devel
-      slang-devel sox-devel zlib-devel XFree86-devel dev86-devel
-      gdk-pixbuf-devel gimp-devel gpm-devel kudzu-devel libghttp-devel libgtop-devel
+      slang-devel sox-devel zlib-devel libxfree86-devel dev86-devel
+      gdk-pixbuf-devel gimp-devel gpm-devel libghttp-devel libgtop-devel
       libmikmod-devel librep-devel libunicode-devel popt-devel pwdb-devel t1lib-devel
-      ucd-snmp-devel mpeg_lib-devel WindowMaker-devel aalib-devel adns-devel
-      alsa-lib-devel audiofile-devel cups-devel e2fsprogs-devel egcs-objc-devel
-      g-wrap-devel gkrellm-devel ibtk libPropList-devel licq-devel openldap-devel
+      libsnmp-devel mpeg_lib-devel WindowMaker-devel libaa-devel adns-devel
+      libalsa-devel audiofile-devel cups-devel e2fsprogs-devel
+      g-wrap-devel gkrellm-devel libPropList-devel licq-devel openldap-devel
       parted-devel pciutils-devel pilot-link-devel svgalib-devel
       recode-devel aspell-devel cracklib-devel faces-devel fnlib-devel
-      freetype-devel gtk+mdk-devel gtkglarea-devel XFree86-static-libs imap-devel
+      freetype-devel gtk+mdk-devel gtkglarea-devel libxfree86-static-devel imap-devel
       php-devel pth-devel sane-devel swig-devel xdelta-devel isapnptools-devel
       pango-devel readline-devel
 
@@ -429,9 +417,9 @@ MONITORING
   4 lsof swatch tcpdump traceroute
   4 nmap
   4 X nmap-frontend
-  3 iplog arpwatch lslk procps-X11 xcpustate xsysinfo
-  2 cfengine gkrellm gps rusers mon xosview 3D xtraceroute
-  1 logcheck bonnie
+  3 iplog arpwatch lslk xcpustate xsysinfo
+  2 cfengine gkrellm gps rusers mon 3D xtraceroute
+  1 logcheck
   GNOME
     4 gnome-system-monitor
 
@@ -439,7 +427,7 @@ FILE_TOOLS
   5 file gnupg mkxauth mtools slocate
   4 symlinks
   3 dosfstools draksync mc tree
-  2 git gentoo sfm xwc FileRunner
+  2 git FileRunner
   1 xdelta
 
 WEBMIN
@@ -449,8 +437,8 @@ WIZARDS
   5 drakwizard
   
 CONFIG
-  3 ipvsadm quota usernet nut
-  2 gfcc control-panel adjtimex isicom xinput timeconfig samba-swat
+  3 ipvsadm quota nut
+  2 gfcc adjtimex xinput timeconfig samba-swat
   1 ipxutils
 
 BOOKS
@@ -471,13 +459,13 @@ X
   3 XFree86-100dpi-fonts draksync
   3 USB usbview
   2 LOCALES"ja" || LOCALES"ko" || LOCALES"zh" jmcce 
-  2 tksysv imlib-cfgeditor
-  1 DrakeLogo Mesa xtoolwait X11R6-contrib 
+  2 imlib-cfgeditor
+  1 Mesa xtoolwait X11R6-contrib 
 
   GNOME
     3 gnorpm
 
-  5 xcin Chinput xa+cv xvnkb FreeWnn ami kinput2-wnn4
+  5 xcin xvnkb FreeWnn ami kinput2-wnn4
 
   2 app-defaults-be app-defaults-cs app-defaults-ga app-defaults-ru app-defaults-th app-defaults-uk
 
@@ -522,7 +510,7 @@ SYSTEM
   4 PCMCIA netprofile
 
   3 bc
-  2 sndconfig kernel-utils acpid adns audiofile freeswan awesfx fbset vlan-utils gpm
+  2 sndconfig acpid adns audiofile freeswan awesfx fbset vlan-utils gpm
   1 fdutils genromfs mailcap pinfo
 
   BOOKS 
@@ -539,33 +527,30 @@ SYSTEM
 
 EMULATORS
   3 wine
-  2 BasiliskII
-  2 xdosemu 
-  1 xmame xmess
 
 INSTALL
   NOCOPY
     5 kernel kernel-smp kernel-enterprise
       raidtools lvm reiserfsprogs jfsprogs xfsprogs 
-      alsa alsa-utils
+      alsa-utils
     4 XFree86 brltty
 
   5 pptp-adsl dhcpcd dhcpxd dhcp-client isdn4net isdn-light isdn4k-utils ibod rp-pppoe pump wireless-tools speedtouch
     ppp nfs-utils-clients
-    autologin ntp cups-drivers samba ncpfs hpoj ucd-snmp libptal0
-    libhpojip0 libsnmp0 xojpanel libsane-hpoj0
-    ipchains shorewall iptables printer-utils rlpr samba-client
+    autologin ntp cups-drivers samba-server ncpfs hpoj ucd-snmp libptal0
+    libhpojip0 libsnmp0 xojpanel libsane-hpoj1
+    shorewall iptables printer-utils samba-client
     xpp printer-testpages nmap scli net-tools
     autologin ntp ipchains 
-    cups lpr printer-utils printer-testpages gimpprint xpp
+    cups printer-utils printer-testpages gimpprint xpp
     foomatic-db-engine foomatic-filters foomatic-db
     nc sndconfig 
     ImageMagick ghostscript printer-filters mpage a2ps ppdfilt libppd1 gpr groff libgimpprint1 numlock curl
     sane-backends sane-frontends xsane xsane-gimp mtools mtoolsfm
-    hotplug dev ypbind speedtouch_mgmt
+    hotplug ypbind speedtouch_mgmt
     tmdns zcip acpi acpid
   4 XFree86-SVGA XFree86-server XFree86-Mach64 XFree86-FBDev
-    XFree86-glide-module Device3Dfx Glide_V3-DRI Glide_V5 Mesa
+    XFree86-glide-module Glide_V3-DRI Glide_V5 Mesa
   3 XFree86-S3 XFree86-S3V XFree86-VGA16
   2 XFree86-8514 XFree86-AGX XFree86-I128 XFree86-Mach32 XFree86-Mach8 XFree86-Mono XFree86-P9000 XFree86-W32
-  1 XFree86-3DLabs XFree86-Sun XFree86-SunMono XFree86-Sun24 
+  1 XFree86-3DLabs
