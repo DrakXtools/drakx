@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 9.3
-Release: 18mdk
+Release: 19mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -313,6 +313,15 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Wed Jan 14 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.3-19mdk
+- diskdrake: updated lvm2 support (pixel)
+- drakboot: boot theme configuration is back (warly)
+- drakboot, drakclock, drakconnect, drakfloppy, drakfont, drakperm,
+  draksec: sanitize buttons bar
+- drakedm: fix dm list
+- printerdrake: sort printer models list
+
+
 * Mon Jan 12 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.3-18mdk
 - drakedm: when offering to restart dm, offer yes/no as choice rather
   than ok/cancel (#6810)
@@ -324,7 +333,6 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 - drakfont: renew GUI through subdialogs
 - localedrake: update languages list (pablo)
 - printerdrake: do not push anymore help menu at right
-
 
 * Mon Jan 12 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.3-17mdk
 - drakfirewall: allow a range of ports (anthill bug #267) (pixel)
