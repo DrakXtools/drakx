@@ -113,10 +113,6 @@ sub detect() {
 
     eval { commands::modprobe("serial") };
     my ($r, $wacom) = mouseconfig(); return ($r, $wacom) if $r;
-    #- my %l;
-    #- eval { commands::modprobe("serial") };
-    #- @l{qw(FULLNAME nbuttons MOUSETYPE XMOUSETYPE device)} = split("\n", `mouseconfig --nointeractive 2>/dev/null`) and return \%l;
-    #- modules::unload("serial");
 
     require pci_probing::main;
     if (my ($c) = pci_probing::main::probe("serial_usb")) {

@@ -396,6 +396,12 @@ sub selectPackagesToUpgrade($$$;$$) {
     local $_; #- else perl complains on the map { ... } grep { ... } @...;
     my %installedFilesForUpgrade; #- help searching package to upgrade in regard to already installed files.
 
+    #- used for package that are not correctly updated.
+    my %upgradeNeedRemove = (
+			     'compat-glibc' => 1,
+			     'compat-libs' => 1,
+			    );
+
     #- help removing package which may have different release numbering
     my %toRemove; map { $toRemove{$_} = 1 } @{$toRemove || []};
 
@@ -423,6 +429,12 @@ sub selectPackagesToUpgrade($$$;$$) {
 				 } else {
 				     $p->{installed} = 1;
 				 }
+			     } elsif ($upgradeNeedRemove{$p->{name}}) {
+				 my $otherPackage = (c::headerGetEntry($header, 'name'). '-' .
+						     c::headerGetEntry($header, 'version'). '-' .
+						     c::headerGetEntry($header, 'release'));
+				 log::l("removing $otherPackage since it will not upgrade correctly!");
+				 $toRemove{$otherPackage} = 1; #- force removing for theses other packages, select our.
 			     }
 			 } else {
 			     my @files = c::headerGetEntry($header, 'filenames');
