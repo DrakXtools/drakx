@@ -24,6 +24,7 @@ help:
 		echo "Updating doc stuff now ..."; \
 		cvs update doc/manualB/{entities,manuals,modules}; \
 	fi
+	touch doc/manualB/entities/es/{button,icon,tab,text_field}_list.ent
 	./help_xml2pm.pl
 
 %.mo: %.po
