@@ -228,7 +228,7 @@ user "$adsl->{login}"
 You can provide it now via a floppy or your windows partition,
 or skip and do it later."), $l) or return;
 	
-	$answer eq "Use a floppy" and load_firmware_floppy("boot.msg", "/usr/share/speedtouch/") || goto firmware;
+	$answer eq "Use a floppy" and load_firmware_floppy("mgmt.o", "/usr/share/speedtouch/") || goto firmware;
 	$answer eq "Use my Windows partition" and goto firmware; # to be done
 	$answer eq "Do it later" and $in->ask_warn('', N("You need the Alcatel microcode.
 Download it at:
