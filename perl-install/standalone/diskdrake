@@ -85,7 +85,7 @@ if ($type eq 'list-hd') {
 } elsif ($type eq 'hd') {
     require diskdrake::interactive;
     diskdrake::interactive::main($in, $all_hds, 0, '', sub { 
-                                     exec("drakhelp Drakxtools-Guide.html/diskdrake.html") unless fork() });
+                                     exec("drakhelp --id diskdrake") unless fork() });
 } elsif ($type eq 'removable') {
     require diskdrake::removable;
     $para =~ s|^/dev/||;
