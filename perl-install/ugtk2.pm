@@ -1153,7 +1153,7 @@ sub ask_browse_tree_info {
 				       })) if $common->{interactive_help};
 
     if ($common->{auto_deps}) {
-	gtkpack__($box1, gtknew('CheckButton', text => $common->{auto_deps}, val => \$common->{state}{auto_deps}));
+	gtkpack__($box1, gtknew('CheckButton', text => $common->{auto_deps}, active_ref => \$common->{state}{auto_deps}));
     }
     $box1->pack_end(my $status = gtknew('Label'), 0, 1, 20);
 
