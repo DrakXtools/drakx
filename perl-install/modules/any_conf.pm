@@ -30,42 +30,48 @@ sub get_alias {
     $conf->{$alias}{alias};
 }
 sub get_options {
-    my ($conf, $name) = @_;
-    $conf->{$name}{options};
+    my ($conf, $module) = @_;
+    $module = $conf->mapping($module);
+    $conf->{$module}{options};
 }
 sub set_options {
-    my ($conf, $name, $new_option) = @_;
-    log::l(qq(set option "$new_option" for module "$name"));
-    $conf->{$name}{options} = $new_option;
+    my ($conf, $module, $new_option) = @_;
+    $module = $conf->mapping($module);
+    log::l(qq(set option "$new_option" for module "$module"));
+    $conf->{$module}{options} = $new_option;
 }
 sub get_parameters {
-    my ($conf, $name) = @_;
-    map { if_(/(.*)=(.*)/, $1 => $2) } split(' ', $conf->get_options($name));
+    my ($conf, $module) = @_;
+    $module = $conf->mapping($module);
+    map { if_(/(.*)=(.*)/, $1 => $2) } split(' ', $conf->get_options($module));
 }
 
 sub get_probeall {
     my ($conf, $alias) = @_;
     $conf->{$alias}{probeall};
 }
-sub set_probeall {
+sub _set_probeall {
     my ($conf, $alias, $modules) = @_;
     $conf->{$alias}{probeall} = $modules;
     log::l("setting probeall $alias to $modules");
 }
 sub add_probeall {
     my ($conf, $alias, $module) = @_;
+    $module = $conf->mapping($module);
     my $modules = join(' ', uniq(split(' ', $conf->{$alias}{probeall}), $module));
-    set_probeall($conf, $alias, $modules);
+    _set_probeall($conf, $alias, $modules);
 }
 sub remove_probeall {
     my ($conf, $alias, $module) = @_;
+    $module = $conf->mapping($module);
     my $modules = join(' ', grep { $_ ne $module } split(' ', $conf->{$alias}{probeall}));
-    set_probeall($conf, $alias, $modules);
+    _set_probeall($conf, $alias, $modules);
 }
 
 sub set_alias { 
     my ($conf, $alias, $module) = @_;
     $module =~ /ignore/ and return;
+    $module = $conf->mapping($module);
     /\Q$alias/ && $conf->{$_}{alias} && $conf->{$_}{alias} eq $module and return $_ foreach keys %$conf;
     log::l("adding alias $alias to $module");
     $conf->{$alias}{alias} = $module;
@@ -96,15 +102,17 @@ sub remove_alias_regexp_byname {
 }
 
 sub remove_module {
-    my ($conf, $name) = @_;
-    $conf->remove_alias($name);
-    log::l("removing module $name");
-    delete $conf->{$name};
+    my ($conf, $module) = @_;
+    $module = $conf->mapping($module);
+    $conf->remove_alias($module);
+    log::l("removing module $module");
+    delete $conf->{$module};
     0;
 }
 
 sub set_sound_slot {
     my ($conf, $alias, $module) = @_;
+    $module = $conf->mapping($module);
     if (my $old = $conf->get_alias($alias)) {
 	$conf->set_above($old, undef);
     }
@@ -156,7 +164,9 @@ sub write {
     my $to_add;
     while (my ($module, $h) = each %$conf) {
 	while (my ($type, $v) = each %$h) {
-	    $to_add .= "$type $module $v\n" if $v && !$written{$module}{$type};
+	    if ($v && !$written{$module}{$type}) {
+		$to_add .= "$type $module $v\n";
+	    }
 	}
     }
     append_to_file($file, $to_add);

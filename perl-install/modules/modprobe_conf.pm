@@ -9,8 +9,15 @@ our @ISA = qw(modules::any_conf);
 sub file { '/etc/modprobe.conf' }
 sub handled_fields { qw(alias options install remove) }
 
+sub mapping {
+    my ($_conf, @modules) = @_;
+    my @l = map { modules::mapping_24_26($_) } @modules;
+    wantarray ? @l : $l[0];
+}
+
 sub get_above {
     my ($conf, $module) = @_;
+    $module = $conf->mapping($module);
 
     my (undef, $after) = parse_non_virtual($module, $conf->{$module}{install}) or return;
     my ($l, $_other_cmds) = partition_modprobes($after);
@@ -18,17 +25,19 @@ sub get_above {
 }
 sub set_above {
     my ($conf, $module, $o_modules) = @_;
+    $module = $conf->mapping($module);
+    my @modules = $conf->mapping(split(' ', $o_modules || ''));
 
     { #- first add to "install" command
 	my ($before, $after) = parse_non_virtual($module, $conf->{$module}{install});
 	my ($_previous_modules, $other_cmds) = partition_modprobes($after || '');
-	$after = join('; ', @$other_cmds, map { "/sbin/modprobe $_" } split(' ', $o_modules || ''));
+	$after = join('; ', @$other_cmds, map { "/sbin/modprobe $_" } @modules);
 	$conf->{$module}{install} = unparse_non_virtual($module, '--ignore-install', $before, $after);
     }
     { #- then to "remove" command
 	my ($before, $after) = parse_non_virtual($module, $conf->{$module}{remove});
 	my ($_previous_modules, $other_cmds) = partition_modprobes($before || '');
-	$before = join('; ', @$other_cmds, map { "/sbin/modprobe -r $_" } split(' ', $o_modules || ''));
+	$before = join('; ', @$other_cmds, map { "/sbin/modprobe -r $_" } @modules);
 	$conf->{$module}{remove} = unparse_non_virtual($module, '-r --ignore-remove', $before, $after);
     }
 }

@@ -38,11 +38,16 @@ $mappings_26_24{'uhci-hcd'} = 'usb-uhci';
 
 sub mapping_24_26 {
     my ($modname) = @_;
-    c::kernel_version() =~ /^\Q2.6/ && $mappings_24_26{$modname} || $modname;
+    $mappings_24_26{$modname} || $modname;
 }
 sub mapping_26_24 {
     my ($modname) = @_;
-    c::kernel_version() =~ /^\Q2.6/ && $mappings_26_24{$modname} || $modname;
+    $mappings_26_24{$modname} || $modname;
+}
+
+sub cond_mapping_24_26 {
+    my ($modname) = @_;
+    c::kernel_version() =~ /^\Q2.6/ && $mappings_24_26{$modname} || $modname;
 }
 
 #-###############################################################################
@@ -65,7 +70,7 @@ sub load_raw {
 sub load {
     my (@l) = @_;
     @l = map {
-	dependencies_closure(mapping_24_26($_));
+	dependencies_closure(cond_mapping_24_26($_));
     } @l;
 
     @l = remove_loaded_modules(@l) or return;
@@ -80,7 +85,7 @@ sub load_and_configure {
     my $category = module2category($module) || '';
     my $network_devices = $category =~ m!network/(main|gigabit|usb|wireless)! && [ detect_devices::getNet() ];
 
-    my @l = remove_loaded_modules(dependencies_closure(mapping_24_26($module))) or return;
+    my @l = remove_loaded_modules(dependencies_closure(cond_mapping_24_26($module))) or return;
     load_raw(\@l, { $module => $o_options });
 
     if ($network_devices) {
@@ -211,8 +216,6 @@ sub name2file {
 sub when_load {
     my ($conf, $name) = @_;
 
-    $name = mapping_26_24($name); #- need to stay with 2.4 names, modutils will allow booting 2.4 and 2.6
-
     if (my $category = module2category($name)) {
 	when_load_category($conf, $name, $category);
     }
@@ -231,7 +234,7 @@ sub when_load_category {
     } elsif ($category eq 'bus/usb') {
 	$conf->add_probeall('usb-interface', $name);
         -f '/proc/bus/usb/devices' or eval {
-            require fs; fs::mount('/proc/bus/usb', '/proc/bus/usb', 'usbdevfs');
+            require fs; fs::mount('none', '/proc/bus/usb', 'usbdevfs');
             #- ensure keyboard is working, the kernel must do the job the BIOS was doing
             sleep 4;
             load("usbkbd", "keybdev") if detect_devices::usbKeyboards();

@@ -9,14 +9,25 @@ our @ISA = qw(modules::any_conf);
 sub file { '/etc/modules.conf' }
 sub handled_fields { qw(alias above options probeall) }
 
+sub mapping {
+    my ($_conf, @modules) = @_;
+    my @l = map { modules::mapping_26_24($_) } @modules;
+    wantarray ? @l : $l[0];
+}
+
 sub get_above {
     my ($conf, $module) = @_;
+    $module = $conf->mapping($module);
+
     $conf->{$module} && $conf->{$module}{above};
 }
 sub set_above {
     my ($conf, $module, $o_modules) = @_;
+    $module = $conf->mapping($module);
+
     if ($o_modules) {
-	$conf->{$module}{above} = $o_modules;
+	my $modules = join(' ', $conf->mapping(split(' ', $o_modules)));
+	$conf->{$module}{above} = $modules;
     } else {
 	delete $conf->{$module}{above};
     }
