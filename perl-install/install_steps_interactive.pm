@@ -861,7 +861,7 @@ sub summary {
     my $format_mouse = sub { $mouse_name = translate($o->{mouse}{type}) . ' ' . translate($o->{mouse}{name}) };
     &$format_mouse;
 
-    #- format printer description in a better way according to CUPS/LPR used.
+    #- format printer description in a better way
     my $format_printers = sub {
 	my ($printer) = @_;
 	if (is_empty_hash_ref($printer->{configured})) {
@@ -869,11 +869,7 @@ sub summary {
 	    return _("No printer");
 	}
 	my $entry = $printer->{configured}{$printer->{QUEUE}} || (values %{$printer->{configured}})[0];
-	for ($entry->{mode}) {
-	    /CUPS/ and return $entry->{cupsDescr};
-	    /lpr/ and return $entry->{DBENTRY};
-	    die "unknown entry for printer $entry->{QUEUE}";
-	}
+	return "$entry->{'make'} $entry->{'model'}";
     };
 
     $o->ask_from_entries_refH_powered({
@@ -915,27 +911,9 @@ sub configurePrinter {
     my $printer = $o->{printer} ||= {};
     eval { add2hash($printer, printer::getinfo($o->{prefix})) };
 
-    #- figure out what printing system to use, currently are suported cups and lpr,
-    #- in case this has not be detected above.
-    $::expert or $printer->{mode} ||= 'CUPS';
-    if ($::expert || !$printer->{mode}) {
-	$o->set_help('configurePrinterSystem');
-	$o->ask_from_entries_refH_powered(
-              {
-	       messages => _("Which printing system do you want to use?"),
-	       }, [ { val => \$printer->{mode}, list => [ 'CUPS', 'lpr' ] } ]
-        ) or $printer->{mode} = undef, $printer->{want} = undef, return;
-	$printer->{want} = 1;
-	$o->set_help('configurePrinter');
-    }
-
     $printer->{PAPERSIZE} = $o->{lang} eq 'en' ? 'letter' : 'a4';
     printerdrake::main($printer, $o, $ask_multiple_printer, sub { install_interactive::upNetwork($o, 'pppAvoided') });
 
-    if (!is_empty_hash_ref($printer->{configured}) || pkgs::packageFlagInstalled(pkgs::packageByName($o->{packages}, 'cups'))) {
-	$o->pkg_install_if_requires_satisfied('Mesa-common', 'xpp', 'libqtcups2', 'qtcups', 'kups')
-	  and run_program::rooted($o->{prefix}, "update-menus");
-    }
 }
 
 #------------------------------------------------------------------------------
