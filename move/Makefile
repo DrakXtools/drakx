@@ -99,7 +99,7 @@ un_live_tree_boot:
 	./make_live_tree_boot -u
 	tools/fix-fc-cache.pl $(DEST_LIVETREE)
 
-iso: un_live_tree_boot install live_tree_boot
+iso: un_live_tree_boot build install live_tree_boot
 	rm -rf /tmp/iso /tmp/live_tree.clp
 	mkdir /tmp/iso
 	cp -a isolinux /tmp/iso
