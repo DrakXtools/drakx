@@ -101,6 +101,11 @@ make
 rm -rf $RPM_BUILD_ROOT
 
 make PREFIX=$RPM_BUILD_ROOT install
+mkdir -p $RPM_BUILD_ROOT%_initrddir/
+if [ -f $RPM_BUILD_ROOT%_sbindir/service_harddrake ]; then
+	mv $RPM_BUILD_ROOT%_sbindir/service_harddrake $RPM_BUILD_ROOT%_initrddir/harddrake2
+	else cp standalone/service_harddrake $RPM_BUILD_ROOT%_initrddir/harddrake2
+fi
 
 mv ${RPM_BUILD_ROOT}%{_sbindir}/net_monitor \
    ${RPM_BUILD_ROOT}%{_sbindir}/net_monitor.real
@@ -127,11 +132,8 @@ cat > $RPM_BUILD_ROOT%_menudir/%name <<EOF
 	command="/usr/sbin/harddrake"\
 	icon="harddrake.png"
 EOF
-mkdir -p $RPM_BUILD_ROOT%_initrddir/
-mv $RPM_BUILD_ROOT%_sbindir/service_harddrake $RPM_BUILD_ROOT%_initrddir/harddrake2
-
 %find_lang libDrakX
-
+cat libDrakX.lang >> %name.list
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -168,7 +170,7 @@ done
 %clean_menus
 
 
-%files newt -f %{name}.list -f libDrakX.lang
+%files newt -f %name.list
 %defattr(-,root,root)
 %config(noreplace) /etc/security/fileshare.conf
 %doc diskdrake/diskdrake.html
