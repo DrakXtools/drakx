@@ -554,6 +554,7 @@ sub main {
     modules::load_deps("/modules/modules.dep");
     modules::get_stage1_conf("/tmp/conf.modules");
     modules::read_already_loaded();
+    modparm::read_modparm_file("/usr/share/modparm.lst");
 
     while (@_) {
 	local $_ = shift;

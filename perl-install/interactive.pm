@@ -89,22 +89,21 @@ sub ask_many_from_list($$$$;$) {
       [ map { $$_ } @$val ] : undef;
 }
 
-sub ask_from_entry($$$;$%) {
-    my ($o, $title, $message, $def, %callback) = @_;
+sub ask_from_entry {
+    my ($o, $title, $message, $label, $def, %callback) = @_;
 
-    
     $message = ref $message ? $message : [ $message ];
-    $o->ask_from_entries($title, $message, [$def], %callback);
-#    $o->ask_from_entryW($title, $message, $def);
+    $o->ask_from_entries($title, $message, [ $label ], [ $def ], %callback);
 }
 
 sub ask_from_entries($$$$;$%) {
     my ($o, $title, $message, $l, $def, %callback) = @_;
 
     my $val = [ map { my $i = $_; \$i } @$def ];
-    $o->ask_from_entries_ref($title, $message, $l, $val, %callback) ?
-      [ map { $$_ } @$val ] : undef;
 
+    $o->ask_from_entries_ref($title, $message, $l, $val, %callback) ?
+      map { $$_ } @$val : 
+      undef;
 }
 # can get a hash of callback: focus_out changed and complete
 # moreove if you pass a hash with a field list -> combo

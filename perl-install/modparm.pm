@@ -1,6 +1,11 @@
 package modparm;
 
+use diagnostics;
+use strict;
+
+use common qw(:common);
 use log;
+
 
 my %modparm_hash;
 
@@ -8,7 +13,8 @@ sub read_modparm_file($) {
   my ($file) = @_;
   my @line;
 
-  open F, $file;
+  local *F;
+  open F, $file or log::l("missing $file: $!"), return;
   while (<F>) {
     chomp;
     @line = split ':';
@@ -19,60 +25,29 @@ sub read_modparm_file($) {
 					 desc => $line [4],
 					};
   }
-  close F;
 }
 
-sub get_options_result($;$) {
-  my ($module,$value) = @_;
-  my @names = keys %{$modparm_hash{$module}};
-  my $options;
-  my $result;
-  my $i;
+sub get_options_result($@) {
+  my ($module, @value) = @_;
 
-  for $i (0..$#$value) {
-    $result = $ {$value->[$i]};
-
-    if ($result != "") {
-      $options .= "$names[$i]=$result ";
-    }
-  }
-
-  return $options;
+  mapn { 
+      my ($a, $b) = @_;
+      $a ? "$b=$a" : ()
+  } \@value, [ keys %{$modparm_hash{$module}} ];
 }
 
 sub get_options_name($) {
   my ($module) = @_;
-  my @names = keys %{$modparm_hash{$module}};
-  my @result;
-  my $opttype;
-  my $default;
+  my @names;
 
-  foreach (@names) {
-    $opttype = $modparm_hash{$module}{$_}{type};
-    $default = $modparm_hash{$module}{$_}{default};
+  %modparm_hash or return;
 
-    if (defined($default)) {
-      push @result, _("$_ ($opttype)[$default]");
-    } else {
-      push @result, _("$_ ($opttype)");
-    }
+  while (my ($k, $v) = each %{$modparm_hash{$module} || {}}) {
+       my $opttype = $v->{type};
+       my $default = $v->{default};
+       push @names, "$k ($v->{type})" . (defined($v->{default}) && "[$v->{default}]");
   }
-
-  return \@result;
-}
-
-sub get_options_value($) {
-  my ($module) = @_;
-  my @names = keys %{$modparm_hash{$module}};
-  my @result;
-
-  for $i (0..$#names) {
-    my $value = "";
-
-    $result[$i] = \$value;
-  }
-
-  return \@result;
+  @names;
 }
 
 read_modparm_file("/tmp/modparm.txt");

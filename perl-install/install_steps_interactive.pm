@@ -534,38 +534,30 @@ sub loadModule {
 			      [ modules::text_of_type($type) ]) or return;
     my $m = modules::text2driver($l);
 
-    if ($o->ask_from_list('', 
+    my @names = modparm::get_options_name($m);
+
+    if ((!defined @names || @names > 0) && $o->ask_from_list('', 
 _("In some cases, the %s driver needs to have extra information to work
 properly, although it normally works fine without. Would you like to specify
 extra options for it or allow the driver to probe your machine for the
 information it needs? Occasionally, probing will hang a computer, but it should
 not cause any damage.", $l),
-			  [ __("Autoprobe"), __("Specify options") ], "Autoprobe") ne "Autoprobe") {
+			      [ __("Autoprobe"), __("Specify options") ], "Autoprobe") ne "Autoprobe") {
       ASK:
-      my $rnames = modparm::get_options_name($m);
-      my $rvalues = modparm::get_options_value($m);
-
-      $o->ask_from_entries_ref('',
+	if (defined @names) {
+	    my @l = $o->ask_from_entries('',
 _("Here must give the different options for the module %s.", $l),
-			       $rnames, $rvalues);
-
-      @options = split ' ', modparm::get_options_result($m, $rvalues);
-#	@options = split ' ',
-#	                 $o->ask_from_entry('',
-#_("Here must give the different options for the module %s.
-#Options are in format ``name=value name2=value2 ...''.
-#For example you can have ``io=0x300 irq=7''", $l),
-#					    _("Module options:"),
-#					   );
-#=======
-#      ASK:
-#	@options = split ' ',
-#	  $o->ask_from_entry('',
-#_("Here must give the different options for the module %s.
-#Options are in format ``name=value name2=value2 ...''.
-#For example you can have ``io=0x300 irq=7''", $l),
-#			     _("Module options:"),
-#			    );
+					 \@names) or return;
+	    @options = modparm::get_options_result($m, @l);
+	} else {
+	    @options = split ' ',
+	      $o->ask_from_entry('',
+_("Here must give the different options for the module %s.
+Options are in format ``name=value name2=value2 ...''.
+For example you can have ``io=0x300 irq=7''", $l),
+				 _("Module options:"),
+				);
+	}
     }
     eval { modules::load($m, $type, @options) };
     if ($@) {
