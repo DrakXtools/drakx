@@ -212,6 +212,50 @@ sub gtkpack2_($@) {
     $box
 }
 
+sub gtkpowerpack {
+    #- Get Default Attributes (if any). 2 syntaxes allowed :
+    #- gtkpowerpack( {expand => 1, fill => 0}, $box...) : the attributes are picked from a specified hash
+    #- gtkpowerpack(1,0,1, $box, ...) : the attributes are picked from the non-ref list, in the order (expand, fill, padding, pack_end).
+    my $RefDefaultAttrs;
+    if (ref($_[0]) eq 'HASH') {
+	$RefDefaultAttrs = shift;
+    } elsif (!ref($_[0])) {
+	my %tmp;
+	foreach my $i ("expand", "fill", "padding", "pack_end") {
+	    !ref($_[0]) ? $tmp{$i} = shift : last;
+	}
+	$RefDefaultAttrs = \%tmp;
+    }
+    my $box = shift; #- The packing box
+    while (@_) {
+	#- Get attributes (if specified). 3 syntaxes allowed :
+	#- gtkpowerpack({defaultattrs}, $box, $widget1, $widget2, ...) : the attrs are picked from the default ones (if they exist)
+	#- gtkpowerpack($box, {fill=>1, expand=>0, ...}, $widget1, ...) : the attributes are picked from a specified hash
+	#- gtkpowerpack($box, 1,0,1, $widget1, ...) : the attributes are picked from the non-ref list, in the order (expand, fill, padding, pack_end).
+	my %attr;
+	my $RefAttrs = shift if (ref($_[0]) eq 'HASH');
+	foreach my $i ("expand", "fill", "padding", "pack_end") {
+	    if (defined($RefAttrs->{$i})) {
+		$attr{$i} = $RefAttrs->{$i};
+	    } elsif (!ref ($_[0])) {
+		$attr{$i} = shift; #-default values are undef ie. false...
+	    } elsif (defined($RefDefaultAttrs->{$i})) {
+		$attr{$i} = $RefDefaultAttrs->{$i};
+	    } else {
+		$attr{$i} = 0;
+	    }
+	}
+	my $widget = ref($_[0]) ? shift : new Gtk::Label(shift); #- The widget we pack
+	if (!$attr{pack_end}) {
+	    $box->pack_start($widget, $attr{expand}, $attr{fill}, $attr{padding})
+	} else {
+	    $box->pack_end($widget, $attr{expand}, $attr{fill}, $attr{padding})
+	}
+	$widget->show;
+    }
+    $box
+}
+
 sub gtkset_editable {
     my ($w, $e) = @_;
     $w->set_editable($e);
@@ -503,7 +547,6 @@ sub gtkicons_labels_widget {
 		       $darea->set_usize($dx, $dy);
 		       $dbl_area = new Gtk::Gdk::Pixmap($darea->window, max($width, $x_round), $y_round + $height);
 		       fill_tiled($darea, $dbl_area, $background, $x_back2, $y_back2, $dx, $dy);
-		       print " coord : $dx - $icon_width\n";
 		       $dbl_area->draw_pixmap($darea->style->bg_gc('normal'),
 					      $icon, 0, 0, ($dx - $icon_width)/2, 0, $icon_width, $icon_height);
 		       $dbl_area->draw_pixmap($darea->style->bg_gc('normal'),
