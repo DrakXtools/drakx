@@ -14,6 +14,7 @@ use detect_devices;
 use commands;
 use modules;
 use raid;
+use fsedit
 use loopback;
 
 1;
@@ -61,9 +62,11 @@ sub check_mounted($) {
 }
 
 sub get_mntpoints_from_fstab {
-    my ($fstab, $prefix) = @_;
+    my ($fstab, $prefix, $uniq) = @_;
 
     foreach (read_fstab("$prefix/etc/fstab")) {
+	next if $uniq && fsedit::mntpoint2part($_->{mntpoint}, $fstab);
+
 	foreach my $p (@$fstab) {
 	    $p->{device} eq $_->{device} or next;
 	    $_->{type} ne 'auto' && $_->{type} ne type2fs($p->{type}) and
@@ -371,7 +374,6 @@ sub write_fstab($;$$) {
     my @new = grep { $_ ne 'none' } map { @$_[0,1] } @to_add;
     my %new; @new{@new} = undef;
 
-    require fsedit;
     unshift @to_add,
       grep { 
 	  my $b = !exists $new{$_->[0]} && !exists $new{$_->[1]};
@@ -386,7 +388,6 @@ sub write_fstab($;$$) {
 	  isNfs($_) and $dir = '', $options = $_->{options} || 'ro,nosuid,rsize=8192,wsize=8192';
 	  isFat($_) and $options = $_->{options} || "user,exec,umask=0";
 
-	  require fsedit;
 	  isReiserfs($_) && $_ == fsedit::get_root($fstab, 'boot') and add_options($options, "notail");
 
 	  my $dev = isLoopback($_) ?

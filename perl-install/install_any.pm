@@ -631,7 +631,7 @@ sub suggest_mount_points {
 	$part->{mntpoint} = $mnt;
 
 	#- try to find other mount points via fstab
-	fs::get_mntpoints_from_fstab(\@parts, $d) if $mnt eq '/';
+	fs::get_mntpoints_from_fstab(\@parts, $d, $uniq) if $mnt eq '/';
     }
 #-    $_->{mntpoint} || fsedit::suggest_part($_, $hds) foreach @parts;
 
@@ -649,7 +649,7 @@ sub use_root_part {
     my ($fstab, $part, $prefix) = @_;
     {
 	my $handle = any::inspect($part, $prefix) or die;
-	fs::get_mntpoints_from_fstab($fstab, $handle->{dir});
+	fs::get_mntpoints_from_fstab($fstab, $handle->{dir}, 'uniq');
     }
 
     map { $_->{mntpoint} = 'swap_upgrade' } grep { isSwap($_) } @$fstab; #- use all available swap.

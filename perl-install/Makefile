@@ -71,6 +71,7 @@ get_needed_files: $(DIRS)
 	perl -Mlang -I. -e 'print "$$_\n" foreach lang::console_font_files()' >> /tmp/list
 
 	install -d $(DEST)/etc
+	install -d $(DEST)/etc/sysconfig/network-scripts
 	install -d $(DEST)/lib
 	install -d $(DEST)/bin
 	install -d $(DEST)/usr/bin
