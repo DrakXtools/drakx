@@ -1092,7 +1092,7 @@ N("Last but not least you can also type in your DNS server IP addresses."),
                    restart => 
                    {
                     name => N("The network needs to be restarted. Do you want to restart it ?"),
-                    # data => [ { label => N("Connection:"), val => \$type, type => 'list', list => [ sort values %l ] }, ],
+                    type => "yesorno",
                     post => sub {
                         my ($a) = @_;
                         if ($a && !$::testing && !run_program::rooted($::prefix, "/etc/rc.d/init.d/network restart")) {
