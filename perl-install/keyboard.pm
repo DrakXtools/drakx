@@ -414,22 +414,23 @@ sub load {
 sub keyboard2full_xkb {
     my ($keyboard) = @_;
 
-    my $XkbLayout = keyboard2xkb($keyboard);
+    my $XkbLayout = keyboard2xkb($keyboard) or return { XkbDisable => '' };
 
     my $XkbModel = 
       arch() =~ /sparc/ ? 'sun' :
 	$XkbLayout eq 'jp' ? 'jp106' : 
 	$XkbLayout eq 'br' ? 'abnt2' : 'pc105';
 
-    $XkbLayout ? {
+    {
 	XkbLayout => join(',', if_($keyboard->{GRP_TOGGLE}, 'us'), $XkbLayout),
 	XkbModel => $XkbModel,
-	XkbOptions => $keyboard->{GRP_TOGGLE} ? 
-		  join(',', 
-		       if_($keyboard->{GRP_TOGGLE} eq 'rwin_toggle', 'compose:rwin'), 
-		       "grp:$keyboard->{GRP_TOGGLE}", 
-		       'grp_led:scroll') : '',
-    } : { XkbDisable => '' };
+	XkbOptions => join(',', 
+			   if_($keyboard->{GRP_TOGGLE},
+			       if_($keyboard->{GRP_TOGGLE} eq 'rwin_toggle', 'compose:rwin'), 
+			       "grp:$keyboard->{GRP_TOGGLE}", 
+			       'grp_led:scroll'),
+			   if_(member($XkbLayout, 'az', 'tr', 'tr_f'), 'caps:shift')),
+    };
 }
 
 sub xmodmap_file {
