@@ -154,7 +154,7 @@ sub process {
         }
         my $name = ref($page->{name}) ? $page->{name}->() : $page->{name};
         my %yesno = (yes => N("Yes"), no => N("No"));
-        my $yes = $page->{default};
+        my $yes = ref($page->{default}) eq 'CODE' ? $page->{default}->() : $page->{default};
         $data2 = [ { val => \$yes, type => 'list', list => [ keys %yesno ], format => sub { $yesno{$_[0]} }, 
                      gtk => { use_boxradio => 1 } } ] if $page->{type} eq "yesorno";
         my $a;
