@@ -34,7 +34,7 @@ sub ask_warn {
 }
 
 sub create_boxradio {
-    my ($e, $may_go_to_next, $changed) = @_;
+    my ($e, $may_go_to_next, $changed, $double_click) = @_;
     my @l = map { may_apply($e->{format}, $_) } @{$e->{list}};
 
     my $boxradio = gtkpack2__(new Gtk::VBox(0, 0),
@@ -43,14 +43,15 @@ sub create_boxradio {
     my $tips = new Gtk::Tooltips;
     mapn {
 	my ($txt, $w) = @_;
+	$w->signal_connect(button_press_event => $double_click) if $double_click;
 	$w->signal_connect(clicked => sub {
  	    ${$e->{val}} = $txt;
 	    &$changed;
         });
 	if ($e->{help}) {
-	    $tips->set_tip($w,
-			   ref($e->{help}) eq 'HASH' ? $e->{help}{$txt} :
-			   ref($e->{help}) eq 'CODE' ? $e->{help}($txt) : $e->{help});
+	    gtkset_tip($tips, $w,
+		       ref($e->{help}) eq 'HASH' ? $e->{help}{$txt} :
+		       ref($e->{help}) eq 'CODE' ? $e->{help}($txt) : $e->{help});
 	}
     } $e->{list}, \@radios;
 
@@ -284,9 +285,9 @@ sub create_list {
 	$list->append_items($item);
 	$item->show;
 	if ($e->{help}) {
-	    $tips->set_tip($item,
-			   ref($e->{help}) eq 'HASH' ? $e->{help}{$_} :
-			   ref($e->{help}) eq 'CODE' ? $e->{help}($_) : $e->{help});
+	    gtkset_tip($tips, $item,
+		       ref($e->{help}) eq 'HASH' ? $e->{help}{$_} :
+		       ref($e->{help}) eq 'CODE' ? $e->{help}($_) : $e->{help});
 	}
 	$item->grab_focus if ${$e->{val}} && $_ eq ${$e->{val}};
     } @$l;
@@ -401,14 +402,15 @@ sub ask_from_entries_refW {
 		sub { if ($_[1]{type} =~ /^2/) { $mainw->{retval} = 1; Gtk->main_quit } } : ''; 
 
 	    my @para = ($e, $may_go_to_next, $changed, $quit_if_double_click);
+	    my $use_boxradio = @{$e->{list}} <= 8;
 
 	    if ($e->{help}) {
 		#- used only when needed, as key bindings are dropped by List (CList does not seems to accepts Tooltips).
-		($w, $set) = create_list(@para);
+		($w, $set) = $use_boxradio ? create_boxradio(@para) : create_list(@para);
 	    } elsif ($e->{type} eq 'treelist') {
 		($w, $set, $size) = create_ctree(@para);
 	    } else {
-		($w, $set) = $::isWizard ? create_boxradio(@para) : create_clist(@para);
+		($w, $set) = $use_boxradio ? create_boxradio(@para) : create_clist(@para);
 	    }
 	    if (@{$e->{list}} > 4) {
 		$has_scroll = 1;
