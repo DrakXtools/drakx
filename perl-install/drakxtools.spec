@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 9.1
-Release: 0.21mdk
+Release: 0.22mdk
 Url: http://www.linux-mandrake.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -290,6 +290,10 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog 
+* Tue Feb  4 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.1-0.22mdk
+- add support for adiusbadsl 1.0.2 (fponsinet)
+- faster draksec shutdown
+
 * Mon Feb  3 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.1-0.21mdk
 - draksec:
   o gui look nicer
