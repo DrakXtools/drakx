@@ -294,6 +294,10 @@ sub configure {
 
     xfree_and_glx_choose($in, $card, $auto) or return;
 
+    if ($card->{card_name} eq 'Intel 865') {
+	$raw_X->{xfree4}->get_Section('ServerFlags')->{DontVTSwitch} = [ { val => 'yes', Option => 1 } ];
+    }
+
     $card->{prog} = install_server($card, $options, $do_pkgs);
     
     if ($card->{needVideoRam} && !$card->{VideoRam}) {
