@@ -384,8 +384,8 @@ sub choosePackagesTree {
 	$w->show;
 	$w->set_sensitive(!$p->{base} && !$p->{installed});
 	$w->signal_connect(focus_in_event => sub {
-	    my $p = pkgs::getHeader($p);
-	    gtktext_insert($info_widget,
+	    my $p = eval { pkgs::getHeader($p) };
+	    gtktext_insert($info_widget, $@ ? _("Bad package") :
 			   _("Version: %s\n", c::headerGetEntry($p, 'version') . '-' . c::headerGetEntry($p, 'release')) .
 			   _("Size: %d KB\n", c::headerGetEntry($p, 'size') / 1024) .
 

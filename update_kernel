@@ -9,7 +9,7 @@ function f() {
 f "scsi|disk" ; SCSI_DRIVERS=$v
 f "net" ; NETWORK_DRIVERS=$v
 f "scsi|cdrom" ; CD_DRIVERS=$v
-f "pcmcia|paride" ; PCMCIA_DRIVERS=$v
+f "pcmcia" ; PCMCIA_DRIVERS=$v
 
 MISCMODULES="lp.o parport_pc.o parport.o loop.o"
 FSMODULES="vfat.o fat.o"

@@ -25,6 +25,7 @@ sub exit {
 
 sub ask_from_listW {
     my ($o, $title, $messages, $l, $def) = @_;
+    my $r;
 
     my $w = my_gtk->new(first(deref($title)), %$o);
     $w->{retval} = $def || $l->[0]; #- nearly especially for the X test case (see timeout in Xconfigurator.pm)
@@ -44,11 +45,12 @@ sub ask_from_listW {
 	       );
 	$defW->grab_focus if $defW;
 	$w->{rwindow}->set_position('center') if $::isStandalone;
-	$w->main;
+	$r = $w->main;
     } else {
 	$w->_ask_from_list($title, $messages, $l, $def);
-	$w->main;
+	$r = $w->main;
     }
+    $r or die "ask_from_list cancel";
 }
 
 sub ask_many_from_list_refW($$$$$) {

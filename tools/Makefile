@@ -7,16 +7,15 @@ CFLAGS      = -Wall
 
 .PHONY: clean install $(DIRS)
 
-all: $(BASE)/depslist $(BASE)/hdlist $(DIRS) install
+all: $(BASE)/depslist $(BASE)/hdlist $(DIRS) xhost+ install
 
 $(DIRS):
 	make -C $@
 
 install:
-	$(MAKE) gendepslist rpm2header xhost+
+	$(MAKE) gendepslist rpm2header
 	install make_mdkinst_stage2 gendepslist rpm2header genhdlist $(ROOTDEST)/misc
 	mkdir -p $(DEST)/usr/bin
-	install -s xhost+ $(DEST)/usr/bin
 
 xhost+: %: %.c
 	$(CC) $(CFLAGS) $< -L/usr/X11R6/lib -lX11 -o $@

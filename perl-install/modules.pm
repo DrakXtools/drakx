@@ -148,6 +148,7 @@ my @drivers_by_category = (
   "cdu31a" => "Sony CDU-31A",
   "sonycd535" => "Sony CDU-5xx",
   "isofs" => "iso9660",
+  "ide-cd" => "ide-cd",
 }],
 [ 'sound', {
   "alsa" => "ALSA sound module, many sound cards",

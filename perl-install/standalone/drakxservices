@@ -2,8 +2,9 @@
 
 use lib qw(/usr/lib/libDrakX);
 
-use common qw(:common :functional);
+use common qw(:common :functional :file);
 use interactive;
+use log;
 
 local $_ = join '', @ARGV;
 
@@ -23,7 +24,17 @@ _("Choose which services should be automatically started at boot time"),
 mapn { 
     my ($name, $before, $after) = @_;
     if ($before != $after) {
-	system("chkconfig", $after ? "--add" : "--del", $name);
+	if ($after) {
+	    if (cat_("/etc/rc.d/init.d/$name") =~ /^chkconfig:\s+-/m) {
+		system("chkconfig --add $name");
+	    } else {
+		`/sbin/runlevel` =~ /\s(\d+)/ or die "bad runlevel";
+		$1 == 3 || $1 == 5 or log::l("strange runlevel: ``$1'' (neither 3 nor 5)");
+		system("chkconfig --level $1 $name on");
+	    }
+	} else {
+	    system("chkconfig --del $name");
+	}
     }
 } \@l, \@before, $after if $after;
 

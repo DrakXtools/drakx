@@ -48,14 +48,15 @@ System configuration
 	kde:administration:utilities
 
 Web Server
-	daemons:network:http
+ 	apache
+ 	mod_perl
+ 	mod_php3
 
 Network Management Workstation	
 	network:tools
-# above is daemons:network *without* sendmail
+# above is daemons:network *without* sendmail and http
 	daemons:network:base
 	daemons:network:ftp
-	daemons:network:http
 	daemons:network:nfs
 	daemons:network:telnet
 	BeroList
