@@ -226,6 +226,7 @@ foreach my $lang (lang::list_langs()) {
 }
 symlinkf('/etc/X11/ksycoca', "$::prefix/usr/share/services/ksycoca");
 
+cp_af("$::prefix/usr/share/applnk-mdk/System/Configuration/Hardware/krandrtray.desktop", "$::prefix/usr/share/autostart");
 
     #- Mandrake
 
