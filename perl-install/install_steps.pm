@@ -296,7 +296,8 @@ sub installPackages($$) { #- complete REWORK, TODO and TOCHECK!
 	$o->{toSave} = [];
 
 	#- hack for compat-glibc to upgrade properly :-(
-	if (pkgs::packageFlagSelected(pkgs::packageByName($packages, 'compat-glibc'))) {
+	if (pkgs::packageFlagSelected(pkgs::packageByName($packages, 'compat-glibc')) &&
+	    !pkgs::packageFlagInstalled(pkgs::packageByName($packages, 'compat-glibc'))) {
 	    rename "$o->{prefix}/usr/i386-glibc20-linux", "$o->{prefix}/usr/i386-glibc20-linux.mdkgisave";
 	}
     }
@@ -961,7 +962,7 @@ sub downNetwork {
     } elsif ($o->{modem} && $o->{modem}{isUp}) {
 	run_program::rooted($o->{prefix}, "ifdown", "ppp0");
 	run_program::rooted($o->{prefix}, "/etc/rc.d/init.d/syslog", "stop");
-	eval { modules::unload($_) foreach qw(ppp serial) };
+	eval { modules::unload($_) foreach qw(ppp_deflate bsd_comp ppp serial) };
 	$o->{modem}{isUp} = 0;
     } else {
 	$::testing or return;
