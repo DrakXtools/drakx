@@ -588,6 +588,7 @@ my %locale2encoding = (
                        'ja_JP' => 'eucj',
                        'ko_KR' => 'kr',
                        'zh_CN' => 'gb',
+                       # zh_SG zh_HK were reported as missing by make check:
                        'zh_HK' => 'big5',
                        'zh_SG' => 'gb',
                        'zh_TW' => 'big5',
@@ -1016,14 +1017,15 @@ sub write {
 	
     }
 
+    add2hash($h, $IM_locale_specific_config{$locale->{lang}});
+    $h->{ENC} = $locale2encoding{$locale->{lang}};
+    $h->{ENC} = 'utf8' if member($locale->{lang}, qw(ja_JP.UTF-8 ko_KR.UTF-8 zh_CN.UTF-8 zh_HK.UTF-8 zh_SG.UTF-8 zh_TW.UTF-8));
+
     my $im = $locale->{IM};
     if ($im && $im ne 'None') {
         log::explanations(qq(Configuring "$im" IM));
         delete @$h{qw(GTK_IM_MODULE QT_IM_MODULE XIM XIM_PROGRAM XMODIFIERS)};
         add2hash($h, { XIM_PROGRAM => $IM_XIM_program{$im}{$h->{LC_NAME}} });
-        add2hash($h, $IM_locale_specific_config{$locale->{lang}});
-        $h->{ENC} = $locale2encoding{$locale->{lang}};
-        $h->{ENC} = 'utf8' if member($locale->{lang}, qw(ja_JP.UTF-8 ko_KR.UTF-8 zh_CN.UTF-8 zh_HK.UTF-8 zh_SG.UTF-8 zh_TW.UTF-8));
 
         add2hash($h, $IM_config{$locale->{IM}});
         $h->{QT_IM_MODULE} = $h->{GTK_IM_MODULE} if $h->{GTK_IM_MODULE};
