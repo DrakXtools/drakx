@@ -53,7 +53,7 @@ gtkadd(my $icon = Gtk2::TrayIcon->new("Net_Applet"),
       );
 $eventbox->signal_connect(button_press_event => sub {
 			      if ($_[1]->button == 1) {
-				  is running('net_monitor') > 1 or netMonitor()
+				  is_running('net_monitor') > 1 or netMonitor()
 			      }
                               $_[1]->button == 3 && $menu and $menu->popup(undef, undef, undef, undef, $_[1]->button, $_[1]->time);
                           });
