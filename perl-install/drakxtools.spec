@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10.2
-Release: 0.31mdk
+Release: 0.32mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -368,6 +368,20 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Mon Feb 28 2005 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.2-0.32mdk
+- drakboot: make sure /boot/grub/install.sh is 755 (pixel)
+- drakconnect (blino):
+  o allow to alter DHCP timeout (# 11435)
+  o add support for PEERDNS, PEERYP and PEERNTPD (#9982)
+  o workaround broken ethtool from hostap drivers (#13979)
+  o handle USERCTL settings for modems too
+- net_applet (blino):
+  o add menu entry (#11898)
+  o netprofile support (#12094)
+  o allow to select watched interface
+- printerdrake: let country and not language decide about default
+  paper size (till)
+
 * Fri Feb 25 2005 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.2-0.31mdk
 - drakconnect (blino):
   o allow users to start the connection (#12837)
