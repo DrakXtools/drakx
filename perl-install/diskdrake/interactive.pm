@@ -494,15 +494,17 @@ sub Type {
     #- for ext2, warn after choosing as ext2->ext3 can be achieved without loosing any data :)
     isExt2($part) or $warn->() or return;
 
-    my $type = type2name($part->{type});
+    my $type_name = type2name($part->{type});
     $in->ask_from(_("Change partition type"),
 		  _("Which filesystem do you want?"),
-		  [ { label => _("Type"), val => \$type, list => [ partition_table::important_types() ], sort => 0, not_edit => !$::expert } ]) or return;
+		  [ { label => _("Type"), val => \$type_name, list => [ partition_table::important_types() ], sort => 0, not_edit => !$::expert } ]) or return;
 
-    if (isExt2($part) && isThisFs('ext3', { type => name2type($type) })) {
+    my $type = $type_name && name2type($type_name);
+
+    if (isExt2($part) && isThisFs('ext3', { type => $type })) {
 	my $w = $in->wait_message('', _("Switching from ext2 to ext3"));
 	if (run_program::run("tune2fs", "-j", devices::make($part->{device}))) {
-	    $part->{type} = name2type($type);
+	    $part->{type} = $type;
 	    $part->{isFormatted} = 1; #- assume that if tune2fs works, partition is formatted
 
 	    #- disable the fsck (don't do it together with -j in case -j fails?)
@@ -514,8 +516,7 @@ sub Type {
     !isExt2($part) or $warn->() or return;
 
     if (defined $type) {
-	my $i_type = name2type($type);
-	fsedit::change_type(name2type($type), $hd, $part);
+	check_type($in, $type, $hd, $part) and fsedit::change_type($type, $hd, $part);
     }
 }
 
@@ -920,9 +921,21 @@ sub partitions_suggestions {
 sub check_type {
     my ($in, $type, $hd, $part) = @_;
     eval { fsedit::check_type($type, $hd, $part) };
-    my $err = $@;
-    $in->ask_warn('', $err) if $err;
-    !$err;
+    if (my $err = $@) {
+	$in->ask_warn('', $err);
+	return;
+    }
+    if ($::isStandalone) {
+	if (my $pkg = fsedit::package_needed_for_partition_type({ type => $type })) {
+	    my $fs = type2fs({ type => $type });
+	    if (!-x "/sbin/mkfs.$fs") {
+		$in->ask_yesorno('', _("The package %s is needed. Install it?", $pkg), 1) or return;
+		$in->do_pkgs->install($pkg);
+	    }
+	    -x "/sbin/mkfs.$fs" or $in->ask_warn('', "Mandatory package $pkg is missing"), return;
+	}
+    }
+    1;
 }
 sub check_mntpoint {
     my ($in, $mntpoint, $hd, $part, $all_hds) = @_;
