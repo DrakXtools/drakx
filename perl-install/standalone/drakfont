@@ -117,6 +117,8 @@ foreach my $i (@application) {
 # print "uninstall : @uninstall\n";
 # print "applications supproted: so: $so  gs: $gs \n";
 
+
+
 # PATH and binary full path
 my $xfs_conffile = '/etc/X11/fs/config';
 my $drakfont_dir = '/home/seb/new2_drakfont'; # '/usr/X11R6/lib/X11/fonts/drakfont';
@@ -408,6 +410,12 @@ my $adj1;
 my $adj2;
 my $adj3;
 
+
+my $check4;
+my $check1;
+my $check2;
+my $check3;
+
 sub interactive_mode {
 
 init Gtk;
@@ -455,22 +463,32 @@ sub install_gi {
     $adj2 = new Gtk::Adjustment( 0, 1, 300, 0, 0, 0 );
     $adj3 = new Gtk::Adjustment( 0, 1, 300, 0, 0, 0 );
     gtkadd($window2,
-	   gtkpack_(new Gtk::VBox(0,6),
-		    0, $pbar  = new_with_adjustment Gtk::ProgressBar( $adj ),  
-		    0, $pbar1 = new_with_adjustment Gtk::ProgressBar( $adj1 ),  
-		    0, $pbar2 = new_with_adjustment Gtk::ProgressBar( $adj2 ),  
-		    0, $pbar3 = new_with_adjustment Gtk::ProgressBar( $adj3 ),  
-		    0, gtkadd(gtkset_layout(new Gtk::VButtonBox, -end),
-			      _("DrakFont"),
+	   gtkpack__(new Gtk::VBox(0,0),
+		     create_packtable({ col_spacings => 30, row_spacings => 20},
+				      [ "Work", "Status" , "Valid"],
+#				      [ _("Sending Speed:"), my $label_st = new Gtk::Label(""), my $label_sta=new Gtk::Label("na")],
+#				      [ _("Receiving Speed:"),my $label_sr= new Gtk::Label(""), my $label_sra=new Gtk::Label("na")],
+	#							  ),
+#		     gtkpack_(new Gtk::VBox(0,6),
+		     [_("Search Fonts on your System"), $pbar  = new_with_adjustment Gtk::ProgressBar( $adj ), $check1 = new Gtk::CheckButton()],
+		     ["Supress Doublons ", $pbar1 = new_with_adjustment Gtk::ProgressBar( $adj1 ),$check2 =  new Gtk::CheckButton()],  
+		     ["Install Fonts ", $pbar2 = new_with_adjustment Gtk::ProgressBar( $adj2 ),$check3 =  new Gtk::CheckButton()],  
+		     ["Post Install Fonts ", $pbar3 = new_with_adjustment Gtk::ProgressBar( $adj3 ),$check4 =  new Gtk::CheckButton()],  
+				      ),
+		     gtkadd(gtkset_layout(new Gtk::VButtonBox, -end),
+#			      _("DrakFont"),
+
 			      )
 		    ),
 	   );   
 
-    my $timer = Gtk->timeout_add( 5, \&progress_timeout );  
+    my $timer  = Gtk->timeout_add(  5, \&progress_timeout );  
     my $timer1 = Gtk->timeout_add( 10, \&progress_timeout1 );       
     my $timer2 = Gtk->timeout_add( 15, \&progress_timeout2 );       
     my $timer3 = Gtk->timeout_add( 20, \&progress_timeout3 );       
-
+#    $check4->set_active;
+#    gtkset_active($check4 , 1);
+#    $check4 -> set_active =1;
 
     $window2->show_all;
     $window2->realize;
@@ -511,21 +529,25 @@ Gtk->exit(0);
 
 sub progress_timeout   {     
     my $new_val;     
-    my $adjt;          	  
+    my $adjt;          	      
     $new_val = $pbar->get_value() + 5;       
-    $adjt = $pbar->adjustment;  
+    $adjt = $pbar->adjustment;  1;   
     $pbar->set_value( $new_val );  
-    1;   
+    $new_val < 300 || gtkset_active($check1 , 1);
+    $new_val < 300 ;
 }
 
 
 sub progress_timeout1   {     
     my $new_val;     
-    my $adjt;          	  
+    my $adjt;          
+#    my $tmmm = $pbar1->get_value("MAX");
     $new_val = $pbar1->get_value() + 4;       
     $adjt = $pbar1->adjustment;  
+#    $new_val = $adjt->lower if ( $new_val > $adjt->upper );      
     $pbar1->set_value( $new_val );       
-    1;   
+    $new_val < 300 || gtkset_active($check2 , 1);
+    $new_val < 300 ;
 }
 
 sub progress_timeout2   {     
@@ -534,7 +556,9 @@ sub progress_timeout2   {
     $new_val = $pbar2->get_value() + 3;       
     $adjt = $pbar2->adjustment;  
     $pbar2->set_value( $new_val );       
-    1;   
+    $new_val < 300 || gtkset_active($check3 , 1);
+    $new_val < 300 ;
+
 }
 
 sub progress_timeout3   {     
@@ -543,7 +567,8 @@ sub progress_timeout3   {
     $new_val = $pbar3->get_value() + 2;       
     $adjt = $pbar3->adjustment;  
     $pbar3->set_value( $new_val );       
-    1;   
+    $new_val < 300 || gtkset_active($check4 , 1);
+    $new_val < 300;
 }
 
 
