@@ -1286,7 +1286,7 @@ try to force installation even if that destroys the first partition?"));
 sub miscellaneous {
     my ($o, $_clicked) = @_;
 
-    if ($o->{meta_class} ne 'desktop' && !$o->{isUpgrade}) {
+    if ($o->{meta_class} ne 'desktop' && $o->{meta_class} ne 'firewall' && !$o->{isUpgrade}) {
 	require security::level;
 	security::level::level_choose($o, \$o->{security}, \$o->{libsafe}, \$o->{security_user});
 
