@@ -651,8 +651,9 @@ sub g_auto_install {
 	$o->{printer}{configured} = {};
 	foreach my $queue (keys %{$::o->{printer}{configured}}) {
 	    my $val = $::o->{printer}{configured}{$queue};
-	    $val->{$_} and $o->{printer}{configured}{$queue}{$_} = $val->{$_} foreach qw(OPTIONS);
-	    add2hash($o->{printer}{configured}{$queue}{queuedata} = {}, $val->{queuedata});
+	    exists $val->{$_} and $o->{printer}{configured}{$queue}{$_} = $val->{$_} foreach qw(OPTIONS);
+	    exists $val->{queuedata}{$_} and $o->{printer}{configured}{$queue}{queuedata}{$_} = $val->{queuedata}{$_}
+	      foreach keys %{$val->{queuedata} || {}};
 	}
     }
 
