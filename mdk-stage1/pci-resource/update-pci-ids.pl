@@ -33,7 +33,7 @@ my %sanity_check =
     medias => [ 'aic7xxx', 'sym53c8xx', 'initio' ],
   ) :
   ( network => [ '3c59x', 'eepro100', 'e100', 'tulip', 'via-rhine', 'ne2k-pci', '8139too', 'tlan' ],
-    medias => [ 'aic7xxx', 'advansys', 'ncr53c8xx', 'sym53c8xx', 'initio' ],
+    medias => [ 'aic7xxx', 'advansys', 'sym53c8xx', 'initio' ],
   );
 
 foreach $type (keys %t) {
