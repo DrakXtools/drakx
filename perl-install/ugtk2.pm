@@ -1613,13 +1613,6 @@ sub set_pixmap {
     $darea->window->set_back_pixmap($pixmap);
 
     $darea->{layout} = $darea->create_pango_layout($darea->{text});
-    $darea->signal_connect(expose_event => sub {
-                               my $height = $darea->{icon}->get_height;
-                               $darea->{icon}->render_to_drawable($window, $darea->style->bg_gc('normal'),
-                                                                  0, 0, 10, 10, -1, -1, 'none', 0, 0);
-                               $darea->window->draw_layout($style->text_gc('normal'), $height + 20, 25, $darea->{layout});
-                               1;
-                           });
 }
 
 
@@ -1634,6 +1627,14 @@ sub new {
 
     $darea->signal_connect(realize => \&set_pixmap);
     $darea->signal_connect("style-set" => \&set_pixmap);
+    $darea->signal_connect(expose_event => sub {
+                               my $style = $darea->get_style;
+                               my $height = $darea->{icon}->get_height;
+                               $darea->{icon}->render_to_drawable($darea->window, $style->bg_gc('normal'),
+                                                                  0, 0, 10, 10, -1, -1, 'none', 0, 0);
+                               $darea->window->draw_layout($style->text_gc('normal'), $height + 20, 25, $darea->{layout});
+                               1;
+                           });
                                
     return $darea;
 }
