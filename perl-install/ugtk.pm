@@ -500,6 +500,7 @@ sub gtkicons_labels_widget {
     my $cursor_normal = new Gtk::Gdk::Cursor 68;
     foreach (@$args) {
 	my $label = $_->[0];
+	die "$label 's icon is missing" unless $exec_hash->{$label};
 	my $dbl_area;
 	my $darea = new Gtk::DrawingArea;
 	my ($icon, undef) = gtkcreate_png($_->[1]);
