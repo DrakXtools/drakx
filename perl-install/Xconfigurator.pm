@@ -128,7 +128,6 @@ sub rewriteInittab {
 sub keepOnlyLegalModes {
     my ($card, $monitor) = @_;
     my $mem = 1024 * ($card->{memory} || ($card->{server} eq 'FBDev' ? 2048 : 99999));
-    print "$mem<<<\n";
     my $hsync = max(split(/[,-]/, $monitor->{hsyncrange}));
 
     while (my ($depth, $res) = each %{$card->{depth}}) {
