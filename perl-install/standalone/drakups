@@ -304,15 +304,16 @@ if (!$::isEmbedded) {
 $w->{window}->add(gtkpack_(Gtk2::VBox->new,
                            0, Gtk2::Label->new(N("Welcome to the UPS configuration tools")),
                            1, my $nb = Gtk2::Notebook->new,
-                           0, Gtk2::HSeparator->new,
-                           0, gtkpack(Gtk2::HButtonBox->new,
-                                      gtksignal_connect(Gtk2::Button->new(N("Ok")), clicked => sub { 
-                                                            #$_->{save}->() foreach @pages;
-                                                            writeconf();
-                                                            $w->exit;
-                                                        }),
-                                      gtksignal_connect(Gtk2::Button->new(N("Cancel")), clicked => sub { $w->exit }),
-                                     ),
+                           0, create_okcancel( my $oc = 
+                                               {
+                                                ok_clicked => sub { 
+                                                    #$_->{save}->() foreach @pages;
+                                                    writeconf();
+                                                    $w->exit;
+                                                },
+                                                cancel_clicked => sub { $w->exit },
+                                               },
+                                             ),
                           ),
                  );
 
