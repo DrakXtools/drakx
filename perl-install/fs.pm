@@ -385,34 +385,41 @@ sub mount_options_pack {
 }
 
 sub mount_options_help {
-    my %help = map { $_ => '' } @_;
-    my %short = map { if_(/(.*?)=/, "$1=" => $_) } keys %help;
+    (
 
-    foreach (split(':', $ENV{LANGUAGE}), '') {
-	my $manpage = "/usr/share/man/$_/man8/mount.8.bz2";
-	-e $manpage or next;
+	'grpquota' => '',
 
-	my ($tp, $option);
-	foreach (`bzip2 -dc $manpage`) {
-	    my $prev_tp = $tp;
-	    $tp = /^\.(TP|RE)/;
-	    my ($s) = /^\.B (.*)/;
-	    if (($prev_tp && $s eq '\-o') .. /X^/) {
-		if (my $v = ($prev_tp && $s =~ /^[a-z]/i) .. $tp) {
-		    if ($v == 1) {
-			$s = $short{$s} || $s;
-			$option = exists $help{$s} && !$help{$s} ? $s : '';
-		    } elsif ($v !~ /E0/) {
-			s/\\//g;
-			s/\s*"(.*?)"\s*/$1/g if s/^\.BR\s+//;
-			s/^\.B\s+//;
-			$help{$option} .= $_ if $option;
-		    }
-		}        
-	    }
-	}
-    }
-    %help;
+	'noatime' => N("Do not update inode access times on this file system
+(e.g, for faster access on the news spool to speed up news servers)."),
+
+	'noauto' => N("Can only be mounted explicitly (i.e.,
+the -a option will not cause the file system to be mounted)."),
+
+	'nodev' => N("Do not interpret character or block special devices on the file system."),
+
+	'noexec' => N("Do not allow execution of any binaries on the mounted
+file system. This option might be useful for a server that has file systems
+containing binaries for architectures other than its own."),
+
+	'nosuid' => N("Do not allow set-user-identifier or set-group-identifier
+bits to take effect. (This seems safe, but is in fact rather unsafe if you
+have suidperl(1) installed.)"),
+
+	'ro' => N("Mount the file system read-only."),
+
+	'sync' => N("All I/O to the file system should be done synchronously."),
+
+	'supermount' => '',
+
+	'user' => N("Allow an ordinary user to mount the file system. The
+name of the mounting user is written to mtab so that he can unmount the file
+system again. This option implies the options noexec, nosuid, and nodev
+(unless overridden by subsequent options, as in the option line
+user,exec,dev,suid )."),
+
+	'usrquota' => '',
+
+    );
 }
 
 sub set_default_options {
