@@ -227,7 +227,8 @@ static enum return_type try_with_device(char *dev_name)
                         return RETURN_ERROR;
                 }
 
-                results = ask_from_list_comments_auto("Please choose the partition on which you copied the " DISTRIB_NAME " Distribution.",
+                results = ask_from_list_comments_auto("Please select the partition containing the copy of the "
+						      DISTRIB_NAME " Distribution install source.",
                                                       parts, parts_comments, &choice, "partition", parts);
                 if (results != RETURN_OK)
                         return results;
@@ -238,7 +239,8 @@ static enum return_type try_with_device(char *dev_name)
 		return try_with_device(dev_name);
 	}
 
-	if (ask_from_entries_auto("Please enter the directory (or ISO image file) containing the " DISTRIB_NAME " Distribution.",
+	if (ask_from_entries_auto("Please enter the directory (or ISO image file) containing the "
+				  DISTRIB_NAME " Distribution install source.",
 				  questions_location, &answers_location, 24, questions_location_auto, NULL) != RETURN_OK) {
 		umount(disk_own_mount);
 		return try_with_device(dev_name);
@@ -426,7 +428,8 @@ enum return_type disk_prepare(void)
 		return disk_prepare();
 	}
 
-	results = ask_from_list_comments_auto("Please choose the DISK drive on which you copied the " DISTRIB_NAME " Distribution.",
+	results = ask_from_list_comments_auto("Please select the disk containing the copy of the "
+					      DISTRIB_NAME " Distribution install source.",
 					      medias, medias_models, &choice, "disk", medias);
 
 	if (results != RETURN_OK)
