@@ -24,7 +24,7 @@ sub ether_conf {
 	$netcnx->{type} = 'lan';
 	$netcnx->{NET_DEVICE} = $netc->{NET_DEVICE} = '';
 	$netcnx->{NET_INTERFACE} = 'lan'; #$netc->{NET_INTERFACE};
-        write_cnx_script($netc, "local network",
+        set_cnx_script($netc, "local network",
 qq(
 /etc/rc.d/init.d/network restart
 ),

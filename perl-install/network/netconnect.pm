@@ -451,7 +451,7 @@ Take a look at http://www.linmodems.org"),
                     pre => sub {
                         $mouse ||= {};
                         $mouse->{device} ||= readlink "$::prefix/dev/mouse";
-                        write_cnx_script($netc, "modem", join("\n", if_($::testing, "/sbin/route del default"), "ifup ppp0"),
+                        set_cnx_script($netc, "modem", join("\n", if_($::testing, "/sbin/route del default"), "ifup ppp0"),
                                          q(ifdown ppp0
 killall pppd
 ), $netcnx->{type});
@@ -853,7 +853,7 @@ notation (for example, 1.2.3.4).")),
                         $ethntf->{MII_NOT_SUPPORTED} = bool2yesno(!$hotplug);
                         $ethntf->{HWADDR} = $track_network_id or delete $ethntf->{HWADDR};
                         $in->do_pkgs->install($netc->{dhcp_client}) if $auto_ip;
-                        write_cnx_script($netc, "cable", qq(
+                        set_cnx_script($netc, "cable", qq(
 /sbin/ifup $netc->{NET_DEVICE}
 ),
                                                   qq(

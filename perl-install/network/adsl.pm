@@ -218,7 +218,7 @@ user "$adsl->{login}"
 /usr/bin/killall pppoe pppd\n),
                     },
           );
-        write_cnx_script($netc, "adsl", join("\n",
+        set_cnx_script($netc, "adsl", join("\n",
                                              "/sbin/route del default",
                                              $modems{$adsl_device}{start},
                                              # /usr/sbin/pppd call adsl
@@ -230,7 +230,7 @@ user "$adsl->{login}"
                         );
 
     } elsif ($adsl_type eq 'dhcp') {
-        write_cnx_script($netc, 'adsl',
+        set_cnx_script($netc, 'adsl',
                          qq(
 /sbin/route del default
 #$modems{$adsl_device}{start}
@@ -244,7 +244,7 @@ INTERFACE=`$modems{$adsl_device}{get_intf}`
                          $netc->{adsltype});
     } elsif ($adsl_type eq 'static') {
         # TODO: handle manually configured (new feature)
-        write_cnx_script($netc, 'adsl',
+        set_cnx_script($netc, 'adsl',
                          qq(
 /sbin/route del default
 #$modems{$adsl_device}{start}
@@ -269,7 +269,7 @@ INTERFACE=`$modems{$adsl_device}{get_intf}`
         } "$::prefix/etc/analog/adiusbadsl.conf";
     } elsif ($adsl_device eq 'speedtouch') {
         # speedtouch really is used only with pppoa, let its own script handle firmware upload and the like:
-        write_cnx_script($netc, 'adsl', 
+        set_cnx_script($netc, 'adsl', 
                          qq(/sbin/route del default
 /usr/share/speedtouch/speedtouch.sh start\n),
                          "/usr/share/speedtouch/speedtouch.sh stop\n",
