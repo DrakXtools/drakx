@@ -20,6 +20,8 @@ RAID upgrades
 -choices--------------------------------------------------------------------------------
 horizontal sub-steps
 
+better help for partitioning in newbie 
+
 firewall configuration (instant firewalling?)
 
 install in 800x600
@@ -90,6 +92,7 @@ configure DHCP for newbies if ethernet & DHCP card available
 
 rpmdrake proposition for cdrom labels
 
+kernel chosen by default must be the one according to supermount/secure
 
 -fixes needing thinking-----------------------------------------------------------------
 get the error when getting/reading .rpm files fail
@@ -167,6 +170,7 @@ smp not detected (mhoward@memphisonline.com on cooker, bios=BP6PW)
 UDMA66 (ultra66.o for promise)
 
 bug if ide-scsi, no more hdX, but scd0 (aka sr0)
+(and add alias block-major-11 ide-scsi ?)
 
 aha152x needs "insmod aha152x.o aha152x=0x140,11,7"
 
