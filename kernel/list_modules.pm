@@ -6,10 +6,8 @@ our @ISA = qw(Exporter);
 our @EXPORT = qw(load_dependencies dependencies_closure category2modules module2category sub_categories);
 
 # the categories have 2 purposes
-# - choosing modules to include on stage1's (cf update_kernel)
-#   (scsi/main scsi/main+hardware_raid 
-# - performing a load_thiskind or get_that_type
-#   (usb scsi|disk net isdn tv scanner photo sound)
+# - choosing modules to include on stage1's (cf update_kernel and mdk-stage1/pci-resource/update-pci-ids.pl)
+# - performing a load_category or probe_category (modules.pm and many files in perl-install)
 
 our %l = (
   ################################################################################
