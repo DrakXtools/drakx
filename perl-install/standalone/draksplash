@@ -214,13 +214,9 @@ sub write_boot_thm {
 	my $globalconf_file = $thm_conf_path.$theme{name}.'/global.config';
 	my $cfg_file = $thm_conf_path . $theme{name} . "$cfg_path/bootsplash-" . $theme{res}{res} . '.cfg';
 	#- verify all dir exists or create them
-	-d $thm_conf_path.$theme{name}
-	  or mkdir($thm_conf_path.$theme{name});
-     mkdir($thm_conf_path.$theme{name} . $cfg_path) if !-d ($thm_conf_path.$theme{name} . $cfg_path);
-	-d $thm_path.$theme{name}
-	  or mkdir($thm_path.$theme{name});
-	-d $thm_path.$theme{name}.'/images/'
-	  or mkdir($thm_path.$theme{name}.'/images/');
+     foreach my $dir ($thm_conf_path . $theme{name} . $cfg_path, $thm_path.$theme{name} . '/images/') {
+         mkdir_p($dir) if !-d $dir;
+     }
 	#- copy image to dest by convert
 	system('convert -scale '.$theme{res}{res} . ' ' . $img_file . ' ' . $thm_path.$theme{name} . '/images/bootsplash-' . $theme{res}{res} . '.jpg');
 	system('/usr/share/bootsplash/scripts/rewritejpeg '.$thm_path.$theme{name}.'/images/bootsplash-'.$theme{res}{res}.'.jpg');
