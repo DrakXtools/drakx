@@ -1,3 +1,338 @@
+2002/07/04  daouda
+
+	* standalone/draknet: 
+	  - don't display clear password
+
+2002/07/04  fcrozat
+
+	* share/rpmsrate: Fix GNOME2 packages
+	Install urw-fonts when installing XFree
+
+2002/07/04  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/tr.po: updated Turkish file
+
+	* share/po/fr.po: updated French file
+
+	* lang.pm: Changed some languages to defautl to utf-8
+	removed X11_NOT_LOCALIZED (now Gnome2 fully supports right-to-left
+	languages)
+
+2002/07/04  Pixel  <pixel@mandrakesoft.com>
+
+	* install_steps_interactive.pm, install_steps_auto_install.pm,
+	install2.pm, network/ethernet.pm, network/isdn.pm, commands.pm,
+	printerdrake.pm, mouse.pm, network/netconnect.pm, install_any.pm,
+	install_steps.pm, detect_devices.pm, bootloader.pm: adapt to new
+	modules.pm
+
+	* c/stuff.xs.pm: adapt to new ldetect
+
+	* modules.pm: reworked, cleaned:
+	  - the list of modules is moved to kernel/list_modules.pm (and a few
+	functions too)
+	  - new "add_probeall" function (similar to "add_alias")
+	  -> used for scsi_hostadapter and usb-interface
+	  - "load_multi" removed in favour of "load" which is now more powerful
+	  - load_thiskind renamed load_category
+	  - get_that_type renamed probe_category
+	  - %modules::drivers dropped (handled for list_modules)
+	still more cleanup to come
+
+	* getpkgs_deps, do_resize_fat: removed since unused
+
+	* Makefile, rescue/make_rescue_img: adapt to the move all.modules ->
+	kernel/all.modules  and  all.kernels -> kernel/all.kernels
+
+	* modparm.pm: rework, cleanup, simplify and make it work
+
+	* install2: create symlink list_modules.pm in current directory for
+	testing purpose
+
+	* mdk-stage1/pci-resource/update-pci-ids.pl: new directory "kernel"
+	containing:
+	  - all.modules all.kernels update_kernel
+	  - part of perl-install/modules.pm now in kernel/list_modules.pm and
+	kernel/modules.pl
+	  - update_kernel cleaned (it doesn't mention module names anymore, it
+	is now in kernel/modules.pl)
+	  - cleanup Makefile
+	  - mdk-stage1 doesn't depend on perl-install anymore
+	(more precisely mdk-stage1/pci-resource/update-pci-ids.pl)
+
+	* tools/specific_arch: simplified using MDK::Common
+
+	* any.pm: reworked & cleaned the kernel modules part
+	  - adapt to new modules.pm
+	  - adapt to new modparm.pm
+	  - renamed setup_thiskind to load_category
+	  - renamed setup_thiskind_backend to load_category_no_message
+
+	* share/po/Makefile: make the "clean" rule less verbose
+
+2002/07/04  Thierry Vignaud  <tvignaud@mandrakesoft.com
+
+	* harddrake/TODO: add harddrake2 todo list
+
+	* harddrake/data.pm: get rid of 'use vars'
+	remove wait_message hack for printerdraker, better use class_discard
+	harddrake2: "the return of the vengeance son"
+	  - harddrake/data.pm: the data structure
+	  - harddrake/ui.pm: the ui code
+	
+	  - standalone/service_harddrake: the init.d service (which need a few
+	polishing (timeout, ...)
+	
+	  - standalone/harddrake2: the ui caller which need to be dadou/ln -fied
+
+	* harddrake/ui.pm: don't stack signals on config buttons
+	  - remove no more used @pid_launched
+	  - better GUI reactivity: don't wait for config tool to complete, just
+	  "fork and forget" [(c) us air force] and refuse to run another
+	  config tool until the first one to complete
+	print "Running $configurator ..." in status bar while running a config
+	tool
+	  - POSIX is needed for POSIX::wait
+	  - move strict and standalone require at top
+	
+	  - c is unused
+	
+	  - comment exceptions in devices loop (ie skip classes without any
+	  devices or any detector
+	
+	  - optimize away $pid
+	fix move from harddrake.pm to harddrake/data.pm:
+	
+	  - menu does appear
+	
+	  - information fields are translated from raw to english again
+	harddrake2: "the return of the vengeance son"
+	
+	  - harddrake/data.pm: the data structure
+	
+	  - harddrake/ui.pm: the ui code
+	
+	  - standalone/service_harddrake: the init.d service (which need a few
+	polishing (timeout, ...)
+	
+	  - standalone/harddrake2: the ui caller which need to be dadou/ln -fied
+
+	* detect_devices.pm: add tapes() for harddrake2
+
+	* standalone/harddrake2, standalone/service_harddrake: harddrake2: "the
+	return of the vengeance son"
+	  - harddrake/data.pm: the data structure
+	  - harddrake/ui.pm: the ui code
+	
+	  - standalone/service_harddrake: the init.d service (which need a few
+	polishing (timeout, ...)
+	
+	  - standalone/harddrake2: the ui caller which need to be dadou/ln -fied
+
+2002/07/03  François Pons  <fpons@mandrakesoft.com>
+
+	* mdk-stage1/probing.c: fixed static definition when non static
+	declaration (gcc limitation).
+	added conditional code around network detection.
+
+2002/07/03  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* mdk-stage1/mar/mar-extract-only.c, mdk-stage1/minilibc.c,
+	mdk-stage1/newt/newt.c, mdk-stage1/bzlib/bzlib.c,
+	mdk-stage1/newt/listbox.c, mdk-stage1/newt-frontend.c,
+	mdk-stage1/disk.c, mdk-stage1/modules.c, mdk-stage1/stage1.c,
+	mdk-stage1/newt/checkboxtree.c, mdk-stage1/mar/mar-frontend.c,
+	mdk-stage1/Makefile.common, mdk-stage1/url.c, mdk-stage1/newt/textbox.c,
+	mdk-stage1/newt/grid.c, mdk-stage1/dhcp.c, mdk-stage1/init.c,
+	mdk-stage1/automatic.c, mdk-stage1/newt/entry.c: compile with -W
+
+2002/07/02  daouda
+
+	* my_gtk.pm: 
+	  - fill a combo by default :
+	gtkcombo_setpopdown_strings($combo_widget,@strings)
+
+2002/07/02  gbeauchesne
+
+	* c/smp.c: 
+	  - TODO: Update ia64 check with /proc/pal/cpuX ?
+	  - TODO: Update x86_64 check when SMP machines are actually available
+	  - Conditionalize compilation of main() with TEST macro
+
+2002/07/02  Pixel  <pixel@mandrakesoft.com>
+
+	* network/smb.pm: try harder to find the full list of servers available,
+	using "smbclient -L" to
+	check the workgroup masters
+
+2002/07/01  Pixel  <pixel@mandrakesoft.com>
+
+	* diskdrake/smbnfs_gtk.pm (raw_hd_mount_point): nicer default mount point
+
+2002/06/28  Pixel  <pixel@mandrakesoft.com>
+
+	* diskdrake/smbnfs_gtk.pm, network/smb.pm, network/smbnfs.pm: 
+	  - add authentification in diskdrake --smb (esp. for windows NT)
+	  - use "credentials=" to put the passwords
+	(ideas and investigations from Stew Benedict,
+	integrated by Pixel, but need testing)
+	Known bug: if you want to change the password when there are 2 entries
+	in fstab
+	  using the same username=/password=, writing the credentials is done in
+	random order,
+	  => you've got one chance in 2 that the password is changed :-(
+
+	* fs.pm: 
+	  - add authentification in diskdrake --smb (esp. for windows NT)
+	  - use "credentials=" to put the passwords
+	(ideas and investigations from Stew Benedict,
+	integrated by Pixel, but need testing)
+	Known bug: if you want to change the password when there are 2 entries
+	in fstab
+	  using the same username=/password=, writing the credentials is done in
+	random order,
+	  => you've got one chance in 2 that the password is changed :-(
+	handle spaces in mount points and devices (using \040)
+
+2002/06/27  Stew Benedict  <sbenedict@mandrakesoft.com>
+
+	* standalone/drakTermServ, standalone/icons/drakTS.620x57.png: Add
+	drakTermServ application and icon.
+
+2002/06/26  Pixel  <pixel@mandrakesoft.com>
+
+	* install_steps.pm, install_steps_interactive.pm, install2.pm: ensure
+	licence step is asked in any case (ie. even when selectLanguage is
+	automatic)
+
+	* any.pm: "my" variables where needed
+
+2002/06/25  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/tr.po, share/po/ar.po: Updated po files
+
+2002/06/19  Frederic Lepied  <flepied@mandrakesoft.com>
+
+	* Makefile: corrected rules to make distributable rpms.
+
+2002/06/19  François Pons  <fpons@mandrakesoft.com>
+
+	* patch/patch-oem-hp.pl: added patch-oem.pl file used to generate HP
+	Mandrake Linux 8.2.
+
+2002/06/19  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* modules.pm: remove a few drivers so that hd.img and network.img are
+	possible with latest BOOT kernel
+
+2002/06/19  Pixel  <pixel@mandrakesoft.com>
+
+	* standalone/fileshareset: use "wide links = no" for exporting via samba
+	(thanks to Jan Schäfer)
+
+	* fs.pm: mounting of ntfs after install really mount the partition (thanks
+	to Buchan Milne)
+
+2002/06/18  daouda
+
+	* my_gtk.pm: 
+	  - add gtkset_text, gtkprepend_text, gtkappend_text for entry widgets
+
+2002/06/18  Frederic Lepied  <flepied@mandrakesoft.com>
+
+	* Makefile.drakxtools: manage security subdir.
+
+	* Makefile: added targets to build test and distribution rpms and srpms
+	(localrpm,
+	localsrpm, rpm, srpm).
+	added security to the installed directories
+
+	* pam.net_monitor, diskdrake/diskdrake.html, drakxtools.spec,
+	apps.net_monitor: ripped from the srpm
+
+2002/06/18  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/hu.po: updated Hungarian file
+
+2002/06/17  cbelisle
+
+	* standalone/draksec: added server, user and network advanced options
+
+	* any.pm: draksec: customize entries for each options (lists, checkboxes
+	and text boxes)
+	Added user,server and network advanced options
+
+	* security/msec.pm: 
+	  - Customize entries for each options (checkboxes, text boxes and
+	lists)
+	added network, server and user advanced options
+
+2002/06/15  alus
+
+	* share/po/pl.po: updates
+
+2002/06/13  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* lang.pm: Catalan doesn't have French fallback anymore
+
+	* share/po/be.po, share/po/sp.po, share/po/zh_CN.po, share/po/pt.po,
+	share/po/DrakX.pot, share/po/es.po, share/po/fr.po, share/po/bg.po,
+	share/po/ga.po, share/po/sr.po, share/po/de.po, share/po/et.po,
+	share/po/tr.po, share/po/eu.po, share/po/az.po, share/po/ru.po,
+	share/po/pt_BR.po, share/po/hr.po, share/po/ko.po, share/po/cy.po,
+	share/po/nl.po, share/po/ja.po, share/po/wa.po, share/po/sv.po,
+	share/po/is.po, share/po/hu.po, share/po/it.po, share/po/id.po,
+	share/po/pl.po, share/po/no.po, share/po/fi.po, share/po/th.po,
+	share/po/el.po, share/po/sk.po, share/po/lt.po, share/po/ar.po,
+	share/po/sl.po, share/po/mt.po, share/po/vi.po, share/po/br.po,
+	share/po/ca.po, share/po/gl.po, share/po/lv.po, share/po/uk.po,
+	share/po/eo.po, share/po/ro.po, share/po/bs.po, share/po/da.po,
+	share/po/zh_TW.po, share/po/cs.po, share/po/af.po: updated pot file
+
+2002/06/11  Pixel  <pixel@mandrakesoft.com>
+
+	* fsedit.pm: added /tmp in @suggestions_mntpoints (as suggested by
+	Philippe Coulon)
+
+2002/06/10  cbelisle
+
+	* standalone/draksec: Add an entry for the security user email
+
+	* security/msec.pm: Initial commit
+
+	* any.pm: Add security user email entry in draksec
+
+2002/06/10  daouda
+
+	* network/tools.pm: 
+	  - choose country according to timezone.
+
+2002/06/10  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* tools/syncrpms: english fix
+
+2002/06/10  Pixel  <pixel@mandrakesoft.com>
+
+	* c/stuff.xs.pm: s/class/class_/ for ldetect 0.4
+
+2002/06/07  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* timezone.pm: remove duplicate entry in ntp_servers
+
+	* interactive_gtk.pm, my_gtk.pm: split ask_browse_tree_info from
+	interactive_gtk
+	to my_gtk between widgets creation and real
+	stuff so that we can now call it with widgets
+	places differently
+
+2002/06/06  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/tr.po: updated po file
+
+2002/06/05  Pixel  <pixel@mandrakesoft.com>
+
+	* bootloader.pm: adapt to new lilo
+
 2002/06/05  Pixel  <pixel@mandrakesoft.com>
 
 	* fs.pm: use -ff for mkreiserfs, do not use -q for mkreiserfs
