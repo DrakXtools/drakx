@@ -16,7 +16,7 @@ tar-drakxtools: clean
 	$(MAKE) -C ../tools clean
 	cd .. ; rm -rf drakxtools ; cp -af perl-install drakxtools ; cp -af tools/ddcprobe tools/serial_probe drakxtools	
 	cd ../drakxtools ; rm -rf install* pkgs.pm ftp.pm t.pm */CVS ; mv Makefile.drakxtools Makefile ; mv -f standalone/* .
-	cd .. ; tar cfy drakxtools.tar.bz2 --exclude CVS $(patsubst %,drakxtools/%,Makefile Makefile.config share/MonitorsDB share/Cards+ share/CardsNames Newt c ddcprobe serial_probe share/po pci_probing sbus_probing resize_fat share/diskdrake.rc share/isdndb.net  $(STANDALONEPMS) icons *.pm)
+	cd .. ; tar cfI drakxtools.tar.bz2 --exclude CVS $(patsubst %,drakxtools/%,Makefile Makefile.config share/MonitorsDB share/Cards+ share/CardsNames Newt c ddcprobe serial_probe share/po pci_probing sbus_probing resize_fat share/diskdrake.rc share/isdndb.net  $(STANDALONEPMS) icons *.pm)
 	cd .. ; rm -rf drakxtools
 
 $(DIRS):
@@ -68,6 +68,8 @@ get_needed_files: $(DIRS)
 		ldd $$i 2>/dev/null | grep "=>" | sed -e 's/.*=> //' -e 's/ .*//' | uniq | sort >> /tmp/list; \
 	done
 
+	perl -Mlang -I. -e 'print "$$_\n" foreach lang::console_font_files()' >> /tmp/list
+
 	install -d $(DEST)/etc
 	install -d $(DEST)/lib
 	install -d $(DEST)/bin
@@ -113,10 +115,9 @@ endif
 
 	perl -ane 'symlink "$$F[1]", "$(DEST)/usr/bin/$$F[0]"' share/aliases
 
-	for i in fonts keyboards locales gconv; do tar xfy `../tools/specific_arch share/$$i.tar.bz2` -C $(DEST); done
+	for i in fonts keyboards locales gconv keymaps; do tar xfI `../tools/specific_arch share/$$i.tar.bz2` -C $(DEST); done
 
 	cd share ; cp -a modparm.lst $(DEST)/usr/share
-	cd share ; cp -a keymaps $(DEST)/usr/share
 	cd share ; cp -a consolefonts $(DEST)/usr/share
 	cd share ; cp template.in/*.in $(DEST)/usr/share
 	cd share ; cp MonitorsDB Cards+ CardsNames $(DEST)/usr/X11R6/lib/X11

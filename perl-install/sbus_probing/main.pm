@@ -127,7 +127,7 @@ sub prom_walk($$$$) {
 }
 
 sub probe {
-    eval { modules::load("openprom") };
+    eval { modules::load("openprom") } if arch() =~ /sparc/;
     my $root_node = c::prom_open();
     my @l;
 

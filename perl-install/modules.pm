@@ -344,7 +344,7 @@ sub get_options {
     $conf{$name}{options};
 }
 
-sub add_alias($$) { 
+sub add_alias { 
     my ($alias, $name) = @_;
     $name =~ /ignore/ and return;
     /\Q$alias/ && $conf{$_}{alias} && $conf{$_}{alias} eq $name and return $_ foreach keys %conf;
@@ -353,6 +353,9 @@ sub add_alias($$) {
     $conf{$alias}{alias} ||= $name;
     if ($name =~ /^snd-card-/) {
 	$conf{$name}{"post-install"} = "modprobe snd-pcm-oss";
+    }
+    if ($alias eq 'scsi_hostadapter') {
+	add_alias('block-major-11', $alias);
     }
     $alias;
 }
@@ -383,6 +386,7 @@ sub load {
     if ($name eq "usb-storage") {
 	sleep(2); 
 	-d "/proc/scsi/usb" or return;
+	$conf{"usb-storage"}{"post-install"} = "modprobe usbkbd; modprobe keybdev";
     }
     if ($type) {
 	add_alias('scsi_hostadapter', $name), load('sd_mod') if $type =~ /scsi/ || $type eq $type_aliases{scsi};
@@ -428,6 +432,8 @@ sub load_raw {
 	}
     } @l;
 
+    die "insmod'ing module " . join(", ", map { $_->[0] } @failed) . " failed" if @failed;
+
     foreach (@l) {
 	if ($_->[0] eq "parport_pc") {
 	    #- this is a hack to make plip go
@@ -440,7 +446,6 @@ sub load_raw {
 	    load_multi("usbkbd", "keybdev");
 	}
     }
-    die "insmod'ing module " . join(", ", map { $_->[0] } @failed) . " failed" if @failed;
 }
 
 sub read_already_loaded() {
@@ -474,7 +479,6 @@ sub read_conf($;$) {
     }
     #- cheating here: not handling aliases of aliases
     while (my ($k, $v) = each %c) {
-#-	$$scsi ||= $v->{scsi_hostadapter} if $scsi;
 	if (my $a = $v->{alias}) {
 	    local $c{$a}{alias};
 	    add2hash($c{$a}, $v);
@@ -489,19 +493,13 @@ sub write_conf {
     my $file = "$prefix/etc/modules.conf";
     rename "$prefix/etc/conf.modules", $file; #- make the switch to new name if needed
 
-    #- remove the post-install supermount stuff. We may have to add some more
+    #- remove the post-install supermount stuff. We now do it in /etc/modules
     substInFile { $_ = '' if /^post-install supermount/ } $file;
 
     my $written = read_conf($file);
 
     my %net = detect_devices::net2module();
     while (my ($k, $v) = each %net) { add_alias($k, $v) }
-
-    my @l = sort grep { $conf{$_}{alias} && /scsi_hostadapter/ } keys %conf;
-    add_alias('block-major-11', 'scsi_hostadapter') if @l;
-    push @l, "ide-floppy" if detect_devices::ide_zips();
-    $conf{supermount}{"post-install"} = join " ; ", map { "modprobe $_" } @l if @l;
-    $conf{"usb-storage"}{"post-install"} = "modprobe usbkbd; modprobe keybdev" if @l && arch() !~ /sparc|alpha/;
 
     local *F;
     open F, ">> $file" or die("cannot write module config file $file: $!\n");
@@ -510,6 +508,13 @@ sub write_conf {
 	    print F "$type $mod $v2\n" if $v2 && $type ne "loaded" && !$written->{$mod}{$type};
 	}
     }
+    my @l = map { "scsi_hostadapter$_\n" } '', 1..$scsi-1 if $scsi;
+    push @l, "ide-floppy" if detect_devices::ide_zips();
+
+    substInFile { 
+	$_ = '' if /^scsi_hostadapter/;
+	$_ = join '', @l if eof;
+    } "$prefix/etc/modules";
 }
 
 sub read_stage1_conf {

@@ -3,15 +3,16 @@
 use lib "..";
 use keyboard;
 
-system("rm -rf keymaps ; mkdir keymaps");
+my $dir = "keymaps/usr/share/keymaps";
+system("rm -rf keymaps ; mkdir -p keymaps/usr/share/keymaps");
 
 foreach (keyboard::xmodmaps()) {
     my $kmap = keyboard::keyboard2kmap($_);
-    if (system("./kmap2bkmap $kmap > keymaps/$kmap.bkmap 2>/dev/null") != 0) {
+    if (system("./kmap2bkmap $kmap > $dir/$kmap.bkmap 2>/dev/null") != 0) {
 	warn "unknown kmap $kmap\n";
-	unlink "keymaps/$kmap.bkmap";
+	unlink "$dir/$kmap.bkmap";
     }
 }
 
-system("tar cfI keymaps.tar.bz2 keymaps") == 0 or die;
+system("tar cfI keymaps.tar.bz2 -C keymaps usr") == 0 or die;
 system("rm -rf keymaps");

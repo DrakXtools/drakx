@@ -61,6 +61,8 @@ sub selectLanguage($) {
 				    $o->{lang});
     install_steps::selectLanguage($o);
 
+    $o->ask_warn('', "No translation is available yet during installation in this language") if $o->{lang} !~ /^en/ && translate("_I18N_");
+
 #-    $o->{useless_thing_accepted} = $o->ask_from_list_('', 
 #-"Warning no warranty", 
 #-			 [ __("Accept"), __("Refuse") ], "Accept") eq "Accept" or _exit(1) unless $o->{useless_thing_accepted};
@@ -646,7 +648,7 @@ USA")) || return;
     return if $@;
 
     #- bring all interface up for installing crypto packages.
-    $o->upNetwork();
+    install_interactive::upNetwork($o);
 
     my @packages = do {
       my $w = $o->wait_message('', _("Contacting the mirror to get the list of available packages"));
@@ -658,7 +660,7 @@ USA")) || return;
     $o->pkg_install(@{$u->{packages} = [ grep { $h{$_} } @packages ]});
 
     #- stop interface using ppp only.
-    $o->downNetwork('pppOnly');
+    install_interactive::downNetwork($o, 'pppOnly');
 }
 
 #------------------------------------------------------------------------------
@@ -694,11 +696,11 @@ sub configurePrinter {
 
     #- bring interface up for installing ethernet packages but avoid ppp by default,
     #- else the guy know what he is doing...
-    #$o->upNetwork('pppAvoided');
+    #install_interactive::upNetwork($o, 'pppAvoided');
 
     eval { add2hash($o->{printer} ||= {}, printer::getinfo($o->{prefix})) };
     $o->{printer}{PAPERSIZE} = $o->{lang} eq 'en' ? 'letter' : 'a4';
-    printerdrake::main($o->{printer}, $o, sub { $o->pkg_install($_[0]) }, sub { $o->upNetwork('pppAvoided') });
+    printerdrake::main($o->{printer}, $o, sub { $o->pkg_install($_[0]) }, sub { install_interactive::upNetwork($o, 'pppAvoided') });
 }
 
 #------------------------------------------------------------------------------
@@ -991,8 +993,6 @@ Do you want to keep XFree 3.3?"), 0) if $::expert;
 
     { local $::testing = 0; #- unset testing
       local $::auto = $::beginner;
-      local $::noauto = $::expert && !$o->ask_yesorno('', _("Try to find PCI devices?"), 1);
-      $::noauto = $::noauto; #- no warning
 
       Xconfigurator::main($o->{prefix}, $o->{X}, $o, $o->{allowFB}, bool($o->{pcmcia}), sub {
 	  my ($server, @l) = @_;
@@ -1103,88 +1103,6 @@ install chapter of the Official Linux-Mandrake User's Guide.")) if $alldone && !
 #-######################################################################################
 #- Misc Steps Functions
 #-######################################################################################
-
-#--------------------------------------------------------------------------------
-sub wait_load_module {
-    my ($o, $type, $text, $module) = @_;
-    $o->wait_message('',
-		     [ _("Installing driver for %s card %s", $type, $text),
-		       $::beginner ? () : _("(module %s)", $module)
-		     ]);
-}
-
-
-sub load_module {
-    my ($o, $type) = @_;
-    my @options;
-
-    my $m = $o->ask_from_list('',
-			      _("Which %s driver should I try?", $type),
-			      \&modules::module2text,
-			      [ modules::module_of_type($type) ]) or return;
-    my $l = modules::module2text($m);
-    require modparm;
-    my @names = modparm::get_options_name($m);
-
-    if ((@names != 0) && $o->ask_from_list_('',
-_("In some cases, the %s driver needs to have extra information to work
-properly, although it normally works fine without. Would you like to specify
-extra options for it or allow the driver to probe your machine for the
-information it needs? Occasionally, probing will hang a computer, but it should
-not cause any damage.", $l),
-			      [ __("Autoprobe"), __("Specify options") ], "Autoprobe") ne "Autoprobe") {
-      ASK:
-	if (@names >= 0) {
-	    my @l = $o->ask_from_entries('',
-_("You may now provide its options to module %s.", $l),
-					 \@names) or return;
-	    @options = modparm::get_options_result($m, @l);
-	} else {
-	    @options = split ' ',
-	      $o->ask_from_entry('',
-_("You may now provide its options to module %s.
-Options are in format ``name=value name2=value2 ...''.
-For instance, ``io=0x300 irq=7''", $l),
-				 _("Module options:"),
-				);
-	}
-    }
-    eval { 
-	my $w = wait_load_module($o, $type, $l, $m);
-	modules::load($m, $type, @options);
-    };
-    if ($@) {
-	$o->ask_yesorno('',
-_("Loading module %s failed.
-Do you want to try again with other parameters?", $l), 1) or return;
-	goto ASK;
-    }
-    $l;
-}
-
-#------------------------------------------------------------------------------
-sub load_thiskind {
-    my ($o, $type) = @_;
-    my $w; #- needed to make the wait_message stay alive
-    my $pcmcia = $o->{pcmcia}
-      unless !$::beginner && modules::pcmcia_need_config($o->{pcmcia}) && 
-	     !$o->ask_yesorno('', _("Try to find PCMCIA cards?"), 1);
-    $w = $o->wait_message(_("PCMCIA"), _("Configuring PCMCIA cards...")) if modules::pcmcia_need_config($pcmcia);
-
-    modules::load_thiskind($type, $pcmcia, sub { $w = wait_load_module($o, $type, @_) });
-}
-
-sub upNetwork {
-    my ($o, $pppAvoided) = @_;
-    my $w = $o->wait_message('', _("Bringing up the network"));
-    install_steps::upNetwork($o, $pppAvoided);
-}
-sub downNetwork {
-    my ($o, $pppOnly) = @_;
-    my $w = $o->wait_message('', _("Bringing down the network"));
-    install_steps::downNetwork($o, $pppOnly);
-}
-
 
 #-######################################################################################
 #- Wonderful perl :(

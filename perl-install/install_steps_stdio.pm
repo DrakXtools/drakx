@@ -32,4 +32,13 @@ sub leavingStep {
     print "--------\n";
 }
 
+#-######################################################################################
+#- Steps Functions
+#-######################################################################################
+sub selectLanguage {
+    my ($o, $first_time) = @_;
+    $o->SUPER::selectLanguage($first_time);
+    lang::load_console_font($o->{lang});
+}
+
 1;

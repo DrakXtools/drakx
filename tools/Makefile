@@ -31,7 +31,7 @@ $(BASE)/depslist: $(BASE)/hdlists $(BASE)/hdlist.cz
 	gendepslist2 -o $@ `cat $< | perl -pe 's|^(\S*).*|'$(BASE)'/$$1|' `
 
 $(BASE)/filelist: $(RPMS)
-	genfilelist $(ROOTDEST)/Mandrake/RPMS* >$@
+#	genfilelist $(ROOTDEST)/Mandrake/RPMS* >$@
 
 $(BASE)/hdlist.cz: $(BASE)/hdlists $(RPMS)
 	genhdlists --noclean --distrib $(ROOTDEST)

@@ -129,7 +129,7 @@ sub new($$) {
 sub enteringStep {
     my ($o, $step) = @_;
 
-    print _("Entering step `%s'\n", translate($o->{steps}{$step}{text}));
+    printf "Entering step `%s'\n", $o->{steps}{$step}{text};
     $o->SUPER::enteringStep($step);
     create_steps_window($o);
     create_help_window($o);
@@ -362,7 +362,7 @@ sub choosePackagesTree {
 		       pkgs::correctSize($size / sqr(1024)),
 		       install_any::getAvailableSpace($o) / sqr(1024)));
     };
-    my $toggle = sub {
+    my $toggle_ = sub {
 	if (ref $curr) {
 	    $tree->toggle_expansion($curr);
 	} else {
@@ -406,6 +406,8 @@ sub choosePackagesTree {
 	    }
 	}
     };
+    my $toggle = sub { &$toggle_; gtkset_mousecursor_normal() };
+
     $tree->signal_connect(button_press_event => sub { &$toggle if $_[1]{type} =~ /^2/ });
     $tree->signal_connect(key_press_event => sub {
         my ($w, $e) = @_;

@@ -120,10 +120,10 @@ sub getFile {
 	    require crypto;
 	    log::l("crypto::getFile $f");
 	    crypto::getFile($f);
-	} elsif ($method eq "ftp") {
+	} elsif ($::o->{method} eq "ftp") {
 	    require ftp;
 	    ftp::getFile($rel);
-	} elsif ($method eq "http") {
+	} elsif ($::o->{method} eq "http") {
 	    require http;
 	    http::getFile($rel);
 	} else {
@@ -623,6 +623,7 @@ sub suggest_mount_points {
 	my $d = $handle->{dir};
 	my ($mnt) = grep { -e "$d/$l{$_}" } keys %l;
 	$mnt ||= (stat("$d/.bashrc"))[4] ? '/root' : '/home/user' . ++$user if -e "$d/.bashrc";
+	$mnt ||= (grep { -d $_ && (stat($_))[4] >= 500 } glob_("$d")) && '/home'; 
 
 	next if $uniq && fsedit::mntpoint2part($mnt, \@parts);
 	$part->{mntpoint} = $mnt;

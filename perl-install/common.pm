@@ -346,7 +346,10 @@ sub translate {
     require lang;
     foreach (split ':', $lang) {
 	lang::load_po($_) unless defined $po::I18N::{$_};
-	return ${$po::I18N::{$_}}{$s} || $s if %{$po::I18N::{$_}};
+	if (%{$po::I18N::{$_}}) {
+	    return if $s eq '_I18N_';
+	    return ${$po::I18N::{$_}}{$s} || $s 
+	}
     }
     $s;
 }

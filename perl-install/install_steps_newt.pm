@@ -13,6 +13,7 @@ use install_steps_interactive;
 use interactive_newt;
 use install_any;
 use devices;
+use lang;
 use common qw(:common);
 
 my $banner = __();
@@ -43,6 +44,15 @@ sub enteringStep {
 sub exitInstall { 
     &install_steps_interactive::exitInstall;
     interactive_newt::end;
+}
+
+#-######################################################################################
+#- Steps Functions
+#-######################################################################################
+sub selectLanguage {
+    my ($o) = @_;
+    $o->SUPER::selectLanguage;
+    lang::load_console_font($o->{lang});
 }
 
 

@@ -216,10 +216,10 @@ Do You want to use XFree 3.3 instead of XFree 4.0?"), 1) and $card->{driver} = '
 					 "Xsun$1" : "XF86_$card->{server}");
 
     -x "$prefix$card->{prog}" or $install && do {
-	$in->suspend;
+	$in->suspend if ref($in) =~ /newt/;
 	&$install($card->{server}, $card->{Utah_glx} ? 'Mesa' : ()) if !$card->{driver};
 	&$install('server') if $card->{driver}; #- add XFree86-libs-DRI here if using DRI (future split of XFree86 TODO)
-	$in->resume;
+	$in->resume if ref($in) =~ /newt/;
     };
     -x "$prefix$card->{prog}" or die "server $card->{server} is not available (should be in $prefix$card->{prog})";
 

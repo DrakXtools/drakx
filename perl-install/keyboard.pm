@@ -207,13 +207,13 @@ sub loadkeys_files {
     @l, keys %l, grep { -e $_ } map { "$p/$_.inc.gz" } qw(compose euro windowkeys linux-keys-bare);
 }
 
-sub lang2keyboard($) {
-    local ($_) = @_;
-    my $kb = $lang2keyboard{$_} || $keyboards{$_} && $_ || "us";
+sub lang2keyboard {
+    my ($l) = @_;
+    my $kb = $lang2keyboard{$l} || $keyboards{$l} && $l || "us";
     $keyboards{$kb} ? $kb : "us"; #- handle incorrect keyboad mapping to us.
 }
 
-sub load($) {
+sub load {
     my ($keymap) = @_;
     return if $::testing;
 
@@ -253,25 +253,25 @@ sub xmodmap_file {
     -e $f && $f;
 }
 
-sub setup($) {
+sub setup {
     return if arch() =~ /^sparc/;
     my ($keyboard) = @_;
     my $o = $keyboards{$keyboard} or return;
 
     log::l("loading keymap $o->[1]");
-    if (-e (my $f = "$ENV{SHARE_PATH}/keymaps/$o->[1].kmap")) {
-	load(cat_($f));
+    if (-e (my $f = "$ENV{SHARE_PATH}/keymaps/$o->[1].bkmap")) {
+	load(scalar cat_($f));
     } else {
 	local *F;
-	open F, "packdrake -x $ENV{SHARE_PATH}/keymaps.cz2 '' $o->[1].kmap |";
+	open F, "packdrake -x $ENV{SHARE_PATH}/keymaps.cz2 '' $o->[1].bkmap |";
 	local $/ = undef;
-	eval { load(<F>) };
+	eval { load(scalar <F>) };
     }
     my $f = xmodmap_file($keyboard);
     eval { run_program::run('xmodmap', $f) } unless $::testing || !$f;
 }
 
-sub write($$$;$) {
+sub write {
     my ($prefix, $keyboard, $charset, $isNotDelete) = @_;
 
     setVarsInSh("$prefix/etc/sysconfig/keyboard", { KEYTABLE => keyboard2kmap($keyboard), 
@@ -280,7 +280,7 @@ sub write($$$;$) {
     run_program::rooted($prefix, "dumpkeys > /etc/sysconfig/console/default.kmap") or log::l("dumpkeys failed");
 }
 
-sub read($) {
+sub read {
     my ($prefix) = @_;
 
     my %keyf = getVarsFromSh("$prefix/etc/sysconfig/keyboard");

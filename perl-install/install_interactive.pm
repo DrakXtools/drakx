@@ -12,6 +12,7 @@ use log;
 use partition_table qw(:types);
 use partition_table_raw;
 use detect_devices;
+use install_steps;
 use devices;
 use modules;
 
@@ -153,23 +154,78 @@ When you are done, don't forget to save using `w'", partition_table_raw::descrip
 	    }
 	    $o->resume;
 	    0;
-	} ];
+	} ] if $o->{partitioning}{fdisk};
 
     log::l("partitioning wizard log:\n", (map { ">>wizlog>>$_\n" } @wizlog));
     %solutions;
 }
 
+#--------------------------------------------------------------------------------
+sub wait_load_module {
+    my ($o, $type, $text, $module) = @_;
+    $o->wait_message('',
+		     [ _("Installing driver for %s card %s", $type, $text),
+		       $::beginner ? () : _("(module %s)", $module)
+		     ]);
+}
+
+
+sub load_module {
+    my ($o, $type) = @_;
+    my @options;
+
+    my $m = $o->ask_from_listf('',
+			       _("Which %s driver should I try?", $type),
+			       \&modules::module2text,
+			       [ modules::module_of_type($type) ]) or return;
+    my $l = modules::module2text($m);
+    require modparm;
+    my @names = modparm::get_options_name($m);
+
+    if ((@names != 0) && $o->ask_from_list_('',
+_("In some cases, the %s driver needs to have extra information to work
+properly, although it normally works fine without. Would you like to specify
+extra options for it or allow the driver to probe your machine for the
+information it needs? Occasionally, probing will hang a computer, but it should
+not cause any damage.", $l),
+			      [ __("Autoprobe"), __("Specify options") ], "Autoprobe") ne "Autoprobe") {
+      ASK:
+	if (@names >= 0) {
+	    my @l = $o->ask_from_entries('',
+_("You may now provide its options to module %s.", $l),
+					 \@names) or return;
+	    @options = modparm::get_options_result($m, @l);
+	} else {
+	    @options = split ' ',
+	      $o->ask_from_entry('',
+_("You may now provide its options to module %s.
+Options are in format ``name=value name2=value2 ...''.
+For instance, ``io=0x300 irq=7''", $l),
+				 _("Module options:"),
+				);
+	}
+    }
+    eval { 
+	my $w = wait_load_module($o, $type, $l, $m);
+	modules::load($m, $type, @options);
+    };
+    if ($@) {
+	$o->ask_yesorno('',
+_("Loading module %s failed.
+Do you want to try again with other parameters?", $l), 1) or return;
+	goto ASK;
+    }
+    $l;
+}
+
 #------------------------------------------------------------------------------
 sub load_thiskind {
     my ($o, $type) = @_;
-    my $w; #- needed to make the wait_message stay alive
-    my $pcmcia = $o->{pcmcia}
-      unless !$::beginner && modules::pcmcia_need_config($o->{pcmcia}) && 
-	     !$o->ask_yesorno('', _("Try to find PCMCIA cards?"), 1);
-    $w = $o->wait_message(_("PCMCIA"), _("Configuring PCMCIA cards...")) if modules::pcmcia_need_config($pcmcia);
-
-    modules::load_thiskind($type, $pcmcia, sub { $w = $o->wait_load_module($type, @_) });
+    my $pcmcia = $o->{pcmcia} if modules::pcmcia_need_config($o->{pcmcia}) && !$::noauto;
+    my $w; $w = $o->wait_message(_("PCMCIA"), _("Configuring PCMCIA cards...")) if $pcmcia;
+    modules::load_thiskind($type, $pcmcia, sub { $w = wait_load_module($o, $type, @_) });
 }
+
 
 #------------------------------------------------------------------------------
 sub setup_thiskind {
@@ -178,10 +234,8 @@ sub setup_thiskind {
     return if arch() eq "ppc";
 
     my @l;
-    my $allow_probe = !$::expert || $o->ask_yesorno('', _("Try to find %s devices?", "PCI" . (arch() =~ /sparc/ && "/SBUS")), 1);
-
-    if ($allow_probe) {
-	@l = $o->load_thiskind($type);
+    if (!$::noauto) {
+	@l = load_thiskind($o, $type);
 	if (my @err = grep { $_ } map { $_->{error} } @l) {
 	    $o->ask_warn('', join("\n", @err));
 	}
@@ -200,12 +254,25 @@ sub setup_thiskind {
 	$r = $o->ask_from_list_('', $msg, $opt, "No") unless $at_least_one && @l == 0;
 	if ($r eq "No") { return @l }
 	if ($r eq "Yes") {
-	    push @l, $o->load_module($type) || next;
+	    push @l, load_module($o, $type) || next;
 	} else {
-	    #-eval { commands::modprobe("isapnp") };
-	    $o->ask_warn('', [ detect_devices::stringlist() ]); #-, scalar cat_("/proc/isapnp") ]);
+	    $o->ask_warn('', [ detect_devices::stringlist() ]);
 	}
     }
 }
+
+#------------------------------------------------------------------------------
+sub upNetwork {
+    my ($o, $pppAvoided) = @_;
+    my $w = $o->wait_message('', _("Bringing up the network"));
+    install_steps::upNetwork($o, $pppAvoided);
+}
+sub downNetwork {
+    my ($o, $pppOnly) = @_;
+    my $w = $o->wait_message('', _("Bringing down the network"));
+    install_steps::downNetwork($o, $pppOnly);
+}
+
+
 
 1;

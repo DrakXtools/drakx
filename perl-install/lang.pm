@@ -353,12 +353,19 @@ sub load_po($) {
 }
 
 
+sub console_font_files {
+    map { -e $_ ? $_ : "$_.gz" }
+      (map { "/usr/lib/kbd/consolefonts/$_.psf" } uniq grep {$_} map { $_->[0] } values %charsets),
+      (map { -e $_ ? $_ : "$_.sfm" } map { "/usr/lib/kbd/consoletrans/$_" } uniq grep {$_} map { $_->[1] } values %charsets),
+      (map { -e $_ ? $_ : "$_.acm" } map { "/usr/lib/kbd/consoletrans/$_" } uniq grep {$_} map { $_->[2] } values %charsets),
+}
+
 sub load_console_font {
     my ($lang) = @_;
     my ($charset) = $languages{$lang} && $languages{$lang}[1] ;
     my ($f, $u, $m) = @{$charsets{$charset} || []};
 
-    run_program::run('consolechars',
+    run_program::run('consolechars', '-v',
 		          ('-f', $f || 'lat0-sun16'),
 		     $u ? ('-u', $u) : (),
 		     $m ? ('-m', $m) : ());
