@@ -988,7 +988,8 @@ I cannot set up this connection type.")), return;
                     name => N("Please enter your host name.
 Your host name should be a fully-qualified host name,
 such as ``mybox.mylab.myco.com''.
-You may also enter the IP address of the gateway if you have one."),
+You may also enter the IP address of the gateway if you have one.") .
+N("Last but not leat you can also type in your DNS server IP addresses."),
                     data => sub {
                         [ { label => $auto_ip ? N("Host name (optional)") : N("Host name"), val => \$netc->{HOSTNAME}, advanced => $auto_ip },
                           { label => N("DNS server 1"),  val => \$netc->{dnsServer} },
