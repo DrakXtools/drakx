@@ -555,6 +555,9 @@ sub install2::startMove {
         run_program::raw({ detach => 1 }, '/usr/bin/dnotify', '-MCRD', '/etc', '-r', '-e', '/usr/bin/etc-monitorer.pl', '{}') or die "dnotify not found!";
     }
 
+    #- password in screensaver doesn't make sense if we keep the shell
+    kill 9, cat_('/var/run/drakx_shell.pid');
+
     if (fork()) {
 	sleep 1;
         log::l("DrakX waves bye-bye");
