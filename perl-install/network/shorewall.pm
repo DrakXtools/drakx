@@ -94,7 +94,7 @@ sub read {
 	$conf{masquerade}{subnet} = $e->[1] if $e->[1];
     }
     if ($mode eq 'silent') {
-	    put_in_hash(\%conf, default_interfaces_silent($in), @l . 2);
+	    put_in_hash(\%conf, default_interfaces_silent($in));
     } else {
 	    put_in_hash(\%conf, default_interfaces($in));
     };
