@@ -800,10 +800,12 @@ sub computeGroupSize {
 	    $group{$_} = $m =~ /SYSTEM/ ? 'SYSTEM' : ($memo{$m} ||= or_clean(@flags, split("\t", $s)));
 	}
     }
-    my (%sizes);
+    my (%sizes, %pkgs);
     while (my ($k, $v) = each %group) {
+	push @{$pkgs{$v}}, $k;
 	$sizes{$v} += packageSize($packages->{names}{$k});
     }
+    log::l(sprintf "%s %sMB %s", $_, $sizes{$_} / sqr(1024), join(',', @{$pkgs{$_}})) foreach keys %sizes;
     \%sizes;
 }
 
