@@ -357,7 +357,7 @@ sub real_main {
 
                         $netc->{isdntype} = 'isdn_internal';
                         # FIXME: some of these should be taken from isdn db
-                        $netcnx->{isdn_internal} = $isdn = { map { $_ => $isdn_cards{$my_isdn}{$_} } qw(description vendor id card_type driver type mem io io0 io1 irq firmware) };
+                        $netcnx->{isdn_internal} = $isdn = { map { $_ => $isdn_cards{$isdn_name}{$_} } qw(description vendor id card_type driver type mem io io0 io1 irq firmware) };
 
                         if ($isdn->{id}) {
                             log::explanations("found isdn card : $isdn->{description}; vendor : $isdn->{vendor}; id : $isdn->{id}; driver : $isdn->{driver}\n");
