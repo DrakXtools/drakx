@@ -669,18 +669,69 @@ static int mirrorlist_entry_split(const char *entry, char *mirror[4]) /* mirror 
 }
 
 
+static int choose_mirror_from_host_list(char *mirrorlist[][4], const char *protocol, char *medium, char **selected_host, char **filepath) {
+	enum return_type results;
+	char *hostlist[MIRRORLIST_MAX_ITEMS+1] = { "Specifiy the mirror manually", "-----" };
+	int hostlist_index = 2, mirrorlist_index;
+
+	/* select hosts matching medium and protocol */
+	for (mirrorlist_index = 0; mirrorlist[mirrorlist_index][0]; mirrorlist_index++) {
+		if (!strcmp(mirrorlist[mirrorlist_index][0], medium) &&
+		    !strcmp(mirrorlist[mirrorlist_index][1], protocol)) {
+			hostlist[hostlist_index] = mirrorlist[mirrorlist_index][2];
+			hostlist_index++;
+			if (hostlist_index == MIRRORLIST_MAX_ITEMS)
+				break;
+		}
+	}
+	hostlist[hostlist_index] = NULL;
+
+	do {
+		results = ask_from_list("Please select a mirror from the list below.",
+					hostlist, selected_host);
+
+		if (results == RETURN_BACK) {
+			return RETURN_ERROR;
+		} else if (results == RETURN_OK) {
+			if (!strcmp(*selected_host, hostlist[0])) {
+				/* enter the mirror manually */
+				return RETURN_OK;
+			} else if (!strcmp(*selected_host, hostlist[1])) {
+				/* the separator has been selected */
+				results = RETURN_ERROR;
+				continue;
+			}
+		}
+
+		/* select the path according to medium, protocol and host */
+		for (mirrorlist_index = 0; mirrorlist[mirrorlist_index][0]; mirrorlist_index++) {
+			if (!strcmp(mirrorlist[mirrorlist_index][0], medium) &&
+			    !strcmp(mirrorlist[mirrorlist_index][1], protocol) &&
+			    !strcmp(mirrorlist[mirrorlist_index][2], *selected_host)) {
+				*filepath = mirrorlist[mirrorlist_index][3];
+				return RETURN_OK;
+			}
+		}
+
+		stg1_info_message("Unable to find the path for this mirror, please select another one");
+		results = RETURN_ERROR;
+		
+	} while (results == RETURN_ERROR);
+
+	return RETURN_ERROR;
+}
+
+
 static int choose_mirror_from_list(char *http_proxy_host, char *http_proxy_port, const char *protocol, char **selected_host, char **filepath) {
 	enum return_type results;
-	char *mirrorlist[MIRRORLIST_MAX_ITEMS][4];
-	char *medialist[MIRRORLIST_MAX_MEDIA+1];
-	int mirrorlist_number = 0, media_number = 0;
+	char *mirrorlist[MIRRORLIST_MAX_ITEMS+1][4];
+	int mirrorlist_number = 0;
+	char *medialist[MIRRORLIST_MAX_MEDIA+1] = { "Specifiy the mirror manually", "-----" };
+	int media_number = 2;
+	char *selected_medium;
 	int fd, size, line_pos = 0;
 	char line[500];
 	int use_http_proxy = !streq(http_proxy_host, "") && !streq(http_proxy_port, "");
-
-	if (IS_AUTOMATIC)
-		return RETURN_OK;
-
 
 	fd = http_download_file(MIRRORLIST_HOST, MIRRORLIST_PATH, &size, use_http_proxy ? "http" : NULL, http_proxy_host, http_proxy_port);
 	if (fd < 0) {
@@ -701,7 +752,7 @@ static int choose_mirror_from_list(char *http_proxy_host, char *http_proxy_port,
 				continue;
 
 			/* add medium in media list if different from previous one */
-			if (media_number < 1 ||
+			if (media_number == 2 ||
 			    strcmp(mirrorlist[mirrorlist_number][0], medialist[media_number-1])) {
 				medialist[media_number] = mirrorlist[mirrorlist_number][0];
 				media_number++;
@@ -717,54 +768,29 @@ static int choose_mirror_from_list(char *http_proxy_host, char *http_proxy_port,
 	}
 	close(fd);
 
+	mirrorlist[mirrorlist_number][0] = NULL;
 	medialist[media_number] = NULL;
 
 	do {
-		char *hostlist[MIRRORLIST_MAX_ITEMS+1];
-		char *selected_medium;
-		int hostlist_index = 0, mirrorlist_index;
-
-		results = ask_from_list("Please select a medium in the list, "
-					"or cancel to specify the mirror.",
+		results = ask_from_list("Please select a medium from the list below.",
 					medialist, &selected_medium);
 
-		if (results != RETURN_OK)
-			break;
-
-		/* select hosts matching medium and protocol */
-		for (mirrorlist_index = 0; mirrorlist_index < mirrorlist_number; mirrorlist_index++) {
-			if (!strcmp(mirrorlist[mirrorlist_index][0], selected_medium) &&
-			    !strcmp(mirrorlist[mirrorlist_index][1], protocol)) {
-				hostlist[hostlist_index] = mirrorlist[mirrorlist_index][2];
-				hostlist_index++;
-				if (hostlist_index == MIRRORLIST_MAX_ITEMS)
-					break;
-			}
-
-		}
-		hostlist[hostlist_index] = NULL;
-
-		results = ask_from_list("Please select a mirror in the list, "
-					"or cancel to specify it.",
-					hostlist, selected_host);
-		if (results != RETURN_OK) {
-			break;
-		}
-
-		/* select the path according to medium, protocol and host */
-		for (mirrorlist_index = 0; mirrorlist_index < mirrorlist_number; mirrorlist_index++) {
-			if (!strcmp(mirrorlist[mirrorlist_index][0], selected_medium) &&
-			    !strcmp(mirrorlist[mirrorlist_index][1], protocol) &&
-			    !strcmp(mirrorlist[mirrorlist_index][2], *selected_host)) {
-				*filepath = mirrorlist[mirrorlist_index][3];
+		if (results == RETURN_BACK) {
+			return RETURN_ERROR;
+		} else if (results == RETURN_OK) {
+			if (!strcmp(selected_medium, medialist[0])) {
+				/* enter the mirror manually */
 				return RETURN_OK;
+			} else if (!strcmp(selected_medium, medialist[1])) {
+				/* the separator has been selected */
+				results = RETURN_ERROR;
+				continue;
+			} else {
+				/* a medium has been selected */
+				results = choose_mirror_from_host_list(mirrorlist, protocol, selected_medium, selected_host, filepath);
 			}
 		}
-
-		stg1_info_message("Unable to find the path for this mirror, please select another one");
-		results = RETURN_BACK;
-		
-	} while (results == RETURN_BACK);
+	} while (results == RETURN_ERROR);
 
 	return RETURN_ERROR;
 }
@@ -907,9 +933,17 @@ enum return_type ftp_prepare(void)
 		int use_http_proxy;
 		char ftp_hostname[500];
 
-		if (answers == NULL)
-			answers = (char **) malloc(sizeof(questions));
-		results = choose_mirror_from_list(http_proxy_host, http_proxy_port, "ftp", &answers[0], &answers[1]);
+		if (!IS_AUTOMATIC) {
+			if (answers == NULL)
+				answers = (char **) malloc(sizeof(questions));
+
+			results = choose_mirror_from_list(http_proxy_host, http_proxy_port, "ftp", &answers[0], &answers[1]);
+
+			if (results != RETURN_OK) {
+				unset_param(MODE_AUTOMATIC); /* we are in a fallback mode */
+				return ftp_prepare();
+			}
+		}
 
 		results = ask_from_entries_auto("Please enter the name or IP address of the FTP server, "
 						"the directory containing the " DISTRIB_NAME " Distribution, "
