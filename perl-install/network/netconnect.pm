@@ -789,7 +789,8 @@ Modifying the fields below will override this configuration."),
                         delete $ethntf->{NETWORK};
                         delete $ethntf->{BROADCAST};
                         @fields = qw(IPADDR NETMASK);
-                        $netc->{dhcp_client} ||= "dhcp-client";
+                        $netc->{dhcp_client} ||= (find { -x "/sbin/$_" } qw(dhclient dhcpcd pump dhcpxd)) || "dhcp-client";
+                        $netc->{dhcp_client} = "dhcp-client" if $netc->{dhcp_client} eq "dhclient";
                     },
                     name => sub { join('', 
                                        N("Configuring network device %s (driver %s)", $ethntf->{DEVICE}, $module),
