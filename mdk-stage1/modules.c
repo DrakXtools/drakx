@@ -32,19 +32,8 @@ static struct module_deps_elem * modules_deps = NULL;
 
 static char * archive_name = "/modules/modules.mar";
 static struct mar_stream s = { 0, NULL, NULL };
+static int disable_modules = 0;
 
-
-static int ensure_archive_opened(void)
-{
-	/* don't consume too much memory */
-	if (s.first_element == NULL) { 
-		if (mar_open_file(archive_name, &s) != 0) {
-			log_message("open marfile failed");
-			return -1;
-		}
-	}
-	return 0;
-}
 
 /* unarchive and insmod given module
  * WARNING: module must not contain the trailing ".o"
@@ -54,9 +43,6 @@ static int insmod_archived_file(const char * mod_name, char * options)
 	char module_name[50];
 	char final_name[50] = "/tmp/";
 	int i, rc;
-
-	if (ensure_archive_opened() == -1)
-		return -1;
 
 	strncpy(module_name, mod_name, sizeof(module_name));
 	strcat(module_name, ".o");
@@ -80,7 +66,7 @@ static int insmod_archived_file(const char * mod_name, char * options)
 
 
 
-int load_modules_dependencies(void)
+static int load_modules_dependencies(void)
 {
 	char * deps_file = "/modules/modules.dep";
 	char * buf, * ptr, * start, * end;
@@ -167,6 +153,15 @@ int load_modules_dependencies(void)
 }
 
 
+void init_modules_insmoding(void)
+{
+	if (load_modules_dependencies() || mar_open_file(archive_name, &s)) {
+		log_message("warning, error initing modules stuff, modules loading disabled");
+		disable_modules = 1;
+	}
+}
+
+
 static void add_modules_conf(char * str)
 {
 	static char data[500] = "";
@@ -225,10 +220,19 @@ int my_insmod(const char * mod_name, enum driver_type type, char * options)
 #endif
 #ifndef DISABLE_NETWORK
 	char ** net_devices = NULL; /* fucking compiler */
+#endif
+
+	log_message("have to insmod %s", mod_name);
+
+	if (disable_modules) {
+		log_message("\tdisabled");
+		return 0;
+	}
+
+#ifndef DISABLE_NETWORK
 	if (type == NETWORK_DEVICES)
 		net_devices = get_net_devices();
 #endif
-	log_message("have to insmod %s", mod_name);
 
 	if (IS_TESTING)
 		return 0;
@@ -312,8 +316,8 @@ enum return_type ask_insmod(enum driver_type type)
 	else
 		return RETURN_ERROR;
 
-	if (ensure_archive_opened() == -1)
-		return -1;
+	if (disable_modules)
+		return RETURN_BACK;
 
 	snprintf(msg, sizeof(msg), "Which driver should I try to gain %s access?", mytype);
 

@@ -191,8 +191,7 @@ int main(int argc, char **argv, char **env)
 	process_cmdline();
 	handle_env(env);
 	spawn_shell();
-	if (load_modules_dependencies())
-		log_message("warning, could not open and parse modules dependencies");
+	init_modules_insmoding();
 	init_frontend();
 
 	ret = method_select_and_prepare();
