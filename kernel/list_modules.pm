@@ -165,7 +165,7 @@ our %l = (
           qw(snd-ymfpci sonicvibes sscape trident via82cxxx_audio wavefront ymfpci),
       ),
     ],
-    tv => [ qw(bt878 bttv cpia_usb cx8800 cyber2000fb ibmcam ivtv mod_quickcam ov511 ov518_decomp pwc saa7134 ultracam usbvideo usbvision) ],
+    tv => [ qw(bt878 bttv cpia_usb cx8800 cyber2000fb dpc7146 ibmcam ivtv mod_quickcam ov511 ov518_decomp pwc saa7134 ultracam usbvideo usbvision zr36067) ],
     dvb => [ qw(budget budget-av budget-ci dvb-ttpci hexium_orion hexium_gemini skystar2) ],
     photo => [ qw(dc2xx mdc800) ],
     radio => [ qw(radio-maxiradio) ],
@@ -180,7 +180,7 @@ our %l = (
       qw(linear raid0 raid1 raid5 lvm-mod multipath dm-mod),
     ],
     mouse => [
-      qw(busmouse msbusmouse logibusmouse  qpmouse serial synclinkmp atixlmouse),
+      qw(busmouse msbusmouse logibusmouse pcips2 qpmouse serial synclinkmp atixlmouse),
       if_(arch() =~ /ppc/, 'macserial'),
       qw(hid mousedev usbhid usbmouse),
     ],
