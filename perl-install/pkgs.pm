@@ -407,7 +407,7 @@ sub psUsingHdlists {
     log::l("psUsingHdlists read " . int(@{$packages->{depslist}}) .
 	   " headers on " . int(keys %{$packages->{mediums}}) . " hdlists");
 
-    return ($packages, $suppl_CDs);
+    return $packages, $suppl_CDs;
 }
 
 sub psUsingHdlist {
