@@ -267,9 +267,8 @@ sub setRootPassword {
 #------------------------------------------------------------------------------
 sub addUser {
     my ($clicked, $_ent_number, $auto) = @_;
-    return if $o->{isUpgrade} && !$clicked;
 
-    installStepsCall($o, $auto, 'addUser', $clicked);
+    installStepsCall($o, $auto, 'addUser', $clicked) if !$o->{isUpgrade};
 }
 
 #------------------------------------------------------------------------------
