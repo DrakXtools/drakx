@@ -362,7 +362,15 @@ our @tree =
 
 sub pciusb_id {
     my ($dev) = @_;
-    join(':', map { $dev->{$_} } qw(bus pci_bus pci_device vendor id subvendor subid description));
+    my %alt = (
+               bus => 'usb_bus',
+               description => 'usb_description',
+               id => 'usb_id',
+               pci_bus => 'usb_pci_bus',
+               pci_device => 'usb_pci_device',
+               vendor => 'usb_vendor',
+               );
+    join(':', map { $dev->{$alt{$_}} || $dev->{$_} } qw(bus pci_bus pci_device vendor id subvendor subid description));
 }
 
 
