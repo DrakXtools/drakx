@@ -38,6 +38,11 @@ sub is_removable { $_[0] =~ /FLOPPY|ZIP|DVDROM|CDROM|BURNER/ }
 
 sub set_removable_configurator {
     my ($class, $device) = @_;
+    return "/usr/sbin/diskdrake --removable=$device->{device}" if is_removable($class);
+ }
+
+sub set_removable_auto_configurator {
+    my ($class, $device) = @_;
     return "/usr/sbin/drakupdate_fstab --no-flag --auto --add $device->{device}" if is_removable($class);
 }
 
