@@ -165,7 +165,7 @@ $first{widgets}{combo}{res}->entry->signal_connect(changed => sub {
 #- image file selection for new theme
 $first{widgets}{button}{file}->signal_connect(clicked => sub {
 	my $file_dialog = gtkset_modal(Gtk2::FileSelection->new(N("choose image")), 1);
-	$file_dialog->set_transient_for($window->{rwindow});
+	$file_dialog->set_transient_for($window->{real_window});
 
 	$file_dialog->set_filename($img_file || '~/');
 	$file_dialog->cancel_button->signal_connect(clicked => sub { $file_dialog->destroy });

@@ -65,7 +65,7 @@ my %inv_fields = reverse %fields;
 
 # factorize this with rpmdrake and harddrake2
 sub wait_msg {
-    my $mainw = ugtk2->new(N("Please wait"), (modal => 1, if_(!$::isEmbedded, transient => $w->{rwindow})));
+    my $mainw = ugtk2->new(N("Please wait"), (modal => 1, if_(!$::isEmbedded, transient => $w->{real_window})));
     $mainw->{window}->add(Gtk2::WrappedLabel->new($_[0]));
     $mainw->{rwindow}->show_all;
     gtkset_mousecursor_wait($mainw->{rwindow}->window);
@@ -343,7 +343,7 @@ gtkpack_($vbox,
                                                                ]
                                                               ),
                                                 { use_markup => 1,
-                                                  if_(!$::isEmbedded, transient => $w->{window}),
+                                                  if_(!$::isEmbedded, transient => $w->{real_window}),
                                                   height => 400,
                                                   width => 600,
                                                   scroll => 1,

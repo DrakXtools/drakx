@@ -63,7 +63,7 @@ my $remove_theme = '/usr/share/bootsplash/scripts/remove-theme';
 
 my $w = ugtk2->new($splash_working ? N("Graphical boot theme selection") : N("System mode"));
 my $window = $w->{window};
-$::main_window = $w->{rwindow} if !$::isEmbedded;
+$::main_window = $w->{real_window} if !$::isEmbedded;
 
 $window->signal_connect(delete_event => sub { ugtk2->exit(0) });
 unless ($::isEmbedded) {

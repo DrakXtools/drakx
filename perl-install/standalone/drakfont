@@ -624,7 +624,7 @@ sub exitdialog() { Gtk2->main_quit };
 
 sub dialog {
     my ($title, $widgets, $buttons, $o_main_loop) = @_;
-    $dialog = _create_dialog($title, { transient => $::isEmbedded ? $::Plug : $window1->{window} });
+    $dialog = _create_dialog($title, { transient => $window1->{real_window} });
     $dialog->signal_connect(delete_event => \&exitdialog);
     gtkpack_($dialog->vbox, @$widgets);
     gtkpack($dialog->action_area, @$buttons) if $buttons;
