@@ -661,6 +661,7 @@ sub autologin {
 #- part of perl-MDK-Common-1.1.7-2mdk but since cooker is frozen...
 sub uniq_(&@) {
     my $f = shift;
+    my %l;
     $l{$f->($_)} = 1 foreach @_;
     grep { delete $l{$f->($_)} } @_;
 }
