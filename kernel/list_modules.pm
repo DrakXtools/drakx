@@ -169,15 +169,13 @@ sub category2modules {
 
 sub module2category {
     my ($module) = @_;
-    my ($t1, $t2);
-    while (($t1, my $h) = each %l) {
-	while (($t2, my $l) = each %$h) {
-	    $module eq $_ and goto found foreach @$l;
-	}
+    foreach my $t1 (keys %l) {
+	my $h = $l{$t1};
+	foreach my $t2 (keys %$h) {
+	  $module eq $_ and return "$t1/$t2" foreach @{$h->{$t2}};
+      }
     }
     return;
-  found: 
-    "$t1/$t2";
 }
 
 sub sub_categories {
