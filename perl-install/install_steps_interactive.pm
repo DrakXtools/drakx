@@ -455,8 +455,11 @@ mandatory laws of public order. However this agreement expressly excludes any
 conflict of laws, principles, choice of law or rule to the contrary. Therefore
 French laws shall prevail on any other local laws.
 
-For any queries relating to these agreement, please contact Mandrakesoft 43, rue
-d'Aboukir, 75002 Paris FRANCE")) || return;
+For any queries relating to these agreement, please contact 
+Mandrakesoft
+43, rue d'Aboukir
+75002 Paris
+FRANCE")) || return;
 
     require crypto;
     eval {
