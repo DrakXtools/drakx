@@ -417,7 +417,12 @@ sub getSagem() {
 }
 
 sub getNet() {
-    grep { /^(eth|fddi|plip|tr|wifi|wlan)/ } c::getNetInterfaces();
+    grep { !(($::isStandalone || $::live) && /plip/) && c::hasNetDevice($_) }
+      grep { /^(eth|fddi|plip|tr|wifi|wlan)/ }
+        map_index {
+            # skip headers
+            if_(1 < $::i && /^\s*([a-z]*[0-9]*):/, $1)
+        } cat_("/proc/net/dev");
 }
 
 #sub getISDN() {
