@@ -689,7 +689,8 @@ You can now :
   - edit \t\t\t (modify parameters of an existing section)
   - remove \t\t (remove an existing section)
   - commit \t\t (writes the changes to the real file)"),
-		[ N_("Display"), N_("Add"), N_("Edit"), N_("Remove"), N_("Commit") ]) or goto step_configuration;
+		[ #-PO: here "display" is a verb, not a noun
+           N_("Display"), N_("Add"), N_("Edit"), N_("Remove"), N_("Commit") ]) or goto step_configuration;
 
 
 #- display $racoon_conf -------------------------
