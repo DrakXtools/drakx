@@ -1,5 +1,44 @@
 2002/02/16  Pixel  <pixel@mandrakesoft.com>
 
+	* Xconfig.pm: 
+	  - prefer XKB available from existing XF86Config over
+	/etc/sysconfig/keyboard KEYTABLE
+	  - fix translating from /etc/sysconfig/keyboard KEYTABLE to XKB
+
+	* diskdrake/interactive.pm: add Resize'ing mounted XFS on LVM
+
+	* interactive_newt.pm: do not trash error messages if testing
+
+	* lang.pm (country2lang): created
+	(write): ensure it doesn't fail when kdeglobals is not writable (eg: the
+	directory doesn't exist)
+	(list): return the languages in a "specific" order (favours non utf8
+	over utf8)
+
+	* crypto.pm (mirrors): add a timeout via "alarm" (needs testing)
+
+	* install_steps_interactive.pm (setupSCSI): when "clicked", ask "Do you
+	have any SCSI interfaces" instead
+	of assuming there is a SCSI interface and asking the driver name
+
+	* lvm.pm: 
+	  - LVs "device" field were containing "/dev/vg/number" whereas it must
+	be "vg/name"
+	  - added lv_resize
+	  - call pvcreate with "-y -ff"
+	  - created LVs are notFormatted
+
+	* interactive.pm: 
+	  - fix non X + testing + su
+	  - since "interactive" takes care of "format" for type "combo", remove
+	"format" (so that interactive_newt which switch to type "list" don't
+	apply
+	"format" once again)
+
+	* standalone/localedrake: handle --kde_country=<country>
+
+2002/02/16  Pixel  <pixel@mandrakesoft.com>
+
 	* lang.pm (country2lang): created
 	(write): ensure it doesn't fail when kdeglobals is not writable (eg: the
 	directory doesn't exist)
