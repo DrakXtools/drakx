@@ -5,7 +5,7 @@ use any;
 
 
 sub kinds() { 
-    ('local', 'LDAP', 'NIS', 'winbind', 'AD', 'ADWIN');
+    ('local', 'LDAP', 'NIS', 'winbind', 'AD', 'SMBKRB');
 }
 
 sub kind2name {
@@ -16,7 +16,7 @@ sub kind2name {
     NIS => N("NIS"), 
     winbind => N("Windows Domain"), 
     AD => N("Active Directory with SFU"),
-    ADWIN => N("Active Directory with Winbind") }}{$kind};
+    SMBKRB => N("Active Directory with Winbind") }}{$kind};
 }
 
 sub kind2description() {
@@ -52,10 +52,6 @@ sub ask_parameters {
 	delete $authentication->{$_} if $_ ne $kind;
     }
 
-    if ($kind eq 'AD') {
-	$authentication->{subkind} = $in->ask_from_list('', "text explaining SFU vs Winbind", [ 'SFU', 'winbind' ]) or return;
-    }
-
     if ($kind eq 'LDAP') {
 	$authentication->{LDAP_server} ||= 'ldap.' . $netc->{DOMAINNAME};
 	$netc->{LDAPDOMAIN} ||= domain_to_ldap_domain($netc->{DOMAINNAME});
@@ -64,7 +60,7 @@ sub ask_parameters {
 		     [ { label => N("LDAP Base dn"), val => \$netc->{LDAPDOMAIN} },
 		       { label => N("LDAP Server"), val => \$authentication->{LDAP_server} },
 		     ]) or return;
-    } elsif ($kind eq 'AD' && $authentication->{subkind} eq 'SFU') {
+    } elsif ($kind eq 'AD') {
 	$authentication->{AD_domain} ||= $netc->{DOMAINNAME};
 	$authentication->{AD_server} ||= 'kerberos.' . $authentication->{AD_domain};
 	$authentication->{AD_users_db} ||= 'cn=users,' . domain_to_ldap_domain($authentication->{AD_domain});
@@ -103,18 +99,18 @@ sub ask_parameters {
 		     [ { label => N("NIS Domain"), val => \$netc->{NISDOMAIN} },
 		       { label => N("NIS Server"), val => \$authentication->{NIS_server}, list => ["broadcast"], not_edit => 0 },
 		     ]) or return;
-    } elsif ($kind eq 'winbind' || $kind eq 'AD' && $authentication->{subkind} eq 'winbind') {
+    } elsif ($kind eq 'winbind' || $kind eq 'SMBKRB') {
 	#- maybe we should browse the network like diskdrake --smb and get the 'doze server names in a list 
 	#- but networking isn't setup yet necessarily
 	$in->ask_warn('', N("For this to work for a W2K PDC, you will probably need to have the admin run: C:\\>net localgroup \"Pre-Windows 2000 Compatible Access\" everyone /add and reboot the server.\nYou will also need the username/password of a Domain Admin to join the machine to the Windows(TM) domain.\nIf networking is not yet enabled, Drakx will attempt to join the domain after the network setup step.\nShould this setup fail for some reason and domain authentication is not working, run 'smbpasswd -j DOMAIN -U USER%%PASSWORD' using your Windows(tm) Domain, and Admin Username/Password, after system boot.\nThe command 'wbinfo -t' will test whether your authentication secrets are good."))
 	  if $kind eq 'winbind';
 
-	$authentication->{AD_domain} ||= $netc->{DOMAINNAME} if $kind eq 'AD';
-	 $authentication->{AD_users_idmap} ||= 'ou=idmap,' . domain_to_ldap_domain($authentication->{AD_domain}) if $kind eq 'AD';
+	$authentication->{AD_domain} ||= $netc->{DOMAINNAME} if $kind eq 'SMBKRB';
+	 $authentication->{AD_users_idmap} ||= 'ou=idmap,' . domain_to_ldap_domain($authentication->{AD_domain}) if $kind eq 'SMBKRB';
 	$netc->{WINDOMAIN} ||= $netc->{DOMAINNAME};
 	$in->ask_from('',
-		      $kind eq 'AD' ? N("Authentication Active Directory") : N("Authentication Windows Domain"),
-		        [ if_($kind eq 'AD', 
+		      $kind eq 'SMBKRB' ? N("Authentication Active Directory") : N("Authentication Windows Domain"),
+		        [ if_($kind eq 'SMBKRB', 
 			  { label => N("Domain"), val => \$authentication->{AD_domain} }
 			     ),
 			  { label => N("Windows Domain"), val => \$netc->{WINDOMAIN} },
@@ -157,7 +153,7 @@ sub set {
 			 nss_base_passwd => "ou=People,$domain",
 			 nss_base_group => "ou=Group,$domain",
 			);
-    } elsif ($kind eq 'AD' && $authentication->{subkind} eq 'SFU') {
+    } elsif ($kind eq 'AD') {
 	$in->do_pkgs->install(qw(nss_ldap pam_krb5 libsasl2-plug-gssapi));
 
 	set_nsswitch_priority('ldap');
@@ -245,7 +241,7 @@ sub set {
 	$when_network_is_up->(sub {
 	    run_program::rooted($::prefix, 'smbpasswd', '-j', $domain, '-U', $authentication->{winuser} . '%' . $authentication->{winpass});
 	});
-    } elsif ($kind eq 'AD' && $authentication->{subkind} eq 'winbind') {
+    } elsif ($kind eq 'SMBKRB') {
 
 	my $domain = uc $netc->{WINDOMAIN};
 	my $realm = $authentication->{AD_domain};
