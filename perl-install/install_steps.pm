@@ -196,7 +196,7 @@ sub choosePartitionsToFormat($$) {
 	$_->{mntpoint} = "swap" if isSwap($_);
 	$_->{mntpoint} or next;
 	
-	add2hash_($_, { toFormat => $_->{notFormatted} || $o->{partitioning}{autoformat} });
+	add2hash_($_, { toFormat => $_->{notFormatted} });
 	if (!$_->{toFormat}) {
 	    my $t = isLoopback($_) ? 
 	      eval { fsedit::typeOfPart($o->{prefix} . loopback::file($_)) } :

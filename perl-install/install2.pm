@@ -141,7 +141,7 @@ $o = $::o = {
     autoSCSI   => 0,
     mkbootdisk => 1, #- no mkbootdisk if 0 or undef, find a floppy with 1, or fd1
 #-    packages   => [ qw() ],
-    partitioning => { clearall => 0, eraseBadPartitions => 0, auto_allocate => 0, autoformat => 0 }, #-, readonly => 0 },
+    partitioning => { clearall => 0, eraseBadPartitions => 0, auto_allocate => 0 }, #-, readonly => 0 },
 #-    security => 2,
     shells => [ map { "/bin/$_" } qw(bash tcsh zsh ash ksh) ],
     authentication => { md5 => 1, shadow => 1 },
