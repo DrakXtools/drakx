@@ -154,7 +154,7 @@ arch() eq "ppc" ? (
  "ru" => [ __("Russian"),        "ru4",         "ru(winkeys)" ],
  "ru_yawerty" => [ __("Russian (Yawerty)"),"ru-yawerty","ru_yawerty" ],
  "se" => [ __("Swedish"),        "se-latin1",   "se" ],
- "si" => [ __("Slovenian"),      "slovene",     "si" ],
+ "si" => [ __("Slovenian"),      "slovene",     "sl" ],
  "sk" => [ __("Slovakian"),      "sk-qwertz",   "czsk(sk_us_qwertz)" ],
  "th" => [ __("Thai keyboard"),  "th",          "th" ],
  "tr_f" => [ __("Turkish (traditional \"F\" model)"), "trf", "tr_f" ],
