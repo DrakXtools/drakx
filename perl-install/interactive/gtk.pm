@@ -493,7 +493,7 @@ sub ask_fromW {
     
 	{ e => $e, w => $w, real_w => $real_w || $w, focus_w => $focus_w || $w, expand => $expand,
 	  get => $get || sub { ${$e->{val}} }, set => $set || sub {},
-	  icon_w => -e $e->{icon} ? gtkpng($e->{icon}) : '' };
+	  icon_w => eval { gtkpng($e->{icon}) } };
     };
     @widgets_always   = map_index { $create_widget->($_, $::i)       } @$l;
     my $always_total_size = $total_size;
