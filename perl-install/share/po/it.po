@@ -1,5 +1,3 @@
-# translation of attuale-DrakX-it.po to italiano
-# translation of nuovo-DrakX-it.po to italiano
 # translation of DrakX-it.po to italiano
 # italian translation of drakflopy
 # Copyright (C) 2000, 2001 MandrakSoft S.A.
@@ -12,8 +10,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX-it\n"
-"POT-Creation-Date: 2003-03-09 13:01+0100\n"
-"PO-Revision-Date: 2003-03-08 12:22+0100\n"
+"POT-Creation-Date: 2003-03-12 14:29+0100\n"
+"PO-Revision-Date: 2003-03-09 20:25+0100\n"
 "Last-Translator: Andrea Celli <a.celli@caltanet.it>\n"
 "Language-Team: italiano <timl@freelists.org>\n"
 "MIME-Version: 1.0\n"
@@ -1285,6 +1283,45 @@ msgid ""
 " * Default OS: you can select which OS will boot by default when the Open\n"
 "Firmware Delay expires."
 msgstr ""
+"Yaboot e' un bootloader per l' hardware NewWorld Macintosh e puo' essere "
+"usato per\n"
+"avviare GNU/Linux, MacOS o MacOSX. Normalmente, MacOS e MacOSX sono\n"
+"rilevati correttamente e installati nel menu del bootloader. Se cio' non "
+"avviene, puoi\n"
+"aggiungere una voce a mano in questa schermata. Presta attenzione nello "
+"scegliere\n"
+"i parametri corretti.\n"
+"\n"
+"Le principali opzioni di Yaboot sono:\n"
+"\n"
+" * Init Message: un semplice messaggio di testo mostrato prima del prompt di "
+"boot.\n"
+"\n"
+" * Boot Device: indica dove vuoi inserire l' informazione richiesta per "
+"avviare GNU/Linux.\n"
+"In generale, si appronta una partizione di avvio prima di avere quest' "
+"informazione.\n"
+"\n"
+" * Open Firmware Delay: A differenza di LILO, ci sono due delay disponibili "
+"con Yaboot.\n"
+"Il primo delay e' misurato in secondi, e a questo punto, puoi\n"
+"scegliere tra CD, OF boot, MacOS o Linux;\n"
+"\n"
+" * Kernel Boot Timeout: questo timeout e' simile al boot delay di LILO.\n"
+"Dopo aver selezionato Linux, avrai questo ritardo in decimi di secondo "
+"perima che\n"
+"venga selezionata la descrizione di default del kernel;\n"
+"\n"
+" * Enable CD Boot?: selezionando quest' opzione potrai scegliere ``C'' per "
+"CD\n"
+"al primo boot prompt.\n"
+"\n"
+" * Enable OF Boot?: selezionando quest' opzione potrai scegliere ``N'' per\n"
+"Open Firmware al primo boot prompt.\n"
+"\n"
+" * Default OS: puoi selezionare quale OS partira' per default quando scade "
+"il delay\n"
+"dell' Open Firmware."
 
 #: ../../help.pm:1
 #, c-format
@@ -1386,10 +1423,8 @@ msgstr ""
 " premendo INVIO al prompt di yaboot. Inoltre, questa voce sarà evidenziata\n"
 "con uno \"*\" se premi [Tab] per vedere tutti i sistemi avviabili."
 
-# DO NOT BOTHER TO MODIFY HERE, SEE:
-# cvs.mandrakesoft.com:/cooker/doc/manualB/modules/it/drakx-chapter.xml
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "DrakX will first detect any IDE devices present in your computer. It will\n"
 "also scan for one or more PCI SCSI cards on your system. If a SCSI card is\n"
@@ -1408,43 +1443,11 @@ msgid ""
 "which parameters need to be passed to the hardware, you'll need to manually\n"
 "configure the driver."
 msgstr ""
-"Ora DrakX procederà con il rilevamento di tutti i dischi rigidi e altri\n"
-"dispositivi IDE presenti sul vostro computer, e cercherà anche di stabilire\n"
-"se sul vostro sistema sono presenti una o più schede SCSI di tipo PCI. Se\n"
-"verrà individuato un dispositivo di questo tipo, DrakX installerà\n"
-"automaticamente il driver appropriato.\n"
-"\n"
-"Dato che il riconoscimento automatico in alcuni casi potrebbe non riuscire\n"
-"ad individuare una particolare periferica, vi verrà comunque chiesto se\n"
-"avete una scheda SCSI PCI diversa da quelle eventualmente identificate\n"
-"oppure no. Scegliete \"Sì\" se siete sicuri che nel vostro computer è\n"
-"presente un'altra scheda SCSI: potrete scegliere la vostra scheda da una\n"
-"lista. Scegliete \"No\" se non disponete di nessun tipo di hardware SCSI, o\n"
-"se siete soddisfatti del riconoscimento automatico. Se non siete sicuri,\n"
-"potete anche controllare la lista dell'hardware rilevato nella vostra\n"
-"macchina selezionando \"Vedi informazioni hardware\" e cliccando su \"Ok\".\n"
-"Controllate l'elenco dell'hardware individuato e poi cliccate sul pulsante\n"
-"\"Ok\" per ritornare alla domanda relativa alla scheda SCSI.\n"
-"\n"
-"Se sarete costretti a specificare manualmente il tipo di scheda in vostro\n"
-"possesso, DrakX vi chiederà se intendete indicare delle opzioni da usare\n"
-"con essa. Vi consigliamo di permettere a DrakX di esaminare l'hardware per\n"
-"stabilire le particolari opzioni della scheda che dovranno essere usate\n"
-"all'inizializzazione; questo metodo in genere permette di ottenere buoni\n"
-"risultati.\n"
-"\n"
-"Se DrakX non riesce a stabilire quali sono le opzioni da passare alla\n"
-"scheda, dovrete specificarle manualmente. Consultate il \"Manuale\n"
-"dell'utente\" (capitolo 3, paragrafo \"Ricerca di informazioni sul vostro\n"
-"hardware\") per qualche suggerimento su come ottenerle dalla documentazione\n"
-"dell'hardware, dal sito web del produttore (se disponete di un accesso a\n"
-"Internet) o da Microsoft Windows (se avete utilizzato la stessa scheda con\n"
-"Windows sul vostro stesso sistema)."
 
 # DO NOT BOTHER TO MODIFY HERE, SEE:
 # cvs.mandrakesoft.com:/cooker/doc/manualB/modules/it/drakx-chapter.xml
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Now, it's time to select a printing system for your computer. Other OSs may\n"
 "offer you one, but Mandrake Linux offers two. Each of the printing systems\n"
@@ -1473,7 +1476,7 @@ msgid ""
 msgstr ""
 "Qui potrete scegliere il sistema di stampa da usare con questo computer.\n"
 "Altri sistemi operativi possono offrirvene uno, ma Mandrake Linux ve ne\n"
-"offre ben tre.\n"
+"offre ben due.\n"
 "\n"
 " * \"pdq\" - che sta per \"print, don't queue\" (\"stampa, non mettere in\n"
 "coda\"), è una buona scelta se avete una connessione diretta con la\n"
@@ -1494,16 +1497,7 @@ msgstr ""
 "configurazione base è quasi altrettanto semplice di quella per \"pdq\".\n"
 "Se avete bisogno di emulare un server \"lpd\" dovete attivare il demone\n"
 "\"cups-lpd\". Dispone di interfaccia grafica per la stampa e per la\n"
-"configurazione delle opzioni della stampante.\n"
-"\n"
-" * \"lprNG\" - \"line printer daemon New Generation\" (\"demone di stampa\n"
-"di nuova generazione\". Questo sistema è approssimativamente equivalente\n"
-"agli altri, ma è anche in grado di stampare su dispositivi collegati per\n"
-"mezzo di una rete Novell, dato che supporta il protocollo IPX, e può\n"
-"stampare direttamente in base a comandi via shell. Se avete bisogno di una\n"
-"connessione di tipo Novell, o di stampare senza fare uso di pipe,\n"
-"utilizzate lprNG. In caso contrario, è preferibile usare CUPS dato che è\n"
-"più semplice e migliore nel gestire stampanti di rete."
+"configurazione delle opzioni della stampante."
 
 #: ../../help.pm:1
 #, c-format
@@ -1802,10 +1796,8 @@ msgstr ""
 "provate i pulsanti e spostate il mouse in modo da accertarvi che tutto sia\n"
 "a posto."
 
-# DO NOT BOTHER TO MODIFY HERE, SEE:
-# cvs.mandrakesoft.com:/cooker/doc/manualB/modules/it/drakx-chapter.xml
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Your choice of preferred language will affect the language of the\n"
 "documentation, the installer and the system in general. Select first the\n"
@@ -1832,22 +1824,6 @@ msgid ""
 "language used by the entire system. Running the command as a regular user\n"
 "will only change the language settings for that particular user."
 msgstr ""
-"Il primo passo è scegliere la lingua che preferite.\n"
-"\n"
-"Scegliete la lingua che intendete usare per l'installazione e l'uso del\n"
-"sistema.\n"
-"\n"
-"Cliccando sul pulsante \"Avanzato\" potrete scegliere altre lingue da\n"
-"installare sul vostro computer. La selezione di altre lingue comporta\n"
-"l'installazione dei file relativi alla documentazione e alle applicazioni\n"
-"per ciascuna di esse. Se il vostro computer dovrà essere usato, ad esempio,\n"
-"anche da persone di madre lingua spagnola, potete scegliere l'italiano come\n"
-"lingua principale nella struttura ad albero e, nella sezione \"Avanzato\",\n"
-"apporre un segno di spunta sul pulsante grigio corrispondente a\n"
-"\"Spanish|Spain\".\n"
-"\n"
-"È possibile installare i file per più lingue allo stesso tempo. Dopo aver\n"
-"scelto quelle che preferite cliccate sul pulsante \"Ok\" per continuare."
 
 # DO NOT BOTHER TO MODIFY HERE, SEE:
 # cvs.mandrakesoft.com:/cooker/doc/manualB/modules/it/drakx-chapter.xml
@@ -2174,10 +2150,8 @@ msgstr ""
 "un kernel di riserva e immagini di ''ramdisk'' da utilizzare in caso di\n"
 "emergenza."
 
-# DO NOT BOTHER TO MODIFY HERE, SEE:
-# cvs.mandrakesoft.com:/cooker/doc/manualB/modules/it/drakx-chapter.xml
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "At this point, DrakX will allow you to choose the security level desired\n"
 "for the machine. As a rule of thumb, the security level should be set\n"
@@ -2187,20 +2161,9 @@ msgid ""
 "\n"
 "If you do not know what to choose, keep the default option."
 msgstr ""
-"Ora è il momento di scegliere il livello di sicurezza desiderato per il\n"
-"tuo sistema. Come regola generale, quanto più esposta è la macchina e\n"
-"quanto più sono importanti i dati che contiene, tanto più alto dovrebbe\n"
-"essere il livello di sicurezza. Tieni presente, tuttavia, che un livello di\n"
-"sicurezza molto alto in genere viene ottenuto a spese della facilità d'uso.\n"
-"Consulta il capitolo MSEC del \"Manuale di riferimento\" per avere\n"
-"ulteriori informazioni in merito al significato di tali livelli.\n"
-"\n"
-"Se non sai cosa scegliere, mantieni l'opzione predefinita."
 
-# DO NOT BOTHER TO MODIFY HERE, SEE:
-# cvs.mandrakesoft.com:/cooker/doc/manualB/modules/it/drakx-chapter.xml
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "At the time you are installing Mandrake Linux, it is likely that some\n"
 "packages have been updated since the initial release. Bugs may have been\n"
@@ -2214,21 +2177,6 @@ msgid ""
 "appear: review the selection, and press \"Install\" to retrieve and install\n"
 "the selected package(s), or \"Cancel\" to abort."
 msgstr ""
-"È molto probabile che, al momento in cui state installando Mandrake Linux,\n"
-"alcuni pacchetti siano stati aggiornati rispetto alla versione iniziale.\n"
-"Potrebbe trattarsi di un \"bug fix\", o della soluzione ai problemi\n"
-"relativi alla sicurezza. Per permettervi di beneficiare di questi\n"
-"aggiornamenti vi verrà proposto di scaricare la nuova versione dei\n"
-"pacchetti usando Internet. Scegliete \"Sì\" se potete contare su una\n"
-"connessione ad Internet funzionante, oppure \"No\" se preferite installare "
-"i\n"
-"pacchetti aggiornati in un secondo momento.\n"
-"\n"
-"Se scegliete \"Sì\" comparirà una lista di siti da cui è possibile\n"
-"scaricare i pacchetti aggiornati. Selezionate quello più vicino a voi. A\n"
-"questo punto comparirà una finestra di selezione pacchetti: controllate la\n"
-"lista e cliccate su \"Installa\" per scaricare e installare i pacchetti, o\n"
-"su \"Annulla\" per annullare l'operazione."
 
 # DO NOT BOTHER TO MODIFY HERE, SEE:
 # cvs.mandrakesoft.com:/cooker/doc/manualB/modules/it/drakx-chapter.xml
@@ -4824,9 +4772,9 @@ msgid "Please choose your type of mouse."
 msgstr "Per favore, scegli il tipo di mouse."
 
 #: ../../install_steps_interactive.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Encryption key for %s"
-msgstr "Chiave di crittazione"
+msgstr "Chiave di codifica per %s"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -11025,11 +10973,6 @@ msgstr "Cambia il sistema di stampa"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
-msgid "Printer sharing"
-msgstr "Condivisione stampante"
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
 msgid "CUPS configuration"
 msgstr "Configurazione di CUPS"
 
@@ -11460,10 +11403,10 @@ msgid "Printing/Scanning/Photo Cards on \"%s\""
 msgstr "Stampa/Scansione/photocard su \"%s\""
 
 #: ../../printer/printerdrake.pm:1
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "To know about the options available for the current printer read either the "
-"list shown below or click on the \"Print option list\" button.%s%s\n"
+"list shown below or click on the \"Print option list\" button.%s%s%s\n"
 "\n"
 msgstr ""
 "Per conoscere le opzioni disponibili per questa stampante leggi l'elenco "
@@ -11717,51 +11660,8 @@ msgstr ""
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
-msgid ""
-"Your printer belongs to the group of GDI laser printers (winprinters) sold "
-"by different manufacturers which uses the Zenographics ZJ-stream raster "
-"format for the data sent to the printer. The driver for these printers is "
-"still in a very early development stage and so it will perhaps not always "
-"work properly. Especially it is possible that the printer only works when "
-"you choose the A4 paper size.\n"
-"\n"
-"Some of these printers, as the HP LaserJet 1000, for which this driver was "
-"originally created, need their firmware to be uploaded to them after they "
-"are turned on. In the case of the HP LaserJet 1000 you have to search the "
-"printer's Windows driver CD or your Windows partition for the file "
-"\"sihp1000.img\" and upload the file to the printer with one of the "
-"following commands:\n"
-"\n"
-"     lpr -o raw sihp1000.img\n"
-"     cat sihp1000.img > /dev/usb/lp0\n"
-"\n"
-"The first command can be given by any normal user, the second must be given "
-"as root. After having done so you can print normally.\n"
+msgid "Firmware-Upload for HP LaserJet 1000"
 msgstr ""
-"La stampante appartiene al gruppo delle GDI laser printer (winprinter), "
-"vendute da diversi produttori, che usano il formato \"Zenographics ZJ-stream "
-"raster\" per l'invio dei dati alla stampante. Il driver per queste stampanti "
-"è in uno stato di sviluppo molto iniziale. Quindi non sempre funziona "
-"correttamente. In particolare, è possibile che la stampante funzioni solo "
-"con carta formato A4.\n"
-"\n"
-"Alcune stampanti, come la HP LaserJet 1000, per la quale questo driver è "
-"stato creato appositamente, richiedono un aggiornamento del firmware dopo "
-"l'accensione. Nel caso della HP LaserJet 1000 devi cercare il file "
-"\"sihp1000.img\" nel CD dei driver per Windows o nella tua partizione "
-"Windows e caricarlo nella memoria della stampante con uno di questi "
-"comandi:\n"
-"\n"
-"     lpr -o raw sihp1000.img\n"
-"     cat sihp1000.img > /dev/usb/lp0\n"
-"\n"
-"Il primo comando può essere lanciato da un utente normale, il secondo solo "
-"da root. Fatto questo potrai stampare normalmente.\n"
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "GDI Laser Printer using the Zenographics ZJ-Stream Format"
-msgstr "Stampante laser GDI con formato Zenographics ZJ-Stream"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -11949,6 +11849,11 @@ msgstr "Sto rendendo la porta della stampante disponibile per CUPS..."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
+msgid "Checking device and configuring HPOJ..."
+msgstr "Verifica della periferica e configurazione di HPOJ..."
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
 msgid "Photo memory card access on your HP multi-function device"
 msgstr ""
 "Accesso alla scheda di memoria fotografica del tuo dispositivo multi-"
@@ -11968,11 +11873,6 @@ msgstr "Installazione dei pacchetti mtools..."
 #, c-format
 msgid "Installing SANE packages..."
 msgstr "Installazione dei pacchetti SANE ..."
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "Checking device and configuring HPOJ..."
-msgstr "Verifica della periferica e configurazione di HPOJ..."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -12865,6 +12765,11 @@ msgstr "Manca il nome del server IP!"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
+msgid "If no port is given, 631 will be taken as default."
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
 msgid "Enter IP address and port of the host whose printers you want to use."
 msgstr ""
 "Fornisci l'indirizzo IP e la porta dell'host di cui vuoi usare le stampanti."
@@ -12996,6 +12901,23 @@ msgstr "Correzione automatica della configurazione di CUPS"
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid ""
+"Turning on this allows to print plain text files in japanese language. Only "
+"use this function if you really want to print text in japanese, if it is "
+"activated you cannot print accentuated characters in latin fonts any more "
+"and you will not be able to adjust the margins, the character size, etc. "
+"This setting only affects printers defined on this machine. If you want to "
+"print japanese text on a printer set up on a remote machine, you have to "
+"activate this function on that remote machine."
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid "Japanese text printing mode"
+msgstr "Cambia il sistema di stampa"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid ""
 "To get access to printers on remote CUPS servers in your local network you "
 "only need to turn on the \"Automatically find available printers on remote "
 "machines\" option; the CUPS servers inform your machine automatically about "
@@ -13070,8 +12992,8 @@ msgstr ""
 "macchine."
 
 #: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "CUPS printer sharing configuration"
+#, fuzzy, c-format
+msgid "CUPS printer configuration"
 msgstr "Configurazione della condivisione di stampanti con CUPS"
 
 #: ../../printer/printerdrake.pm:1
@@ -13099,6 +13021,18 @@ msgstr "Com'è collegata la stampante?"
 #, c-format
 msgid "Select Printer Connection"
 msgstr "Scegli Connessione stampante"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid ""
+"The HP LaserJet 1000 needs its firmware to be uploaded after being turned "
+"on. Download the Windows driver package from the HP web site (the firmware "
+"on the printer's CD does not work) and extract the firmware file from it by "
+"uncompresing the self-extracting '.exe' file with the 'unzip' utility and "
+"searching for the 'sihp1000.img' file. Copy this file into the '/etc/"
+"printer' directory. There it will be found by the automatic uploader script "
+"and uploaded whenever the printer is connected and turned on.\n"
+msgstr ""
 
 #: ../../security/help.pm:1
 #, c-format
@@ -14543,7 +14477,7 @@ msgstr ""
 "  Per default i file di backups saranno archiviati\n"
 "  nella directory /var/lib/drakbackup\n"
 "\n"
-"  File di Configuration:\n"
+"  File di configurazione:\n"
 "\t/etc/drakconf/drakbackup/drakbackup.conf\n"
 "\n"
 "Procedura di ripristino:\n"
@@ -14600,6 +14534,30 @@ msgid ""
 "\n"
 "\n"
 msgstr ""
+"descrizione del ripristino:\n"
+" \n"
+"Verranno usati solo i dati più recenti, in quanto con i backup incrementali\n"
+"è necessario ripristinare uno per uno tutti i backup precedenti.\n"
+"\n"
+"Quindi, se non vuoi ripristinare un utente, devi togliere la spunta a tutte "
+"le\n"
+"caselle che lo riguardano.\n"
+"\n"
+"Altrimenti, potrai selezionarne solo una.\n"
+"\n"
+" - Backup incrementali:\n"
+"\n"
+"\tIl backup incrementale è l'opzione più potente\n"
+"\tda usare. Questa opzione ti permette di\n"
+"\tsalvare tutti i tuoi dati la prima volta e solo \n"
+"\tquelli modificati le volte successive.\n"
+"\tQuindi, durante il ripristino, sarai in grado di\n"
+"\trecuperare i tuoi dati da una data precisa.\n"
+"\tSe non hai scelto questa opzione, tutti i vecchi backup\n"
+"\tsaranno distrutti prima di effettuarne uno nuovo.    \n"
+"\n"
+"\n"
+"\n"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -14642,6 +14600,45 @@ msgid ""
 "\n"
 "\n"
 msgstr ""
+"descrizione delle opzioni:\n"
+"\n"
+" - Backup dei file di sistema:\n"
+"       \n"
+"\tQuesta opzione ti permette di fare una copia di riserva\n"
+"\tdella tua directory /etc, che contiene tutti i file di\n"
+"\tconfigurazione. Dev, però, stare attento durante il\n"
+"\tripristino a non sovrascrivere i file:\n"
+"\t\t/etc/passwd \n"
+"\t\t/etc/group \n"
+"\t\t/etc/fstab\n"
+"\n"
+" - Backup dei file utente: \n"
+"\n"
+"\tQuesta opzione ti permette di scegliere gli utenti dei\n"
+"\tcui file vuoi fare una copia di riserva.\n"
+"\tdella tua directory /etc, che contiene tutti i file di\n"
+"\tPer salvare spazio sul disco, si raccomanda di non\n"
+"\tincludere la cache del browser web.\n"
+"\n"
+" - Backup di altri file: \n"
+"\n"
+"\t\tQuesta opzione ti permette di scegliere altri dati da\n"
+"\tincludere nella copia di riserva.\n"
+"\tCon questa opzione non è possibile (almeno\n"
+"\tper ora) fare un backup incrementale.\t\t\n"
+" \n"
+" - Backup incrementale:\n"
+"\n"
+"\tIl backup incrementale è l'opzione più efficace\n"
+"\tper fare copie di riserva. Questa opzione ti consente\n"
+"\tdi salvare tutti i tuoi dati la prima volta e solo \n"
+"\tquelli modificati le volte successive.\n"
+"\tQuindi, durante il ripristino, sarai in grado di\n"
+"\trecuperare i tuoi dati da una data precisa.\n"
+"\tSe non hai scelto questa opzione, tutti i vecchi backup\n"
+"\tsaranno distrutti prima di effettuarne uno nuovo.    \n"
+"\n"
+"\n"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -14655,7 +14652,7 @@ msgstr ""
 "\n"
 "Alcuni errori nell'invio della posta sono causati da\n"
 "un'errata configurazione di postfix. Per risolvere il problema\n"
-"devi indicare ilmionomehost o ilmiodominio in /etc/postfix/main.cf\n"
+"devi indicare nomedelmiohost o miodominio in /etc/postfix/main.cf\n"
 "\n"
 
 #: ../../standalone/drakbackup:1
@@ -14690,6 +14687,34 @@ msgid ""
 "      \n"
 "\n"
 msgstr ""
+"descrizione delle opzioni:\n"
+"\n"
+" In questa fase Drakbackup ti consente di cambiare:\n"
+"\n"
+"  - Il modo di comprimere:\n"
+"    \n"
+"      Se scegli la compressione bzip2, comprimerai\n"
+"      i tuoi dati meglio che con gzip (circa 2-10 %%).\n"
+"      Questa opzione non è preimpostata poiché al suo algoritmo\n"
+"      di compressione serve più tempo (circa il 1000%% in più).\n"
+" \n"
+" - La modalità aggiornamento:\n"
+"\n"
+"      Questa opzione farà un aggiornamento del tuo backup. Però,\n"
+"      non è un'opzione veramente utile, perché saresti costretto\n"
+"      a decomprimere il file di backup prima di poterlo aggiornare.\n"
+"      \n"
+" - la modalità .backupignore:\n"
+"\n"
+"      Drakbackup si comporterà come cvs e ignorerà tutti i\n"
+"      riferimenti inclusi nei file .backupignore di ogni directory.\n"
+"      ad es.: \n"
+"         #> cat .backupignore\n"
+"         *.o\n"
+"         *~\n"
+"         ...\n"
+"      \n"
+"\n"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -14754,7 +14779,7 @@ msgstr "Backup di altri file"
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "Backup user files"
-msgstr "Backup dei file degli utenti"
+msgstr "Backup dei file utente"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -14774,11 +14799,6 @@ msgid ""
 msgstr ""
 "Nessun file di configurazione trovato\n"
 "per favore clicca Assistente o Avanzato."
-
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "%s"
-msgstr "%s"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -15782,7 +15802,7 @@ msgstr "File di backup su disco rigido..."
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "Backup Other files..."
-msgstr "Backup di altri file"
+msgstr "Backup di altri file ..."
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -17866,9 +17886,9 @@ msgid "choose image file"
 msgstr "Scegli un file immagine"
 
 #: ../../standalone/draksplash:1
-#, fuzzy, c-format
+#, c-format
 msgid "choose image"
-msgstr "Scegli un file immagine"
+msgstr "Scegli un'immagine"
 
 #: ../../standalone/draksplash:1
 #, c-format
@@ -19368,13 +19388,13 @@ msgid ""
 "worldwide Linux Community."
 msgstr ""
 "Il successo di MandrakeSoft si basa sull principio del Software Libero. Il "
-"tuo nuovo sistema operativo è il risultato del lavoro collaborativo di tutta "
-"la la Comunità mondiale di Linux."
+"tuo nuovo sistema operativo è il risultato del lavorosvolto in "
+"collaborazione da tutta la Comunità mondiale di Linux."
 
 #: ../../share/advertising/01-thanks.pl:1
 #, c-format
 msgid "Welcome to the Open Source world."
-msgstr "Benvenuto nel mondo dell'Open Source"
+msgstr "Benvenuto nel mondo dell'Open Source."
 
 #: ../../share/advertising/01-thanks.pl:1
 #, c-format
@@ -19387,9 +19407,9 @@ msgid ""
 "To share your own knowledge and help build Linux software, join our "
 "discussion forums on our \"Community\" webpages."
 msgstr ""
-"Per condividere le tue capacità personali e aiutare a sviluppare strumenti "
-"Linux, partecipa ai forum di discussione che trovi sulle nostre pagine web "
-"dedicate alla \"Comunità\""
+"Per condividere le tue capacità personali e aiutare a sviluppare software "
+"per Linux, partecipa ai nostri forum di discussione aperti sulle nostre "
+"pagine web dedicate alla \"Comunità\""
 
 #: ../../share/advertising/02-community.pl:1
 #, c-format
@@ -19397,13 +19417,13 @@ msgid ""
 "Want to know more and to contribute to the Open Source community? Get "
 "involved in the Free Software world!"
 msgstr ""
-"Vuoi saperne di più sulla comunità dell'Open Source? Unisciti al mondo del "
-"software libero!"
+"Vuoi conoscere meglio la comunità dell'Open Source e portare il tuo apporto? "
+"Unisciti al mondo del Software Libero!"
 
 #: ../../share/advertising/02-community.pl:1
 #, c-format
 msgid "Build the future of Linux!"
-msgstr ""
+msgstr "Costruisci il futuro di Linux!"
 
 #: ../../share/advertising/03-software.pl:1
 #, c-format
@@ -19411,8 +19431,9 @@ msgid ""
 "And, of course, push multimedia to its limits with the very latest software "
 "to play videos, audio files and to handle your images or photos."
 msgstr ""
-"Mandrake Linux 9.1 ti permette di usare i software più recenti per ascoltare "
-"file musicali, modificare e gestire le tue immagini o foto e vedere filmati."
+"E, naturalmente, sfrutta al massimo gli strumenti multimediali con i più "
+"recenti software per vedere filmati, ascoltare file musicali e gestire le "
+"tue immagini o foto."
 
 #: ../../share/advertising/03-software.pl:1
 #, c-format
@@ -19420,11 +19441,13 @@ msgid ""
 "Surf the Web with Mozilla or Konqueror, read your mail with Evolution or "
 "Kmail, create your documents with OpenOffice.org."
 msgstr ""
+"Naviga nel Web con Mozilla o Konqueror, leggi la tua posta con Evolution o "
+"Kmail, crea i tuoi documenti con OpenOffice.org."
 
 #: ../../share/advertising/03-software.pl:1
 #, c-format
 msgid "MandrakeSoft has selected the best software for you"
-msgstr ""
+msgstr "MandrakeSoft ha selezionato per te i migliori software"
 
 #: ../../share/advertising/04-configuration.pl:1
 #, c-format
@@ -19434,26 +19457,32 @@ msgid ""
 "customize elements such as the security level, the peripherals (screen, "
 "mouse, keyboard...), the Internet connection and much more!"
 msgstr ""
+"Mandrake Linux 9.1 ti mette a disposizione il Centro di Controllo Mandrak,e "
+"un potente strumento per adattare completamente il tuo computer all'uso che "
+"vuoi farne. Configura e personalizza elementi come il livello di sicurezza, "
+"le periferiche (schermo, mouse, tastiera...), la connessione ad Internet e "
+"molte altre cose!"
 
 #: ../../share/advertising/04-configuration.pl:1
-#, fuzzy, c-format
+#, c-format
 msgid "Mandrake's multipurpose configuration tool"
-msgstr "Configurazione del Terminal Server Mandrake"
+msgstr "Strumento multifunzionale di Mandrake per la configurazione"
 
 #: ../../share/advertising/05-desktop.pl:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Perfectly adapt your computer to your needs thanks to the 11 available "
 "Mandrake Linux user interfaces which can be fully modified: KDE 3.1, GNOME "
 "2.2, Window Maker, ..."
 msgstr ""
-"Mandrake Linux 9.1 ti fornisce 11 interfacce utente che possono essere "
-"completamente personalizzate: KDE-3 ,GNOME-2, WindowMaker, ..."
+"Adatta perfettamente il tuo computer alle tue esigenze grazie alle 11 "
+"interfacce utente disponibili in Mandrake Linux, che possono essere "
+"completamente personalizzate: KDE-3.1 ,GNOME-2.2, Window Maker, ..."
 
 #: ../../share/advertising/05-desktop.pl:1
 #, c-format
 msgid "A customizable environment"
-msgstr ""
+msgstr "Un ambiente personalizzabile"
 
 #: ../../share/advertising/06-development.pl:1
 #, c-format
@@ -19462,11 +19491,14 @@ msgid ""
 "+ has never been so easy thanks to GNU gcc 3 and the best Open Source "
 "development environments."
 msgstr ""
+"Creare o modificare programmi in diversi linguaggi (come Perl, Python, C e C+"
+"+) non è mai stato così facile grazie a GNU gcc 3 e ai migliori ambienti "
+"Open Source per lo sviluppo."
 
 #: ../../share/advertising/06-development.pl:1
 #, c-format
 msgid "Mandrake Linux 9.1: the ultimate development platform"
-msgstr "Mandrake Linux 9.1 è la più avanzata piattaforma di sviluppo."
+msgstr "Mandrake Linux 9.1: la più avanzata piattaforma di sviluppo"
 
 #: ../../share/advertising/07-server.pl:1
 #, c-format
@@ -19474,13 +19506,14 @@ msgid ""
 "Transform your computer into a powerful Linux server: Web server, mail, "
 "firewall, router, file and print server (etc.) are just a few clicks away!"
 msgstr ""
-"Trasforma la tua macchina in un server Linux potente con pochi clic del "
-"mouse: server web, di posta, di stampa, firewall, router, file server,..."
+"Trasforma il tuo computer in un potente server Linux. Per avere un server "
+"web, di posta, di stampa, un firewall, un router, un file server,... (etc.)  "
+"bastano pochi clic del mouse."
 
 #: ../../share/advertising/07-server.pl:1
 #, c-format
 msgid "Turn your computer into a reliable server"
-msgstr "Trasforma la tua macchina in un server affidabile."
+msgstr "Trasforma il tuo computer in un server affidabile."
 
 #: ../../share/advertising/08-store.pl:1
 #, c-format
@@ -19488,29 +19521,27 @@ msgid ""
 "Our full range of Linux solutions, as well as special offers on products and "
 "other \"goodies\", are available on our e-store:"
 msgstr ""
-"Tutta la nostra offerta di soluzioni Linux, oltre ad offerte speciali di "
-"prodotti e altre \"chicche\", sono disponibili in linea nel nostro negozio "
-"interattivo:"
+"Tutta la nostra linea di soluzioni Linux, oltre ad offerte speciali di "
+"prodotti e altre \"chicche\", sono disponibili nel nostro negozio internet:"
 
 #: ../../share/advertising/08-store.pl:1
 #, c-format
 msgid "The official MandrakeSoft Store"
-msgstr "Il negozio ufficiale di MandrakeStore"
+msgstr "MandrakeStore, il negozio ufficiale di MandrakeSoft"
 
 #: ../../share/advertising/09-mdksecure.pl:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Enhance your computer performance with the help of a selection of partners "
 "offering professional solutions compatible with Mandrake Linux"
 msgstr ""
-"MandrakeSoft collabora con delle ditte selezionate che offrono soluzioni "
-"professionali compatibili con Mandrake Linux. Su MandrakeStore puoi trovare "
-"un elenco di queste società."
+"Ottimizza le prestazioni del tuo computer con l'aiuto di ditte selezionate "
+"che offrono soluzioni professionali compatibili con Mandrake Linux. "
 
 #: ../../share/advertising/09-mdksecure.pl:1
 #, c-format
 msgid "Get the best items with Mandrake Linux Strategic partners"
-msgstr ""
+msgstr "Ottieni le migliori soluzioni dai partner strategici di Mandrake Linux"
 
 #: ../../share/advertising/10-security.pl:1
 #, c-format
@@ -19519,16 +19550,20 @@ msgid ""
 "version ever: Draksec, a system security management tool, and a strong "
 "firewall are teamed up together  in order to highly reduce hacking risks."
 msgstr ""
+"MandrakeSoft ha progettato degli strumenti esclusivi per creare la più "
+"sicura versione di Linux: Draksec, un sistema per gestire la sicurezza, e un "
+"potente firewall sono stati abbinati per ridurre fortemente i rischi di "
+"hacking."
 
 #: ../../share/advertising/10-security.pl:1
 #, c-format
 msgid "Optimize your security by using Mandrake Linux"
-msgstr "Ottimizza la tua sicurezza"
+msgstr "Ottimizza la tua sicurezza usando Mandrake Linux"
 
 #: ../../share/advertising/11-mnf.pl:1
 #, c-format
 msgid "This product is available on the MandrakeStore Web site."
-msgstr "Questo prodotto è disponibile sul sito web MandrakeStore"
+msgstr "Questo prodotto è disponibile sul sito web di MandrakeStore"
 
 #: ../../share/advertising/11-mnf.pl:1
 #, c-format
@@ -19538,11 +19573,15 @@ msgid ""
 "network (VPN) server and client, an intrusion detection system and a traffic "
 "manager."
 msgstr ""
+"Completa le tue misure di sicurezza con questo software facilissimo da "
+"usare, ma che comprende delle componenti ad alte prestazioni, quali un "
+"firewall, un server e un client per una rete virtuale privata (VPM), un "
+"sistema per rilevare eventuali intrusioni e un gestore di traffico."
 
 #: ../../share/advertising/11-mnf.pl:1
 #, c-format
 msgid "Secure your networks with the Multi Network Firewall"
-msgstr ""
+msgstr "Rendi sicure le tue reti con il Multi Network Firewall"
 
 #: ../../share/advertising/12-mdkexpert.pl:1
 #, c-format
@@ -19562,7 +19601,7 @@ msgid ""
 "platform."
 msgstr ""
 "Trova la soluzione dei tuo problemi tecnici rivolgendoti al programma di "
-"supporto in linea di MandrakeSoft"
+"supporto in linea di MandrakeSoft."
 
 #: ../../share/advertising/12-mdkexpert.pl:1
 #, c-format
@@ -19582,8 +19621,8 @@ msgstr ""
 #, c-format
 msgid "An online platform to respond to enterprise support needs."
 msgstr ""
-"Un'organizzazione in linea per rispondere alle esigenze di supporto "
-"specifiche delle aziende."
+"Un'organizzazione online per rispondere alle esigenze di supporto specifiche "
+"delle aziende."
 
 #: ../../share/advertising/13-mdkexpert_corporate.pl:1
 #, c-format
@@ -19775,98 +19814,410 @@ msgid "NFS server, SMB server, Proxy server, ssh server"
 msgstr "Server NFS, server SMB, server proxy, server SSH"
 
 #: ../../share/compssUsers:999
-msgid "Office"
-msgstr "Office"
+#, fuzzy
+msgid "Audio station"
+msgstr "Computer multimediale"
 
 #: ../../share/compssUsers:999
-msgid "Set of tools for mail, news, web, file transfer, and chat"
-msgstr "Varie utilità per posta, news, web, trasferimento file, e chat"
+#, fuzzy
+msgid "Sound playing/editing programs"
+msgstr "Programmi di riproduzione/modifica audio e video"
 
 #: ../../share/compssUsers:999
-msgid "Games"
-msgstr "Giochi"
+#, fuzzy
+msgid "Video station"
+msgstr "Computer per giocare"
 
 #: ../../share/compssUsers:999
-msgid "Multimedia - Graphics"
-msgstr "Multimedia - Grafica"
+#, fuzzy
+msgid "Video playing programs"
+msgstr "Programmi di riproduzione/modifica audio e video"
 
 #: ../../share/compssUsers:999
-msgid "Graphics programs such as The Gimp"
+#, fuzzy
+msgid "Graphic station"
+msgstr "Computer per giocare"
+
+#: ../../share/compssUsers:999
+#, fuzzy
+msgid "Graphics programs"
 msgstr "Programmi grafici come The Gimp"
 
 #: ../../share/compssUsers:999
-msgid "Multimedia - Sound"
-msgstr "Multimedia - Suono"
+#, fuzzy
+msgid "Set of tools to read and send mail and news and to browse the Web"
+msgstr ""
+"Gruppo di programmi per leggere e inviare posta e news (pine, mutt, tin..) e "
+"per navigare il Web"
 
-#: ../../share/compssUsers:999
-msgid "Audio-related tools: mp3 or midi players, mixers, etc"
-msgstr "Utilità audio: riproduttori mp3 o midi, mixer, ecc."
+#~ msgid "Printer sharing"
+#~ msgstr "Condivisione stampante"
 
-#: ../../share/compssUsers:999
-msgid "Multimedia - Video"
-msgstr "Multimedia - Video"
+#~ msgid ""
+#~ "Your printer belongs to the group of GDI laser printers (winprinters) "
+#~ "sold by different manufacturers which uses the Zenographics ZJ-stream "
+#~ "raster format for the data sent to the printer. The driver for these "
+#~ "printers is still in a very early development stage and so it will "
+#~ "perhaps not always work properly. Especially it is possible that the "
+#~ "printer only works when you choose the A4 paper size.\n"
+#~ "\n"
+#~ "Some of these printers, as the HP LaserJet 1000, for which this driver "
+#~ "was originally created, need their firmware to be uploaded to them after "
+#~ "they are turned on. In the case of the HP LaserJet 1000 you have to "
+#~ "search the printer's Windows driver CD or your Windows partition for the "
+#~ "file \"sihp1000.img\" and upload the file to the printer with one of the "
+#~ "following commands:\n"
+#~ "\n"
+#~ "     lpr -o raw sihp1000.img\n"
+#~ "     cat sihp1000.img > /dev/usb/lp0\n"
+#~ "\n"
+#~ "The first command can be given by any normal user, the second must be "
+#~ "given as root. After having done so you can print normally.\n"
+#~ msgstr ""
+#~ "La stampante appartiene al gruppo delle GDI laser printer (winprinter), "
+#~ "vendute da diversi produttori, che usano il formato \"Zenographics ZJ-"
+#~ "stream raster\" per l'invio dei dati alla stampante. Il driver per queste "
+#~ "stampanti è in uno stato di sviluppo molto iniziale. Quindi non sempre "
+#~ "funziona correttamente. In particolare, è possibile che la stampante "
+#~ "funzioni solo con carta formato A4.\n"
+#~ "\n"
+#~ "Alcune stampanti, come la HP LaserJet 1000, per la quale questo driver è "
+#~ "stato creato appositamente, richiedono un aggiornamento del firmware dopo "
+#~ "l'accensione. Nel caso della HP LaserJet 1000 devi cercare il file "
+#~ "\"sihp1000.img\" nel CD dei driver per Windows o nella tua partizione "
+#~ "Windows e caricarlo nella memoria della stampante con uno di questi "
+#~ "comandi:\n"
+#~ "\n"
+#~ "     lpr -o raw sihp1000.img\n"
+#~ "     cat sihp1000.img > /dev/usb/lp0\n"
+#~ "\n"
+#~ "Il primo comando può essere lanciato da un utente normale, il secondo "
+#~ "solo da root. Fatto questo potrai stampare normalmente.\n"
 
-#: ../../share/compssUsers:999
-msgid "Video players and editors"
-msgstr "Riproduttori video e programmi di editing"
+#~ msgid "GDI Laser Printer using the Zenographics ZJ-Stream Format"
+#~ msgstr "Stampante laser GDI con formato Zenographics ZJ-Stream"
 
-#: ../../share/compssUsers:999
-msgid "Multimedia - CD Burning"
-msgstr "Multimedia - Masterizzazione CD"
+#~ msgid "%s"
+#~ msgstr "%s"
 
-#: ../../share/compssUsers:999
-msgid "Tools to create and burn CD's"
-msgstr "Utilità per creare e masterizzare CD"
+#~ msgid "Office"
+#~ msgstr "Office"
 
-#: ../../share/compssUsers:999
-msgid "More Graphical Desktops (Gnome, IceWM)"
-msgstr "Altri desktop grafici (Gnome, IceWM)"
+#~ msgid "Set of tools for mail, news, web, file transfer, and chat"
+#~ msgstr "Varie utilità per posta, news, web, trasferimento file, e chat"
 
-#: ../../share/compssUsers:999
-msgid "Gnome, Icewm, Window Maker, Enlightenment, Fvwm, etc"
-msgstr "Gnome, Icewm, Window Maker, Enlightenment, Fvwm, ecc."
+#~ msgid "Games"
+#~ msgstr "Giochi"
 
-#: ../../share/compssUsers:999
-msgid "Personal Information Management"
-msgstr "Gestione di informazioni personali"
+#~ msgid "Multimedia - Graphics"
+#~ msgstr "Multimedia - Grafica"
 
-#: ../../share/compssUsers:999
-msgid "Tools for your Palm Pilot or your Visor"
-msgstr "Utilità per il tuo Palm Pilot o Visor"
+#~ msgid "Multimedia - Sound"
+#~ msgstr "Multimedia - Suono"
 
-#: ../../share/compssUsers:999
-msgid "Personal Finance"
-msgstr "Finanza Personale"
+#~ msgid "Audio-related tools: mp3 or midi players, mixers, etc"
+#~ msgstr "Utilità audio: riproduttori mp3 o midi, mixer, ecc."
 
-#: ../../share/compssUsers:999
-msgid "Programs to manage your finances, such as gnucash"
-msgstr "Programmi per gestire le tue finanze, come gnucash"
+#~ msgid "Multimedia - Video"
+#~ msgstr "Multimedia - Video"
+
+#~ msgid "Video players and editors"
+#~ msgstr "Riproduttori video e programmi di editing"
+
+#~ msgid "Multimedia - CD Burning"
+#~ msgstr "Multimedia - Masterizzazione CD"
+
+#~ msgid "Tools to create and burn CD's"
+#~ msgstr "Utilità per creare e masterizzare CD"
+
+#~ msgid "More Graphical Desktops (Gnome, IceWM)"
+#~ msgstr "Altri desktop grafici (Gnome, IceWM)"
+
+#~ msgid "Gnome, Icewm, Window Maker, Enlightenment, Fvwm, etc"
+#~ msgstr "Gnome, Icewm, Window Maker, Enlightenment, Fvwm, ecc."
+
+#~ msgid "Personal Information Management"
+#~ msgstr "Gestione di informazioni personali"
+
+#~ msgid "Tools for your Palm Pilot or your Visor"
+#~ msgstr "Utilità per il tuo Palm Pilot o Visor"
+
+#~ msgid "Personal Finance"
+#~ msgstr "Finanza Personale"
+
+#~ msgid "Programs to manage your finances, such as gnucash"
+#~ msgstr "Programmi per gestire le tue finanze, come gnucash"
+
+#~ msgid ""
+#~ "drakTermServ Overview\n"
+#~ "\t\t\t   \n"
+#~ "        - Create Etherboot Enabled Boot Images:\n"
+#~ "        \t\tTo boot a kernel via etherboot, a special kernel/initrdrd "
+#~ "image must be created.\n"
+#~ "        \t\tmkinitrd-net does much of this work and drakTermServ is just "
+#~ "a graphical interface\n"
+#~ "        \t\tto help manage/customize these images.\n"
+#~ "\n"
+#~ "        - Maintain /etc/dhcpd.conf:\n"
+#~ "        \t\tTo net boot clients, each client needs a dhcpd.conf entry, "
+#~ "assigning an IP address\n"
+#~ "        \t\tand net boot images to the machine. drakTermServ helps create/"
+#~ "remove these entries.\n"
+#~ "\t\t\t\n"
+#~ "        \t\t(PCI cards may omit the image - etherboot will request the "
+#~ "correct image. You should\n"
+#~ "        \t\talso consider that when etherboot looks for the images, it "
+#~ "expects names like\n"
+#~ "        \t\tboot-3c59x.nbi, rather than boot-3c59x.2.4.19-16mdk.nbi).\n"
+#~ "\t\t\t \n"
+#~ "        \t\tA typical dhcpd.conf stanza to support a diskless client "
+#~ "looks like:\n"
+#~ "        \t\t\n"
+#~ "\t\t\t\thost curly {\n"
+#~ "\t\t\t\t\thardware ethernet        00:20:af:2f:f7:9d;\n"
+#~ "\t\t\t\t\tfixed-address              192.168.192.3;\n"
+#~ "\t\t\t\t\t#type                          fat;\n"
+#~ "\t\t\t\t\tfilename                      \"i386/boot/boot-3c509.2.4.18-"
+#~ "6mdk.nbi\";\n"
+#~ "\t\t\t\t}\n"
+#~ "\t\t\t\n"
+#~ "\t\t\tWhile you can use a pool of IP addresses, rather than setup a "
+#~ "specific entry for\n"
+#~ "\t\t\ta client machine, using a fixed address scheme facilitates using "
+#~ "the functionality\n"
+#~ "\t\t\tof client-specific configuration files that ClusterNFS provides.\n"
+#~ "\t\t\t\n"
+#~ "\t\t\tNote: The \"#type\" entry is only used by drakTermServ.  Clients "
+#~ "can either be \"thin\"\n"
+#~ "\t\t\tor 'fat'.  Thin clients run most software on the server via xdmcp, "
+#~ "while fat clients run most\n"
+#~ "\t\t\tsoftware on the client machine. A special inittab, /etc/inittab\\$\\"
+#~ "$IP=client_ip\\$\\$ is\n"
+#~ "\t\t\twritten for thin clients. System config files xdm-config, kdmrc, "
+#~ "and gdm.conf are modified\n"
+#~ "\t\t\tif thin clients are used, to enable xdmcp. Since there are security "
+#~ "issues in using xdmcp,\n"
+#~ "\t\t\thosts.deny and hosts.allow are modified to limit access to the "
+#~ "local subnet.\n"
+#~ "\t\t\t\n"
+#~ "\t\t\tNote: You must stop/start the server after adding or changing "
+#~ "clients.\n"
+#~ "\t\t\t\n"
+#~ "        - Maintain /etc/exports:\n"
+#~ "        \t\tClusternfs allows export of the root filesystem to diskless "
+#~ "clients. drakTermServ\n"
+#~ "        \t\tsets up the correct entry to allow anonymous access to the "
+#~ "root filesystem from\n"
+#~ "        \t\tdiskless clients.\n"
+#~ "\n"
+#~ "        \t\tA typical exports entry for clusternfs is:\n"
+#~ "        \t\t\n"
+#~ "        \t\t/                  (ro,all_squash)\n"
+#~ "        \t\t/home              SUBNET/MASK(rw,root_squash)\n"
+#~ "\t\t\t\n"
+#~ "\t\t\tWith SUBNET/MASK being defined for your network.\n"
+#~ "        \t\t\n"
+#~ "        - Maintain /etc/shadow\\$\\$CLIENT\\$\\$:\n"
+#~ "        \t\tFor users to be able to log into the system from a diskless "
+#~ "client, their entry in\n"
+#~ "        \t\t/etc/shadow needs to be duplicated in /etc/shadow\\$\\$CLIENTS"
+#~ "\\$\\$. drakTermServ helps\n"
+#~ "        \t\tin this respect by adding or removing system users from this "
+#~ "file.\n"
+#~ "\n"
+#~ "        - Per client /etc/X11XF86Config-4\\$\\$IP-ADDRESS\\$\\$:\n"
+#~ "        \t\tThrough clusternfs, each diskless client can have it's own "
+#~ "unique configuration files\n"
+#~ "        \t\ton the root filesystem of the server. In the future "
+#~ "drakTermServ will help create these\n"
+#~ "        \t\tfiles.\n"
+#~ "\n"
+#~ "        - Per client system configuration files:\n"
+#~ "        \t\tThrough clusternfs, each diskless client can have it's own "
+#~ "unique configuration files\n"
+#~ "        \t\ton the root filesystem of the server. In the future, "
+#~ "drakTermServ can help create files\n"
+#~ "        \t\tsuch as /etc/modules.conf, /etc/sysconfig/mouse, /etc/"
+#~ "sysconfig/keyboard on a per-client\n"
+#~ "        \t\tbasis.\n"
+#~ "\n"
+#~ "        - /etc/xinetd.d/tftp:\n"
+#~ "        \t\tdrakTermServ will configure this file to work in conjunction "
+#~ "with the images created by\n"
+#~ "        \t\tmkinitrd-net, and the entries in /etc/dhcpd.conf, to serve up "
+#~ "the boot image to each\n"
+#~ "        \t\tdiskless client.\n"
+#~ "\n"
+#~ "        \t\tA typical tftp configuration file looks like:\n"
+#~ "        \t\t\n"
+#~ "        \t\tservice tftp\n"
+#~ "        \t\t(\n"
+#~ "                        disable         = no\n"
+#~ "                        socket_type  = dgram\n"
+#~ "                        protocol        = udp\n"
+#~ "                        wait             = yes\n"
+#~ "                        user             = root\n"
+#~ "                        server          = /usr/sbin/in.tftpd\n"
+#~ "                        server_args  = -s /var/lib/tftpboot\n"
+#~ "        \t\t}\n"
+#~ "        \t\t\n"
+#~ "        \t\tThe changes here from the default installation are changing "
+#~ "the disable flag to\n"
+#~ "        \t\t'no' and changing the directory path to /var/lib/tftpboot, "
+#~ "where mkinitrd-net\n"
+#~ "        \t\tputs it's images.\n"
+#~ "\n"
+#~ "        - Create etherboot floppies/CDs:\n"
+#~ "        \t\tThe diskless client machines need either ROM images on the "
+#~ "NIC, or a boot floppy\n"
+#~ "        \t\tor CD to initate the boot sequence.  drakTermServ will help "
+#~ "generate these images,\n"
+#~ "        \t\tbased on the NIC in the client machine.\n"
+#~ "        \t\t\n"
+#~ "        \t\tA basic example of creating a boot floppy for a 3Com 3c509 "
+#~ "manually:\n"
+#~ "        \t\t\n"
+#~ "        \t\tcat /usr/lib/etherboot/boot1a.bin \\\n"
+#~ "        \t\t\t/usr/lib/etherboot/lzrom/3c509.lzrom > /dev/fd0\n"
+#~ " \n"
+#~ "\n"
+#~ msgstr ""
+#~ "Panoramica su drakTermServ\n"
+#~ "\t\t\t   \n"
+#~ "        - Creare immagini di avvio per Etherboot:\n"
+#~ "        \t\tPer avviare un kernel tramite etherboot, devi creare "
+#~ "un'immagine speciale kernel/initrdrd.\n"
+#~ "        \t\tmkinitrd-net compie gran parte del lavoro e drakTermServ è "
+#~ "solo un'interfaccia grafica\n"
+#~ "        \t\tche aiuta a gestire e personalizzare queste immagini.\n"
+#~ "\n"
+#~ "        - Mantenere /etc/dhcpd.conf:\n"
+#~ "        \t\tAd ogni client, per fare boot da rete, serve una chiamata in "
+#~ "dhcpd.conf, che assegni\n"
+#~ "        \t\tun indirizzo IP e le immagini di boot via rete per la "
+#~ "macchina. drakTermServ aiuta \n"
+#~ "        \t\ta creare e a rimuovere queste voci.\n"
+#~ "\t\t\t\n"
+#~ "        \t\t(le schede PCI possono fare ameno di un'immagine - etherboot "
+#~ "richiederà l'immagine giusta.\n"
+#~ "        \t\tTu devi considerare che quando etherboot cerca le immagini, "
+#~ "si aspetta dei nomi tipo\n"
+#~ "        \t\tboot-3c59x.nbi, e non boot-3c59x.2.4.19-16mdk.nbi).\n"
+#~ "\t\t\t \n"
+#~ "        \t\tUn tipico blocco di righe in dhcpd.conf per gestire un client "
+#~ "diskless sarà del tipo:\n"
+#~ "        \t\t\n"
+#~ "\t\t\t\thost curly {\n"
+#~ "\t\t\t\t\thardware ethernet        00:20:af:2f:f7:9d;\n"
+#~ "\t\t\t\t\tfixed-address              192.168.192.3;\n"
+#~ "\t\t\t\t\t#type                          fat;\n"
+#~ "\t\t\t\t\tfilename                      \"i386/boot/boot-3c509.2.4.18-"
+#~ "6mdk.nbi\";\n"
+#~ "\t\t\t\t}\n"
+#~ "\t\t\t\n"
+#~ "\t\t\tAnche se puoi usare un intervallo di indirizzi IP, invece che "
+#~ "assegnarne uno specifico\n"
+#~ "\t\t\ta ogni macchina client, l'uso di indirizzi fissi facilita l'impiego "
+#~ "della possibilità\n"
+#~ "\t\t\tdata da ClusterNFS di configurare ogni client con un proprio file.\n"
+#~ "\t\t\t\n"
+#~ "\t\t\tNota: La voce \"#type\" è usata solo da drakTermServ.  I client "
+#~ "possono essere \"thin\"\n"
+#~ "\t\t\to \"fat\".  I thin client fanno eseguire quasi tutti i programmi "
+#~ "sul server via xdmcp, mentre \n"
+#~ "\t\t\ti fat client lo eseguono loro. Uno speciale inittab, /etc/inittab\\$"
+#~ "\\$IP=client_ip\\$\\$ è\n"
+#~ "\t\t\tscritto per i thin client. I file di configurazione generale xdm-"
+#~ "config, kdmrc, e gdm.conf sono\n"
+#~ "\t\t\tmodificati per usare thin client, per abilitare xdmcp. Poiché non è "
+#~ "molto sicuro usare xdmcp,\n"
+#~ "\t\t\thosts.deny e hosts.allow sono modificati per limitare l'accesso "
+#~ "alla sottorete locale.\n"
+#~ "\t\t\t\n"
+#~ "\t\t\tNota: Occorre spegnere e riavviare il server dopo l'aggiunta o la "
+#~ "modifica or changing dei client.\n"
+#~ "\t\t\t\n"
+#~ "        - Mantenere /etc/exports:\n"
+#~ "        \t\tClusternfs permette di esportare la root del filesystem ai "
+#~ "client senza disco. drakTermServ\n"
+#~ "        \t\timposta la chiamata giusta per permettere l'accesso anonimo "
+#~ "al filesystem da\n"
+#~ "        \t\tparte dei client senza disco.\n"
+#~ "\n"
+#~ "        \t\tUna sezione tipica per l'export in clusternfs è:\n"
+#~ "        \t\t\n"
+#~ "        \t\t/                  (ro,all_squash)\n"
+#~ "        \t\t/home              SUBNET/MASK(rw,root_squash)\n"
+#~ "\t\t\t\n"
+#~ "\t\t\tDove SUBNET/MASK è stata definita per la tua rete.\n"
+#~ "        \t\t\n"
+#~ "        - Mantenere /etc/shadow\\$\\$CLIENT\\$\\$:\n"
+#~ "        \t\tAffinché un utente possa accedere al sistema da un client "
+#~ "senza disco, la sua riga in\n"
+#~ "        \t\t/etc/shadow deve essere copiata in /etc/shadow\\$\\$CLIENTS\\$"
+#~ "\\$. drakTermServ aiuta\n"
+#~ "        \t\timolto, perché aggiunge e toglie automaticamente gli utenti "
+#~ "da questo file.\n"
+#~ "\n"
+#~ "        - File /etc/X11/XF86Config-4\\$\\$IP-ADDRESS\\$\\$ per i client:\n"
+#~ "        \t\tUsando clusternfs, ogni client senza disco può avere il "
+#~ "proprio file di configurazione\n"
+#~ "        \t\tsul filesystem del server. In seguito drakTermServ aiuterà a "
+#~ "creare questo file.\n"
+#~ "\n"
+#~ "        - File di configurazione del sistema per i client:\n"
+#~ "        \t\tUsando clusternfs, ogni client senza disco può avere il "
+#~ "proprio file di configurazione\n"
+#~ "        \t\tsul filesystem del server. In seguito drakTermServ aiuterà a "
+#~ "creare file come\n"
+#~ "        \t\t/etc/modules.conf, /etc/sysconfig/mouse, /etc/sysconfig/"
+#~ "keyboard\n"
+#~ "        \t\t per ogni singolo client.\n"
+#~ "\n"
+#~ "        - /etc/xinetd.d/tftp:\n"
+#~ "        \t\tdrakTermServ configurerà questo file per funzionare in "
+#~ "accordo con le immagini create da\n"
+#~ "        \t\tmkinitrd-net, e le voci in /etc/dhcpd.conf, per mettere a "
+#~ "disposizione dei client senza disco\n"
+#~ "        \t\tle immagini di boot.\n"
+#~ "\n"
+#~ "        \t\tUn tipico file di configurazione per tftp è del tipo:\n"
+#~ "        \t\t\n"
+#~ "        \t\tservice tftp\n"
+#~ "        \t\t(\n"
+#~ "                        disable         = no\n"
+#~ "                        socket_type  = dgram\n"
+#~ "                        protocol        = udp\n"
+#~ "                        wait             = yes\n"
+#~ "                        user             = root\n"
+#~ "                        server          = /usr/sbin/in.tftpd\n"
+#~ "                        server_args  = -s /var/lib/tftpboot\n"
+#~ "        \t\t}\n"
+#~ "        \t\t\n"
+#~ "        \t\tQui le differenze rispetto all'installazione predefinita sono "
+#~ "il \"no\" per disable e\n"
+#~ "        \t\tla modifica al path della directory /var/lib/tftpboot, dove "
+#~ "mkinitrd-net\n"
+#~ "        \t\tmette le sue immagini.\n"
+#~ "\n"
+#~ "        - Creare floppies o CD per il boot via ethernet:\n"
+#~ "        \t\tAlle macchine senza disco per avviarsi serve un'immagine ROM "
+#~ "sul NIC, o di un\n"
+#~ "        \t\tfloppy di o CD di avvio per iniziare la sequenza di boot "
+#~ "sequence.  drakTermServ aiuta\n"
+#~ "        \t\ta preparare queste immagini, basate sul NIC della macchina "
+#~ "client.\n"
+#~ "        \t\t\n"
+#~ "        \t\tEcco un semplice esempio di come si crea a mano un floppy di "
+#~ "boot per una 3Com 3c509:\n"
+#~ "        \t\t\n"
+#~ "        \t\tcat /usr/lib/etherboot/boot1a.bin \\\n"
+#~ "        \t\t\t/usr/lib/etherboot/lzrom/3c509.lzrom > /dev/fd0\n"
+#~ " \n"
+#~ "\n"
 
 #~ msgid "no network card found"
 #~ msgstr "nessuna scheda di rete trovata"
-
-#~ msgid ""
-#~ "The success of MandrakeSoft is based upon the principle of Free Software. "
-#~ "Your new operating system is the result of collaborative work on the part "
-#~ "of the worldwide Linux Community"
-#~ msgstr ""
-#~ "Il successo di MandrakeSoft si basa sull principio del Software Libero. "
-#~ "Il tuo nuovo sistema operativo è il risultato del lavoro collaborativo di "
-#~ "tutta la la Comunità mondiale di Linux."
-
-#~ msgid "Welcome to the Open Source world"
-#~ msgstr "Benvenuto nel mondo dell'Open Source"
-
-#~ msgid ""
-#~ "To share your own knowledge and help build Linux tools, join the "
-#~ "discussion forums you'll find on our \"Community\" webpages"
-#~ msgstr ""
-#~ "Per condividere le tue capacità personali e aiutare a sviluppare "
-#~ "strumenti Linux, partecipa ai forum di discussione che trovi sulle nostre "
-#~ "pagine web dedicate alla \"Comunità\""
-
-#~ msgid "Want to know more about the Open Source community?"
-#~ msgstr "Vuoi saperne di più sulla comunità dell'Open Source?"
 
 #~ msgid "Get involved in the Free Software world"
 #~ msgstr "Unisciti al mondo del software libero"
@@ -19883,14 +20234,6 @@ msgstr "Programmi per gestire le tue finanze, come gnucash"
 
 #~ msgid "Get the most from the Internet"
 #~ msgstr "Prendi il meglio da Internet"
-
-#~ msgid ""
-#~ "Mandrake Linux 9.1 enables you to use the very latest software to play "
-#~ "audio files, edit and handle your images or photos, and play videos"
-#~ msgstr ""
-#~ "Mandrake Linux 9.1 ti permette di usare i software più recenti per "
-#~ "ascoltare file musicali, modificare e gestire le tue immagini o foto e "
-#~ "vedere filmati."
 
 #~ msgid "Push multimedia to its limits!"
 #~ msgstr "Sfrutta la multimedia fino ai sui limiti massimi!"
@@ -19912,13 +20255,6 @@ msgstr "Programmi per gestire le tue finanze, come gnucash"
 #~ "Mandrake Linux 9.1 ti fornisce un efficiente strumento per personalizzare "
 #~ "e configurare completamente la tua macchina:"
 
-#~ msgid ""
-#~ "Mandrake Linux 9.1 provides you with 11 user interfaces that can be fully "
-#~ "modified: KDE 3, Gnome 2, WindowMaker, ..."
-#~ msgstr ""
-#~ "Mandrake Linux 9.1 ti fornisce 11 interfacce utente che possono essere "
-#~ "completamente personalizzate: KDE-3 ,GNOME-2, WindowMaker, ..."
-
 #~ msgid "User interfaces"
 #~ msgstr "Interfacce utente"
 
@@ -19929,24 +20265,8 @@ msgstr "Programmi per gestire le tue finanze, come gnucash"
 #~ "Utilizza appieno la potenza del compilatore GNU gcc 3 insieme ai migliori "
 #~ "ambienti di sviluppo a Codice Aperto."
 
-#~ msgid "Mandrake Linux 9.1 is the ultimate development platform"
-#~ msgstr "Mandrake Linux 9.1 è la più avanzata piattaforma di sviluppo."
-
 #~ msgid "Development simplified"
 #~ msgstr "Sviluppo semplificato"
-
-#~ msgid ""
-#~ "Transform your machine into a powerful Linux server with a few clicks of "
-#~ "your mouse: Web server, mail, firewall, router, file and print server, ..."
-#~ msgstr ""
-#~ "Trasforma la tua macchina in un server Linux potente con pochi clic del "
-#~ "mouse: server web, di posta, di stampa, firewall, router, file server,..."
-
-#~ msgid "Turn your machine into a reliable server"
-#~ msgstr "Trasforma la tua macchina in un server affidabile."
-
-#~ msgid "This product is available on MandrakeStore website"
-#~ msgstr "Questo prodotto è disponibile sul sito web MandrakeStore"
 
 #~ msgid ""
 #~ "This firewall product includes network features that allow you to fulfill "
@@ -19961,29 +20281,6 @@ msgstr "Programmi per gestire le tue finanze, come gnucash"
 #~ msgstr ""
 #~ "L'offerta MandrakeSecurity include il prodotto Multi Network Firewall (M."
 #~ "N.F.)."
-
-#~ msgid "Optimize your security"
-#~ msgstr "Ottimizza la tua sicurezza"
-
-#~ msgid ""
-#~ "Our full range of Linux solutions, as well as special offers on products "
-#~ "and other \"goodies,\" are available online on our e-store:"
-#~ msgstr ""
-#~ "Tutta la nostra offerta di soluzioni Linux, oltre ad offerte speciali di "
-#~ "prodotti e altre \"chicche\", sono disponibili in linea nel nostro "
-#~ "negozio interattivo:"
-
-#~ msgid "The official MandrakeSoft store"
-#~ msgstr "Il negozio ufficiale di MandrakeStore"
-
-#~ msgid ""
-#~ "MandrakeSoft works alongside a selection of companies offering "
-#~ "professional solutions compatible with Mandrake Linux. A list of these "
-#~ "partners is available on the MandrakeStore"
-#~ msgstr ""
-#~ "MandrakeSoft collabora con delle ditte selezionate che offrono soluzioni "
-#~ "professionali compatibili con Mandrake Linux. Su MandrakeStore puoi "
-#~ "trovare un elenco di queste società."
 
 #~ msgid "Strategic partners"
 #~ msgstr "Partner strategici"
@@ -20012,18 +20309,6 @@ msgstr "Programmi per gestire le tue finanze, come gnucash"
 
 #~ msgid "Discover MandrakeSoft's training catalogue Linux-Campus"
 #~ msgstr "Scopri Linux-Campus, il catalogo dei corsi di MandrakeSoft"
-
-#~ msgid ""
-#~ "Find the solutions of your problems via MandrakeSoft's online support "
-#~ "platform"
-#~ msgstr ""
-#~ "Trova la soluzione dei tuo problemi tecnici rivolgendoti al programma di "
-#~ "supporto in linea di MandrakeSoft"
-
-#~ msgid "An online platform to respond to company's specific support needs"
-#~ msgstr ""
-#~ "Un'organizzazione in linea per rispondere alle esigenze di supporto "
-#~ "specifiche delle aziende."
 
 #~ msgid ""
 #~ "MandrakeClub and Mandrake Corporate Club were created for business and "

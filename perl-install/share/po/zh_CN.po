@@ -9,7 +9,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX 9.1\n"
-"POT-Creation-Date: 2003-03-09 13:01+0100\n"
+"POT-Creation-Date: 2003-03-12 14:29+0100\n"
 "PO-Revision-Date: 2003-03-09 00:27+0800\n"
 "Last-Translator: Funda Wang <mandrake@en2china.com>\n"
 "Language-Team: Mandrake Internationalization Team <cooker-i18n@linux-"
@@ -10442,11 +10442,6 @@ msgstr "修改打印系统"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
-msgid "Printer sharing"
-msgstr "打印机共享"
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
 msgid "CUPS configuration"
 msgstr "CUPS 打印配置"
 
@@ -10845,10 +10840,10 @@ msgid "Printing/Scanning/Photo Cards on \"%s\""
 msgstr "在“%s”打印机上的打印/扫描/照片卡"
 
 #: ../../printer/printerdrake.pm:1
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "To know about the options available for the current printer read either the "
-"list shown below or click on the \"Print option list\" button.%s%s\n"
+"list shown below or click on the \"Print option list\" button.%s%s%s\n"
 "\n"
 msgstr ""
 "要了解当前打印机可用的选项，请看下面的列表, 或者单击“打印选项列表”按钮。%s%"
@@ -11075,46 +11070,8 @@ msgstr ""
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
-msgid ""
-"Your printer belongs to the group of GDI laser printers (winprinters) sold "
-"by different manufacturers which uses the Zenographics ZJ-stream raster "
-"format for the data sent to the printer. The driver for these printers is "
-"still in a very early development stage and so it will perhaps not always "
-"work properly. Especially it is possible that the printer only works when "
-"you choose the A4 paper size.\n"
-"\n"
-"Some of these printers, as the HP LaserJet 1000, for which this driver was "
-"originally created, need their firmware to be uploaded to them after they "
-"are turned on. In the case of the HP LaserJet 1000 you have to search the "
-"printer's Windows driver CD or your Windows partition for the file "
-"\"sihp1000.img\" and upload the file to the printer with one of the "
-"following commands:\n"
-"\n"
-"     lpr -o raw sihp1000.img\n"
-"     cat sihp1000.img > /dev/usb/lp0\n"
-"\n"
-"The first command can be given by any normal user, the second must be given "
-"as root. After having done so you can print normally.\n"
+msgid "Firmware-Upload for HP LaserJet 1000"
 msgstr ""
-"您的打印机属于GDI 激光打印机 (所谓 winprinter), 尽管牌子不同 它们都采用 "
-"Zenographics ZJ-stream 光栅格式把数据传输到打印机。这类打印机的驱动程序仍然处"
-"于前期开发阶段, 所以它未必总能正常工作。特别是打印机可能只有选择 A4 纸张尺寸"
-"时才能工作。\n"
-"\n"
-"有些打印机如 HP LaserJet 1000, 需要在开机之后上载固件。对 HP LaserJet 1000,  "
-"您需要在打印机的 Windows 驱动程序光盘或 Windows 磁盘分区上查找“sihp1000."
-"img”然后使用下列命令之一把这个文件传到打印机:\n"
-"\n"
-"     lpr -o raw sihp1000.img\n"
-"     cat sihp1000.img > /dev/usb/lp0\n"
-"\n"
-"任何普通用户都可以使用第一个命令, 第二个命令必须由 root 执行.升级固件之后您就"
-"可以正常打印了。\n"
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "GDI Laser Printer using the Zenographics ZJ-Stream Format"
-msgstr "使用 Zenographics ZJ-Stream 格式的GDI 激光打印机"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -11283,6 +11240,11 @@ msgstr "正在配置打印机端口适用于 CUPS..."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
+msgid "Checking device and configuring HPOJ..."
+msgstr "正在检查并配置 HPOJ..."
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
 msgid "Photo memory card access on your HP multi-function device"
 msgstr "您的惠普多功能设备的相片存储卡访问"
 
@@ -11300,11 +11262,6 @@ msgstr "正在安装 mtools 包..."
 #, c-format
 msgid "Installing SANE packages..."
 msgstr "正在安装 SANE 包..."
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "Checking device and configuring HPOJ..."
-msgstr "正在检查并配置 HPOJ..."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -12141,6 +12098,11 @@ msgstr "缺少服务器 IP!"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
+msgid "If no port is given, 631 will be taken as default."
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
 msgid "Enter IP address and port of the host whose printers you want to use."
 msgstr "请输入您想使用的打印机所在主机的 IP 地址和端口。"
 
@@ -12263,6 +12225,23 @@ msgstr "自动纠正CUPS 配置"
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid ""
+"Turning on this allows to print plain text files in japanese language. Only "
+"use this function if you really want to print text in japanese, if it is "
+"activated you cannot print accentuated characters in latin fonts any more "
+"and you will not be able to adjust the margins, the character size, etc. "
+"This setting only affects printers defined on this machine. If you want to "
+"print japanese text on a printer set up on a remote machine, you have to "
+"activate this function on that remote machine."
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid "Japanese text printing mode"
+msgstr "修改打印系统"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid ""
 "To get access to printers on remote CUPS servers in your local network you "
 "only need to turn on the \"Automatically find available printers on remote "
 "machines\" option; the CUPS servers inform your machine automatically about "
@@ -12330,8 +12309,8 @@ msgstr ""
 "机。"
 
 #: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "CUPS printer sharing configuration"
+#, fuzzy, c-format
+msgid "CUPS printer configuration"
 msgstr "CUPS 打印机共享配置"
 
 #: ../../printer/printerdrake.pm:1
@@ -12358,6 +12337,18 @@ msgstr "打印机是如何连接的?"
 #, c-format
 msgid "Select Printer Connection"
 msgstr "选择打印机连接"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid ""
+"The HP LaserJet 1000 needs its firmware to be uploaded after being turned "
+"on. Download the Windows driver package from the HP web site (the firmware "
+"on the printer's CD does not work) and extract the firmware file from it by "
+"uncompresing the self-extracting '.exe' file with the 'unzip' utility and "
+"searching for the 'sihp1000.img' file. Copy this file into the '/etc/"
+"printer' directory. There it will be found by the automatic uploader script "
+"and uploaded whenever the printer is connected and turned on.\n"
+msgstr ""
 
 #: ../../security/help.pm:1
 #, c-format
@@ -14052,11 +14043,6 @@ msgid ""
 msgstr ""
 "没有找到配置文件\n"
 "请单击向导或高级。"
-
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "%s"
-msgstr "%s"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -18948,69 +18934,129 @@ msgid "NFS server, SMB server, Proxy server, ssh server"
 msgstr "NFS 服务器，SMB 服务器，代理服务器，SSH 服务器"
 
 #: ../../share/compssUsers:999
-msgid "Office"
-msgstr "办公"
+#, fuzzy
+msgid "Audio station"
+msgstr "多媒体工作站"
 
 #: ../../share/compssUsers:999
-msgid "Set of tools for mail, news, web, file transfer, and chat"
-msgstr "一组用于邮件、新闻、浏览、文件传输和聊天的工具"
+#, fuzzy
+msgid "Sound playing/editing programs"
+msgstr "声音和视频播放/编辑程序"
 
 #: ../../share/compssUsers:999
-msgid "Games"
-msgstr "游戏"
+#, fuzzy
+msgid "Video station"
+msgstr "游戏工作站"
 
 #: ../../share/compssUsers:999
-msgid "Multimedia - Graphics"
-msgstr "多媒体 - 图形"
+#, fuzzy
+msgid "Video playing programs"
+msgstr "声音和视频播放/编辑程序"
 
 #: ../../share/compssUsers:999
-msgid "Graphics programs such as The Gimp"
+#, fuzzy
+msgid "Graphic station"
+msgstr "游戏工作站"
+
+#: ../../share/compssUsers:999
+#, fuzzy
+msgid "Graphics programs"
 msgstr "图像处理程序，如 Gimp"
 
 #: ../../share/compssUsers:999
-msgid "Multimedia - Sound"
-msgstr "多媒体 - 声音"
+#, fuzzy
+msgid "Set of tools to read and send mail and news and to browse the Web"
+msgstr "上网工具，如收发电子邮件及新闻组（pine, mutt, tin..），浏览网站"
 
-#: ../../share/compssUsers:999
-msgid "Audio-related tools: mp3 or midi players, mixers, etc"
-msgstr "有关音频的工具：mp3 和 midi 播放器，混音器等 "
+#~ msgid "Printer sharing"
+#~ msgstr "打印机共享"
 
-#: ../../share/compssUsers:999
-msgid "Multimedia - Video"
-msgstr "多媒体 - 视频"
+#~ msgid ""
+#~ "Your printer belongs to the group of GDI laser printers (winprinters) "
+#~ "sold by different manufacturers which uses the Zenographics ZJ-stream "
+#~ "raster format for the data sent to the printer. The driver for these "
+#~ "printers is still in a very early development stage and so it will "
+#~ "perhaps not always work properly. Especially it is possible that the "
+#~ "printer only works when you choose the A4 paper size.\n"
+#~ "\n"
+#~ "Some of these printers, as the HP LaserJet 1000, for which this driver "
+#~ "was originally created, need their firmware to be uploaded to them after "
+#~ "they are turned on. In the case of the HP LaserJet 1000 you have to "
+#~ "search the printer's Windows driver CD or your Windows partition for the "
+#~ "file \"sihp1000.img\" and upload the file to the printer with one of the "
+#~ "following commands:\n"
+#~ "\n"
+#~ "     lpr -o raw sihp1000.img\n"
+#~ "     cat sihp1000.img > /dev/usb/lp0\n"
+#~ "\n"
+#~ "The first command can be given by any normal user, the second must be "
+#~ "given as root. After having done so you can print normally.\n"
+#~ msgstr ""
+#~ "您的打印机属于GDI 激光打印机 (所谓 winprinter), 尽管牌子不同 它们都采用 "
+#~ "Zenographics ZJ-stream 光栅格式把数据传输到打印机。这类打印机的驱动程序仍"
+#~ "然处于前期开发阶段, 所以它未必总能正常工作。特别是打印机可能只有选择 A4 纸"
+#~ "张尺寸时才能工作。\n"
+#~ "\n"
+#~ "有些打印机如 HP LaserJet 1000, 需要在开机之后上载固件。对 HP LaserJet "
+#~ "1000,  您需要在打印机的 Windows 驱动程序光盘或 Windows 磁盘分区上查"
+#~ "找“sihp1000.img”然后使用下列命令之一把这个文件传到打印机:\n"
+#~ "\n"
+#~ "     lpr -o raw sihp1000.img\n"
+#~ "     cat sihp1000.img > /dev/usb/lp0\n"
+#~ "\n"
+#~ "任何普通用户都可以使用第一个命令, 第二个命令必须由 root 执行.升级固件之后"
+#~ "您就可以正常打印了。\n"
 
-#: ../../share/compssUsers:999
-msgid "Video players and editors"
-msgstr "视频播放器和编辑器"
+#~ msgid "GDI Laser Printer using the Zenographics ZJ-Stream Format"
+#~ msgstr "使用 Zenographics ZJ-Stream 格式的GDI 激光打印机"
 
-#: ../../share/compssUsers:999
-msgid "Multimedia - CD Burning"
-msgstr "多媒体 - 烧录光盘"
+#~ msgid "%s"
+#~ msgstr "%s"
 
-#: ../../share/compssUsers:999
-msgid "Tools to create and burn CD's"
-msgstr "用于创建和烧录光盘的工具"
+#~ msgid "Office"
+#~ msgstr "办公"
 
-#: ../../share/compssUsers:999
-msgid "More Graphical Desktops (Gnome, IceWM)"
-msgstr "更多的图形桌面 (Gnome, IceWM)"
+#~ msgid "Set of tools for mail, news, web, file transfer, and chat"
+#~ msgstr "一组用于邮件、新闻、浏览、文件传输和聊天的工具"
 
-#: ../../share/compssUsers:999
-msgid "Gnome, Icewm, Window Maker, Enlightenment, Fvwm, etc"
-msgstr "Gnome, Icewm, Window Maker, Enlightenment, Fvwm 等"
+#~ msgid "Games"
+#~ msgstr "游戏"
 
-#: ../../share/compssUsers:999
-msgid "Personal Information Management"
-msgstr "个人信息管理"
+#~ msgid "Multimedia - Graphics"
+#~ msgstr "多媒体 - 图形"
 
-#: ../../share/compssUsers:999
-msgid "Tools for your Palm Pilot or your Visor"
-msgstr "配合 Palm Pilot 或 Visor 等掌上电脑的工具"
+#~ msgid "Multimedia - Sound"
+#~ msgstr "多媒体 - 声音"
 
-#: ../../share/compssUsers:999
-msgid "Personal Finance"
-msgstr "个人财务"
+#~ msgid "Audio-related tools: mp3 or midi players, mixers, etc"
+#~ msgstr "有关音频的工具：mp3 和 midi 播放器，混音器等 "
 
-#: ../../share/compssUsers:999
-msgid "Programs to manage your finances, such as gnucash"
-msgstr "用于管理您财务的程序，如 gnucash"
+#~ msgid "Multimedia - Video"
+#~ msgstr "多媒体 - 视频"
+
+#~ msgid "Video players and editors"
+#~ msgstr "视频播放器和编辑器"
+
+#~ msgid "Multimedia - CD Burning"
+#~ msgstr "多媒体 - 烧录光盘"
+
+#~ msgid "Tools to create and burn CD's"
+#~ msgstr "用于创建和烧录光盘的工具"
+
+#~ msgid "More Graphical Desktops (Gnome, IceWM)"
+#~ msgstr "更多的图形桌面 (Gnome, IceWM)"
+
+#~ msgid "Gnome, Icewm, Window Maker, Enlightenment, Fvwm, etc"
+#~ msgstr "Gnome, Icewm, Window Maker, Enlightenment, Fvwm 等"
+
+#~ msgid "Personal Information Management"
+#~ msgstr "个人信息管理"
+
+#~ msgid "Tools for your Palm Pilot or your Visor"
+#~ msgstr "配合 Palm Pilot 或 Visor 等掌上电脑的工具"
+
+#~ msgid "Personal Finance"
+#~ msgstr "个人财务"
+
+#~ msgid "Programs to manage your finances, such as gnucash"
+#~ msgstr "用于管理您财务的程序，如 gnucash"

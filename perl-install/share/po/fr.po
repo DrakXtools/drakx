@@ -53,8 +53,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX-fr\n"
-"POT-Creation-Date: 2003-03-09 13:01+0100\n"
-"PO-Revision-Date: 2003-03-09 18:52+0100\n"
+"POT-Creation-Date: 2003-03-12 14:29+0100\n"
+"PO-Revision-Date: 2003-03-11 23:41+0100\n"
 "Last-Translator: Christophe Combelles <ccomb@free.fr>\n"
 "Language-Team: french <cooker-i18n@linux-mandrake.com>\n"
 "MIME-Version: 1.0\n"
@@ -11155,11 +11155,6 @@ msgstr "Changer le système d'impression"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
-msgid "Printer sharing"
-msgstr "Partage d'imprimante"
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
 msgid "CUPS configuration"
 msgstr "Configuration de CUPS"
 
@@ -11598,10 +11593,10 @@ msgid "Printing/Scanning/Photo Cards on \"%s\""
 msgstr "Impression/Acquisition/Cartes photo sur « %s »"
 
 #: ../../printer/printerdrake.pm:1
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "To know about the options available for the current printer read either the "
-"list shown below or click on the \"Print option list\" button.%s%s\n"
+"list shown below or click on the \"Print option list\" button.%s%s%s\n"
 "\n"
 msgstr ""
 "Pour obtenir la liste des paramètres disponibles pour l'imprimante courante, "
@@ -11858,52 +11853,8 @@ msgstr ""
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
-msgid ""
-"Your printer belongs to the group of GDI laser printers (winprinters) sold "
-"by different manufacturers which uses the Zenographics ZJ-stream raster "
-"format for the data sent to the printer. The driver for these printers is "
-"still in a very early development stage and so it will perhaps not always "
-"work properly. Especially it is possible that the printer only works when "
-"you choose the A4 paper size.\n"
-"\n"
-"Some of these printers, as the HP LaserJet 1000, for which this driver was "
-"originally created, need their firmware to be uploaded to them after they "
-"are turned on. In the case of the HP LaserJet 1000 you have to search the "
-"printer's Windows driver CD or your Windows partition for the file "
-"\"sihp1000.img\" and upload the file to the printer with one of the "
-"following commands:\n"
-"\n"
-"     lpr -o raw sihp1000.img\n"
-"     cat sihp1000.img > /dev/usb/lp0\n"
-"\n"
-"The first command can be given by any normal user, the second must be given "
-"as root. After having done so you can print normally.\n"
+msgid "Firmware-Upload for HP LaserJet 1000"
 msgstr ""
-"Votre imprimante appartient au groupe d'imprimantes laser GDI (destinées à "
-"MS-Windows) vendues par différents fabricants et qui utilisent le format de "
-"trames Zenographics ZJ-stream pour les données envoyées à l'imprimante. Le "
-"pilote pour ces imprimantes est encore en processus de développement et "
-"pourrait ne pas fonctionner de manière optimale. En particulier, un format "
-"autre que A4 pour le papier peut s'avérer problématique.\n"
-"\n"
-"Certaines de ces imprimantes, comme la HP LaserJet 1000, pour lequel ce "
-"pilote a été écrit à l'origine, ont besoin à l'allumage d'avoir leur micro-"
-"code téléchargé en mémoire. Dans le cas de la HP LaserJet 1000 vous cherchez "
-"le fichier « sihp1000.img » sur le CD fourni avec l'imprimante ou dans votre "
-"partition Windows et envoyez ce fichier dans la mémoire de l'imprimante avec "
-"l'une des commandes suivantes :\n"
-"\n"
-"     lpr -o raw sihp1000.img\n"
-"     cat sihp1000.img > /dev/usb/lp0\n"
-"\n"
-"La première commande peut être lancée par un utilisateur normal, la seconde "
-"ne peut être lancée que par root. Après cela vous pourrez imprimer "
-"normalement.\n"
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "GDI Laser Printer using the Zenographics ZJ-Stream Format"
-msgstr "Imprimante Laser GDI avec le format Zenographics ZJ-Stream"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -12092,6 +12043,11 @@ msgstr "Mise à disposition du port d'imprimante à CUPS..."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
+msgid "Checking device and configuring HPOJ..."
+msgstr "Vérification du périphérique et configuration de HPOJ..."
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
 msgid "Photo memory card access on your HP multi-function device"
 msgstr "Accès à la carte mémoire photo de votre périphérique multifonction"
 
@@ -12109,11 +12065,6 @@ msgstr "Installation des paquetages mtools..."
 #, c-format
 msgid "Installing SANE packages..."
 msgstr "Installation des paquetages SANE..."
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "Checking device and configuring HPOJ..."
-msgstr "Vérification du périphérique et configuration de HPOJ..."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -13015,6 +12966,11 @@ msgstr "Adresse IP du serveur manquante !"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
+msgid "If no port is given, 631 will be taken as default."
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
 msgid "Enter IP address and port of the host whose printers you want to use."
 msgstr ""
 "Entrez l'adresse IP et le numéro de port de la machine dont vous voulez "
@@ -13145,6 +13101,23 @@ msgstr "Correction automatique de la configuration du serveur CUPS"
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid ""
+"Turning on this allows to print plain text files in japanese language. Only "
+"use this function if you really want to print text in japanese, if it is "
+"activated you cannot print accentuated characters in latin fonts any more "
+"and you will not be able to adjust the margins, the character size, etc. "
+"This setting only affects printers defined on this machine. If you want to "
+"print japanese text on a printer set up on a remote machine, you have to "
+"activate this function on that remote machine."
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid "Japanese text printing mode"
+msgstr "Changer le système d'impression"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid ""
 "To get access to printers on remote CUPS servers in your local network you "
 "only need to turn on the \"Automatically find available printers on remote "
 "machines\" option; the CUPS servers inform your machine automatically about "
@@ -13223,8 +13196,8 @@ msgstr ""
 "pourront y accéder."
 
 #: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "CUPS printer sharing configuration"
+#, fuzzy, c-format
+msgid "CUPS printer configuration"
 msgstr "Configuration du partage d'imprimante CUPS"
 
 #: ../../printer/printerdrake.pm:1
@@ -13252,6 +13225,18 @@ msgstr "Quel est le type de connexion de l'imprimante ?"
 #, c-format
 msgid "Select Printer Connection"
 msgstr "Type de connexion de l'imprimante"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid ""
+"The HP LaserJet 1000 needs its firmware to be uploaded after being turned "
+"on. Download the Windows driver package from the HP web site (the firmware "
+"on the printer's CD does not work) and extract the firmware file from it by "
+"uncompresing the self-extracting '.exe' file with the 'unzip' utility and "
+"searching for the 'sihp1000.img' file. Copy this file into the '/etc/"
+"printer' directory. There it will be found by the automatic uploader script "
+"and uploaded whenever the printer is connected and turned on.\n"
+msgstr ""
 
 #: ../../security/help.pm:1
 #, c-format
@@ -15023,11 +15008,6 @@ msgstr ""
 "La configuration de sauvegarde n'est pas encore définie. \n"
 "Veuillez cliquer sur « Configuration par assistant », ou « Configuration "
 "manuelle »"
-
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "%s"
-msgstr "%s"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -19635,15 +19615,14 @@ msgid ""
 "Your new operating system is the result of collaborative work of the "
 "worldwide Linux Community."
 msgstr ""
-"Le principe du logiciel libre est à l'origine de MandrakeSoft et de son "
-"succès. Ce système d'exploitation est le fruit du travail collaboratif et "
-"ouvert de la communauté Linux. Ses contributeurs passionnés sont répartis "
-"dans le monde entier."
+"Le succès de MandrakeSoft est basé sur le logiciel libre. Votre nouveau "
+"système d'exploitation est le résultat du travail de la communauté Linux "
+"mondiale."
 
 #: ../../share/advertising/01-thanks.pl:1
 #, c-format
 msgid "Welcome to the Open Source world."
-msgstr "Bienvenue dans le monde Open Source"
+msgstr "Bienvenue dans le monde de l'Open Source."
 
 #: ../../share/advertising/01-thanks.pl:1
 #, c-format
@@ -19656,9 +19635,8 @@ msgid ""
 "To share your own knowledge and help build Linux software, join our "
 "discussion forums on our \"Community\" webpages."
 msgstr ""
-"Pour mieux connaître la communauté Open Source et y contribuer, partagez vos "
-"connaissances et participez au développement d'outils en accédant aux forums "
-"de discussions sur nos pages Web « community »"
+"Pour partagez vos connaissances et aider à la création de logiciels Linux, "
+"rejoignez nos forums de discussion sur nos pages « community »."
 
 #: ../../share/advertising/02-community.pl:1
 #, c-format
@@ -19666,8 +19644,8 @@ msgid ""
 "Want to know more and to contribute to the Open Source community? Get "
 "involved in the Free Software world!"
 msgstr ""
-"Souhaitez-vous en savoir plus sur la communauté Open Source ? Rejoignez le "
-"monde du logiciel libre !"
+"Vous désirez en savoir plus et contribuer à la communauté Open Source ? "
+"Impliquez-vous dans le monde Open Source !"
 
 #: ../../share/advertising/02-community.pl:1
 #, c-format
@@ -19680,15 +19658,17 @@ msgid ""
 "And, of course, push multimedia to its limits with the very latest software "
 "to play videos, audio files and to handle your images or photos."
 msgstr ""
-"Utilisez les dernières applications pour gérer vos fichiers audio, éditez "
-"vos images ou collections de photos et visualisez vos vidéos."
+"Et bien sûr, poussez le multimédia à ses limites. Utilisez les tous derniers "
+"lecteurs audio et video. Manipulez vos images et photos."
 
 #: ../../share/advertising/03-software.pl:1
 #, c-format
 msgid ""
 "Surf the Web with Mozilla or Konqueror, read your mail with Evolution or "
 "Kmail, create your documents with OpenOffice.org."
-msgstr "Surfez sur le Web avec Mozilla ou Konqueror, lisez votre courrier électronique avec Evolution ou Kmail, créez vos documents avec OpenOffice.org."
+msgstr ""
+"Consultez des sites Web avec Mozilla ou Konqueror. Lisez votre courrier avec "
+"Evolution ou Kmail. Créez vos documents avec OpenOffice.org."
 
 #: ../../share/advertising/03-software.pl:1
 #, c-format
@@ -19702,12 +19682,16 @@ msgid ""
 "tool to fully adapt your computer to the use you make of it. Configure and "
 "customize elements such as the security level, the peripherals (screen, "
 "mouse, keyboard...), the Internet connection and much more!"
-msgstr "Mandrake Linux 9.1 vous propose le Centre de Contrôle Mandrake, un puissant outil vous aidant à adapter votre ordinateur à l'utilisation que vous en faites. Configurez et personnalisez le niveau de sécurité, les périphériques (écran, souris, clavier...), la connexion Internet et bien plus encore !"
+msgstr ""
+"Mandrake Linux 9.1 est livrée avec Mandrake Control Center. Ce puissant "
+"logiciel vous permet d'adapter votre ordinateur à vos besoins. Configurez "
+"des éléments tels que le niveau de sécurité, vos périphériques (écran, "
+"souris, clavier...), la connexion Internet et plus encore !"
 
 #: ../../share/advertising/04-configuration.pl:1
 #, c-format
 msgid "Mandrake's multipurpose configuration tool"
-msgstr "L'outil de configuration multi-usage de Mandrake"
+msgstr "Le logiciel de configuration universel de Mandrake"
 
 #: ../../share/advertising/05-desktop.pl:1
 #, c-format
@@ -19715,12 +19699,14 @@ msgid ""
 "Perfectly adapt your computer to your needs thanks to the 11 available "
 "Mandrake Linux user interfaces which can be fully modified: KDE 3.1, GNOME "
 "2.2, Window Maker, ..."
-msgstr "Adaptez votre ordinateur à vos besoins grâce aux 11 interfaces utilisateurs entièrement paramétrables : KDE 3.1, Gnome 2.2, Window Maker, ..."
+msgstr ""
+"Adaptez votre ordinateur à vos besoins grâce aux 11 interfaces utilisateurs "
+"entièrement paramétrables : KDE 3.1, Gnome 2.2, Window Maker, ..."
 
 #: ../../share/advertising/05-desktop.pl:1
 #, c-format
 msgid "A customizable environment"
-msgstr "Un environnement personnalisable"
+msgstr "Un environnement adapté à vos besoins"
 
 #: ../../share/advertising/06-development.pl:1
 #, c-format
@@ -19728,12 +19714,15 @@ msgid ""
 "To modify and to create in different languages such as Perl, Python, C and C+"
 "+ has never been so easy thanks to GNU gcc 3 and the best Open Source "
 "development environments."
-msgstr "Programmer dans de différents langages comme Perl, Python, C et C++ n'a jamais été aussi facile, grâce à GNU gcc 3 et aux meilleures environnements de développement Open Source."
+msgstr ""
+"Programmer en utilisant des langages aussi différents que Perl, Python, C ou "
+"C++ n'a jamais été aussi facile grâce à GNU gcc 3 et les meilleurs outils de "
+"développement Open Source."
 
 #: ../../share/advertising/06-development.pl:1
 #, c-format
 msgid "Mandrake Linux 9.1: the ultimate development platform"
-msgstr "Mandrake Linux 9.1 est une plate-forme de choix pour le développement"
+msgstr "Mandrake Linux 9.1 : la plate-forme de développement idéale"
 
 #: ../../share/advertising/07-server.pl:1
 #, c-format
@@ -19741,14 +19730,14 @@ msgid ""
 "Transform your computer into a powerful Linux server: Web server, mail, "
 "firewall, router, file and print server (etc.) are just a few clicks away!"
 msgstr ""
-"En quelques clics, Mandrake Linux 9.1 transforme votre ordinateur en un "
-"puissant serveur : serveur Web, courriel, pare-feu, routeur, partage de "
-"fichiers et d'imprimantes..."
+"Transformez votre ordinateur en un puissant serveur Linux. Les serveurs Web, "
+"de courrier, pare-feu, routeur, de fichiers et d'impression (etc.) ne sont "
+"qu'à quelques clics."
 
 #: ../../share/advertising/07-server.pl:1
 #, c-format
 msgid "Turn your computer into a reliable server"
-msgstr "La puissance de Linux au profit des serveurs"
+msgstr "Transformez votre ordinateur en un serveur fiable"
 
 #: ../../share/advertising/08-store.pl:1
 #, c-format
@@ -19756,26 +19745,29 @@ msgid ""
 "Our full range of Linux solutions, as well as special offers on products and "
 "other \"goodies\", are available on our e-store:"
 msgstr ""
-"Accédez à l'ensemble de nos solutions Linux, profitez des offres exclusives "
-"sur nos produits et goodies via notre site de vente en ligne à l'adresse "
-"suivante"
+"Notre gamme complète de solutions Linux ainsi que des offres spéciales sur "
+"des produits et accessoires sont disponibles sur note boutique en ligne :"
 
 #: ../../share/advertising/08-store.pl:1
 #, c-format
 msgid "The official MandrakeSoft Store"
-msgstr "MandrakeStore : la boutique en ligne officielle de MandrakeSoft"
+msgstr "La boutique officielle Mandrake"
 
 #: ../../share/advertising/09-mdksecure.pl:1
 #, c-format
 msgid ""
 "Enhance your computer performance with the help of a selection of partners "
 "offering professional solutions compatible with Mandrake Linux"
-msgstr "Améliorez les performances de votre ordinateur avec l'aide d'une sélection de partenaires offrant des solutions professionnelles compatibles avec Mandrake Linux"
+msgstr ""
+"Améliorez les performances de votre ordinateur grâce à l'aide d'une "
+"sélection de partenaires offrant des solutions professionnelles compatibles "
+"avec Mandrake Linux"
 
 #: ../../share/advertising/09-mdksecure.pl:1
 #, c-format
 msgid "Get the best items with Mandrake Linux Strategic partners"
-msgstr "Obtenez les meilleurs éléments avec les partenaires stratégiques Mandrake Linux"
+msgstr ""
+"Obtenez le meilleur avec les partenaires stratégiques de Mandrake Linux"
 
 #: ../../share/advertising/10-security.pl:1
 #, c-format
@@ -19783,17 +19775,21 @@ msgid ""
 "MandrakeSoft has designed exclusive tools to create the most secured Linux "
 "version ever: Draksec, a system security management tool, and a strong "
 "firewall are teamed up together  in order to highly reduce hacking risks."
-msgstr "MandrakeSoft a conçu des outils exclusifs pour créer la version de Linux la plus sécurisée qui soit : Draksec, un outil de gestion de la sécurité du système, et un pare-feu (firewall) robuste, fonctionnent ensemble afin de réduire foretement les risques de piratage."
+msgstr ""
+"MandrakeSoft a créé des outils exclusifs pour créer le plus sécurisé des "
+"Linux ayant jamais existé : DrakSec, un outil permettant de gérer la "
+"sécurité, et un solide pare-feu vous permettent de grandement réduire les "
+"risques de piratage."
 
 #: ../../share/advertising/10-security.pl:1
 #, c-format
 msgid "Optimize your security by using Mandrake Linux"
-msgstr "La sécurité optimale sous Linux !"
+msgstr "Optimisez votre sécurité en utilisant Mandrake Linux"
 
 #: ../../share/advertising/11-mnf.pl:1
 #, c-format
 msgid "This product is available on the MandrakeStore Web site."
-msgstr "Ce produit est disponible sur MandrakeStore"
+msgstr "Ce produit est disponible sur notre boutique en ligne."
 
 #: ../../share/advertising/11-mnf.pl:1
 #, c-format
@@ -19802,12 +19798,16 @@ msgid ""
 "combines high performance components such as a firewall, a virtual private "
 "network (VPN) server and client, an intrusion detection system and a traffic "
 "manager."
-msgstr "Complétez votre sécurité avec ce logiciel d'utilisation très simple, qui combine des éléments à haute-performance comme un pare-feu (firewall), un réseau privé virtuel (VPN), un dispositif de détection d'intrusions et un gestionnaire de trafic. "
+msgstr ""
+"Optimisez votre sécurité avec ce logiciel très facile à utiliser combinant "
+"des éléments de haute performance : un pare-feu, un serveur et un client "
+"pour réseau privé virtuel (VPN), un système de détection d'intrusion et un "
+"gestionnaire de trafic."
 
 #: ../../share/advertising/11-mnf.pl:1
 #, c-format
 msgid "Secure your networks with the Multi Network Firewall"
-msgstr "Sécurisez vos réseaux avec le Multi Network Firewall"
+msgstr "Sécurisez vos réseaux avec le Multi Newtwork Firewall"
 
 #: ../../share/advertising/12-mdkexpert.pl:1
 #, c-format
@@ -19816,17 +19816,16 @@ msgid ""
 "your knowledge and help others by becoming a recognized Expert on the online "
 "technical support website:"
 msgstr ""
-"En tant qu'expert, vous pourrez partager vos connaissances et proposer du "
-"support à d'autres utilisateurs sur :"
+"Rejoignez les équipes de support de MandrakeSoft et la communauté Linux. "
+"Partagez vos connaissances et aidez les autres en devenant un Expert reconnu "
+"sur le site Web de support technique :"
 
 #: ../../share/advertising/12-mdkexpert.pl:1
 #, c-format
 msgid ""
 "Find the solutions of your problems via MandrakeSoft's online support "
 "platform."
-msgstr ""
-"Bénéficiez de l'aide de la communauté et de MandrakeSoft pour obtenir un "
-"support de qualité"
+msgstr "Résolvez vos problèmes via notre plate-forme de support en ligne."
 
 #: ../../share/advertising/12-mdkexpert.pl:1
 #, c-format
@@ -19839,16 +19838,12 @@ msgid ""
 "All incidents will be followed up by a single qualified MandrakeSoft "
 "technical expert."
 msgstr ""
-"Afin de répondre aux besoins spécifiques des entreprises, MandrakeSoft met à "
-"la disposition des grands comptes sa nouvelle plate-forme professionnelle de "
-"support en ligne. Cette interface vous garantira le suivi de vos incidents "
-"par l'intermédiaire d'un interlocuteur unique et vous permettra d'obtenir "
-"toute l'expertise du support Entreprise de MandrakeSoft"
+"Tous les incidents sont suivis par un interlocuteur unique et qualifié."
 
 #: ../../share/advertising/13-mdkexpert_corporate.pl:1
 #, c-format
 msgid "An online platform to respond to enterprise support needs."
-msgstr "Un support spécifique aux entreprises"
+msgstr "Une plate-forme en ligne pour répondre aux besoins des entreprises."
 
 #: ../../share/advertising/13-mdkexpert_corporate.pl:1
 #, c-format
@@ -20042,74 +20037,143 @@ msgid "NFS server, SMB server, Proxy server, ssh server"
 msgstr "Serveur NFS, serveur SMB, serveur Proxy (mandataire), serveur SSH"
 
 #: ../../share/compssUsers:999
-msgid "Office"
-msgstr "Bureautique"
+#, fuzzy
+msgid "Audio station"
+msgstr "Multimédia"
 
 #: ../../share/compssUsers:999
-msgid "Set of tools for mail, news, web, file transfer, and chat"
-msgstr ""
-"Utilitaires pour le courrier électronique, les forums, le web, le transfert "
-"de fichiers, les discussions en ligne"
+#, fuzzy
+msgid "Sound playing/editing programs"
+msgstr "Programmes pour jouer/éditer du son et de la vidéo"
 
 #: ../../share/compssUsers:999
-msgid "Games"
+#, fuzzy
+msgid "Video station"
 msgstr "Jeux"
 
 #: ../../share/compssUsers:999
-msgid "Multimedia - Graphics"
-msgstr "Multimédia - Graphisme"
+#, fuzzy
+msgid "Video playing programs"
+msgstr "Programmes pour jouer/éditer du son et de la vidéo"
 
 #: ../../share/compssUsers:999
-msgid "Graphics programs such as The Gimp"
+#, fuzzy
+msgid "Graphic station"
+msgstr "Jeux"
+
+#: ../../share/compssUsers:999
+#, fuzzy
+msgid "Graphics programs"
 msgstr "Programmes de graphisme comme Le Gimp"
 
 #: ../../share/compssUsers:999
-msgid "Multimedia - Sound"
-msgstr "Multimédia - Son"
+#, fuzzy
+msgid "Set of tools to read and send mail and news and to browse the Web"
+msgstr ""
+"Ensemble d'outils pour lire ou envoyer des courriers électronique (pine, "
+"mutt), des messages de forums (tin), et pour naviguer sur Internet"
 
-#: ../../share/compssUsers:999
-msgid "Audio-related tools: mp3 or midi players, mixers, etc"
-msgstr "Outils audio : lecteurs mp3 ou midi, mixeurs, etc"
+#~ msgid "Printer sharing"
+#~ msgstr "Partage d'imprimante"
 
-#: ../../share/compssUsers:999
-msgid "Multimedia - Video"
-msgstr "Multimédia - Vidéo"
+#~ msgid ""
+#~ "Your printer belongs to the group of GDI laser printers (winprinters) "
+#~ "sold by different manufacturers which uses the Zenographics ZJ-stream "
+#~ "raster format for the data sent to the printer. The driver for these "
+#~ "printers is still in a very early development stage and so it will "
+#~ "perhaps not always work properly. Especially it is possible that the "
+#~ "printer only works when you choose the A4 paper size.\n"
+#~ "\n"
+#~ "Some of these printers, as the HP LaserJet 1000, for which this driver "
+#~ "was originally created, need their firmware to be uploaded to them after "
+#~ "they are turned on. In the case of the HP LaserJet 1000 you have to "
+#~ "search the printer's Windows driver CD or your Windows partition for the "
+#~ "file \"sihp1000.img\" and upload the file to the printer with one of the "
+#~ "following commands:\n"
+#~ "\n"
+#~ "     lpr -o raw sihp1000.img\n"
+#~ "     cat sihp1000.img > /dev/usb/lp0\n"
+#~ "\n"
+#~ "The first command can be given by any normal user, the second must be "
+#~ "given as root. After having done so you can print normally.\n"
+#~ msgstr ""
+#~ "Votre imprimante appartient au groupe d'imprimantes laser GDI (destinées "
+#~ "à MS-Windows) vendues par différents fabricants et qui utilisent le "
+#~ "format de trames Zenographics ZJ-stream pour les données envoyées à "
+#~ "l'imprimante. Le pilote pour ces imprimantes est encore en processus de "
+#~ "développement et pourrait ne pas fonctionner de manière optimale. En "
+#~ "particulier, un format autre que A4 pour le papier peut s'avérer "
+#~ "problématique.\n"
+#~ "\n"
+#~ "Certaines de ces imprimantes, comme la HP LaserJet 1000, pour lequel ce "
+#~ "pilote a été écrit à l'origine, ont besoin à l'allumage d'avoir leur "
+#~ "micro-code téléchargé en mémoire. Dans le cas de la HP LaserJet 1000 vous "
+#~ "cherchez le fichier « sihp1000.img » sur le CD fourni avec l'imprimante "
+#~ "ou dans votre partition Windows et envoyez ce fichier dans la mémoire de "
+#~ "l'imprimante avec l'une des commandes suivantes :\n"
+#~ "\n"
+#~ "     lpr -o raw sihp1000.img\n"
+#~ "     cat sihp1000.img > /dev/usb/lp0\n"
+#~ "\n"
+#~ "La première commande peut être lancée par un utilisateur normal, la "
+#~ "seconde ne peut être lancée que par root. Après cela vous pourrez "
+#~ "imprimer normalement.\n"
 
-#: ../../share/compssUsers:999
-msgid "Video players and editors"
-msgstr "Lecteurs et éditeurs vidéo"
+#~ msgid "GDI Laser Printer using the Zenographics ZJ-Stream Format"
+#~ msgstr "Imprimante Laser GDI avec le format Zenographics ZJ-Stream"
 
-#: ../../share/compssUsers:999
-msgid "Multimedia - CD Burning"
-msgstr "Multimédia - Gravure de CD"
+#~ msgid "%s"
+#~ msgstr "%s"
 
-#: ../../share/compssUsers:999
-msgid "Tools to create and burn CD's"
-msgstr "Outils pour créer et graver des CD"
+#~ msgid "Office"
+#~ msgstr "Bureautique"
 
-#: ../../share/compssUsers:999
-msgid "More Graphical Desktops (Gnome, IceWM)"
-msgstr "Plus d'Environnements de Bureau (Gnome, IceWM)"
+#~ msgid "Set of tools for mail, news, web, file transfer, and chat"
+#~ msgstr ""
+#~ "Utilitaires pour le courrier électronique, les forums, le web, le "
+#~ "transfert de fichiers, les discussions en ligne"
 
-#: ../../share/compssUsers:999
-msgid "Gnome, Icewm, Window Maker, Enlightenment, Fvwm, etc"
-msgstr "Gnome, Icewm, Window Maker, Enlightenment, Fvwm, etc"
+#~ msgid "Games"
+#~ msgstr "Jeux"
 
-#: ../../share/compssUsers:999
-msgid "Personal Information Management"
-msgstr "Gestionnaire d'Informations Personnelles"
+#~ msgid "Multimedia - Graphics"
+#~ msgstr "Multimédia - Graphisme"
 
-#: ../../share/compssUsers:999
-msgid "Tools for your Palm Pilot or your Visor"
-msgstr "Outils pour votre Palm Pilot ou votre Visor"
+#~ msgid "Multimedia - Sound"
+#~ msgstr "Multimédia - Son"
 
-#: ../../share/compssUsers:999
-msgid "Personal Finance"
-msgstr "Gestion Financière"
+#~ msgid "Audio-related tools: mp3 or midi players, mixers, etc"
+#~ msgstr "Outils audio : lecteurs mp3 ou midi, mixeurs, etc"
 
-#: ../../share/compssUsers:999
-msgid "Programs to manage your finances, such as gnucash"
-msgstr "Programmes pour gérer votre finance, comme gnucash"
+#~ msgid "Multimedia - Video"
+#~ msgstr "Multimédia - Vidéo"
+
+#~ msgid "Video players and editors"
+#~ msgstr "Lecteurs et éditeurs vidéo"
+
+#~ msgid "Multimedia - CD Burning"
+#~ msgstr "Multimédia - Gravure de CD"
+
+#~ msgid "Tools to create and burn CD's"
+#~ msgstr "Outils pour créer et graver des CD"
+
+#~ msgid "More Graphical Desktops (Gnome, IceWM)"
+#~ msgstr "Plus d'Environnements de Bureau (Gnome, IceWM)"
+
+#~ msgid "Gnome, Icewm, Window Maker, Enlightenment, Fvwm, etc"
+#~ msgstr "Gnome, Icewm, Window Maker, Enlightenment, Fvwm, etc"
+
+#~ msgid "Personal Information Management"
+#~ msgstr "Gestionnaire d'Informations Personnelles"
+
+#~ msgid "Tools for your Palm Pilot or your Visor"
+#~ msgstr "Outils pour votre Palm Pilot ou votre Visor"
+
+#~ msgid "Personal Finance"
+#~ msgstr "Gestion Financière"
+
+#~ msgid "Programs to manage your finances, such as gnucash"
+#~ msgstr "Programmes pour gérer votre finance, comme gnucash"
 
 #~ msgid "no network card found"
 #~ msgstr "Aucune carte réseau n'a été identifiée"

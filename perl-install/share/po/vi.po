@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX for Mandrake Linux 9.x\n"
-"POT-Creation-Date: 2003-03-09 13:01+0100\n"
-"PO-Revision-Date: 2003-03-07 18:08+0700\n"
+"POT-Creation-Date: 2003-03-12 14:29+0100\n"
+"PO-Revision-Date: 2003-03-11 18:09+0700\n"
 "Last-Translator: Trinh Minh Thanh <tmthanh@yahoo.com>\n"
 "Language-Team: Gnome-Vi <Gnomevi-list@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -10787,11 +10787,6 @@ msgstr "Thay đổi hệ thống in"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
-msgid "Printer sharing"
-msgstr "Chia sẻ máy in"
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
 msgid "CUPS configuration"
 msgstr "Cấu hình CUPS"
 
@@ -10940,7 +10935,7 @@ msgstr "cao"
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Restarting printing system..."
-msgstr "Khởi chạy lại hệ thống in ấn ..."
+msgstr "Đang khởi chạy lại hệ thống in ấn ..."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -11216,10 +11211,10 @@ msgid "Printing/Scanning/Photo Cards on \"%s\""
 msgstr "In/Quét/Thẻ photo trên \"%s\""
 
 #: ../../printer/printerdrake.pm:1
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "To know about the options available for the current printer read either the "
-"list shown below or click on the \"Print option list\" button.%s%s\n"
+"list shown below or click on the \"Print option list\" button.%s%s%s\n"
 "\n"
 msgstr ""
 "Để biết về các tùy chọn có sẵn cho máy in hiện thời, hãy đọc danh sách bên "
@@ -11469,50 +11464,8 @@ msgstr ""
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
-msgid ""
-"Your printer belongs to the group of GDI laser printers (winprinters) sold "
-"by different manufacturers which uses the Zenographics ZJ-stream raster "
-"format for the data sent to the printer. The driver for these printers is "
-"still in a very early development stage and so it will perhaps not always "
-"work properly. Especially it is possible that the printer only works when "
-"you choose the A4 paper size.\n"
-"\n"
-"Some of these printers, as the HP LaserJet 1000, for which this driver was "
-"originally created, need their firmware to be uploaded to them after they "
-"are turned on. In the case of the HP LaserJet 1000 you have to search the "
-"printer's Windows driver CD or your Windows partition for the file "
-"\"sihp1000.img\" and upload the file to the printer with one of the "
-"following commands:\n"
-"\n"
-"     lpr -o raw sihp1000.img\n"
-"     cat sihp1000.img > /dev/usb/lp0\n"
-"\n"
-"The first command can be given by any normal user, the second must be given "
-"as root. After having done so you can print normally.\n"
+msgid "Firmware-Upload for HP LaserJet 1000"
 msgstr ""
-"Máy in của bạn thuộc về nhóm máy in Laser GDI (winprinters) được nhiều nhà "
-"sản xuất bán, máy dùng định dạng  Zenographics ZJ-stream raster cho dữ liệu "
-"gửi tới máy in. Driver cho các máy in này vẫn còn đang trong giai đoạn phát "
-"triển ban đầu nên không phải lúc nào chúng cũng chạy tốt. Nhất là chúng có "
-"lẽ chỉ làm việc khi bạn chọn khổ giấy in A4.\n"
-"\n"
-"Một số máy in loại này, như là HP LaserJet 1000, thì driver này cho chúng "
-"được tạo lúc đầu cần firmware của chúng để được upload tới sau khi chúng "
-"được bật lên. Trong trường hợp máy in HP LaserJet 1000, bạn phải tìm kiếm "
-"Windows driver CD của máy hay ở phân vùng Windows cho tập tin \"sihp1000.img"
-"\" và upload tập tin tới máy in bằng một trong các lệnh sau:\n"
-"\n"
-"     lpr -o raw sihp1000.img\n"
-"     cat sihp1000.img > /dev/usb/lp0\n"
-"\n"
-"Lệnh thứ nhất có thể cho bất kỳ người dùng thông thường nào dùng. Lệnh thứ "
-"hai thì bắt buộc phải chạy trong root. Sau khi hoàn tất mọi thứ, bạn có thể "
-"in như bình thường.\n"
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "GDI Laser Printer using the Zenographics ZJ-Stream Format"
-msgstr "Máy in Laser GDI sử dụng định dạng Zenographics ZJ-Stream"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -11694,6 +11647,11 @@ msgstr "Đang tạo cổng máy in dành cho CUPS..."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
+msgid "Checking device and configuring HPOJ..."
+msgstr "Đang kiểm tra thiết bị và cấu hình HPOJ..."
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
 msgid "Photo memory card access on your HP multi-function device"
 msgstr "Truy cập photo memory card trên thiết bị đa năng HP của bạn"
 
@@ -11711,11 +11669,6 @@ msgstr "Đang cài đặt các gói mtools..."
 #, c-format
 msgid "Installing SANE packages..."
 msgstr "Đang cài đặt các gói SANE ..."
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "Checking device and configuring HPOJ..."
-msgstr "Đang kiểm tra thiết bị và cấu hình HPOJ..."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -12567,7 +12520,7 @@ msgstr "Đang kiểm tra hệ thống của bạn..."
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Restarting CUPS..."
-msgstr "Khởi chạy lại CUPS..."
+msgstr "Đang khởi chạy lại CUPS..."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -12588,6 +12541,11 @@ msgstr "IP nhập vào không đúng.\n"
 #, c-format
 msgid "Server IP missing!"
 msgstr "Thiếu IP máy chủ!"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "If no port is given, 631 will be taken as default."
+msgstr ""
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -12717,6 +12675,23 @@ msgstr "Tự động hiệu chỉnh cấu hình CUPS"
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid ""
+"Turning on this allows to print plain text files in japanese language. Only "
+"use this function if you really want to print text in japanese, if it is "
+"activated you cannot print accentuated characters in latin fonts any more "
+"and you will not be able to adjust the margins, the character size, etc. "
+"This setting only affects printers defined on this machine. If you want to "
+"print japanese text on a printer set up on a remote machine, you have to "
+"activate this function on that remote machine."
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid "Japanese text printing mode"
+msgstr "Thay đổi hệ thống in"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid ""
 "To get access to printers on remote CUPS servers in your local network you "
 "only need to turn on the \"Automatically find available printers on remote "
 "machines\" option; the CUPS servers inform your machine automatically about "
@@ -12788,8 +12763,8 @@ msgstr ""
 "được từ máy tính ở xa và cụ thể là từ máy ở xa nào."
 
 #: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "CUPS printer sharing configuration"
+#, fuzzy, c-format
+msgid "CUPS printer configuration"
 msgstr "Cấu hình chia sẻ máy in CUPS"
 
 #: ../../printer/printerdrake.pm:1
@@ -12817,6 +12792,18 @@ msgstr "Máy in được kết nối như thế nào?"
 #, c-format
 msgid "Select Printer Connection"
 msgstr "Chọn Kết Nối Máy In"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid ""
+"The HP LaserJet 1000 needs its firmware to be uploaded after being turned "
+"on. Download the Windows driver package from the HP web site (the firmware "
+"on the printer's CD does not work) and extract the firmware file from it by "
+"uncompresing the self-extracting '.exe' file with the 'unzip' utility and "
+"searching for the 'sihp1000.img' file. Copy this file into the '/etc/"
+"printer' directory. There it will be found by the automatic uploader script "
+"and uploaded whenever the printer is connected and turned on.\n"
+msgstr ""
 
 #: ../../security/help.pm:1
 #, c-format
@@ -14569,11 +14556,6 @@ msgid ""
 msgstr ""
 "Không thấy tập tin cấu hình \n"
 "Hãy nhấn Đồ thuật hay Nâng cao."
-
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "%s"
-msgstr "%s"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -16831,7 +16813,7 @@ msgstr "Các trục trặc cài đặt gói %s"
 #: ../../standalone/drakgw:1
 #, c-format
 msgid "Configuring scripts, installing software, starting servers..."
-msgstr "Đang cấu hình các script, cài đặt phần mềm, khởi chạy các server..."
+msgstr "Đang cấu hình các script, cài đặt phần mềm, khởi chạy các máy chủ..."
 
 #: ../../standalone/drakgw:1
 #, c-format
@@ -19377,7 +19359,7 @@ msgstr "Nhóm MandrakeExpert"
 
 #: ../../share/compssUsers:999
 msgid "Office Workstation"
-msgstr "Trạm làm việc văn phòng"
+msgstr "Văn phòng"
 
 #: ../../share/compssUsers:999
 msgid ""
@@ -19393,7 +19375,7 @@ msgstr "Trạm làm việc"
 
 #: ../../share/compssUsers:999
 msgid "Game station"
-msgstr "Trạm trò chơi"
+msgstr "Trò chơi"
 
 #: ../../share/compssUsers:999
 msgid "Amusement programs: arcade, boards, strategy, etc"
@@ -19401,7 +19383,7 @@ msgstr "Các chương trình giải trí: arcade, boards, strategy, v.v..."
 
 #: ../../share/compssUsers:999
 msgid "Multimedia station"
-msgstr "Trạm đa phương tiện"
+msgstr "Đa phương tiện"
 
 #: ../../share/compssUsers:999
 msgid "Sound and video playing/editing programs"
@@ -19409,7 +19391,7 @@ msgstr "Các chương trình chơi Audio-Video/soạn thảo"
 
 #: ../../share/compssUsers:999
 msgid "Internet station"
-msgstr "Trạm Internet"
+msgstr "Internet"
 
 #: ../../share/compssUsers:999
 msgid ""
@@ -19436,7 +19418,7 @@ msgstr "Công cụ xoá cấu hình máy tính của bạn"
 
 #: ../../share/compssUsers:999
 msgid "Scientific Workstation"
-msgstr "Trạm làm việc khoa học"
+msgstr "Khoa học"
 
 #: ../../share/compssUsers:999
 msgid "Scientific applications such as gnuplot"
@@ -19452,7 +19434,7 @@ msgstr "Các trình soạn thảo, các tiện ích tập tin, các thiết bị
 
 #: ../../share/compssUsers:999
 msgid "KDE Workstation"
-msgstr "Trạm làm việc KDE"
+msgstr "KDE"
 
 #: ../../share/compssUsers:999
 msgid ""
@@ -19467,7 +19449,7 @@ msgstr "Môi trường đồ hoạ"
 
 #: ../../share/compssUsers:999
 msgid "Gnome Workstation"
-msgstr "Trạm làm việc GNOME"
+msgstr "GNOME"
 
 #: ../../share/compssUsers:999
 msgid ""
@@ -19558,72 +19540,138 @@ msgid "NFS server, SMB server, Proxy server, ssh server"
 msgstr "Máy chủ NFS, SMB, SSH, ủy nhiệm"
 
 #: ../../share/compssUsers:999
-msgid "Office"
-msgstr "Văn phòng"
+#, fuzzy
+msgid "Audio station"
+msgstr "Đa phương tiện"
 
 #: ../../share/compssUsers:999
-msgid "Set of tools for mail, news, web, file transfer, and chat"
-msgstr "Thiết lập công cụ cho thư, tin tức, web, truyền tập tin, và trò chuyện"
+#, fuzzy
+msgid "Sound playing/editing programs"
+msgstr "Các chương trình chơi Audio-Video/soạn thảo"
 
 #: ../../share/compssUsers:999
-msgid "Games"
-msgstr "Các trò chơi"
+#, fuzzy
+msgid "Video station"
+msgstr "Trò chơi"
 
 #: ../../share/compssUsers:999
-msgid "Multimedia - Graphics"
-msgstr "Đa phương tiện-Đồ hoạ"
+#, fuzzy
+msgid "Video playing programs"
+msgstr "Các chương trình chơi Audio-Video/soạn thảo"
 
 #: ../../share/compssUsers:999
-msgid "Graphics programs such as The Gimp"
+#, fuzzy
+msgid "Graphic station"
+msgstr "Trò chơi"
+
+#: ../../share/compssUsers:999
+#, fuzzy
+msgid "Graphics programs"
 msgstr "Các chương trình đồ hoạ như là Gimp"
 
 #: ../../share/compssUsers:999
-msgid "Multimedia - Sound"
-msgstr "Đa phương tiện-Âm thanh"
+#, fuzzy
+msgid "Set of tools to read and send mail and news and to browse the Web"
+msgstr ""
+"Các công cụ đọc và gửi thư tín và tin tức (pine, mutt, tin..) và để duyệt Web"
 
-#: ../../share/compssUsers:999
-msgid "Audio-related tools: mp3 or midi players, mixers, etc"
-msgstr "Các công cụ âm thanh: mp3 hay midi players, mixers,v.v..."
+#~ msgid "Printer sharing"
+#~ msgstr "Chia sẻ máy in"
 
-#: ../../share/compssUsers:999
-msgid "Multimedia - Video"
-msgstr "Đa phương tiện - Video"
+#~ msgid ""
+#~ "Your printer belongs to the group of GDI laser printers (winprinters) "
+#~ "sold by different manufacturers which uses the Zenographics ZJ-stream "
+#~ "raster format for the data sent to the printer. The driver for these "
+#~ "printers is still in a very early development stage and so it will "
+#~ "perhaps not always work properly. Especially it is possible that the "
+#~ "printer only works when you choose the A4 paper size.\n"
+#~ "\n"
+#~ "Some of these printers, as the HP LaserJet 1000, for which this driver "
+#~ "was originally created, need their firmware to be uploaded to them after "
+#~ "they are turned on. In the case of the HP LaserJet 1000 you have to "
+#~ "search the printer's Windows driver CD or your Windows partition for the "
+#~ "file \"sihp1000.img\" and upload the file to the printer with one of the "
+#~ "following commands:\n"
+#~ "\n"
+#~ "     lpr -o raw sihp1000.img\n"
+#~ "     cat sihp1000.img > /dev/usb/lp0\n"
+#~ "\n"
+#~ "The first command can be given by any normal user, the second must be "
+#~ "given as root. After having done so you can print normally.\n"
+#~ msgstr ""
+#~ "Máy in của bạn thuộc về nhóm máy in Laser GDI (winprinters) được nhiều "
+#~ "nhà sản xuất bán, máy dùng định dạng  Zenographics ZJ-stream raster cho "
+#~ "dữ liệu gửi tới máy in. Driver cho các máy in này vẫn còn đang trong giai "
+#~ "đoạn phát triển ban đầu nên không phải lúc nào chúng cũng chạy tốt. Nhất "
+#~ "là chúng có lẽ chỉ làm việc khi bạn chọn khổ giấy in A4.\n"
+#~ "\n"
+#~ "Một số máy in loại này, như là HP LaserJet 1000, thì driver này cho chúng "
+#~ "được tạo lúc đầu cần firmware của chúng để được upload tới sau khi chúng "
+#~ "được bật lên. Trong trường hợp máy in HP LaserJet 1000, bạn phải tìm kiếm "
+#~ "Windows driver CD của máy hay ở phân vùng Windows cho tập tin \"sihp1000."
+#~ "img\" và upload tập tin tới máy in bằng một trong các lệnh sau:\n"
+#~ "\n"
+#~ "     lpr -o raw sihp1000.img\n"
+#~ "     cat sihp1000.img > /dev/usb/lp0\n"
+#~ "\n"
+#~ "Lệnh thứ nhất có thể cho bất kỳ người dùng thông thường nào dùng. Lệnh "
+#~ "thứ hai thì bắt buộc phải chạy trong root. Sau khi hoàn tất mọi thứ, bạn "
+#~ "có thể in như bình thường.\n"
 
-#: ../../share/compssUsers:999
-msgid "Video players and editors"
-msgstr "Các trình chơi Video và soạn thảo"
+#~ msgid "GDI Laser Printer using the Zenographics ZJ-Stream Format"
+#~ msgstr "Máy in Laser GDI sử dụng định dạng Zenographics ZJ-Stream"
 
-#: ../../share/compssUsers:999
-msgid "Multimedia - CD Burning"
-msgstr "Đa phương tiện - Ghi CD"
+#~ msgid "%s"
+#~ msgstr "%s"
 
-#: ../../share/compssUsers:999
-msgid "Tools to create and burn CD's"
-msgstr "Các tiện ích tạo và ghi CD"
+#~ msgid "Office"
+#~ msgstr "Văn phòng"
 
-#: ../../share/compssUsers:999
-msgid "More Graphical Desktops (Gnome, IceWM)"
-msgstr "Thêm màn hình nền đồ họa (Gnome, IceWM)"
+#~ msgid "Set of tools for mail, news, web, file transfer, and chat"
+#~ msgstr ""
+#~ "Thiết lập công cụ cho thư, tin tức, web, truyền tập tin, và trò chuyện"
 
-#: ../../share/compssUsers:999
-msgid "Gnome, Icewm, Window Maker, Enlightenment, Fvwm, etc"
-msgstr "Gnome, Icewm, Window Maker, Enlightenment, Fvwm,v.v..."
+#~ msgid "Games"
+#~ msgstr "Các trò chơi"
 
-#: ../../share/compssUsers:999
-msgid "Personal Information Management"
-msgstr "Quản lý thông tin cá nhân"
+#~ msgid "Multimedia - Graphics"
+#~ msgstr "Đa phương tiện-Đồ hoạ"
 
-#: ../../share/compssUsers:999
-msgid "Tools for your Palm Pilot or your Visor"
-msgstr "Công cụ cho Palm Pilot hoặc Visor"
+#~ msgid "Multimedia - Sound"
+#~ msgstr "Đa phương tiện-Âm thanh"
 
-#: ../../share/compssUsers:999
-msgid "Personal Finance"
-msgstr "Tài chính cá nhân"
+#~ msgid "Audio-related tools: mp3 or midi players, mixers, etc"
+#~ msgstr "Các công cụ âm thanh: mp3 hay midi players, mixers,v.v..."
 
-#: ../../share/compssUsers:999
-msgid "Programs to manage your finances, such as gnucash"
-msgstr "Các chương trình quản lý tài chính của bạn, như là gnucash"
+#~ msgid "Multimedia - Video"
+#~ msgstr "Đa phương tiện - Video"
+
+#~ msgid "Video players and editors"
+#~ msgstr "Các trình chơi Video và soạn thảo"
+
+#~ msgid "Multimedia - CD Burning"
+#~ msgstr "Đa phương tiện - Ghi CD"
+
+#~ msgid "Tools to create and burn CD's"
+#~ msgstr "Các tiện ích tạo và ghi CD"
+
+#~ msgid "More Graphical Desktops (Gnome, IceWM)"
+#~ msgstr "Thêm màn hình nền đồ họa (Gnome, IceWM)"
+
+#~ msgid "Gnome, Icewm, Window Maker, Enlightenment, Fvwm, etc"
+#~ msgstr "Gnome, Icewm, Window Maker, Enlightenment, Fvwm,v.v..."
+
+#~ msgid "Personal Information Management"
+#~ msgstr "Quản lý thông tin cá nhân"
+
+#~ msgid "Tools for your Palm Pilot or your Visor"
+#~ msgstr "Công cụ cho Palm Pilot hoặc Visor"
+
+#~ msgid "Personal Finance"
+#~ msgstr "Tài chính cá nhân"
+
+#~ msgid "Programs to manage your finances, such as gnucash"
+#~ msgstr "Các chương trình quản lý tài chính của bạn, như là gnucash"
 
 #~ msgid "no network card found"
 #~ msgstr "không tìm thấy card mạng"

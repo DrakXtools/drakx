@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX\n"
-"POT-Creation-Date: 2003-03-09 13:01+0100\n"
+"POT-Creation-Date: 2003-03-12 14:29+0100\n"
 "PO-Revision-Date: 2002-10-10 3:34+0200\n"
 "Last-Translator: Raül Cambeiro <rulet@menta.net>\n"
 "Language-Team: Catalan <traddrake@softcatala.org>\n"
@@ -11002,11 +11002,6 @@ msgstr "Mode normal"
 msgid "Change the printing system"
 msgstr "Modifica el sistema d'impressió"
 
-#: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
-msgid "Printer sharing"
-msgstr "Compartició de fitxers"
-
 #
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -11468,10 +11463,10 @@ msgid "Printing/Scanning/Photo Cards on \"%s\""
 msgstr "S'està imprimint/escanejant/llegint targetes de fotos en \"%s\""
 
 #: ../../printer/printerdrake.pm:1
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "To know about the options available for the current printer read either the "
-"list shown below or click on the \"Print option list\" button.%s%s\n"
+"list shown below or click on the \"Print option list\" button.%s%s%s\n"
 "\n"
 msgstr ""
 "Per conèixer les opcions disponibles per a la impressora actual, llegiu la "
@@ -11734,53 +11729,8 @@ msgstr ""
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
-msgid ""
-"Your printer belongs to the group of GDI laser printers (winprinters) sold "
-"by different manufacturers which uses the Zenographics ZJ-stream raster "
-"format for the data sent to the printer. The driver for these printers is "
-"still in a very early development stage and so it will perhaps not always "
-"work properly. Especially it is possible that the printer only works when "
-"you choose the A4 paper size.\n"
-"\n"
-"Some of these printers, as the HP LaserJet 1000, for which this driver was "
-"originally created, need their firmware to be uploaded to them after they "
-"are turned on. In the case of the HP LaserJet 1000 you have to search the "
-"printer's Windows driver CD or your Windows partition for the file "
-"\"sihp1000.img\" and upload the file to the printer with one of the "
-"following commands:\n"
-"\n"
-"     lpr -o raw sihp1000.img\n"
-"     cat sihp1000.img > /dev/usb/lp0\n"
-"\n"
-"The first command can be given by any normal user, the second must be given "
-"as root. After having done so you can print normally.\n"
+msgid "Firmware-Upload for HP LaserJet 1000"
 msgstr ""
-"La vostra impressora pertany al grup d'impressores làser GDI (winprinters: "
-"orientades principalment a Windows) distribuïdes per diversos fabricants, i "
-"fa servir el format de trama Zenographics ZJ-stream per a les dades enviades "
-"a la impressora. El controlador per a aquest tipus d'impressores encara es "
-"troba en una etapa inicial de desenvolupament i, per tant, és possible que "
-"no sempre funcioni de manera correcta. En concret, és molt possible que la "
-"impressora només funcioni si trieu com a mida de paper l'A4.\n"
-"\n"
-"Alguna d'aquestes impressores, com l'HP Laserjet 1000, per a la qual es va "
-"crear aquest controlador en un principi, necessiten que els carregueu el "
-"microprogramari (firmware) després d'engegar-les. En el cas de l'HP Laserjet "
-"1000, haureu de cercar el fitxer \"sihp1000.img\" en el CD de controladors "
-"d'impressora de Windows o a la partició Windows, i carregar-lo a la "
-"impressora amb una de les ordres següents:\n"
-"\n"
-"     lpr -o raw sihp1000.img\n"
-"     cat sihp1000.img > /dev/usb/lp0\n"
-"\n"
-"La primera d'elles la pot introduir qualsevol usuari, mentre que la segona "
-"s'ha d'executar com a root. Un cop fet això, podreu imprimir amb "
-"normalitat.\n"
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "GDI Laser Printer using the Zenographics ZJ-Stream Format"
-msgstr "Impressora làser GDI que empra el format Zenographics ZJ-Stream"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -11976,6 +11926,11 @@ msgstr ""
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
+msgid "Checking device and configuring HPOJ..."
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
 msgid "Photo memory card access on your HP multi-function device"
 msgstr ""
 
@@ -11995,11 +11950,6 @@ msgstr "S'estan instal·lant els paquets..."
 #, fuzzy, c-format
 msgid "Installing SANE packages..."
 msgstr "S'estan instal·lant els paquets..."
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "Checking device and configuring HPOJ..."
-msgstr ""
 
 #
 #: ../../printer/printerdrake.pm:1
@@ -12923,6 +12873,11 @@ msgstr "Falta el nom del Servidor NCP!"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
+msgid "If no port is given, 631 will be taken as default."
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
 msgid "Enter IP address and port of the host whose printers you want to use."
 msgstr ""
 
@@ -13037,6 +12992,24 @@ msgstr "Configuració automàtica de CUPS"
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid ""
+"Turning on this allows to print plain text files in japanese language. Only "
+"use this function if you really want to print text in japanese, if it is "
+"activated you cannot print accentuated characters in latin fonts any more "
+"and you will not be able to adjust the margins, the character size, etc. "
+"This setting only affects printers defined on this machine. If you want to "
+"print japanese text on a printer set up on a remote machine, you have to "
+"activate this function on that remote machine."
+msgstr ""
+
+#
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid "Japanese text printing mode"
+msgstr "Modifica el sistema d'impressió"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid ""
 "To get access to printers on remote CUPS servers in your local network you "
 "only need to turn on the \"Automatically find available printers on remote "
 "machines\" option; the CUPS servers inform your machine automatically about "
@@ -13100,7 +13073,7 @@ msgstr ""
 #
 #: ../../printer/printerdrake.pm:1
 #, fuzzy, c-format
-msgid "CUPS printer sharing configuration"
+msgid "CUPS printer configuration"
 msgstr "Configuració de la \"winprinter\" OKI"
 
 #: ../../printer/printerdrake.pm:1
@@ -13129,6 +13102,18 @@ msgstr "Com està connectada la impressora?"
 #, c-format
 msgid "Select Printer Connection"
 msgstr "Seleccioneu la connexió de la impressora"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid ""
+"The HP LaserJet 1000 needs its firmware to be uploaded after being turned "
+"on. Download the Windows driver package from the HP web site (the firmware "
+"on the printer's CD does not work) and extract the firmware file from it by "
+"uncompresing the self-extracting '.exe' file with the 'unzip' utility and "
+"searching for the 'sihp1000.img' file. Copy this file into the '/etc/"
+"printer' directory. There it will be found by the automatic uploader script "
+"and uploaded whenever the printer is connected and turned on.\n"
+msgstr ""
 
 #: ../../security/help.pm:1
 #, c-format
@@ -14637,11 +14622,6 @@ msgid ""
 msgstr ""
 "No s'ha trobat el fitxer de configuració \n"
 "si us plau, feu clic a 'Auxiliar' o a 'Avançat'."
-
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "%s"
-msgstr ""
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -19726,73 +19706,142 @@ msgid "NFS server, SMB server, Proxy server, ssh server"
 msgstr "Servidor NFS, Servidor SMB, Servidor Proxy, Servidor SSH"
 
 #: ../../share/compssUsers:999
-msgid "Office"
-msgstr "Oficina"
+#, fuzzy
+msgid "Audio station"
+msgstr "Estació multimèdia"
 
 #: ../../share/compssUsers:999
-msgid "Set of tools for mail, news, web, file transfer, and chat"
-msgstr ""
-"Conjunt d'eines per al correu, notícies, web, transferència de fitxers i xat"
+#, fuzzy
+msgid "Sound playing/editing programs"
+msgstr "Programes de reproducció/edició de so i vídeo"
 
 #: ../../share/compssUsers:999
-msgid "Games"
-msgstr "Jocs"
+#, fuzzy
+msgid "Video station"
+msgstr "Estació de jocs"
 
 #: ../../share/compssUsers:999
-msgid "Multimedia - Graphics"
-msgstr "Multimèdia - Gràfics"
+#, fuzzy
+msgid "Video playing programs"
+msgstr "Programes de reproducció/edició de so i vídeo"
 
 #: ../../share/compssUsers:999
-msgid "Graphics programs such as The Gimp"
+#, fuzzy
+msgid "Graphic station"
+msgstr "Estació de jocs"
+
+#: ../../share/compssUsers:999
+#, fuzzy
+msgid "Graphics programs"
 msgstr "Programes gràfics com El Gimp"
 
 #: ../../share/compssUsers:999
-msgid "Multimedia - Sound"
-msgstr "Multimèdia - So"
+#, fuzzy
+msgid "Set of tools to read and send mail and news and to browse the Web"
+msgstr ""
+"Conjunt d'eines per llegir i enviar correu i notícies (pine, mutt, tin...) i "
+"per navegar pel Web"
 
-#: ../../share/compssUsers:999
-msgid "Audio-related tools: mp3 or midi players, mixers, etc"
-msgstr "Eines d'àudio: reproductors d'mp3 o midi, mescladors, etc."
+#, fuzzy
+#~ msgid "Printer sharing"
+#~ msgstr "Compartició de fitxers"
 
-#: ../../share/compssUsers:999
-msgid "Multimedia - Video"
-msgstr "Multimèdia - Vídeo"
+#~ msgid ""
+#~ "Your printer belongs to the group of GDI laser printers (winprinters) "
+#~ "sold by different manufacturers which uses the Zenographics ZJ-stream "
+#~ "raster format for the data sent to the printer. The driver for these "
+#~ "printers is still in a very early development stage and so it will "
+#~ "perhaps not always work properly. Especially it is possible that the "
+#~ "printer only works when you choose the A4 paper size.\n"
+#~ "\n"
+#~ "Some of these printers, as the HP LaserJet 1000, for which this driver "
+#~ "was originally created, need their firmware to be uploaded to them after "
+#~ "they are turned on. In the case of the HP LaserJet 1000 you have to "
+#~ "search the printer's Windows driver CD or your Windows partition for the "
+#~ "file \"sihp1000.img\" and upload the file to the printer with one of the "
+#~ "following commands:\n"
+#~ "\n"
+#~ "     lpr -o raw sihp1000.img\n"
+#~ "     cat sihp1000.img > /dev/usb/lp0\n"
+#~ "\n"
+#~ "The first command can be given by any normal user, the second must be "
+#~ "given as root. After having done so you can print normally.\n"
+#~ msgstr ""
+#~ "La vostra impressora pertany al grup d'impressores làser GDI "
+#~ "(winprinters: orientades principalment a Windows) distribuïdes per "
+#~ "diversos fabricants, i fa servir el format de trama Zenographics ZJ-"
+#~ "stream per a les dades enviades a la impressora. El controlador per a "
+#~ "aquest tipus d'impressores encara es troba en una etapa inicial de "
+#~ "desenvolupament i, per tant, és possible que no sempre funcioni de manera "
+#~ "correcta. En concret, és molt possible que la impressora només funcioni "
+#~ "si trieu com a mida de paper l'A4.\n"
+#~ "\n"
+#~ "Alguna d'aquestes impressores, com l'HP Laserjet 1000, per a la qual es "
+#~ "va crear aquest controlador en un principi, necessiten que els carregueu "
+#~ "el microprogramari (firmware) després d'engegar-les. En el cas de l'HP "
+#~ "Laserjet 1000, haureu de cercar el fitxer \"sihp1000.img\" en el CD de "
+#~ "controladors d'impressora de Windows o a la partició Windows, i carregar-"
+#~ "lo a la impressora amb una de les ordres següents:\n"
+#~ "\n"
+#~ "     lpr -o raw sihp1000.img\n"
+#~ "     cat sihp1000.img > /dev/usb/lp0\n"
+#~ "\n"
+#~ "La primera d'elles la pot introduir qualsevol usuari, mentre que la "
+#~ "segona s'ha d'executar com a root. Un cop fet això, podreu imprimir amb "
+#~ "normalitat.\n"
 
-#: ../../share/compssUsers:999
-msgid "Video players and editors"
-msgstr "Reproductors i editors de vídeo"
+#~ msgid "GDI Laser Printer using the Zenographics ZJ-Stream Format"
+#~ msgstr "Impressora làser GDI que empra el format Zenographics ZJ-Stream"
 
-#: ../../share/compssUsers:999
-msgid "Multimedia - CD Burning"
-msgstr "Multimèdia - Enregistrament de CD"
+#~ msgid "Office"
+#~ msgstr "Oficina"
 
-#: ../../share/compssUsers:999
-msgid "Tools to create and burn CD's"
-msgstr "Eines per crear i enregistrar CD"
+#~ msgid "Set of tools for mail, news, web, file transfer, and chat"
+#~ msgstr ""
+#~ "Conjunt d'eines per al correu, notícies, web, transferència de fitxers i "
+#~ "xat"
 
-#: ../../share/compssUsers:999
-msgid "More Graphical Desktops (Gnome, IceWM)"
-msgstr "Més escriptoris gràfics (Gnome, IceWM)"
+#~ msgid "Games"
+#~ msgstr "Jocs"
 
-#: ../../share/compssUsers:999
-msgid "Gnome, Icewm, Window Maker, Enlightenment, Fvwm, etc"
-msgstr "Gnome, Icewm, Window Maker, Enlightenment, Fvwm, etc."
+#~ msgid "Multimedia - Graphics"
+#~ msgstr "Multimèdia - Gràfics"
 
-#: ../../share/compssUsers:999
-msgid "Personal Information Management"
-msgstr "Gestió d'informació personal"
+#~ msgid "Multimedia - Sound"
+#~ msgstr "Multimèdia - So"
 
-#: ../../share/compssUsers:999
-msgid "Tools for your Palm Pilot or your Visor"
-msgstr "Eines per al Palm Pilot o per al Visor"
+#~ msgid "Audio-related tools: mp3 or midi players, mixers, etc"
+#~ msgstr "Eines d'àudio: reproductors d'mp3 o midi, mescladors, etc."
 
-#: ../../share/compssUsers:999
-msgid "Personal Finance"
-msgstr "Comptabilitat personal"
+#~ msgid "Multimedia - Video"
+#~ msgstr "Multimèdia - Vídeo"
 
-#: ../../share/compssUsers:999
-msgid "Programs to manage your finances, such as gnucash"
-msgstr "Programes per gestionar els vostres comptes, com ara el gnucash"
+#~ msgid "Video players and editors"
+#~ msgstr "Reproductors i editors de vídeo"
+
+#~ msgid "Multimedia - CD Burning"
+#~ msgstr "Multimèdia - Enregistrament de CD"
+
+#~ msgid "Tools to create and burn CD's"
+#~ msgstr "Eines per crear i enregistrar CD"
+
+#~ msgid "More Graphical Desktops (Gnome, IceWM)"
+#~ msgstr "Més escriptoris gràfics (Gnome, IceWM)"
+
+#~ msgid "Gnome, Icewm, Window Maker, Enlightenment, Fvwm, etc"
+#~ msgstr "Gnome, Icewm, Window Maker, Enlightenment, Fvwm, etc."
+
+#~ msgid "Personal Information Management"
+#~ msgstr "Gestió d'informació personal"
+
+#~ msgid "Tools for your Palm Pilot or your Visor"
+#~ msgstr "Eines per al Palm Pilot o per al Visor"
+
+#~ msgid "Personal Finance"
+#~ msgstr "Comptabilitat personal"
+
+#~ msgid "Programs to manage your finances, such as gnucash"
+#~ msgstr "Programes per gestionar els vostres comptes, com ara el gnucash"
 
 #~ msgid "no network card found"
 #~ msgstr "no s'ha trobat cap targeta de xarxa"

@@ -1,4 +1,4 @@
-# danish drakbootdisk
+# danish DrakX
 # Copyright (C) 2000 Free Software Foundation, Inc.
 # Keld Simonsen <keld@dkuug.dk>, 2000-2003.
 # Troels Liebe Bentsen <tlb@iname.com> 2000.
@@ -8,8 +8,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX\n"
-"POT-Creation-Date: 2003-03-09 13:01+0100\n"
-"PO-Revision-Date: 2003-03-08 00:29+0100\n"
+"POT-Creation-Date: 2003-03-12 14:29+0100\n"
+"PO-Revision-Date: 2003-03-10 00:29+0100\n"
 "Last-Translator: Keld Simonsen <keld@dkuug.dk>\n"
 "Language-Team: Danish <dansk@klid.dk>\n"
 "MIME-Version: 1.0\n"
@@ -1149,6 +1149,73 @@ msgid ""
 "be run on your machine. If you plan to use this machine as a server it's a\n"
 "good idea to review this setup."
 msgstr ""
+"Som en opsummering vil DrakX give dig en oversigt over forskellig "
+"information\n"
+"som den har om dit system. Afhængig af installeret maskinel kan du have\n"
+"et eller flere af de følgende punkter. Hvert punkt består af en overskrift\n"
+"fulgt af en kort opsummering af den nuværende konfiguration. Klik på\n"
+"den tilsvarende \"Konfigurér\" knap for at ændre på opsætningen.\n"
+"\n"
+" * \"Tastatur\": Tjek at din tastaturopsætning er korrekt og ændr om "
+"nødvendigt.\n"
+"\n"
+" * \"Land\": Tjek at du har valgt korrekt land. Hvis du ikke er i dette "
+"land,\n"
+"så klik på \"Konfigurér\"-knappen og vælg et andet land. Hvis dit land dit "
+"ikke er i\n"
+"listen, så klik på \"Mere\"-knappen for at få en fuldstændig liste.\n"
+"\n"
+" ' \"Tidszone\": DrakX bestemmer din tidszone ud fra hvilket land du har "
+"valgt.\n"
+"Du kan klikke på \"Konfigurér\" her, hvis dette ikke er korrekt.\n"
+"\n"
+" * \"Mus\" :Tjek museopsætningen og klik på knappen for at ændre om "
+"nødvendigt.\n"
+"\n"
+" * \"Printer\": Ved at klikke på \"Konfigurér\"-knappen åbnes "
+"printeropsætnings-\n"
+"hjælperen. Konsultér det tilhørende kapitel i opstartsguiden for mere\n"
+"information om hvordan en printer kan sættes op. Grænsefladen som er vist\n"
+"dér ligner det som benyttes under installationen.\n"
+"\n"
+" * 'Lydkort': Hvis et lydkort er blevet fundet på dit system, vil det blive "
+"vist hér. Hvis du bemærker at det viste lydkort ikke er det som faktisk er "
+"til stede på systemet, kan du klikke på knappen og vælge en anden driver.\n"
+" * \"Grafisk grænseflade\": DrakX vil opsætte din grafiske grænseflade i "
+"opløsning\n"
+"800x600 eller 1024x768. Hvis det ikke passer til dine behov, så klik på "
+"\"Konfigurér\"-\n"
+"knappen for at ændre på opsætningen.\n"
+"\n"
+" * \"TV-kort\": Hvis et TV-kort er fundet i din maskine, er det vist her. "
+"Hvis du har\n"
+"et TV-kort som ikke er fundet, så klik \"Konfigurér\" for at sætte det op "
+"manuelt.\n"
+"\n"
+" * \"ISDN-kort\": Hvis der er fundet et ISDN-kort, vil det vises her. Du kan "
+"klikke på\n"
+"\"Konfigurér\" for at ændre på parameterne til kortet.\n"
+"\n"
+" * \"Netværk\": Vælg dette for at ændre på internetforbindelsen eller den "
+"lokale\n"
+"netværksopsætning.\n"
+"\n"
+" * \"Sikkerhedsniveau\": Du kan her ændre på sikkerhedsniveauet som er "
+"defineret tidligere.\n"
+"\n"
+" * \"Brandmur\": Hvis du skal koble din maskine direkte til internet, er det "
+"en god idé\n"
+"at beskytte sig mod angreb med en brandmur. Opstartsguiden har mere om\n"
+"dette.\n"
+"\n"
+" * \"Opstartsindlæser\": Hvis du vil ændre på konfigurationen for "
+"opstartsindlæseren,\n"
+"så klik på denne knap. Dette bør forbeholdes avancerede brugere.\n"
+"\n"
+" * \"Tjenester\": Her kan du bestemme hvilke tjenester som skal startes på "
+"din\n"
+"maskine. Hvis du skal bruge maskinen som server er det en god idé at "
+"kontrollere dette."
 
 #: ../../help.pm:1
 #, c-format
@@ -1433,6 +1500,28 @@ msgid ""
 "installed on the second hard drive (\"/dev/hdb\"), or even on a floppy disk\n"
 "(\"On Floppy\")."
 msgstr ""
+"LILO og grub er opstartsindlæsere for GNU/Linux. Normalt er dette trin\n"
+"helt automatisk. DrakX vil analysere opstartssektoren på disken og\n"
+"handle ud fra det som findes der.\n"
+"\n"
+" * Hvis en opstartssektor for Windows bliver fundet, vil den erstatte denne "
+"med\n"
+"en grub- eller LILO-opstartsektor. På denne måde kan du indlæse enten\n"
+"GNU/Linux eller et andet operativsystem.\n"
+"\n"
+" * Hvis en opstartsektor for grub eller LILO bliver fundet, vil den blive "
+"erstattet\n"
+"med en ny.\n"
+"\n"
+"Hvis det ikke er mulig at afgøre dette automatisk, vil DrakX spørge dig "
+"hvor\n"
+"opstartsindlæseren skal installeres.\n"
+"\n"
+"\"Opstartsenhed\": I de fleste tilfælde vil du ikke ønske at ændre på\n"
+"standardvalget (\"Første sektor af harddisk (MBR)\"), men hvis du "
+"foretrækker\n"
+"det, kan opstartsindlæseren installeres på en anden disk, eller til og med\n"
+"på en diskette (\"På diskette\"). "
 
 #: ../../help.pm:1
 #, c-format
@@ -1772,6 +1861,26 @@ msgid ""
 "running version \"8.1\" or later. Performing an Upgrade on versions prior\n"
 "to Mandrake Linux version \"8.1\" is not recommended."
 msgstr ""
+"Dette trin bliver kun aktiveret hvis der bliver fundet en eksisterende\n"
+"GNU/Linux partition på din maskine.\n"
+"\n"
+"DrakX skal vide om du vil udføre en ny installation eller en opgradering\n"
+"af et eksisterende Mandrake Linux-system.\n"
+"\n"
+" * \"Installér\": Dette vil stort sét slette hele det gamle system. Hvis du\n"
+"ønsker at ændre hvordan diskene bliver partitioneret, eller ændre på\n"
+"filsystemene, bør du vælge dette. Afhængigt af hvordan du partitionerer kan\n"
+"nogen af de gamle data eventuelt beholdes. \n"
+"\n"
+" * \"Opgradér\": Denne installationsklasse lader dig opgradere pakkene som\n"
+"er installeret på dit nuværende Mandrake Linux-system. Dine nuværende\n"
+"partitioner og brugerdata bliver ikke berørt. De fleste andre "
+"konfigurationstrin\n"
+"forbliver tilgængelige, i lighed med en standardinstallation.\n"
+"\n"
+"\"Opgradér\"-valget bør fungere på Mandrake Linux-systemer som kører\n"
+"version 8.1 eller nyere. Opgradering af versioner tidligere end 8.1 er ikke\n"
+"anbefalet. "
 
 #: ../../help.pm:1
 #, c-format
@@ -4123,9 +4232,9 @@ msgstr "System"
 
 #. -PO: example: lilo-graphic on /dev/hda1
 #: ../../install_steps_interactive.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "%s on %s"
-msgstr "%s (port %s)"
+msgstr "%s på %s"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -7142,6 +7251,18 @@ msgid ""
 "                 : name_of_application like  so for staroffice \n"
 "                 : and gs for ghostscript for only this one."
 msgstr ""
+"Skrifttype-import og "
+"overvågningsapplikation                                     \n"
+"--windows_import : importér fra alle tilgængelige windowspartitioner.\n"
+"--xls_fonts      : vis alle skrifttyper som allerede eksisterer fra xls\n"
+"--strong         : stærk verifikation af skrifttyper.\n"
+"--install        : installér alle skrifttyper og kataloger.\n"
+"--uninstall      : afinstallér alle skrifttyper og kataloger.\n"
+"--replace        : erstat skrifttyper som eksisterer fra før\n"
+"--application    : 0 ingen applikation.\n"
+"                 : 1 alle tilgængelige understøttede applikationer.\n"
+"                 : applikationsnavn, som \"so\" for staroffice \n"
+"                 : og gs for ghostscript."
 
 #: ../../standalone.pm:1
 #, c-format
@@ -8846,6 +8967,23 @@ msgid ""
 "\n"
 "- \"/sbin/fuser -v /dev/dsp\" will tell which program uses the sound card.\n"
 msgstr ""
+"Den klassiske metode for at fejlsøge lydopsætningten er at køre følgende\n"
+"kommandoer:\n"
+"\n"
+"- \"lspcidrake -v | fgrep AUDIO\" vil vise hvilken driver lydkortet bruger \n"
+"som standard\n"
+"- \"grep sound-slot /etc/modules.conf\" vil vise hvilken driver som er i "
+"brug\n"
+"\n"
+"- \"/sbin/lsmod\" lader dig se om denne driver er indlæst\n"
+"\n"
+"- \"/sbin/chkconfig --list sound\" og \"/sbin/chkconfig --list alsa\" vil\n"
+"vise om disse tjenester er sat op til at startes.\n"
+"\n"
+"- \"aumix -q\" vil vise om lyden er slukket ned eller ikke\n"
+"\n"
+"- \"/sbin/fuser -v /dev/dsp\" vil vise hvilke programmer som bruger "
+"lydkortet\n"
 
 #: ../../harddrake/sound.pm:1
 #, c-format
@@ -10090,9 +10228,9 @@ msgid "Start at boot"
 msgstr "Start ved opstart"
 
 #: ../../network/network.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Assign host name from DHCP address"
-msgstr "Du skal indtaste et værtsnavn eller en IP-adresse.\n"
+msgstr "Tildel værtsnavn fra DHCP-adresse"
 
 #: ../../network/network.pm:1
 #, c-format
@@ -10710,11 +10848,6 @@ msgstr "Ændr printsystemet"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
-msgid "Printer sharing"
-msgstr "Printerdeling"
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
 msgid "CUPS configuration"
 msgstr "CUPS-konfiguration"
 
@@ -11137,10 +11270,10 @@ msgid "Printing/Scanning/Photo Cards on \"%s\""
 msgstr "Udskriver/Skanner/Fotokort på '%s'"
 
 #: ../../printer/printerdrake.pm:1
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "To know about the options available for the current printer read either the "
-"list shown below or click on the \"Print option list\" button.%s%s\n"
+"list shown below or click on the \"Print option list\" button.%s%s%s\n"
 "\n"
 msgstr ""
 "Hvilke muligheder der er for den aktuelle printer kan du enten læse på "
@@ -11392,51 +11525,8 @@ msgstr ""
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
-msgid ""
-"Your printer belongs to the group of GDI laser printers (winprinters) sold "
-"by different manufacturers which uses the Zenographics ZJ-stream raster "
-"format for the data sent to the printer. The driver for these printers is "
-"still in a very early development stage and so it will perhaps not always "
-"work properly. Especially it is possible that the printer only works when "
-"you choose the A4 paper size.\n"
-"\n"
-"Some of these printers, as the HP LaserJet 1000, for which this driver was "
-"originally created, need their firmware to be uploaded to them after they "
-"are turned on. In the case of the HP LaserJet 1000 you have to search the "
-"printer's Windows driver CD or your Windows partition for the file "
-"\"sihp1000.img\" and upload the file to the printer with one of the "
-"following commands:\n"
-"\n"
-"     lpr -o raw sihp1000.img\n"
-"     cat sihp1000.img > /dev/usb/lp0\n"
-"\n"
-"The first command can be given by any normal user, the second must be given "
-"as root. After having done so you can print normally.\n"
+msgid "Firmware-Upload for HP LaserJet 1000"
 msgstr ""
-"Din printer tilhører gruppen af GDI-laserprintere (winprintere) solgt af "
-"forskellige producenter som bruger Zenographics ZJ-stream rasterformat for "
-"data sendt til printeren. Drivprogrammet til disse printere er stadig i et "
-"meget tidligt udviklingstrin og det vil således måske ikke altid virke "
-"rigtigt. Især er det muligt at printeren kun virker når du har valgt "
-"papirstørrelsen A4.\n"
-"\n"
-"Nogen af disse printere, såsom HP Laserjet 1000, som dette drivprogram først "
-"blev udviklet til, behøver at deres programmel bliver lagt op på dem efter "
-"at de er blevet tændt. I tilfældet med HP LaserJet 1000 skal du søge i "
-"printerens Windows drivprogram-cd på din Windows-partition efter filen "
-"\"sihp1000.img\" og lægge den op på printeren med en af de følgende "
-"kommandoer:\n"
-"\n"
-"     lpr -o raw sihp1000.img\n"
-"     cat sihp1000.img > /dev/usb/lp0\n"
-"\n"
-"Den første kommando kan gives af enhver normal bruger, den anden skal gives "
-"som root. Efter at have gjort dette kan du udskrive normalt.\n"
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "GDI Laser Printer using the Zenographics ZJ-Stream Format"
-msgstr "GDI Laserprinter med Zenographics ZJ-Stream-Format"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -11621,6 +11711,11 @@ msgstr "Gør printerport tilgængelig for CUPS..."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
+msgid "Checking device and configuring HPOJ..."
+msgstr "Tjekker enhed og konfigurerer HPOJ..."
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
 msgid "Photo memory card access on your HP multi-function device"
 msgstr "Adgang til fotohukommelseskort på din HP-multifunktionsenhed"
 
@@ -11638,11 +11733,6 @@ msgstr "Installerer mtools-pakker..."
 #, c-format
 msgid "Installing SANE packages..."
 msgstr "Installerer SANE-pakker..."
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "Checking device and configuring HPOJ..."
-msgstr "Tjekker enhed og konfigurerer HPOJ..."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -12521,6 +12611,11 @@ msgstr "Server-IP mangler!"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
+msgid "If no port is given, 631 will be taken as default."
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
 msgid "Enter IP address and port of the host whose printers you want to use."
 msgstr ""
 "Indtast IP-adresse og port på værten, hvis printere du ønsker at bruge."
@@ -12632,11 +12727,40 @@ msgid ""
 "If some of these measures lead to problems for you, turn this option off, "
 "but then you have to take care of these points."
 msgstr ""
+"Når denne valgmulighed er valgt, vil CUPS hver gang den starter forsikre sig "
+"om at\n"
+"\n"
+"- hvis LPD/LPRng er installeret, vil /etc/printcap ikke overskrives af CUPS\n"
+"\n"
+"- hvis /etc/cups/cupsd.conf mangler, vil den blive oprettet\n"
+"\n"
+"- når printerinformation rundsendes, vil den ikke indeholde \"localhost\" "
+"som servernavn.\n"
+"\n"
+"Hvis nogen af disse ting giver dig problemer, så fjern denne valgmulighed, "
+"men da må du selv sørge for at disse punkter bliver overholdt."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Automatic correction of CUPS configuration"
 msgstr "Automatisk rettelse af CUPS-konfiguration"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid ""
+"Turning on this allows to print plain text files in japanese language. Only "
+"use this function if you really want to print text in japanese, if it is "
+"activated you cannot print accentuated characters in latin fonts any more "
+"and you will not be able to adjust the margins, the character size, etc. "
+"This setting only affects printers defined on this machine. If you want to "
+"print japanese text on a printer set up on a remote machine, you have to "
+"activate this function on that remote machine."
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid "Japanese text printing mode"
+msgstr "Ændr printsystemet"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -12650,6 +12774,13 @@ msgid ""
 "address(es) and optionally the port number(s) here to get the printer "
 "information from the server(s)."
 msgstr ""
+"For at få adgang til eksterne CUPS-servere i dit lokale netværk behøver du "
+"bare at aktivere \"Find automatisk tilgængelige printere på eksterne maskiner"
+"\"-valget: CUPS-serverene informerer din maskine automatisk om printerne. "
+"Alle printerne som for øjeblikket er kendt af din maskine er listet i "
+"\"Fjern-printere\" sektionen i hovedvinduet til Printerdrake. Hvis din CUPS-"
+"server ikke er i dit lokale netværk, må du indtaste CUPS-servernes IP-"
+"adresser og evt. portnummeret for at få printer-information fra serverne."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -12705,15 +12836,15 @@ msgstr ""
 "tilgængelige fra eksterne maskiner, og fra hvilke eksterne maskiner."
 
 #: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "CUPS printer sharing configuration"
+#, fuzzy, c-format
+msgid "CUPS printer configuration"
 msgstr "Konfiguration af deling af CUPS-printere"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Printer auto-detection (Local, TCP/Socket, and SMB printers)"
 msgstr ""
-"Automatisk identifikation af printere (Lokal, TCP/Socket og SMB-skrivere)"
+"Automatisk identifikation af printere (Lokal, TCP/Socket og SMB-printere)"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -12735,6 +12866,18 @@ msgstr "Hvordan er printeren tilsluttet?"
 #, c-format
 msgid "Select Printer Connection"
 msgstr "Vælg printer-forbindelse"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid ""
+"The HP LaserJet 1000 needs its firmware to be uploaded after being turned "
+"on. Download the Windows driver package from the HP web site (the firmware "
+"on the printer's CD does not work) and extract the firmware file from it by "
+"uncompresing the self-extracting '.exe' file with the 'unzip' utility and "
+"searching for the 'sihp1000.img' file. Copy this file into the '/etc/"
+"printer' directory. There it will be found by the automatic uploader script "
+"and uploaded whenever the printer is connected and turned on.\n"
+msgstr ""
 
 #: ../../security/help.pm:1
 #, c-format
@@ -13606,7 +13749,7 @@ msgid "Boot Floppy"
 msgstr "Start fra diskette"
 
 #: ../../standalone/drakTermServ:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "drakTermServ Overview\n"
 "\t\t\t   \n"
@@ -13741,29 +13884,29 @@ msgid ""
 " \n"
 "\n"
 msgstr ""
-"drakTermServ overblik\n"
+"drakTermServ-oversigt\n"
 "\t\t\t   \n"
-"        - Opret Etherboot-kyndig opstartsaftryk:\n"
-"        \t\tFor at starte en kerne op via etherboot skal et specielt kerne/"
-"initrdrd aftryk oprettes.\n"
+"        - Lav Etherboot-aktiverede opstartsaftryksfiler:\n"
+"        \t\tFor at starte med en kerne via etherboot skal en speciel kerne/"
+"initrd-aftryksfil oprettes.\n"
 "        \t\tmkinitrd-net laver meget af dette arbejde og drakTermServ er "
 "bare en grafisk grænseflade\n"
-"        \t\tder hjælper med at styre og tilrette disse aftryk.\n"
+"        \t\tfor at hjælpe til med at håndtere/ændre på disse aftryksfiler.\n"
 "\n"
 "        - Vedligeholdelse af /etc/dhcpd.conf:\n"
-"        \t\tFor netopstartsklienter behøver hver klient en indgang i dhcpd."
-"conf, som tildeler en IP-adresse\n"
-"        \t\tog et netopstartsaftryk til maskinen. drakTermServ hjælper med "
-"at oprette og fjerne disse indgange.\n"
+"        \t\tFor at starte klientene over netværk behøver hver klient en "
+"indgang i dhcpd.conf, som udleverer en IP-adresse\n"
+"        \t\tog netværksopstart-aftryksfiler til maskinen. drakTermServ "
+"hjælper til med at lave/fjerne disse indgange.\n"
 "\t\t\t\n"
-"        \t\t(PCI-kort kan undlade dette aftryk - etherboot vil bede om det "
-"rigtige aftryk. Du bør\n"
-"        \t\togså overveje at når etherboot leder efter aftrykkene, forventer "
-"den navne såsom\n"
-"        \t\tboot-3c59x.nbi, i stedet for boot-3c59x.2.4.19-16mdk.nbi).\n"
+"        \t\t(PCI-kort kan undlade aftryksfilen - etherboot vil efterspørge "
+"den rigtige aftryksfil. Du bør\n"
+"        \t\togså bemærke at når etherboot ser efter aftryksfilerne forventer "
+"den navne som\n"
+"        \t\tboot-3c59x.nbi, fremfor boot-3c59x.2.4.19-16mdk.nbi).\n"
 "\t\t\t \n"
-"        \t\tEn typisk dhcpd.conf stanza til understøttelse af en diskløs "
-"klient ser sådan ud:\n"
+"        \t\tEt typisk dhcpd.conf-afsnit for at understøtte diskløse klienter "
+"ser sådan ud:\n"
 "        \t\t\n"
 "\t\t\t\thost curly {\n"
 "\t\t\t\t\thardware ethernet        00:20:af:2f:f7:9d;\n"
@@ -13773,74 +13916,73 @@ msgstr ""
 "nbi\";\n"
 "\t\t\t\t}\n"
 "\t\t\t\n"
-"\t\t\tSelvom du kan bruge en pøl af IP-adresser, i stedet for at opsætte en "
-"specifik indgang for\n"
-"\t\t\ten klientmaskine, using a fixed address scheme facilitates using the "
-"functionality\n"
-"\t\t\tof client-specific configuration files that ClusterNFS provides.\n"
+"\t\t\tMens du kan bruge en pøl af IP-adresser, fremfor at opsætte en "
+"specifik opsætningsindgang for\n"
+"\t\t\ten klientmaskine, vil brug af faste adresser lette\n"
+"brugen\n"
+"\t\t\taf klientspecifikke konfigurationsfiler som ClusterNFS tilbyder.\n"
 "\t\t\t\n"
-"\t\t\tNote: The \"#type\" entry is only used by drakTermServ.  Clients can "
-"either be \"thin\"\n"
-"\t\t\tor 'fat'.  Thin clients run most software on the server via xdmcp, "
-"while fat clients run most\n"
-"\t\t\tsoftware on the client machine. A special inittab, /etc/inittab\\$\\"
-"$IP=client_ip\\$\\$ is\n"
-"\t\t\twritten for thin clients. System config files xdm-config, kdmrc, and "
-"gdm.conf are modified\n"
-"\t\t\tif thin clients are used, to enable xdmcp. Since there are security "
-"issues in using xdmcp,\n"
-"\t\t\thosts.deny and hosts.allow are modified to limit access to the local "
-"subnet.\n"
+"\t\t\tBemærk: \"#type\"-indgangen er kun brugt af drakTermServ.  Klienter "
+"kan enten være \"tynde\"\n"
+"\t\t\teller 'tykke'.  Tynde klienter kører størsteparten af programmellet "
+"via xdmcp, mens tykke klienter kører størsteparten\n"
+"af programmellet på klientmaskinen. En speciel inttab, /etc/inittab\\$\\"
+"$IP=client_ip\\$\\$ bliver\n"
+"\t\t\tskrevet for tynde klienter. Systemkonfigurationsfilerne xdm-config, "
+"kdmrc, og gdm.conf bliver ændrede\n"
+"\t\t\thvis tynde klienter bliver brugt, for at aktivere xdmcp. Idet der er "
+"sikkerhedsproblematik omkring brugen af xdmcp,\n"
+"\t\t\tså bliver hosts.deny og hosts.allow ændret for at begrænse adgangen "
+"til det lokale subnet.\n"
 "\t\t\t\n"
-"\t\t\tNote: You must stop/start the server after adding or changing "
-"clients.\n"
+"\t\t\tBemærk: Du skal stoppe/starte serveren efter at have tilføjet eller "
+"ændret klienter.\n"
 "\t\t\t\n"
-"        - Maintain /etc/exports:\n"
-"        \t\tClusternfs allows export of the root filesystem to diskless "
-"clients. drakTermServ\n"
-"        \t\tsets up the correct entry to allow anonymous access to the root "
-"filesystem from\n"
-"        \t\tdiskless clients.\n"
+"        - Vedligeholdelse af /etc/exports:\n"
+"        \t\tClusternfs lader dig eksportere rod-filsystemet til diskløse "
+"klienter, drakTermServ\n"
+"        \t\topsætter de rigtige indgange for at tillade anonym adgang til "
+"rod-filsystemet fra\n"
+"        \t\tdiskløse klienter.\n"
 "\n"
-"        \t\tA typical exports entry for clusternfs is:\n"
+"        \t\tEn typisk eksporterings-indgang for clusternfs er:\n"
 "        \t\t\n"
 "        \t\t/                  (ro,all_squash)\n"
-"        \t\t/home              SUBNET/MASK(rw,root_squash)\n"
+"        \t\t/home              SUBNET/MASKE(rw,root_squash)\n"
 "\t\t\t\n"
-"\t\t\tWith SUBNET/MASK being defined for your network.\n"
+"\t\t\tHvor SUBNET/MASKE bliver defineret for dit netværk.\n"
 "        \t\t\n"
-"        - Maintain /etc/shadow\\$\\$CLIENT\\$\\$:\n"
-"        \t\tFor users to be able to log into the system from a diskless "
-"client, their entry in\n"
-"        \t\t/etc/shadow needs to be duplicated in /etc/shadow\\$\\$CLIENTS\\$"
-"\\$. drakTermServ helps\n"
-"        \t\tin this respect by adding or removing system users from this "
-"file.\n"
+"        - Vedligeholdelse af /etc/shadow\\$\\$CLIENT\\$\\$:\n"
+"        \t\tFor at brugere skal kunne logge ind på systemet fra en diskløs "
+"klient, så må deres indgang i\n"
+"        \t\t/etc/shadow kopieres ind i /etc/shadow\\$\\$CLIENTS\\$\\$. "
+"drakTermServ hjælper til\n"
+"        \t\tved at tilføje og slette brugere fra denne fil.\n"
 "\n"
-"        - Per client /etc/X11/XF86Config-4\\$\\$IP-ADDRESS\\$\\$:\n"
-"        \t\tThrough clusternfs, each diskless client can have it's own "
-"unique configuration files\n"
-"        \t\ton the root filesystem of the server. In the future drakTermServ "
-"will help create these\n"
-"        \t\tfiles.\n"
+"        - Per klient /etc/X11/XF86Config-4\\$\\$IP-ADDRESS\\$\\$:\n"
+"        \t\tVia clusternfs kan hver diskløs klient have deres egen unikke "
+"konfigurationsfil\n"
+"        \t\tpå rod-filsystemet på serveren. I fremtiden vil drakTermServ "
+"kunne hjælpe til med at lave disse\n"
+"        \t\tfiler.\n"
 "\n"
-"        - Per client system configuration files:\n"
-"        \t\tThrough clusternfs, each diskless client can have it's own "
-"unique configuration files\n"
-"        \t\ton the root filesystem of the server. In the future, "
-"drakTermServ can help create files\n"
-"        \t\tsuch as /etc/modules.conf, /etc/sysconfig/mouse, /etc/sysconfig/"
-"keyboard on a per-client\n"
+"        - Per klient systemkonfigurationsfiler:\n"
+"        \t\tVia clusternfs kan hver diskløs klient have deres egne unikke "
+"konfigurationsfiler\n"
+"        \t\tpå rod-filesystemet på serveren. I fremtiden vil drakTermServ "
+"kunne hjælpe til med at oprette disse filer\n"
+"        \t\tsom feks. /etc/modules.conf, /etc/sysconfig/mouse, /etc/"
+"sysconfig/keyboard på per klient\n"
 "        \t\tbasis.\n"
 "\n"
 "        - /etc/xinetd.d/tftp:\n"
-"        \t\tdrakTermServ will configure this file to work in conjunction "
-"with the images created by\n"
-"        \t\tmkinitrd-net, and the entries in /etc/dhcpd.conf, to serve up "
-"the boot image to each\n"
+"        \t\tdrakTermServ vil konfigurere denne fil til at virke sammen med "
+"aftryksfilerne som bliver oprettet af\n"
+"        \t\tmkinitrd-net, og indgangene i /etc/dhcpd.conf, for at udlevere "
+"netværks-opstartsaftryksfilerne til hver \n"
 "        \t\tdiskløs klient.\n"
 "\n"
-"        \t\tEn typisk tftp konfigurationsfil ser sådan ud:\n"
+"        \t\tEn typisk tftp-konfigurationsfil ser sådan ud:\n"
 "        \t\t\n"
 "        \t\tservice tftp\n"
 "        \t\t(\n"
@@ -13853,21 +13995,21 @@ msgstr ""
 "                        server_args  = -s /var/lib/tftpboot\n"
 "        \t\t}\n"
 "        \t\t\n"
-"        \t\tThe changes here from the default installation are changing the "
-"disable flag to\n"
-"        \t\t'no' and changing the directory path to /var/lib/tftpboot, where "
-"mkinitrd-net\n"
-"        \t\tputs it's images.\n"
+"        \t\tÆndringen her fra den normale installation er ændringen af "
+"disable-flaget til\n"
+"        \t\t'no' og ændring af filstien til /var/lib/tftpboot, hvor mkinitrd-"
+"net\n"
+"        \t\tplacere sine aftryksfiler.\n"
 "\n"
-"        - Create etherboot floppies/CDs:\n"
-"        \t\tThe diskless client machines need either ROM images on the NIC, "
-"or a boot floppy\n"
-"        \t\tor CD to initate the boot sequence.  drakTermServ will help "
-"generate these images,\n"
-"        \t\tbased on the NIC in the client machine.\n"
+"        - Opret etherboot-disketter/CD'er:\n"
+"        \t\tDe diskløse klientmaskiner behøver enten ROM aftryksfiler på "
+"netværkskortet, en opstartsdiskette\n"
+"        \t\teller en CD for at initiere opstartssekvensen.  drakTermServ vil "
+"hjælpe til med generere disse aftryksfiler,\n"
+"        \t\tbaseret på netværkskortet i klientmaskinen.\n"
 "        \t\t\n"
-"        \t\tA basic example of creating a boot floppy for a 3Com 3c509 "
-"manually:\n"
+"        \t\tEt basiseksempel på oprettelse af en opstartsdiskette for 3Com "
+"3c509 manuelt:\n"
 "        \t\t\n"
 "        \t\tcat /usr/lib/etherboot/boot1a.bin \\\n"
 "        \t\t\t/usr/lib/etherboot/lzrom/3c509.lzrom > /dev/fd0\n"
@@ -14482,11 +14624,6 @@ msgid ""
 msgstr ""
 "ingen konfigurationsfil fundet \n"
 "klik på Vejleder eller Avanceret."
-
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "%s"
-msgstr "%s"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -16972,6 +17109,13 @@ msgid ""
 "\t\teth0, or eth1 for cable connection, \n"
 "\t\tippp+ for a isdn connection.\n"
 msgstr ""
+"Indtast venligst navnet på grænsefladen som er koblet på internettet.\n"
+"\n"
+"Eksempler:\n"
+"\t\tppp+ for modem- eller DSL-opkoblinger, \n"
+"\t\teth0 eller eth1 for kabelopkobling eller ADSL-opkobling via "
+"lokalnetværk, \n"
+"\t\tippp+ for isdn-opkobling.\n"
 
 #: ../../standalone/drakgw:1
 #, c-format
@@ -18008,12 +18152,12 @@ msgstr "Bustypen som musen er forbundet til"
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "Stepping of the cpu (sub model (generation) number)"
-msgstr ""
+msgstr "Serie af processoren (undermodel- (generations) nummer)"
 
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "Model stepping"
-msgstr ""
+msgstr "Modelserie"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -19113,6 +19257,10 @@ msgid ""
 "customize elements such as the security level, the peripherals (screen, "
 "mouse, keyboard...), the Internet connection and much more!"
 msgstr ""
+"Mandrake Linux 9.1 indeholder Mandrake Kontrolcenter, et stærkt værktøj til "
+"at tilpasse din maskin fullstændigt til den brug du har behov for. "
+"Konfigurér og tilpas elementer som sikkerhetsniveau, tilbehør (skærm, mus, "
+"tastatur), internetforbindelse og meget mere!"
 
 #: ../../share/advertising/04-configuration.pl:1
 #, c-format
@@ -19142,6 +19290,9 @@ msgid ""
 "+ has never been so easy thanks to GNU gcc 3 and the best Open Source "
 "development environments."
 msgstr ""
+"At ændre og oprette i forskellige sprog som Perl, Python, C og C++ har "
+"aldrig før været så nemt, takket være GNU gcc 3 og de bedste "
+"udviklingsmiljøer baseret på åben kildekode."
 
 #: ../../share/advertising/06-development.pl:1
 #, c-format
@@ -19197,6 +19348,10 @@ msgid ""
 "version ever: Draksec, a system security management tool, and a strong "
 "firewall are teamed up together  in order to highly reduce hacking risks."
 msgstr ""
+"MandrakeSoft har designet eksklusive værktøjer for at lave den mest sikre "
+"Linux-version nogensinde: Draksec, et systemsikkerheds-håndteringsværktøj, "
+"og en stærk brandmur bevirker tilsammen at indbrudsrisikoen reduceres "
+"betragtelig."
 
 #: ../../share/advertising/10-security.pl:1
 #, c-format
@@ -19216,6 +19371,10 @@ msgid ""
 "network (VPN) server and client, an intrusion detection system and a traffic "
 "manager."
 msgstr ""
+"Fuldfør din sikkerhedsopsætning med dette meget brugervenlige programmel som "
+"kombinerer højydelseskomponenter som brandmur, en server og klient for "
+"virutelle private netværk (VPN), et indbrudsopdagelsessystem og en "
+"trafikadministrator."
 
 #: ../../share/advertising/11-mnf.pl:1
 #, c-format
@@ -19446,69 +19605,139 @@ msgid "NFS server, SMB server, Proxy server, ssh server"
 msgstr "NFS-vært, SMB-vært, mellemvært (proxy), SSH-vært"
 
 #: ../../share/compssUsers:999
-msgid "Office"
-msgstr "Kontor"
+#, fuzzy
+msgid "Audio station"
+msgstr "Multimedie-station"
 
 #: ../../share/compssUsers:999
-msgid "Set of tools for mail, news, web, file transfer, and chat"
-msgstr "Samling af værktøjer til post, nyheder, filoverførsel og chat"
+#, fuzzy
+msgid "Sound playing/editing programs"
+msgstr "Lyd- og video-afspillere og redigeringsværktøjer"
 
 #: ../../share/compssUsers:999
-msgid "Games"
-msgstr "Spil"
+#, fuzzy
+msgid "Video station"
+msgstr "Spillemaskine"
 
 #: ../../share/compssUsers:999
-msgid "Multimedia - Graphics"
-msgstr "Multimedie - Grafik"
+#, fuzzy
+msgid "Video playing programs"
+msgstr "Lyd- og video-afspillere og redigeringsværktøjer"
 
 #: ../../share/compssUsers:999
-msgid "Graphics programs such as The Gimp"
+#, fuzzy
+msgid "Graphic station"
+msgstr "Spillemaskine"
+
+#: ../../share/compssUsers:999
+#, fuzzy
+msgid "Graphics programs"
 msgstr "Grafiske programmer som fx The Gimp"
 
 #: ../../share/compssUsers:999
-msgid "Multimedia - Sound"
-msgstr "Multimedie - Lyd"
+#, fuzzy
+msgid "Set of tools to read and send mail and news and to browse the Web"
+msgstr ""
+"Værktøjssæt til at læse samt sende post og nyheder (pine, mutt, tin..) , og "
+"til at browse på nettet"
 
-#: ../../share/compssUsers:999
-msgid "Audio-related tools: mp3 or midi players, mixers, etc"
-msgstr "Lyd-relaterede værktøjer: mp3 eller midi-afspillere, mixere o.lign."
+#~ msgid "Printer sharing"
+#~ msgstr "Printerdeling"
 
-#: ../../share/compssUsers:999
-msgid "Multimedia - Video"
-msgstr "Multimedie - Video"
+#~ msgid ""
+#~ "Your printer belongs to the group of GDI laser printers (winprinters) "
+#~ "sold by different manufacturers which uses the Zenographics ZJ-stream "
+#~ "raster format for the data sent to the printer. The driver for these "
+#~ "printers is still in a very early development stage and so it will "
+#~ "perhaps not always work properly. Especially it is possible that the "
+#~ "printer only works when you choose the A4 paper size.\n"
+#~ "\n"
+#~ "Some of these printers, as the HP LaserJet 1000, for which this driver "
+#~ "was originally created, need their firmware to be uploaded to them after "
+#~ "they are turned on. In the case of the HP LaserJet 1000 you have to "
+#~ "search the printer's Windows driver CD or your Windows partition for the "
+#~ "file \"sihp1000.img\" and upload the file to the printer with one of the "
+#~ "following commands:\n"
+#~ "\n"
+#~ "     lpr -o raw sihp1000.img\n"
+#~ "     cat sihp1000.img > /dev/usb/lp0\n"
+#~ "\n"
+#~ "The first command can be given by any normal user, the second must be "
+#~ "given as root. After having done so you can print normally.\n"
+#~ msgstr ""
+#~ "Din printer tilhører gruppen af GDI-laserprintere (winprintere) solgt af "
+#~ "forskellige producenter som bruger Zenographics ZJ-stream rasterformat "
+#~ "for data sendt til printeren. Drivprogrammet til disse printere er stadig "
+#~ "i et meget tidligt udviklingstrin og det vil således måske ikke altid "
+#~ "virke rigtigt. Især er det muligt at printeren kun virker når du har "
+#~ "valgt papirstørrelsen A4.\n"
+#~ "\n"
+#~ "Nogen af disse printere, såsom HP Laserjet 1000, som dette drivprogram "
+#~ "først blev udviklet til, behøver at deres programmel bliver lagt op på "
+#~ "dem efter at de er blevet tændt. I tilfældet med HP LaserJet 1000 skal du "
+#~ "søge i printerens Windows drivprogram-cd på din Windows-partition efter "
+#~ "filen \"sihp1000.img\" og lægge den op på printeren med en af de følgende "
+#~ "kommandoer:\n"
+#~ "\n"
+#~ "     lpr -o raw sihp1000.img\n"
+#~ "     cat sihp1000.img > /dev/usb/lp0\n"
+#~ "\n"
+#~ "Den første kommando kan gives af enhver normal bruger, den anden skal "
+#~ "gives som root. Efter at have gjort dette kan du udskrive normalt.\n"
 
-#: ../../share/compssUsers:999
-msgid "Video players and editors"
-msgstr "Videoafspillere og redigeringsværktøjer"
+#~ msgid "GDI Laser Printer using the Zenographics ZJ-Stream Format"
+#~ msgstr "GDI Laserprinter med Zenographics ZJ-Stream-Format"
 
-#: ../../share/compssUsers:999
-msgid "Multimedia - CD Burning"
-msgstr "Multimedie - CD-brænding"
+#~ msgid "%s"
+#~ msgstr "%s"
 
-#: ../../share/compssUsers:999
-msgid "Tools to create and burn CD's"
-msgstr "Værktøjer til at skabe og brænde CD-er"
+#~ msgid "Office"
+#~ msgstr "Kontor"
 
-#: ../../share/compssUsers:999
-msgid "More Graphical Desktops (Gnome, IceWM)"
-msgstr "Flere grafiske miljøer (Gnome, IceWM)"
+#~ msgid "Set of tools for mail, news, web, file transfer, and chat"
+#~ msgstr "Samling af værktøjer til post, nyheder, filoverførsel og chat"
 
-#: ../../share/compssUsers:999
-msgid "Gnome, Icewm, Window Maker, Enlightenment, Fvwm, etc"
-msgstr "Gnome, Icewm, Window Maker, Enlightenment, Fvwm, o.lign."
+#~ msgid "Games"
+#~ msgstr "Spil"
 
-#: ../../share/compssUsers:999
-msgid "Personal Information Management"
-msgstr "Personlig informationshåndtering"
+#~ msgid "Multimedia - Graphics"
+#~ msgstr "Multimedie - Grafik"
 
-#: ../../share/compssUsers:999
-msgid "Tools for your Palm Pilot or your Visor"
-msgstr "Værktøjer til Palm Pilot og Visor"
+#~ msgid "Multimedia - Sound"
+#~ msgstr "Multimedie - Lyd"
 
-#: ../../share/compssUsers:999
-msgid "Personal Finance"
-msgstr "Personlig økonomi"
+#~ msgid "Audio-related tools: mp3 or midi players, mixers, etc"
+#~ msgstr "Lyd-relaterede værktøjer: mp3 eller midi-afspillere, mixere o.lign."
 
-#: ../../share/compssUsers:999
-msgid "Programs to manage your finances, such as gnucash"
-msgstr "Programmer til at håndtere din økonomi, som fx gnucash"
+#~ msgid "Multimedia - Video"
+#~ msgstr "Multimedie - Video"
+
+#~ msgid "Video players and editors"
+#~ msgstr "Videoafspillere og redigeringsværktøjer"
+
+#~ msgid "Multimedia - CD Burning"
+#~ msgstr "Multimedie - CD-brænding"
+
+#~ msgid "Tools to create and burn CD's"
+#~ msgstr "Værktøjer til at skabe og brænde CD-er"
+
+#~ msgid "More Graphical Desktops (Gnome, IceWM)"
+#~ msgstr "Flere grafiske miljøer (Gnome, IceWM)"
+
+#~ msgid "Gnome, Icewm, Window Maker, Enlightenment, Fvwm, etc"
+#~ msgstr "Gnome, Icewm, Window Maker, Enlightenment, Fvwm, o.lign."
+
+#~ msgid "Personal Information Management"
+#~ msgstr "Personlig informationshåndtering"
+
+#~ msgid "Tools for your Palm Pilot or your Visor"
+#~ msgstr "Værktøjer til Palm Pilot og Visor"
+
+#~ msgid "Personal Finance"
+#~ msgstr "Personlig økonomi"
+
+#~ msgid "Programs to manage your finances, such as gnucash"
+#~ msgstr "Programmer til at håndtere din økonomi, som fx gnucash"
+
+#~ msgid "Findish"
+#~ msgstr "Finsk"

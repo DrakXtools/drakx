@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX\n"
-"POT-Creation-Date: 2003-03-09 13:01+0100\n"
+"POT-Creation-Date: 2003-03-12 14:29+0100\n"
 "PO-Revision-Date: 2001-09-10 14:24GMT+7\n"
 "Last-Translator: Wachara Chinsettawong <wachara@yahoo.com>\n"
 "Language-Team: Thai <th@li.org>\n"
@@ -9592,11 +9592,6 @@ msgstr "คอนฟิกระบบเน็ตเวิร์ก"
 
 #: ../../printer/printerdrake.pm:1
 #, fuzzy, c-format
-msgid "Printer sharing"
-msgstr "เครื่องพิมพ์"
-
-#: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
 msgid "CUPS configuration"
 msgstr "การปรับแต่ง LAN"
 
@@ -9953,7 +9948,7 @@ msgstr "ระบบเน็ตเวิร์กกำลังจะหยุ
 #, c-format
 msgid ""
 "To know about the options available for the current printer read either the "
-"list shown below or click on the \"Print option list\" button.%s%s\n"
+"list shown below or click on the \"Print option list\" button.%s%s%s\n"
 "\n"
 msgstr ""
 
@@ -10159,31 +10154,7 @@ msgstr ""
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
-msgid ""
-"Your printer belongs to the group of GDI laser printers (winprinters) sold "
-"by different manufacturers which uses the Zenographics ZJ-stream raster "
-"format for the data sent to the printer. The driver for these printers is "
-"still in a very early development stage and so it will perhaps not always "
-"work properly. Especially it is possible that the printer only works when "
-"you choose the A4 paper size.\n"
-"\n"
-"Some of these printers, as the HP LaserJet 1000, for which this driver was "
-"originally created, need their firmware to be uploaded to them after they "
-"are turned on. In the case of the HP LaserJet 1000 you have to search the "
-"printer's Windows driver CD or your Windows partition for the file "
-"\"sihp1000.img\" and upload the file to the printer with one of the "
-"following commands:\n"
-"\n"
-"     lpr -o raw sihp1000.img\n"
-"     cat sihp1000.img > /dev/usb/lp0\n"
-"\n"
-"The first command can be given by any normal user, the second must be given "
-"as root. After having done so you can print normally.\n"
-msgstr ""
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "GDI Laser Printer using the Zenographics ZJ-Stream Format"
+msgid "Firmware-Upload for HP LaserJet 1000"
 msgstr ""
 
 #: ../../printer/printerdrake.pm:1
@@ -10330,6 +10301,11 @@ msgstr ""
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
+msgid "Checking device and configuring HPOJ..."
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
 msgid "Photo memory card access on your HP multi-function device"
 msgstr ""
 
@@ -10347,11 +10323,6 @@ msgstr "กำลังติดตั้งแพ็คเก็จ %s"
 #, fuzzy, c-format
 msgid "Installing SANE packages..."
 msgstr "กำลังติดตั้งแพ็คเก็จ %s"
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "Checking device and configuring HPOJ..."
-msgstr ""
 
 #: ../../printer/printerdrake.pm:1
 #, fuzzy, c-format
@@ -11083,6 +11054,11 @@ msgstr "ชื่อของเครื่องพิมพ์"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
+msgid "If no port is given, 631 will be taken as default."
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
 msgid "Enter IP address and port of the host whose printers you want to use."
 msgstr ""
 
@@ -11193,6 +11169,23 @@ msgstr "Boot Style Configuration"
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid ""
+"Turning on this allows to print plain text files in japanese language. Only "
+"use this function if you really want to print text in japanese, if it is "
+"activated you cannot print accentuated characters in latin fonts any more "
+"and you will not be able to adjust the margins, the character size, etc. "
+"This setting only affects printers defined on this machine. If you want to "
+"print japanese text on a printer set up on a remote machine, you have to "
+"activate this function on that remote machine."
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid "Japanese text printing mode"
+msgstr "คอนฟิกระบบเน็ตเวิร์ก"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid ""
 "To get access to printers on remote CUPS servers in your local network you "
 "only need to turn on the \"Automatically find available printers on remote "
 "machines\" option; the CUPS servers inform your machine automatically about "
@@ -11254,7 +11247,7 @@ msgstr ""
 
 #: ../../printer/printerdrake.pm:1
 #, fuzzy, c-format
-msgid "CUPS printer sharing configuration"
+msgid "CUPS printer configuration"
 msgstr "การคอนฟิก Internet"
 
 #: ../../printer/printerdrake.pm:1
@@ -11282,6 +11275,18 @@ msgstr "เครื่องพิมพ์เชื่อมต่ออย่
 #, c-format
 msgid "Select Printer Connection"
 msgstr "เลือกการเชื่อมต่อกับเครื่องพิมพ์"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid ""
+"The HP LaserJet 1000 needs its firmware to be uploaded after being turned "
+"on. Download the Windows driver package from the HP web site (the firmware "
+"on the printer's CD does not work) and extract the firmware file from it by "
+"uncompresing the self-extracting '.exe' file with the 'unzip' utility and "
+"searching for the 'sihp1000.img' file. Copy this file into the '/etc/"
+"printer' directory. There it will be found by the automatic uploader script "
+"and uploaded whenever the printer is connected and turned on.\n"
+msgstr ""
 
 #: ../../security/help.pm:1
 #, c-format
@@ -12565,11 +12570,6 @@ msgstr ""
 msgid ""
 "No configuration file found \n"
 "please click Wizard or Advanced."
-msgstr ""
-
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "%s"
 msgstr ""
 
 #: ../../standalone/drakbackup:1
@@ -17154,76 +17154,75 @@ msgstr ""
 
 #: ../../share/compssUsers:999
 #, fuzzy
-msgid "Office"
-msgstr "ดี"
+msgid "Audio station"
+msgstr "Multimedia - เขียน CD "
 
 #: ../../share/compssUsers:999
-msgid "Set of tools for mail, news, web, file transfer, and chat"
-msgstr ""
-
-#: ../../share/compssUsers:999
-msgid "Games"
+msgid "Sound playing/editing programs"
 msgstr ""
 
 #: ../../share/compssUsers:999
 #, fuzzy
-msgid "Multimedia - Graphics"
-msgstr "Multimedia - เขียน CD "
+msgid "Video station"
+msgstr "Workstation ที่ทำงาน"
 
 #: ../../share/compssUsers:999
-msgid "Graphics programs such as The Gimp"
+msgid "Video playing programs"
 msgstr ""
 
 #: ../../share/compssUsers:999
 #, fuzzy
-msgid "Multimedia - Sound"
-msgstr "Multimedia - เขียน CD "
-
-#: ../../share/compssUsers:999
-msgid "Audio-related tools: mp3 or midi players, mixers, etc"
-msgstr ""
+msgid "Graphic station"
+msgstr "Workstation ที่ทำงาน"
 
 #: ../../share/compssUsers:999
 #, fuzzy
-msgid "Multimedia - Video"
-msgstr "Multimedia - เขียน CD "
-
-#: ../../share/compssUsers:999
-msgid "Video players and editors"
-msgstr ""
-
-#: ../../share/compssUsers:999
-msgid "Multimedia - CD Burning"
-msgstr "Multimedia - เขียน CD "
-
-#: ../../share/compssUsers:999
-msgid "Tools to create and burn CD's"
-msgstr "เครื่องมือในการทำ CD"
+msgid "Graphics programs"
+msgstr "กราฟฟิคการ์ด: %s"
 
 #: ../../share/compssUsers:999
 #, fuzzy
-msgid "More Graphical Desktops (Gnome, IceWM)"
-msgstr "Graphical Desktops อื่นๆ"
+msgid "Set of tools to read and send mail and news and to browse the Web"
+msgstr "เครื่องมือในการอ่านและส่ง mail และ news (pine, mutt, tin..) และท่องอินเตอร์เน็ต"
 
-#: ../../share/compssUsers:999
-msgid "Gnome, Icewm, Window Maker, Enlightenment, Fvwm, etc"
-msgstr ""
+#, fuzzy
+#~ msgid "Printer sharing"
+#~ msgstr "เครื่องพิมพ์"
 
-#: ../../share/compssUsers:999
-msgid "Personal Information Management"
-msgstr ""
+#, fuzzy
+#~ msgid "Office"
+#~ msgstr "ดี"
 
-#: ../../share/compssUsers:999
-msgid "Tools for your Palm Pilot or your Visor"
-msgstr "เครื่องมือสำหรับ Palm Pilot หรือ Visor"
+#, fuzzy
+#~ msgid "Multimedia - Graphics"
+#~ msgstr "Multimedia - เขียน CD "
 
-#: ../../share/compssUsers:999
-msgid "Personal Finance"
-msgstr "การเงินส่วนตัว"
+#, fuzzy
+#~ msgid "Multimedia - Sound"
+#~ msgstr "Multimedia - เขียน CD "
 
-#: ../../share/compssUsers:999
-msgid "Programs to manage your finances, such as gnucash"
-msgstr "โปรแกรมที่ช่วยจัดการเรื่องการเงิน เช่น gnucash"
+#, fuzzy
+#~ msgid "Multimedia - Video"
+#~ msgstr "Multimedia - เขียน CD "
+
+#~ msgid "Multimedia - CD Burning"
+#~ msgstr "Multimedia - เขียน CD "
+
+#~ msgid "Tools to create and burn CD's"
+#~ msgstr "เครื่องมือในการทำ CD"
+
+#, fuzzy
+#~ msgid "More Graphical Desktops (Gnome, IceWM)"
+#~ msgstr "Graphical Desktops อื่นๆ"
+
+#~ msgid "Tools for your Palm Pilot or your Visor"
+#~ msgstr "เครื่องมือสำหรับ Palm Pilot หรือ Visor"
+
+#~ msgid "Personal Finance"
+#~ msgstr "การเงินส่วนตัว"
+
+#~ msgid "Programs to manage your finances, such as gnucash"
+#~ msgstr "โปรแกรมที่ช่วยจัดการเรื่องการเงิน เช่น gnucash"
 
 #~ msgid "no network card found"
 #~ msgstr "ไม่พบการ์ดเน็ตเวิร์ก"

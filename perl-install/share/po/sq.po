@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX for MDK 8.1\n"
-"POT-Creation-Date: 2003-03-09 13:01+0100\n"
+"POT-Creation-Date: 2003-03-12 14:29+0100\n"
 "PO-Revision-Date: 2003-01-20 13:35+0200\n"
 "Last-Translator: Naim Daka <naim70@freesurf.ch>\n"
 "Language-Team: Albanian <LL@li.org>\n"
@@ -10880,11 +10880,6 @@ msgstr "Ndërroje sistemin e stampimit"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
-msgid "Printer sharing"
-msgstr "Shpërndarja e Stampuesit"
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
 msgid "CUPS configuration"
 msgstr "Konfigurim CUPS"
 
@@ -11324,10 +11319,10 @@ msgid "Printing/Scanning/Photo Cards on \"%s\""
 msgstr "Stampim/Skanim/Kartel Fotografike në \"%s\""
 
 #: ../../printer/printerdrake.pm:1
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "To know about the options available for the current printer read either the "
-"list shown below or click on the \"Print option list\" button.%s%s\n"
+"list shown below or click on the \"Print option list\" button.%s%s%s\n"
 "\n"
 msgstr ""
 "Për ta përfituar listën e parametrave në disponibilitet për stampuesin e "
@@ -11582,52 +11577,8 @@ msgstr ""
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
-msgid ""
-"Your printer belongs to the group of GDI laser printers (winprinters) sold "
-"by different manufacturers which uses the Zenographics ZJ-stream raster "
-"format for the data sent to the printer. The driver for these printers is "
-"still in a very early development stage and so it will perhaps not always "
-"work properly. Especially it is possible that the printer only works when "
-"you choose the A4 paper size.\n"
-"\n"
-"Some of these printers, as the HP LaserJet 1000, for which this driver was "
-"originally created, need their firmware to be uploaded to them after they "
-"are turned on. In the case of the HP LaserJet 1000 you have to search the "
-"printer's Windows driver CD or your Windows partition for the file "
-"\"sihp1000.img\" and upload the file to the printer with one of the "
-"following commands:\n"
-"\n"
-"     lpr -o raw sihp1000.img\n"
-"     cat sihp1000.img > /dev/usb/lp0\n"
-"\n"
-"The first command can be given by any normal user, the second must be given "
-"as root. After having done so you can print normally.\n"
+msgid "Firmware-Upload for HP LaserJet 1000"
 msgstr ""
-"Stampuesi i juaj i përketë grupit të stampuesve lazer GDI (me përcaktim të "
-"winprinters) të shitur nga uzina të ndryshme, dhe të cilët i përdorin forma "
-"të trameve Zenographics ZJ-stream, për të dhënat e dërguara në stampues. "
-"Piloti për këta stampues është ende në gjendje punimi dhe është e mundur që "
-"nuk  do të funksionoj në mënyrë të duhur. Më së shpeshti, një formë tjetër "
-"A4 për letër të zgjedhur mund të jetë një problem për të.\n"
-"\n"
-"Disa nga këta stampues, si për shembull HP LaserJet 1000, për të cilët ky "
-"pilotë është i shkruar me origjinën e vetë, kanë nevojë për një ndezje që të "
-"kenë mundësi të ngarkojnë kodin e tyre në memori. Në këtë rast të HP "
-"LaserJet 1000, ju duhet ta kërkoni skedaren \"sihp1000.img\" e cila është e "
-"furnizuar me CD-në e stampuesit apo në ndarjen tuaj Windows, dhe dërgojeni, "
-"këtë skedare, në memori të stampuesit me një nga urdhërat vijues:\n"
-"\n"
-"     lpr -o raw sihp1000.img\n"
-"     cat sihp1000.img > /dev/usb/lp0\n"
-"\n"
-"Urdhëri i parë mund të niset nga një përdorues normal, i dyti duhet të jeni "
-"përdorues administrator (root). Mandej ju mund të stamponi normalisht me "
-"të.\n"
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "GDI Laser Printer using the Zenographics ZJ-Stream Format"
-msgstr "Stampues lazer GDI me Formë Zenographics ZJ-Stream"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -11815,6 +11766,11 @@ msgstr "Krijim i një porte të lirë për stampues CUPS..."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
+msgid "Checking device and configuring HPOJ..."
+msgstr "Verifikim i mjetit dhe konfigurimi i HPOJ..."
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
 msgid "Photo memory card access on your HP multi-function device"
 msgstr ""
 "Memori fotografike me kartelë hyrëse në mjetin tuaj multi-funksionues HP"
@@ -11833,11 +11789,6 @@ msgstr "Intalim i pakove të mtools..."
 #, c-format
 msgid "Installing SANE packages..."
 msgstr "Intalim i pakove SANE..."
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "Checking device and configuring HPOJ..."
-msgstr "Verifikim i mjetit dhe konfigurimi i HPOJ..."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -12724,6 +12675,11 @@ msgstr "Emri i Serverit NCP mungon!"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
+msgid "If no port is given, 631 will be taken as default."
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
 msgid "Enter IP address and port of the host whose printers you want to use."
 msgstr ""
 
@@ -12850,6 +12806,23 @@ msgstr "Korigjues automatik i konfigurimit CUPS"
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid ""
+"Turning on this allows to print plain text files in japanese language. Only "
+"use this function if you really want to print text in japanese, if it is "
+"activated you cannot print accentuated characters in latin fonts any more "
+"and you will not be able to adjust the margins, the character size, etc. "
+"This setting only affects printers defined on this machine. If you want to "
+"print japanese text on a printer set up on a remote machine, you have to "
+"activate this function on that remote machine."
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid "Japanese text printing mode"
+msgstr "Ndërroje sistemin e stampimit"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid ""
 "To get access to printers on remote CUPS servers in your local network you "
 "only need to turn on the \"Automatically find available printers on remote "
 "machines\" option; the CUPS servers inform your machine automatically about "
@@ -12914,8 +12887,8 @@ msgstr ""
 "duhet të jenë me hyrje në makinën e largët dhe nga cila makinë e largët."
 
 #: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "CUPS printer sharing configuration"
+#, fuzzy, c-format
+msgid "CUPS printer configuration"
 msgstr "Konfigurim i stampuesit shërndarës CUPS"
 
 #: ../../printer/printerdrake.pm:1
@@ -12943,6 +12916,18 @@ msgstr "Si është i kyqur stampuesi?"
 #, c-format
 msgid "Select Printer Connection"
 msgstr "Zgjedheni tipin e Kyqjes së Stampuesit"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid ""
+"The HP LaserJet 1000 needs its firmware to be uploaded after being turned "
+"on. Download the Windows driver package from the HP web site (the firmware "
+"on the printer's CD does not work) and extract the firmware file from it by "
+"uncompresing the self-extracting '.exe' file with the 'unzip' utility and "
+"searching for the 'sihp1000.img' file. Copy this file into the '/etc/"
+"printer' directory. There it will be found by the automatic uploader script "
+"and uploaded whenever the printer is connected and turned on.\n"
+msgstr ""
 
 #: ../../security/help.pm:1
 #, c-format
@@ -14567,11 +14552,6 @@ msgid ""
 msgstr ""
 "Asnjë konfigurim i gjetur për skedare \n"
 "ju lutemi klikoni mbi Asistent ose Vazhdo Para"
-
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "%s"
-msgstr ""
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -19594,73 +19574,140 @@ msgid "NFS server, SMB server, Proxy server, ssh server"
 msgstr "Server NFS, server SMB, server Proxy, server ssh"
 
 #: ../../share/compssUsers:999
-msgid "Office"
-msgstr "Tryezë"
+#, fuzzy
+msgid "Audio station"
+msgstr "Stacion Multimedia"
 
 #: ../../share/compssUsers:999
-msgid "Set of tools for mail, news, web, file transfer, and chat"
-msgstr ""
-"Përdorues të veglave për letra, lajme, web, trasferim të skedareve dhe chat"
+#, fuzzy
+msgid "Sound playing/editing programs"
+msgstr "Programe për lojëra/botime të zërit dhe videos"
 
 #: ../../share/compssUsers:999
-msgid "Games"
-msgstr "Lojërat"
+#, fuzzy
+msgid "Video station"
+msgstr "Stacion Lojërash"
 
 #: ../../share/compssUsers:999
-msgid "Multimedia - Graphics"
-msgstr "Multimedia - Grafikët"
+#, fuzzy
+msgid "Video playing programs"
+msgstr "Programe për lojëra/botime të zërit dhe videos"
 
 #: ../../share/compssUsers:999
-msgid "Graphics programs such as The Gimp"
+#, fuzzy
+msgid "Graphic station"
+msgstr "Stacion Lojërash"
+
+#: ../../share/compssUsers:999
+#, fuzzy
+msgid "Graphics programs"
 msgstr "Programe grafike sikur Gimp"
 
 #: ../../share/compssUsers:999
-msgid "Multimedia - Sound"
-msgstr "Multimedia - Zëri"
+#, fuzzy
+msgid "Set of tools to read and send mail and news and to browse the Web"
+msgstr ""
+"Përgjithësia a veglave për leximin, dërgimin e letrave elektronike të "
+"lajmeve (pine, mutt, tin...) dhe për të lundruar në internet."
 
-#: ../../share/compssUsers:999
-msgid "Audio-related tools: mp3 or midi players, mixers, etc"
-msgstr "Vegla audio: lexues mp3 apo midi, mikserë, etj."
+#~ msgid "Printer sharing"
+#~ msgstr "Shpërndarja e Stampuesit"
 
-#: ../../share/compssUsers:999
-msgid "Multimedia - Video"
-msgstr "Multimedia - Video"
+#~ msgid ""
+#~ "Your printer belongs to the group of GDI laser printers (winprinters) "
+#~ "sold by different manufacturers which uses the Zenographics ZJ-stream "
+#~ "raster format for the data sent to the printer. The driver for these "
+#~ "printers is still in a very early development stage and so it will "
+#~ "perhaps not always work properly. Especially it is possible that the "
+#~ "printer only works when you choose the A4 paper size.\n"
+#~ "\n"
+#~ "Some of these printers, as the HP LaserJet 1000, for which this driver "
+#~ "was originally created, need their firmware to be uploaded to them after "
+#~ "they are turned on. In the case of the HP LaserJet 1000 you have to "
+#~ "search the printer's Windows driver CD or your Windows partition for the "
+#~ "file \"sihp1000.img\" and upload the file to the printer with one of the "
+#~ "following commands:\n"
+#~ "\n"
+#~ "     lpr -o raw sihp1000.img\n"
+#~ "     cat sihp1000.img > /dev/usb/lp0\n"
+#~ "\n"
+#~ "The first command can be given by any normal user, the second must be "
+#~ "given as root. After having done so you can print normally.\n"
+#~ msgstr ""
+#~ "Stampuesi i juaj i përketë grupit të stampuesve lazer GDI (me përcaktim "
+#~ "të winprinters) të shitur nga uzina të ndryshme, dhe të cilët i përdorin "
+#~ "forma të trameve Zenographics ZJ-stream, për të dhënat e dërguara në "
+#~ "stampues. Piloti për këta stampues është ende në gjendje punimi dhe është "
+#~ "e mundur që nuk  do të funksionoj në mënyrë të duhur. Më së shpeshti, një "
+#~ "formë tjetër A4 për letër të zgjedhur mund të jetë një problem për të.\n"
+#~ "\n"
+#~ "Disa nga këta stampues, si për shembull HP LaserJet 1000, për të cilët ky "
+#~ "pilotë është i shkruar me origjinën e vetë, kanë nevojë për një ndezje që "
+#~ "të kenë mundësi të ngarkojnë kodin e tyre në memori. Në këtë rast të HP "
+#~ "LaserJet 1000, ju duhet ta kërkoni skedaren \"sihp1000.img\" e cila është "
+#~ "e furnizuar me CD-në e stampuesit apo në ndarjen tuaj Windows, dhe "
+#~ "dërgojeni, këtë skedare, në memori të stampuesit me një nga urdhërat "
+#~ "vijues:\n"
+#~ "\n"
+#~ "     lpr -o raw sihp1000.img\n"
+#~ "     cat sihp1000.img > /dev/usb/lp0\n"
+#~ "\n"
+#~ "Urdhëri i parë mund të niset nga një përdorues normal, i dyti duhet të "
+#~ "jeni përdorues administrator (root). Mandej ju mund të stamponi "
+#~ "normalisht me të.\n"
 
-#: ../../share/compssUsers:999
-msgid "Video players and editors"
-msgstr "Lexues dhe botues për video"
+#~ msgid "GDI Laser Printer using the Zenographics ZJ-Stream Format"
+#~ msgstr "Stampues lazer GDI me Formë Zenographics ZJ-Stream"
 
-#: ../../share/compssUsers:999
-msgid "Multimedia - CD Burning"
-msgstr "Multimedia - Gdhendës CD"
+#~ msgid "Office"
+#~ msgstr "Tryezë"
 
-#: ../../share/compssUsers:999
-msgid "Tools to create and burn CD's"
-msgstr "Vegla për të krijuar dhe gdhendur CD'të"
+#~ msgid "Set of tools for mail, news, web, file transfer, and chat"
+#~ msgstr ""
+#~ "Përdorues të veglave për letra, lajme, web, trasferim të skedareve dhe "
+#~ "chat"
 
-#: ../../share/compssUsers:999
-msgid "More Graphical Desktops (Gnome, IceWM)"
-msgstr "Më shumë Grafikë në Tryezë (Gnome, IceWM)"
+#~ msgid "Games"
+#~ msgstr "Lojërat"
 
-#: ../../share/compssUsers:999
-msgid "Gnome, Icewm, Window Maker, Enlightenment, Fvwm, etc"
-msgstr "Gnome, Icewm, Window Maker, Enlightenment, Fvwm, etj."
+#~ msgid "Multimedia - Graphics"
+#~ msgstr "Multimedia - Grafikët"
 
-#: ../../share/compssUsers:999
-msgid "Personal Information Management"
-msgstr "Qeverisje e Infomacioneve Personale"
+#~ msgid "Multimedia - Sound"
+#~ msgstr "Multimedia - Zëri"
 
-#: ../../share/compssUsers:999
-msgid "Tools for your Palm Pilot or your Visor"
-msgstr "Vegla për Palm Pilotin tuaj apo Visor"
+#~ msgid "Audio-related tools: mp3 or midi players, mixers, etc"
+#~ msgstr "Vegla audio: lexues mp3 apo midi, mikserë, etj."
 
-#: ../../share/compssUsers:999
-msgid "Personal Finance"
-msgstr "Financat Personale"
+#~ msgid "Multimedia - Video"
+#~ msgstr "Multimedia - Video"
 
-#: ../../share/compssUsers:999
-msgid "Programs to manage your finances, such as gnucash"
-msgstr "Programe për të qeverisur financat tuaja, sikur gnucash"
+#~ msgid "Video players and editors"
+#~ msgstr "Lexues dhe botues për video"
+
+#~ msgid "Multimedia - CD Burning"
+#~ msgstr "Multimedia - Gdhendës CD"
+
+#~ msgid "Tools to create and burn CD's"
+#~ msgstr "Vegla për të krijuar dhe gdhendur CD'të"
+
+#~ msgid "More Graphical Desktops (Gnome, IceWM)"
+#~ msgstr "Më shumë Grafikë në Tryezë (Gnome, IceWM)"
+
+#~ msgid "Gnome, Icewm, Window Maker, Enlightenment, Fvwm, etc"
+#~ msgstr "Gnome, Icewm, Window Maker, Enlightenment, Fvwm, etj."
+
+#~ msgid "Personal Information Management"
+#~ msgstr "Qeverisje e Infomacioneve Personale"
+
+#~ msgid "Tools for your Palm Pilot or your Visor"
+#~ msgstr "Vegla për Palm Pilotin tuaj apo Visor"
+
+#~ msgid "Personal Finance"
+#~ msgstr "Financat Personale"
+
+#~ msgid "Programs to manage your finances, such as gnucash"
+#~ msgstr "Programe për të qeverisur financat tuaja, sikur gnucash"
 
 #~ msgid "no network card found"
 #~ msgstr "asnjë kartelë e rrjetit e identifikuar"

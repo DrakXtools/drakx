@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX-mt\n"
-"POT-Creation-Date: 2003-03-09 13:01+0100\n"
+"POT-Creation-Date: 2003-03-12 14:29+0100\n"
 "PO-Revision-Date: 2002-09-12 17:24CET\n"
 "Last-Translator: Ramon Casha <ramon.casha@linux.org.mt>\n"
 "Language-Team: Maltese <mt@li.org>\n"
@@ -10432,11 +10432,6 @@ msgid "Change the printing system"
 msgstr "Ibdel is-sistema tal-ipprintjar"
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
-msgid "Printer sharing"
-msgstr "Qsim ta' fajls"
-
-#: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "CUPS configuration"
 msgstr "Konfigurazzjoni CUPS"
@@ -10863,10 +10858,10 @@ msgid "Printing/Scanning/Photo Cards on \"%s\""
 msgstr "Kards ta' printjar/skannjar/fotografija fuq \"%s\""
 
 #: ../../printer/printerdrake.pm:1
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "To know about the options available for the current printer read either the "
-"list shown below or click on the \"Print option list\" button.%s%s\n"
+"list shown below or click on the \"Print option list\" button.%s%s%s\n"
 "\n"
 msgstr ""
 "Biex tikseb lista ta' għażliet disponibbli għal dan il-printer, aqra l-lista "
@@ -11117,32 +11112,8 @@ msgstr ""
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
-msgid ""
-"Your printer belongs to the group of GDI laser printers (winprinters) sold "
-"by different manufacturers which uses the Zenographics ZJ-stream raster "
-"format for the data sent to the printer. The driver for these printers is "
-"still in a very early development stage and so it will perhaps not always "
-"work properly. Especially it is possible that the printer only works when "
-"you choose the A4 paper size.\n"
-"\n"
-"Some of these printers, as the HP LaserJet 1000, for which this driver was "
-"originally created, need their firmware to be uploaded to them after they "
-"are turned on. In the case of the HP LaserJet 1000 you have to search the "
-"printer's Windows driver CD or your Windows partition for the file "
-"\"sihp1000.img\" and upload the file to the printer with one of the "
-"following commands:\n"
-"\n"
-"     lpr -o raw sihp1000.img\n"
-"     cat sihp1000.img > /dev/usb/lp0\n"
-"\n"
-"The first command can be given by any normal user, the second must be given "
-"as root. After having done so you can print normally.\n"
+msgid "Firmware-Upload for HP LaserJet 1000"
 msgstr ""
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "GDI Laser Printer using the Zenographics ZJ-Stream Format"
-msgstr "GDI Laser Printer li juża Zenographics ZJ-Stream Format"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -11325,6 +11296,11 @@ msgstr ""
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
+msgid "Checking device and configuring HPOJ..."
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
 msgid "Photo memory card access on your HP multi-function device"
 msgstr ""
 
@@ -11342,11 +11318,6 @@ msgstr "Qed ninstalla pakketti..."
 #, fuzzy, c-format
 msgid "Installing SANE packages..."
 msgstr "Qed ninstalla pakketti..."
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "Checking device and configuring HPOJ..."
-msgstr ""
 
 #: ../../printer/printerdrake.pm:1
 #, fuzzy, c-format
@@ -12228,6 +12199,11 @@ msgstr "Isem tas-server NCP nieqes!"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
+msgid "If no port is given, 631 will be taken as default."
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
 msgid "Enter IP address and port of the host whose printers you want to use."
 msgstr ""
 
@@ -12338,6 +12314,23 @@ msgstr "Konfigurazzjoni CUPS awtomatika"
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid ""
+"Turning on this allows to print plain text files in japanese language. Only "
+"use this function if you really want to print text in japanese, if it is "
+"activated you cannot print accentuated characters in latin fonts any more "
+"and you will not be able to adjust the margins, the character size, etc. "
+"This setting only affects printers defined on this machine. If you want to "
+"print japanese text on a printer set up on a remote machine, you have to "
+"activate this function on that remote machine."
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid "Japanese text printing mode"
+msgstr "Ibdel is-sistema tal-ipprintjar"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid ""
 "To get access to printers on remote CUPS servers in your local network you "
 "only need to turn on the \"Automatically find available printers on remote "
 "machines\" option; the CUPS servers inform your machine automatically about "
@@ -12399,7 +12392,7 @@ msgstr ""
 
 #: ../../printer/printerdrake.pm:1
 #, fuzzy, c-format
-msgid "CUPS printer sharing configuration"
+msgid "CUPS printer configuration"
 msgstr "Konfigurazzjoni OKI WinPrinter"
 
 #: ../../printer/printerdrake.pm:1
@@ -12428,6 +12421,18 @@ msgstr "Kif inhu mqabbad il-printer?"
 #, c-format
 msgid "Select Printer Connection"
 msgstr "Agħżel konnessjoni tal-printer"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid ""
+"The HP LaserJet 1000 needs its firmware to be uploaded after being turned "
+"on. Download the Windows driver package from the HP web site (the firmware "
+"on the printer's CD does not work) and extract the firmware file from it by "
+"uncompresing the self-extracting '.exe' file with the 'unzip' utility and "
+"searching for the 'sihp1000.img' file. Copy this file into the '/etc/"
+"printer' directory. There it will be found by the automatic uploader script "
+"and uploaded whenever the printer is connected and turned on.\n"
+msgstr ""
 
 #: ../../security/help.pm:1
 #, c-format
@@ -13904,11 +13909,6 @@ msgid ""
 msgstr ""
 "Ebda fajl ta' konfigurazzjoni ma nstab.\n"
 "Agħżel Saħħar jew Avvanzat."
-
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "%s"
-msgstr ""
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -18817,73 +18817,97 @@ msgid "NFS server, SMB server, Proxy server, ssh server"
 msgstr "Servers NFS, SMB, Proxy, ssh"
 
 #: ../../share/compssUsers:999
-msgid "Office"
-msgstr "Uffiċċju"
+#, fuzzy
+msgid "Audio station"
+msgstr "Multimedja"
 
 #: ../../share/compssUsers:999
-msgid "Set of tools for mail, news, web, file transfer, and chat"
-msgstr ""
-"Sett ta' programmi għal imejl, newsgroups, web, trasferiment ta' fajls u chat"
+#, fuzzy
+msgid "Sound playing/editing programs"
+msgstr "Programmi għad-daqq u editjar ta' awdjo u video"
 
 #: ../../share/compssUsers:999
-msgid "Games"
+#, fuzzy
+msgid "Video station"
 msgstr "Logħob"
 
 #: ../../share/compssUsers:999
-msgid "Multimedia - Graphics"
-msgstr "Multimedja - grafika"
+#, fuzzy
+msgid "Video playing programs"
+msgstr "Programmi għad-daqq u editjar ta' awdjo u video"
 
 #: ../../share/compssUsers:999
-msgid "Graphics programs such as The Gimp"
+#, fuzzy
+msgid "Graphic station"
+msgstr "Logħob"
+
+#: ../../share/compssUsers:999
+#, fuzzy
+msgid "Graphics programs"
 msgstr "Programmi grafiċi bħal GIMP"
 
 #: ../../share/compssUsers:999
-msgid "Multimedia - Sound"
-msgstr "Multimedja - awdjo"
+#, fuzzy
+msgid "Set of tools to read and send mail and news and to browse the Web"
+msgstr ""
+"Sett għodda biex taqra u tibgħat imejl u \"news\", u biex tibbrawżja l-web"
 
-#: ../../share/compssUsers:999
-msgid "Audio-related tools: mp3 or midi players, mixers, etc"
-msgstr "Għodda relatati mal-awdjo: biex iddoqq mp3 u midi, miksers, eċċ"
+#, fuzzy
+#~ msgid "Printer sharing"
+#~ msgstr "Qsim ta' fajls"
 
-#: ../../share/compssUsers:999
-msgid "Multimedia - Video"
-msgstr "Multimedja - video"
+#~ msgid "GDI Laser Printer using the Zenographics ZJ-Stream Format"
+#~ msgstr "GDI Laser Printer li juża Zenographics ZJ-Stream Format"
 
-#: ../../share/compssUsers:999
-msgid "Video players and editors"
-msgstr "Programmi għad-daqq u editjar ta' video"
+#~ msgid "Office"
+#~ msgstr "Uffiċċju"
 
-#: ../../share/compssUsers:999
-msgid "Multimedia - CD Burning"
-msgstr "Multimedja - Ħruq ta' CDs"
+#~ msgid "Set of tools for mail, news, web, file transfer, and chat"
+#~ msgstr ""
+#~ "Sett ta' programmi għal imejl, newsgroups, web, trasferiment ta' fajls u "
+#~ "chat"
 
-#: ../../share/compssUsers:999
-msgid "Tools to create and burn CD's"
-msgstr "Għodda biex toħloq u taħraq CDs"
+#~ msgid "Games"
+#~ msgstr "Logħob"
 
-#: ../../share/compssUsers:999
-msgid "More Graphical Desktops (Gnome, IceWM)"
-msgstr "Desktops grafiċi oħrajn (Gnome, IceWM)"
+#~ msgid "Multimedia - Graphics"
+#~ msgstr "Multimedja - grafika"
 
-#: ../../share/compssUsers:999
-msgid "Gnome, Icewm, Window Maker, Enlightenment, Fvwm, etc"
-msgstr "Gnome, Icewm, Window Maker, Enlightenment, Fvwm, eċċ"
+#~ msgid "Multimedia - Sound"
+#~ msgstr "Multimedja - awdjo"
 
-#: ../../share/compssUsers:999
-msgid "Personal Information Management"
-msgstr "Maniġġjar ta' Informazzjoni Personali"
+#~ msgid "Audio-related tools: mp3 or midi players, mixers, etc"
+#~ msgstr "Għodda relatati mal-awdjo: biex iddoqq mp3 u midi, miksers, eċċ"
 
-#: ../../share/compssUsers:999
-msgid "Tools for your Palm Pilot or your Visor"
-msgstr "Għodda għall-Palm Pilot jew Visor"
+#~ msgid "Multimedia - Video"
+#~ msgstr "Multimedja - video"
 
-#: ../../share/compssUsers:999
-msgid "Personal Finance"
-msgstr "Finanzi Personali"
+#~ msgid "Video players and editors"
+#~ msgstr "Programmi għad-daqq u editjar ta' video"
 
-#: ../../share/compssUsers:999
-msgid "Programs to manage your finances, such as gnucash"
-msgstr "Programmi biex timmaniġġja l-finanzi personali"
+#~ msgid "Multimedia - CD Burning"
+#~ msgstr "Multimedja - Ħruq ta' CDs"
+
+#~ msgid "Tools to create and burn CD's"
+#~ msgstr "Għodda biex toħloq u taħraq CDs"
+
+#~ msgid "More Graphical Desktops (Gnome, IceWM)"
+#~ msgstr "Desktops grafiċi oħrajn (Gnome, IceWM)"
+
+#~ msgid "Gnome, Icewm, Window Maker, Enlightenment, Fvwm, etc"
+#~ msgstr "Gnome, Icewm, Window Maker, Enlightenment, Fvwm, eċċ"
+
+#~ msgid "Personal Information Management"
+#~ msgstr "Maniġġjar ta' Informazzjoni Personali"
+
+#~ msgid "Tools for your Palm Pilot or your Visor"
+#~ msgstr "Għodda għall-Palm Pilot jew Visor"
+
+#~ msgid "Personal Finance"
+#~ msgstr "Finanzi Personali"
+
+#~ msgid "Programs to manage your finances, such as gnucash"
+#~ msgstr "Programmi biex timmaniġġja l-finanzi personali"
 
 #~ msgid "no network card found"
 #~ msgstr "ebda kard tal-internet ma nstabet"

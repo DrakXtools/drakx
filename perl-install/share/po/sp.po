@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX\n"
-"POT-Creation-Date: 2003-03-09 13:01+0100\n"
+"POT-Creation-Date: 2003-03-12 14:29+0100\n"
 "PO-Revision-Date: 2003-02-28 18:21+0100\n"
 "Last-Translator: Toma Jankovic <tomaja@net.yu>\n"
 "Language-Team: Serbian <i18n@mandrake.co.yu>\n"
@@ -10905,11 +10905,6 @@ msgstr "Промените систем за штампање"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
-msgid "Printer sharing"
-msgstr "Заједничко дељење штампача"
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
 msgid "CUPS configuration"
 msgstr "CUPS конфигурација"
 
@@ -11333,10 +11328,10 @@ msgid "Printing/Scanning/Photo Cards on \"%s\""
 msgstr "Картице за Штампање/Скенирање/Фото на \"%s\""
 
 #: ../../printer/printerdrake.pm:1
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "To know about the options available for the current printer read either the "
-"list shown below or click on the \"Print option list\" button.%s%s\n"
+"list shown below or click on the \"Print option list\" button.%s%s%s\n"
 "\n"
 msgstr ""
 "Да би знали које су вам опције доступне за текући штампач прочитајте листу "
@@ -11589,49 +11584,8 @@ msgstr ""
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
-msgid ""
-"Your printer belongs to the group of GDI laser printers (winprinters) sold "
-"by different manufacturers which uses the Zenographics ZJ-stream raster "
-"format for the data sent to the printer. The driver for these printers is "
-"still in a very early development stage and so it will perhaps not always "
-"work properly. Especially it is possible that the printer only works when "
-"you choose the A4 paper size.\n"
-"\n"
-"Some of these printers, as the HP LaserJet 1000, for which this driver was "
-"originally created, need their firmware to be uploaded to them after they "
-"are turned on. In the case of the HP LaserJet 1000 you have to search the "
-"printer's Windows driver CD or your Windows partition for the file "
-"\"sihp1000.img\" and upload the file to the printer with one of the "
-"following commands:\n"
-"\n"
-"     lpr -o raw sihp1000.img\n"
-"     cat sihp1000.img > /dev/usb/lp0\n"
-"\n"
-"The first command can be given by any normal user, the second must be given "
-"as root. After having done so you can print normally.\n"
+msgid "Firmware-Upload for HP LaserJet 1000"
 msgstr ""
-"Ваш штампач припада групи GDI ласерских штампача (win штампача) продатих од "
-"стране других произвођача који користе Zenographics ZJ-stream растер формат "
-"за слање података штампачу. Драјвер за ове штампаче је још увек у раној фази "
-"развоја па зато не ради увек како треба. Понекада је могуће да штампач ради "
-"само када изаберете A4 величину папира.\n"
-"\n"
-"Неки од ових штампача, као што је HP LaserJet 1000, за кога је овај драјвер "
-"оргинално и креиран, захтева да му се убаци firmware након што се укључе.У "
-"случају  HP LaserJet 1000 морате да пронађете на ЦД са Windows драјверима "
-"или на вашој Windows партицији фајл \"sihp1000.img\" и да га учитате у "
-"штампач са једном од следећих команди:\n"
-"\n"
-"     lpr -o raw sihp1000.img\n"
-"     cat sihp1000.img > /dev/usb/lp0\n"
-"\n"
-"Прва команду може извршити и обичан корисник, а другу морате покренути као "
-"root. Када ово урадите моћи ћете да штампате нормално.\n"
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "GDI Laser Printer using the Zenographics ZJ-Stream Format"
-msgstr "GDI Ласерски штампач користи Zenographics ZJ-Stream Формат"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -11814,6 +11768,11 @@ msgstr "Омогућавам порт штампача доступним за CUPS..."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
+msgid "Checking device and configuring HPOJ..."
+msgstr "Проверавам уређај и подешавам HPOJ..."
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
 msgid "Photo memory card access on your HP multi-function device"
 msgstr ""
 "Приступ Фото меморијској картици на вашем HP мулти-функционалном уређају"
@@ -11832,11 +11791,6 @@ msgstr "Инсталирам mtools пакете..."
 #, c-format
 msgid "Installing SANE packages..."
 msgstr "Инсталирам SANE пакете..."
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "Checking device and configuring HPOJ..."
-msgstr "Проверавам уређај и подешавам HPOJ..."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -12715,6 +12669,11 @@ msgstr "Недостаје IP сервер!"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
+msgid "If no port is given, 631 will be taken as default."
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
 msgid "Enter IP address and port of the host whose printers you want to use."
 msgstr "Унесите IP адресу и порт хоста чије штампаче желите да користите."
 
@@ -12843,6 +12802,23 @@ msgstr "Аутоматска корекција CUPS конфигурације"
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid ""
+"Turning on this allows to print plain text files in japanese language. Only "
+"use this function if you really want to print text in japanese, if it is "
+"activated you cannot print accentuated characters in latin fonts any more "
+"and you will not be able to adjust the margins, the character size, etc. "
+"This setting only affects printers defined on this machine. If you want to "
+"print japanese text on a printer set up on a remote machine, you have to "
+"activate this function on that remote machine."
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid "Japanese text printing mode"
+msgstr "Промените систем за штампање"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid ""
 "To get access to printers on remote CUPS servers in your local network you "
 "only need to turn on the \"Automatically find available printers on remote "
 "machines\" option; the CUPS servers inform your machine automatically about "
@@ -12914,8 +12890,8 @@ msgstr ""
 "доступни на другим удаљеним машинама и на којим удаљеним машинама."
 
 #: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "CUPS printer sharing configuration"
+#, fuzzy, c-format
+msgid "CUPS printer configuration"
 msgstr "CUPSконфигурација за дељење штампача"
 
 #: ../../printer/printerdrake.pm:1
@@ -12943,6 +12919,18 @@ msgstr "Како је штампач повезан?"
 #, c-format
 msgid "Select Printer Connection"
 msgstr "Избор повезаности штампача"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid ""
+"The HP LaserJet 1000 needs its firmware to be uploaded after being turned "
+"on. Download the Windows driver package from the HP web site (the firmware "
+"on the printer's CD does not work) and extract the firmware file from it by "
+"uncompresing the self-extracting '.exe' file with the 'unzip' utility and "
+"searching for the 'sihp1000.img' file. Copy this file into the '/etc/"
+"printer' directory. There it will be found by the automatic uploader script "
+"and uploaded whenever the printer is connected and turned on.\n"
+msgstr ""
 
 #: ../../security/help.pm:1
 #, c-format
@@ -14571,11 +14559,6 @@ msgid ""
 msgstr ""
 "Није пронађен кофигурациони фајл \n"
 "Кликните на Чаробњак или Напредно."
-
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "%s"
-msgstr "%s"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -19551,72 +19534,137 @@ msgid "NFS server, SMB server, Proxy server, ssh server"
 msgstr "NFS сервер, SMB сервер, Proxy сервер, SSH сервер"
 
 #: ../../share/compssUsers:999
-msgid "Office"
-msgstr "Office"
+#, fuzzy
+msgid "Audio station"
+msgstr "Мултимедиjална станицa"
 
 #: ../../share/compssUsers:999
-msgid "Set of tools for mail, news, web, file transfer, and chat"
-msgstr "Сет алата за ел.пошту, вести, web, трансфер датотекa, или chat"
+#, fuzzy
+msgid "Sound playing/editing programs"
+msgstr "Програми за пуштaње звукa и видеa"
 
 #: ../../share/compssUsers:999
-msgid "Games"
-msgstr "Игрe"
+#, fuzzy
+msgid "Video station"
+msgstr "Станица за игру"
 
 #: ../../share/compssUsers:999
-msgid "Multimedia - Graphics"
-msgstr "Мултимедиja - Графикa"
+#, fuzzy
+msgid "Video playing programs"
+msgstr "Програми за пуштaње звукa и видеa"
 
 #: ../../share/compssUsers:999
-msgid "Graphics programs such as The Gimp"
+#, fuzzy
+msgid "Graphic station"
+msgstr "Станица за игру"
+
+#: ../../share/compssUsers:999
+#, fuzzy
+msgid "Graphics programs"
 msgstr "Графички програми као што jе Gimp"
 
 #: ../../share/compssUsers:999
-msgid "Multimedia - Sound"
-msgstr "Мултимедиja - Звук"
+#, fuzzy
+msgid "Set of tools to read and send mail and news and to browse the Web"
+msgstr ""
+"Скуп алата за читaње и слaње ел.поште и вести (pine, mutt, tin..) и за "
+"претрaживaњe Интернетa"
 
-#: ../../share/compssUsers:999
-msgid "Audio-related tools: mp3 or midi players, mixers, etc"
-msgstr "Аудио aлати: mp3 или midi плеjери,миксери, итд"
+#~ msgid "Printer sharing"
+#~ msgstr "Заједничко дељење штампача"
 
-#: ../../share/compssUsers:999
-msgid "Multimedia - Video"
-msgstr "Мултимедиja - Видео"
+#~ msgid ""
+#~ "Your printer belongs to the group of GDI laser printers (winprinters) "
+#~ "sold by different manufacturers which uses the Zenographics ZJ-stream "
+#~ "raster format for the data sent to the printer. The driver for these "
+#~ "printers is still in a very early development stage and so it will "
+#~ "perhaps not always work properly. Especially it is possible that the "
+#~ "printer only works when you choose the A4 paper size.\n"
+#~ "\n"
+#~ "Some of these printers, as the HP LaserJet 1000, for which this driver "
+#~ "was originally created, need their firmware to be uploaded to them after "
+#~ "they are turned on. In the case of the HP LaserJet 1000 you have to "
+#~ "search the printer's Windows driver CD or your Windows partition for the "
+#~ "file \"sihp1000.img\" and upload the file to the printer with one of the "
+#~ "following commands:\n"
+#~ "\n"
+#~ "     lpr -o raw sihp1000.img\n"
+#~ "     cat sihp1000.img > /dev/usb/lp0\n"
+#~ "\n"
+#~ "The first command can be given by any normal user, the second must be "
+#~ "given as root. After having done so you can print normally.\n"
+#~ msgstr ""
+#~ "Ваш штампач припада групи GDI ласерских штампача (win штампача) продатих "
+#~ "од стране других произвођача који користе Zenographics ZJ-stream растер "
+#~ "формат за слање података штампачу. Драјвер за ове штампаче је још увек у "
+#~ "раној фази развоја па зато не ради увек како треба. Понекада је могуће да "
+#~ "штампач ради само када изаберете A4 величину папира.\n"
+#~ "\n"
+#~ "Неки од ових штампача, као што је HP LaserJet 1000, за кога је овај "
+#~ "драјвер оргинално и креиран, захтева да му се убаци firmware након што се "
+#~ "укључе.У случају  HP LaserJet 1000 морате да пронађете на ЦД са Windows "
+#~ "драјверима или на вашој Windows партицији фајл \"sihp1000.img\" и да га "
+#~ "учитате у штампач са једном од следећих команди:\n"
+#~ "\n"
+#~ "     lpr -o raw sihp1000.img\n"
+#~ "     cat sihp1000.img > /dev/usb/lp0\n"
+#~ "\n"
+#~ "Прва команду може извршити и обичан корисник, а другу морате покренути "
+#~ "као root. Када ово урадите моћи ћете да штампате нормално.\n"
 
-#: ../../share/compssUsers:999
-msgid "Video players and editors"
-msgstr "Видео плеjери и едитори"
+#~ msgid "GDI Laser Printer using the Zenographics ZJ-Stream Format"
+#~ msgstr "GDI Ласерски штампач користи Zenographics ZJ-Stream Формат"
 
-#: ../../share/compssUsers:999
-msgid "Multimedia - CD Burning"
-msgstr "Мултимедиja - CD пржeње"
+#~ msgid "%s"
+#~ msgstr "%s"
 
-#: ../../share/compssUsers:999
-msgid "Tools to create and burn CD's"
-msgstr "Алати за креирaње и пржeње CDa"
+#~ msgid "Office"
+#~ msgstr "Office"
 
-#: ../../share/compssUsers:999
-msgid "More Graphical Desktops (Gnome, IceWM)"
-msgstr "Jош графичких окружeњa (Gnome, IceWM)"
+#~ msgid "Set of tools for mail, news, web, file transfer, and chat"
+#~ msgstr "Сет алата за ел.пошту, вести, web, трансфер датотекa, или chat"
 
-#: ../../share/compssUsers:999
-msgid "Gnome, Icewm, Window Maker, Enlightenment, Fvwm, etc"
-msgstr "Gnome, Icewm, Window Maker, Enlightenment, Fvwm, итд"
+#~ msgid "Games"
+#~ msgstr "Игрe"
 
-#: ../../share/compssUsers:999
-msgid "Personal Information Management"
-msgstr "Управљaње приватним информациjамa"
+#~ msgid "Multimedia - Graphics"
+#~ msgstr "Мултимедиja - Графикa"
 
-#: ../../share/compssUsers:999
-msgid "Tools for your Palm Pilot or your Visor"
-msgstr "Алати за Palm Pilot или Visor"
+#~ msgid "Multimedia - Sound"
+#~ msgstr "Мултимедиja - Звук"
 
-#: ../../share/compssUsers:999
-msgid "Personal Finance"
-msgstr "Личне финансиje"
+#~ msgid "Audio-related tools: mp3 or midi players, mixers, etc"
+#~ msgstr "Аудио aлати: mp3 или midi плеjери,миксери, итд"
 
-#: ../../share/compssUsers:999
-msgid "Programs to manage your finances, such as gnucash"
-msgstr "Програми за управљaње вaшим финансиjамa, као што jе gnucash"
+#~ msgid "Multimedia - Video"
+#~ msgstr "Мултимедиja - Видео"
+
+#~ msgid "Video players and editors"
+#~ msgstr "Видео плеjери и едитори"
+
+#~ msgid "Multimedia - CD Burning"
+#~ msgstr "Мултимедиja - CD пржeње"
+
+#~ msgid "Tools to create and burn CD's"
+#~ msgstr "Алати за креирaње и пржeње CDa"
+
+#~ msgid "More Graphical Desktops (Gnome, IceWM)"
+#~ msgstr "Jош графичких окружeњa (Gnome, IceWM)"
+
+#~ msgid "Gnome, Icewm, Window Maker, Enlightenment, Fvwm, etc"
+#~ msgstr "Gnome, Icewm, Window Maker, Enlightenment, Fvwm, итд"
+
+#~ msgid "Personal Information Management"
+#~ msgstr "Управљaње приватним информациjамa"
+
+#~ msgid "Tools for your Palm Pilot or your Visor"
+#~ msgstr "Алати за Palm Pilot или Visor"
+
+#~ msgid "Personal Finance"
+#~ msgstr "Личне финансиje"
+
+#~ msgid "Programs to manage your finances, such as gnucash"
+#~ msgstr "Програми за управљaње вaшим финансиjамa, као што jе gnucash"
 
 #~ msgid "no network card found"
 #~ msgstr "Није пронађена мрежна картица"

@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX\n"
-"POT-Creation-Date: 2003-03-09 13:01+0100\n"
+"POT-Creation-Date: 2003-03-12 14:29+0100\n"
 "PO-Revision-Date: 2002-09-09 09:08+0900\n"
 "Last-Translator: Jaegeum Cze <baedaron@hanafos.com>\n"
 "Language-Team: Korean <beadaron@hanafos.com>\n"
@@ -9962,11 +9962,6 @@ msgid "Change the printing system"
 msgstr "인쇄시스템 변경"
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
-msgid "Printer sharing"
-msgstr "파일 공유"
-
-#: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "CUPS configuration"
 msgstr "CUPS 설정"
@@ -10378,7 +10373,7 @@ msgstr "프린터「%s」상에서 인쇄 중"
 #, fuzzy, c-format
 msgid ""
 "To know about the options available for the current printer read either the "
-"list shown below or click on the \"Print option list\" button.%s%s\n"
+"list shown below or click on the \"Print option list\" button.%s%s%s\n"
 "\n"
 msgstr ""
 "현재 프린터에 사용할 수 있는 옵션 목록을 보려면, 「인쇄 옵션 목록」을 누르세"
@@ -10606,31 +10601,7 @@ msgstr ""
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
-msgid ""
-"Your printer belongs to the group of GDI laser printers (winprinters) sold "
-"by different manufacturers which uses the Zenographics ZJ-stream raster "
-"format for the data sent to the printer. The driver for these printers is "
-"still in a very early development stage and so it will perhaps not always "
-"work properly. Especially it is possible that the printer only works when "
-"you choose the A4 paper size.\n"
-"\n"
-"Some of these printers, as the HP LaserJet 1000, for which this driver was "
-"originally created, need their firmware to be uploaded to them after they "
-"are turned on. In the case of the HP LaserJet 1000 you have to search the "
-"printer's Windows driver CD or your Windows partition for the file "
-"\"sihp1000.img\" and upload the file to the printer with one of the "
-"following commands:\n"
-"\n"
-"     lpr -o raw sihp1000.img\n"
-"     cat sihp1000.img > /dev/usb/lp0\n"
-"\n"
-"The first command can be given by any normal user, the second must be given "
-"as root. After having done so you can print normally.\n"
-msgstr ""
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "GDI Laser Printer using the Zenographics ZJ-Stream Format"
+msgid "Firmware-Upload for HP LaserJet 1000"
 msgstr ""
 
 #: ../../printer/printerdrake.pm:1
@@ -10780,6 +10751,11 @@ msgstr ""
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
+msgid "Checking device and configuring HPOJ..."
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
 msgid "Photo memory card access on your HP multi-function device"
 msgstr ""
 
@@ -10797,11 +10773,6 @@ msgstr "팩키지 설치 중..."
 #, fuzzy, c-format
 msgid "Installing SANE packages..."
 msgstr "팩키지 설치 중..."
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "Checking device and configuring HPOJ..."
-msgstr ""
 
 #: ../../printer/printerdrake.pm:1
 #, fuzzy, c-format
@@ -11539,6 +11510,11 @@ msgstr "NCP 서버 이름을 찾을 수 없음!"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
+msgid "If no port is given, 631 will be taken as default."
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
 msgid "Enter IP address and port of the host whose printers you want to use."
 msgstr ""
 
@@ -11649,6 +11625,23 @@ msgstr "자동 CUPS 설정"
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid ""
+"Turning on this allows to print plain text files in japanese language. Only "
+"use this function if you really want to print text in japanese, if it is "
+"activated you cannot print accentuated characters in latin fonts any more "
+"and you will not be able to adjust the margins, the character size, etc. "
+"This setting only affects printers defined on this machine. If you want to "
+"print japanese text on a printer set up on a remote machine, you have to "
+"activate this function on that remote machine."
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid "Japanese text printing mode"
+msgstr "인쇄시스템 변경"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid ""
 "To get access to printers on remote CUPS servers in your local network you "
 "only need to turn on the \"Automatically find available printers on remote "
 "machines\" option; the CUPS servers inform your machine automatically about "
@@ -11710,7 +11703,7 @@ msgstr ""
 
 #: ../../printer/printerdrake.pm:1
 #, fuzzy, c-format
-msgid "CUPS printer sharing configuration"
+msgid "CUPS printer configuration"
 msgstr "OKI 윈프린터 설정"
 
 #: ../../printer/printerdrake.pm:1
@@ -11739,6 +11732,18 @@ msgstr "프린터가 어떻게 연결되어 있습니까?"
 #, c-format
 msgid "Select Printer Connection"
 msgstr "프린터 연결방법을 선택하세요."
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid ""
+"The HP LaserJet 1000 needs its firmware to be uploaded after being turned "
+"on. Download the Windows driver package from the HP web site (the firmware "
+"on the printer's CD does not work) and extract the firmware file from it by "
+"uncompresing the self-extracting '.exe' file with the 'unzip' utility and "
+"searching for the 'sihp1000.img' file. Copy this file into the '/etc/"
+"printer' directory. There it will be found by the automatic uploader script "
+"and uploaded whenever the printer is connected and turned on.\n"
+msgstr ""
 
 #: ../../security/help.pm:1
 #, c-format
@@ -13046,11 +13051,6 @@ msgstr ""
 msgid ""
 "No configuration file found \n"
 "please click Wizard or Advanced."
-msgstr ""
-
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "%s"
 msgstr ""
 
 #: ../../standalone/drakbackup:1
@@ -17657,72 +17657,91 @@ msgid "NFS server, SMB server, Proxy server, ssh server"
 msgstr "NFS 서버, 삼바 서버, 프락시 서버, SSH 서버"
 
 #: ../../share/compssUsers:999
-msgid "Office"
-msgstr "오피스"
+#, fuzzy
+msgid "Audio station"
+msgstr "멀티미디어 스테이션"
 
 #: ../../share/compssUsers:999
-msgid "Set of tools for mail, news, web, file transfer, and chat"
-msgstr "메일, 뉴스, 웹, 파일전송, 채팅용 도구모음"
+#, fuzzy
+msgid "Sound playing/editing programs"
+msgstr "사운드 및 비디오 연주/편집 프로그램"
 
 #: ../../share/compssUsers:999
-msgid "Games"
-msgstr "게임"
+#, fuzzy
+msgid "Video station"
+msgstr "게임 스테이션"
 
 #: ../../share/compssUsers:999
-msgid "Multimedia - Graphics"
-msgstr "멀티미디어 - 그래픽"
+#, fuzzy
+msgid "Video playing programs"
+msgstr "사운드 및 비디오 연주/편집 프로그램"
 
 #: ../../share/compssUsers:999
-msgid "Graphics programs such as The Gimp"
+#, fuzzy
+msgid "Graphic station"
+msgstr "게임 스테이션"
+
+#: ../../share/compssUsers:999
+#, fuzzy
+msgid "Graphics programs"
 msgstr "GIMP 같은 그래픽 프로그램"
 
 #: ../../share/compssUsers:999
-msgid "Multimedia - Sound"
-msgstr "멀티미디어 - 사운드"
+#, fuzzy
+msgid "Set of tools to read and send mail and news and to browse the Web"
+msgstr "메일/뉴스를 일고 보내며 웹검색을 위한 도구모음(pine, mutt, tin...)"
 
-#: ../../share/compssUsers:999
-msgid "Audio-related tools: mp3 or midi players, mixers, etc"
-msgstr "오디오 관련 도구; mp3/midi 플레이어, 믹서, 등등"
+#, fuzzy
+#~ msgid "Printer sharing"
+#~ msgstr "파일 공유"
 
-#: ../../share/compssUsers:999
-msgid "Multimedia - Video"
-msgstr "멀티미디어 - 비디오"
+#~ msgid "Office"
+#~ msgstr "오피스"
 
-#: ../../share/compssUsers:999
-msgid "Video players and editors"
-msgstr "비디오 플레이어 및 에디터"
+#~ msgid "Set of tools for mail, news, web, file transfer, and chat"
+#~ msgstr "메일, 뉴스, 웹, 파일전송, 채팅용 도구모음"
 
-#: ../../share/compssUsers:999
-msgid "Multimedia - CD Burning"
-msgstr "멀티미디어 - CD 굽기"
+#~ msgid "Games"
+#~ msgstr "게임"
 
-#: ../../share/compssUsers:999
-msgid "Tools to create and burn CD's"
-msgstr "CD 제작 및 굽기 도구"
+#~ msgid "Multimedia - Graphics"
+#~ msgstr "멀티미디어 - 그래픽"
 
-#: ../../share/compssUsers:999
-msgid "More Graphical Desktops (Gnome, IceWM)"
-msgstr "추가 그래픽 데스크탑 (Gnome, IceWM)"
+#~ msgid "Multimedia - Sound"
+#~ msgstr "멀티미디어 - 사운드"
 
-#: ../../share/compssUsers:999
-msgid "Gnome, Icewm, Window Maker, Enlightenment, Fvwm, etc"
-msgstr "그놈, Icewm, 윈도우 메이커, 인라이튼먼트, Fvwm, 등등"
+#~ msgid "Audio-related tools: mp3 or midi players, mixers, etc"
+#~ msgstr "오디오 관련 도구; mp3/midi 플레이어, 믹서, 등등"
 
-#: ../../share/compssUsers:999
-msgid "Personal Information Management"
-msgstr "개인 정보관리"
+#~ msgid "Multimedia - Video"
+#~ msgstr "멀티미디어 - 비디오"
 
-#: ../../share/compssUsers:999
-msgid "Tools for your Palm Pilot or your Visor"
-msgstr "Palm pilot 또는 Visor용 도구들"
+#~ msgid "Video players and editors"
+#~ msgstr "비디오 플레이어 및 에디터"
 
-#: ../../share/compssUsers:999
-msgid "Personal Finance"
-msgstr "개인 금융"
+#~ msgid "Multimedia - CD Burning"
+#~ msgstr "멀티미디어 - CD 굽기"
 
-#: ../../share/compssUsers:999
-msgid "Programs to manage your finances, such as gnucash"
-msgstr "gnucash 같은 자금관리 프로그램"
+#~ msgid "Tools to create and burn CD's"
+#~ msgstr "CD 제작 및 굽기 도구"
+
+#~ msgid "More Graphical Desktops (Gnome, IceWM)"
+#~ msgstr "추가 그래픽 데스크탑 (Gnome, IceWM)"
+
+#~ msgid "Gnome, Icewm, Window Maker, Enlightenment, Fvwm, etc"
+#~ msgstr "그놈, Icewm, 윈도우 메이커, 인라이튼먼트, Fvwm, 등등"
+
+#~ msgid "Personal Information Management"
+#~ msgstr "개인 정보관리"
+
+#~ msgid "Tools for your Palm Pilot or your Visor"
+#~ msgstr "Palm pilot 또는 Visor용 도구들"
+
+#~ msgid "Personal Finance"
+#~ msgstr "개인 금융"
+
+#~ msgid "Programs to manage your finances, such as gnucash"
+#~ msgstr "gnucash 같은 자금관리 프로그램"
 
 #~ msgid "no network card found"
 #~ msgstr "네트웍 카드를 찾을수 없습니다"

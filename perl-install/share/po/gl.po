@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX\n"
-"POT-Creation-Date: 2003-03-09 13:01+0100\n"
+"POT-Creation-Date: 2003-03-12 14:29+0100\n"
 "PO-Revision-Date: 2001-03-17 19:17+0100\n"
 "Last-Translator: Jesús Bravo Álvarez (mdk) <jba@pobox.com>\n"
 "Language-Team: Galician <trasno@ceu.fi.udc.es>\n"
@@ -9606,11 +9606,6 @@ msgstr "Configurar a rede"
 
 #: ../../printer/printerdrake.pm:1
 #, fuzzy, c-format
-msgid "Printer sharing"
-msgstr "Impresora"
-
-#: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
 msgid "CUPS configuration"
 msgstr "Configuración da LAN"
 
@@ -9967,7 +9962,7 @@ msgstr "Desactivando a rede"
 #, c-format
 msgid ""
 "To know about the options available for the current printer read either the "
-"list shown below or click on the \"Print option list\" button.%s%s\n"
+"list shown below or click on the \"Print option list\" button.%s%s%s\n"
 "\n"
 msgstr ""
 
@@ -10173,31 +10168,7 @@ msgstr ""
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
-msgid ""
-"Your printer belongs to the group of GDI laser printers (winprinters) sold "
-"by different manufacturers which uses the Zenographics ZJ-stream raster "
-"format for the data sent to the printer. The driver for these printers is "
-"still in a very early development stage and so it will perhaps not always "
-"work properly. Especially it is possible that the printer only works when "
-"you choose the A4 paper size.\n"
-"\n"
-"Some of these printers, as the HP LaserJet 1000, for which this driver was "
-"originally created, need their firmware to be uploaded to them after they "
-"are turned on. In the case of the HP LaserJet 1000 you have to search the "
-"printer's Windows driver CD or your Windows partition for the file "
-"\"sihp1000.img\" and upload the file to the printer with one of the "
-"following commands:\n"
-"\n"
-"     lpr -o raw sihp1000.img\n"
-"     cat sihp1000.img > /dev/usb/lp0\n"
-"\n"
-"The first command can be given by any normal user, the second must be given "
-"as root. After having done so you can print normally.\n"
-msgstr ""
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "GDI Laser Printer using the Zenographics ZJ-Stream Format"
+msgid "Firmware-Upload for HP LaserJet 1000"
 msgstr ""
 
 #: ../../printer/printerdrake.pm:1
@@ -10344,6 +10315,11 @@ msgstr ""
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
+msgid "Checking device and configuring HPOJ..."
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
 msgid "Photo memory card access on your HP multi-function device"
 msgstr ""
 
@@ -10361,11 +10337,6 @@ msgstr "Instalando o paquete %s"
 #, fuzzy, c-format
 msgid "Installing SANE packages..."
 msgstr "Instalando o paquete %s"
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "Checking device and configuring HPOJ..."
-msgstr ""
 
 #: ../../printer/printerdrake.pm:1
 #, fuzzy, c-format
@@ -11099,6 +11070,11 @@ msgstr "Servidor de impresión"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
+msgid "If no port is given, 631 will be taken as default."
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
 msgid "Enter IP address and port of the host whose printers you want to use."
 msgstr ""
 
@@ -11209,6 +11185,23 @@ msgstr "Configuración do estilo de arrinque"
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid ""
+"Turning on this allows to print plain text files in japanese language. Only "
+"use this function if you really want to print text in japanese, if it is "
+"activated you cannot print accentuated characters in latin fonts any more "
+"and you will not be able to adjust the margins, the character size, etc. "
+"This setting only affects printers defined on this machine. If you want to "
+"print japanese text on a printer set up on a remote machine, you have to "
+"activate this function on that remote machine."
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid "Japanese text printing mode"
+msgstr "Configurar a rede"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid ""
 "To get access to printers on remote CUPS servers in your local network you "
 "only need to turn on the \"Automatically find available printers on remote "
 "machines\" option; the CUPS servers inform your machine automatically about "
@@ -11270,7 +11263,7 @@ msgstr ""
 
 #: ../../printer/printerdrake.pm:1
 #, fuzzy, c-format
-msgid "CUPS printer sharing configuration"
+msgid "CUPS printer configuration"
 msgstr "Configuración de Internet"
 
 #: ../../printer/printerdrake.pm:1
@@ -11298,6 +11291,18 @@ msgstr "¿Como está conectada a impresora?"
 #, c-format
 msgid "Select Printer Connection"
 msgstr "Selección da conexión da impresora"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid ""
+"The HP LaserJet 1000 needs its firmware to be uploaded after being turned "
+"on. Download the Windows driver package from the HP web site (the firmware "
+"on the printer's CD does not work) and extract the firmware file from it by "
+"uncompresing the self-extracting '.exe' file with the 'unzip' utility and "
+"searching for the 'sihp1000.img' file. Copy this file into the '/etc/"
+"printer' directory. There it will be found by the automatic uploader script "
+"and uploaded whenever the printer is connected and turned on.\n"
+msgstr ""
 
 #: ../../security/help.pm:1
 #, c-format
@@ -12593,11 +12598,6 @@ msgstr ""
 msgid ""
 "No configuration file found \n"
 "please click Wizard or Advanced."
-msgstr ""
-
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "%s"
 msgstr ""
 
 #: ../../standalone/drakbackup:1
@@ -17189,74 +17189,96 @@ msgid "NFS server, SMB server, Proxy server, ssh server"
 msgstr ""
 
 #: ../../share/compssUsers:999
-msgid "Office"
-msgstr "Office"
+#, fuzzy
+msgid "Audio station"
+msgstr "Estación multimedia"
 
 #: ../../share/compssUsers:999
-msgid "Set of tools for mail, news, web, file transfer, and chat"
-msgstr ""
-"Conxunto de ferramentas para correo, novas, web, transferencia de ficheiros "
-"e chat"
+#, fuzzy
+msgid "Sound playing/editing programs"
+msgstr "Programas de reproducción/edición de son e vídeo"
 
 #: ../../share/compssUsers:999
-msgid "Games"
-msgstr "Xogos"
+#, fuzzy
+msgid "Video station"
+msgstr "Estación de xogos"
 
 #: ../../share/compssUsers:999
-msgid "Multimedia - Graphics"
-msgstr "Multimedia - Gráficos"
+#, fuzzy
+msgid "Video playing programs"
+msgstr "Programas de reproducción/edición de son e vídeo"
 
 #: ../../share/compssUsers:999
-msgid "Graphics programs such as The Gimp"
+#, fuzzy
+msgid "Graphic station"
+msgstr "Estación de xogos"
+
+#: ../../share/compssUsers:999
+#, fuzzy
+msgid "Graphics programs"
 msgstr "Programas gráficos como o Gimp"
 
 #: ../../share/compssUsers:999
-msgid "Multimedia - Sound"
-msgstr "Multimedia - Son"
+#, fuzzy
+msgid "Set of tools to read and send mail and news and to browse the Web"
+msgstr ""
+"Conxunto de ferramentas para ler e enviar correo e novas (pine, mutt, tin..) "
+"e para navegar na Web"
 
-#: ../../share/compssUsers:999
-msgid "Audio-related tools: mp3 or midi players, mixers, etc"
-msgstr "Ferramentas de audio: reproductores de mp3 ou midi, mesturadores, etc"
+#, fuzzy
+#~ msgid "Printer sharing"
+#~ msgstr "Impresora"
 
-#: ../../share/compssUsers:999
-msgid "Multimedia - Video"
-msgstr "Multimedia - Vídeo"
+#~ msgid "Office"
+#~ msgstr "Office"
 
-#: ../../share/compssUsers:999
-msgid "Video players and editors"
-msgstr "Reproductores e editores de vídeo"
+#~ msgid "Set of tools for mail, news, web, file transfer, and chat"
+#~ msgstr ""
+#~ "Conxunto de ferramentas para correo, novas, web, transferencia de "
+#~ "ficheiros e chat"
 
-#: ../../share/compssUsers:999
-msgid "Multimedia - CD Burning"
-msgstr "Multimedia - Gravación de CD"
+#~ msgid "Games"
+#~ msgstr "Xogos"
 
-#: ../../share/compssUsers:999
-msgid "Tools to create and burn CD's"
-msgstr "Ferramentas para crear e gravar CDs"
+#~ msgid "Multimedia - Graphics"
+#~ msgstr "Multimedia - Gráficos"
 
-#: ../../share/compssUsers:999
-msgid "More Graphical Desktops (Gnome, IceWM)"
-msgstr "Máis escritorios gráficos (Gnome, IceWM)"
+#~ msgid "Multimedia - Sound"
+#~ msgstr "Multimedia - Son"
 
-#: ../../share/compssUsers:999
-msgid "Gnome, Icewm, Window Maker, Enlightenment, Fvwm, etc"
-msgstr "Gnome, Icewm, Window Maker, Enlightenment, Fvwm, etc"
+#~ msgid "Audio-related tools: mp3 or midi players, mixers, etc"
+#~ msgstr ""
+#~ "Ferramentas de audio: reproductores de mp3 ou midi, mesturadores, etc"
 
-#: ../../share/compssUsers:999
-msgid "Personal Information Management"
-msgstr "Xestión de información persoal"
+#~ msgid "Multimedia - Video"
+#~ msgstr "Multimedia - Vídeo"
 
-#: ../../share/compssUsers:999
-msgid "Tools for your Palm Pilot or your Visor"
-msgstr "Ferramentas para o seu Palm Pilot ou o seu Visor"
+#~ msgid "Video players and editors"
+#~ msgstr "Reproductores e editores de vídeo"
 
-#: ../../share/compssUsers:999
-msgid "Personal Finance"
-msgstr "Finanzas persoais"
+#~ msgid "Multimedia - CD Burning"
+#~ msgstr "Multimedia - Gravación de CD"
 
-#: ../../share/compssUsers:999
-msgid "Programs to manage your finances, such as gnucash"
-msgstr "Programas para xestionar as súas finanzas, como o gnucash"
+#~ msgid "Tools to create and burn CD's"
+#~ msgstr "Ferramentas para crear e gravar CDs"
+
+#~ msgid "More Graphical Desktops (Gnome, IceWM)"
+#~ msgstr "Máis escritorios gráficos (Gnome, IceWM)"
+
+#~ msgid "Gnome, Icewm, Window Maker, Enlightenment, Fvwm, etc"
+#~ msgstr "Gnome, Icewm, Window Maker, Enlightenment, Fvwm, etc"
+
+#~ msgid "Personal Information Management"
+#~ msgstr "Xestión de información persoal"
+
+#~ msgid "Tools for your Palm Pilot or your Visor"
+#~ msgstr "Ferramentas para o seu Palm Pilot ou o seu Visor"
+
+#~ msgid "Personal Finance"
+#~ msgstr "Finanzas persoais"
+
+#~ msgid "Programs to manage your finances, such as gnucash"
+#~ msgstr "Programas para xestionar as súas finanzas, como o gnucash"
 
 #~ msgid "no network card found"
 #~ msgstr "non se atopou ningunha tarxeta de rede"
