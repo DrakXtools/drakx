@@ -80,7 +80,7 @@ sub vnew {
     if ($ENV{DISPLAY} && system('/usr/X11R6/bin/xtest') == 0) {
 	if ($su) {
 	    $ENV{PATH} = "/sbin:/usr/sbin:$ENV{PATH}";
-	    if ($>) {
+	    if ($> && !$::testing) {
 		exec("kdesu", "-c", "$0 @ARGV") or die _("kdesu missing");
 	    }
 	}
