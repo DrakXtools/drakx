@@ -678,7 +678,10 @@ sub chooseCD {
 
     if (!common::usingRamdisk()) {
 	#- mono-cd in case of no ramdisk
-	undef $packages->{mediums}{$_}{selected} foreach @mediums;
+	foreach (@mediums) {
+	    pkgs::mediumDescr($packages, $install_any::boot_medium) eq pkgs::mediumDescr($packages, $_) and next;
+	    undef $packages->{mediums}{$_}{selected};
+	}
 	log::l("low memory install, using single CD installation (as it is not ejectable)");
 	return;
     }
