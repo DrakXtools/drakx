@@ -353,7 +353,7 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 - harddrake service: 
   o do not disable glx when switching from nvidia driver to nv
     (indirect support, #11285)
-  o do not faill when hw db is corrupted
+  o do not fail when hw db is corrupted
 
 * Mon Oct  4 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.1-16mdk
 - drakconnect (blino):
