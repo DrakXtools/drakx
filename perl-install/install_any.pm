@@ -144,13 +144,14 @@ sub errorOpeningFile($) {
     $file eq 'XXX' and return; #- special case to force closing file after rpmlib transaction.
     $current_medium eq $asked_medium and log::l("errorOpeningFile $file"), return; #- nothing to do in such case.
     $::o->{packages}{mediums}{$asked_medium}{selected} or return; #- not selected means no need for worying about.
+    my $current_method = $::o->{packages}{medium}{$asked_medium}{method} || $::o->{method};
 
     my $max = 32; #- always refuse after $max tries.
-    if ($::o->{method} eq "cdrom") {
+    if ($current_method eq "cdrom") {
 	cat_("/proc/mounts") =~ m,(/(?:dev|tmp)/\S+)\s+(?:/mnt/cdrom|/tmp/image), and $cdrom = $1;
 	return unless $cdrom;
 	ejectCdrom($cdrom);
-	while ($max > 0 && askChangeMedium($::o->{method}, $asked_medium)) {
+	while ($max > 0 && askChangeMedium($current_method, $asked_medium)) {
 	    $current_medium = $asked_medium;
 	    mountCdrom("/tmp/image");
 	    my $getFile = getFile($file); 
@@ -161,7 +162,7 @@ sub errorOpeningFile($) {
 	    --$max;
 	}
     } else {
-	while ($max > 0 && askChangeMedium($::o->{method}, $asked_medium)) {
+	while ($max > 0 && askChangeMedium($current_method, $asked_medium)) {
 	    $current_medium = $asked_medium;
 	    my $getFile = getFile($file); $getFile and return $getFile;
 	    $current_medium = 'unknown'; #- don't know what CD image has been copied.
@@ -184,7 +185,9 @@ sub errorOpeningFile($) {
 }
 sub getFile {
     my ($f, $o_method, $o_altroot) = @_;
-    log::l("getFile $f:$o_method");
+    my $current_method = $o_method eq 'local' ? ''
+	: (($asked_medium ? $::o->{packages}{medium}{$asked_medium}{method} : '') || $::o->{method});
+    log::l("getFile $f:$o_method ($asked_medium:$current_method)");
     my $rel = relGetFile($f);
     do {
 	if ($f =~ m|^http://|) {
@@ -193,10 +196,10 @@ sub getFile {
 	} elsif ($o_method =~ /crypto|update/i) {
 	    require crypto;
 	    crypto::getFile($f);
-	} elsif ($::o->{method} eq "ftp") {
+	} elsif ($current_method eq "ftp") {
 	    require ftp;
 	    ftp::getFile($rel);
-	} elsif ($::o->{method} eq "http") {
+	} elsif ($current_method eq "http") {
 	    require http;
 	    http::getFile("$ENV{URLPREFIX}/$rel");
 	} else {
@@ -214,7 +217,7 @@ sub getFile {
 sub getAndSaveFile {
     my ($file, $local) = @_ == 1 ? ("install/stage2/live$_[0]", $_[0]) : @_;
     local $/ = \ (16 * 1024);
-    my $f = ref($file) ? $file : getFile($file) or return;
+    my $f = ref($file) ? $file : getFile($file, 'local') or return;
     open(my $F, ">$local") or log::l("getAndSaveFile(opening $local): $!"), return;
     local $_;
     while (<$f>) { syswrite($F, $_) or die("getAndSaveFile($local): $!") }
@@ -364,50 +367,87 @@ sub setPackages {
     require pkgs;
     if (!$o->{packages} || is_empty_array_ref($o->{packages}{depslist})) {
 	my $cdrom;
-	($o->{packages}, my $suppl_CDs) = pkgs::psUsingHdlists($o->{prefix}, $o->{method});
+	($o->{packages}, my $suppl_method) = pkgs::psUsingHdlists($o->{prefix}, $o->{method});
 
-	#- ask whether there are supplementary CDs
+	#- ask whether there are supplementary media
 	SUPPL: {
-	    if ($suppl_CDs && !$o->{isUpgrade}
-	        && $o->ask_yesorno('', N("Do you have a supplementary CD to install?"), 0))
+	    if ($suppl_method && !$o->{isUpgrade}
+	        && (my $suppl = $o->ask_from_list_('', N("Do you have a supplementary installation media to configure?"),
+			[ N_("None"), N_("CD-ROM"), N_("Network (http)") ], 'None')
+		   ) ne 'None')
 	    {
+		#- translate to method name
+		$suppl_method = {
+		    'CD-ROM' => 'cdrom',
+		    'Network (http)' => 'http',
+		}->{$suppl};
 		#- by convention, the media names for suppl. CDs match /^\d+s$/
-		my $medium_name = '1s'; #- supplement 1
+		my $medium_name = $suppl_method eq 'cdrom' ? '1s' : int(keys %{$o->{packages}{mediums}}) + 1;
 		local $::isWizard = 0;
-		local $o->{method} = 'cdrom';
-		(my $cdromdev) = detect_devices::cdroms();
-		last SUPPL if !$cdromdev;
-		$cdrom = $cdromdev->{device};
-		devices::make($cdrom);
-		ejectCdrom($cdrom);
-		if ($o->ask_okcancel('', N("Insert the CD"), 1)) {
-		    mountCdrom("/mnt/cdrom", $cdrom);
-		    log::l($@) if $@;
-		    useMedium($medium_name);
-		    my $supplmedium = pkgs::psUsingHdlist(
-			$o->{prefix}, # /mnt
-			'cdrom',
-			$o->{packages},
-			"hdlist$medium_name.cz",
-			$medium_name,
-			'media/main',
-			"Supplementary CD $medium_name",
-			1, # selected
-			"/mnt/cdrom/media/main/media_info/hdlist$medium_name.cz",
-		    );
-		    if ($supplmedium) {
-			log::l("read suppl hdlist");
-			$supplmedium->{prefix} = "removable://mnt/cdrom"; #- pour install_urpmi
-			$supplmedium->{selected} = 1;
-			$supplmedium->{method} = 'cdrom';
-		    } else {
-			log::l("no suppl hdlist");
+		local $o->{method} = $suppl_method;
+		if ($suppl_method eq 'cdrom') {
+		    (my $cdromdev) = detect_devices::cdroms();
+		    $suppl_method = '', last SUPPL if !$cdromdev;
+		    $cdrom = $cdromdev->{device};
+		    devices::make($cdrom);
+		    ejectCdrom($cdrom);
+		    if ($o->ask_okcancel('', N("Insert the CD"), 1)) {
+			mountCdrom("/mnt/cdrom", $cdrom);
+			log::l($@) if $@;
+			useMedium($medium_name);
+			#- TODO probe for an hdlists file, and then look for
+			#- all hdlists listed herein
+			my $supplmedium = pkgs::psUsingHdlist(
+			    $o->{prefix}, # /mnt
+			    $suppl_method,
+			    $o->{packages},
+			    "hdlist$medium_name.cz",
+			    $medium_name,
+			    'media/main',
+			    "Supplementary CD $medium_name",
+			    1, # selected
+			    "/mnt/cdrom/media/main/media_info/hdlist$medium_name.cz",
+			);
+			if ($supplmedium) {
+			    log::l("read suppl hdlist");
+			    $supplmedium->{prefix} = "removable://mnt/cdrom"; #- pour install_urpmi
+			    $supplmedium->{selected} = 1;
+			    $supplmedium->{method} = 'cdrom';
+			} else {
+			    log::l("no suppl hdlist");
+			}
 		    }
-		    #- TODO loop if there are several supplementary CDs
-		    # ++$medium_name; $medium_name .= "s";
+		} else {
+		    my $url = $o->ask_from_entry('', N("URL of the mirror?")) or $suppl_method = '', last SUPPL;
+		    useMedium($medium_name);
+		    require http;
+		    my $f = eval { http::getFile("$url/media_info/hdlist.cz") };
+		    if (!defined $f) {
+			log::l($@) if $@;
+			$o->ask_warn('', N("Can't find hdlist file on this mirror"));
+			$suppl_method = '';
+			last SUPPL;
+		    }
+		    my $tmphdlistfile = pkgs::urpmidir($o->{prefix})."/hdlist$medium_name.cz";
+		    open(my $f2, ">", $tmphdlistfile);
+		    local $_;
+		    while (<$f>) { syswrite($f2, $_) }
+		    close $f; close $f2;
+		    my $supplmedium = pkgs::psUsingHdlist(
+			$o->{prefix},
+			$suppl_method,
+			$o->{packages},
+			"hdlist$medium_name.cz", #- hdlist
+			$medium_name,
+			'', #- rpmsdir
+			"Supplementary media $medium_name", #- description
+			1, # selected
+			$tmphdlistfile,
+		    );
+		    unlink $tmphdlistfile;
 		}
 	    } else {
-		$suppl_CDs = 0;
+		$suppl_method = '';
 	    }
 	}
 
@@ -426,11 +466,11 @@ sub setPackages {
 	#- if there is a supplementary CD, override the rpmsrate/compssUsers
 	pkgs::read_rpmsrate(
 	    $o->{packages},
-	    getFile($suppl_CDs ? "/mnt/cdrom/media/media_info/rpmsrate" : "media/media_info/rpmsrate")
+	    getFile($suppl_method eq 'cdrom' ? "/mnt/cdrom/media/media_info/rpmsrate" : "media/media_info/rpmsrate")
 	);
 	($o->{compssUsers}, $o->{compssUsersSorted}) = pkgs::readCompssUsers(
 	    $o->{meta_class},
-	    $suppl_CDs ? "/mnt/cdrom/media/media_info/compssUsers" : "",
+	    $suppl_method eq 'cdrom' ? "/mnt/cdrom/media/media_info/compssUsers" : "",
 	);
 
 	#- preselect default_packages and compssUsersChoices.
@@ -438,7 +478,7 @@ sub setPackages {
 	pkgs::selectPackage($o->{packages}, pkgs::packageByName($o->{packages}, $_) || next) foreach @{$o->{default_packages}};
 
 	#- umount supplementary CD. Will re-ask for it later
-	if ($suppl_CDs) {
+	if ($suppl_method eq 'cdrom') {
 	    getFile("XXX"); #- close still opened filehandles
 	    log::l("Umounting suppl. CD");
 	    eval { fs::umount("/mnt/cdrom") };
@@ -670,11 +710,12 @@ sub install_urpmi {
     foreach (sort { $a->{medium} <=> $b->{medium} } values %$mediums) {
 	my $name = $_->{fakemedium};
 	if ($_->{ignored} || $_->{selected}) {
+	    my $curmethod = $_->{method} || $::o->{method};
 	    my $dir = ($_->{prefix} || ${{ nfs => "file://mnt/nfs", 
 					   disk => "file:/" . any::hdInstallPath(),
 					   ftp => $ENV{URLPREFIX},
 					   http => $ENV{URLPREFIX},
-					   cdrom => "removable://mnt/cdrom" }}{$method} ||
+					   cdrom => "removable://mnt/cdrom" }}{$curmethod} ||
 		       #- for live_update or live_install script.
 		       readlink("/tmp/image/media") =~ m,^(/.*)/media/*$, && "removable:/$1") . "/$_->{rpmsdir}";
 	    #- use list file only if visible password or macro.
@@ -723,6 +764,7 @@ sub install_urpmi {
 	    $qname =~ s/(\s)/\\$1/g; $qdir =~ s/(\s)/\\$1/g;
 
 	    #- compute correctly reference to media/media_info
+	    #- FIXME
 	    my $with;
 	    if ($_->{update}) {
 		#- an update medium always use "../base/hdlist.cz";
@@ -747,6 +789,7 @@ sub install_urpmi {
 ";
 	} else {
 	    #- remove not selected media by removing hdlist and synthesis files copied.
+	    log::l("removing media $name");
 	    unlink "$prefix/var/lib/urpmi/hdlist.$name.cz";
 	    unlink "$prefix/var/lib/urpmi/synthesis.hdlist.$name.cz";
 	}
