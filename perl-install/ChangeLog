@@ -1,3 +1,184 @@
+2004/01/08  Damien Chaumette  <dchaumette at mandrakesoft.com>
+
+	* network/adsl.pm: fix sagem net_cnx_up (thanks to QA team)
+
+	* standalone/drakconnect: first 'manage interface'
+	implementatiimplementation
+
+	* drakxtools.spec: new version
+
+2004/01/08  Pixel  <pixel at mandrakesoft.com>
+
+	* Makefile: runinstall2 is deprecated, install2 is called directly
+
+	* share/aliases: i thought stage1 didn't call runinstall2 anymore...
+	what's wrong with me??
+	runinstall2 is deprecated, install2 is called directly
+
+	* install2.pm: no need to log the error twice, errorInStep will take care
+	of it
+	display the error
+
+	* diskdrake/interactive.pm, Xconfig/resolution_and_depth.pm: perl_checker
+	compliance
+
+	* network/smb.pm, diskdrake/smbnfs_gtk.pm: authentification is french, the
+	english word is authentication
+
+	* bootloader.pm: drop keytable line in grub config file since grub doesn't
+	handle it anymore
+	(patch dropped long ago in grub 0.90-3mdk)
+	  - simplify lilo boot message. Not mentioning the timeout parameter
+	fixes bugzilla #5429
+	  - remove /boot/grub/messages and don't use the i18n command which are
+	obsolete
+	  since grub doesn't handle it anymore
+
+	* standalone/drakauth, any.pm, authentication.pm,
+	install_steps_interactive.pm, install_any.pm: 
+	  - integrate chkauth (which is now deprecated)
+	  - new module authentication
+
+	* services.pm: add a fam description (telling that GNOME & KDE uses it).
+	closes part of bugzilla #1704
+
+	* common.pm: better override formatError than replacing all the
+	formatError with formatError_and_log
+	(goal: get log'ing even now that SIG{__DIE__} is not there anymore)
+	add formatError_and_log (to get log'ing even now that SIG{__DIE__} is
+	not there anymore)
+
+	* install_steps_auto_install.pm: display the error
+
+2004/01/08  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* standalone/drakbackup: merge back drakbacup update
+
+	* ugtk2.pm: add a separator below buttons on fredc request
+
+	* drakxtools.spec: merge in spec file from update SRPM
+
+	* network/adsl.pm: fordward sagem net_cnx_up fix
+
+	* standalone/drakconnect (configure_net)
+	  - make buttons smaller
+	  - follow button std order
+	move all options parsing pieces together
+	restore exit_dialogsub
+	(configure_net)
+	when there's no connection:
+	  - fix message for new drakconnect scheme
+	  - shrink code by reusing interactive
+
+2004/01/07  Fabian Mandelbaum  <fabman at 2vias.com.ar>
+
+	* share/po/es.po: Updated Spanish translations
+
+2004/01/07  Pixel  <pixel at mandrakesoft.com>
+
+	* install2.pm, standalone/diskdrake: logging when __DIE__ing is dangerous:
+	  - in diskdrake, logging the error via c::syslog caused $@ to be
+	undefined, causing the error to be dropped! (esp "you need to reboot")
+	  - during install, no known error, but it's better to remove it anyway
+	(bye bye the "warning: ..." in ddebug.log, sniff)
+
+	* pkgs.pm: handle lilo not installed
+
+	* install_any.pm: use whereis_binary()
+
+	* Makefile.config: livedrake is deprecated/removed
+
+	* bootloader.pm: handle lilo not installed
+	pass --splash <resolution> to mkinitrd
+	(so that make-boot-splash doesn't rely on lilo.conf or menu.lst)
+
+	* run_program.pm: when called from commands.pm, install_any is not loaded
+
+	* any.pm, Xconfig/resolution_and_depth.pm: pass --splash <resolution> to
+	mkinitrd
+	(so that make-boot-splash doesn't rely on lilo.conf or menu.lst)
+
+	* drakxtools.spec: we need latest perl-MDK-Common
+
+2004/01/07  Stew Benedict  <sbenedict at mandrakesoft.com>
+
+	* standalone/drakbackup: DVD+RW support, perl_checker, fix bogus cron
+	message
+
+2004/01/07  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* share/po/br.po, share/po/fr.po: update
+
+	* standalone/service_harddrake, modules.pm, c/stuff.xs.pl,
+	network/ethernet.pm, drakxtools.spec: fixes merged from head into
+	updates
+
+2004/01/06  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/fa.po, share/po/ms.po, share/po/id.po, share/po/sk.po,
+	share/po/ru.po, share/po/gl.po, share/po/pt_BR.po, share/po/th.po,
+	share/po/sl.po, share/po/uz@Cyrl.po, share/po/et.po, share/po/ja.po,
+	share/po/hr.po, share/po/tr.po, share/po/mt.po, share/po/ga.po,
+	share/po/be.po, share/po/uk.po, share/po/mn.po, share/po/ko.po,
+	share/po/DrakX.pot, share/po/sv.po, share/po/sr.po, share/po/pl.po,
+	share/po/fi.po, share/po/lt.po, share/po/he.po, share/po/cy.po,
+	share/po/ca.po, share/po/da.po, share/po/ar.po, share/po/tg.po,
+	share/po/nb.po, share/po/bs.po, share/po/uz.po, share/po/ro.po,
+	share/po/mk.po, share/po/wa.po, share/po/is.po, share/po/af.po,
+	share/po/hi.po, share/po/az.po, share/po/zh_TW.po, share/po/zh_CN.po,
+	share/po/pt.po, share/po/vi.po, share/po/ta.po, share/po/fr.po,
+	share/po/sr@Latn.po, share/po/sq.po, share/po/nl.po, share/po/it.po,
+	share/po/eu.po, share/po/es.po, share/po/de.po, share/po/eo.po,
+	share/po/lv.po, share/po/el.po, share/po/bg.po, share/po/cs.po,
+	share/po/hu.po: updated pot file
+
+2004/01/06  Pixel  <pixel at mandrakesoft.com>
+
+	* pkgs.pm: perl_checker compliance
+	get rid of g_auto_install (unused & not working)
+
+	* Xconfig/card.pm, live_install, Makefile.config, install_gtk.pm,
+	standalone/livedrake, modules.pm, live_install2: obsolete livedrake,
+	live_install, live_update
+
+	* g_auto_install: get rid of g_auto_install (unused & not working)
+
+	* install_any.pm: obsolete livedrake, live_install, live_update
+	perl_checker compliance
+	use $::prefix
+	get rid of g_auto_install (unused & not working)
+
+	* detect_devices.pm: perl_checker compliance
+	obsolete livedrake, live_install, live_update
+
+	* standalone/adduserdrake, partition_table/mac.pm, standalone/XFdrake,
+	fsedit.pm, commands.pm, standalone/localedrake, partition_table.pm:
+	perl_checker compliance
+
+	* drakxtools.spec: obsolete live_update
+
+	* install_steps.pm: obsolete livedrake, live_install, live_update
+	use $::prefix
+	get rid of g_auto_install (unused & not working)
+
+	* standalone/drakclock: perl_checker compliance
+	use $::prefix
+
+	* Makefile, install2.pm: obsolete livedrake, live_install, live_update
+	get rid of g_auto_install (unused & not working)
+
+	* timezone.pm: use $::prefix
+
+	* install_steps_interactive.pm: perl_checker compliance
+	perl_checker compliance
+	perl_checker compliance
+	use $::prefix
+	get rid of g_auto_install (unused & not working)
+
+2004/01/06  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* standalone/harddrake2: kill unused variables
+
 2003/09/23  Pablo Saratxaga  <pablo at mandrakesoft.com>
 
 	* share/po/uk.po, share/po/it.po: updated Basque, Italian and Ukrainian
@@ -22395,7 +22576,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.846 2003/09/22 16:02:51 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.847 2003/09/23 09:45:58 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
