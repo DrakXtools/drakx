@@ -376,10 +376,6 @@ foreach (@classes) {
         if ($_->{bus} && $_->{bus} eq 'ide') {
             $_->{channel} = $_->{channel} ? N("secondary") : N("primary");
             delete $_->{info};
-        } elsif ($_->{bus} && $_->{bus} !~ /USB|PCI/) {
-            # SCSI detection incoherency:
-            my $i = $_;
-            $_->{bus_location} = join ':', map { sprintf("%lx", $i->{$_}) } qw(channel id lun);
         }
         if (defined $_->{capacity}) {
             my ($burner, $dvd) = (N("burner"), N("DVD"));
