@@ -1,3 +1,196 @@
+2003/09/18  Alice Lafox  <alice at lafox.com.ua>
+
+	* share/po/ru.po: last license message update
+
+2003/09/18  David Baudens  <baudens at mandrakesoft.com>
+
+	* share/rpmsrate: Add kdemultimedia-common to allow kaudiocreator to work
+
+2003/09/18  François Pons  <fpons at mandrakesoft.com>
+
+	* rescue/tree/etc/oem-all: updated with oem
+
+	* share/rpmsrate: added kdeutils in rpmsrate to help upgrading it.
+
+	* rescue/tree/etc/oem: fixed for %{ARCH} used in hdlists.
+
+2003/09/18  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/zh_CN.po, share/po/bs.po, share/po/zh_TW.po, share/po/pt_BR.po,
+	share/po/is.po, share/po/tr.po, share/po/sr@Latn.po, share/po/az.po,
+	share/po/ta.po, share/po/ro.po, share/po/ga.po, share/po/eu.po,
+	share/po/cy.po, share/po/fa.po, share/po/tg.po, share/po/ar.po,
+	share/po/ru.po, share/po/el.po, share/po/lt.po, share/po/it.po,
+	share/po/de.po, share/po/pt.po, share/po/hr.po, share/po/uz.po,
+	share/po/ko.po, share/po/ca.po, share/po/be.po, share/po/hu.po,
+	share/po/sv.po, share/po/fr.po, share/po/bg.po, share/po/lv.po,
+	share/po/uz@Cyrl.po, share/po/sl.po, share/po/pl.po, share/po/ms.po,
+	share/po/ja.po, share/po/eo.po, share/po/nl.po, share/po/mt.po,
+	share/po/nb.po, share/po/vi.po, share/po/wa.po, share/po/sk.po,
+	share/po/DrakX.pot, share/po/fi.po, share/po/sr.po, share/po/th.po,
+	share/po/he.po, share/po/da.po, share/po/gl.po, share/po/es.po,
+	share/po/af.po, share/po/id.po: updated pot file
+
+	* install_messages.pm: paragraph about patents was not tagged as
+	translatable; added N( )
+
+	* share/po/et.po: updated Estonian file
+	updated pot file
+
+	* share/po/Makefile: Arabic and Farsi po files not used at install, as
+	there
+	isn't available font during install
+
+	* share/po/sq.po: updated Albanian file
+	updated pot file
+
+	* share/po/cs.po, share/po/uk.po: updated pot file
+	updated Czech and Ukrainian files
+
+2003/09/18  Pixel  <pixel at mandrakesoft.com>
+
+	* pkgs.pm: update naughtyServers
+
+	* share/po/Makefile, Makefile: don't remove some po's from drakxtools,
+	only from install
+	(ar/fa disabled because not working at install, ga/sl not translated
+	enough)
+
+	* install_steps.pm: sanitize ld.so.conf *before* calling ldconfig
+
+	* standalone/drakboot: ensure update_bootloader_label() won't break when
+	called in text interactive
+	(hint: in that case, $boot_label is unset)
+
+	* bootloader.pm: 
+	  - fix grub/menu.lst -> lilo.conf
+	  - cleanup
+
+	* install_steps_gtk.pm: the install package dialog box must be explictly
+	destroyed when quitting
+	installation (esp. this occurs when answering "No" to "There was an
+	error
+	installing packages")
+	rationale: the $w (created with ugtk2->new) is not reference counted
+	correctly
+	(it was already workarounded when leaving installPackages the normal
+	way)
+
+	* modules.pm: don't "probeall scsi_hostadapter usb-storage" (as requested
+	by flepied and planel)
+
+2003/09/18  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* drakxtools.spec: 9.2-15mdk
+
+	* install_steps_interactive.pm: fix slot number when configuring sound
+	cards
+
+	* harddrake/sound.pm: prevent some obscure crash at install time
+	when installing, remember the new sound driver so that the user isn't
+	confused if he ever want to configure it again
+
+2003/09/17  Alice Lafox  <alice at lafox.com.ua>
+
+	* share/po/ru.po: fresh updates
+
+2003/09/17  Daouda Lo  <daouda at mandrakesoft.com>
+
+	* standalone/drakhelp: 
+	  - replace mdklaunchhelp by konqueror
+
+	* standalone/drakbug: 
+	  - drakhelp will load online drakbug help file
+
+2003/09/17  Damien Chaumette  <dchaumette at mandrakesoft.com>
+
+	* install_steps.pm: remove deprecated function call (thanks to guillaume
+	'eagle eye' Cottenceau)
+
+2003/09/17  François Pons  <fpons at mandrakesoft.com>
+
+	* install2.pm: make sure use_existing_root is not set.
+
+	* install_steps.pm: moved update-menu after installation of oem-theme.rpm
+	allow exit code of detached process to be seen.
+	fixed closing of rpmdb directly in pkgs
+	install urpmi before update-menus is called.
+	fixed to close rpm db whenever possible.
+
+	* pkgs.pm: make always sure rpmdb is closed before attempting
+	installation.
+
+2003/09/17  Guillaume Cottenceau  <gc at mandrakesoft.com>
+
+	* lang.pm, install_steps.pm: treat C encoding specially when computing
+	utf8 flag, it should not trigger utf8 set by itself
+
+2003/09/17  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/zh_TW.po: removed duplicate entry
+	Completed a translation
+	s:country:country/region:
+	updated Italian, Brazilian and Chinese files
+
+	* share/po/it.po, share/po/pt_BR.po: updated Italian, Brazilian and
+	Chinese files
+
+	* share/po/wa.po, lang.pm: Added "English (Ireland)" choice;
+	make Russian encoding compatible with Ukrainian (choosin 'ru' and 'uk'
+	languages doesn't force utf-8 but keeps koi8)
+
+	* pixmaps/langs/lang-en_IE.png: readded with binary flag
+	removed binary file
+	Added "English (Ireland)" choice;
+	make Russian encoding compatible with Ukrainian (choosin 'ru' and 'uk'
+	languages doesn't force utf-8 but keeps koi8)
+
+2003/09/17  Pixel  <pixel at mandrakesoft.com>
+
+	* diskdrake/interactive.pm: don't display a wait_message together with the
+	write_partitions() dialog
+
+	* fs.pm, partition_table.pm: ensure that a number is not written as the
+	type in fstab
+
+	* any.pm: add /usr/lib/qt3/lib (and sometimes /usr/lib/qt3/lib64) in
+	ld.so.conf
+	(needed for upgrade where package renaming can cause this to disappear)
+
+	* install_steps_interactive.pm: cancel in setRootPassword means "No
+	password", not cancel
+
+	* pkgs.pm: don't warn about FreeWnn being an open port (gc will try to
+	only open it to localhost)
+
+	* fsedit.pm: when the checking the mount point is not already used, don't
+	take into account current partition
+
+	* interactive/gtk.pm: fix ugliness: don't display $advanced_pack when
+	there are no @widgets_advanced
+	(esp. since $advanced_pack is now in its own scrolled window)
+
+2003/09/17  Till Kamppeter  <till at mandrakesoft.com>
+
+	* printer/main.pm: Fixed "Configure CUPS" function of printerdrake adding
+	a second
+	"<Location />...</Location>" in /etc/cups/cupsd.conf instead of
+	replacing the existing one (fix of Titi's newly introduced bug from
+	May 19 14:17:58 2003 UTC).
+
+2003/09/17  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* handle_configs.pm (comment_directive) fix it
+
+	* drakxtools.spec: 9.2-14mdk
+	we still are 13mdk
+	do not log changes that got reversed between two releases
+	9.2-13mdk
+
+2003/09/17  Warly  <warly at mandrakesoft.com>
+
+	* share/rpmsrate: force mandrake_doc-en if language is not fr, it or es
+
 2003/09/17  Alice Lafox  <alice at lafox.com.ua>
 
 	* share/po/ru.po: fresh updates
@@ -21948,7 +22141,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.839 2003/09/16 16:27:37 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.840 2003/09/17 12:33:13 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
