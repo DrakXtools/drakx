@@ -98,6 +98,10 @@ print "Making live in $::prefix directory.\n";
     run_program::rooted($::prefix, 'fc-cache');  #- generate cache in all directories mentioned in config file
 
     run_program::rooted($::prefix, 'nspluginscan'); #- must be run before kbuildsycoca for the ksycoca to be flash plugin aware
+
+    $ENV{HELP_BROWSER} = "kfmclient openProfile webbrowsing";
+    $ENV{BROWSER} = "kfmclient openProfile webbrowsing";
+    $ENV{DESKTOP} = "kde";
     foreach (@langs) {
 	$ENV{LC_ALL} = $_;
 	run_program::rooted($::prefix, 'kbuildsycoca');
