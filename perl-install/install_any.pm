@@ -1169,12 +1169,8 @@ sub what_provides {
 }
 
 sub is_installed {
-    my ($do, @l) = @_;
-    foreach (@l) {
-	my $p = pkgs::packageByName($do->{o}{packages}, $_);
-	$p && $p->flag_available or return;
-    }
-    1;
+    my ($do, $name) = @_;
+    are_installed($do, $name);
 }
 
 sub are_installed {
