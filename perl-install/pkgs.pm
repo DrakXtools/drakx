@@ -1413,7 +1413,7 @@ sub install($$$;$$) {
 		    $trans->order or die "error ordering package list: " . c::rpmErrorString();
 		    $trans->set_script_fd(fileno LOG);
 
-		    log::l("rpmRunTransactions start");
+		    log::l("rpm transactions start");
 		    my @probs = $trans->run($packages, force => 1, nosize => 1, callback_open => sub {
 						my ($data, $type, $id) = @_;
 						my $pkg = defined $id && $data->{depslist}[$id];
@@ -1435,7 +1435,7 @@ sub install($$$;$$) {
 						my ($data, $type, $id, $subtype, $amount, $total) = @_;
 						print OUTPUT "$type:$id:$subtype:$amount:$total\n";
 					    });
-		    log::l("rpmRunTransactions done, now trying to close still opened fd");
+		    log::l("transactions done, now trying to close still opened fd");
 		    install_any::getFile('XXX'); #- close still opened fd.
 
 		    @probs and die "installation of rpms failed:\n  ", join("\n  ", @probs);
@@ -1516,18 +1516,12 @@ sub remove($$) {
 
     return if $::g_auto_install || !@{$toRemove || []};
 
-    log::l("reading /usr/lib/rpm/rpmrc");
-    c::rpmReadConfigFiles() or die "can't read rpm config files";
-    log::l("\tdone");
-
-    my $db = c::rpmdbOpen($prefix) or die "error opening RPM database: ", c::rpmErrorString();
-    log::l("opened rpm database for removing old packages");
-
-    my $trans = c::rpmtransCreateSet($db, $prefix);
+    my $db = URPM::DB::open($prefix, 1) or die "error opening RPM database: ", c::rpmErrorString();
+    my $trans = $db->create_transaction($prefix);
 
     foreach my $p (@$toRemove) {
 	#- stuff remove all packages that matches $p, not a problem since $p has name-version-release format.
-	c::rpmtransRemovePackages($db, $trans, $p) if allowedToUpgrade($p);
+	$trans->remove($p) if allowedToUpgrade($p);
     }
 
     eval { fs::mount("/proc", "$prefix/proc", "proc", 0) } unless -e "$prefix/proc/cpuinfo";
@@ -1543,13 +1537,9 @@ sub remove($$) {
     #- place (install_steps_gtk.pm,...).
     installCallback($db, 'user', undef, 'remove', scalar @$toRemove);
 
-    #- TODO
-    if (my @probs = c::rpmRunTransactions($trans, $callbackOpen, $callbackClose, \&installCallback, 1)) {
+    if (my @probs = $trans->run(undef, force => 1)) {
 	die "removing of old rpms failed:\n  ", join("\n  ", @probs);
     }
-    c::rpmtransFree($trans);
-    c::rpmdbClose($db);
-    log::l("rpm database closed");
 
     #- keep in mind removing of these packages by cleaning $toRemove.
     @{$toRemove || []} = ();
