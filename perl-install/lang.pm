@@ -84,11 +84,11 @@ my %langs = (
 'pt_BR' => [ 'Portuguese Brazil', 'Portugues do Brasil', 'pt_BR', '    5', 'iso-8859-1',  'pt_BR:pt_PT:pt' ],
 'ro' =>    [ 'Romanian',            'Romana',            'ro_RO', '1    ', 'iso-8859-2' ],
 'ru' =>    [ 'Russian',             'Russkij',           'ru_RU', '12   ', 'koi8-r' ],
+'sh' =>    [ 'Serbian Latin',       'Srpska',            'sh_YU', '1    ', 'iso-8859-2',  'sh:sr@Latn' ], 
 'sk' =>    [ 'Slovak',              'Slovencina',        'sk_SK', '1    ', 'iso-8859-2' ],
 'sl' =>    [ 'Slovenian',           'Slovenscina',       'sl_SI', '1    ', 'iso-8859-2' ],
-'sp' =>    [ 'Serbian Cyrillic',    'Srpska',            'sp_YU', '1    ', 'iso-8859-5',  'sp:sr' ],
 'sq' =>    [ 'Albanian',            'Shqip',             'sq_AL', '1    ', 'iso-8859-1' ], 
-'sr' =>    [ 'Serbian Latin',       'Srpska',            'sr_YU', '1    ', 'iso-8859-2' ], 
+'sr' =>    [ 'Serbian Cyrillic',    'Srpska',            'sr_YU', '1    ', 'iso-8859-5',  'sp:sr' ],
 'sv' =>    [ 'Swedish',             'Svenska',           'sv_SE', '1    ', 'iso-8859-1' ],
 'ta' =>    [ 'Tamil',               'ZZ Tamil',          'ta_IN', ' 2   ', 'utf_ta' ],
 'tg' =>    [ 'Tajik',               'Tojiki',            'tg_TJ', ' 2   ', 'utf_cyr2' ],
@@ -608,7 +608,7 @@ sub get_kde_lang {
     my $valid_lang = sub {
 	my ($lang) = @_;
 	#- fast & dirty solution to ensure bad entries do not happen
-        my %fixlangs = (en => 'C', en_US => 'C', no => 'nb', sp => 'sr',
+        my %fixlangs = (en => 'C', en_US => 'C', no => 'nb', sh => 'sr',
                         zh_CN => 'zh_CN.GB2312', zh_SG => 'zh_CN.GB2312', zh_TW => 'zh_TW.Big5', zh_HK => 'zh_TW.Big5');
         exists $fixlangs{$lang} ? $fixlangs{$lang} :
 	  exists $valid_kde_langs{$lang} ? $lang :
