@@ -82,18 +82,17 @@ sub down_it {
 sub write_conf {
     my ($file, $netc) = @_;
 
-    if ($netc->{HOSTNAME}) {
-	$netc->{HOSTNAME} =~ /\.(.+)$/;
+    if ($netc->{HOSTNAME} && $netc->{HOSTNAME} =~ /\.(.+)$/) {
 	$netc->{DOMAINNAME} = $1;
     }
-    ($netc->{DOMAINNAME}) ||= 'localdomain';
+    $netc->{DOMAINNAME} ||= 'localdomain';
     add2hash($netc, {
 		     NETWORKING => "yes",
 		     FORWARD_IPV4 => "false",
 		     if_(!$netc->{DHCP}, HOSTNAME => "localhost.$netc->{DOMAINNAME}"),
 		    });
 
-    setVarsInSh($file, $netc, if_(!$netc->{DHCP}, 'HOSTNAME'), qw(NETWORKING FORWARD_IPV4 GATEWAY GATEWAYDEV NISDOMAIN));
+    setVarsInSh($file, $netc, if_(!$netc->{DHCP}, qw(HOSTNAME DOMAINNAME)), qw(NETWORKING FORWARD_IPV4 GATEWAY GATEWAYDEV NISDOMAIN));
 }
 
 sub write_zeroconf {
