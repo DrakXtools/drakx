@@ -13,15 +13,13 @@ use modules;
 sub parameters {
   my ($module) = @_;
 
-  my $modinfo = find { -x $_ } qw(/sbin/modiInfo /usr/bin/modinfo) or die N("modinfo is not available");
-
   if (!$::isStandalone && !$::testing) {
       modules::extract_modules('/tmp', $module);
       $module = "/tmp/$module.o";
   }
 
   my @parameters;
-  foreach (common::join_lines(`$modinfo -p $module`)) {
+  foreach (common::join_lines(run_program::get_stdout('modinfo', '-p', $module))) {
       chomp;
       next if /^warning:/;
       (my $name, $_) = /(\S+)\s+(.*)/s or warn "modules::parameters::get_options_name($module): unknown line\n";
