@@ -109,7 +109,9 @@ use common qw(:common);
     __("2 MB") => 2048,
     __("4 MB") => 4096,
     __("8 MB") => 8192,
-    __("16 MB or more") => 16384,
+    __("16 MB") => 16384,
+    __("32 MB") => 32768,
+    __("64 MB or more") => 65536,
 );
 
 $good_default_monitor = arch !~ /ppc/ ? "High Frequency SVGA, 1024x768 at 70 Hz" : 
