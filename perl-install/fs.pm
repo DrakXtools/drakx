@@ -130,7 +130,7 @@ sub subpart_from_wild_device_name {
     if ($dev =~ /^LABEL=(.*)/) {
 	return { device_LABEL => $1 };
     } elsif ($dev eq 'none') {
-    } elsif ($dev =~ m!^(\w+):/\w!) {
+    } elsif ($dev =~ m!^(\S+):/\w!) {
 	#- nfs
     } elsif ($dev =~ m!^//\w!) {
 	#- smb
