@@ -43,7 +43,7 @@ top_dir = .
 include $(top_dir)/Makefile.common
 
 
-DEFS = -DVERSION=\"$(VERSION)\" -DSPAWN_SHELL
+DEFS = -DVERSION=\"$(VERSION)\" #-DSPAWN_SHELL
 
 COMPILE = $(CC) $(DEFS) $(CFLAGS)
 
@@ -161,7 +161,7 @@ PCMCIA_DEFS = -DENABLE_PCMCIA
 endif
 
 
-all: dirs .depend $(BINS)
+all: dirs $(BINS)
 
 dirs:
 	@for n in . $(DIRS); do \
@@ -225,7 +225,7 @@ tar-mkinitrd_helper: clean
 	rm -rf mkinitrd_helper-subdir
 
 
-.depend: $(ALLSRC) *.h
+.depend:
 	$(CPP) $(CFLAGS) -M $(ALLSRC) > .depend
 
 ifeq (.depend,$(wildcard .depend))
