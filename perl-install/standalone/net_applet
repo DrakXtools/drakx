@@ -16,6 +16,8 @@ use Gtk2::TrayIcon;
 
 use ugtk2 qw(:create :helpers :wrappers);
 
+my $enable_activefw;
+
 my ($eventbox, $img);
 my ($current_state, $menu, $timeout);
 my $onstartupfile = "$ENV{HOME}/.net_applet";
@@ -24,7 +26,6 @@ add_icon_path("/usr/share/libDrakX/pixmaps/");
 is_running('net_applet') and die "net_applet already running\n";
 my $prog_name = "/usr/bin/net_applet";
 my $current_md5 = md5file($prog_name);
-
 my %appletstate = (
              connected => {
   		          colour => [ 'connected' ],
@@ -77,19 +78,23 @@ if ($opt eq '--force' || $opt eq '-f') { setAutoStart('TRUE') }
 
 shouldStart() or die "$onstartupfile should be set to TRUE or use net_applet --force";
 
-my $activefw = activefw->new(sub {
-    my ($con, $msg) = @_;
-    handle_attack($msg->get_args_list) if
-      $msg->get_interface eq "com.mandrakesoft.activefirewall" &&
-      $msg->get_path eq "/com/mandrakesoft/activefirewall" &&
-      $msg->get_member eq "Attack";
-});
+my $activefw;
 my $interactive_cb;
 my @attacks_queue;
 
+if ($enable_activefw) {
+    $activefw = activefw->new(sub {
+        my ($con, $msg) = @_;
+        handle_attack($msg->get_args_list) if
+          $msg->get_interface eq "com.mandrakesoft.activefirewall" &&
+          $msg->get_path eq "/com/mandrakesoft/activefirewall" &&
+          $msg->get_member eq "Attack";
+    });
+}
+
 checkNetwork();
 cronNetwork();
-get_unprocessed_attacks();
+get_unprocessed_attacks() if $enable_activefw;
 
 $icon->show_all;
 Gtk2->main;
@@ -168,9 +173,11 @@ sub setState {
         $menu->append(gtksignal_connect(gtkshow(Gtk2::MenuItem->new_with_label($name)), activate => sub { $launch->($interface) }));
     }
     $menu->append(gtkshow(Gtk2::SeparatorMenuItem->new));
-    $menu->append($interactive_cb = gtkshow(gtksignal_connect(gtkset_active(Gtk2::CheckMenuItem->new_with_label(N("Interactive intrusion detection")),
-                                                                            $activefw->get_interactive),
-                                                              toggled => sub { $activefw->set_interactive(to_bool($_[0]->get_active)) })));
+    if ($enable_activefw) {
+        $menu->append($interactive_cb = gtkshow(gtksignal_connect(gtkset_active(Gtk2::CheckMenuItem->new_with_label(N("Interactive intrusion detection")),
+                                                                                $activefw->get_interactive),
+                                                                  toggled => sub { $activefw->set_interactive(to_bool($_[0]->get_active)) })));
+    }
     $menu->append(gtkshow(gtksignal_connect(gtkset_active(Gtk2::CheckMenuItem->new_with_label(N("Always launch on startup")), shouldStart()),
                                             toggled => sub { setAutoStart(uc(bool2text($_[0]->get_active))) })));
     $menu->append(gtksignal_connect(gtkshow(Gtk2::MenuItem->new_with_label(N("Quit"))), activate => sub { mainQuit() }));
