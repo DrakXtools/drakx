@@ -60,10 +60,14 @@ $::wizard_xpm = "/usr/share/pixmaps/internet.xpm";
 my $in = vnew interactive('su');
 
 #$::isEmbedded or goto dd;
+netconnect::read_net_conf('', $netcnx, $netc);
+my @all_cards = netconnect::conf_network_card_backend ('', $netc, $intf, undef, undef, undef, undef);
+netconnect::load_conf('', $netcnx, $netc, $intf);
+
 my $window1 = $::isEmbedded ? new Gtk::Plug ($::XID) : new Gtk::Window -toplevel;
 $window1->signal_connect ( delete_event => sub { Gtk->exit(0); });
 $window1->set_position(1);
-$window1->set_title(_("Network configuration"));
+$window1->set_title(_("Network configuration (%d adapters)", @all_cards));
 $window1->border_width(10);
 my $vbox1 = new Gtk::VBox(0,0);
 $window1->add($vbox1);
@@ -72,7 +76,6 @@ $vbox1->pack_start($hbox1,1,1,0);
 $hbox1->pack_start(new Gtk::Label(_("Profile: ")),0,0,0);
 my $combo1 = new Gtk::Combo;
 $combo1->set_popdown_strings (get_profiles() );
-netconnect::read_net_conf('', $netcnx, $netc);
 my $old_profile=$netcnx->{PROFILE};
 $combo1->entry->set_text($netcnx->{PROFILE} ? $netcnx->{PROFILE} : "default");
 $combo1->entry->set_editable(0);
@@ -86,11 +89,10 @@ $hbox2->pack_start($label_host,0,0,0);
 
 $vbox1->pack_start(new Gtk::HSeparator,1,1,5);
 
-netconnect::load_conf('', $netcnx, $netc, $intf);
-
 my $frame1 = new Gtk::Frame (_("Internet access"));
 $vbox1->pack_start($frame1,1,1,0);
 my $table1 = new Gtk::Table (3,3, 0);
+$table1->set_border_width(5);
 $table1->set_row_spacings(5);
 $table1->set_col_spacings(5);
 #$table1->border_width(10);
@@ -122,22 +124,48 @@ $vbox1->pack_start($separator2,1,1,5);
 
 my $frame2 = new Gtk::Frame (_("LAN configuration"));
 $vbox1->pack_start($frame2,1,1,0);
-my$table2 = new Gtk::Table (3,2, 0);
-$table2->set_row_spacings(5);
-$table2->set_col_spacings(5);
-$frame2->add($table2);
-my $label9 = new Gtk::Label(_("Network adaptater 1 (eth0):"));
-$table2->attach($label9, 0, 1, 0, 1, 'fill', 'fill',0,0);
-my $label10 = new Gtk::Label(_("isdn_internal"));
-$table2->attach($label10, 1, 2, 0, 1, 'fill', 'fill',0,0);
-my $label11 = new Gtk::Label(_("Interface:"));
-$table2->attach($label11, 0, 1, 1, 2, 'fill', 'fill',0,0);
-my $label12 = new Gtk::Label(_("ippp0"));
-$table2->attach($label12, 1, 2, 1, 2, 'fill', 'fill',0,0);
-my $label13 = new Gtk::Label(_("Status:"));
-$table2->attach($label13, 0, 1, 2, 3, 'fill', 'fill',0,0);
-my $label14 = new Gtk::Label(_("not connected"));
-$table2->attach($label14, 1, 2, 2, 3, 'fill', 'fill',0,0);
+#my $scrolled1 = new Gtk::ScrolledWindow;
+#$scrolled1->set_policy('automatic','automatic');
+#$scrolled1->set_usize(300, 0);
+#$scrolled1->shadow_type('etched_in');
+#$frame2->add($scrolled1);
+#my $table2 = new Gtk::Table (scalar(@all_cards),3, 0);
+#$table2->set_border_width(5);
+#$table2->set_row_spacings(5);
+#$table2->set_col_spacings(5);
+#$frame2->add($table2);
+my $clist1 = new_with_titles Gtk::CList(_("Adapter"), _("Interface"), _("IP address"), _("Protocole"), _("Driver"));
+$clist1->set_column_width (2, 80);
+$clist1->set_column_width (4, 60);
+$frame2->add($clist1);
+#$scrolled1->add_with_viewport($table2);
+
+any::setup_thiskind($in, 'net', !$::expert, 1);
+my @eth_infos;
+foreach (0..$#all_cards) {
+$clist1->append($_+1, "eth$_", $intf->{"eth$_"}{IPADDR}, $intf->{"eth$_"}{BOOTPROTO}, $all_cards[$_]->[1]);
+#    $table2->attach(new Gtk::Label(_("Network adaptater n°%s", $_+1) . " (eth$_):"), 0, 1, $i, $i+1, 'fill', 'fill',0,0);
+#    $table2->attach(new Gtk::Label($intf->{"eth${_}"}{IPADDR} . " (" . $intf->{"eth${_}"}{BOOTPROTO} . ")"), 1, 2, $i, $i+1, 'fill', 'fill',0,0);
+#    $netc->{NET_DEVICE} eq "eth$_" and $table2->attach( _("connected to internet by %s", $netcnx->{type}), 2, 3, $i, $i+1, 'fill', 'fill',0,0);
+    print "-----\n";
+    print $intf->{"eth${_}"}{DEVICE} . "\n";
+    print $intf->{"eth${_}"}{IPADDR} . "\n";
+    print $all_cards[$_]->[1] . "\n";
+    print "-----\n";
+}
+
+#  my $label9 = new Gtk::Label(_("Network adaptater 1 (eth0):"));
+#  $table2->attach($label9, 0, 1, 0, 1, 'fill', 'fill',0,0);
+#  my $label10 = new Gtk::Label(_("isdn_internal"));
+#  $table2->attach($label10, 1, 2, 0, 1, 'fill', 'fill',0,0);
+#  my $label11 = new Gtk::Label(_("Interface:"));
+#  $table2->attach($label11, 0, 1, 1, 2, 'fill', 'fill',0,0);
+#  my $label12 = new Gtk::Label(_("ippp0"));
+#  $table2->attach($label12, 1, 2, 1, 2, 'fill', 'fill',0,0);
+#  my $label13 = new Gtk::Label(_("Status:"));
+#  $table2->attach($label13, 0, 1, 2, 3, 'fill', 'fill',0,0);
+#  my $label14 = new Gtk::Label(_("not connected"));
+#  $table2->attach($label14, 1, 2, 2, 3, 'fill', 'fill',0,0);
 
 my $bbox1 = new Gtk::HButtonBox;
 $vbox1->pack_start($bbox1,0,0,0);
@@ -193,7 +221,7 @@ sub get_profiles {
 	$i++;
     }
     @a;
-    #grep { s/.*?_//;} 
+    #grep { s/.*?_//;}
 }
 
 sub quit_global {
@@ -203,7 +231,7 @@ sub quit_global {
 sub configure_net {
     my (undef, $prefix, $netcnx, $netc, $intf) = @_;
     my $cnx={};
-#    my @infos;
+    my @infos;
     $cnx=$netcnx->{$netcnx->{type}};
     my $auto_detect={};
     my $window = new Gtk::Window -toplevel;
