@@ -4,6 +4,7 @@ use diagnostics;
 use strict;
 use vars qw(*LOG %preferred $limitMinTrans %compssListDesc);
 
+use MDK::Common::System;
 use common;
 use install_any;
 use commands;
@@ -434,11 +435,11 @@ sub psUsingHdlist {
 	    ++$packages->{count}; #- take care of this one, so that desplist will be clean with index of package.
 	    my $pkg = [ (undef) x 8 ]; $pkg->[$FILE] = $_; $pkg->[$MEDIUM] = $m;
 	    my $specific_arch = packageArch($pkg);
-	    if (!$specific_arch || compat_arch($specific_arch)) {
+	    if (!$specific_arch || MDK::Common::System::compat_arch($specific_arch)) {
 		my $old_pkg = $packages->{names}{packageName($pkg)};
 		if ($old_pkg) {
 		    if (packageVersion($pkg) eq packageVersion($old_pkg) && packageRelease($pkg) eq packageRelease($old_pkg)) {
-			if (better_arch($specific_arch, packageArch($old_pkg))) {
+			if (MDK::Common::System::better_arch($specific_arch, packageArch($old_pkg))) {
 			    log::l("replacing old package with package $_ with better arch: $specific_arch");
 			    $packages->{names}{packageName($pkg)} = $pkg;
 			} else {
