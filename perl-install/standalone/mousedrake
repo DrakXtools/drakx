@@ -57,14 +57,16 @@ if (!$mouse || !$::auto) {
 	my ($c) = grep { $_->{driver} =~ /usb-[ou]hci/ } detect_devices::pci_probe(0) or die _("no serial_usb found\n");
 	eval { modules::load($c->{driver}, "serial_usb") };
     }
-}
-$mouse->{XEMU3} = 'yes' if $mouse->{nbuttons} < 3 && (!$::noauto || $in->ask_yesorno('', _("Emulate third button?"), 1));
 
-$mouse->{device} = 
-  $in->ask_from_listf(_("Mouse Port"),
-		     _("Please choose on which serial port your mouse is connected to."),
-		     \&mouse::serial_port2text,
-		     [ mouse::serial_ports ]) || goto begin if $mouse->{type} eq 'serial';
+    $mouse->{XEMU3} = 'yes' if $mouse->{nbuttons} < 3 && (!$::noauto || $in->ask_yesorno('', _("Emulate third button?"), 1));
+
+    $mouse->{device} = $in->ask_from_listf(_("Mouse Port"),
+					   _("Please choose on which serial port your mouse is connected to."),
+					   \&mouse::serial_port2text,
+					   [ mouse::serial_ports ],
+					   $mouse->{device},
+					  ) || goto begin if $mouse->{type} eq 'serial';
+}
 
 #test_mouse($mouse) if $::isEmbedded;
 mouse::write_conf($mouse);
