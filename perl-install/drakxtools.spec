@@ -312,6 +312,7 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
   both standalone and embedded modes (tv)
 - printerdrake fixes (till)
 - translation updates
+- drakboot: fix #3048 (pixel)
 
 * Fri Mar  7 2003 Guillaume Cottenceau <gc@mandrakesoft.com> 9.1-18mdk
 - ugtk2.pm: fix rpmdrake dumping core when multiple searchs in some
