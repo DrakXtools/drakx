@@ -292,7 +292,7 @@ sub detect {
 	$modules_conf->get_probeall("usb-interface") and eval { modules::load('usbhid') };
         my @input_devices = cat_('/proc/bus/input/devices');
         my $synaptics_mouse;
-        if (my $mouse_nb = grep { /^H: Handlers=mouse/ } @input_devices) {
+        if (my $mouse_nb = scalar grep { /^H: Handlers=mouse/ } @input_devices) {
             if (is_xbox()) {
                 return fullname2mouse('Universal|Microsoft Xbox Controller S');
             }
