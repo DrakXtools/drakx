@@ -266,13 +266,31 @@ sub status_report {
 
 }
 
+
+sub return_path {
+    my $name = $_; 
+    foreach (@user_and_path_list) {
+	if (grep /^$name\:/, $_) {
+	    s/^$name\://gi;
+	    return $_;
+	}
+    }
+}
+
 sub build_backup_files {
+    -d  $save_path or mkdir_p($save_path);
+    my $path_name;
     if ($where_hd) {
+	print "backup_sys @sys_files\n";
 	$backup_sys and system("tar cvfz $save_path/backup_sys.tar.gz @sys_files");
+	print "backup_other @list_other\n";
 	@list_other and system("tar cvfz $save_path/backup_other.tar.gz @list_other");
 	if ($backup_user) {
 	    foreach (@user_list) {
-		system("tar cvfz $save_path/backup_user_$_.tar.gz /home/$_");
+		$path_name = return_path($_);
+		print "path of user: $path_name\n";
+		$what_no_browser or system("tar cvfz $save_path/backup_user_$_.tar.gz $path_name");
+		$what_no_browser and system("tar cvz --exclude NewCache --exclude Cache --exclude cache -f $save_path/backup_user_$_.tar.gz $path_name | grep cahe");
 	    }
 	}
     }
