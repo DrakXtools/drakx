@@ -1,27 +1,34 @@
-package network::nfs;
+package network::nfs; # $Id$
+
+use strict;
+use diagnostics;
 
 use common;
 use network::network;
+use network::smbnfs;
 use log;
 
-sub check {
-    my ($in) = @_;
+our @ISA = 'network::smbnfs';
 
-    my $pkg = 'nfs-utils-clients';
-    my $f = '/usr/sbin/showmount';
-    if (! -e $f) {
-	$in->ask_okcancel('', _("The package %s needs to be installed. Do you want to install it?", $pkg), 1) or return;
-	$in->do_pkgs->install($pkg);
-    }
-    if (! -e $f) {
-	$in->ask_warn('', _("Mandatory package %s is missing", $pkg));
-	return;
-    }
-    1;
+sub to_fstab_entry {
+    my ($class, $e) = @_;
+    $class->to_fstab_entry_raw($e, 'nfs');
+}
+sub from_dev { 
+    my ($class, $dev) = @_;
+    $dev =~ m|(.*?):(.*)|;
+}
+sub to_dev_raw {
+    my ($class, $server, $name) = @_;
+    $server . ':' . $name;
 }
 
+sub check {
+    my ($class, $in) = @_;
+    $class->raw_check($in, 'nfs-utils-clients', '/usr/sbin/showmount');
+}
 
-sub find_servers() {
+sub find_servers {
     local *F;
     my $pid = open F, "rpcinfo-flushed -b mountd 2 |";
     $SIG{ALRM} = sub { kill(15, $pid) };
@@ -40,7 +47,7 @@ sub find_servers() {
 }
 
 sub find_exports {
-    my ($server) = @_;
+    my ($class, $server) = @_;
 
     local *F;
     my $s = $server->{ip} || $server->{name};
@@ -49,8 +56,7 @@ sub find_exports {
     alarm 5;
 
     my (undef, @l) = <F>;
-    map { /(\S+)\s*(\S+)/; { name => $1, comment => $2 } } @l;
+    map { /(\S+)\s*(\S+)/; { name => $1, comment => $2, server => $server } } @l;
 }
 
 1;
-

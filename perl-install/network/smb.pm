@@ -1,26 +1,34 @@
-package network::smb;
+package network::smb; # $Id$
+
+use strict;
+use diagnostics;
 
 use common;
 use network::network;
+use network::smbnfs;
 
 
-sub check {
-    my ($in) = @_;
+our @ISA = 'network::smbnfs';
 
-    my $pkg = 'samba-client';
-    my $f = '/usr/bin/nmblookup';
-    if (! -e $f) {
-	$in->ask_okcancel('', _("The package %s needs to be installed. Do you want to install it?", $pkg), 1) or return;
-	$in->do_pkgs->install($pkg);
-    }
-    if (! -e $f) {
-	$in->ask_warn('', _("Mandatory package %s is missing", $pkg));
-	return;
-    }
-    1;
+sub to_fstab_entry {
+    my ($class, $e) = @_;
+    $class->to_fstab_entry_raw($e, 'nfs');
+}
+sub from_dev { 
+    my ($class, $dev) = @_;
+    $dev =~ m|//(.*?)/(.*)|;
+}
+sub to_dev_raw {
+    my ($class, $server, $name) = @_;
+    '//' . $server . '/' . $name;
 }
 
-sub find_servers() {
+sub check {
+    my ($class, $in) = @_;
+    $class->raw_check($in, 'samba-client', '/usr/bin/nmblookup');
+}
+
+sub find_servers {
     my (undef, @l) = `nmblookup "*"`;
     s/\s.*\n// foreach @l;
     my @servers = grep { network::network::is_ip($_) } @l;
@@ -41,7 +49,7 @@ sub find_servers() {
 }
 
 sub find_exports {
-    my ($server) = @_;
+    my ($class, $server) = @_;
     my @l;
     my $name  = $server->{name} || $server->{ip};
     my $ip    = $server->{ip} ? "-I $server->{ip}" : '';
@@ -55,7 +63,7 @@ sub find_exports {
 	s/^\t//;
 	my ($name, $type, $comment) = unpack "A15 A10 A*", $_;
 	if ($name eq '---------' && $type eq '----' && $comment eq '-------' .. /^$/) {
-	    push @l, { name => $name, type => $type, comment => $comment }
+	    push @l, { name => $name, type => $type, comment => $comment, server => $server }
 	      if $type eq 'Disk' && $name !~ /\$$/;
 	}
     }
