@@ -23,6 +23,10 @@ function create_marfile() {
     $GIBASEDIR/mdk-stage1/mar/mar -c $marfile $*
 }
 
+function build_kernel_is_26() { 
+    uname -r | grep -q '^2\.6'
+}
+
 function kern_version() {
     if echo $1 | grep -q ^2.4; then
         version=24
@@ -48,7 +52,11 @@ function create_modules() {
     fi
     perl -pi -e 's/((plip|ppa|imm): parport)/$1 parport_pc/' modules.dep
 
-    /sbin/modinfo-$version -f '%{filename} %{description}\n' $objects | perl -lne 'print "$1\t$2" if /(.*?)\.k?o "(.*)"/' > modules.description
+    if build_kernel_is_26; then
+	/sbin/modinfo $objects | perl -lne 'print "$name\t$1" if $name && /^description:\s*(.*)/; $name = $1 if m!^filename:\s*(.*)\.k?o!' > modules.description
+    else
+	/sbin/modinfo-$version -f '%{filename} %{description}\n' $objects | perl -lne 'print "$1\t$2" if /(.*?)\.k?o "(.*)"/' > modules.description
+    fi
 }
 
 function create_modules_mar() {
