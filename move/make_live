@@ -29,7 +29,7 @@ sub installPackages {
     install_any::setPackages(my $o = $::o = { 
 					     prefix => $::prefix, 
 					     meta_class => 'desktop', 
-					     default_packages => [ qw(XFree86-server XFree86-xfs) ],
+					     default_packages => [ qw(XFree86-server XFree86-xfs XFree86-FBDev) ],
 					    });
 
     my %compssUsersChoice = map { $_ => 1 } map { @{$_->{flags}} } values %{$o->{compssUsers}};
