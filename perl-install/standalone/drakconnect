@@ -395,15 +395,15 @@ sub build_notebook {
 				     ),
 			      gtkpack_(Gtk2::HBox->new(0,0),
 				       0, Gtk2::Label->new(N("Connection timeout (in sec)")),
-				       1, gtksignal_connect($gui->{cnx}{huptimeout} = Gtk2::Entry->new,
+				       1, gtksignal_connect($gui->{intf}{huptimeout} = Gtk2::Entry->new,
 							    key_press_event => $apply),
 				      ),
 			     ),
 			 ));
-	$dialing_mode_radio[0]->signal_connect('toggled' => sub { $gui->{cnx}{dialing_mode_radio} = 'auto'; $apply->() });
-	$dialing_mode_radio[1]->signal_connect('toggled' => sub { $gui->{cnx}{dialing_mode_radio} = 'static'; $apply->() });
-	$speed_radio[0]->signal_connect('toggled' => sub { $gui->{cnx}{speed_radio} = '64'; $apply->() });
-	$speed_radio[1]->signal_connect('toggled' => sub { $gui->{cnx}{speed_radio} = '128'; $apply->() });
+	$dialing_mode_radio[0]->signal_connect('toggled' => sub { $gui->{intf}{dialing_mode_radio} = 'auto'; $apply->() });
+	$dialing_mode_radio[1]->signal_connect('toggled' => sub { $gui->{intf}{dialing_mode_radio} = 'static'; $apply->() });
+	$speed_radio[0]->signal_connect('toggled' => sub { $gui->{intf}{speed_radio} = '64'; $apply->() });
+	$speed_radio[1]->signal_connect('toggled' => sub { $gui->{intf}{speed_radio} = '128'; $apply->() });
 	$gui->{intf_bool}{ONBOOT}->set_active($intf->{ONBOOT} eq 'yes' ? 1 : 0);
 	$gui->{intf_bool}{MII_NOT_SUPPORTED}->set_active($intf->{MII_NOT_SUPPORTED} eq 'no' ? 1 : 0);
 	$gui->{intf_bool}{HWADDR}->set_active($intf->{HWADDR});
@@ -433,8 +433,6 @@ sub build_notebook {
 		);
 	$gui->{intf}{auth}->set_popdown_strings(N("PAP"), N("Terminal-based"), N("Script-based"), N_("CHAP"));
 	$gui->{intf}{passwd}->set_visibility(0);
-	#/^user\s+"([^"]+)"/ and $intf->{login} = $1 foreach cat_("/etc/ppp/peers/adsl");
-	#$_->{login} eq $intf->{login} and $intf->{passwd} = $_->{passwd} foreach @{read_secret_backend()};
     }
     
     if ($intf->{pages}{Modem}) {
