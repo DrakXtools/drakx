@@ -133,6 +133,11 @@ my $popimap = sub {
     my $quit = sub {
 	$_[0] or $in->exit(0);
 	SaveConfig();
+	system($_) foreach ("/bin/cp /usr/share/Bastille/bastille-ipchains /usr/share/Bastille/bastille-netfilter /sbin",
+			    "/bin/cp /usr/share/Bastille/bastille-firewall /etc/rc.d/init.d/",
+			    "/bin/chmod 0700 /etc/rc.d/init.d/bastille-firewall", "/bin/chmod 0700 /sbin/bastille-ipchains",
+			    "/bin/chmod 0700 /sbin/bastille-netfilter", "/sbin/chkconfig bastille-firewall on",
+			    "/etc/rc.d/init.d/bastille-firewall stop", "/etc/rc.d/init.d/bastille-firewall start");
 	$in->exit(0);
 	return;
 	$_[0] or $in->exit(0);
@@ -143,7 +148,7 @@ my $popimap = sub {
 		s/\".*\"/\"$a\"/;
 	    }
 	} $config_file;
-	map { system($_) } ("/bin/cp /usr/share/Bastille/bastille-ipchains /usr/share/Bastille/bastille-netfilter /sbin",
+	system($_) foreach ("/bin/cp /usr/share/Bastille/bastille-ipchains /usr/share/Bastille/bastille-netfilter /sbin",
 			    "/bin/cp /usr/share/Bastille/bastille-firewall /etc/rc.d/init.d/",
 			    "/bin/chmod 0700 /etc/rc.d/init.d/bastille-firewall", "/bin/chmod 0700 /sbin/bastille-ipchains",
 			    "/bin/chmod 0700 /sbin/bastille-netfilter", "/sbin/chkconfig bastille-firewall on",
@@ -162,7 +167,7 @@ my $popimap = sub {
 		  [undef , "No I don't need NTP", "Yes I need NTP", $ntp ],
 		  [undef , "Don't Save", "Save & Quit", $quit ]
 		 );
-    !Kernel22() and pop @struct, pop @struct;
+    if (!Kernel22()) { pop @struct; pop @struct; pop @struct; @struct = ( @struct, [undef , "Don't Save", "Save & Quit", $quit ] ) }
     for (my $i=0;$i<@struct;$i++) {
 	$::Wizard_no_previous = $i == 0;
 	$::Wizard_finished = $i == $#struct;
