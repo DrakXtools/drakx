@@ -445,7 +445,7 @@ sub pppConfig {
     my ($in, $modem, $prefix) = @_;
     $modem or return;
 
-    devfssymlinkf($modem, 'modem', $prefix) if $modem->{device} ne "/dev/modem";
+    devfssymlinkf($modem, 'modem') if $modem->{device} ne "/dev/modem";
     $in->do_pkgs->install('ppp') if !$::testing;
 
     my %toreplace;
@@ -937,31 +937,37 @@ sub report_bug {
 }
 
 sub devfssymlinkf {
-    my ($o_if, $of, $prefix) = @_;
+    my ($o_if, $of) = @_;
     my $if = $o_if->{device};
 
     my $devfs_if = $o_if->{devfs_device};
-    $devfs_if ||= devices::to_devfs($o_if->{device});
-    $devfs_if ||= $o_if->{device};
+    $devfs_if ||= devices::to_devfs($if);
+    $devfs_if ||= $if;
 
-    #- when creating a symlink on the system, use devfs name if devfs is mounted
-    $if = $devfs_if if !$prefix && detect_devices::dev_is_devfs();
+    #- example: $of is mouse, $if is usbmouse, $devfs_if is input/mouse0
 
-    symlinkf($if, "$prefix/dev/$of");
-
-    output_p("$prefix/etc/devfs/conf.d/$of.conf", 
+    output_p("$::prefix/etc/devfs/conf.d/$of.conf", 
 "REGISTER	^$devfs_if\$	CFUNCTION GLOBAL symlink $devfs_if $of
 UNREGISTER	^$devfs_if\$	CFUNCTION GLOBAL unlink $of
 ");
+
+    output_p("$::prefix/etc/devfs/conf.d/$if.conf", 
+"REGISTER	^$devfs_if\$	CFUNCTION GLOBAL symlink $devfs_if $if
+UNREGISTER	^$devfs_if\$	CFUNCTION GLOBAL unlink $if
+") if $devfs_if ne $if;
+
+    #- when creating a symlink on the system, use devfs name if devfs is mounted
+    symlinkf($devfs_if, "$::prefix/dev/$if") if $devfs_if ne $if && detect_devices::dev_is_devfs();
+    symlinkf($if, "$::prefix/dev/$of");
 }
 sub devfs_rawdevice {
-    my ($o_if, $of, $prefix) = @_;
+    my ($o_if, $of) = @_;
 
     my $devfs_if = $o_if->{devfs_device};
     $devfs_if ||= devices::to_devfs($o_if->{device});
     $devfs_if ||= $o_if->{device};
 
-    output_p("$prefix/etc/devfs/conf.d/$of.conf", 
+    output_p("$::prefix/etc/devfs/conf.d/$of.conf", 
 "REGISTER	^$devfs_if\$	EXECUTE /etc/dynamic/scripts/rawdevice.script add /dev/$devfs_if /dev/$of
 UNREGISTER	^$devfs_if\$	EXECUTE /etc/dynamic/scripts/rawdevice.script del /dev/$of
 ");
@@ -1160,8 +1166,8 @@ sub config_dvd {
     log::l("configuring DVD");
     #- create /dev/dvd symlink
     each_index {
-	devfssymlinkf($_, 'dvd' . ($::i ? $::i + 1 : ''), $prefix);
-	devfs_rawdevice($_, 'rdvd' . ($::i ? $::i + 1 : ''), $prefix) if $have_devfsd;
+	devfssymlinkf($_, 'dvd' . ($::i ? $::i + 1 : ''));
+	devfs_rawdevice($_, 'rdvd' . ($::i ? $::i + 1 : '')) if $have_devfsd;
     } @dvds;
 
     if (!$have_devfsd) {
