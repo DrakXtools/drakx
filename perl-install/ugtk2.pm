@@ -842,11 +842,11 @@ sub _create_window($$) {
 
     if ($::o->{mouse}{unsafe}) {
 	$w->add_events('pointer-motion-mask');
-	my $signal;  #- don't make this line part of next one, signal_disconnect won't be able to access $signal value
-	$signal = $w->signal_connect(motion_notify_event => sub {
+	my $signal = $w->signal_connect(motion_notify_event => sub {
+	    my ($sig) = @_;
 	    delete $::o->{mouse}{unsafe};
 	    log::l("unsetting unsafe mouse");
-	    $w->signal_disconnect($signal);
+	    $w->signal_disconnect($sig);
 	});
     }
     $w->signal_connect(key_press_event => sub {
