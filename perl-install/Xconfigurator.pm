@@ -73,12 +73,12 @@ sub readCardsDB {
     \%cards;
 }
 sub readCardsNames {
-    my $file = "/usr/share/ldetect-lst/CardsNames";
+    my $file = "$ENV{SHARE_PATH}/ldetect-lst/CardsNames";
     local *F; open F, $file or die "can't find $file\n";
     map { (split '=>')[0] } grep { !/^#/ } <F>;
 }
 sub cardName2RealName {
-    my $file = "/usr/share/ldetect-lst/CardsNames";
+    my $file = "$ENV{SHARE_PATH}/ldetect-lst/CardsNames";
     my ($name) = @_;
     local *F; open F, $file or die "can't find $file\n";
     local $_;
@@ -92,7 +92,7 @@ sub cardName2RealName {
 }
 sub updateCardAccordingName {
     my ($card, $name) = @_;
-    my $cards = readCardsDB("/usr/share/ldetect-lst/Cards+");
+    my $cards = readCardsDB("$ENV{SHARE_PATH}/ldetect-lst/Cards+");
 
     add2hash($card->{flags}, $cards->{$name}{flags});
     add2hash($card, $cards->{$name});
@@ -358,7 +358,7 @@ sub monitorConfiguration(;$$) {
 
     $monitor->{hsyncrange} && $monitor->{vsyncrange} and return $monitor;
 
-    readMonitorsDB("/usr/share/ldetect-lst/MonitorsDB");
+    readMonitorsDB("$ENV{SHARE_PATH}/ldetect-lst/MonitorsDB");
 
     add2hash($monitor, { type => $in->ask_from_treelist(_("Monitor"), _("Choose a monitor"), '|', ['Custom', keys %monitors], 'Generic|' . translate($default_monitor)) }) unless $monitor->{type};
     if ($monitor->{type} eq 'Custom') {
