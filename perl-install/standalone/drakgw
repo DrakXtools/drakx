@@ -227,6 +227,7 @@ my $format = sub {
 
 #- setup the network interface we shall use
 
+step_interface_choice:
 my $device;
 if (!@cards)
 {
@@ -242,13 +243,13 @@ N("There is only one configured network adapter on your system:
 
 %s
 
-I am about to setup your Local Area Network with that adapter.", $format->($device)), 1) or goto step_ask_confirm;
+I am about to setup your Local Area Network with that adapter.", $format->($device)), 1) or goto step_detectsetup;
 } else {
     $device = $in->ask_from_listf(N("Choose the network interface"),
 				    N("Please choose what network adapter will be connected to your Local Area Network."),
 				     $format,
 				    \@cards,
-				    ) or goto step_ask_confirm;
+				    ) or goto step_detectsetup;
     defined $device or quit_global($in, 0);
 }
 log::explanations("Choosing network device: $device");
@@ -285,7 +286,7 @@ You can do it manually but you need to know what you're doing.", $device),
 Network: %s
 IP address: %s
 IP attribution: %s
-Driver: %s", $device, $conf->{NETWORK}, $conf->{IPADDR}, $conf->{BOOTPROTO}, $aliased_devices{$device} || '(unknown)')) } } ]) or goto step_detectsetup;
+Driver: %s", $device, $conf->{NETWORK}, $conf->{IPADDR}, $conf->{BOOTPROTO}, $aliased_devices{$device} || '(unknown)')) } } ]) or goto step_interface_choice;
     
     if ($auto ne N("Yes")) {
 	$reconf_dhcp_server_intf = 0;
