@@ -1,13 +1,16 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 9.3
-Release: 19mdk
+Release: 20mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
 Group: System/Configuration/Other
 Requires: %{name}-newt = %version-%release, perl-Gtk2 >= 1.022-1mdk, /usr/X11R6/bin/xtest, font-tools, usermode >= 1.63-5mdk, perl-MDK-Common >= 1.1.10, gurpmi
-Requires: foomatic-db-engine, mkbootdisk
+Requires: foomatic-db-engine
+%ifarch sparc sparc64 %{ix86} x86_64 amd64
+Requires: mkbootdisk
+%endif
 Conflicts: drakconf < 9.3-21mdk
 Conflicts: rpmdrake < 2.1-29mdk
 Conflicts: mandrake_doc-drakxtools-en < 9.2, mandrake_doc-drakxtools-es < 9.2, mandrake_doc-drakxtools-fr < 9.2
@@ -313,6 +316,17 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Thu Jan 15 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.3-20mdk
+- diskdrake:
+  o more lvm2 support (pixel / Luca Berra)
+  o update partition reread on kernel side and rebooting if needed (pixel)
+- drakboot (boot loader config) :
+  o do not complain on canceling
+  o handle graphical boot with grub too
+  o fix layout when embedded
+- drakconnect: update manage interfaces (poulpy)
+- drakTermServ: first time wizard (stew)
+
 * Wed Jan 14 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.3-19mdk
 - diskdrake: updated lvm2 support (pixel)
 - drakboot: boot theme configuration is back (warly)
@@ -320,7 +334,6 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
   draksec: sanitize buttons bar
 - drakedm: fix dm list
 - printerdrake: sort printer models list
-
 
 * Mon Jan 12 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.3-18mdk
 - drakedm: when offering to restart dm, offer yes/no as choice rather
