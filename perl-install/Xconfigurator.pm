@@ -202,23 +202,29 @@ sub cardConfiguration(;$$$) {
 				      $card->{type} =~ /GeForce 256/ ||
 				      $card->{type} =~ /S3 Savage3D/ || #- only this one is evoluting (expect a stable release ?)
 				      #- $card->{type} =~ /S3 ViRGE/ || #- 15bits only
-				      $card->{type} =~ /SiS /);
+				      $card->{type} =~ /SiS/);
     #- 3D acceleration configuration for XFree 4.0 using DRI.
     $card->{DRI_glx} = ($card->{identifier} =~ /Voodoo [35]/ || $card->{identifier} =~ /Voodoo Banshee/ || #- 16bit only
 			$card->{identifier} =~ /Matrox.* G[24]00/ || #- prefer 16bit (24bit not well tested according to DRI)
 			$card->{identifier} =~ /8281[05].* CGC/ || #- 16bits (Intel 810 & 815).
-			$card->{identifier} =~ /Radeon / || #- 16bits preferable ?
+			#$card->{identifier} =~ /Radeon / || #- 16bits preferable ?
 			$card->{identifier} =~ /Rage 128/); #- 16 and 32 bits, prefer 16bit as no DMA.
+    #- 3D acceleration configuration for XFree 4.0 using DRI but EXPERIMENTAL that may freeze the machine (FOR INFO NOT USED).
+    $card->{DRI_glx_EXPERIMENTAL} = ($card->{identifier} =~ /SiS.*6C?326/ || #- prefer 16bit, other ?
+				     $card->{identifier} =~ /SiS.*6C?236/ ||
+				     $card->{identifier} =~ /SiS.*630/ ||
+				     $card->{identifier} =~ /Radeon /); #- 16bits preferable ?
 
     #- check to use XFree 4.0 or XFree 3.3.
     $card->{use_xf4} = $card->{driver} && !$card->{flags}{unsupported};
     $card->{prefer_xf3} = ($card->{type} =~ /RIVA TNT/ ||
 			   $card->{type} =~ /RIVA128/ ||
 			   $card->{type} =~ /GeForce/ ||
-			   $card->{type} =~ /NeoMagic /);
+			   $card->{type} =~ /NeoMagic / ||
+			   $card->{type} =~ /SiS/);
 
     #- basic installation, use of XFree 4.0 or XFree 3.3.
-    my ($xf4_ver, $xf3_ver) = ("4.0.1", "3.3.6");
+    my ($xf4_ver, $xf3_ver) = ("4.0.2", "3.3.6");
     my $xf3_tc = { text => _("XFree %s", $xf3_ver),
 		   code => sub { $card->{Utah_glx} = $card->{DRI_glx} = ''; $card->{use_xf4} = '';
 				 log::l("Using XFree $xf3_ver") } };
@@ -241,6 +247,16 @@ _("Your card can have 3D hardware acceleration support with XFree %s.", $xf3_ver
 	unshift @choices, { text => _("XFree %s with 3D hardware acceleration", $xf3_ver),
 			    code => sub { $card->{use_xf4} = '';
 					  log::l("Using XFree $xf3_ver with 3D hardware acceleration") } };
+    }
+
+    #- an expert user may want to try to use an EXPERIMENTAL 3D acceleration.
+    if ($::expert && $card->{use_xf4} && $card->{DRI_glx_EXPERIMENTAL}) {
+	$msg =
+_("Your card can have 3D hardware acceleration support with XFree %s,
+NOTE THIS IS EXPERIMENTAL SUPPORT AND MAY FREEZE YOUR COMPUTER.", $xf4_ver) . "\n\n\n" . $msg;
+	push @choices, { text => _("XFree %s with EXPERIMENTAL 3D hardware acceleration", $xf4_ver),
+			 code => sub { $card->{DRI_glx} = 'EXPERIMENTAL';
+				       log::l("Using XFree $xf4_ver with EXPERIMENTAL 3D hardware acceleration") } };
     }
 
     #- an expert user may want to try to use an EXPERIMENTAL 3D acceleration, currenlty
@@ -305,11 +321,15 @@ NOTE THIS IS EXPERIMENTAL SUPPORT AND MAY FREEZE YOUR COMPUTER.", $xf3_ver)) . "
 					   keys %videomemory])};
 
 
-    #- hack for ATI Mach64 card where two options should be used if using Utah-GLX.
+    #- hack for ATI Mach64 cards where two options should be used if using Utah-GLX.
     if ($card->{identifier} =~ /Rage X[CL]/ ||
 	$card->{identifier} =~ /Rage Mobility (?:P\/M|L) / ||
 	$card->{identifier} =~ /3D Rage (?:LT|Pro)/) {
 	$card->{options_xf3}{no_font_cache} = $card->{Utah_glx};
+	$card->{options_xf3}{no_pixmap_cache} = $card->{Utah_glx};
+    }
+    #- hack for SiS cards where an option should be used if using Utah-GLX.
+    if ($card->{type} =~ /SiS /) {
 	$card->{options_xf3}{no_pixmap_cache} = $card->{Utah_glx};
     }
 
