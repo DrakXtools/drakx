@@ -198,7 +198,7 @@ my @menu_items =
      [ $menus{help}.N("/_About..."), undef, sub {
            create_dialog(N("About Harddrake"), 
 #-PO: Do not alter the <span ..> and </span> tags
-                         N("This is HardDrake, a Mandrake hardware configuration tool.\n<span foreground=\"royalblue3\">Version:</span> %s
+                         N("This is HardDrake, a Mandrakelinux hardware configuration tool.\n<span foreground=\"royalblue3\">Version:</span> %s
 <span foreground=\"royalblue3\">Author:</span> Thierry Vignaud &lt;tvignaud\@mandrakesoft.com&gt;\n\n", $harddrake::data::version) . "\n" .
                          formatAlaTeX($::license), { use_markup => 1, if_(!$::isEmbedded, transient => $w->{window}) });
        }, undef, '<Item>'

@@ -41,17 +41,17 @@ foreach (@ARGV) {
     /^--incident$/ and do { $incident = 1; $prog = shift @ARGV };
 }
 
-my $window = ugtk2->new(N("Mandrake Bug Report Tool"), center => 1);
+my $window = ugtk2->new(N("Mandrakelinux Bug Report Tool"), center => 1);
 $window->{rwindow}->set_border_width(5);
 $window->{window}->signal_connect("delete_event", sub { ugtk2->exit(0) });
 
 my $mdk_app = { 
-	       N("Mandrake Control Center") => 'drakconf',
+	       N("Mandrakelinux Control Center") => 'drakconf',
 	       N("First Time Wizard") => 'drakfw',
 	       N("Synchronization tool") => 'draksync',  
 	       N("Standalone Tools") => ['adduserdrake', 'diskdrake', 'drakautoinst', 'drakbackup', 'drakboot', 'drakbug', 'drakfloppy', 'drakfont', 'drakgw', 'drakconnect', 'drakxservices', 'drakxtv', 'keyboardrake', 'logdrake', 'mousedrake', 'net_monitor', 'printerdrake', 'scannerdrake', 'drakfirewall', 'XFdrake'],
 	       N("HardDrake") => 'harddrake2',
-	       N("Mandrake Online") => 'mdkonline',
+	       N("Mandrakeonline") => 'mdkonline',
 	       N("Menudrake") => 'menudrake',
 	       N("Msec") => 'msec',
 	       N("Remote Control") => 'rfbdrake',
