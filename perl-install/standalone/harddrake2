@@ -92,10 +92,15 @@ my %fields =
      {
       info => [ N("Disk identifier"), N("usually the disk serial number") ],
      },
-     MOUSE => {
+     MOUSE =>
+     {
+      "device" => [ N("Device file"), N("the device file used to communicate with the kernel driver for the mouse") ],
+      EMULATEWHEEL => [ N("Emulated wheel"), N("whether the wheel is emulated or not") ],
+      MOUSETYPE => [ N("Mouse type"), N("the type of the mouse") ],
       name => [ N("Name"), N("the name of the mouse") ],
       nbuttons => [ N("Number of buttons"), N("the number of buttons the mouse has") ],
       type => [ N("Type"), N("the type of bus on which the mouse is connected") ],
+      XMOUSETYPE => [ N("Mouse protocol used by X11"), N("the protocol that the graphical desktop use with the mouse") ],
      }
     );
 
@@ -391,6 +396,7 @@ foreach (@classes) {
             $hd->{extended_partitions} = @{$info->{extended}};
             delete $hd->{extended_partitions} if $hd->{extended_partitions} eq '0';
         }
+        $_->{EMULATEWHEEL} = bool2yesno($_->{EMULATEWHEEL}) if $Ident eq "MOUSE";
         rename_field($_, 'usb_bus', 'bus');
         rename_field($_, 'usb_driver', 'driver');
         rename_field($_, 'usb_id', 'id');
@@ -399,7 +405,7 @@ foreach (@classes) {
         rename_field($_, 'usb_vendor', 'vendor');
         rename_field($_, 'vendor_name', 'Vendor');
 
-        foreach my $i (qw(EMULATEWHEEL MOUSETYPE XMOUSETYPE auxmouse devfs_prefix unsafe val wacom)) { delete $_->{$i} };
+        foreach my $i (qw(auxmouse devfs_prefix unsafe val wacom)) { delete $_->{$i} };
 
         my $custom_id = harddrake::data::custom_id($_, $title);
         foreach my $field (qw(devfs_device device)) {
