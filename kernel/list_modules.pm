@@ -51,7 +51,7 @@ our %l = (
       qw(catc CDCEther kaweth pegasus rtl8150 usbnet usbvnet_rfmd),
     ],
     isdn => [
-      qw(b1pci c4 hisax hisax_fcpcipnp hysdn t1pci tpam),
+      qw(b1pci c4 hisax hisax_fcpcipnp hysdn t1pci tpam divas),
     ],
   },
 
