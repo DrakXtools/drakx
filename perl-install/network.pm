@@ -101,7 +101,7 @@ sub write_resolv_conf {
     print F "search $netc->{DOMAINNAME} $netc->{DOMAINNAME2}\n\n" if ($netc->{DOMAINNAME} || $netc->{DOMAINNAME2});
     print F "# nameserver $_\n" foreach grep { ! exists $used_dns{$_} } sort { $dns{$a} <=> $dns{$b} } keys %dns;
     print F "nameserver $_\n" foreach  sort { $used_dns{$a} <=> $used_dns{$b} } grep { $_ } keys %used_dns;
-    $dns_auto and print F "# ppp temp entry\n";
+    $dns_auto or print F "# ppp temp entry\n";
     print F "\n";
     print F "# $_\n" foreach @unknown;
 
