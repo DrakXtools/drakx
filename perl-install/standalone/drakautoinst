@@ -75,7 +75,7 @@ my $floppy = detect_devices::floppy();
 my $dev = devices::make($floppy);
 $in->ask_okcancel('', N("Insert a blank floppy in drive %s", $floppy), 1) or quit_global($in, 0);
 {
-    standalone::explanations(N("Creating auto install floppy"));
+    log::explanations(N("Creating auto install floppy"));
     my $w = $in->wait_message('', N("Creating auto install floppy"));
     commands::dd("if=$imagefile", "of=$dev", "bs=1440", "count=1024");
     common::sync();

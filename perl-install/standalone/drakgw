@@ -63,13 +63,13 @@ pur_gtk_mode() if $::isEmbedded && $in->isa('interactive::gtk');
 sub sys { system(@_) == 0 or log::l("[drakgw] Warning, sys failed for $_[0]") }
 
 sub outpend { 
-    standalone::explanations("modified file $_[0]");
+    log::explanations("modified file $_[0]");
     my $f = shift; local *F; open F, ">>$f" or die "outpend in file $f failed: $!\n"; print F foreach @_;
 }
 
 sub start_daemons () {
     my $cups_used = 0;
-    standalone::explanations("Starting daemons");
+    log::explanations("Starting daemons");
     if (-f "/etc/rc.d/init.d/cups") {
         if (system("/etc/rc.d/init.d/cups status >/dev/null") == 0) {
            $cups_used = 1;
@@ -91,7 +91,7 @@ sub start_daemons () {
 }
 
 sub stop_daemons () {
-    standalone::explanations("Stopping daemons");
+    log::explanations("Stopping daemons");
     foreach (qw(dhcpd named)) {
 	system("/etc/rc.d/init.d/$_ status >/dev/null 2>/dev/null") == 0 and sys("/etc/rc.d/init.d/$_ stop");
     }
@@ -238,7 +238,7 @@ I am about to setup your Local Area Network with that adapter.", $format->($devi
 				    ) or goto step_ask_confirm;
     defined $device or quit_global($in, 0);
 }
-standalone::explanations("Choosing network device: $device");
+log::explanations("Choosing network device: $device");
 
 
 my $lan_address = "192.168.1.0";
@@ -314,7 +314,7 @@ if (!($lan_address =~ s/\.0$//)) {
 		  N("The Local Network did not finish with `.0', bailing out."));
     quit_global($in, 0);
 }
-standalone::explanations("Using LAN address <$lan_address>");
+log::explanations("Using LAN address <$lan_address>");
 
 
 #- test for potential conflict with other networks
@@ -339,7 +339,7 @@ $wait_configuring = $in->wait_message(N("Configuring..."),
 #- setup the /etc/sysconfig/network-script/ script
 
 if ($reconf_dhcp_server_intf) {
-    standalone::explanations("Reconfiguring network parameters of $device");
+    log::explanations("Reconfiguring network parameters of $device");
     my $network_scripts = "/etc/sysconfig/network-scripts";
     my $ifcfg = "$network_scripts/ifcfg-$device";
     renamef($ifcfg, "$network_scripts/old.ifcfg-$device");
@@ -390,7 +390,7 @@ substInFile { s/^FORWARD_IPV4.*\n//; $_ .= "FORWARD_IPV4=true\n" if eof } $sysco
 #- setup the DHCP server
 
 if ($reconf_dhcp_server_intf) {
-    standalone::explanations("Configuring a DHCP server on $lan_address.0");
+    log::explanations("Configuring a DHCP server on $lan_address.0");
     renamef($dhcpd_conf, "$dhcpd_conf.old");
     output($dhcpd_conf, qq(subnet $lan_address.0 netmask $netmask {
 	# default gateway
@@ -441,7 +441,7 @@ substInFile { s/^INTERFACES\n//; $_ .= "INTERFACES=\"$device\"\n" if eof } $sysc
 #- Modify the root location block in /etc/cups/cupsd.conf
 
 if (-f $cups_conf) {
-    standalone::explanations("Updating CUPS configuration accordingly");
+    log::explanations("Updating CUPS configuration accordingly");
 
     substInFile {
         s/^ServerName[^:].*\n//; $_ .= "ServerName $server_ip\n" if eof;

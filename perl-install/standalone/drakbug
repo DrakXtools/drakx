@@ -178,7 +178,7 @@ sub connect_bugzilla {
     exec $ENV{BROWSER},$url if exists $ENV{BROWSER};
     my @browser = qw(mozilla konqueror galeon);
     foreach (@browser) {
-	if (-e "/usr/bin/$_") { standalone::explanations("Contacting $url with $_\n "); exec $_,$url } 
+	if (-e "/usr/bin/$_") { log::explanations("Contacting $url with $_\n "); exec $_,$url } 
     }
     $in->ask_warn('', N("No browser available! Please install one"));
 }

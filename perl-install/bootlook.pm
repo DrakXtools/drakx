@@ -27,6 +27,7 @@ use interactive;
 use standalone;
 use Xconfig::various;
 use any;
+use log;
 use bootloader;
 use fs;
 use ugtk2 qw(:helpers :wrappers :create);
@@ -182,10 +183,10 @@ sub {
       #lilo installation
       if (-f $themes{path}.$combo{lilo}->entry->get_text() . $themes{lilo}{file}) {
 			use MDK::Common::File;
-	    standalone::explanations(N("Backup %s to %s.old",$lilomsg,$lilomsg)); 
+	    log::explanations(N("Backup %s to %s.old",$lilomsg,$lilomsg)); 
 	    cp_af($lilomsg, "/boot/message-graphic.old");
 	    #can't use this anymore or $in->ask_warn(N("Error"), N("unable to backup lilo message"));
-	    standalone::explanations(N("Copy %s to %s", $themes{path} . $combo{lilo}->entry->get_text() . $themes{lilo}{file},$lilomsg)); 
+	    log::explanations(N("Copy %s to %s", $themes{path} . $combo{lilo}->entry->get_text() . $themes{lilo}{file},$lilomsg)); 
 	    cp_af($themes{path} . $combo{lilo}->entry->get_text() . $themes{lilo}{file}, $lilomsg);
 			#can't use this anymore  or $in->ask_warn(N("Error"), N("can't change lilo message"));
 	} else {
@@ -220,7 +221,7 @@ THEME=" . $combo{boot}->entry->get_text() . "
 LOGO_CONSOLE=" . ($keep_logo ? 'yes' : 'no') . "\n";
                 if (-f $boot_conf_file) {
                         eval { output($boot_conf_file, $bootsplash_cont) };
-			$@ and $in->ask_warn(N("Error"), N("Can't write /etc/sysconfig/bootsplash.")) or standalone::explanations(N("Write %s",$boot_conf_file));
+			$@ and $in->ask_warn(N("Error"), N("Can't write /etc/sysconfig/bootsplash.")) or log::explanations(N("Write %s",$boot_conf_file));
                 } else {
                     $in->ask_warn(N("Error"), N("Can't write /etc/sysconfig/bootsplash\nFile not found."));
                     $error = 1;
@@ -236,7 +237,7 @@ LOGO_CONSOLE=" . ($keep_logo ? 'yes' : 'no') . "\n";
 				  N("Can't launch mkinitrd -f /boot/initrd-%s.img %s.", $_,$_));
                     $error = 1;
                 } else { 
-		  standalone::explanations(N("Make initrd 'mkinitrd -f /boot/initrd-%s.img %s'.", $_,$_));
+		  log::explanations(N("Make initrd 'mkinitrd -f /boot/initrd-%s.img %s'.", $_,$_));
 		}
             }
         }
@@ -246,7 +247,7 @@ N("Can't relaunch LiLo!
 Launch \"lilo\" as root in command line to complete LiLo theme installation."));
             $error = 1;
         } else {
-		standalone::explanations(N("Relaunch 'lilo'"));
+		log::explanations(N("Relaunch 'lilo'"));
 	}
 	$in->ask_warn($error ? N("Error") : N("Notice"),
 		      $error ? N("Theme installation failed!") : N("LiLo and Bootsplash themes installation successfull"));

@@ -55,4 +55,6 @@ sub closeLog() {
     } else { close LOG; close LOG2 }
 }
 
+sub explanations { c::syslog(c::LOG_INFO()|c::LOG_LOCAL1(), "@_") }
+
 1;

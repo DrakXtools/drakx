@@ -70,6 +70,6 @@ foreach (@harddrake::data::tree) {
 }
 
 # output new hw config
-standalone::explanations "created file $last_boot_config";
+log::explanations "created file $last_boot_config";
 store \%config, $last_boot_config;
 $in->exit(0);

@@ -208,25 +208,25 @@ my $bok = gtksignal_connect(new Gtk2::Button(N("Ok")),
                                 my $secadmin_value = $secadmin_entry->get_text();
                                 my $w;
 
-                                standalone::explanations("Configuring msec");
+                                log::explanations("Configuring msec");
 
                                 if ($seclevel_value ne security::level::get_string()) {
                                     $w = wait_msg(N("Please wait, setting security level..."));
-                                    standalone::explanations("Setting security level");
+                                    log::explanations("Setting security level");
                                     security::level::set($seclevel_value);
                                     remove_wait_msg($w);
                                 }
 
                                 $w = wait_msg(N("Please wait, setting security options..."));
-                                standalone::explanations("Setting security administrator option");
+                                log::explanations("Setting security administrator option");
                                 $msec->config_check('MAIL_WARN', $secadmin_check_value == 1 ? 'yes' : 'no');
 
                                 if ($secadmin_value ne $msec->get_check_value('MAIL_USER') && $secadmin_check_value) {
-                                    standalone::explanations("Setting security administrator contact");
+                                    log::explanations("Setting security administrator contact");
                                       $msec->config_check('MAIL_USER', $secadmin_value);
                                   }
 
-                                standalone::explanations("Setting security periodic checks");
+                                log::explanations("Setting security periodic checks");
                                 foreach my $key (keys %security_checks_value) {
                                     if ($security_checks_value{$key}->entry->get_text() ne $msec->get_check_value($key)) {
                                         $msec->config_check($key, $security_checks_value{$key}->entry->get_text());
@@ -234,13 +234,13 @@ my $bok = gtksignal_connect(new Gtk2::Button(N("Ok")),
                                 }
 
                                 foreach my $domain (keys %options_values) {
-                                    standalone::explanations("Setting msec functions related to $domain");
+                                    log::explanations("Setting msec functions related to $domain");
                                       foreach my $key (keys %{$options_values{$domain}}) {
                                           my $opt = $options_values{$domain}{$key};
                                           $msec->config_function($key, $opt =~ /Combo/ ? $opt->entry->get_text() : $opt->get_text());
                                       }
                                   }
-                                standalone::explanations("Applying msec changes");
+                                log::explanations("Applying msec changes");
                                 run_program::rooted($::prefix, "/usr/sbin/msec");
 
                                 remove_wait_msg($w);

@@ -862,7 +862,7 @@ sub maintain_clients {
 				`perl -pi -e 's/Enable=false/Enable=true/' /usr/share/config/kdm/kdmrc`;
 				# This file had 2 "Enable=" entries, one for xdmcp and one for debug
 				change_gdm_xdmcp("true");
-				standalone::explanations("Modified files /etc/inittab, /etc/X11/xdm/xdm-config, /usr/share/config/kdm/kdmrc, /etc/X11/gdm/gdm.conf");
+				log::explanations("Modified files /etc/inittab, /etc/X11/xdm/xdm-config, /usr/share/config/kdm/kdmrc, /etc/X11/gdm/gdm.conf");
 				# just xdmcp in hosts.allow is enough for xdm & kdm, but gdm doesn't work - x11 doesn't help either
 				update_hosts_allow("enable");
 			} else {
@@ -870,7 +870,7 @@ sub maintain_clients {
 				`perl -pi -e 's/DisplayManager.requestPort:/\! DisplayManager.requestPort:/' /etc/X11/xdm/xdm-config`;
 				`perl -pi -e 's/Enable=true/Enable=false/' /usr/share/config/kdm/kdmrc`;
 				change_gdm_xdmcp("false");
-				standalone::explanations("Modified files /etc/inittab, /etc/X11/xdm/xdm-config, /usr/share/config/kdm/kdmrc, /etc/X11/gdm/gdm.conf");
+				log::explanations("Modified files /etc/inittab, /etc/X11/xdm/xdm-config, /usr/share/config/kdm/kdmrc, /etc/X11/gdm/gdm.conf");
 				update_hosts_allow("disable");
 			}
 			$in->ask_warn('', N("Need to restart the Display Manager for full changes to take effect. \n(service dm restart - at the console)"));
@@ -1455,12 +1455,12 @@ sub update_hosts_allow {
 			return;
 		}
 		if (!$has_all) {
-			standalone::explanations("Modified file /etc/hosts.allow");
+			log::explanations("Modified file /etc/hosts.allow");
 			append_to_file("/etc/hosts.allow", "ALL:\t$subnet\n");
 		}
 		$has_all = `grep ALL /etc/hosts.deny`;
 		if (!$has_all) {
-			standalone::explanations("Modified file /etc/hosts.deny");
+			log::explanations("Modified file /etc/hosts.deny");
 			append_to_file("/etc/hosts.deny", "ALL:\tALL\n");
 		}
 	}
@@ -1469,7 +1469,7 @@ sub update_hosts_allow {
 		for (my $i = 0; $i < @allow; $i++) {
 			if ($allow[$i] =~ /^ALL:\t$subnet/) {
 				splice(@allow, $i, 1);
-				standalone::explanations("Modified file /etc/hosts.allow");
+				log::explanations("Modified file /etc/hosts.allow");
 				output("/etc/hosts.allow", @allow);
 				last;
 			}
@@ -1478,7 +1478,7 @@ sub update_hosts_allow {
 		for (my $i = 0; $i < @deny; $i++) {
 			if ($deny[$i] =~ /^ALL:\tALL/) {
 				splice(@deny, $i, 1);
-				standalone::explanations("Modified file /etc/hosts.deny");
+				log::explanations("Modified file /etc/hosts.deny");
 				output("/etc/hosts.deny", @deny);
 				last;
 			}

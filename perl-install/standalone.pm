@@ -6,8 +6,8 @@ use common qw(N);
 use Config;
 
 #- for sanity (if a use standalone is made during install, MANY problems will happen)
+require 'log.pm'; #- "require log" causes some pb, perl thinking that "log" is the log() function
 if ($::isInstall) {
-    require 'log.pm'; #- "require log" causes some pb, perl thinking that "log" is the log() function
     log::l('ERROR: use standalone made during install :-(');
     log::l('backtrace: ' . backtrace());
 }
@@ -147,7 +147,7 @@ Copyright (C) 1999-2002 MandrakeSoft by <install\@mandrakesoft.com>
 sub on_request_help {
     my ($o, $link) = @_;
     my $browser = $ENV{BROWSER} || MDK::Common::Func::find { -x "/usr/bin/$_" } qw(mozilla konqueror galeon) or $o->ask_warn('',N("No browser is installed on your system, Please install one if you want to browse the help system"));
-    standalone::explanations("Connection to help system at $link");
+    log::explanations("Connection to help system at $link");
     system("$browser $link &");
 }
 
@@ -156,6 +156,7 @@ package pkgs_interactive;
 
 use run_program;
 use common;
+require 'log.pm';
 
 our @ISA = qw(); #- tell perl_checker this is a class
 
@@ -175,7 +176,7 @@ sub install {
     } else {
 	$wait = $o->{in}->wait_message('', N("Installing packages..."));
     }
-    standalone::explanations("installed packages @l");
+    log::explanations("installed packages @l");
     my $ret = system('urpmi', '--allow-medium-change', '--auto', '--best-output', @l) == 0;
 
     if ($o->{in}->isa('interactive::newt')) {
@@ -222,7 +223,7 @@ sub are_installed {
 sub remove {
     my ($o, @l) = @_;
     $o->{in}->suspend;
-    standalone::explanations("removed packages @l");
+    log::explanations("removed packages @l");
     my $ret = system('rpm', '-e', @l) == 0;
     $o->{in}->resume;
     $ret;
@@ -231,7 +232,7 @@ sub remove {
 sub remove_nodeps {
     my ($o, @l) = @_;
     $o->{in}->suspend;
-    standalone::explanations("removed (with --nodeps) packages @l");
+    log::explanations("removed (with --nodeps) packages @l");
     my $ret = system('rpm', '-e', '--nodeps', @l) == 0;
     $o->{in}->resume;
     $ret;
@@ -244,7 +245,7 @@ package standalone;
 
 #- stuff will go to special /var/log/explanations file
 my $standalone_name;
-sub explanations { c::syslog(c::LOG_INFO()|c::LOG_LOCAL1(), "@_") }
+sub explanations { log::explanations("@_") }
 
 our @common_functs = qw(renamef linkf symlinkf output substInFile mkdir_p rm_rf cp_af touch setVarsInSh setExportedVarsInSh setExportedVarsInCsh update_gnomekderc);
 our @builtin_functs = qw(chmod chown unlink link symlink rename system);

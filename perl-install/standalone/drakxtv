@@ -41,7 +41,7 @@ sub scan4channels {
 #{	   exec {'consolehelper'} $0, ("urpmi", "xawtv") or die N("consolehelper missing");
 #    };
     if (! -x "/usr/bin/scantv") {
-#	standalone::explanations("package xawtv isn't installed");
+#	log::explanations("package xawtv isn't installed");
 	   $in->ask_warn("XawTV isn't installed!", 
 				  formatAlaTeX(N("XawTV isn't installed!
 
@@ -120,7 +120,7 @@ You can install it by typing \"urpmi xawtv\" as root, in a console.")));
 			 $in->ask_warn(N("There was an error while scanning for TV channels"),
 				       N("XawTV isn't installed!")) }
 		  else {
-			 standalone::explanations("created file $home/.xawtv");
+			 log::explanations("created file $home/.xawtv");
 			   $in->ask_warn(N("Have a nice day!"),
 					 N("Now, you can run xawtv (under X Window!) !\n")) unless $use_X;
 		    };
