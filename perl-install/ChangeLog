@@ -1,5 +1,32 @@
 2001/04/05  Pixel  <pixel@mandrakesoft.com>
 
+	* any.pm (autologin): fix
+	ask for autologin
+
+	* install_steps_interactive.pm: ask for autologin
+	(generateAutoInstFloppy): do not use $o->{pcmcia} to know if pcmcia.img
+	was used. Better have a look at /proc/cmdline
+
+	* bootloader.pm (install_lilo): fix lilo's dumbness (when lilo warns about
+	not the first drive, it usually fails)
+
+	* pkgs.pm, share/rpmsrate: 
+	  - s/PCI/HW/
+	  - add rio500
+
+	* install_any.pm (kernelVersion): fix enormous stupid typo
+
+	* common.pm (getVarsFromSh): fix for AA="" inspired by chmou the Great
+	(but the Great
+	what?)
+
+	* install_steps.pm (exitInstall): oups, report_bug is no more in
+	commands::
+
+	* diskdrake.pm (More): created, asks for supermount, rescue pt, reload.
+
+2001/04/05  Pixel  <pixel@mandrakesoft.com>
+
 	* install_steps_gtk.pm (choosePackagesTree): invert the meaning of 'Show
 	automatically selected
 	packages' to go along with the new description
