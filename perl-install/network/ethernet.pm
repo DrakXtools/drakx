@@ -83,12 +83,10 @@ sub get_eth_cards() {
 #- $netc output:
 #-  $netc->{NET_DEVICE} : this is used to indicate that this eth card is used to connect to internet : $device
 #- output:
-#-  $all_cards : a list of a list ( [eth1, module1], ... , [ethn, modulen]). Pass the ethx as $interface in further call.
 #-  $device : only returned in case $interface was given it's $interface, but filtered by /eth[0-9+]/ : string : /eth[0-9+]/
 sub conf_network_card_backend {
     my ($netc, $intf, $o_type, $o_interface, $o_ipadr, $o_netadr) = @_;
     #-type =static or dhcp
-    return get_eth_cards() if !$o_interface;
 
     $o_interface =~ /eth[0-9]+/ or die("the interface is not an ethx");
     
