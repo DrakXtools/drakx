@@ -136,6 +136,11 @@ sub expand_symlinks {
     $f;
 }
 
+sub if_($@) {
+    my $b = shift;
+    $b ? @_ : ();
+}
+
 sub arch() {
     require c;
     c::kernel_arch();
