@@ -1,0 +1,371 @@
+Index: make_boot_img
+===================================================================
+RCS file: /cooker/gi/make_boot_img,v
+retrieving revision 1.103
+diff -u -r1.103 make_boot_img
+--- make_boot_img	2002/03/15 14:59:55	1.103
++++ make_boot_img	2002/03/20 22:12:43
+@@ -10,8 +10,8 @@
+ 
+ ($img, $type) = @ARGV;
+ 
+-$default_append = "ramdisk_size=32000 root=/dev/ram3";
+-$default_vga = "vga=788";
++$default_append = "ramdisk_size=48000 root=/dev/ram3";
++$default_vga = "vga=785";
+ 
+ $instdir = "mdk-stage1";
+ $mnt = "/tmp/drakx_mnt";
+Index: mdk-stage1/Makefile
+===================================================================
+RCS file: /cooker/gi/mdk-stage1/Makefile,v
+retrieving revision 1.53
+diff -u -r1.53 Makefile
+--- mdk-stage1/Makefile	2002/02/26 22:59:53	1.53
++++ mdk-stage1/Makefile	2002/03/20 22:12:43
+@@ -36,7 +36,7 @@
+  #*****************************************************************************
+ 
+ 
+-VERSION = 8.2
++VERSION = 0.9.2
+ 
+ top_dir = .
+ 
+Index: mdk-stage1/cdrom.c
+===================================================================
+RCS file: /cooker/gi/mdk-stage1/cdrom.c,v
+retrieving revision 1.18
+diff -u -r1.18 cdrom.c
+--- mdk-stage1/cdrom.c	2001/08/22 12:43:27	1.18
++++ mdk-stage1/cdrom.c	2002/03/20 22:12:43
+@@ -58,7 +58,7 @@
+ 	if (test_that_cd()) {
+ 		enum return_type results;
+ 		umount(IMAGE_LOCATION);
+-		results = ask_yes_no("That CDROM disc does not seem to be a " DISTRIB_NAME " Installation CDROM.\nRetry with another disc?");
++		results = ask_yes_no("That CDROM disc does not seem to be a " DISTRIB_NAME " Demo-CDROM.\nRetry with another disc?");
+ 		if (results == RETURN_OK)
+ 			return try_with_device(dev_name, dev_model);
+ 		return results;
+@@ -66,8 +66,7 @@
+ 
+ 	log_message("found a " DISTRIB_NAME " CDROM, good news!");
+ 
+-	if (IS_SPECIAL_STAGE2 || ramdisk_possible())
+-		load_ramdisk(); /* we don't care about return code, we'll do it live if we failed */
++	load_ramdisk(IMAGE_LOCATION LIVE_LOCATION); /* we don't care about return code, we'll do it live if we failed */
+ 
+ 	if (IS_RESCUE)
+ 		umount(IMAGE_LOCATION);
+Index: mdk-stage1/config-stage1.h
+===================================================================
+RCS file: /cooker/gi/mdk-stage1/config-stage1.h,v
+retrieving revision 1.7
+diff -u -r1.7 config-stage1.h
+--- mdk-stage1/config-stage1.h	2001/07/30 13:28:18	1.7
++++ mdk-stage1/config-stage1.h	2002/03/20 22:12:43
+@@ -24,12 +24,12 @@
+ /* If we have more than that amount of memory (in Mbytes), we assume we can load the rescue as a ramdisk */
+ #define MEM_LIMIT_RESCUE 40
+ 
+-#define DISTRIB_NAME "Mandrake Linux"
++#define DISTRIB_NAME "Frozen Bubble"
+ 
+ #define RAMDISK_COMPRESSION_RATIO 1.95
+ 
+-#define LIVE_LOCATION    "/Mandrake/mdkinst/"
+-#define RAMDISK_LOCATION "/Mandrake/base/"
++#define LIVE_LOCATION    "/fbimg.bz2"
++#define RAMDISK_LOCATION "/"
+ #define IMAGE_LOCATION   "/tmp/image"
+ #define STAGE2_LOCATION  "/tmp/stage2"
+ 
+Index: mdk-stage1/disk.c
+===================================================================
+RCS file: /cooker/gi/mdk-stage1/disk.c,v
+retrieving revision 1.24
+diff -u -r1.24 disk.c
+--- mdk-stage1/disk.c	2001/09/24 22:39:09	1.24
++++ mdk-stage1/disk.c	2002/03/20 22:12:43
+@@ -148,7 +148,7 @@
+ 
+ static enum return_type try_with_device(char *dev_name)
+ {
+-	char * questions_location[] = { "Directory or ISO image", NULL };
++	char * questions_location[] = { "Location", NULL };
+ 	char * questions_location_auto[] = { "directory", NULL };
+ 	static char ** answers_location = NULL;
+ 	char device_fullname[50];
+@@ -197,7 +197,7 @@
+ 		return RETURN_ERROR;
+ 	}
+ 
+-	results = ask_from_list_comments_auto("Please choose the partition where is copied the " DISTRIB_NAME " Distribution.",
++	results = ask_from_list_comments_auto("Please choose the partition where is copied the " DISTRIB_NAME " Image File.",
+ 					      parts, parts_comments, &choice, "partition", parts);
+ 	if (results != RETURN_OK)
+ 		return results;
+@@ -212,7 +212,7 @@
+ 		return try_with_device(dev_name);
+ 	}
+ 
+-	if (ask_from_entries_auto("Please enter the directory (or ISO image file) containing the " DISTRIB_NAME " Distribution.",
++	if (ask_from_entries_auto("Please enter the full path of the " DISTRIB_NAME " Image File.",
+ 				  questions_location, &answers_location, 24, questions_location_auto, NULL) != RETURN_OK) {
+ 		umount(disk_own_mount);
+ 		return try_with_device(dev_name);
+@@ -223,9 +223,9 @@
+ 	strcat(location_full, answers_location[0]);
+ 
+ 	if (access(location_full, R_OK)) {
+-		stg1_error_message("Directory or ISO image file could not be found on partition.\n"
+-			      "Here's a short extract of the files in the root of the partition:\n"
+-			      "%s", disk_extract_list_directory(disk_own_mount));
++		stg1_error_message("No such file on partition.\n"
++				   "Here's a short extract of the files in the root of the partition:\n"
++				   "%s", disk_extract_list_directory(disk_own_mount));
+ 		umount(disk_own_mount);
+ 		return try_with_device(dev_name);
+ 	}
+@@ -233,14 +233,18 @@
+ 	unlink(IMAGE_LOCATION);
+ 
+ 	if (!stat(location_full, &statbuf) && !S_ISDIR(statbuf.st_mode)) {
+-		log_message("%s exists and is not a directory, assuming this is an ISO image", location_full);
+-		if (lomount(location_full, IMAGE_LOCATION)) {
+-			stg1_error_message("Could not mount file %s as an ISO image of the " DISTRIB_NAME " Distribution.", answers_location[0]);
++		log_message("found file ok");
++		if (load_ramdisk(location_full) != RETURN_OK) {
++			stg1_error_message("Could not load program into memory.");
+ 			umount(disk_own_mount);
+ 			return try_with_device(dev_name);
+ 		}
+-	} else
+-		symlink(location_full, IMAGE_LOCATION);
++		method_name = strdup("disk");
++		return RETURN_OK;
++	} else {
++		stg1_error_message("It's a directory!");
++		return try_with_device(dev_name);
++	}
+ 
+ 	if (IS_SPECIAL_STAGE2 || ramdisk_possible()) {
+ 		/* RAMDISK install */
+@@ -253,12 +257,6 @@
+ 			umount(disk_own_mount);
+ 			return try_with_device(dev_name);
+ 		}
+-		if (load_ramdisk() != RETURN_OK) {
+-			stg1_error_message("Could not load program into memory.");
+-			loumount();
+-			umount(disk_own_mount);
+-			return try_with_device(dev_name);
+-		}
+ 	} else {
+ 		/* LIVE install */
+ 		char p;
+@@ -326,7 +324,7 @@
+ 		return disk_prepare();
+ 	}
+ 
+-	results = ask_from_list_comments_auto("Please choose the DISK drive on which you copied the " DISTRIB_NAME " Distribution.",
++	results = ask_from_list_comments_auto("Please choose the DISK drive on which you copied the " DISTRIB_NAME " Image File",
+ 					      medias, medias_models, &choice, "disk", medias);
+ 
+ 	if (results != RETURN_OK)
+Index: mdk-stage1/network.c
+===================================================================
+RCS file: /cooker/gi/mdk-stage1/network.c,v
+retrieving revision 1.40
+diff -u -r1.40 network.c
+--- mdk-stage1/network.c	2002/03/20 22:11:43	1.40
++++ mdk-stage1/network.c	2002/03/20 22:12:44
+@@ -670,7 +670,7 @@
+ 	log_message("found the " DISTRIB_NAME " Installation, good news!");
+ 
+ 	if (IS_SPECIAL_STAGE2) {
+-		if (load_ramdisk() != RETURN_OK) {
++		if (load_ramdisk(NULL) != RETURN_OK) {
+ 			stg1_error_message("Could not load program into memory.");
+ 			return nfs_prepare();
+ 		}
+Index: mdk-stage1/stage1.c
+===================================================================
+RCS file: /cooker/gi/mdk-stage1/stage1.c,v
+retrieving revision 1.46
+diff -u -r1.46 stage1.c
+--- mdk-stage1/stage1.c	2001/12/11 14:48:26	1.46
++++ mdk-stage1/stage1.c	2002/03/20 22:12:44
+@@ -394,6 +394,9 @@
+ 	init_modules_insmoding();
+ 	init_frontend("Welcome to " DISTRIB_NAME " (" VERSION ") " __DATE__ " " __TIME__);
+ 
++	if (total_memory() < 66)
++		stg1_error_message("It seems that you have 64 Mbytes or less of RAM. It will probably fail.");
++
+ 	if (IS_EXPERT)
+ 		expert_third_party_modules();
+ 
+Index: mdk-stage1/tools.c
+===================================================================
+RCS file: /cooker/gi/mdk-stage1/tools.c,v
+retrieving revision 1.29
+diff -u -r1.29 tools.c
+--- mdk-stage1/tools.c	2001/08/24 19:11:07	1.29
++++ mdk-stage1/tools.c	2002/03/20 22:12:44
+@@ -339,14 +339,10 @@
+ }
+ 
+ 
+-enum return_type load_ramdisk(void)
++enum return_type load_ramdisk(char * img_name)
+ {
+ 	int st2_fd;
+ 	struct stat statr;
+-	char img_name[500];
+-
+-	strcpy(img_name, IMAGE_LOCATION);
+-	strcat(img_name, get_ramdisk_realname());
+ 
+ 	log_message("trying to load %s as a ramdisk", img_name);
+ 
+Index: mdk-stage1/tools.h
+===================================================================
+RCS file: /cooker/gi/mdk-stage1/tools.h,v
+retrieving revision 1.9
+diff -u -r1.9 tools.h
+--- mdk-stage1/tools.h	2001/04/30 17:23:04	1.9
++++ mdk-stage1/tools.h	2002/03/20 22:12:44
+@@ -32,7 +32,7 @@
+ int total_memory(void);
+ int ramdisk_possible(void);
+ char * get_ramdisk_realname(void);
+-enum return_type load_ramdisk(void);
++enum return_type load_ramdisk(char * img_name);
+ enum return_type load_ramdisk_fd(int ramdisk_fd, int size);
+ void * memdup(void *src, size_t size);
+ void add_to_env(char * name, char * value);
+Index: perl-install/Makefile
+===================================================================
+RCS file: /cooker/gi/perl-install/Makefile,v
+retrieving revision 1.225
+diff -u -r1.225 Makefile
+--- perl-install/Makefile	2002/03/11 11:38:23	1.225
++++ perl-install/Makefile	2002/03/20 22:12:44
+@@ -68,8 +68,7 @@
+ 	chmod a+x $(DESTREP4PMS)/g_auto_install
+ 	chmod a+x $(DESTREP4PMS)/live_install*
+ 
+-get_needed_files: $(DIRS) $(MOFILES)
+-	$(MAKE) -C share
++get_needed_files: $(DIRS)
+ 
+ #	export PERL_INSTALL_TEST=1 ; strace -f -e trace=file -o '| grep -v "(No such file or directory)" | sed -e "s/[^\"]*\"//" -e "s/\".*//" | grep "^/" | grep -v -e "^/tmp" -e "^/home" -e "^/proc" -e "^/var" -e "^/dev" -e "^/etc" -e "^/usr/lib/rpm" > /tmp/list ' $(PERL) -d install2 < /dev/null
+ 	eval `perl -V:version`; \
+@@ -80,6 +79,19 @@
+ 
+ 	find auto -follow -name "*.so" >> /tmp/list
+ 
++	rpm -ql icewm-light | grep /usr/X11R6 >> /tmp/list
++	rpm -ql libSDL_image1.2 libSDL1.2 libSDL_mixer1.2 | grep /usr/lib >> /tmp/list
++	rpm -ql perl-SDL | grep site_perl >> /tmp/list
++	rpm -ql frozen-bubble | grep -v /usr/lib/menu | grep -v /usr/share/doc >> /tmp/list
++	echo /sbin/isapnp >> /tmp/list
++	echo /sbin/pnpdump >> /tmp/list
++	echo /usr/sbin/sndconfig >> /tmp/list
++	echo /bin/vim-minimal >> /tmp/list
++	echo /usr/bin/aumix >> /tmp/list
++	echo /bin/bash >> /tmp/list
++	echo /usr/X11R6/bin/rxvt.bin >> /tmp/list
++	echo /usr/X11R6/lib/X11/rgb.txt >> /tmp/list
++
+ 	for i in $(LOCALFILES) `cat /tmp/list` ; do \
+ 		ldd $$i 2>/dev/null | grep "=>" | sed -e 's/.*=> //' -e 's/ .*//' | uniq | sort >> /tmp/list; \
+ 	done
+@@ -160,10 +172,20 @@
+ 
+ 	for i in ../all.modules/modules.cz*; do cp -f $$i $(DEST)/lib/; done
+ 
+-	$(MAKE) -C share/po install NAME=libDrakX LOCALEDIR=$(DEST)/usr/share/locale_special
++#	$(MAKE) -C share/po install NAME=libDrakX LOCALEDIR=$(DEST)/usr/share/locale_special
+ 
+ #	echo -e '#!/bin/sh\n\nexec "/usr/bin/sh"' > $(DEST)/usr/bin/runinstall2
+ #	chmod a+x $(DEST)/usr/bin/runinstall2
++
++	rm -f $(DEST)/usr/X11R6/lib/X11/fonts/{gb16st,k14,taipei16,baekmuk_gulim_12}.pcf.gz
++	cp -f /usr/X11R6/lib/X11/fonts/75dpi/helv* $(DEST)/usr/X11R6/lib/X11/fonts/
++	cp -f /usr/X11R6/lib/X11/fonts/misc/7x14* $(DEST)/usr/X11R6/lib/X11/fonts/
++	mkfontdir $(DEST)/usr/X11R6/lib/X11/fonts 2>/dev/null
++
++	echo -e "prog frozen-bubble frozen-bubble frozen-bubble\nprog aumix aumix aumix\nprog rxvt rxvt rxvt.bin -sl 2000 -fn -*-fixed-medium-*-*-*-*-*-*-*-*-*-iso8859-15" > $(DEST)/usr/X11R6/lib/X11/icewm/toolbar
++	cat $(DEST)/usr/X11R6/lib/X11/icewm/toolbar > $(DEST)/usr/X11R6/lib/X11/icewm/menu
++	echo -e "Theme=bluePlastic/default.theme" > $(DEST)/usr/X11R6/lib/X11/icewm/preferences
++
+ 
+ ifeq (i386,$(ARCH))
+ 	cp -a /etc/pcmcia $(DEST)/etc
+Index: perl-install/install_steps_gtk.pm
+===================================================================
+RCS file: /cooker/gi/perl-install/install_steps_gtk.pm,v
+retrieving revision 1.263
+diff -u -r1.263 install_steps_gtk.pm
+--- perl-install/install_steps_gtk.pm	2002/03/15 10:32:48	1.263
++++ perl-install/install_steps_gtk.pm	2002/03/20 22:12:44
+@@ -57,7 +57,7 @@
+ 		    sleep 1;
+ 		    log::l("Server died"), return 0 if !$ok;
+ 		    if (c::Xtest($ENV{DISPLAY})) {
+-			fork || exec("aewm-drakx") || exec("true");
++#			fork || exec("aewm-drakx") || exec("true");
+ 			return 1;
+ 		    }
+ 		}
+@@ -105,6 +105,31 @@
+ 	}
+     }
+   OK:
++    require commands;
++    commands::mknod("/dev/dsp", "c", 14, 3);
++    commands::mknod("/dev/mixer", "c", 14, 0);
++    eval { commands::mknod("/dev/ptyp0", "c", 2, 0); };
++    eval { commands::mknod("/dev/ttyp0", "c", 3, 0); };
++    eval { commands::mknod("/dev/ptmx", "c", 5, 2); };
++    eval { commands::mknod("/dev/tty", "c", 5, 0); };
++
++    symlink "/usr/bin/bash", "/bin/bash";
++    symlinkf("/usr/bin/bash", "/bin/sh");
++
++    if (!$::expert) {
++	if (!modules::load_thiskind("sound")) {
++	    eval {
++		symlink "/usr/bin/pnpdump", "/sbin/pnpdump";
++		run_program::run("sndconfig", "--quiet");
++		run_program::run("isapnp", "/etc/isapnp.conf");
++		my @l = cat_("/etc/modules.conf");
++		my $module; /alias sound-slot-0 (\S+)/ and $module = $1 foreach @l;
++		my @options; /options\s+$module\s+(.*)/ and @options = split ' ', $1 foreach @l;
++		modules::load($module, 'sound', @options);
++	    }
++	}
++    }
++    exec "icewm-light" or die;
+     install_gtk::init_sizes();
+     install_gtk::default_theme($o);
+     install_gtk::create_logo_window($o);
+Index: tools/make_mdkinst_stage2
+===================================================================
+RCS file: /cooker/gi/tools/make_mdkinst_stage2,v
+retrieving revision 1.21
+diff -u -r1.21 make_mdkinst_stage2
+--- tools/make_mdkinst_stage2	2002/02/21 14:54:28	1.21
++++ tools/make_mdkinst_stage2	2002/03/20 22:12:44
+@@ -61,7 +61,7 @@
+ mkdir -p $MNTPOINT 2>/dev/null
+ for i in $MNTPOINT $STAGE2; do $SUDO umount $i 2>/dev/null ; done
+ dd if=/dev/zero of=$STAGE2 bs=1k count=$[ `du -s $STAGE2TMP | cut -f1` + 1024 + 200 ]
+-$MKE2FS -N 1000 $STAGE2
++$MKE2FS -N 2000 $STAGE2
+ $SUDO mount -t ext2 $STAGE2 $MNTPOINT -o loop
+ 
+ rmdir $MNTPOINT/lost+found
