@@ -348,7 +348,7 @@ int main(int argc __attribute__ ((unused)), char **argv __attribute__ ((unused))
 		printf("\033[8]");
 	}
 	else
-		printf("*** TESTING MODE ***\n");
+		printf("*** TESTING MODE *** (pid is %d)\n", getpid());
 
 
 	printf("\n\t\t\t\033[1;40mWelcome to \033[1;36mMandrake\033[0;39m Linux\n\n");
