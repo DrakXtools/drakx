@@ -80,7 +80,7 @@ PUBLISHING
 
   5 CUPS 
       cups-drivers xpp
-  5 CUPS || LPR foomatic
+  5 CUPS || LPR foomatic-db-engine foomatic-filters foomatic-db
   1 CUPS hpoj
 
 SHELLS
@@ -543,7 +543,8 @@ INSTALL
     ipchains shorewall iptables printer-utils rlpr samba-client
     xpp pdq printer-testpages nmap scli net-tools
     autologin ntp ipchains 
-    cups lpr foomatic printer-utils printer-testpages gimpprint xpp
+    cups lpr printer-utils printer-testpages gimpprint xpp
+    foomatic-db-engine foomatic-filters foomatic-db
     nc sndconfig 
     ImageMagick ghostscript printer-filters mpage a2ps ppdfilt libppd1 gpr groff libgimpprint1 numlock curl
     sane-backends sane-frontends xsane xsane-gimp mtools mtoolsfm
