@@ -120,7 +120,7 @@ endif
 
 	perl -ane 'symlink "$$F[1]", "$(DEST)/usr/bin/$$F[0]"' share/aliases
 
-	for i in fonts keyboards locales gconv keymaps; do tar xfj `../tools/specific_arch share/$$i.tar.bz2` -C $(DEST); done
+	for i in fonts keyboards locales keymaps; do tar xfj `../tools/specific_arch share/$$i.tar.bz2` -C $(DEST); done
 
 	grep ChangeLog CVS/Entries > $(DEST)/usr/share/VERSION
 
