@@ -55,6 +55,7 @@ $bbox1->set_layout(-end);
 my $button_conf = new Gtk::Button _("Configure");
 $button_conf->signal_connect ( clicked => sub {
 				 system("/usr/sbin/tinyfirewall --wizard");
+				 update();
 			     });
 $bbox1->add($button_conf);
 my $button_ok = new Gtk::Button _("OK");
