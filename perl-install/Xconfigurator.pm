@@ -698,6 +698,8 @@ sub testFinalConfig {
     }
 
     $::noShadow = 1;
+    my $message = _("Leaving in %d seconds", 99); #- fake translation of test program.
+    my $question = _("Is this the correct setting?");
     local *F;
     open F, "|perl 2>/dev/null" or die '';
     print F "use lib qw(", join(' ', @INC), ");\n";
@@ -714,7 +716,9 @@ sub testFinalConfig {
         my $text = Gtk::Label->new;
         my $time = 8;
         Gtk->timeout_add(1000, sub {
-	    $text->set(_("Leaving in %d seconds", $time));
+	    my $message = "} . $message . q{";
+ 	    $message = s/99/$time/;
+	    $text->set($message);
 	    $time-- or Gtk->main_quit;
             1;
 	});
@@ -725,7 +729,7 @@ sub testFinalConfig {
             system(($::testing ? "} . $prefix . q{" : "chroot } . $prefix . q{/ ") . "$qiv -y $background");
 
         my $in = interactive_gtk->new;
-	$in->exit($in->ask_yesorno('', [ _("Is this the correct setting?"), $text ], 0) ? 0 : 222);
+	$in->exit($in->ask_yesorno('', [ "} . $question . q{"), $text ], 0) ? 0 : 222);
     };
     my $rc = close F;
     my $err = $?;
