@@ -41,7 +41,6 @@ $::noauto = /-noauto/;
 $::testing = /-testing/;
 $i->{skiptest} = /-skiptest/;
 
-begin:
 my $in = interactive->vnew('su');
 
 my $f = "/usr/X11R6/lib/X11/Cards";
@@ -56,6 +55,7 @@ Xconfig::getinfoFromXF86Config($i) if $0 =~ Xdrakres;
 
 begin:
 Xconfig::getinfo($i);
+Xconfig::getinfoFromXF86Config($i, ''); #- take default from here at least.
 
 $::isEmbedded and kill USR2, $::CCPID;
 Xconfigurator::main('', $i, $in, 0, sub { $in->standalone::pkgs_install(@_) });
