@@ -104,7 +104,7 @@ sub update {
 }
 
 sub import_ctree {
-    my ($kind, $imported, $find_servers, $find_exports, $create) = @_;
+    my ($kind, $default_imports, $find_servers, $find_exports, $create) = @_;
     my (%name2server, %wservers, %name2export, $inside);
 
     my $tree = Gtk::CTree->new(1, 0);
@@ -132,8 +132,8 @@ sub import_ctree {
     };
 
     my $click_here = $tree->insert_node(undef, undef, [_("click here")], 5, (undef) x 4, 0, 0);
-    foreach (@$imported) {
-	my $node = $add_server->($_->{server});
+    foreach (@$default_imports) {
+	my $node = $add_server->({ name => $_ });
 	$add_exports->($node);
     }
 
@@ -175,12 +175,10 @@ sub import_ctree {
 }
 
 sub add_smbnfs {
-    my ($widget, $kind, $find_servers, $find_exports, $create) = @_;
+    my ($widget, $kind, $find_servers, $find_exports, $create, $default_imports) = @_;
     die if $kind->{main_box};
 
-    my $imported = [];
-
-    $kind->{display_box} = createScrolledWindow(import_ctree($kind, $imported, $find_servers, $find_exports, $create));
+    $kind->{display_box} = createScrolledWindow(import_ctree($kind, $default_imports, $find_servers, $find_exports, $create));
     $kind->{action_box} = new Gtk::HBox(0,0);
     $kind->{info_box} = new Gtk::VBox(0,0);
     $kind->{main_box} =
@@ -215,7 +213,8 @@ sub nfs_create {
 	fs::set_default_options($nfs);
 	$nfs;
     };
-    add_smbnfs($widget, nfs2kind($all_hds->{nfss}), \&network::nfs::find_servers, \&network::nfs::find_exports, $create);
+    my $servers = [ uniq(map { $_->{device} =~ m|(.*?):| } @{$all_hds->{nfss}}) ];
+    add_smbnfs($widget, nfs2kind($all_hds->{nfss}), \&network::nfs::find_servers, \&network::nfs::find_exports, $create, $servers);
 }
 
 ################################################################################
@@ -236,7 +235,8 @@ sub smb_create {
 	fs::set_default_options($smb);
 	$smb;
     };
-    add_smbnfs($widget, smb2kind($all_hds->{smbs}), \&network::smb::find_servers, \&network::smb::find_exports, $create);
+    my $servers = [ uniq(map { $_->{device} =~ m|//(.*?)/| } @{$all_hds->{smbs}}) ];
+    add_smbnfs($widget, smb2kind($all_hds->{smbs}), \&network::smb::find_servers, \&network::smb::find_exports, $create, $servers);
 }
 
 1;
