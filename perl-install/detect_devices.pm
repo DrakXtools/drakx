@@ -52,7 +52,7 @@ sub zips()        {
 
 sub floppies() {
     require modules;
-    eval { modules::load("floppy") };
+    eval { modules::load("floppy") } if $::isInstall;
     my @fds = $@ ? () : map {
 	my $info = (!dev_is_devfs() || -e "/dev/fd$_") && c::floppy_info(devices::make("fd$_"));
 	if_($info && $info ne '(null)', { device => "fd$_", devfs_device => "floppy/$_", media_type => 'fd', info => $info })
