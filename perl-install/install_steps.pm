@@ -139,9 +139,7 @@ sub doPartitionDisksAfter {
 
     if (!$::testing) {
 	my $hds = $o->{all_hds}{hds};
-	install_any::cond_umount_hdimage();
 	partition_table::write($_) foreach @$hds;
-	install_any::cond_remount_hdimage();
 	$_->{rebootNeeded} and $o->rebootNeeded foreach @$hds;
     }
 
