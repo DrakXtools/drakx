@@ -324,7 +324,7 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
-* Tue Jul  6 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10-53mdk
+* Thu Jul  8 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10-53mdk
 - bootloader-config (pixel):
   o nicer "usage: ..." 
   o add actions "add-entry" and "remove-entry"
@@ -333,7 +333,12 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
   o rename --vmlinuz to --image
   o remove unneeded spaces in append=" foo"
   o handles "optional" in LILO
+- drakbackup: fixes for Anthill #927 & #929 (filenames with spaces,
+  .backupignore, gui behavior)
 - drakboot: update bootsplash even if framebuffer was disabled (oblin)
+- XFdrake: add 1024x480 (pixel, #5192)
+- redo modules managment (prepare for reading either modprobe.conf or
+  modules.conf based on the running kernel version) (pixel)
 - fix build with new glibc
 
 * Mon Jul  5 2004 Pixel <pixel@mandrakesoft.com> 10-53mdk
