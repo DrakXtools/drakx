@@ -16,11 +16,27 @@ use Data::Dumper;
 sub configure {
     my ($netcnx, $mouse, $netc, $intf) = @_;
     $netcnx->{type} = 'modem';
+    my $modem = $netcnx->{$netcnx->{type}};
 #    $netcnx->{$netcnx->{type}} = {};
-#    $netcnx->{modem}{device} = $netc->{autodetect}{modem};
+    $modem->{device} = $netc->{autodetect}{modem};
 #  modem_step_1:
-    $netcnx->{$netcnx->{type}}{login} = ($netcnx->{$netcnx->{type}}{auth} eq 'PAP' || $netcnx->{$netcnx->{type}}{auth} eq 'CHAP') && $intf->{ppp0}{PAPNAME};
-    pppConfig($netcnx->{$netcnx->{type}}, $mouse, $netc, $intf) or return;
+#    $modem->{login} = ($modem->{auth} eq 'PAP' ||$modem->{auth} eq 'CHAP') && $intf->{ppp0}{PAPNAME};
+#    $netcnx->{$netcnx->{type}}->{connection} = ($netcnx->{$netcnx->{type}}->{auth} eq 'PAP' || $netcnx->{$netcnx->{type}}->{auth} eq 'CHAP') && $intf->{ppp0}{PAPNAME};
+#    $modem->{device} = readlink "$prefix/dev/modem";
+    foreach (cat_("/usr/share/config/kppprc")) {
+	/^DNS=(.*)$/ and ($modem->{dns1}, $modem->{dns2}) = split (',', $1);
+    }
+    my $secret = network::tools::read_secret_backend();
+    foreach (@$secret) {
+	$modem->{passwd} = $_->{passwd} if ($_->{login} eq $modem->{login});
+    }
+    foreach (cat_("/etc/sysconfig/network-scripts/chat-ppp0")) {
+	if (/.*ATDT(\d*).*/) {
+	    $modem->{phone} = $1;
+	    last;
+	}
+    }
+    pppConfig($modem, $mouse, $netc, $intf) or return;
     write_cnx_script($netc, "modem",
 q(
 /sbin/route del default
@@ -34,17 +50,22 @@ killall pppd
 
 sub pppConfig {
     my ($modem, $mouse, $netc, $intf) = @_;
-
     $mouse ||= {};
+
     $mouse->{device} ||= readlink "$prefix/dev/mouse";
     $::isInstall and $in->set_help('selectSerialPort');
     $modem->{device} ||= $in->ask_from_listf('', N("Please choose which serial port your modem is connected to."),
 					     \&mouse::serial_port2text,
 					     [ grep { $_ ne $mouse->{device} } (mouse::serial_ports(), if_(-e '/dev/modem', '/dev/modem')) ]) || return;
 
+    my @cnx_list;
+    my $secret = network::tools::read_secret_backend();
+    foreach (@$secret) {
+	push @cnx_list, $_->{server};
+    }
     $::isStandalone || $in->set_help('configureNetworkISP');
     $in->ask_from('', N("Dialup options"), [
-{ label => N("Connection name"), val => \$modem->{connection} },
+{ label => N("Connection name"), val => \$modem->{connection}},
 { label => N("Phone number"), val => \$modem->{phone} },
 { label => N("Login ID"), val => \$modem->{login} },
 { label => N("Password"), val => \$modem->{passwd}, hidden => 1 },

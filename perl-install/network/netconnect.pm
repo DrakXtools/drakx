@@ -123,7 +123,7 @@ sub main {
     $::isStandalone and read_net_conf($prefix, $netcnx, $netc); # REDONDANCE with intro. FIXME
     $netc->{NET_DEVICE} = $netcnx->{NET_DEVICE} if $netcnx->{NET_DEVICE}; # REDONDANCE with read_conf. FIXME
     $netc->{NET_INTERFACE} = $netcnx->{NET_INTERFACE} if $netcnx->{NET_INTERFACE}; # REDONDANCE with read_conf. FIXME
-    network::read_all_conf($prefix, $netc ||= {}, $intf ||= {});
+    network::network::read_all_conf($prefix, $netc ||= {}, $intf ||= {});
 
     modules::mergein_conf("$prefix/etc/modules.conf");
 
@@ -178,7 +178,7 @@ If you don't want to use the auto detection, deselect the checkbox.
     my %conf;
     $conf{$_} = $netc->{autodetect}{$_} ? 1 : 0 foreach 'modem', 'winmodem', 'adsl', 'cable', 'lan';
     $conf{isdn} = $netc->{autodetect}{isdn}{description} ? 1 : 0;
-    my @l;
+    my %l;
 #     my @l = (
 # 	     [N("Normal modem connection"), $netc->{autodetect}{modem}, N_("detected on port %s"), \$conf{modem}],
 # 	     [N("ISDN connection"), $netc->{autodetect}{isdn}{description}, N_("detected %s"), \$conf{isdn}],
@@ -188,27 +188,49 @@ If you don't want to use the auto detection, deselect the checkbox.
 # 	);
     my $i = 0;
     map { defined $set_default or do { $_->[1] and $set_default = $i }; $i++ } @l;
+#     my %l = (
+# 	       1 => [N("Normal modem connection") . if_($netc->{autodetect}{modem}, " - " . N("detected on port %s", $netc->{autodetect}{modem})), "modem"],
+# 	       2 => [N("Winmodem connection") . if_($netc->{autodetect}{winmodem}, " - " . N("detected")), "winmodem"],
+# 	       3 => [N("ISDN connection") . if_($netc->{autodetect}{isdn}{description}, " - " . N("detected %s", $netc->{autodetect}{isdn}{description})), "isdn"],
+# 	       4 => [N("ADSL connection") . if_($netc->{autodetect}{adsl}, " - " . N("detected")), "adsl"],
+# 	       5 => [N("Cable connection") . if_($netc->{autodetect}{cable}, " - " . N("cable connection detected")), "cable"],
+# 	       6 => [N("LAN connection") . if_($netc->{autodetect}{lan}, " - " . N("ethernet card(s) detected")), "lan"]
+	       
+# 	      );
+    $::isInstall and $in->set_help('configureNetwork');
+    my $tata;
+#     my $e = $in->ask_from(N("Network Configuration Wizard"), N("Choose the connection you want to configure"),
+#          [{ val => \$cnx_type, list => [sort keys %l], format => sub { $l{$_}[0] },
+# 			  changed => sub {
+# 			      return if !$netc->{autodetection};
+# 			      my $c = 0;
+# #-			      $conf{adsl} and $c++;
+# 			      $conf{cable} and $c++;
+# 			      my $a = keys(%{$netc->{autodetect}{lan}});
+# 			      0 < $a && $a <= $c and $conf{lan} = undef;
+# 			  }}]
+# 			 ) or goto step_1;
+#     $conf{$l{$cnx_type}[1]} = 1;
     @l = (
-[N("Normal modem connection") . if_($netc->{autodetect}{modem}, " - " . N("detected on port %s", $netc->{autodetect}{modem})), \$conf{modem}],
-[N("Winmodem connection") . if_($netc->{autodetect}{winmodem}, " - " . N("detected")), \$conf{winmodem}],
-[N("ISDN connection") . if_($netc->{autodetect}{isdn}{description}, " - " . N("detected %s", $netc->{autodetect}{isdn}{description})), \$conf{isdn}],
-[N("ADSL connection") . if_($netc->{autodetect}{adsl}, " - " . N("detected")), \$conf{adsl}],
-[N("Cable connection") . if_($netc->{autodetect}{cable}, " - " . N("cable connection detected")), \$conf{cable}],
-[N("LAN connection") . if_($netc->{autodetect}{lan}, " - " . N("ethernet card(s) detected")), \$conf{lan}]
-);
+	  [N("Normal modem connection") . if_($netc->{autodetect}{modem}, " - " . N("detected on port %s", $netc->{autodetect}{modem})), \$conf{modem}],
+	  [N("Winmodem connection") . if_($netc->{autodetect}{winmodem}, " - " . N("detected")), \$conf{winmodem}],
+	  [N("ISDN connection") . if_($netc->{autodetect}{isdn}{description}, " - " . N("detected %s", $netc->{autodetect}{isdn}{description})), \$conf{isdn}],
+	  [N("ADSL connection") . if_($netc->{autodetect}{adsl}, " - " . N("detected")), \$conf{adsl}],
+	  [N("Cable connection") . if_($netc->{autodetect}{cable}, " - " . N("cable connection detected")), \$conf{cable}],
+	  [N("LAN connection") . if_($netc->{autodetect}{lan}, " - " . N("ethernet card(s) detected")), \$conf{lan}]
+	 );
     $::isInstall and $in->set_help('configureNetwork');
     my $e = $in->ask_from(N("Network Configuration Wizard"), N("Choose the connection you want to configure"),
 			  [ map { { label => $_->[0], val => $_->[1], type => 'bool' } } @l ],
 			  changed => sub {
 			      return if !$netc->{autodetection};
 			      my $c = 0;
-#-			      $conf{adsl} and $c++;
+			      #-      $conf{adsl} and $c++;
 			      $conf{cable} and $c++;
 			      my $a = keys(%{$netc->{autodetect}{lan}});
 			      0 < $a && $a <= $c and $conf{lan} = undef;
 			  }
 			 ) or goto step_1;
-
     load_conf($netcnx, $netc, $intf);
     $conf{modem} and do { pre_func("modem"); require network::modem; network::modem::configure($netcnx, $mouse, $netc, $intf) or goto step_2 };
     $conf{winmodem} and do { pre_func("winmodem"); require network::modem; network::modem::winmodemConfigure($netc) or goto step_2 }; 
@@ -344,36 +366,33 @@ sub save_conf {
     my @all_cards = conf_network_card_backend($netc, $intf, undef, undef, undef, undef);
 
     $intf = { %$intf };
-
     output_with_perm("$prefix/etc/sysconfig/network-scripts/drakconnect_conf", 0600,
-      "SystemName=" . do { $netc->{HOSTNAME} =~ /([^\.]*)\./; $1 } . "
-DomainName=" . do { $netc->{HOSTNAME} =~ /\.(.*)/; $1 } . "
-InternetAccessType=" . do { if ($netcnx->{type}) { $netcnx->{type} } else { $netc->{GATEWAY} ? "lan" : "" } } . "
-InternetInterface=" . ($netc->{GATEWAY} && (!$netcnx->{type} || $netcnx->{type} eq 'lan') ? $netc->{GATEWAYDEV} : $netcnx->{NET_INTERFACE}) . "
-InternetGateway=$netc->{GATEWAY}
-DNSPrimaryIP=$netc->{dnsServer}
-DNSSecondaryIP=$netc->{dnsServer2}
-DNSThirdIP=$netc->{dnsServer3}
-AdminInterface=
+#      "SystemName=" . do { $netc->{HOSTNAME} =~ /([^\.]*)\./; $1 } . "
+#DomainName=" . do { $netc->{HOSTNAME} =~ /\.(.*)/; $1 } . "
+#InternetAccessType=" . do { if ($netcnx->{type}) { $netcnx->{type} } else { $netc->{GATEWAY} ? "lan" : "" } } . "
+#InternetInterface=" . ($netc->{GATEWAY} && (!$netcnx->{type} || $netcnx->{type} eq 'lan') ? $netc->{GATEWAYDEV} : $netcnx->{NET_INTERFACE}) . "
+# InternetGateway=$netc->{GATEWAY}
+# DNSPrimaryIP=$netc->{dnsServer}
+# DNSSecondaryIP=$netc->{dnsServer2}
+# DNSThirdIP=$netc->{dnsServer3}
+# AdminInterface=
 
-" . join ('', map {
-"Eth${_}Known=" . ($intf->{"eth$_"}{DEVICE} eq "eth$_" ? 'true' : 'false') . "
-Eth${_}IP=" . $intf->{"eth$_"}{IPADDR} . "
-Eth${_}Mask=" . $intf->{"eth$_"}{NETMASK} . "
-Eth${_}Mac=
-Eth${_}BootProto=" . $intf->{"eth$_"}{BOOTPROTO} . "
-Eth${_}OnBoot=" . $intf->{"eth$_"}{ONBOOT} . "
-Eth${_}Hostname=$netc->{HOSTNAME}
-Eth${_}HostAlias=" . do { $netc->{HOSTNAME} =~ /([^\.]*)\./; $1 } . "
-Eth${_}Driver=$all_cards[$_][1]
-Eth${_}Irq=
-Eth${_}Port=
-Eth${_}DHCPClient=" . ($intf->{"eth$_"}{BOOTPROTO} eq 'dhcp' ? $netcnx->{dhcp_client} : '') . "
-Eth${_}DHCPServerName=" . ($intf->{"eth$_"}{BOOTPROTO} eq 'dhcp' ? $netc->{HOSTNAME} : '') . "\n"
- } (0..9)) .
-"
-
-ISDNDriver=$isdn->{driver}
+# " . join ('', map {
+# "Eth${_}Known=" . ($intf->{"eth$_"}{DEVICE} eq "eth$_" ? 'true' : 'false') . "
+# Eth${_}IP=" . $intf->{"eth$_"}{IPADDR} . "
+# Eth${_}Mask=" . $intf->{"eth$_"}{NETMASK} . "
+# Eth${_}Mac=
+# Eth${_}BootProto=" . $intf->{"eth$_"}{BOOTPROTO} . "
+# Eth${_}OnBoot=" . $intf->{"eth$_"}{ONBOOT} . "
+# Eth${_}Hostname=$netc->{HOSTNAME}
+# Eth${_}HostAlias=" . do { $netc->{HOSTNAME} =~ /([^\.]*)\./; $1 } . "
+# Eth${_}Driver=$all_cards[$_][1]
+# Eth${_}Irq=
+# Eth${_}Port=
+# Eth${_}DHCPClient=" . ($intf->{"eth$_"}{BOOTPROTO} eq 'dhcp' ? $netcnx->{dhcp_client} : '') . "
+# Eth${_}DHCPServerName=" . ($intf->{"eth$_"}{BOOTPROTO} eq 'dhcp' ? $netc->{HOSTNAME} : '') . "\n"
+#  } (0..9)) .
+"ISDNDriver=$isdn->{driver}
 ISDNDeviceType=$isdn->{type}
 ISDNIrq=$isdn->{irq}
 ISDNMem=$isdn->{mem}
@@ -396,19 +415,22 @@ ISDNHomePhone=$isdn->{phone_in}
 ISDNLogin=$isdn->{login}
 ISDNPassword=$isdn->{passwd}
 ISDNConfirmPassword=$isdn->{passwd2}
-
-PPPInterfacesList=
-PPPDevice=$modem->{device}
+".
+#PPPInterfacesList=
+"PPPDevice=$modem->{device}
 PPPDeviceSpeed=
 PPPConnectionName=$modem->{connection}
-PPPProviderPhone=$modem->{phone}
-PPPProviderDomain=$modem->{domain}
-PPPProviderDNS1=$modem->{dns1}
-PPPProviderDNS2=$modem->{dns2}
-PPPLogin=$modem->{login}
-PPPPassword=$modem->{passwd}
-PPPConfirmPassword=$modem->{passwd}
-PPPAuthentication=$modem->{auth}
+".
+#PPPProviderPhone=$modem->{phone}
+"PPPProviderDomain=$modem->{domain}
+".
+#PPPProviderDNS1=$modem->{dns1}
+#PPPProviderDNS2=$modem->{dns2}
+"PPPLogin=$modem->{login}
+".
+#PPPPassword=$modem->{passwd}
+#PPPConfirmPassword=$modem->{passwd}
+"PPPAuthentication=$modem->{auth}
 PPPSpecialCommand=" . ($netcnx->{type} eq 'isdn_external' ? $netcnx->{isdn_external}{special_command} : '') . "
 
 ADSLInterfacesList=
@@ -502,9 +524,9 @@ sub load_conf {
 #	    /^DNSPrimaryIP=(.*)$/ and $netc->{dnsServer} = $1;
 #	    /^DNSSecondaryIP=(.*)$/ and $netc->{dnsServer2} = $1;
 #	    /^DNSThirdIP=(.*)$/ and $netc->{dnsServer3} = $1;
-	    /^InternetAccessType=(.*)$/ and $netcnx->{type} = $1;
-	    /^InternetInterface=(.*)$/ and $netcnx->{NET_INTERFACE} = $1;
-	    /^InternetGateway=(.*)$/ and $netc->{GATEWAY} = $1;
+#	    /^InternetAccessType=(.*)$/ and $netcnx->{type} = $1;
+#	    /^InternetInterface=(.*)$/ and $netcnx->{NET_INTERFACE} = $1;
+#	    /^InternetGateway=(.*)$/ and $netc->{GATEWAY} = $1;
 #	    /^SystemName=(.*)$/ and $system_name = $1;
 #	    /^DomainName=(.*)$/ and $domain_name = $1;
 # 	    /^Eth([0-9])Known=true$/ and $intf->{"eth$1"}{DEVICE} = "eth$1";
@@ -534,15 +556,15 @@ sub load_conf {
 	    /^ISDNPassword=(.*)$/ and $isdn->{passwd} = $1;
 	    /^ISDNConfirmPassword=(.*)$/ and $isdn->{passwd2} = $1;
 
-	    /^PPPDevice=(.*)$/ and $modem->{device} = $1;
-	    /^PPPConnectionName=(.*)$/ and $modem->{connection} = $1;
-	    /^PPPProviderPhone=(.*)$/ and $modem->{phone} = $1;
-	    /^PPPProviderDomain=(.*)$/ and $modem->{domain} = $1;
-	    /^PPPProviderDNS1=(.*)$/ and $modem->{dns1} = $1;
-	    /^PPPProviderDNS2=(.*)$/ and $modem->{dns2} = $1;
-	    #/^PPPLogin=(.*)$/ and $modem->{login} = $1;
-	    /^PPPPassword=(.*)$/ and $modem->{passwd} = $1;
-	    /^PPPAuthentication=(.*)$/ and $modem->{auth} = $1;
+	    #/^PPPDevice=(.*)$/ and $modem->{device} = $1;
+	    /^PPPConnectionName=(.*)$/ and $modem->{connection} = $1; # Keep this for futur multiple cnx support
+	    #/^PPPProviderPhone=(.*)$/ and $modem->{phone} = $1;
+	    /^PPPProviderDomain=(.*)$/ and $modem->{domain} = $1; # used only for kppp
+	    #/^PPPProviderDNS1=(.*)$/ and $modem->{dns1} = $1; # be aware that this value is now extracted from kppprc file ONLY
+	    #/^PPPProviderDNS2=(.*)$/ and $modem->{dns2} = $1;
+	    /^PPPLogin=(.*)$/ and $modem->{login} = $1;
+	    #/^PPPPassword=(.*)$/ and $modem->{passwd} = $1;
+	    /^PPPAuthentication=(.*)$/ and $modem->{auth} = $1; # We keep this because system is configured the same for both PAP and CHAP.
 	    if (/^PPPSpecialCommand=(.*)$/) {
 		$netcnx->{type} eq 'isdn_external' and $netcnx->{$netcnx->{type}}{special_command} = $1;
 	    }

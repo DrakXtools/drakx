@@ -33,6 +33,22 @@ sub write_secret_backend {
     }
 }
 
+sub read_secret_backend {
+    my $conf;
+    foreach my $i ("pap-secrets", "chap-secrets") {
+	foreach (cat_("$prefix/etc/ppp/$i")) {
+	    my ($login, $server, $passwd) = split(' ');
+	    ($a, $b, $c) = $passwd =~ /"(.*)"|'(.*)'|(.*)/;
+	    $passwd = $a ? $a : $b ? $b : $c;
+	    push @$conf, {login => $login,
+			  passwd => $passwd,
+			  server => $server };
+	}
+    }
+    $conf;
+}
+
+
 sub ask_connect_now {
     my ($type) = @_;
     $::Wizard_no_previous = 1;
