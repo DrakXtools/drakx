@@ -120,7 +120,7 @@ char * get_net_intf_description(char * intf_name)
 }
 #endif
 
-static void probe_that_type(enum driver_type type)
+void probe_that_type(enum driver_type type)
 {
 	if (IS_EXPERT) {
 		ask_insmod(type);
@@ -272,6 +272,7 @@ static void probe_that_type(enum driver_type type)
 			for (i = 0; i < len; i++) {
 				if (usbdb[i].vendor == vendor && usbdb[i].id == id) {
 					log_message("USB: device %04x %04x is \"%s\" (%s)", vendor, id, usbdb[i].name, usbdb[i].module);
+#ifndef DISABLE_NETWORK
 					if (type == NETWORK_DEVICES) {
 						stg1_info_message("About to load driver for usb network device:\n \n%s", usbdb[i].name);
 						prepare_intf_descr(usbdb[i].name);
@@ -279,6 +280,7 @@ static void probe_that_type(enum driver_type type)
 						if (intf_descr_for_discover) /* for modules providing more than one net intf */
 							net_discovered_interface(NULL);
 					}
+#endif
 
 				}
 			}
