@@ -132,6 +132,11 @@ sub size2time {
 }
 
 
+sub packagesProviding {
+    my ($packages, $name) = @_;
+    map { $packages->{depslist}[$_] } keys %{$packages->{provides}{$name} || {}};
+}
+
 #- searching and grouping methods.
 #- package is a reference to list that contains
 #- a hash to search by name and
@@ -141,8 +146,7 @@ sub packageByName {
     #- search package with given name and compatible with current architecture.
     #- take the best one found (most up-to-date).
     my @packages;
-    foreach (keys %{$packages->{provides}{$name} || {}}) {
-	my $pkg = $packages->{depslist}[$_];
+    foreach my $pkg (packagesProviding($packages, $name)) {
 	$pkg->is_arch_compat or next;
 	$pkg->name eq $name or next;
 	push @packages, $pkg;
@@ -172,14 +176,13 @@ sub packages2kernels {
     my ($packages) = @_;
 
     map { 
-	my $pkg = $packages->{depslist}[$_];
-	if (my ($ext, $version) = analyse_kernel_name($pkg->name)) {
-	    { pkg => $pkg, ext => $ext, version => $version };
+	if (my ($ext, $version) = analyse_kernel_name($_->name)) {
+	    { pkg => $_, ext => $ext, version => $version };
 	} else {
-	    log::l("ERROR: unknown package " . $pkg->name . " providing kernel");
+	    log::l("ERROR: unknown package " . $_->name . " providing kernel");
 	    ();
 	}
-    } keys %{$packages->{provides}{kernel}};
+    } packagesProviding($packages, 'kernel');
 }
 
 sub bestKernelPackage {
