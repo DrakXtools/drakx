@@ -628,30 +628,6 @@ sub select_packages {
       pkgs::readCompssUsers($o->{packages}, $o->{meta_class});
     eval { install_any::getFile("XXX") }; #- close out any still opened filehandle..
 
-    #- first select closure, package that will be selected for closure at least.
-    $o->{compssUsersChoice}{$_} = 1 foreach qw(BURNER DVD PCMCIA HIGH_SECURITY BIGMEM SMP 3D TV SCANNER PHOTO SOUND);
-    pkgs::setSelectedFromCompssList($o->{packages}, $o->{compssUsersChoice}, 4, 0);
-    $o->{compssUsersChoice}{$_} = 0 foreach qw(BURNER DVD PCMCIA HIGH_SECURITY BIGMEM SMP 3D TV SCANNER PHOTO SOUND);
-
-    #- INSTALL class need to be copied as closure (unless installed after).
-    foreach (@{$o->{packages}{needToCopy}}) {
-	my $pkg = pkgs::packageByName($o->{packages}, $_);
-	pkgs::selectPackage($o->{packages}, $pkg);
-    }
-	
-    #- first select package that have to go to closure according to their names.
-    foreach my $pkg (@{$o->{packages}{depslist}}) {
-	$pkg->{name} =~ /kernel-(\d|smp|enterprise|secure)/ and pkgs::selectPackage($o->{packages}, $pkg);
-	$pkg->{name} =~ /NVIDIA/ and pkgs::selectPackage($o->{packages}, $pkg);
-    }
-    foreach my $pkg (@{$o->{packages}{depslist}}) {
-	delete $pkg->{selected} and $pkg->{closure} = 1;
-    }
-    foreach (qw(Mesa-common xpp libqtcups2 qtcups kups)) {
-	my $pkg = pkgs::packageByName($o->{packages}, $_);
-	$pkg and $pkg->{closure} = 1;
-    }
-    
     pkgs::selectPackage($o->{packages}, pkgs::packageByName($o->{packages}, 'basesystem') || die "no basesystem package found");
     #- by default, choose:
     $o->{compssUsersChoice}{$_} = 1 foreach 'GNOME', 'KDE', 'CONFIG', 'X';
@@ -688,25 +664,58 @@ sub select_packages {
     }
 
     pkgs::setSelectedFromCompssList($o->{packages}, $o->{compssUsersChoice}, 4, 0);
+    #- save selected, but keep selected property.
+    foreach my $pkg (@{$o->{packages}{depslist}}) {
+	$pkg->{selected} and $pkg->{save_selected} = $pkg->{selected};
+    }
+
+    #- extend selection to closure now, make all selected as closure and restore selected after.
+    $o->{compssUsersChoice}{$_} = 1 foreach qw(BURNER DVD PCMCIA BIGMEM SMP 3D TV SCANNER PHOTO SOUND);
+    pkgs::setSelectedFromCompssList($o->{packages}, $o->{compssUsersChoice}, 4, 0);
+    $o->{compssUsersChoice}{$_} = 0 foreach qw(BURNER DVD PCMCIA BIGMEM SMP 3D TV SCANNER PHOTO SOUND);
+    #- INSTALL class need to be copied as closure (unless installed after).
+    #- but we have to remove kernel22 and kernel22-smp now obsolete for oem.
+    foreach (@{$o->{packages}{needToCopy}}) {
+	/^(kernel22.*|raidtools|lvm|reiserfsprogs|xfsprogs|jfsprogs)$/ and next;
+	my $pkg = pkgs::packageByName($o->{packages}, $_);
+	pkgs::selectPackage($o->{packages}, $pkg);
+    }
+    #- first select package that have to go to closure according to their names.
+    foreach my $pkg (@{$o->{packages}{depslist}}) {
+	$pkg->{name} =~ /kernel-(\d|smp|enterprise)/ and pkgs::selectPackage($o->{packages}, $pkg);
+	$pkg->{name} =~ /NVIDIA/ and pkgs::selectPackage($o->{packages}, $pkg);
+    }
+    foreach my $pkg (@{$o->{packages}{depslist}}) {
+	delete $pkg->{selected} && !$pkg->{save_selected} and $pkg->{closure} = 1;
+	$pkg->{save_selected} and $pkg->{selected} = $pkg->{save_selected};
+    }
 
     #- package that have to selected here as a bonus for oem install.
-    foreach (qw(cups cups-drivers a2ps drakprofile draksync numlock raidtools icewm-light
-		Mesa Mesa-demos alsa alsa-utils Mesa-demos curl
+    foreach (qw(cups cups-drivers a2ps drakprofile draksync numlock icewm-light
+		Mesa Mesa-demos alsa alsa-utils curl
                 glibc vim-minimal kernel
-	       ), exists $options{server} ? qw(kernel22 openldap-migration openldap-clients pam_ldap) : ()) {
+	       ), exists $options{server} ? qw(openldap-migration openldap-clients pam_ldap) : ()) {
 	my $pkg = pkgs::packageByName($o->{packages}, $_);
 	$pkg and pkgs::selectPackage($o->{packages}, $pkg);
     }
 
     #- special packages that are to be move to closure always ...
-    foreach (qw(nfs-utils-client numlock kernel22 usbd hotplug alsa alsa-utils imwheel
-		raidtools lvm reiserfsprogs xfsprogs jfsprogs),
-	     exists $options{server} ? qw(Aurora Aurora-Monitor-NewStyle-Categorizing-WsLib
-					  kernel-enterprise kernel22-secure) : ()) {
+    foreach (qw(nfs-utils-client numlock usbd hotplug alsa alsa-utils
+                bzflag),
+	     exists $options{server} ? qw(Aurora Aurora-Monitor-NewStyle-Categorizing-WsLib bootsplash) : ()) {
 	my $pkg = pkgs::packageByName($o->{packages}, $_);
 	if ($pkg) {
 	    pkgs::selectPackage($o->{packages}, $pkg);
 	    $pkg->{closure} = 1;
+	    delete $pkg->{selected};
+	}
+    }
+
+    #- special packages that are to be removed always... BEWARE THIS IS A HACK !!!
+    foreach (qw(gmc gcc3.0 gcc3.0-c++ gcc3.0-cpp libstdc++3.0 libstdc++3.0-devel)) {
+	my $pkg = pkgs::packageByName($o->{packages}, $_);
+	if ($pkg) {
+	    delete $pkg->{closure};
 	    delete $pkg->{selected};
 	}
     }
