@@ -38,20 +38,21 @@ enum boot_proto_type { BOOTPROTO_STATIC, BOOTPROTO_DHCP };
 struct interface_info {
     char device[10];
     int is_ptp, is_up;
-    int set, manually_set;
     struct in_addr ip, netmask, broadcast, network;
-    struct in_addr boot_server;
-    char * boot_file;
     enum boot_proto_type boot_proto;
 };
 
-struct net_info {
-    int set, manually_set;
-    char * hostname, * domain;		/* dynamically allocated */
-    struct in_addr gateway;
-    struct in_addr dns_server;
-    int numDns;
-};
+
+/* these are to be used only by dhcp.c */
+
+void guess_netmask(struct interface_info * intf);
+int configure_net_device(struct interface_info * intf);
+
+extern char * hostname;
+extern char * domain;
+extern struct in_addr gateway;
+extern struct in_addr dns_server;
+extern struct in_addr dns_server2;
 
 
 

@@ -50,7 +50,7 @@ static void error_message_net(void)  /* reduce code size */
 }
 
 
-static int configure_net_device(struct interface_info * intf)
+int configure_net_device(struct interface_info * intf)
 {
 	struct ifreq req;
 	struct rtentry route;
@@ -89,7 +89,7 @@ static int configure_net_device(struct interface_info * intf)
 	strcpy(req.ifr_name, intf->device);
 
 	if (intf->is_up == 1) {
-		log_message("interface already up, downing");
+		log_message("interface already up, downing before reconfigure");
 
 		req.ifr_flags = 0;
 		if (ioctl(s, SIOCSIFFLAGS, &req)) {
@@ -170,10 +170,11 @@ static int configure_net_device(struct interface_info * intf)
 }
 
 /* host network informations */ 
-static char * hostname = NULL;
-static char * domain = NULL;
-static struct in_addr gateway = { 0 };
-static struct in_addr dns_server = { 0 };
+char * hostname = NULL;
+char * domain = NULL;
+struct in_addr gateway = { 0 };
+struct in_addr dns_server = { 0 };
+struct in_addr dns_server2 = { 0 };
 
 static int add_default_route(void)
 {
@@ -228,9 +229,6 @@ static int write_resolvconf(void) {
 	char * filename = "/etc/resolv.conf";
 	FILE * f;
 	
-	if (IS_TESTING)
-		return 1;
-
 	if (dns_server.s_addr == 0) {
 		log_message("resolvconf needs a dns server");
 		return -1;
@@ -245,6 +243,8 @@ static int write_resolvconf(void) {
 	if (domain)
 		fprintf(f, "search %s\n", domain); /* we can live without the domain search (user will have to enter fully-qualified names) */
 	fprintf(f, "nameserver %s\n", inet_ntoa(dns_server));
+	if (dns_server2.s_addr != 0)
+		fprintf(f, "nameserver %s\n", inet_ntoa(dns_server2));
 
 	fclose(f);
 	res_init();		/* reinit the resolver so DNS changes take affect */
@@ -253,16 +253,73 @@ static int write_resolvconf(void) {
 }
 
 
-static void guess_netmask(struct interface_info * intf, struct in_addr * addr)
+static int save_netinfo(struct interface_info * intf) {
+	char * file_network = "/tmp/network";
+	char file_intf[500];
+	FILE * f;
+	
+	if (dns_server.s_addr == 0) {
+		log_message("resolvconf needs a dns server");
+		return -1;
+	}
+
+	f = fopen(file_network, "w");
+	if (!f) {
+		log_perror(file_network);
+		return -1;
+	}
+
+	fprintf(f, "NETWORKING=yes\n");
+	fprintf(f, "FORWARD_IPV4=false\n");
+
+	if (hostname)
+		fprintf(f, "HOSTNAME=%s\n", hostname);
+	if (domain)
+		fprintf(f, "DOMAINNAME=%s\n", domain);
+	
+	if (gateway.s_addr != 0)
+		fprintf(f, "GATEWAY=%s\n", inet_ntoa(gateway));
+
+	fclose(f);
+
+	
+	strcpy(file_intf, "/tmp/ifcfg-");
+	strcat(file_intf, intf->device);
+
+	f = fopen(file_intf, "w");
+	if (!f) {
+		log_perror(file_intf);
+		return -1;
+	}
+
+	fprintf(f, "DEVICE=%s\n", intf->device);
+
+	if (intf->boot_proto == BOOTPROTO_DHCP)
+		fprintf(f, "BOOTPROTO=dhcp\n");
+	else {
+		fprintf(f, "BOOTPROTO=static\n");
+		fprintf(f, "IPADDR=%s\n", inet_ntoa(intf->ip));
+		fprintf(f, "NETMASK=%s\n", inet_ntoa(intf->netmask));
+		fprintf(f, "NETWORK=%s\n", inet_ntoa(intf->network));
+		fprintf(f, "BROADCAST=%s\n", inet_ntoa(intf->broadcast));
+	}
+
+	fclose(f);
+
+	return 0;
+}
+
+
+void guess_netmask(struct interface_info * intf)
 {
 	unsigned long int tmp = ntohl(intf->ip.s_addr);
 	if (((tmp & 0xFF000000) >> 24) <= 127)
-		inet_aton("255.0.0.0", addr);
+		inet_aton("255.0.0.0", &intf->netmask);
 	else if (((tmp & 0xFF000000) >> 24) <= 191)
-		inet_aton("255.255.0.0", addr);
+		inet_aton("255.255.0.0", &intf->netmask);
 	else 
-		inet_aton("255.255.255.0", addr);
-	log_message("netmask guess: %s", inet_ntoa(*addr));
+		inet_aton("255.255.255.0", &intf->netmask);
+	log_message("netmask guess: %s", inet_ntoa(intf->netmask));
 }
 
 
@@ -314,10 +371,10 @@ static enum return_type setup_network_interface(struct interface_info * intf)
 				error_message("Invalid netmask");
 				return setup_network_interface(intf);
 			}
+			memcpy(&intf->netmask, &addr, sizeof(addr));
 		}
 		else
-			guess_netmask(intf, &addr);
-		memcpy(&intf->netmask, &addr, sizeof(addr));
+			guess_netmask(intf);
 
 		*((uint32_t *) &intf->broadcast) = (*((uint32_t *) &intf->ip) &
 						    *((uint32_t *) &intf->netmask)) | ~(*((uint32_t *) &intf->netmask));
@@ -333,16 +390,13 @@ static enum return_type setup_network_interface(struct interface_info * intf)
 		}
 		intf->boot_proto = BOOTPROTO_STATIC;
 	} else {
-		error_message("Currently unsupported");
-		return RETURN_ERROR;
+		results = perform_dhcp(intf);
 
-		results = RETURN_ERROR; //setup_network_intf_as_dhcp(intf);
 		if (results == RETURN_BACK)
 			return setup_network_interface(intf);
 		if (results == RETURN_ERROR)
 			return results;
 		intf->boot_proto = BOOTPROTO_DHCP;
-		return RETURN_OK;
 	}
 	
 	if (configure_net_device(intf))
@@ -350,7 +404,7 @@ static enum return_type setup_network_interface(struct interface_info * intf)
 	return add_default_route();
 }
 
-
+/*
 static enum return_type configure_network(struct interface_info * intf)
 {
 	char ips[50];
@@ -389,43 +443,27 @@ static enum return_type configure_network(struct interface_info * intf)
 
 	return RETURN_OK;
 }
-
+*/
 
 static enum return_type bringup_networking(struct interface_info * intf)
 {
 	static struct interface_info loopback;
-	enum { BRINGUP_NET, BRINGUP_CONF, BRINGUP_DONE } step = BRINGUP_NET;
+	enum return_type results = RETURN_ERROR;
 	
 	my_insmod("af_packet", ANY_DRIVER_TYPE, NULL);
 
 //	if (intf->is_up == 1)
 //		log_message("interface already up (with IP %s)", inet_ntoa(intf->ip));
 
-	while (step != BRINGUP_DONE) {
-		enum return_type results = RETURN_ERROR;
-		switch (step) {
-		case BRINGUP_NET:
-			results = setup_network_interface(intf);
-			if (results != RETURN_OK)
-				return results;
-			step = BRINGUP_CONF;
-			break;
-			
-		case BRINGUP_CONF:
-			write_resolvconf();
-			results = configure_network(intf);
-			if (results != RETURN_OK)
-				step = BRINGUP_NET;
-			else
-				step = BRINGUP_DONE;
-			break;
-			
-		case BRINGUP_DONE:
-			break;
-		}
-	}
+//	while (results != RETURN_OK) {
+		results = setup_network_interface(intf);
+		if (results != RETURN_OK)
+			return results;
+		write_resolvconf();
+//		results = configure_network(intf);
+//	}
 
-	write_resolvconf(); /* maybe we have now domain to write also */
+//	write_resolvconf(); /* maybe we have now domain to write also */
 
 	if (loopback.is_up == 0) {
 		int rc;
@@ -490,6 +528,7 @@ static enum return_type intf_select_and_up(void)
 	static int num_interfaces = 0;
 	struct interface_info * sel_intf = NULL;
 	int i;
+	enum return_type results;
 	char * iface = interface_select();
 	
 	if (iface == NULL)
@@ -506,7 +545,12 @@ static enum return_type intf_select_and_up(void)
 		num_interfaces++;
 	}
 	
-	return bringup_networking(sel_intf);
+	results = bringup_networking(sel_intf);
+
+	if (results == RETURN_OK)
+		save_netinfo(sel_intf);
+	
+	return results;
 }
 
 

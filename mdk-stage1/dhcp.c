@@ -3,9 +3,6 @@
  *
  * Copyright 2000 MandrakeSoft
  *
- * View the homepage: http://us.mandrakesoft.com/~gc/html/stage1.html
- *
- *
  * This software may be freely redistributed under the terms of the GNU
  * public license.
  *
@@ -16,384 +13,591 @@
  */
 
 /*
- *  Portions from GRUB  --  GRand Unified Bootloader
- *  Copyright (C) 2000  Free Software Foundation, Inc.
+ * Portions from Erik Troan (ewt@redhat.com)
  *
- *  Itself based on etherboot-4.6.4 by Martin Renters.
+ * Copyright 1996 Red Hat Software 
  *
  */
 
+/*
+ * Portions from GRUB  --  GRand Unified Bootloader
+ * Copyright (C) 2000  Free Software Foundation, Inc.
+ */
+
+
 #include <stdlib.h>
 #include <unistd.h>
+#include <string.h>
+#include <sys/socket.h>
+#include <sys/ioctl.h>
+#include <net/if.h>
+#include <arpa/inet.h>
+#include <net/route.h>
+#include <errno.h>
+#include <net/ethernet.h>
+#include <netinet/ip.h>
+#include <netinet/udp.h>
 #include <sys/time.h>
+#include <fcntl.h>
+
 #include "stage1.h"
+#include "log.h"
+#include "network.h"
+#include "frontend.h"
 
 #include "dhcp.h"
 
 
-static int currticks (void)
+#define NUM_RETRIES	5
+
+
+typedef int bp_int32;
+typedef short bp_int16;
+
+#define BOOTP_OPTION_NETMASK		1
+#define BOOTP_OPTION_GATEWAY		3
+#define BOOTP_OPTION_DNS		6
+#define BOOTP_OPTION_HOSTNAME		12
+#define BOOTP_OPTION_DOMAIN		15
+#define BOOTP_OPTION_BROADCAST		28
+
+#define DHCP_OPTION_REQADDR		50
+#define DHCP_OPTION_LEASE		51
+#define DHCP_OPTION_TYPE		53
+#define DHCP_OPTION_SERVER		54
+#define DHCP_OPTION_OPTIONREQ		55
+#define DHCP_OPTION_MAXSIZE		57
+
+#define BOOTP_CLIENT_PORT	68
+#define BOOTP_SERVER_PORT	67
+
+#define BOOTP_OPCODE_REQUEST	1
+#define BOOTP_OPCODE_REPLY	2
+
+#define DHCP_TYPE_DISCOVER	1
+#define DHCP_TYPE_OFFER		2
+#define DHCP_TYPE_REQUEST	3
+#define DHCP_TYPE_ACK		5
+#define DHCP_TYPE_RELEASE	7
+
+#define BOOTP_VENDOR_LENGTH	64
+#define DHCP_VENDOR_LENGTH	340
+
+struct bootp_request {
+	char opcode;
+	char hw;
+	char hwlength;
+	char hopcount;
+	bp_int32 id;
+	bp_int16 secs;
+	bp_int16 flags;
+	bp_int32 ciaddr, yiaddr, server_ip, bootp_gw_ip;
+	char hwaddr[16];
+	char servername[64];
+	char bootfile[128];
+	char vendor[DHCP_VENDOR_LENGTH];
+} ;
+
+static const char vendor_cookie[] = { 99, 130, 83, 99, 255 };
+
+
+static unsigned int verify_checksum(void * buf2, int length2)
 {
-  struct timeval tv;
-  long csecs;
-  int ticks_per_csec, ticks_per_usec;
+	unsigned int csum = 0;
+	unsigned short * sp;
 
-  /* Note: 18.2 ticks/sec.  */
+	for (sp = (unsigned short *) buf2; length2 > 0; (length2 -= 2), sp++)
+		csum += *sp;
+	
+	while (csum >> 16)
+		csum = (csum & 0xffff) + (csum >> 16);
 
-  /* Get current time.  */
-  gettimeofday (&tv, 0);
-
-  /* Compute centiseconds.  */
-  csecs = tv.tv_sec / 10;
-
-  /* Ticks per centisecond.  */
-  ticks_per_csec = csecs * 182;
-
-  /* Ticks per microsecond.  */
-  ticks_per_usec = (((tv.tv_sec - csecs * 10) * 1000000 + tv.tv_usec)
-		    * 182 / 10000000);
-
-  /* Sum them.  */
-  return ticks_per_csec + ticks_per_usec;
+	return (csum == 0xffff);
 }
 
 
-static char rfc1533_cookie[] = { RFC1533_COOKIE };
-static char rfc1533_end[] = { RFC1533_END };
-
-static const char dhcpdiscover[] =
-{
-  RFC2132_MSG_TYPE, 1, DHCPDISCOVER,	
-  RFC2132_MAX_SIZE,2,	/* request as much as we can */
-  sizeof(struct bootpd_t) / 256, sizeof(struct bootpd_t) % 256,
-  RFC2132_PARAM_LIST, 4, RFC1533_NETMASK, RFC1533_GATEWAY,
-  RFC1533_HOSTNAME, RFC1533_EXTENSIONPATH
-};
-
-static const char dhcprequest[] =
-{
-  RFC2132_MSG_TYPE, 1, DHCPREQUEST,
-  RFC2132_SRV_ID, 4, 0, 0, 0, 0,
-  RFC2132_REQ_ADDR, 4, 0, 0, 0, 0,
-  RFC2132_MAX_SIZE,2,	/* request as much as we can */
-  sizeof(struct bootpd_t) / 256, sizeof(struct bootpd_t) % 256,
-  /* request parameters */
-  RFC2132_PARAM_LIST,
-  4 + 2,
-  /* Standard parameters */
-  RFC1533_NETMASK, RFC1533_GATEWAY,
-  RFC1533_HOSTNAME, RFC1533_EXTENSIONPATH,
-  /* Etherboot vendortags */
-  RFC1533_VENDOR_MAGIC,
-  RFC1533_VENDOR_CONFIGFILE,
-};
-
-
-static unsigned long xid;
-static int sock;
-
-static int await_reply (int type, int ival, void *ptr, int timeout)
-{
-	unsigned long time;
-	struct iphdr *ip;
-	struct udphdr *udp;
-	struct arprequest *arpreply;
-	struct bootp_t *bootpreply;
-	unsigned short ptype;
-	unsigned int protohdrlen = (ETHER_HDR_SIZE + sizeof (struct iphdr) + sizeof (struct udphdr));
-	
-	/* Clear the abort flag.  */
-	ip_abort = 0;
-	
-	time = currticks () + TIMEOUT;
-	/* The timeout check is done below.  The timeout is only checked if
-	 * there is no packet in the Rx queue.  This assumes that eth_poll()
-	 * needs a negligible amount of time.  */
-	for (;;)
-	{
-		if (eth_poll ())
-	{
-	  /* We have something!  */
-	  
-	  /* Check for ARP - No IP hdr.  */
-	  if (nic.packetlen >= ETHER_HDR_SIZE)
-	    {
-	      ptype = (((unsigned short) nic.packet[12]) << 8
-		       | ((unsigned short) nic.packet[13]));
-	    }
-	  else
-	    /* What else could we do with it?  */
-	    continue;
-	  
-	  if (nic.packetlen >= ETHER_HDR_SIZE + sizeof (struct arprequest)
-	      && ptype == ARP)
-	    {
-	      unsigned long tmp;
-
-	      arpreply = (struct arprequest *) &nic.packet[ETHER_HDR_SIZE];
-	      
-	      if (arpreply->opcode == ntohs (ARP_REPLY)
-		  && ! grub_memcmp (arpreply->sipaddr, ptr, sizeof (in_addr))
-		  && type == AWAIT_ARP)
-		{
-		  grub_memmove ((char *) arptable[ival].node,
-				arpreply->shwaddr,
-				ETHER_ADDR_SIZE);
-		  return 1;
-		}
-	      
-	      grub_memmove ((char *) &tmp, arpreply->tipaddr,
-			    sizeof (in_addr));
-	      
-	      if (arpreply->opcode == ntohs (ARP_REQUEST)
-		  && tmp == arptable[ARP_CLIENT].ipaddr.s_addr)
-		{
-		  arpreply->opcode = htons (ARP_REPLY);
-		  grub_memmove (arpreply->tipaddr, arpreply->sipaddr,
-				sizeof (in_addr));
-		  grub_memmove (arpreply->thwaddr, (char *) arpreply->shwaddr,
-				ETHER_ADDR_SIZE);
-		  grub_memmove (arpreply->sipaddr,
-				(char *) &arptable[ARP_CLIENT].ipaddr,
-				sizeof (in_addr));
-		  grub_memmove (arpreply->shwaddr,
-				arptable[ARP_CLIENT].node,
-				ETHER_ADDR_SIZE);
-		  eth_transmit (arpreply->thwaddr, ARP,
-				sizeof (struct arprequest),
-				arpreply);
-#ifdef MDEBUG
-		  grub_memmove (&tmp, arpreply->tipaddr, sizeof (in_addr));
-		  grub_printf ("Sent ARP reply to: %x\n", tmp);
-#endif	/* MDEBUG */
-		}
-	      
-	      continue;
-	    }
-
-	  if (type == AWAIT_QDRAIN)
-	    {
-	      continue;
-	    }
-	  
-	  /* Check for RARP - No IP hdr.  */
-	  if (type == AWAIT_RARP
-	      && nic.packetlen >= ETHER_HDR_SIZE + sizeof (struct arprequest)
-	      && ptype == RARP)
-	    {
-	      arpreply = (struct arprequest *) &nic.packet[ETHER_HDR_SIZE];
-	      
-	      if (arpreply->opcode == ntohs (RARP_REPLY)
-		  && ! grub_memcmp (arpreply->thwaddr, ptr, ETHER_ADDR_SIZE))
-		{
-		  grub_memmove ((char *) arptable[ARP_SERVER].node,
-				arpreply->shwaddr, ETHER_ADDR_SIZE);
-		  grub_memmove ((char *) &arptable[ARP_SERVER].ipaddr,
-				arpreply->sipaddr, sizeof (in_addr));
-		  grub_memmove ((char *) &arptable[ARP_CLIENT].ipaddr,
-				arpreply->tipaddr, sizeof (in_addr));
-		  return 1;
-		}
-	      
-	      continue;
-	    }
-
-	  /* Anything else has IP header.  */
-	  if (nic.packetlen < protohdrlen || ptype != IP)
-	    continue;
-	  
-	  ip = (struct iphdr *) &nic.packet[ETHER_HDR_SIZE];
-	  if (ip->verhdrlen != 0x45
-	      || ipchksum ((unsigned short *) ip, sizeof (struct iphdr))
-	      || ip->protocol != IP_UDP)
-	    continue;
-	  
-	  udp = (struct udphdr *)
-	    &nic.packet[ETHER_HDR_SIZE + sizeof (struct iphdr)];
-	  
-	  /* BOOTP ?  */
-	  bootpreply = (struct bootp_t *) &nic.packet[ETHER_HDR_SIZE];
-	  if (type == AWAIT_BOOTP
-#ifdef NO_DHCP_SUPPORT
-	      && (nic.packetlen
-		  >= (ETHER_HDR_SIZE + sizeof (struct bootp_t)))
-#else
-	      && (nic.packetlen
-		  >= (ETHER_HDR_SIZE + sizeof (struct bootp_t)) - DHCP_OPT_LEN)
-#endif /* ! NO_DHCP_SUPPORT */
-	      && ntohs (udp->dest) == BOOTP_CLIENT
-	      && bootpreply->bp_op == BOOTP_REPLY
-	      && bootpreply->bp_xid == xid)
-	    {
-	      arptable[ARP_CLIENT].ipaddr.s_addr
-		= bootpreply->bp_yiaddr.s_addr;
-#ifndef	NO_DHCP_SUPPORT
-	      dhcp_addr.s_addr = bootpreply->bp_yiaddr.s_addr;
-#endif /* ! NO_DHCP_SUPPORT */
-	      netmask = default_netmask ();
-	      arptable[ARP_SERVER].ipaddr.s_addr
-		= bootpreply->bp_siaddr.s_addr;
-	      /* Kill arp.  */
-	      grub_memset (arptable[ARP_SERVER].node, 0, ETHER_ADDR_SIZE);
-	      arptable[ARP_GATEWAY].ipaddr.s_addr
-		= bootpreply->bp_giaddr.s_addr;
-	      /* Kill arp.  */
-	      grub_memset (arptable[ARP_GATEWAY].node, 0, ETHER_ADDR_SIZE);
-
-	      /* GRUB doesn't autoload any kernel image.  */
-#ifndef GRUB
-	      if (bootpreply->bp_file[0])
-		{
-		  grub_memmove (kernel_buf, bootpreply->bp_file, 128);
-		  kernel = kernel_buf;
-		}
-#endif /* ! GRUB */
-	      
-	      grub_memmove ((char *) BOOTP_DATA_ADDR, (char *) bootpreply,
-			    sizeof (struct bootpd_t));
-#ifdef NO_DHCP_SUPPORT
-	      decode_rfc1533 (BOOTP_DATA_ADDR->bootp_reply.bp_vend,
-			      0, BOOTP_VENDOR_LEN + MAX_BOOTP_EXTLEN, 1);
-#else
-	      decode_rfc1533 (BOOTP_DATA_ADDR->bootp_reply.bp_vend,
-			      0, DHCP_OPT_LEN, 1);
-#endif /* ! NO_DHCP_SUPPORT */
-	      
-	      return 1;
-	    }
-	  
-	  /* TFTP ? */
-	  if (type == AWAIT_TFTP && ntohs (udp->dest) == ival)
-	    return 1;
-	}
-      else
-	{
-	  /* Check for abort key only if the Rx queue is empty -
-	   * as long as we have something to process, don't
-	   * assume that something failed.  It is unlikely that
-	   * we have no processing time left between packets.  */
-	  if (checkkey () != -1 && ASCII_CHAR (getkey ()) == CTRL_C)
-	    {
-	      ip_abort = 1;
-	      return 0;
-	    }
-	  
-	  /* Do the timeout after at least a full queue walk.  */
-	  if ((timeout == 0) || (currticks() > time))
-	    {
-	      break;
-	    }
-	}
-    }
-  
-  return 0;
-}
-
-
-static int bootp(struct interface_info * intf)
-{
-	int retry;
-	int retry1;
-	struct bootp_t bp;
-	unsigned long starttime;
+static int initial_setup_interface(char * device, int s) {
+	struct sockaddr_in * addrp;
 	struct ifreq req;
-	int s;
-
-	strcpy(req.ifr_name, intf->name);
-	if (ioctl(sock, SIOCGIFHWADDR, &req)) {
-		log_perror("SIOCSIFHWADDR");
+	struct rtentry route;
+	int true = 1;
+	
+	addrp = (struct sockaddr_in *) &req.ifr_addr;
+	
+	strcpy(req.ifr_name, device);
+	addrp->sin_family = AF_INET;
+	addrp->sin_port = 0;
+	memset(&addrp->sin_addr, 0, sizeof(addrp->sin_addr));
+	
+	req.ifr_flags = 0; /* take it down */
+	if (ioctl(s, SIOCSIFFLAGS, &req)) {
+		log_perror("SIOCSIFFLAGS (downing)");
+		return -1;
+	}
+    
+	addrp->sin_family = AF_INET;
+	addrp->sin_addr.s_addr = htonl(0);
+	if (ioctl(s, SIOCSIFADDR, &req)) {
+		log_perror("SIOCSIFADDR");
 		return -1;
 	}
 
-	memset (&bp, 0, sizeof (struct bootp_t));
-	bp.bp_op = BOOTP_REQUEST;
-	bp.bp_htype = 1;
-	bp.bp_hlen = ETHER_ADDR_SIZE;
-	bp.bp_xid = xid = starttime = currticks ();
+	req.ifr_flags = IFF_UP | IFF_BROADCAST | IFF_RUNNING;
+	if (ioctl(s, SIOCSIFFLAGS, &req)) {
+		log_perror("SIOCSIFFLAGS (upping)");
+		return -1;
+	}
 
-
-	memmove(bp.bp_hwaddr, req.ifr_hwaddr.sa_data, ETHER_ADDR_SIZE);
-
-	/* Request RFC-style options.  */
-	memmove(bp.bp_vend, rfc1533_cookie, sizeof rfc1533_cookie);
-	memmove(bp.bp_vend + sizeof rfc1533_cookie, dhcpdiscover, sizeof dhcpdiscover);
-	memmove(bp.bp_vend + sizeof rfc1533_cookie + sizeof dhcpdiscover, rfc1533_end, sizeof rfc1533_end);
-
-	for (retry = 0; retry < MAX_BOOTP_RETRIES;)
-	{
-		/* Clear out the Rx queue first.  It contains nothing of
-		 * interest, except possibly ARP requests from the DHCP/TFTP
-		 * server.  We use polling throughout Etherboot, so some time
-		 * may have passed since we last polled the receive queue,
-		 * which may now be filled with broadcast packets.  This will
-		 * cause the reply to the packets we are about to send to be
-		 * lost immediately.  Not very clever.  */
-		await_reply (AWAIT_QDRAIN, 0, NULL, 0);
-		
-		udp_transmit (IP_BROADCAST, BOOTP_CLIENT, BOOTP_SERVER,
-			      sizeof (struct bootp_t), &bp);
-		
-		if (await_reply (AWAIT_BOOTP, 0, NULL, TIMEOUT))
-		{
-			if (dhcp_reply == DHCPOFFER)
-			{
-				dhcp_reply = 0;
-				grub_memmove (bp.bp_vend, rfc1533_cookie, sizeof rfc1533_cookie);
-				grub_memmove (bp.bp_vend + sizeof rfc1533_cookie,
-					      dhcprequest, sizeof dhcprequest);
-				grub_memmove (bp.bp_vend + sizeof rfc1533_cookie
-					      + sizeof dhcprequest,
-					      rfc1533_end, sizeof rfc1533_end);
-				grub_memmove (bp.bp_vend + 9, (char *) &dhcp_server,
-					      sizeof (in_addr));
-				grub_memmove (bp.bp_vend + 15, (char *) &dhcp_addr,
-					      sizeof (in_addr));
-				for (retry1 = 0; retry1 < MAX_BOOTP_RETRIES;)
-				{
-					udp_transmit (IP_BROADCAST, 0, BOOTP_SERVER,
-						      sizeof (struct bootp_t), &bp);
-					dhcp_reply = 0;
-					if (await_reply (AWAIT_BOOTP, 0, NULL, TIMEOUT))
-						if (dhcp_reply == DHCPACK)
-						{
-							network_ready = 1;
-							return 1;
-						}
-					
-					if (ip_abort)
-						return 0;
-					
-					rfc951_sleep (++retry1);
-				}
-				
-				/* Timeout.  */
-				return 0;
-			}
-			else
-			{
-				network_ready = 1;
-				return 1;
-			}
+	memset(&route, 0, sizeof(route));
+	memcpy(&route.rt_gateway, addrp, sizeof(*addrp));
+	
+	addrp->sin_family = AF_INET;
+	addrp->sin_port = 0;
+	addrp->sin_addr.s_addr = INADDR_ANY;
+	memcpy(&route.rt_dst, addrp, sizeof(*addrp));
+	memcpy(&route.rt_genmask, addrp, sizeof(*addrp));
+	
+	route.rt_dev = device;
+	route.rt_flags = RTF_UP;
+	route.rt_metric = 0;
+	
+	if (ioctl(s, SIOCADDRT, &route)) {
+		if (errno != EEXIST) {
+			close(s);
+			log_perror("SIOCADDRT");
+			return -1;
 		}
-      
-		if (ip_abort)
-			return 0;
-		
-		rfc951_sleep (++retry);
-		bp.bp_secs = htons ((currticks () - starttime) / 20);
 	}
 	
-	/* Timeout.  */
+	if (setsockopt(s, SOL_SOCKET, SO_BROADCAST, &true, sizeof(true))) {
+		close(s);
+		log_perror("setsockopt");
+		return -1;
+	}
+
 	return 0;
 }
 
 
-enum return_type setup_network_intf_as_dhcp(struct interface_info * intf)
+void set_missing_ip_info(struct interface_info * intf)
 {
-	sock = socket(AF_INET, SOCK_DGRAM, 0);
-	if (sock < 0) {
-		return log_perror("socket");
-		return -1;
+	bp_int32 ipNum = *((bp_int32 *) &intf->ip);
+	bp_int32 nmNum;
+
+	if (intf->netmask.s_addr == 0)
+		guess_netmask(intf);
+
+	nmNum = *((bp_int32 *) &intf->netmask);
+
+	if (intf->broadcast.s_addr == 0)
+		*((bp_int32 *) &intf->broadcast) = (ipNum & nmNum) | ~(nmNum);
+
+	if (intf->network.s_addr == 0)
+		*((bp_int32 *) &intf->network) = ipNum & nmNum;
+}
+
+static void parse_reply(struct bootp_request * breq, struct interface_info * intf)
+{
+	unsigned char * chptr;
+	unsigned char option, length;
+
+	memcpy(&intf->ip, &breq->yiaddr, 4);
+
+	chptr = breq->vendor;
+	chptr += 4;
+	while (*chptr != 0xFF && (void *) chptr < (void *) breq->vendor + DHCP_VENDOR_LENGTH) {
+		char tmp_str[500];
+		option = *chptr++;
+		if (!option)
+			continue;
+		length = *chptr++;
+
+		switch (option) {
+		case BOOTP_OPTION_DNS:
+			memcpy(&dns_server, chptr, sizeof(dns_server));
+			if (length >= sizeof(dns_server)*2)
+				memcpy(&dns_server2, chptr+sizeof(dns_server), sizeof(dns_server2));
+			break;
+
+		case BOOTP_OPTION_NETMASK:
+			memcpy(&intf->netmask, chptr, 4);
+			break;
+		    
+		case BOOTP_OPTION_DOMAIN:
+			memcpy(tmp_str, chptr, length);
+			tmp_str[length] = '\0';
+			domain = strdup(tmp_str);
+			break;
+
+		case BOOTP_OPTION_BROADCAST:
+			memcpy(&intf->broadcast, chptr, 4);
+			break;
+
+		case BOOTP_OPTION_GATEWAY:
+			memcpy(&gateway, chptr, 4);
+			break;
+
+		case BOOTP_OPTION_HOSTNAME:
+			memcpy(tmp_str, chptr, length);
+			tmp_str[length] = '\0';
+			hostname = strdup(tmp_str);
+			log_message("DHCP: got hostname %s", hostname);
+			break;
+
+		}
+
+		chptr += length;
 	}
 
-	return RETURN_ERROR;
+	set_missing_ip_info(intf);
+}
+
+
+static void init_vendor_codes(struct bootp_request * breq) {
+	memcpy(breq->vendor, vendor_cookie, sizeof(vendor_cookie));
+}
+
+static char gen_hwaddr[16];
+
+static int prepare_request(struct bootp_request * breq, int sock, char * device, time_t startTime)
+{
+	struct ifreq req;
+	
+	memset(breq, 0, sizeof(*breq));
+	
+	breq->opcode = BOOTP_OPCODE_REQUEST;
+	
+	strcpy(req.ifr_name, device);
+	if (ioctl(sock, SIOCGIFHWADDR, &req)) {
+		log_perror("SIOCSIFHWADDR");
+		return -1;
+	}
+	
+	breq->hw = 1; 		/* ethernet */
+	breq->hwlength = IFHWADDRLEN;	
+	memcpy(breq->hwaddr, req.ifr_hwaddr.sa_data, IFHWADDRLEN);
+	memcpy(gen_hwaddr, req.ifr_hwaddr.sa_data, IFHWADDRLEN);
+	
+	breq->hopcount = 0;
+	
+	init_vendor_codes(breq);
+	
+	return 0;
+}
+
+static int get_vendor_code(struct bootp_request * bresp, unsigned char option, void * data)
+{
+	unsigned char * chptr;
+	unsigned int length, theOption;
+	
+	chptr = bresp->vendor + 4;
+	while (*chptr != 0xFF && *chptr != option) {
+		theOption = *chptr++;
+		if (!theOption)
+			continue;
+		length = *chptr++;
+		chptr += length;
+	}
+	
+	if (*chptr++ == 0xff)
+		return 1;
+	
+	length = *chptr++;
+	memcpy(data, chptr, length);
+	
+	return 0;
+}
+
+
+int
+currticks (void)
+{
+	struct timeval tv;
+	long csecs;
+	int ticks_per_csec, ticks_per_usec;
+	
+	/* Note: 18.2 ticks/sec.  */
+	
+	gettimeofday (&tv, 0);
+	csecs = tv.tv_sec / 10;
+	ticks_per_csec = csecs * 182;
+	ticks_per_usec = (((tv.tv_sec - csecs * 10) * 1000000 + tv.tv_usec) * 182 / 10000000);
+	return ticks_per_csec + ticks_per_usec;
+}
+
+
+#define BACKOFF_LIMIT 7
+#define	TICKS_PER_SEC 18
+#define MAX_ARP_RETRIES	5
+
+void
+rfc951_sleep (int exp)
+{
+	static long seed = 0;
+	long q;
+	unsigned long tmo;
+	
+	if (exp > BACKOFF_LIMIT)
+		exp = BACKOFF_LIMIT;
+	
+	if (!seed)
+		/* Initialize linear congruential generator.  */
+		seed = (currticks () + *(long *) &gen_hwaddr + ((short *) gen_hwaddr)[2]);
+  
+	/* Simplified version of the LCG given in Bruce Scheier's
+	   "Applied Cryptography".  */
+	q = seed / 53668;
+	if ((seed = 40014 * (seed - 53668 * q) - 12211 * q) < 0)
+		seed += 2147483563l;
+	
+	/* Compute mask.  */
+	for (tmo = 63; tmo <= 60 * TICKS_PER_SEC && --exp > 0; tmo = 2 * tmo + 1)
+		;
+  
+	/* Sleep.  */
+	log_message("<sleep>");
+	
+	for (tmo = (tmo & seed) + currticks (); currticks () < tmo;);
+}
+
+
+static int handle_transaction(int s, struct bootp_request * breq, struct bootp_request * bresp,
+			      struct sockaddr_in * server_addr, int dhcp_type)
+{
+	struct timeval tv;
+	fd_set readfs;
+	int i, j;
+	int retry = 1;
+	int sin;
+	char eth_packet[ETH_FRAME_LEN];
+	struct iphdr * ip_hdr;
+	struct udphdr * udp_hdr;
+	unsigned char type;
+	unsigned long starttime;
+	int timeout = 1;
+
+	breq->id = starttime = currticks();
+	breq->secs = 0;
+
+	sin = socket(AF_PACKET, SOCK_DGRAM, ntohs(ETH_P_IP));
+
+	while (retry <= MAX_ARP_RETRIES) {
+		i = sizeof(*breq);
+
+		if (sendto(s, breq, i, 0, (struct sockaddr *) server_addr, sizeof(*server_addr)) != i) {
+			close(s);
+			log_perror("sendto");
+			return -1;
+		}
+		
+		FD_ZERO(&readfs);
+		FD_SET(sin, &readfs);
+		tv.tv_usec = 0;
+		tv.tv_sec = timeout;
+
+		while (select(sin + 1, &readfs, NULL, NULL, &tv) == 1) {
+
+			if ((j = recv(sin, eth_packet, sizeof(eth_packet), 0)) == -1) {
+				log_perror("recv");
+				continue;
+			}
+			
+			/* We need to do some basic sanity checking of the header */
+			if (j < (sizeof(*ip_hdr) + sizeof(*udp_hdr)))
+				continue;
+			
+			ip_hdr = (void *) eth_packet;
+			if (!verify_checksum(ip_hdr, sizeof(*ip_hdr)))
+				continue;
+
+			if (ntohs(ip_hdr->tot_len) > j)
+				continue;
+
+			j = ntohs(ip_hdr->tot_len);
+			
+			if (ip_hdr->protocol != IPPROTO_UDP)
+				continue;
+			
+			udp_hdr = (void *) (eth_packet + sizeof(*ip_hdr));
+
+			if (ntohs(udp_hdr->source) != BOOTP_SERVER_PORT)
+				continue;
+			
+			if (ntohs(udp_hdr->dest) != BOOTP_CLIENT_PORT)
+				continue;
+			/* Go on with this packet; it looks sane */
+			
+			/* Originally copied sizeof (*bresp) - this is a security
+			   problem due to a potential underflow of the source
+			   buffer.  Also, it trusted that the packet was properly
+			   0xFF terminated, which is not true in the case of the
+			   DHCP server on Cisco 800 series ISDN router. */
+			
+			memset (bresp, 0xFF, sizeof (*bresp));
+			memcpy (bresp, (char *) udp_hdr + sizeof (*udp_hdr), j - sizeof (*ip_hdr) - sizeof (*udp_hdr));
+			
+			/* sanity checks */
+			if (bresp->id != breq->id)
+				continue;
+			if (bresp->opcode != BOOTP_OPCODE_REPLY)
+				continue;
+			if (bresp->hwlength != breq->hwlength)
+				continue;
+			if (memcmp(bresp->hwaddr, breq->hwaddr, bresp->hwlength))
+				continue;
+			if (get_vendor_code(bresp, DHCP_OPTION_TYPE, &type) || type != dhcp_type)
+				continue;
+			if (memcmp(bresp->vendor, vendor_cookie, 4))
+				continue;
+			return 0;
+		}
+		rfc951_sleep(retry);
+		breq->secs = htons ((currticks () - starttime) / 20);
+		retry++;
+		timeout *= 2;
+		if (timeout > 5)
+			timeout = 5;
+	}
+	
+	error_message("No DHCP reply received");
+	return -1;
+}
+
+static void add_vendor_code(struct bootp_request * breq, unsigned char option, unsigned char length, void * data)
+{
+	unsigned char * chptr;
+	int theOption, theLength;
+
+	chptr = breq->vendor;
+	chptr += 4;
+	while (*chptr != 0xFF && *chptr != option) {
+		theOption = *chptr++;
+		if (!theOption) continue;
+		theLength = *chptr++;
+		chptr += theLength;
+	}
+
+	*chptr++ = option;
+	*chptr++ = length;
+	memcpy(chptr, data, length);
+	chptr[length] = 0xff;
+}
+
+
+
+enum return_type perform_dhcp(struct interface_info * intf)
+{
+	int s, i;
+	struct sockaddr_in server_addr;
+	struct sockaddr_in client_addr;
+	struct sockaddr_in broadcast_addr;
+	struct bootp_request breq, bresp;
+	unsigned char messageType;
+	unsigned int lease;
+	time_t startTime = time(NULL);
+	short aShort;
+	int num_options;
+	char requested_options[50];
+
+	if (strncmp(intf->device, "eth", 3)) {
+		error_message("DHCP available only for Ethernet networking");
+		return RETURN_ERROR;
+	}
+
+	s = socket(AF_INET, SOCK_DGRAM, 0);
+	if (s < 0) {
+		log_perror("socket");
+		return RETURN_ERROR;
+	}
+
+	if (initial_setup_interface(intf->device, s) != 0) {
+		close(s);
+		return RETURN_ERROR;
+	}
+
+	if (prepare_request(&breq, s, intf->device, startTime) != 0) {
+		close(s);
+		return RETURN_ERROR;
+	}
+
+	messageType = DHCP_TYPE_DISCOVER;
+	add_vendor_code(&breq, DHCP_OPTION_TYPE, 1, &messageType);
+
+	memset(&client_addr.sin_addr, 0, sizeof(&client_addr.sin_addr));
+	client_addr.sin_family = AF_INET;
+	client_addr.sin_port = htons(BOOTP_CLIENT_PORT);	/* bootp client */
+
+	if (bind(s, (struct sockaddr *) &client_addr, sizeof(client_addr))) {
+		log_perror("bind");
+		return RETURN_ERROR;
+	}
+
+	broadcast_addr.sin_family = AF_INET;
+	broadcast_addr.sin_port = htons(BOOTP_SERVER_PORT);	/* bootp server */
+	memset(&broadcast_addr.sin_addr, 0xff, sizeof(broadcast_addr.sin_addr));  /* broadcast */
+
+	log_message("DHCP: sending DISCOVER");
+
+	wait_message("Sending DHCP request...");
+	i = handle_transaction(s, &breq, &bresp, &broadcast_addr, DHCP_TYPE_OFFER);
+	remove_wait_message();
+
+	if (i != 0) {
+		close(s);
+		return RETURN_ERROR;
+	}
+
+	server_addr.sin_family = AF_INET;
+	server_addr.sin_port = htons(BOOTP_SERVER_PORT);	/* bootp server */
+	if (get_vendor_code(&bresp, DHCP_OPTION_SERVER, &server_addr.sin_addr)) {
+		close(s);
+		log_message("DHCPOFFER didn't include server address");
+		return RETURN_ERROR;
+	}
+
+	init_vendor_codes(&breq);
+	messageType = DHCP_TYPE_REQUEST;
+	add_vendor_code(&breq, DHCP_OPTION_TYPE, 1, &messageType);
+	add_vendor_code(&breq, DHCP_OPTION_SERVER, 4, &server_addr.sin_addr);
+	add_vendor_code(&breq, DHCP_OPTION_REQADDR, 4, &bresp.yiaddr);
+
+	aShort = ntohs(sizeof(struct bootp_request));
+	add_vendor_code(&breq, DHCP_OPTION_MAXSIZE, 2, &aShort);
+
+	num_options = 0;
+	requested_options[num_options++] = BOOTP_OPTION_NETMASK;
+	requested_options[num_options++] = BOOTP_OPTION_GATEWAY;
+	requested_options[num_options++] = BOOTP_OPTION_DNS;
+	requested_options[num_options++] = BOOTP_OPTION_DOMAIN;
+	requested_options[num_options++] = BOOTP_OPTION_BROADCAST;
+	add_vendor_code(&breq, DHCP_OPTION_OPTIONREQ, num_options, requested_options);
+
+	/* request a lease of 1 hour */
+	i = htonl(60 * 60);
+	add_vendor_code(&breq, DHCP_OPTION_LEASE, 4, &i);
+
+	log_message("DHCP: sending REQUEST");
+
+	i = handle_transaction(s, &breq, &bresp, &broadcast_addr, DHCP_TYPE_ACK);
+
+	if (i != 0) {
+		close(s);
+		return RETURN_ERROR;
+	}
+
+	if (get_vendor_code(&bresp, DHCP_OPTION_LEASE, &lease)) {
+		log_message("failed to get lease time\n");
+		return RETURN_ERROR;
+	}
+	lease = ntohl(lease);
+
+	close(s);
+
+	intf->netmask.s_addr = 0;
+	intf->broadcast.s_addr = 0;
+	intf->network.s_addr = 0;
+
+	parse_reply(&bresp, intf);
+
+	return RETURN_OK;
 }
