@@ -52,11 +52,11 @@ install_pms: $(DIRS)
 		perl -ne 'print' $$i > $(DESTREP4PMS)/$$i; \
 		perl -pe 's/#[-+].*//; $$_ = "\n" if (/^=head/ .. /^=cut/) || /use (diagnostics|vars|strict)/' $$i > $(DESTREP4PMS)/$$i; \
 	done
-	if [ "x$PERL_INSTALL_DEBUG" == "x" ]; then
-		perl -pe 's|#!/usr/bin/perl -d.*\n|#!/usr/bin/perl\n|' install2 > $(DESTREP4PMS)/install2
-	else
-		perl -pe 's|#!/usr/bin/perl.*\n|#!/usr/bin/perl -d \n|' install2 > $(DESTREP4PMS)/install2
-	fi
+	if [ "x$(PERL_INSTALL_DEBUG)" == "x" ]; then \
+		perl -pe 's|#!/usr/bin/perl -d.*\n|#!/usr/bin/perl\n|' install2 > $(DESTREP4PMS)/install2; \
+	else \
+		perl -pe 's|#!/usr/bin/perl.*\n|#!/usr/bin/perl -d \n|' install2 > $(DESTREP4PMS)/install2; \
+	fi \
 #		perl -pe 's/#-.*//; $$_ = "\n" if (/^=head/ .. /^=cut/) || /use (diagnostics)/' $$i > $(DESTREP4PMS)/$$i; \
 
 	cp share/*.rc $(DESTREP4PMS)
