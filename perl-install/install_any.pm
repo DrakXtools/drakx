@@ -206,11 +206,11 @@ sub spawnShell() {
     $ENV{DISPLAY} ||= ":0"; #- why not :pp
 
     local *F;
-    sysopen F, "/dev/tty2", 2 or die "cannot open /dev/tty2 -- no shell will be provided: $!";
+    sysopen F, "/dev/tty2", 2 or log::l("cannot open /dev/tty2 -- no shell will be provided: $!"), goto cant_spawn;
 
-    open STDIN, "<&F" or die '';
-    open STDOUT, ">&F" or die '';
-    open STDERR, ">&F" or die '';
+    open STDIN, "<&F" or goto cant_spawn;
+    open STDOUT, ">&F" or goto cant_spawn;
+    open STDERR, ">&F" or goto cant_spawn;
     close F;
 
     print any::drakx_version(), "\n";
@@ -225,7 +225,10 @@ sub spawnShell() {
         my $program_name = /busybox/ ? "/bin/sh" : $_;  #- since perl_checker is too dumb
         exec { $_ } $program_name, @args or log::l("exec of $_ failed: $!");
     }
-    die "cannot open shell";
+
+    log::l("cannot open any shell");
+cant_spawn:
+    c::_exit(1);
 }
 
 sub getAvailableSpace {
