@@ -393,7 +393,7 @@ sub gtkpng { new Gtk::Pixmap(gtkcreate_png(@_)) }
 
 sub create_pix_text {
     #reference widget, text, color_text, [font], [width], [height], flag1, flag2, [background (color or gdkpix), backsize x y], centered
-    my ($w, $text, $color_text, $font, $max_width, $max_height, $can_be_greater, $can_be_smaller, $background, $x_back, $y_back, $centeredx, $centeredy) = @_;
+    my ($w, $text, $color_text, $font, $max_width, $max_height, $can_be_greater, $can_be_smaller, $background, $x_back, $y_back, $centeredx, $centeredy, $bold) = @_;
     my $color_background;
     my $backpix;
     if ($color_text =~ /#(\d+)#(\d+)#(\d+)/) { $color_text = gtkcolor(map{$_*65535/255}($1, $2, $3)) }
@@ -426,6 +426,7 @@ sub create_pix_text {
     my $i = 0;
     foreach (@{$lines}) {
 	$pix->draw_string($style->font, $gc_text, ${$widths}[$i], ${$heights}[$i], $_);
+	$bold and $pix->draw_string($style->font, $gc_text, ${$widths}[$i] + 1, ${$heights}[$i], $_);
 	$i++;
     }
     ($pix, $width, $height);
@@ -465,6 +466,7 @@ sub get_text_coord {
 	$width <= $real_width or $real_width = $width;
     }
     $height += $height_elem;
+    $widths[$idx] = $centeredx && !$can_be_smaller ? (max($max_width2-$width, 0))/2 : 0;
 
     $height < $real_height or $real_height = $height;
     $width = $max_width;
@@ -518,7 +520,7 @@ sub gtkicons_labels_widget {
 		   my ($dx, $dy) = ($darea->allocation->[2], $darea->allocation->[3]);
 		   if (!defined($dbl_area)) {
 		       my ($pix, $width, $height) = create_pix_text($darea, $label, $color_text, $font, $x_round, $y_round,
-								1, 1, $background, $x_back2, $y_back2);
+								1, 0, $background, $x_back2, $y_back2, 1);
 		       ($dx, $dy) = (max($width, $x_round), $y_round + $height);
 		       $darea->set_usize($dx, $dy);
 		       $dbl_area = new Gtk::Gdk::Pixmap($darea->window, max($width, $x_round), $y_round + $height);
@@ -545,7 +547,7 @@ sub gtkicons_labels_widget {
     $fixed->signal_connect( size_allocate => sub {
 				my ($dx, $dy) = ($fixed->allocation->[2], $fixed->allocation->[3]);
 				foreach (@tab) {
-				    $fixed->move();
+#				    $fixed->move();
 				}
 			    });
     $fixed->signal_connect( realize => sub { $fixed->window->set_back_pixmap($background, 0) });
