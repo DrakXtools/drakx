@@ -1,6 +1,6 @@
 BOOT_IMG = gi_hd.img gi_cdrom.img gi_network.img gi_network_ks.img gi_pcmcia.img
 BINS = install/install install/local-install install/installinit/init
-DIRS = install mouseconfig perl-install ddcprobe
+DIRS = install install/installinit mouseconfig perl-install ddcprobe
 
 
 .PHONY: $(BOOT_IMG) $(FLOPPY_IMG) $(BINS) update_kernel
