@@ -1,8 +1,9 @@
 #!/usr/bin/perl -lp
 
-s|_\(\[(.*),\s*(.*),\s*(.*)\]| ngettext($2,$3,$1)|; # special plural form handling
-
 s|^(__?\()| $1|;		# add a blank at the beginning (?!)
+
+s|_\(\[(.*),\s*(.*),\s*(.*)\]|ngettext($2,$3,$1)|; # special plural form handling
+
 s,\Qs/#.*//,,;			# ugly special case
 s|//|/""/|g;			# ensure // or not understood as comments
 
