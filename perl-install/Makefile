@@ -224,8 +224,6 @@ stage2:
 	mkdir -p $(DEST)
 	$(MAKE) get_needed_files 
 	$(MAKE) install_pms
-	find $(DEST)/usr -name "*.pm" | xargs gzip -9f
-	cd $(DEST)/usr/lib/perl5 ; gunzip 5.*/{PerlIO,Exporter}.pm.gz 5.*/*-linux-thread-multi/{XSLoader,lib}.pm.gz vendor_perl/*/*-linux-thread-multi/PerlIO/gzip.pm.gz
 
 # rules to build a test rpm
 
