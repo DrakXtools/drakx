@@ -1551,17 +1551,5 @@ sub configure_pcmcia {
     modules::read_already_loaded($modules_conf);
 }
 
-sub write_pcmcia {
-    my ($pcic) = @_;
-
-    #- should be set after installing the package above otherwise the file will be renamed.
-    setVarsInSh("$::prefix/etc/sysconfig/pcmcia", {
-	PCMCIA    => bool2yesno($pcic),
-	PCIC      => $pcic,
-	PCIC_OPTS => "",
-        CORE_OPTS => "",
-    });
-}
-
 
 1;

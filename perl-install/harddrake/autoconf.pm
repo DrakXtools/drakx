@@ -31,4 +31,16 @@ sub mouse_conf {
     mouse::write_conf(do_pkgs_standalone->new, $modules_conf, mouse::detect($modules_conf), 1);
 }
 
+sub pcmcia {
+    my ($pcic) = @_;
+
+    #- should be set after installing the package above otherwise the file will be renamed.
+    setVarsInSh("$::prefix/etc/sysconfig/pcmcia", {
+     PCMCIA    => bool2yesno($pcic),
+     PCIC      => $pcic,
+     PCIC_OPTS => "",
+     CORE_OPTS => "",
+    });
+}
+
 1;
