@@ -623,7 +623,7 @@ sub suggest_mount_points {
     }
 #-    $_->{mntpoint} || fsedit::suggest_part($_, $hds) foreach @parts;
 
-    $_->{mntpoint} and log::l("suggest_mount_points: $_->{device} -> $_->{mntpoint}") foreach @parts;
+    $_->{mntpoint} and log::l("suggest_mount_points: $_->{device} -> $_->{mntpoint}") foreach fsedit::get_fstab(@$hds);
 }
 
 #- mainly for finding the root partitions for upgrade
