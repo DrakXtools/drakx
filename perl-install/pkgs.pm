@@ -52,7 +52,7 @@ autoirpm autoirpm-icons numlock
 
 %by_lang = (
   'ar'	=> [ 'acon' ],
-# 'be_BE.CP1251' => [ 'fonts-ttf-cyrillic' ],
+#'be_BE.CP1251' => [ 'fonts-ttf-cyrillic' ],
 #'bg_BG' => [ 'fonts-ttf-cyrillic' ],
   'cs'	=> [ 'XFree86-ISO8859-2', 'XFree86-ISO8859-2-75dpi-fonts' ],
 # 'cy'  => iso8859-14 fonts
@@ -66,9 +66,9 @@ autoirpm autoirpm-icons numlock
   'ja'	=> [ 'rxvt-CLE', 'fonts-ttf-japanese', 'kterm' ],
 # 'ka'	=> georgian fonts
   'ko'	=> [ 'rxvt-CLE', 'fonts-ttf-korean' ],
-# 'lt'	=> iso8859-13 fonts
-# 'lv'	=> iso8859-13 fonts
-# 'mi'	=> iso8859-13 fonts
+  'lt'	=> [ 'fonts-type1-baltic' ],
+  'lv'	=> [ 'fonts-type1-baltic' ],
+  'mi'	=> [ 'fonts-type1-baltic' ],
 # 'mk'	=> [ 'fonts-ttf-cyrillic' ],
   'pl'	=> [ 'XFree86-ISO8859-2', 'XFree86-ISO8859-2-75dpi-fonts' ],
   'ro'	=> [ 'XFree86-ISO8859-2', 'XFree86-ISO8859-2-75dpi-fonts' ],

@@ -144,8 +144,7 @@ arch() eq "ppc" ? (
  "hr" => [ __("Croatian"),	 "croat",	"yu" ],
  "il" => [ __("Israeli"),        "il-8859_8",   "il" ],
  "il_phonetic" => [ __("Israeli (Phonetic)"),"hebrew",   "il_phonetic" ],
-#- only xmodmap is currently available
-#"ir" => [ __("Iranian"),        "ir-isiri3342","ir" ],
+ "ir" => [ __("Iranian"),        "ir-isiri3342","ir" ],
  "is" => [ __("Icelandic"),      "is-latin1",   "is" ],
  "it" => [ __("Italian"),        "it-latin1",   "it" ],
  "jp" => [ __("Japanese 106 keys"), "jp106",	"jp" ],
@@ -173,7 +172,7 @@ arch() eq "ppc" ? (
  "uk" => [ __("UK keyboard"),    "uk",           "gb" ],
  "us" => [ __("US keyboard"),    "us",           "us" ],
  "us_intl" => [ __("US keyboard (international)"), "us-latin1", "us_intl" ],
- "vn" => [ __("Vietnamese \"numeric row\" QWERTY"),"vn", "vn" ], 
+ "vn" => [ __("Vietnamese \"numeric row\" QWERTY"),"vn-tcvn", "vn" ], 
  "yu" => [ __("Yugoslavian (latin layout)"), "sr", "yu" ],
 )),
 );
