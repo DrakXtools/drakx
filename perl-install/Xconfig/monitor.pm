@@ -156,7 +156,7 @@ sub configure_automatic {
 	    log::l("unknown EISA_ID and partial DDC probe, so unknown monitor");
 	    delete @$monitor{'VendorName', 'ModelName', 'EISA_ID'};	    
 	}
-    } else {
+    } elsif ($monitor->{VendorName}) {
 	if (my $mon = find { $_->{VendorName} eq $monitor->{VendorName} && $_->{ModelName} eq $monitor->{ModelName} } @$monitors_db) {
 	    put_in_hash($monitor, $mon);
 	}
