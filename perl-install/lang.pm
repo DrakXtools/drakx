@@ -666,8 +666,10 @@ sub write {
 
     $lang or return;
 
-    my $h = {};
-    $h->{$_} = $lang foreach qw(LC_COLLATE LC_CTYPE LC_MESSAGES LC_NUMERIC LC_MONETARY LC_TIME);
+    my $h = {
+	XKB_IN_USE => '',
+	(map { $_ => $lang } qw(LC_COLLATE LC_CTYPE LC_MESSAGES LC_NUMERIC LC_MONETARY LC_TIME)),
+    };
     if ($lang && exists $languages{$lang}) {
 ##- note: KDE is unable to use the keyboard if LC_* and LANG values differ...
 #-	add2hash $h, { LANG => lang2LANG($lang), LANGUAGE => lang2LANGUAGE($lang) };

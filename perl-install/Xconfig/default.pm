@@ -40,11 +40,6 @@ sub config_keyboard {
 
     my $XkbLayout = keyboard::keyboard2xkb($keyboard);
 
-    {
-	my $f = "$::prefix/etc/sysconfig/i18n";
-	setVarsInSh($f, add2hash_({ XKB_IN_USE => $XkbLayout ? '': 'no' }, { getVarsFromSh($f) })) if !$::testing;
-    }
-
     my $XkbModel = 
       arch() =~ /sparc/ ? 'sun' :
 	$XkbLayout eq 'jp' ? 'jp106' : 
