@@ -1,7 +1,6 @@
 package pkg;
 
 sub flag_available {
-    log::l("(dummy pkg::flag_available called)");
     return 1;
 }
 
