@@ -54,7 +54,7 @@ our %l = (
     ],
     wireless => [
       qw(acx100_pci airo airo_cs aironet4500_cs aironet_cs at76c503-rfmd atmel_cs atmel_pci hostap_pci hostap_plx),
-      qw(ipw2100 ipw2200 madwifi_pci netwave_cs orinoco orinoco_cs orinoco_pci orinoco_plx),
+      qw(ipw2100 ipw2200 madwifi_pci ath_pci netwave_cs orinoco orinoco_cs orinoco_pci orinoco_plx),
       qw(prism2_pci prism2_usb prism54 ray_cs usbvnet_rfmd vt_ar5k wavelan_cs wvlan_cs rt2500),
       if_(arch() =~ /ppc/, qw(airport)),
     ],
