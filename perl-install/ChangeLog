@@ -1,3 +1,30 @@
+2005/01/03  Funda Wang <fundawang at linux.net.cn>
+
+	* lang.pm: s/jp/ja. Corrected spelling of locale ja
+
+	* share/po/zh_CN.po: Updated Simplified Chinese translation
+
+2004/12/31  Pixel  <pixel at mandrakesoft.com>
+
+	* mygtk2.pm: no need to have things twice in _icon_paths()
+
+	* install_steps_gtk.pm: simplify (thanks to perl_checker)
+	remove code using getAndSaveFile to get the X server
+	(we don't have live directory anymore, and anyway we only use one X
+	server)
+
+	* install_gtk.pm: simplify (we always want the logo, and looking the right
+	path is already done elsewhere)
+
+	* share/list: ldd doesn't say anymore which file ld-linux is, so adding it
+	explicitly
+
+	* interactive/gtk.pm: better layout:
+	  - ensure buttons are at bottom using pack_end instead of packing a
+	growing empty vbox for ask_warn-like dialogs
+	  - drop old code
+	  - always allow box to grow (this may be wrong)
+
 2004/12/31  Pixel  <pixel at mandrakesoft.com>
 
 	* install_steps_gtk.pm: simplify (thanks to perl_checker)
@@ -42972,7 +42999,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.994 2004/12/13 17:47:19 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.995 2004/12/31 09:34:02 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
