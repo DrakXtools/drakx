@@ -67,6 +67,7 @@ my %languages = (
   'is'  => [ 'Icelandic', 		'iso-8859-1', 'is', 'is' ],
 'it_CH' => [ 'Italian|Switzerland',	'iso-8859-1', 'it', 'it_IT:it' ],
 'it_IT' => [ 'Italian|Italy',  		'iso-8859-1', 'it', 'it_IT:it' ],
+#-'iu'  => [ 'Inuktitut', 		'unicodeIU',  'iu', 'iu' ],
   'ja'  => [ 'Japanese',		'jisx0208',   'ja', 'ja_JP.ujis:ja' ],
   'ka'  => [ 'Georgian',                'georgian-ps','ka', 'ka' ],
   'kl'  => [ 'Greenlandic (inuit)',	'iso-8859-1', 'kl', 'kl' ],
@@ -113,8 +114,12 @@ my %languages = (
 				        'vi_VN.VISCII:vi_VN.viscii:vi' ],
   'wa'  => [ 'Walon',     		'iso-8859-1', 'wa', 'wa:fr_BE:fr' ],
 #-'yi'	=> [ 'Yiddish',			'cp1255',     'yi', 'yi' ],
-'zh_TW.Big5' => [ 'Chinese|Traditional', 'Big5', 'zh_TW.Big5', 'zh_TW.Big5:zh_TW.big5:zh_TW:zh' ],
+#'zh_HK.Big5' => [ 'Chinese|Traditional|Hong Kong|Big5', 'Big5', 'zh_TW.Big5', 'zh_TW.Big5:zh_TW.big5:zh_TW:zh_HK' ],
+#'zh_HK.UTF-8' => [ 'Chinese|Traditional|Hong Kong|UTF-8','unicodeTW','zh_HK', 'zh_HK:zh_TW.Big5:zh_TW.big5:zh_TW:zh_CN.GB2312:zh_CN:zh' ],
+'zh_TW.Big5' => [ 'Chinese|Traditional', 'Big5', 'zh_TW.Big5', 'zh_TW.Big5:zh_TW.big5:zh_TW:zh_HK' ],
+#'zh_TW.UTF-8' => [ 'Chinese|Traditional|Taiwan|UTF-8','unicodeTW','zh_TW', 'zh_TW.Big5:zh_TW.big5:zh_TW:zh_HK:zh_CN.GB2312:zh_CN:zh' ],
 'zh_CN.GB2312' => [ 'Chinese|Simplified', 'gb2312', 'zh_CN.GB2312', 'zh_CN.GB2312:zh_CN.gb2312:zh_CN:zh' ],
+#'zh_TW.UTF-8' => [ 'Chinese|Simplified|UTF-8','unicodeCN','zh_CN', 'zh_CN.GB2312:zh_CN.gb2312:zh_CN:zh:zh_TW.Big5:zh_TW.big5:zh_TW:zh_HK' ],
 );
 
 my %xim = (
