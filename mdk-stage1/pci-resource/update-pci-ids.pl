@@ -29,7 +29,7 @@ struct pci_module_map_full {
 
 my %t = ( 
     network => 'network/main|gigabit',
-    medias  => 'disk/scsi|hardware_raid',
+    medias  => 'disk/scsi|hardware_raid|sata',
 );
 
 foreach my $type (keys %t) {
