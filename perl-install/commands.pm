@@ -71,7 +71,7 @@ sub mount {
     "       (if /dev/ is left off the device name, a temporary node will be created)\n";
 
     my ($dev, $where) = @_;
-    $fs ||= $where =~ /:/ ? "nfs" :
+    $fs ||= $dev =~ /:/ ? "nfs" :
             $dev =~ /fd/ ? "vfat" : "ext2";
 
     require fs;
