@@ -107,6 +107,7 @@ $my_win->{window}->add(gtkpack_(gtkset_border_width(Gtk2::VBox->new, $::isEmbedd
                                                    {
                                                     cancel_clicked => sub { ugtk2->exit(0) },
                                                     ok_clicked => sub {
+							my $need_date = 1;
                                                         if ($check_ntp->get_active) {
                                                             my $choosed_serv = $combo_ntpserver->entry->get_text;
                                                             $choosed_serv =~ s/(\S+)\s*(.*)$/$1/;
@@ -115,19 +116,26 @@ $my_win->{window}->add(gtkpack_(gtkset_border_width(Gtk2::VBox->new, $::isEmbedd
                                                             system("service ntpd stop");
                                                             #verify that we have a valid hostname (thx sam)
                                                             $choosed_serv =~ s/[^-a-zA-Z0-9.]//g;
-                                                            system("/usr/sbin/ntpdate", $choosed_serv);
-                                                            update_time(); #- get the new time before updating the hwclock
-                                                            system("service ntpd start");
+							    if (!system("/usr/sbin/ntpdate", $choosed_serv)) {
+								update_time(); #- get the new time before updating the hwclock
+								system("service ntpd start");
+								$need_date = 0
+							    } else {
+								warn_dialog(N("Error"), N("Could not synchronize with $choosed_serv."));
+								return
+							    }
                                                         } else {
                                                             if (-e $ntpdlock) { 
 								system("service ntpd stop");
 								system("/sbin/chkconfig --level 35 ntpd off");
 							    }
+							}
+							if ($need_date) {
 							    my ($year, $month, $day) = $calendar->get_date;
 							    $month++;
 							    my ($hour, $min, $sec) = ($adjh->get_value, $adjm->get_value, $adjs->get_value);
 							    system("date " .
-							    join('', map { print_it0($_) } ($month, $day, $hour, $min, $year)) . '.' . print_it0($sec));
+							           join('', map { print_it0($_) } ($month, $day, $hour, $min, $year)) . '.' . print_it0($sec));
 							}
 							-e '/sbin/hwclock' and system('/sbin/hwclock --systohc');
                                                         system("dcop kicker Panel restart") if $ENV{DESKTOP} eq 'kde';
@@ -139,8 +147,6 @@ $my_win->{window}->add(gtkpack_(gtkset_border_width(Gtk2::VBox->new, $::isEmbedd
                                                          $its_reset = 1;
                                                          $timer = Glib::Timeout->add(120, \&update_time);
                                                          Repaint($drawing_area, 1);
-                                                         $calendar->select_month($old_month, $old_year);
-                                                         $calendar->select_day($old_day);
                                                          $button_reset->set_sensitive(0);
                                                          $its_reset = 0;
                                                      } ]
@@ -229,6 +235,13 @@ sub get_server() {
     [ map { "$_  ($servs->{$_})" } sort keys %$servs ]
 }
 sub update_time() {
+    my (undef, undef, undef, $mday, $mon, $year) = localtime(time());
+    $year += 1900;
+    my $old_its_reset = $its_reset;
+    $its_reset = 1;
+    $calendar->select_day($mday);
+    $calendar->select_month($mon, $year);
+    $its_reset = $old_its_reset;
     Repaint($drawing_area, 1);
 };
 
@@ -309,7 +322,7 @@ sub time_to_rad {
 
 sub Repaint {
     my ($drawing_area, $o_update_time) = @_;
-    my ($sec, $min, $hour) = localtime(time());
+    my ($sec,$min,$hour) = localtime(time());
     time_to_rad($sec, $min, $hour) if $o_update_time;
     my ($width, $height) = ($drawing_area->allocation->width, $drawing_area->allocation->height);
     my $dRadians_hour_real = $dRadians_hour + $dRadians_min / 12;
@@ -353,7 +366,7 @@ sub DrawHour {
     my ($pixmap, $gc, $midx, $midy, $dRadians, $dec) = @_;
     $pixmap->draw_polygon($gc, 1, $midx+$dec - 5/100 * $radius * sin($dRadians),       $midy+$dec + 5/100 * $radius * cos($dRadians),
 				    $midx+$dec - 5/100 * $radius * sin($dRadians+$PI/2), $midy+$dec + 5/100 * $radius * cos($dRadians+$PI/2),
-				    $midx+$dec + 7/10  * $radius * sin($dRadians),       $midy+$dec - 7/10  * $radius * cos($dRadians),
+				    $midx+$dec + 6/10  * $radius * sin($dRadians),       $midy+$dec - 6/10  * $radius * cos($dRadians),
 				    $midx+$dec + 5/100 * $radius * sin($dRadians+$PI/2), $midy+$dec - 5/100 * $radius * cos($dRadians+$PI/2)
 				    );
 }
