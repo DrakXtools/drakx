@@ -99,18 +99,9 @@ sub inspect {
 
 sub getFree {
     my ($dir, $part) = @_;
-    my ($freespace);
-
-    if ($dir) {
-	my $buf = ' ' x 20000;
-	syscall_('statfs', $dir, $buf) or return;
-	my (undef, $blocksize, $size, undef, $free, undef) = unpack "L2L4", $buf;
-	$_ *= $blocksize / 512 foreach $free;
-	
-	$freespace = $free;
-    } else {
-	$freespace = $part->{size};
-    }
+    my $freespace = $dir ? 
+      2 * (common::df($dir))[1] : #- df in KiB
+      $part->{size};
 
     $freespace - sum map { $_->{size} } @{$part->{loopback} || []};
 }

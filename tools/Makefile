@@ -28,13 +28,13 @@ $(BASE)/compss: $(BASE)/hdlists $(BASE)/hdlist.cz2
 	./gencompss `cat $< | perl -pe 's|(.*)|'$(BASE)'/$$1|' ` > $@ 
 
 $(BASE)/depslist: $(BASE)/hdlists $(BASE)/hdlist.cz2
-	gendepslist2 -o $@ `cat $< | perl -pe 's|^(\S*).*|'$(BASE)'/$$1|' `
+#	gendepslist2 -o $@ `cat $< | perl -pe 's|^(\S*).*|'$(BASE)'/$$1|' `
 
 $(BASE)/filelist: $(RPMS)
-	genfilelist $(ROOTDEST)/Mandrake/RPMS* >$@
+#	genfilelist $(ROOTDEST)/Mandrake/RPMS* >$@
 
 $(BASE)/hdlist.cz2: $(BASE)/hdlists $(RPMS)
-	genhdlists --noclean --distrib $(ROOTDEST)
+#	genhdlists --noclean --distrib $(ROOTDEST)
 
 clean: 
 	for i in $(DIRS); do $(MAKE) -C $$i clean; done

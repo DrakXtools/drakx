@@ -235,17 +235,16 @@ sub getAvailableSpace {
     #- 50mb may be a good choice to avoid almost all problem of insuficient space left...
     my $minAvailableSize = 50 * sqr(1024);
 
-    int ((getAvailableSpace_mounted($o->{prefix}) || getAvailableSpace_raw($o->{fstab}) * 512 / 1.07) - $minAvailableSize);
+    int ((!$::testing && 
+	  getAvailableSpace_mounted($o->{prefix}) || 
+	  getAvailableSpace_raw($o->{fstab}) * 512 / 1.07) - $minAvailableSize);
 }
 
 sub getAvailableSpace_mounted {
     my ($prefix) = @_;
-    my $buf = ' ' x 20000;
     my $dir = -d "$prefix/usr" ? "$prefix/usr" : "$prefix";
-    syscall_('statfs', $dir, $buf) or return;
-    my (undef, $blocksize, $size, undef, $free, undef) = unpack "L2L4", $buf;
-    log::l("space free on $dir is $free blocks of $blocksize bytes");
-    $free * $blocksize || 1;
+    my ($free, undef) = common::df($dir) or return;
+    $free || 1;
 }
 sub getAvailableSpace_raw {
     my ($fstab) = @_;
@@ -254,7 +253,7 @@ sub getAvailableSpace_raw {
     do { $_->{mntpoint} eq '/'    and return $_->{size} } foreach @$fstab;
 
     if ($::testing) {
-	my $nb = 650;
+	my $nb = 450;
 	log::l("taking ${nb}MB for testing");
 	return $nb << 11;
     }

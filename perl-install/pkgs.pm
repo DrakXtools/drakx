@@ -36,6 +36,7 @@ use c;
 );
 #- HACK: rating += 50 for some packages (like kapm, cf install_any::setPackages)
 #- HACK: rating += 10 if the group is selected and it is not a kde package (aka name !~ /^k/)
+#- HACK: rating += 1  if the group is selected and it is     a kde package (aka name !~ /^k/)
 
 
 @skip_list = qw(
@@ -706,10 +707,12 @@ sub setSelectedFromCompssList {
 	selectPackage($packages, $p, 0, \%newSelection);
 
 	#- this enable an incremental total size.
+	my $old_nb = $nb;
 	foreach (grep { $newSelection{$_} } keys %newSelection) {
 	    $nb += packageSize($packages->[0]{$_});
 	}
 	if ($max_size && $nb > $max_size) {
+	    $nb = $old_nb;
 	    $min_level = $p->{values}[$ind];
 	    last;
 	}
@@ -720,6 +723,19 @@ sub setSelectedFromCompssList {
     log::l("setSelectedFromCompssList: reached size $nb, up to indice $min_level (less than $max_size)");
     $ind, $min_level;
 }
+
+#- usefull to know the size it would take for a given min_level/max_size
+#- just saves the selected packages, call setSelectedFromCompssList and restores the selected packages
+sub fakeSetSelectedFromCompssList {
+    my ($compssListLevels, $packages, $min_level, $max_size, $install_class) = @_;
+    my @l = values %{$packages->[0]};
+    my @flags = map { pkgs::packageFlagSelected($_) } @l;
+    my (undef, $level) = setSelectedFromCompssList($compssListLevels, $packages, $min_level, $max_size, $install_class);
+    my $size = pkgs::selectedSize($packages);
+    mapn { pkgs::packageSetFlagSelected(@_) } \@l, \@flags;
+    $size, $level;
+}
+
 
 sub init_db {
     my ($prefix, $isUpgrade) = @_;

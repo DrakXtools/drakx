@@ -7,7 +7,7 @@ use vars qw(@ISA %EXPORT_TAGS @EXPORT_OK $printable_chars $sizeof_int $bitof_int
 @ISA = qw(Exporter);
 %EXPORT_TAGS = (
     common     => [ qw(__ even odd arch better_arch compat_arch min max sqr sum and_ or_ sign product bool invbool listlength bool2text bool2yesno text2bool to_int to_float ikeys member divide is_empty_array_ref is_empty_hash_ref add2hash add2hash_ set_new set_add round round_up round_down first second top uniq translate untranslate warp_text formatAlaTeX formatLines deref) ],
-    functional => [ qw(fold_left compose mapgrep map_index grep_index map_each grep_each list2kv map_tab_hash mapn mapn_ difference2 before_leaving catch_cdie cdie combine) ],
+    functional => [ qw(fold_left compose mapgrep map_index grep_index find_index map_each grep_each list2kv map_tab_hash mapn mapn_ difference2 before_leaving catch_cdie cdie combine) ],
     file       => [ qw(dirname basename touch all glob_ cat_ output symlinkf chop_ mode typeFromMagic expand_symlinks) ],
     system     => [ qw(sync makedev unmakedev psizeof strcpy gettimeofday syscall_ salt getVarsFromSh setVarsInSh setVarsInCsh substInFile availableRam availableMemory removeXiBSuffix template2file formatTime unix2dos setVirtual) ],
     constant   => [ qw($printable_chars $sizeof_int $bitof_int $SECTORSIZE %compat_arch) ],
@@ -176,6 +176,16 @@ sub grep_index(&@) {
     my $v; local $::i = 0;
     grep { $v = &$f($::i); $::i++; $v } @_;
 }
+sub find_index(&@) {
+    my $f = shift;
+    local $_;
+    for (my $i = 0; $i < @_; $i++) {
+	$_ = $_[$i];
+	&$f and return $i;
+    }
+    die "find_index failed in @_";
+}
+
 sub map_each(&%) {
     my ($f, %h) = @_;
     my @l;
@@ -537,6 +547,15 @@ sub formatTime($) {
     sprintf "%02d:%02d:%02d", $h, $m, $s;
 }
 
+#- return the size of the partition and its free space in KiB
+sub df {
+    my ($mntpoint) = @_;
+    my ($blocksize, $size, $free);
+    my $buf = ' ' x 20000;
+    syscall_('statfs', $mntpoint, $buf) or return;
+    (undef, $blocksize, $size, undef, $free, undef) = unpack "L2L4", $buf;
+    map { $_ * ($blocksize / 1024) } $size, $free;
+}
 
 #-######################################################################################
 #- Wonderful perl :(

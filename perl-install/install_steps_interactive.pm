@@ -153,13 +153,14 @@ You will be allowed to make powerful but dangerous things here."),
 sub selectMouse {
     my ($o, $force) = @_;
 
-    if ($o->{mouse}{unsafe} || $::expert || $force) {
+    $force ||= $o->{mouse}{unsafe} || $::expert;
+    if ($force) {
 	my $name = $o->ask_from_list_('', _("Please, choose the type of your mouse."), [ mouse::names() ], $o->{mouse}{FULLNAME});
 	$o->{mouse} = mouse::name2mouse($name);
     }
     $o->{mouse}{XEMU3} = 'yes' if $o->{mouse}{nbuttons} < 3; #- if $o->{mouse}{nbuttons} < 3 && $o->ask_yesorno('', _("Emulate third button?"), 1);
 
-    if ($o->{mouse}{device} eq "ttyS") {
+    if ($force && $o->{mouse}{device} eq "ttyS") {
 	$o->set_help('selectSerialPort');
 	$o->{mouse}{device} = mouse::serial_ports_names2dev(
 	  $o->ask_from_list(_("Mouse Port"),
@@ -297,21 +298,24 @@ sub choosePackages {
 
     #- avoid reselection of package if individual selection is requested and this is not the first time.
     if ($first_time || !$individual) {
-	my $min_mark = $::beginner ? 25 : 1;
-	my @l = values %{$packages->[0]};
-	my @flags = map { pkgs::packageFlagSelected($_) } @l;
-	pkgs::setSelectedFromCompssList($o->{compssListLevels}, $packages, $min_mark, 0, $o->{installClass});
-	my $max_size = 1 + pkgs::selectedSize($packages); #- avoid division by zero.
-	mapn { pkgs::packageSetFlagSelected(@_) } \@l, \@flags;
-
-#-	  if (!$::beginner && $max_size > $availableC) {
-#-	      $o->ask_okcancel('', 
-#-_("You need %dMB for a full install of the groups you selected.
-#-You can go on anyway, but be warned that you won't get all packages", $max_size / sqr(1024)), 1) or goto &choosePackages
-#-	  }
-	my $size2install = $::beginner && $first_time ? $availableC * 0.7 :
-	  $o->chooseSizeToInstall($packages, $min_size, $max_size, $availableC, $individual) or goto &choosePackages;
-
+	my $min_mark = $::beginner ? 10 : $::expert ? 0 : 1;
+	my ($size, $level) = pkgs::fakeSetSelectedFromCompssList($o->{compssListLevels}, $packages, $min_mark, 0, $o->{installClass});
+	my $max_size = 1 + $size; #- avoid division by zero.
+	
+	my $size2install = do {
+	    if ($::beginner) {
+		#- TODO: check the max_size > 700, otherwise remove Full entry, and even maybe Medium
+		#- in any case, ensure the result < $max_size
+		my @sizes = (300, 700, round_up(min($max_size, $availableC) / 1024 / 1024, 100));
+		my @l = mapn { _ ($_[0], $_[1]) } [ __("Small(%dMB)"), __("Normal (%dMB)"), __("Full (%dMB)") ], \@sizes;
+		$sizes[2] > $sizes[1] + 200 or splice(@l, 1, 1), splice(@sizes, 1, 1); #- not worth proposing too alike stuff
+		$sizes[1] > $sizes[0] + 100 or splice(@l, 1, 1), splice(@sizes, 1, 1);
+		my $choice = $o->ask_from_list('', 'TODOMESSAGE', \@l);
+		$sizes[find_index { $_ eq $choice } @l] * 1024 * 1024;
+	    } else {
+		$o->chooseSizeToInstall($packages, $min_size, $max_size, $availableC, $individual) || goto &choosePackages;
+	    }
+	};
 	($o->{packages_}{ind}) =
 	  pkgs::setSelectedFromCompssList($o->{compssListLevels}, $packages, $min_mark, $size2install, $o->{installClass});
     }

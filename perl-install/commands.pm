@@ -472,7 +472,7 @@ $l{Destination}, $l{Gateway}, $l{Mask}, $l{Iface}
 
 sub df {
     my ($h) = getopts(\@_, qw(h));
-    my ($dev, $blocksize, $size, $free, $used, $use, $mntpoint);
+    my ($dev, $size, $free, $used, $use, $mntpoint);
     open DF, ">&STDOUT";
     format DF_TOP =
 Filesystem          Size      Used    Avail     Use  Mounted on
@@ -487,12 +487,7 @@ $dev, $size, $used, $free, $use, $mntpoint
 	$h{$dev} = $mntpoint;
     }
     foreach $dev (sort keys %h) {
-	$mntpoint = $h{$dev};
-	my $buf = ' ' x 20000;
-	syscall_('statfs', $mntpoint, $buf) or next;
-	(undef, $blocksize, $size, undef, $free, undef) = unpack "L2L4", $buf;
-	$_ *= $blocksize / 1024 foreach $size, $free;
-
+	($size, $free) = common::df($mntpoint = $h{$dev});
 	$size or next;
 
 	$use = int (100 * ($size - $free) / $size);
