@@ -883,6 +883,7 @@ sub write_yaboot {
 	}
 	my $f = "$::prefix/etc/yaboot.conf";
 	log::l("writing yaboot config to $f");
+	rename $f, "$f.old";
 	output($f, map { "$_\n" } @conf);
     }
 }
@@ -997,6 +998,7 @@ sub write_lilo {
     my $f = arch() =~ /ia64/ ? "$::prefix/boot/efi/elilo.conf" : "$::prefix/etc/lilo.conf";
 
     log::l("writing lilo config to $f");
+    rename $f, "$f.old";
     output_with_perm($f, $bootloader->{password} ? 0600 : 0644, map { "$_\n" } @conf);
 }
 
@@ -1078,7 +1080,9 @@ sub read_grub_device_map() {
 }
 sub write_grub_device_map {
     my ($legacy_floppies, $sorted_hds) = @_;
-    output("$::prefix/boot/grub/device.map",
+    my $f = "$::prefix/boot/grub/device.map";
+    rename $f, "$f.old";
+    output($f,
 	   (map_index { "(fd$::i) /dev/$_->{device}\n" } @$legacy_floppies),
 	   (map_index { "(hd$::i) /dev/$_->{device}\n" } @$sorted_hds));
 }
@@ -1118,7 +1122,9 @@ sub write_grub {
     write_grub_device_map(\@legacy_floppies, \@sorted_hds);
 
     my $file2grub = sub {
+	warn "file2grub: fstab is ", join(' ', map { "$_->{device}:$_->{mntpoint}" } @$fstab), "\n";
 	my ($part, $file) = fsedit::file2part($fstab, $_[0], 'keep_simple_symlinks');
+	warn "file2grub: $part->{device}:$file\n";
 	device2grub($part, \@sorted_hds) . $file;
     };
     {
@@ -1170,16 +1176,21 @@ sub write_grub {
 	}
 	my $f = "$::prefix/boot/grub/menu.lst";
 	log::l("writing grub config to $f");
+	rename $f, "$f.old";
 	output($f, map { "$_\n" } @conf);
     }
-    my $dev = device_string2grub($bootloader->{boot}, \@legacy_floppies, \@sorted_hds);
-    my ($stage1, $stage2, $menu_lst) = map { $file2grub->("/boot/grub/$_") } qw(stage1 stage2 menu.lst);
-    output "$::prefix/boot/grub/install.sh",
+    {
+	my $f = "$::prefix/boot/grub/install.sh";
+	my $dev = device_string2grub($bootloader->{boot}, \@legacy_floppies, \@sorted_hds);
+	my ($stage1, $stage2, $menu_lst) = map { $file2grub->("/boot/grub/$_") } qw(stage1 stage2 menu.lst);
+	rename $f, "$f.old";
+	output "$::prefix/boot/grub/install.sh",
 "grub --device-map=/boot/grub/device.map --batch <<EOF
 install $stage1 d $dev $stage2 p $menu_lst
 quit
 EOF
-";  
+";
+    }
 
     check_enough_space();
 }
@@ -1262,7 +1273,10 @@ sub update_for_renumbered_partitions {
     $in->ask_okcancel('', N("Your bootloader configuration must be updated because partition has been renumbered")) or return;
 
     foreach (values %configs) {
-	output("$::prefix/$_->{file}", $_->{new}) if $_->{new} ne $_->{orig};
+	if ($_->{new} ne $_->{orig}) {
+	    rename "$::prefix/$_->{file}", "$::prefix/$_->{file}.old";
+	    output("$::prefix/$_->{file}", $_->{new});
+	}
     }
 
     my $main_method = detect_main_method([ fsedit::get_fstab(@$hds) ]);
