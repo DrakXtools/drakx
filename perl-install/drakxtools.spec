@@ -321,6 +321,7 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 - drakconnect wizard:
   o never delete up/down scripts
   o only write internet service if start at boot requested
+- banners: prevent shadow to be darker on theme switches
 
 * Thu Feb 26 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10-12mdk
 - drakbackup: use ATAPI:/dev/hdX for both 2.4/2.6 compatibility (stew)
