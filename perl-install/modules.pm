@@ -486,7 +486,7 @@ sub add_alias {
     log::l("adding alias $alias to $name");
     $conf{$alias}{alias} ||= $name;
     if ($name =~ /^snd-card-/) {
-	$conf{$name}{"post-install"} = "modprobe snd-pcm-oss";
+	$conf{$name}{above} = 'snd-pcm-oss';
     }
     $alias;
 }
