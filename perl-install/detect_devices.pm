@@ -403,8 +403,9 @@ sub whatUsbport() {
     my @res = ();
     foreach $i (0..15) {
 	my $port = "/dev/usb/lp$i";
-	devices::make("$port");
-	open PORT, "$port" or next;
+	my $realport = devices::make("$port");
+	next if (!$realport);
+	open PORT, "$realport" or next;
 	my $idstr;
 	# Calculation of IOCTL function 0x84005001 (to get device ID string):
 	# len = 1024
