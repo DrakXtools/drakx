@@ -236,7 +236,7 @@ sub selectLanguage {
 
     addToBeDone {
 	lang::write($o->{prefix});
-	keyboard::write($o->{prefix}, $o->{keyboard});
+	keyboard::write($o->{prefix}, lang::lang2charset($o->{lang}), $o->{keyboard});
     } 'doInstallStep' unless $::g_auto_install;
 }
 
@@ -270,7 +270,7 @@ sub selectKeyboard {
     #- if we go back to the selectKeyboard, you must rewrite
     addToBeDone {
 	lang::write($o->{prefix});
-	keyboard::write($o->{prefix}, $o->{keyboard});
+	keyboard::write($o->{prefix}, lang::lang2charset($o->{lang}), $o->{keyboard});
     } 'doInstallStep' unless $::g_auto_install;
 }
 
@@ -730,7 +730,7 @@ sub main {
 
     -e "$o->{prefix}/usr/bin/urpmi" or eval { commands::rm("-rf", "$o->{prefix}/var/lib/urpmi") };
 
-    #- have the really bleeding edge ddebug.log for this f*cking msec :-/
+    #- have the really bleeding edge ddebug.log
     eval { commands::cp('-f', "/tmp/ddebug.log", "$o->{prefix}/root") };
 
     #- ala pixel? :-) [fpons]

@@ -210,6 +210,8 @@ sub text2lang {
     die "unknown language $t";
 }
 
+sub lang2charset { $languages{$_[0]} }
+
 sub set {
     my ($lang) = @_;
 
