@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10
-Release: 0.11mdk
+Release: 0.12mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -316,6 +316,16 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Thu Feb 12 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10-0.12mdk
+- drakconnect:
+  o preselect right protocol for ethernet though connections
+  o only offer to connect now for ppp connections
+  o fix module retrieving when configuring an adsl connection over
+    ethernet
+- authentication:
+  o install ldap packages *before* doing ldapsearch
+  o pam*.so modules do not have /lib/security/ prefix anymore
+
 * Thu Feb 12 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10-0.11mdk
 - drakconnect wizard:
   o fix choosing dhcp as adsl protocol
