@@ -269,6 +269,48 @@ sub getNetworkInterfaces {
     @interfaces;
 }
 
+sub getIPsOfLocalMachine {
+
+    # subroutine determines all IPs which point to the local machine,
+    # except 127.0.0.1 (localhost).
+
+    # Return an empty list if no network is running
+    return () unless network_running();
+    
+    # Read the output of "ifconfig" to determine the broadcast addresses of
+    # the local networks
+    my $dev_is_realnet = 0;
+    my @local_ips;
+    my $current_ip = "";
+	
+    local *IFCONFIG_OUT;
+    open IFCONFIG_OUT, ($::testing ? "" : "chroot $::prefix/ ") .
+	"/bin/sh -c \"export LC_ALL=C; ifconfig\" |" or return ();
+    while (my $readline = <IFCONFIG_OUT>) {
+	# New entry ...
+	if ($readline =~ /^(\S+)\s/) {
+	    my $dev = $1;
+	    # ... for a real network (not lo = localhost)
+	    $dev_is_realnet = ($dev ne 'lo');
+	    # delete previous address
+	    $current_ip = "";
+	}
+	# Are we in the important line now?
+	if ($readline =~ /\sinet addr:([0-9]+\.[0-9]+\.[0-9]+\.[0-9]+)\s/) {
+	    # Rip out the IP address
+	    $current_ip = $1;
+	    
+	    # Are we in an entry for a real network?
+	    if ($dev_is_realnet) {
+		# Store current IP address
+		push @local_ips, $current_ip;
+	    }
+	}
+    }
+    close(IFCONFIG_OUT);
+    @local_ips;
+}
+
 sub getIPsInLocalNetworks {
 
     # subroutine determines the list of all hosts reachable in the local

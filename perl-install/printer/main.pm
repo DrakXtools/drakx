@@ -1047,7 +1047,9 @@ sub clientnetworks {
 	} elsif (!member($line, map {broadcastaddress($_)} @sharehosts)) {
 	    # Line pointing to remote server
 	    push(@sharehosts, networkaddress($line));
-	    $havebrowseaddresswithoutallowedhost = 1;
+	    if ($printer->{cupsconfig}{localprintersshared}) {
+		$havebrowseaddresswithoutallowedhost = 1;
+	    }
 	}
     }
     my $havebrowseallowwithoutallowedhost = 0;
@@ -1060,7 +1062,7 @@ sub clientnetworks {
 	} elsif (!member($line, @sharehosts)) {
 	    # Line pointing to remote server
 	    push(@sharehosts, $line);
-	    $havebrowseallowwithoutallowedhost = 1;
+	    #$havebrowseallowwithoutallowedhost = 1;
 	}
     }
 
@@ -1199,6 +1201,12 @@ sub read_cups_config {
     @{$printer->{cupsconfig}{root}{AllowFrom}} =
 	handle_configs::read_directives($printer->{cupsconfig}{rootlocation},
 					'Allow From');
+    # Remove the IPs pointing to the local machine
+    my @localips = printer::detect::getIPsOfLocalMachine();
+    @{$printer->{cupsconfig}{root}{AllowFrom}} =
+	grep {
+	    !member($_, @localips)
+	} @{$printer->{cupsconfig}{root}{AllowFrom}};
 
     # Keyword "Deny from" 
     @{$printer->{cupsconfig}{root}{DenyFrom}} =
@@ -1279,19 +1287,25 @@ sub write_cups_config {
 
     # To which machines are the local printers available?
     if (!$printer->{cupsconfig}{customsharingsetup}) {
+	my @localips = printer::detect::getIPsOfLocalMachine();
 	# root location block
 	@{$printer->{cupsconfig}{rootlocation}} =
 	    "<Location />\n" .
-	    ($printer->{cupsconfig}{localprintersshared} ?
-	     "Order Deny,Allow\n" :
-	     "Order Allow,Deny\n") .
+	    "Order Deny,Allow\n" .
 	    "Deny From All\n" .
 	    "Allow From 127.0.0.1\n" .
-	    ($#{$printer->{cupsconfig}{clientnetworks}} >= 0 ?
+	    (@localips ?
+	     "Allow From " .
+	     join("\nAllow From ", @localips).
+	     "\n" : "") .
+	    ($printer->{cupsconfig}{localprintersshared} &&
+	     ($#{$printer->{cupsconfig}{clientnetworks}} >= 0) ?
 	     "Allow From " .
 	     join("\nAllow From ", 
-		  @{$printer->{cupsconfig}{clientnetworks}}) .
-	     "\n" : "").
+		  grep {
+		      !member($_, @localips)
+		  } @{$printer->{cupsconfig}{clientnetworks}}) .
+	     "\n" : "") .
 	    "</Location>\n";
 	my ($location_start, @location) = 
 	    rip_location($printer->{cupsconfig}{cupsd_conf}, "/");
