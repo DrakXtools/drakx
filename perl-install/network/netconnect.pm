@@ -1010,7 +1010,7 @@ notation (for example, 1.2.3.4).")),
                         }
                     },
                     focus_out => sub {
-                        $ethntf->{NETMASK} ||= netmask($ethntf->{IPADDR}) unless $_[0];
+                        $ethntf->{NETMASK} ||= netmask($ethntf->{IPADDR}) unless $ethntf->{NETMASK};
                     },
                     post => sub {
                         $ethntf->{ONBOOT} = bool2yesno($onboot);
