@@ -98,8 +98,7 @@
 #	        10- backend : --resore_all, --restore_sys, --restore_users
 #			  --build_cd_autoinst 	
 #			  --backup_now --backup_default_now
-#		11- tape device support
-#		 
+#		11- tape device support		 
 #		12- cpio use !!
 #		13- boot floppy disk (with dialog)
 #		14- build autoboot with backup and install cd 
@@ -128,43 +127,34 @@ $::isEmbedded = ($::XID, $::CCPID) = "@ARGV" =~ /--embedded (\w+) (\w+)/;
 
 
 if ("@ARGV" =~ /--help|-h/) {
-    print q(Backup and monitoring application
+    print q(Backup and Restore application
 
---list           : list of files or directories to backup.
---default        : save default directories.
---build_cd       : build restore iso with the currents backups files
-                       & rescue options.
---build_floppy   : build restore floppy.
---save_dir       : by default the backup files are saved in 
-                       in /var/backup directory so write other directory
-	               to change to change it.
---conf_file      : to read other configuration file. 
---debug		 : permit to see all debug messages.
+--default             : save default directories.
+--debug		      : permit to see all debug messages.
+--show-conf           : list of files or directories to backup.
+--help                : show this message.
+--version             : show version name.
 );
     exit(0);
 }
 
-# Backend Options.
-my $default = 0;
-my $build_cd = 0;
-my $build_floppy = 0;
-my $mode = 0;
-my $conf_file = 0;
-my @list_arg = ();
+if ("@ARGV" =~ /--version/) {
+    print "DrakBakckup Beta Version 0.1.\n";
+    exit(0);
+}
+
+
+# Backend Options.      
 my $central_widget;
 my $previous_widget;
 my $current_widget;
 my $interactive;
 my $up_box;
 my $advanced_box;
-my $box;
 my $box2;
-my $backup_choice = 0;
 my $cfg_file_exist = 0;
-my @user_and_path_list;
 my @all_user_list;
 my $list_other;
-my $label_cfg_file;
 my $DEBUG = 0;
 my $restore_sys = 1; 
 my $restore_user = 1; 
@@ -176,7 +166,6 @@ my $sys_backuped = 0;
 my $other_backuped = 0;
 my @user_list_to_restore= ();
 my @sys_list_to_restore = ();
-my $retore_box2;
 my $cd_devive_entry;
 my $custom_help;
 my $button_box;
@@ -193,7 +182,6 @@ my $pbar3;
 my $the_time;
 my @user_list_to_restore2 = ();
 my @data_backuped = ();
-my $box_tail; 
 my $label_tail;
 my @list_to_build_on_cd = (); 
 my $restore_path = "/";
@@ -253,33 +241,48 @@ my $send_mail = 0;
 my $user_mail;
 
 foreach (@ARGV) {
-    /--default/ and $default = 1, $mode=-1;
-    /--build_cd/ and $build_cd = 1, $mode=-1;
-    /--build_floppy/ and $build_floppy = 1, $mode=-1;
-    /--conf_file/ and $mode = 0, next;
-    /--list/ and $mode = 1, next;
+    /--default/ and backend_mode();
+    /--show-conf/ and show_conf();
     /--debug/ and $DEBUG = 1, next;
-    $mode == 1 and push @list_arg, $_;
 }
 
-$build_floppy || $build_cd || $default || @list_arg || $conf_file ? build_backup_files() : interactive_mode();
+sub show_conf {
+    print "DrakBakckup configuration:\n\n";
+    print cat_("$cfg_file"). "\n";
+    exit(0);
+}
 
-sub read_passwd {
-    my @tmp1;
-    my @tmp2;
-    @user_and_path_list = map { 
-	(split(':', $_))[0] . ":" . (split(':', $_))[5] } grep {( split(':', $_))[2] >= 500} split ('\n', cat_('/etc/passwd'));  
-    $DEBUG and print "user_and_path_list: ".$_."\n" foreach (@user_and_path_list);
-    @user_list = ();
+sub backend_mode {
+    build_backup_files();
+    exit(0);
+}
+
+interactive_mode();
+
+sub all_user_list {
+    my ($username) = @_;
+    my $passwdfile = "/etc/passwd";
+    my $user;
+    my $uid;
     @all_user_list = ();
-    push @user_and_path_list, 'root:/root';
-    push @user_list, (split(':', $_))[0] foreach (@user_and_path_list);
-    push @all_user_list, (split(':', $_))[0] foreach (@user_and_path_list);
-    @tmp1 = sort @user_list;
-    @user_list = @tmp1;
-    @tmp2 = sort @all_user_list;
-    @all_user_list = @tmp2;
+
+    open (PASSWD, $passwdfile) or exit 1; 
+    while (defined(my $line = <PASSWD>)) {
+	chomp($line);
+	($user, $uid) = (split(/:/, $line))[0, 2];
+	if ($uid >= 500 || $uid == 0 ) {
+	    push @all_user_list, $user;
+	}
+    }
+    close (PASSWD);
+    if ($DEBUG) {
+	print "/--  User list  --/ \n";
+	print " -> $_\n" foreach (@all_user_list);
+	print "\n";
+    }
 }
+
+
 
 sub the_time {
     $the_time = "_";
@@ -384,7 +387,6 @@ sub save_cron_files {
 }
 
 sub read_conf_file {
-    read_passwd();
     if (-e $cfg_file) {
         open ( CONF_FILE, "<"."$cfg_file") || print "You must be root to read configuration file. \n" ;
         while (<CONF_FILE>) {
@@ -430,23 +432,12 @@ sub read_conf_file {
 	    if (/^OTHER_INCREMENTAL_BACKUPS/) { $backup_other_versions = 1;}
 	    if (/^NO_CRITICAL_SYS/)  { $no_critical_sys = 1;}
 	    if (/^CRITICAL_SYS/)  { $no_critical_sys = 0;}
-
 	}
 	read_cron_files();
 	$cfg_file_exist = 1;
     } 
     else { $cfg_file_exist = 0; }
     close CONF_FILE;    
-}
-
-sub return_path {
-    my $name = $_; 
-    foreach (@user_and_path_list) {
-	if (grep /^$name\:/, $_) {
-	    s/^$name\://gi;
-	    return $_;
-	}
-    }
 }
 
 sub ftp_client {
@@ -458,7 +449,6 @@ sub ftp_client {
     $DEBUG or  $ftp = Net::FTP->new("$host_name", Debug => 0); 
     $ftp->login("$login_user","$passwd_user"); 
     $ftp->cwd("$host_path"); 
-#   $ftp->get("/ce/repertoire/ce.fichier"); 
     foreach (@file_list_to_send_by_ftp) {
 	$ftp->put("$_");
     }
@@ -466,20 +456,7 @@ sub ftp_client {
 }
 
 sub ssh_client {
-#    foreach (@file_list_to_send_by_ftp) {
-	system("scp @file_list_to_send_by_ftp root\@petra:.");
-#    }
-
-#  $res = Net::SSLeay::write($ssl, $msg);  # Perl knows how long $msg is
-#         die_if_ssl_error("ssl write");
-#         shutdown S, 1;  # Half close --> No more output, sends EOF to server
-#         $got = Net::SSLeay::read($ssl);         # Perl returns undef on failure
-#         die_if_ssl_error("ssl read");
-#         print $got;
-                
-#         Net::SSLeay::free ($ssl);               # Tear down connection
-#         Net::SSLeay::CTX_free ($ctx);
-#         close S;
+    system("scp @file_list_to_send_by_ftp root\@petra:.");
 }
 
 sub send_mail {
@@ -741,6 +718,7 @@ sub advanced_what_user {
     my $box_what_user;
     my %check_what_user;
     
+    all_user_list();
     gtkpack($advanced_box,
 	    $box_what_user = gtkpack_(new Gtk::VBox(0, 15),
 				      0, _("Please check all user that you want to include inb your backup."),
@@ -804,7 +782,7 @@ sub advanced_what_other {
 			       gtksignal_connect(new Gtk::Button(_("Add")), clicked => sub {filedialog()  }),
 			       gtksignal_connect(new Gtk::Button(_("Remove Selected")), clicked => \&list_remove, $list_other),
 			       ),
-		     0, gtkset_sensitive(my $check_what_other_versions = new Gtk::CheckButton( _("Use Incremental Backups  (do not replace old backups)") ), 0),
+ 0, gtkset_sensitive(my $check_what_other_versions = new Gtk::CheckButton( _("Use Incremental Backups  (do not replace old backups)") ), 0),
 		     ),
 	    );
     gtksignal_connect(gtkset_active($check_what_other_versions, $backup_other_versions), toggled => sub {
@@ -857,8 +835,7 @@ sub advanced_what_entire_sys{
 }
 
 sub advanced_what{
-    my $box_what;
-    
+    my $box_what;    
     my ($pix_user_map, $pix_user_mask) = gtkcreate_png("ic82-users-40");
     my ($pix_other_map, $pix_other_mask) = gtkcreate_png("ic82-others-40");
     my ($pix_sys_map, $pix_sys_mask) = gtkcreate_png("ic82-system-40");
@@ -882,16 +859,16 @@ sub advanced_what{
 		     1, new Gtk::VBox(0, 5),	
 				 ),
 	    );
-    $button_what_sys->add(gtkpack(new Gtk::HBox(0,10),
-				  new Gtk::Pixmap($pix_sys_map, $pix_sys_mask),
-				  new Gtk::Label(_(" System ")),
-				  new Gtk::HBox(0, 5)
-				  ));
-    $button_what_user->add(gtkpack(new Gtk::HBox(0,10),
-				   new Gtk::Pixmap($pix_user_map, $pix_user_mask),
-				   new Gtk::Label(_(" Users ")),
-				   new Gtk::HBox(0, 5)
-				   ));
+    $button_what_sys->add(  gtkpack(new Gtk::HBox(0,10),
+				    new Gtk::Pixmap($pix_sys_map, $pix_sys_mask),
+				    new Gtk::Label(_(" System ")),
+				    new Gtk::HBox(0, 5)
+				    ));
+    $button_what_user->add( gtkpack(new Gtk::HBox(0,10),
+				    new Gtk::Pixmap($pix_user_map, $pix_user_mask),
+				    new Gtk::Label(_(" Users ")),
+				    new Gtk::HBox(0, 5)
+				    ));
     $button_what_other->add(gtkpack(new Gtk::HBox(0,10),
 				    new Gtk::Pixmap($pix_other_map, $pix_other_mask),
 				    new Gtk::Label(_(" Other ")),
@@ -1769,7 +1746,7 @@ sub restore_aff_result {
 
 }
 
-sub return_path2 {
+sub return_path {
     my ($username) = @_;
     my $usr;
     my $home_dir;
@@ -1802,7 +1779,7 @@ sub restore_backend {
 		    my ($tnom, $username, $theure2) = /^(\w+\_\w+\_user_)(.*)_(\d+\_\d+.*)$/;
 		    $DEBUG and print "user name to restore: $username, user directory: $user_dir\n";		    
 		    if ($remove_user_before_restore) {
-			$user_dir = return_path2($username);
+			$user_dir = return_path($username);
 			-d $user_dir and rm_rf($user_dir);
 		    }
 		    $untar_cmd or system(" tar xfz  $path_to_find_restore/$_ -C $restore_path") ;
