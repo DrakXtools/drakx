@@ -81,24 +81,25 @@ sub to_string {
 sub allowed {
     my ($card) = @_;
 
-    my ($prefered_depth, @depths, @resolutions, @resolution_and_depth);
+    my ($prefered_depth, @resolution_and_depth);
     
     if ($card->{Driver} eq 'fbdev') {
-	push @resolution_and_depth, grep { $_->{Depth} == 16 } @bios_vga_modes;
-    } elsif ($card->{Driver} eq 'vmware') {
-	push @depths, 16, 8;
-    } elsif ($card->{Driver} eq 'fglrx') {
-	push @depths, 24;
+	@resolution_and_depth = grep { $_->{Depth} == 16 } @bios_vga_modes;
     } else {
-	if ($card->{use_DRI_GLX}) {
+	my @depths;
+	if ($card->{Driver} eq 'vmware') {
+	    @depths = (16, 8);
+	} elsif ($card->{Driver} eq 'fglrx') {
+	    @depths = 24;
+	} elsif ($card->{BoardName} eq 'RIVA128') { 
+	    @depths = qw(8 15 24);
+	} elsif ($card->{use_DRI_GLX}) {
 	    $prefered_depth = 16;
-	    push @depths, 16, 24;
+	    @depths = (16, 24);
+	} else {
+	    @depths = our @depths_available;
 	}
-	if ($card->{BoardName} eq 'RIVA128') { @depths = qw(8 15 24) }  #- X doesn't even start in 16bpp for RIVA128
-    }
-    if (!@resolution_and_depth || @depths || @resolutions) {
-	@depths = our @depths_available if !@depths;
-	@resolutions = @Xconfig::xfree::resolutions if !@resolutions;
+	my @resolutions = @Xconfig::xfree::resolutions;
 
 	push @resolution_and_depth,
 	  map {
