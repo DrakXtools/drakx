@@ -431,10 +431,10 @@ sub load {
     if ($::testing) {
 	log::l("i try to install $name module (@options)");
     } elsif ($::isStandalone || $::live) {
-	run_program::run("modprobe", $name, @options);
+	run_program::run("modprobe", $name, @options) or die "insmod'ing module $name failed";
     } else {
 	$conf{$name}{loaded} and return;
-	
+
 	eval { load($_, 'prereq') } foreach @{$deps{$name}};
 	load_raw([ $name, @options ]);
     }
