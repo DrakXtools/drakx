@@ -1,3 +1,30 @@
+2001/09/24  dam's  <damien@mandrakesoft.com>
+
+	* network/netconnect.pm, network/ethernet.pm: bug fix
+
+2001/09/24  François Pons  <fpons@mandrakesoft.com>
+
+	* Xconfigurator.pm: deactivated Riva128 3D hw acceleration and too many
+	problems reported with it.
+
+	* share/rpmsrate: allow rpm build for non expert who choose development.
+	removed any reference to XFree86-glide-module or Glide_XXX packages.
+
+	* pkgs.pm: sort mediums by number, in allMediums() else they will be in
+	hash keys orders in
+	install_steps_interactive::chooseCD().
+
+	* install_steps.pm: disable wins in /etc/nsswitch.conf (after installed
+	packages).
+
+2001/09/24  Pixel  <pixel@mandrakesoft.com>
+
+	* fs.pm: add "iocharset=" for cdrom
+
+	* install_steps.pm: 
+	  - disable supermount by default
+	  - cleanup nsswitch.conf wins removing
+
 2001/09/24  François Pons  <fpons@mandrakesoft.com>
 
 	* share/rpmsrate: removed any reference to XFree86-glide-module or
