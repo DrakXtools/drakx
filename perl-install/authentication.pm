@@ -27,7 +27,7 @@ sub kind2description() {
           [ N("Local file:"), N("Use local for all authentication and information user tell in local file"), ],
           [ N("LDAP:"), N("Tells your computer to use LDAP for some or all authentication. LDAP consolidates certain types of information within your organization."), ],
           [ N("NIS:"), N("Allows you to run a group of computers in the same Network Information Service domain with a common password and group file."), ],
-          [ N("Windows Domain:"), N("Winbind allows a system to retrieve information about users and to authenticate users by using in an Windows domain."), ],
+          [ N("Windows Domain:"), N("Winbind allows the system to retrieve information and authenticate users in a Windows domain."), ],
           [ N("Active Directory with SFU:"), N("Kerberos is a secure system for providing network authentication services."), ],
           [ N("Active Directory with Winbind:"), N("Kerberos is a secure system for providing network authentication services.")  ],
          )

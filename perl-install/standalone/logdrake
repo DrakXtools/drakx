@@ -165,7 +165,7 @@ gtkadd($my_win->{window},
                                                       $::WizardWindow->destroy if defined $::WizardWindow;
                                                       undef $::WizardWindow;
                                                       if ($err && $err !~ /wizcancel/) {
-                                                          err_dialog(N("Error"), N("The alert wizard had unexpectly failled:")
+                                                          err_dialog(N("Error"), N("The alert wizard has failed unexpectedly:")
                                                                      . "\n\n" . $err);
                                                       }
                                                   })),
