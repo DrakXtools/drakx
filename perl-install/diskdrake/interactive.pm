@@ -751,6 +751,7 @@ sub Add2LVM {
 	$lvm = bless { disks => [], LVMname => $name }, 'lvm';
 	push @$lvms, $lvm;
     }
+    raid::make($all_hds->{raids}, $part) if isRAID($part);
     $part->{lvm} = $lvm->{LVMname};
     push @{$lvm->{disks}}, $part;
     delete $part->{mntpoint};
