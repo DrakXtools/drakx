@@ -132,9 +132,11 @@ If some of these measures lead to problems for you, turn this option off, but th
                     disabled => sub {
 			$daemonless_cups;
 		    } }),
-	      { val => N("Remote CUPS server and no local CUPS daemon: ") .
+	      { val => N("Remote CUPS server and no local CUPS daemon") .
+		    ": " .
 		    ($daemonless_cups ? 
-		     N("On; Server:") . $remote_cups_server :
+		     N("On") . "; " . N("Server") . ": " . 
+		     $remote_cups_server :
 		     N("Off")),
 		help => N("In this mode the local CUPS daemon will be stopped and all printing requests go directly to the server specified below. Note that it is not possible to define local print queues then and if the specified server is down it cannot be printed at all from this machine."),
 		type => 'button',
