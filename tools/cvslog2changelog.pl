@@ -70,5 +70,6 @@ BEGIN {
 	      'uid535'  => 'Guillaume Cottenceau  <gc@mandrakesoft.com>',
 	      'uid553'  => 'Pixel  <pixel@mandrakesoft.com>',
 	      'sbenedict'=>'Stew Benedict  <sbenedict@mandrakesoft.com>',
+	      'tkamppeter' => 'Till Kamppeter <till@mandrakesoft.com>',
 	     );
 }
