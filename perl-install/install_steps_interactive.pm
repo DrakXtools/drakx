@@ -835,7 +835,7 @@ sub summary {
 	return N("Remote CUPS server"); #- fall back in case of something wrong.
     };
 
-    my @sound_cards = getSoundDevices();
+    my @sound_cards = detect_devices::getSoundDevices();
 
     #- if no sound card are detected AND the user selected things needing a sound card,
     #- propose a special case for ISA cards
