@@ -199,6 +199,8 @@ sub manage {
     @all_cards = network::ethernet::get_eth_cards();
     my %name = network::ethernet::get_eth_cards_names(@all_cards);
     
+    $config->{$_} = { kind => $_ } foreach keys %name;
+
     $window->{rwindow}->add(gtkpack_(Gtk2::VBox->new,
 				     0, $interface_menu = gtksignal_connect(Gtk2::OptionMenu->new,
 									    changed => sub {
