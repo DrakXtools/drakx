@@ -209,4 +209,80 @@ sub get_wep_key_from_iwconfig {
     $key;
 }
 
+
+#- returns interface whose IP address matchs given IP address, according to its network mask
+sub find_matching_interface {
+    my ($intf, $address) = @_;
+    my @ip = split '\.', $address;
+    find {
+        my @intf_ip = split '\.', $intf->{$_}{IPADDR} or return;
+        my @mask = split '\.', $intf->{$_}{NETMASK} or return;
+        every { $_ } mapn { ($_[0] & $_[2]) == ($_[1] & $_[2]) } \@intf_ip, \@ip, \@mask;
+    } sort keys %$intf;
+}
+
+#- returns first dhcp interface started on boot
+sub get_default_ethernet_dhcp_interface {
+    my ($intf) = @_;
+    find {
+        text2bool($intf->{$_}{ONBOOT}) && $intf->{$_}{BOOTPROTO} eq 'dhcp'
+    } grep { /^eth\d+/ } sort keys %$intf;
+}
+
+
+#- returns first ppp interface started on boot
+sub get_default_ppp_interface {
+    my ($intf) = @_;
+    find {
+        text2bool($intf->{$_}{ONBOOT})
+    } grep { /^ppp\d+/ } sort keys %$intf;
+}
+
+#- returns ippp interface dialed on boot
+sub get_default_ippp_interface {
+    my ($intf) = @_;
+    find {
+        text2bool($intf->{$_}{ONBOOT}) && text2bool($intf->{$_}{DIAL_ON_IFUP})
+    } grep { /^ippp\d+/ } sort keys %$intf;
+}
+
+#- returns gateway interface if found
+sub get_default_gateway_interface {
+    my ($netc, $intf) = @_;
+    `$::prefix/sbin/ip route show` =~ /^default.*\s+dev\s+(\S+)/m && $1 ||
+    $netc->{GATEWAYDEV} ||
+    $netc->{GATEWAY} && find_matching_interface($intf, $netc->{GATEWAY}) ||
+    get_default_ethernet_dhcp_interface($intf) ||
+    get_default_ppp_interface($intf) ||
+    get_default_ippp_interface($intf);
+}
+
+#- returns (gateway_interface, interface is up, gateway address, dns server address)
+sub get_internet_connection {
+    my ($netc, $intf, $o_gw_intf) = @_;
+    my @routes = `$::prefix/sbin/ip route show`;
+    my ($gw_intf, $is_up, $gw_address);
+    $gw_intf = $o_gw_intf || get_default_gateway_interface($netc, $intf) or return;
+    $is_up = to_bool(grep { /\s+dev\s+$gw_intf(?:\s+|$)/ } @routes);
+    ($gw_address) = join('', @routes) =~ /^default\s+via\s+(\S+).*\s+dev\s+$gw_intf(?:\s+|$)/m;
+    return $gw_intf, $is_up, $gw_address, $netc->{dnsServer};
+}
+
+#- returns (ping to mandrakesoft.com, resolved host)
+sub test_internet_connection() {
+    if (my $ip = gethostbyname('mandrakesoft.com')) {
+        require Net::Ping;
+        my $p;
+        if ($>) {
+            $p = Net::Ping->new('tcp');
+            # Try connecting to the www port instead of the echo port
+            $p->{port_num} = getservbyname('http', 'tcp');
+        } else {
+            $p = Net::Ping->new('icmp');
+        }
+        #- default timeout is 5 seconds
+        return $ip, to_bool($p->ping($ip));
+    }
+}
+
 1;
