@@ -1,8 +1,8 @@
 package printerdrake;
 # $Id$
-
 use diagnostics;
 use strict;
+
 
 use common;
 use detect_devices;
@@ -232,16 +232,27 @@ sub setup_local {
     my ($printer, $in) = @_;
     my (@port, @str, $device);
     my $queue = $printer->{OLD_QUEUE};
-    my @parport = auto_detect($in);
-    $in->set_help('setupLocal') if $::isInstall;
-    foreach (@parport) {
-	$_->{val}{DESCRIPTION} and push @str, _("A printer, model \"%s\", has been detected on ",
-						$_->{val}{DESCRIPTION}) . $_->{port};
-    }
-    if ($::expert || !@str) {
-	@port = detect_devices::whatPrinterPort();
+    my $do_auto_detect =
+	$in->ask_yesorno(_("Auto-Detection of Printers"), 
+			 _("Printerdrake is able to auto-detect your locally connected parallel and USB printers for you, but note that on some systems the auto-detection CAN FREEZE YOUR SYSTEM AND EVEN CORRUPT YOUR FILE SYSTEMS! So do it ON YOUR OWN RISK!
+
+For local printers auto-detection is not really necessary, because they are external devices where you can easily see on their labels which models you have, but if you really want to auto-detect them, connect them and turn them on now and click \"Yes\", otherwise click \"No\"."),0);
+    my @parport;
+    if ($do_auto_detect) {
+	@parport = auto_detect($in);
+	$in->set_help('setupLocal') if $::isInstall;
+	foreach (@parport) {
+	    $_->{val}{DESCRIPTION} and push @str, _("A printer, model \"%s\", has been detected on ",
+						    $_->{val}{DESCRIPTION}) . $_->{port};
+	}
+	if ($::expert || !@str) {
+	    @port = detect_devices::whatPrinterPort();
+	} else {
+	    @port = map { $_->{port} } grep { $_->{val}{DESCRIPTION} } @parport;
+	}
     } else {
-	@port = map { $_->{port} } grep { $_->{val}{DESCRIPTION} } @parport;
+	@port = qw(/dev/lp0 /dev/lp1 /dev/lp2
+		   /dev/usb/lp0 /dev/usb/lp1 /dev/usb/lp2);
     }
     if (($printer->{configured}{$queue}) &&
 	($printer->{currentqueue}{'connect'} =~ m/^file:/)) {
@@ -253,8 +264,9 @@ sub setup_local {
     if ($in) {
 	$::expert or $in->set_help('configurePrinterDev') if $::isInstall;
 	return if !$in->ask_from(_("Local Printer Device"),
-_("What device is your printer connected to 
-(note that /dev/lp0 is equivalent to LPT1:)?\n") . (join "\n", @str), [
+_("What device is your printer connected to?
+(Parallel Ports: /dev/lp0, /dev/lp1, ..., equivalent to LPT1:, LPT2:, ...,
+1st USB printer: /dev/usb/lp0, 2nd USB printer: /dev/usb/lp1, ...)\n") . (join "\n", @str), [
 { label => _("Printer Device"), val => \$device, list => \@port, not_edit => !$::expert } ],
 complete => sub {
     unless ($device ne "") {
