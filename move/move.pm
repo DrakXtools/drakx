@@ -140,6 +140,7 @@ sub init {
     key_installfiles('simple');
     if (`getent passwd 501` =~ /([^:]+):/) {
         $o->{users} = [ { name => $1 } ];
+	$ENV{HOME} = "/home/$1"; #- used by lang::read()  :-/
         print "using existing user configuration\n";
         $using_existing_user_config = 1;
     }
@@ -148,7 +149,7 @@ sub init {
         $using_existing_host_config = 1;
     }
     if (-s '/etc/sysconfig/i18n') {
-        lang::set($o->{locale} = lang::read('', 0));
+        lang::set($o->{locale} = lang::read('', 0)); #- read ~/.i18n first if it exists
 	install2::handleI18NClp();
     }
 
@@ -401,6 +402,17 @@ sub install2::configMove {
     require mouse;
     mouse::write_conf($o, $o->{mouse}, 1);  #- write xfree mouse conf
     detect_devices::install_addons('');
+
+    {
+	my $user = $o->{users}[0]{name};
+	cp_af("/usr/share/config/kdeglobals", $confdir);
+	lang::configure_kdeglobals($o->{locale}, "/home/$user/.kde/share/config");
+
+	mkdir_p("/home/$user/.kde/share/services");
+	cp_af("/usr/share/services/ksycoca-$o->{locale}{lang}", "/home/$user/.kde/share/services/ksycoca");
+
+        run_program::run('chown', '-R', "$user.$user", "/home/$user/.kde");
+    }
 
     foreach my $step (@{$o->{orderedSteps_orig}}) {
         next if member($step, @{$o->{orderedSteps}});
