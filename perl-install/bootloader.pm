@@ -119,7 +119,7 @@ sub read_grub {
         $b{boot} = grub2dev($1) if /\s*d\s* (\(.*?\))\s*/;
     }
 
-    $b{default} = $b{entries}[$b{default}]->{label};
+    $b{default} = $b{entries}[$b{default}]{label};
 
     \%b;
 }
