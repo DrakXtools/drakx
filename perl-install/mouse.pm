@@ -342,9 +342,9 @@ sub write_conf {
 	my ($mouse) = @_;
 
 	my ($zaxis, $zaxis_aux) = map { [
-					 $mouse->{nbuttons} > 3 ? [ "ZAxisMapping", "4 5" ] : (),
-					 $mouse->{nbuttons} > 5 ? [ "ZAxisMapping", "6 7" ] : (),
-					 $mouse->{nbuttons} < 3 ? ([ "Emulate3Buttons" ], [ "Emulate3Timeout", "50" ]) : ()
+					 $_->{nbuttons} > 3 ? [ "ZAxisMapping", "4 5" ] : (),
+					 $_->{nbuttons} > 5 ? [ "ZAxisMapping", "6 7" ] : (),
+					 $_->{nbuttons} < 3 ? ([ "Emulate3Buttons" ], [ "Emulate3Timeout", "50" ]) : ()
 					] } grep { $_ } ($mouse, $mouse->{auxmouse});
 
 	my ($str_zaxis, $str_zaxis_aux) = map { join('', map { qq(\n    $_->[0]) . ($_->[1] && qq( $_->[1])) } @$_)
@@ -357,7 +357,7 @@ sub write_conf {
 		s|^(\s*Device\s+).*|$1"/dev/$mouse->{device}"$str_zaxis|;
 	    }
 	    if ($mouse->{auxmouse}) {
-		if (/^DeviceName\s+"Mouse2"/ .. /^EndSection/) {
+		if (/DeviceName\s+"Mouse2"/ .. /^EndSection/) {
 		    $found_auxmouse = 1;
 		    $_ = '' if /(ZAxisMapping|Emulate3)/; #- remove existing line
 		    s|^(\s*Protocol\s+).*|$1"$mouse->{auxmouse}{XMOUSETYPE}"|;
@@ -366,13 +366,14 @@ sub write_conf {
 	    }
 	} $f if -e $f && !$::testing;
 	substInFile {
-	    if (/^Section\s+"Pointer"/ .. /^EndSection/ && /^EndSection/) {
-		$_ .= qq(
+	    if (my $l = /^Section\s+"Pointer"/ .. /^EndSection/) {
+		$l =~ /E/ and $_ .= qq(
 
 Section "XInput"
     SubSection "Mouse"
-        Protocol "$mouse->{auxmouse}{XMOUSETYPE}"
-        Device   "/dev/$mouse->{auxmouse}{device}"$str_zaxis_aux
+        DeviceName "Mouse2"
+        Protocol   "$mouse->{auxmouse}{XMOUSETYPE}"
+        Device     "/dev/$mouse->{auxmouse}{device}"$str_zaxis_aux
     EndSubSection
 EndSection
 );
@@ -385,25 +386,26 @@ EndSection
 	substInFile {
 	    if (/Identifier\s+"Mouse1"/ .. /^EndSection/) {
 		$_ = '' if /(ZAxisMapping|Emulate3)/; #- remove existing line
-		s|^(\s*Option\s+"Protocol"\s+).*|$1"$mouse->{XMOUSETYPE}"|;
+		s|^(\s*Option\s+"Protocol"\s+).*|$1"$mouse->{XMOUSETYPE}"|; #"
 		s|^(\s*Option\s+"Device"\s+).*|$1"/dev/mouse"$str_zaxis|;
 	    }
 	    if ($mouse->{auxmouse}) {
 		if (/Identifier\s+"Mouse2"/ .. /^EndSection/) {
+		    $found_auxmouse = 1;
 		    $_ = '' if /(ZAxisMapping|Emulate3)/; #- remove existing line
-		    s|^(\s*Option\s+"Protocol"\s+).*|$1"$mouse->{auxmouse}{XMOUSETYPE}"|;
-		    s|^(\s*Option\s+"Device"\s+).*|$1"/dev/$mouse->{auxmouse}{device}"$str_zaxis_aux|;
+		    s|^(\s*Option\s+"Protocol"\s+).*|$1"$mouse->{auxmouse}{XMOUSETYPE}"|; #"
+		    s|^(\s*Option\s+"Device"\s+).*|$1"/dev/$mouse->{auxmouse}{device}"$str_zaxis_aux|; #"
 		}
 	    }
 	} $g if -e $g && !$::testing;
-	subsInFile {
-	    if (/Identifier\s+"Mouse1"/ .. /^EndSection/ && /^EndSection/) {
-		$_ .= qq(
+	substInFile {
+	    if (my $l = /Identifier\s+"Mouse1"/ .. /^EndSection/) {
+		$l =~ /E/ and $_ .= qq(
 
 Section "InputDevice"
     Identifier "Mouse2"
-    Option "Protocol" "$mouse->{auxmouse}{XMOUSETYPE}"
-    Option "Device"   "/dev/$mouse->{auxmouse}{XMOUSETYPE}"$str_zaxis_aux
+    Option     "Protocol" "$mouse->{auxmouse}{XMOUSETYPE}"
+    Option     "Device"   "/dev/$mouse->{auxmouse}{XMOUSETYPE}"$str_zaxis_aux
 EndSection
 );
 	    }
