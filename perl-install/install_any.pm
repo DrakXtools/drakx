@@ -1146,7 +1146,7 @@ sub remove_bigseldom_used {
     unlink(m|^/| ? $_ : "/usr/bin/$_") foreach 
       ((map { @$_ } @bigseldom_used_groups),
        qw(pvcreate pvdisplay vgchange vgcreate vgdisplay vgextend vgremove vgscan lvcreate lvdisplay lvremove /lib/liblvm.so),
-       qw(mkreiserfs resize_reiserfs mkfs.xfs),
+       qw(mkreiserfs resize_reiserfs mkfs.xfs fsck.jfs),
       );
 }
 
