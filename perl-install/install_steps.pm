@@ -722,8 +722,8 @@ sub addUser {
     foreach (@$users) {
 	$_->{home} ||= "/home/$_->{name}";
 
-	my $u = $_->{uid} || ($_->{oldu} = (stat("$p$_->{home}"))[4]);
-	my $g = $_->{gid} || ($_->{oldg} = (stat("$p$_->{home}"))[5]);
+	my $u = $_->{uid} || ($_->{oldu} = (stat("$p$_->{home}"))[4]) || int getpwnam($_->{name});
+	my $g = $_->{gid} || ($_->{oldg} = (stat("$p$_->{home}"))[5]) || int getgrnam($_->{name});
 	#- search for available uid above 501 else initscripts may fail to change language for KDE.
 	if (!$u || getpwuid($u)) { for ($u = 501; getpwuid($u) || $uids{$u}; $u++) {} }
 	if (!$g)                 { for ($g = 501; getgrgid($g) || $gids{$g}; $g++) {} }
