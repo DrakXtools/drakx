@@ -67,9 +67,11 @@ sub load_rc {
 	Gtk2::Rc->parse_string(q(
 style "galaxy-default"
 {
-    bg[SELECTED]      = "#CECECE"
     base[ACTIVE]      = "#CECECE"
     base[SELECTED]    = "#CECECE"
+    text[ACTIVE]      = "#000000"
+    text[PRELIGHT]    = "#000000"
+    text[SELECTED]    = "#000000"
 }
 ));
     }
