@@ -43,6 +43,7 @@ I4L_IO0="$isdn->{io0}"
 I4L_IO1="$isdn->{io1}"
 I4L_ID="HiSax"
 I4L_FIRMWARE="$isdn->{firmware}"
+I4L_PROTOCOL="$isdn->{protocol}"
 );
 
 	output "$::prefix/etc/ppp/ioptions",

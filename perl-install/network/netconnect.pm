@@ -424,7 +424,10 @@ If you have a PCMCIA card, you have to know the \"irq\" and \"io\" of your card.
                              { label => N("Protocol"), type => "list", val => \$isdn_type,
                                list => [ keys %isdn_protocols ], format => sub { $isdn_protocols{$_[0]} } }
                             ],
-                    next => "isdn_db",
+                    post => sub { 
+                        $isdn->{protocol} = $isdn_type; 
+                        return "isdn_db",
+                    }
                    },
 
 
