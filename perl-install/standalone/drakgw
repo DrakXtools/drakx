@@ -192,6 +192,7 @@ $::Wizard_no_previous = 1;
     
 $::direct or $in->ask_okcancel(_("Internet Connection Sharing"),
 _("You are about to configure your computer to share its Internet connection.
+With that feature, other computers on your local network will be able to use this computer's Internet connection.
 
 Note: you need a dedicated Network Adapter to set up a Local Area Network (LAN)."), 1) or quit_global($in, 0);
 
@@ -232,10 +233,6 @@ if (!@cards)
 elsif (@cards == 1)
 {
     $device = $cards[0];
-    print "device $device\n";
-    my $t = $format->($device);
-    print "format $t\n";
-
     $in->ask_okcancel(_("Network interface"),
 _("There is only one configured network adapter on your system:
 
@@ -588,11 +585,6 @@ sub quit_global {
     goto begin
 }
 
-
-
-########################################################
-
-
 sub pur_gtk_mode
 {
     require Gtk;
@@ -610,8 +602,12 @@ sub pur_gtk_mode
     $window1->add($vbox1);
     my $hbox1 = new Gtk::HBox(0,0);
     $vbox1->pack_start($hbox1,1,1,0);
-    my $label1 = new Gtk::Label(_("Welcome to the Internet Connection Sharing utility!"."\n$setup_state\n". 
-				  "Click on Configure to launch the setup wizard"));
+    my $label1 = new Gtk::Label(
+_("Welcome to the Internet Connection Sharing utility!
+
+%s
+
+Click on Configure to launch the setup wizard.", $setup_state));
     $hbox1->pack_start($label1,1,1,0);
     my $hbox2 = new Gtk::HBox(0,0);
     $vbox1->pack_start($hbox2,1,1,0);
@@ -645,6 +641,11 @@ sub pur_gtk_mode
 
 #-------------------------------------------------
 #- $Log$
+#- Revision 1.33  2001/04/06 14:12:06  gc
+#- - correct yvounetification in i18n stuff
+#- - remove some remaining debugging printings
+#- - add a bit more of explanations when starting drakgw in wizard mode
+#-
 #- Revision 1.32  2001/04/06 01:34:44  yduret
 #- recoded a embedded && gtk mode
 #-
