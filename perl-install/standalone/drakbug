@@ -69,26 +69,43 @@ my @generic_tool = keys %$mdk_app;
 my @all_drakxtools = @{ $mdk_app->{N("Standalone Tools")} };
 push(@generic_tool,@all_drakxtools);
 
-my $kernel_release = chomp_(`uname -r`) . "";
+my $kernel_release = chomp_(`uname -r`);
 
 my $table = create_packtable({ col_spacings => 5, row_spacings => 10 },
                              [ new Gtk2::Label(N("Application:")), my $comb_app = gtkset_size_request(Gtk2::Combo->new(), 270, -1) ],
                              [ new Gtk2::Label(N("Package: ")), my $package = new Gtk2::Entry("...") ],
-                             [ Gtk2::Label->new(N("Kernel:")), my $kernel_rel = gtkset_editable(Gtk2::Entry->new($kernel_release), 0) ],
-                             [ Gtk2::Label->new(N("Release: ")), my $mdk_rel = gtkset_editable(Gtk2::Entry->new(mandrake_release()), 0) ]
+                             [ Gtk2::Label->new(N("Kernel:")), gtkset_editable(Gtk2::Entry->new($kernel_release), 0) ],
+                             [ Gtk2::Label->new(N("Release: ")), gtkset_editable(Gtk2::Entry->new(mandrake_release()), 0) ]
                              );
 $comb_app->set_popdown_strings("", sort(@generic_tool));
 
-gtkpack2__(
-	   gtkpack2__(my $vbx = new Gtk2::VBox(0,5),
-		      gtkadd($table),
-		      gtkpack(new Gtk2::HBox(0,0),
-			      gtkpack(gtkset_justify(new Gtk2::Label(N("\n\nTo submit a bug report, click on the button report.\nThis will open  a web browser window  on https://drakbug.mandrakesoft.com\n where you'll find a form to fill in.The information displayed above will be \ntransferred to that server\n\n")), "left")),
-			     ),
-		      gtkpack(new Gtk2::HSeparator),
-		      
-		     ),
-	  );
+gtkadd(
+       $window->{window},
+       gtkpack2__(my $vbx = new Gtk2::VBox(0,5),
+                  gtkadd($table),
+                  gtkpack(new Gtk2::HBox(0,0),
+                          gtkpack(gtkset_justify(new Gtk2::Label(N("\n\nTo submit a bug report, click on the button report.\nThis will open  a web browser window  on https://drakbug.mandrakesoft.com\n where you'll find a form to fill in.The information displayed above will be \ntransferred to that server\n\n")), "left")),
+                         ),
+                  gtkpack(new Gtk2::HSeparator),
+                  gtkpack_(Gtk2::HBox->new(0,0),
+                           0, gtksignal_connect(Gtk2::Button->new(N("Close")), clicked => sub { ugtk2->exit(0) }),
+                           1, Gtk2::Label->new(""),
+                           0, gtksignal_connect(Gtk2::Button->new(N("Report")), clicked => sub { 
+                                                    my $options = "mdkbugreport=1";
+                                                    $options .= "&incident=1" if $incident;
+                                                    my $p = $package->get_text();
+                                                    (my $r = parse_release()) =~ s/\s//;
+                                                    $options .= "&package=$p" if $p =~ /mdk/;
+                                                    $options .= "&kernel=$kernel_release";
+                                                    $options .= "&version=$r";
+                                                    print($bugzilla_url . "?" . $options . "\n");
+                                                    connect_bugzilla($bugzilla_url."?".$options);
+                                                }
+                                               ),
+                           0, gtksignal_connect(Gtk2::Button->new(N("Help")), clicked => sub { system("drakhelp https://qa.mandrakesoft.com &") }),
+                          ),
+                 ),
+      );
 
 if (defined $prog) {
     update_app($prog); 
@@ -96,28 +113,6 @@ if (defined $prog) {
 };
 
 $comb_app->entry->signal_connect('changed', sub { update_app($comb_app->entry->get_text()) });
-my $kernel = $kernel_rel->get_chars(0, -1);
-my $hbx = new Gtk2::HBox(0,0);
-my $Close_Button = new Gtk2::Button(N("Close"));
-$Close_Button->signal_connect(clicked => sub { ugtk2->exit(0) });
-$hbx->pack_start($Close_Button,0,0,0);
-
-my $Report_Button = new Gtk2::Button(N("Report"));
-$Report_Button->signal_connect(clicked => sub { my $options = "mdkbugreport=1";
-						$options .= "&incident=1" if $incident;
-						my $p = $package->get_text(); my $k = $kernel_rel->get_text(); (my $r = parse_release()) =~ s/\s//;
-						$options .= "&package=$p" if $p =~ /mdk/;
-						$options .= "&kernel=$k";
-						$options .= "&version=$r";
-						print($bugzilla_url . "?" . $options . "\n");
-						connect_bugzilla($bugzilla_url."?".$options) });
-my $help_button = new Gtk2::Button(" ".N("Help")." ");
-$help_button->signal_connect(clicked => sub { system("drakhelp https://qa.mandrakesoft.com &") });
-$hbx->pack_end($Report_Button,0,0,0);
-$hbx->pack_end($help_button,0,0,5);
-$vbx->pack_start($hbx,0,0,0);
-$window->{window}->add($vbx);
-
 $window->{window}->show_all();
 $window->main;
 ugtk2->exit(0);
@@ -160,8 +155,7 @@ sub get_package {
 }
 
 sub parse_release() {
-    my ($rel) = mandrake_release() =~ /release\s(\S+\s\(.*\))/;
-    $rel;
+    (mandrake_release() =~ /release\s(\S+\s\(.*\))/)[0];
 }
 
 sub connect_bugzilla {
