@@ -28,10 +28,10 @@ sub description {
     sprintf "%s%s (%s%s%s%s)", 
       $hd->{device}, 
       $win && " [$win:]", 
-      formatXiB($hd->{totalsectors} || $hd->{size}, 512),
-      $hd->{info} && ", $hd->{info}",
-      $hd->{mntpoint} && ", " . $hd->{mntpoint},
-      $hd->{fs_type} && ", $hd->{fs_type}";
+	join(', ', 
+	     grep { $_ } 
+	       formatXiB($hd->{totalsectors} || $hd->{size}, 512),
+	       $hd->{info}, $hd->{mntpoint}, $hd->{fs_type});
 }
 
 sub isPrimary {
