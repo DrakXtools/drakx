@@ -68,6 +68,8 @@ sub device_name_to_entry {
 	$e->{devfs_device} = $e->{devfs_prefix} . '/part' . $nb;
 	if ($e->{devfs_device} eq $name) {
 	    $e->{prefer_devfs_name} = 1;
+	} else {
+	    $e->{device} = $name;
 	}
     } else {
 	unless ($e = find { $name eq $_->{device} } @l) {
@@ -78,9 +80,6 @@ sub device_name_to_entry {
     }
 
     $e ||= {};
-    unless ($e->{devfs_device} eq $name) {
-	$e->{device} = $name; #- keeping the exact name given (often is the devfs name)
-    }
     $e->{media_type} = 'fd' if $name =~ /fd[01]/;
     $e;
 }
