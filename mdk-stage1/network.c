@@ -318,6 +318,7 @@ static int save_netinfo(struct interface_info * intf) {
 		fprintf(f, "BOOTPROTO=adsl_pppoe\n");
 		fprintf(f, "USER=%s\n", intf->user);
 		fprintf(f, "PASS=%s\n", intf->pass);
+		fprintf(f, "ACNAME=%s\n", intf->acname);
 	}
 
 	if (!streq(intf->http_proxy_host, "") && !streq(intf->http_proxy_port, "")) {

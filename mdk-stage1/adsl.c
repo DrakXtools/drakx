@@ -38,7 +38,7 @@
 #include "adsl.h"
 
 
-static enum return_type adsl_connect(char * net_device, char * username, char * password)
+static enum return_type adsl_connect(char * net_device, char * username, char * password, char * acname)
 {
 	char pppoe_call[500];
 	char * pppd_launch[] = { "/sbin/pppd", "pty", pppoe_call, "noipdefault", "noauth", "default-asyncmap", "defaultroute",
@@ -53,6 +53,10 @@ static enum return_type adsl_connect(char * net_device, char * username, char * 
 
 	snprintf(pppoe_call, sizeof(pppoe_call), "/sbin/pppoe -p /var/run/pppoe.conf-adsl.pid.pppoe -I %s -T 80 -U -m 1412", net_device);
 
+        if (!streq(acname, "")) {
+                strcat(pppoe_call, "-C ");
+                strcat(pppoe_call, acname);
+        }
 
 	fd = open(tty_adsl, O_RDWR);
 	if (fd == -1) {
@@ -115,8 +119,8 @@ static enum return_type adsl_connect(char * net_device, char * username, char * 
 enum return_type perform_adsl(struct interface_info * intf)
 {
 	struct in_addr addr;
-	char * questions[] = { "Username", "Password", NULL };
-	char * questions_auto[] = { "adsluser", "adslpass", NULL };
+	char * questions[] = { "Username", "Password", "AC Name", NULL };
+	char * questions_auto[] = { "adsluser", "adslpass", "adslacname", NULL };
 	static char ** answers = NULL;
 	enum return_type results;
 
@@ -137,6 +141,7 @@ enum return_type perform_adsl(struct interface_info * intf)
 	}
 
 	results = ask_from_entries_auto("Please enter the username and password for your ADSL account.\n"
+                                        "Leave blank the AC Name field if you don't know what it means.\n"
 					"(Warning! only PPPoE protocol is supported)",
 					questions, &answers, 40, questions_auto, NULL);
 	if (results != RETURN_OK)
@@ -148,16 +153,17 @@ enum return_type perform_adsl(struct interface_info * intf)
 	my_insmod("ppp_generic", ANY_DRIVER_TYPE, NULL, 1);
 	my_insmod("ppp_async", ANY_DRIVER_TYPE, NULL, 1);
 	my_insmod("ppp", ANY_DRIVER_TYPE, NULL, 1);
-	results = adsl_connect(intf->device, answers[0], answers[1]);
+	results = adsl_connect(intf->device, answers[0], answers[1], answers[2]);
 	remove_wait_message();
 
 	if (results != RETURN_OK) {
 		wait_message("Retrying the ADSL connection...");
-		results = adsl_connect(intf->device, answers[0], answers[1]);
+		results = adsl_connect(intf->device, answers[0], answers[1], answers[2]);
 		remove_wait_message();
 	} else {
 		intf->user = strdup(answers[0]);
 		intf->pass = strdup(answers[1]);
+		intf->acname = strdup(answers[2]);
 	}
 
 	if (results != RETURN_OK) {
