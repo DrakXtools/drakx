@@ -16,17 +16,17 @@ sub configure {
 
   conf_adsl_step1:
     my %l = (
-	     'pppoe' =>  N_("use pppoe"),
-	     'pptp'  =>  N_("use pptp"), 
-	     'dhcp'  =>  N_("use dhcp"), 
-	     'speedtouch' => N_("Alcatel speedtouch usb") . if_($netc->{autodetect}{adsl}{speedtouch}, " - detected"),
-	     'sagem' =>  N_("Sagem (using pppoa) usb") . if_($netc->{autodetect}{adsl}{sagem}, " - detected"),
+	     'pppoe' =>  N("use pppoe"),
+	     'pptp'  =>  N("use pptp"),
+	     'dhcp'  =>  N("use dhcp"),
+	     'speedtouch' => N("Alcatel speedtouch usb") . if_($netc->{autodetect}{adsl}{speedtouch}, N(" - detected")),
+	     'sagem' =>  N("Sagem (using pppoa) usb") . if_($netc->{autodetect}{adsl}{sagem}, N(" - detected")),
 	     if_($::expert, #- avoid clash with strings not translated but still add functionnalities...
-		 'sagem_dhcp' =>  N_("Sagem (using dhcp) usb") . if_($netc->{autodetect}{adsl}{sagem}, " - detected"),
+		 'sagem_dhcp' =>  N("Sagem (using dhcp) usb") . if_($netc->{autodetect}{adsl}{sagem}, N(" - detected")),
 		),
 	    );
     
-    my $type = $in->ask_from_list_(N("Connect to the Internet"),
+    my $type = $in->ask_from_list(N("Connect to the Internet"),
 				   N("The most common way to connect with adsl is pppoe.
 Some connections use pptp, a few use dhcp.
 If you don't know, choose 'use pppoe'"),
