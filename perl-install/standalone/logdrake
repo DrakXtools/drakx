@@ -108,10 +108,10 @@ my $col = 'darkcyan';
 ######### font and colors end
 
 my %files = (
-	     "auth" => { file => "/var/log/auth.log", desc => N("Authentication") },
-	     "user" => { file => "/var/log/user.log", desc => N("User") },
-	     "messages" => { file => "/var/log/messages", desc => N("Messages") },
-	     "syslog" => { file => "/var/log/syslog", desc => N("Syslog") },
+	     "auth" => { file => "/var/log/auth.log", desc => N("_:this is the auth.log log file\nAuthentication") },
+	     "user" => { file => "/var/log/user.log", desc => N("_:this is the user.log log file\nUser") },
+	     "messages" => { file => "/var/log/messages", desc => N("_:this is the /var/log/messages log file\nMessages") },
+	     "syslog" => { file => "/var/log/syslog", desc => N("_:this is the /var/log/syslog log file\nSyslog") },
 	     "explanations" => { file => "/var/log/explanations", desc => $explain_title }
 );
 
@@ -417,7 +417,7 @@ sub alert_config() {
                                            return 1;
                                        }
                                        if (member($options{MAIL}, map { $_->[0] } list_passwd()) && $options{SMP} !~ /localhost/) {
-                                           err_dialog(N("Error"), N("\"%s\" is a local user but you did not select a local smtp, so you must use a complete email address!", $options{MAIL}));
+                                           err_dialog(N("Error"), N("\"%s\" is a local user, but you did not select a local smtp, so you must use a complete email address!", $options{MAIL}));
                                            return 1;
                                        }
                                    },
