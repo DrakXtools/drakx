@@ -285,7 +285,6 @@ sub new {
 sub quit_global {
     kill(15, $pid) if $pid;
     setVarsInSh($conffile, \%options);
-    $w->{rwindow}->destroy;
     my_gtk->exit(0);
 }
 
