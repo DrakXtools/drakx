@@ -802,7 +802,7 @@ If you don't know, choose 'use PPPoE'"),
                     },
                     post => sub {
                         $netc->{internet_cnx_choice} = 'adsl';
-                        network::adsl::adsl_conf_backend($in, $modules_conf, $netcnx, $netc, $ntf_name, $adsl_type, $netcnx); #FIXME
+                        network::adsl::adsl_conf_backend($in, $modules_conf, $netcnx, $netc, $intf, $ntf_name, $adsl_type, $netcnx); #FIXME
                         $config->{adsl} = { kind => $ntf_name, protocol => $adsl_type };
                         $handle_multiple_cnx->();
                     },
