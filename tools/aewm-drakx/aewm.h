@@ -15,13 +15,13 @@ struct _Client {
 };
 
 extern Display *dpy;
-extern Atom wm_state;
 
 /* events.c */
 extern void do_event_loop(void);
 
 /* client.c */
 extern Client *find_client(Window);
+extern void set_focus_on(Window w);
 extern void set_wm_state(Client *, int);
 extern void remove_client(Client *);
 extern void make_new_client(Window);
@@ -30,3 +30,5 @@ extern void make_new_client(Window);
 void err(const char *, ...);
 int handle_xerror(Display *, XErrorEvent *);
 
+
+#define wm_state  XInternAtom(dpy, "WM_STATE", False)

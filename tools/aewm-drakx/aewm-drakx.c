@@ -7,7 +7,6 @@
 
 Display *dpy;
 Window root;
-Atom wm_state;
 
 static void scan_wins(void)
 {
@@ -37,8 +36,6 @@ static void setup_display(void)
 
     XSetErrorHandler(handle_xerror);
     root = RootWindow(dpy, DefaultScreen(dpy));
-
-    wm_state = XInternAtom(dpy, "WM_STATE", False);
 
     sattr.event_mask = SubstructureRedirectMask|SubstructureNotifyMask;
     XChangeWindowAttributes(dpy, root, CWEventMask, &sattr);

@@ -18,7 +18,6 @@ Client *find_client(Window w)
     return NULL;
 }
 
-
 void set_focus_on(Window w)
 {
     char *name;
@@ -26,7 +25,7 @@ void set_focus_on(Window w)
     if (name && strcmp(name, "skip")) {
 	XSetInputFocus(dpy, w, RevertToPointerRoot, CurrentTime);
 #ifdef DEBUG
-	printf("aewm-drakx: adding %ld %s\n", w, name);
+	printf("aewm-drakx: adding %lx %s\n", w, name);
 #endif
     }
 }

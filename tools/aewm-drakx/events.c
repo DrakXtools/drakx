@@ -25,6 +25,7 @@ static void handle_map_request(XMapRequestEvent *e)
     if (c) {
         XMapWindow(dpy, c->window);
         set_wm_state(c, NormalState);
+	set_focus_on(c->window);
     } else {
         make_new_client(e->window);
     }
