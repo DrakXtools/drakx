@@ -127,13 +127,13 @@ sub setupBootloader {
 	my %bootloaders = (if_(exists $b->{methods}{silo},
 			       __("SILO")                     => sub { $b->{methods}{silo} = 1 }),
 			   if_(exists $b->{methods}{lilo},
-			       __("LILO with text menu")      => sub { $b->{methods}{lilo} = "boot-menu.b" },
-			       __("LILO with graphical menu") => sub { $b->{methods}{lilo} = "boot-graphic.b" }),
+			       __("LILO with text menu")      => sub { $b->{methods}{lilo} = "lilo-menu" },
+			       __("LILO with graphical menu") => sub { $b->{methods}{lilo} = "lilo-graphic" }),
 			   if_(exists $b->{methods}{grub},
 			       #- put lilo if grub is chosen, so that /etc/lilo.conf is generated
 			       __("Grub")                     => sub { $b->{methods}{grub} = 1;
 								       exists $b->{methods}{lilo}
-									 and $b->{methods}{lilo} = "boot-menu.b" }),
+									 and $b->{methods}{lilo} = "lilo-menu" }),
 			   if_(exists $b->{methods}{loadlin},
 			       __("Boot from DOS/Windows (loadlin)") => sub { $b->{methods}{loadlin} = 1 }),
 			   if_(exists $b->{methods}{yaboot},

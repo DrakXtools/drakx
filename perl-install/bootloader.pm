@@ -116,14 +116,14 @@ sub read($$) {
     \%b;
 }
 
-sub suggest_onmbr($) {
+sub suggest_onmbr ($) {
     my ($hds) = @_;
     
     my $type = partition_table_raw::typeOfMBR($hds->[0]{device});
     !$type || member($type, qw(dos dummy lilo grub empty)), !$type;
 }
 
-sub compare_entries($$) {
+sub compare_entries ($$) {
     my ($a, $b) = @_;
     my %entries;
 
@@ -380,8 +380,8 @@ wait %d seconds for default boot.
 	    );
     unless ($lilo->{methods}) {
 	$lilo->{methods} ||= { map { $_ => 1 } grep { $l{$_} } keys %l };
-	if ($lilo->{methods}{lilo} && -e "$prefix/boot/boot-graphic.b") {
-	    $lilo->{methods}{lilo} = "boot-graphic.b";
+	if ($lilo->{methods}{lilo} && -e "$prefix/boot/lilo-graphic") {
+	    $lilo->{methods}{lilo} = "lilo-graphic";
 	    exists $lilo->{methods}{grub} and $lilo->{methods}{grub} = undef;
 	}
     }
@@ -586,13 +586,34 @@ sub install_silo($$$) {
     c::setPromVars($silo->{bootalias}, $silo->{bootdev});
 }
 
-sub install_lilo($$) {
+sub install_lilo ($$) {
     my ($prefix, $lilo, $fstab, $hds) = @_;
     $lilo->{prompt} = $lilo->{timeout};
 
-    if ($lilo->{message}) {
-	local *F;
-	open F, ">$prefix/boot/message" and print F $lilo->{message} or $lilo->{message} = 0;
+    #- try to use a specific stage2 if defined and present.
+    -e "$prefix/boot/$lilo->{methods}{lilo}" and symlinkf $lilo->{methods}{lilo}, "$prefix/boot/lilo";
+    log::l("stage2 of lilo used is " . readlink "$prefix/boot/lilo");
+
+    if ($lilo->{methods}{lilo} eq "lilo-graphic") {
+	-e "$prefix/boot/$lilo->{methods}{lilo}/message" and symlinkf "$lilo->{methods}{lilo}/message", "$prefix/boot/message";
+    }  else  {
+	-e "$prefix/boot/message" and unlink "$prefix/boot/message";
+	print "-->$prefix/boot/messag<--\n";
+	
+	my $msg_en =
+	  #-PO: these messages will be displayed at boot time in the BIOS, use only ASCII (7bit)
+__("Welcome to %s the operating system chooser!
+
+Choose an operating system in the list above or
+wait %d seconds for default boot.
+
+");
+	my $msg = translate($msg_en);
+	#- use the english version if more than 20% of 8bits chars
+	$msg = $msg_en if int(grep { $_ & 0x80 } unpack "c*", $msg) / length($msg) > 0.2;
+	$msg = sprintf $msg, arch() =~ /sparc/ ? "SILO" : "LILO", $lilo->{timeout};
+ 	local *F;
+	open F, ">$prefix/boot/message" and print F $msg;
     }
     {
 	local *F;
@@ -616,13 +637,7 @@ sub install_lilo($$) {
 	    print F "disk=/dev/$dev bios=0x80";
 	}
 
-	if ($lilo->{message}) {
-	    if (-e "$prefix/boot/$lilo->{methods}{lilo}" && $lilo->{methods}{lilo} eq "boot-graphic.b") {
-		print F "message=/boot/message-graphic";
-	    } else {
-		print F "message=/boot/message";
-	    }
-	}
+	print F "message=/boot/message";
 	print F "menu-scheme=wb:bw:wb:bw";
 
 	foreach (@{$lilo->{entries}}) {
@@ -656,9 +671,7 @@ sub install_lilo($$) {
 	    }
 	}
     }
-    #- try to use a specific stage2 if defined and present.
-    -e "$prefix/boot/$lilo->{methods}{lilo}" and symlinkf $lilo->{methods}{lilo}, "$prefix/boot/boot.b";
-    log::l("stage2 of lilo used is " . readlink "$prefix/boot/boot.b");
+
     log::l("Installing boot loader...");
     $::testing and return;
     run_program::rooted_or_die($prefix, "lilo", "2>", "/tmp/.error");
