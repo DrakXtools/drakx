@@ -40,7 +40,7 @@ sub info {
 sub various {
     my ($in, $card, $options, $auto) = @_;
 
-    tvout($in, $card, $options);
+    tvout($in, $card, $options) if !$auto;
     choose_xdm($in, $auto);
     1;
 }
