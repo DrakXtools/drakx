@@ -364,7 +364,7 @@ sub ask_fromW {
 	my ($e, $ind) = @_;
 
 	my $may_go_to_next = sub {
-	    my ($w, $event) = @_;
+	    my (undef, $event) = @_;
 	    if (!$event || ($event->keyval & 0x7f) == 0xd) {
 		if ($ind == $#widgets) {
 		    @widgets == 1 ? $mainw->{ok}->clicked : $mainw->{ok}->grab_focus;
