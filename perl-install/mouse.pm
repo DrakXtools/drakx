@@ -314,6 +314,17 @@ sub detect() {
 			MOUSETYPE  => "Microsoft",
 			XMOUSETYPE => "Microsoft"}, @wacom;
 
+    if (!modules::get_alias("usb-interface") && detect_devices::is_a_recent_computer() && $::isInstall && !$::noauto) {
+	#- special case for non detected usb interface on a box with no mouse.
+	#- we *must* find out if there really is no usb, otherwise the box may
+	#- not be accessible via the keyboard (if the keyboard is USB)
+	#- the only way to know this is to make a full pci probe
+	modules::load_thiskind("usb", '', 'unsafe'); 
+	if (my $mouse = $fast_mouse_probe->()) {
+	    return $mouse;
+	}
+    }
+
     #- defaults to generic serial mouse on ttyS0.
     #- Oops? using return let return a hash ref, if not using it, it return a list directly :-)
     return fullname2mouse("serial|Generic 2 Button Mouse", unsafe => 1);
