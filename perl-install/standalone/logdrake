@@ -432,7 +432,7 @@ my $initdir = "/etc/init.d";
 		  N("You will receive an alert if the load is higher than this value"),
 		  [
 
-		   { label => NC("_: load here is a noun, the load of the system\nLoad"), val => \$load, type => 'range', min => 1, max => 50 },
+		   { label => N("_: load here is a noun, the load of the system\nLoad"), val => \$load, type => 'range', min => 1, max => 50 },
 		  ]) or goto step_service;
 
     $cron .= sprintf(<<'EOF', $load);
