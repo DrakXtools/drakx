@@ -239,26 +239,19 @@ sub find_matching_interface {
 #- returns first dhcp interface started on boot
 sub get_default_ethernet_dhcp_interface {
     my ($intf) = @_;
-    find {
-        text2bool($intf->{$_}{ONBOOT}) && $intf->{$_}{BOOTPROTO} eq 'dhcp'
-    } grep { /^eth\d+/ } sort keys %$intf;
+    find { /^eth\d+/ && text2bool($intf->{$_}{ONBOOT}) && $intf->{$_}{BOOTPROTO} eq 'dhcp' } sort keys %$intf;
 }
-
 
 #- returns first ppp interface started on boot
 sub get_default_ppp_interface {
     my ($intf) = @_;
-    find {
-        text2bool($intf->{$_}{ONBOOT})
-    } grep { /^ppp\d+/ } sort keys %$intf;
+    find { /^ppp\d+/ && text2bool($intf->{$_}{ONBOOT}) } sort keys %$intf;
 }
 
 #- returns ippp interface dialed on boot
 sub get_default_ippp_interface {
     my ($intf) = @_;
-    find {
-        text2bool($intf->{$_}{ONBOOT}) && text2bool($intf->{$_}{DIAL_ON_IFUP})
-    } grep { /^ippp\d+/ } sort keys %$intf;
+    find { /^ippp\d+/ && text2bool($intf->{$_}{ONBOOT}) && text2bool($intf->{$_}{DIAL_ON_IFUP}) } sort keys %$intf;
 }
 
 #- returns gateway interface if found
