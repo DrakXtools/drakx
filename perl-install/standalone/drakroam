@@ -189,7 +189,7 @@ sub UpdateAvailable {
 	open(my $LIST, "$IWList scan 2>/dev/null |") or die("Can't run iwlist");
 	@{$AvailableList->{data}} = ();
 	while (<$LIST>) {
-		if(/([^ ]+)([ \t]+)Scan completed :/) { $device = $1 }
+		if (/([^ ]+)([ \t]+)Scan completed :/) { $device = $1 }
 		elsif (/([^ ]+)([ \t]+)No scan results/) { $device = $1 }
 		if (/ESSID:"(\S*)"/) {
 			$essid = $1;
