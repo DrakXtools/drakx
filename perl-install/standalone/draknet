@@ -547,30 +547,30 @@ Create one first by clicking on 'Configure'")),1,1,0);
     my $vbox2 = new Gtk::VBox(0,0);
     $frame1->add($vbox2);
     my $i=0;
-    my @conf_data = ([_("Card IRQ"), \$cnx->{irq}],
-		     [_("Card mem (DMA)"), \$cnx->{mem}],
-		     [_("Card IO"), \$cnx->{io}],
-		     [_("Card IO_0"), \$cnx->{io0} ],
-		     [_("Card IO_1"), \$cnx->{io1}],
-		     [_("Your personal phone number"), \$cnx->{phone_in}],
+    my @conf_data = ([_("Card IRQ"), \$cnx->{irq}, 'label'],
+		     [_("Card mem (DMA)"), \$cnx->{mem}, 'label'],
+		     [_("Card IO"), \$cnx->{io}, 'label'],
+		     [_("Card IO_0"), \$cnx->{io0}, 'label'],
+		     [_("Card IO_1"), \$cnx->{io1}, 'label'],
+		     [_("Your personal phone number"), \$cnx->{phone_in}, 'label'],
 		     [_("Provider name (ex provider.net)"), \$netc->{DOMAINNAME2}],
-		     [_("Provider phone number"), \$cnx->{phone_out}],
+		     [_("Provider phone number"), \$cnx->{phone_out}, 'label'],
 		     [_("Provider dns 1 (optional)"), \$netc->{dnsServer2}],
 		     [_("Provider dns 2 (optional)"), \$netc->{dnsServer3}],
-		     [_("Account Login (user name)"), \$cnx->{login}],
-		     [_("Account Password"), \$cnx->{passwd}],
-		     [_("Dialing mode"), $cnx->{dialing_mode}, [ "auto", "manual"] ],
+		     [_("Account Login (user name)"), \$cnx->{login}, 'label'],
+		     [_("Account Password"), \$cnx->{passwd}, 'label'],
+		     [_("Dialing mode"), $cnx->{dialing_mode}, 'label', [ "auto", "manual"] ],
 		     [_("Gateway"), \$netc->{GATEWAY}],
-		     [_("Connection name"), \$cnx->{connection} ],
-		     [_("Phone number"), \$cnx->{phone} ],
-		     [_("Login ID"), \$cnx->{login} ],
-		     [_("Password"), \$cnx->{passwd} ],
-		     [_("Authentication"), \$cnx->{auth}, [ _("PAP"), _("Terminal-based"), _("Script-based") ] ],
-		     [_("Domain name"), \$cnx->{domain} ],
-		     [_("First DNS Server (optional)"), \$cnx->{dns1} ],
-		     [_("Second DNS Server (optional)"), \$cnx->{dns2} ],
-		     [_("Ethernet Card"), \$netc->{NET_DEVICE}, [ 'eth0', 'eth1', 'eth2', 'eth3', 'eth4', 'eth5','eth6', 'eth7', 'eth8', 'eth9' ]],
-		     [_("DHCP Client"), \$netcnx->{dhcp_client}, ["dhcpcd", "dhcpxd", "dhcp-client"] ]
+		     [_("Connection name"), \$cnx->{connection}, 'label'],
+		     [_("Phone number"), \$cnx->{phone}, 'label'],
+		     [_("Login ID"), \$cnx->{login}, 'label'],
+		     [_("Password"), \$cnx->{passwd}, 'label'],
+		     [_("Authentication"), \$cnx->{auth}, 'label', [ _("PAP"), _("Terminal-based"), _("Script-based") ] ],
+		     [_("Domain name"), \$cnx->{domain}, 'label'],
+		     [_("First DNS Server (optional)"), \$cnx->{dns1}, 'label'],
+		     [_("Second DNS Server (optional)"), \$cnx->{dns2}, 'label'],
+		     [_("Ethernet Card"), \$netc->{NET_DEVICE}, 'label', [ 'eth0', 'eth1', 'eth2', 'eth3', 'eth4', 'eth5','eth6', 'eth7', 'eth8', 'eth9' ]],
+		     [_("DHCP Client"), \$netcnx->{dhcp_client}, 'label', ["dhcpcd", "dhcpxd", "dhcp-client"] ]
 );
     foreach (@conf_data) {
 	$infos[2*$i]=new Gtk::HBox(0,0);
@@ -579,11 +579,17 @@ Create one first by clicking on 'Configure'")),1,1,0);
 	$infos[2*$i]->pack_start($l,1,1,0);
 	$vbox2->pack_start($infos[2*$i],0,0,0);
   	if (defined $_->[2]) {
-	    my $c=new Gtk::Combo();
-	    $c->set_popdown_strings(@{$_->[2]});
-	    $infos[2*$i+1]=$c->entry;
-	    $infos[2*$i+1]->set_editable(0);
-	    $infos[2*$i]->pack_start($c,0,0,0);
+	    if ($_->[2] eq 'label') {
+		$infos[2*$i+1]=new Gtk::Entry();
+		$infos[2*$i+1]->set_editable(0);
+		$infos[2*$i]->pack_start($infos[2*$i+1],0,0,0);
+	    } else {
+		my $c=new Gtk::Combo();
+		$c->set_popdown_strings(@{$_->[2]});
+		$infos[2*$i+1]=$c->entry;
+		$infos[2*$i+1]->set_editable(0);
+		$infos[2*$i]->pack_start($c,0,0,0);
+	    }
 	} else {
 	    $infos[2*$i+1]=new Gtk::Entry();
 	    $infos[2*$i]->pack_start($infos[2*$i+1],0,0,0);
