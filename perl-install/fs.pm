@@ -42,8 +42,11 @@ sub read_fstab {
 	}
 
 	if ($dev =~ m,/(tmp|dev)/,) {
-	    $dev = expand_symlinks($dev);
-	    $dev =~ s,/(tmp|dev)/,,;
+	    if (readlink($dev) !~ m|/|) {
+		$dev = readlink($dev);
+	    } else {
+		$dev =~ s,/(tmp|dev)/,,;
+	    }
 	}
 
 	{ device => $dev, mntpoint => $mntpoint, type => $type, options => $options };
