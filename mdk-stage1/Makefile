@@ -161,7 +161,7 @@ PCMCIA_DEFS = -DENABLE_PCMCIA
 endif
 
 
-all: dirs $(BINS)
+all: dirs .depend $(BINS)
 
 dirs:
 	@for n in . $(DIRS); do \
@@ -192,19 +192,19 @@ stage1-full: $(STAGE1OBJS-FULL) $(STAGE1_OWN_LIBS) $(STAGE1_NETWORK_LIBS) $(FRON
 $(INITOBJS): %.o: %.c
 	$(COMPILE) $(INIT_DEFS) -c $<
 
-$(STAGE1OBJS-CDROM): %-CDROM.o: %.c .depend
+$(STAGE1OBJS-CDROM): %-CDROM.o: %.c
 	$(COMPILE) $(INCLUDES) $(CDROM_DEFS) -c $< -o $@
 
-$(STAGE1OBJS-DISK): %-DISK.o: %.c .depend
+$(STAGE1OBJS-DISK): %-DISK.o: %.c
 	$(COMPILE) $(INCLUDES) $(DISK_DEFS) -c $< -o $@
 
-$(STAGE1OBJS-NETWORK): %-NETWORK.o: %.c .depend
+$(STAGE1OBJS-NETWORK): %-NETWORK.o: %.c
 	$(COMPILE) $(INCLUDES) $(NETWORK_DEFS) -c $< -o $@
 
-$(STAGE1OBJS-FULL): %-FULL.o: %.c .depend
+$(STAGE1OBJS-FULL): %-FULL.o: %.c
 	$(COMPILE) $(INCLUDES) $(PCMCIA_DEFS) -c $< -o $@
 
-.c.o: .depend
+.c.o:
 	$(COMPILE) $(INCLUDES) -c $<
 
 
@@ -225,8 +225,8 @@ tar-mkinitrd_helper: clean
 	rm -rf mkinitrd_helper-subdir
 
 
-.depend:
-	$(CPP) $(CFLAGS) -DHAVE_CONFIG_H -M $(ALLSRC) > .depend
+.depend: $(ALLSRC) *.h
+	$(CPP) $(CFLAGS) -M $(ALLSRC) > .depend
 
 ifeq (.depend,$(wildcard .depend))
 include .depend
