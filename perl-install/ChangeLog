@@ -1,3 +1,30 @@
+2004/03/24  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/hi.po: updated Hindi file
+
+2004/03/24  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* network/adsl.pm (adsl_conf_backend) only disable kernel driver for 2.4.x
+	kernels since
+	latest speedtouch package is totally broken in userland mode now :-(
+
+	* drakxtools.spec: one more change in 10-26mdk
+
+2004/03/23  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* standalone/drakgw: add a new line for lord cat
+
+	* network/netconnect.pm: fix drakconnect config writing when there's only
+	one configured
+	interface (eg: at install time) (#8998)
+
+	* drakxtools.spec: add bug reference in 10-25mdk changelog
+	remove doble entries in 10-25mdk changelog
+	10-26mdk
+
+	* standalone/drakconnect (del_intf) enable to delete ADSL and ISDN
+	connections
+
 2004/03/23  fwang
 
 	* share/po/zh_CN.po: Updated Simplified Chinese translation
@@ -29764,7 +29791,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.915 2004/03/23 17:08:43 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.916 2004/03/23 18:04:25 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
