@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX-uz@Cyrl\n"
-"POT-Creation-Date: 2003-08-04 11:27+0200\n"
+"POT-Creation-Date: 2003-08-08 10:25+0200\n"
 "PO-Revision-Date: 2003-07-28 18:35+0200\n"
 "Last-Translator: Mashrab Kuvatov <kmashrab@uni-bremen.de>\n"
 "Language-Team: Uzbek <uz-li@yahoogroups.com>\n"
@@ -329,6 +329,11 @@ msgstr "Танланган компютерни тузатиш"
 #, c-format
 msgid "No CD device defined!"
 msgstr "CD ускунаси аниқланмаган!"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "\tUse .backupignore files\n"
+msgstr ""
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -1486,6 +1491,11 @@ msgstr ""
 msgid "Harddrake2 version %s"
 msgstr "Harddrake2 - версия %s"
 
+#: ../../standalone/drakfloppy:1
+#, fuzzy, c-format
+msgid "Preferences"
+msgstr "Афзал кўриш: "
+
 #: ../../lang.pm:1
 #, c-format
 msgid "Swaziland"
@@ -1726,11 +1736,6 @@ msgstr "ва битта номаълум принтер"
 #, c-format
 msgid "Ireland"
 msgstr "Ирландия"
-
-#: ../../standalone/drakfloppy:1
-#, c-format
-msgid "kernel version"
-msgstr ""
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -3058,8 +3063,8 @@ msgid "German"
 msgstr "Олмонча"
 
 #: ../../help.pm:1 ../../install_steps_gtk.pm:1 ../../interactive.pm:1
-#: ../../my_gtk.pm:1 ../../interactive/newt.pm:1
-#: ../../printer/printerdrake.pm:1
+#: ../../my_gtk.pm:1 ../../ugtk2.pm:1 ../../interactive/newt.pm:1
+#: ../../printer/printerdrake.pm:1 ../../standalone/drakbackup:1
 #, c-format
 msgid "Next ->"
 msgstr "Кейингиси ->"
@@ -3098,6 +3103,11 @@ msgstr "Гвинея-Биссау"
 #, c-format
 msgid "Horizontal refresh rate"
 msgstr ""
+
+#: ../../standalone/drakperm:1
+#, fuzzy, c-format
+msgid "Edit"
+msgstr "Чиқиш"
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -5697,6 +5707,11 @@ msgstr ""
 msgid "I don't know"
 msgstr "Мен билмайман"
 
+#: ../../services.pm:1
+#, fuzzy, c-format
+msgid "Start when requested"
+msgstr "Start Menu"
+
 #: ../../printer/main.pm:1
 #, c-format
 msgid ", TCP/IP host \"%s\", port %s"
@@ -6062,6 +6077,13 @@ msgstr "Мартиника"
 #, c-format
 msgid "HardDrive / NFS"
 msgstr "Қатиқ диск / NFS"
+
+#: ../../standalone/drakbackup:1
+#, fuzzy, c-format
+msgid "Old user list:\n"
+msgstr ""
+"\n"
+"- Фойдаланувчиларнинг файллари:\n"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -7251,7 +7273,7 @@ msgstr "Буюк Британия"
 msgid "running"
 msgstr "ишлаяпти"
 
-#: ../../standalone/drakfloppy:1 ../../standalone/draksec:1
+#: ../../standalone/draksec:1
 #, c-format
 msgid "default"
 msgstr "андоза"
@@ -7501,7 +7523,7 @@ msgstr "Киритилган IP нотўғри.\n"
 msgid "Ethernet Card"
 msgstr "Ethernet карта"
 
-#: ../../my_gtk.pm:1 ../../ugtk2.pm:1
+#: ../../my_gtk.pm:1 ../../services.pm:1 ../../ugtk2.pm:1
 #, c-format
 msgid "Info"
 msgstr "Маълумот"
@@ -9197,10 +9219,17 @@ msgstr "Ўрнатилган шрифтларни белгилашни беко�
 
 #: ../../any.pm:1 ../../help.pm:1 ../../install_steps_gtk.pm:1
 #: ../../install_steps_interactive.pm:1 ../../interactive.pm:1
-#: ../../my_gtk.pm:1 ../../ugtk.pm:1 ../../diskdrake/smbnfs_gtk.pm:1
-#: ../../interactive/http.pm:1 ../../interactive/newt.pm:1
-#: ../../interactive/stdio.pm:1 ../../printer/printerdrake.pm:1
-#: ../../standalone/drakautoinst:1 ../../standalone/drakfont:1
+#: ../../my_gtk.pm:1 ../../ugtk2.pm:1 ../../ugtk.pm:1
+#: ../../Xconfig/resolution_and_depth.pm:1 ../../diskdrake/smbnfs_gtk.pm:1
+#: ../../interactive/gtk.pm:1 ../../interactive/http.pm:1
+#: ../../interactive/newt.pm:1 ../../interactive/stdio.pm:1
+#: ../../printer/printerdrake.pm:1 ../../standalone/drakautoinst:1
+#: ../../standalone/drakbackup:1 ../../standalone/drakboot:1
+#: ../../standalone/drakconnect:1 ../../standalone/drakfloppy:1
+#: ../../standalone/drakfont:1 ../../standalone/drakgw:1
+#: ../../standalone/drakperm:1 ../../standalone/draksec:1
+#: ../../standalone/logdrake:1 ../../standalone/mousedrake:1
+#: ../../standalone/net_monitor:1
 #, c-format
 msgid "Cancel"
 msgstr "Бекор қилиш"
@@ -9278,7 +9307,7 @@ msgstr ""
 msgid "Other"
 msgstr "Бошқаси"
 
-#: ../../any.pm:1 ../../harddrake/v4l.pm:1
+#: ../../any.pm:1 ../../harddrake/v4l.pm:1 ../../standalone/drakfloppy:1
 #, c-format
 msgid "Default"
 msgstr "Андоза"
@@ -9924,7 +9953,8 @@ msgstr ""
 "Тугатгач \"w\" билан сақлаш эсингиздан чиқмасин."
 
 #: ../../printer/printerdrake.pm:1 ../../standalone/drakTermServ:1
-#: ../../standalone/drakfont:1
+#: ../../standalone/drakbackup:1 ../../standalone/drakbug:1
+#: ../../standalone/drakfont:1 ../../standalone/net_monitor:1
 #, c-format
 msgid "Close"
 msgstr "Ёпиш"
@@ -10185,11 +10215,6 @@ msgstr ""
 #, c-format
 msgid "Installing SANE packages..."
 msgstr "SANE пакетлари ўрнатилмоқда..."
-
-#: ../../standalone/drakfloppy:1
-#, c-format
-msgid "boot disk creation"
-msgstr "системани юклаш дискини яратиш"
 
 #: ../../any.pm:1
 #, c-format
@@ -10781,7 +10806,7 @@ msgstr "ТВ карта топилмади!"
 
 #: ../../Xconfig/main.pm:1 ../../diskdrake/dav.pm:1
 #: ../../diskdrake/interactive.pm:1 ../../diskdrake/removable.pm:1
-#: ../../diskdrake/smbnfs_gtk.pm:1
+#: ../../diskdrake/smbnfs_gtk.pm:1 ../../standalone/harddrake2:1
 #, c-format
 msgid "Options"
 msgstr "Параметрлар"
@@ -11274,8 +11299,8 @@ msgid "Turks and Caicos Islands"
 msgstr "Туркс ва Каикос Ороллари"
 
 #: ../../help.pm:1 ../../install_steps_gtk.pm:1 ../../interactive.pm:1
-#: ../../my_gtk.pm:1 ../../interactive/newt.pm:1
-#: ../../printer/printerdrake.pm:1
+#: ../../my_gtk.pm:1 ../../ugtk2.pm:1 ../../interactive/newt.pm:1
+#: ../../printer/printerdrake.pm:1 ../../standalone/drakbackup:1
 #, c-format
 msgid "<- Previous"
 msgstr "<- Олдингиси"
@@ -11839,6 +11864,11 @@ msgstr "Ҳажми: %s\n"
 #, c-format
 msgid "Hostname: "
 msgstr "Компютернинг номи:"
+
+#: ../../standalone/drakperm:1
+#, fuzzy, c-format
+msgid "Add a rule"
+msgstr "Қоидани қўшиш"
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -12489,6 +12519,11 @@ msgid ""
 "Note that any address should be entered with the prefix 0x like '0x123'"
 msgstr ""
 
+#: ../../lang.pm:1
+#, c-format
+msgid "Kenya"
+msgstr "Кения"
+
 #: ../../share/advertising/04-configuration.pl:1
 #, c-format
 msgid ""
@@ -12497,11 +12532,6 @@ msgid ""
 "customize elements such as the security level, the peripherals (screen, "
 "mouse, keyboard...), the Internet connection and much more!"
 msgstr ""
-
-#: ../../lang.pm:1
-#, c-format
-msgid "Kenya"
-msgstr "Кения"
 
 #: ../../diskdrake/hd_gtk.pm:1
 #, c-format
@@ -12553,6 +12583,11 @@ msgstr "Drakbackup мосламаси"
 msgid "Save as.."
 msgstr "...сифатида сақлаш"
 
+#: ../../lang.pm:1
+#, c-format
+msgid "Korea (North)"
+msgstr "Шимолий Корея"
+
 #: ../../standalone/drakconnect:1
 #, c-format
 msgid ""
@@ -12561,11 +12596,6 @@ msgid ""
 msgstr ""
 "Бу интерфейс ҳали мослангани йўқ.\n"
 "Мошлаш ёрдамчисини асосий ойнадан ишга туширинг."
-
-#: ../../lang.pm:1
-#, c-format
-msgid "Korea (North)"
-msgstr "Шимолий Корея"
 
 #: ../../install_gtk.pm:1
 #, c-format
@@ -13305,8 +13335,14 @@ msgstr "Шарт бўлган пакет (%s) етишмаяпти"
 msgid "Philippines"
 msgstr "Филиппин"
 
-#: ../../interactive.pm:1 ../../my_gtk.pm:1 ../../interactive/http.pm:1
-#: ../../interactive/newt.pm:1 ../../interactive/stdio.pm:1
+#: ../../interactive.pm:1 ../../my_gtk.pm:1 ../../ugtk2.pm:1
+#: ../../Xconfig/resolution_and_depth.pm:1 ../../interactive/gtk.pm:1
+#: ../../interactive/http.pm:1 ../../interactive/newt.pm:1
+#: ../../interactive/stdio.pm:1 ../../standalone/drakbackup:1
+#: ../../standalone/drakboot:1 ../../standalone/drakconnect:1
+#: ../../standalone/drakfloppy:1 ../../standalone/drakperm:1
+#: ../../standalone/draksec:1 ../../standalone/mousedrake:1
+#: ../../standalone/net_monitor:1
 #, c-format
 msgid "Ok"
 msgstr "Ок"
@@ -13455,6 +13491,13 @@ msgstr "Параметрларни аниқлаш"
 #, c-format
 msgid "Vanuatu"
 msgstr "Вануату"
+
+#: ../../standalone/drakbackup:1
+#, fuzzy, c-format
+msgid "New user list:\n"
+msgstr ""
+"\n"
+"- Фойдаланувчиларнинг файллари:\n"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -13724,6 +13767,7 @@ msgid ""
 msgstr ""
 
 #: ../../diskdrake/hd_gtk.pm:1 ../../diskdrake/interactive.pm:1
+#: ../../standalone/drakperm:1
 #, c-format
 msgid "Delete"
 msgstr "Ўчириш"
@@ -13888,7 +13932,7 @@ msgstr "CUPS - Умумий Юникс Босиб чиқариш Система�
 msgid "Webmin Service"
 msgstr "Вебмин хизмати"
 
-#: ../../diskdrake/interactive.pm:1 ../../standalone/drakfloppy:1
+#: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid "device"
 msgstr "ускуна"
@@ -14111,6 +14155,11 @@ msgid "There is no FAT partition to resize (or not enough space left)"
 msgstr ""
 "Ҳажмини ўзгартириш учу дискда FAT қисм мавжуд эмас (ёки етарли жой мавжуд "
 "эмас)"
+
+#: ../../standalone/drakperm:1
+#, c-format
+msgid "Up"
+msgstr "Юқорига"
 
 #: ../../help.pm:1 ../../install_steps_interactive.pm:1
 #, c-format
@@ -14403,8 +14452,11 @@ msgid "Optimize your security by using Mandrake Linux"
 msgstr "Mandrake Linux ёрдамида хавфсизликингизни яхшиланг"
 
 #: ../../install_steps_gtk.pm:1 ../../interactive.pm:1 ../../ugtk2.pm:1
+#: ../../Xconfig/resolution_and_depth.pm:1 ../../diskdrake/hd_gtk.pm:1
 #: ../../interactive/gtk.pm:1 ../../standalone/drakTermServ:1
-#: ../../standalone/drakfont:1
+#: ../../standalone/drakbackup:1 ../../standalone/drakbug:1
+#: ../../standalone/drakconnect:1 ../../standalone/drakfont:1
+#: ../../standalone/harddrake2:1
 #, c-format
 msgid "Help"
 msgstr "Ёрдам"
@@ -14438,6 +14490,11 @@ msgstr ""
 msgid "Username required"
 msgstr "Фойдаланувчининг номи керак"
 
+#: ../../standalone/drakfloppy:1
+#, fuzzy, c-format
+msgid "Device"
+msgstr "Ускуна: "
+
 #: ../../help.pm:1
 #, c-format
 msgid ""
@@ -14462,6 +14519,11 @@ msgstr ""
 #, c-format
 msgid "SMB (Windows 9x/NT) Printer Options"
 msgstr "SMB (Windows 9x/NT) принтернинг парамертрлари"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "Valid user list changed, rewriting config file."
+msgstr ""
 
 #: ../../standalone/drakfloppy:1
 #, c-format
@@ -14707,7 +14769,8 @@ msgstr "Мянмар"
 
 #: ../../install_steps_interactive.pm:1 ../../Xconfig/main.pm:1
 #: ../../diskdrake/dav.pm:1 ../../printer/printerdrake.pm:1
-#: ../../standalone/draksplash:1 ../../standalone/scannerdrake:1
+#: ../../standalone/draksplash:1 ../../standalone/harddrake2:1
+#: ../../standalone/logdrake:1 ../../standalone/scannerdrake:1
 #, c-format
 msgid "Quit"
 msgstr "Чиқиш"
@@ -15271,6 +15334,11 @@ msgstr "Адаптер %s: %s"
 #, c-format
 msgid "Falkland Islands (Malvinas)"
 msgstr "Фолкленд (Малвин) Ороллари"
+
+#: ../../standalone/drakfloppy:1
+#, fuzzy, c-format
+msgid "Boot disk creation"
+msgstr "системани юклаш дискини яратиш"
 
 #: ../../printer/main.pm:1 ../../printer/printerdrake.pm:1
 #, c-format
@@ -16382,6 +16450,11 @@ msgstr ""
 msgid "Mandrake's multipurpose configuration tool"
 msgstr "Mandrake'нинг кўп мақсадли мослаш воситаси"
 
+#: ../../standalone/drakbackup:1 ../../standalone/logdrake:1
+#, c-format
+msgid "Save"
+msgstr "Сақлаш"
+
 #: ../../standalone/scannerdrake:1
 #, c-format
 msgid "The %s is unsupported"
@@ -16476,6 +16549,11 @@ msgstr "%s (Порт %s)"
 #, c-format
 msgid "Use network connection to backup"
 msgstr ""
+
+#: ../../standalone/drakfloppy:1
+#, fuzzy, c-format
+msgid "Kernel version"
+msgstr "Интернет станция"
 
 #: ../../help.pm:1
 #, c-format
@@ -17033,6 +17111,11 @@ msgstr ""
 msgid "Allow remote root login"
 msgstr "Root узоқдан киришига рухсат этиш"
 
+#: ../../standalone/drakperm:1
+#, c-format
+msgid "Down"
+msgstr "Пастга"
+
 #: ../../printer/main.pm:1 ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Raw printer (No driver)"
@@ -17082,6 +17165,11 @@ msgstr "Microsoft Explorer"
 #, c-format
 msgid "German (no dead keys)"
 msgstr "Олмонча (ўлик тугмаларсиз)"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "\tSend mail to %s\n"
+msgstr ""
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -17839,15 +17927,6 @@ msgstr ""
 #~ msgid "delete"
 #~ msgstr "Ўчириш"
 
-#~ msgid "Up"
-#~ msgstr "Юқорига"
-
-#~ msgid "add a rule"
-#~ msgstr "Қоидани қўшиш"
-
-#~ msgid "Down"
-#~ msgstr "Пастга"
-
 #~ msgid ""
 #~ "Arguments: (arg)\n"
 #~ "\n"
@@ -17971,9 +18050,6 @@ msgstr ""
 #~ msgid "Previous"
 #~ msgstr "Олдингиси"
 
-#~ msgid "Save"
-#~ msgstr "Сақлаш"
-
 #~ msgid "Wizard..."
 #~ msgstr "Ёрдамчи"
 
@@ -18037,9 +18113,6 @@ msgstr ""
 
 #~ msgid "Remove entry"
 #~ msgstr "Yozuvni olib tashlash"
-
-#~ msgid "Start Menu"
-#~ msgstr "Start Menu"
 
 #~ msgid "FAT"
 #~ msgstr "FAT"
