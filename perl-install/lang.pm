@@ -256,8 +256,8 @@ sub std  { std2($_[0], $_[1] || 10), std2($_[0],  8) }
 #- [4]: codepage parameter for mount (none if utf8)
 #- [5]: X11 fontset (for DrakX)
 my %charsets = (
-  "armscii-8"  => [ "arm8",		"armscii8.uni",	"trivial.trans",
-    undef,	undef, std_("armscii-8") ],
+  "armscii-8"  => [ "arm8",		undef,	"armscii-8",
+	 undef,	undef, std_("armscii-8") ],
 #- chinese needs special console driver for text mode
   "Big5"       => [ undef,		undef,		undef,
 	"big5", "950", "-*-*-*-*-*-*-*-*-*-*-*-*-big5-0" ],
@@ -277,24 +277,24 @@ my %charsets = (
 #-  	"iso8859-5", "855", sub { std("microsoft-cp1251", @_) } ],
 #-#- arabic needs special console driver for text mode [acon]
 #-#- (and gtk support isn't done yet)
-  "iso-8859-6" => [ "iso06.f16",	"iso06",	"trivial.trans",
+  "iso-8859-6" => [ "iso06.f16",	undef,	"iso06",
 	"iso8859-6", "864", std_("iso8859-6") ],
   "iso-8859-7" => [ "iso07.f16",	undef,	"iso07",
 	"iso8859-7", "869", std_("iso8859-7") ],
 #-#- hebrew needs special console driver for text mode [acon]
 #-#- (and gtk support isn't done yet)
-   "iso-8859-8" => [ "iso08.f16",	"iso08",	"trivial.trans",
+   "iso-8859-8" => [ "iso08.f16",	undef,	"iso08",
 #-	std_("iso8859-8") ],
 	"iso8859-8", "862", std_("microsoft-cp1255") ],
-  "iso-8859-9" => [ "iso09.f16",	"iso09",	"trivial.trans",
+  "iso-8859-9" => [ "iso09.f16",	undef,	"iso09",
 	"iso8859-9", "857", sub { std("iso8859-9", @_) } ],
-  "iso-8859-13" => [ "tlat7",		"iso13",	"trivial.trans",
+  "iso-8859-13" => [ "tlat7",		undef,	"iso13",
 	"iso8859-13", "775", std_("iso8859-13") ],
-  "iso-8859-14" => [ "iso14",		undef,		"iso14",
+  "iso-8859-14" => [ "iso14.f16",	undef,		"iso14",
 	"iso8859-14", "850", std_("iso8859-14") ],
   "iso-8859-15" => [ "lat0-16",	undef,		"iso15",
 	"iso8859-15", "850", sub { std("iso8859-15", @_) } ],
-  "iso-8859-9e"      => [ "tiso09e",		"iso09",	"trivial.trans",
+  "iso-8859-9e"      => [ "tiso09e",		undef,	"iso09e",
 	undef, undef, std2("iso8859-9e",10) ],
 #- japanese needs special console driver for text mode [kon2]
   "jisx0208"   => [ undef,		undef,		"trivial.trans",
@@ -303,9 +303,9 @@ my %charsets = (
 	"koi8-r", "866", sub { std("microsoft-cp1251", @_) } ],
   "koi8-u"     => [ "UniCyr_8x16",	undef,		"koi8-u",
 	"koi8-u", "866", sub { std("microsoft-cp1251", @_) } ],
-  "utf_ka"      => [ "t_geors",		"geors.uni",	"geors_to_geops.trans",
+  "utf_ka"      => [ "t_geors",		undef,	undef,
 	"utf8",  undef, "-*-*-*-*-*-*-*-*-*-*-*-*-georgian-academy" ],
-  "utf_koi8-k"     => [ "koi8-k",		"iso01",	"trivial.trans",
+  "utf_koi8-k"     => [ "koi8-k",		undef,	undef,
 	"utf8", undef, std("koi8-k") ],
   "cp1251"     => [ "UniCyr_8x16",	undef,		"cp1251",
 	"cp1251", "866", sub { std("microsoft-cp1251", @_) } ],
@@ -323,18 +323,14 @@ my %charsets = (
 #- I have no console font for Thai...
   "tis620"     => [ undef,		undef,		"trivial.trans",
 	"tis-620", "874", std2("tis620.2533-1",12) ],
-#-  "tcvn"       => [ "tcvn8x16",		"tcvn",		"trivial.trans",
+#-  "tcvn"       => [ "tcvn8x16",		undef,		"tcvn",
 #-	undef, undef, std2("tcvn-5712", 13), std2("tcvn-5712", 10) ],
-  "viscii"     => [ "tcvn8x16",	"viscii.uni",	"viscii1.0_to_viscii1.1.trans",
+  "viscii"     => [ "tcvn8x16",	undef,	"viscii",
 	undef, undef, std2("tcvn-5712", 13), std2("tcvn-5712", 10) ],
-#- Farsi (iranian) needs special console driver for text mode [acon]
-#- (and gtk support isn't done yet)
-#-  "isiri-3342" => [ undef,		undef,		"trivial.trans",
-#-	undef, undef, "-*-*-*-*-*-*-*-*-*-*-*-*-isiri-3342" ],
 #- Tamil uses pseudo iso-8859-1 fonts
-  "tscii" => [ "tamil",		undef,		"trivial.trans",
+  "tscii" => [ "tamil",		undef,		"tscii-0",
 	undef, undef, "-tamil-tscakaram-medium-r-normal--12-120-75-75-p-92-tscii-0" ],
-  "unicode" => [ undef,			undef,		"trivial.trans",
+  "unicode" => [ undef,			undef,		undef,
 	"utf8", undef, "-*-*-*-*-*-*-*-*-*-*-*-*-iso10646-1" ],
 );
 
