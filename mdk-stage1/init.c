@@ -403,8 +403,7 @@ int main(int argc __attribute__ ((unused)), char **argv __attribute__ ((unused))
 	   2) we receive a SIGHUP 
 	*/
 
-	printf("If more people were to meet doing raklets, this planet\n");
-	printf("would be a safer place.\n");
+	printf("Moltes ! MOLTES !\n");
 	printf("\n");
 	printf("Running install...\n"); 
 	
