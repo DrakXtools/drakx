@@ -4,6 +4,7 @@ use lib qw(/usr/lib/libDrakX);
 
 use common qw(:common :file :functional);
 use interactive;
+use standalone;
 use any;
 use bootloader;
 use detect_devices;
@@ -16,7 +17,6 @@ local $_ = join '', @ARGV;
 /-h/ and die "usage: drakboot [--expert]\n";
 
 $::expert = /-expert/;
-$::isStandalone = 1;
 
 my $in = interactive->vnew('su');
 

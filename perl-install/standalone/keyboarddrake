@@ -5,6 +5,7 @@ use lib qw(/usr/lib/libDrakX);
 
 use interactive;
 use keyboard;
+use standalone;
 use Xconfigurator_consts;
 use common qw(:system);
 use c;
@@ -14,7 +15,6 @@ local $_ = join '', @ARGV;
 /-h/ and die _("usage: keyboarddrake [--expert] [keyboard]\n");
 
 $::expert = /-expert/;
-$::isStandalone = 1;
 
 my ($keyboard) = grep { !/^-/ } @ARGV;
 

@@ -4,6 +4,7 @@ use lib qw(/usr/lib/libDrakX);
 
 use common qw(:common :functional :system :file);
 use interactive;
+use standalone;
 use any;
 
 local $_ = join '', @ARGV;
@@ -12,7 +13,6 @@ local $_ = join '', @ARGV;
 
 $::beginner = /-beginner/;
 $::expert = /-expert/;
-$::isStandalone = 1;
 
 my @etc_pass_fields = qw(name pw uid gid realname home shell);
 my @shells = grep { -x $_ } map { "/bin/$_" } qw(bash tcsh zsh ash ksh);

@@ -4,6 +4,7 @@ use lib qw(/usr/lib/libDrakX);
 
 use common qw(:common :system :file);
 use interactive;
+use standalone;
 use run_program;
 use c;
 
@@ -12,7 +13,6 @@ local $_ = join '', @ARGV;
 /-h/ and die "usage: livedrake [--testing]\n";
 
 $::testing = /-testing/;
-$::isStandalone = 1;
 
 my $in = vnew interactive('su');
 

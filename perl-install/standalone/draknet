@@ -21,6 +21,7 @@
 use lib qw(/usr/lib/libDrakX);
 
 use interactive;
+use standalone;
 use netconnect;
 use c;
 
@@ -30,7 +31,6 @@ local $_ = join '', @ARGV;
 
 my $netcnx = {};
 
-$::isStandalone = 1;
 $::isWizard = 0;
 $::wizard_xpm = "/usr/share/pixmaps/internet.xpm";
 #$::force_xf3 = /-xf3/;
@@ -47,10 +47,6 @@ $::wizard_xpm = "/usr/share/pixmaps/internet.xpm";
 
 my $in = vnew interactive('su');
 
-$::isStandalone and my $wait=$in->wait_message('', "", 1);
-netconnect::intro('', $netcnx, $in, -e "/etc/pcmcia", sub {
-		      $in->suspend;
-		      system("urpmi --auto --best-output " . join(' ', @_));
-		      $in->resume;
-		  });
+my $wait = $in->wait_message('', '', 1);
+netconnect::intro('', $netcnx, $in, -e "/etc/pcmcia", \&standalone::pkgs_install);
 $in->exit(0);

@@ -4,6 +4,7 @@ use lib qw(/usr/lib/libDrakX);
 
 use common qw(:common :functional :file);
 use interactive;
+use standalone;
 use services;
 use log;
 
@@ -11,7 +12,6 @@ local $_ = join '', @ARGV;
 
 /-h/ and die "usage: drakxservices\n";
 
-$::isStandalone = 1;
 
 my $in = vnew interactive('su');
 my $l = services::ask($in);

@@ -21,8 +21,9 @@
 use lib qw(/usr/lib/libDrakX);
 
 use interactive;
-use printer;
+use standalone;
 use printerdrake;
+use printer;
 use c;
 
 local $_ = join '', @ARGV;
@@ -35,7 +36,6 @@ $::auto = /-auto/;
 $::noauto = /-noauto/;
 $::skiptest = /-skiptest/;
 $::testing = /-testing/;
-$::isStandalone = 1;
 
 my $printer; eval { $printer = printer::getinfo('') };
 /-lpr/ and $printer->{mode} = 'lpr';
@@ -44,6 +44,6 @@ $printer->{mode} ||= 'CUPS'; #- assume this default if nothing found.
 
 my $in = vnew interactive('su');
 
-printerdrake::main($printer, $in, sub { $in->suspend; system("urpmi --auto --best-output " . join(' ', @_)); $in->resume; });
+printerdrake::main($printer, $in, sub { $in->standalone::pkgs_install(@_) });
 
 $in->exit(0);

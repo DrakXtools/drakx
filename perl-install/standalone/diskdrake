@@ -25,6 +25,7 @@
 use lib qw(/usr/lib/libDrakX);
 use common qw(:common :functional);
 use diskdrake;
+use standalone;
 use interactive_gtk;
 use detect_devices;
 use fsedit;
@@ -38,7 +39,6 @@ local $_ = join '', @ARGV;
 
 $::expert = /-expert/;
 $::testing = /-testing/;
-$::isStandalone = 1;
 
 if ($>) {
     $ENV{PATH} = "/sbin:/usr/sbin:$ENV{PATH}";

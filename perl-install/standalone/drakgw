@@ -17,6 +17,7 @@ use lib qw(/usr/lib/libDrakX);
 
 use common qw(:system :file);
 use interactive;
+use standalone;
 use log;
 use c;
 use netconnect;
@@ -29,7 +30,6 @@ local $_ = join '', @ARGV;
 
 $::verbose = /-verbose/;
 $::direct = /-direct/;
-$::isStandalone = 1;
 
 my $in = vnew interactive('su');
 
@@ -84,13 +84,6 @@ sub stop_daemons()
     local *DRAKGW_SETUP; open DRAKGW_SETUP, ">$drakgw_setup" or die "Can't open $drakgw_setup";
     print DRAKGW_SETUP "INET_SHARING=disabled\n";
     close DRAKGW_SETUP;
-}
-
-sub install_rpm($)
-{
-    $in->suspend;
-    system("urpmi --auto --best-output $_[0]");
-    $in->resume;
 }
 
 sub fatal_quit($)
@@ -322,7 +315,7 @@ my %bin2rpm = ( "/sbin/ipchains" => "ipchains",
 		"/var/named/named.local" => "caching-nameserver" );
 
 -e $_ or $rpms_to_install .= "$bin2rpm{$_} " foreach (keys %bin2rpm);
-install_rpm($rpms_to_install);
+standalone::pkgs_install($rpms_to_install);
 -e $_ or fatal_quit(_("Problems installing package $bin2rpm{$_}")) foreach (keys %bin2rpm);
 
 
@@ -549,6 +542,9 @@ $in->exit(0);
 
 #-------------------------------------------------
 #- $Log$
+#- Revision 1.19  2001/01/10 00:32:42  prigaux
+#- use standalone and standalone::pkgs_install
+#-
 #- Revision 1.18  2000/12/16 16:13:34  prigaux
 #- use ldetect-lst
 #-
