@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10.1
-Release: 0.19mdk
+Release: 0.20mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -327,6 +327,10 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Fri Sep  3 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.1-0.20mdk
+- detect more devices
+- misc GUI cleanups
+
 * Thu Sep  2 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.1-0.19mdk
 - add icons to most tools' windows
 - drakboot: do not crash if default autologin or default desktop
