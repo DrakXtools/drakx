@@ -78,7 +78,10 @@ sub ask_from_entries_refW {
     my $num_champs = @{$l};
     my $ignore = 0;
 
+    my $w       = my_gtk->new($title, %$o);
     my @entries = map { new Gtk::Entry } @{$l};
+    my $ok      = $w->create_okcancel;
+
     my @updates = mapn { 
 	my ($entry, $ref) = @_;
 	return sub { ${$ref} = $entry->get_text };
@@ -91,7 +94,7 @@ sub ask_from_entries_refW {
     } \@entries, $val;
 
 
-    for (my $i = 0; $i <$num_champs; $i++) {
+    for (my $i = 0; $i < $num_champs; $i++) {
 	my $ind = $i;
 	my $callback = sub {
 	    return if $ignore; #handle recursive deadlock
@@ -106,17 +109,21 @@ sub ask_from_entries_refW {
 	};
 	my $entry = $entries[$i];
 	$entry->signal_connect(changed => $callback);
+	$entry->signal_connect(activate => sub {
+				   ($ind == ($num_champs -1)) ?
+				     $w->{ok}->grab_focus() : $entries[$ind+1]->grab_focus();
+			       });
 	$entry->set_text(${$val->[$i]})  if ${$val->[$i]};
 	$entry->set_visibility(0) if $_[0] =~ /password/i;
 #	&{$updates[$i]};
     }
     my @entry_list = mapn { [($_[0], $_[1])]} $l, \@entries;
-    my $w = my_gtk->new($title, %$o);
     gtkadd($w->{window}, 
 	   gtkpack(
 		   create_box_with_title($w, @$messages),
 		   create_packtable({}, @entry_list),
-		   $w->create_okcancel));
+		   $ok
+		   ));
     
     $entries[0]->grab_focus();
     $w->main();
