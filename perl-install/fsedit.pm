@@ -92,7 +92,7 @@ sub hds {
 	require lvm;
 	foreach (@pvs) {
 	    my $name = lvm::get_vg($_) or next;
-	    my ($lvm) = grep { $_->{LVMname} eq $name } @hds;
+	    my ($lvm) = grep { $_->{LVMname} eq $name } (@hds, @lvms);
 	    if (!$lvm) {
 		$lvm = bless { disks => [], LVMname => $name, level => 'linear' }, 'lvm';
 		lvm::update_size($lvm);
