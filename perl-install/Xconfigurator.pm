@@ -582,7 +582,7 @@ sub testFinalConfig {
 
     my $verybad_card = $o->{card}{driver} eq 'i810';
     $verybad_card ||= $o->{card}{driver} eq 'nvidia' && !$::isStandalone; #- avoid testing during install at any price.
-    $verybad_card and return 1;
+    $bad_card || $verybad_card and return 1; #- deactivating bad_card test too.
 
     my $mesg = _("Do you want to test the configuration?");
     my $def = 1;
