@@ -120,11 +120,6 @@ enum return_type perform_adsl(struct interface_info * intf)
 	static char ** answers = NULL;
 	enum return_type results;
 
-	if (strncmp(intf->device, "eth", 3)) {
-		stg1_error_message("ADSL available only for Ethernet networking (through PPPoE).");
-		return RETURN_ERROR;
-	}
-
 	inet_aton("10.0.0.10", &addr);
 	memcpy(&intf->ip, &addr, sizeof(addr));
 
