@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10
-Release: 0.20mdk
+Release: 0.21mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -316,6 +316,16 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Thu Feb 19 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10-0.21mdk
+- drakboot: fix theme displaying under console (Olivier Blin)
+- drakconnect: since no PCMCIA cards support link status notification,
+  ifplugd should be disabled for all pcmcia cards by default (#8031)
+- XFdrake: kill spurious icons (pixel)
+- fix some wrapping (pixel)
+- do not use global scrolled window but many local scrolled windows
+  instead (pixel)
+- fix uim-xim input method (pablo)
+
 * Thu Feb 19 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10-0.20mdk
 - fix broken "advanced" and "help" buttons (pixel)
 - switch japanese from kinput2 to uim input method
