@@ -50,6 +50,20 @@ sub install {
     $ret;
 }
 
+sub ensure_is_installed {
+    my ($o, $pkg, $file) = @_;
+
+    if (! -e $file) {
+	$o->{in}->ask_okcancel('', _("The package %s needs to be installed. Do you want to install it?", $pkg), 1) or return;
+	$o->{in}->do_pkgs->install($pkg);
+    }
+    if (! -e $file) {
+	$o->{in}->ask_warn('', _("Mandatory package %s is missing", $pkg));
+	return;
+    }
+    1;
+}
+
 sub what_provides {
     my ($o, $name) = @_;
     my ($what) = split '\n', `urpmq '$name' 2>/dev/null`;
