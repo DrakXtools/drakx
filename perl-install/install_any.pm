@@ -293,7 +293,9 @@ sub setPackages($) {
 	pkgs::selectPackage($o->{packages}, pkgs::packageByName($o->{packages}, 'basesystem') || die("missing basesystem package"), 1);
 
 	#- some program that may be crazy on some conditions (hack waiting for Aurora to work if no fb).
-	$o->{allowFB} or push @pkgs::skip_list, 'Aurora';
+	$o->{allowFB} && (!detect_devices::matching_desc('Rage LT') &&
+			  !detect_devices::matching_desc('Rage Mobility'))
+	  or push @pkgs::skip_list, 'Aurora';
 
 	#- must be done after selecting base packages (to save memory)
 	pkgs::getProvides($o->{packages});
@@ -312,8 +314,25 @@ sub setPackages($) {
 	require timezone;
 	require lang;
 	push @l, "isdn4k-utils" if ($o->{timezone}{timezone} || timezone::bestTimezone(lang::lang2text($o->{lang}))) =~ /Europe/;
-	$_->{values} = [ map { $_ + 50 } @{$_->{values}} ] foreach grep {$_} map { pkgs::packageByName($o->{packages}, $_) } @l;
 
+	#- add OpenGL games that are only usefull if a 3D accelerated card is installed.
+	if (detect_devices::matching_desc('Matrox.* G[24]00') ||
+	    detect_devices::matching_desc('Rage X[CL]') ||
+	    detect_devices::matching_desc('Rage Mobility (?:P\/M|L) ') ||
+	    detect_devices::matching_desc('3D Rage (?:LT|Pro)') ||
+	    detect_devices::matching_desc('Voodoo [35]') ||
+	    detect_devices::matching_desc('Voodoo Banshee') ||
+	    detect_devices::matching_desc('8281[05].* CGC') ||
+	    detect_devices::matching_desc('Rage 128')) {
+	    push @l, "xscreensaver-gl", "Mesa-demos", "xmms-mesa";
+	    push @l, "bzflag" if (!detect_devices::matching_desc('Rage X[CL]') &&
+				  !detect_devices::matching_desc('Rage Mobility (?:P\/M|L) ') &&
+				  !detect_devices::matching_desc('3D Rage (?:LT|Pro)'));
+	    push @l, "csmash", "gltron" if (!detect_devices::matching_desc('Rage 128')); #- does not work well on transparancy.
+	    push @l, "spacecup", "chromium";
+	}
+
+	$_->{values} = [ map { $_ + 50 } @{$_->{values}} ] foreach grep {$_} map { pkgs::packageByName($o->{packages}, $_) } @l;
     } else {
 	#- this has to be done to make sure necessary files for urpmi are
 	#- present.

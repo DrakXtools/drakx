@@ -187,7 +187,9 @@ sub cardConfiguration(;$$$) {
 
     #- 3D acceleration configuration for XFree 3.3 using Utah-GLX.
     $card->{Utah_glx} = ($card->{identifier} =~ /Matrox.* G[24]00/ || #- 8bpp does not work.
-			 $card->{identifier} =~ /3D Rage Pro AGP/); #- by default only such card are supported, with AGP ?
+			 $card->{identifier} =~ /Rage X[CL]/ ||
+			 $card->{identifier} =~ /Rage Mobility (?:P\/M|L) / ||
+			 $card->{identifier} =~ /3D Rage (?:LT|Pro)/);
                          #- NOT WORKING $card->{type} =~ /Intel 810/);
     #- 3D acceleration configuration for XFree 3.3 using Utah-GLX but EXPERIMENTAL that may freeze the machine (FOR INFO NOT USED).
     $card->{Utah_glx_EXPERIMENTAL} = ($card->{type} =~ /RIVA TNT/ || #- all RIVA/GeForce comes from NVIDIA and may freeze (gltron).
@@ -199,8 +201,8 @@ sub cardConfiguration(;$$$) {
     #- 3D acceleration configuration for XFree 4.0 using DRI.
     $card->{DRI_glx} = ($card->{identifier} =~ /Voodoo [35]/ || $card->{identifier} =~ /Voodoo Banshee/ || #- 16bit only
 			$card->{identifier} =~ /Matrox.* G[24]00/ || #- prefer 16bit (24bit not well tested according to DRI)
-			$card->{type} =~ /Intel 810/ || #- 16bit
-			$card->{type} =~ /ATI Rage 128/); #- 16 and 32 bits, prefer 16bit as no DMA.
+			$card->{identifier} =~ /8281[05].* CGC/ || #- 16bit (Intel 810 & 815).
+			$card->{identifier} =~ /Rage 128/); #- 16 and 32 bits, prefer 16bit as no DMA.
 
     #- check to use XFree 4.0 or XFree 3.3.
     $card->{use_xf4} = $card->{driver} && !$card->{flags}{unsupported};
@@ -298,7 +300,9 @@ NOTE THIS IS EXPERIMENTAL SUPPORT AND MAY FREEZE YOUR COMPUTER.", $xf3_ver)) . "
 
 
     #- hack for ATI Mach64 card where two options should be used if using Utah-GLX.
-    if ($card->{identifier} =~ /3D Rage Pro AGP/) {
+    if ($card->{identifier} =~ /Rage X[CL]/ ||
+	$card->{identifier} =~ /Rage Mobility (?:P\/M|L) / ||
+	$card->{identifier} =~ /3D Rage (?:LT|Pro)/) {
 	$card->{options_xf3}{no_font_cache} = $card->{Utah_glx};
 	$card->{options_xf3}{no_pixmap_cache} = $card->{Utah_glx};
     }
