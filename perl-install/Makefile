@@ -182,7 +182,7 @@ endif
 
 	for i in fonts keyboards locales-skeleton keymaps; do tar xfj share/$$i.tar.bz2 -C $(DEST); done
 
-	grep ChangeLog CVS/Entries > $(DEST)/usr/share/VERSION
+	grep ChangeLog CVS/Entries > $(STAGE2_DEST)/VERSION
 
 	gzip -9f $(DEST)/usr/share/ldetect-lst/*
 

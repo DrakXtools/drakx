@@ -72,6 +72,7 @@ upload_only:
 	upload $(MEDIA_INFO_DEST) rpmsrate ;\
 	upload $(STAGE2_DEST) '*.clp' ;\
 	upload $(STAGE2_DEST) mdkinst.kernels ;\
+	upload $(STAGE2_DEST) VERSION ;\
 	upload $(EXTRA_INSTALL_DEST)/advertising '' ;\
 	upload $(MISC_DEST) gendistrib ;\
 	upload $(MISC_DEST) mdkinst_stage2_tool ;\
