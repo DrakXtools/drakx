@@ -681,4 +681,20 @@ sub is_a_recent_computer {
     $frequence > 600;
 }
 
+sub suggest_mount_point {
+    my ($e) = @_;
+
+    my $name = $e->{media_type};
+    if (member($name, 'hd', 'fd')) {
+	if (isZipDrive($e)) {
+	    $name = 'zip';
+	} elsif ($name eq 'fd') {
+	    $name = 'floppy';
+	} else {
+	    log::l("set_removable_mntpoints: don't know what to with hd $e->{device}");
+	}
+    }
+    $name;
+}
+
 1;

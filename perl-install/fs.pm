@@ -503,21 +503,10 @@ sub set_removable_mntpoints {
 
     my %names;
     foreach (@{$all_hds->{raw_hds}}) {
-	my $name = $_->{media_type};
-	if (member($name, 'hd', 'fd')) {
-	    if (detect_devices::isZipDrive($_)) {
-		$name = 'zip';
-	    } elsif ($name eq 'fd') {
-		$name = 'floppy';
-	    } else {
-		log::l("set_removable_mntpoints: don't know what to with hd $_->{device}");
-		next;
-	    }
-	}
-	if ($name) {
-	    my $s = ++$names{$name};
-	    $_->{mntpoint} ||= "/mnt/$name" . ($s == 1 ? '' : $s);
-	}
+	my $name = detect_devices::suggest_mount_point($_) or next;
+	
+	my $s = ++$names{$name};
+	$_->{mntpoint} ||= "/mnt/$name" . ($s == 1 ? '' : $s);
     }
 }
 
