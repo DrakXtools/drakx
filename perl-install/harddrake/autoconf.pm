@@ -12,7 +12,7 @@ sub xconf {
     $o->{raw_X} = Xconfig::default::configure();
     
     require Xconfig::main;
-    require do_pkgs_standalone;
+    require do_pkgs;
     Xconfig::main::configure_everything_auto_install($o->{raw_X}, do_pkgs_standalone->new, {}, { allowFB => 1 });
 
     modules::load_category($modules_conf, 'various/agpgart'); 
