@@ -1,3 +1,50 @@
+2001/09/04  fcrozat
+
+	* share/rpmsrate: Add plugins for KDE and Mozilla
+
+2001/09/04  François Pons  <fpons@mandrakesoft.com>
+
+	* install_steps.pm: fix bad vga= which go for some install.
+
+	* pkgs.pm: cleanup to avoid invalid file error.
+
+2001/09/04  Pixel  <pixel@mandrakesoft.com>
+
+	* modules.pm (add_alias): use "above" instead of "post-install"
+
+	* fs.pm: mount ext3 as ext2 during install for speed up
+
+	* partition_table.pm: re-add JFS
+
+	* fsedit.pm, common.pm, bootloader.pm: 
+	  - don't expand symlinks in grub's menu.lst
+	  - better use of /proc/partitions verification
+
+	* detect_devices.pm (getCompaqSmartArray): add yet another location for
+	cpqarray location
+
+2001/09/04  yduret
+
+	* my_gtk.pm: emebedded mode fix
+
+	* interactive_gtk.pm, diskdrake.pm: embedded mode fix
+
+2001/09/03  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* share/po/fr.po: unfuzzy-ise a few things, translate a few things
+
+2001/09/03  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/ko.po: updated Korean file
+
+2001/09/03  Pixel  <pixel@mandrakesoft.com>
+
+	* fs.pm: fix for lvm (non-)creation of devices
+
+2001/09/03  yduret
+
+	* my_gtk.pm, diskdrake.pm: fix Embedded mode
+
 2001/09/03  dam's  <damien@mandrakesoft.com>
 
 	* network/network.pm: added timeout in resolv.conf
