@@ -41,8 +41,8 @@ else
 CFLAGS = -Os -pipe -Wall -Werror -fomit-frame-pointer
 endif
 
-DIETLIBC_INCLUDES = -I$(top_dir)/dietlibc/include -I.
-GLIBC_INCLUDES = -I.
+DIETLIBC_INCLUDES = -I$(top_dir)/dietlibc/include -I. -I$(top_dir)/bzlib
+GLIBC_INCLUDES = -I. -I$(top_dir)/bzlib
 INCLUDES = $($(L)_INCLUDES)
 
 GLIBC_LDFLAGS_STAGE1 = -static
