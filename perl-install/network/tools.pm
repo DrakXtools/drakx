@@ -10,14 +10,18 @@ use MDK::Common::Globals "network", qw($in $prefix $disconnect_file $connect_pro
 @EXPORT_OK = qw($in);
 
 sub write_cnx_script {
-    my ($netc, $type, $up, $down) = @_;
-    $type or output ("$prefix$_",
+    my ($netc, $type, $up, $down, $type2) = @_;
+    if ($type) {
+	$netc->{internet_cnx}{$type}{$_->[0]}=$_->[1] foreach ([$connect_file, $up], [$disconnect_file, $down]);
+	$netc->{internet_cnx}{$type}{type} = $type2;
+    } else {
+	foreach ($connect_file, $disconnect_file) {
+	    output ("$prefix$_",
 '#!/bin/bash
 ' . if_(!$netc->{at_boot}, 'if [ "x$1" == "x--boot_time" ]; then exit; fi
-') . $netc->{internet_cnx}{$netc->{internet_cnx_choice}}{$_}) foreach ($connect_file, $disconnect_file);
-    foreach ([$connect_file, $up], [$disconnect_file, $down]) {
-	$netc->{internet_cnx}{$type}{$_->[0]}=$_->[1];
-	chmod 0755, "$prefix" . $_->[0];
+') . $netc->{internet_cnx}{$netc->{internet_cnx_choice}}{$_});
+	chmod 0755, "$prefix" . $_;
+	}
     }
 }
 

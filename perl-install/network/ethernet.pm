@@ -52,7 +52,7 @@ qq(
 ),
 qq(
 /sbin/ifdown $netc->{NET_DEVICE}
-));
+), $netcnx->{type});
     1;
 }
 
@@ -80,7 +80,7 @@ qq(
 qq(
 /etc/rc.d/init.d/network stop
 /sbin/ifup lo
-));
+), $netcnx->{type});
     }
     $::isStandalone and modules::write_conf($prefix);
     1;

@@ -149,19 +149,19 @@ and copy the mgmt.o in /usr/share/speedtouch'))
 /usr/bin/pptp 10.0.0.138 name $adsl->{login}
 ",
 '/usr/bin/killall pptp pppd
-' ) } elsif ($adsl_type eq 'pppoe') {
+', $netcnx->{type}) } elsif ($adsl_type eq 'pppoe') {
     write_cnx_script($netc, "adsl",
 "/sbin/route del default
 LC_ALL=C LANG=C LANGUAGE=C LC_MESSAGES=C /usr/sbin/adsl-start $netc->{NET_DEVICE} $adsl->{login}
 ",
 '/usr/sbin/adsl-stop
 /usr/bin/killall pppoe pppd
-' ) } elsif ($adsl_type eq 'speedtouch') {
+', $netcnx->{type}) } elsif ($adsl_type eq 'speedtouch') {
     write_cnx_script($netc, 'adsl',
 '/usr/share/speedtouch/speedtouch.sh start
 ',
 '/usr/share/speedtouch/speedtouch.sh stop
-') }
+', $netcnx->{type}) }
 
     $netc->{NET_INTERFACE}='ppp0';
 }

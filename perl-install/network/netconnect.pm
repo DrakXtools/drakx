@@ -223,6 +223,7 @@ ifdown eth0
       $netc->{at_boot} = $in->ask_yesorno(_("Network Configuration Wizard"), _("Do you want to start the connection at boot?"));
     if ($netc->{internet_cnx_choice} ) {
 	write_cnx_script($netc);
+	$netcnx->{type} = $netc->{internet_cnx}{$netc->{internet_cnx_choice}}{type};
     } else {
 	unlink "$prefix/etc/sysconfig/network-scripts/net_cnx_up";
 	unlink "$prefix/etc/sysconfig/network-scripts/net_cnx_down";
@@ -397,7 +398,7 @@ PPPAuthentication=$modem->{auth}
 PPPSpecialCommand=" . ($netcnx->{type} eq 'isdn_external' ? $netcnx->{isdn_external}{special_command} : '' ) . "
 
 ADSLInterfacesList=
-ADSLModem=" .  q(# Obsolete information. Please don't use it.) . "
+ADSLModem=" .  q( # Obsolete information. Please don't use it.) . "
 ADSLType=" . ($netcnx->{type} =~ /adsl/ ? $netcnx->{type} : '') . "
 ADSLProviderDomain=$netc->{DOMAINNAME2}
 ADSLProviderDNS1=$netc->{dnsServer2}

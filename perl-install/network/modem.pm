@@ -24,7 +24,7 @@ q(ifup ppp0
 ),
 q(ifdown ppp0
 killall pppd
-));
+), $netcnx->{type});
     1;
 }
 

@@ -144,7 +144,7 @@ defaultroute
 "/sbin/isdnctrl hangup ippp0
 /sbin/ifdown ippp0
 "  . if_($isdn->{speed} =~ /128/, "service ibod stop
-"));
+"), $netcnx->{type});
     1;
 }
 
