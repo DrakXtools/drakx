@@ -1181,4 +1181,47 @@ sub install {
     $f->($bootloader, $fstab, $hds, $bootloader->{method});
 }
 
+sub update_for_renumbered_partitions {
+    my ($in, $renumbering) = @_;
+
+    my %files = (
+		 lilo => '/etc/lilo.conf',
+		 grub => '/boot/grub/menu.lst',
+		 grub_install => '/boot/grub/install.sh',
+		 );
+
+    my %configs = map {
+	my $f = cat_("$::prefix/$files{$_}");
+	$_ => { orig => $f, new => $f, file => $files{$_} };
+    } keys %files;
+
+    my $grub2dev = read_grub_device_map();
+    my %dev2grub = reverse %$grub2dev;
+
+    foreach (@$renumbering) {
+	my ($old, $new) = @$_;
+	my $old_grub = dev2grub($old, \%dev2grub);
+	my $new_grub = dev2grub($new, \%dev2grub);
+	log::l("renaming $old -> $new  and $old_grub -> $new_grub");
+	foreach (values %configs) {
+	    $_->{new} =~ s/\b$old/$new/g;
+	    $_->{new} =~ s/\Q$old_grub/$new_grub/g;
+	}
+    }
+
+    any { $_->{orig} ne $_->{new} } values %configs or return 1; # no need to update
+
+    $in->ask_okcancel('', N("Your bootloader configuration must be updated because partition has been renumbered")) or return;
+
+    foreach (values %configs) {
+	output("$::prefix/$_->{file}", $_->{new}) if $_->{new} ne $_->{orig};
+    }
+    if ($configs{lilo}{orig} ne $configs{lilo}{new} && detect_bootloader() =~ /LILO/ ||
+	$configs{grub_install}{orig} ne $configs{grub_install}{new} && detect_bootloader() =~ /GRUB/) {
+	$in->ask_warn('', N("The bootloader can't be installed correctly. You have to boot rescue and choose \"%s\"", 
+			    N("Re-install Boot Loader")));
+    }
+    1;
+}
+
 1;

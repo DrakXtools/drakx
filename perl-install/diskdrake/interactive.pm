@@ -113,9 +113,10 @@ struct hd {
   list will_tell_kernel # list of actions to tell to the kernel so that it knows the new partition table
   bool hasBeenDirty     # for undo
   bool rebootNeeded     # happens when a kernel reread failed
-  bool partitionsRenumbered # happens when you
+  list partitionsRenumbered # happens when you
                             # - remove an extended partition which is not the last one
                             # - add an extended partition which is the first extended partition
+  list allPartitionsRenumbered # used to update bootloader configuration
   int bus, id
   
   partition_table_elem primary
@@ -270,6 +271,8 @@ sub Done {
 	    $all_hds->{current_fstab} = $new;
 	    fs::write_fstab($all_hds);
 	}
+	update_bootloader_for_renumbered_partitions($in, $all_hds);
+
 	if (any { $_->{rebootNeeded} } @{$all_hds->{hds}}) {
 	    $in->ask_warn('', N("You need to reboot for the partition table modifications to take place"));
 	    tell_wm_and_reboot();
@@ -1119,6 +1122,8 @@ sub warn_if_renumbered {
     my $l = delete $hd->{partitionsRenumbered};
     return if is_empty_array_ref($l);
 
+    push @{$hd->{allPartitionsRenumbered}}, @$l;
+
     my @l = map { 
 	my ($old, $new) = @$_;
 	N("partition %s is now known as %s", $old, $new) } @$l;
@@ -1278,4 +1283,12 @@ sub tell_wm_and_reboot() {
 	    exec 'reboot';
 	), $wm, $pid;
     }
+}
+
+sub update_bootloader_for_renumbered_partitions {
+    my ($in, $all_hds) = @_;
+    my @renumbering = map { @{$_->{allPartitionsRenumbered} || []} } @{$all_hds->{hds}} or return;
+
+    require bootloader;
+    bootloader::update_for_renumbered_partitions($in, \@renumbering);    
 }
