@@ -4113,12 +4113,13 @@ sub install_foomatic {
     if (!$::testing &&
 	!files_exist(qw(/usr/bin/foomatic-configure 
 			/usr/bin/foomatic-rip
-			/usr/share/foomatic/db/source/driver/ljet4.xml))) {
+			/usr/share/foomatic/db/source/driver/ljet4.xml
+			/usr/share/foomatic/db/source/driver/hpijs.xml))) {
 	my $_w = $in->wait_message(N("Printerdrake"),
 				   N("Installing Foomatic..."));
 	$in->do_pkgs->install('foomatic-db-engine',
 			      'foomatic-filters',
-			      'foomatic-db') 
+			      'foomatic-db', 'foomatic-db-hpijs') 
 	    or do {
 		$in->ask_warn(N("Error"),
 			      N("Could not install %s packages, %s cannot be started!",

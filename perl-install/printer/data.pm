@@ -23,12 +23,25 @@ our $commonpackages = [ [ 'foomatic-db-engine' ],
 
 # Packages which are needed to create and manage local print queues
 our $localqueuepackages = [ [ 'foomatic-filters', 'foomatic-db',
-			      'printer-utils', 'printer-testpages', 'nmap',
-			      'scli' ],
+			      'foomatic-db-hpijs', 'foomatic-db-engine',
+			      'printer-filters', 
+			      'printer-utils', 'printer-testpages', 
+			      'ghostscript', 'hpijs', 'gimpprint-ijs',
+			      'gimpprint-foomatic', 'gimpprint-escputil', 
+			      'postscript-ppds', 'nmap', 'scli' ],
 			    [qw(/usr/bin/foomatic-rip
 				/usr/share/foomatic/db/source/driver/ljet4.xml
-				/usr/bin/escputil
+				/usr/share/foomatic/db/source/driver/hpijs.xml
+				/usr/bin/foomatic-configure
+				/usr/bin/pnm2ppa
+				/usr/bin/getusbprinterid
 				/usr/share/printer-testpages/testprint.ps
+				/usr/bin/gs-common
+				/usr/bin/hpijs
+				/usr/bin/ijsgimpprint
+				/usr/share/foomatic/db/source/driver/gimp-print-ijs.xml
+				/usr/bin/escputil
+				/usr/share/cups/model/postscript.ppd.gz
 				/usr/bin/nmap
 				/usr/bin/scli)] ];
 
@@ -105,12 +118,13 @@ our %spoolers = ('pdq' => {
 		     'boot_spooler' => 'cups',
 		     'service' => 'cups',
 		     'local_queues' => 1,
-		     'packages2add' => [ ['cups', 'net-tools', 'xpp', 'cups-drivers',
+		     'packages2add' => [ ['cups', 'net-tools', 'xpp', 'cups-drivers', 'gimpprint-cups',
 					  $::isInstall ? 'curl' : 'webfetch'],
 					 [ qw(/usr/lib/cups/cgi-bin/printers.cgi
 					      /sbin/ifconfig
 					      /usr/bin/xpp
-					      /usr/share/cups/model/postscript.ppd.gz),
+					      /usr/lib/cups/filter/rastertolxx74 
+					      /usr/lib/cups/filter/rastertoprinter),
 					   $::isInstall ||
 					   !(-x '/usr/bin/wget') ?
 					   '/usr/bin/curl' :
