@@ -155,12 +155,12 @@ foreach my $hw_class (@harddrake::data::tree) {
         eval { $configurator->() };
         log::explanations(qw(cannot run "$configurator": $@)) if $@;
     } elsif (!$no && $res) {
-        foreach my $configurator (@configurator_pool) {
+        foreach my $program (@configurator_pool) {
             if (fork()) {
                 wait();
             } else {
-                exec("$configurator 2>/dev/null") or do {
-                    log::explanations(qw(cannot run "$configurator"));
+                exec("$program 2>/dev/null") or do {
+                    log::explanations(qw(cannot run "$program"));
                     require POSIX;
                     POSIX::_exit();
                 };
