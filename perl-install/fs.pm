@@ -72,7 +72,7 @@ sub read_fstab {
 		};
 
 	if ($dev =~ /^LABEL=/) {
-	    if (my ($e) = grep { $_->{mntpoint} eq $mntpoint } read_fstab('', '/proc/mounts')) {
+	    if (my $e = find { $_->{mntpoint} eq $mntpoint } read_fstab('', '/proc/mounts')) {
 		$h->{device_LABEL} = $dev;
 		$dev = $h->{device} = $e->{device};
 	    }
@@ -112,8 +112,9 @@ sub merge_fstabs {
     my ($loose, $fstab, @l) = @_;
 
     foreach my $p (@$fstab) {
-	my ($p2) = grep { fsedit::is_same_hd($_, $p) } @l or next;
-	@l       = grep { !fsedit::is_same_hd($_, $p) } @l;
+	my ($l1, $l2) = partition { fsedit::is_same_hd($_, $p) } @l;
+	my ($p2) = @$l1 or next;
+	@l = @$l2;
 
 	$p->{mntpoint} = $p2->{mntpoint} if delete $p->{unsafeMntpoint};
 
@@ -536,7 +537,7 @@ sub format_ext2($@) {
     my ($dev, @options) = @_;
     $dev =~ m,(rd|ida|cciss)/, and push @options, qw(-b 4096 -R stride=16); #- For RAID only.
     push @options, qw(-b 1024 -O none) if arch() =~ /alpha/;
-    run_program::raw({ timeout => 60 * 60 }, 'mke2fs', '-F', @options, devices::make($dev)) or die N("%s formatting of %s failed", grep { $_ eq '-j' } @options ? "ext3" : "ext2", $dev);
+    run_program::raw({ timeout => 60 * 60 }, 'mke2fs', '-F', @options, devices::make($dev)) or die N("%s formatting of %s failed", any { $_ eq '-j' } @options ? "ext3" : "ext2", $dev);
 }
 sub format_ext3 {
     my ($dev, @options) = @_;
@@ -596,7 +597,7 @@ sub real_format_part {
     } elsif (isAppleBootstrap($part)) {
         format_hfs($dev, @options, '-l', "bootstrap");
     } elsif (isSwap($part)) {
-	my $check_blocks = grep { /^-c$/ } @options;
+	my $check_blocks = any { /^-c$/ } @options;
         swap::make($dev, $check_blocks);
     } else {
 	die N("I don't know how to format %s in type %s", $part->{device}, type2name($part->{type}));

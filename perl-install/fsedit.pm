@@ -116,7 +116,7 @@ sub raids {
 	my @mdparts = 
 	  map { 
 	      my $mdpart = $devname2part{$_} || { device => $_ };
-	      if (my ($part) = grep { is_same_hd($mdpart, $_) } @parts) {
+	      if (my $part = find { is_same_hd($mdpart, $_) } @parts) {
 		  $part->{raid} = $nb;
 		  delete $part->{mntpoint};
 		  $part;
@@ -147,7 +147,7 @@ sub lvms {
     my @lvms;
     foreach (@pvs) {
 	my $name = lvm::get_vg($_) or next;
-	my ($lvm) = grep { $_->{VG_name} eq $name } @lvms;
+	my $lvm = find { $_->{VG_name} eq $name } @lvms;
 	if (!$lvm) {
 	    $lvm = new lvm($name);
 	    lvm::update_size($lvm);
@@ -269,11 +269,11 @@ sub read_proc_partitions {
     my @parts = grep { $_->{dev} =~ /\d$/ } @all;
     my @disks = grep { $_->{dev} !~ /\d$/ } @all;
 
-    my $devfs_like = grep { $_->{dev} =~ m|/disc$| } @disks;
+    my $devfs_like = any { $_->{dev} =~ m|/disc$| } @disks;
 
     my %devfs2normal = map {
 	my (undef, $major, $minor) = devices::entry($_->{device});
-	my ($disk) = grep { $_->{major} == $major && $_->{minor} == $minor } @disks;
+	my $disk = find { $_->{major} == $major && $_->{minor} == $minor } @disks;
 	$disk->{dev} => $_->{device};
     } @$hds;
 
@@ -305,7 +305,7 @@ sub all_hds {
 }
 sub part2hd {
     my ($part, $all_hds) = @_;
-    my ($hd) = grep { $part->{rootDevice} eq ($_->{device} || $_->{VG_name}) } all_hds($all_hds);
+    my $hd = find { $part->{rootDevice} eq ($_->{device} || $_->{VG_name}) } all_hds($all_hds);
     $hd;
 }
 
@@ -400,7 +400,7 @@ sub file2part {
 
     $file = $keep_simple_symlinks ? common::expand_symlinks_but_simple("$::prefix$file") : expand_symlinks("$::prefix$file");
     unless ($file =~ s/^$::prefix//) {
-	my ($part) = grep { loopback::carryRootLoopback($_) } @$fstab or die;
+	my $part = find { loopback::carryRootLoopback($_) } @$fstab or die;
 	log::l("found $part->{mntpoint}");
 	$file =~ s|/initrd/loopfs|$part->{mntpoint}|;
     }
@@ -449,14 +449,14 @@ sub computeSize {
     }
     my $size = int min($max, $best->{size} + $free_space * ($tot_ratios && $best->{ratio} / $tot_ratios));
     #- verify other entry can fill the hole
-    if (grep { $_->{size} < $max - $size } @L) { $size } else { $max }
+    any { $_->{size} < $max - $size } @L ? $size : $max;
 }
 
 sub suggest_part {
     my ($part, $all_hds, $suggestions) = @_;
     $suggestions ||= $suggestions{server} || $suggestions{simple};
 
-    my $has_swap = grep { isSwap($_) } get_all_fstab($all_hds);
+    my $has_swap = any { isSwap($_) } get_all_fstab($all_hds);
 
     my ($best) =
       grep { !$_->{maxsize} || $part->{size} <= $_->{maxsize} }
@@ -483,7 +483,7 @@ sub suggestions_mntpoint {
 
 sub mntpoint2part {
     my ($mntpoint, $fstab) = @_;
-    first(grep { $mntpoint eq $_->{mntpoint} } @$fstab);
+    find { $mntpoint eq $_->{mntpoint} } @$fstab;
 }
 sub has_mntpoint {
     my ($mntpoint, $all_hds) = @_;
@@ -589,7 +589,7 @@ sub auto_allocate {
 
     if ($before == listlength(fsedit::get_all_fstab($all_hds))) {
 	# find out why auto_allocate failed
-	if (grep { !has_mntpoint($_->{mntpoint}, $all_hds) } @$suggestions_) {
+	if (any { !has_mntpoint($_->{mntpoint}, $all_hds) } @$suggestions_) {
 	    die N("Not enough free space for auto-allocating");
 	} else {
 	    die N("Nothing to do");

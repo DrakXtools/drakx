@@ -203,7 +203,7 @@ my $ip_regexp = qr/^(\d{1,3})\.(\d{1,3})\.(\d{1,3})\.(\d{1,3})$/;
 sub is_ip {
     my ($ip) = @_;
     my @fields = $ip =~ $ip_regexp or return;
-    return if grep { $_ < 0 || $_ > 255 } @fields;
+    every { 0 <= $_ && $_ <= 255 } @fields or return;
     @fields;
 }
 sub is_domain_name {
@@ -449,10 +449,10 @@ sub configureNetwork2 {
     write_interface_conf("$etc/sysconfig/network-scripts/ifcfg-$_->{DEVICE}", $_, $prefix) foreach grep { $_->{DEVICE} } values %$intf;
     add2hosts("$etc/hosts", $netc->{HOSTNAME}, map { $_->{IPADDR} } values %$intf);
 
-    if (grep { $_->{BOOTPROTO} =~ /^(dhcp)$/ } values %$intf) {
+    if (any { $_->{BOOTPROTO} =~ /^(dhcp)$/ } values %$intf) {
 	$in->do_pkgs->install($netc->{dhcp_client} ? $netc->{dhcp_client} : 'dhcpcd');
     }
-    if (grep { $_->{BOOTPROTO} =~ /^(pump|bootp)$/ } values %$intf) {
+    if (any { $_->{BOOTPROTO} =~ /^(pump|bootp)$/ } values %$intf) {
 	$in->do_pkgs->install('pump');
     }
     #-res_init();		#- reinit the resolver so DNS changes take affect

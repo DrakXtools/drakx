@@ -133,7 +133,7 @@ sub configure_automatic {
 
     if ($monitor->{EISA_ID}) {
 	log::l("EISA_ID: $monitor->{EISA_ID}");
-	if (my ($mon) = grep { lc($_->{EISA_ID}) eq $monitor->{EISA_ID} } @$monitors) {
+	if (my $mon = find { lc($_->{EISA_ID}) eq $monitor->{EISA_ID} } @$monitors) {
 	    add2hash($monitor, $mon);
 	    log::l("EISA_ID corresponds to: $monitor->{ModelName}");
 	} elsif (!$monitor->{HorizSync} || !$monitor->{VertRefresh}) {
@@ -141,7 +141,7 @@ sub configure_automatic {
 	    delete @$monitor{'VendorName', 'ModelName', 'EISA_ID'};	    
 	}
     } else {
-	if (my ($mon) = grep { $_->{VendorName} eq $monitor->{VendorName} && $_->{ModelName} eq $monitor->{ModelName} } @$monitors) {
+	if (my $mon = find { $_->{VendorName} eq $monitor->{VendorName} && $_->{ModelName} eq $monitor->{ModelName} } @$monitors) {
 	    put_in_hash($monitor, $mon);
 	}
     }

@@ -294,7 +294,7 @@ sub preConfigureTimezone {
 
     $o->{timezone}{timezone} ||= timezone::bestTimezone(lang::lang2text($o->{lang}));
 
-    my $utc = !grep { isFat($_) || isNT($_) } @{$o->{fstab}};
+    my $utc = every { !isFat($_) && !isNT($_) } @{$o->{fstab}};
     my $ntp = timezone::ntp_server($o->{prefix});
     add2hash_($o->{timezone}, { UTC => $utc, ntp => $ntp });
 }
@@ -381,7 +381,7 @@ sub setDefaultPackages {
     $o->{compssUsersChoice}{HIGH_SECURITY} = 1 if $o->{security} > 3;
     $o->{compssUsersChoice}{BIGMEM} = 1 if !$::oem && availableRamMB() > 800 && arch() !~ /ia64/;
     $o->{compssUsersChoice}{SMP} = 1 if detect_devices::hasSMP();
-    $o->{compssUsersChoice}{CDCOM} = 1 if grep { $_->{descr} =~ /commercial/i } values %{$o->{packages}{mediums}};
+    $o->{compssUsersChoice}{CDCOM} = 1 if any { $_->{descr} =~ /commercial/i } values %{$o->{packages}{mediums}};
     $o->{compssUsersChoice}{'3D'} = 1 if 
       detect_devices::matching_desc('Matrox.* G[245][05]0') ||
       detect_devices::matching_desc('Rage X[CL]') ||
@@ -940,9 +940,9 @@ sub guess_mount_point {
 
     my $handle = any::inspect($part, $prefix) or return;
     my $d = $handle->{dir};
-    my ($mnt) = grep { -e "$d/$l{$_}" } keys %l;
+    my $mnt = find { -e "$d/$l{$_}" } keys %l;
     $mnt ||= (stat("$d/.bashrc"))[4] ? '/root' : '/home/user' . ++$$user if -e "$d/.bashrc";
-    $mnt ||= (grep { -d $_ && (stat($_))[4] >= 500 && -e "$_/.bashrc" } glob_($d)) ? '/home' : '';
+    $mnt ||= (any { -d $_ && (stat($_))[4] >= 500 && -e "$_/.bashrc" } glob_($d)) ? '/home' : '';
     ($mnt, $handle);
 }
 
@@ -1104,7 +1104,7 @@ sub check_prog {
     my @l = $f !~ m|^/| ?
         map { "$_/$f" } split(":", $ENV{PATH}) :
 	$f;
-    return if grep { -x $_ } @l;
+    return if any { -x $_ } @l;
 
     common::usingRamdisk() or log::l("ERROR: check_prog can't find the program $f and we're not using ramdisk"), return;
 

@@ -62,7 +62,7 @@ sub configure_lan {
     configureNetwork($netc, $intf, $first_time) or return;
     configureNetwork2($in, $prefix, $netc, $intf);
     $netc->{NETWORKING} = "yes";
-    if ($netc->{GATEWAY} || grep { $_->{BOOTPROTO} eq 'dhcp' } values %$intf) {
+    if ($netc->{GATEWAY} || any { $_->{BOOTPROTO} eq 'dhcp' } values %$intf) {
 	$netcnx->{type} = 'lan';
 	$netcnx->{NET_DEVICE} = $netc->{NET_DEVICE} = '';
 	$netcnx->{NET_INTERFACE} = 'lan'; #$netc->{NET_INTERFACE};

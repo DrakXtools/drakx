@@ -64,7 +64,7 @@ sub partition_with_diskdrake {
 For this, create a partition (or click on an existing one).
 Then choose action ``Mount point'' and set it to `/'"), 1) or return;
 	}
-	if (!grep { isSwap($_) } @fstab) {
+	if (!any { isSwap($_) } @fstab) {
 	    $o->ask_warn('', N("You must have a swap partition")), $ok = 0 if !$::expert;
 	    $ok &&= $o->ask_okcancel('', N("You don't have a swap partition.\n\nContinue anyway?"));
 	}
@@ -231,7 +231,7 @@ sub partitionWizard {
 	if ($solutions{loopback}) {
 	    %solutions = (loopback => $solutions{loopback});
 	} else {
-	    $o->ask_warn('', N("You don't have enough free space on your Windows partition")) if grep { isFat($_) } fsedit::get_all_fstab($o->{all_hds});
+	    $o->ask_warn('', N("You don't have enough free space on your Windows partition")) if any { isFat($_) } fsedit::get_all_fstab($o->{all_hds});
 	}
     }
 

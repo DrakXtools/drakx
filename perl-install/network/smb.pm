@@ -70,7 +70,7 @@ sub find_servers {
 	    my ($group, $name) = split(' ', lc($_));
 
 	    # already done
-	    next if grep { $group eq $_->{group} } values %servers;
+	    next if any { $group eq $_->{group} } values %servers;
 
 	    $l{$name} = $group;
 	}

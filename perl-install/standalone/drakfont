@@ -243,7 +243,7 @@ sub search_windows_font {
                         return 0;
                     }
                 }
-                !$replace && grep(/$i/, @installed_fonts) and next;
+                !$replace && any { /$i/ } @installed_fonts and next;
                 grep (/$i$/, @font_list)
                   or push @font_list, "$win_dir/$_->[1]/fonts/$i";
             }
@@ -285,8 +285,7 @@ sub search_dir_font {
                     if (is_a_font($i)) {
                         push @font_list_tmp, "$i";
                         foreach my $i (@font_list_tmp) {
-                            !$replace && grep(/$i/, @installed_fonts)
-                              and next;
+                            !$replace && any { /$i/ } @installed_fonts and next;
                             grep /$i/, @font_list or push @font_list, "$fn/$i";
                         }
                     }
@@ -294,7 +293,7 @@ sub search_dir_font {
             }
             else {
                 if (is_a_font($fn)) {
-                    !$replace && grep(/$fn/, @installed_fonts) and next;
+                    !$replace && any { /$fn/ } @installed_fonts and next;
                     !grep /$fn/, (@installed_fonts) and push @font_list, "$fn";
                 }
             }

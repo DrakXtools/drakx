@@ -62,7 +62,7 @@ sub checkval { $_[0] && $_[0] ne ' '  ? '*' : ' ' }
 sub ask_fromW {
     my ($o, $common, $l, $l2) = @_;
 
-    if (grep { $_->{type} ne 'button' } @$l or @$l < 5) {
+    if ((any { $_->{type} ne 'button' } @$l) || @$l < 5) {
 	&ask_fromW_real;
     } else {
 	my $r;
@@ -220,7 +220,7 @@ sub ask_fromW_real {
 	my $r = $form->RunForm;
 	$canceled = $cancel && $$r == $$cancel;
 
-	if (my ($button) = grep { $$r == ${$_->{w}} } @widgets) {
+	if (my $button = find { $$r == ${$_->{w}} } @widgets) {
 	    $get_all->();
 	    my $v = $button->{e}{clicked_may_quit}();
 	    $form->FormDestroy;

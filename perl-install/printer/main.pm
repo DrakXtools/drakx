@@ -611,7 +611,7 @@ sub set_cups_special_options {
     # If nothing is already configured, set text file borders of half an inch
     # and decrease the font size a little bit, so nothing of the text gets
     # cut off by unprintable borders.
-    if (!grep { /$queue.*\s(page-(top|bottom|left|right)|lpi|cpi)=/ } @lpoptions) {
+    if (!any { /$queue.*\s(page-(top|bottom|left|right)|lpi|cpi)=/ } @lpoptions) {
 	run_program::rooted($::prefix, "lpoptions",
 			    "-p", $queue,
 			    "-o", "page-top=36", "-o", "page-bottom=36",
@@ -619,7 +619,7 @@ sub set_cups_special_options {
 			    "-o", "cpi=12", "-o", "lpi=7", "-o", "wrap");
     }
     # Let images fill the whole page by default
-    if (!grep { /$queue.*\s(scaling|natural-scaling|ppi)=/ } @lpoptions) {
+    if (!any { /$queue.*\s(scaling|natural-scaling|ppi)=/ } @lpoptions) {
 	run_program::rooted($::prefix, "lpoptions",
 			    "-p", $queue,
 			    "-o", "scaling=100");

@@ -118,9 +118,8 @@ sub get_screens {
 sub get_default_screen {
     my ($raw_X) = @_;
     my @l = get_screens($raw_X);
-    my @m = grep { $_->{Identifier} && val($_->{Identifier}) eq 'screen1' || 
-		   $_->{Driver} && val($_->{Driver}) =~ /svga|accel/ } @l;
-    first(@m ? @m : @l);
+    (find { $_->{Identifier} && val($_->{Identifier}) eq 'screen1' || 
+	      $_->{Driver} && val($_->{Driver}) =~ /svga|accel/ } @l) || $l[0];
 }
 sub set_screens {
     my ($raw_X, @screens) = @_;
@@ -172,7 +171,7 @@ sub get_resolution {
     $Screen ||= $raw_X->get_default_screen or return {};
 
     my $depth = val($Screen->{DefaultColorDepth});
-    my ($Display) = grep { !$depth || val($_->{l}{Depth}) eq $depth } @{$Screen->{Display} || []} or return {};
+    my $Display = find { !$depth || val($_->{l}{Depth}) eq $depth } @{$Screen->{Display} || []} or return {};
     val($Display->{l}{Modes}) =~ /(\d+)x(\d+)/ or return {};
     { X => $1, Y => $2, Depth => val($Display->{l}{Depth}) };
 }

@@ -163,7 +163,7 @@ sub choices {
     #- finding it in @resolutions (well @matching)
     #- (that way, we check it exists, and we get field "bios" for fbdev)
     my @default_resolutions = sort { $b->{Y} <=> $a->{Y} } grep { $_->{Depth} eq $Depth } @matching;
-    my $default_resolution = first(grep { $resolution_wanted->{Y} eq $_->{Y} } @default_resolutions) || $default_resolutions[0];
+    my $default_resolution = (find { $resolution_wanted->{Y} eq $_->{Y} } @default_resolutions) || $default_resolutions[0];
 
     $default_resolution, @resolutions;
 }
@@ -243,7 +243,7 @@ sub choose_gtk {
 	    $chosen_y_res = $_[1];
 	} else {
 	    #- take one
-	    my ($one) = grep { $_->{X} eq $chosen_x_res } @resolutions;
+	    my $one = find { $_->{X} eq $chosen_x_res } @resolutions;
 	    $chosen_y_res = $one->{Y};
 	}
 	my $image = $monitor_images_x_res{$chosen_x_res} or internal_error("no image for resolution $chosen_x_res");
@@ -303,9 +303,9 @@ sub choose_gtk {
     $x_res_combo->entry->set_text($chosen_x_res . "x" . $chosen_y_res);
     $W->main or return;
 
-    first(grep { $_->{X} == $chosen_x_res && 
-		 $_->{Y} == $chosen_y_res && 
-		 $_->{Depth} == $chosen_Depth } @resolutions);
+    find { $_->{X} == $chosen_x_res && 
+	   $_->{Y} == $chosen_y_res && 
+	   $_->{Depth} == $chosen_Depth } @resolutions);
 }
 
 1;

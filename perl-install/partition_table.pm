@@ -565,7 +565,7 @@ sub write {
 	    $_->{local_start} = $_->{start}; 
 	    $_->{active} ||= 0;
 	}
-	$l[0]{active} = 0x80 if !grep { $_->{active} } @l;
+	$l[0]{active} = 0x80 if !any { $_->{active} } @l;
     }
 
     #- last chance for verification, this make sure if an error is detected,

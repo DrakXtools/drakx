@@ -285,7 +285,7 @@ sub choosePackagesTree {
 					foreach my $p (@{$packages->{depslist}}) {
 					    !$limit_to_medium || pkgs::packageMedium($packages, $p) == $limit_to_medium or next;
 					    my @flags = $p->rflags;
-					    next if !($p->rate && grep { grep { !/^!/ && $fl{$_} } split('\|\|') } @flags);
+					    next if !($p->rate && any { any { !/^!/ && $fl{$_} } split('\|\|') } @flags);
 					    $p->rate >= 3 ?
 					      push(@firstchoice, $p->name) :
 						push(@others,    $p->name);

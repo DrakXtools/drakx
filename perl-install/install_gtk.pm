@@ -19,7 +19,7 @@ my (@background1, @background2);
 sub load_rc {
     my ($name) = @_;
 
-    if (my ($f) = grep { -r $_ } map { "$_/$name.rc" } ("share", $ENV{SHARE_PATH}, dirname(__FILE__))) {
+    if (my $f = find { -r $_ } map { "$_/$name.rc" } ("share", $ENV{SHARE_PATH}, dirname(__FILE__))) {
 	Gtk2::Rc->parse($f);
 	foreach (cat_($f)) {
 	    if (/style\s+"background"/ .. /^\s*$/) {

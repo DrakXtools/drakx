@@ -174,7 +174,7 @@ sub inactivate_and_dirty {
 
 sub is_active {
     my ($dev) = @_;
-    grep { /^$dev / } cat_("/proc/mdstat");
+    cat_("/proc/mdstat") =~ /^$dev /m;
 }
 
 sub inactivate_all() { run_program::run("raidstop", devices::make("md$_")) foreach 0..7 }

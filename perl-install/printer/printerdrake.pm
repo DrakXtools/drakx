@@ -2882,9 +2882,7 @@ sub main {
 			    $cursorpos = 
 				$printer->{configured}{$printer->{DEFAULT}}{queuedata}{menuentry} . N(" (Default)");
 			} elsif ($printer->{SPOOLER} eq "cups") {
-			    ($cursorpos) = 
-				grep { /!$printer->{DEFAULT}:[^!]*$/ }
-			    printer::cups::get_formatted_remote_queues($printer);
+			    $cursorpos = find { /!$printer->{DEFAULT}:[^!]*$/ } printer::cups::get_formatted_remote_queues($printer);
 			}
 		    }
 		    # Generate the list of available printers

@@ -54,10 +54,9 @@ my @all_servers =
 
 sub port2server {
     my ($port) = @_;
-    foreach (@all_servers) {
-	return $_ if grep { $port eq $_ } split ' ', $_->{ports};
-    }
-    undef;
+    find {
+	any { $port eq $_ } split(' ', $_->{ports});
+    } @all_servers;
 }
 
 sub check_ports_syntax {
@@ -95,7 +94,7 @@ sub default_from_pkgs {
     my @pkgs = $in->do_pkgs->are_installed(map { split ' ', $_->{pkg} } @all_servers);
     [ grep {
 	my $s = $_;
-	grep { member($_, @pkgs) } split ' ', $s->{pkg};
+	any { member($_, @pkgs) } (split ' ', $s->{pkg});
     } @all_servers ];
 }
 

@@ -113,7 +113,7 @@ sub get_sys_cdrom_info {
 	    @drives_order = map {
 		s/^sr/scd/;
 		my $dev = $_;
-		first(grep { $_->{device} eq $dev } @drives);
+		find { $_->{device} eq $dev } @drives;
 	    } @l;
 	} else {
 	    my $capacity;
@@ -160,7 +160,7 @@ sub get_usb_storage_info {
     @informed or return;
 
     foreach my $usb (usb_probe()) {
-	if (my ($e) = grep { $_->{usb_vendor} == $usb->{vendor} && $_->{usb_id} == $usb->{id} } @informed) {
+	if (my $e = find { $_->{usb_vendor} == $usb->{vendor} && $_->{usb_id} == $usb->{id} } @informed) {
 	    $e->{"usb_$_"} = $usb->{$_} foreach keys %$usb;
 	}
     }
@@ -731,7 +731,7 @@ sub raidAutoStartRaidtab {
     #- (choosing any inactive md)
     raid::inactivate_all();
     foreach (@parts) {
-	my ($nb) = grep { !raid::is_active("md$_") } 0..7;
+	my $nb = find { !raid::is_active("md$_") } 0..7;
 	output("/tmp/raidtab", "raiddev /dev/md$nb\n  device " . devices::make($_->{device}) . "\n");
 	run_program::run('raidstart', '-c', "/tmp/raidtab", devices::make("md$nb"));
     }

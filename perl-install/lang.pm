@@ -428,7 +428,7 @@ sub lang2country {
     $country ||= $valid_country->(lc($1)) if $lang =~ /([A-Z]+)/;
     $country ||= $valid_country->(lc($1)) if lang2LANGUAGE($lang) =~ /([A-Z]+)/;
     $country ||= $valid_country->(substr($lang, 0, 2));
-    $country ||= first(grep { $valid_country->($_) } map { substr($_, 0, 2) } split(':', lang2LANGUAGE($lang)));
+    $country ||= find { $valid_country->($_) } map { substr($_, 0, 2) } split(':', lang2LANGUAGE($lang));
     $country || 'C';
 }
 
@@ -441,10 +441,10 @@ sub country2lang {
     
     my ($lang1, $lang2);
     $lang1 ||= $country2lang{$country};
-    $lang1 ||= first(grep { /^$country/    } list());
-    $lang1 ||= first(grep { /_$uc_country/ } list());
-    $lang2 ||= first(grep { int grep { /^$country/    } split(':', lang2LANGUAGE($_)) } list());
-    $lang2 ||= first(grep { int grep { /_$uc_country/ } split(':', lang2LANGUAGE($_)) } list());
+    $lang1 ||= find { /^$country/    } list();
+    $lang1 ||= find { /_$uc_country/ } list();
+    $lang2 ||= find { int grep { /^$country/    } split(':', lang2LANGUAGE($_)) } list();
+    $lang2 ||= find { int grep { /_$uc_country/ } split(':', lang2LANGUAGE($_)) } list();
     ($lang1 =~ /UTF-8/ && $lang2 !~ /UTF-8/ ? $lang2 || $lang1 : $lang1 || $lang2) || $default || 'en_US';
 }
 
@@ -466,13 +466,13 @@ sub lang2kde_lang {
 
     my $r;
     $r ||= $valid_lang->(lang2LANG($lang));
-    $r ||= first(grep { $valid_lang->($_) } split(':', lang2LANGUAGE($lang)));
+    $r ||= find { $valid_lang->($_) } split(':', lang2LANGUAGE($lang));
     $r || $default || 'C';
 }
 
 sub kde_lang2lang {
     my ($klang, $default) = @_;
-    first(grep { /^$klang/ } list()) || $default || 'en_US';
+    (find { /^$klang/ } list()) || $default || 'en_US';
 }
 
 sub kde_lang_country2lang {
@@ -581,8 +581,8 @@ sub set {
 
     if ($lang && !exists $languages{$lang}) {
 	#- try to find the best lang
-	my ($lang2) = grep { /^\Q$lang/ } list(); #- $lang is not precise enough, choose the first complete
-	my ($lang3) = grep { $lang =~ /^\Q$_/ } list(); #- $lang is too precise, choose the first substring matching
+	my $lang2 = find { /^\Q$lang/ } list(); #- $lang is not precise enough, choose the first complete
+	my $lang3 = find { $lang =~ /^\Q$_/ } list(); #- $lang is too precise, choose the first substring matching
 	log::l("lang::set: fixing $lang with ", $lang2 || $lang3);
 	$lang = $lang2 || $lang3;
     }

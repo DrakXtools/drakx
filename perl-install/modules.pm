@@ -56,7 +56,7 @@ sub load {
     } else {
 	load_raw(map { [ $_ => $options{$_} ] } @l);
     }
-    sleep 2 if grep { /^(usb-storage|mousedev|printer)$/ } @l;
+    sleep 2 if any { /^(usb-storage|mousedev|printer)$/ } @l;
 
     if ($network_module) {
 	add_alias($_, $network_module) foreach difference2([ detect_devices::getNet() ], \@network_devices);
@@ -256,7 +256,7 @@ sub write_conf {
     }
     my @l;
     push @l, 'scsi_hostadapter' if !is_empty_array_ref($conf{scsi_hostadapter}{probeall});
-    push @l, 'bttv' if grep { $_->{driver} eq 'bttv' } detect_devices::probeall();
+    push @l, 'bttv' if any { $_->{driver} eq 'bttv' } detect_devices::probeall();
     append_to_etc_modules($prefix, @l);
 }
 

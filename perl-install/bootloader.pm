@@ -842,7 +842,7 @@ sub write_lilo_conf {
 	print F "message=/boot/message" if arch() !~ /ia64/;
 	print F "menu-scheme=wb:bw:wb:bw" if arch() !~ /ia64/;
 
-	print F "ignore-table" if grep { $_->{unsafe} && $_->{table} } @{$bootloader->{entries}};
+	print F "ignore-table" if any { $_->{unsafe} && $_->{table} } @{$bootloader->{entries}};
 
 	while (my ($dev, $bios) = each %{$bootloader->{bios}}) {
 	    print F "disk=$dev bios=$bios";
@@ -1051,7 +1051,7 @@ sub lnx4win_file {
 sub install {
     my ($bootloader, $fstab, $hds) = @_;
 
-    if (my ($p) = grep { $bootloader->{boot} eq "/dev/$_->{device}" } @$fstab) {
+    if (my $p = find { $bootloader->{boot} eq "/dev/$_->{device}" } @$fstab) {
 	die N("You can't install the bootloader on a %s partition\n", partition_table::type2fs($p))
 	  if isThisFs('xfs', $p);
     }

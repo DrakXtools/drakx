@@ -186,7 +186,7 @@ sub doPartitionDisksAfter {
     }
 
     cat_("/proc/mounts") =~ m|(\S+)\s+/tmp/image nfs| &&
-      !grep { $_->{mntpoint} eq "/mnt/nfs" } @{$o->{all_hds}{nfss}} and
+      !any { $_->{mntpoint} eq "/mnt/nfs" } @{$o->{all_hds}{nfss}} and
 	push @{$o->{all_hds}{nfss}}, { type => 'nfs', mntpoint => "/mnt/nfs", device => $1, options => "noauto,ro,nosuid,soft,rsize=8192,wsize=8192" };
 }
 
@@ -383,7 +383,7 @@ sub afterInstallPackages($) {
     die N("Some important packages didn't get installed properly.
 Either your cdrom drive or your cdrom is defective.
 Check the cdrom on an installed computer using \"rpm -qpl Mandrake/RPMS/*.rpm\"
-") if grep { m|read failed: Input/output error| } cat_("$o->{prefix}/root/drakx/install.log");
+") if any { m|read failed: Input/output error| } cat_("$o->{prefix}/root/drakx/install.log");
 
     if (arch() !~ /^sparc/) { #- TODO restore it as may be needed for sparc
 	-x "$o->{prefix}/usr/bin/dumpkeys" or $::testing or die 
@@ -848,7 +848,7 @@ sub setupBootloaderBefore {
 					 );
 
 	#- propose the default fb mode for kernel fb, if aurora or bootsplash is installed.
-	my $need_fb = grep {
+	my $need_fb = any {
 	    my $p = pkgs::packageByName($o->{packages}, $_);
 	    $p && $p->flag_installed;
 	} 'Aurora', 'bootsplash';

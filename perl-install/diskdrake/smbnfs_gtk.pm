@@ -119,7 +119,7 @@ sub find_fstab_entry {
 
     my $fs_entry = $kind->to_fstab_entry($e);
 
-    if (my ($fs_entry_) = grep { $fs_entry->{device} eq $_->{device} } @{$kind->{val}}) {
+    if (my $fs_entry_ = find { $fs_entry->{device} eq $_->{device} } @{$kind->{val}}) {
 	$fs_entry_;
     } elsif ($add_or_not) {
 	push @{$kind->{val}}, $fs_entry;

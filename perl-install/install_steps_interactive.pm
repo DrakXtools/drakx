@@ -289,7 +289,7 @@ sub choosePartitionsToFormat {
 	       } @$fstab;
     $_->{toFormat} = 1 foreach grep { isSwap($_) && !$::expert } @$fstab;
 
-    return if @l == 0 || !$::expert && 0 == grep { ! $_->{toFormat} } @l;
+    return if @l == 0 || !$::expert && every { $_->{toFormat} } @l;
 
     #- keep it temporary until the guy has accepted
     $_->{toFormatTmp} = $_->{toFormat} || $_->{toFormatUnsure} foreach @l;
@@ -469,7 +469,7 @@ sub chooseGroups {
 	int $total_size;
     };
     my %val = map {
-	$_ => ! grep { ! $o->{compssUsersChoice}{$_} } @{$compssUsers->{$_}{flags}}
+	$_ => every { $o->{compssUsersChoice}{$_} } @{$compssUsers->{$_}{flags}}
     } @groups;
 
 #    @groups = grep { $size{$_} = round_down($size{$_} / sqr(1024), 10) } @groups; #- don't display the empty or small one (eg: because all packages are below $min_level)
@@ -505,9 +505,9 @@ sub chooseGroups {
     #- do not try to deselect package (by default no groups are selected).
     $o->{isUpgrade} or $unselect_all and install_any::unselectMostPackages($o);
     #- if no group have been chosen, ask for using base system only, or no X, or normal.
-    if (!$o->{isUpgrade} && !grep { $val{$_} } keys %val) {
+    if (!$o->{isUpgrade} && !any { $_ } values %val) {
 	my $docs = !$o->{excludedocs};	
-	my $minimal = !grep { $_ } values %{$o->{compssUsersChoice}};
+	my $minimal = !any { $_ } values %{$o->{compssUsersChoice}};
 
 	$o->ask_from(N("Type of install"), 
 		     N("You haven't selected any group of packages.

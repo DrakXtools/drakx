@@ -84,8 +84,8 @@ sub from_raw_X {
     my ($xfree3_server) = readlink("$::prefix/etc/X11/X") =~ /XF86_(.*)/;
 
     my $card = {
-	use_UTAH_GLX => int(grep { /glx/ } $raw_X->{xfree3}->get_modules),
-	use_DRI_GLX  => int(grep { /dri/ } $raw_X->{xfree4}->get_modules),
+	use_UTAH_GLX => any { /glx/ } $raw_X->{xfree3}->get_modules,
+	use_DRI_GLX  => any { /dri/ } $raw_X->{xfree4}->get_modules),
 	server => $xfree3_server,
 	prefer_xf3 => $xfree3_server && !$force_xf4,
 	%$device,
@@ -284,7 +284,7 @@ sub configure {
     $card->{prog} = install_server($card, $options, $do_pkgs);
     
     if ($card->{needVideoRam} && !$card->{VideoRam}) {
-	$card->{VideoRam} = first(grep { $_ <= $options->{VideoRam_probed} } reverse ikeys %VideoRams) || 4096;
+	$card->{VideoRam} = (find { $_ <= $options->{VideoRam_probed} } reverse ikeys %VideoRams) || 4096;
 	$in->ask_from('', N("Select the memory size of your graphics card"),
 		      [ { val => \$card->{VideoRam},
 			  type => 'list',
@@ -361,7 +361,7 @@ sub multi_head_choices {
     my @choices;
 
     my $has_multi_head = @cards > 1 || $cards[0]{MULTI_HEAD} > 1;
-    my $disable_multi_head = grep { 
+    my $disable_multi_head = any { 
 	$_->{Driver} or log::l("found card $_->{description} not supported by XF4, disabling multi-head support");
 	!$_->{Driver};
     } @cards;

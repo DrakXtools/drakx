@@ -798,9 +798,8 @@ sub RemoveFromLVM {
     my ($_in, $_hd, $part, $all_hds) = @_;
     my $lvms = $all_hds->{lvms};
     isPartOfLVM($part) or die;
-    my ($lvm) = grep { $_->{VG_name} eq $part->{lvm} } @$lvms;
-    lvm::vg_destroy($lvm);
-    @$lvms = grep { $_ != $lvm } @$lvms;
+    (my $lvm, $lvms) = partition { $_->{VG_name} eq $part->{lvm} } @$lvms;
+    lvm::vg_destroy($lvm->[0]);
 }
 sub ModifyRAID { 
     my ($in, $_hd, $part, $all_hds) = @_;
@@ -920,7 +919,7 @@ sub Options {
 
 sub is_part_existing {
     my ($part, $all_hds) = @_;
-    $part && grep { fsedit::is_same_part($part, $_) } fsedit::get_all_fstab_and_holes($all_hds);
+    $part && any { fsedit::is_same_part($part, $_) } fsedit::get_all_fstab_and_holes($all_hds);
 }
 
 sub modifyRAID {

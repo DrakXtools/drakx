@@ -486,7 +486,7 @@ sub read_rpmsrate {
 	}
 	if ($data) {
 	    # has packages on same line
-	    my ($rate) = grep { /^\d$/ } @m or die sprintf qq(missing rate for "%s" at line %d (flags are %s)\n), $data, $line_nb, join('&&', @m);
+	    my $rate = find { /^\d$/ } @m or die sprintf qq(missing rate for "%s" at line %d (flags are %s)\n), $data, $line_nb, join('&&', @m);
 	    foreach (split ' ', $data) {
 		if ($packages) {
 		    my $p = packageByName($packages, $_) or next;
@@ -555,7 +555,7 @@ sub saveCompssUsers {
 	$flat .= $compssUsers->{$_}{verbatim};
 	foreach my $p (@{$packages->{depslist}}) {
 	    my @flags = $p->rflags;
-	    if ($p->rate && grep { grep { !/^!/ && $fl{$_} } split('\|\|') } @flags) {
+	    if ($p->rate && any { any { !/^!/ && $fl{$_} } split('\|\|') } @flags) {
 		$flat .= sprintf "\t%d %s\n", $p->rate, $p->name;
 	    }
 	}
@@ -571,7 +571,7 @@ sub setSelectedFromCompssList {
 	my @flags = $p->rflags;
 	next if 
 	  !$p->rate || $p->rate < $min_level || 
-	  grep { !grep { /^!(.*)/ ? !$compssUsersChoice->{$1} : $compssUsersChoice->{$_} } split('\|\|') } @flags;
+	  any { !any { /^!(.*)/ ? !$compssUsersChoice->{$1} : $compssUsersChoice->{$_} } split('\|\|') } @flags;
 
 	#- determine the packages that will be selected when
 	#- selecting $p. the packages are not selected.

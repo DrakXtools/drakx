@@ -167,7 +167,7 @@ sub setupBootloader__general {
     ($b->{method}, my $method_choices) = bootloader::method_choices($fstab);
     my $profiles = bootloader::has_profiles($b);
     my $memsize = bootloader::get_append($b, 'mem');
-    my $prev_clean_tmp = my $clean_tmp = grep { $_->{mntpoint} eq '/tmp' } @{$all_hds->{special} ||= []};
+    my $prev_clean_tmp = my $clean_tmp = any { $_->{mntpoint} eq '/tmp' } @{$all_hds->{special} ||= []};
     my $prev_boot = $b->{boot};
 
     $b->{password2} ||= $b->{password} ||= '';
