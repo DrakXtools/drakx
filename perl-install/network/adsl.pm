@@ -174,7 +174,7 @@ defaultroute)
 	output("$::prefix/etc/ppp/peers/adsl",
 qq(noauth
 noipdefault
-pty $modems{$adsl_device}{server}
+pty $modems{$adsl_device}{server}{$adsl_type}
 $modems{$adsl_device}{ppp_options}
 kdebug 1
 nopcomp
