@@ -16,8 +16,8 @@ computer."),
 
 addUser => 
 N_("GNU/Linux is a multi-user system, meaning each user can have their own
-preferences, their own files and so on. You can read the ``User Guide'' to
-learn more about multi-user systems. But unlike \"root\", which is the
+preferences, their own files and so on. You can read the ``Starter Guide''
+to learn more about multi-user systems. But unlike \"root\", which is the
 system administrator, the users you add at this point will not be
 authorized to change anything except their own files and their own
 configuration, protecting the system from unintentional or malicious
@@ -411,7 +411,7 @@ dangerous choice and you can very easily lose all your data. That's why
 this option is really only recommended if you have done something like this
 before and have some experience. For more instructions on how to use the
 DiskDrake utility, refer to the ``Managing Your Partitions '' section in
-the `` ``Starter Guide''''."),
+the ``Starter Guide''."),
 
 exitInstall => 
 N_("There you are. Installation is now complete and your GNU/Linux system is
@@ -490,7 +490,7 @@ for the machine. As a rule of thumb, the security level should be set
 higher if the machine will contain crucial data, or if it will be a machine
 directly exposed to the Internet. The trade-off of a higher security level
 is generally obtained at the expense of ease of use. Refer to the \"msec\"
-chapter of the ``Reference Manual'' to get more information about the
+chapter of the ``Command Line Manual'' to get more information about the
 meaning of these levels.
 
 If you do not know what to choose, keep the default option."),
