@@ -128,7 +128,6 @@ printer::printerdrake::init($printer, $security, $in, undef);
 
 # GTK2 main window
 
-my $error = 0;
 my $stringsearch = '';
 
 sub HelpSystem() { exec("drakhelp --id printerdrake") unless fork() };
@@ -255,7 +254,7 @@ my @toolbwg = map {
   );
 my ($tbadd, $tbdefault, $tbedit, $tbdel, $_tbref, $_tbconfig) = @toolbwg;
 GrayDelEdit();
-foreach ($tbadd, $buttorcheck{add}) { defined $_ and $_->set_sensitive($printer->{SPOOLER} ne "rcups")};
+foreach ($tbadd, $buttorcheck{add}) { defined $_ and $_->set_sensitive($printer->{SPOOLER} ne "rcups") };
 $localtree->parent->parent->set_sensitive($printer->{SPOOLER} ne "rcups");
 $nb->set_current_page(1) if $printer->{SPOOLER} eq "rcups";
 
@@ -338,8 +337,7 @@ sub RefreshRemotePrintersFull {
 	next LOOP if defined($printer->{configured}{$p->{queuename}});
 	# Apply string search to all fields, not only the printer name
 	my $queue = $p->{queuename};
-	my $server = ($p->{ipp} ?
-		      $p->{ipp} : $printer->{remote_cups_server});
+	my $server = $p->{ipp} || $printer->{remote_cups_server};
 	my $description = $p->{description};
 	my $location = $p->{location};
 	my $searchstr = "$queue|$server|$description|$location";
@@ -352,8 +350,7 @@ sub RefreshRemotePrintersFull {
 	my $state = ($printer->{SPOOLER} !~ /cups/ ? N("Unknown") :
 		     (printer::cups::queue_enabled($queue) ? N("Enabled") :
 		      N("Disabled")));
-	my $server = ($p->{ipp} ?
-		      $p->{ipp} : $printer->{remote_cups_server});
+	my $server = $p->{ipp} || $printer->{remote_cups_server};
 	my $description = $p->{description};
 	my $location = $p->{location};
 	my $default = ($queue eq $printer->{DEFAULT} ? "X" : "");
@@ -420,7 +417,7 @@ sub Delete() {
 sub ConfigCUPS() {
     deactivate_mainwindow();
     printer::printerdrake::config_cups($printer, $security, $in, undef);
-    foreach ($tbadd, $buttorcheck{add}) { defined $_ and $_->set_sensitive($printer->{SPOOLER} ne "rcups")};
+    foreach ($tbadd, $buttorcheck{add}) { defined $_ and $_->set_sensitive($printer->{SPOOLER} ne "rcups") };
     $localtree->parent->parent->set_sensitive($printer->{SPOOLER} ne "rcups");
     $nb->set_current_page(1) if $printer->{SPOOLER} eq "rcups";
     Refresh($stringsearch);
@@ -430,7 +427,6 @@ sub ConfigCUPS() {
 sub deactivate_mainwindow() {
     $us->{wnd}{rwindow}->set_sensitive(0);
     gtkset_mousecursor_wait();
-    $error = 0;
 }
 
 sub activate_mainwindow() {
