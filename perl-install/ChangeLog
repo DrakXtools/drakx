@@ -1,3 +1,85 @@
+2002/03/11  dam's  <damien@mandrakesoft.com>
+
+	* Makefile.config: added drakproxy
+
+	* standalone/drakxtv: added embedded mode
+
+2002/03/11  François Pons  <fpons@mandrakesoft.com>
+
+	* install_steps_gtk.pm: for updates, make tree as flat instead in order to
+	see all packages.
+
+2002/03/11  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* share/rpmsrate: webmin: 3
+
+	* standalone/drakxtv: 
+	  - install xawtv when necessary instead of
+	telling people to use urpmi (titi sucks)
+	  - prints out a message when no tv card
+	has been detected
+
+	* share/po/fr.po: small ortograf
+
+2002/03/11  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/fr.po, share/po/it.po, share/po/eu.po: merged with new strings
+	from manuals
+
+	* share/po/DrakX.pot: merged with new strings from manuals
+	updated GErman file
+
+	* share/po/de.po: updated GErman file
+
+	* share/po/es.po: updated Spanish
+
+2002/03/11  Pixel  <pixel@mandrakesoft.com>
+
+	* mouse.pm (fullname2mouse): workaround when "1 Button" is not found
+
+	* install_steps.pm, install2.pm: 
+	  - default security level now set in miscellaneousBefore
+	  - default security level is 3 in meta_class server
+
+	* install_any.pm: 
+	  - fix the setting of compssUsersChoices in auto_install when it is
+	empty
+	  - set the default compssUsersChoices adapted to the server meta_class
+
+	* share/rpmsrate: remove phpgroupware from OFFICE (since it appeas twice,
+	the rate is 4, and it requires apache, and ...)
+
+	* Makefile: upload the various compssUsers* (esp. compssUsers.server)
+
+	* install_steps_gtk.pm: 
+	  - remove the hack for not displaying Utilities in classic meta_class
+	  - new compssUsers groups for the server meta_class
+
+	* share/compssUsers: remove "Utilities" here instead of removing it
+	hackily in install_steps_gtk
+
+	* share/compssUsers.server: fix the path=Utilities for the Utilities
+	section
+
+2002/03/11  Till Kamppeter <till@mandrakesoft.com>
+
+	* printerdrake.pm: Small text fix.
+	Security fix: Give a warning that SMB passwords can easily be revealed
+	by normal users when printing on a Windows-hosted printer is set up.
+
+	* detect_devices.pm: Reverted parts of the last change, they broke in
+	non-DevFS environments (e. g. during installation).
+
+2002/03/11  warly
+
+	* share/rpmsrate: add bwbserver_linux in rpmsate for BeeWeb server
+
+	* share/compssUsers.server: remove ICEWM choice
+
+2002/03/11  Yves Duret <yduret@mandrakesoft.com>
+
+	* tools/cvslog2changelog.pl: added yduret entry in user.
+
 2002/03/11  François Pons  <fpons@mandrakesoft.com>
 
 	* Xconfigurator.pm: add Rage Mobility as bad card for XF4 (was already bad
