@@ -130,22 +130,18 @@ void discovered_device(enum driver_type type,
 	if (type == SCSI_ADAPTERS) {
 		int wait_msg = 0;
 		enum insmod_return failed;
-		if (IS_AUTOMATIC) {
-			wait_message("Loading driver for SCSI adapter:\n \n%s", description);
-			wait_msg = 1;
-		} else
-			stg1_info_message("About to load driver for SCSI adapter:\n \n%s", description);
+		wait_message("Loading driver for SCSI adapter:\n \n%s", description);
 		failed = my_insmod(driver, SCSI_ADAPTERS, NULL, 1);
-		if (wait_msg)
-			remove_wait_message();
+		remove_wait_message();
 		warning_insmod_failed(failed);
 	}
 #endif
 #ifndef DISABLE_NETWORK
 	if (type == NETWORK_DEVICES) {
-		stg1_info_message("About to load driver for network device:\n \n%s", description);
+		wait_message("Loading driver for network device:\n \n%s", description);
 		prepare_intf_descr(description);
 		warning_insmod_failed(my_insmod(driver, NETWORK_DEVICES, NULL, 1));
+		remove_wait_message();
 		if (intf_descr_for_discover) /* for modules providing more than one net intf */
 			net_discovered_interface(NULL);
 	}
