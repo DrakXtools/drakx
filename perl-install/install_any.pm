@@ -505,6 +505,7 @@ sub selectSupplMedia {
 		    and $global_ftp_prefix = [ $3, $4, $1, $2 ]; #- for getFile
 	    } else {
 		$url = $o->ask_from_entry('', N("URL of the mirror?")) or return 'error';
+		$url =~ s!/+\z!!;
 	    }
 	    useMedium($medium_name);
 	    require http if $suppl_method eq 'http';
