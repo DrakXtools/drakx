@@ -299,7 +299,7 @@ sub configureX {
     modules::write_conf($o->{prefix});
 
     require pkgs;
-    installStepsCall($o, $auto, 'configureX', $clicked) if pkgs::packageByName($o->{packages}, 'XFree86')->flag_installed && !$o->{X}{disabled} || $clicked || $::testing;
+    installStepsCall($o, $auto, 'configureX') if pkgs::packageByName($o->{packages}, 'XFree86')->flag_installed && !$o->{X}{disabled} || $::testing;
 }
 #------------------------------------------------------------------------------
 sub exitInstall {
