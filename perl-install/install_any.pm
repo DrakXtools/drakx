@@ -607,27 +607,37 @@ sub loadO {
     bless $o, ref $O;
 }
 
-sub generate_ks_cfg {
+sub generate_automatic_stage1_params {
     my ($o) = @_;
     
     return if $o->{method} =~ /hd|cdrom/;
 
-    my $ks;
-    if ($o->{method} =~ /ftp|http/) {
-	$ks .= "url --url $ENV{URLPREFIX}\n";
+    my $ks = "automatic=";
+    
+    if ($o->{method} =~ /hd/) {
+	$ks .= "method:disk,";
+    } else {
+	$ks .= "method:" . $o->{method} . ",";
+    }
+
+    if ($o->{method} =~ /http/) {
+	"$ENV{URLPREFIX}" =~ m|http://(.*)/(.*)| or die;
+	$ks .= "server:$1,directory:$2,";
+    } elsif ($o->{method} =~ /ftp/) {
+	$ks .= "server:$ENV{HOST},directory:$ENV{PREFIX},user:$ENV{LOGIN},pass:$ENV{PASSWORD},";
     } elsif ($o->{method} =~ /nfs/) {
 	cat_("/proc/mounts") =~ m|(\S+):(\S+)\s+/tmp/image nfs| or die;
-	$ks .= "nfs --server $1 --dir $2\n";
+	$ks .= "server:$1,directory:$2,";
     }
+
     my ($intf) = values %{$o->{intf}};
-    if ($intf->{BOOTPROTO} =~ /^(dhcp|bootp)$/) {
-	$ks .= "network --bootproto $intf->{BOOTPROTO}\n";
+    if ($intf->{BOOTPROTO} =~ /dhcp/) {
+	$ks .= "network:dhcp,";
     } else {
 	require network;
-	my %l = (ip => $intf->{IPADDR}, netmask => $intf->{NETMASK}, gateway => $o->{netc}{GATEWAY});
-	$ks .= "network " . join(" ", map_each { $::b && "--$::a $::b" } %l);
-	$ks .= " --nameserver $_" foreach network::dnsServers($o->{netc});
-	$ks .= "\n";
+	$ks .= "ip:$intf->{IPADDR},netmask:$intf->{NETMASK},gateway:$o->{netc}{GATEWAY},";
+	my @dnss = network::dnsServers($o->{netc});
+	$ks .= "dns:$dnss[0]," if @dnss;
     }
     $ks;
 }
