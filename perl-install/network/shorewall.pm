@@ -129,9 +129,8 @@ sub write {
 		    (map { [ 'loc', $_, 'detect' ] } @{$conf->{loc_interface} || []}),
 		   );
     set_config_file('policy',
-		    if_($conf->{loc_interface}[0], [ 'loc', 'net', 'ACCEPT' ]),
+		    if_($conf->{loc_interface}[0], [ 'loc', 'net', 'ACCEPT' ], [ 'fw', 'loc', 'ACCEPT' ]),
 		    [ 'fw', 'net', 'ACCEPT' ],
-		    [ 'fw', 'loc', 'ACCEPT' ],
 		    [ 'net', 'all', 'DROP', 'info' ],
 		    [ 'all', 'all', 'REJECT', 'info' ],
 		   );
