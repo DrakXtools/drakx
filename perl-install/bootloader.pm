@@ -380,6 +380,12 @@ sub sanitize_ver {
 	my $s = $1;
 	$chtaim =~ m|^(\d+)\.(\d+)\.(\d+)\.(\d+)mdk|;
 	$return = "$1$2$3-$4$s";
+    } elsif ($chaloch =~ m|mdk| and $chtaim =~ /pre\d+/
+	     and $arba =~ m|(\d+)mdk(${mdksub})?|) { #new mdk with mdksub
+	my $r = $1;
+	my $s = $2 ? $2 : "";
+	$chtaim =~ m|^(\d+)\.(\d+)\.(\d+)pre(\d+)|;
+	$return = "$1$2$3-p$4$r$s";
     } elsif ($chtaim =~ m|mdk$|) { #new mdk
 	$chtaim =~ m|^(\d+)\.(\d+)\.(\d+)\.(\d+)mdk$|;
 	$return = "$1$2$3-$4";
