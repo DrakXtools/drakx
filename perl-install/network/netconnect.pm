@@ -62,7 +62,7 @@ sub detect {
     modules::load_category('network/main|gigabit|usb');
     require network::ethernet;
     network::ethernet->import;
-    my @all_cards = conf_network_card_backend(undef, undef, undef, undef, undef, undef);
+    my @all_cards = conf_network_card_backend();
     map { $auto_detect->{lan}{$_->[0]} = $_->[1] } @all_cards if !$net_install;
 
     my $adsl = {};
@@ -330,7 +330,7 @@ sub save_conf {
     modules::load_category('network/main|gigabit|usb');
     require network::ethernet;
     network::ethernet->import;
-    my @_all_cards = conf_network_card_backend($netc, $intf, undef, undef, undef, undef);
+    my @_all_cards = conf_network_card_backend($netc, $intf);
 
     $intf = { %$intf };
     my $str;

@@ -67,7 +67,7 @@ import ugtk2 qw(:helpers :wrappers :create);
 my $expert_mode = 0;
 network::netconnect::read_net_conf('', $netcnx, $netc);
 modules::load_category('net');
-my @all_cards = network::ethernet::conf_network_card_backend($netc, $intf, undef, undef, undef, undef);
+my @all_cards = network::ethernet::conf_network_card_backend($netc, $intf);
 network::netconnect::load_conf($netcnx, $netc, $intf);
 
 my $window1 = ugtk2->new('drakconnect');
