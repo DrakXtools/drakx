@@ -399,7 +399,7 @@ sub xfree_and_glx_choices {
     my $xf4 = if_($card->{Driver}, { text => _("XFree %s", $xf4_ver), code => sub { $card->{prefer_xf3} = 0 } });
 
     #- no XFree3 with multi-head
-    my @choices = grep {$_} ($card->{cards} ? $xf4 : $card->{prefer_xf3} ? ($xf3, $xf4) : ($xf4, $xf3));
+    my @choices = grep { $_ } ($card->{cards} ? $xf4 : $card->{prefer_xf3} ? ($xf3, $xf4) : ($xf4, $xf3));
 
     #- no GLX with Xinerama
     return @choices if $card->{Xinerama};
