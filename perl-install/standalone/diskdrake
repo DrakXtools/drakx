@@ -95,7 +95,7 @@ if ($type eq 'list-hd') {
 	my $mntpoint = detect_devices::suggest_mount_point($raw_hd);
 	$raw_hd->{mntpoint} ||= find { !fsedit::has_mntpoint($_, $all_hds) } map { "/mnt/$mntpoint$_" } '', 2 .. 10;
 
-	my $useSupermount = 1;
+	my $useSupermount = 'magicdev';
 	require security::level;
 	require lang;
 	fs::set_default_options($raw_hd, 
