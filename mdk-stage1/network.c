@@ -901,7 +901,6 @@ enum return_type ftp_prepare(void)
 	char * questions_auto[] = { "server", "directory", "user", "pass", NULL };
 	static char ** answers = NULL;
 	enum return_type results;
-	char modules_cz[500];
 	struct utsname kernel_uname;
 	char *http_proxy_host, *http_proxy_port;
 
@@ -953,6 +952,8 @@ enum return_type ftp_prepare(void)
 		if (use_http_proxy) {
 		        log_message("FTP: don't connect to %s directly, will use proxy", answers[0]);
 		} else {
+			char *kernels_list_file, *kernels_list;
+
 		        log_message("FTP: trying to connect to %s", answers[0]);
 			ftp_serv_response = ftp_open_connection(answers[0], answers[2], answers[3], "");
                         if (ftp_serv_response < 0) {
@@ -966,13 +967,25 @@ enum return_type ftp_prepare(void)
                                 results = RETURN_BACK;
                                 continue;
                         }
+			kernels_list_file = asprintf_("%s/" RAMDISK_LOCATION_REL "mdkinst.kernels", location_full);
 
-			strcpy(modules_cz, location_full);
-			strcat(modules_cz, "/" LIVE_LOCATION_REL "lib/modules.cz-");
-			strcat(modules_cz, kernel_uname.release);
+			log_message("FTP: trying to retrieve %s", kernels_list_file);
+		        fd = ftp_start_download(ftp_serv_response, kernels_list_file, &size);
 
-			log_message("checking presence of modules.cz file : \"%s\"", modules_cz);
-			if (ftp_get_filesize(ftp_serv_response, modules_cz) <= 0) {
+			if (fd < 0) {
+				char *msg = str_ftp_error(fd);
+				log_message("FTP: error get %d for remote file %s", fd, kernels_list_file);
+				stg1_error_message("Error: %s.", msg ? msg : "couldn't retrieve list of kernel versions");
+				results = RETURN_BACK;
+				continue;
+			}
+
+			kernels_list = alloca(size);
+			size = read(fd, kernels_list, size);
+			close(fd);
+			ftp_end_data_command(ftp_serv_response);
+			
+			if (!strstr(kernels_list, asprintf_("%s\n", kernel_uname.release))) {
 				stg1_info_message("The modules for this kernel (%s) can't be found on this mirror, please update your boot disk", kernel_uname.release);
 				results = RETURN_BACK;
 				continue;
