@@ -43,7 +43,7 @@ struct module_descr modules_descriptions[] = {
 	{ "sim710",    "NCR53C710 family" },
 
 	/* description of usb drivers that have not very explicit names */
-	{ "usbnet",    "Netchip/ or Prolific USB-USB Bridge" },
+	{ "usbnet",    "Netchip or Prolific USB-USB Bridge" },
 	{ "pegasus",   "ADMtek AN986 (USB Ethernet chipset)" },
 	{ "kaweth",    "KL5KUSB101 (USB Ethernet chipset)" },
 };
