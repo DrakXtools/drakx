@@ -600,6 +600,11 @@ sub addUser($) {
 sub createBootdisk {
     my ($o, $first_time) = @_;
     my @l = detect_devices::floppies();
+    my %l = (
+	     'fd0'  => __("First drive"),
+	     'fd1'  => __("Second drive"),
+	     'Skip' => __("Skip"),
+	    );
 
     if ($first_time || @l == 1) {
 	$o->ask_yesorno('',
@@ -614,9 +619,9 @@ failures. Would you like to create a bootdisk for your system?"),
     } else {
 	@l or die _("Sorry, no floppy drive available");
 
-	$o->{mkbootdisk} = $o->ask_from_list_('',
-					      _("Choose the floppy drive you want to use to make the bootdisk"),
-					      [ @l, __("Skip") ], $o->{mkbootdisk});
+	$o->{mkbootdisk} = ${{reverse %l}}{$o->ask_from_list_('',
+							      _("Choose the floppy drive you want to use to make the bootdisk"),
+							      [ @l{@l, "Skip"} ], $o->{mkbootdisk})};
 	return $o->{mkbootdisk} = '' if $o->{mkbootdisk} eq 'Skip';
     }
 
@@ -743,7 +748,7 @@ _("Default") => { val => \$default, type => 'bool' },
 			    $name ne $old_name && $b->{entries}{$name} and $o->ask_warn('', _("A entry %s already exists", $name)), return 1;
 			   }
 		)) {
-	    $b->{default} = $old_default ^ $default ? $default && $e->{label} : $b->{default};
+	    $b->{default} = $old_default || $default ? $default && $e->{label} : $b->{default};
 	    
 	    delete $b->{entries}{$old_name};
 	    $b->{entries}{$name} = $e;

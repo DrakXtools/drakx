@@ -82,7 +82,7 @@ name and directory should be used for this queue?"),
 				  {
 				      $printer->{SPOOLDIR} = "$printer::spooldir/$printer->{QUEUE}" unless $_[0];
 				  },
-				 );
+				 ) or return; #- cancel
     }
     copy_printer_params($printer->{configured}{$printer->{QUEUE}}, $printer); #- get default parameters from existing queue.
 
