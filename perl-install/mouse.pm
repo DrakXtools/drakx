@@ -68,6 +68,7 @@ sub read($) { getVarsFromSh $_[0]; }
 
 sub write($;$) {
     my ($mouse, $prefix) = @_;
+    local $mouse->{FULLNAME} = qq("$mouse->{FULLNAME}");
     setVarsInSh("$prefix/etc/sysconfig/mouse", $mouse, qw(MOUSETYPE XMOUSETYPE FULLNAME XEMU3));
     symlink $mouse->{device}, "$prefix/dev/mouse" or log::l("creating $prefix/dev/mouse symlink failed");
 }

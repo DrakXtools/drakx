@@ -24,16 +24,19 @@ sub Package {
 
 sub select($$;$) {
     my ($packages, $p, $base) = @_;
+    my ($n, $v);
     $p->{base} ||= $base;
     $p->{selected} = -1; #- selected by user
-    my @l = @{$p->{deps} || die "missing deps file"};
-    while (@l) {
-	my $n = shift @l;
+    my %l; @l{@{$p->{deps} || die "missing deps file"}} = ();
+    while (do { while (($n, $v) = each %l) { last if !defined $v; } $n }) {
+	$l{$n} = 1;
 	$n =~ /|/ and $n = first(split '\|', $n); #-TODO better handling of choice
 	my $i = Package($packages, $n) or next;
 	$i->{base} ||= $base;
 	$i->{deps} or log::l("missing deps for $n");
-	push @l, @{$i->{deps} || []} unless $i->{selected};
+	unless ($i->{selected}) {
+	    $l{$_} ||= 0 foreach @{$i->{deps} || []};
+	}
 	$i->{selected}++ unless $i->{selected} == -1;
     }
 }
@@ -61,21 +64,21 @@ sub unselect($$;$) {
     }
     return if defined $size && $size <= 0;
 
-    #- garbage collect for circular dependencies
-    my $changed = 0; #1;
-    while ($changed) {
-	$changed = 0;
-      NEXT: foreach my $p (grep { $_->{selected} > 0 && !$_->{base} } values %$packages) {
-	    my $set = set_new(@{$p->{provides}});
-	    foreach (@{$set->{list}}) {
-		my $q = Package($packages, $_);
-		$q->{selected} == -1 || $q->{base} and next NEXT;
-		set_add($set, @{$q->{provides}}) if $q->{selected};
-	    }
-	    $p->{selected} = 0;
-	    $changed = 1;
-	}
-    }
+#    #- garbage collect for circular dependencies
+#    my $changed = 0; #1;
+#    while ($changed) {
+#	 $changed = 0;
+#      NEXT: foreach my $p (grep { $_->{selected} > 0 && !$_->{base} } values %$packages) {
+#	     my $set = set_new(@{$p->{provides}});
+#	     foreach (@{$set->{list}}) {
+#		 my $q = Package($packages, $_);
+#		 $q->{selected} == -1 || $q->{base} and next NEXT;
+#		 set_add($set, @{$q->{provides}}) if $q->{selected};
+#	     }
+#	     $p->{selected} = 0;
+#	     $changed = 1;
+#	 }
+#    }
 }
 sub toggle($$) {
     my ($packages, $p) = @_;
@@ -261,8 +264,8 @@ sub getHeader($) {
     $p->{header};
 }
 
-sub install {
-    my ($prefix, $toInstall, $force) = @_;
+sub install($$) {
+    my ($prefix, $toInstall) = @_;
 
     return if $::g_auto_install;
 
@@ -302,7 +305,7 @@ sub install {
     my $callbackProgress = sub { log::ld("progressing installation ", $_[0], "/", $_[1]) };
 
     if (my @probs = c::rpmRunTransactions($trans, $callbackOpen, $callbackClose, 
-					  $callbackStart, $callbackProgress, $force)) {
+					  $callbackStart, $callbackProgress, 0)) {
 	my %parts;
 	@probs = reverse grep {
 	    if (s/(installing package) .* (needs (?:.*) on the (.*) filesystem)/$1 $2/) {

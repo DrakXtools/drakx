@@ -145,7 +145,7 @@ sub beforeInstallPackages {
 sub installPackages($$) {
     my ($o, $packages) = @_;
     my $toInstall = [ grep { $_->{selected} && !$_->{installed} } values %$packages ];
-    pkgs::install($o->{prefix}, $toInstall, 0);
+    pkgs::install($o->{prefix}, $toInstall);
 }
 
 sub afterInstallPackages($) {
