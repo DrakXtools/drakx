@@ -4278,11 +4278,11 @@ sub button_box_adv() {
     $button_box_tmp->destroy;
     gtkpack($button_box,
 		$button_box_tmp = gtkpack_(new Gtk2::HButtonBox,
-			0, gtksignal_connect(Gtk2::Button->new(N("Help")), clicked => sub { 
-				adv_help();
-			}),
 			0, gtksignal_connect(Gtk2::Button->new(N("Cancel")), clicked => sub { 
 				interactive_mode_box();
+			}),
+			0, gtksignal_connect(Gtk2::Button->new(N("Help")), clicked => sub { 
+				adv_help();
 			}),
 			1, new Gtk2::HBox(0, 1),	
 			0, gtksignal_connect(Gtk2::Button->new(N("Previous")), clicked => sub { 
@@ -4305,12 +4305,12 @@ sub button_box_restore_main() {
 
     gtkpack($button_box,
 	    $button_box_tmp = gtkpack_(gtkpack_(new Gtk2::HButtonBox, 
-			0, gtksignal_connect(Gtk2::Button->new(N("Help")), clicked => sub {
-				adv_help();
-			}),
 			0, gtksignal_connect(Gtk2::Button->new(N("Cancel")), clicked => sub { 
 				destroy_widget(); 
 				interactive_mode_box();
+			}),
+			0, gtksignal_connect(Gtk2::Button->new(N("Help")), clicked => sub {
+				adv_help();
 			}),
 			1, new Gtk2::HBox(0, 1),	
 			0, gtksignal_connect(Gtk2::Button->new(N("Previous")), clicked => sub { 
@@ -4330,12 +4330,12 @@ sub button_box_file_restore() {
 
     gtkpack($button_box,
 	    $button_box_tmp = gtkpack_(gtkpack_(new Gtk2::HButtonBox, 
-			0, gtksignal_connect(Gtk2::Button->new(N("Help")), clicked => sub {
-				adv_help();
-			}),
 			0, gtksignal_connect(Gtk2::Button->new(N("Cancel")), clicked => sub { 
 				destroy_widget(); 
 				restore_box();
+			}),
+			0, gtksignal_connect(Gtk2::Button->new(N("Help")), clicked => sub {
+				adv_help();
 			}),
 			1, new Gtk2::HBox(0, 1),	
 			),
@@ -4363,12 +4363,12 @@ sub button_box_backup_end() {
 
     gtkpack($button_box,
 	    $button_box_tmp = gtkpack_(new Gtk2::HButtonBox,
-			0, gtksignal_connect(Gtk2::Button->new(N("Help")), clicked => sub { 
-				adv_help() 
-			}),
 			0, gtksignal_connect(Gtk2::Button->new(N("Cancel")), clicked => sub { 
 				destroy_widget(); 
 				interactive_mode_box() 
+			}),
+			0, gtksignal_connect(Gtk2::Button->new(N("Help")), clicked => sub { 
+				adv_help() 
 			}),
 			1, new Gtk2::HBox(0, 1),	
 			0, gtksignal_connect(Gtk2::Button->new(N("Previous")), clicked => sub { 
@@ -4389,12 +4389,12 @@ sub button_box_wizard_end() {
 
     gtkpack($button_box,
 		$button_box_tmp = gtkpack_(new Gtk2::HButtonBox,
-			0, gtksignal_connect(Gtk2::Button->new(N("Help")), clicked => sub { 
-				adv_help();
-			}),
 			0, gtksignal_connect(Gtk2::Button->new(N("Cancel")), clicked => sub { 
 				destroy_widget();
 				interactive_mode_box();
+			}),
+			0, gtksignal_connect(Gtk2::Button->new(N("Help")), clicked => sub { 
+				adv_help();
 			}),
 			1, new Gtk2::HBox(0, 1),	
 			0, gtksignal_connect(Gtk2::Button->new(N("Previous")), clicked => sub { 
@@ -4415,12 +4415,12 @@ sub button_box_restore_end() {
 
     gtkpack($button_box,
 	    $button_box_tmp = gtkpack_(new Gtk2::HButtonBox,
-			0, gtksignal_connect(Gtk2::Button->new(N("Help")), clicked => sub { 
-				adv_help();
-			}),
 			0, gtksignal_connect(Gtk2::Button->new(N("Cancel")), clicked => sub { 
 				destroy_widget();
 				interactive_mode_box();
+			}),
+			0, gtksignal_connect(Gtk2::Button->new(N("Help")), clicked => sub { 
+				adv_help();
 			}),
 			1, new Gtk2::HBox(0, 1),	
 			0, gtksignal_connect(Gtk2::Button->new(N("Previous")), clicked => sub { 
@@ -4467,43 +4467,18 @@ sub button_box_restore_pbs_end() {
 	);
 }
 
-sub button_box_build_backup() {
-    $button_box_tmp->destroy;
-
-	gtkpack($button_box,
-		$button_box_tmp = gtkpack_(new Gtk2::HButtonBox,
-			1, gtksignal_connect(Gtk2::Button->new(N("Help")), clicked => sub {
-				adv_help(); 
-			}),
-			1, gtksignal_connect(Gtk2::Button->new(N("Cancel")), clicked => sub { 
-				destroy_widget(); 
-				interactive_mode_box();
-			}),
-			1, new Gtk2::HBox(0, 0),
-			0, gtksignal_connect(Gtk2::Button->new(N("Previous")), clicked => sub { 
-				destroy_widget();
-				$previous_widget->();
-			}),
-			1, gtksignal_connect(Gtk2::Button->new(N("Next")), clicked => sub {
-				destroy_widget();
-				$next_widget->();
-			}),
-		),
-	);
-}
-
 sub button_box_restore() {
 
     $button_box_tmp->destroy;
 
     gtkpack($button_box,
 	    $button_box_tmp = gtkpack_(new Gtk2::HButtonBox,
-			1, gtksignal_connect(Gtk2::Button->new(N("Help")), clicked => sub {
-				adv_help();
-			}),
 			1, gtksignal_connect(Gtk2::Button->new(N("Cancel")), clicked => sub { 
 				destroy_widget(); 
 				interactive_mode_box();  
+			}),
+			1, gtksignal_connect(Gtk2::Button->new(N("Help")), clicked => sub {
+				adv_help();
 			}),
 			1, new Gtk2::HBox(0, 0),
 			0, gtksignal_connect(Gtk2::Button->new(N("Previous")), clicked => sub { 
@@ -4527,13 +4502,13 @@ sub button_box_find_media {
 
     gtkpack($button_box,
 	    $button_box_tmp = gtkpack_(new Gtk2::HButtonBox,
-			1, gtksignal_connect(Gtk2::Button->new(N("Help")), clicked => sub {
-				$central_widget = \$box2; 
-				adv_help();
-			}),
 			1, gtksignal_connect(Gtk2::Button->new(N("Cancel")), clicked => sub { 
 				$central_widget = \$box2;
 				interactive_mode_box();  
+			}),
+			1, gtksignal_connect(Gtk2::Button->new(N("Help")), clicked => sub {
+				$central_widget = \$box2; 
+				adv_help();
 			}),
 			1, new Gtk2::HBox(0, 0),
 			0, gtksignal_connect(Gtk2::Button->new(N("Previous")), clicked => sub {
@@ -4552,12 +4527,12 @@ sub button_box_wizard() {
 
     gtkpack($button_box,
 	    $button_box_tmp = gtkpack_(new Gtk2::HButtonBox,
-			1, gtksignal_connect(Gtk2::Button->new(N("Help")), clicked => sub {
-				adv_help() 
-			}),
 			1, gtksignal_connect(Gtk2::Button->new(N("Cancel")), clicked => sub { 
 				destroy_widget(); 
 				interactive_mode_box() 
+			}),
+			1, gtksignal_connect(Gtk2::Button->new(N("Help")), clicked => sub {
+				adv_help() 
 			}),
 			1, new Gtk2::HBox(0, 0),
 			0, gtksignal_connect(Gtk2::Button->new($previous_widget ? N("Previous") : N("Ok")), clicked => sub { 
