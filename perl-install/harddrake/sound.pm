@@ -279,8 +279,8 @@ The current driver for your \"%s\" sound card is \"%s\" ", $card, $driver)),
                        { label => N("Driver:"), val => \$driver, list => [ category2modules("multimedia/sound") ], type => 'combo', default => $driver, sort =>1, separator => '|' },
                       ]
                      )) {
-        
         do_switch($old_driver, $driver, $index);
+        goto end;
     }
 }
 
@@ -288,7 +288,7 @@ sub get_any_driver_entry {
     my ($in, $driver, $device, $index) = @_;
     {
         val => N("Let me pick any driver"), disabled => sub {},
-        clicked => sub { &choose_any_driver($in, $driver, $device->{description}, $index); goto end }
+        clicked => sub { &choose_any_driver($in, $driver, $device->{description}, $index); }
     }
 }
 
