@@ -737,7 +737,7 @@ sub ask_users {
             { label => _("Password (again)"), val => \$u->{password2}, hidden => 1 },
             { label => _("Shell"), val => \$u->{shell}, list => [ shells($prefix) ], not_edit => !$::expert, advanced => 1 },
 	      if_($security <= 3,
-	    { label => _("Icon"), val => \$u->{icon}, list => [ facesnames($prefix) ], icon2f => sub { face2png($_[0], $prefix) }, format => \&translate },
+	    { label => _("Icon"), val => \$u->{icon}, list => [ '', facesnames($prefix) ], icon2f => sub { face2png($_[0], $prefix) }, format => \&translate },
 	      ),
            ],
         );
@@ -755,12 +755,14 @@ sub autologin {
     my @wm = (split (' ', `$cmd /usr/sbin/chksession -l`));
     my @users = map { $_->{name} } @{$o->{users} || []};
 
-    if (@wm && @users && !$o->{authentication}{NIS} && $ENV{SECURE_LEVEL} <= 3) {
-	 $in->ask_from_entries_refH(_("Autologin"),
-				    _("I can set up your computer to automatically log on one user.
+    if (@wm && @users && !$o->{authentication}{NIS} && $o->{security} <= 2) {
+	add2hash_($o, { autologin => $users[0] });
+
+	$in->ask_from_entries_refH(_("Autologin"),
+				   _("I can set up your computer to automatically log on one user.
 If you don't want to use this feature, click on the cancel button."),
-				    [ { label => _("Choose the default user:"), val => \$o->{autologin}, list => [ '', @users ] },
-				      { label => _("Choose the window manager to run:"), val => \$o->{desktop}, list => \@wm }, ]) or delete $o->{autologin};
+				   [ { label => _("Choose the default user:"), val => \$o->{autologin}, list => [ '', @users ] },
+				     { label => _("Choose the window manager to run:"), val => \$o->{desktop}, list => \@wm }, ]) or delete $o->{autologin};
     }
 }
 
