@@ -32,7 +32,9 @@ print '
 #include <libldetect.h>
 #include <X11/Xlib.h>
 #include <X11/extensions/xf86misc.h>
+
 #include <term.h>
+#undef max_colors
 
 #define SECTORSIZE 512
 ';
