@@ -343,7 +343,7 @@ sub update() {
     foreach (@intfs) {
 	my $intf = $_;
 	if (!member($intf,@interfaces)) {
-	    $default_intf = $intf;
+	    $default_intf ||= $intf;
 	    $monitor->{$intf}{initialr} = $monitor->{$intf}{val}[0];
 	    $monitor->{$intf}{initialt} = $monitor->{$intf}{val}[8];
 	    $darea->{$intf} = Gtk2::DrawingArea->new;
@@ -417,6 +417,12 @@ sub update() {
     foreach (@interfaces) {
 	my $intf = $_;
      $notebook->remove_page($monitor->{$intf}{page}) unless member($intf,@intfs);
+    }
+    for (my $num_p = 0; $num_p < $notebook->get_n_pages; $num_p++) {
+        if ($notebook->get_tab_label_text($notebook->get_nth_page($num_p)) eq $default_intf) {
+            $notebook->set_current_page($num_p);
+            last;
+        }
     }
     @interfaces = @intfs;
 	if ($isconnected != -2 && $isconnected != -1 && !$during_connection) {
