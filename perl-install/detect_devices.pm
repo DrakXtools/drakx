@@ -243,7 +243,7 @@ sub tryWrite($) {
 
 sub syslog {
     -r "/tmp/syslog" and return map { /<\d+>(.*)/ } cat_("/tmp/syslog");
-    `dmesg`;
+    `/bin/dmesg`;
 }
 
 sub hasSMP { c::detectSMP() }
@@ -328,7 +328,7 @@ sub probeSerialDevices {
     print STDERR "Please wait while probing serial ports...\n";
     #- start probing all serial ports... really faster than before ...
     #- ... but still take some time :-)
-    local *F; open F, "serial_probe 2>/dev/null |";
+    local *F; open F, "$ENV{LD_LOADER} serial_probe 2>/dev/null |";
     local $_;
     my %current = (); while (<F>) {
 	$serialprobe{$current{DEVICE}} = { %current } and %current = () if /^\s*$/ && $current{DEVICE};

@@ -388,7 +388,7 @@ sub load_po {
     unless ($f && -e $f) {
 	-e ($f = "$_/po/$lang.po.bz2") and last foreach @INC;
 	if (-e $f) {
-	    open F, "bzip2 -dc $f 2>/dev/null |";
+	    open F, "$ENV{LD_LOADER} bzip2 -dc $f 2>/dev/null |";
 	} else {
 	    -e ($f = "$_/po.cz2") and last foreach @INC;
 	    log::l("trying to load $lang.po from $f");

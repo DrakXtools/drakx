@@ -438,7 +438,7 @@ sub insmod {
 		};
 		#run_program::run("packdrake -x $cz /tmp $_.o");
 	    } elsif (-e "/lib/modules.cpio.bz2") {
-		run_program::run("cd /tmp ; bzip2 -cd /lib/modules.cpio.bz2 | cpio -i $_.o");
+		run_program::run("cd /tmp ; $ENV{LD_LOADER} bzip2 -cd /lib/modules.cpio.bz2 | $ENV{LD_LOADER} cpio -i $_.o");
 	    } else {
 		die "unable to find an archive for modules";
 	    }
@@ -564,7 +564,7 @@ sub  install_cpio($$;@) {
     require run_program;
     
     my $more = join " ", map { $_ && "$_ $_/*" } @more;
-    run_program::run("cd $dir ; bzip2 -cd $cpio | cpio -id $name $name/* $more");
+    run_program::run("cd $dir ; $ENV{LD_LOADER} bzip2 -cd $cpio | $ENV{LD_LOADER} cpio -id $name $name/* $more");
 
     "$dir/$name";
 }
@@ -579,7 +579,7 @@ sub report_bug {
     join '', map { chomp; "$_\n" }
       header("lspci"), detect_devices::stringlist(),
       header("pci_devices"), cat_("/proc/bus/pci/devices"),
-      header("fdisk"), arch() =~ /ppc/ ? `pdisk -l` : `fdisk -l`,
+      header("fdisk"), arch() =~ /ppc/ ? `$ENV{LD_LOADER} pdisk -l` : `$ENV{LD_LOADER} fdisk -l`,
       header("scsi"), cat_("/proc/scsi/scsi"),
       header("lsmod"), cat_("/proc/modules"),
       header("cmdline"), cat_("/proc/cmdline"),
@@ -588,7 +588,7 @@ sub report_bug {
       header("partitions"), cat_("/proc/partitions"),
       header("cpuinfo"), cat_("/proc/cpuinfo"),
       header("syslog"), cat_("/tmp/syslog"),
-      header("ddcxinfos"), `ddcxinfos`,
+      header("ddcxinfos"), `$ENV{LD_LOADER} ddcxinfos`,
       header("ddebug.log"), cat_("/tmp/ddebug.log"),
       header("install.log"), cat_("/mnt/root/install.log"),
       ;

@@ -425,7 +425,8 @@ sub load {
     if ($::testing) {
 	log::l("i try to install $name module (@options)");
     } elsif ($::isStandalone || $::live) {
-	run_program::run("modprobe", $name, @options) or die "insmod'ing module $name failed";
+	run_program::run(-x "/sbin/modprobe.static" ? "/sbin/modprobe.static" : "/sbin/modprobe", $name, @options)
+	    or die "insmod'ing module $name failed";
     } else {
 	$conf{$name}{loaded} and return;
 
@@ -450,7 +451,7 @@ sub load_multi {
     if ($::testing) {
 	log::l("i would install modules @l");
     } elsif ($::isStandalone || $::live) {
-	foreach (@l) { run_program::run("modprobe", $_)	}
+	foreach (@l) { run_program::run(-x "/sbin/modprobe.static" ? "/sbin/modprobe.static" : "/sbin/modprobe", $_) }
     } else {
 	load_raw(map { [ $_ ] } @l);
     }

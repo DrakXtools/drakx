@@ -4,14 +4,30 @@ my $dir = `pwd`;
 chomp $dir;
 $dir .= "/../../..";
 
+#- keep it mind the ELF loader to use.
+$ENV{LD_LOADER} = "$dir/lib/ld-linux.so.2";
+
+$ENV{LOCPATH}="$dir/usr/share/locale";
+$ENV{GCONV_PATH}="$dir/usr/lib/gconv";
 $ENV{PERL5LIB} = join ":", map { "$dir/$_" } @INC;
-$ENV{LD_LIBRARY_PATH} = "$dir/lib:$dir/usr/lib:$dir/usr/lib/perl5/5.6.0/i386-linux/CORE";
+$ENV{LD_LIBRARY_PATH} = "$dir/usr/bin:$dir/bin:$dir/sbin:$dir/usr/sbin:$dir/usr/X11R6/bin:$dir/lib:$dir/usr/lib:$dir/usr/lib/perl5/5.6.0/i386-linux/CORE";
 $ENV{PATH} = join(":", map { "$dir/$_" } split ":", "/usr/bin:/bin:/sbin:/usr/sbin:/usr/X11R6/bin") . ":$ENV{PATH}";
 $ENV{SHARE_PATH} = "$dir/usr/share";
 $ENV{RPMRC_FILE} = "$dir/usr/lib/rpm/rpmrc";
+$ENV{GTK_EXE_PREFIX} = "$dir/usr";
 
-system "../../../lib/ld-linux.so.2", "../perl", "-i", "-pe", "s,(macrofiles:\\s*)(.*),$1$dir/usr/lib/rpm/macros:$2,", $ENV{RPMRC_FILE};
-system "../../../lib/ld-linux.so.2", "../perl", "./install2", "--live", @ARGV;
+system $ENV{LD_LOADER}, "../perl", "-i", "-pe", "s,^(.*macrofiles[^/]*)(.*),\$1$dir/usr/lib/rpm/macros:\$2,", $ENV{RPMRC_FILE};
+system $ENV{LD_LOADER}, "../perl", "./install2", "--live", @ARGV;
+
+#- at this point, unwind above else they will not run correctly (wrong ld-linux.so.2)
+delete $ENV{GTK_EXE_PREFIX};
+delete $ENV{RPMRC_FILE};
+delete $ENV{LOCPATH};
+delete $ENV{SHARE_PATH};
+delete $ENV{PATH};
+delete $ENV{LD_LIBRARY_PATH};
+delete $ENV{PERL5LIB};
+delete $ENV{LD_LOADER};
 
 $ENV{DISPLAY} and system "xset", "-fp", "/tmp/drakx/mdkinst/usr/X11R6/lib/X11/fonts/";
 foreach (qw(misc PEX Speedo Type1 mdk 75dpi 100dpi cyrillic)) {
