@@ -93,7 +93,7 @@ my $button_apply;
 
 my $hostname = chomp_(`hostname`);
 my $int_label = Gtk2::Label->new($netcnx->{type} eq 'lan' ? N("Gateway:") : N("Interface:"));
-my $interface_name = Gtk2::Label->new($netcnx->{type} eq 'lan' ? $netc->{GATEWAY} : $netcnx->{NET_INTERFACE});
+my $int_name = Gtk2::Label->new($netcnx->{type} eq 'lan' ? $netc->{GATEWAY} : $netcnx->{NET_INTERFACE});
 my $isconnected = -1;
 
 my $int_connect = Gtk2::Button->new(N("Wait please"));
@@ -203,13 +203,13 @@ sub manage {
     @all_cards = network::ethernet::get_eth_cards($modules_conf);
     my %name = network::ethernet::get_eth_cards_names($modules_conf, @all_cards);
     foreach (keys %name) {
-	$p->{/eth|ath|wlan/ ? $name{$_} : $_} = { kind => $_ };
+	$p->{/eth|ath|wlan/ ? $name{$_} : $_} = { name => $_ };
 	$p->{name}{intf} = $_;
     }
     while (my ($device, $interface) = each %$intf) {
         my $type;
         exists $name{$device} and next;
-        $type = network::tools::get_interface_type($interface) and $p->{$type} = { kind => $device };
+        $type = network::tools::get_interface_type($interface) and $p->{$type} = { name => $device };
         $p->{name}{intf} = $intf->{$device};
     }
 
@@ -244,7 +244,7 @@ sub manage {
     $apply_button = $oc->{buttons}{N("Apply")};
 
     each_index {
-	my ($name, $interface, $protocol) = ($_, $p->{$_}{kind}, $p->{$_}{protocol});
+	my ($name, $interface, $protocol) = ($_, $p->{$_}{name}, $p->{$_}{protocol});
 	$p->{$name}{gui}{index} = $::i;
 	build_tree($netc, $p->{$name}{intf}, $name, $interface, $protocol);
 	build_notebook($netc, $p->{$name}{intf}, $p->{$name}{gui}, $apply_button, $name, $interface);
@@ -261,15 +261,15 @@ sub manage {
 }
 
 sub build_tree {
-    my ($netc, $intf, $interface, $interface_kind, $protocol) = @_;
+    my ($netc, $intf, $interface, $interface_name, $protocol) = @_;
 
     if ($interface eq 'adsl') {
 	$intf->{pages} = { 'TCP/IP' => 1, 'Account' => 1, 'Options' => 1, 'Information' => 1 };
-	network::adsl::adsl_probe_info($intf, $netc, $protocol, $interface_kind);
+	network::adsl::adsl_probe_info($intf, $netc, $protocol, $interface_name);
 	$intf->{save} = sub {
             $netc->{internet_cnx_choice} = 'adsl';
             $netc->{at_boot} = $intf->{ONBOOT} eq 'yes' ? 1 : 0;
-            network::adsl::adsl_conf_backend($in, $modules_conf, $netcnx, $netc, $intf, $interface_kind, $protocol)
+            network::adsl::adsl_conf_backend($in, $modules_conf, $netcnx, $netc, $intf, $interface_name, $protocol)
           };
     }
     elsif ($interface eq 'modem') {
@@ -289,7 +289,7 @@ sub build_tree {
 }
 
 sub build_notebook {
-    my ($netc, $intf, $gui, $apply_button, $interface, $interface_kind) = @_;
+    my ($netc, $intf, $gui, $apply_button, $interface, $interface_name) = @_;
 
     my $apply = sub { $apply_button->set_sensitive(1) };
     my $is_ethernet = $interface =~ /eth|ath|wlan/;
@@ -359,7 +359,7 @@ sub build_notebook {
 	    $_->set_sensitive(0) foreach $gui->{intf}{IPADDR}, $gui->{intf}{NETMASK};
 	    delete $gui->{intf}{BOOTPROTO};
 	}
-	!$intf->{IPADDR} and ($intf->{IPADDR}, $gui->{active}, $intf->{NETMASK}) = get_intf_ip($interface_kind);
+	!$intf->{IPADDR} and ($intf->{IPADDR}, $gui->{active}, $intf->{NETMASK}) = get_intf_ip($interface_name);
 	$gui->{netc}{$_}->set_text($netc->{$_}) foreach keys %{$gui->{netc}};
     }
 
@@ -442,8 +442,8 @@ sub build_notebook {
     }
 
     if ($intf->{pages}{Account}) {
-	if ($interface_kind =~ /^speedtouch|sagem$/) {
-	    $gui->{description} = $interface_kind eq 'speedtouch' ? 'Alcatel|USB ADSL Modem (Speed Touch)' : 'Analog Devices Inc.|USB ADSL modem';
+	if ($interface_name =~ /^speedtouch|sagem$/) {
+	    $gui->{description} = $interface_name eq 'speedtouch' ? 'Alcatel|USB ADSL Modem (Speed Touch)' : 'Analog Devices Inc.|USB ADSL modem';
 	}
 	gtkpack_(gtkset_border_width($gui->{sheet}{Account} = Gtk2::VBox->new(0,10), 5),
 		 if_($interface eq 'modem',
@@ -546,8 +546,8 @@ sub build_notebook {
 
     if ($intf->{pages}{Information}) {
 	my ($info) = $gui->{description} ?
-	  find { $_->{description} eq $gui->{description} } detect_devices::probeall : network::ethernet::mapIntfToDevice($interface_kind);
-	my @intfs = grep { $interface_kind eq $_->[0] } @all_cards;
+	  find { $_->{description} eq $gui->{description} } detect_devices::probeall : network::ethernet::mapIntfToDevice($interface_name);
+	my @intfs = grep { $interface_name eq $_->[0] } @all_cards;
 	if (is_empty_hash_ref($info) && @intfs == 1) {
 	    my $driver = $intfs[0][1];
 	    my @cards = grep { $_->{driver} eq $driver } detect_devices::probeall();
@@ -562,7 +562,7 @@ sub build_notebook {
 					 [ N("Description"), reverse split('\|', $info->{description}) ],
 					 [ N("Media class"), $info->{media_type} || '-' ],
 					 [ N("Module name"), $info->{driver} || '-' ],
-					 [ N("Mac Address"), c::get_hw_address($interface_kind) || '-' ],
+					 [ N("Mac Address"), c::get_hw_address($interface_name) || '-' ],
 					 [ N("Bus"), $info->{bus} || '-' ],
 					 [ N("Location on the bus"), $info->{pci_bus} || '-' ],
 										    )
@@ -756,7 +756,7 @@ sub update() {
     my $h = chomp_(`hostname`);
     $label_host->set_label($h);
     $int_label->set($netcnx->{type} eq 'lan' ? N("Gateway:") : N("Interface:"));
-    $interface_name->set($netcnx->{type} eq 'lan' ? $netc->{GATEWAY} : $netcnx->{NET_INTERFACE});
+    $int_name->set($netcnx->{type} eq 'lan' ? $netc->{GATEWAY} : $netcnx->{NET_INTERFACE});
     update_list($modules_conf);
     update_intbutt() if $isconnected != -1;
     1;
@@ -980,7 +980,7 @@ Run the \"Add Connection\" assistant from the Mandrakelinux Control Center"));
                                                gtkset_border_width(create_packtable({ col_spacings => 5, row_spacings => 5, homogenous => 1 },
                                                                                     [ Gtk2::Label->new(N("Connection type: ")),
                                                                                       Gtk2::Label->new(translate($netcnx->{type})) ],
-                                                                                    [ $int_label, $interface_name ],
+                                                                                    [ $int_label, $int_name ],
                                                                                     [ Gtk2::Label->new(N("Status:")),
                                                                                       $int_state = Gtk2::Label->new(N("Testing your connection...")) ]
                                                                                    ),
