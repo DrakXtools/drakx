@@ -317,11 +317,7 @@ our @tree =
       string => N("PCMCIA controllers"),
       icon => "scsi.png",
       configurator => "",
-      detector => sub {
-          require list_modules;
-          my @modules = list_modules::category2modules('bus/pcmcia');
-          f(grep { member($_->{driver}, @modules) } @devices);
-      },
+      detector => sub { f(detect_devices::pcmcia_controller_probe()) },
       checked_on_boot => 1,
      },
 

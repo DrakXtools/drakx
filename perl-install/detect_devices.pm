@@ -699,6 +699,12 @@ sub firewire_probe() {
     @l;
 }
 
+sub pcmcia_controller_probe() {
+    require list_modules;
+    my @modules = list_modules::category2modules('bus/pcmcia');
+    grep { member($_->{driver}, @modules) } probeall();
+}
+
 sub real_pcmcia_probe() {
     return if $::testing;
 
