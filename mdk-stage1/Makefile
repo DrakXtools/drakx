@@ -28,7 +28,7 @@ include $(top_dir)/Makefile.common
 
 CFLAGS = -Os -pipe -Wall -Werror -fomit-frame-pointer
 
-DEFS = -DVERSION=\"$(VERSION)\"
+DEFS = -DVERSION=\"$(VERSION)\" -DSPAWN_SHELL
 
 COMPILE = $(CC) $(DEFS) $(CFLAGS)
 
@@ -52,21 +52,15 @@ NEWT_FRONTEND_LIBS = /usr/lib/libnewt.a /usr/lib/libslang.a
 STDIO_FRONTEND_SRC = stdio-frontend.c
 STDIO_FRONTEND_LIBS =
 
-WSLIB_FRONTEND_SRC = wslib-frontend.c
-WSLIB_FRONTEND_LIBS = /usr/lib/libwslib.a
-
 
 FRONTEND_OBJS = $(subst .c,.o,$($(F)_FRONTEND_SRC))
 FRONTEND_LIBS = $($(F)_FRONTEND_LIBS)
 
 FRONTEND_LINK = $(FRONTEND_OBJS) $(FRONTEND_LIBS)
-MEDIAS_FRONTEND_LINK = $(FRONTEND_LINK)
 
 ifeq (DIETLIBC, $(L))
 ifeq (NEWT, $(F))
-MEDIAS_FRONTEND_LINK = $(subst .c,.o,$(STDIO_FRONTEND_SRC)) $(STDIO_FRONTEND_LIBS)
-else
-MEDIAS_FRONTEND_LINK = $(FRONTEND_LINK)
+FRONTEND_LINK = $(subst .c,.o,$(STDIO_FRONTEND_SRC)) $(STDIO_FRONTEND_LIBS)
 endif
 endif
 
@@ -81,13 +75,19 @@ DIETLIBC_STAGE1_OWN_LIBS = $(INSMOD)/libinsmod-DIET.a mar/libmar-DIET.a bzlib/li
 STAGE1_OWN_LIBS = $($(L)_STAGE1_OWN_LIBS)
 
 
+ifeq (DIETLIBC, $(L))
+STAGE1_NETWORK_LIBS = $(top_dir)/dietlibc/bin-$(ARCH)/librpc.a
+endif
+
+ifeq (GLIBC, $(L))
 STAGE1_NETWORK_LIBS = /usr/lib/libresolv.a
+endif
 
  #- stage1 itself
 STAGE1SRC = stage1.c log.c tools.c modules.c probing.c mount.c automatic.c
 CDROMSRC = cdrom.c
 DISKSRC = disk.c lomount.c
-NETWORKSRC = network.c dns.c nfsmount.c dhcp.c url.c
+NETWORKSRC = network.c nfsmount.c dhcp.c url.c dns.c
 
 ALLSRC = $(INITSRC) $(STAGE1SRC) $(CDROMSRC) $(DISKSRC) $(NETWORKSRC)
 
@@ -118,7 +118,7 @@ INIT_LIBC = $(DIETLIBC_LIBC)
 endif
 
 
-BINS = init stage1-full
+BINS = init #stage1-full
 
 ifeq (i386, $(ARCH))
 BINS += stage1-cdrom stage1-disk stage1-network
@@ -148,20 +148,20 @@ init: $(INITOBJS) $(INIT_LIBC)
 	$(CC) $(LDFLAGS_INIT) -o $@ $^
 	$(STRIPCMD) $@
 
-stage1-cdrom: $(STAGE1OBJS-CDROM) $(STAGE1_OWN_LIBS) $(STAGE1_OWN_LIBS) $(MEDIAS_FRONTEND_LINK) $(STAGE1_LIBC)
+stage1-cdrom: $(STAGE1OBJS-CDROM) $(STAGE1_OWN_LIBS) $(FRONTEND_LINK) $(STAGE1_LIBC)
 	$(CC) $(LDFLAGS_STAGE1) -o $@ $^
 	$(STRIPCMD) $@
 
-stage1-disk: $(STAGE1OBJS-DISK) $(STAGE1_OWN_LIBS) $(MEDIAS_FRONTEND_LINK) $(STAGE1_LIBC)
+stage1-disk: $(STAGE1OBJS-DISK) $(STAGE1_OWN_LIBS) $(FRONTEND_LINK) $(STAGE1_LIBC)
 	$(CC) $(LDFLAGS_STAGE1) -o $@ $^
 	$(STRIPCMD) $@
 
-stage1-network: $(STAGE1OBJS-NETWORK) $(GLIBC_STAGE1_OWN_LIBS) $(STAGE1_NETWORK_LIBS) $(FRONTEND_LINK)
-	$(CC) $(GLIBC_LDFLAGS_STAGE1) -o $@ $^
+stage1-network: $(STAGE1OBJS-NETWORK) $(STAGE1_OWN_LIBS) $(STAGE1_NETWORK_LIBS) $(FRONTEND_LINK) $(STAGE1_LIBC)
+	$(CC) $(LDFLAGS_STAGE1) -o $@ $^
 	$(STRIPCMD) $@
 
-stage1-full: $(STAGE1OBJS) $(GLIBC_STAGE1_OWN_LIBS) $(STAGE1_NETWORK_LIBS) $(FRONTEND_LINK) $(PCMCIA_LIB)
-	$(CC) $(GLIBC_LDFLAGS_STAGE1) -o $@ $^
+stage1-full: $(STAGE1OBJS) $(STAGE1_OWN_LIBS) $(STAGE1_NETWORK_LIBS) $(FRONTEND_LINK) $(PCMCIA_LIB)
+	$(CC) $(LDFLAGS_STAGE1) -o $@ $^
 	$(STRIPCMD) $@
 
 
@@ -172,7 +172,7 @@ $(STAGE1OBJS-DISK): %-DISK.o: %.c .depend
 	$(COMPILE) $(INCLUDES) $(DISK_DEFS) -c $< -o $@
 
 $(STAGE1OBJS-NETWORK): %-NETWORK.o: %.c .depend
-	$(COMPILE) $(GLIBC_INCLUDES) $(NETWORK_DEFS) -c $< -o $@
+	$(COMPILE) $(INCLUDES) $(NETWORK_DEFS) -c $< -o $@
 
 $(INITOBJS): %.o: %.c
 	$(COMPILE) $(INIT_DEFS) -c $<
