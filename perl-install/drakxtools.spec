@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10.1
-Release: 0.6mdk
+Release: 0.7mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -326,6 +326,18 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Mon Aug  9 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.1-0.7mdk
+- diskdrake: switch from raidtools to mdadm (pixel)
+- drakboot: sort themes, users and WMs lists
+- drakupdate_fstab: do not complain about ips in /etc/fstab (pixel)
+- localedrake:
+  o changed default font for gb2312 (Funda Wang)
+  o rename the "More" button as "Other Countries" (pixel)
+- net_applet:
+  o do not die when gateway canot be guessed (Joe Bolin)
+  o fix status toolip
+  o allow multiple instances, but only one per user (Joe Bolin)
+
 * Fri Aug  6 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.1-0.6mdk
 - add a 6px border around scrolled TextViews (Fabrice FACORAT, #10561)
 - drakbackup: fix crash when selecting an entry in pull down menus
