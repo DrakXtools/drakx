@@ -907,6 +907,7 @@ sub report_bug {
       header("fstab"), cat_("$prefix/etc/fstab"),
       header("modules.conf"), cat_("$prefix/etc/modules.conf"),
       header("lilo.conf"), cat_("$prefix/etc/lilo.conf"),
+      header("menu.lst"), cat_("$prefix/boot/grub/menu.lst"),
       header("/etc/modules"), cat_("$prefix/etc/modules"),
       map_index { even($::i) ? header($_) : $_ } @other;
 }
