@@ -907,11 +907,7 @@ ifdown eth0
                     $direct_net_install = 1;
                     $use_wizard = 0;
                 };
-          } else {
-              $wiz->{pages}{welcome} = $wiz->{pages}{install};
         }
-      } else {
-          $wiz->{pages}{welcome} = $wiz->{pages}{connection};
       };
       
       if ($use_wizard) {
