@@ -8,10 +8,8 @@ style "steps"
   fontset = "-*-*-medium-r-normal-*-8-*-*-*-*-*-iso8859-15"
 }
 
-style "logo"
+style "logo" = "background"
 {
-  bg[NORMAL] = { 1.0, 1.0, 1.0 }
-
   # no background image
   engine "pixmap" { image { function = FLAT_BOX } }
 }
