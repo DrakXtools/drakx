@@ -11,7 +11,6 @@ use log;
 
 my $good_default_monitor = arch() !~ /ppc/ ? 'Generic|1024x768 @ 70 Hz' :
   detect_devices::get_mac_model =~ /^iBook/ ? 'Apple|iBook 800x600' : 'Apple|iMac/PowerBook 1024x768';
-my $low_default_monitor = 'Generic|800x600 @ 56 Hz';
 
 my @VertRefresh_ranges = ("50-70", "50-90", "50-100", "40-150");
 
@@ -59,7 +58,7 @@ sub configure_auto_install {
     put_in_hash($monitor, $old_monitor);
 
     my $monitors = monitors();
-    configure_automatic($monitor, $monitors) or put_in_hash($monitor, $monitors->{$low_default_monitor});
+    configure_automatic($monitor, $monitors) or put_in_hash($monitor, { HorizSync => '31.5-35.1', VertRefresh => '50-61' });
     $raw_X->set_monitors($monitor);
     $monitor;
 }
@@ -80,7 +79,7 @@ sub choose {
 	} else {
 	    my $merged_name = $monitor->{VendorName} . '|' . $monitor->{ModelName};
 
-	    if (!exists $monitors->{$merged_name}) {
+	    if (!exists $h_monitors{$merged_name}) {
 		$merged_name = $monitor->{HorizSync} ? 'Custom' : $good_default_monitor;
 	    } else {
 		$merged_name;
