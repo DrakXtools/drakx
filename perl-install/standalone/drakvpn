@@ -807,30 +807,12 @@ network::ipsec::add_section_racoon_conf($path_section, $racoon);
 					4 => 	[ 'authentication_method', 'rsasig' ],
 					5 =>	[ 'dh_group', 'modp1024' ]
 					};
-	$in->ask_from('',
+	ask_info2('',
 N("Make sure you already have the path sections
 on the top of your racoon.conf file.
 
 You can now choose the remote settings.
-Choose continue or previous when you are done.\n"),
-	[     	{ label => N("remote"), val => \$main_remote_section->{1}[1], type => 'entry' },
-		{ label => N("exchange_mode"), val => \$main_remote_section->{2}[1], type => 'entry' },
-		{ label => N("generate_policy"), val => \$main_remote_section->{3}[1], type => 'entry' },
-		{ label => N("passive"), val => \$main_remote_section->{4}[1], type => 'entry' },
-		{ label => N("certificate_type"), val => \$main_remote_section->{5}[1], type => 'entry' },
-		{ label => N("my_certfile"), val => \$main_remote_section->{5}[2], type => 'entry' },
-		{ label => N("my_private_key"), val => \$main_remote_section->{5}[3], type => 'entry' },
-		{ label => N("peers_certfile"), val => \$main_remote_section->{6}[1], type => 'entry' },
-		{ label => N("verify_cert"), val => \$main_remote_section->{7}[1], type => 'entry' },
-		{ label => N("my_identifier"), val => \$main_remote_section->{8}[1], type => 'entry' },
-		{ label => N("peers_identifier"), val => \$main_remote_section->{9}[1], type => 'entry' },
-		{ label => N("proposal"), val => \$proposal_remote_section->{1}[0], type => 'entry' },
-		{ label => N("Encryption algorithm"), val => \$proposal_remote_section->{2}[1], type => 'entry' },
-		{ label => N("Hash algorithm"), val => \$proposal_remote_section->{3}[1], type => 'entry' },
-		{ label => N("Authentication method"), val => \$proposal_remote_section->{4}[1], type => 'entry' },
-		{ label => N("DH group"), val => \$proposal_remote_section->{5}[1], type => 'entry' },
-	]
-) or goto step_configure_racoon_conf;
+Choose continue or previous when you are done.\n"), $main_remote_section, $proposal_remote_section) or goto step_configure_racoon_conf;
 
 network::ipsec::add_section_racoon_conf($main_remote_section, $racoon);
 network::ipsec::add_section_racoon_conf($proposal_remote_section, $racoon);
@@ -868,30 +850,13 @@ to edit and then click on next.\n", $racoon_conf),
 my $number = network::ipsec::matched_section_key_number_racoon_conf($choice,$racoon);
 
 if ($choice =~ /^remote/) {
-	$in->ask_from('',
+     ask_info2('',
 N("Your %s file has several sctions.\n
 
 You can now edit the remote section entries.
 
-Choose continue when you are done to write the data.\n", $racoon_conf),
-	[     	{ label => N("remote"), val => \$racoon->{$number}{1}[1], type => 'entry' },
-		{ label => N("exchange_mode"), val => \$racoon->{$number}{2}[1], type => 'entry' },
-		{ label => N("generate_policy"), val => \$racoon->{$number}{3}[1], type => 'entry' },
-		{ label => N("passive"), val => \$racoon->{$number}{4}[1], type => 'entry' },
-		{ label => N("certificate_type"), val => \$racoon->{$number}{5}[1], type => 'entry' },
-		{ label => N("my_certfile"), val => \$racoon->{$number}{5}[2], type => 'entry' },
-		{ label => N("my_private_key"), val => \$racoon->{$number}{5}[3], type => 'entry' },
-		{ label => N("peers_certfile"), val => \$racoon->{$number}{6}[1], type => 'entry' },
-		{ label => N("verify_cert"), val => \$racoon->{$number}{7}[1], type => 'entry' },
-		{ label => N("my_identifier"), val => \$racoon->{$number}{8}[1], type => 'entry' },
-		{ label => N("peers_identifier"), val => \$racoon->{$number}{9}[1], type => 'entry' },
-		{ label => N("proposal"), val => \$racoon->{$number+2}{1}[0], type => 'entry' },
-		{ label => N("Encryption algorithm"), val => \$racoon->{$number+2}{2}[1], type => 'entry' },
-		{ label => N("Hash algorithm"), val => \$racoon->{$number+2}{3}[1], type => 'entry' },
-		{ label => N("Authentication method"), val => \$racoon->{$number+2}{4}[1], type => 'entry' },
-		{ label => N("DH group"), val => \$racoon->{$number+2}{5}[1], type => 'entry' },
-	]
-) or goto step_configure_racoon_conf;
+Choose continue when you are done to write the data.\n", $racoon_conf), $racoon->{$number}, $racoon->{$number+2})
+       or goto step_configure_racoon_conf;
 
 } elsif ($choice =~ /^sainfo/) {
 	ask_info('',
@@ -983,4 +948,26 @@ sub ask_info {
 		{ label => N("Authentication algorithm"), val => \$data->{5}[1], type => 'entry' },
 		{ label => N("Compression algorithm"), val => \$data->{6}[1], type => 'entry' },
 	]);
+}
+
+sub ask_info2 {
+    my ($title, $text, $main_remote_section, $proposal_remote_section) = @_;
+	$in->ask_from($title, $text,,
+                   [ { label => N("remote"), val => \$main_remote_section->{1}[1], type => 'entry' },
+                     { label => N("exchange_mode"), val => \$main_remote_section->{2}[1], type => 'entry' },
+                     { label => N("generate_policy"), val => \$main_remote_section->{3}[1], type => 'entry' },
+                     { label => N("passive"), val => \$main_remote_section->{4}[1], type => 'entry' },
+                     { label => N("certificate_type"), val => \$main_remote_section->{5}[1], type => 'entry' },
+                     { label => N("my_certfile"), val => \$main_remote_section->{5}[2], type => 'entry' },
+                     { label => N("my_private_key"), val => \$main_remote_section->{5}[3], type => 'entry' },
+                     { label => N("peers_certfile"), val => \$main_remote_section->{6}[1], type => 'entry' },
+                     { label => N("verify_cert"), val => \$main_remote_section->{7}[1], type => 'entry' },
+                     { label => N("my_identifier"), val => \$main_remote_section->{8}[1], type => 'entry' },
+                     { label => N("peers_identifier"), val => \$main_remote_section->{9}[1], type => 'entry' },
+                     { label => N("proposal"), val => \$proposal_remote_section->{1}[0], type => 'entry' },
+                     { label => N("Encryption algorithm"), val => \$proposal_remote_section->{2}[1], type => 'entry' },
+                     { label => N("Hash algorithm"), val => \$proposal_remote_section->{3}[1], type => 'entry' },
+                     { label => N("Authentication method"), val => \$proposal_remote_section->{4}[1], type => 'entry' },
+                     { label => N("DH group"), val => \$proposal_remote_section->{5}[1], type => 'entry' },
+                   ]);
 }
