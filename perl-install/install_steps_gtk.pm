@@ -285,7 +285,7 @@ sub reallyChooseGroups {
     };
     my $entries_in_path = sub {
 	my ($path) = @_;
-	translate($path), map { $entry->($_) } grep { !/Utilities/ && $o->{compssUsers}{$_}{path} eq $path } @{$o->{compssUsersSorted}};
+	translate($path), map { $entry->($_) } grep { $o->{compssUsers}{$_}{path} eq $path } @{$o->{compssUsersSorted}};
     };
     gtkadd($w->{window},
 	   gtkpack($w->create_box_with_title(_("Package Group Selection")),
@@ -296,10 +296,11 @@ sub reallyChooseGroups {
 					   $entries_in_path->('Server'),
 					  ),
 				   1, gtkpack(new Gtk::VBox(0,0), 
-					   $entry->('Development|Development'),
-					   $entry->('Development|Documentation'),
-					   '',
 					   $entries_in_path->('Graphical Environment'),
+					   '',
+					   $entries_in_path->('Development'),
+					   '',
+					   $entries_in_path->('Utilities'),
 					  ),
 				) : (
 				   1, gtkpack(new Gtk::VBox(0,0), 
