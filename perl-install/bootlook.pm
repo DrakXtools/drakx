@@ -41,14 +41,8 @@ import Locale::GetText I_;
 $::isEmbedded = ($::XID, $::CCPID) = "@ARGV" =~/--embedded (\S*) (\S*)/;
 if ($::isEmbedded) {
   print "EMBED\n";
-<<<<<<< bootlook.pm
-  print "XID: $::XID\n";
-  print "CCPID:  $::CCPID\n";
-#  $path_to_pixmaps = "./pixmaps/";
-=======
   print "XID : $::XID\n";
   print "CCPID :  $::CCPID\n";
->>>>>>> 1.18
 }
 
 my $in = interactive->vnew('su');
@@ -214,7 +208,7 @@ $bbox->add($apply_button);
 my $cancel_button = new Gtk::Button $::isEmbedded ? _("Cancel") : _("Quit");
 $bbox->add($cancel_button);
 my $fin_hbox = new Gtk::HBox( 0, 0 );
-$cancel_button->signal_connect( clicked => sub {$::isEmbedded ? kill(USR1, $::CCPID) : Gtk->exit(0)});
+$cancel_button->signal_connect(clicked => sub {$::isEmbedded ? kill(USR1, $::CCPID) : Gtk->exit(0)});
 $build_button->signal_connect(clicked => sub{updateInit();updateAutologin();updateAurora();$::isEmbedded ? kill(USR1, $::CCPID) : Gtk->exit(0)});
 $apply_button->signal_connect(clicked => sub{updateInit();updateAutologin();updateAurora(); });
 
@@ -315,19 +309,19 @@ sub updateAurora
     if ($a_mode) {
         if ($a_c_button->get_active()) {
             symlinkf("/lib/aurora/Monitors/NewStyle-Categorizing-WsLib",    "/etc/aurora/Monitor");
-            $in->standalone::pkgs_install(qw(Aurora-Monitor-NewStyle-Categorizing-WsLib)) if !(-e "/lib/aurora/Monitors/NewStyle-Categorizing-WsLib");
+            $in->standalone::pkgs_install(q(Aurora-Monitor-NewStyle-Categorizing-WsLib)) if !(-e "/lib/aurora/Monitors/NewStyle-Categorizing-WsLib");
         }
         if ($a_h_button->get_active()) {
             symlinkf("/lib/aurora/Monitors/NewStyle-WsLib",    "/etc/aurora/Monitor");
-            $in->standalone::pkgs_install(qw(Aurora-Monitor-NewStyle-WsLib)) if !(-e "/lib/aurora/Monitors/NewStyle-WsLib");
+            $in->standalone::pkgs_install(q(Aurora-Monitor-NewStyle-WsLib)) if !(-e "/lib/aurora/Monitors/NewStyle-WsLib");
         }
         if ($a_v_button->get_active()) {
             symlinkf("/lib/aurora/Monitors/Traditional-WsLib", "/etc/aurora/Monitor");
-            $in->standalone::pkgs_install(qw(Aurora-Monitor-Traditional-WsLib)) if !(-e "/lib/aurora/Monitors/Traditional-WsLib");
+            $in->standalone::pkgs_install(q(Aurora-Monitor-Traditional-WsLib)) if !(-e "/lib/aurora/Monitors/Traditional-WsLib");
         }
         if ($a_g_button->get_active()) {
             symlinkf("/lib/aurora/Monitors/Traditional-Gtk+",  "/etc/aurora/Monitor");
-            $in->standalone::pkgs_install(qw(Aurora-Monitor-Traditional-Gtk+)) if !(-e "/lib/aurora/Monitors/Traditional-Gtk+");
+            $in->standalone::pkgs_install(q(Aurora-Monitor-Traditional-Gtk+)) if !(-e "/lib/aurora/Monitors/Traditional-Gtk+");
 	}
     } else {
 	unlink "/etc/aurora/Monitor";
@@ -377,12 +371,12 @@ sub updateAutologin
 {
     my ($usern,$deskt)=($user_combo->entry->get_text(), $desktop_combo->entry->get_text());
 
-    if ($x_yes_button->get_active() ) {
+    if ($x_yes_button->get_active()) {
+	$in->standalone::pkgs_install(q(autologin));
 	set_autologin('',$usern,$deskt);
     } else {
 	set_autologin('',undef) if ($x_no_button->get_active());
     }
-    $in->standalone::pkgs_install(q(autologin));
 }
  
 sub set_autologin {
