@@ -70,14 +70,14 @@ sub adsl_probe_info {
     my $pptp_file = "$::prefix/etc/sysconfig/network-scripts/net_cnx_up";
     my %pppoe_conf; %pppoe_conf = getVarsFromSh($pppoe_file) if (! defined $adsl_type || $adsl_type eq 'pppoe') && -f $pppoe_file;
     my $login = $pppoe_conf{USER};
-    foreach (qw(/etc/ppp/peers/adsl /etc/ppp/options /etc/ppp/options.adsl)) {
+    foreach (qw(/etc/ppp/peers/ppp0 /etc/ppp/options /etc/ppp/options.adsl)) {
 	($login) = map { if_(/^user\s+"([^"]+)"/, $1) } cat_("$::prefix/$_") if !$login && -r "$::prefix/$_";
     }
     ($login) = map { if_(/\sname\s+([^ \n]+)/, $1) } cat_($pptp_file) if (! defined $adsl_type || $adsl_type eq 'pptp') && -r $pptp_file;
     my $passwd = passwd_by_login($login);
     if (!$netc->{vpi} && !$netc->{vpi} && member($o_adsl_modem, qw(eci speedtouch))) {
       ($netc->{vpi}, $netc->{vci}) = 
-	(map { if_(/^.*-vpi\s+(\d+)\s+-vci\s+(\d+)/, map { sprintf("%x", $_) } $1, $2) } cat_("$::prefix/etc/ppp/peers/adsl"));
+	(map { if_(/^.*-vpi\s+(\d+)\s+-vci\s+(\d+)/, map { sprintf("%x", $_) } $1, $2) } cat_("$::prefix/etc/ppp/peers/ppp0"));
     }
     $pppoe_conf{DNS1} ||= '';
     $pppoe_conf{DNS2} ||= '';
@@ -235,7 +235,7 @@ usepeerdns
 defaultroute)
               );
         
-	output("$::prefix/etc/ppp/peers/adsl",
+	output("$::prefix/etc/ppp/peers/ppp0",
 qq(noauth
 noipdefault
 $modems{$adsl_device}{ppp_options}
