@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10
-Release: 31mdk
+Release: 32mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -314,6 +314,19 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Fri Apr 23 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10-32mdk
+- diskdrake, XFdrake: make --auto really not interactive
+- drakconnect:
+  o wizard: fix ISDN support (poulpy)
+  o manage interface: smoother layout
+- drakxtv:
+  o fix brown paper bag bug regarding tv cards detection
+  o sync card and tuner lists with 2.6.6-rc2
+- harddrake GUI: split USB sontrollers and ports
+  o new data structure
+- harddrake service: autoconfigure X11, sound and removable media
+- log more actions regarding modules managment in explanations
+
 * Tue Apr 20 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10-31mdk
 - drakbackup: some drives don't return "ATIP info from disk" (stew)
 - drakclock: check /etc/init.d/ntpd instead of /etc/ntp.conf for ntp
