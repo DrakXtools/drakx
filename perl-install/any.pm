@@ -74,6 +74,12 @@ sub enableShadow {
     run_program::rooted($prefix, "grpconv") or log::l("grpconv failed");
 }
 
+sub hdInstallPath() {
+    my $tail = first(readlink("/tmp/image") =~ m|^/tmp/hdimage/(.*)|);
+    my $head = first(readlink("/tmp/hdimage") =~ m|$::prefix(.*)|);
+    $tail && ($head ? "$head/$tail" : "/mnt/hd/$tail");
+}
+
 sub kernelVersion {
     my $kernel = readlink "$::prefix/boot/vmlinuz" || first(all("$::prefix/boot"));
     first($kernel =~ /vmlinuz-(.*)/);
@@ -309,11 +315,6 @@ sub setupBootloader__general {
 
     bootloader::set_profiles($b, $profiles);
     bootloader::set_append($b, "mem", $memsize);
-    if ($force_acpi) {
-	$in->do_pkgs->install(qw(acpi acpid));
-	-x "$::prefix/usr/bin/acpi" && -x "$::prefix/usr/sbin/acpid" or $force_acpi = 0;
-	$force_acpi or log::l("deactivating acpi as no acpi nor acpid packages are present");
-    }
     if ($prev_force_acpi != $force_acpi) {
 	bootloader::set_append($b, acpi => ($force_acpi ? '' : 'off'));
     }
