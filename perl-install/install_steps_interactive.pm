@@ -77,7 +77,7 @@ so the messages will be displayed in english during installation") if $ENV{LANGU
     }
 }
     
-sub acceptLicence {
+sub acceptLicense {
     my ($o) = @_;
     return if $o->{useless_thing_accepted};
 
@@ -88,7 +88,7 @@ sub acceptLicence {
 
     $o->ask_yesorno('', N("Are you sure you refuse the licence?"), 1) and $o->exit;
 
-    &acceptLicence;
+    &acceptLicense;
 }
 
 #------------------------------------------------------------------------------

@@ -120,7 +120,7 @@ sub selectKeyboard {
     } 'installPackages' if !$::g_auto_install && (!$o->{isUpgrade} || !$o->{keyboard}{unsafe});
 }
 #------------------------------------------------------------------------------
-sub acceptLicence {}
+sub acceptLicense {}
 
 #------------------------------------------------------------------------------
 sub setupSCSI {

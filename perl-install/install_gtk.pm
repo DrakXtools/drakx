@@ -64,7 +64,6 @@ style "small-font"
    $pango_font_name{10}
 }
 widget "*" style "default-font"
-widget "*Steps*" style "small-font"
 
 ));
     }
@@ -111,8 +110,6 @@ sub create_help_window {
 sub create_steps_window {
     my ($o) = @_;
 
-    my $PIX_H = my $PIX_W = 21;
-
     $o->{steps_window}->destroy if $o->{steps_window};
 
     my $w = bless {}, 'ugtk2';
@@ -120,46 +117,19 @@ sub create_steps_window {
     $w->{rwindow}->set_uposition(0, 0);
     $w->{rwindow}->set_size_request($::stepswidth, $::stepsheight);
     $w->{rwindow}->set_name('Steps');
-    $w->{rwindow}->set_events('button_press_mask');
     $w->{rwindow}->set_title('skip');
-    #$w->show;
 
-    my %cache_pixbuf;
-    gtkadd($w->{window},
-	   gtkpack_(Gtk2::VBox->new(0,0),
-		    (map { (1, $_) } map {
-			my $step = $o->{steps}{$_};
-			my $darea = Gtk2::DrawingArea->new;
-			my $in_button;
-			my $draw_pix = sub {
-			    $cache_pixbuf{$_[0]} ||= gtkcreate_pixbuf($_[0]);
-			    $cache_pixbuf{$_[0]}->render_to_drawable($darea->window(),
-								     $darea->style()->bg_gc('normal'),
-								     0, 0,
-								     ($darea->allocation->width-$PIX_W)/2 + 3,
-								     ($darea->allocation->height-$PIX_H)/2,
-								     $PIX_W, $PIX_H,
-								     'none', 0, 0);
-			};
+    my @l = ('', '', N_("System installation"));
+    my $s;
+    foreach (grep { !eval $o->{steps}{$_}{hidden} } @{$o->{orderedSteps}}) {
+	if ($_ eq 'setRootPassword') {
+	    push @l, $s, N_("System configuration");
+	    $s = '';
+	}
+	$s .= "- " . translate($o->{steps}{$_}{text}) . "\n";	
+    }
 
-			my $f = sub { 
-			    my ($type) = @_;
-			    my $color = $step->{done} ? 'green' : $step->{entered} ? 'orange' : 'red';
-			    "$ENV{SHARE_PATH}/step-$color$type.xpm";
-			};
-			$darea->set_size_request($PIX_W+3,$PIX_H);
-			$darea->add_events(['exposure_mask', 'enter_notify_mask', 'leave_notify_mask',
-					    'button_press_mask', 'button_release_mask']);
-			$darea->signal_connect(expose_event => sub { $draw_pix->($f->('')) });
-			if ($step->{reachable}) {
-			    $darea->signal_connect(enter_notify_event => sub { $in_button = 1; $draw_pix->($f->('-on')) });
-			    $darea->signal_connect(leave_notify_event => sub { undef $in_button; $draw_pix->($f->('')) });
-			    $darea->signal_connect(button_press_event => sub { $draw_pix->($f->('-click')) });
-			}
-			gtkpack_(Gtk2::HBox->new(0,5), 0, $darea, 0, Gtk2::Label->new(translate($step->{text})));
-		    } grep {
-			!eval $o->{steps}{$_}{hidden};
-		    } @{$o->{orderedSteps}})));
+    gtkadd($w->{window}, gtkpack__(Gtk2::VBox->new(0,15), @l, $s));
     $w->show;
     $o->{steps_window} = $w;
 }
