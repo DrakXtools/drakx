@@ -336,13 +336,17 @@ void unmount_filesystems(void)
 	}
 }
 
+int reboot_magic = 0x01234567;
+
 int in_reboot(void)
 {
         int fd;
         if ((fd = open("/var/run/rebootctl", O_RDONLY, 0)) > 0) {
-                char buf[1];
+                char buf[100];
                 int i = read(fd, buf, sizeof(buf));
                 close(fd);
+                if (strstr(buf, "halt"))
+                        reboot_magic = 0x4321FEDC;
                 return i > 0;
         }
         return 0;
@@ -475,9 +479,12 @@ int main(int argc __attribute__ ((unused)), char **argv __attribute__ ((unused))
 	sync(); sync();
 
 	if (!abnormal_termination) {
-		printf("automatic reboot in 10 seconds\n");
+                if (reboot_magic == 0x01234567)
+                        printf("automatic reboot in 10 seconds\n");
+                else 
+                        printf("automatic poweroff in 10 seconds\n");
                 sleep(10);
-		reboot(0xfee1dead, 672274793, 0x01234567);
+		reboot(0xfee1dead, 672274793, reboot_magic);
 	} else {
 		printf("you may safely reboot or halt your system\n");
 		while (1);

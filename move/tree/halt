@@ -1,0 +1,5 @@
+#!/bin/sh
+
+echo "halt" > /var/run/rebootctl
+sudo killall -USR1 startkde_move
+sudo killall X
