@@ -169,7 +169,7 @@ sub ask_from_treelist_ {
 }
 sub ask_from_treelistf {
     my ($o, $title, $message, $separator, $f, $l, $def) = @_;
-    ask_from_entries_refH($o, $title, $message, [ { val => \$def, separator => $separator, list => $l, format => $f } ]) or return;
+    ask_from_entries_refH($o, $title, $message, [ { val => \$def, separator => $separator, list => $l, format => $f, sort => 1 } ]) or return;
     $def;
 }
 
