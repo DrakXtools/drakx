@@ -41,6 +41,10 @@ print '
 #include <X11/Xlib.h>
 #include <X11/extensions/xf86misc.h>
 
+#include <langinfo.h>
+#include <string.h>
+#include <iconv.h>
+
 #include <libintl.h>
 #include <term.h>
 #undef max_colors
@@ -60,13 +64,6 @@ char *pcmcia_probe(void);
 ';
 
 $ENV{C_RPM} and print '
-#include <langinfo.h>
-#include <string.h>
-#include <iconv.h>
-
-#undef Fflush
-#undef Mkdir
-#undef Stat
 #include <rpm/rpmlib.h>
 #include <rpm/rpmio.h>
 
