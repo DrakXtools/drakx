@@ -38,8 +38,13 @@ sub rewrite1 {
 		s/\s+/ /gs;
 		s/"/\\"/g;
 	    }
+	    push @l, $tree
+	} elsif ($tag eq 'screen') {
+	    $tree->[1] eq '0' or die "screen tag contains non CDATA\n";
+	    push @l, $tree->[2];
+	} else {
+	    push @l, rewrite1($tag, $tree);
 	}
-	push @l, $tag eq '0' ? $tree : rewrite1($tag, $tree);
     }
     { attr => $attr, tag => $tag, children => \@l };
 }
@@ -60,6 +65,11 @@ sub rewrite2 {
     my ($tree) = @_;
     ref($tree) or return $tree;
 
+    if ($tree->{tag} eq 'screen') {
+	'';
+    }
+
+
     my $text = do {
 	my @l = map { rewrite2($_) } @{$tree->{children}};
 	my $text;
@@ -78,13 +88,13 @@ sub rewrite2 {
 	$text =~ s/^( ?\n)+//;
 	$text =~ s/\s+$//;
 	qq(\n$text\n);
-    } elsif ($tree->{tag} eq 'quote') {
+    } elsif (member($tree->{tag}, 'quote', 'citetitle')) {
 	qq(``$text'');
     } elsif ($tree->{tag} eq 'command') {
 	qq(\\"$text\\");
     } elsif ($tree->{tag} eq 'userinput') {
 	qq(>>$text<<);
-    } elsif ($tree->{tag} eq 'footnote') {
+    } elsif (member($tree->{tag}, 'footnote', 'keysym')) {
 	'(*)'
     } elsif ($tree->{tag} eq 'warning') {
 	$text =~ s/^(\s+)/$1!! /;
@@ -98,7 +108,8 @@ sub rewrite2 {
 
     } elsif (member($tree->{tag}, 'guibutton', 'guimenu', 'guilabel',
                     'emphasis', 'acronym', 'keycap', 'ulink', 'tip', 'note',
-		    'primary', 'indexterm',
+		    'primary', 'indexterm', 'application', 'keycombo', 
+		    'literal', 'superscript',
 		   )) {
 	# ignored tags
 	$text;
@@ -115,6 +126,8 @@ sub rewrite2 {
 	} find('footnote', $tree);
 	$help->{$tree->{attr}{id}} = aerate($text . join('', @footnotes));
 	'';
+    } elsif ($tree->{tag} eq 'screen') {
+	qq(\n$text\n);
     } else {
 	die "unknown tag $tree->{tag}\n";
     }

@@ -13,7 +13,7 @@ LOCALEDIR=$(DATADIR)/locale
 all: $(MOFILES)
 
 help:
-	wget -q -O drakx-help.xml "http://www.mandrakelinux.com/cgi-bin/cvsweb.cgi/~checkout~/doc/manual/literal/drakx/en/drakx-help.xml?rev=1.1&content-type=text/plain"
+	wget -q -O drakx-help.xml "http://www.mandrakelinux.com/cgi-bin/cvsweb.cgi/~checkout~/doc/manual/literal/drakx/en/drakx-help.xml?rev=1&content-type=text/plain"
 	./help_xml2pm.pl drakx-help.xml | LC_ALL=fr iconv -f utf8 -t ascii//TRANSLIT > ../../help.pm
 
 %.mo: %.po
