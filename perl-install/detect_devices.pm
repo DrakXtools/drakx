@@ -654,13 +654,41 @@ sub getSNMPModel {
 	      };
 }
 
+sub getSMBPrinterShares {
+
+    my ($host) = @_;
+    
+    # SMB request to auto-detect shares
+    local *F;
+    open F, "export LC_ALL=\"C\"; smbclient -N -L $host |" || return ();
+    my $insharelist = 0;
+    my @shares;
+    while (my $l = <F>) {
+	chomp $l;
+	if ($l =~ /^\s*Sharename\s+Type\s+Comment\s*$/i) {
+	    $insharelist = 1;
+	} elsif ($l =~ /^\s*Server\s+Comment\s*$/i) {
+	    $insharelist = 0;
+	} elsif (($l =~ /^\s*(\S+)\s+Printer\s*(.*)$/i) &&
+		 ($insharelist)) {
+	    my $name = $1;
+	    my $description = $2;
+	    $description =~ s/^(\s*)//;
+	    push (@shares, { name => $name, description => $description });
+	}
+    }
+    close F;
+
+    return @shares;
+}
+
 sub whatNetPrinter () {
     my $i; 
     my @res;
 
-    # Scan network for printers (one of ports 9100-9199 open)
+    # Scan network for printers
     local *F;
-    open F, "export LC_ALL=\"C\"; nmap -p 4010,4020,4030,5503,9100-9104 `route | egrep \"^[0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+\" | cut -f 1 -d \" \" | grep -v \"127\\.0\\.0\\.0\" | sed \"s/\\.0\$/\\.*/\"` |" ||
+    open F, "export LC_ALL=\"C\"; nmap -p 139,4010,4020,4030,5503,9100-9104 `route | egrep \"^[0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+\" | cut -f 1 -d \" \" | grep -v \"127\\.0\\.0\\.0\" | sed \"s/\\.0\$/\\.*/\"` |" ||
 	return @res;
     my $host = "";
     my $ip = "";
@@ -679,18 +707,42 @@ sub whatNetPrinter () {
 	    }
 	    $port = "";
 
-	    # SNMP request to auto-detect model
-	    $modelinfo = getSNMPModel ($ip);
+	    undef $modelinfo;
 
 	} elsif ($line =~ m/^\s*(\d+)\/\S+\s+open\s+/i) {
-	    next if ($ip eq "") || (!defined($modelinfo));
+	    next if ($ip eq "");
 	    $port = $1;
-
+	    
 	    # Now we have all info for one printer
 	    # Store this auto-detection result in the data structure
-	    push @res, { port => "socket://$host:$port",
-			 val => $modelinfo
-			 };
+
+	    # Determine the protocol by the port number
+
+	    # SMB/Windows
+	    if ($port eq "139") {
+		my @shares = getSMBPrinterShares($ip);
+		for my $share (@shares) {
+		    push @res, { port => "smb://$host/$share->{name}",
+				 val => { CLASS => 'PRINTER',
+					  MODEL => _("Unknown Model"),
+					  MANUFACTURER => "",
+					  DESCRIPTION =>
+					      "$share->{description}",
+					  SERIALNUMBER => ""
+				      }
+			     };
+		}
+	    } else {
+		if (!defined($modelinfo)) {
+		    # SNMP request to auto-detect model
+		    $modelinfo = getSNMPModel ($ip);
+		}
+		if (defined($modelinfo)) {
+		    push @res, { port => "socket://$host:$port",
+				 val => $modelinfo
+				 };
+		}
+	    }
 	}
     }
     close F;
