@@ -695,8 +695,8 @@ sub allowedDepth($) {
 	$allowed_depth{16} = 1; #- this is the default.
 	$card->{identifier} =~ /Voodoo 5/ and $allowed_depth{24} = undef;
 	$card->{identifier} =~ /Matrox.* G[245][05]0/ and $allowed_depth{24} = undef;
-	$card->{identifier} =~ /Rage 128/ and $allowed_depth{32} = undef;
-	$card->{identifier} =~ /Radeon/ and $allowed_depth{32} = undef;
+	$card->{identifier} =~ /Rage 128/ and $allowed_depth{24} = undef;
+	$card->{identifier} =~ /Radeon/ and $allowed_depth{24} = undef;
     }
     
     for ($card->{server}) {
