@@ -90,8 +90,8 @@ sub config_cups {
 		     N("Custom configuration") :
 		     ($#{$sharehosts->{list}} >= 0 ?
 		      ($#{$sharehosts->{list}} > 1 ?
-		       join (", ", @{$sharehosts->{list}}[0,1]) . " ..." :
-		       join (", ", @{$sharehosts->{list}})) :
+		       join(", ", @{$sharehosts->{list}}[0,1]) . " ..." :
+		       join(", ", @{$sharehosts->{list}})) :
 		      N("No remote machines"))), 
 		type => 'button',
 		clicked_may_quit => sub {
