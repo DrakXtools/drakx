@@ -417,6 +417,7 @@ sub create_dialog {
     $dialog->action_area->pack_start($button, 1, 1, 0);
     $button->grab_default;
 
+    $dialog->set_has_separator(0);;
     $dialog->show_all;
     Gtk2->main;
     $ret;
