@@ -465,7 +465,7 @@ sub selectSupplMedia {
 	} else {
 	    my $url = $o->ask_from_entry('', N("URL of the mirror?")) or return '';
 	    useMedium($medium_name);
-	    require "$suppl_method.pm";
+	    require "$suppl_method.pm"; #- require http or ftp
 	    #- first, try to find an hdlists file
 	    eval { pkgs::psUsingHdlists($o, $suppl_method, $url, $o->{packages}, $medium_name, \&setup_suppl_medium) };
 	    if ($@) {

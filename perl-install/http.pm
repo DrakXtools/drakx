@@ -1,6 +1,5 @@
 package http; # $Id$
 
-use IO::Socket;
 use network::network;
 
 
@@ -19,6 +18,10 @@ sub getFile {
 
     my $use_http_proxy = $ENV{PROXY} && $ENV{PROXYPORT};
 
+    delete $INC{'IO/Socket.pm'};
+    delete $INC{'IO/Socket/UNIX.pm'};
+    delete $INC{'IO/Socket/INET.pm'};
+    require IO::Socket;
     $sock = IO::Socket::INET->new(PeerAddr => $use_http_proxy ? $ENV{PROXY} : $host,
 				  PeerPort => $use_http_proxy ? $ENV{PROXYPORT} : $port || 80,
 				  Proto    => 'tcp',
