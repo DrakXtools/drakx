@@ -319,6 +319,7 @@ sub suggest {
 	 bootUnsafe => $unsafe,
 	 entries => [],
 	 timeout => $onmbr && 10,
+	 nowarn => 1,
 	   if_(arch() !~ /ia64/,
 	 lba32 => 1,
 	 boot => "/dev/" . ($onmbr ? $hds->[0]{device} : fsedit::get_root($fstab, 'boot')->{device}),
@@ -711,7 +712,7 @@ sub write_lilo_conf {
 
 	local $lilo->{default} = make_label_lilo_compatible($lilo->{default});
 	$lilo->{$_} and print F "$_=$lilo->{$_}" foreach qw(boot map install vga default keytable);
-	$lilo->{$_} and print F $_ foreach qw(linear lba32 compact prompt restricted);
+	$lilo->{$_} and print F $_ foreach qw(linear lba32 compact prompt nowarn restricted);
 	print F "append=\"$lilo->{append}\"" if $lilo->{append};
  	print F "password=", $lilo->{password} if $lilo->{password}; #- also done by msec
 	print F "timeout=", round(10 * $lilo->{timeout}) if $lilo->{timeout};
