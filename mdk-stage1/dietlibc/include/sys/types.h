@@ -110,7 +110,7 @@ typedef uint32_t n_time;
 typedef uint32_t n_long;
 # ifndef __dietlibc_u_char_defined
 typedef char* caddr_t;
-typedef unsigned long u_long;
+typedef uint32_t u_long;
 typedef unsigned char u_char;
 typedef unsigned short u_short;
 typedef unsigned int u_int;
