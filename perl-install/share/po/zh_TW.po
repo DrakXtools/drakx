@@ -18,7 +18,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX\n"
 "POT-Creation-Date: 2005-02-24 14:10+0100\n"
-"PO-Revision-Date: 2005-03-05 13:19+0800\n"
+"PO-Revision-Date: 2005-03-06 21:56+0800\n"
 "Last-Translator: Shiva Huang <shivahuang@gmail.com>\n"
 "Language-Team: Traditional Chinese <zh@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -1777,13 +1777,13 @@ msgid "Set administrator (root) password and network authentication methods"
 msgstr ""
 
 #: authentication.pm:166
-#, fuzzy, c-format
+#, c-format
 msgid "Set administrator (root) password"
-msgstr "設定 root 密碼"
+msgstr "設定管理者 (root) 密碼"
 
 #: authentication.pm:167
 #: standalone/drakvpn:1125
-#, fuzzy, c-format
+#, c-format
 msgid "Authentication method"
 msgstr "認證方式"
 
@@ -6114,20 +6114,20 @@ msgid ""
 "Information on configuring your system is available in the post\n"
 "install chapter of the Official Mandrakelinux User's Guide."
 msgstr ""
-"恭喜!! 系統已經完成安裝.\n"
-"請取出開機媒介且按下 return 以重新開機.\n"
+"恭喜您！系統已經完成安裝。\n"
+"請取出開機媒介並按下 return 以重新開機。\n"
 "\n"
 "\n"
-"要獲得這個 Mandrakelinux 釋出版本可用的修正相關資訊,\n"
-"諮詢可用的勘誤表: \n"
+"要獲得這個 Mandrakelinux 釋出版本可用的修正相關資訊，\n"
+"請諮詢可用的勘誤表：\n"
 "\n"
 "\n"
 "%s\n"
 "\n"
 "\n"
-"關於設定您的系統的資訊可以在正式 Mandrakelinux 使用者指南\n"
+"關於如何設定您系統的資訊可以在官方 Mandrakelinux 使用者指南\n"
 "(Official Mandrakelinux User's Guide) 的安裝後章節 (post install chapter )\n"
-"裡面找到."
+"裡面找到。"
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
 #: install_messages.pm:144
@@ -6147,9 +6147,9 @@ msgid ""
 "Either your cdrom drive or your cdrom is defective.\n"
 "Check the cdrom on an installed computer using \"rpm -qpl media/main/*.rpm\"\n"
 msgstr ""
-"有某些重要的套件沒有被適當安裝.\n"
-"可能是您的 cdrom 磁碟或者是 cdrom 光碟有缺陷.\n"
-"確認 cdrom 在一個已經安裝的電腦上使用 \"rpm -qpl media/main/*.rpm\"\n"
+"有某些重要的套件沒有被適當地安裝。\n"
+"可能是您的光碟機或者是光碟片有缺陷。\n"
+"請將光碟放在一個已經安裝好的電腦上使用 \"rpm -qpl media/main/*.rpm\" 來檢查\n"
 
 #: install_steps.pm:599
 #, c-format
@@ -6169,9 +6169,9 @@ msgid ""
 "Mandrakelinux. If that occurs, you can try a text install instead. For this,\n"
 "press `F1' when booting on CDROM, then enter `text'."
 msgstr ""
-"您的系統資源太低. 您可能有某些問題在安裝 Mandrakelinux 過程中\n"
-"若是那發生的話, 您或許可以改用文字模式的方式安裝替代.\n"
-"要如此的話, CDROM 開機時按下 `F1', 然後輸入 `text'."
+"您的系統資源太少。您可能會在安裝 Mandrakelinux 過程中遇到問題。\n"
+"若是真的發生問題，您或許可以改用文字模式的安裝方式來取代。\n"
+"要如此作的話m，請在光碟開機時按下 `F1'，然後輸入 `text'。"
 
 #: install_steps_gtk.pm:224
 #: install_steps_interactive.pm:624
@@ -6183,7 +6183,7 @@ msgstr "套件群組選擇"
 #: install_steps_interactive.pm:567
 #, c-format
 msgid "Total size: %d / %d MB"
-msgstr "總共大小: %d / %d MB"
+msgstr "總共大小： %d / %d MB"
 
 #: install_steps_gtk.pm:295
 #, c-format
@@ -6193,12 +6193,12 @@ msgstr "壞掉的套件"
 #: install_steps_gtk.pm:297
 #, c-format
 msgid "Version: "
-msgstr "版本:"
+msgstr "版本："
 
 #: install_steps_gtk.pm:298
 #, c-format
 msgid "Size: "
-msgstr "大小:"
+msgstr "大小："
 
 #: install_steps_gtk.pm:298
 #, c-format
@@ -6208,7 +6208,7 @@ msgstr "%d KB\n"
 #: install_steps_gtk.pm:299
 #, c-format
 msgid "Importance: "
-msgstr "重要性:"
+msgstr "重要性："
 
 #: install_steps_gtk.pm:332
 #, c-format
@@ -6238,7 +6238,7 @@ msgstr "為了要保留 %s"
 #: install_steps_gtk.pm:344
 #, c-format
 msgid "You can not select this package as there is not enough space left to install it"
-msgstr "您不可以選取這個套件因為剩餘空間不足以安裝它."
+msgstr "您不可以選取這個套件，因為剩餘的空間不足以安裝它。"
 
 #: install_steps_gtk.pm:347
 #, c-format
@@ -6253,12 +6253,12 @@ msgstr "下列的套件將會被移除"
 #: install_steps_gtk.pm:372
 #, c-format
 msgid "This is a mandatory package, it can not be unselected"
-msgstr "這是一個必要的套件, 您不可以選擇不要安裝這個套件"
+msgstr "這是一個必要的套件，您不可以選擇不要安裝這個套件"
 
 #: install_steps_gtk.pm:374
 #, c-format
 msgid "You can not unselect this package. It is already installed"
-msgstr "您不可以不選這個套件. 它已經被安裝上了."
+msgstr "您不可以不選這個套件。它已經被安裝上了。"
 
 #: install_steps_gtk.pm:377
 #, c-format
@@ -6266,23 +6266,23 @@ msgid ""
 "This package must be upgraded.\n"
 "Are you sure you want to deselect it?"
 msgstr ""
-"這個套件一定要更新才行.\n"
-"您確定您不要選它嗎?"
+"這個套件一定要更新才行。\n"
+"您確定您不要選它嗎？"
 
 #: install_steps_gtk.pm:380
 #, c-format
 msgid "You can not unselect this package. It must be upgraded"
-msgstr "您不可以不選這個套件. 它一定要更新才行."
+msgstr "您不可以不選這個套件，它一定要更新才行。"
 
 #: install_steps_gtk.pm:385
 #, c-format
 msgid "Show automatically selected packages"
-msgstr "自動顯示被選取的套件"
+msgstr "顯示自動被選取的套件"
 
 #: install_steps_gtk.pm:390
-#, fuzzy, c-format
+#, c-format
 msgid "Load/Save selection"
-msgstr "套件選取"
+msgstr "載入/儲存選取"
 
 #: install_steps_gtk.pm:391
 #, c-format
@@ -6324,7 +6324,7 @@ msgstr "剩餘時間"
 #: install_steps_gtk.pm:497
 #, c-format
 msgid "Please wait, preparing installation..."
-msgstr "請稍後, 正在準備安裝..."
+msgstr "請稍候，正在準備安裝..."
 
 #: install_steps_gtk.pm:512
 #, c-format
@@ -6334,7 +6334,7 @@ msgstr "%d 套件"
 #: install_steps_gtk.pm:517
 #, c-format
 msgid "Installing package %s"
-msgstr "正在安裝 %s 套件"
+msgstr "正在安裝套件 %s"
 
 #: install_steps_gtk.pm:552
 #: install_steps_interactive.pm:92
@@ -6351,15 +6351,15 @@ msgid ""
 "Please insert the Cd-Rom labelled \"%s\" in your drive and press Ok when done.\n"
 "If you do not have it, press Cancel to avoid installation from this Cd-Rom."
 msgstr ""
-"更換 Cd-Rom!\n"
-"請插入 Cd-Rom 標籤為 \"%s\" 於您的磁碟, 完成時按下 Ok 確定.\n"
-"若是您並沒有它, 請點選 Cancel 取消以略過這一片 Cd-Rom 的安裝."
+"更換光碟片！\n"
+"請插入標示為為 \"%s\" 的光碟於您的光碟機中，完成後請按下確定。\n"
+"若是您沒有這片光碟，請點選取消以略過這一片光碟的安裝。"
 
 #: install_steps_gtk.pm:571
 #: install_steps_interactive.pm:746
 #, c-format
 msgid "There was an error ordering packages:"
-msgstr "排列套件時發生錯誤:"
+msgstr "排列套件時發生錯誤："
 
 #: install_steps_gtk.pm:571
 #: install_steps_gtk.pm:575
@@ -6367,13 +6367,13 @@ msgstr "排列套件時發生錯誤:"
 #: install_steps_interactive.pm:750
 #, c-format
 msgid "Go on anyway?"
-msgstr "無論如何都要繼續嗎?"
+msgstr "無論如何都要繼續嗎？"
 
 #: install_steps_gtk.pm:575
 #: install_steps_interactive.pm:750
 #, c-format
 msgid "There was an error installing packages:"
-msgstr "安裝套件時發生錯誤:"
+msgstr "安裝套件時發生錯誤："
 
 #: install_steps_gtk.pm:617
 #: install_steps_interactive.pm:920
@@ -6397,6 +6397,8 @@ msgid ""
 "You have the option to copy the contents of the CDs onto the hard drive before installation.\n"
 "It will then continue from the hard drive and the packages will remain available once the system is fully installed."
 msgstr ""
+"您可以選擇在安裝前將光碟的內容複製到硬碟。稍候將會由硬碟繼續安裝，並且這些套件\n"
+"在安裝完畢之後仍然可以繼續使用。"
 
 #: install_steps_gtk.pm:686
 #, c-format
@@ -6515,15 +6517,15 @@ msgstr "選取掛載點"
 #, c-format
 msgid "No free space for 1MB bootstrap! Install will continue, but to boot your system, you'll need to create the bootstrap partition in DiskDrake"
 msgstr ""
-"沒有足夠的可用空間安裝 bootstrap! 安裝還是會繼續, 但是您需要在 DiskDrake\n"
-"建立 bootstrap 分割以開機您的系統"
+"沒有足夠的可用空間安裝 bootstrap！安裝還是會繼續，但是您必須在 DiskDrake\n"
+"中建立 bootstrap 分割來啟動您的系統"
 
 #: install_steps_interactive.pm:317
-#, fuzzy, c-format
+#, c-format
 msgid "You'll need to create a PPC PReP Boot bootstrap! Install will continue, but to boot your system, you'll need to create the bootstrap partition in DiskDrake"
 msgstr ""
-"沒有足夠的可用空間安裝 bootstrap! 安裝還是會繼續, 但是您需要在 DiskDrake\n"
-"建立 bootstrap 分割以開機您的系統"
+"您需要建立一個 PPC PReP 開機 bootstrap！安裝還是會繼續, 但是您必須在 DiskDrake\n"
+"中建立 bootstrap 分割來啟動您的系統"
 
 #: install_steps_interactive.pm:353
 #, c-format
@@ -6578,13 +6580,13 @@ msgid "Your system does not have enough space left for installation or upgrade (
 msgstr "您的系統沒有足夠的空間可以用來安裝或升級了 (%d > %d)"
 
 #: install_steps_interactive.pm:495
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Please choose load or save package selection.\n"
 "The format is the same as auto_install generated files."
 msgstr ""
-"請選擇載入或者是儲存套件選擇到軟片.\n"
-"該格式等同於 auto_install 產生的軟片."
+"請選擇要載入或者儲存套件選擇到磁片上。\n"
+"它使用與自動安裝所產生的磁片相同的格式。"
 
 #: install_steps_interactive.pm:497
 #, c-format
@@ -6600,9 +6602,9 @@ msgid "Save"
 msgstr "儲存"
 
 #: install_steps_interactive.pm:505
-#, fuzzy, c-format
+#, c-format
 msgid "Bad file"
-msgstr "選擇檔案"
+msgstr "損壞的檔案"
 
 #: install_steps_interactive.pm:581
 #, c-format
@@ -7258,7 +7260,9 @@ msgstr "瑞士 (德國式配置)"
 msgid ""
 "_: keyboard\n"
 "Swiss (French layout)"
-msgstr "瑞士 (法國式配置)"
+msgstr ""
+"_: keyboard\n"
+"瑞士 (法國式配置)"
 
 #: keyboard.pm:203
 #, fuzzy, c-format
@@ -9123,7 +9127,7 @@ msgstr "辛巴威"
 #: lang.pm:1040
 #, c-format
 msgid "You should install the following packages: %s"
-msgstr "您應該安裝下列套件: %s"
+msgstr "您應該安裝下列套件： %s"
 
 #. -PO: the following is used to combine packages names. eg: "initscripts, harddrake, yudit"
 #: lang.pm:1043
@@ -9135,7 +9139,7 @@ msgstr ", "
 #: lang.pm:1094
 #, c-format
 msgid "Welcome to %s"
-msgstr "歡迎來到 %s"
+msgstr "歡迎使用 %s"
 
 #: loopback.pm:31
 #, c-format
@@ -9157,7 +9161,7 @@ msgstr "參數"
 #: standalone/draksec:51
 #, c-format
 msgid "NONE"
-msgstr ""
+msgstr "無"
 
 #: modules/interactive.pm:22
 #, c-format
@@ -9167,7 +9171,7 @@ msgstr "模組組態設定"
 #: modules/interactive.pm:22
 #, c-format
 msgid "You can configure each parameter of the module here."
-msgstr "您可以在這邊輸入該模組的每一個參數."
+msgstr "您可以在這邊輸入該模組的每一個參數。"
 
 #: modules/interactive.pm:63
 #, c-format
@@ -9177,43 +9181,43 @@ msgstr "找到 %s 介面"
 #: modules/interactive.pm:64
 #, c-format
 msgid "Do you have another one?"
-msgstr "您還有其他的嗎?"
+msgstr "您還有其他的嗎？"
 
 #: modules/interactive.pm:65
 #, c-format
 msgid "Do you have any %s interfaces?"
-msgstr "你是否有任何 %s 介面?"
+msgstr "你是否有任何 %s 介面？"
 
 #: modules/interactive.pm:71
 #, c-format
 msgid "See hardware info"
-msgstr "看硬體資訊"
+msgstr "觀看硬體資訊"
 
 #: modules/interactive.pm:82
-#, fuzzy, c-format
+#, c-format
 msgid "Installing driver for USB controller"
-msgstr "正在安裝 %s 卡 %s 的驅動程式"
+msgstr "正在安裝 USB 控制器的驅動程式"
 
 #: modules/interactive.pm:83
-#, fuzzy, c-format
+#, c-format
 msgid "Installing driver for firewire controller %s"
-msgstr "正在安裝 %s 卡 %s 的驅動程式"
+msgstr "正在安裝 Firewire 控制器的驅動程式 %s"
 
 #: modules/interactive.pm:84
-#, fuzzy, c-format
+#, c-format
 msgid "Installing driver for hard drive controller %s"
-msgstr "正在安裝 %s 卡 %s 的驅動程式"
+msgstr "正在安裝硬碟控制器的驅動程式 %s"
 
 #: modules/interactive.pm:85
-#, fuzzy, c-format
+#, c-format
 msgid "Installing driver for ethernet controller %s"
-msgstr "正在安裝 %s 卡 %s 的驅動程式"
+msgstr "正在安裝網路卡控制器的驅動程式 %s"
 
 #. -PO: the first %s is the card type (scsi, network, sound,...)
 #: modules/interactive.pm:96
 #, c-format
 msgid "Installing driver for %s card %s"
-msgstr "正在安裝 %s 卡 %s 的驅動程式"
+msgstr "正在安裝 %s 卡的驅動程式 %s"
 
 #: modules/interactive.pm:99
 #, c-format
@@ -9226,8 +9230,8 @@ msgid ""
 "You may now provide options to module %s.\n"
 "Note that any address should be entered with the prefix 0x like '0x123'"
 msgstr ""
-"您現在可以為模組 %s 提供選項.\n"
-"請注意一下, 輸入的記憶體位置應該使用 0x 開頭, 比方像是 '0x123'"
+"您現在可以為模組 %s 提供選項。\n"
+"請注意，您輸入的記憶體位置以 0x 開頭，例如 '0x123'"
 
 #: modules/interactive.pm:115
 #, c-format
@@ -9236,20 +9240,20 @@ msgid ""
 "Options are in format ``name=value name2=value2 ...''.\n"
 "For instance, ``io=0x300 irq=7''"
 msgstr ""
-"您現在可以為模組 %s 提供選項.\n"
+"您現在可以為模組 %s 提供選項。\n"
 "選項的格式為 ``name=value name2=value2 ...''\n"
-"例如, ``io=0x300 irq=7''"
+"例如 ``io=0x300 irq=7''"
 
 #: modules/interactive.pm:117
 #, c-format
 msgid "Module options:"
-msgstr "模組選項:"
+msgstr "模組選項："
 
 #. -PO: the %s is the driver type (scsi, network, sound,...)
 #: modules/interactive.pm:130
 #, c-format
 msgid "Which %s driver should I try?"
-msgstr "我應該試那個 %s 驅動程式呢?"
+msgstr "我應該試那個 %s 驅動程式呢？"
 
 #: modules/interactive.pm:139
 #, c-format
@@ -10122,9 +10126,9 @@ msgid "Account Password"
 msgstr "帳號的密碼"
 
 #: network/netconnect.pm:325
-#, fuzzy, c-format
+#, c-format
 msgid "Cable: account options"
-msgstr "撥號: 帳號選項"
+msgstr "Cable：帳號選項"
 
 #: network/netconnect.pm:328
 #, c-format
@@ -10136,7 +10140,7 @@ msgstr ""
 #: network/netconnect.pm:920
 #, c-format
 msgid "Select the network interface to configure:"
-msgstr "選取要設定的網路介面:"
+msgstr "選取要設定的網路介面："
 
 #: network/netconnect.pm:364
 #: network/netconnect.pm:412
@@ -10161,7 +10165,7 @@ msgstr "外接式 ISDN 數據機"
 #: standalone/harddrake2:210
 #, c-format
 msgid "Select a device!"
-msgstr "選取一個裝置!"
+msgstr "選取一個裝置！"
 
 #: network/netconnect.pm:420
 #: network/netconnect.pm:430
@@ -10175,7 +10179,7 @@ msgstr "ISDN 設定"
 #: network/netconnect.pm:421
 #, c-format
 msgid "What kind of card do you have?"
-msgstr "您有那種的卡?"
+msgstr "您有那種的卡？"
 
 #: network/netconnect.pm:431
 #, c-format
@@ -10186,9 +10190,9 @@ msgid ""
 "If you have a PCMCIA card, you have to know the \"irq\" and \"io\" of your card.\n"
 msgstr ""
 "\n"
-"如果你有一個 ISA 卡, 下一個螢幕所顯示的數值應該是正確的.\n"
+"如果您使用的是 ISA 卡，下一個螢幕所顯示的數值應該是正確的。\n"
 "\n"
-"如果你有一個 PCMCIA 卡, 那您必須要知道你的卡的\"irq\" 與 \"io\"值.\n"
+"如果您使用的是 PCMCIA 卡，那您必須要知道這張卡的\"irq\" 與 \"io\"值。\n"
 
 #: network/netconnect.pm:435
 #, c-format
@@ -10315,14 +10319,14 @@ msgid "IP address"
 msgstr "IP 位址"
 
 #: network/netconnect.pm:652
-#, fuzzy, c-format
+#, c-format
 msgid "Subnet mask"
-msgstr "網路遮罩"
+msgstr "子網路遮罩"
 
 #: network/netconnect.pm:664
 #, c-format
 msgid "Dialup: DNS parameters"
-msgstr "撥號: DNS 參數"
+msgstr "撥號：DNS 參數"
 
 #: network/netconnect.pm:667
 #, c-format
@@ -10586,9 +10590,9 @@ msgstr "使用已經安裝的驅動程式 (%s)"
 
 #: network/netconnect.pm:1072
 #: printer/printerdrake.pm:3644
-#, fuzzy, c-format
+#, c-format
 msgid "Could not install the %s package!"
-msgstr "正在安裝 %s 套件"
+msgstr "無法安裝 %s 套件！"
 
 #: network/netconnect.pm:1076
 #, c-format
@@ -11260,44 +11264,44 @@ msgid ", USB printer"
 msgstr "，USB 印表機"
 
 #: printer/main.pm:364
-#, fuzzy, c-format
+#, c-format
 msgid ", HP printer on a parallel port"
-msgstr "印表機位於並列埠 \\/*%s"
+msgstr "，位於並列埠的 HP 印表機"
 
 #: printer/main.pm:366
-#, fuzzy, c-format
+#, c-format
 msgid ", HP printer on USB"
-msgstr "，USB 印表機"
+msgstr "，位於 USB 埠的 HP 印表機"
 
 #: printer/main.pm:368
-#, fuzzy, c-format
+#, c-format
 msgid ", HP printer on HP JetDirect"
-msgstr "，多功能裝置於 HP JetDirect"
+msgstr "，位於 HP JetDirect 的 HP 印表機"
 
 #: printer/main.pm:370
-#, fuzzy, c-format
+#, c-format
 msgid ", HP printer"
-msgstr "，USB 印表機"
+msgstr "，HP 印表機"
 
 #: printer/main.pm:376
 #, c-format
 msgid ", multi-function device on parallel port #%s"
-msgstr "，多功能裝置於並列埠 #%s"
+msgstr "，位於並列埠 %s 的多功能裝置"
 
 #: printer/main.pm:379
 #, c-format
 msgid ", multi-function device on a parallel port"
-msgstr "，多功能裝置於一個並列埠"
+msgstr "，位於並列埠的多功能裝置"
 
 #: printer/main.pm:381
 #, c-format
 msgid ", multi-function device on USB"
-msgstr "，多功能裝置於 USB"
+msgstr "，位於 USB 的多功能裝置"
 
 #: printer/main.pm:383
 #, c-format
 msgid ", multi-function device on HP JetDirect"
-msgstr "，多功能裝置於 HP JetDirect"
+msgstr "，為於 HP JetDirect 的多功能裝置"
 
 #: printer/main.pm:385
 #, c-format
@@ -11353,24 +11357,24 @@ msgid "USB printer"
 msgstr "USB 印表機"
 
 #: printer/main.pm:432
-#, fuzzy, c-format
+#, c-format
 msgid "HP printer on a parallel port"
-msgstr "印表機位於並列埠 \\/*%s"
+msgstr "位於並列埠的 HP 印表機"
 
 #: printer/main.pm:434
-#, fuzzy, c-format
+#, c-format
 msgid "HP printer on USB"
-msgstr "找不到印表機！"
+msgstr "位於 USB 埠的 HP 印表機"
 
 #: printer/main.pm:436
-#, fuzzy, c-format
+#, c-format
 msgid "HP printer on HP JetDirect"
-msgstr "，多功能裝置於 HP JetDirect"
+msgstr "位於 HP JetDirect 的 HP 印表機"
 
 #: printer/main.pm:438
-#, fuzzy, c-format
+#, c-format
 msgid "HP printer"
-msgstr "印表機"
+msgstr "HP 印表機"
 
 #: printer/main.pm:444
 #, c-format
@@ -11811,6 +11815,8 @@ msgid ""
 "\n"
 "WARNING: No local network connection active, remote printers can neither be detected nor tested!"
 msgstr ""
+"\n"
+"警告：本地端網路連線並未啟動，無法偵測遠端印表機也無法測試！"
 
 #: printer/printerdrake.pm:621
 #, c-format
@@ -11820,12 +11826,12 @@ msgstr "印表機自動偵測 (本地端，TCP/Socket，SMB 印表機，與裝�
 #: printer/printerdrake.pm:623
 #, c-format
 msgid "Modify timeout for network printer auto-detection"
-msgstr ""
+msgstr "修改網路印表機自動偵測的連線逾時時間"
 
 #: printer/printerdrake.pm:629
 #, c-format
 msgid "Enter the timeout for network printer auto-detection (in msec) here. "
-msgstr ""
+msgstr "請在此輸入網路印表機自動偵測的連線逾時時間 (以秒為單位)。"
 
 #: printer/printerdrake.pm:631
 #, c-format
@@ -11833,9 +11839,9 @@ msgid "The longer you choose the timeout, the more reliable the detections of ne
 msgstr ""
 
 #: printer/printerdrake.pm:635
-#, fuzzy, c-format
+#, c-format
 msgid "The timeout must be a positive integer number!"
-msgstr "%s 參數需要為整數!"
+msgstr "連線逾時時間必須為整數！"
 
 #: printer/printerdrake.pm:673
 #, c-format
@@ -11850,7 +11856,7 @@ msgstr "與一台未知的印表機機"
 #: printer/printerdrake.pm:692
 #, c-format
 msgid "and %d unknown printers"
-msgstr "與 %d 未知的印表機"
+msgstr "與 %d 台未知的印表機"
 
 #: printer/printerdrake.pm:696
 #, c-format
@@ -12141,7 +12147,7 @@ msgid "Auto-detect printers connected to machines running Microsoft Windows"
 msgstr "自動偵測位於 Microsoft Windows 電腦的印表機"
 
 #: printer/printerdrake.pm:1108
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "\n"
 "Congratulations, your printer is now installed and configured!\n"
@@ -12151,11 +12157,11 @@ msgid ""
 "If you want to add, remove, or rename a printer, or if you want to change the default option settings (paper input tray, printout quality, ...), select \"Printer\" in the \"Hardware\" section of the %s Control Center."
 msgstr ""
 "\n"
-"恭喜！印表機設定已經完成。\n"
+"恭喜，您的印表機已經安裝並設定完成！\n"
 "\n"
-"若是您事後需要新增、刪除、重新命名相關印表機等設定的話，\n"
-"請在 Mandrake 控制台內選擇『硬體』再選擇『印表機』項目\n"
-"即可進行設定動作。"
+"您可以在您的應用程式中使用 \"列印\" 這個指令 (通常位於 \"檔案\" 這個選單下)。"
+
+"若是您事後需要新增、刪除、重新命名，或者修改預設選項 (例如紙張輸入方向、輸出品質...等)，請在 %s 控制中心中的 \"硬體\" 選擇 \"印表機\" 來設定。"
 
 #: printer/printerdrake.pm:1143
 #: printer/printerdrake.pm:1373
@@ -12173,9 +12179,9 @@ msgstr ""
 #: printer/printerdrake.pm:2275
 #: printer/printerdrake.pm:2342
 #: printer/printerdrake.pm:2377
-#, fuzzy, c-format
+#, c-format
 msgid "Could not install the %s packages!"
-msgstr "正在安裝 %s 套件"
+msgstr "無法安裝 %s 套件！"
 
 #: printer/printerdrake.pm:1145
 #, c-format
@@ -12213,9 +12219,9 @@ msgstr "偵測到 %s"
 #: printer/printerdrake.pm:1193
 #: printer/printerdrake.pm:1220
 #: printer/printerdrake.pm:1238
-#, fuzzy, c-format
+#, c-format
 msgid "Printer on parallel port #%s"
-msgstr "印表機位於並列埠 \\/*%s"
+msgstr "位於並列埠 %s 的印表機"
 
 #: printer/printerdrake.pm:1199
 #, c-format
@@ -12310,9 +12316,9 @@ msgid "Please choose the printer you want to set up. The configuration of the pr
 msgstr "請選擇您要設定的印表機。印表機的相關設定將會自動完成。若您的印表機沒有正確的被偵測到或是您喜歡一個自訂的印表機設定，請打開 「手動設定」。"
 
 #: printer/printerdrake.pm:1326
-#, fuzzy, c-format
+#, c-format
 msgid "Please choose the printer to which the print jobs should go."
-msgstr "請選取印表機所連接的連接埠。"
+msgstr "請選取印表工作應該送達的印表機。"
 
 #: printer/printerdrake.pm:1328
 #, c-format
@@ -12594,23 +12600,23 @@ msgstr ""
 #: printer/printerdrake.pm:1848
 #, c-format
 msgid "Printer host name or IP missing!"
-msgstr "沒指定印表機主機名稱或是IP !"
+msgstr "沒指定印表機主機名稱或是 IP！"
 
 #: printer/printerdrake.pm:1871
 #, c-format
 msgid "Printer host name or IP"
-msgstr "印表機主機名稱或是IP"
+msgstr "印表機主機名稱或是 IP"
 
 #: printer/printerdrake.pm:1927
-#, fuzzy, c-format
+#, c-format
 msgid "Refreshing Device URI list..."
-msgstr "正在更新印表機資料 ..."
+msgstr "正在更新設備 URL 列表..."
 
 #: printer/printerdrake.pm:1930
 #: printer/printerdrake.pm:1932
 #, c-format
 msgid "Printer Device URI"
-msgstr "印表裝置的 URI"
+msgstr "印表機的 URI"
 
 #: printer/printerdrake.pm:1931
 #, c-format
@@ -12717,9 +12723,9 @@ msgstr ""
 
 #: printer/printerdrake.pm:2170
 #: printer/printerdrake.pm:2287
-#, fuzzy, c-format
+#, c-format
 msgid "Checking device and configuring %s..."
-msgstr "請稍候，正在偵測與設定裝置中..."
+msgstr "正在檢查與設定 %s 中..."
 
 #: printer/printerdrake.pm:2189
 #, fuzzy, c-format
@@ -12728,9 +12734,9 @@ msgstr "您要使用那個通訊協定?"
 
 #: printer/printerdrake.pm:2218
 #: printer/printerdrake.pm:2331
-#, fuzzy, c-format
+#, c-format
 msgid "Installing SANE packages..."
-msgstr "正在安裝套件..."
+msgstr "正在安裝套件 SANE..."
 
 #: printer/printerdrake.pm:2231
 #: printer/printerdrake.pm:2344
@@ -12741,12 +12747,12 @@ msgstr ""
 #: printer/printerdrake.pm:2246
 #, c-format
 msgid "Using and Maintaining your %s"
-msgstr ""
+msgstr "使用與維護您的 %s"
 
 #: printer/printerdrake.pm:2371
-#, fuzzy, c-format
+#, c-format
 msgid "Installing mtools packages..."
-msgstr "正在安裝套件..."
+msgstr "正在安裝套件 mtools..."
 
 #: printer/printerdrake.pm:2379
 #, c-format
@@ -12756,7 +12762,7 @@ msgstr ""
 #: printer/printerdrake.pm:2395
 #, c-format
 msgid "Scanning on your HP multi-function device"
-msgstr "正在掃描你的 HP 多功能裝置"
+msgstr "正在掃描您的 HP 多功能裝置"
 
 #: printer/printerdrake.pm:2404
 #, c-format
@@ -12764,9 +12770,9 @@ msgid "Photo memory card access on your HP multi-function device"
 msgstr ""
 
 #: printer/printerdrake.pm:2421
-#, fuzzy, c-format
+#, c-format
 msgid "Configuring device..."
-msgstr "設定中..."
+msgstr "設定裝置中..."
 
 #: printer/printerdrake.pm:2455
 #, c-format
@@ -13027,9 +13033,9 @@ msgstr ""
 "連結位置。"
 
 #: printer/printerdrake.pm:3174
-#, fuzzy, c-format
+#, c-format
 msgid "Samsung ML/QL-85G configuration"
-msgstr "音效設定"
+msgstr "Samsung ML/QL-85G 設定"
 
 #: printer/printerdrake.pm:3175
 #: printer/printerdrake.pm:3202
@@ -13149,9 +13155,9 @@ msgid "Printing test page(s)..."
 msgstr "正在列印測試頁..."
 
 #: printer/printerdrake.pm:3646
-#, fuzzy, c-format
+#, c-format
 msgid "Skipping photo test page."
-msgstr "圖形列印測試頁"
+msgstr "略過照片列印測試頁"
 
 #: printer/printerdrake.pm:3663
 #, c-format
