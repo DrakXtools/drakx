@@ -78,6 +78,7 @@ our @tree =
      [ "MODEM", , N("Modem"), "modem.png", "$sbindir/drakconnect", sub { detect_devices::getModem() }, 0 ],
      [ "ADSL", , N("ADSL adapters"), "modem.png", "$sbindir/drakconnect", sub { 
            require network::adsl; my $a = network::adsl::adsl_detect(); $a ? f(grep { $_ } values %$a) : () }, 0 ],
+     [ "AGP", , N("AGP controllers"), "memory.png", "", sub { f(modules::probe_category('various/agpgart')) }, 0 ],
      [ "BRIDGE", , N("Bridges and system controllers"), "memory.png", "", sub { f(grep { $_->{media_type} =~ /BRIDGE|MEMORY_RAM/ && $_->{driver} ne 'nvnet' } @devices) }, 0 ],
      [ "PRINTER", , N("Printer"), "hw_printer.png", "$sbindir/printerdrake", sub { 
          require printer::detect; printer::detect::local_detect() }, 0 ],
