@@ -200,7 +200,7 @@ sub real_main {
       };
 
       my $goto_start_on_boot_ifneeded = sub {
-          return $after_start_on_boot_step->() if $need_restart_network;
+          return $after_start_on_boot_step->() if $netcnx->{type} eq "lan";
           return "isdn_dial_on_boot" if  $netcnx->{type} =~ /isdn/;
           return "network_on_boot";
       };
@@ -977,7 +977,9 @@ notation (for example, 1.2.3.4).")),
                           ),
                           { text => N("Track network card id (useful for laptops)"), val => \$track_network_id, type => "bool" },
                           { text => N("Network Hotplugging"), val => \$hotplug, type => "bool" },
-                          { text => N("Start at boot"), val => \$onboot, type => "bool" },
+                          if_($netcnx->{type} eq "lan",
+                              { text => N("Start at boot"), val => \$onboot, type => "bool" },
+                             ),
                           if_($auto_ip, 
                               { label => N("DHCP client"), val => \$netc->{dhcp_client}, 
                                 list => [ qw(dhcp-client dhcpcd pump dhcpxd) ], advanced => 1 },
