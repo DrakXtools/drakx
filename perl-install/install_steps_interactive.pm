@@ -881,6 +881,7 @@ sub summary {
 { label => _("TV card"), val => $_->{description} } 
      } grep { $_->{driver} eq 'bttv' } detect_devices::probeall()),
 ]);
+    install_steps::configureTimezone($o);  #- do not forget it.
 }
 
 #------------------------------------------------------------------------------
