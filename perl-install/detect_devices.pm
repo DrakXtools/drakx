@@ -158,7 +158,7 @@ sub getSCSI() {
 	my ($id) = /^Host:.*?Id: (\d+)/ or $err->($_);
 	my ($vendor, $model) = /^\s*Vendor:\s*(.*?)\s+Model:\s*(.*?)\s+Rev:/m or $err->($_);
 	my ($type) = /^\s*Type:\s*(.*)/m or $err->($_);
-	{ info => "$vendor $model", id => $id, channel => 0, device => "sg$::i", raw_type => $type };
+	{ info => "$vendor $model", id => $id, channel => 0, device => "sg$::i", raw_type => $type, bus => 'SCSI' };
     } @l;
 
     each_index {
@@ -179,36 +179,35 @@ sub getSCSI() {
     } grep { $_->{raw_type} =~ /Scanner/ } @l;
 
     get_sys_cdrom_info(@l);
-    map {$_->{bus} = 'SCSI' } @l;
+    @l;
 }
 
-my %eide_hds =
-    (
-	"ASUS " => "Asus",
-	"CD-ROM CDU" => "Sony",
-	"CD-ROM Drive/F5D" => "ASUSTeK",
-	"Compaq" => "Compaq",
-	"CONNER" => "Conner Peripherals",
-	"IBM-" => "IBM",
-	"FUJITSU" => "Fujitsu",
-	"HITACHI" => "Hitachi",
-	"Lite-On" => "Lite-On Technology Corp.",
-	"LTN" => "Lite-On Technology Corp.",
-	"IOMEGA " => "Iomega",
-	"MAXTOR " => "Maxtor",
-	"Maxtor " => "Maxtor",
-	"Micropolis" => "Micropolis",
-	"PLEXTOR" => "Plextor",
-	"QUANTUM" => "Quantum", 
-	"SAMSUNG" => "Samsung",
-	"Seagate " => "Seagate Technology",
-	"ST3" => "Seagate Technology",
-	"TEAC" => "Teac",
-	"TOSHIBA" => "Toshiba",
-	"TEAC" => "Teac",
-	"TOSHIBA" => "Toshiba",
-	"WDC" => "Western Digital Corp.",
-	);
+my %eide_hds = (
+    "ASUS" => "Asus",
+    "CD-ROM CDU" => "Sony",
+    "CD-ROM Drive/F5D" => "ASUSTeK",
+    "Compaq" => "Compaq",
+    "CONNER" => "Conner Peripherals",
+    "IBM" => "IBM",
+    "FUJITSU" => "Fujitsu",
+    "HITACHI" => "Hitachi",
+    "Lite-On" => "Lite-On Technology Corp.",
+    "LTN" => "Lite-On Technology Corp.",
+    "IOMEGA" => "Iomega",
+    "MAXTOR" => "Maxtor",
+    "Maxtor" => "Maxtor",
+    "Micropolis" => "Micropolis",
+    "PLEXTOR" => "Plextor",
+    "QUANTUM" => "Quantum", 
+    "SAMSUNG" => "Samsung",
+    "Seagate " => "Seagate Technology",
+    "ST3" => "Seagate Technology",
+    "TEAC" => "Teac",
+    "TOSHIBA" => "Toshiba",
+    "TEAC" => "Teac",
+    "TOSHIBA" => "Toshiba",
+    "WDC" => "Western Digital Corp.",
+);
 
 
 sub getIDE() {
@@ -225,15 +224,10 @@ sub getIDE() {
 	my $info = chomp_(cat_("$d/model")) || "(none)";
 
 	my $num = ord (($d =~ /(.)$/)[0]) - ord 'a';
-	my ($vendor, $model);
-	foreach my $hd (keys %eide_hds) {
-	    if ($info =~ /^$hd/) {
-		   $vendor = $eide_hds{$hd};
-		   $model = $info;
-		   $model =~ s/^$hd//;
-		   last;
-	    }
-	}
+	my ($vendor, $model) = map { 
+	    if_($info =~ /^$_\b\s*(.*)/, $eide_hds{$_}, $1);
+	} keys %eide_hds;
+
 	push @idi, { media_type => $type, device => basename($d), info => $info, channel => $num/2, id => $num%2, bus => 'ide', Vendor => $vendor, Model => $model };
     }
     get_sys_cdrom_info(@idi);
