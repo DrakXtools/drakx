@@ -1,13 +1,15 @@
 #!/bin/sh
 
-[ -z "$1" ] && { echo "usage: $0 <network card type> (eg: 3c59x)" ; exit 1; }
+type=$1
+#[ -z "$type" ] && { echo "usage: $0 <network card type> (eg: 3c59x)" ; exit 1; }
+[ -z "$type" ] && type=3c90x
 
 ks="../../../install/ks.cfg"
 [ -e $ks ] || { echo "missing file $ks, create one based on $ks.default"; exit 1; }
 
 
-ln -sf stage1.$1 stage1
-ln -sf stage2.$1 stage2
+ln -sf stage1.$type stage1
+ln -sf stage2.$type stage2
 
 mformat a:
 mcopy {menu.lst,stage1,stage2} a:
