@@ -1,18 +1,16 @@
 #!/usr/bin/perl -w
-# harddrake2         This service runs the HardDrake hardware probe.
 
 use lib qw(/usr/lib/libDrakX);
 
 use strict;
 use standalone;     #- warning, standalone must be loaded very first, for 'explanations'
 use MDK::Common;
-use POSIX;
 use interactive;
 use harddrake::data;
-use Data::Dumper;
+use Storable qw(store retrieve);
 
 my $hw_sysconfdir = "/etc/sysconfig/harddrake2";
-my $last_boot_config = "$hw_sysconfdir/previous_hw";
+my $last_boot_config = $hw_sysconfdir."/previous_hw";
 
 my $str = '#!/usr/bin/perl -w
 #
@@ -26,7 +24,7 @@ my $str = '#!/usr/bin/perl -w
 ';
 
 # first run ? if not read old hw config
-my $previous_config = -f $last_boot_config ? do $last_boot_config : {};
+my %previous_config = -f $last_boot_config ? retrieve($last_boot_config) : {};
 
 my (%config, $in);
 
@@ -55,8 +53,8 @@ foreach (@harddrake::data::tree) {
     } &$detector;
     $config{$Ident} = \%ID;
 
-    next if is_empty_hash_ref $previous_config;
-    my $oldconfig = $previous_config->{$Ident};
+    next if is_empty_hash_ref %previous_config;
+    my $oldconfig = $previous_config{$Ident};
 
     my $msg;
     my @was_removed = difference2([ keys %$oldconfig ], [ keys %ID ]);
@@ -86,15 +84,14 @@ foreach (@harddrake::data::tree) {
     print "CANCELED\n" if $res;
     next unless ($res);   # canceled
     if (my $pid = fork) {
+		require POSIX;
 		  POSIX::wait();
 		} else {
 		    exec("$configurator 2>/dev/null") or die "$configurator missing\n";
 		}
 }
 
-
-$Data::Dumper::Terse = 1;          # don't output names where feasible
-$Data::Dumper::Purity = 1;         # fill in the holes for eval
 # output new hw config
-output("$last_boot_config",  $str . Dumper(\%config) . ";\n");
+standalone::explanations "created file $last_boot_config";
+store \%config, $last_boot_config;
 $in->exit(0) if defined $in; exit 0;
