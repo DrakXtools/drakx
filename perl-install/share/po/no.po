@@ -4701,6 +4701,15 @@ msgstr "Her er den komplette lista over tilgjengelige tastatur"
 msgid "Please choose your keyboard layout."
 msgstr "Vennligst velg tastatur-oppsettet ditt."
 
+#: ../../install_steps_interactive.pm:1 ../../Xconfig/main.pm:1
+#: ../../diskdrake/dav.pm:1 ../../printer/printerdrake.pm:1
+#: ../../standalone/drakperm:1 ../../standalone/draksplash:1
+#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "Quit"
+msgstr "Avslutt"
+
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "License agreement"
@@ -7563,14 +7572,6 @@ msgstr "Monitor"
 #, c-format
 msgid "Graphic Card"
 msgstr "Grafikk-kort"
-
-#: ../../Xconfig/main.pm:1 ../../diskdrake/dav.pm:1
-#: ../../printer/printerdrake.pm:1 ../../standalone/drakperm:1
-#: ../../standalone/draksplash:1 ../../standalone/harddrake2:1
-#: ../../standalone/logdrake:1 ../../standalone/scannerdrake:1
-#, c-format
-msgid "Quit"
-msgstr "Avslutt"
 
 #: ../../Xconfig/monitor.pm:1
 #, c-format
@@ -10686,6 +10687,7 @@ msgid "Add a new printer"
 msgstr "Legg til en ny skriver"
 
 #: ../../printer/printerdrake.pm:1 ../../standalone/drakconnect:1
+#: ../../standalone/drakfloppy:1
 #, c-format
 msgid "Normal Mode"
 msgstr "Normalt modus"
@@ -16435,6 +16437,11 @@ msgstr ""
 "bruke hjelpesystemet"
 
 #: ../../standalone/drakperm:1
+#, c-format
+msgid "Path"
+msgstr ""
+
+#: ../../standalone/drakperm:1
 #, fuzzy, c-format
 msgid "group :"
 msgstr "Arbeidsgruppe"
@@ -16490,11 +16497,6 @@ msgstr ""
 #, fuzzy, c-format
 msgid "Property"
 msgstr "Port"
-
-#: ../../standalone/drakperm:1
-#, c-format
-msgid "Path"
-msgstr ""
 
 #: ../../standalone/drakperm:1
 #, fuzzy, c-format
@@ -17522,6 +17524,16 @@ msgstr "Kommafeil"
 
 #: ../../standalone/harddrake2:1
 #, c-format
+msgid "special capacities of the driver (burning ability and or DVD support)"
+msgstr ""
+
+#: ../../standalone/harddrake2:1
+#, c-format
+msgid "Drive capacity"
+msgstr ""
+
+#: ../../standalone/harddrake2:1
+#, c-format
 msgid "Size of the (second level) cpu cache"
 msgstr "Størrelse på andrenivå prosessor-hurtigminne"
 
@@ -18428,12 +18440,14 @@ msgid "Apache, Pro-ftpd"
 msgstr "Apache og Pro-ftpd"
 
 #: ../../share/compssUsers:999
-msgid "Mail/Groupware/News"
-msgstr "Server, Mail/Gruppevare/News"
+#, fuzzy
+msgid "Mail"
+msgstr "Mali"
 
 #: ../../share/compssUsers:999
-msgid "Postfix mail server, Inn news server"
-msgstr "Postfix posttjener, Inn nyhetstjener"
+#, fuzzy
+msgid "Postfix mail server"
+msgstr "Postfix posttjener"
 
 #: ../../share/compssUsers:999
 msgid "Database"
@@ -18530,6 +18544,12 @@ msgstr "Personlig finans"
 #: ../../share/compssUsers:999
 msgid "Programs to manage your finances, such as gnucash"
 msgstr "Programmer for å håndtere dine finanser, så som gnucash"
+
+#~ msgid "Mail/Groupware/News"
+#~ msgstr "Server, Mail/Gruppevare/News"
+
+#~ msgid "Postfix mail server, Inn news server"
+#~ msgstr "Postfix posttjener, Inn nyhetstjener"
 
 #~ msgid "/Options"
 #~ msgstr "/Valg"
