@@ -274,7 +274,7 @@ Resolution
 
    You can choose here resolutions and color depth between those available
 for your hardware. Choose the one that best suit your needs (you will be
-able to change that after installation though). Asample of the chosen
+able to change that after installation though). A sample of the chosen
 configuration is shown in the monitor.
 
 
@@ -970,8 +970,8 @@ country, click on the button and choose another one.
 
  * \"Timezone\": By default, DrakX deduces your time zone based on the
 primary language you have chosen. But here, just as in your choice of a
-keyboard, you may not be in the country with which the chosen language
-should correspond. You may need to click on the \"Timezone\" button to
+keyboard, you may not be in a country to which the chosen language
+corresponds. You may need to click on the \"Timezone\" button to
 configure the clock for the correct timezone.
 
  * \"Printer\": clicking on the \"No Printer\" button will open the printer
