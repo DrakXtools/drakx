@@ -129,8 +129,7 @@ sub gtksetstyle {
 sub gtkradio {
     my $def = shift;
     my $radio;
-    map { $radio = Gtk2::RadioButton->new($radio ? $radio->get_group : undef, $_);
-	  $radio->set_active($_ eq $def); $radio } @_;
+    map { gtkset_active($radio = Gtk2::RadioButton->new($radio ? $radio->get_group : undef, $_), $_ eq $def) } @_;
 }
 
 sub gtkroot {
