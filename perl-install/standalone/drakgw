@@ -56,7 +56,7 @@ my $shorewall = network::shorewall::read();
 
 my $in = 'interactive'->vnew('su', 'default');
 
-!$::isEmbedded && $in->isa('interactive::gtk') and $::isWizard = 1;
+$::isEmbedded || $in->isa('interactive::gtk') and $::isWizard = 1;
 
 pur_gtk_mode() if $::isEmbedded && $in->isa('interactive::gtk');
 
@@ -463,7 +463,7 @@ if (-f $cups_conf) {
 	for (my $i = 0; $i < @cups_conf_content && $root_location_end == -1; $i++) {
 	    if ($cups_conf_content[$i] =~ m|^\s*<\s*Location\s+/\s*>|) {
 		$root_location_start = $i;
-	    } elsif (($cups_conf_content[$i] =~ m|^\s*<\s*/Location\s*>|) && $root_location_start != -1) {
+	    } elsif ($cups_conf_content[$i] =~ m|^\s*<\s*/Location\s*>| && $root_location_start != -1) {
 		$root_location_end = $i;
 	    }
 	}
@@ -479,8 +479,8 @@ if (-f $cups_conf) {
     s/^\s*Order.*//, s/^\s*Allow.*//, s/^\s*Deny.*// foreach @root_location;
  
     # Add the new "Order" and "Deny" lines, add an "Allow" line for the local network
-    splice(@root_location, -1, 0, $_) foreach ("Order Deny,Allow\n", "Deny From All\n", "Allow From 127.0.0.1\n",
-					       "Allow From $lan_address.*\n");
+    splice(@root_location, -1, 0, $_) foreach "Order Deny,Allow\n", "Deny From All\n", "Allow From 127.0.0.1\n",
+					       "Allow From $lan_address.*\n";
  
     # Put the changed root location block back into the file
     splice(@cups_conf_content, $root_location_start, 0, @root_location);
@@ -516,51 +516,49 @@ sub quit_global {
 }
 
 sub pur_gtk_mode {
-    require my_gtk;
-    import my_gtk qw(:helpers :wrappers);
+    require gtk2;
+    import gtk2 qw(:all);
     my $setup_state = $shorewall && $shorewall->{masquerade} ? 
                          ($shorewall->{disabled} ? 
 			  N("The setup has already been done, but it's currently disabled.") :
 			  N("The setup has already been done, and it's currently enabled.")) :
 			 N("No Internet Connection Sharing has ever been configured.");
     
-    my $window1 = my_gtk->new('drakgw');
-    $window1->{rwindow}->signal_connect(delete_event => sub { my_gtk->exit(0) });
+    my $window1 = ugtk2->new('drakgw');
+    $window1->{rwindow}->signal_connect(delete_event => sub { ugtk2->exit(0) });
     unless ($::isEmbedded) {
         $window1->{rwindow}->set_position(1);
         $window1->{rwindow}->set_title(N("Internet connection sharing configuration"));
     }
     $window1->{rwindow}->border_width(10);
-    my $vbox1 = new Gtk::VBox(0,0);
+    my $vbox1 = new Gtk2::VBox(0,0);
     $window1->{rwindow}->add($vbox1);
-    my $hbox1 = new Gtk::HBox(0,0);
+    my $hbox1 = new Gtk2::HBox(0,0);
     $vbox1->pack_start($hbox1,1,1,0);
-    my $label1 = new Gtk::Label(
+    my $label1 = new Gtk2::Label(
 N("Welcome to the Internet Connection Sharing utility!
 
 %s
 
 Click on Configure to launch the setup wizard.", $setup_state));
     $hbox1->pack_start($label1,1,1,0);
-    my $hbox2 = new Gtk::HBox(0,0);
+    my $hbox2 = new Gtk2::HBox(0,0);
     $vbox1->pack_start($hbox2,1,1,0);
     
-    my $bbox1 = new Gtk::HButtonBox;
+    my $bbox1 = new Gtk2::HButtonBox;
     $vbox1->pack_start($bbox1,0,0,0);
     $bbox1->set_layout(-end);
-    my $button_conf = new Gtk::Button N("Configure");
+    my $button_conf = Gtk2::Button->new(N("Configure"));
     $button_conf->signal_connect(clicked => sub {
 				       system("/usr/sbin/drakgw --wizard");
-				       kill('USR1', $::CCPID);
+				       ugtk2->exit(0);
 				   });
     $bbox1->add($button_conf);
-    my $button_cancel = new Gtk::Button N("Cancel");
-    $button_cancel->signal_connect(clicked => sub {
-					 kill('USR1', $::CCPID);
-				     });
+    my $button_cancel = Gtk2::Button->new(N("Cancel"));
+    $button_cancel->signal_connect(clicked => sub { ugtk2->exit(0) });
     $bbox1->add($button_cancel);
     $window1->{rwindow}->show_all();
     $window1->main;
-    my_gtk->exit(0);
+    ugtk2->exit(0);
     
 }
