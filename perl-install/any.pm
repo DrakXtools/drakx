@@ -826,13 +826,18 @@ UNREGISTER	^$devfs_if\$	EXECUTE /etc/dynamic/scripts/rawdevice.script del /dev/$
 ");
 }
 
-sub fix_broken_alternatives() {
+sub fix_broken_alternatives {
+    my ($force_default) = @_;
     #- fix bad update-alternatives that may occurs after upgrade (and sometimes for install too).
     -d "$::prefix/etc/alternatives" or return;
 
     foreach (all("$::prefix/etc/alternatives")) {
-	next if run_program::rooted($::prefix, 'test', '-e', "/etc/alternatives/$_");
-	log::l("fixing broken alternative $_");
+	if ($force_default) {
+	    log::l("setting alternative $_");
+	} else {
+	    next if run_program::rooted($::prefix, 'test', '-e', "/etc/alternatives/$_");
+	    log::l("fixing broken alternative $_");
+	}
 	run_program::rooted($::prefix, 'update-alternatives', '--auto', $_);
     }
 }

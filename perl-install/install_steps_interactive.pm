@@ -163,7 +163,7 @@ sub selectInstallClass {
 			      [ { label => N("Encryption key for %s", $_->{mntpoint}),
 				  hidden => 1, val => \$_->{encrypt_key} } ]);
 	    }
-	    $o->{isUpgrade} = 1;
+	    $o->{isUpgrade} = $p->{release_file} =~ /redhat/ ? 'redhat' : 'mandrake';
 	}
     }
 }

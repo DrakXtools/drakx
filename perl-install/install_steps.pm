@@ -312,6 +312,43 @@ sub choosePackages {
     $availableCorrected;
 }
 
+sub upgrading_redhat() {
+    #- remove weird config files that bother Xconfig::* too much
+    unlink "$::prefix/etc/X11/XF86Config";
+    unlink "$::prefix/etc/X11/XF86Config-4";
+
+    sub prefering_mdk {
+	my ($lpkg, $rpkg_ver, $c) = @_;
+	my $lpkg_ver = $lpkg->version . '-' . $lpkg->release;
+	log::l($lpkg->name . ' ' . ': prefering ' . ($c == 1 ? "$lpkg_ver over $rpkg_ver" : "$rpkg_ver over $lpkg_ver"));
+    }
+
+    my $old_compare_pkg = \&URPM::Package::compare_pkg;
+    undef *URPM::Package::compare_pkg;
+    *URPM::Package::compare_pkg = sub {
+	my ($lpkg, $rpkg) = @_;
+	my $c = ($lpkg->release =~ /mdk$/ ? 1 : 0) - ($rpkg->release =~ /mdk$/ ? 1 : 0);
+	if ($c) {
+	    prefering_mdk($lpkg, $rpkg->version . '-' . $rpkg->release, $c);
+	    $c;
+	} else {
+	    &$old_compare_pkg;
+	}
+    };
+
+    my $old_compare = \&URPM::Package::compare;
+    undef *URPM::Package::compare;
+    *URPM::Package::compare = sub {
+	my ($lpkg, $rpkg_ver) = @_;
+	my $c = ($lpkg->release =~ /mdk$/ ? 1 : 0) - ($rpkg_ver =~ /mdk$/ ? 1 : 0);
+	if ($c) {
+	    prefering_mdk($lpkg, $rpkg_ver, $c);
+	    return $c;
+	}
+	&$old_compare;
+    };
+}
+
 sub beforeInstallPackages {
     my ($o) = @_;
 
@@ -326,6 +363,22 @@ sub beforeInstallPackages {
 	foreach (@filesNewerToUseAfterUpgrade) {
 	    unlink "$o->{prefix}/$_.rpmnew";
 	}
+    }
+
+    #- mainly for upgrading redhat packages, but it can help other
+    my @should_not_be_dirs = qw(/usr/X11R6/lib/X11/xkb /usr/share/locale/zh_TW/LC_TIME /usr/include/GL);
+    my @should_be_dirs = qw(/etc/X11/xkb);
+    foreach (@should_not_be_dirs) {
+	my $f = "$::prefix$_";
+	rm_rf($f) if !-l $f && -d $f;
+    }
+    foreach (@should_be_dirs) {
+	my $f = "$::prefix$_";
+	rm_rf($f) if -l $f || !-d $f;
+    }
+
+    if ($o->{isUpgrade} eq 'redhat') {
+	upgrading_redhat();
     }
 
     #- some packages need such files for proper installation.
@@ -519,7 +572,7 @@ GridHeight=70
 	}
     }
 
-    any::fix_broken_alternatives();
+    any::fix_broken_alternatives($o->{isUpgrade} eq 'redhat');
 
     #- update theme directly from a package (simplest).
     if (-s "$o->{prefix}/usr/share/oem-theme.rpm") {
