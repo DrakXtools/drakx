@@ -132,6 +132,11 @@ This configures a personal firewall for this Mandrake Linux machine.
 For a powerful dedicated firewall solution, please look to the
 specialized MandrakeSecurity Firewall distribution."), 1) or return;
 
+	$in->ask_okcancel('', _("drakfirewall configurator
+
+Make sure you have configured your Network/Internet access with
+drakconnect before going any further."), 1) or return;
+
 	$disabled, $possible_servers, '';
     }
 }
