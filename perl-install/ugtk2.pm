@@ -440,7 +440,7 @@ sub create_okcancel {
     my $b1 = gtksignal_connect($w->{ok} = Gtk2::Button->new($ok), clicked => $w->{ok_clicked} || sub { $w->{retval} = 1; Gtk2->main_quit });
     my $b2 = $cancel && gtksignal_connect($w->{cancel} = Gtk2::Button->new($cancel), clicked => $w->{cancel_clicked} || sub { log::l("default cancel_clicked"); undef $w->{retval}; Gtk2->main_quit });
     $::isWizard and gtksignal_connect($w->{wizcancel} = Gtk2::Button->new(N("Cancel")), clicked => sub { die 'wizcancel' });
-    my @l = grep { $_ } $::isWizard ? ($w->{wizcancel}, if_(!$::Wizard_no_previous, $b2, $b1)) : ($b1, $b2);
+    my @l = grep { $_ } $::isWizard ? ($w->{wizcancel}, if_(!$::Wizard_no_previous, $b2), $b1) : ($b1, $b2);
     push @l, map { gtksignal_connect(Gtk2::Button->new($_->[0]), clicked => $_->[1]) } @other;
 
     $_->can_default($::isWizard) foreach @l;
