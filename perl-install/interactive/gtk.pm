@@ -751,4 +751,12 @@ sub kill {
     $o->{before_killing} = @interactive::objects;
 }
 
+sub ok {
+    'gtk-ok'
+}
+
+sub cancel {
+    'gtk-cancel'
+}
+
 1;

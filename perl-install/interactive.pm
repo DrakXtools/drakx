@@ -137,7 +137,7 @@ sub ask_okcancel {
 
 sub ask_warn_ {
     my ($o, $common) = @_;
-    ask_from_listf_raw_no_check($o, $common, undef, [ N("Ok") ]);
+    ask_from_listf_raw_no_check($o, $common, undef, [ $o->ok ]);
 }
 
 sub ask_yesorno_ {
@@ -154,7 +154,7 @@ sub ask_okcancel_ {
 	$common->{focus_cancel} = !$b_def;
     	ask_from_no_check($o, $common, []);
     } else {
-	ask_from_listf_raw($o, $common, sub { translate($_[0]) }, [ N_("Ok"), N_("Cancel") ], $b_def ? "Ok" : "Cancel") eq "Ok";
+	ask_from_listf_raw($o, $common, sub { translate($_[0]) }, [ $o->ok, $o->cancel ], $b_def ? "Ok" : "Cancel") eq "Ok";
     }
 }
 

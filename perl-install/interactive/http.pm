@@ -154,6 +154,13 @@ sub wait_message_endW {
     print "\n" . CGI::p();
 }
 
+sub ok {
+    N("Ok");
+}
+
+sub cancel {
+    N("Cancel");
+}
 
 
 1;

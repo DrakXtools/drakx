@@ -296,8 +296,8 @@ sub ask_fromW_real {
     };
 
     my ($ok, $cancel) = ($common->{ok}, $common->{cancel});
-    $cancel = $::isWizard ? 'gtk-go-back"' : 'gtk-cancel' if !defined $cancel && !defined $ok;
-    $ok ||= $::isWizard ? ($::Wizard_finished ? N("Finish") : '"gtk-go-forward') : 'gtk-ok';
+    $cancel = $::isWizard ? N("<- Previous") : N("Cancel") if !defined $cancel && !defined $ok;
+    $ok ||= $::isWizard ? ($::Wizard_finished ? N("Finish") : N("Next ->")) : N("Ok");
 
     my @okcancel = grep { $_ } $ok, $cancel;
     @okcancel = reverse(@okcancel) if $::isWizard;
@@ -396,6 +396,14 @@ sub simplify_string {
     $s =~ s/\n/ /g;
     $s = substr($s, 0, $o_width || 40); #- truncate if too long
     $s;
+}
+
+sub ok {
+    N("Ok");
+}
+
+sub cancel {
+    N("Cancel");
 }
 
 1;
