@@ -484,6 +484,8 @@ hasNetDevice(device)
 
 char*
 getNetDriver(char* device)
+  ALIAS:
+    getHwIDs = 1
   CODE:
     struct ifreq ifr;
     struct ethtool_drvinfo drvinfo;
@@ -495,9 +497,16 @@ getNetDriver(char* device)
     drvinfo.cmd = ETHTOOL_GDRVINFO;
     ifr.ifr_data = (caddr_t) &drvinfo;
 
-    if (ioctl(s, SIOCETHTOOL, &ifr) != -1)
-         RETVAL = strdup(drvinfo.driver);
-    else { perror("SIOCETHTOOL"); RETVAL = strdup(""); }
+    if (ioctl(s, SIOCETHTOOL, &ifr) != -1) {
+        switch (ix) {
+            case 0:
+                RETVAL = strdup(drvinfo.driver);
+                break;
+            case 1:
+                RETVAL = strdup(drvinfo.bus_info);
+                break;
+        }
+    } else { perror("SIOCETHTOOL"); RETVAL = strdup(""); }
   OUTPUT:
   RETVAL
 
