@@ -291,6 +291,12 @@ EndSection
 
 Section "Keyboard"
    Protocol    "Standard"
+   AutoRepeat  0 0
+
+   LeftAlt         Meta
+   RightAlt        Meta
+   ScrollLock      Compose
+   RightCtl        Control
    XkbDisable
 EndSection
 
@@ -326,7 +332,8 @@ Section "Screen"
     Device      "Generic VGA"
     Monitor     "monitor"
     Subsection "Display"
-        Modes "640x480"
+        Modes      "640x480"
+        ViewPort   0 0
     EndSubsection
 EndSection
 
@@ -335,28 +342,31 @@ Section "Screen"
     Device      "Generic VGA"
     Monitor     "monitor"
     Subsection "Display"
-        Depth 16
-        Modes "default"
+        Depth      16
+        Modes      "default"
+        ViewPort   0 0
     EndSubsection
 EndSection
 
 Section "Screen"
-    Driver "svga"
-    Device "svga"
-    Monitor "monitor"
+    Driver      "svga"
+    Device      "svga"
+    Monitor     "monitor"
     Subsection "Display"
-        Depth 16
-        Modes "800x600" "640x480"
+        Depth      16
+        Modes      "800x600" "640x480"
+        ViewPort   0 0
     EndSubsection
 EndSection
 
 Section "Screen"
-    Driver "accel"
-    Device "svga"
-    Monitor "monitor"
+    Driver      "accel"
+    Device      "svga"
+    Monitor     "monitor"
     Subsection "Display"
-        Depth 16
-        Modes "800x600" "640x480"
+        Depth      16
+        Modes      "800x600" "640x480"
+        ViewPort   0 0
     EndSubsection
 EndSection
 END
