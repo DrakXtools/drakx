@@ -267,6 +267,7 @@ sub configureNetwork {
     #-	  }
     $last or return;
     if ($last->{BOOTPROTO} =~ /^(dhcp|bootp)$/) {
+	$netc->{minus_one} = 1;
 	my $dhcp_hostname = $netc->{HOSTNAME};
 	$::isInstall and $in->set_help('configureNetworkHostDHCP');
 	$in->ask_from_entries_ref(_("Configuring network"),

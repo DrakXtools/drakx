@@ -1,6 +1,10 @@
 2000-10-05  dam's  <damien@mandrakesoft.com>
 
 	* netconnect.pm (adsl_conf): updated pppoe conf.
+	(main): added $netc->{minus_one} to avoid to count dhcp configured
+	eth when asking to share the connection.
+	(adsl-pppoe): improvement. Should work now.
+
 	* netconnect.pm (main): network is stopped then started, instead
 	of restarted.
 
