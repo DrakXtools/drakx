@@ -35,8 +35,8 @@ ask_mntpoint_s =>
 __("Listed above are the existing Linux partitions detected on your hard drive.
 You can keep the choices made by the wizard, they are good for most common
 installs. If you make any changes, you must at least define a root
-partition (\"/\"). Do not choose too small a partition or you will not
-be able to install enough software. If you want to store your data on a
+partition (\"/\"). Do not choose too small a partition or you will not be
+able to install enough software. If you want to store your data on a
 separate partition, you will also need to create a partition for \"/home\"
 (only possible if you have more than one Linux partition available).
 
@@ -338,7 +338,7 @@ machines. See the Auto install section at our web site.
  * \"Save packages selection\"(*): saves the packages selection as made
 previously. Then, when doing another installation, insert the floppy inside
 the driver and run the installation going to the help screen by pressing on
-the F1 key, and by issuing >>linux defcfg=\"floppy\"<<.
+the [F1] key, and by issuing >>linux defcfg=\"floppy\"<<.
 
 (*) You need a FAT-formatted floppy (to create one under GNU/Linux, type
 \"mformat a:\")"),
@@ -437,7 +437,7 @@ perform this step.
 save your changes back to disc.
 
 Note: you can reach any option using the keyboard. Navigate through the
-partitions using Tab and Up/Down arrows.
+partitions using [Tab] and [Up/Down] arrows.
 
 When a partition is selected, you can use:
 
@@ -684,7 +684,7 @@ native frame buffer support.
 
  * Default: selects this entry as being the default Linux selection,
 selectable by just pressing ENTER at the yaboot prompt. This entry will
-also be highlighted with a \"*\", if you press Tab to see the boot
+also be highlighted with a \"*\", if you press [Tab] to see the boot
 selections."),
 
 setupYabootGeneral => 
