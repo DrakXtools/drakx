@@ -127,15 +127,15 @@ sub write_initscript {
 
 	case "$1" in
 		start)
-		echo -n "Checking internet connections to start at boot: "
-		$connect_file --boot_time
+		echo -n "Checking internet connections to start at boot: " } . "
+		$connect_file --boot_time" . q{
 		touch /var/lock/subsys/internet
 		echo -n internet
 		echo
 		;;
 	stop)
-		echo -n "Stopping internet connection if needed: "
-		$disconnect_file
+		echo -n "Stopping internet connection if needed: " } . "
+		$disconnect_file" . q{
 		echo -n internet
 		echo
 		rm -f /var/lock/subsys/internet
