@@ -10,7 +10,7 @@ $border = 10;  #- for leftish text
 
 # @text = ([ N("text to display"), center => 1 ],
 
-@text = ([ N("<b>Multimedia: Software for every need!</b>"), center => 1 ],
+@text = ([ N("<b>Multimedia</b>: Software for every need!"), center => 1 ],
         ' ',
 	N("Listen to audio CDs with <b>KsCD</b>."),
 	' ',

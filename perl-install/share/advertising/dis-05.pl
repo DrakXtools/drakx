@@ -14,4 +14,4 @@ $border = 10;  #- for leftish text
         ' ',
 	N("Discover the new integrated personal information suite KDE Kontact."),
 	' ',
-	N("More than just a full-featured email client, Kontact also includes an address book, a calendar and scheduling program, plus a tool for taking notes!")); 
+	N("More than just a full-featured email client, <b>Kontact</b> also includes an address book, a calendar and scheduling program, plus a tool for taking notes!")); 
