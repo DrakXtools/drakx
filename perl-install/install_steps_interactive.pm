@@ -701,6 +701,7 @@ sub configureNetwork {
     my ($o) = @_;
     require network::network;
     network::network::easy_dhcp($o, $o->{netc}, $o->{intf});
+    $o->SUPER::configureNetwork();
 }
 
 #------------------------------------------------------------------------------
