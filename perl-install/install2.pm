@@ -427,7 +427,6 @@ sub main {
 
     undef $::auto_install if $cfg;
     if (!$::testing) {
-	symlink "rhimage", "/tmp/image"; #- for compatibility with old stage1
 	unlink $_ foreach "/modules/modules.mar", "/sbin/stage1";
     }
 
