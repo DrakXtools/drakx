@@ -225,7 +225,7 @@ sub setupSCSI {
     my ($o) = @_;
 
     if (!$::noauto && arch() =~ /i.86/) {
-	if ($o->{pcmcia} ||= !$::testing && c::pcmcia_probe()) {
+	if ($o->{pcmcia} ||= detect_devices::real_pcmcia_probe()) {
 	    my $w = $o->wait_message(N("PCMCIA"), N("Configuring PCMCIA cards..."));
 	    my $results = install_any::configure_pcmcia($o->{modules_conf}, $o->{pcmcia});
 	    undef $w;

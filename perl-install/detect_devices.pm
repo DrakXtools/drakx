@@ -699,6 +699,12 @@ sub firewire_probe() {
     @l;
 }
 
+sub real_pcmcia_probe() {
+    return if $::testing;
+
+    c::pcmcia_probe() || (find { $_->{driver} eq 'yenta_socket' } pci_probe()) && 'yenta_socket';
+}
+
 sub pcmcia_probe() {
     -e '/var/run/stab' || -e '/var/lib/pcmcia/stab' or return ();
 
