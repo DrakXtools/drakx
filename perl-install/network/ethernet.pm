@@ -38,7 +38,7 @@ qq(
 
 sub mapIntfToDevice {
     my ($interface) = @_;
-    my ($bus, $slot, $_func) = map { hex($_) } (c::getHwIDs($interface) =~ /([0-9a-f])+:([0-9a-f])+\.([0-9a-f]+)/);
+    my ($bus, $slot, $_func) = map { hex($_) } (c::getHwIDs($interface) =~ /([0-9a-f]+):([0-9a-f]+)\.([0-9a-f]+)/);
     grep { $_->{pci_bus} == $bus && $_->{pci_device} == $slot } detect_devices::probeall();
 }
 
