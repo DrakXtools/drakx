@@ -84,8 +84,8 @@ sub get_subwizard {
       my ($network_configured, $direct_net_install, $cnx_type, $type, $interface, @cards, @all_cards, @devices, %eth_intf);
       my (%connections, @connection_list);
       my ($modem, $modem_name, $modem_conf_read, $modem_dyn_dns, $modem_dyn_ip);
-      my ($adsl_type, $adsl_protocol, $adsl_device, @adsl_devices, $adsl_failed, $adsl_answer, %adsl_data, $adsl_data, $adsl_provider, $adsl_old_provider);
-      my ($ntf_name, $ntf_device, $ipadr, $netadr, $gateway_ex, $up, $isdn, $isdn_type, $need_restart_network);
+      my ($adsl_type, $adsl_protocol, @adsl_devices, $adsl_failed, $adsl_answer, %adsl_data, $adsl_data, $adsl_provider, $adsl_old_provider);
+      my ($ntf_name, $ipadr, $netadr, $gateway_ex, $up, $isdn, $isdn_type, $need_restart_network);
       my ($module, $auto_ip, $onboot, $needhostname, $hotplug, $track_network_id, @fields); # lan config
       my $success = 1;
       my $ethntf = {};
@@ -162,15 +162,22 @@ sub get_subwizard {
                         pppoa  => N("PPP over ATM (PPPoA)"),
                        );
 
-      my $encapsulation;
       my %encapsulations = (
-                            N("Bridged Ethernet LLC") => 1, 
-                            N("Bridged Ethernet VC") => 2, 
-                            N("Routed IP LLC") => 3, 
-                            N("Routed IP VC") => 4,
-                            N("PPPOA LLC") => 5, 
-                            N("PPPOA VC") => 6,
+                            1 => N("Bridged Ethernet LLC"), 
+                            2 => N("Bridged Ethernet VC"), 
+                            3 => N("Routed IP LLC"), 
+                            4 => N("Routed IP VC"),
+                            5 => N("PPPOA LLC"), 
+                            6 => N("PPPOA VC"),
                            );
+
+      my %ppp_auth_methods = (
+                              0 => N("Script-based"),
+                              1 => N("PAP"),
+                              2 => N("Terminal-based"),
+                              3 => N("CHAP"),
+                              4 => N("PAP/CHAP"),
+                             );
     
       # main wizard:
       my $wiz;
@@ -432,8 +439,7 @@ Take a look at http://www.linmodems.org"),
                         if ($old_provider ne $provider) {
                             $modem->{connection} = $l{Name};
                             $modem->{phone} = $l{Phonenumber};
-                            $modem->{auth} = $l{Authentication};
-                            $modem->{$_} = $l{$_} foreach qw(AutoName Domain Gateway IPAddr SubnetMask);
+                            $modem->{$_} = $l{$_} foreach qw(Authentication AutoName Domain Gateway IPAddr SubnetMask);
                             ($modem->{dns1}, $modem->{dns2}) = split(',', $l{DNS});
                         }
                         return "ppp_account";
@@ -457,8 +463,7 @@ killall pppd
                         $modem->{device} ||= $first_modem->()->{device};
                         my %l = getVarsFromSh("$::prefix/usr/share/config/kppprc");
                         $l{Authentication} = 4 if !exists $l{Authentication};
-                        $modem->{auth} ||= { 0 => N("Script-based"), 1 => N("PAP"), 2 => N("Terminal-based"), 3 => N("CHAP"), 4 => N("PAP/CHAP") }->{$l{Authentication}};
-                        $modem->{$_} ||= $l{$_} foreach qw(Gateway IPAddr SubnetMask);
+                        $modem->{$_} ||= $l{$_} foreach qw(Authentication Gateway IPAddr SubnetMask);
                         $modem->{connection} ||= $l{Name};
                         $modem->{domain} ||= $l{Domain};
                         ($modem->{dns1}, $modem->{dns2}) = split(',', $l{DNS});
@@ -488,8 +493,8 @@ killall pppd
                              { label => N("Phone number"), val => \$modem->{phone} },
                              { label => N("Login ID"), val => \$modem->{login} },
                              { label => N("Password"), val => \$modem->{passwd}, hidden => 1 },
-                             { label => N("Authentication"), val => \$modem->{auth}, 
-                               list => [ N("PAP"), N("Terminal-based"), N("Script-based"), N("CHAP"), N("PAP/CHAP") ] },
+                             { label => N("Authentication"), val => \$modem->{Authentication}, 
+                               list => [ sort keys %ppp_auth_methods ], format => sub { $ppp_auth_methods{$_[0]} } },
                             ],
                         },
                     next => "ppp_ip",
@@ -558,31 +563,29 @@ killall pppd
                         $lan_detect->();
                         detect($netc->{autodetect}, 'adsl');
                         # FIXME: we still need to detect bewan modems
-                        @adsl_devices = values %eth_intf;
+                        @adsl_devices = keys %eth_intf;
                         foreach my $modem (keys %adsl_devices) {
-                            push @adsl_devices, $adsl_devices{$modem} if $netc->{autodetect}{adsl}{$modem};
+                            push @adsl_devices, $modem if $netc->{autodetect}{adsl}{$modem};
                         }
                     },
                     name => N("ADSL configuration") . "\n\n" . N("Select the network interface to configure:"),
-                    data =>  [ { label => N("Net Device"), type => "list", val => \$ntf_device, allow_empty_list => 1,
-                               list => \@adsl_devices, } ],
+                    data =>  [ { label => N("Net Device"), type => "list", val => \$ntf_name, allow_empty_list => 1,
+                               list => \@adsl_devices, format => sub { $eth_intf{$_[0]} || $adsl_devices{$_[0]} } } ],
                     post => sub {
                         my %packages = (
                                         'eci'        => [ 'eciadsl', 'missing' ],
                                         'sagem'      => [ 'eagle', '/usr/sbin/eaglectrl' ],
                                         'speedtouch' => [ 'speedtouch', '/usr/share/speedtouch/speedtouch.sh' ],
                                        );
-                        $ntf_name = { reverse %eth_intf }->{$ntf_device} || $ntf_device;
-                        $adsl_device = { reverse %adsl_devices }->{$ntf_name} || $ntf_name; # ethernet device case
-                        return 'adsl_unsupported_eci' if $adsl_device eq 'eci';
-                        $netconnect::need_restart_network = member($adsl_device, qw(speedtouch eci));
-                        $in->do_pkgs->install($packages{$adsl_device}->[0]) if $packages{$adsl_device} && !-e $packages{$adsl_device}->[1];
-                        if ($adsl_device eq 'speedtouch' && ! -r '$::prefix/usr/share/speedtouch/mgmt.o' && !$::testing) {
+                        return 'adsl_unsupported_eci' if $ntf_name eq 'eci';
+                        $netconnect::need_restart_network = member($ntf_name, qw(speedtouch eci));
+                        $in->do_pkgs->install($packages{$ntf_name}->[0]) if $packages{$ntf_name} && !-e $packages{$ntf_name}->[1];
+                        if ($ntf_name eq 'speedtouch' && ! -r '$::prefix/usr/share/speedtouch/mgmt.o' && !$::testing) {
                             $in->do_pkgs->what_provides("speedtouch_mgmt") and 
                               $in->do_pkgs->install('speedtouch_mgmt');
                             return 'adsl_speedtouch_firmware' if ! -e "$::prefix/usr/share/speedtouch/mgmt.o";
                         }
-                        return 'adsl_provider' if $adsl_devices{$adsl_device};
+                        return 'adsl_provider' if $adsl_devices{$ntf_name};
                         return 'adsl_protocol';
                     },
                    },
@@ -606,7 +609,7 @@ killall pppd
                             $netc->{$_} = $adsl_data->{$_} foreach qw(dnsServer2 dnsServer3 DOMAINNAME2 Encapsulation vpi vci);
                               $adsl_protocol = $adsl_types{$adsl_data->{method}};
                         }
-                        $adsl_protocol = $adsl_types{pppoa} if $adsl_device eq 'speedtouch';
+                        $adsl_protocol = $adsl_types{pppoa} if $ntf_name eq 'speedtouch';
                         return 'adsl_protocol';
                     },
                    },
@@ -684,7 +687,7 @@ If you don't know, choose 'use pppoe'"),
                         $adsl_type = find { $adsl_types{$_} eq $adsl_protocol } keys %adsl_types;
                         $adsl_type = { reverse %adsl_types }->{$adsl_protocol};
                         # process static/dhcp ethernet devices:
-                        if (!exists $adsl_devices{$adsl_device} && member($adsl_type, qw(manual dhcp))) {
+                        if (!exists $adsl_devices{$ntf_name} && member($adsl_type, qw(manual dhcp))) {
                             $auto_ip = $adsl_type eq 'dchp';
                             $ethntf->{DEVICE} = $ntf_name;
                             $find_lan_module->();
@@ -692,7 +695,7 @@ If you don't know, choose 'use pppoe'"),
                             add2hash($ethntf, $intf->{$ntf_name});
                             return 'lan_intf';
                         }
-                        network::adsl::adsl_probe_info($netcnx, $netc, $adsl_type, $adsl_device);
+                        network::adsl::adsl_probe_info($netcnx, $netc, $adsl_type, $ntf_name);
                         $netc->{NET_DEVICE} = $ntf_name if $adsl_type eq 'pppoe';
                         return 'adsl_account';
                     },
@@ -704,7 +707,6 @@ If you don't know, choose 'use pppoe'"),
                     pre => sub {
                         $netc->{dnsServer2} ||= $adsl_data->{dns1};
                         $netc->{dnsServer3} ||= $adsl_data->{dns2};
-                        $encapsulation ||= find { $encapsulations{$_} eq $netc->{Encapsulation} } keys %encapsulations;
                     },
                     name => N("Connection Configuration") . "\n\n" .
                     N("Please fill or check the field below"),
@@ -715,7 +717,9 @@ If you don't know, choose 'use pppoe'"),
                          { label => N("Second DNS Server (optional)"), val => \$netc->{dnsServer3} },
                          { label => N("Account Login (user name)"), val => \$netcnx->{login} },
                          { label => N("Account Password"),  val => \$netcnx->{passwd}, hidden => 1 },
-                         { label => N("Encapsulation :"), val => \$encapsulation, list => [ sort keys %encapsulations ], },
+                         { label => N("Encapsulation :"), val => \$netc->{Encapsulation}, list => [ values %encapsulations ],
+                           format => sub { $encapsulations{$_[0]} },
+                         },
                         ],
                     },
                     post => sub {
@@ -727,10 +731,9 @@ If you don't know, choose 'use pppoe'"),
                                      N("United Kingdom") => [ 0, 38 ],
                                      N("United States")  => [ 8, 35 ],
                                     );
-                            $netc->{Encapsulation} = $encapsulations{$encapsulation};
                             ($netc->{vpi}, $netc->{vci}) = @{$h{$netcnx->{country}}};
                         }
-                        network::adsl::adsl_conf_backend($netcnx, $netc, $adsl_device, $adsl_type); #FIXMEl
+                        network::adsl::adsl_conf_backend($netcnx, $netc, $ntf_name, $adsl_type); #FIXME
                         $handle_multiple_cnx->();
                     },
                    },
@@ -750,11 +753,10 @@ You can find a driver on http://eciadsl.flashtux.org/"),
                     pre => $lan_detect,
                     name => N("Select the network interface to configure:"),
                     data =>  sub {
-                        [ { label => N("Net Device"), type => "list", val => \$ntf_device, list => [ values %eth_intf ], 
-                            allow_empty_list => 1 } ];
+                        [ { label => N("Net Device"), type => "list", val => \$ntf_name, list => [ values %eth_intf ], 
+                            allow_empty_list => 1, format => sub { $eth_intf{$_[0]} } } ];
                     },
                     post => sub {
-                        $ntf_name = { reverse %eth_intf }->{$ntf_device} || $ntf_device;
                         delete $ethntf->{$_} foreach keys %$ethntf;
                         add2hash($ethntf, $intf->{$ntf_name});
                         $::isInstall && $netc->{NET_DEVICE} eq $ethntf->{DEVICE} ? 'lan_alrd_cfg' : 'lan_protocol';

@@ -18,8 +18,7 @@ sub ppp_configure {
 
     any::devfssymlinkf($modem, 'modem') if $modem->{device} ne "/dev/modem";
 
-    my %toreplace = map { $_ => $modem->{$_} } qw(auth AutoName connection dns1 dns2 domain IPAddr login passwd phone SubnetMask);
-    $toreplace{kpppauth} = ${{ N("Script-based") => 0, N("PAP") => 1, N("Terminal-based") => 2, N("CHAP") => 3, N("PAP/CHAP") => 4 }}{$modem->{auth}};
+    my %toreplace = map { $_ => $modem->{$_} } qw(Authentication AutoName connection dns1 dns2 domain IPAddr login passwd phone SubnetMask);
     $toreplace{phone} =~ s/[a-zA-Z]//g;
     if ($modem->{auto_dns} ne N("Automatic")) {
         $toreplace{dnsserver} = join ',', map { $modem->{$_} } "dns1", "dns2";
@@ -32,7 +31,7 @@ sub ppp_configure {
     $toreplace{connection} ||= 'DialupConnection';
     $toreplace{domain} ||= 'localdomain';
     $toreplace{intf} ||= 'ppp0';
-    $toreplace{papname} = ($modem->{auth} eq 'PAP' || $modem->{auth} eq 'CHAP') && $toreplace{login};
+    $toreplace{papname} = $toreplace{login} if member($modem->{Authentication}, 1, 3, 4);
 
     # handle static/dynamic settings:
     if ($modem->{auto_ip} eq N("Automatic")) {
@@ -92,7 +91,7 @@ END
 'OK' 'ATDT$toreplace{phone}'
 'CONNECT' ''
 END
-    if ($modem->{auth} eq 'Terminal-based' || $modem->{auth} eq 'Script-based') {
+    if (member($modem->{Authentication}, 0, 2)) {
 	push @chat, <<END;
 'ogin:--ogin:' '$toreplace{login}'
 'ord:' '$toreplace{passwd}'
@@ -129,7 +128,7 @@ Password=$toreplace{passwd}
 BeforeDisconnect=
 Command=
 ScriptCommands=
-Authentication=$toreplace{kpppauth}
+Authentication=$toreplace{Authentication}
 DNS=$toreplace{dnsserver}
 SubnetMask=$toreplace{SubnetMask}
 AccountingFile=
