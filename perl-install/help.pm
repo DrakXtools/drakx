@@ -3,8 +3,8 @@ use common;
 
 # IMPORTANT: Don't edit this File - It is automatically generated 
 #            from the manuals !!! 
-#            Write a mail to <doc@linux-mandrake.com> if you want 
-#            it changed.
+#            Write a mail to <documentation@mandrakesoft.com> if
+#            you want it changed.
 
 %steps = (
 empty => '',
@@ -101,12 +101,16 @@ preferred graphical environment. At least one must be selected if you want
 to have a graphical workstation!
 
 Moving the mouse cursor over a group name will display a short explanatory
-text about that group. If you do not select any group when installing (and
-not upgrading), a dialog will popup asking you to choose the nature of
-minimal install. This can be \"Base system only\" for the smallest install
-possible, \"No X\" for a bit larger install but without X11 or \"With X\"
-for the the largest minimal install including X11. (this para *MUST* be
-reviewed and splitted)
+text about that group. If you do not select any group when performing a
+regular installation (by opposition to an upgrade), a dialog will popup
+proposing different kind of minimal installations:
+
+ * Will install the strict minimum necessary to get a working Linux system,
+in command line only.
+
+ * Installs the base system plus basic utilities
+
+ * Install the fewer packages possible for having a graphical desktop
 
 You can check the \"Individual package selection\" box, which is useful if
 you are familiar with the packages being offered or if you want to have
@@ -511,10 +515,17 @@ selectInstallClass =>
 __("DrakX now needs to know if you want to perform a default (\"Recommended\")
 installation or if you want to have greater control (\"Expert\"). You also
 have the choice of performing a new install or an upgrade of an existing
-Mandrake Linux system. Clicking \"Install\" will completely wipe out the
-old system. Select \"Upgrade\" if you are upgrading or repairing an
-existing system. Select \"Upgrade packages only\" if you are upgrading the
-packages of a previous distribution without any other modification.
+Mandrake Linux system:
+
+ * completely wipes out the old system;
+
+ *
+
+ *
+
+On the other hand, \"Upgrade\" allows you to upgrade an existing system.
+Finally, Select \"Upgrade packages only\" if you wish to upgrade the
+packages of a previous installation, without any other modification.
 
 Please choose \"Install\" if there are no previous version of Mandrake
 Linux installed or if you wish to boot between various operating systems.
