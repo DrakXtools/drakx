@@ -10,7 +10,6 @@ use log;
 
 
 my %conf;
-my $scsi = 0;
 my %deps = ();
 
 my @drivers_by_category = (
@@ -483,9 +482,14 @@ sub add_alias {
     my ($alias, $name) = @_;
     $name =~ /ignore/ and return;
     /\Q$alias/ && $conf{$_}{alias} && $conf{$_}{alias} eq $name and return $_ foreach keys %conf;
-    $alias .= ++$scsi if $alias eq 'scsi_hostadapter';
-    log::l("adding alias $alias to $name");
-    $conf{$alias}{alias} ||= $name;
+    if ($alias eq 'scsi_hostadapter') {
+	my $l = $conf{scsi_hostadapter}{probeall} ||= [];
+	push @$l, $name;
+	log::l("setting probeall scsi_hostadapter to @$l");
+    } else {
+	log::l("adding alias $alias to $name");
+	$conf{$alias}{alias} ||= $name;
+    }
     if ($name =~ /^snd-card-/) {
 	$conf{$name}{above} = 'snd-pcm-oss';
     }
@@ -631,15 +635,19 @@ sub load_deps($) {
     }
 }
 
-sub read_conf($;$) {
-    my ($file, $scsi) = @_;
+sub read_conf {
+    my ($file) = @_;
     my %c;
 
     foreach (cat_($file)) {
-	do {
-	    $c{$2}{$1} = $3;
-	    $$scsi = max($$scsi, $1 || 0) if /^\s*alias\s+scsi_hostadapter(\d*)/ && $scsi;
-	} if /^\s*(\S+)\s+(\S+)\s+(.*?)\s*$/;
+	next if /^\s*#/;
+	my ($type, $alias, $val) = split(/\s+/, chomp_($_), 3) or next;
+
+	if ($type eq 'probeall') {
+	    $c{$alias}{$type} = [ split ' ', $val ];
+	} else {
+	    $c{$alias}{$type} = $val;
+	}
     }
     #- cheating here: not handling aliases of aliases
     while (my ($k, $v) = each %c) {
@@ -648,15 +656,21 @@ sub read_conf($;$) {
 	    add2hash($c{$a}, $v);
 	}
     }
+    #- convert old scsi_hostadapter's to new probeall
+    while (my ($alias, $type) = each %c) {
+	$alias =~ /^scsi_hostadapter/ && $type->{alias} or next;
+	push @{$c{scsi_hostadapter}{probeall} ||= []}, delete $type->{alias};
+    }
+
     \%c;
 }
 
 sub mergein_conf {
     my ($file) = @_;
-#-    add2hash(\%conf, read_conf($file, \$scsi));
-    my $modconfref = read_conf ($file, \$scsi);
+    my $modconfref = read_conf($file);
     while (my ($key, $value) = each %$modconfref) {
-	$conf{$key}{alias} = $value->{alias} unless exists $conf{$key}{alias};
+	$conf{$key}{alias} = $value->{alias} if !exists $conf{$key}{alias};
+	push @{$conf{$key}{probeall} ||= []}, deref($value->{probeall});
     }
 }
 
@@ -666,22 +680,20 @@ sub write_conf {
     my $file = "$prefix/etc/modules.conf";
     rename "$prefix/etc/conf.modules", $file; #- make the switch to new name if needed
 
-    my @scsi_hostadapters = $scsi ? map { "scsi_hostadapter$_" } (1 .. $scsi) : ();
-    $conf{scsi_hostadapter}{probeall} = join(' ', @scsi_hostadapters) if @scsi_hostadapters;
-
     #- Substitute new aliases in modules.conf (if config has changed)
     substInFile {
-	my ($type,$alias,$module) = split /\s+/, chomp_($_), 3;
+	my ($type,$alias,$module) = split(/\s+/, chomp_($_), 3);
 	if ($type eq 'post-install' && $alias eq 'supermount') {	    
 	    #- remove the post-install supermount stuff.
 	    $_ = '';
-	} elsif ($type eq 'alias' && $alias eq 'scsi_hostadapter') {
-	    #- remove old alias scsi_hostadapter which is replaced by probeall
+	} elsif ($type eq 'alias' && $alias =~ /scsi_hostadapter/) {
+	    #- remove old alias scsi_hostadapter's which are replaced by probeall
 	    $_ = '';
-	} elsif ($type ne "loaded"     &&
+	} elsif ($type ne "loaded" &&
 	    $conf{$alias}{$type}  &&
 	    $conf{$alias}{$type} ne $module)  {
-	    $_ = "$type $alias $conf{$alias}{alias} \n"; 
+	    my $v = join(' ', uniq(deref($conf{$alias}{$type})));
+	    $_ = "$type $alias $v\n";
 	}
     } $file;
 
@@ -690,11 +702,14 @@ sub write_conf {
     local *F;
     open F, ">> $file" or die("cannot write module config file $file: $!\n");
     while (my ($mod, $h) = each %conf) {
-	while (my ($type, $v2) = each %$h) {
-	    print F "$type $mod $v2\n" if $v2 && $type ne "loaded" && !$written->{$mod}{$type};
+	while (my ($type, $v) = each %$h) {
+	    my $v2 = join(' ', uniq(deref($v)));
+	    print F "$type $mod $v2\n" 
+	      if $v2 && $type ne "loaded" && !$written->{$mod}{$type};
 	}
     }
     my @l = ();
+    push @l, 'scsi_hostadapter' if !is_empty_array_ref($conf{scsi_hostadapter}{probeall});
     push @l, 'ide-floppy' if detect_devices::ide_zips();
     push @l, 'bttv' if grep { $_->{driver} eq 'bttv' } detect_devices::probeall();
     my $l = join '|', map { '^\s*'.$_.'\s*$' } @l;
