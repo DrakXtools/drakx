@@ -763,7 +763,6 @@ when your installation is complete and you restart your system.")),
 	$listval2val->($lang);
 
     } else {
-	my $utf = $in->{locale}{utf8};
 	my @langs = sort { lang::l2name($a) cmp lang::l2name($b) } lang::list_langs(exclude_non_installed => 1);
 	die 'one lang only' if @langs == 1;
 	$in->ask_from_($common,
