@@ -16,8 +16,14 @@ LOCALEDIR=$(DATADIR)/locale
 all: help $(MOFILES)
 
 help:
-	cvs co doc/manual/{entities,literal/drakx}
-	rm -rf doc/CVS
+	@if [ ! -d doc ]; then \
+		echo "Checking out doc stuff now ..."; \
+		cvs co doc/manual/{entities,literal/drakx}; \
+		rm -rf doc/CVS; \
+	else \
+		echo "Updating doc stuff now ..."; \
+		cvs update doc/manual/{entities,literal/drakx}; \
+	fi
 	./help_xml2pm.pl
 
 %.mo: %.po
