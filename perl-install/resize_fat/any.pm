@@ -33,7 +33,7 @@ sub max_cluster_count($) {
 # calculates the minimum size of a partition, in physical sectors
 sub min_size($) {
     my ($fs) = @_;
-    my $count = $fs->{clusters}->{count};
+    my $count = $fs->{clusters}{count};
 
     # directories are both in `used' and `dirs', so are counted twice
     # It's done on purpose since we're moving all directories. So at the worse
@@ -71,12 +71,12 @@ sub flag_clusters {
 
 	for (; !resize_fat::fat::is_eof($cluster); $cluster = resize_fat::fat::next($fs, $cluster)) {
 	    $cluster == 0 and die "Bad FAT: unterminated chain for $entry->{name}\n";
-	    $fs->{fat_flag_map}->[$cluster] and die "Bad FAT: cluster $cluster is cross-linked for $entry->{name}\n";
-	    $fs->{fat_flag_map}->[$cluster] = $type;
-	    $fs->{clusters}->{count}->{dirs}++ if $type == $DIRECTORY;
+	    $fs->{fat_flag_map}[$cluster] and die "Bad FAT: cluster $cluster is cross-linked for $entry->{name}\n";
+	    $fs->{fat_flag_map}[$cluster] = $type;
+	    $fs->{clusters}{count}{dirs}++ if $type == $DIRECTORY;
 	}
     };
     $fs->{fat_flag_map} = [ ($FREE) x ($fs->{nb_clusters} + 2) ];
-    $fs->{clusters}->{count}->{dirs} = 0;
+    $fs->{clusters}{count}{dirs} = 0;
     resize_fat::directory::traverse_all($fs, $f);
 }

@@ -12,19 +12,28 @@ use my_gtk qw(:helpers :wrappers);
 
 1;
 
+# redefine ask_warn
+sub ask_warn {
+    my $o = shift;
+    local $my_gtk::grab = 1;
+    $o->SUPER::ask_warn(@_);
+}
+
 sub ask_from_entryW {
     my ($o, $title, $messages, $def) = @_;
-    my_gtk::ask_from_entry($title, @$messages);
+    my $w = my_gtk->new($title, %$o);
+    $w->_ask_from_entry(@$messages);
+    $w->main;
 }
 
 sub ask_from_listW {
     my ($o, $title, $messages, $l, $def) = @_;
 
     if (@$l < 5 && sum(map { length $_ } @$l) < 70) {
-	my $w = my_gtk->new($title);
+	my $w = my_gtk->new($title, %$o);
 	my $f = sub { $w->{retval} = $_[1]; Gtk->main_quit };
 	gtkadd($w->{window},
-	       gtkpack(create_box_with_title($o, @$messages),
+	       gtkpack(create_box_with_title($w, @$messages),
 		       gtkadd((@$l < 3 ? create_hbox() : create_vbox()),
 			      map {
 				  my $b = new Gtk::Button($_);
@@ -37,6 +46,53 @@ sub ask_from_listW {
 	$def->grab_focus if $def;
 	$w->main;
     } else {
-	my_gtk::ask_from_list($title, $messages, $l, $def);
+	my $w = my_gtk->new($title);
+	$w->_ask_from_list($messages, $l, $def);
+	$w->main;
     }
+}
+
+sub ask_many_from_listW {
+    my ($o, $title, $messages, $list, $default) = @_;
+    my @rr = @$default;
+    my $n = 0;
+    my $w = my_gtk->new('', %$o);
+    gtkadd($w->{window}, 
+	   gtkpack(create_box_with_title($w, @$messages),
+		   gtkpack(new Gtk::VBox(0,0),
+			   map { 
+			       my $nn = $n++; 
+			       my $o = Gtk::CheckButton->new($_);
+			       $o->set_active($rr[$nn]);
+			       $o->signal_connect(clicked => sub { $rr[$nn] = !$rr[$nn] });
+			       $o;
+			   } @$list),
+		   $w->create_okcancel,
+		  )
+	  );
+    $w->{ok}->grab_focus;
+    $w->main or return;
+    @rr;
+}
+
+sub wait_messageW($$$) {
+    my ($o, $title, $message) = @_;
+
+    my $w = my_gtk->new(_("Resizing"), %$o, grab => 1);
+    my $W = pop @$message;
+    gtkadd($w->{window}, 
+	   gtkpack(new Gtk::VBox(0,0), 
+		   @$message, 
+		   $w->{wait_messageW} = new Gtk::Label($W)));
+    $w->sync;
+    $w;
+}
+sub wait_message_nextW {
+    my ($o, $message, $w) = @_;
+    $w->{wait_messageW}->set($message);
+    $w->sync;
+}
+sub wait_message_endW {
+    my ($o, $w) = @_;
+    $w->destroy;
 }

@@ -2,7 +2,7 @@ package my_gtk;
 
 use diagnostics;
 use strict;
-use vars qw(@ISA %EXPORT_TAGS @EXPORT_OK);
+use vars qw(@ISA %EXPORT_TAGS @EXPORT_OK $border);
 
 @ISA = qw(Exporter);
 %EXPORT_TAGS = (
@@ -18,7 +18,7 @@ use c;
 use common qw(:common);
 
 my $forgetTime = 1000; # in milli-seconds
-my $border = 10;
+$border = 5;
 
 1;
 
@@ -26,20 +26,23 @@ my $border = 10;
 # OO stuff
 ################################################################################
 sub new {
-    my ($type, $title, @opts) = @_;
+    my ($type, $title, %opts) = @_;
 
     Gtk->init;
-    my $o = bless { @opts }, $type;
+    my $o = bless { %opts }, $type;
     $o->_create_window($title);
+    push @interactive::objects, $o unless $opts{no_interactive_objects};
     $o;
 }
 sub main($;$) {
     my ($o, $f) = @_;
     $o->show;
 
-    $o->{rwindow}->grab_add;
-    do { Gtk->main } while ($o->{retval} && $f && !&$f());
-    $o->{rwindow}->grab_remove;
+    $o->{rwindow}->grab_add if $my_gtk::grab || $o->{grab};
+    do { 
+	Gtk->main 
+    } while ($o->{retval} && $f && !&$f());
+    $o->{rwindow}->grab_remove if $my_gtk::grab || $o->{grab};
     $o->destroy;
     $o->{retval}
 }
@@ -53,6 +56,7 @@ sub destroy($) {
     $o->{rwindow}->destroy;
     flush();
 }
+sub DESTROY { goto &destroy }
 sub sync($) {
     my ($o) = @_;
     $o->show;
@@ -65,7 +69,7 @@ sub flush(;$) {
     Gtk->main_iteration while Gtk::Gdk->events_pending;
 }
 sub bigsize($) { 
-    $_[0]->{rwindow}->set_usize(600,400); 
+    $_[0]{rwindow}->set_usize(600,400); 
 }
 
 
@@ -141,7 +145,7 @@ sub gtkset_mousecursor($) {
     gtkroot()->set_cursor(Gtk::Gdk::Cursor->new($type));
 }
 
-sub gtkset_background($$$) {
+sub gtkset_background {
     my ($r, $g, $b) = @_;
 
     my $root = gtkroot();
@@ -152,7 +156,6 @@ sub gtkset_background($$$) {
     $root->set_background($color);
     
     my ($h, $w) = $root->get_size;
-    
     $root->draw_rectangle($gc, 1, 0, 0, $w, $h);
 }
 
@@ -176,7 +179,7 @@ sub create_okcancel($;$$) {
 sub create_box_with_title($@) {
     my $o = shift;
 
-    @_ = map { warp_text($_) } @_;
+    @_ = map { ref $_ ? $_ : warp_text($_) } @_;
     $o->{box} = gtkpack_(new Gtk::VBox(0,0),
 			 map({
 			      my $w = ref $_ ? $_ : new Gtk::Label($_);
@@ -285,9 +288,15 @@ sub _create_window($$) {
     }
 
     $w->set_title($title);
-    $w->signal_connect("expose_event" => sub { c::XSetInputFocus($w->window->XWINDOW) }) if $my_gtk::force_focus;
+    $w->signal_connect("expose_event" => sub { c::XSetInputFocus($w->window->XWINDOW) }) if $my_gtk::force_focus || $o->{force_focus};
     $w->signal_connect("delete_event" => sub { $o->{retval} = undef; Gtk->main_quit });
-    $w->set_uposition(@$my_gtk::force_position) if $my_gtk::force_position;
+    $w->set_uposition(@{$my_gtk::force_position || $o->{force_position}}) if $my_gtk::force_position || $o->{force_position};
+
+    $w->signal_connect(size_allocate => sub {
+	my ($wi, $he) = @{$_[1]}[2,3]; 
+	my ($X, $Y, $Wi, $He) = @{$my_gtk::force_center || $o->{force_center}};
+        $w->set_uposition(max(0, $X + ($Wi - $wi) / 2), max(0, $Y + ($He - $he) / 2));
+    }) if ($my_gtk::force_center || $o->{force_center}) && !($my_gtk::force_position || $o->{force_position}) ;
 
     $o->{window} = $f;
     $o->{rwindow} = $w;
@@ -399,7 +408,7 @@ sub _ask_okcancel($@) {
 
 sub _ask_file($$) {
     my ($o, $title) = @_;
-    my $f = $o->{window} = new Gtk::FileSelection $title;
+    my $f = $o->{rwindow} = new Gtk::FileSelection $title;
     $f->ok_button->signal_connect(clicked => sub { $o->{retval} = $f->get_filename ; Gtk->main_quit });
     $f->cancel_button->signal_connect(clicked => sub { Gtk->main_quit });
     $f->hide_fileop_buttons;

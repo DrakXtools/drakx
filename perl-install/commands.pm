@@ -246,25 +246,29 @@ sub cp {
     &$cp(@_);
 }
 
-#sub ps {
-#    @_ and die "usage: ps\n";
-#    my ($pid, $cmd);
-#
-#    local (*STDOUT_TOP, *STDOUT);
-#    format STDOUT_TOP =
-#  PID   CMD
-#.
-#    format =
-#@>>>>  @<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-#$pid, $cmd
-#.
-#
-#    foreach $pid (sort {$a <=> $b} grep { /\d+/ } all('/proc')) {
-#	 (($cmd) = cat_("/proc/$pid/cmdline")) =~ s/\0/ /g;
-#	 $cmd ||= (split ' ', (cat_("/proc/$pid/stat"))[0])[1];
-#	 write STDOUT
-#    }
-#}
+sub ps {
+    @_ and die "usage: ps\n";
+    my ($pid, $cpu, $cmd);
+    my $uptime = int first(cat_("/proc/uptime"));
+    my $hertz = 100;
+
+    local (*STDOUT_TOP);
+    format STDOUT_TOP =
+  PID   CMD
+.
+    format =
+@>>>>  @>>> @<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+$pid, $cpu, $cmd
+.
+
+    foreach $pid (sort {$a <=> $b} grep { /\d+/ } all('/proc')) {
+	 my @l = split(' ', cat_("/proc/$pid/stat"));
+	 $cpu = sprintf "%2.1f", max(0, min(99, ($l[13] + $l[14]) * 100 / $hertz / ($uptime - $l[21] / $hertz)));
+	 (($cmd) = cat_("/proc/$pid/cmdline")) =~ s/\0/ /g;
+	 $cmd ||= (split ' ', (cat_("/proc/$pid/stat"))[0])[1];
+	 write STDOUT;
+    }
+}
 
 
 sub dd {

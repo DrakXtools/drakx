@@ -1,0 +1,40 @@
+style "any"
+{
+  font = "-adobe-helvetica-medium-r-normal-*-*-100-*-*-p-*-iso8859-1"
+
+  bg[NORMAL]      = { 0.67, 0.67, 0.67 }
+  bg[ACTIVE]      = { 0, 0, 0 }
+  bg[PRELIGHT]    = { 0, 0, 0 }
+  bg[INSENSITIVE] = { 0, 0, 0 }
+  
+  fg[NORMAL]  	  = { 1.0, 1.0, 1.0 }
+  fg[ACTIVE]  	  = { 1.0, 1.0, 1.0 }
+  fg[PRELIGHT]    = { 1.0, 1.0, 1.0 }
+  fg[INSENSITIVE] = { 1.0, 1.0, 1.0 }
+}
+
+style "entry"
+{
+  base[NORMAL] = { 1.0, 1.0, 1.0 }
+  fg[NORMAL] = { 0.67, 0.67, 0.67 }
+}
+
+style "button"
+{
+  bg[NORMAL] = { 1.0, 1.0, 1.0 }
+  fg[NORMAL] = { 0, 0, 0 }
+  bg[PRELIGHT] = { 1.0, 1.0, 1.0 }
+  fg[PRELIGHT] = { 0.67, 0.67, 0.67 }
+}
+
+style "background"
+{
+  bg[NORMAL] = { 0.67, 0.67, 0.67 }
+}
+
+widget_class "*" style "any"
+widget_class "*GtkEntry*" style "entry"
+widget_class "*GtkSpin*" style "entry"
+widget_class "*Gtk*List*" style "entry"
+widget "*GtkButton*" style "button"
+widget "*background*" style "background"

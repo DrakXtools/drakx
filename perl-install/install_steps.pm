@@ -3,9 +3,10 @@ package install_steps;
 use diagnostics;
 use strict;
 
-use common qw(:file :system);
+use common qw(:file :system :common);
 use install_any qw(:all);
 use partition_table qw(:types);
+use modules;
 use run_program;
 use lilo;
 use lang;
@@ -15,6 +16,11 @@ use cpio;
 use log;
 use fsedit;
 use commands;
+use network;
+use fs;
+
+
+my @etc_pass_fields = qw(name password uid gid realname home shell);
 
 
 my $o;
@@ -28,25 +34,55 @@ sub new($$) {
     $o = bless $o_, ref $type || $type;
 }
 
+sub default {
+    my ($o, $field) = @_;
+    $o->{$field} || $o->{default}{$field};
+}
+
 sub enteringStep($$) {
     my ($o, $step) = @_;
     log::l("starting step `$step'");
+    $o->kill;
+
+    for (my $s = $o->{steps}{first}; $s; $s = $o->{steps}{$s}{next}) {
+
+	next if $o->{steps}{$s}{done} && !$o->{steps}{$s}{redoable};
+
+	my $reachable = 1;
+	if (my $needs = $o->{steps}{$s}{needs}) {
+	    my @l = ref $needs ? @$needs : $needs;
+	    $reachable = min(map { $o->{steps}{$_}{done} } @l);
+	}
+	if ($reachable && !$o->{steps}{$s}{reachable}) {
+	    $o->{steps}{$s}{reachable} = 1;
+	    $o->step_set_reachable($s);
+	}
+    }
 }
 sub leavingStep($$) {
     my ($o, $step) = @_;
     log::l("step `$step' finished");
+
+    unless ($o->{steps}{$step}{redoable}) {
+	$o->{steps}{$step}{reachable} = 0;
+	$o->step_set_unreachable($step);
+    }
+
+    while (my $f = shift @{$o->{steps}{$step}{toBeDone} || []}) {
+	&$f();
+    }
 }
 
 sub errorInStep($$) {}
 
 sub chooseLanguage($) {
-    $o->{default}->{lang};
+    $o->default("lang");
 }
 sub selectInstallOrUpgrade($) {
-    $o->{default}->{isUpgrade} || 0;
+    $o->default("isUpgrade") || 0;
 }
 sub selectInstallClass($@) {
-    $o->{default}->{installClass} || $_[1];
+    $o->default("installClass") || $_[1];
 }
 sub setupSCSI {
     modules::load_thiskind('scsi');
@@ -54,7 +90,7 @@ sub setupSCSI {
 
 sub doPartitionDisks($$) {
     my ($o, $hds) = @_;
-    fsedit::auto_allocate($hds, $o->{default}->{partitions});
+    fsedit::auto_allocate($hds, $o->{default}{partitions});
 }
 sub rebootNeeded($) {
     my ($o) = @_;
@@ -66,8 +102,15 @@ sub choosePartitionsToFormat($$) {
     my ($o, $fstab) = @_;
 
     foreach (@$fstab) { 
-	$_->{toFormat} = $_->{mntpoint} && (isExt2($_) || isSwap($_)) &&
-	  ($_->{notFormatted} || $o->{default}->{partitionning}->{autoformat});
+	$_->{toFormat} = ($_->{mntpoint} && isExt2($_) || isSwap($_)) &&
+	  ($_->{notFormatted} || $o->{default}{partitionning}{autoformat});
+    }
+}
+
+sub formatPartitions {
+    my $o = shift;
+    foreach (@_) {
+	fs::format_part($_) if $_->{toFormat};
     }
 }
 
@@ -76,17 +119,8 @@ sub choosePackages($$$) {
 }
 
 sub beforeInstallPackages($) {
-
-    foreach (qw(dev etc home mnt tmp var var/tmp var/lib var/lib/rpm)) {
-	mkdir "$o->{prefix}/$_", 0755;
-    }
-
-    unless ($o->{isUpgrade}) {
-	local *F;
-	open F, "> $o->{prefix}/etc/hosts" or die "Failed to create etc/hosts: $!";
-	print F "127.0.0.1		localhost localhost.localdomain\n";
-    }
-
+    mkdir "$o->{prefix}/$_", 0755 foreach qw(dev etc home mnt tmp var var/tmp var/lib var/lib/rpm);
+    network::add2hosts("$o->{prefix}/etc/hosts", "127.0.0.1", "localhost.localdomain");
     pkgs::init_db($o->{prefix}, $o->{isUpgrade});
 }
 
@@ -99,10 +133,6 @@ sub installPackages($$) {
 sub afterInstallPackages($) {
     my ($o) = @_;
 
-    unless ($o->{isUpgrade}) {
-        keyboard::write($o->{prefix}, $o->{keyboard});
-        lang::write($o->{prefix});
-    }
     #  why not? 
     sync(); sync();
 
@@ -115,25 +145,16 @@ sub mouseConfig($) {
 
 sub finishNetworking($) {
     my ($o) = @_;
+    my $etc = "$o->{prefix}/etc";
 #
 #    rc = checkNetConfig(&$o->{intf}, &$o->{netc}, &$o->{intfFinal},
 #			 &$o->{netcFinal}, &$o->{driversLoaded}, $o->{direction});
-#
-#    if (rc) return rc;
-#
-#    sprintf(path, "%s/etc/sysconfig", $o->{rootPath});
-#    writeNetConfig(path, &$o->{netcFinal}, 
-#		    &$o->{intfFinal}, 0);
-#    strcat(path, "/network-scripts");
-#    writeNetInterfaceConfig(path, &$o->{intfFinal});
-#    sprintf(path, "%s/etc", $o->{rootPath});
-#    writeResolvConf(path, &$o->{netcFinal});
-#
-#    #  this is a bit of a hack 
-#    writeHosts(path, &$o->{netcFinal}, 
-#		&$o->{intfFinal}, !$o->{isUpgrade});
-#
-#    return 0;
+    network::write_conf("$etc/sysconfig/network", $o->{netc});
+    network::write_interface_conf("$etc/sysconfig/network-scripts/ifcfg-$o->{intf}{DEVICE}", $o->{intf});
+    network::write_resolv_conf("$etc/resolv.conf", $o->{netc});
+    network::add2hosts("$etc/hosts", $o->{intf}{IPADDR}, $o->{netc}{HOSTNAME});
+#    syscall_('sethostname', $hostname, length $hostname) or warn "sethostname failed: $!";
+    #res_init();		# reinit the resolver so DNS changes take affect     
 }
 
 sub timeConfig {}
@@ -141,9 +162,10 @@ sub servicesConfig {}
 
 sub setRootPassword($) {
     my ($o) = @_;
+    my %u = %{$o->default("superuser")};
     my $p = $o->{prefix};
-    my $pw = $o->{default}->{rootPassword};
-    $pw = crypt_($pw);
+
+    $u{password} = crypt_($u{password}) if $u{password};
 
     my $f = "$p/etc/passwd";
     my @lines = cat_($f, "failed to open file $f");
@@ -151,49 +173,55 @@ sub setRootPassword($) {
     local *F;
     open F, "> $f" or die "failed to write file $f: $!\n";
     foreach (@lines) {
-	s/^root:.*?:/root:$pw:/;
+	if (/^root:/) {
+	    chomp;
+	    my %l; @l{@etc_pass_fields} = split ':';
+	    add2hash(\%u, \%l);
+	    $_ = join(':', @u{@etc_pass_fields}) . "\n";
+	}
 	print F $_;
     }
 }
 
 sub addUser($) {
     my ($o) = @_;
-    my %u = %{$o->{default}->{user}};
+    my %u = %{$o->default("user")};
     my $p = $o->{prefix};
+    my @passwd = cat_("$p/etc/passwd");;
 
-    my $new_uid;
-    #my @uids = map { (split)[2] } cat__("$p/etc/passwd");
-    #for ($new_uid = 500; member($new_uid, @uids); $new_uid++) {}
-    for ($new_uid = 500; getpwuid($new_uid); $new_uid++) {}
+    !$u{name} || member($u{name}, map { (split ':')[0] } @passwd) and return;
 
-    my $new_gid;
-    #my @gids = map { (split)[2] } cat__("$p/etc/group");
-    #for ($new_gid = 500; member($new_gid, @gids); $new_gid++) {}
-    for ($new_gid = 500; getgrgid($new_gid); $new_gid++) {}
+    unless ($u{uid}) {
+	my @uids = map { (split ':')[2] } @passwd;
+	for ($u{uid} = 500; member($u{uid}, @uids); $u{uid}++) {}    
+    }    
+    unless ($u{gid}) {
+	my @gids = map { (split ':')[2] } cat_("$p/etc/group");
+	for ($u{gid} = 500; member($u{gid}, @gids); $u{gid}++) {}
+    }
+    $u{home} ||= "/home/$u{name}";
 
-    my $homedir = "$p/home/$u{name}";
-
-    my $pw = crypt_($u{password});
+    $u{password} = crypt_($u{password}) if $u{password};
 
     local *F;
     open F, ">> $p/etc/passwd" or die "can't append to passwd file: $!";
-    print F "$u{name}:$pw:$new_uid:$new_gid:$u{realname}:/home/$u{name}:$u{shell}\n";
-	    
-    open F, ">> $p/etc/group" or die "can't append to group file: $!";
-    print F "$u{name}::$new_gid:\n";
+    print F join(':', @u{@etc_pass_fields}), "\n";
 
-    eval { commands::cp("-f", "$p/etc/skel", $homedir) }; $@ and log::l("copying of skel failed: $@"), mkdir($homedir, 0750);
-    commands::chown_("-r", "$new_uid.$new_gid", $homedir);    
+    open F, ">> $p/etc/group" or die "can't append to group file: $!";
+    print F "$u{name}::$u{gid}:\n";
+
+    eval { commands::cp("-f", "$p/etc/skel", "$p$u{home}") }; $@ and log::l("copying of skel failed: $@"), mkdir("$p$u{home}", 0750);
+    commands::chown_("-r", "$u{uid}.$u{gid}", "$p$u{home}");
 }
 
 sub createBootdisk($) {
-    lilo::mkbootdisk($o->{prefix}, versionString()) if $o->{default}->{mkbootdisk} && !$::testing;
+    lilo::mkbootdisk($o->{prefix}, versionString()) if $o->default("mkbootdisk") && !$::testing;
 }
 
 sub setupBootloader($) {
     my ($o) = @_;
     my $versionString = versionString();
-    lilo::install($o->{prefix}, $o->{hds}, $o->{fstab}, $versionString, $o->{default}->{bootloader});
+    lilo::install($o->{prefix}, $o->{hds}, $o->{fstab}, $versionString, $o->default("bootloader"));
 }
 
 sub setupXfree {

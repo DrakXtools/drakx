@@ -29,6 +29,7 @@ my %languages = (
 1;
 
 sub list { map { $_->[0] } values %languages }
+sub lang2text { $languages{$_[0]} && $languages{$_[0]}[0] }
 sub text2lang {
     my ($t) = @_;
     while (my ($k, $v) = each %languages) {
@@ -42,8 +43,8 @@ sub set {
 
     if ($lang) {
 	$ENV{LANG} = $ENV{LINGUAS} = $lang;
-	$ENV{LC_ALL} = $languages{$lang}->[3];
-	#if (my $f = $languages{$lang}->[1]) { load_font($f) }
+	$ENV{LC_ALL} = $languages{$lang}[3];
+	#if (my $f = $languages{$lang}[1]) { load_font($f) }
     } else {
 	# stick with the default (English) */
 	delete $ENV{LANG};

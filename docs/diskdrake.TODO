@@ -1,10 +1,13 @@
+- popup menu should no be closed when a simple click is done
 - test what windows can handle (the number of partitions)
-- bug when creating smallest partitions (size < 0)
+- better keyboard focus handling
+- end sector in Create
 - add warnings for scsi drives if you create more than sdx15
 - the information put in save/restore partitions must be cleaned
 (remove mounted/formatted/..., also remove the Data::Dumper dependency)
 - test, test, test
 - integrate ext2resize
+- do not allow swap partitions above 2Gigs
 - wanting the first partition to be extended is not used
 - maybe warn if a mounted partition change of dev number
 - add the ability to specify primary or extended partitions (in expert mode)

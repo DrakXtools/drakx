@@ -64,8 +64,8 @@ sub copy_clusters {
 	}
     };
     for (; $cluster < $fs->{nb_clusters} + 2; $cluster++) {
-	$fs->{fat_flag_map}->[$cluster] == $resize_fat::any::FILE or next;
-	push @buffer, $fs->{fat_remap}->[$cluster], resize_fat::io::read_cluster($fs, $cluster);
+	$fs->{fat_flag_map}[$cluster] == $resize_fat::any::FILE or next;
+	push @buffer, $fs->{fat_remap}[$cluster], resize_fat::io::read_cluster($fs, $cluster);
 	@buffer > 50 and &$flush();
     }
     &$flush();
@@ -78,14 +78,14 @@ sub construct_dir_tree {
     if ($resize_fat::isFAT32) { 
 	# fat32's root must remain in the first 64k clusters
 	# so don't set it as DIRECTORY, it will be specially handled
-	$fs->{fat_flag_map}->[$fs->{fat32_root_dir_cluster}] = $resize_fat::any::FREE;
+	$fs->{fat_flag_map}[$fs->{fat32_root_dir_cluster}] = $resize_fat::any::FREE;
     }
 
     for (my $cluster = 2; $cluster < $fs->{nb_clusters} + 2; $cluster++) {
-	$fs->{fat_flag_map}->[$cluster] == $resize_fat::any::DIRECTORY or next;
+	$fs->{fat_flag_map}[$cluster] == $resize_fat::any::DIRECTORY or next;
 
       resize_fat::io::write_cluster($fs, 
-				    $fs->{fat_remap}->[$cluster], 
+				    $fs->{fat_remap}[$cluster], 
 				  resize_fat::directory::remap($fs, resize_fat::io::read_cluster($fs, $cluster)));
     }
 
@@ -101,7 +101,7 @@ sub construct_dir_tree {
 	my $cluster = $fs->{fat32_root_dir_cluster};
 
 	resize_fat::io::write_cluster($fs, 
-		      $fs->{fat_remap}->[$cluster], 
+		      $fs->{fat_remap}[$cluster], 
 		      resize_fat::directory::remap($fs, resize_fat::io::read_cluster($fs, $cluster)));
     } else {
 	resize_fat::io::write($fs, $fs->{root_dir_offset}, $fs->{root_dir_size},
@@ -147,8 +147,8 @@ sub resize {
 
     $fs->{nb_sectors} = $size;
     $fs->{nb_clusters} = $new_nb_clusters;
-    $fs->{clusters}->{count}->{free} = 
-	$fs->{nb_clusters} - $fs->{clusters}->{count}->{used} - $fs->{clusters}->{count}->{bad} - 2;
+    $fs->{clusters}{count}->{free} = 
+	$fs->{nb_clusters} - $fs->{clusters}{count}->{used} - $fs->{clusters}->{count}->{bad} - 2;
 
     $fs->{system_id} = 'was here!';
     $fs->{small_nb_sectors} = 0;

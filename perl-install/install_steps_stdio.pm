@@ -18,7 +18,7 @@ use log;
 
 sub enteringStep($$$) {
     my ($o, $step) = @_;
-    print _("Starting step `%s'\n", $o->{steps}->{$step}->{text});
+    print _("Starting step `%s'\n", $o->{steps}{$step}{text});
 }
 sub leavingStep {
     my ($o) = @_;
@@ -50,7 +50,7 @@ sub setRootPassword($) {
 	print "Password (again for confirmation): "; 
     } until ($w{password} eq $o->readln());
 
-    $o->{default}->{rootPassword} = $w{password};
+    $o->{default}{rootPassword} = $w{password};
     $o->SUPER::setRootPassword;
 }
 
@@ -68,6 +68,6 @@ sub addUser($) {
     
     $w{shell} = $o->ask_from_list('', 'Shell', [ install_any::shells($o) ], "/bin/bash");
     
-    $o->{default}->{user} = { map { $_ => $w{$_}->get_text } qw(name password realname shell) };
+    $o->{default}{user} = { map { $_ => $w{$_}->get_text } qw(name password realname shell) };
     $o->SUPER::addUser;
 }

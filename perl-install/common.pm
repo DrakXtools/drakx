@@ -7,9 +7,9 @@ use vars qw(@ISA %EXPORT_TAGS @EXPORT_OK $printable_chars $sizeof_int $bitof_int
 @ISA = qw(Exporter);
 %EXPORT_TAGS = (
     common => [ qw(__ min max sum sign product bool ikeys member divide is_empty_array_ref add2hash set_new set_add round_up round_down first second top uniq translate untranslate warp_text) ],
-    functional => [ qw(fold_left difference2) ],
+    functional => [ qw(fold_left difference2 before_leaving catch_cdie cdie) ],
     file => [ qw(dirname basename touch all glob_ cat_ chop_ mode) ],
-    system => [ qw(sync makedev unmakedev psizeof strcpy gettimeofday syscall_ crypt_ getVarsFromSh) ],
+    system => [ qw(sync makedev unmakedev psizeof strcpy gettimeofday syscall_ crypt_ getVarsFromSh setVarsInSh) ],
     constant => [ qw($printable_chars $sizeof_int $bitof_int $SECTORSIZE) ],
 );
 @EXPORT_OK = map { @$_ } values %EXPORT_TAGS;
@@ -49,7 +49,7 @@ sub is_empty_array_ref { my $a = shift; !defined $a || @$a == 0 }
 sub difference2 { my %l; @l{@{$_[1]}} = (); grep { !exists $l{$_} } @{$_[0]} }
 
 sub set_new(@) { my %l; @l{@_} = undef; { list => [ @_ ], hash => \%l } }
-sub set_add($@) { my $o = shift; foreach (@_) { exists $o->{hash}->{$_} and next; push @{$o->{list}}, $_; $o->{hash}->{$_} = undef } }
+sub set_add($@) { my $o = shift; foreach (@_) { exists $o->{hash}{$_} and next; push @{$o->{list}}, $_; $o->{hash}{$_} = undef } }
 
 sub sync { syscall_('sync') }
 sub gettimeofday { my $t = pack "LL"; syscall_('gettimeofday', $t, 0) or die "gettimeofday failed: $!\n"; unpack("LL", $t) }
@@ -75,6 +75,50 @@ sub fold_left(&$@) {
     $a
 }
 
+sub add_f4before_leaving {
+    my ($f, $b, $name) = @_;
+
+#    print "add_f4before_leaving\n";
+    unless ($common::before_leaving::{$name}) {
+	no strict 'refs';
+	${"common::before_leaving::$name"} = 1;
+	${"common::before_leaving::list"} = 1;
+    }
+    local *N = *{$common::before_leaving::{$name}};
+    my $list = *common::before_leaving::list;
+    $list->{$b}{$name} = $f;
+    *N = sub {
+	my $f = $list->{$_[0]}{$name} or die;
+	$name eq 'DESTROY' and delete $list->{$_[0]};
+	goto $f;
+    } unless defined &{*N};
+
+}
+
+# ! the functions are not called in the order wanted, in case of multiple before_leaving :(
+sub before_leaving(&) {
+    my ($f) = @_;
+    my $b = bless {}, 'common::before_leaving';
+    add_f4before_leaving($f, $b, 'DESTROY');
+    $b;
+}
+
+sub catch_cdie(&&) {
+    my ($f, $catch) = @_;
+
+    unshift @common::cdie_catches, $catch;
+    &$f();
+    shift @common::cdie_catches;
+}
+
+sub cdie {
+    $@ = join '', @_;
+    foreach (@common::cdie_catches) {
+	print;
+	&{$_}(@_) and return;
+    }
+    die @_;
+}
 
 sub all {
     my $d = shift;
@@ -163,4 +207,11 @@ sub getVarsFromSh($) {
 	$l{$v} = $val2 || $val;
     }
     %l;
+}
+
+sub setVarsInSh {
+    my ($file, $l, @fields) = @_;
+    local *F;
+    open F, "> $_[0]" or die "cannot create config file $file";
+    $l->{$_} and print F "$_=$l->{$_}\n" foreach @fields;
 }

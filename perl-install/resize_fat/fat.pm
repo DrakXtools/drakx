@@ -18,7 +18,7 @@ sub read($) {
 	$fat;
     } (0 .. $fs->{nb_fats} - 1);
 
-    $fs->{fat} = $fs->{fats}->[0];
+    $fs->{fat} = $fs->{fats}[0];
 
     my ($free, $bad, $used) = (0, 0, 0);
 
@@ -28,7 +28,7 @@ sub read($) {
 	elsif ($cluster == $resize_fat::bad_cluster_value) { $bad++; }
 	else { $used++; }
     }
-    @{$fs->{clusters}->{count}}{qw(free bad used)} = ($free, $bad, $used);
+    @{$fs->{clusters}{count}}{qw(free bad used)} = ($free, $bad, $used);
 }
 
 sub write($) {
@@ -49,7 +49,7 @@ sub write($) {
 sub allocate_remap {
     my ($fs, $cut_point) = @_;
     my ($cluster, $new_cluster);
-    my $remap = sub { $fs->{fat_remap}->[$cluster] = $new_cluster; };
+    my $remap = sub { $fs->{fat_remap}[$cluster] = $new_cluster; };
     my $get_new = sub {
 	$new_cluster = get_free($fs);
 	0 < $new_cluster && $new_cluster < $cut_point or die "no free clusters";
@@ -57,11 +57,11 @@ sub allocate_remap {
 	#log::ld("resize_fat: [$cluster,", &next($fs, $cluster), "...]->$new_cluster...");
     };
 
-    $fs->{fat_remap}->[0] = 0;
+    $fs->{fat_remap}[0] = 0;
     $fs->{last_free_cluster} = 2;
     for ($cluster = 2; $cluster < $fs->{nb_clusters} + 2; $cluster++) {
 	if ($cluster < $cut_point) {
-	    if ($fs->{fat_flag_map}->[$cluster] == $resize_fat::any::DIRECTORY) {
+	    if ($fs->{fat_flag_map}[$cluster] == $resize_fat::any::DIRECTORY) {
 		&$get_new();
 	    } else {
 		$new_cluster = $cluster;
@@ -80,10 +80,10 @@ sub update {
     my ($fs) = @_;
 
     for (my $cluster = 2; $cluster < $fs->{nb_clusters} + 2; $cluster++) {
-	 if ($fs->{fat_flag_map}->[$cluster]) {
+	 if ($fs->{fat_flag_map}[$cluster]) {
 	     my $old_next = &next($fs, $cluster);
-	     my $new      = $fs->{fat_remap}->[$cluster];
-	     my $new_next = $fs->{fat_remap}->[$old_next];
+	     my $new      = $fs->{fat_remap}[$cluster];
+	     my $new_next = $fs->{fat_remap}[$old_next];
 
 	     set_available($fs, $cluster);
 
@@ -101,7 +101,7 @@ sub update {
 sub check($) {
     my ($fs) = @_;
     foreach (@{$fs->{fats}}) {
-	$_ eq $fs->{fats}->[0] or die "FAT tables do not match";
+	$_ eq $fs->{fats}[0] or die "FAT tables do not match";
     }
 }
 

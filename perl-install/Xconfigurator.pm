@@ -36,46 +36,50 @@ sub readCardsDB {
     local *F;
     open F, $file or die "file $file not found";
 
-    my $lineno = 0; foreach (<F>) { $lineno++;
+    my ($lineno, $cmd, $val) = 0;
+    my $fs = { 
+        LINE => sub { push @{$card->{lines}}, $val unless $val eq "VideoRam" },
+	NAME => sub {
+	    $cards{$card->{type}} = $card if $card;
+	    $card = { type => $val };
+	},
+	SEE => sub {
+	    my $c = $cards{$val} or die "Error in database, invalid reference $val at line $lineno";
+	    
+	    push @{$card->{lines}}, @{$c->{lines} || []};
+	    add2hash($card->{flags}, $c->{flags});
+	    add2hash($card, $c);
+	},
+	CHIPSET => sub { 
+	    $card->{chipset} = $val; 
+	    $card->{flags}{needVideoRam} = 1 if member($val, qw(mgag10 mgag200 RIVA128));
+	},
+	SERVER => sub { $card->{server} = $val; },
+	RAMDAC => sub { $card->{ramdac} = $val; },
+	DACSPEED => sub { $card->{dacspeed} = $val; },
+	CLOCKCHIP => sub { $card->{clockchip} = $val; $card->{flags}{noclockprobe} = 1; },
+	NOCLOCKPROBE => sub { $card->{flags}{noclockprobe} = 1 },
+	UNSUPPORTED => sub { $card->{flags}{unsupported} = 1 },
+	COMMENT => sub {},
+    };
+
+    foreach (<F>) { $lineno++;
 	s/\s+$//;
 	/^#/ and next;
 	/^$/ and next;
 	/^END/ and last;
 
-	my ($cmd, $val) = /(\S+)\s*(.*)/ or log::l("bad line $lineno ($_)"), next;
+	($cmd, $val) = /(\S+)\s*(.*)/ or log::l("bad line $lineno ($_)"), next;
 
-	my $f = $ {{ 
-	    LINE => sub { push @{$card->{lines}}, $val unless $val eq "VideoRam" },
-	    NAME => sub {
-		$cards{$card->{type}} = $card if $card;
-		$card = { type => $val };
-	    },
-	    SEE => sub {
-		my $c = $cards{$val} or die "Error in database, invalid reference $val at line $lineno";
-    
-		push @{$card->{lines}}, @{$c->{lines} || []};
-		add2hash($card->{flags}, $c->{flags});
-		add2hash($card, $c);
-	    },
-	    CHIPSET => sub { $card->{chipset} = $val; 
-			     $card->{flags}->{needVideoRam} = 1 if member($val, qw(mgag10 mgag200 RIVA128));
-			 },
-	    SERVER => sub { $card->{server} = $val; },
-	    RAMDAC => sub { $card->{ramdac} = $val; },
-	    DACSPEED => sub { $card->{dacspeed} = $val; },
-	    CLOCKCHIP => sub { $card->{clockchip} = $val; $card->{flags}->{noclockprobe} = 1; },
-	    NOCLOCKPROBE => sub { $card->{flags}->{noclockprobe} = 1 },
-	    UNSUPPORTED => sub { $card->{flags}->{unsupported} = 1 },
-	    COMMENT => sub {},
-	}}{$cmd};
+	my $f = $fs->{$cmd};
 
 	$f ? &$f() : log::l("unknown line $lineno ($_)");
     }
-    push @{$cards{S3}->{lines}}, $s3_comment;
-    push @{$cards{'CL-GD'}->{lines}}, $cirrus_comment;
+    push @{$cards{S3}{lines}}, $s3_comment;
+    push @{$cards{'CL-GD'}{lines}}, $cirrus_comment;
 
     # this entry is broken in X11R6 cards db 
-    $cards{I128}->{flags}->{noclockprobe} = 1;
+    $cards{I128}{flags}{noclockprobe} = 1;
 }
 
 sub readMonitorsDB {
@@ -156,7 +160,7 @@ sub cardConfiguration(;$$) {
     add2hash($card, { vendor => "Unknown", board => "Unknown" });
 
     $card->{prog} = "/usr/X11R6/bin/XF86_$card->{server}";
-    
+
     -x "$prefix$card->{prog}" or !defined $install or &$install($card->{server});
     -x "$prefix$card->{prog}" or die "server $card->{server} is not available (should be in $prefix$card->{prog})";
 	
@@ -166,10 +170,10 @@ sub cardConfiguration(;$$) {
     }
 
     unless ($card->{type}) {
-	$card->{flags}->{noclockprobe} = member($card->{server}, qw(I128 S3 S3V Mach64));
+	$card->{flags}{noclockprobe} = member($card->{server}, qw(I128 S3 S3V Mach64));
     }
 
-    $card->{flags}->{needVideoRam} and
+    $card->{flags}{needVideoRam} and
       $card->{memory} ||= 
 	$videomemory{$in->ask_from_list_('', 
 					 _("Give your graphic card memory size"), 
@@ -198,9 +202,9 @@ sub testConfig($) {
     write_XF86Config($o, $tmpconfig);
 
     local *F;
-    open F, "$prefix$o->{card}->{prog} :9 -probeonly -pn -xf86config $tmpconfig 2>&1 |";
+    open F, "$prefix$o->{card}{prog} :9 -probeonly -pn -xf86config $tmpconfig 2>&1 |";
     foreach (<F>) {
-	$o->{card}->{memory} ||= $2 if /(videoram|Video RAM):\s*(\d*)/;
+	$o->{card}{memory} ||= $2 if /(videoram|Video RAM):\s*(\d*)/;
 
 	# look for clocks
 	push @$clocklines, $1 if /clocks: (.*)/ && !/(pixel |num)clocks:/;
@@ -216,13 +220,13 @@ sub testConfig($) {
 sub testFinalConfig($;$) {
     my ($o, $auto) = @_;
 
-    $o->{monitor}->{hsyncrange} && $o->{monitor}->{vsyncrange} or
+    $o->{monitor}{hsyncrange} && $o->{monitor}{vsyncrange} or
       $in->ask_warn('', _("Monitor not configured yet")), return;
 
-    $o->{card}->{server} or
+    $o->{card}{server} or
       $in->ask_warn('', _("Graphic card not configured yet")), return;
 
-    $o->{card}->{depth} or
+    $o->{card}{depth} or
       $in->ask_warn('', _("Resolutions not chosen yet")), return;
 
     rename("$prefix/etc/X11/XF86Config", "$prefix/etc/X11/XF86Config.old") || die "unable to make a backup of XF86Config" unless $::testing;
@@ -235,7 +239,7 @@ sub testFinalConfig($;$) {
 
     my $pid; unless ($pid = fork) {
 	my @l = "X";
-	@l = ($o->{card}->{prog}, "-xf86config", $tmpconfig) if $::testing;
+	@l = ($o->{card}{prog}, "-xf86config", $tmpconfig) if $::testing;
 	chroot $prefix if $prefix;
 	exec @l, ":9" or exit 1;
     }
@@ -266,8 +270,7 @@ sub testFinalConfig($;$) {
 	    $time-- or Gtk->main_quit;
 	});
 
-	exit (interactive_gtk->new->ask_yesorno('', [ _("Is this ok?"), $text ], 1) 
-                ? 0 : 222);
+	exit (interactive_gtk->new->ask_yesorno('', [ _("Is this ok?"), $text ], 1) ? 0 : 222);
     };
     my $rc = close F;
     my $err = $?;
@@ -298,10 +301,10 @@ You can switch if off if you want, you'll hear a beep when it's over")) or retur
 
 	my ($resolutions, $clocklines) = eval { testConfig($o) };
 	if ($@ || !$resolutions) {
-	    delete $card->{depth}->{$_};
+	    delete $card->{depth}{$_};
 	} else {
-	    $card->{clocklines} ||= $clocklines unless $card->{flags}->{noclockprobe};
-	    $card->{depth}->{$_} = [ @$resolutions ];
+	    $card->{clocklines} ||= $clocklines unless $card->{flags}{noclockprobe};
+	    $card->{depth}{$_} = [ @$resolutions ];
 	}
     }
 
@@ -373,7 +376,7 @@ sub chooseResolutions($$) {
     $depth_combo->set_popdown_strings(map { translate($depths{$_}) } ikeys(%{$card->{depth}}));
     $depth_combo->entry->signal_connect(changed => sub {
        $chosen_depth = $txt2depth{untranslate($depth_combo->entry->get_text, keys %txt2depth)};
-       my $w = $card->{depth}->{$chosen_depth}->[0][0];
+       my $w = $card->{depth}{$chosen_depth}[0][0];
        $chosen_w > $w and &$set($w2widget{$chosen_w = $w});
     });
     &$set_depth();
@@ -420,7 +423,7 @@ sub resolutionsConfiguration($$) {
     #						       _("Do you want to try?") ]);
     
     unless ($card->{depth}) {
-	$card->{depth}->{$_} = [ map { [ split "x" ] } @resolutions ] 
+	$card->{depth}{$_} = [ map { [ split "x" ] } @resolutions ] 
 	  foreach @depths;
 
 	if ($nowarning || (!$noauto && $in->ask_okcancel(_("Automatic resolutions"), 
@@ -432,12 +435,11 @@ Do you want to try?")))) {
     }
 
     # sort resolutions in each depth
-    { 
+    foreach (values %{$card->{depth}}) {
 	my $i;
 	@$_ = grep { first($i != $_->[0], $i = $_->[0]) }
-	      sort { $b->[0] <=> $a->[0] } @$_ 
-		foreach values %{$card->{depth}};
-    } 
+	  sort { $b->[0] <=> $a->[0] } @$_;
+    }
 
     # remove unusable resolutions (based on the video memory size)
     keepOnlyLegalModes($card);
@@ -448,11 +450,11 @@ Do you want to try?")))) {
     $auto or ($depth, $res) = chooseResolutions($card, $depth) or return;
 
     # needed in auto mode when all has been provided by the user
-    $card->{depth}->{$depth} or die "you fixed an unusable depth";
+    $card->{depth}{$depth} or die "you fixed an unusable depth";
 
     # remove all biggest resolution (keep the small ones for ctl-alt-+)
     # otherwise there'll be a virtual screen :(
-    $card->{depth}->{$depth} = [ grep { $_->[0] <= $res } @{$card->{depth}->{$depth}} ];
+    $card->{depth}{$depth} = [ grep { $_->[0] <= $res } @{$card->{depth}{$depth}} ];
     $card->{default_depth} = $depth;
     1;
 }
@@ -512,7 +514,7 @@ sub write_XF86Config {
     print F qq(    VertRefresh $O->{vsyncrange}\n);
     print F "\n";
     print F $monitorsection_text4;
-    print F ($o->{card}->{type} eq "TG 96" ? 
+    print F ($o->{card}{type} eq "TG 96" ? 
 	     $modelines_text_Trident_TG_96xx :
 	     $modelines_text);
     print F "EndSection\n\n\n";
@@ -525,7 +527,7 @@ sub write_XF86Config {
     print F qq(    VendorName  "$O->{vendor}"\n);
     print F qq(    BoardName   "$O->{board}"\n);
 
-    print F "#" if $O->{memory} && !$O->{flags}->{needVideoRam};
+    print F "#" if $O->{memory} && !$O->{flags}{needVideoRam};
     print F "    VideoRam    $O->{memory}\n" if $O->{memory};
 
     print F map { "    $_\n" } @{$O->{lines} || []};
@@ -551,7 +553,7 @@ sub write_XF86Config {
 Section "Screen"
     Driver "$server"
     Device      "$device"
-    Monitor     "$o->{monitor}->{type}"
+    Monitor     "$o->{monitor}{type}"
 );
 	print F "    DefaultColorDepth $defdepth\n" if $defdepth;
 
@@ -627,7 +629,7 @@ sub main {
            __("Change Graphic card") => sub { $o->{card} = cardConfiguration('', 'noauto') },
 	   __("Change Resolution") => sub { resolutionsConfiguration($o, 'noauto') },
 	   __("Automaticall resolutions search") => sub { 
-	       delete $o->{card}->{depth};
+	       delete $o->{card}{depth};
 	       resolutionsConfiguration($o, 'nowarning');
 	   },
 	   __("Test again") => sub { $ok = testFinalConfig($o, 1) },

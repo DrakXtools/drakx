@@ -1,22 +1,14 @@
-
-
-style "border"
-{
-  bg[NORMAL] = { 0, 0, 0 }
-}
-
 style "steps"
 {
   bg[NORMAL] = { 0, 0, 0 }
   fg[NORMAL] = { 1.0, 1.0, 1.0 }
+  font = "-adobe-helvetica-medium-r-normal-*-*-80-*-*-p-*-iso8859-1"	
 }
 
-style "title"
+style "logo"
 {
-  bg[NORMAL] = { 0, 0.66, 1.0 }
-#  fg[NORMAL] = { 1.0, 1.0, 1.0 }
+  bg[NORMAL] = { 1.0, 1.0, 1.0 }
 }
 
-
-widget "*Title" style "title"
-widget "*Steps" style "steps"
+widget "*Steps*" style "steps"
+widget "*logo*" style "logo"

@@ -1,19 +1,28 @@
+replace in place catchable die's by cdie's  (as in partition_table::load)
+
+add the different xmodmaps for every languages (maybe gnome-core xmodmaps can help)
+xmodmap needed even for english as the backspace is not what it should
+
 in diskdrake, only swap partitions with a ``mount point'' are used.
 it should be: all swap for newbie, ask for others?
+
+replace the after_install_packages with callbacks about things to do when available
+
+mkdosfs missing => crash :(
+
+look at SuperProbe
 
 after install, startx does not launch an available window manager
 (kdebase was present, and twm too)
 
-problem with initrd and lilo (computer with scsi). mkbootdisk is ok
+problem with mkbootdisk
 
-xmodmap needed even for english as the backspace is not what it should
+add the ability to give arguments to insmod.
 
 remove the hack in pkgs.pm (search for hack)
 
 `Show all' should toggle in package selection
-`(Un)Select all' in package selection
 help:programs is empty in expert in package selection
-left scroll bar is half visible
 
 pb with ghostscript-both & ghostscript-X11...
 
@@ -26,35 +35,26 @@ Xconfigurator:
   possibility to show card autodetected
   use the VideoRam for skeeping some tests (not all the 32 24 16 15 8)
 
-add a waiting message while formatting
-
-does not reboot at the end of install
-
-insmod of /modules/loop.o fails (eg: in mkbootdisk)
-(no /modules nor insmod)
+in package choosing, the group (on the left) is no more `selected' (gtk focus) when clicking on a package (on the right)
 
 install2 sigsegv when leaving :(
 (i hacked init to reboot on error)
 
-xmodmaps for every languages (maybe gnome-core xmodmaps can help)
-
 verify the free space is big enough.
 
+ask realname first, then propose a username using the realname
 be able to add more than one normal user
-
-left window in the install (steps) should have a smaller font.
 
 loadFont sucks
 
 trash on the screen when X first start
 
-do not allow window resizing
-
 network configuration
 
 get the error when reading .rpm files fail
 
-setupSCSIInterfaces
+ask for notepad (aka portable) or not
+ask for hdparm or not
+
 mouseConfig in setup.c
 add a log != tty3 (like /tmp/...)
-ps in commands marche pas

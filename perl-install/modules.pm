@@ -4,11 +4,11 @@ use diagnostics;
 use strict;
 use vars qw(%loaded);
 
-use common qw(:file);
+use common qw(:common :file);
+use pci_probing::main;
 use log;
 use detect_devices;
 use run_program;
-use pci;
 
 %loaded = ();
 
@@ -231,11 +231,11 @@ sub load_raw($$$@) {
     my ($name, $type, $minor, @options) = @_;
 
 #    @options or @options = guiGetModuleOptions($name);
-    my $m = "/modules/$name.o";
-    -r $m or $m = "/lib$m";
-    -r $m or die "can't find module $name";
-
-    run_program::run("insmod", $m, @options) or die("insmod $name failed");
+    my $f = "/tmp/$name.o";
+    run_program::run("cd /tmp ; bzip2 -cd /lib/modules.cpio.bz2 | cpio -i $name.o");
+    -r $f or die "can't find module $name";
+    run_program::run("insmod", $f, @options) or die("insmod $name failed");
+    unlink $f;
 
     # this is a hack to make plip go
     if ($name eq "parport_pc") {
@@ -259,7 +259,6 @@ sub load_deps($) {
 	my ($f, $deps) = split ':';
 	push @{$deps{$f}}, split ' ', $deps;
     }
-    1;
 }
 
 sub read_conf {
@@ -271,43 +270,36 @@ sub read_conf {
     foreach (<F>) {
 	/^alias\s+eth0\s+(\S+)/             and $loaded{$1} = { type => 'net', minor => 'ethernet' };
 	/^alias\s+scsi_hostadapter\s+(\S+)/ and $loaded{$1} = { type => 'scsi' };
-	/^option\s+(\S+)\s+(.*)/            and $loaded{$1} = { type => 'other', options => [ split ' ', $2 ] };
+	/^options\s+(\S+)\s+(.*)/           and add2hash($loaded{$1} || {}, { type => 'other', options => [ split ' ', $2 ] });
     }
-    1;
 }
 
 sub write_conf {
     my ($file, $append) = @_;
     my ($tr, $eth, $scsi) = (0, 0, 0);
 
-    $append or rename($file, "$file.orig"), log::l("backing up old conf.modules");
+    $append or rename($file, "$file.orig"), log::l("backing up old $file");
 
     local *F;
     open F, ($append ? ">" : "") . "> $file" or die("cannot write module config file $file: $!\n");
 
     while (my ($k, $v) = each %loaded) {
-	unless ($append && $v->{persistFlags}->{alias}) {
-	    if ($v->{type} eq 'net') {
-		$v->{minor} eq 'tr' and print F "alias tr", $tr++, " $k\n";
-		$v->{minor} eq 'ethernet' and print F "alias eth", $eth++, " $k\n";
-	    } elsif ($v->{type} eq 'scsi') {
-		print F "alias scsi_hostadapter", $scsi++, " $k\n";
-	    }
+	if ($v->{type} eq 'net') {
+	    $v->{minor} eq 'tr' and print F "alias tr", $tr++, " $k\n";
+	    $v->{minor} eq 'ethernet' and print F "alias eth", $eth++, " $k\n";
+	} elsif ($v->{type} eq 'scsi') {
+	    print F "alias scsi_hostadapter", $scsi++, " $k\n";
 	}
-	unless ($append && $v->{persistFlags}->{options} || !$v->{options}) {
-	    print F "options $k ", join(' ', @{$v->{options}}), "\n";
-	}
+	print F "options $k ", join(' ', @{$v->{options}}), "\n" unless is_empty_array_ref($v->{options});
     }
-
     print F "alias parport_lowlevel parport_pc\n";
     print F "pre-install pcmcia_core /etc/rc.d/init.d/pcmcia start\n";
-    1;
 }
 
 
 
-sub load_thiskind($) {
-    my ($type) = @_;
+sub load_thiskind($;&) {
+    my ($type, $f) = @_;
     my @devs;
     my $found;
 
@@ -315,14 +307,14 @@ sub load_thiskind($) {
 	 @devs = pci_probing::main::probe($type);
 	 log::l("pci probe found " . scalar @devs . " $type devices");
     }
-
     my %devs;
-    foreach (map { $_->[1] } @devs) {
-	 $devs{$_}++ and log::l("multiple $_ devices found"), next;
-	 $drivers{$_} or log::l("module $_ not in install table"), next;
-	 log::l("found driver for $_");
-	 load($_);
-	 $found = $_;
+    foreach (@devs) {
+	my ($text, $mod) = @$_;
+	$devs{$mod}++ and log::l("multiple $mod devices found"), next;
+	$drivers{$mod} or log::l("module $mod not in install table"), next;
+	log::l("found driver for $mod");
+	&$f($text, $mod) if $f; 
+	load($mod);
     }
     @devs;
 }
@@ -331,7 +323,7 @@ sub load_thiskind($) {
 sub removeDeviceDriver {
 #    my ($type) = @_;
 #
-#    my @m = grep { $loaded{$_}->{type} eq $type } keys %loaded;
+#    my @m = grep { $loaded{$_}{type} eq $type } keys %loaded;
 #    @m or return 0;
 #    @m > 1 and log::l("removeDeviceDriver assume only one of each driver type is loaded, which is not the case (" . join(' ', @m) . ")");
 #    removeModule($m[0]);

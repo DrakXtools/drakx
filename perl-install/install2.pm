@@ -7,7 +7,7 @@ use vars qw($o);
 use common qw(:common :file :system);
 use install_any qw(:all);
 use log;
-use net;
+use network;
 use keyboard;
 use fs;
 use fsedit;
@@ -20,64 +20,40 @@ use smp;
 use lang;
 use run_program;
 
-my @installStepsFields = qw(text help skipOnCancel skipOnLocal prev next);
+my @installStepsFields = qw(text help redoable onError needs);
 my @installSteps = (
-  selectLanguage => [ __("Choose your language"), "help", 0, 0 ],
+  selectLanguage => [ __("Choose your language"), "help", 1, 1 ],
   selectPath => [ __("Choose install or upgrade"), __("help"), 0, 0 ],
-  selectInstallClass => [ __("Select installation class"), __("help"), 0, 0 ],
-  setupSCSI => [ __("Setup SCSI"), __("help"), 0, 1 ],	
-  partitionDisks => [ __("Setup filesystems"), __("help"), 0, 1 ],
-  formatPartitions => [ __("Format partitions"), __("help"), 0, 1 ],
-  findInstallFiles => [ __("Find installation files"), __("help"), 1, 0 ],
-  choosePackages => [ __("Choose packages to install"), __("help"), 0, 0 ],
-  doInstallStep => [ __("Install system"), __("help"), 0, 0 ],
+  selectInstallClass => [ __("Select installation class"), __("help"), 1, 1 ],
+  setupSCSI => [ __("Setup SCSI"), __("help"), 1, 0 ],	
+  partitionDisks => [ __("Setup filesystems"), __("help"), 1, 0 ],
+  formatPartitions => [ __("Format partitions"), __("help"), 1, -1, "partitionDisks" ],
+  choosePackages => [ __("Choose packages to install"), __("help"), 1, 1 ],
+  doInstallStep => [ __("Install system"), __("help"), 1, -1, ["formatPartitions", "selectPath"] ],
 #  configureMouse => [ __("Configure mouse"), __("help"), 0, 0 ],
-  finishNetworking => [ __("Configure networking"), __("help"), 0, 0 ],
+  finishNetworking => [ __("Configure networking"), __("help"), 1, 1, "formatPartitions" ],
 #  configureTimezone => [ __("Configure timezone"), __("help"), 0, 0 ],
 #  configureServices => [ __("Configure services"), __("help"), 0, 0 ],
 #  configurePrinter => [ __("Configure printer"), __("help"), 0, 0 ],
-  setRootPassword => [ __("Set root password"), __("help"), 0, 0 ],
-  addUser => [ __("Add a user"), __("help"), 0, 0 ],
-  createBootdisk => [ __("Create bootdisk"), __("help"), 0, 1 ],
-  setupBootloader => [ __("Install bootloader"), __("help"), 0, 1 ],
-  configureX => [ __("Configure X"), __("help"), 0, 0 ],
-  exitInstall => [ __("Exit install"), __("help"), 0, 0, undef, 'done' ],
-);
-
-# this table is translated at run time
-my @upgradeSteps = (
-  selectLanguage => [ "Choose your language", "help", 0, 0 ],
-  selectPath => [ __("Choose install or upgrade"), __("help"), 0, 0 ],
-  selectInstallClass => [ __("Select installation class"), __("help"), 0, 0 ],
-  setupSCSI => [ __("Setup SCSI"), __("help"), 0, 0 ],
-  upgrFindInstall => [ __("Find current installation"), __("help"), 0, 0 ],
-  findInstallFiles => [ __("Find installation files"), __("help"), 1, 0 ],
-  upgrChoosePackages => [ __("Choose packages to upgrade"), __("help"), 0, 0 ],
-  doInstallStep => [ __("Upgrade system"), __("help"), 0, 0 ],
-  createBootdisk => [ __("Create bootdisk"), __("help"), 0, 0 , 'none' ],
-  setupBootloader => [ __("Install bootloader"), __("help"), 0, 0 ],
-  exitInstall => [ __("Exit install"), __("help"), 0, 0 , undef, 'done' ],
+  setRootPassword => [ __("Set root password"), __("help"), 1, 0, "formatPartitions" ],
+  addUser => [ __("Add a user"), __("help"), 1, 0, "formatPartitions" ],
+  createBootdisk => [ __("Create bootdisk"), __("help"), 1, 0, "doInstallStep" ],
+  setupBootloader => [ __("Install bootloader"), __("help"), 1, 1, "doInstallStep" ],
+  configureX => [ __("Configure X"), __("help"), 1, 0, "formatPartitions" ],
+  exitInstall => [ __("Exit install"), __("help"), 0, 0, "alldone" ],
 );
 my (%installSteps, %upgradeSteps, @orderedInstallSteps, @orderedUpgradeSteps);
 for (my $i = 0; $i < @installSteps; $i += 2) {
     my %h; @h{@installStepsFields} = @{ $installSteps[$i + 1] };
-    $h{prev} ||= $installSteps[$i - 2];
-    $h{next} ||= $installSteps[$i + 2];
+    $h{next} = $installSteps[$i + 2];
+    $h{onError} = $installSteps[$i + 2 * $h{onError}];
     $installSteps{ $installSteps[$i] } = \%h;
     push @orderedInstallSteps, $installSteps[$i];
 }
 $installSteps{first} = $installSteps[0];
-for (my $i = 0; $i < @upgradeSteps; $i += 2) {
-    my %h; @h{@installStepsFields} = @{ $upgradeSteps[$i + 1] };
-    $h{prev} ||= $upgradeSteps[$i - 2];
-    $h{next} ||= $upgradeSteps[$i + 2];
-    $upgradeSteps{ $upgradeSteps[$i] } = \%h;
-    push @orderedUpgradeSteps, $installSteps[$i];
-}
-$upgradeSteps{first} = $upgradeSteps[0];
 
 
-my @install_classes = (__("newbie"), __("developer"), __("server"), __("expert"));
+my @install_classes = (__("beginner"), __("developer"), __("server"), __("expert"));
 
 # partition layout for a server
 my @serverPartitioning = (
@@ -91,16 +67,20 @@ my @serverPartitioning = (
 
 my $default = {
 #    display => "192.168.1.9:0",
-    user => { name => 'foo', password => 'foo', shell => '/bin/bash', realname => 'really, it is foo' },
-    rootPassword => 'toto',
-    lang => 'fr',
-    isUpgrade => 0,
-    installClass => 'newbie',
+
+    # for the list of fields available for user and superuser, see @etc_pass_fields in install_steps.pm
+#    user => { name => 'foo', password => 'bar', home => '/home/foo', shell => '/bin/bash', realname => 'really, it is foo' },
+#    superuser => { password => 'a', shell => '/bin/bash', realname => 'God' },
+
+#    lang => 'fr',
+#    isUpgrade => 0,
+#    installClass => 'beginner',
     bootloader => { onmbr => 1, linear => 0 },
+    autoSCSI => 0,
     mkbootdisk => 0,
     base => [ qw(basesystem initscripts console-tools mkbootdisk linuxconf anacron linux_logo rhs-hwdiag utempter ldconfig chkconfig ntsysv mktemp setup setuptool filesystem MAKEDEV SysVinit ash at authconfig bash bdflush binutils console-tools crontabs dev e2fsprogs ed etcskel file fileutils findutils getty_ps gpm grep groff gzip hdparm info initscripts isapnptools kbdconfig kernel less ldconfig lilo logrotate losetup man mkinitrd mingetty modutils mount net-tools passwd procmail procps psmisc mandrake-release rootfiles rpm sash sed setconsole setserial shadow-utils sh-utils slocate stat sysklogd tar termcap textutils time timeconfig tmpwatch util-linux vim-minimal vixie-cron which) ],
     packages => [ qw() ],
-    partitionning => { clearall => $::testing, eraseBadPartitions => 1, autoformat => 1 },
+    partitionning => { clearall => $::testing, eraseBadPartitions => 1, auto_allocate => 0, autoformat => 1 },
     partitions => [
 		   { mntpoint => "/boot", size =>  16 << 11, type => 0x83 }, 
 		   { mntpoint => "/",     size => 300 << 11, type => 0x83 }, 
@@ -116,6 +96,13 @@ sub selectLanguage {
     $o->{lang} = $o->chooseLanguage;
     lang::set($o->{lang});
     $o->{keyboard} = keyboard::setup();
+
+    addToBeDone {
+	unless ($o->{isUpgrade}) {
+	    keyboard::write($o->{prefix}, $o->{keyboard});
+	    lang::write($o->{prefix});
+	} 
+    } 'doInstallStep';
 }
 
 sub selectPath {
@@ -127,16 +114,23 @@ sub selectPath {
 sub selectInstallClass {
     $o->{installClass} = $o->selectInstallClass(@install_classes);
     $::expert = $o->{installClass} eq "expert";
+    $o->{autoSCSI} = $o->default("autoSCSI") || $o->{installClass} eq "beginner";
 }
 
 sub setupSCSI { $o->setupSCSI }
 
 sub partitionDisks {
     $o->{drives} = [ detect_devices::hds() ];
-    $o->{hds} = fsedit::hds($o->{drives}, $o->{default}->{partitionning});
-    @{$o->{hds}} > 0 or die _("An error has occurred - no valid devices were found on which to create new filesystems. Please check your hardware for the cause of this problem");
+    $o->{hds} = fsedit::hds($o->{drives}, $o->{default}{partitionning});
+    unless (@{$o->{hds}} > 0) {
+	$o->setupSCSI if $o->{autoSCSI}; # ask for an unautodetected scsi card
+    }
+    unless (@{$o->{hds}} > 0) { # no way
+	die _("An error has occurred - no valid devices were found on which to create new filesystems. Please check your hardware for the cause of this problem");
+    }
 
     unless ($o->{isUpgrade}) {
+	eval { fsedit::auto_allocate($o->{hds}, $o->{partitions}) } if $o->{default}{partitionning}{auto_allocate};
 	$o->doPartitionDisks($o->{hds});
 
 	unless ($::testing) {
@@ -162,29 +156,26 @@ sub formatPartitions {
 
     $::testing and return;
 
-    foreach (@{$o->{fstab}}) {
-	fs::format_part($_) if $_->{toFormat};
-    }
+    $o->formatPartitions(@{$o->{fstab}});
+
     fs::mount_all([ grep { isExt2($_) || isSwap($_) } @{$o->{fstab}} ], $o->{prefix});
 }
 
-sub findInstallFiles {
+sub choosePackages {
     $o->{packages} = pkgs::psUsingDirectory();
     pkgs::getDeps($o->{packages});
 
     $o->{compss} = pkgs::readCompss($o->{packages});
-}
- 
-sub choosePackages {
-    my @p = @{$o->{default}->{base}};
+
+    my @p = @{$o->{default}{base}};
     push @p, "kernel-smp" if smp::detect();
 
-    foreach (@p) { $o->{packages}->{$_}->{base} = 1 }
+    foreach (@p) { $o->{packages}{$_}{base} = 1 }
 
     pkgs::setCompssSelected($o->{compss}, $o->{packages}, $o->{installClass});
     $o->choosePackages($o->{packages}, $o->{compss}); 
 
-    foreach (@p) { $o->{packages}->{$_}->{selected} = 1 }
+    foreach (@p) { $o->{packages}{$_}{selected} = 1 }
 }
 
 sub doInstallStep {
@@ -213,7 +204,7 @@ sub setupBootloader {
     $o->{isUpgrade} or modules::read_conf("$o->{prefix}/etc/conf.modules");
     $o->setupBootloader;
 }
-sub configureX { $o->setupXfree if $o->{packages}->{XFree86}->{installed} }
+sub configureX { $o->setupXfree if $o->{packages}{XFree86}{installed} }
 sub exitInstall { $o->exitInstall }
 
 
@@ -244,22 +235,32 @@ sub main {
 
     $o = install_steps_graphical->new($o);
 
-    $o->{netc} = net::readNetConfig("/tmp");
+    $o->{netc} = network::read_conf("/tmp/network");
     if (my ($file) = glob_('/tmp/ifcfg-*')) {
 	log::l("found network config file $file");
-	$o->{intf} = net::readNetInterfaceConfig($file);
+	$o->{intf} = network::read_interface_conf($file);
     }
 
-    modules::load_deps("/lib/modules/modules.dep");
+    modules::load_deps("/modules/modules.dep");
     modules::read_conf("/tmp/conf.modules");
 
-    for (my $step = $o->{steps}->{first}; $step ne 'done'; $step = getNextStep($step)) {
-	$o->enteringStep($step);
+    for ($o->{step} = $o->{steps}{first};; $o->{step} = getNextStep()) {
+	$o->enteringStep($o->{step});
+	$o->{steps}{$o->{step}}{entered} = 1;
 	eval { 
-	    &{$install2::{$step}}();
+	    &{$install2::{$o->{step}}}();
 	};
-	$o->errorInStep($@), redo if $@;
-	$o->leavingStep($step);
+	$@ =~ /^setstep (.*)/ and $o->{step} = $1, redo;
+	$@ =~ /^theme_changed$/ and redo;
+	if ($@) {
+	    $o->errorInStep($@);
+	    $o->{step} = $o->{steps}{$o->{step}}{onError};
+	    redo;
+	}
+	$o->leavingStep($o->{step});
+	$o->{steps}{$o->{step}}{done} = 1;
+
+	last if $o->{step} eq 'exitInstall';
     }
     killCardServices();
 

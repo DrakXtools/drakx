@@ -6,7 +6,7 @@ use vars qw(@ISA %EXPORT_TAGS @EXPORT_OK);
 
 @ISA = qw(Exporter);
 %EXPORT_TAGS = (
-    all => [ qw(versionString getNextStep doSuspend spawnSync spawnShell) ],
+    all => [ qw(versionString getNextStep doSuspend spawnSync spawnShell addToBeDone) ],
 );
 @EXPORT_OK = map { @$_ } values %EXPORT_TAGS;
 
@@ -26,7 +26,7 @@ sub imageGetFile {
 }
 
 sub versionString {
-    my $kernel = $::o->{packages}->{kernel};
+    my $kernel = $::o->{packages}{kernel};
     $kernel && $kernel->{header} or die "I couldn't find the kernel package!";
     
     c::headerGetEntry($kernel->{header}, 'version') . "-" .
@@ -35,11 +35,9 @@ sub versionString {
 
 
 sub getNextStep {
-    my ($lastStep) = @_;
-
-    $::o->{direction} = 1;
-
-    return $::o->{lastChoice} = $::o->{steps}->{$lastStep}->{next};
+    my ($s) = $::o->{steps}{first};
+    $s = $::o->{steps}{$s}{next} while $::o->{steps}{$s}{done};
+    $s;
 }
 
 sub doSuspend {
@@ -92,9 +90,15 @@ sub mouse_detect() {
 
 sub shells($) {
     my ($o) = @_;
-    my @l = grep { -x "$o->{prefix}$_" } @{$o->{default}->{shells}};
+    my @l = grep { 1 || -x "$o->{prefix}$_" } @{$o->{default}{shells}};
     @l or die "no shell available";
     @l;
+}
+
+sub addToBeDone(&$) {
+    my ($f, $step) = @_;
+
+    push @{$::o->{steps}{$step}{toBeDone}}, $f;
 }
 
 sub upgrFindInstall {

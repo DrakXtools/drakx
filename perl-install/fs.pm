@@ -12,6 +12,7 @@ use nfs;
 use swap;
 use detect_devices;
 use commands;
+use modules;
 
 1;
 
@@ -23,7 +24,7 @@ sub read_fstab($) {
     open F, $file or return;
     
     map {
-	my ($dev, $mntpoint, @l) = split ' ';
+	my ($dev, $mntpoint, @l) = split;
 	$dev =~ s,/(tmp|dev)/,,;
 	while (@l > 4) { $mntpoint .= " " . shift @l; }
 	{ device => $dev, mntpoint => $mntpoint, type => $l[0], options => $l[1] }
@@ -111,7 +112,13 @@ sub mount($$$;$) {
 
 	my $flag = 0;#c::MS_MGC_VAL();
 	$flag |= c::MS_RDONLY() if $rdonly;
-	my $mount_opt = $fs eq 'vfat' ? "check=relaxed" : "";
+	my $mount_opt = "";
+
+	if ($fs eq 'vfat') {
+	    $mount_opt = "check=relaxed";
+	    eval { modules::load('vfat') }; # try using vfat
+	    eval { modules::load('msdos') } if $@; # otherwise msdos...
+	}
   
 	log::l("calling mount($dev, $where, $fs, $flag, $mount_opt)");
 	syscall_('mount', $dev, $where, $fs, $flag, $mount_opt) or die _("mount failed: ") . "$!";

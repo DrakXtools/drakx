@@ -92,16 +92,6 @@ sub set($$$) {
     $val ? &select($packages, $p) : unselect($packages, $p);
 }
 
-sub addInfosFromHeader($$;$) {
-    my ($packages, $header, $file) = @_;
-
-    my $name = c::headerGetEntry($header, 'name');
-    $packages->{$name} = {
-        name => $name, file => $file, selected => 0, deps => [],
-	header => $header, size => c::headerGetEntry($header, 'size'),
-    };
-}
-
 sub psUsingDirectory(;$) {
     my ($dirname) = @_;
     my %packages;
@@ -119,6 +109,10 @@ sub psUsingDirectory(;$) {
     \%packages;
 }
 
+sub chop_version($) { 
+    first($_[0] =~ /(.*)-[^-]+-[^-.]+/) || $_[0];
+}
+
 sub getDeps($) {
     my ($packages) = @_;
 
@@ -126,10 +120,11 @@ sub getDeps($) {
     open F, install_any::imageGetFile("depslist") or die "can't find dependencies list";
     foreach (<F>) {
 	my ($name, $size, @deps) = split;
+	($name, @deps) = map { chop_version($_) } ($name, @deps);
 	$packages->{$name} or next;
-	$packages->{$name}->{size} = $size;
-	$packages->{$name}->{deps} = \@deps;
-	map { push @{$packages->{$_}->{provides}}, $name if $packages->{$_} } @deps;
+	$packages->{$name}{size} = $size;
+	$packages->{$name}{deps} = \@deps;
+	map { push @{$packages->{$_}{provides}}, $name if $packages->{$_} } @deps;
     }
 }
 
@@ -186,37 +181,32 @@ sub setCompssSelected($$$) {
     }
 }
 
-sub psFromHeaderListDesc {
+sub addHdlistInfos {
     my ($fd, $noSeek) = @_;
     my %packages;
     my $end;
+    my $file;
+    local *F;
+    sysopen F, $file, 0 or die "error opening header file $file: $!";
 
-    unless ($noSeek) {
-	my $current = sysseek $fd, 0, 1 or die "seek failed";
-	$end = sysseek $fd, 0, 2 or die "seek failed";
-	sysseek $fd, $current, 0 or die "seek failed";
-    }
+    $end = sysseek $fd, 0, 2 or die "seek failed";
+    sysseek $fd, 0, 0 or die "seek failed";
 
-    while (1) {
+    while (sysseek($fd, 0, 1) <= $end) {
 	my $header = c::headerRead(fileno($fd), 1);
 	unless ($header) {
 	    $noSeek and last;
 	    die "error reading header at offset ", sysseek($fd, 0, 1);
 	}
-	addInfosFromHeader(\%packages, $header);
+
+	c::headerGetEntry($header, 'name');
+
 	$noSeek or $end <= sysseek($fd, 0, 1) and last; 
     }
 
     log::l("psFromHeaderListDesc read " . scalar keys(%packages) . " headers");
     
     \%packages;
-}
-
-sub psFromHeaderListFile {
-    my ($file) = @_;
-    local *F;
-    sysopen F, $file, 0 or die "error opening header file $file: $!";
-    psFromHeaderListDesc(\*F, 0);
 }
 
 sub init_db {

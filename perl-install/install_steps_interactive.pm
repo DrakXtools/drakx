@@ -31,21 +31,22 @@ use partition_table qw(:types);
 use install_steps;
 use modules;
 use lang;
+use fs;
 use log;
 
 1;
-
 
 sub errorInStep($$) {
     my ($o, $err) = @_;
     $o->ask_warn(_("Error"), [ _("An error occured"), $err ]);
 }
 
+
 sub chooseLanguage($) {
     my ($o) = @_;
     lang::text2lang($o->ask_from_list("Language",
 				      __("Which language do you want?"), # the translation may be used for the help
-				      [ lang::list() ]));
+				      [ lang::list() ], lang::lang2text($o->default("lang"))));
 }
 
 sub selectInstallOrUpgrade($) {
@@ -53,25 +54,34 @@ sub selectInstallOrUpgrade($) {
     $o->ask_from_list_(_("Install/Upgrade"), 
 		       _("Is it an install or an updgrade?"),
 		       [ __("Install"), __("Upgrade") ], 
-		       "Install") eq "Upgrade";
+		       $o->default("isUpgrade") ? "Upgrade" : "Install") eq "Upgrade";
 }
 
 sub selectInstallClass($@) {
     my ($o, @classes) = @_;
     $o->ask_from_list_(_("Install Class"),
 		       _("What type of user will you have?"),
-		       [ @classes ]);
+		       [ @classes ], $o->default("installClass"));
 }
 
 sub setupSCSI {
     my ($o) = @_;
-    my @l = modules::load_thiskind('scsi');
+    my $w;
+    my @l = modules::load_thiskind('scsi', sub { 
+        $w = $o->wait_message('', 
+			      [ _("Installing driver for scsi card %s", $_->[0]),
+				$o->{installClass} ne "beginner" ? _("(module %s)", $_->[1]) : () 
+			      ]);
+    });
+    undef $w; # kill wait_message
+
+    $o->default("autoSCSI") and return;
     while (1) {
 	@l ?
 	  $o->ask_yesorno('', 
 			  [ _("Found ") . join(", ", map { $_->[0] } @l) . _(" scsi interfaces"),
-			    _("Do you have another one?") ]) :
-	  $o->ask_yesorno('', _("Do you have an scsi interface?")) or return;
+			    _("Do you have another one?") ], "No") :
+	  $o->ask_yesorno('', _("Do you have an scsi interface?"), "No") or return;
 
 	my $l = $o->ask_from_list('', _("What scsi card have you?"), [ modules::text_of_type('scsi') ]) or return;
 	my $m = modules::text2driver($l);
@@ -88,39 +98,54 @@ sub rebootNeeded($) {
 
 sub choosePartitionsToFormat($$) {
     my ($o, $fstab) = @_;
-    my @l = grep { $_->{mntpoint} && (isExt2($_) || isSwap($_)) } @$fstab;
+
+    my @l = grep { $_->{mntpoint} && isExt2($_) || isSwap($_) } @$fstab;
     my @r = $o->ask_many_from_list('', _("Choose the partitions you want to format"), 
-				   [ map { $_->{mntpoint} } @l ], 
+				   [ map { $_->{mntpoint} || type2name($_->{type}) . " ($_->{device})" } @l ],
 				   [ map { $_->{notFormatted} } @l ]);
-    for (my $i = 0; $i < @l; $i++) {
-	$l[$i]->{toFormat} = $r[$i];
+    defined @r or die "cancel";
+    my $i = 0;
+    $_->{toFormat} = $r[$i++] foreach @l;
+}
+
+sub formatPartitions {
+    my $o = shift;
+    my $w = $o->wait_message('', '');
+    foreach (@_) {
+	if ($_->{toFormat}) {
+	    $w->set(_("Formatting partition %s", $_->{device}));
+	    fs::format_part($_);
+	}
     }
 }
 
 sub createBootdisk($) {
     my ($o) = @_;
     
-    if ($o->{default}->{mkbootdisk} = $o->ask_yesorno('',
+    if ($o->{mkbootdisk} = $o->ask_yesorno('',
  _("A custom bootdisk provides a way of booting into your Linux system without
 depending on the normal bootloader. This is useful if you don't want to install
 lilo on your system, or another operating system removes lilo, or lilo doesn't
 work with your hardware configuration. A custom bootdisk can also be used with
 the Mandrake rescue image, making it much easier to recover from severe system
-failures. Would you like to create a bootdisk for your system?"))) {
+failures. Would you like to create a bootdisk for your system?"), !$o->default("mkbootdisk"))) {
 
-	$o->ask_warn('',
-_("Insert a floppy in drive fd0 (aka A:)"));
-
+	$o->ask_warn('', _("Insert a floppy in drive fd0 (aka A:)"));
+	my $w = $o->wait_message('', _("Creating bootdisk"));
 	$o->SUPER::createBootdisk;
     }
 }
 
 sub setupBootloader($) {
     my ($o) = @_;
+    my @l = (__("First sector of drive"), __("First sector of boot partition"));
 
-    my $where = $o->ask_from_list(_("Lilo Installation"), _("Where do you want to install the bootloader?"), [ _("First sector of drive"), _("First sector of boot partition") ]);
-    $o->{default}->{bootloader}->{onmbr} = $where eq _("First sector of drive");
-    
+    $o->{bootloader}{onmbr} = 
+      $o->ask_from_list_(_("Lilo Installation"), 
+			 _("Where do you want to install the bootloader?"), 
+			 \@l, 
+			 $l[!$o->default("bootloader")->{onmbr}]
+			) eq $l[0];
     $o->SUPER::setupBootloader;
 }
 
@@ -134,3 +159,5 @@ consult the Errata available from http://www.linux-mandrake.com/.
 Information on configuring your system is available in the post
 install chapter of the Official Linux Mandrake User's Guide."));
 }
+
+=cut

@@ -174,7 +174,7 @@ sub removeFromList($$$) {
 sub allocatePartitions($$) {
     my ($hds, $to_add) = @_;
     my %free_sectors = map { $_->{device} => [1, $_->{totalsectors} ] } @$hds; # first sector is always occupied by the MBR
-    my $remove = sub { removeFromList($_[0]->{start}, $_[0]->{start} + $_[0]->{size}, $free_sectors{$_[0]->{rootDevice}}) };
+    my $remove = sub { removeFromList($_[0]{start}, $_[0]->{start} + $_[0]->{size}, $free_sectors{$_[0]->{rootDevice}}) };
     my $success = 0;
 
     foreach (get_fstab(@$hds)) { &$remove($_); }
@@ -217,6 +217,10 @@ sub undo_prepare($) {
 	push @{$_->{undo}}, Data::Dumper->Dump([\@h], ['$h']);
     }
 }
+sub undo_forget($) {
+    my ($hds) = @_;
+    pop @{$_->{undo}} foreach @$hds;
+}
 
 sub undo($) {
     my ($hds) = @_;
@@ -233,12 +237,12 @@ sub move {
 
     my $part2 = { %$part };
     $part2->{start} = $sector2;
-    $part2->{size} += partition_table::cylinder_size($hd2);
+    $part2->{size} += partition_table::cylinder_size($hd2) - 1;
     partition_table::remove($hd, $part);
     {
 	local ($part2->{notFormatted}, $part2->{isFormatted}); # do not allow partition::add to change this
 	partition_table::add($hd2, $part2);
-    }
+    }    
 
     return if $part2->{notFormatted} && !$part2->{isFormatted} || $::testing;
 

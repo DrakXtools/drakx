@@ -11,7 +11,7 @@ use vars qw(@ISA %EXPORT_TAGS @EXPORT_OK @important_types @fields2save);
 @EXPORT_OK = map { @$_ } values %EXPORT_TAGS;
 
 
-use common qw(:common :system);
+use common qw(:common :system :functional);
 use partition_table_raw;
 use Data::Dumper;
 
@@ -88,22 +88,22 @@ sub type2fs($) { $type2fs{$_[0]} }
 sub name2type($) { $types_rev{$_[0]} }
 sub fs2type($) { $fs2type{$_[0]} }
 
-sub isExtended($) { $_[0]->{type} == 5 }
-sub isSwap($) { $type2fs{$_[0]->{type}} eq 'swap' }
-sub isExt2($) { $type2fs{$_[0]->{type}} eq 'ext2' }
-sub isDos($) { $ {{ 1=>1, 4=>1, 6=>1 }}{$_[0]->{type}} }
-sub isWin($) { $ {{ 0xb=>1, 0xc=>1, 0xe=>1 }}{$_[0]->{type}} }
-sub isNfs($) { $_[0]->{type} eq 'nfs' } # small hack
+sub isExtended($) { $_[0]{type} == 5 }
+sub isSwap($) { $type2fs{$_[0]{type}} eq 'swap' }
+sub isExt2($) { $type2fs{$_[0]{type}} eq 'ext2' }
+sub isDos($) { $ {{ 1=>1, 4=>1, 6=>1 }}{$_[0]{type}} }
+sub isWin($) { $ {{ 0xb=>1, 0xc=>1, 0xe=>1 }}{$_[0]{type}} }
+sub isNfs($) { $_[0]{type} eq 'nfs' } # small hack
 
 sub isPrimary($$) {
     my ($part, $hd) = @_;
-    foreach (@{$hd->{primary}->{raw}}) { $part eq $_ and return 1; }
+    foreach (@{$hd->{primary}{raw}}) { $part eq $_ and return 1; }
     0;
 }
 
 sub cylinder_size($) { 
     my ($hd) = @_;
-    $hd->{geom}->{sectors} * $hd->{geom}->{heads};
+    $hd->{geom}{sectors} * $hd->{geom}{heads};
 }
 
 sub adjustStart($$) {
@@ -111,8 +111,8 @@ sub adjustStart($$) {
     my $end = $part->{start} + $part->{size};
 
     $part->{start} = round_up($part->{start}, 
-			       $part->{start} % cylinder_size($hd) < 2 * $hd->{geom}->{sectors} ?
-			       $hd->{geom}->{sectors} : cylinder_size($hd));
+			       $part->{start} % cylinder_size($hd) < 2 * $hd->{geom}{sectors} ?
+			       $hd->{geom}{sectors} : cylinder_size($hd));
     $part->{size} = $end - $part->{start};
 }
 sub adjustEnd($$) {
@@ -138,26 +138,32 @@ sub verifyInside($$) {
     $b->{start} <= $a->{start} && $a->{start} + $a->{size} <= $b->{start} + $b->{size};
 }
 
-sub verifyPrimary($) {
-    my ($pt) = @_;
-    my @l = (@{$pt->{normal}}, $pt->{extended});
-    foreach my $i (@l) { foreach (@l) {
+sub verifyParts_ {
+    foreach my $i (@_) { foreach (@_) {
 	$i != $_ and verifyNotOverlap($i, $_) || die "partitions $i->{start} $i->{size} and $_->{start} $_->{size} are overlapping!";
     }}
+}
+sub verifyParts($) {
+    my ($hd) = @_;
+    verifyParts_(get_normal_parts($hd));
+}
+sub verifyPrimary($) {
+    my ($pt) = @_;
+    verifyParts_(@{$pt->{normal}}, $pt->{extended});
 }
 
 sub assign_device_numbers($) {
     my ($hd) = @_;
 
     my $i = 1; 
-    $_->{device} = $hd->{prefix} . $i++ foreach @{$hd->{primary}->{raw}}, 
+    $_->{device} = $hd->{prefix} . $i++ foreach @{$hd->{primary}{raw}}, 
                                                 map { $_->{normal} } @{$hd->{extended} || []};
 
     # try to figure what the windobe drive letter could be!
     #
     # first verify there's at least one primary dos partition, otherwise it
     # means it is a secondary disk and all will be false :(
-    my ($c, @others) = grep { isDos($_) || isWin($_) } @{$hd->{primary}->{normal}};
+    my ($c, @others) = grep { isDos($_) || isWin($_) } @{$hd->{primary}{normal}};
     $c or return;
 
     $i = ord 'D';
@@ -170,7 +176,7 @@ sub assign_device_numbers($) {
 
 sub remove_empty_extended($) {
     my ($hd) = @_;
-    my $last = $hd->{primary}->{extended} or return;
+    my $last = $hd->{primary}{extended} or return;
     @{$hd->{extended}} = grep {
 	if ($_->{normal}) {
 	    $last = $_;
@@ -189,27 +195,27 @@ sub adjust_main_extended($) {
 	my ($l, @l) = @{$hd->{extended}};
 
 	# the first is a special case, must recompute its real size
-	my $start = round_down($l->{normal}->{start} - 1, cylinder_size($hd));
-	my $end = $l->{normal}->{start} + $l->{normal}->{size};
+	my $start = round_down($l->{normal}{start} - 1, cylinder_size($hd));
+	my $end = $l->{normal}{start} + $l->{normal}{size};
 	foreach (map $_->{normal}, @l) {
 	    $start = min($start, $_->{start});
 	    $end = max($end, $_->{start} + $_->{size});
 	}
-	$l->{start} = $hd->{primary}->{extended}->{start} = $start;
-	$l->{size} = $hd->{primary}->{extended}->{size} = $end - $start;
+	$l->{start} = $hd->{primary}{extended}{start} = $start;
+	$l->{size} = $hd->{primary}{extended}{size} = $end - $start;
     }
-    unless (@{$hd->{extended} || []} || !$hd->{primary}->{extended}) {
-	%{$hd->{primary}->{extended}} = (); # modify the raw entry
-	delete $hd->{primary}->{extended};
+    unless (@{$hd->{extended} || []} || !$hd->{primary}{extended}) {
+	%{$hd->{primary}{extended}} = (); # modify the raw entry
+	delete $hd->{primary}{extended};
     }
-    verifyPrimary($hd->{primary}); # verify everything is all right
+    verifyParts($hd); # verify everything is all right
 }
 
 
 sub get_normal_parts($) {
     my ($hd) = @_;
 
-    @{$hd->{primary}->{normal} || []}, map { $_->{normal} } @{$hd->{extended} || []}
+    @{$hd->{primary}{normal} || []}, map { $_->{normal} } @{$hd->{extended} || []}
 }
 
 
@@ -257,14 +263,14 @@ sub read_extended($$) {
 
     @{$pt->{normal}} <= 1 or die "more than one normal partition in extended partition";
     @{$pt->{normal}} >= 1 or die "no normal partition in extended partition";
-    $pt->{normal} = $pt->{normal}->[0];
+    $pt->{normal} = $pt->{normal}[0];
     # in case of extended partitions, the start sector is local to the partition or to the first extended_part!
-    $pt->{normal}->{start} += $pt->{start};
+    $pt->{normal}{start} += $pt->{start};
 
-    verifyInside($pt->{normal}, $extended) or die "partition $pt->{normal}->{device} is not inside its extended partition";
+    verifyInside($pt->{normal}, $extended) or die "partition $pt->{normal}{device} is not inside its extended partition";
 
     if ($pt->{extended}) {
-	$pt->{extended}->{start} += $hd->{primary}->{extended}->{start};
+	$pt->{extended}{start} += $hd->{primary}{extended}{start};
 	read_extended($hd, $pt->{extended}) or return 0;
     }
     1;
@@ -275,15 +281,15 @@ sub write($) {
     my ($hd) = @_;
 
     # set first primary partition active if no primary partitions are marked as active.
-    for ($hd->{primary}->{raw}) {
-	(grep { $_->{local_start} = $_->{start}; $_->{active} ||= 0 } @$_) or $_->[0]->{active} = 0x80;
+    for ($hd->{primary}{raw}) {
+	(grep { $_->{local_start} = $_->{start}; $_->{active} ||= 0 } @$_) or $_->[0]{active} = 0x80;
     }
-    partition_table_raw::write($hd, 0, $hd->{primary}->{raw}) or die "writing of partition table failed";
+    partition_table_raw::write($hd, 0, $hd->{primary}{raw}) or die "writing of partition table failed";
 
     foreach (@{$hd->{extended}}) {
 	# in case of extended partitions, the start sector must be local to the partition
-	$_->{normal}->{local_start} = $_->{normal}->{start} - $_->{start};
-	$_->{extended} and $_->{extended}->{local_start} = $_->{extended}->{start} - $hd->{primary}->{extended}->{start};
+	$_->{normal}{local_start} = $_->{normal}{start} - $_->{start};
+	$_->{extended} and $_->{extended}{local_start} = $_->{extended}{start} - $hd->{primary}{extended}{start};
 
 	partition_table_raw::write($hd, $_->{start}, $_->{raw}) or die "writing of partition table failed";
     }
@@ -300,7 +306,7 @@ sub write($) {
 sub active($$) {
     my ($hd, $part) = @_;
 
-    $_->{active} = 0 foreach @{$hd->{primary}->{normal}};
+    $_->{active} = 0 foreach @{$hd->{primary}{normal}};
     $part->{active} = 0x80;   
 }
 
@@ -311,9 +317,9 @@ sub remove($$) {
     my $i;
 
     # first search it in the primary partitions
-    $i = 0; foreach (@{$hd->{primary}->{normal}}) {
+    $i = 0; foreach (@{$hd->{primary}{normal}}) {
 	if ($_ eq $part) {
-	    splice(@{$hd->{primary}->{normal}}, $i, 1);
+	    splice(@{$hd->{primary}{normal}}, $i, 1);
 	    %$_ = (); # blank it
 
 	    return $hd->{isDirty} = $hd->{needKernelReread} = 1;
@@ -337,18 +343,18 @@ sub add_primary($$) {
     my ($hd, $part) = @_;
 
     {
-	local $hd->{primary}->{normal}; # save it to fake an addition of $part, that way add_primary do not modify $hd if it fails
-	push @{$hd->{primary}->{normal}}, $part;
+	local $hd->{primary}{normal}; # save it to fake an addition of $part, that way add_primary do not modify $hd if it fails
+	push @{$hd->{primary}{normal}}, $part;
 	adjust_main_extended($hd); # verify
-	raw_add($hd->{primary}->{raw}, $part);
+	raw_add($hd->{primary}{raw}, $part);
     }
-    push @{$hd->{primary}->{normal}}, $part; # really do it
+    push @{$hd->{primary}{normal}}, $part; # really do it
 }
 
 sub add_extended($$) {
     my ($hd, $part) = @_;
 
-    my $e = $hd->{primary}->{extended};
+    my $e = $hd->{primary}{extended};
 
     if ($e && !verifyInside($part, $e)) {
 	#ie "sorry, can't add outside the main extended partition" unless $::unsafe;
@@ -371,8 +377,8 @@ The only solution is to move your primary partitions to have the hole next to th
 	my $l = first (@{$hd->{extended}});
 
 	# the first is a special case, must recompute its real size
-	$l->{start} = round_down($l->{normal}->{start} - 1, cylinder_size($hd));
-	$l->{size} = $l->{normal}->{start} + $l->{normal}->{size} - $l->{start};
+	$l->{start} = round_down($l->{normal}{start} - 1, cylinder_size($hd));
+	$l->{size} = $l->{normal}{start} + $l->{normal}{size} - $l->{start};
 	my $ext = { %$l };
 	unshift @{$hd->{extended}}, { type => 5, raw => [ $part, $ext, {}, {} ], normal => $part, extended => $ext };
 	# size will be autocalculated :)
@@ -403,9 +409,9 @@ sub add($$;$) {
     $part->{start} ||= 1; # starting at sector 0 is not allowed
     adjustStartAndEnd($hd, $part);
 
-    my $e = $hd->{primary}->{extended};
+    my $e = $hd->{primary}{extended};
 
-    if (is_empty_array_ref($hd->{primary}->{normal}) || $want_primary) {
+    if (is_empty_array_ref($hd->{primary}{normal}) || $want_primary) {
 	eval { add_primary($hd, $part) };
 	return unless $@;
     }
@@ -461,7 +467,7 @@ sub load($$;$) {
 
     my %h; @h{@fields2save} = @$h;
 
-    $h{totalsectors} == $hd->{totalsectors} or $force or die "Bad totalsectors";
+    $h{totalsectors} == $hd->{totalsectors} or $force or cdie("Bad totalsectors");
 
     # unsure we don't modify totalsectors
     local $hd->{totalsectors};

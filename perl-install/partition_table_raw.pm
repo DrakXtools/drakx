@@ -34,8 +34,8 @@ sub CHS2rawCHS($$$) {
 sub sector2CHS($$) {
     my ($hd, $start) = @_;
     my ($s, $h);
-    ($start, $s) = divide($start, $hd->{geom}->{sectors});
-    ($start, $h) = divide($start, $hd->{geom}->{heads});
+    ($start, $s) = divide($start, $hd->{geom}{sectors});
+    ($start, $h) = divide($start, $hd->{geom}{heads});
     ($start, $h, $s + 1);
 }
 
@@ -51,7 +51,7 @@ sub get_geometry($) {
     { geom => \%geom, totalsectors => $geom{heads} * $geom{sectors} * $geom{cylinders} };
 }
 
-sub openit($$;$) { sysopen $_[1], $_[0]->{file}, $_[2] || 0; }
+sub openit($$;$) { sysopen $_[1], $_[0]{file}, $_[2] || 0; }
 
 # cause kernel to re-read partition table 
 sub kernel_read($) {
@@ -102,6 +102,6 @@ sub write($$$) {
 sub clear_raw { { raw => [ ({}) x $nb_primary ] } }
 
 sub zero_MBR($) { 
-    $_[0]->{primary} = clear_raw();
-    delete $_[0]->{extended};
+    $_[0]{primary} = clear_raw();
+    delete $_[0]{extended};
 }

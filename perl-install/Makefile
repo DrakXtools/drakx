@@ -1,17 +1,20 @@
-VERSION = 2.2.11-1mdkBOOT
+VERSION = 2.2.10-BOOT
 SO_FILES = c/blib/arch/auto/c/c.so
-PMS = *.pm c/*.pm resize_fat/*.pm po/*.pm pci_probing/*.pm commands install2 diskdrake
+PMS = *.pm c/*.pm resize_fat/*.pm po/*.pm pci_probing/*.pm commands install2 diskdrake XFdrake
 ROOTDEST = /export
-DEST = $(ROOTDEST)/Mandrake/instimage
+DEST = $(ROOTDEST)/Mandrake/mdkinst
 DESTREP4PMS = $(DEST)/usr/bin/perl-install
 PERL = perl
 LOCALFILES = $(PERL) mouseconfig
 DIRS = po pci_probing
 EXCLUDE = $(LOCALFILES) boot.img keymaps xmodmaps consolefonts install
 
-.PHONY: all $(DIRS) tags install clean verify_c
+CFLAGS	= -Wall
+override CFLAGS  += -pipe
 
-all: $(SO_FILES) $(DIRS) install1_hd
+.PHONY: all $(DIRS) tags install clean stage2 full_stage2 verify_c
+
+all: $(SO_FILES) $(DIRS)
 
 tags:
 	etags -o - $(PMS) | perl2etags > TAGS
@@ -19,16 +22,14 @@ tags:
 clean:
 	test ! -e c/Makefile || $(MAKE) -C c clean
 	for i in $(DIRS); do $(MAKE) -C $$i clean; done
-	rm -f c/c.xs install1_hd gendepslist
+	rm -f c/c.xs gendepslist
 	find . -name "*~" -o -name "TAGS" -o -name "*.old" | xargs rm -f
 
 tar: clean
 	cd .. ; tar cfy perl-install.tar.bz2 $(EXCLUDE:%=--exclude %) perl-install
 
-floppy: tar
-	mcopy -o ../perl-install.tar.bz2 a:
-	mcopy -o ../perl-install.tar.bz2 a:a
-	mcopy -o ../perl-install.tar.bz2 a:aa
+floppy:
+	dd if=/dev/zero of=/tmp/initrd bs=1k count=2000 ; echo y | mke2fs /tmp/initrd ; mount /tmp/initrd /mnt/disk/ -o loop ; cp -a ../install1/* /mnt/disk/ ; umount /mnt/disk ; gzip -c /tmp/initrd > /tmp/initrd.img ; mcopy -o /tmp/initrd.img a:
 
 tar-diskdrake: clean
 	cd .. ; rm -rf diskdrake ; cp -af perl-install diskdrake
@@ -50,9 +51,6 @@ c/c.xs: c/c.xs.pm
 $(SO_FILES): c/c.xs
 	test -e c/Makefile || (cd c; export C_RPM=1 ; perl Makefile.PL)
 	$(MAKE) -C c
-
-install1_hd: install1_hd.c
-	$(CC) -static -Wall -o $@ $<
 
 $(DIRS):
 	$(MAKE) -C $@
@@ -80,7 +78,7 @@ install_pms: all
 		perl -ne 'print #unless /^use (diagnostics|vars|strict)/' $$i > $(DESTREP4PMS)/$$i; \
 	done
 
-	cp diskdrake.rc install.rc $(DESTREP4PMS)
+	cp *.rc $(DESTREP4PMS)
 	ln -sf perl-install/install2 $(DEST)/usr/bin
 	ln -sf perl-install/commands $(DEST)/usr/bin
 	chmod a+x $(DESTREP4PMS)/install2
@@ -111,7 +109,7 @@ get_needed_files: $(SO_FILES)
 		  d=`echo $(DEST)/$$i | sed 's/\/usr\/local\//\/usr\//'`; \
 		  install -d `dirname $$d` && \
 		  if (echo $$i | grep -q "\.pm"); then \
-		     perl -pe '$$_ eq "__END__" and exit(0);' $$i > $$d; \
+		     perl -pe '$$_ =~ /^__END__/ and exit(0);' $$i > $$d; \
 		  else \
 		  	  cp -f $$i $$d; \
 			  strip $$d 2>/dev/null || true; \
@@ -122,21 +120,21 @@ get_needed_files: $(SO_FILES)
 	mv -f $(DEST)/bin/* $(DEST)/sbin/* $(DEST)/usr/bin
 	rmdir $(DEST)/bin $(DEST)/sbin
 
-	ln -s ash $(DEST)/usr/bin/sh
+	ln -sf ash $(DEST)/usr/bin/sh
 
-	install -d $(DEST)/usr/X11R6/lib/X11/fonts/
-	cp -a /usr/X11R6/lib/X11/fonts/misc $(DEST)/usr/X11R6/lib/X11/fonts/
+	install -d $(DEST)/usr/X11R6/lib/X11/fonts/75dpi
+	install -d $(DEST)/usr/X11R6/lib/X11/fonts/misc
+	cd /usr/X11R6/lib/X11/fonts/75dpi ; cp -a fonts.* helvR* $(DEST)/usr/X11R6/lib/X11/fonts/75dpi
+	cd /usr/X11R6/lib/X11/fonts/misc ; cp -a fonts.* cursor.pcf.gz 6x13.pcf.gz $(DEST)/usr/X11R6/lib/X11/fonts/misc
 
 	cp -a xmodmaps $(DEST)/usr/share
 	cp -a keymaps $(DEST)/usr/share
 	cp -a consolefonts $(DEST)/usr/share
 	cp MonitorsDB $(DEST)/usr/share
+	cp logo-mandrake.xpm $(DEST)/usr/share
 	cp compss $(ROOTDEST)/Mandrake/base
 
-	install -d $(DEST)/lib/modules
-	(cd /lib/modules/$(VERSION) ; \
-	 cp `find -name "*.o"` $(DEST)/lib/modules ; \
-	 /sbin/depmod -m /boot/System.map-$(VERSION) -i -e *.o | grep ': ' | sed 's/\.o//g' > $(DEST)/lib/modules/modules.dep)
+	cp -f ../modules/modules.cpio.bz2 $(DEST)/lib/
 
 	ln -s install2 $(DEST)/usr/bin/runinstall2
 #	echo -e "#!/bin/sh\n\nexec '/usr/bin/sh'" > $(DEST)/usr/bin/runinstall2
@@ -158,7 +156,7 @@ full_stage2:
 stage2:
 	$(MAKE) install_pms
 #	cd $(ROOTDEST) ; tar cfz /tmp/instimage-full.tgz Mandrake
-#	cd $(ROOTDEST) ; tar cfz /tmp/instimage-light.tgz Mandrake/base/compss Mandrake/instimage/usr/[bl]*
+#	cd $(ROOTDEST) ; tar cfz /tmp/instimage-light.tgz Mandrake/base/compss Mandrake/mdkinst/usr/[bl]*
 
 	@#rm -rf /mnt/initrd/*
 	@#cp -a $(DEST)/* /mnt/initrd
@@ -167,6 +165,7 @@ stage2:
 
 # function f() { grep "$*" /usr/include/*.h /usr/include/*/*.h; }
 
-# dd if=/dev/zero of=/tmp/initrd bs=1k count=2000 ; echo y | mke2fs /tmp/initrd ; mount /tmp/initrd /mnt/disk/ -o loop ; cd ~pixel/gi/perl-install ; install -s install/install install1/bin/install ; install -s installinit/init install1/bin/ ; cp -a install1/* /mnt/disk/ ; umount /mnt/disk ; gzip -c /tmp/initrd > /tmp/initrd.img ; mcopy -o /tmp/initrd.img a:
+# 
+# install -s install/install install1/bin/install ; install -s installinit/init install1/bin/init
 # mount /tmp/initrd /mnt/disk/ -o loop ;  ; umount /mnt/disk ; gzip -c /tmp/initrd > /tmp/initrd.img ; mcopy -o /tmp/initrd.img a:
 

@@ -3,7 +3,7 @@ package interactive;
 use diagnostics;
 use strict;
 
-use common qw(:common);
+use common qw(:common :functional);
 
 1;
 
@@ -18,11 +18,11 @@ sub ask_warn($$$) {
     my ($o, $title, $message) = @_;
     ask_from_list($o, $title, $message, [ _("Ok") ]);
 }
-sub ask_yesorno($$$) {
+sub ask_yesorno($$$;$) {
     my ($o, $title, $message, $def) = @_;
     ask_from_list_($o, $title, $message, [ __("Yes"), __("No") ], $def ? "No" : "Yes") eq "Yes";
 }
-sub ask_okcancel($$$) {
+sub ask_okcancel($$$;$) {
     my ($o, $title, $message, $def) = @_;
     ask_from_list_($o, $title, $message, [ __("Ok"), __("Cancel") ], $def ? "Cancel" : "Ok") eq "Ok";
 }
@@ -55,4 +55,26 @@ sub ask_from_entry($$$;$) {
     $message = ref $message ? $message : [ $message ];
 
     $o->ask_from_entryW($title, $message, $def);
+}
+
+sub wait_message($$$) {
+    my ($o, $title, $message) = @_;
+
+    $message = ref $message ? $message : [ $message ];
+
+    my $w = $o->wait_messageW($title, [ _("Please wait"), @$message ]);
+    my $b = before_leaving { $o->wait_message_endW($w) };
+
+    # enable access through set
+    common::add_f4before_leaving(sub { $o->wait_message_nextW($_[1], $w) }, $b, 'set');
+    $b;
+}
+
+sub kill {
+    my ($o) = @_;
+    while ($o->{before_killing} && @interactive::objects > $o->{before_killing}) {
+	my $w = pop @interactive::objects;
+	$w->destroy;
+    }
+    $o->{before_killing} = @interactive::objects;
 }

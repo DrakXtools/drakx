@@ -78,3 +78,9 @@ sub ask_many_from_listW {
 }
 
 
+sub wait_messageW {
+    my ($o, $title, $message) = @_;
+    print map { "$_\n" } @$message;
+}
+sub wait_message_nextW { print "$_[1]\n" }
+sub wait_message_endW { print "Done\n" }
