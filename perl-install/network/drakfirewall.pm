@@ -1,7 +1,7 @@
 package network::drakfirewall; # $Id$
 
-use diagnostics;
-use strict;
+
+
 
 use network::shorewall;
 use common;
@@ -105,16 +105,14 @@ sub default_from_pkgs {
 }
 
 sub get_ports {
-    my ($_ports) = @_;
-    my $shorewall = network::shorewall::read() or return;
+    my ($in, $_ports) = @_;
+    my $shorewall = network::shorewall::read($in,'silent') or return;
     \$shorewall->{ports};
 }
 
 sub set_ports {
     my ($in, $disabled, $ports) = @_;
-
-    my $shorewall = network::shorewall::read() || network::shorewall::default_interfaces() or die \N("No network card");
-
+    my $shorewall = network::shorewall::read($in,'not_silent') || network::shorewall::default_interfaces($in) or die \N("No network card");
     if (!$disabled || -x "$::prefix/sbin/shorewall") {
 	$in->do_pkgs->ensure_is_installed('shorewall', '/sbin/shorewall', $::isInstall) or return;
     
@@ -126,13 +124,13 @@ sub set_ports {
 
 sub get_conf {
     my ($in, $disabled, $o_ports) = @_;
-
+		
     my $possible_servers = default_from_pkgs($in);
     $_->{hide} = 0 foreach @$possible_servers;
 
     if ($o_ports) {
 	$disabled, from_ports($o_ports);
-    } elsif (my $shorewall = network::shorewall::read()) {
+    } elsif (my $shorewall = network::shorewall::read($in,'silent')) {
 	$shorewall->{disabled}, from_ports(\$shorewall->{ports});
     } else {
 	$in->ask_okcancel('', N("drakfirewall configurator

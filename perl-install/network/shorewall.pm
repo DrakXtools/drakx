@@ -46,22 +46,51 @@ sub get_config_file {
     map { [ split ' ' ] } grep { !/^#/ } cat_("$::prefix/etc/shorewall/$file");
 }
 
-sub default_interfaces() {
-    my %conf;
-
-    my @l = detect_devices::getNet() or return;
-    if (@l == 1) {
+sub default_interfaces_silent($) {
+	my ($in) = @_;
+	my %conf;
+	my @l = detect_devices::getNet() or return;
+	if (@l == 1) {
 	$conf{net_interface} = $l[0];
     } else {
 	$conf{net_interface} = network::netconnect::get_net_device() || $l[0];
-	$conf{loc_interface} = [ grep { $_ ne $conf{net_interface} } @l ];
+	$conf{loc_interface} = [  grep { $_ ne $conf{net_interface} } @l ];
     }
     \%conf;
 }
 
-sub read() {
-    my %conf;
+sub default_interfaces($) {
+	my ($in) = @_;
+	my %conf;
+	my $card_netconnect = network::netconnect::get_net_device() || "eth0";
+	defined $card_netconnect and log::l("[drakgw] Information from netconnect: ignore card $card_netconnect");
 
+	my @l = detect_devices::getNet() or return;
+	if (@l == 1) {
+	$conf{net_interface} = $l[0];
+    } else {
+	$in->ask_from('',
+                      N("Please enter the name of the interface connected to the internet.              
+                
+Examples:
+                ppp+ for modem or DSL connections, 
+                eth0, or eth1 for cable connection, 
+                ippp+ for a isdn connection.
+", $card_netconnect),
+      [ { label => N("Net Device"), val => \$card_netconnect, type => 'entry' } ]);
+	put_in_hash($conf ||= {}, {
+	   net_interface => $card_netconnect,
+   });
+	$conf{net_interface} = $card_netconnect;
+	#$conf{net_interface} = network::netconnect::get_net_device() || $l[0];
+	$conf{loc_interface} = [  grep { $_ ne $conf{net_interface} } @l ];
+    }
+    \%conf;
+}
+
+sub read($$) {
+    my %conf;
+    my ($in,$mode) = @_;
     $conf{disabled} = !glob_("$::prefix/etc/rc3.d/S*shorewall");
 
     $conf{ports} = 
@@ -73,7 +102,11 @@ sub read() {
     if (my ($e) = get_config_file('masq')) {
 	$conf{masquerade}{subnet} = $e->[1] if $e->[1];
     }
-    put_in_hash(\%conf, default_interfaces());
+    if ($mode eq 'silent') {
+	    put_in_hash(\%conf, default_interfaces_silent($in));
+    } else {
+	    put_in_hash(\%conf, default_interfaces($in));
+    };
     foreach (get_config_file('interfaces')) {
 	my ($name, $interface) = @$_;
 	if ($name eq 'masq') {
