@@ -453,6 +453,7 @@ sub installPackages {
 			  )), 0, 1, 0);
     $release_notes_button->hide if !$o->{release_notes};
     $details->hide if !@install_any::advertising_images;
+    $release_notes_scroll->hide; #- it is hidden by default
     $w->sync;
     $msg->set_label(N("Please wait, preparing installation..."));
     foreach ($cancel, $release_notes_button, $details) {
