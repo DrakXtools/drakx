@@ -1,3 +1,218 @@
+2003/01/23  alus
+
+	* share/po/pl.po: updated
+
+2003/01/23  Damien Chaumette  <dchaumette@mandrakesoft.com>
+
+	* network/network.pm, network/ethernet.pm: 
+	  - perl_checker compliant
+	  - s/$pump/$auto_ip/
+	  - use join('', if_(..), if_(..))
+	  - each_index instead of for
+	  - various fixes
+
+	* network/netconnect.pm, network/modem.pm, network/isdn.pm,
+	network/adsl.pm: isdn.pm now in use strict
+	little cleanup
+
+2003/01/23  Pablo Saratxaga  <pablo@mandrakesoft.com>
+
+	* share/po/et.po: updated Estonian file
+
+	* share/po/ko.po: Changes asked by HP people to Korean translation
+
+2003/01/23  Pixel  <pixel@mandrakesoft.com>
+
+	* Xconfig/main.pm (configure_chooser_raw): no special case for "Next"
+	button
+
+	* common.pm: better fix of ->isa use
+	remove use of UNIVERSAL::isa() (it is not much more complex with ref +
+	->isa, and UNIVERSAL::isa() would need a special case in perl_checker)
+
+	* keyboard.pm (read): fix return value when no configured keyboard is
+	found
+
+	* diskdrake/interactive.pm: fix diskdrake in newt (causing error about
+	missing method ->cylinder_size)
+
+	* Xconfig/xfree3.pm, Xconfig/xfreeX.pm, Xconfig/xfree4.pm: introduce
+	->is_fbdev, and use it to simplify ->set_resolution
+
+	* install_any.pm (getHds): do not handle missing harddrives by calling
+	setupSCSI, since
+	setupSCSI do it by itself now
+
+	* interactive/newt.pm: fix special case "for license agreement": only use
+	it for long messages, and fix {format} use
+	add a button to "summary"-like dialog boxes
+	  - handle {ok_disabled}
+	  - correctly wrap messages
+	  - fix Textbox size
+	  - fix Listbox size
+	  - special code to handle the license dialog
+
+	* Xconfig/various.pm (to_string): created, try to shortly describe current
+	configuration
+	(configure_FB_TVOUT): don't do anything when not using XF4
+
+	* interactive/gtk.pm: focus first widget when there is no ok
+
+	* Xconfig/xfree.pm (is_fbdev): created
+	(get_both, set_both): skip modifications on missing xfree3 or xfree4
+
+	* install_steps_interactive.pm (formatMountPartitions): help perl
+	(otherwise wait_message stays forever in newt)
+	(reallyChooseGroups): remove "Previous" button
+	(setupSCSI): remove now unused variable $clicked
+	(summary): display more nicely the current X config when fbdev
+	(selectLanguage): no need to handle "Cancel" on language choosing :)
+	(setupSCSI): handle calling modules::interactive::load_category in
+	non-automatic mode when no harddrives are found
+
+	* modules/interactive.pm (load_category__prompt_for_more): cleanup,
+	propose "See hardware info" in any case
+
+	* network/network.pm: pixelification
+
+2003/01/23  Thierry Vignaud  <tvignaud@mandrakesoft.com>
+
+	* drakxtools.spec: fix perl-GTK2 dependancy
+	9.1-0.13mdk
+
+	* standalone/drakpxe: perl_checker fix
+
+	* network/ethernet.pm: 
+	  - force use strict
+	  - perl_checker fix
+
+	* network/isdn.pm: force strict pragma
+	force strict mode
+
+	* interactive/gtk.pm: workaround bug introduced by new pixel focus
+	managment
+
+	* standalone/service_harddrake: perl_checker fix
+	reconfigure sound slots at boot time (we should enhance slot filling
+	by keeping existent module affectation, aka keep user choice if his
+	module for slot X is not the default one)
+
+	* network/netconnect.pm, network/tools.pm, network/shorewall.pm,
+	network/network.pm, network/modem.pm: force strict mode
+
+2003/01/22  Damien Chaumette  <dchaumette@mandrakesoft.com>
+
+	* network/adsl.pm: 
+	  - speedtouch fixes :
+	o binaries location from /usr/bin to /usr/sbin
+	  o clean previous instance of pppoa3 according to modem id (-c)
+	(special thanks to Corsikas who proudly brings this patch to me :)
+
+2003/01/22  François Pons  <fpons@mandrakesoft.com>
+
+	* install_steps_interactive.pm: perl checker fixes.
+
+	* bootloader.pm: fix call to sanitize_ver by giving it linux-$version
+	instead of linux$ext.
+
+2003/01/22  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* c/stuff.xs.pl, lang.pm: fix accents characters displaying in console
+	mode during install:
+	  - convert translations into utf8 only during install && if using gtk
+	  - explicitely bind the codeset to the specified locale's encoding
+	because
+	during install they are reported as utf8
+
+	* ugtk2.pm: correctly pop when F2 (screenshots)
+	revive F1, F2 and alt-e (dialogs for F1 and F2 are broken, though)
+
+	* mdk-stage1/pci-resource/update-pci-ids.pl, mdk-stage1/probing.c: add
+	full pci probe support
+
+	* mdk-stage1/usb-resource/update-usb-ids.pl: have pci usb controllers
+	sorted alphabetically
+
+	* common.pm: correctly pop when F2 (screenshots)
+	fix accents characters displaying in console mode during install:
+	  - convert translations into utf8 only during install && if using gtk
+	  - explicitely bind the codeset to the specified locale's encoding
+	because
+	during install they are reported as utf8
+
+2003/01/22  Pablo Saratxaga  <pablo@mandrakesoft.com>
+
+	* share/po/id.po, share/po/sk.po, share/po/ru.po, share/po/gl.po,
+	share/po/pt_BR.po, share/po/br.po, share/po/th.po, share/po/sl.po,
+	share/po/no.po, share/po/ja.po, share/po/hr.po, share/po/tr.po,
+	share/po/mt.po, share/po/ga.po, share/po/be.po, share/po/uk.po,
+	share/po/ko.po, share/po/DrakX.pot, share/po/sv.po, share/po/sr.po,
+	share/po/pl.po, share/po/lt.po, share/po/he.po, share/po/sp.po,
+	share/po/cy.po, share/po/ca.po, share/po/da.po, share/po/ar.po,
+	share/po/bs.po, share/po/ro.po, share/po/wa.po, share/po/is.po,
+	share/po/af.po, share/po/az.po, share/po/zh_TW.po, share/po/zh_CN.po,
+	share/po/pt.po, share/po/vi.po, share/po/ta.po, share/po/fr.po,
+	share/po/sq.po, share/po/it.po, share/po/nl.po, share/po/eu.po,
+	share/po/es.po, share/po/de.po, share/po/eo.po, share/po/el.po,
+	share/po/cs.po, share/po/bg.po, share/po/lv.po, share/po/hu.po: updated
+	pot file
+
+	* standalone/draksplash, standalone/drakbackup, standalone/drakfloppy,
+	standalone/drakfont, standalone/drakconnect, standalone/drakgw,
+	standalone/drakperm: English proofreading
+
+	* lang.pm: small changes in charset naming so they work better in console
+	(console
+	is still not in utf-8)
+
+	* share/po/et.po, share/po/fi.po: updated pot file
+	updated Finnish and Estonian files
+
+2003/01/22  Pixel  <pixel@mandrakesoft.com>
+
+	* install_steps.pm: call "yelp-pregenerate -a" after installing pkgs
+	(since it's skipped DURING_INSTALL)
+	  - remove createBootdisk step
+	  - add mkbootdisk option in setupBootloader__general()
+	  - move kernelVersion() from install_any to any
+
+	* interactive.pm: add some documentation about the various possible fields
+
+	* interactive/gtk.pm: add {callbacks}{ok_disabled}
+
+	* network/network.pm: simplify easy_dhcp prototype
+
+	* install_steps_interactive.pm (acceptLicense): use new "interactive"
+	feature to gray "Next" button until
+	license is accepted
+	simplify easy_dhcp prototype
+	  - remove createBootdisk step
+	  - add mkbootdisk option in setupBootloader__general()
+	  - move kernelVersion() from install_any to any
+
+	* any.pm, install2.pm, install_any.pm, steps.pm: 
+	  - remove createBootdisk step
+	  - add mkbootdisk option in setupBootloader__general()
+	  - move kernelVersion() from install_any to any
+
+2003/01/22  Thierry Vignaud  <tvignaud@mandrakesoft.com>
+
+	* network/netconnect.pm, network/network.pm, standalone/mousedrake,
+	printer/printerdrake.pm, harddrake/TODO, standalone/drakxtv:
+	perl_checker fixes
+
+	* standalone/drakfont: 
+	  - perl_checker fixes
+	  - is_a_font(): display the non existant file we just checked for
+	instead of an undefined value
+	fix progressbar label initialization
+
+	* harddrake/sound.pm: 
+	  - if there's no know driver, offer to pick a driver in the drivers
+	list in case ldetect-lst isn't up to date but the user know which
+	  driver to use
+	  - consolidate "pick any driver" entry
+
 2003/01/22  Pixel  <pixel@mandrakesoft.com>
 
 	* install_steps.pm, any.pm, install_any.pm, install2.pm, steps.pm,
@@ -8577,7 +8792,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.769 2003/01/16 14:30:23 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.770 2003/01/22 00:23:02 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
