@@ -123,9 +123,9 @@ If you don't want to use the auto detection, deselect the checkbox.
                              );
 
 
-  step_2:
     $conf{$_} = $netc->{autodetect}{$_} ? 1 : 0 foreach 'modem', 'winmodem', 'adsl', 'cable', 'lan';
     $conf{isdn} = $netc->{autodetect}{isdn}{driver} ? 1 : 0;
+  step_2:
 
     my @l = (
 	  [ join('', N("Normal modem connection"), if_($netc->{autodetect}{modem}, " - " . N("detected on port %s", $netc->{autodetect}{modem}))), \$conf{modem} ],
