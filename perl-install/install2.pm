@@ -21,6 +21,7 @@ use keyboard;
 use lilo;
 use mouse;
 use fs;
+use raid;
 use timezone;
 use fsedit;
 use devices;
@@ -325,7 +326,7 @@ sub formatPartitions {
 	home mnt tmp var var/tmp var/lib var/lib/rpm);
     mkdir "$o->{prefix}/$_", 0700 foreach qw(root);
 
-    eval { commands::cp("-f", "/etc/raidtab", "$o->{prefix}/etc/raidtab") } if !is_empty_hash_ref($o->{raid});
+    raid::prepare_prefixed($o->{raid}, $o->{prefix});
 }
 
 #------------------------------------------------------------------------------

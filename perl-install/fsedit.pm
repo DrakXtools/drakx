@@ -162,7 +162,7 @@ sub has_mntpoint($$) {
 sub check_mntpoint {
     my ($mntpoint, $hd, $part, $hds) = @_;
 
-    $mntpoint eq '' || isSwap($part) and return;
+    $mntpoint eq '' || isSwap($part) || isRAID($part) and return;
 
     local $_ = $mntpoint;
     m|^/| or die _("Mount points must begin with a leading /");

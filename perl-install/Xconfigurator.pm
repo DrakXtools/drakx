@@ -714,7 +714,7 @@ sub main {
     my ($o, $allowFB);
     ($prefix, $o, $in, $allowFB, $install) = @_;
     $o ||= {};
-
+    
     XF86check_link();
 
     {
