@@ -36,7 +36,7 @@ sub relGetFile($) {
     local $_ = $_[0];
     /\.img$/ and return "images/$_";
     my $dir = m|/| ? "mdkinst" :
-      member($_, qw(compss compssList compssUsers depslist hdlist)) ? "/base" : "/RPMS";
+      member($_, qw(compss compssList compssUsers depslist hdlist)) ? "base/" : "/RPMS/";
     $_ = "Mandrake/$dir$_";
     s/i386/i586/;
     $_;
