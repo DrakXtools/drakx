@@ -117,7 +117,7 @@ static int size_progress;
 static int actually_drawn;
 static char * msg_progress;
 
-void init_progression(char *msg, int size)
+void init_progression_raw(char *msg, int size)
 {
 	size_progress = size;
 	if (size) {
@@ -136,7 +136,7 @@ void init_progression(char *msg, int size)
 	}
 }
 
-void update_progression(int current_size)
+void update_progression_raw(int current_size)
 {
 	if (size_progress) {
 		if (current_size <= size_progress)
@@ -159,7 +159,7 @@ void update_progression(int current_size)
 	}
 }
 
-void end_progression(void)
+void end_progression_raw(void)
 {
 	if (size_progress) {
 		newtPopWindow();

@@ -38,9 +38,19 @@ void info_message(char *msg, ...) __attribute__ ((format (printf, 1, 2))); /* bl
 void wait_message(char *msg, ...) __attribute__ ((format (printf, 1, 2))); /* non-blocking */
 void remove_wait_message(void);
 
+void init_progression_raw(char *msg, int size);
+void update_progression_raw(int current_size);
+void end_progression_raw(void);
+
+#ifdef ENABLE_BOOTSPLASH
 void init_progression(char *msg, int size);
 void update_progression(int current_size);
 void end_progression(void);
+#else
+#define init_progression init_progression_raw
+#define update_progression update_progression_raw
+#define end_progression end_progression_raw
+#endif
 
 enum return_type ask_yes_no(char *msg);
 enum return_type ask_from_list(char *msg, char ** elems, char ** choice);

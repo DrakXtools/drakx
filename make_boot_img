@@ -12,7 +12,7 @@ rename 'all.kernels', 'kernel/all.kernels';
 my $default_append = "ramdisk_size=128000";
 # full acpi support for x86_64, enough acpi support for x86 ht, no acpi for others
 my $default_acpi = $arch =~ /i.86/ ? "acpi=ht" : $arch =~ /x86_64/ ? "" : "acpi=off";
-my $default_vga = "vga=788";
+my $default_vga = "vga=788 splash=silent";
 
 my $instdir = "mdk-stage1";
 my $tmp_mnt = '/tmp/drakx_mnt';
@@ -676,10 +676,15 @@ sub isolinux {
     @kernels = ($main, grep { $_ ne $main } @kernels);
     _ "rm -rf isolinux"; mkdir "isolinux", 0777;
 
+    $default_vga =~ /788/ or die 'we rely on vga=788 for bootsplash';
+    my $bootspash_cfg = '/etc/bootsplash/themes/Mandrakelinux/config/bootsplash-800x600.cfg';
+    -e $bootspash_cfg or die "can't find $bootspash_cfg";
+
     each_index {
 	mkdir "isolinux/alt$::i", 0777;
 	_ "cp kernel/all.kernels/$_/vmlinuz isolinux/alt$::i";
 	initrd($tmp_mnt_initrd, 'all', '', "images/all.rdz-$_");
+	_ "splash -s -f $bootspash_cfg >> images/all.rdz-$_" if !/BOOT/;
 	_ "mv images/all.rdz-$_ isolinux/alt$::i/all.rdz";
     } @kernels;
 

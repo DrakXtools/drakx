@@ -200,7 +200,7 @@ void remove_wait_message(void)
 static int size_progress;
 static int actually_drawn;
 #define PROGRESS_SIZE 45
-void init_progression(char *msg, int size)
+void init_progression_raw(char *msg, int size)
 {
 	int i;
 	size_progress = size;
@@ -215,7 +215,7 @@ void init_progression(char *msg, int size)
 		printf("\n");
 }
 
-void update_progression(int current_size)
+void update_progression_raw(int current_size)
 {
 	if (size_progress) {
 		if (current_size > size_progress)
@@ -230,10 +230,10 @@ void update_progression(int current_size)
 	fflush(stdout);
 }
 
-void end_progression(void)
+void end_progression_raw(void)
 {
 	if (size_progress) {
-		update_progression(size_progress);
+		update_progression_raw(size_progress);
 		printf("]\n");
 	} else
 		printf(" done.\n");

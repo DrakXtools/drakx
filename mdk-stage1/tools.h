@@ -23,6 +23,7 @@
 #define _TOOLS_H_
 
 #include <stdlib.h>
+#include "bootsplash.h"
 
 void process_cmdline(void);
 int get_param(int i);

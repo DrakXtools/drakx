@@ -191,6 +191,7 @@ void unset_automatic(void)
 {
 	log_message("unsetting automatic");
 	unset_param(MODE_AUTOMATIC);
+	exit_bootsplash();
 }
 
 // warning, many things rely on the fact that:
