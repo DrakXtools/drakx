@@ -1,10 +1,10 @@
 package printer;
 # $Id$
 
-use diagnostics;
-use strict;
 
-use vars qw(%thedb %spooler %spooler_inv %printer_type %printer_type_inv @entries_db_short @entry_db_description %descr_to_help %descr_to_db %db_to_descr %descr_to_ppd);
+
+
+
 
 use common;
 use commands;
@@ -226,7 +226,7 @@ sub read_printer_db(;$) {
 			}
 		    }
 		    $entry = {};
-		} elsif (m!^\s*<id>\s*([0-9]+)\s*</id>\s*$!) {
+		} elsif (m!^\s*<id>\s*([^\s<>]+)\s*</id>\s*$!) {
 		    # Foomatic printer ID
 		    $entry->{id} = $1;
 		} elsif (m!^\s*<make>(.+)</make>\s*$!) {
