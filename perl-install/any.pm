@@ -158,7 +158,7 @@ sub setupBootloader {
 	$b->{vga} ||= 'normal';
 	if (arch !~ /ppc/) {
 	$in->ask_from('', _("Bootloader main options"), [
-{ label => _("Bootloader to use"), val => \$bootloader, list => [ keys(%bootloaders) ], format => \&translate },
+{ label => _("Bootloader to use"), val => \$bootloader, list => [ keys(%bootloaders) ], format => \&translate, type => 'list' },
     arch() =~ /sparc/ ? (
 { label => _("Bootloader installation"), val => \$silo_install_lang, list => \@silo_install_lang },
 ) : if_(arch() !~ /ia64/,
@@ -190,7 +190,7 @@ sub setupBootloader {
 	} else {
 	$b->{boot} = $partition_table_mac::bootstrap_part;	
 	$in->ask_from('', _("Bootloader main options"), [
-	{ label => _("Bootloader to use"), val => \$bootloader, list => [ keys(%bootloaders) ], format => \&translate },	
+	{ label => _("Bootloader to use"), val => \$bootloader, list => [ keys(%bootloaders) ], format => \&translate, type => 'list' },	
 	{ label => _("Init Message"), val => \$b->{initmsg} },
 	{ label => _("Boot device"), val => \$b->{boot}, list => [ map { "/dev/$_" } (map { $_->{device} } (grep { isAppleBootstrap($_) } @$fstab))], not_edit => !$::expert },
 	{ label => _("Open Firmware Delay"), val => \$b->{delay} },
