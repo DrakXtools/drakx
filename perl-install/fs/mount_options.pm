@@ -157,6 +157,9 @@ sub rationalize {
     if (!fs::type::can_be_one_of_those_fs_types($part, 'vfat', 'smbfs', 'iso9660', 'udf')) {
 	delete $options->{'codepage='};
     }
+    if (fs::type::directories_needed_to_boot()) {
+	$options->{$_} = 0 foreach qw(users user noauto supermount);
+    }
 
     &pack($part, $options, $unknown);
 }
