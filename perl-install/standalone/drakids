@@ -21,7 +21,7 @@ my $blacklist = Gtk2::SimpleList->new(addr => 'hidden',
                                       N("Network interface") => 'text',
                                       N("Protocol") => 'text',
                                   );
-$blacklist->get_selection->set_mode ('multiple');
+$blacklist->get_selection->set_mode('multiple');
 
 my $activefw = activefw->new(sub {
     my ($con, $msg) = @_;
@@ -93,7 +93,7 @@ sub handle_blacklist {
 }
 
 sub unblacklist {
-    my @addr = uniq(map { $blacklist->{data}->[$_]->[0] } $blacklist->get_selected_indices);
+    my @addr = uniq(map { $blacklist->{data}[$_][0] } $blacklist->get_selected_indices);
     $activefw->unblacklist($_) foreach @addr;
     #- delete from the list even if the above calls were unsuccessful
     @{$blacklist->{data}} = grep { !member($_->[0], @addr) } @{$blacklist->{data}};
