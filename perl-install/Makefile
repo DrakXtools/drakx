@@ -57,7 +57,7 @@ install_pms: $(DIRS)
 	for i in `perl -ne 's/sub (\w+?)_? {.*/$$1/ and print' commands.pm` sync; do ln -sf commands $(DEST)/usr/bin/$$i; done
 
 	install -d $(DESTREP4PMS)
-	find $(DESTREP4PMS) -name "*.gz.pm" | xargs rm -f
+	find $(DESTREP4PMS) -name "*.pm.gz" | xargs rm -f
 	for i in $(PMS); do \
 		dest=$(DESTREP4PMS)/`dirname $$i`; \
 		install -d $$dest; \
