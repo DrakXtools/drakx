@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 1.1.9
-Release: 8mdk
+Release: 9mdk
 Url: http://www.linux-mandrake.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -260,11 +260,23 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && \
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog 
+* Fri Aug  9 2002 Thierry Vignaud <tvignaud@mandrakesoft.com> 1.1.9-9mdk
+- harddrake:
+	o module configuration window:
+		* read current options
+		* don't display ranges, we cannot really know when a range
+            is needed and so display them in wrong cases
+		* read & parse modules.conf only when configuring the
+            module, not on each click in the tree
+		* don't display ranges, we cannot really know when a range
+       	  is needed and so display them in wrong cases (kill code,
+       	  enable us to simplify modparm::parameters after
+
 * Fri Aug  9 2002 Pixel <pixel@mandrakesoft.com> 1.1.9-8mdk
 - snapshot
 
 * Tue Aug  6 2002 Thierry Vignaud <tvignaud@mandrakesoft.com> 1.1.9-7mdk
-- harddrake, scannerdrake: add scsi detection support
+- harddrake, scannerdrake: add scsi scanner detection support
 - harddrake: detect external modems
 
 * Tue Aug  6 2002 Pixel <pixel@mandrakesoft.com> 1.1.9-6mdk
