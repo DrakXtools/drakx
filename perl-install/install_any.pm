@@ -666,6 +666,13 @@ sub g_auto_install {
 	qw(oldu oldg password password2),
     );
     $_ = { %{$_ || {}} }, delete @$_{@user_info_to_remove} foreach $o->{superuser}, @{$o->{users} || []};
+
+    if ($respect_privacy && $o->{netcnx}) {
+	if (my $type = $o->{netcnx}{type}) {
+	    my @netcnx_type_to_remove = qw(passwd passwd2 login phone_in phone_out);
+	    $_ = { %{$_ || {}} }, delete @$_{@netcnx_type_to_remove} foreach $o->{netcnx}{$type};
+	}
+    }
     
     require Data::Dumper;
     my $str = join('', 
