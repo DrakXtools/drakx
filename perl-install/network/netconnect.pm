@@ -46,7 +46,8 @@ sub pre_func {
     $in->isa('interactive::gtk') or return;
     $::Wizard_no_previous = 1;
     #- for i18n : %s is the type of connection of the list: (modem, isdn, adsl, cable, local network);
-    $in->ask_okcancel(N("Network Configuration Wizard"), N("\n\n\nWe are now going to configure the %s connection.\n\n\nPress OK to continue.", translate($text)), 1);
+    #-PO here, "forward" is the standard gtk+ button for "next"; check what is displayed in your language
+    $in->ask_okcancel(N("Network Configuration Wizard"), N("\n\n\nWe are now going to configure the %s connection.\n\n\nPress \"Forward\" to continue.", translate($text)), 1);
     undef $::Wizard_no_previous;
 }
 
