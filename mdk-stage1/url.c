@@ -152,19 +152,14 @@ static int ftp_command(int sock, char * command, char * param)
 	return 0;
 }
 
-static int get_host_address(const char * host, struct in_addr * address)
+static int get_host_address(char * host, struct in_addr * address)
 {
 	if (isdigit(host[0])) {
 		if (!inet_aton(host, address)) {
 			return FTPERR_BAD_HOST_ADDR;
 		}
 	} else {
-		struct hostent * h;
-		h = mygethostbyname(host);
-		if (h && h->h_addr_list && (h->h_addr_list)[0]) {
-			*address = *((struct in_addr *) (h->h_addr_list)[0]);
-			log_message("is-at: %s", inet_ntoa(*address));
-		} else
+		if (mygethostbyname(host, address))
 			return FTPERR_BAD_HOSTNAME;
 	}
     

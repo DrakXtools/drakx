@@ -47,6 +47,8 @@ struct interface_info {
 
 char * guess_netmask(char * ip_addr);
 
+int configure_net_device(struct interface_info * intf);
+
 extern char * hostname;
 extern char * domain;
 extern struct in_addr gateway;

@@ -20,29 +20,194 @@
  */
 
 #include <stdlib.h>
+
+// dietlibc can do hostname lookup, whereas glibc can't when linked statically :-(
+
+#ifdef __LIBC_DIETLIBC__
+
 #include <unistd.h>
 #include <string.h>
 #include <stdio.h>
+#include <netdb.h>
+#include <sys/socket.h>
 
 #include "network.h"
 #include "log.h"
 
 #include "dns.h"
 
-
-// needs a wrapper since gethostbyname from dietlibc doesn't support domain handling
-struct hostent *mygethostbyname(const char *name)
+int mygethostbyname(char * name, struct in_addr * addr)
 {
-	char fully_qualified[500];
-	struct hostent * h;
-	h = gethostbyname(name);
-	if (h)
-		return h;
-	if (!domain)
-		return NULL;
-	sprintf(fully_qualified, "%s.%s", name, domain);
-	h = gethostbyname(fully_qualified);
-	if (!h)
-		log_message("unknown host %s", name);
-	return h;
+	struct hostent * h = gethostbyname(name);
+	if (!h) {
+		if (domain) {
+			// gethostbyname from dietlibc doesn't support domain handling
+			char fully_qualified[500];
+			sprintf(fully_qualified, "%s.%s", name, domain);
+			h = gethostbyname(fully_qualified);
+			if (!h) {
+				log_message("unknown host %s", name);
+				return -1;
+			}
+		} else
+			return -1;
+	}
+	
+	if (h->h_addr_list && (h->h_addr_list)[0]) {
+		memcpy(addr, (h->h_addr_list)[0], sizeof(*addr));
+		log_message("is-at: %s", inet_ntoa(*addr));
+		return 0;
+	}
+	return -1;
 }
+
+char * mygethostbyaddr(char * ipnum)
+{
+	struct in_addr in;
+	struct hostent * host;
+	if (!inet_aton(ipnum, &in))
+		return NULL;
+	host = gethostbyaddr(&in, strlen((void *) &in), AF_INET);
+	if (host && host->h_name)
+		return host->h_name;
+	return NULL;
+}
+
+
+#else // __LIBC_DIETLIBC__
+
+#include <alloca.h>
+#include <sys/socket.h>
+#include <netinet/in.h>
+#include <resolv.h>
+#include <arpa/nameser.h>
+#include <arpa/inet.h>
+#include <stdlib.h>
+#include <string.h>
+
+#include "log.h"
+
+#include "dns.h"
+
+/* This is dumb, but glibc doesn't like to do hostname lookups w/o libc.so */
+
+union dns_response {
+    HEADER hdr;
+    u_char buf[PACKETSZ];
+} ;
+
+static int do_query(char * query, int queryType, char ** domainName, struct in_addr * ipNum)
+{
+	int len, ancount, type;
+	u_char * data, * end;
+	char name[MAXDNAME];
+	union dns_response response;
+	
+#ifdef __sparc__
+	/* from jj: */
+	/* We have to wait till ethernet negotiation is done */
+	_res.retry = 3;
+#else
+	_res.retry = 2;
+#endif
+
+
+	len = res_search(query, C_IN, queryType, (void *) &response, sizeof(response));
+	if (len <= 0)
+		return -1;
+
+	if (ntohs(response.hdr.rcode) != NOERROR)
+		return -1;
+
+	ancount = ntohs(response.hdr.ancount);
+	if (ancount < 1)
+		return -1;
+	
+	data = response.buf + sizeof(HEADER);
+	end = response.buf + len;
+	
+	/* skip the question */
+	data += dn_skipname(data, end) + QFIXEDSZ;
+
+	/* parse the answer(s) */
+	while (--ancount >= 0 && data < end) {
+
+		/* skip the domain name portion of the RR record */
+		data += dn_skipname(data, end);
+
+		/* get RR information */
+		GETSHORT(type, data);
+		data += INT16SZ; /* skipp class */
+		data += INT32SZ; /* skipp TTL */
+		GETSHORT(len,  data);
+
+		if (type == T_PTR) {
+			/* we got a pointer */
+			len = dn_expand(response.buf, end, data, name, sizeof(name));
+			if (len <= 0) return -1;
+			if (queryType == T_PTR && domainName) {
+				/* we wanted a pointer */
+				*domainName = malloc(strlen(name) + 1);
+				strcpy(*domainName, name);
+				return 0;
+			}
+		} else if (type == T_A) {
+			/* we got an address */
+			if (queryType == T_A && ipNum) {
+				/* we wanted an address */
+				memcpy(ipNum, data, sizeof(*ipNum));
+				return 0;
+			}
+		}
+		
+		/* move ahead to next RR */
+		data += len;
+	} 
+	
+	return -1;
+}
+
+char * mygethostbyaddr(char * ipnum) {
+	int rc;
+	char * result;
+	char * strbuf;
+	char * chptr;
+	char * splits[4];
+	int i;
+
+	_res.retry = 1;
+	
+	strbuf = alloca(strlen(ipnum) + 1);
+	strcpy(strbuf, ipnum);
+	
+	ipnum = alloca(strlen(strbuf) + 20);
+	
+	for (i = 0; i < 4; i++) {
+		chptr = strbuf;
+		while (*chptr && *chptr != '.')
+			chptr++;
+		*chptr = '\0';
+		
+		if (chptr - strbuf > 3) return NULL;
+		splits[i] = strbuf;
+		strbuf = chptr + 1;
+	}
+	
+	sprintf(ipnum, "%s.%s.%s.%s.in-addr.arpa", splits[3], splits[2], splits[1], splits[0]);
+	
+	rc = do_query(ipnum, T_PTR, &result, NULL);
+	
+	if (rc) 
+		return NULL;
+	else
+		return result;
+}
+
+int mygethostbyname(char * name, struct in_addr * addr) {
+	int rc = do_query(name, T_A, NULL, addr);
+	if (!rc)
+		log_message("is-at %s", inet_ntoa(*addr));
+	return rc;
+}
+
+#endif

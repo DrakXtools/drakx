@@ -150,12 +150,7 @@ int nfsmount_prepare(const char *spec, int *flags, char **mount_opts)
 	/* first, try as IP address */
 	if (!inet_aton(hostname, &server_addr.sin_addr)) {
 		/* failure, try as machine name */
-		struct hostent * host;
-		host = mygethostbyname(hostname);
-		if (host && host->h_addr_list && (host->h_addr_list)[0]) {
-			server_addr.sin_addr = *((struct in_addr *) (host->h_addr_list)[0]);
-			log_message("is-at: %s", inet_ntoa(server_addr.sin_addr));
-		} else
+		if (mygethostbyname(hostname, &server_addr.sin_addr))
 			goto fail;
 	}
 

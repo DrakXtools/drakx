@@ -3,6 +3,9 @@
  *
  * Copyright 2000 MandrakeSoft
  *
+ * View the homepage: http://us.mandrakesoft.com/~gc/html/stage1.html
+ *
+ *
  * This software may be freely redistributed under the terms of the GNU
  * public license.
  *
@@ -13,18 +16,19 @@
  */
 
 /*
- * Portions from Erik Troan (ewt@redhat.com)
+ *  Portions from GRUB  --  GRand Unified Bootloader
+ *  Copyright (C) 2000  Free Software Foundation, Inc.
  *
- * Copyright 1996 Red Hat Software 
+ *  Itself based on etherboot-4.6.4 by Martin Renters.
  *
  */
 
-#ifndef H_DNS
-#define H_DNS 
+#ifndef _ADSL_H_
+#define _ADSL_H_
 
-#include <netinet/in.h>
+#include "stage1.h"
+#include "network.h"
 
-int mygethostbyname(char * name, struct in_addr * addr);
-char * mygethostbyaddr(char * ipnum);
+enum return_type perform_adsl(struct interface_info * intf);
 
 #endif

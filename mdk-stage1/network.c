@@ -40,7 +40,9 @@
 #include "mount.h"
 #include "automatic.h"
 #include "dhcp.h"
+#include "adsl.h"
 #include "url.h"
+#include "dns.h"
 
 #include "network.h"
 
@@ -51,7 +53,7 @@ static void error_message_net(void)  /* reduce code size */
 }
 
 
-static int configure_net_device(struct interface_info * intf)
+int configure_net_device(struct interface_info * intf)
 {
 	struct ifreq req;
 	struct rtentry route;
@@ -166,6 +168,15 @@ static int configure_net_device(struct interface_info * intf)
 	close(s);
 
 	intf->is_up = 1;
+
+	if (intf->boot_proto == BOOTPROTO_STATIC) {
+		/* I need to sleep a bit in order for kernel to finish
+		   init of the network device; if not, first sendto() for
+		   gethostbyaddr will get an EINVAL. */
+		wait_message("Bringing up networking...");
+		sleep(2);
+		remove_wait_message();
+	}
 
 	return 0;
 }
@@ -353,8 +364,8 @@ static void static_ip_callback(char ** strings)
 static enum return_type setup_network_interface(struct interface_info * intf)
 {
 	enum return_type results;
-	char * bootprotos[] = { "Static", "DHCP", NULL };
-	char * bootprotos_auto[] = { "static", "dhcp" };
+	char * bootprotos[] = { "Static", "DHCP", "ADSL", NULL };
+	char * bootprotos_auto[] = { "static", "dhcp", "adsl" };
 	char * choice;
 
 	results = ask_from_list_auto("Please choose the desired IP attribution.", bootprotos, &choice, "network", bootprotos_auto);
@@ -409,7 +420,11 @@ static enum return_type setup_network_interface(struct interface_info * intf)
 			intf->is_ptp = 0;
 		}
 		intf->boot_proto = BOOTPROTO_STATIC;
-	} else {
+
+		if (configure_net_device(intf))
+			return RETURN_ERROR;
+
+	} else if (streq(choice, "DHCP")) {
 		results = perform_dhcp(intf);
 
 		if (results == RETURN_BACK)
@@ -417,37 +432,37 @@ static enum return_type setup_network_interface(struct interface_info * intf)
 		if (results == RETURN_ERROR)
 			return results;
 		intf->boot_proto = BOOTPROTO_DHCP;
-	}
-	
-	if (configure_net_device(intf))
+
+		if (configure_net_device(intf))
+			return RETURN_ERROR;
+
+	} else if (streq(choice, "ADSL")) {
+		intf->boot_proto = BOOTPROTO_STATIC;
+
+		results = perform_adsl(intf);
+
+		if (results == RETURN_BACK)
+			return setup_network_interface(intf);
+		if (results == RETURN_ERROR)
+			return results;
+	} else
 		return RETURN_ERROR;
-
-	if (intf->boot_proto == BOOTPROTO_STATIC) {
-		/* I need to sleep a bit in order for kernel to finish
-		   init of the network device; if not, first sendto() for
-		   gethostbyaddr will get an EINVAL. */
-		wait_message("Bringing up networking...");
-		sleep(2);
-		remove_wait_message();
-	}
-
+	
 	return add_default_route();
 }
 
 
 static enum return_type configure_network(struct interface_info * intf)
 {
-	struct hostent * host;
+	char * dnshostname;
 
 	if (hostname && domain)
 		return RETURN_OK;
 
-	wait_message("Trying to resolve hostname...");
-	host = gethostbyaddr(&(intf->ip), strlen((void *) &(intf->ip)), AF_INET);
-	remove_wait_message();
+	dnshostname = mygethostbyaddr(inet_ntoa(intf->ip));
 
-	if (host && host->h_name) {
-		hostname = strdup(host->h_name);
+	if (dnshostname) {
+		hostname = strdup(dnshostname);
 		domain = strchr(strdup(hostname), '.') + 1;
 		log_message("got hostname and domain from dns entry, %s and %s", hostname, domain);
 		return RETURN_OK;
@@ -460,12 +475,12 @@ static enum return_type configure_network(struct interface_info * intf)
 
 	if (dns_server.s_addr != 0) {
 		wait_message("Trying to resolve dns...");
-		host = gethostbyaddr(&dns_server, strlen((void *) &dns_server), AF_INET);
+		dnshostname = mygethostbyaddr(inet_ntoa(dns_server));
 		remove_wait_message();
 	}
 
-	if (host && host->h_name) {
-		domain = strchr(strdup(host->h_name), '.') + 1;
+	if (dnshostname) {
+		domain = strchr(strdup(dnshostname), '.') + 1;
 		log_message("got domain from DNS fullname, %s", domain);
 	} else {
 		enum return_type results;
