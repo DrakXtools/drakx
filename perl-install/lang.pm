@@ -984,7 +984,7 @@ sub write {
     		    my $font_list = $charset2kde_font{$charset} || $charset2kde_font{default};
 		    my $font_small = $font_list->[0];
 		    my $font_huge = $font_small;
-		    $font_huge =~ s/(.*),../$1,24/;
+		    $font_huge =~ s/(.*?),\d+/$1,24/;
 		    s/^(StdFont)=.*/$1=$font_small,5,$kde_charset,50,0/;
 		    s/^(FailFont)=.*/$1=$font_small,5,$kde_charset,75,0/;
 		    s/^(GreetFont)=.*/$1=$font_huge,5,$kde_charset,50,0/;
