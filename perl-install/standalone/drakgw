@@ -33,7 +33,6 @@ use log;
 use c;
 use network::netconnect;
 use network::shorewall;
-use Data::Dumper;
 
 $::isInstall and die "Not supported during install.\n";
 
@@ -53,7 +52,6 @@ my $dhcpd_conf = "/etc/dhcpd.conf";
 my $cups_conf = "/etc/cups/cupsd.conf";
 
 my $shorewall = network::shorewall::read();
-Dumper($shorewall),"\n";
 
 my $in = 'interactive'->vnew('su');
 $::Wizard_title = N("Internet Connection Sharing");
