@@ -271,15 +271,19 @@ Driver: %s", $device, $conf->{NETWORK}, $conf->{IPADDR}, $conf->{BOOTPROTO}, $al
     if ($auto ne _('Yes')) {
 	$reconf_dhcp_server_intf = 0;
 	$server_ip = $conf->{IPADDR};
+	$nameserver_ip = $conf->{IPADDR};
 	$lan_address = $conf->{NETWORK};
 	$in->ask_from('',
 		      _("I can keep your current configuration and assume you already set up a DHCP server; in that case please verify I correctly read the C-Class Network that you use for your local network; I will not reconfigure it and I will not touch your DHCP server configuration.
 
+The default DNS entry is the Caching Nameserver configured on the firewall. You can replace that with your ISP DNS IP, for example.
+									
 Else, I can reconfigure your interface and (re)configure a DHCP server for you.
 
 ", $device),
 		      [ { label => _("C-Class Local Network"), val => \$lan_address, type => 'entry' },
 			{ label => _("(This) DHCP Server IP"), val => \$server_ip, type => 'entry' },
+			{ label => _("The DNS Server IP"), val => \$nameserver_ip, type => 'entry' },
 			{ label => _("Re-configure interface and DHCP server"), val => \$reconf_dhcp_server_intf, type => 'bool' } ])
 	  or goto step_warning_already_conf;
     }
@@ -374,7 +378,7 @@ if ($reconf_dhcp_server_intf) {
 	option subnet-mask 255.255.255.0;
 
 	option domain-name "homelan.org";
-	option domain-name-servers $server_ip;
+	option domain-name-servers $nameserver_ip;
 
 	range dynamic-bootp $lan_address.16 $lan_address.253;
 	default-lease-time 21600;
