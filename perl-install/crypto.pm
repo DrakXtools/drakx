@@ -57,6 +57,7 @@ sub mirrors {
 	local $SIG{ALRM} = sub { die "timeout" };
 	alarm 60;
 	my $distro_type = $o_distro_type || 'updates';
+	my $sub_dir = $distro_type eq 'cooker' ? '' : ($::corporate ? '/corporate' : '') . '/' . version();
 	foreach (<$f>) {
 	    my ($arch, $url, $dir) = m|$distro_type([^:]*):ftp://([^/]*)(/\S*)| or next;
 	    MDK::Common::System::compat_arch($arch) or
@@ -66,7 +67,7 @@ sub mirrors {
 		my $qu = quotemeta $_;
 		$url =~ /\.$qu(?:\..*)?$/ and $land = $url2land{$_};
 	    }
-	    $mirrors{$url} = [ $land, $dir ];
+	    $mirrors{$url} = [ $land, $dir . $sub_dir ];
 	}
 	http::getFile('/XXX'); #- close connection.
 	alarm 0; 
@@ -107,7 +108,7 @@ sub version() {
     $pkg && $pkg->version || '9.1'; #- safe but dangerous ;-)
 }
 
-sub dir { $mirrors{$_[0]}[1] . ($::corporate && '/corporate' || '') . '/' . version() }
+sub dir { $mirrors{$_[0]}[1] }
 sub ftp($) { ftp::new($_[0], dir($_[0])) }
 
 sub getFile {
