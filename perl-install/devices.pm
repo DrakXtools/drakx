@@ -77,12 +77,12 @@ sub make($) {
     } elsif (/(.*)(\d+)$/) {
 	    ($type, $major, $minor) =
 	     @{ ${{"fd"     => [ c::S_IFBLK(), 2,  0 ],
-		   "md"     => [ c::S_IFBLK(), 9,  0 ],
-		   "lp"     => [ c::S_IFCHR(), 6,  0 ],
-		   "scd"    => [ c::S_IFBLK(), 11, 0 ],
-		   "nst"    => [ c::S_IFCHR(), 9, 128],
-		   "ttyS"   => [ c::S_IFCHR(), 4, 64 ],
 		   "hidbp-mse-" => [ c::S_IFCHR(), 10, 32 ],
+		   "lp"     => [ c::S_IFCHR(), 6,  0 ],
+		   "md"     => [ c::S_IFBLK(), 9,  0 ],
+		   "nst"    => [ c::S_IFCHR(), 9, 128],
+		   "scd"    => [ c::S_IFBLK(), 11, 0 ],
+		   "ttyS"   => [ c::S_IFCHR(), 4, 64 ],
 	       }}{$1}};
 	    $minor += $2;
     }
@@ -93,17 +93,16 @@ sub make($) {
 		   "cdu31a"  => [ c::S_IFBLK(), 15, 0 ],
 		   "cdu535"  => [ c::S_IFBLK(), 24, 0 ],
 		   "cm206cd" => [ c::S_IFBLK(), 32, 0 ],
-		   "tty"     => [ c::S_IFCHR(),  5, 0 ],
 		   "gscd"    => [ c::S_IFBLK(), 16, 0 ],
 		   "mcd"     => [ c::S_IFBLK(), 23, 0 ],
 		   "mcdx"    => [ c::S_IFBLK(), 20, 0 ],
 		   "mem"     => [ c::S_IFCHR(), 1,  1 ],
+		   "optcd"   => [ c::S_IFBLK(), 17, 0 ],
 		   "psaux"   => [ c::S_IFCHR(), 10, 1 ],
 		   "random"  => [ c::S_IFCHR(), 1,  8 ],
-		   "optcd"   => [ c::S_IFBLK(), 17, 0 ],
 		   "sbpcd"   => [ c::S_IFBLK(), 25, 0 ],
 		   "sjcd"    => [ c::S_IFBLK(), 18, 0 ],
-		   "psaux"   => [ c::S_IFCHR(), 10, 1 ],
+		   "tty"     => [ c::S_IFCHR(),  5, 0 ],
 		   "usbmouse"=> [ c::S_IFCHR(), 10, 32], #- aka hidbp-mse-0
 		   "zero"    => [ c::S_IFCHR(), 1,  5 ],		     
 	       }}{$_} or die "unknown device $_" };

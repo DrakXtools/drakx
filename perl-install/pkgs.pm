@@ -270,7 +270,7 @@ sub setSelectedFromCompssList($$$$$$) {
     my ($compssListLevels, $packages, $size, $install_class, $lang, $isUpgrade) = @_;
     my ($level, $ind) = 100;
 
-    my @packages = values %$packages;
+    my @packages = allpackages($packages);
     my @places = do {
 	map_index { $ind = $::i if $_ eq $install_class } @{$compssListLevels};
 	defined $ind or log::l("unknown install class $install_class in compssList"), return;

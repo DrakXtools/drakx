@@ -969,7 +969,8 @@ sub setup_thiskind {
 	    my @r = $o->load_module($type) or return;
 	    push @l, \@r;
 	} else {
-	    $o->ask_warn('', [ pci_probing::main::list() ]);
+	    eval { commands::modprobe("isapnp") };
+	    $o->ask_warn('', [ pci_probing::main::list(), cat_("/proc/isapnp") ]);
 	}
     }
 }
