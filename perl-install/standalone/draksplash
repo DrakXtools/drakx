@@ -64,7 +64,7 @@ my %scale_size = ('tx' => ($theme{res}{w} / $font_size{w}),
                   'ph' => $theme{res}{h},
                   );
 
-my %first = ('frame' => new Gtk2::Frame(N("first step creation")),
+my %first = ('frame' => Gtk2::Frame->new(N("first step creation")),
              'widget' => { 
                  'label' => {
                      'res' => N("final resolution"),
@@ -89,7 +89,7 @@ my %first = ('frame' => new Gtk2::Frame(N("first step creation")),
              'pos' => [ 'name', 'res', 'file', 'boot_conf', #'save', #'kill'
 					],
              );
-my %boot_conf_frame = ('frame' => new Gtk2::Frame(N("Configure bootsplash picture")),
+my %boot_conf_frame = ('frame' => Gtk2::Frame->new(N("Configure bootsplash picture")),
                        'widget' => {
                            'label' => {
                                'tx' => N("x coordinate of text box\nin number of characters"),
@@ -143,8 +143,8 @@ my %boot_conf_frame = ('frame' => new Gtk2::Frame(N("Configure bootsplash pictur
                                   ],
                        );
 #- var action is used to hide/show the correct frame
-my $VB2 = new Gtk2::VBox(0,5);
-my $first_vbox = new Gtk2::VBox(0,5);
+my $VB2 = Gtk2::VBox->new(0,5);
+my $first_vbox = Gtk2::VBox->new(0,5);
 
 &mk_frame($VB2, \%first);
 #****************************- Signal event actions
@@ -154,7 +154,7 @@ $first{widgets}{combo}{res}->entry->signal_connect(changed => sub {
 	($theme{res}{w}, $theme{res}{h}) = $theme{res}{res} =~ /([^x]+)x([^x]+)/;
 	&set_scale_size;
 	$boot_conf_frame{frame}->destroy;
-	$boot_conf_frame{frame} = new Gtk2::Frame(N("Configure bootsplash picture"));
+	$boot_conf_frame{frame} = Gtk2::Frame->new(N("Configure bootsplash picture"));
 	&make_boot_frame;
 	$first_vbox->add($boot_conf_frame{frame});
 	member($theme{name}, giv_exist_thm()) and thm_in_this_res() and get_this_thm_res_conf() || $in->ask_warn(N("Notice"), N("This theme does not yet have a bootsplash in %s !", $theme{res}{res}));
@@ -358,7 +358,7 @@ sub tool_tip {
 	foreach (keys %{$ref->{widget}}) {
 		$_ eq 'tooltip' and next;
 	  	if ($ref->{widget}{$_}{$name}) {
-		  ! $adj{$name.'_tip'} and $adj{$name.'_tip'} = new Gtk2::Tooltips();
+		  ! $adj{$name.'_tip'} and $adj{$name.'_tip'} = Gtk2::Tooltips->new;
 		  $adj{$name.'_tip'}->set_tip($ref->{widgets}{$_}{$name}, $ref->{widget}{tooltip}{$name}, '');
 		}
 	}
@@ -374,14 +374,14 @@ sub mk_frame {
 	foreach my $pos (@{$ref->{pos}}) {
        my $key = $1.'hb' if $pos =~ m/^(\w+)(\s+)?(\w+)?$/;
 	  #- open a new hbox
-	  $hboxes{$key} = new Gtk2::HBox($3 ? 1 : 0, 5);
+	  $hboxes{$key} = Gtk2::HBox->new($3 ? 1 : 0, 5);
 	  #- look for label
 	  $ref->{widget}{label}{$1}
-	    and $ref->{widgets}{label}{$1} = new Gtk2::Label($ref->{widget}{label}{$1}) 
+	    and $ref->{widgets}{label}{$1} = Gtk2::Label->new($ref->{widget}{label}{$1}) 
 	    and $hboxes{$key}->add($ref->{widgets}{label}{$1});
 	  #- look for scale
 	  $ref->{widget}{scale}{$1}
-	    and $ref->{widgets}{scale}{$1} = new Gtk2::HScale($adj{$1} =  new Gtk2::Adjustment(0, 0, $scale_size{$1}, 1, 10, 0))
+	    and $ref->{widgets}{scale}{$1} = Gtk2::HScale->new($adj{$1} =  Gtk2::Adjustment->new(0, 0, $scale_size{$1}, 1, 10, 0))
 	    and $hboxes{$key}->add($ref->{widgets}{scale}{$1})
 	    and $ref->{widgets}{scale}{$1}->set_digits(0);
 	  $adj{$1} and $adj{$1}->set_value($theme{boot_conf}{$1});
@@ -395,12 +395,12 @@ sub mk_frame {
      }
 	  #- look for checkbox
 	  $ref->{widget}{check}{$1}
-	    and $ref->{widgets}{check}{$1} = new Gtk2::CheckButton($ref->{widget}{check}{$1})
+	    and $ref->{widgets}{check}{$1} = Gtk2::CheckButton->new($ref->{widget}{check}{$1})
 	    and $hboxes{$key}->add($ref->{widgets}{check}{$1})
 	    and $ref->{widgets}{check}{$1}->set_active(1);
 	  #- look for button
 	  $ref->{widget}{button}{$1}
-	    and $ref->{widgets}{button}{$1} = new Gtk2::Button($ref->{widget}{button}{$1})
+	    and $ref->{widgets}{button}{$1} = Gtk2::Button->new($ref->{widget}{button}{$1})
 	    and  $hboxes{$key}->add($ref->{widgets}{button}{$1});
 	  #- look for tooltips
 	  $ref->{widget}{tooltip}{$1} and tool_tip($1, \%$ref);
@@ -425,7 +425,7 @@ sub dec2hex {
 
 #- Desc  => prepare and set all signal_connect for boot_frame widget 
 sub make_boot_frame() {
-	my $VB = new Gtk2::VBox(0,5);
+	my $VB = Gtk2::VBox->new(0,5);
 	&mk_frame($VB, \%boot_conf_frame);
 	#- open a color choose box
 	$boot_conf_frame{widgets}{button}{pc}->signal_connect(clicked => sub {
@@ -496,13 +496,13 @@ sub kill_preview() {
 sub show_prev {
  my ($txt_tl_x, $txt_tl_y, $txt_width, $txt_height, $prog_tl_x, $prog_tl_y, $prog_width, $prog_height) = @_;
  $prev_window
-   or $prev_window = new Gtk2::Window('toplevel'); 
+   or $prev_window = Gtk2::Window->new('toplevel'); 
 #-PO  First %s is theme name, second %s (in parenthesis) is resolution
  $prev_window->set_title(N("%s BootSplash (%s) preview", $theme{name}, $theme{res}{res}));
  $prev_pic = gtkcreate_pixbuf($img_file);
  $prev_pic->scale_simple($theme{res}{w}, $theme{res}{h}, 'hyper');
  $prev_canvas && $prev_canvas->isa('Gtk2::Widget')
-	 or $prev_canvas = new Gtk2::DrawingArea() and $prev_window->add($prev_canvas);
+	 or $prev_canvas = Gtk2::DrawingArea->new and $prev_window->add($prev_canvas);
  $prev_canvas->set_size_request($theme{res}{w}, $theme{res}{h});
      $prev_canvas->signal_connect(expose_event => sub {
      my ($w, $event) = @_;
