@@ -1,3 +1,23 @@
+2001/01/21  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* mdk-stage1/nfsmount.c: fix remaining perror's
+
+	* mdk-stage1/stage1.c: fix remaining perror's
+	  - better msg in fatal errors
+	  - do not include code to spawn a shell for releases
+
+2001/01/21  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/pt_BR.po, share/po/da.po: updated Danish and Brazilian files
+
+2001/01/21  Pixel  <pixel@mandrakesoft.com>
+
+	* install_steps_interactive.pm (selectMouse): use ask_from_treelist_
+
+	* interactive.pm (ask_from_treelist_): created, split with the separator,
+	call translate on
+	words, then re-join.
+
 2001/01/19  François Pons  <fpons@mandrakesoft.com>
 
 	* install_any.pm: fixes for CD not changeable.
