@@ -265,6 +265,14 @@ sub ask_mntpoint_s { #- }{}
     } else {
 	$o->ask_from_({ messages => N("Choose the mount points"),
 			interactive_help_id => 'ask_mntpoint_s',
+			callbacks => {
+			    complete => sub {
+				require diskdrake::interactive;
+				eval { 1, find_index {
+				    !diskdrake::interactive::check_mntpoint($o, $_->{mntpoint}, $_, $o->{all_hds});
+				} @fstab };
+			    },
+			},
 		      },
 		      [ map { 
 			  { 
