@@ -1289,6 +1289,34 @@ sub install($$$;$$) {
 		log::l("rpm database closed");
 
 		close OUTPUT;
+
+		#- now search for child process which may be locking the cdrom, making it unable to be ejected.
+		my (@killpid, %tree, $pid);
+		local (*DIR, *F, $_);
+		opendir DIR, "/proc";
+		while ($pid = readdir DIR) {
+		    $pid =~ /^\d+$/ or next;
+		    open F, "/proc/$pid/status";
+		    while (<F>) {
+			/^Pid:\s+(\d+)/ and $pid == $1 || die "incorrect pid reported for $pid (found $1)";
+			if (/^PPid:\s+(\d+)/) {
+			    $tree{$pid} and die "PPID already found for $pid, previously $tree{$pid}, now $1";
+			    $tree{$pid} = $1;
+			}
+		    }
+		    close F;
+		}
+		closedir DIR;
+		foreach (keys %tree) {
+		    $pid = $_; while ($pid = $tree{$pid}) { $pid == $$ and push @killpid, $_ }
+		}
+		if (@killpid) {
+		    log::l("killing process ". join(", ", @killpid));
+		    kill 15, @killpid;
+		    sleep 2;
+		    kill 9, @killpid;
+		}
+
 		c::_exit(0);
 	    }
 
