@@ -781,7 +781,6 @@ sub new {
     $o->_create_window($title);
     while (my $e = shift @tempory::objects) { $e->destroy }
     push @interactive::objects, $o if !$opts{no_interactive_objects};
-#    $o->{rwindow}->set_position('center-always') if $::isStandalone;
     $o->{rwindow}->set_modal(1) if ($grab || $o->{grab} || $o->{modal}) && !$::isInstall;
     $o->{rwindow}->set_transient_for($o->{transient}) if $o->{transient};
 
@@ -843,7 +842,7 @@ sub new {
 					   }
 				       });
 
-		$::WizardWindow->set_position('center_always');
+		$::WizardWindow->set_position('center_always') if !$::isStandalone;
 		$::WizardTable->attach($draw1, 0, 2, 0, 1, 'fill', 'fill', 0, 0);
 		$::WizardTable->set_size_request(540,420);
 	    }

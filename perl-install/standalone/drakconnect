@@ -221,7 +221,7 @@ $window1->{window}->add(
                                                                               }),
                                            gtksignal_connect(Gtk2::Button->new(N("Launch the wizard")),
                                                              clicked => sub {
-                                                                 system("drakconnect");
+                                                                 system("drakconnect&");
 								 #- reload everything...
 								 $netcnx = {}; $netc = {}; $intf = {};
 								 network::netconnect::read_net_conf('', $netcnx, $netc);
@@ -413,10 +413,10 @@ Configure them first by clicking on 'Configure'")),1,1,0);
 			);
 	my $i = 0;
 	foreach my $j (@conf_data) {
-	    $infos[2*$i] = new Gtk2::HBox(0,0);
 	    my $l = new Gtk2::Label($j->[0]);
 	    $l->set_justify('left');
-	    $infos[2*$i]->pack_start($l,1,1,0);
+	    $infos[2*$i] = gtkpack_(Gtk2::HBox->new,
+                                 1);
 	    $vbox_local->pack_start($infos[2*$i],0,0,0);
 	    if (defined $j->[2]) {
 		my $c = new Gtk2::OptionMenu;
@@ -479,7 +479,6 @@ Configure them first by clicking on 'Configure'")),1,1,0);
 	my @infos = @{$card_tab[2*$_]};
 	$intf->{"eth$_"}{BOOTPROTO} eq "dhcp" or $infos[8]->hide;
     }
-    $window->set_position('center_always');
     $window->run;
 }
 
