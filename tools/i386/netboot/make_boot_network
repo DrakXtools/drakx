@@ -3,6 +3,13 @@
 type=$1
 [ -z "$type" ] && { echo "usage: $0 <network card type> (eg: 3c90x)" ; exit 1; }
 
+if [ ! -d "$type" ]; then
+        echo "$type: no such network driver"
+        echo "available drivers are:"
+        echo `find -not -name CVS -type d -maxdepth 1 -printf '%P\n'`
+        exit 1;
+fi
+
 [ -e menu.lst ] || { echo "missing file menu.lst, create one based on menu.lst.example"; exit 1; }
 
 ln -sf ${type}/stage1 stage1
