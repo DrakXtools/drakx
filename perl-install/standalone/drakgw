@@ -62,8 +62,9 @@ $in->isa('interactive::gtk') and $::isWizard = 1;
 sub sys { system(@_) == 0 or log::l("[drakgw] Warning, sys failed for $_[0]") }
 
 sub outpend { 
-    log::explanations("modified file $_[0]");
-    my $f = shift; local *F; open F, ">>$f" or die "outpend in file $f failed: $!\n"; print F foreach @_;
+    my $f = shift;
+    log::explanations("modified file $f");
+    append_to_file($f, @_);
 }
 
 sub start_daemons () {
