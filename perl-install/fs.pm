@@ -327,8 +327,6 @@ sub prepare_write_fstab {
 
 	    my $fs_type = $_->{fs_type} || 'auto';
 
-	    my $dev = $device;
-
 	    $mntpoint =~ s/ /\\040/g;
 	    $device =~ s/ /\\040/g;
 
