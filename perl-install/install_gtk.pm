@@ -3,7 +3,8 @@ package install_gtk; # $Id$
 use diagnostics;
 use strict;
 
-use ugtk2 qw(:wrappers :helpers :create);
+use ugtk2;
+use mygtk2;
 use common;
 use lang;
 use devices;
@@ -117,7 +118,7 @@ sub install_theme {
 
     load_rc($o, $o->{theme} ||= default_theme($o));
     load_font($o);
-    gtkset_background(@background) if !$::move;
+    mygtk2::set_root_window_background(@background) if !$::move;
 }
 
 #------------------------------------------------------------------------------
@@ -129,12 +130,12 @@ sub create_help_window {
 	$w->{window}->foreach(sub { $_[0]->destroy }, undef);
     } else {
 	$w = $o->{help_window} = bless {}, 'ugtk2';
-	$w->{rwindow} = $w->{window} = Gtk2::Window->new('toplevel');
+	$w->{rwindow} = $w->{window} = gtknew('Window');
 	$w->{rwindow}->set_uposition($::rootwidth - $::helpwidth, $::rootheight - $::helpheight);
 	$w->{rwindow}->set_size_request($::helpwidth, $::helpheight);
 	$w->{rwindow}->set_title('skip');
     }
-    gtkadd($w->{window}, create_scrolled_window($o->{help_window_text} = Gtk2::TextView->new));
+    gtkadd($w->{window}, child => gtknew('ScrolledWindow', child => $o->{help_window_text} = gtknew('TextView')));
     $w->show;
 }
 
@@ -146,27 +147,25 @@ sub create_steps_window {
     return if $::stepswidth == 0;
 
     $o->{steps_window} and $o->{steps_window}->destroy;
-    my $w = bless {}, 'ugtk2';
-    $w->{rwindow} = $w->{window} = Gtk2::Window->new('toplevel');
-    $w->{rwindow}->set_uposition(lang::text_direction_rtl() ? ($::rootwidth - $::stepswidth - 8) : 8, 150);
-    $w->{rwindow}->set_size_request($::stepswidth, -1);
-    $w->{rwindow}->set_name('Steps');
-    $w->{rwindow}->set_title('skip');
 
-    $steps{$_} ||= gtkcreate_pixbuf("steps_$_") foreach qw(on off);
-    my $category = sub { gtkset_name(Gtk2::Label->new($_[0]), 'Step-categories') };
+    $steps{$_} ||= gtknew('Pixbuf', file => "steps_$_") foreach qw(on off);
+    my $category = sub { gtknew('Label', text => $_[0], widget_name => 'Step-categories') };
 
-    gtkpack__(my $vb = Gtk2::VBox->new(0, 3), $steps{inst} = $category->(N("System installation")), '');
+    my @l = ($category->(N("System installation")), '');
     foreach (grep { !eval $o->{steps}{$_}{hidden} } @{$o->{orderedSteps}}) {
-	$_ eq 'setRootPassword'
-	  and gtkpack__($vb, '', '', $steps{conf} = $category->(N("System configuration")), '');
-	$steps{steps}{$_} = { img => gtkcreate_img('steps_off.png'),
-			      txt => Gtk2::Label->new(translate($o->{steps}{$_}{text})) };
-	gtkpack__($vb, gtkpack__(Gtk2::HBox->new(0, 7), $steps{steps}{$_}{img}, $steps{steps}{$_}{txt}));
-					      
+	if ($_ eq 'setRootPassword') {
+	    push @l, '', '', $category->(N("System configuration")), '';
+	}
+	my $img = gtknew('Image', file => 'steps_off.png');
+	$steps{steps}{$_}{img} = $img;
+	push @l, gtknew('HBox', spacing => 7, children_tight => [ $img, translate($o->{steps}{$_}{text}) ]);					      
     }
 
-    gtkadd($w->{window}, $vb);
+    my $w = bless {}, 'ugtk2';
+    $w->{rwindow} = $w->{window} = 
+      gtknew('Window', width => $::stepswidth, widget_name => 'Steps', title => 'skip',
+	     position => [ lang::text_direction_rtl() ? ($::rootwidth - $::stepswidth - 8) : 8, 150 ],
+	     child => gtknew('VBox', spacing => 3, children_tight => \@l));
     $w->show;
     $o->{steps_window} = $w;
 }
@@ -192,18 +191,19 @@ sub create_logo_window {
 
     return if $::logowidth == 0 || $::move;
 
-    gtkdestroy($o->{logo_window});
+    mygtk2::may_destroy($o->{logo_window});
 
-    my $w = bless {}, 'ugtk2';
-    $w->{rwindow} = $w->{window} = Gtk2::Window->new('toplevel');
-#    $w->{rwindow}->set_position(0, 0);
-    $w->{rwindow}->set_size_request($::logowidth, $::logoheight);
-    $w->{rwindow}->set_name("logo");
-    $w->{rwindow}->set_title('skip');
-    $w->show;
     my $file = $o->{meta_class} eq 'firewall' ? "logo-mandrake-Firewall.png" : "logo-mandrake.png";
     -r $file or $file = "$ENV{SHARE_PATH}/$file";
-    -r $file and gtkadd($w->{window}, gtkcreate_img($file));
+
+    my $w = bless {}, 'ugtk2';
+    $w->{rwindow} = $w->{window} = 
+      gtknew('Window', 
+	     width => $::logowidth, height => $::logoheight, 
+	     title => 'skip', widget_name => 'logo',
+	     if_(-r $file, child => gtknew('Image', file => $file)),
+	 );
+    $w->show;
     $o->{logo_window} = $w;
 }
 
