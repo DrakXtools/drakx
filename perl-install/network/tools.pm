@@ -11,8 +11,8 @@ use MDK::Common::System qw(getVarsFromSh);
 @EXPORT = qw(connect_backend connected connected_bg disconnect_backend is_dynamic_ip passwd_by_login read_providers_backend read_secret_backend set_cnx_script test_connected write_cnx_script write_initscript write_secret_backend);
 
 our $connect_prog   = "/etc/sysconfig/network-scripts/net_cnx_pg";
-my $connect_file    = "/etc/sysconfig/network-scripts/net_cnx_up";
-my $disconnect_file = "/etc/sysconfig/network-scripts/net_cnx_down";
+our $connect_file    = "/etc/sysconfig/network-scripts/net_cnx_up";
+our $disconnect_file = "/etc/sysconfig/network-scripts/net_cnx_down";
 
 sub set_cnx_script {
     my ($netc, $type, $up, $down, $type2) = @_;
