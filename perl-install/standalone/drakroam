@@ -201,7 +201,7 @@ gtkadd(gtkset_border_width($w->{window}, 2),
                                    1, create_scrolled_window($AvailableList),
                                    0, gtkpack(create_hbox(),
 					      gtksignal_connect(Gtk2::Button->new(N("Add")), clicked => sub {
-								    my @selected = $AvailableList->get_selected_indices;
+								    my @selected = $AvailableList->get_selected_indices or return;
 								    my ($mode, $channel, $key);
 								    my $essid = $AvailableList->{data}["@selected"][0];
 								    my $dhcp = 1; # assume dhcp for new networks
