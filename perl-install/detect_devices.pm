@@ -456,11 +456,11 @@ sub add_addons {
     my ($addons, @l) = @_;
 
     foreach (split "\n", $addons) {
-	/^\s/ and die "bad detect_devices::probeall_addons line \"$_\"";
+	/^\s/ and die qq(bad detect_devices::probeall_addons line "$_");
 	s/^#.*//;
 	s/"(.*?)"/$1/g;
 	next if /^$/;
-	my ($vendor, $id, $driver, $description) = split("\t", $_, 4) or die "bad detect_devices::probeall_addons line \"$_\"";
+	my ($vendor, $id, $driver, $description) = split("\t", $_, 4) or die qq(bad detect_devices::probeall_addons line "$_");
 	foreach (@l) {
 	    $_->{vendor} == hex $vendor && $_->{id} == hex $id or next;
 	    put_in_hash($_, { driver => $driver, description => $description });
