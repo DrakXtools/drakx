@@ -5,6 +5,7 @@ package network::shorewall; # $Id$
 
 use detect_devices;
 use network::netconnect;
+use network::ethernet;
 use run_program;
 use common;
 use log;
@@ -66,15 +67,20 @@ sub default_interfaces {
 	defined $card_netconnect and log::l("[drakgw] Information from netconnect: ignore card $card_netconnect");
 
 	my @l = detect_devices::getNet() or return;
+
+my @all_cards = network::ethernet::get_eth_cards();
+my %net_devices = network::ethernet::get_eth_cards_names(@all_cards);
+
 	$in->ask_from('',
-                      N("Please enter the name of the interface connected to the internet.
+		N("Please enter the name of the interface connected to the internet.
 
 Examples:
 		ppp+ for modem or DSL connections, 
 		eth0, or eth1 for cable connection, 
 		ippp+ for a isdn connection.
 "),
-                   [ { label => N("Net Device"), val => \$card_netconnect, list => \@l } ]);
+      [ { label => N("Net Device"), val => \$card_netconnect, list => [ sort keys %net_devices ], format => sub { $net_devices{$_[0]} || $_[0] }, not_edit => 0 } ]);
+
 	$conf{net_interface} = $card_netconnect;
 	#$conf{net_interface} = network::netconnect::get_net_device() || $l[0];
 	$conf{loc_interface} = [  grep { $_ ne $conf{net_interface} } @l ];
