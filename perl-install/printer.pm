@@ -99,7 +99,7 @@ sub get_default_spooler () {
 sub set_default_spooler ($) {
     my ($printer) = @_;
     # Make Foomatic config directory if it does not exist yet
-    if (!(-d $FOOMATICCONFDIR)) {mkdir $FOOMATICCONFDIR;}
+    if (!(-d "$prefix$FOOMATICCONFDIR")) {mkdir "$prefix$FOOMATICCONFDIR";}
     # Mark the default driver in a file
     open DEFSPOOL, "> $prefix$FOOMATIC_DEFAULT_SPOOLER" || 
 	die "Cannot create $prefix$FOOMATIC_DEFAULT_SPOOLER!";
