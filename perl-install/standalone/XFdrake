@@ -49,6 +49,8 @@ begin:
 { 
     my $in = 'interactive'->vnew('su', 'X');
 
+    modules::mergein_conf('/etc/modules.conf') if -r '/etc/modules.conf';
+
     $::isEmbedded and kill 'USR2', $::CCPID;
 
     my $rc = do {	
