@@ -26,11 +26,14 @@ endif
 
 all: install
 
-build: xwait
+build: xwait isolinux/boot.msg
 	cd $(STAGE1) && ADDITIONAL_DEFS="-DMANDRAKE_MOVE" MOVE=1 make init stage1-network stage1-cdrom init-move
 	sudo ./collect-directories-to-create.pl $(DEST_LIVETREE) > data/directories-to-create
 	sudo find $(DEST_LIVETREE)/etc -type f | perl -pe 's|$(DEST_LIVETREE)||' > data/all-etcfiles
 	$(MAKE) -C ../perl-install mo_files
+
+isolinux/boot.msg: data/isolinux-graphic.bmp
+	lilo-bmp2mdk mode:0x103 progress:371,144,4,8,64+60 clear:600,800,64+127 pos:0,0 < $< > $@
 
 install: build
 	 #- todo: make_boot_img alike to create boot volume from ../mdk-stage1/stage1-cdrom (isolinux mandatory since stock kernel is so big)
