@@ -65,7 +65,8 @@ push(@generic_tool,@all_drakxtools);
 
 my $kernel_release = chomp_(`uname -r`);
 my $mandrake_release = chomp_(cat_('/etc/mandrakelinux-release'));
-(my $mandrake_version) = $mandrake_release =~ /(\d+\.\d+)/;
+#- unused for now
+#- (my $mandrake_version) = $mandrake_release =~ /(\d+\.\d+)/;
 
 if ($mandrake_release =~ /(official|community)/i) {
     my $anthill = 'http://bugs.mandrakelinux.com';
