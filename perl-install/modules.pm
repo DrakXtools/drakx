@@ -423,7 +423,7 @@ sub unload($;$) {
 sub load_raw {
     my @l = map { my ($i, @i) = @$_; [ $i, \@i ] } @_;
 
-    my $cz = "/lib/modules.cz"; -e $cz or $cz .= "2";
+    my $cz = "/lib/modules" . (arch() eq 'sparc64' && "64") . ".cz"; -e $cz or $cz .= "2";
     run_program::run("extract_archive", $cz, "/tmp", map { "$_->[0].o" } @l);
     my @failed = grep {
 	my $m = "/tmp/$_->[0].o";

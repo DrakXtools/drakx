@@ -7,7 +7,8 @@ BOOT_IMG = pcmcia_ks.img network_ks.img
 RELEASE_BOOT_IMG += pcmcia.img
 endif
 ifeq (sparc,$(ARCH))
-BOOT_IMG = live.img tftp.img tftprd.img
+BOOT_IMG = live.img tftp.img tftprd.img live64.img tftp64.img tftprd64.img
+RELEASE_BOOT_IMG += hd64.img cdrom64.img network64.img
 endif
 BOOT_IMG += $(RELEASE_BOOT_IMG)
 
@@ -70,11 +71,11 @@ rescue: modules
 
 network_ks.rdz pcmcia_ks.rdz: %_ks.rdz: %.rdz
 
-network.rdz pcmcia.rdz hd.rdz cdrom.rdz live.rdz tftp.rdz tftprd.rdz: dirs modules
+network.rdz pcmcia.rdz hd.rdz cdrom.rdz live.rdz tftp.rdz tftprd.rdz network64.rdz hd64.rdz cdrom64.rdz live64.rdz tftp64.rdz tftprd64.rdz: dirs modules
 	./make_boot_img $@ $(@:%.rdz=%)
 
 $(BOOT_IMG): %.img: %.rdz
-	`./tools/specific_arch ./make_boot_img` $@ $(@:%.img=%)
+	./make_boot_img $@ $(@:%.img=%)
 
 tar: clean
 	rpm -qa > needed_rpms.lst
@@ -89,7 +90,7 @@ $(BOOT_IMG:%=%f): %f: %
 	xmessage "Floppy done"
 
 clean:
-	rm -rf $(BOOT_IMG) $(BOOT_RDZ) $(BINS) modules install_pcmcia_modules vmlinu* System.map
+	rm -rf $(BOOT_IMG) $(BOOT_RDZ) $(BINS) modules modules64 install_pcmcia_modules vmlinu* System*.map
 	rm -rf install/*/sbin/install install/*/sbin/init
 	for i in $(DIRS) rescue; do make -C $$i clean; done
 	find . -name "*~" -o -name ".#*" | xargs rm -f

@@ -115,7 +115,7 @@ my %ignoreBadPkg = (
 #- simpler and faster depslist reader, this gets (sizeDeps).
 sub packageHeaderFile   { my ($pkg) = @_; $pkg->{file} }
 sub packageName         { my ($pkg) = @_; $pkg->{file} =~ /([^\(]*)(?:\([^\)]*\))?-[^-]+-[^-]+/ ? $1 : die "invalid file `$pkg->{file}'" }
-sub packageSpecificArch { my ($pkg) = @_; $pkg->{file} =~ /[^\(]*(?:\(([^\)])*\))?-[^-]+-[^-]+/ ? $1 : die "invalid file `$pkg->{file}'" }
+sub packageSpecificArch { my ($pkg) = @_; $pkg->{file} =~ /[^\(]*(?:\(([^\)]*)\))?-[^-]+-[^-]+/ ? $1 : die "invalid file `$pkg->{file}'" }
 sub packageVersion      { my ($pkg) = @_; $pkg->{file} =~ /.*-([^-]+)-[^-]+/ ? $1 : die "invalid file `$pkg->{file}'" }
 sub packageRelease      { my ($pkg) = @_; $pkg->{file} =~ /.*-[^-]+-([^-]+)/ ? $1 : die "invalid file `$pkg->{file}'" }
 
@@ -181,11 +181,19 @@ sub extractHeaders($$$) {
 }
 
 #- size and correction size functions for packages.
+#- invCorrectSize corrects size in the range 0 to 3Gb approximately, so
+#- it should not be used outside these levels.
+#- but since it is an inverted parabolic curve starting above 0, we can
+#- get a solution where X=Y at approximately 9.3Gb. we use this point as
+#- a limit to change the approximation to use a linear one.
+#- for information above this point, we have the corrected size below the
+#- original size wich is absurd, this point is named D below.
 my $A = -1.922e-05;
 my $B = 1.18411;
 my $C = 23.2; #- doesn't take hdlist's into account as getAvailableSpace will do it.
-sub correctSize { max($_[0], ($A * $_[0] + $B) * $_[0] + $C) } #- size correction in MB.
-sub invCorrectSize { min($_[0], (sqrt(max(sqr($B) + 4 * $A * ($_[0] - $C), 0)) - $B) / 2 / $A) } #- size correction in MB.
+my $D = (sqrt(sqr($B - 1) - 4 * $A * $C) - ($B - 1)) / 2 / $A;
+sub correctSize { $_[0] < $D ? ($A * $_[0] + $B) * $_[0] + $C : $_[0] } #- size correction in MB.
+sub invCorrectSize { $_[0] < $D ? (sqrt(sqr($B) + 4 * $A * ($_[0] - $C)) - $B) / 2 / $A : $_[0]; } #- size correction in MB.
 
 sub selectedSize {
     my ($packages) = @_;
@@ -426,7 +434,7 @@ sub psUsingHdlist {
 		if ($old_pkg) {
 		    if (packageVersion($pkg) eq packageVersion($old_pkg) && packageRelease($pkg) eq packageRelease($old_pkg)) {
 			if (better_arch($specific_arch, packageSpecificArch($old_pkg))) {
-			    log::l("replacing old package with package $1 with better arch");
+			    log::l("replacing old package with package $1 with better arch: $specific_arch");
 			    $packages->[0]{packageName($pkg)} = $pkg;
 			} else {
 			    log::l("keeping old package against package $1 with worse arch");
@@ -438,7 +446,7 @@ sub psUsingHdlist {
 		    $packages->[0]{packageName($pkg)} = $pkg;
 		}
 	    } else {
-	        log::l("ignoring package $1 with incompatible arch");
+	        log::l("ignoring package $1 with incompatible arch: $specific_arch");
 	    }
 	} else {
 	    die "bad hdlist file: $newf";

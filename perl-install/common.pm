@@ -136,14 +136,12 @@ sub expand_symlinks {
 }
 
 sub arch() {
-    require Config;
-    Config->import;
-    no strict;
-    $Config{archname} =~ /(.*)-/ and $1;
+    require c;
+    c::kernel_arch();
 }
 sub better_arch {
     my ($new, $old) = @_;
-    while ($new && $new != $old) { $new = $compat_arch{$_} }
+    while ($new && $new ne $old) { $new = $compat_arch{$new} }
     $new;
 }
 sub compat_arch { better_arch(arch(), $_[0]) }

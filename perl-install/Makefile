@@ -125,6 +125,9 @@ endif
 
 	if [ -f ../modules/modules.cz* ]; then \
 		cp -f ../modules/modules.cz* $(DEST)/lib/; \
+		if [ -f ../modules64/modules.cz* ]; then \
+			cp -f ../modules64/modules.cz* $(DEST)/lib/modules64.cz2; \
+		fi \
 	else \
 		cp -f ../modules/modules.cpio.bz2 $(DEST)/lib/; \
 		install -d $(DEST)/lib/modules; \

@@ -83,6 +83,7 @@ sub new($$) {
 	    } elsif (arch() =~ /^sparc/) {
 		local $_ = cat_("/proc/fb");
 		if (/Mach64/) { @servers = qw(Mach64) }
+		elsif (/Permedia2/) { @servers = qw(3DLabs) }
 		else { @servers = qw(Xsun24) }
 	    }
 	    @servers = qw(PPCDummy) if arch() eq "ppc";
@@ -946,9 +947,6 @@ Section "Screen"
     EndSubsection
 EndSection
 
-END
-    if (arch() =~ /^sparc/) {
-	print F <<END_FBDEV_SPARC;
 Section "Screen"
     Driver "svga"
     Device      "svga"
@@ -959,9 +957,7 @@ Section "Screen"
         ViewPort    0 0
     EndSubsection
 EndSection
-END_FBDEV_SPARC
-    } else {
-	print F <<END_FBDEV;
+
 Section "Screen"
     Driver      "accel"
     Device      "svga"
@@ -972,8 +968,7 @@ Section "Screen"
         ViewPort    0 0
     EndSubsection
 EndSection
-END_FBDEV
-    }
+END
 }
 #-   ModeLine "640x480"     28     640  672  768  800   480  490  492  525
 #-######################################################################################

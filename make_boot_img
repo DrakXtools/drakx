@@ -31,7 +31,14 @@ $install = $ {{
     pcmcia => "full-install",
     network => "install",
     cdrom => "local-install",
-    hd => "local-install"
+    hd => "local-install",
+    live64 => "full-install",
+    tftp64 => "full-install",
+    tftprd64 => "full-install",
+    pcmcia64 => "full-install",
+    network64 => "install",
+    cdrom64 => "local-install",
+    hd64 => "local-install",
 }}{$type} or die;
 
 $img =~ /rdz$/ ? initrd($mnt, $img) : $::{"boot_img_$arch"}->($mnt, $img);
@@ -40,6 +47,7 @@ sub install_s { _ "strip $_[0]"; _ "$sudo install $_[0] $_[1]" }
 
 sub initrd {
     my ($mnt, $img) = @_;
+    my ($ltype, $I) = $type =~ /(.*?)(64)/; $ltype ||= $type;
     my $tmp = "$ENV{HOME}/tmp/initrd";
     my $tar = "$instdir/install1_$type.$arch.tar.bz2";
     -e $tar or $tar = "$instdir/install1.$arch.tar.bz2";
@@ -54,9 +62,8 @@ sub initrd {
     install_s("$instdir/$install", "$mnt/sbin/install");
 
     _ "$sudo cp -f install_${type}_modules/* $mnt/modules/" if -d "install_${type}_modules";
-    _ "$sudo cp -f modules/${type}_modules.cgz $mnt/modules/modules.cgz";
-    _ "ln -s modules.cgz $mnt/modules/modules64.cgz" if $arch =~ /sparc/;
-    _ "$sudo cp -f modules/modules.dep $mnt/modules/";
+    _ "$sudo cp -f modules$I/${ltype}_modules.cgz $mnt/modules/modules$I.cgz";
+    _ "$sudo cp -f modules$I/modules.dep $mnt/modules/";
     _ "$sudo umount $mnt";
 
 # Workaround for vfat-loop bug (quite touchy)
@@ -143,15 +150,15 @@ sub boot_img_alpha {
 
 sub boot_img_sparc {
     my ($mnt, $img) = @_;
-    if ($type eq 'live') {
+    if ($type =~ /^live(.*)/) {
 	#- hack to produce directly into /export the needed file for cdrom boot.
 	my $dir = "/export";
 	my $boot = "boot"; #- non-absolute pathname only!
 
 	_ "mkdir -p $dir/$boot";
 	_ "cp -f /boot/cd.b /boot/second.b $dir/$boot";
-	_ "cp -f vmlinuz $dir/$boot/vmlinux.gz";
-	-f "live.rdz" ? _ "cp -f live.rdz $dir/$boot" : initrd("${mnt}2", "$dir/$boot/live.rdz");
+	_ "cp -f vmlinux$1 $dir/$boot/vmlinux$1";
+	-f "live$1.rdz" ? _ "cp -f live$1.rdz $dir/$boot" : initrd("${mnt}2", "$dir/$boot/live$1.rdz");
 
 	output("$dir/$boot/silo.conf", "
 partition=1
@@ -177,20 +184,37 @@ image=\"cat /$boot/kickit.msg\"
 image=\"cat /$boot/param.msg\"
   label=6
   single-key
-image=/$boot/vmlinux.gz
+image[sun4c,sun4d,sun4m]=/$boot/vmlinux
   label=linux
   alias=install
   initrd=/$boot/live.rdz
   append=ramdisk_size=32000
-image=/$boot/vmlinux.gz
+image[sun4c,sun4d,sun4m]=/$boot/vmlinux
   label=text
   initrd=/$boot/live.rdz
   append=ramdisk_size=32000 text
-image=/$boot/vmlinux.gz
+image[sun4c,sun4d,sun4m]=/$boot/vmlinux
   label=expert
   initrd=/$boot/live.rdz
   append=ramdisk_size=32000 expert
-image=/$boot/vmlinux.gz
+image[sun4c,sun4d,sun4m]=/$boot/vmlinux
+  label=ks
+  initrd=/$boot/live.rdz
+  append=ramdisk_size=32000 ks
+image[sun4u]=/$boot/vmlinux64
+  label=linux
+  alias=install
+  initrd=/$boot/live.rdz
+  append=ramdisk_size=32000
+image[sun4u]=/$boot/vmlinux64
+  label=text
+  initrd=/$boot/live.rdz
+  append=ramdisk_size=32000 text
+image[sun4u]=/$boot/vmlinux64
+  label=expert
+  initrd=/$boot/live.rdz
+  append=ramdisk_size=32000 expert
+image[sun4u]=/$boot/vmlinux64
   label=ks
   initrd=/$boot/live.rdz
   append=ramdisk_size=32000 ks
@@ -200,29 +224,30 @@ image=/$boot/vmlinux.gz
 To Build a Bootable CD-ROM, try:
   mkisofs -R -o t.iso -S $boot/cd.b -B $boot/second.b -s /$boot/silo.conf /export
 ");
-    } elsif ($type eq 'tftp') {
+    } elsif ($type =~ /^tftprd(.*)/) {
+	my $dir = "/export";
+	my $boot = "images";
+	my $setarch = $1 ? "sparc64" : "sparc32";
+
+	_ "mkdir -p $dir/$boot";
+	-f "$type.rdz" or initrd("${mnt}2", "$type.rdz");
+	_ "cp -f vmlinux$1.aout $dir/$boot/$type.img";
+	_ "$setarch kernel$1/src/arch/sparc$1/boot/piggyback $dir/$boot/$type.img kernel$1/boot/System.map $type.rdz";
+    } elsif ($type =~ /^tftp(.*)/) {
 	my $dir = "/export";
 	my $boot = "images";
 
 	_ "mkdir -p $dir/$boot";
-	_ "elftoaout kernel/src/vmlinux -o $dir/$boot/tftp.img";
-    } elsif ($type eq 'tftprd') {
-	my $dir = "/export";
-	my $boot = "images";
-	my $arch = `uname -m`; chomp $arch;
-
-	_ "mkdir -p $dir/$boot";
-	-f "$type.rdz" ? _ "cp -f $type.rdz kernel/src/initrd.gz" : initrd("${mnt}2", "kernel/src/initrd.gz");
-	_ "make -C kernel/src tftpboot.img";
-	_ "cp -f kernel/src/arch/$arch/boot/tftpboot.img $dir/$boot/tftprd.img";
+	_ "cp -f vmlinux$1.aout $dir/$boot/$type.img";
     } else {
 	my $dir = "floppy";
+	my ($ltype, $I) = $type =~ /(.*?)(64)/; $ltype ||= $type;
 
 	__ "$sudo umount $mnt 2>/dev/null";
 	_ "rm -rf $dir";
 	_ "mkdir -p $dir";
 	_ "cp -f /boot/fd.b /boot/second.b $dir";
-	_ "cp -f vmlinuz $dir/vmlinux.gz";
+	_ "cp -f vmlinuz$I $dir/vmlinux$I.gz";
 	-f "$type.rdz" ? _ "cp -f $type.rdz $dir" : initrd("${mnt}2", "$dir/$type.rdz");
 
 	output("$dir/silo.conf", "
@@ -230,10 +255,10 @@ partition=1
 default=linux
 timeout=100
 read-write
-image=/vmlinux.gz
+image=/vmlinux$I.gz
   label=linux
   initrd=/$type.rdz
-  append=ramdisk_size=32000 $type
+  append=ramdisk_size=32000 $ltype
 ");
 	_ "genromfs -d $dir -f /dev/ram -A 2048,/.. -a 512 -V \'DrakX boot disk\'";
 	_ "$sudo mount -t romfs /dev/ram $mnt";
