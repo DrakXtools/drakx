@@ -8,7 +8,7 @@ License: GPL
 Group: System/Configuration/Other
 # Temporary requires for tools that still use gtk+1 (that is net_monitor; drakcronat is being ported)
 Requires: perl-GTK >= 0.7008-29mdk, perl-GTK-GdkImlib, perl-GTK-GdkPixbuf
-Requires: %{name}-newt = %version-%release, perl-GTK2 >= 0.0.cvs.2003.04.04.1, XFree86-100dpi-fonts, XFree86-75dpi-fonts, /usr/X11R6/bin/xtest, font-tools, usermode >= 1.63-5mdk, perl-MDK-Common >= 1.1.2-2mdk
+Requires: %{name}-newt = %version-%release, perl-GTK2 >= 0.0.cvs.2003.04.04.1, /usr/X11R6/bin/xtest, font-tools, usermode >= 1.63-5mdk, perl-MDK-Common >= 1.1.2-2mdk
 Conflicts: drakconf < 9.1-14mdk
 BuildRequires: gettext, libgtk+-x11-2.0-devel, ldetect-devel >= 0.4.9, ncurses-devel, newt-devel, perl-devel >= 1:5.8.0-20mdk, libext2fs-devel, perl-MDK-Common-devel >= 1.1.3-1mdk
 BuildRoot: %_tmppath/%name-buildroot
