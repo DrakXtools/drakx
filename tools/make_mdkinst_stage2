@@ -41,7 +41,7 @@ rm -f $STAGE2TMP/usr/X11R6/bin/XF86_{VGA16,3DLabs,TGA,S3}
 rm -f `ls --sort=size $STAGE2TMP/lib/modules.cz-* | perl -ne 'print if $i++'`
 rm -f $STAGE2TMP/usr/bin/{pv*,vg*,lv*} $STAGE2TMP/lib/liblvm*
 rm -f $STAGE2TMP/usr/bin/{resize_reiserfs,fsck.jfs}
-rm -f $STAGE2TMP/usr/X11R6/lib/X11/fonts/{taipei16,gb16fs,k14,baekmuk_gulim_h_14,cu12}.pcf.gz
+rm -f $STAGE2TMP/usr/X11R6/lib/X11/fonts/{12x13mdk,18x18mdk,mdk_10}.pcf*
 rm -rf $STAGE2TMP/usr/share/locale_special
 
 (   # only keeping UTF-8
