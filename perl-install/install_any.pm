@@ -246,7 +246,7 @@ sub spawnShell {
 sub fsck_option {
     my ($o) = @_;
     my $y = $o->{security} < 3 && !$::expert && "-y ";
-    substInFile { s/^(\s*fsckoptions="?)(-y )?/$1$y/ } "$o->{prefix}/etc/rc.d/rc.sysinit"; #- " help po, DON'T REMOVE
+    substInFile { s/^(\s*fsckoptions="?)(-y )?/$1$y/ } "$o->{prefix}/etc/rc.d/rc.sysinit"; #- " help po, DONT REMOVE
 }
 
 sub getAvailableSpace {
