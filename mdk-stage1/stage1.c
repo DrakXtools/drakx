@@ -568,11 +568,16 @@ void finish_preparing(void)
 	copy_file("/etc/resolv.conf", SLASH_LOCATION "/etc/resolv.conf", NULL);
 	mkdir(SLASH_LOCATION "/modules", 0755);
 	copy_file("/modules/modules.dep", SLASH_LOCATION "/modules/modules.dep", NULL);
+
+	if (!IS_RESCUE) {
+		copy_file(STAGE2_LOCATION "/etc/init", SLASH_LOCATION "/etc/init", NULL);
+		chmod(SLASH_LOCATION "/etc/init", 0755);
+	}
                 
 	umount("/tmp/tmpfs");
 	do_pivot_root();
 
-	if (file_size("/sbin/init") == -1)
+	if (file_size(IS_RESCUE ? "/sbin/init" : "/etc/init") == -1)
 		stg1_fatal_message("Fatal error giving hand to second stage.");
 
 	if (shell_pid != 0) {

@@ -215,7 +215,7 @@ ifeq (y,$(USE_PCMCIA))
 	../tools/patch_pcmcia_config.pl $(DEST)/etc/pcmcia/config ../kernel/all.kernels/`cat ../kernel/all.kernels/.main`/modules.dep
 endif
 
-	cp -f $(STAGE1)/init-stage2 $(DEST)/usr/bin/init
+	cp -f $(STAGE1)/init-stage2 $(DEST)/etc/init
 
 	find $(DEST) -name CVS | xargs rm -rf
 
