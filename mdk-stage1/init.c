@@ -429,13 +429,19 @@ int in_reboot(void)
 
 int exit_value_proceed = 66;
 
-int main(int argc __attribute__ ((unused)), char **argv __attribute__ ((unused)))
+int main(int argc, char **argv)
 {
 	pid_t installpid, childpid;
 	int wait_status;
 	int fd;
 	int abnormal_termination = 0;
 	int end_stage2 = 0;
+
+        if (argc > 1 && argv[1][0] >= '0' && argv[1][0] <= '9') {
+                printf("This is no normal init, sorry.\n"
+                       "Call `reboot' or `halt' directly.\n");
+                return 0;
+        }
 
 	/* getpid() != 1 should work, by linuxrc tends to get a larger pid */
 	testing = (getpid() > 50);
