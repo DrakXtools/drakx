@@ -215,6 +215,7 @@ sub getNet() {
 
 sub pci_probe {
     my ($probe_type) = @_;
+    log::l("full pci_probe") if $probe_type;
     map {
 	my %l;
 	@l{qw(vendor id subvendor subid pci_bus pci_device pci_function media_type driver description)} = split "\t";
