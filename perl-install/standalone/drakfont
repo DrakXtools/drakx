@@ -394,7 +394,6 @@ sub remove_gs_fonts {
 
 sub remove_fonts {
     my @list_dir;
-    my @toto;
     -e $drakfont_dir . "/remove"  || mkdir_p($drakfont_dir . "/remove");
     foreach my $i (@font_list) {
 	$_ = $i;
@@ -542,7 +541,6 @@ sub license {
     my ($function) = @_,
     my $text = new Gtk::Text(undef, undef);
     my $license_box;
-#$scrolled_window->set_usize( 440, 300 ),
     gtkpack($font_box,
 	    $license_box = gtkpack_(new Gtk::VBox(0,10),
 				    1, gtkpack_(new Gtk::HBox(0,0),
@@ -724,28 +722,41 @@ sub advanced_install {
     $adv_box->show_all();
 }
 
-# sub list_remove {
-# 	my($widget, $list) = @_;
+sub show_path_list {
+	my($widget, $list) = @_;
+	my @to_remove;
+	push @to_remove, $list->child_position($_) foreach($list->selection);
+	splice @install, $_, 1 foreach(reverse sort @to_remove);
+	$list->remove_items($list->selection);
+}
+
+
+# sub show_path_list {
+#  	my($widget, $list) = @_;
+# #	my $list = @_;
+# #    print "$_\n" foreach ($list->selected);
+# #    $list->add(gtkshow(new Gtk::ListItem($_))) foreach (all($list->selection));
+
+# # 	Gtk->main_iteration while Gtk->events_pending;
 # 	my @to_remove;
-# 	push @to_remove, $list->child_position($_) foreach($list->selection);
-# 	splice @install, $_, 1 foreach(reverse sort @to_remove);
-# 	$list->remove_items($list->selection);
+#  	push @to_remove, $list->child_position($_) foreach($list->selection);
+# 	print "$_\n" foreach (@to_remove);
+# # 	my @to_remove;
+# # 	push @to_remove, $list->child_position($_) foreach($list->selection);
+# # 	splice @install, $_, 1 foreach(reverse sort @to_remove);
+# # 	$list->remove_items($list->selection);
 # }
 
-
-sub show_path_list {
- 	my($widget, $list) = @_;
-#	my $list = @_;
-    print "$list->selection\n";
-#    $list->add(gtkshow(new Gtk::ListItem($_))) foreach (all($list->selection));
-
-# 	Gtk->main_iteration while Gtk->events_pending;
-
-# 	my @to_remove;
-# 	push @to_remove, $list->child_position($_) foreach($list->selection);
-# 	splice @install, $_, 1 foreach(reverse sort @to_remove);
-# 	$list->remove_items($list->selection);
+sub list_to_remove {
+	my($widget, $list) = @_;
+	my @to_remove;
+	push @to_remove, $list->child_position($_) foreach($list->selection);
+#	splice @install, $_, 1 foreach(reverse sort @to_remove);
+#	$list->remove_items($list->selection);
+	print "$_ \n" foreach (@to_remove);
 }
+
+
 
 sub uninstall {
     my $scrolled_window;
@@ -759,11 +770,9 @@ sub uninstall {
 	my $t = $_;
 	$list_path->add(gtkshow(gtksignal_connect(new Gtk::ListItem($t), select => sub {
 						      $path_list->clear_items(0, -1);
-						      $path_list->append_items(map { /fonts/ ? () : gtkshow(new Gtk::ListItem($_)) } all($t));
-					      })));
+						      $path_list->append_items(map { /fonts/ ? () : gtkshow(new Gtk::ListItem($_)) } all($t)); })));
     }
     $list_path->set_selection_mode(-single);
-
     $path_list = new Gtk::List();
     $path_list->set_selection_mode(-extended);
 
@@ -779,7 +788,7 @@ sub uninstall {
 					     gtksignal_connect(new Gtk::Button(_("Selected All")), clicked => 
 							       sub {$path_list->select_all (); } ),
 					     gtksignal_connect(new Gtk::Button(_("Remove List")), clicked => 
-							       sub { ${$central_widget}->destroy(); import_status_uninstall() }),
+							       sub { ${$central_widget}->destroy(); \&list_to_remove(), $path_list}),
 					     ),
 				  )
 	    );
