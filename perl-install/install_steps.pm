@@ -729,7 +729,7 @@ sub summaryAfter {
     my ($o) = @_;
 
     require bootloader;
-    bootloader::get_append($o->{bootloader}, 'acpi') ne 'off' && !(-x "$::prefix/usr/bin/acpi" && -x "$::prefix/usr/sbin/acpid")
+    bootloader::get_append($o->{bootloader}, 'acpi') ne 'off' && ne 'ht' && !(-x "$::prefix/usr/bin/acpi" && -x "$::prefix/usr/sbin/acpid")
 	and $o->do_pkgs->install(qw(acpi acpid));
 }
 
@@ -884,6 +884,9 @@ sub setupBootloaderBefore {
     }
     if (cat_("/proc/cmdline") =~ /\bacpi=off/) {
 	bootloader::set_append($o->{bootloader}, acpi => 'off');
+    }
+    if (cat_("/proc/cmdline") =~ /\bacpi=ht/) {
+	bootloader::set_append($o->{bootloader}, acpi => 'ht');
     }
     if (cat_("/proc/cmdline") =~ /\bnoapic/) {
 	bootloader::set_append($o->{bootloader}, 'noapic');
