@@ -16,7 +16,6 @@ if ( ! -x "$xsltproc" ){
 my %helps = map {
     my $lang = $_;
     my @l = grep { !/drakx-MNF-chapter/ } map { /(drakx-.*).xml$/ } all("$dir/$lang");
-    warn int(@l), " ", "\n";
     if (@l < 20) { () } else {
 	my $template_file = "$dir/$lang/drakx.xml";
 	my $file = "$dir/$lang/drakx_full.xml";
