@@ -298,6 +298,20 @@ sub pkg_install {
     $o->installPackages;
 }
 
+sub pkg_install_if_requires_satisfied {
+    my ($o, @l) = @_;
+    require pkgs;
+    foreach (@l) {
+	my %newSelection;
+	my $pkg = pkgs::packageByName($o->{packages}, $_) || die "$_ rpm not found";
+	pkgs::selectPackage($o->{packages}, $pkg, 0, \%newSelection) foreach @l;
+	if (scalar(keys %newSelection) == 1) {
+	    pkg::selectPackage($o->{packages}, $pkg);
+	}
+    }
+    $o->installPackages;
+}
+
 sub installPackages($$) { #- complete REWORK, TODO and TOCHECK!
     my ($o) = @_;
     my $packages = $o->{packages};
