@@ -5,12 +5,9 @@ use lib qw(/usr/lib/libDrakX);
 
 use strict;
 use standalone;     #- warning, standalone must be loaded very first, for 'explanations'
-
 use MDK::Common;
 use POSIX;
-
 use interactive;
-
 use harddrake::data;
 use Data::Dumper;
 
@@ -28,16 +25,10 @@ my $str = '#!/usr/bin/perl -w
 #
 ';
 
-my $in = 'interactive'->vnew('su');
-my $w = $in->wait_message(_("Please wait"), _("Hardware probing in progress"));
-
 # first run ? if not read old hw config
 my $previous_config = -f $last_boot_config ? do $last_boot_config : {};
 
-my %config;
-
-$SIG{SIGALRM} = sub { die "time out elapsed"; };
-alarm 200;
+my (%config, $in);
 
 # For each hw, class, detect device, compare and offer to reconfigure if
 # needed
@@ -78,23 +69,32 @@ foreach (@harddrake::data::tree) {
     @added || @was_removed or next;
    
     next unless (-x $configurator);
-    undef $w;
 
-    if ($in->ask_okcancel("Hardware changes in $Ident class",
-					 $msg . "\nDo you want to run the appropriate config tool ?", 1)) {
-	   
-	   if (my $pid = fork) {
+    my $res;
+    $SIG{ALRM} = sub { die "TIMED OUT\n" };
+    undef $@;
+    eval {
+	alarm (5);
+	$in = 'interactive'->vnew('su') unless defined $in;
+	$res = $in->ask_okcancel("Hardware changes in $Ident class (5 seconds to answer)",
+				 $msg . "\nDo you want to run the appropriate config tool ?", 1)
+	    or $in->wait_message(_('Please wait'), _('Hardware probing in progress'));
+	alarm (0);
+    };
+
+    next unless ($@);     # timed out
+    print "CANCELED\n" if $res;
+    next unless ($res);   # canceled
+    if (my $pid = fork) {
 		  POSIX::wait();
 		} else {
-		    exec($configurator) or die "$configurator missing\n";
+		    exec("$configurator 2>/dev/null") or die "$configurator missing\n";
 		}
-    }
 }
-
-alarm 0;
 
 
 $Data::Dumper::Terse = 1;          # don't output names where feasible
 $Data::Dumper::Purity = 1;         # fill in the holes for eval
 # output new hw config
 output("$last_boot_config",  $str . Dumper(\%config) . ";\n");
+$in->exit(0) if defined $in; exit 0;
