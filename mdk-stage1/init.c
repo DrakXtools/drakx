@@ -466,8 +466,10 @@ int main(int argc, char **argv)
 	signal(SIGINT, SIG_IGN);
 	signal(SIGTSTP, SIG_IGN);
 
+#ifdef MANDRAKE_MOVE
         /* disallow Ctrl Alt Del to reboot */
         reboot(0xfee1dead, 672274793, BMAGIC_SOFT);
+#endif
 
 	if (!testing) {
 		fd = open("/dev/console", O_RDWR, 0);
