@@ -397,6 +397,9 @@ sub getModem() {
 sub getSpeedtouch {
     grep { $_->{description} eq 'Alcatel|USB ADSL Modem (Speed Touch)' } probeall(0);
 }
+sub getSagem {
+    grep { $_->{description} eq 'Analog Devices Inc.|USB ADSL modem' } probeall(0);
+}
 
 sub getNet() {
     grep { !(($::isStandalone || $::live) && /plip/) && c::hasNetDevice($_) } @netdevices;
