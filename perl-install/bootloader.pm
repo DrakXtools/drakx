@@ -1140,11 +1140,11 @@ sub write_grub {
 	};
 
 	foreach (@{$bootloader->{entries}}) {
-	    push @conf, "\ntitle $_->{label}";
+	    my $title = "\ntitle $_->{label}";
 
 	    if ($_->{type} eq "image") {
 		my $vga = $_->{vga} || $bootloader->{vga};
-		push @conf, 
+		push @conf, $title,
 		  join(' ', 'kernel', $file2grub->($_->{kernel_or_dev}),
 		       if_($_->{root}, $_->{root} =~ /loop7/ ? "root=707" : "root=$_->{root}"), #- special to workaround bug in kernel (see #ifdef CONFIG_BLK_DEV_LOOP)
 		       $_->{append},
@@ -1152,7 +1152,12 @@ sub write_grub {
 		       if_($vga && $vga ne "normal", "vga=$vga"));
 		push @conf, "initrd " . $file2grub->($_->{initrd}) if $_->{initrd};
 	    } else {
-		push @conf, "root " . device_string2grub($_->{kernel_or_dev}, \@legacy_floppies, \@sorted_hds);
+		my $dev = eval { device_string2grub($_->{kernel_or_dev}, \@legacy_floppies, \@sorted_hds) };
+		if (!$dev) {
+		    log::l("dropping bad entry $_->{label} for unknown device $_->{kernel_or_dev}");
+		    next;
+		}
+		push @conf, $title, "root $dev";
 
 		if ($_->{table}) {
 		    if (my $hd = fs::device2part($_->{table}, \@sorted_hds)) {
