@@ -68,8 +68,8 @@ sub default_interfaces {
 
 	my $modules_conf = modules::any_conf->read;
 	my @all_cards = network::ethernet::get_eth_cards($modules_conf);
-	my $net_devices = network::ethernet::get_eth_cards_names(@all_cards);
-	put_in_hash($net_devices, { 'ppp+' => 'ppp+', 'ippp+' => 'ippp+' });
+	my %net_devices = network::ethernet::get_eth_cards_names(@all_cards);
+	put_in_hash(\%net_devices, { 'ppp+' => 'ppp+', 'ippp+' => 'ippp+' });
 
 	$in->ask_from('',
 		N("Please enter the name of the interface connected to the internet.
@@ -79,7 +79,7 @@ Examples:
 		eth0, or eth1 for cable connection, 
 		ippp+ for a isdn connection.
 "),
-      [ { label => N("Net Device"), val => \$card_netconnect, list => [ sort keys %$net_devices ], format => sub { $net_devices->{$_[0]} || $_[0] }, not_edit => 0 } ]);
+      [ { label => N("Net Device"), val => \$card_netconnect, list => [ sort keys %net_devices ], format => sub { $net_devices{$_[0]} || $_[0] }, not_edit => 0 } ]);
 
 	$conf{net_interface} = $card_netconnect;
 	$conf{loc_interface} = [  grep { $_ ne $conf{net_interface} } @l ];

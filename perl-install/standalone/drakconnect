@@ -202,16 +202,16 @@ sub manage {
     $notebook->set_property('show-border', 0);
 
     @all_cards = network::ethernet::get_eth_cards($modules_conf);
-    my $names = network::ethernet::get_eth_cards_names(@all_cards);
-    foreach (keys %$names) {
-	my $dev = /eth|ath|wlan/ ? $names->{$_} : $_;
+    my %names = network::ethernet::get_eth_cards_names(@all_cards);
+    foreach (keys %names) {
+	my $dev = /eth|ath|wlan/ ? $names{$_} : $_;
 	$p->{$dev} = {
                       name => $_ ,
                       intf => $intf->{$_}
                      };
     }
     while (my ($device, $interface) = each %$intf) {
-        exists $names->{$device} and next;
+        exists $names{$device} and next;
         my $type = network::tools::get_interface_type($interface);
         $p->{"$type ($device)"} = {
                                   name => $device,
@@ -671,7 +671,7 @@ sub del_intf() {
       $in->exit(0);
     }
     @all_cards = network::ethernet::get_eth_cards($modules_conf);
-    my $ethernet_names = network::ethernet::get_eth_cards_names(@all_cards);
+    my %ethernet_names = network::ethernet::get_eth_cards_names(@all_cards);
     my $wiz =
       {
        defaultimage => "drakconnect.png",
@@ -684,7 +684,7 @@ sub del_intf() {
                                           list => [ keys %$intf ],
                                           format => sub {
                                               my $type = network::tools::get_interface_type($intf->{$_[0]});
-                                              $ethernet_names->{$_[0]} || ($type ? "$type ($_[0])" : $_[0])
+                                              $ethernet_names{$_[0]} || ($type ? "$type ($_[0])" : $_[0])
                                             }
                                         }
                                       ],
