@@ -211,6 +211,7 @@ sub save_perm() {
                          }, $val);
     close F;
     $modified = 0;
+    ugtk2->exit;
 }
 
 sub row_setting_dialog {
