@@ -478,6 +478,8 @@ sub set_window_manager {
     #- for KDM/GDM
     my $wm_number = sessions_with_order()->{$wm} || '';
     update_gnomekderc("$p_home/.dmrc", 'Desktop', Session => "$wm_number$wm");
+    my $user = find { $p_home eq $_->[7] } list_passwd();
+    chown($user->[2], $user->[3], "$p_home/.dmrc");
 
     #- for startx/autologin
     {
