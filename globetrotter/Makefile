@@ -89,3 +89,9 @@ nuke_perl:
 img:
 	/usr/bin/lilo-bmp2mdk mode:0x103 progress:397,190,14,6,64+8 clear:600,800,64+8 pos:0,0 < BOOTGTROTTER-install-lilo-8bis.bmp > isolinux_boot.msg
 
+.PHONY: log changelog
+
+log: changelog
+
+changelog:
+	cvs2cl --accum -W 400 -U ../../soft/common/username
