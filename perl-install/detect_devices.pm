@@ -733,11 +733,14 @@ sub hasPCMCIA() { $::o->{pcmcia} } #- because /proc/pcmcia seems not to be prese
 #- try to detect a laptop, we assume pcmcia service is an indication of a laptop or
 #- the following regexp to match graphics card apparently only used for such systems.
 sub isLaptop() {
-    hasPCMCIA() || (matching_desc('C&T.*655[45]\d') || matching_desc('C&T.*68554') ||
-		    matching_desc('Neomagic.*Magic(Media|Graph)') ||
-		    matching_desc('ViRGE.MX') || matching_desc('S3.*Savage.*[IM]X') ||
-		    matching_desc('ATI.*(Mobility|LT)'))
-                || cat_('/proc/cpuinfo') =~ /\bmobile\b/i;
+    arch() =~ /ppc/ ? 
+      get_mac_model() =~ /Book/ :
+      hasPCMCIA() 
+	|| (matching_desc('C&T.*655[45]\d') || matching_desc('C&T.*68554') ||
+	    matching_desc('Neomagic.*Magic(Media|Graph)') ||
+	    matching_desc('ViRGE.MX') || matching_desc('S3.*Savage.*[IM]X') ||
+	    matching_desc('ATI.*(Mobility|LT)'))
+	|| cat_('/proc/cpuinfo') =~ /\bmobile\b/i;
 }
 
 sub usbMice()      { grep { $_->{media_type} =~ /\|Mouse/ && $_->{driver} !~ /Tablet:wacom/ ||
