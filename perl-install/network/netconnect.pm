@@ -172,7 +172,6 @@ If you don't want to use the auto detection, deselect the checkbox.
     }
 
   step_2:
-
     $conf{$_} = $netc->{autodetect}{$_} ? 1 : 0 foreach 'modem', 'winmodem', 'adsl', 'cable', 'lan';
     $conf{isdn} = $netc->{autodetect}{isdn}{description} ? 1 : 0;
 
@@ -205,6 +204,7 @@ If you don't want to use the auto detection, deselect the checkbox.
 	   $conf{cable} and do { pre_func("cable"); require network::ethernet; network::ethernet::configure_cable($netcnx, $netc, $intf, $first_time) or goto step_2; $netconnect::need_restart_network = 1 };
 	   $conf{lan} and do { pre_func("local network"); require network::ethernet; network::ethernet::configure_lan($netcnx, $netc, $intf, $first_time) or goto step_2; $netconnect::need_restart_network = 1 };
        }; $in->exit(0) if $@ =~ /wizcancel/;
+  
   step_2_1:
     my $nb = keys %{$netc->{internet_cnx}};
     if ($nb < 1) {
@@ -246,7 +246,6 @@ If you don't want to use the auto detection, deselect the checkbox.
       $success = ask_connect_now($netc->{internet_cnx_choice});
 
   step_3:
-
     my $m = $success ? N("Congratulations, the network and Internet configuration is finished.
 The configuration will now be applied to your system.
 
@@ -263,7 +262,6 @@ Test your connection via net_monitor or mcc. If your connection doesn't work, yo
     } else { $::isStandalone and $in->ask_warn('', $m) }
 
   step_5:
-
     $network_configured or network::configureNetwork2($in, $prefix, $netc, $intf);
 
     my $connect_cmd;
@@ -333,62 +331,6 @@ sub save_conf {
     my @_all_cards = conf_network_card_backend($netc, $intf, undef, undef, undef, undef);
 
     $intf = { %$intf };
-#      "SystemName=" . do { $netc->{HOSTNAME} =~ /([^\.]*)\./; $1 } . "
-#DomainName=" . do { $netc->{HOSTNAME} =~ /\.(.*)/; $1 } . "
-#InternetAccessType=" . do { if ($netcnx->{type}) { $netcnx->{type} } else { $netc->{GATEWAY} ? "lan" : "" } } . "
-#InternetInterface=" . ($netc->{GATEWAY} && (!$netcnx->{type} || $netcnx->{type} eq 'lan') ? $netc->{GATEWAYDEV} : $netcnx->{NET_INTERFACE}) . "
-# InternetGateway=$netc->{GATEWAY}
-# DNSPrimaryIP=$netc->{dnsServer}
-# DNSSecondaryIP=$netc->{dnsServer2}
-# DNSThirdIP=$netc->{dnsServer3}
-# AdminInterface=
-
-# " . join ('', map {
-# "Eth${_}Known=" . ($intf->{"eth$_"}{DEVICE} eq "eth$_" ? 'true' : 'false') . "
-# Eth${_}IP=" . $intf->{"eth$_"}{IPADDR} . "
-# Eth${_}Mask=" . $intf->{"eth$_"}{NETMASK} . "
-# Eth${_}Mac=
-# Eth${_}BootProto=" . $intf->{"eth$_"}{BOOTPROTO} . "
-# Eth${_}OnBoot=" . $intf->{"eth$_"}{ONBOOT} . "
-# Eth${_}Hostname=$netc->{HOSTNAME}
-# Eth${_}HostAlias=" . do { $netc->{HOSTNAME} =~ /([^\.]*)\./; $1 } . "
-# Eth${_}Driver=$all_cards[$_][1]
-# Eth${_}Irq=
-# Eth${_}Port=
-# Eth${_}DHCPClient=" . ($intf->{"eth$_"}{BOOTPROTO} eq 'dhcp' ? $netcnx->{dhcp_client} : '') . "
-# Eth${_}DHCPServerName=" . ($intf->{"eth$_"}{BOOTPROTO} eq 'dhcp' ? $netc->{HOSTNAME} : '') . "\n"
-#  } (0..9)) .
-# ISDNDriver=$isdn->{driver}
-# ISDNDeviceType=$isdn->{type}
-# ISDNIrq=$isdn->{irq}
-# ISDNMem=$isdn->{mem}
-# ISDNIo=$isdn->{io}
-# ISDNIo0=$isdn->{io0}
-# ISDNIo1=$isdn->{io1}
-# ISDNProtocol=$isdn->{protocol}
-# ISDNCardDescription=$isdn->{description}
-# ISDNCardVendor=$isdn->{vendor}
-# ISDNId=$isdn->{id}
-# ISDNProvider=$netc->{DOMAINNAME2}
-# ISDNProviderPhone=$isdn->{phone_out}
-# ISDNProviderDomain=" . do { $netc->{DOMAINNAME2} =~ /\.(.*)/; $1 } . "
-# ISDNProviderDNS1=$netc->{dnsServer2}
-# ISDNProviderDNS2=$netc->{dnsServer3}
-# ISDNDialing=$isdn->{dialing_mode}
-# ISDNSpeed=$isdn->{speed}
-# ISDNTimeout=$isdn->{huptimeout}
-# ISDNHomePhone=$isdn->{phone_in}
-# ISDNLogin=$isdn->{login}
-# ISDNPassword=$isdn->{passwd}
-# ISDNConfirmPassword=$isdn->{passwd2}
-# PPPProviderPhone=$modem->{phone}
-# PPPProviderDNS1=$modem->{dns1}
-# PPPProviderDNS2=$modem->{dns2}
-# PPPPassword=$modem->{passwd}
-# PPPConfirmPassword=$modem->{passwd}
-# ADSLProviderDNS1=$netc->{dnsServer2}
-# ADSLProviderDNS2=$netc->{dnsServer3}
-
     my $str;
     $str .= "
 PPPDevice=$modem->{device}
