@@ -7,10 +7,9 @@ use standalone;     #- warning, standalone must be loaded very first, for 'expla
 use common;
 use interactive;
 use log;
-use security::msec;
+use security::main;
 
 local $_ = join '', @ARGV;
-
 
 /-h/ and die "usage: draksec [--expert]\n";
 
@@ -22,12 +21,7 @@ my $in = 'interactive'->vnew('su', 'security');
 begin:
 $::isEmbedded and kill USR2, $::CCPID;
 
-my $security = security::msec::get_secure_level('');
-my $libsafe = security::msec::config_libsafe('');
-my $sec_user = security::msec::config_security_user('');
-my $w;
-
-security::main($in, $security, $sec_user);
+security::main::main($prefix, $in);
 
 !$::isEmbedded ? $in->exit(0) : kill(USR1, $::CCPID);
 goto begin;
