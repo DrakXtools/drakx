@@ -1,3 +1,273 @@
+2003/03/06  Frederic Lepied  <flepied@mandrakesoft.com>
+
+	* share/po/fr.po: corrected remaining mise-à-jour
+
+2003/03/06  François Pons  <fpons@mandrakesoft.com>
+
+	* any.pm: make sure acpi is installed.
+
+	* install_steps.pm: modified logic for summaryAfter.
+	fixed again the same typo.
+	fixed stupid typo.
+	summaryAfter created to install acpi and acpid if needed.
+	menu update method modified for upgrade.
+
+	* install2.pm: added summaryAfter steps for summary.
+
+2003/03/06  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* share/po/es.po: this translation can't get much big or else it will
+	enlarge too
+	much diskdrake
+
+2003/03/06  Pablo Saratxaga  <pablo@mandrakesoft.com>
+
+	* standalone/harddrake2: fixed XIM definitions for Chinese locales
+
+	* share/rpmsrate: removed non-ascii chars
+
+	* share/po/sv.po, share/po/sk.po: updated Slovak and Swedish files
+
+	* lang.pm: Enabled Laotian (was missing a definition in %charsets),
+	Bengali (there starts to be gnome translations available),
+	and Kannada (there starts to be gnome translations available).
+	Code for Xhosa added (there is an official kde-i18n-xh package
+	available),
+	wating for lang-xh.png to enable it
+	fixed XIM definitions for Chinese locales
+
+2003/03/06  Pixel  <pixel@mandrakesoft.com>
+
+	* any.pm: don't create xxx.conf for standard devfs compatibility names
+
+	* detect_devices.pm: merge cdroms__faking_ide_scsi() and
+	zips__faking_ide_scsi() in
+	cdroms_and_zips__faking_ide_scsi() to be able to have a good devfs
+	device name
+	this fixes *__faking_ide_scsi() not faking devfs_device causing bad
+	/etc/devfs/conf.d/dvd.conf for dvd burners
+
+	* share/po/help_xml2pm.pl: do not exclude "ru" drakx-help.xml anymore
+
+	* interactive/gtk.pm: "ensure buttons are visible when the widgets above
+	are too big" only at install
+
+2003/03/06  tpittich
+
+	* share/po/sk.po: updated slovak translation
+
+2003/03/06  Thierry Vignaud  <tvignaud@mandrakesoft.com>
+
+	* ugtk2.pm: fix #2672
+
+	* Makefile: move ugtk2 back in drakxtools on gc idea
+
+	* standalone/logdrake: 
+	  - display "wait while searching" message also when embedded: we do not
+	want it only when embedded for explanations
+	  - flush this wait dialog draw queue on each update so that it get
+	  displayed when embedded
+
+	* harddrake/data.pm: move usb webcams which have mod_quickcam as a driver
+	from unknown to
+	webcam clategory since they do not have any valid usb class
+
+	* scanner.pm: do not detect some usb webcams as scanners ...
+
+	* standalone/drakedm: log system config changes
+
+	* drakxtools.spec: more fixes
+	more logdrake fixes
+	move ugtk2 back in drakxtools on gc idea
+	more fixes
+	more fixes
+	9.1-15mdk
+
+	* lang.pm: 
+	  - cornish is a p-celtic language (aka a britonnic one), not a gaelic
+	one
+	  - homogeinize q-celtic languages (aka gaelic ones)
+
+	* standalone/draksec: let i fit in 800x600
+
+2003/03/05  Arkadiusz Lipiec  <alipiec@elka.pw.edu.pl>
+
+	* share/po/pl.po: two entries remained
+
+2003/03/05  fabman
+
+	* share/po/es.po: updated Spanish translation
+
+2003/03/05  Frederic Lepied  <flepied@mandrakesoft.com>
+
+	* network/isdn.pm: read right config according to isdn-light or isdn4linux
+
+	* network/adsl.pm: read login name from net_cnx_up in pptp mode.
+
+	* network/ethernet.pm: fix to avoid creating an ifcfg-1 config file.
+
+	* network/tools.pm: if the user don't want to start the internet
+	connection, continue without
+	error message.
+
+	* network/netconnect.pm: use driver instead of descrition to validate an
+	isdn autodetection
+
+2003/03/05  François Pons  <fpons@mandrakesoft.com>
+
+	* drakxtools.spec: add changelog for drakconnect modification.
+
+	* standalone/drakconnect: fixed wizard modification not taken into account
+	when using drakconf.
+
+2003/03/05  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* share/po/fr.po: fix one translation
+
+	* any.pm, drakxtools.spec, standalone/localedrake: fix behaviour when only
+	one lang is available (clicking
+	on "cancel" on the country selection didn't cancel it)
+
+2003/03/05  Pablo Saratxaga  <pablo@mandrakesoft.com>
+
+	* share/po/ro.po, share/po/vi.po, share/po/ar.po: updated Arabic, Romanian
+	and Vietnamese files
+
+	* share/po/tg.po, share/po/th.po, share/po/is.po, share/po/sl.po,
+	share/po/az.po, share/po/be.po, share/po/uk.po, share/po/lt.po,
+	share/po/eo.po, share/po/hu.po: updated Hungarian file
+
+	* share/po/fr.po, share/po/it.po, share/po/es.po, share/po/de.po: merged
+	with help strings from manuals
+
+	* share/po/uz.po: updated Uzbek file
+
+	* share/po/no.po: updated Norwegian file
+
+2003/03/05  Pixel  <pixel@mandrakesoft.com>
+
+	* Xconfig/various.pm (choose_xdm): allow to switch back from level 5 to
+	level 3
+
+	* network/network.pm, network/isdn.pm: this is perl, not python ;p
+
+	* install_steps.pm: modifying keyboard in summary must modify XF86Config
+
+	* interactive/gtk.pm: ensure buttons are visible when the widgets above
+	are too big
+
+2003/03/05  Thierry Vignaud  <tvignaud@mandrakesoft.com>
+
+	* mouse.pm, standalone/harddrake2, common.pm, harddrake/data.pm: prevent
+	warning when using diagnostics pragma (easier debugging)
+
+	* standalone/drakedm: handle low case config variables despite they should
+	have been upcase
+	(fix side effects of stupid rh code that manage $prefdm)
+
+	* detect_devices.pm: 
+	  - (getTVcards, isTVcard) : consolidate tv detection code
+	  - no need to keep capture buffer (not a big slow down but small rivers
+	make big ones...)
+	normalize
+	prevent warning when using diagnostics pragma (easier debugging)
+
+	* standalone/logdrake: restore old search behavior like we did before
+	gtk+-2 port:
+	  - empty log buffer on search startup
+	  - freeze buffer while searching
+	  - do not realize ourselves the window, it's done by next statement
+	  - set initial text to '' so that editable property is disabled once
+	  the textview is realized
+	no need to explicitely disable editable property, this is already
+	handled by ugtk2::gtktext_insert() called from ugtk2::gtktext_append()
+
+	* standalone/drakxtv, install_steps_interactive.pm: 
+	  - (getTVcards, isTVcard) : consolidate tv detection code
+	  - no need to keep capture buffer (not a big slow down but small rivers
+	make big ones...)
+
+	* drakxtools.spec: more to come
+
+	* share/po/fr.po: update french translation
+
+	* share/po/br.po: minor update
+
+2003/03/04  Frederic Lepied  <flepied@mandrakesoft.com>
+
+	* network/isdn.pm: corrected isdn-light choice
+
+	* network/modem.pm: install kdenetwork-kppp if kdebase is already
+	installed
+
+	* network/network.pm: allow to set hostname in DHCP mode
+	install tmdns only when bind isn't installed
+
+2003/03/04  François Pons  <fpons@mandrakesoft.com>
+
+	* standalone/drakconnect: clean interface flags when dhcp mode is used.
+
+	* network/ethernet.pm: avoid being pertubed by created virtual interface
+	(no inet addre nor
+	physicall card behing)
+
+2003/03/04  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* tools/cvslog2changelog.pl: add florin alafox alus
+
+	* lang.pm: set better default XIMInputStyle value for CJK, thx to Narfi
+	Stefansson <narfi at cs.wisc.edu> for the idea
+
+	* mdk-stage1/stdio-frontend.c, mdk-stage1/newt-frontend.c: don't forget to
+	probe USB for info and error messages as well
+
+2003/03/04  Pablo Saratxaga  <pablo@mandrakesoft.com>
+
+	* share/po/cs.po: updated Czech file
+	updated pot files
+
+	* share/po/ar.po: corrected encoding problems
+	updated pot files
+
+	* share/po/sk.po, share/po/ru.po, share/po/pt_BR.po, share/po/sl.po,
+	share/po/no.po, share/po/ja.po, share/po/tr.po, share/po/mt.po,
+	share/po/uk.po, share/po/ko.po, share/po/DrakX.pot, share/po/sv.po,
+	share/po/sr.po, share/po/pl.po, share/po/lt.po, share/po/sp.po,
+	share/po/tg.po, share/po/uz.po, share/po/ro.po, share/po/wa.po,
+	share/po/zh_TW.po, share/po/zh_CN.po, share/po/pt.po, share/po/vi.po,
+	share/po/ta.po, share/po/sq.po, share/po/nl.po, share/po/lv.po: updated
+	pot file
+
+	* share/po/th.po: corrected encoding problems
+	updated pot file
+
+	* share/po/et.po: updated Estonian file
+	updated pot files
+
+	* share/po/id.po, share/po/gl.po, share/po/br.po, share/po/hr.po,
+	share/po/ga.po, share/po/be.po, share/po/fi.po, share/po/he.po,
+	share/po/cy.po, share/po/ca.po, share/po/da.po, share/po/bs.po,
+	share/po/is.po, share/po/af.po, share/po/az.po, share/po/fr.po,
+	share/po/it.po, share/po/eu.po, share/po/es.po, share/po/de.po,
+	share/po/eo.po, share/po/el.po, share/po/bg.po, share/po/hu.po: updated
+	pot files
+
+2003/03/04  Pixel  <pixel@mandrakesoft.com>
+
+	* share/rpmsrate: add "acpi" and "acpid" to INSTALL
+	move imap to NETWORKING_MAIL_SERVER (bug #2622)
+
+2003/03/04  Thierry Vignaud  <tvignaud@mandrakesoft.com>
+
+	* standalone/drakperm: 
+	  - untabify
+	  - fix small memory leak (tree iterators)
+	  - restore edit dialog on doble click and
+	  - restore informations retrieving for edit dialog on doble click and
+	get rid of %CURENT
+
+	* standalone/logdrake: scroll back when logging
+
 2003/03/04  florin
 
 	* standalone/drakgw: simplified form (pixel)
@@ -13874,7 +14144,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.800 2003/03/03 00:35:36 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.801 2003/03/04 13:54:59 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
