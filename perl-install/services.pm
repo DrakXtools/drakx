@@ -237,7 +237,9 @@ sub ask_standalone_gtk {
 		      gtkpack__(Gtk2::HBox->new(0,0), gtksignal_connect(Gtk2::Button->new(translate($a)),
                           clicked => sub { 
 			      my $action = $a eq "Start" ? 'restart' : 'stop'; 
-			      local $_ = `service $service $action 2>&1`; s/\033\[[^mG]*[mG]//g;
+			      # as we need the output in UTF-8, force it
+			      local $_ = `GP_LANG="UTF-8" service $service $action 2>&1`; s/\033\[[^mG]*[mG]//g;
+			      c::set_tagged_utf8($_);
 			      $update_service->($service, $label);
 			      $display->($_);
 			  })) if !$is_xinetd_service;
