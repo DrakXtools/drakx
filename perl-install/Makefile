@@ -154,7 +154,11 @@ endif
 ifeq (i386,$(ARCH))
 	cp ../tools/i386/busybox $(DEST)/usr/bin
 endif
+ifeq (ia64,$(ARCH))
+	ln -sf bash $(DEST)/usr/bin/sh
+else
 	ln -sf ash $(DEST)/usr/bin/sh
+endif
 
 	for i in fonts keyboards locales keymaps; do tar xfj `../tools/specific_arch share/$$i.tar.bz2` -C $(DEST); done
 
