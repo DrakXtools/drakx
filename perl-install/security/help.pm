@@ -117,6 +117,7 @@ CHECK_WRITABLE => N("if set to yes, check files/directories writable by everybod
 CHKROOTKIT_CHECK => N("if set to yes, run chkrootkit checks."),
 MAIL_USER => N("if set, send the mail report to this email address else send it to root."),
 MAIL_WARN => N("if set to yes, report check result by mail."),
+MAIL_EMPTY_CONTENT => N("Do not send mails if there's nothing to warn about"),
 RPM_CHECK => N("if set to yes, run some checks against the rpm database."),
 SYSLOG_WARN => N("if set to yes, report check result to syslog."),
 TTY_WARN => N("if set to yes, reports check result to tty."),
