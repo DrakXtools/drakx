@@ -243,20 +243,18 @@ sub row_setting_dialog {
     my $cancel      = Gtk2::Button->new(N("Cancel"));
     my $browse = new Gtk2::Button(N("browse"));
     my $file        = new Gtk2::Entry;
-    my $usr_check  = new Gtk2::CheckButton(N("Current user"));
-    my $sticky = new Gtk2::CheckButton(N("Sticky-bit"));
-    my $suid   = new Gtk2::CheckButton(N("Set-UID"));
-    my $gid    = new Gtk2::CheckButton(N("Set-GID"));
+    my ($id_box, $usr_check);
     my $rght = $model->get($iter, 4) if $iter;
     my $s = length($rght) == 4 ? substr($rght,0,1) : 0;
     my $user  = $s ? substr($rght,1,1) : substr($rght,0,1);
     my $group = $s ? substr($rght,2,1) : substr($rght,1,1);
     my $other = $s ? substr($rght,3,1) : substr($rght,2,1);
+    my @bits = qw(sticky gid suid);
+    my @rights = qw(read write execute);
+    my @owners = qw(user group other);
     
     my %rights = (user => $user, group => $group, other => $other);
     my %rights_labels = (user => N("User"), group => N("Group"), other => N("Other"));
-    my @check  = ('', 'read', 'write', 'execute');
-    
     my %checks = ('read' => {
                              label => N("Read"),
                              tip => { map { $_ => N("Enable \"%s\" to read the file", $_) } keys %rights },
@@ -269,18 +267,13 @@ sub row_setting_dialog {
                                 label => N("Execute"),
                                 tip => { map { $_ => N("Enable \"%s\" to execute the file", $_) } keys %rights },
                                },
-                  '' => { label => '', tip => '' },
+                  sticky => { label => N("Sticky-bit"), tip => N("Used for directory:\n only owner of directory or file in this directory can delete it") },
+                  suid => { label => N("Set-UID"), tip => N("Use owner id for execution") },
+                  gid => { label => N("Set-GID"), tip => N("Use group id for execution") },
                  );
-    $tips->set_tip($sticky, N("Used for directory:\n only owner of directory or file in this directory can delete it"));
-    $tips->set_tip($suid, N("Use owner id for execution"));
-    $tips->set_tip($gid, N("Use group id for execution"));
-    $tips->set_tip($usr_check, N("When checked, owner and group won't be changed"));
 
     #- dlg widgets settings
     my %s_right = get_right($s);
-    $sticky->set_active($s_right{execute});
-    $gid->set_active($s_right{write});
-    $suid->set_active($s_right{read});
      
     $file->set_text($model->get($iter, 1)) if $iter;
 
@@ -298,10 +291,6 @@ sub row_setting_dialog {
      $users->set_sensitive(0);
     }
      
-    $tips->set_tip($sticky, N("Used for directory:\n only owner of directory or file in this directory can delete it"));
-    $tips->set_tip($suid, N("Use owner id for execution"));
-    $tips->set_tip($gid, N("Use group id for execution"));
-    $tips->set_tip($usr_check, N("when checked, owner and group won't be changed"));
      
     $cancel->signal_connect(clicked => sub { $dlg->destroy });
     $browse->signal_connect(clicked => sub {
@@ -336,11 +325,6 @@ sub row_setting_dialog {
                             $dlg->destroy;
                             $modified++;
                         });
-    $usr_check->signal_connect(clicked => sub {
-                        my $bool = $usr_check->get_active; 
-                        $groups->set_sensitive(!$bool);
-                        $users->set_sensitive(!$bool);
-                    });
 
     gtkpack_($dlg->vbox,
              0, gtkadd(Gtk2::Frame->new(N("Path")),
@@ -351,19 +335,22 @@ sub row_setting_dialog {
                       ),
              0, gtkadd(Gtk2::Frame->new(N("Property")),
                        gtkadd(Gtk2::VBox->new(0,5),
-                              $usr_check,
-                              gtkadd(Gtk2::HBox->new(0,5),
-                                     Gtk2::Label->new(N("User :")),
-                                     $users,
-                                     Gtk2::Label->new(N("Group :")),
-                                     $groups,
-                                    ),
+                              $usr_check = gtksignal_connect(gtkset_tip($tips, Gtk2::CheckButton->new(N("Current user")),
+                                                                        N("When checked, owner and group won't be changed")),
+                                                             clicked => sub { $id_box->set_sensitive($usr_check->get_active) }),
+                              $id_box = gtkadd(Gtk2::HBox->new(0,5),
+                                               Gtk2::Label->new(N("User :")),
+                                               $users,
+                                               Gtk2::Label->new(N("Group :")),
+                                               $groups,
+                                              ),
                              ),
                       ),
              1, gtkadd(Gtk2::Frame->new(N("Permissions")),
                        gtkpack(Gtk2::HBox->new(0,15),
                                gtkadd(Gtk2::VBox->new(0,15),
-                                      map { gtkset_tip($tips, Gtk2::Label->new($checks{$_}{label}), $checks{$_}{tip}) } @check,
+                                      Gtk2::Label->new(""),
+                                      map { gtkset_tip($tips, Gtk2::Label->new($checks{$_}{label}), $checks{$_}{tip}) } @rights,
                                      ),
                                (map {
                                    my $owner = $_;
@@ -378,20 +365,21 @@ sub row_setting_dialog {
                                                                         $checks{$c}{tip}{$owner},
                                                                        );
                                                          gtkset_active($perms{$owner}{$c}, $active);
-                                                     } grep { $_ } @check,
+                                                     } @rights,
                                                     );
                                    
                                    $vbox;
-                               } keys %rights),
+                               } @owners),
                                gtkpack(Gtk2::VBox->new(0,5),
                                        Gtk2::Label->new(' '),
-                                       $suid,
-                                       $gid,
-                                       $sticky,
+                                       map { $perms{$_} = gtkset_tip($tips, Gtk2::CheckButton->new($checks{$_}{label}), $checks{$_}{tip}) } @bits,
                                       ),
                               ),
                       ),
             );
+    $perms{sticky}->set_active($s_right{execute});
+    $perms{gid}->set_active($s_right{write});
+    $perms{suid}->set_active($s_right{read});
 
     gtkadd($dlg->action_area,
            $cancel,
