@@ -448,7 +448,7 @@ and optionally the port number."), [
 		$in->set_help('configurePrinterLocal') if $::isInstall;
 		$in->ask_from_entries_refH_powered(
                     { title => _("Select Printer Connection"),
-		      cancel => !$::expert || !$printer->{configured}{$printer->{QUEUE}} ? '' : _("Remove queue"),
+		      cancel => !$printer->{configured}{$printer->{QUEUE}} ? '' : _("Remove queue"),
 		      callbacks => { complete => sub {
 					 unless ($printer->{QUEUE} =~ /^\w*$/) {
 					     $in->ask_warn('', _("Name of printer should contains only letters, numbers and the underscore"));
