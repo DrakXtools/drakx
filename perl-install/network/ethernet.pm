@@ -30,6 +30,7 @@ sub write_ether_conf {
 sub mapIntfToDevice {
     my ($interface) = @_;
     my $hw_addr = c::getHwIDs($interface);
+    return {} if $hw_addr =~ /^usb/;
     my ($bus, $slot, $func) = map { hex($_) } ($hw_addr =~ /([0-9a-f]+):([0-9a-f]+)\.([0-9a-f]+)/);
     $hw_addr && (every { defined $_ } $bus, $slot, $func) ?
       grep { $_->{pci_bus} == $bus && $_->{pci_device} == $slot && $_->{pci_function} == $func } detect_devices::probeall() : {};
