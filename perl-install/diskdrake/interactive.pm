@@ -664,7 +664,6 @@ sub Resize {
 	    log::l("dumpe2fs $nice_resize{ext2} gives: Block_count=$block_count, Free_blocks=$free_block, Block_size=$block_size");
 	    if ($block_count && $free_block && $block_size) {
 		$min = max($min, ($block_count - $free_block) * ($block_size / 512));
-		$max = min($max, $block_count * ($block_size / 512));
 		$nice_resize{ext2} = $dev;
 	    }
 	} elsif (isThisFs('ntfs', $part)) {
