@@ -533,23 +533,18 @@ sub template2userfile($$$$%) {
     }
 }
 
-sub kderc_largedisplay($) {
-    my ($prefix) = @_;
+sub update_userkderc($$$) {
+    my ($prefix, $cat, $subst) = @_;
 
     foreach ("/etc/skel", "/root", list_home()) {
 	my ($inputfile, $outputfile) = ("$prefix$_/.kderc", "$prefix$_/.kderc.new");
-	my %subst = ( contrast => "Contrast=7\n",
-		      kfmiconstyle => "kfmIconStyle=Large\n",
-		      kpaneliconstyle => "kpanelIconStyle=Normal\n", #- to change to Large when icons looks better
-		      kdeiconstyle => "KDEIconStyle=Large\n",
-		    );
-
+	my %subst = %$subst;
 	local *INFILE; local *OUTFILE;
 	open INFILE, $inputfile or return;
 	open OUTFILE, ">$outputfile" or return;
 
 	print OUTFILE map {
-	    if (my $i = /^\s*\[KDE\]/ ... /^\s*\[/) {
+	    if (my $i = /^\s*\[$cat\]/i ... /^\s*\[/) {
 		if (/^\s*(\w*)=/ && $subst{lc($1)}) {
 		    delete $subst{lc($1)};
 		} else {
@@ -559,10 +554,32 @@ sub kderc_largedisplay($) {
 		$_;
 	    }
 	} <INFILE>;
+	print OUTFILE "[$cat]\n", values %subst if values %subst; #- if categorie has not been found above.
 
 	unlink $inputfile;
 	rename $outputfile, $inputfile;
     }
+}
+
+sub kderc_largedisplay($) {
+    my ($prefix) = @_;
+
+    update_userkderc($prefix, 'KDE', {
+				      contrast => "Contrast=7\n",
+				      kfmiconstyle => "kfmIconStyle=Large\n",
+				      kpaneliconstyle => "kpanelIconStyle=Normal\n", #- to change to Large when icons looks better
+				      kdeiconstyle => "KDEIconStyle=Large\n",
+				     });
+}
+
+sub kdelang_postinstall($) {
+    my ($prefix) = @_;
+    my %i18n = getVarsFromSh("$prefix/etc/sysconfig/i18n");
+    my $lang = $i18n{LANG} eq 'se' ? 'sv' : $i18n{LANG};
+
+    update_userkderc($prefix, 'Locale', {
+					 language => "Language=$lang\n",
+					});
 }
 
 sub kdeicons_postinstall($) {
@@ -593,8 +610,11 @@ sub kdeicons_postinstall($) {
 	    my %toreplace = ( id => $1 );
 	    template2userfile($prefix, "/usr/share/floppy.kdelnk.in", "Desktop/floppy$2.kdelnk", 1, %toreplace);
 	} elsif (/^\/dev\/(\S+)\s+\/mnt\/DOS_ (\S*)\s+/x) {
-	    my %toreplace = ( device => $1, id => $2 );
+	    my %toreplace = ( device => $1, id => $2, mntpoint => "/mnt/DOS_$2" );
 	    template2userfile($prefix, "/usr/share/Dos_.kdelnk.in", "Desktop/Dos_$2.kdelnk", 1, %toreplace);
+	} elsif (/^\/dev\/(\S+)\s+(\S*)\s+vfat\s+/x) {
+	    my %toreplace = ( device => $1, id => $1, mntpoint => $2 );
+	    template2userfile($prefix, "/usr/share/Dos_.kdelnk.in", "Desktop/Dos_$1.kdelnk", 1, %toreplace);
 	}
     }
 }

@@ -238,7 +238,7 @@ sub write_fstab($;$$) {
 	  isNfs($_) and $dir = '', $options ||= 'ro,rsize=8192,wsize=8192';
 
 	  #- keep in mind the new line for fstab.
-	  @new{($_->{mntpoint}, $_->{"$dir$_->{device}"})} = undef;
+	  @new{($_->{mntpoint}, "$dir$_->{device}")} = undef;
 
 	  #- tested? devices::make("$prefix/$dir$_->{device}") if $_->{device} && $dir && !$_->{noMakeDevice};
 	  eval { devices::make("$prefix/$dir$_->{device}") } if $_->{device} && $dir;
@@ -247,21 +247,23 @@ sub write_fstab($;$$) {
 	  [ ( $_->{device} =~ /^\// ? $_->{device} : "$dir$_->{device}" ),
 	    $_->{mntpoint}, type2fs($_->{type}), $options, $freq, $passno ];
 
-      } grep { $_->{mntpoint} && type2fs($_->{type}) &&
+      } grep { $_->{mntpoint} && type2fs($_->{type}) && !isFat($_) &&
 		 ! exists $new{$_->{mntpoint}} && ! exists $new{"/dev/$_->{device}"} } @$fstab;
 
     #- inserts dos/win partitions in fstab.
     #- backward compatible win kdeicons script to handle upgrade correctly?
+    #- take into account an already provided mount point.
     unshift @to_add,
       map_index {
 	  my $i = $::i ? $::i + 1 : '';
 	  my $device = $_->{device} =~ /^\/dev\/(.*)$/ ? $1 : $_->{device};
+	  my $mntpoint = $_->{mntpoint} ? $_->{mntpoint} : "/mnt/DOS_$device";
 
 	  #- keep in mind the new line for fstab.
-	  @new{("/mnt/DOS_$device", "/dev/$device")} = undef;
+	  @new{($mntpoint, "/dev/$device")} = undef;
 
-	  mkdir "$prefix/mnt/DOS_$device", 0755 or log::l("failed to mkdir $prefix/mnt/DOS_$device: $!");
-	  [ "/dev/$device", "/mnt/DOS_$device", "vfat", "user,exec,conv=auto", 0, 0 ];
+	  mkdir "$prefix/$mntpoint", 0755 or log::l("failed to mkdir $prefix/$mntpoint: $!");
+	  [ "/dev/$device", $mntpoint, "vfat", "user,exec,conv=auto", 0, 0 ];
       } grep { isFat($_) &&
 		 ! exists $new{"/dev/$_->{device}"} } @$fstab;
 

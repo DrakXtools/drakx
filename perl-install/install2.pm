@@ -356,10 +356,6 @@ sub doInstallStep {
     $o->beforeInstallPackages;
     $o->installPackages($o->{packages});
     $o->afterInstallPackages;
-
-    #- make icons for KDE.
-    log::l("updating kde icons according to available devices");
-    install_any::kdeicons_postinstall($o->{prefix});
 }
 #------------------------------------------------------------------------------
 sub miscellaneous {
@@ -616,6 +612,12 @@ sub main {
 
     fs::write($o->{prefix}, $o->{fstab}, $o->{manualFstab}, $o->{useSupermount});
     modules::write_conf("$o->{prefix}/etc/conf.modules", 'append');
+
+    #- update language and icons for KDE.
+    log::l("updating language for kde");
+    install_any::kdelang_postinstall($o->{prefix});
+    log::l("updating kde icons according to available devices");
+    install_any::kdeicons_postinstall($o->{prefix});
 
     install_any::lnx4win_postinstall($o->{prefix}) if $o->{lnx4win};
     install_any::killCardServices();
