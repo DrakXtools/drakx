@@ -125,7 +125,7 @@ sub real_main {
               return "multiple_internet_cnx";
           } else {
               $netc->{internet_cnx_choice} = (keys %{$netc->{internet_cnx}})[0] if $nb == 1;
-              return $::isInstall ? "network_on_boot" : "apply_settings";
+              return "network_on_boot";
           }
       };
 
@@ -1019,19 +1019,19 @@ N("Last but not least you can also type in your DNS server IP addresses."),
                         [ { label => N("Internet connection"), val => \$netc->{internet_cnx_choice}, 
                             list => [ keys %{$netc->{internet_cnx}} ] } ];
                     },
-                    post => sub { $::isInstall ? "network_on_boot" : "apply_settings" },
+                    post => sub {
+                        if (keys %$config) {
+                            require Data::Dumper;
+                            output('/etc/sysconfig/drakconnect', Data::Dumper->Dump([$config], ['$p']));
+                        }
+                        return "network_on_boot";
+                    },
                    },
                    
                    apply_settings => 
                    {
                     name => N("Configuration is complete, do you want to apply settings ?"),
                     type => "yesorno",
-                    post => sub {
-			if (keys %$config) {
-			    require Data::Dumper;
-			    output('/etc/sysconfig/drakconnect', Data::Dumper->Dump([$config], ['$p']));
-			}
-			"network_on_boot" },
                    },
                    
                    network_on_boot => 
