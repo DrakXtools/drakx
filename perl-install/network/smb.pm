@@ -131,14 +131,14 @@ sub remove_bad_credentials {
 sub save_credentials {
     my ($credentials) = @_;
     my $file = $credentials->{file};
-    output($file, map { "$_ = $credentials->{$_}\n" } qw(username domain password));
-    chmod(0640, $file);
+    output_p($file, map { "$_ = $credentials->{$_}\n" } qw(username domain password));
+    chmod(0640, "$::prefix$file");
 }
 
 
 sub read_credentials_raw {
     my ($file) = @_;
-    my %h = map { /(.*?)\s*=\s*(.*)/ } cat_($file);
+    my %h = map { /(.*?)\s*=\s*(.*)/ } cat_("$::prefix$file");
     \%h;
 }
 

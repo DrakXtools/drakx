@@ -91,7 +91,7 @@ sub read_fstab {
 	    #- the other way is done in fstab_to_string
 	    my ($options, $unknown) = mount_options_unpack($h);
 	    my $file = delete $options->{'credentials='};
-	    my $credentials = network::smb::read_credentials_raw("$prefix$file");
+	    my $credentials = network::smb::read_credentials_raw($file);
 	    if ($credentials->{username}) {
 		$options->{"$_="} = $credentials->{$_} foreach qw(username password domain);
 		mount_options_pack($h, $options, $unknown);
