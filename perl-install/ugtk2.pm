@@ -1033,13 +1033,17 @@ sub ask_browse_tree_info {
 		   ));
     gtkpack__($box2, my $toolbar = Gtk2::Toolbar->new('horizontal', 'icons'));
 
-    $box2->pack_end(gtksignal_connect(Gtk2::Button->new($common->{cancel}), clicked => sub {
-					  $w->{retval} = 0;
-					  Gtk2->main_quit }), 0, 1, 20) if $common->{cancel};
-
-    $box2->pack_end(my $go = gtksignal_connect(Gtk2::Button->new($common->{ok}), clicked => sub {
-						   $w->{retval} = 1;
-						   Gtk2->main_quit }), 0, 1, 20);
+    my @l = ([ $common->{ok}, 1 ], if_($common->{cancel}, [ $common->{cancel}, 0 ]));
+    @l = reverse @l if !$::isInstall;
+    my @buttons = map {
+	my ($t, $val) = @$_;
+	$box2->pack_end(my $w = gtksignal_connect(Gtk2::Button->new($t), clicked => sub {
+						      $w->{retval} = $val;
+						      Gtk2->main_quit;
+						  }), 0, 1, 20);
+	$w;
+    } @l;
+    @buttons = reverse @buttons if !$::isInstall;    
 
     if ($common->{auto_deps}) {
 	gtkpack__($box1, gtksignal_connect(gtkset_active(Gtk2::CheckButton->new($common->{auto_deps}), $common->{state}{auto_deps}),
@@ -1048,7 +1052,7 @@ sub ask_browse_tree_info {
     $box1->pack_end(my $status = Gtk2::Label->new, 0, 1, 20);
 
     $w->{window}->set_size_request(map { $_ - 2 * $border - 4 } $::windowwidth, $::windowheight) if !$::isInstall;
-    $go->grab_focus;
+    $buttons[0]->grab_focus;
     $w->{rwindow}->show_all;
 
     my @toolbar = (ftout  =>  [ N("Expand Tree"), sub { $tree->expand_all } ],
