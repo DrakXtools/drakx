@@ -1088,11 +1088,11 @@ sub migrate_files {
     my @l = glob_("$part->{mntpoint}/*");
     foreach (@l) {
 	$wait->set(N("Copying %s", $_)); 
-	system("cp", "-a", $_, $handle->{dir});
+	system("cp", "-a", $_, $handle->{dir}) == 0 or die "copying failed";
     }
     foreach (@l) {
 	$wait->set(N("Removing %s", $_)); 
-	system("rm", "-rf", $_);
+	system("rm", "-rf", $_) == 0 or die "removing files failed";
     }
 }
 
