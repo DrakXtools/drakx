@@ -42,7 +42,6 @@ foreach (@ARGV) {
 }
 
 my $window = ugtk2->new('drakbug', center => 1);
-my $window_g = $window->{window};
 $window->{rwindow}->set_border_width(5);
 $window->{rwindow}->set_title(N("Mandrake Bug Report Tool"));
 $window->{window}->signal_connect("delete_event", sub { ugtk2->exit(0) });
