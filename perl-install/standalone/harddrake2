@@ -5,6 +5,7 @@ use diagnostics;
 use lib qw(/usr/lib/libDrakX);
 use standalone;
 use common;
+use do_pkgs;
 
 # i18n: IMPORTANT: to get correct namespace (drakconf instead of only libDrakX)
 BEGIN { unshift @::textdomains, 'drakconf' }
@@ -463,9 +464,26 @@ $textcolumn->set_sizing('GTK_TREE_VIEW_COLUMN_AUTOSIZE');#GROW_ONLY
 #$tree->columns_autosize();
 $tree->signal_connect(realize => sub { $tree->get_selection->select_path(Gtk2::TreePath->new_first) });
 $w->{rwindow}->show_all;
+$_->hide foreach $module_cfg_button, $config_button; # hide buttons while no device
+
+{
+    $SIG{CHLD} = undef;
+    #local $SIG{CHLD} = sub {};
+    if (my @packages = simple_read_rpmsrate()) {
+        my $do_pkgs = do_pkgs_standalone->new;
+        my @packages2install = grep { !$do_pkgs->is_installed($_) } @packages;
+        undef $wait;
+        gtkset_mousecursor_normal();
+        
+        if (@packages2install && $in->ask_yesorno(N("Warning"), N("The following packages need to be installed:\n" . join(', ', @packages2install)))) {
+            $do_pkgs->install(@packages2install);
+        }
+    }
+}
 undef $wait;
 gtkset_mousecursor_normal();
-$_->hide foreach $module_cfg_button, $config_button; # hide buttons while no device
+
+
 $w->main;
 
 
@@ -559,4 +577,17 @@ $password_w->set_visibility(0); #set_invisible_char('*');
         require run_program;
         run_program::raw({ detach => 1 }, "/usr/sbin/hwdb_add_system", $account, $name);
     }
+}
+
+
+sub simple_read_rpmsrate {
+    map { split(' ', $_) } map {
+        if (my ($p, $packages) = /[^!]HW"(.*)"(.*)/) {
+            if_(detect_devices::matching_desc__regexp($p), $packages);
+        } elsif (($p, $packages) = /[^!]DRIVER"(.*)"(.*)/) {
+            if_(detect_devices::matching_driver__regexp($p), $packages);
+        } else {
+            ();
+        }
+    } cat_("/usr/share/harddrake/rpmsrate");
 }
