@@ -37,7 +37,7 @@ use fs;
 XFree86-Mach64 XFree86-S3 XFree86-S3V XFree86-SVGA 
 XFree86-Sun XFree86-SunMono XFree86-Sun24 XFree86-FBDev XFree86-server
 XFree86 XFree86-glide-module Device3Dfx Glide_V3-DRI Glide_V5 Mesa
-dhcpcd pump dhcpxd dhcp-client isdn4net isdn4k-utils dev pptp-adsl rp-pppoe ppp ypbind
+dhcpcd pump dhcpxd dhcp-client isdn-light isdn4net isdn4k-utils dev pptp-adsl rp-pppoe ppp ypbind
 autologin
 foomatic printer-utils printer-testpages gimpprint rlpr samba-client ncpfs nc
 cups xpp qtcups kups cups-drivers lpr LPRng pdq ImageMagick
