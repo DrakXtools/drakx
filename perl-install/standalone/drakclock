@@ -1,0 +1,374 @@
+#!/usr/bin/perl
+
+use strict;
+use lib qw(/usr/lib/libDrakX);
+use POSIX;
+use common;
+# i18n : IMPORTANT to get correct namespace (drakconf instead of libDrakX)
+BEGIN { unshift @::textdomains, 'drakconf' }
+use ugtk2 qw(:all);
+use interactive;
+use standalone;
+use timezone;
+
+my $in = interactive->vnew('su');
+my $pixmap;
+my $radius;
+my ($dRadians_hour, $dRadians_min, $dRadians_sec);
+my $Radian;
+my $timer;
+my ($midx, $midy);
+my $first = 1;
+my $its_reset = 0;
+
+my $conffile = '/etc/sysconfig/ntpclock';
+my $ntpfile = '/etc/ntp.conf';
+my $ntpdlock = '/var/lock/subsys/ntpd';
+
+my $my_win = ugtk2->new('print_launcher');
+$my_win->{rwindow}->set_title(N("DrakClock")) unless $::isEmbedded;
+
+$my_win->{window}->signal_connect(delete_event => sub { ugtk2->exit(0) });
+
+my $calendar = Gtk2::Calendar->new;
+$calendar->signal_connect($_ => \&cal_changed) foreach 'month-changed', 'day-selected', 'day-selected-double-click', 'prev-month', 'next-month', 'prev-year', 'next-year';
+
+my $button_time = Gtk2::Button->new(N("Time Zone"));
+$button_time->signal_connect(clicked => sub {
+				   local $::isEmbedded = 0; # to prevent sub window embedding
+				   $in->{timezone} = {};
+				   add2hash($in->{timezone}, timezone::read());
+				   my $timezone = $in->{timezone}{timezone};
+				   $in->{timezone}{timezone} = $in->ask_from_treelist(N("Timezone - DrakClock"), N("Which is your timezone?"), '/', [ timezone::getTimeZones('') ], $timezone);
+				   if (defined($in->{timezone}{timezone})) {
+					   $in->{timezone}{UTC} = $in->ask_yesorno(N("GMT - DrakClock"), N("Is your hardware clock set to GMT?"), $in->{timezone}{UTC});
+					   timezone::write('', $in->{timezone});
+				   } else {
+					   $in->{timezone}{timezone} = $timezone;
+                        }
+			       });
+#my $button_ntp = Gtk2::Button->new(N("Use NTP"));
+#$button_time->signal_connect(clicked => sub { ask_ntp($in, $) });
+
+my $drawing_area;
+
+my $adj_h = Gtk2::Adjustment->new(0.0, 0.0, 23.0, 1.0, 5.0, 0.0);
+my $adj_m = Gtk2::Adjustment->new(0.0, 0.0, 59.0, 1.0, 5.0, 0.0);
+my $adj_s = Gtk2::Adjustment->new(0.0, 0.0, 59.0, 1.0, 5.0, 0.0);
+
+my ($button_reset, $check_ntp, $hb_ntp, $combo_ntpserver, $fullntp, $ntp);
+my $mode = 0;
+
+my (undef, undef, $h_old, $old_day, $old_month, $old_year) = localtime(time());
+
+my @image_size = (300, 300);
+
+$my_win->{window}->add(gtkpack_(Gtk2::VBox->new(0,0),
+                                1, gtkpack_(Gtk2::HBox->new(0,0),
+                                            1, gtkpack_(Gtk2::VBox->new(0,0),
+                                                        0, $calendar,
+                                                        0, $button_time,
+							1, gtkadd(gtkset_shadow_type(Gtk2::Frame->new(N("Network Time Protocol")), 'etched_in'),
+								  gtkpack_(Gtk2::VBox->new(0, 3),
+									   0, Gtk2::Label->new(N("Your computer can synchronize its clock\n with a remote time server using NTP")),
+									   0, gtksignal_connect(gtkset_active($check_ntp = Gtk2::CheckButton->new(N("Enable Network Time Protocol")), $mode),  clicked => sub { 
+												    $mode = !$mode; 
+												    $hb_ntp->set_sensitive($mode);
+												    if (!-e $ntpfile && $mode == 1)
+												      { install_ntp() }
+												}),
+									   0, gtkpack_($hb_ntp = Gtk2::HBox->new(0, 2),
+										       0, Gtk2::Label->new(N("Server:")),
+										       1, $combo_ntpserver = Gtk2::Combo->new
+										      )
+									  ))
+						       ),
+                                            1, gtkpack_(Gtk2::VBox->new(0,0),
+                                                        0, gtkpack_(Gtk2::HBox->new(0,0),
+                                                                    0, $drawing_area = gtkset_size_request(Gtk2::DrawingArea->new, @image_size),
+                                                                    ),
+                                                        0, gtkpack_(Gtk2::HBox->new(1,0),
+                                                                    0, Gtk2::HBox->new(1,0),
+                                                                    0, my $spinner_h = Gtk2::SpinButton->new($adj_h, 0, 0),
+                                                                    0, my $spinner_m = Gtk2::SpinButton->new($adj_m, 0, 0),
+                                                                    0, my $spinner_s = Gtk2::SpinButton->new($adj_s, 0, 0),
+                                                                    ),
+                                                        ),
+                                            ),
+                                0, gtkadd(gtkset_layout(Gtk2::HButtonBox->new, 'end'),
+                                          gtksignal_connect(Gtk2::Button->new_from_stock('gtk-cancel'), clicked => sub { ugtk2->exit(0) }),
+                                          $button_reset = gtksignal_connect(Gtk2::Button->new_from_stock('gtk-revert-to-saved'), clicked => sub {
+                                              $its_reset = 1;
+                                              $timer = Glib::Timeout->add(120, \&update_time);
+                                              Repaint($drawing_area, 1);
+                                              $calendar->select_month($old_month, $old_year);
+                                              $calendar->select_day($old_day);
+                                              $button_reset->set_sensitive(0);
+                                              $its_reset = 0;
+                                          }),
+                                          gtksignal_connect(Gtk2::Button->new_from_stock('gtk-ok'), 
+                                                                       clicked => sub {
+									   if ($check_ntp->get_active) {
+									       my $choosed_serv = $combo_ntpserver->entry->get_text();
+									       $choosed_serv =~ s/(\S+)\s*(.*)$/$1/;
+									       timezone::ntp_server('', $1);
+									       system("/sbin/chkconfig --level 35 ntpd on");
+									       system("service ntpd restart");
+									   } else {
+									       if (-e $ntpdlock) { 
+										   system("service ntpd stop");
+										   system("/sbin/chkconfig --level 35 ntpd off");
+									       }
+									   }
+									   my ($year, $month, $day) = $calendar->get_date;
+									   $month++;
+									   my ($hour, $min, $sec) = ($adj_h->get_value, $adj_m->get_value, $adj_s->get_value);
+									   system("date " .
+										  join('', map { print_it0($_) } ($month, $day, $hour, $min, $year)) . '.' . print_it0($sec));
+									   -e '/sbin/hwclock' and system('/sbin/hwclock --systohc');
+									   system("dcop kicker Panel restart") if $ENV{DESKTOP} eq 'kde';
+									   ugtk2->exit(0);
+                                                                       }),
+                                          )
+                                )
+                       );
+my $servers = get_server();
+$combo_ntpserver->set_popdown_strings(@$servers);
+if (-e $ntpfile && -e $ntpdlock) {
+    $ntp = timezone::ntp_server('');
+    print "******$ntp*******\n";
+    $ntp and ntp_widget_state(1);
+    foreach my $s (@$servers) {
+	$s =~ /\Q$ntp/ and $fullntp = $s;
+	$fullntp and last
+    }
+    $fullntp |= $ntp;
+    $combo_ntpserver->entry->set_text($fullntp);
+} else { ntp_widget_state(0) }
+  
+my $pressed;
+$drawing_area->set_events([ 'button_press_mask', 'button_release_mask', "pointer_motion_mask" ]);
+$drawing_area->signal_connect(expose_event => \&expose_event);
+$drawing_area->signal_connect(realize => sub {
+                                  my $window = $drawing_area->window;
+                                  $pixmap = Gtk2::Gdk::Pixmap->new($window, @image_size, $window->get_depth);
+                              });
+
+$drawing_area->signal_connect(button_press_event   => sub { $pressed = 1 });
+$drawing_area->signal_connect(button_release_event => sub { $first = 1; $pressed = 0 });
+$drawing_area->signal_connect(motion_notify_event  => \&motion_event);
+
+$spinner_h->set_wrap(1);
+$spinner_h->signal_connect(activate => \&spinned);
+$spinner_h->signal_connect(button_release_event => \&spinned);
+$spinner_h->signal_connect(changed => \&changed);
+
+$spinner_m->set_wrap(1);
+$spinner_m->signal_connect(activate => \&spinned);
+$spinner_m->signal_connect(button_release_event => \&spinned);
+
+$spinner_s->set_wrap(1);
+$spinner_s->signal_connect(activate => \&spinned);
+$spinner_s->signal_connect(button_release_event => \&spinned);
+
+$my_win->{window}->show_all;
+
+gtkflush();
+
+my $is24 = $h_old > 12;
+$old_year += 1900;
+$calendar->select_month($old_month, $old_year);
+$calendar->select_day($old_day);
+$button_reset->set_sensitive(0);
+$timer = Glib::Timeout->add(120, \&update_time);
+
+$drawing_area->show;
+$my_win->main;
+ugtk2->exit(0);
+
+sub ntp_widget_state {
+    my $state = shift;
+    $check_ntp->set_active($state);  
+    $hb_ntp->set_sensitive($state);
+    $mode = $state;
+}
+sub install_ntp() {
+    my $w = ugtk2->new("Want to install ntp ?", grab => 1, center => 1, if_(!$::isEmbedded, transient => $my_win->{rwindow}));
+    gtkadd($w->{window},
+           gtkpack__(Gtk2::VBox->new(0,5),
+                     Gtk2::Label->new(N("We need to install ntp package\n to enable Network Time Protocol")),
+                     Gtk2::HSeparator->new,
+                     gtkpack(create_hbox(),
+                             gtksignal_connect(Gtk2::Button->new(N("Yes")), clicked => sub {
+						   Gtk2->main_quit;
+						   $in->do_pkgs->install('ntp');
+                                               }),
+                             gtksignal_connect(Gtk2::Button->new(N("No")), clicked => sub { 
+						   Gtk2->main_quit; 
+						   ntp_widget_state(0);
+					       }))));
+    $w->main;
+}
+sub get_server {
+    my ($servs, @sv);
+    $servs = timezone::ntp_servers();
+    foreach my $l (keys %$servs) {
+	my $c = $l . "  (" . $servs->{$l} . ")";
+	push(@sv, $c);
+    }
+    \@sv
+}
+sub update_time() {
+    Repaint($drawing_area, 1);
+};
+
+sub cal_changed() {
+    !$its_reset and $timer and Glib::Source->remove($timer);
+    $button_reset->set_sensitive(1);
+}
+
+sub changed() {
+  my $val   = $adj_h->get_value;
+  my $limit = ($is24 ? 18 : 6);
+  if (($limit > $val  &&  $h_old > $limit  &&  $h_old < ($is24 ? 24 : 12)) ||
+      ($limit < $val  &&  $h_old < $limit  &&  $val-$h_old != 12)) {
+    $is24 = !$is24;
+  }
+  $h_old = $val;
+}
+
+sub spinned() {
+    Glib::Source->remove($timer);
+    $button_reset->set_sensitive(1);
+
+    my (undef, undef, undef, @values) = localtime(time());
+    time_to_rad($adj_s->get_value, $adj_m->get_value, $adj_h->get_value, @values);
+    Repaint($drawing_area);
+    0;
+}
+
+sub motion_event {
+    my ($widget, $event) = @_;
+    $pressed or return;
+    if ($first) {
+	Glib::Source->remove($timer);
+	$Radian = determine_radian($event->x, $event->y);
+	$button_reset->set_sensitive(1);
+    }
+
+    $$Radian = -atan2(($event->x-$midx), ($event->y-$midy)) + $PI;
+
+    Repaint($widget);
+    rad_to_time();
+    $first = 0;
+}
+
+sub determine_radian {
+    my ($x, $y) = @_;
+
+    my $res;
+    my $r;
+    foreach (\$dRadians_hour, \$dRadians_min, \$dRadians_sec) {
+	my $d = sqrt( ($x - ($midx + 7/10 * $radius * sin($$_)))**2 + ($y - ($midy - 7/10 * $radius * cos($$_)))**2);
+	$res or $res = $d, $r = $_;
+	$d < $res and $res = $d, $r = $_;
+    }
+    $r;
+}
+
+sub expose_event {
+    my ($widget, $event) = @_;
+    my ($x, $y, $width, $height) = $event->area->values;
+    $widget->window->draw_drawable($widget->style->fg_gc('normal'), $pixmap, $x, $y, $x, $y, $width, $height);
+    0;
+}
+
+sub rad_to_time() {
+    $adj_h->set_value(POSIX::floor($dRadians_hour * 6 / $PI) + ($is24 ? 12 : 0));
+    $adj_m->set_value(POSIX::floor($dRadians_min*30/$PI));
+    $adj_s->set_value(POSIX::floor($dRadians_sec*30/$PI));
+}
+
+sub time_to_rad {
+    my ($sec, $min, $hour) = @_;
+    $dRadians_hour = $hour % 12 * $PI / 6;
+    $dRadians_min = $min * $PI / 30;
+    $dRadians_sec = $sec * $PI / 30;
+    $adj_h->set_value($hour);
+    $adj_m->set_value($min);
+    $adj_s->set_value($sec);
+}
+
+sub Repaint {
+    my ($drawing_area, $o_update_time) = @_;
+    time_to_rad(localtime(time())) if $o_update_time;
+    my ($width, $height) = ($drawing_area->allocation->width, $drawing_area->allocation->height);
+    my $dRadians_hour_real = $dRadians_hour + $dRadians_min / 12;
+    my $dRadians_min_real  = POSIX::floor($dRadians_min / $PI * 30) * $PI / 30;
+    my $dRadians_sec_real  = $dRadians_sec;
+    $pixmap->draw_rectangle($drawing_area->style->white_gc, 1, 0, 0, $width, $height);
+    my ($midx, $midy) = ($width / 2, $height / 2);
+    $radius = ($midx < $midy ? $midx : $midy) - 10;
+
+    my $gray_gc  = $drawing_area->style->bg_gc('normal');
+    my $black_gc = $drawing_area->style->black_gc;
+    foreach ([ $gray_gc, 5 ], [ $black_gc, 0 ]) {
+      &DrawTickAt($pixmap,  $_->[0], $midx, $midy, $_->[1]);
+      &DrawHour($pixmap, $_->[0], $midx, $midy, $dRadians_hour_real, $_->[1]);
+      &DrawMin($pixmap,  $_->[0], $midx, $midy, $dRadians_min_real,  $_->[1]);
+      &DrawSec($pixmap,  $_->[0], $midx, $midy, $dRadians_sec_real,  $_->[1]);
+    }
+    &DrawPointAt($pixmap, $black_gc, $_, $midx, $midy) foreach (1..60);
+    $drawing_area->queue_draw;
+    1;
+}
+
+sub DrawSec {
+    my ($pixmap, $gc, $midx, $midy, $dRadians, $dec) = @_;
+    $pixmap->draw_line($gc,
+		       $midx+$dec, $midy+$dec,
+		       $midx+$dec + (8/10 * $radius * sin($dRadians)),
+		       $midy+$dec - (8/10 * $radius * cos($dRadians)))
+}
+
+sub DrawMin {
+    my ($pixmap, $gc, $midx, $midy, $dRadians, $dec) = @_;
+    $pixmap->draw_polygon($gc, 1, $midx+$dec - 3/100 * $radius * sin($dRadians),       $midy+$dec + 3/100 * $radius * cos($dRadians),
+				    $midx+$dec - 3/100 * $radius * sin($dRadians+$PI/2), $midy+$dec + 3/100 * $radius * cos($dRadians+$PI/2),
+				    $midx+$dec + 8/10  * $radius * sin($dRadians),       $midy+$dec - 8/10  * $radius * cos($dRadians),
+				    $midx+$dec + 3/100 * $radius * sin($dRadians+$PI/2), $midy+$dec - 3/100 * $radius * cos($dRadians+$PI/2)
+				    );
+}
+
+sub DrawHour {
+    my ($pixmap, $gc, $midx, $midy, $dRadians, $dec) = @_;
+    $pixmap->draw_polygon($gc, 1, $midx+$dec - 5/100 * $radius * sin($dRadians),       $midy+$dec + 5/100 * $radius * cos($dRadians),
+				    $midx+$dec - 5/100 * $radius * sin($dRadians+$PI/2), $midy+$dec + 5/100 * $radius * cos($dRadians+$PI/2),
+				    $midx+$dec + 7/10  * $radius * sin($dRadians),       $midy+$dec - 7/10  * $radius * cos($dRadians),
+				    $midx+$dec + 5/100 * $radius * sin($dRadians+$PI/2), $midy+$dec - 5/100 * $radius * cos($dRadians+$PI/2)
+				    );
+}
+
+sub DrawTickAt {
+    my ($pixmap, $gc, $cx, $cy, $dec) = @_;
+    foreach my $nHour (1..12) {
+      my $dRadians = $nHour * $PI / 6.0;
+      $pixmap->draw_line($gc,
+			 $cx + $dec + 9/10 * $radius * sin($dRadians),
+			 $cy + $dec - 9/10 * $radius * cos($dRadians),
+			 $cx + $dec + 1    * $radius * sin($dRadians),
+			 $cy + $dec - 1    * $radius * cos($dRadians));
+    }
+}
+
+sub DrawPointAt {
+    my ($pixmap, $black_gc, $nHour, $cx, $cy) = @_;
+    my $dRadians = $nHour * $PI / 30;
+
+    Gtk2::Gdk::Drawable::draw_points($pixmap, $black_gc,
+			$cx + 95/100 * $radius * sin($dRadians),
+			$cy - 95/100 * $radius * cos($dRadians))
+}
+
+
+sub print_it0 { sprintf("%02d", $_[0]) }
