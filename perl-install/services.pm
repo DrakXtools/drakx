@@ -185,6 +185,7 @@ sub ask_install {
 sub ask_standalone_gtk {
     my ($_in) = @_;
     my ($l, $on_services) = services();
+    my @xinetd_services = map { $_->[0] } @{(services_raw())[1]};
 
     require ugtk2;
     ugtk2->import(qw(:wrappers :create));
@@ -192,17 +193,21 @@ sub ask_standalone_gtk {
     my $W = ugtk2->new(N("Services"));
     my ($x, $y, $w_popup);
     my $nopop = sub { $w_popup and $w_popup->destroy; undef $w_popup };
-    my $display = sub { $nopop->(); $_[0] and gtkshow(gtkadd($w_popup = Gtk2::Window->new('popup'),
-        				       gtksignal_connect(gtkadd(Gtk2::EventBox->new,
-        				           gtkadd(gtkset_shadow_type(Gtk2::Frame->new, 'etched_out'),
-        					   gtkset_justify(Gtk2::Label->new($_[0]), 'left'))),
-        					   button_press_event => sub { $nopop->() }
-		      )))->move($x, $y) };
+    my $display = sub { 
+	my ($text) = @_;
+	$nopop->(); 
+	gtkshow(gtkadd($w_popup = Gtk2::Window->new('popup'),
+		       gtksignal_connect(gtkadd(Gtk2::EventBox->new,
+						gtkadd(gtkset_shadow_type(Gtk2::Frame->new, 'etched_out'),
+						       gtkset_justify(Gtk2::Label->new($text), 'left'))),
+					 button_press_event => sub { $nopop->() }
+					)))->move($x, $y) if $text;
+    };
     my $update_service = sub {
-		my $started = -e "/var/lock/subsys/$_[0]";
-                my $action = $started ? "stop" : "start";
-                $_[1]->set_label($started ? N("running") : N("stopped"));
-                $started, $action;
+	my ($service, $label) = @_;
+	my $started = -e "/var/lock/subsys/$service";
+	my $action = $started ? "stop" : "start";
+	$label->set_label($started ? N("running") : N("stopped"));
     };
     my $b = Gtk2::EventBox->new;
     $b->set_events('pointer_motion_mask');
@@ -210,27 +215,32 @@ sub ask_standalone_gtk {
 	1, gtkset_size_request(create_scrolled_window(create_packtable({ col_spacings => 10, row_spacings => 3 },
 	    map {
                 my $service = $_;
+		my $is_xinetd_service = member($service, @xinetd_services);
         	my $infos = warp_text(description($_), 40);
                 $infos ||= N("No additional information\nabout this service, sorry.");
-		my $l = Gtk2::Label->new;
-                my ($started, $action) = $update_service->($service, gtkset_justify($l, 'left'));
+		my $label = gtkset_justify(Gtk2::Label->new, 'left');
+                $update_service->($service, $label) if !$is_xinetd_service;
 		[ gtkpack__(Gtk2::HBox->new(0,0), $_),
-		  gtkpack__(Gtk2::HBox->new(0,0), $l),
+		  gtkpack__(Gtk2::HBox->new(0,0), $label),
 		  gtkpack__(Gtk2::HBox->new(0,0), gtksignal_connect(Gtk2::Button->new(N("Info")), clicked => sub { $display->($infos) })),
+
                   gtkpack__(Gtk2::HBox->new(0,0), gtkset_active(gtksignal_connect(
-                          Gtk2::CheckButton->new(N("On boot")),
+                          Gtk2::CheckButton->new($is_xinetd_service ? N("Start when requested") : N("On boot")),
                           clicked => sub { if ($_[0]->get_active) {
                                                push @$on_services, $service if !member($service, @$on_services);
                                            } else {
                                                @$on_services = grep { $_ ne $service } @$on_services;
                                         } }), member($service, @$on_services))),
-		  map { my $a = $_;
-                      gtkpack__(Gtk2::HBox->new(0,0), gtksignal_connect(Gtk2::Button->new(translate($a)),
-                          clicked => sub { my $c = "service $service " . (lc($a) eq "start" ? "restart" : lc($a)) . " 2>&1"; local $_ = `$c`; s/\033\[[^mG]*[mG]//g;
-                                           ($started, $action) = $update_service->($service, $l);
-                                           $display->($_);
-                                         }
-                      )) } (N_("Start"), N_("Stop"))
+		  map { 
+		      my $a = $_;
+		      gtkpack__(Gtk2::HBox->new(0,0), gtksignal_connect(Gtk2::Button->new(translate($a)),
+                          clicked => sub { 
+			      my $action = $a eq "Start" ? 'restart' : 'stop'; 
+			      local $_ = `service $service $action 2>&1`; s/\033\[[^mG]*[mG]//g;
+			      $update_service->($service, $label);
+			      $display->($_);
+			  })) if !$is_xinetd_service;
+		  } (N_("Start"), N_("Stop"))
 		]
 	    }
             @$l), [ $::isEmbedded ? 'automatic' : 'never', 'automatic' ]), -1, $::isEmbedded ? -1 : 400),
@@ -277,8 +287,8 @@ sub services_raw() {
     local $ENV{LANGUAGE} = 'C';
     my (@services, @xinetd_services);
     foreach (run_program::rooted_get_stdout($::prefix, '/sbin/chkconfig', '--list')) {
-	if (my ($name, $on_off) = m!^\t(\S+):\s*(on|off)!) {
-	    push @xinetd_services, [ $name, $on_off eq 'on' ];
+	if (my ($xinetd_name, $on_off) = m!^\t(\S+):\s*(on|off)!) {
+	    push @xinetd_services, [ $xinetd_name, $on_off eq 'on' ];
 	} elsif (my ($name, $l) = m!^(\S+)\s+(0:(on|off).*)!) {
 	    push @services, [ $name, [ $l =~ /(\d+):on/g ] ];
 	}
