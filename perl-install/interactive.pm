@@ -224,12 +224,12 @@ sub ask_from_entries_refH_powered_normalize {
 sub ask_from_entries_refH_powered {
     my ($o, $common, $l) = @_;
     ask_from_entries_refH_powered_normalize($o, $common, $l);
+    @$l or return 1;
     $o->ask_from_entries_refW($common, [ grep { !$_->{advanced} } @$l ], [ grep { $_->{advanced} } @$l ]);
 }
 sub ask_from_entries_refH_powered_no_check {
     my ($o, $common, $l) = @_;
     ask_from_entries_refH_powered_normalize($o, $common, $l);
-    @$l or return 1;
     $o->ask_from_entries_refW($common, [ grep { !$_->{advanced} } @$l ], [ grep { $_->{advanced} } @$l ]);
 }
 

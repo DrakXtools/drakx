@@ -324,6 +324,7 @@ sub create_packtable($@) {
 	    if (defined $_) {
 		ref $_ or $_ = new Gtk::Label($_);
 		$w->attach($_, $j, $j + 1, $i, $i + 1, 'fill', 'fill', 5, 0);
+#		$w->attach_defaults($_, $j, $j + 1, $i, $i + 1);
 		$_->show;
 	    }
 	} @$_;

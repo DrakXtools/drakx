@@ -60,10 +60,6 @@ sub create_clist {
 #      $list->signal_connect(button_release_event => $leave) :
 #      $list->signal_connect(button_press_event => sub { &$leave if $_[1]{type} =~ /^2/ });
 
-    $list->signal_connect(select_row => sub {
-	my ($w, $row) = @_;
-	${$e->{val}} = $e->{list}[$curr = $row];
-    });
     $list->signal_connect(key_press_event => sub {
         my ($w, $event) = @_;
 	my $c = chr($event->{keyval} & 0xff);
@@ -97,12 +93,19 @@ sub create_clist {
 	}
 	1;
     });
+    $list->show;
 
     $list->append($_) foreach @l;
 
+    $list->signal_connect(select_row => sub {
+	my ($w, $row) = @_;
+	${$e->{val}} = $e->{list}[$curr = $row];
+    });
+
     $list, sub {
+	my ($v) = @_;
 	eval { 
-	    $select->(find_index { $_ eq ${$e->{val}} } @{$e->{list}}) 
+	    $select->(find_index { $_ eq $v } @{$e->{list}});
 	};
     };
 }
@@ -156,7 +159,7 @@ sub create_ctree {
     $tree->set_row_height($tree->style->font->ascent + $tree->style->font->descent + 1);
 
     $tree, sub {
-	my $node = $wleaves{${$e->{val}}} or return;
+	my $node = $wleaves{$_[0]} or return;
 
 	for (my $c = $node; $c; $c = $c->row->parent) { 
 	    $tree->expand($c);
@@ -209,8 +212,9 @@ sub create_list {
 	${$e->{val}} = $l->[$list->child_position($row)];
     });
     $list, sub { 
+	my ($v) = @_;
 	eval { 
-	    $select->(find_index { $_ eq ${$e->{val}} } @$l) 
+	    $select->(find_index { $_ eq $v } @$l);
 	};
     };
 }
@@ -335,13 +339,14 @@ sub ask_from_entries_refW {
     };
     my $advanced_button = [ _("Advanced"), sub { $set_advanced->(!$advanced) } ];
 
-    $set_all->();
     gtkadd($mainw->{window},
 	   gtkpack(create_box_with_title($mainw, @{$common->{messages}}),
 		   may_createScrolledWindow(@widgets_always > 8, create_packtable({}, map { [($_->{icon_w}, $_->{e}{label}, $_->{real_w})]} @widgets_always), 200, min(350, $::windowheight - 60)),
 		   new Gtk::HSeparator,
 		   $advanced_pack = create_packtable({}, map { [($_->{icon_w}, $_->{e}{label}, $_->{real_w})]} @widgets_advanced),
 		   $mainw->create_okcancel($common->{ok}, $common->{cancel}, '', @$l2 ? $advanced_button : ())));
+    $mainw->sync; #- for $set_all below (mainly for the set of clist)
+    $set_all->();
     $set_advanced->(0);
     (@widgets ? $widgets[0]{w} : $mainw->{ok})->grab_focus();
 
