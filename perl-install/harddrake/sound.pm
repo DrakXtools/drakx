@@ -4,7 +4,7 @@ package harddrake::sound;
 # No ALSA for OSS's 
 #    o tv cards: btaudio,
 #    o isa cards: msnd_pinnacle, pas2, 
-#    o pci cards: ad1889,
+#    o pci cards: ad1889, sam9407
 # No OSS for ALSA's
 #    o pci cards: snd-als4000, snd-es968, snd-hdsp
 #    o isa cards: snd-azt2320, snd-cs4231, snd-cs4236, 
@@ -24,10 +24,10 @@ use list_modules;
 
 my $has_nvaudio = -x '/lib/modules/' . c::kernel_version() . '/';
 
-my %alsa2oss = 
+our %alsa2oss = 
     (
      "snd-ad1816a" => [ "ad1816" ], # isa
-     "snd-ad1848"  => [ "pss" ], # isa
+     "snd-ad1848"  => [ "ad1848", "pss" ], # isa
      "snd-ali5451" => [ "trident" ],
      "snd-als100"  => [ "sb" ], # isa
      "snd-als4000" => [ "unknown" ],
@@ -65,6 +65,7 @@ my %alsa2oss =
      "snd-opti93x" => [ "mad16" ],
      "snd-rme32"   => [ "unknown" ], # isa
      "snd-rme96"   => [ "rme96xx" ], # pci
+     "snd-rme9652" => [ "rme96xx" ], # pci
      "snd-sb16"    => ["sscape", "sb"],
      "snd-sb8"     => [ "sb" ],
      "snd-sbawe"   => [ "awe_wave" ],
@@ -79,9 +80,10 @@ my %alsa2oss =
      );
 
 
-my %oss2alsa = 
+our %oss2alsa = 
     (
      "ad1816"  => [ "snd-ad1816a" ],
+     "ad1848"  => [ "snd-ad1848" ],
      "ad1889"  => [ "unknown" ],
      "ali5455" => [ "snd-intel8x0" ],
      "audigy"  => [ "snd-emu10k1" ],
@@ -112,7 +114,8 @@ my %oss2alsa =
      "opl3sa2" => [ "snd-opl3sa2" ],
      "pas2"    => [ "unknown" ],
      "pss" => [ "snd-ad1848" ],
-     "rme96xx" => [ "snd-rme96" ],
+     "rme96xx" => [ "snd-rme96", "snd-rme9652" ],
+     "sam9407" => [ "unknown" ],
      "sb"      => [ "snd-als100", "snd-cmi8330", "snd-es1688", "snd-es18xx", "snd-es968", "snd-sb8", "snd-sb16" ],
      "sgalaxy" => [ "snd-sgalaxy" ],
      "sonicvibes" => [ "snd-sonicvibes" ],
