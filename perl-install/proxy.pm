@@ -10,3 +10,8 @@ sub main {
     undef $::Wizard_no_previous;
     log::l("[drakproxy] Installation complete, exiting\n");
 }
+
+#---------------------------------------------
+#                WONDERFULL pad
+#---------------------------------------------
+1;
