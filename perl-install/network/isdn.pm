@@ -16,36 +16,6 @@ use MDK::Common::File;
 @ISA = qw(Exporter);
 @EXPORT = qw(isdn_write_config isdn_write_config_backend get_info_providers_backend isdn_ask_info isdn_ask_protocol isdn_ask isdn_detect isdn_detect_backend isdn_get_list isdn_get_info);
 
-sub configure {
-    my ($netcnx, $netc) = @_;
-    configure_device($netcnx, $netc, $_) foreach values %{$netc->{autodetect}{isdn}};
-}
-
-sub configure_device {
-    my ($netcnx, $netc, $isdn) = @_;
-  isdn_step_1:
-    defined $isdn->{id} and goto intern_pci;
-
-    my $e = $in->ask_from_list_(N("Network Configuration Wizard"),
-				N("What kind is your ISDN connection?"), [ N_("Internal ISDN card"), N_("External ISDN modem") ]
-			       ) or return;
-    
-    if ($e =~ /card/) {
-      intern_pci:
-	$netc->{isdntype} = 'isdn_internal';
-	$netcnx->{isdn_internal} = $isdn;
-	$netcnx->{isdn_internal} = isdn_read_config($netcnx->{isdn_internal});
-	isdn_detect($netcnx->{isdn_internal}, $netc) or goto isdn_step_1;
-    } else {
-	$netc->{isdntype} = 'isdn_external';
-	$netcnx->{isdn_external}{device} = $netc->{autodetect}{modem};
-	$netcnx->{isdn_external} = isdn_read_config($netcnx->{isdn_external});
-	$netcnx->{isdn_external}{special_command} = 'AT&F&O2B40';
-	require network::modem;
-	network::modem::ppp_choose($in, $netc, $netcnx->{isdn_external}) or goto isdn_step_1;
-    }
-    1;
-}
 
 sub isdn_write_config {
     my ($isdn, $netc) = @_;
@@ -221,31 +191,6 @@ If you have a PCMCIA card, you have to know the \"irq\" and \"io\" of your card.
   isdn_ask_step_4:
     isdn_ask_info($isdn, $netc) or goto isdn_ask_step_3;
     isdn_write_config($isdn, $netc) or goto isdn_ask_step_4;
-    1;
-}
-
-sub isdn_detect {
-    my ($isdn, $netc) = @_;
-    if ($isdn->{id}) {
-  	log::explanations("found isdn card : $isdn->{description}; vendor : $isdn->{vendor}; id : $isdn->{id}; driver : $isdn->{driver}\n");
-	$isdn->{description} =~ s/\|/ -- /;
-	
-   isdn_detect_step_0:
-	defined $isdn->{type} and my $new = $in->ask_yesorno(N("ISDN Configuration"), N("Do you want to start a new configuration ?"), 1);
-	
-	if ($isdn->{type} eq '' || $new) {
-	    isdn_ask($isdn, $netc, N("I have detected an ISDN PCI card, but I don't know its type. Please select a PCI card on the next screen.")) or goto isdn_detect_step_0;
-	} else {
-	  isdn_detect_step_1:
-	    $isdn->{protocol} = isdn_ask_protocol() or goto isdn_detect_step_0;
-	  isdn_detect_step_2:
-	    isdn_ask_info($isdn, $netc) or goto isdn_detect_step_1;
-	    isdn_write_config($isdn, $netc) or goto isdn_detect_step_2;
-	}
-    } else {
-	isdn_ask($isdn, $netc, N("No ISDN PCI card found. Please select one on the next screen.")) or return;
-    }
-    $netc->{$_} = 'ippp0' foreach 'NET_DEVICE', 'NET_INTERFACE';
     1;
 }
 

@@ -13,34 +13,14 @@ use vars qw(@ISA @EXPORT);
 use MDK::Common::Globals "network", qw($in $prefix);
 
 @ISA = qw(Exporter);
-@EXPORT = qw(configureNetwork conf_network_card conf_network_card_backend go_ethernet);
+@EXPORT = qw(conf_network_card conf_network_card_backend go_ethernet);
 
-sub configure_cable {
-    my ($netcnx, $netc, $intf, $first_time) = @_;
-    
-    $netcnx->{type} = 'cable';
-    
-    $in->ask_from(N("Connect to the Internet"),
-		  N("Which dhcp client do you want to use ? (default is dhcp-client)"),
-		  [ { val => \$netcnx->{dhcp_client}, list => ["dhcp-client", "dhcpcd", "dhcpxd"] } ],
-		 ) or return;
-    
-    $in->do_pkgs->install($netcnx->{dhcp_client});
-    
-    go_ethernet($netc, $intf, 'dhcp', '', '', $first_time);
-    write_cnx_script($netc, "cable",
-qq(
-/sbin/ifup $netc->{NET_DEVICE}
-),
-qq(
-/sbin/ifdown $netc->{NET_DEVICE}
-), $netcnx->{type});
-    1;
-}
+my (@cards, @ether_steps, $last, %last);
 
-sub configure_lan {
-    my ($netcnx, $netc, $intf, $first_time) = @_;
-    configureNetwork($netc, $intf, $first_time) or return;
+
+sub ether_conf{
+    # my ($netcnx, $netc, $intf, $first_time) = @_;
+    my ($in, $prefix, $netc, $intf) = @_;
     configureNetwork2($in, $prefix, $netc, $intf);
     $netc->{NETWORKING} = "yes";
     if ($netc->{GATEWAY} || any { $_->{BOOTPROTO} =~ /dhcp/ } values %$intf) {
@@ -60,28 +40,6 @@ qq(
     1;
 }
 
-sub conf_network_card {
-    my ($netc, $intf, $type, $ipadr, $o_netadr) = @_;
-    #-type =static or dhcp
-    modules::interactive::load_category($in, 'network/main|gigabit|usb', !$::expert, 1);
-    my @all_cards = conf_network_card_backend($netc, $intf, $type, undef, $ipadr, $o_netadr) or 
-      $in->ask_warn('', N("No ethernet network adapter has been detected on your system.
-I cannot set up this connection type.")), return;
-
-    my $interface = $in->ask_from_listf(N("Choose the network interface"),
-					N("Please choose which network adapter you want to use to connect to Internet."),
-					sub { my ($e) = @_; $e->[0] . ($e->[1] ? " (using module $e->[1])" : "") },
-					\@all_cards) or return;
-
-    modules::write_conf($prefix) if $::isStandalone;
-
-    my $_device = conf_network_card_backend($netc, $intf, $type, $interface->[0], $ipadr, $o_netadr);
-#      if ( $::isStandalone and !($type eq "dhcp")) {
-#  	$in->ask_yesorno(N("Network interface"),
-#  			  N("I'm about to restart the network device:\n") . $device . N("\nDo you agree?"), 1) and configureNetwork2($in, $prefix, $netc, $intf) and system("$prefix/sbin/ifdown $device;$prefix/sbin/ifup $device");
-#      }
-    1;
-}
 
 #- conf_network_card_backend : configure the network cards and return the list of them, or configure one specified interface : WARNING, you have to setup the ethernet cards, by calling load_category($in, 'network/main|gigabit|usb', !$::expert, 1) or load_category_backend before calling this function. Basically, you call this function in 2 times.
 #- input
@@ -130,65 +88,6 @@ sub conf_network_card_backend {
     
     $intf->{$o_interface}{IPADDR} = $o_ipadr if $o_ipadr;
     $o_interface;
-}
-
-sub go_ethernet {
-    my ($netc, $intf, $type, $ipadr, $netadr, $first_time) = @_;
-    conf_network_card($netc, $intf, $type, $ipadr, $netadr) or return;
-    $netc->{NET_INTERFACE} = $netc->{NET_DEVICE};
-    configureNetwork($netc, $intf, $first_time) or return;
-    1;
-}
-
-sub configureNetwork {
-    my ($netc, $intf, $_first_time) = @_;
-    local $_;
-    modules::interactive::load_category($in, 'network/main|gigabit|usb|pcmcia', !$::expert, 1) or return;
-    my @all_cards = conf_network_card_backend($netc, $intf);
-    my @l = map { $_->[0] } @all_cards;
-
-    foreach (@all_cards) {
-	modules::remove_alias($_->[1]);
-	modules::add_alias($_->[0], $_->[1]);
-    }
-
-  configureNetwork_step_1:
-    $netc ||= {};
-    my ($last, %last);
-    foreach (@all_cards) {
-	my $intf2 = findIntf($intf ||= {}, $_->[0]);
-	add2hash($intf2, $last{$_->[0]});
-	add2hash($intf2, { NETMASK => '255.255.255.0' });
-	configureNetworkIntf($netc, $in, $intf2, $netc->{NET_DEVICE}, 0, $_->[1]) or return;
-
-	$last = $last{$_->[0]} = $intf2;
-    }
-    $last or return;
-    
-  configureNetwork_step_2:
-    if (is_dynamic_ip($intf)) {
-	$netc->{minus_one} = 1;
-
-	$in->ask_from(N("Configuring network"), N("
-
-Enter a Zeroconf host name without any dot if you don't
-want to use the default host name."),
-		      [ { label => N("Zeroconf Host name"), val => \$netc->{ZEROCONF_HOSTNAME} },
-			{ label => N("Host name"), val => \$netc->{HOSTNAME}, advanced => 1 }
-		      ],
-		      complete => sub {
-			  if ($netc->{ZEROCONF_HOSTNAME} =~ /\./) {
-			      $in->ask_warn('', N("Zeroconf host name must not contain a ."));
-			      return 1;
-			  }
-			  0;
-		      }
-		     ) or goto configureNetwork_step_1;
-    } else {
-    configureNetworkNet($in, $netc, $intf, @l) or goto configureNetwork_step_1;
-    }
-    network::network::miscellaneous_choose($in, $::o->{miscellaneous} ||= {}) or goto configureNetwork_step_2;
-    1;
 }
 
 # automatic net aliases configuration

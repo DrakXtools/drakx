@@ -11,10 +11,11 @@ use MDK::Common::Globals "network", qw($in $prefix);
 @ISA = qw(Exporter);
 @EXPORT = qw(adsl_ask_info adsl_detect adsl_conf adsl_conf_backend);
 
-sub configure {
-    my ($netcnx, $netc, $intf, $first_time) = @_;
 
-  conf_adsl_step1:
+sub get_wizard {
+    my ($wiz, $_type) = @_;
+    my $netc = $wiz->{var}{netc};
+
     my %l = (
 	     'pppoe' =>  N("use pppoe"),
 	     'pptp'  =>  N("use pptp"),
@@ -22,57 +23,70 @@ sub configure {
 	     'speedtouch' => N("Alcatel speedtouch usb") . if_($netc->{autodetect}{adsl}{speedtouch}, N(" - detected")),
 	     'sagem' =>  N("Sagem (using pppoa) usb") . if_($netc->{autodetect}{adsl}{sagem}, N(" - detected")),
 	     'sagem_dhcp' =>  N("Sagem (using dhcp) usb") . if_($netc->{autodetect}{adsl}{sagem}, N(" - detected")),
+          # 'eci' => N("ECI Hi-Focus"), # this one needs eci agreement
 	    );
     
-    my $type = $in->ask_from_list(N("Connect to the Internet"),
-				   N("The most common way to connect with adsl is pppoe.
+    $wiz->{var}{adsl} = {
+                         connection_list => \%l,
+                         type => "",
+                        };
+    add2hash($wiz->{pages},
+             {
+              adsl => {
+                       name => N("Connect to the Internet") . "\n\n" .
+                       N("The most common way to connect with adsl is pppoe.
 Some connections use pptp, a few use dhcp.
 If you don't know, choose 'use pppoe'"),
-				   [ sort values %l ],
-				   $l{ find { $netc->{autodetect}{adsl}{$_} } keys %l }
-				  ) or return;
-    $type = find { $l{$_} eq $type } keys %l;
-    if ($type eq 'pppoe') {
-	$in->do_pkgs->install("rp-$type");
-	$netcnx->{type} = "adsl_$type";
-	adsl_conf($netcnx->{"adsl_$type"}, $netc, $intf, $type) or goto conf_adsl_step1;
-    } elsif ($type eq 'dhcp') {
-	$in->do_pkgs->ensure_is_installed('dhcpcd', '/sbin/dhcpcd', 'auto');
-	go_ethernet($netc, $intf, 'dhcp', '', '', $first_time) or goto conf_adsl_step1;
-    } elsif ($type eq 'pptp') {
-	$in->do_pkgs->ensure_is_installed('pptp-adsl', '/usr/bin/pptp', 'auto');
-	$netcnx->{type} = "adsl_$type";
-	$netcnx->{"adsl_$type"} = {};
-	adsl_conf($netcnx->{"adsl_$type"}, $netc, $intf, $type) or goto conf_adsl_step1;
-    } elsif ($type =~ /sagem/) {
-	$type = 'sagem' . ($type =~ /dhcp/ ? "_dhcp" : "");
-	$in->do_pkgs->ensure_is_installed('adiusbadsl', '/usr/sbin/adictrl', 'auto');
-	$in->do_pkgs->ensure_is_installed('dhcpcd', '/sbin/dhcpcd', 'auto') if $type =~ /dhcp/;
-	$netcnx->{type} = "adsl_$type";
-	$netcnx->{"adsl_$type"} = {};
-	adsl_conf($netcnx->{"adsl_$type"}, $netc, $intf, $type) or goto conf_adsl_step1;
-    } elsif ($type =~ /speedtouch/) {
-	$type = 'speedtouch';
-	$in->do_pkgs->ensure_is_installed('speedtouch', '/usr/sbin/pppoa3', 'auto');
-	$netcnx->{type} = "adsl_$type";
-	$netcnx->{"adsl_$type"} = {};
-	$netcnx->{"adsl_$type"}{vpivci} = '';
-	adsl_conf($netcnx->{"adsl_$type"}, $netc, $intf, $type) or goto conf_adsl_step1;
-    }
-    # elsif ($type =~ /ECI/) {
-# 	$type = 'eci';
-# 	$in->do_pkgs->install(qw(eciadsl)) if !$::testing;
-# 	$netcnx->{type} = "adsl_$type";
-# 	$netcnx->{"adsl_$type"} = {};
-# 	$netcnx->{"adsl_$type"}{vpivci} = '';
-# 	adsl_conf($netcnx->{"adsl_$type"}, $netc, $intf, $type) or goto conf_adsl_step1;
-#     }
-    else {
-        die "unknown adsl connection type !!!";
-    }
-    $type =~ /speedtouch|eci/ or $netconnect::need_restart_network = 1;
-    1;
-}
+                       data =>  [
+                                 {
+                                  label => N("ADSL connection type :"), val_ref => \$wiz->{var}{adsl}{type}, list => [ sort values %l ] },
+                                ],
+                       pre => sub {
+                           $wiz->{var}{adsl}{type} = $l{sagem}; # debug
+                           $wiz->{var}{adsl}{type} ||= find { $netc->{autodetect}{adsl}{$_} } keys %l;
+                           print "\n\ntype is «$wiz->{var}{adsl}{type}»\n\n";
+                       },
+                       post => sub {
+                           $wiz->{var}{adsl}{type} = find { $l{$_} eq $wiz->{var}{adsl}{type} } keys %l;
+                           my $adsl   = $wiz->{var}{adsl}{connection};
+                           my $type   = $wiz->{var}{adsl}{type};
+                           my $netcnx = $wiz->{var}{netcnx};
+                           $netcnx->{type} = "adsl_$type";
+                                         
+                           my %packages = (
+                                           'dhcp'  => [ 'dhcpcd' ],
+                                           'eci'   => [ 'eciadsl' ],
+                                           'pppoe' => [ 'rp-pppoe' ],
+                                           'pptp'  => [ 'pptp-adsl' ],
+                                           'sagem' => [ 'adiusbadsl' ],
+                                           'sagem_dhcp' => [ qw(adiusbadsl dhcpcd) ],
+                                           'speedtouch' => [ 'speedtouch' ],
+                                          );
+                           $in->do_pkgs->install(@{$packages{$type}});
+                           $netcnx->{"adsl_$type"} = {};
+                           $netcnx->{"adsl_$type"}{vpivci} = '' if $type =~ /eci|speedtouch/;
+                           return 'ethernet' if $type eq 'dhcp';
+                           adsl_probe_info($adsl, $netc, $type);
+                           # my ($adsl, $netc, $intf, $adsl_type) = @_;
+                           # ask_info2($adsl, $netc);
+                           return "hw_account";
+                       },
+                      },
+              adsl_conf2 => {
+                             #$adsl_type =~ /sagem|speedtouch|eci/ or conf_network_card($netc, $intf, 'static', '10.0.0.10') or goto adsl_conf_step_1;
+                             #adsl_conf_backend($adsl, $netc, $adsl_type) or goto adsl_conf_step_1;
+                             #1;
+                            },
+              ethernet => {
+                           #go_ethernet($netc, $intf, 'dhcp', '', '', $first_time);
+                          },
+              end => {
+                      post => sub {
+                          $wiz->{var}{adsl}{type} =~ /speedtouch|eci/ or $netconnect::need_restart_network = 1;
+                      },
+                     },
+             });
+};
 
 sub adsl_probe_info {
     my ($adsl, $netc, $adsl_type) = @_;
@@ -91,30 +105,12 @@ sub adsl_probe_info {
     add2hash($adsl, { login => $login, passwd => $passwd, passwd2 => '' });
 }
 
-sub adsl_ask_info {
-    my ($adsl, $netc, $adsl_type) = @_;
-    adsl_probe_info($adsl, $netc, $adsl_type);
-    ask_info2($adsl, $netc);
-}
-
-sub adsl_detect() {
-    my ($adsl) = {};
+sub adsl_detect {
+    my ($adsl) = @_;
     require detect_devices;
     $adsl->{speedtouch} = detect_devices::getSpeedtouch();
     $adsl->{sagem} = detect_devices::getSagem();
     return $adsl if $adsl->{speedtouch} || $adsl->{sagem};
-}
-
-sub adsl_conf {
-    my ($adsl, $netc, $intf, $adsl_type) = @_;
-    $adsl ||= {};
-
-  adsl_conf_step_1:
-    adsl_ask_info($adsl, $netc, $adsl_type) or return;
-  adsl_conf_step_2:
-    $adsl_type =~ /sagem|speedtouch|eci/ or conf_network_card($netc, $intf, 'static', '10.0.0.10') or goto adsl_conf_step_1;
-    adsl_conf_backend($adsl, $netc, $adsl_type) or goto adsl_conf_step_1;
-    1;
 }
 
 sub adsl_conf_backend {
@@ -221,8 +217,8 @@ You can provide it now via a floppy or your windows partition,
 or skip and do it later."), $l) or return;
 	
 	my $destination = "$prefix/usr/share/speedtouch/";
-	$answer eq 'Use a floppy' and network::tools::copy_firmware('floppy', $destination, 'mgmt.o') || goto firmware;
-	$answer eq 'Use my Windows partition' and network::tools::copy_firmware('windows', $destination, 'alcaudsl.sys') || goto firmware;
+	$answer eq 'Use a floppy' && network::tools::copy_firmware('floppy', $destination, 'mgmt.o') || goto firmware;
+	$answer eq 'Use my Windows partition' && network::tools::copy_firmware('windows', $destination, 'alcaudsl.sys') || goto firmware;
 	$answer eq 'Do it later' and $in->ask_warn('', N("You need the Alcatel microcode.
 Download it at:
 %s

@@ -52,8 +52,9 @@ my $in = 'interactive'->vnew('su');
 if ($in->isa('interactive::gtk')) {
     require ugtk2;
     ugtk2->import(qw(:create :dialogs :helpers :wrappers));
-    reread_net_conf();
 }
+reread_net_conf();
+$::Wizard_title = N("Network & Internet Configuration");
 $::Wizard_pix_up = "wiz_drakconnect.png";
 
 MDK::Common::Globals::init(
@@ -68,6 +69,10 @@ MDK::Common::Globals::init(
 /--skip-wizard/ and goto manage;
 /--add/ and add_intf();
 /--del/ and del_intf();
+if (/--install/) {
+    $::isInstall = 1;
+    add_intf()
+}
 /--internet/ and configure_net($netcnx, $netc, $intf);
 
 # default is to run wizard
@@ -189,46 +194,52 @@ gtkflush();
 $window1->main;
 ugtk2->exit(0);
 
+
 sub add_intf() {
-    $::Wizard_title = N("Network & Internet Configuration");
     $::isWizard = 1;
     network::netconnect::load_conf($netcnx, $netc, $intf);
-    network::netconnect::main('', $netcnx, $in);
+    # network::netconnect::add_interface($in, $netcnx);
+    eval { network::netconnect::main('', $netcnx, $in, $netc, undef, $intf) };
+    my $err = $@;
+    if ($err && $in->isa('interactive::gtk')) {
+        err_dialog(N("Error"), N("An unexpected error has happened:\n%s", $err));
+    }
     $in->exit(0);
 }
 
 sub del_intf() {
-    $::Wizard_title = N("Remove a network interface");
-    $::isWizard = 1;
-    $::Wizard_no_previous = 1;
-    my $intf;
-    
-    $in->ask_from(N("Network Configuration"),
-                  N("Select the network interface to remove:"),
-                  [ { label => N("Net Device"), val => \$intf, list => [ detect_devices::getNet() ], allow_empty_list => 1 } ]); 
-
-    eval {
-        modules::mergein_conf('/etc/modules.conf');
-        modules::remove_alias($intf);
-        modules::write_conf();
-        rm_rf("/etc/sysconfig/network-scripts/ifcfg-$intf");
-    };
-    my $faillure = $@;
-    $::Wizard_finished = 1;
-    eval { 
-        $in->ask_okcancel(N("Network Configuration"), ($faillure ? 
-                                                       N("An error occured while deleting the \"%s\" network interface:\n\n%s",
-                                                         $intf, $faillure) :
-                                                       N("Congratulations, the \"%s\" network interface has been succesfully deleted", $intf)
-                                                      ),
-                          1);
-    };
-    my $err = $@;
-    if ($err =~ /wizcancel/) {
-        $in->exit(0);
-    } else { 
-        die $err;
-    }
+    my ($intf, $faillure);
+    my $wiz =
+      {
+       defaultimage => "wiz_drakconnect.png",
+       name => N("Remove a network interface"),
+       pages => {
+                 welcome => {
+                             no_back => 1,
+                             name => N("Select the network interface to remove:"),
+                             data =>  [ { label => N("Net Device"), val => \$intf, list => [ detect_devices::getNet() ], allow_empty_list => 1 } ],
+                             post => sub {
+                                 eval {
+                                     modules::mergein_conf('/etc/modules.conf');
+                                     modules::remove_alias($intf);
+                                     modules::write_conf();
+                                     rm_rf("/etc/sysconfig/network-scripts/ifcfg-$intf");
+                                 };
+                                 $faillure = $@;
+                             },
+                             next => "end",
+                             name => sub {
+                                 ($faillure ? 
+                                  N("An error occured while deleting the \"%s\" network interface:\n\n%s",
+                                    $intf, $faillure) :
+                                  N("Congratulations, the \"%s\" network interface has been succesfully deleted", $intf)
+                                 )
+                             },
+                            },
+                },
+      };
+    require wizards;
+    wizards->new->safe_process($wiz, $in);
 }
 
 
