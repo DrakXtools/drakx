@@ -1,3 +1,218 @@
+2004/09/13  Funda Wang <fundawang at linux.net.cn>
+
+	* share/po/zh_CN.po: Updated Simplified Chinese translation
+
+2004/09/13  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/bn.po, share/po/ms.po, share/po/sk.po, share/po/gl.po,
+	share/po/pt_BR.po, share/po/th.po, share/po/ja.po, share/po/hr.po,
+	share/po/be.po, share/po/ko.po, share/po/DrakX.pot, share/po/sv.po,
+	share/po/sr.po, share/po/pl.po, share/po/fi.po, share/po/he.po,
+	share/po/ca.po, share/po/da.po, share/po/ltg.po, share/po/nb.po,
+	share/po/ky.po, share/po/uz.po, share/po/ro.po, share/po/zh_TW.po,
+	share/po/zh_CN.po, share/po/sr@Latn.po, share/po/sq.po, share/po/it.po,
+	share/po/eu.po, share/po/es.po, share/po/lv.po, share/po/hu.po,
+	share/po/fa.po, share/po/id.po, share/po/ru.po, share/po/br.po,
+	share/po/sl.po, share/po/nn.po, share/po/tr.po, share/po/mt.po,
+	share/po/ga.po, share/po/mn.po, share/po/uk.po, share/po/am.po,
+	share/po/lt.po, share/po/cy.po, share/po/tg.po, share/po/bs.po,
+	share/po/fur.po, share/po/mk.po, share/po/wa.po, share/po/is.po,
+	share/po/hi.po, share/po/af.po, share/po/az.po, share/po/pt.po,
+	share/po/fr.po, share/po/ta.po, share/po/vi.po, share/po/nl.po,
+	share/po/de.po, share/po/tl.po, share/po/eo.po, share/po/bg.po,
+	share/po/cs.po, share/po/el.po, share/po/uz@Latn.po: updated pot file
+
+	* share/po/ar.po: updated pot file
+	updated Arabic file
+
+	* share/po/et.po: updated pot file
+	updated Estonian po file
+
+2004/09/13  Pixel  <pixel at mandrakesoft.com>
+
+	* share/rpmsrate: simplify
+
+	* Xconfig/card.pm: adapt to new proprietary package naming
+
+	* do_pkgs.pm: 
+	  - simplify ->check_kernel_module_packages, same for install and
+	standalone
+	  - create ->are_available used by ->check_kernel_module_packages
+
+2004/09/13  Rafael Garcia-Suarez <rgarciasuarez at mandrakesoft.com>
+
+	* install_steps.pm, install_any.pm, install_steps_interactive.pm: Ability
+	to choose from the mirror list when assing an ftp supplementary
+	media. Fix download of hdlists file for ftp supplementary media.
+
+2004/09/13  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* share/po/cy.po: fix draksec entries in welsh
+	  - fix label of entry in help
+	  - move help from tooltips into separate page (#9894)
+	rationale:
+	
+	  - there's already a "help" button that do the same thing as mcc one
+	
+	  - Gtk+ only support tooltips on widgets that have their own X window
+	(which new
+	  GkComboBox widget has not)
+	
+	  - tooltips are usefull on first run but then are just annoying
+
+	* share/po/fa.po, share/po/id.po, share/po/ru.po, share/po/br.po,
+	share/po/sl.po, share/po/et.po, share/po/hr.po, share/po/mt.po,
+	share/po/ga.po, share/po/be.po, share/po/uk.po, share/po/mn.po,
+	share/po/am.po, share/po/ko.po, share/po/sv.po, share/po/pl.po,
+	share/po/he.po, share/po/ca.po, share/po/ar.po, share/po/tg.po,
+	security/help.pm, share/po/ltg.po, share/po/uz.po, share/po/wa.po,
+	share/po/af.po, share/po/az.po, share/po/zh_TW.po, share/po/pt.po,
+	share/po/fr.po, share/po/sr@Latn.po, share/po/it.po, share/po/nl.po,
+	share/po/tl.po, share/po/de.po, share/po/eo.po, share/po/bg.po,
+	share/po/lv.po: 
+	  - fix label of entry in help
+	  - move help from tooltips into separate page (#9894)
+	rationale:
+	
+	  - there's already a "help" button that do the same thing as mcc one
+	
+	  - Gtk+ only support tooltips on widgets that have their own X window
+	(which new
+	  GkComboBox widget has not)
+	
+	  - tooltips are usefull on first run but then are just annoying
+
+	* standalone/draksec (set_help_tip) only use on tooltip group
+
+	* standalone/drakbug_report: fix crash
+
+	* share/rpmsrate: fix rpmsrate
+	ltmodem needs ltmodem package
+	install Device-mapper ATARAID tool for software raid (aka bios driven
+	ones)
+	the odds're high we should do this too for sata_promise, sata_sx4 and
+	sx8 SATA
+	drivers.
+	both diskdrake and initscripts now prefer mdadm over raidtools
+
+	* harddrake/data.pm: explain why some hw classes are not probed on
+	bootstrapping
+	move comment where appropriate
+
+2004/09/13  vljubovic
+
+	* share/po/bs.po: Fixing
+
+2004/09/12  (Hilbert) <h at mandrake.org>
+
+	* share/po/zh_TW.po: DrakX-zh_TW: 711
+	No floppy drive
+
+2004/09/12  huftis
+
+	* share/po/nn.po: Fixed a few fuzzy strings.
+
+2004/09/12  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/zh_TW.po, share/po/az.po, share/po/nl.po: updated Azeri file
+	updated pot file
+
+	* keyboard.pm: disambiguation of keyboard names, so they can be translated
+	differently
+	from language names
+
+	* share/po/bn.po, share/po/ms.po, share/po/sk.po, share/po/gl.po,
+	share/po/pt_BR.po, share/po/th.po, share/po/et.po, share/po/ja.po,
+	share/po/hr.po, share/po/be.po, share/po/ko.po, share/po/DrakX.pot,
+	share/po/sv.po, share/po/sr.po, share/po/pl.po, share/po/fi.po,
+	share/po/he.po, share/po/ca.po, share/po/da.po, share/po/ar.po,
+	share/po/ltg.po, share/po/nb.po, share/po/ky.po, share/po/uz.po,
+	share/po/ro.po, share/po/zh_CN.po, share/po/sr@Latn.po, share/po/sq.po,
+	share/po/eu.po, share/po/es.po, share/po/lv.po, share/po/hu.po,
+	share/po/fa.po, share/po/id.po, share/po/ru.po, share/po/br.po,
+	share/po/sl.po, share/po/nn.po, share/po/tr.po, share/po/mt.po,
+	share/po/ga.po, share/po/mn.po, share/po/uk.po, share/po/am.po,
+	share/po/lt.po, share/po/cy.po, share/po/tg.po, share/po/bs.po,
+	share/po/fur.po, share/po/mk.po, share/po/wa.po, share/po/is.po,
+	share/po/hi.po, share/po/af.po, share/po/pt.po, share/po/vi.po,
+	share/po/fr.po, share/po/ta.po, share/po/de.po, share/po/tl.po,
+	share/po/eo.po, share/po/bg.po, share/po/cs.po, share/po/el.po,
+	share/po/uz@Latn.po: updated pot file
+
+	* share/po/it.po: updated Italian file
+	updated pot file
+
+2004/09/12  Reinout van Schouwen  <reinout at cs.vu.nl>
+
+	* share/po/nl.po: Updated Dutch (nl) translation
+	by Reinout van Schouwen <reinout@cs.vu.nl>
+	* DrakX
+
+2004/09/12  Youcef Rabah Rahal <rahal at arabeyes.org>
+
+	* share/po/ar.po: Arab ic translation
+
+2004/09/11  (Hilbert) <h at mandrake.org>
+
+	* share/po/zh_TW.po: DrakX-zh_TW: 662
+	You have selected
+
+2004/09/11  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/bn.po: updated Bengali file
+
+	* share/po/fa.po, share/po/ms.po, share/po/sv.po, share/po/he.po,
+	share/po/br.po, share/po/hi.po, share/po/et.po, share/po/zh_TW.po,
+	share/po/tr.po, share/po/pt.po, share/po/ar.po: updated Estonian file;
+	fixed error syntax in Hebrew file;
+	removed non-ascii version of the bootloader message
+
+2004/09/10  (Hilbert) <h at mandrake.org>
+
+	* share/po/zh_TW.po: DrakX-zh_TW: 650
+	You must also
+
+2004/09/10  Olivier Blin <oblin at mandrakesoft.com>
+
+	* network/netconnect.pm: do not ask if network should be started on boot
+	if it has already been
+	asked during pseudo-lan configuration
+
+	* standalone/net_applet: lower refresh timeout to 5 seconds
+	make connect/disconnect buttons useful
+
+2004/09/10  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* keyboard.pm: some more XKB keyboard names fixed to match xorg versions
+	fixed compose:rwin (it must be enabled if the key isn't used, and not
+	when the key is already used); and a new keyboard toggle
+	fixed Russian phonetic keyboard layout on xorg
+
+2004/09/10  Pixel  <pixel at mandrakesoft.com>
+
+	* pkgs.pm: fix choosing bestKernelPackage
+	remove debug code
+
+2004/09/10  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* drakxtools.spec: one more change in 10.1-3mdk for lord blino
+	10.1-3mdk
+	typo fix in 10.1-0.19mdk's changelog
+	fix 10.1-0.25mdk's changelog
+	10.1-2mdk
+	  - move tools description in proper packages (aka make -newt
+	description somewhat usefull)
+	  - describe missing tools
+	  - sanitize tool names
+
+	* share/po/fr.po: update (how did the drakvpn got fuzzy whereas this tool
+	was left
+	untouched for monthes???)
+
+2004/09/10  Youcef Rabah Rahal <rahal at arabeyes.org>
+
+	* share/po/ar.po: Arabic translation from Arabeyes
+
 2004/09/10  Olivier Blin <oblin at mandrakesoft.com>
 
 	* standalone/drakboot (enable_framebuffer) do not kill the whole wizard
@@ -38688,7 +38903,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.965 2004/09/10 07:57:24 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.966 2004/09/10 10:02:38 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
