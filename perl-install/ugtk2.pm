@@ -377,14 +377,13 @@ sub create_dialog {
     my $ret = 0;
     my $dialog = _create_dialog($title, $o_options);
     $dialog->set_border_width(10);
-    my $text = $o_options->{use_markup} ? gtkset_markup(Gtk2::WrappedLabel->new, $label) : Gtk2::WrappedLabel->new($label);
+    my $text = ref($label) ? $label : $o_options->{use_markup} ? gtkset_markup(Gtk2::WrappedLabel->new, $label) : Gtk2::WrappedLabel->new($label);
     gtkpack($dialog->vbox,
             gtkpack_(Gtk2::HBox->new,
                      if_($o_options->{stock}, 0, Gtk2::Image->new_from_stock($o_options->{stock}, 'dialog')),
                      1, create_scrolled_window($text, [ 'never', 'automatic' ]),
                     ),
            );
-    $text->set_line_wrap(1);
 
     if ($o_options->{cancel}) {
 	my $button2 = Gtk2::Button->new(N("Cancel"));
