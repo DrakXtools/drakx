@@ -15,7 +15,7 @@ use modules;
 use any;
 use log;
 
-my @mouses_fields = qw(nbuttons MOUSETYPE XMOUSETYPE name);
+my @mouses_fields = qw(nbuttons MOUSETYPE XMOUSETYPE name EMULATEWHEEL);
 
 my %mice = 
  arch() =~ /^sparc/ ? 
@@ -44,6 +44,7 @@ my %mice =
    [ [ 1, 'ps/2', 'IMPS/2', N_("1 button") ],
      [ 2, 'ps/2', 'IMPS/2', N_("Generic 2 Button Mouse") ],
      [ 3, 'ps/2', 'IMPS/2', N_("Generic") ],
+     [ 3, 'ps/2', 'IMPS/2', N_("Generic 3 Button Mouse with Wheel emulation"), 'wheel' ],
      [ 5, 'ps/2', 'IMPS/2', N_("Wheel") ],
      [ 7, 'ps/2', 'ExplorerPS/2', N_("Microsoft Explorer") ],
    ] ],
@@ -52,17 +53,22 @@ my %mice =
  [ [ map { "ttyS$_" } 0..3 ],
    [ [ 2, 'Microsoft', 'Microsoft', N_("Generic 2 Button Mouse") ],
      [ 3, 'Microsoft', 'Microsoft', N_("Generic 3 Button Mouse") ],
+     [ 3, 'Microsoft', 'Microsoft', N_("Generic 3 Button Mouse with Wheel emulation"), 'wheel' ],
      [ 5, 'ms3', 'IntelliMouse', N_("Microsoft IntelliMouse") ],
      [ 3, 'MouseMan', 'MouseMan', N_("Logitech MouseMan") ],
+     [ 3, 'MouseMan', 'MouseMan', N_("Logitech MouseMan with Wheel emulation"), 'wheel' ],
      [ 2, 'MouseSystems', 'MouseSystems', N_("Mouse Systems") ],     
      '',
      [ 3, 'logim', 'MouseMan', N_("Logitech CC Series") ],
+     [ 3, 'logim', 'MouseMan', N_("Logitech CC Series with Wheel emulation"), 'wheel' ],
      [ 5, 'pnp', 'IntelliMouse', N_("Logitech MouseMan+/FirstMouse+") ],
      [ 5, 'ms3', 'IntelliMouse', N_("Genius NetMouse") ],
      [ 2, 'MMSeries', 'MMSeries', N_("MM Series") ],
      [ 2, 'MMHitTab', 'MMHittab', N_("MM HitTablet") ],
      [ 3, 'Logitech', 'Logitech', N_("Logitech Mouse (serial, old C7 type)") ],
+     [ 3, 'Logitech', 'Logitech', N_("Logitech Mouse (serial, old C7 type) with Wheel emulation"), 'wheel' ],
      [ 3, 'Microsoft', 'ThinkingMouse', N_("Kensington Thinking Mouse") ],
+     [ 3, 'Microsoft', 'ThinkingMouse', N_("Kensington Thinking Mouse with Wheel emulation"), 'wheel' ],
    ] ],
 
  N_("busmouse") =>
@@ -70,6 +76,7 @@ my %mice =
    [ if_(arch() eq 'ppc', [ 1, 'Busmouse', 'BusMouse', N_("1 button") ]),
      [ 2, 'Busmouse', 'BusMouse', N_("2 buttons") ],
      [ 3, 'Busmouse', 'BusMouse', N_("3 buttons") ],
+     [ 3, 'Busmouse', 'BusMouse', N_("3 buttons with Wheel emulation"), 'wheel' ],
    ] ],
 
  N_("none") =>
@@ -327,6 +334,7 @@ sub set_xfree_conf {
 	    Device => "/dev/$_->{device}",
 	    if_($_->{nbuttons} > 3, ZAxisMapping => [ $_->{nbuttons} > 5 ? '6 7' : '4 5' ]),
 	    if_($_->{nbuttons} < 3, Emulate3Buttons => undef, Emulate3Timeout => 50),
+	    if_($_->{EMULATEWHEEL}, Emulate3Buttons => undef, Emulate3Timeout => 50, EmulateWheel => undef, EmulateWheelButton => 2),
 	};
     } ($mouse, if_($mouse->{auxmouse}, $mouse->{auxmouse}));
     
