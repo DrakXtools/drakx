@@ -52,7 +52,6 @@ my $no_bootsplash;
 my $x_mode = Xconfig::various::runlevel() == 5;
 my $splash_mode = 1;
 my $auto_mode = any::get_autologin();
-my $lilogrub = bootloader::detect_bootloader();
 my $switch_theme = '/usr/share/bootsplash/scripts/switch-themes';
 
 my $w = ugtk2->new($splash_working ? N("Graphical boot theme selection") : N("System mode"));
