@@ -23,6 +23,8 @@
 #define _DISK_H_
 
 enum return_type disk_prepare(void);
+#ifndef MANDRAKE_MOVE
 int process_recovery(void);
+#endif
 
 #endif

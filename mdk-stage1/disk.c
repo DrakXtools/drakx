@@ -316,6 +316,7 @@ enum return_type disk_prepare(void)
 	return disk_prepare();
 }
 
+#ifndef MANDRAKE_MOVE
 int
 process_recovery(void)
 {
@@ -385,3 +386,4 @@ process_recovery(void)
 
         return 0;
 }
+#endif

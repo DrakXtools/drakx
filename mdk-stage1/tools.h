@@ -32,10 +32,12 @@ int charstar_to_int(const char * s);
 off_t file_size(const char * path);
 int total_memory(void);
 int ramdisk_possible(void);
-char * get_ramdisk_realname(void);
 enum return_type copy_file(char * from, char * to, void (*callback_func)(int overall));
+#ifndef MANDRAKE_MOVE
+char * get_ramdisk_realname(void);
 enum return_type load_ramdisk(void);
 enum return_type load_ramdisk_fd(int ramdisk_fd, int size);
+#endif
 void * memdup(void *src, size_t size);
 void add_to_env(char * name, char * value);
 char ** list_directory(char * direct);

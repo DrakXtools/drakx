@@ -619,7 +619,7 @@ static char * interface_select(void)
 	return choice;
 }
 
-
+#ifndef MANDRAKE_MOVE
 static enum return_type get_http_proxy(char **http_proxy_host, char **http_proxy_port)
 {
 	char *questions[] = { "HTTP proxy host", "HTTP proxy port", NULL };
@@ -806,7 +806,7 @@ static int choose_mirror_from_list(char *http_proxy_host, char *http_proxy_port,
 
 	return results;
 }
-
+#endif
 
 
 /* -=-=-- */
@@ -889,6 +889,7 @@ enum return_type nfs_prepare(void)
 }
 
 
+#ifndef MANDRAKE_MOVE
 enum return_type ftp_prepare(void)
 {
 	char * questions[] = { "FTP server", DISTRIB_NAME " directory", "Login", "Password", NULL };
@@ -1113,3 +1114,4 @@ enum return_type http_prepare(void)
 	return RETURN_OK;
 
 }
+#endif

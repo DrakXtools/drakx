@@ -28,8 +28,10 @@
 
 
 enum return_type nfs_prepare(void);
+#ifndef MANDRAKE_MOVE
 enum return_type ftp_prepare(void);
 enum return_type http_prepare(void);
+#endif
 
 
 enum boot_proto_type { BOOTPROTO_STATIC, BOOTPROTO_DHCP, BOOTPROTO_ADSL_PPPOE };

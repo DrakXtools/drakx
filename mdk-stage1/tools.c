@@ -286,6 +286,7 @@ enum return_type copy_file(char * from, char * to, void (*callback_func)(int ove
         return ret;
 }
 
+#ifndef MANDRAKE_MOVE
 static void save_stuff_for_rescue(void)
 {
         copy_file("/etc/resolv.conf", STAGE2_LOCATION "/etc/resolv.conf", NULL);
@@ -409,6 +410,7 @@ enum return_type load_ramdisk(void)
 	else
 		return load_ramdisk_fd(st2_fd, size);
 }
+#endif
 
 /* pixel's */
 void * memdup(void *src, size_t size)
