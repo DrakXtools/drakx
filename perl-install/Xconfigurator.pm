@@ -1076,7 +1076,7 @@ sub main {
 	$in->set_help('configureXmain') unless $::isStandalone;
 	my $f = $in->ask_from_list_(['XFdrake'],
 				 _("What do you want to do?"),
-				 [ grep { !ref } @c ]);
+				 [ grep { !ref } @c ]) or die "automatic X configuration failed, ensure you give hsyncrange and vsyncrange with non-DDC aware videocards/monitors";
 	eval { &{$c{$f}} };
 	!$@ || $@ =~ /ask_from_list cancel/ or die;
 	$in->kill;
