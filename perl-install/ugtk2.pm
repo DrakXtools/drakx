@@ -471,8 +471,8 @@ sub create_menu {
 sub create_notebook {
     my $book = Gtk2::Notebook->new;
     while (@_) {
-	my ($title, $page) = splice(@_, 0, 2);
-	gtkappend_page($book, $title, $page);
+	my ($page, $title) = splice(@_, 0, 2);
+	gtkappend_page($book, $page, $title);
     }
     $book
 }

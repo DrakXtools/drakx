@@ -222,7 +222,7 @@ if (!$::isEmbedded && $in->isa('interactive::gtk')) {
 #    $W->{window}->show_all;
 #      gtkadd($W->{window},
 #  	   gtkpack_($W->create_box_with_title(N("Edit variables")),
-#  		    1, my $notebook = create_notebook( map { $_, h2widget($o->{$_}, "\$o->\{$_\}") } keys %$o ),
+#  		    1, my $notebook = create_notebook( map { h2widget($o->{$_}, "\$o->\{$_\}"), $_ } keys %$o ),
 #  		    0, gtkpack(gtkset_border_width(Gtk2::HBox->new(0,0),5), $W->create_okcancel),
 #  		   ),
 #  	  );
