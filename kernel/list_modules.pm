@@ -109,6 +109,11 @@ our %l = (
   {
     usb => [ qw(usb-uhci usb-ohci ehci-hcd uhci-hcd ohci-hcd) ],
     firewire => [ qw(ohci1394) ],
+    i2c => [
+      qw(i2c-ali1535 i2c-ali1563 i2c-ali15x3 i2c-amd756 i2c-amd8111 i2c-i801 i2c-i810 i2c-nforce2),
+      qw(i2c-piix4 i2c-prosavage i2c-savage4 i2c-sis5595 i2c-sis630 i2c-sis96x i2c-via i2c-viapro i2c-voodoo3),
+      if_(arch() !~ /^ppc/, qw(i2c-hydra i2c-ibm_iic i2c-mpc)),
+    ],
     pcmcia => [
       if_(arch() !~ /^sparc/, qw(i82365 i82092 pd6729 tcic yenta_socket)), # cb_enabler
     ],
