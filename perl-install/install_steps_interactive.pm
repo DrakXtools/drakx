@@ -306,7 +306,7 @@ sub setupSCSI {
 	my $w = $o->wait_message(_("IDE"), _("Configuring IDE"));
 	modules::load_ide();
     }
-    any::setup_thiskind($o, 'scsi|disk', !$::expert && !$clicked, $clicked, $o->{pcmcia});
+    any::setup_thiskind($o, 'scsi|disk', !$::expert && !$clicked, 0, $o->{pcmcia});
 
     install_interactive::tellAboutProprietaryModules($o) if !$clicked;
 }
