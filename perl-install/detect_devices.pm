@@ -202,7 +202,7 @@ sub isDvdDrive {
 sub isZipDrive { $_[0]{info} =~ /ZIP\s+\d+/ } #- accept ZIP 100, untested for bigger ZIP drive.
 sub isJazzDrive { $_[0]{info} =~ /\bJAZZ?\b/i } #- accept "iomega jaz 1GB"
 sub isLS120Drive { $_[0]{info} =~ /LS-?120|144MB/ }
-sub isRemovableUsb { $_[0]{usb_media_type} && index($_[0]{usb_media_type}, 'Mass Storage|') == 0 && usb2removable($_[0]) }
+sub isRemovableUsb { $_[0]{usb_media_type} && index($_[0]{usb_media_type}, 'Mass Storage') == 0 && usb2removable($_[0]) }
 sub isFloppyUsb { $_[0]{usb_driver} && $_[0]{usb_driver} eq 'Removable:floppy' }
 sub isRemovableDrive { 
     my ($e) = @_;
