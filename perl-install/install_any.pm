@@ -744,6 +744,8 @@ sub getAndSaveAutoInstallFloppy {
         commands::dd("if=/dev/ram", "of=$where", "bs=1440", "count=1024");
 
         rm_rf($workdir, $mountdir, $imagefile);
+    } elsif (arch() =~ /ia64/) {
+	#- nothing yet
     } else {
 	my $imagefile = "$o->{prefix}/tmp/autoinst.img";
 	my $mountdir = "$o->{prefix}/tmp/aif-mount"; -d $mountdir or mkdir $mountdir, 0755;
