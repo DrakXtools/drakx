@@ -253,8 +253,8 @@ my @pages = (
                                  $::WizardWindow->destroy if defined $::WizardWindow;
                                  undef $::WizardWindow;
                              },
-                             edit => sub { },
-                             remove => sub { },
+                             edit => sub {},
+                             remove => sub {},
                             },
                load => sub {
                    read_nut_config();
@@ -269,8 +269,8 @@ my @pages = (
                                  my ($name) = @_;
                                  $users->{$name} = {};
                              },
-                             edit => sub { },
-                             remove => sub { },
+                             edit => sub {},
+                             remove => sub {},
                             },
                load => sub {
                    $users = Libconf::Glueconf::NUT::Ups_conf->new($files{users});
@@ -281,9 +281,9 @@ my @pages = (
              { name => N("Access Control Lists"),
                columns => [ N("Name"), N("IP address"), N("IP mask") ],
                callbacks => {
-                             add => sub { },
-                             edit => sub { },
-                             remove => sub { },
+                             add => sub {},
+                             edit => sub {},
+                             remove => sub {},
                             },
                load => sub { 
                    load_access_conf();
@@ -294,9 +294,9 @@ my @pages = (
              { name => N("Rules"),
                columns => [ N("Action"), N("Level"), N("ACL name"), N("Password") ],
                callbacks => {
-                             N("Add") => sub { },
-                             N("Edit") => sub { },
-                             N("Remove") => sub { },
+                             N("Add") => sub {},
+                             N("Edit") => sub {},
+                             N("Remove") => sub {},
                             },
                       
                load => sub { @rules }, # already loaded when we loaded acls
@@ -315,7 +315,7 @@ $ugtk2::wm_icon = "drakups";
 
 $in->do_pkgs->ensure_is_installed('nut-server', '/etc/rc.d/init.d/upsd') if !$::testing;
 
-if (any { $_ eq '--wizard' } @ARGV) {
+if (member('--wizard', @ARGV)) {
     read_nut_config();
     add_device_wizard($in, $struct);
     writeconf();
