@@ -1,0 +1,80 @@
+#!/usr/bin/perl
+
+#
+# Guillaume Cottenceau (gc@mandrakesoft.com)
+#
+# Copyright 2001 MandrakeSoft
+#
+# This software may be freely redistributed under the terms of the GNU
+# public license.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+#
+
+
+sub cat_ { local *F; open F, $_[0] or $_[1] ? die "cat of file $_[0] failed: $!\n" : return; my @l = <F>; wantarray ? @l : join '', @l }
+
+
+#- start
+system('drvinst'); #- class2text seems broken, I can't detect easily only modules for SCSI storage :-(
+
+print "\nPlease wait, trying to find your root device...\n";
+
+my $target = '/mnt/sysimage';
+(-d $target) or mkdir($target) or die "couldn't create $target\n";
+
+
+my @parts = cat_('/proc/partitions');
+splice @parts, 0, 2; #- doesn't contain partitions
+
+my @fstab;
+my $root;
+
+for my $dirtypart (@parts) {
+    next if $dirtypart !~ /^\s*\w+\s+\w+\s+\w+\s+(\w+)\s/;
+    my $dev = "/dev/$1";
+
+    for my $fs ('ext2', 'reiserfs') {
+	my $where = $target;
+	if (!system("mount -t $fs $dev $where 2>/dev/null")) {
+	    if (-f "$where/etc/fstab") {
+		print "Found a probable root partition on $dev (type $fs)\n";
+		@fstab = cat_("$where/etc/fstab");
+		$root = $dev;
+	    } else {
+		system('umount', $where) and die "error unmounting $mntpoint: $!\n";
+	    }
+	    last;
+	}
+    }
+    last if @fstab;
+}
+
+if ($root) {
+    print "\nMounting other partition from fstab on $target...\n";
+    for my $fstabline (@fstab) {
+	my ($dev, $where, $type, $opts) = $fstabline =~ /^(\S+)\s+(\S+)\s+(\S+)\s+(\S+)\s/;
+	next if (!$type || $dev eq 'none' || $where eq '/' || $type eq 'supermount' ||
+		 $type eq 'swap' || $type eq 'nfs' || $where =~ /cdrom/ ||
+		 $where =~ /floppy/ || $opts =~ /noauto/ || $where =~ /proc/ ||
+		 $where =~ /mnt\/zip/);
+	$opts = join(',', grep { !/codepage=/ && !/iocharset/ } split(/,/, $opts)); #- vfat opts, we don't have the modules in rescue
+	$where = "/mnt/sysimage$where";
+	(-d $where) or mkdir($where) or die "couldn't create $where\n";
+	print "Mounting $dev on $where type $type\n";
+	system("mount -t $type $dev $where -o $opts");
+    }
+    print "Your partitions are mounted on $target.\n".
+	  "For example you can use 'chroot $target' to simulate your system.\n".
+	  "(you can reinstall lilo that way if necessary).\n\n";
+}
+
+
+#-------------------------------------------------
+#- $Log$
+#- Revision 1.1  2001/06/10 21:08:33  gc
+#- - add 'guessmounts' that mimics RH's detecting of partitions when rescue starts
+#-
+#-

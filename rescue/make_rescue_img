@@ -74,6 +74,7 @@ _ "cp ../all.modules/modules.cz-$main $tmp/modules/modules.cz";
 _ "cp ../all.modules/$main/modules.dep $tmp/modules";
 
 installown("drvinst", "/usr/bin");
+installown("guessmounts", "/usr/bin");
 
 #_ "install -s kernel_read_part $tmp/sbin" if $arch =~ /i.86/;
 __ "$sudo strip $tmp/{lib,bin,sbin}/* $tmp/usr/{bin,sbin}/* 2>/dev/null";
