@@ -115,7 +115,7 @@ ask_fromW_begin:
 
     print "* ";
     $common->{title} and print "$common->{title}\n";
-    print map { "$_\n" } @{$common->{messages}};
+    print(map { "$_\n" } @{$common->{messages}});
 
     $predo_widget->($_) foreach @$l;
     if (listlength(@$l) > 30) {

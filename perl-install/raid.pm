@@ -108,7 +108,7 @@ sub write {
     open F, ">$file" or die N("Can't write file %s", $file);
 
     foreach (grep { $_ } @$raids) {
-	print F <<"EOF";
+	print F <<EOF;
 raiddev       /dev/$_->{device}
 raid-level    $_->{level}
 chunk-size    $_->{'chunk-size'}

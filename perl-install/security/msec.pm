@@ -103,11 +103,11 @@ sub get_value {
     if (-e $item_file) {
         open F, $item_file;
         while(<F>) {
-            if($_ =~ /^$item/) {
+            if ($_ =~ /^$item/) {
 			 if ($category eq 'functions') {
 				my $i = $_;
 				(undef, $_) = split /\(/;
-				tr /()//d;
+				tr/()//d;
 				$value = $_;
 				$_ = $i;
 			 } elsif ($category eq 'checks') {

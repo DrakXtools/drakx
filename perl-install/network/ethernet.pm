@@ -88,7 +88,7 @@ sub conf_network_card {
     @all_cards == () and $in->ask_warn('', N("No ethernet network adapter has been detected on your system.
 I cannot set up this connection type.")) and return;
     @all_cards == 1 and $interface = $all_cards[0][0] and goto l1;
-    again :
+    again:
 	$interface = $in->ask_from_list(N("Choose the network interface"),
 					N("Please choose which network adapter you want to use to connect to Internet"),
 					[ map { $_->[0] . ($_->[1] ? " (using module $_->[1])" : "") } @all_cards ]

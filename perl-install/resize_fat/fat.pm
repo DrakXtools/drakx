@@ -89,9 +89,9 @@ sub endianness($$) {
     my ($val, $nb_bits) = @_;
     my $r = 0;
     for (; $nb_bits > 0; $nb_bits -= 8) {
-	$r <<= 8;
+	$r = $r << 8;
 	$r += $val & 0xff;
-	$val >>= 8;
+	$val = $val >> 8;
     }
     $nb_bits < 0 and die "error: endianness only handle numbers divisible by 8";
     $r;

@@ -36,7 +36,7 @@ if_(arch() =~ /ppc/,
     [ 'freebsd', 0x160, "\x6A\x10\x89\xE6\x48\x80\xCC\x40\xCD\x13" ],
     [ 'dummy', 0xAC, "\x0E\xB3\x07\x56\xCD\x10\x5E\xEB" ], #- caldera?
     [ 'ranish', 0x100, "\x6A\x10\xB4\x42\x8B\xF4\xCD\x13\x8B\xE5\x73" ],
-    [ 'os2', 0x1c2, "\xA" ],
+    [ 'os2', 0x1c2, "\x0A" ],
     [ 'Acronis', 0, "\xE8\x12\x01" ],
 );
 

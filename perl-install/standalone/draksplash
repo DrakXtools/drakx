@@ -169,7 +169,7 @@ $first{'widgets'}{'combo'}{'res'}->entry->signal_connect( changed => sub {
 #- image file selection for new theme
 $first{'widgets'}{'button'}{'file'}->signal_connect( clicked =>sub{
 	my $file_dialog = new Gtk::FileSelection('choose image');
-	$file_dialog->set_filename( ( $first{'widgets'}{'label'}{'file'}->get ne N("choose image file") )?$first{'widgets'}{'label'}{'file'}->get:'~/' );
+	$file_dialog->set_filename( ( $first{'widgets'}{'label'}{'file'}->get ne N("choose image file") ) ? $first{'widgets'}{'label'}{'file'}->get : '~/' );
 	$file_dialog->cancel_button->signal_connect( clicked => sub{ $file_dialog->destroy} );
 	$file_dialog->ok_button->signal_connect( clicked => sub{ $first{'widgets'}{'label'}{'file'}->set_text($file_dialog->get_filename) ; $file_dialog->destroy ;});
 	$file_dialog->show;
