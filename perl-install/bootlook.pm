@@ -233,7 +233,7 @@ LOGO_CONSOLE=" . ($keep_logo ? 'yes' : 'no') . "\n";
 				  _("Can't launch mkinitrd -f /boot/initrd-%s.img %s.", $_,$_));
                     $error = 1;
                 } else { 
-		  standalone::explanations(_("Make initrd 'mkinird -f /boot/initrd-%s.img %s'.", $_,$_));
+		  standalone::explanations(_("Make initrd 'mkinitrd -f /boot/initrd-%s.img %s'.", $_,$_));
 		}
             }
         }
