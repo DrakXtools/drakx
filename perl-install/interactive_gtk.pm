@@ -755,10 +755,10 @@ sub wait_messageW($$$) {
 }
 sub wait_message_nextW {
     my ($o, $messages, $w) = @_;
-    my $msg = join "\n", @$messages;
+    my $msg = join("\n", warp_text(join "\n", @$messages));
     return if $msg eq $w->{wait_messageW}->get; #- needed otherwise no expose_event :(
     $w->{displayed} = 0;
-    $w->{wait_messageW}->set(join("\n", warp_text($msg)));
+    $w->{wait_messageW}->set($msg);
     $w->flush until $w->{displayed};
 }
 sub wait_message_endW {
