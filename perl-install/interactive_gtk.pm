@@ -414,7 +414,8 @@ sub ask_from_entries_refW {
 
     my $pack = gtkpack_(create_box_with_title($mainw, @{$common->{messages}}),
 		   1, $create_widgets->(@widgets_always),
-		   0, $mainw->create_okcancel($common->{ok}, $common->{cancel}, '', @$l2 ? $advanced_button : ()));
+		   if_($common->{ok}, 
+		       0, $mainw->create_okcancel($common->{ok}, $common->{cancel}, '', @$l2 ? $advanced_button : ())));
     $advanced_pack = 
       gtkpack_(new Gtk::VBox(0,0),
 	       0, '',
