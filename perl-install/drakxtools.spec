@@ -248,13 +248,24 @@ done
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog 
-* Wed Jul 10 2002 Thierry Vignaud <tvignaud@mandrakesoft.com> 1.1.8-5mdk
-- list and describe all gui tools from drakxtools
-- code enhancement: increase coherency around the whole drakx code
-- decrease the debug verbosity
+* Thu Jul 11 2002 Thierry Vignaud <tvignaud@mandrakesoft.com> 1.1.8-5mdk
+- drakx :
+	o code enhancement: increase coherency around the whole drakx
+	  code regarding devices
+	o decrease the debug verbosity
+- harddrake2 :
+	o i18n:
+		* move $version out of translatable strings
+	o ui:
+		* increase default main window size
+		* put back the hw tree root
+		* eide devices: split info between vendor and model strings
+- spec :
+	o fix parrallel build
+	o list and describe all gui tools from drakxtools
 
 * Wed Jul 10 2002 Thierry Vignaud <tvignaud@mandrakesoft.com> 1.1.8-4mdk
-- fix depandancy
+- fix perl depandancy
 
 * Tue Jul 09 2002 Thierry Vignaud <tvignaud@mandrakesoft.com> 1.1.8-3mdk
 - harddrake2:
