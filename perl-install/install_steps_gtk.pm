@@ -301,7 +301,7 @@ sub chooseSizeToInstall {
     my $percentage = int 100 * $max_size / $max_size_;
 
     #- don't ask anything if the difference between min and max is too small
-    return $max_size if $min_size && $max_size / $min_size < 1.01;
+    return $max_size if $min_size && $max_size / $min_size < 1.05;
 
     log::l("choosing size to install between $min_size and $max_size");
     my $w = my_gtk->new('');
@@ -326,7 +326,7 @@ A low percentage will install only the most important packages;
 a percentage of %d%% will install as many packages as possible.", $percentage, $percentage))
 . ($individual ? "\n\n" . _("You will be able to choose them more specifically in the next step.") : ''),
 		 create_packtable({},
-				  [ _("Percentage of packages to install") . '  ', $spin, "%", my $mb = new Gtk::Label('xxxx MB') ],
+				  [ _("Percentage of packages to install") . '  ', $spin, "%", my $mb = new Gtk::Label ],
 				  [ undef, new Gtk::HScrollbar($adj) ],
 			       ),
 		 create_okcancel($w)
@@ -334,6 +334,7 @@ a percentage of %d%% will install as many packages as possible.", $percentage, $
 	 );
     $spin->signal_connect(changed => my $changed = sub { 
 	$val = $spin->get_value_as_int / 100 * $max_size;
+	log::l("val $val ", pkgs::correctSize($val / sqr(1024)));
 	$mb->set(sprintf("(%dMB)", pkgs::correctSize($val / sqr(1024)))); 
     }); &$changed();
     $spin->signal_connect(activate => sub { $w->{retval} = 1; Gtk->main_quit });

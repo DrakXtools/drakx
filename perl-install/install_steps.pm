@@ -787,7 +787,8 @@ sub setupXfreeAfter {
 	    Xconfigurator::rewriteInittab(3) unless $::testing; #- disable automatic start-up of X11 on error.
 	}
     }
-    if ($o->{X}{card}{default_depth} >= 16 && $o->{X}{card}{default_wres} >= 1024) {
+    log::l("large icon? $o->{X}{default_depth} >= 16 && $o->{X}{card}{default_wres} >= 1024");
+    if ($o->{X}{default_depth} >= 16 && $o->{X}{card}{default_wres} >= 1024) {
 	log::l("setting large icon style for kde");
 	install_any::kderc_largedisplay($o->{prefix});
     }
