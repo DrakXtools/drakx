@@ -306,7 +306,7 @@ our %adsl_data = (
                    Encapsulation => 3,
                   },
 
-                  N("France") . "|Free non dégroupé 512/128 & 1024/128" =>
+                  N("France") . "|Free non dÃ©groupÃ© 512/128 & 1024/128" =>
                   { 
                    vpi => 8, 
                    vci => 23,
@@ -317,7 +317,7 @@ our %adsl_data = (
                    DOMAINNAME2 => 'free.fr',
                   },
 
-                  N("France") . "|Free dégroupé 1024/256 (mini)" =>
+                  N("France") . "|Free dÃ©groupÃ© 1024/256 (mini)" =>
                   {
                    vpi => 8,
                    vci => 24,
@@ -327,7 +327,7 @@ our %adsl_data = (
                    DOMAINNAME2 => 'free.fr',
                   },
 
-                  N("France") . "|n9uf tel9com 512 & dégroupé 1024" =>
+                  N("France") . "|n9uf tel9com 512 & dÃ©groupÃ© 1024" =>
                   {
                    vpi => 8,
                    vci => 23,
@@ -337,7 +337,7 @@ our %adsl_data = (
                    method => 'pppoa',
                   },
 
-                  N("France") . "|Cegetel non dégroupé 512 IP/ADSL et dégroupé" =>
+                  N("France") . "|Cegetel non dÃ©groupÃ© 512 IP/ADSL et dÃ©groupÃ©" =>
                   {
                    vpi => 8,
                    vci => 23,
@@ -369,7 +369,7 @@ our %adsl_data = (
                    DOMAINNAME2 => 'wanadoo.fr',
                   },
 
-                  N("France") . "|Télé2" =>
+                  N("France") . "|TÃ©lÃ©2" =>
                   {
                    vpi => 8,
                    vci => 23,
@@ -484,7 +484,7 @@ our %adsl_data = (
                    method => 'pppoe',
                   },
 
-                  N("Morrocco") . "|Maroc Telecom" =>
+                  N("Morocco") . "|Maroc Telecom" =>
                   {
                    vpi => 8,
                    vci => 23,
@@ -528,7 +528,7 @@ our %adsl_data = (
                    Encapsulation => 1,
                   },
 
-                  N("Spain") . "|Telefónica IP dinámica" =>
+                  N("Spain") . "|TelefÃ³nica IP dinÃ¡mica" =>
                   {
                    vpi => 8,
                    vci => 20,
@@ -537,7 +537,7 @@ our %adsl_data = (
                    dnsServer3 => '80.58.0.97',
                    method => 'pppoe',
                   },
-                  N("Spain") . "|Telefónica ip fija" =>
+                  N("Spain") . "|TelefÃ³nica ip fija" =>
                   {
                    vpi => 8,
                    vci => 20,
