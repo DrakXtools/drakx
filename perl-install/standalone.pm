@@ -148,11 +148,10 @@ sub on_request_help {
     my ($link) = shift;
     my $browser;
     if (!($browser = $ENV{BROWSER})) {
-	foreach (qw(mozilla konqueror galeon)) { -x "/usr/bin/$_" or next; $browser = $_;last};
+	foreach (qw(mozilla konqueror galeon)) { -x "/usr/bin/$_" or next; $browser = $_; last };
     }
     standalone::explanations("Connection to help system at $link");
-    my $ret = system("$browser $link &");
-    $ret;
+    system("$browser $link &");
 }
 
 ################################################################################
