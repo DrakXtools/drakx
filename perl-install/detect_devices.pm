@@ -771,6 +771,10 @@ sub isLaptop() {
 	|| cat_('/proc/cpuinfo') =~ /\bmobile\b/i;
 }
 
+sub is_i586() {
+    cat_('/proc/cpuinfo') =~ /^cpu family\s*:\s*(\d+)/m && $1 < 6;
+}
+
 sub matching_type {
     my ($type) = @_;
     $type =~ /laptop/i && isLaptop();
