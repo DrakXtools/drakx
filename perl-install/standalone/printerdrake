@@ -34,7 +34,7 @@ printer::main::get_usermode ();
 
 my $printer;
 
-my $in = 'interactive'->vnew('su', 'printer-mdk');
+my $in = 'interactive'->vnew('su', if_(!$::isEmbedded, 'printer-mdk'));
 
 my $commandline = $_;
 
