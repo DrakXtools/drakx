@@ -211,7 +211,7 @@ sub automatic_xconf {
     require Xconfig::main;
     require class_discard;
     Xconfig::main::configure_everything_auto_install($o->{raw_X}, class_discard->new, {},
-                                                     { allowNVIDIA_rpms => [], allowATI_rpms => [] });
+                                                     { allowNVIDIA_rpms => [], allowATI_rpms => [], allowFB => $o->{allowFB} });
 }
 
 
