@@ -2747,17 +2747,20 @@ sub install_spooler {
 		my $w = $in->wait_message(_("Printerdrake"),
 					  _("Checking installed software..."));
 		if ((!$::testing) &&
-		    ((!printer::files_exist((qw(/usr/lib/cups/cgi-bin/printers.cgi
+		    (!printer::files_exist((qw(/usr/lib/cups/cgi-bin/printers.cgi
 						/sbin/ifconfig
 						/usr/bin/xpp),
 					     ($::expert ? 
 					      "/usr/share/cups/model/postscript.ppd.gz" : ())
-					     ))) ||
-		     ((!printer::files_exist((qw(/usr/bin/wget)))) &&
-		      (!printer::files_exist((qw(/usr/bin/curl))))))) {
+					    )))) {
 		    $in->do_pkgs->install(('cups', 'net-tools', 'xpp',
-					   'webfetch',
 					   ($::expert ? 'cups-drivers' : ())));
+		}
+		if ((!$::testing) &&
+		    ((!printer::files_exist((qw(/usr/bin/wget)))) &&
+		     (!printer::files_exist((qw(/usr/bin/curl)))))) {
+		    $in->do_pkgs->install
+			($::isInstall ? 'curl' : 'webfetch');
 		}
 		# Try to start the network when CUPS is the spooler, so that
 		# remote CUPS printers get displayed (especially during
