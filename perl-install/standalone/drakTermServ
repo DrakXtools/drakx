@@ -46,6 +46,7 @@ use interactive;
 use ugtk2 qw(:helpers :wrappers :create);
 use common;
 use run_program;
+use MDK::Common::File qw(:all);
 
 use Config;
 use POSIX;
@@ -66,6 +67,7 @@ my $thin_clients = 0;
 my $cfg_dir = "/etc/drakxtools/draktermserv/";
 my $cfg_file = $cfg_dir . "draktermserv.conf";
 my $server_ip = get_ip_from_sys();
+my $changes_made = 0;
 
 #- make sure terminal server and friends are installed
 my $ts = system("rpm -qa | grep terminal-server > /dev/null");
@@ -214,13 +216,13 @@ sub cursor_norm() {
 sub display_error {
     my ($message) = @_;
     my $error_box;
-    $$central_widget->destroy;
+    destroy_widget();
     gtkpack($status_box,
 	    $error_box = gtkpack_(new Gtk2::VBox(0,0),
 			1, new Gtk2::Label($message),
 			0, gtkadd(gtkset_layout(new Gtk2::HButtonBox, 'spread'),
 				gtksignal_connect(new Gtk2::Button(N("OK")), clicked => sub {
-					$$central_widget->destroy;
+					destroy_widget();
 				}),
 			),
 		)
@@ -238,7 +240,7 @@ sub interactive_mode() {
     $window1->{rwindow}->set_border_width(5);
 
     gtkadd($window1->{window},
-	   gtkpack_(new Gtk2::VBox(0,2),
+	   gtkpack_(gtkset_size_request(new Gtk2::VBox(0,2), 620, 400),
 		    if_(!$::isEmbedded, 0,  gtkcreate_img("drakTS.620x57")),
 		    1, gtkpack_(new Gtk2::HBox(0,2),
 				1, gtkpack_(new Gtk2::VBox(0,2),
@@ -248,14 +250,14 @@ sub interactive_mode() {
 					    1, gtkpack_(new Gtk2::HBox(0,2),
 							0, gtkadd(gtkset_layout(Gtk2::VButtonBox->new, 'end'),
 								  gtksignal_connect(new Gtk2::Button(N("Enable Server")), clicked => sub {
-								      $$central_widget->destroy;
+								      destroy_widget();
 								      $windows = 1;
 								      cursor_wait(); 
 								      enable_ts();
 								      cursor_norm();
 								  }),
 								  gtksignal_connect(new Gtk2::Button(N("Disable Server")), clicked => sub {
-								      $$central_widget->destroy;
+								      destroy_widget();
 								      cursor_wait();
 								      disable_ts();
 								      cursor_norm(); 
@@ -263,14 +265,14 @@ sub interactive_mode() {
 								  ),
 							0, gtkadd(gtkset_layout(Gtk2::VButtonBox->new, 'end'),
 								  gtksignal_connect(new Gtk2::Button(N("Start Server")), clicked => sub { 
-								      $$central_widget->destroy;
+								      destroy_widget();
 								      $windows = 0; 
 								      cursor_wait();	
 								      start_ts();
 								      cursor_norm();
 								  }),
 								  gtksignal_connect(new Gtk2::Button(N("Stop Server")), clicked => sub {
-								      $$central_widget->destroy;
+								      destroy_widget();
 								      cursor_wait();
 								      stop_ts();
 								      cursor_norm();
@@ -278,36 +280,39 @@ sub interactive_mode() {
 								  ),
 							0, gtkadd(gtkset_layout(Gtk2::VButtonBox->new, 'end'),
 								  gtksignal_connect(new Gtk2::Button(N("Etherboot Floppy/ISO")), clicked => sub { 
-								      $$central_widget->destroy;
+								      destroy_widget();
 								      $windows = 1; 
 								      make_boot();
 								  }),
 								  gtksignal_connect(new Gtk2::Button(N("Net Boot Images")), clicked => sub {
-								      $$central_widget->destroy;
+								      destroy_widget();
 								      make_nbi();
 								  }),
 								  ),
 							0, gtkadd(gtkset_layout(Gtk2::VButtonBox->new, 'end'),
 								  gtksignal_connect(new Gtk2::Button(N("Add/Del Users")), clicked => sub {
-								      $$central_widget->destroy;
+								      destroy_widget();
 								      $windows = 0;
 								      maintain_users();
 								  }),
-								  gtksignal_connect(new Gtk2::Button(N("Add/Del Clients")), clicked => sub { $$central_widget->destroy; maintain_clients() }),
+								  gtksignal_connect(new Gtk2::Button(N("Add/Del Clients")), clicked => sub { destroy_widget(); maintain_clients() }),
 								  ),
 							1, new Gtk2::HBox(0,2),
 							0, gtkadd(gtkset_layout(Gtk2::VButtonBox->new, 'end'),
-								  gtksignal_connect(new Gtk2::Button(N("Help")),clicked => sub {
-								      $$central_widget->destroy;
-								      help();
-								  }),
-								  gtksignal_connect(new Gtk2::Button(N("Close")), clicked => sub {
-								      write_conf_file();
-								      Gtk2->main_quit;
-								  }),
-								  ),
+								gtksignal_connect(new Gtk2::Button(N("Help")),clicked => sub {
+									destroy_widget();
+									help();
+								}),
+								gtksignal_connect(new Gtk2::Button(N("Close")), clicked => sub {
+									write_conf_file();
+									if ($changes_made == 1) {
+										restart_server();
+									}
+									Gtk2->main_quit;
+								}),
 							),
-					    ),
+						),
+					),
 				),
 		    ),
 	   );
@@ -339,20 +344,18 @@ sub text_view {
     my $box;
     gtkpack($status_box,
 	    $box = gtkpack_(new Gtk2::VBox(0,10),
-	       1, gtkpack_(new Gtk2::HBox(0,0),
-			   1, create_scrolled_window(gtktext_insert(
-#								    gtkset_editable(
-										    new Gtk2::TextView,
-#										    1)
-								    [ [ $text ] ])
-						     ),
-			   ),
-				 0, gtkadd(gtkset_layout(new Gtk2::HButtonBox, 'spread'),
-					   gtksignal_connect(new Gtk2::Button(N("OK")), clicked => 
-							     sub { $$central_widget->destroy }),
-					   ),
-				 )
-	    );
+			1, gtkpack_(new Gtk2::HBox(0,0),
+				1, create_scrolled_window(gtktext_insert(
+					new Gtk2::TextView, [ [ $text ] ])
+				),
+			),
+			0, gtkpack(gtkset_layout(new Gtk2::HButtonBox, 'spread'),
+				gtksignal_connect(new Gtk2::Button(N("OK")), clicked => 
+					sub { destroy_widget() }),
+			),
+		)
+	);
+	gtkset_size_request($box, 580, 280);
     $central_widget = \$box;
     $status_box->show_all;
 }
@@ -382,19 +385,27 @@ sub help() {
 					fixed-address              192.168.192.3;
 					#type                          fat;
 					filename                      \"i386/boot/boot-3c509.2.4.18-6mdk.nbi\";
+					#hdw_config                true;
 				}
 			
 			While you can use a pool of IP addresses, rather than setup a specific entry for
 			a client machine, using a fixed address scheme facilitates using the functionality
 			of client-specific configuration files that ClusterNFS provides.
 			
-			Note: The \"#type\" entry is only used by drakTermServ.  Clients can either be \"thin\"
+			Note: The \"#type\" entry is only used by drakTermServ.  Clients can either be 'thin'
 			or 'fat'.  Thin clients run most software on the server via xdmcp, while fat clients run 
 			most software on the client machine. A special inittab, /etc/inittab\$\$IP=client_ip\$\$ is
 			written for thin clients. System config files xdm-config, kdmrc, and gdm.conf are 
 			modified if thin clients are used, to enable xdmcp. Since there are security issues in 
 			using xdmcp, hosts.deny and hosts.allow are modified to limit access to the local
 			subnet.
+			
+			Note: The \"#hdw_config\" entry is also only used by drakTermServ.  Clients can either 
+			be 'true' or 'false'.  'true' enables root login at the client machine and allows local 
+			hardware configuration of sound, mouse, and X, using the 'drak' tools. This is enabled 
+			by creating seperate config files associated with the client's IP address and creating 
+			read/write mount points to allow the client to alter the file. Once you are satisfied 
+			with the configuration, you can remove root login priviledges from the client.
 			
 			Note: You must stop/start the server after adding or changing clients.
 			
@@ -741,6 +752,9 @@ sub maintain_clients() {
 	my $client;
 	my $citer;
 	my $local_config = 0;
+	my $button_edit;
+	my $button_config;
+	my $button_delete;
 	
 	#- client info in tree view
 	my $model = Gtk2::TreeStore->new(Gtk2::GType->STRING);
@@ -768,7 +782,11 @@ sub maintain_clients() {
 		if ($clients{$key}{filename}) {
 			$model->append($c_detail, $t_client);
     		$model->set($c_detail, [ 0 => $clients{$key}{filename} ]);
-		}		
+		}
+		
+		$model->append($c_detail, $t_client);
+    	$model->set($c_detail, [ 0 => N("local config: %s", $clients{$key}{hdw_config}) ]);
+				
 	}
 	
 	$tree_clients->get_selection->signal_connect(changed => sub {
@@ -782,6 +800,9 @@ sub maintain_clients() {
 		} else {
 			$client = '';
 		}
+		$button_edit->set_sensitive(1);
+		$button_config->set_sensitive(1);
+		$button_delete->set_sensitive(1);		
 	});
 
 	#- entry boxes for client data entry
@@ -833,7 +854,7 @@ sub maintain_clients() {
 							my $nbi = $entry_nbi->entry->get_text;
 							if ($hostname && $mac && $ip) {
 	
-								my $result = addclient(0, $hostname, $mac, $ip, $nbi, $is_thin);
+								my $result = addclient(0, $hostname, $mac, $ip, $nbi, $is_thin, $local_config);
 								
 								if ($result == 0) {
 									my $t_client = Gtk2::TreeIter->new;
@@ -868,30 +889,52 @@ sub maintain_clients() {
 									my $c_hdw_config = Gtk2::TreeIter->new;
 									$model->append($c_hdw_config, $t_client);
     								$model->set($c_hdw_config, [ 0 => $hdw_config ]);
-					
+									$check_hdw_config->set_active(0);
+									$local_config = 0;
+									%clients = read_dhcpd_conf();
 								}		
 							}
 						}),
-					gtksignal_connect(new Gtk2::Button(N("<-- Edit Client")), clicked => 
+					gtksignal_connect($button_edit = new Gtk2::Button(N("<-- Edit Client")), clicked => 
 						sub { $entry_host->set_text($client);
-								$entry_mac->set_text($clients{$client}{hardware});
-								$entry_ip->set_text($clients{$client}{address});
-								my $type = $clients{$client}{type};
-								if ($type eq "thin") {
-									$check_thin->set_active(1);
-								} else {
-									$check_thin->set_active(0);
-								}	
-								$entry_nbi->entry->set_text($clients{$client}{filename});
-								my $result = delclient(0, $client);
-								if ($result == 0) {
-									$model->remove($citer);
-								}
+							$entry_mac->set_text($clients{$client}{hardware});
+							$entry_ip->set_text($clients{$client}{address});
+							my $type = $clients{$client}{type};
+							if ($type eq "thin") {
+								$check_thin->set_active(1);
+							} else {
+								$check_thin->set_active(0);
+							}	
+							$entry_nbi->entry->set_text($clients{$client}{filename});
+							my $hdw_config = $clients{$client}{hdw_config};
+							if ($hdw_config eq "true") {
+								$check_hdw_config->set_active(1);
+							} else {
+								$check_hdw_config->set_active(0);
+							}	
+								
+							my $result = delclient(0, $client);
+							if ($result == 0) {
+								$model->remove($citer);
+								$button_edit->set_sensitive(0);
+								$button_config->set_sensitive(0);
+								$button_delete->set_sensitive(0);
+							}
 						}),
-					gtksignal_connect(new Gtk2::Button(N("Delete Client")), clicked => 
+					gtksignal_connect($button_config = new Gtk2::Button(N("Disable Local Config")), clicked => 
+						sub { 
+							my $hdw_config = $clients{$client}{hdw_config};
+							if ($hdw_config eq "true") {
+								client_hdw_config($clients{$client}{address}, 0);
+							}	
+						}),	
+					gtksignal_connect($button_delete = new Gtk2::Button(N("Delete Client")), clicked => 
 						sub { my $result = delclient(0, $client);
 							if ($result == 0) {
 								$model->remove($citer);
+									$button_edit->set_sensitive(0);
+									$button_config->set_sensitive(0);
+									$button_delete->set_sensitive(0);
 							}
 						}),
 					gtksignal_connect(new Gtk2::Button(N("dhcpd Config...")), clicked => 
@@ -929,6 +972,9 @@ sub maintain_clients() {
 			$in->ask_warn('', N("Need to restart the Display Manager for full changes to take effect. \n(service dm restart - at the console)"));
 		}
 	);
+	$button_edit->set_sensitive(0);
+	$button_config->set_sensitive(0);
+	$button_delete->set_sensitive(0);
 	$central_widget = \$client_box;
 	$client_box->show_all;
 }
@@ -1420,12 +1466,11 @@ sub deluser {
 
 sub addclient {
 	#- add a new client entry after checking for dups
-	my ($cmd_line, $hostname, $mac, $ip, $nbi, $is_thin) = @_;
+	my ($cmd_line, $hostname, $mac, $ip, $nbi, $is_thin, $local_config) = @_;
 
 	my $host_in_use = 0;
 	my $mac_in_use = 0;
 	my $ip_in_use = 0;
-			
 	my %ts_clients = read_dhcpd_conf();
 
 	foreach my $client (keys(%ts_clients)) {
@@ -1435,9 +1480,9 @@ sub addclient {
 	}
 	
 	if ($cmd_line == 1) {
-		print "$hostname already in use\n" if $host_in_use;
-		print "$mac already in use\n" if $mac_in_use;
-		print "$ip already in use\n" if $ip_in_use;
+		print N("%s already in use\n", $hostname) if $host_in_use;
+		print N("%s already in use\n", $mac) if $mac_in_use;
+		print N("%s already in use\n", $ip) if $ip_in_use;
 		if ($host_in_use || $mac_in_use || $ip_in_use) {
 			return;
 		}
@@ -1452,13 +1497,20 @@ sub addclient {
 			$ts_clients{$hostname}{type} = "fat";
 		}
 		$ts_clients{$hostname}{filename} = $nbi;
-			
+		if ($local_config == 1) {
+			$ts_clients{$hostname}{hdw_config} = "true";
+			client_hdw_config($ip, 1);
+		} else {
+			$ts_clients{$hostname}{hdw_config} = "false";
+			client_hdw_config($ip, 0);
+		}	
 		my $clients = "/etc/dhcpd.conf.etherboot.clients";
-          local *CLIENT;
-		open(CLIENT, ">> $clients") or warn("Can't open $clients!");
+		local *CLIENT;
+		open(CLIENT, ">> $clients") or warn(N("Can't open %s!", $clients));
 		my $client_entry = format_client_entry($hostname, %ts_clients);
 		print CLIENT $client_entry;
 		close CLIENT;	
+		$changes_made = 1;
 		0;
 	} 
 }
@@ -1473,14 +1525,16 @@ sub delclient {
 	foreach my $client (keys(%ts_clients)) {
 		if ($hostname eq $client) {
 			$host_found = 1;
+			clean_client_config($ts_clients{$client}{address});
 			delete $ts_clients{$client};
 			write_dhcpd_conf(%ts_clients);
+			$changes_made = 1;
 			return 0;			
 		}
 	}
 		
 	if ($cmd_line == 1) {
-		print "$hostname not found...\n" unless $host_found;
+		print N("%s not found...\n", $hostname) unless $host_found;
 		return;
 	}	
 }
@@ -1552,8 +1606,13 @@ sub format_client_entry {
 	$entry .= "\tfixed-address\t\t$ts_clients{$client}{address};\n";
 	$entry .= "\t#type\t\t\t$ts_clients{$client}{type};\n" if $ts_clients{$client}{type};
 	$entry .= "\tfilename\t\t\"$ts_clients{$client}{filename}\";\n" if $ts_clients{$client}{filename};
+	$entry .= "\t#hdw_config\t\t$ts_clients{$client}{hdw_config};\n" if $ts_clients{$client}{hdw_config};
 	$entry .= "}\n";
-	write_thin_inittab($ts_clients{$client}{address}) if $ts_clients{$client}{type} eq "thin";
+	if ($ts_clients{$client}{type} eq "thin") {
+		write_thin_inittab($ts_clients{$client}{address}) 
+	} else {
+		eval { rm_rf("/etc/inittab\$\$IP=$ts_clients{$client}{address}\$\$") };
+	}
 	$entry
 }
 
@@ -1561,7 +1620,7 @@ sub write_dhcpd_conf {
 	my %ts_clients = @_;
 	my $clients = "/etc/dhcpd.conf.etherboot.clients";
 		
-     local *CLIENT;
+	local *CLIENT;
 	open(CLIENT, "> $clients") or warn("Can't open $clients!");
 	foreach my $key (keys(%ts_clients)) {
 		my $client_entry = format_client_entry($key, %ts_clients);
@@ -1588,10 +1647,85 @@ sub read_dhcpd_conf() {
 			} else {
 				$name = "address" if $name =~ /fixed-address/;
 				$name = "type" if $name =~ /#type/;
+				$name = "hdw_config" if $name =~ /#hdw_config/;
 				$ts_clients{$hostname}{$name} = $val;
 			}
 		}	
 	}
 	close CLIENTS;
 	%ts_clients;	
+}
+
+sub client_hdw_config {
+	my ($client_ip, $mode) = @_;
+	# configure the files for a client to be able to
+	# run drak tools locally and modify configs
+	# mode 0 disables root logins but retains configs
+	# mode 1 creates the new template files
+	if ($mode == 1) {
+		log::explanations("Allowing root access for $client_ip");
+		my $suffix = "\$\$IP=$client_ip\$\$";
+		cp_af("/etc/shadow\$\$CLIENT\$\$", "/etc/shadow$suffix");
+		my @sys_users = cat_("/etc/shadow");
+		foreach (@sys_users) {
+			if (/^root:/) {
+				# need root access to do the hardware config
+				append_to_file("/etc/shadow$suffix", $_);
+				last;
+			}
+		}
+		# make all the local config files
+		cp_af("/etc/sysconfig/mouse", "/etc/sysconfig/mouse$suffix") if -f "/etc/sysconfig/mouse";
+		cp_af("/etc/X11/XF86Config", "/etc/X11/XF86Config$suffix") if -f "/etc/X11/XF86Config";
+		cp_af("/etc/X11/XF86Config-4\$\$CLIENT\$\$", "/etc/X11/XF86Config-4$suffix") if -f "/etc/X11/XF86Config-4\$\$CLIENT\$\$";
+		cp_af("/dev/null", "/etc/modules.conf$suffix");
+		# create mount points so they can be edited by the client
+		my $mnt_access = "$client_ip(rw,no_root_squash)";
+		append_to_file("/etc/exports", "/etc/sysconfig/mouse$suffix\t$mnt_access\n");
+		append_to_file("/etc/exports", "/etc/modules.conf$suffix\t$mnt_access\n");
+		append_to_file("/etc/exports", "/etc/X11/XF86Config$suffix\t$mnt_access\n");
+		append_to_file("/etc/exports", "/etc/X11/XF86Config-4$suffix\t$mnt_access\n");
+	} else {
+		log::explanations("Removing root access for $client_ip");
+		eval { rm_rf("/etc/shadow\$\$IP=$client_ip\$\$") };
+		remove_client_mounts($client_ip);
+	}	
+}
+
+sub restart_server() {
+	my $answer = $in->ask_yesorno('', N("Configuration changed - restart clusternfs/dhcpd?"));
+	if ($answer == 1) {
+		stop_ts();
+		start_ts();
+		$changes_made = 0;
+	}
+}
+
+sub clean_client_config {
+	my ($client_ip) = @_;
+	# this routine entirely removes local hardware config settings
+	log::explanations("Removing all local hardware config for $client_ip");
+	my $suffix = "\$\$IP=$client_ip\$\$";
+	eval { rm_rf("/etc/shadow$suffix") };
+	eval { rm_rf("/etc/sysconfig/mouse$suffix") };
+	eval { rm_rf("/etc/modules.conf$suffix") };
+	eval { rm_rf("/etc/X11/XF86Config$suffix") };
+	eval { rm_rf("/etc/X11/XF86Config-4$suffix") };
+	remove_client_mounts($client_ip);
+}
+
+sub remove_client_mounts {
+	my ($client_ip) = @_;
+	#remove the mount points also
+	log::explanations("Removing read/write mount points for $client_ip");
+	substInFile { 
+		$_ = '' if /$client_ip/;
+	} "/etc/exports";	
+}
+
+sub destroy_widget() {
+	if ($central_widget ne '') {
+		$$central_widget->destroy;
+		$central_widget = '';
+	}
 }
