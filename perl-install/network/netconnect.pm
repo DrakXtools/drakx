@@ -118,7 +118,7 @@ sub real_main {
 
       init_globals($in);
 
-      network::network::read_net_conf($netcnx, $netc, $intf);
+      read_net_conf($netcnx, $netc, $intf);
 
       modules::mergein_conf();
 
