@@ -423,7 +423,7 @@ sub get_normal_parts_and_holes {
     } sort { $a->{start} <=> $b->{start} } grep { !isWholedisk($_) } get_normal_parts($hd);
 
     push @l, { start => $start, size => $hd->{totalsectors} - $start, type => 0, rootDevice => $hd->{device} };
-    grep { $_->{size} >= $hd->cylinder_size } @l;
+    grep { $_->{type} || $_->{size} >= $hd->cylinder_size } @l;
 }
 
 sub read_one($$) {
