@@ -12,6 +12,8 @@ use devices;
 #-INTERN CONSTANT
 #-#####################################################################################
 
+my @background;
+
 #- if we're running for the doc team, we want screenshots with
 #- a good B&W contrast: we'll override values of our theme
 my $theme_overriding_for_doc = q(style "galaxy-default"
@@ -60,7 +62,12 @@ sub load_rc {
 	$o->{doc} and push @contents, $theme_overriding_for_doc;
 
 	Gtk2::Rc->parse_string(join("\n", @contents));
-    }
+ 	foreach (@contents) {
+	    if (/style\s+"background"/ .. /^\s*$/) {
+		@background = map { $_ * 256 * 257 } split ',', $1 if /NORMAL.*\{(.*)\}/;
+	    }
+	}
+   }
 
     if ($::move) {
         #- override selection color since we won't do inverse-video on the text when it's images
@@ -111,6 +118,7 @@ sub install_theme {
 
     load_rc($o, $o->{theme} ||= default_theme($o));
     load_font($o);
+    $::move or gtkset_background(@background);
 }
 
 #------------------------------------------------------------------------------
