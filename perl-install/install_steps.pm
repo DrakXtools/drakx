@@ -491,121 +491,10 @@ sub configureNetwork($) {
     $o->pkg_install("pump") if grep { $_->{BOOTPROTO} =~ /^(pump|bootp)$/ } @{$o->{intf}};
     #-res_init();		#- reinit the resolver so DNS changes take affect
 
-    miscellaneousNetwork($o);
+    any::miscellaneousNetwork($o);
 }
 
 #------------------------------------------------------------------------------
-sub pppConfig {
-    my ($o) = @_;
-    $o->{modem} or return;
-
-    symlinkf($o->{modem}{device}, "$o->{prefix}/dev/modem") or log::l("creation of $o->{prefix}/dev/modem failed");
-    $o->pkg_install("ppp") unless $::testing;
-
-    my %toreplace;
-    $toreplace{$_} = $o->{modem}{$_} foreach qw(connection phone login passwd auth domain dns1 dns2);
-    $toreplace{kpppauth} = ${{ 'Script-based' => 0, 'PAP' => 1, 'Terminal-based' => 2, 'CHAP' => 3, }}{$o->{modem}{auth}};
-    $toreplace{phone} =~ s/\D//g;
-    $toreplace{dnsserver} = join ',', map { $o->{modem}{$_} } "dns1", "dns2";
-    $toreplace{dnsserver} .= $toreplace{dnsserver} && ',';
-
-    #- using peerdns or dns1,dns2 avoid writing a /etc/resolv.conf file.
-    $toreplace{peerdns} = "yes";
-
-    $toreplace{connection} ||= 'DialupConnection';
-    $toreplace{domain} ||= 'localdomain';
-    $toreplace{intf} ||= 'ppp0';
-    $toreplace{papname} = $o->{modem}{auth} eq 'PAP' && $toreplace{login};
-
-    #- build ifcfg-ppp0.
-    my $ifcfg = "$o->{prefix}/etc/sysconfig/network-scripts/ifcfg-ppp0";
-    local *IFCFG; open IFCFG, ">$ifcfg" or die "Can't open $ifcfg";
-    print IFCFG <<END;
-DEVICE="$toreplace{intf}"
-ONBOOT="no"
-USERCTL="no"
-MODEMPORT="/dev/modem"
-LINESPEED="115200"
-PERSIST="yes"
-DEFABORT="yes"
-DEBUG="yes"
-INITSTRING="ATZ"
-DEFROUTE="yes"
-HARDFLOWCTL="yes"
-ESCAPECHARS="no"
-PPPOPTIONS=""
-PAPNAME="$toreplace{papname}"
-REMIP=""
-NETMASK=""
-IPADDR=""
-MRU=""
-MTU=""
-DISCONNECTTIMEOUT="5"
-RETRYTIMEOUT="60"
-BOOTPROTO="none"
-PEERDNS="$toreplace{peerdns}"
-END
-    foreach (1..2) {
-	if ($toreplace{"dns$_"}) {
-	    print IFCFG <<END;
-DNS$_=$toreplace{"dns$_"}
-END
-	}
-    }
-    close IFCFG;
-
-    #- build chat-ppp0.
-    my $chat = "$o->{prefix}/etc/sysconfig/network-scripts/chat-ppp0";
-    local *CHAT; open CHAT, ">$chat" or die "Can't open $chat";
-    print CHAT <<END;
-'ABORT' 'BUSY'
-'ABORT' 'ERROR'
-'ABORT' 'NO CARRIER'
-'ABORT' 'NO DIALTONE'
-'ABORT' 'Invalid Login'
-'ABORT' 'Login incorrect'
-'' 'ATZ'
-'OK' 'ATDT$toreplace{phone}'
-'CONNECT' ''
-END
-    if ($o->{modem}{auth} eq 'Terminal-based' || $o->{modem}{auth} eq 'Script-based') {
-	print CHAT <<END;
-'ogin:' '$toreplace{login}'
-'ord:' '$toreplace{passwd}'
-END
-    }
-    print CHAT <<END;
-'TIMEOUT' '5'
-'~--' ''
-END
-    close CHAT;
-
-    if ($o->{modem}{auth} eq 'PAP') {
-	#- need to create a secrets file for the connection.
-	my $secrets = "$o->{prefix}/etc/ppp/" . lc($o->{modem}{auth}) . "-secrets";
-	my @l = cat_($secrets);
-	my $replaced = 0;
-	do { $replaced ||= 1
-	       if s/^\s*"?$toreplace{login}"?\s+ppp0\s+(\S+)/"$toreplace{login}"  ppp0  "$toreplace{passwd}"/; } foreach @l;
-	if ($replaced) {
-	    local *F;
-	    open F, ">$secrets" or die "Can't open $secrets: $!";
-	    print F @l;
-        } else {
-	    local *F;
-	    open F, ">>$secrets" or die "Can't open $secrets: $!";
-	    print F "$toreplace{login}  ppp0  \"$toreplace{passwd}\"\n";
-	}
-	#- restore access right to secrets file, just in case.
-	chmod 0600, $secrets;
-    } #- CHAP is not supported by initscripts, need patching before doing more on that here!
-
-    #-install_any::template2userfile($o->{prefix}, "$ENV{SHARE_PATH}/kppprc.in", ".kde/share/config/kppprc", 1, %toreplace);
-    commands::mkdir_("-p", "$o->{prefix}/usr/share/config");
-    template2file("$ENV{SHARE_PATH}/kppprc.in", "$o->{prefix}/usr/share/config/kppprc", %toreplace);
-
-    miscellaneousNetwork($o);
-}
 
 #------------------------------------------------------------------------------
 sub installCrypto {
@@ -885,12 +774,7 @@ sub configureXAfter {
 }
 
 #------------------------------------------------------------------------------
-sub miscellaneousNetwork {
-    my ($o) = @_;
-    setVarsInSh ("$o->{prefix}/etc/profile.d/proxy.sh",  $o->{miscellaneous}, qw(http_proxy ftp_proxy));
-    setVarsInCsh("$o->{prefix}/etc/profile.d/proxy.csh", $o->{miscellaneous}, qw(http_proxy ftp_proxy));
-}
-
+# miscellaneousNetwork moved to any
 #------------------------------------------------------------------------------
 sub miscellaneous {
     my ($o) = @_;

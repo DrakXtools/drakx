@@ -564,40 +564,7 @@ You may also enter the IP address of the gateway if you have one"),
 }
 
 #------------------------------------------------------------------------------
-sub pppConfig {
-    my ($o) = @_;
-    my $m = $o->{modem} ||= {};
-
-    unless ($m->{device} || $::expert && !$o->ask_yesorno('', _("Try to find a modem?"), 1)) {
-	eval { modules::load("serial"); };
-	detect_devices::probeSerialDevices();
-	foreach (0..3) {
-	    next if $o->{mouse}{device} =~ /ttyS$_/;
-	    detect_devices::hasModem("/dev/ttyS$_") and $m->{device} = "ttyS$_", last;
-	}
-    }
-
-    $m->{device} ||= $o->set_help('selectSerialPort') && 
-	$o->ask_from_listf('', _("Please choose which serial port your modem is connected to."),
-			   \&mouse::serial_port2text,
-			   [ grep { $_ ne $o->{mouse}{device} } mouse::serial_ports ]);
-
-    $o->set_help('configureNetworkISP');
-    install_steps::pppConfig($o) if $o->ask_from_entries_refH('',
-							      _("Dialup options"), [
-_("Connection name") => \$m->{connection},
-_("Phone number") => \$m->{phone},
-_("Login ID") => \$m->{login},
-_("Password") => { val => \$m->{passwd}, hidden => 1 },
-_("Authentication") => { val => \$m->{auth}, list => [ __("PAP"), __("CHAP"), __("Terminal-based"), __("Script-based") ] },
-_("Domain name") => \$m->{domain},
-#-$::expert ? ( #- It is not apropriate to remove DNS as kppp need them! only available for "ifup ppp0"
-_("First DNS Server") => \$m->{dns1},
-_("Second DNS Server") => \$m->{dns2},
-#-) : (),
-    ]);
-}
-
+#-pppConfig moved to any.pm
 #------------------------------------------------------------------------------
 sub installCrypto {
     my ($o) = @_;
