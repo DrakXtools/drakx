@@ -39,7 +39,7 @@ $::direct = /-direct/;
 
 
 my $sysconf_network = "/etc/sysconfig/network";
-my $conf_linuxconf = "/etc/conf.linuxconf";
+my $sysconf_dhcpd = "/etc/sysconfig/dhcpd";
 my $rc_firewall_generic = "/etc/rc.d/rc.firewall";
 my $rc_firewall_drakgw = "/etc/rc.d/rc.firewall.inet_sharing";
 my $rc_firewall_22 = "/etc/rc.d/rc.firewall.inet_sharing-2.2";
@@ -298,7 +298,6 @@ my $rpms_to_install;
 my %rpm2file = ( ipchains => '/sbin/ipchains',
 		 iptables => '/sbin/iptables',
 		 'dhcp-server' => '/usr/sbin/dhcpd',
-		 linuxconf => $conf_linuxconf,
 		 bind => '/usr/sbin/named',
 		 'caching-nameserver' => '/var/named/named.local');
 
@@ -506,9 +505,9 @@ my $update_dhcp = '/usr/sbin/update_dhcp.pl';
 -e $update_dhcp and system($update_dhcp);
 
 
-#- put the interface for the dhcp server in linuxconf config, for the /etc script of dhcpd
+#- put the interface for the dhcp server in the sysconfig-dhcp config, for the /etc/init.d script of dhcpd
 
-substInFile { s/^DHCP.interface.*\n//; $_ .= "DHCP.interface $device\n" if eof } $conf_linuxconf;
+substInFile { s/^INTERFACES\n//; $_ .= "INTERFACES=\"$device\"\n" if eof } $sysconf_dhcpd;
 
 
 #- Set up /etc/cups/cupsd.conf to make the broadcasting of the printer info
@@ -665,6 +664,9 @@ Click on Configure to launch the setup wizard.", $setup_state));
 
 #-------------------------------------------------
 #- $Log$
+#- Revision 1.52  2001/09/06 15:38:09  gc
+#- works now ;p
+#-
 #- Revision 1.51  2001/08/29 21:52:34  gc
 #- quit_global
 #-
