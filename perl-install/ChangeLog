@@ -1,3 +1,87 @@
+2001/03/12  Pixel  <pixel@mandrakesoft.com>
+
+	* install_any.pm (setPackages): set compssUsersChoice "3D" if 3D enabled
+	graphic card
+
+2001/03/11  dam's  <damien@mandrakesoft.com>
+
+	* services.pm: no more restart button
+
+2001/03/11  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* ftp.pm: do not retry on 550 file unavailable
+
+2001/03/11  Pixel  <pixel@mandrakesoft.com>
+
+	* install_steps_interactive.pm (summary): fix clicked empty handler
+
+	* share/rpmsrate: 
+	  - lower tftp-server
+	  - a lot of modifs (thanks to Prana)
+
+2001/03/10  dam's  <damien@mandrakesoft.com>
+
+	* standalone/drakxservices: embedded mode
+
+	* my_gtk.pm: added gtkset_border_width
+	typo again
+	typo
+	added gtkmove
+	added gtkset_modal and gtkappenditems
+
+	* services.pm: fixed big bug.
+	imajor improvement.
+	improved.
+
+2001/03/10  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/be.po, share/po/sp.po, share/po/pt.po, share/po/DrakX.pot,
+	share/po/es.po, share/po/fr.po, share/po/bg.po, share/po/ga.po,
+	share/po/sr.po, share/po/de.po, share/po/et.po, share/po/tr.po,
+	share/po/eu.po, share/po/az.po, share/po/ru.po, share/po/pt_BR.po,
+	share/po/hr.po, share/po/ko.po, share/po/cy.po, share/po/nl.po,
+	share/po/ja.po, share/po/wa.po, share/po/sv.po, share/po/is.po,
+	share/po/hu.po, share/po/zh_TW.Big5.po, share/po/it.po, share/po/id.po,
+	share/po/pl.po, share/po/fi.po, share/po/no.po,
+	share/po/zh_CN.GB2312.po, share/po/th.po, share/po/el.po,
+	share/po/sk.po, share/po/lt.po, share/po/sl.po, share/po/br.po,
+	share/po/ca.po, share/po/gl.po, share/po/lv.po, share/po/uk.po,
+	share/po/eo.po, share/po/ro.po, share/po/da.po, share/po/cs.po,
+	share/po/af.po: updated Korean file
+
+2001/03/09  dam's  <damien@mandrakesoft.com>
+
+	* standalone/drakxconf: added harddrake
+
+	* my_gtk.pm: applied gtkradio
+	created create_boxradio
+	in wizard mode : list -> radio buttons
+	added gtkradio
+
+	* bootlook.pm: workaround for the graphical layout.
+
+	* install_steps_gtk.pm: applied gtkradio
+	created create_boxradio
+	in wizard mode : list -> radio buttons
+
+	* printerdrake.pm: if embedded -> no first question
+
+	* interactive_gtk.pm: added tooltips to create_boxradio
+	applied gtkradio
+	created create_boxradio
+	in wizard mode : list -> radio buttons
+
+2001/03/09  Pixel  <pixel@mandrakesoft.com>
+
+	* share/rpmsrate: a hell lot of modifications, mostly cleanup of
+	DEVELOPEMENT
+
+2001/03/09  Stew Benedict  <sbenedict@mandrakesoft.com>
+
+	* Xconfigurator_consts.pm: keyboard mapping for PPC
+
+	* detect_devices.pm: routine to detect MacIntosh model code
+
 2001/03/09  dam's  <damien@mandrakesoft.com>
 
 	* my_gtk.pm: added gtkradio
