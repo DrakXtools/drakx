@@ -69,3 +69,7 @@ verif2:
 
 
 #	for i in *.po; do echo -n "$i "; msgfmt -v $i 2>&1; done | perl -e 'print map { $_->[0] } sort { $a->[1] <=> $b->[1] } map { [ $_, (split)[1] ] } <>'
+
+
+%: %.sh
+	#  fake built-in
