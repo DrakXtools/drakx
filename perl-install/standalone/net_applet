@@ -87,7 +87,7 @@ my %actions = (
                        network::tools::bg_command_as_root('/sbin/set-netprofile', $netcnx->{PROFILE});
                    }
                },
-	       'refresh' => { name => N("Refresh"), launch => sub { checkNetwork() } },
+	       'refresh' => { name => N("Refresh"), launch => sub { checkNetworkForce() } },
                'help' => { name => N("Get Online Help"), launch => sub { system("drakhelp --id internet-connection &") } }
               );
 
