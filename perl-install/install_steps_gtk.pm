@@ -661,7 +661,7 @@ _("There was an error installing packages:"), $1, _("Go on anyway?") ], 1) and r
       };
     if ($pkgs::cancel_install) {
 	$pkgs::cancel_install = 0;
-	die "setstep choosePackages\n";
+	die 'already displayed';
     }
     $w->destroy;
     $install_result;

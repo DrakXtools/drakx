@@ -36,7 +36,10 @@ sub partition_with_diskdrake {
 	    local $::expert = $::expert;
 	    diskdrake_interactive::main($o, $all_hds, $nowizard);
 	}
-	delete $o->{wizard} and return partitionWizard($o, 'nodiskdrake');
+	if (delete $o->{wizard}) {
+	    partitionWizard($o, 'nodiskdrake') or redo;
+	    return 1;
+	}
 	my @fstab = fsedit::get_all_fstab($all_hds);
 	
 	unless (fsedit::get_root_(\@fstab)) {
@@ -228,13 +231,17 @@ sub partitionWizard {
 
     my $ok; while (!$ok) {
 	log::l('HERE: ', join(',', map { $_->[1] } @solutions));
-	my $sol = $o->ask_from_listf('', _("The DrakX Partitioning wizard found the following solutions:"), sub { $_[0][1] }, \@solutions) or redo;
-	log::l("partitionWizard calling solution $sol->[1]");
-	eval { $ok = $sol->[2]->() };
-	die if $@ =~ /setstep/;
-	$ok &&= !$@;
-	$@ and $o->ask_warn('', _("Partitioning failed: %s", $@));
+	if (my $sol = $o->ask_from_listf('', _("The DrakX Partitioning wizard found the following solutions:"), sub { $_[0][1] }, \@solutions)) {
+	    log::l("partitionWizard calling solution $sol->[1]");
+	    eval { $ok = $sol->[2]->() };
+	    die if $@ =~ /setstep/;
+	    $ok &&= !$@;
+	    $@ and $o->ask_warn('', _("Partitioning failed: %s", $@));
+	} else {
+	    $nodiskdrake ? return : die "setstep setupSCSI\n";
+	}
     }
+    1;
 }
 
 sub upNetwork {

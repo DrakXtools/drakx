@@ -670,7 +670,7 @@ sub chooseGroups {
 
 	#- ask user for its choice.
 	$type = $o->ask_from_list_(_("Type of install"), _("You do not have selected any group of packages
-Please choose the minimal installation you want"), [ __("Base system only"), __("No X"), __("With X"), ], $type);
+Please choose the minimal installation you want"), [ __("Base system only"), __("No X"), __("With X"), ], $type) or return &chooseGroups;
 
 	#- reselect according to user selection.
 	if ($type eq __("Base system only")) {
@@ -952,7 +952,7 @@ sub configureTimezone {
     my ($o, $clicked) = @_;
 
     require timezone;
-    $o->{timezone}{timezone} = $o->ask_from_treelist('', _("Which is your timezone?"), '/', [ timezone::getTimeZones($::g_auto_install ? '' : $o->{prefix}) ], $o->{timezone}{timezone});
+    $o->{timezone}{timezone} = $o->ask_from_treelist('', _("Which is your timezone?"), '/', [ timezone::getTimeZones($::g_auto_install ? '' : $o->{prefix}) ], $o->{timezone}{timezone}) || return;
     $o->set_help('configureTimezoneGMT');
 
     my $ntp = to_bool($o->{timezone}{ntp});
