@@ -46,6 +46,9 @@ our %l = (
       qw(ibmtr_cs nmclan_cs pcnet_cs smc91c92_cs),
       qw(xirc2ps_cs xircom_cb xircom_tulip_cb),
     ],
+   #- generic NIC detection for USB seems broken (class, subclass, 
+   #- protocol reported are not accurate) so we match network adapters against
+   #- known drivers :-(
     usb => [ 
       qw(catc CDCEther kaweth pegasus rtl8150 usbnet),
     ],

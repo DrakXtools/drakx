@@ -201,9 +201,6 @@ our @tree =
       icon => "hw_network.png",
       configurator => "$sbindir/drakconnect",
       detector => sub {
-          #- generic NIC detection for USB seems broken (class, subclass, 
-          #- protocol reported are not accurate) so we match network adapters against
-          #- known drivers :-(
           require list_modules;
           require network::ethernet;
           my @net_modules = list_modules::category2modules(network::ethernet::get_eth_categories());
