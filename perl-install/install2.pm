@@ -235,7 +235,7 @@ sub selectLanguage {
 
     addToBeDone {
 	lang::write($o->{prefix});
-	keyboard::write($o->{prefix}, lang::lang2charset($o->{lang}), $o->{keyboard});
+	keyboard::write($o->{prefix}, $o->{keyboard}, lang::lang2charset($o->{lang}));
     } 'installPackages' unless $::g_auto_install;
 }
 
@@ -269,7 +269,7 @@ sub selectKeyboard {
     #- if we go back to the selectKeyboard, you must rewrite
     addToBeDone {
 	lang::write($o->{prefix});
-	keyboard::write($o->{prefix}, lang::lang2charset($o->{lang}), $o->{keyboard});
+	keyboard::write($o->{prefix}, $o->{keyboard}, lang::lang2charset($o->{lang}));
     } 'installPackages' unless $::g_auto_install;
 }
 

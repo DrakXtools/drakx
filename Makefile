@@ -83,7 +83,8 @@ clean:
 upload: clean install
 	function upload() { rsync -qSavz --verbose --exclude '*~' -e ssh --delete $(ROOTDEST)/$$1/$$2 mandrake@kenobi:/c/cooker/$$1; } ;\
 	upload Mandrake/mdkinst '' ;\
-	upload Mandrake/base {compss*,mdkinst_stage2.gz,rescue_stage2.gz} ;\
+	upload Mandrake/base compss* ;\
+	upload Mandrake/base *_stage2.gz ;\
 	upload boot '' ;\
 	for i in $(RELEASE_BOOT_IMG); do upload images $$i; done ;\
 	echo 
