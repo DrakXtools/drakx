@@ -86,19 +86,28 @@ gtkadd(gtkset_border_width($w->{window}, 2),
                                                   ),
                                   gtkpack(create_hbox(),
                                           gtksignal_connect(Gtk2::Button->new("Disconnect"), clicked => sub { &Disconnect }),
-                                          gtksignal_connect(Gtk2::Button->new("Refresh"), clicked => sub { &UpdateStatus })))),
+                                          gtksignal_connect(Gtk2::Button->new("Refresh"), clicked => sub { &UpdateStatus })
+                                         )
+                                 )
+                         ),
                 0, gtkadd(gtkset_border_width(Gtk2::Frame->new("Roaming"), 2),
                           gtkpack(create_hbox(),
                                   gtkpack(Gtk2::VBox->new,
                                           my $RoamStatus = Gtk2::Label->new("Roaming: off"),
                                           gtkpack(create_hbox(),
 						  gtksignal_connect(Gtk2::Button->new("Start"), clicked => sub { &StartRoam }),
-						  gtksignal_connect(Gtk2::Button->new("Stop"), clicked => sub { &StopRoam }))),
+						  gtksignal_connect(Gtk2::Button->new("Stop"), clicked => sub { &StopRoam })
+                                                 )
+                                         ),
                                   gtkpack(Gtk2::VBox->new,
                                           Gtk2::Label->new("Scan interval (sec): "),
                                           gtkpack(Gtk2::HBox->new,
                                                   $ScanEntry,
-                                                  gtksignal_connect(Gtk2::Button->new("Set"), clicked => sub { &SetInterval }))))),
+                                                  gtksignal_connect(Gtk2::Button->new("Set"), clicked => sub { &SetInterval })
+                                                 )
+                                         )
+                                 )
+                         ),
                 1, gtkadd(gtkset_border_width(Gtk2::Frame->new("Known Networks (Drag up/down or edit)"), 2),
                           gtkpack_(Gtk2::VBox->new,
                                    1, create_scrolled_window($KnownList),
@@ -111,7 +120,10 @@ gtkadd(gtkset_border_width($w->{window}, 2),
 								    my @selected = $KnownList->get_selected_indices;
 								    &ConnectNow(@selected);
 								}),
-					      gtksignal_connect(Gtk2::Button->new("Save"), clicked => sub { &WriteConfig })))),
+					      gtksignal_connect(Gtk2::Button->new("Save"), clicked => sub { &WriteConfig })
+                                             )
+                                  )
+                         ),
                 1, gtkadd(gtkset_border_width(Gtk2::Frame->new("Available Networks"), 2),
                           gtkpack_(Gtk2::VBox->new,
                                    1, create_scrolled_window($AvailableList),
@@ -123,14 +135,20 @@ gtkadd(gtkset_border_width($w->{window}, 2),
 								    my $dhcp = 1; # assume dhcp for new networks
 								    &AddNet($essid, $mode, $channel, $key, $dhcp);
 								}),
-					      gtksignal_connect(Gtk2::Button->new("Rescan"), clicked => sub { &UpdateAvailable })))),
+					      gtksignal_connect(Gtk2::Button->new("Rescan"), clicked => sub { &UpdateAvailable })
+                                             )
+                                  )
+                         ),
                 0, gtkpack(create_hbox(),
                            gtksignal_connect(Gtk2::Button->new("Help"), clicked => sub { &Dialog($HelpFile) }),
                            gtksignal_connect(Gtk2::Button->new("About"), clicked => sub { &Dialog($AboutFile) }),
                            gtksignal_connect(Gtk2::Button->new("Save and close"), clicked => sub {
                                                  &WriteConfig;
                                                  Gtk2->main_quit;
-                                             }))));
+                                             })
+                          )
+               )
+      );
 
 # fill the GUI
 &ReadConfig;
