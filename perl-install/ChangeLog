@@ -3,6 +3,53 @@
 	* standalone/drakboot (enable_framebuffer) do not kill the whole wizard
 	when embedded
 
+2004/09/10  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* keyboard.pm: fixed compose:rwin (it must be enabled if the key isn't
+	used, and not
+	when the key is already used); and a new keyboard toggle
+	fixed Russian phonetic keyboard layout on xorg
+
+	* share/po/it.po: updated Italian file
+
+2004/09/10  Pixel  <pixel at mandrakesoft.com>
+
+	* pkgs.pm: fix choosing bestKernelPackage
+	remove debug code
+
+	* resize_fat/c_rewritten.xs, c/stuff.xs.pl, xf86misc/main.xs,
+	Newt/Newt.xs: prototypes are dangerous
+
+2004/09/10  Rafael Garcia-Suarez <rgarciasuarez at mandrakesoft.com>
+
+	* install_any.pm: Remove (temporarily, do we hope) the code that re-reads
+	all hdlists when the
+	user has added supplementary media. It doesn't work for now, when the
+	main
+	media is networked and the supplementary media a superset of the main
+	media.
+
+2004/09/10  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* harddrake/data.pm: autoconfigure mice on bootstrapping
+
+	* harddrake/autoconf.pm: cleanups
+	autoconfigure mice on bootstrapping
+
+	* drakxtools.spec: typo fix in 10.1-1mdk's changelog
+	10.1-1mdk
+
+	* share/po/br.po: update
+
+	* standalone/service_harddrake: cleanups
+	perl_checker cleanups
+	autoconfigure mice on bootstrapping
+
+2004/09/10  Olivier Blin <oblin at mandrakesoft.com>
+
+	* standalone/drakboot (enable_framebuffer) do not kill the whole wizard
+	when embedded
+
 	* standalone/drakconnect (configure_net) use network::test to test
 	internet connection
 
@@ -38641,7 +38688,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.964 2004/09/09 10:18:18 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.965 2004/09/10 07:57:24 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
