@@ -548,6 +548,8 @@ sub install2::startMove {
     my $o = $::o;
 
     $::WizardWindow->destroy if $::WizardWindow;
+    require ugtk2;
+    ugtk2::flush();
 
     #- get info from existing fstab. This won't do anything if we already wrote fstab in configMove
     fs::get_info_from_fstab($o->{all_hds}, '');
