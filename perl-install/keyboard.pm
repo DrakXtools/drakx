@@ -327,7 +327,7 @@ sub loadkeys_files {
 }
 
 sub unpack_keyboards {
-    my ($k) = @_ or return;
+    my ($k) = @_; $k or return;
     [ grep { 
 	my $b = $keyboards{$_->[0]};
 	$b or log::l("bad keyboard $_->[0] in %keyboard::lang2keyboard");
