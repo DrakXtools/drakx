@@ -101,7 +101,7 @@ gtkadd($window,
 			  gtkpack__(new Gtk::HBox(0, 0),
 				    _("You are currently using %s as Boot Manager.
 Click on Configure to launch the setup wizard.", $lilogrub),
-				    gtksignal_connect(new Gtk::Button (_("Configure")), clicked => \&lilo_choice)
+				    gtksignal_connect(new Gtk::Button (_("Configure")), clicked => $::lilo_choice)
 				   )
 			 ),
 		  # aurora
@@ -314,28 +314,3 @@ sub set_autologin {
 }
 
 
-#-------------------------------------------------------------
-# lilo/grub functions
-#-------------------------------------------------------------
-sub lilo_choice {
-    my $bootloader = bootloader::read('', '/etc/lilo.conf');
-    local ($_) = `detectloader`;
-    $bootloader->{methods} = { lilo => 1, grub => !!/grub/i };
-    
-    my ($all_hds) = catch_cdie { fsedit::hds([ detect_devices::hds() ], {}) } sub { 1 };
-    my $fstab = [ fsedit::get_all_fstab($all_hds) ];
-    fs::merge_info_from_fstab($fstab);
- 
-    $::expert=1;
-  ask:
-    local $::isEmbedded = 0;
-    any::setupBootloader($in, $bootloader, $all_hds, $fstab, $ENV{SECURE_LEVEL}) or return;
-    eval { bootloader::install('', $bootloader, $fstab, $all_hds->{hds}) };  
-    if ($@) {
-	$in->ask_warn('', 
-		      [ _("Installation of LILO failed. The following error occured:"),
-			grep { !/^Warning:/ } cat_("/tmp/.error") ]);
-	unlink "/tmp/.error";
-	goto ask;
-    }
-}

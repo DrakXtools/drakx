@@ -22,9 +22,17 @@ $::expert = /-expert/;
 
 my $in = 'interactive'->vnew('su', 'bootloader');
 
-require 'bootlook.pm' if $in->isa('interactive_gtk');
-lilo_choice();
+$::lilo_choice = \&lilo_choice;
 
+if ($in->isa('interactive_gtk')) {
+    require 'bootlook.pm';
+} else {
+    lilo_choice();
+}
+
+!$::isEmbedded and $in->exit(0);
+kill(USR1, $::CCPID);
+goto ask;
 
 sub lilo_choice
 {
@@ -33,13 +41,14 @@ sub lilo_choice
     $bootloader->{methods} = { lilo => 1, grub => !!/grub/i };
     
     my ($all_hds) = catch_cdie { fsedit::hds([ detect_devices::hds() ], {}) } sub { 1 };
-    my $fstab = [ fsedit::get_all_fstab(@$all_hds) ];
+    my $fstab = [ fsedit::get_all_fstab($all_hds) ];
     fs::merge_info_from_fstab($fstab);
-    
+ 
     $::expert=1;
     
   ask:
-    any::setupBootloader($in, $bootloader, $all_hds, $fstab, $ENV{SECURE_LEVEL}) or $in->exit(0);
+    local $::isEmbedded = 0;
+    any::setupBootloader($in, $bootloader, $all_hds, $fstab, $ENV{SECURE_LEVEL}) or return;
     eval { bootloader::install('', $bootloader, $fstab, $all_hds->{hds}) };
 
     if ($@) {
@@ -50,7 +59,3 @@ sub lilo_choice
 	goto ask;
     }
 }
-    !$::isEmbedded and $in->exit(0);
-    kill(USR1, $::CCPID);
-    goto ask;
-
