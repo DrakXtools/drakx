@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 9.2
-Release: 15mdk
+Release: 16mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -315,6 +315,9 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Fri Sep 19 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.2-16mdk
+- drakconnect: fix #5825 (hostname set as ARRAY(0x...))
+
 * Thu Sep 18 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.2-15mdk
 - drakboot: (pixel)
   o fix switching from grub to lilo
