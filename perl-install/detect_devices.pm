@@ -39,7 +39,7 @@ sub cdroms      { grep { $_->{media_type} eq 'cdrom' } get() }
 sub burners     { grep { isBurner($_) } cdroms() }
 sub dvdroms     { grep { isDvdDrive($_) } cdroms() }
 sub raw_zips    { grep { member($_->{media_type}, 'fd', 'hd') && isZipDrive($_) } get() }
-#-sub jazzs     { grep { member($_->{media_type}, 'fd', 'hd') && isJazDrive($_) } get() }
+#-sub jazzs     { grep { member($_->{media_type}, 'fd', 'hd') && isJazzDrive($_) } get() }
 sub ls120s      { grep { member($_->{media_type}, 'fd', 'hd') && isLS120Drive($_) } get() }
 sub zips        { map { $_->{device} .= 4; $_ } raw_zips() }
 
@@ -82,7 +82,7 @@ sub floppies() {
     my @ide = ls120s() and eval { modules::load("ide-floppy") };
 
     eval { modules::load("usb-storage") } if usbStorage();
-    my @scsi = grep { $_->{media_type} eq 'fd' } getSCSI();
+    my @scsi = grep { $_->{media_type} eq 'fd' && !isZipDrive($_) && !isJazzDrive($_) } getSCSI();
     @ide, @scsi, @fds;
 }
 sub floppies_dev() { map { $_->{device} } floppies() }
@@ -135,7 +135,7 @@ sub isDvdDrive {
     $f && c::isDvdDrive(fileno($f));
 }
 sub isZipDrive { $_[0]->{info} =~ /ZIP\s+\d+/ } #- accept ZIP 100, untested for bigger ZIP drive.
-#-sub isJazzDrive { $_[0]->{info} =~ /JAZZ?\s+/ } #- untested.
+sub isJazzDrive { $_[0]->{info} =~ /JAZZ?\s+/ } #- untested.
 sub isLS120Drive { $_[0]->{info} =~ /LS-?120|144MB/ }
 sub isRemovableDrive { &isZipDrive || &isLS120Drive || $_[0]->{media_type} eq 'fd' } #-or &isJazzDrive }
 
@@ -160,7 +160,7 @@ sub getSCSI() {
 	$_ = <F>; my ($vendor, $model) = /^\s*Vendor:\s*(.*?)\s+Model:\s*(.*?)\s+Rev:/ or return &$err();
 	$_ = <F>; my ($type) = /^\s*Type:\s*(.*)/ or &$err();
 	my $device;
-	if ($type =~ /Direct-Access/) { #- what about LS-120 floppy drive, assuming there are Direct-Access...
+	if ($type =~ /Direct-Access/) {
 	    $device = "sd" . chr($driveNum++ + ord('a'));
 	    $type = isFloppyOrHD($device);
 	} elsif ($type =~ /Sequential-Access/) {
