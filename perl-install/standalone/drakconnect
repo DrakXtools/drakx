@@ -219,7 +219,7 @@ sub del_intf() {
                              name => N("Select the network interface to remove:"),
                              data =>  [ { label => N("Net Device"), val => \$intf, list => [ detect_devices::getNet() ], allow_empty_list => 1 } ],
                              post => sub {
-                                 eval {
+                                 !$::testing and eval {
                                      modules::mergein_conf('/etc/modules.conf');
                                      modules::remove_alias($intf);
                                      modules::write_conf();
