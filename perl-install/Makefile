@@ -135,6 +135,7 @@ get_needed_files: $(SO_FILES)
 
 	ln -sf ash $(DEST)/usr/bin/sh
 
+#	 tar xfy locales.tar.bz2 -C $(DEST)
 	DEST=$(DEST) perl -I. -MForMakefile -e 'locale()'
 	DEST=$(DEST) perl -I. -MForMakefile -e 'xmodmap()'
 
