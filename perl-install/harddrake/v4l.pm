@@ -63,7 +63,7 @@ my %tuners_lst =
 # Tweaked from Cardlist
 my $cards_lst = {
     'bttv' => {
-        N("Auto-detect") => -1,
+        $default => -1,
         N("Unknown|Generic") => 0,
         "M|Miro|PCTV" => 1,
         "H|Hauppauge|bt848" => 2,
