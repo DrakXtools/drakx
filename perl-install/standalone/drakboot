@@ -119,7 +119,7 @@ if (-r $themes{sysconfig}) {
 
 my @boot_thms = if_(!$themes{default}, qw(default));
 chdir($themes{path}); #- we must change directory for correct @boot_thms assignement
-foreach (all('.')) {
+foreach (sort(all('.'))) {
     if (-d "$themes{path}$_" && m/^[^.]/) {
         -f "$themes{path}$_$themes{boot}{path}bootsplash-$cur_res.jpg" and push @boot_thms, $_;
     }
