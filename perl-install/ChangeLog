@@ -1,3 +1,228 @@
+2002/02/14  dam's  <damien@mandrakesoft.com>
+
+	* standalone/drakfont: embedded mode
+	drakfont embedde mode
+
+	* share/step-red-on.xpm, share/step-red.xpm, share/step-orange.xpm,
+	share/step-orange-on.xpm, share/step-orange-click.xpm,
+	share/step-green-click.xpm, share/step-red-click.xpm,
+	share/step-green-on.xpm: new gfx
+
+2002/02/14  erwan
+
+	* tools/i386/netboot/ni5010/pxegrub, tools/i386/netboot/epic100/stage1,
+	tools/i386/netboot/epic100/stage2, tools/i386/netboot/3c90x/pxegrub,
+	tools/i386/netboot/rtl8139/pxegrub, tools/i386/netboot/ni5210/nbgrub,
+	tools/i386/netboot/otulip/stage1, tools/i386/netboot/otulip/stage2,
+	tools/i386/netboot/exos205/nbgrub, tools/i386/netboot/eepro/stage1,
+	tools/i386/netboot/eepro/stage2, tools/i386/netboot/3c529/nbgrub,
+	tools/i386/netboot/smc9000/pxegrub, tools/i386/netboot/ne2100/stage1,
+	tools/i386/netboot/ne2100/stage2, tools/i386/netboot/exos205/pxegrub,
+	tools/i386/netboot/sis900/nbgrub, tools/i386/netboot/ne/stage1,
+	tools/i386/netboot/ne/stage2, tools/i386/netboot/tulip/nbgrub,
+	tools/i386/netboot/sk_g16/nbgrub, tools/i386/netboot/eepro100/pxegrub,
+	tools/i386/netboot/tiara/nbgrub, tools/i386/netboot/rtl8139/stage1,
+	tools/i386/netboot/rtl8139/stage2, tools/i386/netboot/tiara/pxegrub,
+	tools/i386/netboot/lance/nbgrub, tools/i386/netboot/depca/nbgrub,
+	tools/i386/netboot/ni6510/stage1, tools/i386/netboot/3c90x/nbgrub,
+	tools/i386/netboot/ni6510/stage2, tools/i386/netboot/smc9000/stage1,
+	tools/i386/netboot/smc9000/stage2, tools/i386/netboot/3c509/pxegrub,
+	tools/i386/netboot/3c509/stage1, tools/i386/netboot/3c509/stage2,
+	tools/i386/netboot/sis900/pxegrub, tools/i386/netboot/ne2100/pxegrub,
+	tools/i386/netboot/3c595/nbgrub, tools/i386/netboot/eepro/pxegrub,
+	tools/i386/netboot/wd/nbgrub, tools/i386/netboot/ns8390/nbgrub,
+	tools/i386/netboot/ni5210/stage1, tools/i386/netboot/ni5010/nbgrub,
+	tools/i386/netboot/ni5210/stage2, tools/i386/netboot/exos205/stage1,
+	tools/i386/netboot/exos205/stage2, tools/i386/netboot/eepro100/nbgrub,
+	tools/i386/netboot/3c529/stage1, tools/i386/netboot/3c529/stage2,
+	tools/i386/netboot/sis900/stage1, tools/i386/netboot/tulip/stage1,
+	tools/i386/netboot/sis900/stage2, tools/i386/netboot/tulip/stage2,
+	tools/i386/netboot/sk_g16/stage1, tools/i386/netboot/w89c840/nbgrub,
+	tools/i386/netboot/sk_g16/stage2, tools/i386/netboot/tiara/stage1,
+	tools/i386/netboot/tiara/stage2, tools/i386/netboot/depca/stage1,
+	tools/i386/netboot/lance/stage1, tools/i386/netboot/3c90x/stage1,
+	tools/i386/netboot/depca/stage2, tools/i386/netboot/lance/stage2,
+	tools/i386/netboot/3c90x/stage2, tools/i386/netboot/otulip/pxegrub,
+	tools/i386/netboot/tulip/pxegrub, tools/i386/netboot/epic100/nbgrub,
+	tools/i386/netboot/3c595/stage1, tools/i386/netboot/ni5210/pxegrub,
+	tools/i386/netboot/3c595/stage2, tools/i386/netboot/w89c840/pxegrub,
+	tools/i386/netboot/wd/stage1, tools/i386/netboot/wd/pxegrub,
+	tools/i386/netboot/wd/stage2, tools/i386/netboot/otulip/nbgrub,
+	tools/i386/netboot/ns8390/stage1, tools/i386/netboot/eepro/nbgrub,
+	tools/i386/netboot/ni5010/stage1, tools/i386/netboot/ns8390/stage2,
+	tools/i386/netboot/ni5010/stage2, tools/i386/netboot/ne2100/nbgrub,
+	tools/i386/netboot/ni6510/pxegrub, tools/i386/netboot/eepro100/stage1,
+	tools/i386/netboot/eepro100/stage2, tools/i386/netboot/ne/nbgrub,
+	tools/i386/netboot/depca/pxegrub, tools/i386/netboot/ne/pxegrub,
+	tools/i386/netboot/w89c840/stage1, tools/i386/netboot/rtl8139/nbgrub,
+	tools/i386/netboot/w89c840/stage2, tools/i386/netboot/sk_g16/pxegrub,
+	tools/i386/netboot/lance/pxegrub, tools/i386/netboot/ni6510/nbgrub,
+	tools/i386/netboot/smc9000/nbgrub, tools/i386/netboot/3c529/pxegrub,
+	tools/i386/netboot/3c595/pxegrub, tools/i386/netboot/ns8390/pxegrub,
+	tools/i386/netboot/epic100/pxegrub, tools/i386/netboot/3c509/nbgrub: New
+	version of grub (0.91) with allstage and pxegrub
+
+	* tools/i386/netboot/3c507/pxegrub, tools/i386/netboot/3c507/stage1,
+	tools/i386/netboot/3c507/stage2, tools/i386/netboot/3c503/nbgrub,
+	tools/i386/netboot/3c503/pxegrub, tools/i386/netboot/3c507/nbgrub,
+	tools/i386/netboot/3c503/stage1, tools/i386/netboot/3c503/stage2:
+	Fixning some file missing in netboot
+
+2002/02/14  François Pons  <fpons@mandrakesoft.com>
+
+	* pkgs.pm: fixed obsoletes management according to urpmi code.
+
+2002/02/14  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/ga.po, share/po/cy.po, share/po/is.po, share/po/ar.po,
+	share/po/sl.po, share/po/ro.po: Instead of temporary removingfiles from
+	CVS put a rule in Makefile to
+	don't use them (thanks Thierry)
+	updated some po files; removed the ones too lowly translated for the 8.2
+
+	* share/po/pt_BR.po: updted Brazilian file
+	updated some po files; removed the ones too lowly translated for the 8.2
+
+	* share/po/be.po, share/po/sp.po, share/po/zh_CN.po, share/po/pt.po,
+	share/po/es.po, share/po/fr.po, share/po/bg.po, share/po/sr.po,
+	share/po/de.po, share/po/et.po, share/po/tr.po, share/po/az.po,
+	share/po/ru.po, share/po/hr.po, share/po/ko.po, share/po/nl.po,
+	share/po/ja.po, share/po/sv.po, share/po/hu.po, share/po/it.po,
+	share/po/id.po, share/po/pl.po, share/po/fi.po, share/po/no.po,
+	share/po/th.po, share/po/el.po, share/po/sk.po, share/po/lt.po,
+	share/po/br.po, share/po/ca.po, share/po/gl.po, share/po/lv.po,
+	share/po/uk.po, share/po/eo.po, share/po/bs.po, share/po/zh_TW.po,
+	share/po/cs.po, share/po/af.po: updated some po files; removed the ones
+	too lowly translated for the 8.2
+
+	* share/po/vi.po: updated Vietnamese file
+	updated some po files; removed the ones too lowly translated for the 8.2
+
+	* share/po/Makefile: Instead of temporary removingfiles from CVS put a
+	rule in Makefile to
+	don't use them (thanks Thierry)
+
+2002/02/14  Pixel  <pixel@mandrakesoft.com>
+
+	* standalone/lsnetdrake: adapt to the neater network::smb and network::nfs
+
+	* network/smbnfs.pm, network/smb.pm, network/nfs.pm: cleaner & OOed code,
+	with more code sharing
+
+	* interactive.pm: if testing, don't use kdesu
+
+	* install_steps.pm: gzip report.bug
+
+	* interactive_gtk.pm, diskdrake/interactive.pm: use the new warp_text
+	feature
+
+	* standalone/diskdrake: fix expert and testing options handling
+
+	* my_gtk.pm (ctree_set_icon): new function
+
+	* c/stuff.xs.pm: undef'ing some macros used by 2 independent sources et
+	still needed :-(
+	#include iconv.h is needed even when C_RPM is undefined
+
+	* diskdrake/smbnfs_gtk.pm: some cleanup, icons showing wether a
+	mount-point is associated are coming
+
+2002/02/14  tvignaud
+
+	* share/po/br.po: update
+	convert to utf-8
+
+	* standalone/drakxtv: uses xawtv internal strings instead of frequencies
+	tables ids as values
+	in %freqtables in order to enhance drakxtv robustness when
+	translators'll
+	arrive. thus we'll pass right strings to scantv instead of translated
+	ones
+	explain how we manage the "all frequencies" case
+	display sorted tv norms
+
+2002/02/13  erwan
+
+	* tools/i386/netboot/device.map, tools/i386/netboot/makeImages: Adding
+	missing file on netboot
+
+	* tools/i386/netboot/make_boot_network, tools/i386/netboot/grub: updating
+	grub in netboot
+
+2002/02/13  François Pons  <fpons@mandrakesoft.com>
+
+	* install_any.pm: avoid generating headers for copying file in
+	postinstall-rpm directory.
+	make sure not to crash if a package that should have been in CD1 is
+	somewhere
+	else.
+	fixed stupid typo.
+	removed all @needToCopy... variables and now use INSTALL category in
+	rpmsrate.
+
+	* share/rpmsrate: updated INSTALL category with the merge of DrakX
+	obsoleted list (it will use
+	INSTALL now :-)
+
+	* pkgs.pm: added extension to setSelectedFromCompssList.
+
+	* share/rpmsrate.server: synced INSTALL category with standard rpmsrate.
+
+2002/02/13  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/hu.po: updated Danish and Hungarian files
+
+	* share/po/da.po: updated Danish file
+	updated Danish and Hungarian files
+
+2002/02/13  Pixel  <pixel@mandrakesoft.com>
+
+	* network/nfs.pm: $server->{ip} is no more mandatory
+
+	* network/smb.pm: don't show shares ending with "$"
+	$server->{ip} is no more mandatory
+
+	* any.pm (setupBootloader): switch from "list" to "combo"
+
+	* fs.pm (fstab_to_string): unsetting mount points in standalone will now
+	work
+	  - handle WORM type in /proc/scsi/scsi
+	  - added media_type cdrom-burner
+	  - adapting to new media_type
+	  - nicer fd&hd testing
+
+	* diskdrake/smbnfs_gtk.pm: have the fstab entries shown by default
+
+	* detect_devices.pm, diskdrake/interactive.pm: 
+	  - handle WORM type in /proc/scsi/scsi
+	  - added media_type cdrom-burner
+	  - adapting to new media_type
+	  - nicer fd&hd testing
+
+2002/02/13  Till Kamppeter <till@mandrakesoft.com>
+
+	* printerdrake.pm: When one visited the help page of a remote CUPS printer
+	afterwards the full
+	printer modification menu was shown, not only the one for remote CUPS
+	printers. This is fixed now.
+
+2002/02/12  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/wa.po, share/po/DrakX.pot: updated Czech and Walloon files
+
+	* share/po/cs.po: updated Czech file
+	updated Czech and Walloon files
+
+2002/02/12  Pixel  <pixel@mandrakesoft.com>
+
+	* devices.pm: i prefer /(.*?)(\d+)$/ to /(.*\D)(\d+)$/
+
+2002/02/12  Till Kamppeter <till@mandrakesoft.com>
+
+	* detect_devices.pm: In the USB auto-detection checked whether and where
+	the device node was
+	created.
+
 2002/02/12  dam's  <damien@mandrakesoft.com>
 
 	* share/step-red.xpm, share/step-orange.xpm, share/step-orange-click.xpm,
