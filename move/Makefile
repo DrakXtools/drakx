@@ -24,7 +24,7 @@ endif
 
 .PHONY: iso 
 
-all: install
+default: install
 
 build: stage1 xwait runlevel_set
 	sudo ./collect-directories-to-create.pl $(DEST_LIVETREE) > data/directories-to-create
