@@ -1,3 +1,57 @@
+2004/08/02  Olivier Blin <oblin at mandrakesoft.com>
+
+	* network/adsl.pm: in sagem start section, modprobe eagle-usb and do not
+	wait for sync
+	here, fctStartAdsl will handle that when pppd is called
+	in speedtouch start section, modprobe speedtch module and use
+	speedtouch-start instead of directly using modem_run
+	in install, run modem start scripts once config is written
+
+	* Makefile: enable ar and fa locales since an arabic font is now available
+	in install
+
+2004/08/02  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/fonts.tar.bz2: added arabic and bengali fonts
+
+2004/08/02  Pixel  <pixel at mandrakesoft.com>
+
+	* .perl_checker: black list URPM::Build
+
+	* fs.pm: don't use supermount for {is_removable} devices when used for a
+	boot time partition (like /usr and /)
+
+	* share/rpmsrate: flag rosegarden4 KDE
+
+	* any.pm, network/network.pm, harddrake/sound.pm, diskdrake/dav.pm,
+	network/netconnect.pm, network/smb.pm, do_pkgs.pm, lvm.pm,
+	network/drakfirewall.pm, network/nfs.pm, standalone/drakups,
+	standalone/drakxtv: introduce ->ensure_binary_is_installed and use it
+
+	* fs/format.pm, install_any.pm: 
+	  - move package_needed_for_partition_type() from fsedit to fs::format
+	  - create check_package_is_installed() in fs::format and use it
+
+	* diskdrake/interactive.pm: fsedit::check_fs_type() is now
+	fs::type::check()
+	use fs::format::check_package_is_installed() before formatting (bugzilla
+	#10435)
+	  - move package_needed_for_partition_type() from fsedit to fs::format
+	  - create check_package_is_installed() in fs::format and use it
+
+	* fsedit.pm: fsedit::check_fs_type() is now fs::type::check()
+	  - move package_needed_for_partition_type() from fsedit to fs::format
+	  - create check_package_is_installed() in fs::format and use it
+
+	* fs/type.pm: fsedit::check_fs_type() is now fs::type::check()
+
+2004/08/02  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* c/Makefile.PL: fix build
+
+	* standalone/drakups: clean spacing
+	(add_device_wizard) fix string
+
 2004/08/02  Frederic Lepied  <flepied at mandrakesoft.com>
 
 	* share/rpmsrate: updated installed packages for 10.1
@@ -33675,7 +33729,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.938 2004/07/30 11:07:19 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.939 2004/08/02 08:08:17 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
