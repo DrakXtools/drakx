@@ -113,19 +113,17 @@ $global_vbox->pack_start (new Gtk::Label(_("Boot style configuration")), 0, 0, 0
 my $a_dedans = new Gtk::VBox(0, 10);
 $a_dedans->border_width(5);
 my $a_box = new Gtk::VBox(0, 0);
+
 my $a_c_button = new Gtk::RadioButton _("NewStyle Categorizing Monitor");
 $a_c_button->signal_connect(clicked => sub { $pixmap->set($c_pixmap, $c_mask) });
 $a_box->pack_start($a_c_button, 0, 0, 0);
-
-my $a_h_button = new Gtk::RadioButton _("NewStyle Monitor");
+my $a_h_button = new Gtk::RadioButton _("NewStyle Monitor"), $a_c_button;
 $a_h_button->signal_connect(clicked => sub { $pixmap->set($h_pixmap, $h_mask) });
 $a_box->pack_start($a_h_button, 0, 0, 0);
-
-my $a_v_button = new Gtk::RadioButton _("Traditional Monitor"), $a_h_button;
+my $a_v_button = new Gtk::RadioButton _("Traditional Monitor"), $a_c_button;
 $a_v_button->signal_connect(clicked => sub { $pixmap->set($v_pixmap, $v_mask) });
 $a_box->pack_start($a_v_button, 0, 0, 0);
-
-my $a_g_button = new Gtk::RadioButton _("Traditional Gtk+ Monitor"), $a_h_button;
+my $a_g_button = new Gtk::RadioButton _("Traditional Gtk+ Monitor"), $a_c_button;
 $a_g_button->signal_connect(clicked => sub { $pixmap->set($g_pixmap, $g_mask) });
 $a_box->pack_start($a_g_button, 0, 0, 0);
 
