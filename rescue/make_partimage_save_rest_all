@@ -24,6 +24,8 @@ PARTIMAGE_DIR="$where" PARTIMAGE_RPM=$rpm DISTRIB_DESCR="partimage save/restore 
 mkdir -p .tmp/install/stage2
 mv -f rescue.clp .tmp/install/stage2
 
+common_para="rescue automatic=method:cdrom"
+
 for action in save_all rest_all; do
 
     cat <<EOF > .tmp/isolinux/isolinux.cfg
@@ -33,13 +35,13 @@ timeout 150
 
 label save_all
   kernel vmlinuz
-  append initrd=all.rdz rescue save_all automatic=method:cdrom
+  append initrd=all.rdz $common_para save_all
 label rest_all
   kernel vmlinuz
-  append initrd=all.rdz rescue keepmounted rest_all automatic=method:cdrom
+  append initrd=all.rdz keepmounted rest_all
 label rescue
   kernel vmlinuz
-  append initrd=all.rdz rescue automatic=method:cdrom
+  append initrd=all.rdz
 EOF
 
     if [ $action = rest_all ]; then
