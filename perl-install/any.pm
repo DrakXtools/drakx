@@ -848,7 +848,9 @@ sub selectLanguage {
     $in->ask_from_(
 	{ messages => _("Please choose a language to use."),
 	  title => 'language choice',
-	  advanced_messages => _("You can choose other languages that will be available after install"),
+	  advanced_messages => formatAlaTeX(_("Mandrake Linux can support multiple languages. Select
+the languages you would like to install. They will be available
+when your installation is complete and you restart your system.")),
 	  callbacks => {
 	      focus_out => sub { $langs->{$lang} = 1 },
 	  },
