@@ -216,7 +216,7 @@ sub manage {
     $window->{rwindow}->add(gtkpack_(Gtk2::VBox->new,
 				     0, gtkpack__(Gtk2::HBox->new,
                                                   Gtk2::Label->new(N("Device selected")),
-                                                  $interface_menu = gtksignal_connect(Gtk2::OptionMenu->new,
+                                                  $interface_menu = gtksignal_connect(Gtk2::ComboBox->new_text,
                                                                     changed => sub {
                                                                         $selected = $interface_menu->get_text;
                                                                         $notebook->set_current_page($p->{$selected}{gui}{index});
@@ -252,6 +252,7 @@ sub manage {
     } (sort keys %$p);
 
     $interface_menu->set_popdown_strings(sort keys %$p);
+    $interface_menu->set_active(0);
     $apply_button->set_sensitive(0);
     
     $window->{rwindow}->show_all;
@@ -315,7 +316,7 @@ sub build_notebook {
                                 if_($is_ethernet, 
                                      0, gtkpack__(Gtk2::HBox->new,
 						  Gtk2::Label->new(N("Protocol")),
-                                                  $gui->{intf}{BOOTPROTO} = gtksignal_connect(Gtk2::OptionMenu->new,
+                                                  $gui->{intf}{BOOTPROTO} = gtksignal_connect(Gtk2::ComboBox->new_text,
                                                                             changed => sub { 
                                                                             return if !$_[0]->realized;
                                                                             my $proto = $gui->{intf}{BOOTPROTO};
@@ -458,7 +459,7 @@ sub build_notebook {
 		 if_($interface eq 'modem',
                       0, gtkpack(Gtk2::VBox->new(1,0),
 				 gtkpack__(Gtk2::HBox->new, Gtk2::Label->new(N("Authentication"))),
-				 gtkpack__(Gtk2::HBox->new, $gui->{intf}{auth} = gtksignal_connect(Gtk2::OptionMenu->new,
+				 gtkpack__(Gtk2::HBox->new, $gui->{intf}{auth} = gtksignal_connect(Gtk2::ComboBox->new_text,
                                                                                                    changed => $apply)),
 				)),
 		 map { (0, gtkpack(Gtk2::VBox->new(1,0),
@@ -485,7 +486,7 @@ sub build_notebook {
                      gtkpack__(Gtk2::VBox->new(0,5),
                                (map { (gtkpack(Gtk2::VBox->new(1,0),
 					       gtkpack__(Gtk2::HBox->new, Gtk2::Label->new($_->[0])),
-					       gtkpack__(Gtk2::HBox->new, $gui->{intf}{$_->[1]} = gtksignal_connect(Gtk2::OptionMenu->new,
+					       gtkpack__(Gtk2::HBox->new, $gui->{intf}{$_->[1]} = gtksignal_connect(Gtk2::ComboBox->new_text,
                                                                                                                     changed => $apply)),
 					      ),
                                       ),
@@ -842,7 +843,7 @@ Configure them first by clicking on 'Configure'")));
 	    $vbox_local->pack_start($infos[2*$i], 1, 1, 0);
 	    my $c;
 	    if (defined $j->[2]) {
-		$c = Gtk2::OptionMenu->new;
+		$c = Gtk2::ComboBox->new_text;
 		$c->set_popdown_strings(@{$j->[2]});
 		$infos[2*$i+1] = $c->entry;
 		$infos[2*$i]->pack_start($c,0,0,0);

@@ -228,7 +228,7 @@ sub choose_gtk {
 	%h;
     };
 
-    my ($depth_combo, $x_res_combo) = (Gtk2::OptionMenu->new, Gtk2::OptionMenu->new);
+    my ($depth_combo, $x_res_combo) = (Gtk2::ComboBox->new_text, Gtk2::ComboBox->new_text);
 
     my $pix_colors = Gtk2::Image->new;
     my $set_chosen_Depth_image = sub {

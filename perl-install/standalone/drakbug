@@ -99,7 +99,7 @@ my $lspci;
 
 if ($stable_release == 0) {
 	$table = create_packtable({ col_spacings => 5, row_spacings => 10 },
-                             [ new Gtk2::Label(N("Application:")), $comb_app = Gtk2::OptionMenu->new ],
+                             [ new Gtk2::Label(N("Application:")), $comb_app = Gtk2::ComboBox->new_text ],
                              [ new Gtk2::Label(N("Package: ")), $package = Gtk2::Entry->new_with_text("...") ], # complain on gtk-perl@ml
                              [ Gtk2::Label->new(N("Kernel:")), gtkset_editable(Gtk2::Entry->new_with_text($kernel_release), 0) ],
                              [ Gtk2::Label->new(N("Release: ")), gtkset_editable(Gtk2::Entry->new_with_text($mandrake_release), 0) ]

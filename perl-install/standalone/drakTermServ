@@ -719,8 +719,9 @@ sub make_nbi() {
 		
  	update_list($list_model);
 
-	my $combo_default_kernel = new Gtk2::OptionMenu();
+	my $combo_default_kernel = Gtk2::ComboBox->new_text;
 	$combo_default_kernel->set_popdown_strings(N("Default kernel version"), @kernels);
+	$combo_default_kernel->set_active(0);
 	$combo_default_kernel->entry->signal_connect('changed', sub {
 		my $default_kernel = $combo_default_kernel->entry->get_text;
 		my $config;

@@ -389,8 +389,9 @@ sub mk_frame {
                                  my @popdown;
                                  if ($ref->{widget}{combo}{$1}) {
                                      @popdown = @{$ref->{widget}{combo}{$1}};
-                                     my $w = $ref->{widgets}{combo}{$1} = $ref->{widget}{extras}{$1}{noneditable} ? Gtk2::OptionMenu->new : Gtk2::Combo->new;
+                                     my $w = $ref->{widgets}{combo}{$1} = $ref->{widget}{extras}{$1}{noneditable} ? Gtk2::ComboBox->new_text : Gtk2::Combo->new;
                                      $ref->{widgets}{combo}{$1}->set_popdown_strings(@popdown);
+                                     $w->set_active(0) if $w->isa('Gtk2::ComboBox');
                                      push @widgets, $w;
                                  }
 

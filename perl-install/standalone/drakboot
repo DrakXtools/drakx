@@ -72,10 +72,10 @@ unless ($::isEmbedded) {
     ######### menus end
 }
 
-my $user_combo = Gtk2::OptionMenu->new;
+my $user_combo = Gtk2::ComboBox->new_text;
 $user_combo->set_popdown_strings(list_users());
 $user_combo->entry->set_text($auto_mode->{autologin}) if $auto_mode->{autologin};
-my $desktop_combo = Gtk2::OptionMenu->new;
+my $desktop_combo = Gtk2::ComboBox->new_text;
 $desktop_combo->set_popdown_strings(split(' ', `/usr/sbin/chksession -l`));
 $desktop_combo->entry->set_text($auto_mode->{desktop}) if $auto_mode->{desktop};
 
@@ -127,7 +127,7 @@ foreach (all('.')) {
 }
 my %combo = ('thms' => '', 'lilo' => '', 'boot' => '');
 foreach (keys(%combo)) {
-    $combo{$_} = gtkset_size_request(Gtk2::OptionMenu->new, 10, -1);
+    $combo{$_} = gtkset_size_request(Gtk2::ComboBox->new_text, 10, -1);
 }
 
 $combo{boot}->set_popdown_strings(@boot_thms);

@@ -535,8 +535,8 @@ sub ask_fromW {
 		my @l = sort { $b <=> $a } map { length } @formatted_list;
 		my $width = $l[@l / 16]; # take the third octile (think quartile)
 
-		if ($e->{not_edit} && $width < 60) { #- OptionMenus do not have an horizontal scroll-bar. This can cause havoc for long strings (eg: diskdrake Create dialog box in expert mode)
-		    $w = Gtk2::OptionMenu->new;
+		if ($e->{not_edit} && $width < 160) { #- ComboBoxes do not have an horizontal scroll-bar. This can cause havoc for long strings (eg: diskdrake Create dialog box in expert mode)
+		    $w = Gtk2::ComboBox->new_text;
 		} else {
 		    $w = Gtk2::Combo->new;
 		    $w->set_use_arrows_always(1);
@@ -545,6 +545,7 @@ sub ask_fromW {
 		}
 
 		$w->set_popdown_strings(@formatted_list);
+		$w->set_text($formatted_list[0]) if $w->isa('Gtk2::ComboBox');
 		($real_w, $w) = ($w, $w->entry);
 
 		#- FIXME workaround gtk suckiness (set_text generates two 'change' signals, one when removing the whole, one for inserting the replacement..)
