@@ -1095,9 +1095,9 @@ enum return_type http_prepare(void)
                 add_to_env("METHOD", "http");
 		sprintf(location_full, "http://%s%s", answers[0], answers[1]);
 		add_to_env("URLPREFIX", location_full);
-                if (!streq(answers[2], ""))
+                if (!streq(http_proxy_host, ""))
 			add_to_env("PROXY", http_proxy_host);
-                if (!streq(answers[3], ""))
+                if (!streq(http_proxy_port, ""))
 			add_to_env("PROXYPORT", http_proxy_port);
 	}
 	while (results == RETURN_BACK);
