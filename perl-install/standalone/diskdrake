@@ -47,9 +47,6 @@ while (my $e = shift @l) {
     }
 }
 
-$::expert  = exists $options{expert};  delete $options{expert};
-$::testing = exists $options{testing}; delete $options{testing};
-
 my @types = qw(hd nfs smb dav removable fileshare);
 my ($type, $para) = ('hd', '');
 foreach (@types) {
