@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10.1
-Release: 14mdk
+Release: 15mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -347,6 +347,9 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Fri Oct  1 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.1-15mdk
+- fix serial UPS detection
+
 * Fri Oct  1 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.1-14mdk
 - mousedrake, harddrake service: do not crash with touchpads (blino)
 - harddrake service: on stop, blacklist snd-usb-audio
