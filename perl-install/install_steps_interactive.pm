@@ -448,7 +448,7 @@ sub addUser($) {
 	  {val => \$u->{shell}, list => \@shells, not_edit => !$::expert},
         ],
         focus_out => sub {
-	    $u{name} = lc first($u{realname} =~ /(\w+)/) if $_[0] eq 0;
+	    $u->{name} = lc first($u->{realname} =~ /(\w+)/) if $_[0] eq 0;
 	},
         complete => sub {
 	    $u->{password} eq $u->{password2} or $o->ask_warn('', [ _("You must enter the same password"), _("Please try again") ]), return (1,3);
