@@ -71,8 +71,8 @@ my $cal_butt = gtksignal_connect(new Gtk::CheckButton(N("Show only for the selec
 # but they provides shiny shortcut like C-q
 my @menu_items = (
 		  { path => N("/_File"), type => '<Branch>' },
-		  { path => N("/File/_New"), accelerator => N("<control>N"), ncallback => \&print_hello },
-		  { path => N("/File/_Open"), accelerator => N("<control>O"), callback => \&print_hello },
+		  { path => N("/File/_New"), accelerator => N("<control>N") },
+		  { path => N("/File/_Open"), accelerator => N("<control>O") },
 		  { path => N("/File/_Save"), accelerator => N("<control>S"), callback => \&save },
 		  { path => N("/File/Save _As") },
 		  { path => N("/File/-"),type => '<Separator>' },
