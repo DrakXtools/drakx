@@ -673,48 +673,14 @@ sub configure_new_printers {
 					 connect  => "",
 					 spooler  => $printer->{SPOOLER},
 				       };
-	    # Generate a queue name from manufacturer and model
-	    my $queue;
-	    my $unknown;
-	    if (!$p->{val}{MANUFACTURER} || !$p->{val}{MODEL} ||
-		$p->{val}{MODEL} eq N("Unknown Model")) {
-		$queue = N("Printer");
-		$unknown = 1;
-	    } else {
-		my $make = $p->{val}{MANUFACTURER};
-		if ($p->{val}{SKU}) {
-		    $queue = $make . $p->{val}{SKU};
-		} else {
-		    $queue = $make . $p->{val}{MODEL};
-		}
-		$queue =~ s/series//gi;
-		$queue =~ s/[\s\(\)\-,]//g;
-		$queue =~ s/^$make$make/$make/;
-	    }
-	    # Append a number if the queue name already exists
-	    if ($printer->{configured}{$queue}) {
-		$queue =~ s/(\d)$/$1_/;
-		my $i = 1;
-		while ($printer->{configured}{"$queue$i"}) {
-		    $i++;
-		}
-		$queue .= $i;
-	    }
-	    $printer->{currentqueue}{queue} = $queue;
 	    undef $w;
 	    $w = $in->wait_message(N("Printerdrake"),
-				    ($unknown ?
-				     N("Configuring printer...") :
-				     N("Configuring printer \"%s\"...",
-				       $printer->{currentqueue}{queue})));
+				    N("Found printer on %s...",
+				      $p->{port}));
 	    # Do configuration of multi-function devices and look up
 	    # model name in the printer database
 	    setup_common($printer, $in, $p->{val}{DESCRIPTION}, $p->{port},
 			 1, @autodetected) or next;
-	    # Set also OLD_QUEUE field so that the subroutines for the
-	    # configuration work correctly.
-	    $printer->{OLD_QUEUE} = $printer->{QUEUE} =
-		$printer->{currentqueue}{queue};
 	    # Do the steps of queue setup
 	    get_db_entry($printer, $in);
 	    # Let the user choose the model manually if it could not be
@@ -739,32 +705,20 @@ sub configure_new_printers {
 Printerdrake could not determine which model your printer %s is. Please choose the correct model from the list.", $info) . " " .
 					   N("If your printer is not listed, choose a compatible (see printer manual) or a similar one."), '|',
 					   [ keys %printer::main::thedb ], $printer->{DBENTRY}) or next;
-		if ($unknown) {
-		    # Rename the queue according to the chosen model
-		    $queue = $printer->{DBENTRY};
-		    $queue =~ s/\|/ /g;
-		    $printer->{currentqueue}{desc} = $queue;
-		    $queue =~ s/series//gi;
-		    $queue =~ s/[\s\(\)\-,]//g;
-		    # Append a number if the queue name already exists
-		    if ($printer->{configured}{$queue}) {
-			$queue =~ s/(\d)$/$1_/;
-			my $i = 1;
-			while ($printer->{configured}{"$queue$i"}) {
-			    $i++;
-			}
-			$queue .= $i;
-		    }
-		    $printer->{currentqueue}{queue} = $queue;
-		    $printer->{QUEUE} = $printer->{currentqueue}{queue};
-		}
 		# Restore wait message
 		$w = $in->wait_message(N("Printerdrake"),
-					N("Configuring printer \"%s\"...",
-					  $printer->{currentqueue}{queue}));
+				       N("Configuring printer on %s...",
+					 $p->{port}));
 	    }
 	    get_printer_info($printer, $in) or next;
 	    setup_options($printer, $in) or next;
+	    my $queue = generate_queuename($printer);
+	    # Change wait message
+	    undef $w;
+	    $w = $in->wait_message(N("Printerdrake"),
+				   N("Configuring printer \"%s\"...",
+				     $printer->{currentqueue}{queue}));
+	    # Create the queue
 	    configure_queue($printer, $in) or next;
 	    # If there is no default printer set, let this one get the
 	    # default
@@ -781,6 +735,39 @@ Printerdrake could not determine which model your printer %s is. Please choose t
 	$printer->{complete} = 0;
     }
     undef $printer->{noninteractive};
+}
+
+sub generate_queuename {
+    my ($printer) = @_;
+    my $queue;
+    if ($printer->{currentqueue}{model}) {
+	if ($printer->{currentqueue}{model} eq N("Unknown model")) {
+	    $queue = N("Printer");
+	} else {
+	    $queue = $printer->{currentqueue}{make} . '|' .
+		$printer->{currentqueue}{model};
+	}
+    } else {
+	$queue = $printer->{DBENTRY};
+    }
+    $queue =~ s/\|/ /g;
+    $printer->{currentqueue}{desc} = $queue;
+    $queue =~ s/series//gi;
+    $queue =~ s/[\s\(\)\-,]//g;
+    my $make = $printer->{currentqueue}{make};
+    $queue =~ s/$make$make/$make/gi;
+    # Append a number if the queue name already exists
+    if ($printer->{configured}{$queue}) {
+	$queue =~ s/(\d)$/$1_/;
+	my $i = 1;
+	while ($printer->{configured}{"$queue$i"}) {
+	    $i++;
+	}
+	$queue .= $i;
+    }
+    $printer->{currentqueue}{queue} = $queue;
+    $printer->{OLD_QUEUE} = $printer->{QUEUE} = $queue;
+    return $queue;
 }
 
 sub wizard_welcome {
@@ -4144,26 +4131,13 @@ sub add_printer {
     # Tell subroutines that we add a new printer
     $printer->{NEW} = 1;
 
-    # Default printer name, we do not use "lp" so that one can
-    # switch the default printer under LPD without needing to
-    # rename another printer.  Under LPD the alias "lp" will be
-    # given to the default printer.
-    my $defaultprname = N("Printer");
-    
-    # Determine a default name for a new printer queue
-    my %queues; 
-    @queues{map { split '\|', $_ } keys %{$printer->{configured}}} = ();
-    my $i = '';
-    while ($i < 99999) { 
-	last unless exists $queues{"$defaultprname$i"};
-	$i++;
-    }
-    my $queue = "$defaultprname$i";
+    # Printer queue name
+    my $queue = "";
 
     #- Set default values for a new queue
     $printer_type_inv{$printer->{TYPE}} or 
 	$printer->{TYPE} = printer::default::printer_type();
-    $printer->{currentqueue} = { queue    => $queue,
+    $printer->{currentqueue} = { queue    => "",
 				 foomatic => 0,
 				 desc     => "",
 				 loc      => "",
@@ -4174,15 +4148,12 @@ sub add_printer {
 				 connect  => "",
 				 spooler  => $printer->{SPOOLER},
 			     };
-    #- Set OLD_QUEUE field so that the subroutines for the
-    #- configuration work correctly.
-    $printer->{OLD_QUEUE} = $printer->{QUEUE} = $queue;
     #- Do all the configuration steps for a new queue
   step_0:
     #if (!$::isEmbedded && !$::isInstall &&
     if (!$::isInstall &&
 	$in->isa('interactive::gtk')) {
-	# Enter wizard mode
+	# Enter wizard mode (only after installation)
 	$::Wizard_pix_up = "printerdrake.png";
 	$::Wizard_title = N("Add a new printer");
 	$::isWizard = 1;
@@ -4209,19 +4180,10 @@ sub add_printer {
 		    goto step_1 if $printer->{expert};
 		    goto step_0;
 		};
-	  step_3:
-	    if ($printer->{expert} || $printer->{MANUAL} ||
-		$printer->{MORETHANONE}) {
-		choose_printer_name($printer, $in) or
-		    goto step_2;
-	    }
 	    get_db_entry($printer, $in);
 	  step_3_9:
 	    if (!$printer->{expert} && !$printer->{MANUAL}) {
-		is_model_correct($printer, $in) or do {
-		    goto step_3 if $printer->{MORETHANONE};
-		    goto step_2;
-		}
+		is_model_correct($printer, $in) or goto step_2;
 	    }
 	  step_4:
 	    # Remember DB entry for "Previous" button in wizard
@@ -4232,15 +4194,26 @@ sub add_printer {
 		    # Restore DB entry
 		    $printer->{DBENTRY} = $dbentry;
 		    goto step_3_9 if $printer->{MANUALMODEL};
-		    goto step_3;
+		    goto step_2;
 		};
 	    }
 	    get_printer_info($printer, $in) or return 0;
+	    $queue = generate_queuename($printer);
 	  step_5:
 	    setup_options($printer, $in) or
 		goto step_4;
+	  step_6:
+	    if ($printer->{expert} || $printer->{MANUAL} ||
+		$printer->{MORETHANONE}) {
+		choose_printer_name($printer, $in) or do {
+		    goto step_5 if $printer->{expert} || $printer->{MANUAL};
+		    goto step_4 if $printer->{MANUALMODEL};
+		    goto step_3_9;
+		}
+	    }
 	    configure_queue($printer, $in) or die 'wizcancel';
 	    undef $printer->{MANUAL} if $printer->{MANUAL};
+	  step_7:
 	    $::Wizard_no_previous = 1;
 	    setasdefault($printer, $in);
 	    my $testpages = print_testpages($printer, $in, $printer->{TYPE} !~ /LOCAL/ && $upNetwork);
@@ -4256,19 +4229,19 @@ sub add_printer {
 		$queue = $printer->{QUEUE};
 		edit_printer($printer, $in, $upNetwork, $queue);
 		return 1;
+	    } else {
+		# "Previous" button clicked in test page dialog
+		goto step_7;
 	    }
 	};
 	die if $@ && $@ !~ /^wizcancel/;
 	wizard_close($in, 0);
     } else {
+	# Print queue setup without wizard (for installation)
 	$printer->{expert} or $printer->{TYPE} = "LOCAL";
 	wizard_welcome($printer, $in, $upNetwork) or return 0;
 	!$printer->{expert} or choose_printer_type($printer, $in, $upNetwork) or return 0;
 	setup_printer_connection($printer, $in, $upNetwork) or return 0;
-	if ($printer->{expert} || $printer->{MANUAL} ||
-	    $printer->{MORETHANONE}) {
-	    choose_printer_name($printer, $in) or return 0;
-	}
 	get_db_entry($printer, $in);
 	if (!$printer->{expert} && !$printer->{MANUAL}) {
 	    is_model_correct($printer, $in) or return 0;
@@ -4278,7 +4251,12 @@ sub add_printer {
 	    choose_model($printer, $in) or return 0;
 	}
 	get_printer_info($printer, $in) or return 0;
+	$queue = generate_queuename($printer);
 	setup_options($printer, $in) or return 0;
+	if ($printer->{expert} || $printer->{MANUAL} ||
+	    $printer->{MORETHANONE}) {
+	    choose_printer_name($printer, $in) or return 0;
+	}
 	configure_queue($printer, $in) or return 0;
 	undef $printer->{MANUAL} if $printer->{MANUAL};
 	setasdefault($printer, $in);
