@@ -54,7 +54,7 @@ sub get_label {
 sub mkinitrd($$$) {
     my ($prefix, $kernelVersion, $initrdImage) = @_;
 
-    $::testing || -e "$prefix/$initrdImage" and return;
+    $::oem or $::testing || -e "$prefix/$initrdImage" and return;
 
     my $loop_boot = loopback::prepare_boot($prefix);
 
