@@ -87,7 +87,7 @@ sub setfirmware {
 
 sub installfirmware {
     # Install the firmware file in /usr/share/sane/firmware
-    my ($firmware) = @_;
+    my ($firmware, $backend) = @_;
     return "" if !$firmware;
     # Install firmware
     run_program::rooted($::prefix, "mkdir", "-p",
@@ -96,6 +96,18 @@ sub installfirmware {
 					  N("Could not create directory /usr/share/sane/firmware!"));
 			    return "";
 			};
+    # Link /usr/share/sane/firmware to /usr/share/sane/<backend name> as
+    # some backends ignore the supplied absolute path to the firmware file
+    # and always search their own directory
+    if ($backend) {
+	run_program::rooted($::prefix, "ln", "-sf",
+			    "/usr/share/sane/firmware",
+			    "/usr/share/sane/$backend") || do {
+				$in->ask_warn('Scannerdrake',
+					      N("Could not create link /usr/share/sane/%s!", $backend));
+				return "";
+			    };
+    }
     run_program::rooted($::prefix, "cp", "-f", "$firmware",
 			"/usr/share/sane/firmware") || do {
 			    $in->ask_warn('Scannerdrake',

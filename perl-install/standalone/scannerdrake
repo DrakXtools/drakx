@@ -165,7 +165,7 @@ sub dynamic() {
 }
 
 sub installfirmware {
-    my ($model) = @_;
+    my ($model, $backend) = @_;
     my $firmware;
     my $choice = N("Do not install firmware file");
     while (1) {
@@ -204,7 +204,7 @@ sub installfirmware {
 	
     }
     # Install the firmware file in /usr/share/sane/firmware
-    $firmware = scanner::installfirmware($firmware);
+    $firmware = scanner::installfirmware($firmware, $backend);
     return $firmware;
 }
 
@@ -266,7 +266,7 @@ sub updatefirmware {
     return 0 if !$firmware;
 
     # Install the firmware file in /usr/share/sane/firmware
-    $firmware = scanner::installfirmware($firmware);
+    $firmware = scanner::installfirmware($firmware, $_->{val}{BACKEND});
 
     # Enter the path to the firmware in the appropriate config file
     foreach (@configured) {
@@ -367,7 +367,8 @@ sub tryConfScanner {
     ($vendor, $product) = scanner::get_usb_ids_for_port($port);
     my $firmware;
     if (grep { /FIRMWARELINE/ } @{$scanner::scannerDB->{$model}{lines}} ) {
-	$firmware = installfirmware($model);
+	$firmware = installfirmware($model, 
+				    $scanner::scannerDB->{$model}{server});
 	return 0 if $firmware eq "///";
     }
     scanner::confScanner($model, $port, $vendor, $product, $firmware);
