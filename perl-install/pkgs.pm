@@ -84,7 +84,7 @@ autoirpm autoirpm-icons numlock
 # 'vi'	=> vietnamese fonts
   'yi'  => [ 'acon' ],
   'zh_CN.GB2312' => [ 'rxvt-CLE', 'fonts-ttf-gb2312' ],
-  'zh_TW.Big5' => [ 'rxvt-CLE', 'fonts-ttf-big5' ],
+  'zh_TW.Big5' => [ 'rxvt-CLE', 'taipeifonts', 'fonts-ttf-big5' ],
 );
 
 @preferred = qw(perl-GTK postfix ghostscript-X vim-minimal kernel ispell-en);
