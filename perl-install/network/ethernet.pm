@@ -63,8 +63,8 @@ sub configure_lan {
     require Data::Dumper;
     configureNetwork($netc, $intf, $first_time) or return;
     configureNetwork2($in, $prefix, $netc, $intf, $install);
-    if ($::isStandalone and $in->ask_yesorno(_("Network configuration"),
-					     _("Do you want to restart the network"), 1)) {
+    if ($::isStandalone and ($::expert or $in->ask_yesorno(_("Network configuration"),
+							  _("Do you want to restart the network"), 1))) {
 	run_program::rooted($prefix, "/etc/rc.d/init.d/network stop");
 	if (!run_program::rooted($prefix, "/etc/rc.d/init.d/network start")) {
 	    $in->ask_okcancel(_("Network Configuration"), _("A problem occured while restarting the network: \n\n%s", `/etc/rc.d/init.d/network start`), 0) or return;

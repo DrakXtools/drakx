@@ -358,24 +358,24 @@ sub write_on_pixmap {
     my $darea= new Gtk::DrawingArea();
     $darea->size($width, $height);
     $darea->set_usize($width, $height);
-    my $first_time=1;
     my $draw = sub {
 	my $style = new Gtk::Style;
 	#- i18n : you can change the font.
 	$style->font(Gtk::Gdk::Font->fontset_load(_("-adobe-times-bold-r-normal--17-*-100-100-p-*-iso8859-*,*-r-*")));
 	my $y_pos2= $y_pos;
   	foreach (@text) {
-  	    $gdkpixmap->draw_string($style->font, $gc, $x_pos, $y_pos2, $_);
+	    print " -- $_ --\n";
+  	    $darea->window->draw_string($style->font, $gc, $x_pos, $y_pos2, $_);
   	    $y_pos2 += 20;
   	}
-	$first_time=0;
     };
-    $darea->signal_connect(expose_event => sub { $first_time and &$draw();
+    $darea->signal_connect(expose_event => sub { $darea->window->draw_rectangle($darea->style->white_gc, 1, 0, 0, $width, $height);
 						 $darea->window->draw_pixmap
 						   ($darea->style->white_gc,
 						    $gdkpixmap, 0, 0,
 						    ($darea->allocation->[2]-$width)/2, ($darea->allocation->[3]-$height)/2,
 						    $width, $height);
+						 &$draw();
 					     });
     $darea;
 }

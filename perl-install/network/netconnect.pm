@@ -82,6 +82,34 @@ sub detect {
     $modem->{device} and $auto_detect->{modem}=$modem->{device};
 }
 
+sub pre_func {
+    my ($text) = @_;
+    print "PLOP $text PLOP\n";
+    $::Wizard_no_previous=1;
+    if ($in->isa('interactive_gtk')) {
+	$::Wizard_splash=1;
+	require my_gtk;
+	my_gtk->import(qw(:wrappers));
+	my $W = my_gtk->new(_("Network Configuration Wizard"));
+	gtkadd($W->{window},
+	       gtkpack_(new Gtk::VBox(0, 0),
+			1, write_on_pixmap(gtkpng ("draknet_step"),
+					   20,190,
+					   _("We are now going to configure the %s connection.",_($text)),
+					   _("Press next to continue."),
+					  ),
+			0, $W->create_okcancel
+		       )
+	      );
+	$W->main;
+	$::Wizard_splash=0;
+    } else {
+	#- for i18n : %s is the type of connection of the list: (modem, isdn, adsl, cable, local network);
+	$in->ask_okcancel(_("Network Configuration Wizard"), _("\n\n\nWe are now going to configure the %s connection.\n\n\nPress next to begin.",_($_[0])), 1);
+    }
+    undef $::Wizard_no_previous;
+}
+
 sub main {
     my ($prefix, $netcnx, $netc, $mouse, $in, $intf, $install, $first_time, $direct_fr) = @_;
     MDK::Common::Globals::init(
@@ -169,36 +197,11 @@ ifdown eth0
 
 #    load_conf ($netcnx, $netc, $intf);
 
-    my $pre_func = sub {
-	$::Wizard_no_previous=1;
-	if ($in->isa('interactive_gtk')) {
-	    $::Wizard_splash=1;
-	    require my_gtk;
-	    my_gtk->import(qw(:wrappers));
-	    my $W = my_gtk->new(_("Network Configuration Wizard"));
-	    gtkadd($W->{window},
-		   gtkpack_(new Gtk::VBox(0, 0),
-			    1, write_on_pixmap(gtkpng ("draknet_step"),
-					       20,60,
-					       _("We are now going to configure the %s connection.",_($_[0])),
-					       _("Press next to continue."),
-					      ),
-			    0, $W->create_okcancel
-			   )
-		  );
-	    $W->main;
-	    $::Wizard_splash=0;
-	} else {
-	    #- for i18n : %s is the type of connection of the list: (modem, isdn, adsl, cable, local network);
-	    $in->ask_okcancel(_("Network Configuration Wizard"), _("\n\n\nWe are now going to configure the %s connection.\n\n\nPress next to begin.",_($_[0])), 1);
-	}
-	undef $::Wizard_no_previous;
-    };
-    $conf{modem} and do { &$pre_func("modem"); require network::modem; network::modem::configure($netcnx, $mouse, $netc) or goto step_2 };
-    $conf{isdn} and do { &$pre_func("isdn"); require network::isdn; network::isdn::configure($netcnx, $netc) or goto step_2 };
-    $conf{adsl} and do { &$pre_func("adsl"); require network::adsl; network::adsl::configure($netcnx, $netc, $intf, $first_time) or goto step_2};
-    $conf{cable} and do { &$pre_func("cable"); require network::ethernet; network::ethernet::configure_cable($netcnx, $netc, $intf, $first_time) or goto step_2 };
-    $conf{lan} and do { &$pre_func("local network"); require network::ethernet; network::ethernet::configure_lan($netcnx, $netc, $intf, $first_time) or goto step_2 };
+    $conf{modem} and do { pre_func("modem"); require network::modem; network::modem::configure($netcnx, $mouse, $netc) or goto step_2 };
+    $conf{isdn} and do { pre_func("isdn"); require network::isdn; network::isdn::configure($netcnx, $netc) or goto step_2 };
+    $conf{adsl} and do { pre_func("adsl"); require network::adsl; network::adsl::configure($netcnx, $netc, $intf, $first_time) or goto step_2};
+    $conf{cable} and do { pre_func("cable"); require network::ethernet; network::ethernet::configure_cable($netcnx, $netc, $intf, $first_time) or goto step_2 };
+    $conf{lan} and do { pre_func("local network"); require network::ethernet; network::ethernet::configure_lan($netcnx, $netc, $intf, $first_time) or goto step_2 };
 
   step_2_1:
     my $nb = keys %{$netc->{internet_cnx}};
@@ -394,7 +397,14 @@ DOMAINNAME2=$netc->{DOMAINNAME2}"
     commands::cp("-f", "$prefix/etc/sysconfig/network-scripts/draknet_conf", "$prefix/etc/sysconfig/network-scripts/draknet_conf." . $a);
     chmod 0600, "$prefix/etc/sysconfig/network-scripts/draknet_conf";
     chmod 0600, "$prefix/etc/sysconfig/network-scripts/draknet_conf." . $a;
-    foreach ( ["$prefix$connect_file", "up"], ["$prefix$disconnect_file", "down"], ["$prefix$connect_prog", "prog"] ) {
+    foreach ( ["$prefix$connect_file", "up"],
+	      ["$prefix$disconnect_file", "down"],
+	      ["$prefix$connect_prog", "prog"],
+	      ["$prefix/etc/ppp/ioptions1B", "iop1B"],
+	      ["$prefix/etc/ppp/ioptions2B", "iop2B"],
+	      ["$prefix/etc/isdn/isdn1B.conf", "isdn1B"],
+	      ["$prefix/etc/isdn/isdn2B.conf", "isdn2B"],
+	    ) {
 	my $file = "$prefix/etc/sysconfig/network-scripts/net_" . $_->[1] . "." . $a;
 	-e ($_->[0]) and commands::cp("-f", $_->[0], $file) and chmod 0755, $file;
     }
@@ -409,9 +419,16 @@ sub set_profile {
     $netcnx->{PROFILE}=$profile;
     print "changing to $profile\n";
     commands::cp("-f", $f . "." . $profile, $f);
-    foreach ( ["up", "$prefix$connect_file"], ["down", "$prefix$disconnect_file"], ["prog", "$prefix$connect_prog"]) {
-	my $c = "$prefix/etc/sysconfig/network-scripts/net_" . $_->[0] . "." . $profile;
-	-e ($c) and commands::cp("-f", $c, $_->[1]);
+    foreach ( ["$prefix$connect_file", "up"],
+	      ["$prefix$disconnect_file", "down"],
+	      ["$prefix$connect_prog", "prog"],
+	      ["$prefix/etc/ppp/ioptions1B", "iop1B"],
+	      ["$prefix/etc/ppp/ioptions2B", "iop2B"],
+	      ["$prefix/etc/isdn/isdn1B.conf", "isdn1B"],
+	      ["$prefix/etc/isdn/isdn2B.conf", "isdn2B"],
+	    ) {
+	my $c = "$prefix/etc/sysconfig/network-scripts/net_" . $_->[1] . "." . $profile;
+	-e ($c) and commands::cp("-f", $c, $_->[0]);
     }
 }
 
@@ -421,7 +438,7 @@ sub del_profile {
     $profile eq "default" and return;
     print "deleting $profile\n";
     commands::rm("-f", "$prefix/etc/sysconfig/network-scripts/draknet_conf." . $profile);
-    commands::rm("-f", glob_("$prefix/etc/sysconfig/network-scripts/net_{up,down,prog}." . $profile));
+    commands::rm("-f", glob_("$prefix/etc/sysconfig/network-scripts/net_{up,down,prog,iop1B,iop2B,isdn1B,isdn2B}." . $profile));
 }
 
 sub add_profile {

@@ -60,7 +60,8 @@ We recommand the light configuration.
     }
     run_program::rooted($prefix, "rpm", "-e", "$rmpackage");
     $install->($instpackage, if_($isdn->{speed} =~ /128/, 'ibod'), 'isdn4k-utils');
-    isdn_write_config_backend($isdn, $e =~ /light/, $netc);
+    my $light = $e =~ /light/ ? 1 : 0;
+    isdn_write_config_backend($isdn, $light, $netc);
     1;
 }
 
@@ -94,14 +95,15 @@ sub isdn_write_config_backend {
 	symlinkf("ioptions" . $bundle, "$prefix/etc/ppp/ioptions");
     } else {
 	my $f = "$prefix/etc/isdn/profile/link/myisp";
-	output $f,
+	output ($f,
 	  qq(
 I4L_USERNAME="$isdn->{login}"
 I4L_SYSNAME=""
 I4L_LOCALMSN="$isdn->{phone_in}"
 I4L_REMOTE_OUT="$isdn->{phone_out}"
 I4L_DIALMODE="$isdn->{dialing_mode}"
-);
+) . if_($isdn->{speed} =~ /128/, 'SLAVE="ippp1"
+'));
 	chmod 0600, $f;
 
 	output "$prefix/etc/isdn/profile/card/mycard",
@@ -134,11 +136,13 @@ defaultroute
 /sbin/route del default
 /sbin/ifup ippp0
 /sbin/isdnctrl dial ippp0
-",
+" . if_($isdn->{speed} =~ /128/, "service ibod restart
+"),
 "#!/bin/bash
 /sbin/isdnctrl hangup ippp0
 /sbin/ifdown ippp0
-");
+"  . if_($isdn->{speed} =~ /128/, "service ibod stop
+"));
     1;
 }
 
