@@ -215,9 +215,9 @@ foreach (@drivers_by_category) {
     my $l = pop @l;
     foreach (keys %$l) { $drivers{$_} = [ $l->{$_}, @l ]; }
 }
-foreach (keys %drivers) {
-    my %l; @{$l{@drivers_fields}} = @{$drivers{$_}};
-    $drivers{$_} = \%l;
+while (my ($k, $v) = each %drivers) {
+    my %l; @l{@drivers_fields} = @$v;
+    $drivers{$k} = \%l;
 }
 
 
