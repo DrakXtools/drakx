@@ -17,7 +17,7 @@ use vars qw(@ISA %EXPORT_TAGS @EXPORT_OK @icon_paths $force_center $force_focus 
       get_text_coord gtkcolor gtkset_background gtkfontinfo gtkcreate_img gtkcreate_pixbuf) ],
     create => [ qw(create_box_with_title create_adjustment create_scrolled_window create_hbox create_vbox
       create_dialog destroy_window create_factory_menu create_menu create_notebook create_packtable
-      create_vpaned create_hpaned) ],
+      create_vpaned create_hpaned create_okcancel) ],
     ask => [ qw(ask_warn ask_okcancel ask_yesorno ask_from_entry ask_browse_tree_info
       ask_browse_tree_info_given_widgets ask_dir) ],
 );
@@ -134,8 +134,6 @@ sub gtkradio {
 }
 
 sub gtkroot {
-    Gtk2->init;  #- ugly hack for install, because Gtk init is delayed to wait for X server
-    Gtk2->set_locale;
     Gtk2::Gdk::Window->foreign_new(Gtk2::Gdk->ROOT_WINDOW);
 }
 
@@ -294,7 +292,6 @@ sub create_box_with_title {
     return $box if $nbline == 0;
 
     $o->{box_size} = n_line_size($nbline, 'text', $box);
-
     if (@_ <= 2 && $nbline > 4) {
 	$o->{icon} && !$::isWizard and 
 	  eval { gtkpack__($box, gtkset_border_width(gtkpack_(Gtk2::HBox->new(0,0), 1, gtkcreate_img($o->{icon})),5)) };
@@ -565,12 +562,8 @@ sub fill_tiled {
 
 sub add2notebook {
     my ($n, $title, $book) = @_;
-    my ($w1, $w2) = map { Gtk2::Label->new($_) } $title, $title;
-    $book->{widget_title} = $w1;
-    $n->append_page_menu($book, $w1, $w2);
+    $n->append_page($book, gtkshow(Gtk2::Label->new($title)));
     $book->show;
-    $w1->show;
-    $w2->show;
 }
 
 sub string_size {
