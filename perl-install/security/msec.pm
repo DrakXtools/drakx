@@ -105,7 +105,11 @@ sub get_value {
         while(<F>) {
             if($_ =~ /^$item/) {
 			 if ($category eq 'functions') {
-				(undef, $value) = split(/ /, $_);
+				my $i = $_;
+				(undef, $_) = split / /;
+				tr /()//d;
+				$value = $_;
+				$_ = $i;
 			 } elsif ($category eq 'checks') {
                 (undef, $value) = split(/=/, $_);
 			 }
@@ -224,9 +228,9 @@ sub config_function {
     my $options_file = "$::prefix/etc/security/msec/level.local";
 
     if ($value eq 'default') {
-	   substInFile { s/^$function.*// } $options_file;
+	   substInFile { s/^$function.*\n// } $options_file;
     } else {
-	   substInFile { s/^$function.*// } $options_file;
+	   substInFile { s/^$function.*\n// } $options_file;
 	   append_to_file($options_file, "$function ($value)")
     }
 }
@@ -275,7 +279,7 @@ sub config_check {
     shift;
     my ($check, $value) = @_;
     if ($value eq 'default') {
-	   substInFile { s/^$check.*// } $check_file;
+	   substInFile { s/^$check.*\n// } $check_file;
     } else {
 	   setVarsInSh($check_file, { $check => $value });
     }
