@@ -371,6 +371,17 @@ You may also enter the IP address of the gateway if you have one"),
 				 { label => _("Gateway device"), val => \$netc->{GATEWAYDEV}, list => \@devices },
 				    ),
 			       ],
+		               complete => sub {
+				   unless (is_ip($netc->{dnsServer})) {
+				       $in->ask_warn('', _("DNS server address should be in format 1.2.3.4"));
+				       return 1;
+				   }
+				   unless (is_ip($netc->{GATEWAY})) {
+				       $in->ask_warn('', _("Gateway address should be in format 1.2.3.4"));
+				       return 1;
+				   }
+				   0;
+			       }
 			      );
 }
 
