@@ -577,10 +577,10 @@ sub installPackages {
 				  my $details = new Gtk::Button(_("Details")),
 				  ),
 			  )), 0, 1, 0);
+    $details->hide if !@install_any::advertising_images;
     $w->sync;
     $msg->set(_("Please wait, preparing installation"));
     gtkset_mousecursor_normal($cancel->window);
-    $details->hide if !@install_any::advertising_images;
 
     my $advertize = sub {
 	@install_any::advertising_images or return;
