@@ -25,6 +25,7 @@ sub config_cups {
     my ($printer, $security, $in, $upNetwork) = @_;
 
     local $::isWizard = 0;
+    local $::isEmbedded = 0;
     # Check whether the network functionality is configured and
     # running
     if (!check_network($printer, $in, $upNetwork, 0)) { return 0 };
@@ -668,6 +669,7 @@ sub setup_printer_connection {
 
 sub first_time_dialog {
     my ($printer, $in, $upNetwork) = @_;
+    local $::isEmbedded = 0;
     return 1 if printer::default::get_spooler() || $::isInstall;
 
     my $w = $in->wait_message(N("Printerdrake"), N("Checking your system..."));
@@ -1006,6 +1008,7 @@ sub generate_queuename {
 
 sub wizard_welcome {
     my ($printer, $in, $upNetwork) = @_;
+    local $::isEmbedded = 0;
     my $ret;
     my $autodetectlocal = 0;
     my $autodetectnetwork = 0;
@@ -1103,6 +1106,7 @@ If you have printer(s) connected to this machine, Please plug it/them in on this
 
 sub wizard_congratulations {
     my ($in) = @_;
+    local $::isEmbedded = 0;
     if ($in) {
 	$in->ask_okcancel(N("Add a new printer"),
 			  N("
@@ -1116,6 +1120,7 @@ If you want to add, remove, or rename a printer, or if you want to change the de
 
 sub setup_local_autoscan {
     my ($printer, $in, $upNetwork) = @_;
+    local $::isEmbedded = 0;
     my $queue = $printer->{OLD_QUEUE};
     my $expert_or_modify = $printer->{expert} || !$printer->{NEW};
     my $do_auto_detect = 
@@ -1388,6 +1393,7 @@ sub setup_local_autoscan {
 sub setup_lpd {
     my ($printer, $in, $upNetwork) = @_;
 
+    local $::isEmbedded = 0;
     # Check whether the network functionality is configured and
     # running
     if (!check_network($printer, $in, $upNetwork, 0)) { return 0 };
@@ -1467,6 +1473,7 @@ complete => sub {
 sub setup_smb {
     my ($printer, $in, $upNetwork) = @_;
 
+    local $::isEmbedded = 0;
     # Check whether the network functionality is configured and
     # running
     if (!check_network($printer, $in, $upNetwork, 0)) { return 0 };
@@ -1673,6 +1680,7 @@ Do you really want to continue setting up this printer as you are doing now?"), 
 sub setup_ncp {
     my ($printer, $in, $upNetwork) = @_;
 
+    local $::isEmbedded = 0;
     # Check whether the network functionality is configured and
     # running
     if (!check_network($printer, $in, $upNetwork, 0)) { return 0 };
@@ -1747,6 +1755,7 @@ complete => sub {
 sub setup_socket {
     my ($printer, $in, $upNetwork) = @_;
 
+    local $::isEmbedded = 0;
     # Check whether the network functionality is configured and
     # running
     if (!check_network($printer, $in, $upNetwork, 0)) { return 0 };
@@ -1921,6 +1930,7 @@ sub setup_socket {
 sub setup_uri {
     my ($printer, $in, $upNetwork) = @_;
 
+    local $::isEmbedded = 0;
 #    $in->set_help('setupURI') if $::isInstall;
     if ($printer->{AUTODETECT} && $printer->{SPOOLER} eq 'cups') {
 	my $_w = $in->wait_message(N("Printerdrake"), 
@@ -2045,6 +2055,7 @@ complete => sub {
 sub setup_postpipe {
     my ($printer, $in) = @_;
 
+    local $::isEmbedded = 0;
 #    $in->set_help('setupPostpipe') if $::isInstall;
     my $uri;
     my $commandline;
@@ -2080,6 +2091,7 @@ sub setup_common {
 
     my ($printer, $in, $makemodel, $device, $do_auto_detect, @autodetected) = @_;
 
+    local $::isEmbedded = 0;
     #- Check whether the printer is an HP multi-function device and 
     #- configure HPOJ if it is one
 
@@ -2667,6 +2679,7 @@ sub setup_common {
 
 sub choose_printer_name {
     my ($printer, $in) = @_;
+    local $::isEmbedded = 0;
     # Name, description, location
 #    $in->set_help('setupPrinterName') if $::isInstall;
     my $default = $printer->{currentqueue}{queue};
@@ -2709,6 +2722,7 @@ N("Every printer needs a name (for example \"printer\"). The Description and Loc
 
 sub get_db_entry {
     my ($printer, $in) = @_;
+    local $::isEmbedded = 0;
     #- Read the printer driver database if necessary
     if (keys %printer::main::thedb == 0) {
 	my $_w = $in->wait_message(N("Printerdrake"),
@@ -2823,6 +2837,7 @@ sub get_db_entry {
 
 sub is_model_correct {
     my ($printer, $in) = @_;
+    local $::isEmbedded = 0;
 #    $in->set_help('chooseModel') if $::isInstall;
     my $dbentry = $printer->{DBENTRY};
     if (!$dbentry) {
@@ -2850,6 +2865,7 @@ For your printer Printerdrake has found:
 
 sub choose_model {
     my ($printer, $in) = @_;
+    local $::isEmbedded = 0;
 #    $in->set_help('chooseModel') if $::isInstall;
     #- Read the printer driver database if necessary
     if (keys %printer::main::thedb == 0) {
@@ -2906,6 +2922,7 @@ Please check whether Printerdrake did the auto-detection of your printer model c
 sub installppd {
     my ($printer, $in) = @_;
 
+    local $::isEmbedded = 0;
     # Install a manufacturer-supplied PPD file
 
     # The dialogs to choose the PPD file should appear as extra
@@ -2998,6 +3015,7 @@ my %drv_x125_options = (
 
 sub get_printer_info {
     my ($printer, $in) = @_;
+    local $::isEmbedded = 0;
     my $queue = $printer->{OLD_QUEUE};
     my $oldchoice = $printer->{OLD_CHOICE};
     my $newdriver = 0;
@@ -3271,6 +3289,7 @@ sub unhexify {
 
 sub setup_options {
     my ($printer, $in) = @_;
+    local $::isEmbedded = 0;
     my @simple_options = 
 	("PageSize",        # Media properties
 	 "MediaType",
@@ -3554,6 +3573,7 @@ You should make sure that the page size and the ink type/printing mode (if avail
 
 sub setasdefault {
     my ($printer, $in) = @_;
+    local $::isEmbedded = 0;
 #    $in->set_help('setupAsDefault') if $::isInstall;
     if ($printer->{DEFAULT} eq '' || # We have no default printer,
 	                             # so set the current one as default
@@ -3565,6 +3585,7 @@ sub setasdefault {
 	
 sub print_testpages {
     my ($printer, $in, $upNetwork) = @_;
+    local $::isEmbedded = 0;
 #    $in->set_help('printTestPages') if $::isInstall;
     # print test pages
     my $res2 = 0;
@@ -3685,6 +3706,7 @@ It may take some time before the printer starts.\n");
 
 sub printer_help {
     my ($printer, $in) = @_;
+    local $::isEmbedded = 0;
     my $spooler = $printer->{SPOOLER};
     $spooler = "cups" if $spooler eq "rcups";
     my $queue = $printer->{QUEUE};
@@ -3896,6 +3918,7 @@ sub photocard_help {
 sub copy_queues_from {
     my ($printer, $in, $oldspooler) = @_;
 
+    local $::isEmbedded = 0;
 #    $in->set_help('copyQueues') if $::isInstall;
     my $newspooler = $printer->{SPOOLER};
     my @oldqueues;
@@ -4007,6 +4030,7 @@ You can also type a new name or skip this printer.",
 
 sub start_network {
     my ($in, $upNetwork) = @_;
+    local $::isEmbedded = 0;
     my $_w = $in->wait_message(N("Printerdrake"), 
 			      N("Starting network..."));
     if ($::isInstall) {
@@ -4039,6 +4063,7 @@ sub check_network {
 
     my ($printer, $in, $upNetwork, $b_dontconfigure) = @_;
 
+    local $::isEmbedded = 0;
     # Any additional dialogs caused by this subroutine should appear as
     # extra windows and not embedded in the "Add printer" wizard.
     local $::isWizard = 0;
@@ -4113,6 +4138,7 @@ sub security_check {
     # user whether he really wants to configure printing.
     my ($spooler, $security, $o_in) = @_;
 
+    local $::isEmbedded = 0;
     # Any additional dialogs caused by this subroutine should appear as
     # extra windows and not embedded in the "Add printer" wizard.
     local $::isWizard = 0;
@@ -4163,6 +4189,7 @@ sub start_spooler_on_boot {
     # PDQ has no daemon, so nothing needs to be started :
     return unless $b_service;
 
+    local $::isEmbedded = 0;
     # Any additional dialogs caused by this subroutine should appear as
     # extra windows and not embedded in the "Add printer" wizard.
     local $::isWizard = 0;
@@ -4186,6 +4213,7 @@ Do you want to have the automatic starting of the printing system turned on agai
 sub install_spooler {
     # installs the default spooler and start its daemon
     my ($printer, $security, $do_pkgs, $o_in, $o_upNetwork, $b_silentspooleronboot) = @_;
+    local $::isEmbedded = 0;
     return 1 if $::testing;
     my $spooler = $printer->{SPOOLER};
     # If the user refuses to install the spooler in high or paranoid
@@ -4283,6 +4311,7 @@ sub install_spooler {
 
 sub assure_remote_server_is_set {
     my ($printer, $in) = @_;
+    local $::isEmbedded = 0;
     # Check if a remote CUPS server is specified
     if (!$printer->{remote_cups_server}) {
 	my ($daemonless_cups, $remote_cups_server) =
@@ -4342,6 +4371,7 @@ sub assure_default_printer_is_set {
 
 sub set_cups_daemon_mode {
     my ($printer, $in) = @_;
+    local $::isEmbedded = 0;
     my ($modechoice, $daemonless_cups, $remote_cups_server);
 
     if ($in->ask_from_
@@ -4405,6 +4435,7 @@ sub set_cups_daemon_mode {
 
 sub setup_default_spooler {
     my ($printer, $security, $in, $upNetwork) = @_;
+    local $::isEmbedded = 0;
     my $oldspooler = $printer->{SPOOLER};
     $printer->{SPOOLER} ||= 'cups';
     my @spoolerlist = printer::main::spooler();
@@ -4451,6 +4482,7 @@ sub setup_default_spooler {
 
 sub configure_queue {
     my ($printer, $in) = @_;
+    local $::isEmbedded = 0;
     my $_w = $in->wait_message(N("Printerdrake"),
 			       N("Configuring printer \"%s\"...",
 				 $printer->{currentqueue}{queue}))
@@ -4469,6 +4501,7 @@ sub configure_queue {
 
 sub install_foomatic {
     my ($in) = @_;
+    local $::isEmbedded = 0;
     if (!$::testing &&
 	!files_exist(qw(/usr/bin/foomatic-configure 
 			/usr/bin/foomatic-rip
@@ -4490,6 +4523,7 @@ sub install_foomatic {
 
 sub wizard_close {
     my ($in, $mode) = @_;
+    local $::isEmbedded = 0;
     # Leave wizard mode with congratulations screen if $mode = 1
     $::Wizard_no_previous = 1;
     $::Wizard_no_cancel = 1;
@@ -4852,15 +4886,17 @@ sub add_printer {
 				 spooler  => $printer->{SPOOLER},
 			     };
     #- Do all the configuration steps for a new queue
-  step_0:
-    #if (!$::isEmbedded && !$::isInstall &&
     if (!$::isInstall &&
 	$in->isa('interactive::gtk')) {
+	local $::isEmbedded = 0;
+	undef $::WizardTable;
+	undef $::WizardWindow;
 	# Enter wizard mode (only after installation)
 	$::Wizard_pix_up = "printerdrake.png";
 	$::Wizard_title = N("Add a new printer");
 	$::isWizard = 1;
 	# Wizard welcome screen
+      step_0:
 	$::Wizard_no_previous = 1;
 	undef $::Wizard_no_cancel; undef $::Wizard_finished;
 	wizard_welcome($printer, $in, $upNetwork) or do {
