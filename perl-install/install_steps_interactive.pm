@@ -1059,7 +1059,7 @@ sub configureX {
     { local $::testing = 0; #- unset testing
       local $::auto = !$::expert && !$clicked;
 
-      symlink "$o->{prefix}/etc/gtkrc", "/etc/gtkrc";
+      symlink "$o->{prefix}/etc/gtk", "/etc/gtk";
       Xconfigurator::main($o->{prefix}, $o->{X}, $o, $o->{allowFB}, sub { $o->pkg_install(@_) });
     }
     $o->configureXAfter;
