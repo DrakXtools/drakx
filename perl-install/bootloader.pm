@@ -655,7 +655,7 @@ sub method_choices {
 	if_(arch() =~ /sparc/,
 	    'silo' => N("SILO"),
         ), if_(arch() !~ /sparc|ppc/ && !isLoopback(fsedit::get_root($fstab)),
-	    'lilo-graphic' => N("LILO with graphical menu"),
+	    if_(!detect_devices::matching_desc('ProSavageDDR'), 'lilo-graphic' => N("LILO with graphical menu")),
 	    'lilo-menu'    => N("LILO with text menu"),
 	), if_(arch() !~ /sparc|ppc/ && !isRAID(fsedit::get_root($fstab)),
 	    'grub' => N("Grub"),
