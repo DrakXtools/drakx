@@ -397,7 +397,7 @@ int mandrake_move_post(void)
         int real_is_symlink_to_raw = 0;
 
         if (!access(IMAGE_LOCATION "/move/symlinks", R_OK)) {
-                log_message("move: seems we don't use a cloop since " IMAGE_LOCATION "/move/symlinks is here");
+                log_message("move: seems we don't use a gzloop since " IMAGE_LOCATION "/move/symlinks is here");
                 if (scall(symlink(IMAGE_LOCATION, IMAGE_LOCATION_REAL), "symlink"))
                         return RETURN_ERROR;
                 real_is_symlink_to_raw = 1;
