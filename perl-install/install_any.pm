@@ -711,7 +711,9 @@ Please insert the Cd-Rom labelled \"%s\" in your drive and press Ok when done.",
 	my ($wait_w, $wait_message) = fs::format::wait_message($o); #- nb, this is only called when interactive
 	$wait_message->(N("Copying in progress") . "\n($m->{descr})"); #- XXX to be translated
 	if ($k != $current_medium) {
-	    do {
+	    my $cd_k = getCDNumber($m->{description});
+	    my $cd_cur = getCDNumber($o->{packages}{mediums}{$current_medium}{description});
+	    $cd_k ne $cd_cur and do {
 		askChangeMedium($o->{method}, $k)
 		    or next;
 		mountCdrom("/tmp/image", $cdrom) if $o->{method} eq 'cdrom';
