@@ -38,6 +38,7 @@ my $in = 'interactive'->vnew('su', 'printer-mdk');
 
 my $commandline = $_;
 
+$::CCPID and kill 'USR2', $::CCPID;
 exit 0 unless printer::printerdrake::first_time_dialog($printer, $in, 1);
 
 {
@@ -62,10 +63,4 @@ $commandline =~ /-pdq/ and
 -r '/etc/modules.conf' and modules::mergein_conf('/etc/modules.conf');
 }
 
-begin:
-$::isEmbedded and kill 'USR2', $::CCPID;
-
 printer::printerdrake::main($printer, $in, 1);
-
-$::isEmbedded ? kill('USR1', $::CCPID) : $in->exit(0);
-goto begin;
