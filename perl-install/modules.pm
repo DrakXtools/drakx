@@ -306,6 +306,7 @@ sub get_pcmcia_devices($$) {
 	log::l("i try to configure pcmcia services");
 
 	symlink("/tmp/rhimage/etc/pcmcia", "/etc/pcmcia") unless -e "/etc/pcmcia";
+	symlink("/sbin/install", "/sbin/cardmgr") unless -x "/sbin/cardmgr";
 
 	load("pcmcia_core");
 	load($pcic);
