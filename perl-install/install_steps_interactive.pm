@@ -69,7 +69,7 @@ sub selectKeyboard($) {
 						 _("What is your keyboard layout?"),
 						 [ keyboard::list() ],
 						 keyboard::keyboard2text($o->{keyboard})));
-    $o->{keyboard_force} = 1;
+    delete $o->{keyboard_unsafe};
     install_steps::selectKeyboard($o);
 }
 #------------------------------------------------------------------------------
@@ -502,14 +502,17 @@ wish to access and any applicable user name and password."),
 #------------------------------------------------------------------------------
 sub setRootPassword($) {
     my ($o) = @_;
-    $o->{superuser}{password2} ||= $o->{user}{password} ||= "";
-    my $sup = $o->{superuser};
+    my $sup = $o->{superuser} ||= {};
+    $sup->{password2} ||= $sup->{password} ||= "";
 
     $o->ask_from_entries_ref([_("Set root password"), _("Ok"), _("No password")],
 			 _("Set root password"),
-			 [_("Password:"), _("Password (again):")],
-			 [{ val => \$sup->{password},  hidden => 1},
-			  { val => \$sup->{password2}, hidden => 1}],
+			 [_("Password:"), _("Password (again):"), $o->{installClass} eq "server" || $::expert ? (_("Use shadow file"), _("Use MD5 passwords")) : () ],
+			 [{ val => \$sup->{password},  hidden => 1 },
+			  { val => \$sup->{password2}, hidden => 1 },
+			  { val => \$o->{authentification}{shadow}, type => 'bool', text => _("shadow") },
+			  { val => \$o->{authentification}{md5}, type => 'bool', text => _("MD5") },
+			 ],
 			 complete => sub {
 			     $sup->{password} eq $sup->{password2} or $o->ask_warn('', [ _("The passwords do not match"), _("Please try again") ]), return (1,1);
 			     (length $sup->{password} < 6) and $o->ask_warn('', _("This password is too simple")), return (1,0);
@@ -524,14 +527,14 @@ sub setRootPassword($) {
 #------------------------------------------------------------------------------
 sub addUser($) {
     my ($o) = @_;
-    $o->{user}{password2} ||= $o->{user}{password} ||= "";
-    my $u = $o->{user};
+    my $u = $o->{user} ||= {};
+    $u->{password2} ||= $u->{password} ||= "";
     my @fields = qw(realname name password password2);
     my @shells = install_any::shells($o);
 
-    $o->ask_from_entries_ref(
+    if ($o->ask_from_entries_ref(
         [ _("Add user"), _("Add user"), _("Done") ],
-        _("Enter a user\n%s", $o->{users} ? _("(already added %s)", join(", ", @{$o->{users}})) : ''),
+        _("Enter a user\n%s", $o->{users} ? _("(already added %s)", join(", ", map { $_->{realname} } @{$o->{users}})) : ''),
         [ _("Real name"), _("User name"), _("Password"), _("Password (again)"), _("Shell") ],
         [ \$u->{realname}, \$u->{name},
 	  {val => \$u->{password}, hidden => 1}, {val => \$u->{password2}, hidden => 1},
@@ -549,11 +552,12 @@ sub addUser($) {
 	    $u->{name} =~ /^[a-z0-9_-]+$/ or $o->ask_warn('', _("The user name must contain only lower cased letters, numbers, `-' and `_'")), return (1,0);
 	    return 0;
 	},
-    ) or return;
+    )) {
+	push @{$o->{users}}, $o->{user};
+	$o->{user} = {};
+	goto &addUser;#- if $::expert;
+    }
     install_steps::addUser($o);
-    push @{$o->{users}}, $o->{user}{realname};
-    $o->{user} = {};
-    goto &addUser;#- if $::expert;
 }
 
 
@@ -571,7 +575,8 @@ depending on the normal bootloader. This is useful if you don't want to install
 LILO on your system, or another operating system removes LILO, or LILO doesn't
 work with your hardware configuration. A custom bootdisk can also be used with
 the Mandrake rescue image, making it much easier to recover from severe system
-failures. Would you like to create a bootdisk for your system?"), $o->{mkbootdisk}) or return;
+failures. Would you like to create a bootdisk for your system?"), 
+			$o->{mkbootdisk}) or return $o->{mkbootdisk} = '';
 	$o->{mkbootdisk} = $l[0] if !$o->{mkbootdisk} || $o->{mkbootdisk} eq "1";
     } else {
 	@l or die _("Sorry, no floppy drive available");
@@ -579,7 +584,7 @@ failures. Would you like to create a bootdisk for your system?"), $o->{mkbootdis
 	$o->{mkbootdisk} = $o->ask_from_list_('',
 					      _("Choose the floppy drive you want to use to make the bootdisk"),
 					      [ @l, 'Cancel' ], $o->{mkbootdisk});
-	return if $o->{mkbootdisk} eq 'Cancel';
+	return $o->{mkbootdisk} = '' if $o->{mkbootdisk} eq 'Cancel';
     }
 
     $o->ask_warn('', _("Insert a floppy in drive %s", $o->{mkbootdisk}));
@@ -664,7 +669,7 @@ _("Append") => \$e->{append},
 _("Initrd") => { val => \$e->{initrd}, list => [ eval { glob_("/boot/initrd*") } ] },
 _("Read-write") => { val => \$e->{'read-write'}, type => 'bool' }
 	    );
-	    @l = @l[0..3] if $::beginner;
+	    @l = @l[0..5] if $::beginner;
 	} else {
 	    @l = ( 
 _("Root") => { val => \$name, list => [ map { "/dev/$_->{device}" } @{$o->{fstab}} ], not_edit => !$::expert },
@@ -710,6 +715,8 @@ _("Some steps are not completed.
 
 Do you really want to quit now?"), 0);
 
+    $o->SUPER::exitInstall;
+
     $o->ask_warn('',
 _("Congratulations, installation is complete.
 Remove the boot media and press return to reboot.
@@ -718,7 +725,7 @@ For information on fixes which are available for this release of Linux-Mandrake,
 consult the Errata available from http://www.linux-mandrake.com/.
 
 Information on configuring your system is available in the post
-install chapter of the Official Linux-Mandrake User's Guide.")) if $alldone;
+install chapter of the Official Linux-Mandrake User's Guide.")) if $alldone && !$::g_auto_install;
 }
 
 

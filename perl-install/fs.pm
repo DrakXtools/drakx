@@ -232,7 +232,7 @@ sub write_fstab($;$$) {
 	  #- keep in mind the new line for fstab.
 	  @new{($_->{mntpoint}, $_->{"$dir$_->{device}"})} = undef;
 
-	  devices::make("$prefix/$dir$_->{device}") if $_->{device} && $dir;
+	  eval { devices::make("$prefix/$dir$_->{device}") } if $_->{device} && $dir;
 
 	  [ "$dir$_->{device}", $_->{mntpoint}, type2fs($_->{type}), $options, $freq, $passno ];
 

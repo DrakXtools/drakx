@@ -19,7 +19,7 @@ XFree86-Sun XFree86-SunMono XFree86-Sun24 XFree86-3DLabs kernel-BOOT
 MySQL MySQL_GPL mod_php3 midgard postfix metroess metrotmpl
 hackkernel hackkernel-BOOT hackkernel-fb hackkernel-headers
 hackkernel-pcmcia-cs hackkernel-smp hackkernel-smp-fb
-);#)
+);
 
 sub correctSize { (20471 - $_[0])*$_[0]/16258 } #- size correction in MB.
 
@@ -396,6 +396,7 @@ sub selectPackagesToUpgrade($$$) {
 
 sub install($$) {
     my ($prefix, $toInstall) = @_;
+    my %packages;
 
     return if $::g_auto_install;
 
@@ -413,7 +414,8 @@ sub install($$) {
 	$p->{file} ||= sprintf "%s-%s-%s.%s.rpm",
 	                       $p->{name}, $p->{version}, $p->{release},
 			       c::headerGetEntry(getHeader($p), 'arch');
-	c::rpmtransAddPackage($trans, getHeader($p), $p->{file}, $p->{name} !~ /kernel/); #- TODO: replace `named kernel' by `provides kernel'
+	$packages{$p->{name}} = $p;
+	c::rpmtransAddPackage($trans, getHeader($p), $p->{name}, $p->{name} !~ /kernel/); #- TODO: replace `named kernel' by `provides kernel'
 #	c::rpmtransAddPackage($trans, getHeader($p), $p->{file}, 1); #- TODO: replace `named kernel' by `provides kernel'
 	$nb++;
 	$total += $p->{size};
@@ -433,11 +435,12 @@ sub install($$) {
 
     #- !! do not translate these messages, they are used when catched (cf install_steps_graphical)
     my $callbackOpen = sub {
-	print LOG "$_[0]\n";
-	my $fd = install_any::getFile($_[0]) or log::l("bad file $_[0]");
+	my $f = (my $p = $packages{$_[0]})->{file};
+	print LOG "$f\n";
+	my $fd = install_any::getFile($f) or log::l("bad file $f");
 	$fd ? fileno $fd : -1;
     };
-    my $callbackClose = sub { };
+    my $callbackClose = sub { $packages{$_[0]}{installed} = 1; };
     my $callbackStart = sub { log::ld("starting installing package ", $_[0]) };
     my $callbackProgress = sub { log::ld("progressing installation ", $_[0], "/", $_[1]) };
 
@@ -454,8 +457,6 @@ sub install($$) {
     c::rpmtransFree($trans);
     c::rpmdbClose($db);
     log::l("rpm database closed");
-
-    $_->{installed} = 1 foreach @$toInstall;
 }
 
 1;

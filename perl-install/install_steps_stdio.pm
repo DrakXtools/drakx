@@ -16,12 +16,14 @@ use log;
 
 1;
 
-sub enteringStep($$$) {
+sub enteringStep {
     my ($o, $step) = @_;
     print _("Entering step `%s'\n", $o->{steps}{$step}{text});
+    $o->SUPER::enteringStep($step);
 }
 sub leavingStep {
-    my ($o) = @_;
+    my ($o, $step) = @_;
+    $o->SUPER::leavingStep($step);
     print "--------\n";
 }
 

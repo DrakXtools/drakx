@@ -281,7 +281,7 @@ sub dd {
     my $u = "usage: dd [-h] [-p] [if=<file>] [of=<file>] [bs=<number>] [count=<number>]\n";
     my ($help, $percent) = getopts(\@_, qw(hp));
     die $u if $help;
-    my %h = (if => \*STDIN, of => \*STDOUT, bs => 512, count => undef);
+    my %h = (if => *STDIN, of => *STDOUT, bs => 512, count => undef);
     foreach (@_) {
 	/(.*?)=(.*)/ && exists $h{$1} or die $u;
 	$h{$1} = $2;
@@ -308,7 +308,7 @@ sub head_tail {
     my ($h, $n) = getopts(\@_, qw(hn));
     $h || @_ > 1 + bool($n) and die "usage: $0 [-h] [-n lines] [<file>]\n";
     $n = $n ? shift : 10;
-    local *F; @_ ? open(F, $_[0]) || die "error: can't open file $_[0]\n" : (*F = \*STDIN);
+    local *F; @_ ? open(F, $_[0]) || die "error: can't open file $_[0]\n" : (*F = *STDIN);
 
     if ($0 eq 'head') {
 	foreach (<F>) { $n-- or return; print }

@@ -69,7 +69,7 @@ sub openit($$;$) { sysopen $_[1], $_[0]{file}, $_[2] || 0; }
 # cause kernel to re-read partition table
 sub kernel_read($) {
     my ($hd) = @_;
-    local *F; openit($hd, \*F) or return 0;
+    local *F; openit($hd, *F) or return 0;
     $hd->{rebootNeeded} = !ioctl(F, c::BLKRRPART(), 0);
 }
 
@@ -77,7 +77,7 @@ sub read($$) {
     my ($hd, $sector) = @_;
     my $tmp;
 
-    local *F; openit($hd, \*F) or return;
+    local *F; openit($hd, *F) or return;
     c::lseek_sector(fileno(F), $sector, $offset) or die "reading of partition in sector $sector failed";
 
     my @pt = map {
@@ -98,7 +98,7 @@ sub read($$) {
 sub write($$$) {
     my ($hd, $sector, $pt) = @_;
 
-    local *F; openit($hd, \*F, 2) or die "error opening device $hd->{device} for writing";
+    local *F; openit($hd, *F, 2) or die "error opening device $hd->{device} for writing";
     c::lseek_sector(fileno(F), $sector, $offset) or return 0;
 
     @$pt == $nb_primary or die "partition table does not have $nb_primary entries";

@@ -13,6 +13,9 @@ sub rooted {
     my ($root, $name, @args) = @_;
     my $str = ref $name ? $name->[0] : $name;
     log::l("running: $str @args" . ($root ? " with root $root" : ""));
+
+    return 1 if $root && $<;
+
     $root ? $root .= '/' : ($root = '');
 
     fork and wait, return $? == 0;

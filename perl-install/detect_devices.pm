@@ -15,8 +15,6 @@ use c;
 #- Globals
 #-#####################################################################################
 my @netdevices = map { my $l = $_; map { "$l$_" } (0..3) } qw(eth tr plip fddi);
-my $scsiDeviceAvailable;
-my $CSADeviceAvailable;
 
 #-######################################################################################
 #- Functions
@@ -49,24 +47,17 @@ sub isZipDrive() { $_[0]->{info} =~ /ZIP\s+\d+/ } #- accept ZIP 100, untested fo
 sub isRemovableDrive() { &isZipDrive } #-or &isJazzDrive }
 
 sub hasSCSI() {
-    defined $scsiDeviceAvailable and return $scsiDeviceAvailable;
     local *F;
     open F, "/proc/scsi/scsi" or log::l("failed to open /proc/scsi/scsi: $!"), return 0;
     foreach (<F>) {
-	/devices: none/ and log::l("no scsi devices are available"), return $scsiDeviceAvailable = 0;
+	/devices: none/ and log::l("no scsi devices are available"), return 0;
     }
     log::l("scsi devices are available");
-    $scsiDeviceAvailable = 1;
+    1;
 }
 sub hasIDE() { -e "/proc/ide" }
 sub hasDAC960() { 1 }
-
-sub hasCompaqSmartArray() {
-    defined $CSADeviceAvailable and return $CSADeviceAvailable;
-    -r "/proc/array/ida0" or log::l("failed to open /proc/array/ida0: $!"), return $CSADeviceAvailable = 0;
-    log::l("Compaq Smart Array controllers available");
-    $CSADeviceAvailable = 1;
-}
+sub hasCompaqSmartArray() { -r "/proc/array/ida0" }
 
 sub getSCSI() {
     my @drives;
@@ -174,12 +165,12 @@ sub hasNetDevice($) { c::hasNetDevice($_[0]) }
 
 sub tryOpen($) {
     local *F;
-    sysopen F, devices::make($_[0]), c::O_NONBLOCK() and \*F;
+    sysopen F, devices::make($_[0]), c::O_NONBLOCK() and *F;
 }
 
 sub tryWrite($) {
     local *F;
-    sysopen F, devices::make($_[0]), 1 | c::O_NONBLOCK() and \*F;
+    sysopen F, devices::make($_[0]), 1 | c::O_NONBLOCK() and *F;
 }
 
 sub syslog {
@@ -188,8 +179,9 @@ sub syslog {
 }
 
 sub hasSMP {
-    my $nb = grep { /^processor/ } cat_("/proc/cpuinfo");
-    $nb > 1;
+#-    my $nb = grep { /^processor/ } cat_("/proc/cpuinfo");
+#-    $nb > 1;
+    c::detectSMP();
 }
 
 sub whatParport() {

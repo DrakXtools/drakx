@@ -109,6 +109,11 @@ setsid()
 int
 detectSMP()
 
+char*
+crypt_md5(pw, salt)
+  char *pw
+  char *salt
+
 unsigned int
 getpagesize()
 

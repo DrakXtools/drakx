@@ -70,5 +70,5 @@ sub open($) {
     check_mounted($fs->{device});
 
     sysopen F, $fs->{fs_name}, 2 or sysopen F, $fs->{fs_name}, 0 or die "error opening device $fs->{fs_name} for writing\n";
-    $fs->{fd} = \*F;
+    $fs->{fd} = *F;
 }

@@ -28,7 +28,7 @@ use printer;
 use modules;
 use detect_devices;
 use modparm;
-use install_steps_graphical;
+#-use install_steps_graphical;
 use run_program;
 
 #-######################################################################################
@@ -120,9 +120,9 @@ my %suggestedPartitions = (
 $o = $::o = {
 #    bootloader => { linear => 0, message => 1, timeout => 5, restricted => 0 },
     autoSCSI   => 0,
-    mkbootdisk => 1, #- no mkbootdisk if 0 or undef,   find a floppy with 1
+    mkbootdisk => 1, #- no mkbootdisk if 0 or undef, find a floppy with 1, or fd1
 #-    packages   => [ qw() ],
-    partitioning => { clearall => 0, eraseBadPartitions => 0, auto_allocate => 0, autoformat => 0, readonly => 1 },
+    partitioning => { clearall => 0, eraseBadPartitions => 0, auto_allocate => 0, autoformat => 0, readonly => 0 },
 #-    partitions => [
 #-		      { mntpoint => "/boot", size =>  16 << 11, type => 0x83 },
 #-		      { mntpoint => "/",     size => 256 << 11, type => 0x83 },
@@ -136,6 +136,7 @@ $o = $::o = {
 #-		   { mntpoint => "/usr",  size => 400 << 11, type => 0x83, growable => 1 },
 #-	     ],
     shells => [ map { "/bin/$_" } qw(bash tcsh zsh ash ksh) ],
+    authentification => { md5 => 1, shadow => 1 },
     lang         => 'en',
     isUpgrade    => 0,
     installClass => "beginner",
@@ -179,7 +180,7 @@ $o = $::o = {
     steps        => \%installSteps,
     orderedSteps => \@orderedInstallSteps,
 
-    base => [ qw(basesystem sed initscripts console-tools mkbootdisk anacron rhs-hwdiag utempter ldconfig chkconfig ntsysv mktemp setup filesystem SysVinit bdflush crontabs dev e2fsprogs etcskel fileutils findutils getty_ps grep groff gzip hdparm info initscripts isapnptools kbdconfig kernel less ldconfig lilo logrotate losetup man mkinitrd mingetty modutils mount net-tools passwd procmail procps psmisc mandrake-release rootfiles rpm sash sed setconsole setserial shadow-utils sh-utils slocate stat sysklogd tar termcap textutils time tmpwatch util-linux vim-minimal vixie-cron which cpio perl) ],
+    base => [ qw(basesystem sed initscripts console-tools mkbootdisk anacron rhs-hwdiag utempter ldconfig chkconfig ntsysv mktemp setup filesystem SysVinit bdflush crontabs dev e2fsprogs etcskel fileutils findutils getty_ps grep groff gzip hdparm info initscripts isapnptools kernel less ldconfig lilo logrotate losetup man mkinitrd mingetty modutils mount net-tools passwd procmail procps psmisc mandrake-release rootfiles rpm sash sed setconsole setserial shadow-utils sh-utils slocate stat sysklogd tar termcap textutils time tmpwatch util-linux vim-minimal vixie-cron which cpio perl) ],
 #- for the list of fields available for user and superuser, see @etc_pass_fields in install_steps.pm
 #-    intf => [ { DEVICE => "eth0", IPADDR => '1.2.3.4', NETMASK => '255.255.255.128' } ],
 
@@ -215,8 +216,7 @@ sub selectLanguage {
 sub selectMouse {
     my ($clicked) = $_[0];
 
-    $o->{mouse} ||= {};
-    add2hash($o->{mouse}, { mouse::read($o->{prefix}) }) if $o->{isUpgrade} && !$clicked;
+    add2hash($o->{mouse} ||= {}, { mouse::read($o->{prefix}) }) if $o->{isUpgrade} && !$clicked;
 
     $o->selectMouse($clicked);
     addToBeDone { mouse::write($o->{prefix}, $o->{mouse}); } 'formatPartitions';
@@ -228,7 +228,7 @@ sub selectKeyboard {
 
     return unless $o->{isUpgrade} || !$::beginner || $clicked;
 
-    $o->{keyboard} = (keyboard::read($o->{prefix}))[0] if $o->{isUpgrade} && !$clicked && !$o->{keyboard_force};
+    $o->{keyboard} = (keyboard::read($o->{prefix}))[0] if $o->{isUpgrade} && !$clicked && $o->{keyboard_unsafe};
     $o->selectKeyboard if !$::beginner || $clicked;
 
     #- if we go back to the selectKeyboard, you must rewrite
@@ -277,7 +277,7 @@ sub partitionDisks {
     $::o->{steps}{formatPartitions}{done} = 0;
     eval { fs::umount_all($o->{fstab}, $o->{prefix}) } if $o->{fstab} && !$::testing;
 
-    my $ok = is_empty_array_ref($o->{hds}) ? install_any::getHds($o) : 1;
+    my $ok = fsedit::get_root($o->{fstab} || []) ? 1 : install_any::getHds($o);
     my $auto = $ok && !$o->{partitioning}{readonly} &&
 	($o->{partitioning}{auto_allocate} || $::beginner && fsedit::get_fstab(@{$o->{hds}}) < 4);
 
@@ -352,15 +352,16 @@ sub configureNetwork {
     $o->configureNetwork($entered == 1 && !$clicked)
 }
 #------------------------------------------------------------------------------
-#-PADTODO
 sub configureTimezone {
     my ($clicked) = $_[0];
     my $f = "$o->{prefix}/etc/sysconfig/clock";
-    return if ((-s $f) || 0) > 0 && $_[1] == 1 && !$clicked && !$::testing;
 
-    add2hash($o->{timezone}, { timezone::read($f) }) if $o->{isUpgrade} && !$clicked;
+    if ($o->{isUpgrade} && -r $f && -s $f > 0) {
+	return if $_[1] == 1 && !$clicked;
+	#- can't be done in install cuz' timeconfig %post creates funny things
+	add2hash($o->{timezone}, { timezone::read($f) });
+    }
     $o->{timezone}{GMT} = 1 unless exists $o->{timezone}{GMT}; #- take GMT by default if nothing else.
-
     $o->timeConfig($f);
 }
 #------------------------------------------------------------------------------
@@ -376,17 +377,14 @@ sub setRootPassword {
     return if $o->{isUpgrade};
 
     $o->setRootPassword;
+    addToBeDone { install_any::setAuthentication() } 'doInstallStep';
 }
 #------------------------------------------------------------------------------
 sub addUser {
     return if $o->{isUpgrade};
 
     $o->addUser;
-
-    addToBeDone {
-	install_any::enableMD5($o->{prefix});
-	run_program::rooted($o->{prefix}, "pwconv") or log::l("pwconv failed"); #- use shadow passwords
-    } 'doInstallStep';
+    install_any::setAuthentication();
 }
 
 #------------------------------------------------------------------------------
@@ -400,7 +398,7 @@ sub createBootdisk {
 
 #------------------------------------------------------------------------------
 sub setupBootloader {
-    return if $o->{lnx4win};
+    return if $o->{lnx4win} || $::g_auto_install;
 
     $o->setupBootloaderBefore if $_[1] == 1;
     $o->setupBootloader($_[1] - 1);
@@ -421,29 +419,42 @@ sub main {
     $SIG{__DIE__} = sub { chomp $_[0]; log::l("ERROR: $_[0]") };
 
     $::beginner = $::expert = $::g_auto_install = 0;
-    while (@_) {
-	local $_ = shift;
-	if (/--method/) {
-	    $o->{method} = shift;
-	} elsif (/--step/) {
-	    $o->{steps}{first} = shift;
-	} elsif (/--expert/) {
-	    $::expert = 1;
-	} elsif (/--beginner/) {
-	    $::beginner = 1;
-	#} elsif (/--ks/ || /--kickstart/) {
-	#    $::auto_install = 1;
-	} elsif (/--g_auto_install/) {
-	    $::testing = $::g_auto_install = 1;
-	    $o->{partitioning}{auto_allocate} = 1;
-	} elsif (/--pcmcia/) {
-	    $o->{pcmcia} = shift;
-	} elsif (/--readonly/) {
-	    $o->{partitioning}{readonly} = 1;
-	} elsif (/--lnx4win/) {
-	    $o->{lnx4win} = 1;
+
+    my %cmdline; map { 
+	my ($n, $v) = split '=';
+	$cmdline{$n} = $v || 1;
+    } split ' ', cat_("/proc/cmdline");
+
+    my $opt; foreach (@_) {
+	if (/^--?(.*)/) {
+	    $cmdline{$opt} = 1 if $opt;
+	    $opt = $1;
+	} else {
+	    $cmdline{$opt} = $_ if $opt;
+	    $opt = '';
 	}
-    }
+    } $cmdline{$opt} = 1 if $opt;
+    
+    map_each {
+	my ($n, $v) = @_;
+	my $f = ${{
+	    method    => sub { $o->{method} = $v },
+	    pcmcia    => sub { $o->{pcmcia} = $v },
+	    step      => sub { $o->{steps}{first} = $v },
+	    expert    => sub { $o->{installClass} = 'expert'; $::expert = 1 },
+	    beginner  => sub { $o->{installClass} = 'beginner'; $::beginner = 1 },
+	    lnx4win   => sub { $o->{lnx4win} = 1 },
+	    readonly  => sub { $o->{partitioning}{readonly} = 1 },
+	    test      => sub { $::testing = 1 },
+	    display   => sub { $o->{display} = $v },
+#	    ks        => sub { $::auto_install = 1 },
+#	    kickstart => sub { $::auto_install = 1 },
+#	    auto_install => sub { $::auto_install = 1 },
+	    defaultcfg => sub { $o = install_any::loadO($o, $v) },
+	    alawindows => sub { $o->{partitioning}{clearall} = 1; $o->{bootloader}{crushMbr} = 1 },
+	    g_auto_install => sub { $::testing = $::g_auto_install = 1; $o->{partitioning}{auto_allocate} = 1 },
+	}}{lc $n}; &$f if $f;
+    } %cmdline;
 
     unlink "/sbin/insmod"  unless $::testing;
     unlink "/modules/pcmcia_core.o" unless $::testing; #- always use module from archive.
@@ -470,21 +481,14 @@ sub main {
     $ENV{LD_LIBRARY_PATH} = "";
 
     if ($::auto_install) {
-	require 'install_steps.pm';
-	fs::mount(devices::make("fd0"), "/mnt", "vfat", 0);
-
-	my $O = $o;
-	my $f = "/mnt/auto_inst.cfg";
-	{
-	    local *F;
-	    open F, $f or die _("Error reading file $f");
-
-	    local $/ = "\0";
-	    eval <F>;
+	require 'install_steps_auto_install.pm';
+	my $f = "auto_inst.cfg";
+	unless ($::testing) {
+	    fs::mount(devices::make("fd0"), "/mnt", "vfat", 0);
+	    $f = "/mnt/$f";
 	}
-	$@ and die _("Bad kickstart file %s (failed %s)", $f, $@);
-	fs::umount("/mnt");
-	add2hash($o, $O);
+	$o = install_any::loadO($o, $f);
+	fs::umount("/mnt") unless $::testing;
     } else {
 	require 'install_steps_graphical.pm';
     }
@@ -500,7 +504,7 @@ sub main {
     eval { $o->{mouse} ||= mouse::detect() };
 
     $::o = $o = $::auto_install ?
-      install_steps->new($o) :
+      install_steps_auto_install->new($o) :
       install_steps_graphical->new($o);
 
     $o->{netc} = network::read_conf("/tmp/network");
@@ -553,15 +557,7 @@ sub main {
     log::l("installation complete, leaving");
     print "\n" x 30;
 
-    if ($::g_auto_install) {
-	my $h = $o; $o = {};
-	$h->{$_} and $o->{$_} = $h->{$_} foreach qw(lang autoSCSI printer mouse netc timezone bootloader superuser intf keyboard mkbootdisk base user modules installClass partitions);
-
-	delete $o->{user}{password2};
-	delete $o->{superuser}{password2};
-
-	print Data::Dumper->Dump([$o], ['$o']), "\0";
-    }
+    install_any::g_auto_install() if $::g_auto_install;
 }
 
 #-######################################################################################

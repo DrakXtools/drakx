@@ -92,7 +92,7 @@ sub make($;$) {
     }
 
     if ($checkBlocks) {
-	$badpages = check_blocks(\*F, $version, $nbpages);
+	$badpages = check_blocks(*F, $version, $nbpages);
     } elsif ($version == 0) {
 	for (my $i = 0; $i < $nbpages; $i++) { vec($signature_page, $i, 1) = 1; }
     }

@@ -43,7 +43,7 @@ sub getFile($) {
     } else {
 	*install_any::getFile = sub($) {
 	    open getFile, "/tmp/rhimage/" . relGetFile($_[0]) or return;
-	    \*getFile;
+	    *getFile;
 	};
     }
     goto &getFile;
@@ -118,6 +118,8 @@ sub setPackages($$) {
 	eval { $o->{packages} = pkgs::psUsingHdlist() }  if $useHdlist;
 	$o->{packages} = pkgs::psUsingDirectory() if !$useHdlist || $@;
 
+	$o->{packages}{$_}{selected} = 1 foreach @{$o->{default_packages} || []};
+
 	pkgs::getDeps($o->{packages});
 
 	my $c; ($o->{compss}, $c) = pkgs::readCompss($o->{packages});
@@ -135,6 +137,7 @@ sub setPackages($$) {
 	    pkgs::select($o->{packages}, $p, 1);
 	} foreach @{$o->{base}};
     }
+    return if $::auto_install;
 
     ($o->{packages_}{ind}, $o->{packages_}{select_level}) = pkgs::setSelectedFromCompssList($o->{compssListLevels}, $o->{packages}, getAvailableSpace($o) * 0.7, $o->{installClass}, $o->{lang}, $o->{isUpgrade});
 }
@@ -189,6 +192,7 @@ I'll try to go on blanking bad partitions")) unless $o->{partitioning}{readonly}
 
     fs::check_mounted($o->{fstab});
 
+    $o->{partitioning}{clearall} and return 1;
     $o->ask_warn('', 
 _("DiskDrake failed to read correctly the partition table.
 Continue at your own risk!")) if !$ok2 && $ok && !$o->{partitioning}{readonly};
@@ -260,17 +264,49 @@ sub write_ldsoconf {
     }
 }
 
-sub enableMD5 {
-    my ($prefix) = @_;
-    local @ARGV = map { "$prefix/etc/pam.d/$_" } qw(login rlogin passwd);
+sub setAuthentication() {
+    my ($shadow, $md5) = @{$::o->{authentification} || {}}{qw(shadow md5)};
+    enableMD5Shadow($::o->{prefix}, $shadow, $md5);
+    enableShadow() if $shadow;
+}
+
+sub enableShadow() {
+    my $p = $::o->{prefix};
+    run_program::rooted($p, "pwconv")  or log::l("pwconv failed");
+    run_program::rooted($p, "grpconv") or log::l("grpconv failed");
+
+#-    my $chpasswd = sub {
+#-	  my ($name, $password) = @_;
+#-	  $password =~ s/"/\\"/;
+#-
+#-	  local *log::l = sub {}; #- disable the logging (otherwise password visible in the log)
+#-	  run_program::rooted($p, qq((echo "$password" ; sleep 1 ; echo "$password") | passwd $name));
+#-#-	run_program::rooted($p, "echo $name:$password | chpasswd");
+#-    };
+#-    &$chpasswd("root", $::o->{superuser}{password});
+#-    &$chpasswd($_->{name}, $_->{password}) foreach @{$::o->{users} || []};
+}
+
+sub enableMD5Shadow($$$) {
+    my ($prefix, $shadow, $md5) = @_;
+    local @ARGV = grep { -r $_ } map { "$prefix/etc/pam.d/$_" } qw(login rlogin passwd) or return;
     local $^I = '';
     while (<>) {
 	if (/^password.*pam_pwdb.so/) {
-	    /\s*shadow/ or s/$/ shadow/;
-	    /\s*md5/ or s/$/ md5/;
+	    s/\s*shadow//; s/\s*md5//;
+	    s/$/ shadow/ if $shadow;
+	    s/$/ md5/ if $md5;
 	}
 	print;
     }
+}
+
+sub crypt($) {
+    my ($password) = @_;
+
+    $::o->{authentification}{md5} ?
+      c::crypt_md5($password, salt(8)) :
+         crypt    ($password, salt(2));
 }
 
 sub lnx4win_postinstall {
@@ -291,6 +327,48 @@ sub killCardServices {
 }
 
 sub unlockCdroms {
-    ioctl detect_devices::tryOpen($_), c::CDROM_LOCKDOOR(), 0
+    ioctl detect_devices::tryOpen($_->{device}), c::CDROM_LOCKDOOR(), 0
       foreach detect_devices::cdroms();
 }
+
+sub g_auto_install {
+    my $o = {};
+
+    $o->{default_packages} = [ map { $_->{name} } grep { $_->{selected} && !$_->{base} } values %{$::o->{packages}} ];
+
+    my @fields = qw(mntpoint type size);
+    $o->{partitions} = [ map { my %l; @l{@fields} = @$_{@fields}; \%l } grep { $_->{mntpoint} } @{$::o->{fstab}} ];
+    
+    exists $::o->{$_} and $o->{$_} = $::o->{$_} foreach qw(lang autoSCSI authentification printer mouse netc timezone superuser intf keyboard mkbootdisk base users installClass partitioning); #- TODO modules bootloader 
+
+    $o->{partitioning}{clearall} = 1;
+
+    delete @$_{qw(oldu oldg pw password2)} foreach $o->{superuser}, @{$o->{users} || []};
+    
+    local *F;
+    open F, ">auto_inst.cfg.pl" or die;
+    print F Data::Dumper->Dump([$o], ['$o']), "\0";
+}
+
+sub loadO {
+    my ($O, $f) = @_;
+    my $o;
+    -e $f or $f .= ".pl";
+    {
+	local *F;
+	open F, $f or die _("Error reading file $f");
+
+	local $/ = "\0";
+	eval <F>;
+    }
+    $@ and log::l _("Bad kickstart file %s (failed %s)", $f, $@);
+    add2hash_($o, $O);
+    $o;
+}
+
+sub pkg_install {
+    my ($o, $name) = @_;
+    my $p = $o->{packages}{$name} or die "$name rpm not found";
+    pkgs::install($o->{prefix}, [ $p ]);
+}
+

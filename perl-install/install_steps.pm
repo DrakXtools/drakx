@@ -38,11 +38,11 @@ sub new($$) {
 #-######################################################################################
 #- In/Out Steps Functions
 #-######################################################################################
-sub enteringStep($$) {
+sub enteringStep {
     my ($o, $step) = @_;
     log::l("starting step `$step'");
 }
-sub leavingStep($$) {
+sub leavingStep {
     my ($o, $step) = @_;
     log::l("step `$step' finished");
 
@@ -82,7 +82,8 @@ sub selectLanguage {
     my ($o) = @_;
     lang::set($o->{lang});
 
-    unless ($o->{keyboard_force}) {
+    if ($o->{keyboard_unsafe} || !$o->{keyboard}) {
+	$o->{keyboard_unsafe} = 1;
 	$o->{keyboard} = keyboard::lang2keyboard($o->{lang});
 	selectKeyboard($o);
     }
@@ -221,6 +222,9 @@ sub configureNetwork($) {
     network::add2hosts("$etc/hosts", $o->{netc}{HOSTNAME}, map { $_->{IPADDR} } @{$o->{intf}});
     network::sethostname($o->{netc}) unless $::testing;
     network::addDefaultRoute($o->{netc}) unless $::testing;
+
+    install_any::pkg_install($o, "dhcpcd") if grep { $_->{BOOTPROTO} eq "dhcp" } @{$o->{intf}};
+    install_any::pkg_install($o, "pump")   if grep { $_->{BOOTPROTO} eq "bootp" } @{$o->{intf}};
     #-res_init();		#- reinit the resolver so DNS changes take affect
 }
 
@@ -263,10 +267,10 @@ sub printerConfig {
 my @etc_pass_fields = qw(name password uid gid realname home shell);
 sub setRootPassword($) {
     my ($o) = @_;
-    my %u = %{$o->{superuser}};
     my $p = $o->{prefix};
+    my %u = %{$o->{superuser} ||= {}};
 
-    $u{password} = crypt_($u{password}) if $u{password};
+    $u{password} = install_any::crypt($u{password}) if $u{password};
 
     my @lines = cat_(my $f = "$p/etc/passwd") or log::l("missing passwd file"), return;
 
@@ -284,37 +288,43 @@ sub setRootPassword($) {
 }
 
 #------------------------------------------------------------------------------
+
 sub addUser($) {
     my ($o) = @_;
-    my %u = %{$o->{user}};
     my $p = $o->{prefix};
-    my @passwd = cat_("$p/etc/passwd");;
-
-    return if !$u{name} || getpwnam($u{name});
-    $u{home} ||= "/home/$u{name}";
 
     my (%uids, %gids); 
     foreach (glob_("$p/home")) { my ($u, $g) = (stat($_))[4,5]; $uids{$u} = 1; $gids{$g} = 1; }
-    my ($old_uid, $old_gid) = ($u{uid}, $u{gid}) = (stat("$p$u{home}"))[4,5];
-    if (getpwuid($u{uid})) { for ($u{uid} = 500; getpwuid($u{uid}) || $uids{$u{uid}}; $u{uid}++) {} }
-    if (getgrgid($u{gid})) { for ($u{gid} = 500; getgrgid($u{gid}) || $gids{$u{gid}}; $u{gid}++) {} }
 
-    $u{password} = crypt_($u{password}) if $u{password};
+    my @l = @{$o->{users} || []};
+    foreach (@l) {
+	next if !$_->{name} || getpwnam($_->{name});
 
-    return if $::testing;
+	my $u = $_->{uid} || ($_->{oldu} = (stat("$p$_->{home}"))[4]);
+	my $g = $_->{gid} || ($_->{oldg} = (stat("$p$_->{home}"))[5]);
+	if (!$u || getpwuid($u)) { for ($u = 500; getpwuid($u) || $uids{$u}; $u++) {} }
+	if (!$g || getgrgid($g)) { for ($g = 500; getgrgid($g) || $gids{$g}; $g++) {} }
+
+	$_->{home} ||= "/home/$_->{name}";
+	@$_{qw(uid gid pw)} = ($u, $g, $_->{password} && install_any::crypt($_->{password}));
+    }
+    my @passwd = cat_("$p/etc/passwd");;
 
     local *F;
     open F, ">> $p/etc/passwd" or die "can't append to passwd file: $!";
-    print F join(':', @u{@etc_pass_fields}), "\n";
+    print F join(':', @$_{@etc_pass_fields}), "\n" foreach @l;
 
     open F, ">> $p/etc/group" or die "can't append to group file: $!";
-    print F "$u{name}::$u{gid}:\n";
+    print F "$_->{name}::$_->{gid}:\n" foreach @l;
 
-    unless (-d "$p$u{home}") {
-	eval { commands::cp("-f", "$p/etc/skel", "$p$u{home}") }; 
-	if ($@) { log::l("copying of skel failed: $@"); mkdir("$p$u{home}", 0750); }
+    foreach (@l) {
+	if (! -d "$p$_->{home}") {
+	    eval { commands::cp("-f", "$p/etc/skel", "$p$_->{home}") }; 
+	    if ($@) { log::l("copying of skel failed: $@"); mkdir("$p$_->{home}", 0750); }
+	}
+	commands::chown_("-r", "$_->{uid}.$_->{gid}", "$p$_->{home}")
+	    if $_->{uid} != $_->{oldu} || $_->{gid} != $_->{oldg};
     }
-    commands::chown_("-r", "$u{uid}.$u{gid}", "$p$u{home}") if $u{uid} != $old_uid || $u{gid} != $old_gid;
 }
 
 #------------------------------------------------------------------------------

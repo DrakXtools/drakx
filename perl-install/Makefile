@@ -27,7 +27,7 @@ tags:
 clean:
 	for i in $(DIRS); do $(MAKE) -C $$i clean; done
 	rm -rf gendepslist auto ../diskdrake*
-	find . -name "*~" -o -name "TAGS" -o -name "*.old" | xargs rm -f
+	find . -name "*~" -o -name ".#*" -o -name "TAGS" -o -name "*.old" | xargs rm -f
 
 tar: clean
 	cd .. ; tar cfy perl-install.tar.bz2 $(EXCLUDE:%=--exclude %) perl-install

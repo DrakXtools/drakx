@@ -9,7 +9,7 @@ use vars qw(@ISA %EXPORT_TAGS @EXPORT_OK $printable_chars $sizeof_int $bitof_int
     common     => [ qw(__ even odd min max sqr sum sign product bool invbool listlength bool2text text2bool to_int to_float ikeys member divide is_empty_array_ref is_empty_hash_ref add2hash add2hash_ set_new set_add round round_up round_down first second top uniq translate untranslate warp_text formatAlaTeX formatLines) ],
     functional => [ qw(fold_left compose map_index grep_index map_each grep_each map_tab_hash mapn mapn_ difference2 before_leaving catch_cdie cdie) ],
     file       => [ qw(dirname basename touch all glob_ cat_ symlinkf chop_ mode typeFromMagic) ],
-    system     => [ qw(sync makedev unmakedev psizeof strcpy gettimeofday syscall_ crypt_ getVarsFromSh setVarsInSh) ],
+    system     => [ qw(sync makedev unmakedev psizeof strcpy gettimeofday syscall_ salt getVarsFromSh setVarsInSh) ],
     constant   => [ qw($printable_chars $sizeof_int $bitof_int $SECTORSIZE) ],
 );
 @EXPORT_OK = map { @$_ } values %EXPORT_TAGS;
@@ -222,11 +222,14 @@ sub syscall_ {
     syscall(&{$common::{"SYS_$f"}}, @_) == 0;
 }
 
-
-sub crypt_ {
-    local $_ = sprintf("%2d", (gettimeofday())[1] % 0x40); #- make sure it is 2 char long.
+sub salt($) {
+    my ($nb) = @_;
+    require 'devices.pm';
+    open F, devices::make("random") or die "missing random";
+    my $s; read F, $s, $nb;
+    local $_ = pack "b8" x $nb, unpack "b6" x $nb, $s;
     tr [\0-\x3f] [0-9a-zA-Z./];
-    crypt($_[0], $_)
+    $_;
 }
 
 sub makedev { ($_[0] << 8) | $_[1] }
