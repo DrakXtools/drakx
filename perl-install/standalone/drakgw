@@ -79,7 +79,8 @@ sub start_daemons ()
 
     sys("/etc/rc.d/init.d/$_ start"), sys("/sbin/chkconfig --level 345 $_ on") foreach 'named', 'dhcpd';
     sys("/etc/rc.d/init.d/cups start") if $cups_used;
-    output $drakgw_setup, "INET_SHARING=enabled\n";
+
+    substInFile { s/^INET_SHARING.*\n//; $_ .= "INET_SHARING=enabled\n" if eof } $drakgw_setup;
 }
 
 sub stop_daemons ()
@@ -94,7 +95,7 @@ sub stop_daemons ()
     }
     sys("/sbin/chkconfig --level 345 $_ off") foreach 'named', 'dhcpd';
 
-    output $drakgw_setup, "INET_SHARING=disabled\n";
+    substInFile { s/^INET_SHARING.*\n//; $_ .= "INET_SHARING=disabled\n" if eof } $drakgw_setup;
 }
 
 sub fatal_quit ($)
@@ -275,6 +276,8 @@ if ($kernel_version eq '2.2') {
 $wait_configuring = $in->wait_message(_("Configuring..."), 
 				      _("Configuring scripts, installing software, starting servers..."));
 
+substInFile { s/^INTERFACE.*\n//; $_ .= "INTERFACE=$device\n" if eof } $drakgw_setup;
+
 #- setup the /etc/sysconfig/network-script/ script
 
 my $network_scripts = "/etc/sysconfig/network-scripts";
@@ -439,6 +442,7 @@ echo 1 > /proc/sys/net/ipv4/ip_forward
 #
 /sbin/ipchains -P forward DENY
 /sbin/ipchains -A forward -s $lan_address.0/24 -j MASQ
+/sbin/ipchains -A input -i $device -j ACCEPT
 ));
 chmod 0700, $rc_firewall_22;
 
@@ -638,6 +642,9 @@ Click on Configure to launch the setup wizard.", $setup_state));
 
 #-------------------------------------------------
 #- $Log$
+#- Revision 1.39  2001/04/10 21:33:15  gc
+#- add INTERFACE param in sysconfig parameter for smooth interoperation with bastille-firewall
+#-
 #- Revision 1.38  2001/04/09 18:09:38  yduret
 #- deyvounification : remove some un-useful comments in code
 #-
