@@ -62,13 +62,13 @@ sub checkval { $_[0] && $_[0] ne ' '  ? '*' : ' ' }
 sub ask_fromW {
     my ($o, $common, $l, $l2) = @_;
 
-    if (@$l == 1 && $l->[0]{list} && @{$l->[0]{list}} == 2) {
+    if (@$l == 1 && $l->[0]{list} && @{$l->[0]{list}} == 2 && listlength(map { split "\n" } @{$common->{messages}}) > 20) {
 	#- special ugly case, esp. for license agreement
 	my $e = $l->[0];
 	my $ok_disabled = $common->{callbacks} && delete $common->{callbacks}{ok_disabled};
 	($common->{ok}, $common->{cancel}) = map { may_apply($e->{format}, $_) } @{$e->{list}};
 	do {
-	    ${$e->{val}} = ask_fromW_real($o, $common, [], $l2) ? $common->{ok} : $common->{cancel};
+	    ${$e->{val}} = ask_fromW_real($o, $common, [], $l2) ? $e->{list}[0] : $e->{list}[1];
 	} while $ok_disabled && $ok_disabled->();
 	1;
     } elsif ((any { $_->{type} ne 'button' } @$l) || @$l < 5) {
