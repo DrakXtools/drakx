@@ -256,7 +256,7 @@ sub spawnShell {
 
     ioctl(STDIN, c::TIOCSCTTY(), 0) or warn "could not set new controlling tty: $!";
 
-    exec {"/bin/sh"} "-/bin/sh" or log::l("exec of /bin/sh failed: $!");
+    exec "/bin/sh" or log::l("exec of /bin/sh failed: $!");
 }
 
 sub fsck_option {
