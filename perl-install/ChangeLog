@@ -1,6 +1,45 @@
 2004/01/30  Damien Chaumette  <dchaumette at mandrakesoft.com>
 
 	* standalone/drakconnect: 
+	  - remove not needed $security
+	  - clean dumb foreach repetition (one foreach to rule them all)
+
+2004/01/30  Guillaume Cottenceau  <gc at mandrakesoft.com>
+
+	* ugtk2.pm: hack :( if ' ' is at the beginning of a text section, don't
+	forget it, substitute
+	with an unbreakable space because gtk allocates too much space otherwise
+
+	* install_messages.pm: bump up to 100errata
+
+2004/01/30  Nicolas Planel  <nplanel at mandrakesoft.com>
+
+	* install_steps.pm: add/fix various/agpgart section
+
+2004/01/30  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/nb.po: updated Norwegian file
+
+2004/01/30  Pixel  <pixel at mandrakesoft.com>
+
+	* modules.pm, install_steps.pm: xxx-agp is not loaded at install, so
+	when_load() is not the right place
+
+	* ugtk2.pm: add help method ->iter_each_children for Gtk2::TreeModel
+
+2004/01/30  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* network/netconnect.pm: do not offer to select dhcp client when
+	configuring static interfaces
+	fix crash on module lookup when ifcfg-<intf> file is missing on disk
+	(not yet configured interface case)
+
+	* drakxtools.spec: log one more change in -27mdk
+	9.3-27mdk
+
+2004/01/30  Damien Chaumette  <dchaumette at mandrakesoft.com>
+
+	* standalone/drakconnect: 
 	  - show gateway in ethernet only
 	  - hide gateway Entry in dhcp mode
 
@@ -24639,7 +24678,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.860 2004/01/29 23:15:58 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.861 2004/01/30 14:57:24 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
