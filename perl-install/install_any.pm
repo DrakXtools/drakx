@@ -499,6 +499,7 @@ sub install_urpmi {
     delete $packages->{rpmdb};
 
     #- import pubkey in rpmdb.
+    require URPM::Signature;
     my $db = pkgs::rpmDbOpenForInstall($prefix);
     $packages->parse_pubkeys(db => $db);
     foreach (values %$mediums) {
