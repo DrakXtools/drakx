@@ -793,10 +793,11 @@ sub get_text_coord {
     my @t = split($wrap_char, $text);
     my @t2;
     if ($::isInstall && $::o->{locale}{lang} =~ /ja|zh/) {
+	use locale;
 	@t = map { $_ . $wrap_char } @t;
 	$wrap_char = '';
 	foreach (@t) {
-	    my @c = split('');
+	    my @c = split(/\b/);
 	    my $i = 0;
 	    my $el = '';
 	    while (1) {
