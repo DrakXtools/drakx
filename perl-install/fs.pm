@@ -316,6 +316,7 @@ sub mount_options_unpack {
     my %per_fs = (
 		  iso9660 => [ qw(unhide) ],
 		  vfat => [ qw(umask=0) ],
+		  ntfs => [ qw(umask=0) ],
 		  nfs => [ qw(rsize=8192 wsize=8192) ],
 		  smbfs => [ qw(username= password=) ],
 		  davfs => [ qw(username= password= uid= gid=) ],
@@ -459,8 +460,8 @@ sub set_default_options {
 			       'umask=0' => $security < 3, 'iocharset=' => $iocharset, 'codepage=' => $codepage,
 			      });
     }
-    if (isThisFs('ntfs', $part) || $is_auto) {
-	put_in_hash($options, { 'umask=0' => $security < 3, 'iocharset=' => $iocharset });
+    if (isThisFs('ntfs', $part)) {
+	put_in_hash($options, { ro => 1, 'umask=0' => $security < 3, 'iocharset=' => $iocharset });
     }
     if (isThisFs('iso9660', $part) || $is_auto) {
 	put_in_hash($options, { user => 1, noexec => 0, 'iocharset=' => $iocharset });
