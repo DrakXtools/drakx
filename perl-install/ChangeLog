@@ -1,3 +1,358 @@
+2004/08/05  Olivier Blin <oblin at mandrakesoft.com>
+
+	* standalone/drakclock: if ntp is used, get the new time before updating
+	the hwclock
+	(fix from Emmanuel Blindauer, #10537)
+
+2004/08/05  Pixel  <pixel at mandrakesoft.com>
+
+	* diskdrake/interactive.pm, standalone/bootloader-config: adapt to
+	bootloader functions now using all_hds instead of hds
+
+	* install_steps.pm: adapt to bootloader functions now using all_hds
+	instead of hds
+	pass around $all_hds instead of $hds
+
+	* harddrake/sound.pm: add dmasound_pmac <=> snd-powermac (for ppc,
+	Christiaan Welvaart)
+
+	* keyboard.pm: ppc doesn't use dumpkeys (?) (Christiaan Welvaart)
+
+	* install_steps_gtk.pm: drop Xpmac support
+
+	* detect_devices.pm: isLaptop() special code for ppc
+
+	* bootloader.pm: update yaboot code (based on Christiaan Welvaart patch)
+	/usr/sbin/ofpath seems to need /mnt/sys mounted, and the device must
+	exist (Christiaan Welvaart)
+	fix typos (Christiaan Welvaart)
+	pass around $all_hds instead of $hds
+	create bootloader::allowed_boot_parts() and use it,
+	it allows installing on md0 if using lilo and md0 is raid1
+
+	* Xconfig/various.pm: adapt to bootloader functions now using all_hds
+	instead of hds
+	replaced XFree86 and XFree with Xorg (bugzilla #10531)
+
+	* any.pm: adapt to bootloader functions now using all_hds instead of hds
+	create bootloader::allowed_boot_parts() and use it,
+	it allows installing on md0 if using lilo and md0 is raid1
+
+	* rescue/list.ppc, tools/ppc/mkINSTALLCD, share/list.ppc: update
+	(Christiaan Welvaart)
+
+	* fs/type.pm: "PPC PReP Boot" is an "important" type on ppc
+
+	* Xconfig/card.pm, services.pm, standalone/XFdrake: replaced XFree86 and
+	XFree with Xorg (bugzilla #10531)
+
+	* share/list, share/list.x86_64, share/list.i386: ntfsresize and dmidecode
+	are not needed on ppc (Christiaan Welvaart)
+
+	* install_any.pm: make room on replay/auto_install floppy image before
+	doing anything
+	when replaying, overwrite boot.msg with an empty message to win some
+	space
+	(it was only done in non-replay mode)
+	adapt to bootloader functions now using all_hds instead of hds
+	fix backward compatibility {type} field in partitions and manualFstab
+
+2004/08/05  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* standalone/draksec: looks like patch -l did wrong things :-(
+
+	* network/adsl.pm: quiet perl_checker
+	(adsl_conf_backend) fix error message
+
+	* share/rpmsrate: install needed alsa tools depending on present sound
+	cards
+
+	* harddrake/sound.pm: make it clearer by factorizing arch() call
+	fix PPC entries
+	add support for ALSA on PPC and SPARC
+	align sound driver entries
+	update sound drivers list
+
+2004/08/04  Daouda Lo  <daouda at mandrakesoft.com>
+
+	* share/net_applet.xinit: 
+	  - added net_applet xinit file to automate launch of net_applet in KDE,
+	GNOME and IceWM
+
+	* drakxtools.spec: 
+	  - do not expand shell vars
+	  - do not forget to package xinit.d net_applet file
+	  - automatically launch net_applet for KDE, GNOME and IceWM
+
+2004/08/04  Olivier Blin <oblin at mandrakesoft.com>
+
+	* network/isdn.pm: do not write cnx_script anymore (isdn4linux service
+	will modprobe the
+	driver, ibod service is started at boot, ifup/ifdown handle the dial)
+
+	* mdk-stage1/directory.c: prefer to use a ramdisk for disk installs
+
+	* network/tools.pm, network/ethernet.pm, standalone/drakconnect: kill
+	set_cnx_script usage, replace cnx_scripts with ifup/ifdown
+
+	* network/adsl.pm: catch die from modules::load
+	add modules arrays and use modules::load to be able to load modules
+	from modules.cz files, load these modules when not in standalone mode
+	(they're needed for install and Move)
+
+	* network/netconnect.pm: fix wording
+	do not force kppp installation, it will be installed by
+	modem::ppp_configure if kdebase is installed,
+	else ifup/ifdown scripts are enough
+	kill set_cnx_script usage, replace cnx_scripts with ifup/ifdown
+	write a cnx_script for adsl connexions too (so that drakconnect can
+	establish the connexion), add a FIXME comment to remind it is bad
+
+2004/08/04  Pixel  <pixel at mandrakesoft.com>
+
+	* fs/get.pm, fs/mount_options.pm: return a true value for perl
+
+	* standalone/bootloader-config: don't allow unknown kernel names to mess
+	everything
+
+	* bootloader.pm: 
+	  - same_entries() doesn't look anymore at kernel options
+	(it tends to create stupid alt_xxx entries)
+	  - fix creation of labels alt2_alt_xxx (will now be alt2_xxx)
+	  - don't create bad "linux-nonfb" for kernel-win4lin
+	try to keep the order of kernel options (to help same_entries())
+	handle win4lin kernels
+
+	* any.pm: .gnome2/wmrc and .wmrc are obsolete, it is now .dmrc
+	(nb: beware, one must write 07IceWM instead of IceWM, same for others)
+	don't set /etc/sysconfig/desktop anymore, configure ~/.wmrc,
+	~/.gnome2/gdm and ~/.desktop instead
+
+	* rescue/list: replace /sbin/mkraid with /sbin/mdadm (as told on cooker by
+	Luca Berra)
+
+2004/08/04  Rafael Garcia-Suarez <rgarciasuarez at mandrakesoft.com>
+
+	* http.pm: Verify that regexp matched
+
+2004/08/04  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* Makefile.drakxtools: fix build
+
+	* ugtk2.pm (Gtk2::ComboBox->set_text) actually print a warning if we
+	failled
+	let's system wide config not override user's locale
+
+	* lang.pm: add x-unikey support for Vietnamese
+	switch korean to scim-hangul IM
+	(write) if one override default IM, remove any setting from default IM
+	(hint:
+	some IM configurations do not have all fields set...)
+	(read) fix IM reading
+
+	* share/rpmsrate: add x-unikey support for Vietnamese
+	include fcitx IM too
+	ensure alternative IMs get in in the isos
+	switch korean to scim-hangul IM
+	uim is already installed if needed depending on locale
+	install xvnkb IM for vietnamese
+	install ami IM only for korean
+
+	* network/adsl.pm: log module loading faillure
+
+	* drakxtools.spec: 10.1-0.4mdk
+	update 10.1-0.3mdk'log (thx to build issue...)
+	10.1-0.3mdk
+
+	* Makefile: fix build
+	remove unused net_applet.desktop
+
+	* interactive/gtk.pm (ask_fromW) actually honor default value
+
+	* standalone/draksec: perl_checker cleanup
+	  - upcase fields values (and btw reduce the number of strings to
+	translate :-))
+	  - simplify translating
+
+2004/08/03  jjorge
+
+	* share/po/pt.po: error?
+
+2004/08/03  Olivier Blin <oblin at mandrakesoft.com>
+
+	* share/fonts.tar.bz2: add missing fonts.conf (with Kacst-Qr entries)
+
+2004/08/03  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/fonts.tar.bz2: oops, /etc/fonts.conf missing from tarball
+	updted fonts-cache file
+
+2004/08/03  Pixel  <pixel at mandrakesoft.com>
+
+	* install_steps_interactive.pm: move mount options related stuff from
+	fs.pm to newly created fs/mount_options.pm
+	  - fs::set_all_default_options() ->
+	fs::mount_options::set_all_default()
+	  - fs::mount_options_pack() -> fs::mount_options::pack()
+	  - fs::mount_options_unpack() -> fs::mount_options::unpack()
+	  - fs::rationalize_options() -> fs::mount_options::rationalize()
+	  - fs::set_default_options() -> fs::mount_options::set_default()
+	  - fs::mount_options() -> fs::mount_options::list()
+	  - fs::mount_options_help() -> fs::mount_options::help()
+	many functions in fsedit don't modify anything, they are simply
+	accessors.
+	create fs::get and move them into it
+	  - device2part(), up_mount_point() moved from fs to fs::get
+	  - part2hd(), file2part(), has_mntpoint(), mntpoint2part(),
+	empty_all_hds() moved from fsedit to fs::get
+	  - fsedit::get_root() -> fs::get::root()
+	  - fsedit::get_root_() -> fs::get::root_()
+	  - fsedit::get_really_all_fstab() -> fs::get::really_all_fstab()
+	  - fsedit::get_all_fstab_and_holes() -> fs::get::fstab_and_holes()
+	  - fsedit::get_all_fstab() -> fs::get::fstab()
+	  - fsedit::get_all_holes() -> fs::get::holes()
+	  - fsedit::all_free_space -> fs::get::free_space()
+	  - fsedit::get_really_all_fstab() -> fs::get::really_all_fstab()
+	
+	  - fsedit::get_fstab_and_holes() -> fs::get::hds_fstab_and_holes()
+	  - fsedit::get_holes() -> fs::get::hds_holes()
+	  - fsedit::get_fstab() -> fs::get::hds_fstab()
+	  - fsedit::free_space() -> fs::get::hds_free_space()
+	
+	  - fsedit::get_visible_fstab() unused, removed
+	authentication::kind2description() has changed and its name is
+	missleading :-(
+	keeping it for now and adapt install_steps_interactive::setRootPassword
+	along what's done in drakauth
+	authentication::kind2description() has changed and its name is
+	missleading :-(
+	keeping it for now and adapt install_steps_interactive::setRootPassword
+	along what's done in drakauth
+
+	* fs/format.pm: add CVS $Id:
+	many functions in fsedit don't modify anything, they are simply
+	accessors.
+	create fs::get and move them into it
+	  - device2part(), up_mount_point() moved from fs to fs::get
+	  - part2hd(), file2part(), has_mntpoint(), mntpoint2part(),
+	empty_all_hds() moved from fsedit to fs::get
+	  - fsedit::get_root() -> fs::get::root()
+	  - fsedit::get_root_() -> fs::get::root_()
+	  - fsedit::get_really_all_fstab() -> fs::get::really_all_fstab()
+	  - fsedit::get_all_fstab_and_holes() -> fs::get::fstab_and_holes()
+	  - fsedit::get_all_fstab() -> fs::get::fstab()
+	  - fsedit::get_all_holes() -> fs::get::holes()
+	  - fsedit::all_free_space -> fs::get::free_space()
+	  - fsedit::get_really_all_fstab() -> fs::get::really_all_fstab()
+	
+	  - fsedit::get_fstab_and_holes() -> fs::get::hds_fstab_and_holes()
+	  - fsedit::get_holes() -> fs::get::hds_holes()
+	  - fsedit::get_fstab() -> fs::get::hds_fstab()
+	  - fsedit::free_space() -> fs::get::hds_free_space()
+	
+	  - fsedit::get_visible_fstab() unused, removed
+
+	* fs/mount_options.pm, network/smbnfs.pm, network/smb.pm: move mount
+	options related stuff from fs.pm to newly created fs/mount_options.pm
+	  - fs::set_all_default_options() ->
+	fs::mount_options::set_all_default()
+	  - fs::mount_options_pack() -> fs::mount_options::pack()
+	  - fs::mount_options_unpack() -> fs::mount_options::unpack()
+	  - fs::rationalize_options() -> fs::mount_options::rationalize()
+	  - fs::set_default_options() -> fs::mount_options::set_default()
+	  - fs::mount_options() -> fs::mount_options::list()
+	  - fs::mount_options_help() -> fs::mount_options::help()
+
+	* tools/hd_grub.cgi: better description
+
+	* diskdrake/interactive.pm, install_steps.pm, fs.pm, fsedit.pm,
+	standalone/diskdrake, standalone/drakupdate_fstab: move mount options
+	related stuff from fs.pm to newly created fs/mount_options.pm
+	  - fs::set_all_default_options() ->
+	fs::mount_options::set_all_default()
+	  - fs::mount_options_pack() -> fs::mount_options::pack()
+	  - fs::mount_options_unpack() -> fs::mount_options::unpack()
+	  - fs::rationalize_options() -> fs::mount_options::rationalize()
+	  - fs::set_default_options() -> fs::mount_options::set_default()
+	  - fs::mount_options() -> fs::mount_options::list()
+	  - fs::mount_options_help() -> fs::mount_options::help()
+	many functions in fsedit don't modify anything, they are simply
+	accessors.
+	create fs::get and move them into it
+	  - device2part(), up_mount_point() moved from fs to fs::get
+	  - part2hd(), file2part(), has_mntpoint(), mntpoint2part(),
+	empty_all_hds() moved from fsedit to fs::get
+	  - fsedit::get_root() -> fs::get::root()
+	  - fsedit::get_root_() -> fs::get::root_()
+	  - fsedit::get_really_all_fstab() -> fs::get::really_all_fstab()
+	  - fsedit::get_all_fstab_and_holes() -> fs::get::fstab_and_holes()
+	  - fsedit::get_all_fstab() -> fs::get::fstab()
+	  - fsedit::get_all_holes() -> fs::get::holes()
+	  - fsedit::all_free_space -> fs::get::free_space()
+	  - fsedit::get_really_all_fstab() -> fs::get::really_all_fstab()
+	
+	  - fsedit::get_fstab_and_holes() -> fs::get::hds_fstab_and_holes()
+	  - fsedit::get_holes() -> fs::get::hds_holes()
+	  - fsedit::get_fstab() -> fs::get::hds_fstab()
+	  - fsedit::free_space() -> fs::get::hds_free_space()
+	
+	  - fsedit::get_visible_fstab() unused, removed
+
+	* loopback.pm, any.pm, fs/get.pm, diskdrake/removable.pm, bootloader.pm,
+	network/netconnect.pm, diskdrake/dav.pm, diskdrake/hd_gtk.pm,
+	standalone/drakboot, lvm.pm, install2.pm, network/tools.pm,
+	diskdrake/smbnfs_gtk.pm, install_interactive.pm, install_any.pm,
+	standalone/bootloader-config, partition_table.pm: many functions in
+	fsedit don't modify anything, they are simply accessors.
+	create fs::get and move them into it
+	  - device2part(), up_mount_point() moved from fs to fs::get
+	  - part2hd(), file2part(), has_mntpoint(), mntpoint2part(),
+	empty_all_hds() moved from fsedit to fs::get
+	  - fsedit::get_root() -> fs::get::root()
+	  - fsedit::get_root_() -> fs::get::root_()
+	  - fsedit::get_really_all_fstab() -> fs::get::really_all_fstab()
+	  - fsedit::get_all_fstab_and_holes() -> fs::get::fstab_and_holes()
+	  - fsedit::get_all_fstab() -> fs::get::fstab()
+	  - fsedit::get_all_holes() -> fs::get::holes()
+	  - fsedit::all_free_space -> fs::get::free_space()
+	  - fsedit::get_really_all_fstab() -> fs::get::really_all_fstab()
+	
+	  - fsedit::get_fstab_and_holes() -> fs::get::hds_fstab_and_holes()
+	  - fsedit::get_holes() -> fs::get::hds_holes()
+	  - fsedit::get_fstab() -> fs::get::hds_fstab()
+	  - fsedit::free_space() -> fs::get::hds_free_space()
+	
+	  - fsedit::get_visible_fstab() unused, removed
+
+2004/08/03  Rafael Garcia-Suarez <rgarciasuarez at mandrakesoft.com>
+
+	* pkgs.pm, install_any.pm: A small variable renaming: use $medium for
+	hashes and $medium_name for strings
+
+	* share/po/fr.po: Small typos
+
+	* share/po/pt.po: pt.po was corrupted
+
+2004/08/03  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* standalone/draksplash2: help perl_checker
+
+	* ugtk2.pm (create_dialog) only add space between icon and text if there's
+	actually an icon
+	(create_notebook) reuse gtkappend_page()
+	(create_dialog) do not show separator by default
+	(_create_dialog) sanitize dialogs/popups:
+	  - set a border around it
+	  - add more space between the icon and the text
+	(gtkappend_page) name parameters, enabling perl_checker to check
+	callers' call
+	signature
+	(create_packtable) set a border around packtables
+
+	* standalone/draksec: reuse gtkappend_page()
+
+	* standalone/drakups (add_device_wizard) fix string (Joe Brower)
+
 2004/08/03  Olivier Blin <oblin at mandrakesoft.com>
 
 	* share/fonts.tar.bz2: add missing fonts.conf (with Kacst-Qr entries)
@@ -33761,7 +34116,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.940 2004/08/02 11:07:49 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.941 2004/08/03 02:44:37 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
