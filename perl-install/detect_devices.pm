@@ -51,33 +51,39 @@ sub zips        {
     } raw_zips();
 }
 
-sub cdroms__faking_ide_scsi {
-    my @l = cdroms();
-    return @l if $::isStandalone;
-    if (my @l_ide = grep { $_->{bus} eq 'ide' && isBurner($_) } @l) {
+sub cdroms__faking_ide_scsi { grep { $_->{media_type} eq 'cdrom' } cdroms_and_zips__faking_ide_scsi() }
+sub cdroms_and_zips__faking_ide_scsi {
+    my @l = grep { $_->{media_type} eq 'cdrom' || member($_->{media_type}, 'fd', 'hd') && isZipDrive($_) } get();
+
+    if (my @l_need_fake = grep { !$::isStandalone && $_->{bus} eq 'ide' && !($_->{media_type} eq 'cdrom' && !isBurner($_)) } @l) {
 	require modules;
 	modules::add_probeall('scsi_hostadapter', 'ide-scsi');
-	my $nb = 1 + max(-1, map { $_->{device} =~ /scd(\d+)/ } @l);
-	foreach my $e (@l_ide) {	    
-	    log::l("IDEBurner: $e->{device}");
-	    $e->{device} = "scd" . $nb++;
-	}
-    }
-    @l;
-}
-sub zips__faking_ide_scsi {
-    my @l = raw_zips();
-    if (my @l_ide = grep { $_->{bus} eq 'ide' && $::isInstall } @l) {
-	require modules;
-	modules::add_probeall('scsi_hostadapter', 'ide-scsi');
-	my $nb = 1 + max(-1, map { if_($_->{device} =~ /sd(\w+)/, ord($1) - ord('a')) } getSCSI());
-	foreach my $e (@l_ide) {	    
-	    my $faked = "sd" . chr(ord('a') + $nb++);
-	    log::l("IDE Zip: $e->{device} => $faked");
+
+	my $nb_cdrom = 1 + max(-1, map { $_->{device} =~ /scd(\d+)/ } @l);
+	my $nb_zip = 1 + max(-1, map { if_($_->{device} =~ /sd(\w+)/, ord($1) - ord('a')) } getSCSI());
+	my $scsi_hostadapters = modules::get_probeall('scsi_hostadapter');
+	my $devfs_host = find_index { $_ eq 'ide-scsi' } @$scsi_hostadapters;
+	my $devfs_id = 0;
+
+	foreach my $e (@l_need_fake) {
+	    $e->{devfs_prefix} = sprintf('scsi/host%d/bus0/target%d/lun0', $devfs_host, $devfs_id++);
+	    my $faked;
+	    if ($e->{media_type} eq 'cdrom') {
+		$faked = "scd" . $nb_cdrom++;
+		log::l("IDEBurner: $e->{device} => $faked and $e->{devfs_prefix}");
+	    } else {
+		$faked = "sd" . chr(ord('a') + $nb_zip++);
+		log::l("IDE Zip: $e->{device} => $faked and $e->{devfs_prefix}");
+	    }
 	    $e->{device} = $faked;
 	}
+	get_devfs_devices(@l_need_fake);
     }
-    map { $_->{device} .= 4; $_ } @l;
+    foreach (@l) {
+	$_->{device} .= 4 if $_->{media_type} ne 'cdrom';
+	$_->{devfs_device} = $_->{devfs_prefix} . '/' . ($_->{media_type} eq 'cdrom' ? 'cd' : 'part4');
+    }
+    @l;
 }
 
 sub floppies() {
@@ -99,7 +105,7 @@ sub floppy { first(floppies_dev()) }
 #- example ls120, model = "LS-120 SLIM 02 UHD Floppy"
 
 sub removables {
-    floppies(), cdroms__faking_ide_scsi(), zips__faking_ide_scsi();
+    floppies(), cdroms_and_zips__faking_ide_scsi();
 }
 
 sub get_sys_cdrom_info {
