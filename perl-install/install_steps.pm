@@ -268,8 +268,11 @@ sub choosePackages {
 	pkgs::unselectAllPackages($packages);
 	pkgs::selectPackage($o->{packages}, pkgs::packageByName($o->{packages}, $_) || next) foreach @{$o->{default_packages}};
 
-	add2hash_($o, { compssListLevel => $::expert ? 5 : 4 }) unless $::auto_install;
-	pkgs::setSelectedFromCompssList($packages, $o->{compssUsersChoice}, $o->{compssListLevel}, $availableCorrected) if exists $o->{compssListLevel};
+	unless ($::expert) {
+	    add2hash_($o, { compssListLevel => 5 }) unless $::auto_install;
+	    exists $o->{compssListLevel}
+	      and pkgs::setSelectedFromCompssList($packages, $o->{compssUsersChoice}, $o->{compssListLevel}, $availableCorrected);
+	}
     }
 
     $availableCorrected;
