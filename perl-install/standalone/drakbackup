@@ -63,18 +63,9 @@ if ("@ARGV" =~ /--help|-h/) {
 my $default = 0;
 my $build_cd = 0;
 my $build_floppy = 0;
-my $comp_mode = 0;
 my $mode = 0;
-my $replace = 0;
-my $update = 0;
 my $conf_file = 0;
 my @list_arg = ();
-my @sys_files ;
-my @home_files;
-my @other_files;
-my $save_path;
-my $option_replace = 0;
-my $option_update = 0;
 my $windows = 0;
 my $central_widget;
 my $central_widget_save;
@@ -83,18 +74,28 @@ my $up_box;
 my $box;
 my $backup_choice = 0;
 
-
-# PATH  & Global variables.
+# config. FILES ->  PATH  & Global variables.
+my @sys_files = ("/etc");
+	# fixme check system to find all users.
+my @home_files = ("/home/seb") ;
+my @other_files = ("/var/www") ;
 my $cfg_file = "/etc/drakconf/drakbackup/drakbackup.conf";
+my $save_path = "/var/drakbackup";
+my $option_replace = 0;
+my $option_update = 0;
+my $comp_mode = "tar.gz";
+my $backup_mode = 0; # 1: save all files don't remove if remove on system.
 
+
+my $DEBUG = 1;
 
 
 foreach (@ARGV) {
     /--default/ and $default = 1, $mode=-1;
     /--build_cd/ and $build_cd = 1, $mode=-1;
     /--build_floppy/ and $build_floppy = 1, $mode=-1;
-    /--replace|-r/ and $replace = 1, $mode=-1;
-    /--update|-u/ and $update = 1, $mode=-1;
+    /--replace|-r/ and $option_replace = 1, $mode=-1;
+    /--update|-u/ and $option_update = 1, $mode=-1;
     /--conf_file/ and $mode = 0, next;
 #    $mode == 0 and push $conf_file, $_;
     /--list/ and $mode = 1, next;
@@ -112,44 +113,29 @@ sub debug {
 }
 
 
+sub set_defaultvar {
+
+}
+
 
 sub read_conf_file {
-    foreach (cat_("$cfg_file")) {
-	if (/^SYS_FILES/) {  
+    if (-e $cfg_file) {
+	open CONF_FILE, "<"."$cfg_file" || die;
+	while (<CONF_FILE>) {
+	    next unless /\S/;
+	    next if /^#/;
 	    chomp;
-	    s/^SYS_FILES=//gi;
-	    @sys_files = split(' ', $_ );
+	    if (/^SYS_FILES/)      { s/^SYS_FILES=//gi;   @sys_files = split(' ', $_ );	}
+	    if (/^HOME_FILES/)     { s/^HOME_FILES=//gi;  @home_files = split(' ', $_ );	}
+	    if (/^OTHER_FILES/)    { s/^OTHER_FILES=//gi; @other_files = split(' ', $_ );	}
+	    if (/^PATH_TO_SAVE/)   { s/^PATH_TO_SAVE=//gi; $save_path = $_;	}
+	    if (/^OPTION_REPLACE/) { $option_replace = 1; $option_update  = 0; }
+	    if (/^OPTION_UPDATE/)  { $option_replace = 0; $option_update  = 1; }
+	    if (/^OPTION_COMP/)    { s/^OPTION_COMP=//gi; /TAR.GZ/ and  $comp_mode = 0; /TAR.BZ2/ and $comp_mode = 1; }
 	}
-	if (/^HOME_FILES/)  {
-	    chomp;
-	    s/^HOME_FILES=//gi;
-	    @home_files = split(' ', $_ );
-	}
-	if (/^OTHER_FILES/)  {
-	    chomp;
-	    s/^OTHER_FILES=//gi;
-	    @other_files = split(' ', $_ );
-	}
-	if (/^PATH_TO_SAVE/) {
-	    chomp;
-	    $save_path = $_;
-	}
-	if (/^OPTION_REPLACE/){
-	    $option_replace = 1;
-	    $option_update  = 0;
-	}
-        if (/^OPTION_UPDATE/){
-	    $option_replace = 0;
-	    $option_update  = 1;
-	}
-	if (/^OPTION_COMP/) {
-	    chomp;
-	    s/^OPTION_COMP=//gi;
-	    /TAR.GZ/ and  $comp_mode = 0;
-	    /TAR.BZ2/ and $comp_mode = 1;
-	}
+	close CONF_FILE;
     }
-    debug; 
+    $DEBUG and debug; 
 }
 
 $build_floppy || $build_cd || $default || @list_arg || $conf_file ? backend_mod() : interactive_mode();
