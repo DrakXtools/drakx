@@ -1077,7 +1077,7 @@ notation (for example, 1.2.3.4).")),
                             return 1;
                         }
                     },
-                    post => sub { return 'ndiswrapper_intf' },
+                    next => 'ndiswrapper_intf',
                    },
 
                    ndiswrapper_intf =>
