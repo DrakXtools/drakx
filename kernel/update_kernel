@@ -134,7 +134,8 @@ fi
 [ -n "$main" -a -e $ALL_KERNELS/$main ] || {
     cd $ALL_KERNELS
     main=$(echo 2.6* | sed 's/.* //')
-    [ -n "$main" ] || main=$(echo 2.4* | sed 's/.* //')
+    [ -e "$main" ] || main=$(echo 2.4* | sed 's/.* //')
+    [ -e "$main" ] || { echo "no kernel installed in $ALL_KERNELS"; exit 1; }
     echo "Choosing $main"
     echo $main > .main
     cd ..
