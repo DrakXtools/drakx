@@ -807,7 +807,7 @@ sub setRootPassword {
     $o->ask_from_entries_refH('',
 			     _("Authentification NIS"),
 			     [ { label => _("NIS Domain"), val => \ ($o->{netc}{NISDOMAIN} ||= $o->{netc}{DOMAINNAME}) },
-			       { label => _("NIS Server"), val => \$o->{authentication}{NIS}, list => ["broadcast"] },
+			       { label => _("NIS Server"), val => \$o->{authentication}{NIS}, list => ["broadcast"], not_edit => 0 },
 			     ]) if $nis;
     install_steps::setRootPassword($o);
 }
