@@ -15,7 +15,7 @@ $(DIRS):
 install:
 	install make_mdkinst_stage2 gencompss $(ROOTDEST)/misc
 	cd /usr/bin ; install build_archive $(ROOTDEST)/misc || { echo "build_archive is missing"; exit 1; }
-	cd /usr/bin ; install gendepslist2 rpm2header genhdlist_cz2 $(ROOTDEST)/misc || { echo "install rpmtools first!" ; exit 1; }
+	cd /usr/bin ; install mkhdlist gendepslist2 rpm2header genhdlist_cz2 $(ROOTDEST)/misc || { echo "install rpmtools first!" ; exit 1; }
 	mkdir -p $(DEST)/usr/bin
 
 xhost+: %: %.c
