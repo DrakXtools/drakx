@@ -197,17 +197,11 @@ sub clean_postinstall_rpms() {
 #-######################################################################################
 sub kernelVersion {
     my ($o) = @_;
-    if (my $link = (arch() !~ /ppc/) ?
-	readlink("$o->{prefix}/boot/vmlinuz") :
-	readlink("$o->{prefix}/boot/vmlinux")) {
-	first($link =~ /-(.*mdk)/);
-    } else {
-	require pkgs;
-	my $p = pkgs::packageByName($o->{packages}, "kernel");
-	$p  ||= pkgs::packageByName($o->{packages}, "kernel22");
-	$p or die "I couldn't find the kernel package!";
-	pkgs::packageVersion($p) . "-" . pkgs::packageRelease($p);
-    }
+    require pkgs;
+    my $p = pkgs::packageByName($o->{packages}, "kernel");
+    $p  ||= pkgs::packageByName($o->{packages}, "kernel22");
+    $p or die "I couldn't find the kernel package!";
+    pkgs::packageVersion($p) . "-" . pkgs::packageRelease($p);
 }
 
 
