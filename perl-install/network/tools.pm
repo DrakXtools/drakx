@@ -200,8 +200,7 @@ sub convert_wep_key_for_iwconfig {
     #- else consider the key as hexadecimal, do not strip dashes 
     #- always quote the key as string
     my ($key) = @_;
-    unquotify \$key;
-    member(length($key), (5, 13)) ? qq("s:$key") : qq("$key");
+    member(length($key), (5, 13)) ? "s:$key" : "$key";
 }
 
 sub get_wep_key_from_iwconfig {
