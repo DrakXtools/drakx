@@ -58,7 +58,7 @@ sub ideGetDevices {
 
     -r "/proc/ide" or die "sorry, /proc/ide not available, seems like you have a pre-2.2 kernel\n => not handled yet :(";
 
-    # Great. 2.2 kernel, things are much easier and less error prone. 
+    #- Great. 2.2 kernel, things are much easier and less error prone. 
     foreach my $d (glob_('/proc/ide/hd*')) {
 	my ($t) = chop_(cat_("$d/media"));
 	my $type = $ {{disk => 'hd', cdrom => 'cdrom', tape => 'tape', floppy => 'fd'}}{$t} or next;
@@ -93,8 +93,8 @@ sub dac960GetDevices {
     local *F;
     open F, $file or die "Failed to open $file: $!";
 
-    # We are looking for lines of this format:DAC960#0:
-    # /dev/rd/c0d0: RAID-7, Online, 17928192 blocks, Write Thru0123456790123456789012    
+    #- We are looking for lines of this format:DAC960#0:
+    #- /dev/rd/c0d0: RAID-7, Online, 17928192 blocks, Write Thru0123456790123456789012    
     foreach (<F>) {
 	my ($devicename, $info) = m|/dev/rd/(.*?): (.*?),| or next;
 	push @idi, { info => $info, type => 'hd', devicename => $devicename }; 

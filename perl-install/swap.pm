@@ -21,9 +21,9 @@ my $signature_page = "\0" x $pagesize;
 
 my $V0_MAX_PAGES = 8 * $pagesize - 10;
 my $V1_OLD_MAX_PAGES = int 0x7fffffff / $pagesize - 1;
-my $V1_MAX_PAGES = $V1_OLD_MAX_PAGES; # (1 << 24) - 1;
+my $V1_MAX_PAGES = $V1_OLD_MAX_PAGES; #- (1 << 24) - 1;
 my $MAX_BADPAGES = int ($pagesize - 1024 - 128 * $common::sizeof_int - 10) / $common::sizeof_int;
-my $signature_format_v1 = "x1024 I I I I125"; # bootbits, version, last_page, nr_badpages, padding
+my $signature_format_v1 = "x1024 I I I I125"; #- bootbits, version, last_page, nr_badpages, padding
 
 1;
 
@@ -52,7 +52,7 @@ sub check_blocks {
 	vec($signature_page, $i, 1) = bool($last_read_ok) if $version == 0;
     }
 
-    # TODO: add interface
+    #- TODO: add interface
     
     $badpages and log::l("$badpages bad pages\n");
     return $badpages;
@@ -114,7 +114,7 @@ sub make($;$) {
 
     syswrite(F, substr($signature_page, $offset)) or die "unable to write signature page: $!";
 
-    # A subsequent swapon() will fail if the signature is not actually on disk. (This is a kernel bug.)
+    #- A subsequent swapon() will fail if the signature is not actually on disk. (This is a kernel bug.)
     syscall_('fsync', fileno(F)) or die "fsync failed: $!";
     close F;
 }

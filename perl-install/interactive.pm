@@ -8,24 +8,24 @@ use strict;
 #-######################################################################################
 use common qw(:common :functional);
 
-# heritate from this class and you'll get all made interactivity for same steps.
-# for this you need to provide 
-# - ask_from_listW(o, title, messages, arrayref, default) returns one string of arrayref
-# - ask_many_from_listW(o, title, messages, arrayref, arrayref2) returns many strings of arrayref
-#
-# where
-# - o is the object
-# - title is a string
-# - messages is an refarray of strings
-# - default is an optional string (default is in arrayref)
-# - arrayref is an arrayref of strings
-# - arrayref2 contains booleans telling the default state, 
-#
-# ask_from_list and ask_from_list_ are wrappers around ask_from_biglist and ask_from_smalllist
-#
-# ask_from_list_ just translate arrayref before calling ask_from_list and untranslate the result
-#
-# ask_from_listW should handle differently small lists and big ones.
+#- heritate from this class and you'll get all made interactivity for same steps.
+#- for this you need to provide 
+#- - ask_from_listW(o, title, messages, arrayref, default) returns one string of arrayref
+#- - ask_many_from_listW(o, title, messages, arrayref, arrayref2) returns many strings of arrayref
+#-
+#- where
+#- - o is the object
+#- - title is a string
+#- - messages is an refarray of strings
+#- - default is an optional string (default is in arrayref)
+#- - arrayref is an arrayref of strings
+#- - arrayref2 contains booleans telling the default state, 
+#-
+#- ask_from_list and ask_from_list_ are wrappers around ask_from_biglist and ask_from_smalllist
+#-
+#- ask_from_list_ just translate arrayref before calling ask_from_list and untranslate the result
+#-
+#- ask_from_listW should handle differently small lists and big ones.
 
 
 
@@ -119,9 +119,9 @@ sub ask_from_entries($$$$;$%) {
       map { $$_ } @$val : 
       undef;
 }
-# can get a hash of callback: focus_out changed and complete
-# moreove if you pass a hash with a field list -> combo
-# if you pass a hash with a field hidden -> emulate stty -echo
+#- can get a hash of callback: focus_out changed and complete
+#- moreove if you pass a hash with a field list -> combo
+#- if you pass a hash with a field hidden -> emulate stty -echo
 sub ask_from_entries_ref($$$$;$%) {
     my ($o, $title, $message, $l, $val, %callback) = @_;
     
@@ -146,14 +146,15 @@ sub wait_message($$$) {
     my $w = $o->wait_messageW($title, [ _("Please wait"), @$message ]);
     my $b = before_leaving { $o->wait_message_endW($w) };
 
-    # enable access through set
+    #- enable access through set
     common::add_f4before_leaving(sub { $o->wait_message_nextW($_[1], $w) }, $b, 'set');
     $b;
 }
 
 sub kill {
     my ($o) = @_;
-    while ($o->{before_killing} && @interactive::objects > $o->{before_killing}) {
+    $o->{before_killing} ||= 0;
+    while (@interactive::objects > $o->{before_killing}) {
 	my $w = pop @interactive::objects;
 	$w->destroy;
     }
@@ -163,4 +164,4 @@ sub kill {
 #-######################################################################################
 #- Wonderful perl :(
 #-######################################################################################
-1; # 
+1;

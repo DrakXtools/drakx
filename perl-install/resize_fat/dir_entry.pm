@@ -46,7 +46,7 @@ sub is_special_entry($) {
     my ($entry) = @_;
     my ($c) = unpack "C", $entry->{name};
 
-    # skip empty slots, deleted files, and 0xF6?? (taken from kernel)
+    #- skip empty slots, deleted files, and 0xF6?? (taken from kernel)
     $c == 0 || $c == $DELETED_FLAG || $c == 0xF6 and return 1;
 
     $entry->{attributes} == $VFAT_ATTR and return 1;
@@ -54,7 +54,7 @@ sub is_special_entry($) {
 }
 
 
-# return true if entry has been modified
+#- return true if entry has been modified
 sub remap {
     my ($fat_remap, $entry) = @_;
 	
@@ -63,9 +63,9 @@ sub remap {
     my $cluster = get_cluster($entry);
     my $new_cluster = $fat_remap->[$cluster];
 
-    #print "remapping cluster ", get_first_cluster($fs, $entry), " to $new_cluster";
+    #-print "remapping cluster ", get_first_cluster($fs, $entry), " to $new_cluster";
 
-    $new_cluster == $cluster and return; # no need to modify
+    $new_cluster == $cluster and return; #- no need to modify
 
     set_cluster($entry, $new_cluster);
     1;

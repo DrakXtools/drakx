@@ -30,11 +30,11 @@ sub findSCSIcdrom {
 
 sub setupCDdevice {
     my ($cddev, $dl) = @_;
-    #TODO
+    #-TODO
 }
 
 sub removeCDmodule {
-    # this wil fail silently if no CD module has been loaded 
+    #- this wil fail silently if no CD module has been loaded 
     removeDeviceDriver('cdrom');
     1;
 }

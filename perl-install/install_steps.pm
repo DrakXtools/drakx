@@ -52,17 +52,14 @@ sub enteringStep($$) {
 	    my @l = ref $needs ? @$needs : $needs;
 	    $reachable = min(map { $o->{steps}{$_}{done} || 0 } @l);
 	}
-	$o->{steps}{$s}{reachable} = 1, $o->step_set_reachable($s) if $reachable; 
+	$o->{steps}{$s}{reachable} = 1 if $reachable; 
     }
 }
 sub leavingStep($$) {
     my ($o, $step) = @_;
     log::l("step `$step' finished");
 
-    unless ($o->{steps}{$step}{redoable}) {
-	$o->{steps}{$step}{reachable} = 0;
-	$o->step_set_unreachable($step);
-    }
+    $o->{steps}{$step}{reachable} = $o->{steps}{$step}{redoable};
 
     while (my $f = shift @{$o->{steps}{$step}{toBeDone} || []}) {
 	eval { &$f() };
@@ -149,7 +146,7 @@ sub installPackages($$) {
 sub afterInstallPackages($) {
     my ($o) = @_;
 
-    #  why not? cuz weather is nice today :-) [pixel]
+    #-  why not? cuz weather is nice today :-) [pixel]
     sync(); sync();
 
 #    configPCMCIA($o->{rootPath}, $o->{pcmcia});
@@ -175,7 +172,7 @@ sub configureNetwork($) {
     network::add2hosts("$etc/hosts", $o->{netc}{HOSTNAME}, map { $_->{IPADDR} } @{$o->{intf}});
     network::sethostname($o->{netc}) unless $::testing;
     network::addDefaultRoute($o->{netc}) unless $::testing;
-    #res_init();		# reinit the resolver so DNS changes take affect     
+    #-res_init();		# reinit the resolver so DNS changes take affect     
 }
 
 #------------------------------------------------------------------------------
@@ -265,7 +262,7 @@ sub createBootdisk($) {
     my @l = detect_devices::floppies();
 
     $dev = shift @l || die _("no floppy available") 
-      if $dev eq "1"; # special case meaning autochoose
+      if $dev eq "1"; #- special case meaning autochoose
 
     return if $::testing;
 
@@ -291,4 +288,4 @@ sub exitInstall {}
 #-######################################################################################
 #- Wonderful perl :(
 #-######################################################################################
-1; # 
+1;

@@ -1,54 +1,34 @@
 style "default-font" 
 {
-       fontset = "-*-helvetica-medium-r-normal--*-*-*-*-*-*-*-*,\
-		  -*-arial-medium-r-normal--*-*-*-*-*-*-*-*,\
-		  -*-*helvetica*-medium-r-normal--*-*-*-*-*-*-*-*,\
-		  -*-*arial*-medium-r-normal--*-*-*-*-*-*-*-*,\
-		  -*-tahoma-medium-r-normal--*-*-*-*-*-*-*-*,\
-		  -ricoh-*-medium-r-normal--*-*-*-*-*-*-jisx0208.1983-0,\
-		  -misc-fixed-medium-r-normal--*-*-*-*-*-*-jisx0208.1983-0,\
-                  -*-*-medium-r-normal--*-*-*-*-*-*-jisx0208.1983-0,\
-		  -*-*-medium-r-normal--*-*-*-*-*-*-jisx0201.1976-0,\
-                  -*-*-medium-r-normal--*-*-*-*-*-*-georgian-academy,\
-		  -*-*-medium-r-normal--*-*-*-*-*-*-georgian-rs,\
-                  -*-*-medium-*-*--*-*-*-*-*-*-ksc5601.1987-*,\
-		  -*-*-medium-r-normal-*-*-*-*-*-*-*-mulelao-1,\
-		  -*-*-medium-r-normal-*-*-*-*-*-*-*-ibm-cp1133,\
-		  -*-*-medium-r-normal-*-*-*-*-*-*-*-iso10646-1,\
-		  -taipei-*-medium-r-normal--*-*-*-*-*-*-big5-0"
-#  fontset = "-adobe-helvetica-medium-r-normal-*-*-100-*-*-p-*-iso8859-1"
+   fontset = "\
+-*-helvetica-medium-r-normal-*-*-100-*-*-*-*-*-*,\
+-*-arial-medium-r-normal-*-*-*-*-*-*-*-*-*,\
+-*-*helvetica*-medium-r-normal-*-*-*-*-*-*-*-*-*,\
+-*-*arial*-medium-r-normal-*-*-*-*-*-*-*-*-*,\
+-*-tahoma-medium-r-normal-*-*-*-*-*-*-*-*-*,\
+-*-*-medium-r-normal-*-*-*-*-*-*-*-jisx0208.1990-0,\
+-*-*-medium-r-normal-*-*-*-*-*-*-*-jisx0208.1983-0,\
+-*-*-medium-r-normal-*-*-*-*-*-*-*-jisx0201.1976-0,\
+-*-*-medium-r-normal-*-*-*-*-*-*-*-georgian-academy,\
+-*-*-medium-r-normal-*-*-*-*-*-*-*-georgian-rs,\
+-*-*-medium-*-*-*-*-*-*-*-*-*-ksc5601.1987-*,\
+-*-*-medium-r-normal-*-*-*-*-*-*-*-mulelao-1,\
+-*-*-medium-r-normal-*-*-*-*-*-*-*-ibm-cp1133,\
+-*-*-medium-r-normal-*-*-*-*-*-*-*-iso10646-1,\
+-taipei-*-medium-r-normal-*-*-*-*-*-*-*-big5-0"
 }
 
 style "steps"
 {
   bg[NORMAL] = { 0, 0, 0 }
   fg[NORMAL] = { 1.0, 1.0, 1.0 }
-#  fontset = "-adobe-helvetica-medium-r-normal-*-*-80-*-*-p-*-iso8859-1"
+
+   fontset = "-*-helvetica-medium-r-normal-*-*-80-*-*-*-*-*-*"
 }
 
 style "logo"
 {
   bg[NORMAL] = { 1.0, 1.0, 1.0 }
-  fg[NORMAL]        = { 1.0, 1.0, 1.0 }
-  text[NORMAL]      = { 1.0, 1.0, 1.0 }
-  fg[ACTIVE]        = { 1.0, 1.0, 1.0 }
-  text[ACTIVE]      = { 1.0, 1.0, 1.0 }
-  fg[PRELIGHT]      = { 1.0, 1.0, 1.0 }
-  text[PRELIGHT]    = { 1.0, 1.0, 1.0 }
-  fg[SELECTED]      = { 1.0, 1.0, 1.0 }
-  text[SELECTED]    = { 1.0, 1.0, 1.0 }
-  fg[INSENSITIVE]   = { 1.0, 1.0, 1.0 }
-  text[INSENSITIVE] = { 1.0, 1.0, 1.0 }
-  bg[NORMAL]        = { 1.0, 1.0, 1.0 }
-  base[NORMAL]      = { 1.0, 1.0, 1.0 }
-  bg[ACTIVE]        = { 1.0, 1.0, 1.0 }
-  base[ACTIVE]      = { 1.0, 1.0, 1.0 }
-  bg[PRELIGHT]      = { 1.0, 1.0, 1.0 }
-  base[PRELIGHT]    = { 1.0, 1.0, 1.0 }
-  bg[SELECTED]      = { 1.0, 1.0, 1.0 }
-  base[SELECTED]    = { 1.0, 1.0, 1.0 }
-  bg[INSENSITIVE]   = { 1.0, 1.0, 1.0 }
-  base[INSENSITIVE] = { 1.0, 1.0, 1.0 }
 }
 
 widget "*" style "default-font"

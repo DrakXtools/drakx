@@ -29,7 +29,7 @@ sub fold_left(&@) {
 }
 
 sub _ { my $s = shift @_; sprintf translate($s), @_ }
-#delete $main::{'_'};
+#-delete $main::{'_'};
 sub __ { $_[0] }
 sub min { fold_left { $a < $b ? $a : $b } @_ }
 sub max { fold_left { $a > $b ? $a : $b } @_ }
@@ -85,7 +85,7 @@ sub map_index(&@) {
     @l;
 }
 
-#pseudo-array-hash :)
+#- pseudo-array-hash :)
 sub map_tab_hash(&$@) {
     my ($f, $fields, @tab_hash) = @_;
     my %hash;
@@ -135,7 +135,7 @@ sub add_f4before_leaving {
 
 }
 
-# ! the functions are not called in the order wanted, in case of multiple before_leaving :(
+#- ! the functions are not called in the order wanted, in case of multiple before_leaving :(
 sub before_leaving(&) {
     my ($f) = @_;
     my $b = bless {}, 'common::before_leaving';

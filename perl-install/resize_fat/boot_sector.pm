@@ -11,41 +11,41 @@ use resize_fat::directory;
 
 my $format = "a3 a8 S C S C S S C S S S I I I S S I S S a458 S";
 my @fields = (
-    'boot_jump',		# boot strap short or near jump
-    'system_id',		# Name - can be used to special case partition manager volumes
-    'sector_size',		# bytes per logical sector
-    'cluster_size_in_sectors',	# sectors/cluster
-    'nb_reserved',		# reserved sectors
-    'nb_fats',			# number of FATs
-    'nb_root_dir_entries',	# number of root directory entries
-    'small_nb_sectors',		# number of sectors: big_nb_sectors supersedes
-    'media',			# media code
-    'fat16_fat_length',		# sectors/FAT for FAT12/16
+    'boot_jump',		#- boot strap short or near jump
+    'system_id',		#- Name - can be used to special case partition manager volumes
+    'sector_size',		#- bytes per logical sector
+    'cluster_size_in_sectors',	#- sectors/cluster
+    'nb_reserved',		#- reserved sectors
+    'nb_fats',			#- number of FATs
+    'nb_root_dir_entries',	#- number of root directory entries
+    'small_nb_sectors',		#- number of sectors: big_nb_sectors supersedes
+    'media',			#- media code
+    'fat16_fat_length',		#- sectors/FAT for FAT12/16
     'sectors_per_track',
     'nb_heads',
-    'nb_hidden',		# (unused)
-    'big_nb_sectors',		# number of sectors (if small_nb_sectors == 0)
+    'nb_hidden',		#- (unused)
+    'big_nb_sectors',		#- number of sectors (if small_nb_sectors == 0)
 
-# FAT32-only entries
-    'fat32_fat_length',		# size of FAT in sectors
-    'fat32_flags',		# bit8: fat mirroring,
-				# low4: active fat
-    'fat32_version',		# minor * 256 + major
+#- FAT32-only entries
+    'fat32_fat_length',		#- size of FAT in sectors
+    'fat32_flags',		#- bit8: fat mirroring,
+				#- low4: active fat
+    'fat32_version',		#- minor * 256 + major
     'fat32_root_dir_cluster',
     'info_offset_in_sectors',
     'fat32_backup_sector',
 
-# Common again...
-    'boot_code',		# Boot code (or message)
-    'boot_sign',		# 0xAA55
+#- Common again...
+    'boot_code',		#- Boot code (or message)
+    'boot_sign',		#- 0xAA55
 );
 
 1;
 
 
-# trimfs_init_boot_sector() - reads in the boot sector - gets important info out
-# of boot sector, and puts in main structure - performs sanity checks - returns 1
-# on success, 0 on failureparameters: filesystem an empty structure to fill.
+#- trimfs_init_boot_sector() - reads in the boot sector - gets important info out
+#- of boot sector, and puts in main structure - performs sanity checks - returns 1
+#- on success, 0 on failureparameters: filesystem an empty structure to fill.
 sub read($) {
     my ($fs) = @_;
     
@@ -60,11 +60,11 @@ sub read($) {
     $fs->{nb_sectors} < 32 and die "Too few sectors for viable file system\n";
 
     if ($fs->{fat16_fat_length}) {
-	# asserting FAT16, will be verified later on
+	#- asserting FAT16, will be verified later on
         $fs->{fs_type} = 'FAT16';
 	$fs->{fs_type_size} = 16;
 	$fs->{fat_length} = $fs->{fat16_fat_length};
-	$resize_fat::bad_cluster_value = 0xfff7; # 2**16 - 1
+	$resize_fat::bad_cluster_value = 0xfff7; #- 2**16 - 1
     } else {
 	$resize_fat::isFAT32 = 1;
         $fs->{fs_type} = 'FAT32';
@@ -84,12 +84,12 @@ sub read($) {
 
     $fs->{nb_fat_entries} = divide($fs->{fat_size}, $fs->{fs_type_size} / 8);
 
-    # - 2 because clusters 0 & 1 doesn't exist 
+    #- - 2 because clusters 0 & 1 doesn't exist 
     $fs->{nb_clusters} = divide($fs->{nb_sectors} * $fs->{sector_size} - $fs->{cluster_offset}, $fs->{cluster_size}) - 2;
 
     $fs->{dir_entries_per_cluster} = divide($fs->{cluster_size}, psizeof($format));
 
-#    $fs->{nb_clusters} >= resize_fat::any::min_cluster_count($fs) or die "error: not enough sectors for a $fs->{fs_type}\n";
+#-    $fs->{nb_clusters} >= resize_fat::any::min_cluster_count($fs) or die "error: not enough sectors for a $fs->{fs_type}\n";
     $fs->{nb_clusters} <  resize_fat::any::max_cluster_count($fs) or die "error: too many sectors for a $fs->{fs_type}\n";
 }
 
@@ -100,7 +100,7 @@ sub write($) {
     eval { resize_fat::io::write($fs, 0, $SECTORSIZE, $boot) }; $@ and die "writing the boot sector failed on device $fs->{fs_name}";
 
     if ($resize_fat::isFAT32) {
-	# write backup
+	#- write backup
 	eval { resize_fat::io::write($fs, $fs->{fat32_backup_sector} * $SECTORSIZE, $SECTORSIZE, $boot) };
 	$@ and die "writing the backup boot sector (#$fs->{fat32_backup_sector}) failed on device $fs->{fs_name}";
     }

@@ -15,12 +15,12 @@ my $CSADeviceAvailable;
 1;
 
 sub get {
-    # Detect the default BIOS boot harddrive is kind of tricky. We may have IDE,
-    # SCSI and RAID devices on the same machine. From what I see so far, the default
-    # BIOS boot harddrive will be
-    # 1. The first IDE device if IDE exists. Or 
-    # 2. The first SCSI device if SCSI exists. Or
-    # 3. The first RAID device if RAID exists.
+    #- Detect the default BIOS boot harddrive is kind of tricky. We may have IDE,
+    #- SCSI and RAID devices on the same machine. From what I see so far, the default
+    #- BIOS boot harddrive will be
+    #- 1. The first IDE device if IDE exists. Or 
+    #- 2. The first SCSI device if SCSI exists. Or
+    #- 3. The first RAID device if RAID exists.
 
     map { &{$_->[0]}() ? &{$_->[1]}() : () }
     [ \&hasIDE, \&getIDE ],
@@ -89,7 +89,7 @@ sub getSCSI() {
 sub getIDE() {
     my @idi;
 
-    # Great. 2.2 kernel, things are much easier and less error prone. 
+    #- Great. 2.2 kernel, things are much easier and less error prone. 
     foreach my $d (glob_('/proc/ide/hd*')) {
 	my ($t) = chop_(cat_("$d/media"));
 	my $type = $ {{disk => 'hd', cdrom => 'cdrom', tape => 'tape', floppy => 'fd'}}{$t} or next;
@@ -119,8 +119,8 @@ sub getCompaqSmartArray() {
 sub getDAC960() {
     my @idi;
 
-    # We are looking for lines of this format:DAC960#0:
-    # /dev/rd/c0d0: RAID-7, Online, 17928192 blocks, Write Thru0123456790123456789012    
+    #- We are looking for lines of this format:DAC960#0:
+    #- /dev/rd/c0d0: RAID-7, Online, 17928192 blocks, Write Thru0123456790123456789012    
     foreach (syslog()) {
 	my ($devicename, $info) = m|/dev/rd/(.*?): (.*?),| or next;
 	push @idi, { info => $info, type => 'hd', devicename => $devicename }; 

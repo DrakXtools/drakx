@@ -42,10 +42,10 @@ sub write($) {
 
 
 
-# allocates where all the clusters will be moved to. Clusters before cut_point
-# remain in the same position, however cluster that are part of a directory are
-# moved regardless (this is a mechanism to prevent data loss) (cut_point is the
-# first cluster that won't occur in the new fs)
+#- allocates where all the clusters will be moved to. Clusters before cut_point
+#- remain in the same position, however cluster that are part of a directory are
+#- moved regardless (this is a mechanism to prevent data loss) (cut_point is the
+#- first cluster that won't occur in the new fs)
 sub allocate_remap {
     my ($fs, $cut_point) = @_;
     my ($cluster, $new_cluster);
@@ -53,8 +53,8 @@ sub allocate_remap {
     my $get_new = sub {
 	$new_cluster = get_free($fs);
 	0 < $new_cluster && $new_cluster < $cut_point or die "no free clusters";
-	set_eof($fs, $new_cluster); # mark as used
-	#log::ld("resize_fat: [$cluster,", &next($fs, $cluster), "...]->$new_cluster...");
+	set_eof($fs, $new_cluster); #- mark as used
+	#-log::ld("resize_fat: [$cluster,", &next($fs, $cluster), "...]->$new_cluster...");
     };
 
     $fs->{fat_remap}[0] = 0;
@@ -75,7 +75,7 @@ sub allocate_remap {
 }
 
 
-# updates the fat for the resized filesystem
+#- updates the fat for the resized filesystem
 sub update {
     my ($fs) = @_;
 
@@ -95,9 +95,9 @@ sub update {
 }
 
 
-# - compares the two FATs (one's a backup that should match) - skips first entry
-# - its just a signature (already checked above) NOTE: checks for cross-linking
-# are done in count.c
+#- - compares the two FATs (one's a backup that should match) - skips first entry
+#- - its just a signature (already checked above) NOTE: checks for cross-linking
+#- are done in count.c
 sub check($) {
     my ($fs) = @_;
     foreach (@{$fs->{fats}}) {
@@ -140,7 +140,7 @@ sub get_free($) {
     die "no free clusters";
 }
 
-#    returns true if <cluster> represents an EOF marker
+#-    returns true if <cluster> represents an EOF marker
 sub is_eof($) {
     my ($cluster) = @_;
     $cluster >= $resize_fat::bad_cluster_value;
@@ -150,13 +150,13 @@ sub set_eof($$) {
     set_next($fs, $cluster, $resize_fat::bad_cluster_value + 1);
 }
 
-#    returns true if <cluster> is empty.  Note that this includes bad clusters.
+#-    returns true if <cluster> is empty.  Note that this includes bad clusters.
 sub is_empty($) {
     my ($cluster) = @_;
     $cluster == 0 || $cluster == $resize_fat::bad_cluster_value;
 }
 
-#    returns true if <cluster> is available.
+#-    returns true if <cluster> is available.
 sub is_available($) {
     my ($cluster) = @_;
     $cluster == 0;

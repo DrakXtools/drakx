@@ -76,9 +76,9 @@ sub suggest_part($$$;$) {
 
     $best = $second if 
       $best->{mntpoint} eq '/boot' && 
-      $part->{start} + $best->{minsize} > 1024 * partition_table::cylinder_size($hd); # if the empty slot is beyond the 1024th cylinder, no use having /boot
+      $part->{start} + $best->{minsize} > 1024 * partition_table::cylinder_size($hd); #- if the empty slot is beyond the 1024th cylinder, no use having /boot
 
-    defined $best or return; # sorry no suggestion :(
+    defined $best or return; #- sorry no suggestion :(
 
     $part->{mntpoint} = $best->{mntpoint};
     $part->{type} = $best->{type};
@@ -87,24 +87,24 @@ sub suggest_part($$$;$) {
 }
 
 
-#sub partitionDrives {
-#
-#    my $cmd = "/sbin/fdisk";
-#    -x $cmd or $cmd = "/usr/bin/fdisk";
-#
-#    my $drives = findDrivesPresent() or die "You don't have any hard drives available! You probably forgot to configure a SCSI controller.";
-#
-#    foreach (@$drives) {
-#	 my $text = "/dev/" . $_->{device};
-#	 $text .= " - SCSI ID " . $_->{id} if $_->{device} =~ /^sd/;
-#	 $text .= " - Model " . $_->{info};
-#	 $text .= " array" if $_->{device} =~ /^c.d/;
-#
-#	 # truncate at 50 columns for now 
-#	 $text = substr $text, 0, 50;
-#    }
-#    #TODO TODO
-#}
+#-sub partitionDrives {
+#-
+#-    my $cmd = "/sbin/fdisk";
+#-    -x $cmd or $cmd = "/usr/bin/fdisk";
+#-
+#-    my $drives = findDrivesPresent() or die "You don't have any hard drives available! You probably forgot to configure a SCSI controller.";
+#-
+#-    foreach (@$drives) {
+#-	 my $text = "/dev/" . $_->{device};
+#-	 $text .= " - SCSI ID " . $_->{id} if $_->{device} =~ /^sd/;
+#-	 $text .= " - Model " . $_->{info};
+#-	 $text .= " array" if $_->{device} =~ /^c.d/;
+#-
+#-	 #- truncate at 50 columns for now 
+#-	 $text = substr $text, 0, 50;
+#-    }
+#-    #-TODO TODO
+#-}
 
 
 sub has_mntpoint($$) {
@@ -112,8 +112,8 @@ sub has_mntpoint($$) {
     scalar grep { $mntpoint eq $_->{mntpoint} } get_fstab(@$hds);
 }
 
-# do this before modifying $part->{mntpoint}
-# $part->{mntpoint} should not be used here, use $mntpoint instead
+#- do this before modifying $part->{mntpoint}
+#- $part->{mntpoint} should not be used here, use $mntpoint instead
 sub check_mntpoint {
     my ($mntpoint, $hd, $part, $hds) = @_;
 
@@ -121,7 +121,7 @@ sub check_mntpoint {
 
     local $_ = $mntpoint;
     m|^/| or die _("Mount points must begin with a leading /");
-#    m|(.)/$| and die "The mount point $_ is illegal.\nMount points may not end with a /";
+#-    m|(.)/$| and die "The mount point $_ is illegal.\nMount points may not end with a /";
 
     has_mntpoint($mntpoint, $hds) and die _("There is already a partition with mount point %s", $mntpoint);
 
@@ -152,10 +152,10 @@ sub removeFromList($$$) {
 	if ($start == $list->[$i]) {
 	    $end > $list->[$i + 1] and die $err;
 	    if ($end == $list->[$i + 1]) {
-		# the free block is just the same size, removing it
+		#- the free block is just the same size, removing it
 		splice(@$list, 0, 2);
 	    } else {
-		# the free block now start just after this block
+		#- the free block now start just after this block
 		$list->[$i] = $end;
 	    }
 	} else {
@@ -163,7 +163,7 @@ sub removeFromList($$$) {
 	    if ($end < $list->[$i + 1]) {
 		splice(@$list, $i + 2, 0, $end, $list->[$i + 1]);
 	    }
-	    $list->[$i + 1] = $start; # shorten the free block
+	    $list->[$i + 1] = $start; #- shorten the free block
 	}
 	return;
     }
@@ -172,7 +172,7 @@ sub removeFromList($$$) {
 
 sub allocatePartitions($$) {
     my ($hds, $to_add) = @_;
-    my %free_sectors = map { $_->{device} => [1, $_->{totalsectors} ] } @$hds; # first sector is always occupied by the MBR
+    my %free_sectors = map { $_->{device} => [1, $_->{totalsectors} ] } @$hds; #- first sector is always occupied by the MBR
     my $remove = sub { removeFromList($_[0]{start}, $_[0]->{start} + $_[0]->{size}, $free_sectors{$_[0]->{rootDevice}}) };
     my $success = 0;
 
@@ -239,7 +239,7 @@ sub move {
     $part2->{size} += partition_table::cylinder_size($hd2) - 1;
     partition_table::remove($hd, $part);
     {
-	local ($part2->{notFormatted}, $part2->{isFormatted}); # do not allow partition::add to change this
+	local ($part2->{notFormatted}, $part2->{isFormatted}); #- do not allow partition::add to change this
 	partition_table::add($hd2, $part2);
     }    
 

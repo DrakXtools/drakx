@@ -27,7 +27,7 @@ sub w { &l }
 sub openLog(;$) {
     if ($::isStandalone) {
 	open LOG, ">&STDERR";
-    } elsif ($_[0]) { # useLocal
+    } elsif ($_[0]) { #- useLocal
 	open LOG, "> $_[0]";# or die "no log possible :(";
     } else {
 	open LOG, "> /dev/tty3" or open LOG, ">> /tmp/install.log";# or die "no log possible :(";
@@ -44,4 +44,4 @@ sub closeLog() { close LOG; close LOG2; }
 #-######################################################################################
 #- Wonderful perl :(
 #-######################################################################################
-1; # 
+1;

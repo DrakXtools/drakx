@@ -183,7 +183,7 @@ my @installSteps = (
   configureMouse     => [ __("Configure mouse"), 1, 1, "formatPartitions" ],                 
   configureNetwork   => [ __("Configure networking"), 1, 1, "formatPartitions" ],            
   configureTimezone  => [ __("Configure timezone"), 1, 1, "doInstallStep" ],                 
-#  configureServices => [ __("Configure services"), 0, 0 ],                                  
+#-  configureServices => [ __("Configure services"), 0, 0 ],                                  
   configurePrinter   => [ __("Configure printer"), 1, 0, "doInstallStep" ],
   setRootPassword    => [ __("Set root password"), 1, 1, "formatPartitions" ],               
   addUser            => [ __("Add a user"), 1, 1, "doInstallStep" ],                         
@@ -204,18 +204,18 @@ for (my $i = 0; $i < @installSteps; $i += 2) {
     push @orderedInstallSteps, $installSteps[$i];
 }
 
-#TOSEE bug with
-#%installSteps = 
-#      map_tab_hash {
-#	   my ($i, $h)   = @_; 
-#	   $h->{help}    = $stepsHelp{$installSteps[$i]} || __("Help");
-#	   $h->{next}    = $installSteps[$i + 2];
-#	   $h->{onError} = $installSteps[$i + 2 * $h->{onError}];
-##          $h->{toBeDone} = []; SEMBLE FIXE les PBS
-##          $h->{entered} = 0;
-#	   push @orderedInstallSteps, $installSteps[$i];
-#      } \@installStepsFields, @installSteps;
-#print Dumper(\%installSteps);
+#-TOSEE bug with
+#-%installSteps = 
+#-      map_tab_hash {
+#-	   my ($i, $h)   = @_; 
+#-	   $h->{help}    = $stepsHelp{$installSteps[$i]} || __("Help");
+#-	   $h->{next}    = $installSteps[$i + 2];
+#-	   $h->{onError} = $installSteps[$i + 2 * $h->{onError}];
+#-#-          $h->{toBeDone} = []; SEMBLE FIXE les PBS
+#-#-          $h->{entered} = 0;
+#-	   push @orderedInstallSteps, $installSteps[$i];
+#-      } \@installStepsFields, @installSteps;
+#-print Dumper(\%installSteps);
 
 $installSteps{first} = $installSteps[0];
 
@@ -227,7 +227,7 @@ my @install_classes = (__("beginner"), __("developer"), __("server"), __("expert
 #-#####################################################################################
 #-Default value
 #-#####################################################################################
-# partition layout
+#- partition layout
 my %suggestedPartitions = (
   beginner => [
     { mntpoint => "/boot", size =>  16 << 11, type => 0x83 }, 
@@ -264,28 +264,28 @@ my %suggestedPartitions = (
 $o = $::o = { 
     bootloader => { onmbr => 1, linear => 0 },
     autoSCSI   => 0,
-    mkbootdisk => 1, # no mkbootdisk if 0 or undef,   find a floppy with 1
-#    packages   => [ qw() ],
+    mkbootdisk => 1, #- no mkbootdisk if 0 or undef,   find a floppy with 1
+#-    packages   => [ qw() ],
     partitioning => { clearall => $::testing, eraseBadPartitions => 0, auto_allocate => 0, autoformat => 0 },
-#    partitions => [
-#		      { mntpoint => "/boot", size =>  16 << 11, type => 0x83 }, 
-#		      { mntpoint => "/",     size => 256 << 11, type => 0x83 }, 
-#		      { mntpoint => "/usr",  size => 512 << 11, type => 0x83, growable => 1 }, 
-#		      { mntpoint => "/var",  size => 256 << 11, type => 0x83 }, 
-#		      { mntpoint => "/home", size => 512 << 11, type => 0x83, growable => 1 }, 
-#		      { mntpoint => "swap",  size =>  64 << 11, type => 0x82 }
-#		    { mntpoint => "/boot", size =>  16 << 11, type => 0x83 }, 
-#		    { mntpoint => "/",     size => 300 << 11, type => 0x83 }, 
-#		    { mntpoint => "swap",  size =>  64 << 11, type => 0x82 },
-#		   { mntpoint => "/usr",  size => 400 << 11, type => 0x83, growable => 1 }, 
-#	     ],
+#-    partitions => [
+#-		      { mntpoint => "/boot", size =>  16 << 11, type => 0x83 }, 
+#-		      { mntpoint => "/",     size => 256 << 11, type => 0x83 }, 
+#-		      { mntpoint => "/usr",  size => 512 << 11, type => 0x83, growable => 1 }, 
+#-		      { mntpoint => "/var",  size => 256 << 11, type => 0x83 }, 
+#-		      { mntpoint => "/home", size => 512 << 11, type => 0x83, growable => 1 }, 
+#-		      { mntpoint => "swap",  size =>  64 << 11, type => 0x82 }
+#-		    { mntpoint => "/boot", size =>  16 << 11, type => 0x83 }, 
+#-		    { mntpoint => "/",     size => 300 << 11, type => 0x83 }, 
+#-		    { mntpoint => "swap",  size =>  64 << 11, type => 0x82 },
+#-		   { mntpoint => "/usr",  size => 400 << 11, type => 0x83, growable => 1 }, 
+#-	     ],
     shells => [ map { "/bin/$_" } qw(bash tcsh zsh ash ksh) ],
     lang         => 'en',
     isUpgrade    => 0,
     installClass => "beginner",
 
     timezone => {
-#                   timezone => "Europe/Paris",
+#-                   timezone => "Europe/Paris",
                    GMT      => 1,
                 },
     printer => { 
@@ -315,27 +315,27 @@ $o = $::o = {
                  SMBPASSWD => "passowrd",
                  SMBWORKGROUP => "AS3",
                },
-#    superuser => { password => 'a', shell => '/bin/bash', realname => 'God' },
-#    user => { name => 'foo', password => 'bar', home => '/home/foo', shell => '/bin/bash', realname => 'really, it is foo' },
+#-    superuser => { password => 'a', shell => '/bin/bash', realname => 'God' },
+#-    user => { name => 'foo', password => 'bar', home => '/home/foo', shell => '/bin/bash', realname => 'really, it is foo' },
     
-#    keyboard => 'de',
-#    display => "192.168.1.9:0",
+#-    keyboard => 'de',
+#-    display => "192.168.1.9:0",
     steps        => \%installSteps,        
     orderedSteps => \@orderedInstallSteps, 
 
     base => [ qw(basesystem initscripts console-tools mkbootdisk anacron rhs-hwdiag utempter ldconfig chkconfig ntsysv mktemp setup filesystem SysVinit bdflush crontabs dev e2fsprogs etcskel fileutils findutils getty_ps grep groff gzip hdparm info initscripts isapnptools kbdconfig kernel less ldconfig lilo logrotate losetup man mkinitrd mingetty modutils mount net-tools passwd procmail procps psmisc mandrake-release rootfiles rpm sash sed setconsole setserial shadow-utils sh-utils slocate stat sysklogd tar termcap textutils time timeconfig tmpwatch util-linux vim-minimal vixie-cron which cpio) ],
-# for the list of fields available for user and superuser, see @etc_pass_fields in install_steps.pm
-#    intf => [ { DEVICE => "eth0", IPADDR => '1.2.3.4', NETMASK => '255.255.255.128' } ],
+#- for the list of fields available for user and superuser, see @etc_pass_fields in install_steps.pm
+#-    intf => [ { DEVICE => "eth0", IPADDR => '1.2.3.4', NETMASK => '255.255.255.128' } ],
 
-#step : the current one
-#prefix
-#mouse
-#keyboard
-#netc
-#autoSCSI drives hds  fstab
-#methods
-#packages compss
-#printer haveone entry(cf printer.pm)
+#-step : the current one
+#-prefix
+#-mouse
+#-keyboard
+#-netc
+#-autoSCSI drives hds  fstab
+#-methods
+#-packages compss
+#-printer haveone entry(cf printer.pm)
 
 };
 
@@ -363,7 +363,7 @@ sub selectKeyboard {
     return if $::beginner && !$clicked;
 
     $o->selectKeyboard;
-    #if we go back to the selectKeyboard, you must rewrite
+    #- if we go back to the selectKeyboard, you must rewrite
     addToBeDone {
 	keyboard::write($o->{prefix}, $o->{keyboard}) unless $o->{isUpgrade};
     } 'doInstallStep';
@@ -397,7 +397,7 @@ sub setupSCSI {
 }
 
 #------------------------------------------------------------------------------
-#PADTODO
+#-PADTODO
 sub partitionDisks {
     $o->{drives} = [ detect_devices::hds() ];
     $o->{hds} = catch_cdie { fsedit::hds($o->{drives}, $o->{partitioning}) }
@@ -409,9 +409,9 @@ I'll try to go on blanking bad partitions"));
       };
 
     unless (@{$o->{hds}} > 0) {
-	$o->setupSCSI if $o->{autoSCSI}; # ask for an unautodetected scsi card
+	$o->setupSCSI if $o->{autoSCSI}; #- ask for an unautodetected scsi card
     }
-    unless (@{$o->{hds}} > 0) { # no way
+    unless (@{$o->{hds}} > 0) { #- no way
 	die _("An error has occurred - no valid devices were found on which to create new filesystems. Please check your hardware for the cause of this problem");
     }
 
@@ -431,7 +431,7 @@ I'll try to go on blanking bad partitions"));
 
 }
 
-#PADTODO
+#-PADTODO
 sub formatPartitions {
     $o->choosePartitionsToFormat($o->{fstab});
 
@@ -444,7 +444,7 @@ sub formatPartitions {
 }
 
 #------------------------------------------------------------------------------
-#PADTODO
+#-PADTODO
 sub choosePackages {
     install_any::setPackages($o);
     $o->choosePackages($o->{packages}, $o->{compss}); 
@@ -452,7 +452,7 @@ sub choosePackages {
 }
 
 #------------------------------------------------------------------------------
-#PADTODO
+#-PADTODO
 sub doInstallStep {
     $o->beforeInstallPackages;
     $o->installPackages($o->{packages});
@@ -467,7 +467,7 @@ sub configureNetwork {
     $o->configureNetwork($entered == 1 && !$clicked) 
 }
 #------------------------------------------------------------------------------
-#PADTODO
+#-PADTODO
 sub configureTimezone { 
     my ($clicked) = $_[0];
     my $f = "$o->{prefix}/etc/sysconfig/clock";
@@ -486,12 +486,12 @@ sub addUser {
     $o->addUser;
 
     addToBeDone {
-	run_program::rooted($o->{prefix}, "pwconv") or log::l("pwconv failed"); # use shadow passwords
+	run_program::rooted($o->{prefix}, "pwconv") or log::l("pwconv failed"); #- use shadow passwords
     } 'doInstallStep';
 }
 
 #------------------------------------------------------------------------------
-#PADTODO
+#-PADTODO
 sub createBootdisk {
     fs::write($o->{prefix}, $o->{fstab}) unless $o->{isUpgrade};
     modules::write_conf("$o->{prefix}/etc/conf.modules", 'append');
@@ -517,7 +517,7 @@ sub exitInstall { $o->exitInstall }
 sub main {
     $SIG{__DIE__} = sub { chomp $_[0]; log::l("ERROR: $_[0]") };
 
-    #  if this fails, it's okay -- it might help with free space though 
+    #-  if this fails, it's okay -- it might help with free space though 
     unlink "/sbin/install" unless $::testing;
     unlink "/sbin/insmod"  unless $::testing;
 
@@ -529,15 +529,15 @@ sub main {
     $o->{prefix} = $::testing ? "/tmp/test-perl-install" : "/mnt";
     mkdir $o->{prefix}, 0755;
 
-    #  make sure we don't pick up any gunk from the outside world 
+    #-  make sure we don't pick up any gunk from the outside world 
     $ENV{PATH} = "/usr/bin:/bin:/sbin:/usr/sbin:/usr/X11R6/bin:$o->{prefix}/sbin:$o->{prefix}/bin:$o->{prefix}/usr/sbin:$o->{prefix}/usr/bin:$o->{prefix}/usr/X11R6/bin";
     $ENV{LD_LIBRARY_PATH} = "";
 
-    #really needed ??
+    #-really needed ??
     spawnSync();
     eval { spawnShell() };
 
-    # needed very early for install_steps_graphical
+    #- needed very early for install_steps_graphical
     $o->{mouse} = install_any::mouse_detect() unless $::testing || $o->{mouse};
 
     $o = install_steps_graphical->new($o);
@@ -574,7 +574,7 @@ sub main {
     }
     
 
-    #the main cycle
+    #-the main cycle
     my $clicked = 0;
     MAIN: for ($o->{step} = $o->{steps}{first};; $o->{step} = getNextStep()) {
 	$o->enteringStep($o->{step});
@@ -604,10 +604,10 @@ sub main {
 
 sub killCardServices { 
     my $pid = chop_(cat_("/tmp/cardmgr.pid"));
-    $pid and kill(15, $pid); # send SIGTERM
+    $pid and kill(15, $pid); #- send SIGTERM
 }
 
 #-######################################################################################
 #- Wonderful perl :(
 #-######################################################################################
-1; # 
+1;

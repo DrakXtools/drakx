@@ -63,7 +63,7 @@ sub format_ext2($;$) {
     my ($dev, $bad_blocks) = @_;
     my @options;
 
-    $dev =~ m,(rd|ida)/, and push @options, qw(-b 4096 -R stride=16); # For RAID only.
+    $dev =~ m,(rd|ida)/, and push @options, qw(-b 4096 -R stride=16); #- For RAID only.
     $bad_blocks and push @options, "-c";
 
     run_program::run("mke2fs", devices::make($dev), @options) or die _("%s formatting of %s failed", "ext2", $dev);
@@ -116,24 +116,24 @@ sub mount($$$;$) {
 
 	if ($fs eq 'vfat') {
 	    $mount_opt = "check=relaxed";
-	    eval { modules::load('vfat') }; # try using vfat
-	    eval { modules::load('msdos') } if $@; # otherwise msdos...
+	    eval { modules::load('vfat') }; #- try using vfat
+	    eval { modules::load('msdos') } if $@; #- otherwise msdos...
 	}
   
 	log::l("calling mount($dev, $where, $fs, $flag, $mount_opt)");
 	syscall_('mount', $dev, $where, $fs, $flag, $mount_opt) or die _("mount failed: ") . "$!";
     }
     local *F;
-    open F, ">>/etc/mtab" or return; # fail silently, must be read-only /etc
+    open F, ">>/etc/mtab" or return; #- fail silently, must be read-only /etc
     print F "$dev $where $fs defaults 0 0\n";
 }
 
-# takes the mount point to umount (can also be the device)
+#- takes the mount point to umount (can also be the device)
 sub umount($) { 
     my ($mntpoint) = @_;
     syscall_('umount', $mntpoint) or die _("error unmounting %s: %s", $mntpoint, "$!");
 
-    my @mtab = cat_('/etc/mtab'); # don't care about error, if we can't read, we won't manage to write... (and mess mtab)
+    my @mtab = cat_('/etc/mtab'); #- don't care about error, if we can't read, we won't manage to write... (and mess mtab)
     local *F;
     open F, ">/etc/mtab" or return;
     foreach (@mtab) { print F $_ unless /(^|\s)$mntpoint\s/; }
@@ -150,7 +150,7 @@ sub mount_part($;$) {
 	$part->{mntpoint} or die "missing mount point";
 	mount(devices::make($part->{device}), ($prefix || '') . $part->{mntpoint}, type2fs($part->{type}), 0);
     }
-    $part->{isMounted} = $part->{isFormatted} = 1; # assume that if mount works, partition is formatted
+    $part->{isMounted} = $part->{isFormatted} = 1; #- assume that if mount works, partition is formatted
 }
 
 sub umount_part($;$) {
@@ -169,7 +169,7 @@ sub mount_all($;$) {
 
     log::l("mounting all filesystems");
 
-    # order mount by alphabetical ordre, that way / < /home < /home/httpd...
+    #- order mount by alphabetical ordre, that way / < /home < /home/httpd...
     foreach (sort { ($a->{mntpoint} || '') cmp ($b->{mntpoint} || '') } @$fstab) {
 	mount_part($_, $prefix) if ($_->{mntpoint} || isSwap($_));
     }
@@ -185,7 +185,7 @@ sub umount_all($;$) {
     }
 }
 
-# do some stuff before calling write_fstab
+#- do some stuff before calling write_fstab
 sub write($$) {
     my ($prefix, $fstab) = @_;
     my @cd_drives = detect_devices::cdroms();
@@ -194,8 +194,8 @@ sub write($$) {
     unshift @cd_drives, grep { $_->{type} eq 'iso9660' } read_fstab("/proc/mounts");
     log::l("found cdrom drive(s) " . join(', ', map { $_->{device} } @cd_drives));
 
-    # cd-rom rooted installs have the cdrom mounted on /dev/root which 
-    # is not what we want to symlink to /dev/cdrom.                    
+    #- cd-rom rooted installs have the cdrom mounted on /dev/root which 
+    #- is not what we want to symlink to /dev/cdrom.                    
     my $cddev = first(grep { $_ ne 'root' } map { $_->{device} } @cd_drives);
 
     log::l("resetting /etc/mtab");
@@ -234,7 +234,7 @@ sub write_fstab($;$$) {
       push @to_add, [ split ' ', 'none /dev/pts devpts mode=0620 0 0' ];
     }
 
-    # get the list of devices and mntpoint
+    #- get the list of devices and mntpoint
     my @new = grep { $_ ne 'none' } map { @$_[0,1] } @to_add;
     my %new; @new{@new} = undef;
 
@@ -245,7 +245,7 @@ sub write_fstab($;$$) {
     open F, "> $prefix/etc/fstab" or die "error writing $prefix/etc/fstab";
     foreach (@current) {
 	my ($a, $b) = split;
-	# if we find one line of fstab containing either the same device or mntpoint, do not write it
+	#- if we find one line of fstab containing either the same device or mntpoint, do not write it
 	exists $new{$a} || exists $new{$b} and next;
 	print F $_;
     }

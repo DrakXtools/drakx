@@ -26,7 +26,7 @@ sub compute_CHS($$) {
 
 sub CHS2rawCHS($$$) {
     my ($c, $h, $s) = @_;
-    $c = min($c, 1023); # no way to have a #cylinder >= 1024
+    $c = min($c, 1023); #- no way to have a #cylinder >= 1024
     ($c & 0xff, $h, $s | ($c >> 2 & 0xc0));
 }
 
@@ -73,7 +73,7 @@ sub read($$) {
 	\%h;
     } (1..$nb_primary);
 
-    # check magic number
+    #- check magic number
     sysread F, $tmp, length $magic or die "error reading magic number";
     $tmp eq $magic or die "bad magic number";
 
@@ -92,7 +92,7 @@ sub write($$$) {
     foreach (@$pt) {
 	compute_CHS($hd, $_);
 	local $_->{start} = $_->{local_start} || 0;
-	$_->{active} ||= 0; $_->{type} ||= 0; $_->{size} ||= 0; # for no warning
+	$_->{active} ||= 0; $_->{type} ||= 0; $_->{size} ||= 0; #- for no warning
 	syswrite F, pack($format, @$_{@fields}), psizeof($format) or return 0;
     }
     syswrite F, $magic, length $magic or return 0;

@@ -2,7 +2,7 @@ use common qw(:common);
 
 %depths = (
       8 => __("256 colors"),
-#     15 => __("32 thousand colors"),
+#-     15 => __("32 thousand colors"),
      16 => __("65 thousand colors"),
      24 => __("16 million colors"),
      32 => __("4 billion colors"),
@@ -41,7 +41,7 @@ $resolution_wanted = "1024x768";
   __("Monitor that can do 1600x1200 at 76 Hz")		           => [ '1600x1200@76',    "31.5-94.0"       , "50-160" ],
 );
 
-# * Screen/video card configuration. 
+#- * Screen/video card configuration. 
 %ramdacs = (
     __("No RAMDAC Setting (recommended)")               => '',
     __("AT&T 20C490 (S3 and AGX servers, ARK driver)"), => 'att20c490',

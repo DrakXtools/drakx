@@ -29,7 +29,7 @@ my %types = (
   4 => "DOS 16-bit <32M",
   5 => "Extended",
   6 => "DOS FAT16",
-  7 => "OS/2 HPFS",               # or QNX? 
+  7 => "OS/2 HPFS",               #- or QNX? 
   8 => "AIX",
   9 => "AIX bootable",
   10 => "OS/2 Boot Manager",
@@ -39,28 +39,28 @@ my %types = (
   0x12 => "Compaq setup",
   0x40 => "Venix 80286",
   0x51 => "Novell?",
-  0x52 => "Microport",            # or CPM? 
-  0x63 => "GNU HURD",             # or System V/386? 
+  0x52 => "Microport",            #- or CPM? 
+  0x63 => "GNU HURD",             #- or System V/386? 
   0x64 => "Novell Netware 286",
   0x65 => "Novell Netware 386",
   0x75 => "PC/IX",
-  0x80 => "Old MINIX",            # Minix 1.4a and earlier 
+  0x80 => "Old MINIX",            #- Minix 1.4a and earlier 
   
-  0x81 => "Linux/MINIX", # Minix 1.4b and later 
+  0x81 => "Linux/MINIX", #- Minix 1.4b and later 
   0x82 => "Linux swap",
   0x83 => "Linux native",
   
   0x93 => "Amoeba",
-  0x94 => "Amoeba BBT",           # (bad block table) 
+  0x94 => "Amoeba BBT",           #- (bad block table) 
   0xa5 => "BSD/386",
   0xb7 => "BSDI fs",
   0xb8 => "BSDI swap",
   0xc7 => "Syrinx",
-  0xdb => "CP/M",                 # or Concurrent DOS? 
+  0xdb => "CP/M",                 #- or Concurrent DOS? 
   0xe1 => "DOS access",
   0xe3 => "DOS R/O",
   0xf2 => "DOS secondary",
-  0xff => "BBT"                   # (bad track table) 
+  0xff => "BBT"                   #- (bad track table) 
 );
 
 my %type2fs = (
@@ -74,7 +74,7 @@ my %type2fs = (
   0x0e => 'vfat',
   0x82 => 'swap',
   0x83 => 'ext2',
-  nfs  => 'nfs', # hack
+  nfs  => 'nfs', #- hack
 );
 my %types_rev = reverse %types;
 my %fs2type = reverse %type2fs;
@@ -94,7 +94,7 @@ sub isSwap($) { $type2fs{$_[0]{type}} eq 'swap' }
 sub isExt2($) { $type2fs{$_[0]{type}} eq 'ext2' }
 sub isDos($) { $ {{ 1=>1, 4=>1, 6=>1 }}{$_[0]{type}} }
 sub isWin($) { $ {{ 0xb=>1, 0xc=>1, 0xe=>1 }}{$_[0]{type}} }
-sub isNfs($) { $_[0]{type} eq 'nfs' } # small hack
+sub isNfs($) { $_[0]{type} eq 'nfs' } #- small hack
 
 sub isPrimary($$) {
     my ($part, $hd) = @_;
@@ -160,10 +160,10 @@ sub assign_device_numbers($) {
     $_->{device} = $hd->{prefix} . $i++ foreach @{$hd->{primary}{raw}}, 
                                                 map { $_->{normal} } @{$hd->{extended} || []};
 
-    # try to figure what the windobe drive letter could be!
+    #- try to figure what the windobe drive letter could be!
     #
-    # first verify there's at least one primary dos partition, otherwise it
-    # means it is a secondary disk and all will be false :(
+    #- first verify there's at least one primary dos partition, otherwise it
+    #- means it is a secondary disk and all will be false :(
     my ($c, @others) = grep { isDos($_) || isWin($_) } @{$hd->{primary}{normal}};
     $c or return;
 
@@ -206,10 +206,10 @@ sub adjust_main_extended($) {
 	$l->{size} = $hd->{primary}{extended}{size} = $end - $start;
     }
     unless (@{$hd->{extended} || []} || !$hd->{primary}{extended}) {
-	%{$hd->{primary}{extended}} = (); # modify the raw entry
+	%{$hd->{primary}{extended}} = (); #- modify the raw entry
 	delete $hd->{primary}{extended};
     }
-    verifyParts($hd); # verify everything is all right
+    verifyParts($hd); #- verify everything is all right
 }
 
 
@@ -265,7 +265,7 @@ sub read_extended($$) {
     @{$pt->{normal}} <= 1 or die "more than one normal partition in extended partition";
     @{$pt->{normal}} >= 1 or die "no normal partition in extended partition";
     $pt->{normal} = $pt->{normal}[0];
-    # in case of extended partitions, the start sector is local to the partition or to the first extended_part!
+    #- in case of extended partitions, the start sector is local to the partition or to the first extended_part!
     $pt->{normal}{start} += $pt->{start};
 
     verifyInside($pt->{normal}, $extended) or die "partition $pt->{normal}{device} is not inside its extended partition";
@@ -281,7 +281,7 @@ sub read_extended($$) {
 sub write($) {
     my ($hd) = @_;
 
-    # set first primary partition active if no primary partitions are marked as active.
+    #- set first primary partition active if no primary partitions are marked as active.
     for ($hd->{primary}{raw}) {
 	(grep { $_->{local_start} = $_->{start}; $_->{active} ||= 0 } @$_) or $_->[0]{active} = 0x80;
     }
@@ -296,7 +296,7 @@ sub write($) {
     }
     $hd->{isDirty} = 0;
 
-    # now sync disk and re-read the partition table 
+    #- now sync disk and re-read the partition table 
     if ($hd->{needKernelReread}) {
 	sync();
 	partition_table_raw::kernel_read($hd);
@@ -317,21 +317,21 @@ sub remove($$) {
     my ($hd, $part) = @_;
     my $i;
 
-    # first search it in the primary partitions
+    #- first search it in the primary partitions
     $i = 0; foreach (@{$hd->{primary}{normal}}) {
 	if ($_ eq $part) {
 	    splice(@{$hd->{primary}{normal}}, $i, 1);
-	    %$_ = (); # blank it
+	    %$_ = (); #- blank it
 
 	    return $hd->{isDirty} = $hd->{needKernelReread} = 1;
 	}
 	$i++;
     }
-    # otherwise search it in extended partitions
+    #- otherwise search it in extended partitions
     foreach (@{$hd->{extended}}) {
 	$_->{normal} eq $part or next;
 
-	delete $_->{normal}; # remove it
+	delete $_->{normal}; #- remove it
 	remove_empty_extended($hd);
 
 	return $hd->{isDirty} = $hd->{needKernelReread} = 1;
@@ -344,12 +344,12 @@ sub add_primary($$) {
     my ($hd, $part) = @_;
 
     {
-	local $hd->{primary}{normal}; # save it to fake an addition of $part, that way add_primary do not modify $hd if it fails
+	local $hd->{primary}{normal}; #- save it to fake an addition of $part, that way add_primary do not modify $hd if it fails
 	push @{$hd->{primary}{normal}}, $part;
-	adjust_main_extended($hd); # verify
+	adjust_main_extended($hd); #- verify
 	raw_add($hd->{primary}{raw}, $part);
     }
-    push @{$hd->{primary}{normal}}, $part; # really do it
+    push @{$hd->{primary}{normal}}, $part; #- really do it
 }
 
 sub add_extended($$) {
@@ -363,7 +363,7 @@ sub add_extended($$) {
 	my $start = min($e->{start}, $part->{start});
 	$end = max($end, $part->{start} + $part->{size}) - $start;
 	
-	{ # faking a resizing of the main extended partition to test for problems
+	{ #- faking a resizing of the main extended partition to test for problems
 	    local $e->{start} = $start;
 	    local $e->{size} = $end - $start;
 	    eval { verifyPrimary($hd->{primary}) };
@@ -386,7 +386,7 @@ The only solution is to move your primary partitions to have the hole next to th
     } else {
 
 	my ($ext, $ext_size) = is_empty_array_ref($hd->{extended}) ?
-	  ($hd->{primary}, -1) : # -1 size will be computed by adjust_main_extended
+	  ($hd->{primary}, -1) : #- -1 size will be computed by adjust_main_extended
 	  (top(@{$hd->{extended}}), $part->{size});
 	my %ext = ( type => 5, start => $part->{start}, size => $ext_size );
     
@@ -394,7 +394,7 @@ The only solution is to move your primary partitions to have the hole next to th
 	$ext->{extended} = \%ext;
 	push @{$hd->{extended}}, { %ext, raw => [ $part, {}, {}, {} ], normal => $part };
     }
-    $part->{start}++; $part->{size}--; # let it start after the extended partition sector
+    $part->{start}++; $part->{size}--; #- let it start after the extended partition sector
     adjustStartAndEnd($hd, $part);
 
     adjust_main_extended($hd);
@@ -407,7 +407,7 @@ sub add($$;$) {
     $part->{isFormatted} = 0;
     $part->{rootDevice} = $hd->{device};
     $hd->{isDirty} = $hd->{needKernelReread} = 1;
-    $part->{start} ||= 1; # starting at sector 0 is not allowed
+    $part->{start} ||= 1; #- starting at sector 0 is not allowed
     adjustStartAndEnd($hd, $part);
 
     my $e = $hd->{primary}{extended};
@@ -417,10 +417,10 @@ sub add($$;$) {
 	eval { add_primary($hd, $part) };
 	return unless $@;
     }
-    eval { add_extended($hd, $part) }; # try adding extended
+    eval { add_extended($hd, $part) }; #- try adding extended
     if (my $err = $@) {
 	eval { add_primary($hd, $part) };
-	die $@ if $@; # send the add extended error which should be better
+	die $@ if $@; #- send the add extended error which should be better
     }
 }
 
@@ -471,7 +471,7 @@ sub load($$;$) {
 
     $h{totalsectors} == $hd->{totalsectors} or $force or cdie("Bad totalsectors");
 
-    # unsure we don't modify totalsectors
+    #- unsure we don't modify totalsectors
     local $hd->{totalsectors};
 
     @{$hd}{@fields2save} = @$h;

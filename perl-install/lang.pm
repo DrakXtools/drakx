@@ -13,9 +13,9 @@ use log;
 #-######################################################################################
 #- Globals
 #-######################################################################################
-# key (to be used in $LC_ALL), [0] = english name, [1] = charset encoding,
-# [2] = value for $LANG, [3] = value for LANGUAGE (a list of possible
-# languages, carefully choosen)
+#- key (to be used in $LC_ALL), [0] = english name, [1] = charset encoding,
+#- [2] = value for $LANG, [3] = value for LANGUAGE (a list of possible
+#- languages, carefully choosen)
 my %languages = (
   'en'  => [ 'English',			undef,	      'en', 'en_US' ],
 'fr_FR' => [ 'French (France)',		'iso-8859-1', 'fr', 'fr_FR' ],
@@ -56,16 +56,16 @@ my %charsets = (
   "iso-8859-5" => [ "iso05.f16",		"iso05",
 	"*-helvetica-medium-r-normal--14-*-*-*-*-iso8859-1," .
 	"*-helvetica-medium-r-normal--14-*-*-*-*-iso8859-5" ],
-# arabic needs special console driver for text mode [acon]
-# (and gtk support isn't done yet)
+#- arabic needs special console driver for text mode [acon]
+#- (and gtk support isn't done yet)
   "iso-8859-6" => [ "iso06.f16",		"iso06",
 	"*-helvetica-medium-r-normal--14-*-*-*-*-iso8859-1," .
 	"*-helvetica-medium-r-normal--14-*-*-*-*-iso8859-6" ],
   "iso-8859-7" => [ "iso07.f16",		"iso07",
 	"*-helvetica-medium-r-normal--14-*-*-*-*-iso8859-1," .
 	"*-helvetica-medium-r-normal--14-*-*-*-*-iso8859-7" ],
-# hebrew needs special console driver for text mode (none yet)
-# (and gtk support isn't done yet)
+#- hebrew needs special console driver for text mode (none yet)
+#- (and gtk support isn't done yet)
   "iso-8859-8" => [ "iso08.f16",		"iso08",
 	"*-helvetica-medium-r-normal--14-*-*-*-*-iso8859-1," .
 	"*-helvetica-medium-r-normal--14-*-*-*-*-iso8859-8" ],
@@ -75,7 +75,7 @@ my %charsets = (
   "iso-8859-15" => [ "lat0-sun16.psf",		"iso15",
 	"*-helvetica-medium-r-normal--14-*-*-*-*-iso8859-1," .
 	"*-helvetica-medium-r-normal--14-*-*-*-*-iso8859-15" ],
-# japanese needs special console driver for text mode [kon2]
+#- japanese needs special console driver for text mode [kon2]
   "jisx0208"   => [ "????",			"????",
 	"-misc-fixed-medium-r-normal--14-130-75-75-c-70-jisx0201.1976-0"
 	 ],
@@ -150,32 +150,32 @@ sub write {
     }
 }
 
-#sub load_font {
-#    my ($charset) = @_;
-#    my $fontFile = "lat0-sun16";
-#
-#    if (my $c = $charsets{$charset}) {
-#	 log::l("loading $charset font");
-#	 $fontFile = $c->[0];
-#    }
-#
-#    # text mode font  
-#    log::l("loading font /usr/share/consolefonts/$fontFile");
-#    #c::loadFont("/tmp/$fontFile") or log::l("error in loadFont: one of PIO_FONT PIO_UNIMAPCLR PIO_UNIMAP PIO_UNISCRNMAP failed: $!");
-#    #print STDERR "\033(K";
-#
-#}
+#-sub load_font {
+#-    my ($charset) = @_;
+#-    my $fontFile = "lat0-sun16";
+#-
+#-    if (my $c = $charsets{$charset}) {
+#-	   log::l("loading $charset font");
+#-	   $fontFile = $c->[0];
+#-    }
+#-
+#-    # text mode font  
+#-    log::l("loading font /usr/share/consolefonts/$fontFile");
+#-    #c::loadFont("/tmp/$fontFile") or log::l("error in loadFont: one of PIO_FONT PIO_UNIMAPCLR PIO_UNIMAP PIO_UNISCRNMAP failed: $!");
+#-    #print STDERR "\033(K";
+#-
+#-}
 
-sub get_x_fontset {
-    my ($lang) = @_;
-    my $def = "*-helvetica-medium-r-normal--14-*-*-*-*-iso8859-1";
-
-    my $l = $languages{$lang}  or return $def;
-    my $c = $charsets{$l->[1]} or return $def;
-    $c->[2];
-}
+#-sub get_x_fontset {
+#-    my ($lang) = @_;
+#-    my $def = "*-helvetica-medium-r-normal--14-*-*-*-*-iso8859-1";
+#-
+#-    my $l = $languages{$lang}  or return $def;
+#-    my $c = $charsets{$l->[1]} or return $def;
+#-    $c->[2];
+#-}
 
 #-######################################################################################
 #- Wonderful perl :(
 #-######################################################################################
-1; # 
+1;

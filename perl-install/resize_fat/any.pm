@@ -18,7 +18,7 @@ $DIRECTORY = 2;
 1;
 
 
-# returns the number of clusters for a given filesystem type
+#- returns the number of clusters for a given filesystem type
 sub min_cluster_count($) {
     my ($fs) = @_;
     (1 << $ {{ FAT16 => 12, FAT32 => 12 }}{$fs->{fs_type}}) - 12;
@@ -30,20 +30,20 @@ sub max_cluster_count($) {
 
 
 
-# calculates the minimum size of a partition, in physical sectors
+#- calculates the minimum size of a partition, in physical sectors
 sub min_size($) {
     my ($fs) = @_;
     my $count = $fs->{clusters}{count};
 
-    # directories are both in `used' and `dirs', so are counted twice
-    # It's done on purpose since we're moving all directories. So at the worse
-    # moment, 2 directories are there, but that way nothing wrong can happen :)
+    #- directories are both in `used' and `dirs', so are counted twice
+    #- It's done on purpose since we're moving all directories. So at the worse
+    #- moment, 2 directories are there, but that way nothing wrong can happen :)
     my $min_cluster_count = max(2 + $count->{used} + $count->{bad} + $count->{dirs}, min_cluster_count($fs));
 
     $min_cluster_count * divide($fs->{cluster_size}, $SECTORSIZE) + 
 	divide($fs->{cluster_offset}, $SECTORSIZE);
 }
-# calculates the maximum size of a partition, in physical sectors
+#- calculates the maximum size of a partition, in physical sectors
 sub max_size($) {
     my ($fs) = @_;
 
@@ -53,8 +53,8 @@ sub max_size($) {
 	divide($fs->{cluster_offset}, $SECTORSIZE);
 }
 
-# fills in $fs->{fat_flag_map}. 
-# Each FAT entry is flagged as either FREE, FILE or DIRECTORY.
+#- fills in $fs->{fat_flag_map}. 
+#- Each FAT entry is flagged as either FREE, FILE or DIRECTORY.
 sub flag_clusters {
     my ($fs) = @_;
     my ($cluster, $entry, $type);

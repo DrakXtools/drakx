@@ -15,91 +15,30 @@ my $scsi = 0;
 my %deps = ();
 
 
-my @neOptions = (
-  [ "io=", "Base IO port:", "0x300:0x280:0x320:0x340:0x360" ],
-  [ "irq=", "IRQ level:", "" ],
-);
-
-my @de4x5Options = (
-  [ "io=", "Base IO port:", "0x0b" ],
-);
-
-my @cdu31aOptions = (
-  [ "cdu31a_port=", "Base IO port:", "" ],
-  [ "cdu31a_irq=", "IRQ level:", "" ],
-);
-
-#
-#my %knownAliases = (
-#    eth => { type => 'net', minor => 'ethernet' },
-#    scsi_hostadapter => { type => 'scsi' },
-#);
-#
-#my @neOptions = (
-#  [ "io=", __("Base IO port:"), "0x300", "0x280", "0x320", "0x340", "0x360" ],
-#  [ "irq=", __("IRQ level:"), "" ],
-#);
-#
-#my @de4x5Options = (
-#  [ "io=", __("Base IO port:"), "0x0b" ],
-#);
-#
-#my @cdu31aOptions = (
-#  [ "cdu31a_port=", __("Base IO port:"), "" ],
-#  [ "cdu31a_irq=", __("IRQ level:"), "" ],
-#);
-#
-#my @cm206Options = (
-#  [ "cm206=", __("IO base, IRQ:"), "" ],
-#);
-#
-#my @mcdOptions = (
-#  [ "mcd=", __("Base IO port:"), "" ],
-#);
-#
-#my @optcdOptions = (
-#  [ "optcd=", __("Base IO port:"), "" ],
-#);
-#
-#my @fdomainOptions = (
-#  [ "setup_called=", __("Use other options"), "1" ],
-#  [ "port_base=", __("Base IO port:"), "0xd800" ],
-#  [ "interrupt_level=", __("Interrupt level (IRQ):"), "10" ],
-#);
-#
-#my @sbpcdOptions = (
-#  [ "sbpcd=", __("IO base, IRQ, label:"), "" ],
-#);
-#
-#my @parportPcOptions = (
-#  [ "io=", __("Base IO port:"), "0x378" ],
-#  [ "irq=", __("IRQ level:"), "7" ],
-#);
-#
-#my @modules_fields = qw(shouldAutoprobe options flags defaultOptions);
-#my %modules = (
-#  "8390" => [ 1 ],
-#  "cdu31a" => [ 0, \@cdu31aOptions ],
-#  "cm206" => [ 0, \@cm206Options ],
-#  "de4x5" => [ 1, \@de4x5Options, 'AUTOPROBE', "io=0" ],
-#  "ds" => [ 1, undef, 0, '' ],
-#  "fdomain" => [ 1, \@fdomainOptions, 0, '' ],
-#  "i82365" => [ 1, undef, 0, '' ],
-#  "isofs" => [ 1, undef, 0, '' ],
-#  "loop" => [ 1, undef, 0, '' ],
-#  "lp" => [ 1, undef, 0, '' ],
-#  "parport" => [ 1, undef, 0, '' ],
-#  "parport_pc" => [ 1, \@parportPcOptions, 0, "irq=7" ],
-#  "mcd" => [ 0, \@mcdOptions, 0, '' ],
-#  "ne" => [ 0, \@neOptions, 'FAKEAUTOPROBE', "io=0x300" ],
-#  "nfs" => [ 1, undef, 0, '' ],
-#  "optcd" => [ 0, \@optcdOptions, 0, '' ],
-#  "pcmcia_core" => [ 1, undef, 0, '' ],
-#  "sbpcd" => [ 1, \@sbpcdOptions, 0, '' ],
-#  "smbfs" => [ 1, undef, 0, '' ],
-#  "tcic" => [ 1, undef, 0, '' ],
-#  "vfat" => [ 1, undef, 0, '' ],
-#);
+#-my @modules_fields = qw(shouldAutoprobe options flags defaultOptions);
+#-my %modules = (
+#-  "8390" => [ 1 ],
+#-  "cdu31a" => [ 0, \@cdu31aOptions ],
+#-  "cm206" => [ 0, \@cm206Options ],
+#-  "de4x5" => [ 1, \@de4x5Options, 'AUTOPROBE', "io=0" ],
+#-  "ds" => [ 1, undef, 0, '' ],
+#-  "fdomain" => [ 1, \@fdomainOptions, 0, '' ],
+#-  "i82365" => [ 1, undef, 0, '' ],
+#-  "isofs" => [ 1, undef, 0, '' ],
+#-  "loop" => [ 1, undef, 0, '' ],
+#-  "lp" => [ 1, undef, 0, '' ],
+#-  "parport" => [ 1, undef, 0, '' ],
+#-  "parport_pc" => [ 1, \@parportPcOptions, 0, "irq=7" ],
+#-  "mcd" => [ 0, \@mcdOptions, 0, '' ],
+#-  "ne" => [ 0, \@neOptions, 'FAKEAUTOPROBE', "io=0x300" ],
+#-  "nfs" => [ 1, undef, 0, '' ],
+#-  "optcd" => [ 0, \@optcdOptions, 0, '' ],
+#-  "pcmcia_core" => [ 1, undef, 0, '' ],
+#-  "sbpcd" => [ 1, \@sbpcdOptions, 0, '' ],
+#-  "smbfs" => [ 1, undef, 0, '' ],
+#-  "tcic" => [ 1, undef, 0, '' ],
+#-  "vfat" => [ 1, undef, 0, '' ],
+#-);
 my @drivers_by_category = (
 [ \&detect_devices::hasEthernet, 'net', 'ethernet', {
   "3c509" => "3com 3c509",
@@ -274,7 +213,7 @@ sub load_raw($@) {
 
     run_program::run("insmod", $name, @options) or die("insmod $name failed");
 
-    # this is a hack to make plip go
+    #- this is a hack to make plip go
     if ($name eq "parport_pc") {
 	foreach (@options) {
 	    /^irq=(\d+)/ or next;
@@ -315,7 +254,7 @@ sub read_conf($;$) {
 	    $$scsi = max($$scsi, $1 || 0) if /^\s*alias\s+scsi_hostadapter (\d*)/x && $scsi;
 	} if /^\s*(\S+)\s+(\S+)\s+(.*?)\s*$/;
     }
-    # cheating here: not handling aliases of aliases
+    #- cheating here: not handling aliases of aliases
     while (my ($k, $v) = each %c) {
 	$$scsi ||= $v->{scsi_hostadapter} if $scsi;
 	if (my $a = $v->{alias}) {
@@ -372,15 +311,15 @@ sub load_thiskind($;&) {
     }
 }
 
-# This assumes only one of each driver type is loaded
-sub removeDeviceDriver {
-#    my ($type) = @_;
-#
-#    my @m = grep { $loaded{$_}{type} eq $type } keys %loaded;
-#    @m or return 0;
-#    @m > 1 and log::l("removeDeviceDriver assume only one of each driver type is loaded, which is not the case (" . join(' ', @m) . ")");
-#    removeModule($m[0]);
-#    1;
-}
+#-#- This assumes only one of each driver type is loaded
+#-sub removeDeviceDriver {
+#-    my ($type) = @_;
+#-
+#-    my @m = grep { $loaded{$_}{type} eq $type } keys %loaded;
+#-    @m or return 0;
+#-    @m > 1 and log::l("removeDeviceDriver assume only one of each driver type is loaded, which is not the case (" . join(' ', @m) . ")");
+#-    removeModule($m[0]);
+#-    1;
+#-}
 
 

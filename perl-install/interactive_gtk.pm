@@ -12,12 +12,12 @@ use my_gtk qw(:helpers :wrappers);
 
 1;
 
-## redefine ask_warn
-#sub ask_warn {
-#    my $o = shift;
-#    local $my_gtk::grab = 1;
-#    $o->SUPER::ask_warn(@_);
-#}
+#-#- redefine ask_warn
+#-sub ask_warn {
+#-    my $o = shift;
+#-    local $my_gtk::grab = 1;
+#-    $o->SUPER::ask_warn(@_);
+#-}
 
 sub ask_from_entryW {
     my ($o, $title, $messages, $def) = @_;
@@ -77,10 +77,10 @@ sub ask_many_from_list_refW($$$$$) {
 sub ask_from_entries_refW {
     my ($o, $title, $messages, $l, $val, %hcallback) = @_;
     my $num_fields = @{$l};
-    my $ignore = 0; #to handle recursivity 
+    my $ignore = 0; #-to handle recursivity 
 
     my $w       = my_gtk->new($title, %$o);
-    #the widgets
+    #-the widgets
     my @entries = map { 
 	if ($_->{type} eq "list") {
 	    my $depth_combo = new Gtk::Combo;
@@ -113,10 +113,10 @@ sub ask_from_entries_refW {
 
 
     for (my $i = 0; $i < $num_fields; $i++) {
-	my $ind = $i; #cos lexical bindings pb !!
+	my $ind = $i; #-cos lexical bindings pb !!
 	my $entry = comb_entry($entries[$i], $val->[$i]);
 	my $changed_callback = sub {
-	    return if $ignore; #handle recursive deadlock
+	    return if $ignore; #-handle recursive deadlock
 	    &{$updates[$ind]};
 	    if ($hcallback{changed}) {
 		&{$hcallback{changed}}($ind);
@@ -151,8 +151,8 @@ sub ask_from_entries_refW {
 	   my $c = chr $e->{keyval};
 	   if ($c eq "\x8d")
 	     {
-		 #don't know why it works, i believe that 
-		 #i must say before &$go_to_next, but with it doen't work HACK!
+		 #-don't know why it works, i believe that 
+		 #-i must say before &$go_to_next, but with it doen't work HACK!
 		 $w->signal_emit_stop("key_press_event");
 	     }
 	    ;
@@ -175,7 +175,7 @@ sub ask_from_entries_refW {
     if ($hcallback{complete}) {
 	my $callback = sub {
 	    my ($error, $focus) = &{$hcallback{complete}};
-	    #update all the value
+	    #-update all the value
 	    $ignore = 1;
 	    foreach (@updates_inv) { &{$_};}
 	    $ignore = 0;

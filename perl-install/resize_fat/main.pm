@@ -36,7 +36,7 @@ use resize_fat::any;
 
 1;
 
-# - reads in the boot sector/partition info., and tries to make some sense of it
+#- - reads in the boot sector/partition info., and tries to make some sense of it
 sub new($$$) {
     my ($type, $device, $fs_name) = @_;
     my $fs = { device => $device, fs_name => $fs_name } ;
@@ -51,9 +51,9 @@ sub new($$$) {
     bless $fs, $type;
 }
 
-# copy all clusters >= <start_cluster> to a new place on the partition, less
-# than <start_cluster>. Only copies files, not directories.
-# (use of buffer needed because the seeks slow like hell the hard drive)
+#- copy all clusters >= <start_cluster> to a new place on the partition, less
+#- than <start_cluster>. Only copies files, not directories.
+#- (use of buffer needed because the seeks slow like hell the hard drive)
 sub copy_clusters {
     my ($fs, $cluster) = @_;
     my @buffer;
@@ -71,13 +71,13 @@ sub copy_clusters {
     &$flush();
 }
 
-# Constructs the new directory tree to match the new file locations.
+#- Constructs the new directory tree to match the new file locations.
 sub construct_dir_tree {
     my ($fs) = @_;
 
     if ($resize_fat::isFAT32) { 
-	# fat32's root must remain in the first 64k clusters
-	# so don't set it as DIRECTORY, it will be specially handled
+	#- fat32's root must remain in the first 64k clusters
+	#- so don't set it as DIRECTORY, it will be specially handled
 	$fs->{fat_flag_map}[$fs->{fat32_root_dir_cluster}] = $resize_fat::any::FREE;
     }
 
@@ -91,12 +91,12 @@ sub construct_dir_tree {
 
     sync();
 
-    # until now, only free clusters have been written. it's a null operation if we stop here.
-    # it means no corruption :)
+    #- until now, only free clusters have been written. it's a null operation if we stop here.
+    #- it means no corruption :)
     #
-    # now we must be as fast as possible!
+    #- now we must be as fast as possible!
 
-    # remapping non movable root directory
+    #- remapping non movable root directory
     if ($resize_fat::isFAT32) {
 	my $cluster = $fs->{fat32_root_dir_cluster};
 
@@ -112,10 +112,10 @@ sub construct_dir_tree {
 sub min_size($) { &resize_fat::any::min_size }
 sub max_size($) { &resize_fat::any::max_size }
 
-# resize
-# - size is in sectors
-# - checks boundaries before starting 
-# - copies all data beyond new_cluster_count behind the frontier
+#- resize
+#- - size is in sectors
+#- - checks boundaries before starting 
+#- - copies all data beyond new_cluster_count behind the frontier
 sub resize {
     my ($fs, $size) = @_;
 
@@ -158,7 +158,7 @@ sub resize {
 
     resize_fat::boot_sector::write($fs);
 
-    $resize_fat::isFAT32 and eval { resize_fat::info_sector::write($fs) }; # doesn't matter if this fails - its pretty useless!
+    $resize_fat::isFAT32 and eval { resize_fat::info_sector::write($fs) }; #- doesn't matter if this fails - its pretty useless!
 
     sync();
     log::l("resize_fat: done");

@@ -35,7 +35,7 @@ sub getinfoFromXF86Config {
     my $o = shift || {};
     my (%c, $depth);
 
-    $o->{card}{server} ||= $1 if readlink("/etc/X11/X") =~ /XF86_ (\w+)$/x; # /x for perl2fcalls
+    $o->{card}{server} ||= $1 if readlink("/etc/X11/X") =~ /XF86_ (\w+)$/x; #- /x for perl2fcalls
     
     local *F;
     open F, "/etc/X11/XF86Config" or return {};

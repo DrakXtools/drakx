@@ -78,7 +78,7 @@ sub readCardsDB {
     push @{$cards{S3}{lines}}, $s3_comment;
     push @{$cards{'CL-GD'}{lines}}, $cirrus_comment;
 
-    # this entry is broken in X11R6 cards db 
+    #- this entry is broken in X11R6 cards db 
     $cards{I128}{flags}{noclockprobe} = 1;
 }
 
@@ -150,8 +150,8 @@ sub cardConfiguration(;$$) {
 
     readCardsDB("$prefix/usr/X11R6/lib/X11/Cards");
 
-    add2hash($card, $cards{$card->{type}}) if $card->{type}; # try to get info from given type
-    $card->{type} = undef unless $card->{server}; # bad type as we can't find the server
+    add2hash($card, $cards{$card->{type}}) if $card->{type}; #- try to get info from given type
+    $card->{type} = undef unless $card->{server}; #- bad type as we can't find the server
 	
     add2hash($card, cardConfigurationAuto()) unless $card->{server} || $noauto;
     add2hash($card, { type => $in->ask_from_list('', _("Choose a graphic card"), [keys %cards]) }) unless $card->{type} || $card->{server};
@@ -245,8 +245,8 @@ sub testFinalConfig($;$) {
     }
     do { sleep 1; } until (c::Xtest(':0'));
 
-    # create a link from the non-prefixed /tmp/.X11-unix/X9 to the prefixed one
-    # that way, you can talk to :9 without doing a chroot
+    #- create a link from the non-prefixed /tmp/.X11-unix/X9 to the prefixed one
+    #- that way, you can talk to :9 without doing a chroot
     unlink "/tmp/.X11-unix/X9" if $prefix;
     symlink "$prefix/tmp/.X11-unix/X9", "/tmp/.X11-unix/X9" if $prefix;
 
@@ -291,10 +291,10 @@ _("To find the available resolutions i will try different ones.
 Your screen will blink... 
 You can switch if off if you want, you'll hear a beep when it's over")) or return;
 
-    # swith to virtual console 1 (hopefully not X :)
+    #- swith to virtual console 1 (hopefully not X :)
     my $vt = setVirtual(1);
 
-    # Configure the modes order.
+    #- Configure the modes order.
     my ($ok, $best);
     foreach (reverse @depths) {
 	local $card->{default_depth} = $_;
@@ -308,9 +308,9 @@ You can switch if off if you want, you'll hear a beep when it's over")) or retur
 	}
     }
 
-    # restore the virtual console
+    #- restore the virtual console
     setVirtual($vt);
-    print "\a"; # beeeep!
+    print "\a"; #- beeeep!
 }
 
 sub autoDefaultDepth($$) {
@@ -332,12 +332,12 @@ sub chooseResolutions($$) {
 
     my $W = my_gtk->new(_("Resolution"));
     my %txt2depth = reverse %depths;
-    my $chosen_w = 9999999; # will be set by the combo callback
+    my $chosen_w = 9999999; #- will be set by the combo callback
     my ($r, $depth_combo, %w2depth, %w2h, %w2widget);
 
     my $set_depth = sub { $depth_combo->entry->set_text(translate($depths{$chosen_depth})) };
 
-    # the set function is usefull to toggle the CheckButton with the callback being ignored
+    #- the set function is usefull to toggle the CheckButton with the callback being ignored
     my $ignore;
     my $set = sub { $ignore = 1; $_[0]->set_active(1); $ignore = 0; };
 
@@ -394,33 +394,33 @@ sub resolutionsConfiguration($$) {
     my $nowarning = $auto || $option eq 'nowarning';
     my $noauto = $option eq 'noauto';
 
-    # For the mono and vga16 server, no further configuration is required.
+    #- For the mono and vga16 server, no further configuration is required.
     return if member($card->{server}, "Mono", "VGA16");
 
-    # some of these guys hate to be poked               
-    # if we dont know then its at the user's discretion
-    #my $manual ||= 
-    #  $card->{server} =~ /^(TGA|Mach32)/ || 
-    #  $card->{name} =~ /^Riva 128/ ||
-    #  $card->{chipset} =~ /^(RIVA128|mgag)/ ||
-    #  $::expert;
-    #
-    #my $unknown = 
-    #  member($card->{server}, qw(S3 S3V I128 Mach64)) ||
-    #  member($card->{type}, 
-    #	      "Matrox Millennium (MGA)",
-    #	      "Matrox Millennium II",
-    #	      "Matrox Millennium II AGP",
-    #	      "Matrox Mystique",
-    #	      "Matrox Mystique",
-    #	      "S3",
-    #	      "S3V",
-    #	      "I128",
-    #	     ) ||
-    #  $card->{type} =~ /S3 ViRGE/;
-    #
-    #$unknown and $manual ||= !$in->ask_okcancel('', [ _("I can try to autodetect information about graphic card, but it may freeze :("),
-    #						       _("Do you want to try?") ]);
+    #- some of these guys hate to be poked               
+    #- if we dont know then its at the user's discretion
+    #-my $manual ||= 
+    #-	$card->{server} =~ /^(TGA|Mach32)/ || 
+    #-	$card->{name} =~ /^Riva 128/ ||
+    #-	$card->{chipset} =~ /^(RIVA128|mgag)/ ||
+    #-	$::expert;
+    #-
+    #-my $unknown = 
+    #-	member($card->{server}, qw(S3 S3V I128 Mach64)) ||
+    #-	member($card->{type}, 
+    #-	       "Matrox Millennium (MGA)",
+    #-	       "Matrox Millennium II",
+    #-	       "Matrox Millennium II AGP",
+    #-	       "Matrox Mystique",
+    #-	       "Matrox Mystique",
+    #-	       "S3",
+    #-	       "S3V",
+    #-	       "I128",
+    #-	      ) ||
+    #-	$card->{type} =~ /S3 ViRGE/;
+    #-
+    #-$unknown and $manual ||= !$in->ask_okcancel('', [ _("I can try to autodetect information about graphic card, but it may freeze :("),
+    #-							_("Do you want to try?") ]);
     
     unless ($card->{depth}) {
 	$card->{depth}{$_} = [ map { [ split "x" ] } @resolutions ] 
@@ -434,14 +434,14 @@ Do you want to try?")))) {
 	}
     }
 
-    # sort resolutions in each depth
+    #- sort resolutions in each depth
     foreach (values %{$card->{depth}}) {
 	my $i;
 	@$_ = grep { first($i != $_->[0], $i = $_->[0]) }
 	  sort { $b->[0] <=> $a->[0] } @$_;
     }
 
-    # remove unusable resolutions (based on the video memory size)
+    #- remove unusable resolutions (based on the video memory size)
     keepOnlyLegalModes($card);
 
     my $res = $o->{resolution_wanted} || $resolution_wanted;
@@ -449,18 +449,18 @@ Do you want to try?")))) {
 
     $auto or ($depth, $res) = chooseResolutions($card, $depth) or return;
 
-    # needed in auto mode when all has been provided by the user
+    #- needed in auto mode when all has been provided by the user
     $card->{depth}{$depth} or die "you fixed an unusable depth";
 
-    # remove all biggest resolution (keep the small ones for ctl-alt-+)
-    # otherwise there'll be a virtual screen :(
+    #- remove all biggest resolution (keep the small ones for ctl-alt-+)
+    #- otherwise there'll be a virtual screen :(
     $card->{depth}{$depth} = [ grep { $_->[0] <= $res } @{$card->{depth}{$depth}} ];
     $card->{default_depth} = $depth;
     1;
 }
 
 
-# * Create the XF86Config file. 
+#- Create the XF86Config file. 
 sub write_XF86Config {
     my ($o, $file) = @_;
     my $O;
@@ -470,7 +470,7 @@ sub write_XF86Config {
 
     print F $XF86firstchunk_text;
 
-    # Write keyboard section.     
+    #- Write keyboard section.     
     $O = $o->{keyboard};
     print F $keyboardsection_start;
 
@@ -479,12 +479,12 @@ sub write_XF86Config {
     print F qq(    XkbLayout       "$O->{xkb_keymap}"\n);
     print F $keyboardsection_end;
 
-    # Write pointer section.     
+    #- Write pointer section.     
     $O = $o->{mouse};
     print F $pointersection_text1;
     print F qq(    Protocol    "$O->{XMOUSETYPE}"\n);
     print F qq(    Device      "$O->{device}"\n);
-    # this will enable the "wheel" or "knob" functionality if the mouse supports it 
+    #- this will enable the "wheel" or "knob" functionality if the mouse supports it 
     print F "    ZAxisMapping 4 5\n" if
       member($O->{XMOUSETYPE}, qw(IntelliMouse IMPS/2 ThinkingMousePS/2 NetScrollPS/2 NetMousePS/2 MouseManPlusPS/2));
 
@@ -500,7 +500,7 @@ sub write_XF86Config {
     print F "    ClearRTS\n\n"  if $O->{cleardtrrts};
     print F "EndSection\n\n\n";
 
-    # Write monitor section.     
+    #- Write monitor section.     
     $O = $o->{monitor};
     print F $monitorsection_text1;
     print F qq(    Identifier "$O->{type}"\n);
@@ -519,7 +519,7 @@ sub write_XF86Config {
 	     $modelines_text);
     print F "EndSection\n\n\n";
 
-    # Write Device section.     
+    #- Write Device section.     
     $O = $o->{card};
     print F $devicesection_text;
     print F qq(Section "Device"\n);
@@ -543,7 +543,7 @@ sub write_XF86Config {
     }
     print F "EndSection\n\n\n";
 
-    # Write Screen sections.     
+    #- Write Screen sections.     
     print F $screensection_text1;
 
     my $screen = sub {
@@ -568,7 +568,7 @@ Section "Screen"
 	print F "EndSection\n";
     };
     
-    # SVGA screen section.
+    #- SVGA screen section.
     print F qq(
 # The Colour SVGA server
 );
@@ -598,7 +598,7 @@ sub XF86check_link {
 
     my $l = "$prefix/usr/X11R6/lib/X11/XF86Config";
 
-    if (-e $l && (stat($f))[1] != (stat($l))[1]) { # compare the inode, must be the sames
+    if (-e $l && (stat($f))[1] != (stat($l))[1]) { #- compare the inode, must be the sames
 	-e $l and unlink($l) || die "can't remove bad $l";
 	symlink "../../../../etc/X11/XF86Config", $l;
     }
@@ -621,7 +621,7 @@ sub show_info {
     $in->ask_warn('', $info);
 }
 
-# * Program entry point. 
+#- Program entry point. 
 sub main {
     my $o;
     ($prefix, $o, $in, $install) = @_;

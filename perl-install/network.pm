@@ -48,7 +48,7 @@ sub write_conf {
 sub write_resolv_conf {
     my ($file, $netc) = @_;
 
-    # We always write these, even if they were autoconfigured. Otherwise, the reverse name lookup in the install doesn't work. 
+    #- We always write these, even if they were autoconfigured. Otherwise, the reverse name lookup in the install doesn't work. 
     unless ($netc->{DOMAINNAME} || dnsServers($netc)) {
 	unlink($file);
 	log::l("neither domain name nor dns server are configured");
@@ -62,7 +62,7 @@ sub write_resolv_conf {
     print F "nameserver $_\n" foreach dnsServers($netc);
     print F "#$_" foreach @l;
 
-    #res_init();		# reinit the resolver so DNS changes take affect 
+    #-res_init();		# reinit the resolver so DNS changes take affect 
     1;
 }
 
@@ -158,13 +158,13 @@ sub netmask {
     return "255.255.255.0" unless is_ip($ip);
     $ip =~ $ip_regexp;
     if ($1 >= 1 && $1 < 127) {
-	return "255.0.0.0";    #1.0.0.0 to 127.0.0.0
+	return "255.0.0.0";    #-1.0.0.0 to 127.0.0.0
     } elsif ($1  >= 128 && $1 <= 191 ){
-	return "255.255.0.0";  #128.0.0.0 to 191.255.0.0
+	return "255.255.0.0";  #-128.0.0.0 to 191.255.0.0
     } elsif ($1 >= 192 && $1 <= 223) {
 	return "255.255.255.0";
     } else {
-	return "255.255.255.255"; #experimental classes
+	return "255.255.255.255"; #-experimental classes
     }
 }
 
@@ -198,4 +198,4 @@ sub gateway {
 #-######################################################################################
 #- Wonderful perl :(
 #-######################################################################################
-1; # 
+1;

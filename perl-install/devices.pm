@@ -17,15 +17,15 @@ sub size($) {
 
     my $valid_offset = sub { sysseek(F, $_[0], 0) && sysread(F, my $a, 1) };
 
-    # first try getting the size nicely
+    #- first try getting the size nicely
     my $size = 0;
     ioctl(F, c::BLKGETSIZE(), $size) and return unpack("i", $size) * $common::SECTORSIZE;
 
-    # sad it didn't work, well searching the size using the dichotomy algorithm!
+    #- sad it didn't work, well searching the size using the dichotomy algorithm!
     my $low = 0;
     my ($high, $mid);
 
-    # first find n where 2^n < size <= 2^n+1
+    #- first find n where 2^n < size <= 2^n+1
     for ($high = 1; $high > 0 && &$valid_offset($high); $high *= 2) { $low = $high; }
 
     while ($low < $high - 1) {
@@ -46,7 +46,7 @@ sub make($) {
 	$file = "$prefix/dev/$_";
 	-e $file or $file = "$prefix/tmp/$_";
     }
-    -e $file and return $file; # assume nobody takes fun at creating files named as device	
+    -e $file and return $file; #- assume nobody takes fun at creating files named as device	
 
     if (/^sd(.)(\d{0,2})/) {
 	$type = c::S_IFBLK();
@@ -100,7 +100,7 @@ sub make($) {
 	       }}{$_} or die "unknown device $_" };
     }
     
-    # make a directory for this inode if needed.
+    #- make a directory for this inode if needed.
     mkdir dirname($file), 0755;   
     
     syscall_('mknod', $file, $type | 0600, makedev($major, $minor)) or die "mknod failed (dev:$_): $!";

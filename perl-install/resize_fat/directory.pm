@@ -14,11 +14,11 @@ my @fields = (
     'extension',
     'attributes',
     'is_upper_case_name',
-    'creation_time_low',	# milliseconds
+    'creation_time_low',	#- milliseconds
     'creation_time_high',
     'creation_date',
     'access_date',
-    'first_cluster_high',	# for FAT32
+    'first_cluster_high',	#- for FAT32
     'time',
     'date',
     'first_cluster',
@@ -29,15 +29,15 @@ my @fields = (
 
 sub entry_size { psizeof($format) }
 
-# call `f' for each entry of the directory
-# if f return true, then modification in the entry are taken back
+#- call `f' for each entry of the directory
+#- if f return true, then modification in the entry are taken back
 sub traverse($$$) {
     my ($fs, $directory, $f) = @_;
 
     for (my $i = 0;; $i++) {
 	my $raw = \substr($directory, $i * psizeof($format), psizeof($format));
 
-	# empty entry means end of directory
+	#- empty entry means end of directory
 	$$raw =~ /^\0*$/ and return $directory;
 
 	my $entry; @{$entry}{@fields} = unpack $format, $$raw;
@@ -59,7 +59,7 @@ sub traverse_all($$) {
         resize_fat::dir_entry::is_directory($entry) 
 	    and traverse($fs, resize_fat::io::read_file($fs, resize_fat::dir_entry::get_cluster($entry)), $traverse_all);
 
-	undef; # no need to write back (cf traverse)
+	undef; #- no need to write back (cf traverse)
     };
 
     my $directory = $resize_fat::isFAT32 ?
@@ -69,8 +69,8 @@ sub traverse_all($$) {
 }
 
 
-# function used by construct_dir_tree to translate the `cluster' fields in each
-# directory entry
+#- function used by construct_dir_tree to translate the `cluster' fields in each
+#- directory entry
 sub remap {
     my ($fs, $directory) = @_;
 

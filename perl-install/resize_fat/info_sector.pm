@@ -9,9 +9,9 @@ use resize_fat::io;
 my $format = "a484 I I I a16";
 my @fields = (
     'unused',
-    'signature',		# should be 0x61417272
-    'free_clusters',		# -1 for unknown
-    'next_cluster',		# most recently allocated cluster
+    'signature',		#- should be 0x61417272
+    'free_clusters',		#- -1 for unknown
+    'next_cluster',		#- most recently allocated cluster
     'unused2',
 );
 

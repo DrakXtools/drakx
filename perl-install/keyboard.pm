@@ -23,10 +23,10 @@ my %lang2keyboard =
   "en" => "us",
 );
 
-# [1] = name for loadkeys, [2] = extension for Xmodmap
+#- [1] = name for loadkeys, [2] = extension for Xmodmap
 my %keyboards = (
-# armenian xmodmap have to be checked...
-# "am" => [ __("Armenian"),       "am-armscii8",  "am" ],
+#- armenian xmodmap have to be checked...
+#- "am" => [ __("Armenian"),       "am-armscii8",  "am" ],
  "be" => [ __("Belgian"),        "be-latin1",   "be" ],
  "bg" => [ __("Bulgarian"),      "bg",          "bg" ],
  "cz" => [ __("Czech"),          "cz-latin2",   "cz" ],
@@ -35,9 +35,9 @@ my %keyboards = (
 "dvorak" => [ __("Dvorak"),      "dvorak",      "dvorak" ],
  "fi" => [ __("Finnish"),        "fi-latin1",   "fi" ],
  "fr" => [ __("French"),         "fr-latin1",   "fr" ],
-# georgian keyboards have to be written...
-#"ge_ru"=>[__("Georgian (\"Russian\" layout)","ge_ru-georgian_academy","ge_ru"],
-#"ge_la"=>[__("Georgian ("\Latin\" layout)","ge_la-georgian_academy","ge_ru"], 
+#- georgian keyboards have to be written...
+#-"ge_ru"=>[__("Georgian (\"Russian\" layout)","ge_ru-georgian_academy","ge_ru"],
+#-"ge_la"=>[__("Georgian ("\Latin\" layout)","ge_la-georgian_academy","ge_ru"], 
  "gr" => [ __("Greek"),          "gr-8859_7",   "gr" ],
  "hu" => [ __("Hungarian"),      "hu-latin2",   "hu" ],
  "il" => [ __("Israelian"),      "il-8859_8",   "il" ],
@@ -55,8 +55,8 @@ my %keyboards = (
  "sg" => [ __("Swiss (german layout)"), "sg-latin1", "sg" ],
  "si" => [ __("Slovenian"),      "si-latin1",   "si" ],
  "sk" => [ __("Slovakian"),      "sk-latin2",   "sk" ],
-# the xmodmap.th has to be fixed to use tis620 keymaps
-# "th" => [ __("Thai keyboard"),  "th",          "th" ],
+#- the xmodmap.th has to be fixed to use tis620 keymaps
+#- "th" => [ __("Thai keyboard"),  "th",          "th" ],
  "tr_f"  => [ __("Turkish (traditional \"F\" model)"), "tr_f-latin5", "tr_f" ],
  "tr_q" => [ __("Turkish (modern \"Q\" model)"), "tr_q-latin5", "tr_q" ],
  "uk" => [ __("UK keyboard"),    "uk-latin1",   "uk" ],
@@ -144,7 +144,7 @@ sub read($) {
     foreach (<F>) {
 	($_) = /^KEYTABLE=(.*)/ or log::l("unrecognized entry in keyboard configuration file ($_)"), next;
 	s/^\s*"(.*)"\s*$/$1/;
-	s/\.[^.]*//; # remove extension
+	s/\.[^.]*//; #- remove extension
 	return basename($_);
     }
     die "empty keyboard configuration file";
@@ -153,4 +153,4 @@ sub read($) {
 #-######################################################################################
 #- Wonderful perl :(
 #-######################################################################################
-1; # 
+1;

@@ -17,14 +17,14 @@ use Gtk;
 use c;
 use common qw(:common :functional);
 
-my $forgetTime = 1000; # in milli-seconds
+my $forgetTime = 1000; #- in milli-seconds
 $border = 5;
 
 1;
 
-################################################################################
-# OO stuff
-################################################################################
+#-###############################################################################
+#- OO stuff
+#-###############################################################################
 sub new {
     my ($type, $title, %opts) = @_;
 
@@ -169,11 +169,11 @@ sub gtkset_default_fontset($) {
 }
 
 
-################################################################################
-# createXXX functions
+#-###############################################################################
+#- createXXX functions
 
-# these functions return a widget
-################################################################################
+#- these functions return a widget
+#-###############################################################################
 
 sub create_okcancel($;$$) {
     my ($w, $ok, $cancel) = @_;
@@ -316,11 +316,11 @@ sub _create_window($$) {
 
 
 
-################################################################################
-# ask_XXX
+#-###############################################################################
+#- ask_XXX
 
-# just give a title and some args, and it will return the value given by the user
-################################################################################
+#- just give a title and some args, and it will return the value given by the user
+#-###############################################################################
 
 sub ask_warn       { my $w = my_gtk->new(shift @_); $w->_ask_warn(@_); main($w); }
 sub ask_yesorno    { my $w = my_gtk->new(shift @_); $w->_ask_okcancel(@_, _("Yes"), _("No")); main($w); }
@@ -394,7 +394,7 @@ sub _ask_from_list($$$$) {
 	   gtkpack($o->create_box_with_title(@$messages), 
 		   @$l > 15 ? gtkset_usize(createScrolledWindow($list), 200, 280) : $list));
 
-    $o->sync; # otherwise the moveto is not done
+    $o->sync; #- otherwise the moveto is not done
     map_index {
 	$list->append($_);
 	&$select($::i) if $def && $_ eq $def; 
@@ -434,16 +434,16 @@ sub _ask_file($$) {
     $f->hide_fileop_buttons;
 }
 
-################################################################################
-# rubbish
-################################################################################
+#-###############################################################################
+#- rubbish
+#-###############################################################################
 
-#sub label_align($$) {
-#    my $w = shift;
-#    local $_ = shift;
-#    $w->set_alignment(!/W/i, !/N/i);
-#    $w
-#}
+#-sub label_align($$) {
+#-    my $w = shift;
+#-    local $_ = shift;
+#-    $w->set_alignment(!/W/i, !/N/i);
+#-    $w
+#-}
 
 #-sub _ask_from_list($$$$) {
 #-    my ($o, $messages, $l, $def) = @_;

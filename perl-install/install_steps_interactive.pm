@@ -266,7 +266,7 @@ name and directory should be used for this queue?"),
 	}
 	eval { modules::unload("lp") };
 	
-#	@port =("lp0", "lp1", "lp2");
+#-	@port =("lp0", "lp1", "lp2");
 	$o->{printer}{DEVICE}    = $port[0] if $port[0];
 
 
@@ -275,7 +275,7 @@ name and directory should be used for this queue?"),
 					    [_("Printer Device:")],
 					    [{val => \$o->{printer}{DEVICE}, list => \@port }],
 					   );
-	#TAKE A GOODDEFAULT TODO
+	#-TAKE A GOODDEFAULT TODO
 
     } elsif ($o->{printer}{TYPE} eq "REMOTE") {
 	return if !$o->ask_from_entries_ref(_("Remote lpd Printer Options"), 
@@ -348,7 +348,7 @@ wish to access and any applicable user name and password."),
     my %db_entry = %{$printer::thedb{$o->{printer}{DBENTRY}}};
 
 
-    #paper size conf
+    #-paper size conf
     $o->{printer}{PAPERSIZE} = 
       $o->ask_from_list_(_("Paper Size"),
 			 _("Paper Size"),
@@ -356,7 +356,7 @@ wish to access and any applicable user name and password."),
 			 $o->{printer}{PAPERSIZE}
 			);
 
-    #resolution size conf
+    #-resolution size conf
     my @list_res = @{$db_entry{RESOLUTION}};
     my @res = map { "${$_}{XDPI}x${$_}{YDPI}" } @list_res;
     if (@list_res) {
@@ -375,7 +375,7 @@ wish to access and any applicable user name and password."),
 					 $o->{printer}{CRLF});
 
 
-    #color_depth
+    #-color_depth
     if ($db_entry{BITSPERPIXEL}) {
 	my @list_col      = @{$db_entry{BITSPERPIXEL}};
 	my @col           = map { "$_->{DEPTH} $_->{DESCR}" } @list_col;
@@ -606,4 +606,4 @@ sub setup_thiskind {
 #-######################################################################################
 #- Wonderful perl :(
 #-######################################################################################
-1; # 
+1;

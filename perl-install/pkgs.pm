@@ -24,11 +24,11 @@ sub Package {
 sub select($$;$) {
     my ($packages, $p, $base) = @_;
     $p->{base} ||= $base;
-    $p->{selected} = -1; # selected by user
+    $p->{selected} = -1; #- selected by user
     my @l = @{$p->{deps} || die "missing deps file"};
     while (@l) {
 	my $n = shift @l;
-	$n =~ /|/ and $n = first(split '\|', $n); #TODO better handling of choice
+	$n =~ /|/ and $n = first(split '\|', $n); #-TODO better handling of choice
 	my $i = Package($packages, $n) or next;
 	$i->{base} ||= $base;
 	$i->{deps} or log::l("missing deps for $n");
@@ -42,11 +42,11 @@ sub unselect($$) {
     my $set = set_new($p->{name});
     my $l = $set->{list};
 
-    # get the list of provided packages
+    #- get the list of provided packages
     foreach my $q (@$l) {
 	my $i = Package($packages, $q);
 	$i->{selected} && !$i->{base} or next;
-	$i->{selected} = 1; # that way, its counter will be zero the first time
+	$i->{selected} = 1; #- that way, its counter will be zero the first time
 	set_add($set, @{$i->{provides} || []});
     }
 
@@ -60,7 +60,7 @@ sub unselect($$) {
 	}
     }
 
-    # garbage collect for circular dependencies
+    #- garbage collect for circular dependencies
     my $changed = 1;
     while ($changed) {
 	$changed = 0;
@@ -280,7 +280,7 @@ sub install {
 
     log::ld("starting installation: ", $nb, " packages, ", $total, " bytes");
 
-    # !! do not translate these messages, they are used when catched (cf install_steps_graphical)
+    #- !! do not translate these messages, they are used when catched (cf install_steps_graphical)
     my $callbackOpen = sub { 
 	my $fd = install_any::getFile($_[0]) or log::l("bad file $_[0]");
 	$fd ? fileno $fd : -1;

@@ -78,8 +78,9 @@ install_pms: all
 	for i in $(PMS); do \
 		dest=$(DESTREP4PMS)/`dirname $$i`; \
 		install -d $$dest; \
-		perl -ne 'print unless (/^=head/ .. /^=cut/) || /^\s*#-/ || /use (diagnostics|vars|strict)/' $$i > $(DESTREP4PMS)/$$i; \
+		perl -ne 'print unless (/^=head/ .. /^=cut/) || /#-.*/' $$i > $(DESTREP4PMS)/$$i; \
 	done
+# || /use (diagnostics|vars|strict)/
 
 	rm $(DESTREP4PMS)/c/c.xs.pm
 	mv -f $(DESTREP4PMS)/c/c.pm $(DESTREP4PMS)
@@ -134,7 +135,9 @@ get_needed_files: $(SO_FILES)
 	install -d $(DEST)/usr/X11R6/lib/X11/fonts/75dpi
 	install -d $(DEST)/usr/X11R6/lib/X11/fonts/misc
 	cd /usr/X11R6/lib/X11/fonts/75dpi ; cp -a fonts.* helvR* $(DEST)/usr/X11R6/lib/X11/fonts/75dpi
-	cd /usr/X11R6/lib/X11/fonts/misc ; cp -a fonts.* cursor.pcf.gz 6x13.pcf.gz $(DEST)/usr/X11R6/lib/X11/fonts/misc
+	cd /usr/X11R6/lib/X11/fonts/misc ; cp -a fonts.* k14.pcf.gz cursor.pcf.gz 6x13.pcf.gz $(DEST)/usr/X11R6/lib/X11/fonts/misc
+
+	for i in ru ja; do install -d $(DEST)/usr/share/locale/$$i ; cp -f `find /usr/share/locale/$$i/* -prune -type f` $(DEST)/usr/share/locale/$$i ; done
 
 	perl -I. -Ic -Ic/blib/arch -Mkeyboard -e 'foreach (keyboard::xmodmaps()) { `cp /usr/share/xmodmap/xmodmap.$$_ $(DEST)/usr/share/xmodmap` }'
 
