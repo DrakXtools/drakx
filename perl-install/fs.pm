@@ -721,7 +721,7 @@ sub mount {
 		my $err = $?;
 		die "fsck.jfs failed" if $err & 0xfc00;
 	    };
-	} elsif ($fs eq 'ext2' || $fs eq 'ext3' && $::isInstall) {
+	} elsif ($fs eq 'ext2' || $fs eq 'ext3' && $::isInstall && !$::o->{isUpgrade}) {
 	    if (!$b_rdonly) {
 		$o_wait_message->(N("Checking %s", $dev)) if $o_wait_message;
 		foreach ('-a', '-y') {
