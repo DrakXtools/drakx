@@ -313,7 +313,8 @@ sub setupBootloader {
     $o->setupBootloader($_[1] - 1);
     
     local $ENV{DRAKX_PASSWORD} = $o->{bootloader}{password};
-    run_program::rooted($o->{prefix}, "/usr/sbin/msec", $o->{security});
+    
+    any::set_security_level($o->{prefix}, $o->{security});
 }
 #------------------------------------------------------------------------------
 sub configureX {
