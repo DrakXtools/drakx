@@ -2,6 +2,7 @@
 
 use XML::Parser;
 use MDK::Common;
+use utf8;
 
 my $help;
 my $dir = "doc/manual/literal/drakx";
@@ -30,8 +31,7 @@ foreach my $lang (keys %helps) {
     print "Now transforming: $lang\n";
     local *F;
     my ($charset) = cat_("$lang.po") =~ /charset=([^\\]+)/ or die "missing charset in $lang.po\n";
-    open F, "| iconv -f utf8 -t $charset//TRANSLIT > help-$lang.pot";
-    #open F, "|cat - > help-$lang.pot";
+    open F, ">:encoding($charset)", "help-$lang.pot";
     print F "\n";
     foreach my $id (keys %{$helps{$lang}}) {
 	$base->{$id} or die "$lang:$id doesn't exist in english\n";
@@ -48,7 +48,7 @@ unlink(".memdump");
 sub save_help {
     my ($help) = @_;
     local *F;
-    open F, "| LC_ALL=fr iconv -f utf8 -t ascii//TRANSLIT > ../../help.pm";
+    open F, ">:encoding(ascii)", "../../help.pm";
     print F q{package help;
 use common;
 
@@ -79,6 +79,7 @@ sub rewrite1 {
 	    foreach ($tree) {
 		s/\s+/ /gs;
 		s/"/\\"/g;
+		tr/\x{2013}\x{00e9}/-e/;
 	    }
 	    push @l, $tree
 	} elsif ($tag eq 'screen') {
@@ -104,7 +105,6 @@ sub find {
 }
 
 sub rewrite2 {
-    use utf8;
     my ($tree, $lang) = @_;
     our $i18ned_open_text_quote  = $ {{ 
 	fr => "« ",
@@ -139,7 +139,7 @@ sub rewrite2_ {
     my $text = do {
 	my @l = map { rewrite2_($_) } @{$tree->{children}};
 	my $text = "";
-	foreach (grep { !/^\s*$/ } @l) {
+	foreach (@l) {
 	    s/^ // if $text =~ /\s$/;
 	    $text =~ s/ $// if /^\s/;
 	    $text =~ s/\n+$// if /^\n/;
