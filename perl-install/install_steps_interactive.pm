@@ -673,7 +673,7 @@ Please choose the minimal installation you want:"),
 	    install_any::setDefaultPackages($o, 'clean');
 	    $o->{compssUsersChoice}{X} = $X;
 	}
-	$unselect_all or install_any::unselectMostPackages($o);
+	install_any::unselectMostPackages($o);
     }
     1;
 }
