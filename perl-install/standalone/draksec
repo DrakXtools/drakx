@@ -132,19 +132,19 @@ my $common_opts = { col_spacings => 10, row_spacings => 5 };
 ######################## BASIC OPTIONS PAGE ################################
 my $seclevel_entry = new Gtk2::Combo();
 
-$notebook->append_page(gtkpack(new Gtk2::VBox(0, 0),
-                               basic_seclevel_explanations($msec),
-                               create_packtable($common_opts,
-                                                [ basic_seclevel_option(\$seclevel_entry, $msec) ],
-                                                [ new Gtk2::Label(N("Security Alerts:")), 
-                                                  my $secadmin_check = new Gtk2::CheckButton ],
-                                                [ new Gtk2::Label(N("Security Administrator:")),
-                                                  my $secadmin_entry = new Gtk2::Entry ])),
-                       new Gtk2::Label(N("Basic")));
-
+$notebook->append_page(gtkshow(gtkpack(new Gtk2::VBox(0, 0),
+                                       basic_seclevel_explanations($msec),
+                                       create_packtable($common_opts,
+                                                        [ basic_seclevel_option(\$seclevel_entry, $msec) ],
+                                                        [ new Gtk2::Label(N("Security Alerts:")), 
+                                                          my $secadmin_check = new Gtk2::CheckButton ],
+                                                        [ new Gtk2::Label(N("Security Administrator:")),
+                                                          my $secadmin_entry = new Gtk2::Entry ]))),
+                               new Gtk2::Label(N("Basic")));
+                       
 $secadmin_entry->set_text($msec->get_check_value("MAIL_USER"));
 $secadmin_check->set_active(1) if $msec->get_check_value("MAIL_WARN") eq "yes";
-
+                       
 ######################### NETWORK & SYSTEM OPTIONS #########################
 my @yesno_choices    = qw(yes no default ignore);
 my @alllocal_choices = qw(ALL LOCAL NONE default);
