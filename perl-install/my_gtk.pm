@@ -212,7 +212,7 @@ sub create_box_with_title($@) {
 
 sub createScrolledWindow($) {
     my ($W) = @_;
-    if (member(ref $W, qw(Gtk::Text)) {
+    if (member(ref $W, qw(Gtk::Text))) {
 	gtkpack_(new Gtk::HBox(0,0), 
 		 1, $W, 
 		 0, new Gtk::VScrollbar($W->vadj));
