@@ -18,11 +18,11 @@ all: help $(MOFILES)
 help:
 	@if [ ! -d doc ]; then \
 		echo "Checking out doc stuff now ..."; \
-		cvs co doc/manual/{entities,literal/drakx}; \
+		cvs co doc/manualB/{entities,manuals,modules}; \
 		rm -rf doc/CVS; \
 	else \
 		echo "Updating doc stuff now ..."; \
-		cvs update doc/manual/{entities,literal/drakx}; \
+		cvs update doc/manualB/{entities,manuals,modules}; \
 	fi
 	./help_xml2pm.pl
 
