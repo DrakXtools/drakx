@@ -114,12 +114,15 @@ foreach (keys(%combo)) {
     $combo{$_} = gtkset_size_request(Gtk2::OptionMenu->new, 10, -1);
 }
 
-do { $combo{boot}->set_popdown_strings(@boot_thms); $combo{boot}->entry->set_text($themes{default})} if !$no_bootsplash;
+if (!$no_bootsplash) {
+    $combo{boot}->set_popdown_strings(@boot_thms);
+    $combo{boot}->entry->set_text($themes{default});
+}
 
 my $boot_pic = gtkcreate_img($themes{def_thmb});
 change_image($boot_pic, $themes{default});
 
-my $thm_button = new Gtk2::Button(N("Install themes"));
+my $_thm_button = new Gtk2::Button(N("Install themes"));
 my $logo_thm = new Gtk2::CheckButton(N("Display theme\nunder console"));
 my $B_create = new Gtk2::Button(N("Create new theme"));
 my $keep_logo = 1;
@@ -133,7 +136,7 @@ $B_create->signal_connect(clicked => sub {
 
 $no_bootsplash == 0 
   and $combo{boot}->entry->signal_connect(changed => sub { change_image($boot_pic, $combo{boot}->entry->get_text) });
-my ($x_box,$splash_box);
+my ($x_box, $splash_box);
 
 gtkadd($window,
        gtkpack_(new Gtk2::VBox(0,0),
