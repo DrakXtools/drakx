@@ -687,7 +687,7 @@ sub setupBootloaderBefore {
 	require bootloader;
 	#- propose the default fb mode for kernel fb, if aurora is installed too.
         bootloader::suggest($o->{prefix}, $o->{bootloader}, $o->{hds}, $o->{fstab}, install_any::kernelVersion($o),
-			    pkgs::packageFlagInstalled(pkgs::packageByName($o->{packages}, 'Aurora') || {}) && 785);
+			    pkgs::packageFlagInstalled(pkgs::packageByName($o->{packages}, 'Aurora') || {}) && ($o->{vga} || 785));
 	if ($o->{miscellaneous}{profiles}) {
 	    my $e = bootloader::get_label("linux", $o->{bootloader});
 	    push @{$o->{bootloader}{entries}}, { %$e, label => "office", append => "$e->{append} prof=Office" };

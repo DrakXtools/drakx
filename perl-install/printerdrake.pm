@@ -37,7 +37,6 @@ sub setup_local($$$) {
     }
     if (@str) {
 	@port = map { $_->{port} } grep { $_->{val}{DESCRIPTION} } @parport;
-	#- in such case for a beginner, do not ask the port, get the first one.
 	!$::expert && @port > 0 and $in = undef;
     } else {
 	@port = detect_devices::whatPrinterPort();
@@ -45,7 +44,7 @@ sub setup_local($$$) {
     $printer->{DEVICE} = $port[0] if $port[0];
 
     $in and return if !$in->ask_from_entries_refH(_("Local Printer Device"),
-						  _("What device is your printer connected to 
+_("What device is your printer connected to 
 (note that /dev/lp0 is equivalent to LPT1:)?\n") . (join "\n", @str), [
 _("Printer Device") => {val => \$printer->{DEVICE}, list => \@port } ],
 					         );
@@ -65,7 +64,7 @@ _("Printer Device") => {val => \$printer->{DEVICE}, list => \@port } ],
 sub setup_remote($$$) {
     my ($printer, $in, $install) = @_;
 
-    $in->ask_from_entries_refH(_("Remote lpd Printer Options"),
+    return if !$in->ask_from_entries_refH(_("Remote lpd Printer Options"),
 _("To use a remote lpd print queue, you need to supply
 the hostname of the printer server and the queue name
 on that server which jobs should be placed in."), [
@@ -79,8 +78,7 @@ _("Remote queue") => \$printer->{REMOTEQUEUE}, ],
 sub setup_smb($$$) {
     my ($printer, $in, $install) = @_;
 
-    return if !$in->ask_from_entries_refH(
-					  _("SMB (Windows 9x/NT) Printer Options"),
+    return if !$in->ask_from_entries_refH(_("SMB (Windows 9x/NT) Printer Options"),
 _("To print to a SMB printer, you need to provide the
 SMB host name (Note! It may be different from its
 TCP/IP hostname!) and possibly the IP address of the print server, as
@@ -109,7 +107,7 @@ _("Workgroup") => \$printer->{SMBWORKGROUP} ],
 				      "/$printer->{SMBSHARE}");
 
     &$install('samba');
-    $printer->{mode} eq 'cups' and printer::restart_queue($printer);
+    $printer->{mode} eq 'CUPS' and printer::restart_queue($printer);
     1;
 }
 
@@ -171,7 +169,7 @@ _("Printer Device URI") => { val => \$printer->{DeviceURI}, list => [ printer::g
 sub setup_gsdriver($$$;$) {
     my ($printer, $in, $install, $upNetwork) = @_;
     for ($printer->{mode}) {
-	/cups/ && return setup_gsdriver_cups($printer, $in, $install, $upNetwork);
+	/CUPS/ && return setup_gsdriver_cups($printer, $in, $install, $upNetwork);
 	/lpr/  && return setup_gsdriver_lpr($printer, $in, $install, $upNetwork);
 	die "mode not chosen to configure a printer";
     }
@@ -183,7 +181,6 @@ sub setup_gsdriver_cups($$$;$) {
 
     while (1) {
 	$printer->{cupsDescr} ||= printer::get_descr_from_ppd($printer);
-	print ">> $printer->{cupsDescr}\n";
 	$printer->{cupsDescr} = $in->ask_from_treelist('', _("What type of printer do you have?"), '|',
 						       [ keys %printer::descr_to_ppd ], $printer->{cupsDescr}) or return;
 	$printer->{cupsPPD} = $printer::descr_to_ppd{$printer->{cupsDescr}};
@@ -361,7 +358,7 @@ You can add some more or change the existing ones."),
 
 	#- switch according to what is being installed: cups, lpr or other.
 	for ($printer->{mode}) {
-	    /cups/ && do { &$install('cups-drivers') unless $::testing;
+	    /CUPS/ && do { &$install('cups-drivers') unless $::testing;
 			   printer::poll_ppd_base(); last };
 	    /lpr/  && do { &$install('rhs-printfilters') unless $::testing;
 			   printer::read_printer_db(); last };
@@ -373,7 +370,7 @@ You can add some more or change the existing ones."),
 	while ($continue) {
 	    $printer::printer_type_inv{$printer->{TYPE}} or $printer->{TYPE} = printer::default_printer_type($printer);
 	    $printer->{str_type} = $printer::printer_type_inv{$printer->{TYPE}};
-	    if ($printer->{mode} eq 'cups') {
+	    if ($printer->{mode} eq 'CUPS') {
 		$printer->{str_type} = $in->ask_from_list_(_("Select Printer Connection"),
 							   _("How is the printer connected?"),
 							   [ printer::printer_type($printer) ],
@@ -385,14 +382,15 @@ You can add some more or change the existing ones."),
 		    $printer->{str_type} = $in->ask_from_list_(_("Select Remote Printer Connection"),
 _("With a remote CUPS server, you do not have to configure
 any printer here; printers will be automatically detected.
-In case of doubt, select \"Remote cups server\"."),
+In case of doubt, select \"Remote CUPS server\"."),
 							       [ @printer::printer_type_inv{qw(CUPS LPD SOCKET)} ],
 							       $printer->{str_type},
 							      );
 		    $printer->{TYPE} = $printer::printer_type{$printer->{str_type}};
 		}
 		$printer->{TYPE} eq 'CUPS' and return; #- exit printer configuration.
-		$in->ask_from_entries_refH([_("Select Printer Connection"), _("Ok"), $::beginner ? () : _("Remove queue")],
+		$in->ask_from_entries_refH([_("Select Printer Connection"), _("Ok"),
+					    $::beginner || !$printer->{configured}{$printer->{QUEUE}} ? () : _("Remove queue")],
 _("Every printer need a name (for example lp).
 Other parameters such as the description of the printer or its location
 can be defined. What name should be used for this printer and

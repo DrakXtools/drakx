@@ -18,7 +18,7 @@ my $PRINTER_FILTER_DIR = "/usr/lib/rhs/rhs-printfilters";
 %printer_type = (
     __("Local printer")            => "LOCAL",
     __("Remote printer")           => "REMOTE",
-    __("Remote cups server")       => "CUPS",
+    __("Remote CUPS server")       => "CUPS",
     __("Remote lpd server")        => "LPD",
     __("Network printer (socket)") => "SOCKET",
     __("SMB/Windows 95/98/NT")     => "SMB",
@@ -46,7 +46,7 @@ sub default_spooldir($) { "/var/spool/lpd/" . default_queue($_[0]) }
 sub default_printer_type($) { "LOCAL" }
 sub printer_type($) {
     for ($_[0]{mode}) {
-	/cups/ && return @printer_type_inv{qw(LOCAL REMOTE SMB), $::expert ? qw(URI) : ()};
+	/CUPS/ && return @printer_type_inv{qw(LOCAL REMOTE SMB), $::expert ? qw(URI) : ()};
 	/lpr/  && return @printer_type_inv{qw(LOCAL LPD SMB NCP)};
     }
 }
@@ -323,7 +323,7 @@ sub read_printers_conf {
     foreach (<PRINTERS>) {
 	chomp;
 	/^\s*#/ and next;
-	if (/^\s*<(?:DefaultPrinter|Printer)\s+([^>]*)>/) { $current = { mode => 'cups', QUEUE => $1, } }
+	if (/^\s*<(?:DefaultPrinter|Printer)\s+([^>]*)>/) { $current = { mode => 'CUPS', QUEUE => $1, } }
 	elsif (/\s*<\/Printer>/) { $current->{QUEUE} && $current->{DeviceURI} or next; #- minimal check of synthax.
 				   add2hash($printer->{configured}{$current->{QUEUE}} ||= {}, $current); $current = undef }
 	elsif (/\s*(\S*)\s+(.*)/) { $current->{$1} = $2 }
@@ -331,7 +331,7 @@ sub read_printers_conf {
     close PRINTERS;
 
     #- assume this printing system.
-    $printer->{mode} ||= 'cups';
+    $printer->{mode} ||= 'CUPS';
 }
 
 sub get_direct_uri {
@@ -349,7 +349,8 @@ sub get_descr_from_ppd {
     my ($printer) = @_;
     my %ppd;
 
-    local *F; open F, "$prefix/etc/cups/ppd/$printer->{QUEUE}.ppd" or return;
+    #- if there is no ppd, this means this is the PostScript generic filter.
+    local *F; open F, "$prefix/etc/cups/ppd/$printer->{QUEUE}.ppd" or return "PostScript";
     foreach (<F>) {
 	/^\*([^\s:]*)\s*:\s*\"([^\"]*)\"/ and do { $ppd{$1} = $2; next };
 	/^\*([^\s:]*)\s*:\s*([^\s\"]*)/   and do { $ppd{$1} = $2; next };
@@ -381,6 +382,9 @@ sub poll_ppd_base {
     }
 
     scalar(keys %descr_to_ppd) > 5 or die "unable to connect to cups server";
+
+    #- assume a default printer not using any ppd at all.
+    $descr_to_ppd{"PostScript"} = '';
 }
 
 #-******************************************************************************
@@ -449,7 +453,7 @@ sub configure_queue($) {
     my ($entry) = @_;
 
     for ($entry->{mode}) {
-	/cups/ && do {
+	/CUPS/ && do {
 	    #- at this level, we are using lpadmin to create a local printer (only local
 	    #- printer are supported with printerdrake).
 	    require run_program;
@@ -457,7 +461,7 @@ sub configure_queue($) {
 				"-p", $entry->{QUEUE},
 				$entry->{State} eq 'Idle' && $entry->{Accepting} eq 'Yes' ? ("-E") : (),
 				"-v", $entry->{DeviceURI},
-				"-m", $entry->{cupsPPD},
+				$entry->{cupsPPD} ? ("-m", $entry->{cupsPPD}) : (),
 				$entry->{Info} ? ("-D", $entry->{Info}) : (),
 				$entry->{Location} ? ("-L", $entry->{Location}) : (),
 			       );
@@ -596,7 +600,7 @@ sub remove_queue($) {
     my ($printer) = @_;
     $printer->{configured}{$printer->{QUEUE}} or return; #- something strange at this point.
 
-    if ($printer->{mode} eq 'cups') {
+    if ($printer->{mode} eq 'CUPS') {
 	require run_program;
 	run_program::rooted($prefix, "lpadmin", "-x", $printer->{QUEUE});
     }
@@ -608,7 +612,7 @@ sub restart_queue($) {
     my $queue = default_queue($printer);
 
     for ($printer->{mode}) {
-	/cups/ && do {
+	/CUPS/ && do {
 	    #- restart cups before cleaning the queue.
 	    require run_program;
 	    run_program::rooted($prefix, "/etc/rc.d/init.d/cups start"); sleep 1;
@@ -634,7 +638,7 @@ sub print_pages($@) {
     my ($lpr, $lpq);
 
     for ($printer->{mode}) {
-	/cups/ and ($lpr, $lpq) = ("/usr/bin/lpr-cups", "/usr/bin/lpq-cups");
+	/CUPS/ and ($lpr, $lpq) = ("/usr/bin/lpr-cups", "/usr/bin/lpq-cups");
 	/lpr/  and ($lpr, $lpq) = ("/usr/bin/lpq-lpd", "/usr/bin/lpq-lpd");
     }
 
