@@ -225,7 +225,7 @@ ifdown eth0
 
   step_3:
 
-    my $m = _("Congratulation, The network and internet configuration is finished.
+    my $m = _("Congratulations, the network and internet configuration is finished.
 
 The configuration will now be applied to your system.\n") . if_($::isStandalone,
 _("After that is done, we recommend you to restart your X
