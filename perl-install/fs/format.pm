@@ -105,7 +105,8 @@ sub mke2fs {
     local $/ = "\b";
     local $_;
     while (<$F>) {
-	$wait_message->('', $1, $2) if m!^\s*(\d+)/(\d+)\b!;
+	#- when this is over, it still takes some time, hence the 85%
+	$wait_message->('', $1, int($2 / 0.85)) if m!^\s*(\d+)/(\d+)\b!;
     }
     return close($F);
 }
@@ -118,14 +119,31 @@ sub disable_forced_fsck {
 sub wait_message {
     my ($in) = @_;
 
-    my $w;
+    my ($w, $progress, $last_msg, $displayed);
     $w, sub {
 	my ($msg, $current, $total) = @_;
 	if ($msg) {
-	    $w ||= $in->wait_message('', $msg);
+	    $last_msg = $msg;
+	    if (!$w) {
+		$progress = Gtk2::ProgressBar->new if $in->isa('interactive::gtk');
+		$w = $in->wait_message('', [ '', if_($progress, $progress) ]);
+		if ($progress) {
+		    #- don't show by default, only if we are given progress information
+		    $progress->hide;
+		    $progress->signal_connect(expose_event => sub { $displayed = 1; 0 });
+		}
+	    }
 	    $w->set($msg);
 	} elsif ($total) {
-	    $w->set("$current / $total");
+	    log::l("set_fraction $current / $total");
+	    if ($progress) {
+		$progress->set_fraction($current / $total);
+		$progress->show;
+		$displayed = 0;
+		mygtk2::flush() while !$displayed;
+	    } else {
+		$w->set([ $last_msg, "$current / $total" ]);
+	    }
 	}
     };
 }
