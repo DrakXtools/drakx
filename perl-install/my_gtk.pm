@@ -530,7 +530,7 @@ sub gtkicons_labels_widget {
 		  }), 0, 0);
     $i = 0;
     foreach (@tab) {
-	$fixed->put($_, $i*64, 64);
+	$fixed->put($_, $i*75, 65);
 	$i++;
     }
     $fixed->show_all();
