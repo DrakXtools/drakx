@@ -437,7 +437,7 @@ sub easy_dhcp {
 			DOMAINNAME => "localdomain",
 		       });
 
-    configureNetwork2($in, '', $netc, $intf);
+    configureNetwork2($in, $::prefix, $netc, $intf);
     1;
 }
 
