@@ -431,7 +431,15 @@ my %lang2country = (
 #- Functions
 #-######################################################################################
 
-sub list { @languages }
+sub list { 
+    my ($exclude_non_necessary_utf8) = @_;
+    if ($exclude_non_necessary_utf8) {
+	my %LANGs_non_utf8 = map { lang2LANG($_) => 1 } grep { !/UTF-8/ } @languages;
+	grep { !/UTF-8/ || !$LANGs_non_utf8{lang2LANG($_)} } @languages;
+    } else {
+	@languages;
+    }
+}
 sub lang2text     { exists $languages{$_[0]} && $languages{$_[0]}[0] }
 sub lang2charset  { exists $languages{$_[0]} && $languages{$_[0]}[1] }
 sub lang2LANG     { exists $languages{$_[0]} && $languages{$_[0]}[2] }

@@ -830,7 +830,7 @@ sub selectLanguage {
 	  },
 	},
 	[ { val => \$lang, separator => '|', 
-	    format => \&lang::lang2text, list => [ lang::list() ] },
+	    format => \&lang::lang2text, list => [ lang::list($::isInstall) ] },
 	    if_($langs_, (map {;
 	       { val => \$langs->{$_->[0]}, type => 'bool', disabled => sub { $langs->{all} },
 		 text => $_->[1], advanced => 1,
