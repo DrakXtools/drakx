@@ -1048,13 +1048,13 @@ sub mixed_kind_of_disks {
 
 sub sort_hds_according_to_bios {
     my ($bootloader, $hds) = @_;
-    my $boot_hd = fs::device2part($bootloader->{first_hd_device} || $bootloader->{boot}, $hds) or die "sort_hds_according_to_bios: unknown hd"; #- if not on mbr
-    my $boot_kind = hd2bios_kind($boot_hd);
+    my $boot_hd = fs::device2part($bootloader->{first_hd_device} || $bootloader->{boot}, $hds); #- $boot_hd is undefined when installing on floppy
+    my $boot_kind = $boot_hd && hd2bios_kind($boot_hd);
 
     my $translate = sub {
 	my ($hd) = @_;
 	my $kind = hd2bios_kind($hd);
-	($hd == $boot_hd ? 0 : $kind eq $boot_kind ? 1 : 2) . "_$kind";
+	$boot_hd ? ($hd == $boot_hd ? 0 : $kind eq $boot_kind ? 1 : 2) . "_$kind" : $kind;
     };
     sort { $translate->($a) cmp $translate->($b) } @$hds;
 }
