@@ -1182,7 +1182,7 @@ It is not necessary on most networks."),
                         #- use net_applet by default
                         $isdn->{dial_method} = $method->{name} || $isdn_dial_methods[1]{name};
                     },
-                    name => N("How do you to dial this connection ?"),
+                    name => N("How do you want to dial this connection ?"),
                     data => sub {
                         [ { type => "list", val => \$isdn->{dial_method}, list => [ map { $_->{name} } @isdn_dial_methods ] } ]
                     },
