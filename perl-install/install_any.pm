@@ -469,7 +469,11 @@ sub selectSupplMedia {
 	    if ($o->ask_okcancel('', N("Insert the CD"), 1)) {
 		#- mount suppl CD in /mnt/cdrom to avoid umounting /tmp/image
 		mountCdrom("/mnt/cdrom", $cdrom);
-		log::l($@) if $@;
+		if ($@) {
+		    log::l($@);
+		    $o->ask_warn('', N("Unable to mount CD-ROM"));
+		    return 'error';
+		}
 		useMedium($medium_name);
 
 		#- probe for an hdlists file and then look for all hdlists listed herein
