@@ -192,19 +192,10 @@ gtkadd($window,
                                                    my @auto_buttons = gtkradio((N("No, I don't want autologin")) x 2,
                                                                                N("Yes, I want autologin with this (user, desktop)")),
                                                   ),
-                                         gtkpack__(
-                                                   my $auto_box = Gtk2::HBox->new,
-                                                   gtkpack(
-                                                           Gtk2::VBox->new,
-                                                           Gtk2::Label->new(N("Default user")),
-                                                           Gtk2::Label->new(N("Default desktop")),
-                                                          ),
-                                                   gtkpack(
-                                                           Gtk2::VBox->new,
-                                                           $user_combo,
-                                                           $desktop_combo
-                                                          ),
-                                                  )
+                                         my $auto_box = create_packtable({ col_spacings => 5, row_spacings => 5, homogenous => 1 },
+                                                                         [ Gtk2::Label->new(N("Default user")), $user_combo ],
+                                                                         [ Gtk2::Label->new(N("Default desktop")), $desktop_combo ],
+                                                                        ),
                                         )
                               )
                  ),
