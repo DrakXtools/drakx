@@ -248,7 +248,6 @@ sub read_one($$) {
 		# perl_checker: require partition_table::dos
 		# perl_checker: require partition_table::empty
 		# perl_checker: require partition_table::gpt
-		# perl_checker: require partition_table::lvm_PV
 		# perl_checker: require partition_table::mac
 		# perl_checker: require partition_table::sun
 		require "partition_table/$_.pm";
