@@ -35,20 +35,33 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 ");
 
 my $progname = basename $0;
-print "Running $progname\n";
 
 my %usages = (
+           'diskdrake' => "[--{" . join(",", qw(hd nfs smb dav removable fileshare)) . "}]",
+           'drakbackup' => N("[--config-info] [--daemon] [--debug] [--default] [--show-conf]
+Backup and Restore application
+
+--default             : save default directories.
+--debug               : show all debug messages.
+--show-conf           : list of files or directories to backup.
+--config-info         : explain configuration file options (for non-X users).
+--daemon              : use daemon configuration. 
+--help                : show this message.
+--version             : show version name.
+"),
 	      'draksec' => N(" [OPTIONS]...
 	      --debug         print debugging information"),
 	      'drakxtv' => "[--no-guess]",
 	      'drakupdate_fstab' => " [--add | --del] <device>\n",
 	      'keyboardrake' => N("[keyboard]"),
+           'logdrake' => N("[--file=myfyle] [--word=myword] [--explain=regexp] [--alert]"),
 	      'printerdrake' => N(" [--skiptest] [--cups] [--lprng] [--lpd] [--pdq]"),
 	      'rpmdrake' => N("[OPTION]...
   --no-confirmation      don't ask first confirmation question in MandrakeUpdate mode
   --no-verify-rpm        don't verify packages signatures
   --changelog-first      display changelog before filelist in the description window
   --merge-all-rpmnew     propose to merge all .rpmnew/.rpmsave files found"),
+           'scannerdrake' => N("[--manual] [--device=dev] [--update-sane=sane_desc_dir] [--update-usbtable] [--dynamic=dev]"),
 	      'XFdrake' => N(" [everything]
        XFdrake [--noauto] monitor
        XFdrake resolution"),
@@ -59,31 +72,31 @@ $usages{Xdrakres} = $usages{XFdrake};
 
 
 my ($i, @new_ARGV);
-foreach my $opt (@ARGV) {
+foreach (@ARGV) {
     $i++;
-    if ($opt eq '--help' || $opt eq '-h') {
+    if (/^-(-help|h)$/) {
 	version();
 	print STDERR N("\nUsage: %s  [--auto] [--beginner] [--expert] [-h|--help] [--noauto] [--testing] [-v|--version] ", $progname),  if_($usages{$progname}, $usages{$progname}), "\n";
 #    print N("\nUsage: "), $::usage, "\n" if $::usage;
 	exit(0);
-    } elsif ($opt eq '--version' || $opt eq '-v') {
+    } elsif (/^-(-version|v)$/) {
 	version();
 	exit(0);
-    } elsif ($opt eq '--embedded') {
+    } elsif (/^--embedded$/) {
 	(undef, $::XID, $::CCPID) = splice @ARGV, ($i-1), 3;
 	$::isEmbedded = 1;
-    } elsif ($opt eq '--expert') {
+    } elsif (/^--expert$/) {
 	$::expert = 1;
-    } elsif ($opt eq '--noauto') {
+    } elsif (/--noauto$/) {
 	$::noauto = /-noauto/;
-    } elsif ($opt eq '--auto') {
+    } elsif (/^--auto$) {
 	$::auto = 1;
-    } elsif ($opt eq '--testing') {
+    } elsif (/^--testing$/) {
 	$::testing = 1;
-    } elsif ($opt eq '--beginner') {
+    } elsif (/^--beginner$/) {
 	$::expert = 0;
     } else {
-	push @new_ARGV, $opt;
+	push @new_ARGV, $_;
     }
 }
 

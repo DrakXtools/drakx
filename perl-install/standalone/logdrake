@@ -40,8 +40,6 @@ if ($::isEmbedded) {
 
 #- parse arguments list.
 for (@ARGV) {
-    /^--version$/ and die 'version: $Id$ '."\n";
-    /^--help$/ and die 'logdrake [--version] [--file=myfyle] [--word=myword] [--explain=regexp] [--alert]';
     /^--explain=(.*)$/ and do { $::isExplain = ($::Explain) = $1; $::isFile = 1; $::File = "/var/log/explanations"; next };
     /^--file=(.*)$/ and do { $::isFile = ($::File) = $1; next };
     /^--word=(.*)$/ and do { $::isWord = ($::Word) = $1; next };

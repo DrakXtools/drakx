@@ -128,24 +128,10 @@ use common;
 use Time::localtime;
 use detect_devices;
 
-if ("@ARGV" =~ /--help|-h/) {
-    print q(Backup and Restore application
-
---default             : save default directories.
---debug		      : show all debug messages.
---show-conf           : list of files or directories to backup.
---config-info	      : explain configuration file options (for non-X users).
---daemon              : use daemon configuration. 
---help                : show this message.
---version             : show version name.
-);
-    exit(0);
-}
-
-if ("@ARGV" =~ /--version/) {
-    print "Drakbackup Version 1.2\n";
-    exit(0);
-}
+#if ("@ARGV" =~ /--version/) {
+#    print "Drakbackup Version 1.2\n";
+#    exit(0);
+#}
 
 # Backend Options.
 # make this global for status screen      

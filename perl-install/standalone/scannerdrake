@@ -27,8 +27,6 @@ use common;
 use scanner;
 
 foreach (@ARGV) {
-    /^--version$/ and die 'version: $Id$ '."\n";
-    /^--help$/ and die 'logdrake [--version] [--help] [--manual] [--device=dev] [--update-sane=sane_desc_dir] [--update-usbtable] [--dynamic=dev]';
     /^--update-usbtable$/ and do { scanner::updateScannerDBfromUsbtable(); exit };
     /^--update-sane=(.*)$/ and do { scanner::updateScannerDBfromSane($1); exit };
     /^--manual$/ and $::Manual=1;
