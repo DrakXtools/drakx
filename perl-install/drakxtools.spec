@@ -1,19 +1,17 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10
-Release: 48mdk
+Release: 49mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
 Group: System/Configuration/Other
 Requires: %{name}-newt = %version-%release, perl-Gtk2 >= 1.040-1mdk, perl-Glib >= 1.040-1mdk, /usr/X11R6/bin/xtest, font-tools, usermode >= 1.63-5mdk, perl-MDK-Common >= 1.1.10, gurpmi, mandrake-doc-common >= 9.2-5mdk
 Requires: foomatic-db-engine
-%ifarch sparc sparc64 %{ix86} x86_64 amd64
-Requires: mkbootdisk
-%endif
 Conflicts: drakconf < 10-0.6mdk
 Conflicts: rpmdrake < 2.1-29mdk
 Conflicts: mandrake_doc-drakxtools-en < 9.2, mandrake_doc-drakxtools-es < 9.2, mandrake_doc-drakxtools-fr < 9.2
+Conflicts: bootloader-utils < 1.8-1mdk, bootsplash < 2.1.7-1mdk
 BuildRequires: gettext, gtk+2-devel, ldetect-devel >= 0.5.2-1mdk, ncurses-devel, newt-devel, perl-devel >= 1:5.8.0-20mdk, libext2fs-devel, perl-MDK-Common-devel >= 1.1.8-3mdk
 BuildRoot: %_tmppath/%name-buildroot
 Provides: draksec
@@ -314,6 +312,27 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Tue Jun 29 2004 Pixel <pixel@mandrakesoft.com> 10-49mdk
+- add bootloader-config (used by bootloader-utils and bootsplash scripts)
+- drakboot (pixel):
+  o major backend rewrite b/c of code sharing with new installkernel
+  o when adding a new kernel, have a nicer new name for conflicting
+    entry
+  o when modifying kernel parameters in all entries, skip the
+    "failsafe" entry (#10143)
+  o when modifying a symlink, ensure we also use the long name for the
+    old symlink in the existing entries
+- drakconnect (Olivier Blin):
+  o never disable "DHCP host name" entry box, it shouldn't be linked
+    with "Assign host name from DHCP address" checkbox (#2759, #9981)
+  o unblacklist sis900 since its link beat detection works with latest
+    kernels
+- draksound: remove unneeded "above" lines in modules::write_conf
+  (Olivier Blin) (#8288)
+- ugtk2 layer: catch missing wizard pixmap, otherwise we end up with
+  unshown windows and error messages can't pop up (pixel)
+- don't require mkbootdisk
+
 * Wed Jun 23 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10-48mdk
 - drakboot (oblin):
   o ask for bootloader choice when framebuffer isn't configured (#9925)
