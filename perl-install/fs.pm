@@ -129,7 +129,7 @@ sub merge_fstabs {
 sub analyze_wild_device_name {
     my ($dev) = @_;
 
-    if ($dev =~ m!^/(tmp|u?dev)/(.*)!) {
+    if ($dev =~ m!^/u?dev/(.*)!) {
 	'dev', $dev;
     } elsif ($dev !~ m!^/! && -e "$::prefix/dev/$dev") {
 	'dev', "/dev/$dev";
@@ -161,7 +161,7 @@ sub subpart_from_wild_device_name {
 	    }
 
 	    my $symlink = readlink("$::prefix$dev");
-	    $dev =~ s!/(tmp|u?dev)/!!;
+	    $dev =~ s!/u?dev/!!;
 
 	    if ($symlink && $symlink =~ m|^[^/]+$|) {
 		$part{device_alias} = $dev;

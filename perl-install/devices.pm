@@ -161,10 +161,9 @@ sub entry {
 sub make($) {
     local $_ = my $file = $_[0];
 
-    if (m,^(.*/(?:dev|tmp))/(.*),) {
+    if (m!^(.*/dev)/(.*)!) {
 	$_ = $2;
     } else {
-	$file =~ m|^/| && -e $file or $file = "/tmp/$_";
 	$file =~ m|^/| && -e $file or $file = "/dev/$_";
     }
     -e $file and return $file; #- assume nobody takes fun at creating files named as device

@@ -972,7 +972,7 @@ sub installTransactionClosure {
     $::o->{mainmethod} = $::o->{method};
     local $::o->{method} = do {
 	my $cdrom;
-	cat_("/proc/mounts") =~ m,(/(?:dev|tmp)/\S+)\s+(?:/mnt/cdrom|/tmp/image), and $cdrom = $1;
+	cat_("/proc/mounts") =~ m,(/dev/\S+)\s+(?:/mnt/cdrom|/tmp/image), and $cdrom = $1;
 	if (!defined $cdrom) {
 	    (my $cdromdev) = detect_devices::cdroms();
 	    $cdrom = $cdromdev->{device};

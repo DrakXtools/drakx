@@ -151,7 +151,7 @@ sub errorOpeningFile($) {
 
     my $max = 32; #- always refuse after $max tries.
     if ($current_method eq "cdrom") {
-	cat_("/proc/mounts") =~ m,(/(?:dev|tmp)/\S+)\s+(/mnt/cdrom|/tmp/image),
+	cat_("/proc/mounts") =~ m,(/dev/\S+)\s+(/mnt/cdrom|/tmp/image),
 	    and ($cdrom, my $mountpoint) = ($1, $2);
 	return unless $cdrom;
 	ejectCdrom($cdrom, $mountpoint);
@@ -779,14 +779,14 @@ sub killCardServices() {
 }
 
 sub unlockCdrom() {
-    my $cdrom = cat_("/proc/mounts") =~ m!(/(?:dev|tmp)/\S+)\s+(?:/mnt/cdrom|/tmp/image)! && $1 or return;
+    my $cdrom = cat_("/proc/mounts") =~ m!(/dev/\S+)\s+(?:/mnt/cdrom|/tmp/image)! && $1 or return;
     eval { ioctl(detect_devices::tryOpen($cdrom), c::CDROM_LOCKDOOR(), 0) };
 }
 
 sub ejectCdrom {
     my ($o_cdrom, $o_mountpoint) = @_;
     getFile("XXX"); #- close still opened filehandle
-    my $cdrom = $o_cdrom || cat_("/proc/mounts") =~ m!(/(?:dev|tmp)/\S+)\s+(/mnt/cdrom|/tmp/image)! && $1 or return;
+    my $cdrom = $o_cdrom || cat_("/proc/mounts") =~ m!(/dev/\S+)\s+(/mnt/cdrom|/tmp/image)! && $1 or return;
     $o_mountpoint ||= $2 || '/tmp/image';
 
     #- umount BEFORE opening the cdrom device otherwise the umount will
