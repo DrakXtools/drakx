@@ -915,24 +915,23 @@ Please run \"Internet access\" in control center."));
 		     [ N("Second DNS Server (optional)"), \$netc->{dnsServer2} ], #\$cnx->{dns2}
                     );
     my @infos;
-    foreach (@conf_data) {
-        $infos[2*$i] = Gtk2::HBox->new(0,0);
-        gtkpack($infos[2*$i], gtkset_justify(Gtk2::Label->new($_->[0]), 'left'));
-        gtkpack($param_vbox, $infos[2*$i]);
-        if (defined $_->[2]) {
-            my $c = Gtk2::Combo->new;
-            $c->set_popdown_strings(@{$_->[2]});
-            $infos[2*$i+1] = $c->entry;
-            gtkpack($infos[2*$i], $c);
-        } else {
-            $infos[2*$i+1] = Gtk2::Entry->new;
-            gtkpack($infos[2*$i], $infos[2*$i+1]);
-            #hide password if Entry Password
-            $infos[2*$i+1]->set_visibility(0) if $_->[0] eq N("Account Password") || $_->[0] eq N("Password");
-        }
-        $infos[2*$i+1]->set_text(${$_->[1]});
-        $i++;
-    }
+    gtkpack($param_vbox,
+            create_packtable({},
+                             map {
+                                 my $c;
+                                 if (defined $_->[2]) {
+                                     $c = Gtk2::Combo->new;
+                                     $c->set_popdown_strings(@{$_->[2]});
+                                     $infos[2*$i+1] = $c->entry;
+                                 } else {
+                                     $c = $infos[2*$i+1] = Gtk2::Entry->new;
+                                 }
+                                 $infos[2*$i+1]->set_text(${$_->[1]});
+                                 $i++;
+                                 [ $_->[0], $c ];
+                             } @conf_data
+                            )
+           );
 
     $dialog->{rwindow}->add(gtkpack_(Gtk2::VBox->new,
                                      0, Gtk2::Label->new(N("Internet Connection Configuration")),
