@@ -1,6 +1,6 @@
 PACKAGE=drakxtools
 PKGVERSION:=$(shell rpm -q --qf '%{VERSION}\n' --specfile $(PACKAGE).spec|head -1)
-RELEASE:=$(shell rpm -q --qf '%{RELEASE}\n' --specfile $(PACKAGE).spec|head -1)
+RELEASE:=$(shell rpm -q --qf '%{RELEASE}\n' --specfile $(PACKAGE).spec|head -)
 TAG := $(shell echo "V$(PKGVERSION)_$(RELEASE)" | tr -- '-.' '__')
 
 include Makefile.config
@@ -196,14 +196,19 @@ stage2:
 
 localrpm: localdist buildrpm
 
-localsrpm: localdist buildsrpm
+localsrpm: spec_test localdist buildsrpm
 
-fastsrpm: cvstag localsrpm
+fastsrpm: spec_test cvstag localsrpm
 
 localdist: cleandist localcopy tar
 
 cleandist:
 	rm -rf ../$(PACKAGE)-$(PKGVERSION) ../$(PACKAGE)-$(PKGVERSION).tar.bz2
+
+spec_test:
+	@if [[ -z "$(PRELEASE)"  ]]; then echo "unable to get spec release"; exit 2;fi
+	@if [[ -z "$(PKGVERSION)"  ]]; then echo "unable to get spec version"; exit 3;fi
+
 
 tar:
 	cd ../$(PACKAGE)-$(PKGVERSION) && perl -pi -e 's/^C_RPM.*/C_RPM=0/; s/^C_DRAKX.*/C_DRAKX=0/' c/Makefile
@@ -224,7 +229,7 @@ buildsrpm:
 
 rpm: cvstag dist buildrpm
 
-srpm: cvstag dist buildsrpm
+srpm: test cvstag dist buildsrpm
 
 dist: cleandist export tar
 
