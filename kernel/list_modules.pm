@@ -147,7 +147,7 @@ our %l = (
           qw(emu10k1 es1370 es1371 esssolo1 forte gus i810_audio ice1712 kahlua mad16 maestro),
           qw(maestro3 mpu401 msnd_pinnacle nm256_audio nvaudio opl3 opl3sa opl3sa2 pas2 pss),
           qw(rme96xx sam9407 sb sgalaxy snd-ad1816a snd-ad1848 snd-ali5451 snd-als100),
-          qw(snd-als4000 snd-atiixp snd-au8810 snd-au8820 snd-au8830 snd-azt2320 snd-azt3328),
+          qw(snd-als4000 snd-atiixp snd-au8810 snd-au8820 snd-au8830 snd-azt2320 snd-azt3328 snd-azx),
           qw(snd-bt87x snd-cmi8330 snd-cmipci snd-cs4231 snd-cs4232 snd-cs4236 snd-cs4281),
           qw(snd-cs46xx snd-dt019x snd-emu10k1 snd-ens1370 snd-ens1371 snd-es1688 snd-es18xx),
           qw(snd-es1938 snd-es1968 snd-es968 snd-fm801 snd-gusclassic snd-gusextreme),
