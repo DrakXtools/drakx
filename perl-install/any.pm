@@ -539,10 +539,13 @@ END
 
     #- install kppprc file according to used configuration.
     mkdir_p("$prefix/usr/share/config");
-    local *KPPPRC;
-    open KPPPRC, ">$prefix/usr/share/config/kppprc" or die "Can't open $prefix/usr/share/config/kppprc: $!";
-    #chmod 0600, "$prefix/usr/share/config/kppprc";
-    print KPPPRC <<END;
+
+    {
+	my %toreplace_utf8 = map { $_ => c::to_utf8($toreplace{$_}) } keys %toreplace;
+	local *KPPPRC;
+	open KPPPRC, ">$prefix/usr/share/config/kppprc" or die "Can't open $prefix/usr/share/config/kppprc: $!";
+	#chmod 0600, "$prefix/usr/share/config/kppprc";
+	print KPPPRC <<END;
 # KDE Config File
 [Account0]
 ExDNSDisabled=0
@@ -550,22 +553,22 @@ AutoName=0
 ScriptArguments=
 AccountingEnabled=0
 DialString=ATDT
-Phonenumber=$toreplace{phone}
+Phonenumber=$toreplace_utf8{phone}
 IPAddr=0.0.0.0
-Domain=$toreplace{domain}
-Name=$toreplace{connection}
+Domain=$toreplace_utf8{domain}
+Name=$toreplace_utf8{connection}
 VolumeAccountingEnabled=0
 pppdArguments=
-Password=$toreplace{passwd}
+Password=$toreplace_utf8{passwd}
 BeforeDisconnect=
 Command=
 ScriptCommands=
-Authentication=$toreplace{kpppauth}
-DNS=$toreplace{dnsserver}
+Authentication=$toreplace_utf8{kpppauth}
+DNS=$toreplace_utf8{dnsserver}
 SubnetMask=0.0.0.0
 AccountingFile=
 DefaultRoute=1
-Username=$toreplace{login}
+Username=$toreplace_utf8{login}
 Gateway=0.0.0.0
 StorePassword=1
 DisconnectCommand=
@@ -589,7 +592,7 @@ OutBytes=255,0,0
 QuitOnDisconnect=0
 ShowLogWindow=0
 DisconnectOnXServerExit=1
-DefaultAccount=$toreplace{connection}
+DefaultAccount=$toreplace_utf8{connection}
 iconifyOnConnect=1
 Hint_QuickHelp=0
 AutomaticRedial=0
@@ -599,7 +602,7 @@ ShowClock=1
 DockIntoPanel=0
 pppdTimeout=30
 END
-
+    }
     miscellaneousNetwork($prefix);
 }
 
